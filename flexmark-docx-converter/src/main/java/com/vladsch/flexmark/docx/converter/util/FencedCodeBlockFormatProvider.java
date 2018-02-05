@@ -1,5 +1,6 @@
 package com.vladsch.flexmark.docx.converter.util;
 
+import com.vladsch.flexmark.docx.converter.internal.DocxRenderer;
 import org.docx4j.wml.PPr;
 import org.docx4j.wml.PPrBase;
 import org.docx4j.wml.Style;
@@ -12,11 +13,11 @@ public class FencedCodeBlockFormatProvider<T> extends BlockFormatProviderBase<T>
     private final BigInteger myAfter;
 
     public FencedCodeBlockFormatProvider(final DocxContext<T> docx) {
-        super(docx, BlockFormatProvider.PREFORMATTED_TEXT_STYLE);
+        super(docx, docx.getRenderingOptions().PREFORMATTED_TEXT_STYLE);
         final BigInteger before;
         final BigInteger after;
 
-        final Style paragraphStyle = docx.getStyle(PREFORMATTED_TEXT_STYLE);
+        final Style paragraphStyle = docx.getStyle(docx.getRenderingOptions().PREFORMATTED_TEXT_STYLE);
         if (paragraphStyle != null) {
             // Should always be true
             before = docx.getHelper().safeSpacingBefore(paragraphStyle.getPPr());
@@ -34,12 +35,12 @@ public class FencedCodeBlockFormatProvider<T> extends BlockFormatProviderBase<T>
     @Override
     public void open() {
         super.open();
-        myDocx.addBlankLine(myBefore, BlockFormatProvider.DEFAULT_STYLE);
+        myDocx.addBlankLine(myBefore, myDocx.getRenderingOptions().DEFAULT_STYLE);
     }
 
     @Override
     public void close() {
-        myDocx.addBlankLine(myAfter, BlockFormatProvider.DEFAULT_STYLE);
+        myDocx.addBlankLine(myAfter, myDocx.getRenderingOptions().DEFAULT_STYLE);
         super.close();
     }
 

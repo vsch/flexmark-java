@@ -73,5 +73,9 @@
     <orderEntry type="library" name="Maven: antlr:antlr:2.7.7" level="project" />
     <orderEntry type="library" name="Maven: com.google.guava:guava:19.0" level="project" />
     <orderEntry type="library" name="Maven: com.thedeanda:lorem:2.0" level="project" />
+    <orderEntry type="module" module-name="flexmark-ext-enumerated-reference" />
+    <orderEntry type="module" module-name="flexmark-ext-attributes" />
+    <orderEntry type="module" module-name="flexmark-ext-aside" />
+    <orderEntry type="module" module-name="flexmark-ext-anchorlink" scope="TEST" />
   </component>
 </module>

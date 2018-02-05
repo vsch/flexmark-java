@@ -43,15 +43,18 @@ public class AbbreviationNodePostProcessor extends NodePostProcessor {
 
             for (String abbr : abbreviations) {
                 AbbreviationBlock abbreviationBlock = abbrRepository.get(abbr);
-                BasedSequence abbreviation = abbreviationBlock.getAbbreviation();
-                if (!abbreviation.isEmpty()) {
-                    abbreviationMap.put(abbr, abbreviation);
+                // Issue #198, test for empty abbr
+                if (!abbr.isEmpty()) {
+                    BasedSequence abbreviation = abbreviationBlock.getAbbreviation();
+                    if (!abbreviation.isEmpty()) {
+                        abbreviationMap.put(abbr, abbreviation);
 
-                    if (sb.length() > 0) sb.append("|");
+                        if (sb.length() > 0) sb.append("|");
 
-                    if (Character.isLetterOrDigit(abbr.charAt(0))) sb.append("\\b");
-                    sb.append("\\Q").append(abbr).append("\\E");
-                    if (Character.isLetterOrDigit(abbr.charAt(abbr.length() - 1))) sb.append("\\b");
+                        if (Character.isLetterOrDigit(abbr.charAt(0))) sb.append("\\b");
+                        sb.append("\\Q").append(abbr).append("\\E");
+                        if (Character.isLetterOrDigit(abbr.charAt(abbr.length() - 1))) sb.append("\\b");
+                    }
                 }
             }
 

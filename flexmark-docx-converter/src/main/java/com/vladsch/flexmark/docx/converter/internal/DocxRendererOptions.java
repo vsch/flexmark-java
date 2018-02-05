@@ -18,6 +18,37 @@ public class DocxRendererOptions {
     public final int maxImageWidth;
     public final String tocInstruction;
     public final String codeHighlightShading;
+    public final String localHyperlinkSuffix;
+    public final String localHyperlinkMissingHighlight;
+    public final String localHyperlinkMissingFormat;
+    public final boolean errorsToStdErr;
+    public final String errorSourceFile;
+
+    public final String DEFAULT_STYLE;
+    public final String LOOSE_PARAGRAPH_STYLE;
+    public final String TIGHT_PARAGRAPH_STYLE;
+    public final String PREFORMATTED_TEXT_STYLE;
+    public final String BLOCK_QUOTE_STYLE;
+    public final String ASIDE_BLOCK_STYLE;
+    public final String HORIZONTAL_LINE_STYLE;
+    public final String TABLE_CAPTION;
+    public final String TABLE_CONTENTS;
+    public final String TABLE_HEADING;
+    public final String FOOTNOTE_STYLE;
+    public final String BULLET_LIST_STYLE;
+    public final String BLOCK_QUOTE_BULLET_LIST_STYLE;
+    public final String NUMBERED_LIST_STYLE;
+    public final String BLOCK_QUOTE_NUMBERED_LIST_STYLE;
+    public final String BOLD_STYLE;
+    public final String ITALIC_STYLE;
+    public final String STRIKE_THROUGH_STYLE;
+    public final String SUBSCRIPT_STYLE;
+    public final String SUPERSCRIPT_STYLE;
+    public final String INS_STYLE;
+    public final String INLINE_CODE_STYLE;
+    public final String HYPERLINK_STYLE;
+    public final String FOOTNOTE_ANCHOR_STYLE;
+    public final String ENDNOTE_ANCHOR_STYLE;
 
     public DocxRendererOptions(DataHolder options) {
         escapeHtmlBlocks = DocxRenderer.ESCAPE_HTML_BLOCKS.getFrom(options);
@@ -35,5 +66,36 @@ public class DocxRendererOptions {
         logImageProcessing = DocxRenderer.LOG_IMAGE_PROCESSING.getFrom(options);
         noCharacterStyles = DocxRenderer.NO_CHARACTER_STYLES.getFrom(options);
         codeHighlightShading = DocxRenderer.CODE_HIGHLIGHT_SHADING.getFrom(options);
+        localHyperlinkSuffix = DocxRenderer.LOCAL_HYPERLINK_SUFFIX.getFrom(options);
+        localHyperlinkMissingHighlight = DocxRenderer.LOCAL_HYPERLINK_MISSING_HIGHLIGHT.getFrom(options);
+        localHyperlinkMissingFormat = DocxRenderer.LOCAL_HYPERLINK_MISSING_FORMAT.getFrom(options);
+        errorsToStdErr = DocxRenderer.ERRORS_TO_STDERR.getFrom(options);
+        errorSourceFile = DocxRenderer.ERROR_SOURCE_FILE.getFrom(options);
+
+        DEFAULT_STYLE = DocxRenderer.DEFAULT_STYLE.getFrom(options);
+        LOOSE_PARAGRAPH_STYLE = DocxRenderer.LOOSE_PARAGRAPH_STYLE.getFrom(options);
+        TIGHT_PARAGRAPH_STYLE = DocxRenderer.TIGHT_PARAGRAPH_STYLE.getFrom(options);
+        PREFORMATTED_TEXT_STYLE = DocxRenderer.PREFORMATTED_TEXT_STYLE.getFrom(options);
+        BLOCK_QUOTE_STYLE = DocxRenderer.BLOCK_QUOTE_STYLE.getFrom(options);
+        ASIDE_BLOCK_STYLE = DocxRenderer.ASIDE_BLOCK_STYLE.getFrom(options);
+        HORIZONTAL_LINE_STYLE = DocxRenderer.HORIZONTAL_LINE_STYLE.getFrom(options);
+        TABLE_CAPTION = DocxRenderer.TABLE_CAPTION.getFrom(options);
+        TABLE_CONTENTS = DocxRenderer.TABLE_CONTENTS.getFrom(options);
+        TABLE_HEADING = DocxRenderer.TABLE_HEADING.getFrom(options);
+        FOOTNOTE_STYLE = DocxRenderer.FOOTNOTE_STYLE.getFrom(options);
+        BULLET_LIST_STYLE = DocxRenderer.BULLET_LIST_STYLE.getFrom(options);
+        BLOCK_QUOTE_BULLET_LIST_STYLE = DocxRenderer.BLOCK_QUOTE_BULLET_LIST_STYLE.getFrom(options);
+        NUMBERED_LIST_STYLE = DocxRenderer.NUMBERED_LIST_STYLE.getFrom(options);
+        BLOCK_QUOTE_NUMBERED_LIST_STYLE = DocxRenderer.BLOCK_QUOTE_NUMBERED_LIST_STYLE.getFrom(options);
+        BOLD_STYLE = DocxRenderer.BOLD_STYLE.getFrom(options);
+        ITALIC_STYLE = DocxRenderer.ITALIC_STYLE.getFrom(options);
+        STRIKE_THROUGH_STYLE = DocxRenderer.STRIKE_THROUGH_STYLE.getFrom(options);
+        SUBSCRIPT_STYLE = DocxRenderer.SUBSCRIPT_STYLE.getFrom(options);
+        SUPERSCRIPT_STYLE = DocxRenderer.SUPERSCRIPT_STYLE.getFrom(options);
+        INS_STYLE = DocxRenderer.INS_STYLE.getFrom(options);
+        INLINE_CODE_STYLE = DocxRenderer.INLINE_CODE_STYLE.getFrom(options);
+        HYPERLINK_STYLE = DocxRenderer.HYPERLINK_STYLE.getFrom(options);
+        FOOTNOTE_ANCHOR_STYLE = DocxRenderer.FOOTNOTE_ANCHOR_STYLE.getFrom(options);
+        ENDNOTE_ANCHOR_STYLE = DocxRenderer.ENDNOTE_ANCHOR_STYLE.getFrom(options);
     }
 }

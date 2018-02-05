@@ -1,34 +1,46 @@
 **flexmark-java extension for enumerated reference processing**
 
-Converts `[@type:reference]` to enumerated reference link based on type pattern defined in
-enumerated reference definition.
+To create an element anchor or bookmark use the id attribute syntax of `{#type:reference}` after
+the element to be referenced. Where `type` is a category used to keep separate numbering within
+the category and `reference` is used to uniquely identify an element in the category. The anchor
+id of the element will be `type:reference` and this must be used by the enumerated reference
+label or link.
 
-Converts `[#type:reference]` to enumerated reference text based on type pattern defined in
-enumerated reference definition.
+To refer to the element in the document use the enumerated reference elements:
 
-Enumerated reference format definition defines the text to be used by an enumerated reference.
+1. A reference link syntax `[@type:reference]` converts to a link based on type pattern defined
+   in enumerated reference format definition. The target of the link will be an element with a
+   `{#type:reference}` attribute assigned to it. The text of the link will be that which is
+   defined by the enumerated reference definition for `type`.
 
-```
-[@type]: Type content [#]
-```
+2. A reference text syntax `[#type:reference]` converts to text which is defined by the
+   enumerated reference definition for `type`. This is to be used where the identifying text of
+   the element within the document is needed.
 
-Where `[#]` is replaced by the ordinal for the actual reference in the document in order of
-appearance of this reference in an id attribute value. `[@]` is equivalent to `[@]` when there
-is no id. It is treated as a placeholder for the ordinal number for the given type. Outside of a
-enumerated reference definition it will render `0`
+3. One reference definition for each `type` must be included in the document. Syntax `[@type]:
+   Label Text [#]` is used to define how to create a label for all elements of the given `type`.
+   This usually includes the ordinal position of the element in the document.
+
+   Text **following** the `[@type]: ` is used as the label with the `[@] or [#]` replaced by the
+   ordinal number of the element in the document relative to other elements of the same `type`.
+   The first element will have ordinal of 1, second 2, etc.
+
+   If a type has no enumerated definition then `type [#]` will be used where `type` is the
+   category type and `[#]` is the ordinal of the element in its category. It is equivalent to
+   specifying `[@type]: type [#]` in the document.
 
 For example:
 
 ```
-![Fig](http://example.com/test.png){#fig:test}  
+![Flexmark Icon Logo](https://github.com/vsch/flexmark-java/raw/master/assets/images/flexmark-icon-logo%402x.png){#fig:test}   
 [#fig:test]
 
-![Fig](http://example.com/test.png){#fig:test2}  
+![Flexmark Icon Logo](https://github.com/vsch/flexmark-java/raw/master/assets/images/flexmark-icon-logo%402x.png){#fig:test2}   
 [#fig:test2]
 
-| table |
-|-------|
-| data  |
+| heading | heading | heading |
+|---------|---------|---------|
+| data    | data    |         |
 [[#tbl:test] caption]
 {#tbl:test}
 
@@ -38,20 +50,19 @@ See [@fig:test]
 
 See [@tbl:test]
 
+[@tbl]: Table [#].
 
 [@fig]: Figure [#].
-
-[@tbl]: Table [#].
 ```
 
 is equivalent to the following without having to manually keep track of numbering of individual
 elements:
 
 ```
-![Fig](http://example.com/test.png){#fig:test}
+![Flexmark Icon Logo](https://github.com/vsch/flexmark-java/raw/master/assets/images/flexmark-icon-logo%402x.png){#fig:test}  
 Figure 1.
 
-![Fig](http://example.com/test.png){#fig:test2}
+![Flexmark Icon Logo](https://github.com/vsch/flexmark-java/raw/master/assets/images/flexmark-icon-logo%402x.png){#fig:test2}  
 Figure 2.
 
 | table |
@@ -71,9 +82,9 @@ See [Table 1.](#tbl:test)
 Will render as:
 
 ```
-<p><img src="http://example.com/test.png" alt="Fig" id="fig:test" /><br />
+<p><img src="https://github.com/vsch/flexmark-java/raw/master/assets/images/flexmark-icon-logo%402x.png" id="fig:test" /><br />
 <span>Figure 1.</span></p>
-<p><img src="http://example.com/test.png" alt="Fig" id="fig:test2" /><br />
+<p><img src="https://github.com/vsch/flexmark-java/raw/master/assets/images/flexmark-icon-logo%402x.png" alt="Fig" id="fig:test2" /><br />
 <span>Figure 2.</span></p>
 <table id="tbl:test">
   <thead>

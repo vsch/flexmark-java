@@ -8,6 +8,7 @@ import com.vladsch.flexmark.ext.attributes.AttributesNode;
 import com.vladsch.flexmark.html.AttributeProvider;
 import com.vladsch.flexmark.html.IndependentAttributeProviderFactory;
 import com.vladsch.flexmark.html.renderer.AttributablePart;
+import com.vladsch.flexmark.html.renderer.LinkResolverContext;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
 import com.vladsch.flexmark.util.html.Attribute;
 import com.vladsch.flexmark.util.html.Attributes;
@@ -21,7 +22,7 @@ import static com.vladsch.flexmark.util.html.Attribute.CLASS_ATTR;
 public class AttributesAttributeProvider implements AttributeProvider {
     private final NodeAttributeRepository nodeAttributeRepository;
 
-    public AttributesAttributeProvider(NodeRendererContext context) {
+    public AttributesAttributeProvider(LinkResolverContext context) {
         DataHolder options = context.getOptions();
         nodeAttributeRepository = AttributesExtension.NODE_ATTRIBUTES.getFrom(options);
     }
@@ -84,7 +85,7 @@ public class AttributesAttributeProvider implements AttributeProvider {
         //}
 
         @Override
-        public AttributeProvider create(NodeRendererContext context) {
+        public AttributeProvider create(LinkResolverContext context) {
             return new AttributesAttributeProvider(context);
         }
     }

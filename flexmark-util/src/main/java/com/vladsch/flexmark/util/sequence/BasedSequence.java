@@ -1,5 +1,6 @@
 package com.vladsch.flexmark.util.sequence;
 
+import com.vladsch.flexmark.util.Pair;
 import com.vladsch.flexmark.util.mappers.CharMapper;
 
 import java.util.ArrayList;
@@ -1057,6 +1058,15 @@ public interface BasedSequence extends CharSequence, Comparable<CharSequence> {
     BasedSequence appendTo(StringBuilder out, int start);
     BasedSequence appendTo(StringBuilder out, int start, int end);
     BasedSequence append(CharSequence... others);
+
+    /**
+     * Get the line and column information from index into sequence
+     *
+     * @param index index for which to get line information
+     * @return Pair(line,column) where line and column are 0 based,
+     * throws IllegalArgumentExeption if index &lt; 0 or &gt; length.
+     */
+    Pair<Integer, Integer> getLineColumnAtIndex(int index);
 
     class EmptyBasedSequence extends BasedSequenceImpl {
         @Override

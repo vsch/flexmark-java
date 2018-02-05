@@ -52,6 +52,7 @@ public class XmlFormatter {
             final Document document = builderFactory.newDocumentBuilder().parse(src);
             final NodeList bodies = document.getElementsByTagName("w:body");
             final NodeList sections = document.getElementsByTagName("w:sectPr");
+            final NodeList footnotes = document.getElementsByTagName("w:footnote");
             final Boolean keepDeclaration = Boolean.valueOf(xml.startsWith("<?xml"));
 
             final DOMImplementationRegistry registry = DOMImplementationRegistry.newInstance();
@@ -64,16 +65,19 @@ public class XmlFormatter {
             int iMax = sections.getLength();
             StringBuilder sb = new StringBuilder();
             for (int i = 0; i < iMax; i++) {
-
                 final Node item = sections.item(i);
                 item.getParentNode().removeChild(item);
             }
 
             iMax = bodies.getLength();
             for (int i = 0; i < iMax; i++) {
-
                 final Node item = bodies.item(i);
+                sb.append(writer.writeToString(item));
+            }
 
+            iMax = footnotes.getLength();
+            for (int i = 0; i < iMax; i++) {
+                final Node item = footnotes.item(i);
                 sb.append(writer.writeToString(item));
             }
             return sb.toString();

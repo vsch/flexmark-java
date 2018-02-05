@@ -3,6 +3,8 @@ package com.vladsch.flexmark.ext.attributes;
 import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.ext.attributes.internal.*;
 import com.vladsch.flexmark.html.HtmlRenderer;
+import com.vladsch.flexmark.html.RendererBuilder;
+import com.vladsch.flexmark.html.RendererExtension;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.KeepType;
 import com.vladsch.flexmark.util.collection.DataValueFactory;
@@ -22,7 +24,7 @@ import com.vladsch.flexmark.util.options.MutableDataHolder;
  * </p>
  */
 public class AttributesExtension implements Parser.ParserExtension
-        , HtmlRenderer.HtmlRendererExtension
+        , RendererExtension
         //, Parser.ReferenceHoldingExtension
 {
     public static final DataKey<NodeAttributeRepository> NODE_ATTRIBUTES = new DataKey<NodeAttributeRepository>("NODE_ATTRIBUTES", new DataValueFactory<NodeAttributeRepository>() {
@@ -58,7 +60,7 @@ public class AttributesExtension implements Parser.ParserExtension
     }
 
     @Override
-    public void extend(final HtmlRenderer.Builder rendererBuilder, final String rendererType) {
+    public void extend(final RendererBuilder rendererBuilder, final String rendererType) {
         //rendererBuilder.nodeRendererFactory(new AttributesNodeRenderer.Factory());
         rendererBuilder.attributeProviderFactory(new AttributesAttributeProvider.Factory());
     }

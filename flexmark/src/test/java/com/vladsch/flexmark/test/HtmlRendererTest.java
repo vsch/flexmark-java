@@ -86,7 +86,7 @@ public class HtmlRendererTest {
     public void attributeProviderForCodeBlock() {
         AttributeProviderFactory factory = new IndependentAttributeProviderFactory() {
             @Override
-            public AttributeProvider create(NodeRendererContext context) {
+            public AttributeProvider create(LinkResolverContext context) {
                 //noinspection ReturnOfInnerClass
                 return new AttributeProvider() {
                     @Override
@@ -115,7 +115,7 @@ public class HtmlRendererTest {
     public void attributeProviderForImage() {
         AttributeProviderFactory factory = new IndependentAttributeProviderFactory() {
             @Override
-            public AttributeProvider create(NodeRendererContext context) {
+            public AttributeProvider create(LinkResolverContext context) {
                 return new AttributeProvider() {
                     @Override
                     public void setAttributes(Node node, AttributablePart part, Attributes attributes) {

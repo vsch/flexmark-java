@@ -1,8 +1,10 @@
 package com.vladsch.flexmark.util.sequence;
 
+import com.vladsch.flexmark.util.Pair;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
@@ -244,5 +246,64 @@ public class BasedSequenceImplTest {
         assertEquals(BasedSequenceImpl.of("[foo]"), text.replace("food", "bars"));
         assertEquals(BasedSequenceImpl.of("(foo]"), text.replace("[", "("));
         assertEquals(BasedSequenceImpl.of("[foo)"), text.replace("]", ")"));
+    }
+
+    @Test
+    public void test_getLineColumnAtIndex() {
+        String[] lines = new String[] {
+                "1: line 1\n",
+                "2: line 2\n",
+                "3: line 3\r",
+                "4: line 4\r\n",
+                "5: line 5\r",
+                "6: line 6"
+        };
+
+        int iMax = lines.length;
+
+        int[] lineStarts = new int[iMax + 1];
+        int[] lineEnds = new int[iMax];
+        int len = 0;
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < iMax; i++) {
+            lineStarts[i] = len;
+            String line = lines[i].replaceAll("\r|\n", "");
+            lineEnds[i] = len + line.length();
+            len += lines[i].length();
+            sb.append(lines[i]);
+        }
+
+        lineStarts[iMax] = len;
+
+        int jMax = len;
+        List<Pair<Integer, Integer>> info = new ArrayList<>(jMax);
+
+        for (int j = 0; j < jMax; j++) {
+            for (int i = 0; i < iMax; i++) {
+                if (j >= lineStarts[i] && j < lineStarts[i + 1]) {
+                    int col = j - lineStarts[i];
+                    int line = i;
+                    if (j > lineEnds[i]) {
+                        col = 0;
+                        line++;
+                    }
+                    info.add(new Pair<>(line, col));
+                    //System.out.println(String.format("%d: [%d, %d]", j, line, col));
+                    break;
+                }
+            }
+        }
+
+        assertEquals(jMax, info.size());
+
+        BasedSequence text = BasedSequenceImpl.of(sb.toString());
+
+        for (int j = 0; j < jMax; j++) {
+            final Pair<Integer, Integer> atIndex = text.getLineColumnAtIndex(j);
+            if (!info.get(j).equals(atIndex)) {
+                text.getLineColumnAtIndex(j);
+            }
+            assertEquals("Failed at " + j, info.get(j), atIndex);
+        }
     }
 }

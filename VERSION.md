@@ -7,7 +7,7 @@ flexmark-java
 
 - [To Do](#to-do)
     - [Docx Converter](#docx-converter)
-- [0.28.40](#02840)
+- [0.30.0](#0300)
 - [0.28.38](#02838)
 - [0.28.36](#02836)
 - [0.28.34](#02834)
@@ -238,12 +238,101 @@ flexmark-java
 
 &nbsp;</details>
 
-0.28.40
--------
+0.30.0
+------
 
-* [ ] Fix: DocxConverter self referencing ref anchors should be converted to bookmark references in the
+* Fix: #198, StringIndexOutOfBoundsException, in `AbbreviationExtension` if abbreviation
+  definition had an empty abbreviation.
+
+* API Change: Refactoring of Interfaces to allow extensions only providing link resolver, attribute
+  provider and html id generator to be re-used by the `DocxRenderer` and `HtmlRenderer` without
+  modifications other than changing the `implemented` extension from
+  `HtmlRenderer.HtmlRendererExtension` to `RendererExtension`
+
+  * `AttributesProviderFactory` pass only `LinkResolverContext` instead
+    of `NodeRenderingContext` to allow for attribute provider extensions to be re-used with
+    `DocxRender`
+  * `HeadIdGenerator` pass only `LinkResolverContext` instead of `NodeRenderingContext` to allow
+    for header id generator provider extensions to be re-used with `DocxRender`
+  * new `RendererExtension` with only ability to register html id generator, link resolver and
+    attribute provider. Such an extension can be used as is with `HtmlRenderer` and
+    `DocxRenderer`
+
+    `RendererExtension.extend(RendererBuilder, String)` method of these gets passed `RendererBuilder` instead of `HtmlRenderer.Builder`
+    
+    extensions that implement both `RendererExtension` and `HtmlRendererExtension` will have
+    only have the html renderer extension `extend` method called.
+
+* Add: `flexmark-ext-aside` handling to DocxConverter 
+
+* Fix: DocxConverter formatting around footnote reference would be applied to footnote text
+
+* Add: `DocxRenderer.LOCAL_HYPERLINK_MISSING_HIGHLIGHT`, default `"red"` to highlight in
+  document hyperlinks with missing targets. Set to `""` to disable this. NOTE: must be one of
+  the 8 named colors used by Word or it might complain.
+
+* Add: `DocxRenderer.LOCAL_HYPERLINK_MISSING_FORMAT`, default `"Missing target id: #%s"` to
+  change the tooltip text of the missing hyperlink. `%s` will be replaced with the reference id of
+  the link.
+
+* Fix: DocxConverter self referencing ref anchors should be converted to bookmark references in the
       docx
-* [ ] Add: DocxConverter options to re-map standard style names to user defined ones. 
+
+* Add: DocxConverter now supports `AttributesExtension` and `EnumeratedReferenceExtension` by
+  converting id attributes to bookmarks and enumerated reference links to hyperlinks to
+  bookmarks.
+
+* Change: Enumerated references which are missing the definition for their type now default to
+  `type #` where # is the reference ordinal instead of just `#`.
+
+* Add: Enumerated links now have title set to the text value of the reference. 
+
+* Add: DocxConverter options to control heading id generation to resolve anchor refs to document anchors
+  * `DocxRenderer.HTML_ID_GENERATOR`, default `HtmlIdGenerator instance`, the id generator to
+    use for generating heading ids.
+
+  * `DocxRenderer.LOCAL_HYPERLINK_SUFFIX`, default `""`, used to add a suffix to hyperlink
+    bookmark names, except ones linking to first heading in a document. Only needed if you have
+    some post processor on the docx adding suffixes to bookmark names.
+
+<!-- 
+  * `DocxRenderer.FIRST_HEADING_ID_SUFFIX`, default `""`, used to add a suffix to the id of the
+    first heading of the document and any hyperlinks to it. 
+ -->
+
+  For convenience these `HtmlRenderer` keys are aliased through `DocxRenderer`, keep in mind
+  that setting either will affect both keys. For information on these keys see [`HtmlRenderer` options](https://github.com/vsch/flexmark-java/wiki/Extensions#renderer)
+  * `DocxRenderer.HEADER_ID_GENERATOR_RESOLVE_DUPES`, default `true`,
+  * `DocxRenderer.HEADER_ID_GENERATOR_TO_DASH_CHARS`, default `" -_"`
+  * `DocxRenderer.HEADER_ID_GENERATOR_NO_DUPED_DASHES`, default `false`
+
+* Add: DocxConverter options to re-map standard style names to user defined ones.
+  * `DocxRenderer.DEFAULT_STYLE`, default "Normal"
+  * `DocxRenderer.LOOSE_PARAGRAPH_STYLE`, default "ParagraphTextBody"
+  * `DocxRenderer.TIGHT_PARAGRAPH_STYLE`, default "BodyText"
+  * `DocxRenderer.PREFORMATTED_TEXT_STYLE`, default "PreformattedText"
+  * `DocxRenderer.BLOCK_QUOTE_STYLE`, default "Quotations"
+  * `DocxRenderer.ASIDE_BLOCK_STYLE`, default "AsideBlock"
+  * `DocxRenderer.HORIZONTAL_LINE_STYLE`, default "HorizontalLine"
+  * `DocxRenderer.TABLE_CAPTION`, default "TableCaption"
+  * `DocxRenderer.TABLE_CONTENTS`, default "TableContents"
+  * `DocxRenderer.TABLE_HEADING`, default "TableHeading"
+  * `DocxRenderer.FOOTNOTE_STYLE`, default "Footnote"
+<!-- 
+  * `DocxRenderer.BULLET_LIST_STYLE`, default "BulletList"
+  * `DocxRenderer.BLOCK_QUOTE_BULLET_LIST_STYLE`, default "QuotationsBulletList"
+  * `DocxRenderer.NUMBERED_LIST_STYLE`, default "NumberedList"
+  * `DocxRenderer.BLOCK_QUOTE_NUMBERED_LIST_STYLE`, default "QuotationsNumberedList"
+ -->
+  * `DocxRenderer.BOLD_STYLE`, default "StrongEmphasis"
+  * `DocxRenderer.ITALIC_STYLE`, default "Emphasis"
+  * `DocxRenderer.STRIKE_THROUGH_STYLE`, default "Strikethrough"
+  * `DocxRenderer.SUBSCRIPT_STYLE`, default "Subscript"
+  * `DocxRenderer.SUPERSCRIPT_STYLE`, default "Superscript"
+  * `DocxRenderer.INS_STYLE`, default "Underlined"
+  * `DocxRenderer.INLINE_CODE_STYLE`, default "SourceText"
+  * `DocxRenderer.HYPERLINK_STYLE`, default "Hyperlink"
+
 
 0.28.38
 -------

@@ -1,16 +1,19 @@
 package com.vladsch.flexmark.docx.converter.util;
 
+import com.vladsch.flexmark.ast.Node;
+import com.vladsch.flexmark.docx.converter.internal.DocxRendererOptions;
+import javafx.scene.control.Hyperlink;
 import org.docx4j.openpackaging.exceptions.Docx4JException;
 import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
 import org.docx4j.openpackaging.parts.Part;
 import org.docx4j.openpackaging.parts.WordprocessingML.FootnotesPart;
 import org.docx4j.openpackaging.parts.WordprocessingML.MainDocumentPart;
-import org.docx4j.openpackaging.parts.relationships.RelationshipsPart;
 import org.docx4j.relationships.Relationship;
 import org.docx4j.wml.*;
 
 import java.math.BigInteger;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public interface DocxContext<T> extends DocxContextFrameProvider<T> {
 
@@ -22,6 +25,8 @@ public interface DocxContext<T> extends DocxContextFrameProvider<T> {
     void setRunContainer(RunContainer container);
     BlockFormatProvider<T> getBlockFormatProvider(T node);
     RunFormatProvider<T> getRunFormatProvider(T node);
+    DocxRendererOptions getRenderingOptions();
+
     /**
      * Get current format provider
      *
@@ -80,6 +85,47 @@ public interface DocxContext<T> extends DocxContextFrameProvider<T> {
      * @return R element
      */
     R getR();
+
+    /**
+     * Insert bookmark start into current P
+     *
+     * @param bookmarkName  name of the bookmark (optional), if not given the it will be BM_{id}
+     * @param isBlockBookmark
+     * @return CTBookmark
+     */
+    CTBookmark createBookmarkStart(String bookmarkName, final boolean isBlockBookmark);
+
+    /**
+     * Insert bookmark end into current P for given bookmark
+     *
+     * @param bookmarkStart starting bookmark to close
+     * @param isBlockBookmark
+     * @return CTMarkupRange
+     */
+    CTMarkupRange createBookmarkEnd(CTBookmark bookmarkStart, final boolean isBlockBookmark);
+
+    /**
+     * Get a hyperlink to a bookmark in the document
+     *
+     * @param bookmarkName name of the bookmark to link to
+     * @param linkText text of the link
+     * @return hyperlink
+     */
+    Hyperlink createBookmarkHyperlink(String bookmarkName, String linkText);
+
+    /**
+     * Increment the last id and return the id
+     *
+     * @return next bookmark id
+     */
+    int getNextBookmarkId();
+
+    /**
+     * get the atomic integer used to generate bookmark ids
+     *
+     * @return the id atomic integer
+     */
+    AtomicInteger getBookmarkIdAtomic();
 
     /**
      * Create and add wrapped Text element to R element
@@ -158,4 +204,27 @@ public interface DocxContext<T> extends DocxContextFrameProvider<T> {
      * @throws Docx4JException thrown if cannot get or create footnotes part of the document
      */
     CTFtnEdn addFootnote(final BigInteger footnoteID) throws Docx4JException;
+
+    /**
+     * Get id for a node
+     * @param node    node
+     * @return  id string or null if none
+     */
+    String getNodeId(Node node);
+
+    /**
+     * Get a valid bookmark for given id
+     *
+     * @param id    node id
+     * @return      mapped to valid bookmark name
+     */
+    String getValidBookmarkName(String id);
+
+    /**
+     * Get Node from id
+     *
+     * @param nodeId id string
+     * @return node or null if no node with given id attribute is defined
+     */
+    Node getNodeFromId(String nodeId);
 }

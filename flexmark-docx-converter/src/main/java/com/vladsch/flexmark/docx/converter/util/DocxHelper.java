@@ -1,5 +1,9 @@
 package com.vladsch.flexmark.docx.converter.util;
 
+import com.vladsch.flexmark.docx.converter.internal.DocxRenderer;
+import com.vladsch.flexmark.docx.converter.internal.DocxRendererOptions;
+import com.vladsch.flexmark.util.options.DataHolder;
+import com.vladsch.flexmark.util.options.DataSet;
 import org.docx4j.model.PropertyResolver;
 import org.docx4j.model.styles.StyleUtil;
 import org.docx4j.openpackaging.exceptions.Docx4JException;
@@ -22,10 +26,12 @@ public class DocxHelper {
     protected final ObjectFactory myFactory;
     protected PropertyResolver myResolver;
     protected final HashMap<String, BigInteger> myNumPrColorMap;
+    protected final DocxRendererOptions myOptions;
 
-    public DocxHelper(final WordprocessingMLPackage mlPackage, final ObjectFactory factory) {
+    public DocxHelper(final WordprocessingMLPackage mlPackage, final ObjectFactory factory, final DocxRendererOptions options) {
         myPackage = mlPackage;
         myFactory = factory;
+        myOptions = options;
         myDocumentPart = mlPackage.getMainDocumentPart();
         myNumPrColorMap = new HashMap<String, BigInteger>();
     }
@@ -293,39 +299,39 @@ public class DocxHelper {
         if (has(parent.getInd())) {
             PPr styledChild = getResolver().getEffectivePPr(child);
 
-            PPrBase.Ind cInd = getCopy(styledChild.getInd(), true);
-            PPrBase.Ind pInd = parent.getInd();
+                PPrBase.Ind cInd = getCopy(styledChild == null ? null : styledChild.getInd(), true);
+                PPrBase.Ind pInd = parent.getInd();
 
-            final PPrBase.NumPr numPr = styledChild.getNumPr();
-            if (numPr != null) {
-                // need to check that too, it may have settings we don't have
-                NumberingDefinitionsPart ndp = myDocumentPart.getNumberingDefinitionsPart();
-                if (ndp != null) {
-                    final PPrBase.Ind ndpInd = ndp.getInd(numPr);
-                    if (ndpInd != null) {
-                        if (cInd.getLeft() == null && ndpInd.getLeft() != null) {
-                            cInd.setLeft(ndpInd.getLeft());
-                        }
-                        if (cInd.getRight() == null && ndpInd.getRight() != null) {
-                            cInd.setRight(ndpInd.getRight());
-                        }
-                        if (cInd.getHanging() == null && ndpInd.getHanging() != null) {
-                            cInd.setHanging(ndpInd.getHanging());
+                final PPrBase.NumPr numPr =styledChild == null ? null :  styledChild.getNumPr();
+                if (numPr != null) {
+                    // need to check that too, it may have settings we don't have
+                    NumberingDefinitionsPart ndp = myDocumentPart.getNumberingDefinitionsPart();
+                    if (ndp != null) {
+                        final PPrBase.Ind ndpInd = ndp.getInd(numPr);
+                        if (ndpInd != null) {
+                            if (cInd.getLeft() == null && ndpInd.getLeft() != null) {
+                                cInd.setLeft(ndpInd.getLeft());
+                            }
+                            if (cInd.getRight() == null && ndpInd.getRight() != null) {
+                                cInd.setRight(ndpInd.getRight());
+                            }
+                            if (cInd.getHanging() == null && ndpInd.getHanging() != null) {
+                                cInd.setHanging(ndpInd.getHanging());
+                            }
                         }
                     }
                 }
-            }
 
-            combine(cInd, pInd, CombineBigInt.ADD, CombineBigInt.NONE);
-            cInd = keepDiff(cInd, styledChild.getInd());
-            child.setInd(cInd);
+                combine(cInd, pInd, CombineBigInt.ADD, CombineBigInt.NONE);
+                cInd = keepDiff(cInd, styledChild == null ? null : styledChild.getInd());
+                child.setInd(cInd);
         }
     }
 
     // get a num pr for a list of given color (other than default)
     //
     public BigInteger getNumPrFor(BigInteger baseNumID, Color color) {
-        RPr rPr = getResolver().getEffectiveRPr(BlockFormatProvider.DEFAULT_STYLE);
+        RPr rPr = getResolver().getEffectiveRPr(myOptions.PREFORMATTED_TEXT_STYLE);
         if (rPr != null && rPr.getColor() != null) {
             if (keepDiff(rPr.getColor(), color) == null) {
                 return baseNumID;

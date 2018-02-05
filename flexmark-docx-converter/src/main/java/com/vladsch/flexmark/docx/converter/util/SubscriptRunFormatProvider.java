@@ -1,10 +1,11 @@
 package com.vladsch.flexmark.docx.converter.util;
 
+import com.vladsch.flexmark.docx.converter.internal.DocxRenderer;
 import org.docx4j.wml.RPr;
 
 public class SubscriptRunFormatProvider<T> extends RunFormatProviderBase<T> {
     public SubscriptRunFormatProvider(final DocxContext<T> docx, boolean noCharacterStyles) {
-        super(docx, RunFormatProvider.SUBSCRIPT_STYLE, noCharacterStyles, null);
+        super(docx, docx.getRenderingOptions().SUBSCRIPT_STYLE, noCharacterStyles, null);
     }
 
     @Override

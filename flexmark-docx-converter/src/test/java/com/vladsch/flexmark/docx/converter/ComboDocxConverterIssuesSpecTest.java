@@ -7,8 +7,12 @@ import com.vladsch.flexmark.docx.converter.util.BlockFormatProvider;
 import com.vladsch.flexmark.docx.converter.util.DocxContextImpl;
 import com.vladsch.flexmark.docx.converter.util.RunFormatProvider;
 import com.vladsch.flexmark.docx.converter.util.XmlFormatter;
+import com.vladsch.flexmark.ext.aside.AsideExtension;
+import com.vladsch.flexmark.ext.attributes.AttributesExtension;
+import com.vladsch.flexmark.ext.autolink.AutolinkExtension;
 import com.vladsch.flexmark.ext.definition.DefinitionExtension;
 import com.vladsch.flexmark.ext.emoji.EmojiExtension;
+import com.vladsch.flexmark.ext.enumerated.reference.EnumeratedReferenceExtension;
 import com.vladsch.flexmark.ext.footnotes.FootnoteExtension;
 import com.vladsch.flexmark.ext.gfm.strikethrough.StrikethroughSubscriptExtension;
 import com.vladsch.flexmark.ext.ins.InsExtension;
@@ -48,8 +52,12 @@ public class ComboDocxConverterIssuesSpecTest extends ComboSpecTestCase {
     private static final DataHolder OPTIONS = new MutableDataSet()
             .set(HtmlRenderer.INDENT_SIZE, 2)
             .set(Parser.EXTENSIONS, Arrays.asList(
+                    AsideExtension.create(),
+                    AttributesExtension.create(),
+                    AutolinkExtension.create(),
                     DefinitionExtension.create(),
                     EmojiExtension.create(),
+                    EnumeratedReferenceExtension.create(),
                     FootnoteExtension.create(),
                     StrikethroughSubscriptExtension.create(),
                     InsExtension.create(),
@@ -78,6 +86,8 @@ public class ComboDocxConverterIssuesSpecTest extends ComboSpecTestCase {
         optionsMap.put("IGNORED", new MutableDataSet().set(IGNORE, SKIP_IGNORED_TESTS));
         optionsMap.put("url", new MutableDataSet().set(DocxRenderer.DOC_RELATIVE_URL, String.format("file://%s", PROJECT_ROOT_DIRECTORY)));
         optionsMap.put("caption-before", new MutableDataSet().set(DocxRenderer.TABLE_CAPTION_BEFORE_TABLE, true));
+        optionsMap.put("yellow-missing-hyperlink", new MutableDataSet().set(DocxRenderer.LOCAL_HYPERLINK_MISSING_HIGHLIGHT, "yellow"));
+        optionsMap.put("no-missing-hyperlink", new MutableDataSet().set(DocxRenderer.LOCAL_HYPERLINK_MISSING_HIGHLIGHT, ""));
 
         // Set up a simple configuration that logs on the console.
         //BasicConfigurator.configure();
@@ -226,7 +236,7 @@ public class ComboDocxConverterIssuesSpecTest extends ComboSpecTestCase {
             for (String line : lines) {
                 String trimmed = line.trim();
                 if (!trimmed.isEmpty()) {
-                    myDocxContext.createP(BlockFormatProvider.LOOSE_PARAGRAPH_STYLE);
+                    myDocxContext.createP(myDocxContext.getRenderingOptions().LOOSE_PARAGRAPH_STYLE);
                     myDocxContext.createColor().setVal("808080");
                     Text text = myDocxContext.addWrappedText();
                     text.setValue(trimmed);
@@ -253,7 +263,22 @@ public class ComboDocxConverterIssuesSpecTest extends ComboSpecTestCase {
         myPackage = DocxRenderer.getDefaultTemplate();
         if (myPackage == null) return;
 
-        myDocxContext = new DocxContextImpl<Node>(myPackage);
+        myDocxContext = new DocxContextImpl<Node>(myPackage, null) {
+            @Override
+            public String getNodeId(final Node node) {
+                return null;
+            }
+
+            @Override
+            public String getValidBookmarkName(final String id) {
+                return null;
+            }
+
+            @Override
+            public Node getNodeFromId(final String nodeId) {
+                return null;
+            }
+        };
         myVisibleLineBreak = "¶";
     }
 

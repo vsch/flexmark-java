@@ -4,27 +4,45 @@
 </head>
 <body>
 <p><strong>flexmark-java extension for enumerated reference processing</strong></p>
-<p>Converts <code>[@type:reference]</code> to enumerated reference link based on type pattern defined in
-enumerated reference definition.</p>
-<p>Converts <code>[#type:reference]</code> to enumerated reference text based on type pattern defined in
-enumerated reference definition.</p>
-<p>Enumerated reference format definition defines the text to be used by an enumerated reference.</p>
-<pre><code>[@type]: Type content [#]
-</code></pre>
-<p>Where <code>[#]</code> is replaced by the ordinal for the actual reference in the document in order of
-appearance of this reference in an id attribute value. <code>[@]</code> is equivalent to <code>[@]</code> when there
-is no id. It is treated as a placeholder for the ordinal number for the given type. Outside of a
-enumerated reference definition it will render <code>0</code></p>
+<p>To create an element anchor or bookmark use the id attribute syntax of <code>{#type:reference}</code> after
+the element to be referenced. Where <code>type</code> is a category used to keep separate numbering within
+the category and <code>reference</code> is used to uniquely identify an element in the category. The anchor
+id of the element will be <code>type:reference</code> and this must be used by the enumerated reference
+label or link.</p>
+<p>To refer to the element in the document use the enumerated reference elements:</p>
+<ol>
+  <li>
+    <p>A reference link syntax <code>[@type:reference]</code> converts to a link based on type pattern defined
+    in enumerated reference format definition. The target of the link will be an element with a
+    <code>{#type:reference}</code> attribute assigned to it. The text of the link will be that which is
+    defined by the enumerated reference definition for <code>type</code>.</p>
+  </li>
+  <li>
+    <p>A reference text syntax <code>[#type:reference]</code> converts to text which is defined by the
+    enumerated reference definition for <code>type</code>. This is to be used where the identifying text of
+    the element within the document is needed.</p>
+  </li>
+  <li>
+    <p>One reference definition for each <code>type</code> must be included in the document. Syntax <code>[@type]: Label Text [#]</code> is used to define how to create a label for all elements of the given <code>type</code>.
+    This usually includes the ordinal position of the element in the document.</p>
+    <p>Text <strong>following</strong> the <code>[@type]:</code> is used as the label with the <code>[@] or [#]</code> replaced by the
+    ordinal number of the element in the document relative to other elements of the same <code>type</code>.
+    The first element will have ordinal of 1, second 2, etc.</p>
+    <p>If a type has no enumerated definition then <code>type [#]</code> will be used where <code>type</code> is the
+    category type and <code>[#]</code> is the ordinal of the element in its category. It is equivalent to
+    specifying <code>[@type]: type [#]</code> in the document.</p>
+  </li>
+</ol>
 <p>For example:</p>
-<pre><code>![Fig](http://example.com/test.png){#fig:test}  
+<pre><code>![Flexmark Icon Logo](https://github.com/vsch/flexmark-java/raw/master/assets/images/flexmark-icon-logo%402x.png){#fig:test}   
 [#fig:test]
 
-![Fig](http://example.com/test.png){#fig:test2}  
+![Flexmark Icon Logo](https://github.com/vsch/flexmark-java/raw/master/assets/images/flexmark-icon-logo%402x.png){#fig:test2}   
 [#fig:test2]
 
-| table |
-|-------|
-| data  |
+| heading | heading | heading |
+|---------|---------|---------|
+| data    | data    |         |
 [[#tbl:test] caption]
 {#tbl:test}
 
@@ -34,17 +52,16 @@ See [@fig:test]
 
 See [@tbl:test]
 
+[@tbl]: Table [#].
 
 [@fig]: Figure [#].
-
-[@tbl]: Table [#].
 </code></pre>
 <p>is equivalent to the following without having to manually keep track of numbering of individual
 elements:</p>
-<pre><code>![Fig](http://example.com/test.png){#fig:test}
+<pre><code>![Flexmark Icon Logo](https://github.com/vsch/flexmark-java/raw/master/assets/images/flexmark-icon-logo%402x.png){#fig:test}  
 Figure 1.
 
-![Fig](http://example.com/test.png){#fig:test2}
+![Flexmark Icon Logo](https://github.com/vsch/flexmark-java/raw/master/assets/images/flexmark-icon-logo%402x.png){#fig:test2}  
 Figure 2.
 
 | table |
@@ -61,9 +78,9 @@ See [Table 1.](#tbl:test)
 
 </code></pre>
 <p>Will render as:</p>
-<pre><code>&lt;p&gt;&lt;img src=&quot;http://example.com/test.png&quot; alt=&quot;Fig&quot; id=&quot;fig:test&quot; /&gt;&lt;br /&gt;
+<pre><code>&lt;p&gt;&lt;img src=&quot;https://github.com/vsch/flexmark-java/raw/master/assets/images/flexmark-icon-logo%402x.png&quot; id=&quot;fig:test&quot; /&gt;&lt;br /&gt;
 &lt;span&gt;Figure 1.&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://example.com/test.png&quot; alt=&quot;Fig&quot; id=&quot;fig:test2&quot; /&gt;&lt;br /&gt;
+&lt;p&gt;&lt;img src=&quot;https://github.com/vsch/flexmark-java/raw/master/assets/images/flexmark-icon-logo%402x.png&quot; alt=&quot;Fig&quot; id=&quot;fig:test2&quot; /&gt;&lt;br /&gt;
 &lt;span&gt;Figure 2.&lt;/span&gt;&lt;/p&gt;
 &lt;table id=&quot;tbl:test&quot;&gt;
   &lt;thead&gt;

@@ -78,7 +78,7 @@ public class HeaderIdGenerator implements HtmlIdGenerator {
 
     public static class Factory implements HeaderIdGeneratorFactory {
         @Override
-        public HtmlIdGenerator create(NodeRendererContext context) {
+        public HtmlIdGenerator create(LinkResolverContext context) {
             return new HeaderIdGenerator();
         }
     }

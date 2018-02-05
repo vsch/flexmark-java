@@ -2,24 +2,18 @@ package com.vladsch.flexmark.docx.converter.internal;
 
 import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.IRender;
-import com.vladsch.flexmark.ast.Document;
-import com.vladsch.flexmark.ast.Node;
+import com.vladsch.flexmark.ast.*;
 import com.vladsch.flexmark.docx.converter.DocxRendererContext;
 import com.vladsch.flexmark.docx.converter.NodeDocxRenderer;
 import com.vladsch.flexmark.docx.converter.NodeDocxRendererFactory;
 import com.vladsch.flexmark.docx.converter.PhasedNodeDocxRenderer;
 import com.vladsch.flexmark.docx.converter.util.*;
-import com.vladsch.flexmark.html.AttributeProviderFactory;
-import com.vladsch.flexmark.html.HtmlRenderer;
-import com.vladsch.flexmark.html.LinkResolver;
-import com.vladsch.flexmark.html.LinkResolverFactory;
-import com.vladsch.flexmark.html.renderer.HeaderIdGeneratorFactory;
-import com.vladsch.flexmark.html.renderer.LinkStatus;
-import com.vladsch.flexmark.html.renderer.LinkType;
-import com.vladsch.flexmark.html.renderer.ResolvedLink;
+import com.vladsch.flexmark.html.*;
+import com.vladsch.flexmark.html.renderer.*;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.collection.NodeCollectingVisitor;
 import com.vladsch.flexmark.util.collection.SubClassingBag;
+import com.vladsch.flexmark.util.collection.TwoWayHashMap;
 import com.vladsch.flexmark.util.dependency.FlatDependencyHandler;
 import com.vladsch.flexmark.util.html.Attributes;
 import com.vladsch.flexmark.util.html.Escaping;
@@ -31,6 +25,7 @@ import org.docx4j.openpackaging.exceptions.InvalidFormatException;
 import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
 import org.docx4j.openpackaging.parts.Part;
 import org.docx4j.openpackaging.parts.WordprocessingML.MainDocumentPart;
+import org.docx4j.wml.CTBookmark;
 import org.docx4j.wml.Numbering;
 import org.docx4j.wml.Styles;
 
@@ -74,16 +69,57 @@ public class DocxRenderer implements IRender {
     public static final DataKey<Boolean> LOG_IMAGE_PROCESSING = new DataKey<Boolean>("LOG_IMAGE_PROCESSING", false);
     public static final DataKey<Boolean> NO_CHARACTER_STYLES = new DataKey<Boolean>("NO_CHARACTER_STYLES", false);
     public static final DataKey<String> CODE_HIGHLIGHT_SHADING = new DataKey<String>("CODE_HIGHLIGHT_SHADING", "");
+    public static final DataKey<Boolean> ERRORS_TO_STDERR = new DataKey<Boolean>("ERRORS_TO_STDERR", false);
+    public static final DataKey<String> ERROR_SOURCE_FILE = new DataKey<String>("ERROR_SOURCE_FILE", "");
 
-    private final List<NodeDocxRendererFactory> nodeFormatterFactories;
+    // for compatibility with HtmlIdGenerator these are placed here
+    public static final DataKey<Boolean> HEADER_ID_GENERATOR_RESOLVE_DUPES = HtmlRenderer.HEADER_ID_GENERATOR_RESOLVE_DUPES;
+    public static final DataKey<String> HEADER_ID_GENERATOR_TO_DASH_CHARS = HtmlRenderer.HEADER_ID_GENERATOR_TO_DASH_CHARS;
+    public static final DataKey<Boolean> HEADER_ID_GENERATOR_NO_DUPED_DASHES = HtmlRenderer.HEADER_ID_GENERATOR_NO_DUPED_DASHES;
+    public static final DataKey<Boolean> RENDER_HEADER_ID = HtmlRenderer.RENDER_HEADER_ID;
+    public static final DataKey<String> LOCAL_HYPERLINK_SUFFIX = new DataKey<String>("LOCAL_HYPERLINK_SUFFIX", "");
+    public static final DataKey<String> LOCAL_HYPERLINK_MISSING_HIGHLIGHT = new DataKey<String>("LOCAL_HYPERLINK_MISSING_HIGHLIGHT", "red");
+    public static final DataKey<String> LOCAL_HYPERLINK_MISSING_FORMAT = new DataKey<String>("LOCAL_HYPERLINK_MISSING_FORMAT", "Missing target id: #%s");
+    //public static final DataKey<String> FIRST_HEADING_ID_SUFFIX = new DataKey<String>("FIRST_HEADING_ID_SUFFIX", "");
+
+    public static final DataKey<String> DEFAULT_STYLE = new DataKey<String>("DEFAULT_STYLE", "Normal");
+    public static final DataKey<String> LOOSE_PARAGRAPH_STYLE = new DataKey<String>("LOOSE_PARAGRAPH_STYLE", "ParagraphTextBody");
+    public static final DataKey<String> TIGHT_PARAGRAPH_STYLE = new DataKey<String>("TIGHT_PARAGRAPH_STYLE", "BodyText");
+    public static final DataKey<String> PREFORMATTED_TEXT_STYLE = new DataKey<String>("PREFORMATTED_TEXT_STYLE", "PreformattedText");
+    public static final DataKey<String> BLOCK_QUOTE_STYLE = new DataKey<String>("BLOCK_QUOTE_STYLE", "Quotations");
+    public static final DataKey<String> ASIDE_BLOCK_STYLE = new DataKey<String>("ASIDE_BLOCK_STYLE", "AsideBlock");
+    public static final DataKey<String> HORIZONTAL_LINE_STYLE = new DataKey<String>("HORIZONTAL_LINE_STYLE", "HorizontalLine");
+    public static final DataKey<String> TABLE_CAPTION = new DataKey<String>("TABLE_CAPTION", "TableCaption");
+    public static final DataKey<String> TABLE_CONTENTS = new DataKey<String>("TABLE_CONTENTS", "TableContents");
+    public static final DataKey<String> TABLE_HEADING = new DataKey<String>("TABLE_HEADING", "TableHeading");
+    public static final DataKey<String> FOOTNOTE_STYLE = new DataKey<String>("FOOTNOTE_STYLE", "Footnote");
+    public static final DataKey<String> BULLET_LIST_STYLE = new DataKey<String>("BULLET_LIST_STYLE", "BulletList");
+    public static final DataKey<String> BLOCK_QUOTE_BULLET_LIST_STYLE = new DataKey<String>("BLOCK_QUOTE_BULLET_LIST_STYLE", "QuotationsBulletList");
+    public static final DataKey<String> NUMBERED_LIST_STYLE = new DataKey<String>("NUMBERED_LIST_STYLE", "NumberedList");
+    public static final DataKey<String> BLOCK_QUOTE_NUMBERED_LIST_STYLE = new DataKey<String>("BLOCK_QUOTE_NUMBERED_LIST_STYLE", "QuotationsNumberedList");
+    public static final DataKey<String> BOLD_STYLE = new DataKey<String>("BOLD_STYLE", "StrongEmphasis");
+    public static final DataKey<String> ITALIC_STYLE = new DataKey<String>("ITALIC_STYLE", "Emphasis");
+    public static final DataKey<String> STRIKE_THROUGH_STYLE = new DataKey<String>("STRIKE_THROUGH_STYLE", "Strikethrough");
+    public static final DataKey<String> SUBSCRIPT_STYLE = new DataKey<String>("SUBSCRIPT_STYLE", "Subscript");
+    public static final DataKey<String> SUPERSCRIPT_STYLE = new DataKey<String>("SUPERSCRIPT_STYLE", "Superscript");
+    public static final DataKey<String> INS_STYLE = new DataKey<String>("INS_STYLE", "Underlined");
+    public static final DataKey<String> INLINE_CODE_STYLE = new DataKey<String>("INLINE_CODE_STYLE", "SourceText");
+    public static final DataKey<String> HYPERLINK_STYLE = new DataKey<String>("HYPERLINK_STYLE", "Hyperlink");
+    public static final DataKey<String> FOOTNOTE_ANCHOR_STYLE = new DataKey<String>("FOOTNOTE_ANCHOR_STYLE", "FootnoteReference");
+    public static final DataKey<String> ENDNOTE_ANCHOR_STYLE = new DataKey<String>("ENDNOTE_ANCHOR_STYLE", "EndnoteReference");
+
+    final List<NodeDocxRendererFactory> nodeFormatterFactories;
     final DocxRendererOptions rendererOptions;
     private final DataHolder options;
     private final Builder builder;
-    private final List<LinkResolverFactory> linkResolverFactories;
+    final List<LinkResolverFactory> linkResolverFactories;
+    final List<AttributeProviderFactory> attributeProviderFactories;
+    final HeaderIdGeneratorFactory htmlIdGeneratorFactory;
 
     private DocxRenderer(Builder builder) {
         this.builder = new Builder(builder); // take a copy to avoid after creation side effects
         this.options = new DataSet(builder);
+        this.htmlIdGeneratorFactory = builder.htmlIdGeneratorFactory;
         this.rendererOptions = new DocxRendererOptions(this.options);
         this.nodeFormatterFactories = new ArrayList<NodeDocxRendererFactory>(builder.nodeDocxRendererFactories.size() + 1);
         this.nodeFormatterFactories.addAll(builder.nodeDocxRendererFactories);
@@ -96,6 +132,7 @@ public class DocxRenderer implements IRender {
             }
         });
 
+        this.attributeProviderFactories = FlatDependencyHandler.computeDependencies(builder.attributeProviderFactories);
         this.linkResolverFactories = FlatDependencyHandler.computeDependencies(builder.linkResolverFactories);
     }
 
@@ -137,7 +174,7 @@ public class DocxRenderer implements IRender {
         return null;
     }
 
-    private static void setDefaultStyleAndNumbering(WordprocessingMLPackage out, final DataHolder options) {
+    static void setDefaultStyleAndNumbering(WordprocessingMLPackage out, final DataHolder options) {
         try {
             // (main doc part it if necessary)
             MainDocumentPart documentPart = out.getMainDocumentPart();
@@ -244,11 +281,11 @@ public class DocxRenderer implements IRender {
     /**
      * Builder for configuring an {@link DocxRenderer}. See methods for default configuration.
      */
-    public static class Builder extends MutableDataSet {
+    public static class Builder extends MutableDataSet implements RendererBuilder {
         List<AttributeProviderFactory> attributeProviderFactories = new ArrayList<AttributeProviderFactory>();
         List<NodeDocxRendererFactory> nodeDocxRendererFactories = new ArrayList<NodeDocxRendererFactory>();
         List<LinkResolverFactory> linkResolverFactories = new ArrayList<LinkResolverFactory>();
-        private final HashSet<RendererExtension> loadedExtensions = new HashSet<RendererExtension>();
+        private final HashSet<Extension> loadedExtensions = new HashSet<Extension>();
         HeaderIdGeneratorFactory htmlIdGeneratorFactory = null;
 
         public Builder() {
@@ -330,8 +367,37 @@ public class DocxRenderer implements IRender {
          * @param linkResolverFactory the factory for creating a node renderer
          * @return {@code this}
          */
+        @Override
         public Builder linkResolverFactory(LinkResolverFactory linkResolverFactory) {
             this.linkResolverFactories.add(linkResolverFactory);
+            return this;
+        }
+
+        /**
+         * Add an attribute provider for adding/changing HTML attributes to the rendered tags.
+         *
+         * @param attributeProviderFactory the attribute provider factory to add
+         * @return {@code this}
+         */
+        @Override
+        public Builder attributeProviderFactory(AttributeProviderFactory attributeProviderFactory) {
+            this.attributeProviderFactories.add(attributeProviderFactory);
+            return this;
+        }
+
+        /**
+         * Add a factory for generating the header id attribute from the header's text
+         *
+         * @param htmlIdGeneratorFactory the factory for generating header tag id attributes
+         * @return {@code this}
+         */
+        @Override
+        public Builder htmlIdGeneratorFactory(HeaderIdGeneratorFactory htmlIdGeneratorFactory) {
+            //noinspection VariableNotUsedInsideIf
+            if (this.htmlIdGeneratorFactory != null) {
+                throw new IllegalStateException("custom header id factory is already set to " + htmlIdGeneratorFactory.getClass().getName());
+            }
+            this.htmlIdGeneratorFactory = htmlIdGeneratorFactory;
             return this;
         }
 
@@ -342,20 +408,31 @@ public class DocxRenderer implements IRender {
         public Builder extensions(Iterable<? extends Extension> extensions) {
             // first give extensions a chance to modify options
             for (Extension extension : extensions) {
-                if (extension instanceof RendererExtension) {
+                if (extension instanceof DocxRendererExtension) {
                     if (!loadedExtensions.contains(extension)) {
-                        RendererExtension rendererExtension = (RendererExtension) extension;
-                        rendererExtension.rendererOptions(this);
+                        DocxRendererExtension docxRendererExtension = (DocxRendererExtension) extension;
+                        docxRendererExtension.rendererOptions(this);
+                    }
+                } else if (extension instanceof RendererExtension) {
+                    if (!loadedExtensions.contains(extension)) {
+                        RendererExtension docxRendererExtension = (RendererExtension) extension;
+                        docxRendererExtension.rendererOptions(this);
                     }
                 }
             }
 
             for (Extension extension : extensions) {
-                if (extension instanceof RendererExtension) {
+                if (extension instanceof DocxRendererExtension) {
                     if (!loadedExtensions.contains(extension)) {
-                        RendererExtension rendererExtension = (RendererExtension) extension;
-                        rendererExtension.extend(this);
-                        loadedExtensions.add(rendererExtension);
+                        DocxRendererExtension docxRendererExtension = (DocxRendererExtension) extension;
+                        docxRendererExtension.extend(this);
+                        loadedExtensions.add(docxRendererExtension);
+                    }
+                } else if (extension instanceof RendererExtension) {
+                    if (!loadedExtensions.contains(extension)) {
+                        RendererExtension htmlRendererExtension = (RendererExtension) extension;
+                        htmlRendererExtension.extend(this, this.get(HtmlRenderer.TYPE));
+                        loadedExtensions.add(htmlRendererExtension);
                     }
                 }
             }
@@ -366,7 +443,7 @@ public class DocxRenderer implements IRender {
     /**
      * Extension for {@link DocxRenderer}.
      */
-    public interface RendererExtension extends Extension {
+    public interface DocxRendererExtension extends Extension {
         /**
          * This method is called first on all extensions so that they can adjust the options.
          *
@@ -404,19 +481,24 @@ public class DocxRenderer implements IRender {
         private final Document document;
         private final Map<Class<?>, NodeDocxRendererHandler> renderers;
         private final SubClassingBag<Node> collectedNodes;
+        final HashSet<Class<?>> bookmarkWrapsChildren;
 
         private final List<PhasedNodeDocxRenderer> phasedFormatters;
         private final Set<DocxRendererPhase> renderingPhases;
-        private final DataHolder options;
         private DocxRendererPhase phase;
         Node renderingNode;
         private final LinkResolver[] myLinkResolvers;
         private final HashMap<LinkType, HashMap<String, ResolvedLink>> resolvedLinkMap = new HashMap<LinkType, HashMap<String, ResolvedLink>>();
+        private final AttributeProvider[] myAttributeProviders;
+        private final HtmlIdGenerator htmlIdGenerator;
+        //private final Node firstHeadingNode;
+        final TwoWayHashMap<Node, String> nodeIdMap;
+        final HashMap<String, Integer> baseIdToSerial;
+        final HashMap<String, String> idToValidBookmark;
 
         MainDocxRenderer(DataHolder options, WordprocessingMLPackage out, Document document, DocumentContentHandler contentContainer) {
-            super(out);
+            super(out, new ScopedDataSet(options, document));
 
-            this.options = new ScopedDataSet(options, document);
             this.document = document;
             this.renderers = new HashMap<Class<?>, NodeDocxRendererHandler>(32);
             this.renderingPhases = new HashSet<DocxRendererPhase>(DocxRendererPhase.values().length);
@@ -424,6 +506,14 @@ public class DocxRenderer implements IRender {
             this.phasedFormatters = new ArrayList<PhasedNodeDocxRenderer>(nodeFormatterFactories.size());
             final Boolean defaultLinkResolver = DEFAULT_LINK_RESOLVER.getFrom(options);
             this.myLinkResolvers = new LinkResolver[linkResolverFactories.size() + (defaultLinkResolver ? 1 : 0)];
+            this.htmlIdGenerator = htmlIdGeneratorFactory != null ? htmlIdGeneratorFactory.create(this)
+                    : new HeaderIdGenerator.Factory().create(this);
+
+            bookmarkWrapsChildren = new HashSet<>();
+            //firstHeadingNode = document.getFirstChildAny(Heading.class);
+            nodeIdMap = new TwoWayHashMap<>();
+            baseIdToSerial = new HashMap<>();
+            idToValidBookmark = new HashMap<>();
 
             setDefaultStyleAndNumbering(out, this.options);
 
@@ -438,6 +528,11 @@ public class DocxRenderer implements IRender {
             if (defaultLinkResolver) {
                 // add the default link resolver
                 myLinkResolvers[linkResolverFactories.size()] = new DocxLinkResolver.Factory().create(this);
+            }
+
+            this.myAttributeProviders = new AttributeProvider[attributeProviderFactories.size()];
+            for (int i = 0; i < attributeProviderFactories.size(); i++) {
+                myAttributeProviders[i] = attributeProviderFactories.get(i).create(this);
             }
 
             // The first node renderer for a node type "wins".
@@ -456,6 +551,12 @@ public class DocxRenderer implements IRender {
                 Set<Class<?>> nodeClasses = nodeDocxRenderer.getNodeClasses();
                 if (nodeClasses != null) {
                     collectNodeTypes.addAll(nodeClasses);
+                }
+
+                // get nodes of interest
+                Set<Class<?>> wrapChildrenClasses = nodeDocxRenderer.getBookmarkWrapsChildrenClasses();
+                if (wrapChildrenClasses != null) {
+                    bookmarkWrapsChildren.addAll(wrapChildrenClasses);
                 }
 
                 if (nodeDocxRenderer instanceof PhasedNodeDocxRenderer) {
@@ -483,6 +584,62 @@ public class DocxRenderer implements IRender {
             if (contentContainer != null) {
                 setContentContainer(contentContainer);
             }
+        }
+
+        String calculateNodeId(Node node) {
+            String id = htmlIdGenerator.getId(node);
+            if (attributeProviderFactories.size() != 0) {
+                Attributes attributes = new Attributes();
+                if (id != null) attributes.replaceValue("id", id);
+
+                for (AttributeProvider attributeProvider : myAttributeProviders) {
+                    attributeProvider.setAttributes(node, AttributablePart.ID, attributes);
+                }
+                id = attributes.getValue("id");
+            }
+            return id == null ? "" : id;
+        }
+
+        @Override
+        public String getNodeId(Node node) {
+            String id = nodeIdMap.getSecond(node);
+
+            //if (id != null && node == firstHeadingNode) {
+            //    id = id + rendererOptions.firstHeadingIdSuffix;
+            //}
+            return id;
+        }
+
+        @Override
+        public String getValidBookmarkName(final String id) {
+            String validBookmark = idToValidBookmark.get(id);
+            if (validBookmark != null) {
+                return validBookmark;
+            }
+
+            if (id.length() < 32) {
+                idToValidBookmark.put(id, id);
+                return id;
+            }
+
+            String baseId = id.substring(0, 32);
+            if (baseId.endsWith("-") || baseId.endsWith(("_"))) {
+                baseId = baseId.substring(0, baseId.length() - 1);
+            }
+            Integer baseSerial = baseIdToSerial.get(baseId);
+            if (baseSerial == null) {
+                // first one
+                baseSerial = 0;
+            }
+            baseIdToSerial.put(baseId, baseSerial + 1);
+            validBookmark = String.format("%s-%d", baseId, baseSerial);
+            idToValidBookmark.put(id, validBookmark);
+            return validBookmark;
+        }
+
+        @Override
+        public Node getNodeFromId(final String nodeId) {
+            return nodeIdMap.getFirst(nodeId);
         }
 
         @Override
@@ -587,6 +744,19 @@ public class DocxRenderer implements IRender {
         @Override
         public void render(final Node node) {
             if (node instanceof Document) {
+                htmlIdGenerator.generateIds(document);
+
+                // now create a map of node to id so we can validate hyperlinks
+                new AllNodesVisitor() {
+                    @Override
+                    protected void process(final Node node) {
+                        String id = calculateNodeId(node);
+                        if (id != null && !id.isEmpty()) {
+                            nodeIdMap.add(node, id);
+                        }
+                    }
+                }.visit(document);
+
                 // here we render multiple phases
                 for (DocxRendererPhase phase : DocxRendererPhase.values()) {
                     if (phase != DocxRendererPhase.DOCUMENT && !renderingPhases.contains(phase)) { continue; }
@@ -625,12 +795,30 @@ public class DocxRenderer implements IRender {
                     contextFramed(new Runnable() {
                         @Override
                         public void run() {
-                            finalNodeRenderer.render(renderingNode, MainDocxRenderer.this);
-
+                            final String id = getNodeId(node);
+                            if (id != null && !id.isEmpty()) {
+                                if (!bookmarkWrapsChildren.contains(node.getClass())) {
+                                    final boolean isBlockBookmark = node instanceof Block;
+                                    if (isBlockBookmark) {
+                                        // put bookmark before the block element
+                                        final CTBookmark bookmarkStart = createBookmarkStart(id, true);
+                                        createBookmarkEnd(bookmarkStart, true);
+                                        finalNodeRenderer.render(renderingNode, MainDocxRenderer.this);
+                                    } else {
+                                        // wrap bookmark around the inline element
+                                        final CTBookmark bookmarkStart = createBookmarkStart(id, false);
+                                        finalNodeRenderer.render(renderingNode, MainDocxRenderer.this);
+                                        createBookmarkEnd(bookmarkStart, false);
+                                    }
+                                } else {
+                                    finalNodeRenderer.render(renderingNode, MainDocxRenderer.this);
+                                }
+                            } else {
+                                finalNodeRenderer.render(renderingNode, MainDocxRenderer.this);
+                            }
                             renderingNode = oldNode;
                         }
                     });
-
                 } else {
                     // default behavior is controlled by generic Node.class that is implemented in CoreNodeDocxRenderer
                     throw new IllegalStateException("Core Node DocxRenderer should implement generic Node renderer");
@@ -638,12 +826,32 @@ public class DocxRenderer implements IRender {
             }
         }
 
-        public void renderChildren(Node parent) {
+        void renderChildrenUnwrapped(final Node parent) {
             Node node = parent.getFirstChild();
             while (node != null) {
                 Node next = node.getNext();
                 render(node);
                 node = next;
+            }
+        }
+
+        public void renderChildren(final Node parent) {
+            final String id = getNodeId(parent);
+            if (id != null && !id.isEmpty()) {
+                if (bookmarkWrapsChildren.contains(parent.getClass())) {
+                    final CTBookmark bookmarkStart = createBookmarkStart(id, false);
+                    renderChildrenUnwrapped(parent);
+                    createBookmarkEnd(bookmarkStart, false);
+                    //contextFramed(new Runnable() {
+                    //    @Override
+                    //    public void run() {
+                    //    }
+                    //});
+                } else {
+                    renderChildrenUnwrapped(parent);
+                }
+            } else {
+                renderChildrenUnwrapped(parent);
             }
         }
 

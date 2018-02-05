@@ -8,6 +8,7 @@ import com.vladsch.flexmark.ext.zzzzzz.ZzzzzzExtension;
 import com.vladsch.flexmark.html.AttributeProvider;
 import com.vladsch.flexmark.html.IndependentAttributeProviderFactory;
 import com.vladsch.flexmark.html.renderer.AttributablePart;
+import com.vladsch.flexmark.html.renderer.LinkResolverContext;
 import com.vladsch.flexmark.html.renderer.LinkStatus;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
 import com.vladsch.flexmark.util.html.Attributes;
@@ -21,7 +22,7 @@ public class ZzzzzzAttributeProvider implements AttributeProvider {
     private final String localOnlyTargetClass;
     private final AttributeProviderAdapter nodeAdapter;
 
-    public ZzzzzzAttributeProvider(NodeRendererContext context) {
+    public ZzzzzzAttributeProvider(LinkResolverContext context) {
         DataHolder options = context.getOptions();
         this.localOnlyTargetClass = options.get(ZzzzzzExtension.LOCAL_ONLY_TARGET_CLASS);
         this.missingTargetClass = options.get(ZzzzzzExtension.MISSING_TARGET_CLASS);
@@ -91,7 +92,7 @@ public class ZzzzzzAttributeProvider implements AttributeProvider {
         //}
 
         @Override
-        public AttributeProvider create(NodeRendererContext context) {
+        public AttributeProvider create(LinkResolverContext context) {
             return new ZzzzzzAttributeProvider(context);
         }
     }

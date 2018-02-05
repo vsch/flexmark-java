@@ -2,6 +2,7 @@ package com.vladsch.flexmark.ext.enumerated.reference.internal;
 
 import com.vladsch.flexmark.ast.Document;
 import com.vladsch.flexmark.ast.Node;
+import com.vladsch.flexmark.ast.util.TextCollectingVisitor;
 import com.vladsch.flexmark.ext.enumerated.reference.EnumeratedReferenceLink;
 import com.vladsch.flexmark.ext.enumerated.reference.EnumeratedReferenceText;
 import com.vladsch.flexmark.ext.enumerated.reference.EnumeratedReferenceBlock;
@@ -20,13 +21,13 @@ import static com.vladsch.flexmark.html.renderer.RenderingPhase.BODY_TOP;
 public class EnumeratedReferenceNodeRenderer implements PhasedNodeRenderer
         // , PhasedNodeRenderer
 {
-     private final EnumeratedReferenceOptions options;
-     private EnumeratedReferences enumeratedOrdinals;
-     private int ordinal;
+    private final EnumeratedReferenceOptions options;
+    private EnumeratedReferences enumeratedOrdinals;
+    private int ordinal;
 
     public EnumeratedReferenceNodeRenderer(DataHolder options) {
-         this.options = new EnumeratedReferenceOptions(options);
-         ordinal = 0;
+        this.options = new EnumeratedReferenceOptions(options);
+        ordinal = 0;
     }
 
     @Override
@@ -54,7 +55,6 @@ public class EnumeratedReferenceNodeRenderer implements PhasedNodeRenderer
         return set;
     }
 
-
     private void render(EnumeratedReferenceLink node, NodeRendererContext context, HtmlWriter html) {
         final String text = node.getText().toString();
 
@@ -63,18 +63,21 @@ public class EnumeratedReferenceNodeRenderer implements PhasedNodeRenderer
             html.text(String.valueOf(ordinal));
         } else {
             Node referenceFormat = enumeratedOrdinals.getFormatNode(text);
-
-            html.withAttr().attr("href", "#" + text).tag("a");
             int wasOrdinal = ordinal;
             ordinal = enumeratedOrdinals.getOrdinal(text);
             if (referenceFormat != null) {
+                String title = new EnumRefTextCollectingVisitor(ordinal).collectAndGetText(referenceFormat);
+                html.withAttr().attr("href", "#" + text).attr("title", title).tag("a");
                 context.renderChildren(referenceFormat);
+                html.tag("/a");
             } else {
-                // no format, just output ordinal
-                html.text(String.valueOf(ordinal));
+                // no format, just output type space ordinal
+                final String defaultText = String.format("%s %d", EnumeratedReferences.getType(text), ordinal);
+                html.withAttr().attr("href", "#" + text).attr("title", defaultText).tag("a");
+                html.text(defaultText);
+                html.tag("/a");
             }
             ordinal = wasOrdinal;
-            html.tag("/a");
         }
     }
 
@@ -86,14 +89,16 @@ public class EnumeratedReferenceNodeRenderer implements PhasedNodeRenderer
             html.text(String.valueOf(ordinal));
         } else {
             Node referenceFormat = enumeratedOrdinals.getFormatNode(text);
-
             int wasOrdinal = ordinal;
             ordinal = enumeratedOrdinals.getOrdinal(text);
+
+            final String defaultText = String.format("%s %d", EnumeratedReferences.getType(text), ordinal);
+
             if (referenceFormat != null) {
                 context.renderChildren(referenceFormat);
             } else {
                 // no format, just output ordinal
-                html.text(String.valueOf(ordinal));
+                html.text(defaultText);
             }
             ordinal = wasOrdinal;
         }

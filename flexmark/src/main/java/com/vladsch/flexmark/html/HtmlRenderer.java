@@ -193,11 +193,11 @@ public class HtmlRenderer implements IRender {
     /**
      * Builder for configuring an {@link HtmlRenderer}. See methods for default configuration.
      */
-    public static class Builder extends MutableDataSet {
+    public static class Builder extends MutableDataSet implements RendererBuilder {
         List<AttributeProviderFactory> attributeProviderFactories = new ArrayList<AttributeProviderFactory>();
         List<NodeRendererFactory> nodeRendererFactories = new ArrayList<NodeRendererFactory>();
         List<LinkResolverFactory> linkResolverFactories = new ArrayList<LinkResolverFactory>();
-        private final HashSet<HtmlRendererExtension> loadedExtensions = new HashSet<HtmlRendererExtension>();
+        private final HashSet<Extension> loadedExtensions = new HashSet<Extension>();
         HeaderIdGeneratorFactory htmlIdGeneratorFactory = null;
 
         public Builder() {
@@ -366,6 +366,7 @@ public class HtmlRenderer implements IRender {
          * @return {@code this}
          */
         public Builder htmlIdGeneratorFactory(HeaderIdGeneratorFactory htmlIdGeneratorFactory) {
+            //noinspection VariableNotUsedInsideIf
             if (this.htmlIdGeneratorFactory != null) {
                 throw new IllegalStateException("custom header id factory is already set to " + htmlIdGeneratorFactory.getClass().getName());
             }
@@ -385,6 +386,11 @@ public class HtmlRenderer implements IRender {
                         HtmlRendererExtension htmlRendererExtension = (HtmlRendererExtension) extension;
                         htmlRendererExtension.rendererOptions(this);
                     }
+                } else if (extension instanceof RendererExtension) {
+                    if (!loadedExtensions.contains(extension)) {
+                        RendererExtension htmlRendererExtension = (RendererExtension) extension;
+                        htmlRendererExtension.rendererOptions(this);
+                    }
                 }
             }
 
@@ -392,6 +398,12 @@ public class HtmlRenderer implements IRender {
                 if (extension instanceof HtmlRendererExtension) {
                     if (!loadedExtensions.contains(extension)) {
                         HtmlRendererExtension htmlRendererExtension = (HtmlRendererExtension) extension;
+                        htmlRendererExtension.extend(this, this.get(HtmlRenderer.TYPE));
+                        loadedExtensions.add(htmlRendererExtension);
+                    }
+                } else if (extension instanceof RendererExtension) {
+                    if (!loadedExtensions.contains(extension)) {
+                        RendererExtension htmlRendererExtension = (RendererExtension) extension;
                         htmlRendererExtension.extend(this, this.get(HtmlRenderer.TYPE));
                         loadedExtensions.add(htmlRendererExtension);
                     }

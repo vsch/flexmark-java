@@ -7,6 +7,7 @@ import com.vladsch.flexmark.html.AttributeProviderFactory;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.html.IndependentAttributeProviderFactory;
 import com.vladsch.flexmark.html.renderer.AttributablePart;
+import com.vladsch.flexmark.html.renderer.LinkResolverContext;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.spec.SpecExample;
@@ -317,7 +318,7 @@ public class TablesTest extends RenderingTestCase {
     public void attributeProviderIsApplied() {
         AttributeProviderFactory factory = new IndependentAttributeProviderFactory() {
             @Override
-            public AttributeProvider create(NodeRendererContext context) {
+            public AttributeProvider create(LinkResolverContext context) {
                 return new AttributeProvider() {
                     @Override
                     public void setAttributes(Node node, AttributablePart part, Attributes attributes) {

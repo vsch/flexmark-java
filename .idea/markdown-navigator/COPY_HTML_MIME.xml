@@ -48,10 +48,11 @@
           <option name="GITHUB_WIKI_LINKS" value="true" />
           <option name="HEADER_ID_NO_DUPED_DASHES" value="false" />
           <option name="JEKYLL_FRONT_MATTER" value="false" />
+          <option name="PARSE_HTML_ANCHOR_ID" value="false" />
           <option name="SIM_TOC_BLANK_LINE_SPACER" value="true" />
         </ParserOptions>
       </ParserSettings>
-      <HtmlSettings headerTopEnabled="false" headerBottomEnabled="false" bodyTopEnabled="false" bodyBottomEnabled="false" embedUrlContent="false" addPageHeader="true" embedImages="true" embedHttpImages="false">
+      <HtmlSettings headerTopEnabled="false" headerBottomEnabled="false" bodyTopEnabled="false" bodyBottomEnabled="false" embedUrlContent="false" addPageHeader="true" embedImages="true" embedHttpImages="false" imageUriSerials="false">
         <GeneratorProvider>
           <provider providerId="com.vladsch.idea.multimarkdown.editor.javafx.html.generator" providerName="JavaFx HTML Generator" />
         </GeneratorProvider>

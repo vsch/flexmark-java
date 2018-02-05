@@ -3,12 +3,14 @@ package com.vladsch.flexmark.docx.converter;
 import com.vladsch.flexmark.IRender;
 import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.docx.converter.internal.DocxRenderer;
-import com.vladsch.flexmark.docx.converter.util.BlockFormatProvider;
 import com.vladsch.flexmark.docx.converter.util.DocxContextImpl;
 import com.vladsch.flexmark.docx.converter.util.RunFormatProvider;
 import com.vladsch.flexmark.docx.converter.util.XmlFormatter;
+import com.vladsch.flexmark.ext.aside.AsideExtension;
+import com.vladsch.flexmark.ext.attributes.AttributesExtension;
 import com.vladsch.flexmark.ext.definition.DefinitionExtension;
 import com.vladsch.flexmark.ext.emoji.EmojiExtension;
+import com.vladsch.flexmark.ext.enumerated.reference.EnumeratedReferenceExtension;
 import com.vladsch.flexmark.ext.footnotes.FootnoteExtension;
 import com.vladsch.flexmark.ext.gfm.strikethrough.StrikethroughSubscriptExtension;
 import com.vladsch.flexmark.ext.ins.InsExtension;
@@ -36,7 +38,7 @@ import java.io.*;
 import java.util.*;
 
 public class ComboDocxConverterSpecTest extends ComboSpecTestCase {
-    // set to true to dump DOCX and XML files to pre-determined location
+    // set to false to dump DOCX and XML files to pre-determined location
     // RELEASE : change to true for release
     static final boolean SKIP_IGNORED_TESTS = true;
     private static final boolean DUMP_TEST_CASE_FILES = !SKIP_IGNORED_TESTS;
@@ -49,8 +51,11 @@ public class ComboDocxConverterSpecTest extends ComboSpecTestCase {
     private static final DataHolder OPTIONS = new MutableDataSet()
             .set(HtmlRenderer.INDENT_SIZE, 2)
             .set(Parser.EXTENSIONS, Arrays.asList(
+                    AsideExtension.create(),
+                    AttributesExtension.create(),
                     DefinitionExtension.create(),
                     EmojiExtension.create(),
+                    EnumeratedReferenceExtension.create(),
                     FootnoteExtension.create(),
                     StrikethroughSubscriptExtension.create(),
                     InsExtension.create(),
@@ -81,6 +86,9 @@ public class ComboDocxConverterSpecTest extends ComboSpecTestCase {
         optionsMap.put("caption-before", new MutableDataSet().set(DocxRenderer.TABLE_CAPTION_BEFORE_TABLE, true));
         optionsMap.put("highlight-code", new MutableDataSet().set(DocxRenderer.CODE_HIGHLIGHT_SHADING, "yellow"));
         optionsMap.put("highlight-shade", new MutableDataSet().set(DocxRenderer.CODE_HIGHLIGHT_SHADING, "shade"));
+        optionsMap.put("hyperlink-suffix", new MutableDataSet().set(DocxRenderer.LOCAL_HYPERLINK_SUFFIX, "_1"));
+        optionsMap.put("yellow-missing-hyperlink", new MutableDataSet().set(DocxRenderer.LOCAL_HYPERLINK_MISSING_HIGHLIGHT, ""));
+        //optionsMap.put("heading-id-suffix", new MutableDataSet().set(DocxRenderer.FIRST_HEADING_ID_SUFFIX, "_1"));
 
         // Set up a simple configuration that logs on the console.
         //BasicConfigurator.configure();
@@ -224,7 +232,7 @@ public class ComboDocxConverterSpecTest extends ComboSpecTestCase {
             for (String line : lines) {
                 String trimmed = line.trim();
                 if (!trimmed.isEmpty()) {
-                    myDocxContext.createP(BlockFormatProvider.LOOSE_PARAGRAPH_STYLE);
+                    myDocxContext.createP(myDocxContext.getRenderingOptions().LOOSE_PARAGRAPH_STYLE);
                     myDocxContext.createColor().setVal("808080");
                     Text text = myDocxContext.addWrappedText();
                     text.setValue(trimmed);
@@ -251,7 +259,22 @@ public class ComboDocxConverterSpecTest extends ComboSpecTestCase {
         myPackage = DocxRenderer.getDefaultTemplate();
         if (myPackage == null) return;
 
-        myDocxContext = new DocxContextImpl<Node>(myPackage);
+        myDocxContext = new DocxContextImpl<Node>(myPackage, null) {
+            @Override
+            public String getNodeId(final Node node) {
+                return null;
+            }
+
+            @Override
+            public String getValidBookmarkName(final String id) {
+                return null;
+            }
+
+            @Override
+            public Node getNodeFromId(final String nodeId) {
+                return null;
+            }
+        };
         myVisibleLineBreak = "¶";
     }
 

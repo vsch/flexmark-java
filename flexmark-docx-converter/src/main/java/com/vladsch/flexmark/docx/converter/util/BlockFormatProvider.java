@@ -4,16 +4,8 @@ import org.docx4j.wml.PPr;
 import org.docx4j.wml.RPr;
 
 public interface BlockFormatProvider<T> extends FormatProvider<T> {
-    String DEFAULT_STYLE = "Normal";
-    String LOOSE_PARAGRAPH_STYLE = "ParagraphTextBody";
-    String TIGHT_PARAGRAPH_STYLE = "TextBody";
-    String PREFORMATTED_TEXT_STYLE = "PreformattedText";
-    String BLOCK_QUOTE_STYLE = "Quotations";
-    String HORIZONTAL_LINE_STYLE = "HorizontalLine";
-    String TABLE_CAPTION = "TableCaption";
-    String TABLE_CONTENTS = "TableContents";
-    String TABLE_HEADING = "TableHeading";
-    String FOOTNOTE_STYLE = "Footnote";
+    // list type style
+    String STYLE_TYPE_NUMBERING = "numbering";
 
 /*
 

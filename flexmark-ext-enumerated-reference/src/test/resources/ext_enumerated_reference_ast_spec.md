@@ -60,9 +60,9 @@ See [@tbl:test]
   <caption><span>Table 1.</span> caption</caption>
 </table>
 <p></p>
-<p>See <a href="#fig:test2"><span>Figure 2.</span></a></p>
-<p>See <a href="#fig:test"><span>Figure 1.</span></a></p>
-<p>See <a href="#tbl:test"><span>Table 1.</span></a></p>
+<p>See <a href="#fig:test2" title="Figure 2."><span>Figure 2.</span></a></p>
+<p>See <a href="#fig:test" title="Figure 1."><span>Figure 1.</span></a></p>
+<p>See <a href="#tbl:test" title="Table 1."><span>Table 1.</span></a></p>
 .
 Document[0, 285]
   Paragraph[0, 61] isTrailingBlankLine
@@ -124,4 +124,21 @@ Document[0, 285]
       EnumeratedReferenceText[279, 282] textOpen:[279, 281, "[#"] text:[281, 281] textClose:[281, 282, "]"]
       Text[282, 283] chars:[282, 283, "."]
 ````````````````````````````````
+
+
+missing enum ref definition
+
+```````````````````````````````` example Enumerated Reference: 2
+abc{#fig:test}
+
+[#fig:test]
+
+[@fig:test]
+
+.
+<p id="fig:test">abc</p>
+<p>fig 1</p>
+<p><a href="#fig:test" title="fig 1">fig 1</a></p>
+````````````````````````````````
+
 

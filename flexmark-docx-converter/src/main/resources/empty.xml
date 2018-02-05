@@ -60,7 +60,7 @@
                         <w:jc w:val="left"/>
                     </w:pPr>
                     <w:rPr>
-                        <w:rFonts w:ascii="Liberation Serif" w:cs="Lucida Sans" w:eastAsia="SimSun" w:hAnsi="Liberation Serif"/>
+                        <w:rFonts w:ascii="Calibri" w:cs="Times New Roman" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
                         <w:color w:val="00000A"/>
                         <w:sz w:val="24"/>
                         <w:szCs w:val="24"/>
@@ -69,6 +69,13 @@
                 </w:style>
                 <w:style w:styleId="Default" w:type="paragraph">
                     <w:name w:val="Default"/>
+                    <w:basedOn w:val="Normal"/>
+                    <w:qFormat/>
+                    <w:pPr />
+                    <w:rPr />
+                </w:style>
+                <w:style w:styleId="BodyText" w:type="paragraph">
+                    <w:name w:val="Body Text"/>
                     <w:basedOn w:val="Normal"/>
                     <w:qFormat/>
                     <w:pPr />
@@ -99,7 +106,6 @@
                         <w:outlineLvl w:val="0"/>
                     </w:pPr>
                     <w:rPr>
-                        <w:rFonts w:ascii="Liberation Serif" w:cs="Lucida Sans" w:eastAsia="SimSun" w:hAnsi="Liberation Serif"/>
                         <w:b/>
                         <w:bCs/>
                         <w:sz w:val="48"/>
@@ -124,7 +130,6 @@
                         <w:outlineLvl w:val="1"/>
                     </w:pPr>
                     <w:rPr>
-                        <w:rFonts w:ascii="Liberation Serif" w:cs="Lucida Sans" w:eastAsia="SimSun" w:hAnsi="Liberation Serif"/>
                         <w:b/>
                         <w:bCs/>
                         <w:sz w:val="42"/>
@@ -144,7 +149,6 @@
                         <w:outlineLvl w:val="2"/>
                     </w:pPr>
                     <w:rPr>
-                        <w:rFonts w:ascii="Liberation Serif" w:cs="Lucida Sans" w:eastAsia="SimSun" w:hAnsi="Liberation Serif"/>
                         <w:b/>
                         <w:bCs/>
                         <w:sz w:val="36"/>
@@ -164,7 +168,6 @@
                         <w:outlineLvl w:val="3"/>
                     </w:pPr>
                     <w:rPr>
-                        <w:rFonts w:ascii="Liberation Serif" w:cs="Lucida Sans" w:eastAsia="SimSun" w:hAnsi="Liberation Serif"/>
                         <w:b/>
                         <w:bCs/>
                         <w:sz w:val="30"/>
@@ -184,7 +187,6 @@
                         <w:outlineLvl w:val="4"/>
                     </w:pPr>
                     <w:rPr>
-                        <w:rFonts w:ascii="Liberation Serif" w:cs="Lucida Sans" w:eastAsia="SimSun" w:hAnsi="Liberation Serif"/>
                         <w:b/>
                         <w:bCs/>
                         <w:sz w:val="24"/>
@@ -205,7 +207,6 @@
                         <w:outlineLvl w:val="5"/>
                     </w:pPr>
                     <w:rPr>
-                        <w:rFonts w:ascii="Liberation Serif" w:cs="Lucida Sans" w:eastAsia="SimSun" w:hAnsi="Liberation Serif"/>
                         <w:b/>
                         <w:bCs w:val="false"/>
                         <w:i/>
@@ -303,7 +304,7 @@
                 <w:style w:styleId="Heading" w:type="paragraph">
                     <w:name w:val="Heading"/>
                     <w:basedOn w:val="Normal"/>
-                    <w:next w:val="TextBody"/>
+                    <w:next w:val="BodyText"/>
                     <w:qFormat/>
                     <w:pPr>
                         <w:keepNext/>
@@ -315,7 +316,7 @@
                         <w:szCs w:val="28"/>
                     </w:rPr>
                 </w:style>
-                <w:style w:styleId="TextBody" w:type="paragraph">
+                <w:style w:styleId="BodyText" w:type="paragraph">
                     <w:name w:val="Body Text"/>
                     <w:basedOn w:val="Normal"/>
                     <w:pPr>
@@ -326,7 +327,7 @@
                 </w:style>
                 <w:style w:styleId="List" w:type="paragraph">
                     <w:name w:val="List"/>
-                    <w:basedOn w:val="TextBody"/>
+                    <w:basedOn w:val="BodyText"/>
                     <w:pPr/>
                     <w:rPr>
                         <w:rFonts w:cs="Lucida Sans"/>
@@ -394,6 +395,25 @@
                         <w:color w:val="666666"/>
                     </w:rPr>
                 </w:style>
+                <w:style w:styleId="AsideBlock" w:type="paragraph">
+                    <w:name w:val="AsideBlock"/>
+                    <w:basedOn w:val="Normal"/>
+                    <w:qFormat/>
+                    <w:pPr>
+                        <w:pBdr>
+                            <w:left w:color="3366FF" w:space="9" w:sz="16" w:val="single"/>
+                        </w:pBdr>
+                        <w:bidi w:val="false"/>
+                        <w:spacing w:after="140" w:before="140" />
+                        <w:ind w:hanging="0" w:left="240" w:right="0"/>
+                        <w:jc w:val="left"/>
+                    </w:pPr>
+                    <w:rPr>
+<!--
+                        <w:color w:val="666666"/>
+-->
+                    </w:rPr>
+                </w:style>
                 <w:style w:styleId="PreformattedText" w:type="paragraph">
                     <w:name w:val="Preformatted Text"/>
                     <w:basedOn w:val="Normal"/>
@@ -457,7 +477,7 @@
                 </w:style>
                 <w:style w:styleId="ParagraphTextBody" w:type="paragraph">
                     <w:name w:val="Paragraph Text Body"/>
-                    <w:basedOn w:val="TextBody"/>
+                    <w:basedOn w:val="BodyText"/>
                     <w:qFormat/>
                     <w:pPr>
                         <w:bidi w:val="false"/>
@@ -466,13 +486,13 @@
                     <w:rPr/>
                 </w:style>
                 <w:style w:type="character" w:styleId="FootnoteReference">
-                    <w:name w:val="Footnote Anchor"/>
+                    <w:name w:val="Footnote Reference"/>
                     <w:rPr>
                         <w:vertAlign w:val="superscript"/>
                     </w:rPr>
                 </w:style>
                 <w:style w:type="character" w:styleId="EndnoteReference">
-                    <w:name w:val="Endnote Anchor"/>
+                    <w:name w:val="Endnote Reference"/>
                     <w:unhideWhenUsed/>
                     <w:rPr>
                         <w:vertAlign w:val="superscript"/>
@@ -498,38 +518,6 @@
                         <w:sz w:val="20"/>
                         <w:szCs w:val="20"/>
                     </w:rPr>
-                </w:style>
-                <w:style w:styleId="List1" w:type="numbering">
-                    <w:name w:val="List 1"/>
-                    <w:qFormat/>
-                </w:style>
-                <w:style w:styleId="List2" w:type="numbering">
-                    <w:name w:val="List 2"/>
-                    <w:qFormat/>
-                </w:style>
-                <w:style w:styleId="List3" w:type="numbering">
-                    <w:name w:val="List 3"/>
-                    <w:qFormat/>
-                </w:style>
-                <w:style w:styleId="List4" w:type="numbering">
-                    <w:name w:val="List 4"/>
-                    <w:qFormat/>
-                </w:style>
-                <w:style w:styleId="List5" w:type="numbering">
-                    <w:name w:val="List 5"/>
-                    <w:qFormat/>
-                </w:style>
-                <w:style w:styleId="Numbering1" w:type="numbering">
-                    <w:name w:val="Numbering 1"/>
-                    <w:qFormat/>
-                </w:style>
-                <w:style w:styleId="Numbering2" w:type="numbering">
-                    <w:name w:val="Numbering 2"/>
-                    <w:qFormat/>
-                </w:style>
-                <w:style w:styleId="Numbering3" w:type="numbering">
-                    <w:name w:val="Numbering 3"/>
-                    <w:qFormat/>
                 </w:style>
                 <w:style w:type="character" w:styleId="Hyperlink">
                     <w:name w:val="Hyperlink"/>
@@ -902,290 +890,6 @@
                         <w:rPr/>
                     </w:lvl>
                 </w:abstractNum>
-
-                <w:abstractNum w:abstractNumId="4">
-                    <w:lvl w:ilvl="0">
-                        <w:start w:val="1"/>
-                        <w:numFmt w:val="bullet"/>
-                        <w:lvlText w:val="•"/>
-                        <w:lvlJc w:val="left"/>
-                        <w:pPr>
-                            <w:tabs>
-                                <w:tab w:pos="227" w:val="num"/>
-                            </w:tabs>
-                            <w:ind w:hanging="227" w:left="227"/>
-                        </w:pPr>
-                        <w:rPr>
-                            <w:rFonts w:cs="OpenSymbol"/>
-                            <w:color w:val="666666"/>
-                        </w:rPr>
-                    </w:lvl>
-                    <w:lvl w:ilvl="1">
-                        <w:start w:val="1"/>
-                        <w:numFmt w:val="bullet"/>
-                        <w:lvlText w:val="•"/>
-                        <w:lvlJc w:val="left"/>
-                        <w:pPr>
-                            <w:tabs>
-                                <w:tab w:pos="454" w:val="num"/>
-                            </w:tabs>
-                            <w:ind w:hanging="227" w:left="454"/>
-                        </w:pPr>
-                        <w:rPr>
-                            <w:rFonts w:cs="OpenSymbol"/>
-                            <w:color w:val="666666"/>
-                        </w:rPr>
-                    </w:lvl>
-                    <w:lvl w:ilvl="2">
-                        <w:start w:val="1"/>
-                        <w:numFmt w:val="bullet"/>
-                        <w:lvlText w:val="•"/>
-                        <w:lvlJc w:val="left"/>
-                        <w:pPr>
-                            <w:tabs>
-                                <w:tab w:pos="680" w:val="num"/>
-                            </w:tabs>
-                            <w:ind w:hanging="227" w:left="680"/>
-                        </w:pPr>
-                        <w:rPr>
-                            <w:rFonts w:cs="OpenSymbol"/>
-                            <w:color w:val="666666"/>
-                        </w:rPr>
-                    </w:lvl>
-                    <w:lvl w:ilvl="3">
-                        <w:start w:val="1"/>
-                        <w:numFmt w:val="bullet"/>
-                        <w:lvlText w:val="•"/>
-                        <w:lvlJc w:val="left"/>
-                        <w:pPr>
-                            <w:tabs>
-                                <w:tab w:pos="907" w:val="num"/>
-                            </w:tabs>
-                            <w:ind w:hanging="227" w:left="907"/>
-                        </w:pPr>
-                        <w:rPr>
-                            <w:rFonts w:cs="OpenSymbol"/>
-                            <w:color w:val="666666"/>
-                        </w:rPr>
-                    </w:lvl>
-                    <w:lvl w:ilvl="4">
-                        <w:start w:val="1"/>
-                        <w:numFmt w:val="bullet"/>
-                        <w:lvlText w:val="•"/>
-                        <w:lvlJc w:val="left"/>
-                        <w:pPr>
-                            <w:tabs>
-                                <w:tab w:pos="1134" w:val="num"/>
-                            </w:tabs>
-                            <w:ind w:hanging="227" w:left="1134"/>
-                        </w:pPr>
-                        <w:rPr>
-                            <w:rFonts w:cs="OpenSymbol"/>
-                            <w:color w:val="666666"/>
-                        </w:rPr>
-                    </w:lvl>
-                    <w:lvl w:ilvl="5">
-                        <w:start w:val="1"/>
-                        <w:numFmt w:val="bullet"/>
-                        <w:lvlText w:val="•"/>
-                        <w:lvlJc w:val="left"/>
-                        <w:pPr>
-                            <w:tabs>
-                                <w:tab w:pos="1361" w:val="num"/>
-                            </w:tabs>
-                            <w:ind w:hanging="227" w:left="1361"/>
-                        </w:pPr>
-                        <w:rPr>
-                            <w:rFonts w:cs="OpenSymbol"/>
-                            <w:color w:val="666666"/>
-                        </w:rPr>
-                    </w:lvl>
-                    <w:lvl w:ilvl="6">
-                        <w:start w:val="1"/>
-                        <w:numFmt w:val="bullet"/>
-                        <w:lvlText w:val="•"/>
-                        <w:lvlJc w:val="left"/>
-                        <w:pPr>
-                            <w:tabs>
-                                <w:tab w:pos="1587" w:val="num"/>
-                            </w:tabs>
-                            <w:ind w:hanging="227" w:left="1587"/>
-                        </w:pPr>
-                        <w:rPr>
-                            <w:rFonts w:cs="OpenSymbol"/>
-                            <w:color w:val="666666"/>
-                        </w:rPr>
-                    </w:lvl>
-                    <w:lvl w:ilvl="7">
-                        <w:start w:val="1"/>
-                        <w:numFmt w:val="bullet"/>
-                        <w:lvlText w:val="•"/>
-                        <w:lvlJc w:val="left"/>
-                        <w:pPr>
-                            <w:tabs>
-                                <w:tab w:pos="1814" w:val="num"/>
-                            </w:tabs>
-                            <w:ind w:hanging="227" w:left="1814"/>
-                        </w:pPr>
-                        <w:rPr>
-                            <w:rFonts w:cs="OpenSymbol"/>
-                            <w:color w:val="666666"/>
-                        </w:rPr>
-                    </w:lvl>
-                    <w:lvl w:ilvl="8">
-                        <w:start w:val="1"/>
-                        <w:numFmt w:val="bullet"/>
-                        <w:lvlText w:val="•"/>
-                        <w:lvlJc w:val="left"/>
-                        <w:pPr>
-                            <w:tabs>
-                                <w:tab w:pos="2041" w:val="num"/>
-                            </w:tabs>
-                            <w:ind w:hanging="227" w:left="2041"/>
-                        </w:pPr>
-                        <w:rPr>
-                            <w:rFonts w:cs="OpenSymbol"/>
-                            <w:color w:val="666666"/>
-                        </w:rPr>
-                    </w:lvl>
-                </w:abstractNum>
-                <w:abstractNum w:abstractNumId="5">
-                    <w:lvl w:ilvl="0">
-                        <w:start w:val="1"/>
-                        <w:numFmt w:val="decimal"/>
-                        <w:lvlText w:val="%1."/>
-                        <w:lvlJc w:val="left"/>
-                        <w:pPr>
-                            <w:tabs>
-                                <w:tab w:pos="283" w:val="num"/>
-                            </w:tabs>
-                            <w:ind w:hanging="283" w:left="283"/>
-                        </w:pPr>
-                        <w:rPr>
-                            <w:color w:val="666666"/>
-                        </w:rPr>
-                    </w:lvl>
-                    <w:lvl w:ilvl="1">
-                        <w:start w:val="1"/>
-                        <w:numFmt w:val="decimal"/>
-                        <w:lvlText w:val="%2."/>
-                        <w:lvlJc w:val="left"/>
-                        <w:pPr>
-                            <w:tabs>
-                                <w:tab w:pos="567" w:val="num"/>
-                            </w:tabs>
-                            <w:ind w:hanging="283" w:left="567"/>
-                        </w:pPr>
-                        <w:rPr>
-                            <w:color w:val="666666"/>
-                        </w:rPr>
-                    </w:lvl>
-                    <w:lvl w:ilvl="2">
-                        <w:start w:val="1"/>
-                        <w:numFmt w:val="decimal"/>
-                        <w:lvlText w:val="%3."/>
-                        <w:lvlJc w:val="left"/>
-                        <w:pPr>
-                            <w:tabs>
-                                <w:tab w:pos="850" w:val="num"/>
-                            </w:tabs>
-                            <w:ind w:hanging="283" w:left="850"/>
-                        </w:pPr>
-                        <w:rPr>
-                            <w:color w:val="666666"/>
-                        </w:rPr>
-                    </w:lvl>
-                    <w:lvl w:ilvl="3">
-                        <w:start w:val="1"/>
-                        <w:numFmt w:val="decimal"/>
-                        <w:lvlText w:val="%4."/>
-                        <w:lvlJc w:val="left"/>
-                        <w:pPr>
-                            <w:tabs>
-                                <w:tab w:pos="1134" w:val="num"/>
-                            </w:tabs>
-                            <w:ind w:hanging="283" w:left="1134"/>
-                        </w:pPr>
-                        <w:rPr>
-                            <w:color w:val="666666"/>
-                        </w:rPr>
-                    </w:lvl>
-                    <w:lvl w:ilvl="4">
-                        <w:start w:val="1"/>
-                        <w:numFmt w:val="decimal"/>
-                        <w:lvlText w:val="%5."/>
-                        <w:lvlJc w:val="left"/>
-                        <w:pPr>
-                            <w:tabs>
-                                <w:tab w:pos="1417" w:val="num"/>
-                            </w:tabs>
-                            <w:ind w:hanging="283" w:left="1417"/>
-                        </w:pPr>
-                        <w:rPr>
-                            <w:color w:val="666666"/>
-                        </w:rPr>
-                    </w:lvl>
-                    <w:lvl w:ilvl="5">
-                        <w:start w:val="1"/>
-                        <w:numFmt w:val="decimal"/>
-                        <w:lvlText w:val="%6."/>
-                        <w:lvlJc w:val="left"/>
-                        <w:pPr>
-                            <w:tabs>
-                                <w:tab w:pos="1701" w:val="num"/>
-                            </w:tabs>
-                            <w:ind w:hanging="283" w:left="1701"/>
-                        </w:pPr>
-                        <w:rPr>
-                            <w:color w:val="666666"/>
-                        </w:rPr>
-                    </w:lvl>
-                    <w:lvl w:ilvl="6">
-                        <w:start w:val="1"/>
-                        <w:numFmt w:val="decimal"/>
-                        <w:lvlText w:val="%7."/>
-                        <w:lvlJc w:val="left"/>
-                        <w:pPr>
-                            <w:tabs>
-                                <w:tab w:pos="1984" w:val="num"/>
-                            </w:tabs>
-                            <w:ind w:hanging="283" w:left="1984"/>
-                        </w:pPr>
-                        <w:rPr>
-                            <w:color w:val="666666"/>
-                        </w:rPr>
-                    </w:lvl>
-                    <w:lvl w:ilvl="7">
-                        <w:start w:val="1"/>
-                        <w:numFmt w:val="decimal"/>
-                        <w:lvlText w:val="%8."/>
-                        <w:lvlJc w:val="left"/>
-                        <w:pPr>
-                            <w:tabs>
-                                <w:tab w:pos="2268" w:val="num"/>
-                            </w:tabs>
-                            <w:ind w:hanging="283" w:left="2268"/>
-                        </w:pPr>
-                        <w:rPr>
-                            <w:color w:val="666666"/>
-                        </w:rPr>
-                    </w:lvl>
-                    <w:lvl w:ilvl="8">
-                        <w:start w:val="1"/>
-                        <w:numFmt w:val="decimal"/>
-                        <w:lvlText w:val="%9."/>
-                        <w:lvlJc w:val="left"/>
-                        <w:pPr>
-                            <w:tabs>
-                                <w:tab w:pos="2551" w:val="num"/>
-                            </w:tabs>
-                            <w:ind w:hanging="283" w:left="2551"/>
-                        </w:pPr>
-                        <w:rPr>
-                            <w:color w:val="666666"/>
-                        </w:rPr>
-                    </w:lvl>
-                </w:abstractNum>
                 <w:num w:numId="1">
                     <w:abstractNumId w:val="1"/>
                 </w:num>
@@ -1194,12 +898,6 @@
                 </w:num>
                 <w:num w:numId="3">
                     <w:abstractNumId w:val="3"/>
-                </w:num>
-                <w:num w:numId="4">
-                    <w:abstractNumId w:val="4"/>
-                </w:num>
-                <w:num w:numId="5">
-                    <w:abstractNumId w:val="5"/>
                 </w:num>
             </w:numbering>
         </pkg:xmlData>

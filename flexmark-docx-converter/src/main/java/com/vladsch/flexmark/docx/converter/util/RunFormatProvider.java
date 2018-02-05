@@ -3,17 +3,8 @@ package com.vladsch.flexmark.docx.converter.util;
 import org.docx4j.wml.RPr;
 
 public interface RunFormatProvider<T> extends FormatProvider<T> {
-    String BOLD_STYLE = "StrongEmphasis";
-    String ITALIC_STYLE = "Emphasis";
-    String STRIKE_THROUGH_STYLE = "Strikethrough";
-    String SUBSCRIPT_STYLE = "Subscript";
-    String SUPERSCRIPT_STYLE = "Superscript";
-    String INS_STYLE = "Underlined";
-    String INLINE_CODE_STYLE = "SourceText";
-    String HYPERLINK_STYLE = "Hyperlink";
+    // for space preservation
     String SPACE_PRESERVE = "preserve";
-    String FOOTNOTE_ANCHOR_STYLE = "FootnoteReference";
-    String ENDNOTE_ANCHOR_STYLE = "EndnoteReference";
 
 /*
 

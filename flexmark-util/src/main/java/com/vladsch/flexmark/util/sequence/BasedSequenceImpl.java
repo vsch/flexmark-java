@@ -1,5 +1,6 @@
 package com.vladsch.flexmark.util.sequence;
 
+import com.vladsch.flexmark.util.Pair;
 import com.vladsch.flexmark.util.Utils;
 import com.vladsch.flexmark.util.html.Escaping;
 import com.vladsch.flexmark.util.mappers.CharMapper;
@@ -1492,6 +1493,37 @@ public abstract class BasedSequenceImpl implements BasedSequence {
             return CharSubSequence.of(sb);
         }
         return this;
+    }
+
+    @Override
+    public Pair<Integer, Integer> getLineColumnAtIndex(final int index) {
+        int iMax = length();
+        if (index < 0 || index > iMax) {
+            throw new IllegalArgumentException("Index: " + index + " out of range [0, " + iMax + "]");
+        }
+
+        boolean hadCr = false;
+        boolean hadEOL = true;
+        int line = 0;
+        int col = 0;
+        for (int i = 0; i < index; i++) {
+            char c1 = charAt(i);
+            if (c1 == '\r') {
+                col = 0;
+                line++;
+                hadCr = true;
+            } else if (c1 == '\n') {
+                if (!hadCr) {
+                    line++;
+                }
+                col = 0;
+                hadCr = false;
+            } else {
+                col++;
+            }
+        }
+
+        return new Pair<>(line, col);
     }
 
     @Override

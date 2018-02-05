@@ -14,6 +14,7 @@ public class DocxLinkResolver implements LinkResolver {
     private final String docRelativeURL;
     private final String docRootURL;
     private final String[] relativeParts;
+
     public DocxLinkResolver(final LinkResolverContext context) {
         // can use context for custom settings
         // context.getDocument();
@@ -48,7 +49,6 @@ public class DocxLinkResolver implements LinkResolver {
                 // assume it is good
                 return link.withStatus(LinkStatus.VALID)
                         .withUrl(url);
-
             } else if (url.startsWith("/")) {
                 if (docRootURL != null && !docRootURL.isEmpty()) {
                     // this one is root url, prefix with root url, without the trailing /
@@ -57,57 +57,59 @@ public class DocxLinkResolver implements LinkResolver {
                     return link.withStatus(LinkStatus.VALID)
                             .withUrl(url);
                 }
-
             } else if (!url.matches("^(?:[a-z]+:|#|\\?)")) {
                 // relative, we will process it as a relative path to the docRelativeURL
                 String pageRef = url;
                 String suffix = "";
                 int pos = url.indexOf('#');
-                if (pos > 0) {
-                    // remove anchor
-                    suffix = url.substring(pos);
-                    pageRef = url.substring(0, pos);
-                }
-                else if (url.contains("?")) {
-                    // remove query
-                    suffix = url.substring(pos);
-                    pageRef = url.substring(0, pos);
-                }
+                if (pos == 0) {
+                    return link.withStatus(LinkStatus.VALID);
+                } else {
+                    if (pos > 0) {
+                        // remove anchor
+                        suffix = url.substring(pos);
+                        pageRef = url.substring(0, pos);
+                    } else if (url.contains("?")) {
+                        // remove query
+                        suffix = url.substring(pos);
+                        pageRef = url.substring(0, pos);
+                    }
 
-                String[] pathParts = pageRef.split("/");
-                int docParts = relativeParts.length;
-                int iMax = pathParts.length;
-                StringBuilder resolved = new StringBuilder();
-                String sep = "";
+                    String[] pathParts = pageRef.split("/");
+                    int docParts = relativeParts.length;
+                    int iMax = pathParts.length;
+                    StringBuilder resolved = new StringBuilder();
+                    String sep = "";
 
-                for (int i = 0; i < iMax; i++) {
-                    String part = pathParts[i];
-                    if (part.equals(".")) {
-                        // skp
-                    } else if (part.equals("..")) {
-                        // remove one doc part
-                        if (docParts == 0) return link;
-                        docParts--;
-                    } else {
-                        resolved.append(sep);
-                        resolved.append(part);
+                    for (int i = 0; i < iMax; i++) {
+                        String part = pathParts[i];
+                        if (part.equals(".")) {
+                            // skp
+                        } else if (part.equals("..")) {
+                            // remove one doc part
+                            if (docParts == 0) return link;
+                            docParts--;
+                        } else {
+                            resolved.append(sep);
+                            resolved.append(part);
+                            sep = "/";
+                        }
+                    }
+
+                    // prefix with remaining docParts
+                    sep = docRelativeURL.startsWith("/") ? "/" : "";
+                    StringBuilder resolvedURL = new StringBuilder();
+                    iMax = docParts;
+                    for (int i = 0; i < iMax; i++) {
+                        resolvedURL.append(sep);
+                        resolvedURL.append(relativeParts[i]);
                         sep = "/";
                     }
-                }
 
-                // prefix with remaining docParts
-                sep = docRelativeURL.startsWith("/") ? "/" : "";
-                StringBuilder resolvedURL = new StringBuilder();
-                iMax = docParts;
-                for (int i = 0; i < iMax; i++) {
-                    resolvedURL.append(sep);
-                    resolvedURL.append(relativeParts[i]);
-                    sep = "/";
+                    resolvedURL.append('/').append(resolved).append(suffix);
+                    return link.withStatus(LinkStatus.VALID)
+                            .withUrl(resolvedURL.toString());
                 }
-
-                resolvedURL.append('/').append(resolved).append(suffix);
-                return link.withStatus(LinkStatus.VALID)
-                        .withUrl(resolvedURL.toString());
             }
         }
         return link;

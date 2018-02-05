@@ -1,8 +1,11 @@
 package com.vladsch.flexmark.docx.converter.util;
 
+import com.vladsch.flexmark.docx.converter.internal.DocxRendererOptions;
 import com.vladsch.flexmark.util.Utils;
+import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.BasedSequenceImpl;
+import javafx.scene.control.Hyperlink;
 import org.docx4j.model.styles.StyleUtil;
 import org.docx4j.openpackaging.exceptions.Docx4JException;
 import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
@@ -26,12 +29,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
-public class DocxContextImpl<T> implements DocxContext<T>, BlockFormatProvider<T>, RunFormatProvider<T>, ParaContainer, RunContainer, ContentContainer {
+public abstract class DocxContextImpl<T> implements DocxContext<T>, BlockFormatProvider<T>, RunFormatProvider<T>, ParaContainer, RunContainer, ContentContainer {
     protected final WordprocessingMLPackage myPackage;
     protected final MainDocumentPart myDocumentPart;
     protected final ObjectFactory myFactory;
     protected final DocxHelper myDocxHelper;
+    protected final DocxRendererOptions myRendererOptions;
+    protected final DataHolder options;
 
     // docx stuff
     protected final HashMap<String, Relationship> myHyperlinks;
@@ -44,12 +50,15 @@ public class DocxContextImpl<T> implements DocxContext<T>, BlockFormatProvider<T
     protected ParaContainer myParaContainer;
     protected RunContainer myRunContainer;
     protected int myFootnoteRef;
+    protected AtomicInteger myBookmarkID;
 
-    public DocxContextImpl(WordprocessingMLPackage out) {
+    public DocxContextImpl(WordprocessingMLPackage out, DataHolder options) {
         myPackage = out;
+        this.options = options;
+        myRendererOptions = new DocxRendererOptions(this.options);
         myFactory = new ObjectFactory();
+        myDocxHelper = new DocxHelper(myPackage, myFactory, myRendererOptions);
         myRunFormatProvider = this;
-        myDocxHelper = new DocxHelper(myPackage, myFactory);
         myRunContainer = this;
         myHyperlinks = new HashMap<String, Relationship>();
         myParaContainer = this;
@@ -59,6 +68,11 @@ public class DocxContextImpl<T> implements DocxContext<T>, BlockFormatProvider<T
         myRunFormatProviders = new HashMap<T, RunFormatProvider<T>>();
         myBlockFormatProvider = this;
         myFootnoteRef = 1;
+        myBookmarkID = new AtomicInteger(1);
+    }
+
+    // must be the first thing called after creation
+    public void setParent(final DocxContext parent) {
     }
 
     @Override
@@ -81,7 +95,6 @@ public class DocxContextImpl<T> implements DocxContext<T>, BlockFormatProvider<T
         if (myContentContainer == this) {
             final List<Object> content = getContent();
             return content != null && content.size() > 0 ? content.get(content.size() - 1) : null;
-
         } else {
             return myContentContainer.getLastContentElement();
         }
@@ -149,6 +162,11 @@ public class DocxContextImpl<T> implements DocxContext<T>, BlockFormatProvider<T
         return myRunFormatProvider;
     }
 
+    @Override
+    public DocxRendererOptions getRenderingOptions() {
+        return myRendererOptions;
+    }
+
     // document format provider
     @Override
     public void open() {
@@ -172,12 +190,12 @@ public class DocxContextImpl<T> implements DocxContext<T>, BlockFormatProvider<T
 
     @Override
     public String getStyleId() {
-        return BlockFormatProvider.DEFAULT_STYLE;
+        return myRendererOptions.DEFAULT_STYLE;
     }
 
     @Override
     public Style getStyle() {
-        return getStyle(BlockFormatProvider.DEFAULT_STYLE);
+        return getStyle(myRendererOptions.DEFAULT_STYLE);
     }
 
     @Override
@@ -347,6 +365,65 @@ public class DocxContextImpl<T> implements DocxContext<T>, BlockFormatProvider<T
     }
 
     @Override
+    public int getNextBookmarkId() {
+        return myBookmarkID.getAndIncrement();
+    }
+
+    @Override
+    public AtomicInteger getBookmarkIdAtomic() {
+        return myBookmarkID;
+    }
+
+    /**
+     * Insert bookmark start into current P
+     *
+     * @param bookmarkName name of the bookmark (optional), if not given the it will be BM_{id}
+     * @param isBlockBookmark
+     * @return CTBookmark
+     */
+    @Override
+    public CTBookmark createBookmarkStart(String bookmarkName, final boolean isBlockBookmark) {
+        CTBookmark bm = myFactory.createCTBookmark();
+        final int id = getNextBookmarkId();
+        bm.setId(BigInteger.valueOf(id));
+
+        if (bookmarkName != null && !bookmarkName.isEmpty()) {
+            bm.setName(getValidBookmarkName(bookmarkName));
+        } else {
+            bm.setName(String.format("BM_%d", id));
+        }
+        JAXBElement<CTBookmark> bmStart = myFactory.createBodyBookmarkStart(bm);
+        if (isBlockBookmark) {
+            myContentContainer.addContentElement(bmStart);
+        } else {
+            // add as inline
+            getP().getContent().add(bmStart);
+        }
+        return bm;
+    }
+
+    @Override
+    public CTMarkupRange createBookmarkEnd(final CTBookmark bookmarkStart, final boolean isBlockBookmark) {
+        CTMarkupRange mr = myFactory.createCTMarkupRange();
+        mr.setId(bookmarkStart.getId());
+        JAXBElement<CTMarkupRange> bmEnd = myFactory.createBodyBookmarkEnd(mr);
+        if (isBlockBookmark) {
+            myContentContainer.addContentElement(bmEnd);
+        } else {
+            // add as inline
+            getP().getContent().add(bmEnd);
+        }
+        return mr;
+    }
+
+    @Override
+    public Hyperlink createBookmarkHyperlink(final String bookmarkName, final String linkText) {
+        P.Hyperlink h = MainDocumentPart.hyperlinkToBookmark(bookmarkName, linkText);
+        getP().getContent().add(h);
+        return null;
+    }
+
+    @Override
     public DocxHelper getHelper() {
         return myDocxHelper;
     }
@@ -502,7 +579,7 @@ public class DocxContextImpl<T> implements DocxContext<T>, BlockFormatProvider<T
     }
 
     public void createHorizontalLine() {
-        P p = createP(HORIZONTAL_LINE_STYLE);
+        P p = createP(myRendererOptions.HORIZONTAL_LINE_STYLE);
         R r = createR();
     }
 
@@ -733,7 +810,7 @@ public class DocxContextImpl<T> implements DocxContext<T>, BlockFormatProvider<T
         RStyle ftnRStyle = myFactory.createRStyle();
         ftnRPr.setRStyle(ftnRStyle);
 
-        ftnRStyle.setVal(FOOTNOTE_ANCHOR_STYLE);
+        ftnRStyle.setVal(myRendererOptions.FOOTNOTE_ANCHOR_STYLE);
 
         // see if we need to create a new footnote id or can re-use existing one
         final boolean haveID = footnoteID.compareTo(BigInteger.ZERO) > 0;
@@ -790,7 +867,7 @@ public class DocxContextImpl<T> implements DocxContext<T>, BlockFormatProvider<T
         PStyle pStyle = myFactory.createPPrBasePStyle();
         pPr.setPStyle(pStyle);
 
-        pStyle.setVal(FOOTNOTE_STYLE);
+        pStyle.setVal(myRendererOptions.FOOTNOTE_STYLE);
 
         R r1 = myFactory.createR();
         p.getContent().add(r1);
@@ -798,7 +875,7 @@ public class DocxContextImpl<T> implements DocxContext<T>, BlockFormatProvider<T
         r1.setRPr(rPr);
         RStyle rStyle = myFactory.createRStyle();
         rPr.setRStyle(rStyle);
-        rStyle.setVal(FOOTNOTE_ANCHOR_STYLE);
+        rStyle.setVal(myRendererOptions.FOOTNOTE_ANCHOR_STYLE);
 
         final FootnoteRef footnoteRef = myFactory.createRFootnoteRef();
         r1.getContent().add(footnoteRef);
