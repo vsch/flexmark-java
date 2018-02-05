@@ -2,7 +2,6 @@ package com.vladsch.flexmark.docx.converter.util;
 
 import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.docx.converter.internal.DocxRendererOptions;
-import javafx.scene.control.Hyperlink;
 import org.docx4j.openpackaging.exceptions.Docx4JException;
 import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
 import org.docx4j.openpackaging.parts.Part;
@@ -111,7 +110,7 @@ public interface DocxContext<T> extends DocxContextFrameProvider<T> {
      * @param linkText text of the link
      * @return hyperlink
      */
-    Hyperlink createBookmarkHyperlink(String bookmarkName, String linkText);
+    P.Hyperlink createBookmarkHyperlink(String bookmarkName, String linkText);
 
     /**
      * Increment the last id and return the id

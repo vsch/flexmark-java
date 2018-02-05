@@ -5,7 +5,6 @@ import com.vladsch.flexmark.util.Utils;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.BasedSequenceImpl;
-import javafx.scene.control.Hyperlink;
 import org.docx4j.model.styles.StyleUtil;
 import org.docx4j.openpackaging.exceptions.Docx4JException;
 import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
@@ -417,7 +416,7 @@ public abstract class DocxContextImpl<T> implements DocxContext<T>, BlockFormatP
     }
 
     @Override
-    public Hyperlink createBookmarkHyperlink(final String bookmarkName, final String linkText) {
+    public P.Hyperlink createBookmarkHyperlink(final String bookmarkName, final String linkText) {
         P.Hyperlink h = MainDocumentPart.hyperlinkToBookmark(bookmarkName, linkText);
         getP().getContent().add(h);
         return null;
