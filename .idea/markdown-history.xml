@@ -23,6 +23,6 @@
       </directories>
       <filenames />
     </CopyImageHistory>
-    <PasteLinkHistory onPasteImageTargetRef="2" onPasteTargetRef="2" onPasteLinkText="0" onPasteImageElement="1" onPasteLinkElement="1" onPasteReferenceElement="2" hideInapplicableOperations="false" linkFormat="0" />
+    <PasteLinkHistory onPasteImageTargetRef="2" onPasteTargetRef="2" onPasteLinkText="0" onPasteImageElement="1" onPasteLinkElement="1" onPasteReferenceElement="2" hideInapplicableOperations="false" linkFormat="2" />
   </component>
 </project>

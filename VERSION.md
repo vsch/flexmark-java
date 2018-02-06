@@ -7,6 +7,7 @@ flexmark-java
 
 - [To Do](#to-do)
     - [Docx Converter](#docx-converter)
+- [0.30.2](#0302)
 - [0.30.0](#0300)
 - [0.28.38](#02838)
 - [0.28.36](#02836)
@@ -238,6 +239,11 @@ flexmark-java
 
 &nbsp;</details>
 
+0.30.2
+------
+
+* [ ] Add: Emoji option to convert shortcuts to unicode emoji characters.
+
 0.30.0
 ------
 
@@ -259,11 +265,11 @@ flexmark-java
     `DocxRenderer`
 
     `RendererExtension.extend(RendererBuilder, String)` method of these gets passed `RendererBuilder` instead of `HtmlRenderer.Builder`
-    
+
     extensions that implement both `RendererExtension` and `HtmlRendererExtension` will have
     only have the html renderer extension `extend` method called.
 
-* Add: `flexmark-ext-aside` handling to DocxConverter 
+* Add: `flexmark-ext-aside` handling to DocxConverter
 
 * Fix: DocxConverter formatting around footnote reference would be applied to footnote text
 
@@ -285,7 +291,7 @@ flexmark-java
 * Change: Enumerated references which are missing the definition for their type now default to
   `type #` where # is the reference ordinal instead of just `#`.
 
-* Add: Enumerated links now have title set to the text value of the reference. 
+* Add: Enumerated links now have title set to the text value of the reference.
 
 * Add: DocxConverter options to control heading id generation to resolve anchor refs to document anchors
   * `DocxRenderer.HTML_ID_GENERATOR`, default `HtmlIdGenerator instance`, the id generator to
@@ -295,9 +301,9 @@ flexmark-java
     bookmark names, except ones linking to first heading in a document. Only needed if you have
     some post processor on the docx adding suffixes to bookmark names.
 
-<!-- 
+<!--
   * `DocxRenderer.FIRST_HEADING_ID_SUFFIX`, default `""`, used to add a suffix to the id of the
-    first heading of the document and any hyperlinks to it. 
+    first heading of the document and any hyperlinks to it.
  -->
 
   For convenience these `HtmlRenderer` keys are aliased through `DocxRenderer`, keep in mind
@@ -318,7 +324,7 @@ flexmark-java
   * `DocxRenderer.TABLE_CONTENTS`, default "TableContents"
   * `DocxRenderer.TABLE_HEADING`, default "TableHeading"
   * `DocxRenderer.FOOTNOTE_STYLE`, default "Footnote"
-<!-- 
+<!--
   * `DocxRenderer.BULLET_LIST_STYLE`, default "BulletList"
   * `DocxRenderer.BLOCK_QUOTE_BULLET_LIST_STYLE`, default "QuotationsBulletList"
   * `DocxRenderer.NUMBERED_LIST_STYLE`, default "NumberedList"
