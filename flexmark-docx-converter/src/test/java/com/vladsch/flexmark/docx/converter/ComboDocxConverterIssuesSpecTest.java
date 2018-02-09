@@ -3,7 +3,6 @@ package com.vladsch.flexmark.docx.converter;
 import com.vladsch.flexmark.IRender;
 import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.docx.converter.internal.DocxRenderer;
-import com.vladsch.flexmark.docx.converter.util.BlockFormatProvider;
 import com.vladsch.flexmark.docx.converter.util.DocxContextImpl;
 import com.vladsch.flexmark.docx.converter.util.RunFormatProvider;
 import com.vladsch.flexmark.docx.converter.util.XmlFormatter;

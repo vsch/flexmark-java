@@ -1,7 +1,9 @@
 package com.vladsch.flexmark.ext.attributes;
 
 import com.vladsch.flexmark.ext.anchorlink.AnchorLinkExtension;
+import com.vladsch.flexmark.ext.definition.DefinitionExtension;
 import com.vladsch.flexmark.ext.emoji.EmojiExtension;
+import com.vladsch.flexmark.ext.tables.TablesExtension;
 import com.vladsch.flexmark.ext.toc.TocExtension;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
@@ -20,7 +22,14 @@ public class ComboExtAttributesSpecTest extends ComboSpecTestCase {
             .set(HtmlRenderer.INDENT_SIZE, 2)
             //.set(HtmlRenderer.PERCENT_ENCODE_URLS, true)
             .set(HtmlRenderer.RENDER_HEADER_ID, true)
-            .set(Parser.EXTENSIONS, Arrays.asList(AttributesExtension.create(), TocExtension.create(), EmojiExtension.create()));
+            .set(AttributesExtension.ASSIGN_TEXT_ATTRIBUTES, true)
+            .set(Parser.EXTENSIONS, Arrays.asList(
+                    AttributesExtension.create(),
+                    TocExtension.create(),
+                    EmojiExtension.create(),
+                    DefinitionExtension.create(),
+                    TablesExtension.create()
+            ));
 
     private static final Map<String, DataHolder> optionsMap = new HashMap<String, DataHolder>();
     static {
@@ -29,7 +38,8 @@ public class ComboExtAttributesSpecTest extends ComboSpecTestCase {
                 .set(AnchorLinkExtension.ANCHORLINKS_WRAP_TEXT, false)
                 .set(HtmlRenderer.RENDER_HEADER_ID, false)
         );
-        optionsMap.put("text-attributes", new MutableDataSet().set(AttributesExtension.ASSIGN_TEXT_ATTRIBUTES, true).set(HtmlRenderer.WRAP_TIGHT_ITEM_PARAGRAPH_IN_SPAN, false));
+        optionsMap.put("text-attributes", new MutableDataSet().set(AttributesExtension.ASSIGN_TEXT_ATTRIBUTES, true));
+        optionsMap.put("no-text-attributes", new MutableDataSet().set(AttributesExtension.ASSIGN_TEXT_ATTRIBUTES, false));
         optionsMap.put("src-pos", new MutableDataSet().set(HtmlRenderer.SOURCE_POSITION_ATTRIBUTE, "md-pos"));
     }
 

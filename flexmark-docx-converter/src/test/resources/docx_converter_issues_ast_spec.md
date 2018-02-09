@@ -2270,15 +2270,15 @@ See [@tmp:test]
 ```
 .
 <w:body>
-    <w:bookmarkStart w:id="1" w:name="tmp:test"/>
-    <w:bookmarkEnd w:id="1"/>
     <w:p>
         <w:pPr>
             <w:pStyle w:val="ParagraphTextBody"/>
         </w:pPr>
+        <w:bookmarkStart w:id="1" w:name="tmp:test"/>
         <w:r>
             <w:t xml:space="preserve">text</w:t>
         </w:r>
+        <w:bookmarkEnd w:id="1"/>
     </w:p>
     <w:p>
         <w:pPr>
@@ -2345,7 +2345,8 @@ See [@tmp:test]
 .
 Document[0, 75]
   Paragraph[0, 16] isTrailingBlankLine
-    Text[0, 4] chars:[0, 4, "text"]
+    TextBase[0, 4] chars:[0, 4, "text"]
+      Text[0, 4] chars:[0, 4, "text"]
     AttributesNode[4, 15] textOpen:[4, 5, "{"] text:[5, 14, "#tmp:test"] textClose:[14, 15, "}"]
       AttributeNode[5, 14] name:[5, 6, "#"] value:[6, 14, "tmp:test"] isImplicit isId
   Paragraph[17, 33] isTrailingBlankLine

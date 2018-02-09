@@ -1,6 +1,5 @@
 package com.vladsch.flexmark.docx.converter.util;
 
-import com.vladsch.flexmark.docx.converter.internal.DocxRenderer;
 import org.docx4j.wml.PPr;
 
 public class FootnoteBlockFormatProvider<T> extends BlockFormatProviderBase<T> {

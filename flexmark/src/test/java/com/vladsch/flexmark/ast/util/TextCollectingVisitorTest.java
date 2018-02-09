@@ -4,7 +4,7 @@ import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.parser.Parser;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class TextCollectingVisitorTest {
     @Test

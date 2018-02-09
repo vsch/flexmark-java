@@ -433,6 +433,7 @@ public class CoreNodeRenderer implements NodeRenderer {
                 return;
             }
         }
+
         if (wrapTextInSpan) {
             html.withAttr().tag("span", false, false, new Runnable() {
                 @Override
@@ -497,11 +498,13 @@ public class CoreNodeRenderer implements NodeRenderer {
     }
 
     private void render(final Paragraph node, final NodeRendererContext context, final HtmlWriter html) {
-        if (!(node.getParent() instanceof ParagraphItemContainer)
-                || !((ParagraphItemContainer) node.getParent()).isParagraphWrappingDisabled(node, listOptions, context.getOptions())) {
-            renderLooseParagraph(node, context, html);
-        } else {
-            renderTextBlockParagraphLines(node, context, html, context.getHtmlOptions().wrapTightItemParagraphInSpan);
+        if (node.getFirstChildAnyNot(NonRenderingInline.class) != null) {
+            if (!(node.getParent() instanceof ParagraphItemContainer)
+                    || !((ParagraphItemContainer) node.getParent()).isParagraphWrappingDisabled(node, listOptions, context.getOptions())) {
+                renderLooseParagraph(node, context, html);
+            } else {
+                renderTextBlockParagraphLines(node, context, html, false); //context.getHtmlOptions().wrapTightItemParagraphInSpan);
+            }
         }
     }
 

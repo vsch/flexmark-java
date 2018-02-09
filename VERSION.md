@@ -181,7 +181,7 @@ flexmark-java
 * [ ] Add: Latex extension
 
 * Change: complete parser profiles for variations within a family
-  [Markdown Parser Emulation](https://github.com/vsch/flexmark-java/blob/master/MarkdownProcessorsEmulation.md).
+  [Markdown Parser Emulation](MarkdownProcessorsEmulation.md).
   * [ ] League/CommonMark
   * [ ] Jekyll
   * [ ] Php Markdown Extra
@@ -244,30 +244,6 @@ flexmark-java
 0.32.0
 ------
 
-* Fix: HTML Parser:
-  * image alt text should escape markdown special characters which can affect parsing of image
-    link text like: `[]`
-  * convert `<pre><tt>` to indented code
-  * add attribute extraction
-    * id : if `FlexmarkHtmlParser.OUTPUT_ATTRIBUTES_ID` is `true`, default `true`
-    * `FlexmarkHtmlParser.OUTPUT_ATTRIBUTES_NAMES_REGEX` default `""`, if not empty then will
-      output attributes extension syntax for attribute names that are matched by the regex.
-  * did not output a line end at start of `<div>`, this tended to splice text in div to previous
-    element.
-
-* Add: `AttributesExtension.ASSIGN_TEXT_ATTRIBUTES`, default `false`. When `true` attribute
-  assignment rules to nodes are changed to allow text elements to get attributes. If an
-  attribute element is spaced from the previous plain text element `some text {attributes}` then
-  attributes are for the parent of the text. If they are attached to the text element `some
-  text{attributes}` then they are assigned to the immediately preceding plain text span. Within
-  an inline element same rules apply: `**bold text {attr}**` are for the strong emphasis span,
-  while `**bold text{attr}**` will wrap the text between the strong emphasis tags, in a span
-  with given attributes.
-
-  If a plain text span is interrupted by an HTML comment then it is considered as two separate
-  plain text spans. ie. `some <!---->text{attr}` will result in `some <!----><span
-  attr>text</span>` rendering.
-
 * **API Change**: removed `EmojiCheatSheet` class to replace with `EmojiShortcuts` which has better
   referencing for GitHub shortcuts and unicode chars for all emojis from
   [emoji-cross-reference](https://github.com/vsch/emoji-cross-reference)
@@ -289,6 +265,56 @@ flexmark-java
     * `EmojiImageType.UNICODE_ONLY` convert to unicode and if there is no unicode treat as
       invalid emoji shortcut
     * `EmojiImageType.UNICODE_FALLBACK_TO_IMAGE` convert to unicode and if no unicode use image.
+
+* **API Change**: removed `HtmlRenderer.WRAP_TIGHT_ITEM_PARAGRAPH_IN_SPAN`, it was only needed
+  to have somewhere to set attributes for tight item text for `Attributes` which now implement
+  intelligent span wrapping of text.
+
+* **Change**: `AttributesExtension.ASSIGN_TEXT_ATTRIBUTES`, default `true`. Set to `false` for
+  backward compatibility.
+
+  When `true` attribute assignment rules to nodes are changed to allow text elements to get
+  attributes. If an attribute element is spaced from the previous plain text element `some text
+  {attributes}` then attributes are for the parent of the text. If they are attached to the text
+  element `some text{attributes}` then they are assigned to the immediately preceding plain text
+  span. Within an inline element same rules apply: `**bold text {attr}**` are for the strong
+  emphasis span, while `**bold text{attr}**` will wrap the text between the strong emphasis
+  tags, in a span with given attributes.
+
+  If a plain text span is interrupted by an HTML comment then it is considered as two separate
+  plain text spans. ie. `some <!---->text{attr}` will result in `some <!----><span
+  attr>text</span>` rendering.
+  
+  Full spec: [ext_attributes_ast_spec](flexmark-ext-attributes/src/test/resources/ext_attributes_ast_spec.md)
+
+* Fix: Attributes, when they are first child then delete leading spaces of following node first
+  rendered child will have leading spaces.
+
+* Add: Attribute syntax option allows `Attributes` on reference definition so that all elements
+  referencing it, inherit the attributes.
+
+  To assign attributes to a reference definition you need to leave a blank line between the
+  reference definition and the attributes element, placed by itself and followed by a blank
+  line. 
+  
+        ![reference 1][ref]
+        
+        ![reference 2][ref]
+  
+        [ref]: http://example.com/image.png
+        
+        {width=20 height=20}
+
+* Fix: HTML Parser:
+  * image alt text should escape markdown special characters which can affect parsing of image
+    link text like: `[]`
+  * convert `<pre><tt>` to indented code
+  * add attribute extraction
+    * id : if `FlexmarkHtmlParser.OUTPUT_ATTRIBUTES_ID` is `true`, default `true`
+    * `FlexmarkHtmlParser.OUTPUT_ATTRIBUTES_NAMES_REGEX` default `""`, if not empty then will
+      output attributes extension syntax for attribute names that are matched by the regex.
+  * did not output a line end at start of `<div>`, this tended to splice text in div to previous
+    element.
 
 * Add: Emoji Extension support to DocxRenderer. 
   * Add: Emoji Cheat Sheet images to resources in DocxRender jar, default configuration will

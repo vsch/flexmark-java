@@ -6,10 +6,8 @@ import com.vladsch.flexmark.ext.definition.DefinitionList;
 import com.vladsch.flexmark.ext.definition.DefinitionTerm;
 import com.vladsch.flexmark.html.CustomNodeRenderer;
 import com.vladsch.flexmark.html.HtmlWriter;
-import com.vladsch.flexmark.html.renderer.NodeRenderer;
-import com.vladsch.flexmark.html.renderer.NodeRendererContext;
-import com.vladsch.flexmark.html.renderer.NodeRendererFactory;
-import com.vladsch.flexmark.html.renderer.NodeRenderingHandler;
+import com.vladsch.flexmark.html.renderer.*;
+import com.vladsch.flexmark.parser.ListOptions;
 import com.vladsch.flexmark.util.options.DataHolder;
 
 import java.util.HashSet;
@@ -17,9 +15,11 @@ import java.util.Set;
 
 public class DefinitionNodeRenderer implements NodeRenderer {
     private final DefinitionOptions options;
+    private final ListOptions listOptions;
 
     public DefinitionNodeRenderer(DataHolder options) {
         this.options = new DefinitionOptions(options);
+        this.listOptions = ListOptions.getFrom(options);
     }
 
     @Override
@@ -47,31 +47,55 @@ public class DefinitionNodeRenderer implements NodeRenderer {
         return set;
     }
 
-    private void render(DefinitionList node, NodeRendererContext context, HtmlWriter html) {
+    private void render(DefinitionList node, NodeRendererContext context, final HtmlWriter html) {
         html.withAttr().tag("dl").indent();
         context.renderChildren(node);
         html.unIndent().tag("/dl");
     }
 
-    private void render(final DefinitionTerm node, final NodeRendererContext context, HtmlWriter html) {
+    private void render(final DefinitionTerm node, final NodeRendererContext context, final HtmlWriter html) {
         final Node childText = node.getFirstChild();
         if (childText != null) {
-            html.srcPosWithEOL(childText.getChars()).withAttr().withCondIndent().tagLine("dt", new Runnable() {
+            html.srcPosWithEOL(node.getChars()).withAttr(CoreNodeRenderer.TIGHT_LIST_ITEM).withCondIndent().tagLine("dt", new Runnable() {
                 @Override
                 public void run() {
+                    html.text(node.getMarkerSuffix().unescape());
                     context.renderChildren(node);
                 }
             });
+            //html.srcPosWithEOL(childText.getChars()).withAttr().withCondIndent().tagLine("dt", new Runnable() {
+            //    @Override
+            //    public void run() {
+            //        context.renderChildren(node);
+            //    }
+            //});
         }
     }
 
     private void render(final DefinitionItem node, final NodeRendererContext context, final HtmlWriter html) {
-        html.srcPosWithEOL(node.getChars()).withAttr().withCondIndent().tagLine("dd", new Runnable() {
-            @Override
-            public void run() {
-                context.renderChildren(node);
-            }
-        });
+        if (listOptions.isTightListItem(node)) {
+            html.srcPosWithEOL(node.getChars()).withAttr(CoreNodeRenderer.TIGHT_LIST_ITEM).withCondIndent().tagLine("dd", new Runnable() {
+                @Override
+                public void run() {
+                    html.text(node.getMarkerSuffix().unescape());
+                    context.renderChildren(node);
+                }
+            });
+        } else {
+            html.srcPosWithEOL(node.getChars()).withAttr(CoreNodeRenderer.LOOSE_LIST_ITEM).tagIndent("dd", new Runnable() {
+                @Override
+                public void run() {
+                    html.text(node.getMarkerSuffix().unescape());
+                    context.renderChildren(node);
+                }
+            });
+        }
+        //html.srcPosWithEOL(node.getChars()).withAttr().withCondIndent().tagLine("dd", new Runnable() {
+        //    @Override
+        //    public void run() {
+        //        context.renderChildren(node);
+        //    }
+        //});
     }
 
     public static class Factory implements NodeRendererFactory {

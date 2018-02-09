@@ -11925,15 +11925,15 @@ See [@fig:abc]
 [@tbl]: Table [#].
 .
 <w:body>
-    <w:bookmarkStart w:id="1" w:name="fig:abc"/>
-    <w:bookmarkEnd w:id="1"/>
     <w:p>
         <w:pPr>
             <w:pStyle w:val="ParagraphTextBody"/>
         </w:pPr>
+        <w:bookmarkStart w:id="1" w:name="fig:abc"/>
         <w:r>
             <w:t xml:space="preserve">test</w:t>
         </w:r>
+        <w:bookmarkEnd w:id="1"/>
     </w:p>
     <w:p>
         <w:pPr>
@@ -12082,15 +12082,15 @@ abc{#fig:test}
 
 .
 <w:body>
-    <w:bookmarkStart w:id="1" w:name="fig:test"/>
-    <w:bookmarkEnd w:id="1"/>
     <w:p>
         <w:pPr>
             <w:pStyle w:val="ParagraphTextBody"/>
         </w:pPr>
+        <w:bookmarkStart w:id="1" w:name="fig:test"/>
         <w:r>
             <w:t xml:space="preserve">abc</w:t>
         </w:r>
+        <w:bookmarkEnd w:id="1"/>
     </w:p>
     <w:p>
         <w:pPr>

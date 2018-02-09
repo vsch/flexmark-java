@@ -6,9 +6,7 @@ import com.vladsch.flexmark.util.options.DataHolder;
 
 import java.util.regex.Pattern;
 
-import static com.vladsch.flexmark.parser.Parser.LISTS_ITEM_MARKER_SPACE;
-import static com.vladsch.flexmark.parser.Parser.LISTS_ITEM_PREFIX_CHARS;
-import static com.vladsch.flexmark.parser.Parser.LISTS_ORDERED_ITEM_DOT_ONLY;
+import static com.vladsch.flexmark.parser.Parser.*;
 
 public class Parsing {
     public final String ADDITIONAL_CHARS;

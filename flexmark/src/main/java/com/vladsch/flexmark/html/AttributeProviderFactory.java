@@ -1,7 +1,6 @@
 package com.vladsch.flexmark.html;
 
 import com.vladsch.flexmark.html.renderer.LinkResolverContext;
-import com.vladsch.flexmark.html.renderer.NodeRendererContext;
 import com.vladsch.flexmark.util.ComputableFactory;
 import com.vladsch.flexmark.util.dependency.Dependent;
 

@@ -47,9 +47,9 @@ See [@tbl:test]
 
 .
 <p><img src="http://example.com/test.png" alt="Fig" id="fig:test" /><br />
-<span>Figure 1.</span></p>
+Figure 1.</p>
 <p><img src="http://example.com/test.png" alt="Fig" id="fig:test2" /><br />
-<span>Figure 2.</span></p>
+Figure 2.</p>
 <table id="tbl:test">
   <thead>
     <tr><th>table</th></tr>
@@ -57,12 +57,11 @@ See [@tbl:test]
   <tbody>
     <tr><td>data</td></tr>
   </tbody>
-  <caption><span>Table 1.</span> caption</caption>
+  <caption>Table 1. caption</caption>
 </table>
-<p></p>
-<p>See <a href="#fig:test2" title="Figure 2."><span>Figure 2.</span></a></p>
-<p>See <a href="#fig:test" title="Figure 1."><span>Figure 1.</span></a></p>
-<p>See <a href="#tbl:test" title="Table 1."><span>Table 1.</span></a></p>
+<p>See <a href="#fig:test2" title="Figure 2.">Figure 2.</a></p>
+<p>See <a href="#fig:test" title="Figure 1.">Figure 1.</a></p>
+<p>See <a href="#tbl:test" title="Table 1.">Table 1.</a></p>
 .
 Document[0, 285]
   Paragraph[0, 61] isTrailingBlankLine
@@ -136,9 +135,22 @@ abc{#fig:test}
 [@fig:test]
 
 .
-<p id="fig:test">abc</p>
+<p><span id="fig:test">abc</span></p>
 <p>fig 1</p>
 <p><a href="#fig:test" title="fig 1">fig 1</a></p>
+.
+Document[0, 42]
+  Paragraph[0, 15] isTrailingBlankLine
+    TextBase[0, 3] chars:[0, 3, "abc"]
+      Text[0, 3] chars:[0, 3, "abc"]
+    AttributesNode[3, 14] textOpen:[3, 4, "{"] text:[4, 13, "#fig:test"] textClose:[13, 14, "}"]
+      AttributeNode[4, 13] name:[4, 5, "#"] value:[5, 13, "fig:test"] isImplicit isId
+  Paragraph[16, 28] isTrailingBlankLine
+    EnumeratedReferenceText[16, 27] textOpen:[16, 18, "[#"] text:[18, 26, "fig:test"] textClose:[26, 27, "]"]
+      Text[18, 26] chars:[18, 26, "fig:test"]
+  Paragraph[29, 41] isTrailingBlankLine
+    EnumeratedReferenceLink[29, 40] textOpen:[29, 31, "[@"] text:[31, 39, "fig:test"] textClose:[39, 40, "]"]
+      Text[31, 39] chars:[31, 39, "fig:test"]
 ````````````````````````````````
 
 

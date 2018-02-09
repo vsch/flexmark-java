@@ -3,7 +3,6 @@ package com.vladsch.flexmark.ext.toc.internal;
 import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.ext.toc.SimTocBlock;
 import com.vladsch.flexmark.ext.toc.SimTocContent;
-import com.vladsch.flexmark.ext.toc.SimTocExtension;
 import com.vladsch.flexmark.formatter.CustomNodeFormatter;
 import com.vladsch.flexmark.formatter.internal.*;
 import com.vladsch.flexmark.util.format.Table;
@@ -13,8 +12,6 @@ import com.vladsch.flexmark.util.options.DataHolder;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
-
-import static com.vladsch.flexmark.ext.toc.SimTocExtension.BLANK_LINE_SPACER;
 
 public class SimTocNodeFormatter implements NodeFormatter {
     private final TableFormatOptions options;

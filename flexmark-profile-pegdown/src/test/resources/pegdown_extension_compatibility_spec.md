@@ -762,11 +762,11 @@ Term 2
 <dl>
   <dt>Term 1</dt>
   <dd>
-  <p>Definition 1 (paragraph)</p>
+    <p>Definition 1 (paragraph)</p>
   </dd>
   <dt>Term 2</dt>
   <dd>
-  <p>Definition 2 (paragraph)</p>
+    <p>Definition 2 (paragraph)</p>
   </dd>
 </dl>
 ````````````````````````````````
@@ -795,13 +795,13 @@ Definition 1 paragraph 2 line 2 (lazy)
 <dl>
   <dt>Term 1</dt>
   <dd>
-  <p>Definition 1 paragraph 1 line 1 Definition 1 paragraph 1 line 2</p>
-  <p>Definition 1 paragraph 2 line 1 Definition 1 paragraph 2 line 2</p>
+    <p>Definition 1 paragraph 1 line 1 Definition 1 paragraph 1 line 2</p>
+    <p>Definition 1 paragraph 2 line 1 Definition 1 paragraph 2 line 2</p>
   </dd>
   <dt>Term 2</dt>
   <dd>
-  <p>Definition 1 paragraph 1 line 1 Definition 1 paragraph 1 line 2 (lazy)</p>
-  <p>Definition 1 paragraph 2 line 1 Definition 1 paragraph 2 line 2 (lazy)</p>
+    <p>Definition 1 paragraph 1 line 1 Definition 1 paragraph 1 line 2 (lazy)</p>
+    <p>Definition 1 paragraph 2 line 1 Definition 1 paragraph 2 line 2 (lazy)</p>
   </dd>
 </dl>
 ````````````````````````````````
@@ -847,18 +847,18 @@ Term 4
   <dt>Term 1</dt>
   <dt>Term 2</dt>
   <dd>
-  <p>Definition 1 paragraph 1 line 1 Definition 1 paragraph 1 line 2 (lazy)</p>
-  <p>Definition 1 paragraph 2 line 1 Definition 1 paragraph 2 line 2</p>
+    <p>Definition 1 paragraph 1 line 1 Definition 1 paragraph 1 line 2 (lazy)</p>
+    <p>Definition 1 paragraph 2 line 1 Definition 1 paragraph 2 line 2</p>
   </dd>
   <dd>
-  <p>Definition 2 paragraph 1 line 1 Definition 2 paragraph 1 line 2 (lazy)</p>
+    <p>Definition 2 paragraph 1 line 1 Definition 2 paragraph 1 line 2 (lazy)</p>
   </dd>
   <dt>Term 3</dt>
   <dd>Definition 3 (no paragraph)</dd>
   <dd>Definition 4 (no paragraph)</dd>
   <dd>Definition 5 line 1 Definition 5 line 2 (no paragraph)</dd>
   <dd>
-  <p>Definition 6 paragraph 1 line 1 Definition 6 paragraph 1 line 2</p>
+    <p>Definition 6 paragraph 1 line 1 Definition 6 paragraph 1 line 2</p>
   </dd>
   <dd>Definition 7 (no paragraph)</dd>
   <dd>Definition 8 paragraph 1 line 1 (forced paragraph) Definition 8 paragraph 1 line 2

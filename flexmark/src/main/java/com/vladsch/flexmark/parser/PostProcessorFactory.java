@@ -1,7 +1,6 @@
 package com.vladsch.flexmark.parser;
 
 import com.vladsch.flexmark.ast.Document;
-import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.util.ComputableFactory;
 import com.vladsch.flexmark.util.dependency.Dependent;
 

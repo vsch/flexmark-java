@@ -10,7 +10,6 @@ import com.vladsch.flexmark.ext.emoji.internal.EmojiReference.Emoji;
 
 import java.io.File;
 import java.util.HashMap;
-import java.util.Map;
 
 public class EmojiShortcuts {
     public static final String gitHubUrlPrefix = EmojiReference.githubUrl;

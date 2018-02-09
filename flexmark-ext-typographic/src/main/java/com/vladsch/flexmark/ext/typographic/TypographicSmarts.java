@@ -1,6 +1,5 @@
 package com.vladsch.flexmark.ext.typographic;
 
-import com.vladsch.flexmark.ast.DoNotDecorate;
 import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 

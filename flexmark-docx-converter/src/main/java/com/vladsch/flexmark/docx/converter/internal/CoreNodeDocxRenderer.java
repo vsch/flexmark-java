@@ -42,7 +42,9 @@ import com.vladsch.flexmark.util.format.options.ListSpacing;
 import com.vladsch.flexmark.util.html.Attribute;
 import com.vladsch.flexmark.util.html.Attributes;
 import com.vladsch.flexmark.util.html.Escaping;
-import com.vladsch.flexmark.util.options.*;
+import com.vladsch.flexmark.util.options.DataHolder;
+import com.vladsch.flexmark.util.options.DataKey;
+import com.vladsch.flexmark.util.options.MutableScopedDataSet;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import org.docx4j.UnitsOfMeasurement;
 import org.docx4j.dml.wordprocessingDrawing.Inline;
@@ -573,8 +575,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
                 docx.createP();
                 docx.renderChildren(node);
             } else {
-                final String text = new TextCollectingVisitor().collectAndGetText(node);
-                if (!text.isEmpty() || node.getFirstChildAny(Emoji.class) != null) {
+                if (node.getFirstChildAnyNot(NonRenderingInline.class) != null) {
                     docx.setBlockFormatProvider(new BlockFormatProviderBase<Node>(docx, docx.getDocxRendererOptions().LOOSE_PARAGRAPH_STYLE));
                     docx.createP();
                     docx.renderChildren(node);

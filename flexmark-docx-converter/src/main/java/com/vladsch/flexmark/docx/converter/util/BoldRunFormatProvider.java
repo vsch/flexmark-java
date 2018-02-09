@@ -1,6 +1,5 @@
 package com.vladsch.flexmark.docx.converter.util;
 
-import com.vladsch.flexmark.docx.converter.internal.DocxRenderer;
 import org.docx4j.wml.RPr;
 
 public class BoldRunFormatProvider<T> extends RunFormatProviderBase<T> {

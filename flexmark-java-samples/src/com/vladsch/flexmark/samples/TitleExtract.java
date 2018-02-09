@@ -1,7 +1,8 @@
 package com.vladsch.flexmark.samples;
 
-import com.vladsch.flexmark.Extension;
-import com.vladsch.flexmark.ast.*;
+import com.vladsch.flexmark.ast.Block;
+import com.vladsch.flexmark.ast.Heading;
+import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.ast.util.TextCollectingVisitor;
 import com.vladsch.flexmark.ext.anchorlink.AnchorLink;
 import com.vladsch.flexmark.ext.anchorlink.internal.AnchorLinkNodeRenderer;

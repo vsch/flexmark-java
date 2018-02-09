@@ -1,6 +1,5 @@
 package com.vladsch.flexmark.docx.converter.util;
 
-import com.vladsch.flexmark.docx.converter.internal.DocxRenderer;
 import org.docx4j.wml.PPr;
 import org.docx4j.wml.PPrBase;
 import org.docx4j.wml.Style;

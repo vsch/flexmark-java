@@ -37,6 +37,16 @@
         </dependency>
         <dependency>
             <groupId>com.vladsch.flexmark</groupId>
+            <artifactId>flexmark-ext-definition</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.vladsch.flexmark</groupId>
+            <artifactId>flexmark-ext-tables</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.vladsch.flexmark</groupId>
             <artifactId>flexmark-ext-emoji</artifactId>
             <scope>test</scope>
         </dependency>

@@ -3,12 +3,13 @@ package com.vladsch.flexmark.ext.attributes;
 import com.vladsch.flexmark.ast.CustomNode;
 import com.vladsch.flexmark.ast.DelimitedNode;
 import com.vladsch.flexmark.ast.DoNotDecorate;
+import com.vladsch.flexmark.ast.NonRenderingInline;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 /**
  * A AttributesNode node
  */
-public class AttributesNode extends CustomNode implements DelimitedNode, DoNotDecorate {
+public class AttributesNode extends CustomNode implements DelimitedNode, DoNotDecorate, NonRenderingInline {
     protected BasedSequence openingMarker = BasedSequence.NULL;
     protected BasedSequence text = BasedSequence.NULL;
     protected BasedSequence closingMarker = BasedSequence.NULL;

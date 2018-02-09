@@ -3,7 +3,6 @@ package com.vladsch.flexmark.docx.converter.util;
 import java.awt.Color;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.regex.Pattern;
 
 public class ColorNameMapper {
     private final static Map<String, Color> colors = new HashMap<>();

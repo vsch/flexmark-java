@@ -37,7 +37,7 @@ public class HtmlRendererOptions {
     public final boolean htmlBlockOpenTagEol;
     public final boolean htmlBlockCloseTagEol;
     public final boolean unescapeHtmlEntities;
-    public final boolean wrapTightItemParagraphInSpan;
+    //public final boolean wrapTightItemParagraphInSpan;
     public final String autolinkWwwPrefix;
 
     public HtmlRendererOptions(DataHolder options) {
@@ -75,6 +75,6 @@ public class HtmlRendererOptions {
         unescapeHtmlEntities = HtmlRenderer.UNESCAPE_HTML_ENTITIES.getFrom(options);
         inlineCodeSpliceClass = HtmlRenderer.INLINE_CODE_SPLICE_CLASS.getFrom(options);
         autolinkWwwPrefix = HtmlRenderer.AUTOLINK_WWW_PREFIX.getFrom(options);
-        wrapTightItemParagraphInSpan = HtmlRenderer.WRAP_TIGHT_ITEM_PARAGRAPH_IN_SPAN.getFrom(options);
+        //wrapTightItemParagraphInSpan = HtmlRenderer.WRAP_TIGHT_ITEM_PARAGRAPH_IN_SPAN.getFrom(options);
     }
 }

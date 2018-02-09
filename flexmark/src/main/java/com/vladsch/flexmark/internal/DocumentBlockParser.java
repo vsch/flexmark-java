@@ -2,7 +2,6 @@ package com.vladsch.flexmark.internal;
 
 import com.vladsch.flexmark.ast.Block;
 import com.vladsch.flexmark.ast.Document;
-import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.block.AbstractBlockParser;
 import com.vladsch.flexmark.parser.block.BlockContinue;
 import com.vladsch.flexmark.parser.block.BlockParser;

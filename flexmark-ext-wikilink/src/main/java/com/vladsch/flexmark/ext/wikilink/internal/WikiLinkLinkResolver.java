@@ -4,7 +4,10 @@ import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.ext.wikilink.WikiImage;
 import com.vladsch.flexmark.html.LinkResolver;
 import com.vladsch.flexmark.html.LinkResolverFactory;
-import com.vladsch.flexmark.html.renderer.*;
+import com.vladsch.flexmark.html.renderer.LinkResolverContext;
+import com.vladsch.flexmark.html.renderer.LinkStatus;
+import com.vladsch.flexmark.html.renderer.LinkType;
+import com.vladsch.flexmark.html.renderer.ResolvedLink;
 
 import java.util.Set;
 

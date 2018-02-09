@@ -1,7 +1,9 @@
 package com.vladsch.flexmark.ext.gfm.users;
 
 import com.vladsch.flexmark.Extension;
-import com.vladsch.flexmark.ext.gfm.users.internal.*;
+import com.vladsch.flexmark.ext.gfm.users.internal.GfmUsersInlineParserExtension;
+import com.vladsch.flexmark.ext.gfm.users.internal.GfmUsersJiraRenderer;
+import com.vladsch.flexmark.ext.gfm.users.internal.GfmUsersNodeRenderer;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.options.DataKey;

@@ -5,7 +5,8 @@ import com.vladsch.flexmark.util.collection.DataValueFactory;
 import com.vladsch.flexmark.util.options.*;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Map;
 
 import static com.vladsch.flexmark.util.sequence.BasedSequence.EMPTY_LIST;
 

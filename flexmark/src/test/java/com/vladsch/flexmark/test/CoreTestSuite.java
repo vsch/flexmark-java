@@ -1,6 +1,5 @@
 package com.vladsch.flexmark.test;
 
-import com.vladsch.flexmark.ast.util.TextCollectingVisitor;
 import com.vladsch.flexmark.ast.util.TextCollectingVisitorTest;
 import com.vladsch.flexmark.internal.HtmlDeepParserTest;
 import org.junit.runners.Suite;

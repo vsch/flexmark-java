@@ -1,7 +1,6 @@
 package com.vladsch.flexmark.ast;
 
 import com.vladsch.flexmark.util.KeepType;
-import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.DataKey;
 
 import java.util.*;

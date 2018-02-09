@@ -80,7 +80,7 @@ public class HtmlRenderer implements IRender {
     public static final DataKey<Boolean> HTML_BLOCK_OPEN_TAG_EOL = new DataKey<Boolean>("HTML_BLOCK_OPEN_TAG_EOL", true);
     public static final DataKey<Boolean> HTML_BLOCK_CLOSE_TAG_EOL = new DataKey<Boolean>("HTML_BLOCK_CLOSE_TAG_EOL", true);
     public static final DataKey<Boolean> UNESCAPE_HTML_ENTITIES = new DataKey<Boolean>("UNESCAPE_HTML_ENTITIES", true);
-    public static final DataKey<Boolean> WRAP_TIGHT_ITEM_PARAGRAPH_IN_SPAN = new DataKey<Boolean>("WRAP_TIGHT_ITEM_PARAGRAPH_IN_SPAN", false);
+    //public static final DataKey<Boolean> WRAP_TIGHT_ITEM_PARAGRAPH_IN_SPAN = new DataKey<Boolean>("WRAP_TIGHT_ITEM_PARAGRAPH_IN_SPAN", false);
     public static final DataKey<String> AUTOLINK_WWW_PREFIX = new DataKey<String>("AUTOLINK_WWW_PREFIX", "http://");
 
     /**

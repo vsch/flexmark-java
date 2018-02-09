@@ -515,10 +515,10 @@ Term 2
   <dt>Term 1</dt>
   <dt>Term 2</dt>
   <dd>
-  <p>Definition 1</p>
+    <p>Definition 1</p>
   </dd>
   <dd>
-  <p>Definition 2</p>
+    <p>Definition 2</p>
   </dd>
 </dl>
 .
@@ -579,10 +579,10 @@ Term 1
 <dl>
   <dt>Term 1</dt>
   <dd>
-  <p>Definition 1 (paragraph)</p>
+    <p>Definition 1 (paragraph)</p>
   </dd>
   <dd>
-  <p>Text out of definition (paragraph)</p>
+    <p>Text out of definition (paragraph)</p>
   </dd>
 </dl>
 .
@@ -719,11 +719,11 @@ Term 2
 <dl>
   <dt>Term 1</dt>
   <dd>
-  <p>Definition 1 (paragraph)</p>
+    <p>Definition 1 (paragraph)</p>
   </dd>
   <dt>Term 2</dt>
   <dd>
-  <p>Definition 2 (paragraph)</p>
+    <p>Definition 2 (paragraph)</p>
   </dd>
 </dl>
 .
@@ -767,17 +767,17 @@ Definition 1 paragraph 2 line 2 (lazy)
 <dl>
   <dt>Term 1</dt>
   <dd>
-  <p>Definition 1 paragraph 1 line 1 ...
-  Definition 1 paragraph 1 line 2</p>
-  <p>Definition 1 paragraph 2 line 1 ...
-  Definition 1 paragraph 2 line 2</p>
+    <p>Definition 1 paragraph 1 line 1 ...
+    Definition 1 paragraph 1 line 2</p>
+    <p>Definition 1 paragraph 2 line 1 ...
+    Definition 1 paragraph 2 line 2</p>
   </dd>
   <dt>Term 2</dt>
   <dd>
-  <p>Definition 1 paragraph 1 line 1 ...
-  Definition 1 paragraph 1 line 2 (lazy)</p>
-  <p>Definition 1 paragraph 2 line 1 ...
-  Definition 1 paragraph 2 line 2 (lazy)</p>
+    <p>Definition 1 paragraph 1 line 1 ...
+    Definition 1 paragraph 1 line 2 (lazy)</p>
+    <p>Definition 1 paragraph 2 line 1 ...
+    Definition 1 paragraph 2 line 2 (lazy)</p>
   </dd>
 </dl>
 .
@@ -850,46 +850,46 @@ Term 4
   <dt>Term 1</dt>
   <dt>Term 2</dt>
   <dd>
-  <p>Definition 1 paragraph 1 line 1 ...
-  Definition 1 paragraph 1 line 2 (lazy)</p>
-  <p>Definition 1 paragraph 2 line 1 ...
-  Definition 1 paragraph 2 line 2</p>
+    <p>Definition 1 paragraph 1 line 1 ...
+    Definition 1 paragraph 1 line 2 (lazy)</p>
+    <p>Definition 1 paragraph 2 line 1 ...
+    Definition 1 paragraph 2 line 2</p>
   </dd>
   <dd>
-  <p>Definition 2 paragraph 1 line 1 ...
-  Definition 2 paragraph 1 line 2 (lazy)</p>
+    <p>Definition 2 paragraph 1 line 1 ...
+    Definition 2 paragraph 1 line 2 (lazy)</p>
   </dd>
   <dt>Term 3</dt>
   <dd>
-  <p>Definition 3 (no paragraph)</p>
+    <p>Definition 3 (no paragraph)</p>
   </dd>
   <dd>
-  <p>Definition 4 (no paragraph)</p>
+    <p>Definition 4 (no paragraph)</p>
   </dd>
   <dd>
-  <p>Definition 5 line 1 ...
-  Definition 5 line 2 (no paragraph)</p>
+    <p>Definition 5 line 1 ...
+    Definition 5 line 2 (no paragraph)</p>
   </dd>
   <dd>
-  <p>Definition 6 paragraph 1 line 1 ...
-  Definition 6 paragraph 1 line 2</p>
+    <p>Definition 6 paragraph 1 line 1 ...
+    Definition 6 paragraph 1 line 2</p>
   </dd>
   <dd>
-  <p>Definition 7 (no paragraph)</p>
+    <p>Definition 7 (no paragraph)</p>
   </dd>
   <dd>
-  <p>Definition 8 paragraph 1 line 1 (forced paragraph) ...
-  Definition 8 paragraph 1 line 2</p>
-  <p>Definition 8 paragraph 2 line 1</p>
+    <p>Definition 8 paragraph 1 line 1 (forced paragraph) ...
+    Definition 8 paragraph 1 line 2</p>
+    <p>Definition 8 paragraph 2 line 1</p>
   </dd>
   <dt>Term 4</dt>
   <dd>
-  <p>Definition 9 paragraph 1 line 1 (forced paragraph) ...
-  Definition 9 paragraph 1 line 2</p>
-  <p>Definition 9 paragraph 2 line 1</p>
+    <p>Definition 9 paragraph 1 line 1 (forced paragraph) ...
+    Definition 9 paragraph 1 line 2</p>
+    <p>Definition 9 paragraph 2 line 1</p>
   </dd>
   <dd>
-  <p>Definition 10 (no paragraph)</p>
+    <p>Definition 10 (no paragraph)</p>
   </dd>
 </dl>
 .
@@ -1120,11 +1120,11 @@ Term 2
 <dl>
   <dt>Term 1</dt>
   <dd>
-  <p>Definition 1 (paragraph)</p>
+    <p>Definition 1 (paragraph)</p>
   </dd>
   <dt>Term 2</dt>
   <dd>
-  <p>Definition 2 (paragraph)</p>
+    <p>Definition 2 (paragraph)</p>
   </dd>
 </dl>
 .
@@ -1159,7 +1159,7 @@ Term 2
 <dl>
   <dt>Term 1</dt>
   <dd>
-  <p>Definition 1 (paragraph)</p>
+    <p>Definition 1 (paragraph)</p>
   </dd>
   <dt>Term 2</dt>
   <dd>Definition 2 (paragraph)</dd>
@@ -1268,8 +1268,8 @@ Definition 1 paragraph 1 line 2 (lazy)
   <dt>Term 1</dt>
   <dt>Term 2</dt>
   <dd>
-  <p>Definition 1 paragraph 1 line 1 ...
-  Definition 1 paragraph 1 line 2 (lazy)</p>
+    <p>Definition 1 paragraph 1 line 1 ...
+    Definition 1 paragraph 1 line 2 (lazy)</p>
   </dd>
 </dl>
 .
@@ -1328,46 +1328,46 @@ Term 4
   <dt>Term 1</dt>
   <dt>Term 2</dt>
   <dd>
-  <p>Definition 1 paragraph 1 line 1 ...
-  Definition 1 paragraph 1 line 2 (lazy)</p>
-  <p>Definition 1 paragraph 2 line 1 ...
-  Definition 1 paragraph 2 line 2</p>
+    <p>Definition 1 paragraph 1 line 1 ...
+    Definition 1 paragraph 1 line 2 (lazy)</p>
+    <p>Definition 1 paragraph 2 line 1 ...
+    Definition 1 paragraph 2 line 2</p>
   </dd>
   <dd>
-  <p>Definition 2 paragraph 1 line 1 ...
-  Definition 2 paragraph 1 line 2 (lazy)</p>
+    <p>Definition 2 paragraph 1 line 1 ...
+    Definition 2 paragraph 1 line 2 (lazy)</p>
   </dd>
   <dt>Term 3</dt>
   <dd>
-  <p>Definition 3 (no paragraph)</p>
+    <p>Definition 3 (no paragraph)</p>
   </dd>
   <dd>
-  <p>Definition 4 (no paragraph)</p>
+    <p>Definition 4 (no paragraph)</p>
   </dd>
   <dd>
-  <p>Definition 5 line 1 ...
-  Definition 5 line 2 (no paragraph)</p>
+    <p>Definition 5 line 1 ...
+    Definition 5 line 2 (no paragraph)</p>
   </dd>
   <dd>
-  <p>Definition 6 paragraph 1 line 1 ...
-  Definition 6 paragraph 1 line 2</p>
+    <p>Definition 6 paragraph 1 line 1 ...
+    Definition 6 paragraph 1 line 2</p>
   </dd>
   <dd>
-  <p>Definition 7 (no paragraph)</p>
+    <p>Definition 7 (no paragraph)</p>
   </dd>
   <dd>
-  <p>Definition 8 paragraph 1 line 1 (forced paragraph) ...
-  Definition 8 paragraph 1 line 2</p>
-  <p>Definition 8 paragraph 2 line 1</p>
+    <p>Definition 8 paragraph 1 line 1 (forced paragraph) ...
+    Definition 8 paragraph 1 line 2</p>
+    <p>Definition 8 paragraph 2 line 1</p>
   </dd>
   <dt>Term 4</dt>
   <dd>
-  <p>Definition 9 paragraph 1 line 1 (forced paragraph) ...
-  Definition 9 paragraph 1 line 2</p>
-  <p>Definition 9 paragraph 2 line 1</p>
+    <p>Definition 9 paragraph 1 line 1 (forced paragraph) ...
+    Definition 9 paragraph 1 line 2</p>
+    <p>Definition 9 paragraph 2 line 1</p>
   </dd>
   <dd>
-  <p>Definition 10 (no paragraph)</p>
+    <p>Definition 10 (no paragraph)</p>
   </dd>
 </dl>
 .
@@ -1483,14 +1483,34 @@ Term 4
 :   Definition 10 (no paragraph)
 .
 <dl>
-<dt>Term 1</dt><dt>Term 2</dt><dd><p>Definition 1 paragraph 1 line 1 ...
+<dt>Term 1</dt><dt>Term 2</dt><dd>
+<p>Definition 1 paragraph 1 line 1 ...
 Definition 1 paragraph 1 line 2 (lazy)</p><p>Definition 1 paragraph 2 line 1 ...
-Definition 1 paragraph 2 line 2</p></dd><dd><p>Definition 2 paragraph 1 line 1 ...
-Definition 2 paragraph 1 line 2 (lazy)</p></dd><dt>Term 3</dt><dd><p>Definition 3 (no paragraph)</p></dd><dd><p>Definition 4 (no paragraph)</p></dd><dd><p>Definition 5 line 1 ...
-Definition 5 line 2 (no paragraph)</p></dd><dd><p>Definition 6 paragraph 1 line 1 ...
-Definition 6 paragraph 1 line 2</p></dd><dd><p>Definition 7 (no paragraph)</p></dd><dd><p>Definition 8 paragraph 1 line 1 (forced paragraph) ...
-Definition 8 paragraph 1 line 2</p><p>Definition 8 paragraph 2 line 1</p></dd><dt>Term 4</dt><dd><p>Definition 9 paragraph 1 line 1 (forced paragraph) ...
-Definition 9 paragraph 1 line 2</p><p>Definition 9 paragraph 2 line 1</p></dd><dd><p>Definition 10 (no paragraph)</p></dd>
+Definition 1 paragraph 2 line 2</p>
+</dd><dd>
+<p>Definition 2 paragraph 1 line 1 ...
+Definition 2 paragraph 1 line 2 (lazy)</p>
+</dd><dt>Term 3</dt><dd>
+<p>Definition 3 (no paragraph)</p>
+</dd><dd>
+<p>Definition 4 (no paragraph)</p>
+</dd><dd>
+<p>Definition 5 line 1 ...
+Definition 5 line 2 (no paragraph)</p>
+</dd><dd>
+<p>Definition 6 paragraph 1 line 1 ...
+Definition 6 paragraph 1 line 2</p>
+</dd><dd>
+<p>Definition 7 (no paragraph)</p>
+</dd><dd>
+<p>Definition 8 paragraph 1 line 1 (forced paragraph) ...
+Definition 8 paragraph 1 line 2</p><p>Definition 8 paragraph 2 line 1</p>
+</dd><dt>Term 4</dt><dd>
+<p>Definition 9 paragraph 1 line 1 (forced paragraph) ...
+Definition 9 paragraph 1 line 2</p><p>Definition 9 paragraph 2 line 1</p>
+</dd><dd>
+<p>Definition 10 (no paragraph)</p>
+</dd>
 </dl>
 .
 Document[0, 815]
