@@ -45,6 +45,15 @@ public class Attributes {
         return replaceValue(attribute.getName(), attribute.getValue());
     }
 
+    /**
+     * Attribute dependent value replacement
+     * class and style append new values to existing ones
+     * others set it to the new value
+     *
+     * @param key attribute name
+     * @param value new value
+     * @return new attribute
+     */
     public Attribute replaceValue(CharSequence key, CharSequence value) {
         String useKey = key instanceof String ? (String) key : String.valueOf(key);
         Attribute attribute;
@@ -125,7 +134,7 @@ public class Attributes {
     }
 
     @SuppressWarnings("unchecked")
-    public Set<BasedSequence> keySet() {
+    public Set<String> keySet() {
         return myAttributes != null ? myAttributes.keySet() : Collections.EMPTY_SET;
     }
 
@@ -166,5 +175,20 @@ public class Attributes {
         } else {
             myAttributes.putAll(attributes.myAttributes);
         }
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        String sep = "";
+        for (String attrName : keySet()) {
+            sb.append(sep).append(attrName);
+            Attribute attribute = myAttributes.get(attrName);
+            if (!attribute.getValue().isEmpty()) sb.append("=").append("\"").append(attribute.getValue().replace("\"", "\\\"")).append("\"");
+            sep = " ";
+        }
+        return "Attributes{" +
+                "myAttributes=" + sb.toString() +
+                '}';
     }
 }

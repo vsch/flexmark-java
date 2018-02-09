@@ -22,6 +22,8 @@ public class DocxRendererOptions {
     public final String localHyperlinkMissingHighlight;
     public final String localHyperlinkMissingFormat;
     public final boolean errorsToStdErr;
+    public final double docEmojiImageVertOffset;
+    public final double docEmojiImageVertSize;
     public final String errorSourceFile;
 
     public final String DEFAULT_STYLE;
@@ -35,10 +37,10 @@ public class DocxRendererOptions {
     public final String TABLE_CONTENTS;
     public final String TABLE_HEADING;
     public final String FOOTNOTE_STYLE;
-    public final String BULLET_LIST_STYLE;
-    public final String BLOCK_QUOTE_BULLET_LIST_STYLE;
-    public final String NUMBERED_LIST_STYLE;
-    public final String BLOCK_QUOTE_NUMBERED_LIST_STYLE;
+    //public final String BULLET_LIST_STYLE;
+    //public final String BLOCK_QUOTE_BULLET_LIST_STYLE;
+    //public final String NUMBERED_LIST_STYLE;
+    //public final String BLOCK_QUOTE_NUMBERED_LIST_STYLE;
     public final String BOLD_STYLE;
     public final String ITALIC_STYLE;
     public final String STRIKE_THROUGH_STYLE;
@@ -70,6 +72,8 @@ public class DocxRendererOptions {
         localHyperlinkMissingHighlight = DocxRenderer.LOCAL_HYPERLINK_MISSING_HIGHLIGHT.getFrom(options);
         localHyperlinkMissingFormat = DocxRenderer.LOCAL_HYPERLINK_MISSING_FORMAT.getFrom(options);
         errorsToStdErr = DocxRenderer.ERRORS_TO_STDERR.getFrom(options);
+        docEmojiImageVertOffset = DocxRenderer.DOC_EMOJI_IMAGE_VERT_OFFSET.getFrom(options);
+        docEmojiImageVertSize = DocxRenderer.DOC_EMOJI_IMAGE_VERT_SIZE.getFrom(options);
         errorSourceFile = DocxRenderer.ERROR_SOURCE_FILE.getFrom(options);
 
         DEFAULT_STYLE = DocxRenderer.DEFAULT_STYLE.getFrom(options);
@@ -83,10 +87,10 @@ public class DocxRendererOptions {
         TABLE_CONTENTS = DocxRenderer.TABLE_CONTENTS.getFrom(options);
         TABLE_HEADING = DocxRenderer.TABLE_HEADING.getFrom(options);
         FOOTNOTE_STYLE = DocxRenderer.FOOTNOTE_STYLE.getFrom(options);
-        BULLET_LIST_STYLE = DocxRenderer.BULLET_LIST_STYLE.getFrom(options);
-        BLOCK_QUOTE_BULLET_LIST_STYLE = DocxRenderer.BLOCK_QUOTE_BULLET_LIST_STYLE.getFrom(options);
-        NUMBERED_LIST_STYLE = DocxRenderer.NUMBERED_LIST_STYLE.getFrom(options);
-        BLOCK_QUOTE_NUMBERED_LIST_STYLE = DocxRenderer.BLOCK_QUOTE_NUMBERED_LIST_STYLE.getFrom(options);
+        //BULLET_LIST_STYLE = DocxRenderer.BULLET_LIST_STYLE.getFrom(options);
+        //BLOCK_QUOTE_BULLET_LIST_STYLE = DocxRenderer.BLOCK_QUOTE_BULLET_LIST_STYLE.getFrom(options);
+        //NUMBERED_LIST_STYLE = DocxRenderer.NUMBERED_LIST_STYLE.getFrom(options);
+        //BLOCK_QUOTE_NUMBERED_LIST_STYLE = DocxRenderer.BLOCK_QUOTE_NUMBERED_LIST_STYLE.getFrom(options);
         BOLD_STYLE = DocxRenderer.BOLD_STYLE.getFrom(options);
         ITALIC_STYLE = DocxRenderer.ITALIC_STYLE.getFrom(options);
         STRIKE_THROUGH_STYLE = DocxRenderer.STRIKE_THROUGH_STYLE.getFrom(options);

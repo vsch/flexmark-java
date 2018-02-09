@@ -8,16 +8,12 @@ import java.util.Map;
 public class ScopedDataSet extends DataSet {
     protected final DataHolder parent;
 
-    public ScopedDataSet() {
-        this.parent = null;
+    public ScopedDataSet(DataHolder parent) {
+        super();
+        this.parent = parent;
     }
 
-    public ScopedDataSet(DataHolder other) {
-        super(other);
-        this.parent = null;
-    }
-
-    public ScopedDataSet(DataHolder other, DataHolder parent) {
+    public ScopedDataSet(DataHolder parent, DataHolder other) {
         super(other);
         this.parent = parent;
     }

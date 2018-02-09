@@ -19,11 +19,13 @@ import com.vladsch.flexmark.ext.toc.SimTocExtension;
 import com.vladsch.flexmark.ext.toc.TocExtension;
 import com.vladsch.flexmark.ext.wikilink.WikiLinkExtension;
 import com.vladsch.flexmark.html.HtmlRenderer;
+import com.vladsch.flexmark.html.renderer.AttributablePart;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.spec.SpecReader;
 import com.vladsch.flexmark.superscript.SuperscriptExtension;
 import com.vladsch.flexmark.test.ComboSpecTestCase;
+import com.vladsch.flexmark.util.html.Attributes;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.MutableDataSet;
 import org.apache.log4j.Logger;
@@ -260,6 +262,16 @@ public class ComboDocxConverterSpecTest extends ComboSpecTestCase {
         if (myPackage == null) return;
 
         myDocxContext = new DocxContextImpl<Node>(myPackage, null) {
+            @Override
+            public Attributes extendRenderingNodeAttributes(final AttributablePart part, final Attributes attributes) {
+                return null;
+            }
+
+            @Override
+            public Attributes extendRenderingNodeAttributes(final Node node, final AttributablePart part, final Attributes attributes) {
+                return null;
+            }
+
             @Override
             public String getNodeId(final Node node) {
                 return null;

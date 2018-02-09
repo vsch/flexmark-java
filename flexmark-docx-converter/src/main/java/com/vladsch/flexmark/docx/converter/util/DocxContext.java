@@ -2,6 +2,8 @@ package com.vladsch.flexmark.docx.converter.util;
 
 import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.docx.converter.internal.DocxRendererOptions;
+import com.vladsch.flexmark.html.renderer.AttributablePart;
+import com.vladsch.flexmark.util.html.Attributes;
 import org.docx4j.openpackaging.exceptions.Docx4JException;
 import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
 import org.docx4j.openpackaging.parts.Part;
@@ -42,6 +44,25 @@ public interface DocxContext<T> extends DocxContextFrameProvider<T> {
      * @return the Wordprocessing package
      */
     WordprocessingMLPackage getPackage();
+
+    /**
+     * Extend the attributes by extensions for the node being currently rendered.
+     *
+     * @param part       the tag of the node being rendered, some nodes render multiple tags with attributes
+     * @param attributes the attributes that were calculated by the renderer or null, these may be modified. To preserve originals pass a copy.
+     * @return the extended attributes with added/updated/removed entries
+     */
+    Attributes extendRenderingNodeAttributes(AttributablePart part, Attributes attributes);
+
+    /**
+     * Extend the attributes by extensions for the node being currently rendered.
+     *
+     * @param node       node for which to get attributes
+     * @param part       the tag of the node being rendered, some nodes render multiple tags with attributes
+     * @param attributes the attributes that were calculated by the renderer or null, these may be modified. To preserve originals pass a copy.
+     * @return the extended attributes with added/updated/removed entries
+     */
+    Attributes extendRenderingNodeAttributes(Node node, AttributablePart part, Attributes attributes);
 
     /**
      * @return the main document

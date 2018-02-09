@@ -41,6 +41,13 @@ public class AttributesInlineParserExtension implements InlineParserExtension {
                 AttributesNode attributes = new AttributesNode(attributesOpen.subSequence(0, 1), attributesText, attributesOpen.endSequence(1));
                 attributes.setCharsFromContent();
 
+                int leadingSpaces = attributesText.countLeading(" \t");
+                // give it to the text node
+                if (leadingSpaces > 0) {
+                    inlineParser.appendText(attributesText,0,leadingSpaces);
+                    attributesText = attributesText.subSequence(leadingSpaces);
+                }
+
                 inlineParser.flushTextNode();
                 inlineParser.getBlock().appendChild(attributes);
 

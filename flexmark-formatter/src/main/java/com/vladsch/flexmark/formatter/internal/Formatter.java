@@ -9,7 +9,6 @@ import com.vladsch.flexmark.html.LinkResolverFactory;
 import com.vladsch.flexmark.html.renderer.HeaderIdGeneratorFactory;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.ParserEmulationProfile;
-import com.vladsch.flexmark.util.collection.DataValueFactory;
 import com.vladsch.flexmark.util.collection.DynamicDefaultKey;
 import com.vladsch.flexmark.util.collection.NodeCollectingVisitor;
 import com.vladsch.flexmark.util.collection.SubClassingBag;
@@ -323,7 +322,7 @@ public class Formatter implements IRender {
 
         MainNodeFormatter(DataHolder options, MarkdownWriter out, Document document) {
             super(out);
-            this.options = new ScopedDataSet(options, document);
+            this.options = new ScopedDataSet(document, options);
             this.document = document;
             this.renderers = new HashMap<Class<?>, NodeFormattingHandler>(32);
             this.renderingPhases = new HashSet<FormattingPhase>(FormattingPhase.values().length);

@@ -20,6 +20,16 @@ public interface NodeRendererContext extends LinkResolverContext {
     Attributes extendRenderingNodeAttributes(AttributablePart part, Attributes attributes);
 
     /**
+     * Extend the attributes by extensions for the node being currently rendered.
+     *
+     * @param node       node for which to get attributes
+     * @param part       the tag of the node being rendered, some nodes render multiple tags with attributes
+     * @param attributes the attributes that were calculated by the renderer or null, these may be modified. To preserve originals pass a copy.
+     * @return the extended attributes with added/updated/removed entries
+     */
+    Attributes extendRenderingNodeAttributes(Node node, AttributablePart part, Attributes attributes);
+
+    /**
      * @return the HTML writer to use
      */
     HtmlWriter getHtmlWriter();

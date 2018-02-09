@@ -7,7 +7,7 @@ flexmark-java
 
 - [To Do](#to-do)
     - [Docx Converter](#docx-converter)
-- [0.30.2](#0302)
+- [0.32.0](#0320)
 - [0.30.0](#0300)
 - [0.28.38](#02838)
 - [0.28.36](#02836)
@@ -228,10 +228,12 @@ flexmark-java
     <p><a href="video.mp4" target="_blank" rel="noopener noreferrer" title="Download 'Sample Video'">Sample Video</a></p>
     </div>
     ```
+
   * [ ] Multiline Block quote delimiters `>>>`
   * [ ] Deleted text markers `{- -}` or `[- -]`
   * [ ] Inserted text markers `{+ +}` or `[+ +]`
-  * [ ] Header ids with emoji shortcuts generate an extra `-` because of two spaces around the emoji shortcut while GitLab only generates a single `-`.
+  * [ ] Header ids with emoji shortcuts generate an extra `-` because of two spaces around the
+        emoji shortcut while GitLab only generates a single `-`.
   * [ ] Math, inline via ```$``$``` or as fenced code with `math` info string requiring
         inclusion of Katex in the rendered HTML page.
   * [ ] Graphing via Mermaid as fenced code with `mermaid` info string, via Mermaid inclusion
@@ -239,10 +241,63 @@ flexmark-java
 
 &nbsp;</details>
 
-0.30.2
+0.32.0
 ------
 
-* [ ] Add: Emoji option to convert shortcuts to unicode emoji characters.
+* Fix: HTML Parser:
+  * image alt text should escape markdown special characters which can affect parsing of image
+    link text like: `[]`
+  * convert `<pre><tt>` to indented code
+  * add attribute extraction
+    * id : if `FlexmarkHtmlParser.OUTPUT_ATTRIBUTES_ID` is `true`, default `true`
+    * `FlexmarkHtmlParser.OUTPUT_ATTRIBUTES_NAMES_REGEX` default `""`, if not empty then will
+      output attributes extension syntax for attribute names that are matched by the regex.
+  * did not output a line end at start of `<div>`, this tended to splice text in div to previous
+    element.
+
+* Add: `AttributesExtension.ASSIGN_TEXT_ATTRIBUTES`, default `false`. When `true` attribute
+  assignment rules to nodes are changed to allow text elements to get attributes. If an
+  attribute element is spaced from the previous plain text element `some text {attributes}` then
+  attributes are for the parent of the text. If they are attached to the text element `some
+  text{attributes}` then they are assigned to the immediately preceding plain text span. Within
+  an inline element same rules apply: `**bold text {attr}**` are for the strong emphasis span,
+  while `**bold text{attr}**` will wrap the text between the strong emphasis tags, in a span
+  with given attributes.
+
+  If a plain text span is interrupted by an HTML comment then it is considered as two separate
+  plain text spans. ie. `some <!---->text{attr}` will result in `some <!----><span
+  attr>text</span>` rendering.
+
+* **API Change**: removed `EmojiCheatSheet` class to replace with `EmojiShortcuts` which has better
+  referencing for GitHub shortcuts and unicode chars for all emojis from
+  [emoji-cross-reference](https://github.com/vsch/emoji-cross-reference)
+
+  * Removed: `EmojiExtension.USE_IMAGE_URL`
+  * Add: `EmojiExtension.USE_SHORTCUT_TYPE`, default `EmojiShortcutType.EMOJI_CHEAT_SHEET`,
+    select type of shortcuts:
+    * `EmojiShortcutType.EMOJI_CHEAT_SHEET`
+    * `EmojiShortcutType.GITHUB`
+    * `EmojiShortcutType.ANY_EMOJI_CHEAT_SHEET_PREFERRED` use any shortcut from any source. If
+      image type options is not `UNICODE_ONLY`, will generate links to Emoji Cheat Sheet files
+      or GitHub URL, with preference given to Emoji Cheat Sheet files.
+    * `EmojiShortcutType.ANY_GITHUB_PREFERRED` - use any shortcut from any source. If image type
+      options is not `UNICODE_ONLY`, will generate links to Emoji Cheat Sheet files or GitHub
+      URL, with preference given to GitHub URL.
+  * Add: `EmojiExtension.USE_IMAGE_TYPE`, default `EmojiImageType.IMAGE_ONLY`, to select what
+    type of images are allowed.
+    * `EmojiImageType.IMAGE_ONLY`, only use image link
+    * `EmojiImageType.UNICODE_ONLY` convert to unicode and if there is no unicode treat as
+      invalid emoji shortcut
+    * `EmojiImageType.UNICODE_FALLBACK_TO_IMAGE` convert to unicode and if no unicode use image.
+
+* Add: Emoji Extension support to DocxRenderer. 
+  * Add: Emoji Cheat Sheet images to resources in DocxRender jar, default configuration will
+    resolve emoji image files to the files in the jar. 
+  * Add: `DocxRenderer.DOC_EMOJI_IMAGE_VERT_OFFSET`, default `-0.1`, vertical offset of emoji
+    image as a factor of line height at point of insertion. The final value is rounded to nearest
+    pt so jumps of 1 pt for small changes of this value can occur.
+  * Add: `DocxRenderer.DOC_EMOJI_IMAGE_VERT_SIZE`, default `1.05`, size of emoji image as a factor
+    of line height at point of insertion.
 
 0.30.0
 ------
@@ -250,13 +305,13 @@ flexmark-java
 * Fix: #198, StringIndexOutOfBoundsException, in `AbbreviationExtension` if abbreviation
   definition had an empty abbreviation.
 
-* API Change: Refactoring of Interfaces to allow extensions only providing link resolver, attribute
-  provider and html id generator to be re-used by the `DocxRenderer` and `HtmlRenderer` without
-  modifications other than changing the `implemented` extension from
+* API Change: Refactoring of Interfaces to allow extensions only providing link resolver,
+  attribute provider and html id generator to be re-used by the `DocxRenderer` and
+  `HtmlRenderer` without modifications other than changing the `implemented` extension from
   `HtmlRenderer.HtmlRendererExtension` to `RendererExtension`
 
-  * `AttributesProviderFactory` pass only `LinkResolverContext` instead
-    of `NodeRenderingContext` to allow for attribute provider extensions to be re-used with
+  * `AttributesProviderFactory` pass only `LinkResolverContext` instead of
+    `NodeRenderingContext` to allow for attribute provider extensions to be re-used with
     `DocxRender`
   * `HeadIdGenerator` pass only `LinkResolverContext` instead of `NodeRenderingContext` to allow
     for header id generator provider extensions to be re-used with `DocxRender`
@@ -264,7 +319,8 @@ flexmark-java
     attribute provider. Such an extension can be used as is with `HtmlRenderer` and
     `DocxRenderer`
 
-    `RendererExtension.extend(RendererBuilder, String)` method of these gets passed `RendererBuilder` instead of `HtmlRenderer.Builder`
+    `RendererExtension.extend(RendererBuilder, String)` method of these gets passed
+    `RendererBuilder` instead of `HtmlRenderer.Builder`
 
     extensions that implement both `RendererExtension` and `HtmlRendererExtension` will have
     only have the html renderer extension `extend` method called.
@@ -278,11 +334,11 @@ flexmark-java
   the 8 named colors used by Word or it might complain.
 
 * Add: `DocxRenderer.LOCAL_HYPERLINK_MISSING_FORMAT`, default `"Missing target id: #%s"` to
-  change the tooltip text of the missing hyperlink. `%s` will be replaced with the reference id of
-  the link.
+  change the tooltip text of the missing hyperlink. `%s` will be replaced with the reference id
+  of the link.
 
-* Fix: DocxConverter self referencing ref anchors should be converted to bookmark references in the
-      docx
+* Fix: DocxConverter self referencing ref anchors should be converted to bookmark references in
+  the docx
 
 * Add: DocxConverter now supports `AttributesExtension` and `EnumeratedReferenceExtension` by
   converting id attributes to bookmarks and enumerated reference links to hyperlinks to
@@ -293,7 +349,8 @@ flexmark-java
 
 * Add: Enumerated links now have title set to the text value of the reference.
 
-* Add: DocxConverter options to control heading id generation to resolve anchor refs to document anchors
+* Add: DocxConverter options to control heading id generation to resolve anchor refs to document
+  anchors
   * `DocxRenderer.HTML_ID_GENERATOR`, default `HtmlIdGenerator instance`, the id generator to
     use for generating heading ids.
 
@@ -306,11 +363,14 @@ flexmark-java
     first heading of the document and any hyperlinks to it.
  -->
 
-  For convenience these `HtmlRenderer` keys are aliased through `DocxRenderer`, keep in mind
-  that setting either will affect both keys. For information on these keys see [`HtmlRenderer` options](https://github.com/vsch/flexmark-java/wiki/Extensions#renderer)
-  * `DocxRenderer.HEADER_ID_GENERATOR_RESOLVE_DUPES`, default `true`,
-  * `DocxRenderer.HEADER_ID_GENERATOR_TO_DASH_CHARS`, default `" -_"`
-  * `DocxRenderer.HEADER_ID_GENERATOR_NO_DUPED_DASHES`, default `false`
+For convenience these `HtmlRenderer` keys are aliased through `DocxRenderer`, keep in mind that
+setting either will affect both keys. For information on these keys see
+[`HtmlRenderer` options](https://github.com/vsch/flexmark-java/wiki/Extensions#renderer)
+* `DocxRenderer.HEADER_ID_GENERATOR_RESOLVE_DUPES`, default `true`,
+
+* `DocxRenderer.HEADER_ID_GENERATOR_TO_DASH_CHARS`, default `" -_"`
+
+* `DocxRenderer.HEADER_ID_GENERATOR_NO_DUPED_DASHES`, default `false`
 
 * Add: DocxConverter options to re-map standard style names to user defined ones.
   * `DocxRenderer.DEFAULT_STYLE`, default "Normal"
@@ -324,21 +384,21 @@ flexmark-java
   * `DocxRenderer.TABLE_CONTENTS`, default "TableContents"
   * `DocxRenderer.TABLE_HEADING`, default "TableHeading"
   * `DocxRenderer.FOOTNOTE_STYLE`, default "Footnote"
+
 <!--
   * `DocxRenderer.BULLET_LIST_STYLE`, default "BulletList"
   * `DocxRenderer.BLOCK_QUOTE_BULLET_LIST_STYLE`, default "QuotationsBulletList"
   * `DocxRenderer.NUMBERED_LIST_STYLE`, default "NumberedList"
   * `DocxRenderer.BLOCK_QUOTE_NUMBERED_LIST_STYLE`, default "QuotationsNumberedList"
  -->
-  * `DocxRenderer.BOLD_STYLE`, default "StrongEmphasis"
-  * `DocxRenderer.ITALIC_STYLE`, default "Emphasis"
-  * `DocxRenderer.STRIKE_THROUGH_STYLE`, default "Strikethrough"
-  * `DocxRenderer.SUBSCRIPT_STYLE`, default "Subscript"
-  * `DocxRenderer.SUPERSCRIPT_STYLE`, default "Superscript"
-  * `DocxRenderer.INS_STYLE`, default "Underlined"
-  * `DocxRenderer.INLINE_CODE_STYLE`, default "SourceText"
-  * `DocxRenderer.HYPERLINK_STYLE`, default "Hyperlink"
-
+* `DocxRenderer.BOLD_STYLE`, default "StrongEmphasis"
+* `DocxRenderer.ITALIC_STYLE`, default "Emphasis"
+* `DocxRenderer.STRIKE_THROUGH_STYLE`, default "Strikethrough"
+* `DocxRenderer.SUBSCRIPT_STYLE`, default "Subscript"
+* `DocxRenderer.SUPERSCRIPT_STYLE`, default "Superscript"
+* `DocxRenderer.INS_STYLE`, default "Underlined"
+* `DocxRenderer.INLINE_CODE_STYLE`, default "SourceText"
+* `DocxRenderer.HYPERLINK_STYLE`, default "Hyperlink"
 
 0.28.38
 -------
@@ -359,7 +419,7 @@ flexmark-java
 
 * Fix: core node renderer renderLineBreak could cause NPE
 
-* Fix: #193, Support `<math>` tag as  a block-forming tag
+* Fix: #193, Support `<math>` tag as a block-forming tag
 
 * Add: `Parser.HTML_BLOCK_TAGS` to define the HTML tags treated as HTML block elements, defaults
   are: `address`, `article`, `aside`, `base`, `basefont`, `blockquote`, `body`, `caption`,
@@ -444,10 +504,9 @@ flexmark-java
 -------
 
 * Fix: #180, Formatter vs HtmlRenderer
-  * Formatter ignored `Parser.LISTS_CODE_INDENT` and
-    `Parser.LISTS_ITEM_INDENT` settings when rendering markdown from AST and used default of 4
-    spaces for code indent and 4 spaces for list item indent if parser family for formatter was
-    `FIXED_INDENT`.
+  * Formatter ignored `Parser.LISTS_CODE_INDENT` and `Parser.LISTS_ITEM_INDENT` settings when
+    rendering markdown from AST and used default of 4 spaces for code indent and 4 spaces for
+    list item indent if parser family for formatter was `FIXED_INDENT`.
   * Formatter did not force a blank line before a non-item paragraph, assuming it was already
     there
 
@@ -457,7 +516,7 @@ flexmark-java
 * Fix: #178, `AutolinkExtension` does not add `http://` to simple urls starting with `www.`
 
 * Fix: #176, docx converter creates a single long bullet list instead of starting a new list
-      when top level list items are interrupted.
+  when top level list items are interrupted.
 
 0.28.12
 -------
@@ -501,7 +560,7 @@ flexmark-java
   only parent's left indent is added to child's left indent.
 
 * Implement DOCX conversion for missing elements:
-    * Footnotes
+  * Footnotes
 
 0.28.2
 ------
@@ -527,9 +586,9 @@ flexmark-java
   When true then a delimiter occurrence is not an opener or closer will be skipped.
 
 * Fix: #168, Text with colons is incorrectly interpreted as an invalid emoji shortcut. Now
-      invalid emoji shortcuts only allow characters which can make up a valid shortcut:
-      `[a-z0-9_+-]` and if the `:` is not preceded or followed by a digit. The latter eliminates
-      time strings as erroneously interpreted as an invalid emoji shortcut.
+  invalid emoji shortcuts only allow characters which can make up a valid shortcut:
+  `[a-z0-9_+-]` and if the `:` is not preceded or followed by a digit. The latter eliminates
+  time strings as erroneously interpreted as an invalid emoji shortcut.
 
 * Fix: #163, BasedSequenceImpl.prefix seems broken. Unable to handle zero length string as
   other. Add tests for this function

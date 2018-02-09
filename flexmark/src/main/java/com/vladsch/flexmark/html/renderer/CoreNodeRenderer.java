@@ -11,6 +11,7 @@ import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.parser.ListOptions;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.html.Attribute;
+import com.vladsch.flexmark.util.html.Attributes;
 import com.vladsch.flexmark.util.html.Escaping;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
@@ -859,8 +860,10 @@ public class CoreNodeRenderer implements NodeRenderer {
             }
         }
 
+        Reference reference = null;
+
         if (node.isDefined()) {
-            Reference reference = node.getReferenceNode(referenceRepository);
+            reference = node.getReferenceNode(referenceRepository);
             String url = reference.getUrl().unescape();
 
             resolvedLink = context.resolveLink(LinkType.IMAGE, url, null, null);
@@ -884,10 +887,17 @@ public class CoreNodeRenderer implements NodeRenderer {
         } else {
             if (!context.isDoNotRenderLinks()) {
                 String altText = new TextCollectingVisitor().collectAndGetText(node);
+                Attributes attributes = resolvedLink.getNonNullAttributes();
 
                 html.attr("src", resolvedLink.getUrl());
                 html.attr("alt", altText);
-                html.attr(resolvedLink.getAttributes());
+
+                // need to take attributes for reference definition, then overlay them with ours
+                if (reference != null) {
+                    attributes = context.extendRenderingNodeAttributes(reference, AttributablePart.NODE, attributes);
+                }
+
+                html.attr(attributes);
                 html.srcPos(node.getChars()).withAttr(resolvedLink).tagVoid("img");
             }
         }
@@ -902,8 +912,9 @@ public class CoreNodeRenderer implements NodeRenderer {
             }
         }
 
+        Reference reference = null;
         if (node.isDefined()) {
-            Reference reference = node.getReferenceNode(referenceRepository);
+            reference = node.getReferenceNode(referenceRepository);
             String url = reference.getUrl().unescape();
 
             resolvedLink = context.resolveLink(LinkType.LINK, url, null, null);
@@ -935,8 +946,15 @@ public class CoreNodeRenderer implements NodeRenderer {
             if (context.isDoNotRenderLinks()) {
                 context.renderChildren(node);
             } else {
+                Attributes attributes = resolvedLink.getNonNullAttributes();
+
                 html.attr("href", resolvedLink.getUrl());
-                html.attr(resolvedLink.getAttributes());
+
+                if (reference != null) {
+                    attributes = context.extendRenderingNodeAttributes(reference, AttributablePart.NODE, attributes);
+                }
+
+                html.attr(attributes);
                 html.srcPos(node.getChars()).withAttr(resolvedLink).tag("a");
                 renderChildrenSourceLineWrapped(node, node.getText(), context, html);
                 html.tag("/a");

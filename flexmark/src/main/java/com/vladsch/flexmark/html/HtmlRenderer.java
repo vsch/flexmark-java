@@ -500,7 +500,7 @@ public class HtmlRenderer implements IRender {
 
         MainNodeRenderer(DataHolder options, HtmlWriter htmlWriter, Document document) {
             super(htmlWriter);
-            this.options = new ScopedDataSet(options, document);
+            this.options = new ScopedDataSet(document, options);
             this.document = document;
             this.renderers = new HashMap<Class<?>, NodeRenderingHandlerWrapper>(32);
             this.renderingPhases = new HashSet<RenderingPhase>(RenderingPhase.values().length);
@@ -630,6 +630,15 @@ public class HtmlRenderer implements IRender {
             Attributes attr = attributes != null ? attributes : new Attributes();
             for (AttributeProvider attributeProvider : attributeProviders) {
                 attributeProvider.setAttributes(this.renderingNode, part, attr);
+            }
+            return attr;
+        }
+
+        @Override
+        public Attributes extendRenderingNodeAttributes(Node node, AttributablePart part, Attributes attributes) {
+            Attributes attr = attributes != null ? attributes : new Attributes();
+            for (AttributeProvider attributeProvider : attributeProviders) {
+                attributeProvider.setAttributes(node, part, attr);
             }
             return attr;
         }
@@ -789,6 +798,15 @@ public class HtmlRenderer implements IRender {
             @Override
             public Attributes extendRenderingNodeAttributes(AttributablePart part, Attributes attributes) {
                 return myMainNodeRenderer.extendRenderingNodeAttributes(
+                        part,
+                        attributes
+                );
+            }
+
+            @Override
+            public Attributes extendRenderingNodeAttributes(Node node, AttributablePart part, Attributes attributes) {
+                return myMainNodeRenderer.extendRenderingNodeAttributes(
+                        node,
                         part,
                         attributes
                 );

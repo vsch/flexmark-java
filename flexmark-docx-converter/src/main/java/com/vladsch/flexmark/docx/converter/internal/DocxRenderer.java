@@ -8,12 +8,11 @@ import com.vladsch.flexmark.docx.converter.NodeDocxRenderer;
 import com.vladsch.flexmark.docx.converter.NodeDocxRendererFactory;
 import com.vladsch.flexmark.docx.converter.PhasedNodeDocxRenderer;
 import com.vladsch.flexmark.docx.converter.util.*;
+import com.vladsch.flexmark.ext.emoji.EmojiExtension;
 import com.vladsch.flexmark.html.*;
 import com.vladsch.flexmark.html.renderer.*;
 import com.vladsch.flexmark.parser.Parser;
-import com.vladsch.flexmark.util.collection.NodeCollectingVisitor;
-import com.vladsch.flexmark.util.collection.SubClassingBag;
-import com.vladsch.flexmark.util.collection.TwoWayHashMap;
+import com.vladsch.flexmark.util.collection.*;
 import com.vladsch.flexmark.util.dependency.FlatDependencyHandler;
 import com.vladsch.flexmark.util.html.Attributes;
 import com.vladsch.flexmark.util.html.Escaping;
@@ -71,6 +70,8 @@ public class DocxRenderer implements IRender {
     public static final DataKey<String> CODE_HIGHLIGHT_SHADING = new DataKey<String>("CODE_HIGHLIGHT_SHADING", "");
     public static final DataKey<Boolean> ERRORS_TO_STDERR = new DataKey<Boolean>("ERRORS_TO_STDERR", false);
     public static final DataKey<String> ERROR_SOURCE_FILE = new DataKey<String>("ERROR_SOURCE_FILE", "");
+    public static final DataKey<Double> DOC_EMOJI_IMAGE_VERT_OFFSET = new DataKey<Double>("DOC_EMOJI_IMAGE_VERT_OFFSET", -0.10);  // offset emoji images down by 10% of the line height, final value rounded to nearest pt so can create jumps in position
+    public static final DataKey<Double> DOC_EMOJI_IMAGE_VERT_SIZE = new DataKey<Double>("DOC_EMOJI_IMAGE_VERT_SIZE", 1.05);  // size of image as factor of line height range >0
 
     // for compatibility with HtmlIdGenerator these are placed here
     public static final DataKey<Boolean> HEADER_ID_GENERATOR_RESOLVE_DUPES = HtmlRenderer.HEADER_ID_GENERATOR_RESOLVE_DUPES;
@@ -93,10 +94,6 @@ public class DocxRenderer implements IRender {
     public static final DataKey<String> TABLE_CONTENTS = new DataKey<String>("TABLE_CONTENTS", "TableContents");
     public static final DataKey<String> TABLE_HEADING = new DataKey<String>("TABLE_HEADING", "TableHeading");
     public static final DataKey<String> FOOTNOTE_STYLE = new DataKey<String>("FOOTNOTE_STYLE", "Footnote");
-    public static final DataKey<String> BULLET_LIST_STYLE = new DataKey<String>("BULLET_LIST_STYLE", "BulletList");
-    public static final DataKey<String> BLOCK_QUOTE_BULLET_LIST_STYLE = new DataKey<String>("BLOCK_QUOTE_BULLET_LIST_STYLE", "QuotationsBulletList");
-    public static final DataKey<String> NUMBERED_LIST_STYLE = new DataKey<String>("NUMBERED_LIST_STYLE", "NumberedList");
-    public static final DataKey<String> BLOCK_QUOTE_NUMBERED_LIST_STYLE = new DataKey<String>("BLOCK_QUOTE_NUMBERED_LIST_STYLE", "QuotationsNumberedList");
     public static final DataKey<String> BOLD_STYLE = new DataKey<String>("BOLD_STYLE", "StrongEmphasis");
     public static final DataKey<String> ITALIC_STYLE = new DataKey<String>("ITALIC_STYLE", "Emphasis");
     public static final DataKey<String> STRIKE_THROUGH_STYLE = new DataKey<String>("STRIKE_THROUGH_STYLE", "Strikethrough");
@@ -107,6 +104,27 @@ public class DocxRenderer implements IRender {
     public static final DataKey<String> HYPERLINK_STYLE = new DataKey<String>("HYPERLINK_STYLE", "Hyperlink");
     public static final DataKey<String> FOOTNOTE_ANCHOR_STYLE = new DataKey<String>("FOOTNOTE_ANCHOR_STYLE", "FootnoteReference");
     public static final DataKey<String> ENDNOTE_ANCHOR_STYLE = new DataKey<String>("ENDNOTE_ANCHOR_STYLE", "EndnoteReference");
+
+    // Not used.
+    //public static final DataKey<String> BULLET_LIST_STYLE = new DataKey<String>("BULLET_LIST_STYLE", "BulletList");
+    //public static final DataKey<String> BLOCK_QUOTE_BULLET_LIST_STYLE = new DataKey<String>("BLOCK_QUOTE_BULLET_LIST_STYLE", "QuotationsBulletList");
+    //public static final DataKey<String> NUMBERED_LIST_STYLE = new DataKey<String>("NUMBERED_LIST_STYLE", "NumberedList");
+    //public static final DataKey<String> BLOCK_QUOTE_NUMBERED_LIST_STYLE = new DataKey<String>("BLOCK_QUOTE_NUMBERED_LIST_STYLE", "QuotationsNumberedList");
+
+    // internal stuff
+    public static final String EMOJI_RESOURCE_PREFIX = "emoji:";
+
+    public static final DynamicDefaultKey<String> DOC_EMOJI_ROOT_IMAGE_PATH = new DynamicDefaultKey<String>("DOC_EMOJI_ROOT_IMAGE_PATH", new DataValueFactory<String>() {
+        @Override
+        public String create(final DataHolder options) {
+            if (options != null && options.contains(EmojiExtension.ROOT_IMAGE_PATH)) {
+                return options.get(EmojiExtension.ROOT_IMAGE_PATH);
+            }
+
+            // kludge it to use our resources
+            return EMOJI_RESOURCE_PREFIX;
+        }
+    });
 
     final List<NodeDocxRendererFactory> nodeFormatterFactories;
     final DocxRendererOptions rendererOptions;
@@ -497,7 +515,7 @@ public class DocxRenderer implements IRender {
         final HashMap<String, String> idToValidBookmark;
 
         MainDocxRenderer(DataHolder options, WordprocessingMLPackage out, Document document, DocumentContentHandler contentContainer) {
-            super(out, new ScopedDataSet(options, document));
+            super(out, new ScopedDataSet(document, options));
 
             this.document = document;
             this.renderers = new HashMap<Class<?>, NodeDocxRendererHandler>(32);
@@ -649,6 +667,24 @@ public class DocxRenderer implements IRender {
             } else {
                 return url instanceof String ? (String) url : String.valueOf(url);
             }
+        }
+
+        @Override
+        public Attributes extendRenderingNodeAttributes(AttributablePart part, Attributes attributes) {
+            Attributes attr = attributes != null ? attributes : new Attributes();
+            for (AttributeProvider attributeProvider : myAttributeProviders) {
+                attributeProvider.setAttributes(this.renderingNode, part, attr);
+            }
+            return attr;
+        }
+
+        @Override
+        public Attributes extendRenderingNodeAttributes(Node node, AttributablePart part, Attributes attributes) {
+            Attributes attr = attributes != null ? attributes : new Attributes();
+            for (AttributeProvider attributeProvider : myAttributeProviders) {
+                attributeProvider.setAttributes(node, part, attr);
+            }
+            return attr;
         }
 
         @Override

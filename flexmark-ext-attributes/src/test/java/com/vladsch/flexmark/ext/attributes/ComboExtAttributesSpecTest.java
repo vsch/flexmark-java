@@ -29,6 +29,7 @@ public class ComboExtAttributesSpecTest extends ComboSpecTestCase {
                 .set(AnchorLinkExtension.ANCHORLINKS_WRAP_TEXT, false)
                 .set(HtmlRenderer.RENDER_HEADER_ID, false)
         );
+        optionsMap.put("text-attributes", new MutableDataSet().set(AttributesExtension.ASSIGN_TEXT_ATTRIBUTES, true).set(HtmlRenderer.WRAP_TIGHT_ITEM_PARAGRAPH_IN_SPAN, false));
         optionsMap.put("src-pos", new MutableDataSet().set(HtmlRenderer.SOURCE_POSITION_ATTRIBUTE, "md-pos"));
     }
 

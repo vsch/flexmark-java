@@ -49,6 +49,10 @@ public class DocxLinkResolver implements LinkResolver {
                 // assume it is good
                 return link.withStatus(LinkStatus.VALID)
                         .withUrl(url);
+            } else if (url.startsWith(DocxRenderer.EMOJI_RESOURCE_PREFIX)) {
+                // assume it is good
+                return link.withStatus(LinkStatus.VALID)
+                        .withUrl(url);
             } else if (url.startsWith("/")) {
                 if (docRootURL != null && !docRootURL.isEmpty()) {
                     // this one is root url, prefix with root url, without the trailing /

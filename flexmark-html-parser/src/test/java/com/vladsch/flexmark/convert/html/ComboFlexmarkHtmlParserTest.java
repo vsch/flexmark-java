@@ -29,6 +29,7 @@ public class ComboFlexmarkHtmlParserTest extends ComboSpecTestCase {
     private static final String SPEC_RESOURCE = "/flexmark_html_parser_spec.md";
     private static final DataHolder OPTIONS = new MutableDataSet()
             .set(HtmlRenderer.INDENT_SIZE, 2)
+            .set(FlexmarkHtmlParser.OUTPUT_ATTRIBUTES_ID, false)
             //.set(HtmlRenderer.PERCENT_ENCODE_URLS, true)
             //.set(Parser.EXTENSIONS, Collections.singleton(FlexmarkHtmlParser.create())
             ;

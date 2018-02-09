@@ -3,6 +3,7 @@ package com.vladsch.flexmark.convert.html;
 import com.vladsch.flexmark.IParse;
 import com.vladsch.flexmark.IRender;
 import com.vladsch.flexmark.ast.Node;
+import com.vladsch.flexmark.ext.tables.TablesExtension;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.spec.SpecReader;
@@ -10,6 +11,7 @@ import com.vladsch.flexmark.test.ComboSpecTestCase;
 import com.vladsch.flexmark.test.DumpSpecReader;
 import com.vladsch.flexmark.test.FullSpecTestCase;
 import com.vladsch.flexmark.test.RenderingTestCase;
+import com.vladsch.flexmark.util.format.TableFormatOptions;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.MutableDataSet;
 import org.junit.AssumptionViolatedException;
@@ -28,6 +30,7 @@ public class ComboAppHtmlParserTest extends ComboSpecTestCase {
     private static final String SPEC_RESOURCE = "/app_html_parser_spec.md";
     private static final DataHolder OPTIONS = new MutableDataSet()
             .set(HtmlRenderer.INDENT_SIZE, 2)
+            .set(FlexmarkHtmlParser.OUTPUT_ATTRIBUTES_ID, false)
             //.set(HtmlRenderer.PERCENT_ENCODE_URLS, true)
             //.set(Parser.EXTENSIONS, Collections.singleton(FlexmarkHtmlParser.create())
             ;
@@ -45,6 +48,9 @@ public class ComboAppHtmlParserTest extends ComboSpecTestCase {
         optionsMap.put("div-as-para", new MutableDataSet().set(FlexmarkHtmlParser.DIV_AS_PARAGRAPH, true));
         optionsMap.put("no-br-as-para-breaks", new MutableDataSet().set(FlexmarkHtmlParser.BR_AS_PARA_BREAKS, false));
         optionsMap.put("no-br-as-extra-blank-lines", new MutableDataSet().set(FlexmarkHtmlParser.BR_AS_EXTRA_BLANK_LINES, false));
+        optionsMap.put("table-no-alignment", new MutableDataSet().set(TableFormatOptions.APPLY_COLUMN_ALIGNMENT, false));
+        optionsMap.put("table-no-width", new MutableDataSet().set(TableFormatOptions.ADJUST_COLUMN_WIDTH, false));
+        optionsMap.put("table-ignore-mid-heading", new MutableDataSet().set(FlexmarkHtmlParser.IGNORE_TABLE_HEADING_AFTER_ROWS, true));
         // optionsMap.put("option1", new MutableDataSet().set(FlexmarkHtmlParserExtension.FLEXMARK_HTML_PARSER_OPTION1, true));
     }
 

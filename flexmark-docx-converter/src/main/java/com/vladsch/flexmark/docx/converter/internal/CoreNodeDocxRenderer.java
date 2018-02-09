@@ -11,6 +11,10 @@ import com.vladsch.flexmark.docx.converter.PhasedNodeDocxRenderer;
 import com.vladsch.flexmark.docx.converter.util.*;
 import com.vladsch.flexmark.ext.aside.AsideBlock;
 import com.vladsch.flexmark.ext.attributes.AttributesNode;
+import com.vladsch.flexmark.ext.emoji.Emoji;
+import com.vladsch.flexmark.ext.emoji.EmojiExtension;
+import com.vladsch.flexmark.ext.emoji.internal.EmojiOptions;
+import com.vladsch.flexmark.ext.emoji.internal.EmojiResolvedShortcut;
 import com.vladsch.flexmark.ext.enumerated.reference.EnumeratedReferenceBlock;
 import com.vladsch.flexmark.ext.enumerated.reference.EnumeratedReferenceExtension;
 import com.vladsch.flexmark.ext.enumerated.reference.EnumeratedReferenceLink;
@@ -26,6 +30,7 @@ import com.vladsch.flexmark.ext.tables.*;
 import com.vladsch.flexmark.ext.toc.SimTocBlock;
 import com.vladsch.flexmark.ext.toc.TocBlock;
 import com.vladsch.flexmark.ext.toc.TocBlockBase;
+import com.vladsch.flexmark.html.renderer.AttributablePart;
 import com.vladsch.flexmark.html.renderer.LinkType;
 import com.vladsch.flexmark.html.renderer.ResolvedLink;
 import com.vladsch.flexmark.parser.ListOptions;
@@ -35,11 +40,15 @@ import com.vladsch.flexmark.util.ImageUtils;
 import com.vladsch.flexmark.util.Pair;
 import com.vladsch.flexmark.util.format.options.ListSpacing;
 import com.vladsch.flexmark.util.html.Attribute;
+import com.vladsch.flexmark.util.html.Attributes;
 import com.vladsch.flexmark.util.html.Escaping;
-import com.vladsch.flexmark.util.options.DataHolder;
-import com.vladsch.flexmark.util.options.DataKey;
+import com.vladsch.flexmark.util.options.*;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import org.docx4j.UnitsOfMeasurement;
 import org.docx4j.dml.wordprocessingDrawing.Inline;
+import org.docx4j.model.structure.PageDimensions;
+import org.docx4j.model.structure.SectionWrapper;
+import org.docx4j.model.styles.StyleUtil;
 import org.docx4j.openpackaging.exceptions.Docx4JException;
 import org.docx4j.openpackaging.parts.Part;
 import org.docx4j.openpackaging.parts.WordprocessingML.AltChunkType;
@@ -73,6 +82,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
     protected final ReferenceRepository referenceRepository;
 
     final DocxRendererOptions options;
+    final EmojiOptions emojiOptions;
     private final ListOptions listOptions;
     protected boolean recheckUndefinedReferences;
     protected boolean repositoryNodesDone;
@@ -116,6 +126,10 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
         footnoteIDs = new HashMap<Node, BigInteger>();
         lastTocBlock = null;
         ordinal = 0;
+
+        final MutableScopedDataSet options1 = new MutableScopedDataSet(options);
+        options1.set(EmojiExtension.ROOT_IMAGE_PATH, DocxRenderer.DOC_EMOJI_ROOT_IMAGE_PATH.getFrom(options));
+        emojiOptions = new EmojiOptions(options1);
     }
 
     @Override
@@ -515,6 +529,12 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
                     public void render(AttributesNode node, final DocxRendererContext docx) {
                         CoreNodeDocxRenderer.this.render(node, docx);
                     }
+                }),
+                new NodeDocxRendererHandler<Emoji>(Emoji.class, new CustomNodeDocxRenderer<Emoji>() {
+                    @Override
+                    public void render(Emoji node, final DocxRendererContext docx) {
+                        CoreNodeDocxRenderer.this.render(node, docx);
+                    }
                 })
         ));
     }
@@ -554,7 +574,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
                 docx.renderChildren(node);
             } else {
                 final String text = new TextCollectingVisitor().collectAndGetText(node);
-                if (!text.isEmpty()) {
+                if (!text.isEmpty() || node.getFirstChildAny(Emoji.class) != null) {
                     docx.setBlockFormatProvider(new BlockFormatProviderBase<Node>(docx, docx.getDocxRendererOptions().LOOSE_PARAGRAPH_STYLE));
                     docx.createP();
                     docx.renderChildren(node);
@@ -836,8 +856,10 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
         });
     }
 
-    private void renderURL(final BasedSequence urlSrc, final DocxRendererContext docx, final String linkUrl, final String linkTitle, final Runnable runnable) {
+    private void renderURL(final BasedSequence urlSrc, final DocxRendererContext docx, final String linkUrl, final Attributes attributes, final Runnable runnable) {
         P p = docx.getP();
+
+        String linkTitle = attributes != null && attributes.contains(Attribute.TITLE_ATTR) ? attributes.getValue(Attribute.TITLE_ATTR) : "";
 
         final P.Hyperlink hyperlink = docx.getFactory().createPHyperlink();
         JAXBElement<P.Hyperlink> wrappedHyperlink = docx.getFactory().createPHyperlink(hyperlink);
@@ -864,7 +886,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
                     } else {
                         sourceFile = String.format("in %s:", sourceFile);
                     }
-                    System.err.println(String.format("    WARN: Invalid anchor target '%s' %s%d:%d", nodeId, sourceFile,atIndex.getFirst()+1, atIndex.getSecond()+2));
+                    System.err.println(String.format("    WARN: Invalid anchor target '%s' %s%d:%d", nodeId, sourceFile, atIndex.getFirst() + 1, atIndex.getSecond() + 2));
                 }
             }
             final String anchor = docx.getValidBookmarkName(nodeId) + options.localHyperlinkSuffix;
@@ -958,13 +980,17 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
         ResolvedLink resolvedLink = docx.resolveLink(LinkType.LINK, node.getUrl().unescape(), null, null);
 
         // we have a title part, use that
+        Attributes attributes = resolvedLink.getNonNullAttributes();
+
         if (node.getTitle().isNotNull()) {
-            resolvedLink.getNonNullAttributes().replaceValue(Attribute.TITLE_ATTR, node.getTitle().unescape());
+            attributes.replaceValue(Attribute.TITLE_ATTR, node.getTitle().unescape());
         } else {
-            resolvedLink.getNonNullAttributes().remove(Attribute.TITLE_ATTR);
+            attributes.remove(Attribute.TITLE_ATTR);
         }
 
-        renderURL(node.getUrl(), docx, resolvedLink.getUrl(), resolvedLink.getTitle(), new Runnable() {
+        attributes = docx.extendRenderingNodeAttributes(AttributablePart.NODE, attributes);
+
+        renderURL(node.getUrl(), docx, resolvedLink.getUrl(), attributes, new Runnable() {
             @Override
             public void run() {
                 docx.renderChildren(node);
@@ -983,8 +1009,9 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
 
         BasedSequence urlSrc = node.getReference();
 
+        Reference reference = null;
         if (node.isDefined()) {
-            Reference reference = node.getReferenceNode(referenceRepository);
+            reference = node.getReferenceNode(referenceRepository);
             urlSrc = reference.getUrl();
             String url = urlSrc.unescape();
 
@@ -1014,7 +1041,14 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
                 docx.text(node.getChars().suffixOf(node.getChildChars()).unescape());
             }
         } else {
-            renderURL(urlSrc, docx, resolvedLink.getUrl(), resolvedLink.getTitle(), new Runnable() {
+            Attributes attributes = resolvedLink.getNonNullAttributes();
+
+            if (reference != null) {
+                attributes = docx.extendRenderingNodeAttributes(reference, AttributablePart.NODE, attributes);
+            }
+
+            attributes = docx.extendRenderingNodeAttributes(AttributablePart.NODE, attributes);
+            renderURL(urlSrc, docx, resolvedLink.getUrl(), attributes, new Runnable() {
                 @Override
                 public void run() {
                     docx.renderChildren(node);
@@ -1023,28 +1057,95 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
         }
     }
 
-    public void newImage(final DocxRendererContext docx, byte[] bytes, String filenameHint, String altText, int id1, int id2, long cx) {
+    private long getSizeInfo(Attributes attributes, String name, double pageDimension) {
+        Double value = -1.0;
+
+        if (attributes.contains(name)) {
+            String attributeValue = attributes.getValue(name).trim();
+            boolean relative = false;
+            if (attributeValue.endsWith("%")) {
+                // make it relative
+                attributeValue = attributeValue.substring(0, attributeValue.length() - 1);
+                relative = true;
+            }
+            try {
+                value = Double.parseDouble(attributeValue);
+                // convert to twips assuming 72dpi for pixels
+                // 20 twips/pt and 72 pt/inch
+                // assuming 72ppi we have pixel = point
+                value *= 20.0 * options.docEmojiImageVertSize;
+            } catch (Throwable ignored) {
+                value = -1.0;
+            }
+
+            if (relative) {
+                // value
+                value *= pageDimension;
+            }
+        }
+
+        long longValue = -1;
+        try {
+            longValue = value.longValue();
+        } catch (Throwable ignored) {
+            longValue = -1;
+        }
+
+        return longValue;
+    }
+
+    public R newImage(final DocxRendererContext docx, byte[] bytes, String filenameHint, Attributes attributes, int id1, int id2) {
         try {
             BinaryPartAbstractImage imagePart = null;
             imagePart = BinaryPartAbstractImage.createImagePart(docx.getPackage(), docx.getContainerPart(), bytes);
             Inline inline = null;
-            inline = cx > 0 ? imagePart.createImageInline(filenameHint, altText, id1, id2, cx, false)
-                    : imagePart.createImageInline(filenameHint, altText, id1, id2, false);
+            String altText = attributes.contains("alt") ? attributes.getValue("alt") : "";
+            List<SectionWrapper> sections = docx.getPackage().getDocumentModel().getSections();
+            PageDimensions page = sections.get(sections.size() - 1).getPageDimensions();
+            double writableWidthTwips = page.getWritableWidthTwips();
+
+            long cx = getSizeInfo(attributes, "width", page.getWritableWidthTwips());
+            long cy = cx > 0 ? getSizeInfo(attributes, "height", page.getWritableHeightTwips()) : -1;
+
+            // kludge: normally there is no max-width attribute but we can fake it
+            long longMaxWidth = getSizeInfo(attributes, "max-width", page.getWritableWidthTwips());
+            int maxWidth = longMaxWidth > 0 && longMaxWidth <= Integer.MAX_VALUE ? (int) longMaxWidth : -1;
+
+            if (cx > 0 && cy > 0) {
+                // here we need cx & cy in emu which needs conversion from twips
+                cx = UnitsOfMeasurement.twipToEMU(cx);
+                cy = UnitsOfMeasurement.twipToEMU(cy);
+                inline = imagePart.createImageInline(filenameHint, altText, id1, id2, cx, cy, false);
+            } else {
+                if (cx > 0) {
+                    inline = imagePart.createImageInline(filenameHint, altText, id1, id2, cx, false);
+                } else {
+                    if (maxWidth > 0) {
+                        inline = imagePart.createImageInline(filenameHint, altText, id1, id2, false, maxWidth);
+                    } else {
+                        inline = imagePart.createImageInline(filenameHint, altText, id1, id2, false);
+                    }
+                }
+            }
 
             // Now add the inline in w:p/w:r/w:drawing
             org.docx4j.wml.R run = docx.createR();
             org.docx4j.wml.Drawing drawing = docx.getFactory().createDrawing();
             run.getContent().add(drawing);
             drawing.getAnchorOrInline().add(inline);
+            return run;
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        return null;
     }
 
     private void render(final Image node, final DocxRendererContext docx) {
         String altText = new TextCollectingVisitor().collectAndGetText(node);
         ResolvedLink resolvedLink = docx.resolveLink(LinkType.IMAGE, node.getUrl().unescape(), null, null);
         String url = resolvedLink.getUrl();
+        Attributes attributes = resolvedLink.getNonNullAttributes();
 
         if (!node.getUrlContent().isEmpty()) {
             // reverse URL encoding of =, &
@@ -1052,8 +1153,92 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
             url += content;
         }
 
+        if (!altText.isEmpty()) {
+            attributes.replaceValue("alt", altText);
+        }
+
+        attributes = docx.extendRenderingNodeAttributes(AttributablePart.NODE, attributes);
+
         //String alt = node.getText().unescape();
-        renderImage(docx, altText, url);
+        renderImage(docx, url, attributes);
+    }
+
+    private void render(final Emoji node, final DocxRendererContext docx) {
+        final EmojiResolvedShortcut shortcut = EmojiResolvedShortcut.getEmojiText(node, emojiOptions.useShortcutType, emojiOptions.useImageType, emojiOptions.rootImagePath);
+
+        if (shortcut.emoji == null || shortcut.emojiText == null) {
+            // output as text
+            docx.text(":");
+            docx.renderChildren(node);
+            docx.text(":");
+        } else {
+            if (shortcut.isUnicode) {
+                docx.text(shortcut.emojiText);
+            } else {
+                ResolvedLink resolvedLink = docx.resolveLink(LinkType.IMAGE, shortcut.emojiText, null, null);
+                String altText = shortcut.alt;
+                String url = resolvedLink.getUrl();
+                Attributes attributes = resolvedLink.getNonNullAttributes();
+
+                if (shortcut.alt != null) {
+                    attributes.replaceValue("alt", shortcut.alt);
+                }
+
+                // need to determine the font point size from the style
+                RPr rPr = docx.getFactory().createRPr();
+                RPr paraRPr = docx.getFactory().createRPr();
+                PPr pPr = docx.getFactory().createPPr();
+
+                docx.getBlockFormatProvider().getPPr(pPr);
+                docx.getBlockFormatProvider().getParaRPr(paraRPr);
+                paraRPr = docx.getHelper().getExplicitRPr(paraRPr, pPr);
+
+                docx.getRunFormatProvider().getRPr(rPr);
+                rPr = docx.getHelper().getExplicitRPr(rPr);
+
+                StyleUtil.apply(rPr, paraRPr);
+                StyleUtil.apply(paraRPr, rPr);
+
+                // now see if we have line height
+                final HpsMeasure sz = rPr.getSz();
+                long l = -1;
+                if (sz != null) {
+                    l = sz.getVal().longValue();
+                    attributes.replaceValue("height", String.valueOf(Math.round(l / 2 / options.docEmojiImageVertSize)));
+                    attributes.replaceValue("width", String.valueOf(Math.round(l / 2 / options.docEmojiImageVertSize)));
+                } else if (!emojiOptions.attrImageSize.isEmpty()) {
+                    attributes.replaceValue("height", emojiOptions.attrImageSize);
+                    attributes.replaceValue("width", emojiOptions.attrImageSize);
+
+                    l = getSizeInfo(attributes, "width", 100.0);// page dimensions not used, these are not %
+                    // now revert from twips to points
+                    l /= 20;
+                }
+
+                if (!emojiOptions.attrAlign.isEmpty()) {
+                    attributes.replaceValue("align", emojiOptions.attrAlign);
+                }
+
+                attributes = docx.extendRenderingNodeAttributes(AttributablePart.NODE, attributes);
+                R r = renderImage(docx, url, attributes);
+
+                // now move down by 20%
+                // <w:position w:val="-4"/>
+                if (r != null) {
+                    long adj = Math.round(l * options.docEmojiImageVertOffset);
+                    if (adj < 0) {
+                        RPr rPr1 = r.getRPr();
+                        if (rPr1 == null) {
+                            rPr1 = docx.getFactory().createRPr();
+                            r.setRPr(rPr1);
+                        }
+                        CTSignedHpsMeasure hpsMeasure = docx.getFactory().createCTSignedHpsMeasure();
+                        rPr1.setPosition(hpsMeasure);
+                        hpsMeasure.setVal(BigInteger.valueOf(adj));
+                    }
+                }
+            }
+        }
     }
 
     private void render(final ImageRef node, final DocxRendererContext docx) {
@@ -1065,8 +1250,10 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
             }
         }
 
+        Reference reference = null;
+
         if (node.isDefined()) {
-            Reference reference = node.getReferenceNode(referenceRepository);
+            reference = node.getReferenceNode(referenceRepository);
             String url = reference.getUrl().unescape();
 
             resolvedLink = docx.resolveLink(LinkType.IMAGE, url, null, null);
@@ -1094,16 +1281,33 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
         } else {
             String altText = new TextCollectingVisitor().collectAndGetText(node);
             String url = resolvedLink.getUrl();
-            renderImage(docx, url, altText);
+            Attributes attributes = resolvedLink.getNonNullAttributes();
+
+            if (!altText.isEmpty()) {
+                attributes.replaceValue("alt", altText);
+            }
+
+            if (reference != null) {
+                attributes = docx.extendRenderingNodeAttributes(reference, AttributablePart.NODE, attributes);
+            }
+
+            attributes = docx.extendRenderingNodeAttributes(AttributablePart.NODE, attributes);
+            renderImage(docx, url, attributes);
         }
     }
 
-    private void renderImage(final DocxRendererContext docx, final String altText, final String url) {
+    private R renderImage(final DocxRendererContext docx, String url, final Attributes attributes) {
         BufferedImage image = null;
         int id1 = imageId++;
         int id2 = imageId++;
         String filenameHint = String.format("Image%d", id1 / 2 + 1);
         int cx = -1;
+
+        if (url.startsWith(DocxRenderer.EMOJI_RESOURCE_PREFIX)) {
+            // we take it from resources
+            url = this.getClass().getResource("/emoji/" + url.substring(DocxRenderer.EMOJI_RESOURCE_PREFIX.length())).toString();
+            int tmp = 0;
+        }
 
         if (url.startsWith("http:") || url.startsWith("https:") || url.startsWith("file:")) {
             // hyperlinked image  or file
@@ -1119,20 +1323,20 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
         if (image != null) {
             int width = image.getWidth();
             if (options.maxImageWidth > 0 && options.maxImageWidth < width) {
-                // convert to twips
-                cx = options.maxImageWidth * 20;
+                cx = options.maxImageWidth;
+                attributes.replaceValue("width", String.valueOf(cx));
             }
 
             byte[] imageBytes = ImageUtils.getImageBytes(image);
-            newImage(docx, imageBytes, filenameHint, altText, id1, id2, cx);
+            return newImage(docx, imageBytes, filenameHint, attributes, id1, id2);
         }
+        return null;
     }
 
     private Tbl myTbl;
     private Tr myTr;
 
     private void render(final TableBlock node, final DocxRendererContext docx) {
-
         // if we have a caption and it goes before the table, we add it here
         final Node caption = node.getFirstChildAny(TableCaption.class);
         if (caption != null && tableCaptionBeforeTable) {
@@ -1539,8 +1743,14 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
 
             final String defaultText = String.format("%s %d", EnumeratedReferences.getType(text), ordinal);
             String title = referenceFormat != null ? new EnumRefTextCollectingVisitor(ordinal).collectAndGetText(referenceFormat) : defaultText;
+            Attributes attributes = new Attributes();
 
-            renderURL(node.getText(), docx, "#" + text, title, new Runnable() {
+            if (title != null) {
+                attributes.replaceValue(Attribute.TITLE_ATTR, title);
+            }
+
+            attributes = docx.extendRenderingNodeAttributes(AttributablePart.NODE, attributes);
+            renderURL(node.getText(), docx, "#" + text, attributes, new Runnable() {
                 @Override
                 public void run() {
                     if (referenceFormat != null) {

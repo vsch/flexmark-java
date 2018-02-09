@@ -22,4 +22,3 @@ AttributesNode which start with `#` such as `#id-string` are equivalent to `id="
 
 NOTE: class values are accumulated as a space separated list. Other attributes override any
 previous values.
-

@@ -1,0 +1,17 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="UnicodeEmojiExtract" type="Application" factoryName="Application" singleton="true" nameIsGenerated="true">
+    <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+    <option name="MAIN_CLASS_NAME" value="UnicodeEmojiExtract" />
+    <option name="VM_PARAMETERS" value="-Xms1g -Xmx6g -XX:MaxPermSize=1g -XX:ReservedCodeCacheSize=1g -XX:+UseCompressedOops -XX:+UseConcMarkSweepGC -XX:+CMSClassUnloadingEnabled -Dide.no.platform.update=true -XX:+UseCMSInitiatingOccupancyOnly -XX:CMSInitiatingOccupancyFraction=70 -XX:+ScavengeBeforeFullGC -XX:+CMSScavengeBeforeRemark" />
+    <option name="PROGRAM_PARAMETERS" value="EmojiList-v11.0.html.txt Emoji.md.txt EmojiExt.txt Emoji/ github.json.txt EmojiReference.txt EmojiReference.json.txt" />
+    <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$/FlexmarkJavaAssets/EmojiReference" />
+    <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+    <option name="ALTERNATIVE_JRE_PATH" />
+    <option name="ENABLE_SWING_INSPECTOR" value="false" />
+    <option name="ENV_VARIABLES" />
+    <option name="PASS_PARENT_ENVS" value="true" />
+    <module name="Samples" />
+    <envs />
+    <method />
+  </configuration>
+</component>

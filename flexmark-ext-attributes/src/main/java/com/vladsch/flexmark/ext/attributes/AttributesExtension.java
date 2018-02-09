@@ -25,6 +25,7 @@ import com.vladsch.flexmark.util.options.MutableDataHolder;
  */
 public class AttributesExtension implements Parser.ParserExtension
         , RendererExtension
+        , HtmlRenderer.HtmlRendererExtension
         //, Parser.ReferenceHoldingExtension
 {
     public static final DataKey<NodeAttributeRepository> NODE_ATTRIBUTES = new DataKey<NodeAttributeRepository>("NODE_ATTRIBUTES", new DataValueFactory<NodeAttributeRepository>() {
@@ -32,6 +33,7 @@ public class AttributesExtension implements Parser.ParserExtension
         public NodeAttributeRepository create(DataHolder options) { return new NodeAttributeRepository(options); }
     });
     public static final DataKey<KeepType> ATTRIBUTES_KEEP = new DataKey<KeepType>("ATTRIBUTES_KEEP", KeepType.FIRST); // standard option to allow control over how to handle duplicates
+    public static final DataKey<Boolean> ASSIGN_TEXT_ATTRIBUTES = new DataKey<Boolean>("ASSIGN_TEXT_ATTRIBUTES", false); // assign attributes to text if previous is not a space
 
     private AttributesExtension() {
     }
@@ -53,10 +55,22 @@ public class AttributesExtension implements Parser.ParserExtension
 
     @Override
     public void rendererOptions(final MutableDataHolder options) {
-        if (!options.contains(HtmlRenderer.WRAP_TIGHT_ITEM_PARAGRAPH_IN_SPAN)) {
-            // set default to true so tight items get span wrapping which inherit the attributes
-            options.set(HtmlRenderer.WRAP_TIGHT_ITEM_PARAGRAPH_IN_SPAN, true);
+        if (!ASSIGN_TEXT_ATTRIBUTES.getFrom(options)) {
+            // this is need only if text is not wrapped in TextBase and if any attributes are applied, then it is
+            // wrapped in a span
+            if (!options.contains(HtmlRenderer.WRAP_TIGHT_ITEM_PARAGRAPH_IN_SPAN)) {
+                // set default to true so tight items get span wrapping which inherit the attributes
+                options.set(HtmlRenderer.WRAP_TIGHT_ITEM_PARAGRAPH_IN_SPAN, true);
+            }
         }
+    }
+
+    @Override
+    public void extend(final HtmlRenderer.Builder rendererBuilder, final String rendererType) {
+        if (ASSIGN_TEXT_ATTRIBUTES.getFrom(rendererBuilder)) {
+            rendererBuilder.nodeRendererFactory(new AttributesNodeRenderer.Factory());
+        }
+        rendererBuilder.attributeProviderFactory(new AttributesAttributeProvider.Factory());
     }
 
     @Override

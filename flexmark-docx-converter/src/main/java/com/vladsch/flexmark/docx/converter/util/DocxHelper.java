@@ -1,9 +1,6 @@
 package com.vladsch.flexmark.docx.converter.util;
 
-import com.vladsch.flexmark.docx.converter.internal.DocxRenderer;
 import com.vladsch.flexmark.docx.converter.internal.DocxRendererOptions;
-import com.vladsch.flexmark.util.options.DataHolder;
-import com.vladsch.flexmark.util.options.DataSet;
 import org.docx4j.model.PropertyResolver;
 import org.docx4j.model.styles.StyleUtil;
 import org.docx4j.openpackaging.exceptions.Docx4JException;
@@ -296,35 +293,35 @@ public class DocxHelper {
      * @param parent PPr of parent element, must be explicit or effective ppr
      */
     public void inheritInd(PPr child, PPr parent) {
-        if (has(parent.getInd())) {
+        if (parent != null && has(parent.getInd())) {
             PPr styledChild = getResolver().getEffectivePPr(child);
 
-                PPrBase.Ind cInd = getCopy(styledChild == null ? null : styledChild.getInd(), true);
-                PPrBase.Ind pInd = parent.getInd();
+            PPrBase.Ind cInd = getCopy(styledChild == null ? null : styledChild.getInd(), true);
+            PPrBase.Ind pInd = parent.getInd();
 
-                final PPrBase.NumPr numPr =styledChild == null ? null :  styledChild.getNumPr();
-                if (numPr != null) {
-                    // need to check that too, it may have settings we don't have
-                    NumberingDefinitionsPart ndp = myDocumentPart.getNumberingDefinitionsPart();
-                    if (ndp != null) {
-                        final PPrBase.Ind ndpInd = ndp.getInd(numPr);
-                        if (ndpInd != null) {
-                            if (cInd.getLeft() == null && ndpInd.getLeft() != null) {
-                                cInd.setLeft(ndpInd.getLeft());
-                            }
-                            if (cInd.getRight() == null && ndpInd.getRight() != null) {
-                                cInd.setRight(ndpInd.getRight());
-                            }
-                            if (cInd.getHanging() == null && ndpInd.getHanging() != null) {
-                                cInd.setHanging(ndpInd.getHanging());
-                            }
+            final PPrBase.NumPr numPr = styledChild == null ? null : styledChild.getNumPr();
+            if (numPr != null) {
+                // need to check that too, it may have settings we don't have
+                NumberingDefinitionsPart ndp = myDocumentPart.getNumberingDefinitionsPart();
+                if (ndp != null) {
+                    final PPrBase.Ind ndpInd = ndp.getInd(numPr);
+                    if (ndpInd != null) {
+                        if (cInd.getLeft() == null && ndpInd.getLeft() != null) {
+                            cInd.setLeft(ndpInd.getLeft());
+                        }
+                        if (cInd.getRight() == null && ndpInd.getRight() != null) {
+                            cInd.setRight(ndpInd.getRight());
+                        }
+                        if (cInd.getHanging() == null && ndpInd.getHanging() != null) {
+                            cInd.setHanging(ndpInd.getHanging());
                         }
                     }
                 }
+            }
 
-                combine(cInd, pInd, CombineBigInt.ADD, CombineBigInt.NONE);
-                cInd = keepDiff(cInd, styledChild == null ? null : styledChild.getInd());
-                child.setInd(cInd);
+            combine(cInd, pInd, CombineBigInt.ADD, CombineBigInt.NONE);
+            cInd = keepDiff(cInd, styledChild == null ? null : styledChild.getInd());
+            child.setInd(cInd);
         }
     }
 
@@ -360,7 +357,7 @@ public class DocxHelper {
         } catch (Docx4JException e) {
             e.printStackTrace();
         }
-        return  null;
+        return null;
     }
 
     public PPr getExplicitPPr(final PPr pPr) {
