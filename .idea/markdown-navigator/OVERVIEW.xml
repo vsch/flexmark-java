@@ -1,12 +1,12 @@
 <component name="MarkdownNavigator.ProfileManager">
   <profile>
     <option name="myName" value="OVERVIEW" havePreviewSettings="true" haveParserSettings="true" haveHtmlSettings="true" haveCssSettings="true" haveHtmlExportSettings="true" haveLinkMapSettings="true" profileName="OVERVIEW">
-      <PreviewSettings splitEditorLayout="FIRST" splitEditorPreview="PREVIEW" useGrayscaleRendering="false" zoomFactor="1.0" maxImageWidth="0" showGitHubPageIfSynced="false" allowBrowsingInPreview="false" synchronizePreviewPosition="true" highlightPreviewType="LINE" highlightFadeOut="10" highlightOnTyping="true" synchronizeSourcePosition="true" verticallyAlignSourceAndPreviewSyncPosition="true" showSearchHighlightsInPreview="true" showSelectionInPreview="true" openRemoteLinks="true">
+      <PreviewSettings splitEditorLayout="FIRST" splitEditorPreview="PREVIEW" useGrayscaleRendering="false" zoomFactor="1.0" maxImageWidth="0" showGitHubPageIfSynced="false" allowBrowsingInPreview="false" synchronizePreviewPosition="true" highlightPreviewType="LINE" highlightFadeOut="10" highlightOnTyping="true" synchronizeSourcePosition="true" verticallyAlignSourceAndPreviewSyncPosition="true" showSearchHighlightsInPreview="true" showSelectionInPreview="true" openRemoteLinks="true" replaceUnicodeEmoji="false">
         <PanelProvider>
           <provider providerId="com.vladsch.idea.multimarkdown.editor.javafx.html.panel" providerName="JavaFX WebView" />
         </PanelProvider>
       </PreviewSettings>
-      <ParserSettings gitHubSyntaxChange="false">
+      <ParserSettings gitHubSyntaxChange="false" emojiShortcuts="0" emojiImages="0">
         <PegdownExtensions>
           <option name="ABBREVIATIONS" value="true" />
           <option name="ANCHORLINKS" value="false" />
@@ -43,11 +43,11 @@
           <option name="GFM_LOOSE_BLANK_LINE_AFTER_ITEM_PARA" value="false" />
           <option name="GFM_TABLE_RENDERING" value="false" />
           <option name="GITBOOK_URL_ENCODING" value="true" />
-          <option name="GITHUB_EMOJI_URL" value="false" />
           <option name="GITHUB_LISTS" value="false" />
           <option name="GITHUB_WIKI_LINKS" value="true" />
           <option name="HEADER_ID_NO_DUPED_DASHES" value="false" />
           <option name="JEKYLL_FRONT_MATTER" value="false" />
+          <option name="NO_TEXT_ATTRIBUTES" value="false" />
           <option name="PARSE_HTML_ANCHOR_ID" value="false" />
           <option name="SIM_TOC_BLANK_LINE_SPACER" value="true" />
         </ParserOptions>

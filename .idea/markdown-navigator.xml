@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="MarkdownProjectSettings">
-    <PreviewSettings splitEditorLayout="FIRST" splitEditorPreview="PREVIEW" useGrayscaleRendering="false" zoomFactor="1.0" maxImageWidth="0" showGitHubPageIfSynced="false" allowBrowsingInPreview="false" synchronizePreviewPosition="true" highlightPreviewType="LINE" highlightFadeOut="10" highlightOnTyping="false" synchronizeSourcePosition="true" verticallyAlignSourceAndPreviewSyncPosition="true" showSearchHighlightsInPreview="true" showSelectionInPreview="true" openRemoteLinks="true">
+    <PreviewSettings splitEditorLayout="FIRST" splitEditorPreview="PREVIEW" useGrayscaleRendering="false" zoomFactor="1.0" maxImageWidth="0" showGitHubPageIfSynced="false" allowBrowsingInPreview="false" synchronizePreviewPosition="true" highlightPreviewType="LINE" highlightFadeOut="10" highlightOnTyping="false" synchronizeSourcePosition="true" verticallyAlignSourceAndPreviewSyncPosition="true" showSearchHighlightsInPreview="true" showSelectionInPreview="true" openRemoteLinks="true" replaceUnicodeEmoji="false">
       <PanelProvider>
         <provider providerId="com.vladsch.idea.multimarkdown.editor.javafx.html.panel" providerName="JavaFX WebView" />
       </PanelProvider>
     </PreviewSettings>
-    <ParserSettings gitHubSyntaxChange="false">
+    <ParserSettings gitHubSyntaxChange="false" emojiShortcuts="0" emojiImages="0">
       <PegdownExtensions>
         <option name="ABBREVIATIONS" value="true" />
         <option name="ANCHORLINKS" value="false" />
@@ -43,11 +43,11 @@
         <option name="GFM_LOOSE_BLANK_LINE_AFTER_ITEM_PARA" value="false" />
         <option name="GFM_TABLE_RENDERING" value="false" />
         <option name="GITBOOK_URL_ENCODING" value="false" />
-        <option name="GITHUB_EMOJI_URL" value="true" />
         <option name="GITHUB_LISTS" value="false" />
         <option name="GITHUB_WIKI_LINKS" value="true" />
         <option name="HEADER_ID_NO_DUPED_DASHES" value="false" />
         <option name="JEKYLL_FRONT_MATTER" value="true" />
+        <option name="NO_TEXT_ATTRIBUTES" value="false" />
         <option name="PARSE_HTML_ANCHOR_ID" value="false" />
         <option name="SIM_TOC_BLANK_LINE_SPACER" value="true" />
       </ParserOptions>
@@ -67,6 +67,7 @@
       </StylesheetProvider>
       <ScriptProviders>
         <provider providerId="com.vladsch.idea.multimarkdown.editor.hljs.html.script" providerName="HighlightJS Script" />
+        <provider providerId="com.vladsch.idea.multimarkdown.editor.github-collapse-markdown.html.script" providerName="GitHub Collapse Markdown" />
       </ScriptProviders>
       <cssText>code {
     background-color: rgba(255, 0, 102, 0.06);

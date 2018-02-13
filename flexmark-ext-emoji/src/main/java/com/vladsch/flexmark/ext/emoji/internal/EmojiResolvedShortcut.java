@@ -24,12 +24,13 @@ public class EmojiResolvedShortcut {
         String alt = null;
 
         if (emoji != null) {
+            String unicodeText = null;
+            String imageText = null;
             if (useImageType.isUnicode && emoji.unicodeChars != null) {
-                emojiText = EmojiShortcuts.getUnicodeChars(emoji);
-                isUnicode = true;
+                unicodeText = EmojiShortcuts.getUnicodeChars(emoji);
             }
 
-            if (emojiText == null && useImageType.isImage) {
+            if (useImageType.isImage) {
                 String gitHubFile = null;
                 String cheatSheetFile = null;
                 if (useShortcutType.isGitHub && emoji.githubFile != null) {
@@ -40,10 +41,19 @@ public class EmojiResolvedShortcut {
                     cheatSheetFile = rootImagePath + emoji.emojiCheatSheetFile;
                 }
 
-                emojiText = useShortcutType.getPreferred(cheatSheetFile, gitHubFile);
+                imageText = useShortcutType.getPreferred(cheatSheetFile, gitHubFile);
             }
 
-            alt = "emoji " + emoji.category + ":" + emoji.shortcut;
+            if (imageText != null) {
+                if (unicodeText != null) {
+                    emojiText = unicodeText;
+                    isUnicode = true;
+                } else {
+                    emojiText = imageText;
+                }
+
+                alt = "emoji " + emoji.category + ":" + emoji.shortcut;
+            }
         }
 
         return new EmojiResolvedShortcut(emoji, emojiText, isUnicode, alt);

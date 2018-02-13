@@ -12200,7 +12200,7 @@ Suffix links
 
 Suffix first heading links
 
-```````````````````````````````` example(Heading and Link Ids: 2) options(IGNORE, Iheading-id-suffix)
+```````````````````````````````` example(Heading and Link Ids: 2) options(IGNORE, heading-id-suffix)
 # Heading 1
 
 ## Heading 2

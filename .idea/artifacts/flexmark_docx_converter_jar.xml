@@ -30,7 +30,7 @@
       <element id="library" level="project" name="Maven: org.docx4j:docx4j:3.3.4" />
       <element id="library" level="project" name="Maven: org.antlr:antlr-runtime:3.5.2" />
       <element id="library" level="project" name="Maven: net.engio:mbassador:1.2.4.2" />
-      <element id="library" level="project" name="org.docx4j:docx4j:3.3.4" />
+      <element id="library" level="project" name="org.docx4j:docx4j:3.3.6" />
       <element id="library" level="project" name="Maven: org.apache.avalon.framework:avalon-framework-impl:4.3.1" />
       <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.7.0" />
       <element id="library" level="project" name="Maven: org.nibor.autolink:autolink:0.6.0" />

@@ -5,6 +5,7 @@ import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.docx.converter.internal.DocxRenderer;
 import com.vladsch.flexmark.docx.converter.util.DocxContextImpl;
 import com.vladsch.flexmark.docx.converter.util.RunFormatProvider;
+import com.vladsch.flexmark.docx.converter.util.XmlDocxSorter;
 import com.vladsch.flexmark.docx.converter.util.XmlFormatter;
 import com.vladsch.flexmark.ext.aside.AsideExtension;
 import com.vladsch.flexmark.ext.attributes.AttributesExtension;
@@ -158,7 +159,7 @@ public class ComboDocxConverterSpecTest extends ComboSpecTestCase {
                 try {
                     mlPackage.save(outputStream, Docx4J.FLAG_SAVE_FLAT_XML);
                     final String xml = outputStream.toString("UTF-8");
-                    final String s = XmlFormatter.format(xml);
+                    final String s = XmlDocxSorter.sortDocumentParts(xml);
                     FileWriter fileWriter = new FileWriter(file2);
                     fileWriter.append(s);
                     fileWriter.append('\n');
@@ -304,7 +305,7 @@ public class ComboDocxConverterSpecTest extends ComboSpecTestCase {
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
             mlPackage.save(outputStream, Docx4J.FLAG_SAVE_FLAT_XML);
             final String xml = outputStream.toString("UTF-8");
-            final String s = XmlFormatter.format(xml);
+            final String s = XmlDocxSorter.sortDocumentParts(xml);
             FileWriter fileWriter = new FileWriter(file2);
             fileWriter.append(s);
             fileWriter.append('\n');

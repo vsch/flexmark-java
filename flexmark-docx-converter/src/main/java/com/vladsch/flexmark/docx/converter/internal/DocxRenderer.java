@@ -12,6 +12,7 @@ import com.vladsch.flexmark.docx.converter.NodeDocxRendererFactory;
 import com.vladsch.flexmark.docx.converter.PhasedNodeDocxRenderer;
 import com.vladsch.flexmark.docx.converter.util.DocumentContentHandler;
 import com.vladsch.flexmark.docx.converter.util.DocxContextImpl;
+import com.vladsch.flexmark.docx.converter.util.XmlDocxSorter;
 import com.vladsch.flexmark.docx.converter.util.XmlFormatter;
 import com.vladsch.flexmark.ext.emoji.EmojiExtension;
 import com.vladsch.flexmark.html.*;
@@ -277,7 +278,7 @@ public class DocxRenderer implements IRender {
         try {
             mlPackage.save(outputStream, Docx4J.FLAG_SAVE_FLAT_XML);
             final String s = options.get(RENDER_BODY_ONLY) ? XmlFormatter.formatDocumentBody(outputStream.toString("UTF-8"))
-                    : XmlFormatter.format(outputStream.toString("UTF-8"));
+                    : XmlDocxSorter.sortDocumentParts(outputStream.toString("UTF-8"));
             return s;
         } catch (Docx4JException e) {
             e.printStackTrace();

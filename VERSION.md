@@ -7,6 +7,7 @@ flexmark-java
 
 - [To Do](#to-do)
     - [Docx Converter](#docx-converter)
+- [0.32.2](#0322)
 - [0.32.0](#0320)
 - [0.30.0](#0300)
 - [0.28.38](#02838)
@@ -230,22 +231,38 @@ flexmark-java
     ```
 
   * [ ] Multiline Block quote delimiters `>>>`
+
   * [ ] Deleted text markers `{- -}` or `[- -]`
+
   * [ ] Inserted text markers `{+ +}` or `[+ +]`
+
   * [ ] Header ids with emoji shortcuts generate an extra `-` because of two spaces around the
         emoji shortcut while GitLab only generates a single `-`.
+
   * [ ] Math, inline via ```$``$``` or as fenced code with `math` info string requiring
         inclusion of Katex in the rendered HTML page.
+
   * [ ] Graphing via Mermaid as fenced code with `mermaid` info string, via Mermaid inclusion
         similar to Math solution above.
 
 &nbsp;</details>
 
+0.32.2
+------
+
+* Add: `EmojiExtension.ATTR_IMAGE_CLASS`, default `""`, if not empty will set the image tag
+  class attribute to this value.
+
+* Fix: when image type was set to unicode then unicode char would be used for a shortcut even
+  when that shortcut was not defined for requested shortcut type: github or ecs.
+
+* Fix: update to docx4j version 3.3.6
+
 0.32.0
 ------
 
-* **API Change**: removed `EmojiCheatSheet` class to replace with `EmojiShortcuts` which has better
-  referencing for GitHub shortcuts and unicode chars for all emojis from
+* **API Change**: removed `EmojiCheatSheet` class to replace with `EmojiShortcuts` which has
+  better referencing for GitHub shortcuts and unicode chars for all emojis from
   [emoji-cross-reference](https://github.com/vsch/emoji-cross-reference)
 
   * Removed: `EmojiExtension.USE_IMAGE_URL`
@@ -284,8 +301,9 @@ flexmark-java
   If a plain text span is interrupted by an HTML comment then it is considered as two separate
   plain text spans. ie. `some <!---->text{attr}` will result in `some <!----><span
   attr>text</span>` rendering.
-  
-  Full spec: [ext_attributes_ast_spec](flexmark-ext-attributes/src/test/resources/ext_attributes_ast_spec.md)
+
+  Full spec:
+  [ext_attributes_ast_spec](flexmark-ext-attributes/src/test/resources/ext_attributes_ast_spec.md)
 
 * Fix: Attributes, when they are first child then delete leading spaces of following node first
   rendered child will have leading spaces.
@@ -295,15 +313,15 @@ flexmark-java
 
   To assign attributes to a reference definition you need to leave a blank line between the
   reference definition and the attributes element, placed by itself and followed by a blank
-  line. 
-  
-        ![reference 1][ref]
-        
-        ![reference 2][ref]
-  
-        [ref]: http://example.com/image.png
-        
-        {width=20 height=20}
+  line.
+
+      ![reference 1][ref]
+
+      ![reference 2][ref]
+
+      [ref]: http://example.com/image.png
+
+      {width=20 height=20}
 
 * Fix: HTML Parser:
   * image alt text should escape markdown special characters which can affect parsing of image
@@ -316,14 +334,14 @@ flexmark-java
   * did not output a line end at start of `<div>`, this tended to splice text in div to previous
     element.
 
-* Add: Emoji Extension support to DocxRenderer. 
+* Add: Emoji Extension support to DocxRenderer.
   * Add: Emoji Cheat Sheet images to resources in DocxRender jar, default configuration will
-    resolve emoji image files to the files in the jar. 
+    resolve emoji image files to the files in the jar.
   * Add: `DocxRenderer.DOC_EMOJI_IMAGE_VERT_OFFSET`, default `-0.1`, vertical offset of emoji
-    image as a factor of line height at point of insertion. The final value is rounded to nearest
-    pt so jumps of 1 pt for small changes of this value can occur.
-  * Add: `DocxRenderer.DOC_EMOJI_IMAGE_VERT_SIZE`, default `1.05`, size of emoji image as a factor
-    of line height at point of insertion.
+    image as a factor of line height at point of insertion. The final value is rounded to
+    nearest pt so jumps of 1 pt for small changes of this value can occur.
+  * Add: `DocxRenderer.DOC_EMOJI_IMAGE_VERT_SIZE`, default `1.05`, size of emoji image as a
+    factor of line height at point of insertion.
 
 0.30.0
 ------

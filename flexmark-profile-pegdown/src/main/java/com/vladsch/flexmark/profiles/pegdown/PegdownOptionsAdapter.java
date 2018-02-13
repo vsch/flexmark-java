@@ -196,15 +196,10 @@ public class PegdownOptionsAdapter {
                 options.set(TocExtension.LEVELS, TocOptions.getLevels(2, 3));
             }
 
-            // pegdown does not have emoji shortcuts
-            if (false) {
-                extensions.add(EmojiExtension.create());
-                // need to set the location of the emoji icons from emoji-cheat-sheet on github or http://www.emoji-cheat-sheet.com/
-                //options.set(EmojiExtension.ROOT_IMAGE_PATH, emojiInstallDirectory());
-
-                // this will use GitHub URLs for emoji icons, not recommended
-                options.set(EmojiExtension.USE_IMAGE_URLS, true);
-            }
+            //// pegdown does not have emoji shortcuts
+            //extensions.add(EmojiExtension.create());
+            //// need to set the location of the emoji icons from emoji-cheat-sheet on github or http://www.emoji-cheat-sheet.com/
+            ////options.set(EmojiExtension.ROOT_IMAGE_PATH, emojiInstallDirectory());
 
             if (haveExtensions(MULTI_LINE_IMAGE_URLS)) {
                 options.set(Parser.PARSE_MULTI_LINE_IMAGE_URLS, true);

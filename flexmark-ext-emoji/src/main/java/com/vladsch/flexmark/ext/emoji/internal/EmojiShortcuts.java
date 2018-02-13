@@ -14,11 +14,11 @@ import java.util.HashMap;
 public class EmojiShortcuts {
     public static final String gitHubUrlPrefix = EmojiReference.githubUrl;
 
-    public static final HashMap<String, Emoji> emojiShortcuts = new HashMap<String, Emoji>();
-    public static final HashMap<String, Emoji> emojiURIs = new HashMap<String, Emoji>();
-    public static final HashMap<Emoji, String> emojiUnicodeChars = new HashMap<Emoji, String>();
+    private static final HashMap<String, Emoji> emojiShortcuts = new HashMap<String, Emoji>();
+    private static final HashMap<String, Emoji> emojiURIs = new HashMap<String, Emoji>();
+    private static final HashMap<Emoji, String> emojiUnicodeChars = new HashMap<Emoji, String>();
 
-    public static String getUnicodeChars(Emoji emoji) {
+    synchronized public static String getUnicodeChars(Emoji emoji) {
         if (emoji == null || emoji.unicodeChars == null) {
             return null;
         }
@@ -45,7 +45,27 @@ public class EmojiShortcuts {
         return fileName;
     }
 
+    public static HashMap<String, Emoji> getEmojiShortcuts() {
+        updateEmojiShortcuts();
+        return emojiShortcuts;
+    }
+
+    public static HashMap<String, Emoji> getEmojiURIs() {
+        updateEmojiShortcuts();
+        return emojiURIs;
+    }
+
     public static Emoji getEmojiFromShortcut(String shortcut) {
+        updateEmojiShortcuts();
+        return emojiShortcuts.get(shortcut);
+    }
+
+    public static Emoji getEmojiFromURI(String imageURI) {
+        updateEmojiURIs();
+        return emojiURIs.get(extractFileName(imageURI));
+    }
+
+    synchronized private static void updateEmojiShortcuts() {
         if (emojiShortcuts.isEmpty()) {
             for (Emoji emoji : EmojiReference.getEmojiList()) {
                 if (emoji.shortcut != null) {
@@ -53,11 +73,9 @@ public class EmojiShortcuts {
                 }
             }
         }
-
-        return emojiShortcuts.get(shortcut);
     }
 
-    public static Emoji getEmojiFromURI(String imageURI) {
+    synchronized private static void updateEmojiURIs() {
         if (emojiURIs.isEmpty()) {
             // create it
             for (Emoji emoji : EmojiReference.getEmojiList()) {
@@ -72,8 +90,6 @@ public class EmojiShortcuts {
                 }
             }
         }
-
-        return emojiURIs.get(extractFileName(imageURI));
     }
 }
 

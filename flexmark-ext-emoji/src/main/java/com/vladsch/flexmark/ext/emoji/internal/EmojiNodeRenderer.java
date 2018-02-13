@@ -46,6 +46,7 @@ public class EmojiNodeRenderer implements NodeRenderer {
                 html.attr("alt", shortcut.alt);
                 if (!myOptions.attrImageSize.isEmpty()) html.attr("height", myOptions.attrImageSize).attr("width", myOptions.attrImageSize);
                 if (!myOptions.attrAlign.isEmpty()) html.attr("align", myOptions.attrAlign);
+                if (!myOptions.attrImageClass.isEmpty()) html.attr("class", myOptions.attrImageClass);
                 html.withAttr(resolvedLink);
                 html.tagVoid("img");
             }

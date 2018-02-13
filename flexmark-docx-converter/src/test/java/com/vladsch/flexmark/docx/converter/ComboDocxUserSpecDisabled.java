@@ -3,6 +3,7 @@ package com.vladsch.flexmark.docx.converter;
 import com.vladsch.flexmark.IRender;
 import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.docx.converter.internal.DocxRenderer;
+import com.vladsch.flexmark.docx.converter.util.XmlDocxSorter;
 import com.vladsch.flexmark.docx.converter.util.XmlFormatter;
 import com.vladsch.flexmark.ext.definition.DefinitionExtension;
 import com.vladsch.flexmark.ext.emoji.EmojiExtension;
@@ -135,7 +136,7 @@ public class ComboDocxUserSpecDisabled extends ComboSpecTestCase {
                     try {
                         mlPackage.save(outputStream, Docx4J.FLAG_SAVE_FLAT_XML);
                         final String xml = outputStream.toString("UTF-8");
-                        final String s = XmlFormatter.format(xml);
+                        final String s = XmlDocxSorter.sortDocumentParts(xml);
                         FileWriter fileWriter = new FileWriter(file2);
                         fileWriter.append(s);
                         fileWriter.append('\n');
