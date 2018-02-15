@@ -42,7 +42,7 @@ following sample:
 <dependency>
     <groupId>com.vladsch.flexmark</groupId>
     <artifactId>flexmark-all</artifactId>
-    <version>0.32.0</version>
+    <version>0.32.4</version>
 </dependency>
 ```
 
@@ -85,7 +85,7 @@ public class BasicSample {
 #### Building via Gradle
 
 ```shell
-compile 'com.vladsch.flexmark:flexmark-all:0.32.0'
+compile 'com.vladsch.flexmark:flexmark-all:0.32.4'
 ```
 
 #### Building with Android Studio
@@ -100,10 +100,10 @@ packagingOptions {
 }
 ```
 
-More information can be found in the documentation:  
-[Wiki Home](../../wiki)  
-&nbsp;&nbsp;&nbsp;&nbsp;[Usage Examples](../../wiki/Usage)  
-&nbsp;&nbsp;&nbsp;&nbsp;[Extension Details](../../wiki/Extensions)  
+More information can be found in the documentation:
+[Wiki Home](../../wiki)
+&nbsp;&nbsp;&nbsp;&nbsp;[Usage Examples](../../wiki/Usage)
+&nbsp;&nbsp;&nbsp;&nbsp;[Extension Details](../../wiki/Extensions)
 &nbsp;&nbsp;&nbsp;&nbsp;[Writing Extensions](../../wiki/Writing-Extensions)
 
 ### Pegdown Migration Helper

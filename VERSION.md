@@ -7,6 +7,7 @@ flexmark-java
 
 - [To Do](#to-do)
     - [Docx Converter](#docx-converter)
+- [0.32.4](#0324)
 - [0.32.2](#0322)
 - [0.32.0](#0320)
 - [0.30.0](#0300)
@@ -246,6 +247,11 @@ flexmark-java
         similar to Math solution above.
 
 &nbsp;</details>
+
+0.32.4
+------
+
+* Fix: #207, Issue extension doesn't support windows new lines, same for Gfm User extension.
 
 0.32.2
 ------
