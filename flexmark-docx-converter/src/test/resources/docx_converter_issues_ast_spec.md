@@ -3772,7 +3772,7 @@ TEXT :+1: TEXT
 
 ## Image CRC Error
 
-```````````````````````````````` example Image CRC Error: 1
+```````````````````````````````` example(Image CRC Error: 1) options(IGNORED)
 ![crc-error](/images/crc-error.png)
 .
 <w:body>
