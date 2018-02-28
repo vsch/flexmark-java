@@ -14,6 +14,7 @@ public class DocxLinkResolver implements LinkResolver {
     private final String docRelativeURL;
     private final String docRootURL;
     private final String[] relativeParts;
+    private final boolean prefixWwwLinks;
 
     public DocxLinkResolver(final LinkResolverContext context) {
         // can use context for custom settings
@@ -31,6 +32,7 @@ public class DocxLinkResolver implements LinkResolver {
         this.docRelativeURL = docRelativeURL;
         this.docRootURL = docRootURL;
         relativeParts = docRelativeURL.split("/");
+        prefixWwwLinks = DocxRenderer.PREFIX_WWW_LINKS.getFrom(context.getOptions());
     }
 
     @Override
@@ -61,6 +63,10 @@ public class DocxLinkResolver implements LinkResolver {
                     return link.withStatus(LinkStatus.VALID)
                             .withUrl(url);
                 }
+            } else if (prefixWwwLinks && url.startsWith("www.")) {
+                // should be prefixed with http://, we will just add it
+                return link.withStatus(LinkStatus.INVALID)
+                        .withUrl("http://" + url);
             } else if (!url.matches("^(?:[a-z]+:|#|\\?)")) {
                 // relative, we will process it as a relative path to the docRelativeURL
                 String pageRef = url;

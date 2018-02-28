@@ -3770,3 +3770,103 @@ TEXT :+1: TEXT
 ````````````````````````````````
 
 
+## Image CRC Error
+
+```````````````````````````````` example Image CRC Error: 1
+![crc-error](/images/crc-error.png)
+.
+<w:body>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="ParagraphTextBody"/>
+        </w:pPr>
+        <w:r>
+            <w:drawing>
+                <wp:inline distB="0" distL="0" distR="0" distT="0">
+                    <wp:extent cx="6332220" cy="6020565"/>
+                    <wp:effectExtent b="0" l="0" r="0" t="0"/>
+                    <wp:docPr descr="crc-error" id="0" name="Image1"/>
+                    <wp:cNvGraphicFramePr>
+                        <a:graphicFrameLocks noChangeAspect="true"/>
+                    </wp:cNvGraphicFramePr>
+                    <a:graphic>
+                        <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                            <pic:pic>
+                                <pic:nvPicPr>
+                                    <pic:cNvPr id="1" name="Image1"/>
+                                    <pic:cNvPicPr/>
+                                </pic:nvPicPr>
+                                <pic:blipFill>
+                                    <a:blip r:embed="rId3"/>
+                                    <a:stretch>
+                                    <a:fillRect/>
+                                    </a:stretch>
+                                </pic:blipFill>
+                                <pic:spPr>
+                                    <a:xfrm>
+                                    <a:off x="0" y="0"/>
+                                    <a:ext cx="6332220" cy="6020565"/>
+                                    </a:xfrm>
+                                    <a:prstGeom prst="rect">
+                                    <a:avLst/>
+                                    </a:prstGeom>
+                                </pic:spPr>
+                            </pic:pic>
+                        </a:graphicData>
+                    </a:graphic>
+                </wp:inline>
+            </w:drawing>
+        </w:r>
+    </w:p>
+</w:body>
+````````````````````````````````
+
+
+## www. link
+
+unprefixed
+
+```````````````````````````````` example(www. link: 1) options(no-www-prefix)
+[www.example](www.example.com) 
+.
+<w:body>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="ParagraphTextBody"/>
+        </w:pPr>
+        <w:hyperlink r:id="rId3">
+            <w:r>
+                <w:rPr>
+                    <w:rStyle w:val="Hyperlink"/>
+                </w:rPr>
+                <w:t xml:space="preserve">www.example</w:t>
+            </w:r>
+        </w:hyperlink>
+    </w:p>
+</w:body>
+````````````````````````````````
+
+
+prefixed
+
+```````````````````````````````` example www. link: 2
+[www.example](www.example.com) 
+.
+<w:body>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="ParagraphTextBody"/>
+        </w:pPr>
+        <w:hyperlink r:id="rId3">
+            <w:r>
+                <w:rPr>
+                    <w:rStyle w:val="Hyperlink"/>
+                </w:rPr>
+                <w:t xml:space="preserve">www.example</w:t>
+            </w:r>
+        </w:hyperlink>
+    </w:p>
+</w:body>
+````````````````````````````````
+
+

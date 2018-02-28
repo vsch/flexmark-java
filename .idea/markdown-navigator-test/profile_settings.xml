@@ -1,0 +1,7 @@
+<component name="MarkdownNavigator.TestProfileManager">
+  <settings default="" pdf-export="">
+    <scope-profiles>
+      <element scope="Test" profile="Test" />
+    </scope-profiles>
+  </settings>
+</component>

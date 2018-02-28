@@ -94,6 +94,7 @@ public class ComboDocxConverterIssuesSpecTest extends ComboSpecTestCase {
         optionsMap.put("no-missing-hyperlink", new MutableDataSet().set(DocxRenderer.LOCAL_HYPERLINK_MISSING_HIGHLIGHT, ""));
         optionsMap.put("emoji-unicode", new MutableDataSet().set(EmojiExtension.USE_IMAGE_TYPE, EmojiImageType.UNICODE_FALLBACK_TO_IMAGE));
         optionsMap.put("emoji-github", new MutableDataSet().set(EmojiExtension.USE_SHORTCUT_TYPE, EmojiShortcutType.ANY_EMOJI_CHEAT_SHEET_PREFERRED));
+        optionsMap.put("no-www-prefix", new MutableDataSet().set(DocxRenderer.PREFIX_WWW_LINKS, false));
 
         // Set up a simple configuration that logs on the console.
         //BasicConfigurator.configure();

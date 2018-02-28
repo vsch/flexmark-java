@@ -1,5 +1,6 @@
 package com.vladsch.flexmark.ext.zzzzzz;
 
+import com.vladsch.flexmark.ext.tables.TablesExtension;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.spec.SpecExample;
@@ -16,7 +17,7 @@ public class ComboZzzzzzSpecTest extends ComboSpecTestCase {
     private static final DataHolder OPTIONS = new MutableDataSet()
             .set(HtmlRenderer.INDENT_SIZE, 2)
             //.set(HtmlRenderer.PERCENT_ENCODE_URLS, true)
-            .set(Parser.EXTENSIONS, Collections.singleton(ZzzzzzExtension.create()));
+            .set(Parser.EXTENSIONS, Arrays.asList(ZzzzzzExtension.create(), TablesExtension.create()));
 
     private static final Map<String, DataHolder> optionsMap = new HashMap<String, DataHolder>();
     static {

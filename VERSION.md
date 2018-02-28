@@ -7,6 +7,8 @@ flexmark-java
 
 - [To Do](#to-do)
     - [Docx Converter](#docx-converter)
+    - [GitLab compatibility extensions](#gitlab-compatibility-extensions)
+- [0.32.6](#0326)
 - [0.32.4](#0324)
 - [0.32.2](#0322)
 - [0.32.0](#0320)
@@ -220,38 +222,49 @@ flexmark-java
 
 * [ ] Fix: #99, YamlFrontMatterBlockParser ignores multi-key list items
 
-* Add: GitLab compatibility extensions
-  * [ ] Add: video link renderer to convert links to video files to embedded content. The valid
-        video extensions are `.mp4`, `.m4v`, `.mov`, `.webm`, and `.ogv`.
+### GitLab compatibility extensions
 
-    ```
-    <div class="video-container">
-    <video src="video.mp4" width="400" controls="true"></video>
-    <p><a href="video.mp4" target="_blank" rel="noopener noreferrer" title="Download 'Sample Video'">Sample Video</a></p>
-    </div>
-    ```
+* [ ] Add: video link renderer to convert links to video files to embedded content. The valid
+      video extensions are `.mp4`, `.m4v`, `.mov`, `.webm`, and `.ogv`.
 
-  * [ ] Multiline Block quote delimiters `>>>`
+  ```
+  <div class="video-container">
+  <video src="video.mp4" width="400" controls="true"></video>
+  <p><a href="video.mp4" target="_blank" rel="noopener noreferrer" title="Download 'Sample Video'">Sample Video</a></p>
+  </div>
+  ```
 
-  * [ ] Deleted text markers `{- -}` or `[- -]`
+* [ ] Multiline Block quote delimiters `>>>`
 
-  * [ ] Inserted text markers `{+ +}` or `[+ +]`
+* [ ] Deleted text markers `{- -}` or `[- -]`
 
-  * [ ] Header ids with emoji shortcuts generate an extra `-` because of two spaces around the
-        emoji shortcut while GitLab only generates a single `-`.
+* [ ] Inserted text markers `{+ +}` or `[+ +]`
 
-  * [ ] Math, inline via ```$``$``` or as fenced code with `math` info string requiring
-        inclusion of Katex in the rendered HTML page.
+* [x] Header ids with emoji shortcuts generate an extra `-` because of two spaces around the
+      emoji shortcut while GitLab only generates a single `-`. (via no duplicate `-` in ids)
 
-  * [ ] Graphing via Mermaid as fenced code with `mermaid` info string, via Mermaid inclusion
-        similar to Math solution above.
+* [ ] Math, inline via ```$``$``` or as fenced code with `math` info string requiring inclusion
+      of Katex in the rendered HTML page.
+
+
+* [ ] Graphing via Mermaid as fenced code with `mermaid` info string, via Mermaid inclusion
+      similar to Math solution above.
 
 &nbsp;</details>
+
+0.32.6
+------
+
+* Add: `DocxRenderer.PREFIX_WWW_LINKS`, default `true`, when true adds `http://` to link
+  addresses which start with `www.`
+
+* Fix: `DocxRenderer` some images would not be embedded and generate a CRC Error when loaded via
+  URL vs file.
 
 0.32.4
 ------
 
-* Fix: #207, Issue extension doesn't support windows new lines, same for Gfm User extension.
+* Fix: #207, Issue extension does not support windows new lines, same for Gfm User extension.
 
 0.32.2
 ------

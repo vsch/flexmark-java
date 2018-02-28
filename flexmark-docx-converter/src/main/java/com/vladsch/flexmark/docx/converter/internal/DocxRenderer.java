@@ -52,6 +52,7 @@ public class DocxRenderer implements IRender {
     public static final DataKey<Boolean> DEFAULT_LINK_RESOLVER = new DataKey<Boolean>("DEFAULT_LINK_RESOLVER", true);
     public static final DataKey<String> DOC_RELATIVE_URL = new DataKey<String>("DOC_RELATIVE_URL", "");
     public static final DataKey<String> DOC_ROOT_URL = new DataKey<String>("DOC_ROOT_URL", "");
+    public static final DataKey<Boolean> PREFIX_WWW_LINKS = new DataKey<Boolean>("PREFIX_WWW_LINKS", true);
 
     // same keys, same function also available here for convenience
     public static final DataKey<Boolean> RECHECK_UNDEFINED_REFERENCES = HtmlRenderer.RECHECK_UNDEFINED_REFERENCES;

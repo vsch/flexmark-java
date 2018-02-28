@@ -65,7 +65,10 @@ import org.docx4j.wml.*;
 
 import javax.xml.bind.JAXBElement;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.math.BigInteger;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.nio.charset.Charset;
 import java.util.*;
 
@@ -1312,7 +1315,17 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
 
         if (url.startsWith("http:") || url.startsWith("https:") || url.startsWith("file:")) {
             // hyperlinked image  or file
-            image = ImageUtils.loadImageFromURL(url, options.logImageProcessing);
+            if (url.startsWith("file:")) {
+                // try to load from file, from URL fails on some images while file load succeeds
+                try {
+                    File imageFile = new File(new URI(url));
+                    image = ImageUtils.loadImageFromFile(imageFile);
+                } catch (URISyntaxException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                image = ImageUtils.loadImageFromURL(url, options.logImageProcessing);
+            }
 
             if (image == null && options.logImageProcessing) {
                 System.out.println("loadImageFromURL(" + url + ") returned null");

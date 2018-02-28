@@ -3,6 +3,7 @@ package com.vladsch.flexmark.html.renderer;
 public class LinkStatus {
     public static final LinkStatus UNKNOWN = new LinkStatus("UNKNOWN");
     public static final LinkStatus VALID = new LinkStatus("VALID");
+    public static final LinkStatus INVALID = new LinkStatus("INVALID");
     public static final LinkStatus UNCHECKED = new LinkStatus("UNCHECKED");
     public static final LinkStatus NOT_FOUND = new LinkStatus("NOT_FOUND");
 

@@ -15,6 +15,7 @@ public class DocxRendererOptions {
     public final boolean tocGenerate;
     public final boolean logImageProcessing;
     public final boolean noCharacterStyles;
+    public final boolean prefixWwwLinks;
     public final int maxImageWidth;
     public final String tocInstruction;
     public final String codeHighlightShading;
@@ -75,6 +76,7 @@ public class DocxRendererOptions {
         docEmojiImageVertOffset = DocxRenderer.DOC_EMOJI_IMAGE_VERT_OFFSET.getFrom(options);
         docEmojiImageVertSize = DocxRenderer.DOC_EMOJI_IMAGE_VERT_SIZE.getFrom(options);
         errorSourceFile = DocxRenderer.ERROR_SOURCE_FILE.getFrom(options);
+        prefixWwwLinks = DocxRenderer.PREFIX_WWW_LINKS.getFrom(options);
 
         DEFAULT_STYLE = DocxRenderer.DEFAULT_STYLE.getFrom(options);
         LOOSE_PARAGRAPH_STYLE = DocxRenderer.LOOSE_PARAGRAPH_STYLE.getFrom(options);
