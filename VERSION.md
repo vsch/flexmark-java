@@ -8,6 +8,7 @@ flexmark-java
 - [To Do](#to-do)
     - [Docx Converter](#docx-converter)
     - [GitLab compatibility extensions](#gitlab-compatibility-extensions)
+- [0.32.8](#0328)
 - [0.32.6](#0326)
 - [0.32.4](#0324)
 - [0.32.2](#0322)
@@ -251,6 +252,13 @@ flexmark-java
       similar to Math solution above.
 
 &nbsp;</details>
+
+0.32.8
+------
+
+* Add: [Admonition Extension](https://github.com/vsch/flexmark-java/wiki/Extensions#admonition)
+  To create block-styled side content. For complete documentation please see the
+  [Admonition Extension, Material for MkDocs] documentation.
 
 0.32.6
 ------
@@ -3212,3 +3220,6 @@ the node's characters, independent of child node breakdown.
 
 ````````````````````````````````
 
+
+
+[Admonition Extension, Material for MkDocs]: https://squidfunk.github.io/mkdocs-material/extensions/admonition/

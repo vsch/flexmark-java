@@ -7,6 +7,7 @@
       <module fileurl="file://$PROJECT_DIR$/flexmark-all/flexmark-all.iml" filepath="$PROJECT_DIR$/flexmark-all/flexmark-all.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-docx-converter/flexmark-docx-converter.iml" filepath="$PROJECT_DIR$/flexmark-docx-converter/flexmark-docx-converter.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-ext-abbreviation/flexmark-ext-abbreviation.iml" filepath="$PROJECT_DIR$/flexmark-ext-abbreviation/flexmark-ext-abbreviation.iml" />
+      <module fileurl="file://$PROJECT_DIR$/flexmark-ext-admonition/flexmark-ext-admonition.iml" filepath="$PROJECT_DIR$/flexmark-ext-admonition/flexmark-ext-admonition.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-ext-anchorlink/flexmark-ext-anchorlink.iml" filepath="$PROJECT_DIR$/flexmark-ext-anchorlink/flexmark-ext-anchorlink.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-ext-aside/flexmark-ext-aside.iml" filepath="$PROJECT_DIR$/flexmark-ext-aside/flexmark-ext-aside.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-ext-attributes/flexmark-ext-attributes.iml" filepath="$PROJECT_DIR$/flexmark-ext-attributes/flexmark-ext-attributes.iml" />

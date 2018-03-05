@@ -113,15 +113,6 @@ public class BlockQuoteParser extends AbstractBlockParser {
         @Override
         public Set<Class<? extends CustomBlockParserFactory>> getAfterDependents() {
             return Collections.emptySet();
-            //new HashSet<Class<?extends CustomBlockParserFactory>>(Arrays.asList(
-            //        //BlockQuoteParser.Factory.class,
-            //        //HeadingParser.Factory.class,
-            //        //FencedCodeBlockParser.Factory.class
-            //        //HtmlBlockParser.Factory.class,
-            //        //ThematicBreakParser.Factory.class,
-            //        //ListBlockParser.Factory.class,
-            //        //IndentedCodeBlockParser.Factory.class
-            //));
         }
 
         @Override
@@ -155,10 +146,10 @@ public class BlockQuoteParser extends AbstractBlockParser {
         private final boolean withLeadSpacesInterruptsItemParagraph;
         BlockFactory(DataHolder options) {
             super(options);
-            allowLeadingSpace = options.get(Parser.BLOCK_QUOTE_ALLOW_LEADING_SPACE);
-            interruptsParagraph = options.get(Parser.BLOCK_QUOTE_INTERRUPTS_PARAGRAPH);
-            interruptsItemParagraph = options.get(Parser.BLOCK_QUOTE_INTERRUPTS_ITEM_PARAGRAPH);
-            withLeadSpacesInterruptsItemParagraph = options.get(Parser.BLOCK_QUOTE_WITH_LEAD_SPACES_INTERRUPTS_ITEM_PARAGRAPH);
+            allowLeadingSpace = Parser.BLOCK_QUOTE_ALLOW_LEADING_SPACE.getFrom( options);
+            interruptsParagraph = Parser.BLOCK_QUOTE_INTERRUPTS_PARAGRAPH.getFrom( options);
+            interruptsItemParagraph = Parser.BLOCK_QUOTE_INTERRUPTS_ITEM_PARAGRAPH.getFrom( options);
+            withLeadSpacesInterruptsItemParagraph = Parser.BLOCK_QUOTE_WITH_LEAD_SPACES_INTERRUPTS_ITEM_PARAGRAPH.getFrom( options);
         }
 
         public BlockStart tryStart(ParserState state, MatchedBlockParser matchedBlockParser) {

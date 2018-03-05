@@ -42,7 +42,7 @@ following sample:
 <dependency>
     <groupId>com.vladsch.flexmark</groupId>
     <artifactId>flexmark-all</artifactId>
-    <version>0.32.4</version>
+    <version>0.32.8</version>
 </dependency>
 ```
 
@@ -85,7 +85,7 @@ public class BasicSample {
 #### Building via Gradle
 
 ```shell
-compile 'com.vladsch.flexmark:flexmark-all:0.32.4'
+compile 'com.vladsch.flexmark:flexmark-all:0.32.8'
 ```
 
 #### Building with Android Studio
@@ -175,6 +175,9 @@ custom node renderer if you need to override the generated link HTML.
 
 ### Latest Additions
 
+* [Admonition Extension](https://github.com/vsch/flexmark-java/wiki/Extensions#admonition) To
+  create block-styled side content. For complete documentation please see the
+  [Admonition Extension, Material for MkDocs] documentation.
 * [Enumerated Reference](https://github.com/vsch/flexmark-java/wiki/Extensions#enumerated-reference)
   to create enumerated references for figures, tables and other markdown elements.
 * [Attributes Extension](https://github.com/vsch/flexmark-java/wiki/Extensions#attributes) to
@@ -650,3 +653,6 @@ BSD (2-clause) licensed, see [LICENSE.txt] file.
 [vsch/pegdown]: https://github.com/vsch/pegdown/tree/develop
 [WebStorm]: http://www.jetbrains.com/webstorm
 
+
+
+[Admonition Extension, Material for MkDocs]: https://squidfunk.github.io/mkdocs-material/extensions/admonition/

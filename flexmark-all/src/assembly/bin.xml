@@ -13,6 +13,7 @@
             <includes>
                 <include>com.vladsch.flexmark:flexmark</include>
                 <include>com.vladsch.flexmark:flexmark-ext-abbreviation</include>
+                <include>com.vladsch.flexmark:flexmark-ext-admonition</include>
                 <include>com.vladsch.flexmark:flexmark-ext-anchorlink</include>
                 <include>com.vladsch.flexmark:flexmark-ext-aside</include>
                 <include>com.vladsch.flexmark:flexmark-ext-autolink</include>

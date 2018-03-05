@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="MarkdownProjectSettings">
-    <PreviewSettings splitEditorLayout="FIRST" splitEditorPreview="PREVIEW" useGrayscaleRendering="false" zoomFactor="1.0" maxImageWidth="0" showGitHubPageIfSynced="false" allowBrowsingInPreview="false" synchronizePreviewPosition="false" highlightPreviewType="LINE" highlightFadeOut="3" highlightOnTyping="false" synchronizeSourcePosition="true" verticallyAlignSourceAndPreviewSyncPosition="true" showSearchHighlightsInPreview="true" showSelectionInPreview="true" openRemoteLinks="true" replaceUnicodeEmoji="false">
+    <PreviewSettings splitEditorLayout="FIRST" splitEditorPreview="PREVIEW" useGrayscaleRendering="false" zoomFactor="1.0" maxImageWidth="0" showGitHubPageIfSynced="false" allowBrowsingInPreview="false" synchronizePreviewPosition="true" highlightPreviewType="LINE" highlightFadeOut="3" highlightOnTyping="false" synchronizeSourcePosition="true" verticallyAlignSourceAndPreviewSyncPosition="true" showSearchHighlightsInPreview="true" showSelectionInPreview="true" openRemoteLinks="true" replaceUnicodeEmoji="false">
       <PanelProvider>
         <provider providerId="com.vladsch.idea.multimarkdown.editor.javafx.html.panel" providerName="JavaFX WebView" />
       </PanelProvider>
@@ -61,13 +61,11 @@
       <bodyTop />
       <bodyBottom>&lt;script src=&quot;file:///Users/vlad/src/sites/public/mn-resources/admonition.js&quot;&gt;&lt;/script&gt;</bodyBottom>
     </HtmlSettings>
-    <CssSettings previewScheme="UI_SCHEME" cssUri="file://$PROJECT_DIR$/admonition.css" isCssUriEnabled="true" isCssUriSerial="true" isCssTextEnabled="true" isDynamicPageWidth="true">
+    <CssSettings previewScheme="UI_SCHEME" cssUri="file://$PROJECT_DIR$/flexmark-ext-admonition/src/main/resources/admonition.css" isCssUriEnabled="true" isCssUriSerial="true" isCssTextEnabled="true" isDynamicPageWidth="true">
       <StylesheetProvider>
         <provider providerId="com.vladsch.idea.multimarkdown.editor.javafx.html.css" providerName="Default JavaFx Stylesheet" />
       </StylesheetProvider>
-      <ScriptProviders>
-        <provider providerId="com.vladsch.idea.multimarkdown.editor.prismjs.html.script" providerName="Prism.js Script" />
-      </ScriptProviders>
+      <ScriptProviders />
       <cssText>.markdown-body,
 .wiki-body {
     font-family: Arial, &quot;Helvetica Neue&quot;, &quot;Segoe UI&quot;, freesans, sans-serif;

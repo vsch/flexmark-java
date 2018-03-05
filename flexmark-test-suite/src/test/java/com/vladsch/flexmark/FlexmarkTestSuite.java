@@ -3,6 +3,7 @@ package com.vladsch.flexmark;
 import com.vladsch.flexmark.convert.html.FlexmarkHtmlParserTestSuite;
 import com.vladsch.flexmark.docx.converter.DocxConverterTestSuite;
 import com.vladsch.flexmark.ext.abbreviation.ExtAbbreviationTestSuite;
+import com.vladsch.flexmark.ext.admonition.ExtAdmonitionTestSuite;
 import com.vladsch.flexmark.ext.anchorlink.ExtAnchorLinkTestSuite;
 import com.vladsch.flexmark.ext.aside.ExtAsideTestSuite;
 import com.vladsch.flexmark.ext.attributes.ExtAttributesTestSuite;
@@ -42,6 +43,7 @@ import org.junit.runners.Suite;
         UtilsTestSuite.class,
         CoreTestSuite.class,
         ExtAbbreviationTestSuite.class,
+        ExtAdmonitionTestSuite.class,
         ExtAnchorLinkTestSuite.class,
         ExtAsideTestSuite.class,
         ExtAttributesTestSuite.class,
