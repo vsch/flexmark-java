@@ -90,7 +90,7 @@ Qualifiers are used to select the icon and the color of the block.
 !!! note
     first child paragraph  
 .
-<svg xmlns=http://www.w3.org/2000/svg class="adm-hidden">
+<svg xmlns="http://www.w3.org/2000/svg" class="adm-hidden">
   <symbol id="adm-note">
     <svg enable-background="new 0 0 24 24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g fill="currentColor"><path d="m15.4 5h4.5v2.7h-4.5z" transform="matrix(-.7071 -.7071 .7071 -.7071 25.7188 23.288)"/><path d="m13.9 7 3.1 3.1-9.5 9.6-3.5.3.3-3.5z"/></g></svg>
   </symbol>
@@ -101,7 +101,6 @@ Qualifiers are used to select the icon and the color of the block.
 </div>
 <div class="adm-body">
   <p>first child paragraph</p>
-</div>
 </div>
 </div>
 .
@@ -118,7 +117,7 @@ with title
 !!! note "Title"
     first child paragraph  
 .
-<svg xmlns=http://www.w3.org/2000/svg class="adm-hidden">
+<svg xmlns="http://www.w3.org/2000/svg" class="adm-hidden">
   <symbol id="adm-note">
     <svg enable-background="new 0 0 24 24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g fill="currentColor"><path d="m15.4 5h4.5v2.7h-4.5z" transform="matrix(-.7071 -.7071 .7071 -.7071 25.7188 23.288)"/><path d="m13.9 7 3.1 3.1-9.5 9.6-3.5.3.3-3.5z"/></g></svg>
   </symbol>
@@ -129,7 +128,6 @@ with title
 </div>
 <div class="adm-body">
   <p>first child paragraph</p>
-</div>
 </div>
 </div>
 .
@@ -146,7 +144,7 @@ no heading
 !!! note ""
     first child paragraph  
 .
-<svg xmlns=http://www.w3.org/2000/svg class="adm-hidden">
+<svg xmlns="http://www.w3.org/2000/svg" class="adm-hidden">
   <symbol id="adm-note">
     <svg enable-background="new 0 0 24 24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g fill="currentColor"><path d="m15.4 5h4.5v2.7h-4.5z" transform="matrix(-.7071 -.7071 .7071 -.7071 25.7188 23.288)"/><path d="m13.9 7 3.1 3.1-9.5 9.6-3.5.3.3-3.5z"/></g></svg>
   </symbol>
@@ -170,7 +168,7 @@ collapsed
 ??? note
     first child paragraph  
 .
-<svg xmlns=http://www.w3.org/2000/svg class="adm-hidden">
+<svg xmlns="http://www.w3.org/2000/svg" class="adm-hidden">
   <symbol id="adm-note">
     <svg enable-background="new 0 0 24 24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g fill="currentColor"><path d="m15.4 5h4.5v2.7h-4.5z" transform="matrix(-.7071 -.7071 .7071 -.7071 25.7188 23.288)"/><path d="m13.9 7 3.1 3.1-9.5 9.6-3.5.3.3-3.5z"/></g></svg>
   </symbol>
@@ -181,7 +179,6 @@ collapsed
 </div>
 <div class="adm-body">
   <p>first child paragraph</p>
-</div>
 </div>
 </div>
 .
@@ -198,7 +195,7 @@ collapsed with title
 ??? note "Title"
     first child paragraph  
 .
-<svg xmlns=http://www.w3.org/2000/svg class="adm-hidden">
+<svg xmlns="http://www.w3.org/2000/svg" class="adm-hidden">
   <symbol id="adm-note">
     <svg enable-background="new 0 0 24 24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g fill="currentColor"><path d="m15.4 5h4.5v2.7h-4.5z" transform="matrix(-.7071 -.7071 .7071 -.7071 25.7188 23.288)"/><path d="m13.9 7 3.1 3.1-9.5 9.6-3.5.3.3-3.5z"/></g></svg>
   </symbol>
@@ -209,7 +206,6 @@ collapsed with title
 </div>
 <div class="adm-body">
   <p>first child paragraph</p>
-</div>
 </div>
 </div>
 .
@@ -226,7 +222,7 @@ collapsed with empty title
 ??? note ""
     first child paragraph  
 .
-<svg xmlns=http://www.w3.org/2000/svg class="adm-hidden">
+<svg xmlns="http://www.w3.org/2000/svg" class="adm-hidden">
   <symbol id="adm-note">
     <svg enable-background="new 0 0 24 24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g fill="currentColor"><path d="m15.4 5h4.5v2.7h-4.5z" transform="matrix(-.7071 -.7071 .7071 -.7071 25.7188 23.288)"/><path d="m13.9 7 3.1 3.1-9.5 9.6-3.5.3.3-3.5z"/></g></svg>
   </symbol>
@@ -250,7 +246,7 @@ open
 ???+ note
     first child paragraph  
 .
-<svg xmlns=http://www.w3.org/2000/svg class="adm-hidden">
+<svg xmlns="http://www.w3.org/2000/svg" class="adm-hidden">
   <symbol id="adm-note">
     <svg enable-background="new 0 0 24 24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g fill="currentColor"><path d="m15.4 5h4.5v2.7h-4.5z" transform="matrix(-.7071 -.7071 .7071 -.7071 25.7188 23.288)"/><path d="m13.9 7 3.1 3.1-9.5 9.6-3.5.3.3-3.5z"/></g></svg>
   </symbol>
@@ -261,7 +257,6 @@ open
 </div>
 <div class="adm-body">
   <p>first child paragraph</p>
-</div>
 </div>
 </div>
 .
@@ -278,7 +273,7 @@ open with title
 ???+ note "Title"
     first child paragraph  
 .
-<svg xmlns=http://www.w3.org/2000/svg class="adm-hidden">
+<svg xmlns="http://www.w3.org/2000/svg" class="adm-hidden">
   <symbol id="adm-note">
     <svg enable-background="new 0 0 24 24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g fill="currentColor"><path d="m15.4 5h4.5v2.7h-4.5z" transform="matrix(-.7071 -.7071 .7071 -.7071 25.7188 23.288)"/><path d="m13.9 7 3.1 3.1-9.5 9.6-3.5.3.3-3.5z"/></g></svg>
   </symbol>
@@ -289,7 +284,6 @@ open with title
 </div>
 <div class="adm-body">
   <p>first child paragraph</p>
-</div>
 </div>
 </div>
 .
@@ -306,7 +300,7 @@ open with empty title
 ???+ note ""
     first child paragraph  
 .
-<svg xmlns=http://www.w3.org/2000/svg class="adm-hidden">
+<svg xmlns="http://www.w3.org/2000/svg" class="adm-hidden">
   <symbol id="adm-note">
     <svg enable-background="new 0 0 24 24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g fill="currentColor"><path d="m15.4 5h4.5v2.7h-4.5z" transform="matrix(-.7071 -.7071 .7071 -.7071 25.7188 23.288)"/><path d="m13.9 7 3.1 3.1-9.5 9.6-3.5.3.3-3.5z"/></g></svg>
   </symbol>
@@ -341,7 +335,7 @@ with multiple children
     | Table Data  |
 
 .
-<svg xmlns=http://www.w3.org/2000/svg class="adm-hidden">
+<svg xmlns="http://www.w3.org/2000/svg" class="adm-hidden">
   <symbol id="adm-note">
     <svg enable-background="new 0 0 24 24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g fill="currentColor"><path d="m15.4 5h4.5v2.7h-4.5z" transform="matrix(-.7071 -.7071 .7071 -.7071 25.7188 23.288)"/><path d="m13.9 7 3.1 3.1-9.5 9.6-3.5.3.3-3.5z"/></g></svg>
   </symbol>
@@ -365,7 +359,6 @@ with multiple children
       <tr><td>Table Data</td></tr>
     </tbody>
   </table>
-</div>
 </div>
 </div>
 .
@@ -416,7 +409,7 @@ collapsed with multiple children
     | Table Data  |
 
 .
-<svg xmlns=http://www.w3.org/2000/svg class="adm-hidden">
+<svg xmlns="http://www.w3.org/2000/svg" class="adm-hidden">
   <symbol id="adm-example">
     <svg enable-background="new 0 0 24 24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><svg enable-background='new 0 0 24 24' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'><g fill="currentColor"><path d='m8 5.2h13v2.4h-13z'/><path d='m4.4 8.4c-.1 0-.2-.1-.2-.2v-2c-.1 0-.2 0-.2.1-.2.1-.4.1-.7.2 0 0 0 0-.1 0h-.1c-.1 0-.1-.1-.1-.2v-.8c0-.1.1-.2.1-.2.4-.1.7-.2.9-.4.2-.1.3-.3.4-.5 0-.1.1-.1.2-.1h.8c.1 0 .2.1.2.2v3.7c0 .1-.1.2-.2.2z'/><path d='m8 10.8h13v2.4h-13z'/><path d='m3 14.1c-.1 0-.1 0-.1-.1s-.1-.1 0-.2c0-.3.2-.6.4-.9s.5-.6 1-1c.3-.3.5-.4.5-.5.1-.1.1-.1.1-.2s0-.1-.1-.1c0 0-.1-.1-.2-.1s-.1 0-.2.1c0 0-.1.1-.1.3 0 .1-.1.2-.2.2 0 0-1-.1-1-.1-.1 0-.1 0-.1-.1 0 0 0-.1 0-.2 0-.3.1-.6.3-.8.1-.2.3-.3.5-.4.1 0 .4-.1.8-.1s.7 0 .9.1.4.2.6.4c.1.2.2.4.2.7s-.1.5-.2.7-.4.5-.8.7c-.1.1-.2.1-.2.2h1c.1 0 .2.1.2.2v.8c0 .1-.1.2-.2.2h-3.1z'/><path d='m8 16.4h13v2.4h-13z'/><path d='m4.5 19.7c-.4 0-.6 0-.9-.1-.2-.1-.4-.2-.6-.4 0-.2-.1-.4-.2-.7 0-.1 0-.1 0-.2s.1-.1.1-.1 1-.1 1-.1c.1 0 .2.1.2.2 0 .2.1.3.1.3s.1.1.2.1.1 0 .2-.1.1-.1.1-.3c0-.1 0-.2-.1-.3 0 0-.1-.1-.2-.1 0 0-.1 0-.3.1 0 0 0 0-.1 0h-.1c.1 0 .1-.1.1-.1v-.8-.1l-1-.2c-.1 0-.1 0-.1-.1 0 0 0-.1 0-.2.1-.2.2-.5.5-.7s.6-.3 1.1-.3.9.1 1.2.3c.2.3.3.5.3.9 0 .2 0 .3-.1.5 0 .1-.1.1-.1.2.1.1.3.2.4.4s.1.3.1.5-.1.5-.2.7-.3.4-.6.5c-.3.2-.6.2-1 .2zm-.1-2.7c.1 0 .1 0 .2-.1 0 0 .1-.1.1-.2s0-.1 0-.1 0 0-.1 0-.1 0-.2.1c0 0-.1.1-.1.3v.1c-.1-.2 0-.1.1-.1z'/></g></svg>
   </symbol>
@@ -440,7 +433,6 @@ collapsed with multiple children
       <tr><td>Table Data</td></tr>
     </tbody>
   </table>
-</div>
 </div>
 </div>
 .
@@ -480,7 +472,7 @@ with lazy continuation of first paragraph
 !!! note
 lazy continuation 
 .
-<svg xmlns=http://www.w3.org/2000/svg class="adm-hidden">
+<svg xmlns="http://www.w3.org/2000/svg" class="adm-hidden">
   <symbol id="adm-note">
     <svg enable-background="new 0 0 24 24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g fill="currentColor"><path d="m15.4 5h4.5v2.7h-4.5z" transform="matrix(-.7071 -.7071 .7071 -.7071 25.7188 23.288)"/><path d="m13.9 7 3.1 3.1-9.5 9.6-3.5.3.3-3.5z"/></g></svg>
   </symbol>
@@ -491,7 +483,6 @@ lazy continuation
 </div>
 <div class="adm-body">
   <p>lazy continuation</p>
-</div>
 </div>
 </div>
 .
@@ -507,7 +498,7 @@ lazy continuation disabled
 !!! note
 lazy continuation 
 .
-<svg xmlns=http://www.w3.org/2000/svg class="adm-hidden">
+<svg xmlns="http://www.w3.org/2000/svg" class="adm-hidden">
   <symbol id="adm-note">
     <svg enable-background="new 0 0 24 24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g fill="currentColor"><path d="m15.4 5h4.5v2.7h-4.5z" transform="matrix(-.7071 -.7071 .7071 -.7071 25.7188 23.288)"/><path d="m13.9 7 3.1 3.1-9.5 9.6-3.5.3.3-3.5z"/></g></svg>
   </symbol>
@@ -517,7 +508,6 @@ lazy continuation
 <svg class="adm-icon"><use xlink:href="#adm-note" /></svg><span>Note</span>
 </div>
 <div class="adm-body"></div>
-</div>
 </div>
 <p>lazy continuation</p>
 .
@@ -534,7 +524,7 @@ with leading space
   !!! note
 lazy continuation 
 .
-<svg xmlns=http://www.w3.org/2000/svg class="adm-hidden">
+<svg xmlns="http://www.w3.org/2000/svg" class="adm-hidden">
   <symbol id="adm-note">
     <svg enable-background="new 0 0 24 24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g fill="currentColor"><path d="m15.4 5h4.5v2.7h-4.5z" transform="matrix(-.7071 -.7071 .7071 -.7071 25.7188 23.288)"/><path d="m13.9 7 3.1 3.1-9.5 9.6-3.5.3.3-3.5z"/></g></svg>
   </symbol>
@@ -545,7 +535,6 @@ lazy continuation
 </div>
 <div class="adm-body">
   <p>lazy continuation</p>
-</div>
 </div>
 </div>
 .
@@ -577,7 +566,7 @@ Inside block quote
 > !!! note
 > lazy continuation 
 .
-<svg xmlns=http://www.w3.org/2000/svg class="adm-hidden">
+<svg xmlns="http://www.w3.org/2000/svg" class="adm-hidden">
   <symbol id="adm-note">
     <svg enable-background="new 0 0 24 24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g fill="currentColor"><path d="m15.4 5h4.5v2.7h-4.5z" transform="matrix(-.7071 -.7071 .7071 -.7071 25.7188 23.288)"/><path d="m13.9 7 3.1 3.1-9.5 9.6-3.5.3.3-3.5z"/></g></svg>
   </symbol>
@@ -589,7 +578,6 @@ Inside block quote
   </div>
   <div class="adm-body">
     <p>lazy continuation</p>
-  </div>
   </div>
   </div>
 </blockquote>
@@ -608,7 +596,7 @@ Try all qualifiers
 !!! abstract
     abstract  
 .
-<svg xmlns=http://www.w3.org/2000/svg class="adm-hidden">
+<svg xmlns="http://www.w3.org/2000/svg" class="adm-hidden">
   <symbol id="adm-abstract">
     <svg enable-background="new 0 0 24 24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g fill="currentColor"><path d="m4.8 4.7h14.4v2.4h-14.4z"/><path d="m4.8 8.7h14.4v2.4h-14.4z"/><path d="m4.8 12.7h14.4v2.4h-14.4z"/><path d="m4.8 16.7h7.2v2.4h-7.2z"/></g></svg>
   </symbol>
@@ -619,7 +607,6 @@ Try all qualifiers
 </div>
 <div class="adm-body">
   <p>abstract</p>
-</div>
 </div>
 </div>
 .
@@ -634,7 +621,7 @@ Document[0, 28]
 !!! summary
     summary  
 .
-<svg xmlns=http://www.w3.org/2000/svg class="adm-hidden">
+<svg xmlns="http://www.w3.org/2000/svg" class="adm-hidden">
   <symbol id="adm-abstract">
     <svg enable-background="new 0 0 24 24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g fill="currentColor"><path d="m4.8 4.7h14.4v2.4h-14.4z"/><path d="m4.8 8.7h14.4v2.4h-14.4z"/><path d="m4.8 12.7h14.4v2.4h-14.4z"/><path d="m4.8 16.7h7.2v2.4h-7.2z"/></g></svg>
   </symbol>
@@ -645,7 +632,6 @@ Document[0, 28]
 </div>
 <div class="adm-body">
   <p>summary</p>
-</div>
 </div>
 </div>
 .
@@ -660,7 +646,7 @@ Document[0, 26]
 !!! tldr
     tldr  
 .
-<svg xmlns=http://www.w3.org/2000/svg class="adm-hidden">
+<svg xmlns="http://www.w3.org/2000/svg" class="adm-hidden">
   <symbol id="adm-abstract">
     <svg enable-background="new 0 0 24 24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g fill="currentColor"><path d="m4.8 4.7h14.4v2.4h-14.4z"/><path d="m4.8 8.7h14.4v2.4h-14.4z"/><path d="m4.8 12.7h14.4v2.4h-14.4z"/><path d="m4.8 16.7h7.2v2.4h-7.2z"/></g></svg>
   </symbol>
@@ -671,7 +657,6 @@ Document[0, 26]
 </div>
 <div class="adm-body">
   <p>tldr</p>
-</div>
 </div>
 </div>
 .
@@ -686,7 +671,7 @@ Document[0, 20]
 !!! bug
     bug  
 .
-<svg xmlns=http://www.w3.org/2000/svg class="adm-hidden">
+<svg xmlns="http://www.w3.org/2000/svg" class="adm-hidden">
   <symbol id="adm-bug">
     <svg enable-background="new 0 0 24 24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g fill="currentColor"><path d="m16.7 13.9-4.8-1.9-4.8 1.8v3.7l4.8 1.8 4.8-1.8zm-4.8 3.4-2-.8v-1.5l2-.8 2 .8v1.5z"/><path d="m16.7 8.9-4.8-1.8-4.8 1.8v3.7l4.8 1.8 4.8-1.8zm-4.8 3.4-2-.8v-1.5l2-.8 2 .8v1.5z"/><path d="m4.5 9.4v1.8h2l1.2-.9-1.2-.9z"/><path d="m4.5 12.4v1.8h2l1.2-.9-1.2-.9z"/><path d="m4.5 15.4v1.7h2l1.2-.8-1.2-.9z"/><path d="m15 5 1.4 1-1.2 1.8-1.2.3-.2-1.2z"/><path d="m8.8 5-1.4 1 1.2 1.8 1.2.2.3-1.2z"/><path d="m19.5 9.4v1.8h-2.1l-1.2-.9 1.2-.9z"/><path d="m19.5 12.4v1.8h-2.1l-1.2-.9 1.2-.9z"/><path d="m19.5 15.4v1.7h-2.1l-1.2-.8 1.2-.9z"/></g></svg>
   </symbol>
@@ -697,7 +682,6 @@ Document[0, 20]
 </div>
 <div class="adm-body">
   <p>bug</p>
-</div>
 </div>
 </div>
 .
@@ -712,7 +696,7 @@ Document[0, 18]
 !!! danger
     danger  
 .
-<svg xmlns=http://www.w3.org/2000/svg class="adm-hidden">
+<svg xmlns="http://www.w3.org/2000/svg" class="adm-hidden">
   <symbol id="adm-danger">
     <svg enable-background="new 0 0 24 24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m8.5 4h8.5l-4 8h3l-7.1 9.5 1.6-8.5h-1.5z" fill="currentColor"/></svg>
   </symbol>
@@ -723,7 +707,6 @@ Document[0, 18]
 </div>
 <div class="adm-body">
   <p>danger</p>
-</div>
 </div>
 </div>
 .
@@ -738,7 +721,7 @@ Document[0, 24]
 !!! error
     error  
 .
-<svg xmlns=http://www.w3.org/2000/svg class="adm-hidden">
+<svg xmlns="http://www.w3.org/2000/svg" class="adm-hidden">
   <symbol id="adm-danger">
     <svg enable-background="new 0 0 24 24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m8.5 4h8.5l-4 8h3l-7.1 9.5 1.6-8.5h-1.5z" fill="currentColor"/></svg>
   </symbol>
@@ -749,7 +732,6 @@ Document[0, 24]
 </div>
 <div class="adm-body">
   <p>error</p>
-</div>
 </div>
 </div>
 .
@@ -764,7 +746,7 @@ Document[0, 22]
 !!! example
     example  
 .
-<svg xmlns=http://www.w3.org/2000/svg class="adm-hidden">
+<svg xmlns="http://www.w3.org/2000/svg" class="adm-hidden">
   <symbol id="adm-example">
     <svg enable-background="new 0 0 24 24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><svg enable-background='new 0 0 24 24' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'><g fill="currentColor"><path d='m8 5.2h13v2.4h-13z'/><path d='m4.4 8.4c-.1 0-.2-.1-.2-.2v-2c-.1 0-.2 0-.2.1-.2.1-.4.1-.7.2 0 0 0 0-.1 0h-.1c-.1 0-.1-.1-.1-.2v-.8c0-.1.1-.2.1-.2.4-.1.7-.2.9-.4.2-.1.3-.3.4-.5 0-.1.1-.1.2-.1h.8c.1 0 .2.1.2.2v3.7c0 .1-.1.2-.2.2z'/><path d='m8 10.8h13v2.4h-13z'/><path d='m3 14.1c-.1 0-.1 0-.1-.1s-.1-.1 0-.2c0-.3.2-.6.4-.9s.5-.6 1-1c.3-.3.5-.4.5-.5.1-.1.1-.1.1-.2s0-.1-.1-.1c0 0-.1-.1-.2-.1s-.1 0-.2.1c0 0-.1.1-.1.3 0 .1-.1.2-.2.2 0 0-1-.1-1-.1-.1 0-.1 0-.1-.1 0 0 0-.1 0-.2 0-.3.1-.6.3-.8.1-.2.3-.3.5-.4.1 0 .4-.1.8-.1s.7 0 .9.1.4.2.6.4c.1.2.2.4.2.7s-.1.5-.2.7-.4.5-.8.7c-.1.1-.2.1-.2.2h1c.1 0 .2.1.2.2v.8c0 .1-.1.2-.2.2h-3.1z'/><path d='m8 16.4h13v2.4h-13z'/><path d='m4.5 19.7c-.4 0-.6 0-.9-.1-.2-.1-.4-.2-.6-.4 0-.2-.1-.4-.2-.7 0-.1 0-.1 0-.2s.1-.1.1-.1 1-.1 1-.1c.1 0 .2.1.2.2 0 .2.1.3.1.3s.1.1.2.1.1 0 .2-.1.1-.1.1-.3c0-.1 0-.2-.1-.3 0 0-.1-.1-.2-.1 0 0-.1 0-.3.1 0 0 0 0-.1 0h-.1c.1 0 .1-.1.1-.1v-.8-.1l-1-.2c-.1 0-.1 0-.1-.1 0 0 0-.1 0-.2.1-.2.2-.5.5-.7s.6-.3 1.1-.3.9.1 1.2.3c.2.3.3.5.3.9 0 .2 0 .3-.1.5 0 .1-.1.1-.1.2.1.1.3.2.4.4s.1.3.1.5-.1.5-.2.7-.3.4-.6.5c-.3.2-.6.2-1 .2zm-.1-2.7c.1 0 .1 0 .2-.1 0 0 .1-.1.1-.2s0-.1 0-.1 0 0-.1 0-.1 0-.2.1c0 0-.1.1-.1.3v.1c-.1-.2 0-.1.1-.1z'/></g></svg>
   </symbol>
@@ -775,7 +757,6 @@ Document[0, 22]
 </div>
 <div class="adm-body">
   <p>example</p>
-</div>
 </div>
 </div>
 .
@@ -790,7 +771,7 @@ Document[0, 26]
 !!! snippet
     snippet  
 .
-<svg xmlns=http://www.w3.org/2000/svg class="adm-hidden">
+<svg xmlns="http://www.w3.org/2000/svg" class="adm-hidden">
   <symbol id="adm-example">
     <svg enable-background="new 0 0 24 24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><svg enable-background='new 0 0 24 24' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'><g fill="currentColor"><path d='m8 5.2h13v2.4h-13z'/><path d='m4.4 8.4c-.1 0-.2-.1-.2-.2v-2c-.1 0-.2 0-.2.1-.2.1-.4.1-.7.2 0 0 0 0-.1 0h-.1c-.1 0-.1-.1-.1-.2v-.8c0-.1.1-.2.1-.2.4-.1.7-.2.9-.4.2-.1.3-.3.4-.5 0-.1.1-.1.2-.1h.8c.1 0 .2.1.2.2v3.7c0 .1-.1.2-.2.2z'/><path d='m8 10.8h13v2.4h-13z'/><path d='m3 14.1c-.1 0-.1 0-.1-.1s-.1-.1 0-.2c0-.3.2-.6.4-.9s.5-.6 1-1c.3-.3.5-.4.5-.5.1-.1.1-.1.1-.2s0-.1-.1-.1c0 0-.1-.1-.2-.1s-.1 0-.2.1c0 0-.1.1-.1.3 0 .1-.1.2-.2.2 0 0-1-.1-1-.1-.1 0-.1 0-.1-.1 0 0 0-.1 0-.2 0-.3.1-.6.3-.8.1-.2.3-.3.5-.4.1 0 .4-.1.8-.1s.7 0 .9.1.4.2.6.4c.1.2.2.4.2.7s-.1.5-.2.7-.4.5-.8.7c-.1.1-.2.1-.2.2h1c.1 0 .2.1.2.2v.8c0 .1-.1.2-.2.2h-3.1z'/><path d='m8 16.4h13v2.4h-13z'/><path d='m4.5 19.7c-.4 0-.6 0-.9-.1-.2-.1-.4-.2-.6-.4 0-.2-.1-.4-.2-.7 0-.1 0-.1 0-.2s.1-.1.1-.1 1-.1 1-.1c.1 0 .2.1.2.2 0 .2.1.3.1.3s.1.1.2.1.1 0 .2-.1.1-.1.1-.3c0-.1 0-.2-.1-.3 0 0-.1-.1-.2-.1 0 0-.1 0-.3.1 0 0 0 0-.1 0h-.1c.1 0 .1-.1.1-.1v-.8-.1l-1-.2c-.1 0-.1 0-.1-.1 0 0 0-.1 0-.2.1-.2.2-.5.5-.7s.6-.3 1.1-.3.9.1 1.2.3c.2.3.3.5.3.9 0 .2 0 .3-.1.5 0 .1-.1.1-.1.2.1.1.3.2.4.4s.1.3.1.5-.1.5-.2.7-.3.4-.6.5c-.3.2-.6.2-1 .2zm-.1-2.7c.1 0 .1 0 .2-.1 0 0 .1-.1.1-.2s0-.1 0-.1 0 0-.1 0-.1 0-.2.1c0 0-.1.1-.1.3v.1c-.1-.2 0-.1.1-.1z'/></g></svg>
   </symbol>
@@ -801,7 +782,6 @@ Document[0, 26]
 </div>
 <div class="adm-body">
   <p>snippet</p>
-</div>
 </div>
 </div>
 .
@@ -816,7 +796,7 @@ Document[0, 26]
 !!! failure
     failure  
 .
-<svg xmlns=http://www.w3.org/2000/svg class="adm-hidden">
+<svg xmlns="http://www.w3.org/2000/svg" class="adm-hidden">
   <symbol id="adm-fail">
     <svg enable-background="new 0 0 24 24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m6.5 4.8 5.4 5.2c.3.3.7.3 1 0l5.4-5.7c.3-.3.8-.3 1.1.1l1.4 1.9c.2.3.2.7-.1 1l-5.9 5c-.3.3-.3.8 0 1.1l5 4.8c.2.2.3.6.1.9l-.9 1.6c-.2.4-.8.5-1.1.2l-5.6-5.1c-.3-.2-.7-.2-1 0l-5.3 4.8c-.4.3-.9.2-1.1-.2l-.9-2.4c-.1-.3-.1-.6.2-.8l4.5-3.9c.3-.3.3-.8 0-1.1l-5-4.7c-.3-.3-.3-.7 0-1l1.8-1.8c.3-.2.7-.2 1 .1z" fill="currentColor"/></svg>
   </symbol>
@@ -827,7 +807,6 @@ Document[0, 26]
 </div>
 <div class="adm-body">
   <p>failure</p>
-</div>
 </div>
 </div>
 .
@@ -842,7 +821,7 @@ Document[0, 26]
 !!! fail
     fail  
 .
-<svg xmlns=http://www.w3.org/2000/svg class="adm-hidden">
+<svg xmlns="http://www.w3.org/2000/svg" class="adm-hidden">
   <symbol id="adm-fail">
     <svg enable-background="new 0 0 24 24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m6.5 4.8 5.4 5.2c.3.3.7.3 1 0l5.4-5.7c.3-.3.8-.3 1.1.1l1.4 1.9c.2.3.2.7-.1 1l-5.9 5c-.3.3-.3.8 0 1.1l5 4.8c.2.2.3.6.1.9l-.9 1.6c-.2.4-.8.5-1.1.2l-5.6-5.1c-.3-.2-.7-.2-1 0l-5.3 4.8c-.4.3-.9.2-1.1-.2l-.9-2.4c-.1-.3-.1-.6.2-.8l4.5-3.9c.3-.3.3-.8 0-1.1l-5-4.7c-.3-.3-.3-.7 0-1l1.8-1.8c.3-.2.7-.2 1 .1z" fill="currentColor"/></svg>
   </symbol>
@@ -853,7 +832,6 @@ Document[0, 26]
 </div>
 <div class="adm-body">
   <p>fail</p>
-</div>
 </div>
 </div>
 .
@@ -868,7 +846,7 @@ Document[0, 20]
 !!! missing
     missing  
 .
-<svg xmlns=http://www.w3.org/2000/svg class="adm-hidden">
+<svg xmlns="http://www.w3.org/2000/svg" class="adm-hidden">
   <symbol id="adm-fail">
     <svg enable-background="new 0 0 24 24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m6.5 4.8 5.4 5.2c.3.3.7.3 1 0l5.4-5.7c.3-.3.8-.3 1.1.1l1.4 1.9c.2.3.2.7-.1 1l-5.9 5c-.3.3-.3.8 0 1.1l5 4.8c.2.2.3.6.1.9l-.9 1.6c-.2.4-.8.5-1.1.2l-5.6-5.1c-.3-.2-.7-.2-1 0l-5.3 4.8c-.4.3-.9.2-1.1-.2l-.9-2.4c-.1-.3-.1-.6.2-.8l4.5-3.9c.3-.3.3-.8 0-1.1l-5-4.7c-.3-.3-.3-.7 0-1l1.8-1.8c.3-.2.7-.2 1 .1z" fill="currentColor"/></svg>
   </symbol>
@@ -879,7 +857,6 @@ Document[0, 20]
 </div>
 <div class="adm-body">
   <p>missing</p>
-</div>
 </div>
 </div>
 .
@@ -894,7 +871,7 @@ Document[0, 26]
 !!! question
     question  
 .
-<svg xmlns=http://www.w3.org/2000/svg class="adm-hidden">
+<svg xmlns="http://www.w3.org/2000/svg" class="adm-hidden">
   <symbol id="adm-faq">
     <svg enable-background="new 0 0 24 24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m20.4 12.2c0 4.5-3.7 8.2-8.2 8.2s-8.2-3.7-8.2-8.2 3.7-8.2 8.2-8.2 8.2 3.7 8.2 8.2zm-4.2-2.9c-.1-1.3-1-2.5-2.3-2.9-.8-.2-1.6-.1-2.4.1-.6.1-1.5.2-1.8.6-.4.5.2 1 .6 1.3.6.4 1.1-.1 1.8-.3s3-.7 2.4.8c-.5 1.1-2 1.9-3 2.6-.4.3-.9.6-1.2 1-.5.6.1 1 .7 1.4.4.3.9.2 1.2-.1.5-.5 1-.9 1.6-1.3 1.1-.7 2.5-1.6 2.4-3.2-.2-1.3 0 .7 0 0zm-2.8 6.8c-.3-.5-1.3-1.3-1.9-1.1-.4.1-.4.4-.5.8-.1.2-.4.6-.3.8.1.4 1.5 1.3 1.9 1 .1-.1.9-1.4.8-1.5 0-.1.1.1 0 0z" fill="currentColor"/></svg>
   </symbol>
@@ -905,7 +882,6 @@ Document[0, 26]
 </div>
 <div class="adm-body">
   <p>question</p>
-</div>
 </div>
 </div>
 .
@@ -920,7 +896,7 @@ Document[0, 28]
 !!! help
     help  
 .
-<svg xmlns=http://www.w3.org/2000/svg class="adm-hidden">
+<svg xmlns="http://www.w3.org/2000/svg" class="adm-hidden">
   <symbol id="adm-faq">
     <svg enable-background="new 0 0 24 24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m20.4 12.2c0 4.5-3.7 8.2-8.2 8.2s-8.2-3.7-8.2-8.2 3.7-8.2 8.2-8.2 8.2 3.7 8.2 8.2zm-4.2-2.9c-.1-1.3-1-2.5-2.3-2.9-.8-.2-1.6-.1-2.4.1-.6.1-1.5.2-1.8.6-.4.5.2 1 .6 1.3.6.4 1.1-.1 1.8-.3s3-.7 2.4.8c-.5 1.1-2 1.9-3 2.6-.4.3-.9.6-1.2 1-.5.6.1 1 .7 1.4.4.3.9.2 1.2-.1.5-.5 1-.9 1.6-1.3 1.1-.7 2.5-1.6 2.4-3.2-.2-1.3 0 .7 0 0zm-2.8 6.8c-.3-.5-1.3-1.3-1.9-1.1-.4.1-.4.4-.5.8-.1.2-.4.6-.3.8.1.4 1.5 1.3 1.9 1 .1-.1.9-1.4.8-1.5 0-.1.1.1 0 0z" fill="currentColor"/></svg>
   </symbol>
@@ -931,7 +907,6 @@ Document[0, 28]
 </div>
 <div class="adm-body">
   <p>help</p>
-</div>
 </div>
 </div>
 .
@@ -946,7 +921,7 @@ Document[0, 20]
 !!! faq
     faq  
 .
-<svg xmlns=http://www.w3.org/2000/svg class="adm-hidden">
+<svg xmlns="http://www.w3.org/2000/svg" class="adm-hidden">
   <symbol id="adm-faq">
     <svg enable-background="new 0 0 24 24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m20.4 12.2c0 4.5-3.7 8.2-8.2 8.2s-8.2-3.7-8.2-8.2 3.7-8.2 8.2-8.2 8.2 3.7 8.2 8.2zm-4.2-2.9c-.1-1.3-1-2.5-2.3-2.9-.8-.2-1.6-.1-2.4.1-.6.1-1.5.2-1.8.6-.4.5.2 1 .6 1.3.6.4 1.1-.1 1.8-.3s3-.7 2.4.8c-.5 1.1-2 1.9-3 2.6-.4.3-.9.6-1.2 1-.5.6.1 1 .7 1.4.4.3.9.2 1.2-.1.5-.5 1-.9 1.6-1.3 1.1-.7 2.5-1.6 2.4-3.2-.2-1.3 0 .7 0 0zm-2.8 6.8c-.3-.5-1.3-1.3-1.9-1.1-.4.1-.4.4-.5.8-.1.2-.4.6-.3.8.1.4 1.5 1.3 1.9 1 .1-.1.9-1.4.8-1.5 0-.1.1.1 0 0z" fill="currentColor"/></svg>
   </symbol>
@@ -957,7 +932,6 @@ Document[0, 20]
 </div>
 <div class="adm-body">
   <p>faq</p>
-</div>
 </div>
 </div>
 .
@@ -972,7 +946,7 @@ Document[0, 18]
 !!! info
     info  
 .
-<svg xmlns=http://www.w3.org/2000/svg class="adm-hidden">
+<svg xmlns="http://www.w3.org/2000/svg" class="adm-hidden">
   <symbol id="adm-info">
     <svg enable-background="new 0 0 24 24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m20.5 11.8c0 4.5-3.7 8.2-8.2 8.2s-8.2-3.7-8.2-8.2 3.7-8.2 8.2-8.2 8.2 3.7 8.2 8.2zm-6.7 4c-.1-.1-.2-.2-.2-.3v-4.5c0-.1.1-.2.2-.4s.2-.3.2-.3 0-.1-.1-.1c-.1-.1-.5-.2-1.2-.4-.7-.1-1.2-.2-1.5-.2-.5 0-.7 0-.7.1s.1.3.2.6v4.7c0 .3-.1.5-.2.6-.2.2-.2.3-.2.3.1.1.5.3 1.2.4.6.1 1.2.2 1.6.2h.3c.4-.1.5-.2.5-.5.1 0 .1-.1-.1-.2zm-.9-8.6c-.7-.1-1.2-.2-1.5-.2-.2 0-.5.2-.7.4s-.3.4-.3.6c0 .1 0 .1.1.2s.6.2 1.5.4c1 .3 1.5.4 1.6.3.1 0 .2-.2.3-.5s.2-.5.2-.6v-.1c-.1-.1-.5-.3-1.2-.5z" fill="currentColor"/></svg>
   </symbol>
@@ -983,7 +957,6 @@ Document[0, 18]
 </div>
 <div class="adm-body">
   <p>info</p>
-</div>
 </div>
 </div>
 .
@@ -998,7 +971,7 @@ Document[0, 20]
 !!! todo
     todo  
 .
-<svg xmlns=http://www.w3.org/2000/svg class="adm-hidden">
+<svg xmlns="http://www.w3.org/2000/svg" class="adm-hidden">
   <symbol id="adm-info">
     <svg enable-background="new 0 0 24 24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m20.5 11.8c0 4.5-3.7 8.2-8.2 8.2s-8.2-3.7-8.2-8.2 3.7-8.2 8.2-8.2 8.2 3.7 8.2 8.2zm-6.7 4c-.1-.1-.2-.2-.2-.3v-4.5c0-.1.1-.2.2-.4s.2-.3.2-.3 0-.1-.1-.1c-.1-.1-.5-.2-1.2-.4-.7-.1-1.2-.2-1.5-.2-.5 0-.7 0-.7.1s.1.3.2.6v4.7c0 .3-.1.5-.2.6-.2.2-.2.3-.2.3.1.1.5.3 1.2.4.6.1 1.2.2 1.6.2h.3c.4-.1.5-.2.5-.5.1 0 .1-.1-.1-.2zm-.9-8.6c-.7-.1-1.2-.2-1.5-.2-.2 0-.5.2-.7.4s-.3.4-.3.6c0 .1 0 .1.1.2s.6.2 1.5.4c1 .3 1.5.4 1.6.3.1 0 .2-.2.3-.5s.2-.5.2-.6v-.1c-.1-.1-.5-.3-1.2-.5z" fill="currentColor"/></svg>
   </symbol>
@@ -1009,7 +982,6 @@ Document[0, 20]
 </div>
 <div class="adm-body">
   <p>todo</p>
-</div>
 </div>
 </div>
 .
@@ -1024,7 +996,7 @@ Document[0, 20]
 !!! note
     note  
 .
-<svg xmlns=http://www.w3.org/2000/svg class="adm-hidden">
+<svg xmlns="http://www.w3.org/2000/svg" class="adm-hidden">
   <symbol id="adm-note">
     <svg enable-background="new 0 0 24 24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g fill="currentColor"><path d="m15.4 5h4.5v2.7h-4.5z" transform="matrix(-.7071 -.7071 .7071 -.7071 25.7188 23.288)"/><path d="m13.9 7 3.1 3.1-9.5 9.6-3.5.3.3-3.5z"/></g></svg>
   </symbol>
@@ -1035,7 +1007,6 @@ Document[0, 20]
 </div>
 <div class="adm-body">
   <p>note</p>
-</div>
 </div>
 </div>
 .
@@ -1050,7 +1021,7 @@ Document[0, 20]
 !!! seealso
     seealso  
 .
-<svg xmlns=http://www.w3.org/2000/svg class="adm-hidden">
+<svg xmlns="http://www.w3.org/2000/svg" class="adm-hidden">
   <symbol id="adm-note">
     <svg enable-background="new 0 0 24 24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g fill="currentColor"><path d="m15.4 5h4.5v2.7h-4.5z" transform="matrix(-.7071 -.7071 .7071 -.7071 25.7188 23.288)"/><path d="m13.9 7 3.1 3.1-9.5 9.6-3.5.3.3-3.5z"/></g></svg>
   </symbol>
@@ -1061,7 +1032,6 @@ Document[0, 20]
 </div>
 <div class="adm-body">
   <p>seealso</p>
-</div>
 </div>
 </div>
 .
@@ -1076,7 +1046,7 @@ Document[0, 26]
 !!! quote
     quote  
 .
-<svg xmlns=http://www.w3.org/2000/svg class="adm-hidden">
+<svg xmlns="http://www.w3.org/2000/svg" class="adm-hidden">
   <symbol id="adm-quote">
     <svg enable-background="new 0 0 24 24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="m10.7 13.1c-.6.6-1.5 1.1-2.8 1.4-.3.1-.5 0-.9-.3-.3-.3-.5-.5-.5-.8 0-.1.1-.2.2-.2.3-.1.6-.4.8-1s.4-1.1.4-1.8c0-1.3-.5-2.2-1.5-2.6-.6-.2-.9-.7-.9-1.4 0-.2 0-.3.1-.4.1-.3.7-.7 1.6-1.2s1.6-.7 1.9-.6c.8.2 1.5.8 2.1 1.9.5 1.1.8 2.3.8 3.5 0 1.4-.4 2.6-1.3 3.5zm6.6 0c-.6.6-1.5 1.1-2.8 1.4-.3.1-.5 0-.9-.3-.3-.3-.5-.5-.5-.8 0-.1.1-.2.2-.2.3-.1.6-.4.8-1s.4-1.1.4-1.8c0-1.3-.5-2.2-1.5-2.6-.6-.3-.8-.7-.8-1.5 0-.2 0-.3.1-.4.1-.3.7-.7 1.6-1.2s1.6-.7 1.9-.6c.8.2 1.5.8 2.1 1.9s.9 2.2.9 3.4c-.2 1.6-.6 2.8-1.5 3.7z"/></svg>
   </symbol>
@@ -1087,7 +1057,6 @@ Document[0, 26]
 </div>
 <div class="adm-body">
   <p>quote</p>
-</div>
 </div>
 </div>
 .
@@ -1102,7 +1071,7 @@ Document[0, 22]
 !!! cite
     cite  
 .
-<svg xmlns=http://www.w3.org/2000/svg class="adm-hidden">
+<svg xmlns="http://www.w3.org/2000/svg" class="adm-hidden">
   <symbol id="adm-quote">
     <svg enable-background="new 0 0 24 24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="m10.7 13.1c-.6.6-1.5 1.1-2.8 1.4-.3.1-.5 0-.9-.3-.3-.3-.5-.5-.5-.8 0-.1.1-.2.2-.2.3-.1.6-.4.8-1s.4-1.1.4-1.8c0-1.3-.5-2.2-1.5-2.6-.6-.2-.9-.7-.9-1.4 0-.2 0-.3.1-.4.1-.3.7-.7 1.6-1.2s1.6-.7 1.9-.6c.8.2 1.5.8 2.1 1.9.5 1.1.8 2.3.8 3.5 0 1.4-.4 2.6-1.3 3.5zm6.6 0c-.6.6-1.5 1.1-2.8 1.4-.3.1-.5 0-.9-.3-.3-.3-.5-.5-.5-.8 0-.1.1-.2.2-.2.3-.1.6-.4.8-1s.4-1.1.4-1.8c0-1.3-.5-2.2-1.5-2.6-.6-.3-.8-.7-.8-1.5 0-.2 0-.3.1-.4.1-.3.7-.7 1.6-1.2s1.6-.7 1.9-.6c.8.2 1.5.8 2.1 1.9s.9 2.2.9 3.4c-.2 1.6-.6 2.8-1.5 3.7z"/></svg>
   </symbol>
@@ -1113,7 +1082,6 @@ Document[0, 22]
 </div>
 <div class="adm-body">
   <p>cite</p>
-</div>
 </div>
 </div>
 .
@@ -1128,7 +1096,7 @@ Document[0, 20]
 !!! success
     success  
 .
-<svg xmlns=http://www.w3.org/2000/svg class="adm-hidden">
+<svg xmlns="http://www.w3.org/2000/svg" class="adm-hidden">
   <symbol id="adm-success">
     <svg enable-background="new 0 0 24 24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m3.3 14.3 1.4-2.8c.2-.4.7-.5 1-.2l4.7 4.9c.3.3.7.2 1-.1l7.1-10.2c.2-.3.7-.4 1 0l1.9 2.4c.2.2.2.6 0 .8l-9.7 10.9c-.2.2-.6.3-.8.1l-7.5-5.1c-.2-.1-.3-.5-.1-.7z" fill="currentColor"/></svg>
   </symbol>
@@ -1139,7 +1107,6 @@ Document[0, 20]
 </div>
 <div class="adm-body">
   <p>success</p>
-</div>
 </div>
 </div>
 .
@@ -1154,7 +1121,7 @@ Document[0, 26]
 !!! check
     check  
 .
-<svg xmlns=http://www.w3.org/2000/svg class="adm-hidden">
+<svg xmlns="http://www.w3.org/2000/svg" class="adm-hidden">
   <symbol id="adm-success">
     <svg enable-background="new 0 0 24 24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m3.3 14.3 1.4-2.8c.2-.4.7-.5 1-.2l4.7 4.9c.3.3.7.2 1-.1l7.1-10.2c.2-.3.7-.4 1 0l1.9 2.4c.2.2.2.6 0 .8l-9.7 10.9c-.2.2-.6.3-.8.1l-7.5-5.1c-.2-.1-.3-.5-.1-.7z" fill="currentColor"/></svg>
   </symbol>
@@ -1165,7 +1132,6 @@ Document[0, 26]
 </div>
 <div class="adm-body">
   <p>check</p>
-</div>
 </div>
 </div>
 .
@@ -1180,7 +1146,7 @@ Document[0, 22]
 !!! done
     done  
 .
-<svg xmlns=http://www.w3.org/2000/svg class="adm-hidden">
+<svg xmlns="http://www.w3.org/2000/svg" class="adm-hidden">
   <symbol id="adm-success">
     <svg enable-background="new 0 0 24 24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m3.3 14.3 1.4-2.8c.2-.4.7-.5 1-.2l4.7 4.9c.3.3.7.2 1-.1l7.1-10.2c.2-.3.7-.4 1 0l1.9 2.4c.2.2.2.6 0 .8l-9.7 10.9c-.2.2-.6.3-.8.1l-7.5-5.1c-.2-.1-.3-.5-.1-.7z" fill="currentColor"/></svg>
   </symbol>
@@ -1191,7 +1157,6 @@ Document[0, 22]
 </div>
 <div class="adm-body">
   <p>done</p>
-</div>
 </div>
 </div>
 .
@@ -1206,7 +1171,7 @@ Document[0, 20]
 !!! tip
     tip  
 .
-<svg xmlns=http://www.w3.org/2000/svg class="adm-hidden">
+<svg xmlns="http://www.w3.org/2000/svg" class="adm-hidden">
   <symbol id="adm-tip">
     <svg enable-background="new 0 0 24 24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m12.3 10c2.8-.7 4.2-3.8 2.1-7.4 8.1 3.2 7.5 18.1-2.6 18.4-8.1.2-9.8-11.4-4.4-14.8.2 3.3 2.8 4.3 4.9 3.8zm-3.2 5.8c.2 1.6 2.5 1.9 3.6 1.5 2.8-1 2.5-4 2.1-5.1-.8 1.4-1.3 1.7-2.2 2s-3.7-.7-3.5 1.6z" fill="currentColor"/></svg>
   </symbol>
@@ -1217,7 +1182,6 @@ Document[0, 20]
 </div>
 <div class="adm-body">
   <p>tip</p>
-</div>
 </div>
 </div>
 .
@@ -1232,7 +1196,7 @@ Document[0, 18]
 !!! hint
     hint  
 .
-<svg xmlns=http://www.w3.org/2000/svg class="adm-hidden">
+<svg xmlns="http://www.w3.org/2000/svg" class="adm-hidden">
   <symbol id="adm-tip">
     <svg enable-background="new 0 0 24 24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m12.3 10c2.8-.7 4.2-3.8 2.1-7.4 8.1 3.2 7.5 18.1-2.6 18.4-8.1.2-9.8-11.4-4.4-14.8.2 3.3 2.8 4.3 4.9 3.8zm-3.2 5.8c.2 1.6 2.5 1.9 3.6 1.5 2.8-1 2.5-4 2.1-5.1-.8 1.4-1.3 1.7-2.2 2s-3.7-.7-3.5 1.6z" fill="currentColor"/></svg>
   </symbol>
@@ -1243,7 +1207,6 @@ Document[0, 18]
 </div>
 <div class="adm-body">
   <p>hint</p>
-</div>
 </div>
 </div>
 .
@@ -1258,7 +1221,7 @@ Document[0, 20]
 !!! important
     important  
 .
-<svg xmlns=http://www.w3.org/2000/svg class="adm-hidden">
+<svg xmlns="http://www.w3.org/2000/svg" class="adm-hidden">
   <symbol id="adm-tip">
     <svg enable-background="new 0 0 24 24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m12.3 10c2.8-.7 4.2-3.8 2.1-7.4 8.1 3.2 7.5 18.1-2.6 18.4-8.1.2-9.8-11.4-4.4-14.8.2 3.3 2.8 4.3 4.9 3.8zm-3.2 5.8c.2 1.6 2.5 1.9 3.6 1.5 2.8-1 2.5-4 2.1-5.1-.8 1.4-1.3 1.7-2.2 2s-3.7-.7-3.5 1.6z" fill="currentColor"/></svg>
   </symbol>
@@ -1269,7 +1232,6 @@ Document[0, 20]
 </div>
 <div class="adm-body">
   <p>important</p>
-</div>
 </div>
 </div>
 .
@@ -1284,7 +1246,7 @@ Document[0, 30]
 !!! warning
     warning  
 .
-<svg xmlns=http://www.w3.org/2000/svg class="adm-hidden">
+<svg xmlns="http://www.w3.org/2000/svg" class="adm-hidden">
   <symbol id="adm-warning">
     <svg enable-background="new 0 0 24 24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m3.1 18.5 8.1-14c.4-.7 1.4-.7 1.8 0l8.1 14c.4.7-.1 1.6-.9 1.6h-16.1c-.9 0-1.4-.9-1-1.6zm10.6-4.3c0-.1 0-.2 0-.2v-4.6c0-.4 0-.6 0-.6-.1-.1-.3-.2-.7-.3s-.7-.1-1-.1c-.1 0-.2 0-.3 0-.3.1-.5.2-.5.4v4.2s-.1.1-.2.4-.1.4 0 .5c.3.2.7.4 1.2.6s.9.3 1.2.3h.2c.2 0 .3-.2.3-.5-.2 0-.2-.1-.2-.1zm-.8 1.4c-.5-.2-.9-.2-1.2-.2s-.4.1-.5.4v.9c0 .2 0 .3-.1.4-.1.2-.2.3-.1.4s.5.3 1.2.5c.6.2 1 .2 1.1.2.2 0 .4-.1.4-.3s.1-.4.1-.7c0-.1 0-.3.1-.7 0-.3 0-.5 0-.5-.2-.1-.5-.2-1-.4z" fill="currentColor"/></svg>
   </symbol>
@@ -1295,7 +1257,6 @@ Document[0, 30]
 </div>
 <div class="adm-body">
   <p>warning</p>
-</div>
 </div>
 </div>
 .
@@ -1310,7 +1271,7 @@ Document[0, 26]
 !!! caution
     caution  
 .
-<svg xmlns=http://www.w3.org/2000/svg class="adm-hidden">
+<svg xmlns="http://www.w3.org/2000/svg" class="adm-hidden">
   <symbol id="adm-warning">
     <svg enable-background="new 0 0 24 24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m3.1 18.5 8.1-14c.4-.7 1.4-.7 1.8 0l8.1 14c.4.7-.1 1.6-.9 1.6h-16.1c-.9 0-1.4-.9-1-1.6zm10.6-4.3c0-.1 0-.2 0-.2v-4.6c0-.4 0-.6 0-.6-.1-.1-.3-.2-.7-.3s-.7-.1-1-.1c-.1 0-.2 0-.3 0-.3.1-.5.2-.5.4v4.2s-.1.1-.2.4-.1.4 0 .5c.3.2.7.4 1.2.6s.9.3 1.2.3h.2c.2 0 .3-.2.3-.5-.2 0-.2-.1-.2-.1zm-.8 1.4c-.5-.2-.9-.2-1.2-.2s-.4.1-.5.4v.9c0 .2 0 .3-.1.4-.1.2-.2.3-.1.4s.5.3 1.2.5c.6.2 1 .2 1.1.2.2 0 .4-.1.4-.3s.1-.4.1-.7c0-.1 0-.3.1-.7 0-.3 0-.5 0-.5-.2-.1-.5-.2-1-.4z" fill="currentColor"/></svg>
   </symbol>
@@ -1321,7 +1282,6 @@ Document[0, 26]
 </div>
 <div class="adm-body">
   <p>caution</p>
-</div>
 </div>
 </div>
 .
@@ -1336,7 +1296,7 @@ Document[0, 26]
 !!! attention
     attention  
 .
-<svg xmlns=http://www.w3.org/2000/svg class="adm-hidden">
+<svg xmlns="http://www.w3.org/2000/svg" class="adm-hidden">
   <symbol id="adm-warning">
     <svg enable-background="new 0 0 24 24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m3.1 18.5 8.1-14c.4-.7 1.4-.7 1.8 0l8.1 14c.4.7-.1 1.6-.9 1.6h-16.1c-.9 0-1.4-.9-1-1.6zm10.6-4.3c0-.1 0-.2 0-.2v-4.6c0-.4 0-.6 0-.6-.1-.1-.3-.2-.7-.3s-.7-.1-1-.1c-.1 0-.2 0-.3 0-.3.1-.5.2-.5.4v4.2s-.1.1-.2.4-.1.4 0 .5c.3.2.7.4 1.2.6s.9.3 1.2.3h.2c.2 0 .3-.2.3-.5-.2 0-.2-.1-.2-.1zm-.8 1.4c-.5-.2-.9-.2-1.2-.2s-.4.1-.5.4v.9c0 .2 0 .3-.1.4-.1.2-.2.3-.1.4s.5.3 1.2.5c.6.2 1 .2 1.1.2.2 0 .4-.1.4-.3s.1-.4.1-.7c0-.1 0-.3.1-.7 0-.3 0-.5 0-.5-.2-.1-.5-.2-1-.4z" fill="currentColor"/></svg>
   </symbol>
@@ -1347,7 +1307,6 @@ Document[0, 26]
 </div>
 <div class="adm-body">
   <p>attention</p>
-</div>
 </div>
 </div>
 .
@@ -1364,7 +1323,7 @@ Document[0, 30]
 !!! caution
     caution  
 .
-<svg xmlns=http://www.w3.org/2000/svg class="adm-hidden">
+<svg xmlns="http://www.w3.org/2000/svg" class="adm-hidden">
   <symbol id="adm-warning">
     <svg enable-background="new 0 0 24 24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m3.1 18.5 8.1-14c.4-.7 1.4-.7 1.8 0l8.1 14c.4.7-.1 1.6-.9 1.6h-16.1c-.9 0-1.4-.9-1-1.6zm10.6-4.3c0-.1 0-.2 0-.2v-4.6c0-.4 0-.6 0-.6-.1-.1-.3-.2-.7-.3s-.7-.1-1-.1c-.1 0-.2 0-.3 0-.3.1-.5.2-.5.4v4.2s-.1.1-.2.4-.1.4 0 .5c.3.2.7.4 1.2.6s.9.3 1.2.3h.2c.2 0 .3-.2.3-.5-.2 0-.2-.1-.2-.1zm-.8 1.4c-.5-.2-.9-.2-1.2-.2s-.4.1-.5.4v.9c0 .2 0 .3-.1.4-.1.2-.2.3-.1.4s.5.3 1.2.5c.6.2 1 .2 1.1.2.2 0 .4-.1.4-.3s.1-.4.1-.7c0-.1 0-.3.1-.7 0-.3 0-.5 0-.5-.2-.1-.5-.2-1-.4z" fill="currentColor"/></svg>
   </symbol>
@@ -1375,7 +1334,6 @@ Document[0, 30]
 </div>
 <div class="adm-body">
   <p md-pos="16-25">caution</p>
-</div>
 </div>
 </div>
 .

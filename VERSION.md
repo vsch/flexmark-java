@@ -8,6 +8,7 @@ flexmark-java
 - [To Do](#to-do)
     - [Docx Converter](#docx-converter)
     - [GitLab compatibility extensions](#gitlab-compatibility-extensions)
+- [0.32.10](#03210)
 - [0.32.8](#0328)
 - [0.32.6](#0326)
 - [0.32.4](#0324)
@@ -252,6 +253,18 @@ flexmark-java
       similar to Math solution above.
 
 &nbsp;</details>
+
+0.32.10
+-------
+
+* Add: `AdmonitionBlock` getters/setters for `titleOpeningMarker`, `title`, `titleClosingMarker`
+* Fix: `AdmonitionNodeRenderer` remove erroneous, extra `</div>`
+* Add: `AdmonitionNodeRenderer` attributable parts:
+  * ADMONITION_SVG_OBJECT_PART - svg object at top of body, part is on `Document` node
+  * ADMONITION_HEADING_PART - heading div
+  * ADMONITION_ICON_PART - heading icon svg
+  * ADMONITION_TITLE_PART - heading title span
+  * ADMONITION_BODY_PART - admonition body div
 
 0.32.8
 ------

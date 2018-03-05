@@ -79,6 +79,30 @@ public class AdmonitionBlock extends Block {
         return title;
     }
 
+    public BasedSequence getTitleOpeningMarker() {
+        return titleOpeningMarker;
+    }
+
+    public void setTitleOpeningMarker(final BasedSequence titleOpeningMarker) {
+        this.titleOpeningMarker = titleOpeningMarker;
+    }
+
+    public void setTitle(final BasedSequence title) {
+        this.title = title;
+    }
+
+    public BasedSequence getTitleClosingMarker() {
+        return titleClosingMarker;
+    }
+
+    public void setTitleClosingMarker(final BasedSequence titleClosingMarker) {
+        this.titleClosingMarker = titleClosingMarker;
+    }
+
+    public BasedSequence getTitleChars() {
+        return spanningChars(titleOpeningMarker, title, titleClosingMarker);
+    }
+
     public void setTitleChars(BasedSequence titleChars) {
         if (titleChars != null && titleChars != BasedSequence.NULL) {
             int titleCharsLength = titleChars.length();

@@ -39,6 +39,7 @@
       <element id="module-output" name="flexmark-ext-gfm-users" />
       <element id="module-output" name="flexmark-ext-attributes" />
       <element id="module-output" name="flexmark-ext-enumerated-reference" />
+      <element id="module-output" name="flexmark-ext-admonition" />
     </root>
   </artifact>
 </component>

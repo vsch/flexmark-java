@@ -15,6 +15,12 @@ import java.util.*;
 import static com.vladsch.flexmark.html.renderer.RenderingPhase.BODY_TOP;
 
 public class AdmonitionNodeRenderer implements PhasedNodeRenderer {
+    public static AttributablePart ADMONITION_SVG_OBJECT_PART = new AttributablePart("ADMONITION_SVG_OBJECT_PART");
+    public static AttributablePart ADMONITION_HEADING_PART = new AttributablePart("ADMONITION_HEADING_PART");
+    public static AttributablePart ADMONITION_ICON_PART = new AttributablePart("ADMONITION_ICON_PART");
+    public static AttributablePart ADMONITION_TITLE_PART = new AttributablePart("ADMONITION_TITLE_PART");
+    public static AttributablePart ADMONITION_BODY_PART = new AttributablePart("ADMONITION_BODY_PART");
+
     private final AdmonitionOptions options;
 
     public AdmonitionNodeRenderer(DataHolder options) {
@@ -43,7 +49,8 @@ public class AdmonitionNodeRenderer implements PhasedNodeRenderer {
             }
 
             if (!resolvedQualifiers.isEmpty()) {
-                html.line().raw("<svg xmlns=http://www.w3.org/2000/svg class=\"adm-hidden\">").indent().line();
+                html.line().attr("xmlns","http://www.w3.org/2000/svg").attr(Attribute.CLASS_ATTR, "adm-hidden").withAttr(ADMONITION_SVG_OBJECT_PART)
+                        .tag("svg").indent().line();
                 for (String info : resolvedQualifiers) {
                     String svgContent = options.typeSvgMap.get(info);
                     if (svgContent != null && !svgContent.isEmpty()) {
@@ -53,7 +60,7 @@ public class AdmonitionNodeRenderer implements PhasedNodeRenderer {
                                 .unIndent().raw("</symbol>").line();
                     }
                 }
-                html.unIndent().raw("</svg>").line();
+                html.unIndent().closeTag("svg").line();
             }
         }
     }
@@ -90,39 +97,38 @@ public class AdmonitionNodeRenderer implements PhasedNodeRenderer {
         else if (node.getOpeningMarker().equals("???+")) openClose = "adm-open";
         else openClose = null;
 
-        Attributes attributes = new Attributes();
-        attributes.addValue(Attribute.CLASS_ATTR, "adm-block");
-        attributes.addValue(Attribute.CLASS_ATTR, "adm-" + type);
-
         if (title.isEmpty()) {
-            html
-                    .srcPos(node.getChars()).attr(attributes).withAttr().tag("div", false).line()
-                    .raw("<div class=\"adm-body\">").indent().line();
+            html.srcPos(node.getChars()).withAttr()
+                    .attr(Attribute.CLASS_ATTR, "adm-block")
+                    .attr(Attribute.CLASS_ATTR, "adm-" + type)
+                    .tag("div", false).line();
+
+            html.attr(Attribute.CLASS_ATTR, "adm-body").withAttr(ADMONITION_BODY_PART).tag("div").indent().line();
 
             context.renderChildren(node);
 
-            html
-                    .unIndent().raw("</div>").line()
-                    .closeTag("div").line()
-            ;
+            html.unIndent().closeTag("div").line();
+            html.closeTag("div").line();
         } else {
-            if (openClose != null) attributes.addValue(Attribute.CLASS_ATTR, openClose);
+            html.srcPos(node.getChars())
+                    .attr(Attribute.CLASS_ATTR, "adm-block").attr(Attribute.CLASS_ATTR, "adm-" + type);
 
-            html
-                    .srcPos(node.getChars()).attr(attributes).withAttr().tag("div", false).line()
-                    .raw("<div class=\"adm-heading\">").line()
-                    .raw("<svg class=\"adm-icon\"><use xlink:href=\"#adm-").raw(type).raw("\" /></svg><span>").text(title).raw("</span>").line()
-                    .raw("</div>").line()
-                    .raw("<div class=\"adm-body\">").indent().line()
-            ;
+            if (openClose != null) {
+                html.attr(Attribute.CLASS_ATTR, openClose).attr(Attribute.CLASS_ATTR, "adm-" + type);
+            }
+
+            html.withAttr().tag("div", false).line();
+            html.attr(Attribute.CLASS_ATTR, "adm-heading").withAttr(ADMONITION_HEADING_PART).tag("div").line();
+            html.attr(Attribute.CLASS_ATTR, "adm-icon").withAttr(ADMONITION_ICON_PART).tag("svg").raw("<use xlink:href=\"#adm-").raw(type).raw("\" />").closeTag("svg");
+            html.withAttr(ADMONITION_TITLE_PART).tag("span").text(title).closeTag("span").line();
+            html.closeTag("div").line();
+
+            html.attr(Attribute.CLASS_ATTR, "adm-body").withAttr(ADMONITION_BODY_PART).tag("div").indent().line();
 
             context.renderChildren(node);
 
-            html
-                    .unIndent().raw("</div>").line()
-                    .raw("</div>").line()
-                    .closeTag("div").line()
-            ;
+            html.unIndent().closeTag("div").line();
+            html.closeTag("div").line();
         }
     }
 

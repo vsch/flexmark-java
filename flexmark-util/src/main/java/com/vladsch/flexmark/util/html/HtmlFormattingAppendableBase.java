@@ -120,7 +120,7 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
         if (currentAttributes == null) {
             currentAttributes = new Attributes();
         }
-        currentAttributes.replaceValue(attrName, value);
+        currentAttributes.addValue(attrName, value);
         return (T) this;
     }
 

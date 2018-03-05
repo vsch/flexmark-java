@@ -5,7 +5,7 @@ import com.vladsch.flexmark.util.options.DataHolder;
 
 import java.util.Map;
 
-class AdmonitionOptions {
+public class AdmonitionOptions {
     public final int contentIndent;
     public final boolean allowLeadingSpace;
     public final boolean interruptsParagraph;
