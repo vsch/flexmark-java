@@ -3571,3 +3571,50 @@ Document[0, 34]
 ````````````````````````````````
 
 
+## Emphasis in cell
+
+```````````````````````````````` example Emphasis in cell: 1
+| Column 1            | Column 2            |
+|---------------------|---------------------|
+| ___________________ | ___________________ |
+| ___________________ | ___________________ |
+
+.
+<table>
+  <thead>
+    <tr><th>Column 1</th><th>Column 2</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>___________________</td><td>___________________</td></tr>
+    <tr><td>___________________</td><td>___________________</td></tr>
+  </tbody>
+</table>
+.
+Document[0, 185]
+  TableBlock[0, 184]
+    TableHead[0, 45]
+      TableRow[0, 45] rowNumber=1
+        TableCell[0, 23] header textOpen:[0, 1, "|"] text:[2, 10, "Column 1"] textClose:[22, 23, "|"]
+          Text[2, 10] chars:[2, 10, "Column 1"]
+        TableCell[23, 45] header text:[24, 32, "Column 2"] textClose:[44, 45, "|"]
+          Text[24, 32] chars:[24, 32, "Column 2"]
+    TableSeparator[46, 91]
+      TableRow[46, 91]
+        TableCell[46, 69] textOpen:[46, 47, "|"] text:[47, 68, "---------------------"] textClose:[68, 69, "|"]
+          Text[47, 68] chars:[47, 68, "----- … -----"]
+        TableCell[69, 91] text:[69, 90, "---------------------"] textClose:[90, 91, "|"]
+          Text[69, 90] chars:[69, 90, "----- … -----"]
+    TableBody[92, 183]
+      TableRow[92, 137] rowNumber=1
+        TableCell[92, 115] textOpen:[92, 93, "|"] text:[94, 113, "___________________"] textClose:[114, 115, "|"]
+          Text[94, 113] chars:[94, 113, "_____ … _____"]
+        TableCell[115, 137] text:[116, 135, "___________________"] textClose:[136, 137, "|"]
+          Text[116, 135] chars:[116, 135, "_____ … _____"]
+      TableRow[138, 183] rowNumber=2
+        TableCell[138, 161] textOpen:[138, 139, "|"] text:[140, 159, "___________________"] textClose:[160, 161, "|"]
+          Text[140, 159] chars:[140, 159, "_____ … _____"]
+        TableCell[161, 183] text:[162, 181, "___________________"] textClose:[182, 183, "|"]
+          Text[162, 181] chars:[162, 181, "_____ … _____"]
+````````````````````````````````
+
+

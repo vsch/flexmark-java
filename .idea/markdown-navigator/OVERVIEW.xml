@@ -34,6 +34,7 @@
           <option name="WIKILINKS" value="true" />
         </PegdownExtensions>
         <ParserOptions>
+          <option name="ADMONITION_EXT" value="false" />
           <option name="ATTRIBUTES_EXT" value="false" />
           <option name="COMMONMARK_LISTS" value="false" />
           <option name="DUMMY" value="false" />

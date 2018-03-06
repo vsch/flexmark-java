@@ -5,7 +5,6 @@ import com.vladsch.flexmark.ext.admonition.AdmonitionBlock;
 import com.vladsch.flexmark.formatter.CustomNodeFormatter;
 import com.vladsch.flexmark.formatter.internal.*;
 import com.vladsch.flexmark.util.format.Table;
-import com.vladsch.flexmark.util.format.TableFormatOptions;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.sequence.RepeatedCharSequence;
 

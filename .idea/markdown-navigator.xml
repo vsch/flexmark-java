@@ -34,6 +34,7 @@
         <option name="WIKILINKS" value="true" />
       </PegdownExtensions>
       <ParserOptions>
+        <option name="ADMONITION_EXT" value="true" />
         <option name="ATTRIBUTES_EXT" value="true" />
         <option name="COMMONMARK_LISTS" value="true" />
         <option name="DUMMY" value="false" />
@@ -52,16 +53,16 @@
         <option name="SIM_TOC_BLANK_LINE_SPACER" value="true" />
       </ParserOptions>
     </ParserSettings>
-    <HtmlSettings headerTopEnabled="false" headerBottomEnabled="false" bodyTopEnabled="false" bodyBottomEnabled="true" embedUrlContent="false" addPageHeader="true" embedImages="false" embedHttpImages="false" imageUriSerials="false">
+    <HtmlSettings headerTopEnabled="false" headerBottomEnabled="false" bodyTopEnabled="false" bodyBottomEnabled="false" embedUrlContent="false" addPageHeader="true" embedImages="false" embedHttpImages="false" imageUriSerials="false">
       <GeneratorProvider>
         <provider providerId="com.vladsch.idea.multimarkdown.editor.javafx.html.generator" providerName="JavaFx HTML Generator" />
       </GeneratorProvider>
       <headerTop />
       <headerBottom />
       <bodyTop />
-      <bodyBottom>&lt;script src=&quot;file:///Users/vlad/src/sites/public/mn-resources/admonition.js&quot;&gt;&lt;/script&gt;</bodyBottom>
+      <bodyBottom />
     </HtmlSettings>
-    <CssSettings previewScheme="UI_SCHEME" cssUri="file://$PROJECT_DIR$/flexmark-ext-admonition/src/main/resources/admonition.css" isCssUriEnabled="true" isCssUriSerial="true" isCssTextEnabled="true" isDynamicPageWidth="true">
+    <CssSettings previewScheme="UI_SCHEME" cssUri="" isCssUriEnabled="false" isCssUriSerial="true" isCssTextEnabled="true" isDynamicPageWidth="true">
       <StylesheetProvider>
         <provider providerId="com.vladsch.idea.multimarkdown.editor.javafx.html.css" providerName="Default JavaFx Stylesheet" />
       </StylesheetProvider>

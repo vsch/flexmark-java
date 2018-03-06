@@ -6,7 +6,6 @@ import com.vladsch.flexmark.docx.converter.internal.DocxRenderer;
 import com.vladsch.flexmark.docx.converter.util.DocxContextImpl;
 import com.vladsch.flexmark.docx.converter.util.RunFormatProvider;
 import com.vladsch.flexmark.docx.converter.util.XmlDocxSorter;
-import com.vladsch.flexmark.docx.converter.util.XmlFormatter;
 import com.vladsch.flexmark.ext.aside.AsideExtension;
 import com.vladsch.flexmark.ext.attributes.AttributesExtension;
 import com.vladsch.flexmark.ext.autolink.AutolinkExtension;

@@ -1,8 +1,8 @@
 package com.vladsch.flexmark.ext.admonition.internal;
 
-import com.vladsch.flexmark.util.options.DataHolder;
-
-import java.util.*;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @SuppressWarnings("WeakerAccess")
 public class AdmonitionRepository {

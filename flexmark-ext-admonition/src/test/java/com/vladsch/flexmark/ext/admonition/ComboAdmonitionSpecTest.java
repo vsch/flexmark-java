@@ -1,7 +1,5 @@
 package com.vladsch.flexmark.ext.admonition;
 
-import com.vladsch.flexmark.ast.Node;
-import com.vladsch.flexmark.ext.admonition.internal.AdmonitionRepository;
 import com.vladsch.flexmark.ext.tables.TablesExtension;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;

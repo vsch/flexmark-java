@@ -6,11 +6,11 @@ import com.vladsch.flexmark.html.CustomNodeRenderer;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.*;
 import com.vladsch.flexmark.util.html.Attribute;
-import com.vladsch.flexmark.util.html.Attributes;
 import com.vladsch.flexmark.util.options.DataHolder;
 
-import java.io.*;
-import java.util.*;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 import static com.vladsch.flexmark.html.renderer.RenderingPhase.BODY_TOP;
 

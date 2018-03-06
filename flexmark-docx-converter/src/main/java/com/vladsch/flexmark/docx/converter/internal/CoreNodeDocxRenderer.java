@@ -94,6 +94,9 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
     protected final boolean linebreakOnInlineHtmlBr;
     protected final boolean tableCaptionToParagraph;
     protected final boolean tableCaptionBeforeTable;
+    protected final int tablePreferredWidthPct;
+    protected final int tableLeftIndent;
+    protected final String tableStyle;
     private int imageId;
     private final HashMap<Node, BigInteger> footnoteIDs;
     private TocBlockBase lastTocBlock;
@@ -124,6 +127,9 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
         linebreakOnInlineHtmlBr = DocxRenderer.LINEBREAK_ON_INLINE_HTML_BR.getFrom(options);
         tableCaptionToParagraph = DocxRenderer.TABLE_CAPTION_TO_PARAGRAPH.getFrom(options);
         tableCaptionBeforeTable = DocxRenderer.TABLE_CAPTION_BEFORE_TABLE.getFrom(options);
+        tablePreferredWidthPct = DocxRenderer.TABLE_PREFERRED_WIDTH_PCT.getFrom(options);
+        tableLeftIndent = DocxRenderer.TABLE_LEFT_INDENT.getFrom(options);
+        tableStyle = DocxRenderer.TABLE_STYLE.getFrom(options);
         repositoryNodesDone = false;
 
         this.options = new DocxRendererOptions(options);
@@ -1370,14 +1376,25 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
         tblpr.setJc(jc);
         jc.setVal(JcEnumeration.LEFT);
 
+        // create style if one is specified
+        if (!tableStyle.isEmpty()) {
+            CTTblPrBase.TblStyle tblStyle = docx.getFactory().createCTTblPrBaseTblStyle();
+            tblpr.setTblStyle(tblStyle);
+            tblStyle.setVal(tableStyle);
+        }
+
         // Create object for tblW
         TblWidth tblwidth = docx.getFactory().createTblWidth();
         tblpr.setTblW(tblwidth);
-        tblwidth.setType("auto");
-        tblwidth.setW(BigInteger.valueOf(0));
+        if (tablePreferredWidthPct == 0) {
+            tblwidth.setType("auto");
+            tblwidth.setW(BigInteger.valueOf(0));
+        } else {
+            tblwidth.setType("pct");
+            tblwidth.setW(BigInteger.valueOf(tablePreferredWidthPct * 50));
+        }
 
         final int cellMargin = 80;
-        final int leftInd = 30;
         // Create object for tblInd
         //TblWidth tblwidth2 = docx.getFactory().createTblWidth();
         //tblpr.setTblInd(tblwidth2);
@@ -1398,56 +1415,58 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
         TblWidth tblInd = docx.getFactory().createTblWidth();
         tblpr.setTblInd(tblInd);
         tblInd.setType("dxa");
-        final BigInteger tableInd = BigInteger.valueOf(cellMargin + leftInd).add(docx.getHelper().safeIndLeft(pPr.getInd()));
+        final BigInteger tableInd = BigInteger.valueOf(tableLeftIndent).add(docx.getHelper().safeIndLeft(pPr.getInd()));
         tblInd.setW(tableInd);
 
         docx.setBlockFormatProvider(new IsolatingBlockFormatProvider<Node>(docx));
 
-        // Create object for tblBorders
-        TblBorders tblborders = docx.getFactory().createTblBorders();
-        tblpr.setTblBorders(tblborders);
-        // Create object for left
-        CTBorder border = docx.getFactory().createCTBorder();
-        tblborders.setLeft(border);
-        border.setVal(org.docx4j.wml.STBorder.SINGLE);
-        border.setSz(BigInteger.valueOf(2));
-        border.setColor("000001");
-        border.setSpace(BigInteger.valueOf(0));
-        // Create object for right
-        CTBorder border2 = docx.getFactory().createCTBorder();
-        tblborders.setRight(border2);
-        border2.setVal(org.docx4j.wml.STBorder.SINGLE);
-        border2.setSz(BigInteger.valueOf(2));
-        border2.setColor("000001");
-        border2.setSpace(BigInteger.valueOf(0));
-        // Create object for top
-        CTBorder border3 = docx.getFactory().createCTBorder();
-        tblborders.setTop(border3);
-        border3.setVal(org.docx4j.wml.STBorder.SINGLE);
-        border3.setSz(BigInteger.valueOf(2));
-        border3.setColor("000001");
-        border3.setSpace(BigInteger.valueOf(0));
-        // Create object for bottom
-        CTBorder border4 = docx.getFactory().createCTBorder();
-        tblborders.setBottom(border4);
-        border4.setVal(org.docx4j.wml.STBorder.SINGLE);
-        border4.setSz(BigInteger.valueOf(2));
-        border4.setColor("000001");
-        border4.setSpace(BigInteger.valueOf(0));
-        // Create object for insideH
-        CTBorder border5 = docx.getFactory().createCTBorder();
-        tblborders.setInsideH(border5);
-        border5.setVal(org.docx4j.wml.STBorder.SINGLE);
-        border5.setSz(BigInteger.valueOf(2));
-        border5.setColor("000001");
-        border5.setSpace(BigInteger.valueOf(0));
-        // Create object for insideV
-        CTBorder border6 = docx.getFactory().createCTBorder();
-        tblborders.setInsideV(border6);
-        border6.setVal(org.docx4j.wml.STBorder.SINGLE);
-        border6.setSz(BigInteger.valueOf(2));
-        border6.setColor("000001");
-        border6.setSpace(BigInteger.valueOf(0));
+        if (tableStyle.isEmpty()) {
+            // Create object for tblBorders
+            TblBorders tblborders = docx.getFactory().createTblBorders();
+            tblpr.setTblBorders(tblborders);
+            // Create object for left
+            CTBorder border = docx.getFactory().createCTBorder();
+            tblborders.setLeft(border);
+            border.setVal(org.docx4j.wml.STBorder.SINGLE);
+            border.setSz(BigInteger.valueOf(2));
+            border.setColor("000001");
+            border.setSpace(BigInteger.valueOf(0));
+            // Create object for right
+            CTBorder border2 = docx.getFactory().createCTBorder();
+            tblborders.setRight(border2);
+            border2.setVal(org.docx4j.wml.STBorder.SINGLE);
+            border2.setSz(BigInteger.valueOf(2));
+            border2.setColor("000001");
+            border2.setSpace(BigInteger.valueOf(0));
+            // Create object for top
+            CTBorder border3 = docx.getFactory().createCTBorder();
+            tblborders.setTop(border3);
+            border3.setVal(org.docx4j.wml.STBorder.SINGLE);
+            border3.setSz(BigInteger.valueOf(2));
+            border3.setColor("000001");
+            border3.setSpace(BigInteger.valueOf(0));
+            // Create object for bottom
+            CTBorder border4 = docx.getFactory().createCTBorder();
+            tblborders.setBottom(border4);
+            border4.setVal(org.docx4j.wml.STBorder.SINGLE);
+            border4.setSz(BigInteger.valueOf(2));
+            border4.setColor("000001");
+            border4.setSpace(BigInteger.valueOf(0));
+            // Create object for insideH
+            CTBorder border5 = docx.getFactory().createCTBorder();
+            tblborders.setInsideH(border5);
+            border5.setVal(org.docx4j.wml.STBorder.SINGLE);
+            border5.setSz(BigInteger.valueOf(2));
+            border5.setColor("000001");
+            border5.setSpace(BigInteger.valueOf(0));
+            // Create object for insideV
+            CTBorder border6 = docx.getFactory().createCTBorder();
+            tblborders.setInsideV(border6);
+            border6.setVal(org.docx4j.wml.STBorder.SINGLE);
+            border6.setSz(BigInteger.valueOf(2));
+            border6.setColor("000001");
+            border6.setSpace(BigInteger.valueOf(0));
+        }
 
         // Create object for tblCellMar
         CTTblCellMar tblcellmar = docx.getFactory().createCTTblCellMar();

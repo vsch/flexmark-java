@@ -8,6 +8,7 @@ flexmark-java
 - [To Do](#to-do)
     - [Docx Converter](#docx-converter)
     - [GitLab compatibility extensions](#gitlab-compatibility-extensions)
+- [0.32.12](#03212)
 - [0.32.10](#03210)
 - [0.32.8](#0328)
 - [0.32.6](#0326)
@@ -253,6 +254,15 @@ flexmark-java
       similar to Math solution above.
 
 &nbsp;</details>
+
+0.32.12
+-------
+
+* Add: `DocxRenderer.TABLE_PREFERRED_WIDTH_PCT` default `0`, if `0` then table width is `auto`,
+  otherwise specifies percent of page width.
+* Add: `DocxRenderer.TABLE_LEFT_INDENT` default `120`, in twips
+* Add: `DocxRenderer.TABLE_STYLE` default `""`, if not empty then table then table style will be
+  set to this value and default cell borders will not be generated.
 
 0.32.10
 -------

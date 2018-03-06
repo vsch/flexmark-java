@@ -2,7 +2,6 @@
   <settings default="" pdf-export="">
     <scope-profiles>
       <element scope="Flexmark Ext Overview" profile="OVERVIEW" />
-      <element scope="Admonition Test Spec" profile="Admonition" />
     </scope-profiles>
   </settings>
 </component>

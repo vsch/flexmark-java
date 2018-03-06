@@ -1277,7 +1277,7 @@ Aside Block Numbered List
         <w:tblPr>
             <w:tblW w:type="auto" w:w="0"/>
             <w:jc w:val="left"/>
-            <w:tblInd w:type="dxa" w:w="110"/>
+            <w:tblInd w:type="dxa" w:w="120"/>
             <w:tblBorders>
                 <w:top w:color="000001" w:space="0" w:sz="2" w:val="single"/>
                 <w:left w:color="000001" w:space="0" w:sz="2" w:val="single"/>
