@@ -99,7 +99,7 @@ public class AdmonitionBlockParser extends AbstractBlockParser {
         final boolean allowLeadingSpace = options.allowLeadingSpace;
         final boolean interruptsParagraph = options.interruptsParagraph;
         final boolean interruptsItemParagraph = options.interruptsItemParagraph;
-        final boolean withLeadSpacesInterruptsItemParagraph = options.withLeadSpacesInterruptsItemParagraph;
+        final boolean withLeadSpacesInterruptsItemParagraph = options.withSpacesInterruptsItemParagraph;
         CharSequence line = state.getLine();
         if (!inParagraph || interruptsParagraph) {
             if ((allowLeadingSpace || state.getIndent() == 0) && (!inParagraphListItem || interruptsItemParagraph)) {

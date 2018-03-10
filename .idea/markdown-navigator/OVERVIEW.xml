@@ -1,12 +1,12 @@
 <component name="MarkdownNavigator.ProfileManager">
   <profile>
     <option name="myName" value="OVERVIEW" havePreviewSettings="true" haveParserSettings="true" haveHtmlSettings="true" haveCssSettings="true" haveHtmlExportSettings="true" haveLinkMapSettings="true" profileName="OVERVIEW">
-      <PreviewSettings splitEditorLayout="FIRST" splitEditorPreview="PREVIEW" useGrayscaleRendering="false" zoomFactor="1.0" maxImageWidth="0" showGitHubPageIfSynced="false" allowBrowsingInPreview="false" synchronizePreviewPosition="true" highlightPreviewType="LINE" highlightFadeOut="10" highlightOnTyping="true" synchronizeSourcePosition="true" verticallyAlignSourceAndPreviewSyncPosition="true" showSearchHighlightsInPreview="true" showSelectionInPreview="true" openRemoteLinks="true" replaceUnicodeEmoji="false">
+      <PreviewSettings splitEditorLayout="FIRST" splitEditorPreview="PREVIEW" useGrayscaleRendering="false" zoomFactor="1.0" maxImageWidth="0" showGitHubPageIfSynced="false" allowBrowsingInPreview="false" synchronizePreviewPosition="true" highlightPreviewType="LINE" highlightFadeOut="10" highlightOnTyping="true" synchronizeSourcePosition="true" verticallyAlignSourceAndPreviewSyncPosition="true" showSearchHighlightsInPreview="true" showSelectionInPreview="true" openRemoteLinks="true" replaceUnicodeEmoji="true" lastLayoutSetsDefault="false">
         <PanelProvider>
           <provider providerId="com.vladsch.idea.multimarkdown.editor.javafx.html.panel" providerName="JavaFX WebView" />
         </PanelProvider>
       </PreviewSettings>
-      <ParserSettings gitHubSyntaxChange="false" emojiShortcuts="0" emojiImages="0">
+      <ParserSettings gitHubSyntaxChange="false" emojiShortcuts="3" emojiImages="0">
         <PegdownExtensions>
           <option name="ABBREVIATIONS" value="true" />
           <option name="ANCHORLINKS" value="false" />
@@ -36,7 +36,7 @@
         <ParserOptions>
           <option name="ADMONITION_EXT" value="false" />
           <option name="ATTRIBUTES_EXT" value="false" />
-          <option name="COMMONMARK_LISTS" value="false" />
+          <option name="COMMONMARK_LISTS" value="true" />
           <option name="DUMMY" value="false" />
           <option name="EMOJI_SHORTCUTS" value="true" />
           <option name="ENUMERATED_REFERENCES_EXT" value="false" />
@@ -68,8 +68,9 @@
         </StylesheetProvider>
         <ScriptProviders />
         <cssText />
+        <cssUriHistory />
       </CssSettings>
-      <HtmlExportSettings updateOnSave="true" parentDir="$ModuleFileDir$/src/main/javadoc" targetDir="$ModuleFileDir$/src/main/javadoc" cssDir="$ModuleFileDir$/src/main/javadoc/css" scriptDir="$ModuleFileDir$/src/main/javadoc/js" plainHtml="false" imageDir="$ModuleFileDir$/src/main/javadoc/img" copyLinkedImages="false" imageUniquifyType="0" targetExt="" useTargetExt="false" noCssNoScripts="true" linkToExportedHtml="true" exportOnSettingsChange="true" regenerateOnProjectOpen="false" linkFormatType="HTTP_ABSOLUTE" />
+      <HtmlExportSettings updateOnSave="true" parentDir="$ModuleFileDir$/src/main/javadoc" targetDir="$ModuleFileDir$/src/main/javadoc" cssDir="$ModuleFileDir$/src/main/javadoc/css" scriptDir="$ModuleFileDir$/src/main/javadoc/js" plainHtml="false" imageDir="$ModuleFileDir$/src/main/javadoc" copyLinkedImages="true" imageUniquifyType="1" targetExt="" useTargetExt="false" noCssNoScripts="true" linkToExportedHtml="true" exportOnSettingsChange="true" regenerateOnProjectOpen="false" linkFormatType="HTTP_ABSOLUTE" />
       <LinkMapSettings>
         <textMaps />
       </LinkMapSettings>

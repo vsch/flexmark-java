@@ -34,7 +34,7 @@ public class AdmonitionExtension implements Parser.ParserExtension, HtmlRenderer
     public static final DataKey<Boolean> ALLOW_LEADING_SPACE = new DataKey<Boolean>("ADMONITION.ALLOW_LEADING_SPACE", true);
     public static final DataKey<Boolean> INTERRUPTS_PARAGRAPH = new DataKey<Boolean>("ADMONITION.INTERRUPTS_PARAGRAPH", true);
     public static final DataKey<Boolean> INTERRUPTS_ITEM_PARAGRAPH = new DataKey<Boolean>("ADMONITION.INTERRUPTS_ITEM_PARAGRAPH", true);
-    public static final DataKey<Boolean> WITH_LEAD_SPACES_INTERRUPTS_ITEM_PARAGRAPH = new DataKey<Boolean>("ADMONITION.WITH_LEAD_SPACES_INTERRUPTS_ITEM_PARAGRAPH", true);
+    public static final DataKey<Boolean> WITH_SPACES_INTERRUPTS_ITEM_PARAGRAPH = new DataKey<Boolean>("ADMONITION.WITH_SPACES_INTERRUPTS_ITEM_PARAGRAPH", true);
     public static final DataKey<Boolean> ALLOW_LAZY_CONTINUATION = new DataKey<Boolean>("ADMONITION.ALLOW_LAZY_CONTINUATION", true);
     public static final DataKey<String> UNRESOLVED_QUALIFIER = new DataKey<String>("ADMONITION.UNRESOLVED_QUALIFIER", "note");
     public static final DataKey<Map<String, String>> QUALIFIER_TYPE_MAP = new DataKey<Map<String, String>>("ADMONITION.QUALIFIER_TYPE_MAP", getQualifierTypeValueFactory());

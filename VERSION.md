@@ -8,6 +8,7 @@ flexmark-java
 - [To Do](#to-do)
     - [Docx Converter](#docx-converter)
     - [GitLab compatibility extensions](#gitlab-compatibility-extensions)
+- [0.32.14](#03214)
 - [0.32.12](#03212)
 - [0.32.10](#03210)
 - [0.32.8](#0328)
@@ -249,11 +250,20 @@ flexmark-java
 * [ ] Math, inline via ```$``$``` or as fenced code with `math` info string requiring inclusion
       of Katex in the rendered HTML page.
 
-
 * [ ] Graphing via Mermaid as fenced code with `mermaid` info string, via Mermaid inclusion
       similar to Math solution above.
 
 &nbsp;</details>
+
+0.32.14
+-------
+
+* Change: `AdmonitionExtension.WITH_LEAD_SPACES_INTERRUPTS_ITEM_PARAGRAPH` to
+  `AdmonitionExtension.WITH_SPACES_INTERRUPTS_ITEM_PARAGRAPH`
+* Fix: Formatter for Tables now treats header column alignment as centered if no alignment
+  marker is given for the column, body cells remain left aligned. This is default browser
+  rendered table appearance.
+* Fix: #213, Attributes element does not allow spaces before closing }
 
 0.32.12
 -------
@@ -460,6 +470,7 @@ flexmark-java
 For convenience these `HtmlRenderer` keys are aliased through `DocxRenderer`, keep in mind that
 setting either will affect both keys. For information on these keys see
 [`HtmlRenderer` options](https://github.com/vsch/flexmark-java/wiki/Extensions#renderer)
+
 * `DocxRenderer.HEADER_ID_GENERATOR_RESOLVE_DUPES`, default `true`,
 
 * `DocxRenderer.HEADER_ID_GENERATOR_TO_DASH_CHARS`, default `" -_"`
@@ -485,6 +496,7 @@ setting either will affect both keys. For information on these keys see
   * `DocxRenderer.NUMBERED_LIST_STYLE`, default "NumberedList"
   * `DocxRenderer.BLOCK_QUOTE_NUMBERED_LIST_STYLE`, default "QuotationsNumberedList"
  -->
+
 * `DocxRenderer.BOLD_STYLE`, default "StrongEmphasis"
 * `DocxRenderer.ITALIC_STYLE`, default "Emphasis"
 * `DocxRenderer.STRIKE_THROUGH_STYLE`, default "Strikethrough"
@@ -1526,6 +1538,7 @@ mismatched item type starts a new list.
 * Add: `flexmark-html-parser` module to convert HTML to markdown, uses `jsoup` for HTML parsing.
 
   Converts HTML to Markdown, assumes all non-application specific extensions are available:
+
   * abbreviations
   * aside
   * block quotes
@@ -3243,6 +3256,5 @@ the node's characters, independent of child node breakdown.
 
 ````````````````````````````````
 
-
-
 [Admonition Extension, Material for MkDocs]: https://squidfunk.github.io/mkdocs-material/extensions/admonition/
+

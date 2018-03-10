@@ -323,7 +323,7 @@ Abc|Def
 ---|---
 **def | abc
 .
-| Abc   | Def |
+|  Abc  | Def |
 |-------|-----|
 | **def | abc |
 
@@ -373,7 +373,7 @@ Abc|Def
 ---|---
 1\\\\|2
 .
-| Abc   | Def |
+|  Abc  | Def |
 |-------|-----|
 | 1\\\\ | 2   |
 
@@ -562,7 +562,7 @@ table, you are over
 
 [ref]: /url
 .
-| **Abc** **test** | _Def_ _Def_   |
+| **Abc** **test** |  _Def_ _Def_  |
 |------------------|---------------|
 | [ref]            | `code` `code` |
 
@@ -789,7 +789,7 @@ in item
 .
 - Add: live templates starting with `.`
 
-  | Element       | Abbreviation    | Expansion         |
+  |    Element    |  Abbreviation   |     Expansion     |
   |---------------|-----------------|-------------------|
   | Abbreviation  | `.abbreviation` | `*[]: `           |
   | Code fence    | `.codefence`    | \`\`\` ... \`\`\` |
@@ -1013,7 +1013,7 @@ in item
 .
 - Add: live templates starting with `.`
 
-  | Element       | Abbreviation    | Expansion         |
+  |    Element    |  Abbreviation   |     Expansion     |
   |---------------|-----------------|-------------------|
   | Abbreviation  | `.abbreviation` | `*[]: `           |
   | Code fence    | `.codefence`    | \`\`\` ... \`\`\` |
@@ -1035,7 +1035,7 @@ default
 .
 - Add: live templates starting with `.`
 
-  | Element       | Abbreviation    |         Expansion |
+  |    Element    |  Abbreviation   |         Expansion |
   |---------------|-----------------|------------------:|
   | Abbreviation  | `.abbreviation` |           `*[]: ` |
   | Code fence    | `.codefence`    | \`\`\` ... \`\`\` |
@@ -1055,7 +1055,7 @@ default
 .
 - Add: live templates starting with `.`
 
-  | Element       | Abbreviation    | Expansion         |
+  |    Element    |  Abbreviation   |     Expansion     |
   |---------------|-----------------|------------------:|
   | Abbreviation  | `.abbreviation` | `*[]: `           |
   | Code fence    | `.codefence`    | \`\`\` ... \`\`\` |

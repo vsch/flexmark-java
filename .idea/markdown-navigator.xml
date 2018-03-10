@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="MarkdownProjectSettings">
-    <PreviewSettings splitEditorLayout="FIRST" splitEditorPreview="PREVIEW" useGrayscaleRendering="false" zoomFactor="1.0" maxImageWidth="0" showGitHubPageIfSynced="false" allowBrowsingInPreview="false" synchronizePreviewPosition="true" highlightPreviewType="LINE" highlightFadeOut="3" highlightOnTyping="false" synchronizeSourcePosition="true" verticallyAlignSourceAndPreviewSyncPosition="true" showSearchHighlightsInPreview="true" showSelectionInPreview="true" openRemoteLinks="true" replaceUnicodeEmoji="false">
+  <component name="MarkdownProjectSettings" wasCopied="false">
+    <PreviewSettings splitEditorLayout="FIRST" splitEditorPreview="PREVIEW" useGrayscaleRendering="false" zoomFactor="1.0" maxImageWidth="0" showGitHubPageIfSynced="false" allowBrowsingInPreview="false" synchronizePreviewPosition="true" highlightPreviewType="LINE" highlightFadeOut="3" highlightOnTyping="false" synchronizeSourcePosition="true" verticallyAlignSourceAndPreviewSyncPosition="true" showSearchHighlightsInPreview="true" showSelectionInPreview="true" openRemoteLinks="true" replaceUnicodeEmoji="false" lastLayoutSetsDefault="false">
       <PanelProvider>
         <provider providerId="com.vladsch.idea.multimarkdown.editor.javafx.html.panel" providerName="JavaFX WebView" />
       </PanelProvider>
@@ -66,7 +66,9 @@
       <StylesheetProvider>
         <provider providerId="com.vladsch.idea.multimarkdown.editor.javafx.html.css" providerName="Default JavaFx Stylesheet" />
       </StylesheetProvider>
-      <ScriptProviders />
+      <ScriptProviders>
+        <provider providerId="com.vladsch.idea.multimarkdown.editor.github-collapse-markdown.html.script" providerName="GitHub Collapse Markdown" />
+      </ScriptProviders>
       <cssText>.markdown-body,
 .wiki-body {
     font-family: Arial, &quot;Helvetica Neue&quot;, &quot;Segoe UI&quot;, freesans, sans-serif;
@@ -96,6 +98,7 @@ code {
     border: solid 1px #52CC7A;
     background-color: #B5FFCE;
 }</cssText>
+      <cssUriHistory />
     </CssSettings>
     <HtmlExportSettings updateOnSave="false" parentDir="$ProjectFileDir$" targetDir="$ProjectFileDir$/out" cssDir="$ProjectFileDir$/out/export/css" scriptDir="$ProjectFileDir$/out/export/js" plainHtml="false" imageDir="$ProjectFileDir$/out/img" copyLinkedImages="false" imageUniquifyType="0" targetExt="" useTargetExt="false" noCssNoScripts="false" linkToExportedHtml="true" exportOnSettingsChange="true" regenerateOnProjectOpen="false" linkFormatType="HTTP_ABSOLUTE" />
     <LinkMapSettings>

@@ -154,12 +154,12 @@ public class Table {
         return Utils.max(headingColumns, separatorColumns, bodyColumns);
     }
 
-    public BasedSequence cellText(CharSequence chars, int width, CellAlignment alignment, Ref<Integer> accumulatedDelta) {
+    public BasedSequence cellText(CharSequence chars, final boolean isHeader, int width, CellAlignment alignment, Ref<Integer> accumulatedDelta) {
         BasedSequence text = BasedSequenceImpl.of(chars);
 
         final int length = options.charWidthProvider.charWidth(text);
         if (length < width && options.adjustColumnWidth) {
-            if (!options.applyColumnAlignment || alignment == null || alignment == CellAlignment.NONE) alignment = CellAlignment.LEFT;
+            if (!options.applyColumnAlignment || alignment == null || alignment == CellAlignment.NONE) alignment = isHeader ? CellAlignment.CENTER : CellAlignment.LEFT;
             int diff = width - length;
             int spaceCount = diff / options.spaceWidth;
             if (accumulatedDelta.value * 2 >= options.spaceWidth) {
@@ -295,7 +295,7 @@ public class Table {
                         if (cell.columnSpan > 1) spanAlignment.set(jSpan);
                     }
 
-                    BasedSequence cellText = cellText(cell.text, 0, null, delta);
+                    BasedSequence cellText = cellText(cell.text, true, 0, null, delta);
                     int width = options.charWidthProvider.charWidth(cellText) + options.spacePad + options.pipeWidth * cell.columnSpan;
                     if (cell.columnSpan > 1) {
                         columnSpans.add(new ColumnSpan(j, cell.columnSpan, width));
@@ -317,7 +317,7 @@ public class Table {
                 int j = 0;
                 int jSpan = 0;
                 for (TableCell cell : row.cells) {
-                    BasedSequence cellText = cellText(cell.text, 0, null, delta);
+                    BasedSequence cellText = cellText(cell.text, false, 0, null, delta);
                     int width = options.charWidthProvider.charWidth(cellText) + options.spacePad + options.pipeWidth * cell.columnSpan;
                     if (cell.columnSpan > 1) {
                         columnSpans.add(new ColumnSpan(jSpan, cell.columnSpan, width));
@@ -450,7 +450,7 @@ public class Table {
                     }
 
                     CellAlignment cellAlignment = cell.alignment != CellAlignment.NONE ? cell.alignment : alignments[jSpan];
-                    out.append(cellText(cell.text, spanWidth(jSpan, cell.columnSpan) - options.spacePad - options.pipeWidth * cell.columnSpan, cellAlignment, delta));
+                    out.append(cellText(cell.text, true, spanWidth(jSpan, cell.columnSpan) - options.spacePad - options.pipeWidth * cell.columnSpan, cellAlignment, delta));
 
                     j++;
                     jSpan += cell.columnSpan;
@@ -511,7 +511,7 @@ public class Table {
                         if (options.spaceAroundPipes) out.append(' ');
                     }
 
-                    out.append(cellText(cell.text, spanWidth(jSpan, cell.columnSpan) - options.spacePad - options.pipeWidth * cell.columnSpan, alignments[jSpan], delta));
+                    out.append(cellText(cell.text, false, spanWidth(jSpan, cell.columnSpan) - options.spacePad - options.pipeWidth * cell.columnSpan, alignments[jSpan], delta));
 
                     j++;
                     jSpan += cell.columnSpan;

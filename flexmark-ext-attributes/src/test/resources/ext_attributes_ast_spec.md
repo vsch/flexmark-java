@@ -26,6 +26,7 @@ The attributes is a space separated list of attribute syntax of one of the follo
  -->
 
 **NOTE**: Handling of multiple value assignment for attributes depends on its name:
+
 * `class` values are accumulated as a space (` `) separated list.
 * `style` values are accumulated as a semicolon (`;`) separated list.
 * all others override any previous values of the same name.
@@ -1764,6 +1765,21 @@ Document[0, 162]
         Text[129, 145] chars:[129, 145, "some  … talic"]
     AttributesNode[149, 161] textOpen:[149, 150, "{"] text:[150, 160, "#heading-3"] textClose:[160, 161, "}"]
       AttributeNode[150, 160] name:[150, 151, "#"] value:[151, 160, "heading-3"] isImplicit isId
+````````````````````````````````
+
+
+## Trailing Spaces
+
+```````````````````````````````` example Trailing Spaces: 1
+text {attribute=value   }
+.
+<p attribute="value">text</p>
+.
+Document[0, 26]
+  Paragraph[0, 26]
+    Text[0, 4] chars:[0, 4, "text"]
+    AttributesNode[5, 25] textOpen:[5, 6, "{"] text:[6, 21, "attribute=value"] textClose:[24, 25, "}"]
+      AttributeNode[6, 21] name:[6, 15, "attribute"] sep:[15, 16, "="] value:[16, 21, "value"]
 ````````````````````````````````
 
 

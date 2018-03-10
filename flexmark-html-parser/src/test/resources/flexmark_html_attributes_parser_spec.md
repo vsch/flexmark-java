@@ -1238,7 +1238,7 @@ unclosed delimiters in cells
 unclosed delimiters in cells
 
 ```````````````````````````````` example Tables: 20
-| Abc   | Def |
+|  Abc  | Def |
 |-------|-----|
 | **def | abc |
 
@@ -1289,7 +1289,7 @@ unclosed delimiters in cells
 
 
 ```````````````````````````````` example Tables: 23
-| Abc   | Def |
+|  Abc  | Def |
 |-------|-----|
 | 1\\\\ | 2   |
 
@@ -1485,7 +1485,7 @@ table, you are over
 inlines should be processed
 
 ```````````````````````````````` example Tables: 34
-| **Abc**     | *Def*  |
+|   **Abc**   | *Def*  |
 |-------------|--------|
 | [ref](/url) | `code` |
 
@@ -1504,7 +1504,7 @@ inlines should be processed
 inlines should be processed
 
 ```````````````````````````````` example Tables: 35
-| **Abc** **test** | *Def* *Def*   |
+| **Abc** **test** |  *Def* *Def*  |
 |------------------|---------------|
 | [ref](/url)      | `code` `code` |
 
@@ -1750,7 +1750,7 @@ in item
 ```````````````````````````````` example Tables: 46
 * Add: live templates starting with `.`
 
-  | Element       | Abbreviation    | Expansion   |
+  |    Element    |  Abbreviation   |  Expansion  |
   |---------------|-----------------|-------------|
   | Abbreviation  | `.abbreviation` | `*[]:`      |
   | Code fence    | `.codefence`    | ``` ... ``` |
@@ -2088,7 +2088,7 @@ real life table
 Table with `th` in `tbody`
 
 ```````````````````````````````` example Tables: 49
-| Result | Description        | Entity Name |
+| Result |    Description     | Entity Name |
 |--------|--------------------|-------------|
 |        | non-breaking space | &nbsp;      |
 | <      | less than          | &lt;        |
@@ -2131,8 +2131,8 @@ Table with `th` in `tbody`
 tables with row span cells
 
 ```````````````````````````````` example Tables: 50
-| ID | e-mail   | Name     | Visits | Trials |                 Points                 |||| Discount On Next License |
-| ID | e-mail   | Name     | Visits | Trials | Earned | Complimentary | Used | Available | Discount On Next License |
+| ID |  e-mail  |   Name   | Visits | Trials |                 Points                 |||| Discount On Next License |
+| ID |  e-mail  |   Name   | Visits | Trials | Earned | Complimentary | Used | Available | Discount On Next License |
 |----|----------|----------|-------:|-------:|-------:|--------------:|-----:|----------:|:------------------------:|
 | 2  | test 1 1 | test 1 2 |     32 |      0 |      0 |             1 |    0 |         1 |           10%            |
 | 24 | test 2 1 | test 2 2 |      1 |      0 |      0 |             1 |    0 |         1 |           10%            |

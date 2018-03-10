@@ -80,7 +80,7 @@ Qualifiers are used to select the icon and the color of the block.
 
 </td><td>
 
-![AdmonitionExample.png](AdmonitionExample.png){height=800}
+<img src="https://github.com/vsch/flexmark-java/raw/master/flexmark-ext-admonition/src/main/javadoc/AdmonitionExample.png" alt="AdmonitionExample.png" height="1000"/>
 
 </td></tr>
 </table>

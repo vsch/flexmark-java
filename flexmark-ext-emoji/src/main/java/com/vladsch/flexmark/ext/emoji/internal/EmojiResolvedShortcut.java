@@ -18,7 +18,11 @@ public class EmojiResolvedShortcut {
     }
 
     public static EmojiResolvedShortcut getEmojiText(Emoji node, EmojiShortcutType useShortcutType, EmojiImageType useImageType, String rootImagePath) {
-        EmojiReference.Emoji emoji = EmojiShortcuts.getEmojiFromShortcut(node.getText().toString());
+        return getEmojiText(node.getText().toString(), useShortcutType, useImageType, rootImagePath);
+    }
+
+    public static EmojiResolvedShortcut getEmojiText(String emojiId, EmojiShortcutType useShortcutType, EmojiImageType useImageType, String rootImagePath) {
+        EmojiReference.Emoji emoji = EmojiShortcuts.getEmojiFromShortcut(emojiId);
         String emojiText = null;
         boolean isUnicode = false;
         String alt = null;
