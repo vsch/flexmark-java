@@ -264,6 +264,7 @@ flexmark-java
   marker is given for the column, body cells remain left aligned. This is default browser
   rendered table appearance.
 * Fix: #213, Attributes element does not allow spaces before closing }
+* Fix: update to open html to pdf 0.0.1-RC12
 
 0.32.12
 -------

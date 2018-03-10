@@ -1,7 +1,7 @@
 flexmark-java extension for application specific macros
 
-Macros come in two forms: block and inline. Block macros can include mutli-line content,
-inluding blank lines. The content can contain other markdown elements and is parsed for inline
+Macros come in two forms: block and inline. Block macros can include multi-line content,
+including blank lines. The content can contain other markdown elements and is parsed for inline
 markdown content.
 
 Inline macros can contain multi-line content but not blank lines because they are fully
@@ -44,7 +44,7 @@ Block Macros without content:
 
 General form of an inline macro is the same as the block form except the opening and/or closing
 marker has a blank or non-blank text prefix and/or non blank text suffix, or both opening and
-closing markers are containted on the same line.
+closing markers are contained on the same line.
 
 ### Inline Macros:
 

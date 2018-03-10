@@ -31,8 +31,12 @@
     <orderEntry type="module" module-name="flexmark" />
     <orderEntry type="module" module-name="flexmark-test-util" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-util" />
+    <orderEntry type="module" module-name="flexmark-formatter" />
+    <orderEntry type="module" module-name="flexmark-ext-aside" />
+    <orderEntry type="module" module-name="flexmark-ext-attributes" />
     <orderEntry type="module" module-name="flexmark-ext-definition" />
     <orderEntry type="module" module-name="flexmark-ext-emoji" />
+    <orderEntry type="module" module-name="flexmark-ext-enumerated-reference" />
     <orderEntry type="module" module-name="flexmark-ext-footnotes" />
     <orderEntry type="module" module-name="flexmark-ext-gfm-strikethrough" />
     <orderEntry type="module" module-name="flexmark-ext-ins" />
@@ -40,42 +44,9 @@
     <orderEntry type="module" module-name="flexmark-ext-tables" />
     <orderEntry type="module" module-name="flexmark-ext-toc" />
     <orderEntry type="module" module-name="flexmark-ext-wikilink" />
-    <orderEntry type="module" module-name="flexmark-formatter" />
+    <orderEntry type="module" module-name="flexmark-ext-autolink" scope="TEST" />
     <orderEntry type="library" name="org.docx4j:docx4j:3.3.6" level="project" />
-    <orderEntry type="module" module-name="flexmark-ext-autolink" />
-    <orderEntry type="module" module-name="flexmark-ext-typographic" />
     <orderEntry type="library" scope="TEST" name="Maven: junit:junit:4.12" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.hamcrest:hamcrest-core:1.3" level="project" />
-    <orderEntry type="library" name="Maven: org.docx4j:docx4j:3.3.4" level="project" />
-    <orderEntry type="library" name="Maven: org.plutext:jaxb-svg11:1.0.2" level="project" />
-    <orderEntry type="library" name="Maven: net.engio:mbassador:1.2.4.2" level="project" />
-    <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.21" level="project" />
-    <orderEntry type="library" name="Maven: org.slf4j:jcl-over-slf4j:1.7.21" level="project" />
-    <orderEntry type="library" name="Maven: org.slf4j:slf4j-log4j12:1.7.21" level="project" />
-    <orderEntry type="library" name="Maven: log4j:log4j:1.2.17" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.commons:commons-lang3:3.4" level="project" />
-    <orderEntry type="library" name="Maven: commons-codec:commons-codec:1.10" level="project" />
-    <orderEntry type="library" name="Maven: commons-io:commons-io:2.4" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.httpcomponents:httpclient:4.5.2" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.httpcomponents:httpcore:4.4.4" level="project" />
-    <orderEntry type="library" name="Maven: commons-logging:commons-logging:1.2" level="project" />
-    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-core:2.7.3" level="project" />
-    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.7.3" level="project" />
-    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.7.0" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.xmlgraphics:xmlgraphics-commons:2.1" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.avalon.framework:avalon-framework-api:4.3.1" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.avalon.framework:avalon-framework-impl:4.3.1" level="project" />
-    <orderEntry type="library" name="Maven: xalan:xalan:2.7.2" level="project" />
-    <orderEntry type="library" name="Maven: xalan:serializer:2.7.2" level="project" />
-    <orderEntry type="library" name="Maven: net.arnx:wmf2svg:0.9.8" level="project" />
-    <orderEntry type="library" name="Maven: org.antlr:antlr-runtime:3.5.2" level="project" />
-    <orderEntry type="library" name="Maven: org.antlr:stringtemplate:3.2.1" level="project" />
-    <orderEntry type="library" name="Maven: antlr:antlr:2.7.7" level="project" />
-    <orderEntry type="library" name="Maven: com.google.guava:guava:19.0" level="project" />
-    <orderEntry type="library" name="Maven: com.thedeanda:lorem:2.0" level="project" />
-    <orderEntry type="module" module-name="flexmark-ext-enumerated-reference" />
-    <orderEntry type="module" module-name="flexmark-ext-attributes" />
-    <orderEntry type="module" module-name="flexmark-ext-aside" />
-    <orderEntry type="module" module-name="flexmark-ext-anchorlink" scope="TEST" />
   </component>
 </module>
