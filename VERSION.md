@@ -8,6 +8,7 @@ flexmark-java
 - [To Do](#to-do)
     - [Docx Converter](#docx-converter)
     - [GitLab compatibility extensions](#gitlab-compatibility-extensions)
+- [0.32.16](#03216)
 - [0.32.14](#03214)
 - [0.32.12](#03212)
 - [0.32.10](#03210)
@@ -254,6 +255,11 @@ flexmark-java
       similar to Math solution above.
 
 &nbsp;</details>
+
+0.32.16
+-------
+
+* Fix: admonition.css remove non-existent `horiz-align` property.
 
 0.32.14
 -------

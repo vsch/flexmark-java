@@ -13,7 +13,7 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 To create block-styled side content. For complete documentation please see the
 [Admonition Extension, Material for MkDocs](https://squidfunk.github.io/mkdocs-material/extensions/admonition/)
 documentation. (*Personal opinion: Material for MkDocs is eye-candy. If you have not taken a
-look at it, you are missing out on an visual treat.*)
+look at it, you are missing out on a visual treat.*)
 
 #### Block-Styled Side Content 
 
