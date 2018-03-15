@@ -4302,4 +4302,19 @@ Document[0, 57]
         Text[24, 50] chars:[24, 50, "fence … code\n"]
 ````````````````````````````````
 
+## Issue MN-567
+
+Heading Ids preserve `_`
+
+```````````````````````````````` example Issue MN-567: 1
+# heading_id
+
+.
+<h1 id="heading_id">heading_id</h1>
+.
+Document[0, 14]
+  Heading[0, 12] textOpen:[0, 1, "#"] text:[2, 12, "heading_id"]
+    Text[2, 12] chars:[2, 12, "heading_id"]
+````````````````````````````````
+
 

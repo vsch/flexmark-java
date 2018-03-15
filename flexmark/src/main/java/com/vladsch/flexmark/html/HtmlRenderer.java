@@ -58,6 +58,7 @@ public class HtmlRenderer implements IRender {
     //public static final DataKey<Boolean> SOURCE_WRAP_INLINE_HTML = new DynamicDefaultKey<>("SOURCE_WRAP_INLINE_HTML", SOURCE_WRAP_HTML::getFrom);
     public static final DataKey<Boolean> HEADER_ID_GENERATOR_RESOLVE_DUPES = new DataKey<Boolean>("HEADER_ID_GENERATOR_RESOLVE_DUPES", true);
     public static final DataKey<String> HEADER_ID_GENERATOR_TO_DASH_CHARS = new DataKey<String>("HEADER_ID_GENERATOR_TO_DASH_CHARS", " -_");
+    public static final DataKey<String> HEADER_ID_GENERATOR_NON_DASH_CHARS = new DataKey<String>("HEADER_ID_GENERATOR_NON_DASH_CHARS", "");
     public static final DataKey<Boolean> HEADER_ID_GENERATOR_NO_DUPED_DASHES = new DataKey<Boolean>("HEADER_ID_GENERATOR_NO_DUPED_DASHES", false);
     public static final DataKey<Boolean> RENDER_HEADER_ID = new DataKey<Boolean>("RENDER_HEADER_ID", false);
     public static final DataKey<Boolean> GENERATE_HEADER_ID = new DataKey<Boolean>("GENERATE_HEADER_ID", true);

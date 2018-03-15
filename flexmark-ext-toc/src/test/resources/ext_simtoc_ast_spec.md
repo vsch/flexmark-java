@@ -1780,6 +1780,33 @@ Document[0, 138]
 ````````````````````````````````
 
 
+```````````````````````````````` example(SimToc: 58) options(github)
+[TOC hierarchy]:#
+
+
+### Heading_add
+## Heading2_add_more
+
+.
+<div>
+  <h1>Table of Contents</h1>
+  <ul>
+    <li><a href="#heading_add">Heading_add</a></li>
+    <li><a href="#heading2_add_more">Heading2_add_more</a></li>
+  </ul>
+</div>
+<h3 id="heading_add">Heading_add</h3>
+<h2 id="heading2_add_more">Heading2_add_more</h2>
+.
+Document[0, 58]
+  SimTocBlock[0, 18] openingMarker:[0, 1] tocKeyword:[1, 4] style:[5, 14] closingMarker:[14, 16] anchorMarker:[16, 17, "#"]
+  Heading[20, 35] textOpen:[20, 23, "###"] text:[24, 35, "Heading_add"]
+    Text[24, 35] chars:[24, 35, "Headi … g_add"]
+  Heading[36, 56] textOpen:[36, 38, "##"] text:[39, 56, "Heading2_add_more"]
+    Text[39, 56] chars:[39, 56, "Headi … _more"]
+````````````````````````````````
+
+
 ## Source Position Attribute
 
 ```````````````````````````````` example(Source Position Attribute: 1) options(src-pos)

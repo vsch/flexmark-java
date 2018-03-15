@@ -14,6 +14,7 @@ public class HeaderIdGenerator implements HtmlIdGenerator {
         final HashMap<String, Integer> headerBaseIds = new HashMap<String, Integer>();
         final boolean resolveDupes = HtmlRenderer.HEADER_ID_GENERATOR_RESOLVE_DUPES.getFrom(document);
         final String toDashChars = HtmlRenderer.HEADER_ID_GENERATOR_TO_DASH_CHARS.getFrom(document);
+        final String nonDashChars = HtmlRenderer.HEADER_ID_GENERATOR_NON_DASH_CHARS.getFrom(document);
         final boolean noDupedDashes = HtmlRenderer.HEADER_ID_GENERATOR_NO_DUPED_DASHES.getFrom(document);
 
         new AnchorRefTargetBlockVisitor() {
@@ -23,7 +24,7 @@ public class HeaderIdGenerator implements HtmlIdGenerator {
                     String text = node.getAnchorRefText();
 
                     if (!text.isEmpty()) {
-                        String baseRefId = generateId(text, toDashChars, noDupedDashes);
+                        String baseRefId = generateId(text, toDashChars, nonDashChars, noDupedDashes);
 
                         if (resolveDupes) {
                             if (headerBaseIds.containsKey(baseRefId)) {
@@ -51,14 +52,21 @@ public class HeaderIdGenerator implements HtmlIdGenerator {
 
     @SuppressWarnings("WeakerAccess")
     public static String generateId(CharSequence headerText, String toDashChars, boolean noDupedDashes) {
+        return generateId(headerText, toDashChars, null, noDupedDashes);
+    }
+
+    @SuppressWarnings("WeakerAccess")
+    public static String generateId(CharSequence headerText, String toDashChars, String nonDashChars, boolean noDupedDashes) {
         int iMax = headerText.length();
         StringBuilder baseRefId = new StringBuilder(iMax);
         if (toDashChars == null) toDashChars = HtmlRenderer.HEADER_ID_GENERATOR_TO_DASH_CHARS.getFrom(null);
+        if (nonDashChars == null) nonDashChars = HtmlRenderer.HEADER_ID_GENERATOR_NON_DASH_CHARS.getFrom(null);
 
         for (int i = 0; i < iMax; i++) {
             char c = headerText.charAt(i);
             if (isAlphabetic(c)) baseRefId.append(Character.toLowerCase(c));
             else if (Character.isDigit(c)) baseRefId.append(c);
+            else if (nonDashChars.indexOf(c) != -1) baseRefId.append(c);
             else if (toDashChars.indexOf(c) != -1 && (!noDupedDashes
                     || ((c == '-' && baseRefId.length() == 0)
                     || baseRefId.length() != 0 && baseRefId.charAt(baseRefId.length() - 1) != '-'))
@@ -69,11 +77,11 @@ public class HeaderIdGenerator implements HtmlIdGenerator {
 
     public static boolean isAlphabetic(final char c) {
         return (((((1 << Character.UPPERCASE_LETTER) |
-            (1 << Character.LOWERCASE_LETTER) |
-            (1 << Character.TITLECASE_LETTER) |
-            (1 << Character.MODIFIER_LETTER) |
-            (1 << Character.OTHER_LETTER) |
-            (1 << Character.LETTER_NUMBER)) >> Character.getType((int) c)) & 1) != 0);
+                (1 << Character.LOWERCASE_LETTER) |
+                (1 << Character.TITLECASE_LETTER) |
+                (1 << Character.MODIFIER_LETTER) |
+                (1 << Character.OTHER_LETTER) |
+                (1 << Character.LETTER_NUMBER)) >> Character.getType((int) c)) & 1) != 0);
     }
 
     public static class Factory implements HeaderIdGeneratorFactory {

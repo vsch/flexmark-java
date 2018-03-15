@@ -4,6 +4,7 @@ import com.vladsch.flexmark.ext.toc.internal.TocOptions;
 import com.vladsch.flexmark.ext.typographic.TypographicExtension;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.parser.ParserEmulationProfile;
 import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.spec.SpecReader;
 import com.vladsch.flexmark.test.ComboSpecTestCase;
@@ -33,6 +34,7 @@ public class ComboSimTocSpecTest extends ComboSpecTestCase {
         optionsMap.put("with-option-list", new MutableDataSet().set(TocExtension.AST_INCLUDE_OPTIONS, true));
         optionsMap.put("blank-line-spacer", new MutableDataSet().set(TocExtension.BLANK_LINE_SPACER, true));
         optionsMap.put("typographic", new MutableDataSet().set(Parser.EXTENSIONS, Arrays.asList(SimTocExtension.create(), TypographicExtension.create())));
+        optionsMap.put("github", new MutableDataSet().setFrom(ParserEmulationProfile.GITHUB_DOC));
     }
 
     private static final Parser PARSER = Parser.builder(OPTIONS).build();

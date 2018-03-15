@@ -8,7 +8,7 @@ flexmark-java
 - [To Do](#to-do)
     - [Docx Converter](#docx-converter)
     - [GitLab compatibility extensions](#gitlab-compatibility-extensions)
-- [0.32.16](#03216)
+- [Next: 0.32.16](#next-03216)
 - [0.32.14](#03214)
 - [0.32.12](#03212)
 - [0.32.10](#03210)
@@ -256,10 +256,18 @@ flexmark-java
 
 &nbsp;</details>
 
-0.32.16
--------
+Next: 0.32.16
+-------------
 
+* Fix: change all javadoc/overview.html to be generated from javadoc/overview.md files.
 * Fix: admonition.css remove non-existent `horiz-align` property.
+* Add: [HtmlToMarkdownSample.java](https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/samples/HtmlToMarkdownSample.java)
+* Add: `HtmlRenderer.HEADER_ID_GENERATOR_NON_DASH_CHARS`, default `""`. Any characters in the
+  string will be preserved and passed through to the heading ID.
+* Fix: `ParserEmulationProfile.GITHUB_DOC` now sets
+  `HtmlRenderer.HEADER_ID_GENERATOR_NO_DUPED_DASHES` to `" -"` and
+  `HtmlRenderer.HEADER_ID_GENERATOR_NON_DASH_CHARS` to `"_"` to match current GitHub heading id
+  generation rules.
 
 0.32.14
 -------

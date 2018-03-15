@@ -1,6 +1,13 @@
 <html>
+<head>
+<meta charset="UTF-8">
+</head>
 <body>
-<b>Extension for GFM strikethrough using ~~ (GitHub Flavored Markdown)</b>
-<p>See {@link com.vladsch.flexmark.ext.gfm.strikethrough.StrikethroughExtension}</p>
+<p><strong>Extension for GFM strike-through using ~~ (GitHub Flavored Markdown)</strong></p>
+<p>Converts:</p>
+<ul>
+  <li><code>~~strike-through text~~</code> to <code>&lt;del&gt;strike-through text&lt;/del&gt;</code>: <del>strike-through text</del></li>
+  <li><code>~subscript text~</code> to <code>&lt;sub&gt;subscript text&lt;/sub&gt;</code>: <sub>subscript text</sub></li>
+</ul>
 </body>
 </html>

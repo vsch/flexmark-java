@@ -343,6 +343,10 @@ public enum ParserEmulationProfile implements MutableDataSetter {
                     .set(Parser.HTML_BLOCK_DEEP_PARSE_INDENTED_CODE_INTERRUPTS, false)
                     .set(Parser.STRONG_WRAPS_EMPHASIS, true)
                     .set(Parser.LINKS_ALLOW_MATCHED_PARENTHESES, false)
+
+                    // github change for heading Ids
+                    .set(HtmlRenderer.HEADER_ID_GENERATOR_TO_DASH_CHARS, " -")
+                    .set(HtmlRenderer.HEADER_ID_GENERATOR_NON_DASH_CHARS, "_")
             ;
         } else if (this == MULTI_MARKDOWN) {
             getOptions().setIn(dataHolder);
