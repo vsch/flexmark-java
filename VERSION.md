@@ -8,7 +8,8 @@ flexmark-java
 - [To Do](#to-do)
     - [Docx Converter](#docx-converter)
     - [GitLab compatibility extensions](#gitlab-compatibility-extensions)
-- [Next: 0.32.16](#next-03216)
+- [0.32.18](#03218)
+- [0.32.16](#03216)
 - [0.32.14](#03214)
 - [0.32.12](#03212)
 - [0.32.10](#03210)
@@ -256,8 +257,13 @@ flexmark-java
 
 &nbsp;</details>
 
-Next: 0.32.16
--------------
+0.32.18
+-------
+
+* Fix: #216, Wrong source positions for Tables with empty TableHead/TableBody
+
+0.32.16
+-------
 
 * Fix: change all javadoc/overview.html to be generated from javadoc/overview.md files.
 * Fix: admonition.css remove non-existent `horiz-align` property.

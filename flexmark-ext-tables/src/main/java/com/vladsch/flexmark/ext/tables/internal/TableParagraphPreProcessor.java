@@ -191,7 +191,7 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
 
         // table is done, could be earlier than the lines tested earlier, may need to truncate lines
         Block tableBlock = new TableBlock(tableLines.subList(0, tableRows.size()));
-        Node section = new TableHead();
+        Node section = new TableHead(tableLines.get(0).subSequence(0, 0));
         tableBlock.appendChild(section);
 
         List<TableCell.Alignment> alignments = parseAlignment(separatorLine);
@@ -300,7 +300,7 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
         section.setCharsFromContent();
 
         if (section instanceof TableSeparator) {
-            TableBody tableBody = new TableBody();
+            TableBody tableBody = new TableBody(section.getChars().subSequence(section.getChars().length()));
             tableBlock.appendChild(tableBody);
         }
 

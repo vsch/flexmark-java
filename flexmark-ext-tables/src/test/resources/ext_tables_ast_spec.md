@@ -30,7 +30,7 @@ Document[0, 22]
           Text[0, 7] chars:[0, 7, "-------"]
         TableCell[8, 21] text:[8, 21, "-------------"]
           Text[8, 21] chars:[8, 21, "----- … -----"]
-    TableBody[0, 0]
+    TableBody[21, 21]
 ````````````````````````````````
 
 
@@ -145,7 +145,7 @@ Document[0, 16]
           Text[8, 11] chars:[8, 11, "---"]
         TableCell[12, 15] text:[12, 15, "---"]
           Text[12, 15] chars:[12, 15, "---"]
-    TableBody[0, 0]
+    TableBody[15, 15]
 ````````````````````````````````
 
 
@@ -176,7 +176,7 @@ Document[0, 16]
           Text[8, 11] chars:[8, 11, ":--"]
         TableCell[12, 15] text:[12, 15, "---"]
           Text[12, 15] chars:[12, 15, "---"]
-    TableBody[0, 0]
+    TableBody[15, 15]
 ````````````````````````````````
 
 
@@ -207,7 +207,7 @@ Document[0, 16]
           Text[8, 11] chars:[8, 11, "--:"]
         TableCell[12, 15] text:[12, 15, "---"]
           Text[12, 15] chars:[12, 15, "---"]
-    TableBody[0, 0]
+    TableBody[15, 15]
 ````````````````````````````````
 
 
@@ -236,7 +236,7 @@ Document[0, 16]
           Text[8, 11] chars:[8, 11, ":-:"]
         TableCell[12, 15] text:[12, 15, "---"]
           Text[12, 15] chars:[12, 15, "---"]
-    TableBody[0, 0]
+    TableBody[15, 15]
 ````````````````````````````````
 
 
@@ -261,7 +261,7 @@ Document[0, 10]
       TableRow[5, 9]
         TableCell[5, 9] textOpen:[5, 6, "|"] text:[6, 9, "---"]
           Text[6, 9] chars:[6, 9, "---"]
-    TableBody[0, 0]
+    TableBody[9, 9]
 ````````````````````````````````
 
 
@@ -286,7 +286,7 @@ Document[0, 12]
       TableRow[6, 11]
         TableCell[6, 11] textOpen:[6, 7, "|"] text:[7, 10, "---"] textClose:[10, 11, "|"]
           Text[7, 10] chars:[7, 10, "---"]
-    TableBody[0, 0]
+    TableBody[11, 11]
 ````````````````````````````````
 
 
@@ -311,7 +311,7 @@ Document[0, 10]
       TableRow[5, 9]
         TableCell[5, 9] text:[5, 8, "---"] textClose:[8, 9, "|"]
           Text[5, 8] chars:[5, 8, "---"]
-    TableBody[0, 0]
+    TableBody[9, 9]
 ````````````````````````````````
 
 
@@ -474,7 +474,7 @@ Document[0, 12]
       TableRow[5, 9]
         TableCell[5, 9] textOpen:[5, 6, "|"] text:[6, 9, "---"]
           Text[6, 9] chars:[6, 9, "---"]
-    TableBody[0, 0]
+    TableBody[9, 9]
   Paragraph[10, 12]
     Text[10, 11] chars:[10, 11, "1"]
 ````````````````````````````````
@@ -1621,7 +1621,7 @@ Document[0, 25]
           Text[16, 19] chars:[16, 19, "---"]
         TableCell[20, 24] text:[20, 23, "---"] textClose:[23, 24, "|"]
           Text[20, 23] chars:[20, 23, "---"]
-    TableBody[0, 0]
+    TableBody[24, 24]
 ````````````````````````````````
 
 
@@ -1654,7 +1654,7 @@ Document[0, 79]
           Text[16, 19] chars:[16, 19, "---"]
         TableCell[20, 24] text:[20, 23, "---"] textClose:[23, 24, "|"]
           Text[20, 23] chars:[20, 23, "---"]
-    TableBody[0, 0]
+    TableBody[24, 24]
     TableCaption[34, 68] textOpen:[34, 35, "["] text:[35, 67, "Caption **bold** _italic_ `code`"] textClose:[67, 68, "]"]
       Text[35, 43] chars:[35, 43, "Caption "]
       StrongEmphasis[43, 51] textOpen:[43, 45, "**"] text:[45, 49, "bold"] textClose:[49, 51, "**"]
@@ -1697,7 +1697,7 @@ Document[0, 34]
           Text[16, 19] chars:[16, 19, "---"]
         TableCell[20, 24] text:[20, 23, "---"] textClose:[23, 24, "|"]
           Text[20, 23] chars:[20, 23, "---"]
-    TableBody[0, 0]
+    TableBody[24, 24]
   Paragraph[25, 34]
     LinkRef[25, 34] referenceOpen:[25, 26, "["] reference:[26, 33, "Caption"] referenceClose:[33, 34, "]"]
       Text[26, 33] chars:[26, 33, "Caption"]
@@ -1838,7 +1838,7 @@ Document[0, 199]
           Text[50, 53] chars:[50, 53, "---"]
         TableCell[54, 58] text:[54, 57, "---"] textClose:[57, 58, "|"]
           Text[54, 57] chars:[54, 57, "---"]
-    TableBody[0, 0]
+    TableBody[58, 58]
   TableBlock[60, 102]
     TableHead[60, 74]
       TableRow[60, 74] rowNumber=1
@@ -2035,7 +2035,7 @@ Document[0, 15]
           Text[8, 11] chars:[8, 11, "---"]
         TableCell[12, 15] text:[12, 15, "---"]
           Text[12, 15] chars:[12, 15, "---"]
-    TableBody[0, 0]
+    TableBody[15, 15]
 ````````````````````````````````
 
 
@@ -3615,6 +3615,89 @@ Document[0, 185]
           Text[140, 159] chars:[140, 159, "_____ … _____"]
         TableCell[161, 183] text:[162, 181, "___________________"] textClose:[182, 183, "|"]
           Text[162, 181] chars:[162, 181, "_____ … _____"]
+````````````````````````````````
+
+
+## Issue 216
+
+Issue #216, Wrong source positions for Tables with empty TableHead/TableBody
+
+```````````````````````````````` example Issue 216: 1
+
+|---|---|
+.
+<table>
+  <thead></thead>
+  <tbody></tbody>
+</table>
+.
+Document[0, 11]
+  TableBlock[1, 11]
+    TableHead[1, 1]
+    TableSeparator[1, 10]
+      TableRow[1, 10]
+        TableCell[1, 6] textOpen:[1, 2, "|"] text:[2, 5, "---"] textClose:[5, 6, "|"]
+          Text[2, 5] chars:[2, 5, "---"]
+        TableCell[6, 10] text:[6, 9, "---"] textClose:[9, 10, "|"]
+          Text[6, 9] chars:[6, 9, "---"]
+    TableBody[10, 10]
+````````````````````````````````
+
+
+```````````````````````````````` example Issue 216: 2
+
+|---|---|
+|a|b|
+.
+<table>
+  <thead></thead>
+  <tbody>
+    <tr><td>a</td><td>b</td></tr>
+  </tbody>
+</table>
+.
+Document[0, 17]
+  TableBlock[1, 17]
+    TableHead[1, 1]
+    TableSeparator[1, 10]
+      TableRow[1, 10]
+        TableCell[1, 6] textOpen:[1, 2, "|"] text:[2, 5, "---"] textClose:[5, 6, "|"]
+          Text[2, 5] chars:[2, 5, "---"]
+        TableCell[6, 10] text:[6, 9, "---"] textClose:[9, 10, "|"]
+          Text[6, 9] chars:[6, 9, "---"]
+    TableBody[11, 16]
+      TableRow[11, 16] rowNumber=1
+        TableCell[11, 14] textOpen:[11, 12, "|"] text:[12, 13, "a"] textClose:[13, 14, "|"]
+          Text[12, 13] chars:[12, 13, "a"]
+        TableCell[14, 16] text:[14, 15, "b"] textClose:[15, 16, "|"]
+          Text[14, 15] chars:[14, 15, "b"]
+````````````````````````````````
+
+
+```````````````````````````````` example Issue 216: 3
+foo
+
+---|---
+
+.
+<p>foo</p>
+<table>
+  <thead></thead>
+  <tbody></tbody>
+</table>
+.
+Document[0, 14]
+  Paragraph[0, 4] isTrailingBlankLine
+    Text[0, 3] chars:[0, 3, "foo"]
+  TableBlock[5, 13]
+    TableHead[5, 5]
+    TableSeparator[5, 12]
+      TableRow[5, 12]
+        TableCell[5, 9] text:[5, 8, "---"] textClose:[8, 9, "|"]
+          Text[5, 8] chars:[5, 8, "---"]
+        TableCell[9, 12] text:[9, 12, "---"]
+          Text[9, 12] chars:[9, 12, "---"]
+    TableBody[12, 12]
 ````````````````````````````````
 
 

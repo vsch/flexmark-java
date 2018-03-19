@@ -786,7 +786,7 @@ Document[0, 16]
           Text[8, 11] chars:[8, 11, "---"]
         TableCell[12, 15] text:[12, 15, "---"]
           Text[12, 15] chars:[12, 15, "---"]
-    TableBody[0, 0]
+    TableBody[15, 15]
 ````````````````````````````````
 
 
@@ -1115,7 +1115,7 @@ Document[0, 25]
           Text[16, 19] chars:[16, 19, "---"]
         TableCell[20, 24] text:[20, 23, "---"] textClose:[23, 24, "|"]
           Text[20, 23] chars:[20, 23, "---"]
-    TableBody[0, 0]
+    TableBody[24, 24]
 ````````````````````````````````
 
 
@@ -1169,7 +1169,7 @@ Document[0, 199]
           Text[50, 53] chars:[50, 53, "---"]
         TableCell[54, 58] text:[54, 57, "---"] textClose:[57, 58, "|"]
           Text[54, 57] chars:[54, 57, "---"]
-    TableBody[0, 0]
+    TableBody[58, 58]
   TableBlock[60, 102]
     TableHead[60, 74]
       TableRow[60, 74] rowNumber=1
