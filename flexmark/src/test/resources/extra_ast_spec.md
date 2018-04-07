@@ -5771,7 +5771,6 @@ Document[0, 139]
       Text[102, 115] chars:[102, 115, "block … ote 1"]
     Paragraph[122, 136] isTrailingBlankLine
       Text[122, 135] chars:[122, 135, "block … ote 2"]
-  BlankLine[117, 120]
   BlankLine[136, 138]
   BlankLine[138, 139]
 ````````````````````````````````

@@ -8,6 +8,7 @@ flexmark-java
 - [To Do](#to-do)
     - [Docx Converter](#docx-converter)
     - [GitLab compatibility extensions](#gitlab-compatibility-extensions)
+- [0.32.20](#03220)
 - [0.32.18](#03218)
 - [0.32.16](#03216)
 - [0.32.14](#03214)
@@ -256,6 +257,11 @@ flexmark-java
       similar to Math solution above.
 
 &nbsp;</details>
+
+0.32.20
+-------
+
+* Fix: #225, BlankLine nodes within IndentedCodeBlock, also within fenced code block
 
 0.32.18
 -------

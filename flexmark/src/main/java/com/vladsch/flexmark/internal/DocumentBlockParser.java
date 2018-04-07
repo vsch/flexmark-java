@@ -1,5 +1,6 @@
 package com.vladsch.flexmark.internal;
 
+import com.vladsch.flexmark.ast.BlankLineContainer;
 import com.vladsch.flexmark.ast.Block;
 import com.vladsch.flexmark.ast.Document;
 import com.vladsch.flexmark.parser.block.AbstractBlockParser;
@@ -11,7 +12,7 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 import static com.vladsch.flexmark.parser.Parser.TRACK_DOCUMENT_LINES;
 
-public class DocumentBlockParser extends AbstractBlockParser {
+public class DocumentBlockParser extends AbstractBlockParser implements BlankLineContainer {
     private Document document;
 
     public DocumentBlockParser() {

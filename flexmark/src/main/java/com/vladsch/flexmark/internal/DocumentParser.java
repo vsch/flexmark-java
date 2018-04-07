@@ -642,7 +642,7 @@ public class DocumentParser implements ParserState {
         boolean allClosed = unmatchedBlockParsers.isEmpty();
 
         // Check to see if we've hit 2nd blank line; if so break out of list or any other block type that handles this
-        if (isBlank() && isLastLineBlank(blockParser.getBlock())) {
+        if (blank && isLastLineBlank(blockParser.getBlock())) {
             List<BlockParser> matchedBlockParsers = new ArrayList<BlockParser>(activeBlockParsers.subList(0, matches));
             breakOutOfLists(matchedBlockParsers);
         }
@@ -654,7 +654,7 @@ public class DocumentParser implements ParserState {
             findNextNonSpace();
 
             // this is a little performance optimization:
-            if (isBlank() || (indent < myParsing.CODE_BLOCK_INDENT && Parsing.isLetter(line, nextNonSpace))) {
+            if (blank || (indent < myParsing.CODE_BLOCK_INDENT && Parsing.isLetter(line, nextNonSpace))) {
                 setNewIndex(nextNonSpace);
                 break;
             }
@@ -690,7 +690,7 @@ public class DocumentParser implements ParserState {
         // appropriate block.
 
         // First check for a lazy paragraph continuation:
-        if (!allClosed && !isBlank() && getActiveBlockParser().isParagraphParser()) {
+        if (!allClosed && !blank && getActiveBlockParser().isParagraphParser()) {
             // lazy paragraph continuation
             addLine();
         } else {
@@ -702,7 +702,7 @@ public class DocumentParser implements ParserState {
 
             if (!blockParser.isContainer()) {
                 addLine();
-            } else if (!isBlank()) {
+            } else if (!blank) {
                 // inlineParser paragraph container for line
                 addChild(new ParagraphParser());
                 addLine();
@@ -827,8 +827,20 @@ public class DocumentParser implements ParserState {
             deactivateBlockParser();
         }
 
+        Block block = blockParser.getBlock();
+
         blockParser.closeBlock(this);
         blockParser.finalizeClosedBlock();
+
+        // remove BlankLine nodes that are part of the block's content
+        while (true) {
+            Node next = block.getNext();
+            if (next instanceof BlankLine && next.getChars().getEndOffset() <= block.getChars().getEndOffset()) {
+                next.unlink();
+            } else {
+                break;
+            }
+        }
     }
 
     /**
@@ -910,7 +922,7 @@ public class DocumentParser implements ParserState {
     }
 
     private void propagateLastLineBlank(BlockParser blockParser, BlockParser lastMatchedBlockParser) {
-        if (isBlank() && blockParser.getBlock().getLastChild() != null) {
+        if (blank && blockParser.getBlock().getLastChild() != null) {
             setLastLineBlank(blockParser.getBlock().getLastChild(), true);
         }
 
@@ -919,7 +931,7 @@ public class DocumentParser implements ParserState {
         // lists or breaking out of lists. We also don't set lastLineBlank
         // on an empty list item.
         // now implemented by the block parsers to make it available to extensions
-        boolean lastLineBlank = isBlank() && blockParser.isPropagatingLastBlankLine(lastMatchedBlockParser);
+        boolean lastLineBlank = blank && blockParser.isPropagatingLastBlankLine(lastMatchedBlockParser);
 
         // Propagate lastLineBlank up through parents
         Node node = blockParser.getBlock();

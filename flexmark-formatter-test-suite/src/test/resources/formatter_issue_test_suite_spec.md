@@ -53,7 +53,6 @@ Document[0, 180]
             Text[101, 132] chars:[101, 132, "unnum …  line"]
       Paragraph[135, 180]
         Text[135, 180] chars:[135, 180, "numbe …  list"]
-  BlankLine[133, 134]
 ````````````````````````````````
 
 

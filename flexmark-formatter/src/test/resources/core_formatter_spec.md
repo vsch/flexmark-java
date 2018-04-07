@@ -739,7 +739,6 @@ Document[0, 131]
       OrderedListItem[113, 131] open:[113, 115, "1."] isTight
         Paragraph[116, 131]
           Text[116, 131] chars:[116, 131, "numbe … tem 1"]
-  BlankLine[36, 39]
 ````````````````````````````````
 
 

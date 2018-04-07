@@ -485,7 +485,6 @@ This paragraph has a footnote[^1].
 
     Not a paragraph of the footnote
 
-
 This paragraph has a footnote[^1].
 
 [^3]: This is the body of the footnote.
@@ -495,7 +494,6 @@ This paragraph has a footnote[^1].
             indented code of the footnote
 
     Not a paragraph of the footnote
-
 
 This paragraph has a footnote[^3].
 
@@ -567,9 +565,7 @@ This paragraph has a footnote[^3].
 
 This paragraph has a footnote[^1].
 
-
 This paragraph has a footnote[^1].
-
 
 This paragraph has a footnote[^3].
 
@@ -609,12 +605,9 @@ This paragraph has a footnote[^3].
 .
 This paragraph has a footnote[^1].
 
-
 This paragraph has a footnote[^1].
 
-
 This paragraph has a footnote[^3].
-
 
 [^2]: This is the body of the footnote.
 
@@ -700,9 +693,7 @@ This paragraph has a footnote[^1].
 
     Not a paragraph of the footnote
 
-
 This paragraph has a footnote[^1].
-
 
 This paragraph has a footnote[^3].
 
@@ -742,9 +733,7 @@ This paragraph has a footnote[^3].
 .
 This paragraph has a footnote[^1].
 
-
 This paragraph has a footnote[^1].
-
 
 This paragraph has a footnote[^3].
 
@@ -808,12 +797,9 @@ This paragraph has a footnote[^3].
 .
 This paragraph has a footnote[^1].
 
-
 This paragraph has a footnote[^1].
 
-
 This paragraph has a footnote[^3].
-
 
 [^1]: This is the body of the footnote.
 
@@ -875,12 +861,9 @@ This paragraph has a footnote[^3].
 .
 This paragraph has a footnote[^1].
 
-
 This paragraph has a footnote[^1].
 
-
 This paragraph has a footnote[^3].
-
 
 [^1]: This is the body of the footnote.
 

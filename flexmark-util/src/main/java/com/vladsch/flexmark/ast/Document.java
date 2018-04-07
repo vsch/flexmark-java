@@ -10,7 +10,7 @@ import java.util.Map;
 
 import static com.vladsch.flexmark.util.sequence.BasedSequence.EMPTY_LIST;
 
-public class Document extends Block implements MutableDataHolder, BlankLineContainer {
+public class Document extends Block implements MutableDataHolder {
     private final MutableDataSet dataSet;
 
     @Override

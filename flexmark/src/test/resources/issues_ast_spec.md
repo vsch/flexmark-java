@@ -1015,4 +1015,58 @@ Document[0, 30]
 ````````````````````````````````
 
 
+## Issue 225 
+
+Issue #225, BlankLine nodes within IndentedCodeBlock
+
+```````````````````````````````` example(Issue 225: 1) options(keep-blank-lines)
+    indented code line 1
+    
+    indented code line 2
+    
+end of indented code    
+    
+.
+<pre><code>indented code line 1
+
+indented code line 2
+</code></pre>
+<p>end of indented code</p>
+.
+Document[0, 90]
+  IndentedCodeBlock[4, 55]
+  BlankLine[55, 60]
+  Paragraph[60, 85] isTrailingBlankLine
+    Text[60, 80] chars:[60, 80, "end o …  code"]
+  BlankLine[85, 90]
+````````````````````````````````
+
+
+```````````````````````````````` example(Issue 225: 2) options(keep-blank-lines)
+```
+fenced code line 1
+
+fenced code line 2
+
+```
+    
+end of indented code    
+    
+.
+<pre><code>fenced code line 1
+
+fenced code line 2
+
+</code></pre>
+<p>end of indented code</p>
+.
+Document[0, 83]
+  FencedCodeBlock[0, 47] open:[0, 3, "```"] content:[4, 44] lines[4] close:[44, 47, "```"]
+    Text[4, 44] chars:[4, 44, "fence … e 2\n\n"]
+  BlankLine[48, 53]
+  Paragraph[53, 78] isTrailingBlankLine
+    Text[53, 73] chars:[53, 73, "end o …  code"]
+  BlankLine[78, 83]
+````````````````````````````````
+
 
