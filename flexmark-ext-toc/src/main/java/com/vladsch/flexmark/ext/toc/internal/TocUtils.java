@@ -325,7 +325,7 @@ public class TocUtils {
                     html.line();
                 }
             } else {
-                for (int lv = lastLevel; lv >= headerLevel + 1; lv++) {
+                for (int lv = lastLevel; lv >= headerLevel + 1; lv--) {
                     if (openedItems[lv]) {
                         html.unIndent();
                         listClose.run(lv);

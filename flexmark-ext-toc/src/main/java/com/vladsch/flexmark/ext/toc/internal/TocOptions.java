@@ -47,7 +47,7 @@ public class TocOptions implements Immutable<TocOptions, TocOptions.AsMutable>, 
     }
 
     public TocOptions(int levels, boolean isHtml, boolean isTextOnly, boolean isNumbered, ListType listType) {
-        this(DEFAULT_LEVELS, false, false, false, DEFAULT_TITLE_LEVEL, DEFAULT_TITLE, listType, false, true);
+        this(levels, isHtml, isTextOnly, isNumbered, DEFAULT_TITLE_LEVEL, DEFAULT_TITLE, listType, false, true);
     }
 
     public TocOptions(int levels, boolean isHtml, boolean isTextOnly, boolean isNumbered, int titleLevel, String title, ListType listType) {
