@@ -16,6 +16,7 @@ public enum ParserEmulationProfile implements MutableDataSetter {
     KRAMDOWN(null),
     MARKDOWN(null),
     GITHUB_DOC(MARKDOWN),
+    GITHUB(COMMONMARK),
     MULTI_MARKDOWN(FIXED_INDENT),
     PEGDOWN(FIXED_INDENT),
     PEGDOWN_STRICT(FIXED_INDENT),;
@@ -278,7 +279,14 @@ public enum ParserEmulationProfile implements MutableDataSetter {
                     );
         }
 
-        return this == COMMONMARK_0_26 ? new MutableListOptions((DataHolder) null).setEndOnDoubleBlank(true) : new MutableListOptions((DataHolder) null);
+        if (family == COMMONMARK) {
+            if (this == COMMONMARK_0_26) {
+                return new MutableListOptions((DataHolder) null).setEndOnDoubleBlank(true);
+            }
+        }
+
+        // default CommonMark
+        return new MutableListOptions((DataHolder) null);
     }
 
     @Override
@@ -344,6 +352,13 @@ public enum ParserEmulationProfile implements MutableDataSetter {
                     .set(Parser.STRONG_WRAPS_EMPHASIS, true)
                     .set(Parser.LINKS_ALLOW_MATCHED_PARENTHESES, false)
 
+                    // github change for heading Ids
+                    .set(HtmlRenderer.HEADER_ID_GENERATOR_TO_DASH_CHARS, " -")
+                    .set(HtmlRenderer.HEADER_ID_GENERATOR_NON_DASH_CHARS, "_")
+            ;
+        } else if (this == GITHUB) {
+            getOptions().setIn(dataHolder);
+            dataHolder
                     // github change for heading Ids
                     .set(HtmlRenderer.HEADER_ID_GENERATOR_TO_DASH_CHARS, " -")
                     .set(HtmlRenderer.HEADER_ID_GENERATOR_NON_DASH_CHARS, "_")

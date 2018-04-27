@@ -8,6 +8,7 @@ flexmark-java
 - [To Do](#to-do)
     - [Docx Converter](#docx-converter)
     - [GitLab compatibility extensions](#gitlab-compatibility-extensions)
+- [0.32.22](#03222)
 - [0.32.20](#03220)
 - [0.32.18](#03218)
 - [0.32.16](#03216)
@@ -257,6 +258,37 @@ flexmark-java
       similar to Math solution above.
 
 &nbsp;</details>
+
+0.32.22
+-------
+
+* Fix: #229, gfm-tasklist extension - add state class to list item
+  * Add: `TaskListExtension.ITEM_DONE_CLASS` and `TaskListExtension.ITEM_NOT_DONE_CLASS` `li`
+    tag classes to use for done and not done items. 
+  * Add: `TaskListExtension.TIGHT_ITEM_CLASS` to complement the
+    `TaskListExtension.LOOSE_ITEM_CLASS` to replace generically named `TaskListExtension.ITEM_CLASS`
+  * Add: depreciation of `TaskListExtension.ITEM_CLASS` in favour of
+    `TaskListExtension.TIGHT_ITEM_CLASS`
+* Fix: merge #231, Fix two small bugs in ext-toc, thanks to [@BlueBoxWare](https://github.com/BlueBoxWare)
+* Add: `TaskListAttributeProviderSample` to `flexmark-java-samples` module.
+* Add: `GitHubParsingSample` to `flexmark-java-samples` module to show GitHub compatible parser setup.
+* Add: `ParserEmulationProfile.GITHUB` to reflect current GitHub profile, effectively it is
+  `ParserEmulationProfile.COMMONMARK_0_28` with GitHub compatible id generator settings.
+* Fix: #221, XSS: Javascript execution through links, add `HtmlRenderer.SUPPRESSED_LINKS`
+  default `"javascript:.*"`, a regular expression to suppress any links that match. The test
+  occurs before the link is resolved using a link resolver. Therefore any link matching will be
+  suppressed before it is resolved. Likewise, a link resolver returning a suppressed link will
+  not be suppressed since this is up to the custom link resolver to handle.
+  
+  Suppressed links will render only the child nodes, effectively `[Something
+  New](javascript:alert(1))` will render as if it was `Something New`.
+  
+  Link suppression based on URL prefixes does not apply to HTML inline or block elements. Use
+  HTML suppression options for this.
+* Add: `AutolinkExtension.IGNORE_LINKS` default `""`, a regex expression to match link text
+  which should not be auto-linked. This can include full urls like `www.google.com` or parts by
+  including wildcard match patterns. Any recognized auto-link which matches the expression will
+  be rendered as text.
 
 0.32.20
 -------

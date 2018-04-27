@@ -4,6 +4,7 @@ import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.ast.Link;
 import com.vladsch.flexmark.ext.autolink.internal.AutolinkNodePostProcessor;
 import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.util.options.DataKey;
 import com.vladsch.flexmark.util.options.MutableDataHolder;
 
 /**
@@ -18,6 +19,9 @@ import com.vladsch.flexmark.util.options.MutableDataHolder;
  * </p>
  */
 public class AutolinkExtension implements Parser.ParserExtension {
+    //  regex to match all link texts which should be ignored for auto-linking
+    public static final DataKey<String> IGNORE_LINKS = new DataKey<String>("IGNORE_LINKS", "");
+
     private AutolinkExtension() {
     }
 

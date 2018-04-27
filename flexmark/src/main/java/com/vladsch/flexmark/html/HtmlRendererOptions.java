@@ -3,6 +3,8 @@ package com.vladsch.flexmark.html;
 import com.vladsch.flexmark.util.Utils;
 import com.vladsch.flexmark.util.options.DataHolder;
 
+import java.util.regex.Pattern;
+
 public class HtmlRendererOptions {
     public final String softBreak;
     public final boolean isSoftBreakAllSpaces;
@@ -39,6 +41,7 @@ public class HtmlRendererOptions {
     public final boolean unescapeHtmlEntities;
     //public final boolean wrapTightItemParagraphInSpan;
     public final String autolinkWwwPrefix;
+    public final Pattern suppressedLinks;
 
     public HtmlRendererOptions(DataHolder options) {
         softBreak = HtmlRenderer.SOFT_BREAK.getFrom(options);
@@ -75,6 +78,9 @@ public class HtmlRendererOptions {
         unescapeHtmlEntities = HtmlRenderer.UNESCAPE_HTML_ENTITIES.getFrom(options);
         inlineCodeSpliceClass = HtmlRenderer.INLINE_CODE_SPLICE_CLASS.getFrom(options);
         autolinkWwwPrefix = HtmlRenderer.AUTOLINK_WWW_PREFIX.getFrom(options);
+
+        String ignoreLinks = HtmlRenderer.SUPPRESSED_LINKS.getFrom(options);
+        suppressedLinks = ignoreLinks.isEmpty() ? null : Pattern.compile(ignoreLinks);
         //wrapTightItemParagraphInSpan = HtmlRenderer.WRAP_TIGHT_ITEM_PARAGRAPH_IN_SPAN.getFrom(options);
     }
 }

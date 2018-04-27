@@ -512,9 +512,107 @@ Document[0, 22]
 ````````````````````````````````
 
 
+loose task list item class
+
+```````````````````````````````` example(Gfm Task List Options: 5) options(loose-class, open-item-class, closed-item-class)
+- [ ] task
+- [x] task
+.
+<ul>
+  <li class="task-list-item open-task"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;task</li>
+  <li class="task-list-item closed-task"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" readonly="readonly" />&nbsp;task</li>
+</ul>
+.
+Document[0, 21]
+  BulletList[0, 21] isTight
+    TaskListItem[0, 11] open:[0, 1, "-"] openSuffix:[2, 5, "[ ]"] isTight isNotDone
+      Paragraph[6, 11]
+        Text[6, 10] chars:[6, 10, "task"]
+    TaskListItem[11, 21] open:[11, 12, "-"] openSuffix:[13, 16, "[x]"] isTight isDone
+      Paragraph[17, 21]
+        Text[17, 21] chars:[17, 21, "task"]
+````````````````````````````````
+
+
+loose task list item class on loose list
+
+```````````````````````````````` example(Gfm Task List Options: 6) options(loose-class, open-item-class, closed-item-class)
+- [ ] task
+
+- [x] task
+.
+<ul>
+  <li class="open-task">
+    <p><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;task</p>
+  </li>
+  <li class="closed-task">
+    <p><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" readonly="readonly" />&nbsp;task</p>
+  </li>
+</ul>
+.
+Document[0, 22]
+  BulletList[0, 22] isLoose
+    TaskListItem[0, 11] open:[0, 1, "-"] openSuffix:[2, 5, "[ ]"] isLoose hadBlankLineAfter isNotDone
+      Paragraph[6, 11] isTrailingBlankLine
+        Text[6, 10] chars:[6, 10, "task"]
+    TaskListItem[12, 22] open:[12, 13, "-"] openSuffix:[14, 17, "[x]"] isLoose isDone
+      Paragraph[18, 22]
+        Text[18, 22] chars:[18, 22, "task"]
+````````````````````````````````
+
+
+loose task list item class
+
+```````````````````````````````` example(Gfm Task List Options: 7) options(open-item-class, closed-item-class)
+- [ ] task
+- [x] task
+.
+<ul>
+  <li class="task-list-item open-task"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;task</li>
+  <li class="task-list-item closed-task"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" readonly="readonly" />&nbsp;task</li>
+</ul>
+.
+Document[0, 21]
+  BulletList[0, 21] isTight
+    TaskListItem[0, 11] open:[0, 1, "-"] openSuffix:[2, 5, "[ ]"] isTight isNotDone
+      Paragraph[6, 11]
+        Text[6, 10] chars:[6, 10, "task"]
+    TaskListItem[11, 21] open:[11, 12, "-"] openSuffix:[13, 16, "[x]"] isTight isDone
+      Paragraph[17, 21]
+        Text[17, 21] chars:[17, 21, "task"]
+````````````````````````````````
+
+
+loose task list item class on loose list
+
+```````````````````````````````` example(Gfm Task List Options: 8) options(open-item-class, closed-item-class)
+- [ ] task
+
+- [x] task
+.
+<ul>
+  <li class="task-list-item open-task">
+    <p><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;task</p>
+  </li>
+  <li class="task-list-item closed-task">
+    <p><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" readonly="readonly" />&nbsp;task</p>
+  </li>
+</ul>
+.
+Document[0, 22]
+  BulletList[0, 22] isLoose
+    TaskListItem[0, 11] open:[0, 1, "-"] openSuffix:[2, 5, "[ ]"] isLoose hadBlankLineAfter isNotDone
+      Paragraph[6, 11] isTrailingBlankLine
+        Text[6, 10] chars:[6, 10, "task"]
+    TaskListItem[12, 22] open:[12, 13, "-"] openSuffix:[14, 17, "[x]"] isLoose isDone
+      Paragraph[18, 22]
+        Text[18, 22] chars:[18, 22, "task"]
+````````````````````````````````
+
+
 task list item class and p class
 
-```````````````````````````````` example(Gfm Task List Options: 5) options(item-class, p-class)
+```````````````````````````````` example(Gfm Task List Options: 9) options(item-class, p-class)
 - [ ] task
 - [x] task
 .
@@ -536,7 +634,7 @@ Document[0, 21]
 
 task list item class and p class on loose list
 
-```````````````````````````````` example(Gfm Task List Options: 6) options(item-class, p-class)
+```````````````````````````````` example(Gfm Task List Options: 10) options(item-class, p-class)
 - [ ] task
 
 - [x] task
@@ -563,7 +661,7 @@ Document[0, 22]
 
 custom marker task list item class and p class
 
-```````````````````````````````` example(Gfm Task List Options: 7) options(item-class, p-class, done)
+```````````````````````````````` example(Gfm Task List Options: 11) options(item-class, p-class, done)
 - [ ] task
 - [x] task
 .
@@ -585,7 +683,7 @@ Document[0, 21]
 
 task list item class and p class on loose list
 
-```````````````````````````````` example(Gfm Task List Options: 8) options(item-class, p-class, done)
+```````````````````````````````` example(Gfm Task List Options: 12) options(item-class, p-class, done)
 - [ ] task
 
 - [x] task
@@ -612,7 +710,7 @@ Document[0, 22]
 
 custom marker task list item class and p class
 
-```````````````````````````````` example(Gfm Task List Options: 9) options(item-class, p-class, done, not-done)
+```````````````````````````````` example(Gfm Task List Options: 13) options(item-class, p-class, done, not-done)
 - [ ] task
 - [x] task
 .
@@ -634,7 +732,7 @@ Document[0, 21]
 
 task list item class and p class on loose list
 
-```````````````````````````````` example(Gfm Task List Options: 10) options(item-class, p-class, done, not-done)
+```````````````````````````````` example(Gfm Task List Options: 14) options(item-class, p-class, done, not-done)
 - [ ] task
 
 - [x] task
@@ -661,7 +759,7 @@ Document[0, 22]
 
 task list item on ordered list item
 
-```````````````````````````````` example Gfm Task List Options: 11
+```````````````````````````````` example Gfm Task List Options: 15
 1. [ ] task
 2. [x] task
 .
@@ -683,7 +781,7 @@ Document[0, 24]
 
 task list item on ordered list item without ordered list item conversion
 
-```````````````````````````````` example(Gfm Task List Options: 12) options(no-ordered-items)
+```````````````````````````````` example(Gfm Task List Options: 16) options(no-ordered-items)
 1. [ ] task
 2. [x] task
 .
@@ -709,7 +807,7 @@ Document[0, 23]
 
 content indent is after task marker
 
-```````````````````````````````` example Gfm Task List Options: 13
+```````````````````````````````` example Gfm Task List Options: 17
 - [ ] task
 
   paragraph child item
@@ -734,7 +832,7 @@ Document[0, 35]
 
 content indent is after task marker
 
-```````````````````````````````` example Gfm Task List Options: 14
+```````````````````````````````` example Gfm Task List Options: 18
 - [ ] task
 
   paragraph child item
@@ -780,7 +878,7 @@ Document[0, 83]
 
 when content indent > code indent becomes code
 
-```````````````````````````````` example Gfm Task List Options: 15
+```````````````````````````````` example Gfm Task List Options: 19
 -     task
 -     [ ] task
 
@@ -828,7 +926,7 @@ Document[0, 65]
 
 when content indent > code indent becomes code
 
-```````````````````````````````` example Gfm Task List Options: 16
+```````````````````````````````` example Gfm Task List Options: 20
 -     task
 - [ ]      task
 

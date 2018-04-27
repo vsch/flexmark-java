@@ -15,12 +15,15 @@ import com.vladsch.flexmark.util.html.Attributes;
 import com.vladsch.flexmark.util.html.Escaping;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.BasedSequenceImpl;
 import com.vladsch.flexmark.util.sequence.Range;
 
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static com.vladsch.flexmark.html.renderer.LinkStatus.UNKNOWN;
 import static com.vladsch.flexmark.util.sequence.BasedSequence.EOL_CHARS;
@@ -742,9 +745,18 @@ public class CoreNodeRenderer implements NodeRenderer {
         }
     }
 
+    public static boolean isSuppressedLinkPrefix(final CharSequence url, NodeRendererContext context) {
+        Pattern suppressedLinks = context.getHtmlOptions().suppressedLinks;
+        if (suppressedLinks != null) {
+            Matcher matcher = suppressedLinks.matcher(url);
+            return matcher.matches();
+        }
+        return false;
+    }
+
     private void render(AutoLink node, NodeRendererContext context, final HtmlWriter html) {
         final String text = node.getText().toString();
-        if (context.isDoNotRenderLinks()) {
+        if (context.isDoNotRenderLinks() || isSuppressedLinkPrefix(node.getUrl(), context)) {
             html.text(text);
         } else {
             ResolvedLink resolvedLink = context.resolveLink(LinkType.LINK, text, null);
@@ -761,7 +773,7 @@ public class CoreNodeRenderer implements NodeRenderer {
 
     private void render(MailLink node, NodeRendererContext context, HtmlWriter html) {
         String text = node.getText().unescape();
-        if (context.isDoNotRenderLinks()) {
+        if (context.isDoNotRenderLinks() || isSuppressedLinkPrefix(node.getUrl(), context)) {
             html.text(text);
         } else {
             ResolvedLink resolvedLink = context.resolveLink(LinkType.LINK, text, null);
@@ -786,7 +798,7 @@ public class CoreNodeRenderer implements NodeRenderer {
     }
 
     private void render(Image node, NodeRendererContext context, HtmlWriter html) {
-        if (!context.isDoNotRenderLinks()) {
+        if (!(context.isDoNotRenderLinks() || isSuppressedLinkPrefix(node.getUrl(), context))) {
             String altText = new TextCollectingVisitor().collectAndGetText(node);
             ResolvedLink resolvedLink = context.resolveLink(LinkType.IMAGE, node.getUrl().unescape(), null, null);
             String url = resolvedLink.getUrl();
@@ -813,7 +825,7 @@ public class CoreNodeRenderer implements NodeRenderer {
     }
 
     private void render(Link node, NodeRendererContext context, HtmlWriter html) {
-        if (context.isDoNotRenderLinks()) {
+        if (context.isDoNotRenderLinks() || isSuppressedLinkPrefix(node.getUrl(), context)) {
             context.renderChildren(node);
         } else {
             ResolvedLink resolvedLink = context.resolveLink(LinkType.LINK, node.getUrl().unescape(), null, null);
@@ -856,6 +868,7 @@ public class CoreNodeRenderer implements NodeRenderer {
 
     private void render(ImageRef node, NodeRendererContext context, HtmlWriter html) {
         ResolvedLink resolvedLink = null;
+        boolean isSuppressed = false;
 
         if (!node.isDefined() && recheckUndefinedReferences) {
             if (node.getReferenceNode(referenceRepository) != null) {
@@ -868,6 +881,7 @@ public class CoreNodeRenderer implements NodeRenderer {
         if (node.isDefined()) {
             reference = node.getReferenceNode(referenceRepository);
             String url = reference.getUrl().unescape();
+            isSuppressed = isSuppressedLinkPrefix(url, context);
 
             resolvedLink = context.resolveLink(LinkType.IMAGE, url, null, null);
             if (reference.getTitle().isNotNull()) {
@@ -888,7 +902,7 @@ public class CoreNodeRenderer implements NodeRenderer {
             // empty ref, we treat it as text
             html.text(node.getChars().unescape());
         } else {
-            if (!context.isDoNotRenderLinks()) {
+            if (!(context.isDoNotRenderLinks() || isSuppressed)) {
                 String altText = new TextCollectingVisitor().collectAndGetText(node);
                 Attributes attributes = resolvedLink.getNonNullAttributes();
 
@@ -908,6 +922,7 @@ public class CoreNodeRenderer implements NodeRenderer {
 
     private void render(LinkRef node, NodeRendererContext context, HtmlWriter html) {
         ResolvedLink resolvedLink = null;
+        boolean isSuppressed = false;
 
         if (!node.isDefined() && recheckUndefinedReferences) {
             if (node.getReferenceNode(referenceRepository) != null) {
@@ -919,6 +934,7 @@ public class CoreNodeRenderer implements NodeRenderer {
         if (node.isDefined()) {
             reference = node.getReferenceNode(referenceRepository);
             String url = reference.getUrl().unescape();
+            isSuppressed = isSuppressedLinkPrefix(url, context);
 
             resolvedLink = context.resolveLink(LinkType.LINK, url, null, null);
             if (reference.getTitle().isNotNull()) {
@@ -946,7 +962,7 @@ public class CoreNodeRenderer implements NodeRenderer {
                 html.text(node.getChars().suffixOf(node.getChildChars()).unescape());
             }
         } else {
-            if (context.isDoNotRenderLinks()) {
+            if (context.isDoNotRenderLinks() || isSuppressed) {
                 context.renderChildren(node);
             } else {
                 Attributes attributes = resolvedLink.getNonNullAttributes();

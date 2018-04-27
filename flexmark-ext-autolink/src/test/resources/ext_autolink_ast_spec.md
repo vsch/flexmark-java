@@ -225,3 +225,18 @@ Document[0, 26]
 ````````````````````````````````
 
 
+## Issue 217
+
+Issue #217, Escape an Autolink
+
+```````````````````````````````` example(Issue 217: 1) options(ignore-google)
+auto link www.google.com
+.
+<p>auto link www.google.com</p>
+.
+Document[0, 24]
+  Paragraph[0, 24]
+    Text[0, 24] chars:[0, 24, "auto  … e.com"]
+````````````````````````````````
+
+

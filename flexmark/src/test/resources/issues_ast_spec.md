@@ -1070,3 +1070,31 @@ Document[0, 83]
 ````````````````````````````````
 
 
+## Issue 221
+
+Issue #221, XSS: Javascript execution through links
+
+```````````````````````````````` example Issue 221: 1
+[Something New](javascript:alert(1))
+.
+<p>Something New</p>
+.
+Document[0, 37]
+  Paragraph[0, 37]
+    Link[0, 36] textOpen:[0, 1, "["] text:[1, 14, "Something New"] textClose:[14, 15, "]"] linkOpen:[15, 16, "("] url:[16, 35, "javascript:alert(1)"] pageRef:[16, 35, "javascript:alert(1)"] linkClose:[35, 36, ")"]
+      Text[1, 14] chars:[1, 14, "Somet … g New"]
+````````````````````````````````
+
+
+```````````````````````````````` example(Issue 221: 2) options(allow-javascript)
+[Something New](javascript:alert(1))
+.
+<p><a href="javascript:alert(1)">Something New</a></p>
+.
+Document[0, 36]
+  Paragraph[0, 36]
+    Link[0, 36] textOpen:[0, 1, "["] text:[1, 14, "Something New"] textClose:[14, 15, "]"] linkOpen:[15, 16, "("] url:[16, 35, "javascript:alert(1)"] pageRef:[16, 35, "javascript:alert(1)"] linkClose:[35, 36, ")"]
+      Text[1, 14] chars:[1, 14, "Somet … g New"]
+````````````````````````````````
+
+

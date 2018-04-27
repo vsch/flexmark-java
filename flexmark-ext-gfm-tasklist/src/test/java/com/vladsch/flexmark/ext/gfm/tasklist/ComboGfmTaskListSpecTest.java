@@ -25,8 +25,10 @@ public class ComboGfmTaskListSpecTest extends ComboSpecTestCase {
         optionsMap.put("marker-space", new MutableDataSet().set(Parser.LISTS_ITEM_MARKER_SPACE, true));
         optionsMap.put("src-pos", new MutableDataSet().set(HtmlRenderer.SOURCE_POSITION_ATTRIBUTE, "md-pos"));
         optionsMap.put("src-pos-lines", new MutableDataSet().set(HtmlRenderer.SOURCE_POSITION_PARAGRAPH_LINES, true));
-        optionsMap.put("item-class", new MutableDataSet().set(TaskListExtension.ITEM_CLASS, ""));
+        optionsMap.put("item-class", new MutableDataSet().set(TaskListExtension.TIGHT_ITEM_CLASS, ""));
         optionsMap.put("loose-class", new MutableDataSet().set(TaskListExtension.LOOSE_ITEM_CLASS, ""));
+        optionsMap.put("closed-item-class", new MutableDataSet().set(TaskListExtension.ITEM_DONE_CLASS, "closed-task"));
+        optionsMap.put("open-item-class", new MutableDataSet().set(TaskListExtension.ITEM_NOT_DONE_CLASS, "open-task"));
         optionsMap.put("p-class", new MutableDataSet().set(TaskListExtension.PARAGRAPH_CLASS, "task-item"));
         optionsMap.put("done", new MutableDataSet().set(TaskListExtension.ITEM_DONE_MARKER, "<span class=\"taskitem\">X</span>"));
         optionsMap.put("not-done", new MutableDataSet().set(TaskListExtension.ITEM_NOT_DONE_MARKER, "<span class=\"taskitem\">O</span>"));

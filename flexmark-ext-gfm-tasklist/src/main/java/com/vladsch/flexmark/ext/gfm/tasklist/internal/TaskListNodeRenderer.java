@@ -15,20 +15,24 @@ import java.util.Set;
 public class TaskListNodeRenderer implements NodeRenderer {
     public static final AttributablePart TASK_ITEM_PARAGRAPH = new AttributablePart("TASK_ITEM_PARAGRAPH");
 
-    private final String doneMarker;
-    private final String notDoneMarker;
-    private final String itemClass;
+    final String doneMarker;
+    final String notDoneMarker;
+    private final String tightItemClass;
     private final String looseItemClass;
-    private final String paragraphClass;
+    private final String itemDoneClass;
+    private final String itemNotDoneClass;
+    final String paragraphClass;
     private final ListOptions listOptions;
 
     public TaskListNodeRenderer(DataHolder options) {
-        this.doneMarker = options.get(TaskListExtension.ITEM_DONE_MARKER);
-        this.notDoneMarker = options.get(TaskListExtension.ITEM_NOT_DONE_MARKER);
-        this.itemClass = options.get(TaskListExtension.ITEM_CLASS);
-        this.looseItemClass = options.get(TaskListExtension.LOOSE_ITEM_CLASS);
-        this.paragraphClass = options.get(TaskListExtension.PARAGRAPH_CLASS);
-        this.listOptions = ListOptions.getFrom(options);
+        doneMarker = options.get(TaskListExtension.ITEM_DONE_MARKER);
+        notDoneMarker = options.get(TaskListExtension.ITEM_NOT_DONE_MARKER);
+        tightItemClass = options.get(TaskListExtension.TIGHT_ITEM_CLASS);
+        looseItemClass = options.get(TaskListExtension.LOOSE_ITEM_CLASS);
+        itemDoneClass = options.get(TaskListExtension.ITEM_DONE_CLASS);
+        itemNotDoneClass = options.get(TaskListExtension.ITEM_NOT_DONE_CLASS);
+        paragraphClass = options.get(TaskListExtension.PARAGRAPH_CLASS);
+        listOptions = ListOptions.getFrom(options);
     }
 
     @Override
@@ -47,27 +51,30 @@ public class TaskListNodeRenderer implements NodeRenderer {
         return set;
     }
 
-    private void render(final TaskListItem node, final NodeRendererContext context, final HtmlWriter html) {
+    void render(final TaskListItem node, final NodeRendererContext context, final HtmlWriter html) {
         final BasedSequence sourceText = context.getHtmlOptions().sourcePositionParagraphLines || node.getFirstChild() == null ? node.getChars() : node.getFirstChild().getChars();
+        final String itemDoneStatusClass = node.isItemDoneMarker() ? itemDoneClass : itemNotDoneClass;
         if (listOptions.isTightListItem(node)) {
-            if (!itemClass.isEmpty()) html.attr("class", itemClass);
+            if (!tightItemClass.isEmpty()) html.attr("class", tightItemClass);
+            if (!itemDoneStatusClass.isEmpty() && !itemDoneStatusClass.equals(tightItemClass)) html.attr("class", itemDoneStatusClass);
             html.srcPos(sourceText.getStartOffset(), sourceText.getEndOffset()).withAttr(CoreNodeRenderer.TIGHT_LIST_ITEM).withCondIndent().tagLine("li", new Runnable() {
                 @Override
                 public void run() {
-                    html.raw(node.isItemDoneMarker() ? TaskListNodeRenderer.this.doneMarker : TaskListNodeRenderer.this.notDoneMarker);
+                    html.raw(node.isItemDoneMarker() ? doneMarker : notDoneMarker);
                     context.renderChildren(node);
                 }
             });
         } else {
             if (!looseItemClass.isEmpty()) html.attr("class", looseItemClass);
+            if (!itemDoneStatusClass.isEmpty() && !itemDoneStatusClass.equals(looseItemClass)) html.attr("class", itemDoneStatusClass);
             html.withAttr(CoreNodeRenderer.LOOSE_LIST_ITEM).tagIndent("li", new Runnable() {
                 @Override
                 public void run() {
-                    if (!TaskListNodeRenderer.this.paragraphClass.isEmpty()) html.attr("class", TaskListNodeRenderer.this.paragraphClass);
+                    if (!paragraphClass.isEmpty()) html.attr("class", paragraphClass);
                     html.srcPos(sourceText.getStartOffset(), sourceText.getEndOffset()).withAttr(TASK_ITEM_PARAGRAPH).tagLine("p", new Runnable() {
                         @Override
                         public void run() {
-                            html.raw(node.isItemDoneMarker() ? TaskListNodeRenderer.this.doneMarker : TaskListNodeRenderer.this.notDoneMarker);
+                            html.raw(node.isItemDoneMarker() ? doneMarker : notDoneMarker);
                             context.renderChildren(node);
                         }
                     });

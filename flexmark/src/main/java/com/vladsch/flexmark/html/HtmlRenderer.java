@@ -84,6 +84,9 @@ public class HtmlRenderer implements IRender {
     //public static final DataKey<Boolean> WRAP_TIGHT_ITEM_PARAGRAPH_IN_SPAN = new DataKey<Boolean>("WRAP_TIGHT_ITEM_PARAGRAPH_IN_SPAN", false);
     public static final DataKey<String> AUTOLINK_WWW_PREFIX = new DataKey<String>("AUTOLINK_WWW_PREFIX", "http://");
 
+    // regex for suppressed link prefixes
+    public static final DataKey<String> SUPPRESSED_LINKS = new DataKey<String>("SUPPRESSED_LINKS", "javascript:.*");
+
     /**
      * output control for FormattingAppendable, see {@link com.vladsch.flexmark.util.html.FormattingAppendable#setOptions(int)}
      */

@@ -325,6 +325,7 @@ public class TocUtils {
                     html.line();
                 }
             } else {
+                // lastLevel > headerLevel
                 for (int lv = lastLevel; lv >= headerLevel + 1; lv--) {
                     if (openedItems[lv]) {
                         html.unIndent();

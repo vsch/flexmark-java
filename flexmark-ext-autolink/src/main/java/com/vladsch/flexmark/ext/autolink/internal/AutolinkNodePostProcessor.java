@@ -1,6 +1,7 @@
 package com.vladsch.flexmark.ext.autolink.internal;
 
 import com.vladsch.flexmark.ast.*;
+import com.vladsch.flexmark.ext.autolink.AutolinkExtension;
 import com.vladsch.flexmark.parser.block.NodePostProcessor;
 import com.vladsch.flexmark.parser.block.NodePostProcessorFactory;
 import com.vladsch.flexmark.util.NodeTracker;
@@ -12,15 +13,28 @@ import org.nibor.autolink.LinkSpan;
 import org.nibor.autolink.LinkType;
 
 import java.util.EnumSet;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class AutolinkNodePostProcessor extends NodePostProcessor {
+
+    private final Pattern ignoredLinks;
 
     private LinkExtractor linkExtractor = LinkExtractor.builder()
             .linkTypes(EnumSet.of(LinkType.URL, LinkType.WWW, LinkType.EMAIL))
             .build();
 
     public AutolinkNodePostProcessor(Document document) {
+        String ignoreLinks = AutolinkExtension.IGNORE_LINKS.getFrom(document);
+        ignoredLinks = ignoreLinks.isEmpty() ? null : Pattern.compile(ignoreLinks);
+    }
 
+    public boolean isIgnoredLinkPrefix(final CharSequence url) {
+        if (ignoredLinks != null) {
+            Matcher matcher = ignoredLinks.matcher(url);
+            return matcher.matches();
+        }
+        return false;
     }
 
     @Override
@@ -35,6 +49,7 @@ public class AutolinkNodePostProcessor extends NodePostProcessor {
 
         for (LinkSpan link : links) {
             BasedSequence linkText = literal.subSequence(link.getBeginIndex(), link.getEndIndex()).trimEnd();
+            if (isIgnoredLinkPrefix(linkText)) continue;
 
             int startOffset = textMapper.originalOffset(link.getBeginIndex());
 
