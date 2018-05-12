@@ -2018,3 +2018,181 @@ Document[0, 34]
 ````````````````````````````````
 
 
+## Empty List Items
+
+```````````````````````````````` example Empty List Items: 1
+* list item 1
+* 
+
+* list item 2
+* 
+not a list item
+.
+* list item 1
+
+* 
+
+* list item 2
+
+* 
+
+not a list item
+.
+Document[0, 51]
+  BulletList[0, 33] isLoose
+    BulletListItem[0, 14] open:[0, 1, "*"] isLoose
+      Paragraph[2, 14]
+        Text[2, 13] chars:[2, 13, "list  … tem 1"]
+    BulletListItem[14, 15] open:[14, 15, "*"] isLoose hadBlankLineAfter
+    BulletListItem[18, 32] open:[18, 19, "*"] isLoose
+      Paragraph[20, 32]
+        Text[20, 31] chars:[20, 31, "list  … tem 2"]
+    BulletListItem[32, 33] open:[32, 33, "*"] isLoose
+  Paragraph[35, 51]
+    Text[35, 50] chars:[35, 50, "not a …  item"]
+````````````````````````````````
+
+
+```````````````````````````````` example Empty List Items: 2
+* list item 1
+* 
+* list item 2
+* 
+not a list item
+.
+* list item 1
+* 
+* list item 2
+* 
+
+not a list item
+.
+Document[0, 50]
+  BulletList[0, 32] isTight
+    BulletListItem[0, 14] open:[0, 1, "*"] isTight
+      Paragraph[2, 14]
+        Text[2, 13] chars:[2, 13, "list  … tem 1"]
+    BulletListItem[14, 15] open:[14, 15, "*"] isTight
+    BulletListItem[17, 31] open:[17, 18, "*"] isTight
+      Paragraph[19, 31]
+        Text[19, 30] chars:[19, 30, "list  … tem 2"]
+    BulletListItem[31, 32] open:[31, 32, "*"] isTight
+  Paragraph[34, 50]
+    Text[34, 49] chars:[34, 49, "not a …  item"]
+````````````````````````````````
+
+
+With removal of empty list items
+
+```````````````````````````````` example(Empty List Items: 3) options(remove-empty-items)
+* list item 1
+* 
+
+* list item 2
+* 
+not a list item
+.
+* list item 1
+
+* list item 2
+
+not a list item
+.
+Document[0, 50]
+  BulletList[0, 33] isLoose
+    BulletListItem[0, 14] open:[0, 1, "*"] isLoose
+      Paragraph[2, 14]
+        Text[2, 13] chars:[2, 13, "list  … tem 1"]
+    BulletListItem[14, 15] open:[14, 15, "*"] isLoose hadBlankLineAfter
+    BulletListItem[18, 32] open:[18, 19, "*"] isLoose
+      Paragraph[20, 32]
+        Text[20, 31] chars:[20, 31, "list  … tem 2"]
+    BulletListItem[32, 33] open:[32, 33, "*"] isLoose
+  Paragraph[35, 50]
+    Text[35, 50] chars:[35, 50, "not a …  item"]
+````````````````````````````````
+
+
+```````````````````````````````` example(Empty List Items: 4) options(remove-empty-items)
+* list item 1
+* 
+* list item 2
+* 
+not a list item
+.
+* list item 1
+* list item 2
+
+not a list item
+.
+Document[0, 49]
+  BulletList[0, 32] isTight
+    BulletListItem[0, 14] open:[0, 1, "*"] isTight
+      Paragraph[2, 14]
+        Text[2, 13] chars:[2, 13, "list  … tem 1"]
+    BulletListItem[14, 15] open:[14, 15, "*"] isTight
+    BulletListItem[17, 31] open:[17, 18, "*"] isTight
+      Paragraph[19, 31]
+        Text[19, 30] chars:[19, 30, "list  … tem 2"]
+    BulletListItem[31, 32] open:[31, 32, "*"] isTight
+  Paragraph[34, 49]
+    Text[34, 49] chars:[34, 49, "not a …  item"]
+````````````````````````````````
+
+
+```````````````````````````````` example(Empty List Items: 5) options(remove-empty-items)
+1. list item 1
+1. 
+
+1. list item 2
+1. 
+not a list item
+.
+1. list item 1
+
+2. list item 2
+
+not a list item
+.
+Document[0, 54]
+  OrderedList[0, 37] isLoose delimiter:'.'
+    OrderedListItem[0, 15] open:[0, 2, "1."] isLoose
+      Paragraph[3, 15]
+        Text[3, 14] chars:[3, 14, "list  … tem 1"]
+    OrderedListItem[15, 17] open:[15, 17, "1."] isLoose hadBlankLineAfter
+    OrderedListItem[20, 35] open:[20, 22, "1."] isLoose
+      Paragraph[23, 35]
+        Text[23, 34] chars:[23, 34, "list  … tem 2"]
+    OrderedListItem[35, 37] open:[35, 37, "1."] isLoose
+  Paragraph[39, 54]
+    Text[39, 54] chars:[39, 54, "not a …  item"]
+````````````````````````````````
+
+
+```````````````````````````````` example(Empty List Items: 6) options(remove-empty-items)
+1. list item 1
+1. 
+1. list item 2
+1. 
+not a list item
+.
+1. list item 1
+2. list item 2
+
+not a list item
+.
+Document[0, 53]
+  OrderedList[0, 36] isTight delimiter:'.'
+    OrderedListItem[0, 15] open:[0, 2, "1."] isTight
+      Paragraph[3, 15]
+        Text[3, 14] chars:[3, 14, "list  … tem 1"]
+    OrderedListItem[15, 17] open:[15, 17, "1."] isTight
+    OrderedListItem[19, 34] open:[19, 21, "1."] isTight
+      Paragraph[22, 34]
+        Text[22, 33] chars:[22, 33, "list  … tem 2"]
+    OrderedListItem[34, 36] open:[34, 36, "1."] isTight
+  Paragraph[38, 53]
+    Text[38, 53] chars:[38, 53, "not a …  item"]
+````````````````````````````````
+
+

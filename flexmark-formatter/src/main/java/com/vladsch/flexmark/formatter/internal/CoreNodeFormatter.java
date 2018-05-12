@@ -486,7 +486,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
 
     private void render(IndentedCodeBlock node, NodeFormatterContext context, MarkdownWriter markdown) {
         markdown.blankLine();
-        String prefix =  RepeatedCharSequence.of(" ", listOptions.getCodeIndent()).toString();
+        String prefix = RepeatedCharSequence.of(" ", listOptions.getCodeIndent()).toString();
 
         if (options.emulationProfile == ParserEmulationProfile.GITHUB_DOC) {
             if (node.getParent() instanceof ListItem) {
@@ -541,11 +541,11 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
     }
 
     private void render(BulletListItem node, NodeFormatterContext context, MarkdownWriter markdown) {
-        renderListItem(node, context, markdown, listOptions, "");
+        renderListItem(node, context, markdown, listOptions, "", false);
     }
 
     private void render(OrderedListItem node, NodeFormatterContext context, MarkdownWriter markdown) {
-        renderListItem(node, context, markdown, listOptions, "");
+        renderListItem(node, context, markdown, listOptions, "", false);
     }
 
     public static void renderList(final ListBlock node, final NodeFormatterContext context, MarkdownWriter markdown) {
@@ -595,7 +595,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
             }
         }
 
-        document.set(LIST_ITEM_SPACING, itemSpacing);
+        document.set(LIST_ITEM_SPACING, itemSpacing == ListSpacing.LOOSE && (listSpacing == null || listSpacing == ListSpacing.LOOSE) ? ListSpacing.LOOSE : itemSpacing);
         for (Node item : itemList) {
             if (itemSpacing == ListSpacing.LOOSE && (listSpacing == null || listSpacing == ListSpacing.LOOSE)) markdown.blankLine();
             context.render(item);
@@ -612,9 +612,15 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
             final ListItem node,
             final NodeFormatterContext context,
             final MarkdownWriter markdown,
-            final ListOptions listOptions, CharSequence markerSuffix
+            final ListOptions listOptions, CharSequence markerSuffix,
+            final boolean addBlankLineLooseItems
     ) {
         final FormatterOptions options = context.getFormatterOptions();
+
+        if (options.listRemoveEmptyItems && !(node.hasChildren() && node.getFirstChildAnyNot(BlankLine.class) != null)) {
+            return;
+        }
+
         CharSequence openingMarker = node.getOpeningMarker();
         if (node instanceof OrderedListItem) {
             char delimiter = openingMarker.charAt(openingMarker.length() - 1);
@@ -659,9 +665,21 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
             }
         }
         markdown.append(openingMarker).append(' ').append(markerSuffix);
-        markdown.pushPrefix().addPrefix(options.itemContentIndent ? RepeatedCharSequence.of(' ', openingMarker.length() + (listOptions.isItemContentAfterSuffix()  ? markerSuffix.length() : 0) + 1)
+        markdown.pushPrefix().addPrefix(options.itemContentIndent ? RepeatedCharSequence.of(' ', openingMarker.length() + (listOptions.isItemContentAfterSuffix() ? markerSuffix.length() : 0) + 1)
                 : RepeatedCharSequence.of(" ", listOptions.getItemIndent()).toString());
-        context.renderChildren(node);
+
+        if (node.hasChildren() && node.getFirstChildAnyNot(BlankLine.class) != null) {
+            context.renderChildren(node);
+            if (addBlankLineLooseItems && (node.isLoose() || node.getDocument().get(LIST_ITEM_SPACING) == ListSpacing.LOOSE)) {
+                markdown.blankLine();
+            }
+        } else {
+            if (node.isLoose()) {
+                markdown.blankLine();
+            } else {
+                markdown.addLine();
+            }
+        }
         markdown.popPrefix();
     }
 

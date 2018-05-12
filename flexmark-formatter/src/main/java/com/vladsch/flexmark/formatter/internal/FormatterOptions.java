@@ -30,6 +30,7 @@ public class FormatterOptions {
     //public final boolean listAlignFirstLineText;
     //public final boolean listAlignChildBlocks;
     public final boolean listRenumberItems;
+    public final boolean listRemoveEmptyItems;
     public final ListBulletMarker listBulletMarker;
     public final ListNumberedMarker listNumberedMarker;
     public final ListSpacing listSpacing;
@@ -65,6 +66,7 @@ public class FormatterOptions {
         //listAlignFirstLineText = Formatter.LIST_ALIGN_FIRST_LINE_TEXT.getFrom(options);
         //listAlignChildBlocks = Formatter.LIST_ALIGN_CHILD_BLOCKS.getFrom(options);
         listRenumberItems = Formatter.LIST_RENUMBER_ITEMS.getFrom(options);
+        listRemoveEmptyItems = Formatter.LIST_REMOVE_EMPTY_ITEMS.getFrom(options);
         listBulletMarker = Formatter.LIST_BULLET_MARKER.getFrom(options);
         listNumberedMarker = Formatter.LIST_NUMBERED_MARKER.getFrom(options);
         listSpacing = Formatter.LIST_SPACING.getFrom(options);

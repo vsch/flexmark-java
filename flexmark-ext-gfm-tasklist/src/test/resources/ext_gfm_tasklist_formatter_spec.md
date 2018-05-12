@@ -767,3 +767,162 @@ Document[0, 24]
             Text[17, 23] chars:[17, 23, "item 2"]
 ````````````````````````````````
 
+
+```````````````````````````````` example No Suffix Content: 3
+* [ ] task
+    * item 2
+    
+* [ ] task
+* [ ] task
+.
+* [ ] task
+  * item 2
+
+* [ ] task
+
+* [ ] task
+
+.
+Document[0, 51]
+  BulletList[0, 51] isLoose
+    TaskListItem[0, 24] open:[0, 1, "*"] openSuffix:[2, 5, "[ ]"] isLoose isNotDone
+      Paragraph[6, 11]
+        Text[6, 10] chars:[6, 10, "task"]
+      BulletList[15, 24] isTight
+        BulletListItem[15, 24] open:[15, 16, "*"] isTight hadBlankLineAfter
+          Paragraph[17, 24] isTrailingBlankLine
+            Text[17, 23] chars:[17, 23, "item 2"]
+    BlankLine[24, 29]
+    TaskListItem[29, 40] open:[29, 30, "*"] openSuffix:[31, 34, "[ ]"] isLoose isNotDone
+      Paragraph[35, 40]
+        Text[35, 39] chars:[35, 39, "task"]
+    TaskListItem[40, 51] open:[40, 41, "*"] openSuffix:[42, 45, "[ ]"] isLoose isNotDone
+      Paragraph[46, 51]
+        Text[46, 50] chars:[46, 50, "task"]
+````````````````````````````````
+
+
+## Empty List Items
+
+```````````````````````````````` example Empty List Items: 1
+* [ ] list item 1
+* [ ] 
+
+* [ ] list item 2
+* [ ] 
+not a list item
+.
+* [ ] list item 1
+
+* [ ] 
+
+* [ ] list item 2
+
+* [ ] 
+
+not a list item
+.
+Document[0, 67]
+  BulletList[0, 49] isLoose
+    TaskListItem[0, 18] open:[0, 1, "*"] openSuffix:[2, 5, "[ ]"] isLoose isNotDone
+      Paragraph[6, 18]
+        Text[6, 17] chars:[6, 17, "list  … tem 1"]
+    TaskListItem[18, 26] open:[18, 19, "*"] openSuffix:[20, 23, "[ ]"] isLoose hadBlankLineAfter isNotDone
+      BlankLine[25, 26]
+    TaskListItem[26, 44] open:[26, 27, "*"] openSuffix:[28, 31, "[ ]"] isLoose isNotDone
+      Paragraph[32, 44]
+        Text[32, 43] chars:[32, 43, "list  … tem 2"]
+    TaskListItem[44, 49] open:[44, 45, "*"] openSuffix:[46, 49, "[ ]"] isLoose isNotDone
+  Paragraph[51, 67]
+    Text[51, 66] chars:[51, 66, "not a …  item"]
+````````````````````````````````
+
+
+```````````````````````````````` example Empty List Items: 2
+* [ ] list item 1
+* [ ] 
+* [ ] list item 2
+* [ ] 
+not a list item
+.
+* [ ] list item 1
+* [ ] 
+* [ ] list item 2
+* [ ] 
+
+not a list item
+.
+Document[0, 66]
+  BulletList[0, 48] isTight
+    TaskListItem[0, 18] open:[0, 1, "*"] openSuffix:[2, 5, "[ ]"] isTight isNotDone
+      Paragraph[6, 18]
+        Text[6, 17] chars:[6, 17, "list  … tem 1"]
+    TaskListItem[18, 23] open:[18, 19, "*"] openSuffix:[20, 23, "[ ]"] isTight isNotDone
+    TaskListItem[25, 43] open:[25, 26, "*"] openSuffix:[27, 30, "[ ]"] isTight isNotDone
+      Paragraph[31, 43]
+        Text[31, 42] chars:[31, 42, "list  … tem 2"]
+    TaskListItem[43, 48] open:[43, 44, "*"] openSuffix:[45, 48, "[ ]"] isTight isNotDone
+  Paragraph[50, 66]
+    Text[50, 65] chars:[50, 65, "not a …  item"]
+````````````````````````````````
+
+
+With removal of empty list items
+
+```````````````````````````````` example(Empty List Items: 3) options(remove-empty-items)
+* [ ] list item 1
+* [ ] 
+
+* [ ] list item 2
+* [ ] 
+not a list item
+.
+* [ ] list item 1
+
+* [ ] list item 2
+
+not a list item
+.
+Document[0, 66]
+  BulletList[0, 49] isLoose
+    TaskListItem[0, 18] open:[0, 1, "*"] openSuffix:[2, 5, "[ ]"] isLoose isNotDone
+      Paragraph[6, 18]
+        Text[6, 17] chars:[6, 17, "list  … tem 1"]
+    TaskListItem[18, 26] open:[18, 19, "*"] openSuffix:[20, 23, "[ ]"] isLoose hadBlankLineAfter isNotDone
+      BlankLine[25, 26]
+    TaskListItem[26, 44] open:[26, 27, "*"] openSuffix:[28, 31, "[ ]"] isLoose isNotDone
+      Paragraph[32, 44]
+        Text[32, 43] chars:[32, 43, "list  … tem 2"]
+    TaskListItem[44, 49] open:[44, 45, "*"] openSuffix:[46, 49, "[ ]"] isLoose isNotDone
+  Paragraph[51, 66]
+    Text[51, 66] chars:[51, 66, "not a …  item"]
+````````````````````````````````
+
+
+```````````````````````````````` example(Empty List Items: 4) options(remove-empty-items)
+* [ ] list item 1
+* [ ] 
+* [ ] list item 2
+* [ ] 
+not a list item
+.
+* [ ] list item 1
+* [ ] list item 2
+
+not a list item
+.
+Document[0, 65]
+  BulletList[0, 48] isTight
+    TaskListItem[0, 18] open:[0, 1, "*"] openSuffix:[2, 5, "[ ]"] isTight isNotDone
+      Paragraph[6, 18]
+        Text[6, 17] chars:[6, 17, "list  … tem 1"]
+    TaskListItem[18, 23] open:[18, 19, "*"] openSuffix:[20, 23, "[ ]"] isTight isNotDone
+    TaskListItem[25, 43] open:[25, 26, "*"] openSuffix:[27, 30, "[ ]"] isTight isNotDone
+      Paragraph[31, 43]
+        Text[31, 42] chars:[31, 42, "list  … tem 2"]
+    TaskListItem[43, 48] open:[43, 44, "*"] openSuffix:[45, 48, "[ ]"] isTight isNotDone
+  Paragraph[50, 65]
+    Text[50, 65] chars:[50, 65, "not a …  item"]
+````````````````````````````````
+
+

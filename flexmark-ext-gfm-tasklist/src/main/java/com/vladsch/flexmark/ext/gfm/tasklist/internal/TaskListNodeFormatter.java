@@ -84,7 +84,9 @@ public class TaskListNodeFormatter implements NodeFormatter {
             }
         }
 
-        CoreNodeFormatter.renderListItem(node, context, markdown, listOptions, markerSuffix.isEmpty() ? markerSuffix : markerSuffix.append(" "));
+        // task list item node overrides isParagraphWrappingDisabled which affects empty list item blank line rendering
+        final boolean forceLooseItem = node.isLoose() && (node.hasChildren() && node.getFirstChildAnyNot(BlankLine.class) != null);
+        CoreNodeFormatter.renderListItem(node, context, markdown, listOptions, markerSuffix.isEmpty() ? markerSuffix : markerSuffix.append(" "), forceLooseItem);
     }
 
     private void render(final BulletList node, final NodeFormatterContext context, MarkdownWriter markdown) {

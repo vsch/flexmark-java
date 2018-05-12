@@ -60,6 +60,7 @@ public class Formatter implements IRender {
     //public static final DataKey<Boolean> LIST_ALIGN_FIRST_LINE_TEXT = new DataKey<Boolean>("LIST_ALIGN_FIRST_LINE_TEXT", false);
     //public static final DataKey<Boolean> LIST_ALIGN_CHILD_BLOCKS = new DataKey<Boolean>("LIST_ALIGN_CHILD_BLOCKS", true);
     public static final DataKey<Boolean> LIST_RENUMBER_ITEMS = new DataKey<Boolean>("LIST_RENUMBER_ITEMS", true);
+    public static final DataKey<Boolean> LIST_REMOVE_EMPTY_ITEMS = new DataKey<Boolean>("LIST_REMOVE_EMPTY_ITEMS", false);
     public static final DataKey<ListBulletMarker> LIST_BULLET_MARKER = new DataKey<ListBulletMarker>("LIST_BULLET_MARKER", ListBulletMarker.ANY);
     public static final DataKey<ListNumberedMarker> LIST_NUMBERED_MARKER = new DataKey<ListNumberedMarker>("LIST_NUMBERED_MARKER", ListNumberedMarker.ANY);
     public static final DataKey<ListSpacing> LIST_SPACING = new DataKey<ListSpacing>("LIST_SPACING", ListSpacing.AS_IS);

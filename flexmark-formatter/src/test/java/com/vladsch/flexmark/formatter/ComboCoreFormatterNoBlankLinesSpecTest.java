@@ -87,6 +87,7 @@ public class ComboCoreFormatterNoBlankLinesSpecTest extends ComboSpecTestCase {
         optionsMap.put("references-keep-last", new MutableDataSet().set(Parser.REFERENCES_KEEP, KeepType.LAST));
         optionsMap.put("image-links-at-start", new MutableDataSet().set(Formatter.KEEP_IMAGE_LINKS_AT_START, true));
         optionsMap.put("explicit-links-at-start", new MutableDataSet().set(Formatter.KEEP_EXPLICIT_LINKS_AT_START, true));
+        optionsMap.put("remove-empty-items", new MutableDataSet().set(Formatter.LIST_REMOVE_EMPTY_ITEMS, true));
         //optionsMap.put("trailing-spaces-keep-all", new MutableDataSet().set(Formatter.KEEP_TRAILING_SPACES, TrailingSpaces.KEEP_ALL));
         //optionsMap.put("trailing-spaces-keep-line-break", new MutableDataSet().set(Formatter.KEEP_TRAILING_SPACES, TrailingSpaces.KEEP_LINE_BREAK));
         //optionsMap.put("trailing-spaces-keep-none", new MutableDataSet().set(Formatter.KEEP_TRAILING_SPACES, TrailingSpaces.KEEP_NONE));

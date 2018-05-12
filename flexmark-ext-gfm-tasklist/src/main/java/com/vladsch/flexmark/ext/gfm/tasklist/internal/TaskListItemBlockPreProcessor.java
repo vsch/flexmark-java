@@ -30,7 +30,7 @@ public class TaskListItemBlockPreProcessor implements BlockPreProcessor {
 
             if (markerSuffix.matches("[ ]") || markerSuffix.matches("[x]") || markerSuffix.matches("[X]")) {
                 TaskListItem taskListItem = new TaskListItem(listItem);
-                taskListItem.setTight(listItem.isTight());
+                taskListItem.setTight(listItem.isOwnTight());
                 listItem.insertBefore(taskListItem);
                 listItem.unlink();
                 state.blockAdded(taskListItem);

@@ -8,6 +8,7 @@ flexmark-java
 - [To Do](#to-do)
     - [Docx Converter](#docx-converter)
     - [GitLab compatibility extensions](#gitlab-compatibility-extensions)
+- [0.32.24](#03224)
 - [0.32.22](#03222)
 - [0.32.20](#03220)
 - [0.32.18](#03218)
@@ -190,7 +191,7 @@ flexmark-java
       to HTML offset for the element(s). This is needed to allow synchronization with source
       when using an attribute to hold the source information is not an option.
 
-* [ ] Add: Latex extension
+* [ ] Add: Latex extension 
 
 * Change: complete parser profiles for variations within a family
   [Markdown Parser Emulation](MarkdownProcessorsEmulation.md).
@@ -258,6 +259,15 @@ flexmark-java
       similar to Math solution above.
 
 &nbsp;</details>
+
+0.32.24
+-------
+
+* Fix: #232, List continuation, add `Formatter.LIST_REMOVE_EMPTY_ITEMS`, default `false`. If
+  `true` then empty list items or list items which only contain a `BlankLine` node are removed
+  from the output.
+* Fix: formatter output of empty list items
+* Fix: formatter output of empty loose task list items
 
 0.32.22
 -------
