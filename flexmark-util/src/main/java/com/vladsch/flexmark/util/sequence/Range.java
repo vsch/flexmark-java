@@ -48,6 +48,10 @@ public class Range {
         return BasedSequenceImpl.of(charSequence, myStart, myEnd);
     }
 
+    public BasedSequence safeSubSequence(CharSequence charSequence) {
+        return BasedSequenceImpl.of(charSequence, Math.max(0, myStart), Math.min(charSequence.length(), myEnd));
+    }
+
     public boolean contains(int index) {
         return myStart <= index && index < myEnd;
     }

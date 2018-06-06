@@ -63,6 +63,7 @@ public class FlexmarkHtmlParser {
     public static final DataKey<Boolean> IGNORE_TABLE_HEADING_AFTER_ROWS = new DataKey<Boolean>("IGNORE_TABLE_HEADING_AFTER_ROWS", true);
 
     private static final Map<Object, CellAlignment> tableCellAlignments = new LinkedHashMap<Object, CellAlignment>();
+    private static final String EMOJI_ALT_PREFIX = "emoji ";
     static {
         tableCellAlignments.put(Pattern.compile("\\bleft\\b"), CellAlignment.LEFT);
         tableCellAlignments.put(Pattern.compile("\\bcenter\\b"), CellAlignment.CENTER);
@@ -821,6 +822,25 @@ public class FlexmarkHtmlParser {
         if (element.hasAttr("src")) {
             String src = element.attr("src");
             EmojiReference.Emoji emoji = EmojiShortcuts.getEmojiFromURI(src);
+
+            // see if this is an emoji from Apple mail from pasted Markdown Navigator HTML mime
+            if (emoji == null && element.hasAttr("alt")) {
+                String emojiAlt = element.attr("alt");
+                if (emojiAlt.startsWith(EMOJI_ALT_PREFIX)) {
+                    // see if the full attribute is emoji
+                    List<EmojiReference.Emoji> emojiList = EmojiReference.getEmojiList();
+                    int pos = emojiAlt.indexOf(":", EMOJI_ALT_PREFIX.length());
+                    if (pos > 0) {
+                        String category = emojiAlt.substring(EMOJI_ALT_PREFIX.length(), pos);
+                        String shortcut = emojiAlt.substring(pos + 1);
+                        EmojiReference.Emoji emoji2 = EmojiShortcuts.getEmojiFromShortcut(shortcut);
+                        if (emoji2.category.equals(category)) {
+                            emoji = emoji2;
+                        }
+                    }
+                }
+            }
+
             if (emoji != null) {
                 out.append(':').append(emoji.shortcut).append(':');
             } else {

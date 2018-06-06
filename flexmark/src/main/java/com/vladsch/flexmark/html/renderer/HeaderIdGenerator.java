@@ -9,45 +9,65 @@ import com.vladsch.flexmark.html.HtmlRenderer;
 import java.util.HashMap;
 
 public class HeaderIdGenerator implements HtmlIdGenerator {
+    HashMap<String, Integer> headerBaseIds = new HashMap<String, Integer>();
+    boolean resolveDupes;
+    String toDashChars;
+    String nonDashChars;
+    boolean noDupedDashes;
+
     @Override
     public void generateIds(Document document) {
-        final HashMap<String, Integer> headerBaseIds = new HashMap<String, Integer>();
-        final boolean resolveDupes = HtmlRenderer.HEADER_ID_GENERATOR_RESOLVE_DUPES.getFrom(document);
-        final String toDashChars = HtmlRenderer.HEADER_ID_GENERATOR_TO_DASH_CHARS.getFrom(document);
-        final String nonDashChars = HtmlRenderer.HEADER_ID_GENERATOR_NON_DASH_CHARS.getFrom(document);
-        final boolean noDupedDashes = HtmlRenderer.HEADER_ID_GENERATOR_NO_DUPED_DASHES.getFrom(document);
+        resolveDupes = HtmlRenderer.HEADER_ID_GENERATOR_RESOLVE_DUPES.getFrom(document);
+        toDashChars = HtmlRenderer.HEADER_ID_GENERATOR_TO_DASH_CHARS.getFrom(document);
+        nonDashChars = HtmlRenderer.HEADER_ID_GENERATOR_NON_DASH_CHARS.getFrom(document);
+        noDupedDashes = HtmlRenderer.HEADER_ID_GENERATOR_NO_DUPED_DASHES.getFrom(document);
 
         new AnchorRefTargetBlockVisitor() {
             @Override
             protected void visit(AnchorRefTarget node) {
                 if (node.getAnchorRefId().isEmpty()) {
                     String text = node.getAnchorRefText();
+                    String refId = null;
 
-                    if (!text.isEmpty()) {
-                        String baseRefId = generateId(text, toDashChars, nonDashChars, noDupedDashes);
+                    refId = generateId(text);
 
-                        if (resolveDupes) {
-                            if (headerBaseIds.containsKey(baseRefId)) {
-                                int index = headerBaseIds.get(baseRefId);
-
-                                index++;
-                                headerBaseIds.put(baseRefId, index);
-                                baseRefId += "-" + index;
-                            } else {
-                                headerBaseIds.put(baseRefId, 0);
-                            }
-                        }
-
-                        node.setAnchorRefId(baseRefId);
+                    if (refId != null) {
+                        node.setAnchorRefId(refId);
                     }
                 }
             }
         }.visit(document);
     }
 
+    String generateId(final String text) {
+        if (!text.isEmpty()) {
+            String baseRefId = generateId(text, toDashChars, nonDashChars, noDupedDashes);
+
+            if (resolveDupes) {
+                if (headerBaseIds.containsKey(baseRefId)) {
+                    int index = headerBaseIds.get(baseRefId);
+
+                    index++;
+                    headerBaseIds.put(baseRefId, index);
+                    baseRefId += "-" + index;
+                } else {
+                    headerBaseIds.put(baseRefId, 0);
+                }
+            }
+
+            return baseRefId;
+        }
+        return null;
+    }
+
     @Override
     public String getId(Node node) {
         return node instanceof AnchorRefTarget ? ((AnchorRefTarget) node).getAnchorRefId() : null;
+    }
+
+    @Override
+    public String getId(final CharSequence text) {
+        return generateId(text.toString());
     }
 
     @SuppressWarnings("WeakerAccess")
@@ -84,9 +104,14 @@ public class HeaderIdGenerator implements HtmlIdGenerator {
                 (1 << Character.LETTER_NUMBER)) >> Character.getType((int) c)) & 1) != 0);
     }
 
-    public static class Factory implements HeaderIdGeneratorFactory {
+    public static class Factory implements HeaderIdGeneratorFactory, HtmlIdGeneratorFactory {
         @Override
         public HtmlIdGenerator create(LinkResolverContext context) {
+            return new HeaderIdGenerator();
+        }
+
+        @Override
+        public HtmlIdGenerator create() {
             return new HeaderIdGenerator();
         }
     }

@@ -17,6 +17,11 @@ public class MarkdownWriter implements FormattingAppendable {
         this(out, 0);
     }
 
+    @Override
+    public String toString() {
+        return myAppendable.getAppendable().toString();
+    }
+
     public MarkdownWriter(Appendable out, int formatOptions) {
         myAppendable = new FormattingAppendableImpl(out, formatOptions);
     }
@@ -30,7 +35,7 @@ public class MarkdownWriter implements FormattingAppendable {
     }
 
     public MarkdownWriter tailBlankLine() {
-      return tailBlankLine(1);
+        return tailBlankLine(1);
     }
 
     public boolean isLastBlockQuoteChild(Node node) {
@@ -48,6 +53,48 @@ public class MarkdownWriter implements FormattingAppendable {
             }
         }
         blankLine(count);
+        return this;
+    }
+
+    public MarkdownWriter appendNonTranslating(final CharSequence csq) {
+        return appendNonTranslating(null, csq, null, null);
+    }
+
+    public MarkdownWriter appendNonTranslating(final CharSequence prefix, final CharSequence csq) {
+        return appendNonTranslating(prefix, csq, null, null);
+    }
+
+    public MarkdownWriter appendNonTranslating(final CharSequence prefix, final CharSequence csq, final CharSequence suffix) {
+        return appendNonTranslating(prefix, csq, suffix, null);
+    }
+
+    public MarkdownWriter appendNonTranslating(final CharSequence prefix, final CharSequence csq, final CharSequence suffix, final CharSequence suffix2) {
+        if (context.isTransformingText()) {
+            append(context.transformNonTranslating(prefix, csq, suffix, suffix2));
+        } else {
+            append(csq);
+        }
+        return this;
+    }
+
+    public MarkdownWriter appendTranslating(final CharSequence csq) {
+        return appendTranslating(null, csq, null, null);
+    }
+
+    public MarkdownWriter appendTranslating(final CharSequence prefix, final CharSequence csq) {
+        return appendTranslating(prefix, csq, null, null);
+    }
+
+    public MarkdownWriter appendTranslating(final CharSequence prefix, final CharSequence csq, final CharSequence suffix) {
+        return appendTranslating(prefix, csq, suffix, null);
+    }
+
+    public MarkdownWriter appendTranslating(final CharSequence prefix, final CharSequence csq, final CharSequence suffix, final CharSequence suffix2) {
+        if (context.isTransformingText()) {
+            append(context.transformTranslating(prefix, csq, suffix, suffix2));
+        } else {
+            append(csq);
+        }
         return this;
     }
 

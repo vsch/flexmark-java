@@ -4,9 +4,13 @@ import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.IRender;
 import com.vladsch.flexmark.ast.Document;
 import com.vladsch.flexmark.ast.Node;
+import com.vladsch.flexmark.formatter.RenderPurpose;
+import com.vladsch.flexmark.formatter.TranslatingSpanRender;
+import com.vladsch.flexmark.formatter.TranslationHandler;
 import com.vladsch.flexmark.html.AttributeProviderFactory;
 import com.vladsch.flexmark.html.LinkResolverFactory;
 import com.vladsch.flexmark.html.renderer.HeaderIdGeneratorFactory;
+import com.vladsch.flexmark.html.renderer.HtmlIdGeneratorFactory;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.ParserEmulationProfile;
 import com.vladsch.flexmark.util.collection.DynamicDefaultKey;
@@ -74,6 +78,7 @@ public class Formatter implements IRender {
 
     // formatter family override
     public static final DataKey<ParserEmulationProfile> FORMATTER_EMULATION_PROFILE = new DynamicDefaultKey<ParserEmulationProfile>("FORMATTER_EMULATION_PROFILE", Parser.PARSER_EMULATION_PROFILE);
+    public static final DataKey<String> TRANSLATION_ID_FORMAT = new DataKey<String>("TRANSLATION_ID_FORMAT", "_%d_");
 
     //public boolean USE_ACTUAL_CHAR_WIDTH = true;
     //
@@ -86,9 +91,8 @@ public class Formatter implements IRender {
     //public boolean WRAP_TEXT = true;
     //public TrailingSpaces FLEXMARK_EXAMPLE_KEEP_TRAILING_SPACES = TrailingSpaces.KEEP_ALL;
 
-
-    private final List<NodeFormatterFactory> nodeFormatterFactories;
-    private final FormatterOptions formatterOptions;
+    final List<NodeFormatterFactory> nodeFormatterFactories;
+    final FormatterOptions formatterOptions;
     private final DataHolder options;
     private final Builder builder;
 
@@ -106,6 +110,10 @@ public class Formatter implements IRender {
                 return new CoreNodeFormatter(options);
             }
         });
+    }
+
+    public TranslationHandler getTranslationHandler(HtmlIdGeneratorFactory idGeneratorFactory) {
+        return new TranslationHandlerImpl(formatterOptions, idGeneratorFactory);
     }
 
     /**
@@ -134,7 +142,7 @@ public class Formatter implements IRender {
      * @param output appendable to use for the output
      */
     public void render(Node node, Appendable output) {
-        MainNodeFormatter renderer = new MainNodeFormatter(options, new MarkdownWriter(output, formatterOptions.formatFlags), node.getDocument());
+        MainNodeFormatter renderer = new MainNodeFormatter(options, new MarkdownWriter(output, formatterOptions.formatFlags), node.getDocument(), null);
         renderer.render(node);
         renderer.flush(formatterOptions.maxTrailingBlankLines);
     }
@@ -146,7 +154,7 @@ public class Formatter implements IRender {
      * @param output appendable to use for the output
      */
     public void render(Node node, Appendable output, int maxTrailingBlankLines) {
-        MainNodeFormatter renderer = new MainNodeFormatter(options, new MarkdownWriter(output, formatterOptions.formatFlags), node.getDocument());
+        MainNodeFormatter renderer = new MainNodeFormatter(options, new MarkdownWriter(output, formatterOptions.formatFlags), node.getDocument(), null);
         renderer.render(node);
         renderer.flush(maxTrailingBlankLines);
     }
@@ -160,6 +168,42 @@ public class Formatter implements IRender {
     public String render(Node node) {
         StringBuilder sb = new StringBuilder();
         render(node, sb);
+        return sb.toString();
+    }
+
+    /**
+     * Render a node to the appendable
+     *
+     * @param node   node to render
+     * @param output appendable to use for the output
+     */
+    public void translationRender(Node node, Appendable output, TranslationHandler translationHandler) {
+        MainNodeFormatter renderer = new MainNodeFormatter(options, new MarkdownWriter(output, formatterOptions.formatFlags), node.getDocument(), translationHandler);
+        renderer.render(node);
+        renderer.flush(formatterOptions.maxTrailingBlankLines);
+    }
+
+    /**
+     * Render a node to the appendable
+     *
+     * @param node   node to render
+     * @param output appendable to use for the output
+     */
+    public void translationRender(Node node, Appendable output, int maxTrailingBlankLines, TranslationHandler translationHandler) {
+        MainNodeFormatter renderer = new MainNodeFormatter(options, new MarkdownWriter(output, formatterOptions.formatFlags), node.getDocument(), translationHandler);
+        renderer.render(node);
+        renderer.flush(maxTrailingBlankLines);
+    }
+
+    /**
+     * Render the tree of nodes to markdown
+     *
+     * @param node the root node
+     * @return the formatted markdown
+     */
+    public String translationRender(Node node, TranslationHandler translationHandler) {
+        StringBuilder sb = new StringBuilder();
+        translationRender(node, sb, translationHandler);
         return sb.toString();
     }
 
@@ -280,6 +324,7 @@ public class Formatter implements IRender {
     public interface FormatterExtension extends Extension {
         /**
          * This method is called first on all extensions so that they can adjust the options.
+         *
          * @param options option set that will be used for the builder
          */
         void rendererOptions(MutableDataHolder options);
@@ -303,15 +348,14 @@ public class Formatter implements IRender {
         }
     };
 
-    private final static Iterable<? extends Node> NULL_ITERABLE = new Iterable<Node>() {
+    final static Iterable<? extends Node> NULL_ITERABLE = new Iterable<Node>() {
         @Override
         public Iterator<Node> iterator() {
             return null;
         }
     };
 
-
-    private class MainNodeFormatter extends NodeFormatterSubContext implements NodeFormatterContext {
+    private class MainNodeFormatter extends NodeFormatterSubContext {
         private final Document document;
         private final Map<Class<?>, NodeFormattingHandler> renderers;
         private final SubClassingBag<Node> collectedNodes;
@@ -320,9 +364,11 @@ public class Formatter implements IRender {
         private final Set<FormattingPhase> renderingPhases;
         private final DataHolder options;
         private FormattingPhase phase;
+        final TranslationHandler myTranslationHandler;
 
-        MainNodeFormatter(DataHolder options, MarkdownWriter out, Document document) {
+        MainNodeFormatter(DataHolder options, MarkdownWriter out, Document document, TranslationHandler translationHandler) {
             super(out);
+            this.myTranslationHandler = translationHandler;
             this.options = new ScopedDataSet(document, options);
             this.document = document;
             this.renderers = new HashMap<Class<?>, NodeFormattingHandler>(32);
@@ -335,7 +381,7 @@ public class Formatter implements IRender {
             // The first node renderer for a node type "wins".
             for (int i = nodeFormatterFactories.size() - 1; i >= 0; i--) {
                 NodeFormatterFactory nodeFormatterFactory = nodeFormatterFactories.get(i);
-                NodeFormatter nodeFormatter = nodeFormatterFactory.create(this.getOptions());
+                NodeFormatter nodeFormatter = nodeFormatterFactory.create(this.options);
                 final Set<NodeFormattingHandler<?>> formattingHandlers = nodeFormatter.getNodeFormattingHandlers();
                 if (formattingHandlers == null) continue;
 
@@ -369,6 +415,49 @@ public class Formatter implements IRender {
                 collectedNodes = collectingVisitor.getSubClassingBag();
             } else {
                 collectedNodes = null;
+            }
+        }
+
+        @Override
+        public RenderPurpose getRenderPurpose() {
+            return myTranslationHandler == null ? RenderPurpose.FORMAT : myTranslationHandler.getRenderPurpose();
+        }
+
+        @Override
+        public boolean isTransformingText() {
+            return myTranslationHandler != null && myTranslationHandler.isTransformingText();
+        }
+
+        @Override
+        public CharSequence transformNonTranslating(final CharSequence prefix, final CharSequence nonTranslatingText, final CharSequence suffix, final CharSequence suffix2) {
+            return myTranslationHandler == null ? nonTranslatingText : myTranslationHandler.transformNonTranslating(prefix, nonTranslatingText, suffix, suffix2);
+        }
+
+        @Override
+        public CharSequence transformTranslating(final CharSequence prefix, final CharSequence translatingText, final CharSequence suffix, final CharSequence suffix2) {
+            return myTranslationHandler == null ? translatingText : myTranslationHandler.transformTranslating(prefix, translatingText, suffix, suffix2);
+        }
+
+        @Override
+        public CharSequence transformAnchorRef(final CharSequence pageRef, final CharSequence anchorRef) {
+            return myTranslationHandler == null ? anchorRef : myTranslationHandler.transformAnchorRef(pageRef, anchorRef);
+        }
+
+        @Override
+        public void translatingSpan(final TranslatingSpanRender render) {
+            if (myTranslationHandler != null) {
+                myTranslationHandler.translatingSpan(render);
+            } else {
+                render.render(this, markdown);
+            }
+        }
+
+        @Override
+        public void translatingRefTargetSpan(Node target, TranslatingSpanRender render) {
+            if (myTranslationHandler != null) {
+                myTranslationHandler.translatingRefTargetSpan(target, render);
+            } else {
+                render.render(this, markdown);
             }
         }
 
@@ -435,11 +524,15 @@ public class Formatter implements IRender {
         void renderNode(Node node, NodeFormatterSubContext subContext) {
             if (node instanceof Document) {
                 // here we render multiple phases
+                if (myTranslationHandler != null) {
+                    myTranslationHandler.beginRendering((Document) node, subContext, subContext.markdown);
+                }
+
                 for (FormattingPhase phase : FormattingPhase.values()) {
                     if (phase != FormattingPhase.DOCUMENT && !renderingPhases.contains(phase)) { continue; }
                     this.phase = phase;
                     // here we render multiple phases
-                    if (getFormattingPhase() == FormattingPhase.DOCUMENT) {
+                    if (this.phase == FormattingPhase.DOCUMENT) {
                         NodeFormattingHandler nodeRenderer = renderers.get(node.getClass());
                         if (nodeRenderer != null) {
                             subContext.renderingNode = node;
@@ -557,6 +650,41 @@ public class Formatter implements IRender {
 
             @Override
             public MarkdownWriter getMarkdown() { return markdown; }
+
+            @Override
+            public RenderPurpose getRenderPurpose() {
+                return myMainNodeRenderer.getRenderPurpose();
+            }
+
+            @Override
+            public boolean isTransformingText() {
+                return myMainNodeRenderer.isTransformingText();
+            }
+
+            @Override
+            public CharSequence transformNonTranslating(final CharSequence prefix, final CharSequence nonTranslatingText, final CharSequence suffix, final CharSequence suffix2) {
+                return myMainNodeRenderer.transformNonTranslating(prefix, nonTranslatingText, suffix, suffix2);
+            }
+
+            @Override
+            public CharSequence transformTranslating(final CharSequence prefix, final CharSequence translatingText, final CharSequence suffix, final CharSequence suffix2) {
+                return myMainNodeRenderer.transformTranslating(prefix, translatingText, suffix, suffix2);
+            }
+
+            @Override
+            public CharSequence transformAnchorRef(final CharSequence pageRef, final CharSequence anchorRef) {
+                return myMainNodeRenderer.transformAnchorRef(pageRef, anchorRef);
+            }
+
+            @Override
+            public void translatingSpan(final TranslatingSpanRender render) {
+                myMainNodeRenderer.translatingSpan(render);
+            }
+
+            @Override
+            public void translatingRefTargetSpan(Node target, final TranslatingSpanRender render) {
+                myMainNodeRenderer.translatingRefTargetSpan(target, render);
+            }
         }
     }
 }

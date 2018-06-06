@@ -63,7 +63,7 @@ public abstract class NodeRepositoryFormatter<R extends NodeRepository<B>, B ext
                     unusedReferences.addAll(referenceList);
                     final Iterable<? extends Node> nodes = context.nodesOfType(getNodeClasses());
                     for (Node node : nodes) {
-                        N referencingNode = lastReference.getReferencingNode(node);
+                        N referencingNode = lastReference == null ? null : lastReference.getReferencingNode(node);
                         if (referencingNode != null) {
                             B referenceBlock = referencingNode.getReferenceNode(referenceRepository);
                             if (referenceBlock != null) {

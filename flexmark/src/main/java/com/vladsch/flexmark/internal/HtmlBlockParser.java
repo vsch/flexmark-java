@@ -38,6 +38,14 @@ public class HtmlBlockParser extends AbstractBlockParser {
                         .append("\\E");
                 delimiter = "|";
             }
+
+            boolean forTranslator = Parser.HTML_FOR_TRANSLATOR.getFrom(options);
+            if (forTranslator) {
+                sb.append(delimiter)
+                        .append("__(?:\\d+)_");
+                delimiter = "|";
+            }
+
             String blockTags = sb.toString();
 
             this.BLOCK_PATTERNS = new Pattern[][] {

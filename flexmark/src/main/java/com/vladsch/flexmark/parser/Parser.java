@@ -78,6 +78,7 @@ public class Parser implements IParse {
 
     public static final DataKey<Boolean> HTML_BLOCK_PARSER = new DataKey<Boolean>("HTML_BLOCK_PARSER", true);
     public static final DataKey<Boolean> HTML_COMMENT_BLOCKS_INTERRUPT_PARAGRAPH = new DataKey<Boolean>("HTML_COMMENT_BLOCKS_INTERRUPT_PARAGRAPH", true);
+    public static final DataKey<Boolean> HTML_FOR_TRANSLATOR = new DataKey<Boolean>("HTML_FOR_TRANSLATOR", false);
 
     public static final DataKey<Boolean> INLINE_DELIMITER_DIRECTIONAL_PUNCTUATIONS = new DataKey<Boolean>("INLINE_DELIMITER_DIRECTIONAL_PUNCTUATIONS", false);
 

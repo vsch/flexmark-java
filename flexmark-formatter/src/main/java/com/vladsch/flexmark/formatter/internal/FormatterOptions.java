@@ -20,6 +20,7 @@ public class FormatterOptions {
     public final boolean blockQuoteBlankLines;
     public final BlockQuoteMarker blockQuoteMarkers;
     public final String thematicBreak;
+    public final String translationIdFormat;
     public final boolean indentedCodeMinimizeIndent;
     public final boolean fencedCodeMinimizeIndent;
     public final boolean fencedCodeMatchClosingMarker;
@@ -54,6 +55,7 @@ public class FormatterOptions {
         atxHeaderTrailingMarker = Formatter.ATX_HEADER_TRAILING_MARKER.getFrom(options);
         minSetextMarkerLength = Parser.HEADING_SETEXT_MARKER_LENGTH.getFrom(options);
         thematicBreak = Formatter.THEMATIC_BREAK.getFrom(options);
+        translationIdFormat = Formatter.TRANSLATION_ID_FORMAT.getFrom(options);
         blockQuoteBlankLines = Formatter.BLOCK_QUOTE_BLANK_LINES.getFrom(options);
         blockQuoteMarkers = Formatter.BLOCK_QUOTE_MARKERS.getFrom(options);
         indentedCodeMinimizeIndent = Formatter.INDENTED_CODE_MINIMIZE_INDENT.getFrom(options);

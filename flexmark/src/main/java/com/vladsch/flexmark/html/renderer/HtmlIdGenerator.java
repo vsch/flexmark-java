@@ -14,8 +14,14 @@ public interface HtmlIdGenerator {
         public String getId(Node node) {
             return null;
         }
+
+        @Override
+        public String getId(CharSequence text) {
+            return null;
+        }
     };
 
     void generateIds(final Document document);
     String getId(Node node);
+    String getId(CharSequence text);
 }

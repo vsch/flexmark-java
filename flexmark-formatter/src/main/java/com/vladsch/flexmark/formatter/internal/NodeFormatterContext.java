@@ -1,7 +1,10 @@
 package com.vladsch.flexmark.formatter.internal;
 
+import com.vladsch.flexmark.ast.AnchorRefTarget;
 import com.vladsch.flexmark.ast.Document;
 import com.vladsch.flexmark.ast.Node;
+import com.vladsch.flexmark.formatter.TranslationContext;
+import com.vladsch.flexmark.formatter.TranslationHandler;
 import com.vladsch.flexmark.util.format.options.ElementPlacementSort;
 import com.vladsch.flexmark.util.options.DataHolder;
 
@@ -10,7 +13,7 @@ import java.util.Collection;
 /**
  * The context for node rendering, including configuration and functionality for the node renderer to use.
  */
-public interface NodeFormatterContext {
+public interface NodeFormatterContext extends TranslationContext {
     /**
      * @return the HTML writer to use
      */

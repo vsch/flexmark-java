@@ -75,6 +75,7 @@ public class Parsing {
 
     public final int CODE_BLOCK_INDENT;
     public final boolean intellijDummyIdentifier;
+    public final boolean htmlForTranslator;
     public final String INVALID_LINK_CHARS;
     public final String IN_MATCHED_PARENS_NOSP;
     public final String IN_MATCHED_PARENS_W_SP;
@@ -83,6 +84,7 @@ public class Parsing {
 
     public Parsing(DataHolder options) {
         this.intellijDummyIdentifier = Parser.INTELLIJ_DUMMY_IDENTIFIER.getFrom(options);
+        this.htmlForTranslator = Parser.HTML_FOR_TRANSLATOR.getFrom(options);
 
         this.EOL = "(?:\r\n|\r|\n)";
         this.ADDITIONAL_CHARS = ADDITIONAL_CHARS();
@@ -170,7 +172,7 @@ public class Parsing {
         this.OPENTAG = "<" + TAGNAME + ATTRIBUTE + "*" + "\\s*/?>";
         this.CLOSETAG = "</" + TAGNAME + "\\s*[>]";
         this.HTMLTAG = "(?:" + OPENTAG + "|" + CLOSETAG + "|" + HTMLCOMMENT
-                + "|" + PROCESSINGINSTRUCTION + "|" + DECLARATION + "|" + CDATA + ")";
+                + "|" + PROCESSINGINSTRUCTION + "|" + DECLARATION + "|" + CDATA + (htmlForTranslator ? "|<_(?:\\d+)_>|</_(?:\\d+)_>" : "") + ")";
         this.HTML_TAG = Pattern.compile('^' + HTMLTAG, Pattern.CASE_INSENSITIVE);
 
         final String itemPrefixChars = LISTS_ITEM_PREFIX_CHARS.getFrom(options);
