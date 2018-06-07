@@ -13,7 +13,7 @@
 
     <properties>
         <!-- Define the version of OPEN HTML TO PDF in the properties section of your POM. -->
-        <openhtml.version>0.0.1-RC9</openhtml.version>
+        <openhtml.version>0.0.1-RC13</openhtml.version>
     </properties>
 
     <dependencies>
