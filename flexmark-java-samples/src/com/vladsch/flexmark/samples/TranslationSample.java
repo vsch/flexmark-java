@@ -53,12 +53,12 @@ public class TranslationSample {
         Parser PARSER = Parser.builder(OPTIONS).build();
         Formatter FORMATTER = Formatter.builder(OPTIONS).build();
 
-        // 1. Parse the document to get markdown
         final String markdown = "This is [*Sparta*](http://sparta.com)";
 
         System.out.println(markdown);
         System.out.append("--------------------------\n");
 
+        // 1. Parse the document to get markdown AST
         Document node = PARSER.parse(markdown);
 
         // 2. Format the document to get markdown strings for translation
