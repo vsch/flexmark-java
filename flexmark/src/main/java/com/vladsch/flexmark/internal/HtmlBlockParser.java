@@ -42,7 +42,7 @@ public class HtmlBlockParser extends AbstractBlockParser {
             boolean forTranslator = Parser.HTML_FOR_TRANSLATOR.getFrom(options);
             if (forTranslator) {
                 sb.append(delimiter)
-                        .append("__(?:\\d+)_");
+                        .append(Parser.TRANSLATION_HTML_BLOCK_TAG_PATTERN.getFrom(options));
                 delimiter = "|";
             }
 

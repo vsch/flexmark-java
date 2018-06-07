@@ -12,6 +12,7 @@ import com.vladsch.flexmark.test.ComboSpecTestCase;
 import com.vladsch.flexmark.util.KeepType;
 import com.vladsch.flexmark.util.format.options.*;
 import com.vladsch.flexmark.util.options.DataHolder;
+import com.vladsch.flexmark.util.options.DataKey;
 import com.vladsch.flexmark.util.options.MutableDataSet;
 import org.junit.runners.Parameterized;
 
@@ -34,10 +35,13 @@ public class ComboCoreTranslationFormatterSpecTest extends ComboSpecTestCase {
             .set(Parser.HEADING_NO_ATX_SPACE, true)
             .set(Formatter.MAX_TRAILING_BLANK_LINES, 0);
 
+    static final DataKey<Boolean> DETAILS = new DataKey<Boolean>("DETAILS", SHOW_INTERMEDIATE);
+
     private static final Map<String, DataHolder> optionsMap = new HashMap<String, DataHolder>();
     static {
         //optionsMap.put("src-pos", new MutableDataSet().set(HtmlRenderer.SOURCE_POSITION_ATTRIBUTE, "md-pos"));
         //optionsMap.put("option1", new MutableDataSet().set(FormatterExtension.FORMATTER_OPTION1, true));
+        optionsMap.put("details", new MutableDataSet().set(DETAILS, true));
         optionsMap.put("format-fixed-indent", new MutableDataSet().set(Formatter.FORMATTER_EMULATION_PROFILE, ParserEmulationProfile.FIXED_INDENT));
         optionsMap.put("parse-fixed-indent", new MutableDataSet().set(Parser.PARSER_EMULATION_PROFILE, ParserEmulationProfile.FIXED_INDENT));
         optionsMap.put("format-github", new MutableDataSet().set(Formatter.FORMATTER_EMULATION_PROFILE, ParserEmulationProfile.GITHUB_DOC));
@@ -149,8 +153,10 @@ public class ComboCoreTranslationFormatterSpecTest extends ComboSpecTestCase {
             // now need to output translation strings, delimited
             final List<String> translatingTexts = handler.getTranslatingTexts();
 
+            final boolean showIntermediate = node.getDocument().get(DETAILS);
+
             try {
-                if (SHOW_INTERMEDIATE) {
+                if (showIntermediate) {
                     output.append("--------------------------\n");
                     output.append(formattedOutput);
                     output.append("--------------------------\n");
@@ -164,7 +170,7 @@ public class ComboCoreTranslationFormatterSpecTest extends ComboSpecTestCase {
                 final CharSequence translated = translate(text);
                 translatedTexts.add(translated);
                 try {
-                    if (SHOW_INTERMEDIATE) {
+                    if (showIntermediate) {
                         output.append("<<<").append(text).append('\n');
                         output.append(">>>").append(translated).append('\n');
                     }
@@ -174,7 +180,7 @@ public class ComboCoreTranslationFormatterSpecTest extends ComboSpecTestCase {
             }
 
             // use the translations
-            if (SHOW_INTERMEDIATE) {
+            if (showIntermediate) {
                 try {
                     output.append("--------------------------\n");
                 } catch (IOException e) {
@@ -186,7 +192,7 @@ public class ComboCoreTranslationFormatterSpecTest extends ComboSpecTestCase {
             handler.setRenderPurpose(RenderPurpose.TRANSLATED_FOR_PARSER);
             final String partial = myFormatter.translationRender(node, handler);
 
-            if (SHOW_INTERMEDIATE) {
+            if (showIntermediate) {
                 try {
                     output.append(partial);
                     output.append("--------------------------\n");
@@ -217,8 +223,6 @@ public class ComboCoreTranslationFormatterSpecTest extends ComboSpecTestCase {
             return new TranslationFormatter(myFormatter.withOptions(options));
         }
     }
-
-    ;
 
     final static TranslationFormatter TRANSLATION_FORMATTER = new TranslationFormatter(FORMATTER);
 

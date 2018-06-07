@@ -1,23 +1,21 @@
 package com.vladsch.flexmark.formatter.internal;
 
 import com.vladsch.flexmark.ast.Document;
-import com.vladsch.flexmark.ast.Heading;
 import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.formatter.RenderPurpose;
 import com.vladsch.flexmark.formatter.TranslatingSpanRender;
 import com.vladsch.flexmark.formatter.TranslationHandler;
 import com.vladsch.flexmark.html.renderer.HtmlIdGenerator;
 import com.vladsch.flexmark.html.renderer.HtmlIdGeneratorFactory;
+import com.vladsch.flexmark.util.Consumer;
+import com.vladsch.flexmark.util.options.DataHolder;
+import com.vladsch.flexmark.util.options.MutableDataSet;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.BasedSequenceImpl;
 
-import java.net.Inet4Address;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.regex.Pattern;
 
-import static com.vladsch.flexmark.formatter.RenderPurpose.TRANSLATED;
 import static java.lang.Character.isWhitespace;
 
 public class TranslationHandlerImpl implements TranslationHandler {
@@ -29,7 +27,8 @@ public class TranslationHandlerImpl implements TranslationHandler {
     final ArrayList<String> myTranslatingSpans;
     final ArrayList<String> myTranslatedSpans;
     final HtmlIdGeneratorFactory myIdGeneratorFactory;
-
+    final Pattern myPlaceHolderMarkerPattern;
+    final MutableDataSet myTranslationStore;
 
     final HashMap<String, Integer> myOriginalRefTargets;      // map ref target id to translation index
     final HashMap<Integer, String> myTranslatedRefTargets;    // map translation index to translated ref target id
@@ -45,7 +44,7 @@ public class TranslationHandlerImpl implements TranslationHandler {
     private int myInTranslationSpan;
     private HtmlIdGenerator myIdGenerator;
 
-    public TranslationHandlerImpl(final FormatterOptions formatterOptions, HtmlIdGeneratorFactory idGeneratorFactory) {
+    public TranslationHandlerImpl(final DataHolder options, final FormatterOptions formatterOptions, HtmlIdGeneratorFactory idGeneratorFactory) {
         myFormatterOptions = formatterOptions;
         myIdGeneratorFactory = idGeneratorFactory;
         myNonTranslatingTexts = new HashMap<>();
@@ -58,6 +57,13 @@ public class TranslationHandlerImpl implements TranslationHandler {
         myTranslatingSpans = new ArrayList<>();
         myTranslatedSpans = new ArrayList<>();
         myTranslatingPlaceholders = new ArrayList<>();
+        myPlaceHolderMarkerPattern = Pattern.compile(formatterOptions.translationExcludePattern); //Pattern.compile("^[\\[\\](){}<>]*_{1,2}\\d+_[\\[\\](){}<>]*$");
+        myTranslationStore = new MutableDataSet();
+    }
+
+    @Override
+    public MutableDataSet getTranslationStore() {
+        return myTranslationStore;
     }
 
     @Override
@@ -85,7 +91,7 @@ public class TranslationHandlerImpl implements TranslationHandler {
 
         // collect all the translating snippets first
         for (Map.Entry<String, String> entry : myTranslatingTexts.entrySet()) {
-            if (!isBlank(entry.getValue())) {
+            if (!isBlank(entry.getValue()) && !myPlaceHolderMarkerPattern.matcher(entry.getValue()).matches()) {
                 // see if it is repeating
                 if (!repeatedTranslatingIndices.containsKey(entry.getValue())) {
                     // new, index
@@ -97,7 +103,7 @@ public class TranslationHandlerImpl implements TranslationHandler {
         }
 
         for (CharSequence text : myTranslatingSpans) {
-            if (!isBlank(text)) {
+            if (!isBlank(text) && !myPlaceHolderMarkerPattern.matcher(text).matches()) {
                 translatingSnippets.add(text.toString());
             }
         }
@@ -119,7 +125,7 @@ public class TranslationHandlerImpl implements TranslationHandler {
         HashMap<String, Integer> repeatedTranslatingIndices = new HashMap<>();
 
         for (Map.Entry<String, String> entry : myTranslatingTexts.entrySet()) {
-            if (!isBlank(entry.getValue())) {
+            if (!isBlank(entry.getValue()) && !myPlaceHolderMarkerPattern.matcher(entry.getValue()).matches()) {
                 final Integer index = repeatedTranslatingIndices.get(entry.getValue());
                 if (index == null) {
                     if (i >= placeholderSize) break;
@@ -136,7 +142,7 @@ public class TranslationHandlerImpl implements TranslationHandler {
         }
 
         for (CharSequence text : myTranslatingSpans) {
-            if (!isBlank(text)) {
+            if (!isBlank(text) && !myPlaceHolderMarkerPattern.matcher(text).matches()) {
                 myTranslatedSpans.add(translatedTexts.get(i).toString());
                 i++;
             } else {
@@ -300,7 +306,7 @@ public class TranslationHandlerImpl implements TranslationHandler {
     }
 
     @Override
-    public CharSequence transformNonTranslating(final CharSequence prefix, final CharSequence nonTranslatingText, final CharSequence suffix, final CharSequence suffix2) {
+    public CharSequence transformNonTranslating(final CharSequence prefix, final CharSequence nonTranslatingText, final CharSequence suffix, final CharSequence suffix2, final Consumer<String> placeholderConsumer) {
         switch (myRenderPurpose) {
             case TRANSLATION_SPANS:
                 // need to transfer trailing EOLs to id

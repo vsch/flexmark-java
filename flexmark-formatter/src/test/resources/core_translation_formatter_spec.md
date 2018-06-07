@@ -10,13 +10,26 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 
 ## Formatter
 
-repeated translating snippets only translated once
+repeated translating snippets only translated once, ones containing placeholder with only
+brackets of all types are excluded.
 
-```````````````````````````````` example Formatter: 1
+```````````````````````````````` example(Formatter: 1) options(details)
 [Markdown]
 
 [Markdown]
 .
+--------------------------
+[_1_]
+
+[_2_]
+--------------------------
+<<<Markdown
+>>>maARKDoWN
+--------------------------
+[_1_]
+
+[_2_]
+--------------------------
 [maARKDoWN]
 
 [maARKDoWN]
@@ -25,9 +38,17 @@ repeated translating snippets only translated once
 
 HTML Blocks not translated
 
-```````````````````````````````` example Formatter: 2
+```````````````````````````````` example(Formatter: 2) options(details)
 <span>this is a test</span>
 .
+--------------------------
+<_1_>this is a test</_2_>
+--------------------------
+<<<<_1_>this is a test</_2_>
+>>><_1_>thiIS iIS aA teESt</_2_>
+--------------------------
+<_1_>thiIS iIS aA teESt</_2_>
+--------------------------
 <span>thiIS iIS aA teESt</span>
 ````````````````````````````````
 
@@ -56,9 +77,19 @@ comments translate
 
 inline comments translate
 
-```````````````````````````````` example Formatter: 5
+```````````````````````````````` example(Formatter: 5) options(details)
 This <!--this is a test--> is a test
 .
+--------------------------
+This <!--_1_--> is a test
+--------------------------
+<<<this is a test
+>>>thiIS iIS aA teESt
+<<<This <!--_1_--> is a test
+>>>thiIS <!--_1_--> iIS aA teESt
+--------------------------
+thiIS <!--_1_--> iIS aA teESt
+--------------------------
 thiIS <!--thiIS iIS aA teESt--> iIS aA teESt
 ````````````````````````````````
 
@@ -102,9 +133,27 @@ pLaAtFoRm**
 ````````````````````````````````
 
 
-default
+mail link preserved
 
 ```````````````````````````````` example Formatter: 9
+Test <test@test.com> 
+.
+teESt <test@test.com>
+````````````````````````````````
+
+
+auto link preserved
+
+```````````````````````````````` example Formatter: 10
+Test <http://example.com> 
+.
+teESt <http://example.com>
+````````````````````````````````
+
+
+default
+
+```````````````````````````````` example Formatter: 11
 #Heading
 -----
 paragraph text 
@@ -126,7 +175,7 @@ LaAZyY coNtiINuUaAtiIoN
 ````````````````````````````````
 
 
-```````````````````````````````` example Formatter: 10
+```````````````````````````````` example Formatter: 12
 ~~~info
         with uneven indent
            with uneven indent
@@ -141,7 +190,7 @@ LaAZyY coNtiINuUaAtiIoN
 ````````````````````````````````
 
 
-```````````````````````````````` example Formatter: 11
+```````````````````````````````` example Formatter: 13
         with uneven indent
            with uneven indent
      indented code
@@ -152,7 +201,7 @@ LaAZyY coNtiINuUaAtiIoN
 ````````````````````````````````
 
 
-```````````````````````````````` example Formatter: 12
+```````````````````````````````` example Formatter: 14
 Work with [Markdown]
 
 Work with [Markdown][]
@@ -179,7 +228,7 @@ woRK WiIth [maARKDoWN imaAGeE][maARKDoWN]
 ````````````````````````````````
 
 
-```````````````````````````````` example Formatter: 13
+```````````````````````````````` example Formatter: 15
 Work with [Markdown](https://test.com/doc.png)
 
 Work with [Markdown](https://test.com/doc.png "")

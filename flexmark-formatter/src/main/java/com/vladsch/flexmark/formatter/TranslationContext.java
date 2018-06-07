@@ -1,6 +1,8 @@
 package com.vladsch.flexmark.formatter;
 
 import com.vladsch.flexmark.ast.Node;
+import com.vladsch.flexmark.util.Consumer;
+import com.vladsch.flexmark.util.options.MutableDataHolder;
 
 public interface TranslationContext {
     /**
@@ -8,6 +10,13 @@ public interface TranslationContext {
      * @return RenderPurpose for current rendering
      */
     RenderPurpose getRenderPurpose();
+
+    /**
+     * Get MutableDataHolder for storing this translation run values across render purpose phases
+     *
+     */
+
+    MutableDataHolder getTranslationStore();
 
     /**
      * Returns false if special translation functions are no-ops
@@ -42,9 +51,10 @@ public interface TranslationContext {
      * @param nonTranslatingText  non-rendering text of the node (content will depend on translation phase)
      * @param suffix              suffix to use on non-translating placeholder so it is interpreted as a proper element during parsing
      * @param suffix2             suffix to use on non-translating placeholder so it is interpreted as a proper element during parsing
+     * @param placeholderConsumer
      * @return text to be used in rendering for this phase
      */
-    CharSequence transformNonTranslating(final CharSequence prefix, final CharSequence nonTranslatingText, final CharSequence suffix, final CharSequence suffix2);
+    CharSequence transformNonTranslating(final CharSequence prefix, final CharSequence nonTranslatingText, final CharSequence suffix, final CharSequence suffix2, final Consumer<String> placeholderConsumer);
 
     /**
      * Transform translating text but which is contextually isolated from the text block in which it is located ie. link reference or image reference

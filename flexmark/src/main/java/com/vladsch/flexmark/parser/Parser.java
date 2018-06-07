@@ -218,6 +218,12 @@ public class Parser implements IParse {
     public static final DataKey<Boolean> HTML_BLOCK_DEEP_PARSE_INDENTED_CODE_INTERRUPTS = new DataKey<Boolean>("HTML_BLOCK_DEEP_PARSE_INDENTED_CODE_INTERRUPTS", false);
 
     /**
+     * Used by formatter for translation parsing
+     */
+    public static final DataKey<String> TRANSLATION_HTML_BLOCK_TAG_PATTERN = new DataKey<String>("TRANSLATION_HTML_BLOCK_TAG_PATTERN", "__(?:\\d+)_");
+    public static final DataKey<String> TRANSLATION_HTML_INLINE_TAG_PATTERN = new DataKey<String>("TRANSLATION_HTML_INLINE_TAG_PATTERN", "_(?:\\d+)_");
+
+    /**
      * @deprecated
      */
     @Deprecated public static final DataKey<ParserEmulationProfile> PARSER_EMULATION_FAMILY = PARSER_EMULATION_PROFILE;

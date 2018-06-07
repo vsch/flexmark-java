@@ -13,6 +13,7 @@ import com.vladsch.flexmark.html.renderer.HeaderIdGeneratorFactory;
 import com.vladsch.flexmark.html.renderer.HtmlIdGeneratorFactory;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.ParserEmulationProfile;
+import com.vladsch.flexmark.util.Consumer;
 import com.vladsch.flexmark.util.collection.DynamicDefaultKey;
 import com.vladsch.flexmark.util.collection.NodeCollectingVisitor;
 import com.vladsch.flexmark.util.collection.SubClassingBag;
@@ -78,7 +79,13 @@ public class Formatter implements IRender {
 
     // formatter family override
     public static final DataKey<ParserEmulationProfile> FORMATTER_EMULATION_PROFILE = new DynamicDefaultKey<ParserEmulationProfile>("FORMATTER_EMULATION_PROFILE", Parser.PARSER_EMULATION_PROFILE);
+
+    // used for translation phases of rendering
     public static final DataKey<String> TRANSLATION_ID_FORMAT = new DataKey<String>("TRANSLATION_ID_FORMAT", "_%d_");
+    public static final DataKey<String> TRANSLATION_HTML_BLOCK_PREFIX = new DataKey<String>("TRANSLATION_HTML_BLOCK_PREFIX", "_");
+    public static final DataKey<String> TRANSLATION_EXCLUDE_PATTERN = new DataKey<String>("TRANSLATION_EXCLUDE_PATTERN", "^[\\[\\](){}<>]*_{1,2}\\d+_[\\[\\](){}<>]*$");
+    public static final DataKey<String> TRANSLATION_HTML_BLOCK_TAG_PATTERN = Parser.TRANSLATION_HTML_BLOCK_TAG_PATTERN;
+    public static final DataKey<String> TRANSLATION_HTML_INLINE_TAG_PATTERN = Parser.TRANSLATION_HTML_INLINE_TAG_PATTERN;
 
     //public boolean USE_ACTUAL_CHAR_WIDTH = true;
     //
@@ -113,7 +120,7 @@ public class Formatter implements IRender {
     }
 
     public TranslationHandler getTranslationHandler(HtmlIdGeneratorFactory idGeneratorFactory) {
-        return new TranslationHandlerImpl(formatterOptions, idGeneratorFactory);
+        return new TranslationHandlerImpl(options, formatterOptions, idGeneratorFactory);
     }
 
     /**
@@ -429,8 +436,8 @@ public class Formatter implements IRender {
         }
 
         @Override
-        public CharSequence transformNonTranslating(final CharSequence prefix, final CharSequence nonTranslatingText, final CharSequence suffix, final CharSequence suffix2) {
-            return myTranslationHandler == null ? nonTranslatingText : myTranslationHandler.transformNonTranslating(prefix, nonTranslatingText, suffix, suffix2);
+        public CharSequence transformNonTranslating(final CharSequence prefix, final CharSequence nonTranslatingText, final CharSequence suffix, final CharSequence suffix2, final Consumer<String> placeholderConsumer) {
+            return myTranslationHandler == null ? nonTranslatingText : myTranslationHandler.transformNonTranslating(prefix, nonTranslatingText, suffix, suffix2, null);
         }
 
         @Override
@@ -458,6 +465,15 @@ public class Formatter implements IRender {
                 myTranslationHandler.translatingRefTargetSpan(target, render);
             } else {
                 render.render(this, markdown);
+            }
+        }
+
+        @Override
+        public MutableDataHolder getTranslationStore() {
+            if (myTranslationHandler != null) {
+                return myTranslationHandler.getTranslationStore();
+            } else {
+                return document;
             }
         }
 
@@ -593,6 +609,11 @@ public class Formatter implements IRender {
             }
 
             @Override
+            public MutableDataHolder getTranslationStore() {
+                return myMainNodeRenderer.getTranslationStore();
+            }
+
+            @Override
             public final Iterable<? extends Node> nodesOfType(final Class<?>[] classes) {
                 return myMainNodeRenderer.nodesOfType(classes);
             }
@@ -662,8 +683,8 @@ public class Formatter implements IRender {
             }
 
             @Override
-            public CharSequence transformNonTranslating(final CharSequence prefix, final CharSequence nonTranslatingText, final CharSequence suffix, final CharSequence suffix2) {
-                return myMainNodeRenderer.transformNonTranslating(prefix, nonTranslatingText, suffix, suffix2);
+            public CharSequence transformNonTranslating(final CharSequence prefix, final CharSequence nonTranslatingText, final CharSequence suffix, final CharSequence suffix2, final Consumer<String> placeholderConsumer) {
+                return myMainNodeRenderer.transformNonTranslating(prefix, nonTranslatingText, suffix, suffix2, null);
             }
 
             @Override

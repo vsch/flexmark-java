@@ -2,6 +2,7 @@ package com.vladsch.flexmark.formatter.internal;
 
 import com.vladsch.flexmark.ast.BlockQuote;
 import com.vladsch.flexmark.ast.Node;
+import com.vladsch.flexmark.util.Consumer;
 import com.vladsch.flexmark.util.Ref;
 import com.vladsch.flexmark.util.html.ConditionalFormatter;
 import com.vladsch.flexmark.util.html.FormattingAppendable;
@@ -70,7 +71,16 @@ public class MarkdownWriter implements FormattingAppendable {
 
     public MarkdownWriter appendNonTranslating(final CharSequence prefix, final CharSequence csq, final CharSequence suffix, final CharSequence suffix2) {
         if (context.isTransformingText()) {
-            append(context.transformNonTranslating(prefix, csq, suffix, suffix2));
+            append(context.transformNonTranslating(prefix, csq, suffix, suffix2, null));
+        } else {
+            append(csq);
+        }
+        return this;
+    }
+
+    public MarkdownWriter appendNonTranslating(final CharSequence prefix, final CharSequence csq, final CharSequence suffix, final CharSequence suffix2, Consumer<String> placeholderConsumer) {
+        if (context.isTransformingText()) {
+            append(context.transformNonTranslating(prefix, csq, suffix, suffix2, placeholderConsumer));
         } else {
             append(csq);
         }
