@@ -63,15 +63,14 @@ public class TranslationSample {
 
         // 2. Format the document to get markdown strings for translation
         final TranslationHandler handler = FORMATTER.getTranslationHandler(new HeaderIdGenerator.Factory());
-        handler.setRenderPurpose(RenderPurpose.TRANSLATION_SPANS);
-        final String formattedOutput = FORMATTER.translationRender(node, handler);
+        final String formattedOutput = FORMATTER.translationRender(node, handler, RenderPurpose.TRANSLATION_SPANS);
 
         // 3. Get the strings to be translated from translation handler
         final List<String> translatingTexts = handler.getTranslatingTexts();
 
         // 4. Have the strings translated by your translation service of preference
         final ArrayList<CharSequence> translatedTexts = new ArrayList<>(translatingTexts.size());
-        for (CharSequence text : translatingTexts) {
+        for (CharSequence text: translatingTexts) {
             final CharSequence translated = translate(text);
 
             // simulated translation
@@ -87,15 +86,13 @@ public class TranslationSample {
 
         // 6. Generate markdown with placeholders for non-translating string and out of context translations
         // the rest will already contain translated text
-        handler.setRenderPurpose(RenderPurpose.TRANSLATED_FOR_PARSER);
-        final String partial = FORMATTER.translationRender(node, handler);
+        final String partial = FORMATTER.translationRender(node, handler, RenderPurpose.TRANSLATED_SPANS);
 
         // 7. Parse the document with placeholders
-        handler.setRenderPurpose(RenderPurpose.TRANSLATED);
         Node partialDoc = PARSER.parse(partial);
 
         // 8. Generate the final translated markdown
-        final String translated = FORMATTER.translationRender(partialDoc, handler);
+        final String translated = FORMATTER.translationRender(partialDoc, handler, RenderPurpose.TRANSLATED);
 
         System.out.println(translated);
 

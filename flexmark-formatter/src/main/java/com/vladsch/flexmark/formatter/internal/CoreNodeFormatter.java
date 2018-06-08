@@ -851,7 +851,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
             // TODO: this really needs to be parsed but we won't do it
             switch (context.getRenderPurpose()) {
                 case TRANSLATION_SPANS:
-                case TRANSLATED_FOR_PARSER:
+                case TRANSLATED_SPANS:
                     markdown.appendNonTranslating(myHtmlBlockPrefix, node.getChars().trimEOL(), ">", node.getChars().trimmedEOL());
                     break;
 
@@ -879,7 +879,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
     private void render(HtmlInnerBlock node, NodeFormatterContext context, MarkdownWriter markdown) {
         switch (context.getRenderPurpose()) {
             case TRANSLATION_SPANS:
-            case TRANSLATED_FOR_PARSER:
+            case TRANSLATED_SPANS:
                 markdown.appendNonTranslating(myHtmlBlockPrefix, node.getChars().trimEOL(), ">", node.getChars().trimmedEOL());
                 break;
 
@@ -905,7 +905,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
     private void render(HtmlInline node, NodeFormatterContext context, MarkdownWriter markdown) {
         switch (context.getRenderPurpose()) {
             case TRANSLATION_SPANS:
-            case TRANSLATED_FOR_PARSER:
+            case TRANSLATED_SPANS:
                 String prefix = node.getChars().startsWith("</") ? "</" : "<";
                 markdown.appendNonTranslating(prefix, node.getChars(), ">");
                 break;
@@ -966,7 +966,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
                         markdown.append(">");
                     }
                     break;
-                case TRANSLATED_FOR_PARSER:
+                case TRANSLATED_SPANS:
                     markdown.append("<");
                     markdown.appendNonTranslating(prefix, node.getText(), suffix);
                     markdown.append(">");

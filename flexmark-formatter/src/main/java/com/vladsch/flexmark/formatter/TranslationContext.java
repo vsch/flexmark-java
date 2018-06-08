@@ -22,7 +22,7 @@ public interface TranslationContext {
      * Returns false if special translation functions are no-ops
      *
      * During {@link RenderPurpose#TRANSLATION_SPANS} this is true
-     * During {@link RenderPurpose#TRANSLATED_FOR_PARSER} this is true
+     * During {@link RenderPurpose#TRANSLATED_SPANS} this is true
      * During {@link RenderPurpose#TRANSLATED} this is true
      *
      * @return true if need to call translation related functions
@@ -33,7 +33,7 @@ public interface TranslationContext {
     // * Returns true if prefix and indent perform usual duty, false if they should use empty strings
     // *
     // * During {@link RenderPurpose#TRANSLATION_SPANS} this is false
-    // * During {@link RenderPurpose#TRANSLATED_FOR_PARSER} this is true
+    // * During {@link RenderPurpose#TRANSLATED_SPANS} this is true
     // * During {@link RenderPurpose#TRANSLATED} this is true
     // *
     // * @return true if need to real prefix/indent operations in output
@@ -44,7 +44,7 @@ public interface TranslationContext {
      * Transform non-translating text
      *
      * During {@link RenderPurpose#TRANSLATION_SPANS} this converts text to non-translating placeholder based on ordinal id
-     * During {@link RenderPurpose#TRANSLATED_FOR_PARSER} this returns the non-translating placeholder based on ordinal id
+     * During {@link RenderPurpose#TRANSLATED_SPANS} this returns the non-translating placeholder based on ordinal id
      * During {@link RenderPurpose#TRANSLATED} this returns the original non-translating text for the nonTranslatingText (placeholder)
      *
      * @param prefix              prefix to use on non-translating placeholder so it is interpreted as a proper element during parsing
@@ -60,7 +60,7 @@ public interface TranslationContext {
      * Transform translating text but which is contextually isolated from the text block in which it is located ie. link reference or image reference
      *
      * During {@link RenderPurpose#TRANSLATION_SPANS} this converts text to non-translating placeholder based on ordinal id and adds it to translation snippets
-     * During {@link RenderPurpose#TRANSLATED_FOR_PARSER} this returns the non-translating placeholder based on ordinal id
+     * During {@link RenderPurpose#TRANSLATED_SPANS} this returns the non-translating placeholder based on ordinal id
      * During {@link RenderPurpose#TRANSLATED} this returns the translated text for the translatingText (placeholder)
      *
      * @param prefix              prefix to use on non-translating placeholder so it is interpreted as a proper element during parsing
@@ -73,7 +73,7 @@ public interface TranslationContext {
 
     /**
      * During {@link RenderPurpose#TRANSLATION_SPANS} this converts anchorRef to ordinal placeholder id
-     * During {@link RenderPurpose#TRANSLATED_FOR_PARSER} this returns the ordinal placeholder
+     * During {@link RenderPurpose#TRANSLATED_SPANS} this returns the ordinal placeholder
      * During {@link RenderPurpose#TRANSLATED} this returns new anchorRef for the AnchorRefTarget original was referring to
      *
      * @param pageRef   url part without the anchor ref to resolve reference
@@ -86,7 +86,7 @@ public interface TranslationContext {
      * Separate translation span, cannot be nested. Will generate a paragraph of text which should be translated as one piece
      *
      * During {@link RenderPurpose#TRANSLATION_SPANS} this adds the generated output to translation spans
-     * During {@link RenderPurpose#TRANSLATED_FOR_PARSER} output from renderer is suppressed, instead outputs corresponding translated span
+     * During {@link RenderPurpose#TRANSLATED_SPANS} output from renderer is suppressed, instead outputs corresponding translated span
      * During {@link RenderPurpose#TRANSLATED} calls render
      *
      */

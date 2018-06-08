@@ -7,9 +7,12 @@ import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.formatter.RenderPurpose;
 import com.vladsch.flexmark.formatter.TranslatingSpanRender;
 import com.vladsch.flexmark.formatter.TranslationHandler;
+import com.vladsch.flexmark.formatter.TranslationHandlerFactory;
 import com.vladsch.flexmark.html.AttributeProviderFactory;
 import com.vladsch.flexmark.html.LinkResolverFactory;
+import com.vladsch.flexmark.html.renderer.HeaderIdGenerator;
 import com.vladsch.flexmark.html.renderer.HeaderIdGeneratorFactory;
+import com.vladsch.flexmark.html.renderer.HtmlIdGenerator;
 import com.vladsch.flexmark.html.renderer.HtmlIdGeneratorFactory;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.ParserEmulationProfile;
@@ -119,8 +122,16 @@ public class Formatter implements IRender {
         });
     }
 
+    public TranslationHandler getTranslationHandler(TranslationHandlerFactory translationHandlerFactory, HtmlIdGeneratorFactory idGeneratorFactory) {
+        return translationHandlerFactory.create(options, formatterOptions, idGeneratorFactory);
+    }
+
     public TranslationHandler getTranslationHandler(HtmlIdGeneratorFactory idGeneratorFactory) {
         return new TranslationHandlerImpl(options, formatterOptions, idGeneratorFactory);
+    }
+
+    public TranslationHandler getTranslationHandler() {
+        return new TranslationHandlerImpl(options, formatterOptions, new HeaderIdGenerator.Factory());
     }
 
     /**
@@ -184,7 +195,8 @@ public class Formatter implements IRender {
      * @param node   node to render
      * @param output appendable to use for the output
      */
-    public void translationRender(Node node, Appendable output, TranslationHandler translationHandler) {
+    public void translationRender(Node node, Appendable output, TranslationHandler translationHandler, RenderPurpose renderPurpose) {
+        translationHandler.setRenderPurpose(renderPurpose);
         MainNodeFormatter renderer = new MainNodeFormatter(options, new MarkdownWriter(output, formatterOptions.formatFlags), node.getDocument(), translationHandler);
         renderer.render(node);
         renderer.flush(formatterOptions.maxTrailingBlankLines);
@@ -196,7 +208,8 @@ public class Formatter implements IRender {
      * @param node   node to render
      * @param output appendable to use for the output
      */
-    public void translationRender(Node node, Appendable output, int maxTrailingBlankLines, TranslationHandler translationHandler) {
+    public void translationRender(Node node, Appendable output, int maxTrailingBlankLines, TranslationHandler translationHandler, RenderPurpose renderPurpose) {
+        translationHandler.setRenderPurpose(renderPurpose);
         MainNodeFormatter renderer = new MainNodeFormatter(options, new MarkdownWriter(output, formatterOptions.formatFlags), node.getDocument(), translationHandler);
         renderer.render(node);
         renderer.flush(maxTrailingBlankLines);
@@ -208,9 +221,9 @@ public class Formatter implements IRender {
      * @param node the root node
      * @return the formatted markdown
      */
-    public String translationRender(Node node, TranslationHandler translationHandler) {
+    public String translationRender(Node node, TranslationHandler translationHandler, RenderPurpose renderPurpose) {
         StringBuilder sb = new StringBuilder();
-        translationRender(node, sb, translationHandler);
+        translationRender(node, sb, translationHandler, renderPurpose);
         return sb.toString();
     }
 

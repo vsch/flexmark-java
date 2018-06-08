@@ -147,8 +147,7 @@ public class ComboCoreTranslationFormatterSpecTest extends ComboSpecTestCase {
         @Override
         public void render(final Node node, final Appendable output) {
             final TranslationHandler handler = myFormatter.getTranslationHandler(new HeaderIdGenerator.Factory());
-            handler.setRenderPurpose(RenderPurpose.TRANSLATION_SPANS);
-            final String formattedOutput = myFormatter.translationRender(node, handler);
+            final String formattedOutput = myFormatter.translationRender(node, handler, RenderPurpose.TRANSLATION_SPANS);
 
             // now need to output translation strings, delimited
             final List<String> translatingTexts = handler.getTranslatingTexts();
@@ -166,7 +165,7 @@ public class ComboCoreTranslationFormatterSpecTest extends ComboSpecTestCase {
             }
 
             final ArrayList<CharSequence> translatedTexts = new ArrayList<>(translatingTexts.size());
-            for (CharSequence text : translatingTexts) {
+            for (CharSequence text: translatingTexts) {
                 final CharSequence translated = translate(text);
                 translatedTexts.add(translated);
                 try {
@@ -189,8 +188,7 @@ public class ComboCoreTranslationFormatterSpecTest extends ComboSpecTestCase {
             }
 
             handler.setTranslatedTexts(translatedTexts);
-            handler.setRenderPurpose(RenderPurpose.TRANSLATED_FOR_PARSER);
-            final String partial = myFormatter.translationRender(node, handler);
+            final String partial = myFormatter.translationRender(node, handler, RenderPurpose.TRANSLATED_SPANS);
 
             if (showIntermediate) {
                 try {
@@ -200,10 +198,8 @@ public class ComboCoreTranslationFormatterSpecTest extends ComboSpecTestCase {
                     e.printStackTrace();
                 }
             }
-            handler.setRenderPurpose(RenderPurpose.TRANSLATED);
-
             Node partialDoc = PARSER.parse(partial);
-            final String translated = myFormatter.translationRender(partialDoc, handler);
+            final String translated = myFormatter.translationRender(partialDoc, handler, RenderPurpose.TRANSLATED);
             try {
                 output.append(translated);
             } catch (IOException e) {
@@ -243,7 +239,7 @@ public class ComboCoreTranslationFormatterSpecTest extends ComboSpecTestCase {
         // NULL example runs full spec test
         data.add(new Object[] { SpecExample.NULL });
 
-        for (SpecExample example : examples) {
+        for (SpecExample example: examples) {
             data.add(new Object[] { example });
         }
         return data;

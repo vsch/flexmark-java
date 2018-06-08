@@ -183,7 +183,7 @@ public class TranslationHandlerImpl implements TranslationHandler {
                 myNonTranslatingTexts.put(replacedTextId, anchorRef.toString());
                 return replacedTextId;
 
-            case TRANSLATED_FOR_PARSER:
+            case TRANSLATED_SPANS:
                 return String.format(myFormatterOptions.translationIdFormat, ++myAnchorId);
 
             case TRANSLATED:
@@ -247,7 +247,7 @@ public class TranslationHandlerImpl implements TranslationHandler {
                     return;
                 }
 
-                case TRANSLATED_FOR_PARSER: {
+                case TRANSLATED_SPANS: {
                     // we output translated text instead of render
                     StringBuilder span = new StringBuilder();
                     final NodeFormatterContext subContext = myWriter.getContext().getSubContext(span);
@@ -321,7 +321,7 @@ public class TranslationHandlerImpl implements TranslationHandler {
                 myNonTranslatingTexts.put(replacedTextId, nonTranslatingText.toString());
                 return replacedTextId;
 
-            case TRANSLATED_FOR_PARSER:
+            case TRANSLATED_SPANS:
                 return getPlaceholderId(myFormatterOptions.translationIdFormat, ++myPlaceholderId, prefix, suffix, suffix2);
 
             case TRANSLATED:
@@ -349,7 +349,7 @@ public class TranslationHandlerImpl implements TranslationHandler {
                 myTranslatingTexts.put(replacedTextId, translatingText.toString());
                 return replacedTextId;
 
-            case TRANSLATED_FOR_PARSER:
+            case TRANSLATED_SPANS:
                 return getPlaceholderId(myFormatterOptions.translationIdFormat, ++myPlaceholderId, prefix, suffix, suffix2);
 
             case TRANSLATED:
