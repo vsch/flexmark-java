@@ -1,7 +1,6 @@
 package com.vladsch.flexmark.formatter;
 
 import com.vladsch.flexmark.ast.Node;
-import com.vladsch.flexmark.util.Consumer;
 import com.vladsch.flexmark.util.options.MutableDataHolder;
 
 public interface TranslationContext {
@@ -51,10 +50,9 @@ public interface TranslationContext {
      * @param nonTranslatingText  non-rendering text of the node (content will depend on translation phase)
      * @param suffix              suffix to use on non-translating placeholder so it is interpreted as a proper element during parsing
      * @param suffix2             suffix to use on non-translating placeholder so it is interpreted as a proper element during parsing
-     * @param placeholderConsumer
      * @return text to be used in rendering for this phase
      */
-    CharSequence transformNonTranslating(final CharSequence prefix, final CharSequence nonTranslatingText, final CharSequence suffix, final CharSequence suffix2, final Consumer<String> placeholderConsumer);
+    CharSequence transformNonTranslating(final CharSequence prefix, final CharSequence nonTranslatingText, final CharSequence suffix, final CharSequence suffix2);
 
     /**
      * Transform translating text but which is contextually isolated from the text block in which it is located ie. link reference or image reference
@@ -83,7 +81,7 @@ public interface TranslationContext {
     CharSequence transformAnchorRef(CharSequence pageRef, CharSequence anchorRef);
 
     /**
-     * Separate translation span, cannot be nested. Will generate a paragraph of text which should be translated as one piece
+     * Separate translation span. Will generate a paragraph of text which should be translated as one piece
      *
      * During {@link RenderPurpose#TRANSLATION_SPANS} this adds the generated output to translation spans
      * During {@link RenderPurpose#TRANSLATED_SPANS} output from renderer is suppressed, instead outputs corresponding translated span
@@ -93,7 +91,7 @@ public interface TranslationContext {
     void translatingSpan(TranslatingSpanRender render);
 
     /**
-     * Separate non-translation span, cannot be nested. Will generate a paragraph of text which will not be translated
+     * Separate non-translation span. Will generate a paragraph of text which will not be translated
      *
      * During {@link RenderPurpose#TRANSLATION_SPANS} this adds the generated output to translation spans
      * During {@link RenderPurpose#TRANSLATED_SPANS} output from renderer is suppressed, instead outputs corresponding translated span

@@ -5,8 +5,11 @@ import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.util.format.options.ElementPlacement;
 import com.vladsch.flexmark.util.format.options.ElementPlacementSort;
 import com.vladsch.flexmark.util.options.DataHolder;
+import com.vladsch.flexmark.util.options.DataKey;
 
 import java.util.*;
+
+import static com.vladsch.flexmark.formatter.RenderPurpose.TRANSLATION_SPANS;
 
 public abstract class NodeRepositoryFormatter<R extends NodeRepository<B>, B extends Node & ReferenceNode<R, B, N>, N extends Node & ReferencingNode<R, B>> implements PhasedNodeFormatter {
     public static final HashSet<FormattingPhase> FORMATTING_PHASES = new HashSet<FormattingPhase>(Arrays.asList(
@@ -32,7 +35,56 @@ public abstract class NodeRepositoryFormatter<R extends NodeRepository<B>, B ext
     protected boolean repositoryNodesDone;
     protected final Comparator<B> myComparator;
 
-    public NodeRepositoryFormatter(DataHolder options) {
+    private NodeFormatterContext myContext;
+    private Map<String, String> referenceTranslationMap;
+    private final DataKey<Map<String, String>> myReferenceMapKey;
+
+    protected ElementPlacement getTranslationReferencePlacement() {
+        if (myContext.isTransformingText()) {
+            return ElementPlacement.AS_IS;
+        } else {
+            return getReferencePlacement();
+        }
+    }
+
+    public String modifyTransformedReference(String transformedReferenceId, final NodeFormatterContext context) {
+        return transformedReferenceId;
+    }
+
+    protected String transformReferenceId(final String nodeText, final NodeFormatterContext context) {
+        if (context.isTransformingText()) {
+            String transformed;
+
+            switch (context.getRenderPurpose()) {
+                case TRANSLATION_SPANS:
+                case TRANSLATED_SPANS:
+                    if (referenceTranslationMap != null) {
+                        if (referenceTranslationMap.containsKey(nodeText)) {
+                            transformed = referenceTranslationMap.get(nodeText);
+                        } else {
+                            transformed = context.transformNonTranslating(null, nodeText, null, null).toString();
+                            referenceTranslationMap.put(nodeText, transformed);
+                        }
+                    } else {
+                        transformed = context.transformNonTranslating(null, nodeText, null, null).toString();
+                    }
+                    return modifyTransformedReference(transformed, context);
+
+                case TRANSLATED:
+                    String untransformed = modifyTransformedReference(nodeText, context);
+                    String s = context.transformNonTranslating(null, untransformed, null, null).toString();
+                    return s;
+
+                case FORMAT:
+                default:
+                    break;
+            }
+        }
+        return nodeText;
+    }
+
+    public NodeRepositoryFormatter(DataHolder options, DataKey<Map<String, String>> referenceMapKey) {
+        myReferenceMapKey = referenceMapKey;
         referenceRepository = getRepository(options);
         referenceList = referenceRepository.values();
         lastReference = referenceList.isEmpty() ? null : referenceList.get(referenceList.size() - 1);
@@ -56,13 +108,22 @@ public abstract class NodeRepositoryFormatter<R extends NodeRepository<B>, B ext
     @Override
     public void renderDocument(final NodeFormatterContext context, final MarkdownWriter markdown, final Document document, final FormattingPhase phase) {
         // here non-rendered elements can be collected so that they are rendered in another part of the document
+        myContext = context;
+
+        if (context.isTransformingText() && myReferenceMapKey != null) {
+            if (context.getRenderPurpose() == TRANSLATION_SPANS) {
+                context.getTranslationStore().set(myReferenceMapKey, new HashMap<String, String>());
+            }
+            referenceTranslationMap = context.getTranslationStore().get(myReferenceMapKey);
+        }
+
         switch (phase) {
             case COLLECT:
-                if (getReferencePlacement() != ElementPlacement.AS_IS && getReferenceSort() == ElementPlacementSort.SORT_UNUSED_LAST) {
+                if (getTranslationReferencePlacement() != ElementPlacement.AS_IS && getReferenceSort() == ElementPlacementSort.SORT_UNUSED_LAST) {
                     // get all ref nodes and figure out which ones are unused
                     unusedReferences.addAll(referenceList);
                     final Iterable<? extends Node> nodes = context.nodesOfType(getNodeClasses());
-                    for (Node node : nodes) {
+                    for (Node node: nodes) {
                         N referencingNode = lastReference == null ? null : lastReference.getReferencingNode(node);
                         if (referencingNode != null) {
                             B referenceBlock = referencingNode.getReferenceNode(referenceRepository);
@@ -75,14 +136,14 @@ public abstract class NodeRepositoryFormatter<R extends NodeRepository<B>, B ext
                 break;
 
             case DOCUMENT_TOP:
-                if (getReferencePlacement() == ElementPlacement.DOCUMENT_TOP) {
+                if (getTranslationReferencePlacement() == ElementPlacement.DOCUMENT_TOP) {
                     // put all footnotes here
                     formatReferences(context, markdown);
                 }
                 break;
 
             case DOCUMENT_BOTTOM:
-                if (getReferencePlacement() == ElementPlacement.DOCUMENT_BOTTOM) {
+                if (getTranslationReferencePlacement() == ElementPlacement.DOCUMENT_BOTTOM) {
                     // put all footnotes here
                     formatReferences(context, markdown);
                 }
@@ -107,7 +168,7 @@ public abstract class NodeRepositoryFormatter<R extends NodeRepository<B>, B ext
             case SORT_UNUSED_LAST:
                 ArrayList<B> used = new ArrayList<B>();
                 ArrayList<B> unused = new ArrayList<B>();
-                for (B footnote : references) {
+                for (B footnote: references) {
                     if (unusedReferences.contains(footnote)) {
                         unused.add(footnote);
                     } else {
@@ -123,7 +184,7 @@ public abstract class NodeRepositoryFormatter<R extends NodeRepository<B>, B ext
         }
 
         markdown.blankLine();
-        for (B reference : references) {
+        for (B reference: references) {
             renderReferenceBlock(reference, context, markdown);
         }
         markdown.blankLine();
@@ -132,7 +193,7 @@ public abstract class NodeRepositoryFormatter<R extends NodeRepository<B>, B ext
 
     protected void renderReference(B node, NodeFormatterContext context, MarkdownWriter markdown) {
         if (!repositoryNodesDone) {
-            switch (getReferencePlacement()) {
+            switch (getTranslationReferencePlacement()) {
                 case AS_IS:
                     renderReferenceBlock(node, context, markdown);
                     if (node.getNext() == null || node.getNext().getClass() != node.getClass()) {

@@ -286,16 +286,16 @@ Document[0, 34]
     MacroClose[23, 33] nameOpen:[23, 26, "{{/"] name:[26, 31, "macro"] nameClose:[31, 33, "}}"]
 ````````````````````````````````
 
+not a valid attribute, now not a macro block
 
 ```````````````````````````````` example Macros: 15
 {{macro attribute=}}text{{/macro}}
 .
-{{macro attribute=}}text{{/macro}}
+<p>{{macro attribute=}}text{{/macro}}</p>
 .
 Document[0, 35]
-  MacroBlock[0, 34]
-    Macro[0, 34] open:[0, 2, "{{"] name:[2, 7, "macro"] attributes:[8, 32, "attribute=}}text{{/macro"] close:[32, 34, "}}"] isBlockMacro macroContent:[34, 34]
-      MacroAttribute[8, 32] attribute:[8, 17, "attribute"] separator:[17, 18, "="] value:[18, 32, "}}text{{/macro"]
+  Paragraph[0, 35]
+    Text[0, 34] chars:[0, 34, "{{mac … cro}}"]
 ````````````````````````````````
 
 

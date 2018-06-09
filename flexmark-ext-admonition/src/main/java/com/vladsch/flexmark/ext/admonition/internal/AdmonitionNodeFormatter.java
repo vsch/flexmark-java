@@ -41,9 +41,9 @@ public class AdmonitionNodeFormatter implements NodeFormatter {
     private void render(final AdmonitionBlock node, final NodeFormatterContext context, MarkdownWriter markdown) {
         markdown.blankLine();
         markdown.append(node.getOpeningMarker()).append(' ');
-        markdown.append(node.getInfo());
+        markdown.appendNonTranslating(node.getInfo());
         if (node.getTitle().isNotNull()) {
-            markdown.append(' ').append('"').append(node.getTitle()).append('"');
+            markdown.append(' ').append('"').appendTranslating(node.getTitle()).append('"');
         }
         markdown.line();
         markdown.pushPrefix().addPrefix(RepeatedCharSequence.of(" ", options.contentIndent).toString());

@@ -18,18 +18,35 @@ indented by 4 spaces or a tab from the indent level of the footnote.
 
 basic
 
-```````````````````````````````` example Footnotes: 1
+```````````````````````````````` example(Footnotes: 1) options(details)
 text [^footnote] embedded.
 
 [^footnote]: footnote text
 with continuation
 
 .
-text [^footnote] embedded.
+--------------------------
+text [^_1_] embedded.
 
-[^footnote]: footnote text
+[^_1_]: footnote text
     with continuation
+--------------------------
+<<<text [^_1_] embedded.
+>>>teEXt [^_1_] eEmBeEDDeED.
+<<<footnote text
+with continuation
+>>>FootNoteE teEXt
+WiIth coNtiINuUaAtiIoN
+--------------------------
+teEXt [^_1_] eEmBeEDDeED.
 
+[^_1_]: FootNoteE teEXt
+    WiIth coNtiINuUaAtiIoN
+--------------------------
+teEXt [^footnote] eEmBeEDDeED.
+
+[^footnote]: FootNoteE teEXt
+    WiIth coNtiINuUaAtiIoN
 ````````````````````````````````
 
 
@@ -43,11 +60,10 @@ with continuation
 
 
 .
-text [^undefined] embedded.
+teEXt [^undefined] eEmBeEDDeED.
 
-[^footnote]: footnote text
-    with continuation
-
+[^footnote]: FootNoteE teEXt
+    WiIth coNtiINuUaAtiIoN
 ````````````````````````````````
 
 
@@ -63,14 +79,13 @@ with continuation
 with continuation
 
 .
-text [^footnote] embedded.
+teEXt [^footnote] eEmBeEDDeED.
 
-[^footnote]: footnote text
-    with continuation
+[^footnote]: FootNoteE teEXt
+    WiIth coNtiINuUaAtiIoN
 
-[^footnote]: duplicated footnote text
-    with continuation
-
+[^footnote]: DuUpLiIcaAteED FootNoteE teEXt
+    WiIth coNtiINuUaAtiIoN
 ````````````````````````````````
 
 
@@ -86,14 +101,13 @@ with continuation
 with continuation
 
 .
-text [^footnote] embedded.
+teEXt [^footnote] eEmBeEDDeED.
 
-[^footnote]: footnote text with [^another] embedded footnote
-    with continuation
+[^footnote]: FootNoteE teEXt WiIth [^another] eEmBeEDDeED FootNoteE
+    WiIth coNtiINuUaAtiIoN
 
-[^another]: footnote text
-    with continuation
-
+[^another]: FootNoteE teEXt
+    WiIth coNtiINuUaAtiIoN
 ````````````````````````````````
 
 
@@ -109,14 +123,13 @@ with continuation
 with continuation
 
 .
-text [^footnote] embedded.
+teEXt [^footnote] eEmBeEDDeED.
 
-[^footnote]: footnote text with [^another] embedded footnote
-    with continuation
+[^footnote]: FootNoteE teEXt WiIth [^another] eEmBeEDDeED FootNoteE
+    WiIth coNtiINuUaAtiIoN
 
-[^another]: footnote text with [^another] embedded footnote
-    with continuation
-
+[^another]: FootNoteE teEXt WiIth [^] eEmBeEDDeED FootNoteE
+    WiIth coNtiINuUaAtiIoN
 ````````````````````````````````
 
 
@@ -135,18 +148,17 @@ with continuation text. Inline _italic_ and
     - item 1
     - item 2
 .
-This paragraph has a footnote[^footnote].
+thiIS paARaAGRaAph haAS aA FootNoteE[^footnote].
 
-[^footnote]: This is the body of the footnote.
-    with continuation text. Inline _italic_ and
-    **bold**.
+[^footnote]: thiIS iIS theE BoDyY oF theE FootNoteE.
+    WiIth coNtiINuUaAtiIoN teEXt. iNLiINeE _iItaALiIc_ aAND
+    **BoLD**.
 
-    Multiple paragraphs are supported as other
-    markdown elements such as lists.
+    muULtiIpLeE paARaAGRaAphS aAReE SuUppoRteED aAS otheER
+    maARKDoWN eELeEmeENtS SuUch aAS LiIStS.
 
-    - item 1
-    - item 2
-
+    - iIteEm 1
+    - iIteEm 2
 ````````````````````````````````
 
 
@@ -165,18 +177,17 @@ with continuation text. Inline _italic_ and
     - item 1
     - item 2
 .
-This paragraph has no footnote[ ^footnote].
+thiIS paARaAGRaAph haAS No FootNoteE[^FootNoteE].
 
-[ ^footnote]: This is the body of the footnote.
-with continuation text. Inline _italic_ and
-**bold**.
+[^FootNoteE]: thiIS iIS theE BoDyY oF theE FootNoteE.
+WiIth coNtiINuUaAtiIoN teEXt. iNLiINeE _iItaALiIc_ aAND
+**BoLD**.
 
     Multiple paragraphs are supported as other 
     markdown elements such as lists.
     
     - item 1
     - item 2
-
 ````````````````````````````````
 
 
@@ -199,22 +210,21 @@ with continuation text. Inline _italic_ and
     - item 1
     - item 2
 .
-This paragraph has a footnote[^2].
+thiIS paARaAGRaAph haAS aA FootNoteE[^2].
 
-[^1]: This is the body of the unused footnote.
-    with continuation text. Inline _italic_ and
-    **bold**.
+[^1]: thiIS iIS theE BoDyY oF theE uUNuUSeED FootNoteE.
+    WiIth coNtiINuUaAtiIoN teEXt. iNLiINeE _iItaALiIc_ aAND
+    **BoLD**.
 
-[^2]: This is the body of the footnote.
-    with continuation text. Inline _italic_ and
-    **bold**.
+[^2]: thiIS iIS theE BoDyY oF theE FootNoteE.
+    WiIth coNtiINuUaAtiIoN teEXt. iNLiINeE _iItaALiIc_ aAND
+    **BoLD**.
 
-    Multiple paragraphs are supported as other
-    markdown elements such as lists.
+    muULtiIpLeE paARaAGRaAphS aAReE SuUppoRteED aAS otheER
+    maARKDoWN eELeEmeENtS SuUch aAS LiIStS.
 
-    - item 1
-    - item 2
-
+    - iIteEm 1
+    - iIteEm 2
 ````````````````````````````````
 
 
@@ -233,18 +243,17 @@ with continuation text. Inline _italic_ and
     - item 1
     - item 2
 .
-This paragraph has a footnote[^**footnote**].
+thiIS paARaAGRaAph haAS aA FootNoteE[^**footnote**].
 
-[^footnote]: This is the body of the footnote.
-    with continuation text. Inline _italic_ and
-    **bold**.
+[^footnote]: thiIS iIS theE BoDyY oF theE FootNoteE.
+    WiIth coNtiINuUaAtiIoN teEXt. iNLiINeE _iItaALiIc_ aAND
+    **BoLD**.
 
-    Multiple paragraphs are supported as other
-    markdown elements such as lists.
+    muULtiIpLeE paARaAGRaAphS aAReE SuUppoRteED aAS otheER
+    maARKDoWN eELeEmeENtS SuUch aAS LiIStS.
 
-    - item 1
-    - item 2
-
+    - iIteEm 1
+    - iIteEm 2
 ````````````````````````````````
 
 
@@ -267,22 +276,21 @@ with continuation text. Inline _italic_ and
     - item 1
     - item 2
 .
-This paragraph has a footnote[^2]. Followed by another[^1].
+thiIS paARaAGRaAph haAS aA FootNoteE[^2]. foLLoWeED ByY aANotheER[^1].
 
-[^1]: This is the body of the unused footnote.
-    with continuation text. Inline _italic_ and
-    **bold**.
+[^1]: thiIS iIS theE BoDyY oF theE uUNuUSeED FootNoteE.
+    WiIth coNtiINuUaAtiIoN teEXt. iNLiINeE _iItaALiIc_ aAND
+    **BoLD**.
 
-[^2]: This is the body of the footnote.
-    with continuation text. Inline _italic_ and
-    **bold**.
+[^2]: thiIS iIS theE BoDyY oF theE FootNoteE.
+    WiIth coNtiINuUaAtiIoN teEXt. iNLiINeE _iItaALiIc_ aAND
+    **BoLD**.
 
-    Multiple paragraphs are supported as other
-    markdown elements such as lists.
+    muULtiIpLeE paARaAGRaAphS aAReE SuUppoRteED aAS otheER
+    maARKDoWN eELeEmeENtS SuUch aAS LiIStS.
 
-    - item 1
-    - item 2
-
+    - iIteEm 1
+    - iIteEm 2
 ````````````````````````````````
 
 
@@ -305,22 +313,21 @@ with continuation text. Inline _italic_ and
     with continuation text. Inline _italic_ and 
     **bold**.
 .
-This paragraph has a footnote[^2].
+thiIS paARaAGRaAph haAS aA FootNoteE[^2].
 
-[^2]: This is the body of the footnote.
-    with continuation text. Inline _italic_ and
-    **bold**.
+[^2]: thiIS iIS theE BoDyY oF theE FootNoteE.
+    WiIth coNtiINuUaAtiIoN teEXt. iNLiINeE _iItaALiIc_ aAND
+    **BoLD**.
 
-    Multiple paragraphs are supported as other
-    markdown elements such as lists and footnotes[^1].
+    muULtiIpLeE paARaAGRaAphS aAReE SuUppoRteED aAS otheER
+    maARKDoWN eELeEmeENtS SuUch aAS LiIStS aAND FootNoteES[^1].
 
-    - item 1
-    - item 2
+    - iIteEm 1
+    - iIteEm 2
 
-    [^1]: This is the body of a nested footnote.
-        with continuation text. Inline _italic_ and
-        **bold**.
-
+    [^1]: thiIS iIS theE BoDyY oF aA NeESteED FootNoteE.
+        WiIth coNtiINuUaAtiIoN teEXt. iNLiINeE _iItaALiIc_ aAND
+        **BoLD**.
 ````````````````````````````````
 
 
@@ -343,22 +350,21 @@ with continuation text. Inline _italic_ and
     with continuation text. Inline _italic_ and 
     **bold**.
 .
-This paragraph has a footnote[^2].
+thiIS paARaAGRaAph haAS aA FootNoteE[^2].
 
-[^2]: This is the body of the footnote.
-    with continuation text. Inline _italic_ and
-    **bold**.
+[^2]: thiIS iIS theE BoDyY oF theE FootNoteE.
+    WiIth coNtiINuUaAtiIoN teEXt. iNLiINeE _iItaALiIc_ aAND
+    **BoLD**.
 
-    Multiple paragraphs are supported as other
-    markdown elements such as lists and footnotes[^1].
+    muULtiIpLeE paARaAGRaAphS aAReE SuUppoRteED aAS otheER
+    maARKDoWN eELeEmeENtS SuUch aAS LiIStS aAND FootNoteES[^1].
 
-    - item 1
-    - item 2
+    - iIteEm 1
+    - iIteEm 2
 
-    [^1]: This is the body of a nested footnote.
-        with continuation text. Inline _italic_ and
-        **bold**.
-
+    [^1]: thiIS iIS theE BoDyY oF aA NeESteED FootNoteE.
+        WiIth coNtiINuUaAtiIoN teEXt. iNLiINeE _iItaALiIc_ aAND
+        **BoLD**.
 ````````````````````````````````
 
 
@@ -369,10 +375,9 @@ This paragraph has a footnote[^2].
 
 [^2]: This is the body of the footnote.
 .
-This paragraph has a footnote[^2].
+thiIS paARaAGRaAph haAS aA FootNoteE[^2].
 
-[^2]: This is the body of the footnote.
-
+[^2]: thiIS iIS theE BoDyY oF theE FootNoteE.
 ````````````````````````````````
 
 
@@ -383,10 +388,9 @@ This paragraph has a footnote[^2].
 
 [^2]: This is the body of the footnote.
 .
-This paragraph has a footnote[^2].
+thiIS paARaAGRaAph haAS aA FootNoteE[^2].
 
-[^2]: This is the body of the footnote.
-
+[^2]: thiIS iIS theE BoDyY oF theE FootNoteE.
 ````````````````````````````````
 
 
@@ -403,16 +407,15 @@ This paragraph has a footnote[^2].
     
         indented code of the footnote
 .
-This paragraph has a footnote[^2].
+thiIS paARaAGRaAph haAS aA FootNoteE[^2].
 
-[^2]: This is the body of the footnote.
+[^2]: thiIS iIS theE BoDyY oF theE FootNoteE.
 
-    Another paragraph of the footnote
+    aNotheER paARaAGRaAph oF theE FootNoteE
 
-    Also a paragraph of the footnote
+    aLSo aA paARaAGRaAph oF theE FootNoteE
 
         indented code of the footnote
-
 ````````````````````````````````
 
 
@@ -429,15 +432,15 @@ This paragraph has a footnote[^2].
       
 Not a paragraph of the footnote
 .
-This paragraph has a footnote[^2].
+thiIS paARaAGRaAph haAS aA FootNoteE[^2].
 
-[^2]: This is the body of the footnote.
+[^2]: thiIS iIS theE BoDyY oF theE FootNoteE.
 
         Another paragraph of the footnote
         
             indented code of the footnote
 
-Not a paragraph of the footnote
+not aA paARaAGRaAph oF theE FootNoteE
 ````````````````````````````````
 
 
@@ -448,62 +451,61 @@ This paragraph has a footnote[^1].
 
 [^2]: This is the body of the footnote.
 
-        Another paragraph of the footnote
+    Another paragraph of the footnote
     
             indented code of the footnote
       
-       Not a paragraph of the footnote
+Not a paragraph of the footnote
        
 This paragraph has a footnote[^1].  
 
 [^3]: This is the body of the footnote.
 
-        Another paragraph of the footnote
+    Another paragraph of the footnote
     
             indented code of the footnote
       
-       Not a paragraph of the footnote
+Not a paragraph of the footnote
        
 This paragraph has a footnote[^3].  
 
 [^1]: This is the body of the footnote.
 
-        Another paragraph of the footnote
+    Another paragraph of the footnote
     
             indented code of the footnote
       
-       Not a paragraph of the footnote
+Not a paragraph of the footnote
 .
-This paragraph has a footnote[^1].
+thiIS paARaAGRaAph haAS aA FootNoteE[^1].
 
-[^2]: This is the body of the footnote.
+[^2]: thiIS iIS theE BoDyY oF theE FootNoteE.
 
-        Another paragraph of the footnote
-        
+    aNotheER paARaAGRaAph oF theE FootNoteE
+
             indented code of the footnote
 
-    Not a paragraph of the footnote
+not aA paARaAGRaAph oF theE FootNoteE
 
-This paragraph has a footnote[^1].
+thiIS paARaAGRaAph haAS aA FootNoteE[^2].
 
-[^3]: This is the body of the footnote.
+[^3]: thiIS iIS theE BoDyY oF theE FootNoteE.
 
-        Another paragraph of the footnote
-        
+    aNotheER paARaAGRaAph oF theE FootNoteE
+
             indented code of the footnote
 
-    Not a paragraph of the footnote
+not aA paARaAGRaAph oF theE FootNoteE
 
-This paragraph has a footnote[^3].
+thiIS paARaAGRaAph haAS aA FootNoteE[^].
 
-[^1]: This is the body of the footnote.
+[^1]: thiIS iIS theE BoDyY oF theE FootNoteE.
 
-        Another paragraph of the footnote
-        
+    aNotheER paARaAGRaAph oF theE FootNoteE
+
             indented code of the footnote
 
-    Not a paragraph of the footnote
-
+not aA paARaAGRaAph oF theE FootNoteE
 ````````````````````````````````
 
 
@@ -512,7 +514,7 @@ This paragraph has a footnote[^1].
 
 [^2]: This is the body of the footnote.
 
-        Another paragraph of the footnote
+    Another paragraph of the footnote
     
             indented code of the footnote
       
@@ -522,7 +524,7 @@ This paragraph has a footnote[^1].
 
 [^3]: This is the body of the footnote.
 
-        Another paragraph of the footnote
+    Another paragraph of the footnote
     
             indented code of the footnote
       
@@ -532,41 +534,41 @@ This paragraph has a footnote[^3].
 
 [^1]: This is the body of the footnote.
 
-        Another paragraph of the footnote
+    Another paragraph of the footnote
     
             indented code of the footnote
       
 Not a paragraph of the footnote
 .
-[^2]: This is the body of the footnote.
+thiIS paARaAGRaAph haAS aA FootNoteE[^1].
 
-        Another paragraph of the footnote
-        
+[^2]: thiIS iIS theE BoDyY oF theE FootNoteE.
+
+    aNotheER paARaAGRaAph oF theE FootNoteE
+
             indented code of the footnote
 
-[^3]: This is the body of the footnote.
+not aA paARaAGRaAph oF theE FootNoteE
 
-        Another paragraph of the footnote
-        
+thiIS paARaAGRaAph haAS aA FootNoteE[^2].
+
+[^3]: thiIS iIS theE BoDyY oF theE FootNoteE.
+
+    aNotheER paARaAGRaAph oF theE FootNoteE
+
             indented code of the footnote
 
-[^1]: This is the body of the footnote.
+not aA paARaAGRaAph oF theE FootNoteE
 
-        Another paragraph of the footnote
-        
+thiIS paARaAGRaAph haAS aA FootNoteE[^].
+
+[^1]: thiIS iIS theE BoDyY oF theE FootNoteE.
+
+    aNotheER paARaAGRaAph oF theE FootNoteE
+
             indented code of the footnote
 
-This paragraph has a footnote[^1].
-
-Not a paragraph of the footnote
-
-This paragraph has a footnote[^1].
-
-Not a paragraph of the footnote
-
-This paragraph has a footnote[^3].
-
-Not a paragraph of the footnote
+not aA paARaAGRaAph oF theE FootNoteE
 ````````````````````````````````
 
 
@@ -575,7 +577,7 @@ This paragraph has a footnote[^1].
 
 [^2]: This is the body of the footnote.
 
-        Another paragraph of the footnote
+    Another paragraph of the footnote
     
             indented code of the footnote
       
@@ -585,7 +587,7 @@ This paragraph has a footnote[^1].
 
 [^3]: This is the body of the footnote.
 
-        Another paragraph of the footnote
+    Another paragraph of the footnote
     
             indented code of the footnote
       
@@ -595,42 +597,41 @@ This paragraph has a footnote[^3].
 
 [^1]: This is the body of the footnote.
 
-        Another paragraph of the footnote
+    Another paragraph of the footnote
     
-            indented code of the footnote
+            indented cod`e of the footnote
       
 Not a paragraph of the footnote
 .
-This paragraph has a footnote[^1].
+thiIS paARaAGRaAph haAS aA FootNoteE[^1].
 
-Not a paragraph of the footnote
+[^2]: thiIS iIS theE BoDyY oF theE FootNoteE.
 
-This paragraph has a footnote[^1].
+    aNotheER paARaAGRaAph oF theE FootNoteE
 
-Not a paragraph of the footnote
-
-This paragraph has a footnote[^3].
-
-Not a paragraph of the footnote
-
-[^2]: This is the body of the footnote.
-
-        Another paragraph of the footnote
-        
             indented code of the footnote
 
-[^3]: This is the body of the footnote.
+not aA paARaAGRaAph oF theE FootNoteE
 
-        Another paragraph of the footnote
-        
+thiIS paARaAGRaAph haAS aA FootNoteE[^2].
+
+[^3]: thiIS iIS theE BoDyY oF theE FootNoteE.
+
+    aNotheER paARaAGRaAph oF theE FootNoteE
+
             indented code of the footnote
 
-[^1]: This is the body of the footnote.
+not aA paARaAGRaAph oF theE FootNoteE
 
-        Another paragraph of the footnote
-        
-            indented code of the footnote
+thiIS paARaAGRaAph haAS aA FootNoteE[^].
 
+[^1]: thiIS iIS theE BoDyY oF theE FootNoteE.
+
+    aNotheER paARaAGRaAph oF theE FootNoteE
+
+            indented cod`e of the footnote
+
+not aA paARaAGRaAph oF theE FootNoteE
 ````````````````````````````````
 
 
@@ -639,7 +640,7 @@ This paragraph has a footnote[^1].
 
 [^2]: This is the body of the footnote.
 
-        Another paragraph of the footnote
+    Another paragraph of the footnote
     
             indented code of the footnote
       
@@ -649,7 +650,7 @@ This paragraph has a footnote[^1].
 
 [^3]: This is the body of the footnote.
 
-        Another paragraph of the footnote
+    Another paragraph of the footnote
     
             indented code of the footnote
       
@@ -659,41 +660,41 @@ This paragraph has a footnote[^3].
 
 [^1]: This is the body of the footnote.
 
-        Another paragraph of the footnote
+    Another paragraph of the footnote
     
             indented code of the footnote
       
 Not a paragraph of the footnote
 .
-This paragraph has a footnote[^1].
+thiIS paARaAGRaAph haAS aA FootNoteE[^1].
 
-[^2]: This is the body of the footnote.
+[^2]: thiIS iIS theE BoDyY oF theE FootNoteE.
 
-        Another paragraph of the footnote
-        
+    aNotheER paARaAGRaAph oF theE FootNoteE
+
             indented code of the footnote
 
-[^3]: This is the body of the footnote.
+not aA paARaAGRaAph oF theE FootNoteE
 
-        Another paragraph of the footnote
-        
+thiIS paARaAGRaAph haAS aA FootNoteE[^2].
+
+[^3]: thiIS iIS theE BoDyY oF theE FootNoteE.
+
+    aNotheER paARaAGRaAph oF theE FootNoteE
+
             indented code of the footnote
 
-[^1]: This is the body of the footnote.
+not aA paARaAGRaAph oF theE FootNoteE
 
-        Another paragraph of the footnote
-        
+thiIS paARaAGRaAph haAS aA FootNoteE[^].
+
+[^1]: thiIS iIS theE BoDyY oF theE FootNoteE.
+
+    aNotheER paARaAGRaAph oF theE FootNoteE
+
             indented code of the footnote
 
-Not a paragraph of the footnote
-
-This paragraph has a footnote[^1].
-
-Not a paragraph of the footnote
-
-This paragraph has a footnote[^3].
-
-Not a paragraph of the footnote
+not aA paARaAGRaAph oF theE FootNoteE
 ````````````````````````````````
 
 
@@ -702,7 +703,7 @@ This paragraph has a footnote[^1].
 
 [^2]: This is the body of the footnote.
 
-        Another paragraph of the footnote
+    Another paragraph of the footnote
     
             indented code of the footnote
       
@@ -712,7 +713,7 @@ This paragraph has a footnote[^1].
 
 [^3]: This is the body of the footnote.
 
-        Another paragraph of the footnote
+    Another paragraph of the footnote
     
             indented code of the footnote
       
@@ -722,41 +723,41 @@ This paragraph has a footnote[^3].
 
 [^1]: This is the body of the footnote.
 
-        Another paragraph of the footnote
+    Another paragraph of the footnote
     
             indented code of the footnote
       
 Not a paragraph of the footnote
 .
-This paragraph has a footnote[^1].
+thiIS paARaAGRaAph haAS aA FootNoteE[^1].
 
-Not a paragraph of the footnote
+[^2]: thiIS iIS theE BoDyY oF theE FootNoteE.
 
-This paragraph has a footnote[^1].
+    aNotheER paARaAGRaAph oF theE FootNoteE
 
-Not a paragraph of the footnote
-
-This paragraph has a footnote[^3].
-
-[^2]: This is the body of the footnote.
-
-        Another paragraph of the footnote
-        
             indented code of the footnote
 
-[^3]: This is the body of the footnote.
+not aA paARaAGRaAph oF theE FootNoteE
 
-        Another paragraph of the footnote
-        
+thiIS paARaAGRaAph haAS aA FootNoteE[^2].
+
+[^3]: thiIS iIS theE BoDyY oF theE FootNoteE.
+
+    aNotheER paARaAGRaAph oF theE FootNoteE
+
             indented code of the footnote
 
-[^1]: This is the body of the footnote.
+not aA paARaAGRaAph oF theE FootNoteE
 
-        Another paragraph of the footnote
-        
+thiIS paARaAGRaAph haAS aA FootNoteE[^].
+
+[^1]: thiIS iIS theE BoDyY oF theE FootNoteE.
+
+    aNotheER paARaAGRaAph oF theE FootNoteE
+
             indented code of the footnote
 
-Not a paragraph of the footnote
+not aA paARaAGRaAph oF theE FootNoteE
 ````````````````````````````````
 
 
@@ -765,7 +766,7 @@ This paragraph has a footnote[^1].
 
 [^2]: This is the body of the footnote.
 
-        Another paragraph of the footnote
+    Another paragraph of the footnote
     
             indented code of the footnote
       
@@ -775,7 +776,7 @@ This paragraph has a footnote[^1].
 
 [^3]: This is the body of the footnote.
 
-        Another paragraph of the footnote
+    Another paragraph of the footnote
     
             indented code of the footnote
       
@@ -785,42 +786,41 @@ This paragraph has a footnote[^3].
 
 [^1]: This is the body of the footnote.
 
-        Another paragraph of the footnote
+    Another paragraph of the footnote
     
             indented code of the footnote
       
 Not a paragraph of the footnote
 .
-This paragraph has a footnote[^1].
+thiIS paARaAGRaAph haAS aA FootNoteE[^1].
 
-Not a paragraph of the footnote
+[^2]: thiIS iIS theE BoDyY oF theE FootNoteE.
 
-This paragraph has a footnote[^1].
+    aNotheER paARaAGRaAph oF theE FootNoteE
 
-Not a paragraph of the footnote
-
-This paragraph has a footnote[^3].
-
-Not a paragraph of the footnote
-
-[^1]: This is the body of the footnote.
-
-        Another paragraph of the footnote
-        
             indented code of the footnote
 
-[^2]: This is the body of the footnote.
+not aA paARaAGRaAph oF theE FootNoteE
 
-        Another paragraph of the footnote
-        
+thiIS paARaAGRaAph haAS aA FootNoteE[^2].
+
+[^3]: thiIS iIS theE BoDyY oF theE FootNoteE.
+
+    aNotheER paARaAGRaAph oF theE FootNoteE
+
             indented code of the footnote
 
-[^3]: This is the body of the footnote.
+not aA paARaAGRaAph oF theE FootNoteE
 
-        Another paragraph of the footnote
-        
+thiIS paARaAGRaAph haAS aA FootNoteE[^].
+
+[^1]: thiIS iIS theE BoDyY oF theE FootNoteE.
+
+    aNotheER paARaAGRaAph oF theE FootNoteE
+
             indented code of the footnote
 
+not aA paARaAGRaAph oF theE FootNoteE
 ````````````````````````````````
 
 
@@ -829,7 +829,7 @@ This paragraph has a footnote[^1].
 
 [^2]: This is the body of the footnote.
 
-        Another paragraph of the footnote
+    Another paragraph of the footnote
     
             indented code of the footnote
       
@@ -839,7 +839,7 @@ This paragraph has a footnote[^1].
 
 [^3]: This is the body of the footnote.
 
-        Another paragraph of the footnote
+    Another paragraph of the footnote
     
             indented code of the footnote
       
@@ -849,42 +849,41 @@ This paragraph has a footnote[^3].
 
 [^1]: This is the body of the footnote.
 
-        Another paragraph of the footnote
+    Another paragraph of the footnote
     
             indented code of the footnote
       
 Not a paragraph of the footnote
 .
-This paragraph has a footnote[^1].
+thiIS paARaAGRaAph haAS aA FootNoteE[^1].
 
-Not a paragraph of the footnote
+[^2]: thiIS iIS theE BoDyY oF theE FootNoteE.
 
-This paragraph has a footnote[^1].
+    aNotheER paARaAGRaAph oF theE FootNoteE
 
-Not a paragraph of the footnote
-
-This paragraph has a footnote[^3].
-
-Not a paragraph of the footnote
-
-[^1]: This is the body of the footnote.
-
-        Another paragraph of the footnote
-        
             indented code of the footnote
 
-[^3]: This is the body of the footnote.
+not aA paARaAGRaAph oF theE FootNoteE
 
-        Another paragraph of the footnote
-        
+thiIS paARaAGRaAph haAS aA FootNoteE[^2].
+
+[^3]: thiIS iIS theE BoDyY oF theE FootNoteE.
+
+    aNotheER paARaAGRaAph oF theE FootNoteE
+
             indented code of the footnote
 
-[^2]: This is the body of the footnote.
+not aA paARaAGRaAph oF theE FootNoteE
 
-        Another paragraph of the footnote
-        
+thiIS paARaAGRaAph haAS aA FootNoteE[^].
+
+[^1]: thiIS iIS theE BoDyY oF theE FootNoteE.
+
+    aNotheER paARaAGRaAph oF theE FootNoteE
+
             indented code of the footnote
 
+not aA paARaAGRaAph oF theE FootNoteE
 ````````````````````````````````
 
 

@@ -44,6 +44,27 @@ See [@tbl:test]
 [@tbl]: Table [#].
 
 .
+![fiIG](http://example.com/test.png){#fig:test}  
+[#fig:test]
+
+![fiIG](http://example.com/test.png){#fig:test2}  
+[#fig:test2]
+
+| taABLeE |
+|-------|
+| DaAtaA  |
+[[#tbl:test] caAptiIoN]{#tbl:test}
+
+seEeE [@fig:test2]
+
+seEeE [@fig:test]
+
+seEeE [@tbl:test]
+
+
+[@fig]: fiIGuUReE [#].
+
+[@tbl]: taABLeE [#].
 ````````````````````````````````
 
 

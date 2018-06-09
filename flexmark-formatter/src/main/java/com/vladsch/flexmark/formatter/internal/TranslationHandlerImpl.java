@@ -8,7 +8,7 @@ import com.vladsch.flexmark.formatter.TranslationHandler;
 import com.vladsch.flexmark.formatter.TranslationPlaceholderGenerator;
 import com.vladsch.flexmark.html.renderer.HtmlIdGenerator;
 import com.vladsch.flexmark.html.renderer.HtmlIdGeneratorFactory;
-import com.vladsch.flexmark.util.Consumer;
+import com.vladsch.flexmark.util.Pair;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.MutableDataSet;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
@@ -48,7 +48,6 @@ public class TranslationHandlerImpl implements TranslationHandler {
     private int myNonTranslatingSpanId = 0;
     private RenderPurpose myRenderPurpose;
     private MarkdownWriter myWriter;
-    private int myInTranslationSpan;
     private HtmlIdGenerator myIdGenerator;
     private TranslationPlaceholderGenerator myPlaceholderGenerator;
 
@@ -73,16 +72,6 @@ public class TranslationHandlerImpl implements TranslationHandler {
     @Override
     public MutableDataSet getTranslationStore() {
         return myTranslationStore;
-    }
-
-    @Override
-    public void customPlaceholderFormat(final TranslationPlaceholderGenerator generator, final TranslatingSpanRender render) {
-        if (myRenderPurpose != TRANSLATED_SPANS) {
-            TranslationPlaceholderGenerator savedGenerator = myPlaceholderGenerator;
-            myPlaceholderGenerator = generator;
-            render.render(myWriter.getContext(), myWriter);
-            myPlaceholderGenerator = savedGenerator;
-        }
     }
 
     @Override
@@ -173,14 +162,9 @@ public class TranslationHandlerImpl implements TranslationHandler {
 
     @Override
     public void setRenderPurpose(final RenderPurpose renderPurpose) {
-        if (myInTranslationSpan > 0) {
-            throw new IllegalStateException("setRendererPurpose changing with nested translationSpan");
-        }
-
         myAnchorId = 0;
         myTranslatingSpanId = 0;
         myPlaceholderId = 0;
-        myInTranslationSpan = 0;
         myRenderPurpose = renderPurpose;
         myNonTranslatingSpanId = 0;
     }
@@ -234,139 +218,124 @@ public class TranslationHandlerImpl implements TranslationHandler {
     }
 
     @Override
+    public void customPlaceholderFormat(final TranslationPlaceholderGenerator generator, final TranslatingSpanRender render) {
+        if (myRenderPurpose != TRANSLATED_SPANS) {
+            TranslationPlaceholderGenerator savedGenerator = myPlaceholderGenerator;
+            myPlaceholderGenerator = generator;
+            render.render(myWriter.getContext(), myWriter);
+            myPlaceholderGenerator = savedGenerator;
+        }
+    }
+
+    @Override
     public void translatingSpan(TranslatingSpanRender render) {
         translatingRefTargetSpan(null, render);
     }
 
+    private String renderInSubContext(TranslatingSpanRender render, boolean copyToMain) {
+        StringBuilder span = new StringBuilder();
+        MarkdownWriter savedMarkdown = myWriter;
+        final NodeFormatterContext subContext = myWriter.getContext().getSubContext(span);
+        final MarkdownWriter writer = subContext.getMarkdown();
+        myWriter = writer;
+
+        render.render(subContext, writer);
+
+        int pendingEOL = writer.getPendingEOL();
+        writer.flush(-1);
+        String spanText = writer.getText();
+
+        myWriter = savedMarkdown;
+        if (copyToMain) {
+            myWriter.append(spanText);
+            if (pendingEOL == 1) {
+                myWriter.line();
+            } else {
+                myWriter.blankLine(pendingEOL - 1);
+            }
+        }
+        return spanText;
+    }
+
     @Override
     public void translatingRefTargetSpan(Node target, TranslatingSpanRender render) {
-        if (myInTranslationSpan == 0) {
-            switch (myRenderPurpose) {
-                case TRANSLATION_SPANS: {
-                    myInTranslationSpan++;
-                    StringBuilder span = new StringBuilder();
-                    MarkdownWriter savedMarkdown = myWriter;
-                    final NodeFormatterContext subContext = myWriter.getContext().getSubContext(span);
-                    final MarkdownWriter writer = subContext.getMarkdown();
-                    myWriter = writer;
-
-                    render.render(subContext, writer);
-
-                    int pendingEOL = writer.getPendingEOL();
-                    writer.flush(-1);
-                    String spanText = writer.getText();
-
-                    if (target != null) {
-                        final String id = myIdGenerator.getId(target);
-                        myOriginalRefTargets.put(id, myTranslatingSpans.size());
-                    }
-
-                    myTranslatingSpans.add(spanText);
-
-                    myWriter = savedMarkdown;
-                    myWriter.append(spanText);
-                    myWriter.blankLine(pendingEOL);
-
-                    myInTranslationSpan--;
-                    return;
+        switch (myRenderPurpose) {
+            case TRANSLATION_SPANS: {
+                String spanText = renderInSubContext(render, true);
+                if (target != null) {
+                    final String id = myIdGenerator.getId(target);
+                    myOriginalRefTargets.put(id, myTranslatingSpans.size());
                 }
 
-                case TRANSLATED_SPANS: {
-                    // we output translated text instead of render
-                    StringBuilder span = new StringBuilder();
-                    final NodeFormatterContext subContext = myWriter.getContext().getSubContext(span);
-                    final MarkdownWriter writer = subContext.getMarkdown();
-
-                    render.render(subContext, writer);
-
-                    final String translated = myTranslatedSpans.get(myTranslatingSpanId);
-
-                    if (target != null) {
-                        final String id = myIdGenerator.getId(translated);
-                        myTranslatedRefTargets.put(myTranslatingSpanId, id);
-                    }
-
-                    myTranslatingSpanId++;
-
-                    myWriter.append(translated);
-                    return;
-                }
-
-                case TRANSLATED:
-                    if (target != null) {
-                        final String id = myIdGenerator.getId(target);
-                        myTranslatedRefTargets.put(myTranslatingSpanId, id);
-                    }
-                    myTranslatingSpanId++;
-
-                case FORMAT:
-                default:
-                    render.render(myWriter.getContext(), myWriter);
-                    return;
+                myTranslatingSpans.add(spanText);
+                return;
             }
-        } else {
-            // already in context, just render
-            render.render(myWriter.getContext(), myWriter);
+
+            case TRANSLATED_SPANS: {
+                // we output translated text instead of render
+                String spanText = renderInSubContext(render, false);
+
+                final String translated = myTranslatedSpans.get(myTranslatingSpanId);
+
+                if (target != null) {
+                    final String id = myIdGenerator.getId(translated);
+                    myTranslatedRefTargets.put(myTranslatingSpanId, id);
+                }
+
+                myTranslatingSpanId++;
+
+                myWriter.append(translated);
+                return;
+            }
+
+            case TRANSLATED:
+                if (target != null) {
+                    final String id = myIdGenerator.getId(target);
+                    myTranslatedRefTargets.put(myTranslatingSpanId, id);
+                }
+                myTranslatingSpanId++;
+                String spanText = renderInSubContext(render, true);
+                return;
+
+            case FORMAT:
+            default:
+                render.render(myWriter.getContext(), myWriter);
         }
-        //throw new IllegalStateException("Nested translatingSpan calls");
     }
 
     public void nonTranslatingSpan(TranslatingSpanRender render) {
-            switch (myRenderPurpose) {
-                case TRANSLATION_SPANS: {
-                    myInTranslationSpan++;
-                    StringBuilder span = new StringBuilder();
-                    MarkdownWriter savedMarkdown = myWriter;
-                    final NodeFormatterContext subContext = myWriter.getContext().getSubContext(span);
-                    final MarkdownWriter writer = subContext.getMarkdown();
-                    myWriter = writer;
+        switch (myRenderPurpose) {
+            case TRANSLATION_SPANS: {
+                String spanText = renderInSubContext(render, false);
 
-                    render.render(subContext, writer);
+                myNonTranslatingSpans.add(spanText);
+                myNonTranslatingSpanId++;
 
-                    int pendingEOL = writer.getPendingEOL();
-                    writer.flush(-1);
-                    String spanText = writer.getText();
-
-                    myNonTranslatingSpans.add(spanText);
-                    myNonTranslatingSpanId++;
-
-                    String replacedTextId = getPlaceholderId(myFormatterOptions.translationIdFormat, myNonTranslatingSpanId, null, null, null);
-
-                    myWriter = savedMarkdown;
-                    myWriter.append(replacedTextId);
-                    myWriter.blankLine(pendingEOL);
-
-                    myInTranslationSpan--;
-                    return;
-                }
-
-                case TRANSLATED_SPANS: {
-                    // we output translated text instead of render
-                    myInTranslationSpan++;
-                    StringBuilder span = new StringBuilder();
-                    final NodeFormatterContext subContext = myWriter.getContext().getSubContext(span);
-                    final MarkdownWriter writer = subContext.getMarkdown();
-
-                    render.render(subContext, writer);
-
-                    final String translated = myNonTranslatingSpans.get(myNonTranslatingSpanId);
-                    myNonTranslatingSpanId++;
-
-                    myWriter.append(translated);
-                    myInTranslationSpan--;
-                    return;
-                }
-
-                case TRANSLATED:
-                    render.render(myWriter.getContext(), myWriter);
-                    return;
-
-                case FORMAT:
-                default:
-                    render.render(myWriter.getContext(), myWriter);
-                    return;
+                String replacedTextId = getPlaceholderId(myFormatterOptions.translationIdFormat, myNonTranslatingSpanId, null, null, null);
+                myWriter.append(replacedTextId);
+                return;
             }
-        //throw new IllegalStateException("Nested translatingSpan calls");
+
+            case TRANSLATED_SPANS: {
+                // we output translated text instead of render
+                String spanText = renderInSubContext(render, false);
+                final String translated = myNonTranslatingSpans.get(myNonTranslatingSpanId);
+                myNonTranslatingSpanId++;
+                myWriter.append(translated);
+                return;
+            }
+
+            case TRANSLATED: {
+                // we output translated text instead of render
+                String spanText = renderInSubContext(render, true);
+                myNonTranslatingSpanId++;
+                return;
+            }
+
+            case FORMAT:
+            default:
+                render.render(myWriter.getContext(), myWriter);
+        }
     }
 
     public String getPlaceholderId(String format, int placeholderId, final CharSequence prefix, final CharSequence suffix, final CharSequence suffix2) {
@@ -388,7 +357,7 @@ public class TranslationHandlerImpl implements TranslationHandler {
     }
 
     @Override
-    public CharSequence transformNonTranslating(final CharSequence prefix, final CharSequence nonTranslatingText, final CharSequence suffix, final CharSequence suffix2, final Consumer<String> placeholderConsumer) {
+    public CharSequence transformNonTranslating(final CharSequence prefix, final CharSequence nonTranslatingText, final CharSequence suffix, final CharSequence suffix2) {
         switch (myRenderPurpose) {
             case TRANSLATION_SPANS:
                 // need to transfer trailing EOLs to id

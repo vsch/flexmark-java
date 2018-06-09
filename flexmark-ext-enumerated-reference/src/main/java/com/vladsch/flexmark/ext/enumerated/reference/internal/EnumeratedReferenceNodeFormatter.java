@@ -1,15 +1,16 @@
 package com.vladsch.flexmark.ext.enumerated.reference.internal;
 
+import com.vladsch.flexmark.ext.attributes.internal.AttributesNodeFormatter;
 import com.vladsch.flexmark.ext.enumerated.reference.EnumeratedReferenceBlock;
 import com.vladsch.flexmark.ext.enumerated.reference.EnumeratedReferenceExtension;
 import com.vladsch.flexmark.ext.enumerated.reference.EnumeratedReferenceLink;
 import com.vladsch.flexmark.ext.enumerated.reference.EnumeratedReferenceText;
 import com.vladsch.flexmark.formatter.CustomNodeFormatter;
-import com.vladsch.flexmark.formatter.TranslatingSpanRender;
 import com.vladsch.flexmark.formatter.internal.*;
 import com.vladsch.flexmark.util.format.options.ElementPlacement;
 import com.vladsch.flexmark.util.format.options.ElementPlacementSort;
 import com.vladsch.flexmark.util.options.DataHolder;
+import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -19,7 +20,7 @@ public class EnumeratedReferenceNodeFormatter extends NodeRepositoryFormatter<En
     private final EnumeratedReferenceFormatOptions options;
 
     public EnumeratedReferenceNodeFormatter(DataHolder options) {
-        super(options);
+        super(options, null);
         this.options = new EnumeratedReferenceFormatOptions(options);
     }
 
@@ -84,32 +85,44 @@ public class EnumeratedReferenceNodeFormatter extends NodeRepositoryFormatter<En
         renderReference(node, context, markdown);
     }
 
+    private static void renderReferenceText(BasedSequence text, NodeFormatterContext context, MarkdownWriter markdown) {
+        if (!text.isEmpty()) {
+            BasedSequence valueChars = text;
+            int pos = valueChars.indexOf(':');
+            String category;
+            String id = null;
+            if (pos == -1) {
+                category = text.toString();
+            } else {
+                category = valueChars.subSequence(0, pos).toString();
+                id = valueChars.subSequence(pos + 1).toString();
+            }
+
+            String encoded = AttributesNodeFormatter.getEncodedIdAttribute(category, id, context, markdown);
+            markdown.append(encoded);
+        }
+    }
+
     private void render(final EnumeratedReferenceText node, NodeFormatterContext context, final MarkdownWriter markdown) {
         markdown.append("[#");
-        if (node.hasChildren()) {
-            // TODO: split them up into ref:id
-            // ref has to match ref of format not just adhoc must be preserved so it can be resolved
-            // id has to be the same as the attribute otherwise it will not be resolved. The same has to be done for attributes xxx:xxx the first
-            // part has to be resolved to the same thing
-            context.nonTranslatingSpan(new TranslatingSpanRender() {
-                @Override
-                public void render(final NodeFormatterContext context, final MarkdownWriter markdown) {
-                    context.renderChildren(node);
-                }
-            });
+        if (context.isTransformingText()) {
+            renderReferenceText(node.getText(), context, markdown);
+        } else {
+            context.renderChildren(node);
         }
         markdown.append("]");
     }
 
     private void render(final EnumeratedReferenceLink node, NodeFormatterContext context, final MarkdownWriter markdown) {
         markdown.append("[@");
-        if (node.hasChildren()) {
-            context.nonTranslatingSpan(new TranslatingSpanRender() {
-                @Override
-                public void render(final NodeFormatterContext context, final MarkdownWriter markdown) {
-                    context.renderChildren(node);
-                }
-            });
+        if (context.isTransformingText()) {
+            if (context.isTransformingText()) {
+                renderReferenceText(node.getText(), context, markdown);
+            } else {
+                context.renderChildren(node);
+            }
+        } else {
+            context.renderChildren(node);
         }
         markdown.append("]");
     }

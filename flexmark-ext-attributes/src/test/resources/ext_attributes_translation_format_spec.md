@@ -1005,6 +1005,29 @@ teEXt{attribute=value}
 ````````````````````````````````
 
 
+## Original preserved
+
+```````````````````````````````` example Original preserved: 1
+text {id=value   }
+.
+teEXt{id=value}
+````````````````````````````````
+
+
+```````````````````````````````` example Original preserved: 2
+text {id="value"   }
+.
+teEXt{id="value"}
+````````````````````````````````
+
+
+```````````````````````````````` example Original preserved: 3
+text {#value }
+.
+teEXt{#value}
+````````````````````````````````
+
+
 ## Source Position Attribute
 
 ```````````````````````````````` example(Source Position Attribute: 1) options(src-pos, no-text-attributes)

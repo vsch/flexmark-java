@@ -1,0 +1,18 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="ComboAbbreviationTranslationFormatterSpecTest" type="JUnit" factoryName="JUnit" folderName="Translator" singleton="true" nameIsGenerated="true">
+    <module name="flexmark-ext-abbreviation" />
+    <extension name="coverage">
+      <pattern>
+        <option name="PATTERN" value="com.vladsch.flexmark.ext.abbreviation.*" />
+        <option name="ENABLED" value="true" />
+      </pattern>
+    </extension>
+    <option name="PACKAGE_NAME" value="com.vladsch.flexmark.ext.abbreviation" />
+    <option name="MAIN_CLASS_NAME" value="com.vladsch.flexmark.ext.abbreviation.ComboAbbreviationTranslationFormatterSpecTest" />
+    <option name="METHOD_NAME" value="" />
+    <option name="PARAMETERS" value="" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

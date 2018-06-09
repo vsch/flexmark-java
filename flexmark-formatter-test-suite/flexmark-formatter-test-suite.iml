@@ -48,5 +48,8 @@
     <orderEntry type="module" module-name="flexmark-ext-gfm-issues" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-ext-gfm-users" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-pdf-converter" scope="TEST" />
+    <orderEntry type="module" module-name="flexmark-ext-admonition" scope="TEST" />
+    <orderEntry type="module" module-name="flexmark-ext-attributes" scope="TEST" />
+    <orderEntry type="module" module-name="flexmark-ext-enumerated-reference" scope="TEST" />
   </component>
 </module>

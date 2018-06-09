@@ -4,21 +4,27 @@ import com.vladsch.flexmark.ext.abbreviation.Abbreviation;
 import com.vladsch.flexmark.ext.abbreviation.AbbreviationBlock;
 import com.vladsch.flexmark.ext.abbreviation.AbbreviationExtension;
 import com.vladsch.flexmark.formatter.CustomNodeFormatter;
+import com.vladsch.flexmark.formatter.TranslatingSpanRender;
+import com.vladsch.flexmark.formatter.internal.Formatter;
 import com.vladsch.flexmark.formatter.internal.*;
 import com.vladsch.flexmark.util.format.options.ElementPlacement;
 import com.vladsch.flexmark.util.format.options.ElementPlacementSort;
 import com.vladsch.flexmark.util.options.DataHolder;
+import com.vladsch.flexmark.util.options.DataKey;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class AbbreviationNodeFormatter extends NodeRepositoryFormatter<AbbreviationRepository, AbbreviationBlock, Abbreviation> {
+    public static final DataKey<Map<String, String>> ABBREVIATION_TRANSLATION_MAP = new DataKey<Map<String, String>>("ABBREVIATION_TRANSLATION_MAP", new HashMap<String, String>()); // assign attributes to text if previous is not a space
     private final FormatOptions options;
+    private final boolean transformUnderscores;
 
     public AbbreviationNodeFormatter(DataHolder options) {
-        super(options);
+        super(options, ABBREVIATION_TRANSLATION_MAP);
         this.options = new FormatOptions(options);
+
+        String transformedId = String.format(Formatter.TRANSLATION_ID_FORMAT.getFrom(options), 1);
+        transformUnderscores = transformedId.startsWith("_") && transformedId.endsWith("_");
     }
 
     @Override
@@ -37,9 +43,22 @@ public class AbbreviationNodeFormatter extends NodeRepositoryFormatter<Abbreviat
     }
 
     @Override
+    public String modifyTransformedReference(String transformedText, NodeFormatterContext context) {
+        if (transformUnderscores && context.isTransformingText()) {
+            if (transformedText.startsWith("-") && transformedText.endsWith("-")) {
+                transformedText = "_" + transformedText.substring(1, transformedText.length() - 1) + "_";
+            } else if (transformedText.startsWith("_") && transformedText.endsWith("_")) {
+                transformedText = "-" + transformedText.substring(1, transformedText.length() - 1) + "-";
+            }
+        }
+
+        return transformedText;
+    }
+
+    @Override
     public void renderReferenceBlock(final AbbreviationBlock node, final NodeFormatterContext context, final MarkdownWriter markdown) {
-        markdown.append(node.getOpeningMarker()).append(node.getText()).append(node.getClosingMarker()).append(' ');
-        markdown.append(node.getAbbreviation()).line();
+        markdown.append(node.getOpeningMarker()).append(transformReferenceId(node.getText().toString(), context)).append(node.getClosingMarker()).append(' ');
+        markdown.appendTranslating(node.getAbbreviation()).line();
     }
 
     @Override
@@ -74,7 +93,12 @@ public class AbbreviationNodeFormatter extends NodeRepositoryFormatter<Abbreviat
     }
 
     private void render(Abbreviation node, NodeFormatterContext context, MarkdownWriter markdown) {
-        markdown.append(node.getChars());
+        if (context.isTransformingText()) {
+            final String referenceId = transformReferenceId(node.getChars().toString(), context);
+            markdown.append(referenceId);
+        } else {
+            markdown.append(node.getChars());
+        }
     }
 
     public static class Factory implements NodeFormatterFactory {

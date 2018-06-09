@@ -192,7 +192,7 @@ flexmark-java
       to HTML offset for the element(s). This is needed to allow synchronization with source
       when using an attribute to hold the source information is not an option.
 
-* [ ] Add: Latex extension 
+* [ ] Add: Latex extension
 
 * Change: complete parser profiles for variations within a family
   [Markdown Parser Emulation](MarkdownProcessorsEmulation.md).
@@ -261,9 +261,15 @@ flexmark-java
 
 &nbsp;</details>
 
-Next: 0.34.0 
+Next: 0.34.0
 ------------
 
+* Add: changed regex for parsing unquoted HTML attribute value to exclude `{}`.
+* Add: translation formatting awareness to: abbreviation, admonition, attributes, emoji,
+  enumerated reference footnotes and tables extensions
+* Add: translation API sample:
+  [TranslationSample.java](https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/samples/TranslationSample.java)
+* Fix: `AttributesExtension` incorrectly parsed consecutive attributes as a single element
 * Add: `TranslationHandlerFactory` to allow format options to be passed for custom handler
   creation.
 * Add: `RenderPurpose` arg to `Formatter.translationRender` eliminating the need for separate
@@ -287,17 +293,20 @@ Next: 0.34.0
 
 0.32.22
 -------
-                                 
+
 * Fix: #229, gfm-tasklist extension - add state class to list item
   * Add: `TaskListExtension.ITEM_DONE_CLASS` and `TaskListExtension.ITEM_NOT_DONE_CLASS` `li`
-    tag classes to use for done and not done items. 
+    tag classes to use for done and not done items.
   * Add: `TaskListExtension.TIGHT_ITEM_CLASS` to complement the
-    `TaskListExtension.LOOSE_ITEM_CLASS` to replace generically named `TaskListExtension.ITEM_CLASS`
+    `TaskListExtension.LOOSE_ITEM_CLASS` to replace generically named
+    `TaskListExtension.ITEM_CLASS`
   * Add: depreciation of `TaskListExtension.ITEM_CLASS` in favour of
     `TaskListExtension.TIGHT_ITEM_CLASS`
-* Fix: merge #231, Fix two small bugs in ext-toc, thanks to [@BlueBoxWare](https://github.com/BlueBoxWare)
+* Fix: merge #231, Fix two small bugs in ext-toc, thanks to
+  [@BlueBoxWare](https://github.com/BlueBoxWare)
 * Add: `TaskListAttributeProviderSample` to `flexmark-java-samples` module.
-* Add: `GitHubParsingSample` to `flexmark-java-samples` module to show GitHub compatible parser setup.
+* Add: `GitHubParsingSample` to `flexmark-java-samples` module to show GitHub compatible parser
+  setup.
 * Add: `ParserEmulationProfile.GITHUB` to reflect current GitHub profile, effectively it is
   `ParserEmulationProfile.COMMONMARK_0_28` with GitHub compatible id generator settings.
 * Fix: #221, XSS: Javascript execution through links, add `HtmlRenderer.SUPPRESSED_LINKS`
@@ -305,10 +314,10 @@ Next: 0.34.0
   occurs before the link is resolved using a link resolver. Therefore any link matching will be
   suppressed before it is resolved. Likewise, a link resolver returning a suppressed link will
   not be suppressed since this is up to the custom link resolver to handle.
-  
+
   Suppressed links will render only the child nodes, effectively `[Something
   New](javascript:alert(1))` will render as if it was `Something New`.
-  
+
   Link suppression based on URL prefixes does not apply to HTML inline or block elements. Use
   HTML suppression options for this.
 * Add: `AutolinkExtension.IGNORE_LINKS` default `""`, a regex expression to match link text
@@ -331,7 +340,8 @@ Next: 0.34.0
 
 * Fix: change all javadoc/overview.html to be generated from javadoc/overview.md files.
 * Fix: admonition.css remove non-existent `horiz-align` property.
-* Add: [HtmlToMarkdownSample.java](https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/samples/HtmlToMarkdownSample.java)
+* Add:
+  [HtmlToMarkdownSample.java](https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/samples/HtmlToMarkdownSample.java)
 * Add: `HtmlRenderer.HEADER_ID_GENERATOR_NON_DASH_CHARS`, default `""`. Any characters in the
   string will be preserved and passed through to the heading ID.
 * Fix: `ParserEmulationProfile.GITHUB_DOC` now sets

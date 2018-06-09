@@ -13,6 +13,8 @@ import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.DataKey;
 import com.vladsch.flexmark.util.options.MutableDataHolder;
 
+import java.util.Map;
+
 /**
  * Extension for attributes
  * <p>

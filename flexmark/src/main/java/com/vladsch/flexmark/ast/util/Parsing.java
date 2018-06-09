@@ -163,7 +163,7 @@ public class Parsing {
         this.LINE_END = Pattern.compile("^[ \t]*(?:" + EOL + "|$)");
         this.TAGNAME = "[A-Za-z" + ADDITIONAL_CHARS + "][A-Za-z0-9" + ADDITIONAL_CHARS + "-]*";
         this.ATTRIBUTENAME = "[a-zA-Z" + ADDITIONAL_CHARS + "_:][a-zA-Z0-9" + ADDITIONAL_CHARS + ":._-]*";
-        this.UNQUOTEDVALUE = "[^\"'=<>`" + EXCLUDED_0_TO_SPACE + "]+";
+        this.UNQUOTEDVALUE = "[^\"'=<>{}`" + EXCLUDED_0_TO_SPACE + "]+";
         this.SINGLEQUOTEDVALUE = "'[^']*'";
         this.DOUBLEQUOTEDVALUE = "\"[^\"]*\"";
         this.ATTRIBUTEVALUE = "(?:" + UNQUOTEDVALUE + "|" + SINGLEQUOTEDVALUE

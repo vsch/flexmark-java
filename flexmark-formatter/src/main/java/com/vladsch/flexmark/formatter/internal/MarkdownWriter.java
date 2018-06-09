@@ -71,7 +71,7 @@ public class MarkdownWriter implements FormattingAppendable {
 
     public MarkdownWriter appendNonTranslating(final CharSequence prefix, final CharSequence csq, final CharSequence suffix, final CharSequence suffix2) {
         if (context.isTransformingText()) {
-            append(context.transformNonTranslating(prefix, csq, suffix, suffix2, null));
+            append(context.transformNonTranslating(prefix, csq, suffix, suffix2));
         } else {
             append(csq);
         }
@@ -80,7 +80,7 @@ public class MarkdownWriter implements FormattingAppendable {
 
     public MarkdownWriter appendNonTranslating(final CharSequence prefix, final CharSequence csq, final CharSequence suffix, final CharSequence suffix2, Consumer<String> placeholderConsumer) {
         if (context.isTransformingText()) {
-            append(context.transformNonTranslating(prefix, csq, suffix, suffix2, placeholderConsumer));
+            append(context.transformNonTranslating(prefix, csq, suffix, suffix2));
         } else {
             append(csq);
         }

@@ -14,7 +14,7 @@ import org.junit.runners.Parameterized;
 import java.util.*;
 
 public class ComboAdmonitionSpecTest extends ComboSpecTestCase {
-    private static final String SPEC_RESOURCE = "/admonition_ast_spec.md";
+    private static final String SPEC_RESOURCE = "/ext_admonition_ast_spec.md";
     private static final DataHolder OPTIONS = new MutableDataSet()
             .set(HtmlRenderer.INDENT_SIZE, 2)
             //.set(HtmlRenderer.PERCENT_ENCODE_URLS, true)

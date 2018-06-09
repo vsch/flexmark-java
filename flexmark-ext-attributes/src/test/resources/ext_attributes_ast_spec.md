@@ -380,7 +380,7 @@ Cond 2.2 Some text **bold text**{.red}{.blue}
 Cond 2.3 Some text **bold text**{.red}
 .
 <p class="red">Cond 2.1 Some text <strong>bold text</strong></p>
-<p>Cond 2.2 Some text <strong class="red}{.blue">bold text</strong></p>
+<p>Cond 2.2 Some text <strong class="red blue">bold text</strong></p>
 <p>Cond 2.3 Some text <strong class="red">bold text</strong></p>
 .
 Document[0, 126]
@@ -394,8 +394,10 @@ Document[0, 126]
     Text[41, 60] chars:[41, 60, "Cond  … text "]
     StrongEmphasis[60, 73] textOpen:[60, 62, "**"] text:[62, 71, "bold text"] textClose:[71, 73, "**"]
       Text[62, 71] chars:[62, 71, "bold text"]
-    AttributesNode[73, 86] textOpen:[73, 74, "{"] text:[74, 85, ".red}{.blue"] textClose:[85, 86, "}"]
-      AttributeNode[74, 85] name:[74, 75, "."] value:[75, 85, "red}{.blue"] isImplicit isClass
+    AttributesNode[73, 79] textOpen:[73, 74, "{"] text:[74, 78, ".red"] textClose:[78, 79, "}"]
+      AttributeNode[74, 78] name:[74, 75, "."] value:[75, 78, "red"] isImplicit isClass
+    AttributesNode[79, 86] textOpen:[79, 80, "{"] text:[80, 85, ".blue"] textClose:[85, 86, "}"]
+      AttributeNode[80, 85] name:[80, 81, "."] value:[81, 85, "blue"] isImplicit isClass
   Paragraph[88, 126]
     Text[88, 107] chars:[88, 107, "Cond  … text "]
     StrongEmphasis[107, 120] textOpen:[107, 109, "**"] text:[109, 118, "bold text"] textClose:[118, 120, "**"]
@@ -413,7 +415,7 @@ Cond 2.2 Some text **bold text**{.red}{.blue}
 Cond 2.3 Some text **bold text**{.red}
 .
 <p class="red">Cond 2.1 Some text <strong>bold text</strong></p>
-<p>Cond 2.2 Some text <strong class="red}{.blue">bold text</strong></p>
+<p>Cond 2.2 Some text <strong class="red blue">bold text</strong></p>
 <p>Cond 2.3 Some text <strong class="red">bold text</strong></p>
 .
 Document[0, 127]
@@ -427,8 +429,10 @@ Document[0, 127]
     Text[41, 60] chars:[41, 60, "Cond  … text "]
     StrongEmphasis[60, 73] textOpen:[60, 62, "**"] text:[62, 71, "bold text"] textClose:[71, 73, "**"]
       Text[62, 71] chars:[62, 71, "bold text"]
-    AttributesNode[73, 86] textOpen:[73, 74, "{"] text:[74, 85, ".red}{.blue"] textClose:[85, 86, "}"]
-      AttributeNode[74, 85] name:[74, 75, "."] value:[75, 85, "red}{.blue"] isImplicit isClass
+    AttributesNode[73, 79] textOpen:[73, 74, "{"] text:[74, 78, ".red"] textClose:[78, 79, "}"]
+      AttributeNode[74, 78] name:[74, 75, "."] value:[75, 78, "red"] isImplicit isClass
+    AttributesNode[79, 86] textOpen:[79, 80, "{"] text:[80, 85, ".blue"] textClose:[85, 86, "}"]
+      AttributeNode[80, 85] name:[80, 81, "."] value:[81, 85, "blue"] isImplicit isClass
   Paragraph[88, 127]
     Text[88, 107] chars:[88, 107, "Cond  … text "]
     StrongEmphasis[107, 120] textOpen:[107, 109, "**"] text:[109, 118, "bold text"] textClose:[118, 120, "**"]
@@ -1780,6 +1784,24 @@ Document[0, 26]
     Text[0, 4] chars:[0, 4, "text"]
     AttributesNode[5, 25] textOpen:[5, 6, "{"] text:[6, 21, "attribute=value"] textClose:[24, 25, "}"]
       AttributeNode[6, 21] name:[6, 15, "attribute"] sep:[15, 16, "="] value:[16, 21, "value"]
+````````````````````````````````
+
+
+## Translator Encoding
+
+```````````````````````````````` example Translator Encoding: 1
+text {#_1_}{#_2_}
+.
+<p><span id="_2_">text </span></p>
+.
+Document[0, 18]
+  Paragraph[0, 18]
+    TextBase[0, 5] chars:[0, 5, "text "]
+      Text[0, 5] chars:[0, 5, "text "]
+    AttributesNode[5, 11] textOpen:[5, 6, "{"] text:[6, 10, "#_1_"] textClose:[10, 11, "}"]
+      AttributeNode[6, 10] name:[6, 7, "#"] value:[7, 10, "_1_"] isImplicit isId
+    AttributesNode[11, 17] textOpen:[11, 12, "{"] text:[12, 16, "#_2_"] textClose:[16, 17, "}"]
+      AttributeNode[12, 16] name:[12, 13, "#"] value:[13, 16, "_2_"] isImplicit isId
 ````````````````````````````````
 
 

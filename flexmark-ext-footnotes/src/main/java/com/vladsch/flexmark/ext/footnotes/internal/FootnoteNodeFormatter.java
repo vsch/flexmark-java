@@ -1,23 +1,27 @@
 package com.vladsch.flexmark.ext.footnotes.internal;
 
+import com.vladsch.flexmark.ast.Document;
 import com.vladsch.flexmark.ext.footnotes.Footnote;
 import com.vladsch.flexmark.ext.footnotes.FootnoteBlock;
 import com.vladsch.flexmark.ext.footnotes.FootnoteExtension;
 import com.vladsch.flexmark.formatter.CustomNodeFormatter;
+import com.vladsch.flexmark.formatter.TranslatingSpanRender;
 import com.vladsch.flexmark.formatter.internal.*;
 import com.vladsch.flexmark.util.format.options.ElementPlacement;
 import com.vladsch.flexmark.util.format.options.ElementPlacementSort;
 import com.vladsch.flexmark.util.options.DataHolder;
+import com.vladsch.flexmark.util.options.DataKey;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
+
+import static com.vladsch.flexmark.formatter.RenderPurpose.TRANSLATION_SPANS;
 
 public class FootnoteNodeFormatter extends NodeRepositoryFormatter<FootnoteRepository, FootnoteBlock, Footnote> {
+    public static final DataKey<Map<String, String>> FOOTNOTE_TRANSLATION_MAP = new DataKey<Map<String, String>>("FOOTNOTE_TRANSLATION_MAP", new HashMap<String, String>()); // assign attributes to text if previous is not a space
     private final FootnoteFormatOptions options;
 
     public FootnoteNodeFormatter(DataHolder options) {
-        super(options);
+        super(options, FOOTNOTE_TRANSLATION_MAP);
         this.options = new FootnoteFormatOptions(options);
     }
 
@@ -38,7 +42,9 @@ public class FootnoteNodeFormatter extends NodeRepositoryFormatter<FootnoteRepos
 
     @Override
     public void renderReferenceBlock(final FootnoteBlock node, final NodeFormatterContext context, final MarkdownWriter markdown) {
-        markdown.blankLine().append("[^").append(node.getText()).append("]: ");
+        markdown.blankLine().append("[^");
+        markdown.append(transformReferenceId(node.getText().toString(), context));
+        markdown.append("]: ");
         markdown.pushPrefix().addPrefix("    ");
         context.renderChildren(node);
         markdown.popPrefix();
@@ -76,9 +82,19 @@ public class FootnoteNodeFormatter extends NodeRepositoryFormatter<FootnoteRepos
         renderReference(node, context, markdown);
     }
 
-    private void render(Footnote node, NodeFormatterContext context, final MarkdownWriter markdown) {
+    private void render(final Footnote node, final NodeFormatterContext context, final MarkdownWriter markdown) {
         markdown.append("[^");
-        context.renderChildren(node);
+        if (context.isTransformingText()) {
+            final String referenceId = transformReferenceId(node.getText().toString(), context);
+            context.nonTranslatingSpan(new TranslatingSpanRender() {
+                @Override
+                public void render(final NodeFormatterContext context, final MarkdownWriter markdown) {
+                    markdown.append(referenceId);
+                }
+            });
+        } else {
+            markdown.append(node.getText());
+        }
         markdown.append("]");
     }
 

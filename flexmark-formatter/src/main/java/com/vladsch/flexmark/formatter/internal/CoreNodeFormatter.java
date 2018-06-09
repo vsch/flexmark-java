@@ -41,7 +41,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
     MutableDataHolder myTranslationStore;
 
     public CoreNodeFormatter(DataHolder options) {
-        super(options);
+        super(options, null);
         this.formatterOptions = new FormatterOptions(options);
         this.listOptions = ListOptions.getFrom(options);
         blankLines = 0;
@@ -835,6 +835,26 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
         }
     }
 
+    static final TranslationPlaceholderGenerator htmlEntityPlaceholderGenerator = new TranslationPlaceholderGenerator() {
+        @Override
+        public String getPlaceholder(final int index) {
+            return String.format("&#%d;", index);
+        }
+    };
+
+    private void render(final HtmlEntity node, NodeFormatterContext context, final MarkdownWriter markdown) {
+        if (context.getRenderPurpose() == FORMAT) {
+            markdown.append(node.getChars());
+        } else {
+            context.customPlaceholderFormat(htmlEntityPlaceholderGenerator, new TranslatingSpanRender() {
+                @Override
+                public void render(final NodeFormatterContext context, final MarkdownWriter markdown) {
+                    markdown.appendNonTranslating(node.getChars());
+                }
+            });
+        }
+    }
+
     private void render(Text node, NodeFormatterContext context, MarkdownWriter markdown) {
         markdown.append(node.getChars());
     }
@@ -935,26 +955,6 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
 
     private void render(Reference node, NodeFormatterContext context, MarkdownWriter markdown) {
         renderReference(node, context, markdown);
-    }
-
-    static final TranslationPlaceholderGenerator htmlEntityPlaceholderGenerator = new TranslationPlaceholderGenerator() {
-        @Override
-        public String getPlaceholder(final int index) {
-            return String.format("&#%d;", index);
-        }
-    };
-
-    private void render(final HtmlEntity node, NodeFormatterContext context, final MarkdownWriter markdown) {
-        if (context.getRenderPurpose() == FORMAT) {
-            markdown.append(node.getChars());
-        } else {
-            context.customPlaceholderFormat(htmlEntityPlaceholderGenerator, new TranslatingSpanRender() {
-                @Override
-                public void render(final NodeFormatterContext context, final MarkdownWriter markdown) {
-                    markdown.appendNonTranslating(node.getChars());
-                }
-            });
-        }
     }
 
     public static final DataKey<Boolean> UNWRAPPED_AUTO_LINKS = new DataKey<>("UNWRAPPED_AUTO_LINKS", false);
