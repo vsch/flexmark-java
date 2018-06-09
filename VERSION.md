@@ -264,6 +264,7 @@ flexmark-java
 Next: 0.34.0
 ------------
 
+* Fix: table formatter for translations to insert a space if the translated text is empty. 
 * Add: changed regex for parsing unquoted HTML attribute value to exclude `{}`.
 * Add: translation formatting awareness to: abbreviation, admonition, attributes, emoji,
   enumerated reference footnotes and tables extensions

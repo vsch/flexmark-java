@@ -1980,3 +1980,44 @@ Not aA LiISt iIteEm
 ````````````````````````````````
 
 
+```````````````````````````````` example(Empty List Items: 7) options(IGNORE)
+1. 
+    ##### Overriding the Web Interface Translations
+
+    If you want to override the Translation Manager web interface translations or add another
+    locale you will need to publish the language files to your project by executing:
+
+    ```bash
+    $ php artisan vendor:publish --provider="Vsch\TranslationManager\ManagerServiceProvider" --tag=lang
+    ```
+
+    This will copy the translations to your project and allow you to view/edit them in the
+    translation manager web interface.
+.
+1. 
+    ##### oVeERRiIDiING theE weEB iNteERFaAceE tRaANSLaAtiIoNS
+    
+    iF yYouU WaANt to oVeERRiIDeE theE tRaANSLaAtiIoN maANaAGeER WeEB iINteERFaAceE tRaANSLaAtiIoNS oR aADD aANotheER
+    LocaALeE yYouU WiILL NeEeED to puUBLiISh theE LaANGuUaAGeE FiILeES to yYouUR pRoJeEct ByY eEXeEcuUtiING:
+    
+    ```bash
+    $ php artisan vendor:publish --provider="Vsch\TranslationManager\ManagerServiceProvider" --tag=lang
+    ```
+    
+    thiIS WiILL copyY theE tRaANSLaAtiIoNS to yYouUR pRoJeEct aAND aALLoW yYouU to ViIeEW/eEDiIt theEm iIN theE
+    tRaANSLaAtiIoN maANaAGeER WeEB iINteERFaAceE.
+````````````````````````````````
+
+
+should discard all non-alpha
+
+```````````````````````````````` example(Empty List Items: 8) options(details, IGNORE)
+![Alt](/url)
+
+this is an image 
+![Alt](/url)
+following text 
+.
+````````````````````````````````
+
+

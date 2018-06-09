@@ -168,14 +168,17 @@ public class TableNodeFormatter implements NodeFormatter {
 
             if (!myTable.isSeparator() && options.spaceAroundPipes && !node.getText().startsWith(" ")) markdown.append(' ');
 
+            final String[] childText = new String[] { "" };
+
             context.translatingSpan(new TranslatingSpanRender() {
                 @Override
                 public void render(final NodeFormatterContext context, final MarkdownWriter writer) {
                     context.renderChildren(node);
+                    childText[0] = writer.getText();
                 }
             });
 
-            if (!myTable.isSeparator() && options.spaceAroundPipes && !node.getText().endsWith(" ")) markdown.append(' ');
+            if (!myTable.isSeparator() && options.spaceAroundPipes && !childText[0].endsWith(" ")) markdown.append(' ');
             if (node.getNext() == null) {
                 if (options.leadTrailPipes && node.getClosingMarker().isEmpty()) markdown.append('|');
                 else markdown.append(node.getClosingMarker());

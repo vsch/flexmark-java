@@ -81,7 +81,7 @@ public class Formatter implements IRender {
     // used for translation phases of rendering
     public static final DataKey<String> TRANSLATION_ID_FORMAT = new DataKey<String>("TRANSLATION_ID_FORMAT", "_%d_");
     public static final DataKey<String> TRANSLATION_HTML_BLOCK_PREFIX = new DataKey<String>("TRANSLATION_HTML_BLOCK_PREFIX", "_");
-    public static final DataKey<String> TRANSLATION_EXCLUDE_PATTERN = new DataKey<String>("TRANSLATION_EXCLUDE_PATTERN", "^[\\[\\](){}<>]*_{1,2}\\d+_[\\[\\](){}<>]*$");
+    public static final DataKey<String> TRANSLATION_EXCLUDE_PATTERN = new DataKey<String>("TRANSLATION_EXCLUDE_PATTERN", "^[^\\p{Alpha}]*$");
     public static final DataKey<String> TRANSLATION_HTML_BLOCK_TAG_PATTERN = Parser.TRANSLATION_HTML_BLOCK_TAG_PATTERN;
     public static final DataKey<String> TRANSLATION_HTML_INLINE_TAG_PATTERN = Parser.TRANSLATION_HTML_INLINE_TAG_PATTERN;
 
