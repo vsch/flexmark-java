@@ -2,6 +2,7 @@ package com.vladsch.flexmark.ext.attributes;
 
 import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.ext.attributes.internal.*;
+import com.vladsch.flexmark.formatter.internal.Formatter;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.html.RendererBuilder;
 import com.vladsch.flexmark.html.RendererExtension;
@@ -26,6 +27,7 @@ import com.vladsch.flexmark.util.options.MutableDataHolder;
 public class AttributesExtension implements Parser.ParserExtension
         , RendererExtension
         , HtmlRenderer.HtmlRendererExtension
+        , Formatter.FormatterExtension
         //, Parser.ReferenceHoldingExtension
 {
     public static final DataKey<NodeAttributeRepository> NODE_ATTRIBUTES = new DataKey<NodeAttributeRepository>("NODE_ATTRIBUTES", new DataValueFactory<NodeAttributeRepository>() {
@@ -51,6 +53,11 @@ public class AttributesExtension implements Parser.ParserExtension
     public void extend(Parser.Builder parserBuilder) {
         parserBuilder.postProcessorFactory(new AttributesNodePostProcessor.Factory());
         parserBuilder.customInlineParserExtensionFactory(new AttributesInlineParserExtension.Factory());
+    }
+
+    @Override
+    public void extend(final Formatter.Builder builder) {
+        builder.nodeFormatterFactory(new AttributesNodeFormatter.Factory());
     }
 
     @Override

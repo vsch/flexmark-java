@@ -317,6 +317,17 @@ public class FormattingAppendableImpl implements FormattingAppendable {
     }
 
     private void appendImpl(final char c) throws IOException {
+        if (haveOptions(PASS_THROUGH)) {
+            while (myPendingEOL-- > 0) {
+                myLineCount++;
+                myAppendable.append('\n');
+            }
+            myModCountOfLastEOL = myModCount++;
+            myPendingEOL = 0;
+            myAppendable.append(c);
+            return;
+        }
+
         if (myPreFormattedNesting > 0) {
             setOffsetBefore(myAppendable.getLength());
 
@@ -352,6 +363,17 @@ public class FormattingAppendableImpl implements FormattingAppendable {
     }
 
     private void appendImpl(final CharSequence csq, final int start, final int end) throws IOException {
+        if (haveOptions(PASS_THROUGH)) {
+            while (myPendingEOL-- > 0) {
+                myLineCount++;
+                myAppendable.append('\n');
+            }
+            myModCountOfLastEOL = myModCount++;
+            myPendingEOL = 0;
+            myAppendable.append(csq, start, end);
+            return;
+        }
+
         int lastPos = start;
         BasedSequence seq = BasedSequenceImpl.of(csq);
 

@@ -75,6 +75,7 @@ public interface FormattingAppendable extends Appendable {
     int COLLAPSE_WHITESPACE = 0x0002;
     int SUPPRESS_TRAILING_WHITESPACE = 0x0004;
     int PREFIX_AFTER_PENDING_EOL = 0x0008; // prefix takes effect after pending EOLs are output
+    int PASS_THROUGH = 0x0010;      // for translator, just pass everything through to appendable
     int FORMAT_ALL = CONVERT_TABS | COLLAPSE_WHITESPACE | SUPPRESS_TRAILING_WHITESPACE;
 
     /**

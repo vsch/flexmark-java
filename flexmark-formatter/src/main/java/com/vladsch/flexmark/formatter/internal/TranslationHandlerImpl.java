@@ -5,6 +5,7 @@ import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.formatter.RenderPurpose;
 import com.vladsch.flexmark.formatter.TranslatingSpanRender;
 import com.vladsch.flexmark.formatter.TranslationHandler;
+import com.vladsch.flexmark.formatter.TranslationPlaceholderGenerator;
 import com.vladsch.flexmark.html.renderer.HtmlIdGenerator;
 import com.vladsch.flexmark.html.renderer.HtmlIdGeneratorFactory;
 import com.vladsch.flexmark.util.Consumer;
@@ -13,9 +14,13 @@ import com.vladsch.flexmark.util.options.MutableDataSet;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.BasedSequenceImpl;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.regex.Pattern;
 
+import static com.vladsch.flexmark.formatter.RenderPurpose.TRANSLATED_SPANS;
 import static java.lang.Character.isWhitespace;
 
 public class TranslationHandlerImpl implements TranslationHandler {
@@ -25,6 +30,7 @@ public class TranslationHandlerImpl implements TranslationHandler {
     final HashMap<String, String> myTranslatedTexts;          // map placeholder to translated text which is to be translated separately from its context and was replaced with placeholder for main context translation
     final ArrayList<String> myTranslatingPlaceholders;        // list of placeholders to index in translating and translated texts
     final ArrayList<String> myTranslatingSpans;
+    final ArrayList<String> myNonTranslatingSpans;
     final ArrayList<String> myTranslatedSpans;
     final HtmlIdGeneratorFactory myIdGeneratorFactory;
     final Pattern myPlaceHolderMarkerPattern;
@@ -39,10 +45,12 @@ public class TranslationHandlerImpl implements TranslationHandler {
     private int myPlaceholderId = 0;
     private int myAnchorId = 0;
     private int myTranslatingSpanId = 0;
+    private int myNonTranslatingSpanId = 0;
     private RenderPurpose myRenderPurpose;
     private MarkdownWriter myWriter;
     private int myInTranslationSpan;
     private HtmlIdGenerator myIdGenerator;
+    private TranslationPlaceholderGenerator myPlaceholderGenerator;
 
     public TranslationHandlerImpl(final DataHolder options, final FormatterOptions formatterOptions, HtmlIdGeneratorFactory idGeneratorFactory) {
         myFormatterOptions = formatterOptions;
@@ -57,6 +65,7 @@ public class TranslationHandlerImpl implements TranslationHandler {
         myTranslatingSpans = new ArrayList<>();
         myTranslatedSpans = new ArrayList<>();
         myTranslatingPlaceholders = new ArrayList<>();
+        myNonTranslatingSpans = new ArrayList<>();
         myPlaceHolderMarkerPattern = Pattern.compile(formatterOptions.translationExcludePattern); //Pattern.compile("^[\\[\\](){}<>]*_{1,2}\\d+_[\\[\\](){}<>]*$");
         myTranslationStore = new MutableDataSet();
     }
@@ -64,6 +73,16 @@ public class TranslationHandlerImpl implements TranslationHandler {
     @Override
     public MutableDataSet getTranslationStore() {
         return myTranslationStore;
+    }
+
+    @Override
+    public void customPlaceholderFormat(final TranslationPlaceholderGenerator generator, final TranslatingSpanRender render) {
+        if (myRenderPurpose != TRANSLATED_SPANS) {
+            TranslationPlaceholderGenerator savedGenerator = myPlaceholderGenerator;
+            myPlaceholderGenerator = generator;
+            render.render(myWriter.getContext(), myWriter);
+            myPlaceholderGenerator = savedGenerator;
+        }
     }
 
     @Override
@@ -90,7 +109,7 @@ public class TranslationHandlerImpl implements TranslationHandler {
         HashMap<String, Integer> repeatedTranslatingIndices = new HashMap<>();
 
         // collect all the translating snippets first
-        for (Map.Entry<String, String> entry : myTranslatingTexts.entrySet()) {
+        for (Map.Entry<String, String> entry: myTranslatingTexts.entrySet()) {
             if (!isBlank(entry.getValue()) && !myPlaceHolderMarkerPattern.matcher(entry.getValue()).matches()) {
                 // see if it is repeating
                 if (!repeatedTranslatingIndices.containsKey(entry.getValue())) {
@@ -102,7 +121,7 @@ public class TranslationHandlerImpl implements TranslationHandler {
             }
         }
 
-        for (CharSequence text : myTranslatingSpans) {
+        for (CharSequence text: myTranslatingSpans) {
             if (!isBlank(text) && !myPlaceHolderMarkerPattern.matcher(text).matches()) {
                 translatingSnippets.add(text.toString());
             }
@@ -124,7 +143,7 @@ public class TranslationHandlerImpl implements TranslationHandler {
         final int placeholderSize = myTranslatingPlaceholders.size();
         HashMap<String, Integer> repeatedTranslatingIndices = new HashMap<>();
 
-        for (Map.Entry<String, String> entry : myTranslatingTexts.entrySet()) {
+        for (Map.Entry<String, String> entry: myTranslatingTexts.entrySet()) {
             if (!isBlank(entry.getValue()) && !myPlaceHolderMarkerPattern.matcher(entry.getValue()).matches()) {
                 final Integer index = repeatedTranslatingIndices.get(entry.getValue());
                 if (index == null) {
@@ -141,7 +160,7 @@ public class TranslationHandlerImpl implements TranslationHandler {
             }
         }
 
-        for (CharSequence text : myTranslatingSpans) {
+        for (CharSequence text: myTranslatingSpans) {
             if (!isBlank(text) && !myPlaceHolderMarkerPattern.matcher(text).matches()) {
                 myTranslatedSpans.add(translatedTexts.get(i).toString());
                 i++;
@@ -163,6 +182,7 @@ public class TranslationHandlerImpl implements TranslationHandler {
         myPlaceholderId = 0;
         myInTranslationSpan = 0;
         myRenderPurpose = renderPurpose;
+        myNonTranslatingSpanId = 0;
     }
 
     @Override
@@ -190,7 +210,7 @@ public class TranslationHandlerImpl implements TranslationHandler {
                 final String placeholderId = String.format(myFormatterOptions.translationIdFormat, ++myAnchorId);
                 final String resolvedPageRef = myNonTranslatingTexts.get(pageRef.toString());
 
-                if (resolvedPageRef  != null && resolvedPageRef.length() == 0) {
+                if (resolvedPageRef != null && resolvedPageRef.length() == 0) {
                     // self reference, add it to the list
                     String refId = myNonTranslatingTexts.get(placeholderId);
                     if (refId != null) {
@@ -225,8 +245,10 @@ public class TranslationHandlerImpl implements TranslationHandler {
                 case TRANSLATION_SPANS: {
                     myInTranslationSpan++;
                     StringBuilder span = new StringBuilder();
+                    MarkdownWriter savedMarkdown = myWriter;
                     final NodeFormatterContext subContext = myWriter.getContext().getSubContext(span);
                     final MarkdownWriter writer = subContext.getMarkdown();
+                    myWriter = writer;
 
                     render.render(subContext, writer);
 
@@ -240,6 +262,8 @@ public class TranslationHandlerImpl implements TranslationHandler {
                     }
 
                     myTranslatingSpans.add(spanText);
+
+                    myWriter = savedMarkdown;
                     myWriter.append(spanText);
                     myWriter.blankLine(pendingEOL);
 
@@ -264,9 +288,6 @@ public class TranslationHandlerImpl implements TranslationHandler {
 
                     myTranslatingSpanId++;
 
-                    //myWriter.setSuppressOutput(true);
-                    //render.render(myWriter.getContext(), myWriter);
-                    //myWriter.setSuppressOutput(false);
                     myWriter.append(translated);
                     return;
                 }
@@ -283,12 +304,73 @@ public class TranslationHandlerImpl implements TranslationHandler {
                     render.render(myWriter.getContext(), myWriter);
                     return;
             }
+        } else {
+            // already in context, just render
+            render.render(myWriter.getContext(), myWriter);
         }
-        throw new IllegalStateException("Nested translatingSpan calls");
+        //throw new IllegalStateException("Nested translatingSpan calls");
     }
 
-    public static String getPlaceholderId(String format, int placeholderId, final CharSequence prefix, final CharSequence suffix, final CharSequence suffix2) {
-        String replacedTextId = String.format(format, placeholderId);
+    public void nonTranslatingSpan(TranslatingSpanRender render) {
+            switch (myRenderPurpose) {
+                case TRANSLATION_SPANS: {
+                    myInTranslationSpan++;
+                    StringBuilder span = new StringBuilder();
+                    MarkdownWriter savedMarkdown = myWriter;
+                    final NodeFormatterContext subContext = myWriter.getContext().getSubContext(span);
+                    final MarkdownWriter writer = subContext.getMarkdown();
+                    myWriter = writer;
+
+                    render.render(subContext, writer);
+
+                    int pendingEOL = writer.getPendingEOL();
+                    writer.flush(-1);
+                    String spanText = writer.getText();
+
+                    myNonTranslatingSpans.add(spanText);
+                    myNonTranslatingSpanId++;
+
+                    String replacedTextId = getPlaceholderId(myFormatterOptions.translationIdFormat, myNonTranslatingSpanId, null, null, null);
+
+                    myWriter = savedMarkdown;
+                    myWriter.append(replacedTextId);
+                    myWriter.blankLine(pendingEOL);
+
+                    myInTranslationSpan--;
+                    return;
+                }
+
+                case TRANSLATED_SPANS: {
+                    // we output translated text instead of render
+                    myInTranslationSpan++;
+                    StringBuilder span = new StringBuilder();
+                    final NodeFormatterContext subContext = myWriter.getContext().getSubContext(span);
+                    final MarkdownWriter writer = subContext.getMarkdown();
+
+                    render.render(subContext, writer);
+
+                    final String translated = myNonTranslatingSpans.get(myNonTranslatingSpanId);
+                    myNonTranslatingSpanId++;
+
+                    myWriter.append(translated);
+                    myInTranslationSpan--;
+                    return;
+                }
+
+                case TRANSLATED:
+                    render.render(myWriter.getContext(), myWriter);
+                    return;
+
+                case FORMAT:
+                default:
+                    render.render(myWriter.getContext(), myWriter);
+                    return;
+            }
+        //throw new IllegalStateException("Nested translatingSpan calls");
+    }
+
+    public String getPlaceholderId(String format, int placeholderId, final CharSequence prefix, final CharSequence suffix, final CharSequence suffix2) {
+        String replacedTextId = myPlaceholderGenerator != null ? myPlaceholderGenerator.getPlaceholder(placeholderId) : String.format(format, placeholderId);
         if (prefix == null && suffix == null && suffix2 == null) return replacedTextId;
 
         return addPrefixSuffix(replacedTextId, prefix, suffix, suffix2);

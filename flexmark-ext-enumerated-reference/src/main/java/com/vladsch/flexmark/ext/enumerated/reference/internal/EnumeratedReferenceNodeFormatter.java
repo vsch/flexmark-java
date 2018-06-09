@@ -5,6 +5,7 @@ import com.vladsch.flexmark.ext.enumerated.reference.EnumeratedReferenceExtensio
 import com.vladsch.flexmark.ext.enumerated.reference.EnumeratedReferenceLink;
 import com.vladsch.flexmark.ext.enumerated.reference.EnumeratedReferenceText;
 import com.vladsch.flexmark.formatter.CustomNodeFormatter;
+import com.vladsch.flexmark.formatter.TranslatingSpanRender;
 import com.vladsch.flexmark.formatter.internal.*;
 import com.vladsch.flexmark.util.format.options.ElementPlacement;
 import com.vladsch.flexmark.util.format.options.ElementPlacementSort;
@@ -39,7 +40,7 @@ public class EnumeratedReferenceNodeFormatter extends NodeRepositoryFormatter<En
 
     @Override
     public void renderReferenceBlock(final EnumeratedReferenceBlock node, final NodeFormatterContext context, final MarkdownWriter markdown) {
-        markdown.blankLine().append("[@").append(node.getText()).append("]: ");
+        markdown.blankLine().append("[@").appendNonTranslating(node.getText()).append("]: ");
         markdown.pushPrefix().addPrefix("    ");
         context.renderChildren(node);
         markdown.popPrefix();
@@ -83,15 +84,33 @@ public class EnumeratedReferenceNodeFormatter extends NodeRepositoryFormatter<En
         renderReference(node, context, markdown);
     }
 
-    private void render(EnumeratedReferenceText node, NodeFormatterContext context, final MarkdownWriter markdown) {
+    private void render(final EnumeratedReferenceText node, NodeFormatterContext context, final MarkdownWriter markdown) {
         markdown.append("[#");
-        context.renderChildren(node);
+        if (node.hasChildren()) {
+            // TODO: split them up into ref:id
+            // ref has to match ref of format not just adhoc must be preserved so it can be resolved
+            // id has to be the same as the attribute otherwise it will not be resolved. The same has to be done for attributes xxx:xxx the first
+            // part has to be resolved to the same thing
+            context.nonTranslatingSpan(new TranslatingSpanRender() {
+                @Override
+                public void render(final NodeFormatterContext context, final MarkdownWriter markdown) {
+                    context.renderChildren(node);
+                }
+            });
+        }
         markdown.append("]");
     }
 
-    private void render(EnumeratedReferenceLink node, NodeFormatterContext context, final MarkdownWriter markdown) {
+    private void render(final EnumeratedReferenceLink node, NodeFormatterContext context, final MarkdownWriter markdown) {
         markdown.append("[@");
-        context.renderChildren(node);
+        if (node.hasChildren()) {
+            context.nonTranslatingSpan(new TranslatingSpanRender() {
+                @Override
+                public void render(final NodeFormatterContext context, final MarkdownWriter markdown) {
+                    context.renderChildren(node);
+                }
+            });
+        }
         markdown.append("]");
     }
 

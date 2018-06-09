@@ -151,9 +151,79 @@ teESt <http://example.com>
 ````````````````````````````````
 
 
-default
+hard breaks preserved
 
 ```````````````````````````````` example Formatter: 11
+Test  
+Another
+.
+teESt  
+aNotheER
+````````````````````````````````
+
+
+html entities preserved
+
+```````````````````````````````` example Formatter: 12
+text &nbsp;   
+text &nbsp;   
+&quot;   
+&dquo;   
+&nbsp;   
+&nbsp;   
+&nbsp;   
+&nbsp;   
+&nbsp;   
+&nbsp;   
+&nbsp;   
+&nbsp;   
+&nbsp;   
+&nbsp;   
+&nbsp;   
+&nbsp;   
+&nbsp;   
+&nbsp;   
+&nbsp;   
+&nbsp;   
+&nbsp;   
+&nbsp;   
+&nbsp;   
+&nbsp;   
+&nbsp;   
+&nbsp;   
+.
+teEXt &nbsp;   
+teEXt &nbsp;   
+&quot;   
+&dquo;   
+&nbsp;   
+&nbsp;   
+&nbsp;   
+&nbsp;   
+&nbsp;   
+&nbsp;   
+&nbsp;   
+&nbsp;   
+&nbsp;   
+&nbsp;   
+&nbsp;   
+&nbsp;   
+&nbsp;   
+&nbsp;   
+&nbsp;   
+&nbsp;   
+&nbsp;   
+&nbsp;   
+&nbsp;   
+&nbsp;   
+&nbsp;   
+&nbsp;
+````````````````````````````````
+
+
+default
+
+```````````````````````````````` example Formatter: 13
 #Heading
 -----
 paragraph text 
@@ -175,7 +245,7 @@ LaAZyY coNtiINuUaAtiIoN
 ````````````````````````````````
 
 
-```````````````````````````````` example Formatter: 12
+```````````````````````````````` example Formatter: 14
 ~~~info
         with uneven indent
            with uneven indent
@@ -190,7 +260,7 @@ LaAZyY coNtiINuUaAtiIoN
 ````````````````````````````````
 
 
-```````````````````````````````` example Formatter: 13
+```````````````````````````````` example Formatter: 15
         with uneven indent
            with uneven indent
      indented code
@@ -201,7 +271,7 @@ LaAZyY coNtiINuUaAtiIoN
 ````````````````````````````````
 
 
-```````````````````````````````` example Formatter: 14
+```````````````````````````````` example Formatter: 16
 Work with [Markdown]
 
 Work with [Markdown][]
@@ -228,7 +298,7 @@ woRK WiIth [maARKDoWN imaAGeE][maARKDoWN]
 ````````````````````````````````
 
 
-```````````````````````````````` example Formatter: 15
+```````````````````````````````` example Formatter: 17
 Work with [Markdown](https://test.com/doc.png)
 
 Work with [Markdown](https://test.com/doc.png "")

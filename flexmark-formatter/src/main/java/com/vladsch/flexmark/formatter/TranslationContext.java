@@ -93,9 +93,27 @@ public interface TranslationContext {
     void translatingSpan(TranslatingSpanRender render);
 
     /**
+     * Separate non-translation span, cannot be nested. Will generate a paragraph of text which will not be translated
+     *
+     * During {@link RenderPurpose#TRANSLATION_SPANS} this adds the generated output to translation spans
+     * During {@link RenderPurpose#TRANSLATED_SPANS} output from renderer is suppressed, instead outputs corresponding translated span
+     * During {@link RenderPurpose#TRANSLATED} calls render
+     *
+     */
+    void nonTranslatingSpan(TranslatingSpanRender render);
+
+    /**
      * Separate translation span which is also a ref target
      * @param target
      * @param render
      */
     void translatingRefTargetSpan(Node target, TranslatingSpanRender render);
+
+    /**
+     * Temporarily change the format for placeholders
+     *
+     * @param generator   placeholder generator
+     * @param render      render which will be used with the custom generator
+     */
+    void customPlaceholderFormat(TranslationPlaceholderGenerator generator, TranslatingSpanRender render);
 }

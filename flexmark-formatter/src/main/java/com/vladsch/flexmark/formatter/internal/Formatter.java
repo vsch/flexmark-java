@@ -4,15 +4,11 @@ import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.IRender;
 import com.vladsch.flexmark.ast.Document;
 import com.vladsch.flexmark.ast.Node;
-import com.vladsch.flexmark.formatter.RenderPurpose;
-import com.vladsch.flexmark.formatter.TranslatingSpanRender;
-import com.vladsch.flexmark.formatter.TranslationHandler;
-import com.vladsch.flexmark.formatter.TranslationHandlerFactory;
+import com.vladsch.flexmark.formatter.*;
 import com.vladsch.flexmark.html.AttributeProviderFactory;
 import com.vladsch.flexmark.html.LinkResolverFactory;
 import com.vladsch.flexmark.html.renderer.HeaderIdGenerator;
 import com.vladsch.flexmark.html.renderer.HeaderIdGeneratorFactory;
-import com.vladsch.flexmark.html.renderer.HtmlIdGenerator;
 import com.vladsch.flexmark.html.renderer.HtmlIdGeneratorFactory;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.ParserEmulationProfile;
@@ -197,7 +193,7 @@ public class Formatter implements IRender {
      */
     public void translationRender(Node node, Appendable output, TranslationHandler translationHandler, RenderPurpose renderPurpose) {
         translationHandler.setRenderPurpose(renderPurpose);
-        MainNodeFormatter renderer = new MainNodeFormatter(options, new MarkdownWriter(output, formatterOptions.formatFlags), node.getDocument(), translationHandler);
+        MainNodeFormatter renderer = new MainNodeFormatter(options, new MarkdownWriter(output, formatterOptions.formatFlags /*| FormattingAppendable.PASS_THROUGH*/), node.getDocument(), translationHandler);
         renderer.render(node);
         renderer.flush(formatterOptions.maxTrailingBlankLines);
     }
@@ -210,7 +206,7 @@ public class Formatter implements IRender {
      */
     public void translationRender(Node node, Appendable output, int maxTrailingBlankLines, TranslationHandler translationHandler, RenderPurpose renderPurpose) {
         translationHandler.setRenderPurpose(renderPurpose);
-        MainNodeFormatter renderer = new MainNodeFormatter(options, new MarkdownWriter(output, formatterOptions.formatFlags), node.getDocument(), translationHandler);
+        MainNodeFormatter renderer = new MainNodeFormatter(options, new MarkdownWriter(output, formatterOptions.formatFlags /*| FormattingAppendable.PASS_THROUGH*/), node.getDocument(), translationHandler);
         renderer.render(node);
         renderer.flush(maxTrailingBlankLines);
     }
@@ -267,14 +263,14 @@ public class Formatter implements IRender {
             super(other);
 
             List<Extension> extensions = new ArrayList<Extension>();
-            for (Extension extension : get(Parser.EXTENSIONS)) {
+            for (Extension extension: get(Parser.EXTENSIONS)) {
                 extensions.add(extension);
             }
 
             if (options != null) {
-                for (DataKey key : options.keySet()) {
+                for (DataKey key: options.keySet()) {
                     if (key == Parser.EXTENSIONS) {
-                        for (Extension extension : options.get(Parser.EXTENSIONS)) {
+                        for (Extension extension: options.get(Parser.EXTENSIONS)) {
                             extensions.add(extension);
                         }
                     } else {
@@ -316,7 +312,7 @@ public class Formatter implements IRender {
          */
         public Builder extensions(Iterable<? extends Extension> extensions) {
             // first give extensions a chance to modify options
-            for (Extension extension : extensions) {
+            for (Extension extension: extensions) {
                 if (extension instanceof FormatterExtension) {
                     if (!loadedExtensions.contains(extension)) {
                         FormatterExtension formatterExtension = (FormatterExtension) extension;
@@ -325,7 +321,7 @@ public class Formatter implements IRender {
                 }
             }
 
-            for (Extension extension : extensions) {
+            for (Extension extension: extensions) {
                 if (extension instanceof FormatterExtension) {
                     if (!loadedExtensions.contains(extension)) {
                         FormatterExtension formatterExtension = (FormatterExtension) extension;
@@ -405,7 +401,7 @@ public class Formatter implements IRender {
                 final Set<NodeFormattingHandler<?>> formattingHandlers = nodeFormatter.getNodeFormattingHandlers();
                 if (formattingHandlers == null) continue;
 
-                for (NodeFormattingHandler nodeType : formattingHandlers) {
+                for (NodeFormattingHandler nodeType: formattingHandlers) {
                     // Overwrite existing renderer
                     renderers.put(nodeType.getNodeType(), nodeType);
                 }
@@ -473,6 +469,15 @@ public class Formatter implements IRender {
         }
 
         @Override
+        public void nonTranslatingSpan(final TranslatingSpanRender render) {
+            if (myTranslationHandler != null) {
+                myTranslationHandler.nonTranslatingSpan(render);
+            } else {
+                render.render(this, markdown);
+            }
+        }
+
+        @Override
         public void translatingRefTargetSpan(Node target, TranslatingSpanRender render) {
             if (myTranslationHandler != null) {
                 myTranslationHandler.translatingRefTargetSpan(target, render);
@@ -487,6 +492,15 @@ public class Formatter implements IRender {
                 return myTranslationHandler.getTranslationStore();
             } else {
                 return document;
+            }
+        }
+
+        @Override
+        public void customPlaceholderFormat(final TranslationPlaceholderGenerator generator, final TranslatingSpanRender render) {
+            if (myTranslationHandler != null) {
+                myTranslationHandler.customPlaceholderFormat(generator, render);
+            } else {
+                render.render(this, markdown);
             }
         }
 
@@ -557,7 +571,7 @@ public class Formatter implements IRender {
                     myTranslationHandler.beginRendering((Document) node, subContext, subContext.markdown);
                 }
 
-                for (FormattingPhase phase : FormattingPhase.values()) {
+                for (FormattingPhase phase: FormattingPhase.values()) {
                     if (phase != FormattingPhase.DOCUMENT && !renderingPhases.contains(phase)) { continue; }
                     this.phase = phase;
                     // here we render multiple phases
@@ -570,7 +584,7 @@ public class Formatter implements IRender {
                         }
                     } else {
                         // go through all renderers that want this phase
-                        for (PhasedNodeFormatter phasedFormatter : phasedFormatters) {
+                        for (PhasedNodeFormatter phasedFormatter: phasedFormatters) {
                             if (phasedFormatter.getFormattingPhases().contains(phase)) {
                                 subContext.renderingNode = node;
                                 phasedFormatter.renderDocument(subContext, subContext.markdown, (Document) node, phase);
@@ -716,8 +730,18 @@ public class Formatter implements IRender {
             }
 
             @Override
+            public void nonTranslatingSpan(final TranslatingSpanRender render) {
+                myMainNodeRenderer.nonTranslatingSpan(render);
+            }
+
+            @Override
             public void translatingRefTargetSpan(Node target, final TranslatingSpanRender render) {
                 myMainNodeRenderer.translatingRefTargetSpan(target, render);
+            }
+
+            @Override
+            public void customPlaceholderFormat(final TranslationPlaceholderGenerator generator, final TranslatingSpanRender render) {
+                myMainNodeRenderer.customPlaceholderFormat(generator, render);
             }
         }
     }

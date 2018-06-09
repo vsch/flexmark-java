@@ -3,7 +3,9 @@ package com.vladsch.flexmark.formatter.internal;
 import com.vladsch.flexmark.ast.*;
 import com.vladsch.flexmark.ast.util.ReferenceRepository;
 import com.vladsch.flexmark.formatter.CustomNodeFormatter;
+import com.vladsch.flexmark.formatter.RenderPurpose;
 import com.vladsch.flexmark.formatter.TranslatingSpanRender;
+import com.vladsch.flexmark.formatter.TranslationPlaceholderGenerator;
 import com.vladsch.flexmark.parser.ListOptions;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.ParserEmulationProfile;
@@ -22,6 +24,7 @@ import com.vladsch.flexmark.util.sequence.RepeatedCharSequence;
 
 import java.util.*;
 
+import static com.vladsch.flexmark.formatter.RenderPurpose.FORMAT;
 import static com.vladsch.flexmark.util.format.options.DiscretionaryText.ADD;
 import static com.vladsch.flexmark.util.format.options.DiscretionaryText.AS_IS;
 import static com.vladsch.flexmark.util.sequence.BasedSequence.NULL;
@@ -825,7 +828,11 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
     }
 
     private void render(HardLineBreak node, NodeFormatterContext context, MarkdownWriter markdown) {
-        markdown.append(node.getChars());
+        if (context.getRenderPurpose() == FORMAT) {
+            markdown.append(node.getChars());
+        } else {
+            markdown.append(node.getChars());
+        }
     }
 
     private void render(Text node, NodeFormatterContext context, MarkdownWriter markdown) {
@@ -930,8 +937,24 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
         renderReference(node, context, markdown);
     }
 
-    private void render(HtmlEntity node, NodeFormatterContext context, MarkdownWriter markdown) {
-        markdown.append(node.getChars());
+    static final TranslationPlaceholderGenerator htmlEntityPlaceholderGenerator = new TranslationPlaceholderGenerator() {
+        @Override
+        public String getPlaceholder(final int index) {
+            return String.format("&#%d;", index);
+        }
+    };
+
+    private void render(final HtmlEntity node, NodeFormatterContext context, final MarkdownWriter markdown) {
+        if (context.getRenderPurpose() == FORMAT) {
+            markdown.append(node.getChars());
+        } else {
+            context.customPlaceholderFormat(htmlEntityPlaceholderGenerator, new TranslatingSpanRender() {
+                @Override
+                public void render(final NodeFormatterContext context, final MarkdownWriter markdown) {
+                    markdown.appendNonTranslating(node.getChars());
+                }
+            });
+        }
     }
 
     public static final DataKey<Boolean> UNWRAPPED_AUTO_LINKS = new DataKey<>("UNWRAPPED_AUTO_LINKS", false);
