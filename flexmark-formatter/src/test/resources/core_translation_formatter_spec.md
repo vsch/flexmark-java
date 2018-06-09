@@ -1364,14 +1364,17 @@ paragraph 2
 paragraph 3
 
 .
-[ReEF3]: /ref3
-[ReEF2]: /ref2/1
-[ReEF2]: /ref2/2
-[ReEF1]: /ref1
-
 paARaAGRaAph 1 [ReEF2]
 
+[ReEF3]: /ref3
+
+[ReEF2]: /ref2/1
+
 paARaAGRaAph 2
+
+[ReEF2]: /ref2/2
+
+[ReEF1]: /ref1
 
 paARaAGRaAph 3
 ````````````````````````````````
@@ -1395,14 +1398,17 @@ paragraph 3
 .
 paARaAGRaAph 1 [ReEF2]
 
+[ReEF3]: /ref3
+
+[ReEF2]: /ref2/1
+
 paARaAGRaAph 2
 
-paARaAGRaAph 3
-
-[ReEF3]: /ref3
-[ReEF2]: /ref2/1
 [ReEF2]: /ref2/2
+
 [ReEF1]: /ref1
+
+paARaAGRaAph 3
 ````````````````````````````````
 
 
@@ -1425,11 +1431,14 @@ paragraph 3
 paARaAGRaAph 1 [ReEF2]
 
 [ReEF3]: /ref3
+
 [ReEF2]: /ref2/1
-[ReEF2]: /ref2/2
-[ReEF1]: /ref1
 
 paARaAGRaAph 2
+
+[ReEF2]: /ref2/2
+
+[ReEF1]: /ref1
 
 paARaAGRaAph 3
 ````````````````````````````````
@@ -1453,11 +1462,14 @@ paragraph 3
 .
 paARaAGRaAph 1 [ReEF2]
 
+[ReEF3]: /ref3
+
+[ReEF2]: /ref2/1
+
 paARaAGRaAph 2
 
-[ReEF3]: /ref3
-[ReEF2]: /ref2/1
 [ReEF2]: /ref2/2
+
 [ReEF1]: /ref1
 
 paARaAGRaAph 3
@@ -1482,14 +1494,17 @@ paragraph 3
 .
 paARaAGRaAph 1 [ReEF2]
 
+[ReEF3]: /ref3
+
+[ReEF2]: /ref2/1
+
 paARaAGRaAph 2
 
-paARaAGRaAph 3
+[ReEF2]: /ref2/2
 
 [ReEF1]: /ref1
-[ReEF2]: /ref2/1
-[ReEF2]: /ref2/2
-[ReEF3]: /ref3
+
+paARaAGRaAph 3
 ````````````````````````````````
 
 
@@ -1511,14 +1526,17 @@ paragraph 3
 .
 paARaAGRaAph 1 [ReEF2]
 
-paARaAGRaAph 2
-
-paARaAGRaAph 3
+[ReEF3]: /ref3
 
 [ReEF2]: /ref2/1
-[ReEF1]: /ref1
+
+paARaAGRaAph 2
+
 [ReEF2]: /ref2/2
-[ReEF3]: /ref3
+
+[ReEF1]: /ref1
+
+paARaAGRaAph 3
 ````````````````````````````````
 
 
@@ -1540,14 +1558,17 @@ paragraph 3
 .
 paARaAGRaAph 1 [ReEF2]
 
+[ReEF3]: /ref3
+
+[ReEF2]: /ref2/1
+
 paARaAGRaAph 2
 
-paARaAGRaAph 3
-
 [ReEF2]: /ref2/2
+
 [ReEF1]: /ref1
-[ReEF2]: /ref2/1
-[ReEF3]: /ref3
+
+paARaAGRaAph 3
 ````````````````````````````````
 
 

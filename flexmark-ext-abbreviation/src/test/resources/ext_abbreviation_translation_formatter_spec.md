@@ -87,35 +87,13 @@ thiIS haAS aAN Abbr eEmBeEDDeED iIN iIt.
 ````````````````````````````````
 
 
-```````````````````````````````` example(Abbreviation: 7) options(details)
+```````````````````````````````` example Abbreviation: 7
 *[Abbr]: Abbreviation 1
 *[Abbre]: Abbreviation 2
 
 This has an Abbre embedded in it.
 And this has another Abbr embedded in it.
 .
---------------------------
-*[-1-]: _2_
-*[-3-]: _4_
-
-This has an -3- embedded in it.
-And this has another -1- embedded in it.
---------------------------
-<<<Abbreviation 1
->>>aBBReEViIaAtiIoN 1
-<<<Abbreviation 2
->>>aBBReEViIaAtiIoN 2
-<<<This has an -3- embedded in it.
-And this has another -1- embedded in it.
->>>thiIS haAS aAN -3- eEmBeEDDeED iIN iIt.
-aND thiIS haAS aANotheER -1- eEmBeEDDeED iIN iIt.
---------------------------
-*[-1-]: _2_
-*[-3-]: _4_
-
-thiIS haAS aAN -3- eEmBeEDDeED iIN iIt.
-aND thiIS haAS aANotheER -1- eEmBeEDDeED iIN iIt.
---------------------------
 *[Abbr]: aBBReEViIaAtiIoN 1
 *[Abbre]: aBBReEViIaAtiIoN 2
 
