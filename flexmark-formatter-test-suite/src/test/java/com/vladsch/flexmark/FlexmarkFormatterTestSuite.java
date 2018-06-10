@@ -17,6 +17,7 @@ import com.vladsch.flexmark.ext.tables.ComboTableFormatterSpecTest;
 import com.vladsch.flexmark.ext.tables.ComboTableTranslationFormatterSpecTest;
 import com.vladsch.flexmark.ext.yaml.front.matter.ComboYamlFrontMatterFormatterSpecTest;
 import com.vladsch.flexmark.formatter.ComboCoreFormatterSpecTest;
+import com.vladsch.flexmark.formatter.ComboCoreTranslationFormatterSpecTest;
 import org.junit.runners.Suite;
 
 @org.junit.runner.RunWith(Suite.class)
@@ -54,6 +55,7 @@ import org.junit.runners.Suite;
         //ComboXWikiMacroFormatterSpecTest.class,
         ComboYamlFrontMatterFormatterSpecTest.class,
         ComboCoreFormatterSpecTest.class,
+        ComboCoreTranslationFormatterSpecTest.class,
         ComboFormatterTestSuiteSpecTest.class,
         ComboFormatterIssueSpecTest.class,
 })

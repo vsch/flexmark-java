@@ -2021,3 +2021,20 @@ following text
 ````````````````````````````````
 
 
+```````````````````````````````` example(Empty List Items: 9) options(details)
+Paragraph text with embedded link [Example Link](http://example.com) in it.
+.
+--------------------------
+Paragraph text with embedded link [_1_](_2_) in it.
+--------------------------
+<<<Example Link
+>>>eXaAmpLeE liINK
+<<<Paragraph text with embedded link [_1_](_2_) in it.
+>>>paARaAGRaAph teEXt WiIth eEmBeEDDeED LiINK [_1_](_2_) iIN iIt.
+--------------------------
+paARaAGRaAph teEXt WiIth eEmBeEDDeED LiINK [_1_](_2_) iIN iIt.
+--------------------------
+paARaAGRaAph teEXt WiIth eEmBeEDDeED LiINK [eXaAmpLeE liINK](http://example.com) iIN iIt.
+````````````````````````````````
+
+

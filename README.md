@@ -42,7 +42,7 @@ following sample:
 <dependency>
     <groupId>com.vladsch.flexmark</groupId>
     <artifactId>flexmark-all</artifactId>
-    <version>0.32.24</version>
+    <version>0.34.0</version>
 </dependency>
 ```
 
@@ -85,7 +85,7 @@ public class BasicSample {
 #### Building via Gradle
 
 ```shell
-compile 'com.vladsch.flexmark:flexmark-all:0.32.24'
+compile 'com.vladsch.flexmark:flexmark-all:0.34.0'
 ```
 
 #### Building with Android Studio
@@ -175,6 +175,8 @@ custom node renderer if you need to override the generated link HTML.
 
 ### Latest Additions
 
+* [Translation Helper API](../../wiki/Translation-Helper-API) to make translating markdown
+  documents easier.
 * [Admonition Extension](https://github.com/vsch/flexmark-java/wiki/Extensions#admonition) To
   create block-styled side content. For complete documentation please see the
   [Admonition Extension, Material for MkDocs] documentation.
