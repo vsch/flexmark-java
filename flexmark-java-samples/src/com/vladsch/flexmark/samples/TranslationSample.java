@@ -14,9 +14,10 @@ import java.util.List;
 
 public class TranslationSample {
 
-    // simulated translation: letters h, o left as is
+    // simulated translation: letters h, o, H, O left as is
     // all other vowels doubled up, with second changing case
     // all other consonants flip case
+    // non-alpha characters passed through as is.
     static CharSequence translate(CharSequence text) {
         StringBuilder sb = new StringBuilder();
         int iMax = text.length();
