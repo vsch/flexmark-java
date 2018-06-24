@@ -8,7 +8,8 @@ flexmark-java
 - [To Do](#to-do)
     - [Docx Converter](#docx-converter)
     - [GitLab compatibility extensions](#gitlab-compatibility-extensions)
-- [Next: 0.34.0](#next-0340)
+- [Next: 0.34.2](#next-0342)
+- [0.34.0](#0340)
 - [0.32.24](#03224)
 - [0.32.22](#03222)
 - [0.32.20](#03220)
@@ -261,10 +262,14 @@ flexmark-java
 
 &nbsp;</details>
 
-Next: 0.34.0
+Next: 0.34.2
 ------------
 
 * Fix: update nexus staging plugin to 1.6.7
+
+0.34.0
+------
+
 * Fix: table formatter for translations to insert a space if the translated text is empty. 
 * Add: changed regex for parsing unquoted HTML attribute value to exclude `{}`.
 * Add: translation formatting awareness to: abbreviation, admonition, attributes, emoji,
