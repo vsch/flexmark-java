@@ -394,7 +394,7 @@ earlier versions of this project.
 
 ### Feature Comparison
 
-| Feature                                                                          | flexmark-java                                                    | commmonmark-java                                                  | pegdown                                                              |
+| Feature                                                                          | flexmark-java                                                    | commonmark-java                                                  | pegdown                                                              |
 |----------------------------------------------------------------------------------|:-----------------------------------------------------------------|:------------------------------------------------------------------|:---------------------------------------------------------------------|
 | Relative parse time (less is better)                                             | :heavy_check_mark: 1x [(1)](#1)                                  | :heavy_check_mark: 0.6x to 0.7x [(2)](#2)                         | :x: 25x average, 20,000x to ∞ for pathological input [(3)](#3)       |
 | All source elements in the AST                                                   | :heavy_check_mark:                                               | :x:                                                               | :heavy_check_mark:                                                   |
