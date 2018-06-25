@@ -8,7 +8,7 @@ flexmark-java
 - [To Do](#to-do)
     - [Docx Converter](#docx-converter)
     - [GitLab compatibility extensions](#gitlab-compatibility-extensions)
-- [Next: 0.34.2](#next-0342)
+- [0.34.2](#0342)
 - [0.34.0](#0340)
 - [0.32.24](#03224)
 - [0.32.22](#03222)
@@ -262,8 +262,8 @@ flexmark-java
 
 &nbsp;</details>
 
-Next: 0.34.2
-------------
+0.34.2
+------
 
 * Fix: update nexus staging plugin to 1.6.7
 * Fix: move nexus-staging plugin to deploy profile so it is not needed for ci test build 
