@@ -102,34 +102,6 @@
                     <target>7</target>
                 </configuration>
             </plugin>
-            <!--
-            <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-javadoc-plugin</artifactId>
-                    <configuration>
-                        <excludePackageNames/>
-                        &lt;!&ndash; The offline links make links from extensions to core work. &ndash;&gt;
-                        <detectOfflineLinks>false</detectOfflineLinks>
-                        <offlineLinks>
-                            <offlineLink>
-                                <url>http://static.javadoc.io/com.vladsch.flexmark/flexmark/${project.version}/</url>
-                                <location>${flexmark.javadoc.location}</location>
-                            </offlineLink>
-                        </offlineLinks>
-                    </configuration>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-release-plugin</artifactId>
-                    <configuration>
-                        &lt;!&ndash; There's lots of potential for things to go wrong when publishing to Central, so
-                             don't push the tag and master automatically (which happens before publishing). Also
-                             requires "localCheckout" for release:perform to work. &ndash;&gt;
-                        <pushChanges>false</pushChanges>
-                        <localCheckout>true</localCheckout>
-                    </configuration>
-                </plugin>
--->
         </plugins>
     </build>
 
@@ -161,6 +133,7 @@
                         </executions>
                     </plugin>
                     <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-assembly-plugin</artifactId>
                         <version>2.6</version>
                         <configuration>
@@ -170,6 +143,7 @@
                         </configuration>
                     </plugin>
                     <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-deploy-plugin</artifactId>
                         <version>2.8.2</version>
                         <configuration>
@@ -177,6 +151,7 @@
                         </configuration>
                     </plugin>
                     <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-source-plugin</artifactId>
                         <version>3.0.1</version>
                         <executions>
@@ -190,6 +165,7 @@
                         </executions>
                     </plugin>
                     <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-javadoc-plugin</artifactId>
                         <version>2.10.4</version>
                         <executions>
@@ -201,6 +177,16 @@
                                 </goals>
                             </execution>
                         </executions>
+                        <configuration>
+                            <excludePackageNames/>
+                            <detectOfflineLinks>false</detectOfflineLinks>
+                            <offlineLinks>
+                                <offlineLink>
+                                    <url>http://static.javadoc.io/doc/com.vladsch.flexmark/flexmark/${project.version}/</url>
+                                    <location>${flexmark.javadoc.location}</location>
+                                </offlineLink>
+                            </offlineLinks>
+                        </configuration>
                     </plugin>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
