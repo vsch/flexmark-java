@@ -268,6 +268,8 @@ flexmark-java
 * Fix: update nexus staging plugin to 1.6.7
 * Fix: move nexus-staging plugin to deploy profile so it is not needed for ci test build 
 * Fix: gfm tables extension to only require a single separator dash
+* Fix: for matched parenthesis destination link parsing, only treat backslash as escape if
+  followed by characters which can be escaped.
 
 0.34.0
 ------

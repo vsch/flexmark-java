@@ -15,12 +15,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.StringReader;
+import java.nio.charset.StandardCharsets;
 import java.util.Set;
 
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.*;
 
 public class ParserTest {
 
@@ -28,7 +28,7 @@ public class ParserTest {
     public void emptyReaderTest() throws IOException {
         Parser parser = Parser.builder().build();
         Node document1 = parser.parseReader(new StringReader(""));
-        assertEquals(false, document1.hasChildren());
+        assertFalse(document1.hasChildren());
     }
 
     @Test
@@ -37,7 +37,7 @@ public class ParserTest {
 
         InputStream input1 = SpecReader.getSpecInputStream();
         Node document1;
-        InputStreamReader reader = new InputStreamReader(input1, "utf-8");
+        InputStreamReader reader = new InputStreamReader(input1, StandardCharsets.UTF_8);
         document1 = parser.parseReader(reader);
 
         String spec = SpecReader.readSpec();
@@ -139,8 +139,7 @@ public class ParserTest {
     }
 
     private static class DashBlockParser extends AbstractBlockParser {
-
-        private DashBlock dash;
+        private final DashBlock dash;
 
         public DashBlockParser(BasedSequence line) {
             dash = new DashBlock();
@@ -186,7 +185,7 @@ public class ParserTest {
     }
 
     private static class BlockFactory extends AbstractBlockParserFactory {
-        private BlockFactory(DataHolder options) {
+        BlockFactory(DataHolder options) {
             super(options);
         }
 

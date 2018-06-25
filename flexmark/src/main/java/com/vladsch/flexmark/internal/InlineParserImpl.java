@@ -1571,8 +1571,10 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
                     for (int i = 0; i < iMax; i++) {
                         char c = matched.charAt(i);
                         if (c == '\\') {
-                            // escape
-                            i++;
+                            if (i + 1 < iMax && myParsing.ESCAPABLE.matcher(matched.subSequence(i + 1, i + 2)).matches()) {
+                                // escape
+                                i++;
+                            }
                         } else if (c == '(') {
                             openCount++;
                         } else if (c == ')') {
