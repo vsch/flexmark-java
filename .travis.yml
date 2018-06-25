@@ -6,8 +6,8 @@ install: true
 #  directories:
 #  - $HOME/.m2
 
-#jdk:
-#  - oraclejdk7
+jdk:
+  - oraclejdk8
 
 env:
   - TEST=java
