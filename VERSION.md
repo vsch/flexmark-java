@@ -266,6 +266,7 @@ Next: 0.34.2
 ------------
 
 * Fix: update nexus staging plugin to 1.6.7
+* Fix: move nexus-staging plugin to deploy profile so it is not needed for ci test build 
 
 0.34.0
 ------
