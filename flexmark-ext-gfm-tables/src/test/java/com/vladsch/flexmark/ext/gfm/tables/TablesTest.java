@@ -39,8 +39,16 @@ public class TablesTest extends RenderingTestCase {
 
     @Test
     public void separatorMustBeThreeOrMore() {
-        assertRendering("Abc|Def\n-|-", "<p>Abc|Def\n-|-</p>\n");
-        assertRendering("Abc|Def\n--|--", "<p>Abc|Def\n--|--</p>\n");
+        assertRendering("Abc|Def\n-|-", "<table>\n" +
+                "<thead>\n" +
+                "<tr><th>Abc</th><th>Def</th></tr>\n" +
+                "</thead>\n" +
+                "</table>\n");
+        assertRendering("Abc|Def\n--|--", "<table>\n" +
+                "<thead>\n" +
+                "<tr><th>Abc</th><th>Def</th></tr>\n" +
+                "</thead>\n" +
+                "</table>\n");
     }
 
     @Test

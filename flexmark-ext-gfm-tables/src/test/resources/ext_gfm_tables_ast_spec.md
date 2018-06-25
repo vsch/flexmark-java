@@ -41,14 +41,27 @@ Document[0, 10]
 Abc|Def
 -|-
 .
-<p>Abc|Def
--|-</p>
+<table>
+  <thead>
+    <tr><th>Abc</th><th>Def</th></tr>
+  </thead>
+</table>
 .
 Document[0, 12]
-  Paragraph[0, 12]
-    Text[0, 7] chars:[0, 7, "Abc|Def"]
-    SoftLineBreak[7, 8]
-    Text[8, 11] chars:[8, 11, "-|-"]
+  TableBlock[0, 12]
+    TableHead[0, 7]
+      TableRow[0, 7]
+        TableCell[0, 3] header text:[0, 3, "Abc"]
+          Text[0, 3] chars:[0, 3, "Abc"]
+        TableCell[4, 7] header text:[4, 7, "Def"]
+          Text[4, 7] chars:[4, 7, "Def"]
+    TableSeparator[8, 11]
+      TableRow[8, 11]
+        TableCell[8, 9] text:[8, 9, "-"]
+          Text[8, 9] chars:[8, 9, "-"]
+        TableCell[10, 11] text:[10, 11, "-"]
+          Text[10, 11] chars:[10, 11, "-"]
+    TableBody[0, 0]
 ````````````````````````````````
 
 
@@ -56,14 +69,27 @@ Document[0, 12]
 Abc|Def
 --|--
 .
-<p>Abc|Def
---|--</p>
+<table>
+  <thead>
+    <tr><th>Abc</th><th>Def</th></tr>
+  </thead>
+</table>
 .
 Document[0, 14]
-  Paragraph[0, 14]
-    Text[0, 7] chars:[0, 7, "Abc|Def"]
-    SoftLineBreak[7, 8]
-    Text[8, 13] chars:[8, 13, "--|--"]
+  TableBlock[0, 14]
+    TableHead[0, 7]
+      TableRow[0, 7]
+        TableCell[0, 3] header text:[0, 3, "Abc"]
+          Text[0, 3] chars:[0, 3, "Abc"]
+        TableCell[4, 7] header text:[4, 7, "Def"]
+          Text[4, 7] chars:[4, 7, "Def"]
+    TableSeparator[8, 13]
+      TableRow[8, 13]
+        TableCell[8, 10] text:[8, 10, "--"]
+          Text[8, 10] chars:[8, 10, "--"]
+        TableCell[11, 13] text:[11, 13, "--"]
+          Text[11, 13] chars:[11, 13, "--"]
+    TableBody[0, 0]
 ````````````````````````````````
 
 
