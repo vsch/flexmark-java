@@ -102,6 +102,16 @@
                     <target>7</target>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>2.6</version>
+                <configuration>
+                    <descriptors>
+                        <descriptor>flexmark-all/src/assembly/bin.xml</descriptor>
+                    </descriptors>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
@@ -131,16 +141,6 @@
                                 </goals>
                             </execution>
                         </executions>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-assembly-plugin</artifactId>
-                        <version>2.6</version>
-                        <configuration>
-                            <descriptors>
-                                <descriptor>flexmark-all/src/assembly/bin.xml</descriptor>
-                            </descriptors>
-                        </configuration>
                     </plugin>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
