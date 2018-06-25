@@ -54,9 +54,5 @@
             <groupId>com.vladsch.flexmark</groupId>
             <artifactId>flexmark-formatter</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.vladsch.flexmark</groupId>
-            <artifactId>flexmark-formatter</artifactId>
-        </dependency>
     </dependencies>
 </project>
