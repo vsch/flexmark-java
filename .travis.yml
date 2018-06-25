@@ -1,5 +1,6 @@
+language: java
 dist: precise
-sudo: false
+sudo: required
 
 jdk:
   - oraclejdk7
