@@ -39,8 +39,8 @@ The following definitions are used:
 * `line column`: would be index of first non-blank if tabs were expanded to 4 space boundaries
 * `item indent`: `line indent` of first line of item (one with list item marker)
 * `item column`: `line column` of first line of item (one with list item marker)
-* `item content offset`: item prefix length + # of trailing white spaces following the item
-  prefix
+* `item content offset`: item PREFIX length + # of trailing white spaces following the item
+  PREFIX
 * `item content indent`: `item indent` + `item content offset`
 * `item content column`: `item column` + `item content offset`
 * `list indent`: first item's `item indent`
@@ -127,7 +127,7 @@ to tweak parser behaviour:
 - [ ] mismatch item type start a sub-list: `Parser.LISTS_ITEM_TYPE_MISMATCH_TO_SUB_LIST`, `ListOptions.itemTypeMismatchToSubList`
 - [ ] bullet or ordered item delimiter mismatch starts a new list: `Parser.LISTS_DELIMITER_MISMATCH_TO_NEW_LIST`, `ListOptions.delimiterMismatchToNewList`
 - [ ] ordered items only with `.` after digit, otherwise `)` is also allowed: `Parser.LISTS_ORDERED_ITEM_DOT_ONLY`, `ListOptions.orderedItemDotOnly`
-- [ ] first ordered item prefix sets start number of list: `Parser.LISTS_ORDERED_LIST_MANUAL_START`, `ListOptions.orderedListManualStart`
+- [ ] first ordered item PREFIX sets start number of list: `Parser.LISTS_ORDERED_LIST_MANUAL_START`, `ListOptions.orderedListManualStart`
 - [ ] item is loose if it contains a blank line after its item text: `Parser.LISTS_LOOSE_WHEN_BLANK_FOLLOWS_ITEM_PARAGRAPH`, `ListOptions.looseWhenBlankFollowsItemParagraph`
 - [ ] item is loose if it or previous item is loose: `Parser.LISTS_LOOSE_ON_PREV_LOOSE_ITEM`, `ListOptions.looseOnPrevLooseItem`
 - [ ] item is loose if it has loose sub-item: `Parser.LISTS_LOOSE_WHEN_HAS_LOOSE_SUB_ITEM`, `ListOptions.looseWhenHasLooseSubItem`

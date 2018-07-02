@@ -44,9 +44,9 @@ Converts :warning: to its emoji image
 * [ ] Fix: Swing preview HTML table has body row count reset or reversed so first row is like
       heading.
 * [ ] Add: parser emulation family to parser configuration
-* [ ] Add: parser profile needs to be passed to functions handling formatting and prefix
+* [ ] Add: parser profile needs to be passed to functions handling formatting and PREFIX
       generation. Now this can vary significantly from one parser family to another.
-* [ ] Fix: when ENTER deletes a list item prefix inserts extra blank line
+* [ ] Fix: when ENTER deletes a list item PREFIX inserts extra blank line
 * [ ] Remove: smart asterisk, underscore and tilde handlers and options.
 * [ ] Add: option for escaping special cases for `*`, `-`, `+`, `#` _`N.`_ where _N_ is numeric
       with a `\` so that it is not mis-interpreted as a special char at first non-blank of a
@@ -70,7 +70,7 @@ Converts :warning: to its emoji image
       item since we are inserting above and not affecting the current item.
 * [ ] Add: List syntax dependent list item action behavior.
       - [x] Add: flexmark option to recognize empty list sub-items option to PARSER purpose.
-      - [x] Fix: psi list item prefix reporting to match fixed4, github and CommonMark list
+      - [x] Fix: psi list item PREFIX reporting to match fixed4, github and CommonMark list
             processing settings.
       * [x] Fix: list indent for nested items should not indent to more than (listLevel)*4 + 3
             in fixed 4 mode, and check if also in GitHub compatible mode
@@ -78,10 +78,10 @@ Converts :warning: to its emoji image
             parent's new indent level. Otherwise parsing of the children will be off. Right now
             works only for fixed4
 * [ ] Add: List syntax dependent list format behavior.
-      * [ ] GitHub enforces styleSettings.LIST_ALIGN_CHILD_BLOCKS and has a maximum for prefix
+      * [ ] GitHub enforces styleSettings.LIST_ALIGN_CHILD_BLOCKS and has a maximum for PREFIX
             marker start
       * [ ] CommonMark enforces styleSettings.LIST_ALIGN_CHILD_BLOCKS and have no maximum for
-            prefix as long as it matches the parent item's content indent
+            PREFIX as long as it matches the parent item's content indent
       * [ ]
 - [ ] Fix: Un-indent item action leaves leading indent if it was aligned to parent's left text
       edge.
@@ -132,7 +132,7 @@ Converts :warning: to its emoji image
   change inline code action to work just like bold, italic and strike through, instead of
   continuously adding back ticks when at the end of word.
 * Fix: references or links to `raw/master/*.png` showed as unresolved when on wiki home because
-  only image links would handle the optional wiki prefix from home page for image files.
+  only image links would handle the optional wiki PREFIX from home page for image files.
 * Fix: backspace at end of file after `#   ` did nothing.
 * Fix: Header marker equalization was broken.
 * Fix: CSS when task list item is first level, bullet sub-items mess up items
@@ -258,7 +258,7 @@ Converts :warning: to its emoji image
 * Add: preview update delay tweak, default of 500ms makes typing a breeze and preview updates
   half second later.
 * Fix: export on smart mode exit broke exporting all together
-* Fix: style sheets need url prefix when displaying HTML
+* Fix: style sheets need url PREFIX when displaying HTML
 * Add: Re-Export action that will ignore modification time and force re-exporting of all
   required files.
 * Fix: added a short time delay to running export after settings change or project open.
@@ -467,9 +467,9 @@ Converts :warning: to its emoji image
   <li>[ ] Fix: Swing preview HTML table has body row count reset or reversed so first row is like
   heading.</li>
   <li>[ ] Add: parser emulation family to parser configuration</li>
-  <li>[ ] Add: parser profile needs to be passed to functions handling formatting and prefix
+  <li>[ ] Add: parser profile needs to be passed to functions handling formatting and PREFIX
   generation. Now this can vary significantly from one parser family to another.</li>
-  <li>[ ] Fix: when ENTER deletes a list item prefix inserts extra blank line</li>
+  <li>[ ] Fix: when ENTER deletes a list item PREFIX inserts extra blank line</li>
   <li>[ ] Remove: smart asterisk, underscore and tilde handlers and options.</li>
   <li>[ ] Add: option for escaping special cases for <code>*</code>, <code>-</code>, <code>+</code>, <code>#</code> <em><code>N.</code></em> where <em>N</em> is numeric
   with a <code>\</code> so that it is not mis-interpreted as a special char at first non-blank of a
@@ -493,7 +493,7 @@ Converts :warning: to its emoji image
   item since we are inserting above and not affecting the current item.</li>
   <li>[ ] Add: List syntax dependent list item action behavior.
   - [x] Add: flexmark option to recognize empty list sub-items option to PARSER purpose.
-  - [x] Fix: psi list item prefix reporting to match fixed4, github and CommonMark list
+  - [x] Fix: psi list item PREFIX reporting to match fixed4, github and CommonMark list
   processing settings.
   * [x] Fix: list indent for nested items should not indent to more than (listLevel)*4 + 3
   in fixed 4 mode, and check if also in GitHub compatible mode
@@ -501,10 +501,10 @@ Converts :warning: to its emoji image
   parent's new indent level. Otherwise parsing of the children will be off. Right now
   works only for fixed4</li>
   <li>[ ] Add: List syntax dependent list format behavior.
-  * [ ] GitHub enforces styleSettings.LIST_ALIGN_CHILD_BLOCKS and has a maximum for prefix
+  * [ ] GitHub enforces styleSettings.LIST_ALIGN_CHILD_BLOCKS and has a maximum for PREFIX
   marker start
   * [ ] CommonMark enforces styleSettings.LIST_ALIGN_CHILD_BLOCKS and have no maximum for
-  prefix as long as it matches the parent item's content indent
+  PREFIX as long as it matches the parent item's content indent
   * [ ]</li>
 </ul>
 <ul>
@@ -560,7 +560,7 @@ Converts :warning: to its emoji image
   change inline code action to work just like bold, italic and strike through, instead of
   continuously adding back ticks when at the end of word.</li>
   <li>Fix: references or links to <code>raw/master/*.png</code> showed as unresolved when on wiki home because
-  only image links would handle the optional wiki prefix from home page for image files.</li>
+  only image links would handle the optional wiki PREFIX from home page for image files.</li>
   <li>Fix: backspace at end of file after <code>#</code> did nothing.</li>
   <li>Fix: Header marker equalization was broken.</li>
   <li>Fix: CSS when task list item is first level, bullet sub-items mess up items</li>
@@ -691,7 +691,7 @@ Converts :warning: to its emoji image
   <li>Add: preview update delay tweak, default of 500ms makes typing a breeze and preview updates
   half second later.</li>
   <li>Fix: export on smart mode exit broke exporting all together</li>
-  <li>Fix: style sheets need url prefix when displaying HTML</li>
+  <li>Fix: style sheets need url PREFIX when displaying HTML</li>
   <li>Add: Re-Export action that will ignore modification time and force re-exporting of all
   required files.</li>
   <li>Fix: added a short time delay to running export after settings change or project open.</li>

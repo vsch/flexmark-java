@@ -194,7 +194,7 @@ text example@example.com
 
 `BlockQuote`
 
-Lazy continuation, no prefix
+Lazy continuation, no PREFIX
 
 ```````````````````````````````` example Markdown elements - BlockQuote: 1
 > block quote
@@ -207,7 +207,7 @@ with lazy continuation
 ````````````````````````````````
 
 
-Lazy continuation, with prefix
+Lazy continuation, with PREFIX
 
 ```````````````````````````````` example Markdown elements - BlockQuote: 2
 > block quote
@@ -220,7 +220,7 @@ Lazy continuation, with prefix
 ````````````````````````````````
 
 
-Nested, Lazy continuation, no prefix
+Nested, Lazy continuation, no PREFIX
 
 ```````````````````````````````` example Markdown elements - BlockQuote: 3
 >> block quote
@@ -235,7 +235,7 @@ with lazy continuation
 ````````````````````````````````
 
 
-Nested, Lazy continuation, with prefix
+Nested, Lazy continuation, with PREFIX
 
 ```````````````````````````````` example Markdown elements - BlockQuote: 4
 >> block quote
@@ -250,7 +250,7 @@ Nested, Lazy continuation, with prefix
 ````````````````````````````````
 
 
-Nested, Lazy continuation less, with prefix
+Nested, Lazy continuation less, with PREFIX
 
 ```````````````````````````````` example Markdown elements - BlockQuote: 5
 >> block quote
@@ -265,7 +265,7 @@ Nested, Lazy continuation less, with prefix
 ````````````````````````````````
 
 
-Nested, Lazy continuation more, with prefix
+Nested, Lazy continuation more, with PREFIX
 
 ```````````````````````````````` example Markdown elements - BlockQuote: 6
 >> block quote
@@ -280,7 +280,7 @@ Nested, Lazy continuation more, with prefix
 ````````````````````````````````
 
 
-Nested, Lazy continuation less, with prefix
+Nested, Lazy continuation less, with PREFIX
 
 ```````````````````````````````` example Markdown elements - BlockQuote: 7
 >> block quote
@@ -297,7 +297,7 @@ with lazy continuation
 ````````````````````````````````
 
 
-Nested, Lazy continuation, with prefix
+Nested, Lazy continuation, with PREFIX
 
 ```````````````````````````````` example Markdown elements - BlockQuote: 8
 >> block quote
@@ -314,7 +314,7 @@ Nested, Lazy continuation, with prefix
 ````````````````````````````````
 
 
-Nested, Lazy continuation less, with prefix
+Nested, Lazy continuation less, with PREFIX
 
 ```````````````````````````````` example Markdown elements - BlockQuote: 9
 >> block quote
@@ -3032,7 +3032,7 @@ options for plain text rendering
 ```````````````````````````````` example Issues: 1
 * Enable Auto Indent Lines after move line/selection up or down actions to have them indented
   automatically.
-* Use Smart Paste to eliminate case change and prefix edits when pasting identifiers. MIA will
+* Use Smart Paste to eliminate case change and PREFIX edits when pasting identifiers. MIA will
   match case and style of identifier at destination when you paste, undo to get results before
   MIA adjusted them. Copy `myColumnData` and paste it over `DEFAULT_VALUE` to get `COLUMN_DATA`,
   reverse the order and get `myDefaultValue`. Works when pasting at the **beginning**, **end**
@@ -3050,7 +3050,7 @@ options for plain text rendering
 .
 <ul>
   <li>Enable Auto Indent Lines after move line/selection up or down actions to have them indented automatically.</li>
-  <li>Use Smart Paste to eliminate case change and prefix edits when pasting identifiers. MIA will match case and style of identifier at destination when you paste, undo to get results before MIA adjusted them. Copy <code>myColumnData</code> and paste it over <code>DEFAULT_VALUE</code> to get <code>COLUMN_DATA</code>, reverse the order and get <code>myDefaultValue</code>. Works when pasting at the <strong>beginning</strong>, <strong>end</strong> and <strong>middle</strong> of identifiers.
+  <li>Use Smart Paste to eliminate case change and PREFIX edits when pasting identifiers. MIA will match case and style of identifier at destination when you paste, undo to get results before MIA adjusted them. Copy <code>myColumnData</code> and paste it over <code>DEFAULT_VALUE</code> to get <code>COLUMN_DATA</code>, reverse the order and get <code>myDefaultValue</code>. Works when pasting at the <strong>beginning</strong>, <strong>end</strong> and <strong>middle</strong> of identifiers.
   <p>Supports: <strong>camelCase</strong>, <strong>PascalCase</strong>, <strong>snake_case</strong>, <strong>SCREAMING_SNAKE_CASE</strong>, <strong>dash-case</strong>, <strong>dot.case</strong>, <strong>slash/case</strong></p>
   <p>Default prefixes: <code>my</code>, <code>our</code>, <code>is</code>, <code>get</code>, <code>set</code> to allow pasting over member fields, static fields, getters and setters.</p>
   </li>

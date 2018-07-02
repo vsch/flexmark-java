@@ -744,7 +744,7 @@ Document[0, 68]
 ````````````````````````````````
 
 
-Block quotes ignore interspersing blank lines but don't include any lines without prefix after
+Block quotes ignore interspersing blank lines but don't include any lines without PREFIX after
 blank lines
 
 ```````````````````````````````` example(Aside: 32) options(ignore-blank-line, extend-to-blank-line)

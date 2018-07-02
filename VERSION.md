@@ -653,7 +653,7 @@ setting either will affect both keys. For information on these keys see
 0.28.32
 -------
 
-* Add: merge request #191, adding absolute wiki link and wiki image prefix options
+* Add: merge request #191, adding absolute wiki link and wiki image PREFIX options
 
 0.28.30
 -------
@@ -686,7 +686,7 @@ setting either will affect both keys. For information on these keys see
 
 * Fix: `AttributeNode` ast dump to show name and separator with range.
 
-* Change: `AttributeNode` now uses the implicit prefix of `.` or `#` as the attribute name and
+* Change: `AttributeNode` now uses the implicit PREFIX of `.` or `#` as the attribute name and
   the value is always the actual value.
 
 0.28.24
@@ -810,7 +810,7 @@ setting either will affect both keys. For information on these keys see
   `[a-z0-9_+-]` and if the `:` is not preceded or followed by a digit. The latter eliminates
   time strings as erroneously interpreted as an invalid emoji shortcut.
 
-* Fix: #163, BasedSequenceImpl.prefix seems broken. Unable to handle zero length string as
+* Fix: #163, BasedSequenceImpl.PREFIX seems broken. Unable to handle zero length string as
   other. Add tests for this function
 
 * Fix: `BasedSequence.suffixOf` and add tests for this function
@@ -1215,7 +1215,7 @@ setting either will affect both keys. For information on these keys see
 ------
 
 * Fix: index out of bounds exception in `flexmark-ext-escaped-character` processing elements
-  embedded in other elements with prefix text removed.
+  embedded in other elements with PREFIX text removed.
 
 * Fix: `flexmark-ext-escaped-character` erroneously processing fenced code content
 
@@ -1985,7 +1985,7 @@ private static final DataHolder OPTIONS = new MutableDataSet()
   * `WikiLinkExtension.IMAGE_FILE_EXTENSION`, default `""`, to add file extension or suffix to
     file reference.
 
-  * `WikiLinkExtension.IMAGE_PREFIX`, default `""`, to add a prefix to file reference
+  * `WikiLinkExtension.IMAGE_PREFIX`, default `""`, to add a PREFIX to file reference
 
 * Add: #24, DefinitionList extension doesn't seem to work, implemented definition lists as per
   PHP Markdown Extra.
@@ -2089,7 +2089,7 @@ private static final DataHolder OPTIONS = new MutableDataSet()
     `HtmlWriter.tag()` with runnable argument for the child element text generation, by using
     the `HtmlWriter.openConditional(ConditionalFormatter)` and
     `HtmlWriter.closeConditional(ConditionalFormatter)` methods giving the parent element
-    ability to change indent, add a new line or blank lines, prefix any output before the child
+    ability to change indent, add a new line or blank lines, PREFIX any output before the child
     element's text. Similar ability on closing the conditional formatting region.
 
   * Add: `HtmlWriter.blankLine()` and `HtmlWriter.blankLine(int)` methods that will add a single
@@ -2572,12 +2572,12 @@ discretion.
   `Parser.LISTS_ORDERED_ITEM_INTERRUPTS_PARAGRAPH` option, now controls whether an ordered list
   item can interrupt a paragraph. i.e. can start without having a blank line before.
   `Parser.LISTS_ORDERED_NON_ONE_ITEM_INTERRUPTS_PARAGRAPH` controls whether this is only true
-  for items with 1. prefix, or any ordered item.
+  for items with 1. PREFIX, or any ordered item.
 
 * Add `Parser.LISTS_ORDERED_ITEM_INTERRUPTS_ITEM_PARAGRAPH` option, when true an ordered list
   sub item can interrupt the parent item's item text paragraph.
   `Parser.LISTS_ORDERED_NON_ONE_ITEM_INTERRUPTS_PARENT_ITEM_PARAGRAPH` controls whether this is
-  only true for items with 1. prefix, or any ordered item.
+  only true for items with 1. PREFIX, or any ordered item.
 
 * Change `Parser.ORDERED_LIST_START` to `Parser.LISTS_ORDERED_LIST_MANUAL_START`
 

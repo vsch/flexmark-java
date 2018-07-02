@@ -43,7 +43,7 @@ Block Macros without content:
 ```
 
 General form of an inline macro is the same as the block form except the opening and/or closing
-marker has a blank or non-blank text prefix and/or non blank text suffix, or both opening and
+marker has a blank or non-blank text PREFIX and/or non blank text suffix, or both opening and
 closing markers are contained on the same line.
 
 ### Inline Macros:
@@ -60,7 +60,7 @@ possibly containing other lines, but no blank lines
 ```
 
 ```markdown
-prefix text {{macroName attribute1=value}}
+PREFIX text {{macroName attribute1=value}}
 content possibly containing other lines, but no blank lines
 lines {{/macroName}}
 ```

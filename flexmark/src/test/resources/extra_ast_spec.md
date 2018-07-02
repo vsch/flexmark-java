@@ -3673,9 +3673,9 @@ Document[0, 32]
 
 ## Fenced Code Options
 
-Change language class prefix
+Change language class PREFIX
 
-```````````````````````````````` example(Fenced Code Options: 1) options(no-class-prefix)
+```````````````````````````````` example(Fenced Code Options: 1) options(no-class-PREFIX)
 ```text
 plain text
 ```
@@ -3851,7 +3851,7 @@ Document[0, 42]
 
 ## Anchor links option
 
-Change language class prefix
+Change language class PREFIX
 
 ```````````````````````````````` example Anchor links option: 1
 inline anchor <a id="test" href="#"></a><em></em> test 
@@ -4717,7 +4717,7 @@ Document[0, 68]
 ````````````````````````````````
 
 
-Block quotes ignore interspersing blank lines but don't include any lines without prefix after
+Block quotes ignore interspersing blank lines but don't include any lines without PREFIX after
 blank lines
 
 ```````````````````````````````` example(Block Quotes: 5) options(block-ignore-blank, block-quote-extend)

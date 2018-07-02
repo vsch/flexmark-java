@@ -160,7 +160,7 @@ Document[0, 4]
 ````````````````````````````````
 
 
-```````````````````````````````` example(GfmUsers: 12) options(root, prefix)
+```````````````````````````````` example(GfmUsers: 12) options(root, PREFIX)
 @123
 .
 <p><a href="http://github.com?user=123"><strong>@123</strong></a></p>
@@ -182,7 +182,7 @@ Document[0, 4]
 ````````````````````````````````
 
 
-```````````````````````````````` example(GfmUsers: 14) options(root, prefix, suffix)
+```````````````````````````````` example(GfmUsers: 14) options(root, PREFIX, suffix)
 @123
 .
 <p><a href="http://github.com?user=123&amp;"><strong>@123</strong></a></p>
@@ -193,7 +193,7 @@ Document[0, 4]
 ````````````````````````````````
 
 
-```````````````````````````````` example(GfmUsers: 15) options(root, prefix, suffix, plain)
+```````````````````````````````` example(GfmUsers: 15) options(root, PREFIX, suffix, plain)
 @123
 .
 <p><a href="http://github.com?user=123&amp;">@123</a></p>

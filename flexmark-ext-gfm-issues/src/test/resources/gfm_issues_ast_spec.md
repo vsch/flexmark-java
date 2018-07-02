@@ -130,7 +130,7 @@ Document[0, 4]
 ````````````````````````````````
 
 
-```````````````````````````````` example(GfmIssues: 10) options(root, prefix)
+```````````````````````````````` example(GfmIssues: 10) options(root, PREFIX)
 #123
 .
 <p><a href="https://github.com/vsch/flexmark-java/issues?issue=123">#123</a></p>
@@ -152,7 +152,7 @@ Document[0, 4]
 ````````````````````````````````
 
 
-```````````````````````````````` example(GfmIssues: 12) options(root, prefix, suffix)
+```````````````````````````````` example(GfmIssues: 12) options(root, PREFIX, suffix)
 #123
 .
 <p><a href="https://github.com/vsch/flexmark-java/issues?issue=123&amp;">#123</a></p>
@@ -163,7 +163,7 @@ Document[0, 4]
 ````````````````````````````````
 
 
-```````````````````````````````` example(GfmIssues: 13) options(root, prefix, suffix, bold)
+```````````````````````````````` example(GfmIssues: 13) options(root, PREFIX, suffix, bold)
 #123
 .
 <p><a href="https://github.com/vsch/flexmark-java/issues?issue=123&amp;"><strong>#123</strong></a></p>

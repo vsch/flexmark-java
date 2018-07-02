@@ -23,6 +23,7 @@
         <module name="flexmark-all" />
         <module name="flexmark-docx-converter" />
         <module name="flexmark-ext-abbreviation" />
+        <module name="flexmark-ext-admonition" />
         <module name="flexmark-ext-anchorlink" />
         <module name="flexmark-ext-aside" />
         <module name="flexmark-ext-attributes" />
@@ -63,6 +64,48 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="1.7">
+      <module name="flexmark" target="7" />
+      <module name="flexmark-all" target="7" />
+      <module name="flexmark-docx-converter" target="7" />
+      <module name="flexmark-ext-abbreviation" target="7" />
+      <module name="flexmark-ext-admonition" target="7" />
+      <module name="flexmark-ext-anchorlink" target="7" />
+      <module name="flexmark-ext-aside" target="7" />
+      <module name="flexmark-ext-attributes" target="7" />
+      <module name="flexmark-ext-autolink" target="7" />
+      <module name="flexmark-ext-definition" target="7" />
+      <module name="flexmark-ext-emoji" target="7" />
+      <module name="flexmark-ext-enumerated-reference" target="7" />
+      <module name="flexmark-ext-escaped-character" target="7" />
+      <module name="flexmark-ext-footnotes" target="7" />
+      <module name="flexmark-ext-gfm-issues" target="7" />
+      <module name="flexmark-ext-gfm-strikethrough" target="7" />
+      <module name="flexmark-ext-gfm-tables" target="7" />
+      <module name="flexmark-ext-gfm-tasklist" target="7" />
+      <module name="flexmark-ext-gfm-users" target="7" />
+      <module name="flexmark-ext-ins" target="7" />
+      <module name="flexmark-ext-jekyll-front-matter" target="7" />
+      <module name="flexmark-ext-jekyll-tag" target="7" />
+      <module name="flexmark-ext-spec-example" target="7" />
+      <module name="flexmark-ext-superscript" target="7" />
+      <module name="flexmark-ext-tables" target="7" />
+      <module name="flexmark-ext-toc" target="7" />
+      <module name="flexmark-ext-typographic" target="7" />
+      <module name="flexmark-ext-wikilink" target="7" />
+      <module name="flexmark-ext-xwiki-macros" target="7" />
+      <module name="flexmark-ext-yaml-front-matter" target="7" />
+      <module name="flexmark-ext-youtube-embedded" target="7" />
+      <module name="flexmark-ext-zzzzzz" target="7" />
+      <module name="flexmark-formatter" target="7" />
+      <module name="flexmark-html-parser" target="7" />
+      <module name="flexmark-integration-test" target="7" />
+      <module name="flexmark-java" target="7" />
+      <module name="flexmark-jira-converter" target="7" />
+      <module name="flexmark-pdf-converter" target="7" />
+      <module name="flexmark-profile-pegdown" target="7" />
+      <module name="flexmark-test-util" target="7" />
+      <module name="flexmark-util" target="7" />
+      <module name="flexmark-youtrack-converter" target="7" />
       <module name="Samples" target="1.8" />
     </bytecodeTargetLevel>
   </component>
