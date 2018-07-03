@@ -37,3 +37,48 @@ Document[0, 53]
 ````````````````````````````````
 
 
+Ignore escaped `@`
+
+```````````````````````````````` example YouTube embedded link transformer: 3
+\@[test](https://www.youtube.com/watch?v=GYem-BGEhaY)
+.
+<p>@<a href="https://www.youtube.com/watch?v=GYem-BGEhaY">test</a></p>
+.
+Document[0, 54]
+  Paragraph[0, 54]
+    Text[0, 2] chars:[0, 2, "\@"]
+    Link[2, 53] textOpen:[2, 3, "["] text:[3, 7, "test"] textClose:[7, 8, "]"] linkOpen:[8, 9, "("] url:[9, 52, "https://www.youtube.com/watch?v=GYem-BGEhaY"] pageRef:[9, 52, "https://www.youtube.com/watch?v=GYem-BGEhaY"] linkClose:[52, 53, ")"]
+      Text[3, 7] chars:[3, 7, "test"]
+````````````````````````````````
+
+
+Ignore escaped `@`
+
+```````````````````````````````` example YouTube embedded link transformer: 4
+\\\@[test](https://www.youtube.com/watch?v=GYem-BGEhaY)
+.
+<p>\@<a href="https://www.youtube.com/watch?v=GYem-BGEhaY">test</a></p>
+.
+Document[0, 56]
+  Paragraph[0, 56]
+    Text[0, 4] chars:[0, 4, "\\\@"]
+    Link[4, 55] textOpen:[4, 5, "["] text:[5, 9, "test"] textClose:[9, 10, "]"] linkOpen:[10, 11, "("] url:[11, 54, "https://www.youtube.com/watch?v=GYem-BGEhaY"] pageRef:[11, 54, "https://www.youtube.com/watch?v=GYem-BGEhaY"] linkClose:[54, 55, ")"]
+      Text[5, 9] chars:[5, 9, "test"]
+````````````````````````````````
+
+
+Don't ignore escaped `\\\\`
+
+```````````````````````````````` example YouTube embedded link transformer: 5
+\\@[test](https://www.youtube.com/watch?v=GYem-BGEhaY)
+.
+<p>\<iframe src="https://www.youtube.com/embed/GYem-BGEhaY" width="420" height="315" class="youtube-embedded" allowfullscreen="true" frameborder="0"></iframe></p>
+.
+Document[0, 55]
+  Paragraph[0, 55]
+    Text[0, 2] chars:[0, 2, "\\"]
+    YouTubeLink[2, 54] textOpen:[2, 4, "@["] text:[4, 8, "test"] textClose:[8, 9, "]"] linkOpen:[9, 10, "("] url:[10, 53, "https://www.youtube.com/watch?v=GYem-BGEhaY"] linkClose:[53, 54, ")"]
+      Text[4, 8] chars:[4, 8, "test"]
+````````````````````````````````
+
+

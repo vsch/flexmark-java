@@ -268,6 +268,7 @@ Next 0.34.4
 
 * Change: convert class methods to static when possible
 * Fix: #239, flexmark-ext-youtube-embedded missing test case for '@' usage.
+* Fix: add ability to escape `@` for youtube links.
 
 0.34.2
 ------

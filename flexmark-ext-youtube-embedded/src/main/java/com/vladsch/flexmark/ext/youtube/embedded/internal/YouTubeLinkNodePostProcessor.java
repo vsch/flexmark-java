@@ -23,15 +23,18 @@ public class YouTubeLinkNodePostProcessor extends NodePostProcessor {
             if (previous instanceof Text) {
                 final BasedSequence chars = previous.getChars();
                 if (chars.endsWith("@") && chars.isContinuedBy(node.getChars())) {
-                    // trim previous chars to remove '@'
-                    previous.setChars(chars.subSequence(0, chars.length() - 1));
+                    int prevBackslash = chars.subSequence(0, chars.length() - 1).countTrailing('\\');
+                    if ((prevBackslash & 1) == 0) {
+                        // trim previous chars to remove '@'
+                        previous.setChars(chars.subSequence(0, chars.length() - 1));
 
-                    YouTubeLink youTubeLink = new YouTubeLink((Link) node);
-                    youTubeLink.takeChildren(node);
-                    node.unlink();
-                    previous.insertAfter(youTubeLink);
-                    state.nodeRemoved(node);
-                    state.nodeAddedWithChildren(youTubeLink);
+                        YouTubeLink youTubeLink = new YouTubeLink((Link) node);
+                        youTubeLink.takeChildren(node);
+                        node.unlink();
+                        previous.insertAfter(youTubeLink);
+                        state.nodeRemoved(node);
+                        state.nodeAddedWithChildren(youTubeLink);
+                    }
                 }
             }
         }
