@@ -4,6 +4,7 @@ import com.vladsch.flexmark.ast.Block;
 import com.vladsch.flexmark.ast.BlockContent;
 import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.ext.gfm.tables.*;
+import com.vladsch.flexmark.ext.gfm.tables.TableCell.Alignment;
 import com.vladsch.flexmark.parser.InlineParser;
 import com.vladsch.flexmark.parser.block.*;
 import com.vladsch.flexmark.util.options.DataHolder;
@@ -15,9 +16,8 @@ import java.util.Set;
 import java.util.regex.Pattern;
 
 public class TableBlockParser extends AbstractBlockParser {
-
-    private static String COL = "\\s*:?-{1,}:?\\s*";
-    private static Pattern TABLE_HEADER_SEPARATOR = Pattern.compile(
+    private static final String COL = "\\s*:?-{1,}:?\\s*";
+    static final Pattern TABLE_HEADER_SEPARATOR = Pattern.compile(
             // For single column, require at least one pipe, otherwise it's ambiguous with setext headers
             "\\|" + COL + "\\|?\\s*" + "|" +
                     COL + "\\|\\s*" + "|" +
@@ -26,7 +26,7 @@ public class TableBlockParser extends AbstractBlockParser {
     private final TableBlock block = new TableBlock();
     private BlockContent content = new BlockContent();
 
-    private boolean nextIsSeparatorLine = false;
+    boolean nextIsSeparatorLine = false;
     private BasedSequence separatorLine = BasedSequence.NULL;
     private int separatorLineNumber = 0;
 
@@ -34,7 +34,7 @@ public class TableBlockParser extends AbstractBlockParser {
     public static boolean bodyColumnsTruncatedToHead = true;
     public static int maxHeaderRows = 1;
 
-    private TableBlockParser() {
+    TableBlockParser() {
     }
 
     @Override
@@ -72,7 +72,7 @@ public class TableBlockParser extends AbstractBlockParser {
         Node section = new TableHead();
         block.appendChild(section);
 
-        List<TableCell.Alignment> alignments = parseAlignment(separatorLine);
+        List<Alignment> alignments = parseAlignment(separatorLine);
 
         int rowNumber = 0;
         int separatorColumns = alignments.size();
@@ -111,7 +111,7 @@ public class TableBlockParser extends AbstractBlockParser {
                     cell = i < rowCells ? cells.get(i + segmentOffset) : BasedSequence.NULL;
                 }
 
-                TableCell.Alignment alignment = i < alignments.size() ? alignments.get(i) : null;
+                Alignment alignment = i < alignments.size() ? alignments.get(i) : null;
                 TableCell tableCell = new TableCell();
                 tableCell.setHeader(rowNumber < separatorLineNumber);
                 tableCell.setAlignment(alignment);
@@ -146,7 +146,7 @@ public class TableBlockParser extends AbstractBlockParser {
         section.setCharsFromContent();
     }
 
-    private int countCells(List<BasedSequence> segments) {
+    private static int countCells(List<BasedSequence> segments) {
         int cells = 0;
         for (BasedSequence segment : segments) {
             if (isCell(segment)) cells++;
@@ -155,24 +155,24 @@ public class TableBlockParser extends AbstractBlockParser {
         return cells;
     }
 
-    private boolean isCell(BasedSequence segment) {
+    private static boolean isCell(BasedSequence segment) {
         return segment.length() != 1 || segment.charAt(0) != '|';
     }
 
-    private static List<TableCell.Alignment> parseAlignment(BasedSequence separatorLine) {
+    private static List<Alignment> parseAlignment(BasedSequence separatorLine) {
         List<BasedSequence> parts = split(separatorLine);
-        List<TableCell.Alignment> alignments = new ArrayList<TableCell.Alignment>();
+        List<Alignment> alignments = new ArrayList<Alignment>();
         for (BasedSequence part : parts) {
             BasedSequence trimmed = part.trim();
             boolean left = trimmed.startsWith(":");
             boolean right = trimmed.endsWith(":");
-            TableCell.Alignment alignment = getAlignment(left, right);
+            Alignment alignment = getAlignment(left, right);
             alignments.add(alignment);
         }
         return alignments;
     }
 
-    private static List<BasedSequence> split(BasedSequence input) {
+    static List<BasedSequence> split(BasedSequence input) {
         BasedSequence line = input.trim();
         int lineLength = line.length();
         List<BasedSequence> segments = new ArrayList<BasedSequence>();
@@ -216,13 +216,13 @@ public class TableBlockParser extends AbstractBlockParser {
         return segments;
     }
 
-    private static TableCell.Alignment getAlignment(boolean left, boolean right) {
+    private static Alignment getAlignment(boolean left, boolean right) {
         if (left && right) {
-            return TableCell.Alignment.CENTER;
+            return Alignment.CENTER;
         } else if (left) {
-            return TableCell.Alignment.LEFT;
+            return Alignment.LEFT;
         } else if (right) {
-            return TableCell.Alignment.RIGHT;
+            return Alignment.RIGHT;
         } else {
             return null;
         }
@@ -251,7 +251,7 @@ public class TableBlockParser extends AbstractBlockParser {
     }
 
     private static class BlockFactory extends AbstractBlockParserFactory {
-        private BlockFactory(DataHolder options) {
+        BlockFactory(DataHolder options) {
             super(options);
         }
 

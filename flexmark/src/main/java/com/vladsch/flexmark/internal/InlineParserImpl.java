@@ -31,7 +31,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
     }
 
     static class InlineParserDependencyStage {
-        private final List<InlineParserExtensionFactory> dependents;
+        final List<InlineParserExtensionFactory> dependents;
 
         public InlineParserDependencyStage(List<InlineParserExtensionFactory> dependents) {
             // compute mappings
@@ -263,7 +263,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
                         if (!p1.getWantExclamationPrefix(options)) lv1++;
                         if (!p2.getWantExclamationPrefix(options)) lv2++;
                     }
-                    return lv1 - lv2;
+                    return Integer.compare(lv1, lv2);
                 }
             });
 
@@ -906,7 +906,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
         Node lastChild = block.getLastChild();
         // Check previous text for trailing spaces.
         // The "endsWith" is an optimization to avoid an RE match in the common case.
-        if (lastChild != null && lastChild instanceof Text && (lastChild.getChars().endsWith(" ") || crLf && lastChild.getChars().endsWith(" \r"))) {
+        if (lastChild instanceof Text && (lastChild.getChars().endsWith(" ") || crLf && lastChild.getChars().endsWith(" \r"))) {
             Text text = (Text) lastChild;
             BasedSequence literal = text.getChars();
             Matcher matcher = myParsing.FINAL_SPACE.matcher(literal);
@@ -920,7 +920,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
                 }
             }
         } else {
-            if (crLf && lastChild != null && lastChild instanceof Text) {
+            if (crLf && lastChild instanceof Text) {
                 Text text = (Text) lastChild;
                 BasedSequence literal = text.getChars();
                 if (literal.length() > 1) {
@@ -1176,9 +1176,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
     protected boolean parseCloseBracket() {
         index++;
         int startIndex = index;
-
         int nestedBrackets;
-        boolean hadBang = false;
 
         // look through stack of delimiters for a [ or ![
         Bracket opener = this.lastBracket;
@@ -1514,7 +1512,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
         }
     }
 
-    protected boolean containsLinkRefs(BasedSequence nodeChars, Node next, Boolean isDefined) {
+    protected static boolean containsLinkRefs(BasedSequence nodeChars, Node next, Boolean isDefined) {
         int startOffset = nodeChars.getStartOffset();
         int endOffset = nodeChars.getEndOffset();
         while (next != null) {
@@ -1526,7 +1524,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
         return false;
     }
 
-    protected void collapseLinkRefChildren(Node node, Boolean isTentative) {
+    protected static void collapseLinkRefChildren(Node node, Boolean isTentative) {
         Node child = node.getFirstChild();
         boolean hadCollapse = false;
         while (child != null) {

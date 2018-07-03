@@ -1,6 +1,7 @@
 package com.vladsch.flexmark.ext.youtube.embedded.internal;
 
 import com.vladsch.flexmark.ast.Link;
+import com.vladsch.flexmark.ext.youtube.embedded.YouTubeLink;
 import com.vladsch.flexmark.html.CustomNodeRenderer;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.*;
@@ -19,16 +20,16 @@ public class YouTubeLinkNodeRenderer implements NodeRenderer {
         final YouTubeLinkNodeRenderer self = this;
 
         HashSet<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
-        set.add(new NodeRenderingHandler<Link>(Link.class, new CustomNodeRenderer<Link>() {
+        set.add(new NodeRenderingHandler<YouTubeLink>(YouTubeLink.class, new CustomNodeRenderer<YouTubeLink>() {
             @Override
-            public void render(Link node, NodeRendererContext context, HtmlWriter html) {
+            public void render(YouTubeLink node, NodeRendererContext context, HtmlWriter html) {
                 self.render(node, context, html);
             }
         }));
         return set;
     }
 
-    private void render(final Link node, final NodeRendererContext context, final HtmlWriter html) {
+    private void render(final YouTubeLink node, final NodeRendererContext context, final HtmlWriter html) {
         if (context.isDoNotRenderLinks()) {
             context.renderChildren(node);
         } else {
@@ -36,7 +37,6 @@ public class YouTubeLinkNodeRenderer implements NodeRenderer {
             ResolvedLink resolvedLink = context.resolveLink(LinkType.LINK, node.getUrl().unescape(), null);
 
             if (resolvedLink.getUrl().contains("www.youtube.com/watch")) {
-
                 html.attr("src", resolvedLink.getUrl().replace("watch?v=".toLowerCase(), "embed/"));
                 html.attr("width", "420");
                 html.attr("height", "315");
