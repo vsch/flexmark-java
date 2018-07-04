@@ -8,7 +8,7 @@
   </component>
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/FlexmarkJavaAssets" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/flexmark-java.wiki" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/FlexmarkJavaAssets" vcs="" />
+    <mapping directory="$PROJECT_DIR$/flexmark-java.wiki" vcs="" />
   </component>
 </project>

@@ -115,6 +115,11 @@
         </dependency>
         <dependency>
             <groupId>com.vladsch.flexmark</groupId>
+            <artifactId>flexmark-ext-media-tags</artifactId>
+            <version>0.34.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.vladsch.flexmark</groupId>
             <artifactId>flexmark-ext-ins</artifactId>
             <version>0.34.4</version>
         </dependency>
