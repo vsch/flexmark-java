@@ -83,9 +83,9 @@ Document[0, 18]
 ````````````````````````````````
 
 
-With PREFIX/suffix, anchor links wrap header text
+With prefix/suffix, anchor links wrap header text
 
-```````````````````````````````` example(AnchorLinks: 5) options(PREFIX-suffix)
+```````````````````````````````` example(AnchorLinks: 5) options(prefix-suffix)
 # Enhanced Edition
 .
 <h1><a href="#enhanced-edition" id="enhanced-edition" class="anchor"><span class="anchor">Enhanced Edition</span></a></h1>
@@ -97,9 +97,9 @@ Document[0, 18]
 ````````````````````````````````
 
 
-With PREFIX/suffix, anchor links do not wrap header text
+With prefix/suffix, anchor links do not wrap header text
 
-```````````````````````````````` example(AnchorLinks: 6) options(no-wrap, PREFIX-suffix)
+```````````````````````````````` example(AnchorLinks: 6) options(no-wrap, prefix-suffix)
 # Enhanced Edition
 .
 <h1><a href="#enhanced-edition" id="enhanced-edition" class="anchor"><span class="anchor"></span></a>Enhanced Edition</h1>
@@ -111,9 +111,9 @@ Document[0, 18]
 ````````````````````````````````
 
 
-With PREFIX/suffix, anchor links do not wrap header text
+With prefix/suffix, anchor links do not wrap header text
 
-```````````````````````````````` example(AnchorLinks: 7) options(no-wrap, PREFIX-suffix, no-class)
+```````````````````````````````` example(AnchorLinks: 7) options(no-wrap, prefix-suffix, no-class)
 # Enhanced Edition
 .
 <h1><a href="#enhanced-edition" id="enhanced-edition"><span class="anchor"></span></a>Enhanced Edition</h1>
@@ -125,9 +125,9 @@ Document[0, 18]
 ````````````````````````````````
 
 
-Set name, with PREFIX/suffix, anchor links do not wrap header text
+Set name, with prefix/suffix, anchor links do not wrap header text
 
-```````````````````````````````` example(AnchorLinks: 8) options(no-wrap, PREFIX-suffix, no-class, set-name)
+```````````````````````````````` example(AnchorLinks: 8) options(no-wrap, prefix-suffix, no-class, set-name)
 # Enhanced Edition
 .
 <h1><a href="#enhanced-edition" id="enhanced-edition" name="enhanced-edition"><span class="anchor"></span></a>Enhanced Edition</h1>
@@ -139,9 +139,9 @@ Document[0, 18]
 ````````````````````````````````
 
 
-Set name, no id, with PREFIX/suffix, anchor links do not wrap header text
+Set name, no id, with prefix/suffix, anchor links do not wrap header text
 
-```````````````````````````````` example(AnchorLinks: 9) options(no-wrap, PREFIX-suffix, no-class, set-name, no-id)
+```````````````````````````````` example(AnchorLinks: 9) options(no-wrap, prefix-suffix, no-class, set-name, no-id)
 # Enhanced Edition
 .
 <h1><a href="#enhanced-edition" name="enhanced-edition"><span class="anchor"></span></a>Enhanced Edition</h1>
@@ -155,7 +155,7 @@ Document[0, 18]
 
 Just to test postProcessor exclusions
 
-```````````````````````````````` example(AnchorLinks: 10) options(no-wrap, PREFIX-suffix, no-class, set-name, no-id)
+```````````````````````````````` example(AnchorLinks: 10) options(no-wrap, prefix-suffix, no-class, set-name, no-id)
 > # Enhanced Edition
 .
 <blockquote>

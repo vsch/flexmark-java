@@ -3826,7 +3826,7 @@ TEXT :+1: TEXT
 
 unprefixed
 
-```````````````````````````````` example(www. link: 1) options(no-www-PREFIX)
+```````````````````````````````` example(www. link: 1) options(no-www-prefix)
 [www.example](www.example.com) 
 .
 <w:body>

@@ -2643,7 +2643,7 @@ Definition Term
 
 ## Fenced Code
 
-Change language class PREFIX
+Change language class prefix
 
 ```````````````````````````````` example Fenced Code: 1
 ```text

@@ -61,8 +61,8 @@ document.
    * `numbered` to use a numbered list for TOC items
 
 2. `"Title"` specifies the text for the table of contents heading. If omitted or blank then no
-   heading will be generated for the table of contents. `#` PREFIX in the title will specify the
-   header level to use for the heading above the table of contents listing. If no `#` PREFIX is
+   heading will be generated for the table of contents. `#` prefix in the title will specify the
+   header level to use for the heading above the table of contents listing. If no `#` prefix is
 
 no spaces after first bracket
 

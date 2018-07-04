@@ -367,9 +367,9 @@ Document[0, 347]
 ````````````````````````````````
 
 
-Fenced code option no language PREFIX
+Fenced code option no language prefix
 
-```````````````````````````````` example(SpecExample: 15) options(no-language-PREFIX)
+```````````````````````````````` example(SpecExample: 15) options(no-language-prefix)
 ```````````````` example
 Markdown only
 …

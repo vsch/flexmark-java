@@ -1596,7 +1596,7 @@ Adds missing editor actions for end of word navigation but that is just the begi
 
 * Enable Auto Indent Lines after move line/selection up or down actions to have them indented
   automatically.
-* Use Smart Paste to eliminate case change and PREFIX edits when pasting identifiers. MIA will
+* Use Smart Paste to eliminate case change and prefix edits when pasting identifiers. MIA will
   match case and style of identifier at destination when you paste, undo to get results before
   MIA adjusted them. Copy `myColumnData` and paste it over `DEFAULT_VALUE` to get `COLUMN_DATA`,
   reverse the order and get `myDefaultValue`. Works when pasting at the **beginning**, **end**
@@ -1633,7 +1633,7 @@ Adds missing editor actions for end of word navigation but that is just the begi
 * Enable Auto Indent Lines after move line/selection up or down actions to have them indented
   automatically.
 
-* Use Smart Paste to eliminate case change and PREFIX edits when pasting identifiers. MIA will
+* Use Smart Paste to eliminate case change and prefix edits when pasting identifiers. MIA will
   match case and style of identifier at destination when you paste, undo to get results before
   MIA adjusted them. Copy `myColumnData` and paste it over `DEFAULT_VALUE` to get `COLUMN_DATA`,
   reverse the order and get `myDefaultValue`. Works when pasting at the **beginning**, **end**
@@ -1678,7 +1678,7 @@ Adds missing editor actions for end of word navigation but that is just the begi
 
 * Enable Auto Indent Lines after move line/selection up or down actions to have them indented
   automatically.
-* Use Smart Paste to eliminate case change and PREFIX edits when pasting identifiers. MIA will
+* Use Smart Paste to eliminate case change and prefix edits when pasting identifiers. MIA will
   match case and style of identifier at destination when you paste, undo to get results before
   MIA adjusted them. Copy `myColumnData` and paste it over `DEFAULT_VALUE` to get `COLUMN_DATA`,
   reverse the order and get `myDefaultValue`. Works when pasting at the **beginning**, **end**
@@ -1715,7 +1715,7 @@ Adds missing editor actions for end of word navigation but that is just the begi
 * Enable Auto Indent Lines after move line/selection up or down actions to have them indented
     automatically.
 
-* Use Smart Paste to eliminate case change and PREFIX edits when pasting identifiers. MIA will
+* Use Smart Paste to eliminate case change and prefix edits when pasting identifiers. MIA will
     match case and style of identifier at destination when you paste, undo to get results before
     MIA adjusted them. Copy `myColumnData` and paste it over `DEFAULT_VALUE` to get `COLUMN_DATA`,
     reverse the order and get `myDefaultValue`. Works when pasting at the **beginning**, **end**
@@ -1760,7 +1760,7 @@ Adds missing editor actions for end of word navigation but that is just the begi
 
 * Enable Auto Indent Lines after move line/selection up or down actions to have them indented
     automatically.
-* Use Smart Paste to eliminate case change and PREFIX edits when pasting identifiers. MIA will
+* Use Smart Paste to eliminate case change and prefix edits when pasting identifiers. MIA will
     match case and style of identifier at destination when you paste, undo to get results before
     MIA adjusted them. Copy `myColumnData` and paste it over `DEFAULT_VALUE` to get `COLUMN_DATA`,
     reverse the order and get `myDefaultValue`. Works when pasting at the **beginning**, **end**
@@ -1797,7 +1797,7 @@ Adds missing editor actions for end of word navigation but that is just the begi
 * Enable Auto Indent Lines after move line/selection up or down actions to have them indented
   automatically.
 
-* Use Smart Paste to eliminate case change and PREFIX edits when pasting identifiers. MIA will
+* Use Smart Paste to eliminate case change and prefix edits when pasting identifiers. MIA will
   match case and style of identifier at destination when you paste, undo to get results before
   MIA adjusted them. Copy `myColumnData` and paste it over `DEFAULT_VALUE` to get `COLUMN_DATA`,
   reverse the order and get `myDefaultValue`. Works when pasting at the **beginning**, **end**

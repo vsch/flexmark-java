@@ -280,7 +280,7 @@ Document[0, 30]
 
 Block quote erroneously parsed on closing inline HTML.
 
-Block parsing is done before inline parsing. Therefore at the time a block quote PREFIX is
+Block parsing is done before inline parsing. Therefore at the time a block quote prefix is
 detected when the paragraph text is not parsed for inline HTML. Therefore it is not possible to
 with the CommonMark architecture to correctly parse.
 

@@ -876,12 +876,12 @@ Document[0, 41]
 ````````````````````````````````
 
 
-Custom PREFIX
+Custom prefix
 
-```````````````````````````````` example(WikiLinks: 40) options(link-PREFIX)
+```````````````````````````````` example(WikiLinks: 40) options(link-prefix)
 [[wiki link]] [^link][ref] [[^wiki link]]
 .
-<p><a href="/PREFIX/wiki-link">wiki link</a> [^link][ref] <a href="/PREFIX/^wiki-link">^wiki link</a></p>
+<p><a href="/prefix/wiki-link">wiki link</a> [^link][ref] <a href="/prefix/^wiki-link">^wiki link</a></p>
 .
 Document[0, 41]
   Paragraph[0, 41]
@@ -1106,12 +1106,12 @@ Document[0, 25]
 ````````````````````````````````
 
 
-Custom PREFIX with empty anchor ref
+Custom prefix with empty anchor ref
 
-```````````````````````````````` example(WikiLinks: 56) options(link-PREFIX)
+```````````````````````````````` example(WikiLinks: 56) options(link-prefix)
 [[wiki link#]]
 .
-<p><a href="/PREFIX/wiki-link#">wiki link#</a></p>
+<p><a href="/prefix/wiki-link#">wiki link#</a></p>
 .
 Document[0, 14]
   Paragraph[0, 14]
@@ -1120,12 +1120,12 @@ Document[0, 14]
 ````````````````````````````````
 
 
-Custom PREFIX with empty anchor ref
+Custom prefix with empty anchor ref
 
-```````````````````````````````` example(WikiLinks: 57) options(link-PREFIX, allow-anchors)
+```````````````````````````````` example(WikiLinks: 57) options(link-prefix, allow-anchors)
 [[wiki link#]]
 .
-<p><a href="/PREFIX/wiki-link#">wiki link</a></p>
+<p><a href="/prefix/wiki-link#">wiki link</a></p>
 .
 Document[0, 14]
   Paragraph[0, 14]
@@ -1134,12 +1134,12 @@ Document[0, 14]
 ````````````````````````````````
 
 
-Custom PREFIX with anchor ref
+Custom prefix with anchor ref
 
-```````````````````````````````` example(WikiLinks: 58) options(link-PREFIX)
+```````````````````````````````` example(WikiLinks: 58) options(link-prefix)
 [[wiki link#anchor-ref]]
 .
-<p><a href="/PREFIX/wiki-link#anchor-ref">wiki link#anchor-ref</a></p>
+<p><a href="/prefix/wiki-link#anchor-ref">wiki link#anchor-ref</a></p>
 .
 Document[0, 24]
   Paragraph[0, 24]
@@ -1148,12 +1148,12 @@ Document[0, 24]
 ````````````````````````````````
 
 
-Custom PREFIX with anchor ref
+Custom prefix with anchor ref
 
-```````````````````````````````` example(WikiLinks: 59) options(link-PREFIX, allow-anchors)
+```````````````````````````````` example(WikiLinks: 59) options(link-prefix, allow-anchors)
 [[wiki link#anchor-ref]]
 .
-<p><a href="/PREFIX/wiki-link#anchor-ref">wiki link</a></p>
+<p><a href="/prefix/wiki-link#anchor-ref">wiki link</a></p>
 .
 Document[0, 24]
   Paragraph[0, 24]
@@ -1198,9 +1198,9 @@ Document[0, 27]
 ````````````````````````````````
 
 
-Absolute link PREFIX
+Absolute link prefix
 
-```````````````````````````````` example(WikiLinks: 62) options(custom-link-escape,link-PREFIX-absolute)
+```````````````````````````````` example(WikiLinks: 62) options(custom-link-escape,link-prefix-absolute)
 [[Page]]
 
 [[dir/Page]]
@@ -1230,9 +1230,9 @@ Document[0, 48]
 ````````````````````````````````
 
 
-Absolute image PREFIX
+Absolute image prefix
 
-```````````````````````````````` example(WikiLinks: 63) options(wiki-images,custom-link-escape,image-PREFIX-absolute)
+```````````````````````````````` example(WikiLinks: 63) options(wiki-images,custom-link-escape,image-prefix-absolute)
 ![[Img]]
 
 ![[dir/Img]]
@@ -1876,20 +1876,20 @@ Document[0, 134]
 ````````````````````````````````
 
 
-Custom PREFIX with empty anchor ref
+Custom prefix with empty anchor ref
 
-```````````````````````````````` example(Wiki Typographic Text: 16) options(link-PREFIX)
+```````````````````````````````` example(Wiki Typographic Text: 16) options(link-prefix)
 [[wiki link#]]
 [[wiki--link#]]
 [[wiki...link#]]
 [[wiki'link#]]
 [['wiki link'#]]
 .
-<p><a href="/PREFIX/wiki-link#">wiki link#</a>
-<a href="/PREFIX/wiki--link#">wiki&ndash;link#</a>
-<a href="/PREFIX/wiki...link#">wiki&hellip;link#</a>
-<a href="/PREFIX/wiki'link#">wiki&rsquo;link#</a>
-<a href="/PREFIX/'wiki-link'#">&rsquo;wiki link&rsquo;#</a></p>
+<p><a href="/prefix/wiki-link#">wiki link#</a>
+<a href="/prefix/wiki--link#">wiki&ndash;link#</a>
+<a href="/prefix/wiki...link#">wiki&hellip;link#</a>
+<a href="/prefix/wiki'link#">wiki&rsquo;link#</a>
+<a href="/prefix/'wiki-link'#">&rsquo;wiki link&rsquo;#</a></p>
 .
 Document[0, 79]
   Paragraph[0, 79]
@@ -1919,20 +1919,20 @@ Document[0, 79]
 ````````````````````````````````
 
 
-Custom PREFIX with empty anchor ref
+Custom prefix with empty anchor ref
 
-```````````````````````````````` example(Wiki Typographic Text: 17) options(link-PREFIX, allow-anchors)
+```````````````````````````````` example(Wiki Typographic Text: 17) options(link-prefix, allow-anchors)
 [[wiki link#]]
 [[wiki--link#]]
 [[wiki...link#]]
 [[wiki'link#]]
 [['wiki link'#]]
 .
-<p><a href="/PREFIX/wiki-link#">wiki link</a>
-<a href="/PREFIX/wiki--link#">wiki&ndash;link</a>
-<a href="/PREFIX/wiki...link#">wiki&hellip;link</a>
-<a href="/PREFIX/wiki'link#">wiki&rsquo;link</a>
-<a href="/PREFIX/'wiki-link'#">&rsquo;wiki link&rsquo;</a></p>
+<p><a href="/prefix/wiki-link#">wiki link</a>
+<a href="/prefix/wiki--link#">wiki&ndash;link</a>
+<a href="/prefix/wiki...link#">wiki&hellip;link</a>
+<a href="/prefix/wiki'link#">wiki&rsquo;link</a>
+<a href="/prefix/'wiki-link'#">&rsquo;wiki link&rsquo;</a></p>
 .
 Document[0, 79]
   Paragraph[0, 79]
@@ -1961,20 +1961,20 @@ Document[0, 79]
 ````````````````````````````````
 
 
-Custom PREFIX with anchor ref
+Custom prefix with anchor ref
 
-```````````````````````````````` example(Wiki Typographic Text: 18) options(link-PREFIX)
+```````````````````````````````` example(Wiki Typographic Text: 18) options(link-prefix)
 [[wiki link#anchor-ref]]
 [[wiki--link#anchor-ref]]
 [[wiki...link#anchor-ref]]
 [[wiki'link#anchor-ref]]
 [['wiki link'#anchor-ref]]
 .
-<p><a href="/PREFIX/wiki-link#anchor-ref">wiki link#anchor-ref</a>
-<a href="/PREFIX/wiki--link#anchor-ref">wiki&ndash;link#anchor-ref</a>
-<a href="/PREFIX/wiki...link#anchor-ref">wiki&hellip;link#anchor-ref</a>
-<a href="/PREFIX/wiki'link#anchor-ref">wiki&rsquo;link#anchor-ref</a>
-<a href="/PREFIX/'wiki-link'#anchor-ref">&rsquo;wiki link&rsquo;#anchor-ref</a></p>
+<p><a href="/prefix/wiki-link#anchor-ref">wiki link#anchor-ref</a>
+<a href="/prefix/wiki--link#anchor-ref">wiki&ndash;link#anchor-ref</a>
+<a href="/prefix/wiki...link#anchor-ref">wiki&hellip;link#anchor-ref</a>
+<a href="/prefix/wiki'link#anchor-ref">wiki&rsquo;link#anchor-ref</a>
+<a href="/prefix/'wiki-link'#anchor-ref">&rsquo;wiki link&rsquo;#anchor-ref</a></p>
 .
 Document[0, 129]
   Paragraph[0, 129]
@@ -2004,20 +2004,20 @@ Document[0, 129]
 ````````````````````````````````
 
 
-Custom PREFIX with anchor ref
+Custom prefix with anchor ref
 
-```````````````````````````````` example(Wiki Typographic Text: 19) options(link-PREFIX, allow-anchors)
+```````````````````````````````` example(Wiki Typographic Text: 19) options(link-prefix, allow-anchors)
 [[wiki link#anchor-ref]]
 [[wiki--link#anchor-ref]]
 [[wiki...link#anchor-ref]]
 [[wiki'link#anchor-ref]]
 [['wiki link'#anchor-ref]]
 .
-<p><a href="/PREFIX/wiki-link#anchor-ref">wiki link</a>
-<a href="/PREFIX/wiki--link#anchor-ref">wiki&ndash;link</a>
-<a href="/PREFIX/wiki...link#anchor-ref">wiki&hellip;link</a>
-<a href="/PREFIX/wiki'link#anchor-ref">wiki&rsquo;link</a>
-<a href="/PREFIX/'wiki-link'#anchor-ref">&rsquo;wiki link&rsquo;</a></p>
+<p><a href="/prefix/wiki-link#anchor-ref">wiki link</a>
+<a href="/prefix/wiki--link#anchor-ref">wiki&ndash;link</a>
+<a href="/prefix/wiki...link#anchor-ref">wiki&hellip;link</a>
+<a href="/prefix/wiki'link#anchor-ref">wiki&rsquo;link</a>
+<a href="/prefix/'wiki-link'#anchor-ref">&rsquo;wiki link&rsquo;</a></p>
 .
 Document[0, 129]
   Paragraph[0, 129]
@@ -2322,9 +2322,9 @@ Document[0, 47]
 ````````````````````````````````
 
 
-Custom PREFIX
+Custom prefix
 
-```````````````````````````````` example(WikiImages: 15) options(wiki-images, image-PREFIX)
+```````````````````````````````` example(WikiImages: 15) options(wiki-images, image-prefix)
 [[wiki image]] [^image][ref] [[^wiki image]]
 .
 <p><a href="wiki-image">wiki image</a> [^image][ref] <a href="^wiki-image">^wiki image</a></p>
@@ -2342,9 +2342,9 @@ Document[0, 44]
 ````````````````````````````````
 
 
-Custom PREFIX
+Custom prefix
 
-```````````````````````````````` example(WikiImages: 16) options(wiki-images, image-PREFIX)
+```````````````````````````````` example(WikiImages: 16) options(wiki-images, image-prefix)
 ![[wiki image]] ![^image][ref] ![[^wiki image]]
 .
 <p><img src="/images/wiki-image" alt="wiki image" /> [^image][ref] <img src="/images/^wiki-image" alt="^wiki image" /></p>
@@ -2474,9 +2474,9 @@ Document[0, 27]
 ````````````````````````````````
 
 
-Custom PREFIX with empty anchor ref
+Custom prefix with empty anchor ref
 
-```````````````````````````````` example(WikiImages: 25) options(wiki-images, image-PREFIX)
+```````````````````````````````` example(WikiImages: 25) options(wiki-images, image-prefix)
 ![[wiki image#]]
 .
 <p><img src="/images/wiki-image#" alt="wiki image#" /></p>
@@ -2488,9 +2488,9 @@ Document[0, 16]
 ````````````````````````````````
 
 
-Custom PREFIX with anchor ref
+Custom prefix with anchor ref
 
-```````````````````````````````` example(WikiImages: 26) options(wiki-images, image-PREFIX)
+```````````````````````````````` example(WikiImages: 26) options(wiki-images, image-prefix)
 ![[wiki image#anchor-ref]]
 .
 <p><img src="/images/wiki-image#anchor-ref" alt="wiki image#anchor-ref" /></p>

@@ -2616,7 +2616,7 @@ Here the block quote messes up parsing and HTML generation
 ````````````````````````````````
 
 
-An item PREFIX with a space but otherwise empty, instead of lazy continuation becomes something
+An item prefix with a space but otherwise empty, instead of lazy continuation becomes something
 outside the item as part of the list
 
 ```````````````````````````````` example(Bugs: 5) options(IGNORE)
