@@ -2,16 +2,18 @@
 <project version="4">
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/FlexmarkJavaAssets/issues/198.flexmark_sioobe.md" charset="UTF-16" />
     <file url="file://$PROJECT_DIR$/flexmark" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/flexmark-all" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/flexmark-docx-converter" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/flexmark-ext-abbreviation" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/flexmark-ext-admonition" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/flexmark-ext-anchorlink" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/flexmark-ext-aside" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/flexmark-ext-attributes" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/flexmark-ext-autolink" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/flexmark-ext-definition" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/flexmark-ext-emoji" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/flexmark-ext-enumerated-reference" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/flexmark-ext-escaped-character" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/flexmark-ext-footnotes" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/flexmark-ext-gfm-issues" charset="UTF-8" />
