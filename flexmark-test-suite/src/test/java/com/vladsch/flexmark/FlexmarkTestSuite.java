@@ -21,6 +21,7 @@ import com.vladsch.flexmark.ext.gfm.users.ExtGfmUsersTestSuite;
 import com.vladsch.flexmark.ext.ins.ExtInsTestSuite;
 import com.vladsch.flexmark.ext.jekyll.front.matter.ExtJekyllFrontMatterTestSuite;
 import com.vladsch.flexmark.ext.jekyll.tag.ExtJekyllTagTestSuite;
+import com.vladsch.flexmark.ext.media.tags.ExtMediaTagsTestSuite;
 import com.vladsch.flexmark.ext.spec.example.ExtSpecExampleTestSuite;
 import com.vladsch.flexmark.ext.tables.ExtTablesTestSuite;
 import com.vladsch.flexmark.ext.toc.ExtTocTestSuite;
@@ -28,6 +29,7 @@ import com.vladsch.flexmark.ext.typographic.ExtTypographicTestSuite;
 import com.vladsch.flexmark.ext.wikilink.ExtWikiLinkTestSuite;
 import com.vladsch.flexmark.ext.xwiki.macros.ExtXWikiMacroTestSuite;
 import com.vladsch.flexmark.ext.yaml.front.matter.ExtYamlFrontMatterTestSuite;
+import com.vladsch.flexmark.ext.youtube.embedded.ExtYouTubeLinkTestSuite;
 import com.vladsch.flexmark.ext.zzzzzz.ExtZzzzzzTestSuite;
 import com.vladsch.flexmark.integration.IntegrationTestSuite;
 import com.vladsch.flexmark.jira.converter.JiraConverterTestSuite;
@@ -61,6 +63,7 @@ import org.junit.runners.Suite;
         ExtJekyllFrontMatterTestSuite.class,
         ExtJekyllTagTestSuite.class,
         ExtInsTestSuite.class,
+        ExtMediaTagsTestSuite.class,
         ExtSuperscriptTestSuite.class,
         ExtSpecExampleTestSuite.class,
         ExtTablesTestSuite.class,
@@ -69,6 +72,7 @@ import org.junit.runners.Suite;
         ExtWikiLinkTestSuite.class,
         ExtXWikiMacroTestSuite.class,
         ExtYamlFrontMatterTestSuite.class,
+        ExtYouTubeLinkTestSuite.class,
         ExtZzzzzzTestSuite.class,
         FlexmarkHtmlParserTestSuite.class,
         JiraConverterTestSuite.class,

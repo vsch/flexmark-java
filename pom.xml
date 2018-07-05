@@ -44,6 +44,7 @@
         <module>flexmark-ext-ins</module>
         <module>flexmark-ext-jekyll-front-matter</module>
         <module>flexmark-ext-jekyll-tag</module>
+        <module>flexmark-ext-media-tags</module>
         <module>flexmark-ext-spec-example</module>
         <module>flexmark-ext-superscript</module>
         <module>flexmark-ext-tables</module>
@@ -302,6 +303,11 @@
             </dependency>
             <dependency>
                 <groupId>com.vladsch.flexmark</groupId>
+                <artifactId>flexmark-ext-ins</artifactId>
+                <version>0.34.4</version>
+            </dependency>
+            <dependency>
+                <groupId>com.vladsch.flexmark</groupId>
                 <artifactId>flexmark-ext-jekyll-front-matter</artifactId>
                 <version>0.34.4</version>
             </dependency>
@@ -312,7 +318,7 @@
             </dependency>
             <dependency>
                 <groupId>com.vladsch.flexmark</groupId>
-                <artifactId>flexmark-ext-ins</artifactId>
+                <artifactId>flexmark-ext-media-tags</artifactId>
                 <version>0.34.4</version>
             </dependency>
             <dependency>

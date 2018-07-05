@@ -52,5 +52,7 @@
     <orderEntry type="module" module-name="flexmark-util" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-youtrack-converter" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-ext-admonition" scope="TEST" />
+    <orderEntry type="module" module-name="flexmark-ext-media-tags" scope="TEST" />
+    <orderEntry type="module" module-name="flexmark-ext-youtube-embedded" scope="TEST" />
   </component>
 </module>

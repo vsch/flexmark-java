@@ -8,6 +8,7 @@ flexmark-java
 - [To Do](#to-do)
     - [Docx Converter](#docx-converter)
     - [GitLab compatibility extensions](#gitlab-compatibility-extensions)
+- [Next 0.34.4](#next-0344)
 - [0.34.2](#0342)
 - [0.34.0](#0340)
 - [0.32.24](#03224)
@@ -261,6 +262,14 @@ flexmark-java
       similar to Math solution above.
 
 &nbsp;</details>
+
+Next 0.34.4
+-----------
+
+* Add: media tags extension thanks to Cornelia Schultz (GitHub @CorneliaXaos)
+* Change: convert class methods to static when possible
+* Fix: #239, flexmark-ext-youtube-embedded missing test case for `@` usage.
+* Fix: add ability to escape `@` for youtube links.
 
 0.34.2
 ------
