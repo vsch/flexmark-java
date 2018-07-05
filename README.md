@@ -43,7 +43,7 @@ following sample:
 <dependency>
     <groupId>com.vladsch.flexmark</groupId>
     <artifactId>flexmark-all</artifactId>
-    <version>0.34.2</version>
+    <version>0.34.4</version>
 </dependency>
 ```
 
@@ -86,7 +86,7 @@ public class BasicSample {
 #### Building via Gradle
 
 ```shell
-compile 'com.vladsch.flexmark:flexmark-all:0.34.2'
+compile 'com.vladsch.flexmark:flexmark-all:0.34.4'
 ```
 
 #### Building with Android Studio
@@ -176,6 +176,9 @@ custom node renderer if you need to override the generated link HTML.
 
 ### Latest Additions
 
+* [Extensions: Media Tags](../../wiki/Extensions#media-tags) Media link transformer extension
+  courtesy Cornelia Schultz (GitHub [@CorneliaXaos](https://github.com/CorneliaXaos)) transforms
+  links using custom prefixes to Audio, Embed, Picture, and Video HTML5 tags.
 * [Translation Helper API](../../wiki/Translation-Helper-API) to make translating markdown
   documents easier.
 * [Admonition Extension](https://github.com/vsch/flexmark-java/wiki/Extensions#admonition) To
