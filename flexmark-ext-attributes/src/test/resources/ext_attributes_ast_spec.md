@@ -1193,10 +1193,10 @@ Document[0, 76]
 .
 Document[0, 111]
   Paragraph[0, 21] isTrailingBlankLine
-    ImageRef[1, 20] textOpen:[1, 2, "["] text:[2, 13, "reference 1"] textClose:[13, 14, "]"] referenceOpen:[14, 15, "["] reference:[15, 19, "test"] referenceClose:[19, 20, "]"]
+    ImageRef[0, 20] textOpen:[0, 2, "!["] text:[2, 13, "reference 1"] textClose:[13, 14, "]"] referenceOpen:[14, 15, "["] reference:[15, 19, "test"] referenceClose:[19, 20, "]"]
       Text[2, 13] chars:[2, 13, "refer … nce 1"]
   Paragraph[22, 43] isTrailingBlankLine
-    ImageRef[23, 42] textOpen:[23, 24, "["] text:[24, 35, "reference 2"] textClose:[35, 36, "]"] referenceOpen:[36, 37, "["] reference:[37, 41, "test"] referenceClose:[41, 42, "]"]
+    ImageRef[22, 42] textOpen:[22, 24, "!["] text:[24, 35, "reference 2"] textClose:[35, 36, "]"] referenceOpen:[36, 37, "["] reference:[37, 41, "test"] referenceClose:[41, 42, "]"]
       Text[24, 35] chars:[24, 35, "refer … nce 2"]
   Reference[44, 81] refOpen:[44, 45, "["] ref:[45, 49, "test"] refClose:[49, 51, "]:"] urlOpen:[52, 53, "<"] url:[53, 80, "http://example.com/test.png"] urlClose:[80, 81, ">"]
   Paragraph[84, 111]

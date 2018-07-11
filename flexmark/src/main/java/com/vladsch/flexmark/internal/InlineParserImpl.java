@@ -1452,7 +1452,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
                 if (refIsDefined) refNode.setDefined(true);
 
                 if (!refIsBare) {
-                    refNode.setTextChars(input.subSequence(opener.index, startIndex));
+                    refNode.setTextChars(input.subSequence(isImage ? opener.index - 1 : opener.index, startIndex));
                 } else if (!bareRef.isEmpty()) {
                     refNode.setTextOpeningMarker(bareRef.subSequence(0, 1));
                     refNode.setTextClosingMarker(bareRef.endSequence(1));

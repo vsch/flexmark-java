@@ -193,9 +193,10 @@ with continuation
       <a href="#fnref-1" class="footnote-backref">&#8617;</a>
     </li>
     <li id="fn-2">
-      <p>footnote text with <sup id="fnref-2"><a class="footnote-ref" href="#fn-2">2</a></sup> embedded footnote
+      <p>footnote text with <sup id="fnref-2-1"><a class="footnote-ref" href="#fn-2">2</a></sup> embedded footnote
       with continuation</p>
       <a href="#fnref-2" class="footnote-backref">&#8617;</a>
+      <a href="#fnref-2-1" class="footnote-backref">&#8617;</a>
     </li>
   </ol>
 </div>
@@ -992,6 +993,46 @@ Document[0, 82]
   FootnoteBlock[53, 82] ordinal: 1  open:[53, 55] text:[55, 56] close:[56, 58] footnote:[59, 82]
     Paragraph[59, 82]
       Text[59, 81] chars:[59, 81, "http: … .com/"]
+````````````````````````````````
+
+
+## Issue 244
+
+Issue #244
+
+```````````````````````````````` example Issue 244: 1
+Duplicated footnote reference[^id].
+
+reference[^id]
+
+[^id]: Footnote text.
+.
+<p>Duplicated footnote reference<sup id="fnref-1"><a class="footnote-ref" href="#fn-1">1</a></sup>.</p>
+<p>reference<sup id="fnref-1-1"><a class="footnote-ref" href="#fn-1">1</a></sup></p>
+<div class="footnotes">
+  <hr />
+  <ol>
+    <li id="fn-1">
+      <p>Footnote text.</p>
+      <a href="#fnref-1" class="footnote-backref">&#8617;</a>
+      <a href="#fnref-1-1" class="footnote-backref">&#8617;</a>
+    </li>
+  </ol>
+</div>
+.
+Document[0, 75]
+  Paragraph[0, 36] isTrailingBlankLine
+    Text[0, 29] chars:[0, 29, "Dupli … rence"]
+    Footnote[29, 34] ordinal: 1  textOpen:[29, 31, "[^"] text:[31, 33, "id"] textClose:[33, 34, "]"]
+      Text[31, 33] chars:[31, 33, "id"]
+    Text[34, 35] chars:[34, 35, "."]
+  Paragraph[37, 52] isTrailingBlankLine
+    Text[37, 46] chars:[37, 46, "reference"]
+    Footnote[46, 51] ordinal: 1  textOpen:[46, 48, "[^"] text:[48, 50, "id"] textClose:[50, 51, "]"]
+      Text[48, 50] chars:[48, 50, "id"]
+  FootnoteBlock[53, 75] ordinal: 1  open:[53, 55] text:[55, 57] close:[57, 59] footnote:[60, 75]
+    Paragraph[60, 75]
+      Text[60, 74] chars:[60, 74, "Footn … text."]
 ````````````````````````````````
 
 

@@ -2269,14 +2269,14 @@ Document[0, 21]
 ```````````````````````````````` example(WikiImages: 12) options(wiki-images)
 ![[wiki image]] ![^image][ref] ![[^wiki image]]
 .
-<p><img src="wiki-image" alt="wiki image" /> [^image][ref] <img src="^wiki-image" alt="^wiki image" /></p>
+<p><img src="wiki-image" alt="wiki image" /> ![^image][ref] <img src="^wiki-image" alt="^wiki image" /></p>
 .
 Document[0, 47]
   Paragraph[0, 47]
     WikiImage[0, 15] linkOpen:[0, 3, "![["] link:[3, 13, "wiki image"] pageRef:[3, 13, "wiki image"] linkClose:[13, 15, "]]"]
       Text[3, 13] chars:[3, 13, "wiki image"]
     Text[15, 16] chars:[15, 16, " "]
-    ImageRef[17, 30] textOpen:[17, 18, "["] text:[18, 24, "^image"] textClose:[24, 25, "]"] referenceOpen:[25, 26, "["] reference:[26, 29, "ref"] referenceClose:[29, 30, "]"]
+    ImageRef[16, 30] textOpen:[16, 18, "!["] text:[18, 24, "^image"] textClose:[24, 25, "]"] referenceOpen:[25, 26, "["] reference:[26, 29, "ref"] referenceClose:[29, 30, "]"]
       Text[18, 24] chars:[18, 24, "^image"]
     Text[30, 31] chars:[30, 31, " "]
     WikiImage[31, 47] linkOpen:[31, 34, "![["] link:[34, 45, "^wiki image"] pageRef:[34, 45, "^wiki image"] linkClose:[45, 47, "]]"]
@@ -2307,14 +2307,14 @@ Document[0, 44]
 ```````````````````````````````` example(WikiImages: 14) options(wiki-images, image-ext)
 ![[wiki image]] ![^image][ref] ![[^wiki image]]
 .
-<p><img src="wiki-image.png" alt="wiki image" /> [^image][ref] <img src="^wiki-image.png" alt="^wiki image" /></p>
+<p><img src="wiki-image.png" alt="wiki image" /> ![^image][ref] <img src="^wiki-image.png" alt="^wiki image" /></p>
 .
 Document[0, 47]
   Paragraph[0, 47]
     WikiImage[0, 15] linkOpen:[0, 3, "![["] link:[3, 13, "wiki image"] pageRef:[3, 13, "wiki image"] linkClose:[13, 15, "]]"]
       Text[3, 13] chars:[3, 13, "wiki image"]
     Text[15, 16] chars:[15, 16, " "]
-    ImageRef[17, 30] textOpen:[17, 18, "["] text:[18, 24, "^image"] textClose:[24, 25, "]"] referenceOpen:[25, 26, "["] reference:[26, 29, "ref"] referenceClose:[29, 30, "]"]
+    ImageRef[16, 30] textOpen:[16, 18, "!["] text:[18, 24, "^image"] textClose:[24, 25, "]"] referenceOpen:[25, 26, "["] reference:[26, 29, "ref"] referenceClose:[29, 30, "]"]
       Text[18, 24] chars:[18, 24, "^image"]
     Text[30, 31] chars:[30, 31, " "]
     WikiImage[31, 47] linkOpen:[31, 34, "![["] link:[34, 45, "^wiki image"] pageRef:[34, 45, "^wiki image"] linkClose:[45, 47, "]]"]
@@ -2347,14 +2347,14 @@ Custom prefix
 ```````````````````````````````` example(WikiImages: 16) options(wiki-images, image-prefix)
 ![[wiki image]] ![^image][ref] ![[^wiki image]]
 .
-<p><img src="/images/wiki-image" alt="wiki image" /> [^image][ref] <img src="/images/^wiki-image" alt="^wiki image" /></p>
+<p><img src="/images/wiki-image" alt="wiki image" /> ![^image][ref] <img src="/images/^wiki-image" alt="^wiki image" /></p>
 .
 Document[0, 47]
   Paragraph[0, 47]
     WikiImage[0, 15] linkOpen:[0, 3, "![["] link:[3, 13, "wiki image"] pageRef:[3, 13, "wiki image"] linkClose:[13, 15, "]]"]
       Text[3, 13] chars:[3, 13, "wiki image"]
     Text[15, 16] chars:[15, 16, " "]
-    ImageRef[17, 30] textOpen:[17, 18, "["] text:[18, 24, "^image"] textClose:[24, 25, "]"] referenceOpen:[25, 26, "["] reference:[26, 29, "ref"] referenceClose:[29, 30, "]"]
+    ImageRef[16, 30] textOpen:[16, 18, "!["] text:[18, 24, "^image"] textClose:[24, 25, "]"] referenceOpen:[25, 26, "["] reference:[26, 29, "ref"] referenceClose:[29, 30, "]"]
       Text[18, 24] chars:[18, 24, "^image"]
     Text[30, 31] chars:[30, 31, " "]
     WikiImage[31, 47] linkOpen:[31, 34, "![["] link:[34, 45, "^wiki image"] pageRef:[34, 45, "^wiki image"] linkClose:[45, 47, "]]"]

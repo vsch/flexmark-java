@@ -709,9 +709,9 @@ Ref image
 
 {style="border-color:red"}
 .
-[ReEFeEReENceE 1][teESt]
+![ReEFeEReENceE 1][teESt]
 
-[ReEFeEReENceE 2][teESt]
+![ReEFeEReENceE 2][teESt]
 
 [teESt]: >
 

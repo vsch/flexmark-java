@@ -1,0 +1,18 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="ComboFootnotesFormatterSpecTest" type="JUnit" factoryName="JUnit" folderName="Format" singleton="true" nameIsGenerated="true">
+    <module name="flexmark-ext-footnotes" />
+    <extension name="coverage">
+      <pattern>
+        <option name="PATTERN" value="com.vladsch.flexmark.ext.footnotes.*" />
+        <option name="ENABLED" value="true" />
+      </pattern>
+    </extension>
+    <option name="PACKAGE_NAME" value="com.vladsch.flexmark.ext.footnotes" />
+    <option name="MAIN_CLASS_NAME" value="com.vladsch.flexmark.ext.footnotes.ComboFootnotesFormatterSpecTest" />
+    <option name="METHOD_NAME" value="" />
+    <option name="PARAMETERS" value="" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

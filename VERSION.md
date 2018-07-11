@@ -8,6 +8,7 @@ flexmark-java
 - [To Do](#to-do)
     - [Docx Converter](#docx-converter)
     - [GitLab compatibility extensions](#gitlab-compatibility-extensions)
+- [0.34.6](#0346)
 - [0.34.4](#0344)
 - [0.34.2](#0342)
 - [0.34.0](#0340)
@@ -262,6 +263,14 @@ flexmark-java
       similar to Math solution above.
 
 &nbsp;</details>
+
+0.34.6
+------
+
+* Fix: #243, Markdown output of ImageRef syntax referencing ID is incorrect
+* Fix: #244, Duplicate footnotes have the problem of HTML ID collision conflict. Now each
+  footnote reference adds a back references and the id of the back reference has `-#` suffix
+  added except for the first back-reference, where `#` is an integer from 1..N
 
 0.34.4
 ------

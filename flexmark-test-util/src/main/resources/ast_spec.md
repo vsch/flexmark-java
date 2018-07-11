@@ -11825,7 +11825,7 @@ Document[0, 56]
 .
 Document[0, 59]
   Paragraph[0, 21] isTrailingBlankLine
-    ImageRef[1, 20] textOpen:[1, 2, "["] text:[2, 11, "foo *bar*"] textClose:[11, 12, "]"] referenceOpen:[12, 13, "["] reference:[13, 19, "foobar"] referenceClose:[19, 20, "]"]
+    ImageRef[0, 20] textOpen:[0, 2, "!["] text:[2, 11, "foo *bar*"] textClose:[11, 12, "]"] referenceOpen:[12, 13, "["] reference:[13, 19, "foobar"] referenceClose:[19, 20, "]"]
       Text[2, 6] chars:[2, 6, "foo "]
       Emphasis[6, 11] textOpen:[6, 7, "*"] text:[7, 10, "bar"] textClose:[10, 11, "*"]
         Text[7, 10] chars:[7, 10, "bar"]
@@ -11892,7 +11892,7 @@ Reference-style:
 .
 Document[0, 25]
   Paragraph[0, 12] isTrailingBlankLine
-    ImageRef[1, 11] textOpen:[1, 2, "["] text:[2, 5, "foo"] textClose:[5, 6, "]"] referenceOpen:[6, 7, "["] reference:[7, 10, "bar"] referenceClose:[10, 11, "]"]
+    ImageRef[0, 11] textOpen:[0, 2, "!["] text:[2, 5, "foo"] textClose:[5, 6, "]"] referenceOpen:[6, 7, "["] reference:[7, 10, "bar"] referenceClose:[10, 11, "]"]
       Text[2, 5] chars:[2, 5, "foo"]
   Reference[13, 24] refOpen:[13, 14, "["] ref:[14, 17, "bar"] refClose:[17, 19, "]:"] url:[20, 24, "/url"]
 ````````````````````````````````
@@ -11907,7 +11907,7 @@ Document[0, 25]
 .
 Document[0, 25]
   Paragraph[0, 12] isTrailingBlankLine
-    ImageRef[1, 11] textOpen:[1, 2, "["] text:[2, 5, "foo"] textClose:[5, 6, "]"] referenceOpen:[6, 7, "["] reference:[7, 10, "bar"] referenceClose:[10, 11, "]"]
+    ImageRef[0, 11] textOpen:[0, 2, "!["] text:[2, 5, "foo"] textClose:[5, 6, "]"] referenceOpen:[6, 7, "["] reference:[7, 10, "bar"] referenceClose:[10, 11, "]"]
       Text[2, 5] chars:[2, 5, "foo"]
   Reference[13, 24] refOpen:[13, 14, "["] ref:[14, 17, "BAR"] refClose:[17, 19, "]:"] url:[20, 24, "/url"]
 ````````````````````````````````

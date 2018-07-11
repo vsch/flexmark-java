@@ -2230,3 +2230,46 @@ Document[0, 53]
 ````````````````````````````````
 
 
+## Issue 243
+
+Issue #243
+
+```````````````````````````````` example Issue 243: 1
+![Alt text][id]
+
+[id]: https://www.example.com/img.png "test"
+.
+![Alt text][id]
+
+[id]: https://www.example.com/img.png "test"
+
+.
+Document[0, 62]
+  Paragraph[0, 16] isTrailingBlankLine
+    ImageRef[0, 15] textOpen:[0, 2, "!["] text:[2, 10, "Alt text"] textClose:[10, 11, "]"] referenceOpen:[11, 12, "["] reference:[12, 14, "id"] referenceClose:[14, 15, "]"]
+      Text[2, 10] chars:[2, 10, "Alt text"]
+  BlankLine[16, 17]
+  Reference[17, 61] refOpen:[17, 18, "["] ref:[18, 20, "id"] refClose:[20, 22, "]:"] url:[23, 54, "https://www.example.com/img.png"] titleOpen:[55, 56, "\""] title:[56, 60, "test"] titleClose:[60, 61, "\""]
+````````````````````````````````
+
+bare image
+
+```````````````````````````````` example Issue 243: 2
+![id][]
+
+[id]: https://www.example.com/img.png "test"
+.
+![id][]
+
+[id]: https://www.example.com/img.png "test"
+
+.
+Document[0, 54]
+  Paragraph[0, 8] isTrailingBlankLine
+    ImageRef[0, 7] referenceOpen:[0, 2, "!["] reference:[2, 4, "id"] referenceClose:[4, 5, "]"] textOpen:[5, 6, "["] textClose:[6, 7, "]"]
+      Text[2, 4] chars:[2, 4, "id"]
+  BlankLine[8, 9]
+  Reference[9, 53] refOpen:[9, 10, "["] ref:[10, 12, "id"] refClose:[12, 14, "]:"] url:[15, 46, "https://www.example.com/img.png"] titleOpen:[47, 48, "\""] title:[48, 52, "test"] titleClose:[52, 53, "\""]
+````````````````````````````````
+
+

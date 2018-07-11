@@ -4565,11 +4565,11 @@ empty link ref
 ```````````````````````````````` example LinkRefs and ImageRefs: 6
 ![ ][ ]
 .
-<p>[ ][ ]</p>
+<p>![ ][ ]</p>
 .
 Document[0, 8]
   Paragraph[0, 8]
-    ImageRef[1, 7] textOpen:[1, 2, "["] text:[3, 3] textClose:[3, 4, "]"] referenceOpen:[4, 5, "["] reference:[6, 6] referenceClose:[6, 7, "]"]
+    ImageRef[0, 7] textOpen:[0, 2, "!["] text:[3, 3] textClose:[3, 4, "]"] referenceOpen:[4, 5, "["] reference:[6, 6] referenceClose:[6, 7, "]"]
       Text[2, 3] chars:[2, 3, " "]
 ````````````````````````````````
 

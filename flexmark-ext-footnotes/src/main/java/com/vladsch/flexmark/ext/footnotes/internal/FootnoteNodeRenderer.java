@@ -100,11 +100,15 @@ public class FootnoteNodeRenderer implements PhasedNodeRenderer {
                                         @Override
                                         public void run() {
                                             context.renderChildren(footnoteBlock);
-                                            html.attr("href", "#fnref-" + footnoteOrdinal);
-                                            if (!options.footnoteBackLinkRefClass.isEmpty()) html.attr("class", options.footnoteBackLinkRefClass);
-                                            html.withAttr().tag("a");
-                                            html.raw(options.footnoteBackRefString);
-                                            html.tag("/a");
+
+                                            int iMax = footnoteBlock.getFootnoteReferences();
+                                            for (int i = 0; i < iMax; i++) {
+                                                html.attr("href", "#fnref-" + footnoteOrdinal + (i == 0 ? "" : String.format("-%d", i)));
+                                                if (!options.footnoteBackLinkRefClass.isEmpty()) html.attr("class", options.footnoteBackLinkRefClass);
+                                                html.line().withAttr().tag("a");
+                                                html.raw(options.footnoteBackRefString);
+                                                html.tag("/a");
+                                            }
                                         }
                                     });
                                 }
@@ -129,7 +133,8 @@ public class FootnoteNodeRenderer implements PhasedNodeRenderer {
             html.raw("]");
         } else {
             final int footnoteOrdinal = footnoteBlock.getFootnoteOrdinal();
-            html.attr("id", "fnref-" + footnoteOrdinal);
+            int i = node.getReferenceOrdinal();
+            html.attr("id", "fnref-" + footnoteOrdinal + (i == 0 ? "" : String.format("-%d", i)));
             html.srcPos(node.getChars()).withAttr().tag("sup", false, false, new Runnable() {
                 @Override
                 public void run() {

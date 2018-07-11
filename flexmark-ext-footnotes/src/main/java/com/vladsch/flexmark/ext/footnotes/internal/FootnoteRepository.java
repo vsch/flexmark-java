@@ -23,6 +23,10 @@ public class FootnoteRepository extends NodeRepository<FootnoteBlock> {
         }
 
         footnoteBlock.setFirstReferenceOffset(footnote.getStartOffset());
+
+        int referenceOrdinal = footnoteBlock.getFootnoteReferences();
+        footnoteBlock.setFootnoteReferences(referenceOrdinal + 1);
+        footnote.setReferenceOrdinal(referenceOrdinal);
     }
 
     public void resolveFootnoteOrdinals() {

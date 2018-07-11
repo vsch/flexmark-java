@@ -470,7 +470,7 @@ Issue #109, Image Ref missing title tag in rendered HTML
 .
 Document[0, 55]
   Paragraph[0, 16] isTrailingBlankLine
-    ImageRef[1, 15] textOpen:[1, 2, "["] text:[2, 10, "alt text"] textClose:[10, 11, "]"] referenceOpen:[11, 12, "["] reference:[12, 14, "id"] referenceClose:[14, 15, "]"]
+    ImageRef[0, 15] textOpen:[0, 2, "!["] text:[2, 10, "alt text"] textClose:[10, 11, "]"] referenceOpen:[11, 12, "["] reference:[12, 14, "id"] referenceClose:[14, 15, "]"]
       Text[2, 10] chars:[2, 10, "alt text"]
   Reference[17, 54] refOpen:[17, 18, "["] ref:[18, 20, "id"] refClose:[20, 22, "]:"] url:[23, 46, "/images/icons/up_16.gif"] titleOpen:[47, 48, "\""] title:[48, 53, "Title"] titleClose:[53, 54, "\""]
 ````````````````````````````````
@@ -493,7 +493,7 @@ Document[0, 101]
     Image[0, 44] textOpen:[0, 2, "!["] text:[2, 10, "alt text"] textClose:[10, 11, "]"] linkOpen:[11, 12, "("] url:[12, 35, "/images/icons/up_16.gif"] pageRef:[12, 35, "/images/icons/up_16.gif"] titleOpen:[36, 37, "\""] title:[37, 42, "Title"] titleClose:[42, 43, "\""] linkClose:[43, 44, ")"]
       Text[2, 10] chars:[2, 10, "alt text"]
   Paragraph[46, 62] isTrailingBlankLine
-    ImageRef[47, 61] textOpen:[47, 48, "["] text:[48, 56, "alt text"] textClose:[56, 57, "]"] referenceOpen:[57, 58, "["] reference:[58, 60, "id"] referenceClose:[60, 61, "]"]
+    ImageRef[46, 61] textOpen:[46, 48, "!["] text:[48, 56, "alt text"] textClose:[56, 57, "]"] referenceOpen:[57, 58, "["] reference:[58, 60, "id"] referenceClose:[60, 61, "]"]
       Text[48, 56] chars:[48, 56, "alt text"]
   Reference[63, 100] refOpen:[63, 64, "["] ref:[64, 66, "id"] refClose:[66, 68, "]:"] url:[69, 92, "/images/icons/up_16.gif"] titleOpen:[93, 94, "\""] title:[94, 99, "Title"] titleClose:[99, 100, "\""]
 ````````````````````````````````
@@ -514,7 +514,7 @@ Document[0, 93]
     Image[0, 36] textOpen:[0, 2, "!["] text:[2, 10, "alt text"] textClose:[10, 11, "]"] linkOpen:[11, 12, "("] url:[12, 35, "/images/icons/up_16.gif"] pageRef:[12, 35, "/images/icons/up_16.gif"] linkClose:[35, 36, ")"]
       Text[2, 10] chars:[2, 10, "alt text"]
   Paragraph[38, 54] isTrailingBlankLine
-    ImageRef[39, 53] textOpen:[39, 40, "["] text:[40, 48, "alt text"] textClose:[48, 49, "]"] referenceOpen:[49, 50, "["] reference:[50, 52, "id"] referenceClose:[52, 53, "]"]
+    ImageRef[38, 53] textOpen:[38, 40, "!["] text:[40, 48, "alt text"] textClose:[48, 49, "]"] referenceOpen:[49, 50, "["] reference:[50, 52, "id"] referenceClose:[52, 53, "]"]
       Text[40, 48] chars:[40, 48, "alt text"]
   Reference[55, 92] refOpen:[55, 56, "["] ref:[56, 58, "id"] refClose:[58, 60, "]:"] url:[61, 84, "/images/icons/up_16.gif"] titleOpen:[85, 86, "\""] title:[86, 91, "Title"] titleClose:[91, 92, "\""]
 ````````````````````````````````
@@ -532,7 +532,7 @@ Document[0, 93]
 .
 Document[0, 93]
   Paragraph[0, 16] isTrailingBlankLine
-    ImageRef[1, 15] textOpen:[1, 2, "["] text:[2, 10, "alt text"] textClose:[10, 11, "]"] referenceOpen:[11, 12, "["] reference:[12, 14, "id"] referenceClose:[14, 15, "]"]
+    ImageRef[0, 15] textOpen:[0, 2, "!["] text:[2, 10, "alt text"] textClose:[10, 11, "]"] referenceOpen:[11, 12, "["] reference:[12, 14, "id"] referenceClose:[14, 15, "]"]
       Text[2, 10] chars:[2, 10, "alt text"]
   Reference[17, 54] refOpen:[17, 18, "["] ref:[18, 20, "id"] refClose:[20, 22, "]:"] url:[23, 46, "/images/icons/up_16.gif"] titleOpen:[47, 48, "\""] title:[48, 53, "Title"] titleClose:[53, 54, "\""]
   Paragraph[56, 93]
@@ -1095,6 +1095,42 @@ Document[0, 36]
   Paragraph[0, 36]
     Link[0, 36] textOpen:[0, 1, "["] text:[1, 14, "Something New"] textClose:[14, 15, "]"] linkOpen:[15, 16, "("] url:[16, 35, "javascript:alert(1)"] pageRef:[16, 35, "javascript:alert(1)"] linkClose:[35, 36, ")"]
       Text[1, 14] chars:[1, 14, "Somet … g New"]
+````````````````````````````````
+
+
+## Issue 243
+
+Issue #243
+
+```````````````````````````````` example Issue 243: 1
+![Alt text][id]
+
+[id]: https://www.example.com/img.png "test"
+.
+<p><img src="https://www.example.com/img.png" alt="Alt text" title="test" /></p>
+.
+Document[0, 62]
+  Paragraph[0, 16] isTrailingBlankLine
+    ImageRef[0, 15] textOpen:[0, 2, "!["] text:[2, 10, "Alt text"] textClose:[10, 11, "]"] referenceOpen:[11, 12, "["] reference:[12, 14, "id"] referenceClose:[14, 15, "]"]
+      Text[2, 10] chars:[2, 10, "Alt text"]
+  Reference[17, 61] refOpen:[17, 18, "["] ref:[18, 20, "id"] refClose:[20, 22, "]:"] url:[23, 54, "https://www.example.com/img.png"] titleOpen:[55, 56, "\""] title:[56, 60, "test"] titleClose:[60, 61, "\""]
+````````````````````````````````
+
+
+bare image
+
+```````````````````````````````` example Issue 243: 2
+![id][]
+
+[id]: https://www.example.com/img.png "test"
+.
+<p><img src="https://www.example.com/img.png" alt="id" title="test" /></p>
+.
+Document[0, 54]
+  Paragraph[0, 8] isTrailingBlankLine
+    ImageRef[0, 7] referenceOpen:[0, 2, "!["] reference:[2, 4, "id"] referenceClose:[4, 5, "]"] textOpen:[5, 6, "["] textClose:[6, 7, "]"]
+      Text[2, 4] chars:[2, 4, "id"]
+  Reference[9, 53] refOpen:[9, 10, "["] ref:[10, 12, "id"] refClose:[12, 14, "]:"] url:[15, 46, "https://www.example.com/img.png"] titleOpen:[47, 48, "\""] title:[48, 52, "test"] titleClose:[52, 53, "\""]
 ````````````````````````````````
 
 

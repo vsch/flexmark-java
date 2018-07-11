@@ -16,10 +16,19 @@ public class FootnoteBlock extends CustomBlock implements ReferenceNode<Footnote
     protected BasedSequence footnote = BasedSequence.NULL;
     private int footnoteOrdinal = 0;
     private int firstReferenceOffset = Integer.MAX_VALUE;
+    private int footnoteReferences = 0;
 
     @Override
     public int compareTo(final FootnoteBlock other) {
         return getText().compareTo(other.getText());
+    }
+
+    public int getFootnoteReferences() {
+        return footnoteReferences;
+    }
+
+    public void setFootnoteReferences(final int footnoteReferences) {
+        this.footnoteReferences = footnoteReferences;
     }
 
     @Override

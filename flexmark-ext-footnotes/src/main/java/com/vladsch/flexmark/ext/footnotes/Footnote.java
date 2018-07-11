@@ -13,6 +13,18 @@ public class Footnote extends CustomNode implements DelimitedNode, DoNotDecorate
     protected BasedSequence closingMarker = BasedSequence.NULL;
     protected FootnoteBlock footnoteBlock;
 
+    public int getReferenceOrdinal() {
+        return referenceOrdinal;
+    }
+
+    public void setReferenceOrdinal(final int referenceOrdinal) {
+        this.referenceOrdinal = referenceOrdinal;
+    }
+
+    protected int referenceOrdinal;
+
+
+
     @Override
     public BasedSequence getReference() {
         return text;

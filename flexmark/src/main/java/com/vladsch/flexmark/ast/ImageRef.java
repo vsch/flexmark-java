@@ -29,4 +29,12 @@ public class ImageRef extends RefNode {
     public ImageRef(BasedSequence textOpenMarker, BasedSequence text, BasedSequence textCloseMarker, BasedSequence referenceOpenMarker, BasedSequence referenceCloseMarker) {
         super(textOpenMarker, text, textCloseMarker, referenceOpenMarker, referenceCloseMarker);
     }
+
+    @Override
+    public void setTextChars(BasedSequence textChars) {
+        int textCharsLength = textChars.length();
+        this.textOpeningMarker = textChars.subSequence(0, 2);
+        this.text = textChars.subSequence(2, textCharsLength - 1).trim();
+        this.textClosingMarker = textChars.subSequence(textCharsLength - 1, textCharsLength);
+    }
 }

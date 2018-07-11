@@ -292,7 +292,7 @@ woRK WiIth [maARKDoWN teEXt][maARKDoWN]
 
 woRK WiIth ![maARKDoWN][]
 
-woRK WiIth [maARKDoWN imaAGeE][maARKDoWN]
+woRK WiIth ![maARKDoWN imaAGeE][maARKDoWN]
 
 [maARKDoWN]: https://test.com/doc.png
 ````````````````````````````````

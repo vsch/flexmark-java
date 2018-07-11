@@ -888,3 +888,39 @@ Not a paragraph of the footnote
 ````````````````````````````````
 
 
+## Issue 244
+
+Issue #244
+
+```````````````````````````````` example Issue 244: 1
+Duplicated footnote reference[^id].
+
+reference[^id]
+
+[^id]: Footnote text.
+.
+Duplicated footnote reference[^id].
+
+reference[^id]
+
+[^id]: Footnote text.
+
+.
+Document[0, 75]
+  Paragraph[0, 36] isTrailingBlankLine
+    Text[0, 29] chars:[0, 29, "Dupli … rence"]
+    Footnote[29, 34] ordinal: 0  textOpen:[29, 31, "[^"] text:[31, 33, "id"] textClose:[33, 34, "]"]
+      Text[31, 33] chars:[31, 33, "id"]
+    Text[34, 35] chars:[34, 35, "."]
+  BlankLine[36, 37]
+  Paragraph[37, 52] isTrailingBlankLine
+    Text[37, 46] chars:[37, 46, "reference"]
+    Footnote[46, 51] ordinal: 0  textOpen:[46, 48, "[^"] text:[48, 50, "id"] textClose:[50, 51, "]"]
+      Text[48, 50] chars:[48, 50, "id"]
+  BlankLine[52, 53]
+  FootnoteBlock[53, 75] ordinal: 0  open:[53, 55] text:[55, 57] close:[57, 59] footnote:[60, 75]
+    Paragraph[60, 75]
+      Text[60, 74] chars:[60, 74, "Footn … text."]
+````````````````````````````````
+
+
