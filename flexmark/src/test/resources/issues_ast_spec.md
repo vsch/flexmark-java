@@ -1134,3 +1134,24 @@ Document[0, 54]
 ````````````````````````````````
 
 
+Issue 246
+
+Issue #246
+
+```````````````````````````````` example Issue 243: 3
+* May 23 - [[Ahnlab] [KR] Andariel Group Trend Report](http://download.ahnlab.com/kr/site/library/[Report]Andariel_Threat_Group.pdf)
+.
+<ul>
+  <li>May 23 - <a href="http://download.ahnlab.com/kr/site/library/%5BReport%5DAndariel_Threat_Group.pdf">[Ahnlab] [KR] Andariel Group Trend Report</a></li>
+</ul>
+.
+Document[0, 133]
+  BulletList[0, 133] isTight
+    BulletListItem[0, 133] open:[0, 1, "*"] isTight
+      Paragraph[2, 133]
+        Text[2, 11] chars:[2, 11, "May 23 - "]
+        Link[11, 132] textOpen:[11, 12, "["] text:[12, 53, "[Ahnlab] [KR] Andariel Group Trend Report"] textClose:[53, 54, "]"] linkOpen:[54, 55, "("] url:[55, 131, "http://download.ahnlab.com/kr/site/library/[Report]Andariel_Threat_Group.pdf"] pageRef:[55, 131, "http://download.ahnlab.com/kr/site/library/[Report]Andariel_Threat_Group.pdf"] linkClose:[131, 132, ")"]
+          Text[12, 53] chars:[12, 53, "[Ahnl … eport"]
+````````````````````````````````
+
+

@@ -34,6 +34,7 @@ public class ComboDefinitionFormatterSpecTest extends ComboSpecTestCase {
         optionsMap.put("marker-type-any", new MutableDataSet().set(DefinitionExtension.FORMAT_MARKER_TYPE, DefinitionMarker.ANY));
         optionsMap.put("marker-type-colon", new MutableDataSet().set(DefinitionExtension.FORMAT_MARKER_TYPE, DefinitionMarker.COLON));
         optionsMap.put("marker-type-tilde", new MutableDataSet().set(DefinitionExtension.FORMAT_MARKER_TYPE, DefinitionMarker.TILDE));
+        optionsMap.put("no-blank-lines", new MutableDataSet().set(Parser.BLANK_LINES_IN_AST, false));
     }
 
     private static final Parser PARSER = Parser.builder(OPTIONS).build();

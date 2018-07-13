@@ -17,7 +17,8 @@ import java.util.Set;
 import java.util.regex.Matcher;
 
 public class JekyllTagBlockParser extends AbstractBlockParser {
-    private final JekyllTagBlock block = new JekyllTagBlock();
+    public static final String INCLUDE_TAG = "include";
+    final JekyllTagBlock block = new JekyllTagBlock();
     private BlockContent content = new BlockContent();
 
     JekyllTagBlockParser(DataHolder options) {
@@ -120,7 +121,8 @@ public class JekyllTagBlockParser extends AbstractBlockParser {
                     final JekyllTagBlockParser parser = new JekyllTagBlockParser(state.getProperties());
                     parser.block.appendChild(tagNode);
 
-                    if (!listIncludesOnly || tagName.equals("include")) {
+                    //noinspection EqualsBetweenInconvertibleTypes
+                    if (!listIncludesOnly || tagName.equals(INCLUDE_TAG)) {
                         List<JekyllTag> tagList = JekyllTagExtension.TAG_LIST.getFrom(state.getProperties());
                         tagList.add(tagNode);
                     }

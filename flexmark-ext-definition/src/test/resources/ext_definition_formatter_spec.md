@@ -790,3 +790,114 @@ Term 2
 ````````````````````````````````
 
 
+## Issue 245
+
+Issue #245
+
+```````````````````````````````` example Issue 245: 1
+Term 1
+:   Definition1
+
+Term 2
+:   Definition2
+.
+Term 1
+:   Definition1
+
+Term 2
+:   Definition2
+.
+Document[0, 47]
+  DefinitionList[0, 47] isTight
+    DefinitionTerm[0, 7]
+      Paragraph[0, 7]
+        Text[0, 6] chars:[0, 6, "Term 1"]
+    DefinitionItem[7, 24] open:[7, 8, ":"] isTight hadBlankLineAfter
+      Paragraph[11, 23] isTrailingBlankLine
+        Text[11, 22] chars:[11, 22, "Defin … tion1"]
+      BlankLine[23, 24]
+    DefinitionTerm[24, 31]
+      Paragraph[24, 31]
+        Text[24, 30] chars:[24, 30, "Term 2"]
+    DefinitionItem[31, 47] open:[31, 32, ":"] isTight
+      Paragraph[35, 47]
+        Text[35, 46] chars:[35, 46, "Defin … tion2"]
+````````````````````````````````
+
+
+no blank lines
+
+```````````````````````````````` example(Issue 245: 2) options(no-blank-lines)
+Term 1
+:   Definition1
+
+Term 2
+:   Definition2
+.
+Term 1
+:   Definition1
+
+Term 2
+:   Definition2
+.
+Document[0, 46]
+  DefinitionList[0, 46] isTight
+    DefinitionTerm[0, 7]
+      Paragraph[0, 7]
+        Text[0, 6] chars:[0, 6, "Term 1"]
+    DefinitionItem[7, 23] open:[7, 8, ":"] isTight hadBlankLineAfter
+      Paragraph[11, 23] isTrailingBlankLine
+        Text[11, 22] chars:[11, 22, "Defin … tion1"]
+    DefinitionTerm[24, 31]
+      Paragraph[24, 31]
+        Text[24, 30] chars:[24, 30, "Term 2"]
+    DefinitionItem[31, 46] open:[31, 32, ":"] isTight
+      Paragraph[35, 46]
+        Text[35, 46] chars:[35, 46, "Defin … tion2"]
+````````````````````````````````
+
+
+no blank lines
+
+```````````````````````````````` example(Issue 245: 3) options(no-blank-lines)
+Term 1
+:   Definition1
+:   Definition2
+
+:   Definition3
+
+Term 2
+:   Definition2
+.
+Term 1
+:   Definition1
+:   Definition2
+
+:   Definition3
+
+Term 2
+:   Definition2
+.
+Document[0, 79]
+  DefinitionList[0, 79] isTight
+    DefinitionTerm[0, 7]
+      Paragraph[0, 7]
+        Text[0, 6] chars:[0, 6, "Term 1"]
+    DefinitionItem[7, 23] open:[7, 8, ":"] isTight
+      Paragraph[11, 23]
+        Text[11, 22] chars:[11, 22, "Defin … tion1"]
+    DefinitionItem[23, 39] open:[23, 24, ":"] isTight hadBlankLineAfter
+      Paragraph[27, 39] isTrailingBlankLine
+        Text[27, 38] chars:[27, 38, "Defin … tion2"]
+    DefinitionItem[40, 56] open:[40, 41, ":"] isLoose hadBlankLineAfter
+      Paragraph[44, 56] isTrailingBlankLine
+        Text[44, 55] chars:[44, 55, "Defin … tion3"]
+    DefinitionTerm[57, 64]
+      Paragraph[57, 64]
+        Text[57, 63] chars:[57, 63, "Term 2"]
+    DefinitionItem[64, 79] open:[64, 65, ":"] isTight
+      Paragraph[68, 79]
+        Text[68, 79] chars:[68, 79, "Defin … tion2"]
+````````````````````````````````
+
+

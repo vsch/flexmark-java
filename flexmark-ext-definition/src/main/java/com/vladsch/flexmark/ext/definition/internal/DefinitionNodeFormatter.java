@@ -1,11 +1,14 @@
 package com.vladsch.flexmark.ext.definition.internal;
 
+import com.vladsch.flexmark.ast.Node;
+import com.vladsch.flexmark.ast.Paragraph;
 import com.vladsch.flexmark.ext.definition.DefinitionItem;
 import com.vladsch.flexmark.ext.definition.DefinitionList;
 import com.vladsch.flexmark.ext.definition.DefinitionTerm;
 import com.vladsch.flexmark.formatter.CustomNodeFormatter;
 import com.vladsch.flexmark.formatter.internal.*;
 import com.vladsch.flexmark.parser.ListOptions;
+import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.RepeatedCharSequence;
@@ -14,6 +17,8 @@ import com.vladsch.flexmark.util.sequence.SubSequence;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
+
+import static com.vladsch.flexmark.parser.Parser.BLANK_LINES_IN_AST;
 
 public class DefinitionNodeFormatter implements NodeFormatter {
     private final FormatOptions options;
@@ -80,6 +85,14 @@ public class DefinitionNodeFormatter implements NodeFormatter {
         markdown.pushPrefix().addPrefix(RepeatedCharSequence.of(' ', context.getFormatterOptions().itemContentIndent ? openMarker.length() + openMarkerSpaces.length() : listOptions.getItemIndent()));
         context.renderChildren(node);
         markdown.popPrefix();
+
+        if (!context.getOptions().get(BLANK_LINES_IN_AST)) {
+            // add blank lines after last paragraph item
+            Node child = node.getLastChild();
+            if (child instanceof Paragraph && ((Paragraph) child).isTrailingBlankLine()) {
+                markdown.blankLine();
+            }
+        }
     }
 
     public static class Factory implements NodeFormatterFactory {

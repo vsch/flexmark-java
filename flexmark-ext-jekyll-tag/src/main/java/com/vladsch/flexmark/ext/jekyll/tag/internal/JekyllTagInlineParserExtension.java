@@ -41,7 +41,8 @@ public class JekyllTagInlineParserExtension implements InlineParserExtension {
                 JekyllTag macro = new JekyllTag(tag.subSequence(0, 2), tagName, parameters, tag.endSequence(2));
                 macro.setCharsFromContent();
 
-                if (!listIncludesOnly || tagName.equals("includes")) {
+                //noinspection EqualsBetweenInconvertibleTypes
+                if (!listIncludesOnly || tagName.equals(JekyllTagBlockParser.INCLUDE_TAG)) {
                     List<JekyllTag> tagList = JekyllTagExtension.TAG_LIST.getFrom(inlineParser.getDocument());
                     tagList.add(macro);
                 }
