@@ -8,7 +8,7 @@ flexmark-java
 - [To Do](#to-do)
     - [Docx Converter](#docx-converter)
     - [GitLab compatibility extensions](#gitlab-compatibility-extensions)
-- [Next: 0.34.8](#next-0348)
+- [0.34.8](#0348)
 - [0.34.6](#0346)
 - [0.34.4](#0344)
 - [0.34.2](#0342)
@@ -265,8 +265,8 @@ flexmark-java
 
 &nbsp;</details>
 
-Next: 0.34.8
-------------
+0.34.8
+------
 
 * Fix: #220, Jekyll Tag "include"
 * Fix: #245, Markdown output of multiple Definition Lists has a problem that list items merge.
