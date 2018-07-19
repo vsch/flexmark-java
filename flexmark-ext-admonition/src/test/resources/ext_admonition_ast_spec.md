@@ -392,7 +392,7 @@ Document[0, 180]
 ````````````````````````````````
 
 
-collapsed with multiple children     
+collapsed with multiple children
 
 ```````````````````````````````` example Basic Tests: 11
 ??? example 
@@ -491,6 +491,7 @@ Document[0, 28]
     Paragraph[9, 28]
       Text[9, 26] chars:[9, 26, "lazy  … ation"]
 ````````````````````````````````
+
 
 lazy continuation disabled
 
@@ -1341,6 +1342,40 @@ Document[0, 25]
   AdmonitionBlock[0, 25] open:[0, 3, "!!!"] info:[4, 11, "caution"]
     Paragraph[16, 25]
       Text[16, 23] chars:[16, 23, "caution"]
+````````````````````````````````
+
+
+## Issue 247
+
+Issue #247, Admonition Expression may lack a part of the text.
+
+```````````````````````````````` example Issue 247: 1
+!!! Note
+→123456
+
+→abcdef
+.
+<svg xmlns="http://www.w3.org/2000/svg" class="adm-hidden">
+  <symbol id="adm-note">
+    <svg enable-background="new 0 0 24 24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g fill="currentColor"><path d="m15.4 5h4.5v2.7h-4.5z" transform="matrix(-.7071 -.7071 .7071 -.7071 25.7188 23.288)"/><path d="m13.9 7 3.1 3.1-9.5 9.6-3.5.3.3-3.5z"/></g></svg>
+  </symbol>
+</svg>
+<div class="adm-block adm-note">
+<div class="adm-heading">
+<svg class="adm-icon"><use xlink:href="#adm-note" /></svg><span>Note</span>
+</div>
+<div class="adm-body">
+  <p>123456</p>
+  <p>abcdef</p>
+</div>
+</div>
+.
+Document[0, 26]
+  AdmonitionBlock[0, 26] open:[0, 3, "!!!"] info:[4, 8, "Note"]
+    Paragraph[10, 17] isTrailingBlankLine
+      Text[10, 16] chars:[10, 16, "123456"]
+    Paragraph[19, 26]
+      Text[19, 25] chars:[19, 25, "abcdef"]
 ````````````````````````````````
 
 

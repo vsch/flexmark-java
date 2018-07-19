@@ -43,7 +43,7 @@ public class SimTocBlockParser extends AbstractBlockParser {
     private BasedSequence blankLineSpacer = BasedSequence.NULL;
 
     SimTocBlockParser(DataHolder options, BasedSequence tocChars, BasedSequence styleChars, BasedSequence titleChars) {
-        this.options = new TocOptions(options);
+        this.options = new TocOptions(options, true);
         block = new SimTocBlock(tocChars, styleChars, titleChars);
     }
 
@@ -177,7 +177,7 @@ public class SimTocBlockParser extends AbstractBlockParser {
 
         BlockFactory(DataHolder options) {
             super(options);
-            this.options = new TocOptions(options);
+            this.options = new TocOptions(options, true);
             this.myParsing = new TocParsing(options);
         }
 

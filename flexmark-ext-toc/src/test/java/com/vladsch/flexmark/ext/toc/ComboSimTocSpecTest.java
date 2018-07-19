@@ -35,6 +35,8 @@ public class ComboSimTocSpecTest extends ComboSpecTestCase {
         optionsMap.put("blank-line-spacer", new MutableDataSet().set(TocExtension.BLANK_LINE_SPACER, true));
         optionsMap.put("typographic", new MutableDataSet().set(Parser.EXTENSIONS, Arrays.asList(SimTocExtension.create(), TypographicExtension.create())));
         optionsMap.put("github", new MutableDataSet().setFrom(ParserEmulationProfile.GITHUB_DOC));
+        optionsMap.put("div-class", new MutableDataSet().set(TocExtension.DIV_CLASS, "content-class"));
+        optionsMap.put("list-class", new MutableDataSet().set(TocExtension.LIST_CLASS, "list-class"));
     }
 
     private static final Parser PARSER = Parser.builder(OPTIONS).build();

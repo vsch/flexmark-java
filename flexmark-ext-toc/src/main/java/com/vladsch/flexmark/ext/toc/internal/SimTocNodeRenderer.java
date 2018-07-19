@@ -9,7 +9,10 @@ import com.vladsch.flexmark.ext.toc.SimTocOption;
 import com.vladsch.flexmark.ext.toc.SimTocOptionList;
 import com.vladsch.flexmark.html.CustomNodeRenderer;
 import com.vladsch.flexmark.html.HtmlWriter;
-import com.vladsch.flexmark.html.renderer.*;
+import com.vladsch.flexmark.html.renderer.NodeRenderer;
+import com.vladsch.flexmark.html.renderer.NodeRendererContext;
+import com.vladsch.flexmark.html.renderer.NodeRendererFactory;
+import com.vladsch.flexmark.html.renderer.NodeRenderingHandler;
 import com.vladsch.flexmark.util.Paired;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
@@ -20,12 +23,10 @@ import java.util.List;
 import java.util.Set;
 
 public class SimTocNodeRenderer implements NodeRenderer {
-    public static final AttributablePart TOC_CONTENT = TocUtils.TOC_CONTENT;
-
     private final TocOptions options;
 
     public SimTocNodeRenderer(DataHolder options) {
-        this.options = new TocOptions(options);
+        this.options = new TocOptions(options, true);
     }
 
     @Override

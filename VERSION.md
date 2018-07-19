@@ -8,6 +8,7 @@ flexmark-java
 - [To Do](#to-do)
     - [Docx Converter](#docx-converter)
     - [GitLab compatibility extensions](#gitlab-compatibility-extensions)
+- [0.34.10](#03410)
 - [0.34.8](#0348)
 - [0.34.6](#0346)
 - [0.34.4](#0344)
@@ -265,6 +266,21 @@ flexmark-java
 
 &nbsp;</details>
 
+0.34.10
+-------
+
+* Fix: #247, Admonition Expression may lack a part of the text.
+* Add: `TocExtension.TOC_CONTENT`, `TocExtension.TOC_LIST`, `SimTocExtension.TOC_CONTENT`,
+  `SimTocExtension.TOC_LIST` attributable parts for `div` and `ul`/`ol` HTML tags. Documented in
+  [Table-of-Contents-Extension](../../wiki/Table-of-Contents-Extension)
+  * Fix: `TOC` element to use `TITLE` option if one is defined. Default for `TOC` is `""`, for
+    sim `TOC` it is `"Table of Contents"`
+* Fix: #248, Request to add CSS class of TOC
+  * Add: `TocExtension.DIV_CLASS` default `""`, class attribute to use on table of content `div`
+    wrapper, duplicated as `SimTocExtension.DIV_CLASS`
+  * Add: `TocExtension.LIST_CLASS` default `""`, class attribute to use on table of content `ul`
+    or `ol` element, duplicated as `SimTocExtension.LIST_CLASS`
+
 0.34.8
 ------
 
@@ -292,7 +308,7 @@ flexmark-java
 ------
 
 * Fix: update nexus staging plugin to 1.6.7
-* Fix: move nexus-staging plugin to deploy profile so it is not needed for ci test build 
+* Fix: move nexus-staging plugin to deploy profile so it is not needed for ci test build
 * Fix: gfm tables extension to only require a single separator dash
 * Fix: for matched parenthesis destination link parsing, only treat backslash as escape if
   followed by characters which can be escaped.
@@ -300,7 +316,7 @@ flexmark-java
 0.34.0
 ------
 
-* Fix: table formatter for translations to insert a space if the translated text is empty. 
+* Fix: table formatter for translations to insert a space if the translated text is empty.
 * Add: changed regex for parsing unquoted HTML attribute value to exclude `{}`.
 * Add: translation formatting awareness to: abbreviation, admonition, attributes, emoji,
   enumerated reference footnotes and tables extensions

@@ -31,6 +31,9 @@ public class ComboTocSpecTest extends ComboSpecTestCase {
         optionsMap.put("sorted-reversed", new MutableDataSet().set(TocExtension.LIST_TYPE, TocOptions.ListType.SORTED_REVERSED));
         optionsMap.put("numbered", new MutableDataSet().set(TocExtension.IS_NUMBERED, true));
         optionsMap.put("levels-2", new MutableDataSet().set(TocExtension.LEVELS, 1 << 2));
+        optionsMap.put("title", new MutableDataSet().set(TocExtension.TITLE, "Table of Contents"));
+        optionsMap.put("div-class", new MutableDataSet().set(TocExtension.DIV_CLASS, "content-class"));
+        optionsMap.put("list-class", new MutableDataSet().set(TocExtension.LIST_CLASS, "list-class"));
     }
 
     private static final Parser PARSER = Parser.builder(OPTIONS).build();

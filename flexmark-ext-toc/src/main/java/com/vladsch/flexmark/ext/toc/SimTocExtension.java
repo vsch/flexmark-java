@@ -1,12 +1,10 @@
 package com.vladsch.flexmark.ext.toc;
 
 import com.vladsch.flexmark.Extension;
-import com.vladsch.flexmark.ext.toc.internal.SimTocBlockParser;
-import com.vladsch.flexmark.ext.toc.internal.SimTocNodeFormatter;
-import com.vladsch.flexmark.ext.toc.internal.SimTocNodeRenderer;
-import com.vladsch.flexmark.ext.toc.internal.TocOptions;
+import com.vladsch.flexmark.ext.toc.internal.*;
 import com.vladsch.flexmark.formatter.internal.Formatter;
 import com.vladsch.flexmark.html.HtmlRenderer;
+import com.vladsch.flexmark.html.renderer.AttributablePart;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.options.DataKey;
 import com.vladsch.flexmark.util.options.MutableDataHolder;
@@ -25,6 +23,9 @@ import com.vladsch.flexmark.util.options.MutableDataHolder;
  */
 public class SimTocExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension, Formatter.FormatterExtension {
     // duplicated here for convenience
+    public static final AttributablePart TOC_CONTENT = TocUtils.TOC_CONTENT;        // div element wrapping TOC list
+    public static final AttributablePart TOC_LIST = TocUtils.TOC_LIST;              // ul/ol element of TOC list
+
     public static final DataKey<Integer> LEVELS = TocExtension.LEVELS;
     public static final DataKey<Boolean> IS_TEXT_ONLY = TocExtension.IS_TEXT_ONLY;
     public static final DataKey<Boolean> IS_NUMBERED = TocExtension.IS_NUMBERED;
@@ -34,6 +35,8 @@ public class SimTocExtension implements Parser.ParserExtension, HtmlRenderer.Htm
     public static final DataKey<String> TITLE = TocExtension.TITLE;
     public static final DataKey<Boolean> AST_INCLUDE_OPTIONS = TocExtension.AST_INCLUDE_OPTIONS;
     public static final DataKey<Boolean> BLANK_LINE_SPACER = TocExtension.BLANK_LINE_SPACER;
+    public static final DataKey<String> DIV_CLASS = TocExtension.DIV_CLASS;
+    public static final DataKey<String> LIST_CLASS = TocExtension.LIST_CLASS;
 
     // format options
     public static final DataKey<SimTocGenerateOnFormat> FORMAT_UPDATE_ON_FORMAT = TocExtension.FORMAT_UPDATE_ON_FORMAT;

@@ -11,6 +11,7 @@ import com.vladsch.flexmark.util.Computable;
 import com.vladsch.flexmark.util.Pair;
 import com.vladsch.flexmark.util.Paired;
 import com.vladsch.flexmark.util.ValueRunnable;
+import com.vladsch.flexmark.util.html.Attribute;
 import com.vladsch.flexmark.util.html.Escaping;
 import com.vladsch.flexmark.util.options.DelimitedBuilder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
@@ -20,6 +21,7 @@ import java.util.*;
 @SuppressWarnings("WeakerAccess")
 public class TocUtils {
     public static final AttributablePart TOC_CONTENT = new AttributablePart("TOC_CONTENT");
+    public static final AttributablePart TOC_LIST = new AttributablePart("TOC_LIST");
 
     public static String getTocPrefix(TocOptions options, TocOptions defaultOptions) {
         DelimitedBuilder out = new DelimitedBuilder(" ");
@@ -74,7 +76,7 @@ public class TocUtils {
     public static void renderHtmlToc(HtmlWriter html, BasedSequence sourceText, List<Heading> headings, List<String> headingTexts, TocOptions tocOptions) {
         if (headings.size() > 0 && (sourceText.isNotNull() || !tocOptions.title.isEmpty())) {
             if (sourceText.isNotNull()) html.srcPos(sourceText);
-            html.withAttr(TOC_CONTENT).tag("div").line().indent();
+            html.attr(Attribute.CLASS_ATTR, tocOptions.divClass).withAttr(TOC_CONTENT).tag("div").line().indent();
             html.tag("h" + tocOptions.titleLevel).text(tocOptions.title).tag("/h" + tocOptions.titleLevel).line();
         }
 
@@ -95,7 +97,7 @@ public class TocUtils {
             if (initLevel == -1) {
                 initLevel = headerLevel;
                 lastLevel = headerLevel;
-                html.withAttr().line().tag(listOpen).indent().line();
+                html.attr(Attribute.CLASS_ATTR, tocOptions.listClass).withAttr(TOC_LIST).line().tag(listOpen).indent().line();
                 openedList[0] = true;
             }
 
@@ -176,7 +178,7 @@ public class TocUtils {
         final List<String> headingContents = new ArrayList<String>(headings.size());
         final boolean isReversed = tocOptions.listType == TocOptions.ListType.SORTED_REVERSED || tocOptions.listType == TocOptions.ListType.FLAT_REVERSED;
         final boolean isSorted = tocOptions.listType == TocOptions.ListType.SORTED || tocOptions.listType == TocOptions.ListType.SORTED_REVERSED;
-        final  boolean needText = isReversed || isSorted;
+        final boolean needText = isReversed || isSorted;
         final HashMap<String, Heading> headingNodes = !needText ? null : new HashMap<String, Heading>(headings.size());
         final HashMap<String, String> headingTexts = !needText || tocOptions.isTextOnly ? null : new HashMap<String, String>(headings.size());
 

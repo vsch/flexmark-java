@@ -911,9 +911,150 @@ Document[0, 126]
 ````````````````````````````````
 
 
+Default rendering with div class
+
+```````````````````````````````` example(SimToc: 35) options(div-class)
+[TOC]:#  
+
+# Heading **some bold** 1
+## Heading 1.1 _some italic_
+### Heading 1.1.1
+### Heading 1.1.2  **_some bold italic_**
+.
+<div class="content-class">
+  <h1>Table of Contents</h1>
+  <ul>
+    <li><a href="#heading-11-some-italic">Heading 1.1 <em>some italic</em></a>
+      <ul>
+        <li><a href="#heading-111">Heading 1.1.1</a></li>
+        <li><a href="#heading-112--some-bold-italic">Heading 1.1.2  <strong><em>some bold italic</em></strong></a></li>
+      </ul>
+    </li>
+  </ul>
+</div>
+<h1 id="heading-some-bold-1">Heading <strong>some bold</strong> 1</h1>
+<h2 id="heading-11-some-italic">Heading 1.1 <em>some italic</em></h2>
+<h3 id="heading-111">Heading 1.1.1</h3>
+<h3 id="heading-112--some-bold-italic">Heading 1.1.2  <strong><em>some bold italic</em></strong></h3>
+.
+Document[0, 125]
+  SimTocBlock[0, 10] openingMarker:[0, 1] tocKeyword:[1, 4] closingMarker:[4, 6] anchorMarker:[6, 7, "#"]
+  Heading[11, 36] textOpen:[11, 12, "#"] text:[13, 36, "Heading **some bold** 1"]
+    Text[13, 21] chars:[13, 21, "Heading "]
+    StrongEmphasis[21, 34] textOpen:[21, 23, "**"] text:[23, 32, "some bold"] textClose:[32, 34, "**"]
+      Text[23, 32] chars:[23, 32, "some bold"]
+    Text[34, 36] chars:[34, 36, " 1"]
+  Heading[37, 65] textOpen:[37, 39, "##"] text:[40, 65, "Heading 1.1 _some italic_"]
+    Text[40, 52] chars:[40, 52, "Headi …  1.1 "]
+    Emphasis[52, 65] textOpen:[52, 53, "_"] text:[53, 64, "some italic"] textClose:[64, 65, "_"]
+      Text[53, 64] chars:[53, 64, "some  … talic"]
+  Heading[66, 83] textOpen:[66, 69, "###"] text:[70, 83, "Heading 1.1.1"]
+    Text[70, 83] chars:[70, 83, "Headi … 1.1.1"]
+  Heading[84, 125] textOpen:[84, 87, "###"] text:[88, 125, "Heading 1.1.2  **_some bold italic_**"]
+    Text[88, 103] chars:[88, 103, "Headi … 1.2  "]
+    StrongEmphasis[103, 125] textOpen:[103, 105, "**"] text:[105, 123, "_some bold italic_"] textClose:[123, 125, "**"]
+      Emphasis[105, 123] textOpen:[105, 106, "_"] text:[106, 122, "some bold italic"] textClose:[122, 123, "_"]
+        Text[106, 122] chars:[106, 122, "some  … talic"]
+````````````````````````````````
+
+
+Default rendering with div class, list class
+
+```````````````````````````````` example(SimToc: 36) options(div-class, list-class)
+[TOC]:#  
+
+# Heading **some bold** 1
+## Heading 1.1 _some italic_
+### Heading 1.1.1
+### Heading 1.1.2  **_some bold italic_**
+.
+<div class="content-class">
+  <h1>Table of Contents</h1>
+  <ul class="list-class">
+    <li><a href="#heading-11-some-italic">Heading 1.1 <em>some italic</em></a>
+      <ul>
+        <li><a href="#heading-111">Heading 1.1.1</a></li>
+        <li><a href="#heading-112--some-bold-italic">Heading 1.1.2  <strong><em>some bold italic</em></strong></a></li>
+      </ul>
+    </li>
+  </ul>
+</div>
+<h1 id="heading-some-bold-1">Heading <strong>some bold</strong> 1</h1>
+<h2 id="heading-11-some-italic">Heading 1.1 <em>some italic</em></h2>
+<h3 id="heading-111">Heading 1.1.1</h3>
+<h3 id="heading-112--some-bold-italic">Heading 1.1.2  <strong><em>some bold italic</em></strong></h3>
+.
+Document[0, 125]
+  SimTocBlock[0, 10] openingMarker:[0, 1] tocKeyword:[1, 4] closingMarker:[4, 6] anchorMarker:[6, 7, "#"]
+  Heading[11, 36] textOpen:[11, 12, "#"] text:[13, 36, "Heading **some bold** 1"]
+    Text[13, 21] chars:[13, 21, "Heading "]
+    StrongEmphasis[21, 34] textOpen:[21, 23, "**"] text:[23, 32, "some bold"] textClose:[32, 34, "**"]
+      Text[23, 32] chars:[23, 32, "some bold"]
+    Text[34, 36] chars:[34, 36, " 1"]
+  Heading[37, 65] textOpen:[37, 39, "##"] text:[40, 65, "Heading 1.1 _some italic_"]
+    Text[40, 52] chars:[40, 52, "Headi …  1.1 "]
+    Emphasis[52, 65] textOpen:[52, 53, "_"] text:[53, 64, "some italic"] textClose:[64, 65, "_"]
+      Text[53, 64] chars:[53, 64, "some  … talic"]
+  Heading[66, 83] textOpen:[66, 69, "###"] text:[70, 83, "Heading 1.1.1"]
+    Text[70, 83] chars:[70, 83, "Headi … 1.1.1"]
+  Heading[84, 125] textOpen:[84, 87, "###"] text:[88, 125, "Heading 1.1.2  **_some bold italic_**"]
+    Text[88, 103] chars:[88, 103, "Headi … 1.2  "]
+    StrongEmphasis[103, 125] textOpen:[103, 105, "**"] text:[105, 123, "_some bold italic_"] textClose:[123, 125, "**"]
+      Emphasis[105, 123] textOpen:[105, 106, "_"] text:[106, 122, "some bold italic"] textClose:[122, 123, "_"]
+        Text[106, 122] chars:[106, 122, "some  … talic"]
+````````````````````````````````
+
+
+Default rendering with list class
+
+```````````````````````````````` example(SimToc: 37) options(list-class)
+[TOC]:#  
+
+# Heading **some bold** 1
+## Heading 1.1 _some italic_
+### Heading 1.1.1
+### Heading 1.1.2  **_some bold italic_**
+.
+<div>
+  <h1>Table of Contents</h1>
+  <ul class="list-class">
+    <li><a href="#heading-11-some-italic">Heading 1.1 <em>some italic</em></a>
+      <ul>
+        <li><a href="#heading-111">Heading 1.1.1</a></li>
+        <li><a href="#heading-112--some-bold-italic">Heading 1.1.2  <strong><em>some bold italic</em></strong></a></li>
+      </ul>
+    </li>
+  </ul>
+</div>
+<h1 id="heading-some-bold-1">Heading <strong>some bold</strong> 1</h1>
+<h2 id="heading-11-some-italic">Heading 1.1 <em>some italic</em></h2>
+<h3 id="heading-111">Heading 1.1.1</h3>
+<h3 id="heading-112--some-bold-italic">Heading 1.1.2  <strong><em>some bold italic</em></strong></h3>
+.
+Document[0, 125]
+  SimTocBlock[0, 10] openingMarker:[0, 1] tocKeyword:[1, 4] closingMarker:[4, 6] anchorMarker:[6, 7, "#"]
+  Heading[11, 36] textOpen:[11, 12, "#"] text:[13, 36, "Heading **some bold** 1"]
+    Text[13, 21] chars:[13, 21, "Heading "]
+    StrongEmphasis[21, 34] textOpen:[21, 23, "**"] text:[23, 32, "some bold"] textClose:[32, 34, "**"]
+      Text[23, 32] chars:[23, 32, "some bold"]
+    Text[34, 36] chars:[34, 36, " 1"]
+  Heading[37, 65] textOpen:[37, 39, "##"] text:[40, 65, "Heading 1.1 _some italic_"]
+    Text[40, 52] chars:[40, 52, "Headi …  1.1 "]
+    Emphasis[52, 65] textOpen:[52, 53, "_"] text:[53, 64, "some italic"] textClose:[64, 65, "_"]
+      Text[53, 64] chars:[53, 64, "some  … talic"]
+  Heading[66, 83] textOpen:[66, 69, "###"] text:[70, 83, "Heading 1.1.1"]
+    Text[70, 83] chars:[70, 83, "Headi … 1.1.1"]
+  Heading[84, 125] textOpen:[84, 87, "###"] text:[88, 125, "Heading 1.1.2  **_some bold italic_**"]
+    Text[88, 103] chars:[88, 103, "Headi … 1.2  "]
+    StrongEmphasis[103, 125] textOpen:[103, 105, "**"] text:[105, 123, "_some bold italic_"] textClose:[123, 125, "**"]
+      Emphasis[105, 123] textOpen:[105, 106, "_"] text:[106, 122, "some bold italic"] textClose:[122, 123, "_"]
+        Text[106, 122] chars:[106, 122, "some  … talic"]
+````````````````````````````````
+
+
 With option nodes in the ast
 
-```````````````````````````````` example(SimToc: 35) options(with-option-list)
+```````````````````````````````` example(SimToc: 38) options(with-option-list)
 [TOC levels=a,b,c,d html markdown text formatted bullet numbered]: # 
 .
 .
@@ -932,7 +1073,7 @@ Document[0, 69]
 
 options, empty title
 
-```````````````````````````````` example SimToc: 36
+```````````````````````````````` example SimToc: 39
 [TOC levels=3]:# ""
 [TOC levels=3]:# ''
 .
@@ -945,7 +1086,7 @@ Document[0, 40]
 
 options, title
 
-```````````````````````````````` example SimToc: 37
+```````````````````````````````` example SimToc: 40
 [TOC levels=3]:# "title"
 [TOC levels=3]:# 'title'
 .
@@ -958,7 +1099,7 @@ Document[0, 50]
 
 options, markers, empty title
 
-```````````````````````````````` example SimToc: 38
+```````````````````````````````` example SimToc: 41
 [TOC levels=3]:# "## "
 [TOC levels=3]:# '## '
 .
@@ -971,7 +1112,7 @@ Document[0, 46]
 
 options, markers, title
 
-```````````````````````````````` example SimToc: 39
+```````````````````````````````` example SimToc: 42
 [TOC levels=3]:# "##title"
 [TOC levels=3]:# '##title'
 .
@@ -984,7 +1125,7 @@ Document[0, 54]
 
 options, markers, title
 
-```````````````````````````````` example SimToc: 40
+```````````````````````````````` example SimToc: 43
 [TOC levels=3]:# "## title"
 [TOC levels=3]:# '## title'
 .
@@ -997,7 +1138,7 @@ Document[0, 56]
 
 options, title with escaped chars
 
-```````````````````````````````` example SimToc: 41
+```````````````````````````````` example SimToc: 44
 ## Header 2
 ### Header 3
 
@@ -1031,7 +1172,7 @@ Document[0, 82]
 
 start with missing first level
 
-```````````````````````````````` example SimToc: 42
+```````````````````````````````` example SimToc: 45
 [TOC levels=1-6]:#  
 
 
@@ -1077,7 +1218,7 @@ Document[0, 82]
 
 start with missing first 2 levels
 
-```````````````````````````````` example SimToc: 43
+```````````````````````````````` example SimToc: 46
 [TOC levels=1-6]:#  
 
 
@@ -1118,7 +1259,7 @@ Document[0, 72]
 
 Text only style
 
-```````````````````````````````` example SimToc: 44
+```````````````````````````````` example SimToc: 47
 [TOC text]:#
 
 
@@ -1167,7 +1308,7 @@ Document[0, 131]
 
 Text and inlines style
 
-```````````````````````````````` example(SimToc: 45) options(text-only)
+```````````````````````````````` example(SimToc: 48) options(text-only)
 [TOC format]:#  
 
 
@@ -1216,7 +1357,7 @@ Document[0, 135]
 
 Text only, flat
 
-```````````````````````````````` example(SimToc: 46) options(text-only, flat)
+```````````````````````````````` example(SimToc: 49) options(text-only, flat)
 [TOC]:#
 
 
@@ -1262,7 +1403,7 @@ Document[0, 126]
 
 Text and inlines, flat
 
-```````````````````````````````` example(SimToc: 47) options(flat)
+```````````````````````````````` example(SimToc: 50) options(flat)
 [TOC]:#
 
 
@@ -1308,7 +1449,7 @@ Document[0, 126]
 
 Text and inlines, hierarchy
 
-```````````````````````````````` example(SimToc: 48) options(flat)
+```````````````````````````````` example(SimToc: 51) options(flat)
 [TOC hierarchy]:#
 
 
@@ -1357,7 +1498,7 @@ Document[0, 136]
 
 Text and inlines, flat
 
-```````````````````````````````` example(SimToc: 49) options(flat-reversed)
+```````````````````````````````` example(SimToc: 52) options(flat-reversed)
 [TOC]:#
 
 
@@ -1403,7 +1544,7 @@ Document[0, 126]
 
 Text and inlines, flat-reversed
 
-```````````````````````````````` example(SimToc: 50) options(flat-reversed)
+```````````````````````````````` example(SimToc: 53) options(flat-reversed)
 [TOC]:#
 
 
@@ -1449,7 +1590,7 @@ Document[0, 126]
 
 Text only, sorted
 
-```````````````````````````````` example(SimToc: 51) options(text-only, sorted)
+```````````````````````````````` example(SimToc: 54) options(text-only, sorted)
 [TOC]:#
 
 
@@ -1495,7 +1636,7 @@ Document[0, 126]
 
 Text and inlines, sorted
 
-```````````````````````````````` example(SimToc: 52) options(sorted)
+```````````````````````````````` example(SimToc: 55) options(sorted)
 [TOC]:#
 
 
@@ -1541,7 +1682,7 @@ Document[0, 126]
 
 Text only, sorted
 
-```````````````````````````````` example(SimToc: 53) options(text-only, sorted-reversed)
+```````````````````````````````` example(SimToc: 56) options(text-only, sorted-reversed)
 [TOC]:#
 
 
@@ -1587,7 +1728,7 @@ Document[0, 126]
 
 Text and inlines, sorted reversed
 
-```````````````````````````````` example(SimToc: 54) options(sorted-reversed)
+```````````````````````````````` example(SimToc: 57) options(sorted-reversed)
 [TOC]:#
 
 
@@ -1633,7 +1774,7 @@ Document[0, 126]
 
 Text and inlines, unsorted
 
-```````````````````````````````` example(SimToc: 55) options(sorted)
+```````````````````````````````` example(SimToc: 58) options(sorted)
 [TOC hierarchy]:#
 
 
@@ -1682,7 +1823,7 @@ Document[0, 136]
 
 Typographic chars included
 
-```````````````````````````````` example(SimToc: 56) options(sorted)
+```````````````````````````````` example(SimToc: 59) options(sorted)
 [TOC hierarchy]:#
 
 
@@ -1731,7 +1872,7 @@ Document[0, 138]
 
 With Typographic extension included
 
-```````````````````````````````` example(SimToc: 57) options(typographic)
+```````````````````````````````` example(SimToc: 60) options(typographic)
 [TOC hierarchy]:#
 
 
@@ -1780,7 +1921,7 @@ Document[0, 138]
 ````````````````````````````````
 
 
-```````````````````````````````` example(SimToc: 58) options(github)
+```````````````````````````````` example(SimToc: 61) options(github)
 [TOC hierarchy]:#
 
 

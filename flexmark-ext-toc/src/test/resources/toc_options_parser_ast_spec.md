@@ -69,34 +69,34 @@ levels=7
 levels=8
 levels=9
 .
-'levels=0' => TocOptions { levels=12, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', rawTitleLevel=1, listType=HIERARCHY, rawTitle='Table of Contents' }
+'levels=0' => TocOptions { levels=12, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', rawTitleLevel=1, listType=HIERARCHY, rawTitle='Table of Contents', divClass='', listClass='' }
   diff: [TOC]
   full: [TOC levels=3 bullet formatted hierarchy]
-'levels=1' => TocOptions { levels=2, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', rawTitleLevel=1, listType=HIERARCHY, rawTitle='Table of Contents' }
+'levels=1' => TocOptions { levels=2, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', rawTitleLevel=1, listType=HIERARCHY, rawTitle='Table of Contents', divClass='', listClass='' }
   diff: [TOC levels=1]
   full: [TOC levels=1 bullet formatted hierarchy]
-'levels=2' => TocOptions { levels=4, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', rawTitleLevel=1, listType=HIERARCHY, rawTitle='Table of Contents' }
+'levels=2' => TocOptions { levels=4, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', rawTitleLevel=1, listType=HIERARCHY, rawTitle='Table of Contents', divClass='', listClass='' }
   diff: [TOC levels=2,2]
   full: [TOC levels=2,2 bullet formatted hierarchy]
-'levels=3' => TocOptions { levels=8, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', rawTitleLevel=1, listType=HIERARCHY, rawTitle='Table of Contents' }
+'levels=3' => TocOptions { levels=8, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', rawTitleLevel=1, listType=HIERARCHY, rawTitle='Table of Contents', divClass='', listClass='' }
   diff: [TOC levels=3,3]
   full: [TOC levels=3,3 bullet formatted hierarchy]
-'levels=4' => TocOptions { levels=16, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', rawTitleLevel=1, listType=HIERARCHY, rawTitle='Table of Contents' }
+'levels=4' => TocOptions { levels=16, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', rawTitleLevel=1, listType=HIERARCHY, rawTitle='Table of Contents', divClass='', listClass='' }
   diff: [TOC levels=4,4]
   full: [TOC levels=4,4 bullet formatted hierarchy]
-'levels=5' => TocOptions { levels=32, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', rawTitleLevel=1, listType=HIERARCHY, rawTitle='Table of Contents' }
+'levels=5' => TocOptions { levels=32, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', rawTitleLevel=1, listType=HIERARCHY, rawTitle='Table of Contents', divClass='', listClass='' }
   diff: [TOC levels=5,5]
   full: [TOC levels=5,5 bullet formatted hierarchy]
-'levels=6' => TocOptions { levels=64, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', rawTitleLevel=1, listType=HIERARCHY, rawTitle='Table of Contents' }
+'levels=6' => TocOptions { levels=64, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', rawTitleLevel=1, listType=HIERARCHY, rawTitle='Table of Contents', divClass='', listClass='' }
   diff: [TOC levels=6,6]
   full: [TOC levels=6,6 bullet formatted hierarchy]
-'levels=7' => TocOptions { levels=12, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', rawTitleLevel=1, listType=HIERARCHY, rawTitle='Table of Contents' }
+'levels=7' => TocOptions { levels=12, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', rawTitleLevel=1, listType=HIERARCHY, rawTitle='Table of Contents', divClass='', listClass='' }
   diff: [TOC]
   full: [TOC levels=3 bullet formatted hierarchy]
-'levels=8' => TocOptions { levels=12, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', rawTitleLevel=1, listType=HIERARCHY, rawTitle='Table of Contents' }
+'levels=8' => TocOptions { levels=12, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', rawTitleLevel=1, listType=HIERARCHY, rawTitle='Table of Contents', divClass='', listClass='' }
   diff: [TOC]
   full: [TOC levels=3 bullet formatted hierarchy]
-'levels=9' => TocOptions { levels=12, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', rawTitleLevel=1, listType=HIERARCHY, rawTitle='Table of Contents' }
+'levels=9' => TocOptions { levels=12, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', rawTitleLevel=1, listType=HIERARCHY, rawTitle='Table of Contents', divClass='', listClass='' }
   diff: [TOC]
   full: [TOC levels=3 bullet formatted hierarchy]
 .
@@ -135,13 +135,13 @@ levels=1-3
 levels=3-1 
 levels=0-9
 .
-'levels=1-3 ' => TocOptions { levels=14, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', rawTitleLevel=1, listType=HIERARCHY, rawTitle='Table of Contents' }
+'levels=1-3 ' => TocOptions { levels=14, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', rawTitleLevel=1, listType=HIERARCHY, rawTitle='Table of Contents', divClass='', listClass='' }
   diff: [TOC levels=1-3]
   full: [TOC levels=1-3 bullet formatted hierarchy]
-'levels=3-1 ' => TocOptions { levels=14, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', rawTitleLevel=1, listType=HIERARCHY, rawTitle='Table of Contents' }
+'levels=3-1 ' => TocOptions { levels=14, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', rawTitleLevel=1, listType=HIERARCHY, rawTitle='Table of Contents', divClass='', listClass='' }
   diff: [TOC levels=1-3]
   full: [TOC levels=1-3 bullet formatted hierarchy]
-'levels=0-9' => TocOptions { levels=126, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', rawTitleLevel=1, listType=HIERARCHY, rawTitle='Table of Contents' }
+'levels=0-9' => TocOptions { levels=126, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', rawTitleLevel=1, listType=HIERARCHY, rawTitle='Table of Contents', divClass='', listClass='' }
   diff: [TOC levels=1-6]
   full: [TOC levels=1-6 bullet formatted hierarchy]
 .
@@ -171,37 +171,37 @@ reversed
 increasing
 decreasing
 .
-'html' => TocOptions { levels=12, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', rawTitleLevel=1, listType=HIERARCHY, rawTitle='Table of Contents' }
+'html' => TocOptions { levels=12, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', rawTitleLevel=1, listType=HIERARCHY, rawTitle='Table of Contents', divClass='', listClass='' }
   diff: [TOC]
   full: [TOC levels=3 bullet formatted hierarchy]
-'markdown' => TocOptions { levels=12, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', rawTitleLevel=1, listType=HIERARCHY, rawTitle='Table of Contents' }
+'markdown' => TocOptions { levels=12, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', rawTitleLevel=1, listType=HIERARCHY, rawTitle='Table of Contents', divClass='', listClass='' }
   diff: [TOC]
   full: [TOC levels=3 bullet formatted hierarchy]
-'numbered' => TocOptions { levels=12, isHtml=false, isTextOnly=false, isNumbered=true, titleLevel=1, title='Table of Contents', rawTitleLevel=1, listType=HIERARCHY, rawTitle='Table of Contents' }
+'numbered' => TocOptions { levels=12, isHtml=false, isTextOnly=false, isNumbered=true, titleLevel=1, title='Table of Contents', rawTitleLevel=1, listType=HIERARCHY, rawTitle='Table of Contents', divClass='', listClass='' }
   diff: [TOC numbered]
   full: [TOC levels=3 numbered formatted hierarchy]
-'bullet' => TocOptions { levels=12, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', rawTitleLevel=1, listType=HIERARCHY, rawTitle='Table of Contents' }
+'bullet' => TocOptions { levels=12, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', rawTitleLevel=1, listType=HIERARCHY, rawTitle='Table of Contents', divClass='', listClass='' }
   diff: [TOC]
   full: [TOC levels=3 bullet formatted hierarchy]
-'text' => TocOptions { levels=12, isHtml=false, isTextOnly=true, isNumbered=false, titleLevel=1, title='Table of Contents', rawTitleLevel=1, listType=HIERARCHY, rawTitle='Table of Contents' }
+'text' => TocOptions { levels=12, isHtml=false, isTextOnly=true, isNumbered=false, titleLevel=1, title='Table of Contents', rawTitleLevel=1, listType=HIERARCHY, rawTitle='Table of Contents', divClass='', listClass='' }
   diff: [TOC text]
   full: [TOC levels=3 bullet text hierarchy]
-'formatted' => TocOptions { levels=12, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', rawTitleLevel=1, listType=HIERARCHY, rawTitle='Table of Contents' }
+'formatted' => TocOptions { levels=12, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', rawTitleLevel=1, listType=HIERARCHY, rawTitle='Table of Contents', divClass='', listClass='' }
   diff: [TOC]
   full: [TOC levels=3 bullet formatted hierarchy]
-'hierarchy' => TocOptions { levels=12, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', rawTitleLevel=1, listType=HIERARCHY, rawTitle='Table of Contents' }
+'hierarchy' => TocOptions { levels=12, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', rawTitleLevel=1, listType=HIERARCHY, rawTitle='Table of Contents', divClass='', listClass='' }
   diff: [TOC]
   full: [TOC levels=3 bullet formatted hierarchy]
-'flat' => TocOptions { levels=12, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', rawTitleLevel=1, listType=FLAT, rawTitle='Table of Contents' }
+'flat' => TocOptions { levels=12, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', rawTitleLevel=1, listType=FLAT, rawTitle='Table of Contents', divClass='', listClass='' }
   diff: [TOC flat]
   full: [TOC levels=3 bullet formatted flat]
-'reversed' => TocOptions { levels=12, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', rawTitleLevel=1, listType=FLAT_REVERSED, rawTitle='Table of Contents' }
+'reversed' => TocOptions { levels=12, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', rawTitleLevel=1, listType=FLAT_REVERSED, rawTitle='Table of Contents', divClass='', listClass='' }
   diff: [TOC reversed]
   full: [TOC levels=3 bullet formatted reversed]
-'increasing' => TocOptions { levels=12, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', rawTitleLevel=1, listType=SORTED, rawTitle='Table of Contents' }
+'increasing' => TocOptions { levels=12, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', rawTitleLevel=1, listType=SORTED, rawTitle='Table of Contents', divClass='', listClass='' }
   diff: [TOC increasing]
   full: [TOC levels=3 bullet formatted increasing]
-'decreasing' => TocOptions { levels=12, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', rawTitleLevel=1, listType=SORTED_REVERSED, rawTitle='Table of Contents' }
+'decreasing' => TocOptions { levels=12, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', rawTitleLevel=1, listType=SORTED_REVERSED, rawTitle='Table of Contents', divClass='', listClass='' }
   diff: [TOC decreasing]
   full: [TOC levels=3 bullet formatted decreasing]
 .
@@ -248,37 +248,37 @@ reversed
 increasing
 decreasing
 .
-'html' => TocOptions { levels=12, isHtml=true, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', rawTitleLevel=1, listType=HIERARCHY, rawTitle='Table of Contents' }
+'html' => TocOptions { levels=12, isHtml=true, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', rawTitleLevel=1, listType=HIERARCHY, rawTitle='Table of Contents', divClass='', listClass='' }
   diff: [TOC html]: #
   full: [TOC levels=3 html bullet formatted hierarchy]: # "# Table of Contents"
-'markdown' => TocOptions { levels=12, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', rawTitleLevel=1, listType=HIERARCHY, rawTitle='Table of Contents' }
+'markdown' => TocOptions { levels=12, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', rawTitleLevel=1, listType=HIERARCHY, rawTitle='Table of Contents', divClass='', listClass='' }
   diff: [TOC]: #
   full: [TOC levels=3 markdown bullet formatted hierarchy]: # "# Table of Contents"
-'numbered' => TocOptions { levels=12, isHtml=false, isTextOnly=false, isNumbered=true, titleLevel=1, title='Table of Contents', rawTitleLevel=1, listType=HIERARCHY, rawTitle='Table of Contents' }
+'numbered' => TocOptions { levels=12, isHtml=false, isTextOnly=false, isNumbered=true, titleLevel=1, title='Table of Contents', rawTitleLevel=1, listType=HIERARCHY, rawTitle='Table of Contents', divClass='', listClass='' }
   diff: [TOC numbered]: #
   full: [TOC levels=3 markdown numbered formatted hierarchy]: # "# Table of Contents"
-'bullet' => TocOptions { levels=12, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', rawTitleLevel=1, listType=HIERARCHY, rawTitle='Table of Contents' }
+'bullet' => TocOptions { levels=12, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', rawTitleLevel=1, listType=HIERARCHY, rawTitle='Table of Contents', divClass='', listClass='' }
   diff: [TOC]: #
   full: [TOC levels=3 markdown bullet formatted hierarchy]: # "# Table of Contents"
-'text' => TocOptions { levels=12, isHtml=false, isTextOnly=true, isNumbered=false, titleLevel=1, title='Table of Contents', rawTitleLevel=1, listType=HIERARCHY, rawTitle='Table of Contents' }
+'text' => TocOptions { levels=12, isHtml=false, isTextOnly=true, isNumbered=false, titleLevel=1, title='Table of Contents', rawTitleLevel=1, listType=HIERARCHY, rawTitle='Table of Contents', divClass='', listClass='' }
   diff: [TOC text]: #
   full: [TOC levels=3 markdown bullet text hierarchy]: # "# Table of Contents"
-'formatted' => TocOptions { levels=12, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', rawTitleLevel=1, listType=HIERARCHY, rawTitle='Table of Contents' }
+'formatted' => TocOptions { levels=12, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', rawTitleLevel=1, listType=HIERARCHY, rawTitle='Table of Contents', divClass='', listClass='' }
   diff: [TOC]: #
   full: [TOC levels=3 markdown bullet formatted hierarchy]: # "# Table of Contents"
-'hierarchy' => TocOptions { levels=12, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', rawTitleLevel=1, listType=HIERARCHY, rawTitle='Table of Contents' }
+'hierarchy' => TocOptions { levels=12, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', rawTitleLevel=1, listType=HIERARCHY, rawTitle='Table of Contents', divClass='', listClass='' }
   diff: [TOC]: #
   full: [TOC levels=3 markdown bullet formatted hierarchy]: # "# Table of Contents"
-'flat' => TocOptions { levels=12, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', rawTitleLevel=1, listType=FLAT, rawTitle='Table of Contents' }
+'flat' => TocOptions { levels=12, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', rawTitleLevel=1, listType=FLAT, rawTitle='Table of Contents', divClass='', listClass='' }
   diff: [TOC flat]: #
   full: [TOC levels=3 markdown bullet formatted flat]: # "# Table of Contents"
-'reversed' => TocOptions { levels=12, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', rawTitleLevel=1, listType=FLAT_REVERSED, rawTitle='Table of Contents' }
+'reversed' => TocOptions { levels=12, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', rawTitleLevel=1, listType=FLAT_REVERSED, rawTitle='Table of Contents', divClass='', listClass='' }
   diff: [TOC reversed]: #
   full: [TOC levels=3 markdown bullet formatted reversed]: # "# Table of Contents"
-'increasing' => TocOptions { levels=12, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', rawTitleLevel=1, listType=SORTED, rawTitle='Table of Contents' }
+'increasing' => TocOptions { levels=12, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', rawTitleLevel=1, listType=SORTED, rawTitle='Table of Contents', divClass='', listClass='' }
   diff: [TOC increasing]: #
   full: [TOC levels=3 markdown bullet formatted increasing]: # "# Table of Contents"
-'decreasing' => TocOptions { levels=12, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', rawTitleLevel=1, listType=SORTED_REVERSED, rawTitle='Table of Contents' }
+'decreasing' => TocOptions { levels=12, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', rawTitleLevel=1, listType=SORTED_REVERSED, rawTitle='Table of Contents', divClass='', listClass='' }
   diff: [TOC decreasing]: #
   full: [TOC levels=3 markdown bullet formatted decreasing]: # "# Table of Contents"
 .
@@ -332,22 +332,22 @@ bbullet
 stext
 sformatted
 .
-'htmls' => TocOptions { levels=12, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', rawTitleLevel=1, listType=HIERARCHY, rawTitle='Table of Contents' }
+'htmls' => TocOptions { levels=12, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', rawTitleLevel=1, listType=HIERARCHY, rawTitle='Table of Contents', divClass='', listClass='' }
   diff: [TOC]
   full: [TOC levels=3 bullet formatted hierarchy]
-'markdowns' => TocOptions { levels=12, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', rawTitleLevel=1, listType=HIERARCHY, rawTitle='Table of Contents' }
+'markdowns' => TocOptions { levels=12, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', rawTitleLevel=1, listType=HIERARCHY, rawTitle='Table of Contents', divClass='', listClass='' }
   diff: [TOC]
   full: [TOC levels=3 bullet formatted hierarchy]
-'snumbered' => TocOptions { levels=12, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', rawTitleLevel=1, listType=HIERARCHY, rawTitle='Table of Contents' }
+'snumbered' => TocOptions { levels=12, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', rawTitleLevel=1, listType=HIERARCHY, rawTitle='Table of Contents', divClass='', listClass='' }
   diff: [TOC]
   full: [TOC levels=3 bullet formatted hierarchy]
-'bbullet' => TocOptions { levels=12, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', rawTitleLevel=1, listType=HIERARCHY, rawTitle='Table of Contents' }
+'bbullet' => TocOptions { levels=12, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', rawTitleLevel=1, listType=HIERARCHY, rawTitle='Table of Contents', divClass='', listClass='' }
   diff: [TOC]
   full: [TOC levels=3 bullet formatted hierarchy]
-'stext' => TocOptions { levels=12, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', rawTitleLevel=1, listType=HIERARCHY, rawTitle='Table of Contents' }
+'stext' => TocOptions { levels=12, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', rawTitleLevel=1, listType=HIERARCHY, rawTitle='Table of Contents', divClass='', listClass='' }
   diff: [TOC]
   full: [TOC levels=3 bullet formatted hierarchy]
-'sformatted' => TocOptions { levels=12, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', rawTitleLevel=1, listType=HIERARCHY, rawTitle='Table of Contents' }
+'sformatted' => TocOptions { levels=12, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', rawTitleLevel=1, listType=HIERARCHY, rawTitle='Table of Contents', divClass='', listClass='' }
   diff: [TOC]
   full: [TOC levels=3 bullet formatted hierarchy]
 .

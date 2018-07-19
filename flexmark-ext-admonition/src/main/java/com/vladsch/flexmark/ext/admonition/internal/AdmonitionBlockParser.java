@@ -55,8 +55,8 @@ public class AdmonitionBlockParser extends AbstractBlockParser {
         } else if (!hadBlankLine && options.allowLazyContinuation) {
             return BlockContinue.atIndex(nonSpaceIndex);
         } else if (state.getIndent() >= options.contentIndent) {
-            int contentIndent = state.getIndex() + options.contentIndent;
-            return BlockContinue.atIndex(contentIndent);
+            int contentIndent = state.getColumn() + options.contentIndent;
+            return BlockContinue.atColumn(contentIndent);
         } else {
             return BlockContinue.none();
         }

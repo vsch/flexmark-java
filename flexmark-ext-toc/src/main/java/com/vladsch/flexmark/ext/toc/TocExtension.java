@@ -4,7 +4,9 @@ import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.ext.toc.internal.TocBlockParser;
 import com.vladsch.flexmark.ext.toc.internal.TocNodeRenderer;
 import com.vladsch.flexmark.ext.toc.internal.TocOptions;
+import com.vladsch.flexmark.ext.toc.internal.TocUtils;
 import com.vladsch.flexmark.html.HtmlRenderer;
+import com.vladsch.flexmark.html.renderer.AttributablePart;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.collection.DataValueFactory;
 import com.vladsch.flexmark.util.options.DataHolder;
@@ -24,22 +26,28 @@ import com.vladsch.flexmark.util.options.MutableDataHolder;
  * </p>
  */
 public class TocExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension {
+    // duplicated here for convenience
+    public static final AttributablePart TOC_CONTENT = TocUtils.TOC_CONTENT;        // div element wrapping TOC list
+    public static final AttributablePart TOC_LIST = TocUtils.TOC_LIST;              // ul/ol element of TOC list
+
     public static final DataKey<Integer> LEVELS = new DataKey<Integer>("LEVELS", TocOptions.DEFAULT_LEVELS);
     public static final DataKey<Boolean> IS_TEXT_ONLY = new DataKey<Boolean>("IS_TEXT_ONLY", false);
     public static final DataKey<Boolean> IS_NUMBERED = new DataKey<Boolean>("IS_NUMBERED", false);
     public static final DataKey<TocOptions.ListType> LIST_TYPE = new DataKey<TocOptions.ListType>("LIST_TYPE", TocOptions.ListType.HIERARCHY);
     public static final DataKey<Boolean> IS_HTML = new DataKey<Boolean>("IS_HTML", false);
     public static final DataKey<Integer> TITLE_LEVEL = new DataKey<Integer>("TITLE_LEVEL", TocOptions.DEFAULT_TITLE_LEVEL);
-    public static final DataKey<String> TITLE = new DataKey<String>("TITLE", TocOptions.DEFAULT_TITLE);
+    public static final DataKey<String> TITLE = new DataKey<String>("TITLE", (String)null);
     public static final DataKey<Boolean> AST_INCLUDE_OPTIONS = new DataKey<Boolean>("AST_INCLUDE_OPTIONS", false);
     public static final DataKey<Boolean> BLANK_LINE_SPACER = new DataKey<Boolean>("BLANK_LINE_SPACER", false);
+    public static final DataKey<String> DIV_CLASS = new DataKey<String>("DIV_CLASS", "");
+    public static final DataKey<String> LIST_CLASS = new DataKey<String>("LIST_CLASS", "");
 
     // format options
     public static final DataKey<SimTocGenerateOnFormat> FORMAT_UPDATE_ON_FORMAT = new DataKey<SimTocGenerateOnFormat>("FORMAT_UPDATE_ON_FORMAT", SimTocGenerateOnFormat.UPDATE);
     public static final DataKey<TocOptions> FORMAT_OPTIONS = new DataKey<TocOptions>("FORMAT_OPTIONS", new DataValueFactory<TocOptions>() {
         @Override
         public TocOptions create(DataHolder options) {
-            return new TocOptions(options);
+            return new TocOptions(options, false);
         }
     });
 

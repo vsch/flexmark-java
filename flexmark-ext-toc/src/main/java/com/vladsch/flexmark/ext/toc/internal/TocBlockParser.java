@@ -22,7 +22,7 @@ public class TocBlockParser extends AbstractBlockParser {
     private final TocOptions options;
 
     private TocBlockParser(DataHolder options, BasedSequence tocChars, BasedSequence styleChars) {
-        this.options = new TocOptions(options);
+        this.options = new TocOptions(options, false);
         block = new TocBlock(tocChars, styleChars);
     }
 
@@ -78,7 +78,7 @@ public class TocBlockParser extends AbstractBlockParser {
 
         private BlockFactory(DataHolder options) {
             super(options);
-            this.options = new TocOptions(options);
+            this.options = new TocOptions(options, false);
         }
 
         @Override
