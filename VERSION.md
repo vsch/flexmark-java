@@ -8,6 +8,7 @@ flexmark-java
 - [To Do](#to-do)
     - [Docx Converter](#docx-converter)
     - [GitLab compatibility extensions](#gitlab-compatibility-extensions)
+- [0.34.12](#03412)
 - [0.34.10](#03410)
 - [0.34.8](#0348)
 - [0.34.6](#0346)
@@ -265,6 +266,11 @@ flexmark-java
       similar to Math solution above.
 
 &nbsp;</details>
+
+0.34.12
+-------
+
+* Fix: merge #249, support Jira links titles thanks to [@qwazer](https://github.com/qwazer)
 
 0.34.10
 -------
