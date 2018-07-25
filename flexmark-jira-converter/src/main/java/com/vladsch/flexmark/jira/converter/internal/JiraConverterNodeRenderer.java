@@ -418,7 +418,11 @@ public class JiraConverterNodeRenderer implements NodeRenderer
             ResolvedLink resolvedLink = context.resolveLink(LinkType.LINK, node.getUrl().unescape(), null);
             html.raw("[");
             context.renderChildren(node);
-            html.raw("|").raw(resolvedLink.getUrl()).raw("]");
+            html.raw("|").raw(resolvedLink.getUrl());
+            if (node.getTitle() != null && !node.getTitle().isEmpty()) {
+                html.raw("|").raw(node.getTitle());
+            }
+            html.raw("]");
         }
     }
 

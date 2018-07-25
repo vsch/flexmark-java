@@ -144,6 +144,19 @@ Document[0, 122]
 ````````````````````````````````
 
 
+```````````````````````````````` example Text formatting: 4
+[inline link with title](http://google.com "Google")
+.
+[inline link with title|http://google.com|Google]
+
+.
+Document[0, 53]
+  Paragraph[0, 53]
+    Link[0, 52] textOpen:[0, 1, "["] text:[1, 23, "inline link with title"] textClose:[23, 24, "]"] linkOpen:[24, 25, "("] url:[25, 42, "http://google.com"] pageRef:[25, 42, "http://google.com"] titleOpen:[43, 44, "\""] title:[44, 50, "Google"] titleClose:[50, 51, "\""] linkClose:[51, 52, ")"]
+      Text[1, 23] chars:[1, 23, "inlin … title"]
+````````````````````````````````
+
+
 ### Block quotes
 
 Single line block quote
