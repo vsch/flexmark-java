@@ -28,11 +28,13 @@ Document[0, 16]
 ```````````````````````````````` example GfmIssues: 2
 abc #123-4 xyz
 .
-<p>abc #123-4 xyz</p>
+<p>abc <a href="issues/123">#123</a>-4 xyz</p>
 .
 Document[0, 15]
   Paragraph[0, 15]
-    Text[0, 14] chars:[0, 14, "abc # … 4 xyz"]
+    Text[0, 4] chars:[0, 4, "abc "]
+    GfmIssue[4, 8] textOpen:[4, 5, "#"] text:[5, 8, "123"]
+    Text[8, 14] chars:[8, 14, "-4 xyz"]
 ````````````````````````````````
 
 
@@ -186,4 +188,21 @@ Document[0, 4]
     GfmIssue[0, 4] textOpen:[0, 1, "#"] text:[1, 4, "123"]
 ````````````````````````````````
 
+
+## Issue 252
+
+Issue #252, GfmUser and GfmIssue are not recognized if immediately followed by non-space
+character
+
+```````````````````````````````` example(Issue 252: 1) options(root, prefix, suffix)
+Hello, @world, and #1!
+.
+<p>Hello, @world, and <a href="https://github.com/vsch/flexmark-java/issues?issue=1&amp;">#1</a>!</p>
+.
+Document[0, 22]
+  Paragraph[0, 22]
+    Text[0, 19] chars:[0, 19, "Hello …  and "]
+    GfmIssue[19, 21] textOpen:[19, 20, "#"] text:[20, 21, "1"]
+    Text[21, 22] chars:[21, 22, "!"]
+````````````````````````````````
 

@@ -10,7 +10,7 @@ import java.util.Set;
 import java.util.regex.Pattern;
 
 public class GfmIssuesInlineParserExtension implements InlineParserExtension {
-   public static final Pattern GITHUB_ISSUE = Pattern.compile("^(#)(\\d+)(?=[ \\t]+|\\r|\\r\\n|\\n|$)");
+   public static final Pattern GITHUB_ISSUE = Pattern.compile("^(#)(\\d+)\\b");
 
     public GfmIssuesInlineParserExtension(final InlineParser inlineParser) {
 

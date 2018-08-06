@@ -18,11 +18,13 @@ Only valid names
 ```````````````````````````````` example GfmUsers: 1
 abc @abcdef1.asdasdf xyz
 .
-<p>abc @abcdef1.asdasdf xyz</p>
+<p>abc <a href="https://github.com/abcdef1"><strong>@abcdef1</strong></a>.asdasdf xyz</p>
 .
 Document[0, 25]
   Paragraph[0, 25]
-    Text[0, 24] chars:[0, 24, "abc @ … f xyz"]
+    Text[0, 4] chars:[0, 4, "abc "]
+    GfmUser[4, 12] textOpen:[4, 5, "@"] text:[5, 12, "abcdef1"]
+    Text[12, 24] chars:[12, 24, ".asda … f xyz"]
 ````````````````````````````````
 
 
@@ -214,6 +216,24 @@ Document[0, 4]
 Document[0, 4]
   Paragraph[0, 4]
     GfmUser[0, 4] textOpen:[0, 1, "@"] text:[1, 4, "123"]
+````````````````````````````````
+
+
+## Issue 252
+
+Issue #252, GfmUser and GfmIssue are not recognized if immediately followed by non-space
+character
+
+```````````````````````````````` example(Issue 252: 1) options(root, prefix, suffix, plain)
+Hello, @world, and #1!
+.
+<p>Hello, <a href="http://github.com?user=world&amp;">@world</a>, and #1!</p>
+.
+Document[0, 22]
+  Paragraph[0, 22]
+    Text[0, 7] chars:[0, 7, "Hello, "]
+    GfmUser[7, 13] textOpen:[7, 8, "@"] text:[8, 13, "world"]
+    Text[13, 22] chars:[13, 22, ", and #1!"]
 ````````````````````````````````
 
 

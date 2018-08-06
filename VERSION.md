@@ -8,6 +8,7 @@ flexmark-java
 - [To Do](#to-do)
     - [Docx Converter](#docx-converter)
     - [GitLab compatibility extensions](#gitlab-compatibility-extensions)
+- [0.34.14](#03414)
 - [0.34.12](#03412)
 - [0.34.10](#03410)
 - [0.34.8](#0348)
@@ -266,6 +267,12 @@ flexmark-java
       similar to Math solution above.
 
 &nbsp;</details>
+
+0.34.14
+-------
+
+* Fix: #252, GfmUser and GfmIssue are not recognized if immediately followed by non-space
+  character, change regex to allow word break after user and issue
 
 0.34.12
 -------

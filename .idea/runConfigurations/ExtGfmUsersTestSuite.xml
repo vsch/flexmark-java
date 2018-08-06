@@ -1,0 +1,18 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="ExtGfmUsersTestSuite" type="JUnit" factoryName="JUnit" singleton="true" nameIsGenerated="true">
+    <module name="flexmark-ext-gfm-users" />
+    <extension name="coverage">
+      <pattern>
+        <option name="PATTERN" value="com.vladsch.flexmark.ext.gfm.users.*" />
+        <option name="ENABLED" value="true" />
+      </pattern>
+    </extension>
+    <option name="PACKAGE_NAME" value="com.vladsch.flexmark.ext.gfm.users" />
+    <option name="MAIN_CLASS_NAME" value="com.vladsch.flexmark.ext.gfm.users.ExtGfmUsersTestSuite" />
+    <option name="METHOD_NAME" value="" />
+    <option name="PARAMETERS" value="" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
