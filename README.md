@@ -98,6 +98,7 @@ packagingOptions {
     exclude 'META-INF/LICENSE-LGPL-2.1.txt'
     exclude 'META-INF/LICENSE-LGPL-3.txt'
     exclude 'META-INF/LICENSE-W3C-TEST'
+    exclude 'META-INF/DEPENDENCIES'
 }
 ```
 
