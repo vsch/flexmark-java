@@ -1155,3 +1155,63 @@ Document[0, 133]
 ````````````````````````````````
 
 
+## Issue 254 
+
+Issue #254, customized HTML_BLOCK_TAGS Parser option seems not taken into account
+
+```````````````````````````````` example(Issue 254: 1) options(custom-html-block)
+<warp10-warpscript-widget>
+
+//There should not be no <p> here
+**no md**
+
+%>
+</warp10-warpscript-widget>
+.
+<warp10-warpscript-widget>
+
+//There should not be no <p> here
+**no md**
+
+%>
+</warp10-warpscript-widget>
+.
+Document[0, 103]
+  HtmlBlock[0, 103]
+````````````````````````````````
+
+
+without custom tags
+
+```````````````````````````````` example(Issue 254: 2) options(deep-html-parser)
+<warp10-warpscript-widget>
+
+//There should not be no <p> here
+**no md**
+
+%>
+</warp10-warpscript-widget>
+.
+<p><warp10-warpscript-widget></p>
+<p>//There should not be no <p> here
+<strong>no md</strong></p>
+<p>%&gt;
+</warp10-warpscript-widget></p>
+.
+Document[0, 103]
+  Paragraph[0, 27] isTrailingBlankLine
+    HtmlInline[0, 26] chars:[0, 26, "<warp … dget>"]
+  Paragraph[28, 72] isTrailingBlankLine
+    Text[28, 53] chars:[28, 53, "//The … e no "]
+    HtmlInline[53, 56] chars:[53, 56, "<p>"]
+    Text[56, 61] chars:[56, 61, " here"]
+    SoftLineBreak[61, 62]
+    StrongEmphasis[62, 71] textOpen:[62, 64, "**"] text:[64, 69, "no md"] textClose:[69, 71, "**"]
+      Text[64, 69] chars:[64, 69, "no md"]
+  Paragraph[73, 103]
+    Text[73, 75] chars:[73, 75, "%>"]
+    SoftLineBreak[75, 76]
+    HtmlInline[76, 103] chars:[76, 103, "</war … dget>"]
+````````````````````````````````
+
+

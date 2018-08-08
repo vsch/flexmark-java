@@ -8,6 +8,7 @@ flexmark-java
 - [To Do](#to-do)
     - [Docx Converter](#docx-converter)
     - [GitLab compatibility extensions](#gitlab-compatibility-extensions)
+- [0.34.16](#03416)
 - [0.34.14](#03414)
 - [0.34.12](#03412)
 - [0.34.10](#03410)
@@ -267,6 +268,11 @@ flexmark-java
       similar to Math solution above.
 
 &nbsp;</details>
+
+0.34.16
+-------
+
+* Fix: #254, customized HTML_BLOCK_TAGS Parser option seems not taken into account
 
 0.34.14
 -------

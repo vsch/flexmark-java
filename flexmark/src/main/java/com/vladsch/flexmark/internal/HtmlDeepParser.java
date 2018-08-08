@@ -16,7 +16,8 @@ class HtmlDeepParser {
         NON_TAG("<(![A-Z])", ">", false),
         TEMPLATE("<([?])", "\\?>", false),
         COMMENT("<(!--)", "-->", false),
-        CDATA("<!\\[(CDATA)\\[", "\\]\\]>", false),;
+        CDATA("<!\\[(CDATA)\\[", "\\]\\]>", false),
+        ;
 
         public final Pattern open;
         public final Pattern close;
@@ -97,16 +98,24 @@ class HtmlDeepParser {
         START_PATTERN = Pattern.compile(startPattern.toString());
     }
 
-    private ArrayList<String> myOpenTags;
+    private final ArrayList<String> myOpenTags;
     private Pattern myClosingPattern;
     private HtmlMatch myHtmlMatch;
     private int myHtmlCount;
+    final private HashSet<String> myBlockTags;
 
     public HtmlDeepParser() {
+        this(Collections.<String>emptyList());
+    }
+
+    public HtmlDeepParser(List<String> customTags) {
         myOpenTags = new ArrayList<String>();
         myClosingPattern = null;
         myHtmlMatch = null;
         myHtmlCount = 0;
+
+        myBlockTags = new HashSet<>(BLOCK_TAGS);
+        myBlockTags.addAll(customTags);
     }
 
     public ArrayList<String> getOpenTags() {
@@ -129,7 +138,7 @@ class HtmlDeepParser {
         return myClosingPattern == null && myOpenTags.isEmpty();
     }
 
-    public boolean isBlankLineIterruptible() {
+    public boolean isBlankLineInterruptible() {
         return (myOpenTags.isEmpty() && myClosingPattern == null || myHtmlMatch == OPEN_TAG && myClosingPattern != null && myOpenTags.size() == 1);
     }
 
@@ -223,7 +232,7 @@ class HtmlDeepParser {
 
                     final String group = matcher.group(i).toLowerCase();
                     HtmlMatch htmlMatch = PATTERN_MAP[i];
-                    final boolean isBlockTag = BLOCK_TAGS.contains(group);
+                    final boolean isBlockTag = myBlockTags.contains(group);
 
                     if ((blockTagsOnly || !parseNonBlock) && matcher.start() > 0) {
                         // nothing but blanks allowed before first pattern match when block tags only
@@ -232,7 +241,7 @@ class HtmlDeepParser {
                     }
 
                     // see if self closed and if void or block
-                    if (htmlMatch != OPEN_TAG && htmlMatch != htmlMatch.CLOSE_TAG) {
+                    if (htmlMatch != OPEN_TAG && htmlMatch != HtmlMatch.CLOSE_TAG) {
                         // block and has closing tag sequence
                         myClosingPattern = htmlMatch.close;
                         myHtmlMatch = htmlMatch;
@@ -288,7 +297,7 @@ class HtmlDeepParser {
 
                             if (!isBlockTag) {
                                 // don't close unmatched block tag by closing non-block tag.
-                                if (BLOCK_TAGS.contains(openTag)) break;
+                                if (myBlockTags.contains(openTag)) break;
                             }
                         }
                     }

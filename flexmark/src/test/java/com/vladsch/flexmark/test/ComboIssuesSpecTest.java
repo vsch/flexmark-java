@@ -80,6 +80,22 @@ public class ComboIssuesSpecTest extends ComboSpecTestCase {
         optionsMap.put("fixed-indent", new MutableDataSet().setFrom(ParserEmulationProfile.FIXED_INDENT));
         optionsMap.put("html-comment-full-lines", new MutableDataSet().set(Parser.HTML_BLOCK_COMMENT_ONLY_FULL_LINE, true));
         optionsMap.put("allow-javascript", new MutableDataSet().set(HtmlRenderer.SUPPRESSED_LINKS, ""));
+
+        final List<String> customHtmlBlockTags = new ArrayList<>(Parser.HTML_BLOCK_TAGS.getFrom(null));
+        customHtmlBlockTags.add("warp10-warpscript-widget");
+        optionsMap.put("custom-html-block", new MutableDataSet()
+                .set(Parser.HTML_BLOCK_TAGS, customHtmlBlockTags)
+                .set(Parser.HTML_BLOCK_DEEP_PARSER, true)
+                .set(Parser.HTML_BLOCK_DEEP_PARSE_BLANK_LINE_INTERRUPTS, false)
+                .set(Parser.HTML_BLOCK_DEEP_PARSE_FIRST_OPEN_TAG_ON_ONE_LINE, true)
+                .set(Parser.HTML_BLOCK_DEEP_PARSE_BLANK_LINE_INTERRUPTS_PARTIAL_TAG, false)
+        );
+        optionsMap.put("deep-html-parser", new MutableDataSet()
+                .set(Parser.HTML_BLOCK_DEEP_PARSER, true)
+                .set(Parser.HTML_BLOCK_DEEP_PARSE_BLANK_LINE_INTERRUPTS, false)
+                .set(Parser.HTML_BLOCK_DEEP_PARSE_FIRST_OPEN_TAG_ON_ONE_LINE, true)
+                .set(Parser.HTML_BLOCK_DEEP_PARSE_BLANK_LINE_INTERRUPTS_PARTIAL_TAG, false)
+        );
     }
 
     private static final Parser PARSER = Parser.builder(OPTIONS).build();

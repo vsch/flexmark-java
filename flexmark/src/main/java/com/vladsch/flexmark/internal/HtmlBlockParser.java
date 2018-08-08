@@ -120,7 +120,7 @@ public class HtmlBlockParser extends AbstractBlockParser {
     public BlockContinue tryContinue(ParserState state) {
         if (deepParser != null) {
             if (state.isBlank()) {
-                if (deepParser.isHtmlClosed() || myHtmlBlockDeepParseBlankLineInterrupts && !deepParser.haveOpenRawTag() || (myHtmlBlockDeepParseBlankLineInterruptsPartialTag && deepParser.isBlankLineIterruptible())) {
+                if (deepParser.isHtmlClosed() || myHtmlBlockDeepParseBlankLineInterrupts && !deepParser.haveOpenRawTag() || (myHtmlBlockDeepParseBlankLineInterruptsPartialTag && deepParser.isBlankLineInterruptible())) {
                     return BlockContinue.none();
                 }
             }
@@ -299,7 +299,7 @@ public class HtmlBlockParser extends AbstractBlockParser {
 
             if (state.getIndent() < 4 && line.charAt(nextNonSpace) == '<' && !(matchedBlockParser.getBlockParser() instanceof HtmlBlockParser)) {
                 if (myHtmlBlockDeepParser) {
-                    HtmlDeepParser deepParser = new HtmlDeepParser();
+                    HtmlDeepParser deepParser = new HtmlDeepParser(Parser.HTML_BLOCK_TAGS.getFrom(state.getProperties()));
                     deepParser.parseHtmlChunk(line.subSequence(nextNonSpace, line.length()), myHtmlBlockStartOnlyOnBlockTags, myHtmlBlockDeepParseNonBlock, myHtmlBlockDeepParseFirstOpenTagOnOneLine);
                     if (deepParser.hadHtml()) {
                         // have our html block start
