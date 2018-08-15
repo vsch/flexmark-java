@@ -8,6 +8,7 @@ flexmark-java
 - [To Do](#to-do)
     - [Docx Converter](#docx-converter)
     - [GitLab compatibility extensions](#gitlab-compatibility-extensions)
+- [0.34.18](#03418)
 - [0.34.16](#03416)
 - [0.34.14](#03414)
 - [0.34.12](#03412)
@@ -267,7 +268,31 @@ flexmark-java
 * [ ] Graphing via Mermaid as fenced code with `mermaid` info string, via Mermaid inclusion
       similar to Math solution above.
 
+* [ ] Fix: regex can go into infinite loop
+
 &nbsp;</details>
+
+0.34.18
+-------
+* Add: html parser options to suppress generating some markdown formatting elements, default for
+  all is false:
+  * `SKIP_INLINE_STRONG` - strong 
+  * `SKIP_INLINE_EMPHASIS` - emphasis 
+  * `SKIP_INLINE_CODE` - code 
+  * `SKIP_INLINE_DEL` - del 
+  * `SKIP_INLINE_INS` - ins 
+  * `SKIP_INLINE_SUB` - sub 
+  * `SKIP_INLINE_SUP` - sup 
+  * `SKIP_HEADING_1`  - heading 1
+  * `SKIP_HEADING_2`  - heading 2
+  * `SKIP_HEADING_3`  - heading 3
+  * `SKIP_HEADING_4`  - heading 4
+  * `SKIP_HEADING_5`  - heading 5
+  * `SKIP_HEADING_6`  - heading 6
+  * `SKIP_ATTRIBUTES` - attribute extension formatting
+* Add: html parser option `ADD_TRAILING_EOL`, default `false`. Will add trailing EOL to
+  generated markdown text.
+* Fix: html parser did not add a blank line before first list item of the first list
 
 0.34.16
 -------

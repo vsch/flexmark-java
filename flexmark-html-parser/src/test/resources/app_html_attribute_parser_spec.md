@@ -32,7 +32,6 @@ Word Samples
 * Vectors
 
 * Oligos
-
 .
 <html xmlns:o="urn:schemas-microsoft-com:office:office"
 xmlns:w="urn:schemas-microsoft-com:office:word"
@@ -727,7 +726,6 @@ Word Samples
 9. Vectors
 
 10. Oligos
-
 .
 <html xmlns:o="urn:schemas-microsoft-com:office:office"
 xmlns:w="urn:schemas-microsoft-com:office:word"
@@ -1416,7 +1414,6 @@ Word Samples, paren list, default
 9. Vectors
 
 10. Oligos
-
 .
 <html xmlns:o="urn:schemas-microsoft-com:office:office"
 xmlns:w="urn:schemas-microsoft-com:office:word"
@@ -2106,7 +2103,6 @@ Word Samples, paren list, default
 9) Vectors
 
 10) Oligos
-
 .
 <html xmlns:o="urn:schemas-microsoft-com:office:office"
 xmlns:w="urn:schemas-microsoft-com:office:word"
@@ -3974,7 +3970,6 @@ For compartment at 20 C, chilled to 0 C gives 25%, 5 C gives 33%, 10 C gives 52%
 For compartment at 25 C, chilled to 0 C gives 19%, 5 C gives 25%, 10 C gives 39%
 For compartment at 30 C, chilled to 0 C gives 14%, 5 C gives 18%, 10 C gives 38%
 For compartment at 35 C, chilled to 0 C gives 11%, 5 C gives 14%, 10 C gives 22%
-
 .
 <div class="" style="color: rgb(0, 0, 0); font-family: AmericanTypewriter; font-size: 14px; font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><div class="">For compartment at 20 C, chilled to 0 C gives 25%, 5 C gives 33%, 10 C gives 52%</div></div><div class="" style="color: rgb(0, 0, 0); font-family: AmericanTypewriter; font-size: 14px; font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><br class=""></div><div class="" style="color: rgb(0, 0, 0); font-family: AmericanTypewriter; font-size: 14px; font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">For compartment at 25 C, chilled to 0 C gives 19%, 5 C gives 25%, 10 C gives 39%</div><div class="" style="color: rgb(0, 0, 0); font-family: AmericanTypewriter; font-size: 14px; font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><br class=""></div><div class="" style="color: rgb(0, 0, 0); font-family: AmericanTypewriter; font-size: 14px; font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><div class="">For compartment at 30 C, chilled to 0 C gives 14%, 5 C gives 18%, 10 C gives 38%</div></div><div class="" style="color: rgb(0, 0, 0); font-family: AmericanTypewriter; font-size: 14px; font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><br class=""></div><div class="" style="color: rgb(0, 0, 0); font-family: AmericanTypewriter; font-size: 14px; font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><div class="">For compartment at 35 C, chilled to 0 C gives 11%, 5 C gives 14%, 10 C gives 22%</div></div><br class="Apple-interchange-newline">
 ````````````````````````````````
@@ -3996,7 +3991,6 @@ For compartment at 30 C, chilled to 0 C gives 14%, 5 C gives 18%, 10 C gives 38%
 For compartment at 35 C, chilled to 0 C gives 11%, 5 C gives 14%, 10 C gives 22%
 
 <br />
-
 .
 <div class="" style="color: rgb(0, 0, 0); font-family: AmericanTypewriter; font-size: 14px; font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><div class="">For compartment at 20 C, chilled to 0 C gives 25%, 5 C gives 33%, 10 C gives 52%</div></div><div class="" style="color: rgb(0, 0, 0); font-family: AmericanTypewriter; font-size: 14px; font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><br class=""></div><div class="" style="color: rgb(0, 0, 0); font-family: AmericanTypewriter; font-size: 14px; font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">For compartment at 25 C, chilled to 0 C gives 19%, 5 C gives 25%, 10 C gives 39%</div><div class="" style="color: rgb(0, 0, 0); font-family: AmericanTypewriter; font-size: 14px; font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><br class=""></div><div class="" style="color: rgb(0, 0, 0); font-family: AmericanTypewriter; font-size: 14px; font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><div class="">For compartment at 30 C, chilled to 0 C gives 14%, 5 C gives 18%, 10 C gives 38%</div></div><div class="" style="color: rgb(0, 0, 0); font-family: AmericanTypewriter; font-size: 14px; font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><br class=""></div><div class="" style="color: rgb(0, 0, 0); font-family: AmericanTypewriter; font-size: 14px; font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><div class="">For compartment at 35 C, chilled to 0 C gives 11%, 5 C gives 14%, 10 C gives 22%</div></div><br class="Apple-interchange-newline">
 ````````````````````````````````
@@ -4008,7 +4002,6 @@ Best regards,
 <br />
 <br />
 Vladimir.
-
 .
 <div class="" style="color: rgb(0, 0, 0); font-family: AmericanTypewriter; font-size: 14px; font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">Best regards,</div><div class="" style="color: rgb(0, 0, 0); font-family: AmericanTypewriter; font-size: 14px; font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><div class=""><div class="" style="word-wrap: break-word; -webkit-nbsp-mode: space; -webkit-line-break: after-white-space;"><div style="color: rgb(0, 0, 0); font-family: 'American Typewriter'; font-size: 14px; font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px; -webkit-text-stroke-width: 0px;"><br class=""><br class=""><br class="">Vladimir.</div></div></div></div>
 ````````````````````````````````
@@ -4018,7 +4011,6 @@ Vladimir.
 Best regards,
 
 Vladimir.
-
 .
 <div class="" style="color: rgb(0, 0, 0); font-family: AmericanTypewriter; font-size: 14px; font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">Best regards,</div><div class="" style="color: rgb(0, 0, 0); font-family: AmericanTypewriter; font-size: 14px; font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><div class=""><div class="" style="word-wrap: break-word; -webkit-nbsp-mode: space; -webkit-line-break: after-white-space;"><div style="color: rgb(0, 0, 0); font-family: 'American Typewriter'; font-size: 14px; font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px; -webkit-text-stroke-width: 0px;"><br class=""><br class=""><br class="">Vladimir.</div></div></div></div>
 ````````````````````````````````
@@ -4030,7 +4022,6 @@ Uses `<strike>` tags instead of del.
 
 ```````````````````````````````` example Office Libre: 1
 ~~strike-through~~
-
 .
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html>

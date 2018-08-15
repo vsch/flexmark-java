@@ -55,6 +55,23 @@ public class FlexmarkHtmlParser {
     public static final DataKey<Boolean> BR_AS_PARA_BREAKS = new DataKey<Boolean>("BR_AS_PARA_BREAKS", true);
     public static final DataKey<Boolean> BR_AS_EXTRA_BLANK_LINES = new DataKey<Boolean>("BR_AS_EXTRA_BLANK_LINES", true);
 
+    public static final DataKey<Boolean> ADD_TRAILING_EOL = new DataKey<Boolean>("ADD_TRAILING_EOL", true);
+
+    public static final DataKey<Boolean> SKIP_INLINE_STRONG = new DataKey<Boolean>("SKIP_INLINE_STRONG", false);
+    public static final DataKey<Boolean> SKIP_INLINE_EMPHASIS = new DataKey<Boolean>("SKIP_INLINE_EMPHASIS", false);
+    public static final DataKey<Boolean> SKIP_INLINE_CODE = new DataKey<Boolean>("SKIP_INLINE_CODE", false);
+    public static final DataKey<Boolean> SKIP_INLINE_DEL = new DataKey<Boolean>("SKIP_INLINE_DEL", false);
+    public static final DataKey<Boolean> SKIP_INLINE_INS = new DataKey<Boolean>("SKIP_INLINE_INS", false);
+    public static final DataKey<Boolean> SKIP_INLINE_SUB = new DataKey<Boolean>("SKIP_INLINE_SUBSCRIPT", false);
+    public static final DataKey<Boolean> SKIP_INLINE_SUP = new DataKey<Boolean>("SKIP_INLINE_SUPERSCRIPT", false);
+    public static final DataKey<Boolean> SKIP_HEADING_1 = new DataKey<Boolean>("SKIP_HEADING_1", false);
+    public static final DataKey<Boolean> SKIP_HEADING_2 = new DataKey<Boolean>("SKIP_HEADING_2", false);
+    public static final DataKey<Boolean> SKIP_HEADING_3 = new DataKey<Boolean>("SKIP_HEADING_3", false);
+    public static final DataKey<Boolean> SKIP_HEADING_4 = new DataKey<Boolean>("SKIP_HEADING_4", false);
+    public static final DataKey<Boolean> SKIP_HEADING_5 = new DataKey<Boolean>("SKIP_HEADING_5", false);
+    public static final DataKey<Boolean> SKIP_HEADING_6 = new DataKey<Boolean>("SKIP_HEADING_6", false);
+    public static final DataKey<Boolean> SKIP_ATTRIBUTES = new DataKey<Boolean>("SKIP_ATTRIBUTES", false);
+
     /**
      * If true then will ignore rows with th columns after rows with td columns have been emitted to the table.
      * <p>
@@ -154,7 +171,7 @@ public class FlexmarkHtmlParser {
     void outputAttributes(FormattingAppendable out) {
         Attributes attributes = myState.myAttributes;
 
-        if (!attributes.isEmpty()) {
+        if (!attributes.isEmpty() && !myOptions.skipAttributes) {
             // have some
             String sep = "";
             out.append("{");
@@ -244,13 +261,15 @@ public class FlexmarkHtmlParser {
         processHtmlTree(out, body, false);
 
         // output abbreviations if any
-        out.blankLine();
         if (!myAbbreviations.isEmpty()) {
+            out.blankLine();
             for (Map.Entry<String, String> entry : myAbbreviations.entrySet()) {
                 out.line().append("*[").append(entry.getKey()).append("]: ").append(entry.getValue()).line();
             }
+            out.blankLine();
+        } else if (myOptions.addTrailingEol) {
+            out.line();
         }
-        out.blankLine();
     }
 
     /**
@@ -415,7 +434,7 @@ public class FlexmarkHtmlParser {
                 case BR                      : processed = processBr(out, (Element) node); break;
                 case ABBR                    : processed = processAbbr(out, (Element) node); break;
                 case ASIDE                   : processed = processAside(out, (Element) node); break;
-                case BLOCKQUOTE              : processed = processBlockquote(out, (Element) node); break;
+                case BLOCKQUOTE              : processed = processBlockQuote(out, (Element) node); break;
                 case CODE                    : processed = processCode(out, (Element) node); break;
                 case DEL                     : processed = processDel(out, (Element) node); break;
                 case DIV                     : processed = processDiv(out, (Element) node); break;
@@ -730,7 +749,7 @@ public class FlexmarkHtmlParser {
         return true;
     }
 
-    private boolean processBlockquote(FormattingAppendable out, Element element) {
+    private boolean processBlockQuote(FormattingAppendable out, Element element) {
         skip();
         out.pushPrefix();
         out.addPrefix("> ");
@@ -746,7 +765,7 @@ public class FlexmarkHtmlParser {
         CharSequence backTicks = RepeatedCharSequence.of("`", backTickCount);
         boolean oldInlineCode = myInlineCode;
         myInlineCode = true;
-        processTextNodes(out, element, backTicks);
+        processTextNodes(out, element, myOptions.skipInlineCode ? "" : backTicks);
         myInlineCode = oldInlineCode;
         return true;
     }
@@ -769,7 +788,7 @@ public class FlexmarkHtmlParser {
         if (!myOptions.preCodePreserveEmphasis && out.isPreFormatted()) {
             wrapTextNodes(out, element, "", false);
         } else {
-            wrapTextNodes(out, element, "~~", true);
+            wrapTextNodes(out, element, myOptions.skipInlineDel ? "" : "~~", true);
         }
         return true;
     }
@@ -779,7 +798,7 @@ public class FlexmarkHtmlParser {
         if (!myOptions.preCodePreserveEmphasis && out.isPreFormatted()) {
             wrapTextNodes(out, element, "", false);
         } else {
-            wrapTextNodes(out, element, "*", true);
+            wrapTextNodes(out, element, myOptions.skipInlineEmphasis ? "" : "*", true);
         }
         return true;
     }
@@ -795,14 +814,28 @@ public class FlexmarkHtmlParser {
                 if (!headingText.isEmpty()) {
                     out.blankLine();
 
-                    if (myOptions.setextHeadings && level <= 2) {
-                        out.append(headingText);
-                        out.line().repeat(level == 1 ? '=' : '-', Utils.minLimit(headingText.length(), myOptions.minSetextHeadingMarkerLength));
-                    } else {
-                        out.repeat('#', level).append(' ');
-                        out.append(headingText);
+                    boolean skipHeading = false;
+                    switch (level) {
+                        case 1: skipHeading = myOptions.skipHeading1; break;
+                        case 2: skipHeading = myOptions.skipHeading2; break;
+                        case 3: skipHeading = myOptions.skipHeading3; break;
+                        case 4: skipHeading = myOptions.skipHeading4; break;
+                        case 5: skipHeading = myOptions.skipHeading5; break;
+                        case 6: skipHeading = myOptions.skipHeading6; break;
                     }
-                    out.blankLine();
+
+                    if (skipHeading) {
+                        out.append(headingText);
+                    } else {
+                        if (myOptions.setextHeadings && level <= 2) {
+                            out.append(headingText);
+                            out.line().repeat(level == 1 ? '=' : '-', Utils.minLimit(headingText.length(), myOptions.minSetextHeadingMarkerLength));
+                        } else {
+                            out.repeat('#', level).append(' ');
+                            out.append(headingText);
+                        }
+                        out.blankLine();
+                    }
                 }
             }
         }
@@ -909,7 +942,7 @@ public class FlexmarkHtmlParser {
         if (!myOptions.preCodePreserveEmphasis && out.isPreFormatted()) {
             wrapTextNodes(out, element, "", false);
         } else {
-            wrapTextNodes(out, element, "++", true);
+            wrapTextNodes(out, element, myOptions.skipInlineIns ? "" : "++", true);
         }
         return true;
     }
@@ -919,14 +952,14 @@ public class FlexmarkHtmlParser {
         if (!myOptions.preCodePreserveEmphasis && out.isPreFormatted()) {
             wrapTextNodes(out, element, "", false);
         } else {
-            wrapTextNodes(out, element, "**", true);
+            wrapTextNodes(out, element, myOptions.skipInlineStrong ? "" : "**", true);
         }
         return true;
     }
 
     private boolean processSub(FormattingAppendable out, Element element) {
         skip();
-        if (!myOptions.preCodePreserveEmphasis && out.isPreFormatted()) {
+        if (myOptions.skipInlineSub || !myOptions.preCodePreserveEmphasis && out.isPreFormatted()) {
             wrapTextNodes(out, element, "", false);
         } else {
             wrapTextNodes(out, element, "~", false);
@@ -936,7 +969,7 @@ public class FlexmarkHtmlParser {
 
     private boolean processSup(FormattingAppendable out, Element element) {
         skip();
-        if (!myOptions.preCodePreserveEmphasis && out.isPreFormatted()) {
+        if (myOptions.skipInlineSup || !myOptions.preCodePreserveEmphasis && out.isPreFormatted()) {
             wrapTextNodes(out, element, "", false);
         } else {
             wrapTextNodes(out, element, "^", false);
@@ -1067,10 +1100,28 @@ public class FlexmarkHtmlParser {
         return false;
     }
 
+    private boolean haveListItemAncestor(Node node) {
+        Node parent = node.parent();
+        while (parent != null) {
+            TagParam tagParam = getTagParam(parent);
+            if (tagParam == null) break;
+
+            if (tagParam.tagType == TagType.LI) {
+                return true;
+            }
+            parent = parent.parent();
+        }
+        return false;
+    }
+
     private boolean processList(FormattingAppendable out, Element element, boolean isNumbered, boolean isFakeList) {
         if (!isFakeList) {
             skip();
             pushState(element);
+
+            if (!haveListItemAncestor(myState.myParent)) {
+                out.blankLine();
+            }
         }
 
         final Element previousElementSibling = element.previousElementSibling();
@@ -1660,7 +1711,6 @@ public class FlexmarkHtmlParser {
         // tags ignored, contents processed
         ourTagProcessors.put("article", TagParam.tag(TagType._UNWRAPPED, null));
         ourTagProcessors.put("address", TagParam.tag(TagType._UNWRAPPED, null));
-        ourTagProcessors.put("article", TagParam.tag(TagType._UNWRAPPED, null));
         ourTagProcessors.put("frameset", TagParam.tag(TagType._UNWRAPPED, null));
         ourTagProcessors.put("section", TagParam.tag(TagType._UNWRAPPED, null));
         ourTagProcessors.put("span", TagParam.tag(TagType._SPAN, null));

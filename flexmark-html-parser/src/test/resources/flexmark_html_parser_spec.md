@@ -14,7 +14,6 @@ Converts HTML to markdown
 
 ```````````````````````````````` example Text: 1
 Expected rendered HTML
-
 .
 <p>Expected rendered HTML</p>
 ````````````````````````````````
@@ -23,7 +22,6 @@ Expected rendered HTML
 ```````````````````````````````` example Text: 2
 Expected rendered HTML  
 Another line
-
 .
 <p>Expected rendered HTML<br>Another line</p>
 ````````````````````````````````
@@ -33,7 +31,6 @@ Another line
 Expected rendered HTML  
 
 Another line
-
 .
 <p>Expected rendered HTML<br><br>Another line</p>
 ````````````````````````````````
@@ -43,7 +40,6 @@ Another line
 
 ```````````````````````````````` example Emphasis: 1
 **Expected** rendered HTML
-
 .
 <p><strong>Expected</strong> rendered HTML</p>
 ````````````````````````````````
@@ -51,7 +47,6 @@ Another line
 
 ```````````````````````````````` example Emphasis: 2
 **Expected** rendered HTML
-
 .
 <p><b>Expected</b> rendered HTML</p>
 ````````````````````````````````
@@ -59,7 +54,6 @@ Another line
 
 ```````````````````````````````` example Emphasis: 3
 *Expected* rendered HTML
-
 .
 <p><em>Expected</em> rendered HTML</p>
 ````````````````````````````````
@@ -67,7 +61,6 @@ Another line
 
 ```````````````````````````````` example Emphasis: 4
 *Expected* rendered HTML
-
 .
 <p><i>Expected</i> rendered HTML</p>
 ````````````````````````````````
@@ -75,7 +68,6 @@ Another line
 
 ```````````````````````````````` example Emphasis: 5
 ++Expected++ rendered HTML
-
 .
 <p><ins>Expected</ins> rendered HTML</p>
 ````````````````````````````````
@@ -83,7 +75,6 @@ Another line
 
 ```````````````````````````````` example Emphasis: 6
 ~~Expected~~ rendered HTML
-
 .
 <p><del>Expected</del> rendered HTML</p>
 ````````````````````````````````
@@ -91,7 +82,6 @@ Another line
 
 ```````````````````````````````` example Emphasis: 7
 ~Expected~ rendered HTML
-
 .
 <p><sub>Expected</sub> rendered HTML</p>
 ````````````````````````````````
@@ -99,7 +89,6 @@ Another line
 
 ```````````````````````````````` example Emphasis: 8
 H~2~O
-
 .
 <p>H<sub>2</sub>O</p>
 ````````````````````````````````
@@ -107,7 +96,6 @@ H~2~O
 
 ```````````````````````````````` example Emphasis: 9
 ^Expected^ rendered HTML
-
 .
 <p><sup>Expected</sup> rendered HTML</p>
 ````````````````````````````````
@@ -115,7 +103,6 @@ H~2~O
 
 ```````````````````````````````` example Emphasis: 10
 H^2^O
-
 .
 <p>H<sup>2</sup>O</p>
 ````````````````````````````````
@@ -123,7 +110,6 @@ H^2^O
 
 ```````````````````````````````` example Emphasis: 11
 `Expected` rendered HTML
-
 .
 <p><code>Expected</code> rendered HTML</p>
 ````````````````````````````````
@@ -133,7 +119,94 @@ H^2^O
 
 ```````````````````````````````` example Emphasis: 12
 ``Expected `a`` rendered HTML
+.
+<p><code>Expected `a</code> rendered HTML</p>
+````````````````````````````````
 
+
+## Skipped Emphasis
+
+```````````````````````````````` example(Skipped Emphasis: 1) options(skip-inline-strong)
+Expected rendered HTML
+.
+<p><strong>Expected</strong> rendered HTML</p>
+````````````````````````````````
+
+
+```````````````````````````````` example(Skipped Emphasis: 2) options(skip-inline-strong)
+Expected rendered HTML
+.
+<p><b>Expected</b> rendered HTML</p>
+````````````````````````````````
+
+
+```````````````````````````````` example(Skipped Emphasis: 3) options(skip-inline-emphasis)
+Expected rendered HTML
+.
+<p><em>Expected</em> rendered HTML</p>
+````````````````````````````````
+
+
+```````````````````````````````` example(Skipped Emphasis: 4) options(skip-inline-emphasis)
+Expected rendered HTML
+.
+<p><i>Expected</i> rendered HTML</p>
+````````````````````````````````
+
+
+```````````````````````````````` example(Skipped Emphasis: 5) options(skip-inline-ins)
+Expected rendered HTML
+.
+<p><ins>Expected</ins> rendered HTML</p>
+````````````````````````````````
+
+
+```````````````````````````````` example(Skipped Emphasis: 6) options(skip-inline-del)
+Expected rendered HTML
+.
+<p><del>Expected</del> rendered HTML</p>
+````````````````````````````````
+
+
+```````````````````````````````` example(Skipped Emphasis: 7) options(skip-inline-sub)
+Expected rendered HTML
+.
+<p><sub>Expected</sub> rendered HTML</p>
+````````````````````````````````
+
+
+```````````````````````````````` example(Skipped Emphasis: 8) options(skip-inline-sub)
+H2O
+.
+<p>H<sub>2</sub>O</p>
+````````````````````````````````
+
+
+```````````````````````````````` example(Skipped Emphasis: 9) options(skip-inline-sup)
+Expected rendered HTML
+.
+<p><sup>Expected</sup> rendered HTML</p>
+````````````````````````````````
+
+
+```````````````````````````````` example(Skipped Emphasis: 10) options(skip-inline-sup)
+H2O
+.
+<p>H<sup>2</sup>O</p>
+````````````````````````````````
+
+
+```````````````````````````````` example(Skipped Emphasis: 11) options(skip-inline-code)
+Expected rendered HTML
+.
+<p><code>Expected</code> rendered HTML</p>
+````````````````````````````````
+
+
+``Expected `a``
+
+```````````````````````````````` example(Skipped Emphasis: 12) options(skip-inline-code)
+Expected `a rendered HTML
 .
 <p><code>Expected `a</code> rendered HTML</p>
 ````````````````````````````````
@@ -218,6 +291,30 @@ H^2^O
 <li><p>item 3</p></li>
 <li><p>item 4</p></li>
 </ul>
+````````````````````````````````
+
+
+```````````````````````````````` example Bullet Lists: 5
+[535 Closed](https://github.com/vsch/idea-multimarkdown/issues?q=is%3Aissue+is%3Aclosed)
+Author
+Labels
+Projects
+Milestones
+Assignee Sort
+
+*
+  [Emoji suggestions do not filter as you type](https://github.com/vsch/idea-multimarkdown/issues/624)[bug](https://github.com/vsch/idea-multimarkdown/issues?q=is%3Aissue+is%3Aopen+label%3Abug "bug")
+  #624 opened 15 days ago by [jcfranco](https://github.com/vsch/idea-multimarkdown/issues?q=is%3Aissue+is%3Aopen+author%3Ajcfranco "Open issues created by jcfranco")
+  [1](https://github.com/vsch/idea-multimarkdown/issues/624)
+*
+  [Directory linking occasionally broken](https://github.com/vsch/idea-multimarkdown/issues/623)[bug](https://github.com/vsch/idea-multimarkdown/issues?q=is%3Aissue+is%3Aopen+label%3Abug "bug") [fix available](https://github.com/vsch/idea-multimarkdown/issues?q=is%3Aissue+is%3Aopen+label%3A%22fix+available%22 "fix available") [fixed for next release](https://github.com/vsch/idea-multimarkdown/issues?q=is%3Aissue+is%3Aopen+label%3A%22fixed+for+next+release%22 "fixed for next release")
+  #623 opened 15 days ago by [mhaas](https://github.com/vsch/idea-multimarkdown/issues?q=is%3Aissue+is%3Aopen+author%3Amhaas "Open issues created by mhaas")
+  [4](https://github.com/vsch/idea-multimarkdown/issues/623)
+* 
+
+<br />
+.
+<div class="table-list-header" id="js-issues-toolbar" style="box-sizing: border-box; position: relative; margin-top: 20px; background-color: rgb(246, 248, 250); border: 1px solid rgb(225, 228, 232); border-top-left-radius: 3px; border-top-right-radius: 3px; border-bottom-right-radius: 0px; border-bottom-left-radius: 0px; caret-color: rgb(36, 41, 46); color: rgb(36, 41, 46); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;; font-size: 14px; font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; text-decoration: none;"><div class="table-list-filters" style="box-sizing: border-box;"><div class="table-list-header-toggle states float-left pl-3" style="box-sizing: border-box; float: left !important; padding-left: 16px !important;"><br class="Apple-interchange-newline"><span class="Apple-converted-space"> </span><a href="https://github.com/vsch/idea-multimarkdown/issues?q=is%3Aissue+is%3Aclosed" class="btn-link " style="box-sizing: border-box; background-color: transparent; color: rgb(88, 96, 105); text-decoration: none; display: inline-block; padding: 13px 0px; font-size: inherit; white-space: nowrap; cursor: pointer; -webkit-user-select: none; border: 0px; -webkit-appearance: none; position: relative; font-weight: 400; margin-left: 10px;"><svg class="octicon octicon-check" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z"></path></svg><span class="Apple-converted-space"> </span>535 Closed</a></div><div class="table-list-header-toggle float-right" style="box-sizing: border-box; float: right !important;"><details class="details-reset details-overlay float-left select-menu" style="box-sizing: border-box; display: block; float: left !important; position: relative;"><summary class="btn-link select-menu-button" data-hotkey="u" aria-haspopup="menu" style="box-sizing: border-box; display: inline-block; cursor: pointer; padding: 13px 15px; font-size: inherit; color: rgb(88, 96, 105); text-decoration: none; white-space: nowrap; -webkit-user-select: none; background-color: transparent; border: 0px; -webkit-appearance: none; list-style: none; position: relative; font-weight: 400;">Author<span class="Apple-converted-space"> </span></summary></details><div class="float-left select-menu label-select-menu js-menu-container js-select-menu js-load-contents" data-contents-url="/vsch/idea-multimarkdown/issues/show_menu_content?partial=issues%2Ffilters%2Flabels_content&amp;q=is%3Aissue+is%3Aopen" style="box-sizing: border-box; float: left !important; position: relative;"><button class="btn-link select-menu-button js-menu-target" type="button" aria-haspopup="true" aria-expanded="false" data-hotkey="l" style="box-sizing: border-box; font-family: inherit; font-size: inherit; font-style: inherit; font-variant-caps: inherit; font-weight: 400; font-stretch: inherit; line-height: inherit; margin: 0px; overflow: visible; text-transform: none; -webkit-appearance: button; cursor: pointer; border-top-left-radius: 0px; border-top-right-radius: 0px; border-bottom-right-radius: 0px; border-bottom-left-radius: 0px; display: inline-block; padding: 13px 15px; color: rgb(88, 96, 105); text-decoration: none; white-space: nowrap; -webkit-user-select: none; background-color: transparent; border: 0px; position: relative;">Labels<span class="Apple-converted-space"> </span></button></div><div class="float-left select-menu js-menu-container js-select-menu js-load-contents" data-contents-url="/vsch/idea-multimarkdown/issues/show_menu_content?partial=issues%2Ffilters%2Fprojects_content&amp;pulls_only=false&amp;q=is%3Aissue+is%3Aopen" style="box-sizing: border-box; float: left !important; position: relative;"><button class="btn-link select-menu-button js-menu-target" type="button" aria-haspopup="true" aria-expanded="false" data-hotkey="m" style="box-sizing: border-box; font-family: inherit; font-size: inherit; font-style: inherit; font-variant-caps: inherit; font-weight: 400; font-stretch: inherit; line-height: inherit; margin: 0px; overflow: visible; text-transform: none; -webkit-appearance: button; cursor: pointer; border-top-left-radius: 0px; border-top-right-radius: 0px; border-bottom-right-radius: 0px; border-bottom-left-radius: 0px; display: inline-block; padding: 13px 15px; color: rgb(88, 96, 105); text-decoration: none; white-space: nowrap; -webkit-user-select: none; background-color: transparent; border: 0px; position: relative;">Projects<span class="Apple-converted-space"> </span></button></div><div class="float-left select-menu js-menu-container js-select-menu js-load-contents" data-contents-url="/vsch/idea-multimarkdown/issues/show_menu_content?partial=issues%2Ffilters%2Fmilestones_content&amp;q=is%3Aissue+is%3Aopen" style="box-sizing: border-box; float: left !important; position: relative;"><button class="btn-link select-menu-button js-menu-target" type="button" aria-haspopup="true" aria-expanded="false" data-hotkey="m" style="box-sizing: border-box; font-family: inherit; font-size: inherit; font-style: inherit; font-variant-caps: inherit; font-weight: 400; font-stretch: inherit; line-height: inherit; margin: 0px; overflow: visible; text-transform: none; -webkit-appearance: button; cursor: pointer; border-top-left-radius: 0px; border-top-right-radius: 0px; border-bottom-right-radius: 0px; border-bottom-left-radius: 0px; display: inline-block; padding: 13px 15px; color: rgb(88, 96, 105); text-decoration: none; white-space: nowrap; -webkit-user-select: none; background-color: transparent; border: 0px; position: relative;">Milestones<span class="Apple-converted-space"> </span></button></div><details class="details-reset details-overlay float-left select-menu" style="box-sizing: border-box; display: block; float: left !important; position: relative;"><summary class="btn-link select-menu-button" data-hotkey="a" aria-haspopup="menu" style="box-sizing: border-box; display: inline-block; cursor: pointer; padding: 13px 15px; font-size: inherit; color: rgb(88, 96, 105); text-decoration: none; white-space: nowrap; -webkit-user-select: none; background-color: transparent; border: 0px; -webkit-appearance: none; list-style: none; position: relative; font-weight: 400;">Assignee<span class="Apple-converted-space"> </span></summary></details><details class="details-reset details-overlay select-menu float-left js-dropdown-details js-select-menu" style="box-sizing: border-box; display: block; float: left !important; position: relative;"><summary class="btn-link select-menu-button" aria-haspopup="true" style="box-sizing: border-box; display: inline-block; cursor: pointer; padding: 13px 15px; font-size: inherit; color: rgb(88, 96, 105); text-decoration: none; white-space: nowrap; -webkit-user-select: none; background-color: transparent; border: 0px; -webkit-appearance: none; list-style: none; position: relative; font-weight: 400;">Sort<span class="sort-label" style="box-sizing: border-box;"></span><span class="Apple-converted-space"> </span></summary></details></div></div></div><div class="border-right border-bottom border-left" style="box-sizing: border-box; border-right-width: 1px !important; border-right-style: solid !important; border-right-color: rgb(225, 228, 232) !important; border-bottom-width: 1px !important; border-bottom-style: solid !important; border-bottom-color: rgb(225, 228, 232) !important; border-left-width: 1px !important; border-left-style: solid !important; border-left-color: rgb(225, 228, 232) !important; caret-color: rgb(36, 41, 46); color: rgb(36, 41, 46); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;; font-size: 14px; font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; text-decoration: none;"><ul class="js-navigation-container js-active-navigation-container" style="box-sizing: border-box; padding-left: 0px; margin-top: 0px; margin-bottom: 0px;"><li id="issue_624" class="Box-row Box-row--focus-gray p-0 js-navigation-item js-issue-row selectable read" data-id="346271155" aria-selected="false" style="box-sizing: border-box; padding: 0px !important; margin-top: -1px; list-style-type: none; border-top-width: 1px; border-top-style: solid; border-top-color: transparent; border-top-left-radius: 2px; border-top-right-radius: 2px;"><div class="d-table table-fixed width-full Box-row--drag-hide position-relative" style="box-sizing: border-box; position: relative !important; width: 977.6470336914063px; display: table !important; table-layout: fixed !important;"><label class="float-left py-2 pl-3" style="box-sizing: border-box; font-weight: 600; float: left !important; padding-top: 8px !important; padding-bottom: 8px !important; padding-left: 16px !important;"><input type="checkbox" class="js-check-all-item js-issues-list-check" name="issues[]" value="624" style="box-sizing: border-box; font-family: inherit; font-size: inherit; font-style: inherit; font-variant-caps: inherit; font-weight: inherit; font-stretch: inherit; line-height: inherit; margin: 0px; overflow: visible; padding: 0px;"></label><div class="float-left pt-2 pl-3" style="box-sizing: border-box; float: left !important; padding-top: 8px !important; padding-left: 16px !important;"><span class="tooltipped tooltipped-n" aria-label="Open issue" style="box-sizing: border-box; position: relative;"><svg class="octicon octicon-issue-opened open" viewBox="0 0 14 16" version="1.1" width="14" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span></div><div class="float-left col-9 lh-condensed p-2" style="box-sizing: border-box; width: 733.2352905273438px; float: left !important; padding: 8px !important; line-height: 1.25 !important;"><a href="https://github.com/vsch/idea-multimarkdown/issues/624" class="link-gray-dark v-align-middle no-underline h4 js-navigation-open" style="box-sizing: border-box; background-color: transparent; color: rgb(36, 41, 46) !important; text-decoration: none !important; vertical-align: middle !important; font-size: 16px !important; font-weight: 600 !important;">Emoji suggestions do not filter as you type<span class="Apple-converted-space"> </span></a><span class="labels lh-default" style="box-sizing: border-box; line-height: 1.5 !important; position: relative;"><a class="d-inline-block IssueLabel v-align-text-top" title="bug" href="https://github.com/vsch/idea-multimarkdown/issues?q=is%3Aissue+is%3Aopen+label%3Abug" style="box-sizing: border-box; background-color: rgb(252, 41, 41); color: rgb(0, 0, 0); text-decoration: none; vertical-align: text-top !important; display: inline-block !important; height: 20px; padding: 0.15em 4px; font-size: 12px; font-weight: 600; line-height: 15px; border-top-left-radius: 2px; border-top-right-radius: 2px; border-bottom-right-radius: 2px; border-bottom-left-radius: 2px; box-shadow: rgba(27, 31, 35, 0.117647) 0px -1px 0px inset;">bug</a></span><div class="mt-1 text-small text-gray" style="box-sizing: border-box; color: rgb(88, 96, 105) !important; margin-top: 4px !important; font-size: 12px !important;"><span class="opened-by" style="box-sizing: border-box;">#624 opened<span class="Apple-converted-space"> </span><relative-time datetime="2018-07-31T16:48:32Z" title="Jul 31, 2018, 12:48 PM GMT-4" style="box-sizing: border-box;">15 days ago</relative-time><span class="Apple-converted-space"> </span>by<span class="Apple-converted-space"> </span><a class="muted-link" title="Open issues created by jcfranco" data-hovercard-user-id="197440" data-octo-click="hovercard-link-click" data-octo-dimensions="link_type:self" href="https://github.com/vsch/idea-multimarkdown/issues?q=is%3Aissue+is%3Aopen+author%3Ajcfranco" aria-describedby="hovercard-aria-description" style="box-sizing: border-box; background-color: transparent; color: rgb(88, 96, 105) !important; text-decoration: none;">jcfranco</a><span class="Apple-converted-space"> </span></span><span class="issue-meta-section css-truncate issue-milestone ml-2" style="box-sizing: border-box; margin-left: 8px !important; max-width: 240px;"></span></div></div><div class="float-right col-2" style="box-sizing: border-box; width: 162.94117736816406px; float: right !important;"><div class="float-left col-7 pt-2 pr-3 text-right" style="box-sizing: border-box; width: 95.03675842285156px; float: left !important; padding-top: 8px !important; padding-right: 16px !important; text-align: right !important;"><div class="AvatarStack AvatarStack--right " style="box-sizing: border-box; position: relative; min-width: 26px; height: 20px;"><div class="AvatarStack-body tooltipped tooltipped-sw tooltipped-multiline tooltipped-align-right-1 mt-1" aria-label="Assigned to " style="box-sizing: border-box; position: absolute; margin-top: 4px !important; display: flex; background-color: rgb(255, 255, 255); right: 0px; flex-direction: row-reverse; background-position: initial initial; background-repeat: initial initial;"></div></div></div><div class="float-right col-5 no-wrap pt-2 pr-3 text-right" style="box-sizing: border-box; width: 67.88602447509766px; float: right !important; padding-top: 8px !important; padding-right: 16px !important; text-align: right !important; white-space: nowrap !important;"><a href="https://github.com/vsch/idea-multimarkdown/issues/624" class="muted-link" aria-label="1 comment" style="box-sizing: border-box; background-color: transparent; color: rgb(88, 96, 105) !important; text-decoration: none;"><svg class="octicon octicon-comment v-align-middle" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M14 1H2c-.55 0-1 .45-1 1v8c0 .55.45 1 1 1h2v3.5L7.5 11H14c.55 0 1-.45 1-1V2c0-.55-.45-1-1-1zm0 9H7l-2 2v-2H2V2h12v8z"></path></svg><span class="Apple-converted-space"> </span><span class="text-small text-bold" style="box-sizing: border-box; font-size: 12px !important; font-weight: 600 !important;">1</span></a></div></div></div></li><li id="issue_623" class="Box-row Box-row--focus-gray p-0 js-navigation-item js-issue-row selectable read navigation-focus" data-id="346161540" aria-selected="true" style="box-sizing: border-box; padding: 0px !important; margin-top: -1px; list-style-type: none; border-top-width: 1px; border-top-style: solid; border-top-color: rgb(225, 228, 232); background-color: rgb(246, 248, 250);"><div class="d-table table-fixed width-full Box-row--drag-hide position-relative" style="box-sizing: border-box; position: relative !important; width: 977.6470336914063px; display: table !important; table-layout: fixed !important;"><label class="float-left py-2 pl-3" style="box-sizing: border-box; font-weight: 600; float: left !important; padding-top: 8px !important; padding-bottom: 8px !important; padding-left: 16px !important;"><input type="checkbox" class="js-check-all-item js-issues-list-check" name="issues[]" value="623" style="box-sizing: border-box; font-family: inherit; font-size: inherit; font-style: inherit; font-variant-caps: inherit; font-weight: inherit; font-stretch: inherit; line-height: inherit; margin: 0px; overflow: visible; padding: 0px;"></label><div class="float-left pt-2 pl-3" style="box-sizing: border-box; float: left !important; padding-top: 8px !important; padding-left: 16px !important;"><span class="tooltipped tooltipped-n" aria-label="Open issue" style="box-sizing: border-box; position: relative;"><svg class="octicon octicon-issue-opened open" viewBox="0 0 14 16" version="1.1" width="14" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span></div><div class="float-left col-9 lh-condensed p-2" style="box-sizing: border-box; width: 733.2352905273438px; float: left !important; padding: 8px !important; line-height: 1.25 !important;"><a href="https://github.com/vsch/idea-multimarkdown/issues/623" class="link-gray-dark v-align-middle no-underline h4 js-navigation-open" style="box-sizing: border-box; background-color: transparent; color: rgb(36, 41, 46) !important; text-decoration: none !important; vertical-align: middle !important; font-size: 16px !important; font-weight: 600 !important;">Directory linking occasionally broken<span class="Apple-converted-space"> </span></a><span class="labels lh-default" style="box-sizing: border-box; line-height: 1.5 !important; position: relative;"><a class="d-inline-block IssueLabel v-align-text-top" title="bug" href="https://github.com/vsch/idea-multimarkdown/issues?q=is%3Aissue+is%3Aopen+label%3Abug" style="box-sizing: border-box; background-color: rgb(252, 41, 41); color: rgb(0, 0, 0); text-decoration: none; vertical-align: text-top !important; display: inline-block !important; height: 20px; padding: 0.15em 4px; font-size: 12px; font-weight: 600; line-height: 15px; border-top-left-radius: 2px; border-top-right-radius: 2px; border-bottom-right-radius: 2px; border-bottom-left-radius: 2px; box-shadow: rgba(27, 31, 35, 0.117647) 0px -1px 0px inset;">bug</a><span class="Apple-converted-space"> </span><a class="d-inline-block IssueLabel v-align-text-top" title="fix available" href="https://github.com/vsch/idea-multimarkdown/issues?q=is%3Aissue+is%3Aopen+label%3A%22fix+available%22" style="box-sizing: border-box; background-color: rgb(83, 25, 231); color: rgb(255, 255, 255); text-decoration: none; vertical-align: text-top !important; display: inline-block !important; height: 20px; padding: 0.15em 4px; font-size: 12px; font-weight: 600; line-height: 15px; border-top-left-radius: 2px; border-top-right-radius: 2px; border-bottom-right-radius: 2px; border-bottom-left-radius: 2px; box-shadow: rgba(27, 31, 35, 0.117647) 0px -1px 0px inset;">fix available</a><span class="Apple-converted-space"> </span><a class="d-inline-block IssueLabel v-align-text-top" title="fixed for next release" href="https://github.com/vsch/idea-multimarkdown/issues?q=is%3Aissue+is%3Aopen+label%3A%22fixed+for+next+release%22" style="box-sizing: border-box; background-color: rgb(145, 115, 230); color: rgb(0, 0, 0); text-decoration: none; vertical-align: text-top !important; display: inline-block !important; height: 20px; padding: 0.15em 4px; font-size: 12px; font-weight: 600; line-height: 15px; border-top-left-radius: 2px; border-top-right-radius: 2px; border-bottom-right-radius: 2px; border-bottom-left-radius: 2px; box-shadow: rgba(27, 31, 35, 0.117647) 0px -1px 0px inset;">fixed for next release</a></span><div class="mt-1 text-small text-gray" style="box-sizing: border-box; color: rgb(88, 96, 105) !important; margin-top: 4px !important; font-size: 12px !important;"><span class="opened-by" style="box-sizing: border-box;">#623 opened<span class="Apple-converted-space"> </span><relative-time datetime="2018-07-31T12:16:08Z" title="Jul 31, 2018, 8:16 AM GMT-4" style="box-sizing: border-box;">15 days ago</relative-time><span class="Apple-converted-space"> </span>by<span class="Apple-converted-space"> </span><a class="muted-link" title="Open issues created by mhaas" data-hovercard-user-id="260872" data-octo-click="hovercard-link-click" data-octo-dimensions="link_type:self" href="https://github.com/vsch/idea-multimarkdown/issues?q=is%3Aissue+is%3Aopen+author%3Amhaas" aria-describedby="hovercard-aria-description" style="box-sizing: border-box; background-color: transparent; color: rgb(88, 96, 105) !important; text-decoration: none;">mhaas</a><span class="Apple-converted-space"> </span></span><span class="issue-meta-section css-truncate issue-milestone ml-2" style="box-sizing: border-box; margin-left: 8px !important; max-width: 240px;"></span></div></div><div class="float-right col-2" style="box-sizing: border-box; width: 162.94117736816406px; float: right !important;"><div class="float-left col-7 pt-2 pr-3 text-right" style="box-sizing: border-box; width: 95.03675842285156px; float: left !important; padding-top: 8px !important; padding-right: 16px !important; text-align: right !important;"><div class="AvatarStack AvatarStack--right " style="box-sizing: border-box; position: relative; min-width: 26px; height: 20px;"><div class="AvatarStack-body tooltipped tooltipped-sw tooltipped-multiline tooltipped-align-right-1 mt-1" aria-label="Assigned to " style="box-sizing: border-box; position: absolute; margin-top: 4px !important; display: flex; background-color: rgb(246, 251, 255); right: 0px; flex-direction: row-reverse; background-position: initial initial; background-repeat: initial initial;"></div></div></div><div class="float-right col-5 no-wrap pt-2 pr-3 text-right" style="box-sizing: border-box; width: 67.88602447509766px; float: right !important; padding-top: 8px !important; padding-right: 16px !important; text-align: right !important; white-space: nowrap !important;"><a href="https://github.com/vsch/idea-multimarkdown/issues/623" class="muted-link" aria-label="4 comments" style="box-sizing: border-box; background-color: transparent; color: rgb(88, 96, 105) !important; text-decoration: none;"><svg class="octicon octicon-comment v-align-middle" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M14 1H2c-.55 0-1 .45-1 1v8c0 .55.45 1 1 1h2v3.5L7.5 11H14c.55 0 1-.45 1-1V2c0-.55-.45-1-1-1zm0 9H7l-2 2v-2H2V2h12v8z"></path></svg><span class="Apple-converted-space"> </span><span class="text-small text-bold" style="box-sizing: border-box; font-size: 12px !important; font-weight: 600 !important;">4</span></a></div></div></div></li><li id="issue_622" class="Box-row Box-row--focus-gray p-0 js-navigation-item js-issue-row selectable read" data-id="345118696" aria-selected="false" style="box-sizing: border-box; padding: 0px !important; margin-top: -1px; list-style-type: none; border-top-width: 1px; border-top-style: solid; border-top-color: rgb(225, 228, 232);"></li></ul></div><br class="Apple-interchange-newline">
 ````````````````````````````````
 
 
@@ -335,7 +432,6 @@ H^2^O
 
 ```````````````````````````````` example Block Quotes: 1
 > Expected rendered HTML
-
 .
 <blockquote>
   <p>Expected rendered HTML</p>
@@ -345,7 +441,6 @@ H^2^O
 
 ```````````````````````````````` example Block Quotes: 2
 > **Expected** rendered HTML
-
 .
 <blockquote>
   <p><strong>Expected</strong> rendered HTML</p>
@@ -355,7 +450,6 @@ H^2^O
 
 ```````````````````````````````` example Block Quotes: 3
 > **Expected** rendered HTML
-
 .
 <blockquote>
   <p><b>Expected</b> rendered HTML</p>
@@ -365,7 +459,6 @@ H^2^O
 
 ```````````````````````````````` example Block Quotes: 4
 > *Expected* rendered HTML
-
 .
 <blockquote>
   <p><em>Expected</em> rendered HTML</p>
@@ -375,7 +468,6 @@ H^2^O
 
 ```````````````````````````````` example Block Quotes: 5
 > *Expected* rendered HTML
-
 .
 <blockquote>
   <p><i>Expected</i> rendered HTML</p>
@@ -385,7 +477,6 @@ H^2^O
 
 ```````````````````````````````` example Block Quotes: 6
 > ++Expected++ rendered HTML
-
 .
 <blockquote>
   <p><ins>Expected</ins> rendered HTML</p>
@@ -395,7 +486,6 @@ H^2^O
 
 ```````````````````````````````` example Block Quotes: 7
 > ~~Expected~~ rendered HTML
-
 .
 <blockquote>
   <p><del>Expected</del> rendered HTML</p>
@@ -405,7 +495,6 @@ H^2^O
 
 ```````````````````````````````` example Block Quotes: 8
 > ~Expected~ rendered HTML
-
 .
 <blockquote>
   <p><sub>Expected</sub> rendered HTML</p>
@@ -415,7 +504,6 @@ H^2^O
 
 ```````````````````````````````` example Block Quotes: 9
 > ^Expected^ rendered HTML
-
 .
 <blockquote>
   <p><sup>Expected</sup> rendered HTML</p>
@@ -425,7 +513,6 @@ H^2^O
 
 ```````````````````````````````` example Block Quotes: 10
 > `Expected` rendered HTML
-
 .
 <blockquote>
   <p><code>Expected</code> rendered HTML</p>
@@ -437,7 +524,6 @@ H^2^O
 
 ```````````````````````````````` example Block Quotes: 11
 > ``Expected `a`` rendered HTML
-
 .
 <blockquote>
   <p><code>Expected `a</code> rendered HTML</p>
@@ -763,7 +849,6 @@ not links
 
 ```````````````````````````````` example Links: 1
 Text
-
 .
 <a attr="http://example.com">Text</a>
 ````````````````````````````````
@@ -771,7 +856,6 @@ Text
 
 ```````````````````````````````` example Links: 2
 Text **Bold**
-
 .
 <a attr="http://example.com">Text <b>Bold</b></a>
 ````````````````````````````````
@@ -781,7 +865,6 @@ links
 
 ```````````````````````````````` example Links: 3
 [](http://example.com)
-
 .
 <a href="http://example.com"></a>
 ````````````````````````````````
@@ -789,7 +872,6 @@ links
 
 ```````````````````````````````` example Links: 4
 [Text](http://example.com)
-
 .
 <a href="http://example.com">Text</a>
 ````````````````````````````````
@@ -797,7 +879,6 @@ links
 
 ```````````````````````````````` example Links: 5
 [Text](http://example.com "Title")
-
 .
 <a href="http://example.com" title="Title">Text</a>
 ````````````````````````````````
@@ -805,7 +886,6 @@ links
 
 ```````````````````````````````` example Links: 6
 [Text **Bold**](http://example.com)
-
 .
 <a href="http://example.com">Text <b>Bold</b></a>
 ````````````````````````````````
@@ -813,7 +893,6 @@ links
 
 ```````````````````````````````` example Links: 7
 [\[Text **Bold** \]](http://example.com)
-
 .
 <a href="http://example.com">[Text <b>Bold</b>]</a>
 ````````````````````````````````
@@ -823,7 +902,6 @@ auto links
 
 ```````````````````````````````` example Links: 8
 http://example.com
-
 .
 <a href="http://example.com">http://example.com</a>
 ````````````````````````````````
@@ -831,7 +909,6 @@ http://example.com
 
 ```````````````````````````````` example(Links: 9) options(wrap-autolinks)
 <http://example.com>
-
 .
 <a href="http://example.com">http://example.com</a>
 ````````````````````````````````
@@ -839,7 +916,6 @@ http://example.com
 
 ```````````````````````````````` example Links: 10
 [http://example.com](http://example.com "Title")
-
 .
 <a href="http://example.com" title="Title">http://example.com</a>
 ````````````````````````````````
@@ -847,7 +923,6 @@ http://example.com
 
 ```````````````````````````````` example Links: 11
 http://example.com
-
 .
 <a href="http://example.com" title="">http://example.com</a>
 ````````````````````````````````
@@ -855,7 +930,6 @@ http://example.com
 
 ```````````````````````````````` example(Links: 12) options(no-autolinks)
 [http://example.com](http://example.com)
-
 .
 <a href="http://example.com">http://example.com</a>
 ````````````````````````````````
@@ -873,7 +947,6 @@ Not images
 
 ```````````````````````````````` example Images: 2
 ![](http://example.com)
-
 .
 <img src="http://example.com">
 ````````````````````````````````
@@ -881,7 +954,6 @@ Not images
 
 ```````````````````````````````` example Images: 3
 ![](http://example.com)
-
 .
 <img src="http://example.com" alt="">
 ````````````````````````````````
@@ -889,7 +961,6 @@ Not images
 
 ```````````````````````````````` example Images: 4
 ![Alt](http://example.com)
-
 .
 <img src="http://example.com" alt="Alt">
 ````````````````````````````````
@@ -897,7 +968,6 @@ Not images
 
 ```````````````````````````````` example Images: 5
 ![](http://example.com "Title")
-
 .
 <img src="http://example.com" title="Title">
 ````````````````````````````````
@@ -905,7 +975,6 @@ Not images
 
 ```````````````````````````````` example Images: 6
 ![](http://example.com "Title")
-
 .
 <img src="http://example.com" alt="" title="Title">
 ````````````````````````````````
@@ -913,7 +982,6 @@ Not images
 
 ```````````````````````````````` example Images: 7
 ![Alt](http://example.com "Title")
-
 .
 <img src="http://example.com" alt="Alt" title="Title">
 ````````````````````````````````
@@ -928,7 +996,6 @@ x^2 + y^2 &= 1 \\
 y &= \sqrt{1 - x^2} \\
 \end{align*}
 "title")
-
 .
 <img src="http://latex.codecogs.com/gif.latex?%5Cbegin%7Balign*%7D%0Ax%5E2%20%2B%20y%5E2%20&amp;=%201%20%5C%5C%0Ay%20&amp;=%20%5Csqrt%7B1%20-%20x%5E2%7D%20%5C%5C%0A%5Cend%7Balign*%7D%0A" alt="alt" title="title" />
 ````````````````````````````````
@@ -1468,7 +1535,6 @@ Extra columns truncated with GFM compatibility on.
 | 1   | 2   |
 
 table, you are over
-
 .
 <table>
   <thead>
@@ -2193,7 +2259,6 @@ a definition in a block quote
 ```````````````````````````````` example Definition Lists: 1
 > Definition Term
 > :   definition item
-
 .
 <blockquote>
   <dl>
@@ -2209,7 +2274,6 @@ simple list
 ```````````````````````````````` example Definition Lists: 2
 Definition Term
 :   definition item
-
 .
 <dl>
   <dt>Definition Term</dt>
@@ -2226,7 +2290,6 @@ Term 1
 
 Term 2
 :   Definition 2
-
 .
 <dl>
   <dt>Term 1</dt>
@@ -2247,7 +2310,6 @@ Term 2
 Term 3
 Term 4
 :   Definition 2
-
 .
 <dl>
   <dt>Term 1</dt>
@@ -2270,7 +2332,6 @@ Term 1
 Term 2
 :   Definition 3
 :   Definition 4
-
 .
 <dl>
   <dt>Term 1</dt>
@@ -2297,7 +2358,6 @@ Term 2
     Definition 3 line 2
 :   Definition 4 line 2 ...
     Definition 4 line 2
-
 .
 <dl>
   <dt>Term 1</dt>
@@ -2357,7 +2417,6 @@ Term 2
 
     Definition 1 paragraph 2 line 1 ...
     Definition 1 paragraph 2 line 2 (lazy)
-
 .
 <dl>
   <dt>Term 1</dt>
@@ -2476,7 +2535,6 @@ inlines allowed
 ```````````````````````````````` example Definition Lists: 10
 Definition **Term**
 :   definition `item`
-
 .
 <dl>
   <dt>Definition <strong>Term</strong></dt>
@@ -2491,7 +2549,6 @@ inlines will be split
 Definition **Term
 Another** Definition Term
 :   definition `item`
-
 .
 <dl>
   <dt>Definition **Term</dt>
@@ -2508,7 +2565,6 @@ don't include preceding blank lines
 
 Definition Term
 :   definition item
-
 .
 <ul>
   <li>bullet item</li>
@@ -2527,11 +2583,11 @@ Definition **Term**
 :   definition `item`
 
     paragraph
+
     * bullet item
       * sub item
     > 
     > block quote
-
 .
 <dl>
   <dt>Definition <strong>Term</strong></dt>
@@ -2586,7 +2642,6 @@ Term 1
 
 Term 2
 :   Definition 2 (paragraph)
-
 .
 <dl>
   <dt>Term 1</dt>
@@ -2603,7 +2658,6 @@ Term 2
 Definition Term
 :   Definition of above term
 :   Another definition of above term
-
 .
 <dl>
   <dt>Definition Term</dt>
@@ -2617,7 +2671,6 @@ Definition Term
 Definition Term
 :   Definition of above term
 :   Another definition of above term
-
 .
 <dl>
   <dt>Definition Term</dt>
@@ -2631,7 +2684,6 @@ Definition Term
 Definition Term
 :   Definition of above term
     Another definition of above term
-
 .
 <dl>
   <dt>Definition Term</dt>
@@ -2854,7 +2906,6 @@ sub
 
 ```````````````````````````````` example Emoji Shortcuts: 1
 :heavy_check_mark:
-
 .
 <g-emoji alias="heavy_check_mark" fallback-src="https://assets-cdn.github.com/images/icons/emoji/unicode/2714.png" ios-version="6.0">✔️</g-emoji>
 ````````````````````````````````
@@ -2862,7 +2913,6 @@ sub
 
 ```````````````````````````````` example Emoji Shortcuts: 2
 :heavy_check_mark:
-
 .
 <g-emoji fallback-src="https://assets-cdn.github.com/images/icons/emoji/unicode/2714.png" ios-version="6.0">✔️</g-emoji>
 ````````````````````````````````
@@ -2870,7 +2920,6 @@ sub
 
 ```````````````````````````````` example Emoji Shortcuts: 3
 :heavy_check_mark:
-
 .
 <img src="file:/Users/vlad/Library/Application Support/IdeaIC2017-1-EAP/idea-multimarkdown/emojis/heavy_check_mark.png" alt="emoji symbols:heavy_check_mark" height="20" width="20" align="absmiddle" />
 ````````````````````````````````
@@ -2878,7 +2927,6 @@ sub
 
 ```````````````````````````````` example Emoji Shortcuts: 4
 :heavy_check_mark:
-
 .
 <img src="https://assets-cdn.github.com/images/icons/emoji/unicode/2714.png" alt="emoji symbols:heavy_check_mark" height="20" width="20" align="absmiddle" />
 ````````````````````````````````

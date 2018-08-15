@@ -14,7 +14,6 @@ Converts HTML to markdown
 
 ```````````````````````````````` example Text: 1
 Expected rendered HTML
-
 .
 <p>Expected rendered HTML</p>
 ````````````````````````````````
@@ -23,7 +22,6 @@ Expected rendered HTML
 ```````````````````````````````` example Text: 2
 Expected rendered HTML  
 Another line
-
 .
 <p>Expected rendered HTML<br>Another line</p>
 ````````````````````````````````
@@ -33,7 +31,6 @@ Another line
 Expected rendered HTML  
 
 Another line
-
 .
 <p>Expected rendered HTML<br><br>Another line</p>
 ````````````````````````````````
@@ -43,7 +40,6 @@ Another line
 
 ```````````````````````````````` example Emphasis: 1
 **Expected** rendered HTML
-
 .
 <p><strong>Expected</strong> rendered HTML</p>
 ````````````````````````````````
@@ -51,7 +47,6 @@ Another line
 
 ```````````````````````````````` example Emphasis: 2
 **Expected** rendered HTML
-
 .
 <p><b>Expected</b> rendered HTML</p>
 ````````````````````````````````
@@ -59,7 +54,6 @@ Another line
 
 ```````````````````````````````` example Emphasis: 3
 *Expected* rendered HTML
-
 .
 <p><em>Expected</em> rendered HTML</p>
 ````````````````````````````````
@@ -67,7 +61,6 @@ Another line
 
 ```````````````````````````````` example Emphasis: 4
 *Expected* rendered HTML
-
 .
 <p><i>Expected</i> rendered HTML</p>
 ````````````````````````````````
@@ -75,7 +68,6 @@ Another line
 
 ```````````````````````````````` example Emphasis: 5
 ++Expected++ rendered HTML
-
 .
 <p><ins>Expected</ins> rendered HTML</p>
 ````````````````````````````````
@@ -83,7 +75,6 @@ Another line
 
 ```````````````````````````````` example Emphasis: 6
 ~~Expected~~ rendered HTML
-
 .
 <p><del>Expected</del> rendered HTML</p>
 ````````````````````````````````
@@ -91,7 +82,6 @@ Another line
 
 ```````````````````````````````` example Emphasis: 7
 ~Expected~ rendered HTML
-
 .
 <p><sub>Expected</sub> rendered HTML</p>
 ````````````````````````````````
@@ -99,7 +89,6 @@ Another line
 
 ```````````````````````````````` example Emphasis: 8
 H~2~O
-
 .
 <p>H<sub>2</sub>O</p>
 ````````````````````````````````
@@ -107,7 +96,6 @@ H~2~O
 
 ```````````````````````````````` example Emphasis: 9
 ^Expected^ rendered HTML
-
 .
 <p><sup>Expected</sup> rendered HTML</p>
 ````````````````````````````````
@@ -115,7 +103,6 @@ H~2~O
 
 ```````````````````````````````` example Emphasis: 10
 H^2^O
-
 .
 <p>H<sup>2</sup>O</p>
 ````````````````````````````````
@@ -123,7 +110,6 @@ H^2^O
 
 ```````````````````````````````` example Emphasis: 11
 `Expected` rendered HTML
-
 .
 <p><code>Expected</code> rendered HTML</p>
 ````````````````````````````````
@@ -133,7 +119,94 @@ H^2^O
 
 ```````````````````````````````` example Emphasis: 12
 ``Expected `a`` rendered HTML
+.
+<p><code>Expected `a</code> rendered HTML</p>
+````````````````````````````````
 
+
+## Skipped Emphasis
+
+```````````````````````````````` example(Skipped Emphasis: 1) options(skip-inline-strong)
+Expected rendered HTML
+.
+<p><strong>Expected</strong> rendered HTML</p>
+````````````````````````````````
+
+
+```````````````````````````````` example(Skipped Emphasis: 2) options(skip-inline-strong)
+Expected rendered HTML
+.
+<p><b>Expected</b> rendered HTML</p>
+````````````````````````````````
+
+
+```````````````````````````````` example(Skipped Emphasis: 3) options(skip-inline-emphasis)
+Expected rendered HTML
+.
+<p><em>Expected</em> rendered HTML</p>
+````````````````````````````````
+
+
+```````````````````````````````` example(Skipped Emphasis: 4) options(skip-inline-emphasis)
+Expected rendered HTML
+.
+<p><i>Expected</i> rendered HTML</p>
+````````````````````````````````
+
+
+```````````````````````````````` example(Skipped Emphasis: 5) options(skip-inline-ins)
+Expected rendered HTML
+.
+<p><ins>Expected</ins> rendered HTML</p>
+````````````````````````````````
+
+
+```````````````````````````````` example(Skipped Emphasis: 6) options(skip-inline-del)
+Expected rendered HTML
+.
+<p><del>Expected</del> rendered HTML</p>
+````````````````````````````````
+
+
+```````````````````````````````` example(Skipped Emphasis: 7) options(skip-inline-sub)
+Expected rendered HTML
+.
+<p><sub>Expected</sub> rendered HTML</p>
+````````````````````````````````
+
+
+```````````````````````````````` example(Skipped Emphasis: 8) options(skip-inline-sub)
+H2O
+.
+<p>H<sub>2</sub>O</p>
+````````````````````````````````
+
+
+```````````````````````````````` example(Skipped Emphasis: 9) options(skip-inline-sup)
+Expected rendered HTML
+.
+<p><sup>Expected</sup> rendered HTML</p>
+````````````````````````````````
+
+
+```````````````````````````````` example(Skipped Emphasis: 10) options(skip-inline-sup)
+H2O
+.
+<p>H<sup>2</sup>O</p>
+````````````````````````````````
+
+
+```````````````````````````````` example(Skipped Emphasis: 11) options(skip-inline-code)
+Expected rendered HTML
+.
+<p><code>Expected</code> rendered HTML</p>
+````````````````````````````````
+
+
+``Expected `a``
+
+```````````````````````````````` example(Skipped Emphasis: 12) options(skip-inline-code)
+Expected `a rendered HTML
 .
 <p><code>Expected `a</code> rendered HTML</p>
 ````````````````````````````````
@@ -335,7 +408,6 @@ H^2^O
 
 ```````````````````````````````` example Block Quotes: 1
 > Expected rendered HTML
-
 .
 <blockquote>
   <p>Expected rendered HTML</p>
@@ -345,7 +417,6 @@ H^2^O
 
 ```````````````````````````````` example Block Quotes: 2
 > **Expected** rendered HTML
-
 .
 <blockquote>
   <p><strong>Expected</strong> rendered HTML</p>
@@ -355,7 +426,6 @@ H^2^O
 
 ```````````````````````````````` example Block Quotes: 3
 > **Expected** rendered HTML
-
 .
 <blockquote>
   <p><b>Expected</b> rendered HTML</p>
@@ -365,7 +435,6 @@ H^2^O
 
 ```````````````````````````````` example Block Quotes: 4
 > *Expected* rendered HTML
-
 .
 <blockquote>
   <p><em>Expected</em> rendered HTML</p>
@@ -375,7 +444,6 @@ H^2^O
 
 ```````````````````````````````` example Block Quotes: 5
 > *Expected* rendered HTML
-
 .
 <blockquote>
   <p><i>Expected</i> rendered HTML</p>
@@ -385,7 +453,6 @@ H^2^O
 
 ```````````````````````````````` example Block Quotes: 6
 > ++Expected++ rendered HTML
-
 .
 <blockquote>
   <p><ins>Expected</ins> rendered HTML</p>
@@ -395,7 +462,6 @@ H^2^O
 
 ```````````````````````````````` example Block Quotes: 7
 > ~~Expected~~ rendered HTML
-
 .
 <blockquote>
   <p><del>Expected</del> rendered HTML</p>
@@ -405,7 +471,6 @@ H^2^O
 
 ```````````````````````````````` example Block Quotes: 8
 > ~Expected~ rendered HTML
-
 .
 <blockquote>
   <p><sub>Expected</sub> rendered HTML</p>
@@ -415,7 +480,6 @@ H^2^O
 
 ```````````````````````````````` example Block Quotes: 9
 > ^Expected^ rendered HTML
-
 .
 <blockquote>
   <p><sup>Expected</sup> rendered HTML</p>
@@ -425,7 +489,6 @@ H^2^O
 
 ```````````````````````````````` example Block Quotes: 10
 > `Expected` rendered HTML
-
 .
 <blockquote>
   <p><code>Expected</code> rendered HTML</p>
@@ -437,7 +500,6 @@ H^2^O
 
 ```````````````````````````````` example Block Quotes: 11
 > ``Expected `a`` rendered HTML
-
 .
 <blockquote>
   <p><code>Expected `a</code> rendered HTML</p>
@@ -763,7 +825,6 @@ not links
 
 ```````````````````````````````` example Links: 1
 Text
-
 .
 <a attr="http://example.com">Text</a>
 ````````````````````````````````
@@ -771,7 +832,6 @@ Text
 
 ```````````````````````````````` example Links: 2
 Text **Bold**
-
 .
 <a attr="http://example.com">Text <b>Bold</b></a>
 ````````````````````````````````
@@ -781,7 +841,6 @@ links
 
 ```````````````````````````````` example Links: 3
 [](http://example.com)
-
 .
 <a href="http://example.com"></a>
 ````````````````````````````````
@@ -789,7 +848,6 @@ links
 
 ```````````````````````````````` example Links: 4
 [Text](http://example.com)
-
 .
 <a href="http://example.com">Text</a>
 ````````````````````````````````
@@ -797,7 +855,6 @@ links
 
 ```````````````````````````````` example Links: 5
 [Text](http://example.com "Title")
-
 .
 <a href="http://example.com" title="Title">Text</a>
 ````````````````````````````````
@@ -805,7 +862,6 @@ links
 
 ```````````````````````````````` example Links: 6
 [Text **Bold**](http://example.com)
-
 .
 <a href="http://example.com">Text <b>Bold</b></a>
 ````````````````````````````````
@@ -813,7 +869,6 @@ links
 
 ```````````````````````````````` example Links: 7
 [\[Text **Bold** \]](http://example.com)
-
 .
 <a href="http://example.com">[Text <b>Bold</b>]</a>
 ````````````````````````````````
@@ -823,7 +878,6 @@ auto links
 
 ```````````````````````````````` example Links: 8
 http://example.com
-
 .
 <a href="http://example.com">http://example.com</a>
 ````````````````````````````````
@@ -831,7 +885,6 @@ http://example.com
 
 ```````````````````````````````` example(Links: 9) options(wrap-autolinks)
 <http://example.com>
-
 .
 <a href="http://example.com">http://example.com</a>
 ````````````````````````````````
@@ -839,7 +892,6 @@ http://example.com
 
 ```````````````````````````````` example Links: 10
 [http://example.com](http://example.com "Title")
-
 .
 <a href="http://example.com" title="Title">http://example.com</a>
 ````````````````````````````````
@@ -847,7 +899,6 @@ http://example.com
 
 ```````````````````````````````` example Links: 11
 http://example.com
-
 .
 <a href="http://example.com" title="">http://example.com</a>
 ````````````````````````````````
@@ -855,7 +906,6 @@ http://example.com
 
 ```````````````````````````````` example(Links: 12) options(no-autolinks)
 [http://example.com](http://example.com)
-
 .
 <a href="http://example.com">http://example.com</a>
 ````````````````````````````````
@@ -873,7 +923,6 @@ Not images
 
 ```````````````````````````````` example Images: 2
 ![](http://example.com)
-
 .
 <img src="http://example.com">
 ````````````````````````````````
@@ -881,7 +930,6 @@ Not images
 
 ```````````````````````````````` example Images: 3
 ![](http://example.com)
-
 .
 <img src="http://example.com" alt="">
 ````````````````````````````````
@@ -889,7 +937,6 @@ Not images
 
 ```````````````````````````````` example Images: 4
 ![Alt](http://example.com)
-
 .
 <img src="http://example.com" alt="Alt">
 ````````````````````````````````
@@ -897,7 +944,6 @@ Not images
 
 ```````````````````````````````` example Images: 5
 ![](http://example.com "Title")
-
 .
 <img src="http://example.com" title="Title">
 ````````````````````````````````
@@ -905,7 +951,6 @@ Not images
 
 ```````````````````````````````` example Images: 6
 ![](http://example.com "Title")
-
 .
 <img src="http://example.com" alt="" title="Title">
 ````````````````````````````````
@@ -913,7 +958,6 @@ Not images
 
 ```````````````````````````````` example Images: 7
 ![Alt](http://example.com "Title")
-
 .
 <img src="http://example.com" alt="Alt" title="Title">
 ````````````````````````````````
@@ -928,7 +972,6 @@ x^2 + y^2 &= 1 \\
 y &= \sqrt{1 - x^2} \\
 \end{align*}
 "title")
-
 .
 <img src="http://latex.codecogs.com/gif.latex?%5Cbegin%7Balign*%7D%0Ax%5E2%20%2B%20y%5E2%20&amp;=%201%20%5C%5C%0Ay%20&amp;=%20%5Csqrt%7B1%20-%20x%5E2%7D%20%5C%5C%0A%5Cend%7Balign*%7D%0A" alt="alt" title="title" />
 ````````````````````````````````
@@ -1468,7 +1511,6 @@ Extra columns truncated with GFM compatibility on.
 | 1   | 2   |
 
 table, you are over
-
 .
 <table>
   <thead>
@@ -2193,7 +2235,6 @@ a definition in a block quote
 ```````````````````````````````` example Definition Lists: 1
 > Definition Term
 > :   definition item
-
 .
 <blockquote>
   <dl>
@@ -2209,7 +2250,6 @@ simple list
 ```````````````````````````````` example Definition Lists: 2
 Definition Term
 :   definition item
-
 .
 <dl>
   <dt>Definition Term</dt>
@@ -2226,7 +2266,6 @@ Term 1
 
 Term 2
 :   Definition 2
-
 .
 <dl>
   <dt>Term 1</dt>
@@ -2247,7 +2286,6 @@ Term 2
 Term 3
 Term 4
 :   Definition 2
-
 .
 <dl>
   <dt>Term 1</dt>
@@ -2270,7 +2308,6 @@ Term 1
 Term 2
 :   Definition 3
 :   Definition 4
-
 .
 <dl>
   <dt>Term 1</dt>
@@ -2297,7 +2334,6 @@ Term 2
     Definition 3 line 2
 :   Definition 4 line 2 ...
     Definition 4 line 2
-
 .
 <dl>
   <dt>Term 1</dt>
@@ -2357,7 +2393,6 @@ Term 2
 
     Definition 1 paragraph 2 line 1 ...
     Definition 1 paragraph 2 line 2 (lazy)
-
 .
 <dl>
   <dt>Term 1</dt>
@@ -2476,7 +2511,6 @@ inlines allowed
 ```````````````````````````````` example Definition Lists: 10
 Definition **Term**
 :   definition `item`
-
 .
 <dl>
   <dt>Definition <strong>Term</strong></dt>
@@ -2491,7 +2525,6 @@ inlines will be split
 Definition **Term
 Another** Definition Term
 :   definition `item`
-
 .
 <dl>
   <dt>Definition **Term</dt>
@@ -2508,7 +2541,6 @@ don't include preceding blank lines
 
 Definition Term
 :   definition item
-
 .
 <ul>
   <li>bullet item</li>
@@ -2527,11 +2559,11 @@ Definition **Term**
 :   definition `item`
 
     paragraph
+
     * bullet item
       * sub item
     > 
     > block quote
-
 .
 <dl>
   <dt>Definition <strong>Term</strong></dt>
@@ -2586,7 +2618,6 @@ Term 1
 
 Term 2
 :   Definition 2 (paragraph)
-
 .
 <dl>
   <dt>Term 1</dt>
@@ -2603,7 +2634,6 @@ Term 2
 Definition Term
 :   Definition of above term
 :   Another definition of above term
-
 .
 <dl>
   <dt>Definition Term</dt>
@@ -2617,7 +2647,6 @@ Definition Term
 Definition Term
 :   Definition of above term
 :   Another definition of above term
-
 .
 <dl>
   <dt>Definition Term</dt>
@@ -2631,7 +2660,6 @@ Definition Term
 Definition Term
 :   Definition of above term
     Another definition of above term
-
 .
 <dl>
   <dt>Definition Term</dt>
@@ -2854,7 +2882,6 @@ sub
 
 ```````````````````````````````` example Emoji Shortcuts: 1
 :heavy_check_mark:
-
 .
 <g-emoji alias="heavy_check_mark" fallback-src="https://assets-cdn.github.com/images/icons/emoji/unicode/2714.png" ios-version="6.0">✔️</g-emoji>
 ````````````````````````````````
@@ -2862,7 +2889,6 @@ sub
 
 ```````````````````````````````` example Emoji Shortcuts: 2
 :heavy_check_mark:
-
 .
 <g-emoji fallback-src="https://assets-cdn.github.com/images/icons/emoji/unicode/2714.png" ios-version="6.0">✔️</g-emoji>
 ````````````````````````````````
@@ -2870,7 +2896,6 @@ sub
 
 ```````````````````````````````` example Emoji Shortcuts: 3
 :heavy_check_mark:
-
 .
 <img src="file:/Users/vlad/Library/Application Support/IdeaIC2017-1-EAP/idea-multimarkdown/emojis/heavy_check_mark.png" alt="emoji symbols:heavy_check_mark" height="20" width="20" align="absmiddle" />
 ````````````````````````````````
@@ -2878,24 +2903,8 @@ sub
 
 ```````````````````````````````` example Emoji Shortcuts: 4
 :heavy_check_mark:
-
 .
 <img src="https://assets-cdn.github.com/images/icons/emoji/unicode/2714.png" alt="emoji symbols:heavy_check_mark" height="20" width="20" align="absmiddle" />
-````````````````````````````````
-
-
--------------------------------------------------------------------------------------
-
-## Issue Attributes Extension
-
-Heading with `<a name=anchor>` or `<a id=anchor>` should add explicit id to heading
-
-```````````````````````````````` example Issue Attributes Extension: 1
-How to use{#use}
-----------------
-
-.
-<h2><a name="use">How to use</a></h2>
 ````````````````````````````````
 
 
