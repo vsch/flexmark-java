@@ -45,7 +45,7 @@ public class ComboDocxConverterSpecTest extends ComboSpecTestCase {
     static final boolean SKIP_IGNORED_TESTS = true;
     private static final boolean DUMP_TEST_CASE_FILES = !SKIP_IGNORED_TESTS;
     private static final boolean DUMP_ALL_TESTS_FILES = !SKIP_IGNORED_TESTS;
-    private static final String PROJECT_ROOT_DIRECTORY = "/Users/vlad/src/flexmark-java";
+    private static final String PROJECT_ROOT_DIRECTORY = "/Users/vlad/src/projects/flexmark-java";
     private static final String FILE_TEST_CASE_DUMP_LOCATION = "/flexmark-docx-converter/src/test/resources/docx_converter_ast_spec/";
     private static final String FILE_ALL_TESTS_DUMP_NAME = "/flexmark-docx-converter/src/test/resources/docx_converter_ast_spec/AllTests";
 
@@ -90,6 +90,7 @@ public class ComboDocxConverterSpecTest extends ComboSpecTestCase {
         optionsMap.put("highlight-shade", new MutableDataSet().set(DocxRenderer.CODE_HIGHLIGHT_SHADING, "shade"));
         optionsMap.put("hyperlink-suffix", new MutableDataSet().set(DocxRenderer.LOCAL_HYPERLINK_SUFFIX, "_1"));
         optionsMap.put("yellow-missing-hyperlink", new MutableDataSet().set(DocxRenderer.LOCAL_HYPERLINK_MISSING_HIGHLIGHT, ""));
+        optionsMap.put("table-no-span", new MutableDataSet().set(TablesExtension.COLUMN_SPANS, false));
         //optionsMap.put("heading-id-suffix", new MutableDataSet().set(DocxRenderer.FIRST_HEADING_ID_SUFFIX, "_1"));
 
         // Set up a simple configuration that logs on the console.

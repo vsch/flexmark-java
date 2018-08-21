@@ -8,6 +8,7 @@ import com.vladsch.flexmark.ast.HtmlInline;
 import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.html.renderer.*;
 import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.util.Pair;
 import com.vladsch.flexmark.util.collection.DataValueFactory;
 import com.vladsch.flexmark.util.collection.DynamicDefaultKey;
 import com.vladsch.flexmark.util.dependency.DependencyHandler;
@@ -92,6 +93,13 @@ public class HtmlRenderer implements IRender {
      */
     public static final DataKey<Integer> FORMAT_FLAGS = new DataKey<Integer>("FORMAT_FLAGS", 0);
     public static final DataKey<Integer> MAX_TRAILING_BLANK_LINES = new DataKey<Integer>("MAX_TRAILING_BLANK_LINES", 1);
+
+    /**
+     * Stores pairs of equivalent renderer types to allow extensions to resolve types not known to them
+     *
+     * Pair contains: rendererType, equivalentType
+     */
+    public static final DataKey<List<Pair<String, String>>> RENDERER_TYPE_EQUIVALENCE = new DataKey<List<Pair<String, String>>>("RENDERER_TYPE_EQUIVALENCE", Collections.<Pair<String, String>>emptyList());
 
     // for convenience or these together and set FORMAT_FLAGS key above to the value, to have HtmlWriter apply these when rendering Html
     public static final int FORMAT_CONVERT_TABS = FormattingAppendable.CONVERT_TABS;
@@ -192,6 +200,39 @@ public class HtmlRenderer implements IRender {
 
     public HtmlRenderer withOptions(DataHolder options) {
         return options == null ? this : new HtmlRenderer(new Builder(builder, options));
+    }
+
+    static public boolean isCompatibleRendererType(final MutableDataHolder options, final String supportedRendererType) {
+        final String rendererType = HtmlRenderer.TYPE.getFrom(options);
+        return isCompatibleRendererType(options, rendererType, supportedRendererType);
+    }
+
+    static public boolean isCompatibleRendererType(final MutableDataHolder options, final String rendererType, final String supportedRendererType) {
+        if (rendererType.equals(supportedRendererType)) {
+            return true;
+        }
+
+        final List<Pair<String, String>> equivalence = RENDERER_TYPE_EQUIVALENCE.getFrom(options);
+
+        for (Pair<String, String> pair : equivalence) {
+            if (rendererType.equals(pair.getFirst())) {
+                if (supportedRendererType.equals(pair.getSecond())) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    static public MutableDataHolder addRenderTypeEquivalence(final MutableDataHolder options, final String rendererType, final String supportedRendererType) {
+        if (!isCompatibleRendererType(options, rendererType, supportedRendererType)) {
+            // need to add
+            final List<Pair<String, String>> equivalence = RENDERER_TYPE_EQUIVALENCE.getFrom(options);
+            final ArrayList<Pair<String, String>> newEquivalence = new ArrayList<>(equivalence);
+            newEquivalence.add(new Pair<String, String>(rendererType, supportedRendererType));
+            options.set(RENDERER_TYPE_EQUIVALENCE, newEquivalence);
+        }
+        return options;
     }
 
     /**
@@ -300,6 +341,11 @@ public class HtmlRenderer implements IRender {
         public Builder escapeHtml(boolean escapeHtml) {
             this.set(ESCAPE_HTML, escapeHtml);
             return this;
+        }
+
+        public boolean isRendererType(final String supportedRendererType) {
+            final String rendererType = HtmlRenderer.TYPE.getFrom(this);
+            return HtmlRenderer.isCompatibleRendererType(this, rendererType, supportedRendererType);
         }
 
         /**

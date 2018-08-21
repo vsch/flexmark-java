@@ -1017,7 +1017,7 @@ with some text
 Local File
 
 ```````````````````````````````` example(Images: 2) options(IGNORED)
-![flexmark-icon-logo](file:///Users/vlad/src/flexmark-java/assets/images/flexmark-icon-logo@2x.png "Title: flexmark-java logo") 
+![flexmark-icon-logo](file:///Users/vlad/src/projects/flexmark-java/assets/images/flexmark-icon-logo@2x.png "Title: flexmark-java logo") 
 
 with some text
 .
@@ -5822,6 +5822,243 @@ With breaks and caption before
                     </w:pPr>
                     <w:r>
                         <w:t xml:space="preserve">We use our versioning system to control changes to these artifacts</w:t>
+                    </w:r>
+                </w:p>
+            </w:tc>
+        </w:tr>
+    </w:tbl>
+</w:body>
+````````````````````````````````
+
+
+With spanning columns
+
+```````````````````````````````` example Tables: 4
+
+| data   | label  |
+|:-------|:-------|
+| spanning       ||
+| normal | column |
+
+.
+<w:body>
+    <w:tbl>
+        <w:tblPr>
+            <w:tblW w:type="auto" w:w="0"/>
+            <w:jc w:val="left"/>
+            <w:tblInd w:type="dxa" w:w="120"/>
+            <w:tblBorders>
+                <w:top w:color="000001" w:space="0" w:sz="2" w:val="single"/>
+                <w:left w:color="000001" w:space="0" w:sz="2" w:val="single"/>
+                <w:bottom w:color="000001" w:space="0" w:sz="2" w:val="single"/>
+                <w:right w:color="000001" w:space="0" w:sz="2" w:val="single"/>
+                <w:insideH w:color="000001" w:space="0" w:sz="2" w:val="single"/>
+                <w:insideV w:color="000001" w:space="0" w:sz="2" w:val="single"/>
+            </w:tblBorders>
+            <w:tblCellMar>
+                <w:top w:type="dxa" w:w="80"/>
+                <w:left w:type="dxa" w:w="80"/>
+                <w:bottom w:type="dxa" w:w="80"/>
+                <w:right w:type="dxa" w:w="80"/>
+            </w:tblCellMar>
+            <w:tblLook w:firstColumn="1" w:firstRow="1" w:lastColumn="0"
+                w:lastRow="0" w:noHBand="0" w:noVBand="1" w:val="04a0"/>
+        </w:tblPr>
+        <w:tr>
+            <w:trPr>
+                <w:tblHeader/>
+            </w:trPr>
+            <w:tc>
+                <w:tcPr>
+                    <w:shd w:fill="DDDDDD" w:val="clear"/>
+                </w:tcPr>
+                <w:p>
+                    <w:pPr>
+                        <w:pStyle w:val="TableHeading"/>
+                        <w:jc w:val="left"/>
+                    </w:pPr>
+                    <w:r>
+                        <w:t xml:space="preserve">data</w:t>
+                    </w:r>
+                </w:p>
+            </w:tc>
+            <w:tc>
+                <w:tcPr>
+                    <w:shd w:fill="DDDDDD" w:val="clear"/>
+                </w:tcPr>
+                <w:p>
+                    <w:pPr>
+                        <w:pStyle w:val="TableHeading"/>
+                        <w:jc w:val="left"/>
+                    </w:pPr>
+                    <w:r>
+                        <w:t xml:space="preserve">label</w:t>
+                    </w:r>
+                </w:p>
+            </w:tc>
+        </w:tr>
+        <w:tr>
+            <w:trPr/>
+            <w:tc>
+                <w:tcPr>
+                    <w:gridSpan w:val="2"/>
+                </w:tcPr>
+                <w:p>
+                    <w:pPr>
+                        <w:pStyle w:val="TableContents"/>
+                        <w:jc w:val="left"/>
+                    </w:pPr>
+                    <w:r>
+                        <w:t xml:space="preserve">spanning</w:t>
+                    </w:r>
+                </w:p>
+            </w:tc>
+        </w:tr>
+        <w:tr>
+            <w:trPr/>
+            <w:tc>
+                <w:tcPr/>
+                <w:p>
+                    <w:pPr>
+                        <w:pStyle w:val="TableContents"/>
+                        <w:jc w:val="left"/>
+                    </w:pPr>
+                    <w:r>
+                        <w:t xml:space="preserve">normal</w:t>
+                    </w:r>
+                </w:p>
+            </w:tc>
+            <w:tc>
+                <w:tcPr/>
+                <w:p>
+                    <w:pPr>
+                        <w:pStyle w:val="TableContents"/>
+                        <w:jc w:val="left"/>
+                    </w:pPr>
+                    <w:r>
+                        <w:t xml:space="preserve">column</w:t>
+                    </w:r>
+                </w:p>
+            </w:tc>
+        </w:tr>
+    </w:tbl>
+</w:body>
+````````````````````````````````
+
+
+With spanning columns turned off
+
+```````````````````````````````` example(Tables: 5) options(table-no-span)
+
+| data   | label  |
+|:-------|:-------|
+| spanning       ||
+| normal | column |
+
+.
+<w:body>
+    <w:tbl>
+        <w:tblPr>
+            <w:tblW w:type="auto" w:w="0"/>
+            <w:jc w:val="left"/>
+            <w:tblInd w:type="dxa" w:w="120"/>
+            <w:tblBorders>
+                <w:top w:color="000001" w:space="0" w:sz="2" w:val="single"/>
+                <w:left w:color="000001" w:space="0" w:sz="2" w:val="single"/>
+                <w:bottom w:color="000001" w:space="0" w:sz="2" w:val="single"/>
+                <w:right w:color="000001" w:space="0" w:sz="2" w:val="single"/>
+                <w:insideH w:color="000001" w:space="0" w:sz="2" w:val="single"/>
+                <w:insideV w:color="000001" w:space="0" w:sz="2" w:val="single"/>
+            </w:tblBorders>
+            <w:tblCellMar>
+                <w:top w:type="dxa" w:w="80"/>
+                <w:left w:type="dxa" w:w="80"/>
+                <w:bottom w:type="dxa" w:w="80"/>
+                <w:right w:type="dxa" w:w="80"/>
+            </w:tblCellMar>
+            <w:tblLook w:firstColumn="1" w:firstRow="1" w:lastColumn="0"
+                w:lastRow="0" w:noHBand="0" w:noVBand="1" w:val="04a0"/>
+        </w:tblPr>
+        <w:tr>
+            <w:trPr>
+                <w:tblHeader/>
+            </w:trPr>
+            <w:tc>
+                <w:tcPr>
+                    <w:shd w:fill="DDDDDD" w:val="clear"/>
+                </w:tcPr>
+                <w:p>
+                    <w:pPr>
+                        <w:pStyle w:val="TableHeading"/>
+                        <w:jc w:val="left"/>
+                    </w:pPr>
+                    <w:r>
+                        <w:t xml:space="preserve">data</w:t>
+                    </w:r>
+                </w:p>
+            </w:tc>
+            <w:tc>
+                <w:tcPr>
+                    <w:shd w:fill="DDDDDD" w:val="clear"/>
+                </w:tcPr>
+                <w:p>
+                    <w:pPr>
+                        <w:pStyle w:val="TableHeading"/>
+                        <w:jc w:val="left"/>
+                    </w:pPr>
+                    <w:r>
+                        <w:t xml:space="preserve">label</w:t>
+                    </w:r>
+                </w:p>
+            </w:tc>
+        </w:tr>
+        <w:tr>
+            <w:trPr/>
+            <w:tc>
+                <w:tcPr/>
+                <w:p>
+                    <w:pPr>
+                        <w:pStyle w:val="TableContents"/>
+                        <w:jc w:val="left"/>
+                    </w:pPr>
+                    <w:r>
+                        <w:t xml:space="preserve">spanning</w:t>
+                    </w:r>
+                </w:p>
+            </w:tc>
+            <w:tc>
+                <w:tcPr/>
+                <w:p>
+                    <w:pPr>
+                        <w:pStyle w:val="TableContents"/>
+                        <w:jc w:val="left"/>
+                    </w:pPr>
+                </w:p>
+            </w:tc>
+        </w:tr>
+        <w:tr>
+            <w:trPr/>
+            <w:tc>
+                <w:tcPr/>
+                <w:p>
+                    <w:pPr>
+                        <w:pStyle w:val="TableContents"/>
+                        <w:jc w:val="left"/>
+                    </w:pPr>
+                    <w:r>
+                        <w:t xml:space="preserve">normal</w:t>
+                    </w:r>
+                </w:p>
+            </w:tc>
+            <w:tc>
+                <w:tcPr/>
+                <w:p>
+                    <w:pPr>
+                        <w:pStyle w:val="TableContents"/>
+                        <w:jc w:val="left"/>
+                    </w:pPr>
+                    <w:r>
+                        <w:t xml:space="preserve">column</w:t>
                     </w:r>
                 </w:p>
             </w:tc>

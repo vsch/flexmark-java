@@ -73,7 +73,7 @@ public class TypographicExtension implements Parser.ParserExtension, HtmlRendere
 
     @Override
     public void extend(HtmlRenderer.Builder rendererBuilder, String rendererType) {
-        if (rendererType.equals("HTML") || rendererType.equals("JIRA") || rendererType.equals("YOUTRACK")) {
+        if (rendererBuilder.isRendererType("HTML") || rendererBuilder.isRendererType("JIRA")) {
             rendererBuilder.nodeRendererFactory(new TypographicNodeRenderer.Factory());
         }
     }

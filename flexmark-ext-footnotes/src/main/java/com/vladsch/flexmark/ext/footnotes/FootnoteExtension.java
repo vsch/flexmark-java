@@ -82,9 +82,9 @@ public class FootnoteExtension implements Parser.ParserExtension, HtmlRenderer.H
 
     @Override
     public void extend(HtmlRenderer.Builder rendererBuilder, String rendererType) {
-        if (rendererType.equals("HTML")) {
+        if (rendererBuilder.isRendererType("HTML")) {
             rendererBuilder.nodeRendererFactory(new FootnoteNodeRenderer.Factory());
-        } else if (rendererType.equals("JIRA") || rendererType.equals("YOUTRACK")) {
+        } else if (rendererBuilder.isRendererType("JIRA")) {
         }
     }
 }

@@ -100,10 +100,10 @@ public class WikiLinkExtension implements Parser.ParserExtension, HtmlRenderer.H
 
     @Override
     public void extend(HtmlRenderer.Builder rendererBuilder, String rendererType) {
-        if (rendererType.equals("HTML")) {
+        if (rendererBuilder.isRendererType("HTML")) {
             rendererBuilder.nodeRendererFactory(new WikiLinkNodeRenderer.Factory());
             rendererBuilder.linkResolverFactory(new WikiLinkLinkResolver.Factory());
-        } else if (rendererType.equals("JIRA") || rendererType.equals("YOUTRACK")) {
+        } else if (rendererBuilder.isRendererType("JIRA")) {
             rendererBuilder.nodeRendererFactory(new WikiLinkJiraRenderer.Factory());
             rendererBuilder.linkResolverFactory(new WikiLinkLinkResolver.Factory());
         }

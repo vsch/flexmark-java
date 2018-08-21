@@ -53,9 +53,9 @@ public class GfmIssuesExtension implements Parser.ParserExtension
 
     @Override
     public void extend(HtmlRenderer.Builder rendererBuilder, String rendererType) {
-        if (rendererType.equals("HTML")) {
+        if (rendererBuilder.isRendererType("HTML")) {
             rendererBuilder.nodeRendererFactory(new GfmIssuesNodeRenderer.Factory());
-        } else if (rendererType.equals("JIRA") || rendererType.equals("YOUTRACK")) {
+        } else if (rendererBuilder.isRendererType("JIRA")) {
             rendererBuilder.nodeRendererFactory(new GfmIssuesJiraRenderer.Factory());
         }
     }

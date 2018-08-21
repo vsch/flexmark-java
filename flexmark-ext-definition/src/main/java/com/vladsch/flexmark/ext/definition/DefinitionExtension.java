@@ -62,9 +62,9 @@ public class DefinitionExtension implements Parser.ParserExtension, HtmlRenderer
 
     @Override
     public void extend(HtmlRenderer.Builder rendererBuilder, String rendererType) {
-        if (rendererType.equals("HTML")) {
+        if (rendererBuilder.isRendererType("HTML")) {
             rendererBuilder.nodeRendererFactory(new DefinitionNodeRenderer.Factory());
-        } else if (rendererType.equals("JIRA") || rendererType.equals("YOUTRACK")) {
+        } else if (rendererBuilder.isRendererType("JIRA")) {
         }
     }
 }

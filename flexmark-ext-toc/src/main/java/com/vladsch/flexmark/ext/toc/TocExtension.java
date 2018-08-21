@@ -81,7 +81,7 @@ public class TocExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRe
 
     @Override
     public void extend(HtmlRenderer.Builder rendererBuilder, String rendererType) {
-        if (rendererType.equals("HTML")) {
+        if (rendererBuilder.isRendererType("HTML")) {
             rendererBuilder.nodeRendererFactory(new TocNodeRenderer.Factory());
         }
     }

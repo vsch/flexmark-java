@@ -51,12 +51,12 @@ public class StrikethroughSubscriptExtension implements Parser.ParserExtension, 
 
     @Override
     public void extend(HtmlRenderer.Builder rendererBuilder, String rendererType) {
-        if (rendererType.equals("HTML")) {
+        if (rendererBuilder.isRendererType("HTML")) {
             rendererBuilder.nodeRendererFactory(new StrikethroughNodeRenderer.Factory());
-        } else if (rendererType.equals("JIRA")) {
-            rendererBuilder.nodeRendererFactory(new StrikethroughJiraRenderer.Factory());
-        } else if (rendererType.equals("YOUTRACK")) {
+        } else if (rendererBuilder.isRendererType("YOUTRACK")) {
             rendererBuilder.nodeRendererFactory(new StrikethroughYouTrackRenderer.Factory());
+        } else if (rendererBuilder.isRendererType("JIRA")) {
+            rendererBuilder.nodeRendererFactory(new StrikethroughJiraRenderer.Factory());
         }
     }
 }

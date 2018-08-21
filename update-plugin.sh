@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-HOME_DIR="/Users/vlad/src/flexmark-java"
+HOME_DIR="/Users/vlad/src/projects/flexmark-java"
 
 cd ${HOME_DIR}
 

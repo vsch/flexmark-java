@@ -33,6 +33,8 @@ public class YouTrackConverterExtension implements Parser.ParserExtension, HtmlR
     public void rendererOptions(final MutableDataHolder options) {
         final String rendererType = HtmlRenderer.TYPE.getFrom(options);
         if (rendererType.equals("HTML")) {
+            // add youtrack equivalence
+            HtmlRenderer.addRenderTypeEquivalence(options, "YOUTRACK", "JIRA");
             options.set(HtmlRenderer.TYPE, "YOUTRACK");
         } else if (!rendererType.equals("YOUTRACK")) {
             throw new IllegalStateException("Non HTML Renderer is already set to " + rendererType);
@@ -46,7 +48,7 @@ public class YouTrackConverterExtension implements Parser.ParserExtension, HtmlR
 
     @Override
     public void extend(HtmlRenderer.Builder rendererBuilder, String rendererType) {
-        if (rendererType.equals("YOUTRACK")) {
+        if (rendererBuilder.isRendererType("YOUTRACK")) {
             rendererBuilder.nodeRendererFactory(new YouTrackConverterNodeRenderer.Factory());
         } else {
             throw new IllegalStateException("YouTrack Converter Extension used with non YouTrack Renderer " + rendererType);

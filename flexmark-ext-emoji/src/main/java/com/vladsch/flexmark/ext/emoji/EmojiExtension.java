@@ -59,9 +59,9 @@ public class EmojiExtension implements Parser.ParserExtension, HtmlRenderer.Html
 
     @Override
     public void extend(HtmlRenderer.Builder rendererBuilder, String rendererType) {
-        if (rendererType.equals("HTML")) {
+        if (rendererBuilder.isRendererType("HTML")) {
             rendererBuilder.nodeRendererFactory(new EmojiNodeRenderer.Factory());
-        } else if (rendererType.equals("JIRA") || rendererType.equals("YOUTRACK")) {
+        } else if (rendererBuilder.isRendererType("JIRA")) {
             rendererBuilder.nodeRendererFactory(new EmojiJiraRenderer.Factory());
         }
     }

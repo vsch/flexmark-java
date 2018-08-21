@@ -8,6 +8,7 @@ flexmark-java
 - [To Do](#to-do)
     - [Docx Converter](#docx-converter)
     - [GitLab compatibility extensions](#gitlab-compatibility-extensions)
+- [0.34.20](#03420)
 - [0.34.18](#03418)
 - [0.34.16](#03416)
 - [0.34.14](#03414)
@@ -271,6 +272,20 @@ flexmark-java
 * [ ] Fix: regex can go into infinite loop
 
 &nbsp;</details>
+
+0.34.20
+-------
+
+* Add: renderer type equivalences for allowing new renderer types which override existing ones.
+  Now "YOUTRACK" is defined as an override of "JIRA" by `YouTrackConverterExtension`
+  * use `HtmlRenderer.Builder.isRendererType(String)` to test for recognizing renderer type
+    instead of `rendererType.equals("...")` make sure renderer type checking is done with most
+    specific one, otherwise the wrong match will occur. For example, test for "YOUTRACK" before
+    "JIRA" because "JIRA" matches "YOUTRACK".
+  * `HtmlRenderer.isCompatibleRendererType(MutableDataHolder, String)`
+  * `HtmlRenderer.isCompatibleRendererType(MutableDataHolder, String, String)`
+  * `HtmlRenderer.addRenderTypeEquivalence(MutableDataHolder, String, String)` add new to old
+    renderer type mapping.
 
 0.34.18
 -------

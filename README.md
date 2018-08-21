@@ -28,7 +28,7 @@ than ideal and for pathological input either hangs or practically hangs during p
 ### Requirements
 
 * Java 7 or above
-* Android compatibility to be added
+* Android compatibility to be added 
 * The project is on Maven: `com.vladsch.flexmark`
 * The core has no dependencies; for extensions, see below
 
