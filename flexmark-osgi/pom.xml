@@ -10,10 +10,10 @@
 		<version>0.34.20</version>
 	</parent>
 
-	<artifactId>flexmark-bundle</artifactId>
-	<name>flexmark-bundle</name>
+	<artifactId>flexmark-osgi</artifactId>
+	<name>flexmark-osgi</name>
 	<packaging>bundle</packaging>
-	<description>flexmark-java core and all extension modules and converters</description>
+	<description>flexmark-java core osgi bundle, all extension modules and converter modules except PDF converter in the OSGi Bundle format</description>
 
 	<!-- NOTE: These dependency declarations are only required to sort this 
 		project to the end of the line in the multimodule build. -->
