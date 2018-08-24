@@ -24,7 +24,7 @@
     <modules>
         <module>flexmark</module>
         <module>flexmark-all</module>
-        <module>flexmark-bundle</module>
+        <module>flexmark-osgi</module>
         <module>flexmark-docx-converter</module>
         <module>flexmark-ext-abbreviation</module>
         <module>flexmark-ext-admonition</module>
