@@ -8,6 +8,7 @@ flexmark-java
 - [To Do](#to-do)
     - [Docx Converter](#docx-converter)
     - [GitLab compatibility extensions](#gitlab-compatibility-extensions)
+- [0.34.22](#03422)
 - [0.34.20](#03420)
 - [0.34.18](#03418)
 - [0.34.16](#03416)
@@ -272,6 +273,11 @@ flexmark-java
 * [ ] Fix: regex can go into infinite loop
 
 &nbsp;</details>
+
+0.34.22
+-------
+
+* Add: OSGi module support thanks to [@klcodanr](https://github.com/klcodanr)
 
 0.34.20
 -------

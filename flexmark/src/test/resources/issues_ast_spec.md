@@ -1215,3 +1215,71 @@ Document[0, 103]
 ````````````````````````````````
 
 
+## Issue 262
+
+```````````````````````````````` example Issue 262: 1
+<div>
+<div>
+
+# test 1
+
+</div>
+<div>
+
+# test 2
+
+</div>
+</div>
+.
+<div>
+<div>
+<h1>test 1</h1>
+</div>
+<div>
+<h1>test 2</h1>
+</div>
+</div>
+.
+Document[0, 61]
+  HtmlBlock[0, 12]
+  Heading[13, 21] textOpen:[13, 14, "#"] text:[15, 21, "test 1"]
+    Text[15, 21] chars:[15, 21, "test 1"]
+  HtmlBlock[23, 36]
+  Heading[37, 45] textOpen:[37, 38, "#"] text:[39, 45, "test 2"]
+    Text[39, 45] chars:[39, 45, "test 2"]
+  HtmlBlock[47, 61]
+````````````````````````````````
+
+
+```````````````````````````````` example(Issue 262: 2) options(deep-html-parser)
+<div>
+<div>
+
+# test 1
+
+</div>
+<div>
+
+# test 2
+
+</div>
+</div>
+.
+<div>
+<div>
+
+# test 1
+
+</div>
+<div>
+
+# test 2
+
+</div>
+</div>
+.
+Document[0, 60]
+  HtmlBlock[0, 60]
+````````````````````````````````
+
+
