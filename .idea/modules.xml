@@ -22,6 +22,7 @@
       <module fileurl="file://$PROJECT_DIR$/flexmark-ext-gfm-tables/flexmark-ext-gfm-tables.iml" filepath="$PROJECT_DIR$/flexmark-ext-gfm-tables/flexmark-ext-gfm-tables.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-ext-gfm-tasklist/flexmark-ext-gfm-tasklist.iml" filepath="$PROJECT_DIR$/flexmark-ext-gfm-tasklist/flexmark-ext-gfm-tasklist.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-ext-gfm-users/flexmark-ext-gfm-users.iml" filepath="$PROJECT_DIR$/flexmark-ext-gfm-users/flexmark-ext-gfm-users.iml" />
+      <module fileurl="file://$PROJECT_DIR$/flexmark-ext-gitlab/flexmark-ext-gitlab.iml" filepath="$PROJECT_DIR$/flexmark-ext-gitlab/flexmark-ext-gitlab.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-ext-ins/flexmark-ext-ins.iml" filepath="$PROJECT_DIR$/flexmark-ext-ins/flexmark-ext-ins.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-ext-jekyll-front-matter/flexmark-ext-jekyll-front-matter.iml" filepath="$PROJECT_DIR$/flexmark-ext-jekyll-front-matter/flexmark-ext-jekyll-front-matter.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-ext-jekyll-tag/flexmark-ext-jekyll-tag.iml" filepath="$PROJECT_DIR$/flexmark-ext-jekyll-tag/flexmark-ext-jekyll-tag.iml" />

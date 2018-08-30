@@ -53,8 +53,8 @@ public class CoreNodeRenderer implements NodeRenderer {
 
     public CoreNodeRenderer(DataHolder options) {
         this.referenceRepository = options.get(Parser.REFERENCES);
-        this.listOptions = ListOptions.getFrom(options);
         this.recheckUndefinedReferences = HtmlRenderer.RECHECK_UNDEFINED_REFERENCES.getFrom(options);
+        this.listOptions = ListOptions.getFrom(options);
         this.obfuscateEmail = HtmlRenderer.OBFUSCATE_EMAIL.getFrom(options);
         this.obfuscateEmailRandom = HtmlRenderer.OBFUSCATE_EMAIL_RANDOM.getFrom(options);
         this.codeContentBlock = Parser.FENCED_CODE_CONTENT_BLOCK.getFrom(options);
@@ -316,13 +316,7 @@ public class CoreNodeRenderer implements NodeRenderer {
 
         BasedSequence info = node.getInfo();
         if (info.isNotNull() && !info.isBlank()) {
-            int space = info.indexOf(' ');
-            BasedSequence language;
-            if (space == -1) {
-                language = info;
-            } else {
-                language = info.subSequence(0, space);
-            }
+            BasedSequence language = node.getInfoDelimitedByAny(" ");
             html.attr("class", context.getHtmlOptions().languageClassPrefix + language.unescape());
         } else {
             String noLanguageClass = context.getHtmlOptions().noLanguageClass.trim();

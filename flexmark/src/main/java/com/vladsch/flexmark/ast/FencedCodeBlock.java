@@ -65,12 +65,24 @@ public class FencedCodeBlock extends Block implements DoNotDecorate {
     }
 
     /**
-     * @see <a href="http://spec.commonmark.org/0.18/#info-string">CommonMark spec</a>
-     *
      * @return the sequence for the info part of the node
+     * @see <a href="http://spec.commonmark.org/0.18/#info-string">CommonMark spec</a>
      */
     public BasedSequence getInfo() {
         return info;
+    }
+
+    public BasedSequence getInfoDelimitedByAny(CharSequence delimiters) {
+        BasedSequence language = BasedSequence.NULL;
+        if (info.isNotNull() && !info.isBlank()) {
+            int space = info.indexOfAny(delimiters);
+            if (space == -1) {
+                language = info;
+            } else {
+                language = info.subSequence(0, space);
+            }
+        }
+        return language;
     }
 
     public BasedSequence getClosingFence() {

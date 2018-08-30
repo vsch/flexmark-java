@@ -149,10 +149,16 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
         if (inlineParserExtensionFactories != null) {
             Map<Character, List<InlineParserExtensionFactory>> extensions = calculateInlineParserExtensions(document, inlineParserExtensionFactories);
             inlineParserExtensions = new HashMap<Character, List<InlineParserExtension>>(extensions.size());
+            Map<InlineParserExtensionFactory, InlineParserExtension> parserExtensionMap = new HashMap<>();
             for (Map.Entry<Character, List<InlineParserExtensionFactory>> entry : extensions.entrySet()) {
                 List<InlineParserExtension> extensionList = new ArrayList<InlineParserExtension>(entry.getValue().size());
                 for (InlineParserExtensionFactory factory : entry.getValue()) {
-                    extensionList.add(factory.create(this));
+                    InlineParserExtension parserExtension = parserExtensionMap.get(factory);
+                    if (parserExtension == null) {
+                        parserExtension = factory.create(this);
+                        parserExtensionMap.put(factory, parserExtension);
+                    }
+                    extensionList.add(parserExtension);
                 }
 
                 inlineParserExtensions.put(entry.getKey(), extensionList);
@@ -476,13 +482,15 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
 
     @Override
     public void moveNodes(Node fromNode, Node toNode) {
-        Node next = fromNode.getNext();
-        while (next != null) {
-            Node nextNode = next.getNext();
-            next.unlink();
-            fromNode.appendChild(next);
-            if (next == toNode) break;
-            next = nextNode;
+        if (fromNode != toNode) {
+            Node next = fromNode.getNext();
+            while (next != null) {
+                Node nextNode = next.getNext();
+                next.unlink();
+                fromNode.appendChild(next);
+                if (next == toNode) break;
+                next = nextNode;
+            }
         }
 
         fromNode.setCharsFromContent();
@@ -593,11 +601,13 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
     }
 
     @Override
-    public void flushTextNode() {
+    public boolean flushTextNode() {
         if (currentText != null) {
             block.appendChild(new Text(SegmentedSequence.of(currentText, BasedSequence.NULL)));
             currentText = null;
+            return true;
         }
+        return false;
     }
 
     /**

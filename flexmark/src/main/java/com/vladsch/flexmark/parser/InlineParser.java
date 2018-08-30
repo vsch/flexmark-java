@@ -47,7 +47,7 @@ public interface InlineParser {
     void appendNode(Node node);
     // In some cases, we don't want the text to be appended to an existing node, we need it separate
     Text appendSeparateText(BasedSequence text);
-    void flushTextNode();
+    boolean flushTextNode();
     BasedSequence match(Pattern re);
     BasedSequence[] matchWithGroups(Pattern re);
     Matcher matcher(Pattern re);

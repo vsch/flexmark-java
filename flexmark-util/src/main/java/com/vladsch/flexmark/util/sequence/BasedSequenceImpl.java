@@ -677,7 +677,7 @@ public abstract class BasedSequenceImpl implements BasedSequence {
         if (fromIndex > length()) fromIndex = length();
         if (startIndex > fromIndex) startIndex = fromIndex;
         int index = lastIndexOfAnyNot(chars, startIndex, fromIndex);
-        return index == -1 ? fromIndex - startIndex : fromIndex - index - 1;
+        return index == -1 ? fromIndex - startIndex : fromIndex <= index ? 0 : fromIndex - index - 1;
     }
 
     @Override
@@ -695,7 +695,7 @@ public abstract class BasedSequenceImpl implements BasedSequence {
         if (fromIndex > length()) fromIndex = length();
         if (startIndex > fromIndex) startIndex = fromIndex;
         int index = lastIndexOfAny(chars, startIndex, fromIndex);
-        return index == -1 ? fromIndex - startIndex : fromIndex - index - 1;
+        return index == -1 ? fromIndex - startIndex : fromIndex <= index ? 0 : fromIndex - index - 1;
     }
 
     @Override
