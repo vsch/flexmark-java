@@ -260,7 +260,7 @@ flexmark-java
 0.34.22
 -------
 
-* Add: OSGi module s../../wiki/Extensions#gitlab-flavoured-markdown/klcodanr)
+* Add: OSGi module support thanks to [@klcodanr](https://github.com/klcodanr)
 
 0.34.20
 -------
