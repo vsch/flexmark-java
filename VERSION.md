@@ -253,7 +253,7 @@ flexmark-java
 
 * Fix: `BasedSequenceImpl.countCharsReversed(char, int, int)` and
   `BasedSequenceImpl.countNotCharsReversed(char, int, int)` to not return -1, should return 0
-
+* Fix: `BasedSequenceImpl.spliceAtEnd()` not to fail if this or other is empty
 * Add: `GitLabExtension`, Documented in
   [Gitlab Flavoured Markdown Extensions](../../wiki/Extensions#gitlab-flavoured-markdown)
 

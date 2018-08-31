@@ -46,6 +46,7 @@
           <option name="GITBOOK_URL_ENCODING" value="true" />
           <option name="GITHUB_LISTS" value="false" />
           <option name="GITHUB_WIKI_LINKS" value="true" />
+          <option name="GITLAB_EXT" value="false" />
           <option name="HEADER_ID_NO_DUPED_DASHES" value="false" />
           <option name="JEKYLL_FRONT_MATTER" value="false" />
           <option name="NO_TEXT_ATTRIBUTES" value="false" />

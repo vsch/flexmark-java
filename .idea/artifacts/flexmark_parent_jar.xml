@@ -40,6 +40,7 @@
       <element id="module-output" name="flexmark-ext-attributes" />
       <element id="module-output" name="flexmark-ext-enumerated-reference" />
       <element id="module-output" name="flexmark-ext-admonition" />
+      <element id="module-output" name="flexmark-ext-gitlab" />
     </root>
   </artifact>
 </component>

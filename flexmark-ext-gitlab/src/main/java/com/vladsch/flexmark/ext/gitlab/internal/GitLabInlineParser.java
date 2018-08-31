@@ -70,6 +70,7 @@ public class GitLabInlineParser implements InlineParserExtension {
                     // this one is now closed, we remove all intervening ones since they did not match
                     inlineParser.setIndex(inlineParser.getIndex() + 2);
                     final BasedSequence closingMarker = input.subSequence(0, 2);
+                    open.setOpeningMarker(openMarker);
                     open.setClosingMarker(closingMarker);
                     open.setText(openMarker.baseSubSequence(openMarker.getEndOffset(), closingMarker.getStartOffset()));
 

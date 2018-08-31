@@ -12,8 +12,8 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 
 Parses and renders GitLab Flavoured Markdown.
 
-* Add: video link renderer to convert links to video files to embedded content. The valid
-      video extensions are `.mp4`, `.m4v`, `.mov`, `.webm`, and `.ogv`.
+* Add: video link renderer to convert links to video files to embedded content. The valid video
+  extensions are `.mp4`, `.m4v`, `.mov`, `.webm`, and `.ogv`.
 
   ```
   <div class="video-container">
@@ -298,7 +298,7 @@ matched
 .
 Document[0, 13]
   Paragraph[0, 13]
-    GitLabIns[0, 12] text:[2, 10, "inserted"] textClose:[10, 12, "+}"]
+    GitLabIns[0, 12] textOpen:[0, 2, "{+"] text:[2, 10, "inserted"] textClose:[10, 12, "+}"]
       Text[2, 10] chars:[2, 10, "inserted"]
 ````````````````````````````````
 
@@ -310,7 +310,7 @@ Document[0, 13]
 .
 Document[0, 13]
   Paragraph[0, 13]
-    GitLabIns[0, 12] text:[2, 10, "inserted"] textClose:[10, 12, "+]"]
+    GitLabIns[0, 12] textOpen:[0, 2, "[+"] text:[2, 10, "inserted"] textClose:[10, 12, "+]"]
       Text[2, 10] chars:[2, 10, "inserted"]
 ````````````````````````````````
 
@@ -322,7 +322,7 @@ Document[0, 13]
 .
 Document[0, 12]
   Paragraph[0, 12]
-    GitLabDel[0, 11] text:[2, 9, "deleted"] textClose:[9, 11, "-}"]
+    GitLabDel[0, 11] textOpen:[0, 2, "{-"] text:[2, 9, "deleted"] textClose:[9, 11, "-}"]
       Text[2, 9] chars:[2, 9, "deleted"]
 ````````````````````````````````
 
@@ -334,7 +334,7 @@ Document[0, 12]
 .
 Document[0, 12]
   Paragraph[0, 12]
-    GitLabDel[0, 11] text:[2, 9, "deleted"] textClose:[9, 11, "-]"]
+    GitLabDel[0, 11] textOpen:[0, 2, "[-"] text:[2, 9, "deleted"] textClose:[9, 11, "-]"]
       Text[2, 9] chars:[2, 9, "deleted"]
 ````````````````````````````````
 
@@ -359,10 +359,10 @@ Document[0, 49]
     LinkRef[13, 25] referenceOpen:[13, 14, "["] reference:[14, 24, "+inserted+"] referenceClose:[24, 25, "]"]
       Text[14, 24] chars:[14, 24, "+inserted+"]
     SoftLineBreak[25, 26]
-    GitLabDel[26, 37] text:[28, 35, "deleted"] textClose:[35, 37, "-}"]
+    GitLabDel[26, 37] textOpen:[26, 28, "{-"] text:[28, 35, "deleted"] textClose:[35, 37, "-}"]
       Text[28, 35] chars:[28, 35, "deleted"]
     SoftLineBreak[37, 38]
-    GitLabDel[38, 49] text:[40, 47, "deleted"] textClose:[47, 49, "-]"]
+    GitLabDel[38, 49] textOpen:[38, 40, "[-"] text:[40, 47, "deleted"] textClose:[47, 49, "-]"]
       Text[40, 47] chars:[40, 47, "deleted"]
 ````````````````````````````````
 
@@ -380,10 +380,10 @@ Document[0, 49]
 .
 Document[0, 49]
   Paragraph[0, 49]
-    GitLabIns[0, 12] text:[2, 10, "inserted"] textClose:[10, 12, "+}"]
+    GitLabIns[0, 12] textOpen:[0, 2, "{+"] text:[2, 10, "inserted"] textClose:[10, 12, "+}"]
       Text[2, 10] chars:[2, 10, "inserted"]
     SoftLineBreak[12, 13]
-    GitLabIns[13, 25] text:[15, 23, "inserted"] textClose:[23, 25, "+]"]
+    GitLabIns[13, 25] textOpen:[13, 15, "[+"] text:[15, 23, "inserted"] textClose:[23, 25, "+]"]
       Text[15, 23] chars:[15, 23, "inserted"]
     SoftLineBreak[25, 26]
     Text[26, 37] chars:[26, 37, "{-del … ted-}"]
@@ -427,9 +427,9 @@ nested
 .
 Document[0, 25]
   Paragraph[0, 25]
-    GitLabIns[0, 24] text:[2, 22, "inserted [-deleted-]"] textClose:[22, 24, "+]"]
+    GitLabIns[0, 24] textOpen:[0, 2, "[+"] text:[2, 22, "inserted [-deleted-]"] textClose:[22, 24, "+]"]
       Text[2, 11] chars:[2, 11, "inserted "]
-      GitLabDel[11, 22] text:[13, 20, "deleted"] textClose:[20, 22, "-]"]
+      GitLabDel[11, 22] textOpen:[11, 13, "[-"] text:[13, 20, "deleted"] textClose:[20, 22, "-]"]
         Text[13, 20] chars:[13, 20, "deleted"]
 ````````````````````````````````
 
@@ -442,11 +442,11 @@ Document[0, 25]
 Document[0, 31]
   Paragraph[0, 31]
     Emphasis[0, 30] textOpen:[0, 1, "*"] text:[1, 29, "[+**inserted** [-deleted-]+]"] textClose:[29, 30, "*"]
-      GitLabIns[1, 29] text:[3, 27, "**inserted** [-deleted-]"] textClose:[27, 29, "+]"]
+      GitLabIns[1, 29] textOpen:[1, 3, "[+"] text:[3, 27, "**inserted** [-deleted-]"] textClose:[27, 29, "+]"]
         StrongEmphasis[3, 15] textOpen:[3, 5, "**"] text:[5, 13, "inserted"] textClose:[13, 15, "**"]
           Text[5, 13] chars:[5, 13, "inserted"]
         Text[15, 16] chars:[15, 16, " "]
-        GitLabDel[16, 27] text:[18, 25, "deleted"] textClose:[25, 27, "-]"]
+        GitLabDel[16, 27] textOpen:[16, 18, "[-"] text:[18, 25, "deleted"] textClose:[25, 27, "-]"]
           Text[18, 25] chars:[18, 25, "deleted"]
 ````````````````````````````````
 
@@ -461,6 +461,19 @@ $`a^2+b^2=c^2`$
 Document[0, 16]
   Paragraph[0, 16]
     GitLabInlineMath[0, 15] textOpen:[0, 2, "$`"] text:[2, 13, "a^2+b^2=c^2"] textClose:[13, 15, "`$"]
+````````````````````````````````
+
+
+```````````````````````````````` example Inline Math: 2
+Prefix $`a^2+b^2=c^2`$ suffix
+.
+<p>Prefix <span class="katex">a^2+b^2=c^2</span> suffix</p>
+.
+Document[0, 30]
+  Paragraph[0, 30]
+    Text[0, 7] chars:[0, 7, "Prefix "]
+    GitLabInlineMath[7, 22] textOpen:[7, 9, "$`"] text:[9, 20, "a^2+b^2=c^2"] textClose:[20, 22, "`$"]
+    Text[22, 29] chars:[22, 29, " suffix"]
 ````````````````````````````````
 
 

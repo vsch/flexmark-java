@@ -1239,6 +1239,11 @@ public abstract class BasedSequenceImpl implements BasedSequence {
 
     @Override
     public BasedSequence spliceAtEnd(BasedSequence other) {
+        if (other.isEmpty()) {
+            return this;
+        } else if (isEmpty()) {
+            return other;
+        }
         assert isContinuedBy(other) : "sequence[" + getStartOffset() + ", " + getEndOffset() + "] is not continued by other[" + other.getStartOffset() + ", " + other.getEndOffset() + "]";
         return baseSubSequence(getStartOffset(), other.getEndOffset());
     }
