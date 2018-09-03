@@ -46,6 +46,7 @@
         <option name="GITBOOK_URL_ENCODING" value="false" />
         <option name="GITHUB_LISTS" value="false" />
         <option name="GITHUB_WIKI_LINKS" value="true" />
+        <option name="GITLAB_EXT" value="true" />
         <option name="HEADER_ID_NO_DUPED_DASHES" value="false" />
         <option name="JEKYLL_FRONT_MATTER" value="true" />
         <option name="NO_TEXT_ATTRIBUTES" value="false" />
@@ -67,6 +68,8 @@
         <provider providerId="com.vladsch.idea.multimarkdown.editor.javafx.html.css" providerName="Default JavaFx Stylesheet" />
       </StylesheetProvider>
       <ScriptProviders>
+        <provider providerId="com.vladsch.idea.multimarkdown.editor.katex.html.script" providerName="Katex Script" />
+        <provider providerId="com.vladsch.idea.multimarkdown.editor.mermaid.html.script" providerName="Mermaid Script" />
         <provider providerId="com.vladsch.idea.multimarkdown.editor.github-collapse-markdown.html.script" providerName="GitHub Collapse Markdown" />
       </ScriptProviders>
       <cssText>.markdown-body,
