@@ -10,7 +10,7 @@ import com.vladsch.flexmark.util.options.MutableDataSetter;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-@SuppressWarnings("WeakerAccess")
+@SuppressWarnings({ "WeakerAccess", "deprecation" })
 public class HtmlParserOptions implements MutableDataSetter {
     public boolean listContentIndent;
     public boolean setextHeadings;
@@ -43,6 +43,13 @@ public class HtmlParserOptions implements MutableDataSetter {
     public boolean skipHeading5;
     public boolean skipHeading6;
     public boolean skipAttributes;
+    public ExtensionConversion extInlineStrong;
+    public ExtensionConversion extInlineEmphasis;
+    public ExtensionConversion extInlineCode;
+    public ExtensionConversion extInlineDel;
+    public ExtensionConversion extInlineIns;
+    public ExtensionConversion extInlineSub;
+    public ExtensionConversion extInlineSup;
     public char orderedListDelimiter;
     public char unorderedListDelimiter;
     public int definitionMarkerSpaces;
@@ -92,6 +99,13 @@ public class HtmlParserOptions implements MutableDataSetter {
         skipHeading5 = other.skipHeading5;
         skipHeading6 = other.skipHeading6;
         skipAttributes = other.skipAttributes;
+        extInlineStrong = other.extInlineStrong;
+        extInlineEmphasis = other.extInlineEmphasis;
+        extInlineCode = other.extInlineCode;
+        extInlineDel = other.extInlineDel;
+        extInlineIns = other.extInlineIns;
+        extInlineSub = other.extInlineSub;
+        extInlineSup = other.extInlineSup;
         orderedListDelimiter = other.orderedListDelimiter;
         unorderedListDelimiter = other.unorderedListDelimiter;
         definitionMarkerSpaces = other.definitionMarkerSpaces;
@@ -138,6 +152,13 @@ public class HtmlParserOptions implements MutableDataSetter {
         skipHeading5 = FlexmarkHtmlParser.SKIP_HEADING_5.getFrom(options);
         skipHeading6 = FlexmarkHtmlParser.SKIP_HEADING_6.getFrom(options);
         skipAttributes = FlexmarkHtmlParser.SKIP_ATTRIBUTES.getFrom(options);
+        extInlineStrong = FlexmarkHtmlParser.EXT_INLINE_STRONG.getFrom(options);
+        extInlineEmphasis = FlexmarkHtmlParser.EXT_INLINE_EMPHASIS.getFrom(options);
+        extInlineCode = FlexmarkHtmlParser.EXT_INLINE_CODE.getFrom(options);
+        extInlineDel = FlexmarkHtmlParser.EXT_INLINE_DEL.getFrom(options);
+        extInlineIns = FlexmarkHtmlParser.EXT_INLINE_INS.getFrom(options);
+        extInlineSub = FlexmarkHtmlParser.EXT_INLINE_SUB.getFrom(options);
+        extInlineSup = FlexmarkHtmlParser.EXT_INLINE_SUP.getFrom(options);
         orderedListDelimiter = FlexmarkHtmlParser.ORDERED_LIST_DELIMITER.getFrom(options);
         unorderedListDelimiter = FlexmarkHtmlParser.UNORDERED_LIST_DELIMITER.getFrom(options);
         definitionMarkerSpaces = FlexmarkHtmlParser.DEFINITION_MARKER_SPACES.getFrom(options);
@@ -185,6 +206,13 @@ public class HtmlParserOptions implements MutableDataSetter {
         dataHolder.set(FlexmarkHtmlParser.SKIP_HEADING_5, skipHeading5);
         dataHolder.set(FlexmarkHtmlParser.SKIP_HEADING_6, skipHeading6);
         dataHolder.set(FlexmarkHtmlParser.SKIP_ATTRIBUTES, skipAttributes);
+        dataHolder.set(FlexmarkHtmlParser.EXT_INLINE_STRONG, extInlineStrong);
+        dataHolder.set(FlexmarkHtmlParser.EXT_INLINE_EMPHASIS, extInlineEmphasis);
+        dataHolder.set(FlexmarkHtmlParser.EXT_INLINE_CODE, extInlineCode);
+        dataHolder.set(FlexmarkHtmlParser.EXT_INLINE_DEL, extInlineDel);
+        dataHolder.set(FlexmarkHtmlParser.EXT_INLINE_INS, extInlineIns);
+        dataHolder.set(FlexmarkHtmlParser.EXT_INLINE_SUB, extInlineSub);
+        dataHolder.set(FlexmarkHtmlParser.EXT_INLINE_SUP, extInlineSup);
         dataHolder.set(FlexmarkHtmlParser.ORDERED_LIST_DELIMITER, orderedListDelimiter);
         dataHolder.set(FlexmarkHtmlParser.UNORDERED_LIST_DELIMITER, unorderedListDelimiter);
         dataHolder.set(FlexmarkHtmlParser.DEFINITION_MARKER_SPACES, definitionMarkerSpaces);

@@ -212,6 +212,203 @@ Expected `a rendered HTML
 ````````````````````````````````
 
 
+```````````````````````````````` example(Skipped Emphasis: 13) options(text-ext-inline-strong)
+Expected rendered HTML
+.
+<p><strong>Expected</strong> rendered HTML</p>
+````````````````````````````````
+
+
+```````````````````````````````` example(Skipped Emphasis: 14) options(text-ext-inline-strong)
+Expected rendered HTML
+.
+<p><b>Expected</b> rendered HTML</p>
+````````````````````````````````
+
+
+```````````````````````````````` example(Skipped Emphasis: 15) options(text-ext-inline-emphasis)
+Expected rendered HTML
+.
+<p><em>Expected</em> rendered HTML</p>
+````````````````````````````````
+
+
+```````````````````````````````` example(Skipped Emphasis: 16) options(text-ext-inline-emphasis)
+Expected rendered HTML
+.
+<p><i>Expected</i> rendered HTML</p>
+````````````````````````````````
+
+
+```````````````````````````````` example(Skipped Emphasis: 17) options(text-ext-inline-ins)
+Expected rendered HTML
+.
+<p><ins>Expected</ins> rendered HTML</p>
+````````````````````````````````
+
+
+```````````````````````````````` example(Skipped Emphasis: 18) options(text-ext-inline-del)
+Expected rendered HTML
+.
+<p><del>Expected</del> rendered HTML</p>
+````````````````````````````````
+
+
+```````````````````````````````` example(Skipped Emphasis: 19) options(text-ext-inline-sub)
+Expected rendered HTML
+.
+<p><sub>Expected</sub> rendered HTML</p>
+````````````````````````````````
+
+
+```````````````````````````````` example(Skipped Emphasis: 20) options(text-ext-inline-sub)
+H2O
+.
+<p>H<sub>2</sub>O</p>
+````````````````````````````````
+
+
+```````````````````````````````` example(Skipped Emphasis: 21) options(text-ext-inline-sup)
+Expected rendered HTML
+.
+<p><sup>Expected</sup> rendered HTML</p>
+````````````````````````````````
+
+
+```````````````````````````````` example(Skipped Emphasis: 22) options(text-ext-inline-sup)
+H2O
+.
+<p>H<sup>2</sup>O</p>
+````````````````````````````````
+
+
+```````````````````````````````` example(Skipped Emphasis: 23) options(text-ext-inline-code)
+Expected rendered HTML
+.
+<p><code>Expected</code> rendered HTML</p>
+````````````````````````````````
+
+
+``Expected `a``
+
+```````````````````````````````` example(Skipped Emphasis: 24) options(text-ext-inline-code)
+Expected `a rendered HTML
+.
+<p><code>Expected `a</code> rendered HTML</p>
+````````````````````````````````
+
+
+## HTML Emphasis
+
+```````````````````````````````` example(HTML Emphasis: 1) options(html-ext-inline-strong)
+<strong>Expected</strong> rendered HTML
+.
+<p><strong>Expected</strong> rendered HTML</p>
+````````````````````````````````
+
+
+```````````````````````````````` example(HTML Emphasis: 2) options(html-ext-inline-strong)
+<b>Expected</b> rendered HTML
+.
+<p><b>Expected</b> rendered HTML</p>
+````````````````````````````````
+
+
+```````````````````````````````` example(HTML Emphasis: 3) options(html-ext-inline-emphasis)
+<em>Expected</em> rendered HTML
+.
+<p><em>Expected</em> rendered HTML</p>
+````````````````````````````````
+
+
+```````````````````````````````` example(HTML Emphasis: 4) options(html-ext-inline-emphasis)
+<i>Expected</i> rendered HTML
+.
+<p><i>Expected</i> rendered HTML</p>
+````````````````````````````````
+
+
+```````````````````````````````` example(HTML Emphasis: 5) options(html-ext-inline-ins)
+<ins>Expected</ins> rendered HTML
+.
+<p><ins>Expected</ins> rendered HTML</p>
+````````````````````````````````
+
+
+```````````````````````````````` example(HTML Emphasis: 6) options(html-ext-inline-del)
+<del>Expected</del> rendered HTML
+.
+<p><del>Expected</del> rendered HTML</p>
+````````````````````````````````
+
+
+```````````````````````````````` example(HTML Emphasis: 7) options(html-ext-inline-sub)
+<sub>Expected</sub> rendered HTML
+.
+<p><sub>Expected</sub> rendered HTML</p>
+````````````````````````````````
+
+
+```````````````````````````````` example(HTML Emphasis: 8) options(html-ext-inline-sub)
+H<sub>2</sub>O
+.
+<p>H<sub>2</sub>O</p>
+````````````````````````````````
+
+
+```````````````````````````````` example(HTML Emphasis: 9) options(html-ext-inline-sup)
+<sup>Expected</sup> rendered HTML
+.
+<p><sup>Expected</sup> rendered HTML</p>
+````````````````````````````````
+
+
+```````````````````````````````` example(HTML Emphasis: 10) options(html-ext-inline-sup)
+H<sup>2</sup>O
+.
+<p>H<sup>2</sup>O</p>
+````````````````````````````````
+
+
+```````````````````````````````` example(HTML Emphasis: 11) options(html-ext-inline-code)
+<code>Expected</code> rendered HTML
+.
+<p><code>Expected</code> rendered HTML</p>
+````````````````````````````````
+
+
+``Expected `a``
+
+```````````````````````````````` example(HTML Emphasis: 12) options(html-ext-inline-code)
+<code>Expected `a</code> rendered HTML
+.
+<p><code>Expected `a</code> rendered HTML</p>
+````````````````````````````````
+
+
+```````````````````````````````` example(HTML Emphasis: 13) options(html-ext-inline-strong, html-ext-inline-emphasis)
+<strong>Expected <em>Nested</em></strong> rendered HTML
+.
+<p><strong>Expected <em>Nested</em></strong> rendered HTML</p>
+````````````````````````````````
+
+
+## Nested Emphasis 
+
+```````````````````````````````` example(Nested Emphasis: 1) options(text-ext-inline-strong, html-ext-inline-emphasis)
+Expected <em>Nested</em> rendered HTML
+.
+<p><strong>Expected <em>Nested</em></strong> rendered HTML</p>
+````````````````````````````````
+
+
+```````````````````````````````` example(Nested Emphasis: 2) options(html-ext-inline-emphasis)
+**Expected <em>Nested</em>** rendered HTML
+.
+<p><strong>Expected <em>Nested</em></strong> rendered HTML</p>
+````````````````````````````````
+
+
 ## Bullet Lists
 
 ```````````````````````````````` example Bullet Lists: 1

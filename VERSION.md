@@ -7,6 +7,7 @@ flexmark-java
 
 - [To Do](#to-do)
     - [Docx Converter](#docx-converter)
+- [0.34.28](#03428)
 - [0.34.26](#03426)
 - [0.34.24](#03424)
 - [0.34.22](#03422)
@@ -248,6 +249,27 @@ flexmark-java
 * [ ] Fix: #99, YamlFrontMatterBlockParser ignores multi-key list items
 
 &nbsp;</details>
+
+0.34.28
+-------
+
+* Add: html parser options to specify how to generate some markdown formatting elements, default
+  for all is `ExtensionConversion.MARKDOWN`:
+  * `EXT_INLINE_STRONG` - strong 
+  * `EXT_INLINE_EMPHASIS` - emphasis 
+  * `EXT_INLINE_CODE` - code 
+  * `EXT_INLINE_DEL` - del 
+  * `EXT_INLINE_INS` - ins 
+  * `EXT_INLINE_SUB` - sub 
+  * `EXT_INLINE_SUP` - sup 
+  
+  Available settings: 
+  * `ExtensionConversion.MARKDOWN` - convert to markdown
+  * `ExtensionConversion.TEXT` - convert to inner text
+  * `ExtensionConversion.HTML` - leave HTML as is
+  
+  Corresponding `SKIP_` options have been deprecated since their function is duplicated by new
+  options. 
 
 0.34.26
 -------
