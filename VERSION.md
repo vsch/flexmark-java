@@ -7,6 +7,7 @@ flexmark-java
 
 - [To Do](#to-do)
     - [Docx Converter](#docx-converter)
+- [0.34.26](#03426)
 - [0.34.24](#03424)
 - [0.34.22](#03422)
 - [0.34.20](#03420)
@@ -247,6 +248,15 @@ flexmark-java
 * [ ] Fix: #99, YamlFrontMatterBlockParser ignores multi-key list items
 
 &nbsp;</details>
+
+0.34.26
+-------
+
+* Fix: Add `DoNotLinkDecorate` to `Code` for preventing AutoLink extension from decorating
+  inline code with autolinks.
+* Fix: `BasedSequenceImpl.lastIndexOfAny(CharSequence)` and
+  `BasedSequenceImpl.lastIndexOfAnyNot(CharSequence)` were using `indexOf...` instead of
+  `lastIndexOf...`
 
 0.34.24
 -------

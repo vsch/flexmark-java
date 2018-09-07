@@ -65,12 +65,40 @@
         <bodyTop />
         <bodyBottom />
       </HtmlSettings>
-      <CssSettings previewScheme="UI_SCHEME" cssUri="" isCssUriEnabled="false" isCssUriSerial="true" isCssTextEnabled="false" isDynamicPageWidth="true">
+      <CssSettings previewScheme="UI_SCHEME" cssUri="" isCssUriEnabled="false" isCssUriSerial="true" isCssTextEnabled="true" isDynamicPageWidth="true">
         <StylesheetProvider>
           <provider providerId="com.vladsch.idea.multimarkdown.editor.javafx.html.css" providerName="Default JavaFx Stylesheet" />
         </StylesheetProvider>
         <ScriptProviders />
-        <cssText />
+        <cssText>.markdown-body,
+.wiki-body {
+    font-family: Arial, &quot;Helvetica Neue&quot;, &quot;Segoe UI&quot;, freesans, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+code { 
+    background-color:#f0f0f0;
+    border-radius:2px;
+    padding:1px 0 0 0;
+    border:1px solid #e0e0e0;
+    font-family:Consolas,Inconsolata,Courier,monospace;
+    font-size:0.9em;color:#b00042; 
+}
+
+.search-highlight {
+    border: solid 1px #000;
+    padding: 1px;
+    background-color: #ffff00;
+    color: #000;
+}
+
+.selection-highlight {
+    color:#000;
+    padding:1px 0 1px 0;
+    border: solid 1px #52CC7A;
+    background-color: #B5FFCE;
+}</cssText>
         <cssUriHistory />
       </CssSettings>
       <HtmlExportSettings updateOnSave="true" parentDir="$ModuleFileDir$/src/main/javadoc" targetDir="$ModuleFileDir$/src/main/javadoc" cssDir="$ModuleFileDir$/src/main/javadoc/css" scriptDir="$ModuleFileDir$/src/main/javadoc/js" plainHtml="false" imageDir="$ModuleFileDir$/src/main/javadoc" copyLinkedImages="true" imageUniquifyType="1" targetExt="" useTargetExt="false" noCssNoScripts="true" linkToExportedHtml="true" exportOnSettingsChange="true" regenerateOnProjectOpen="false" linkFormatType="HTTP_ABSOLUTE" />

@@ -2,7 +2,7 @@ package com.vladsch.flexmark.ast;
 
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
-public class Code extends DelimitedNodeImpl {
+public class Code extends DelimitedNodeImpl implements DoNotLinkDecorate {
     public Code() {
     }
 

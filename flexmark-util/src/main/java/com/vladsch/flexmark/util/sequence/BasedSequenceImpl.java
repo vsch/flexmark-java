@@ -332,7 +332,7 @@ public abstract class BasedSequenceImpl implements BasedSequence {
     @Override public int lastIndexOf(char c)                                        { return lastIndexOf(c, 0, length()); }
     @Override public int lastIndexOfAny(char c1, char c2)                           { return lastIndexOfAny(c1, c2, 0, length()); }
     @Override public int lastIndexOfAny(char c1, char c2, char c3)                  { return lastIndexOfAny(c1, c2, c3, 0, length()); }
-    @Override public int lastIndexOfAny(CharSequence s)                             { return indexOfAny(s, 0, length()); }
+    @Override public int lastIndexOfAny(CharSequence s)                             { return lastIndexOfAny(s, 0, length()); }
     @Override public int lastIndexOf(char c, int fromIndex)                        { return lastIndexOf(c, 0, fromIndex); }
     @Override public int lastIndexOfAny(char c1, char c2, int fromIndex)           { return lastIndexOfAny(c1, c2, 0, fromIndex); }
     @Override public int lastIndexOfAny(char c1, char c2, char c3, int fromIndex)  { return lastIndexOfAny(c1, c2, c3, 0, fromIndex); }
@@ -403,7 +403,7 @@ public abstract class BasedSequenceImpl implements BasedSequence {
     @Override public int lastIndexOfNot(char c)                                         { return lastIndexOfNot(c, 0, length()); }
     @Override public int lastIndexOfAnyNot(char c1, char c2)                            { return lastIndexOfAnyNot(c1, c2, 0, length()); }
     @Override public int lastIndexOfAnyNot(char c1, char c2, char c3)                   { return lastIndexOfAnyNot(c1, c2, c3, 0, length()); }
-    @Override public int lastIndexOfAnyNot(CharSequence s)                              { return indexOfAnyNot(s, 0, length()); }
+    @Override public int lastIndexOfAnyNot(CharSequence s)                              { return lastIndexOfAnyNot(s, 0, length()); }
     @Override public int lastIndexOfNot(char c, int fromIndex)                         { return lastIndexOfNot(c, 0, fromIndex); }
     @Override public int lastIndexOfAnyNot(char c1, char c2, int fromIndex)            { return lastIndexOfAnyNot(c1, c2, 0, fromIndex); }
     @Override public int lastIndexOfAnyNot(char c1, char c2, char c3, int fromIndex)   { return lastIndexOfAnyNot(c1, c2, c3, 0, fromIndex); }

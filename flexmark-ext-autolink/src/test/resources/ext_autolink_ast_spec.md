@@ -240,3 +240,19 @@ Document[0, 24]
 ````````````````````````````````
 
 
+## Issue 265
+
+Issue #265, Autolink extension converts autolinks in inline code nodes in code
+
+```````````````````````````````` example Issue 265: 1
+`http://..../wiki`
+.
+<p><code>http://..../wiki</code></p>
+.
+Document[0, 19]
+  Paragraph[0, 19]
+    Code[0, 18] textOpen:[0, 1, "`"] text:[1, 17, "http: … //..../wiki"] textClose:[17, 18, "`"]
+      Text[1, 17] chars:[1, 17, "http: … /wiki"]
+````````````````````````````````
+
+
