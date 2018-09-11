@@ -20,7 +20,7 @@ public class FootnoteBlock extends CustomBlock implements ReferenceNode<Footnote
 
     @Override
     public int compareTo(final FootnoteBlock other) {
-        return getText().compareTo(other.getText());
+        return text.compareTo(other.text);
     }
 
     public int getFootnoteReferences() {

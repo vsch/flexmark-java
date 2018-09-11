@@ -1,0 +1,1153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="1.8.0_152-release" class="java.beans.XMLDecoder">
+ <object class="com.vladsch.MissingInActions.settings.BatchSearchReplaceSettings" id="BatchSearchReplaceSettings0">
+  <void property="batchPresetName">
+   <string>Flexmark Html Parser</string>
+  </void>
+  <void property="batchPresets">
+   <void method="put">
+    <string>All</string>
+    <object class="com.vladsch.MissingInActions.settings.BatchSearchReplace">
+     <void property="replaceText">
+      <string>approveProcessInstanceId
+approvedAt
+approveProcessTemplateId
+checkedAt
+checkedAt
+clientId
+conditionTypeId
+contentComponentId
+contentComponentId
+contentComponentInstanceId
+contentComponentId
+createdAt
+deadlineAt
+duration
+doneAt
+inputAt
+inputTypeId
+originStepTemplateId
+originProcessTemplateId
+previousVersionId
+processStepInstanceId
+processStepId
+processStepTemplateId
+processTemplateId
+processStepTemplateId
+processStepTemplateId
+processTemplateId
+processStepTemplateId
+taskInstanceId
+trainingProcessTemplateId
+updatedAt
+userUuid
+userUuid
+</string>
+     </void>
+     <void property="searchText">
+      <string>approveProcessInstance
+approvedat
+approveprocess
+checkedDate
+checkedat
+client
+conditiontype
+contentComponent
+contentComponentID
+contentComponentInstance
+contentComponent_id
+createdat
+deadline
+deadline_
+doneDate
+inputDate
+inputType
+origStepTemplateId
+originTemplate
+previousVersion
+processStepInstanceID
+processStep_id
+processStep_id_
+processTemplate_id
+processstep
+processsteptemplate
+processtemplate
+processteptemplate
+taskTemplateId
+trainingsprocess
+updatedat
+user
+username
+</string>
+     </void>
+    </object>
+   </void>
+   <void method="put">
+    <string>ProcessPostConditionProcessTemplate</string>
+    <object class="com.vladsch.MissingInActions.settings.BatchSearchReplace">
+     <void property="replaceText">
+      <string>processPostConditionId
+processTemplateId
+</string>
+     </void>
+     <void property="searchText">
+      <string>id
+processtemplate
+</string>
+     </void>
+    </object>
+   </void>
+   <void method="put">
+    <string>ContentComponents</string>
+    <object class="com.vladsch.MissingInActions.settings.BatchSearchReplace">
+     <void property="replaceText">
+      <string>createdAt
+contentComponentTypeId
+updatedAt
+</string>
+     </void>
+     <void property="searchText">
+      <string>createdat
+type
+updatedat
+</string>
+     </void>
+    </object>
+   </void>
+   <void method="put">
+    <string>ContentComponentVideoInstances</string>
+    <object class="com.vladsch.MissingInActions.settings.BatchSearchReplace">
+     <void property="replaceText">
+      <string>contentComponentInstanceId
+</string>
+     </void>
+     <void property="searchText">
+      <string>contentComponentInstance
+</string>
+     </void>
+    </object>
+   </void>
+   <void method="put">
+    <string>Accountable_TaskTemplates</string>
+    <object class="com.vladsch.MissingInActions.settings.BatchSearchReplace">
+     <void property="replaceText">
+      <string>userUuid
+</string>
+     </void>
+     <void property="searchText">
+      <string>username
+</string>
+     </void>
+    </object>
+   </void>
+   <void method="put">
+    <string>ProcessPostConditions</string>
+    <object class="com.vladsch.MissingInActions.settings.BatchSearchReplace">
+     <void property="replaceText">
+      <string>conditionTypeId
+processTemplateId
+processTemplateId
+</string>
+     </void>
+     <void property="searchText">
+      <string>conditiontype
+processtemplate
+processTemplate_id
+</string>
+     </void>
+    </object>
+   </void>
+   <void method="put">
+    <string>ProcessStepsPostConditionProcessTemplate</string>
+    <object class="com.vladsch.MissingInActions.settings.BatchSearchReplace">
+     <void property="replaceText">
+      <string>processStepsPostConditionId
+processTemplateId
+processTemplateId
+</string>
+     </void>
+     <void property="searchText">
+      <string>id
+processtemplate
+processTemplate_id
+</string>
+     </void>
+    </object>
+   </void>
+   <void method="put">
+    <string>ProcessStepsPrerequisites</string>
+    <object class="com.vladsch.MissingInActions.settings.BatchSearchReplace">
+     <void property="replaceText">
+      <string>conditionTypeId
+processStepTemplateId
+processTemplateId
+</string>
+     </void>
+     <void property="searchText">
+      <string>conditiontype
+processteptemplate
+processTemplate_id
+</string>
+     </void>
+    </object>
+   </void>
+   <void method="put">
+    <string>ProcessStepsTemplates_ProcessTemplates</string>
+    <object class="com.vladsch.MissingInActions.settings.BatchSearchReplace">
+     <void property="replaceText">
+      <string>processStepTemplateId
+processTemplateId
+</string>
+     </void>
+     <void property="searchText">
+      <string>processStep_id
+processTemplate_id
+</string>
+     </void>
+    </object>
+   </void>
+   <void method="put">
+    <string>ProcessStepsPrerequisiteProcessTemplate</string>
+    <object class="com.vladsch.MissingInActions.settings.BatchSearchReplace">
+     <void property="replaceText">
+      <string>processStepsPrerequisiteId
+processTemplateId
+processTemplateId
+</string>
+     </void>
+     <void property="searchText">
+      <string>id
+processtemplate
+processTemplate_id
+</string>
+     </void>
+    </object>
+   </void>
+   <void method="put">
+    <string>ProcessPrerequisites</string>
+    <object class="com.vladsch.MissingInActions.settings.BatchSearchReplace">
+     <void property="replaceText">
+      <string>conditionTypeId
+processTemplateId
+processTemplateId
+</string>
+     </void>
+     <void property="searchText">
+      <string>conditiontype
+processtemplate
+processTemplate_id
+</string>
+     </void>
+    </object>
+   </void>
+   <void method="put">
+    <string>Responsible_ProcessTemplates</string>
+    <object class="com.vladsch.MissingInActions.settings.BatchSearchReplace">
+     <void property="replaceText">
+      <string>userUuid
+</string>
+     </void>
+     <void property="searchText">
+      <string>username
+</string>
+     </void>
+    </object>
+   </void>
+   <void method="put">
+    <string>ChangeHistory</string>
+    <object class="com.vladsch.MissingInActions.settings.BatchSearchReplace">
+     <void property="replaceText">
+      <string>createdAt
+userUuid
+</string>
+     </void>
+     <void property="searchText">
+      <string>createdat
+user
+</string>
+     </void>
+    </object>
+   </void>
+   <void method="put">
+    <string>ContentComponentChecklistInstances</string>
+    <object class="com.vladsch.MissingInActions.settings.BatchSearchReplace">
+     <void property="replaceText">
+      <string>checkedAt
+contentComponentInstanceId
+userUuid
+</string>
+     </void>
+     <void property="searchText">
+      <string>checkedDate
+contentComponentInstance
+user
+</string>
+     </void>
+    </object>
+   </void>
+   <void method="put">
+    <string>Informed_TaskTemplates</string>
+    <object class="com.vladsch.MissingInActions.settings.BatchSearchReplace">
+     <void property="replaceText">
+      <string>userUuid
+</string>
+     </void>
+     <void property="searchText">
+      <string>username
+</string>
+     </void>
+    </object>
+   </void>
+   <void method="put">
+    <string>ContentComponentVideo</string>
+    <object class="com.vladsch.MissingInActions.settings.BatchSearchReplace">
+     <void property="replaceText">
+      <string>contentComponentId
+</string>
+     </void>
+     <void property="searchText">
+      <string>contentComponent
+</string>
+     </void>
+    </object>
+   </void>
+   <void method="put">
+    <string>Flexmark Html Parser</string>
+    <object class="com.vladsch.MissingInActions.settings.BatchSearchReplace">
+     <void property="optionsText">
+      <string>
+
+
+
+
+
+
+?
+?
+?
+?
+?
+?
+?
+?
+?
+?
+?
+
+
+
+
+
+
+
+</string>
+     </void>
+     <void property="replaceText">
+      <string>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</string>
+     </void>
+     <void property="searchText">
+      <string>skipInlineStrong
+skipInlineEmphasis
+skipInlineCode
+skipInlineDel
+skipInlineIns
+skipInlineSub
+skipInlineSup
+_a_
+_b_
+_c_
+_d_
+_e_
+_f_
+_g_
+_h_
+_i_
+_j_
+_k_
+extInlineStrong
+extInlineEmphasis
+extInlineCode
+extInlineDel
+extInlineIns
+extInlineSub
+extInlineSup
+</string>
+     </void>
+    </object>
+   </void>
+   <void method="put">
+    <string>ProcessStepInstances</string>
+    <object class="com.vladsch.MissingInActions.settings.BatchSearchReplace">
+     <void property="replaceText">
+      <string>deadlineAt
+doneAt
+updatedAt
+userUuid
+</string>
+     </void>
+     <void property="searchText">
+      <string>deadline
+doneDate
+updatedat
+user
+</string>
+     </void>
+    </object>
+   </void>
+   <void method="put">
+    <string>ProcessStepsPostConditions</string>
+    <object class="com.vladsch.MissingInActions.settings.BatchSearchReplace">
+     <void property="replaceText">
+      <string>conditionTypeId
+processStepTemplateId
+processTemplateId
+</string>
+     </void>
+     <void property="searchText">
+      <string>conditiontype
+processsteptemplate
+processTemplate_id
+</string>
+     </void>
+    </object>
+   </void>
+   <void method="put">
+    <string>ProcessTemplates</string>
+    <object class="com.vladsch.MissingInActions.settings.BatchSearchReplace">
+     <void property="replaceText">
+      <string>approvedAt
+approveProcessTemplateId
+approveProcessInstanceId
+checkedAt
+clientId
+createdAt
+duration
+originProcessTemplateId
+previousVersionId
+trainingProcessTemplateId
+updatedAt
+</string>
+     </void>
+     <void property="searchText">
+      <string>approvedat
+approveprocess
+approveProcessInstance
+checkedat
+client
+createdat
+deadline
+originTemplate
+previousVersion
+trainingsprocess
+updatedat
+</string>
+     </void>
+    </object>
+   </void>
+   <void method="put">
+    <string>ContentComponentTableInstances</string>
+    <object class="com.vladsch.MissingInActions.settings.BatchSearchReplace">
+     <void property="replaceText">
+      <string>contentComponentInstanceId
+</string>
+     </void>
+     <void property="searchText">
+      <string>contentComponentInstance
+</string>
+     </void>
+    </object>
+   </void>
+   <void method="put">
+    <string>ContentComponentTextInstances</string>
+    <object class="com.vladsch.MissingInActions.settings.BatchSearchReplace">
+     <void property="replaceText">
+      <string>contentComponentInstanceId
+</string>
+     </void>
+     <void property="searchText">
+      <string>contentComponentInstance
+</string>
+     </void>
+    </object>
+   </void>
+   <void method="put">
+    <string>DerivedProcesses</string>
+    <object class="com.vladsch.MissingInActions.settings.BatchSearchReplace">
+     <void property="replaceText">
+      <string>processStepTemplateId
+processTemplateId
+processTemplateId
+</string>
+     </void>
+     <void property="searchText">
+      <string>processstep
+processtemplate
+processTemplate_id
+</string>
+     </void>
+    </object>
+   </void>
+   <void method="put">
+    <string>Responsible_TaskTemplates</string>
+    <object class="com.vladsch.MissingInActions.settings.BatchSearchReplace">
+     <void property="replaceText">
+      <string>userUuid
+</string>
+     </void>
+     <void property="searchText">
+      <string>username
+</string>
+     </void>
+    </object>
+   </void>
+   <void method="put">
+    <string>TaskInstances</string>
+    <object class="com.vladsch.MissingInActions.settings.BatchSearchReplace">
+     <void property="replaceText">
+      <string>clientId
+deadlineAt
+processStepInstanceId
+updatedAt
+</string>
+     </void>
+     <void property="searchText">
+      <string>client
+deadline
+processStepInstanceID
+updatedat
+</string>
+     </void>
+    </object>
+   </void>
+   <void method="put">
+    <string>ContentComponentUserInput</string>
+    <object class="com.vladsch.MissingInActions.settings.BatchSearchReplace">
+     <void property="replaceText">
+      <string>contentComponentId
+inputTypeId
+</string>
+     </void>
+     <void property="searchText">
+      <string>contentComponent
+inputType
+</string>
+     </void>
+    </object>
+   </void>
+   <void method="put">
+    <string>ProcessStepTemplates</string>
+    <object class="com.vladsch.MissingInActions.settings.BatchSearchReplace">
+     <void property="replaceText">
+      <string>createdAt
+duration
+originStepTemplateId
+processTemplateId
+updatedAt
+processTemplateId
+</string>
+     </void>
+     <void property="searchText">
+      <string>createdat
+deadline
+origStepTemplateId
+processtemplate
+updatedat
+processTemplate_id
+</string>
+     </void>
+    </object>
+   </void>
+   <void method="put">
+    <string>ContentComponentPictureInstances</string>
+    <object class="com.vladsch.MissingInActions.settings.BatchSearchReplace">
+     <void property="replaceText">
+      <string>contentComponentInstanceId
+</string>
+     </void>
+     <void property="searchText">
+      <string>contentComponentInstance
+</string>
+     </void>
+    </object>
+   </void>
+   <void method="put">
+    <string>ContentComponentInstances</string>
+    <object class="com.vladsch.MissingInActions.settings.BatchSearchReplace">
+     <void property="replaceText">
+      <string>clientId
+contentComponentId
+createdAt
+processStepInstanceId
+contentComponentTypeId
+updatedAt
+</string>
+     </void>
+     <void property="searchText">
+      <string>client
+contentComponentID
+createdat
+processStepInstanceID
+type
+updatedat
+</string>
+     </void>
+    </object>
+   </void>
+   <void method="put">
+    <string>Informed_TaskInstances</string>
+    <object class="com.vladsch.MissingInActions.settings.BatchSearchReplace">
+     <void property="replaceText">
+      <string>taskInstanceId
+userUuid
+</string>
+     </void>
+     <void property="searchText">
+      <string>taskTemplateId
+username
+</string>
+     </void>
+    </object>
+   </void>
+   <void method="put">
+    <string>ContentComponentUsageSearchModel</string>
+    <object class="com.vladsch.MissingInActions.settings.BatchSearchReplace">
+     <void property="replaceText">
+      <string>contentComponentId
+processStepId
+</string>
+     </void>
+     <void property="searchText">
+      <string>contentComponent_id
+processStep_id
+</string>
+     </void>
+    </object>
+   </void>
+   <void method="put">
+    <string>Consulted_TaskInstances</string>
+    <object class="com.vladsch.MissingInActions.settings.BatchSearchReplace">
+     <void property="replaceText">
+      <string>taskInstanceId
+userUuid
+</string>
+     </void>
+     <void property="searchText">
+      <string>taskTemplateId
+username
+</string>
+     </void>
+    </object>
+   </void>
+   <void method="put">
+    <string>Responsible_TaskInstances</string>
+    <object class="com.vladsch.MissingInActions.settings.BatchSearchReplace">
+     <void property="replaceText">
+      <string>taskInstanceId
+userUuid
+</string>
+     </void>
+     <void property="searchText">
+      <string>taskTemplateId
+username
+</string>
+     </void>
+    </object>
+   </void>
+   <void method="put">
+    <string>Responsible_ProcessStepTemplates</string>
+    <object class="com.vladsch.MissingInActions.settings.BatchSearchReplace">
+     <void property="replaceText">
+      <string>userUuid
+</string>
+     </void>
+     <void property="searchText">
+      <string>username
+</string>
+     </void>
+    </object>
+   </void>
+   <void method="put">
+    <string>Accountable_ProcessInstance</string>
+    <object class="com.vladsch.MissingInActions.settings.BatchSearchReplace">
+     <void property="replaceText">
+      <string>userUuid
+</string>
+     </void>
+     <void property="searchText">
+      <string>username
+</string>
+     </void>
+    </object>
+   </void>
+   <void method="put">
+    <string>ContentComponentRadioButton</string>
+    <object class="com.vladsch.MissingInActions.settings.BatchSearchReplace">
+     <void property="replaceText">
+      <string>contentComponentId
+</string>
+     </void>
+     <void property="searchText">
+      <string>contentComponent
+</string>
+     </void>
+    </object>
+   </void>
+   <void method="put">
+    <string>MiaDemo</string>
+    <object class="com.vladsch.MissingInActions.settings.BatchSearchReplace">
+     <void property="optionsText">
+      <string>
+
+
+
+</string>
+     </void>
+     <void property="replaceText">
+      <string>add
+fix
+change
+NotFound
+</string>
+     </void>
+     <void property="searchText">
+      <string>Add
+Fix
+Change
+NotFound
+</string>
+     </void>
+    </object>
+   </void>
+   <void method="put">
+    <string>Accountable_TaskInstances</string>
+    <object class="com.vladsch.MissingInActions.settings.BatchSearchReplace">
+     <void property="replaceText">
+      <string>taskInstanceId
+userUuid
+</string>
+     </void>
+     <void property="searchText">
+      <string>taskTemplateId
+username
+</string>
+     </void>
+    </object>
+   </void>
+   <void method="put">
+    <string>ContentComponentPicture</string>
+    <object class="com.vladsch.MissingInActions.settings.BatchSearchReplace">
+     <void property="replaceText">
+      <string>contentComponentId
+</string>
+     </void>
+     <void property="searchText">
+      <string>contentComponent
+</string>
+     </void>
+    </object>
+   </void>
+   <void method="put">
+    <string>Responsible_ProcessInstance</string>
+    <object class="com.vladsch.MissingInActions.settings.BatchSearchReplace">
+     <void property="replaceText">
+      <string>userUuid
+</string>
+     </void>
+     <void property="searchText">
+      <string>username
+</string>
+     </void>
+    </object>
+   </void>
+   <void method="put">
+    <string>ContentComponent_ProcessStepTemplate</string>
+    <object class="com.vladsch.MissingInActions.settings.BatchSearchReplace">
+     <void property="replaceText">
+      <string>contentComponentId
+processStepTemplateId
+</string>
+     </void>
+     <void property="searchText">
+      <string>contentComponent_id
+processStep_id
+</string>
+     </void>
+    </object>
+   </void>
+   <void method="put">
+    <string>Informed_ProcessTemplates</string>
+    <object class="com.vladsch.MissingInActions.settings.BatchSearchReplace">
+     <void property="replaceText">
+      <string>userUuid
+</string>
+     </void>
+     <void property="searchText">
+      <string>username
+</string>
+     </void>
+    </object>
+   </void>
+   <void method="put">
+    <string>TaskTemplates</string>
+    <object class="com.vladsch.MissingInActions.settings.BatchSearchReplace">
+     <void property="replaceText">
+      <string>approvedAt
+approveProcessTemplateId
+checkedAt
+clientId
+createdAt
+duration
+originProcessTemplateId
+previousVersionId
+trainingProcessTemplateId
+updatedAt
+</string>
+     </void>
+     <void property="searchText">
+      <string>approvedat
+approveprocess
+checkedat
+client
+createdat
+deadline
+originTemplate
+previousVersion
+trainingsprocess
+updatedat
+</string>
+     </void>
+    </object>
+   </void>
+   <void method="put">
+    <string>Changelog</string>
+    <object class="com.vladsch.MissingInActions.settings.BatchSearchReplace">
+     <void property="replaceText">
+      <string>createdAt
+</string>
+     </void>
+     <void property="searchText">
+      <string>createdat
+</string>
+     </void>
+    </object>
+   </void>
+   <void method="put">
+    <string>Consulted_TaskTemplates</string>
+    <object class="com.vladsch.MissingInActions.settings.BatchSearchReplace">
+     <void property="replaceText">
+      <string>userUuid
+</string>
+     </void>
+     <void property="searchText">
+      <string>username
+</string>
+     </void>
+    </object>
+   </void>
+   <void method="put">
+    <string>AuditLogs</string>
+    <object class="com.vladsch.MissingInActions.settings.BatchSearchReplace">
+     <void property="replaceText">
+      <string>createdAt
+userUuid
+</string>
+     </void>
+     <void property="searchText">
+      <string>createdat
+user
+</string>
+     </void>
+    </object>
+   </void>
+   <void method="put">
+    <string>ContentComponentRadioButtonInstances</string>
+    <object class="com.vladsch.MissingInActions.settings.BatchSearchReplace">
+     <void property="replaceText">
+      <string>checkedAt
+contentComponentInstanceId
+userUuid
+</string>
+     </void>
+     <void property="searchText">
+      <string>checkedDate
+contentComponentInstance
+user
+</string>
+     </void>
+    </object>
+   </void>
+   <void method="put">
+    <string>Accountable_ProcessTemplates</string>
+    <object class="com.vladsch.MissingInActions.settings.BatchSearchReplace">
+     <void property="replaceText">
+      <string>userUuid
+</string>
+     </void>
+     <void property="searchText">
+      <string>username
+</string>
+     </void>
+    </object>
+   </void>
+   <void method="put">
+    <string>Clients</string>
+    <object class="com.vladsch.MissingInActions.settings.BatchSearchReplace">
+     <void property="replaceText">
+      <string>createdAt
+updatedAt
+</string>
+     </void>
+     <void property="searchText">
+      <string>createdat
+updatedat
+</string>
+     </void>
+    </object>
+   </void>
+   <void method="put">
+    <string>Consulted_ProcessInstance</string>
+    <object class="com.vladsch.MissingInActions.settings.BatchSearchReplace">
+     <void property="replaceText">
+      <string>userUuid
+</string>
+     </void>
+     <void property="searchText">
+      <string>username
+</string>
+     </void>
+    </object>
+   </void>
+   <void method="put">
+    <string>Informed_ProcessInstance</string>
+    <object class="com.vladsch.MissingInActions.settings.BatchSearchReplace">
+     <void property="replaceText">
+      <string>userUuid
+</string>
+     </void>
+     <void property="searchText">
+      <string>username
+</string>
+     </void>
+    </object>
+   </void>
+   <void method="put">
+    <string>ProcessInstances</string>
+    <object class="com.vladsch.MissingInActions.settings.BatchSearchReplace">
+     <void property="replaceText">
+      <string>deadlineAt
+doneAt
+updatedAt
+userUuid
+</string>
+     </void>
+     <void property="searchText">
+      <string>deadline
+doneDate
+updatedat
+user
+</string>
+     </void>
+    </object>
+   </void>
+   <void method="put">
+    <string>ContentComponentTable</string>
+    <object class="com.vladsch.MissingInActions.settings.BatchSearchReplace">
+     <void property="replaceText">
+      <string>contentComponentId
+</string>
+     </void>
+     <void property="searchText">
+      <string>contentComponent
+</string>
+     </void>
+    </object>
+   </void>
+   <void method="put">
+    <string>ContentComponentChecklist</string>
+    <object class="com.vladsch.MissingInActions.settings.BatchSearchReplace">
+     <void property="replaceText">
+      <string>contentComponentId
+</string>
+     </void>
+     <void property="searchText">
+      <string>contentComponent
+</string>
+     </void>
+    </object>
+   </void>
+   <void method="put">
+    <string>ProcessPrerequisiteProcessTemplate</string>
+    <object class="com.vladsch.MissingInActions.settings.BatchSearchReplace">
+     <void property="replaceText">
+      <string>processPrerequisiteId
+processTemplateId
+processTemplateId
+</string>
+     </void>
+     <void property="searchText">
+      <string>id
+processtemplate
+processTemplate_id
+</string>
+     </void>
+    </object>
+   </void>
+   <void method="put">
+    <string>ContentComponentText</string>
+    <object class="com.vladsch.MissingInActions.settings.BatchSearchReplace">
+     <void property="replaceText">
+      <string>contentComponentId
+</string>
+     </void>
+     <void property="searchText">
+      <string>contentComponent
+</string>
+     </void>
+    </object>
+   </void>
+   <void method="put">
+    <string>Consulted_ProcessTemplates</string>
+    <object class="com.vladsch.MissingInActions.settings.BatchSearchReplace">
+     <void property="replaceText">
+      <string>userUuid
+</string>
+     </void>
+     <void property="searchText">
+      <string>username
+</string>
+     </void>
+    </object>
+   </void>
+   <void method="put">
+    <string>ContentComponentUserInputInstances</string>
+    <object class="com.vladsch.MissingInActions.settings.BatchSearchReplace">
+     <void property="replaceText">
+      <string>contentComponentInstanceId
+inputAt
+inputTypeId
+userUuid
+</string>
+     </void>
+     <void property="searchText">
+      <string>contentComponentInstance
+inputDate
+inputType
+user
+</string>
+     </void>
+    </object>
+   </void>
+  </void>
+  <void property="batchSearchReplace">
+   <void property="optionsText">
+    <string>
+
+
+
+
+
+
+?
+?
+?
+?
+?
+?
+?
+?
+?
+?
+?
+
+
+
+
+
+
+
+</string>
+   </void>
+   <void property="replaceText">
+    <string>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</string>
+   </void>
+   <void property="searchText">
+    <string>skipInlineStrong
+skipInlineEmphasis
+skipInlineCode
+skipInlineDel
+skipInlineIns
+skipInlineSub
+skipInlineSup
+_a_
+_b_
+_c_
+_d_
+_e_
+_f_
+_g_
+_h_
+_i_
+_j_
+_k_
+extInlineStrong
+extInlineEmphasis
+extInlineCode
+extInlineDel
+extInlineIns
+extInlineSub
+extInlineSup
+</string>
+   </void>
+  </void>
+ </object>
+</java>

@@ -6,6 +6,7 @@ import org.junit.runners.Suite;
 @Suite.SuiteClasses({
         ComboAdmonitionSpecTest.class,
         ComboAdmonitionFormatterSpecTest.class,
+        ComboAdmonitionTranslationFormatterSpecTest.class,
 })
 public class ExtAdmonitionTestSuite {
 }

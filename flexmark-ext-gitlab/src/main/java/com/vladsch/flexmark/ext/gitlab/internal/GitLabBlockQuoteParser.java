@@ -43,7 +43,7 @@ public class GitLabBlockQuoteParser extends AbstractBlockParser {
         final int index = state.getIndex();
 
         BasedSequence line = state.getLineWithEOL();
-        final Matcher matcher = GIT_LAB_BLOCK_END.matcher(line);
+        final Matcher matcher = GIT_LAB_BLOCK_END.matcher(line.subSequence(index));
         if (!matcher.matches()) {
             return BlockContinue.atIndex(index);
         } else {

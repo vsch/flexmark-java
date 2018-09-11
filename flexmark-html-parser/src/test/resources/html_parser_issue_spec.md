@@ -689,6 +689,7 @@ Primarily so we stay compatible with Java 7." style="box-sizing: border-box; bac
   * [Auto Line Selections](https://github.com/vsch/MissingInActions#auto-line-selections)
 
 <br />
+
 .
 <ul style="box-sizing: border-box; padding-left: 2em; margin-top: 0px; margin-bottom: 16px; color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px;">
   <li style="box-sizing: border-box;"><a href="https://github.com/vsch/MissingInActions#version-083---bug-fix-and-improvement-release" style="box-sizing: border-box; background-color: transparent; color: rgb(64, 120, 192); text-decoration: none;">Version 0.8.3 - Bug Fix and Improvement Release</a></li>
@@ -716,6 +717,7 @@ Primarily so we stay compatible with Java 7." style="box-sizing: border-box; bac
   * [Auto Line Selections](https://github.com/vsch/MissingInActions#auto-line-selections)
 
 <br />
+
 .
 <ul style="box-sizing: border-box; padding-left: 2em; margin-top: 0px; margin-bottom: 16px; color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px;"><li style="box-sizing: border-box;"><a href="https://github.com/vsch/MissingInActions#version-083---bug-fix-and-improvement-release" style="box-sizing: border-box; background-color: transparent; color: rgb(64, 120, 192); text-decoration: none;">Version 0.8.3 - Bug Fix and Improvement Release</a></li><li style="box-sizing: border-box; margin-top: 0.25em;"><a href="https://github.com/vsch/MissingInActions#version-082---enhanced-paste-from-history" style="box-sizing: border-box; background-color: transparent; color: rgb(64, 120, 192); text-decoration: none;">Version 0.8.2 - Enhanced Paste From History</a></li><li style="box-sizing: border-box; margin-top: 0.25em;"><a href="https://github.com/vsch/MissingInActions#version-080---mia-has-come-of-age" style="box-sizing: border-box; background-color: transparent; color: rgb(64, 120, 192); text-decoration: none;">Version 0.8.0 - Mia has come of age!</a></li><li style="box-sizing: border-box; margin-top: 0.25em;"><a href="https://github.com/vsch/MissingInActions#why-do-i-need-mia" style="box-sizing: border-box; background-color: transparent; color: rgb(64, 120, 192); text-decoration: none;">Why Do I Need Mia?</a><ul style="box-sizing: border-box; padding-left: 2em; margin-top: 0px; margin-bottom: 0px;"><li style="box-sizing: border-box;"><a href="https://github.com/vsch/MissingInActions#what-you-didnt-know-you-were-missing" style="box-sizing: border-box; background-color: transparent; color: rgb(64, 120, 192); text-decoration: none;">What you didn't know you were missing</a></li><li style="box-sizing: border-box; margin-top: 0.25em;"><a href="https://github.com/vsch/MissingInActions#auto-indent-lines-after-move-lines-updown" style="box-sizing: border-box; background-color: transparent; color: rgb(64, 120, 192); text-decoration: none;">Auto Indent Lines after Move Lines Up/Down</a></li><li style="box-sizing: border-box; margin-top: 0.25em;"><a href="https://github.com/vsch/MissingInActions#auto-line-selections" style="box-sizing: border-box; background-color: transparent; color: rgb(64, 120, 192); text-decoration: none;">Auto Line Selections</a></li></ul></li></ul><br class="Apple-interchange-newline">
 ````````````````````````````````
@@ -728,6 +730,7 @@ don't create a multi-line image url if no new line after ?
 ===================================================================================================================================================================================================
 
 <br />
+
 .
 <meta charset='utf-8'><h1 style="box-sizing: border-box; font-size: 2em; margin-top: 0px !important; margin-right: 0px; margin-bottom: 16px; margin-left: 0px; font-weight: 600; line-height: 1.25; padding-bottom: 0.3em; border-bottom: 1px solid rgb(238, 238, 238); position: relative; padding-right: 0.8em; cursor: pointer; color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px;"><a href="https://github.com/vsch/MissingInActions/raw/master/resources/icons/Mia_logo@2x.png?" target="_blank" style="box-sizing: border-box; background-color: transparent; color: rgb(64, 120, 192); text-decoration: none;"><img src="https://github.com/vsch/MissingInActions/raw/master/resources/icons/Mia_logo@2x.png?" height="32" width="54" border="0" align="absmiddle" style="box-sizing: content-box; border-style: none; max-width: 100%; background-color: rgb(255, 255, 255);"></a>Missing In Actions</h1>
 <br class="Apple-interchange-newline">
@@ -810,7 +813,7 @@ Feature
 :   [KT-9851](/issue/KT-9851)
     --- Create "Extract/Introduce lateinit var" Refactoring
 :   [KT-10346](/issue/KT-10346)
-    --- Support `||` in when conditions in "Introduce subject" intention
+    --- Support \`\|\|\` in when conditions in "Introduce subject" intention
 :   [KT-10642](/issue/KT-10642)
     --- IntelliJ plugin: Support KDoc syntax for all types of comments
 :   [KT-11050](/issue/KT-11050)
@@ -824,7 +827,7 @@ Feature
 :   [KT-12348](/issue/KT-12348)
     --- Rename class refactoring: propose to rename usages in comments
 :   [KT-12471](/issue/KT-12471)
-    --- Allow initializing `const` properties with enum constants
+    --- Allow initializing \`const\` properties with enum constants
 :   [KT-12713](/issue/KT-12713)
     --- Either/ Result to handle errors without exceptions
 :   [KT-12756](/issue/KT-12756)
@@ -1424,6 +1427,7 @@ Examples
 *** ** * ** ***
 
 <br />
+
 .
 <meta charset='utf-8'><h4 style="box-sizing: border-box; font-family: Lato, Helvetica, Arial, sans-serif; font-weight: 300; line-height: 1.1; color: rgb(10, 10, 10); margin-top: 10px; margin-bottom: 10px; font-size: 28px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial;"><span class="mw-headline" id="G2_.26_G3:_Controlled_Arc_Move" style="box-sizing: border-box;">G2 &amp; G3: Controlled Arc Move</span><span class="mw-editsection" style="box-sizing: border-box; user-select: none; font-size: small; font-weight: normal; margin-left: 1em; vertical-align: baseline; line-height: 1em; display: inline-block;"><span class="mw-editsection-bracket" style="box-sizing: border-box;">[</span><a
     href="https://duet3d.com/w2/index.php?title=G-code&amp;action=edit&amp;section=12" title="Edit section: G2 &amp; G3: Controlled Arc Move" style="box-sizing: border-box; background: transparent; color: rgb(35, 107, 155); text-decoration: none; transition: color 250ms ease-out, background-color 250ms ease-out, border-color 250ms ease-out; cursor: pointer;">edit</a><span class="mw-editsection-bracket" style="box-sizing: border-box;">]</span></span></h4><p
@@ -1471,6 +1475,7 @@ Examples
 *** ** * ** ***
 
 <br />
+
 .
 <meta charset='utf-8'><h4 style="box-sizing: border-box; font-family: Lato, Helvetica, Arial, sans-serif; font-weight: 300; line-height: 1.1; color: rgb(10, 10, 10); margin-top: 10px; margin-bottom: 10px; font-size: 28px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial;"><span class="mw-headline" id="G2_.26_G3:_Controlled_Arc_Move" style="box-sizing: border-box;">G2 &amp; G3: Controlled Arc Move</span><span class="mw-editsection" style="box-sizing: border-box; user-select: none; font-size: small; font-weight: normal; margin-left: 1em; vertical-align: baseline; line-height: 1em; display: inline-block;"><span class="mw-editsection-bracket" style="box-sizing: border-box;">[</span><a href="https://duet3d.com/w2/index.php?title=G-code&amp;action=edit&amp;section=12" title="Edit section: G2 &amp; G3: Controlled Arc Move" style="box-sizing: border-box; background: transparent; color: rgb(35, 107, 155); text-decoration: none; transition: color 250ms ease-out, background-color 250ms ease-out, border-color 250ms ease-out; cursor: pointer;">edit</a><span class="mw-editsection-bracket" style="box-sizing: border-box;">]</span></span></h4><p style="box-sizing: border-box; margin: 0px 0px 10px; line-height: 1.5; color: rgb(10, 10, 10); font-family: Lato, Helvetica, Arial, sans-serif; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 300; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial;"><b style="box-sizing: border-box; font-weight: bold;">Implemented in beta in 1.17c+2</b></p><dl style="box-sizing: border-box; margin-top: 0px; margin-bottom: 20px; color: rgb(10, 10, 10); font-family: Lato, Helvetica, Arial, sans-serif; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 300; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial;"><dt style="box-sizing: border-box; line-height: 1.25; font-weight: bold;">Usage</dt><dd style="box-sizing: border-box; line-height: 1.25; margin-left: 1.6em; margin-right: 0px;">G2 Xnnn Ynnn Innn Jnnn Ennn Fnnn<span> </span><i style="box-sizing: border-box;">(Clockwise Arc)</i></dd><dd style="box-sizing: border-box; line-height: 1.25; margin-left: 1.6em; margin-right: 0px;">G3 Xnnn Ynnn Innn Jnnn Ennn Fnnn<span> </span><i style="box-sizing: border-box;">(Counter-Clockwise Arc)</i></dd><dt style="box-sizing: border-box; line-height: 1.25; font-weight: bold;">Parameters</dt><dd style="box-sizing: border-box; line-height: 1.25; margin-left: 1.6em; margin-right: 0px;"><b style="box-sizing: border-box; font-weight: bold;">Xnnn</b><span> </span>The position to move to on the X axis.</dd><dd style="box-sizing: border-box; line-height: 1.25; margin-left: 1.6em; margin-right: 0px;"><b style="box-sizing: border-box; font-weight: bold;">Ynnn</b><span> </span>The position to move to on the Y axis.</dd><dd style="box-sizing: border-box; line-height: 1.25; margin-left: 1.6em; margin-right: 0px;"><b style="box-sizing: border-box; font-weight: bold;">Innn</b><span> </span>The point in X space from the current X position to maintain a constant distance from.</dd><dd style="box-sizing: border-box; line-height: 1.25; margin-left: 1.6em; margin-right: 0px;"><b style="box-sizing: border-box; font-weight: bold;">Jnnn</b><span> </span>The point in Y space from the current Y position to maintain a constant distance from.</dd><dd style="box-sizing: border-box; line-height: 1.25; margin-left: 1.6em; margin-right: 0px;"><b style="box-sizing: border-box; font-weight: bold;">Ennn</b><span> </span>The amount to extrude between the starting point and ending point.</dd><dd style="box-sizing: border-box; line-height: 1.25; margin-left: 1.6em; margin-right: 0px;"><b style="box-sizing: border-box; font-weight: bold;">Fnnn</b><span> </span>The feedrate per minute of the move between the starting point and ending point (if supplied).</dd><dt style="box-sizing: border-box; line-height: 1.25; font-weight: bold;">Examples</dt><dd style="box-sizing: border-box; line-height: 1.25; margin-left: 1.6em; margin-right: 0px;">G2 X90.6 Y13.8 I5 J10 E22.4<span> </span><i style="box-sizing: border-box;">(Move in a Clockwise arc from the current point to point (X=90.6,Y=13.8), with a center point at (X=current_X+5, Y=current_Y+10), extruding 22.4mm of material between starting and stopping)</i></dd><dd style="box-sizing: border-box; line-height: 1.25; margin-left: 1.6em; margin-right: 0px;">G3 X90.6 Y13.8 I5 J10 E22.4<span> </span><i style="box-sizing: border-box;">(Move in a Counter-Clockwise arc from the current point to point (X=90.6,Y=13.8), with a center point at (X=current_X+5, Y=current_Y+10), extruding 22.4mm of material between starting and stopping)</i></dd></dl><hr style="box-sizing: content-box; height: 0px; margin-top: 20px; margin-bottom: 20px; border-width: 1px 0px 0px; border-right-style: initial; border-bottom-style: initial; border-left-style: initial; border-right-color: initial; border-bottom-color: initial; border-left-color: initial; border-image: initial; border-top-style: solid; border-top-color: rgb(238, 238, 238); color: rgb(10, 10, 10); font-family: Lato, Helvetica, Arial, sans-serif; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 300; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial;"><br class="Apple-interchange-newline">
 ````````````````````````````````
@@ -1504,20 +1509,20 @@ make sure links do the same
 ````````````````````````````````
 
 
-## Issue
+## Issue pre/tt
 
-Issue #, convert <pre><tt> to indented code
+Issue pre/tt, convert <pre><tt> to indented code
 
-```````````````````````````````` example Issue: 1
+```````````````````````````````` example Issue pre/tt: 1
 Test
 
     
             _____     _           
            / ____|   (_)          
      _   _| |     ___ _ _ __ ___  
-    | | | | |    / __| | '_ ` _ \\\\ 
-    | |_| | |____\\\\__ \\\\ | | | | | |
-    \\\\ ._,_|\\\\_____|___/_|_| |_| |_|
+    | | | | |    / __| | '_ ` _ \\ 
+    | |_| | |____\\__ \\ | | | | | |
+    \\ ._,_|\\_____|___/_|_| |_| |_|
     | |                           
     |_|                           
 
@@ -1554,5 +1559,39 @@ skip attributes
 [vsch](https://github.com/vsch) commented [on Jun 29](https://github.com/vsch/idea-multimarkdown/issues/610#issuecomment-401358065)
 .
 <h3 class="timeline-comment-header-text f5 text-normal" style="box-sizing: border-box; margin-top: 0px; margin-bottom: 0px; font-size: 14px !important; font-weight: 400 !important; max-width: 78%; padding-top: 10px; padding-bottom: 10px; caret-color: rgb(88, 96, 105); color: rgb(88, 96, 105); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;; font-style: normal; font-variant-caps: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; background-color: rgb(241, 248, 255); text-decoration: none;"><strong class="css-truncate" style="box-sizing: border-box; font-weight: 600;"><a class="author text-inherit css-truncate-target" data-hovercard-user-id="10299086" data-octo-click="hovercard-link-click" data-octo-dimensions="link_type:self" href="https://github.com/vsch" aria-describedby="hovercard-aria-description" style="box-sizing: border-box; background-color: transparent; color: rgb(88, 96, 105); text-decoration: none; display: inline-block; max-width: 125px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: top;">vsch</a><span class="Apple-converted-space"> </span></strong>commented<span class="Apple-converted-space"> </span><a href="https://github.com/vsch/idea-multimarkdown/issues/610#issuecomment-401358065" class="timestamp" style="box-sizing: border-box; background-color: transparent; color: inherit; text-decoration: none; white-space: nowrap;"><relative-time datetime="2018-06-29T13:42:53Z" title="Jun 29, 2018, 9:42 AM GMT-4" style="box-sizing: border-box;">on Jun 29</relative-time></a></h3>
+````````````````````````````````
+
+
+## Issue 268
+
+Issue #268
+
+```````````````````````````````` example Issue 268: 1
+abc\|\[\]
+
+| th\| |
+|------|
+| tr\| |
+| ---- |
+[\[\]caption]
+
+.
+<html>
+<body>
+abc|[]
+<table>
+  <caption>[]caption</caption>
+  <tr>
+    <th>th|</th>
+  </tr>
+  <tr>
+    <td>tr|</td>
+  </tr>
+  <tr>
+    <td>----</td>
+  </tr>
+</table>
+</body>
+</html>
 ````````````````````````````````
 

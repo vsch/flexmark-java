@@ -1,7 +1,8 @@
 package com.vladsch.flexmark.ext.gitlab;
 
-import com.vladsch.flexmark.ast.Block;
-import com.vladsch.flexmark.ast.BlockContent;
+import com.vladsch.flexmark.ast.*;
+import com.vladsch.flexmark.parser.ListOptions;
+import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 import java.util.List;
@@ -9,7 +10,7 @@ import java.util.List;
 /**
  * A GitLab block node
  */
-public class GitLabBlockQuote extends Block {
+public class GitLabBlockQuote extends Block implements ParagraphContainer {
     private BasedSequence openingMarker = BasedSequence.NULL;
     private BasedSequence openingTrailing = BasedSequence.NULL;
     private BasedSequence closingMarker = BasedSequence.NULL;
@@ -26,6 +27,16 @@ public class GitLabBlockQuote extends Block {
     @Override
     public BasedSequence[] getSegments() {
         return new BasedSequence[] { openingMarker, openingTrailing, closingMarker, closingTrailing };
+    }
+
+    @Override
+    public boolean isParagraphEndWrappingDisabled(final Paragraph node) {
+        return node == getLastChild() || node.getNext() instanceof GitLabBlockQuote;
+    }
+
+    @Override
+    public boolean isParagraphStartWrappingDisabled(final Paragraph node) {
+        return node == getFirstChild() || node.getPrevious() instanceof GitLabBlockQuote;
     }
 
     public GitLabBlockQuote() {

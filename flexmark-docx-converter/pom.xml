@@ -5,7 +5,7 @@
     <parent>
         <groupId>com.vladsch.flexmark</groupId>
         <artifactId>flexmark-java</artifactId>
-        <version>0.34.28</version>
+        <version>0.34.30</version>
     </parent>
 
     <artifactId>flexmark-docx-converter</artifactId>
@@ -80,9 +80,13 @@
         </dependency>
         <dependency>
             <groupId>com.vladsch.flexmark</groupId>
+            <artifactId>flexmark-ext-gitlab</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.vladsch.flexmark</groupId>
             <artifactId>flexmark-ext-autolink</artifactId>
             <scope>test</scope>
-            </dependency>
+        </dependency>
         <dependency>
             <groupId>org.docx4j</groupId>
             <artifactId>docx4j</artifactId>

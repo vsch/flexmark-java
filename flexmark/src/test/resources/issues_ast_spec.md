@@ -1283,3 +1283,72 @@ Document[0, 60]
 ````````````````````````````````
 
 
+## Issue xxxx
+
+Issue xxxx, leading spaces tab not part of indented code, which is correct
+
+```````````````````````````````` example Issue xxxx: 1
+    @Test
+    public void testPipeInTable() {
+.
+<pre><code>@Test
+public void testPipeInTable() {
+</code></pre>
+.
+Document[0, 46]
+  IndentedCodeBlock[4, 46]
+````````````````````````````````
+
+
+```````````````````````````````` example Issue xxxx: 2
+ →@Test
+ →public void testPipeInTable() {
+.
+<pre><code>@Test
+public void testPipeInTable() {
+</code></pre>
+.
+Document[0, 42]
+  IndentedCodeBlock[2, 42]
+````````````````````````````````
+
+
+```````````````````````````````` example Issue xxxx: 3
+  →@Test
+  →public void testPipeInTable() {
+.
+<pre><code>@Test
+public void testPipeInTable() {
+</code></pre>
+.
+Document[0, 44]
+  IndentedCodeBlock[3, 44]
+````````````````````````````````
+
+
+```````````````````````````````` example Issue xxxx: 4
+   →@Test
+   →public void testPipeInTable() {
+.
+<pre><code>@Test
+public void testPipeInTable() {
+</code></pre>
+.
+Document[0, 46]
+  IndentedCodeBlock[4, 46]
+````````````````````````````````
+
+
+```````````````````````````````` example Issue xxxx: 5
+    →@Test
+    →public void testPipeInTable() {
+.
+<pre><code>→@Test
+→public void testPipeInTable() {
+</code></pre>
+.
+Document[0, 48]
+  IndentedCodeBlock[4, 48]
+````````````````````````````````
+
+

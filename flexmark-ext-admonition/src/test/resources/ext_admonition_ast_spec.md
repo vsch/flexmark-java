@@ -318,9 +318,165 @@ Document[0, 41]
 ````````````````````````````````
 
 
-with multiple children
+in block quote
 
 ```````````````````````````````` example Basic Tests: 10
+> ???+ note ""
+>     first child paragraph  
+.
+<svg xmlns="http://www.w3.org/2000/svg" class="adm-hidden">
+  <symbol id="adm-note">
+    <svg enable-background="new 0 0 24 24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g fill="currentColor"><path d="m15.4 5h4.5v2.7h-4.5z" transform="matrix(-.7071 -.7071 .7071 -.7071 25.7188 23.288)"/><path d="m13.9 7 3.1 3.1-9.5 9.6-3.5.3.3-3.5z"/></g></svg>
+  </symbol>
+</svg>
+<blockquote>
+  <div class="adm-block adm-note">
+  <div class="adm-body">
+    <p>first child paragraph</p>
+  </div>
+  </div>
+</blockquote>
+.
+Document[0, 45]
+  BlockQuote[0, 45] marker:[0, 1, ">"]
+    AdmonitionBlock[2, 45] open:[2, 6, "???+"] info:[7, 11, "note"] titleOpen:[12, 13, "\""] title:[13, 13] titleClose:[13, 14, "\""]
+      Paragraph[21, 45]
+        Text[21, 42] chars:[21, 42, "first … graph"]
+````````````````````````````````
+
+
+indented 1
+
+```````````````````````````````` example Basic Tests: 11
+ ???+ note ""
+    first child paragraph  
+    
+.
+<svg xmlns="http://www.w3.org/2000/svg" class="adm-hidden">
+  <symbol id="adm-note">
+    <svg enable-background="new 0 0 24 24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g fill="currentColor"><path d="m15.4 5h4.5v2.7h-4.5z" transform="matrix(-.7071 -.7071 .7071 -.7071 25.7188 23.288)"/><path d="m13.9 7 3.1 3.1-9.5 9.6-3.5.3.3-3.5z"/></g></svg>
+  </symbol>
+</svg>
+<div class="adm-block adm-note">
+<div class="adm-body">
+  <p>first child paragraph</p>
+</div>
+</div>
+.
+Document[0, 47]
+  AdmonitionBlock[1, 42] open:[1, 5, "???+"] info:[6, 10, "note"] titleOpen:[11, 12, "\""] title:[12, 12] titleClose:[12, 13, "\""]
+    Paragraph[18, 42] isTrailingBlankLine
+      Text[18, 39] chars:[18, 39, "first … graph"]
+````````````````````````````````
+
+
+indented 2
+
+```````````````````````````````` example Basic Tests: 12
+  ???+ note ""
+    first child paragraph  
+    
+.
+<svg xmlns="http://www.w3.org/2000/svg" class="adm-hidden">
+  <symbol id="adm-note">
+    <svg enable-background="new 0 0 24 24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g fill="currentColor"><path d="m15.4 5h4.5v2.7h-4.5z" transform="matrix(-.7071 -.7071 .7071 -.7071 25.7188 23.288)"/><path d="m13.9 7 3.1 3.1-9.5 9.6-3.5.3.3-3.5z"/></g></svg>
+  </symbol>
+</svg>
+<div class="adm-block adm-note">
+<div class="adm-body">
+  <p>first child paragraph</p>
+</div>
+</div>
+.
+Document[0, 48]
+  AdmonitionBlock[2, 43] open:[2, 6, "???+"] info:[7, 11, "note"] titleOpen:[12, 13, "\""] title:[13, 13] titleClose:[13, 14, "\""]
+    Paragraph[19, 43] isTrailingBlankLine
+      Text[19, 40] chars:[19, 40, "first … graph"]
+````````````````````````````````
+
+
+indented 3
+
+```````````````````````````````` example Basic Tests: 13
+   ???+ note ""
+    first child paragraph  
+    
+.
+<svg xmlns="http://www.w3.org/2000/svg" class="adm-hidden">
+  <symbol id="adm-note">
+    <svg enable-background="new 0 0 24 24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g fill="currentColor"><path d="m15.4 5h4.5v2.7h-4.5z" transform="matrix(-.7071 -.7071 .7071 -.7071 25.7188 23.288)"/><path d="m13.9 7 3.1 3.1-9.5 9.6-3.5.3.3-3.5z"/></g></svg>
+  </symbol>
+</svg>
+<div class="adm-block adm-note">
+<div class="adm-body">
+  <p>first child paragraph</p>
+</div>
+</div>
+.
+Document[0, 49]
+  AdmonitionBlock[3, 44] open:[3, 7, "???+"] info:[8, 12, "note"] titleOpen:[13, 14, "\""] title:[14, 14] titleClose:[14, 15, "\""]
+    Paragraph[20, 44] isTrailingBlankLine
+      Text[20, 41] chars:[20, 41, "first … graph"]
+````````````````````````````````
+
+
+indented 4
+
+```````````````````````````````` example Basic Tests: 14
+    ???+ note ""
+        first child paragraph  
+    
+.
+<pre><code>???+ note &quot;&quot;
+    first child paragraph  
+</code></pre>
+.
+Document[0, 54]
+  IndentedCodeBlock[4, 49]
+````````````````````````````````
+
+
+nested
+
+```````````````````````````````` example Basic Tests: 15
+???+ note ""
+    first child paragraph  
+    
+    !!! note
+        embedded
+.
+<svg xmlns="http://www.w3.org/2000/svg" class="adm-hidden">
+  <symbol id="adm-note">
+    <svg enable-background="new 0 0 24 24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g fill="currentColor"><path d="m15.4 5h4.5v2.7h-4.5z" transform="matrix(-.7071 -.7071 .7071 -.7071 25.7188 23.288)"/><path d="m13.9 7 3.1 3.1-9.5 9.6-3.5.3.3-3.5z"/></g></svg>
+  </symbol>
+</svg>
+<div class="adm-block adm-note">
+<div class="adm-body">
+  <p>first child paragraph</p>
+  <div class="adm-block adm-note">
+  <div class="adm-heading">
+  <svg class="adm-icon"><use xlink:href="#adm-note" /></svg><span>Note</span>
+  </div>
+  <div class="adm-body">
+    <p>embedded</p>
+  </div>
+  </div>
+</div>
+</div>
+.
+Document[0, 76]
+  AdmonitionBlock[0, 76] open:[0, 4, "???+"] info:[5, 9, "note"] titleOpen:[10, 11, "\""] title:[11, 11] titleClose:[11, 12, "\""]
+    Paragraph[17, 41] isTrailingBlankLine
+      Text[17, 38] chars:[17, 38, "first … graph"]
+    AdmonitionBlock[50, 76] open:[50, 53, "!!!"] info:[54, 58, "note"]
+      Paragraph[67, 76]
+        Text[67, 75] chars:[67, 75, "embedded"]
+````````````````````````````````
+
+
+with multiple children
+
+```````````````````````````````` example Basic Tests: 16
 !!! note "Title" 
 
     ## Heading 2
@@ -394,7 +550,7 @@ Document[0, 180]
 
 collapsed with multiple children
 
-```````````````````````````````` example Basic Tests: 11
+```````````````````````````````` example Basic Tests: 17
 ??? example 
 
     ## Heading 2
@@ -468,7 +624,7 @@ Document[0, 175]
 
 with lazy continuation of first paragraph
 
-```````````````````````````````` example Basic Tests: 12
+```````````````````````````````` example Basic Tests: 18
 !!! note
 lazy continuation 
 .
@@ -495,7 +651,7 @@ Document[0, 28]
 
 lazy continuation disabled
 
-```````````````````````````````` example(Basic Tests: 13) options(no-lazy-continuation)
+```````````````````````````````` example(Basic Tests: 19) options(no-lazy-continuation)
 !!! note
 lazy continuation 
 .
@@ -521,7 +677,7 @@ Document[0, 27]
 
 with leading space
 
-```````````````````````````````` example Basic Tests: 14
+```````````````````````````````` example Basic Tests: 20
   !!! note
 lazy continuation 
 .
@@ -546,7 +702,7 @@ Document[0, 30]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Basic Tests: 15) options(no-lead-space)
+```````````````````````````````` example(Basic Tests: 21) options(no-lead-space)
   !!! note
 lazy continuation 
 .
@@ -563,7 +719,7 @@ Document[0, 29]
 
 Inside block quote
 
-```````````````````````````````` example Basic Tests: 16
+```````````````````````````````` example Basic Tests: 22
 > !!! note
 > lazy continuation 
 .
@@ -593,7 +749,7 @@ Document[0, 32]
 
 Try all qualifiers
 
-```````````````````````````````` example Basic Tests: 17
+```````````````````````````````` example Basic Tests: 23
 !!! abstract
     abstract  
 .
@@ -618,7 +774,7 @@ Document[0, 28]
 ````````````````````````````````
 
 
-```````````````````````````````` example Basic Tests: 18
+```````````````````````````````` example Basic Tests: 24
 !!! summary
     summary  
 .
@@ -643,7 +799,7 @@ Document[0, 26]
 ````````````````````````````````
 
 
-```````````````````````````````` example Basic Tests: 19
+```````````````````````````````` example Basic Tests: 25
 !!! tldr
     tldr  
 .
@@ -668,7 +824,7 @@ Document[0, 20]
 ````````````````````````````````
 
 
-```````````````````````````````` example Basic Tests: 20
+```````````````````````````````` example Basic Tests: 26
 !!! bug
     bug  
 .
@@ -693,7 +849,7 @@ Document[0, 18]
 ````````````````````````````````
 
 
-```````````````````````````````` example Basic Tests: 21
+```````````````````````````````` example Basic Tests: 27
 !!! danger
     danger  
 .
@@ -718,7 +874,7 @@ Document[0, 24]
 ````````````````````````````````
 
 
-```````````````````````````````` example Basic Tests: 22
+```````````````````````````````` example Basic Tests: 28
 !!! error
     error  
 .
@@ -743,7 +899,7 @@ Document[0, 22]
 ````````````````````````````````
 
 
-```````````````````````````````` example Basic Tests: 23
+```````````````````````````````` example Basic Tests: 29
 !!! example
     example  
 .
@@ -768,7 +924,7 @@ Document[0, 26]
 ````````````````````````````````
 
 
-```````````````````````````````` example Basic Tests: 24
+```````````````````````````````` example Basic Tests: 30
 !!! snippet
     snippet  
 .
@@ -793,7 +949,7 @@ Document[0, 26]
 ````````````````````````````````
 
 
-```````````````````````````````` example Basic Tests: 25
+```````````````````````````````` example Basic Tests: 31
 !!! failure
     failure  
 .
@@ -818,7 +974,7 @@ Document[0, 26]
 ````````````````````````````````
 
 
-```````````````````````````````` example Basic Tests: 26
+```````````````````````````````` example Basic Tests: 32
 !!! fail
     fail  
 .
@@ -843,7 +999,7 @@ Document[0, 20]
 ````````````````````````````````
 
 
-```````````````````````````````` example Basic Tests: 27
+```````````````````````````````` example Basic Tests: 33
 !!! missing
     missing  
 .
@@ -868,7 +1024,7 @@ Document[0, 26]
 ````````````````````````````````
 
 
-```````````````````````````````` example Basic Tests: 28
+```````````````````````````````` example Basic Tests: 34
 !!! question
     question  
 .
@@ -893,7 +1049,7 @@ Document[0, 28]
 ````````````````````````````````
 
 
-```````````````````````````````` example Basic Tests: 29
+```````````````````````````````` example Basic Tests: 35
 !!! help
     help  
 .
@@ -918,7 +1074,7 @@ Document[0, 20]
 ````````````````````````````````
 
 
-```````````````````````````````` example Basic Tests: 30
+```````````````````````````````` example Basic Tests: 36
 !!! faq
     faq  
 .
@@ -943,7 +1099,7 @@ Document[0, 18]
 ````````````````````````````````
 
 
-```````````````````````````````` example Basic Tests: 31
+```````````````````````````````` example Basic Tests: 37
 !!! info
     info  
 .
@@ -968,7 +1124,7 @@ Document[0, 20]
 ````````````````````````````````
 
 
-```````````````````````````````` example Basic Tests: 32
+```````````````````````````````` example Basic Tests: 38
 !!! todo
     todo  
 .
@@ -993,7 +1149,7 @@ Document[0, 20]
 ````````````````````````````````
 
 
-```````````````````````````````` example Basic Tests: 33
+```````````````````````````````` example Basic Tests: 39
 !!! note
     note  
 .
@@ -1018,7 +1174,7 @@ Document[0, 20]
 ````````````````````````````````
 
 
-```````````````````````````````` example Basic Tests: 34
+```````````````````````````````` example Basic Tests: 40
 !!! seealso
     seealso  
 .
@@ -1043,7 +1199,7 @@ Document[0, 26]
 ````````````````````````````````
 
 
-```````````````````````````````` example Basic Tests: 35
+```````````````````````````````` example Basic Tests: 41
 !!! quote
     quote  
 .
@@ -1068,7 +1224,7 @@ Document[0, 22]
 ````````````````````````````````
 
 
-```````````````````````````````` example Basic Tests: 36
+```````````````````````````````` example Basic Tests: 42
 !!! cite
     cite  
 .
@@ -1093,7 +1249,7 @@ Document[0, 20]
 ````````````````````````````````
 
 
-```````````````````````````````` example Basic Tests: 37
+```````````````````````````````` example Basic Tests: 43
 !!! success
     success  
 .
@@ -1118,7 +1274,7 @@ Document[0, 26]
 ````````````````````````````````
 
 
-```````````````````````````````` example Basic Tests: 38
+```````````````````````````````` example Basic Tests: 44
 !!! check
     check  
 .
@@ -1143,7 +1299,7 @@ Document[0, 22]
 ````````````````````````````````
 
 
-```````````````````````````````` example Basic Tests: 39
+```````````````````````````````` example Basic Tests: 45
 !!! done
     done  
 .
@@ -1168,7 +1324,7 @@ Document[0, 20]
 ````````````````````````````````
 
 
-```````````````````````````````` example Basic Tests: 40
+```````````````````````````````` example Basic Tests: 46
 !!! tip
     tip  
 .
@@ -1193,7 +1349,7 @@ Document[0, 18]
 ````````````````````````````````
 
 
-```````````````````````````````` example Basic Tests: 41
+```````````````````````````````` example Basic Tests: 47
 !!! hint
     hint  
 .
@@ -1218,7 +1374,7 @@ Document[0, 20]
 ````````````````````````````````
 
 
-```````````````````````````````` example Basic Tests: 42
+```````````````````````````````` example Basic Tests: 48
 !!! important
     important  
 .
@@ -1243,7 +1399,7 @@ Document[0, 30]
 ````````````````````````````````
 
 
-```````````````````````````````` example Basic Tests: 43
+```````````````````````````````` example Basic Tests: 49
 !!! warning
     warning  
 .
@@ -1268,7 +1424,7 @@ Document[0, 26]
 ````````````````````````````````
 
 
-```````````````````````````````` example Basic Tests: 44
+```````````````````````````````` example Basic Tests: 50
 !!! caution
     caution  
 .
@@ -1293,7 +1449,7 @@ Document[0, 26]
 ````````````````````````````````
 
 
-```````````````````````````````` example Basic Tests: 45
+```````````````````````````````` example Basic Tests: 51
 !!! attention
     attention  
 .

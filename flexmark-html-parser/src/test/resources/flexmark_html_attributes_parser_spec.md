@@ -1264,7 +1264,7 @@ unclosed delimiters in cells
 ```````````````````````````````` example Tables: 19
 | Abc | Def |
 |-----|-----|-----|
-| `   |     | abc |
+| \`  |     | abc |
 
 .
 <table>
@@ -1792,11 +1792,11 @@ in item
 ```````````````````````````````` example Tables: 46
 * Add: live templates starting with `.`
 
-  |    Element    |  Abbreviation   |  Expansion  |
-  |---------------|-----------------|-------------|
-  | Abbreviation  | `.abbreviation` | `*[]:`      |
-  | Code fence    | `.codefence`    | ``` ... ``` |
-  | Explicit link | `.link`         | `[]()`      |
+  |    Element    |  Abbreviation   |     Expansion     |
+  |---------------|-----------------|-------------------|
+  | Abbreviation  | `.abbreviation` | `*[]:`            |
+  | Code fence    | `.codefence`    | \`\`\` ... \`\`\` |
+  | Explicit link | `.link`         | `[]()`            |
 
 .
 <ul>

@@ -778,33 +778,45 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
     }
 
     private void render(final Paragraph node, final NodeFormatterContext context, final MarkdownWriter markdown) {
-        if (!(node.getParent() instanceof ParagraphItemContainer)) {
-            if (!node.isTrailingBlankLine() && (node.getNext() == null || node.getNext() instanceof ListBlock)) {
+        if (node.getParent() instanceof ParagraphContainer) {
+            final boolean startWrappingDisabled = ((ParagraphContainer) node.getParent()).isParagraphStartWrappingDisabled(node);
+            final boolean endWrappingDisabled = ((ParagraphContainer) node.getParent()).isParagraphEndWrappingDisabled(node);
+            if (startWrappingDisabled || endWrappingDisabled) {
+                if (!startWrappingDisabled) markdown.blankLine();
                 renderTextBlockParagraphLines(node, context, markdown);
+                if (!endWrappingDisabled) markdown.blankLine();
             } else {
                 renderLooseParagraph(node, context, markdown);
             }
         } else {
-            boolean isItemParagraph = ((ParagraphItemContainer) node.getParent()).isItemParagraph(node);
-            if (isItemParagraph) {
-                ListSpacing itemSpacing = context.getDocument().get(LIST_ITEM_SPACING);
-                if (itemSpacing == ListSpacing.TIGHT) {
+            if (!(node.getParent() instanceof ParagraphItemContainer)) {
+                if (!node.isTrailingBlankLine() && (node.getNext() == null || node.getNext() instanceof ListBlock)) {
                     renderTextBlockParagraphLines(node, context, markdown);
-                } else if (itemSpacing == ListSpacing.LOOSE) {
-                    if (node.getParent().getNextAnyNot(BlankLine.class) == null) {
-                        renderTextBlockParagraphLines(node, context, markdown);
-                    } else {
-                        renderLooseItemParagraph(node, context, markdown);
-                    }
                 } else {
-                    if (!((ParagraphItemContainer) node.getParent()).isParagraphWrappingDisabled(node, listOptions, context.getOptions())) {
-                        renderLooseItemParagraph(node, context, markdown);
-                    } else {
-                        renderTextBlockParagraphLines(node, context, markdown);
-                    }
+                    renderLooseParagraph(node, context, markdown);
                 }
             } else {
-                renderLooseParagraph(node, context, markdown);
+                boolean isItemParagraph = ((ParagraphItemContainer) node.getParent()).isItemParagraph(node);
+                if (isItemParagraph) {
+                    ListSpacing itemSpacing = context.getDocument().get(LIST_ITEM_SPACING);
+                    if (itemSpacing == ListSpacing.TIGHT) {
+                        renderTextBlockParagraphLines(node, context, markdown);
+                    } else if (itemSpacing == ListSpacing.LOOSE) {
+                        if (node.getParent().getNextAnyNot(BlankLine.class) == null) {
+                            renderTextBlockParagraphLines(node, context, markdown);
+                        } else {
+                            renderLooseItemParagraph(node, context, markdown);
+                        }
+                    } else {
+                        if (!((ParagraphItemContainer) node.getParent()).isParagraphWrappingDisabled(node, listOptions, context.getOptions())) {
+                            renderLooseItemParagraph(node, context, markdown);
+                        } else {
+                            renderTextBlockParagraphLines(node, context, markdown);
+                        }
+                    }
+                } else {
+                    renderLooseParagraph(node, context, markdown);
+                }
             }
         }
     }

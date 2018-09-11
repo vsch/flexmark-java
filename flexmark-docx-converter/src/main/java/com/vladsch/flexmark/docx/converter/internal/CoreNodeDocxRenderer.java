@@ -1,8 +1,8 @@
 package com.vladsch.flexmark.docx.converter.internal;
 
-import com.vladsch.flexmark.ast.*;
 import com.vladsch.flexmark.ast.Document;
 import com.vladsch.flexmark.ast.Text;
+import com.vladsch.flexmark.ast.*;
 import com.vladsch.flexmark.ast.util.ReferenceRepository;
 import com.vladsch.flexmark.ast.util.TextCollectingVisitor;
 import com.vladsch.flexmark.docx.converter.CustomNodeDocxRenderer;
@@ -25,6 +25,9 @@ import com.vladsch.flexmark.ext.footnotes.Footnote;
 import com.vladsch.flexmark.ext.footnotes.FootnoteBlock;
 import com.vladsch.flexmark.ext.gfm.strikethrough.Strikethrough;
 import com.vladsch.flexmark.ext.gfm.strikethrough.Subscript;
+import com.vladsch.flexmark.ext.gitlab.GitLabBlockQuote;
+import com.vladsch.flexmark.ext.gitlab.GitLabDel;
+import com.vladsch.flexmark.ext.gitlab.GitLabIns;
 import com.vladsch.flexmark.ext.ins.Ins;
 import com.vladsch.flexmark.ext.tables.*;
 import com.vladsch.flexmark.ext.toc.SimTocBlock;
@@ -235,6 +238,12 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
                         CoreNodeDocxRenderer.this.render(node, docx);
                     }
                 }),
+                new NodeDocxRendererHandler<GitLabBlockQuote>(GitLabBlockQuote.class, new CustomNodeDocxRenderer<GitLabBlockQuote>() {
+                    @Override
+                    public void render(final GitLabBlockQuote node, final DocxRendererContext docx) {
+                        CoreNodeDocxRenderer.this.render(node, docx);
+                    }
+                }),
                 new NodeDocxRendererHandler<AsideBlock>(AsideBlock.class, new CustomNodeDocxRenderer<AsideBlock>() {
                     @Override
                     public void render(final AsideBlock node, final DocxRendererContext docx) {
@@ -271,9 +280,21 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
                         CoreNodeDocxRenderer.this.render(node, docx);
                     }
                 }),
+                new NodeDocxRendererHandler<GitLabIns>(GitLabIns.class, new CustomNodeDocxRenderer<GitLabIns>() {
+                    @Override
+                    public void render(final GitLabIns node, final DocxRendererContext docx) {
+                        CoreNodeDocxRenderer.this.render(node, docx);
+                    }
+                }),
                 new NodeDocxRendererHandler<Strikethrough>(Strikethrough.class, new CustomNodeDocxRenderer<Strikethrough>() {
                     @Override
                     public void render(final Strikethrough node, final DocxRendererContext docx) {
+                        CoreNodeDocxRenderer.this.render(node, docx);
+                    }
+                }),
+                new NodeDocxRendererHandler<GitLabDel>(GitLabDel.class, new CustomNodeDocxRenderer<GitLabDel>() {
+                    @Override
+                    public void render(final GitLabDel node, final DocxRendererContext docx) {
                         CoreNodeDocxRenderer.this.render(node, docx);
                     }
                 }),
@@ -643,7 +664,17 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
         docx.renderChildren(node);
     }
 
+    private void render(final GitLabDel node, final DocxRendererContext docx) {
+        docx.setRunFormatProvider(new StrikethroughRunFormatProvider<Node>(docx, options.noCharacterStyles));
+        docx.renderChildren(node);
+    }
+
     private void render(final Ins node, final DocxRendererContext docx) {
+        docx.setRunFormatProvider(new UnderlineRunFormatProvider<Node>(docx, options.noCharacterStyles));
+        docx.renderChildren(node);
+    }
+
+    private void render(final GitLabIns node, final DocxRendererContext docx) {
         docx.setRunFormatProvider(new UnderlineRunFormatProvider<Node>(docx, options.noCharacterStyles));
         docx.renderChildren(node);
     }
@@ -660,6 +691,12 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
     }
 
     private void render(final BlockQuote node, final DocxRendererContext docx) {
+        final int level = node.countDirectAncestorsOfType(null, BlockQuote.class) + 1;
+        docx.setBlockFormatProvider(new QuotedFormatProvider<Node>(docx, level, docx.getRenderingOptions().BLOCK_QUOTE_STYLE));
+        docx.renderChildren(node);
+    }
+
+    private void render(final GitLabBlockQuote node, final DocxRendererContext docx) {
         final int level = node.countDirectAncestorsOfType(null, BlockQuote.class) + 1;
         docx.setBlockFormatProvider(new QuotedFormatProvider<Node>(docx, level, docx.getRenderingOptions().BLOCK_QUOTE_STYLE));
         docx.renderChildren(node);

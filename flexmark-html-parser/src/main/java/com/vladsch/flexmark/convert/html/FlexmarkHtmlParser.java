@@ -57,20 +57,34 @@ public class FlexmarkHtmlParser {
 
     public static final DataKey<Boolean> ADD_TRAILING_EOL = new DataKey<Boolean>("ADD_TRAILING_EOL", true);
 
-    /** @deprecated Use SKIP_INLINE_STRONG set to ExtensionConversion.TEXT instead */
+    /**
+     * @deprecated Use SKIP_INLINE_STRONG set to ExtensionConversion.TEXT instead
+     */
     public static final DataKey<Boolean> SKIP_INLINE_STRONG = new DataKey<Boolean>("SKIP_INLINE_STRONG", false);
-    /** @deprecated Use SKIP_INLINE_EMPHASIS set to ExtensionConversion.TEXT instead */
+    /**
+     * @deprecated Use SKIP_INLINE_EMPHASIS set to ExtensionConversion.TEXT instead
+     */
     public static final DataKey<Boolean> SKIP_INLINE_EMPHASIS = new DataKey<Boolean>("SKIP_INLINE_EMPHASIS", false);
-    /** @deprecated Use SKIP_INLINE_CODE set to ExtensionConversion.TEXT instead */
+    /**
+     * @deprecated Use SKIP_INLINE_CODE set to ExtensionConversion.TEXT instead
+     */
     public static final DataKey<Boolean> SKIP_INLINE_CODE = new DataKey<Boolean>("SKIP_INLINE_CODE", false);
-    /** @deprecated Use SKIP_INLINE_DEL set to ExtensionConversion.TEXT instead */
+    /**
+     * @deprecated Use SKIP_INLINE_DEL set to ExtensionConversion.TEXT instead
+     */
     public static final DataKey<Boolean> SKIP_INLINE_DEL = new DataKey<Boolean>("SKIP_INLINE_DEL", false);
-    /** @deprecated Use SKIP_INLINE_INS set to ExtensionConversion.TEXT instead */
+    /**
+     * @deprecated Use SKIP_INLINE_INS set to ExtensionConversion.TEXT instead
+     */
     public static final DataKey<Boolean> SKIP_INLINE_INS = new DataKey<Boolean>("SKIP_INLINE_INS", false);
-    /** @deprecated Use SKIP_INLINE_SUB set to ExtensionConversion.TEXT instead */
-    public static final DataKey<Boolean> SKIP_INLINE_SUB = new DataKey<Boolean>("SKIP_INLINE_SUBSCRIPT", false);
-    /** @deprecated Use SKIP_INLINE_SUP set to ExtensionConversion.TEXT instead */
-    public static final DataKey<Boolean> SKIP_INLINE_SUP = new DataKey<Boolean>("SKIP_INLINE_SUPERSCRIPT", false);
+    /**
+     * @deprecated Use SKIP_INLINE_SUB set to ExtensionConversion.TEXT instead
+     */
+    public static final DataKey<Boolean> SKIP_INLINE_SUB = new DataKey<Boolean>("SKIP_INLINE_SUB", false);
+    /**
+     * @deprecated Use SKIP_INLINE_SUP set to ExtensionConversion.TEXT instead
+     */
+    public static final DataKey<Boolean> SKIP_INLINE_SUP = new DataKey<Boolean>("SKIP_INLINE_SUP", false);
 
     public static final DataKey<Boolean> SKIP_HEADING_1 = new DataKey<Boolean>("SKIP_HEADING_1", false);
     public static final DataKey<Boolean> SKIP_HEADING_2 = new DataKey<Boolean>("SKIP_HEADING_2", false);
@@ -85,8 +99,8 @@ public class FlexmarkHtmlParser {
     public static final DataKey<ExtensionConversion> EXT_INLINE_CODE = new DataKey<ExtensionConversion>("EXT_INLINE_CODE", ExtensionConversion.MARKDOWN);
     public static final DataKey<ExtensionConversion> EXT_INLINE_DEL = new DataKey<ExtensionConversion>("EXT_INLINE_DEL", ExtensionConversion.MARKDOWN);
     public static final DataKey<ExtensionConversion> EXT_INLINE_INS = new DataKey<ExtensionConversion>("EXT_INLINE_INS", ExtensionConversion.MARKDOWN);
-    public static final DataKey<ExtensionConversion> EXT_INLINE_SUB = new DataKey<ExtensionConversion>("EXT_INLINE_SUBSCRIPT", ExtensionConversion.MARKDOWN);
-    public static final DataKey<ExtensionConversion> EXT_INLINE_SUP = new DataKey<ExtensionConversion>("EXT_INLINE_SUPERSCRIPT", ExtensionConversion.MARKDOWN);
+    public static final DataKey<ExtensionConversion> EXT_INLINE_SUB = new DataKey<ExtensionConversion>("EXT_INLINE_SUB", ExtensionConversion.MARKDOWN);
+    public static final DataKey<ExtensionConversion> EXT_INLINE_SUP = new DataKey<ExtensionConversion>("EXT_INLINE_SUP", ExtensionConversion.MARKDOWN);
 
     /**
      * If true then will ignore rows with th columns after rows with td columns have been emitted to the table.
@@ -520,6 +534,10 @@ public class FlexmarkHtmlParser {
     }
 
     private String prepareText(String text) {
+        return prepareText(text, myInlineCode);
+    }
+
+    private String prepareText(String text, final boolean inCode) {
         if (specialCharsPattern != null) {
             Matcher matcher = specialCharsPattern.matcher(text);
             int length = text.length();
@@ -540,10 +558,15 @@ public class FlexmarkHtmlParser {
 
             text = sb.toString();
         }
-        text = text.replace("\\", "\\\\").replace("\u00A0", myOptions.nbspText);
-        if (!myInlineCode) {
-            // replace [ ] by escaped versions
+
+        if (!inCode) {
+            // replace [ ] | ` by escaped versions
+            text = text.replace("\u00A0", myOptions.nbspText);
+            text = text.replace("\\", "\\\\");
             text = text.replace("[", "\\[").replace("]", "\\]");
+            text = text.replace("|", "\\|").replace("`", "\\`");
+        } else {
+            text = text.replace("\u00A0", " ");
         }
 
         return text;
@@ -552,7 +575,7 @@ public class FlexmarkHtmlParser {
     private boolean processText(FormattingAppendable out, TextNode node) {
         skip();
         if (out.isPreFormatted()) {
-            out.append(prepareText(node.getWholeText()));
+            out.append(prepareText(node.getWholeText(), true));
         } else {
             out.append(prepareText(node.text()));
         }
@@ -731,13 +754,13 @@ public class FlexmarkHtmlParser {
                     } else {
                         // this is blank line insertion via <br />
                         if (myOptions.brAsExtraBlankLines) {
-                            out.append("<br />").line();
+                            out.append("<br />").blankLine();
                         }
                     }
                 } else {
                     // this is blank line insertion via <br />
                     if (myOptions.brAsExtraBlankLines) {
-                        out.append("<br />").line();
+                        out.append("<br />").blankLine();
                     }
                 }
             }
@@ -833,12 +856,24 @@ public class FlexmarkHtmlParser {
 
                     boolean skipHeading = false;
                     switch (level) {
-                        case 1: skipHeading = myOptions.skipHeading1; break;
-                        case 2: skipHeading = myOptions.skipHeading2; break;
-                        case 3: skipHeading = myOptions.skipHeading3; break;
-                        case 4: skipHeading = myOptions.skipHeading4; break;
-                        case 5: skipHeading = myOptions.skipHeading5; break;
-                        case 6: skipHeading = myOptions.skipHeading6; break;
+                        case 1:
+                            skipHeading = myOptions.skipHeading1;
+                            break;
+                        case 2:
+                            skipHeading = myOptions.skipHeading2;
+                            break;
+                        case 3:
+                            skipHeading = myOptions.skipHeading3;
+                            break;
+                        case 4:
+                            skipHeading = myOptions.skipHeading4;
+                            break;
+                        case 5:
+                            skipHeading = myOptions.skipHeading5;
+                            break;
+                        case 6:
+                            skipHeading = myOptions.skipHeading6;
+                            break;
                     }
 
                     if (skipHeading) {
@@ -1461,6 +1496,7 @@ public class FlexmarkHtmlParser {
     }
 
     private void processTableCell(FormattingAppendable out, Element element) {
+
         String cellText = processTextNodes(element).trim().replaceAll("\\s*\n\\s*", " ");
         int colSpan = 1;
         int rowSpan = 1;

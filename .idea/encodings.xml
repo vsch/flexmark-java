@@ -22,9 +22,12 @@
     <file url="file://$PROJECT_DIR$/flexmark-ext-gfm-tables" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/flexmark-ext-gfm-tasklist" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/flexmark-ext-gfm-users" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/flexmark-ext-gitlab" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/flexmark-ext-ins" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/flexmark-ext-jekyll-front-matter" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/flexmark-ext-jekyll-tag" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/flexmark-ext-macros" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/flexmark-ext-media-tags" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/flexmark-ext-spec-example" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/flexmark-ext-superscript" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/flexmark-ext-tables" charset="UTF-8" />
@@ -39,6 +42,7 @@
     <file url="file://$PROJECT_DIR$/flexmark-html-parser" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/flexmark-integration-test" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/flexmark-jira-converter" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/flexmark-osgi" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/flexmark-pdf-converter" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/flexmark-profile-pegdown" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/flexmark-test-util" charset="UTF-8" />

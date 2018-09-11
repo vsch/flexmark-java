@@ -7,6 +7,7 @@ flexmark-java
 
 - [To Do](#to-do)
     - [Docx Converter](#docx-converter)
+- [Next 0.34.30](#next-03430)
 - [0.34.28](#03428)
 - [0.34.26](#03426)
 - [0.34.24](#03424)
@@ -205,9 +206,6 @@ flexmark-java
       to HTML offset for the element(s). This is needed to allow synchronization with source
       when using an attribute to hold the source information is not an option.
 
-* [ ] Add: Latex extension
-
-
 * [ ] Fix: regex can go into infinite loop
 
 * Change: complete parser profiles for variations within a family
@@ -229,10 +227,6 @@ flexmark-java
 * [ ] Add hierarchical anchor id generation for headings: will splice parent heading id with
       child id to create unique ids based on header hierarchy.
 
-* [ ] Add attribute extension parser module to allow adding arbitrary attributes to any block or
-      inline element in markdown
-  * [ ] use these attributes to control docx rendering and html rendering.
-
 * [ ] Add macro module that would allow inserting arbitrary markdown into table cells. This
       would be less readable but would give complete flexibility to generate tables with complex
       content without changing the table syntax because the macro expansion would be done during
@@ -250,26 +244,45 @@ flexmark-java
 
 &nbsp;</details>
 
+Next 0.34.30
+------------
+
+* Fix: #268, Pipe characters are not escaped in Table (FlexmarkHtmlParser)
+  * Fix: escape pipe characters in text (to avoid accidental use as table or other markup) when
+    not inline code nor fenced code
+  * Fix: escape back ticks when inside code
+  * Fix: disable escaping of `[]` when inside code
+  * Fix: disable escaping of `\` when inside code
+  * Fix: replace non-break space with space when inside code
+* Fix: `FlexmarkHtmlParser.BR_AS_EXTRA_BLANK_LINES` now adds `<br />` followed by blank line
+* Add: `GitLab` extension handling to docx converter. For now `math` and `mermaid`
+  blocks are not converted.
+* Add: `GitLab` extension formatter to properly handle block quote formatting
+* Add: `ParagraphContainer` interface to allow container nodes to control how their paragraphs
+  are output for formatting/rendering with respect to blank line before/after control.
+* Fix: `GitLab` block quote parser bug for terminating sequence.
+
 0.34.28
 -------
 
 * Add: html parser options to specify how to generate some markdown formatting elements, default
   for all is `ExtensionConversion.MARKDOWN`:
-  * `EXT_INLINE_STRONG` - strong 
-  * `EXT_INLINE_EMPHASIS` - emphasis 
-  * `EXT_INLINE_CODE` - code 
-  * `EXT_INLINE_DEL` - del 
-  * `EXT_INLINE_INS` - ins 
-  * `EXT_INLINE_SUB` - sub 
-  * `EXT_INLINE_SUP` - sup 
-  
-  Available settings: 
+  * `EXT_INLINE_STRONG` - strong
+  * `EXT_INLINE_EMPHASIS` - emphasis
+  * `EXT_INLINE_CODE` - code
+  * `EXT_INLINE_DEL` - del
+  * `EXT_INLINE_INS` - ins
+  * `EXT_INLINE_SUB` - sub
+  * `EXT_INLINE_SUP` - sup
+
+  Available settings:
+
   * `ExtensionConversion.MARKDOWN` - convert to markdown
   * `ExtensionConversion.TEXT` - convert to inner text
   * `ExtensionConversion.HTML` - leave HTML as is
-  
+
   Corresponding `SKIP_` options have been deprecated since their function is duplicated by new
-  options. 
+  options.
 
 0.34.26
 -------
@@ -287,7 +300,7 @@ flexmark-java
   `BasedSequenceImpl.countNotCharsReversed(char, int, int)` to not return -1, should return 0
 * Fix: `BasedSequenceImpl.spliceAtEnd()` not to fail if this or other is empty
 * Add: `GitLabExtension`, Documented in
-  [Gitlab Flavoured Markdown Extensions](../../wiki/Extensions#gitlab-flavoured-markdown)
+  [Gitlab Flavoured Markdown Extensions](../../wiki/Extensions#gitlab-flavoured-markdown)
 
 0.34.22
 -------
@@ -310,21 +323,22 @@ flexmark-java
 
 0.34.18
 -------
+
 * Add: html parser options to suppress generating some markdown formatting elements, default for
   all is false:
-  * `SKIP_INLINE_STRONG` - strong 
-  * `SKIP_INLINE_EMPHASIS` - emphasis 
-  * `SKIP_INLINE_CODE` - code 
-  * `SKIP_INLINE_DEL` - del 
-  * `SKIP_INLINE_INS` - ins 
-  * `SKIP_INLINE_SUB` - sub 
-  * `SKIP_INLINE_SUP` - sup 
-  * `SKIP_HEADING_1`  - heading 1
-  * `SKIP_HEADING_2`  - heading 2
-  * `SKIP_HEADING_3`  - heading 3
-  * `SKIP_HEADING_4`  - heading 4
-  * `SKIP_HEADING_5`  - heading 5
-  * `SKIP_HEADING_6`  - heading 6
+  * `SKIP_INLINE_STRONG` - strong
+  * `SKIP_INLINE_EMPHASIS` - emphasis
+  * `SKIP_INLINE_CODE` - code
+  * `SKIP_INLINE_DEL` - del
+  * `SKIP_INLINE_INS` - ins
+  * `SKIP_INLINE_SUB` - sub
+  * `SKIP_INLINE_SUP` - sup
+  * `SKIP_HEADING_1` - heading 1
+  * `SKIP_HEADING_2` - heading 2
+  * `SKIP_HEADING_3` - heading 3
+  * `SKIP_HEADING_4` - heading 4
+  * `SKIP_HEADING_5` - heading 5
+  * `SKIP_HEADING_6` - heading 6
   * `SKIP_ATTRIBUTES` - attribute extension formatting
 * Add: html parser option `ADD_TRAILING_EOL`, default `false`. Will add trailing EOL to
   generated markdown text.

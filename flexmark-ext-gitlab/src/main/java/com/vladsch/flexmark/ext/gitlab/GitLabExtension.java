@@ -2,8 +2,8 @@ package com.vladsch.flexmark.ext.gitlab;
 
 import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.ext.gitlab.internal.*;
+import com.vladsch.flexmark.formatter.internal.Formatter;
 import com.vladsch.flexmark.html.HtmlRenderer;
-import com.vladsch.flexmark.html.renderer.LinkStatus;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.options.DataKey;
 import com.vladsch.flexmark.util.options.MutableDataHolder;
@@ -21,6 +21,7 @@ import com.vladsch.flexmark.util.options.MutableDataHolder;
  */
 public class GitLabExtension implements Parser.ParserExtension
         , HtmlRenderer.HtmlRendererExtension
+        , Formatter.FormatterExtension
         // , Parser.ReferenceHoldingExtension
 {
     // public static final DataKey<KeepType> GIT_LABS_KEEP = new DataKey<KeepType>("GIT_LABS_KEEP", KeepType.FIRST); // standard option to allow control over how to handle duplicates
@@ -58,6 +59,11 @@ public class GitLabExtension implements Parser.ParserExtension
     @Override
     public void parserOptions(final MutableDataHolder options) {
 
+    }
+
+    @Override
+    public void extend(final Formatter.Builder builder) {
+        builder.nodeFormatterFactory(new GitLabNodeFormatter.Factory());
     }
 
     @Override

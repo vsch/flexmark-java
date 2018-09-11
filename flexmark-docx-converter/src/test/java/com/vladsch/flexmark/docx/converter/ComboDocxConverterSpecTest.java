@@ -13,6 +13,7 @@ import com.vladsch.flexmark.ext.emoji.EmojiExtension;
 import com.vladsch.flexmark.ext.enumerated.reference.EnumeratedReferenceExtension;
 import com.vladsch.flexmark.ext.footnotes.FootnoteExtension;
 import com.vladsch.flexmark.ext.gfm.strikethrough.StrikethroughSubscriptExtension;
+import com.vladsch.flexmark.ext.gitlab.GitLabExtension;
 import com.vladsch.flexmark.ext.ins.InsExtension;
 import com.vladsch.flexmark.ext.tables.TablesExtension;
 import com.vladsch.flexmark.ext.toc.SimTocExtension;
@@ -59,8 +60,9 @@ public class ComboDocxConverterSpecTest extends ComboSpecTestCase {
                     EmojiExtension.create(),
                     EnumeratedReferenceExtension.create(),
                     FootnoteExtension.create(),
-                    StrikethroughSubscriptExtension.create(),
+                    GitLabExtension.create(),
                     InsExtension.create(),
+                    StrikethroughSubscriptExtension.create(),
                     SuperscriptExtension.create(),
                     TablesExtension.create(),
                     TocExtension.create(),

@@ -32,6 +32,8 @@ public class Footnote extends CustomNode implements DelimitedNode, DoNotDecorate
 
     @Override
     public FootnoteBlock getReferenceNode(final Document document) {
+        if (footnoteBlock != null || text.isEmpty()) return footnoteBlock;
+        footnoteBlock = getFootnoteBlock(document.get(FootnoteExtension.FOOTNOTES));
         return footnoteBlock;
     }
 

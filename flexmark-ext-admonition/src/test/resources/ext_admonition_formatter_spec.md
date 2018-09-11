@@ -118,9 +118,83 @@ open with empty title
 ````````````````````````````````
 
 
-with multiple children
+indented 1
 
 ```````````````````````````````` example Basic Tests: 10
+ ???+ note ""
+    first child paragraph  
+    
+.
+???+ note ""
+
+    first child paragraph
+
+````````````````````````````````
+
+
+indented 2
+
+```````````````````````````````` example Basic Tests: 11
+  ???+ note ""
+    first child paragraph  
+    
+.
+???+ note ""
+
+    first child paragraph
+
+````````````````````````````````
+
+
+indented 3
+
+```````````````````````````````` example Basic Tests: 12
+   ???+ note ""
+    first child paragraph  
+    
+.
+???+ note ""
+
+    first child paragraph
+
+````````````````````````````````
+
+
+indented 4
+
+```````````````````````````````` example Basic Tests: 13
+    ???+ note ""
+        first child paragraph  
+    
+.
+    ???+ note ""
+        first child paragraph  
+
+````````````````````````````````
+
+
+nested
+
+```````````````````````````````` example Basic Tests: 14
+???+ note ""
+    first child paragraph  
+    
+    !!! note
+        embedded
+.
+???+ note ""
+
+    first child paragraph
+
+    !!! note
+        embedded
+
+````````````````````````````````
+
+
+with multiple children
+
+```````````````````````````````` example Basic Tests: 15
 !!! note "Title" 
 
     ## Heading 2
@@ -153,7 +227,7 @@ with multiple children
 
 collapsed with multiple children     
 
-```````````````````````````````` example Basic Tests: 11
+```````````````````````````````` example Basic Tests: 16
 ??? example 
 
     ## Heading 2
@@ -186,7 +260,7 @@ collapsed with multiple children
 
 with lazy continuation of first paragraph
 
-```````````````````````````````` example Basic Tests: 12
+```````````````````````````````` example Basic Tests: 17
 !!! note
 lazy continuation 
 .
