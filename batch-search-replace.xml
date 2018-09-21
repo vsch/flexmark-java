@@ -2,7 +2,7 @@
 <java version="1.8.0_152-release" class="java.beans.XMLDecoder">
  <object class="com.vladsch.MissingInActions.settings.BatchSearchReplaceSettings" id="BatchSearchReplaceSettings0">
   <void property="batchPresetName">
-   <string>Flexmark Html Parser</string>
+   <string>Docx Style Names</string>
   </void>
   <void property="batchPresets">
    <void method="put">
@@ -78,6 +78,95 @@ trainingsprocess
 updatedat
 user
 username
+</string>
+     </void>
+    </object>
+   </void>
+   <void method="put">
+    <string>JavaFxDebugger</string>
+    <object class="com.vladsch.MissingInActions.settings.BatchSearchReplace">
+     <void property="optionsText">
+      <string>
+
+
+
+
+
+
+?
+?
+?
+?
+?
+?
+?
+?
+?
+?
+?
+
+
+
+
+
+
+
+</string>
+     </void>
+     <void property="replaceText">
+      <string>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</string>
+     </void>
+     <void property="searchText">
+      <string>skipInlineStrong
+skipInlineEmphasis
+skipInlineCode
+skipInlineDel
+skipInlineIns
+skipInlineSub
+skipInlineSup
+_a_
+_b_
+_c_
+_d_
+_e_
+_f_
+_g_
+_h_
+_i_
+_j_
+_k_
+extInlineStrong
+extInlineEmphasis
+extInlineCode
+extInlineDel
+extInlineIns
+extInlineSub
+extInlineSup
 </string>
      </void>
     </object>
@@ -772,6 +861,26 @@ username
     </object>
    </void>
    <void method="put">
+    <string>Temp</string>
+    <object class="com.vladsch.MissingInActions.settings.BatchSearchReplace">
+     <void property="optionsText">
+      <string>
+
+</string>
+     </void>
+     <void property="replaceText">
+      <string>
+
+</string>
+     </void>
+     <void property="searchText">
+      <string>myOnPausedParamsRunnable
+DEBUGGER_PAUSED
+</string>
+     </void>
+    </object>
+   </void>
+   <void method="put">
     <string>Responsible_ProcessInstance</string>
     <object class="com.vladsch.MissingInActions.settings.BatchSearchReplace">
      <void property="replaceText">
@@ -857,6 +966,83 @@ updatedat
     </object>
    </void>
    <void method="put">
+    <string>Docx Styles</string>
+    <object class="com.vladsch.MissingInActions.settings.BatchSearchReplace">
+     <void property="optionsText">
+      <string>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</string>
+     </void>
+     <void property="replaceText">
+      <string>Normal
+ParagraphTextBody
+BodyText
+PreformattedText
+Quotations
+AsideBlock
+HorizontalLine
+TableCaption
+TableContents
+TableHeading
+Footnote
+StrongEmphasis
+Emphasis
+Strikethrough
+Subscript
+Superscript
+Underlined
+SourceText
+Hyperlink
+FootnoteReference
+EndnoteReference
+</string>
+     </void>
+     <void property="searchText">
+      <string>DEFAULT_STYLE
+LOOSE_PARAGRAPH_STYLE
+TIGHT_PARAGRAPH_STYLE
+PREFORMATTED_TEXT_STYLE
+BLOCK_QUOTE_STYLE
+ASIDE_BLOCK_STYLE
+HORIZONTAL_LINE_STYLE
+TABLE_CAPTION
+TABLE_CONTENTS
+TABLE_HEADING
+FOOTNOTE_STYLE
+BOLD_STYLE
+ITALIC_STYLE
+STRIKE_THROUGH_STYLE
+SUBSCRIPT_STYLE
+SUPERSCRIPT_STYLE
+INS_STYLE
+INLINE_CODE_STYLE
+HYPERLINK_STYLE
+FOOTNOTE_ANCHOR_STYLE
+ENDNOTE_ANCHOR_STYLE
+</string>
+     </void>
+    </object>
+   </void>
+   <void method="put">
     <string>Consulted_TaskTemplates</string>
     <object class="com.vladsch.MissingInActions.settings.BatchSearchReplace">
      <void property="replaceText">
@@ -925,6 +1111,95 @@ updatedAt
      <void property="searchText">
       <string>createdat
 updatedat
+</string>
+     </void>
+    </object>
+   </void>
+   <void method="put">
+    <string>Docx Style Names</string>
+    <object class="com.vladsch.MissingInActions.settings.BatchSearchReplace">
+     <void property="optionsText">
+      <string>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</string>
+     </void>
+     <void property="replaceText">
+      <string>AsideBlock
+BodyText
+Emphasis
+endnote reference
+footer
+Footnote
+footnote reference
+footnote text
+header
+Horizontal Line
+Hyperlink
+Normal
+Paragraph Text Body
+Preformatted Text
+Quotations
+SourceText
+Strikethrough
+Strong Emphasis
+Subscript
+Superscript
+Table Caption
+Table Contents
+Table Grid
+Table Heading
+Underlined
+</string>
+     </void>
+     <void property="searchText">
+      <string>AsideBlock
+BodyText
+Emphasis
+EndnoteReference
+Footer
+Footnote
+FootnoteReference
+FootnoteText
+Header
+HorizontalLine
+Hyperlink
+Normal
+ParagraphTextBody
+PreformattedText
+Quotations
+SourceText
+Strikethrough
+StrongEmphasis
+Subscript
+Superscript
+TableCaption
+TableContents
+TableGrid
+TableHeading
+Underlined
 </string>
      </void>
     </object>
@@ -1072,17 +1347,17 @@ user
 
 
 
-?
-?
-?
-?
-?
-?
-?
-?
-?
-?
-?
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1093,59 +1368,59 @@ user
 </string>
    </void>
    <void property="replaceText">
-    <string>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    <string>AsideBlock
+BodyText
+Emphasis
+endnote reference
+footer
+Footnote
+footnote reference
+footnote text
+header
+Horizontal Line
+Hyperlink
+Normal
+Paragraph Text Body
+Preformatted Text
+Quotations
+SourceText
+Strikethrough
+Strong Emphasis
+Subscript
+Superscript
+Table Caption
+Table Contents
+Table Grid
+Table Heading
+Underlined
 </string>
    </void>
    <void property="searchText">
-    <string>skipInlineStrong
-skipInlineEmphasis
-skipInlineCode
-skipInlineDel
-skipInlineIns
-skipInlineSub
-skipInlineSup
-_a_
-_b_
-_c_
-_d_
-_e_
-_f_
-_g_
-_h_
-_i_
-_j_
-_k_
-extInlineStrong
-extInlineEmphasis
-extInlineCode
-extInlineDel
-extInlineIns
-extInlineSub
-extInlineSup
+    <string>AsideBlock
+BodyText
+Emphasis
+EndnoteReference
+Footer
+Footnote
+FootnoteReference
+FootnoteText
+Header
+HorizontalLine
+Hyperlink
+Normal
+ParagraphTextBody
+PreformattedText
+Quotations
+SourceText
+Strikethrough
+StrongEmphasis
+Subscript
+Superscript
+TableCaption
+TableContents
+TableGrid
+TableHeading
+Underlined
 </string>
    </void>
   </void>
