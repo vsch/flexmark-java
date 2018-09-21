@@ -7,7 +7,8 @@ flexmark-java
 
 - [To Do](#to-do)
     - [Docx Converter](#docx-converter)
-- [Next 0.34.30](#next-03430)
+- [0.34.32](#03432)
+- [0.34.30](#03430)
 - [0.34.28](#03428)
 - [0.34.26](#03426)
 - [0.34.24](#03424)
@@ -244,8 +245,18 @@ flexmark-java
 
 &nbsp;</details>
 
-Next 0.34.30
-------------
+0.34.32
+-------
+
+* Fix: change anonymous classes to static classes in `CoreNodeDocxRenderer`
+* Add: test case for `Parser.SPACE_IN_LINK_URLS` to validate allowing spaces in URLs
+* Fix: Docx Converter to use style names instead of style ids because Word localizes ids and
+  leaves the names common to all locales. Completely opposite to intuition but that is Word.
+* Fix: Docx Converter remove hardcoded "CENTER" alignment for table headings overriding the
+  `Table Heading` provided alignment.
+
+0.34.30
+-------
 
 * Fix: #268, Pipe characters are not escaped in Table (FlexmarkHtmlParser)
   * Fix: escape pipe characters in text (to avoid accidental use as table or other markup) when

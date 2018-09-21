@@ -10,7 +10,7 @@ public class HeadingBlockFormatProvider<T> extends BlockFormatProviderBase<T> {
     private final int myHeadingLevel;
 
     public HeadingBlockFormatProvider(final DocxContext<T> docx, final int headingLevel) {
-        super(docx, String.format("Heading%d", headingLevel + 1));
+        super(docx, docx.getRenderingOptions().HEADINGS[headingLevel]);
         myDocx = docx;
         myHeadingLevel = headingLevel;
     }

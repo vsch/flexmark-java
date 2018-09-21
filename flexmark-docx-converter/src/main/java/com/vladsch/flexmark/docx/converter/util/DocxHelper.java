@@ -28,7 +28,7 @@ public class DocxHelper {
     public DocxHelper(final WordprocessingMLPackage mlPackage, final ObjectFactory factory, final DocxRendererOptions options) {
         myPackage = mlPackage;
         myFactory = factory;
-        myOptions = options;
+        myOptions = options.isResolved ? options : new DocxRendererOptions(options, mlPackage);
         myDocumentPart = mlPackage.getMainDocumentPart();
         myNumPrColorMap = new HashMap<String, BigInteger>();
     }

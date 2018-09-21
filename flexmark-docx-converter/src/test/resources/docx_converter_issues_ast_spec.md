@@ -1306,7 +1306,6 @@ Aside Block Numbered List
                 <w:p>
                     <w:pPr>
                         <w:pStyle w:val="TableHeading"/>
-                        <w:jc w:val="center"/>
                     </w:pPr>
                     <w:r>
                         <w:t xml:space="preserve">TABLE_HEADING docx style named "Table Heading"</w:t>
@@ -1320,7 +1319,6 @@ Aside Block Numbered List
                 <w:p>
                     <w:pPr>
                         <w:pStyle w:val="TableHeading"/>
-                        <w:jc w:val="center"/>
                     </w:pPr>
                     <w:r>
                         <w:t xml:space="preserve">TABLE_HEADING</w:t>

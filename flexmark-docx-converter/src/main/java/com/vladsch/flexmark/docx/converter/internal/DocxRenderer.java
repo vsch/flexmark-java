@@ -30,8 +30,10 @@ import org.docx4j.openpackaging.exceptions.InvalidFormatException;
 import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
 import org.docx4j.openpackaging.parts.Part;
 import org.docx4j.openpackaging.parts.WordprocessingML.MainDocumentPart;
+import org.docx4j.openpackaging.parts.WordprocessingML.StyleDefinitionsPart;
 import org.docx4j.wml.CTBookmark;
 import org.docx4j.wml.Numbering;
+import org.docx4j.wml.Style;
 import org.docx4j.wml.Styles;
 
 import java.io.*;
@@ -93,27 +95,37 @@ public class DocxRenderer implements IRender {
     public static final DataKey<String> LOCAL_HYPERLINK_MISSING_FORMAT = new DataKey<String>("LOCAL_HYPERLINK_MISSING_FORMAT", "Missing target id: #%s");
     //public static final DataKey<String> FIRST_HEADING_ID_SUFFIX = new DataKey<String>("FIRST_HEADING_ID_SUFFIX", "");
 
-    public static final DataKey<String> DEFAULT_STYLE = new DataKey<String>("DEFAULT_STYLE", "Normal");
-    public static final DataKey<String> LOOSE_PARAGRAPH_STYLE = new DataKey<String>("LOOSE_PARAGRAPH_STYLE", "ParagraphTextBody");
-    public static final DataKey<String> TIGHT_PARAGRAPH_STYLE = new DataKey<String>("TIGHT_PARAGRAPH_STYLE", "BodyText");
-    public static final DataKey<String> PREFORMATTED_TEXT_STYLE = new DataKey<String>("PREFORMATTED_TEXT_STYLE", "PreformattedText");
-    public static final DataKey<String> BLOCK_QUOTE_STYLE = new DataKey<String>("BLOCK_QUOTE_STYLE", "Quotations");
     public static final DataKey<String> ASIDE_BLOCK_STYLE = new DataKey<String>("ASIDE_BLOCK_STYLE", "AsideBlock");
-    public static final DataKey<String> HORIZONTAL_LINE_STYLE = new DataKey<String>("HORIZONTAL_LINE_STYLE", "HorizontalLine");
-    public static final DataKey<String> TABLE_CAPTION = new DataKey<String>("TABLE_CAPTION", "TableCaption");
-    public static final DataKey<String> TABLE_CONTENTS = new DataKey<String>("TABLE_CONTENTS", "TableContents");
-    public static final DataKey<String> TABLE_HEADING = new DataKey<String>("TABLE_HEADING", "TableHeading");
-    public static final DataKey<String> FOOTNOTE_STYLE = new DataKey<String>("FOOTNOTE_STYLE", "Footnote");
+    public static final DataKey<String> BLOCK_QUOTE_STYLE = new DataKey<String>("BLOCK_QUOTE_STYLE", "Quotations");
     public static final DataKey<String> BOLD_STYLE = new DataKey<String>("BOLD_STYLE", "StrongEmphasis");
+    public static final DataKey<String> DEFAULT_STYLE = new DataKey<String>("DEFAULT_STYLE", "Normal");
+    public static final DataKey<String> ENDNOTE_ANCHOR_STYLE = new DataKey<String>("ENDNOTE_ANCHOR_STYLE", "EndnoteReference");
+    public static final DataKey<String> FOOTER = new DataKey<String>("FOOTER", "Footer");
+    public static final DataKey<String> FOOTNOTE_ANCHOR_STYLE = new DataKey<String>("FOOTNOTE_ANCHOR_STYLE", "FootnoteReference");
+    public static final DataKey<String> FOOTNOTE_STYLE = new DataKey<String>("FOOTNOTE_STYLE", "Footnote");
+    public static final DataKey<String> FOOTNOTE_TEXT = new DataKey<String>("FOOTNOTE_TEXT", "FootnoteText");
+    public static final DataKey<String> HEADER = new DataKey<String>("HEADER", "Header");
+    public static final DataKey<String> HEADING_1 = new DataKey<String>("HEADING_1", "Heading1");
+    public static final DataKey<String> HEADING_2 = new DataKey<String>("HEADING_2", "Heading2");
+    public static final DataKey<String> HEADING_3 = new DataKey<String>("HEADING_3", "Heading3");
+    public static final DataKey<String> HEADING_4 = new DataKey<String>("HEADING_4", "Heading4");
+    public static final DataKey<String> HEADING_5 = new DataKey<String>("HEADING_5", "Heading5");
+    public static final DataKey<String> HEADING_6 = new DataKey<String>("HEADING_6", "Heading6");
+    public static final DataKey<String> HORIZONTAL_LINE_STYLE = new DataKey<String>("HORIZONTAL_LINE_STYLE", "HorizontalLine");
+    public static final DataKey<String> HYPERLINK_STYLE = new DataKey<String>("HYPERLINK_STYLE", "Hyperlink");
+    public static final DataKey<String> INLINE_CODE_STYLE = new DataKey<String>("INLINE_CODE_STYLE", "SourceText");
+    public static final DataKey<String> INS_STYLE = new DataKey<String>("INS_STYLE", "Underlined");
     public static final DataKey<String> ITALIC_STYLE = new DataKey<String>("ITALIC_STYLE", "Emphasis");
+    public static final DataKey<String> LOOSE_PARAGRAPH_STYLE = new DataKey<String>("LOOSE_PARAGRAPH_STYLE", "ParagraphTextBody");
+    public static final DataKey<String> PREFORMATTED_TEXT_STYLE = new DataKey<String>("PREFORMATTED_TEXT_STYLE", "PreformattedText");
     public static final DataKey<String> STRIKE_THROUGH_STYLE = new DataKey<String>("STRIKE_THROUGH_STYLE", "Strikethrough");
     public static final DataKey<String> SUBSCRIPT_STYLE = new DataKey<String>("SUBSCRIPT_STYLE", "Subscript");
     public static final DataKey<String> SUPERSCRIPT_STYLE = new DataKey<String>("SUPERSCRIPT_STYLE", "Superscript");
-    public static final DataKey<String> INS_STYLE = new DataKey<String>("INS_STYLE", "Underlined");
-    public static final DataKey<String> INLINE_CODE_STYLE = new DataKey<String>("INLINE_CODE_STYLE", "SourceText");
-    public static final DataKey<String> HYPERLINK_STYLE = new DataKey<String>("HYPERLINK_STYLE", "Hyperlink");
-    public static final DataKey<String> FOOTNOTE_ANCHOR_STYLE = new DataKey<String>("FOOTNOTE_ANCHOR_STYLE", "FootnoteReference");
-    public static final DataKey<String> ENDNOTE_ANCHOR_STYLE = new DataKey<String>("ENDNOTE_ANCHOR_STYLE", "EndnoteReference");
+    public static final DataKey<String> TABLE_CAPTION = new DataKey<String>("TABLE_CAPTION", "TableCaption");
+    public static final DataKey<String> TABLE_CONTENTS = new DataKey<String>("TABLE_CONTENTS", "TableContents");
+    public static final DataKey<String> TABLE_GRID = new DataKey<String>("TABLE_GRID", "TableGrid");
+    public static final DataKey<String> TABLE_HEADING = new DataKey<String>("TABLE_HEADING", "TableHeading");
+    public static final DataKey<String> TIGHT_PARAGRAPH_STYLE = new DataKey<String>("TIGHT_PARAGRAPH_STYLE", "BodyText");
 
     // Not used.
     //public static final DataKey<String> BULLET_LIST_STYLE = new DataKey<String>("BULLET_LIST_STYLE", "BulletList");
@@ -137,7 +149,7 @@ public class DocxRenderer implements IRender {
     });
 
     final List<NodeDocxRendererFactory> nodeFormatterFactories;
-    final DocxRendererOptions rendererOptions;
+    //final DocxRendererOptions rendererOptions;
     private final DataHolder options;
     private final Builder builder;
     final List<LinkResolverFactory> linkResolverFactories;
@@ -148,7 +160,7 @@ public class DocxRenderer implements IRender {
         this.builder = new Builder(builder); // take a copy to avoid after creation side effects
         this.options = new DataSet(builder);
         this.htmlIdGeneratorFactory = builder.htmlIdGeneratorFactory;
-        this.rendererOptions = new DocxRendererOptions(this.options);
+        //this.rendererOptions = new DocxRendererOptions(this.options);
         this.nodeFormatterFactories = new ArrayList<NodeDocxRendererFactory>(builder.nodeDocxRendererFactories.size() + 1);
         this.nodeFormatterFactories.addAll(builder.nodeDocxRendererFactories);
 
@@ -523,10 +535,11 @@ public class DocxRenderer implements IRender {
         final TwoWayHashMap<Node, String> nodeIdMap;
         final HashMap<String, Integer> baseIdToSerial;
         final HashMap<String, String> idToValidBookmark;
+        final DocxRendererOptions rendererOptions;
 
         MainDocxRenderer(DataHolder options, WordprocessingMLPackage out, Document document, DocumentContentHandler contentContainer) {
             super(out, new ScopedDataSet(document, options));
-
+            rendererOptions = this.myRendererOptions;
             this.document = document;
             this.renderers = new HashMap<Class<?>, NodeDocxRendererHandler>(32);
             this.renderingPhases = new HashSet<DocxRendererPhase>(DocxRendererPhase.values().length);

@@ -54,7 +54,7 @@ public abstract class DocxContextImpl<T> implements DocxContext<T>, BlockFormatP
     public DocxContextImpl(WordprocessingMLPackage out, DataHolder options) {
         myPackage = out;
         this.options = options;
-        myRendererOptions = new DocxRendererOptions(this.options);
+        myRendererOptions = new DocxRendererOptions(this.options, out);
         myFactory = new ObjectFactory();
         myDocxHelper = new DocxHelper(myPackage, myFactory, myRendererOptions);
         myRunFormatProvider = this;

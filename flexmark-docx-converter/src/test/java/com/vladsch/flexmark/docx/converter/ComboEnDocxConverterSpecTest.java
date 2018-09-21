@@ -40,14 +40,14 @@ import org.junit.runners.Parameterized;
 import java.io.*;
 import java.util.*;
 
-public class ComboDocxConverterSpecTest extends ComboSpecTestCase {
+public class ComboEnDocxConverterSpecTest extends ComboSpecTestCase {
     // set to false to dump DOCX and XML files to pre-determined location
     // RELEASE : change to true for release
-    static final boolean SKIP_IGNORED_TESTS = true;
+    static final boolean SKIP_IGNORED_TESTS = ComboDocxConverterSpecTest.SKIP_IGNORED_TESTS;
     private static final boolean DUMP_TEST_CASE_FILES = !SKIP_IGNORED_TESTS;
     private static final boolean DUMP_ALL_TESTS_FILES = !SKIP_IGNORED_TESTS;
     private static final String PROJECT_ROOT_DIRECTORY = "/Users/vlad/src/projects/flexmark-java";
-    private static final String FILE_TEST_CASE_DUMP_LOCATION = "/flexmark-docx-converter/src/test/resources/docx_converter_ast_spec/";
+    private static final String FILE_TEST_CASE_DUMP_LOCATION = "/flexmark-docx-converter/src/test/resources/docx_converter_en_ast_spec/";
     private static final String FILE_ALL_TESTS_DUMP_NAME = FILE_TEST_CASE_DUMP_LOCATION + "AllTests";
 
     private static final String SPEC_RESOURCE = "/docx_converter_ast_spec.md";
@@ -82,6 +82,8 @@ public class ComboDocxConverterSpecTest extends ComboSpecTestCase {
     private static final Parser PARSER = Parser.builder(OPTIONS).build();
     // The spec says URL-escaping is optional, but the examples assume that it's enabled.
     private static final DocxRenderer RENDERER = DocxRenderer.builder(OPTIONS).build();
+    private static final String TEMPLATE_XML = "/EN-Template.xml";
+
     static {
         //optionsMap.put("src-pos", new MutableDataSet().set(HtmlRenderer.SOURCE_POSITION_ATTRIBUTE, "md-pos"));
         //optionsMap.put("option1", new MutableDataSet().set(DocxConverterExtension.DOCX_CONVERTER_OPTION1, true));
@@ -105,7 +107,7 @@ public class ComboDocxConverterSpecTest extends ComboSpecTestCase {
         return optionsMap.get(optionSet);
     }
 
-    public ComboDocxConverterSpecTest(SpecExample example) {
+    public ComboEnDocxConverterSpecTest(SpecExample example) {
         super(example);
     }
 
@@ -152,7 +154,7 @@ public class ComboDocxConverterSpecTest extends ComboSpecTestCase {
             // write it out to file, hard-coded for now                    IGNORE
             File file = new File(String.format("%s%s%s_%d.docx", PROJECT_ROOT_DIRECTORY, FILE_TEST_CASE_DUMP_LOCATION, specExample.getSection(), specExample.getExampleNumber()));
             File file2 = new File(String.format("%s%s%s_%d.xml", PROJECT_ROOT_DIRECTORY, FILE_TEST_CASE_DUMP_LOCATION, specExample.getSection(), specExample.getExampleNumber()));
-            WordprocessingMLPackage mlPackage = DocxRenderer.getDefaultTemplate();
+            WordprocessingMLPackage mlPackage = DocxRenderer.getDefaultTemplate(TEMPLATE_XML);
             RENDERER.withOptions(options).render(node, mlPackage);
 
             try {
@@ -261,7 +263,7 @@ public class ComboDocxConverterSpecTest extends ComboSpecTestCase {
     public void fullTestSpecStarting() {
         if (!DUMP_ALL_TESTS_FILES) return;
 
-        myPackage = DocxRenderer.getDefaultTemplate();
+        myPackage = DocxRenderer.getDefaultTemplate(TEMPLATE_XML);
         if (myPackage == null) return;
 
         myDocxContext = new DocxContextImpl<Node>(myPackage, null) {

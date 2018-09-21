@@ -6710,3 +6710,17 @@ Document[0, 53]
 ````````````````````````````````
 
 
+## Space in URL
+
+```````````````````````````````` example(Space in URL: 1) options(url-space)
+[some file](some file.md)
+.
+<p><a href="some%20file.md">some file</a></p>
+.
+Document[0, 25]
+  Paragraph[0, 25]
+    Link[0, 25] textOpen:[0, 1, "["] text:[1, 10, "some file"] textClose:[10, 11, "]"] linkOpen:[11, 12, "("] url:[12, 24, "some file.md"] pageRef:[12, 24, "some file.md"] linkClose:[24, 25, ")"]
+      Text[1, 10] chars:[1, 10, "some file"]
+````````````````````````````````
+
+

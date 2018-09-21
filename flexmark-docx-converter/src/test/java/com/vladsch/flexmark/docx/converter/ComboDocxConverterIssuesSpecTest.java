@@ -47,9 +47,9 @@ public class ComboDocxConverterIssuesSpecTest extends ComboSpecTestCase {
     private static final boolean SKIP_IGNORED_TESTS = ComboDocxConverterSpecTest.SKIP_IGNORED_TESTS;
     private static final boolean DUMP_TEST_CASE_FILES = !SKIP_IGNORED_TESTS;
     private static final boolean DUMP_ALL_TESTS_FILES = !SKIP_IGNORED_TESTS;
-    private static final String PROJECT_ROOT_DIRECTORY = "/Users/vlad/src/flexmark-java";
+    private static final String PROJECT_ROOT_DIRECTORY = "/Users/vlad/src/projects/flexmark-java";
     private static final String FILE_TEST_CASE_DUMP_LOCATION = "/flexmark-docx-converter/src/test/resources/docx_converter_issues_ast_spec/";
-    private static final String FILE_ALL_TESTS_DUMP_NAME = "/flexmark-docx-converter/src/test/resources/docx_converter_issues_ast_spec/AllTests";
+    private static final String FILE_ALL_TESTS_DUMP_NAME = FILE_TEST_CASE_DUMP_LOCATION + "AllTests";
 
     private static final String SPEC_RESOURCE = "/docx_converter_issues_ast_spec.md";
     private static final DataHolder OPTIONS = new MutableDataSet()
@@ -191,7 +191,7 @@ public class ComboDocxConverterIssuesSpecTest extends ComboSpecTestCase {
         final boolean failed = !ignoredCase && !actualHTML.equals(example.getHtml());
 
         // add source information
-        myDocxContext.createP("Heading3");
+        myDocxContext.createP(myDocxContext.getRenderingOptions().HEADING_3);
 
         if (ignoredCase) {
             // does not match, need more stuff

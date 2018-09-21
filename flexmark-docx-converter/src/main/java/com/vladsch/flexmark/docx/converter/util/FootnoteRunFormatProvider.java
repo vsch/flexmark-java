@@ -4,7 +4,7 @@ import org.docx4j.wml.RPr;
 
 public class FootnoteRunFormatProvider<T> extends RunFormatProviderBase<T> {
     public FootnoteRunFormatProvider(final DocxContext<T> docx) {
-        super(docx,"", false,"");
+        super(docx,docx.getRenderingOptions().FOOTNOTE_TEXT, false,"");
     }
 
     @Override
