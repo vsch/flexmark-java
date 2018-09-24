@@ -40,7 +40,6 @@
       <element id="module-output" name="flexmark-ext-enumerated-reference" />
       <element id="module-output" name="flexmark-ext-admonition" />
       <element id="module-output" name="flexmark-ext-gitlab" />
-      <element id="module-output" name="flexmark-ext-macros" />
       <element id="module-output" name="flexmark-ext-xwiki-macros" />
       <element id="module-output" name="flexmark-ext-wikilink" />
     </root>

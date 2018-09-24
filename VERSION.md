@@ -7,6 +7,7 @@ flexmark-java
 
 - [To Do](#to-do)
     - [Docx Converter](#docx-converter)
+- [0.34.34](#03434)
 - [0.34.32](#03432)
 - [0.34.30](#03430)
 - [0.34.28](#03428)
@@ -245,6 +246,11 @@ flexmark-java
 
 &nbsp;</details>
 
+0.34.34
+-------
+
+* Change: docx4j library version to 6.0.1
+
 0.34.32
 -------
 
@@ -253,7 +259,7 @@ flexmark-java
 * Fix: Docx Converter to use style names instead of style ids because Word localizes ids and
   leaves the names common to all locales. Completely opposite to intuition but that is Word.
 * Fix: Docx Converter remove hardcoded "CENTER" alignment for table headings overriding the
-  `Table Heading` provided alignment.
+  `Table Heading` style provided alignment.
 
 0.34.30
 -------

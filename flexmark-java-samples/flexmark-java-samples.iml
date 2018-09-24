@@ -47,7 +47,6 @@
     <orderEntry type="library" name="com.openhtmltopdf:openhtmltopdf-rtl-support:0.0.1-RC13" level="project" />
     <orderEntry type="module" module-name="flexmark-html-parser" />
     <orderEntry type="module" module-name="flexmark-docx-converter" />
-    <orderEntry type="library" name="org.docx4j:docx4j:3.3.6" level="project" />
     <orderEntry type="module" module-name="flexmark-ext-admonition" />
     <orderEntry type="module" module-name="flexmark-ext-attributes" />
     <orderEntry type="module" module-name="flexmark-ext-enumerated-reference" />
@@ -55,5 +54,6 @@
     <orderEntry type="module" module-name="flexmark-ext-gfm-users" />
     <orderEntry type="module" module-name="flexmark-ext-media-tags" />
     <orderEntry type="module" module-name="flexmark-ext-youtube-embedded" />
+    <orderEntry type="library" name="org.docx4j:docx4j" level="project" />
   </component>
 </module>
