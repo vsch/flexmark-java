@@ -8691,6 +8691,489 @@ Paragraph text, repeated footnote[^1]
 ````````````````````````````````
 
 
+```````````````````````````````` example Footnotes: 4
+Paragraph text[^1]
+
+Paragraph text, repeated footnote[^1]
+
+[^1]: Footnote text that will be wrapped and should have a hanging indent to align the overflow
+      to the level of the text after the footnote anchor at the left margin. [Test](http://example.com)
+
+.
+<w:body>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="ParagraphTextBody"/>
+        </w:pPr>
+        <w:r>
+            <w:t xml:space="preserve">Paragraph text</w:t>
+        </w:r>
+        <w:r>
+            <w:rPr>
+                <w:rStyle w:val="FootnoteReference"/>
+            </w:rPr>
+            <w:footnoteReference w:id="1"/>
+        </w:r>
+    </w:p>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="ParagraphTextBody"/>
+        </w:pPr>
+        <w:r>
+            <w:t xml:space="preserve">Paragraph text, repeated footnote</w:t>
+        </w:r>
+        <w:r>
+            <w:rPr>
+                <w:rStyle w:val="FootnoteReference"/>
+            </w:rPr>
+            <w:footnoteReference w:id="2"/>
+        </w:r>
+    </w:p>
+</w:body>
+<w:footnote w:id="-1" w:type="separator">
+    <w:p>
+        <w:r>
+            <w:separator/>
+        </w:r>
+    </w:p>
+</w:footnote>
+<w:footnote w:id="0" w:type="continuationSeparator">
+    <w:p>
+        <w:r>
+            <w:continuationSeparator/>
+        </w:r>
+    </w:p>
+</w:footnote>
+<w:footnote w:id="1">
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="Footnote"/>
+        </w:pPr>
+        <w:r>
+            <w:rPr>
+                <w:rStyle w:val="FootnoteReference"/>
+            </w:rPr>
+            <w:footnoteRef/>
+        </w:r>
+        <w:r>
+            <w:t xml:space="preserve">→</w:t>
+        </w:r>
+        <w:r>
+            <w:t xml:space="preserve">Footnote text that will be wrapped and should have a hanging indent to align the overflow</w:t>
+        </w:r>
+        <w:r>
+            <w:t xml:space="preserve"> </w:t>
+        </w:r>
+        <w:r>
+            <w:t xml:space="preserve">to the level of the text after the footnote anchor at the left margin. </w:t>
+        </w:r>
+        <w:hyperlink r:id="rId1" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
+            <w:r>
+                <w:rPr>
+                    <w:rStyle w:val="Hyperlink"/>
+                </w:rPr>
+                <w:t xml:space="preserve">Test</w:t>
+            </w:r>
+        </w:hyperlink>
+    </w:p>
+</w:footnote>
+<w:footnote w:id="2">
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="Footnote"/>
+        </w:pPr>
+        <w:r>
+            <w:rPr>
+                <w:rStyle w:val="FootnoteReference"/>
+            </w:rPr>
+            <w:footnoteRef/>
+        </w:r>
+        <w:r>
+            <w:t xml:space="preserve">→</w:t>
+        </w:r>
+        <w:r>
+            <w:t xml:space="preserve">Footnote text that will be wrapped and should have a hanging indent to align the overflow</w:t>
+        </w:r>
+        <w:r>
+            <w:t xml:space="preserve"> </w:t>
+        </w:r>
+        <w:r>
+            <w:t xml:space="preserve">to the level of the text after the footnote anchor at the left margin. </w:t>
+        </w:r>
+        <w:hyperlink r:id="rId1" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
+            <w:r>
+                <w:rPr>
+                    <w:rStyle w:val="Hyperlink"/>
+                </w:rPr>
+                <w:t xml:space="preserve">Test</w:t>
+            </w:r>
+        </w:hyperlink>
+    </w:p>
+</w:footnote>
+<w:footnote w:id="-1"/>
+<w:footnote w:id="0"/>
+````````````````````````````````
+
+
+```````````````````````````````` example Footnotes: 5
+|ID|
+|:--:|
+|Der Hersteller[^C1-04]|
+
+[^C1-04]: Beispiele [DREAD](https://en.wikipedia.org/wiki/DREAD_(risk_assessment_model))
+
+.
+<w:body>
+    <w:tbl>
+        <w:tblPr>
+            <w:tblW w:type="auto" w:w="0"/>
+            <w:jc w:val="left"/>
+            <w:tblInd w:type="dxa" w:w="120"/>
+            <w:tblBorders>
+                <w:top w:color="000001" w:space="0" w:sz="2" w:val="single"/>
+                <w:left w:color="000001" w:space="0" w:sz="2" w:val="single"/>
+                <w:bottom w:color="000001" w:space="0" w:sz="2" w:val="single"/>
+                <w:right w:color="000001" w:space="0" w:sz="2" w:val="single"/>
+                <w:insideH w:color="000001" w:space="0" w:sz="2" w:val="single"/>
+                <w:insideV w:color="000001" w:space="0" w:sz="2" w:val="single"/>
+            </w:tblBorders>
+            <w:tblCellMar>
+                <w:top w:type="dxa" w:w="80"/>
+                <w:left w:type="dxa" w:w="80"/>
+                <w:bottom w:type="dxa" w:w="80"/>
+                <w:right w:type="dxa" w:w="80"/>
+            </w:tblCellMar>
+            <w:tblLook w:firstColumn="1" w:firstRow="1" w:lastColumn="0"
+                w:lastRow="0" w:noHBand="0" w:noVBand="1" w:val="04a0"/>
+        </w:tblPr>
+        <w:tr>
+            <w:trPr>
+                <w:tblHeader/>
+            </w:trPr>
+            <w:tc>
+                <w:tcPr>
+                    <w:shd w:fill="DDDDDD" w:val="clear"/>
+                </w:tcPr>
+                <w:p>
+                    <w:pPr>
+                        <w:pStyle w:val="TableHeading"/>
+                        <w:jc w:val="center"/>
+                    </w:pPr>
+                    <w:r>
+                        <w:t xml:space="preserve">ID</w:t>
+                    </w:r>
+                </w:p>
+            </w:tc>
+        </w:tr>
+        <w:tr>
+            <w:trPr/>
+            <w:tc>
+                <w:tcPr/>
+                <w:p>
+                    <w:pPr>
+                        <w:pStyle w:val="TableContents"/>
+                        <w:jc w:val="center"/>
+                    </w:pPr>
+                    <w:r>
+                        <w:t xml:space="preserve">Der Hersteller</w:t>
+                    </w:r>
+                    <w:r>
+                        <w:rPr>
+                            <w:rStyle w:val="FootnoteReference"/>
+                        </w:rPr>
+                        <w:footnoteReference w:id="1"/>
+                    </w:r>
+                </w:p>
+            </w:tc>
+        </w:tr>
+    </w:tbl>
+</w:body>
+<w:footnote w:id="-1" w:type="separator">
+    <w:p>
+        <w:r>
+            <w:separator/>
+        </w:r>
+    </w:p>
+</w:footnote>
+<w:footnote w:id="0" w:type="continuationSeparator">
+    <w:p>
+        <w:r>
+            <w:continuationSeparator/>
+        </w:r>
+    </w:p>
+</w:footnote>
+<w:footnote w:id="1">
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="Footnote"/>
+        </w:pPr>
+        <w:r>
+            <w:rPr>
+                <w:rStyle w:val="FootnoteReference"/>
+            </w:rPr>
+            <w:footnoteRef/>
+        </w:r>
+        <w:r>
+            <w:t xml:space="preserve">→</w:t>
+        </w:r>
+        <w:r>
+            <w:t xml:space="preserve">Beispiele </w:t>
+        </w:r>
+        <w:hyperlink r:id="rId1" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
+            <w:r>
+                <w:rPr>
+                    <w:rStyle w:val="Hyperlink"/>
+                </w:rPr>
+                <w:t xml:space="preserve">DREAD</w:t>
+            </w:r>
+        </w:hyperlink>
+    </w:p>
+</w:footnote>
+<w:footnote w:id="-1"/>
+<w:footnote w:id="0"/>
+````````````````````````````````
+
+
+```````````````````````````````` example Footnotes: 6
+|ID|
+|:--:|
+|Der Hersteller|
+
+Der Hersteller[^C1-04]
+
+[^C1-04]: Beispiele [DREAD](https://en.wikipedia.org/wiki/DREAD_(risk_assessment_model))
+
+.
+<w:body>
+    <w:tbl>
+        <w:tblPr>
+            <w:tblW w:type="auto" w:w="0"/>
+            <w:jc w:val="left"/>
+            <w:tblInd w:type="dxa" w:w="120"/>
+            <w:tblBorders>
+                <w:top w:color="000001" w:space="0" w:sz="2" w:val="single"/>
+                <w:left w:color="000001" w:space="0" w:sz="2" w:val="single"/>
+                <w:bottom w:color="000001" w:space="0" w:sz="2" w:val="single"/>
+                <w:right w:color="000001" w:space="0" w:sz="2" w:val="single"/>
+                <w:insideH w:color="000001" w:space="0" w:sz="2" w:val="single"/>
+                <w:insideV w:color="000001" w:space="0" w:sz="2" w:val="single"/>
+            </w:tblBorders>
+            <w:tblCellMar>
+                <w:top w:type="dxa" w:w="80"/>
+                <w:left w:type="dxa" w:w="80"/>
+                <w:bottom w:type="dxa" w:w="80"/>
+                <w:right w:type="dxa" w:w="80"/>
+            </w:tblCellMar>
+            <w:tblLook w:firstColumn="1" w:firstRow="1" w:lastColumn="0"
+                w:lastRow="0" w:noHBand="0" w:noVBand="1" w:val="04a0"/>
+        </w:tblPr>
+        <w:tr>
+            <w:trPr>
+                <w:tblHeader/>
+            </w:trPr>
+            <w:tc>
+                <w:tcPr>
+                    <w:shd w:fill="DDDDDD" w:val="clear"/>
+                </w:tcPr>
+                <w:p>
+                    <w:pPr>
+                        <w:pStyle w:val="TableHeading"/>
+                        <w:jc w:val="center"/>
+                    </w:pPr>
+                    <w:r>
+                        <w:t xml:space="preserve">ID</w:t>
+                    </w:r>
+                </w:p>
+            </w:tc>
+        </w:tr>
+        <w:tr>
+            <w:trPr/>
+            <w:tc>
+                <w:tcPr/>
+                <w:p>
+                    <w:pPr>
+                        <w:pStyle w:val="TableContents"/>
+                        <w:jc w:val="center"/>
+                    </w:pPr>
+                    <w:r>
+                        <w:t xml:space="preserve">Der Hersteller</w:t>
+                    </w:r>
+                </w:p>
+            </w:tc>
+        </w:tr>
+    </w:tbl>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="ParagraphTextBody"/>
+        </w:pPr>
+        <w:r>
+            <w:t xml:space="preserve">Der Hersteller</w:t>
+        </w:r>
+        <w:r>
+            <w:rPr>
+                <w:rStyle w:val="FootnoteReference"/>
+            </w:rPr>
+            <w:footnoteReference w:id="1"/>
+        </w:r>
+    </w:p>
+</w:body>
+<w:footnote w:id="-1" w:type="separator">
+    <w:p>
+        <w:r>
+            <w:separator/>
+        </w:r>
+    </w:p>
+</w:footnote>
+<w:footnote w:id="0" w:type="continuationSeparator">
+    <w:p>
+        <w:r>
+            <w:continuationSeparator/>
+        </w:r>
+    </w:p>
+</w:footnote>
+<w:footnote w:id="1">
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="Footnote"/>
+        </w:pPr>
+        <w:r>
+            <w:rPr>
+                <w:rStyle w:val="FootnoteReference"/>
+            </w:rPr>
+            <w:footnoteRef/>
+        </w:r>
+        <w:r>
+            <w:t xml:space="preserve">→</w:t>
+        </w:r>
+        <w:r>
+            <w:t xml:space="preserve">Beispiele </w:t>
+        </w:r>
+        <w:hyperlink r:id="rId1" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
+            <w:r>
+                <w:rPr>
+                    <w:rStyle w:val="Hyperlink"/>
+                </w:rPr>
+                <w:t xml:space="preserve">DREAD</w:t>
+            </w:r>
+        </w:hyperlink>
+    </w:p>
+</w:footnote>
+<w:footnote w:id="-1"/>
+<w:footnote w:id="0"/>
+````````````````````````````````
+
+
+```````````````````````````````` example Footnotes: 7
+|ID|
+|:--:|
+|Der Hersteller[^C1-04]|
+
+[^C1-04]: Beispiele DREAD
+
+.
+<w:body>
+    <w:tbl>
+        <w:tblPr>
+            <w:tblW w:type="auto" w:w="0"/>
+            <w:jc w:val="left"/>
+            <w:tblInd w:type="dxa" w:w="120"/>
+            <w:tblBorders>
+                <w:top w:color="000001" w:space="0" w:sz="2" w:val="single"/>
+                <w:left w:color="000001" w:space="0" w:sz="2" w:val="single"/>
+                <w:bottom w:color="000001" w:space="0" w:sz="2" w:val="single"/>
+                <w:right w:color="000001" w:space="0" w:sz="2" w:val="single"/>
+                <w:insideH w:color="000001" w:space="0" w:sz="2" w:val="single"/>
+                <w:insideV w:color="000001" w:space="0" w:sz="2" w:val="single"/>
+            </w:tblBorders>
+            <w:tblCellMar>
+                <w:top w:type="dxa" w:w="80"/>
+                <w:left w:type="dxa" w:w="80"/>
+                <w:bottom w:type="dxa" w:w="80"/>
+                <w:right w:type="dxa" w:w="80"/>
+            </w:tblCellMar>
+            <w:tblLook w:firstColumn="1" w:firstRow="1" w:lastColumn="0"
+                w:lastRow="0" w:noHBand="0" w:noVBand="1" w:val="04a0"/>
+        </w:tblPr>
+        <w:tr>
+            <w:trPr>
+                <w:tblHeader/>
+            </w:trPr>
+            <w:tc>
+                <w:tcPr>
+                    <w:shd w:fill="DDDDDD" w:val="clear"/>
+                </w:tcPr>
+                <w:p>
+                    <w:pPr>
+                        <w:pStyle w:val="TableHeading"/>
+                        <w:jc w:val="center"/>
+                    </w:pPr>
+                    <w:r>
+                        <w:t xml:space="preserve">ID</w:t>
+                    </w:r>
+                </w:p>
+            </w:tc>
+        </w:tr>
+        <w:tr>
+            <w:trPr/>
+            <w:tc>
+                <w:tcPr/>
+                <w:p>
+                    <w:pPr>
+                        <w:pStyle w:val="TableContents"/>
+                        <w:jc w:val="center"/>
+                    </w:pPr>
+                    <w:r>
+                        <w:t xml:space="preserve">Der Hersteller</w:t>
+                    </w:r>
+                    <w:r>
+                        <w:rPr>
+                            <w:rStyle w:val="FootnoteReference"/>
+                        </w:rPr>
+                        <w:footnoteReference w:id="1"/>
+                    </w:r>
+                </w:p>
+            </w:tc>
+        </w:tr>
+    </w:tbl>
+</w:body>
+<w:footnote w:id="-1" w:type="separator">
+    <w:p>
+        <w:r>
+            <w:separator/>
+        </w:r>
+    </w:p>
+</w:footnote>
+<w:footnote w:id="0" w:type="continuationSeparator">
+    <w:p>
+        <w:r>
+            <w:continuationSeparator/>
+        </w:r>
+    </w:p>
+</w:footnote>
+<w:footnote w:id="1">
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="Footnote"/>
+        </w:pPr>
+        <w:r>
+            <w:rPr>
+                <w:rStyle w:val="FootnoteReference"/>
+            </w:rPr>
+            <w:footnoteRef/>
+        </w:r>
+        <w:r>
+            <w:t xml:space="preserve">→</w:t>
+        </w:r>
+        <w:r>
+            <w:t xml:space="preserve">Beispiele DREAD</w:t>
+        </w:r>
+    </w:p>
+</w:footnote>
+<w:footnote w:id="-1"/>
+<w:footnote w:id="0"/>
+````````````````````````````````
+
+
 ## TOC
 
 ```````````````````````````````` example(TOC: 1) options(IGNORED)

@@ -1644,7 +1644,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
         docx.renderChildren(node);
     }
 
-    private static JcEnumeration getAlignValue(TableCell.Alignment alignment) {
+    static JcEnumeration getAlignValue(TableCell.Alignment alignment) {
         switch (alignment) {
             case LEFT:
                 return JcEnumeration.LEFT;
@@ -1814,6 +1814,21 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
         public void run() {
             myDocx.setBlockFormatProvider(new FootnoteBlockFormatProvider<>(myDocx));
             myDocx.setRunFormatProvider(new FootnoteRunFormatProvider<>(myDocx));
+            myDocx.setParaContainer(new ParaContainer() {
+                @Override
+                public void addP(final P p) {
+                    myFtnEdn.getContent().add(p);
+                }
+
+                @Override
+                public P getLastP() {
+                    final List<Object> content = myFtnEdn.getContent();
+                    if (content == null || content.size() == 0) return null;
+                    final Object o = content.get(content.size() - 1);
+                    return o instanceof P ? (P) o : null;
+                }
+            });
+
             myDocx.setContentContainer(new ContentContainer() {
                 @Override
                 public RelationshipsPart getRelationshipsPart() {

@@ -7,6 +7,7 @@ flexmark-java
 
 - [To Do](#to-do)
     - [Docx Converter](#docx-converter)
+- [0.34.36](#03436)
 - [0.34.34](#03434)
 - [0.34.32](#03432)
 - [0.34.30](#03430)
@@ -245,6 +246,12 @@ flexmark-java
 * [ ] Fix: #99, YamlFrontMatterBlockParser ignores multi-key list items
 
 &nbsp;</details>
+
+0.34.36
+-------
+
+* Fix: docx conversion of footnote refs in tables to footnotes which contained links generated
+  invalid docx.
 
 0.34.34
 -------
