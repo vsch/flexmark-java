@@ -44,11 +44,11 @@ public class ComboDocxConverterSpecTest extends ComboSpecTestCase {
     // set to false to dump DOCX and XML files to pre-determined location
     // RELEASE : change to true for release
     static final boolean SKIP_IGNORED_TESTS = true;
-    private static final boolean DUMP_TEST_CASE_FILES = !SKIP_IGNORED_TESTS;
-    private static final boolean DUMP_ALL_TESTS_FILES = !SKIP_IGNORED_TESTS;
-    private static final String PROJECT_ROOT_DIRECTORY = "/Users/vlad/src/projects/flexmark-java";
-    private static final String FILE_TEST_CASE_DUMP_LOCATION = "/flexmark-docx-converter/src/test/resources/docx_converter_ast_spec/";
-    private static final String FILE_ALL_TESTS_DUMP_NAME = FILE_TEST_CASE_DUMP_LOCATION + "AllTests";
+    static final boolean DUMP_TEST_CASE_FILES = !SKIP_IGNORED_TESTS;
+    static final boolean DUMP_ALL_TESTS_FILES = !SKIP_IGNORED_TESTS;
+    static final String PROJECT_ROOT_DIRECTORY = "/Users/vlad/src/projects/flexmark-java";
+    static final String FILE_TEST_CASE_DUMP_LOCATION = "/flexmark-docx-converter/src/test/resources/docx_converter_ast_spec/";
+    static final String FILE_ALL_TESTS_DUMP_NAME = FILE_TEST_CASE_DUMP_LOCATION + "AllTests";
 
     private static final String SPEC_RESOURCE = "/docx_converter_ast_spec.md";
     private static final DataHolder OPTIONS = new MutableDataSet()

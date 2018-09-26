@@ -48,7 +48,7 @@ public class ComboDocxConverterIssuesSpecTest extends ComboSpecTestCase {
     private static final boolean SKIP_IGNORED_TESTS = ComboDocxConverterSpecTest.SKIP_IGNORED_TESTS;
     private static final boolean DUMP_TEST_CASE_FILES = !SKIP_IGNORED_TESTS;
     private static final boolean DUMP_ALL_TESTS_FILES = !SKIP_IGNORED_TESTS;
-    private static final String PROJECT_ROOT_DIRECTORY = "/Users/vlad/src/projects/flexmark-java";
+    private static final String PROJECT_ROOT_DIRECTORY = ComboDocxConverterSpecTest.PROJECT_ROOT_DIRECTORY;
     private static final String FILE_TEST_CASE_DUMP_LOCATION = "/flexmark-docx-converter/src/test/resources/docx_converter_issues_ast_spec/";
     private static final String FILE_ALL_TESTS_DUMP_NAME = FILE_TEST_CASE_DUMP_LOCATION + "AllTests";
 

@@ -1564,7 +1564,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
         }
     }
 
-    private void render(TableCell node, final DocxRendererContext docx) {
+    private void render(final TableCell node, final DocxRendererContext docx) {
         String styleName = node.isHeader() ? docx.getDocxRendererOptions().TABLE_HEADING : docx.getDocxRendererOptions().TABLE_CONTENTS;
 
         // Create object for tc (wrapped in JAXBElement)
@@ -1599,47 +1599,13 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
         P p = docx.createP();
         PPr ppr = p.getPPr();
 
-        // Create object for jc
-        JcEnumeration alignValue = null;
-
         if (node.getAlignment() != null) {
-            alignValue = getAlignValue(node.getAlignment());
-        //} else if (node.isHeader()) {
-        //    if (style != null && style.getPPr() != null && style.getPPr().getJc() != null) {
-        //        alignValue = style.getPPr().getJc().getVal();
-        //        //alignValue = null; // use style
-        //    } else {
-        //        //alignValue = JcEnumeration.CENTER;
-        //    }
-        }
-        if (alignValue != null) {
+            // Create object for jc
+            JcEnumeration alignValue = getAlignValue(node.getAlignment());
             Jc jc3 = docx.getFactory().createJc();
             ppr.setJc(jc3);
             jc3.setVal(alignValue);
         }
-
-        //// Create object for rPr
-        //ParaRPr pararpr = docx.getFactory().createParaRPr();
-        //ppr.setRPr(pararpr);
-        //
-        //// Create object for pStyle
-        //PPrBase.PStyle pprbasepstyle = docx.getFactory().createPPrBasePStyle();
-        //ppr.setPStyle(pprbasepstyle);
-        //pprbasepstyle.setVal(style);
-
-        // Create object for r
-        //R r = docx.getFactory().createR();
-        //p.getContent().add(r);
-        //// Create object for rPr
-        //RPr rpr = docx.getFactory().createRPr();
-        //r.setRPr(rpr);
-        //
-        //// Create object for t (wrapped in JAXBElement)
-        //org.docx4j.wml.Text text = docx.getFactory().createText();
-        //JAXBElement<org.docx4j.wml.Text> textWrapped = docx.getFactory().createRT(text);
-        //r.getContent().add(textWrapped);
-        //text.setValue("Combined header ");
-        //text.setSpace("preserve");
 
         docx.renderChildren(node);
     }

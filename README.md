@@ -28,7 +28,7 @@ than ideal and for pathological input either hangs or practically hangs during p
 ### Requirements
 
 * Java 7 or above
-* Android compatibility to be added 
+* Android compatibility to be added
 * The project is on Maven: `com.vladsch.flexmark`
 * The core has no dependencies; for extensions, see below
 
@@ -402,8 +402,8 @@ earlier versions of this project.
 
 ### Feature Comparison
 
-| Feature                                                                          | flexmark-java                                                    | commonmark-java                                                  | pegdown                                                              |
-|----------------------------------------------------------------------------------|:-----------------------------------------------------------------|:------------------------------------------------------------------|:---------------------------------------------------------------------|
+| Feature                                                                          | flexmark-java                                                    | commonmark-java                                                   | pegdown                                                              |
+|:---------------------------------------------------------------------------------|:-----------------------------------------------------------------|:------------------------------------------------------------------|:---------------------------------------------------------------------|
 | Relative parse time (less is better)                                             | :heavy_check_mark: 1x [(1)](#1)                                  | :heavy_check_mark: 0.6x to 0.7x [(2)](#2)                         | :x: 25x average, 20,000x to ∞ for pathological input [(3)](#3)       |
 | All source elements in the AST                                                   | :heavy_check_mark:                                               | :x:                                                               | :heavy_check_mark:                                                   |
 | AST elements with source position                                                | :heavy_check_mark:                                               | :heavy_check_mark:                                                | :heavy_check_mark: with some errors and idiosyncrasies               |
@@ -595,10 +595,11 @@ Copyright (c) 2016-2018, Vladimir Schneider,
 
 BSD (2-clause) licensed, see [LICENSE.txt] file.
 
+[Admonition Extension, Material for MkDocs]: https://squidfunk.github.io/mkdocs-material/extensions/admonition/
 [All about me]: https://vladsch.com/about
-[CommonMark]: http://commonmark.org/
-[CommonMark (spec 0.27)]: http://spec.commonmark.org/0.27/
-[CommonMark (spec 0.28)]: http://spec.commonmark.org/0.28/
+[CommonMark]: https://commonmark.org
+[CommonMark (spec 0.27)]: https://spec.commonmark.org/0.27
+[CommonMark (spec 0.28)]: https://spec.commonmark.org/0.28
 [commonmark-java]: https://github.com/atlassian/commonmark-java
 [commonMarkSpec.md]: https://github.com/vsch/idea-multimarkdown/blob/master/test/data/performance/commonMarkSpec.md
 [docx4j]: https://www.docx4java.org/trac/docx4j
@@ -612,7 +613,7 @@ BSD (2-clause) licensed, see [LICENSE.txt] file.
 [Include Markdown and HTML File Content]: ../../wiki/Usage#include-markdown-and-html-file-content
 [intellij-markdown]: https://github.com/valich/intellij-markdown
 [Jekyll]: https://jekyllrb.com
-[Kramdown]: http://kramdown.gettalong.org/
+[Kramdown]: https://kramdown.gettalong.org
 [League/CommonMark]: https://github.com/thephpleague/commonmark
 [LICENSE.txt]: LICENSE.txt
 [Markdown]: https://daringfireball.net/projects/markdown/
@@ -622,47 +623,8 @@ BSD (2-clause) licensed, see [LICENSE.txt] file.
 [pegdown]: http://pegdown.org
 [Pegdown - Achilles heel of the Markdown Navigator plugin]: http://vladsch.com/blog/15
 [PegdownOptionsAdapter.java]: flexmark-profile-pegdown/src/main/java/com/vladsch/flexmark/profiles/pegdown/PegdownOptionsAdapter.java
-[PHP Markdown Extra]: http://michelf.com/projects/php-markdown/extra/#abbr
+[PHP Markdown Extra]: https://michelf.ca/projects/php-markdown/extra/#abbr
 [spec.txt]: https://github.com/vsch/idea-multimarkdown/blob/master/test/data/performance/spec.md
 [VERSION.md]: https://github.com/vsch/idea-multimarkdown/blob/master/test/data/performance/VERSION.md
 [wrap.md]: https://github.com/vsch/idea-multimarkdown/blob/master/test/data/performance/wrap.md
-[.gitignore]: http://hsz.mobi
-[Android Studio]: http://developer.android.com/sdk/installing/studio.html
-[AppCode]: http://www.jetbrains.com/objc
-[autolink-java]: https://github.com/robinst/autolink-java
-[CLion]: https://www.jetbrains.com/clion
-[commonmark.js]: https://github.com/jgm/commonmark.js
-[Craig's List]: http://montreal.en.craigslist.ca/
-[DataGrip]: https://www.jetbrains.com/datagrip
-[flexmark-java on Maven]: https://search.maven.org/#search%7Cga%7C1%7Cg%3A%22com.vladsch.flexmark%22
-[flexmark-java wiki]: ../../wiki
-[gfm-tables]: https://help.github.com/articles/organizing-information-with-tables/
-[GitHub Flavoured Markdown]: https://help.github.com/articles/basic-writing-and-formatting-syntax/
-[Github-flavoured-Markdown]: http://github.github.com/github-flavored-markdown/
-[idea-markdown]: https://github.com/nicoulaj/idea-markdown
-[IntelliJ IDEA]: http://www.jetbrains.com/idea
-[JetBrains plugin comment and rate page]: https://plugins.jetbrains.com/plugin/writeComment?pr=&pluginId=7896
-[JetBrains plugin page]: https://plugins.jetbrains.com/plugin?pr=&pluginId=7896
-[Kotlin]: http://kotlinlang.org
-[Maven Central]: https://search.maven.org/#search|ga|1|g%3A%22com.atlassian.commonmark%22
-[Maven Central status]: https://img.shields.io/maven-central/v/com.vladsch.flexmark/flexmark.svg
-[nicoulaj]: https://github.com/nicoulaj
-[nicoulaj/idea-markdown plugin]: https://github.com/nicoulaj/idea-markdown
-[Pandoc]: http://pandoc.org/MANUAL.html#pandocs-markdown
-[PHP Markdown Extra: definition list]: http://michelf.com/projects/php-markdown/extra/#def-list
-[PHP Markdown Extra: fenced code]: http://michelf.com/projects/php-markdown/extra/#fenced-code-blocks
-[PHP Markdown Extra: tables]: http://michelf.com/projects/php-markdown/extra/#table
-[PhpExtra]: https://michelf.ca/projects/php-markdown/extra/
-[PhpStorm]: http://www.jetbrains.com/phpstorm
-[Pipe Table Formatter]: https://github.com/anton-dev-ua/PipeTableFormatter
-[PyCharm]: http://www.jetbrains.com/pycharm
-[RubyMine]: http://www.jetbrains.com/ruby
-[Semantic Versioning]: http://semver.org/
-[sirthias]: https://github.com/sirthias
-[table.md]: https://github.com/vsch/idea-multimarkdown/blob/master/test/data/performance/table.md
-[vsch/pegdown]: https://github.com/vsch/pegdown/tree/develop
-[WebStorm]: http://www.jetbrains.com/webstorm
 
-
-
-[Admonition Extension, Material for MkDocs]: https://squidfunk.github.io/mkdocs-material/extensions/admonition/

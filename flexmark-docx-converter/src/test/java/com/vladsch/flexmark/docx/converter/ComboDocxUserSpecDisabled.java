@@ -32,7 +32,7 @@ import java.util.*;
 
 public class ComboDocxUserSpecDisabled extends ComboSpecTestCase {
     private static final boolean DUMP_TEST_CASE_FILES = !ComboDocxConverterSpecTest.SKIP_IGNORED_TESTS;
-    private static final String PROJECT_ROOT_DIRECTORY = "/Users/vlad/src/flexmark-java";
+    private static final String PROJECT_ROOT_DIRECTORY = ComboDocxConverterSpecTest.PROJECT_ROOT_DIRECTORY;
     private static final String FILE_TEST_CASE_DUMP_LOCATION = "/flexmark-docx-converter/src/test/resources/docx_user_ast_spec/";
 
     private static final String SPEC_RESOURCE = "/docx_user_ast_spec.md";
