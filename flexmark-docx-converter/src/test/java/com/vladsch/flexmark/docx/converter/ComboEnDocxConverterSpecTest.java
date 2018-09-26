@@ -157,6 +157,11 @@ public class ComboEnDocxConverterSpecTest extends ComboSpecTestCase {
             WordprocessingMLPackage mlPackage = DocxRenderer.getDefaultTemplate(TEMPLATE_XML);
             RENDERER.withOptions(options).render(node, mlPackage);
 
+            File parentDir = file.getParentFile();
+            if (!parentDir.exists()) {
+                parentDir.mkdirs();
+            }
+
             try {
                 mlPackage.save(file, Docx4J.FLAG_SAVE_ZIP_FILE);
                 ByteArrayOutputStream outputStream = new ByteArrayOutputStream();

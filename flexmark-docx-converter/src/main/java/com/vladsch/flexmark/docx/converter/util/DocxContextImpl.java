@@ -39,7 +39,7 @@ public abstract class DocxContextImpl<T> implements DocxContext<T>, BlockFormatP
     protected final DataHolder options;
 
     // docx stuff
-    protected final HashMap<String, Relationship> myHyperlinks;
+    protected final HashMap<RelationshipsPart, HashMap<String, Relationship>> myHyperlinks;
     protected HashMap<T, BlockFormatProvider<T>> myBlockFormatProviders;
     protected HashMap<T, RunFormatProvider<T>> myRunFormatProviders;
 
@@ -59,7 +59,7 @@ public abstract class DocxContextImpl<T> implements DocxContext<T>, BlockFormatP
         myDocxHelper = new DocxHelper(myPackage, myFactory, myRendererOptions);
         myRunFormatProvider = this;
         myRunContainer = this;
-        myHyperlinks = new HashMap<String, Relationship>();
+        myHyperlinks = new HashMap<>();
         myParaContainer = this;
         myContentContainer = this;
         myDocumentPart = out.getMainDocumentPart();
@@ -618,8 +618,13 @@ public abstract class DocxContextImpl<T> implements DocxContext<T>, BlockFormatP
 
     @Override
     public Relationship getHyperlinkRelationship(String url) {
-        Relationship rel = myHyperlinks.get(url);
-        if (rel != null) return rel;
+        Relationship rel;
+        RelationshipsPart relationshipsPart = myContentContainer.getRelationshipsPart();
+        HashMap<String, Relationship> urlRelationshipMap = myHyperlinks.get(relationshipsPart);
+        if (urlRelationshipMap != null) {
+            rel = urlRelationshipMap.get(url);
+            if (rel != null) return rel;
+        }
 
         // We need to add a relationship to word/_rels/document.xml.rels
         // but since its external, we don't use the
@@ -632,8 +637,13 @@ public abstract class DocxContextImpl<T> implements DocxContext<T>, BlockFormatP
         rel.setTarget(url);
         rel.setTargetMode("External");
 
-        myContentContainer.getRelationshipsPart().addRelationship(rel);
-        myHyperlinks.put(url, rel);
+        relationshipsPart.addRelationship(rel);
+        if (urlRelationshipMap == null) {
+            urlRelationshipMap = new HashMap<>();
+            myHyperlinks.put(relationshipsPart, urlRelationshipMap);
+        }
+
+        urlRelationshipMap.put(url, rel);
         return rel;
     }
 

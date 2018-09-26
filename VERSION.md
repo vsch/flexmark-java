@@ -7,6 +7,7 @@ flexmark-java
 
 - [To Do](#to-do)
     - [Docx Converter](#docx-converter)
+- [0.34.38](#03438)
 - [0.34.36](#03436)
 - [0.34.34](#03434)
 - [0.34.32](#03432)
@@ -246,6 +247,13 @@ flexmark-java
 * [ ] Fix: #99, YamlFrontMatterBlockParser ignores multi-key list items
 
 &nbsp;</details>
+
+0.34.38
+-------
+
+* Fix: docx conversion of hyperlinks did not take relationship part into account when optimizing
+  rel references causing invalid rel ids to be used if the same link was included in multiple
+  contexts.
 
 0.34.36
 -------
