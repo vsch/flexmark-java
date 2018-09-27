@@ -7,6 +7,7 @@ flexmark-java
 
 - [To Do](#to-do)
     - [Docx Converter](#docx-converter)
+- [0.34.40](#03440)
 - [0.34.38](#03438)
 - [0.34.36](#03436)
 - [0.34.34](#03434)
@@ -247,6 +248,15 @@ flexmark-java
 * [ ] Fix: #99, YamlFrontMatterBlockParser ignores multi-key list items
 
 &nbsp;</details>
+
+0.34.40
+------
+
+* Fix: add `HtmlRenderer.HEADER_ID_GENERATOR_NON_ASCII_TO_LOWERCASE`, default `true`. When set
+  to `false` changes the default header id generator to not convert non-ascii alphabetic
+  characters to lowercase. Needed for `GitHub` id compatibility.
+* Fix: add `HtmlRenderer.HEADER_ID_GENERATOR_NON_ASCII_TO_LOWERCASE` set to `false` to `GitHub`
+  and `GitHubDoc` parser profiles.
 
 0.34.38
 -------

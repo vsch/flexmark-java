@@ -355,6 +355,7 @@ public enum ParserEmulationProfile implements MutableDataSetter {
                     // github change for heading Ids
                     .set(HtmlRenderer.HEADER_ID_GENERATOR_TO_DASH_CHARS, " -")
                     .set(HtmlRenderer.HEADER_ID_GENERATOR_NON_DASH_CHARS, "_")
+                    .set(HtmlRenderer.HEADER_ID_GENERATOR_NON_ASCII_TO_LOWERCASE, false)
             ;
         } else if (this == GITHUB) {
             getOptions().setIn(dataHolder);
@@ -362,6 +363,7 @@ public enum ParserEmulationProfile implements MutableDataSetter {
                     // github change for heading Ids
                     .set(HtmlRenderer.HEADER_ID_GENERATOR_TO_DASH_CHARS, " -")
                     .set(HtmlRenderer.HEADER_ID_GENERATOR_NON_DASH_CHARS, "_")
+                    .set(HtmlRenderer.HEADER_ID_GENERATOR_NON_ASCII_TO_LOWERCASE, false)
             ;
         } else if (this == MULTI_MARKDOWN) {
             getOptions().setIn(dataHolder);

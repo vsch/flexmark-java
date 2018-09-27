@@ -14,6 +14,7 @@ public class HeaderIdGenerator implements HtmlIdGenerator {
     String toDashChars;
     String nonDashChars;
     boolean noDupedDashes;
+    boolean nonAsciiToLowercase;
 
     @Override
     public void generateIds(Document document) {
@@ -21,6 +22,7 @@ public class HeaderIdGenerator implements HtmlIdGenerator {
         toDashChars = HtmlRenderer.HEADER_ID_GENERATOR_TO_DASH_CHARS.getFrom(document);
         nonDashChars = HtmlRenderer.HEADER_ID_GENERATOR_NON_DASH_CHARS.getFrom(document);
         noDupedDashes = HtmlRenderer.HEADER_ID_GENERATOR_NO_DUPED_DASHES.getFrom(document);
+        nonAsciiToLowercase = HtmlRenderer.HEADER_ID_GENERATOR_NON_ASCII_TO_LOWERCASE.getFrom(document);
 
         new AnchorRefTargetBlockVisitor() {
             @Override
@@ -41,7 +43,7 @@ public class HeaderIdGenerator implements HtmlIdGenerator {
 
     String generateId(final String text) {
         if (!text.isEmpty()) {
-            String baseRefId = generateId(text, toDashChars, nonDashChars, noDupedDashes);
+            String baseRefId = generateId(text, toDashChars, nonDashChars, noDupedDashes, nonAsciiToLowercase);
 
             if (resolveDupes) {
                 if (headerBaseIds.containsKey(baseRefId)) {
@@ -71,12 +73,24 @@ public class HeaderIdGenerator implements HtmlIdGenerator {
     }
 
     @SuppressWarnings("WeakerAccess")
+    public static String generateId(CharSequence headerText, String toDashChars, boolean noDupedDashes, final boolean nonAsciiToLowercase) {
+        return generateId(headerText, toDashChars, null, noDupedDashes, nonAsciiToLowercase);
+    }
+
+    /**
+     * @deprecated  use {@link #generateId(CharSequence, String, String, boolean, boolean)}
+     * @param headerText
+     * @param toDashChars
+     * @param noDupedDashes
+     * @return header id
+     */
+    @Deprecated
     public static String generateId(CharSequence headerText, String toDashChars, boolean noDupedDashes) {
-        return generateId(headerText, toDashChars, null, noDupedDashes);
+        return generateId(headerText, toDashChars, null, noDupedDashes, true);
     }
 
     @SuppressWarnings("WeakerAccess")
-    public static String generateId(CharSequence headerText, String toDashChars, String nonDashChars, boolean noDupedDashes) {
+    public static String generateId(CharSequence headerText, String toDashChars, String nonDashChars, boolean noDupedDashes, boolean nonAsciiToLowercase) {
         int iMax = headerText.length();
         StringBuilder baseRefId = new StringBuilder(iMax);
         if (toDashChars == null) toDashChars = HtmlRenderer.HEADER_ID_GENERATOR_TO_DASH_CHARS.getFrom(null);
@@ -84,13 +98,18 @@ public class HeaderIdGenerator implements HtmlIdGenerator {
 
         for (int i = 0; i < iMax; i++) {
             char c = headerText.charAt(i);
-            if (isAlphabetic(c)) baseRefId.append(Character.toLowerCase(c));
-            else if (Character.isDigit(c)) baseRefId.append(c);
+            if (isAlphabetic(c)) {
+                if (!nonAsciiToLowercase && !(c >= 'A' && c <= 'Z')) {
+                    baseRefId.append(c);
+                } else {
+                    baseRefId.append(Character.toLowerCase(c));
+                }
+            } else if (Character.isDigit(c)) baseRefId.append(c);
             else if (nonDashChars.indexOf(c) != -1) baseRefId.append(c);
             else if (toDashChars.indexOf(c) != -1 && (!noDupedDashes
                     || ((c == '-' && baseRefId.length() == 0)
                     || baseRefId.length() != 0 && baseRefId.charAt(baseRefId.length() - 1) != '-'))
-                    ) baseRefId.append('-');
+            ) baseRefId.append('-');
         }
         return baseRefId.toString();
     }

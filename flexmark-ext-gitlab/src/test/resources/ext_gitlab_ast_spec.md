@@ -816,3 +816,31 @@ Document[0, 64]
 ````````````````````````````````
 
 
+## Issue MN-xxx
+
+GitHub does not convert non-ascii heading text to lowercase while GitLab does
+
+```````````````````````````````` example Issue MN-xxx: 1
+## Тест Заголовок
+.
+<h2 id="тест-заголовок">Тест Заголовок</h2>
+.
+Document[0, 18]
+  Heading[0, 17] textOpen:[0, 2, "##"] text:[3, 17, "Тест Заголовок"]
+    Text[3, 17] chars:[3, 17, "Тест  … ловок"]
+````````````````````````````````
+
+
+GitHub does not convert non-ascii heading text to lowercase while GitLab does
+
+```````````````````````````````` example Issue MN-xxx: 2
+## Test Heading
+.
+<h2 id="test-heading">Test Heading</h2>
+.
+Document[0, 16]
+  Heading[0, 15] textOpen:[0, 2, "##"] text:[3, 15, "Test Heading"]
+    Text[3, 15] chars:[3, 15, "Test  … ading"]
+````````````````````````````````
+
+

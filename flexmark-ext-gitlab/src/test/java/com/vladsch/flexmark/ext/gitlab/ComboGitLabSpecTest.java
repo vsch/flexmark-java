@@ -16,6 +16,8 @@ public class ComboGitLabSpecTest extends ComboSpecTestCase {
     private static final DataHolder OPTIONS = new MutableDataSet()
             .set(HtmlRenderer.INDENT_SIZE, 2)
             //.set(HtmlRenderer.PERCENT_ENCODE_URLS, true)
+            .set(HtmlRenderer.PERCENT_ENCODE_URLS, true)
+            .set(HtmlRenderer.RENDER_HEADER_ID, true)
             .set(Parser.EXTENSIONS, Arrays.asList(GitLabExtension.create()));
 
     private static final Map<String, DataHolder> optionsMap = new HashMap<String, DataHolder>();

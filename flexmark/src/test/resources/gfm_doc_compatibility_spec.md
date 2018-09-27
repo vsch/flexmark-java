@@ -4302,6 +4302,7 @@ Document[0, 57]
         Text[24, 50] chars:[24, 50, "fence … code\n"]
 ````````````````````````````````
 
+
 ## Issue MN-567
 
 Heading Ids preserve `_`
@@ -4315,6 +4316,21 @@ Heading Ids preserve `_`
 Document[0, 14]
   Heading[0, 12] textOpen:[0, 1, "#"] text:[2, 12, "heading_id"]
     Text[2, 12] chars:[2, 12, "heading_id"]
+````````````````````````````````
+
+
+## Issue MN-xxx
+
+GitHub does not convert non-ascii heading text to lowercase
+
+```````````````````````````````` example Issue MN-xxx: 1
+## Тест Заголовок
+.
+<h2 id="Тест-Заголовок">Тест Заголовок</h2>
+.
+Document[0, 18]
+  Heading[0, 17] textOpen:[0, 2, "##"] text:[3, 17, "Тест Заголовок"]
+    Text[3, 17] chars:[3, 17, "Тест  … ловок"]
 ````````````````````````````````
 
 
