@@ -1352,3 +1352,48 @@ Document[0, 48]
 ````````````````````````````````
 
 
+## Issue 271
+
+Issue #271, Regression? Comments are presereved in 0.26.4 but removed in 0.34.40
+
+```````````````````````````````` example Issue 271: 1
+<!-- TOC depthFrom:2 -->
+
+- [Quickstart](#quickstart)
+  - [Library](#library)
+  - [Command-line](#command-line)
+
+<!-- /TOC -->
+
+.
+<!-- TOC depthFrom:2 -->
+<ul>
+  <li><a href="#quickstart">Quickstart</a>
+    <ul>
+      <li><a href="#library">Library</a></li>
+      <li><a href="#command-line">Command-line</a></li>
+    </ul>
+  </li>
+</ul>
+<!-- /TOC -->
+.
+Document[0, 128]
+  HtmlCommentBlock[0, 25]
+  BulletList[26, 112] isTight
+    BulletListItem[26, 112] open:[26, 27, "-"] isTight
+      Paragraph[28, 54]
+        Link[28, 53] textOpen:[28, 29, "["] text:[29, 39, "Quickstart"] textClose:[39, 40, "]"] linkOpen:[40, 41, "("] url:[41, 52, "#quickstart"] pageRef:[41, 41] anchorMarker:[41, 42, "#"] anchorRef:[42, 52, "quickstart"] linkClose:[52, 53, ")"]
+          Text[29, 39] chars:[29, 39, "Quickstart"]
+      BulletList[56, 112] isTight
+        BulletListItem[56, 78] open:[56, 57, "-"] isTight
+          Paragraph[58, 78]
+            Link[58, 77] textOpen:[58, 59, "["] text:[59, 66, "Library"] textClose:[66, 67, "]"] linkOpen:[67, 68, "("] url:[68, 76, "#library"] pageRef:[68, 68] anchorMarker:[68, 69, "#"] anchorRef:[69, 76, "library"] linkClose:[76, 77, ")"]
+              Text[59, 66] chars:[59, 66, "Library"]
+        BulletListItem[80, 112] open:[80, 81, "-"] isTight hadBlankLineAfter
+          Paragraph[82, 112] isTrailingBlankLine
+            Link[82, 111] textOpen:[82, 83, "["] text:[83, 95, "Command-line"] textClose:[95, 96, "]"] linkOpen:[96, 97, "("] url:[97, 110, "#command-line"] pageRef:[97, 97] anchorMarker:[97, 98, "#"] anchorRef:[98, 110, "command-line"] linkClose:[110, 111, ")"]
+              Text[83, 95] chars:[83, 95, "Comma … -line"]
+  HtmlCommentBlock[113, 127]
+````````````````````````````````
+
+

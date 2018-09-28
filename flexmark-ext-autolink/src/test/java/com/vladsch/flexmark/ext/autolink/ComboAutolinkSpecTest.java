@@ -25,6 +25,7 @@ public class ComboAutolinkSpecTest extends ComboSpecTestCase {
         optionsMap.put("src-pos", new MutableDataSet().set(HtmlRenderer.SOURCE_POSITION_ATTRIBUTE, "md-pos"));
         optionsMap.put("no-autolink", new MutableDataSet().set(Parser.EXTENSIONS, Collections.EMPTY_LIST));
         optionsMap.put("ignore-google", new MutableDataSet().set(AutolinkExtension.IGNORE_LINKS, "www.google.com"));
+        optionsMap.put("intellij-dummy", new MutableDataSet().set(Parser.INTELLIJ_DUMMY_IDENTIFIER, true));
         //        optionsMap.put("custom", new MutableDataSet()
         //                .set(AutolinkExtension.AUTOLINK, value)
         //        );

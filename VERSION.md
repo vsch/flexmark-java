@@ -7,6 +7,7 @@ flexmark-java
 
 - [To Do](#to-do)
     - [Docx Converter](#docx-converter)
+- [0.34.42](#03442)
 - [0.34.40](#03440)
 - [0.34.38](#03438)
 - [0.34.36](#03436)
@@ -248,6 +249,12 @@ flexmark-java
 * [ ] Fix: #99, YamlFrontMatterBlockParser ignores multi-key list items
 
 &nbsp;</details>
+
+0.34.42
+-------
+
+* Add: url parsing to `AutoLink` to set other link parts of the node like: pageref, anchor marker and
+  anchor
 
 0.34.40
 ------

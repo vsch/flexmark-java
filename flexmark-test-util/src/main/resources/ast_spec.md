@@ -7496,7 +7496,7 @@ Document[0, 13]
 .
 Document[0, 29]
   Paragraph[0, 29]
-    AutoLink[0, 28] textOpen:[0, 1, "<"] text:[1, 27, "http://example.com?find=\*"] textClose:[27, 28, ">"]
+    AutoLink[0, 28] open:[0, 1, "<"] text:[1, 27, "http://example.com?find=\*"] pageRef:[1, 27, "http://example.com?find=\*"] close:[27, 28, ">"]
 ````````````````````````````````
 
 
@@ -8006,7 +8006,7 @@ But this is an autolink:
 .
 Document[0, 23]
   Paragraph[0, 23]
-    AutoLink[0, 21] textOpen:[0, 1, "<"] text:[1, 20, "http://foo.bar.`baz"] textClose:[20, 21, ">"]
+    AutoLink[0, 21] open:[0, 1, "<"] text:[1, 20, "http://foo.bar.`baz"] pageRef:[1, 20, "http://foo.bar.`baz"] close:[20, 21, ">"]
     Text[21, 22] chars:[21, 22, "`"]
 ````````````````````````````````
 
@@ -10102,7 +10102,7 @@ Document[0, 8]
 Document[0, 26]
   Paragraph[0, 26]
     Text[0, 3] chars:[0, 3, "**a"]
-    AutoLink[3, 25] textOpen:[3, 4, "<"] text:[4, 24, "http://foo.bar/?q=**"] textClose:[24, 25, ">"]
+    AutoLink[3, 25] open:[3, 4, "<"] text:[4, 24, "http://foo.bar/?q=**"] pageRef:[4, 24, "http://foo.bar/?q=**"] close:[24, 25, ">"]
 ````````````````````````````````
 
 
@@ -10114,7 +10114,7 @@ __a<http://foo.bar/?q=__>
 Document[0, 26]
   Paragraph[0, 26]
     Text[0, 3] chars:[0, 3, "__a"]
-    AutoLink[3, 25] textOpen:[3, 4, "<"] text:[4, 24, "http://foo.bar/?q=__"] textClose:[24, 25, ">"]
+    AutoLink[3, 25] open:[3, 4, "<"] text:[4, 24, "http://foo.bar/?q=__"] pageRef:[4, 24, "http://foo.bar/?q=__"] close:[24, 25, ">"]
 ````````````````````````````````
 
 
@@ -10803,7 +10803,7 @@ Document[0, 14]
 Document[0, 40]
   Paragraph[0, 40]
     Text[0, 4] chars:[0, 4, "[foo"]
-    AutoLink[4, 39] textOpen:[4, 5, "<"] text:[5, 38, "http://example.com/?search=](uri)"] textClose:[38, 39, ">"]
+    AutoLink[4, 39] open:[4, 5, "<"] text:[5, 38, "http://example.com/?search=](uri)"] pageRef:[5, 38, "http://example.com/?search=](uri)"] close:[38, 39, ">"]
 ````````````````````````````````
 
 
@@ -11052,7 +11052,7 @@ Document[0, 26]
 Document[0, 53]
   Paragraph[0, 40] isTrailingBlankLine
     Text[0, 4] chars:[0, 4, "[foo"]
-    AutoLink[4, 39] textOpen:[4, 5, "<"] text:[5, 38, "http://example.com/?search=][ref]"] textClose:[38, 39, ">"]
+    AutoLink[4, 39] open:[4, 5, "<"] text:[5, 38, "http://example.com/?search=][ref]"] pageRef:[5, 38, "http://example.com/?search=][ref]"] close:[38, 39, ">"]
   Reference[41, 52] refOpen:[41, 42, "["] ref:[42, 45, "ref"] refClose:[45, 47, "]:"] url:[48, 52, "/uri"]
 ````````````````````````````````
 
@@ -12128,7 +12128,7 @@ Here are some valid autolinks:
 .
 Document[0, 21]
   Paragraph[0, 21]
-    AutoLink[0, 20] textOpen:[0, 1, "<"] text:[1, 19, "http://foo.bar.baz"] textClose:[19, 20, ">"]
+    AutoLink[0, 20] open:[0, 1, "<"] text:[1, 19, "http://foo.bar.baz"] pageRef:[1, 19, "http://foo.bar.baz"] close:[19, 20, ">"]
 ````````````````````````````````
 
 
@@ -12139,7 +12139,7 @@ Document[0, 21]
 .
 Document[0, 48]
   Paragraph[0, 48]
-    AutoLink[0, 47] textOpen:[0, 1, "<"] text:[1, 46, "http://foo.bar.baz/test?q=hello&id=22&boolean"] textClose:[46, 47, ">"]
+    AutoLink[0, 47] open:[0, 1, "<"] text:[1, 46, "http://foo.bar.baz/test?q=hello&id=22&boolean"] pageRef:[1, 46, "http://foo.bar.baz/test?q=hello&id=22&boolean"] close:[46, 47, ">"]
 ````````````````````````````````
 
 
@@ -12150,7 +12150,7 @@ Document[0, 48]
 .
 Document[0, 25]
   Paragraph[0, 25]
-    AutoLink[0, 24] textOpen:[0, 1, "<"] text:[1, 23, "irc://foo.bar:2233/baz"] textClose:[23, 24, ">"]
+    AutoLink[0, 24] open:[0, 1, "<"] text:[1, 23, "irc://foo.bar:2233/baz"] pageRef:[1, 23, "irc://foo.bar:2233/baz"] close:[23, 24, ">"]
 ````````````````````````````````
 
 
@@ -12163,7 +12163,7 @@ Uppercase is also fine:
 .
 Document[0, 21]
   Paragraph[0, 21]
-    AutoLink[0, 20] textOpen:[0, 1, "<"] text:[1, 19, "MAILTO:FOO@BAR.BAZ"] textClose:[19, 20, ">"]
+    AutoLink[0, 20] open:[0, 1, "<"] text:[1, 19, "MAILTO:FOO@BAR.BAZ"] pageRef:[1, 19, "MAILTO:FOO@BAR.BAZ"] close:[19, 20, ">"]
 ````````````````````````````````
 
 
@@ -12179,7 +12179,7 @@ with their syntax:
 .
 Document[0, 10]
   Paragraph[0, 10]
-    AutoLink[0, 9] textOpen:[0, 1, "<"] text:[1, 8, "a+b+c:d"] textClose:[8, 9, ">"]
+    AutoLink[0, 9] open:[0, 1, "<"] text:[1, 8, "a+b+c:d"] pageRef:[1, 8, "a+b+c:d"] close:[8, 9, ">"]
 ````````````````````````````````
 
 
@@ -12190,7 +12190,7 @@ Document[0, 10]
 .
 Document[0, 27]
   Paragraph[0, 27]
-    AutoLink[0, 26] textOpen:[0, 1, "<"] text:[1, 25, "made-up-scheme://foo,bar"] textClose:[25, 26, ">"]
+    AutoLink[0, 26] open:[0, 1, "<"] text:[1, 25, "made-up-scheme://foo,bar"] pageRef:[1, 25, "made-up-scheme://foo,bar"] close:[25, 26, ">"]
 ````````````````````````````````
 
 
@@ -12201,7 +12201,7 @@ Document[0, 27]
 .
 Document[0, 13]
   Paragraph[0, 13]
-    AutoLink[0, 12] textOpen:[0, 1, "<"] text:[1, 11, "http://../"] textClose:[11, 12, ">"]
+    AutoLink[0, 12] open:[0, 1, "<"] text:[1, 11, "http://../"] pageRef:[1, 11, "http://../"] close:[11, 12, ">"]
 ````````````````````````````````
 
 
@@ -12212,7 +12212,7 @@ Document[0, 13]
 .
 Document[0, 21]
   Paragraph[0, 21]
-    AutoLink[0, 20] textOpen:[0, 1, "<"] text:[1, 19, "localhost:5001/foo"] textClose:[19, 20, ">"]
+    AutoLink[0, 20] open:[0, 1, "<"] text:[1, 19, "localhost:5001/foo"] pageRef:[1, 19, "localhost:5001/foo"] close:[19, 20, ">"]
 ````````````````````````````````
 
 
@@ -12238,7 +12238,7 @@ Backslash-escapes do not work inside autolinks:
 .
 Document[0, 25]
   Paragraph[0, 25]
-    AutoLink[0, 24] textOpen:[0, 1, "<"] text:[1, 23, "http://example.com/\[\"] textClose:[23, 24, ">"]
+    AutoLink[0, 24] open:[0, 1, "<"] text:[1, 23, "http://example.com/\[\"] pageRef:[1, 23, "http://example.com/\[\"] close:[23, 24, ">"]
 ````````````````````````````````
 
 

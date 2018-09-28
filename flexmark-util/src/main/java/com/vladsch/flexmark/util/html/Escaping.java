@@ -113,6 +113,18 @@ public class Escaping {
         }
     };
 
+    private static final Replacer REMOVE_REPLACER = new Replacer() {
+        @Override
+        public void replace(String s, StringBuilder sb) {
+
+        }
+
+        @Override
+        public void replace(BasedSequence original, int startIndex, int endIndex, ReplacedTextMapper textMapper) {
+            textMapper.addReplacedText(startIndex, endIndex, original.subSequence(endIndex, endIndex));
+        }
+    };
+
     private static final Replacer ENTITY_REPLACER = new Replacer() {
         @Override
         public void replace(String s, StringBuilder sb) {
@@ -231,6 +243,22 @@ public class Escaping {
         int indexOfAny = s.indexOfAny('\\', '&');
         if (indexOfAny != -1) {
             return replaceAll(ENTITY_OR_ESCAPED_CHAR, s, UNESCAPE_REPLACER, textMapper);
+        } else {
+            return s;
+        }
+    }
+
+    /**
+     * Replace entities and backslash escapes with literal characters.
+     *
+     * @param s          based sequence to un-escape
+     * @param textMapper replaced text mapper to update for the changed text
+     * @return un-escaped sequence
+     */
+    public static BasedSequence removeAll(BasedSequence s, CharSequence remove, ReplacedTextMapper textMapper) {
+        int indexOf = s.indexOf(remove);
+        if (indexOf != -1) {
+            return replaceAll(Pattern.compile("\\Q" + remove + "\\E"), s, REMOVE_REPLACER, textMapper);
         } else {
             return s;
         }

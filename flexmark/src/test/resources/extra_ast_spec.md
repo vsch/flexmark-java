@@ -4410,7 +4410,7 @@ Document[0, 56]
 .
 Document[0, 45]
   Paragraph[0, 45]
-    AutoLink[0, 43] textOpen:[0, 1, "<"] text:[1, 42, "http://example.com/linkWithoutSpaces.html"] textClose:[42, 43, ">"]
+    AutoLink[0, 43] open:[0, 1, "<"] text:[1, 42, "http://example.com/linkWithoutSpaces.html"] pageRef:[1, 42, "http://example.com/linkWithoutSpaces.html"] close:[42, 43, ">"]
 ````````````````````````````````
 
 
@@ -4913,7 +4913,7 @@ _text_
 .
 Document[0, 230]
   Paragraph[0, 113] isTrailingBlankLine
-    AutoLink[0, 12] textOpen:[0, 1, "<"] text:[1, 11, "http://url"] textClose:[11, 12, ">"]
+    AutoLink[0, 12] open:[0, 1, "<"] text:[1, 11, "http://url"] pageRef:[1, 11, "http://url"] close:[11, 12, ">"]
     SoftLineBreak[13, 14]
     Code[14, 20] textOpen:[14, 15, "`"] text:[15, 19, "code"] textClose:[19, 20, "`"]
       Text[15, 19] chars:[15, 19, "code"]

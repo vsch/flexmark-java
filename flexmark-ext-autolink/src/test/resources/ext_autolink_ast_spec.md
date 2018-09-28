@@ -23,10 +23,10 @@ Document[0, 40]
   Paragraph[0, 40]
     TextBase[0, 39] chars:[0, 39, "foo h … .org/"]
       Text[0, 4] chars:[0, 4, "foo "]
-      AutoLink[4, 19] text:[4, 19, "http://one.org/"]
+      AutoLink[4, 19] text:[4, 19, "http://one.org/"] pageRef:[4, 19, "http://one.org/"]
         Text[4, 19] chars:[4, 19, "http: … .org/"]
       Text[19, 24] chars:[19, 24, " bar "]
-      AutoLink[24, 39] text:[24, 39, "http://two.org/"]
+      AutoLink[24, 39] text:[24, 39, "http://two.org/"] pageRef:[24, 39, "http://two.org/"]
         Text[24, 39] chars:[24, 39, "http: … .org/"]
 ````````````````````````````````
 
@@ -40,19 +40,65 @@ Document[0, 51]
   Paragraph[0, 51]
     TextBase[0, 24] chars:[0, 24, "foo h …  bar "]
       Text[0, 4] chars:[0, 4, "foo "]
-      AutoLink[4, 19] text:[4, 19, "http://one.org/"]
+      AutoLink[4, 19] text:[4, 19, "http://one.org/"] pageRef:[4, 19, "http://one.org/"]
         Text[4, 19] chars:[4, 19, "http: … .org/"]
       Text[19, 24] chars:[19, 24, " bar "]
     Code[24, 30] textOpen:[24, 25, "`"] text:[25, 29, "code"] textClose:[29, 30, "`"]
       Text[25, 29] chars:[25, 29, "code"]
     TextBase[30, 50] chars:[30, 50, " baz  … .org/"]
       Text[30, 35] chars:[30, 35, " baz "]
-      AutoLink[35, 50] text:[35, 50, "http://two.org/"]
+      AutoLink[35, 50] text:[35, 50, "http://two.org/"] pageRef:[35, 50, "http://two.org/"]
         Text[35, 50] chars:[35, 50, "http: … .org/"]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Autolink: 3) options(no-autolink)
+with anchor ref
+
+```````````````````````````````` example Autolink: 3
+foo http://one.org/#anchor bar `code` baz http://two.org/#anchor
+.
+<p>foo <a href="http://one.org/#anchor">http://one.org/#anchor</a> bar <code>code</code> baz <a href="http://two.org/#anchor">http://two.org/#anchor</a></p>
+.
+Document[0, 65]
+  Paragraph[0, 65]
+    TextBase[0, 31] chars:[0, 31, "foo h …  bar "]
+      Text[0, 4] chars:[0, 4, "foo "]
+      AutoLink[4, 26] text:[4, 26, "http://one.org/#anchor"] pageRef:[4, 19, "http://one.org/"] anchorMarker:[19, 20, "#"] anchorRef:[20, 26, "anchor"]
+        Text[4, 26] chars:[4, 26, "http: … nchor"]
+      Text[26, 31] chars:[26, 31, " bar "]
+    Code[31, 37] textOpen:[31, 32, "`"] text:[32, 36, "code"] textClose:[36, 37, "`"]
+      Text[32, 36] chars:[32, 36, "code"]
+    TextBase[37, 64] chars:[37, 64, " baz  … nchor"]
+      Text[37, 42] chars:[37, 42, " baz "]
+      AutoLink[42, 64] text:[42, 64, "http://two.org/#anchor"] pageRef:[42, 57, "http://two.org/"] anchorMarker:[57, 58, "#"] anchorRef:[58, 64, "anchor"]
+        Text[42, 64] chars:[42, 64, "http: … nchor"]
+````````````````````````````````
+
+
+with intellij dummy identfier
+
+```````````````````````````````` example(Autolink: 4) options(intellij-dummy)
+foo http://one.org/#⎮anchor bar `code` baz http://two.org/#anchor
+.
+<p>foo <a href="http://one.org/#⎮anchor">http://one.org/#⎮anchor</a> bar <code>code</code> baz <a href="http://two.org/#anchor">http://two.org/#anchor</a></p>
+.
+Document[0, 65]
+  Paragraph[0, 65]
+    TextBase[0, 32] chars:[0, 32, "foo h …  bar "]
+      Text[0, 4] chars:[0, 4, "foo "]
+      AutoLink[4, 27] text:[4, 27, "http://one.org/#%1fanchor"] pageRef:[4, 19, "http://one.org/"] anchorMarker:[19, 20, "#"] anchorRef:[20, 27, "%1fanchor"]
+        Text[4, 27] chars:[4, 27, "http: … nchor"]
+      Text[27, 32] chars:[27, 32, " bar "]
+    Code[32, 38] textOpen:[32, 33, "`"] text:[33, 37, "code"] textClose:[37, 38, "`"]
+      Text[33, 37] chars:[33, 37, "code"]
+    TextBase[38, 65] chars:[38, 65, " baz  … nchor"]
+      Text[38, 43] chars:[38, 43, " baz "]
+      AutoLink[43, 65] text:[43, 65, "http://two.org/#anchor"] pageRef:[43, 58, "http://two.org/"] anchorMarker:[58, 59, "#"] anchorRef:[59, 65, "anchor"]
+        Text[43, 65] chars:[43, 65, "http: … nchor"]
+````````````````````````````````
+
+
+```````````````````````````````` example(Autolink: 5) options(no-autolink)
 http://example.com/one. Example 2 (see http://example.com/two). Example 3: http://example.com/foo_(bar)
 .
 <p>http://example.com/one. Example 2 (see http://example.com/two). Example 3: http://example.com/foo_(bar)</p>
@@ -63,7 +109,7 @@ Document[0, 103]
 ````````````````````````````````
 
 
-```````````````````````````````` example Autolink: 4
+```````````````````````````````` example Autolink: 6
 http://example.com/one. Example 2 (see http://example.com/two). Example 3: http://example.com/foo_(bar)
 .
 <p><a href="http://example.com/one">http://example.com/one</a>. Example 2 (see <a href="http://example.com/two">http://example.com/two</a>). Example 3: <a href="http://example.com/foo_(bar)">http://example.com/foo_(bar)</a></p>
@@ -71,18 +117,18 @@ http://example.com/one. Example 2 (see http://example.com/two). Example 3: http:
 Document[0, 104]
   Paragraph[0, 104]
     TextBase[0, 103] chars:[0, 103, "http: … (bar)"]
-      AutoLink[0, 22] text:[0, 22, "http://example.com/one"]
+      AutoLink[0, 22] text:[0, 22, "http://example.com/one"] pageRef:[0, 22, "http://example.com/one"]
         Text[0, 22] chars:[0, 22, "http: … m/one"]
       Text[22, 39] chars:[22, 39, ". Exa … (see "]
-      AutoLink[39, 61] text:[39, 61, "http://example.com/two"]
+      AutoLink[39, 61] text:[39, 61, "http://example.com/two"] pageRef:[39, 61, "http://example.com/two"]
         Text[39, 61] chars:[39, 61, "http: … m/two"]
       Text[61, 75] chars:[61, 75, "). Ex … e 3: "]
-      AutoLink[75, 103] text:[75, 103, "http://example.com/foo_(bar)"]
+      AutoLink[75, 103] text:[75, 103, "http://example.com/foo_(bar)"] pageRef:[75, 103, "http://example.com/foo_(bar)"]
         Text[75, 103] chars:[75, 103, "http: … (bar)"]
 ````````````````````````````````
 
 
-```````````````````````````````` example Autolink: 5
+```````````````````````````````` example Autolink: 7
 foo@example.com
 .
 <p><a href="mailto:foo@example.com">foo@example.com</a></p>
@@ -95,27 +141,27 @@ Document[0, 16]
 ````````````````````````````````
 
 
-```````````````````````````````` example Autolink: 6
+```````````````````````````````` example Autolink: 8
 foo@com
 .
 <p>foo@com</p>
 ````````````````````````````````
 
 
-```````````````````````````````` example Autolink: 7
+```````````````````````````````` example Autolink: 9
 <http://example.com>
 .
 <p><a href="http://example.com">http://example.com</a></p>
 .
 Document[0, 21]
   Paragraph[0, 21]
-    AutoLink[0, 20] textOpen:[0, 1, "<"] text:[1, 19, "http://example.com"] textClose:[19, 20, ">"]
+    AutoLink[0, 20] open:[0, 1, "<"] text:[1, 19, "http://example.com"] pageRef:[1, 19, "http://example.com"] close:[19, 20, ">"]
 ````````````````````````````````
 
 
 Issue #37, How to add attribute 'class' to AutoLink node
 
-```````````````````````````````` example Autolink: 8
+```````````````````````````````` example Autolink: 10
 https://google.com/abc?hello=456&world=789
 .
 <p><a href="https://google.com/abc?hello=456&amp;world=789">https://google.com/abc?hello=456&amp;world=789</a></p>
@@ -123,14 +169,14 @@ https://google.com/abc?hello=456&world=789
 Document[0, 43]
   Paragraph[0, 43]
     TextBase[0, 42] chars:[0, 42, "https … d=789"]
-      AutoLink[0, 42] text:[0, 42, "https://google.com/abc?hello=456&world=789"]
+      AutoLink[0, 42] text:[0, 42, "https://google.com/abc?hello=456&world=789"] pageRef:[0, 42, "https://google.com/abc?hello=456&world=789"]
         Text[0, 42] chars:[0, 42, "https … d=789"]
 ````````````````````````````````
 
 
 Issue #62, Autolinks extension for http:// and https:// links includes trailing spaces
 
-```````````````````````````````` example Autolink: 9
+```````````````````````````````` example Autolink: 11
 http:// some text
 
 https:// some text
@@ -149,22 +195,22 @@ file:// some text
 Document[0, 77]
   Paragraph[0, 18] isTrailingBlankLine
     TextBase[0, 17] chars:[0, 17, "http: …  text"]
-      AutoLink[0, 7] text:[0, 7, "http://"]
+      AutoLink[0, 7] text:[0, 7, "http://"] pageRef:[0, 7, "http://"]
         Text[0, 7] chars:[0, 7, "http://"]
       Text[7, 17] chars:[7, 17, " some text"]
   Paragraph[19, 38] isTrailingBlankLine
     TextBase[19, 37] chars:[19, 37, "https …  text"]
-      AutoLink[19, 27] text:[19, 27, "https://"]
+      AutoLink[19, 27] text:[19, 27, "https://"] pageRef:[19, 27, "https://"]
         Text[19, 27] chars:[19, 27, "https://"]
       Text[27, 37] chars:[27, 37, " some text"]
   Paragraph[39, 56] isTrailingBlankLine
     TextBase[39, 55] chars:[39, 55, "ftp:/ …  text"]
-      AutoLink[39, 45] text:[39, 45, "ftp://"]
+      AutoLink[39, 45] text:[39, 45, "ftp://"] pageRef:[39, 45, "ftp://"]
         Text[39, 45] chars:[39, 45, "ftp://"]
       Text[45, 55] chars:[45, 55, " some text"]
   Paragraph[57, 75] isTrailingBlankLine
     TextBase[57, 74] chars:[57, 74, "file: …  text"]
-      AutoLink[57, 64] text:[57, 64, "file://"]
+      AutoLink[57, 64] text:[57, 64, "file://"] pageRef:[57, 64, "file://"]
         Text[57, 64] chars:[57, 64, "file://"]
       Text[64, 74] chars:[64, 74, " some text"]
 ````````````````````````````````
@@ -172,7 +218,7 @@ Document[0, 77]
 
 Don't process fenced code blocks
 
-```````````````````````````````` example Autolink: 10
+```````````````````````````````` example Autolink: 12
 ```
 http://example.com 
 ```
@@ -202,7 +248,7 @@ Document[0, 34]
         Text[0, 15] chars:[0, 15, "foo@e … e.com"]
     SoftLineBreak[15, 16]
     TextBase[16, 34] chars:[16, 34, "http: … e.com"]
-      AutoLink[16, 34] text:[16, 34, "http://example.com"]
+      AutoLink[16, 34] text:[16, 34, "http://example.com"] pageRef:[16, 34, "http://example.com"]
         Text[16, 34] chars:[16, 34, "http: … e.com"]
 ````````````````````````````````
 
@@ -220,7 +266,7 @@ Document[0, 26]
   Paragraph[0, 26]
     TextBase[0, 25] chars:[0, 25, "auto  … e.com"]
       Text[0, 10] chars:[0, 10, "auto link "]
-      AutoLink[10, 25] text:[10, 25, "www.example.com"]
+      AutoLink[10, 25] text:[10, 25, "www.example.com"] pageRef:[10, 25, "www.example.com"]
         Text[10, 25] chars:[10, 25, "www.e … e.com"]
 ````````````````````````````````
 

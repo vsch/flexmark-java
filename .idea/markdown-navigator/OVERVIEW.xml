@@ -49,6 +49,7 @@
           <option name="GITLAB_EXT" value="false" />
           <option name="GITLAB_MATH_EXT" value="false" />
           <option name="GITLAB_MERMAID_EXT" value="false" />
+          <option name="HEADER_ID_NON_ASCII_TO_LOWERCASE" value="false" />
           <option name="HEADER_ID_NO_DUPED_DASHES" value="false" />
           <option name="JEKYLL_FRONT_MATTER" value="false" />
           <option name="MACROS_EXT" value="false" />
