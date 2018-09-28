@@ -2037,4 +2037,35 @@ paARaAGRaAph teEXt WiIth eEmBeEDDeED LiINK [_1_](_2_) iIN iIt.
 paARaAGRaAph teEXt WiIth eEmBeEDDeED LiINK [eXaAmpLeE liINK](http://example.com) iIN iIt.
 ````````````````````````````````
 
+## Issue 271
+
+Issue #271, Regression? Comments are presereved in 0.26.4 but removed in 0.34.40
+
+```````````````````````````````` example Issue 271: 1
+Table of contents:
+
+<!-- TOC depthFrom:2 -->
+
+- [Quickstart](#quickstart)
+  - [Library](#library)
+  - [Command-line](#command-line)
+- [Team](#team)
+
+<!-- /TOC -->
+.
+taABLeE oF coNteENtS:
+
+<!-- toc DeEpthfRom:2 -->
+
+- [quUiIcKStaARt](command-line#_1_)
+  - [liIBRaARyY](#library)
+  - [commaAND-LiINeE](#command-line)
+- [teEaAm](#team)
+
+<!-- /toc -->
+````````````````````````````````
+
+
+
+
 

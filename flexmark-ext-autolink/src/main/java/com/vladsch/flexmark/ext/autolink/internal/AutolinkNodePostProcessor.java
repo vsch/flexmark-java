@@ -13,11 +13,14 @@ import org.nibor.autolink.LinkExtractor;
 import org.nibor.autolink.LinkSpan;
 import org.nibor.autolink.LinkType;
 
+import java.util.ArrayList;
 import java.util.EnumSet;
+import java.util.Iterator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class AutolinkNodePostProcessor extends NodePostProcessor {
+    final static private Pattern URI_SUFFIX = Pattern.compile("\\b([a-z][a-z0-9+._-]*://\\s*)$");
 
     private final Pattern ignoredLinks;
     private final boolean intellijDummyIdentifier;
@@ -40,6 +43,33 @@ public class AutolinkNodePostProcessor extends NodePostProcessor {
         return false;
     }
 
+    private static class DummyLinkSpan implements LinkSpan {
+        private final LinkType linkType;
+        private final int beginIndex;
+        private final int endIndex;
+
+        public DummyLinkSpan(final LinkType linkType, final int beginIndex, final int endIndex) {
+            this.linkType = linkType;
+            this.beginIndex = beginIndex;
+            this.endIndex = endIndex;
+        }
+
+        @Override
+        public LinkType getType() {
+            return linkType;
+        }
+
+        @Override
+        public int getBeginIndex() {
+            return beginIndex;
+        }
+
+        @Override
+        public int getEndIndex() {
+            return endIndex;
+        }
+    }
+
     @Override
     public void process(NodeTracker state, Node node) {
         BasedSequence original = node.getChars();
@@ -50,11 +80,33 @@ public class AutolinkNodePostProcessor extends NodePostProcessor {
         }
 
         Iterable<LinkSpan> links = linkExtractor.extractLinks(literal);
+        ArrayList<LinkSpan> linksList = null;
+
+        final Matcher matcher = URI_SUFFIX.matcher(literal);
+        if (matcher.find()) {
+            linksList = new ArrayList<LinkSpan>();
+
+            linksList.add(new DummyLinkSpan(LinkType.URL, matcher.start(1), matcher.end(1)));
+        }
+
         int lastEscaped = 0;
         boolean wrapInTextBase = !(node.getParent() instanceof TextBase);
         TextBase textBase = wrapInTextBase ? null : (TextBase) node.getParent();
 
-        for (LinkSpan link : links) {
+        int iMax = linksList == null ? 0 : linksList.size();
+        int i = 0;
+
+        for (Iterator<LinkSpan> iterator = links.iterator(); ; ) {
+            LinkSpan link;
+
+            if (iterator.hasNext()) {
+                link = iterator.next();
+            } else if (i < iMax) {
+                link = linksList.get(i++);
+            } else {
+                break;
+            }
+
             BasedSequence linkText = literal.subSequence(link.getBeginIndex(), link.getEndIndex()).trimEnd();
             if (isIgnoredLinkPrefix(linkText)) continue;
 

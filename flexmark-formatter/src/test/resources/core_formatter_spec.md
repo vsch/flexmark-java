@@ -2252,6 +2252,7 @@ Document[0, 62]
   Reference[17, 61] refOpen:[17, 18, "["] ref:[18, 20, "id"] refClose:[20, 22, "]:"] url:[23, 54, "https://www.example.com/img.png"] titleOpen:[55, 56, "\""] title:[56, 60, "test"] titleClose:[60, 61, "\""]
 ````````````````````````````````
 
+
 bare image
 
 ```````````````````````````````` example Issue 243: 2
@@ -2270,6 +2271,62 @@ Document[0, 54]
       Text[2, 4] chars:[2, 4, "id"]
   BlankLine[8, 9]
   Reference[9, 53] refOpen:[9, 10, "["] ref:[10, 12, "id"] refClose:[12, 14, "]:"] url:[15, 46, "https://www.example.com/img.png"] titleOpen:[47, 48, "\""] title:[48, 52, "test"] titleClose:[52, 53, "\""]
+````````````````````````````````
+
+
+## Issue 271
+
+Issue #271, Regression? Comments are presereved in 0.26.4 but removed in 0.34.40
+
+```````````````````````````````` example Issue 271: 1
+Table of contents:
+
+<!-- TOC depthFrom:2 -->
+
+- [Quickstart](#quickstart)
+  - [Library](#library)
+  - [Command-line](#command-line)
+- [Team](#team)
+
+<!-- /TOC -->
+.
+Table of contents:
+
+<!-- TOC depthFrom:2 -->
+
+- [Quickstart](#quickstart)
+  - [Library](#library)
+  - [Command-line](#command-line)
+- [Team](#team)
+
+<!-- /TOC -->
+.
+Document[0, 163]
+  Paragraph[0, 19] isTrailingBlankLine
+    Text[0, 18] chars:[0, 18, "Table … ents:"]
+  BlankLine[19, 20]
+  HtmlCommentBlock[20, 45]
+  BlankLine[45, 46]
+  BulletList[46, 148] isTight
+    BulletListItem[46, 132] open:[46, 47, "-"] isTight
+      Paragraph[48, 74]
+        Link[48, 73] textOpen:[48, 49, "["] text:[49, 59, "Quickstart"] textClose:[59, 60, "]"] linkOpen:[60, 61, "("] url:[61, 72, "#quickstart"] pageRef:[61, 61] anchorMarker:[61, 62, "#"] anchorRef:[62, 72, "quickstart"] linkClose:[72, 73, ")"]
+          Text[49, 59] chars:[49, 59, "Quickstart"]
+      BulletList[76, 132] isTight
+        BulletListItem[76, 98] open:[76, 77, "-"] isTight
+          Paragraph[78, 98]
+            Link[78, 97] textOpen:[78, 79, "["] text:[79, 86, "Library"] textClose:[86, 87, "]"] linkOpen:[87, 88, "("] url:[88, 96, "#library"] pageRef:[88, 88] anchorMarker:[88, 89, "#"] anchorRef:[89, 96, "library"] linkClose:[96, 97, ")"]
+              Text[79, 86] chars:[79, 86, "Library"]
+        BulletListItem[100, 132] open:[100, 101, "-"] isTight
+          Paragraph[102, 132]
+            Link[102, 131] textOpen:[102, 103, "["] text:[103, 115, "Command-line"] textClose:[115, 116, "]"] linkOpen:[116, 117, "("] url:[117, 130, "#command-line"] pageRef:[117, 117] anchorMarker:[117, 118, "#"] anchorRef:[118, 130, "command-line"] linkClose:[130, 131, ")"]
+              Text[103, 115] chars:[103, 115, "Comma … -line"]
+    BulletListItem[132, 148] open:[132, 133, "-"] isTight hadBlankLineAfter
+      Paragraph[134, 148] isTrailingBlankLine
+        Link[134, 147] textOpen:[134, 135, "["] text:[135, 139, "Team"] textClose:[139, 140, "]"] linkOpen:[140, 141, "("] url:[141, 146, "#team"] pageRef:[141, 141] anchorMarker:[141, 142, "#"] anchorRef:[142, 146, "team"] linkClose:[146, 147, ")"]
+          Text[135, 139] chars:[135, 139, "Team"]
+  BlankLine[148, 149]
+  HtmlCommentBlock[149, 163]
 ````````````````````````````````
 
 

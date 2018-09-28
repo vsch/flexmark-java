@@ -7,6 +7,7 @@ flexmark-java
 
 - [To Do](#to-do)
     - [Docx Converter](#docx-converter)
+- [0.34.44](#03444)
 - [0.34.42](#03442)
 - [0.34.40](#03440)
 - [0.34.38](#03438)
@@ -250,14 +251,21 @@ flexmark-java
 
 &nbsp;</details>
 
+0.34.44
+-------
+
+* Fix: #271, Regression? Comments are presereved in 0.26.4 but removed in 0.34.40
+  * Fix: formatter HTML comments in non-translating mode did not output comment markers
+* Fix: treat protocol prefix at the end of line as a valid link.
+
 0.34.42
 -------
 
-* Add: url parsing to `AutoLink` to set other link parts of the node like: pageref, anchor marker and
-  anchor
+* Add: url parsing to `AutoLink` to set other link parts of the node like: pageref, anchor
+  marker and anchor
 
 0.34.40
-------
+-------
 
 * Fix: add `HtmlRenderer.HEADER_ID_GENERATOR_NON_ASCII_TO_LOWERCASE`, default `true`. When set
   to `false` changes the default header id generator to not convert non-ascii alphabetic
@@ -304,8 +312,8 @@ flexmark-java
   * Fix: disable escaping of `\` when inside code
   * Fix: replace non-break space with space when inside code
 * Fix: `FlexmarkHtmlParser.BR_AS_EXTRA_BLANK_LINES` now adds `<br />` followed by blank line
-* Add: `GitLab` extension handling to docx converter. For now `math` and `mermaid`
-  blocks are not converted.
+* Add: `GitLab` extension handling to docx converter. For now `math` and `mermaid` blocks are
+  not converted.
 * Add: `GitLab` extension formatter to properly handle block quote formatting
 * Add: `ParagraphContainer` interface to allow container nodes to control how their paragraphs
   are output for formatting/rendering with respect to blank line before/after control.

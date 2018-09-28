@@ -103,7 +103,9 @@ public class MarkdownWriter implements FormattingAppendable {
         if (context.isTransformingText()) {
             append(context.transformTranslating(prefix, csq, suffix, suffix2));
         } else {
+            if (prefix != null) append(prefix);
             append(csq);
+            if (suffix != null) append(suffix);
         }
         return this;
     }

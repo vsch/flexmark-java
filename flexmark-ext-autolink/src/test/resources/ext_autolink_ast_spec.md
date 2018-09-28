@@ -128,7 +128,22 @@ Document[0, 104]
 ````````````````````````````````
 
 
+make sure www. auto links are recognized
+
 ```````````````````````````````` example Autolink: 7
+www.example.com
+.
+<p><a href="http://www.example.com">www.example.com</a></p>
+.
+Document[0, 16]
+  Paragraph[0, 16]
+    TextBase[0, 15] chars:[0, 15, "www.e … e.com"]
+      AutoLink[0, 15] text:[0, 15, "www.example.com"] pageRef:[0, 15, "www.example.com"]
+        Text[0, 15] chars:[0, 15, "www.e … e.com"]
+````````````````````````````````
+
+
+```````````````````````````````` example Autolink: 8
 foo@example.com
 .
 <p><a href="mailto:foo@example.com">foo@example.com</a></p>
@@ -141,14 +156,14 @@ Document[0, 16]
 ````````````````````````````````
 
 
-```````````````````````````````` example Autolink: 8
+```````````````````````````````` example Autolink: 9
 foo@com
 .
 <p>foo@com</p>
 ````````````````````````````````
 
 
-```````````````````````````````` example Autolink: 9
+```````````````````````````````` example Autolink: 10
 <http://example.com>
 .
 <p><a href="http://example.com">http://example.com</a></p>
@@ -161,7 +176,7 @@ Document[0, 21]
 
 Issue #37, How to add attribute 'class' to AutoLink node
 
-```````````````````````````````` example Autolink: 10
+```````````````````````````````` example Autolink: 11
 https://google.com/abc?hello=456&world=789
 .
 <p><a href="https://google.com/abc?hello=456&amp;world=789">https://google.com/abc?hello=456&amp;world=789</a></p>
@@ -176,7 +191,7 @@ Document[0, 43]
 
 Issue #62, Autolinks extension for http:// and https:// links includes trailing spaces
 
-```````````````````````````````` example Autolink: 11
+```````````````````````````````` example Autolink: 12
 http:// some text
 
 https:// some text
@@ -218,7 +233,7 @@ Document[0, 77]
 
 Don't process fenced code blocks
 
-```````````````````````````````` example Autolink: 12
+```````````````````````````````` example Autolink: 13
 ```
 http://example.com 
 ```
@@ -299,6 +314,81 @@ Document[0, 19]
   Paragraph[0, 19]
     Code[0, 18] textOpen:[0, 1, "`"] text:[1, 17, "http: … //..../wiki"] textClose:[17, 18, "`"]
       Text[1, 17] chars:[1, 17, "http: … /wiki"]
+````````````````````````````````
+
+
+## Issue xxx-1
+
+Issue, Autolink extension does not convert URI prefix without following text
+
+```````````````````````````````` example Issue xxx-1: 1
+http://
+.
+<p><a href="http://">http://</a></p>
+.
+Document[0, 8]
+  Paragraph[0, 8]
+    TextBase[0, 7] chars:[0, 7, "http://"]
+      AutoLink[0, 7] text:[0, 7, "http://"] pageRef:[0, 7, "http://"]
+        Text[0, 7] chars:[0, 7, "http://"]
+````````````````````````````````
+
+
+```````````````````````````````` example Issue xxx-1: 2
+http://abc http://
+.
+<p><a href="http://abc">http://abc</a> <a href="http://">http://</a></p>
+.
+Document[0, 19]
+  Paragraph[0, 19]
+    TextBase[0, 18] chars:[0, 18, "http: … tp://"]
+      AutoLink[0, 10] text:[0, 10, "http://abc"] pageRef:[0, 10, "http://abc"]
+        Text[0, 10] chars:[0, 10, "http://abc"]
+      Text[10, 11] chars:[10, 11, " "]
+      AutoLink[11, 18] text:[11, 18, "http://"] pageRef:[11, 18, "http://"]
+        Text[11, 18] chars:[11, 18, "http://"]
+````````````````````````````````
+
+
+```````````````````````````````` example Issue xxx-1: 3
+test http://
+.
+<p>test <a href="http://">http://</a></p>
+.
+Document[0, 13]
+  Paragraph[0, 13]
+    TextBase[0, 12] chars:[0, 12, "test  … tp://"]
+      Text[0, 5] chars:[0, 5, "test "]
+      AutoLink[5, 12] text:[5, 12, "http://"] pageRef:[5, 12, "http://"]
+        Text[5, 12] chars:[5, 12, "http://"]
+````````````````````````````````
+
+
+```````````````````````````````` example Issue xxx-1: 4
+test http://   
+.
+<p>test <a href="http://">http://</a></p>
+.
+Document[0, 16]
+  Paragraph[0, 16]
+    TextBase[0, 12] chars:[0, 12, "test  … tp://"]
+      Text[0, 5] chars:[0, 5, "test "]
+      AutoLink[5, 12] text:[5, 12, "http://"] pageRef:[5, 12, "http://"]
+        Text[5, 12] chars:[5, 12, "http://"]
+````````````````````````````````
+
+
+```````````````````````````````` example Issue xxx-1: 5
+test custom-protocol-1+2_://   
+.
+<p>test <a href="custom-protocol-1+2_://">custom-protocol-1+2_://</a></p>
+.
+Document[0, 32]
+  Paragraph[0, 32]
+    TextBase[0, 28] chars:[0, 28, "test  … 2_://"]
+      Text[0, 5] chars:[0, 5, "test "]
+      AutoLink[5, 28] text:[5, 28, "custom-protocol-1+2_://"] pageRef:[5, 28, "custom-protocol-1+2_://"]
+        Text[5, 28] chars:[5, 28, "custo … 2_://"]
 ````````````````````````````````
 
 
