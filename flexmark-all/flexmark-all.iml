@@ -62,6 +62,7 @@
     <orderEntry type="module" module-name="flexmark-ext-gfm-users" />
     <orderEntry type="module" module-name="flexmark-ext-admonition" />
     <orderEntry type="module" module-name="flexmark-ext-gitlab" />
+    <orderEntry type="module" module-name="flexmark-ext-macros" />
     <orderEntry type="module" module-name="flexmark-ext-media-tags" />
   </component>
 </module>

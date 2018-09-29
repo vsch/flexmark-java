@@ -14,6 +14,7 @@
     <orderEntry type="module" module-name="flexmark" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-docx-converter" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-ext-abbreviation" scope="TEST" />
+    <orderEntry type="module" module-name="flexmark-ext-admonition" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-ext-anchorlink" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-ext-aside" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-ext-attributes" scope="TEST" />
@@ -29,9 +30,12 @@
     <orderEntry type="module" module-name="flexmark-ext-gfm-tables" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-ext-gfm-tasklist" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-ext-gfm-users" scope="TEST" />
+    <orderEntry type="module" module-name="flexmark-ext-gitlab" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-ext-ins" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-ext-jekyll-front-matter" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-ext-jekyll-tag" scope="TEST" />
+    <orderEntry type="module" module-name="flexmark-ext-macros" scope="TEST" />
+    <orderEntry type="module" module-name="flexmark-ext-media-tags" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-ext-spec-example" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-ext-superscript" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-ext-tables" scope="TEST" />
@@ -40,6 +44,7 @@
     <orderEntry type="module" module-name="flexmark-ext-wikilink" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-ext-xwiki-macros" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-ext-yaml-front-matter" scope="TEST" />
+    <orderEntry type="module" module-name="flexmark-ext-youtube-embedded" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-ext-zzzzzz" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-formatter" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-formatter-test-suite" scope="TEST" />
@@ -51,9 +56,5 @@
     <orderEntry type="module" module-name="flexmark-test-util" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-util" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-youtrack-converter" scope="TEST" />
-    <orderEntry type="module" module-name="flexmark-ext-admonition" scope="TEST" />
-    <orderEntry type="module" module-name="flexmark-ext-media-tags" scope="TEST" />
-    <orderEntry type="module" module-name="flexmark-ext-youtube-embedded" scope="TEST" />
-    <orderEntry type="module" module-name="flexmark-ext-gitlab" />
   </component>
 </module>

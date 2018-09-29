@@ -379,16 +379,30 @@ Document[0, 16]
 
 
 ```````````````````````````````` example Issue xxx-1: 5
-test custom-protocol-1+2_://   
+test custom.protocol-1+2://   
 .
-<p>test <a href="custom-protocol-1+2_://">custom-protocol-1+2_://</a></p>
+<p>test <a href="custom.protocol-1+2://">custom.protocol-1+2://</a></p>
 .
-Document[0, 32]
-  Paragraph[0, 32]
-    TextBase[0, 28] chars:[0, 28, "test  … 2_://"]
+Document[0, 31]
+  Paragraph[0, 31]
+    TextBase[0, 27] chars:[0, 27, "test  … +2://"]
       Text[0, 5] chars:[0, 5, "test "]
-      AutoLink[5, 28] text:[5, 28, "custom-protocol-1+2_://"] pageRef:[5, 28, "custom-protocol-1+2_://"]
-        Text[5, 28] chars:[5, 28, "custo … 2_://"]
+      AutoLink[5, 27] text:[5, 27, "custom.protocol-1+2://"] pageRef:[5, 27, "custom.protocol-1+2://"]
+        Text[5, 27] chars:[5, 27, "custo … +2://"]
+````````````````````````````````
+
+
+```````````````````````````````` example Issue xxx-1: 6
+test custom.protocol-1+2://abc
+.
+<p>test <a href="custom.protocol-1+2://abc">custom.protocol-1+2://abc</a></p>
+.
+Document[0, 31]
+  Paragraph[0, 31]
+    TextBase[0, 30] chars:[0, 30, "test  … //abc"]
+      Text[0, 5] chars:[0, 5, "test "]
+      AutoLink[5, 30] text:[5, 30, "custom.protocol-1+2://abc"] pageRef:[5, 30, "custom.protocol-1+2://abc"]
+        Text[5, 30] chars:[5, 30, "custo … //abc"]
 ````````````````````````````````
 
 

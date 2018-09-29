@@ -22,6 +22,7 @@ import com.vladsch.flexmark.ext.gitlab.ExtGitLabTestSuite;
 import com.vladsch.flexmark.ext.ins.ExtInsTestSuite;
 import com.vladsch.flexmark.ext.jekyll.front.matter.ExtJekyllFrontMatterTestSuite;
 import com.vladsch.flexmark.ext.jekyll.tag.ExtJekyllTagTestSuite;
+import com.vladsch.flexmark.ext.macros.ExtMacrosTestSuite;
 import com.vladsch.flexmark.ext.media.tags.ExtMediaTagsTestSuite;
 import com.vladsch.flexmark.ext.spec.example.ExtSpecExampleTestSuite;
 import com.vladsch.flexmark.ext.tables.ExtTablesTestSuite;
@@ -65,6 +66,7 @@ import org.junit.runners.Suite;
         ExtJekyllFrontMatterTestSuite.class,
         ExtJekyllTagTestSuite.class,
         ExtInsTestSuite.class,
+        ExtMacrosTestSuite.class,
         ExtMediaTagsTestSuite.class,
         ExtSuperscriptTestSuite.class,
         ExtSpecExampleTestSuite.class,

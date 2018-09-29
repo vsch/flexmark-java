@@ -42,6 +42,9 @@
       <element id="module-output" name="flexmark-ext-gitlab" />
       <element id="module-output" name="flexmark-ext-xwiki-macros" />
       <element id="module-output" name="flexmark-ext-wikilink" />
+      <element id="module-output" name="flexmark-ext-macros" />
+      <element id="module-output" name="flexmark-ext-media-tags" />
+      <element id="module-output" name="flexmark-ext-youtube-embedded" />
     </root>
   </artifact>
 </component>

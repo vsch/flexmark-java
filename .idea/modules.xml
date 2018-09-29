@@ -26,6 +26,7 @@
       <module fileurl="file://$PROJECT_DIR$/flexmark-ext-ins/flexmark-ext-ins.iml" filepath="$PROJECT_DIR$/flexmark-ext-ins/flexmark-ext-ins.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-ext-jekyll-front-matter/flexmark-ext-jekyll-front-matter.iml" filepath="$PROJECT_DIR$/flexmark-ext-jekyll-front-matter/flexmark-ext-jekyll-front-matter.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-ext-jekyll-tag/flexmark-ext-jekyll-tag.iml" filepath="$PROJECT_DIR$/flexmark-ext-jekyll-tag/flexmark-ext-jekyll-tag.iml" />
+      <module fileurl="file://$PROJECT_DIR$/flexmark-ext-macros/flexmark-ext-macros.iml" filepath="$PROJECT_DIR$/flexmark-ext-macros/flexmark-ext-macros.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-ext-media-tags/flexmark-ext-media-tags.iml" filepath="$PROJECT_DIR$/flexmark-ext-media-tags/flexmark-ext-media-tags.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-ext-spec-example/flexmark-ext-spec-example.iml" filepath="$PROJECT_DIR$/flexmark-ext-spec-example/flexmark-ext-spec-example.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-ext-superscript/flexmark-ext-superscript.iml" filepath="$PROJECT_DIR$/flexmark-ext-superscript/flexmark-ext-superscript.iml" />

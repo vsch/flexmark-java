@@ -1283,11 +1283,11 @@ Document[0, 60]
 ````````````````````````````````
 
 
-## Issue xxxx
+## Issue xxx-1
 
-Issue xxxx, leading spaces tab not part of indented code, which is correct
+Issue xxx-1, leading spaces tab not part of indented code, which is correct
 
-```````````````````````````````` example Issue xxxx: 1
+```````````````````````````````` example Issue xxx-1: 1
     @Test
     public void testPipeInTable() {
 .
@@ -1300,7 +1300,7 @@ Document[0, 46]
 ````````````````````````````````
 
 
-```````````````````````````````` example Issue xxxx: 2
+```````````````````````````````` example Issue xxx-1: 2
  →@Test
  →public void testPipeInTable() {
 .
@@ -1313,7 +1313,7 @@ Document[0, 42]
 ````````````````````````````````
 
 
-```````````````````````````````` example Issue xxxx: 3
+```````````````````````````````` example Issue xxx-1: 3
   →@Test
   →public void testPipeInTable() {
 .
@@ -1326,7 +1326,7 @@ Document[0, 44]
 ````````````````````````````````
 
 
-```````````````````````````````` example Issue xxxx: 4
+```````````````````````````````` example Issue xxx-1: 4
    →@Test
    →public void testPipeInTable() {
 .
@@ -1339,7 +1339,7 @@ Document[0, 46]
 ````````````````````````````````
 
 
-```````````````````````````````` example Issue xxxx: 5
+```````````````````````````````` example Issue xxx-1: 5
     →@Test
     →public void testPipeInTable() {
 .
@@ -1394,6 +1394,22 @@ Document[0, 128]
             Link[82, 111] textOpen:[82, 83, "["] text:[83, 95, "Command-line"] textClose:[95, 96, "]"] linkOpen:[96, 97, "("] url:[97, 110, "#command-line"] pageRef:[97, 97] anchorMarker:[97, 98, "#"] anchorRef:[98, 110, "command-line"] linkClose:[110, 111, ")"]
               Text[83, 95] chars:[83, 95, "Comma … -line"]
   HtmlCommentBlock[113, 127]
+````````````````````````````````
+
+
+## Issue xxx-2
+
+Issue xxx-2, leading spaces tab not part of indented code, which is correct
+
+```````````````````````````````` example Issue xxx-2: 1
+[ www.google.com  ](https://www.google.com)
+.
+<p><a href="https://www.google.com"> www.google.com  </a></p>
+.
+Document[0, 44]
+  Paragraph[0, 44]
+    Link[0, 43] textOpen:[0, 1, "["] text:[1, 18, " www.google.com  "] textClose:[18, 19, "]"] linkOpen:[19, 20, "("] url:[20, 42, "https://www.google.com"] pageRef:[20, 42, "https://www.google.com"] linkClose:[42, 43, ")"]
+      Text[1, 18] chars:[1, 18, " www. … com  "]
 ````````````````````````````````
 
 

@@ -20,7 +20,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class AutolinkNodePostProcessor extends NodePostProcessor {
-    final static private Pattern URI_SUFFIX = Pattern.compile("\\b([a-z][a-z0-9+._-]*://\\s*)$");
+    final static private Pattern URI_SUFFIX = Pattern.compile("\\b([a-z][a-z0-9+.-]*://\\s*)$");
 
     private final Pattern ignoredLinks;
     private final boolean intellijDummyIdentifier;
