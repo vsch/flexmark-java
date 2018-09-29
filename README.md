@@ -177,7 +177,7 @@ custom node renderer if you need to override the generated link HTML.
 
 ### Latest Additions
 
-* [Macros Extension](../../wiki/Extensions#macros) to allow arbitrary markdown content to be
+* [Macros Extension](../../wiki/Macros-Extension) to allow arbitrary markdown content to be
   inserted as block or inline elements, allowing block elements to be used where only inline
   elements are allowed by syntax.
 * [Gitlab Flavoured Markdown Extensions](../../wiki/Extensions#gitlab-flavoured-markdown) for
