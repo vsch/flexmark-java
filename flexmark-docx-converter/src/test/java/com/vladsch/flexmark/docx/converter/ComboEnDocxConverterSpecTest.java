@@ -15,6 +15,7 @@ import com.vladsch.flexmark.ext.footnotes.FootnoteExtension;
 import com.vladsch.flexmark.ext.gfm.strikethrough.StrikethroughSubscriptExtension;
 import com.vladsch.flexmark.ext.gitlab.GitLabExtension;
 import com.vladsch.flexmark.ext.ins.InsExtension;
+import com.vladsch.flexmark.ext.macros.MacrosExtension;
 import com.vladsch.flexmark.ext.tables.TablesExtension;
 import com.vladsch.flexmark.ext.toc.SimTocExtension;
 import com.vladsch.flexmark.ext.toc.TocExtension;
@@ -62,6 +63,7 @@ public class ComboEnDocxConverterSpecTest extends ComboSpecTestCase {
                     FootnoteExtension.create(),
                     GitLabExtension.create(),
                     InsExtension.create(),
+                    MacrosExtension.create(),
                     StrikethroughSubscriptExtension.create(),
                     SuperscriptExtension.create(),
                     TablesExtension.create(),

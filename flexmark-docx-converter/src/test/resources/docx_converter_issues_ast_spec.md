@@ -3970,7 +3970,6 @@ invalid docx
                 <w:p>
                     <w:pPr>
                         <w:pStyle w:val="TableContents"/>
-                        <w:jc w:val="center"/>
                     </w:pPr>
                 </w:p>
             </w:tc>
@@ -4180,7 +4179,6 @@ invalid docx
                 <w:p>
                     <w:pPr>
                         <w:pStyle w:val="TableContents"/>
-                        <w:jc w:val="center"/>
                     </w:pPr>
                 </w:p>
             </w:tc>
@@ -4379,7 +4377,6 @@ invalid docx
                 <w:p>
                     <w:pPr>
                         <w:pStyle w:val="TableContents"/>
-                        <w:jc w:val="center"/>
                     </w:pPr>
                 </w:p>
             </w:tc>
@@ -4577,7 +4574,6 @@ invalid docx
                 <w:p>
                     <w:pPr>
                         <w:pStyle w:val="TableContents"/>
-                        <w:jc w:val="center"/>
                     </w:pPr>
                 </w:p>
             </w:tc>

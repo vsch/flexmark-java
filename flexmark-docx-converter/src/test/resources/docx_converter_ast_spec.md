@@ -6191,7 +6191,6 @@ With spanning columns turned off
                 <w:p>
                     <w:pPr>
                         <w:pStyle w:val="TableContents"/>
-                        <w:jc w:val="left"/>
                     </w:pPr>
                 </w:p>
             </w:tc>
@@ -13926,3 +13925,639 @@ with child paragraphs
 ````````````````````````````````
 
 
+
+
+## Macros
+
+```````````````````````````````` example Macros: 1
+>>>macro
+Simple Text
+<<<
+
+Plain Text <<<macro>>>
+.
+<w:body>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="ParagraphTextBody"/>
+        </w:pPr>
+        <w:r>
+            <w:t xml:space="preserve">Plain Text </w:t>
+        </w:r>
+        <w:r>
+            <w:t xml:space="preserve">Simple Text</w:t>
+        </w:r>
+    </w:p>
+</w:body>
+````````````````````````````````
+
+
+```````````````````````````````` example Macros: 2
+>>>macro
+1. Item 1
+1. Item 2
+<<<
+
+Plain Text <<<macro>>>
+.
+<w:body>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="ParagraphTextBody"/>
+        </w:pPr>
+        <w:r>
+            <w:t xml:space="preserve">Plain Text </w:t>
+        </w:r>
+    </w:p>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="BodyText"/>
+            <w:numPr>
+                <w:ilvl w:val="0"/>
+                <w:numId w:val="4"/>
+            </w:numPr>
+        </w:pPr>
+        <w:r>
+            <w:t xml:space="preserve">Item 1</w:t>
+        </w:r>
+    </w:p>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="BodyText"/>
+            <w:numPr>
+                <w:ilvl w:val="0"/>
+                <w:numId w:val="4"/>
+            </w:numPr>
+        </w:pPr>
+        <w:r>
+            <w:t xml:space="preserve">Item 2</w:t>
+        </w:r>
+    </w:p>
+</w:body>
+````````````````````````````````
+
+
+```````````````````````````````` example Macros: 3
+>>>macro
+| Heading |
+|:-------|
+|  Data      |
+<<<
+
+Plain Text <<<macro>>>
+.
+<w:body>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="ParagraphTextBody"/>
+        </w:pPr>
+        <w:r>
+            <w:t xml:space="preserve">Plain Text </w:t>
+        </w:r>
+    </w:p>
+    <w:tbl>
+        <w:tblPr>
+            <w:tblW w:type="auto" w:w="0"/>
+            <w:jc w:val="left"/>
+            <w:tblInd w:type="dxa" w:w="120"/>
+            <w:tblBorders>
+                <w:top w:color="000001" w:space="0" w:sz="2" w:val="single"/>
+                <w:left w:color="000001" w:space="0" w:sz="2" w:val="single"/>
+                <w:bottom w:color="000001" w:space="0" w:sz="2" w:val="single"/>
+                <w:right w:color="000001" w:space="0" w:sz="2" w:val="single"/>
+                <w:insideH w:color="000001" w:space="0" w:sz="2" w:val="single"/>
+                <w:insideV w:color="000001" w:space="0" w:sz="2" w:val="single"/>
+            </w:tblBorders>
+            <w:tblCellMar>
+                <w:top w:type="dxa" w:w="80"/>
+                <w:left w:type="dxa" w:w="80"/>
+                <w:bottom w:type="dxa" w:w="80"/>
+                <w:right w:type="dxa" w:w="80"/>
+            </w:tblCellMar>
+            <w:tblLook w:firstColumn="1" w:firstRow="1" w:lastColumn="0"
+                w:lastRow="0" w:noHBand="0" w:noVBand="1" w:val="04a0"/>
+        </w:tblPr>
+        <w:tr>
+            <w:trPr>
+                <w:tblHeader/>
+            </w:trPr>
+            <w:tc>
+                <w:tcPr>
+                    <w:shd w:fill="DDDDDD" w:val="clear"/>
+                </w:tcPr>
+                <w:p>
+                    <w:pPr>
+                        <w:pStyle w:val="TableHeading"/>
+                        <w:jc w:val="left"/>
+                    </w:pPr>
+                    <w:r>
+                        <w:t xml:space="preserve">Heading</w:t>
+                    </w:r>
+                </w:p>
+            </w:tc>
+        </w:tr>
+        <w:tr>
+            <w:trPr/>
+            <w:tc>
+                <w:tcPr/>
+                <w:p>
+                    <w:pPr>
+                        <w:pStyle w:val="TableContents"/>
+                        <w:jc w:val="left"/>
+                    </w:pPr>
+                    <w:r>
+                        <w:t xml:space="preserve">Data</w:t>
+                    </w:r>
+                </w:p>
+            </w:tc>
+        </w:tr>
+    </w:tbl>
+</w:body>
+````````````````````````````````
+
+
+```````````````````````````````` example Macros: 4
+>>>macro
+> Block Quote
+<<<
+
+| outer first  | outer heading |
+|:-------------|:--------------|
+| Regular Text | <<<macro>>>   |
+.
+<w:body>
+    <w:tbl>
+        <w:tblPr>
+            <w:tblW w:type="auto" w:w="0"/>
+            <w:jc w:val="left"/>
+            <w:tblInd w:type="dxa" w:w="120"/>
+            <w:tblBorders>
+                <w:top w:color="000001" w:space="0" w:sz="2" w:val="single"/>
+                <w:left w:color="000001" w:space="0" w:sz="2" w:val="single"/>
+                <w:bottom w:color="000001" w:space="0" w:sz="2" w:val="single"/>
+                <w:right w:color="000001" w:space="0" w:sz="2" w:val="single"/>
+                <w:insideH w:color="000001" w:space="0" w:sz="2" w:val="single"/>
+                <w:insideV w:color="000001" w:space="0" w:sz="2" w:val="single"/>
+            </w:tblBorders>
+            <w:tblCellMar>
+                <w:top w:type="dxa" w:w="80"/>
+                <w:left w:type="dxa" w:w="80"/>
+                <w:bottom w:type="dxa" w:w="80"/>
+                <w:right w:type="dxa" w:w="80"/>
+            </w:tblCellMar>
+            <w:tblLook w:firstColumn="1" w:firstRow="1" w:lastColumn="0"
+                w:lastRow="0" w:noHBand="0" w:noVBand="1" w:val="04a0"/>
+        </w:tblPr>
+        <w:tr>
+            <w:trPr>
+                <w:tblHeader/>
+            </w:trPr>
+            <w:tc>
+                <w:tcPr>
+                    <w:shd w:fill="DDDDDD" w:val="clear"/>
+                </w:tcPr>
+                <w:p>
+                    <w:pPr>
+                        <w:pStyle w:val="TableHeading"/>
+                        <w:jc w:val="left"/>
+                    </w:pPr>
+                    <w:r>
+                        <w:t xml:space="preserve">outer first</w:t>
+                    </w:r>
+                </w:p>
+            </w:tc>
+            <w:tc>
+                <w:tcPr>
+                    <w:shd w:fill="DDDDDD" w:val="clear"/>
+                </w:tcPr>
+                <w:p>
+                    <w:pPr>
+                        <w:pStyle w:val="TableHeading"/>
+                        <w:jc w:val="left"/>
+                    </w:pPr>
+                    <w:r>
+                        <w:t xml:space="preserve">outer heading</w:t>
+                    </w:r>
+                </w:p>
+            </w:tc>
+        </w:tr>
+        <w:tr>
+            <w:trPr/>
+            <w:tc>
+                <w:tcPr/>
+                <w:p>
+                    <w:pPr>
+                        <w:pStyle w:val="TableContents"/>
+                        <w:jc w:val="left"/>
+                    </w:pPr>
+                    <w:r>
+                        <w:t xml:space="preserve">Regular Text</w:t>
+                    </w:r>
+                </w:p>
+            </w:tc>
+            <w:tc>
+                <w:tcPr/>
+                <w:p>
+                    <w:pPr>
+                        <w:pStyle w:val="Normal"/>
+                        <w:spacing w:after="0" w:before="0" w:line="140" w:lineRule="exact"/>
+                    </w:pPr>
+                </w:p>
+                <w:p>
+                    <w:pPr>
+                        <w:pStyle w:val="Quotations"/>
+                    </w:pPr>
+                    <w:r>
+                        <w:t xml:space="preserve">Block Quote</w:t>
+                    </w:r>
+                </w:p>
+                <w:p>
+                    <w:pPr>
+                        <w:pStyle w:val="Normal"/>
+                        <w:spacing w:after="0" w:before="0" w:line="140" w:lineRule="exact"/>
+                    </w:pPr>
+                    <w:r>
+                        <w:t xml:space="preserve"/>
+                    </w:r>
+                </w:p>
+            </w:tc>
+        </w:tr>
+    </w:tbl>
+</w:body>
+````````````````````````````````
+
+
+```````````````````````````````` example Macros: 5
+>>>macro
+1. Item 1
+1. Item 2
+<<<
+
+| outer first  | outer heading |
+|:-------------|:--------------|
+| Regular Text | <<<macro>>>   |
+.
+<w:body>
+    <w:tbl>
+        <w:tblPr>
+            <w:tblW w:type="auto" w:w="0"/>
+            <w:jc w:val="left"/>
+            <w:tblInd w:type="dxa" w:w="120"/>
+            <w:tblBorders>
+                <w:top w:color="000001" w:space="0" w:sz="2" w:val="single"/>
+                <w:left w:color="000001" w:space="0" w:sz="2" w:val="single"/>
+                <w:bottom w:color="000001" w:space="0" w:sz="2" w:val="single"/>
+                <w:right w:color="000001" w:space="0" w:sz="2" w:val="single"/>
+                <w:insideH w:color="000001" w:space="0" w:sz="2" w:val="single"/>
+                <w:insideV w:color="000001" w:space="0" w:sz="2" w:val="single"/>
+            </w:tblBorders>
+            <w:tblCellMar>
+                <w:top w:type="dxa" w:w="80"/>
+                <w:left w:type="dxa" w:w="80"/>
+                <w:bottom w:type="dxa" w:w="80"/>
+                <w:right w:type="dxa" w:w="80"/>
+            </w:tblCellMar>
+            <w:tblLook w:firstColumn="1" w:firstRow="1" w:lastColumn="0"
+                w:lastRow="0" w:noHBand="0" w:noVBand="1" w:val="04a0"/>
+        </w:tblPr>
+        <w:tr>
+            <w:trPr>
+                <w:tblHeader/>
+            </w:trPr>
+            <w:tc>
+                <w:tcPr>
+                    <w:shd w:fill="DDDDDD" w:val="clear"/>
+                </w:tcPr>
+                <w:p>
+                    <w:pPr>
+                        <w:pStyle w:val="TableHeading"/>
+                        <w:jc w:val="left"/>
+                    </w:pPr>
+                    <w:r>
+                        <w:t xml:space="preserve">outer first</w:t>
+                    </w:r>
+                </w:p>
+            </w:tc>
+            <w:tc>
+                <w:tcPr>
+                    <w:shd w:fill="DDDDDD" w:val="clear"/>
+                </w:tcPr>
+                <w:p>
+                    <w:pPr>
+                        <w:pStyle w:val="TableHeading"/>
+                        <w:jc w:val="left"/>
+                    </w:pPr>
+                    <w:r>
+                        <w:t xml:space="preserve">outer heading</w:t>
+                    </w:r>
+                </w:p>
+            </w:tc>
+        </w:tr>
+        <w:tr>
+            <w:trPr/>
+            <w:tc>
+                <w:tcPr/>
+                <w:p>
+                    <w:pPr>
+                        <w:pStyle w:val="TableContents"/>
+                        <w:jc w:val="left"/>
+                    </w:pPr>
+                    <w:r>
+                        <w:t xml:space="preserve">Regular Text</w:t>
+                    </w:r>
+                </w:p>
+            </w:tc>
+            <w:tc>
+                <w:tcPr/>
+                <w:p>
+                    <w:pPr>
+                        <w:pStyle w:val="BodyText"/>
+                        <w:numPr>
+                            <w:ilvl w:val="0"/>
+                            <w:numId w:val="4"/>
+                        </w:numPr>
+                    </w:pPr>
+                    <w:r>
+                        <w:t xml:space="preserve">Item 1</w:t>
+                    </w:r>
+                </w:p>
+                <w:p>
+                    <w:pPr>
+                        <w:pStyle w:val="BodyText"/>
+                        <w:numPr>
+                            <w:ilvl w:val="0"/>
+                            <w:numId w:val="4"/>
+                        </w:numPr>
+                    </w:pPr>
+                    <w:r>
+                        <w:t xml:space="preserve">Item 2</w:t>
+                    </w:r>
+                    <w:r>
+                        <w:t xml:space="preserve"/>
+                    </w:r>
+                </w:p>
+            </w:tc>
+        </w:tr>
+    </w:tbl>
+</w:body>
+````````````````````````````````
+
+
+```````````````````````````````` example Macros: 6
+>>>macro
+| heading     |
+|:------------|
+| column `data` |
+| column **data** 2 |
+<<<
+
+| outer first  | outer heading |
+|:-------------|:--------------|
+| Regular Text | <<<macro>>>   |
+.
+<w:body>
+    <w:tbl>
+        <w:tblPr>
+            <w:tblW w:type="auto" w:w="0"/>
+            <w:jc w:val="left"/>
+            <w:tblInd w:type="dxa" w:w="120"/>
+            <w:tblBorders>
+                <w:top w:color="000001" w:space="0" w:sz="2" w:val="single"/>
+                <w:left w:color="000001" w:space="0" w:sz="2" w:val="single"/>
+                <w:bottom w:color="000001" w:space="0" w:sz="2" w:val="single"/>
+                <w:right w:color="000001" w:space="0" w:sz="2" w:val="single"/>
+                <w:insideH w:color="000001" w:space="0" w:sz="2" w:val="single"/>
+                <w:insideV w:color="000001" w:space="0" w:sz="2" w:val="single"/>
+            </w:tblBorders>
+            <w:tblCellMar>
+                <w:top w:type="dxa" w:w="80"/>
+                <w:left w:type="dxa" w:w="80"/>
+                <w:bottom w:type="dxa" w:w="80"/>
+                <w:right w:type="dxa" w:w="80"/>
+            </w:tblCellMar>
+            <w:tblLook w:firstColumn="1" w:firstRow="1" w:lastColumn="0"
+                w:lastRow="0" w:noHBand="0" w:noVBand="1" w:val="04a0"/>
+        </w:tblPr>
+        <w:tr>
+            <w:trPr>
+                <w:tblHeader/>
+            </w:trPr>
+            <w:tc>
+                <w:tcPr>
+                    <w:shd w:fill="DDDDDD" w:val="clear"/>
+                </w:tcPr>
+                <w:p>
+                    <w:pPr>
+                        <w:pStyle w:val="TableHeading"/>
+                        <w:jc w:val="left"/>
+                    </w:pPr>
+                    <w:r>
+                        <w:t xml:space="preserve">outer first</w:t>
+                    </w:r>
+                </w:p>
+            </w:tc>
+            <w:tc>
+                <w:tcPr>
+                    <w:shd w:fill="DDDDDD" w:val="clear"/>
+                </w:tcPr>
+                <w:p>
+                    <w:pPr>
+                        <w:pStyle w:val="TableHeading"/>
+                        <w:jc w:val="left"/>
+                    </w:pPr>
+                    <w:r>
+                        <w:t xml:space="preserve">outer heading</w:t>
+                    </w:r>
+                </w:p>
+            </w:tc>
+        </w:tr>
+        <w:tr>
+            <w:trPr/>
+            <w:tc>
+                <w:tcPr/>
+                <w:p>
+                    <w:pPr>
+                        <w:pStyle w:val="TableContents"/>
+                        <w:jc w:val="left"/>
+                    </w:pPr>
+                    <w:r>
+                        <w:t xml:space="preserve">Regular Text</w:t>
+                    </w:r>
+                </w:p>
+            </w:tc>
+            <w:tc>
+                <w:tcPr/>
+                <w:tbl>
+                    <w:tblPr>
+                        <w:tblW w:type="auto" w:w="0"/>
+                        <w:jc w:val="left"/>
+                        <w:tblInd w:type="dxa" w:w="120"/>
+                        <w:tblBorders>
+                            <w:top w:color="000001" w:space="0" w:sz="2" w:val="single"/>
+                            <w:left w:color="000001" w:space="0"
+                                w:sz="2" w:val="single"/>
+                            <w:bottom w:color="000001" w:space="0"
+                                w:sz="2" w:val="single"/>
+                            <w:right w:color="000001" w:space="0"
+                                w:sz="2" w:val="single"/>
+                            <w:insideH w:color="000001" w:space="0"
+                                w:sz="2" w:val="single"/>
+                            <w:insideV w:color="000001" w:space="0"
+                                w:sz="2" w:val="single"/>
+                        </w:tblBorders>
+                        <w:tblCellMar>
+                            <w:top w:type="dxa" w:w="80"/>
+                            <w:left w:type="dxa" w:w="80"/>
+                            <w:bottom w:type="dxa" w:w="80"/>
+                            <w:right w:type="dxa" w:w="80"/>
+                        </w:tblCellMar>
+                        <w:tblLook w:firstColumn="1" w:firstRow="1"
+                            w:lastColumn="0" w:lastRow="0" w:noHBand="0"
+                            w:noVBand="1" w:val="04a0"/>
+                    </w:tblPr>
+                    <w:tr>
+                        <w:trPr>
+                            <w:tblHeader/>
+                        </w:trPr>
+                        <w:tc>
+                            <w:tcPr>
+                                <w:shd w:fill="DDDDDD" w:val="clear"/>
+                            </w:tcPr>
+                            <w:p>
+                                <w:pPr>
+                                    <w:pStyle w:val="TableHeading"/>
+                                    <w:jc w:val="left"/>
+                                </w:pPr>
+                                <w:r>
+                                    <w:t xml:space="preserve">heading</w:t>
+                                </w:r>
+                            </w:p>
+                        </w:tc>
+                    </w:tr>
+                    <w:tr>
+                        <w:trPr/>
+                        <w:tc>
+                            <w:tcPr/>
+                            <w:p>
+                                <w:pPr>
+                                    <w:pStyle w:val="TableContents"/>
+                                    <w:jc w:val="left"/>
+                                </w:pPr>
+                                <w:r>
+                                    <w:t xml:space="preserve">column </w:t>
+                                </w:r>
+                                <w:r>
+                                    <w:rPr>
+                                    <w:rStyle w:val="SourceText"/>
+                                    </w:rPr>
+                                    <w:t xml:space="preserve">data</w:t>
+                                </w:r>
+                                <w:r>
+                                    <w:t xml:space="preserve"/>
+                                </w:r>
+                            </w:p>
+                        </w:tc>
+                    </w:tr>
+                    <w:tr>
+                        <w:trPr/>
+                        <w:tc>
+                            <w:tcPr/>
+                            <w:p>
+                                <w:pPr>
+                                    <w:pStyle w:val="TableContents"/>
+                                    <w:jc w:val="left"/>
+                                </w:pPr>
+                                <w:r>
+                                    <w:t xml:space="preserve">column </w:t>
+                                </w:r>
+                                <w:r>
+                                    <w:rPr>
+                                    <w:rStyle w:val="StrongEmphasis"/>
+                                    </w:rPr>
+                                    <w:t xml:space="preserve">data</w:t>
+                                </w:r>
+                                <w:r>
+                                    <w:t xml:space="preserve"> 2</w:t>
+                                </w:r>
+                            </w:p>
+                        </w:tc>
+                    </w:tr>
+                </w:tbl>
+                <w:p>
+                    <w:pPr>
+                        <w:pStyle w:val="TableContents"/>
+                    </w:pPr>
+                    <w:r>
+                        <w:t xml:space="preserve"/>
+                    </w:r>
+                </w:p>
+            </w:tc>
+        </w:tr>
+    </w:tbl>
+</w:body>
+````````````````````````````````
+
+
+Recursion cut short
+
+```````````````````````````````` example Macros: 7
+>>>macro1
+Macro 1
+<<<macro2>>>
+<<<
+
+>>>macro2
+Macro 2
+<<<macro1>>>
+<<<
+
+Plain text <<<macro1>>>
+
+Plain text <<<macro2>>>
+.
+<w:body>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="ParagraphTextBody"/>
+        </w:pPr>
+        <w:r>
+            <w:t xml:space="preserve">Plain text </w:t>
+        </w:r>
+        <w:r>
+            <w:t xml:space="preserve">Macro 1</w:t>
+        </w:r>
+        <w:r>
+            <w:t xml:space="preserve"> </w:t>
+        </w:r>
+        <w:r>
+            <w:t xml:space="preserve">Macro 2</w:t>
+        </w:r>
+        <w:r>
+            <w:t xml:space="preserve"> </w:t>
+        </w:r>
+    </w:p>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="ParagraphTextBody"/>
+        </w:pPr>
+        <w:r>
+            <w:t xml:space="preserve">Plain text </w:t>
+        </w:r>
+        <w:r>
+            <w:t xml:space="preserve">Macro 2</w:t>
+        </w:r>
+        <w:r>
+            <w:t xml:space="preserve"> </w:t>
+        </w:r>
+        <w:r>
+            <w:t xml:space="preserve">Macro 1</w:t>
+        </w:r>
+        <w:r>
+            <w:t xml:space="preserve"> </w:t>
+        </w:r>
+    </w:p>
+</w:body>
+````````````````````````````````
+
+
+**

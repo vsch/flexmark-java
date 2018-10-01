@@ -29,6 +29,8 @@ import com.vladsch.flexmark.ext.gitlab.GitLabBlockQuote;
 import com.vladsch.flexmark.ext.gitlab.GitLabDel;
 import com.vladsch.flexmark.ext.gitlab.GitLabIns;
 import com.vladsch.flexmark.ext.ins.Ins;
+import com.vladsch.flexmark.ext.macros.MacroDefinitionBlock;
+import com.vladsch.flexmark.ext.macros.MacroReference;
 import com.vladsch.flexmark.ext.tables.*;
 import com.vladsch.flexmark.ext.toc.SimTocBlock;
 import com.vladsch.flexmark.ext.toc.TocBlock;
@@ -285,6 +287,18 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
                 new NodeDocxRendererHandler<GitLabIns>(GitLabIns.class, new CustomNodeDocxRenderer<GitLabIns>() {
                     @Override
                     public void render(final GitLabIns node, final DocxRendererContext docx) {
+                        CoreNodeDocxRenderer.this.render(node, docx);
+                    }
+                }),
+                new NodeDocxRendererHandler<MacroReference>(MacroReference.class, new CustomNodeDocxRenderer<MacroReference>() {
+                    @Override
+                    public void render(final MacroReference node, final DocxRendererContext docx) {
+                        CoreNodeDocxRenderer.this.render(node, docx);
+                    }
+                }),
+                new NodeDocxRendererHandler<MacroDefinitionBlock>(MacroDefinitionBlock.class, new CustomNodeDocxRenderer<MacroDefinitionBlock>() {
+                    @Override
+                    public void render(final MacroDefinitionBlock node, final DocxRendererContext docx) {
                         CoreNodeDocxRenderer.this.render(node, docx);
                     }
                 }),
@@ -717,6 +731,32 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
         // Create object for r
         docx.createP();
         docx.createR();
+    }
+
+    private void render(final MacroReference node, final DocxRendererContext docx) {
+        final MacroDefinitionBlock macroDefinitionBlock = node.getReferenceNode(docx.getDocument());
+        if (macroDefinitionBlock != null) {
+            if (macroDefinitionBlock.hasChildren() && !macroDefinitionBlock.isInExpansion()) {
+                try {
+                    macroDefinitionBlock.setInExpansion(true);
+                    Node child = macroDefinitionBlock.getFirstChild();
+                    if (child instanceof Paragraph && child == macroDefinitionBlock.getLastChild()) {
+                        // if a single paragraph then we unwrap it and output only its children as inline text
+                        docx.renderChildren(child);
+                    } else {
+                        docx.renderChildren(macroDefinitionBlock);
+                    }
+                } finally {
+                    macroDefinitionBlock.setInExpansion(false);
+                }
+            }
+        } else {
+            docx.text(node.getChars().unescape());
+        }
+    }
+
+    private void render(final MacroDefinitionBlock node, final DocxRendererContext docx) {
+
     }
 
     private void render(final FencedCodeBlock node, final DocxRendererContext docx) {
@@ -1373,6 +1413,8 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
             renderTableCaption((TableCaption) caption, docx);
         }
 
+        final Tbl savedTbl = myTbl;
+
         myTbl = docx.getFactory().createTbl();
         JAXBElement<org.docx4j.wml.Tbl> tblWrapped = docx.getFactory().createHdrTbl(myTbl);
         docx.getContent().add(tblWrapped);
@@ -1513,7 +1555,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
         tbllook.setFirstColumn(org.docx4j.sharedtypes.STOnOff.ONE);
 
         docx.renderChildren(node);
-        myTbl = null;
+        myTbl = savedTbl;
     }
 
     private void render(final TableHead node, final DocxRendererContext docx) {
@@ -1585,8 +1627,10 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
             }
         }
 
+        final boolean[] firstP = new boolean[] { true };
+        docx.setContentContainer(new TableCellContentContainer(tc, docx, firstP));
         docx.setBlockFormatProvider(new BlockFormatProviderBase<>(docx, styleName));
-        docx.setParaContainer(new TableCellParaContainer(tc));
+        docx.setParaContainer(new TableCellParaContainer(node, tc, docx, firstP));
 
         if (node.getSpan() > 1) {
             // Create object for gridSpan
@@ -1595,19 +1639,12 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
             tcprinnergridspan.setVal(BigInteger.valueOf(node.getSpan()));
         }
 
-        // Create object for p
-        P p = docx.createP();
-        PPr ppr = p.getPPr();
-
-        if (node.getAlignment() != null) {
-            // Create object for jc
-            JcEnumeration alignValue = getAlignValue(node.getAlignment());
-            Jc jc3 = docx.getFactory().createJc();
-            ppr.setJc(jc3);
-            jc3.setVal(alignValue);
-        }
-
         docx.renderChildren(node);
+
+        if (firstP[0]) {
+            // empty content, need to create p
+            docx.createP();
+        }
     }
 
     static JcEnumeration getAlignValue(TableCell.Alignment alignment) {
@@ -1875,21 +1912,86 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
         }
     }
 
-    private static class TableCellParaContainer implements ParaContainer {
+    private static class TableCellContentContainer implements ContentContainer {
         private final Tc myTc;
+        private final DocxRendererContext myDocx;
+        private final Part myContainerPart;
+        private final boolean[] myFirstP;
 
-        public TableCellParaContainer(final Tc tc) {
+        public TableCellContentContainer(final Tc tc, final DocxRendererContext docx, final boolean[] firstP) {
             myTc = tc;
+            myDocx = docx;
+            myFirstP = firstP;
+            myContainerPart = myDocx.getContainerPart();
+        }
+
+        @Override
+        public List<Object> getContent() {
+            return myTc.getContent();
+        }
+
+        @Override
+        public RelationshipsPart getRelationshipsPart() {
+            return myContainerPart.relationships;
+        }
+
+        @Override
+        public Part getContainerPart() {
+            return myContainerPart;
+        }
+
+        @Override
+        public Object getLastContentElement() {
+            final List<Object> content = myTc.getContent();
+            return content != null && content.size() > 0 ? content.get(content.size() - 1) : null;
+        }
+
+        @Override
+        public void addContentElement(final Object element) {
+            myTc.getContent().add(element);
+            myFirstP[0] = false;
+        }
+    }
+
+    private static class TableCellParaContainer implements ParaContainer {
+        private final TableCell myNode;
+        private final Tc myTc;
+        private final DocxRendererContext myDocx;
+        private final boolean[] myFirstP;
+
+        public TableCellParaContainer(final TableCell node, final Tc tc, final DocxRendererContext docx, final boolean[] firstP) {
+            myNode = node;
+            myTc = tc;
+            myDocx = docx;
+            myFirstP = firstP;
         }
 
         @Override
         public void addP(final P p) {
+            myFirstP[0] = false;
             myTc.getContent().add(p);
         }
 
         @Override
         public P getLastP() {
             final List<Object> content = myTc.getContent();
+            if (myFirstP[0] && (content == null || content.size() == 0)) {
+                // Create object for p
+                P p = myDocx.createP();
+                PPr ppr = p.getPPr();
+
+                // Create object for jc
+
+                if (myNode.getAlignment() != null) {
+                    JcEnumeration alignValue = getAlignValue(myNode.getAlignment());
+                    Jc jc3 = myDocx.getFactory().createJc();
+                    ppr.setJc(jc3);
+                    jc3.setVal(alignValue);
+                }
+
+                myFirstP[0] = false;
+            }
+
             if (content == null || content.size() == 0) return null;
             final Object o = content.get(content.size() - 1);
             return o instanceof P ? (P) o : null;

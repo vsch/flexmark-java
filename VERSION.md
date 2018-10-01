@@ -7,6 +7,7 @@ flexmark-java
 
 - [To Do](#to-do)
     - [Docx Converter](#docx-converter)
+- [0.34.48](#03448)
 - [0.34.46](#03446)
 - [0.34.44](#03444)
 - [0.34.42](#03442)
@@ -251,6 +252,12 @@ flexmark-java
 * [ ] Fix: #99, YamlFrontMatterBlockParser ignores multi-key list items
 
 &nbsp;</details>
+
+0.34.48
+-------
+
+* Add: `Macros` extension handling to docx converter. Macros allow nesting of block elements
+  inside tables.
 
 0.34.46
 -------
