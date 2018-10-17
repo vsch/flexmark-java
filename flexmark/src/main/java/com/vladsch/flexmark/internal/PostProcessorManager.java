@@ -31,9 +31,8 @@ public class PostProcessorManager {
     }
 
     public static PostProcessorDependencies calculatePostProcessors(DataHolder options, List<PostProcessorFactory> postProcessorFactories) {
-        List<PostProcessorFactory> list = new ArrayList<PostProcessorFactory>();
         // By having the custom factories come first, extensions are able to change behavior of core syntax.
-        list.addAll(postProcessorFactories);
+        List<PostProcessorFactory> list = new ArrayList<PostProcessorFactory>(postProcessorFactories);
 
         // add core block preprocessors
         //list.addAll(CORE_POST_PROCESSORS.keySet().stream().filter(options::get).map(key -> CORE_POST_PROCESSORS.get(key)).collect(Collectors.toList()));
@@ -143,13 +142,20 @@ public class PostProcessorManager {
                         if (Node.class.isAssignableFrom(entry.getKey())) {
                             //noinspection SuspiciousMethodCalls
                             Set<Class<?>> classes = nodeMap.get(entry.getKey());
+                            final Set<Class<?>> value = entry.getValue();
                             if (classes == null) {
-                                classes = entry.getValue();
+                                classes = value;
                                 //noinspection unchecked
                                 nodeMap.put((Class<? extends Node>) entry.getKey(), classes);
                             } else {
-                                classes.addAll(entry.getValue());
+                                try {
+                                    classes.addAll(value);
+                                } catch (UnsupportedOperationException e) {
+                                    classes = new HashSet<>(classes);
+                                    classes.addAll(value);
+                                }
                             }
+
                             if (!classes.isEmpty()) haveExclusions[0] = true;
                         }
                     }

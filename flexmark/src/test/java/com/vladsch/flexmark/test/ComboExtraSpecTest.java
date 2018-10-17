@@ -97,6 +97,7 @@ public class ComboExtraSpecTest extends ComboSpecTestCase {
         optionsMap.put("spec-027", new MutableDataSet().set(Parser.STRONG_WRAPS_EMPHASIS, true));
         optionsMap.put("custom-list-marker", new MutableDataSet().set(Parser.LISTS_ITEM_PREFIX_CHARS, "*/"));
         optionsMap.put("url-space", new MutableDataSet().set(Parser.SPACE_IN_LINK_URLS, true));
+        optionsMap.put("no-p-tags", new MutableDataSet().set(HtmlRenderer.NO_P_TAGS_USE_BR, true));
         //optionsMap.put("src-wrap-inline", new MutableDataSet().set(HtmlRenderer.SOURCE_WRAP_INLINE_HTML, true));
         optionsMap.put("list-markdown-navigator", new MutableDataSet()
                 .set(Parser.LISTS_AUTO_LOOSE, false)

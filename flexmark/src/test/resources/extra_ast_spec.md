@@ -6724,3 +6724,22 @@ Document[0, 25]
 ````````````````````````````````
 
 
+## No p tags
+
+```````````````````````````````` example(No p tags: 1) options(no-p-tags)
+First paragraph
+
+Second paragraph
+
+.
+First paragraph<br /><br />
+Second paragraph<br /><br />
+.
+Document[0, 35]
+  Paragraph[0, 16] isTrailingBlankLine
+    Text[0, 15] chars:[0, 15, "First … graph"]
+  Paragraph[17, 34] isTrailingBlankLine
+    Text[17, 33] chars:[17, 33, "Secon … graph"]
+````````````````````````````````
+
+

@@ -88,6 +88,7 @@ public class HtmlRenderer implements IRender {
 
     // regex for suppressed link prefixes
     public static final DataKey<String> SUPPRESSED_LINKS = new DataKey<String>("SUPPRESSED_LINKS", "javascript:.*");
+    public static final DataKey<Boolean> NO_P_TAGS_USE_BR = new DataKey<Boolean>("NO_P_TAGS_USE_BR", false);
 
     /**
      * output control for FormattingAppendable, see {@link com.vladsch.flexmark.util.html.FormattingAppendable#setOptions(int)}

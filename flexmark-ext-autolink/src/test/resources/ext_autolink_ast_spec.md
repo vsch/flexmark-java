@@ -406,3 +406,22 @@ Document[0, 31]
 ````````````````````````````````
 
 
+## Issue xxx.2
+
+Issue of autolinks not parsed after built in auto link
+
+```````````````````````````````` example Issue xxx.2: 1
+<http://test.com> www.vladsch.com
+.
+<p><a href="http://test.com">http://test.com</a> <a href="http://www.vladsch.com">www.vladsch.com</a></p>
+.
+Document[0, 34]
+  Paragraph[0, 34]
+    AutoLink[0, 17] open:[0, 1, "<"] text:[1, 16, "http://test.com"] pageRef:[1, 16, "http://test.com"] close:[16, 17, ">"]
+    TextBase[17, 33] chars:[17, 33, " www. … h.com"]
+      Text[17, 18] chars:[17, 18, " "]
+      AutoLink[18, 33] text:[18, 33, "www.vladsch.com"] pageRef:[18, 33, "www.vladsch.com"]
+        Text[18, 33] chars:[18, 33, "www.v … h.com"]
+````````````````````````````````
+
+

@@ -72,6 +72,9 @@ public class AutolinkNodePostProcessor extends NodePostProcessor {
 
     @Override
     public void process(NodeTracker state, Node node) {
+        // TODO: figure our why optimization does not work after AutoLink inserted by inline parser
+        if (node.getAncestorOfType(DoNotDecorate.class, DoNotLinkDecorate.class) != null) return;
+
         BasedSequence original = node.getChars();
         ReplacedTextMapper textMapper = new ReplacedTextMapper(original);
         BasedSequence literal = Escaping.unescape(original, textMapper);
@@ -91,7 +94,8 @@ public class AutolinkNodePostProcessor extends NodePostProcessor {
 
         int lastEscaped = 0;
         boolean wrapInTextBase = !(node.getParent() instanceof TextBase);
-        TextBase textBase = wrapInTextBase ? null : (TextBase) node.getParent();
+        TextBase textBase = wrapInTextBase || !(node.getParent() instanceof TextBase) ? null : (TextBase) node.getParent();
+        boolean processedNode = false;
 
         int iMax = linksList == null ? 0 : linksList.size();
         int i = 0;
@@ -111,6 +115,7 @@ public class AutolinkNodePostProcessor extends NodePostProcessor {
             if (isIgnoredLinkPrefix(linkText)) continue;
 
             int startOffset = textMapper.originalOffset(link.getBeginIndex());
+            processedNode = true;
 
             if (wrapInTextBase) {
                 wrapInTextBase = false;
@@ -122,7 +127,11 @@ public class AutolinkNodePostProcessor extends NodePostProcessor {
             if (startOffset != lastEscaped) {
                 BasedSequence escapedChars = original.subSequence(lastEscaped, startOffset);
                 Node node1 = new Text(escapedChars);
-                textBase.appendChild(node1);
+                if (textBase != null) {
+                    textBase.appendChild(node1);
+                } else {
+                    node.insertBefore(node1);
+                }
                 state.nodeAdded(node1);
             }
 
@@ -141,7 +150,11 @@ public class AutolinkNodePostProcessor extends NodePostProcessor {
 
             linkNode.setCharsFromContent();
             linkNode.appendChild(contentNode);
-            textBase.appendChild(linkNode);
+            if (textBase != null) {
+                textBase.appendChild(linkNode);
+            } else {
+                node.insertBefore(linkNode);
+            }
             state.nodeAddedWithChildren(linkNode);
 
             lastEscaped = textMapper.originalOffset(link.getBeginIndex() + linkText.length());
@@ -151,10 +164,16 @@ public class AutolinkNodePostProcessor extends NodePostProcessor {
             if (lastEscaped != original.length()) {
                 BasedSequence escapedChars = original.subSequence(lastEscaped, original.length());
                 Node node1 = new Text(escapedChars);
-                textBase.appendChild(node1);
+                if (textBase != null) {
+                    textBase.appendChild(node1);
+                } else {
+                    node.insertBefore(node1);
+                }
                 state.nodeAdded(node1);
             }
+        }
 
+        if (processedNode) {
             node.unlink();
             state.nodeRemoved(node);
         }
@@ -163,7 +182,9 @@ public class AutolinkNodePostProcessor extends NodePostProcessor {
     public static class Factory extends NodePostProcessorFactory {
         public Factory() {
             super(false);
-            addNodeWithExclusions(Text.class, DoNotDecorate.class, DoNotLinkDecorate.class);
+            // TODO: figure our why optimization does not work after AutoLink inserted by inline parser
+            //addNodeWithExclusions(Text.class, DoNotDecorate.class, DoNotLinkDecorate.class);
+            addNodes(Text.class);
         }
 
         @Override

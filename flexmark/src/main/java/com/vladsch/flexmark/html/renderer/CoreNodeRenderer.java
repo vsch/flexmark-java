@@ -492,12 +492,17 @@ public class CoreNodeRenderer implements NodeRenderer {
     }
 
     private void renderLooseParagraph(final Paragraph node, final NodeRendererContext context, final HtmlWriter html) {
-        html.srcPosWithEOL(node.getChars()).withAttr().tagLine("p", new Runnable() {
-            @Override
-            public void run() {
-                renderTextBlockParagraphLines(node, context, html, false);
-            }
-        });
+        if (context.getHtmlOptions().noPTagsUseBr) {
+            renderTextBlockParagraphLines(node, context, html, false);
+            html.tagVoid("br").tagVoid("br").line();
+        } else {
+            html.srcPosWithEOL(node.getChars()).withAttr().tagLine("p", new Runnable() {
+                @Override
+                public void run() {
+                    renderTextBlockParagraphLines(node, context, html, false);
+                }
+            });
+        }
     }
 
     void render(final Paragraph node, final NodeRendererContext context, final HtmlWriter html) {

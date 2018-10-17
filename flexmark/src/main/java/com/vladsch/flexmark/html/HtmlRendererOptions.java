@@ -39,6 +39,7 @@ public class HtmlRendererOptions {
     public final boolean htmlBlockOpenTagEol;
     public final boolean htmlBlockCloseTagEol;
     public final boolean unescapeHtmlEntities;
+    public final boolean noPTagsUseBr;
     //public final boolean wrapTightItemParagraphInSpan;
     public final String autolinkWwwPrefix;
     public final Pattern suppressedLinks;
@@ -76,6 +77,7 @@ public class HtmlRendererOptions {
         htmlBlockOpenTagEol = HtmlRenderer.HTML_BLOCK_OPEN_TAG_EOL.getFrom(options);
         htmlBlockCloseTagEol = HtmlRenderer.HTML_BLOCK_CLOSE_TAG_EOL.getFrom(options);
         unescapeHtmlEntities = HtmlRenderer.UNESCAPE_HTML_ENTITIES.getFrom(options);
+        noPTagsUseBr = HtmlRenderer.NO_P_TAGS_USE_BR.getFrom(options);
         inlineCodeSpliceClass = HtmlRenderer.INLINE_CODE_SPLICE_CLASS.getFrom(options);
         autolinkWwwPrefix = HtmlRenderer.AUTOLINK_WWW_PREFIX.getFrom(options);
 

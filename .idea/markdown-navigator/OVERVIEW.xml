@@ -58,7 +58,7 @@
           <option name="SIM_TOC_BLANK_LINE_SPACER" value="true" />
         </ParserOptions>
       </ParserSettings>
-      <HtmlSettings headerTopEnabled="false" headerBottomEnabled="false" bodyTopEnabled="false" bodyBottomEnabled="false" embedUrlContent="false" addPageHeader="false" embedImages="false" embedHttpImages="false" imageUriSerials="false" addDocTypeHtml="false">
+      <HtmlSettings headerTopEnabled="false" headerBottomEnabled="false" bodyTopEnabled="false" bodyBottomEnabled="false" embedUrlContent="false" addPageHeader="false" embedImages="false" embedHttpImages="false" imageUriSerials="false" addDocTypeHtml="false" noParaTags="false">
         <GeneratorProvider>
           <provider providerId="com.vladsch.idea.multimarkdown.editor.javafx.html.generator" providerName="JavaFx HTML Generator" />
         </GeneratorProvider>
@@ -103,7 +103,7 @@ code {
 }</cssText>
         <cssUriHistory />
       </CssSettings>
-      <HtmlExportSettings updateOnSave="true" parentDir="$ModuleFileDir$/src/main/javadoc" targetDir="$ModuleFileDir$/src/main/javadoc" cssDir="$ModuleFileDir$/src/main/javadoc/css" scriptDir="$ModuleFileDir$/src/main/javadoc/js" plainHtml="false" imageDir="$ModuleFileDir$/src/main/javadoc" copyLinkedImages="true" imageUniquifyType="1" targetExt="" useTargetExt="false" noCssNoScripts="true" linkToExportedHtml="true" exportOnSettingsChange="true" regenerateOnProjectOpen="false" linkFormatType="HTTP_ABSOLUTE" />
+      <HtmlExportSettings updateOnSave="true" parentDir="$ModuleFileDir$/src/main/javadoc" targetDir="$ModuleFileDir$/src/main/javadoc" cssDir="$ModuleFileDir$/src/main/javadoc/css" scriptDir="$ModuleFileDir$/src/main/javadoc/js" plainHtml="false" imageDir="$ModuleFileDir$/src/main/javadoc" copyLinkedImages="true" imageUniquifyType="1" targetPathType="2" targetExt="" useTargetExt="false" noCssNoScripts="true" useElementStyleAttribute="false" linkToExportedHtml="true" exportOnSettingsChange="true" regenerateOnProjectOpen="false" linkFormatType="HTTP_ABSOLUTE" />
       <LinkMapSettings>
         <textMaps />
       </LinkMapSettings>
