@@ -1571,6 +1571,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
     }
 
     private void render(final TableRow node, final DocxRendererContext docx) {
+        Tr savedTr = myTr;
         myTr = docx.getFactory().createTr();
         myTbl.getContent().add(myTr);
 
@@ -1586,7 +1587,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
         }
 
         docx.renderChildren(node);
-        myTr = null;
+        myTr = savedTr;
     }
 
     private void render(final TableCaption node, final DocxRendererContext docx) {
