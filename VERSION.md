@@ -8,6 +8,7 @@ flexmark-java
 - [To Do](#to-do)
     - [Docx Converter](#docx-converter)
 - [0.34.50](#03450)
+- [0.34.49](#03449)
 - [0.34.48](#03448)
 - [0.34.46](#03446)
 - [0.34.44](#03444)
@@ -261,6 +262,11 @@ flexmark-java
   paragraphs in `<p>` tag adds 2 x `<br />` after paragraph.
 * Fix: extension auto links would not be processed if paragraph had inline parser processed auto
   links before.
+
+0.34.49
+-------
+
+* Change: revert docx4j to 3.3.6
 
 0.34.48
 -------

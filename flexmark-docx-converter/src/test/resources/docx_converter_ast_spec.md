@@ -917,7 +917,7 @@ with some text
         <w:pPr>
             <w:pStyle w:val="ParagraphTextBody"/>
         </w:pPr>
-        <w:hyperlink r:id="rId3" w:tooltip="Title: flexmark-java logo" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
+        <w:hyperlink r:id="rId3" w:tooltip="Title: flexmark-java logo">
             <w:r>
                 <w:fldChar w:fldCharType="begin"/>
             </w:r>
@@ -1269,7 +1269,7 @@ with hyperlink
         <w:pPr>
             <w:pStyle w:val="Quotations"/>
         </w:pPr>
-        <w:hyperlink r:id="rId3" w:tooltip="Title: flexmark-java logo" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
+        <w:hyperlink r:id="rId3" w:tooltip="Title: flexmark-java logo">
             <w:r>
                 <w:fldChar w:fldCharType="begin"/>
             </w:r>
@@ -1326,7 +1326,7 @@ with hard break
         <w:r>
             <w:t xml:space="preserve">with a link </w:t>
         </w:r>
-        <w:hyperlink r:id="rId3" w:tooltip="Title: flexmark-java logo" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
+        <w:hyperlink r:id="rId3" w:tooltip="Title: flexmark-java logo">
             <w:r>
                 <w:fldChar w:fldCharType="begin"/>
             </w:r>
@@ -1386,7 +1386,7 @@ with child paragraphs
         <w:r>
             <w:t xml:space="preserve">with a link </w:t>
         </w:r>
-        <w:hyperlink r:id="rId3" w:tooltip="Title: flexmark-java logo" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
+        <w:hyperlink r:id="rId3" w:tooltip="Title: flexmark-java logo">
             <w:r>
                 <w:fldChar w:fldCharType="begin"/>
             </w:r>
@@ -1500,7 +1500,7 @@ with child paragraphs
         <w:r>
             <w:t xml:space="preserve">with a link </w:t>
         </w:r>
-        <w:hyperlink r:id="rId3" w:tooltip="Title: flexmark-java logo" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
+        <w:hyperlink r:id="rId3" w:tooltip="Title: flexmark-java logo">
             <w:r>
                 <w:fldChar w:fldCharType="begin"/>
             </w:r>
@@ -6304,7 +6304,7 @@ With embedded links
                     <w:r>
                         <w:t xml:space="preserve">text </w:t>
                     </w:r>
-                    <w:hyperlink r:id="rId3" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
+                    <w:hyperlink r:id="rId3">
                         <w:r>
                             <w:rPr>
                                 <w:rStyle w:val="Hyperlink"/>
@@ -8874,7 +8874,7 @@ Paragraph text, repeated footnote[^1]
         <w:r>
             <w:t xml:space="preserve">to the level of the text after the footnote anchor at the left margin. </w:t>
         </w:r>
-        <w:hyperlink r:id="rId1" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
+        <w:hyperlink r:id="rId1">
             <w:r>
                 <w:rPr>
                     <w:rStyle w:val="Hyperlink"/>
@@ -8907,7 +8907,7 @@ Paragraph text, repeated footnote[^1]
         <w:r>
             <w:t xml:space="preserve">to the level of the text after the footnote anchor at the left margin. </w:t>
         </w:r>
-        <w:hyperlink r:id="rId1" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
+        <w:hyperlink r:id="rId1">
             <w:r>
                 <w:rPr>
                     <w:rStyle w:val="Hyperlink"/>
@@ -9026,7 +9026,7 @@ Paragraph text, repeated footnote[^1]
         <w:r>
             <w:t xml:space="preserve">Beispiele </w:t>
         </w:r>
-        <w:hyperlink r:id="rId1" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
+        <w:hyperlink r:id="rId1">
             <w:r>
                 <w:rPr>
                     <w:rStyle w:val="Hyperlink"/>
@@ -9155,7 +9155,7 @@ Der Hersteller[^C1-04]
         <w:r>
             <w:t xml:space="preserve">Beispiele </w:t>
         </w:r>
-        <w:hyperlink r:id="rId1" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
+        <w:hyperlink r:id="rId1">
             <w:r>
                 <w:rPr>
                     <w:rStyle w:val="Hyperlink"/>
@@ -9305,7 +9305,7 @@ Text [^id] with link [link](http://example.com)
         <w:r>
             <w:t xml:space="preserve"> with link </w:t>
         </w:r>
-        <w:hyperlink r:id="rId5" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
+        <w:hyperlink r:id="rId5">
             <w:r>
                 <w:rPr>
                     <w:rStyle w:val="Hyperlink"/>
@@ -9343,7 +9343,7 @@ Text [^id] with link [link](http://example.com)
         <w:r>
             <w:t xml:space="preserve">→</w:t>
         </w:r>
-        <w:hyperlink r:id="rId1" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
+        <w:hyperlink r:id="rId1">
             <w:r>
                 <w:rPr>
                     <w:rStyle w:val="Hyperlink"/>
@@ -9382,7 +9382,7 @@ Text [^id] with link [link](http://example.com)
         <w:r>
             <w:t xml:space="preserve"> with link </w:t>
         </w:r>
-        <w:hyperlink r:id="rId5" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
+        <w:hyperlink r:id="rId5">
             <w:r>
                 <w:rPr>
                     <w:rStyle w:val="Hyperlink"/>
@@ -9420,7 +9420,7 @@ Text [^id] with link [link](http://example.com)
         <w:r>
             <w:t xml:space="preserve">→</w:t>
         </w:r>
-        <w:hyperlink r:id="rId1" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
+        <w:hyperlink r:id="rId1">
             <w:r>
                 <w:rPr>
                     <w:rStyle w:val="Hyperlink"/>
@@ -13533,7 +13533,7 @@ with hyperlink
         <w:pPr>
             <w:pStyle w:val="AsideBlock"/>
         </w:pPr>
-        <w:hyperlink r:id="rId3" w:tooltip="Title: flexmark-java logo" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
+        <w:hyperlink r:id="rId3" w:tooltip="Title: flexmark-java logo">
             <w:r>
                 <w:fldChar w:fldCharType="begin"/>
             </w:r>
@@ -13590,7 +13590,7 @@ with hard break
         <w:r>
             <w:t xml:space="preserve">with a link </w:t>
         </w:r>
-        <w:hyperlink r:id="rId3" w:tooltip="Title: flexmark-java logo" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
+        <w:hyperlink r:id="rId3" w:tooltip="Title: flexmark-java logo">
             <w:r>
                 <w:fldChar w:fldCharType="begin"/>
             </w:r>
@@ -13650,7 +13650,7 @@ with child paragraphs
         <w:r>
             <w:t xml:space="preserve">with a link </w:t>
         </w:r>
-        <w:hyperlink r:id="rId3" w:tooltip="Title: flexmark-java logo" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
+        <w:hyperlink r:id="rId3" w:tooltip="Title: flexmark-java logo">
             <w:r>
                 <w:fldChar w:fldCharType="begin"/>
             </w:r>
@@ -13873,7 +13873,7 @@ with child paragraphs
         <w:r>
             <w:t xml:space="preserve">with a link </w:t>
         </w:r>
-        <w:hyperlink r:id="rId3" w:tooltip="Title: flexmark-java logo" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
+        <w:hyperlink r:id="rId3" w:tooltip="Title: flexmark-java logo">
             <w:r>
                 <w:fldChar w:fldCharType="begin"/>
             </w:r>

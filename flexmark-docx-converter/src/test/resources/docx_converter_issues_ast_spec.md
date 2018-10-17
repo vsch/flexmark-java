@@ -176,7 +176,7 @@ Footnote [^1]
         <w:r>
             <w:t xml:space="preserve">Link </w:t>
         </w:r>
-        <w:hyperlink r:id="rId1" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
+        <w:hyperlink r:id="rId1">
             <w:r>
                 <w:rPr>
                     <w:rStyle w:val="Hyperlink"/>
@@ -1223,7 +1223,7 @@ Aside Block Numbered List
         <w:r>
             <w:t xml:space="preserve">HYPERLINK_STYLE - docx style named "Hyperlink" plain </w:t>
         </w:r>
-        <w:hyperlink r:id="rId3" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
+        <w:hyperlink r:id="rId3">
             <w:r>
                 <w:rPr>
                     <w:rStyle w:val="Hyperlink"/>
@@ -2368,7 +2368,7 @@ www.example.com
         <w:pPr>
             <w:pStyle w:val="ParagraphTextBody"/>
         </w:pPr>
-        <w:hyperlink r:id="rId3" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
+        <w:hyperlink r:id="rId3">
             <w:r>
                 <w:rPr>
                     <w:rStyle w:val="Hyperlink"/>
@@ -2400,22 +2400,22 @@ TEXT :+1: TEXT
                 <w:position w:val="-2"/>
             </w:rPr>
             <w:drawing>
-                <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
+                <wp:inline distB="0" distL="0" distR="0" distT="0">
                     <wp:extent cx="146685" cy="146685"/>
                     <wp:effectExtent b="0" l="0" r="0" t="0"/>
                     <wp:docPr descr="emoji people:+1" id="0" name="Image1"/>
                     <wp:cNvGraphicFramePr>
-                        <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
+                        <a:graphicFrameLocks noChangeAspect="true"/>
                     </wp:cNvGraphicFramePr>
-                    <a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
+                    <a:graphic>
                         <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
-                            <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                            <pic:pic>
                                 <pic:nvPicPr>
                                     <pic:cNvPr id="1" name="Image1"/>
                                     <pic:cNvPicPr/>
                                 </pic:nvPicPr>
                                 <pic:blipFill>
-                                    <a:blip r:embed="rId3" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"/>
+                                    <a:blip r:embed="rId3"/>
                                     <a:stretch>
                                     <a:fillRect/>
                                     </a:stretch>
@@ -2478,22 +2478,22 @@ TEXT :+1: TEXT
                 <w:position w:val="-5"/>
             </w:rPr>
             <w:drawing>
-                <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
+                <wp:inline distB="0" distL="0" distR="0" distT="0">
                     <wp:extent cx="306705" cy="306705"/>
                     <wp:effectExtent b="0" l="0" r="0" t="0"/>
                     <wp:docPr descr="emoji people:+1" id="0" name="Image1"/>
                     <wp:cNvGraphicFramePr>
-                        <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
+                        <a:graphicFrameLocks noChangeAspect="true"/>
                     </wp:cNvGraphicFramePr>
-                    <a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
+                    <a:graphic>
                         <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
-                            <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                            <pic:pic>
                                 <pic:nvPicPr>
                                     <pic:cNvPr id="1" name="Image1"/>
                                     <pic:cNvPicPr/>
                                 </pic:nvPicPr>
                                 <pic:blipFill>
-                                    <a:blip r:embed="rId3" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"/>
+                                    <a:blip r:embed="rId3"/>
                                     <a:stretch>
                                     <a:fillRect/>
                                     </a:stretch>
@@ -2532,22 +2532,22 @@ TEXT :+1: TEXT
                 <w:position w:val="-4"/>
             </w:rPr>
             <w:drawing>
-                <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
+                <wp:inline distB="0" distL="0" distR="0" distT="0">
                     <wp:extent cx="266700" cy="266700"/>
                     <wp:effectExtent b="0" l="0" r="0" t="0"/>
                     <wp:docPr descr="emoji people:+1" id="2" name="Image2"/>
                     <wp:cNvGraphicFramePr>
-                        <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
+                        <a:graphicFrameLocks noChangeAspect="true"/>
                     </wp:cNvGraphicFramePr>
-                    <a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
+                    <a:graphic>
                         <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
-                            <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                            <pic:pic>
                                 <pic:nvPicPr>
                                     <pic:cNvPr id="3" name="Image2"/>
                                     <pic:cNvPicPr/>
                                 </pic:nvPicPr>
                                 <pic:blipFill>
-                                    <a:blip r:embed="rId4" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"/>
+                                    <a:blip r:embed="rId4"/>
                                     <a:stretch>
                                     <a:fillRect/>
                                     </a:stretch>
@@ -2586,22 +2586,22 @@ TEXT :+1: TEXT
                 <w:position w:val="-4"/>
             </w:rPr>
             <w:drawing>
-                <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
+                <wp:inline distB="0" distL="0" distR="0" distT="0">
                     <wp:extent cx="226695" cy="226695"/>
                     <wp:effectExtent b="0" l="0" r="0" t="0"/>
                     <wp:docPr descr="emoji people:+1" id="4" name="Image3"/>
                     <wp:cNvGraphicFramePr>
-                        <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
+                        <a:graphicFrameLocks noChangeAspect="true"/>
                     </wp:cNvGraphicFramePr>
-                    <a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
+                    <a:graphic>
                         <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
-                            <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                            <pic:pic>
                                 <pic:nvPicPr>
                                     <pic:cNvPr id="5" name="Image3"/>
                                     <pic:cNvPicPr/>
                                 </pic:nvPicPr>
                                 <pic:blipFill>
-                                    <a:blip r:embed="rId5" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"/>
+                                    <a:blip r:embed="rId5"/>
                                     <a:stretch>
                                     <a:fillRect/>
                                     </a:stretch>
@@ -2640,22 +2640,22 @@ TEXT :+1: TEXT
                 <w:position w:val="-3"/>
             </w:rPr>
             <w:drawing>
-                <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
+                <wp:inline distB="0" distL="0" distR="0" distT="0">
                     <wp:extent cx="186690" cy="186690"/>
                     <wp:effectExtent b="0" l="0" r="0" t="0"/>
                     <wp:docPr descr="emoji people:+1" id="6" name="Image4"/>
                     <wp:cNvGraphicFramePr>
-                        <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
+                        <a:graphicFrameLocks noChangeAspect="true"/>
                     </wp:cNvGraphicFramePr>
-                    <a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
+                    <a:graphic>
                         <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
-                            <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                            <pic:pic>
                                 <pic:nvPicPr>
                                     <pic:cNvPr id="7" name="Image4"/>
                                     <pic:cNvPicPr/>
                                 </pic:nvPicPr>
                                 <pic:blipFill>
-                                    <a:blip r:embed="rId6" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"/>
+                                    <a:blip r:embed="rId6"/>
                                     <a:stretch>
                                     <a:fillRect/>
                                     </a:stretch>
@@ -2694,22 +2694,22 @@ TEXT :+1: TEXT
                 <w:position w:val="-2"/>
             </w:rPr>
             <w:drawing>
-                <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
+                <wp:inline distB="0" distL="0" distR="0" distT="0">
                     <wp:extent cx="146685" cy="146685"/>
                     <wp:effectExtent b="0" l="0" r="0" t="0"/>
                     <wp:docPr descr="emoji people:+1" id="8" name="Image5"/>
                     <wp:cNvGraphicFramePr>
-                        <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
+                        <a:graphicFrameLocks noChangeAspect="true"/>
                     </wp:cNvGraphicFramePr>
-                    <a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
+                    <a:graphic>
                         <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
-                            <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                            <pic:pic>
                                 <pic:nvPicPr>
                                     <pic:cNvPr id="9" name="Image5"/>
                                     <pic:cNvPicPr/>
                                 </pic:nvPicPr>
                                 <pic:blipFill>
-                                    <a:blip r:embed="rId7" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"/>
+                                    <a:blip r:embed="rId7"/>
                                     <a:stretch>
                                     <a:fillRect/>
                                     </a:stretch>
@@ -2748,22 +2748,22 @@ TEXT :+1: TEXT
                 <w:position w:val="-2"/>
             </w:rPr>
             <w:drawing>
-                <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
+                <wp:inline distB="0" distL="0" distR="0" distT="0">
                     <wp:extent cx="146685" cy="146685"/>
                     <wp:effectExtent b="0" l="0" r="0" t="0"/>
                     <wp:docPr descr="emoji people:+1" id="10" name="Image6"/>
                     <wp:cNvGraphicFramePr>
-                        <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
+                        <a:graphicFrameLocks noChangeAspect="true"/>
                     </wp:cNvGraphicFramePr>
-                    <a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
+                    <a:graphic>
                         <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
-                            <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                            <pic:pic>
                                 <pic:nvPicPr>
                                     <pic:cNvPr id="11" name="Image6"/>
                                     <pic:cNvPicPr/>
                                 </pic:nvPicPr>
                                 <pic:blipFill>
-                                    <a:blip r:embed="rId8" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"/>
+                                    <a:blip r:embed="rId8"/>
                                     <a:stretch>
                                     <a:fillRect/>
                                     </a:stretch>
@@ -2796,22 +2796,22 @@ TEXT :+1: TEXT
                 <w:position w:val="-2"/>
             </w:rPr>
             <w:drawing>
-                <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
+                <wp:inline distB="0" distL="0" distR="0" distT="0">
                     <wp:extent cx="146685" cy="146685"/>
                     <wp:effectExtent b="0" l="0" r="0" t="0"/>
                     <wp:docPr descr="emoji people:+1" id="12" name="Image7"/>
                     <wp:cNvGraphicFramePr>
-                        <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
+                        <a:graphicFrameLocks noChangeAspect="true"/>
                     </wp:cNvGraphicFramePr>
-                    <a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
+                    <a:graphic>
                         <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
-                            <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                            <pic:pic>
                                 <pic:nvPicPr>
                                     <pic:cNvPr id="13" name="Image7"/>
                                     <pic:cNvPicPr/>
                                 </pic:nvPicPr>
                                 <pic:blipFill>
-                                    <a:blip r:embed="rId9" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"/>
+                                    <a:blip r:embed="rId9"/>
                                     <a:stretch>
                                     <a:fillRect/>
                                     </a:stretch>
@@ -2874,22 +2874,22 @@ TEXT :+1: TEXT
                 <w:position w:val="-5"/>
             </w:rPr>
             <w:drawing>
-                <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
+                <wp:inline distB="0" distL="0" distR="0" distT="0">
                     <wp:extent cx="306705" cy="306705"/>
                     <wp:effectExtent b="0" l="0" r="0" t="0"/>
                     <wp:docPr descr="emoji people:+1" id="0" name="Image1"/>
                     <wp:cNvGraphicFramePr>
-                        <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
+                        <a:graphicFrameLocks noChangeAspect="true"/>
                     </wp:cNvGraphicFramePr>
-                    <a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
+                    <a:graphic>
                         <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
-                            <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                            <pic:pic>
                                 <pic:nvPicPr>
                                     <pic:cNvPr id="1" name="Image1"/>
                                     <pic:cNvPicPr/>
                                 </pic:nvPicPr>
                                 <pic:blipFill>
-                                    <a:blip r:embed="rId3" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"/>
+                                    <a:blip r:embed="rId3"/>
                                     <a:stretch>
                                     <a:fillRect/>
                                     </a:stretch>
@@ -2928,22 +2928,22 @@ TEXT :+1: TEXT
                 <w:position w:val="-4"/>
             </w:rPr>
             <w:drawing>
-                <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
+                <wp:inline distB="0" distL="0" distR="0" distT="0">
                     <wp:extent cx="266700" cy="266700"/>
                     <wp:effectExtent b="0" l="0" r="0" t="0"/>
                     <wp:docPr descr="emoji people:+1" id="2" name="Image2"/>
                     <wp:cNvGraphicFramePr>
-                        <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
+                        <a:graphicFrameLocks noChangeAspect="true"/>
                     </wp:cNvGraphicFramePr>
-                    <a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
+                    <a:graphic>
                         <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
-                            <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                            <pic:pic>
                                 <pic:nvPicPr>
                                     <pic:cNvPr id="3" name="Image2"/>
                                     <pic:cNvPicPr/>
                                 </pic:nvPicPr>
                                 <pic:blipFill>
-                                    <a:blip r:embed="rId4" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"/>
+                                    <a:blip r:embed="rId4"/>
                                     <a:stretch>
                                     <a:fillRect/>
                                     </a:stretch>
@@ -2982,22 +2982,22 @@ TEXT :+1: TEXT
                 <w:position w:val="-4"/>
             </w:rPr>
             <w:drawing>
-                <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
+                <wp:inline distB="0" distL="0" distR="0" distT="0">
                     <wp:extent cx="226695" cy="226695"/>
                     <wp:effectExtent b="0" l="0" r="0" t="0"/>
                     <wp:docPr descr="emoji people:+1" id="4" name="Image3"/>
                     <wp:cNvGraphicFramePr>
-                        <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
+                        <a:graphicFrameLocks noChangeAspect="true"/>
                     </wp:cNvGraphicFramePr>
-                    <a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
+                    <a:graphic>
                         <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
-                            <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                            <pic:pic>
                                 <pic:nvPicPr>
                                     <pic:cNvPr id="5" name="Image3"/>
                                     <pic:cNvPicPr/>
                                 </pic:nvPicPr>
                                 <pic:blipFill>
-                                    <a:blip r:embed="rId5" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"/>
+                                    <a:blip r:embed="rId5"/>
                                     <a:stretch>
                                     <a:fillRect/>
                                     </a:stretch>
@@ -3036,22 +3036,22 @@ TEXT :+1: TEXT
                 <w:position w:val="-3"/>
             </w:rPr>
             <w:drawing>
-                <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
+                <wp:inline distB="0" distL="0" distR="0" distT="0">
                     <wp:extent cx="186690" cy="186690"/>
                     <wp:effectExtent b="0" l="0" r="0" t="0"/>
                     <wp:docPr descr="emoji people:+1" id="6" name="Image4"/>
                     <wp:cNvGraphicFramePr>
-                        <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
+                        <a:graphicFrameLocks noChangeAspect="true"/>
                     </wp:cNvGraphicFramePr>
-                    <a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
+                    <a:graphic>
                         <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
-                            <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                            <pic:pic>
                                 <pic:nvPicPr>
                                     <pic:cNvPr id="7" name="Image4"/>
                                     <pic:cNvPicPr/>
                                 </pic:nvPicPr>
                                 <pic:blipFill>
-                                    <a:blip r:embed="rId6" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"/>
+                                    <a:blip r:embed="rId6"/>
                                     <a:stretch>
                                     <a:fillRect/>
                                     </a:stretch>
@@ -3090,22 +3090,22 @@ TEXT :+1: TEXT
                 <w:position w:val="-2"/>
             </w:rPr>
             <w:drawing>
-                <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
+                <wp:inline distB="0" distL="0" distR="0" distT="0">
                     <wp:extent cx="146685" cy="146685"/>
                     <wp:effectExtent b="0" l="0" r="0" t="0"/>
                     <wp:docPr descr="emoji people:+1" id="8" name="Image5"/>
                     <wp:cNvGraphicFramePr>
-                        <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
+                        <a:graphicFrameLocks noChangeAspect="true"/>
                     </wp:cNvGraphicFramePr>
-                    <a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
+                    <a:graphic>
                         <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
-                            <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                            <pic:pic>
                                 <pic:nvPicPr>
                                     <pic:cNvPr id="9" name="Image5"/>
                                     <pic:cNvPicPr/>
                                 </pic:nvPicPr>
                                 <pic:blipFill>
-                                    <a:blip r:embed="rId7" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"/>
+                                    <a:blip r:embed="rId7"/>
                                     <a:stretch>
                                     <a:fillRect/>
                                     </a:stretch>
@@ -3144,22 +3144,22 @@ TEXT :+1: TEXT
                 <w:position w:val="-2"/>
             </w:rPr>
             <w:drawing>
-                <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
+                <wp:inline distB="0" distL="0" distR="0" distT="0">
                     <wp:extent cx="146685" cy="146685"/>
                     <wp:effectExtent b="0" l="0" r="0" t="0"/>
                     <wp:docPr descr="emoji people:+1" id="10" name="Image6"/>
                     <wp:cNvGraphicFramePr>
-                        <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
+                        <a:graphicFrameLocks noChangeAspect="true"/>
                     </wp:cNvGraphicFramePr>
-                    <a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
+                    <a:graphic>
                         <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
-                            <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                            <pic:pic>
                                 <pic:nvPicPr>
                                     <pic:cNvPr id="11" name="Image6"/>
                                     <pic:cNvPicPr/>
                                 </pic:nvPicPr>
                                 <pic:blipFill>
-                                    <a:blip r:embed="rId8" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"/>
+                                    <a:blip r:embed="rId8"/>
                                     <a:stretch>
                                     <a:fillRect/>
                                     </a:stretch>
@@ -3192,22 +3192,22 @@ TEXT :+1: TEXT
                 <w:position w:val="-2"/>
             </w:rPr>
             <w:drawing>
-                <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
+                <wp:inline distB="0" distL="0" distR="0" distT="0">
                     <wp:extent cx="146685" cy="146685"/>
                     <wp:effectExtent b="0" l="0" r="0" t="0"/>
                     <wp:docPr descr="emoji people:+1" id="12" name="Image7"/>
                     <wp:cNvGraphicFramePr>
-                        <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
+                        <a:graphicFrameLocks noChangeAspect="true"/>
                     </wp:cNvGraphicFramePr>
-                    <a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
+                    <a:graphic>
                         <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
-                            <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                            <pic:pic>
                                 <pic:nvPicPr>
                                     <pic:cNvPr id="13" name="Image7"/>
                                     <pic:cNvPicPr/>
                                 </pic:nvPicPr>
                                 <pic:blipFill>
-                                    <a:blip r:embed="rId9" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"/>
+                                    <a:blip r:embed="rId9"/>
                                     <a:stretch>
                                     <a:fillRect/>
                                     </a:stretch>
@@ -3270,22 +3270,22 @@ TEXT :basecamp: TEXT
                 <w:position w:val="-5"/>
             </w:rPr>
             <w:drawing>
-                <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
+                <wp:inline distB="0" distL="0" distR="0" distT="0">
                     <wp:extent cx="306705" cy="306705"/>
                     <wp:effectExtent b="0" l="0" r="0" t="0"/>
                     <wp:docPr descr="emoji symbols:basecamp" id="0" name="Image1"/>
                     <wp:cNvGraphicFramePr>
-                        <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
+                        <a:graphicFrameLocks noChangeAspect="true"/>
                     </wp:cNvGraphicFramePr>
-                    <a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
+                    <a:graphic>
                         <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
-                            <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                            <pic:pic>
                                 <pic:nvPicPr>
                                     <pic:cNvPr id="1" name="Image1"/>
                                     <pic:cNvPicPr/>
                                 </pic:nvPicPr>
                                 <pic:blipFill>
-                                    <a:blip r:embed="rId3" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"/>
+                                    <a:blip r:embed="rId3"/>
                                     <a:stretch>
                                     <a:fillRect/>
                                     </a:stretch>
@@ -3324,22 +3324,22 @@ TEXT :basecamp: TEXT
                 <w:position w:val="-4"/>
             </w:rPr>
             <w:drawing>
-                <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
+                <wp:inline distB="0" distL="0" distR="0" distT="0">
                     <wp:extent cx="266700" cy="266700"/>
                     <wp:effectExtent b="0" l="0" r="0" t="0"/>
                     <wp:docPr descr="emoji symbols:basecamp" id="2" name="Image2"/>
                     <wp:cNvGraphicFramePr>
-                        <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
+                        <a:graphicFrameLocks noChangeAspect="true"/>
                     </wp:cNvGraphicFramePr>
-                    <a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
+                    <a:graphic>
                         <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
-                            <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                            <pic:pic>
                                 <pic:nvPicPr>
                                     <pic:cNvPr id="3" name="Image2"/>
                                     <pic:cNvPicPr/>
                                 </pic:nvPicPr>
                                 <pic:blipFill>
-                                    <a:blip r:embed="rId4" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"/>
+                                    <a:blip r:embed="rId4"/>
                                     <a:stretch>
                                     <a:fillRect/>
                                     </a:stretch>
@@ -3378,22 +3378,22 @@ TEXT :basecamp: TEXT
                 <w:position w:val="-4"/>
             </w:rPr>
             <w:drawing>
-                <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
+                <wp:inline distB="0" distL="0" distR="0" distT="0">
                     <wp:extent cx="226695" cy="226695"/>
                     <wp:effectExtent b="0" l="0" r="0" t="0"/>
                     <wp:docPr descr="emoji symbols:basecamp" id="4" name="Image3"/>
                     <wp:cNvGraphicFramePr>
-                        <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
+                        <a:graphicFrameLocks noChangeAspect="true"/>
                     </wp:cNvGraphicFramePr>
-                    <a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
+                    <a:graphic>
                         <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
-                            <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                            <pic:pic>
                                 <pic:nvPicPr>
                                     <pic:cNvPr id="5" name="Image3"/>
                                     <pic:cNvPicPr/>
                                 </pic:nvPicPr>
                                 <pic:blipFill>
-                                    <a:blip r:embed="rId5" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"/>
+                                    <a:blip r:embed="rId5"/>
                                     <a:stretch>
                                     <a:fillRect/>
                                     </a:stretch>
@@ -3432,22 +3432,22 @@ TEXT :basecamp: TEXT
                 <w:position w:val="-3"/>
             </w:rPr>
             <w:drawing>
-                <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
+                <wp:inline distB="0" distL="0" distR="0" distT="0">
                     <wp:extent cx="186690" cy="186690"/>
                     <wp:effectExtent b="0" l="0" r="0" t="0"/>
                     <wp:docPr descr="emoji symbols:basecamp" id="6" name="Image4"/>
                     <wp:cNvGraphicFramePr>
-                        <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
+                        <a:graphicFrameLocks noChangeAspect="true"/>
                     </wp:cNvGraphicFramePr>
-                    <a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
+                    <a:graphic>
                         <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
-                            <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                            <pic:pic>
                                 <pic:nvPicPr>
                                     <pic:cNvPr id="7" name="Image4"/>
                                     <pic:cNvPicPr/>
                                 </pic:nvPicPr>
                                 <pic:blipFill>
-                                    <a:blip r:embed="rId6" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"/>
+                                    <a:blip r:embed="rId6"/>
                                     <a:stretch>
                                     <a:fillRect/>
                                     </a:stretch>
@@ -3486,22 +3486,22 @@ TEXT :basecamp: TEXT
                 <w:position w:val="-2"/>
             </w:rPr>
             <w:drawing>
-                <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
+                <wp:inline distB="0" distL="0" distR="0" distT="0">
                     <wp:extent cx="146685" cy="146685"/>
                     <wp:effectExtent b="0" l="0" r="0" t="0"/>
                     <wp:docPr descr="emoji symbols:basecamp" id="8" name="Image5"/>
                     <wp:cNvGraphicFramePr>
-                        <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
+                        <a:graphicFrameLocks noChangeAspect="true"/>
                     </wp:cNvGraphicFramePr>
-                    <a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
+                    <a:graphic>
                         <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
-                            <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                            <pic:pic>
                                 <pic:nvPicPr>
                                     <pic:cNvPr id="9" name="Image5"/>
                                     <pic:cNvPicPr/>
                                 </pic:nvPicPr>
                                 <pic:blipFill>
-                                    <a:blip r:embed="rId7" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"/>
+                                    <a:blip r:embed="rId7"/>
                                     <a:stretch>
                                     <a:fillRect/>
                                     </a:stretch>
@@ -3540,22 +3540,22 @@ TEXT :basecamp: TEXT
                 <w:position w:val="-2"/>
             </w:rPr>
             <w:drawing>
-                <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
+                <wp:inline distB="0" distL="0" distR="0" distT="0">
                     <wp:extent cx="146685" cy="146685"/>
                     <wp:effectExtent b="0" l="0" r="0" t="0"/>
                     <wp:docPr descr="emoji symbols:basecamp" id="10" name="Image6"/>
                     <wp:cNvGraphicFramePr>
-                        <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
+                        <a:graphicFrameLocks noChangeAspect="true"/>
                     </wp:cNvGraphicFramePr>
-                    <a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
+                    <a:graphic>
                         <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
-                            <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                            <pic:pic>
                                 <pic:nvPicPr>
                                     <pic:cNvPr id="11" name="Image6"/>
                                     <pic:cNvPicPr/>
                                 </pic:nvPicPr>
                                 <pic:blipFill>
-                                    <a:blip r:embed="rId8" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"/>
+                                    <a:blip r:embed="rId8"/>
                                     <a:stretch>
                                     <a:fillRect/>
                                     </a:stretch>
@@ -3588,22 +3588,22 @@ TEXT :basecamp: TEXT
                 <w:position w:val="-2"/>
             </w:rPr>
             <w:drawing>
-                <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
+                <wp:inline distB="0" distL="0" distR="0" distT="0">
                     <wp:extent cx="146685" cy="146685"/>
                     <wp:effectExtent b="0" l="0" r="0" t="0"/>
                     <wp:docPr descr="emoji symbols:basecamp" id="12" name="Image7"/>
                     <wp:cNvGraphicFramePr>
-                        <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
+                        <a:graphicFrameLocks noChangeAspect="true"/>
                     </wp:cNvGraphicFramePr>
-                    <a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
+                    <a:graphic>
                         <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
-                            <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                            <pic:pic>
                                 <pic:nvPicPr>
                                     <pic:cNvPr id="13" name="Image7"/>
                                     <pic:cNvPicPr/>
                                 </pic:nvPicPr>
                                 <pic:blipFill>
-                                    <a:blip r:embed="rId9" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"/>
+                                    <a:blip r:embed="rId9"/>
                                     <a:stretch>
                                     <a:fillRect/>
                                     </a:stretch>
@@ -3832,7 +3832,7 @@ unprefixed
         <w:pPr>
             <w:pStyle w:val="ParagraphTextBody"/>
         </w:pPr>
-        <w:hyperlink r:id="rId3" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
+        <w:hyperlink r:id="rId3">
             <w:r>
                 <w:rPr>
                     <w:rStyle w:val="Hyperlink"/>
@@ -3855,7 +3855,7 @@ prefixed
         <w:pPr>
             <w:pStyle w:val="ParagraphTextBody"/>
         </w:pPr>
-        <w:hyperlink r:id="rId3" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
+        <w:hyperlink r:id="rId3">
             <w:r>
                 <w:rPr>
                     <w:rStyle w:val="Hyperlink"/>
@@ -4016,7 +4016,7 @@ invalid docx
                     <w:r>
                         <w:t xml:space="preserve">für </w:t>
                     </w:r>
-                    <w:hyperlink r:id="rId5" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
+                    <w:hyperlink r:id="rId5">
                         <w:r>
                             <w:rPr>
                                 <w:rStyle w:val="Hyperlink"/>
@@ -4063,7 +4063,7 @@ invalid docx
         <w:r>
             <w:t xml:space="preserve">Die </w:t>
         </w:r>
-        <w:hyperlink r:id="rId1" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
+        <w:hyperlink r:id="rId1">
             <w:r>
                 <w:rPr>
                     <w:rStyle w:val="Hyperlink"/>
@@ -4225,7 +4225,7 @@ invalid docx
                     <w:r>
                         <w:t xml:space="preserve">für </w:t>
                     </w:r>
-                    <w:hyperlink r:id="rId5" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
+                    <w:hyperlink r:id="rId5">
                         <w:r>
                             <w:rPr>
                                 <w:rStyle w:val="Hyperlink"/>
@@ -4459,7 +4459,7 @@ invalid docx
         <w:r>
             <w:t xml:space="preserve">Die </w:t>
         </w:r>
-        <w:hyperlink r:id="rId1" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
+        <w:hyperlink r:id="rId1">
             <w:r>
                 <w:rPr>
                     <w:rStyle w:val="Hyperlink"/>
@@ -4611,7 +4611,7 @@ invalid docx
                     <w:r>
                         <w:t xml:space="preserve">für </w:t>
                     </w:r>
-                    <w:hyperlink r:id="rId3" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
+                    <w:hyperlink r:id="rId3">
                         <w:r>
                             <w:rPr>
                                 <w:rStyle w:val="Hyperlink"/>
