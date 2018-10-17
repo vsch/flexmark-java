@@ -7,6 +7,7 @@ flexmark-java
 
 - [To Do](#to-do)
     - [Docx Converter](#docx-converter)
+- [0.34.52](#03452)
 - [0.34.50](#03450)
 - [0.34.48](#03448)
 - [0.34.46](#03446)
@@ -253,6 +254,11 @@ flexmark-java
 * [ ] Fix: #99, YamlFrontMatterBlockParser ignores multi-key list items
 
 &nbsp;</details>
+
+0.34.52
+-------
+
+Fix: intermittent NPE when including macro with table in table 
 
 0.34.50
 -------

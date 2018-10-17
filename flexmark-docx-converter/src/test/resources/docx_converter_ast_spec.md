@@ -14559,5 +14559,189 @@ Plain text <<<macro2>>>
 </w:body>
 ````````````````````````````````
 
+```````````````````````````````` example Macros: 8
+>>>macro
+- item 1
+- item 2
 
-**
+
+| Column |
+|--------|
+| Data   |
+<<<
+
+
+|   Complex   |   Simple    |
+|-------------|-------------|
+| <<<macro>>> | Simple Data |
+
+.
+<w:body>
+    <w:tbl>
+        <w:tblPr>
+            <w:tblW w:type="auto" w:w="0"/>
+            <w:jc w:val="left"/>
+            <w:tblInd w:type="dxa" w:w="120"/>
+            <w:tblBorders>
+                <w:top w:color="000001" w:space="0" w:sz="2" w:val="single"/>
+                <w:left w:color="000001" w:space="0" w:sz="2" w:val="single"/>
+                <w:bottom w:color="000001" w:space="0" w:sz="2" w:val="single"/>
+                <w:right w:color="000001" w:space="0" w:sz="2" w:val="single"/>
+                <w:insideH w:color="000001" w:space="0" w:sz="2" w:val="single"/>
+                <w:insideV w:color="000001" w:space="0" w:sz="2" w:val="single"/>
+            </w:tblBorders>
+            <w:tblCellMar>
+                <w:top w:type="dxa" w:w="80"/>
+                <w:left w:type="dxa" w:w="80"/>
+                <w:bottom w:type="dxa" w:w="80"/>
+                <w:right w:type="dxa" w:w="80"/>
+            </w:tblCellMar>
+            <w:tblLook w:firstColumn="1" w:firstRow="1" w:lastColumn="0"
+                w:lastRow="0" w:noHBand="0" w:noVBand="1" w:val="04a0"/>
+        </w:tblPr>
+        <w:tr>
+            <w:trPr>
+                <w:tblHeader/>
+            </w:trPr>
+            <w:tc>
+                <w:tcPr>
+                    <w:shd w:fill="DDDDDD" w:val="clear"/>
+                </w:tcPr>
+                <w:p>
+                    <w:pPr>
+                        <w:pStyle w:val="TableHeading"/>
+                    </w:pPr>
+                    <w:r>
+                        <w:t xml:space="preserve">Complex</w:t>
+                    </w:r>
+                </w:p>
+            </w:tc>
+            <w:tc>
+                <w:tcPr>
+                    <w:shd w:fill="DDDDDD" w:val="clear"/>
+                </w:tcPr>
+                <w:p>
+                    <w:pPr>
+                        <w:pStyle w:val="TableHeading"/>
+                    </w:pPr>
+                    <w:r>
+                        <w:t xml:space="preserve">Simple</w:t>
+                    </w:r>
+                </w:p>
+            </w:tc>
+        </w:tr>
+        <w:tr>
+            <w:trPr/>
+            <w:tc>
+                <w:tcPr/>
+                <w:p>
+                    <w:pPr>
+                        <w:pStyle w:val="BodyText"/>
+                        <w:numPr>
+                            <w:ilvl w:val="0"/>
+                            <w:numId w:val="4"/>
+                        </w:numPr>
+                    </w:pPr>
+                    <w:r>
+                        <w:t xml:space="preserve">item 1</w:t>
+                    </w:r>
+                </w:p>
+                <w:p>
+                    <w:pPr>
+                        <w:pStyle w:val="BodyText"/>
+                        <w:numPr>
+                            <w:ilvl w:val="0"/>
+                            <w:numId w:val="4"/>
+                        </w:numPr>
+                    </w:pPr>
+                    <w:r>
+                        <w:t xml:space="preserve">item 2</w:t>
+                    </w:r>
+                </w:p>
+                <w:tbl>
+                    <w:tblPr>
+                        <w:tblW w:type="auto" w:w="0"/>
+                        <w:jc w:val="left"/>
+                        <w:tblInd w:type="dxa" w:w="120"/>
+                        <w:tblBorders>
+                            <w:top w:color="000001" w:space="0" w:sz="2" w:val="single"/>
+                            <w:left w:color="000001" w:space="0"
+                                w:sz="2" w:val="single"/>
+                            <w:bottom w:color="000001" w:space="0"
+                                w:sz="2" w:val="single"/>
+                            <w:right w:color="000001" w:space="0"
+                                w:sz="2" w:val="single"/>
+                            <w:insideH w:color="000001" w:space="0"
+                                w:sz="2" w:val="single"/>
+                            <w:insideV w:color="000001" w:space="0"
+                                w:sz="2" w:val="single"/>
+                        </w:tblBorders>
+                        <w:tblCellMar>
+                            <w:top w:type="dxa" w:w="80"/>
+                            <w:left w:type="dxa" w:w="80"/>
+                            <w:bottom w:type="dxa" w:w="80"/>
+                            <w:right w:type="dxa" w:w="80"/>
+                        </w:tblCellMar>
+                        <w:tblLook w:firstColumn="1" w:firstRow="1"
+                            w:lastColumn="0" w:lastRow="0" w:noHBand="0"
+                            w:noVBand="1" w:val="04a0"/>
+                    </w:tblPr>
+                    <w:tr>
+                        <w:trPr>
+                            <w:tblHeader/>
+                        </w:trPr>
+                        <w:tc>
+                            <w:tcPr>
+                                <w:shd w:fill="DDDDDD" w:val="clear"/>
+                            </w:tcPr>
+                            <w:p>
+                                <w:pPr>
+                                    <w:pStyle w:val="TableHeading"/>
+                                </w:pPr>
+                                <w:r>
+                                    <w:t xml:space="preserve">Column</w:t>
+                                </w:r>
+                            </w:p>
+                        </w:tc>
+                    </w:tr>
+                    <w:tr>
+                        <w:trPr/>
+                        <w:tc>
+                            <w:tcPr/>
+                            <w:p>
+                                <w:pPr>
+                                    <w:pStyle w:val="TableContents"/>
+                                </w:pPr>
+                                <w:r>
+                                    <w:t xml:space="preserve">Data</w:t>
+                                </w:r>
+                            </w:p>
+                        </w:tc>
+                    </w:tr>
+                </w:tbl>
+                <w:p>
+                    <w:pPr>
+                        <w:pStyle w:val="TableContents"/>
+                    </w:pPr>
+                    <w:r>
+                        <w:t xml:space="preserve"/>
+                    </w:r>
+                </w:p>
+            </w:tc>
+            <w:tc>
+                <w:tcPr/>
+                <w:p>
+                    <w:pPr>
+                        <w:pStyle w:val="TableContents"/>
+                    </w:pPr>
+                    <w:r>
+                        <w:t xml:space="preserve">Simple Data</w:t>
+                    </w:r>
+                </w:p>
+            </w:tc>
+        </w:tr>
+    </w:tbl>
+</w:body>
+````````````````````````````````
+
+
