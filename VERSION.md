@@ -7,6 +7,7 @@ flexmark-java
 
 - [To Do](#to-do)
     - [Docx Converter](#docx-converter)
+- [0.34.53](#03453)
 - [0.34.52](#03452)
 - [0.34.51](#03451)
 - [0.34.50](#03450)
@@ -257,15 +258,20 @@ flexmark-java
 
 &nbsp;</details>
 
+0.34.53
+-------
+
+* Change: revert docx4j to 3.3.4 in docx4j-3 branch
+
 0.34.52
 -------
 
-Fix: intermittent NPE when including macro with table in table 
+Fix: intermittent NPE when including macro with table in table
 
 0.34.51
 -------
 
-Fix: intermittent NPE when including macro with table in table 
+Fix: intermittent NPE when including macro with table in table in docx4j-3 branch
 
 0.34.50
 -------
@@ -278,7 +284,7 @@ Fix: intermittent NPE when including macro with table in table
 0.34.49
 -------
 
-* Change: revert docx4j to 3.3.6
+* Change: revert docx4j to 3.3.6 in docx4j-3 branch
 
 0.34.48
 -------

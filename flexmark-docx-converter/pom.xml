@@ -5,7 +5,7 @@
     <parent>
         <groupId>com.vladsch.flexmark</groupId>
         <artifactId>flexmark-java</artifactId>
-        <version>0.34.51</version>
+        <version>0.34.53</version>
     </parent>
 
     <artifactId>flexmark-docx-converter</artifactId>
@@ -94,7 +94,7 @@
         <dependency>
             <groupId>org.docx4j</groupId>
             <artifactId>docx4j</artifactId>
-            <version>3.3.6</version>
+            <version>3.3.4</version>
         </dependency>
     </dependencies>
 </project>
