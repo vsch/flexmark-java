@@ -2355,8 +2355,8 @@ Table with `th` in `tbody`
 | Result |    Description     | Entity Name |
 |--------|--------------------|-------------|
 |        | non-breaking space | &nbsp;      |
-| <      | less than          | &lt;        |
-| >      | greater than       | &gt;        |
+| \<     | less than          | &lt;        |
+| \>     | greater than       | &gt;        |
 | &      | ampersand          | &amp;       |
 
 .

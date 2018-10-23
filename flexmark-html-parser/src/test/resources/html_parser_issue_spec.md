@@ -763,7 +763,7 @@ don't create a multi-line image url if no new line after ?
 
 
 ```````````````````````````````` example Issue Tests: 21
-<h3>JavaScript is disabled in your browser or not supported!</h3>
+\<h3\>JavaScript is disabled in your browser or not supported!\</h3\>
 View Options
 
 * Show description
@@ -1140,8 +1140,8 @@ info("End of the response");
 '  
 '  
 '  
-<<  
->>  
+\<\<  
+\>\>  
 …  
 &endash;  
 &emdash;  
@@ -1149,8 +1149,8 @@ info("End of the response");
 "  
 '  
 '  
-<<  
->>  
+\<\<  
+\>\>  
 …  
 –  
 —  
@@ -1183,8 +1183,8 @@ info("End of the response");
 '  
 '  
 '  
-<<  
->>  
+\<\<  
+\>\>  
 ...  
 --  
 ---  
@@ -1192,8 +1192,8 @@ info("End of the response");
 "  
 '  
 '  
-<<  
->>  
+\<\<  
+\>\>  
 ...  
 --  
 ---  
@@ -1594,4 +1594,35 @@ abc|[]
 </body>
 </html>
 ````````````````````````````````
+
+
+## Issue 274 
+
+Issue #274, FlexmarkHtmlParser can not handle escaped tags correctly
+
+```````````````````````````````` example Issue 274: 1
+\<em\>abc\</em\>
+
+| \<s\>th\</s\> |
+|---------------|
+| \<u\>tr\</u\> |
+| \<i\>tr\</i\> |
+| \<\>          |
+| \\            |
+[\<b\>caption\</b\>]
+
+.
+<html><body>
+&lt;em&gt;abc&lt;/em&gt;
+<table>
+<caption>&lt;b&gt;caption&lt;/b&gt;</caption>
+<tr><th>&lt;s&gt;th&lt;/s&gt;</th></tr>
+<tr><td>&lt;u&gt;tr&lt;/u&gt;</td></tr>
+<tr><td>&lt;i&gt;tr&lt;/i&gt;</td></tr>
+<tr><td>&lt;&gt;</td></tr>
+<tr><td>\</td></tr>
+</table>
+</body></html>
+````````````````````````````````
+
 

@@ -7,8 +7,12 @@ flexmark-java
 
 - [To Do](#to-do)
     - [Docx Converter](#docx-converter)
+- [0.34.56](#03456)
+- [0.34.53](#03453)
 - [0.34.52](#03452)
+- [0.34.51](#03451)
 - [0.34.50](#03450)
+- [0.34.49](#03449)
 - [0.34.48](#03448)
 - [0.34.46](#03446)
 - [0.34.44](#03444)
@@ -255,10 +259,26 @@ flexmark-java
 
 &nbsp;</details>
 
+0.34.56
+-------
+
+Fix: #274, FlexmarkHtmlParser can not handle escaped tags correctly, now `<` and `>` are also
+escaped.
+
+0.34.53
+-------
+
+* Change: revert docx4j to 3.3.4 in docx4j-3 branch
+
 0.34.52
 -------
 
-Fix: intermittent NPE when including macro with table in table 
+Fix: intermittent NPE when including macro with table in table
+
+0.34.51
+-------
+
+Fix: intermittent NPE when including macro with table in table in docx4j-3 branch
 
 0.34.50
 -------
@@ -267,6 +287,11 @@ Fix: intermittent NPE when including macro with table in table
   paragraphs in `<p>` tag adds 2 x `<br />` after paragraph.
 * Fix: extension auto links would not be processed if paragraph had inline parser processed auto
   links before.
+
+0.34.49
+-------
+
+* Change: revert docx4j to 3.3.6 in docx4j-3 branch
 
 0.34.48
 -------

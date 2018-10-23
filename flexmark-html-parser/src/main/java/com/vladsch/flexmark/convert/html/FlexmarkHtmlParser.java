@@ -560,9 +560,11 @@ public class FlexmarkHtmlParser {
         }
 
         if (!inCode) {
-            // replace [ ] | ` by escaped versions
+            // replace < > [ ] | ` by escaped versions
             text = text.replace("\u00A0", myOptions.nbspText);
             text = text.replace("\\", "\\\\");
+            //text = text.replace("&", "\\&");
+            text = text.replace("<", "\\<").replace(">", "\\>");
             text = text.replace("[", "\\[").replace("]", "\\]");
             text = text.replace("|", "\\|").replace("`", "\\`");
         } else {
