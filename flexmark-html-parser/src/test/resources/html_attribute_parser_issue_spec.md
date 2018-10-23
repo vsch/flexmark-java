@@ -1057,8 +1057,8 @@ info("End of the response");
 «  
 »  
 …  
-&endash;  
-&emdash;  
+\&endash;  
+\&emdash;  
 “  
 ”  
 ‘  
@@ -1143,8 +1143,8 @@ info("End of the response");
 \<\<  
 \>\>  
 …  
-&endash;  
-&emdash;  
+\&endash;  
+\&emdash;  
 "  
 "  
 '  
@@ -1404,7 +1404,7 @@ Issue #149
 
 
 ```````````````````````````````` example Issue  149: 2
-#### G2 & G3: Controlled Arc Move\[[edit](https://duet3d.com/w2/index.php?title=G-code&action=edit&section=12 "Edit section: G2 & G3: Controlled Arc Move")\]
+#### G2 \& G3: Controlled Arc Move\[[edit](https://duet3d.com/w2/index.php?title=G-code&action=edit&section=12 "Edit section: G2 & G3: Controlled Arc Move")\]
 
 **Implemented in beta in 1.17c+2**
 
@@ -1452,7 +1452,7 @@ Examples
 
 
 ```````````````````````````````` example Issue  149: 3
-#### G2 & G3: Controlled Arc Move\[[edit](https://duet3d.com/w2/index.php?title=G-code&action=edit&section=12 "Edit section: G2 & G3: Controlled Arc Move")\]
+#### G2 \& G3: Controlled Arc Move\[[edit](https://duet3d.com/w2/index.php?title=G-code&action=edit&section=12 "Edit section: G2 & G3: Controlled Arc Move")\]
 
 **Implemented in beta in 1.17c+2**
 

@@ -262,7 +262,7 @@ flexmark-java
 0.34.56
 -------
 
-Fix: #274, FlexmarkHtmlParser can not handle escaped tags correctly, now `<` and `>` are also
+Fix: #274, FlexmarkHtmlParser can not handle escaped tags correctly, now `<`, `>` and `&` are also
 escaped.
 
 0.34.53

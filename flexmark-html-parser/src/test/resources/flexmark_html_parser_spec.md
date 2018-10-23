@@ -2354,10 +2354,10 @@ Table with `th` in `tbody`
 ```````````````````````````````` example Tables: 49
 | Result |    Description     | Entity Name |
 |--------|--------------------|-------------|
-|        | non-breaking space | &nbsp;      |
-| \<     | less than          | &lt;        |
-| \>     | greater than       | &gt;        |
-| &      | ampersand          | &amp;       |
+|        | non-breaking space | \&nbsp;     |
+| \<     | less than          | \&lt;       |
+| \>     | greater than       | \&gt;       |
+| \&     | ampersand          | \&amp;      |
 
 .
 <table>
