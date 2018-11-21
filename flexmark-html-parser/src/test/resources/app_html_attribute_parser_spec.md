@@ -4047,3 +4047,84 @@ Uses `<strike>` tags instead of del.
 ````````````````````````````````
 
 
+## GitHub RST Rendered Document
+
+```````````````````````````````` example GitHub RST Rendered Document: 1
+### error: attempt to use poisoned "SIG_USART0_RECV" {#error-attempt-to-use-poisoned-sig_usart0_recv}
+
+If you get the following error:
+
+```
+/usr/share/arduino/hardware/arduino/cores/arduino/HardwareSerial.cpp:91:41: error: attempt to use poisoned "SIG_USART0_RECV"
+/usr/share/arduino/hardware/arduino/cores/arduino/HardwareSerial.cpp:101:15: error: attempt to use poisoned "SIG_USART0_RECV"
+/usr/share/arduino/hardware/arduino/cores/arduino/HardwareSerial.cpp:132:15: error: attempt to use poisoned "SIG_USART1_RECV"
+/usr/share/arduino/hardware/arduino/cores/arduino/HardwareSerial.cpp:145:15: error: attempt to use poisoned "SIG_USART2_RECV"
+/usr/share/arduino/hardware/arduino/cores/arduino/HardwareSerial.cpp:158:15: error: attempt to use poisoned "SIG_USART3_RECV"
+```
+
+You probably recently upgraded avr-libc to the latest version, which has deperecated the use of these symbols. There is a [Arduino Patch](http://arduino.googlecode.com/issues/attachment?aid=9550004000&name=sig-patch.diff&token=R2RWB0LZXQi8OpPLsyAdnMATDNU%3A1351021269609) which
+fixes these error, you can read more about this bug here: [Arduino Bug ISSUE 955](http://code.google.com/p/arduino/issues/detail?id=955).
+
+Resources {#resources}
+----------------------
+
+Here are some resources you might find useful in getting started.
+
+1. CMake:
+   * [Offical CMake Tutorial](http://www.cmake.org/cmake/help/cmake_tutorial.html)
+   * [CMake Tutorial](http://mathnathan.com/2010/07/11/getting-started-with-cmake/)
+   * [CMake Reference](http://www.cmake.org/cmake/help/cmake-2-8-docs.html)
+
+<!-- -->
+
+2. Arduino:
+   * [Getting Started](http://www.arduino.cc/en/Guide/HomePage) - Introduction to Arduino
+   * [Playground](http://www.arduino.cc/playground/) - User contributed documentation and help
+   * [Arduino Forums](http://www.arduino.cc/forum/) - Official forums
+   * [Arduino Reference](http://www.arduino.cc/en/Reference/HomePage) - Official reference manual
+
+.
+<h3 style="box-sizing: border-box; margin-bottom: 16px; margin-top: 24px; font-size: 1.25em; font-weight: 600; line-height: 1.25; caret-color: rgb(36, 41, 46); color: rgb(36, 41, 46); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;; font-style: normal; font-variant-caps: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration: none;"><a id="user-content-error-attempt-to-use-poisoned-sig_usart0_recv" class="anchor" aria-hidden="true" href="https://github.com/francoiscampbell/arduino-cmake/blob/master/README.original.rst#error-attempt-to-use-poisoned-sig_usart0_recv"
+  <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
+    <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+  </svg>
+  </a>error: attempt to use poisoned "SIG_USART0_RECV"
+</h3><p style="box-sizing: border-box; margin-bottom: 16px; margin-top: 0px; caret-color: rgb(36, 41, 46); color: rgb(36, 41, 46); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;; font-size: 16px; font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration: none;">If you get the following error:</p>
+<pre style="box-sizing: border-box; font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; font-size: 13.600000381469727px; margin-bottom: 16px; margin-top: 0px; word-wrap: normal; background-color: rgb(246, 248, 250); border-top-left-radius: 3px; border-top-right-radius: 3px; border-bottom-right-radius: 3px; border-bottom-left-radius: 3px; line-height: 1.45; overflow: auto; padding: 16px; caret-color: rgb(36, 41, 46); color: rgb(36, 41, 46); font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; text-decoration: none;">/usr/share/arduino/hardware/arduino/cores/arduino/HardwareSerial.cpp:91:41: error: attempt to use poisoned "SIG_USART0_RECV"
+/usr/share/arduino/hardware/arduino/cores/arduino/HardwareSerial.cpp:101:15: error: attempt to use poisoned "SIG_USART0_RECV"
+/usr/share/arduino/hardware/arduino/cores/arduino/HardwareSerial.cpp:132:15: error: attempt to use poisoned "SIG_USART1_RECV"
+/usr/share/arduino/hardware/arduino/cores/arduino/HardwareSerial.cpp:145:15: error: attempt to use poisoned "SIG_USART2_RECV"
+/usr/share/arduino/hardware/arduino/cores/arduino/HardwareSerial.cpp:158:15: error: attempt to use poisoned "SIG_USART3_RECV"
+</pre><p style="box-sizing: border-box; margin-bottom: 16px; margin-top: 0px; caret-color: rgb(36, 41, 46); color: rgb(36, 41, 46); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;; font-size: 16px; font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration: none;">You probably recently upgraded avr-libc to the latest version, which has deperecated the use of these symbols. There is a<span class="Apple-converted-space"> </span><a href="http://arduino.googlecode.com/issues/attachment?aid=9550004000&amp;name=sig-patch.diff&amp;token=R2RWB0LZXQi8OpPLsyAdnMATDNU%3A1351021269609"
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   rel="nofollow" style="box-sizing: border-box; color: rgb(3, 102, 214); text-decoration: none;">Arduino Patch</a><span class="Apple-converted-space"> </span>which
+  fixes these error, you can read more about this bug here:<span class="Apple-converted-space"> </span><a href="http://code.google.com/p/arduino/issues/detail?id=955" rel="nofollow" style="box-sizing: border-box; color: rgb(3, 102, 214); text-decoration: none;">Arduino Bug ISSUE 955</a>.</p><a name="user-content-resources" style="box-sizing: border-box; background-color: rgb(255, 255, 255); color: rgb(36, 41, 46); text-decoration: none; caret-color: rgb(36, 41, 46); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;; font-size: 16px; font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"></a><span
+    style="caret-color: rgb(36, 41, 46); color: rgb(36, 41, 46); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;; font-size: 16px; font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration: none; display: inline !important; float: none;"></span>
+<h2 style="box-sizing: border-box; margin-bottom: 16px; margin-top: 24px; font-weight: 600; font-size: 1.5em; line-height: 1.25; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(234, 236, 239); padding-bottom: 0.3em; caret-color: rgb(36, 41, 46); color: rgb(36, 41, 46); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;; font-style: normal; font-variant-caps: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration: none;"><a id="user-content-resources" class="anchor" aria-hidden="true" href="https://github.com/francoiscampbell/arduino-cmake/blob/master/README.original.rst#resources"
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 style="box-sizing: border-box; color: rgb(3, 102, 214); text-decoration: none; float: left; line-height: 1; margin-left: -20px; padding-right: 4px;">
+  <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
+    <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+  </svg>
+</a>Resources
+</h2><p style="box-sizing: border-box; margin-bottom: 16px; margin-top: 0px; caret-color: rgb(36, 41, 46); color: rgb(36, 41, 46); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;; font-size: 16px; font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration: none;">Here are some resources you might find useful in getting started.</p>
+<ol style="box-sizing: border-box; margin-bottom: 16px; margin-top: 0px; padding-left: 2em; caret-color: rgb(36, 41, 46); color: rgb(36, 41, 46); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;; font-size: 16px; font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration: none;">
+  <li style="box-sizing: border-box;">CMake:
+    <ul style="box-sizing: border-box; margin-bottom: 0px; margin-top: 0px; padding-left: 2em;">
+      <li style="box-sizing: border-box;"><a href="http://www.cmake.org/cmake/help/cmake_tutorial.html" rel="nofollow" style="box-sizing: border-box; color: rgb(3, 102, 214); text-decoration: none;">Offical CMake Tutorial</a></li>
+      <li style="box-sizing: border-box; margin-top: 0.25em;"><a href="http://mathnathan.com/2010/07/11/getting-started-with-cmake/" rel="nofollow" style="box-sizing: border-box; color: rgb(3, 102, 214); text-decoration: none;">CMake Tutorial</a></li>
+      <li style="box-sizing: border-box; margin-top: 0.25em;"><a href="http://www.cmake.org/cmake/help/cmake-2-8-docs.html" rel="nofollow" style="box-sizing: border-box; color: rgb(3, 102, 214); text-decoration: none;">CMake Reference</a></li>
+    </ul>
+  </li>
+</ol>
+<ol start="2" style="box-sizing: border-box; margin-bottom: 0px !important; margin-top: 0px; padding-left: 2em; caret-color: rgb(36, 41, 46); color: rgb(36, 41, 46); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;; font-size: 16px; font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration: none;">
+  <li style="box-sizing: border-box;">Arduino:
+    <ul style="box-sizing: border-box; margin-bottom: 0px; margin-top: 0px; padding-left: 2em;">
+      <li style="box-sizing: border-box;"><a href="http://www.arduino.cc/en/Guide/HomePage" rel="nofollow" style="box-sizing: border-box; color: rgb(3, 102, 214); text-decoration: none;">Getting Started</a><span class="Apple-converted-space"> </span>- Introduction to Arduino</li>
+      <li style="box-sizing: border-box; margin-top: 0.25em;"><a href="http://www.arduino.cc/playground/" rel="nofollow" style="box-sizing: border-box; color: rgb(3, 102, 214); text-decoration: none;">Playground</a><span class="Apple-converted-space"> </span>- User contributed documentation and help</li>
+      <li style="box-sizing: border-box; margin-top: 0.25em;"><a href="http://www.arduino.cc/forum/" rel="nofollow" style="box-sizing: border-box; color: rgb(3, 102, 214); text-decoration: none;">Arduino Forums</a><span class="Apple-converted-space"> </span>- Official forums</li>
+      <li style="box-sizing: border-box; margin-top: 0.25em;"><a href="http://www.arduino.cc/en/Reference/HomePage" rel="nofollow" style="box-sizing: border-box; color: rgb(3, 102, 214); text-decoration: none;">Arduino Reference</a><span class="Apple-converted-space"> </span>- Official reference manual</li>
+    </ul>
+  </li>
+</ol>
+````````````````````````````````
+
+

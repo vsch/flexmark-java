@@ -37,6 +37,7 @@ public class SimTocExtension implements Parser.ParserExtension, HtmlRenderer.Htm
     public static final DataKey<Boolean> BLANK_LINE_SPACER = TocExtension.BLANK_LINE_SPACER;
     public static final DataKey<String> DIV_CLASS = TocExtension.DIV_CLASS;
     public static final DataKey<String> LIST_CLASS = TocExtension.LIST_CLASS;
+    public static final DataKey<Boolean> CASE_SENSITIVE_TOC_TAG = TocExtension.CASE_SENSITIVE_TOC_TAG;
 
     // format options
     public static final DataKey<SimTocGenerateOnFormat> FORMAT_UPDATE_ON_FORMAT = TocExtension.FORMAT_UPDATE_ON_FORMAT;

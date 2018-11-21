@@ -37,6 +37,7 @@ public class ComboSimTocSpecTest extends ComboSpecTestCase {
         optionsMap.put("github", new MutableDataSet().setFrom(ParserEmulationProfile.GITHUB_DOC));
         optionsMap.put("div-class", new MutableDataSet().set(TocExtension.DIV_CLASS, "content-class"));
         optionsMap.put("list-class", new MutableDataSet().set(TocExtension.LIST_CLASS, "list-class"));
+        optionsMap.put("not-case-sensitive", new MutableDataSet().set(TocExtension.CASE_SENSITIVE_TOC_TAG, false));
     }
 
     private static final Parser PARSER = Parser.builder(OPTIONS).build();

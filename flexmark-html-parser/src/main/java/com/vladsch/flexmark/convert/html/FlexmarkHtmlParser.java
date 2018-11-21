@@ -46,6 +46,10 @@ public class FlexmarkHtmlParser {
     public static final DataKey<String> EOL_IN_TITLE_ATTRIBUTE = new DataKey<String>("EOL_IN_TITLE_ATTRIBUTE", " ");
     public static final DataKey<String> THEMATIC_BREAK = new DataKey<String>("THEMATIC_BREAK", "*** ** * ** ***");
 
+    // regex to use for processing id attributes, if matched then will concatenate all groups which are not empty, if result string is empty after trimming then no id will be generated
+    // if value empty then no processing is done
+    public static final DataKey<String> OUTPUT_ID_ATTRIBUTE_REGEX = new DataKey<String>("OUTPUT_ID_ATTRIBUTE_REGEX", "^user-content-(.*)$");
+
     public static final DataKey<Integer> TABLE_MIN_SEPARATOR_COLUMN_WIDTH = TableFormatOptions.MIN_SEPARATOR_COLUMN_WIDTH;
     public static final DataKey<Integer> TABLE_MIN_SEPARATOR_DASHES = TableFormatOptions.MIN_SEPARATOR_DASHES;
     public static final DataKey<Boolean> TABLE_LEAD_TRAIL_PIPES = TableFormatOptions.LEAD_TRAIL_PIPES;
@@ -198,12 +202,14 @@ public class FlexmarkHtmlParser {
         }
     }
 
-    void outputAttributes(FormattingAppendable out) {
+    int outputAttributes(FormattingAppendable out, final String initialSep) {
         Attributes attributes = myState.myAttributes;
+        int startOffset = out.offset();
 
         if (!attributes.isEmpty() && !myOptions.skipAttributes) {
             // have some
             String sep = "";
+            out.append(initialSep);
             out.append("{");
 
             for (String attrName : attributes.keySet()) {
@@ -211,7 +217,28 @@ public class FlexmarkHtmlParser {
                 out.append(sep);
 
                 if (attrName.equals("id") || attrName.equals("name")) {
-                    out.append("#").append(value);
+                    // process it first
+                    boolean handled = false;
+                    if (!myOptions.outputIdAttributeRegex.isEmpty()) {
+                        Matcher matcher = myOptions.outputIdAttributeRegexPattern.matcher(value);
+                        if (matcher.matches()) {
+                            StringBuilder sb = new StringBuilder();
+                            int iMax = matcher.groupCount();
+                            for (int i = 0; i < iMax; i++) {
+                                String group = matcher.group(i + 1);
+                                if (group != null && !group.isEmpty()) {
+                                    sb.append(group);
+                                }
+                            }
+
+                            value = sb.toString().trim();
+                            handled = value.isEmpty();
+                        }
+                    }
+
+                    if (!handled) {
+                        out.append("#").append(value);
+                    }
                 } else if (attrName.equals("class")) {
                     out.append(".").append(value);
                 } else {
@@ -229,7 +256,10 @@ public class FlexmarkHtmlParser {
                 sep = " ";
             }
             out.append("}");
+            myState.myAttributes.clear();
         }
+
+        return out.offset() - startOffset;
     }
 
     void processAttributes(Node node) {
@@ -562,6 +592,9 @@ public class FlexmarkHtmlParser {
         if (!inCode) {
             // replace < > [ ] | ` by escaped versions
             text = text.replace("\\", "\\\\");
+            text = text.replace("*", "\\*");
+            text = text.replace("~", "\\~");
+            text = text.replace("^", "\\^");
             text = text.replace("&", "\\&");
             text = text.replace("\u00A0", myOptions.nbspText);
             text = text.replace("<", "\\<").replace(">", "\\>");
@@ -584,15 +617,15 @@ public class FlexmarkHtmlParser {
         return true;
     }
 
-    private void processTextNodes(FormattingAppendable out, Node node) {
-        processTextNodes(out, node, null, null);
+    private void processTextNodes(FormattingAppendable out, Node node, final boolean stripIdAttribute) {
+        processTextNodes(out, node, stripIdAttribute, null, null);
     }
 
-    private void processTextNodes(FormattingAppendable out, Node node, CharSequence wrapText) {
-        processTextNodes(out, node, wrapText, wrapText);
+    private void processTextNodes(FormattingAppendable out, Node node, final boolean stripIdAttribute, CharSequence wrapText) {
+        processTextNodes(out, node, stripIdAttribute, wrapText, wrapText);
     }
 
-    private void processTextNodes(FormattingAppendable out, Node node, CharSequence textPrefix, CharSequence textSuffix) {
+    private void processTextNodes(FormattingAppendable out, Node node, final boolean stripIdAttribute, CharSequence textPrefix, CharSequence textSuffix) {
         pushState(node);
 
         Node child;
@@ -612,6 +645,15 @@ public class FlexmarkHtmlParser {
             }
         }
 
+        if (stripIdAttribute) {
+            excludeAttributes("id");
+        }
+
+        // last text node gives up id to parent
+        int nodeCount = node.parent().childNodeSize();
+        if (node.parent().childNode(nodeCount - 1) == node) {
+            transferIdToParent();
+        }
         popState(out);
     }
 
@@ -691,6 +733,7 @@ public class FlexmarkHtmlParser {
             }
         }
 
+        transferIdToParent();
         popState(null);
         return out.getText();
     }
@@ -729,7 +772,13 @@ public class FlexmarkHtmlParser {
                 popState(null);
             }
         } else {
-            processTextNodes(out, element);
+            boolean stripIdAttribute = false;
+            if (element.childNodeSize() == 0 && element.parent().tagName().equals("body")) {
+                // these are GitHub dummy repeats of heading anchors
+                stripIdAttribute = true;
+            }
+
+            processTextNodes(out, element, stripIdAttribute);
         }
 
         return true;
@@ -807,7 +856,7 @@ public class FlexmarkHtmlParser {
         CharSequence backTicks = RepeatedCharSequence.of("`", backTickCount);
         boolean oldInlineCode = myInlineCode;
         myInlineCode = true;
-        processTextNodes(out, element, myOptions.skipInlineCode || myOptions.extInlineCode.isTextOnly ? "" : backTicks);
+        processTextNodes(out, element, false, myOptions.skipInlineCode || myOptions.extInlineCode.isTextOnly ? "" : backTicks);
         myInlineCode = oldInlineCode;
         return true;
     }
@@ -883,10 +932,12 @@ public class FlexmarkHtmlParser {
                     } else {
                         if (myOptions.setextHeadings && level <= 2) {
                             out.append(headingText);
-                            out.line().repeat(level == 1 ? '=' : '-', Utils.minLimit(headingText.length(), myOptions.minSetextHeadingMarkerLength));
+                            int extraChars = outputAttributes(out, " ");
+                            out.line().repeat(level == 1 ? '=' : '-', Utils.minLimit(headingText.length() + extraChars, myOptions.minSetextHeadingMarkerLength));
                         } else {
                             out.repeat('#', level).append(' ');
                             out.append(headingText);
+                            outputAttributes(out, " ");
                         }
                         out.blankLine();
                     }
@@ -963,7 +1014,7 @@ public class FlexmarkHtmlParser {
             isDefinitionItemParagraph = tagName.equalsIgnoreCase("dd");
         }
         out.blankLineIf(!(isItemParagraph || isDefinitionItemParagraph));
-        processTextNodes(out, element);
+        processTextNodes(out, element, false);
         out.blankLineIf(isItemParagraph || isDefinitionItemParagraph).line();
         return true;
     }
@@ -1184,11 +1235,20 @@ public class FlexmarkHtmlParser {
             if (myOptions.listsEndOnDoubleBlank) {
                 out.blankLine(2);
             } else {
-                out.line().append("<!-- -->").line();
+                out.line().append("<!-- -->").blankLine();
             }
         }
 
         ListState listState = new ListState(isNumbered);
+
+        if (listState.isNumbered && element.hasAttr("start")) {
+            try {
+                int i = Integer.parseInt(element.attr("start"));
+                listState.itemCount = i-1; // it will be pre-incremented before output
+            } catch (NumberFormatException ignored) {
+            }
+        } else {
+        }
 
         Node item;
         while ((item = peek()) != null) {
@@ -1248,7 +1308,7 @@ public class FlexmarkHtmlParser {
         if (firstIsPara) {
             processHtmlTree(out, item, true);
         } else {
-            processTextNodes(out, item);
+            processTextNodes(out, item, false);
         }
         out.popPrefix();
         popState(out);
@@ -1268,7 +1328,7 @@ public class FlexmarkHtmlParser {
                 switch (tagParam.tagType) {
                     case DT:
                         out.blankLineIf(lastWasDefinition).lineIf(!firstItem);
-                        processTextNodes(out, item);
+                        processTextNodes(out, item, false);
                         out.line();
                         lastWasDefinition = false;
                         firstItem = false;
@@ -1437,31 +1497,26 @@ public class FlexmarkHtmlParser {
         while ((node = next()) != null) {
             TagParam tagParam = getTagParam(node);
             if (tagParam != null) {
-                switch (tagParam.tagType) {
-                    case TR: {
-                        Element tableRow = (Element) node;
-                        Elements children = tableRow.children();
-                        boolean wasHeading = myTable.isHeading();
-
-                        if (!children.isEmpty()) {
-                            if (children.get(0).tagName().equalsIgnoreCase("th")) {
-                                myTable.setHeading(true);
-                            }
+                if (tagParam.tagType == TagType.TR) {
+                    Element tableRow = (Element) node;
+                    Elements children = tableRow.children();
+                    boolean wasHeading = myTable.isHeading();
+                    if (!children.isEmpty()) {
+                        if (children.get(0).tagName().equalsIgnoreCase("th")) {
+                            myTable.setHeading(true);
                         }
-
-                        if (myTable.isHeading() && myTable.body.rows.size() > 0) {
-                            if (myOptions.ignoreTableHeadingAfterRows) {
-                                // ignore it
-                                myTableSuppressColumns = true;
-                            } else {
-                                myTable.setHeading(false);
-                            }
-                        }
-                        processTableRow(out, tableRow);
-                        myTableSuppressColumns = false;
-                        myTable.setHeading(wasHeading);
-                        break;
                     }
+                    if (myTable.isHeading() && myTable.body.rows.size() > 0) {
+                        if (myOptions.ignoreTableHeadingAfterRows) {
+                            // ignore it
+                            myTableSuppressColumns = true;
+                        } else {
+                            myTable.setHeading(false);
+                        }
+                    }
+                    processTableRow(out, tableRow);
+                    myTableSuppressColumns = false;
+                    myTable.setHeading(wasHeading);
                 }
             } else {
                 processWrapped(out, element, true);
@@ -1571,7 +1626,10 @@ public class FlexmarkHtmlParser {
         final Attribute attribute = myState.myAttributes.get("id");
         myState.myAttributes.remove("id");
         if (attribute != null && !attribute.getValue().isEmpty()) {
-            myStateStack.peek().myAttributes.addValue("id", attribute.getValue());
+            State state = myStateStack.peek();
+            if (state != null) {
+                state.myAttributes.addValue("id", attribute.getValue());
+            }
         }
     }
 
@@ -1615,7 +1673,7 @@ public class FlexmarkHtmlParser {
 
     private void popState(FormattingAppendable out) {
         if (myStateStack.isEmpty()) throw new IllegalStateException("popState with an empty stack");
-        if (out != null) outputAttributes(out);
+        if (out != null) outputAttributes(out, "");
         myState = myStateStack.pop();
     }
 

@@ -58,6 +58,7 @@ public class ComboHtmlAttributeParserIssueTest extends ComboSpecTestCase {
         optionsMap.put("skip-heading-5", new MutableDataSet().set(FlexmarkHtmlParser.SKIP_HEADING_5, true));
         optionsMap.put("skip-heading-6", new MutableDataSet().set(FlexmarkHtmlParser.SKIP_HEADING_6, true));
         optionsMap.put("skip-attributes", new MutableDataSet().set(FlexmarkHtmlParser.SKIP_ATTRIBUTES, true));
+        optionsMap.put("no-github-id", new MutableDataSet().set(FlexmarkHtmlParser.OUTPUT_ID_ATTRIBUTE_REGEX, ""));
     }
 
     private static final IParse PARSER = new HtmlParser(OPTIONS);

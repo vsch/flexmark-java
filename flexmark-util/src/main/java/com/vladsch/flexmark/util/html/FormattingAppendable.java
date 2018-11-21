@@ -76,6 +76,7 @@ public interface FormattingAppendable extends Appendable {
     int SUPPRESS_TRAILING_WHITESPACE = 0x0004;
     int PREFIX_AFTER_PENDING_EOL = 0x0008; // prefix takes effect after pending EOLs are output
     int PASS_THROUGH = 0x0010;      // for translator, just pass everything through to appendable
+    int ALLOW_LEADING_WHITESPACE = 0x0020;  // used to allow spaces after EOL
     int FORMAT_ALL = CONVERT_TABS | COLLAPSE_WHITESPACE | SUPPRESS_TRAILING_WHITESPACE;
 
     /**
@@ -369,6 +370,23 @@ public interface FormattingAppendable extends Appendable {
      * @return character offset after last append or flush
      */
     int offset();
+
+    /**
+     * Get column offset after last append, does not include any pending: EOLs, spaces nor indents
+     *
+     * @return column offset after last append or flush from previous EOL
+     */
+    int column();
+
+    /**
+     * Get column offset after last append, does not include any pending: EOLs, spaces nor indents
+     *
+     * @param csq   sequence to use for computation
+     * @param start start offset in csq
+     * @param end   end offset in csq
+     * @return column offset which would result from appending csq
+     */
+    int columnWith(final CharSequence csq, final int start, final int end);
 
     /**
      * Open a pre-formatted section. No monitoring of text is done, all text is output as is while nesting count &gt;0

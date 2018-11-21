@@ -2,10 +2,7 @@ package com.vladsch.flexmark.ext.toc.internal;
 
 import com.vladsch.flexmark.ast.*;
 import com.vladsch.flexmark.ast.util.Parsing;
-import com.vladsch.flexmark.ext.toc.SimTocBlock;
-import com.vladsch.flexmark.ext.toc.SimTocContent;
-import com.vladsch.flexmark.ext.toc.SimTocOption;
-import com.vladsch.flexmark.ext.toc.SimTocOptionList;
+import com.vladsch.flexmark.ext.toc.*;
 import com.vladsch.flexmark.parser.InlineParser;
 import com.vladsch.flexmark.parser.block.*;
 import com.vladsch.flexmark.util.Pair;
@@ -18,6 +15,7 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static com.vladsch.flexmark.ext.toc.TocExtension.CASE_SENSITIVE_TOC_TAG;
 import static com.vladsch.flexmark.parser.block.BlockStart.none;
 
 public class SimTocBlockParser extends AbstractBlockParser {
@@ -27,7 +25,11 @@ public class SimTocBlockParser extends AbstractBlockParser {
 
         public TocParsing(DataHolder options) {
             super(options);
-            this.TOC_BLOCK_START = Pattern.compile("^\\[TOC(?:\\s+([^\\]]+))?]:\\s*#(?:\\s+(" + super.LINK_TITLE_STRING + "))?\\s*$");
+            if (CASE_SENSITIVE_TOC_TAG.getFrom(options)) {
+                this.TOC_BLOCK_START = Pattern.compile("^\\[TOC(?:\\s+([^\\]]+))?]:\\s*#(?:\\s+(" + super.LINK_TITLE_STRING + "))?\\s*$");
+            } else {
+                this.TOC_BLOCK_START = Pattern.compile("^\\[(?i:TOC)(?:\\s+([^\\]]+))?]:\\s*#(?:\\s+(" + super.LINK_TITLE_STRING + "))?\\s*$");
+            }
         }
     }
 

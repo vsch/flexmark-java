@@ -1339,6 +1339,7 @@ Issue #138, HTML to Markdown converter missing list end for two consecutive list
 3. Item 3
 
 <!-- -->
+
 1. [Example.com](http://www.example.com)
 2. [Google](http://www.google.com)
 3. [Yahoo!](http://www.yahoo.com)

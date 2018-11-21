@@ -381,8 +381,8 @@ Unwrap iframes
 suppress GitHub anchors and octicon svg
 
 ```````````````````````````````` example Issue Tests: 12
-TEST CASES
-==========
+TEST CASES {#test-cases}
+========================
 
 .
 <h1><a id="user-content-test-cases" class="anchor" href="#test-cases" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>TEST CASES</h1>
@@ -392,8 +392,8 @@ TEST CASES
 suppress GitHub anchors and octicon svg
 
 ```````````````````````````````` example Issue Tests: 13
-TEST CASES
-==========
+TEST CASES {#test-cases}
+========================
 
 .
 <h1><a id="user-content-test-cases" class="anchor" href="file#test-cases" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>TEST CASES</h1>
@@ -769,8 +769,8 @@ View Options
 * Show description
 * Show comments
 
-Click To Add a Title{#id_l.R.titleLink_set}
-===========================================
+Click To Add a Title{#id_l.R.titleLink_set} {#id_l.R.titleLinkInlineEditor_set}
+===============================================================================
 
 [project: Kotlin State: -Fixed,-Duplicate,-Rejected,-{As Designed},-Obsolete type: Feature,{Feature Group} refactoring](/issues?q=project%3A+Kotlin+State%3A+-Fixed%2C-Duplicate%2C-Rejected%2C-%7BAs+Designed%7D%2C-Obsolete+++type%3A+Feature%2C%7BFeature+Group%7D++refactoring)
 Only the first 2500 issues are exported because of the "Max Issues to Export" setting.
@@ -1339,6 +1339,7 @@ Issue #138, HTML to Markdown converter missing list end for two consecutive list
 3. Item 3
 
 <!-- -->
+
 1. [Example.com](http://www.example.com)
 2. [Google](http://www.google.com)
 3. [Yahoo!](http://www.yahoo.com)
@@ -1404,7 +1405,7 @@ Issue #149
 
 
 ```````````````````````````````` example Issue  149: 2
-#### G2 \& G3: Controlled Arc Move\[[edit](https://duet3d.com/w2/index.php?title=G-code&action=edit&section=12 "Edit section: G2 & G3: Controlled Arc Move")\]
+#### G2 \& G3: Controlled Arc Move\[[edit](https://duet3d.com/w2/index.php?title=G-code&action=edit&section=12 "Edit section: G2 & G3: Controlled Arc Move")\] {#G2_.26_G3:_Controlled_Arc_Move}
 
 **Implemented in beta in 1.17c+2**
 
@@ -1452,7 +1453,7 @@ Examples
 
 
 ```````````````````````````````` example Issue  149: 3
-#### G2 \& G3: Controlled Arc Move\[[edit](https://duet3d.com/w2/index.php?title=G-code&action=edit&section=12 "Edit section: G2 & G3: Controlled Arc Move")\]
+#### G2 \& G3: Controlled Arc Move\[[edit](https://duet3d.com/w2/index.php?title=G-code&action=edit&section=12 "Edit section: G2 & G3: Controlled Arc Move")\] {#G2_.26_G3:_Controlled_Arc_Move}
 
 **Implemented in beta in 1.17c+2**
 
@@ -1514,8 +1515,8 @@ make sure links do the same
 Heading with `<a name=anchor>` or `<a id=anchor>` should add explicit id to heading
 
 ```````````````````````````````` example Issue Attributes Extension: 1
-How to use{#use}
-----------------
+How to use {#use}
+-----------------
 
 .
 <h2><a name="use">How to use</a></h2>

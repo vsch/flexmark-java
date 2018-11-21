@@ -35,7 +35,7 @@ public final class SegmentedSequence extends BasedSequenceImpl {
             }
             return 0;
         }
-        return iMax > 0 ? baseOffsets[baseStartOffset] : 0;
+        return iMax > 0 ? (baseStartOffset < iMax ? baseOffsets[baseStartOffset] : baseOffsets[iMax-1]) : 0;
     }
 
     public int getEndOffset() {
@@ -49,8 +49,8 @@ public final class SegmentedSequence extends BasedSequenceImpl {
         }
 
         // ensure that 0 length end returns start
-        if (length == 0) return iMax > 0 ? baseOffsets[baseStartOffset] : 0;
-        return iMax > 0 ? baseOffsets[baseStartOffset + length - 1] + 1 : 0;
+        if (length == 0) return iMax > 0 ? (baseStartOffset < iMax ? baseOffsets[baseStartOffset] : baseOffsets[iMax-1]) : 0;
+        return iMax > 0 ? (baseStartOffset + length <= iMax ? baseOffsets[baseStartOffset + length - 1] + 1 : baseOffsets[baseStartOffset + iMax - 1] + 1) : 0;
     }
 
     @Override
@@ -154,9 +154,6 @@ public final class SegmentedSequence extends BasedSequenceImpl {
         BasedSequence base = segments.size() > 0 ? segments.get(0).getBaseSequence() : SubSequence.NULL;
 
         for (BasedSequence basedSequence : segments) {
-            if (base.getBase() != basedSequence.getBase()) {
-                int tmp = 0;
-            }
             assert base.getBase() == basedSequence.getBase() : "all segments must come from the same base sequence";
             assert basedSequence.getStartOffset() >= length : "segments must be in increasing index order from base sequence start=" + basedSequence.getStartOffset() + ", length=" + length;
             length += basedSequence.length();

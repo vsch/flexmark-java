@@ -619,6 +619,12 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
     public int offset() { return out.offset(); }
 
     @Override
+    public int column() { return out.column(); }
+
+    @Override
+    public int columnWith(final CharSequence csq, final int start, final int end) { return out.columnWith(csq, start, end); }
+
+    @Override
     public T openPreFormatted(final boolean keepIndent) {
         out.openPreFormatted(true);
         return (T) this;

@@ -55,9 +55,9 @@ public class FormatterOptions {
         formatFlags = Formatter.FORMAT_FLAGS.getFrom(options);
         maxBlankLines = Formatter.MAX_BLANK_LINES.getFrom(options);
         maxTrailingBlankLines = Formatter.MAX_TRAILING_BLANK_LINES.getFrom(options);
+        minSetextMarkerLength = Parser.HEADING_SETEXT_MARKER_LENGTH.getFrom(options);
         spaceAfterAtxMarker = Formatter.SPACE_AFTER_ATX_MARKER.getFrom(options);
         atxHeaderTrailingMarker = Formatter.ATX_HEADER_TRAILING_MARKER.getFrom(options);
-        minSetextMarkerLength = Parser.HEADING_SETEXT_MARKER_LENGTH.getFrom(options);
         thematicBreak = Formatter.THEMATIC_BREAK.getFrom(options);
         translationIdFormat = Formatter.TRANSLATION_ID_FORMAT.getFrom(options);
         translationHtmlBlockPrefix = Formatter.TRANSLATION_HTML_BLOCK_PREFIX.getFrom(options);

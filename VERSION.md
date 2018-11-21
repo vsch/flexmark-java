@@ -7,6 +7,7 @@ flexmark-java
 
 - [To Do](#to-do)
     - [Docx Converter](#docx-converter)
+- [0.34.58](#03458)
 - [0.34.56](#03456)
 - [0.34.53](#03453)
 - [0.34.52](#03452)
@@ -259,11 +260,28 @@ flexmark-java
 
 &nbsp;</details>
 
+0.34.58
+-------
+
+* Fix: possible index out of bounds on segmented sequences
+* Add: HTML parser option to modify id attribute before output. Used to strip prefix
+  `user-content-` from GitHub rendered docs. See
+  [`OUTPUT_ID_ATTRIBUTE_REGEX`](../../wiki/Extensions#html-to-markdown)
+* Fix: HTML parser to transfer last `<a>` with `id`/`name` attribute to parent.
+* Fix: HTML parser to strip out `<a>` tags with `id` attribute and no text when direct children
+  of `<body>`. A kludge to strip out duplicate ids in GitHub rendered docs.
+* Fix: HTML parser to respect `<ol>` `start` attribute for first list item.
+* Fix: HTML parser to add `*`, `~` and `^` to escaped text characters so they don't generate
+  erroneous markup.
+* Add: to TOC extension `CASE_SENSITIVE_TOC_TAG` option, default `true`, setting it to false
+  allows `[TOC]` and `[TOC]: #` to be matched without case sensitivity. The syntax for toc
+  options is still case sensitive.
+
 0.34.56
 -------
 
-Fix: #274, FlexmarkHtmlParser can not handle escaped tags correctly, now `<`, `>` and `&` are also
-escaped.
+* Fix: #274, FlexmarkHtmlParser can not handle escaped tags correctly, now `<`, `>` and `&` are
+  also escaped.
 
 0.34.53
 -------
@@ -273,12 +291,12 @@ escaped.
 0.34.52
 -------
 
-Fix: intermittent NPE when including macro with table in table
+* Fix: intermittent NPE when including macro with table in table
 
 0.34.51
 -------
 
-Fix: intermittent NPE when including macro with table in table in docx4j-3 branch
+* Fix: intermittent NPE when including macro with table in table in docx4j-3 branch
 
 0.34.50
 -------

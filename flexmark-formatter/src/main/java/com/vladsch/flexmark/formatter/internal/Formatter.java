@@ -363,7 +363,7 @@ public class Formatter implements IRender {
         }
     };
 
-    final static Iterable<? extends Node> NULL_ITERABLE = new Iterable<Node>() {
+    final public static Iterable<? extends Node> NULL_ITERABLE = new Iterable<Node>() {
         @Override
         public Iterator<Node> iterator() {
             return null;

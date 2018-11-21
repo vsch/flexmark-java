@@ -86,9 +86,67 @@ Document[0, 11]
 ````````````````````````````````
 
 
-accepts all text for style
+Default case sensitive
 
 ```````````````````````````````` example SimToc: 3
+[toc]: #
+
+# Heading **some bold** 1
+## Heading 1.1 _some italic_
+
+.
+<h1 id="heading-some-bold-1">Heading <strong>some bold</strong> 1</h1>
+<h2 id="heading-11-some-italic">Heading 1.1 <em>some italic</em></h2>
+.
+Document[0, 66]
+  Reference[0, 8] refOpen:[0, 1, "["] ref:[1, 4, "toc"] refClose:[4, 6, "]:"] url:[7, 8, "#"]
+  Heading[10, 35] textOpen:[10, 11, "#"] text:[12, 35, "Heading **some bold** 1"]
+    Text[12, 20] chars:[12, 20, "Heading "]
+    StrongEmphasis[20, 33] textOpen:[20, 22, "**"] text:[22, 31, "some bold"] textClose:[31, 33, "**"]
+      Text[22, 31] chars:[22, 31, "some bold"]
+    Text[33, 35] chars:[33, 35, " 1"]
+  Heading[36, 64] textOpen:[36, 38, "##"] text:[39, 64, "Heading 1.1 _some italic_"]
+    Text[39, 51] chars:[39, 51, "Headi …  1.1 "]
+    Emphasis[51, 64] textOpen:[51, 52, "_"] text:[52, 63, "some italic"] textClose:[63, 64, "_"]
+      Text[52, 63] chars:[52, 63, "some  … talic"]
+````````````````````````````````
+
+
+case insensitive
+
+```````````````````````````````` example(SimToc: 4) options(not-case-sensitive)
+[toc]: # 
+
+# Heading **some bold** 1
+## Heading 1.1 _some italic_
+
+.
+<div>
+  <h1>Table of Contents</h1>
+  <ul>
+    <li><a href="#heading-11-some-italic">Heading 1.1 <em>some italic</em></a></li>
+  </ul>
+</div>
+<h1 id="heading-some-bold-1">Heading <strong>some bold</strong> 1</h1>
+<h2 id="heading-11-some-italic">Heading 1.1 <em>some italic</em></h2>
+.
+Document[0, 67]
+  SimTocBlock[0, 10] openingMarker:[0, 1] tocKeyword:[1, 4] closingMarker:[4, 6] anchorMarker:[7, 8, "#"]
+  Heading[11, 36] textOpen:[11, 12, "#"] text:[13, 36, "Heading **some bold** 1"]
+    Text[13, 21] chars:[13, 21, "Heading "]
+    StrongEmphasis[21, 34] textOpen:[21, 23, "**"] text:[23, 32, "some bold"] textClose:[32, 34, "**"]
+      Text[23, 32] chars:[23, 32, "some bold"]
+    Text[34, 36] chars:[34, 36, " 1"]
+  Heading[37, 65] textOpen:[37, 39, "##"] text:[40, 65, "Heading 1.1 _some italic_"]
+    Text[40, 52] chars:[40, 52, "Headi …  1.1 "]
+    Emphasis[52, 65] textOpen:[52, 53, "_"] text:[53, 64, "some italic"] textClose:[64, 65, "_"]
+      Text[53, 64] chars:[53, 64, "some  … talic"]
+````````````````````````````````
+
+
+accepts all text for style
+
+```````````````````````````````` example SimToc: 5
 [TOC levels=a,b,c,d html markdown text formatted bullet numbered]: #  
 .
 .
@@ -99,7 +157,7 @@ Document[0, 71]
 
 Absorbs only valid combinations, HTML or Heading with List, no blank lines
 
-```````````````````````````````` example SimToc: 4
+```````````````````````````````` example SimToc: 6
 [TOC levels=a,b,c,d html markdown text formatted bullet numbered]: #  
 
 # Heading 1
@@ -115,7 +173,7 @@ Document[0, 84]
 
 Absorbs only valid combinations, HTML or Heading with List, no blank lines
 
-```````````````````````````````` example SimToc: 5
+```````````````````````````````` example SimToc: 7
 [TOC levels=a,b,c,d html markdown text formatted bullet numbered]: #  
 
 - asfdasfd
@@ -133,7 +191,7 @@ Document[0, 83]
 ````````````````````````````````
 
 
-```````````````````````````````` example SimToc: 6
+```````````````````````````````` example SimToc: 8
 [TOC levels=a,b,c,d html markdown text formatted bullet numbered]: #  
 
 <div>
@@ -150,7 +208,7 @@ Document[0, 85]
 
 Absorbs only valid combinations, HTML or Heading with List, no blank lines
 
-```````````````````````````````` example SimToc: 7
+```````````````````````````````` example SimToc: 9
 [TOC levels=a,b,c,d html markdown text formatted bullet numbered]: #  
 # Heading 1
 ## Heading 1.1
@@ -187,7 +245,7 @@ Document[0, 123]
 
 Absorbs only valid combinations, HTML or Heading with List, no blank lines
 
-```````````````````````````````` example SimToc: 8
+```````````````````````````````` example SimToc: 10
 [TOC levels=a,b,c,d html markdown text formatted bullet numbered]: #  
 # Heading 1
 
@@ -215,7 +273,7 @@ Document[0, 109]
 
 Absorbs only valid combinations, HTML or Heading with List, no blank lines
 
-```````````````````````````````` example SimToc: 9
+```````````````````````````````` example SimToc: 11
 [TOC levels=a,b,c,d html markdown text formatted bullet numbered]: #  
 - afdasfdsadf
 - asfdasfd
@@ -241,7 +299,7 @@ Document[0, 109]
 
 Absorbs only valid combinations, HTML or Heading with List, no blank lines
 
-```````````````````````````````` example SimToc: 10
+```````````````````````````````` example SimToc: 12
 [TOC levels=a,b,c,d html markdown text formatted bullet numbered]: #  
 # Heading 1
 - afdasfdsadf
@@ -282,7 +340,7 @@ Document[0, 157]
 
 Absorbs only valid combinations, HTML or Heading with List, no blank lines
 
-```````````````````````````````` example SimToc: 11
+```````````````````````````````` example SimToc: 13
 [TOC levels=a,b,c,d html markdown text formatted bullet numbered]: #  
 <div>
   <h1>Content</h1>
@@ -309,7 +367,7 @@ Document[0, 179]
 
 Absorbs only valid combinations, HTML or Heading with List, no blank lines
 
-```````````````````````````````` example SimToc: 12
+```````````````````````````````` example SimToc: 14
 [TOC levels=a,b,c,d html markdown text formatted bullet numbered]: #  
 <div>
   <h1>Content</h1>
@@ -330,7 +388,7 @@ Document[0, 187]
 
 Absorbs only valid combinations, HTML or Heading with List, no blank lines
 
-```````````````````````````````` example SimToc: 13
+```````````````````````````````` example SimToc: 15
 [TOC levels=a,b,c,d html markdown text formatted bullet numbered]: #  
 <div>
   <h1>Content</h1>
@@ -348,7 +406,7 @@ Document[0, 128]
 
 Absorbs only valid combinations, HTML or Heading with List, no blank lines
 
-```````````````````````````````` example SimToc: 14
+```````````````````````````````` example SimToc: 16
 [TOC levels=a,b,c,d html markdown text formatted bullet numbered]: #  
 <div>
   <h1>Content</h1>
@@ -367,7 +425,7 @@ Document[0, 135]
 
 Absorbs only valid combinations, HTML or Heading with List, with one leading blank line
 
-```````````````````````````````` example(SimToc: 15) options(blank-line-spacer)
+```````````````````````````````` example(SimToc: 17) options(blank-line-spacer)
 [TOC levels=a,b,c,d html markdown text formatted bullet numbered]: #  
 
 # Heading 1
@@ -382,7 +440,7 @@ Document[0, 83]
 
 Absorbs only valid combinations, HTML or Heading with List, with one leading blank line
 
-```````````````````````````````` example(SimToc: 16) options(blank-line-spacer)
+```````````````````````````````` example(SimToc: 18) options(blank-line-spacer)
 [TOC levels=a,b,c,d html markdown text formatted bullet numbered]: #  
 
 - asfdasfd
@@ -400,7 +458,7 @@ Document[0, 82]
 
 Absorbs only valid combinations, HTML or Heading with List, with one leading blank line
 
-```````````````````````````````` example(SimToc: 17) options(blank-line-spacer)
+```````````````````````````````` example(SimToc: 19) options(blank-line-spacer)
 [TOC levels=a,b,c,d html markdown text formatted bullet numbered]: #  
 
 <div>
@@ -416,7 +474,7 @@ Document[0, 84]
 
 Absorbs only valid combinations, HTML or Heading with List, with one leading blank line
 
-```````````````````````````````` example(SimToc: 18) options(blank-line-spacer)
+```````````````````````````````` example(SimToc: 20) options(blank-line-spacer)
 [TOC levels=a,b,c,d html markdown text formatted bullet numbered]: #  
 # Heading 1
 ## Heading 1.1
@@ -453,7 +511,7 @@ Document[0, 122]
 
 Absorbs only valid combinations, HTML or Heading with List, with one leading blank line
 
-```````````````````````````````` example(SimToc: 19) options(blank-line-spacer)
+```````````````````````````````` example(SimToc: 21) options(blank-line-spacer)
 [TOC levels=a,b,c,d html markdown text formatted bullet numbered]: #  
 
 # Heading 1
@@ -491,7 +549,7 @@ Document[0, 123]
 
 Absorbs only valid combinations, HTML or Heading with List, with one leading blank line
 
-```````````````````````````````` example(SimToc: 20) options(blank-line-spacer)
+```````````````````````````````` example(SimToc: 22) options(blank-line-spacer)
 [TOC levels=a,b,c,d html markdown text formatted bullet numbered]: #  
 # Heading 1
 
@@ -519,7 +577,7 @@ Document[0, 108]
 
 Absorbs only valid combinations, HTML or Heading with List, with one leading blank line
 
-```````````````````````````````` example(SimToc: 21) options(blank-line-spacer)
+```````````````````````````````` example(SimToc: 23) options(blank-line-spacer)
 [TOC levels=a,b,c,d html markdown text formatted bullet numbered]: #  
 - afdasfdsadf
 - asfdasfd
@@ -545,7 +603,7 @@ Document[0, 108]
 
 Absorbs only valid combinations, HTML or Heading with List, with one leading blank line
 
-```````````````````````````````` example(SimToc: 22) options(blank-line-spacer)
+```````````````````````````````` example(SimToc: 24) options(blank-line-spacer)
 [TOC levels=a,b,c,d html markdown text formatted bullet numbered]: #  
 # Heading 1
 - afdasfdsadf
@@ -586,7 +644,7 @@ Document[0, 156]
 
 Absorbs only valid combinations, HTML or Heading with List, with one leading blank line
 
-```````````````````````````````` example(SimToc: 23) options(blank-line-spacer)
+```````````````````````````````` example(SimToc: 25) options(blank-line-spacer)
 [TOC levels=a,b,c,d html markdown text formatted bullet numbered]: #  
 
 # Heading 1
@@ -628,7 +686,7 @@ Document[0, 157]
 
 Absorbs only valid combinations, HTML or Heading with List, no blank lines
 
-```````````````````````````````` example(SimToc: 24) options(blank-line-spacer)
+```````````````````````````````` example(SimToc: 26) options(blank-line-spacer)
 [TOC levels=a,b,c,d html markdown text formatted bullet numbered]: #  
 <div>
   <h1>Content</h1>
@@ -655,7 +713,7 @@ Document[0, 178]
 
 Absorbs only valid combinations, HTML or Heading with List, with one leading blank line
 
-```````````````````````````````` example(SimToc: 25) options(blank-line-spacer)
+```````````````````````````````` example(SimToc: 27) options(blank-line-spacer)
 [TOC levels=a,b,c,d html markdown text formatted bullet numbered]: #  
 <div>
   <h1>Content</h1>
@@ -676,7 +734,7 @@ Document[0, 186]
 
 Absorbs only valid combinations, HTML or Heading with List, with one leading blank line
 
-```````````````````````````````` example(SimToc: 26) options(blank-line-spacer)
+```````````````````````````````` example(SimToc: 28) options(blank-line-spacer)
 [TOC levels=a,b,c,d html markdown text formatted bullet numbered]: #  
 
 <div>
@@ -698,7 +756,7 @@ Document[0, 187]
 
 Absorbs only valid combinations, HTML or Heading with List, with one leading blank line
 
-```````````````````````````````` example(SimToc: 27) options(blank-line-spacer)
+```````````````````````````````` example(SimToc: 29) options(blank-line-spacer)
 [TOC levels=a,b,c,d html markdown text formatted bullet numbered]: #  
 
 
@@ -728,7 +786,7 @@ Document[0, 188]
 
 Absorbs only valid combinations, HTML or Heading with List, with one leading blank line
 
-```````````````````````````````` example(SimToc: 28) options(blank-line-spacer)
+```````````````````````````````` example(SimToc: 30) options(blank-line-spacer)
 [TOC levels=a,b,c,d html markdown text formatted bullet numbered]: #  
 <div>
   <h1>Content</h1>
@@ -746,7 +804,7 @@ Document[0, 127]
 
 Absorbs only valid combinations, HTML or Heading with List, with one leading blank line
 
-```````````````````````````````` example(SimToc: 29) options(blank-line-spacer)
+```````````````````````````````` example(SimToc: 31) options(blank-line-spacer)
 [TOC levels=a,b,c,d html markdown text formatted bullet numbered]: #  
 
 <div>
@@ -765,7 +823,7 @@ Document[0, 128]
 
 Absorbs only valid combinations, HTML or Heading with List, with one leading blank line
 
-```````````````````````````````` example(SimToc: 30) options(blank-line-spacer)
+```````````````````````````````` example(SimToc: 32) options(blank-line-spacer)
 [TOC levels=a,b,c,d html markdown text formatted bullet numbered]: #  
 
 
@@ -789,7 +847,7 @@ Document[0, 129]
 
 Absorbs only valid combinations, HTML or Heading with List, with one leading blank line
 
-```````````````````````````````` example(SimToc: 31) options(blank-line-spacer)
+```````````````````````````````` example(SimToc: 33) options(blank-line-spacer)
 [TOC levels=a,b,c,d html markdown text formatted bullet numbered]: #  
 <div>
   <h1>Content</h1>
@@ -813,7 +871,7 @@ Document[0, 135]
 
 Absorbs only valid combinations, HTML or Heading with List, with one leading blank line
 
-```````````````````````````````` example(SimToc: 32) options(blank-line-spacer)
+```````````````````````````````` example(SimToc: 34) options(blank-line-spacer)
 [TOC levels=a,b,c,d html markdown text formatted bullet numbered]: #  
 
 <div>
@@ -838,7 +896,7 @@ Document[0, 136]
 
 Absorbs only valid combinations, HTML or Heading with List, with one leading blank line
 
-```````````````````````````````` example(SimToc: 33) options(blank-line-spacer)
+```````````````````````````````` example(SimToc: 35) options(blank-line-spacer)
 [TOC levels=a,b,c,d html markdown text formatted bullet numbered]: #  
 
 
@@ -866,7 +924,7 @@ Document[0, 137]
 
 Default rendering with emphasis
 
-```````````````````````````````` example SimToc: 34
+```````````````````````````````` example SimToc: 36
 [TOC]:#  
 
 # Heading **some bold** 1
@@ -913,7 +971,7 @@ Document[0, 126]
 
 Default rendering with div class
 
-```````````````````````````````` example(SimToc: 35) options(div-class)
+```````````````````````````````` example(SimToc: 37) options(div-class)
 [TOC]:#  
 
 # Heading **some bold** 1
@@ -960,7 +1018,7 @@ Document[0, 125]
 
 Default rendering with div class, list class
 
-```````````````````````````````` example(SimToc: 36) options(div-class, list-class)
+```````````````````````````````` example(SimToc: 38) options(div-class, list-class)
 [TOC]:#  
 
 # Heading **some bold** 1
@@ -1007,7 +1065,7 @@ Document[0, 125]
 
 Default rendering with list class
 
-```````````````````````````````` example(SimToc: 37) options(list-class)
+```````````````````````````````` example(SimToc: 39) options(list-class)
 [TOC]:#  
 
 # Heading **some bold** 1
@@ -1054,7 +1112,7 @@ Document[0, 125]
 
 With option nodes in the ast
 
-```````````````````````````````` example(SimToc: 38) options(with-option-list)
+```````````````````````````````` example(SimToc: 40) options(with-option-list)
 [TOC levels=a,b,c,d html markdown text formatted bullet numbered]: # 
 .
 .
@@ -1073,7 +1131,7 @@ Document[0, 69]
 
 options, empty title
 
-```````````````````````````````` example SimToc: 39
+```````````````````````````````` example SimToc: 41
 [TOC levels=3]:# ""
 [TOC levels=3]:# ''
 .
@@ -1086,7 +1144,7 @@ Document[0, 40]
 
 options, title
 
-```````````````````````````````` example SimToc: 40
+```````````````````````````````` example SimToc: 42
 [TOC levels=3]:# "title"
 [TOC levels=3]:# 'title'
 .
@@ -1099,7 +1157,7 @@ Document[0, 50]
 
 options, markers, empty title
 
-```````````````````````````````` example SimToc: 41
+```````````````````````````````` example SimToc: 43
 [TOC levels=3]:# "## "
 [TOC levels=3]:# '## '
 .
@@ -1112,7 +1170,7 @@ Document[0, 46]
 
 options, markers, title
 
-```````````````````````````````` example SimToc: 42
+```````````````````````````````` example SimToc: 44
 [TOC levels=3]:# "##title"
 [TOC levels=3]:# '##title'
 .
@@ -1125,7 +1183,7 @@ Document[0, 54]
 
 options, markers, title
 
-```````````````````````````````` example SimToc: 43
+```````````````````````````````` example SimToc: 45
 [TOC levels=3]:# "## title"
 [TOC levels=3]:# '## title'
 .
@@ -1138,7 +1196,7 @@ Document[0, 56]
 
 options, title with escaped chars
 
-```````````````````````````````` example SimToc: 44
+```````````````````````````````` example SimToc: 46
 ## Header 2
 ### Header 3
 
@@ -1172,7 +1230,7 @@ Document[0, 82]
 
 start with missing first level
 
-```````````````````````````````` example SimToc: 45
+```````````````````````````````` example SimToc: 47
 [TOC levels=1-6]:#  
 
 
@@ -1218,7 +1276,7 @@ Document[0, 82]
 
 start with missing first 2 levels
 
-```````````````````````````````` example SimToc: 46
+```````````````````````````````` example SimToc: 48
 [TOC levels=1-6]:#  
 
 
@@ -1259,7 +1317,7 @@ Document[0, 72]
 
 Text only style
 
-```````````````````````````````` example SimToc: 47
+```````````````````````````````` example SimToc: 49
 [TOC text]:#
 
 
@@ -1308,7 +1366,7 @@ Document[0, 131]
 
 Text and inlines style
 
-```````````````````````````````` example(SimToc: 48) options(text-only)
+```````````````````````````````` example(SimToc: 50) options(text-only)
 [TOC format]:#  
 
 
@@ -1357,7 +1415,7 @@ Document[0, 135]
 
 Text only, flat
 
-```````````````````````````````` example(SimToc: 49) options(text-only, flat)
+```````````````````````````````` example(SimToc: 51) options(text-only, flat)
 [TOC]:#
 
 
@@ -1403,7 +1461,7 @@ Document[0, 126]
 
 Text and inlines, flat
 
-```````````````````````````````` example(SimToc: 50) options(flat)
+```````````````````````````````` example(SimToc: 52) options(flat)
 [TOC]:#
 
 
@@ -1449,7 +1507,7 @@ Document[0, 126]
 
 Text and inlines, hierarchy
 
-```````````````````````````````` example(SimToc: 51) options(flat)
+```````````````````````````````` example(SimToc: 53) options(flat)
 [TOC hierarchy]:#
 
 
@@ -1498,7 +1556,7 @@ Document[0, 136]
 
 Text and inlines, flat
 
-```````````````````````````````` example(SimToc: 52) options(flat-reversed)
+```````````````````````````````` example(SimToc: 54) options(flat-reversed)
 [TOC]:#
 
 
@@ -1544,7 +1602,7 @@ Document[0, 126]
 
 Text and inlines, flat-reversed
 
-```````````````````````````````` example(SimToc: 53) options(flat-reversed)
+```````````````````````````````` example(SimToc: 55) options(flat-reversed)
 [TOC]:#
 
 
@@ -1590,7 +1648,7 @@ Document[0, 126]
 
 Text only, sorted
 
-```````````````````````````````` example(SimToc: 54) options(text-only, sorted)
+```````````````````````````````` example(SimToc: 56) options(text-only, sorted)
 [TOC]:#
 
 
@@ -1636,7 +1694,7 @@ Document[0, 126]
 
 Text and inlines, sorted
 
-```````````````````````````````` example(SimToc: 55) options(sorted)
+```````````````````````````````` example(SimToc: 57) options(sorted)
 [TOC]:#
 
 
@@ -1682,7 +1740,7 @@ Document[0, 126]
 
 Text only, sorted
 
-```````````````````````````````` example(SimToc: 56) options(text-only, sorted-reversed)
+```````````````````````````````` example(SimToc: 58) options(text-only, sorted-reversed)
 [TOC]:#
 
 
@@ -1728,7 +1786,7 @@ Document[0, 126]
 
 Text and inlines, sorted reversed
 
-```````````````````````````````` example(SimToc: 57) options(sorted-reversed)
+```````````````````````````````` example(SimToc: 59) options(sorted-reversed)
 [TOC]:#
 
 
@@ -1774,7 +1832,7 @@ Document[0, 126]
 
 Text and inlines, unsorted
 
-```````````````````````````````` example(SimToc: 58) options(sorted)
+```````````````````````````````` example(SimToc: 60) options(sorted)
 [TOC hierarchy]:#
 
 
@@ -1823,7 +1881,7 @@ Document[0, 136]
 
 Typographic chars included
 
-```````````````````````````````` example(SimToc: 59) options(sorted)
+```````````````````````````````` example(SimToc: 61) options(sorted)
 [TOC hierarchy]:#
 
 
@@ -1872,7 +1930,7 @@ Document[0, 138]
 
 With Typographic extension included
 
-```````````````````````````````` example(SimToc: 60) options(typographic)
+```````````````````````````````` example(SimToc: 62) options(typographic)
 [TOC hierarchy]:#
 
 
@@ -1921,7 +1979,7 @@ Document[0, 138]
 ````````````````````````````````
 
 
-```````````````````````````````` example(SimToc: 61) options(github)
+```````````````````````````````` example(SimToc: 63) options(github)
 [TOC hierarchy]:#
 
 

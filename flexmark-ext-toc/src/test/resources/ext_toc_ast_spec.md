@@ -199,9 +199,65 @@ Document[0, 261]
 ````````````````````````````````
 
 
-Default rendering
+Default case sensitive
 
 ```````````````````````````````` example Toc: 3
+[toc] 
+
+# Heading **some bold** 1
+## Heading 1.1 _some italic_
+
+.
+<p>[toc]</p>
+<h1 id="heading-some-bold-1">Heading <strong>some bold</strong> 1</h1>
+<h2 id="heading-11-some-italic">Heading 1.1 <em>some italic</em></h2>
+.
+Document[0, 64]
+  Paragraph[0, 7] isTrailingBlankLine
+    LinkRef[0, 5] referenceOpen:[0, 1, "["] reference:[1, 4, "toc"] referenceClose:[4, 5, "]"]
+      Text[1, 4] chars:[1, 4, "toc"]
+  Heading[8, 33] textOpen:[8, 9, "#"] text:[10, 33, "Heading **some bold** 1"]
+    Text[10, 18] chars:[10, 18, "Heading "]
+    StrongEmphasis[18, 31] textOpen:[18, 20, "**"] text:[20, 29, "some bold"] textClose:[29, 31, "**"]
+      Text[20, 29] chars:[20, 29, "some bold"]
+    Text[31, 33] chars:[31, 33, " 1"]
+  Heading[34, 62] textOpen:[34, 36, "##"] text:[37, 62, "Heading 1.1 _some italic_"]
+    Text[37, 49] chars:[37, 49, "Headi …  1.1 "]
+    Emphasis[49, 62] textOpen:[49, 50, "_"] text:[50, 61, "some italic"] textClose:[61, 62, "_"]
+      Text[50, 61] chars:[50, 61, "some  … talic"]
+````````````````````````````````
+
+
+case insensitive
+
+```````````````````````````````` example(Toc: 4) options(not-case-sensitive)
+[toc] 
+
+# Heading **some bold** 1
+## Heading 1.1 _some italic_
+
+.
+<ul>
+  <li><a href="#heading-11-some-italic">Heading 1.1 <em>some italic</em></a></li>
+</ul>
+<h1 id="heading-some-bold-1">Heading <strong>some bold</strong> 1</h1>
+<h2 id="heading-11-some-italic">Heading 1.1 <em>some italic</em></h2>
+.
+Document[0, 64]
+  TocBlock[0, 7] openingMarker:[0, 1] tocKeyword:[1, 4] closingMarker:[4, 5]
+  Heading[8, 33] textOpen:[8, 9, "#"] text:[10, 33, "Heading **some bold** 1"]
+    Text[10, 18] chars:[10, 18, "Heading "]
+    StrongEmphasis[18, 31] textOpen:[18, 20, "**"] text:[20, 29, "some bold"] textClose:[29, 31, "**"]
+      Text[20, 29] chars:[20, 29, "some bold"]
+    Text[31, 33] chars:[31, 33, " 1"]
+  Heading[34, 62] textOpen:[34, 36, "##"] text:[37, 62, "Heading 1.1 _some italic_"]
+    Text[37, 49] chars:[37, 49, "Headi …  1.1 "]
+    Emphasis[49, 62] textOpen:[49, 50, "_"] text:[50, 61, "some italic"] textClose:[61, 62, "_"]
+      Text[50, 61] chars:[50, 61, "some  … talic"]
+````````````````````````````````
+
+
+```````````````````````````````` example Toc: 5
 [TOC] 
 
 # Heading **some bold** 1
@@ -273,7 +329,7 @@ Document[0, 202]
 
 Default rendering with emphasis
 
-```````````````````````````````` example Toc: 4
+```````````````````````````````` example Toc: 6
 [TOC] 
 
 # Heading **some bold** 1
@@ -317,7 +373,7 @@ Document[0, 123]
 
 Set levels rendering
 
-```````````````````````````````` example Toc: 5
+```````````````````````````````` example Toc: 7
 [TOC levels=1] 
 
 ---
@@ -390,7 +446,7 @@ Document[0, 233]
 
 Invalid levels take default
 
-```````````````````````````````` example Toc: 6
+```````````````````````````````` example Toc: 8
 [TOC levels=0] 
 
 [TOC levels=7] 
@@ -515,7 +571,7 @@ Document[0, 261]
 
 Use title
 
-```````````````````````````````` example(Toc: 7) options(title)
+```````````````````````````````` example(Toc: 9) options(title)
 [TOC] 
 
 # Heading **some bold** 1
@@ -554,7 +610,7 @@ Document[0, 80]
 
 Use title, div class
 
-```````````````````````````````` example(Toc: 8) options(title, div-class)
+```````````````````````````````` example(Toc: 10) options(title, div-class)
 [TOC] 
 
 # Heading **some bold** 1
@@ -593,7 +649,7 @@ Document[0, 80]
 
 Use title, div class, list Class
 
-```````````````````````````````` example(Toc: 9) options(title, div-class, list-class)
+```````````````````````````````` example(Toc: 11) options(title, div-class, list-class)
 [TOC] 
 
 # Heading **some bold** 1
@@ -632,7 +688,7 @@ Document[0, 80]
 
 Use list Class
 
-```````````````````````````````` example(Toc: 10) options(list-class)
+```````````````````````````````` example(Toc: 12) options(list-class)
 [TOC] 
 
 # Heading **some bold** 1
@@ -668,7 +724,7 @@ Document[0, 80]
 
 Text only rendering
 
-```````````````````````````````` example(Toc: 11) options(text-only)
+```````````````````````````````` example(Toc: 13) options(text-only)
 [TOC] 
 
 # Heading **some bold** 1
@@ -713,7 +769,7 @@ Document[0, 124]
 
 Text only style
 
-```````````````````````````````` example Toc: 12
+```````````````````````````````` example Toc: 14
 [TOC text] 
 
 # Heading **some bold** 1
@@ -758,7 +814,7 @@ Document[0, 129]
 
 Text and inlines style
 
-```````````````````````````````` example(Toc: 13) options(text-only)
+```````````````````````````````` example(Toc: 15) options(text-only)
 [TOC format] 
 
 # Heading **some bold** 1
@@ -803,7 +859,7 @@ Document[0, 131]
 
 Text only, flat
 
-```````````````````````````````` example(Toc: 14) options(text-only, flat)
+```````````````````````````````` example(Toc: 16) options(text-only, flat)
 [TOC] 
 
 # Heading **some bold** 1
@@ -845,7 +901,7 @@ Document[0, 124]
 
 Text and inlines, flat
 
-```````````````````````````````` example(Toc: 15) options(flat)
+```````````````````````````````` example(Toc: 17) options(flat)
 [TOC] 
 
 # Heading **some bold** 1
@@ -887,7 +943,7 @@ Document[0, 124]
 
 Text only, flat reversed
 
-```````````````````````````````` example(Toc: 16) options(text-only, flat-reversed)
+```````````````````````````````` example(Toc: 18) options(text-only, flat-reversed)
 [TOC] 
 
 # Heading **some bold** 1
@@ -929,7 +985,7 @@ Document[0, 124]
 
 Text and inlines, flat
 
-```````````````````````````````` example(Toc: 17) options(flat-reversed)
+```````````````````````````````` example(Toc: 19) options(flat-reversed)
 [TOC] 
 
 # Heading **some bold** 1
@@ -971,7 +1027,7 @@ Document[0, 124]
 
 Text and inlines, hierarchy
 
-```````````````````````````````` example(Toc: 18) options(sorted)
+```````````````````````````````` example(Toc: 20) options(sorted)
 [TOC hierarchy] 
 
 # Heading **some bold** 1
@@ -1016,7 +1072,7 @@ Document[0, 134]
 
 Text only, sorted
 
-```````````````````````````````` example(Toc: 19) options(text-only, sorted)
+```````````````````````````````` example(Toc: 21) options(text-only, sorted)
 [TOC] 
 
 ## Heading 1.1 _some italic_
@@ -1058,7 +1114,7 @@ Document[0, 124]
 
 Text only, reverse sorted
 
-```````````````````````````````` example(Toc: 20) options(text-only, sorted-reversed)
+```````````````````````````````` example(Toc: 22) options(text-only, sorted-reversed)
 [TOC] 
 
 ## Heading 1.1 _some italic_
@@ -1100,7 +1156,7 @@ Document[0, 124]
 
 Text and inlines, sorted
 
-```````````````````````````````` example(Toc: 21) options(sorted)
+```````````````````````````````` example(Toc: 23) options(sorted)
 [TOC] 
 
 ### Heading 1.1.2  **_some bold italic_**
@@ -1142,7 +1198,7 @@ Document[0, 124]
 
 Text and inlines, unsorted
 
-```````````````````````````````` example(Toc: 22) options(sorted)
+```````````````````````````````` example(Toc: 24) options(sorted)
 [TOC flat] 
 
 ### Heading 1.1.2  **_some bold italic_**

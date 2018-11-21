@@ -60,6 +60,8 @@ public class HtmlParserOptions implements MutableDataSetter {
     public String thematicBreak;
     public String outputAttributesNamesRegex;
     public Pattern outputAttributesNamesRegexPattern;
+    public String outputIdAttributeRegex;
+    public Pattern outputIdAttributeRegexPattern;
     public Map<Object, CellAlignment> tableCellAlignmentMap;
     public TableFormatOptions tableOptions;
 
@@ -118,6 +120,8 @@ public class HtmlParserOptions implements MutableDataSetter {
         outputAttributesNamesRegexPattern = other.outputAttributesNamesRegexPattern;
         tableCellAlignmentMap = other.tableCellAlignmentMap;
         tableOptions = other.tableOptions;
+        outputIdAttributeRegex = other.outputIdAttributeRegex;
+        outputIdAttributeRegexPattern = other.outputIdAttributeRegexPattern;
     }
 
     HtmlParserOptions(DataHolder options) {
@@ -169,6 +173,8 @@ public class HtmlParserOptions implements MutableDataSetter {
         thematicBreak = FlexmarkHtmlParser.THEMATIC_BREAK.getFrom(options);
         outputAttributesNamesRegex = FlexmarkHtmlParser.OUTPUT_ATTRIBUTES_NAMES_REGEX.getFrom(options);
         outputAttributesNamesRegexPattern = Pattern.compile(outputAttributesNamesRegex);
+        outputIdAttributeRegex = FlexmarkHtmlParser.OUTPUT_ID_ATTRIBUTE_REGEX.getFrom(options);
+        outputIdAttributeRegexPattern = Pattern.compile(outputIdAttributeRegex);
         tableCellAlignmentMap = FlexmarkHtmlParser.TABLE_CELL_ALIGNMENT_MAP.getFrom(options);
         tableOptions =  new TableFormatOptions(options);
     }
@@ -223,6 +229,7 @@ public class HtmlParserOptions implements MutableDataSetter {
         dataHolder.set(FlexmarkHtmlParser.THEMATIC_BREAK, thematicBreak);
         dataHolder.set(FlexmarkHtmlParser.OUTPUT_ATTRIBUTES_NAMES_REGEX, outputAttributesNamesRegex);
         dataHolder.set(FlexmarkHtmlParser.TABLE_CELL_ALIGNMENT_MAP, tableCellAlignmentMap);
+        dataHolder.set(FlexmarkHtmlParser.OUTPUT_ID_ATTRIBUTE_REGEX, outputIdAttributeRegex);
         dataHolder.setFrom(tableOptions);
         return dataHolder;
     }

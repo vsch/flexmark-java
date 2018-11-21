@@ -58,6 +58,21 @@ public class ComboFlexmarkHtmlAttributesParserTest extends ComboSpecTestCase {
         optionsMap.put("skip-heading-5", new MutableDataSet().set(FlexmarkHtmlParser.SKIP_HEADING_5, true));
         optionsMap.put("skip-heading-6", new MutableDataSet().set(FlexmarkHtmlParser.SKIP_HEADING_6, true));
         optionsMap.put("skip-attributes", new MutableDataSet().set(FlexmarkHtmlParser.SKIP_ATTRIBUTES, true));
+        optionsMap.put("no-github-id", new MutableDataSet().set(FlexmarkHtmlParser.OUTPUT_ID_ATTRIBUTE_REGEX, ""));
+        optionsMap.put("text-ext-inline-strong", new MutableDataSet().set(FlexmarkHtmlParser.EXT_INLINE_STRONG, ExtensionConversion.TEXT));
+        optionsMap.put("text-ext-inline-emphasis", new MutableDataSet().set(FlexmarkHtmlParser.EXT_INLINE_EMPHASIS, ExtensionConversion.TEXT));
+        optionsMap.put("text-ext-inline-code", new MutableDataSet().set(FlexmarkHtmlParser.EXT_INLINE_CODE, ExtensionConversion.TEXT));
+        optionsMap.put("text-ext-inline-del", new MutableDataSet().set(FlexmarkHtmlParser.EXT_INLINE_DEL, ExtensionConversion.TEXT));
+        optionsMap.put("text-ext-inline-ins", new MutableDataSet().set(FlexmarkHtmlParser.EXT_INLINE_INS, ExtensionConversion.TEXT));
+        optionsMap.put("text-ext-inline-sub", new MutableDataSet().set(FlexmarkHtmlParser.EXT_INLINE_SUB, ExtensionConversion.TEXT));
+        optionsMap.put("text-ext-inline-sup", new MutableDataSet().set(FlexmarkHtmlParser.EXT_INLINE_SUP, ExtensionConversion.TEXT));
+        optionsMap.put("html-ext-inline-strong", new MutableDataSet().set(FlexmarkHtmlParser.EXT_INLINE_STRONG, ExtensionConversion.HTML));
+        optionsMap.put("html-ext-inline-emphasis", new MutableDataSet().set(FlexmarkHtmlParser.EXT_INLINE_EMPHASIS, ExtensionConversion.HTML));
+        optionsMap.put("html-ext-inline-code", new MutableDataSet().set(FlexmarkHtmlParser.EXT_INLINE_CODE, ExtensionConversion.HTML));
+        optionsMap.put("html-ext-inline-del", new MutableDataSet().set(FlexmarkHtmlParser.EXT_INLINE_DEL, ExtensionConversion.HTML));
+        optionsMap.put("html-ext-inline-ins", new MutableDataSet().set(FlexmarkHtmlParser.EXT_INLINE_INS, ExtensionConversion.HTML));
+        optionsMap.put("html-ext-inline-sub", new MutableDataSet().set(FlexmarkHtmlParser.EXT_INLINE_SUB, ExtensionConversion.HTML));
+        optionsMap.put("html-ext-inline-sup", new MutableDataSet().set(FlexmarkHtmlParser.EXT_INLINE_SUP, ExtensionConversion.HTML));
     }
 
     private static final IParse PARSER = new HtmlParser(OPTIONS);

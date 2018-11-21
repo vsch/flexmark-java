@@ -42,6 +42,7 @@ public class FormattingAppendableImpl implements FormattingAppendable {
     private int myLineCount;
     private int myModCountOfLastEOL;
     private int myLastEOLCount;
+    private int myLastEOLOffset;
 
     // indent level to use after the next \n and before text is appended
     private int myIndent;
@@ -49,6 +50,8 @@ public class FormattingAppendableImpl implements FormattingAppendable {
     private int myIndentOffset;
     private BasedSequence myPrefix;
     private BasedSequence myIndentPrefix;
+
+    private int mySpacesAfterEOL;
 
     // pre-formatted nesting level, while >0 all text is passed through as is and not monitored
     private int myPreFormattedNesting;
@@ -94,6 +97,8 @@ public class FormattingAppendableImpl implements FormattingAppendable {
         myIndentPrefix = BasedSequence.NULL;
         myPreFormattedNesting = 0;
         myEolOptions = myOptions;
+        mySpacesAfterEOL = 0;
+        updateLastEolOffset();
         setWhitespace();
     }
 
@@ -128,6 +133,10 @@ public class FormattingAppendableImpl implements FormattingAppendable {
 
     private boolean isSuppressingTrailingWhitespace() {
         return haveOptions(SUPPRESS_TRAILING_WHITESPACE);
+    }
+
+    private boolean isAllowLeadingWhitespace() {
+        return haveOptions(ALLOW_LEADING_WHITESPACE);
     }
 
     private boolean isCollapseWhitespace() {
@@ -166,12 +175,18 @@ public class FormattingAppendableImpl implements FormattingAppendable {
 
     private void appendSpaces() throws IOException {
         if (myPendingSpaces > 0) {
-            while (myPendingSpaces > 0) {
-                myAppendable.append(' ');
-                myPendingSpaces--;
-            }
+            int spaces = myPendingSpaces;
+            appendSpaces(spaces);
 
+            myPendingSpaces = 0;
             myModCount++;
+        }
+    }
+
+    private void appendSpaces(int spaces) throws IOException {
+        while (spaces > 0) {
+            myAppendable.append(' ');
+            spaces--;
         }
     }
 
@@ -185,6 +200,8 @@ public class FormattingAppendableImpl implements FormattingAppendable {
                 myEolOptions = myOptions;
             }
         }
+
+        mySpacesAfterEOL = 0;
     }
 
     private void resetPendingEOL() {
@@ -224,6 +241,7 @@ public class FormattingAppendableImpl implements FormattingAppendable {
 
             while (myPendingEOL > 0) {
                 myAppendable.append(myEOL);
+                updateLastEolOffset();
                 myLineCount++;
                 runAllAfterEol();
                 myPendingEOL--;
@@ -235,6 +253,10 @@ public class FormattingAppendableImpl implements FormattingAppendable {
 
             resetPendingEOL();
             runAllAfterEol();
+
+            // now output any leading spaces accumulated
+            appendSpaces(mySpacesAfterEOL);
+            mySpacesAfterEOL = 0;
 
             if (withIndent) appendIndent();
         } else {
@@ -248,6 +270,10 @@ public class FormattingAppendableImpl implements FormattingAppendable {
             }
         }
         myLastEOLCount = myLineCount - lineCount;
+    }
+
+    private void updateLastEolOffset() {
+        myLastEOLOffset = myAppendable.getLength();
     }
 
     @SuppressWarnings("SameParameterValue")
@@ -307,6 +333,7 @@ public class FormattingAppendableImpl implements FormattingAppendable {
     private void beforePre() throws IOException {
         while (myPendingEOL > 0) {
             myAppendable.append('\n');
+            updateLastEolOffset();
             myLineCount++;
             if (myPendingPreFormattedPrefix && !myPrefix.isEmpty()) {
                 myAppendable.append(myPrefix);
@@ -322,6 +349,10 @@ public class FormattingAppendableImpl implements FormattingAppendable {
                 myLineCount++;
                 myAppendable.append('\n');
             }
+            updateLastEolOffset();
+            appendSpaces(mySpacesAfterEOL);
+            mySpacesAfterEOL = 0;
+
             myModCountOfLastEOL = myModCount++;
             myPendingEOL = 0;
             myAppendable.append(c);
@@ -341,6 +372,7 @@ public class FormattingAppendableImpl implements FormattingAppendable {
             if (c == myEOL) {
                 myPendingEOL = 1;
                 myPendingPreFormattedPrefix = true;
+                mySpacesAfterEOL = 0;
             } else {
                 myAppendable.append(c);
                 myModCount++;
@@ -367,6 +399,7 @@ public class FormattingAppendableImpl implements FormattingAppendable {
             while (myPendingEOL-- > 0) {
                 myLineCount++;
                 myAppendable.append('\n');
+                updateLastEolOffset();
             }
             myModCountOfLastEOL = myModCount++;
             myPendingEOL = 0;
@@ -401,6 +434,7 @@ public class FormattingAppendableImpl implements FormattingAppendable {
 
                 if (pos == -1) break;
 
+                updateLastEolOffset();
                 myLineCount++;
                 myPendingPreFormattedPrefix = true;
                 lastPos = endPos;
@@ -411,6 +445,7 @@ public class FormattingAppendableImpl implements FormattingAppendable {
             if (lastPos == endNoEOL && endNoEOL != end) {
                 myPendingEOL = 1;
                 myPendingPreFormattedPrefix = true;
+                mySpacesAfterEOL = 0;
             }
         } else {
             // have to handle \n, white spaces, etc
@@ -446,13 +481,172 @@ public class FormattingAppendableImpl implements FormattingAppendable {
                         addPendingSpaces(span);
                     }
                 } else {
-                    // we are coming after an EOL, all whitespaces are ignored
+                    // we are coming after an EOL, all whitespaces are ignored if suppressed
+                    if (isAllowLeadingWhitespace()) mySpacesAfterEOL += span;
                 }
 
                 pos += span;
                 lastPos = pos;
             }
         }
+    }
+
+    // kludge: to try and estimate column position after char sequence is output without touching already fragile code
+    private int appendPretendColumn(final CharSequence csq, final int start, final int end) {
+        int column = column();
+        boolean myPendingPreFormattedPrefix = this.myPendingPreFormattedPrefix;
+        int myPendingSpaces = this.myPendingSpaces;
+        int mySpacesAfterEOL = this.mySpacesAfterEOL;
+
+        int prefixLength = myPrefix.length();
+        if (haveOptions(PASS_THROUGH)) {
+            if (myPendingEOL > 0) {
+                column = 0;
+                if (myPendingPreFormattedPrefix && !myPrefix.isEmpty()) {
+                    column = prefixLength;
+                }
+                myPendingPreFormattedPrefix = false;
+            }
+            return column;
+        }
+
+        int lastPos = start;
+        BasedSequence seq = BasedSequenceImpl.of(csq);
+
+        if (myPreFormattedNesting > 0) {
+            int endNoEOL = start + seq.subSequence(start, end).removeSuffix("\n").length();
+
+            if (lastPos < end) {
+                if (myPendingPreFormattedPrefix) {
+                    column += prefixLength;
+                }
+                myPendingPreFormattedPrefix = false;
+            }
+
+            while (lastPos < endNoEOL) {
+                int pos = seq.indexOf(myEOL, lastPos, endNoEOL);
+                int endPos = pos == -1 ? endNoEOL : pos + 1;
+
+                if (lastPos < endPos) {
+                    if (myPendingPreFormattedPrefix) {
+                        column += prefixLength;
+                    }
+                    myPendingPreFormattedPrefix = false;
+
+                    column += endPos - lastPos;
+                    lastPos = endPos;
+                }
+
+                if (pos == -1) break;
+
+                myPendingPreFormattedPrefix = true;
+                lastPos = endPos;
+            }
+
+            // if EOL is last then we reset pending and eol mod count
+            if (lastPos == endNoEOL && endNoEOL != end) {
+                myPendingPreFormattedPrefix = true;
+            }
+        } else {
+            // have to handle \n, white spaces, etc
+            boolean firstAppend = true;
+            while (lastPos < end) {
+                int pos = seq.indexOfAny(myWhitespaceEOL, lastPos, end);
+
+                // output what has accumulated before
+                int spanEnd = pos == -1 ? end : pos;
+
+                if (lastPos < spanEnd) {
+                    //beforeAppendText(true, true, true);
+
+                    int myIndentSize = myIndentPrefix.length() * (myIndent + myIndentOffset);
+                    boolean haveIndent = myIndent + myIndentOffset > 0 && !myIndentPrefix.isEmpty();
+                    if (myPendingEOL > 0) {
+                        //appendIndent();
+                        column = 0;
+                        if (!myPrefix.isEmpty()) {
+                            column += prefixLength;
+                        }
+
+                        if (haveIndent) {
+                            column += myIndentSize;
+                        }
+                    } else {
+                        if (myModCountOfLastEOL == myModCount) {
+                            if (!myPrefix.isEmpty()) {
+                                column += prefixLength;
+                            }
+
+                            if (haveIndent) {
+                                column += myIndentSize;
+                            }
+                        } else {
+                            //appendSpaces();
+                            if (myPendingSpaces > 0) column += myPendingSpaces;
+                        }
+                    }
+
+                    if (firstAppend) {
+                        firstAppend = false;
+                    }
+                    column += spanEnd - lastPos;
+                }
+
+                if (pos == -1) break;
+
+                // spaces and tabs are only output if we don't have a pending EOL and they don't come before an EOL
+                int span = seq.countChars(myWhitespaceEOL, pos, end);
+                if (myPendingEOL == 0) {
+                    int eolPos = seq.indexOf(myEOL, pos, pos + span);
+                    boolean handleSpaces = myPreFormattedNesting == 0 && (myPendingEOL == 0 && myModCountOfLastEOL != myModCount);
+
+                    if (eolPos != -1) {
+                        // we don't output the spaces after the EOL but make EOL pending
+                        if (eolPos > pos && !haveOptions(SUPPRESS_TRAILING_WHITESPACE)) {
+                            //addPendingSpaces(eolPos - pos);
+                            int count = eolPos - pos;
+                            if (count > 0) {
+                                if (handleSpaces) {
+                                    if (isCollapseWhitespace()) {
+                                        if (myPendingSpaces == 0) {
+                                            myPendingSpaces = 1;
+                                        }
+                                    } else {
+                                        myPendingSpaces += count;
+                                    }
+                                }
+                            }
+                        }
+                    } else {
+                        // no eol, make spaces pending
+                        //addPendingSpaces(span);
+                        int count = span;
+                        if (count > 0) {
+                            if (handleSpaces) {
+                                if (isCollapseWhitespace()) {
+                                    if (myPendingSpaces == 0) {
+                                        myPendingSpaces = 1;
+                                    }
+                                } else {
+                                    myPendingSpaces += count;
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    // we are coming after an EOL, all whitespaces are ignored
+                    if (isAllowLeadingWhitespace()) {
+                        // output spaces
+                        column += mySpacesAfterEOL;
+                        mySpacesAfterEOL = 0;
+                    }
+                }
+
+                pos += span;
+                lastPos = pos;
+            }
+        }
+        return column;
     }
 
     @Override
@@ -762,6 +956,16 @@ public class FormattingAppendableImpl implements FormattingAppendable {
     @Override
     public int offset() {
         return myAppendable.getLength();
+    }
+
+    @Override
+    public int column() {
+        return myAppendable.getLength() - myLastEOLOffset;
+    }
+
+    @Override
+    public int columnWith(final CharSequence csq, final int start, final int end) {
+        return appendPretendColumn(csq, start, end);
     }
 
     @Override
