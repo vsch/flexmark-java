@@ -5,6 +5,7 @@
       <sourceFolder url="file://$MODULE_DIR$/gen" isTestSource="false" generated="true" />
       <sourceFolder url="file://$MODULE_DIR$/flexmark-java.wiki" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/assets/images" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/.github/ISSUE_TEMPLATE" type="java-test-resource" />
       <excludeFolder url="file://$MODULE_DIR$/FlexmarkJavaAssets/EmojiReference" />
       <excludeFolder url="file://$MODULE_DIR$/javadoc" />
       <excludeFolder url="file://$MODULE_DIR$/target" />

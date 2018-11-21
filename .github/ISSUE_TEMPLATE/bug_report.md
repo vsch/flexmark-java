@@ -4,7 +4,8 @@ about: Create a detailed report to help improve flexmark-java
 
 ---
 
-**Describe the bug** A clear and concise description of what the bug is. 
+**Describe the bug** 
+A clear and concise description of what the bug is. 
 
 Feel free to remove any sections that do not apply or add your own to clarify your issue. 
 
@@ -49,12 +50,10 @@ Or a link to a sample code file.
    when you can.
 
 **Expected behavior**
-
 A clear and concise description of what you expected to happen with sample output that would be
 desired, where it makes sense.
 
 **Resulting Output**
-
 It is best to provide in decreasing order of value:
 
 1. text results,
@@ -62,5 +61,4 @@ It is best to provide in decreasing order of value:
 3. screenshots are least useful but better than nothing.
 
 **Additional context**
-
 Add any other context about the problem here.
