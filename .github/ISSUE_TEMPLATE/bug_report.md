@@ -1,6 +1,6 @@
 ---
 name: Bug report
-about: Create a report to help improve flexmark-java
+about: Create a detailed report to help improve flexmark-java
 
 ---
 
