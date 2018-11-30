@@ -4,6 +4,7 @@ import com.vladsch.flexmark.ast.*;
 import com.vladsch.flexmark.ast.util.ReferenceRepository;
 import com.vladsch.flexmark.ast.util.TextCollectingVisitor;
 import com.vladsch.flexmark.html.CustomNodeRenderer;
+import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.*;
 import com.vladsch.flexmark.parser.ListOptions;
@@ -18,14 +19,15 @@ import java.util.Set;
 
 import static com.vladsch.flexmark.util.sequence.BasedSequence.NULL;
 
-public class JiraConverterNodeRenderer implements NodeRenderer
-{
+public class JiraConverterNodeRenderer implements NodeRenderer {
     private final ReferenceRepository referenceRepository;
     private final ListOptions listOptions;
     private int inBlockQuote = 0;
+    private final boolean recheckUndefinedReferences;
 
     public JiraConverterNodeRenderer(DataHolder options) {
         this.referenceRepository = options.get(Parser.REFERENCES);
+        recheckUndefinedReferences = HtmlRenderer.RECHECK_UNDEFINED_REFERENCES.getFrom(options);
         this.listOptions = ListOptions.getFrom(options);
     }
 
@@ -427,6 +429,12 @@ public class JiraConverterNodeRenderer implements NodeRenderer
     }
 
     private void render(ImageRef node, NodeRendererContext context, HtmlWriter html) {
+        if (!node.isDefined() && recheckUndefinedReferences) {
+            if (node.getReferenceNode(referenceRepository) != null) {
+                node.setDefined(true);
+            }
+        }
+
         if (!node.isDefined()) {
             // empty ref, we treat it as text
             assert !node.isDefined();
@@ -444,6 +452,12 @@ public class JiraConverterNodeRenderer implements NodeRenderer
     }
 
     private void render(LinkRef node, NodeRendererContext context, HtmlWriter html) {
+        if (!node.isDefined() && recheckUndefinedReferences) {
+            if (node.getReferenceNode(referenceRepository) != null) {
+                node.setDefined(true);
+            }
+        }
+
         if (!node.isDefined()) {
             // empty ref, we treat it as text
             assert !node.isDefined();

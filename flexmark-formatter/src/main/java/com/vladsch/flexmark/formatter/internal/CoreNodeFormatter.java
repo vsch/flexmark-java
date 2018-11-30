@@ -111,7 +111,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
         super.renderDocument(context, markdown, document, phase);
 
         if (phase == DOCUMENT_BOTTOM) {
-            if (APPEND_TRANSFERRED_REFERENCES.getFrom(document)) {
+            if (context.getFormatterOptions().appendTransferredReferences) {
                 // we will transfer all references which were not part of our document
                 ArrayList<DataKey<?>> keys = new ArrayList<>();
                 
@@ -127,17 +127,23 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
                         return o1.getName().compareTo(o2.getName());
                     }
                 });
+                
+                boolean firstAppend = true;
                         
                 for (DataKey<?> key : keys) {
                     if (document.get(key) instanceof NodeRepository) {
                         NodeRepository repository = (NodeRepository) key.getFrom(document);
-                        List nodes = repository.getReferencedElements(document);
+                        Set nodes = repository.getReferencedElements(document);
 
                         for (Object value : nodes) {
                             if (value instanceof Node) {
                                 Node node = (Node) value;
                                 if (node.getDocument() != document) {
                                     // need to add this one
+                                    if (firstAppend) {
+                                        firstAppend = false;
+                                        markdown.blankLine();
+                                    } 
                                     context.render(node);
                                 }
                             }

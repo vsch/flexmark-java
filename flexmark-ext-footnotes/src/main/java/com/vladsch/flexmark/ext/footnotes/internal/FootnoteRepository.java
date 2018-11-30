@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.ext.footnotes.internal;
 
-import com.vladsch.flexmark.ast.*;
-import com.vladsch.flexmark.ast.util.ReferenceRepository;
+import com.vladsch.flexmark.ast.Node;
+import com.vladsch.flexmark.ast.NodeRepository;
 import com.vladsch.flexmark.ext.footnotes.Footnote;
 import com.vladsch.flexmark.ext.footnotes.FootnoteBlock;
 import com.vladsch.flexmark.ext.footnotes.FootnoteExtension;
@@ -10,10 +10,7 @@ import com.vladsch.flexmark.util.ValueRunnable;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.DataKey;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 @SuppressWarnings("WeakerAccess")
 public class FootnoteRepository extends NodeRepository<FootnoteBlock> {
@@ -65,8 +62,8 @@ public class FootnoteRepository extends NodeRepository<FootnoteBlock> {
     }
 
     @Override
-    public List<FootnoteBlock> getReferencedElements(final Node parent) {
-        final ArrayList<FootnoteBlock> references = new ArrayList<>();
+    public Set<FootnoteBlock> getReferencedElements(final Node parent) {
+        final HashSet<FootnoteBlock> references = new HashSet<>();
         visitNodes(parent, new ValueRunnable<Node>() {
             @Override
             public void run(final Node value) {

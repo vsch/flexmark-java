@@ -276,6 +276,7 @@ flexmark-java
 * Add: `Formatter.APPEND_TRANSFERRED_REFERENCES`, default false. Setting to `true` will append
   all transferred references to the bottom of the formatted document. 
 * Add: `NodeRepository` API to return referenced references from a given node.
+* Fix: Jira and YouTrack converters ignored `HtmlRenderer.RECHECK_UNDEFINED_REFERENCES`
 
 0.34.58
 -------

@@ -1,19 +1,15 @@
 package com.vladsch.flexmark.ext.zzzzzz.internal;
 
-import com.vladsch.flexmark.ast.*;
-import com.vladsch.flexmark.ast.util.ReferenceRepository;
+import com.vladsch.flexmark.ast.Node;
+import com.vladsch.flexmark.ast.NodeRepository;
 import com.vladsch.flexmark.ext.zzzzzz.Zzzzzz;
 import com.vladsch.flexmark.ext.zzzzzz.ZzzzzzBlock;
 import com.vladsch.flexmark.ext.zzzzzz.ZzzzzzExtension;
 import com.vladsch.flexmark.util.KeepType;
-import com.vladsch.flexmark.util.ValueRunnable;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.DataKey;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 @SuppressWarnings("WeakerAccess")
 public class ZzzzzzRepository extends NodeRepository<ZzzzzzBlock> {
@@ -60,8 +56,8 @@ public class ZzzzzzRepository extends NodeRepository<ZzzzzzBlock> {
     }
 
     @Override
-    public List<ZzzzzzBlock> getReferencedElements(final Node parent) {
-        final ArrayList<ZzzzzzBlock> references = new ArrayList<ZzzzzzBlock>();
+    public Set<ZzzzzzBlock> getReferencedElements(final Node parent) {
+        final HashSet<ZzzzzzBlock> references = new HashSet<ZzzzzzBlock>();
         //visitNodes(parent, new ValueRunnable<Node>() {
         //    @Override
         //    public void run(final Node value) {
@@ -75,5 +71,4 @@ public class ZzzzzzRepository extends NodeRepository<ZzzzzzBlock> {
         //}, Zzzzzz.class);
         return references;
     }
-
 }

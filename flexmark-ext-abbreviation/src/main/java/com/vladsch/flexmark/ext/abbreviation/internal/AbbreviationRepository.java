@@ -10,8 +10,8 @@ import com.vladsch.flexmark.util.ValueRunnable;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.DataKey;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @SuppressWarnings("WeakerAccess")
 public class AbbreviationRepository extends NodeRepository<AbbreviationBlock> {
@@ -31,8 +31,8 @@ public class AbbreviationRepository extends NodeRepository<AbbreviationBlock> {
     }
 
     @Override
-    public List<AbbreviationBlock> getReferencedElements(final Node parent) {
-        final ArrayList<AbbreviationBlock> references = new ArrayList<>();
+    public Set<AbbreviationBlock> getReferencedElements(final Node parent) {
+        final HashSet<AbbreviationBlock> references = new HashSet<>();
         visitNodes(parent, new ValueRunnable<Node>() {
             @Override
             public void run(final Node value) {

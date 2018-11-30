@@ -15,7 +15,7 @@ public abstract class NodeRepository<T> implements Map<String, T> {
     public abstract DataKey<KeepType> getKeepDataKey();
     
     // function implementing extraction of referenced elements by given node or its children
-    public abstract List<T> getReferencedElements(Node parent);
+    public abstract Set<T> getReferencedElements(Node parent);
     
     protected void visitNodes(Node parent, final ValueRunnable<Node> runnable, Class<? extends Node>... classes) {
         ArrayList<VisitHandler<?>> handlers = new ArrayList<>();

@@ -10,10 +10,7 @@ import com.vladsch.flexmark.util.ValueRunnable;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.DataKey;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 @SuppressWarnings("WeakerAccess")
 public class MacroDefinitionRepository extends NodeRepository<MacroDefinitionBlock> {
@@ -62,8 +59,8 @@ public class MacroDefinitionRepository extends NodeRepository<MacroDefinitionBlo
     }
 
     @Override
-    public List<MacroDefinitionBlock> getReferencedElements(final Node parent) {
-        final ArrayList<MacroDefinitionBlock> references = new ArrayList<>();
+    public Set<MacroDefinitionBlock> getReferencedElements(final Node parent) {
+        final HashSet<MacroDefinitionBlock> references = new HashSet<>();
         visitNodes(parent, new ValueRunnable<Node>() {
             @Override
             public void run(final Node value) {

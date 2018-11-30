@@ -8,8 +8,8 @@ import com.vladsch.flexmark.util.html.Escaping;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.DataKey;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class ReferenceRepository extends NodeRepository<Reference> {
     public ReferenceRepository(DataHolder options) {
@@ -32,8 +32,8 @@ public class ReferenceRepository extends NodeRepository<Reference> {
     }
 
     @Override
-    public List<Reference> getReferencedElements(final Node parent) {
-        final ArrayList<Reference> references = new ArrayList<>();
+    public Set<Reference> getReferencedElements(final Node parent) {
+        final HashSet<Reference> references = new HashSet<>();
         visitNodes(parent, new ValueRunnable<Node>() {
             @Override
             public void run(final Node value) {
