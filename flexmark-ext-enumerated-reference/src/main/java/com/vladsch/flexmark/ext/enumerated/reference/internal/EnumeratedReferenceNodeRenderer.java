@@ -71,7 +71,7 @@ public class EnumeratedReferenceNodeRenderer implements PhasedNodeRenderer
                 html.tag("/a");
             } else {
                 // no format, just output type space ordinal
-                final String defaultText = String.format("%s %d", EnumeratedReferences.getType(text), ordinal);
+                final String defaultText = String.format("%s %d", EnumeratedReferenceRepository.getType(text), ordinal);
                 html.withAttr().attr("href", "#" + text).attr("title", defaultText).tag("a");
                 html.text(defaultText);
                 html.tag("/a");
@@ -91,7 +91,7 @@ public class EnumeratedReferenceNodeRenderer implements PhasedNodeRenderer
             int wasOrdinal = ordinal;
             ordinal = enumeratedOrdinals.getOrdinal(text);
 
-            final String defaultText = String.format("%s %d", EnumeratedReferences.getType(text), ordinal);
+            final String defaultText = String.format("%s %d", EnumeratedReferenceRepository.getType(text), ordinal);
 
             if (referenceFormat != null) {
                 context.renderChildren(referenceFormat);

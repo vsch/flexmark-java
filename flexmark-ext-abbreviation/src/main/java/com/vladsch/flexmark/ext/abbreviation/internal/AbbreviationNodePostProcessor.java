@@ -17,6 +17,8 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static com.vladsch.flexmark.ext.abbreviation.AbbreviationExtension.RECOMPUTE_ABBREVIATIONS_MAP;
+
 public class AbbreviationNodePostProcessor extends NodePostProcessor {
     //public static final String SINGLE_QUOTES = "'’‘";
     //public static final String DOUBLE_QUOTES = "\"“”";
@@ -26,6 +28,10 @@ public class AbbreviationNodePostProcessor extends NodePostProcessor {
     private HashMap<String, BasedSequence> abbreviationMap = null;
 
     private AbbreviationNodePostProcessor(Document document) {
+        computeAbbreviations(document);
+    }
+
+    private void computeAbbreviations(final Document document) {
         AbbreviationRepository abbrRepository = document.get(AbbreviationExtension.ABBREVIATIONS);
 
         if (!abbrRepository.isEmpty()) {

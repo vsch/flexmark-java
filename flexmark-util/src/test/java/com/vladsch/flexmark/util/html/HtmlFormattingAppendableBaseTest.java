@@ -12,7 +12,7 @@ public class HtmlFormattingAppendableBaseTest {
     @Test
     public void test_basic() throws Exception {
         StringBuilder sb = new StringBuilder();
-        final HtmlFormattingAppendableBase fa = new HtmlFormattingAppendableBase(sb, 2, true);
+        final HtmlFormattingAppendableBase fa = new HtmlFormattingAppendableBase(sb, 2, FormattingAppendable.FORMAT_ALL);
 
         fa.tagIndent("ul", new Runnable() {
             @Override
@@ -30,7 +30,7 @@ public class HtmlFormattingAppendableBaseTest {
         assertEquals("<ul>\n  <li>item1</li>\n</ul>\n", sb.toString());
 
         sb = new StringBuilder();
-        final HtmlFormattingAppendableBase fa1 = new HtmlFormattingAppendableBase(sb, 2, true);
+        final HtmlFormattingAppendableBase fa1 = new HtmlFormattingAppendableBase(sb, 2, FormattingAppendable.FORMAT_ALL);
 
         fa1.tagIndent("ul", new Runnable() {
             @Override
@@ -59,7 +59,7 @@ public class HtmlFormattingAppendableBaseTest {
         assertEquals("<ul>\n  <li>item1\n    <ul>\n      <li>item1</li>\n    </ul>\n  </li>\n</ul>\n", sb.toString());
 
         sb = new StringBuilder();
-        final HtmlFormattingAppendableBase fa2 = new HtmlFormattingAppendableBase(sb, 2, true);
+        final HtmlFormattingAppendableBase fa2 = new HtmlFormattingAppendableBase(sb, 2, FormattingAppendable.FORMAT_ALL);
 
         fa2.withCondLine().tagIndent("tbody", new Runnable() {
             @Override
@@ -77,7 +77,7 @@ public class HtmlFormattingAppendableBaseTest {
     @Test
     public void test_tagList() throws Exception {
         final StringBuilder sb = new StringBuilder();
-        final HtmlFormattingAppendableBase fa = new HtmlFormattingAppendableBase(sb, 2, true);
+        final HtmlFormattingAppendableBase fa = new HtmlFormattingAppendableBase(sb, 2, FormattingAppendable.FORMAT_ALL);
 
         fa.tag("span", false);
         fa.tagIndent("ul", new Runnable() {
@@ -100,7 +100,7 @@ public class HtmlFormattingAppendableBaseTest {
         assertEquals("<span>\n<ul>\n  <li>item1</li>\n</ul>\n</span>", sb.toString());
 
         final StringBuilder sb1 = new StringBuilder();
-        final HtmlFormattingAppendableBase fa1 = new HtmlFormattingAppendableBase(sb1, 2, true);
+        final HtmlFormattingAppendableBase fa1 = new HtmlFormattingAppendableBase(sb1, 2, FormattingAppendable.FORMAT_ALL);
 
         fa1.tagIndent("ul", new Runnable() {
             @Override

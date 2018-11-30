@@ -20,6 +20,7 @@ import com.vladsch.flexmark.ext.enumerated.reference.EnumeratedReferenceExtensio
 import com.vladsch.flexmark.ext.enumerated.reference.EnumeratedReferenceLink;
 import com.vladsch.flexmark.ext.enumerated.reference.EnumeratedReferenceText;
 import com.vladsch.flexmark.ext.enumerated.reference.internal.EnumRefTextCollectingVisitor;
+import com.vladsch.flexmark.ext.enumerated.reference.internal.EnumeratedReferenceRepository;
 import com.vladsch.flexmark.ext.enumerated.reference.internal.EnumeratedReferences;
 import com.vladsch.flexmark.ext.footnotes.Footnote;
 import com.vladsch.flexmark.ext.footnotes.FootnoteBlock;
@@ -1729,7 +1730,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
             int wasOrdinal = ordinal;
             ordinal = enumeratedOrdinals.getOrdinal(text);
 
-            final String defaultText = String.format("%s %d", EnumeratedReferences.getType(text), ordinal);
+            final String defaultText = String.format("%s %d", EnumeratedReferenceRepository.getType(text), ordinal);
             String title = referenceFormat != null ? new EnumRefTextCollectingVisitor(ordinal).collectAndGetText(referenceFormat) : defaultText;
             Attributes attributes = new Attributes();
 

@@ -2230,6 +2230,160 @@ Document[0, 53]
 ````````````````````````````````
 
 
+## Keep Breaks
+
+```````````````````````````````` example(Keep Breaks: 1) options(no-hard-breaks)
+Paragraph with hard break   
+and more text.
+
+Paragraph with soft break
+and more text.
+
+Paragraph with hard break   
+and more text.
+
+.
+Paragraph with hard break and more text.
+
+Paragraph with soft break
+and more text.
+
+Paragraph with hard break and more text.
+
+.
+Document[0, 132]
+  Paragraph[0, 44] isTrailingBlankLine
+    Text[0, 25] chars:[0, 25, "Parag … break"]
+    HardLineBreak[25, 29]
+    Text[29, 43] chars:[29, 43, "and m … text."]
+  BlankLine[44, 45]
+  Paragraph[45, 86] isTrailingBlankLine
+    Text[45, 70] chars:[45, 70, "Parag … break"]
+    SoftLineBreak[70, 71]
+    Text[71, 85] chars:[71, 85, "and m … text."]
+  BlankLine[86, 87]
+  Paragraph[87, 131] isTrailingBlankLine
+    Text[87, 112] chars:[87, 112, "Parag … break"]
+    HardLineBreak[112, 116]
+    Text[116, 130] chars:[116, 130, "and m … text."]
+  BlankLine[131, 132]
+````````````````````````````````
+
+
+```````````````````````````````` example(Keep Breaks: 2) options(no-hard-breaks)
+Paragraph with hard break   
+and more text.
+
+Paragraph with soft break
+and more text.
+
+Paragraph with hard break   
+and more text.
+
+.
+Paragraph with hard break and more text.
+
+Paragraph with soft break
+and more text.
+
+Paragraph with hard break and more text.
+
+.
+Document[0, 132]
+  Paragraph[0, 44] isTrailingBlankLine
+    Text[0, 25] chars:[0, 25, "Parag … break"]
+    HardLineBreak[25, 29]
+    Text[29, 43] chars:[29, 43, "and m … text."]
+  BlankLine[44, 45]
+  Paragraph[45, 86] isTrailingBlankLine
+    Text[45, 70] chars:[45, 70, "Parag … break"]
+    SoftLineBreak[70, 71]
+    Text[71, 85] chars:[71, 85, "and m … text."]
+  BlankLine[86, 87]
+  Paragraph[87, 131] isTrailingBlankLine
+    Text[87, 112] chars:[87, 112, "Parag … break"]
+    HardLineBreak[112, 116]
+    Text[116, 130] chars:[116, 130, "and m … text."]
+  BlankLine[131, 132]
+````````````````````````````````
+
+
+```````````````````````````````` example(Keep Breaks: 3) options(no-soft-breaks)
+Paragraph with hard break   
+and more text.
+
+Paragraph with soft break
+and more text.
+
+Paragraph with hard break   
+and more text.
+
+.
+Paragraph with hard break   
+and more text.
+
+Paragraph with soft break and more text.
+
+Paragraph with hard break   
+and more text.
+
+.
+Document[0, 132]
+  Paragraph[0, 44] isTrailingBlankLine
+    Text[0, 25] chars:[0, 25, "Parag … break"]
+    HardLineBreak[25, 29]
+    Text[29, 43] chars:[29, 43, "and m … text."]
+  BlankLine[44, 45]
+  Paragraph[45, 86] isTrailingBlankLine
+    Text[45, 70] chars:[45, 70, "Parag … break"]
+    SoftLineBreak[70, 71]
+    Text[71, 85] chars:[71, 85, "and m … text."]
+  BlankLine[86, 87]
+  Paragraph[87, 131] isTrailingBlankLine
+    Text[87, 112] chars:[87, 112, "Parag … break"]
+    HardLineBreak[112, 116]
+    Text[116, 130] chars:[116, 130, "and m … text."]
+  BlankLine[131, 132]
+````````````````````````````````
+
+
+```````````````````````````````` example(Keep Breaks: 4) options(no-hard-breaks, no-soft-breaks)
+Paragraph with hard break   
+and more text.
+
+Paragraph with soft break
+and more text.
+
+Paragraph with hard break   
+and more text.
+
+.
+Paragraph with hard break and more text.
+
+Paragraph with soft break and more text.
+
+Paragraph with hard break and more text.
+
+.
+Document[0, 132]
+  Paragraph[0, 44] isTrailingBlankLine
+    Text[0, 25] chars:[0, 25, "Parag … break"]
+    HardLineBreak[25, 29]
+    Text[29, 43] chars:[29, 43, "and m … text."]
+  BlankLine[44, 45]
+  Paragraph[45, 86] isTrailingBlankLine
+    Text[45, 70] chars:[45, 70, "Parag … break"]
+    SoftLineBreak[70, 71]
+    Text[71, 85] chars:[71, 85, "and m … text."]
+  BlankLine[86, 87]
+  Paragraph[87, 131] isTrailingBlankLine
+    Text[87, 112] chars:[87, 112, "Parag … break"]
+    HardLineBreak[112, 116]
+    Text[116, 130] chars:[116, 130, "and m … text."]
+  BlankLine[131, 132]
+````````````````````````````````
+
+
 ## Issue 243
 
 Issue #243

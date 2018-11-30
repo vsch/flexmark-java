@@ -1,6 +1,7 @@
 package com.vladsch.flexmark.ast;
 
 import com.vladsch.flexmark.util.KeepType;
+import com.vladsch.flexmark.util.ValueRunnable;
 import com.vladsch.flexmark.util.options.DataKey;
 
 import java.util.*;
@@ -12,6 +13,25 @@ public abstract class NodeRepository<T> implements Map<String, T> {
 
     public abstract DataKey<? extends NodeRepository<T>> getDataKey();
     public abstract DataKey<KeepType> getKeepDataKey();
+    
+    // function implementing extraction of referenced elements by given node or its children
+    public abstract List<T> getReferencedElements(Node parent);
+    
+    protected void visitNodes(Node parent, final ValueRunnable<Node> runnable, Class<? extends Node>... classes) {
+        ArrayList<VisitHandler<?>> handlers = new ArrayList<>();
+        for (Class<? extends Node> clazz : classes) {
+            handlers.add(
+                    new VisitHandler<Node>(clazz, new Visitor<Node>() {
+                        @Override
+                        public void visit(Node node) {
+                            runnable.run(node);
+                        }
+                    })
+            );
+        }
+        final NodeVisitor visitor = new NodeVisitor(handlers);
+        visitor.visit(parent);
+    }
 
     public NodeRepository(KeepType keepType) {
         this.keepType = keepType == null ? KeepType.LOCKED : keepType;

@@ -1,10 +1,12 @@
 package com.vladsch.flexmark.ext.footnotes.internal;
 
-import com.vladsch.flexmark.ast.NodeRepository;
+import com.vladsch.flexmark.ast.*;
+import com.vladsch.flexmark.ast.util.ReferenceRepository;
 import com.vladsch.flexmark.ext.footnotes.Footnote;
 import com.vladsch.flexmark.ext.footnotes.FootnoteBlock;
 import com.vladsch.flexmark.ext.footnotes.FootnoteExtension;
 import com.vladsch.flexmark.util.KeepType;
+import com.vladsch.flexmark.util.ValueRunnable;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.DataKey;
 
@@ -60,5 +62,22 @@ public class FootnoteRepository extends NodeRepository<FootnoteBlock> {
     @Override
     public DataKey<KeepType> getKeepDataKey() {
         return FootnoteExtension.FOOTNOTES_KEEP;
+    }
+
+    @Override
+    public List<FootnoteBlock> getReferencedElements(final Node parent) {
+        final ArrayList<FootnoteBlock> references = new ArrayList<>();
+        visitNodes(parent, new ValueRunnable<Node>() {
+            @Override
+            public void run(final Node value) {
+                if (value instanceof Footnote) {
+                    FootnoteBlock reference = ((Footnote) value).getReferenceNode(FootnoteRepository.this);
+                    if (reference != null) {
+                        references.add(reference);
+                    }
+                }
+            }
+        }, Footnote.class);
+        return references;
     }
 }

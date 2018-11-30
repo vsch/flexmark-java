@@ -1,9 +1,10 @@
 package com.vladsch.flexmark.ext.enumerated.reference.internal;
 
+import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.ast.NodeRepository;
-import com.vladsch.flexmark.ext.enumerated.reference.EnumeratedReferenceBlock;
-import com.vladsch.flexmark.ext.enumerated.reference.EnumeratedReferenceExtension;
+import com.vladsch.flexmark.ext.enumerated.reference.*;
 import com.vladsch.flexmark.util.KeepType;
+import com.vladsch.flexmark.util.ValueRunnable;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.DataKey;
 
@@ -13,6 +14,16 @@ import java.util.List;
 @SuppressWarnings("WeakerAccess")
 public class EnumeratedReferenceRepository extends NodeRepository<EnumeratedReferenceBlock> {
     private ArrayList<EnumeratedReferenceBlock> referencedEnumeratedReferenceBlocks = new ArrayList<EnumeratedReferenceBlock>();
+
+    public static String getType(final String text) {
+        int pos = text.indexOf(':');
+        if (pos > 0) {
+            return text.subSequence(0, pos).toString();
+        } else {
+            // use empty type
+            return EnumeratedReferences.EMPTY_TYPE;
+        }
+    }
 
     public List<EnumeratedReferenceBlock> getReferencedEnumeratedReferenceBlocks() {
         return referencedEnumeratedReferenceBlocks;
@@ -31,5 +42,22 @@ public class EnumeratedReferenceRepository extends NodeRepository<EnumeratedRefe
     @Override
     public DataKey<KeepType> getKeepDataKey() {
         return EnumeratedReferenceExtension.ENUMERATED_REFERENCES_KEEP;
+    }
+
+    @Override
+    public List<EnumeratedReferenceBlock> getReferencedElements(final Node parent) {
+        final ArrayList<EnumeratedReferenceBlock> references = new ArrayList<>();
+        visitNodes(parent, new ValueRunnable<Node>() {
+            @Override
+            public void run(final Node value) {
+                if (value instanceof EnumeratedReferenceBase) {
+                    EnumeratedReferenceBlock reference = ((EnumeratedReferenceBase) value).getReferenceNode(EnumeratedReferenceRepository.this);
+                    if (reference != null) {
+                        references.add(reference);
+                    }
+                }
+            }
+        }, EnumeratedReferenceText.class, EnumeratedReferenceLink.class);
+        return references;
     }
 }

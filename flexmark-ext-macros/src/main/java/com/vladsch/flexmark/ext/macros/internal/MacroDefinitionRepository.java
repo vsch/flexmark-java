@@ -1,10 +1,12 @@
 package com.vladsch.flexmark.ext.macros.internal;
 
+import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.ast.NodeRepository;
 import com.vladsch.flexmark.ext.macros.MacroDefinitionBlock;
 import com.vladsch.flexmark.ext.macros.MacroReference;
 import com.vladsch.flexmark.ext.macros.MacrosExtension;
 import com.vladsch.flexmark.util.KeepType;
+import com.vladsch.flexmark.util.ValueRunnable;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.DataKey;
 
@@ -57,5 +59,22 @@ public class MacroDefinitionRepository extends NodeRepository<MacroDefinitionBlo
         public int compare(MacroDefinitionBlock f1, MacroDefinitionBlock f2) {
             return Integer.compare(f1.getFirstReferenceOffset(), f2.getFirstReferenceOffset());
         }
+    }
+
+    @Override
+    public List<MacroDefinitionBlock> getReferencedElements(final Node parent) {
+        final ArrayList<MacroDefinitionBlock> references = new ArrayList<>();
+        visitNodes(parent, new ValueRunnable<Node>() {
+            @Override
+            public void run(final Node value) {
+                if (value instanceof MacroReference) {
+                    MacroDefinitionBlock reference = ((MacroReference) value).getReferenceNode(MacroDefinitionRepository.this);
+                    if (reference != null) {
+                        references.add(reference);
+                    }
+                }
+            }
+        }, MacroReference.class);
+        return references;
     }
 }

@@ -18,4 +18,10 @@ public interface IRender {
     String render(Node node);
 
     IRender withOptions(DataHolder options);
+
+    /**
+     * Get Options for parsing
+     * @return DataHolder for options
+     */
+    DataHolder getOptions();
 }

@@ -20,6 +20,8 @@ import com.vladsch.flexmark.util.options.MutableDataHolder;
  * The parsed macros text is turned into {@link Macro} nodes.
  * </p>
  */
+
+// TODO: Rename this class to XWikiMacroExtension
 public class MacroExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension {
     public static final DataKey<Boolean> ENABLE_INLINE_MACROS = new DataKey<Boolean>("ENABLE_INLINE_MACROS", true);
     public static final DataKey<Boolean> ENABLE_BLOCK_MACROS = new DataKey<Boolean>("ENABLE_BLOCK_MACROS", true);

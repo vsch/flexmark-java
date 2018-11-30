@@ -35,7 +35,7 @@ public class EnumeratedReferenceBase extends CustomNode  implements DelimitedNod
     }
 
     public EnumeratedReferenceBlock getEnumeratedReferenceBlock(EnumeratedReferenceRepository enumeratedReferenceRepository) {
-        return text.isEmpty() ? null : enumeratedReferenceRepository.get(text.toString());
+        return text.isEmpty() ? null : enumeratedReferenceRepository.get(EnumeratedReferenceRepository.getType(text.toString()));
     }
 
     public EnumeratedReferenceBlock getEnumeratedReferenceBlock() {

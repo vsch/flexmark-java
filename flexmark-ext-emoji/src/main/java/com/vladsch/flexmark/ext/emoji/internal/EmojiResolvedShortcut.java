@@ -48,7 +48,7 @@ public class EmojiResolvedShortcut {
                 imageText = useShortcutType.getPreferred(cheatSheetFile, gitHubFile);
             }
 
-            if (imageText != null) {
+            if (imageText != null || unicodeText != null) {
                 if (unicodeText != null) {
                     emojiText = unicodeText;
                     isUnicode = true;

@@ -9,6 +9,7 @@ import com.vladsch.flexmark.test.ComboSpecTestCase;
 import com.vladsch.flexmark.util.KeepType;
 import com.vladsch.flexmark.util.format.options.*;
 import com.vladsch.flexmark.util.options.DataHolder;
+import com.vladsch.flexmark.util.options.DataKey;
 import com.vladsch.flexmark.util.options.MutableDataSet;
 import org.junit.runners.Parameterized;
 
@@ -88,6 +89,8 @@ public class ComboCoreFormatterSpecTest extends ComboSpecTestCase {
         optionsMap.put("image-links-at-start", new MutableDataSet().set(Formatter.KEEP_IMAGE_LINKS_AT_START, true));
         optionsMap.put("explicit-links-at-start", new MutableDataSet().set(Formatter.KEEP_EXPLICIT_LINKS_AT_START, true));
         optionsMap.put("remove-empty-items", new MutableDataSet().set(Formatter.LIST_REMOVE_EMPTY_ITEMS, true));
+        optionsMap.put("no-hard-breaks", new MutableDataSet().set(Formatter.KEEP_HARD_LINE_BREAKS, false));
+        optionsMap.put("no-soft-breaks", new MutableDataSet().set(Formatter.KEEP_SOFT_LINE_BREAKS, false));
         //optionsMap.put("trailing-spaces-keep-all", new MutableDataSet().set(Formatter.KEEP_TRAILING_SPACES, TrailingSpaces.KEEP_ALL));
         //optionsMap.put("trailing-spaces-keep-line-break", new MutableDataSet().set(Formatter.KEEP_TRAILING_SPACES, TrailingSpaces.KEEP_LINE_BREAK));
         //optionsMap.put("trailing-spaces-keep-none", new MutableDataSet().set(Formatter.KEEP_TRAILING_SPACES, TrailingSpaces.KEEP_NONE));

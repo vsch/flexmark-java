@@ -267,11 +267,11 @@ public class ComboDocxConverterIssuesSpecTest extends ComboSpecTestCase {
     private String myVisibleLineBreak;
 
     @Override
-    public void fullTestSpecStarting() {
-        if (!DUMP_ALL_TESTS_FILES) return;
+    public boolean fullTestSpecStarting() {
+        if (!DUMP_ALL_TESTS_FILES) return true;
 
         myPackage = DocxRenderer.getDefaultTemplate();
-        if (myPackage == null) return;
+        if (myPackage == null) return true;
 
         myDocxContext = new DocxContextImpl<Node>(myPackage, null) {
             @Override
@@ -300,6 +300,7 @@ public class ComboDocxConverterIssuesSpecTest extends ComboSpecTestCase {
             }
         };
         myVisibleLineBreak = "¶";
+        return true;
     }
 
     @Override

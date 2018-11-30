@@ -1,5 +1,6 @@
 package com.vladsch.flexmark;
 
+import com.vladsch.flexmark.ast.Document;
 import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
@@ -48,4 +49,11 @@ public interface IParse {
      * @return a new instance of IParse implementation with the given options applied
      */
     IParse withOptions(DataHolder options);
+
+    /**
+     * Get Options for parsing
+     * @return DataHolder for options
+     */
+    DataHolder getOptions();
+    boolean transferReferences(Document document, Document included);
 }

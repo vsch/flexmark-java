@@ -275,7 +275,7 @@ should fail
 :couplekiss:
 .
 <h1>some leading text</h1>
-<p>:couplekiss:</p>
+<p>💏</p>
 .
 Document[0, 33]
   Heading[0, 19] textOpen:[0, 1, "#"] text:[2, 19, "some leading text"]
@@ -747,6 +747,20 @@ Document[0, 85]
     Emphasis[60, 73] textOpen:[60, 61, "*"] text:[61, 72, "\"3:50 ночи\""] textClose:[72, 73, "*"]
       Text[61, 72] chars:[61, 72, "\"3:50 … ночи\""]
     Text[73, 84] chars:[73, 84, ", даж …  если"]
+````````````````````````````````
+
+
+## Issue, Unicode missing
+
+```````````````````````````````` example(Issue, Unicode missing: 1) options(unicode-only)
+:ant:
+.
+<p>🐜</p>
+.
+Document[0, 5]
+  Paragraph[0, 5]
+    Emoji[0, 5] textOpen:[0, 1, ":"] text:[1, 4, "ant"] textClose:[4, 5, ":"]
+      Text[1, 4] chars:[1, 4, "ant"]
 ````````````````````````````````
 
 

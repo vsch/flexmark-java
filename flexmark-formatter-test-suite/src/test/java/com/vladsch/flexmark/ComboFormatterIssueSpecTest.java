@@ -1,14 +1,30 @@
 package com.vladsch.flexmark;
 
+import com.vladsch.flexmark.ast.Document;
+import com.vladsch.flexmark.ext.abbreviation.AbbreviationExtension;
+import com.vladsch.flexmark.ext.abbreviation.internal.AbbreviationRepository;
+import com.vladsch.flexmark.ext.anchorlink.AnchorLinkExtension;
+import com.vladsch.flexmark.ext.aside.AsideExtension;
+import com.vladsch.flexmark.ext.attributes.AttributesExtension;
+import com.vladsch.flexmark.ext.autolink.AutolinkExtension;
 import com.vladsch.flexmark.ext.definition.DefinitionExtension;
 import com.vladsch.flexmark.ext.emoji.EmojiExtension;
+import com.vladsch.flexmark.ext.enumerated.reference.EnumeratedReferenceExtension;
+import com.vladsch.flexmark.ext.escaped.character.EscapedCharacterExtension;
 import com.vladsch.flexmark.ext.footnotes.FootnoteExtension;
 import com.vladsch.flexmark.ext.gfm.strikethrough.StrikethroughSubscriptExtension;
+import com.vladsch.flexmark.ext.gfm.tasklist.TaskListExtension;
 import com.vladsch.flexmark.ext.ins.InsExtension;
+import com.vladsch.flexmark.ext.jekyll.front.matter.JekyllFrontMatterExtension;
+import com.vladsch.flexmark.ext.jekyll.tag.JekyllTagExtension;
+import com.vladsch.flexmark.ext.macros.MacrosExtension;
+import com.vladsch.flexmark.ext.spec.example.SpecExampleExtension;
 import com.vladsch.flexmark.ext.tables.TablesExtension;
 import com.vladsch.flexmark.ext.toc.SimTocExtension;
 import com.vladsch.flexmark.ext.toc.TocExtension;
+import com.vladsch.flexmark.ext.typographic.TypographicExtension;
 import com.vladsch.flexmark.ext.wikilink.WikiLinkExtension;
+import com.vladsch.flexmark.ext.yaml.front.matter.YamlFrontMatterExtension;
 import com.vladsch.flexmark.formatter.internal.Formatter;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.ParserEmulationProfile;
@@ -27,16 +43,30 @@ public class ComboFormatterIssueSpecTest extends ComboSpecTestCase {
     private static final DataHolder OPTIONS = ParserEmulationProfile.FIXED_INDENT.getProfileOptions()
             .set(Parser.BLANK_LINES_IN_AST, true)
             .set(Parser.EXTENSIONS, Arrays.asList(
+                    AbbreviationExtension.create(),
+                    AnchorLinkExtension.create(),
+                    AsideExtension.create(),
+                    AttributesExtension.create(),
+                    AutolinkExtension.create(),
                     DefinitionExtension.create(),
                     EmojiExtension.create(),
+                    EnumeratedReferenceExtension.create(),
+                    EscapedCharacterExtension.create(),
                     FootnoteExtension.create(),
-                    StrikethroughSubscriptExtension.create(),
                     InsExtension.create(),
+                    JekyllFrontMatterExtension.create(),
+                    JekyllTagExtension.create(),
+                    MacrosExtension.create(),
+                    SimTocExtension.create(),
+                    SpecExampleExtension.create(),
+                    StrikethroughSubscriptExtension.create(),
                     SuperscriptExtension.create(),
                     TablesExtension.create(),
+                    TaskListExtension.create(),
                     TocExtension.create(),
-                    SimTocExtension.create(),
-                    WikiLinkExtension.create()
+                    TypographicExtension.create(),
+                    WikiLinkExtension.create(),
+                    YamlFrontMatterExtension.create()
             ));
 
     private static final Map<String, DataHolder> optionsMap = new HashMap<String, DataHolder>();
@@ -45,6 +75,48 @@ public class ComboFormatterIssueSpecTest extends ComboSpecTestCase {
         //optionsMap.put("option1", new MutableDataSet().set(RendererExtension.FORMATTER_OPTION1, true));
         optionsMap.put("item-indent-1", new MutableDataSet().set(Parser.LISTS_ITEM_INDENT, 1));
         optionsMap.put("item-indent-2", new MutableDataSet().set(Parser.LISTS_ITEM_INDENT, 2));
+
+        optionsMap.put("no-append-references", new MutableDataSet().set(Formatter.APPEND_TRANSFERRED_REFERENCES, false)
+                .set(INCLUDED_DOCUMENT, "" +
+                        "[^footnote]: Included footnote\n" +
+                        "    with some extras\n" +
+                        "\n" +
+                        "*[abbr]: Abbreviation\n" +
+                        "\n" +
+                        "[ref]: ./link.md\n" +
+                        "[image]: ./included.png\n" +
+                        "\n" +
+                        "[@enum]: Enumerated Reference [#]\n" +
+                        "\n" +
+                        ">>>macro1\n" +
+                        "macro text\n" +
+                        "<<<\n" +
+                        "\n" +
+                        "")
+        );
+
+        optionsMap.put("append-references", new MutableDataSet().set(Formatter.APPEND_TRANSFERRED_REFERENCES, true)
+                .set(INCLUDED_DOCUMENT, "" +
+                        "[^footnote]: Included footnote\n" +
+                        "    with some extras\n" +
+                        "\n" +
+                        "*[abbr]: Abbreviation\n" +
+                        "\n" +
+                        "[ref]: ./link.md\n" +
+                        "[image]: ./included.png\n" +
+                        "\n" +
+                        "[@enum]: Enumerated Reference [#]\n" +
+                        "\n" +
+                        ">>>macro1\n" +
+                        "macro text\n" +
+                        "<<<\n" +
+                        "\n" +
+                        "")
+        );
+    }
+    @Override
+    protected boolean fullTestSpecStarting() {
+        return false; // cannot do full with included docs
     }
 
     private static final Parser PARSER = Parser.builder(OPTIONS).build();
@@ -58,6 +130,16 @@ public class ComboFormatterIssueSpecTest extends ComboSpecTestCase {
 
     public ComboFormatterIssueSpecTest(SpecExample example) {
         super(example);
+    }
+
+    @Override
+    protected IParse adjustParserForInclusion(final IParse parserWithOptions, final Document includedDocument) {
+        AbbreviationRepository abbreviationRepository = includedDocument.get(AbbreviationExtension.ABBREVIATIONS);
+        if (!abbreviationRepository.isEmpty()) {
+            // need to transfer it to parser
+            return parserWithOptions.withOptions(new MutableDataSet().set(AbbreviationExtension.ABBREVIATIONS, abbreviationRepository));
+        }
+        return parserWithOptions;
     }
 
     @Parameterized.Parameters(name = "{0}")

@@ -96,9 +96,18 @@ public class HtmlRenderer implements IRender {
     public static final DataKey<Integer> FORMAT_FLAGS = new DataKey<Integer>("FORMAT_FLAGS", 0);
     public static final DataKey<Integer> MAX_TRAILING_BLANK_LINES = new DataKey<Integer>("MAX_TRAILING_BLANK_LINES", 1);
 
+    // convenience pass through
+    public static final int CONVERT_TABS = FormattingAppendable.CONVERT_TABS;
+    public static final int COLLAPSE_WHITESPACE = FormattingAppendable.COLLAPSE_WHITESPACE;
+    public static final int SUPPRESS_TRAILING_WHITESPACE = FormattingAppendable.SUPPRESS_TRAILING_WHITESPACE;
+    public static final int PREFIX_AFTER_PENDING_EOL = FormattingAppendable.PREFIX_AFTER_PENDING_EOL;
+    public static final int PASS_THROUGH = FormattingAppendable.PASS_THROUGH;
+    public static final int ALLOW_LEADING_WHITESPACE = FormattingAppendable.ALLOW_LEADING_WHITESPACE;
+    public static final int FORMAT_ALL = FormattingAppendable.FORMAT_ALL;
+
     /**
      * Stores pairs of equivalent renderer types to allow extensions to resolve types not known to them
-     *
+     * <p>
      * Pair contains: rendererType, equivalentType
      */
     public static final DataKey<List<Pair<String, String>>> RENDERER_TYPE_EQUIVALENCE = new DataKey<List<Pair<String, String>>>("RENDERER_TYPE_EQUIVALENCE", Collections.<Pair<String, String>>emptyList());
@@ -109,6 +118,7 @@ public class HtmlRenderer implements IRender {
     public static final int FORMAT_SUPPRESS_TRAILING_WHITESPACE = FormattingAppendable.SUPPRESS_TRAILING_WHITESPACE;
     public static final int FORMAT_ALL_OPTIONS = FormattingAppendable.FORMAT_ALL;
 
+    // now not final only to allow disposal of resources
     private final List<AttributeProviderFactory> attributeProviderFactories;
     private final List<DelegatingNodeRendererFactoryWrapper> nodeRendererFactories;
     private final List<LinkResolverFactory> linkResolverFactories;
@@ -164,6 +174,11 @@ public class HtmlRenderer implements IRender {
         return new Builder(options);
     }
 
+    @Override
+    public DataHolder getOptions() {
+        return new DataSet(builder);
+    }
+
     /**
      * Render a node to the appendable
      *
@@ -174,6 +189,7 @@ public class HtmlRenderer implements IRender {
         MainNodeRenderer renderer = new MainNodeRenderer(options, new HtmlWriter(output, htmlOptions.indentSize, htmlOptions.formatFlags, !htmlOptions.htmlBlockOpenTagEol, !htmlOptions.htmlBlockCloseTagEol), node.getDocument());
         renderer.render(node);
         renderer.flush(htmlOptions.maxTrailingBlankLines);
+        renderer.dispose();
     }
 
     /**
@@ -186,6 +202,7 @@ public class HtmlRenderer implements IRender {
         MainNodeRenderer renderer = new MainNodeRenderer(options, new HtmlWriter(output, htmlOptions.indentSize, htmlOptions.formatFlags, !htmlOptions.htmlBlockOpenTagEol, !htmlOptions.htmlBlockCloseTagEol), node.getDocument());
         renderer.render(node);
         renderer.flush(maxTrailingBlankLines);
+        renderer.dispose();
     }
 
     /**
@@ -537,18 +554,41 @@ public class HtmlRenderer implements IRender {
         }
     }
 
-    private class MainNodeRenderer extends NodeRendererSubContext implements NodeRendererContext {
-        private final Document document;
-        private final Map<Class<?>, NodeRenderingHandlerWrapper> renderers;
-
-        private final List<PhasedNodeRenderer> phasedRenderers;
-        private final LinkResolver[] myLinkResolvers;
-        private final Set<RenderingPhase> renderingPhases;
-        private final DataHolder options;
+    private class MainNodeRenderer extends NodeRendererSubContext implements NodeRendererContext, Disposable {
+        private Document document;
+        private Map<Class<?>, NodeRenderingHandlerWrapper> renderers;
+        private List<PhasedNodeRenderer> phasedRenderers;
+        private LinkResolver[] myLinkResolvers;
+        private Set<RenderingPhase> renderingPhases;
+        private DataHolder options;
         private RenderingPhase phase;
-        private final HtmlIdGenerator htmlIdGenerator;
-        private final HashMap<LinkType, HashMap<String, ResolvedLink>> resolvedLinkMap = new HashMap<LinkType, HashMap<String, ResolvedLink>>();
-        private final AttributeProvider[] attributeProviders;
+        private HtmlIdGenerator htmlIdGenerator;
+        private HashMap<LinkType, HashMap<String, ResolvedLink>> resolvedLinkMap = new HashMap<LinkType, HashMap<String, ResolvedLink>>();
+        private AttributeProvider[] attributeProviders;
+
+        @Override
+        public void dispose() {
+            document = null;
+            renderers = null;
+            phasedRenderers = null;
+
+            for (LinkResolver linkResolver : myLinkResolvers) {
+                if (linkResolver instanceof Disposable) ((Disposable) linkResolver).dispose();
+            }
+            myLinkResolvers = null;
+
+            renderingPhases = null;
+            options = null;
+
+            if (htmlIdGenerator instanceof Disposable) ((Disposable) htmlIdGenerator).dispose();
+            htmlIdGenerator = null;
+            resolvedLinkMap = null;
+
+            for (AttributeProvider attributeProvider : attributeProviders) {
+                if (attributeProvider instanceof Disposable) ((Disposable) attributeProvider).dispose();
+            }
+            attributeProviders = null;
+        }
 
         MainNodeRenderer(DataHolder options, HtmlWriter htmlWriter, Document document) {
             super(htmlWriter);

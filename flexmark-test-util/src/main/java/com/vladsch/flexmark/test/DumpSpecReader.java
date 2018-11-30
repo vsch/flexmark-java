@@ -1,5 +1,7 @@
 package com.vladsch.flexmark.test;
 
+import com.vladsch.flexmark.IParse;
+import com.vladsch.flexmark.IRender;
 import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.spec.SpecReader;
@@ -25,7 +27,7 @@ public class DumpSpecReader extends SpecReader {
     }
 
     @Override
-    protected void addSpecLine(String line) {
+    public void addSpecLine(String line) {
         sb.append(line).append("\n");
     }
 
@@ -49,14 +51,32 @@ public class DumpSpecReader extends SpecReader {
             parseSource = trimTrailingEOL(parseSource);
         }
 
-        Node node = testCase.parser().withOptions(options).parse(parseSource);
-        final String actualHTML = testCase.renderer().withOptions(options).render(node);
+        IParse parserWithOptions = testCase.parser().withOptions(options);
+        IRender rendererWithOptions = testCase.renderer().withOptions(options);
+
+        long start = System.nanoTime();
+        Node node = parserWithOptions.parse(parseSource);
+        long parse = System.nanoTime();
+        String actualHTML = rendererWithOptions.render(node);
+        long render = System.nanoTime();
+
+        boolean timed = RenderingTestCase.TIMED.getFrom(node.getDocument());
+        boolean embedTimed = RenderingTestCase.EMBED_TIMED.getFrom(node.getDocument());
+
+        if (timed || embedTimed) {
+            System.out.println(String.format(RenderingTestCase.TIMED_FORMAT_STRING, (parse - start)/1000000.0, (render - parse)/1000000.0, (render - start)/1000000.0));
+        }
+
         final String actualAST = testCase.ast(node);
         String html = !ignoredCase && testCase.useActualHtml() ? actualHTML : example.getHtml();
         String ast = example.getAst() == null ? null : (!ignoredCase ? actualAST : example.getAst());
 
         // allow other formats to accumulate
         testCase.addSpecExample(example, node, options, ignoredCase, actualHTML, actualAST);
+
+        if (embedTimed) {
+            sb.append(String.format(RenderingTestCase.TIMED_FORMAT_STRING, (parse - start)/1000000.0, (render - parse)/1000000.0, (render - start)/1000000.0));
+        }
 
         // include source so that diff can be used to update spec
         addSpecExample(sb, example.getSource(), html, ast, example.getOptionsSet(), testCase.includeExampleCoords(), example.getSection(), example.getExampleNumber());

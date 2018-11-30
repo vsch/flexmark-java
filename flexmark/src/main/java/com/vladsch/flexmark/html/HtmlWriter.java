@@ -16,25 +16,26 @@ public class HtmlWriter extends HtmlFormattingAppendableBase<HtmlWriter> {
     private NodeRendererContext context;
     private AttributablePart useAttributes;
 
-    public HtmlWriter(Appendable out) {
-        super(out);
+    //public HtmlWriter(Appendable out) {
+    //    super(out, 0, 0);
+    //}
+    //
+    //public HtmlWriter(Appendable out, int indentSize) {
+    //    super(out, indentSize, 0);
+    //}
+
+    //public HtmlWriter(Appendable out, int indentSize, boolean allFormatOptions) {
+    //    super(out, indentSize, 0);
+    //}
+    //
+
+    public HtmlWriter(Appendable out, int indentSize, int formatOptions) {
+        super(out, indentSize, formatOptions);
     }
 
     public HtmlWriter(HtmlWriter other, Appendable out, boolean inheritIndent) {
         super(other, out, inheritIndent);
         context = other.context;
-    }
-
-    public HtmlWriter(Appendable out, int indentSize) {
-        super(out, indentSize, false);
-    }
-
-    public HtmlWriter(Appendable out, int indentSize, boolean allFormatOptions) {
-        super(out, indentSize, allFormatOptions);
-    }
-
-    public HtmlWriter(Appendable out, int indentSize, int formatOptions) {
-        super(out, indentSize, formatOptions);
     }
 
     public HtmlWriter(Appendable out, int indentSize, int formatOptions, boolean suppressOpenTagLine, boolean suppressCloseTagLine) {

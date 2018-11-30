@@ -1,6 +1,7 @@
 package com.vladsch.flexmark.spec;
 
 import com.vladsch.flexmark.IParse;
+import com.vladsch.flexmark.ast.Document;
 import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.MutableDataSet;
@@ -27,6 +28,11 @@ public abstract class IParseBase implements IParse {
         return parse(CharSubSequence.of(input));
     }
 
+    @Override
+    public boolean transferReferences(final Document document, final Document included) {
+        return false;
+    }
+    
     @Override
     public Node parseReader(Reader input) throws IOException {
         BufferedReader bufferedReader;

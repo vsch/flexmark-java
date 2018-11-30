@@ -15,6 +15,7 @@ import com.vladsch.flexmark.util.KeepType;
 import com.vladsch.flexmark.util.format.options.*;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.DataKey;
+import com.vladsch.flexmark.util.options.DataSet;
 import com.vladsch.flexmark.util.options.MutableDataSet;
 import org.junit.runners.Parameterized;
 
@@ -97,6 +98,11 @@ public class ComboTableTranslationFormatterSpecTest extends ComboSpecTestCase {
 
         public TranslationFormatter(final Formatter formatter) {
             myFormatter = formatter;
+        }
+
+        @Override
+        public DataHolder getOptions() {
+            return myFormatter.getOptions();
         }
 
         @Override

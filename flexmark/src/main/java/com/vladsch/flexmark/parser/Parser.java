@@ -394,6 +394,12 @@ public class Parser implements IParse {
         return options == null ? this : (options.contains(EXTENSIONS) ? new Parser(new Builder(options)) : new Parser(new Builder(builder, options)));
     }
 
+    @Override
+    public DataHolder getOptions() {
+        return new DataSet(builder);
+    }
+
+    @Override
     public boolean transferReferences(Document document, Document included) {
         // transfer references from included to document
         boolean transferred = false;
@@ -429,7 +435,7 @@ public class Parser implements IParse {
                 transferred = true;
             }
         }
-        return true;
+        return transferred;
     }
 
     /**

@@ -18,18 +18,8 @@ public class EnumeratedReferences {
         enumeratedReferenceOrdinals = new HashMap<>();
     }
 
-    public static String getType(final String text) {
-        int pos = text.indexOf(':');
-        if (pos > 0) {
-            return text.subSequence(0, pos).toString();
-        } else {
-            // use empty type
-            return EMPTY_TYPE;
-        }
-    }
-
     public void add(final String text) {
-        String type = getType(text);
+        String type = EnumeratedReferenceRepository.getType(text);
         int ordinal;
         if (!enumerationCounters.containsKey(type)) {
             enumerationCounters.put(type, 2);
@@ -55,7 +45,7 @@ public class EnumeratedReferences {
      * @return enumerated reference block or null if not defined
      */
     public Node getFormatNode(final String text) {
-        String type = getType(text);
+        String type = EnumeratedReferenceRepository.getType(text);
         return referenceRepository.get(type);
     }
 }

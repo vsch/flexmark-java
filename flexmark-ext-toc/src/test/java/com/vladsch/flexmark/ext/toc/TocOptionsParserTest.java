@@ -14,6 +14,7 @@ import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.spec.SpecReader;
 import com.vladsch.flexmark.test.ComboSpecTestCase;
 import com.vladsch.flexmark.util.Pair;
+import com.vladsch.flexmark.util.html.FormattingAppendable;
 import com.vladsch.flexmark.util.options.*;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import org.junit.runners.Parameterized;
@@ -229,7 +230,7 @@ public class TocOptionsParserTest extends ComboSpecTestCase {
         public void render(Node node, Appendable output) {
             assert node instanceof ParserNode;
             TocOptions tocOptions = getOptions().get(TOC_OPTIONS);
-            final HtmlWriter html = new HtmlWriter(output, 2);
+            final HtmlWriter html = new HtmlWriter(output, 2, 0);
             RenderingVisitor visitor = new RenderingVisitor(html, tocOptions);
             visitor.render(node);
             html.flush();

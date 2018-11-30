@@ -22,6 +22,17 @@ public abstract class ComboSpecTestCase extends FullSpecTestCase {
 
     protected final SpecExample example;
 
+    //@Rule
+    //public Timeout timeout = new Timeout(5, TimeUnit.SECONDS);
+    //
+    //@Rule
+    //public Stopwatch stopwatch = new Stopwatch() {
+    //    @Override
+    //    protected void finished(long nanos, Description description) {
+    //        System.err.println(description.getDisplayName() + " took " + (nanos / 1000000) + " ms");
+    //    }
+    //};
+
     /**
      * @return return resource name for the spec to use for the examples of the test
      */
@@ -97,8 +108,11 @@ public abstract class ComboSpecTestCase extends FullSpecTestCase {
         }
     }
 
-    protected void fullTestSpecStarting() {
-
+    /**
+     * @return   false to not do full spec
+     */
+    protected boolean fullTestSpecStarting() {
+      return true;
     }
 
     protected void fullTestSpecComplete() {
@@ -109,7 +123,7 @@ public abstract class ComboSpecTestCase extends FullSpecTestCase {
     public void testFullSpec() throws Exception {
         if (!example.isFullSpecExample()) return;
 
-        fullTestSpecStarting();
+        if (fullTestSpecStarting()) {
 
         String specResourcePath = getSpecResourceName();
         String fullSpec = SpecReader.readSpec(specResourcePath);
@@ -122,5 +136,6 @@ public abstract class ComboSpecTestCase extends FullSpecTestCase {
 
         fullTestSpecComplete();
         assertEquals(fullSpec, actual);
+        }
     }
 }

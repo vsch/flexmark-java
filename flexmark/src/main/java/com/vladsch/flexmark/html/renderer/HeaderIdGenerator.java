@@ -4,17 +4,23 @@ import com.vladsch.flexmark.ast.AnchorRefTarget;
 import com.vladsch.flexmark.ast.Document;
 import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.ast.util.AnchorRefTargetBlockVisitor;
+import com.vladsch.flexmark.html.Disposable;
 import com.vladsch.flexmark.html.HtmlRenderer;
 
 import java.util.HashMap;
 
-public class HeaderIdGenerator implements HtmlIdGenerator {
+public class HeaderIdGenerator implements HtmlIdGenerator, Disposable {
     HashMap<String, Integer> headerBaseIds = new HashMap<String, Integer>();
     boolean resolveDupes;
     String toDashChars;
     String nonDashChars;
     boolean noDupedDashes;
     boolean nonAsciiToLowercase;
+
+    @Override
+    public void dispose() {
+        headerBaseIds = null;
+    }
 
     @Override
     public void generateIds(Document document) {
@@ -78,11 +84,11 @@ public class HeaderIdGenerator implements HtmlIdGenerator {
     }
 
     /**
-     * @deprecated  use {@link #generateId(CharSequence, String, String, boolean, boolean)}
      * @param headerText
      * @param toDashChars
      * @param noDupedDashes
      * @return header id
+     * @deprecated use {@link #generateId(CharSequence, String, String, boolean, boolean)}
      */
     @Deprecated
     public static String generateId(CharSequence headerText, String toDashChars, boolean noDupedDashes) {

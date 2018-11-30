@@ -3,9 +3,9 @@ package com.vladsch.flexmark.formatter.internal;
 import com.vladsch.flexmark.ast.*;
 import com.vladsch.flexmark.ast.util.ReferenceRepository;
 import com.vladsch.flexmark.formatter.CustomNodeFormatter;
-import com.vladsch.flexmark.formatter.RenderPurpose;
 import com.vladsch.flexmark.formatter.TranslatingSpanRender;
 import com.vladsch.flexmark.formatter.TranslationPlaceholderGenerator;
+import com.vladsch.flexmark.html.renderer.RenderingPhase;
 import com.vladsch.flexmark.parser.ListOptions;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.ParserEmulationProfile;
@@ -25,6 +25,8 @@ import com.vladsch.flexmark.util.sequence.RepeatedCharSequence;
 import java.util.*;
 
 import static com.vladsch.flexmark.formatter.RenderPurpose.FORMAT;
+import static com.vladsch.flexmark.formatter.internal.Formatter.APPEND_TRANSFERRED_REFERENCES;
+import static com.vladsch.flexmark.formatter.internal.FormattingPhase.DOCUMENT_BOTTOM;
 import static com.vladsch.flexmark.util.format.options.DiscretionaryText.ADD;
 import static com.vladsch.flexmark.util.format.options.DiscretionaryText.AS_IS;
 import static com.vladsch.flexmark.util.sequence.BasedSequence.NULL;
@@ -101,6 +103,48 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
             markdown.append(node.getUrlClosingMarker()).line();
         } else {
             markdown.append(node.getChars()).line();
+        }
+    }
+
+    @Override
+    public void renderDocument(final NodeFormatterContext context, final MarkdownWriter markdown, final Document document, final FormattingPhase phase) {
+        super.renderDocument(context, markdown, document, phase);
+
+        if (phase == DOCUMENT_BOTTOM) {
+            if (APPEND_TRANSFERRED_REFERENCES.getFrom(document)) {
+                // we will transfer all references which were not part of our document
+                ArrayList<DataKey<?>> keys = new ArrayList<>();
+                
+                for (DataKey<?> key : document.getAll().keySet()) {
+                    if (document.get(key) instanceof NodeRepository) {
+                        keys.add(key);
+                    }
+                }
+                
+                Collections.sort(keys, new Comparator<DataKey<?>>() {
+                    @Override
+                    public int compare(final DataKey<?> o1, final DataKey<?> o2) {
+                        return o1.getName().compareTo(o2.getName());
+                    }
+                });
+                        
+                for (DataKey<?> key : keys) {
+                    if (document.get(key) instanceof NodeRepository) {
+                        NodeRepository repository = (NodeRepository) key.getFrom(document);
+                        List nodes = repository.getReferencedElements(document);
+
+                        for (Object value : nodes) {
+                            if (value instanceof Node) {
+                                Node node = (Node) value;
+                                if (node.getDocument() != document) {
+                                    // need to add this one
+                                    context.render(node);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 
@@ -836,14 +880,24 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
     }
 
     private void render(SoftLineBreak node, NodeFormatterContext context, MarkdownWriter markdown) {
-        markdown.append(node.getChars());
+        if (formatterOptions.keepSoftLineBreaks) {
+            markdown.append(node.getChars());
+        } else if (!markdown.isPendingSpace()) {
+            // need to add a space
+            markdown.append(' ');
+        }
     }
 
     private void render(HardLineBreak node, NodeFormatterContext context, MarkdownWriter markdown) {
-        if (context.getRenderPurpose() == FORMAT) {
-            markdown.append(node.getChars());
-        } else {
-            markdown.append(node.getChars());
+        if (formatterOptions.keepHardLineBreaks) {
+            if (context.getRenderPurpose() == FORMAT) {
+                markdown.append(node.getChars());
+            } else {
+                markdown.append(node.getChars());
+            }
+        } else if (!markdown.isPendingSpace()) {
+            // need to add a space
+            markdown.append(' ');
         }
     }
 
@@ -977,7 +1031,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
     }
 
     private void render(MailLink node, NodeFormatterContext context, MarkdownWriter markdown) {
-        renderAutoLink(node, context, markdown, null,"@1.h");
+        renderAutoLink(node, context, markdown, null, "@1.h");
     }
 
     private void renderAutoLink(final DelimitedLinkNode node, final NodeFormatterContext context, final MarkdownWriter markdown, final String prefix, final String suffix) {

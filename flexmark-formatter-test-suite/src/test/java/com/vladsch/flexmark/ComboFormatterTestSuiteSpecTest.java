@@ -15,13 +15,13 @@ import com.vladsch.flexmark.ext.gfm.tasklist.TaskListItemPlacement;
 import com.vladsch.flexmark.ext.ins.InsExtension;
 import com.vladsch.flexmark.ext.jekyll.front.matter.JekyllFrontMatterExtension;
 import com.vladsch.flexmark.ext.jekyll.tag.JekyllTagExtension;
+import com.vladsch.flexmark.ext.macros.MacrosExtension;
 import com.vladsch.flexmark.ext.spec.example.SpecExampleExtension;
 import com.vladsch.flexmark.ext.tables.TablesExtension;
 import com.vladsch.flexmark.ext.toc.SimTocExtension;
 import com.vladsch.flexmark.ext.toc.TocExtension;
 import com.vladsch.flexmark.ext.typographic.TypographicExtension;
 import com.vladsch.flexmark.ext.wikilink.WikiLinkExtension;
-import com.vladsch.flexmark.ext.xwiki.macros.MacroExtension;
 import com.vladsch.flexmark.ext.yaml.front.matter.YamlFrontMatterExtension;
 import com.vladsch.flexmark.formatter.internal.Formatter;
 import com.vladsch.flexmark.parser.Parser;
@@ -63,7 +63,7 @@ public class ComboFormatterTestSuiteSpecTest extends ComboSpecTestCase {
                     SimTocExtension.create(),
                     TypographicExtension.create(),
                     WikiLinkExtension.create(),
-                    MacroExtension.create(),
+                    MacrosExtension.create(),
                     YamlFrontMatterExtension.create()
             ))
             .set(Parser.BLANK_LINES_IN_AST, true)

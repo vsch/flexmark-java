@@ -2,6 +2,7 @@ package com.vladsch.flexmark.test;
 
 import com.vladsch.flexmark.IParse;
 import com.vladsch.flexmark.IRender;
+import com.vladsch.flexmark.ast.Document;
 import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.util.options.DataHolder;
@@ -20,9 +21,15 @@ public abstract class RenderingTestCase {
     public static final String FAIL_OPTION_NAME = "FAIL";
     public static final String NO_FILE_EOL_OPTION_NAME = "NO_FILE_EOL";
     public static final String FILE_EOL_OPTION_NAME = "FILE_EOL";
-    public static DataKey<Boolean> FAIL = new DataKey<Boolean>(FAIL_OPTION_NAME, false);
-    public static DataKey<Boolean> IGNORE = new DataKey<Boolean>(IGNORE_OPTION_NAME, false);
-    public static DataKey<Boolean> NO_FILE_EOL = new DataKey<Boolean>(NO_FILE_EOL_OPTION_NAME, true);
+    public static final String TIMED_OPTION_NAME = "TIMED";
+    public static final String EMBED_TIMED_OPTION_NAME = "EMBED_TIMED";
+    public static final String TIMED_FORMAT_STRING = "Timing: parse %.3f ms, render %.3f ms, total %.3f\n";
+    public static final DataKey<Boolean> FAIL = new DataKey<Boolean>(FAIL_OPTION_NAME, false);
+    public static final DataKey<Boolean> IGNORE = new DataKey<Boolean>(IGNORE_OPTION_NAME, false);
+    public static final DataKey<Boolean> NO_FILE_EOL = new DataKey<Boolean>(NO_FILE_EOL_OPTION_NAME, true);
+    public static final DataKey<Boolean> TIMED = new DataKey<Boolean>(TIMED_OPTION_NAME, false);
+    public static final DataKey<Boolean> EMBED_TIMED = new DataKey<Boolean>(TIMED_OPTION_NAME, false);
+    public static final DataKey<String> INCLUDED_DOCUMENT = new DataKey<>("INCLUDED_DOCUMENT", "");
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -61,23 +68,15 @@ public abstract class RenderingTestCase {
             if (option.equals(IGNORE_OPTION_NAME)) {//noinspection ConstantConditions
                 throwIgnoredOption(example, optionSets, option);
             } else if (option.equals(FAIL_OPTION_NAME)) {
-                if (options == null) {
-                    options = new MutableDataSet().set(FAIL, true);
-                } else {
-                    options = new MutableDataSet(options).set(FAIL, true);
-                }
+                options = addOption(options, FAIL, true);
             } else if (option.equals(NO_FILE_EOL_OPTION_NAME)) {
-                if (options == null) {
-                    options = new MutableDataSet().set(NO_FILE_EOL, true);
-                } else {
-                    options = new MutableDataSet(options).set(NO_FILE_EOL, true);
-                }
+                options = addOption(options, NO_FILE_EOL, true);
             } else if (option.equals(FILE_EOL_OPTION_NAME)) {
-                if (options == null) {
-                    options = new MutableDataSet().set(NO_FILE_EOL, false);
-                } else {
-                    options = new MutableDataSet(options).set(NO_FILE_EOL, true);
-                }
+                options = addOption(options, NO_FILE_EOL, false);
+            } else if (option.equals(TIMED_OPTION_NAME)) {
+                options = addOption(options, TIMED, true);
+            } else if (option.equals(EMBED_TIMED_OPTION_NAME)) {
+                options = addOption(options, EMBED_TIMED, true);
             } else {
                 if (options == null) {
                     options = options(option);
@@ -106,6 +105,14 @@ public abstract class RenderingTestCase {
             }
         }
         return options;
+    }
+
+    private <T> MutableDataSet addOption(DataHolder options, DataKey<T> key, T value) {
+        if (options == null) {
+            return new MutableDataSet().set(key, value);
+        } else {
+            return new MutableDataSet(options).set(key, value);
+        }
     }
 
     private void throwIgnoredOption(SpecExample example, String optionSets, String option) {
@@ -139,6 +146,10 @@ public abstract class RenderingTestCase {
 
     }
 
+    protected IParse adjustParserForInclusion(IParse parserWithOptions, Document includedDocument) {
+        return parserWithOptions;
+    }
+
     protected void assertRendering(String source, String expectedHtml) {
         assertRendering(source, expectedHtml, null);
     }
@@ -158,8 +169,39 @@ public abstract class RenderingTestCase {
             parseSource = DumpSpecReader.trimTrailingEOL(parseSource);
         }
 
-        Node node = parser().withOptions(options).parse(parseSource);
-        String html = renderer().withOptions(options).render(node);
+        IParse parserWithOptions = parser().withOptions(options);
+        IRender rendererWithOptions = renderer().withOptions(options);
+
+        Node includedDocument = null;
+
+        String includedText = INCLUDED_DOCUMENT.getFrom(parserWithOptions.getOptions());
+        if (includedText != null && !includedText.isEmpty()) {
+            // need to parse and transfer references
+            includedDocument = parserWithOptions.parse(includedText);
+
+            if (includedDocument instanceof Document) {
+                parserWithOptions = adjustParserForInclusion(parserWithOptions, (Document) includedDocument);
+            }
+        }
+
+        long start = System.nanoTime();
+        Node node = parserWithOptions.parse(parseSource);
+        long parse = System.nanoTime();
+
+        if (node instanceof Document && includedDocument instanceof Document) {
+            parserWithOptions.transferReferences((Document) node, (Document) includedDocument);
+        }
+
+        String html = rendererWithOptions.render(node);
+        long render = System.nanoTime();
+
+        boolean timed = TIMED.getFrom(node.getDocument());
+        boolean embedTimed = EMBED_TIMED.getFrom(node.getDocument());
+
+        if (timed || embedTimed) {
+            System.out.print(String.format(TIMED_FORMAT_STRING, (parse - start) / 1000000.0, (render - parse) / 1000000.0, (render - start) / 1000000.0));
+        }
+
         testCase(node, options);
         actualHtml(html, optionsSet);
         boolean useActualHtml = useActualHtml();
@@ -169,6 +211,10 @@ public abstract class RenderingTestCase {
         String actual;
         if (example() != null && example().getSection() != null) {
             StringBuilder outExpected = new StringBuilder();
+            if (embedTimed) {
+                outExpected.append(String.format(TIMED_FORMAT_STRING, (parse - start) / 1000000.0, (render - parse) / 1000000.0, (render - start) / 1000000.0));
+            }
+
             DumpSpecReader.addSpecExample(outExpected, source, expectedHtml, "", optionsSet, true, example().getSection(), example().getExampleNumber());
             expected = outExpected.toString();
 
@@ -176,7 +222,14 @@ public abstract class RenderingTestCase {
             DumpSpecReader.addSpecExample(outActual, source, useActualHtml ? html : expectedHtml, "", optionsSet, true, example().getSection(), example().getExampleNumber());
             actual = outActual.toString();
         } else {
-            expected = DumpSpecReader.addSpecExample(source, expectedHtml, "", optionsSet);
+            if (embedTimed) {
+                StringBuilder outExpected = new StringBuilder();
+                outExpected.append(String.format(TIMED_FORMAT_STRING, (parse - start) / 1000000.0, (render - parse) / 1000000.0, (render - start) / 1000000.0));
+                outExpected.append(DumpSpecReader.addSpecExample(source, expectedHtml, "", optionsSet));
+                expected = outExpected.toString();
+            } else {
+                expected = DumpSpecReader.addSpecExample(source, expectedHtml, "", optionsSet);
+            }
             actual = DumpSpecReader.addSpecExample(source, useActualHtml ? html : expectedHtml, "", optionsSet);
         }
 
@@ -200,8 +253,39 @@ public abstract class RenderingTestCase {
             parseSource = DumpSpecReader.trimTrailingEOL(parseSource);
         }
 
-        Node node = parser().withOptions(options).parse(parseSource);
-        String html = renderer().withOptions(options).render(node);
+        IParse parserWithOptions = parser().withOptions(options);
+        IRender rendererWithOptions = renderer().withOptions(options);
+
+        Node includedDocument = null;
+
+        String includedText = INCLUDED_DOCUMENT.getFrom(parserWithOptions.getOptions());
+        if (includedText != null && !includedText.isEmpty()) {
+            // need to parse and transfer references
+            includedDocument = parserWithOptions.parse(includedText);
+
+            if (includedDocument instanceof Document) {
+                parserWithOptions = adjustParserForInclusion(parserWithOptions, (Document) includedDocument);
+            }
+        }
+
+        long start = System.nanoTime();
+        Node node = parserWithOptions.parse(parseSource);
+        long parse = System.nanoTime();
+
+        if (node instanceof Document && includedDocument instanceof Document) {
+            parserWithOptions.transferReferences((Document) node, (Document) includedDocument);
+        }
+
+        String html = rendererWithOptions.render(node);
+        long render = System.nanoTime();
+
+        boolean timed = TIMED.getFrom(node.getDocument());
+        boolean embedTimed = EMBED_TIMED.getFrom(node.getDocument());
+
+        if (timed || embedTimed) {
+            System.out.print(String.format(TIMED_FORMAT_STRING, (parse - start) / 1000000.0, (render - parse) / 1000000.0, (render - start) / 1000000.0));
+        }
+
         testCase(node, options);
         actualHtml(html, optionsSet);
         String ast = ast(node);
@@ -211,8 +295,12 @@ public abstract class RenderingTestCase {
         // include source for better assertion errors
         String expected;
         String actual;
+
         if (example() != null && example().getSection() != null) {
             StringBuilder outExpected = new StringBuilder();
+            //if (TIMED.getFrom(node.getDocument())) {
+            //    outExpected.append(String.format("Timing: parse %.3f ms, render %.3f ms, total %.3f\n", (parse - start)/1000000.0, (render - parse)/1000000.0, (render - start)/1000000.0));
+            //}
             DumpSpecReader.addSpecExample(outExpected, source, expectedHtml, expectedAst, optionsSet, true, example().getSection(), example().getExampleNumber());
             expected = outExpected.toString();
 
@@ -220,11 +308,19 @@ public abstract class RenderingTestCase {
             DumpSpecReader.addSpecExample(outActual, source, useActualHtml ? html : expectedHtml, ast, optionsSet, true, example().getSection(), example().getExampleNumber());
             actual = outActual.toString();
         } else {
-            expected = DumpSpecReader.addSpecExample(source, expectedHtml, expectedAst, optionsSet);
+            if (embedTimed) {
+                StringBuilder outExpected = new StringBuilder();
+                outExpected.append(String.format(TIMED_FORMAT_STRING, (parse - start) / 1000000.0, (render - parse) / 1000000.0, (render - start) / 1000000.0));
+                outExpected.append(DumpSpecReader.addSpecExample(source, expectedHtml, "", optionsSet));
+                expected = outExpected.toString();
+            } else {
+                expected = DumpSpecReader.addSpecExample(source, expectedHtml, "", optionsSet);
+            }
             actual = DumpSpecReader.addSpecExample(source, useActualHtml ? html : expectedHtml, ast, optionsSet);
         }
 
         specExample(expected, actual, optionsSet);
+
         if (options != null && options.get(FAIL)) {
             thrown.expect(ComparisonFailure.class);
         }

@@ -43,6 +43,9 @@ public class FormatterOptions {
     public final ElementPlacementSort referenceSort;
     public final boolean keepImageLinksAtStart;
     public final boolean keepExplicitLinksAtStart;
+    public final boolean keepHardLineBreaks;
+    public final boolean keepSoftLineBreaks;
+    public final boolean appendTransferredReferences;
     public final CharWidthProvider charWidthProvider;
     //public final TrailingSpaces keepTrailingSpaces;
     //public final TrailingSpaces codeKeepTrailingSpaces;
@@ -85,6 +88,9 @@ public class FormatterOptions {
         keepImageLinksAtStart = Formatter.KEEP_IMAGE_LINKS_AT_START.getFrom(options);
         keepExplicitLinksAtStart = Formatter.KEEP_EXPLICIT_LINKS_AT_START.getFrom(options);
         charWidthProvider = Formatter.CHAR_WIDTH_PROVIDER.getFrom(options);
+        keepHardLineBreaks = Formatter.KEEP_HARD_LINE_BREAKS.getFrom(options);
+        keepSoftLineBreaks = Formatter.KEEP_SOFT_LINE_BREAKS.getFrom(options);
+        appendTransferredReferences = Formatter.APPEND_TRANSFERRED_REFERENCES.getFrom(options);
         //keepTrailingSpaces = Formatter.KEEP_TRAILING_SPACES.getFrom(options);
         //codeKeepTrailingSpaces = Formatter.CODE_KEEP_TRAILING_SPACES.getFrom(options);
     }

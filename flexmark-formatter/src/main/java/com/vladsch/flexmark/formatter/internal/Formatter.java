@@ -84,6 +84,10 @@ public class Formatter implements IRender {
     public static final DataKey<String> TRANSLATION_EXCLUDE_PATTERN = new DataKey<String>("TRANSLATION_EXCLUDE_PATTERN", "^[^\\p{IsAlphabetic}]*$");
     public static final DataKey<String> TRANSLATION_HTML_BLOCK_TAG_PATTERN = Parser.TRANSLATION_HTML_BLOCK_TAG_PATTERN;
     public static final DataKey<String> TRANSLATION_HTML_INLINE_TAG_PATTERN = Parser.TRANSLATION_HTML_INLINE_TAG_PATTERN;
+    
+    public static final DataKey<Boolean> KEEP_HARD_LINE_BREAKS = new DataKey<Boolean>("KEEP_HARD_LINE_BREAKS", true);
+    public static final DataKey<Boolean> KEEP_SOFT_LINE_BREAKS = new DataKey<Boolean>("KEEP_SOFT_LINE_BREAKS", true);
+    public static final DataKey<Boolean> APPEND_TRANSFERRED_REFERENCES = new DataKey<Boolean>("APPEND_TRANSFERRED_REFERENCES", false);
 
     //public boolean USE_ACTUAL_CHAR_WIDTH = true;
     //
@@ -127,6 +131,11 @@ public class Formatter implements IRender {
 
     public TranslationHandler getTranslationHandler() {
         return new TranslationHandlerImpl(options, formatterOptions, new HeaderIdGenerator.Factory());
+    }
+
+    @Override
+    public DataHolder getOptions() {
+        return new DataSet(builder);
     }
 
     /**

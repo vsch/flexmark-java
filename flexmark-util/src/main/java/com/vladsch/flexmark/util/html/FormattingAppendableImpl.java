@@ -59,18 +59,10 @@ public class FormattingAppendableImpl implements FormattingAppendable {
     // accumulated spaces and tabs that we were not sure would need to be output
     private int myPendingSpaces;
     private final Stack<BasedSequence> myPrefixStack;
-
-    @SuppressWarnings("WeakerAccess")
-    public FormattingAppendableImpl(final boolean allFormatOptions) {
-        this(new StringBuilder(), allFormatOptions);
-    }
+    private boolean myPassThrough;
 
     public FormattingAppendableImpl(final int formatOptions) {
         this(new StringBuilder(), formatOptions);
-    }
-
-    public FormattingAppendableImpl(final Appendable appendable, final boolean allFormatOptions) {
-        this(appendable, allFormatOptions ? FORMAT_ALL : 0);
     }
 
     public FormattingAppendableImpl(final Appendable appendable, final int formatOptions) {
@@ -98,6 +90,8 @@ public class FormattingAppendableImpl implements FormattingAppendable {
         myPreFormattedNesting = 0;
         myEolOptions = myOptions;
         mySpacesAfterEOL = 0;
+        myPassThrough = haveOptions(PASS_THROUGH);
+
         updateLastEolOffset();
         setWhitespace();
     }
@@ -115,6 +109,8 @@ public class FormattingAppendableImpl implements FormattingAppendable {
     @Override
     public FormattingAppendable setOptions(final int options) {
         myOptions = options;
+        myPassThrough = haveOptions(PASS_THROUGH);
+
         setWhitespace();
         return this;
     }
@@ -191,13 +187,17 @@ public class FormattingAppendableImpl implements FormattingAppendable {
     }
 
     private void setPendingEOL(int pendingEOL) {
-        if (myPreFormattedNesting == 0 && pendingEOL > myPendingEOL) {
-            if (myModCountOfLastEOL != myModCount) {
-                myPendingEOL = pendingEOL;
-                myEolOptions = myOptions;
-            } else if (myLineCount > 0 && pendingEOL > myLastEOLCount) {
-                myPendingEOL = pendingEOL - myLastEOLCount;
-                myEolOptions = myOptions;
+        if (myPassThrough) {
+            myPendingEOL = pendingEOL;
+        } else {
+            if (myPreFormattedNesting == 0 && pendingEOL > myPendingEOL) {
+                if (myModCountOfLastEOL != myModCount) {
+                    myPendingEOL = pendingEOL;
+                    myEolOptions = myOptions;
+                } else if (myLineCount > 0 && pendingEOL > myLastEOLCount) {
+                    myPendingEOL = pendingEOL - myLastEOLCount;
+                    myEolOptions = myOptions;
+                }
             }
         }
 
@@ -344,16 +344,11 @@ public class FormattingAppendableImpl implements FormattingAppendable {
     }
 
     private void appendImpl(final char c) throws IOException {
-        if (haveOptions(PASS_THROUGH)) {
-            while (myPendingEOL-- > 0) {
-                myLineCount++;
+        if (myPassThrough) {
+            // track nothing but 1 eol and just output everything else
+            if (myPendingEOL-- > 0) {
                 myAppendable.append('\n');
             }
-            updateLastEolOffset();
-            appendSpaces(mySpacesAfterEOL);
-            mySpacesAfterEOL = 0;
-
-            myModCountOfLastEOL = myModCount++;
             myPendingEOL = 0;
             myAppendable.append(c);
             return;
@@ -395,13 +390,14 @@ public class FormattingAppendableImpl implements FormattingAppendable {
     }
 
     private void appendImpl(final CharSequence csq, final int start, final int end) throws IOException {
-        if (haveOptions(PASS_THROUGH)) {
-            while (myPendingEOL-- > 0) {
-                myLineCount++;
+        if (myPassThrough) {
+            // track nothing but 1 pending eol, just output
+            if (myPendingEOL-- > 0) {
+                //myLineCount++;
                 myAppendable.append('\n');
-                updateLastEolOffset();
+                //updateLastEolOffset();
             }
-            myModCountOfLastEOL = myModCount++;
+            ////myModCountOfLastEOL = myModCount++;
             myPendingEOL = 0;
             myAppendable.append(csq, start, end);
             return;
@@ -499,7 +495,7 @@ public class FormattingAppendableImpl implements FormattingAppendable {
         int mySpacesAfterEOL = this.mySpacesAfterEOL;
 
         int prefixLength = myPrefix.length();
-        if (haveOptions(PASS_THROUGH)) {
+        if (myPassThrough) {
             if (myPendingEOL > 0) {
                 column = 0;
                 if (myPendingPreFormattedPrefix && !myPrefix.isEmpty()) {
@@ -902,10 +898,14 @@ public class FormattingAppendableImpl implements FormattingAppendable {
     @Override
     public FormattingAppendable indent() {
         if (myPreFormattedNesting != 0) throw new IllegalStateException("indent should not be called inside preFormatted");
-        line();
-        ++myIndent;
-        myIndentLineCounts.push(myLineCount);
+
+        if (!myPassThrough) {
+            line();
+            myIndentLineCounts.push(myLineCount);
+        }
+
         myWillIndent = false;
+        ++myIndent;
         return this;
     }
 
@@ -918,16 +918,19 @@ public class FormattingAppendableImpl implements FormattingAppendable {
     @Override
     public FormattingAppendable unIndent() {
         if (myIndent <= 0) throw new IllegalStateException("unIndent called with nesting == 0");
-        if (myPreFormattedNesting != 0) throw new IllegalStateException("unIndent should not be called inside preFormatted");
 
-        int indentLineCount = myIndentLineCounts.pop();
-        if (indentLineCount == myLineCount) {
-            myPendingEOL = 0;
-            runAllAfterEol();
-        } else {
-            line();
+        if (!myPassThrough) {
+            if (myPreFormattedNesting != 0) throw new IllegalStateException("unIndent should not be called inside preFormatted");
+
+            int indentLineCount = myIndentLineCounts.pop();
+            if (indentLineCount == myLineCount) {
+                myPendingEOL = 0;
+                runAllAfterEol();
+            } else {
+                line();
+            }
+
         }
-
         --myIndent;
         return this;
     }

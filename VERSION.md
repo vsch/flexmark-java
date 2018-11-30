@@ -7,6 +7,7 @@ flexmark-java
 
 - [To Do](#to-do)
     - [Docx Converter](#docx-converter)
+- [0.34.60](#03460)
 - [0.34.58](#03458)
 - [0.34.56](#03456)
 - [0.34.53](#03453)
@@ -259,6 +260,22 @@ flexmark-java
 * [ ] Fix: #99, YamlFrontMatterBlockParser ignores multi-key list items
 
 &nbsp;</details>
+
+0.34.60
+-------
+
+* Change: some breaking changes to FormattingAppendableImpl derived constructors. Now all
+  arguments must be passed, no defaults. It was getting too messy to trace which constructors
+  were used and what were the resulting options for the appendable.
+* Fix: optimized HTML rendering with `HtmlRenderer.FORMAT_FLAGS` set to
+  `HtmlRenderer.PASS_THROUGH`, no fancy output formatting other than line breaks but 7x faster
+  than using standard fancy formatting output.
+* Fix: Emoji shortcut did not render emoji with UNICODE_ONLY image type option
+* Add: `Formatter.KEEP_HARD_LINE_BREAKS`, default true and `Formatter.KEEP_SOFT_LINE_BREAKS`
+  default true. Setting to `false` will not output corresponding line break.
+* Add: `Formatter.APPEND_TRANSFERRED_REFERENCES`, default false. Setting to `true` will append
+  all transferred references to the bottom of the formatted document. 
+* Add: `NodeRepository` API to return referenced references from a given node.
 
 0.34.58
 -------

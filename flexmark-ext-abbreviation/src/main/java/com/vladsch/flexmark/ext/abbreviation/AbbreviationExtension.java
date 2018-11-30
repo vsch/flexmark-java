@@ -48,6 +48,8 @@ public class AbbreviationExtension implements Parser.ParserExtension, HtmlRender
     // format options
     public static final DataKey<ElementPlacement> ABBREVIATIONS_PLACEMENT = new DataKey<ElementPlacement>("ABBREVIATIONS_PLACEMENT", ElementPlacement.AS_IS);
     public static final DataKey<ElementPlacementSort> ABBREVIATIONS_SORT = new DataKey<ElementPlacementSort>("ABBREVIATIONS_SORT", ElementPlacementSort.AS_IS);
+    
+    public static final DataKey<Boolean> RECOMPUTE_ABBREVIATIONS_MAP = new DataKey<>("RECOMPUTE_ABBREVIATIONS_MAP", false);
 
     public static Extension create() {
         return new AbbreviationExtension();
@@ -70,9 +72,13 @@ public class AbbreviationExtension implements Parser.ParserExtension, HtmlRender
 
     @Override
     public boolean transferReferences(final MutableDataHolder document, final DataHolder included) {
-        if (document.contains(ABBREVIATIONS) && included.contains(ABBREVIATIONS)) {
-            return Parser.transferReferences(ABBREVIATIONS.getFrom(document), ABBREVIATIONS.getFrom(included), ABBREVIATIONS_KEEP.getFrom(document) == KeepType.FIRST);
-        }
+        // abbreviations cannot be transferred except before parsing the document
+        //if (document.contains(ABBREVIATIONS) && included.contains(ABBREVIATIONS)) {
+        //    if (Parser.transferReferences(ABBREVIATIONS.getFrom(document), ABBREVIATIONS.getFrom(included), ABBREVIATIONS_KEEP.getFrom(document) == KeepType.FIRST)) {
+        //        // reset abbreviations optimization
+        //        document.set(RECOMPUTE_ABBREVIATIONS_MAP, true);
+        //    }
+        //}
         return false;
     }
 

@@ -10,6 +10,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Stack;
 
+import static com.vladsch.flexmark.util.html.FormattingAppendable.PASS_THROUGH;
+
 @SuppressWarnings("unchecked")
 public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase> implements HtmlFormattingAppendable {
     private final FormattingAppendable out;
@@ -22,17 +24,8 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
     private boolean suppressCloseTagLine = false;
     private final Stack<String> myOpenTags = new Stack<String>();
 
-    public HtmlFormattingAppendableBase(Appendable out) {
-        this(out, 0, false);
-    }
-
     public HtmlFormattingAppendableBase(FormattingAppendable other, Appendable out, boolean inheritIndent) {
-        this(out, inheritIndent ? other.getIndentPrefix().length() : 0, false);
-    }
-
-    public HtmlFormattingAppendableBase(Appendable out, int indentSize, final boolean allFormatOptions) {
-        this.out = new FormattingAppendableImpl(out, allFormatOptions);
-        this.out.setIndentPrefix(RepeatedCharSequence.of(" ", indentSize).toString());
+        this(out, inheritIndent ? other.getIndentPrefix().length() : 0, other.getOptions());
     }
 
     public HtmlFormattingAppendableBase(Appendable out, int indentSize, final int formatOptions) {
@@ -296,44 +289,48 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
 
         if (withIndent) out.indent();
 
-        final boolean isLineOnChildText = lineOnChildText;
-        final boolean isIndentIndentingChildren = indentIndentingChildren;
-        lineOnChildText = false;
-        indentIndentingChildren = false;
+        if ((out.getOptions() & PASS_THROUGH) != 0) {
+            runnable.run();
+        } else {
+            final boolean isLineOnChildText = lineOnChildText;
+            final boolean isIndentIndentingChildren = indentIndentingChildren;
+            lineOnChildText = false;
+            indentIndentingChildren = false;
 
-        if (isLineOnChildText || isIndentIndentingChildren) {
-            out.openConditional(new ConditionalFormatter() {
-                @Override
-                public void apply(final boolean firstAppend, final boolean onIndent, final boolean onLine, final boolean onText) {
-                    if (onIndent) {
-                        if (isIndentIndentingChildren) out.indent();
-                        else out.line();
-                    } else if (firstAppend) {
-                        if (isLineOnChildText) {
-                            out.line();
-                        } else if (onLine) {
-                            // don't suppress the child new line
+            if (isLineOnChildText || isIndentIndentingChildren) {
+                out.openConditional(new ConditionalFormatter() {
+                    @Override
+                    public void apply(final boolean firstAppend, final boolean onIndent, final boolean onLine, final boolean onText) {
+                        if (onIndent) {
+                            if (isIndentIndentingChildren) out.indent();
+                            else out.line();
+                        } else if (firstAppend) {
+                            if (isLineOnChildText) {
+                                out.line();
+                            } else if (onLine) {
+                                // don't suppress the child new line
+                                out.line();
+                            }
+                        }
+                    }
+                });
+            }
+
+            runnable.run();
+
+            if (isLineOnChildText || isIndentIndentingChildren) {
+                out.closeConditional(new ConditionalFormatter() {
+                    @Override
+                    public void apply(final boolean firstAppend, final boolean onIndent, final boolean onLine, final boolean onText) {
+                        if (onIndent) {
+                            if (isIndentIndentingChildren) out.unIndent();
+                            //else buffer.line();
+                        } else if (onText && isLineOnChildText) {
                             out.line();
                         }
                     }
-                }
-            });
-        }
-
-        runnable.run();
-
-        if (isLineOnChildText || isIndentIndentingChildren) {
-            out.closeConditional(new ConditionalFormatter() {
-                @Override
-                public void apply(final boolean firstAppend, final boolean onIndent, final boolean onLine, final boolean onText) {
-                    if (onIndent) {
-                        if (isIndentIndentingChildren) out.unIndent();
-                        //else buffer.line();
-                    } else if (onText && isLineOnChildText) {
-                        out.line();
-                    }
-                }
-            });
+                });
+            }
         }
 
         if (withIndent) out.unIndent();
@@ -343,7 +340,7 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
 
         closeTag(tagName);
 
-        if (withIndent && !suppressCloseTagLine) line();
+        if (withIndent && !suppressCloseTagLine) out.line();
 
         return (T) this;
     }

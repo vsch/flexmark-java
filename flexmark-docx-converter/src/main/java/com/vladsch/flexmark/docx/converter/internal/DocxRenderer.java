@@ -176,6 +176,11 @@ public class DocxRenderer implements IRender {
         this.linkResolverFactories = FlatDependencyHandler.computeDependencies(builder.linkResolverFactories);
     }
 
+    @Override
+    public DataHolder getOptions() {
+        return new DataSet(builder);
+    }
+
     /**
      * Create a new builder for configuring the DocxRenderer.
      *

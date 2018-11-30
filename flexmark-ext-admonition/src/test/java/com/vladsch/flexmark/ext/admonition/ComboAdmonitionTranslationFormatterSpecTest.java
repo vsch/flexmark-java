@@ -80,6 +80,11 @@ public class ComboAdmonitionTranslationFormatterSpecTest extends ComboSpecTestCa
         }
 
         @Override
+        public DataHolder getOptions() {
+            return myFormatter.getOptions();
+        }
+
+        @Override
         public void render(final Node node, final Appendable output) {
             final TranslationHandler handler = myFormatter.getTranslationHandler(new HeaderIdGenerator.Factory());
             final String formattedOutput = myFormatter.translationRender(node, handler, RenderPurpose.TRANSLATION_SPANS);

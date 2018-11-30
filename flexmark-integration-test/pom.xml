@@ -4,7 +4,7 @@
     <parent>
         <groupId>com.vladsch.flexmark</groupId>
         <artifactId>flexmark-java</artifactId>
-        <version>0.34.58</version>
+        <version>0.34.60</version>
     </parent>
 
     <artifactId>flexmark-integration-test</artifactId>
@@ -55,6 +55,11 @@
         <dependency>
             <groupId>com.vladsch.flexmark</groupId>
             <artifactId>flexmark-ext-tables</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.vladsch.flexmark</groupId>
+            <artifactId>flexmark-ext-toc</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -117,5 +122,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>

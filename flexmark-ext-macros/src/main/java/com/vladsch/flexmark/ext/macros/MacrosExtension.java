@@ -63,7 +63,8 @@ public class MacrosExtension implements Parser.ParserExtension
 
     @Override
     public boolean transferReferences(final MutableDataHolder document, final DataHolder included) {
-        if (document.contains(MACRO_DEFINITIONS) && included.contains(MACRO_DEFINITIONS)) {
+        // cannot optimize based on macros in this document, repository is not accessed until rendering
+        if (/*document.contains(MACRO_DEFINITIONS) &&*/ included.contains(MACRO_DEFINITIONS)) {
             return Parser.transferReferences(MACRO_DEFINITIONS.getFrom(document), MACRO_DEFINITIONS.getFrom(included), MACRO_DEFINITIONS_KEEP.getFrom(document) == KeepType.FIRST);
         }
         return false;
