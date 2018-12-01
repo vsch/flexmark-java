@@ -264,6 +264,7 @@ flexmark-java
 0.34.60
 -------
 
+* [ ] Add: base64 embedded image link resolver option or a sample on how to do it
 * Change: some breaking changes to FormattingAppendableImpl derived constructors. Now all
   arguments must be passed, no defaults. It was getting too messy to trace which constructors
   were used and what were the resulting options for the appendable.
@@ -277,6 +278,7 @@ flexmark-java
   all transferred references to the bottom of the formatted document. 
 * Add: `NodeRepository` API to return referenced references from a given node.
 * Fix: Jira and YouTrack converters ignored `HtmlRenderer.RECHECK_UNDEFINED_REFERENCES`
+* Add: Base64 conversion to image utils
 
 0.34.58
 -------

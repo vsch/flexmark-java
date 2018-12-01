@@ -82,7 +82,7 @@ public class Utils {
     }
 
     public static String wrapWith(String receiver, String prefix, String suffix) {
-        return (receiver == null || receiver.isEmpty()) ? "" : prefix + receiver + suffix;
+        return (receiver == null || receiver.isEmpty()) ? "" : prefixWith(prefix, suffixWith(receiver, suffix));
     }
 
     public static String suffixWith(String receiver, char suffix) {
@@ -321,6 +321,43 @@ public class Utils {
         return result.toString();
     }
 
+    /**
+     * Longest Common Prefix for a set of strings
+     *
+     * @param s array of strings or null
+     * @return longest common prefix
+     */
+    public static String getLongestCommonPrefix(String... s) {
+        if (s == null || s.length == 0) return "";
+        if (s.length == 1) return s[0];
+
+        String s0 = s[0];
+        int iMax = s0.length();
+        int jMax = s.length;
+
+        for (int j = 1; j < jMax; j++) {
+            final String sj = s[j];
+            if (iMax > sj.length()) iMax = sj.length();
+        }
+
+        for (int i = 0; i < iMax; i++) {
+            char c = s0.charAt(i);
+            for (int j = 1; j < jMax; j++) {
+                if (s[j].charAt(i) != c) return s0.substring(0, i);
+            }
+        }
+        return s0.substring(0, iMax);
+    }
+
+    public static String getAbbreviatedText(String text, int maxLength) {
+        if (text == null) return "";
+        if (text.length() <= maxLength || maxLength < 6) return text;
+
+        int prefix = maxLength / 2;
+        int suffix = maxLength - 3 - prefix;
+        return text.substring(0, prefix) + " … " + text.substring(text.length() - suffix);
+    }
+
     public static String splice(Collection<String> receiver, String delimiter, boolean skipNullOrEmpty) {
         StringBuilder result = new StringBuilder(receiver.size() * (delimiter.length() + 10));
         String delim = "";
@@ -333,6 +370,41 @@ public class Utils {
         }
         return result.toString();
     }
+
+    public static String join(String[] items, String prefix, String suffix, String itemPrefix, String itemSuffix) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(prefix);
+        for (String item : items) {
+            sb.append(itemPrefix).append(item).append(itemSuffix);
+        }
+        sb.append(suffix);
+        return sb.toString();
+    }
+
+    public static String join(Collection<String> items, String prefix, String suffix, String itemPrefix, String itemSuffix) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(prefix);
+        for (String item : items) {
+            sb.append(itemPrefix).append(item).append(itemSuffix);
+        }
+        sb.append(suffix);
+        return sb.toString();
+    }
+
+    public static String repeat(String text, int repeatCount) {
+        if (repeatCount > 0) {
+            StringBuilder sb = new StringBuilder(text.length() * repeatCount);
+            while (repeatCount-- > 0) {
+                sb.append(text);
+            }
+            return sb.toString();
+        }
+        return "";
+    }
+    
+    /*
+       Limits and other numeric helpers
+     */
 
     public static int max(int receiver, int... others) {
         int max = receiver;
@@ -362,6 +434,60 @@ public class Utils {
         if (receiver < minBound) return minBound;
         else if (receiver > maxBound) return maxBound;
         else return receiver;
+    }
+
+    public static float max(float receiver, float... others) {
+        float max = receiver;
+        for (float other : others) {
+            if (max < other) max = other;
+        }
+        return max;
+    }
+
+    public static float min(float receiver, float... others) {
+        float min = receiver;
+        for (float other : others) {
+            if (min > other) min = other;
+        }
+        return min;
+    }
+
+    public static float minLimit(float receiver, float... minBound) {
+        return max(receiver, minBound);
+    }
+
+    public static float maxLimit(float receiver, float... maxBound) {
+        return min(receiver, maxBound);
+    }
+
+    public static float rangeLimit(float receiver, float minBound, float maxBound) {
+        if (receiver < minBound) return minBound;
+        else if (receiver > maxBound) return maxBound;
+        else return receiver;
+    }
+
+    public static Integer parseUnsignedIntOrNull(String text) {
+        try {
+            if (text.startsWith("-")) {
+                return null;
+            }
+            return Integer.parseInt(text);
+        } catch (NumberFormatException ignored) {
+            return null;
+        }
+    }
+
+    public static Integer parseIntOrNull(String text) {
+        try {
+            return Integer.parseInt(text);
+        } catch (NumberFormatException ignored) {
+            return null;
+        }
+    }
+
+    static public <T extends Comparable<T>> int compareNullable(T i1, T i2) {
+        if (i1 == null || i2 == null) return 0;
+        else return i1.compareTo(i2);
     }
 
     public static <K, V> V putIfMissing(Map<K, V> receiver, K key, RunnableValue<V> value) {

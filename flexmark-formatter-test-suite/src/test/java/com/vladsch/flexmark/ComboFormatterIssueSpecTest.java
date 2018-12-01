@@ -114,10 +114,6 @@ public class ComboFormatterIssueSpecTest extends ComboSpecTestCase {
                         "")
         );
     }
-    @Override
-    protected boolean fullTestSpecStarting() {
-        return false; // cannot do full with included docs
-    }
 
     private static final Parser PARSER = Parser.builder(OPTIONS).build();
     // The spec says URL-escaping is optional, but the examples assume that it's enabled.

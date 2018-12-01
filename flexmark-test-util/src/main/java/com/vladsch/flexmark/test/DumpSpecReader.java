@@ -2,6 +2,7 @@ package com.vladsch.flexmark.test;
 
 import com.vladsch.flexmark.IParse;
 import com.vladsch.flexmark.IRender;
+import com.vladsch.flexmark.ast.Document;
 import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.spec.SpecReader;
@@ -54,9 +55,26 @@ public class DumpSpecReader extends SpecReader {
         IParse parserWithOptions = testCase.parser().withOptions(options);
         IRender rendererWithOptions = testCase.renderer().withOptions(options);
 
+        Node includedDocument = null;
+
+        String includedText = RenderingTestCase.INCLUDED_DOCUMENT.getFrom(parserWithOptions.getOptions());
+        if (includedText != null && !includedText.isEmpty()) {
+            // need to parse and transfer references
+            includedDocument = parserWithOptions.parse(includedText);
+
+            if (includedDocument instanceof Document) {
+                parserWithOptions = testCase.adjustParserForInclusion(parserWithOptions, (Document) includedDocument);
+            }
+        }
+
         long start = System.nanoTime();
         Node node = parserWithOptions.parse(parseSource);
         long parse = System.nanoTime();
+
+        if (node instanceof Document && includedDocument instanceof Document) {
+            parserWithOptions.transferReferences((Document) node, (Document) includedDocument);
+        }
+
         String actualHTML = rendererWithOptions.render(node);
         long render = System.nanoTime();
 

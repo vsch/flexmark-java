@@ -39,22 +39,45 @@
 
 package com.vladsch.flexmark.util;
 
+import sun.misc.BASE64Decoder;
+import sun.misc.BASE64Encoder;
+
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
-import java.awt.*;
+import javax.swing.JComponent;
+import java.awt.AlphaComposite;
+import java.awt.BasicStroke;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.RenderingHints;
+import java.awt.Toolkit;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
 import java.awt.datatransfer.UnsupportedFlavorException;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.RoundRectangle2D;
-import java.awt.image.*;
+import java.awt.image.AffineTransformOp;
+import java.awt.image.BufferedImage;
+import java.awt.image.FilteredImageSource;
+import java.awt.image.ImageFilter;
+import java.awt.image.ImageProducer;
+import java.awt.image.RGBImageFilter;
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.util.regex.Pattern;
 
 public class ImageUtils {
+    public static Color TRANSPARENT = new Color(0, 0, 0, 0);
+    
     public static Image getImageFromClipboard() {
         Transferable transferable = Toolkit.getDefaultToolkit().getSystemClipboard().getContents(null);
         return getImageFromTransferable(transferable);
@@ -96,7 +119,9 @@ public class ImageUtils {
     }
 
     public static BufferedImage toBufferedImage(Image src) {
-        if (src instanceof BufferedImage) {
+        if (src == null) {
+            return null;
+        } else if (src instanceof BufferedImage) {
             return (BufferedImage) src;
         }
 
@@ -160,6 +185,98 @@ public class ImageUtils {
         return null;
     }
 
+    public static String base64Encode(BufferedImage image) {
+        String imageString = null;
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+
+        try {
+            ImageIO.write(image, "PNG", bos);
+            byte[] imageBytes = bos.toByteArray();
+            imageString = new String(new BASE64Encoder().encode(imageBytes));
+            bos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return "data:image/png;base64," + imageString;
+    }
+
+    public static String base64Encode(File file) {
+        if (file == null || !file.isFile()) {
+            return null;
+        }
+
+        try {
+            FileInputStream fileInputStreamReader = new FileInputStream(file);
+            byte[] bytes = new byte[(int) file.length()];
+            if (fileInputStreamReader.read(bytes) != -1) {
+                return "data:image/png;base64," + new String(new BASE64Encoder().encode(bytes));
+            }
+            return null;
+        } catch (Throwable e) {
+            return null;
+        }
+    }
+
+    public static BufferedImage base64Decode(File file) {
+        if (file == null || !file.isFile()) {
+            return null;
+        }
+
+        try {
+            FileInputStream fileInputStreamReader = new FileInputStream(file);
+            byte[] bytes = new byte[(int) file.length()];
+            if (fileInputStreamReader.read(bytes) != -1) {
+                String encoded = new String(bytes, StandardCharsets.UTF_8);
+                int pos = encoded.indexOf(',');
+                if (pos >= 0) {
+                    String encodedImage = encoded.substring(pos + 1);
+                    byte[] imageBytes = new BASE64Decoder().decodeBuffer(encodedImage);
+
+                    ByteArrayInputStream bis = new ByteArrayInputStream(imageBytes);
+                    final BufferedImage bufferedImage = ImageIO.read(bis);
+                    bis.close();
+                    return bufferedImage;
+                }
+            }
+            return null;
+        } catch (Throwable e) {
+            return null;
+        }
+    }
+
+    private static final Pattern BASE64_ENCODING_PATTERN = Pattern.compile("^data:image/[a-z0-9_-]+;base64,", Pattern.CASE_INSENSITIVE);
+
+    public static boolean isEncodedImage(String encoded) {
+        return encoded != null && encoded.startsWith("data:image/") && BASE64_ENCODING_PATTERN.matcher(encoded).find();
+    }
+
+    public static boolean isPossiblyEncodedImage(String encoded) {
+        return encoded != null && encoded.startsWith("data:image/");
+    }
+
+    public static BufferedImage base64Decode(String encoded) {
+        if (encoded == null || encoded.isEmpty()) {
+            return null;
+        }
+
+        try {
+            int pos = encoded.indexOf(',');
+            if (pos >= 0) {
+                String encodedImage = encoded.substring(pos + 1);
+                byte[] imageBytes = new BASE64Decoder().decodeBuffer(encodedImage);
+
+                ByteArrayInputStream bis = new ByteArrayInputStream(imageBytes);
+                final BufferedImage bufferedImage = ImageIO.read(bis);
+                bis.close();
+                return bufferedImage;
+            }
+            return null;
+        } catch (Throwable e) {
+            return null;
+        }
+    }
+
     public static BufferedImage loadImageFromURL(String imageURL, boolean logImageProcessing) {
         try {
             return toBufferedImage(new ImageIcon(new URL(imageURL)).getImage());
@@ -172,7 +289,7 @@ public class ImageUtils {
         return null;
     }
 
-    /*
+    /**
      * http://stackoverflow.com/questions/7603400/how-to-make-a-rounded-corner-image-in-java
      */
     public static BufferedImage makeRoundedCorner(BufferedImage image, int cornerRadius, int borderWidth) {
@@ -195,7 +312,7 @@ public class ImageUtils {
         //        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.CLEAR));
         //        g2.fillRect(0,0,256,256);
 
-        // ... then compositing the image on top,
+        // ... then composing the image on top,
         // using the white shape from above as alpha source
         g2.setComposite(AlphaComposite.SrcAtop);
         g2.drawImage(image, 0, 0, null);
@@ -232,6 +349,11 @@ public class ImageUtils {
     }
 
     public static BufferedImage drawRectangle(BufferedImage image, int x, int y, int w, int h, Color borderColor, int borderWidth, int cornerRadius) {
+
+        return drawRectangle(image, x, y, w, h, borderColor, borderWidth, cornerRadius, null, 0.0f);
+    }
+
+    public static BufferedImage drawRectangle(BufferedImage image, int x, int y, int w, int h, Color borderColor, int borderWidth, int cornerRadius, float[] dash, float dashPhase) {
         BufferedImage output = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_INT_ARGB);
         //BufferedImage output = UIUtil.createImage(w, h, BufferedImage.TYPE_INT_ARGB);
 
@@ -246,7 +368,12 @@ public class ImageUtils {
 
         g2.drawImage(image, 0, 0, null);
         //UIUtil.drawImage(g2, image, 0, 0, null);
-        g2.setStroke(new BasicStroke(borderWidth, BasicStroke.CAP_SQUARE, BasicStroke.JOIN_MITER, borderWidth));
+        if (dash != null) {
+            g2.setStroke(new BasicStroke(borderWidth, BasicStroke.CAP_SQUARE, BasicStroke.JOIN_MITER, borderWidth, dash, dashPhase));
+        } else {
+            g2.setStroke(new BasicStroke(borderWidth, BasicStroke.CAP_SQUARE, BasicStroke.JOIN_MITER, borderWidth));
+        }
+
         g2.setRenderingHint(
                 RenderingHints.KEY_ANTIALIASING,
                 RenderingHints.VALUE_ANTIALIAS_ON
@@ -267,7 +394,88 @@ public class ImageUtils {
         return output;
     }
 
-    /*
+    public static BufferedImage drawHighlightRectangle(
+            BufferedImage image,
+            int x, int y, int w, int h,
+            Color borderColor, int borderWidth, int cornerRadius,
+            Color innerFillColor,
+            Color outerFillColor,
+            final int outerCornerRadius
+    ) {
+        //BufferedImage output = UIUtil.createImage(w, h, BufferedImage.TYPE_INT_ARGB);
+        //noinspection UndesirableClassUsage
+        BufferedImage output = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_INT_ARGB);
+        int imgW = image.getWidth();
+        int imgH = image.getHeight();
+
+        Graphics2D g2 = output.createGraphics();
+
+        g2.setRenderingHint(
+                RenderingHints.KEY_ANTIALIASING,
+                RenderingHints.VALUE_ANTIALIAS_ON
+        );
+
+        boolean innerFilled = innerFillColor.getAlpha() != 0;
+        boolean outerFilled = outerFillColor.getAlpha() != 0;
+
+        if (outerFilled) {
+            g2.setColor(outerFillColor);
+            if (outerCornerRadius > 0) {
+                g2.fillRoundRect(0, 0, imgW, imgH, outerCornerRadius, outerCornerRadius);
+            } else {
+                g2.fillRect(0, 0, imgW, imgH);
+            }
+        } else {
+            g2.drawImage(image, 0, 0, null);
+        }
+
+        if (cornerRadius > 0) {
+            if (outerFilled) {
+                g2.setColor(TRANSPARENT);
+                g2.setComposite(AlphaComposite.Src);
+                g2.fillRoundRect(x, y, w, h, cornerRadius, cornerRadius);
+            }
+
+            if (innerFilled) {
+                g2.setColor(innerFillColor);
+                g2.fillRoundRect(x, y, w, h, cornerRadius, cornerRadius);
+            }
+
+            if (borderWidth > 0) {
+                g2.setColor(borderColor);
+                g2.setStroke(new BasicStroke(borderWidth, BasicStroke.CAP_SQUARE, BasicStroke.JOIN_MITER, borderWidth));
+                g2.drawRoundRect(x, y, w, h, cornerRadius, cornerRadius);
+            }
+        } else {
+            if (outerFilled) {
+                g2.setColor(TRANSPARENT);
+                g2.setComposite(AlphaComposite.Src);
+                g2.fillRect(x, y, w, h);
+            }
+
+            if (innerFilled) {
+                g2.setColor(innerFillColor);
+                g2.fillRect(x, y, w, h);
+            }
+
+            if (borderWidth > 0) {
+                g2.setColor(borderColor);
+                g2.setStroke(new BasicStroke(borderWidth, BasicStroke.CAP_SQUARE, BasicStroke.JOIN_MITER, borderWidth));
+                g2.drawRect(x, y, w, h);
+            }
+        }
+
+        if (outerFilled) {
+            // combine with image
+            g2.setComposite(AlphaComposite.DstOver);
+            g2.drawImage(image, 0, 0, null);
+        }
+
+        g2.dispose();
+        return output;
+    }
+
+    /**
      * http://stackoverflow.com/questions/2386064/how-do-i-crop-an-image-in-java
      */
     public static BufferedImage cropImage(BufferedImage image, int trimLeft, int trimRight, int trimTop, int trimBottom) {
@@ -275,7 +483,7 @@ public class ImageUtils {
         return output;
     }
 
-    /*
+    /**
      * http://stackoverflow.com/questions/464825/converting-transparent-gif-png-to-jpeg-using-java
      */
     public static BufferedImage removeAlpha(BufferedImage image) {
@@ -289,7 +497,7 @@ public class ImageUtils {
         return bufferedImage;
     }
 
-    /*
+    /**
      * http://stackoverflow.com/questions/665406/how-to-make-a-color-transparent-in-a-bufferedimage-and-save-as-png
      */
     public static Image toTransparent(BufferedImage image, final Color color, final int tolerance) {

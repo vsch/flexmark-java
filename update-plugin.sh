@@ -6,6 +6,13 @@ cd ${HOME_DIR}
 cp out/artifacts/flexmark-util.jar ../MissingInActions/lib
 echo updated out/artifacts/flexmark-util.jar in ../MissingInActions/lib
 
+#cp out/artifacts/flexmark-util.jar ../plugin-utils/lib
+#echo updated out/artifacts/flexmark-util.jar  ../plugin-utils/lib
+#cp out/artifacts/flexmark-test-util.jar  ../plugin-utils/lib
+#echo updated out/artifacts/flexmark-test-util.jar  ../plugin-utils/lib
+#cp out/artifacts/flexmark-formatter.jar  ../plugin-utils/lib
+#echo updated out/artifacts/flexmark-formatter.jar  ../plugin-utils/lib
+
 cp out/artifacts/flexmark-util.jar ../CLionArduinoPlugin/lib
 echo updated out/artifacts/flexmark-util.jar in ../CLionArduinoPlugin/lib
 cp out/artifacts/flexmark-test-util.jar ../CLionArduinoPlugin/lib
