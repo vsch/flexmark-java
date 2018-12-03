@@ -23,7 +23,7 @@
  * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * Copyright (c) 2015-2017 Vladimir Schneider <vladimir.schneider@gmail.com>, all rights reserved.
+ * Copyright (c) 2015-2018 Vladimir Schneider <vladimir.schneider@gmail.com>, all rights reserved.
  *
  * This code is private property of the copyright holder and cannot be used without
  * having obtained a license or prior written permission of the of the copyright holder.
@@ -44,40 +44,24 @@ import sun.misc.BASE64Encoder;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
-import javax.swing.JComponent;
-import java.awt.AlphaComposite;
-import java.awt.BasicStroke;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.RenderingHints;
-import java.awt.Toolkit;
+import java.awt.*;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
 import java.awt.datatransfer.UnsupportedFlavorException;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.RoundRectangle2D;
-import java.awt.image.AffineTransformOp;
-import java.awt.image.BufferedImage;
-import java.awt.image.FilteredImageSource;
-import java.awt.image.ImageFilter;
-import java.awt.image.ImageProducer;
-import java.awt.image.RGBImageFilter;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
+import java.awt.image.*;
+import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.regex.Pattern;
 
+import static com.vladsch.flexmark.util.Utils.minLimit;
+
 public class ImageUtils {
     public static Color TRANSPARENT = new Color(0, 0, 0, 0);
-    
+
     public static Image getImageFromClipboard() {
         Transferable transferable = Toolkit.getDefaultToolkit().getSystemClipboard().getContents(null);
         return getImageFromTransferable(transferable);
@@ -277,12 +261,18 @@ public class ImageUtils {
         }
     }
 
+    public static BufferedImage loadImageFromURL(String imageURL) {
+        return loadImageFromURL(imageURL, false);
+    }
+
     public static BufferedImage loadImageFromURL(String imageURL, boolean logImageProcessing) {
-        try {
-            return toBufferedImage(new ImageIcon(new URL(imageURL)).getImage());
-        } catch (MalformedURLException e) {
-            if (logImageProcessing) {
-                e.printStackTrace();
+        if (imageURL != null) {
+            try {
+                return toBufferedImage(new ImageIcon(new URL(imageURL)).getImage());
+            } catch (MalformedURLException e) {
+                if (logImageProcessing) {
+                    e.printStackTrace();
+                }
             }
         }
 
@@ -312,7 +302,7 @@ public class ImageUtils {
         //        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.CLEAR));
         //        g2.fillRect(0,0,256,256);
 
-        // ... then composing the image on top,
+        // ... then compositing the image on top,
         // using the white shape from above as alpha source
         g2.setComposite(AlphaComposite.SrcAtop);
         g2.drawImage(image, 0, 0, null);
@@ -433,7 +423,7 @@ public class ImageUtils {
             if (outerFilled) {
                 g2.setColor(TRANSPARENT);
                 g2.setComposite(AlphaComposite.Src);
-                g2.fillRoundRect(x, y, w, h, cornerRadius, cornerRadius);
+                g2.fillRoundRect(minLimit(0, x - borderWidth / 2), minLimit(0, y - borderWidth / 2), w + borderWidth, h + borderWidth, cornerRadius + borderWidth, cornerRadius + borderWidth);
             }
 
             if (innerFilled) {
@@ -450,7 +440,7 @@ public class ImageUtils {
             if (outerFilled) {
                 g2.setColor(TRANSPARENT);
                 g2.setComposite(AlphaComposite.Src);
-                g2.fillRect(x, y, w, h);
+                g2.fillRect(minLimit(0, x - borderWidth / 2), minLimit(0, y - borderWidth / 2), w + borderWidth, h + borderWidth);
             }
 
             if (innerFilled) {
@@ -466,6 +456,64 @@ public class ImageUtils {
         }
 
         if (outerFilled) {
+            // combine with image
+            g2.setComposite(AlphaComposite.DstOver);
+            g2.drawImage(image, 0, 0, null);
+        }
+
+        g2.dispose();
+        return output;
+    }
+
+    public static BufferedImage punchOuterHighlightRectangle(
+            BufferedImage image,
+            BufferedImage outerImage,
+            int x, int y, int w, int h,
+            Color borderColor, int borderWidth, int cornerRadius,
+            Color innerFillColor,
+            Color outerFillColor,
+            final int outerCornerRadius,
+            boolean applyToImage
+    ) {
+        //BufferedImage output = UIUtil.createImage(w, h, BufferedImage.TYPE_INT_ARGB);
+        boolean outerFilled = outerFillColor.getAlpha() != 0;
+        if (!outerFilled) {
+            return outerImage;
+        }
+
+        //noinspection UndesirableClassUsage
+        BufferedImage output = outerImage != null ? outerImage : new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_INT_ARGB);
+        int imgW = image.getWidth();
+        int imgH = image.getHeight();
+
+        Graphics2D g2 = output.createGraphics();
+
+        g2.setRenderingHint(
+                RenderingHints.KEY_ANTIALIASING,
+                RenderingHints.VALUE_ANTIALIAS_ON
+        );
+
+        if (outerImage == null) {
+            // first one, we need to fill it
+            g2.setColor(outerFillColor);
+            if (outerCornerRadius > 0) {
+                g2.fillRoundRect(0, 0, imgW, imgH, outerCornerRadius, outerCornerRadius);
+            } else {
+                g2.fillRect(0, 0, imgW, imgH);
+            }
+        }
+
+        if (cornerRadius > 0) {
+            g2.setColor(TRANSPARENT);
+            g2.setComposite(AlphaComposite.Src);
+            g2.fillRoundRect(minLimit(0, x - borderWidth / 2), minLimit(0, y - borderWidth / 2), w + borderWidth, h + borderWidth, cornerRadius + borderWidth, cornerRadius + borderWidth);
+        } else {
+            g2.setColor(TRANSPARENT);
+            g2.setComposite(AlphaComposite.Src);
+            g2.fillRect(minLimit(0, x - borderWidth / 2), minLimit(0, y - borderWidth / 2), w + borderWidth, h + borderWidth);
+        }
+
+        if (applyToImage) {
             // combine with image
             g2.setComposite(AlphaComposite.DstOver);
             g2.drawImage(image, 0, 0, null);

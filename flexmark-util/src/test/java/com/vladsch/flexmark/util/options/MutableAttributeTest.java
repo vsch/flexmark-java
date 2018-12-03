@@ -65,16 +65,16 @@ public class MutableAttributeTest {
         MutableAttribute attribute = MutableAttributeImpl.of("style", "");
 
         attribute.setValue("color:#white");
-        assertEquals("add value", "color:#white;",attribute.getValue());
+        assertEquals("add value", "color:#white",attribute.getValue());
 
         attribute.setValue("background:#black");
-        assertEquals("add value", "color:#white;background:#black;",attribute.getValue());
+        assertEquals("add value", "color:#white;background:#black",attribute.getValue());
 
         attribute.setValue("font-family:monospaced;color:#green");
-        assertEquals("add and change multiple values", "color:#green;background:#black;font-family:monospaced;",attribute.getValue());
+        assertEquals("add and change multiple values", "color:#green;background:#black;font-family:monospaced",attribute.getValue());
 
         attribute.setValue("font-family");
-        assertEquals("remove value", "color:#green;background:#black;",attribute.getValue());
+        assertEquals("remove value", "color:#green;background:#black",attribute.getValue());
 
         attribute.removeValue("color;background");
         assertEquals("remove values", "",attribute.getValue());

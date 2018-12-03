@@ -184,13 +184,13 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
     }
 
     protected void pushTag(CharSequence tagName) {
-        myOpenTags.push(tagName instanceof String ? (String) tagName : String.valueOf(tagName));
+        myOpenTags.push(String.valueOf(tagName));
     }
 
     protected void popTag(CharSequence tagName) {
         if (myOpenTags.isEmpty()) throw new IllegalStateException("Close tag '" + tagName + "' with no tags open");
         String openTag = myOpenTags.peek();
-        if (!openTag.equals(tagName instanceof String ? (String) tagName : String.valueOf(tagName)))
+        if (!openTag.equals(String.valueOf(tagName)))
             throw new IllegalStateException("Close tag '" + tagName + "' does not match '" + openTag + "' in " + getOpenTagText());
         myOpenTags.pop();
     }
@@ -215,7 +215,7 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
         List<String> tagList = new ArrayList<String>(myOpenTags);
         int iMax = tagList.size();
         int lastPos = iMax;
-        String lastTag = latestTag instanceof String ? (String) latestTag : String.valueOf(latestTag);
+        String lastTag = String.valueOf(latestTag);
         for (int i = iMax; i-- > 0; ) {
             if (tagList.get(i).equals(lastTag)) {
                 lastPos = i + 1;

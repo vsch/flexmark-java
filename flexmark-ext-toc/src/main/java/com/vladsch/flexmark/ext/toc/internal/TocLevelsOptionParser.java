@@ -1,6 +1,7 @@
 package com.vladsch.flexmark.ext.toc.internal;
 
 import com.vladsch.flexmark.util.Computable;
+import com.vladsch.flexmark.util.DelimitedBuilder;
 import com.vladsch.flexmark.util.Pair;
 import com.vladsch.flexmark.util.Utils;
 import com.vladsch.flexmark.util.options.*;

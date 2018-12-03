@@ -9,12 +9,12 @@ public class TagRange extends Range {
 
     public TagRange(CharSequence tag, Range range) {
         super(range);
-        this.tag = tag instanceof String ? (String) tag : String.valueOf(tag);
+        this.tag = String.valueOf(tag);
     }
 
     public TagRange(CharSequence tag, int start, int end) {
         super(start, end);
-        this.tag = tag instanceof String ? (String) tag : String.valueOf(tag);
+        this.tag = String.valueOf(tag);
     }
 
     public String getTag() {
@@ -22,7 +22,7 @@ public class TagRange extends Range {
     }
 
     public TagRange withTag(CharSequence tag) {
-        return this.tag.equals(tag instanceof String ? (String) tag : String.valueOf(tag)) ? this : new TagRange(tag, getStart(), getEnd());
+        return this.tag.equals(String.valueOf(tag)) ? this : new TagRange(tag, getStart(), getEnd());
     }
 
     @Override

@@ -30,7 +30,7 @@ public class ResolvedLink {
 
     public ResolvedLink(LinkType linkType, CharSequence url, Attributes attributes, LinkStatus status) {
         myLinkType = linkType;
-        myUrl = url instanceof String ? (String) url : String.valueOf(url);
+        myUrl = String.valueOf(url);
         myStatus = status;
         if (attributes != null) {
             getNonNullAttributes().addValues(attributes);
@@ -51,7 +51,7 @@ public class ResolvedLink {
     }
 
     public ResolvedLink withUrl(CharSequence url) {
-        String useUrl = url instanceof String ? (String) url : String.valueOf(url);
+        String useUrl = String.valueOf(url);
         return this.myUrl.equals(useUrl) ? this : new ResolvedLink(myLinkType, useUrl, myAttributes, myStatus);
     }
 

@@ -205,7 +205,7 @@ public class Escaping {
         if (BACKSLASH_OR_AMP.matcher(s).find()) {
             return replaceAll(ENTITY_OR_ESCAPED_CHAR, s, UNESCAPE_REPLACER);
         } else {
-            return s instanceof String ? (String) s : String.valueOf(s);
+            return String.valueOf(s);
         }
     }
 
@@ -221,13 +221,13 @@ public class Escaping {
             if (BACKSLASH_OR_AMP.matcher(s).find()) {
                 return replaceAll(ESCAPED_CHAR, s, UNESCAPE_REPLACER);
             } else {
-                return s instanceof String ? (String) s : String.valueOf(s);
+                return String.valueOf(s);
             }
         } else {
             if (BACKSLASH_ONLY.matcher(s).find()) {
                 return replaceAll(ENTITY_OR_ESCAPED_CHAR, s, UNESCAPE_REPLACER);
             } else {
-                return s instanceof String ? (String) s : String.valueOf(s);
+                return String.valueOf(s);
             }
         }
     }
@@ -274,7 +274,7 @@ public class Escaping {
         if (AMP_ONLY.matcher(s).find()) {
             return replaceAll(ENTITY_ONLY, s, ENTITY_REPLACER);
         } else {
-            return s instanceof String ? (String) s : String.valueOf(s);
+            return String.valueOf(s);
         }
     }
 
@@ -507,7 +507,7 @@ public class Escaping {
             int stripStart = s.charAt(0) == '!' ? 2 : 1;
             return normalizeReference(s.subSequence(stripStart, s.length() - stripEnd), changeCase);
         }
-        return s instanceof String ? (String) s : String.valueOf(s);
+        return String.valueOf(s);
     }
 
     /**
@@ -544,7 +544,7 @@ public class Escaping {
         Matcher matcher = p.matcher(s);
 
         if (!matcher.find()) {
-            return s instanceof String ? (String) s : String.valueOf(s);
+            return String.valueOf(s);
         }
 
         StringBuilder sb = new StringBuilder(s.length() + 16);

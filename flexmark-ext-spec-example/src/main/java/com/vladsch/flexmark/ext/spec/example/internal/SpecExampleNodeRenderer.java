@@ -9,7 +9,7 @@ import com.vladsch.flexmark.html.renderer.NodeRendererFactory;
 import com.vladsch.flexmark.html.renderer.NodeRenderingHandler;
 import com.vladsch.flexmark.spec.SpecReader;
 import com.vladsch.flexmark.util.options.DataHolder;
-import com.vladsch.flexmark.util.options.DelimitedBuilder;
+import com.vladsch.flexmark.util.DelimitedBuilder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 import java.util.Arrays;

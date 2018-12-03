@@ -693,7 +693,7 @@ public class DocxRenderer implements IRender {
             if (rendererOptions.percentEncodeUrls) {
                 return Escaping.percentEncodeUrl(url);
             } else {
-                return url instanceof String ? (String) url : String.valueOf(url);
+                return String.valueOf(url);
             }
         }
 
@@ -780,7 +780,7 @@ public class DocxRenderer implements IRender {
                 resolvedLinkMap.put(linkType, resolvedLinks);
             }
 
-            String urlSeq = url instanceof String ? (String) url : String.valueOf(url);
+            String urlSeq = String.valueOf(url);
             ResolvedLink resolvedLink = resolvedLinks.get(urlSeq);
             if (resolvedLink == null) {
                 resolvedLink = new ResolvedLink(linkType, urlSeq, attributes);

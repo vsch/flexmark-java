@@ -28,14 +28,14 @@ public class Attributes {
     public Attribute get(CharSequence key) {
         if (myAttributes == null || key == null || key.length() == 0) return null;
 
-        String useKey = key instanceof String ? (String) key : String.valueOf(key);
+        String useKey = String.valueOf(key);
         return myAttributes.get(useKey);
     }
 
     public String getValue(CharSequence key) {
         if (myAttributes == null || key == null || key.length() == 0) return "";
 
-        String useKey = key instanceof String ? (String) key : String.valueOf(key);
+        String useKey = String.valueOf(key);
         Attribute attribute = myAttributes.get(useKey);
         if (attribute == null) return "";
         return attribute.getValue();
@@ -55,7 +55,7 @@ public class Attributes {
      * @return new attribute
      */
     public Attribute replaceValue(CharSequence key, CharSequence value) {
-        String useKey = key instanceof String ? (String) key : String.valueOf(key);
+        String useKey = String.valueOf(key);
         Attribute attribute;
         if (myAttributes == null) {
             attribute = AttributeImpl.of(useKey, value);
@@ -81,7 +81,7 @@ public class Attributes {
 
     public Attribute addValue(CharSequence key, CharSequence value) {
         Attribute attribute;
-        String useKey = key instanceof String ? (String) key : String.valueOf(key);
+        String useKey = String.valueOf(key);
         if (myAttributes == null) {
             attribute = AttributeImpl.of(key, value);
         } else {
@@ -104,7 +104,7 @@ public class Attributes {
     public Attribute removeValue(CharSequence key, CharSequence value) {
         if (myAttributes == null || key == null || key.length() == 0) return null;
 
-        String useKey = key instanceof String ? (String) key : String.valueOf(key);
+        String useKey = String.valueOf(key);
         Attribute oldAttribute = myAttributes.get(useKey);
         Attribute attribute = oldAttribute.removeValue(value);
         getAttributes().put(useKey, attribute);
@@ -114,13 +114,13 @@ public class Attributes {
     public boolean contains(CharSequence key) {
         if (myAttributes == null || key == null || key.length() == 0) return false;
 
-        String useKey = key instanceof String ? (String) key : String.valueOf(key);
+        String useKey = String.valueOf(key);
         return myAttributes.containsKey(useKey);
     }
 
     public boolean containsValue(CharSequence key, CharSequence value) {
         if (myAttributes == null) return false;
-        String useKey = key instanceof String ? (String) key : String.valueOf(key);
+        String useKey = String.valueOf(key);
         Attribute attribute = myAttributes.get(useKey);
         return attribute != null && attribute.containsValue(value);
     }
@@ -163,7 +163,7 @@ public class Attributes {
     public Attribute remove(CharSequence key) {
         if (myAttributes == null || key == null || key.length() == 0) return null;
 
-        String useKey = key instanceof String ? (String) key : String.valueOf(key);
+        String useKey = String.valueOf(key);
         Attribute oldAttribute = myAttributes.get(useKey);
         myAttributes.remove(useKey);
         return oldAttribute;

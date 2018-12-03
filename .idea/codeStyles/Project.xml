@@ -16,7 +16,7 @@
     <option name="HTML_DO_NOT_INDENT_CHILDREN_OF" value="html,body" />
     <option name="HTML_DONT_ADD_BREAKS_IF_INLINE_CONTENT" value="title,h1,h2,h3,h4,h5,h6,p,li" />
     <option name="FORMATTER_TAGS_ENABLED" value="true" />
-    <JSCodeStyleSettings>
+    <JSCodeStyleSettings version="0">
       <option name="VAR_DECLARATION_WRAP" value="2" />
       <option name="OBJECT_LITERAL_WRAP" value="2" />
     </JSCodeStyleSettings>

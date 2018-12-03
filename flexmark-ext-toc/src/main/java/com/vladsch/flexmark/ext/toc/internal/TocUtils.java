@@ -13,7 +13,7 @@ import com.vladsch.flexmark.util.Paired;
 import com.vladsch.flexmark.util.ValueRunnable;
 import com.vladsch.flexmark.util.html.Attribute;
 import com.vladsch.flexmark.util.html.Escaping;
-import com.vladsch.flexmark.util.options.DelimitedBuilder;
+import com.vladsch.flexmark.util.DelimitedBuilder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 import java.util.*;

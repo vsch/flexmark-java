@@ -647,7 +647,7 @@ public class HtmlRenderer implements IRender {
                 resolvedLinkMap.put(linkType, resolvedLinks);
             }
 
-            String urlSeq = url instanceof String ? (String) url : String.valueOf(url);
+            String urlSeq = String.valueOf(url);
             ResolvedLink resolvedLink = resolvedLinks.get(urlSeq);
             if (resolvedLink == null) {
                 resolvedLink = new ResolvedLink(linkType, urlSeq, attributes);
@@ -713,7 +713,7 @@ public class HtmlRenderer implements IRender {
             if (htmlOptions.percentEncodeUrls) {
                 return Escaping.percentEncodeUrl(url);
             } else {
-                return url instanceof String ? (String) url : String.valueOf(url);
+                return String.valueOf(url);
             }
         }
 

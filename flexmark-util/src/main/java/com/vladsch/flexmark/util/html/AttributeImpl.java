@@ -10,10 +10,10 @@ public class AttributeImpl implements Attribute {
     private final String myValue;
 
     private AttributeImpl(CharSequence name, CharSequence value, char valueListDelimiter, char valueNameDelimiter) {
-        myName = name instanceof String ? (String) name : String.valueOf(name);
+        myName = String.valueOf(name);
         myValueListDelimiter = valueListDelimiter;
         myValueNameDelimiter = valueNameDelimiter;
-        myValue = value == null ? "" : value instanceof String ? (String) value : String.valueOf(value);
+        myValue = value == null ? "" : String.valueOf(value);
     }
 
     @Override
@@ -83,7 +83,7 @@ public class AttributeImpl implements Attribute {
 
     @Override
     public Attribute replaceValue(final CharSequence value) {
-        return myValue.equals(value) ? this : of(myName, value, myValueListDelimiter, myValueNameDelimiter);
+        return value.equals(myValue) ? this : of(myName, value, myValueListDelimiter, myValueNameDelimiter);
     }
 
     @Override
@@ -142,9 +142,9 @@ public class AttributeImpl implements Attribute {
     }
 
     public static AttributeImpl of(CharSequence attrName, CharSequence value, char valueListDelimiter, char valueNameDelimiter) {
-        if (CLASS_ATTR.equals(attrName)) {
+        if (attrName.equals(CLASS_ATTR)) {
             return new AttributeImpl(attrName, value, ' ', NUL);
-        } else if (STYLE_ATTR.equals(attrName)) {
+        } else if (attrName.equals(STYLE_ATTR)) {
             return new AttributeImpl(attrName, value, ';', ':');
         }
         return new AttributeImpl(attrName, value, valueListDelimiter, valueNameDelimiter);

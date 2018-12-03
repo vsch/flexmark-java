@@ -14,10 +14,10 @@ public class MutableAttributeImpl implements MutableAttribute {
     private LinkedHashMap<String, String> myValues;
 
     private MutableAttributeImpl(CharSequence name, CharSequence value, char valueListDelimiter, char valueNameDelimiter) {
-        myName = name instanceof String ? (String) name : String.valueOf(name);
+        myName = String.valueOf(name);
         myValueListDelimiter = valueListDelimiter;
         myValueNameDelimiter = valueNameDelimiter;
-        myValue = value == null ? "" : value instanceof String ? (String) value : String.valueOf(value);
+        myValue = value == null ? "" : String.valueOf(value);
         myValues = null;
     }
 
@@ -108,20 +108,25 @@ public class MutableAttributeImpl implements MutableAttribute {
         if (myValueListDelimiter != NUL) {
             StringBuilder sb = new StringBuilder();
             if (myValueNameDelimiter != NUL) {
+                String sep = "";
+                String del = String.valueOf(myValueListDelimiter);
                 for (Map.Entry<String, String> entry : myValues.entrySet()) {
-                    if (!entry.getKey().isEmpty() && !entry.getValue().isEmpty()) {
-                        sb.append(entry.getKey()).append(myValueNameDelimiter).append(entry.getValue()).append(myValueListDelimiter);
+                    if (!entry.getKey().isEmpty()/* && !entry.getValue().isEmpty()*/) {
+                        sb.append(sep);
+                        sep = del;
+                        sb.append(entry.getKey()).append(myValueNameDelimiter).append(entry.getValue());
                     }
                 }
             } else {
+                String sep = "";
+                String del = String.valueOf(myValueListDelimiter);
                 for (String key : myValues.keySet()) {
                     if (!key.isEmpty()) {
-                        sb.append(key).append(myValueListDelimiter);
+                        sb.append(sep);
+                        sb.append(key);
+                        sep = del;
                     }
                 }
-            }
-            if (myValueListDelimiter == ' ' && sb.length() > 0) {
-                sb.delete(sb.length() - 1, sb.length());
             }
             myValue = sb.toString();
         } else {
@@ -136,7 +141,7 @@ public class MutableAttributeImpl implements MutableAttribute {
     }
 
     public MutableAttributeImpl replaceValue(CharSequence value) {
-        final String useValue = value == null ? "" : value instanceof String ? (String) value : String.valueOf(value);
+        final String useValue = value == null ? "" : String.valueOf(value);
         if (myValue == null || value == null || !myValue.equals(useValue)) {
             myValue = useValue;
             myValues = null;
@@ -164,7 +169,7 @@ public class MutableAttributeImpl implements MutableAttribute {
             }
         } else {
             if (myValue == null || value == null || !myValue.equals(value)) {
-                myValue = value == null ? "" : value instanceof String ? (String) value : String.valueOf(value);
+                myValue = value == null ? "" : String.valueOf(value);
                 myValues = null;
             }
         }
@@ -173,7 +178,7 @@ public class MutableAttributeImpl implements MutableAttribute {
     }
 
     private void forEachValue(final CharSequence value, BiConsumer<String, String> consumer) {
-        String useValue = value == null ? "" : value instanceof String ? (String) value : String.valueOf(value);
+        String useValue = value == null ? "" : String.valueOf(value);
         int lastPos = 0;
         while (lastPos < useValue.length()) {
             int pos = useValue.indexOf(myValueListDelimiter, lastPos);

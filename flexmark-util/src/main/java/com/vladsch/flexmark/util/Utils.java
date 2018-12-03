@@ -233,7 +233,15 @@ public class Utils {
         }
     }
 
+    /**
+     * @deprecated Use removePrefix
+     */
+    @Deprecated
     public static String removeStart(String receiver, char prefix) {
+        return removePrefix(receiver, prefix);
+    }
+
+    public static String removePrefix(String receiver, char prefix) {
         if (receiver != null) {
             if (receiver.startsWith(java.lang.String.valueOf(prefix))) {
                 return receiver.substring(1);
@@ -243,7 +251,15 @@ public class Utils {
         return "";
     }
 
+    /**
+     * @deprecated Use removePrefix
+     */
+    @Deprecated
     public static String removeStart(String receiver, String prefix) {
+        return removePrefix(receiver, prefix);
+    }
+
+    public static String removePrefix(String receiver, String prefix) {
         if (receiver != null) {
             if (receiver.startsWith(java.lang.String.valueOf(prefix))) {
                 return receiver.substring(prefix.length());
@@ -253,7 +269,38 @@ public class Utils {
         return "";
     }
 
+    public static String removeAnyPrefix(String receiver, String... prefixes) {
+        if (receiver != null) {
+            for (String prefix : prefixes) {
+                if (receiver.startsWith(java.lang.String.valueOf(prefix))) {
+                    return receiver.substring(prefix.length());
+                }
+            }
+            return receiver;
+        }
+        return "";
+    }
+
+    public static String removePrefixIncluding(String receiver, String delimiter) {
+        if (receiver != null) {
+            int pos = receiver.indexOf(delimiter);
+            if (pos != -1) {
+                return receiver.substring(pos + delimiter.length());
+            }
+            return receiver;
+        }
+        return "";
+    }
+
+    /**
+     * @deprecated Use removeSuffix
+     */
+    @Deprecated
     public static String removeEnd(String receiver, char suffix) {
+        return removeSuffix(receiver, suffix);
+    }
+
+    public static String removeSuffix(String receiver, char suffix) {
         if (receiver != null) {
             if (receiver.endsWith(java.lang.String.valueOf(suffix))) {
                 return receiver.substring(0, receiver.length() - 1);
@@ -263,10 +310,30 @@ public class Utils {
         return "";
     }
 
+    /**
+     * @deprecated Use removeSuffix
+     */
+    @Deprecated
     public static String removeEnd(String receiver, String suffix) {
+        return removeSuffix(receiver, suffix);
+    }
+
+    public static String removeSuffix(String receiver, String suffix) {
         if (receiver != null) {
             if (receiver.endsWith(java.lang.String.valueOf(suffix))) {
                 return receiver.substring(0, receiver.length() - suffix.length());
+            }
+            return receiver;
+        }
+        return "";
+    }
+
+    public static String removeAnySuffix(String receiver, String... suffixes) {
+        if (receiver != null) {
+            for (String suffix : suffixes) {
+                if (receiver.endsWith(java.lang.String.valueOf(suffix))) {
+                    return receiver.substring(0, receiver.length() - suffix.length());
+                }
             }
             return receiver;
         }
@@ -401,7 +468,7 @@ public class Utils {
         }
         return "";
     }
-    
+
     /*
        Limits and other numeric helpers
      */

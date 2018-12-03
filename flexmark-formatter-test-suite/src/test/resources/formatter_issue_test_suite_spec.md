@@ -108,7 +108,7 @@ Document[0, 122]
 
 With append just include
 
-```````````````````````````````` example(Append References: 2) options(append-references)
+```````````````````````````````` example(Append References: 2) options(append-references,)
 Text with footnote[^footnote] abbr, link ref [ref], image ref ![image], <<<macro1>>>
 
 Enumerated Ref{#enum:this}
@@ -122,6 +122,9 @@ Enumerated Ref{#enum:this}
 
 See [@enum:this]
 
+[image]: ./included.png
+[ref]: ./link.md
+
 *[abbr]: Abbreviation
 
 [@enum]: Enumerated Reference [#]
@@ -132,9 +135,6 @@ See [@enum:this]
 >>>macro1
 macro text
 <<<
-
-[ref]: ./link.md
-[image]: ./included.png
 
 .
 Document[0, 133]

@@ -148,7 +148,7 @@ public class TocOptions implements Immutable<TocOptions, TocOptions.AsMutable>, 
         this.isNumbered = isNumbered;
         this.listType = listType;
         this.isHtml = isHtml;
-        this.rawTitle = title == null ? "" : title instanceof String ? (String) title : String.valueOf(title);
+        this.rawTitle = title == null ? "" : String.valueOf(title);
         this.rawTitleLevel = titleLevel;
         if (!rawTitle.isEmpty()) {
             int markers = SubSequence.of(rawTitle.trim()).countLeading("#");
