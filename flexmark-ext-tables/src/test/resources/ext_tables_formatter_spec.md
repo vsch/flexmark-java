@@ -948,11 +948,11 @@ real life table
 ````````````````````````````````
 
 
-## GFM options
+## GFM 
 
 invalid table:
 
-```````````````````````````````` example(GFM options: 1) options(gfm)
+```````````````````````````````` example(GFM: 1) options(gfm)
 | A | B | C |
 |-----------|
 | a | b | c |
@@ -967,7 +967,7 @@ invalid table:
 
 invalid table:
 
-```````````````````````````````` example(GFM options: 2) options(gfm)
+```````````````````````````````` example(GFM: 2) options(gfm)
 | A | B | C |
 | a | b | c |
 | b | a | c |
@@ -978,7 +978,7 @@ invalid table:
 ````````````````````````````````
 
 
-```````````````````````````````` example GFM options: 3
+```````````````````````````````` example GFM: 3
 | Feature                                                                                                                 | Basic | Enhanced |
 |:------------------------------------------------------------------------------------------------------------------------|:-----:|:--------:|
 | Works with builds 143.2370 or newer, product version IDEA 15.0.6                                                        |   X   |    X     |
@@ -1002,7 +1002,7 @@ invalid table:
 
 in item
 
-```````````````````````````````` example(GFM options: 4) options(gfm)
+```````````````````````````````` example(GFM: 4) options(gfm)
 - Add: live templates starting with `.`    
                                         
   | Element       | Abbreviation    | Expansion                                               |
@@ -1024,7 +1024,7 @@ in item
 
 default
 
-```````````````````````````````` example GFM options: 5
+```````````````````````````````` example GFM: 5
 - Add: live templates starting with `.`    
                                         
   | Element       | Abbreviation    | Expansion                     |
@@ -1044,7 +1044,7 @@ default
 ````````````````````````````````
 
 
-```````````````````````````````` example(GFM options: 6) options(no-alignment)
+```````````````````````````````` example(GFM: 6) options(no-alignment)
 - Add: live templates starting with `.`    
                                         
   | Element       | Abbreviation    | Expansion                     |
@@ -1064,7 +1064,7 @@ default
 ````````````````````````````````
 
 
-```````````````````````````````` example(GFM options: 7) options(no-width)
+```````````````````````````````` example(GFM: 7) options(no-width)
 - Add: live templates starting with `.`    
                                         
   | Element       | Abbreviation    | Expansion                     |
@@ -1084,7 +1084,7 @@ default
 ````````````````````````````````
 
 
-```````````````````````````````` example(GFM options: 8) options(no-alignment, no-width)
+```````````````````````````````` example(GFM: 8) options(no-alignment, no-width)
 - Add: live templates starting with `.`    
                                         
   | Element       | Abbreviation    | Expansion                     |
@@ -1104,7 +1104,7 @@ default
 ````````````````````````````````
 
 
-```````````````````````````````` example(GFM options: 9) options(fill-missing-columns)
+```````````````````````````````` example(GFM: 9) options(fill-missing-columns)
 | col11 | col12|
 | col21 | col22|
 |---|---|
@@ -1118,7 +1118,7 @@ default
 ````````````````````````````````
 
 
-```````````````````````````````` example(GFM options: 10) options(left-align-marker-add)
+```````````````````````````````` example(GFM: 10) options(left-align-marker-add)
 | col11 | col12|
 | col21 | col22|
 |---|:---|
@@ -1132,7 +1132,7 @@ default
 ````````````````````````````````
 
 
-```````````````````````````````` example(GFM options: 11) options(left-align-marker-remove)
+```````````````````````````````` example(GFM: 11) options(left-align-marker-remove)
 | col11 | col12|
 | col21 | col22|
 |---|:---|
@@ -1146,7 +1146,7 @@ default
 ````````````````````````````````
 
 
-```````````````````````````````` example GFM options: 12
+```````````````````````````````` example GFM: 12
 day|time|spent
 :---|:---:|--:
 nov. 2. tue|10:00|4h 40m 
@@ -1160,6 +1160,179 @@ total:|| **13h**
 | nov. 3. thu | 11:00 |      4h |
 | nov. 7. mon | 10:20 |  4h 20m |
 | total:             || **13h** |
+
+````````````````````````````````
+
+
+Should match
+
+```````````````````````````````` example(GFM: 13) options(markdown-navigator)
+| Feature          | Basic | Enhanced |
+|:-----------------|:-----:|:--------:|
+| iew Tab soasdsfd |   X   |    X     |
+| dfax highig      |   X   |    X     |
+| Table syntax h   |   X   |    X     |
+| Support for De   |   X   |    X     |
+| Warning and Er   |   X   |    X     |
+| Link address c   |   X   |    X     |
+| Quick Fixes fo   |   X   |    X     |
+| GFM Task lis     |   X   |    X     |
+| Line markers,    |   X   |    X     |
+| Markdown exten   |   X   |    X     |
+| GitHub wiki su   |   X   |    X     |
+| GitHub compati   |   X   |    X     |
+| Swing and Java   |   X   |    X     |
+| Supports Highl   |   X   |    X     |
+| **Multi-line I   |   X   |    X     |
+| Supports **Jav   |   X   |    X     |
+
+.
+| Feature          | Basic | Enhanced |
+|:-----------------|:-----:|:--------:|
+| iew Tab soasdsfd |   X   |    X     |
+| dfax highig      |   X   |    X     |
+| Table syntax h   |   X   |    X     |
+| Support for De   |   X   |    X     |
+| Warning and Er   |   X   |    X     |
+| Link address c   |   X   |    X     |
+| Quick Fixes fo   |   X   |    X     |
+| GFM Task lis     |   X   |    X     |
+| Line markers,    |   X   |    X     |
+| Markdown exten   |   X   |    X     |
+| GitHub wiki su   |   X   |    X     |
+| GitHub compati   |   X   |    X     |
+| Swing and Java   |   X   |    X     |
+| Supports Highl   |   X   |    X     |
+| **Multi-line I   |   X   |    X     |
+| Supports **Jav   |   X   |    X     |
+
+````````````````````````````````
+
+
+Should match
+
+```````````````````````````````` example(GFM: 14) options(markdown-navigator, dummy-identifier)
+|     Feature     | Basic | Enhanced |
+|:---------------: ⎮ |:-----:|:--------:|
+| ew Tab soasdsfd |   X   |    X     |
+|    dfhighig     |   X   |    X     |
+| Table syntax h  |   X   |    X     |
+| Support for De  |   X   |    X     |
+| Warning and Er  |   X   |    X     |
+
+.
+|     Feature     | Basic | Enhanced |
+|:---------------⎮:|:-----:|:--------:|
+| ew Tab soasdsfd |   X   |    X     |
+|    dfhighig     |   X   |    X     |
+| Table syntax h  |   X   |    X     |
+| Support for De  |   X   |    X     |
+| Warning and Er  |   X   |    X     |
+
+````````````````````````````````
+
+
+```````````````````````````````` example(GFM: 15) options(markdown-navigator, dummy-identifier)
+|     Feature     | Basic | Enhanced |
+|:----------------------------⎮------:|:-----:|:--------:|
+| ew Tab soasdsfd |   X   |    X     |
+|    dfhighig     |   X   |    X     |
+
+.
+|     Feature     | Basic | Enhanced |
+|:---------------⎮:|:-----:|:--------:|
+| ew Tab soasdsfd |   X   |    X     |
+|    dfhighig     |   X   |    X     |
+
+````````````````````````````````
+
+
+```````````````````````````````` example(GFM: 16) options(markdown-navigator, dummy-identifier)
+|     Feature     | Basic | Enhanced |
+|:----------⎮------:|:-----:|:--------:|
+| ew Tab soasdsfd |   X   |    X     |
+|    dfhighig     |   X   |    X     |
+
+.
+|     Feature     | Basic | Enhanced |
+|:-----------⎮----:|:-----:|:--------:|
+| ew Tab soasdsfd |   X   |    X     |
+|    dfhighig     |   X   |    X     |
+
+````````````````````````````````
+
+
+```````````````````````````````` example(GFM: 17) options(markdown-navigator, dummy-identifier)
+|     Feature     | Basic | Enhanced |
+|:---------⎮------:|:-----:|:--------:|
+| ew Tab soasdsfd |   X   |    X     |
+|    dfhighig     |   X   |    X     |
+
+.
+|     Feature     | Basic | Enhanced |
+|:----------⎮-----:|:-----:|:--------:|
+| ew Tab soasdsfd |   X   |    X     |
+|    dfhighig     |   X   |    X     |
+
+````````````````````````````````
+
+
+```````````````````````````````` example(GFM: 18) options(markdown-navigator, dummy-identifier)
+|     Feature     | Basic | Enhanced |
+|    ⎮          :----------------------------------:|:-----:|:--------:|
+| ew Tab soasdsfd |   X   |    X     |
+|    dfhighig     |   X   |    X     |
+
+.
+|     Feature     | Basic | Enhanced |
+|:⎮---------------:|:-----:|:--------:|
+| ew Tab soasdsfd |   X   |    X     |
+|    dfhighig     |   X   |    X     |
+
+````````````````````````````````
+
+
+```````````````````````````````` example(GFM: 19) options(markdown-navigator, dummy-identifier)
+|     Feature     | Basic | Enhanced |
+|:----------------------------------:            ⎮          |:-----:|:--------:|
+| ew Tab soasdsfd |   X   |    X     |
+|    dfhighig     |   X   |    X     |
+
+.
+|     Feature     | Basic | Enhanced |
+|:---------------⎮:|:-----:|:--------:|
+| ew Tab soasdsfd |   X   |    X     |
+|    dfhighig     |   X   |    X     |
+
+````````````````````````````````
+
+
+```````````````````````````````` example(GFM: 20) options(markdown-navigator, dummy-identifier)
+|     Feature     | Basic | Enhanced |
+|:----------------------------------:                      |:-----:|:--------:|
+| ew Tab soasdsfd     ⎮      |   X   |    X     |
+|    dfhighig     |   X   |    X     |
+
+.
+|       Feature        | Basic | Enhanced |
+|:--------------------:|:-----:|:--------:|
+| ew Tab soasdsfd     ⎮ |   X   |    X     |
+|       dfhighig       |   X   |    X     |
+
+````````````````````````````````
+
+
+```````````````````````````````` example(GFM: 21) options(markdown-navigator, line-prefix)
+|     Feature     | Basic | Enhanced |
+|:----------------------------------:                      |:-----:|:--------:|
+| ew Tab soasdsfd     ⎮      |   X   |    X     |
+|    dfhighig     |   X   |    X     |
+
+.
+>   |       Feature        | Basic | Enhanced |
+>   |:--------------------:|:-----:|:--------:|
+>   | ew Tab soasdsfd     ⎮ |   X   |    X     |
+>   |       dfhighig       |   X   |    X     |
 
 ````````````````````````````````
 

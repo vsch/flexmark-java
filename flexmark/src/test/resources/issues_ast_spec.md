@@ -1412,3 +1412,58 @@ Document[0, 44]
       Text[1, 18] chars:[1, 18, " www. … com  "]
 ````````````````````````````````
 
+
+## Issue xxx-3
+
+Issue xxx-3, pre and code have spaces between them in generated html for fenced code, but only
+with pass-through html writer option
+
+```````````````````````````````` example(Issue xxx-3: 1) options(pass-through)
+* Fix: back tab changes indent to wrong prefix, causing to mess up the list, caret marked by
+  `|`:
+
+  ```markdown
+  7. Element types are:
+     1. class - sub-types: 
+        1. class, 
+        2. interface, 
+        3. enum, 
+        4. singleton (effectively constructor becomes private)
+     2. static member - sub-types: 
+        1. field, function,
+           1. | 
+     3. member - all variations: constructor, field, function,
+  ```
+.
+<ul>
+<li>
+<p>Fix: back tab changes indent to wrong prefix, causing to mess up the list, caret marked by
+<code>|</code>:</p>
+<pre><code class="language-markdown">7. Element types are:
+   1. class - sub-types: 
+      1. class, 
+      2. interface, 
+      3. enum, 
+      4. singleton (effectively constructor becomes private)
+   2. static member - sub-types: 
+      1. field, function,
+         1. | 
+   3. member - all variations: constructor, field, function,
+</code></pre>
+</li>
+</ul>
+.
+Document[0, 439]
+  BulletList[0, 439] isLoose
+    BulletListItem[0, 439] open:[0, 1, "*"] isLoose hadBlankLineAfter
+      Paragraph[2, 100] isTrailingBlankLine
+        Text[2, 92] chars:[2, 92, "Fix:  … ed by"]
+        SoftLineBreak[92, 93]
+        Code[95, 98] textOpen:[95, 96, "`"] text:[96, 97, "|"] textClose:[97, 98, "`"]
+          Text[96, 97] chars:[96, 97, "|"]
+        Text[98, 99] chars:[98, 99, ":"]
+      FencedCodeBlock[103, 439] open:[103, 106, "```"] info:[106, 114, "markdown"] content:[117, 434] lines[10] close:[436, 439, "```"]
+        Text[117, 434] chars:[117, 434, "7. El … ion,\n"]
+````````````````````````````````
+
+

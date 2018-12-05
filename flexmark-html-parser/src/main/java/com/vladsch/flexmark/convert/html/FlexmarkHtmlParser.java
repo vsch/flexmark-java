@@ -1444,7 +1444,7 @@ public class FlexmarkHtmlParser {
         skip();
         pushState(table);
 
-        myTable = new Table(myOptions.tableOptions);
+        myTable = new Table(myOptions.tableOptions, "", "");
         myTableSuppressColumns = false;
 
         Node item;

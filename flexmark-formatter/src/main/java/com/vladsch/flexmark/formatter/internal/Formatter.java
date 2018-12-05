@@ -74,6 +74,9 @@ public class Formatter implements IRender {
     //public static final DataKey<TrailingSpaces> KEEP_TRAILING_SPACES = new DataKey<TrailingSpaces>("KEEP_TRAILING_SPACES", TrailingSpaces.KEEP_LINE_BREAK);
     //public static final DataKey<TrailingSpaces> CODE_KEEP_TRAILING_SPACES = new DataKey<TrailingSpaces>("CODE_KEEP_TRAILING_SPACES", TrailingSpaces.KEEP_ALL);
     public static final DataKey<CharWidthProvider> CHAR_WIDTH_PROVIDER = TableFormatOptions.CHAR_WIDTH_PROVIDER;
+    public static final DataKey<TableCaptionHandling> FORMAT_TABLE_CAPTION = TableFormatOptions.FORMAT_TABLE_CAPTION;
+    public static final DataKey<DiscretionaryText> FORMAT_TABLE_CAPTION_SPACES = TableFormatOptions.FORMAT_TABLE_CAPTION_SPACES;
+    public static final DataKey<String> FORMAT_TABLE_INDENT_PREFIX = TableFormatOptions.FORMAT_TABLE_INDENT_PREFIX;
 
     // formatter family override
     public static final DataKey<ParserEmulationProfile> FORMATTER_EMULATION_PROFILE = new DynamicDefaultKey<ParserEmulationProfile>("FORMATTER_EMULATION_PROFILE", Parser.PARSER_EMULATION_PROFILE);

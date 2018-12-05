@@ -2851,7 +2851,6 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 [holgerbrandl/pasteimages]: https://github.com/holgerbrandl/pasteimages
 
 .
-
 <h2 id="markdown-navigator">Markdown Navigator</h2>
 <h3 id="version-history">Version History</h3>
 <ul>

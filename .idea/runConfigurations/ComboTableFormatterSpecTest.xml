@@ -1,14 +1,12 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="ComboTableFormatterSpecTest" type="JUnit" factoryName="JUnit" folderName="Format" singleton="true" nameIsGenerated="true">
-    <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+    <module name="flexmark-ext-tables" />
+    <extension name="coverage">
       <pattern>
-        <option name="PATTERN" value="com.vladsch.flexmark.ext.tables.*" />
+        <option name="PATTERN" value="com.vladsch.flexmark.util.format.options.*" />
         <option name="ENABLED" value="true" />
       </pattern>
     </extension>
-    <module name="flexmark-ext-tables" />
-    <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-    <option name="ALTERNATIVE_JRE_PATH" />
     <option name="PACKAGE_NAME" value="com.vladsch.flexmark.ext.tables" />
     <option name="MAIN_CLASS_NAME" value="com.vladsch.flexmark.ext.tables.ComboTableFormatterSpecTest" />
     <option name="METHOD_NAME" value="" />
@@ -16,13 +14,8 @@
     <option name="VM_PARAMETERS" value="" />
     <option name="PARAMETERS" value="" />
     <option name="WORKING_DIRECTORY" value="" />
-    <option name="ENV_VARIABLES" />
-    <option name="PASS_PARENT_ENVS" value="true" />
-    <option name="TEST_SEARCH_SCOPE">
-      <value defaultName="singleModule" />
-    </option>
-    <envs />
-    <patterns />
-    <method />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
   </configuration>
 </component>

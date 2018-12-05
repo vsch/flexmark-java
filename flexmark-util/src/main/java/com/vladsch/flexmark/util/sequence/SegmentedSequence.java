@@ -35,7 +35,7 @@ public final class SegmentedSequence extends BasedSequenceImpl {
             }
             return 0;
         }
-        return iMax > 0 ? (baseStartOffset < iMax ? baseOffsets[baseStartOffset] : baseOffsets[iMax-1]) : 0;
+        return iMax > 0 ? (baseStartOffset < iMax ? baseOffsets[baseStartOffset] : baseOffsets[iMax - 1]) : 0;
     }
 
     public int getEndOffset() {
@@ -49,7 +49,7 @@ public final class SegmentedSequence extends BasedSequenceImpl {
         }
 
         // ensure that 0 length end returns start
-        if (length == 0) return iMax > 0 ? (baseStartOffset < iMax ? baseOffsets[baseStartOffset] : baseOffsets[iMax-1]) : 0;
+        if (length == 0) return iMax > 0 ? (baseStartOffset < iMax ? baseOffsets[baseStartOffset] : baseOffsets[iMax - 1]) : 0;
         return iMax > 0 ? (baseStartOffset + length <= iMax ? baseOffsets[baseStartOffset + length - 1] + 1 : baseOffsets[baseStartOffset + iMax - 1] + 1) : 0;
     }
 
@@ -153,16 +153,20 @@ public final class SegmentedSequence extends BasedSequenceImpl {
 
         BasedSequence base = segments.size() > 0 ? segments.get(0).getBaseSequence() : SubSequence.NULL;
 
-        for (BasedSequence basedSequence : segments) {
-            assert base.getBase() == basedSequence.getBase() : "all segments must come from the same base sequence";
-            assert basedSequence.getStartOffset() >= length : "segments must be in increasing index order from base sequence start=" + basedSequence.getStartOffset() + ", length=" + length;
-            length += basedSequence.length();
+        int index = 0;
+        int lastEnd = base.getStartOffset();
+        for (BasedSequence segment : segments) {
+            assert base.getBase() == segment.getBase() : "all segments must come from the same base sequence, segments[" + index + "], length so far: " + length;
+            assert segment.getStartOffset() >= lastEnd : "segments must be in increasing index order from base sequence start=" + segment.getStartOffset() + ", length=" + length + " at index: " + index;
+            lastEnd = segment.getEndOffset();
+            length += segment.length();
+            index++;
         }
 
         this.baseStartOffset = 0;
         this.length = length;
         this.baseOffsets = new int[length];
-        length = 0;
+        int len = 0;
         StringBuilder sb = null;
 
         for (BasedSequence basedSequence : segments) {
@@ -176,10 +180,11 @@ public final class SegmentedSequence extends BasedSequenceImpl {
                     offset = -sb.length();
                 }
 
-                this.baseOffsets[ci + length] = offset;
+                assert ci + len < this.baseOffsets.length : "Incorrect array size calculation: length: " + length + " ci + len: " + (ci + len);
+                this.baseOffsets[ci + len] = offset;
             }
 
-            length += ciMax;
+            len += ciMax;
         }
 
         if (sb != null) {

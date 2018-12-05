@@ -32,7 +32,7 @@
       </option>
     </JavaCodeStyleSettings>
     <MarkdownNavigatorCodeStyleSettings>
-      <option name="WRAP_ON_TYPING" value="1" />
+      <option name="WRAP_ON_TYPING" value="0" />
       <option name="KEEP_BLANK_LINES" value="1" />
       <option name="KEEP_TRAILING_SPACES" value="0" />
       <option name="FORMAT_WITH_SOFT_WRAP" value="2" />
@@ -52,7 +52,6 @@
       <option name="ABBREVIATIONS_SORT" value="2" />
       <option name="FOOTNOTE_SORT" value="2" />
       <option name="REFERENCE_SORT" value="2" />
-      <option name="SMART_EDIT_TABLES" value="true" />
       <option name="TOC_FORMAT_ON_SAVE" value="true" />
       <option name="TOC_GENERATE_TEXT_ONLY" value="true" />
       <option name="TOC_TITLE_LEVEL" value="3" />

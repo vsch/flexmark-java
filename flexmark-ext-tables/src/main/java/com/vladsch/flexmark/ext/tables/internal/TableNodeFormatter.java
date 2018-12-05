@@ -3,10 +3,12 @@ package com.vladsch.flexmark.ext.tables.internal;
 import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.ast.Paragraph;
 import com.vladsch.flexmark.ast.Text;
+import com.vladsch.flexmark.ast.util.Parsing;
 import com.vladsch.flexmark.ext.tables.*;
 import com.vladsch.flexmark.formatter.CustomNodeFormatter;
 import com.vladsch.flexmark.formatter.TranslatingSpanRender;
 import com.vladsch.flexmark.formatter.internal.*;
+import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.format.Table;
 import com.vladsch.flexmark.util.format.TableFormatOptions;
 import com.vladsch.flexmark.util.html.CellAlignment;
@@ -21,13 +23,17 @@ import static com.vladsch.flexmark.formatter.RenderPurpose.FORMAT;
 
 public class TableNodeFormatter implements NodeFormatter {
     private final TableFormatOptions options;
-    Pattern TABLE_HEADER_SEPARATOR;
+    private final boolean isIntellijDummyIdentifier;
+    private final String intellijDummyIdentifier;
+    private final String linePrefix;
 
     private Table myTable;
 
     public TableNodeFormatter(DataHolder options) {
         this.options = new TableFormatOptions(options);
-        this.TABLE_HEADER_SEPARATOR = TableParagraphPreProcessor.getTableHeaderSeparator(TablesExtension.MIN_SEPARATOR_DASHES.getFrom(options));
+        linePrefix = TablesExtension.FORMAT_TABLE_INDENT_PREFIX.getFrom(options);
+        isIntellijDummyIdentifier = Parser.INTELLIJ_DUMMY_IDENTIFIER.getFrom(options);
+        intellijDummyIdentifier = isIntellijDummyIdentifier ? Parsing.INTELLIJ_DUMMY_IDENTIFIER : "";
     }
 
     @Override
@@ -90,7 +96,7 @@ public class TableNodeFormatter implements NodeFormatter {
     }
 
     private void render(final TableBlock node, final NodeFormatterContext context, MarkdownWriter markdown) {
-        myTable = new Table(options);
+        myTable = new Table(options, linePrefix, intellijDummyIdentifier);
 
         switch (context.getRenderPurpose()) {
             case TRANSLATION_SPANS:
@@ -157,7 +163,7 @@ public class TableNodeFormatter implements NodeFormatter {
 
     private void render(final TableCell node, final NodeFormatterContext context, MarkdownWriter markdown) {
         if (context.getRenderPurpose() == FORMAT) {
-            myTable.addCell(new Table.TableCell(node.getOpeningMarker(), node.getText(), node.getClosingMarker(), 1, node.getSpan(), node.getAlignment() == null ? CellAlignment.NONE : node.getAlignment().cellAlignment()));
+            myTable.addCell(new Table.TableCell(node.getOpeningMarker(), options.trimCellWhitespace ? node.getText().trim() : node.getText(), node.getClosingMarker(), 1, node.getSpan(), node.getAlignment() == null ? CellAlignment.NONE : node.getAlignment().cellAlignment()));
         } else {
             if (node.getPrevious() == null) {
                 if (options.leadTrailPipes && node.getOpeningMarker().isEmpty()) markdown.append('|');

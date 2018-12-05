@@ -568,9 +568,7 @@ public class Utils {
     }
 
     public static <K, V> Map<K, V> withDefaults(Map<K, V> receiver, Map<K, V> defaults) {
-        HashMap<K, V> map = new HashMap<K, V>();
-
-        map.putAll(receiver);
+        HashMap<K, V> map = new HashMap<K, V>(receiver);
         for (final Map.Entry<K, V> entry : defaults.entrySet()) {
             putIfMissing(map, entry.getKey(), new RunnableValue<V>() {
                 @Override

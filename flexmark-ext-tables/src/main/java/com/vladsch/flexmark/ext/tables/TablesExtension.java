@@ -10,6 +10,7 @@ import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.format.TableFormatOptions;
 import com.vladsch.flexmark.util.format.options.DiscretionaryText;
+import com.vladsch.flexmark.util.format.options.TableCaptionHandling;
 import com.vladsch.flexmark.util.mappers.CharWidthProvider;
 import com.vladsch.flexmark.util.options.DataKey;
 import com.vladsch.flexmark.util.options.MutableDataHolder;
@@ -32,24 +33,31 @@ public class TablesExtension implements Parser.ParserExtension, HtmlRenderer.Htm
     public static final DataKey<Integer> MIN_SEPARATOR_DASHES = new DataKey<Integer>("MIN_SEPARATOR_DASHES", 3);
     public static final DataKey<Boolean> APPEND_MISSING_COLUMNS = new DataKey<Boolean>("APPEND_MISSING_COLUMNS", false);
     public static final DataKey<Boolean> DISCARD_EXTRA_COLUMNS = new DataKey<Boolean>("DISCARD_EXTRA_COLUMNS", false);
-    public static final DataKey<Boolean> TRIM_CELL_WHITESPACE = new DataKey<Boolean>("TRIM_CELL_WHITESPACE", true);
     public static final DataKey<Boolean> COLUMN_SPANS = new DataKey<Boolean>("COLUMN_SPANS", true);
     public static final DataKey<Boolean> HEADER_SEPARATOR_COLUMN_MATCH = new DataKey<Boolean>("HEADER_SEPARATOR_COLUMN_MATCH", false);
     public static final DataKey<String> CLASS_NAME = new DataKey<String>("CLASS_NAME", "");
     public static final DataKey<Boolean> WITH_CAPTION = new DataKey<Boolean>("WITH_CAPTION", true);
     public static final DataKey<Boolean> MULTI_LINE_ROWS = new DataKey<Boolean>("MULTI_LINE_ROWS", false);
 
-    // format options copy from TableFormatOptions for convenience
+    // format options copy from TableFormatOptions
+    public static final DataKey<Boolean> TRIM_CELL_WHITESPACE = TableFormatOptions.TRIM_CELL_WHITESPACE;
     public static final DataKey<Boolean> FORMAT_LEAD_TRAIL_PIPES = TableFormatOptions.LEAD_TRAIL_PIPES;
     public static final DataKey<Boolean> FORMAT_SPACE_AROUND_PIPES = TableFormatOptions.SPACE_AROUND_PIPES;
     public static final DataKey<Boolean> FORMAT_ADJUST_COLUMN_WIDTH = TableFormatOptions.ADJUST_COLUMN_WIDTH;
     public static final DataKey<Boolean> FORMAT_APPLY_COLUMN_ALIGNMENT = TableFormatOptions.APPLY_COLUMN_ALIGNMENT;
     public static final DataKey<Boolean> FORMAT_FILL_MISSING_COLUMNS = TableFormatOptions.FILL_MISSING_COLUMNS;
+    
     public static final DataKey<Boolean> FORMAT_REMOVE_CAPTION = TableFormatOptions.REMOVE_CAPTION;
+    
     public static final DataKey<DiscretionaryText> FORMAT_LEFT_ALIGN_MARKER = TableFormatOptions.LEFT_ALIGN_MARKER;
     public static final DataKey<Integer> FORMAT_MIN_SEPARATOR_COLUMN_WIDTH = TableFormatOptions.MIN_SEPARATOR_COLUMN_WIDTH;
     public static final DataKey<Integer> FORMAT_MIN_SEPARATOR_DASHES = TableFormatOptions.MIN_SEPARATOR_DASHES;
     public static final DataKey<CharWidthProvider> FORMAT_CHAR_WIDTH_PROVIDER = TableFormatOptions.CHAR_WIDTH_PROVIDER;
+    
+    // TODO: implement
+    public static final DataKey<TableCaptionHandling> FORMAT_TABLE_CAPTION = TableFormatOptions.FORMAT_TABLE_CAPTION;
+    public static final DataKey<DiscretionaryText> FORMAT_TABLE_CAPTION_SPACES = TableFormatOptions.FORMAT_TABLE_CAPTION_SPACES;
+    public static final DataKey<String> FORMAT_TABLE_INDENT_PREFIX = TableFormatOptions.FORMAT_TABLE_INDENT_PREFIX;
 
     public static Extension create() {
         return new TablesExtension();

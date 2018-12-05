@@ -268,6 +268,8 @@ flexmark-java
 * Change: some breaking changes to FormattingAppendableImpl derived constructors. Now all
   arguments must be passed, no defaults. It was getting too messy to trace which constructors
   were used and what were the resulting options for the appendable.
+* Fix: with `HtmlRenderer.FORMAT_FLAGS` set to `HtmlRenderer.PASS_THROUGH` pre-formatted would
+  incorrectly add indent spaces.
 * Fix: optimized HTML rendering with `HtmlRenderer.FORMAT_FLAGS` set to
   `HtmlRenderer.PASS_THROUGH`, no fancy output formatting other than line breaks but 7x faster
   than using standard fancy formatting output.

@@ -384,13 +384,47 @@ public class ImageUtils {
         return output;
     }
 
+    public static BufferedImage drawOval(BufferedImage image, int x, int y, int w, int h, Color borderColor, int borderWidth, float[] dash, float dashPhase) {
+        BufferedImage output = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_INT_ARGB);
+        //BufferedImage output = UIUtil.createImage(w, h, BufferedImage.TYPE_INT_ARGB);
+
+        Graphics2D g2 = output.createGraphics();
+        boolean invert = borderColor == null;
+
+        if (invert) {
+            // invert
+            final int rgb = image.getRGB(x + w / 2, y + h / 2);
+            borderColor = Color.getColor("", ~(rgb & 0xFFFFFF));
+        }
+
+        g2.drawImage(image, 0, 0, null);
+        //UIUtil.drawImage(g2, image, 0, 0, null);
+        if (dash != null) {
+            g2.setStroke(new BasicStroke(borderWidth, BasicStroke.CAP_SQUARE, BasicStroke.JOIN_MITER, borderWidth, dash, dashPhase));
+        } else {
+            g2.setStroke(new BasicStroke(borderWidth, BasicStroke.CAP_SQUARE, BasicStroke.JOIN_MITER, borderWidth));
+        }
+
+        g2.setRenderingHint(
+                RenderingHints.KEY_ANTIALIASING,
+                RenderingHints.VALUE_ANTIALIAS_ON
+        );
+
+        if (invert) {
+            //g2.setXORMode(Color.WHITE);
+        }
+
+        g2.setColor(borderColor);
+        g2.drawOval(x, y, w, h);
+        g2.dispose();
+        return output;
+    }
+
     public static BufferedImage drawHighlightRectangle(
             BufferedImage image,
             int x, int y, int w, int h,
             Color borderColor, int borderWidth, int cornerRadius,
-            Color innerFillColor,
-            Color outerFillColor,
-            final int outerCornerRadius
+            Color innerFillColor
     ) {
         //BufferedImage output = UIUtil.createImage(w, h, BufferedImage.TYPE_INT_ARGB);
         //noinspection UndesirableClassUsage
@@ -406,26 +440,10 @@ public class ImageUtils {
         );
 
         boolean innerFilled = innerFillColor.getAlpha() != 0;
-        boolean outerFilled = outerFillColor.getAlpha() != 0;
 
-        if (outerFilled) {
-            g2.setColor(outerFillColor);
-            if (outerCornerRadius > 0) {
-                g2.fillRoundRect(0, 0, imgW, imgH, outerCornerRadius, outerCornerRadius);
-            } else {
-                g2.fillRect(0, 0, imgW, imgH);
-            }
-        } else {
-            g2.drawImage(image, 0, 0, null);
-        }
+        g2.drawImage(image, 0, 0, null);
 
         if (cornerRadius > 0) {
-            if (outerFilled) {
-                g2.setColor(TRANSPARENT);
-                g2.setComposite(AlphaComposite.Src);
-                g2.fillRoundRect(minLimit(0, x - borderWidth / 2), minLimit(0, y - borderWidth / 2), w + borderWidth, h + borderWidth, cornerRadius + borderWidth, cornerRadius + borderWidth);
-            }
-
             if (innerFilled) {
                 g2.setColor(innerFillColor);
                 g2.fillRoundRect(x, y, w, h, cornerRadius, cornerRadius);
@@ -437,12 +455,6 @@ public class ImageUtils {
                 g2.drawRoundRect(x, y, w, h, cornerRadius, cornerRadius);
             }
         } else {
-            if (outerFilled) {
-                g2.setColor(TRANSPARENT);
-                g2.setComposite(AlphaComposite.Src);
-                g2.fillRect(minLimit(0, x - borderWidth / 2), minLimit(0, y - borderWidth / 2), w + borderWidth, h + borderWidth);
-            }
-
             if (innerFilled) {
                 g2.setColor(innerFillColor);
                 g2.fillRect(x, y, w, h);
@@ -455,10 +467,42 @@ public class ImageUtils {
             }
         }
 
-        if (outerFilled) {
-            // combine with image
-            g2.setComposite(AlphaComposite.DstOver);
-            g2.drawImage(image, 0, 0, null);
+        g2.dispose();
+        return output;
+    }
+
+    public static BufferedImage drawHighlightOval(
+            BufferedImage image,
+            int x, int y, int w, int h,
+            Color borderColor, int borderWidth,
+            Color innerFillColor
+    ) {
+        //BufferedImage output = UIUtil.createImage(w, h, BufferedImage.TYPE_INT_ARGB);
+        //noinspection UndesirableClassUsage
+        BufferedImage output = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_INT_ARGB);
+        int imgW = image.getWidth();
+        int imgH = image.getHeight();
+
+        Graphics2D g2 = output.createGraphics();
+
+        g2.setRenderingHint(
+                RenderingHints.KEY_ANTIALIASING,
+                RenderingHints.VALUE_ANTIALIAS_ON
+        );
+
+        boolean innerFilled = innerFillColor.getAlpha() != 0;
+
+        g2.drawImage(image, 0, 0, null);
+
+        if (innerFilled) {
+            g2.setColor(innerFillColor);
+            g2.fillOval(x, y, w, h);
+        }
+
+        if (borderWidth > 0) {
+            g2.setColor(borderColor);
+            g2.setStroke(new BasicStroke(borderWidth, BasicStroke.CAP_SQUARE, BasicStroke.JOIN_MITER, borderWidth));
+            g2.drawOval(x, y, w, h);
         }
 
         g2.dispose();
@@ -512,6 +556,58 @@ public class ImageUtils {
             g2.setComposite(AlphaComposite.Src);
             g2.fillRect(minLimit(0, x - borderWidth / 2), minLimit(0, y - borderWidth / 2), w + borderWidth, h + borderWidth);
         }
+
+        if (applyToImage) {
+            // combine with image
+            g2.setComposite(AlphaComposite.DstOver);
+            g2.drawImage(image, 0, 0, null);
+        }
+
+        g2.dispose();
+        return output;
+    }
+
+    public static BufferedImage punchOuterHighlightOval(
+            BufferedImage image,
+            BufferedImage outerImage,
+            int x, int y, int w, int h,
+            Color borderColor, int borderWidth,
+            Color innerFillColor,
+            Color outerFillColor,
+            final int outerCornerRadius,
+            boolean applyToImage
+    ) {
+        //BufferedImage output = UIUtil.createImage(w, h, BufferedImage.TYPE_INT_ARGB);
+        boolean outerFilled = outerFillColor.getAlpha() != 0;
+        if (!outerFilled) {
+            return outerImage;
+        }
+
+        //noinspection UndesirableClassUsage
+        BufferedImage output = outerImage != null ? outerImage : new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_INT_ARGB);
+        int imgW = image.getWidth();
+        int imgH = image.getHeight();
+
+        Graphics2D g2 = output.createGraphics();
+
+        g2.setRenderingHint(
+                RenderingHints.KEY_ANTIALIASING,
+                RenderingHints.VALUE_ANTIALIAS_ON
+        );
+
+        if (outerImage == null) {
+            // first one, we need to fill it
+            g2.setColor(outerFillColor);
+            if (outerCornerRadius > 0) {
+                g2.fillRoundRect(0, 0, imgW, imgH, outerCornerRadius, outerCornerRadius);
+            } else {
+                g2.fillRect(0, 0, imgW, imgH);
+            }
+        }
+
+        g2.setColor(TRANSPARENT);
+        g2.setComposite(AlphaComposite.Src);
+        g2.fillOval(minLimit(0, x - borderWidth / 2), minLimit(0, y - borderWidth / 2), w + borderWidth, h + borderWidth);
 
         if (applyToImage) {
             // combine with image

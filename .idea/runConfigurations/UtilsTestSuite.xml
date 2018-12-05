@@ -1,6 +1,6 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="UtilsTestSuite" type="JUnit" factoryName="JUnit" singleton="true" nameIsGenerated="true">
-    <module name="plugin-utils" />
+    <module name="flexmark-util" />
     <extension name="coverage">
       <pattern>
         <option name="PATTERN" value="com.vladsch.flexmark.internal.util.*" />
@@ -10,6 +10,7 @@
     <option name="PACKAGE_NAME" value="com.vladsch.flexmark.util" />
     <option name="MAIN_CLASS_NAME" value="com.vladsch.flexmark.util.UtilsTestSuite" />
     <option name="METHOD_NAME" value="" />
+    <option name="TEST_OBJECT" value="class" />
     <option name="PARAMETERS" value="" />
     <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
     <method v="2">

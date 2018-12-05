@@ -80,6 +80,7 @@ public class ComboIssuesSpecTest extends ComboSpecTestCase {
         optionsMap.put("fixed-indent", new MutableDataSet().setFrom(ParserEmulationProfile.FIXED_INDENT));
         optionsMap.put("html-comment-full-lines", new MutableDataSet().set(Parser.HTML_BLOCK_COMMENT_ONLY_FULL_LINE, true));
         optionsMap.put("allow-javascript", new MutableDataSet().set(HtmlRenderer.SUPPRESSED_LINKS, ""));
+        optionsMap.put("pass-through", new MutableDataSet().set(HtmlRenderer.FORMAT_FLAGS, HtmlRenderer.PASS_THROUGH));
 
         final List<String> customHtmlBlockTags = new ArrayList<>(Parser.HTML_BLOCK_TAGS.getFrom(null));
         customHtmlBlockTags.add("warp10-warpscript-widget");

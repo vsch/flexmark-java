@@ -188,7 +188,9 @@ public class FormattingAppendableImpl implements FormattingAppendable {
 
     private void setPendingEOL(int pendingEOL) {
         if (myPassThrough) {
-            myPendingEOL = pendingEOL;
+            if (myAppendable.getLength() > 0) {
+                myPendingEOL = pendingEOL;
+            }
         } else {
             if (myPreFormattedNesting == 0 && pendingEOL > myPendingEOL) {
                 if (myModCountOfLastEOL != myModCount) {
@@ -350,6 +352,7 @@ public class FormattingAppendableImpl implements FormattingAppendable {
                 myAppendable.append('\n');
             }
             myPendingEOL = 0;
+            myModCount++;
             myAppendable.append(c);
             return;
         }
@@ -399,6 +402,7 @@ public class FormattingAppendableImpl implements FormattingAppendable {
             }
             ////myModCountOfLastEOL = myModCount++;
             myPendingEOL = 0;
+            myModCount++;
             myAppendable.append(csq, start, end);
             return;
         }

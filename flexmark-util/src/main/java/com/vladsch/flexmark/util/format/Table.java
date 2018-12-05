@@ -26,21 +26,29 @@ public class Table {
     private BasedSequence captionClose;
     private boolean isHeading;
     private boolean isSeparator;
+    private final boolean isIntellijDummyIdentifier;
+    private final String intellijDummyIdentifier;
+    private final String colonTrimChars;
+    private final String linePrefix;
 
     public CellAlignment[] alignments;
     public int[] columnWidths;
 
-    public Table(DataHolder options) {
-        this(new TableFormatOptions(options));
+    public Table(DataHolder options, String linePrefix, String intellijDummyIdentifier) {
+        this(new TableFormatOptions(options), linePrefix, intellijDummyIdentifier);
     }
 
-    public Table(TableFormatOptions options) {
+    public Table(TableFormatOptions options, String linePrefix, String intellijDummyIdentifier) {
         heading = new TableSection();
         separator = new TableSection();
         body = new TableSection();
         isHeading = true;
         isSeparator = false;
         this.options = options;
+        isIntellijDummyIdentifier = !intellijDummyIdentifier.isEmpty();
+        this.intellijDummyIdentifier = intellijDummyIdentifier;
+        colonTrimChars = ":" + intellijDummyIdentifier;
+        this.linePrefix = linePrefix;
     }
 
     public boolean isHeading() {
@@ -353,7 +361,8 @@ public class Table {
             for (TableCell cell : separator.rows.get(0).cells) {
                 CellAlignment alignment = adjustCellAlignment(cell.alignment);
                 int colonCount = alignment == CellAlignment.LEFT || alignment == CellAlignment.RIGHT ? 1 : alignment == CellAlignment.CENTER ? 2 : 0;
-                int dashCount = cell.text.trim(":").length();
+                BasedSequence trim = cell.text.trim(colonTrimChars);
+                int dashCount = trim.length();
                 int dashesOnly = Utils.minLimit(dashCount, options.minSeparatorColumnWidth - colonCount, options.minSeparatorDashes);
                 if (dashCount < dashesOnly) dashCount = dashesOnly;
                 int width = dashCount * options.dashWidth + colonCount * options.colonWidth + options.pipeWidth;
@@ -439,6 +448,9 @@ public class Table {
                 int j = 0;
                 int jSpan = 0;
                 delta.value = 0;
+                
+                out.append(linePrefix);
+                
                 for (TableCell cell : row.cells) {
                     if (j == 0) {
                         if (options.leadTrailPipes) {
@@ -472,6 +484,8 @@ public class Table {
         }
 
         {
+            out.append(linePrefix);
+            
             int j = 0;
             delta.value = 0;
             for (CellAlignment alignment : alignments) {
@@ -486,18 +500,75 @@ public class Table {
                     delta.value -= options.dashWidth;
                 }
 
-                if (options.leadTrailPipes && j == 0) out.append('|');
-                if (alignment1 == CellAlignment.LEFT || alignment1 == CellAlignment.CENTER) out.append(':');
-                out.repeat('-', dashCount);
-                if (alignment1 == CellAlignment.RIGHT || alignment1 == CellAlignment.CENTER) out.append(':');
-                j++;
-                if (options.leadTrailPipes || j < alignments.length) out.append('|');
+                boolean handled = false;
+
+                if (isIntellijDummyIdentifier) {
+                    int intellijPos = -1;
+                    BasedSequence cellText = BasedSequence.NULL;
+
+                    if (separator.rows.size() > 0) {
+                        List<TableCell> cells = separator.rows.get(0).cells;
+                        if (j < cells.size()) {
+                            cellText = cells.get(j).text;
+                        }
+                    }
+
+                    intellijPos = cellText.indexOf(intellijDummyIdentifier.charAt(0));
+
+                    if (intellijPos != -1) {
+                        if (options.leadTrailPipes && j == 0) out.append('|');
+
+                        if (alignment1 == CellAlignment.LEFT || alignment1 == CellAlignment.CENTER) out.append(':');
+
+                        if (intellijPos == 0) {
+                            out.append(intellijDummyIdentifier);
+                            intellijPos = -1;
+                            out.repeat('-', dashCount);
+                        } else if (intellijPos < dashCount) {
+                            out.repeat('-', intellijPos);
+                            out.append(intellijDummyIdentifier);
+                            out.repeat('-', dashCount - intellijPos);
+                            intellijPos = -1;
+                        } else {
+                            out.repeat('-', dashCount);
+                        }
+                        
+                        if (intellijPos != -1) {
+                            // last chance, we put it at the end
+                            out.append(intellijDummyIdentifier);
+                            intellijPos = -1;
+                        }
+                        
+                        if (alignment1 == CellAlignment.RIGHT || alignment1 == CellAlignment.CENTER) out.append(':');
+
+                        j++;
+                        if (options.leadTrailPipes || j < alignments.length) out.append('|');
+                        handled = true;
+                    }
+                }
+
+                if (!handled) {
+                    if (options.leadTrailPipes && j == 0) out.append('|');
+                    if (alignment1 == CellAlignment.LEFT || alignment1 == CellAlignment.CENTER) out.append(':');
+
+                    if (isIntellijDummyIdentifier) {
+                        // more work, we need to insert the id if it was in the separator 
+                    } else {
+
+                    }
+                    out.repeat('-', dashCount);
+                    if (alignment1 == CellAlignment.RIGHT || alignment1 == CellAlignment.CENTER) out.append(':');
+                    j++;
+                    if (options.leadTrailPipes || j < alignments.length) out.append('|');
+                }
             }
             out.line();
         }
 
         if (body.rows.size() > 0) {
             for (TableRow row : body.rows) {
+                out.append(linePrefix);
+                
                 int j = 0;
                 int jSpan = 0;
                 delta.value = 0;

@@ -4,9 +4,11 @@ import com.vladsch.flexmark.ast.Block;
 import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.ast.NodeIterator;
 import com.vladsch.flexmark.ast.Paragraph;
+import com.vladsch.flexmark.ast.util.Parsing;
 import com.vladsch.flexmark.ext.tables.*;
 import com.vladsch.flexmark.internal.ReferencePreProcessorFactory;
 import com.vladsch.flexmark.parser.InlineParser;
+import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.block.CharacterNodeFactory;
 import com.vladsch.flexmark.parser.block.ParagraphPreProcessor;
 import com.vladsch.flexmark.parser.block.ParagraphPreProcessorFactory;
@@ -18,13 +20,6 @@ import java.util.*;
 import java.util.regex.Pattern;
 
 public class TableParagraphPreProcessor implements ParagraphPreProcessor {
-    private static final String COL3 = "(?:" + "\\s*-{3,}\\s*|\\s*:-{2,}\\s*|\\s*-{2,}:\\s*|\\s*:-+:\\s*" + ")";
-    private static final Pattern TABLE_HEADER_SEPARATOR3 = Pattern.compile(
-            // For single column, require at least one pipe, otherwise it's ambiguous with setext headers
-            "\\|" + COL3 + "\\|?\\s*" + "|" +
-                    COL3 + "\\|\\s*" + "|" +
-                    "\\|?" + "(?:" + COL3 + "\\|)+" + COL3 + "\\|?\\s*");
-
     private static BitSet pipeCharacters = new BitSet(1);
     private static BitSet separatorCharacters = new BitSet(3);
     static {
@@ -87,30 +82,34 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
     }
 
     private final TableParserOptions options;
+    private final boolean isIntellijDummyIdentifier;
+    private final String intellijDummyIdentifier;
     Pattern TABLE_HEADER_SEPARATOR;
 
-    public static Pattern getTableHeaderSeparator(int minColumnDashes) {
+    public static Pattern getTableHeaderSeparator(int minColumnDashes, String intellijDummyIdentifier) {
         int minCol = minColumnDashes >= 1 ? minColumnDashes : 1;
-        if (minCol == 3) {
-            return TABLE_HEADER_SEPARATOR3;
-        } else {
-            int minColDash = minColumnDashes >= 2 ? minColumnDashes - 1 : 1;
-            int minColDashes = minColumnDashes >= 3 ? minColumnDashes - 2 : 1;
-            String COL = String.format("(?:" + "\\s*-{%d,}\\s*|\\s*:-{%d,}\\s*|\\s*-{%d,}:\\s*|\\s*:-{%d,}:\\s*" + ")", minCol, minColDash, minColDash, minColDashes);
-            return Pattern.compile(
-                    "\\|" + COL + "\\|?\\s*" + "|" +
-                            COL + "\\|\\s*" + "|" +
-                            "\\|?" + "(?:" + COL + "\\|)+" + COL + "\\|?\\s*");
+        int minColDash = minColumnDashes >= 2 ? minColumnDashes - 1 : 1;
+        int minColDashes = minColumnDashes >= 3 ? minColumnDashes - 2 : 1;
+        String COL = String.format("(?:" + "\\s*-{%d,}\\s*|\\s*:-{%d,}\\s*|\\s*-{%d,}:\\s*|\\s*:-{%d,}:\\s*" + ")", minCol, minColDash, minColDash, minColDashes);
+
+        if (!intellijDummyIdentifier.isEmpty()) {
+            String add = Parsing.INTELLIJ_DUMMY_IDENTIFIER;
+            String sp = "(?:\\s" + add + "?)";
+            String ds = "(?:-" + add + "?)";
+            COL = COL.replace("\\s", sp).replace("-", ds);
         }
+
+        return Pattern.compile(
+                "\\|" + COL + "\\|?\\s*" + "|" +
+                        COL + "\\|\\s*" + "|" +
+                        "\\|?" + "(?:" + COL + "\\|)+" + COL + "\\|?\\s*");
     }
 
     private TableParagraphPreProcessor(DataHolder options) {
         this.options = new TableParserOptions(options);
-        this.TABLE_HEADER_SEPARATOR = getTableHeaderSeparator(this.options.minSeparatorDashes);
-    }
-
-    private TableParagraphPreProcessor(TableParserOptions options) {
-        this.options = options;
+        isIntellijDummyIdentifier = Parser.INTELLIJ_DUMMY_IDENTIFIER.getFrom(options);
+        intellijDummyIdentifier = isIntellijDummyIdentifier ? Parsing.INTELLIJ_DUMMY_IDENTIFIER : "";
+        this.TABLE_HEADER_SEPARATOR = getTableHeaderSeparator(this.options.minSeparatorDashes, intellijDummyIdentifier);
     }
 
     @Override
@@ -267,7 +266,7 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
 
                 if (closingMarker != null) tableCell.setClosingMarker(closingMarker);
                 tableCell.setChars(tableCell.getChildChars());
-                // TODO: Add option to keep cell whitespace, if yes, then convert it to text and merge adjacent text nodes
+                // option to keep cell whitespace, if yes, then convert it to text and merge adjacent text nodes
                 if (options.trimCellWhitespace) tableCell.trimWhiteSpace();
                 else tableCell.mergeWhiteSpace();
 
@@ -319,11 +318,12 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
         return tableBlock.getChars().length();
     }
 
-    private static List<TableCell.Alignment> parseAlignment(BasedSequence separatorLine) {
+    private List<TableCell.Alignment> parseAlignment(BasedSequence separatorLine) {
         List<BasedSequence> parts = split(separatorLine, false, false);
         List<TableCell.Alignment> alignments = new ArrayList<TableCell.Alignment>();
         for (BasedSequence part : parts) {
-            BasedSequence trimmed = part.trim();
+            BasedSequence cleaned = isIntellijDummyIdentifier ? part.replace(intellijDummyIdentifier, "") : part;
+            BasedSequence trimmed = cleaned.trim();
             boolean left = trimmed.startsWith(":");
             boolean right = trimmed.endsWith(":");
             TableCell.Alignment alignment = getAlignment(left, right);

@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
 import static com.vladsch.flexmark.parser.Parser.*;
 
 public class Parsing {
+    public static final String INTELLIJ_DUMMY_IDENTIFIER = "\u001f";
     public final String ADDITIONAL_CHARS;
     public final String EXCLUDED_0_TO_SPACE;
 
@@ -205,7 +206,7 @@ public class Parsing {
     }
 
     public String ADDITIONAL_CHARS() {
-        return intellijDummyIdentifier ? "\u001f" : "";
+        return intellijDummyIdentifier ? INTELLIJ_DUMMY_IDENTIFIER : "";
     }
 
     public String ADDITIONAL_CHARS_SET(String quantifier) {
