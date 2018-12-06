@@ -108,7 +108,7 @@ public class TableCell extends CustomNode implements DelimitedNode {
     public void getAstExtra(StringBuilder out) {
         if (alignment != null) out.append(" ").append(alignment);
         if (header) out.append(" header");
-        if (span > 1) out.append(" span");
+        if (span > 1) out.append(" span=" + span);
         delimitedSegmentSpanChars(out, openingMarker, text, closingMarker, "text");
     }
 

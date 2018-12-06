@@ -271,10 +271,10 @@ foo
 .
 Document[0, 14]
   AsideBlock[0, 6] marker:[0, 1, "|"]
-    FencedCodeBlock[2, 6] open:[2, 5, "```"] content:[6, 6] lines[0]
+    FencedCodeBlock[2, 6] open:[2, 5, "```"] lines[0]
   Paragraph[6, 10]
     Text[6, 9] chars:[6, 9, "foo"]
-  FencedCodeBlock[10, 14] open:[10, 13, "```"] content:[14, 14] lines[0]
+  FencedCodeBlock[10, 14] open:[10, 13, "```"] lines[0]
 ````````````````````````````````
 
 

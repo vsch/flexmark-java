@@ -1467,3 +1467,154 @@ Document[0, 439]
 ````````````````````````````````
 
 
+## Issue xxx-4
+
+Parsing a sub-sequence as the document input
+
+```````````````````````````````` example(Issue xxx-4: 1) options(sub-parse)
+* Fix: back tab changes indent to wrong prefix, causing to mess up the list, caret marked by
+  `|`:
+
+  ```markdown
+  7. Element types are:
+     1. class - sub-types: 
+        1. class, 
+        2. interface, 
+        3. enum, 
+        4. singleton (effectively constructor becomes private)
+     2. static member - sub-types: 
+        1. field, function,
+           1. | 
+     3. member - all variations: constructor, field, function,
+  ```
+.
+<ul>
+  <li>
+    <p>Fix: back tab changes indent to wrong prefix, causing to mess up the list, caret marked by
+    <code>|</code>:</p>
+    <pre><code class="language-markdown">7. Element types are:
+   1. class - sub-types: 
+      1. class, 
+      2. interface, 
+      3. enum, 
+      4. singleton (effectively constructor becomes private)
+   2. static member - sub-types: 
+      1. field, function,
+         1. | 
+   3. member - all variations: constructor, field, function,
+</code></pre>
+  </li>
+</ul>
+.
+Document[14, 454]
+  BulletList[14, 453] isLoose
+    BulletListItem[14, 453] open:[14, 15, "*"] isLoose hadBlankLineAfter
+      Paragraph[16, 114] isTrailingBlankLine
+        Text[16, 106] chars:[16, 106, "Fix:  … ed by"]
+        SoftLineBreak[106, 107]
+        Code[109, 112] textOpen:[109, 110, "`"] text:[110, 111, "|"] textClose:[111, 112, "`"]
+          Text[110, 111] chars:[110, 111, "|"]
+        Text[112, 113] chars:[112, 113, ":"]
+      FencedCodeBlock[117, 453] open:[117, 120, "```"] info:[120, 128, "markdown"] content:[131, 448] lines[10] close:[450, 453, "```"]
+        Text[131, 448] chars:[131, 448, "7. El … ion,\n"]
+````````````````````````````````
+
+
+```````````````````````````````` example(Issue xxx-4: 2) options(strip-indent)
+> > * Fix: back tab changes indent to wrong prefix, causing to mess up the list, caret marked by
+> >   `|`:
+> > 
+> >   ```markdown
+> >   7. Element types are:
+> >      1. class - sub-types: 
+> >         1. class, 
+> >         2. interface, 
+> >         3. enum, 
+> >         4. singleton (effectively constructor becomes private)
+> >      2. static member - sub-types: 
+> >         1. field, function,
+> >            1. | 
+> >      3. member - all variations: constructor, field, function,
+> >   ```
+.
+<ul>
+  <li>
+    <p>Fix: back tab changes indent to wrong prefix, causing to mess up the list, caret marked by
+    <code>|</code>:</p>
+    <pre><code class="language-markdown">7. Element types are:
+   1. class - sub-types: 
+      1. class, 
+      2. interface, 
+      3. enum, 
+      4. singleton (effectively constructor becomes private)
+   2. static member - sub-types: 
+      1. field, function,
+         1. | 
+   3. member - all variations: constructor, field, function,
+</code></pre>
+  </li>
+</ul>
+.
+Document[4, 499]
+  BulletList[4, 499] isLoose
+    BulletListItem[4, 499] open:[4, 5, "*"] isLoose hadBlankLineAfter
+      Paragraph[6, 108] isTrailingBlankLine
+        Text[6, 96] chars:[6, 96, "Fix:  … ed by"]
+        SoftLineBreak[96, 97]
+        Code[103, 106] textOpen:[103, 104, "`"] text:[104, 105, "|"] textClose:[105, 106, "`"]
+          Text[104, 105] chars:[104, 105, "|"]
+        Text[106, 107] chars:[106, 107, ":"]
+      FencedCodeBlock[119, 499] open:[119, 122, "```"] info:[122, 130, "markdown"] content:[137, 490] lines[10] close:[496, 499, "```"]
+        Text[137, 490] chars:[137, 490, "7. El … ion,\n"]
+````````````````````````````````
+
+
+```````````````````````````````` example(Issue xxx-4: 3) options(sub-parse, strip-indent)
+> > * Fix: back tab changes indent to wrong prefix, causing to mess up the list, caret marked by
+> >   `|`:
+> > 
+> >   ```markdown
+> >   7. Element types are:
+> >      1. class - sub-types: 
+> >         1. class, 
+> >         2. interface, 
+> >         3. enum, 
+> >         4. singleton (effectively constructor becomes private)
+> >      2. static member - sub-types: 
+> >         1. field, function,
+> >            1. | 
+> >      3. member - all variations: constructor, field, function,
+> >   ```
+.
+<ul>
+  <li>
+    <p>Fix: back tab changes indent to wrong prefix, causing to mess up the list, caret marked by
+    <code>|</code>:</p>
+    <pre><code class="language-markdown">7. Element types are:
+   1. class - sub-types: 
+      1. class, 
+      2. interface, 
+      3. enum, 
+      4. singleton (effectively constructor becomes private)
+   2. static member - sub-types: 
+      1. field, function,
+         1. | 
+   3. member - all variations: constructor, field, function,
+</code></pre>
+  </li>
+</ul>
+.
+Document[18, 514]
+  BulletList[18, 513] isLoose
+    BulletListItem[18, 513] open:[18, 19, "*"] isLoose hadBlankLineAfter
+      Paragraph[20, 122] isTrailingBlankLine
+        Text[20, 110] chars:[20, 110, "Fix:  … ed by"]
+        SoftLineBreak[110, 111]
+        Code[117, 120] textOpen:[117, 118, "`"] text:[118, 119, "|"] textClose:[119, 120, "`"]
+          Text[118, 119] chars:[118, 119, "|"]
+        Text[120, 121] chars:[120, 121, ":"]
+      FencedCodeBlock[133, 513] open:[133, 136, "```"] info:[136, 144, "markdown"] content:[151, 504] lines[10] close:[510, 513, "```"]
+        Text[151, 504] chars:[151, 504, "7. El … ion,\n"]
+````````````````````````````````
+
+

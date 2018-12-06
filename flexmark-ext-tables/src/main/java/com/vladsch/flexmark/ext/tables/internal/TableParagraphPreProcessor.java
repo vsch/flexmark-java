@@ -1,10 +1,6 @@
 package com.vladsch.flexmark.ext.tables.internal;
 
-import com.vladsch.flexmark.ast.Block;
-import com.vladsch.flexmark.ast.Node;
-import com.vladsch.flexmark.ast.NodeIterator;
-import com.vladsch.flexmark.ast.Paragraph;
-import com.vladsch.flexmark.ast.util.Parsing;
+import com.vladsch.flexmark.ast.*;
 import com.vladsch.flexmark.ext.tables.*;
 import com.vladsch.flexmark.internal.ReferencePreProcessorFactory;
 import com.vladsch.flexmark.parser.InlineParser;
@@ -19,14 +15,23 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 import java.util.*;
 import java.util.regex.Pattern;
 
+import static com.vladsch.flexmark.ast.util.Parsing.INTELLIJ_DUMMY_IDENTIFIER;
+
 public class TableParagraphPreProcessor implements ParagraphPreProcessor {
-    private static BitSet pipeCharacters = new BitSet(1);
-    private static BitSet separatorCharacters = new BitSet(3);
+    private static BitSet pipeCharacters = new BitSet();
+    private static BitSet separatorCharacters = new BitSet();
+    private static BitSet separatorWithIntelliJCharacters = new BitSet();
     static {
         pipeCharacters.set('|');
+
         separatorCharacters.set('|');
         separatorCharacters.set(':');
         separatorCharacters.set('-');
+
+        separatorWithIntelliJCharacters.set('|');
+        separatorWithIntelliJCharacters.set(':');
+        separatorWithIntelliJCharacters.set('-');
+        separatorWithIntelliJCharacters.set(INTELLIJ_DUMMY_IDENTIFIER.charAt(0));
     }
 
     private static HashMap<Character, CharacterNodeFactory> pipeNodeMap = new HashMap<Character, CharacterNodeFactory>();
@@ -41,6 +46,32 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
             @Override
             public boolean skipPrev(char c) {
                 return c == ' ' || c == '\t';
+                //return false;
+            }
+
+            @Override
+            public boolean wantSkippedWhitespace() {
+                return true;
+            }
+
+            @Override
+            public Node create() {
+                return new TableColumnSeparator();
+            }
+        });
+    }
+    private static HashMap<Character, CharacterNodeFactory> pipeIntelliJNodeMap = new HashMap<Character, CharacterNodeFactory>();
+    static {
+        pipeIntelliJNodeMap.put('|', new CharacterNodeFactory() {
+            @Override
+            public boolean skipNext(char c) {
+                return c == ' ' || c == '\t';
+                //return false;
+            }
+
+            @Override
+            public boolean skipPrev(char c) {
+                return c == ' ' || c == '\t' /*|| c == Parsing.INTELLIJ_DUMMY_IDENTIFIER.charAt(0)*/;
                 //return false;
             }
 
@@ -92,23 +123,26 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
         int minColDashes = minColumnDashes >= 3 ? minColumnDashes - 2 : 1;
         String COL = String.format("(?:" + "\\s*-{%d,}\\s*|\\s*:-{%d,}\\s*|\\s*-{%d,}:\\s*|\\s*:-{%d,}:\\s*" + ")", minCol, minColDash, minColDash, minColDashes);
 
-        if (!intellijDummyIdentifier.isEmpty()) {
-            String add = Parsing.INTELLIJ_DUMMY_IDENTIFIER;
-            String sp = "(?:\\s" + add + "?)";
-            String ds = "(?:-" + add + "?)";
-            COL = COL.replace("\\s", sp).replace("-", ds);
-        }
+        boolean noIntelliJ = intellijDummyIdentifier.isEmpty();
+        String add = noIntelliJ ? "" : INTELLIJ_DUMMY_IDENTIFIER;
+        String sp = noIntelliJ ? "\\s" : "(?:\\s" + add + "?)";
+        String ds = noIntelliJ ? "-" : "(?:-" + add + "?)";
+        String pipe = noIntelliJ ? "\\|" : "(?:" + add + "?\\|" + add + "?)";
+        //COL = COL.replace("\\s", sp).replace("-", ds);
 
-        return Pattern.compile(
-                "\\|" + COL + "\\|?\\s*" + "|" +
-                        COL + "\\|\\s*" + "|" +
-                        "\\|?" + "(?:" + COL + "\\|)+" + COL + "\\|?\\s*");
+        String regex = "\\|" + COL + "\\|?\\s*" + "|" +
+                COL + "\\|\\s*" + "|" +
+                "\\|?" + "(?:" + COL + "\\|)+" + COL + "\\|?\\s*";
+
+        String withIntelliJ = regex.replace("\\s", sp).replace("\\|", pipe).replace("-", ds);
+
+        return Pattern.compile(withIntelliJ);
     }
 
     private TableParagraphPreProcessor(DataHolder options) {
         this.options = new TableParserOptions(options);
         isIntellijDummyIdentifier = Parser.INTELLIJ_DUMMY_IDENTIFIER.getFrom(options);
-        intellijDummyIdentifier = isIntellijDummyIdentifier ? Parsing.INTELLIJ_DUMMY_IDENTIFIER : "";
+        intellijDummyIdentifier = isIntellijDummyIdentifier ? INTELLIJ_DUMMY_IDENTIFIER : "";
         this.TABLE_HEADER_SEPARATOR = getTableHeaderSeparator(this.options.minSeparatorDashes, intellijDummyIdentifier);
     }
 
@@ -121,6 +155,8 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
         BasedSequence separatorLine = null;
         int blockIndent = block.getLineIndent(0);
         BasedSequence captionLine = null;
+        BitSet separators = isIntellijDummyIdentifier ? separatorWithIntelliJCharacters : separatorCharacters;
+        HashMap<Character, CharacterNodeFactory> nodeMap = isIntellijDummyIdentifier ? pipeIntelliJNodeMap : pipeNodeMap;
 
         int i = 0;
         for (BasedSequence rowLine : block.getContentLines()) {
@@ -144,10 +180,11 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
                 if (rowNumber >= options.minHeaderRows
                         && TABLE_HEADER_SEPARATOR.matcher(rowLine).matches()) {
                     // must start with | or cell, whitespace means its not a separator line
-                    if (fullRowLine.charAt(0) != ' ' && fullRowLine.charAt(0) != '\t' || rowLine.charAt(0) != '|') {
+                    int pos = isIntellijDummyIdentifier ? fullRowLine.indexOfAnyNot(intellijDummyIdentifier) : 0;
+                    if (fullRowLine.charAt(pos) != ' ' && fullRowLine.charAt(pos) != '\t' || rowLine.charAt(pos) != '|') {
                         separatorLineNumber = rowNumber;
                         separatorLine = rowLine;
-                    } else if (fullRowLine.charAt(0) == ' ' || fullRowLine.charAt(0) == '\t') {
+                    } else if (fullRowLine.charAt(pos) == ' ' || fullRowLine.charAt(pos) == '\t') {
                         block.setHasTableSeparator(true);
                     }
                 }
@@ -171,7 +208,7 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
 
             List<Node> sepList;
             if (rowNumber == separatorLineNumber) {
-                sepList = inlineParser.parseCustom(fullRowLine, tableRow, separatorCharacters, pipeNodeMap);
+                sepList = inlineParser.parseCustom(fullRowLine, tableRow, separators, nodeMap);
                 tableRowNumber = 0;
             } else {
                 sepList = inlineParser.parseCustom(fullRowLine, tableRow, pipeCharacters, pipeNodeMap);
@@ -206,6 +243,31 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
                 section.setCharsFromContent();
                 section = new TableBody();
                 tableBlock.appendChild(section);
+            }
+
+            if (isIntellijDummyIdentifier) {
+                // need to combine leading and trailing id nodes with separators
+                NodeIterator nodes = new NodeIterator(tableRow.getFirstChild());
+
+                while (nodes.hasNext()) {
+                    Node node = nodes.next();
+                    if (node instanceof Text && node.getChars().equals(INTELLIJ_DUMMY_IDENTIFIER)) {
+                        // need to combine it with next separator and if no next, with previous one
+                        if (nodes.hasNext() && nodes.peek() instanceof TableColumnSeparator) {
+                            Node sep = nodes.next();
+                            sep.setChars(node.getChars().baseSubSequence(node.getStartOffset(), sep.getEndOffset()));
+                            node.unlink();
+                        } else {
+                            // combine with previous
+                            Node prevNode = node.getPrevious();
+                            if (prevNode instanceof TableColumnSeparator) {
+                                // leading marker, not a real cell need to add it to the separator
+                                prevNode.setChars(node.getChars().baseSubSequence(prevNode.getStartOffset(), node.getEndOffset()));
+                                node.unlink();
+                            }
+                        }
+                    }
+                }
             }
 
             boolean firstCell = true;
@@ -319,7 +381,8 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
     }
 
     private List<TableCell.Alignment> parseAlignment(BasedSequence separatorLine) {
-        List<BasedSequence> parts = split(separatorLine, false, false);
+        BasedSequence trim = isIntellijDummyIdentifier ? separatorLine.trim(intellijDummyIdentifier) : separatorLine;
+        List<BasedSequence> parts = split(trim, false, false);
         List<TableCell.Alignment> alignments = new ArrayList<TableCell.Alignment>();
         for (BasedSequence part : parts) {
             BasedSequence cleaned = isIntellijDummyIdentifier ? part.replace(intellijDummyIdentifier, "") : part;

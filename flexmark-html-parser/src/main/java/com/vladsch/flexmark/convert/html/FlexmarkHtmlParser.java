@@ -1444,7 +1444,7 @@ public class FlexmarkHtmlParser {
         skip();
         pushState(table);
 
-        myTable = new Table(myOptions.tableOptions, "", "");
+        myTable = new Table(myOptions.tableOptions);
         myTableSuppressColumns = false;
 
         Node item;
@@ -1476,12 +1476,12 @@ public class FlexmarkHtmlParser {
             }
         }
 
-        myTable.finalizeTable();
+        myTable.finalizeTable("");
         int sepColumns = myTable.getMaxColumns();
 
         if (sepColumns > 0) {
             out.blankLine();
-            myTable.appendTable(out);
+            myTable.appendTable(out, "", "");
             out.blankLine();
         }
 

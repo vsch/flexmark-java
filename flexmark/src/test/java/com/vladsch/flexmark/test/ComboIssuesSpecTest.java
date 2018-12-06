@@ -81,6 +81,15 @@ public class ComboIssuesSpecTest extends ComboSpecTestCase {
         optionsMap.put("html-comment-full-lines", new MutableDataSet().set(Parser.HTML_BLOCK_COMMENT_ONLY_FULL_LINE, true));
         optionsMap.put("allow-javascript", new MutableDataSet().set(HtmlRenderer.SUPPRESSED_LINKS, ""));
         optionsMap.put("pass-through", new MutableDataSet().set(HtmlRenderer.FORMAT_FLAGS, HtmlRenderer.PASS_THROUGH));
+        optionsMap.put("strip-indent", new MutableDataSet().set(SOURCE_INDENT, "> > "));
+        optionsMap.put("sub-parse", new MutableDataSet()
+                .set(SOURCE_PREFIX, "" +
+                        "Source Prefix\n" +
+                        "")
+                .set(SOURCE_SUFFIX, "" +
+                        "Source Suffix\n" +
+                        "")
+        );
 
         final List<String> customHtmlBlockTags = new ArrayList<>(Parser.HTML_BLOCK_TAGS.getFrom(null));
         customHtmlBlockTags.add("warp10-warpscript-widget");

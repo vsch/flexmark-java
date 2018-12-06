@@ -1514,7 +1514,7 @@ Document[0, 29]
           Text[14, 17] chars:[14, 17, "---"]
     TableBody[19, 28]
       TableRow[19, 28] rowNumber=1
-        TableCell[19, 28] span textOpen:[19, 20, "|"] text:[21, 25, "span"] textClose:[26, 28, "||"]
+        TableCell[19, 28] span=2 textOpen:[19, 20, "|"] text:[21, 25, "span"] textClose:[26, 28, "||"]
           Text[21, 25] chars:[21, 25, "span"]
 ````````````````````````````````
 
@@ -1558,7 +1558,7 @@ Document[0, 38]
           Text[23, 26] chars:[23, 26, "---"]
     TableBody[28, 37]
       TableRow[28, 37] rowNumber=1
-        TableCell[28, 37] span textOpen:[28, 29, "|"] text:[30, 34, "span"] textClose:[35, 37, "||"]
+        TableCell[28, 37] span=2 textOpen:[28, 29, "|"] text:[30, 34, "span"] textClose:[35, 37, "||"]
           Text[30, 34] chars:[30, 34, "span"]
 ````````````````````````````````
 
@@ -1767,7 +1767,7 @@ Document[0, 204]
         TableCell[159, 169] RIGHT text:[161, 167, "4h 20m"] textClose:[168, 169, "|"]
           Text[161, 167] chars:[161, 167, "4h 20m"]
       TableRow[170, 203] rowNumber=4
-        TableCell[170, 193] LEFT span textOpen:[170, 171, "|"] text:[172, 178, "total:"] textClose:[191, 193, "||"]
+        TableCell[170, 193] LEFT span=2 textOpen:[170, 171, "|"] text:[172, 178, "total:"] textClose:[191, 193, "||"]
           Text[172, 178] chars:[172, 178, "total:"]
         TableCell[193, 203] RIGHT text:[194, 201, "**13h**"] textClose:[202, 203, "|"]
           StrongEmphasis[194, 201] textOpen:[194, 196, "**"] text:[196, 199, "13h"] textClose:[199, 201, "**"]
@@ -3698,6 +3698,1110 @@ Document[0, 14]
         TableCell[9, 12] text:[9, 12, "---"]
           Text[9, 12] chars:[9, 12, "---"]
     TableBody[12, 12]
+````````````````````````````````
+
+
+## Issue xxx-1
+
+Parse sub sequences
+
+```````````````````````````````` example(Issue xxx-1: 1) options(sub-parse)
+| Left                                   |  Right | Center  |
+| Left                                   |  Right | Center  |
+|:---------------------------------------|-------:|:-------:|
+| ditem 1 can be longer                  | 125.30 |   yes   |
+| item 2  this is a test of table formng |        1,234.00 ||
+| item 3 much longer format              |  10.50 |  maybe  |
+| item 4 short                           |  34.10 | not now |
+
+.
+<table>
+  <thead>
+    <tr><th align="left">Left</th><th align="right">Right</th><th align="center">Center</th></tr>
+    <tr><th align="left">Left</th><th align="right">Right</th><th align="center">Center</th></tr>
+  </thead>
+  <tbody>
+    <tr><td align="left">ditem 1 can be longer</td><td align="right">125.30</td><td align="center">yes</td></tr>
+    <tr><td align="left">item 2  this is a test of table formng</td><td align="right" colspan="2">1,234.00</td></tr>
+    <tr><td align="left">item 3 much longer format</td><td align="right">10.50</td><td align="center">maybe</td></tr>
+    <tr><td align="left">item 4 short</td><td align="right">34.10</td><td align="center">not now</td></tr>
+  </tbody>
+</table>
+.
+Document[14, 449]
+  TableBlock[14, 448]
+    TableHead[14, 137]
+      TableRow[14, 75] rowNumber=1
+        TableCell[14, 56] LEFT header textOpen:[14, 15, "|"] text:[16, 20, "Left"] textClose:[55, 56, "|"]
+          Text[16, 20] chars:[16, 20, "Left"]
+        TableCell[56, 65] RIGHT header text:[58, 63, "Right"] textClose:[64, 65, "|"]
+          Text[58, 63] chars:[58, 63, "Right"]
+        TableCell[65, 75] CENTER header text:[66, 72, "Center"] textClose:[74, 75, "|"]
+          Text[66, 72] chars:[66, 72, "Center"]
+      TableRow[76, 137] rowNumber=2
+        TableCell[76, 118] LEFT header textOpen:[76, 77, "|"] text:[78, 82, "Left"] textClose:[117, 118, "|"]
+          Text[78, 82] chars:[78, 82, "Left"]
+        TableCell[118, 127] RIGHT header text:[120, 125, "Right"] textClose:[126, 127, "|"]
+          Text[120, 125] chars:[120, 125, "Right"]
+        TableCell[127, 137] CENTER header text:[128, 134, "Center"] textClose:[136, 137, "|"]
+          Text[128, 134] chars:[128, 134, "Center"]
+    TableSeparator[138, 199]
+      TableRow[138, 199]
+        TableCell[138, 180] LEFT textOpen:[138, 139, "|"] text:[139, 179, ":---------------------------------------"] textClose:[179, 180, "|"]
+          Text[139, 179] chars:[139, 179, ":---- … -----"]
+        TableCell[180, 189] RIGHT text:[180, 188, "-------:"] textClose:[188, 189, "|"]
+          Text[180, 188] chars:[180, 188, "-------:"]
+        TableCell[189, 199] CENTER text:[189, 198, ":-------:"] textClose:[198, 199, "|"]
+          Text[189, 198] chars:[189, 198, ":-------:"]
+    TableBody[200, 447]
+      TableRow[200, 261] rowNumber=1
+        TableCell[200, 242] LEFT textOpen:[200, 201, "|"] text:[202, 223, "ditem 1 can be longer"] textClose:[241, 242, "|"]
+          Text[202, 223] chars:[202, 223, "ditem … onger"]
+        TableCell[242, 251] RIGHT text:[243, 249, "125.30"] textClose:[250, 251, "|"]
+          Text[243, 249] chars:[243, 249, "125.30"]
+        TableCell[251, 261] CENTER text:[254, 257, "yes"] textClose:[260, 261, "|"]
+          Text[254, 257] chars:[254, 257, "yes"]
+      TableRow[262, 323] rowNumber=2
+        TableCell[262, 304] LEFT textOpen:[262, 263, "|"] text:[264, 302, "item 2  this is a test of table formng"] textClose:[303, 304, "|"]
+          Text[264, 302] chars:[264, 302, "item  … ormng"]
+        TableCell[304, 323] RIGHT span=2 text:[312, 320, "1,234.00"] textClose:[321, 323, "||"]
+          Text[312, 320] chars:[312, 320, "1,234.00"]
+      TableRow[324, 385] rowNumber=3
+        TableCell[324, 366] LEFT textOpen:[324, 325, "|"] text:[326, 351, "item 3 much longer format"] textClose:[365, 366, "|"]
+          Text[326, 351] chars:[326, 351, "item  … ormat"]
+        TableCell[366, 375] RIGHT text:[368, 373, "10.50"] textClose:[374, 375, "|"]
+          Text[368, 373] chars:[368, 373, "10.50"]
+        TableCell[375, 385] CENTER text:[377, 382, "maybe"] textClose:[384, 385, "|"]
+          Text[377, 382] chars:[377, 382, "maybe"]
+      TableRow[386, 447] rowNumber=4
+        TableCell[386, 428] LEFT textOpen:[386, 387, "|"] text:[388, 400, "item 4 short"] textClose:[427, 428, "|"]
+          Text[388, 400] chars:[388, 400, "item  … short"]
+        TableCell[428, 437] RIGHT text:[430, 435, "34.10"] textClose:[436, 437, "|"]
+          Text[430, 435] chars:[430, 435, "34.10"]
+        TableCell[437, 447] CENTER text:[438, 445, "not now"] textClose:[446, 447, "|"]
+          Text[438, 445] chars:[438, 445, "not now"]
+````````````````````````````````
+
+
+Parse sub sequences
+
+```````````````````````````````` example(Issue xxx-1: 2) options(strip-indent)
+> > | Left                                   |  Right | Center  |
+> > | Left                                   |  Right | Center  |
+> > |:---------------------------------------|-------:|:-------:|
+> > | ditem 1 can be longer                  | 125.30 |   yes   |
+> > | item 2  this is a test of table formng |        1,234.00 ||
+> > | item 3 much longer format              |  10.50 |  maybe  |
+> > | item 4 short                           |  34.10 | not now |
+
+.
+<table>
+  <thead>
+    <tr><th align="left">Left</th><th align="right">Right</th><th align="center">Center</th></tr>
+    <tr><th align="left">Left</th><th align="right">Right</th><th align="center">Center</th></tr>
+  </thead>
+  <tbody>
+    <tr><td align="left">ditem 1 can be longer</td><td align="right">125.30</td><td align="center">yes</td></tr>
+    <tr><td align="left">item 2  this is a test of table formng</td><td align="right" colspan="2">1,234.00</td></tr>
+    <tr><td align="left">item 3 much longer format</td><td align="right">10.50</td><td align="center">maybe</td></tr>
+    <tr><td align="left">item 4 short</td><td align="right">34.10</td><td align="center">not now</td></tr>
+  </tbody>
+</table>
+.
+Document[4, 463]
+  TableBlock[4, 462]
+    TableHead[4, 131]
+      TableRow[4, 65] rowNumber=1
+        TableCell[4, 46] LEFT header textOpen:[4, 5, "|"] text:[6, 10, "Left"] textClose:[45, 46, "|"]
+          Text[6, 10] chars:[6, 10, "Left"]
+        TableCell[46, 55] RIGHT header text:[48, 53, "Right"] textClose:[54, 55, "|"]
+          Text[48, 53] chars:[48, 53, "Right"]
+        TableCell[55, 65] CENTER header text:[56, 62, "Center"] textClose:[64, 65, "|"]
+          Text[56, 62] chars:[56, 62, "Center"]
+      TableRow[70, 131] rowNumber=2
+        TableCell[70, 112] LEFT header textOpen:[70, 71, "|"] text:[72, 76, "Left"] textClose:[111, 112, "|"]
+          Text[72, 76] chars:[72, 76, "Left"]
+        TableCell[112, 121] RIGHT header text:[114, 119, "Right"] textClose:[120, 121, "|"]
+          Text[114, 119] chars:[114, 119, "Right"]
+        TableCell[121, 131] CENTER header text:[122, 128, "Center"] textClose:[130, 131, "|"]
+          Text[122, 128] chars:[122, 128, "Center"]
+    TableSeparator[136, 197]
+      TableRow[136, 197]
+        TableCell[136, 178] LEFT textOpen:[136, 137, "|"] text:[137, 177, ":---------------------------------------"] textClose:[177, 178, "|"]
+          Text[137, 177] chars:[137, 177, ":---- … -----"]
+        TableCell[178, 187] RIGHT text:[178, 186, "-------:"] textClose:[186, 187, "|"]
+          Text[178, 186] chars:[178, 186, "-------:"]
+        TableCell[187, 197] CENTER text:[187, 196, ":-------:"] textClose:[196, 197, "|"]
+          Text[187, 196] chars:[187, 196, ":-------:"]
+    TableBody[202, 461]
+      TableRow[202, 263] rowNumber=1
+        TableCell[202, 244] LEFT textOpen:[202, 203, "|"] text:[204, 225, "ditem 1 can be longer"] textClose:[243, 244, "|"]
+          Text[204, 225] chars:[204, 225, "ditem … onger"]
+        TableCell[244, 253] RIGHT text:[245, 251, "125.30"] textClose:[252, 253, "|"]
+          Text[245, 251] chars:[245, 251, "125.30"]
+        TableCell[253, 263] CENTER text:[256, 259, "yes"] textClose:[262, 263, "|"]
+          Text[256, 259] chars:[256, 259, "yes"]
+      TableRow[268, 329] rowNumber=2
+        TableCell[268, 310] LEFT textOpen:[268, 269, "|"] text:[270, 308, "item 2  this is a test of table formng"] textClose:[309, 310, "|"]
+          Text[270, 308] chars:[270, 308, "item  … ormng"]
+        TableCell[310, 329] RIGHT span=2 text:[318, 326, "1,234.00"] textClose:[327, 329, "||"]
+          Text[318, 326] chars:[318, 326, "1,234.00"]
+      TableRow[334, 395] rowNumber=3
+        TableCell[334, 376] LEFT textOpen:[334, 335, "|"] text:[336, 361, "item 3 much longer format"] textClose:[375, 376, "|"]
+          Text[336, 361] chars:[336, 361, "item  … ormat"]
+        TableCell[376, 385] RIGHT text:[378, 383, "10.50"] textClose:[384, 385, "|"]
+          Text[378, 383] chars:[378, 383, "10.50"]
+        TableCell[385, 395] CENTER text:[387, 392, "maybe"] textClose:[394, 395, "|"]
+          Text[387, 392] chars:[387, 392, "maybe"]
+      TableRow[400, 461] rowNumber=4
+        TableCell[400, 442] LEFT textOpen:[400, 401, "|"] text:[402, 414, "item 4 short"] textClose:[441, 442, "|"]
+          Text[402, 414] chars:[402, 414, "item  … short"]
+        TableCell[442, 451] RIGHT text:[444, 449, "34.10"] textClose:[450, 451, "|"]
+          Text[444, 449] chars:[444, 449, "34.10"]
+        TableCell[451, 461] CENTER text:[452, 459, "not now"] textClose:[460, 461, "|"]
+          Text[452, 459] chars:[452, 459, "not now"]
+````````````````````````````````
+
+
+Parse sub sequences
+
+```````````````````````````````` example(Issue xxx-1: 3) options(sub-parse, strip-indent)
+> > | Left                                   |  Right | Center  |
+> > | Left                                   |  Right | Center  |
+> > |:---------------------------------------|-------:|:-------:|
+> > | ditem 1 can be longer                  | 125.30 |   yes   |
+> > | item 2  this is a test of table formng |        1,234.00 ||
+> > | item 3 much longer format              |  10.50 |  maybe  |
+> > | item 4 short                           |  34.10 | not now |
+
+.
+<table>
+  <thead>
+    <tr><th align="left">Left</th><th align="right">Right</th><th align="center">Center</th></tr>
+    <tr><th align="left">Left</th><th align="right">Right</th><th align="center">Center</th></tr>
+  </thead>
+  <tbody>
+    <tr><td align="left">ditem 1 can be longer</td><td align="right">125.30</td><td align="center">yes</td></tr>
+    <tr><td align="left">item 2  this is a test of table formng</td><td align="right" colspan="2">1,234.00</td></tr>
+    <tr><td align="left">item 3 much longer format</td><td align="right">10.50</td><td align="center">maybe</td></tr>
+    <tr><td align="left">item 4 short</td><td align="right">34.10</td><td align="center">not now</td></tr>
+  </tbody>
+</table>
+.
+Document[18, 477]
+  TableBlock[18, 476]
+    TableHead[18, 145]
+      TableRow[18, 79] rowNumber=1
+        TableCell[18, 60] LEFT header textOpen:[18, 19, "|"] text:[20, 24, "Left"] textClose:[59, 60, "|"]
+          Text[20, 24] chars:[20, 24, "Left"]
+        TableCell[60, 69] RIGHT header text:[62, 67, "Right"] textClose:[68, 69, "|"]
+          Text[62, 67] chars:[62, 67, "Right"]
+        TableCell[69, 79] CENTER header text:[70, 76, "Center"] textClose:[78, 79, "|"]
+          Text[70, 76] chars:[70, 76, "Center"]
+      TableRow[84, 145] rowNumber=2
+        TableCell[84, 126] LEFT header textOpen:[84, 85, "|"] text:[86, 90, "Left"] textClose:[125, 126, "|"]
+          Text[86, 90] chars:[86, 90, "Left"]
+        TableCell[126, 135] RIGHT header text:[128, 133, "Right"] textClose:[134, 135, "|"]
+          Text[128, 133] chars:[128, 133, "Right"]
+        TableCell[135, 145] CENTER header text:[136, 142, "Center"] textClose:[144, 145, "|"]
+          Text[136, 142] chars:[136, 142, "Center"]
+    TableSeparator[150, 211]
+      TableRow[150, 211]
+        TableCell[150, 192] LEFT textOpen:[150, 151, "|"] text:[151, 191, ":---------------------------------------"] textClose:[191, 192, "|"]
+          Text[151, 191] chars:[151, 191, ":---- … -----"]
+        TableCell[192, 201] RIGHT text:[192, 200, "-------:"] textClose:[200, 201, "|"]
+          Text[192, 200] chars:[192, 200, "-------:"]
+        TableCell[201, 211] CENTER text:[201, 210, ":-------:"] textClose:[210, 211, "|"]
+          Text[201, 210] chars:[201, 210, ":-------:"]
+    TableBody[216, 475]
+      TableRow[216, 277] rowNumber=1
+        TableCell[216, 258] LEFT textOpen:[216, 217, "|"] text:[218, 239, "ditem 1 can be longer"] textClose:[257, 258, "|"]
+          Text[218, 239] chars:[218, 239, "ditem … onger"]
+        TableCell[258, 267] RIGHT text:[259, 265, "125.30"] textClose:[266, 267, "|"]
+          Text[259, 265] chars:[259, 265, "125.30"]
+        TableCell[267, 277] CENTER text:[270, 273, "yes"] textClose:[276, 277, "|"]
+          Text[270, 273] chars:[270, 273, "yes"]
+      TableRow[282, 343] rowNumber=2
+        TableCell[282, 324] LEFT textOpen:[282, 283, "|"] text:[284, 322, "item 2  this is a test of table formng"] textClose:[323, 324, "|"]
+          Text[284, 322] chars:[284, 322, "item  … ormng"]
+        TableCell[324, 343] RIGHT span=2 text:[332, 340, "1,234.00"] textClose:[341, 343, "||"]
+          Text[332, 340] chars:[332, 340, "1,234.00"]
+      TableRow[348, 409] rowNumber=3
+        TableCell[348, 390] LEFT textOpen:[348, 349, "|"] text:[350, 375, "item 3 much longer format"] textClose:[389, 390, "|"]
+          Text[350, 375] chars:[350, 375, "item  … ormat"]
+        TableCell[390, 399] RIGHT text:[392, 397, "10.50"] textClose:[398, 399, "|"]
+          Text[392, 397] chars:[392, 397, "10.50"]
+        TableCell[399, 409] CENTER text:[401, 406, "maybe"] textClose:[408, 409, "|"]
+          Text[401, 406] chars:[401, 406, "maybe"]
+      TableRow[414, 475] rowNumber=4
+        TableCell[414, 456] LEFT textOpen:[414, 415, "|"] text:[416, 428, "item 4 short"] textClose:[455, 456, "|"]
+          Text[416, 428] chars:[416, 428, "item  … short"]
+        TableCell[456, 465] RIGHT text:[458, 463, "34.10"] textClose:[464, 465, "|"]
+          Text[458, 463] chars:[458, 463, "34.10"]
+        TableCell[465, 475] CENTER text:[466, 473, "not now"] textClose:[474, 475, "|"]
+          Text[466, 473] chars:[466, 473, "not now"]
+````````````````````````````````
+
+
+## IntelliJ
+
+parse intellij identifier marker
+
+```````````````````````````````` example(IntelliJ: 1) options(intellij-identifier)
+| Left                                   |  Right | Center  |
+| Left                                   |  Right | Center  |
+⎮|:---------------------------------------|-------:|:-------:|
+| ditem 1 can be longer                  | 125.30 |   yes   |
+| item 2  this is a test of table formng |        1,234.00 ||
+| item 3 much longer format              |  10.50 |  maybe  |
+| item 4 short                           |  34.10 | not now |
+
+.
+<table>
+  <thead>
+    <tr><th align="left">Left</th><th align="right">Right</th><th align="center">Center</th></tr>
+    <tr><th align="left">Left</th><th align="right">Right</th><th align="center">Center</th></tr>
+  </thead>
+  <tbody>
+    <tr><td align="left">ditem 1 can be longer</td><td align="right">125.30</td><td align="center">yes</td></tr>
+    <tr><td align="left">item 2  this is a test of table formng</td><td align="right" colspan="2">1,234.00</td></tr>
+    <tr><td align="left">item 3 much longer format</td><td align="right">10.50</td><td align="center">maybe</td></tr>
+    <tr><td align="left">item 4 short</td><td align="right">34.10</td><td align="center">not now</td></tr>
+  </tbody>
+</table>
+.
+Document[0, 436]
+  TableBlock[0, 435]
+    TableHead[0, 123]
+      TableRow[0, 61] rowNumber=1
+        TableCell[0, 42] LEFT header textOpen:[0, 1, "|"] text:[2, 6, "Left"] textClose:[41, 42, "|"]
+          Text[2, 6] chars:[2, 6, "Left"]
+        TableCell[42, 51] RIGHT header text:[44, 49, "Right"] textClose:[50, 51, "|"]
+          Text[44, 49] chars:[44, 49, "Right"]
+        TableCell[51, 61] CENTER header text:[52, 58, "Center"] textClose:[60, 61, "|"]
+          Text[52, 58] chars:[52, 58, "Center"]
+      TableRow[62, 123] rowNumber=2
+        TableCell[62, 104] LEFT header textOpen:[62, 63, "|"] text:[64, 68, "Left"] textClose:[103, 104, "|"]
+          Text[64, 68] chars:[64, 68, "Left"]
+        TableCell[104, 113] RIGHT header text:[106, 111, "Right"] textClose:[112, 113, "|"]
+          Text[106, 111] chars:[106, 111, "Right"]
+        TableCell[113, 123] CENTER header text:[114, 120, "Center"] textClose:[122, 123, "|"]
+          Text[114, 120] chars:[114, 120, "Center"]
+    TableSeparator[124, 186]
+      TableRow[124, 186]
+        TableCell[124, 167] LEFT textOpen:[124, 126, "%1f|"] text:[126, 166, ":---------------------------------------"] textClose:[166, 167, "|"]
+          Text[126, 166] chars:[126, 166, ":---- … -----"]
+        TableCell[167, 176] RIGHT text:[167, 175, "-------:"] textClose:[175, 176, "|"]
+          Text[167, 175] chars:[167, 175, "-------:"]
+        TableCell[176, 186] CENTER text:[176, 185, ":-------:"] textClose:[185, 186, "|"]
+          Text[176, 185] chars:[176, 185, ":-------:"]
+    TableBody[187, 434]
+      TableRow[187, 248] rowNumber=1
+        TableCell[187, 229] LEFT textOpen:[187, 188, "|"] text:[189, 210, "ditem 1 can be longer"] textClose:[228, 229, "|"]
+          Text[189, 210] chars:[189, 210, "ditem … onger"]
+        TableCell[229, 238] RIGHT text:[230, 236, "125.30"] textClose:[237, 238, "|"]
+          Text[230, 236] chars:[230, 236, "125.30"]
+        TableCell[238, 248] CENTER text:[241, 244, "yes"] textClose:[247, 248, "|"]
+          Text[241, 244] chars:[241, 244, "yes"]
+      TableRow[249, 310] rowNumber=2
+        TableCell[249, 291] LEFT textOpen:[249, 250, "|"] text:[251, 289, "item 2  this is a test of table formng"] textClose:[290, 291, "|"]
+          Text[251, 289] chars:[251, 289, "item  … ormng"]
+        TableCell[291, 310] RIGHT span=2 text:[299, 307, "1,234.00"] textClose:[308, 310, "||"]
+          Text[299, 307] chars:[299, 307, "1,234.00"]
+      TableRow[311, 372] rowNumber=3
+        TableCell[311, 353] LEFT textOpen:[311, 312, "|"] text:[313, 338, "item 3 much longer format"] textClose:[352, 353, "|"]
+          Text[313, 338] chars:[313, 338, "item  … ormat"]
+        TableCell[353, 362] RIGHT text:[355, 360, "10.50"] textClose:[361, 362, "|"]
+          Text[355, 360] chars:[355, 360, "10.50"]
+        TableCell[362, 372] CENTER text:[364, 369, "maybe"] textClose:[371, 372, "|"]
+          Text[364, 369] chars:[364, 369, "maybe"]
+      TableRow[373, 434] rowNumber=4
+        TableCell[373, 415] LEFT textOpen:[373, 374, "|"] text:[375, 387, "item 4 short"] textClose:[414, 415, "|"]
+          Text[375, 387] chars:[375, 387, "item  … short"]
+        TableCell[415, 424] RIGHT text:[417, 422, "34.10"] textClose:[423, 424, "|"]
+          Text[417, 422] chars:[417, 422, "34.10"]
+        TableCell[424, 434] CENTER text:[425, 432, "not now"] textClose:[433, 434, "|"]
+          Text[425, 432] chars:[425, 432, "not now"]
+````````````````````````````````
+
+
+```````````````````````````````` example(IntelliJ: 2) options(intellij-identifier)
+| Left                                   |  Right | Center  |
+| Left                                   |  Right | Center  |
+|⎮:---------------------------------------|-------:|:-------:|
+| ditem 1 can be longer                  | 125.30 |   yes   |
+| item 2  this is a test of table formng |        1,234.00 ||
+| item 3 much longer format              |  10.50 |  maybe  |
+| item 4 short                           |  34.10 | not now |
+
+.
+<table>
+  <thead>
+    <tr><th align="left">Left</th><th align="right">Right</th><th align="center">Center</th></tr>
+    <tr><th align="left">Left</th><th align="right">Right</th><th align="center">Center</th></tr>
+  </thead>
+  <tbody>
+    <tr><td align="left">ditem 1 can be longer</td><td align="right">125.30</td><td align="center">yes</td></tr>
+    <tr><td align="left">item 2  this is a test of table formng</td><td align="right" colspan="2">1,234.00</td></tr>
+    <tr><td align="left">item 3 much longer format</td><td align="right">10.50</td><td align="center">maybe</td></tr>
+    <tr><td align="left">item 4 short</td><td align="right">34.10</td><td align="center">not now</td></tr>
+  </tbody>
+</table>
+.
+Document[0, 436]
+  TableBlock[0, 435]
+    TableHead[0, 123]
+      TableRow[0, 61] rowNumber=1
+        TableCell[0, 42] LEFT header textOpen:[0, 1, "|"] text:[2, 6, "Left"] textClose:[41, 42, "|"]
+          Text[2, 6] chars:[2, 6, "Left"]
+        TableCell[42, 51] RIGHT header text:[44, 49, "Right"] textClose:[50, 51, "|"]
+          Text[44, 49] chars:[44, 49, "Right"]
+        TableCell[51, 61] CENTER header text:[52, 58, "Center"] textClose:[60, 61, "|"]
+          Text[52, 58] chars:[52, 58, "Center"]
+      TableRow[62, 123] rowNumber=2
+        TableCell[62, 104] LEFT header textOpen:[62, 63, "|"] text:[64, 68, "Left"] textClose:[103, 104, "|"]
+          Text[64, 68] chars:[64, 68, "Left"]
+        TableCell[104, 113] RIGHT header text:[106, 111, "Right"] textClose:[112, 113, "|"]
+          Text[106, 111] chars:[106, 111, "Right"]
+        TableCell[113, 123] CENTER header text:[114, 120, "Center"] textClose:[122, 123, "|"]
+          Text[114, 120] chars:[114, 120, "Center"]
+    TableSeparator[124, 186]
+      TableRow[124, 186]
+        TableCell[124, 167] LEFT textOpen:[124, 125, "|"] text:[125, 166, "%1f:---------------------------------------"] textClose:[166, 167, "|"]
+          Text[125, 166] chars:[125, 166, "%1f:--- … -----"]
+        TableCell[167, 176] RIGHT text:[167, 175, "-------:"] textClose:[175, 176, "|"]
+          Text[167, 175] chars:[167, 175, "-------:"]
+        TableCell[176, 186] CENTER text:[176, 185, ":-------:"] textClose:[185, 186, "|"]
+          Text[176, 185] chars:[176, 185, ":-------:"]
+    TableBody[187, 434]
+      TableRow[187, 248] rowNumber=1
+        TableCell[187, 229] LEFT textOpen:[187, 188, "|"] text:[189, 210, "ditem 1 can be longer"] textClose:[228, 229, "|"]
+          Text[189, 210] chars:[189, 210, "ditem … onger"]
+        TableCell[229, 238] RIGHT text:[230, 236, "125.30"] textClose:[237, 238, "|"]
+          Text[230, 236] chars:[230, 236, "125.30"]
+        TableCell[238, 248] CENTER text:[241, 244, "yes"] textClose:[247, 248, "|"]
+          Text[241, 244] chars:[241, 244, "yes"]
+      TableRow[249, 310] rowNumber=2
+        TableCell[249, 291] LEFT textOpen:[249, 250, "|"] text:[251, 289, "item 2  this is a test of table formng"] textClose:[290, 291, "|"]
+          Text[251, 289] chars:[251, 289, "item  … ormng"]
+        TableCell[291, 310] RIGHT span=2 text:[299, 307, "1,234.00"] textClose:[308, 310, "||"]
+          Text[299, 307] chars:[299, 307, "1,234.00"]
+      TableRow[311, 372] rowNumber=3
+        TableCell[311, 353] LEFT textOpen:[311, 312, "|"] text:[313, 338, "item 3 much longer format"] textClose:[352, 353, "|"]
+          Text[313, 338] chars:[313, 338, "item  … ormat"]
+        TableCell[353, 362] RIGHT text:[355, 360, "10.50"] textClose:[361, 362, "|"]
+          Text[355, 360] chars:[355, 360, "10.50"]
+        TableCell[362, 372] CENTER text:[364, 369, "maybe"] textClose:[371, 372, "|"]
+          Text[364, 369] chars:[364, 369, "maybe"]
+      TableRow[373, 434] rowNumber=4
+        TableCell[373, 415] LEFT textOpen:[373, 374, "|"] text:[375, 387, "item 4 short"] textClose:[414, 415, "|"]
+          Text[375, 387] chars:[375, 387, "item  … short"]
+        TableCell[415, 424] RIGHT text:[417, 422, "34.10"] textClose:[423, 424, "|"]
+          Text[417, 422] chars:[417, 422, "34.10"]
+        TableCell[424, 434] CENTER text:[425, 432, "not now"] textClose:[433, 434, "|"]
+          Text[425, 432] chars:[425, 432, "not now"]
+````````````````````````````````
+
+
+```````````````````````````````` example(IntelliJ: 3) options(intellij-identifier)
+| Left                                   |  Right | Center  |
+| Left                                   |  Right | Center  |
+|:---------------------------------------⎮|-------:|:-------:|
+| ditem 1 can be longer                  | 125.30 |   yes   |
+| item 2  this is a test of table formng |        1,234.00 ||
+| item 3 much longer format              |  10.50 |  maybe  |
+| item 4 short                           |  34.10 | not now |
+
+.
+<table>
+  <thead>
+    <tr><th align="left">Left</th><th align="right">Right</th><th align="center">Center</th></tr>
+    <tr><th align="left">Left</th><th align="right">Right</th><th align="center">Center</th></tr>
+  </thead>
+  <tbody>
+    <tr><td align="left">ditem 1 can be longer</td><td align="right">125.30</td><td align="center">yes</td></tr>
+    <tr><td align="left">item 2  this is a test of table formng</td><td align="right" colspan="2">1,234.00</td></tr>
+    <tr><td align="left">item 3 much longer format</td><td align="right">10.50</td><td align="center">maybe</td></tr>
+    <tr><td align="left">item 4 short</td><td align="right">34.10</td><td align="center">not now</td></tr>
+  </tbody>
+</table>
+.
+Document[0, 436]
+  TableBlock[0, 435]
+    TableHead[0, 123]
+      TableRow[0, 61] rowNumber=1
+        TableCell[0, 42] LEFT header textOpen:[0, 1, "|"] text:[2, 6, "Left"] textClose:[41, 42, "|"]
+          Text[2, 6] chars:[2, 6, "Left"]
+        TableCell[42, 51] RIGHT header text:[44, 49, "Right"] textClose:[50, 51, "|"]
+          Text[44, 49] chars:[44, 49, "Right"]
+        TableCell[51, 61] CENTER header text:[52, 58, "Center"] textClose:[60, 61, "|"]
+          Text[52, 58] chars:[52, 58, "Center"]
+      TableRow[62, 123] rowNumber=2
+        TableCell[62, 104] LEFT header textOpen:[62, 63, "|"] text:[64, 68, "Left"] textClose:[103, 104, "|"]
+          Text[64, 68] chars:[64, 68, "Left"]
+        TableCell[104, 113] RIGHT header text:[106, 111, "Right"] textClose:[112, 113, "|"]
+          Text[106, 111] chars:[106, 111, "Right"]
+        TableCell[113, 123] CENTER header text:[114, 120, "Center"] textClose:[122, 123, "|"]
+          Text[114, 120] chars:[114, 120, "Center"]
+    TableSeparator[124, 186]
+      TableRow[124, 186]
+        TableCell[124, 167] LEFT textOpen:[124, 125, "|"] text:[125, 166, ":---------------------------------------%1f"] textClose:[166, 167, "|"]
+          Text[125, 166] chars:[125, 166, ":---- … ----%1f"]
+        TableCell[167, 176] RIGHT text:[167, 175, "-------:"] textClose:[175, 176, "|"]
+          Text[167, 175] chars:[167, 175, "-------:"]
+        TableCell[176, 186] CENTER text:[176, 185, ":-------:"] textClose:[185, 186, "|"]
+          Text[176, 185] chars:[176, 185, ":-------:"]
+    TableBody[187, 434]
+      TableRow[187, 248] rowNumber=1
+        TableCell[187, 229] LEFT textOpen:[187, 188, "|"] text:[189, 210, "ditem 1 can be longer"] textClose:[228, 229, "|"]
+          Text[189, 210] chars:[189, 210, "ditem … onger"]
+        TableCell[229, 238] RIGHT text:[230, 236, "125.30"] textClose:[237, 238, "|"]
+          Text[230, 236] chars:[230, 236, "125.30"]
+        TableCell[238, 248] CENTER text:[241, 244, "yes"] textClose:[247, 248, "|"]
+          Text[241, 244] chars:[241, 244, "yes"]
+      TableRow[249, 310] rowNumber=2
+        TableCell[249, 291] LEFT textOpen:[249, 250, "|"] text:[251, 289, "item 2  this is a test of table formng"] textClose:[290, 291, "|"]
+          Text[251, 289] chars:[251, 289, "item  … ormng"]
+        TableCell[291, 310] RIGHT span=2 text:[299, 307, "1,234.00"] textClose:[308, 310, "||"]
+          Text[299, 307] chars:[299, 307, "1,234.00"]
+      TableRow[311, 372] rowNumber=3
+        TableCell[311, 353] LEFT textOpen:[311, 312, "|"] text:[313, 338, "item 3 much longer format"] textClose:[352, 353, "|"]
+          Text[313, 338] chars:[313, 338, "item  … ormat"]
+        TableCell[353, 362] RIGHT text:[355, 360, "10.50"] textClose:[361, 362, "|"]
+          Text[355, 360] chars:[355, 360, "10.50"]
+        TableCell[362, 372] CENTER text:[364, 369, "maybe"] textClose:[371, 372, "|"]
+          Text[364, 369] chars:[364, 369, "maybe"]
+      TableRow[373, 434] rowNumber=4
+        TableCell[373, 415] LEFT textOpen:[373, 374, "|"] text:[375, 387, "item 4 short"] textClose:[414, 415, "|"]
+          Text[375, 387] chars:[375, 387, "item  … short"]
+        TableCell[415, 424] RIGHT text:[417, 422, "34.10"] textClose:[423, 424, "|"]
+          Text[417, 422] chars:[417, 422, "34.10"]
+        TableCell[424, 434] CENTER text:[425, 432, "not now"] textClose:[433, 434, "|"]
+          Text[425, 432] chars:[425, 432, "not now"]
+````````````````````````````````
+
+
+```````````````````````````````` example(IntelliJ: 4) options(intellij-identifier)
+| Left                                   |  Right | Center  |
+| Left                                   |  Right | Center  |
+|:---------------------------------------|⎮-------:|:-------:|
+| ditem 1 can be longer                  | 125.30 |   yes   |
+| item 2  this is a test of table formng |        1,234.00 ||
+| item 3 much longer format              |  10.50 |  maybe  |
+| item 4 short                           |  34.10 | not now |
+
+.
+<table>
+  <thead>
+    <tr><th align="left">Left</th><th align="right">Right</th><th align="center">Center</th></tr>
+    <tr><th align="left">Left</th><th align="right">Right</th><th align="center">Center</th></tr>
+  </thead>
+  <tbody>
+    <tr><td align="left">ditem 1 can be longer</td><td align="right">125.30</td><td align="center">yes</td></tr>
+    <tr><td align="left">item 2  this is a test of table formng</td><td align="right" colspan="2">1,234.00</td></tr>
+    <tr><td align="left">item 3 much longer format</td><td align="right">10.50</td><td align="center">maybe</td></tr>
+    <tr><td align="left">item 4 short</td><td align="right">34.10</td><td align="center">not now</td></tr>
+  </tbody>
+</table>
+.
+Document[0, 436]
+  TableBlock[0, 435]
+    TableHead[0, 123]
+      TableRow[0, 61] rowNumber=1
+        TableCell[0, 42] LEFT header textOpen:[0, 1, "|"] text:[2, 6, "Left"] textClose:[41, 42, "|"]
+          Text[2, 6] chars:[2, 6, "Left"]
+        TableCell[42, 51] RIGHT header text:[44, 49, "Right"] textClose:[50, 51, "|"]
+          Text[44, 49] chars:[44, 49, "Right"]
+        TableCell[51, 61] CENTER header text:[52, 58, "Center"] textClose:[60, 61, "|"]
+          Text[52, 58] chars:[52, 58, "Center"]
+      TableRow[62, 123] rowNumber=2
+        TableCell[62, 104] LEFT header textOpen:[62, 63, "|"] text:[64, 68, "Left"] textClose:[103, 104, "|"]
+          Text[64, 68] chars:[64, 68, "Left"]
+        TableCell[104, 113] RIGHT header text:[106, 111, "Right"] textClose:[112, 113, "|"]
+          Text[106, 111] chars:[106, 111, "Right"]
+        TableCell[113, 123] CENTER header text:[114, 120, "Center"] textClose:[122, 123, "|"]
+          Text[114, 120] chars:[114, 120, "Center"]
+    TableSeparator[124, 186]
+      TableRow[124, 186]
+        TableCell[124, 166] LEFT textOpen:[124, 125, "|"] text:[125, 165, ":---------------------------------------"] textClose:[165, 166, "|"]
+          Text[125, 165] chars:[125, 165, ":---- … -----"]
+        TableCell[166, 176] RIGHT text:[166, 175, "%1f-------:"] textClose:[175, 176, "|"]
+          Text[166, 175] chars:[166, 175, "%1f-------:"]
+        TableCell[176, 186] CENTER text:[176, 185, ":-------:"] textClose:[185, 186, "|"]
+          Text[176, 185] chars:[176, 185, ":-------:"]
+    TableBody[187, 434]
+      TableRow[187, 248] rowNumber=1
+        TableCell[187, 229] LEFT textOpen:[187, 188, "|"] text:[189, 210, "ditem 1 can be longer"] textClose:[228, 229, "|"]
+          Text[189, 210] chars:[189, 210, "ditem … onger"]
+        TableCell[229, 238] RIGHT text:[230, 236, "125.30"] textClose:[237, 238, "|"]
+          Text[230, 236] chars:[230, 236, "125.30"]
+        TableCell[238, 248] CENTER text:[241, 244, "yes"] textClose:[247, 248, "|"]
+          Text[241, 244] chars:[241, 244, "yes"]
+      TableRow[249, 310] rowNumber=2
+        TableCell[249, 291] LEFT textOpen:[249, 250, "|"] text:[251, 289, "item 2  this is a test of table formng"] textClose:[290, 291, "|"]
+          Text[251, 289] chars:[251, 289, "item  … ormng"]
+        TableCell[291, 310] RIGHT span=2 text:[299, 307, "1,234.00"] textClose:[308, 310, "||"]
+          Text[299, 307] chars:[299, 307, "1,234.00"]
+      TableRow[311, 372] rowNumber=3
+        TableCell[311, 353] LEFT textOpen:[311, 312, "|"] text:[313, 338, "item 3 much longer format"] textClose:[352, 353, "|"]
+          Text[313, 338] chars:[313, 338, "item  … ormat"]
+        TableCell[353, 362] RIGHT text:[355, 360, "10.50"] textClose:[361, 362, "|"]
+          Text[355, 360] chars:[355, 360, "10.50"]
+        TableCell[362, 372] CENTER text:[364, 369, "maybe"] textClose:[371, 372, "|"]
+          Text[364, 369] chars:[364, 369, "maybe"]
+      TableRow[373, 434] rowNumber=4
+        TableCell[373, 415] LEFT textOpen:[373, 374, "|"] text:[375, 387, "item 4 short"] textClose:[414, 415, "|"]
+          Text[375, 387] chars:[375, 387, "item  … short"]
+        TableCell[415, 424] RIGHT text:[417, 422, "34.10"] textClose:[423, 424, "|"]
+          Text[417, 422] chars:[417, 422, "34.10"]
+        TableCell[424, 434] CENTER text:[425, 432, "not now"] textClose:[433, 434, "|"]
+          Text[425, 432] chars:[425, 432, "not now"]
+````````````````````````````````
+
+
+```````````````````````````````` example(IntelliJ: 5) options(intellij-identifier)
+| Left                                   |  Right | Center  |
+| Left                                   |  Right | Center  |
+|:---------------------------------------|-------:⎮|:-------:|
+| ditem 1 can be longer                  | 125.30 |   yes   |
+| item 2  this is a test of table formng |        1,234.00 ||
+| item 3 much longer format              |  10.50 |  maybe  |
+| item 4 short                           |  34.10 | not now |
+
+.
+<table>
+  <thead>
+    <tr><th align="left">Left</th><th align="right">Right</th><th align="center">Center</th></tr>
+    <tr><th align="left">Left</th><th align="right">Right</th><th align="center">Center</th></tr>
+  </thead>
+  <tbody>
+    <tr><td align="left">ditem 1 can be longer</td><td align="right">125.30</td><td align="center">yes</td></tr>
+    <tr><td align="left">item 2  this is a test of table formng</td><td align="right" colspan="2">1,234.00</td></tr>
+    <tr><td align="left">item 3 much longer format</td><td align="right">10.50</td><td align="center">maybe</td></tr>
+    <tr><td align="left">item 4 short</td><td align="right">34.10</td><td align="center">not now</td></tr>
+  </tbody>
+</table>
+.
+Document[0, 436]
+  TableBlock[0, 435]
+    TableHead[0, 123]
+      TableRow[0, 61] rowNumber=1
+        TableCell[0, 42] LEFT header textOpen:[0, 1, "|"] text:[2, 6, "Left"] textClose:[41, 42, "|"]
+          Text[2, 6] chars:[2, 6, "Left"]
+        TableCell[42, 51] RIGHT header text:[44, 49, "Right"] textClose:[50, 51, "|"]
+          Text[44, 49] chars:[44, 49, "Right"]
+        TableCell[51, 61] CENTER header text:[52, 58, "Center"] textClose:[60, 61, "|"]
+          Text[52, 58] chars:[52, 58, "Center"]
+      TableRow[62, 123] rowNumber=2
+        TableCell[62, 104] LEFT header textOpen:[62, 63, "|"] text:[64, 68, "Left"] textClose:[103, 104, "|"]
+          Text[64, 68] chars:[64, 68, "Left"]
+        TableCell[104, 113] RIGHT header text:[106, 111, "Right"] textClose:[112, 113, "|"]
+          Text[106, 111] chars:[106, 111, "Right"]
+        TableCell[113, 123] CENTER header text:[114, 120, "Center"] textClose:[122, 123, "|"]
+          Text[114, 120] chars:[114, 120, "Center"]
+    TableSeparator[124, 186]
+      TableRow[124, 186]
+        TableCell[124, 166] LEFT textOpen:[124, 125, "|"] text:[125, 165, ":---------------------------------------"] textClose:[165, 166, "|"]
+          Text[125, 165] chars:[125, 165, ":---- … -----"]
+        TableCell[166, 176] RIGHT text:[166, 175, "-------:%1f"] textClose:[175, 176, "|"]
+          Text[166, 175] chars:[166, 175, "-------:%1f"]
+        TableCell[176, 186] CENTER text:[176, 185, ":-------:"] textClose:[185, 186, "|"]
+          Text[176, 185] chars:[176, 185, ":-------:"]
+    TableBody[187, 434]
+      TableRow[187, 248] rowNumber=1
+        TableCell[187, 229] LEFT textOpen:[187, 188, "|"] text:[189, 210, "ditem 1 can be longer"] textClose:[228, 229, "|"]
+          Text[189, 210] chars:[189, 210, "ditem … onger"]
+        TableCell[229, 238] RIGHT text:[230, 236, "125.30"] textClose:[237, 238, "|"]
+          Text[230, 236] chars:[230, 236, "125.30"]
+        TableCell[238, 248] CENTER text:[241, 244, "yes"] textClose:[247, 248, "|"]
+          Text[241, 244] chars:[241, 244, "yes"]
+      TableRow[249, 310] rowNumber=2
+        TableCell[249, 291] LEFT textOpen:[249, 250, "|"] text:[251, 289, "item 2  this is a test of table formng"] textClose:[290, 291, "|"]
+          Text[251, 289] chars:[251, 289, "item  … ormng"]
+        TableCell[291, 310] RIGHT span=2 text:[299, 307, "1,234.00"] textClose:[308, 310, "||"]
+          Text[299, 307] chars:[299, 307, "1,234.00"]
+      TableRow[311, 372] rowNumber=3
+        TableCell[311, 353] LEFT textOpen:[311, 312, "|"] text:[313, 338, "item 3 much longer format"] textClose:[352, 353, "|"]
+          Text[313, 338] chars:[313, 338, "item  … ormat"]
+        TableCell[353, 362] RIGHT text:[355, 360, "10.50"] textClose:[361, 362, "|"]
+          Text[355, 360] chars:[355, 360, "10.50"]
+        TableCell[362, 372] CENTER text:[364, 369, "maybe"] textClose:[371, 372, "|"]
+          Text[364, 369] chars:[364, 369, "maybe"]
+      TableRow[373, 434] rowNumber=4
+        TableCell[373, 415] LEFT textOpen:[373, 374, "|"] text:[375, 387, "item 4 short"] textClose:[414, 415, "|"]
+          Text[375, 387] chars:[375, 387, "item  … short"]
+        TableCell[415, 424] RIGHT text:[417, 422, "34.10"] textClose:[423, 424, "|"]
+          Text[417, 422] chars:[417, 422, "34.10"]
+        TableCell[424, 434] CENTER text:[425, 432, "not now"] textClose:[433, 434, "|"]
+          Text[425, 432] chars:[425, 432, "not now"]
+````````````````````````````````
+
+
+```````````````````````````````` example(IntelliJ: 6) options(intellij-identifier)
+| Left                                   |  Right | Center  |
+| Left                                   |  Right | Center  |
+|:---------------------------------------|-------:|⎮:-------:|
+| ditem 1 can be longer                  | 125.30 |   yes   |
+| item 2  this is a test of table formng |        1,234.00 ||
+| item 3 much longer format              |  10.50 |  maybe  |
+| item 4 short                           |  34.10 | not now |
+
+.
+<table>
+  <thead>
+    <tr><th align="left">Left</th><th align="right">Right</th><th align="center">Center</th></tr>
+    <tr><th align="left">Left</th><th align="right">Right</th><th align="center">Center</th></tr>
+  </thead>
+  <tbody>
+    <tr><td align="left">ditem 1 can be longer</td><td align="right">125.30</td><td align="center">yes</td></tr>
+    <tr><td align="left">item 2  this is a test of table formng</td><td align="right" colspan="2">1,234.00</td></tr>
+    <tr><td align="left">item 3 much longer format</td><td align="right">10.50</td><td align="center">maybe</td></tr>
+    <tr><td align="left">item 4 short</td><td align="right">34.10</td><td align="center">not now</td></tr>
+  </tbody>
+</table>
+.
+Document[0, 436]
+  TableBlock[0, 435]
+    TableHead[0, 123]
+      TableRow[0, 61] rowNumber=1
+        TableCell[0, 42] LEFT header textOpen:[0, 1, "|"] text:[2, 6, "Left"] textClose:[41, 42, "|"]
+          Text[2, 6] chars:[2, 6, "Left"]
+        TableCell[42, 51] RIGHT header text:[44, 49, "Right"] textClose:[50, 51, "|"]
+          Text[44, 49] chars:[44, 49, "Right"]
+        TableCell[51, 61] CENTER header text:[52, 58, "Center"] textClose:[60, 61, "|"]
+          Text[52, 58] chars:[52, 58, "Center"]
+      TableRow[62, 123] rowNumber=2
+        TableCell[62, 104] LEFT header textOpen:[62, 63, "|"] text:[64, 68, "Left"] textClose:[103, 104, "|"]
+          Text[64, 68] chars:[64, 68, "Left"]
+        TableCell[104, 113] RIGHT header text:[106, 111, "Right"] textClose:[112, 113, "|"]
+          Text[106, 111] chars:[106, 111, "Right"]
+        TableCell[113, 123] CENTER header text:[114, 120, "Center"] textClose:[122, 123, "|"]
+          Text[114, 120] chars:[114, 120, "Center"]
+    TableSeparator[124, 186]
+      TableRow[124, 186]
+        TableCell[124, 166] LEFT textOpen:[124, 125, "|"] text:[125, 165, ":---------------------------------------"] textClose:[165, 166, "|"]
+          Text[125, 165] chars:[125, 165, ":---- … -----"]
+        TableCell[166, 175] RIGHT text:[166, 174, "-------:"] textClose:[174, 175, "|"]
+          Text[166, 174] chars:[166, 174, "-------:"]
+        TableCell[175, 186] CENTER text:[175, 185, "%1f:-------:"] textClose:[185, 186, "|"]
+          Text[175, 185] chars:[175, 185, "%1f:-------:"]
+    TableBody[187, 434]
+      TableRow[187, 248] rowNumber=1
+        TableCell[187, 229] LEFT textOpen:[187, 188, "|"] text:[189, 210, "ditem 1 can be longer"] textClose:[228, 229, "|"]
+          Text[189, 210] chars:[189, 210, "ditem … onger"]
+        TableCell[229, 238] RIGHT text:[230, 236, "125.30"] textClose:[237, 238, "|"]
+          Text[230, 236] chars:[230, 236, "125.30"]
+        TableCell[238, 248] CENTER text:[241, 244, "yes"] textClose:[247, 248, "|"]
+          Text[241, 244] chars:[241, 244, "yes"]
+      TableRow[249, 310] rowNumber=2
+        TableCell[249, 291] LEFT textOpen:[249, 250, "|"] text:[251, 289, "item 2  this is a test of table formng"] textClose:[290, 291, "|"]
+          Text[251, 289] chars:[251, 289, "item  … ormng"]
+        TableCell[291, 310] RIGHT span=2 text:[299, 307, "1,234.00"] textClose:[308, 310, "||"]
+          Text[299, 307] chars:[299, 307, "1,234.00"]
+      TableRow[311, 372] rowNumber=3
+        TableCell[311, 353] LEFT textOpen:[311, 312, "|"] text:[313, 338, "item 3 much longer format"] textClose:[352, 353, "|"]
+          Text[313, 338] chars:[313, 338, "item  … ormat"]
+        TableCell[353, 362] RIGHT text:[355, 360, "10.50"] textClose:[361, 362, "|"]
+          Text[355, 360] chars:[355, 360, "10.50"]
+        TableCell[362, 372] CENTER text:[364, 369, "maybe"] textClose:[371, 372, "|"]
+          Text[364, 369] chars:[364, 369, "maybe"]
+      TableRow[373, 434] rowNumber=4
+        TableCell[373, 415] LEFT textOpen:[373, 374, "|"] text:[375, 387, "item 4 short"] textClose:[414, 415, "|"]
+          Text[375, 387] chars:[375, 387, "item  … short"]
+        TableCell[415, 424] RIGHT text:[417, 422, "34.10"] textClose:[423, 424, "|"]
+          Text[417, 422] chars:[417, 422, "34.10"]
+        TableCell[424, 434] CENTER text:[425, 432, "not now"] textClose:[433, 434, "|"]
+          Text[425, 432] chars:[425, 432, "not now"]
+````````````````````````````````
+
+
+```````````````````````````````` example(IntelliJ: 7) options(intellij-identifier)
+| Left                                   |  Right | Center  |
+| Left                                   |  Right | Center  |
+|:---------------------------------------|-------:|:-------:⎮|
+| ditem 1 can be longer                  | 125.30 |   yes   |
+| item 2  this is a test of table formng |        1,234.00 ||
+| item 3 much longer format              |  10.50 |  maybe  |
+| item 4 short                           |  34.10 | not now |
+
+.
+<table>
+  <thead>
+    <tr><th align="left">Left</th><th align="right">Right</th><th align="center">Center</th></tr>
+    <tr><th align="left">Left</th><th align="right">Right</th><th align="center">Center</th></tr>
+  </thead>
+  <tbody>
+    <tr><td align="left">ditem 1 can be longer</td><td align="right">125.30</td><td align="center">yes</td></tr>
+    <tr><td align="left">item 2  this is a test of table formng</td><td align="right" colspan="2">1,234.00</td></tr>
+    <tr><td align="left">item 3 much longer format</td><td align="right">10.50</td><td align="center">maybe</td></tr>
+    <tr><td align="left">item 4 short</td><td align="right">34.10</td><td align="center">not now</td></tr>
+  </tbody>
+</table>
+.
+Document[0, 436]
+  TableBlock[0, 435]
+    TableHead[0, 123]
+      TableRow[0, 61] rowNumber=1
+        TableCell[0, 42] LEFT header textOpen:[0, 1, "|"] text:[2, 6, "Left"] textClose:[41, 42, "|"]
+          Text[2, 6] chars:[2, 6, "Left"]
+        TableCell[42, 51] RIGHT header text:[44, 49, "Right"] textClose:[50, 51, "|"]
+          Text[44, 49] chars:[44, 49, "Right"]
+        TableCell[51, 61] CENTER header text:[52, 58, "Center"] textClose:[60, 61, "|"]
+          Text[52, 58] chars:[52, 58, "Center"]
+      TableRow[62, 123] rowNumber=2
+        TableCell[62, 104] LEFT header textOpen:[62, 63, "|"] text:[64, 68, "Left"] textClose:[103, 104, "|"]
+          Text[64, 68] chars:[64, 68, "Left"]
+        TableCell[104, 113] RIGHT header text:[106, 111, "Right"] textClose:[112, 113, "|"]
+          Text[106, 111] chars:[106, 111, "Right"]
+        TableCell[113, 123] CENTER header text:[114, 120, "Center"] textClose:[122, 123, "|"]
+          Text[114, 120] chars:[114, 120, "Center"]
+    TableSeparator[124, 186]
+      TableRow[124, 186]
+        TableCell[124, 166] LEFT textOpen:[124, 125, "|"] text:[125, 165, ":---------------------------------------"] textClose:[165, 166, "|"]
+          Text[125, 165] chars:[125, 165, ":---- … -----"]
+        TableCell[166, 175] RIGHT text:[166, 174, "-------:"] textClose:[174, 175, "|"]
+          Text[166, 174] chars:[166, 174, "-------:"]
+        TableCell[175, 186] CENTER text:[175, 185, ":-------:%1f"] textClose:[185, 186, "|"]
+          Text[175, 185] chars:[175, 185, ":-------:%1f"]
+    TableBody[187, 434]
+      TableRow[187, 248] rowNumber=1
+        TableCell[187, 229] LEFT textOpen:[187, 188, "|"] text:[189, 210, "ditem 1 can be longer"] textClose:[228, 229, "|"]
+          Text[189, 210] chars:[189, 210, "ditem … onger"]
+        TableCell[229, 238] RIGHT text:[230, 236, "125.30"] textClose:[237, 238, "|"]
+          Text[230, 236] chars:[230, 236, "125.30"]
+        TableCell[238, 248] CENTER text:[241, 244, "yes"] textClose:[247, 248, "|"]
+          Text[241, 244] chars:[241, 244, "yes"]
+      TableRow[249, 310] rowNumber=2
+        TableCell[249, 291] LEFT textOpen:[249, 250, "|"] text:[251, 289, "item 2  this is a test of table formng"] textClose:[290, 291, "|"]
+          Text[251, 289] chars:[251, 289, "item  … ormng"]
+        TableCell[291, 310] RIGHT span=2 text:[299, 307, "1,234.00"] textClose:[308, 310, "||"]
+          Text[299, 307] chars:[299, 307, "1,234.00"]
+      TableRow[311, 372] rowNumber=3
+        TableCell[311, 353] LEFT textOpen:[311, 312, "|"] text:[313, 338, "item 3 much longer format"] textClose:[352, 353, "|"]
+          Text[313, 338] chars:[313, 338, "item  … ormat"]
+        TableCell[353, 362] RIGHT text:[355, 360, "10.50"] textClose:[361, 362, "|"]
+          Text[355, 360] chars:[355, 360, "10.50"]
+        TableCell[362, 372] CENTER text:[364, 369, "maybe"] textClose:[371, 372, "|"]
+          Text[364, 369] chars:[364, 369, "maybe"]
+      TableRow[373, 434] rowNumber=4
+        TableCell[373, 415] LEFT textOpen:[373, 374, "|"] text:[375, 387, "item 4 short"] textClose:[414, 415, "|"]
+          Text[375, 387] chars:[375, 387, "item  … short"]
+        TableCell[415, 424] RIGHT text:[417, 422, "34.10"] textClose:[423, 424, "|"]
+          Text[417, 422] chars:[417, 422, "34.10"]
+        TableCell[424, 434] CENTER text:[425, 432, "not now"] textClose:[433, 434, "|"]
+          Text[425, 432] chars:[425, 432, "not now"]
+````````````````````````````````
+
+
+```````````````````````````````` example(IntelliJ: 8) options(intellij-identifier)
+| Left                                   |  Right | Center  |
+| Left                                   |  Right | Center  |
+|:---------------------------------------|-------:|:-------:|⎮
+| ditem 1 can be longer                  | 125.30 |   yes   |
+| item 2  this is a test of table formng |        1,234.00 ||
+| item 3 much longer format              |  10.50 |  maybe  |
+| item 4 short                           |  34.10 | not now |
+
+.
+<table>
+  <thead>
+    <tr><th align="left">Left</th><th align="right">Right</th><th align="center">Center</th></tr>
+    <tr><th align="left">Left</th><th align="right">Right</th><th align="center">Center</th></tr>
+  </thead>
+  <tbody>
+    <tr><td align="left">ditem 1 can be longer</td><td align="right">125.30</td><td align="center">yes</td></tr>
+    <tr><td align="left">item 2  this is a test of table formng</td><td align="right" colspan="2">1,234.00</td></tr>
+    <tr><td align="left">item 3 much longer format</td><td align="right">10.50</td><td align="center">maybe</td></tr>
+    <tr><td align="left">item 4 short</td><td align="right">34.10</td><td align="center">not now</td></tr>
+  </tbody>
+</table>
+.
+Document[0, 436]
+  TableBlock[0, 435]
+    TableHead[0, 123]
+      TableRow[0, 61] rowNumber=1
+        TableCell[0, 42] LEFT header textOpen:[0, 1, "|"] text:[2, 6, "Left"] textClose:[41, 42, "|"]
+          Text[2, 6] chars:[2, 6, "Left"]
+        TableCell[42, 51] RIGHT header text:[44, 49, "Right"] textClose:[50, 51, "|"]
+          Text[44, 49] chars:[44, 49, "Right"]
+        TableCell[51, 61] CENTER header text:[52, 58, "Center"] textClose:[60, 61, "|"]
+          Text[52, 58] chars:[52, 58, "Center"]
+      TableRow[62, 123] rowNumber=2
+        TableCell[62, 104] LEFT header textOpen:[62, 63, "|"] text:[64, 68, "Left"] textClose:[103, 104, "|"]
+          Text[64, 68] chars:[64, 68, "Left"]
+        TableCell[104, 113] RIGHT header text:[106, 111, "Right"] textClose:[112, 113, "|"]
+          Text[106, 111] chars:[106, 111, "Right"]
+        TableCell[113, 123] CENTER header text:[114, 120, "Center"] textClose:[122, 123, "|"]
+          Text[114, 120] chars:[114, 120, "Center"]
+    TableSeparator[124, 186]
+      TableRow[124, 186]
+        TableCell[124, 166] LEFT textOpen:[124, 125, "|"] text:[125, 165, ":---------------------------------------"] textClose:[165, 166, "|"]
+          Text[125, 165] chars:[125, 165, ":---- … -----"]
+        TableCell[166, 175] RIGHT text:[166, 174, "-------:"] textClose:[174, 175, "|"]
+          Text[166, 174] chars:[166, 174, "-------:"]
+        TableCell[175, 186] CENTER text:[175, 184, ":-------:"] textClose:[184, 186, "|%1f"]
+          Text[175, 184] chars:[175, 184, ":-------:"]
+    TableBody[187, 434]
+      TableRow[187, 248] rowNumber=1
+        TableCell[187, 229] LEFT textOpen:[187, 188, "|"] text:[189, 210, "ditem 1 can be longer"] textClose:[228, 229, "|"]
+          Text[189, 210] chars:[189, 210, "ditem … onger"]
+        TableCell[229, 238] RIGHT text:[230, 236, "125.30"] textClose:[237, 238, "|"]
+          Text[230, 236] chars:[230, 236, "125.30"]
+        TableCell[238, 248] CENTER text:[241, 244, "yes"] textClose:[247, 248, "|"]
+          Text[241, 244] chars:[241, 244, "yes"]
+      TableRow[249, 310] rowNumber=2
+        TableCell[249, 291] LEFT textOpen:[249, 250, "|"] text:[251, 289, "item 2  this is a test of table formng"] textClose:[290, 291, "|"]
+          Text[251, 289] chars:[251, 289, "item  … ormng"]
+        TableCell[291, 310] RIGHT span=2 text:[299, 307, "1,234.00"] textClose:[308, 310, "||"]
+          Text[299, 307] chars:[299, 307, "1,234.00"]
+      TableRow[311, 372] rowNumber=3
+        TableCell[311, 353] LEFT textOpen:[311, 312, "|"] text:[313, 338, "item 3 much longer format"] textClose:[352, 353, "|"]
+          Text[313, 338] chars:[313, 338, "item  … ormat"]
+        TableCell[353, 362] RIGHT text:[355, 360, "10.50"] textClose:[361, 362, "|"]
+          Text[355, 360] chars:[355, 360, "10.50"]
+        TableCell[362, 372] CENTER text:[364, 369, "maybe"] textClose:[371, 372, "|"]
+          Text[364, 369] chars:[364, 369, "maybe"]
+      TableRow[373, 434] rowNumber=4
+        TableCell[373, 415] LEFT textOpen:[373, 374, "|"] text:[375, 387, "item 4 short"] textClose:[414, 415, "|"]
+          Text[375, 387] chars:[375, 387, "item  … short"]
+        TableCell[415, 424] RIGHT text:[417, 422, "34.10"] textClose:[423, 424, "|"]
+          Text[417, 422] chars:[417, 422, "34.10"]
+        TableCell[424, 434] CENTER text:[425, 432, "not now"] textClose:[433, 434, "|"]
+          Text[425, 432] chars:[425, 432, "not now"]
+````````````````````````````````
+
+
+```````````````````````````````` example(IntelliJ: 9) options(intellij-identifier)
+| Left                                   |  Right | Center  |
+| Left                                   |  Right | Center  |
+|:---------------------------------------|-------:|:-------:|
+| ditem 1 can be longer                  | 125.30 |   yes   |
+| item 2  this is a test of table formng |        1,234.00 ⎮||
+| item 3 much longer format              |  10.50 |  maybe  |
+| item 4 short                           |  34.10 | not now |
+
+.
+<table>
+  <thead>
+    <tr><th align="left">Left</th><th align="right">Right</th><th align="center">Center</th></tr>
+    <tr><th align="left">Left</th><th align="right">Right</th><th align="center">Center</th></tr>
+  </thead>
+  <tbody>
+    <tr><td align="left">ditem 1 can be longer</td><td align="right">125.30</td><td align="center">yes</td></tr>
+    <tr><td align="left">item 2  this is a test of table formng</td><td align="right" colspan="2">1,234.00 ⎮</td></tr>
+    <tr><td align="left">item 3 much longer format</td><td align="right">10.50</td><td align="center">maybe</td></tr>
+    <tr><td align="left">item 4 short</td><td align="right">34.10</td><td align="center">not now</td></tr>
+  </tbody>
+</table>
+.
+Document[0, 436]
+  TableBlock[0, 435]
+    TableHead[0, 123]
+      TableRow[0, 61] rowNumber=1
+        TableCell[0, 42] LEFT header textOpen:[0, 1, "|"] text:[2, 6, "Left"] textClose:[41, 42, "|"]
+          Text[2, 6] chars:[2, 6, "Left"]
+        TableCell[42, 51] RIGHT header text:[44, 49, "Right"] textClose:[50, 51, "|"]
+          Text[44, 49] chars:[44, 49, "Right"]
+        TableCell[51, 61] CENTER header text:[52, 58, "Center"] textClose:[60, 61, "|"]
+          Text[52, 58] chars:[52, 58, "Center"]
+      TableRow[62, 123] rowNumber=2
+        TableCell[62, 104] LEFT header textOpen:[62, 63, "|"] text:[64, 68, "Left"] textClose:[103, 104, "|"]
+          Text[64, 68] chars:[64, 68, "Left"]
+        TableCell[104, 113] RIGHT header text:[106, 111, "Right"] textClose:[112, 113, "|"]
+          Text[106, 111] chars:[106, 111, "Right"]
+        TableCell[113, 123] CENTER header text:[114, 120, "Center"] textClose:[122, 123, "|"]
+          Text[114, 120] chars:[114, 120, "Center"]
+    TableSeparator[124, 185]
+      TableRow[124, 185]
+        TableCell[124, 166] LEFT textOpen:[124, 125, "|"] text:[125, 165, ":---------------------------------------"] textClose:[165, 166, "|"]
+          Text[125, 165] chars:[125, 165, ":---- … -----"]
+        TableCell[166, 175] RIGHT text:[166, 174, "-------:"] textClose:[174, 175, "|"]
+          Text[166, 174] chars:[166, 174, "-------:"]
+        TableCell[175, 185] CENTER text:[175, 184, ":-------:"] textClose:[184, 185, "|"]
+          Text[175, 184] chars:[175, 184, ":-------:"]
+    TableBody[186, 434]
+      TableRow[186, 247] rowNumber=1
+        TableCell[186, 228] LEFT textOpen:[186, 187, "|"] text:[188, 209, "ditem 1 can be longer"] textClose:[227, 228, "|"]
+          Text[188, 209] chars:[188, 209, "ditem … onger"]
+        TableCell[228, 237] RIGHT text:[229, 235, "125.30"] textClose:[236, 237, "|"]
+          Text[229, 235] chars:[229, 235, "125.30"]
+        TableCell[237, 247] CENTER text:[240, 243, "yes"] textClose:[246, 247, "|"]
+          Text[240, 243] chars:[240, 243, "yes"]
+      TableRow[248, 310] rowNumber=2
+        TableCell[248, 290] LEFT textOpen:[248, 249, "|"] text:[250, 288, "item 2  this is a test of table formng"] textClose:[289, 290, "|"]
+          Text[250, 288] chars:[250, 288, "item  … ormng"]
+        TableCell[290, 310] RIGHT span=2 text:[298, 308, "1,234.00 %1f"] textClose:[308, 310, "||"]
+          Text[298, 308] chars:[298, 308, "1,234.00 %1f"]
+      TableRow[311, 372] rowNumber=3
+        TableCell[311, 353] LEFT textOpen:[311, 312, "|"] text:[313, 338, "item 3 much longer format"] textClose:[352, 353, "|"]
+          Text[313, 338] chars:[313, 338, "item  … ormat"]
+        TableCell[353, 362] RIGHT text:[355, 360, "10.50"] textClose:[361, 362, "|"]
+          Text[355, 360] chars:[355, 360, "10.50"]
+        TableCell[362, 372] CENTER text:[364, 369, "maybe"] textClose:[371, 372, "|"]
+          Text[364, 369] chars:[364, 369, "maybe"]
+      TableRow[373, 434] rowNumber=4
+        TableCell[373, 415] LEFT textOpen:[373, 374, "|"] text:[375, 387, "item 4 short"] textClose:[414, 415, "|"]
+          Text[375, 387] chars:[375, 387, "item  … short"]
+        TableCell[415, 424] RIGHT text:[417, 422, "34.10"] textClose:[423, 424, "|"]
+          Text[417, 422] chars:[417, 422, "34.10"]
+        TableCell[424, 434] CENTER text:[425, 432, "not now"] textClose:[433, 434, "|"]
+          Text[425, 432] chars:[425, 432, "not now"]
+````````````````````````````````
+
+
+```````````````````````````````` example(IntelliJ: 10) options(intellij-identifier)
+| Left                                   |  Right | Center  |
+| Left                                   |  Right | Center  |
+|:---------------------------------------|-------:|:-------:|
+| ditem 1 can be longer                  | 125.30 |   yes   |
+| item 2  this is a test of table formng |        1,234.00 |⎮|
+| item 3 much longer format              |  10.50 |  maybe  |
+| item 4 short                           |  34.10 | not now |
+
+.
+<table>
+  <thead>
+    <tr><th align="left">Left</th><th align="right">Right</th><th align="center">Center</th></tr>
+    <tr><th align="left">Left</th><th align="right">Right</th><th align="center">Center</th></tr>
+  </thead>
+  <tbody>
+    <tr><td align="left">ditem 1 can be longer</td><td align="right">125.30</td><td align="center">yes</td></tr>
+    <tr><td align="left">item 2  this is a test of table formng</td><td align="right" colspan="2">1,234.00</td></tr>
+    <tr><td align="left">item 3 much longer format</td><td align="right">10.50</td><td align="center">maybe</td></tr>
+    <tr><td align="left">item 4 short</td><td align="right">34.10</td><td align="center">not now</td></tr>
+  </tbody>
+</table>
+.
+Document[0, 436]
+  TableBlock[0, 435]
+    TableHead[0, 123]
+      TableRow[0, 61] rowNumber=1
+        TableCell[0, 42] LEFT header textOpen:[0, 1, "|"] text:[2, 6, "Left"] textClose:[41, 42, "|"]
+          Text[2, 6] chars:[2, 6, "Left"]
+        TableCell[42, 51] RIGHT header text:[44, 49, "Right"] textClose:[50, 51, "|"]
+          Text[44, 49] chars:[44, 49, "Right"]
+        TableCell[51, 61] CENTER header text:[52, 58, "Center"] textClose:[60, 61, "|"]
+          Text[52, 58] chars:[52, 58, "Center"]
+      TableRow[62, 123] rowNumber=2
+        TableCell[62, 104] LEFT header textOpen:[62, 63, "|"] text:[64, 68, "Left"] textClose:[103, 104, "|"]
+          Text[64, 68] chars:[64, 68, "Left"]
+        TableCell[104, 113] RIGHT header text:[106, 111, "Right"] textClose:[112, 113, "|"]
+          Text[106, 111] chars:[106, 111, "Right"]
+        TableCell[113, 123] CENTER header text:[114, 120, "Center"] textClose:[122, 123, "|"]
+          Text[114, 120] chars:[114, 120, "Center"]
+    TableSeparator[124, 185]
+      TableRow[124, 185]
+        TableCell[124, 166] LEFT textOpen:[124, 125, "|"] text:[125, 165, ":---------------------------------------"] textClose:[165, 166, "|"]
+          Text[125, 165] chars:[125, 165, ":---- … -----"]
+        TableCell[166, 175] RIGHT text:[166, 174, "-------:"] textClose:[174, 175, "|"]
+          Text[166, 174] chars:[166, 174, "-------:"]
+        TableCell[175, 185] CENTER text:[175, 184, ":-------:"] textClose:[184, 185, "|"]
+          Text[175, 184] chars:[175, 184, ":-------:"]
+    TableBody[186, 434]
+      TableRow[186, 247] rowNumber=1
+        TableCell[186, 228] LEFT textOpen:[186, 187, "|"] text:[188, 209, "ditem 1 can be longer"] textClose:[227, 228, "|"]
+          Text[188, 209] chars:[188, 209, "ditem … onger"]
+        TableCell[228, 237] RIGHT text:[229, 235, "125.30"] textClose:[236, 237, "|"]
+          Text[229, 235] chars:[229, 235, "125.30"]
+        TableCell[237, 247] CENTER text:[240, 243, "yes"] textClose:[246, 247, "|"]
+          Text[240, 243] chars:[240, 243, "yes"]
+      TableRow[248, 310] rowNumber=2
+        TableCell[248, 290] LEFT textOpen:[248, 249, "|"] text:[250, 288, "item 2  this is a test of table formng"] textClose:[289, 290, "|"]
+          Text[250, 288] chars:[250, 288, "item  … ormng"]
+        TableCell[290, 310] RIGHT span=2 text:[298, 306, "1,234.00"] textClose:[307, 310, "|%1f|"]
+          Text[298, 306] chars:[298, 306, "1,234.00"]
+      TableRow[311, 372] rowNumber=3
+        TableCell[311, 353] LEFT textOpen:[311, 312, "|"] text:[313, 338, "item 3 much longer format"] textClose:[352, 353, "|"]
+          Text[313, 338] chars:[313, 338, "item  … ormat"]
+        TableCell[353, 362] RIGHT text:[355, 360, "10.50"] textClose:[361, 362, "|"]
+          Text[355, 360] chars:[355, 360, "10.50"]
+        TableCell[362, 372] CENTER text:[364, 369, "maybe"] textClose:[371, 372, "|"]
+          Text[364, 369] chars:[364, 369, "maybe"]
+      TableRow[373, 434] rowNumber=4
+        TableCell[373, 415] LEFT textOpen:[373, 374, "|"] text:[375, 387, "item 4 short"] textClose:[414, 415, "|"]
+          Text[375, 387] chars:[375, 387, "item  … short"]
+        TableCell[415, 424] RIGHT text:[417, 422, "34.10"] textClose:[423, 424, "|"]
+          Text[417, 422] chars:[417, 422, "34.10"]
+        TableCell[424, 434] CENTER text:[425, 432, "not now"] textClose:[433, 434, "|"]
+          Text[425, 432] chars:[425, 432, "not now"]
+````````````````````````````````
+
+
+```````````````````````````````` example(IntelliJ: 11) options(intellij-identifier)
+| Left                                   |  Right | Center  |
+| Left                                   |  Right | Center  |
+|:---------------------------------------|-------:|:-------:|
+| ditem 1 can be longer                  | 125.30 |   yes   |
+| item 2  this is a test of table formng |        1,234.00 ||⎮
+| item 3 much longer format              |  10.50 |  maybe  |
+| item 4 short                           |  34.10 | not now |
+
+.
+<table>
+  <thead>
+    <tr><th align="left">Left</th><th align="right">Right</th><th align="center">Center</th></tr>
+    <tr><th align="left">Left</th><th align="right">Right</th><th align="center">Center</th></tr>
+  </thead>
+  <tbody>
+    <tr><td align="left">ditem 1 can be longer</td><td align="right">125.30</td><td align="center">yes</td></tr>
+    <tr><td align="left">item 2  this is a test of table formng</td><td align="right" colspan="2">1,234.00</td></tr>
+    <tr><td align="left">item 3 much longer format</td><td align="right">10.50</td><td align="center">maybe</td></tr>
+    <tr><td align="left">item 4 short</td><td align="right">34.10</td><td align="center">not now</td></tr>
+  </tbody>
+</table>
+.
+Document[0, 436]
+  TableBlock[0, 435]
+    TableHead[0, 123]
+      TableRow[0, 61] rowNumber=1
+        TableCell[0, 42] LEFT header textOpen:[0, 1, "|"] text:[2, 6, "Left"] textClose:[41, 42, "|"]
+          Text[2, 6] chars:[2, 6, "Left"]
+        TableCell[42, 51] RIGHT header text:[44, 49, "Right"] textClose:[50, 51, "|"]
+          Text[44, 49] chars:[44, 49, "Right"]
+        TableCell[51, 61] CENTER header text:[52, 58, "Center"] textClose:[60, 61, "|"]
+          Text[52, 58] chars:[52, 58, "Center"]
+      TableRow[62, 123] rowNumber=2
+        TableCell[62, 104] LEFT header textOpen:[62, 63, "|"] text:[64, 68, "Left"] textClose:[103, 104, "|"]
+          Text[64, 68] chars:[64, 68, "Left"]
+        TableCell[104, 113] RIGHT header text:[106, 111, "Right"] textClose:[112, 113, "|"]
+          Text[106, 111] chars:[106, 111, "Right"]
+        TableCell[113, 123] CENTER header text:[114, 120, "Center"] textClose:[122, 123, "|"]
+          Text[114, 120] chars:[114, 120, "Center"]
+    TableSeparator[124, 185]
+      TableRow[124, 185]
+        TableCell[124, 166] LEFT textOpen:[124, 125, "|"] text:[125, 165, ":---------------------------------------"] textClose:[165, 166, "|"]
+          Text[125, 165] chars:[125, 165, ":---- … -----"]
+        TableCell[166, 175] RIGHT text:[166, 174, "-------:"] textClose:[174, 175, "|"]
+          Text[166, 174] chars:[166, 174, "-------:"]
+        TableCell[175, 185] CENTER text:[175, 184, ":-------:"] textClose:[184, 185, "|"]
+          Text[175, 184] chars:[175, 184, ":-------:"]
+    TableBody[186, 434]
+      TableRow[186, 247] rowNumber=1
+        TableCell[186, 228] LEFT textOpen:[186, 187, "|"] text:[188, 209, "ditem 1 can be longer"] textClose:[227, 228, "|"]
+          Text[188, 209] chars:[188, 209, "ditem … onger"]
+        TableCell[228, 237] RIGHT text:[229, 235, "125.30"] textClose:[236, 237, "|"]
+          Text[229, 235] chars:[229, 235, "125.30"]
+        TableCell[237, 247] CENTER text:[240, 243, "yes"] textClose:[246, 247, "|"]
+          Text[240, 243] chars:[240, 243, "yes"]
+      TableRow[248, 310] rowNumber=2
+        TableCell[248, 290] LEFT textOpen:[248, 249, "|"] text:[250, 288, "item 2  this is a test of table formng"] textClose:[289, 290, "|"]
+          Text[250, 288] chars:[250, 288, "item  … ormng"]
+        TableCell[290, 310] RIGHT span=2 text:[298, 306, "1,234.00"] textClose:[307, 310, "||%1f"]
+          Text[298, 306] chars:[298, 306, "1,234.00"]
+      TableRow[311, 372] rowNumber=3
+        TableCell[311, 353] LEFT textOpen:[311, 312, "|"] text:[313, 338, "item 3 much longer format"] textClose:[352, 353, "|"]
+          Text[313, 338] chars:[313, 338, "item  … ormat"]
+        TableCell[353, 362] RIGHT text:[355, 360, "10.50"] textClose:[361, 362, "|"]
+          Text[355, 360] chars:[355, 360, "10.50"]
+        TableCell[362, 372] CENTER text:[364, 369, "maybe"] textClose:[371, 372, "|"]
+          Text[364, 369] chars:[364, 369, "maybe"]
+      TableRow[373, 434] rowNumber=4
+        TableCell[373, 415] LEFT textOpen:[373, 374, "|"] text:[375, 387, "item 4 short"] textClose:[414, 415, "|"]
+          Text[375, 387] chars:[375, 387, "item  … short"]
+        TableCell[415, 424] RIGHT text:[417, 422, "34.10"] textClose:[423, 424, "|"]
+          Text[417, 422] chars:[417, 422, "34.10"]
+        TableCell[424, 434] CENTER text:[425, 432, "not now"] textClose:[433, 434, "|"]
+          Text[425, 432] chars:[425, 432, "not now"]
 ````````````````````````````````
 
 

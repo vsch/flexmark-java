@@ -34,6 +34,16 @@ public class ComboTableSpecTest extends ComboSpecTestCase {
         optionsMap.put("keep-whitespace", new MutableDataSet().set(TablesExtension.TRIM_CELL_WHITESPACE, false));
         optionsMap.put("min-dashes-2", new MutableDataSet().set(TablesExtension.MIN_SEPARATOR_DASHES, 2));
         optionsMap.put("min-dashes-1", new MutableDataSet().set(TablesExtension.MIN_SEPARATOR_DASHES, 1));
+        optionsMap.put("intellij-identifier", new MutableDataSet().set(Parser.INTELLIJ_DUMMY_IDENTIFIER, true));
+        optionsMap.put("strip-indent", new MutableDataSet().set(SOURCE_INDENT, "> > "));
+        optionsMap.put("sub-parse", new MutableDataSet()
+                .set(SOURCE_PREFIX, "" +
+                        "Source Prefix\n" +
+                        "")
+                .set(SOURCE_SUFFIX, "" +
+                        "Source Suffix\n" +
+                        "")
+        );
     }
 
     static final Parser PARSER = Parser.builder(OPTIONS).build();

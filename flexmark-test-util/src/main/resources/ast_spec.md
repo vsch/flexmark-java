@@ -2264,7 +2264,7 @@ Unclosed code blocks are closed by the end of the document
 <pre><code></code></pre>
 .
 Document[0, 4]
-  FencedCodeBlock[0, 4] open:[0, 3, "```"] content:[4, 4] lines[0]
+  FencedCodeBlock[0, 4] open:[0, 3, "```"] lines[0]
 ````````````````````````````````
 
 
@@ -2333,7 +2333,7 @@ A code block can be empty:
 <pre><code></code></pre>
 .
 Document[0, 8]
-  FencedCodeBlock[0, 7] open:[0, 3, "```"] content:[7, 7] lines[0] close:[4, 7, "```"]
+  FencedCodeBlock[0, 7] open:[0, 3, "```"] lines[0] close:[4, 7, "```"]
 ````````````````````````````````
 
 
@@ -2591,7 +2591,7 @@ Document[0, 65]
 <pre><code class="language-;"></code></pre>
 .
 Document[0, 11]
-  FencedCodeBlock[0, 10] open:[0, 4, "````"] info:[4, 5, ";"] content:[10, 10] lines[0] close:[6, 10, "````"]
+  FencedCodeBlock[0, 10] open:[0, 4, "````"] info:[4, 5, ";"] lines[0] close:[6, 10, "````"]
 ````````````````````````````````
 
 
@@ -4546,10 +4546,10 @@ foo
 .
 Document[0, 14]
   BlockQuote[0, 6] marker:[0, 1, ">"]
-    FencedCodeBlock[2, 6] open:[2, 5, "```"] content:[6, 6] lines[0]
+    FencedCodeBlock[2, 6] open:[2, 5, "```"] lines[0]
   Paragraph[6, 10]
     Text[6, 9] chars:[6, 9, "foo"]
-  FencedCodeBlock[10, 14] open:[10, 13, "```"] content:[14, 14] lines[0]
+  FencedCodeBlock[10, 14] open:[10, 13, "```"] lines[0]
 ````````````````````````````````
 
 

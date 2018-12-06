@@ -265,7 +265,12 @@ flexmark-java
 -------
 
 * [ ] Add: base64 embedded image link resolver option or a sample on how to do it
-* Change: some breaking changes to FormattingAppendableImpl derived constructors. Now all
+* Break: potentially breaking change, now FencedCode block with empty content returns
+  `SubSequence.NULL` for content with no lines, previously returned empty string with start==end
+  representing the position in the document where the content should have been. Affects only
+  `FencedCodeBlock` and `AsideBlock`. Can use`FencedCodeBlock.getOpeningMarker().getEndOffset()
+  \+ 1` if you need the position where the content would have been. Similarly for `AsideBlock`
+* Break: some breaking changes to `FormattingAppendableImpl` derived constructors. Now most 
   arguments must be passed, no defaults. It was getting too messy to trace which constructors
   were used and what were the resulting options for the appendable.
 * Fix: with `HtmlRenderer.FORMAT_FLAGS` set to `HtmlRenderer.PASS_THROUGH` pre-formatted would

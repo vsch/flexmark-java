@@ -30,7 +30,7 @@ public final class SegmentedSequenceBuilder {
     }
 
     public BasedSequence toBasedSequence() {
-        return SegmentedSequence.of(segments, base);
+        return SegmentedSequence.of(segments);
     }
 
     public BasedSequence[] toSegments() {

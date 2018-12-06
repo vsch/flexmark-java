@@ -10,11 +10,13 @@ import static java.lang.Integer.MIN_VALUE;
  * a subSequence() returns a sub-sequence from the original base sequence
  */
 public final class SegmentedSequence extends BasedSequenceImpl {
-    private final BasedSequence baseSeq;
-    private final char[] nonBaseChars;
-    private final int[] baseOffsets;
-    private final int baseStartOffset;
-    private final int length;      // list of start/end indices
+    private final BasedSequence baseSeq;  // base sequence
+    private final char[] nonBaseChars;    // all non-base characters, offset by baseStartOffset. When baseOffsets[] < 0, take -ve - 1 to get index into this array
+    private final int[] baseOffsets;      // list of base offsets, offset by baseStartOffset
+    private final int baseStartOffset;    // start offset for baseOffsets of this sequence, offset from baseSeq for all chars, including non-base chars
+    private final int length;             // length of this sequence
+    private Integer startOffset = null;   // this sequence's start offset in base or best guess when non-base characters are used
+    private Integer endOffset = null;     // this sequence's end offset in base or best guess when non-base characters are used
 
     @Override
     public Object getBase() {
@@ -26,31 +28,72 @@ public final class SegmentedSequence extends BasedSequenceImpl {
         return baseSeq.getBaseSequence();
     }
 
+    /**
+     * Get the first start in the base sequence, non-based sequences are skipped
+     *
+     * @return start in base sequence
+     */
     public int getStartOffset() {
+        if (startOffset == null) {
+            startOffset = computeStartOffset();
+        }
+        return startOffset;
+    }
+
+    private int computeStartOffset() {
+        assert baseStartOffset + length <= baseOffsets.length : "Sub-sequence offsets list length < baseStartOffset + sub-sequence length";
+
         int iMax = baseOffsets.length;
 
         if (nonBaseChars != null) {
+            // start is the first real start in this sequence or after it 
             for (int i = baseStartOffset; i < iMax; i++) {
                 if (baseOffsets[i] >= 0) return baseOffsets[i];
             }
-            return 0;
+
+            // if no start in or after then it is previous real end
+            for (int i = baseStartOffset; i-- > 0; ) {
+                if (baseOffsets[i] >= 0) return baseOffsets[i] + 1;
+            }
+
+            return baseSeq.getStartOffset();  // better than 0, here we are no further than baseSeq start
         }
-        return iMax > 0 ? (baseStartOffset < iMax ? baseOffsets[baseStartOffset] : baseOffsets[iMax - 1]) : 0;
+
+        // here there are no nonBaseChars, all sequences are based sequences
+        return baseStartOffset < iMax ? baseOffsets[baseStartOffset] : iMax > 0 ? baseOffsets[iMax - 1] : baseSeq.getStartOffset();
     }
 
+    /**
+     * Get the last end in the base sequence, non-based sequences are skipped
+     *
+     * @return end in base sequence
+     */
     public int getEndOffset() {
+        //if (endOffset == null) {
+        //    endOffset = computeEndOffset();
+        //}
+        //return endOffset;
+        return computeEndOffset();
+    }
+
+    private int computeEndOffset() {
+        // ensure that 0 length end returns start
+        if (length == 0) return getStartOffset();
+
         int iMax = baseOffsets.length;
 
         if (nonBaseChars != null) {
-            for (int i = iMax; i-- > baseStartOffset; ) {
-                if (baseOffsets[i] >= 0) return baseOffsets[i];
+            // end is the last real end in this sequence
+            for (int i = baseStartOffset + length; i-- > 0; ) {
+                if (baseOffsets[i] >= 0) return baseOffsets[i] + 1;
             }
-            return 0;
+
+            // failing that it is the same as start
+            return getStartOffset();
         }
 
-        // ensure that 0 length end returns start
-        if (length == 0) return iMax > 0 ? (baseStartOffset < iMax ? baseOffsets[baseStartOffset] : baseOffsets[iMax - 1]) : 0;
-        return iMax > 0 ? (baseStartOffset + length <= iMax ? baseOffsets[baseStartOffset + length - 1] + 1 : baseOffsets[baseStartOffset + iMax - 1] + 1) : 0;
+        // here there are no nonBaseChars, all sequences are based sequences
+        return baseOffsets[baseStartOffset + length - 1] + 1;
     }
 
     @Override
@@ -89,7 +132,7 @@ public final class SegmentedSequence extends BasedSequenceImpl {
         }
 
         if (index == length) {
-            if (index == 0) {
+            if (length == 0) {
                 throw new StringIndexOutOfBoundsException("String index: " + index + " out of range: 0, " + length());
             }
             int offset = baseOffsets[baseStartOffset + index - 1];
@@ -103,47 +146,59 @@ public final class SegmentedSequence extends BasedSequenceImpl {
         return offset < 0 ? -1 : offset;
     }
 
-    public static BasedSequence of(List<BasedSequence> segments, BasedSequence empty) {
-        if (segments.size() == 0) {
-            return empty;
-        }
+    /**
+     * removed empty and return BasedSequence.NULL when no segments which is the logical result however,
+     * this will mean empty node text in FencedCodeBlock will now return NULL sequence instead of an empty
+     * sequence from the document.
+     * <p>
+     * If you need the location where content would have been use the FencedCodeBlock.getOpeningMarker().getEndOffset() + 1
+     *
+     * @param segments list of based sequences to put into a based sequence
+     * @return based sequence of segments. Result is a sequence which looks like
+     * all the segments were concatenated, while still maintaining
+     * the original offset for each character when using {@link #getIndexOffset(int)}(int index)
+     */
+    public static BasedSequence of(List<BasedSequence> segments) {
+        if (segments.size() != 0) {
+            BasedSequence lastSegment = null;
+            BasedSequence firstSegment = segments.get(0);
+            BasedSequence base = firstSegment.getBaseSequence();
+            ArrayList<BasedSequence> mergedSequences = new ArrayList<BasedSequence>();
 
-        BasedSequence lastSegment = null;
-        BasedSequence firstSegment = segments.get(0);
-        BasedSequence base = firstSegment.getBaseSequence();
-        ArrayList<BasedSequence> mergedSequences = new ArrayList<BasedSequence>();
+            for (BasedSequence segment : segments) {
+                if (segment.isEmpty()) continue;  // skip empty sequences, they serve no purpose
 
-        for (BasedSequence basedSequence : segments) {
-            if (base.getBase() != basedSequence.getBase()) {
-                int tmp = 0;
-            }
-            assert base.getBase() == basedSequence.getBase() : "all segments must come from the same base sequence";
+                if (base.getBase() != segment.getBase()) {
+                    assert false : "all segments must come from the same base sequence";
+                }
 
-            if (basedSequence instanceof PrefixedSubSequence || basedSequence instanceof SegmentedSequence) {
-                if (lastSegment != null) mergedSequences.add(lastSegment);
-                mergedSequences.add(basedSequence);
-                lastSegment = null;
-            } else {
-                if (lastSegment == null) {
-                    lastSegment = basedSequence;
+                if (segment instanceof PrefixedSubSequence || segment instanceof SegmentedSequence) {
+                    if (lastSegment != null) mergedSequences.add(lastSegment);
+                    mergedSequences.add(segment);
+                    lastSegment = null;
                 } else {
-                    if (lastSegment.getEndOffset() != basedSequence.getStartOffset()) {
-                        mergedSequences.add(lastSegment);
-                        lastSegment = basedSequence;
+                    if (lastSegment == null) {
+                        lastSegment = segment;
                     } else {
-                        lastSegment = lastSegment.baseSubSequence(lastSegment.getStartOffset(), basedSequence.getEndOffset());
+                        if (lastSegment.getEndOffset() != segment.getStartOffset()) {
+                            mergedSequences.add(lastSegment);
+                            lastSegment = segment;
+                        } else {
+                            lastSegment = lastSegment.baseSubSequence(lastSegment.getStartOffset(), segment.getEndOffset());
+                        }
                     }
                 }
             }
+
+            if (lastSegment != null) mergedSequences.add(lastSegment);
+
+            if (mergedSequences.size() == 1) {
+                return mergedSequences.get(0);
+            } else if (mergedSequences.size() != 0) {
+                return new SegmentedSequence(mergedSequences);
+            }
         }
-
-        if (lastSegment != null) mergedSequences.add(lastSegment);
-
-        if (mergedSequences.size() == 1) {
-            return mergedSequences.get(0);
-        }
-
-        return new SegmentedSequence(mergedSequences);
+        return SubSequence.NULL;
     }
 
     private SegmentedSequence(List<BasedSequence> segments) {
@@ -157,7 +212,9 @@ public final class SegmentedSequence extends BasedSequenceImpl {
         int lastEnd = base.getStartOffset();
         for (BasedSequence segment : segments) {
             assert base.getBase() == segment.getBase() : "all segments must come from the same base sequence, segments[" + index + "], length so far: " + length;
-            assert segment.getStartOffset() >= lastEnd : "segments must be in increasing index order from base sequence start=" + segment.getStartOffset() + ", length=" + length + " at index: " + index;
+            if (segment.getStartOffset() < lastEnd) {
+                assert false : "segments must be in increasing index order from base sequence start=" + segment.getStartOffset() + ", length=" + length + " at index: " + index;
+            }
             lastEnd = segment.getEndOffset();
             length += segment.length();
             index++;

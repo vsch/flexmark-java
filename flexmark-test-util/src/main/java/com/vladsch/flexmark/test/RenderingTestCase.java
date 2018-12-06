@@ -5,13 +5,19 @@ import com.vladsch.flexmark.IRender;
 import com.vladsch.flexmark.ast.Document;
 import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.spec.SpecExample;
+import com.vladsch.flexmark.util.Utils;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.DataKey;
 import com.vladsch.flexmark.util.options.MutableDataSet;
+import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.BasedSequenceImpl;
+import com.vladsch.flexmark.util.sequence.SegmentedSequence;
 import org.junit.AssumptionViolatedException;
 import org.junit.ComparisonFailure;
 import org.junit.Rule;
 import org.junit.rules.ExpectedException;
+
+import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
 
@@ -23,13 +29,16 @@ public abstract class RenderingTestCase {
     public static final String FILE_EOL_OPTION_NAME = "FILE_EOL";
     public static final String TIMED_OPTION_NAME = "TIMED";
     public static final String EMBED_TIMED_OPTION_NAME = "EMBED_TIMED";
-    public static final String TIMED_FORMAT_STRING = "Timing: parse %.3f ms, render %.3f ms, total %.3f\n";
+    public static final String TIMED_FORMAT_STRING = "Timing %s: parse %.3f ms, render %.3f ms, total %.3f\n";
     public static final DataKey<Boolean> FAIL = new DataKey<Boolean>(FAIL_OPTION_NAME, false);
     public static final DataKey<Boolean> IGNORE = new DataKey<Boolean>(IGNORE_OPTION_NAME, false);
     public static final DataKey<Boolean> NO_FILE_EOL = new DataKey<Boolean>(NO_FILE_EOL_OPTION_NAME, true);
     public static final DataKey<Boolean> TIMED = new DataKey<Boolean>(TIMED_OPTION_NAME, false);
     public static final DataKey<Boolean> EMBED_TIMED = new DataKey<Boolean>(TIMED_OPTION_NAME, false);
     public static final DataKey<String> INCLUDED_DOCUMENT = new DataKey<>("INCLUDED_DOCUMENT", "");
+    public static final DataKey<String> SOURCE_PREFIX = new DataKey<>("SOURCE_PREFIX", "");
+    public static final DataKey<String> SOURCE_SUFFIX = new DataKey<>("SOURCE_SUFFIX", "");
+    public static final DataKey<String> SOURCE_INDENT = new DataKey<>("SOURCE_INDENT", "");
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -161,16 +170,52 @@ public abstract class RenderingTestCase {
         return true;
     }
 
+    public static BasedSequence stripIndent(BasedSequence input, CharSequence sourceIndent) {
+        BasedSequence result = input;
+        if (sourceIndent.length() != 0) {
+            // strip out indent to test how segmented input parses
+            ArrayList<BasedSequence> segments = new ArrayList<>();
+            int lastPos = 0;
+            int length = input.length();
+
+            while (lastPos < length) {
+                int pos = input.indexOf(sourceIndent, lastPos);
+                int end = pos == -1 ? length : pos;
+
+                if (lastPos < end && (pos <= 0 || input.charAt(pos - 1) == '\n')) {
+                    segments.add(input.subSequence(lastPos, end));
+                }
+                lastPos = end + sourceIndent.length();
+            }
+
+            result = SegmentedSequence.of(segments);
+        }
+        return result;
+    }
+
     protected void assertRendering(String source, String expectedHtml, String optionsSet) {
         DataHolder options = optionsSet == null ? null : getOptions(example(), optionsSet);
         String parseSource = source;
+        IParse parserWithOptions = parser().withOptions(options);
+        IRender rendererWithOptions = renderer().withOptions(options);
 
         if (options != null && options.get(NO_FILE_EOL)) {
             parseSource = DumpSpecReader.trimTrailingEOL(parseSource);
         }
 
-        IParse parserWithOptions = parser().withOptions(options);
-        IRender rendererWithOptions = renderer().withOptions(options);
+        BasedSequence input;
+        String sourcePrefix = SOURCE_PREFIX.getFrom(parserWithOptions.getOptions());
+        String sourceSuffix = SOURCE_SUFFIX.getFrom(parserWithOptions.getOptions());
+        String sourceIndent = SOURCE_INDENT.getFrom(parserWithOptions.getOptions());
+
+        if (!sourcePrefix.isEmpty() || !sourceSuffix.isEmpty()) {
+            String combinedSource = sourcePrefix + Utils.suffixWith(parseSource, "\n") + sourceSuffix;
+            input = BasedSequenceImpl.of(combinedSource).subSequence(sourcePrefix.length(), combinedSource.length() - sourceSuffix.length());
+        } else {
+            input = BasedSequenceImpl.of(parseSource);
+        }
+
+        input = stripIndent(input, sourceIndent);
 
         Node includedDocument = null;
 
@@ -185,7 +230,7 @@ public abstract class RenderingTestCase {
         }
 
         long start = System.nanoTime();
-        Node node = parserWithOptions.parse(parseSource);
+        Node node = parserWithOptions.parse(input);
         long parse = System.nanoTime();
 
         if (node instanceof Document && includedDocument instanceof Document) {
@@ -199,7 +244,7 @@ public abstract class RenderingTestCase {
         boolean embedTimed = EMBED_TIMED.getFrom(node.getDocument());
 
         if (timed || embedTimed) {
-            System.out.print(String.format(TIMED_FORMAT_STRING, (parse - start) / 1000000.0, (render - parse) / 1000000.0, (render - start) / 1000000.0));
+            System.out.print(String.format(TIMED_FORMAT_STRING, "", (parse - start) / 1000000.0, (render - parse) / 1000000.0, (render - start) / 1000000.0));
         }
 
         testCase(node, options);
@@ -212,7 +257,7 @@ public abstract class RenderingTestCase {
         if (example() != null && example().getSection() != null) {
             StringBuilder outExpected = new StringBuilder();
             if (embedTimed) {
-                outExpected.append(String.format(TIMED_FORMAT_STRING, (parse - start) / 1000000.0, (render - parse) / 1000000.0, (render - start) / 1000000.0));
+                outExpected.append(String.format(TIMED_FORMAT_STRING, "", (parse - start) / 1000000.0, (render - parse) / 1000000.0, (render - start) / 1000000.0));
             }
 
             DumpSpecReader.addSpecExample(outExpected, source, expectedHtml, "", optionsSet, true, example().getSection(), example().getExampleNumber());
@@ -224,7 +269,7 @@ public abstract class RenderingTestCase {
         } else {
             if (embedTimed) {
                 StringBuilder outExpected = new StringBuilder();
-                outExpected.append(String.format(TIMED_FORMAT_STRING, (parse - start) / 1000000.0, (render - parse) / 1000000.0, (render - start) / 1000000.0));
+                outExpected.append(String.format(TIMED_FORMAT_STRING, "", (parse - start) / 1000000.0, (render - parse) / 1000000.0, (render - start) / 1000000.0));
                 outExpected.append(DumpSpecReader.addSpecExample(source, expectedHtml, "", optionsSet));
                 expected = outExpected.toString();
             } else {
@@ -248,13 +293,26 @@ public abstract class RenderingTestCase {
         //assert options != null || optionsSet == null || optionsSet.isEmpty() : "Non empty optionsSet without any option customizations";
         DataHolder options = optionsSet == null ? null : getOptions(example(), optionsSet);
         String parseSource = source;
+        IParse parserWithOptions = parser().withOptions(options);
+        IRender rendererWithOptions = renderer().withOptions(options);
 
         if (options != null && options.get(NO_FILE_EOL)) {
             parseSource = DumpSpecReader.trimTrailingEOL(parseSource);
         }
 
-        IParse parserWithOptions = parser().withOptions(options);
-        IRender rendererWithOptions = renderer().withOptions(options);
+        BasedSequence input;
+        String sourcePrefix = SOURCE_PREFIX.getFrom(parserWithOptions.getOptions());
+        String sourceSuffix = SOURCE_SUFFIX.getFrom(parserWithOptions.getOptions());
+        String sourceIndent = SOURCE_INDENT.getFrom(parserWithOptions.getOptions());
+
+        if (!sourcePrefix.isEmpty() || !sourceSuffix.isEmpty()) {
+            String combinedSource = sourcePrefix + Utils.suffixWith(parseSource, "\n") + sourceSuffix;
+            input = BasedSequenceImpl.of(combinedSource).subSequence(sourcePrefix.length(), combinedSource.length() - sourceSuffix.length());
+        } else {
+            input = BasedSequenceImpl.of(parseSource);
+        }
+
+        input = stripIndent(input, sourceIndent);
 
         Node includedDocument = null;
 
@@ -269,7 +327,7 @@ public abstract class RenderingTestCase {
         }
 
         long start = System.nanoTime();
-        Node node = parserWithOptions.parse(parseSource);
+        Node node = parserWithOptions.parse(input);
         long parse = System.nanoTime();
 
         if (node instanceof Document && includedDocument instanceof Document) {
@@ -283,7 +341,7 @@ public abstract class RenderingTestCase {
         boolean embedTimed = EMBED_TIMED.getFrom(node.getDocument());
 
         if (timed || embedTimed) {
-            System.out.print(String.format(TIMED_FORMAT_STRING, (parse - start) / 1000000.0, (render - parse) / 1000000.0, (render - start) / 1000000.0));
+            System.out.print(String.format(TIMED_FORMAT_STRING, "", (parse - start) / 1000000.0, (render - parse) / 1000000.0, (render - start) / 1000000.0));
         }
 
         testCase(node, options);

@@ -753,7 +753,7 @@ public abstract class Node {
      * @return concatenated string of all segments
      */
     public BasedSequence getCharsFromSegments() {
-        return SegmentedSequence.of(Arrays.asList(getSegmentsForChars()), chars.subSequence(0, 0));
+        return SegmentedSequence.of(Arrays.asList(getSegmentsForChars()));
     }
 
     /**

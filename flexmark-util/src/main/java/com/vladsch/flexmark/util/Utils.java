@@ -533,6 +533,20 @@ public class Utils {
         else return receiver;
     }
 
+    public static <T> boolean contained(T value, T[] array) {
+        for (T item : array) {
+            if (item.equals(value)) return true;
+        }
+        return false;
+    }
+
+    public static boolean contained(int value, int[] array) {
+        for (int item : array) {
+            if (item == value) return true;
+        }
+        return false;
+    }
+
     public static Integer parseUnsignedIntOrNull(String text) {
         try {
             if (text.startsWith("-")) {

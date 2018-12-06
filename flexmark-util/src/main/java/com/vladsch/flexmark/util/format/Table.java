@@ -14,53 +14,36 @@ import java.util.ArrayList;
 import java.util.BitSet;
 import java.util.List;
 
+import static com.vladsch.flexmark.util.Utils.*;
+
 @SuppressWarnings("WeakerAccess")
 public class Table {
 
     public final TableSection heading;
     public final TableSection separator;
     public final TableSection body;
-    public final TableFormatOptions options;
+    public TableFormatOptions options;
     private BasedSequence captionOpen;
     private BasedSequence caption;
     private BasedSequence captionClose;
     private boolean isHeading;
     private boolean isSeparator;
-    private final boolean isIntellijDummyIdentifier;
-    private final String intellijDummyIdentifier;
-    private final String colonTrimChars;
-    private final String linePrefix;
 
-    public CellAlignment[] alignments;
-    public int[] columnWidths;
+    // used by finalization and conversion to text
+    private CellAlignment[] alignments;
+    private int[] columnWidths;
 
-    public Table(DataHolder options, String linePrefix, String intellijDummyIdentifier) {
-        this(new TableFormatOptions(options), linePrefix, intellijDummyIdentifier);
+    public Table(DataHolder options) {
+        this(new TableFormatOptions(options));
     }
 
-    public Table(TableFormatOptions options, String linePrefix, String intellijDummyIdentifier) {
+    public Table(TableFormatOptions options) {
         heading = new TableSection();
         separator = new TableSection();
         body = new TableSection();
         isHeading = true;
         isSeparator = false;
         this.options = options;
-        isIntellijDummyIdentifier = !intellijDummyIdentifier.isEmpty();
-        this.intellijDummyIdentifier = intellijDummyIdentifier;
-        colonTrimChars = ":" + intellijDummyIdentifier;
-        this.linePrefix = linePrefix;
-    }
-
-    public boolean isHeading() {
-        return isHeading;
-    }
-
-    public void setHeading(final boolean heading) {
-        isHeading = heading;
-    }
-
-    public boolean isSeparator() {
-        return isSeparator;
     }
 
     public BasedSequence getCaptionOpen() {
@@ -85,19 +68,6 @@ public class Table {
         return captionClose;
     }
 
-    public void setSeparator(final boolean separator) {
-        isSeparator = separator;
-    }
-
-    public void nextRow() {
-        if (isSeparator) throw new IllegalStateException("Only one separator row allowed");
-        if (isHeading) {
-            heading.nextRow();
-        } else {
-            body.nextRow();
-        }
-    }
-
     public int getHeadingRows() {
         return heading.rows.size();
     }
@@ -111,41 +81,11 @@ public class Table {
     }
 
     public int getSeparatorColumns() {
-        return body.getMaxColumns();
+        return separator.getMaxColumns();
     }
 
     public int getBodyColumns() {
         return body.getMaxColumns();
-    }
-
-    public void addCell(TableCell cell) {
-        TableSection tableSection = isSeparator ? separator : isHeading ? heading : body;
-
-        if (isSeparator && (cell.columnSpan != 1 || cell.rowSpan != 1))
-            throw new IllegalStateException("Separator columns cannot span rows/columns");
-
-        final TableRow currentRow = tableSection.get(tableSection.row);
-
-        // skip cells that are already set
-        while (tableSection.column < currentRow.cells.size() && currentRow.cells.get(tableSection.column) != null) tableSection.column++;
-
-        int rowSpan = 0;
-        while (rowSpan < cell.rowSpan) {
-            tableSection.get(tableSection.row + rowSpan).set(tableSection.column, cell);
-
-            // set the rest to NULL cells up to null column
-            int colSpan = 1;
-            while (colSpan < cell.columnSpan) {
-                tableSection.expandTo(tableSection.row + rowSpan, tableSection.column + colSpan);
-                if (tableSection.get(tableSection.row + rowSpan).cells.get(tableSection.column + colSpan) != null) break;
-
-                tableSection.rows.get(tableSection.row + rowSpan).set(tableSection.column + colSpan, TableCell.NULL);
-                colSpan++;
-            }
-            rowSpan++;
-        }
-
-        tableSection.column += cell.columnSpan;
     }
 
     public int getMinColumns() {
@@ -162,93 +102,215 @@ public class Table {
         return Utils.max(headingColumns, separatorColumns, bodyColumns);
     }
 
-    public BasedSequence cellText(CharSequence chars, final boolean isHeader, int width, CellAlignment alignment, Ref<Integer> accumulatedDelta) {
-        BasedSequence text = BasedSequenceImpl.of(chars);
+    int maxColumnsWithout(boolean withSeparator, int... skipRows) {
+        int columns = 0;
+        int index = 0;
 
-        final int length = options.charWidthProvider.charWidth(text);
-        if (length < width && options.adjustColumnWidth) {
-            if (!options.applyColumnAlignment || alignment == null || alignment == CellAlignment.NONE) alignment = isHeader ? CellAlignment.CENTER : CellAlignment.LEFT;
-            int diff = width - length;
-            int spaceCount = diff / options.spaceWidth;
-            if (accumulatedDelta.value * 2 >= options.spaceWidth) {
-                spaceCount++;
-                accumulatedDelta.value -= options.spaceWidth;
-            }
-
-            switch (alignment) {
-                case LEFT:
-                    text = text.append(PrefixedSubSequence.repeatOf(" ", spaceCount, text.subSequence(0, 0)));
-                    break;
-                case RIGHT:
-                    text = PrefixedSubSequence.repeatOf(" ", spaceCount, text);
-                    break;
-                case CENTER:
-                    int count = spaceCount / 2;
-                    text = PrefixedSubSequence.repeatOf(" ", count, text).append(PrefixedSubSequence.repeatOf(" ", spaceCount - count, text.subSequence(0, 0)));
-                    break;
-            }
+        for (TableRow row : allRows(withSeparator)) {
+            if (!contained(index, skipRows)) columns = max(columns, row.getTotalColumns());
+            index++;
         }
-
-        return text;
+        return columns;
     }
 
-    public int spanWidth(int col, int colSpan) {
-        if (colSpan > 1) {
-            int width = 0;
-            for (int i = 0; i < colSpan; i++) {
-                width += columnWidths[i + col];
-            }
-            return width;
-        } else {
-            return columnWidths[col];
+    int minColumnsWithout(boolean withSeparator, int... skipRows) {
+        int columns = 0;
+        int index = 0;
+
+        for (TableRow row : allRows(withSeparator)) {
+            if (!contained(index, skipRows)) columns = min(columns, row.getTotalColumns());
+            index++;
         }
+        return columns;
     }
 
-    public int spanFixedWidth(BitSet unfixedColumns, int col, int colSpan) {
-        if (colSpan > 1) {
-            int width = 0;
-            for (int i = 0; i < colSpan; i++) {
-                if (!unfixedColumns.get(i)) {
-                    width += columnWidths[i + col];
+    /*
+        Table Manipulation Helper API
+    */
+    public List<TableRow> allRows(boolean withSeparator) {
+        ArrayList<TableRow> rows = new ArrayList<>(heading.rows.size() + (withSeparator ? separator.rows.size() : 0) + body.rows.size());
+        rows.addAll(heading.rows);
+        if (withSeparator) rows.addAll(separator.rows);
+        rows.addAll(body.rows);
+        return rows;
+    }
+
+    public int allRowCount(boolean withSeparator) {
+        return heading.rows.size() + (withSeparator ? separator.rows.size() : 0) + body.rows.size();
+    }
+
+    public interface TableRowManipulator {
+        boolean apply(ArrayList<TableRow> rows, int index);
+    }
+
+    public void forAllRows(int rowIndex, int count, boolean withSeparator, TableRowManipulator manipulator) {
+        int remaining = count;
+        TableSection section = null;
+
+        if (rowIndex < heading.rows.size()) {
+            section = heading;
+        } else if (withSeparator && rowIndex < separator.rows.size()) {
+            section = separator;
+            rowIndex -= heading.rows.size();
+        } else if (rowIndex < body.rows.size()) {
+            section = body;
+            rowIndex -= (withSeparator ? separator : heading).rows.size();
+        }
+
+        do {
+            while (rowIndex < section.rows.size() && remaining > 0) {
+                if (!manipulator.apply(section.rows, rowIndex)) {
+                    break;
+                }
+                remaining--;
+            }
+
+            if (remaining > 0 && section.rows.isEmpty()) {
+                if (section == heading) {
+                    section = withSeparator ? separator : body;
+                }
+                if (section == separator && section.rows.isEmpty()) {
+                    section = body;
                 }
             }
-            return width;
+        } while (remaining > 0 && !section.rows.isEmpty());
+    }
+
+    public void deleteRows(int rowIndex, int count, boolean withSeparator) {
+        forAllRows(rowIndex, count, withSeparator, new TableRowManipulator() {
+            @Override
+            public boolean apply(final ArrayList<TableRow> rows, final int index) {
+                rows.remove(index);
+                return true;
+            }
+        });
+    }
+
+    void insertColumns(final int column, final int count, boolean withSeparator) {
+        forAllRows(0, allRowCount(true), true, new TableRowManipulator() {
+            @Override
+            public boolean apply(final ArrayList<TableRow> rows, final int index) {
+                rows.get(index).insertColumns(column, count);
+                return true;
+            }
+        });
+    }
+
+    void deleteColumns(final int column, final int count, boolean withSeparator) {
+        forAllRows(0, allRowCount(withSeparator), withSeparator, new TableRowManipulator() {
+            @Override
+            public boolean apply(final ArrayList<TableRow> rows, final int index) {
+                rows.get(index).deleteColumns(column, count);
+                return true;
+            }
+        });
+    }
+
+    void insertRows(final int rowIndex, final int count, boolean withSeparator) {
+        final int maxColumns = getMaxColumns();
+        forAllRows(rowIndex, 1, withSeparator, new TableRowManipulator() {
+            @Override
+            public boolean apply(final ArrayList<TableRow> rows, final int index) {
+                TableRow emptyRow = new TableRow();
+                emptyRow.appendColumns(maxColumns);
+                rows.add(rowIndex, emptyRow);
+                return true;
+            }
+        });
+    }
+
+    void moveColumn(final int fromColumn, final int toColumn) {
+        forAllRows(0, allRowCount(true), true, new TableRowManipulator() {
+            @Override
+            public boolean apply(final ArrayList<TableRow> rows, final int index) {
+                rows.get(index).moveColumn(fromColumn, toColumn);
+                return true;
+            }
+        });
+    }
+
+    boolean isEmptyColumn(int column, boolean withSeparator) {
+        for (TableRow row : allRows(withSeparator)) {
+            if (!row.isEmptyColumn(column)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    boolean isEmptyRow(int rowIndex, boolean withSeparator) {
+        return rowIndex < allRowCount(withSeparator) && allRows(withSeparator).get(rowIndex).isEmpty();
+    }
+
+    /*
+     * Used during table construction by building the table
+     * as the AST visiting process (Flexmark or HTML)
+     *
+     */
+
+    public boolean isHeading() {
+        return isHeading;
+    }
+
+    public void setHeading(final boolean heading) {
+        isHeading = heading;
+    }
+
+    public boolean isSeparator() {
+        return isSeparator;
+    }
+
+    public void setSeparator(final boolean separator) {
+        isSeparator = separator;
+    }
+
+    public void nextRow() {
+        if (isSeparator) throw new IllegalStateException("Only one separator row allowed");
+        if (isHeading) {
+            heading.nextRow();
         } else {
-            return columnWidths[col];
+            body.nextRow();
         }
     }
 
-    private static class ColumnSpan {
-        final int startColumn;
-        final int columnSpan;
-        final int width;
-        int additionalWidth;
+    /**
+     * @param cell cell to add
+     */
+    public void addCell(TableCell cell) {
+        TableSection tableSection = isSeparator ? separator : isHeading ? heading : body;
 
-        public ColumnSpan(final int startColumn, final int columnSpan, final int width) {
-            this.startColumn = startColumn;
-            this.columnSpan = columnSpan;
-            this.width = width;
-            this.additionalWidth = 0;
+        if (isSeparator && (cell.columnSpan != 1 || cell.rowSpan != 1))
+            throw new IllegalStateException("Separator columns cannot span rows/columns");
+
+        final TableRow currentRow = tableSection.get(tableSection.row);
+
+        // skip cells that are already set
+        while (tableSection.column < currentRow.cells.size() && currentRow.cells.get(tableSection.column) != null) tableSection.column++;
+
+        int rowSpan = 0;
+        while (rowSpan < cell.rowSpan) {
+            tableSection.get(tableSection.row + rowSpan).set(tableSection.column, cell);
+
+            // set the rest to NULL cells up to null column
+            int columnSpan = 1;
+            while (columnSpan < cell.columnSpan) {
+                tableSection.expandTo(tableSection.row + rowSpan, tableSection.column + columnSpan);
+                if (tableSection.get(tableSection.row + rowSpan).cells.get(tableSection.column + columnSpan) != null) break;
+
+                tableSection.rows.get(tableSection.row + rowSpan).set(tableSection.column + columnSpan, TableCell.NULL);
+                columnSpan++;
+            }
+            rowSpan++;
         }
+
+        tableSection.column += cell.columnSpan;
     }
 
-    private CellAlignment adjustCellAlignment(CellAlignment alignment) {
-        switch (options.leftAlignMarker) {
-            case ADD:
-                if (alignment == null || alignment == CellAlignment.NONE) alignment = CellAlignment.LEFT;
-                break;
-            case REMOVE:
-                if (alignment == CellAlignment.LEFT) alignment = CellAlignment.NONE;
-                break;
-
-            default:
-                break;
-        }
-        return alignment;
-    }
-
-    public void finalizeTable() {
+    public void finalizeTable(String intellijDummyIdentifier) {
         // remove null cells
+        boolean isIntellijDummyIdentifier = !intellijDummyIdentifier.isEmpty();
+        String colonTrimChars = ":" + intellijDummyIdentifier;
+
         heading.cleanup();
         body.cleanup();
 
@@ -437,20 +499,22 @@ public class Table {
         }
     }
 
-    public void appendTable(final FormattingAppendable out) {
+    public void appendTable(final FormattingAppendable out, final String linePrefix, String intellijDummyIdentifier) {
         // we will prepare the separator based on max columns
+        Ref<Integer> delta = new Ref<Integer>(0);
+        boolean isIntellijDummyIdentifier = !intellijDummyIdentifier.isEmpty();
+
         int formatterOptions = out.getOptions();
         out.setOptions(formatterOptions & ~FormattingAppendable.COLLAPSE_WHITESPACE);
-        Ref<Integer> delta = new Ref<Integer>(0);
 
         if (heading.rows.size() > 0) {
             for (TableRow row : heading.rows) {
                 int j = 0;
                 int jSpan = 0;
                 delta.value = 0;
-                
+
                 out.append(linePrefix);
-                
+
                 for (TableCell cell : row.cells) {
                     if (j == 0) {
                         if (options.leadTrailPipes) {
@@ -485,7 +549,7 @@ public class Table {
 
         {
             out.append(linePrefix);
-            
+
             int j = 0;
             delta.value = 0;
             for (CellAlignment alignment : alignments) {
@@ -532,13 +596,13 @@ public class Table {
                         } else {
                             out.repeat('-', dashCount);
                         }
-                        
+
                         if (intellijPos != -1) {
                             // last chance, we put it at the end
                             out.append(intellijDummyIdentifier);
                             intellijPos = -1;
                         }
-                        
+
                         if (alignment1 == CellAlignment.RIGHT || alignment1 == CellAlignment.CENTER) out.append(':');
 
                         j++;
@@ -568,7 +632,7 @@ public class Table {
         if (body.rows.size() > 0) {
             for (TableRow row : body.rows) {
                 out.append(linePrefix);
-                
+
                 int j = 0;
                 int jSpan = 0;
                 delta.value = 0;
@@ -610,6 +674,91 @@ public class Table {
         }
     }
 
+    private BasedSequence cellText(CharSequence chars, final boolean isHeader, int width, CellAlignment alignment, Ref<Integer> accumulatedDelta) {
+        BasedSequence text = BasedSequenceImpl.of(chars);
+
+        final int length = options.charWidthProvider.charWidth(text);
+        if (length < width && options.adjustColumnWidth) {
+            if (!options.applyColumnAlignment || alignment == null || alignment == CellAlignment.NONE) alignment = isHeader ? CellAlignment.CENTER : CellAlignment.LEFT;
+            int diff = width - length;
+            int spaceCount = diff / options.spaceWidth;
+            if (accumulatedDelta.value * 2 >= options.spaceWidth) {
+                spaceCount++;
+                accumulatedDelta.value -= options.spaceWidth;
+            }
+
+            switch (alignment) {
+                case LEFT:
+                    text = text.append(PrefixedSubSequence.repeatOf(" ", spaceCount, text.subSequence(0, 0)));
+                    break;
+                case RIGHT:
+                    text = PrefixedSubSequence.repeatOf(" ", spaceCount, text);
+                    break;
+                case CENTER:
+                    int count = spaceCount / 2;
+                    text = PrefixedSubSequence.repeatOf(" ", count, text).append(PrefixedSubSequence.repeatOf(" ", spaceCount - count, text.subSequence(0, 0)));
+                    break;
+            }
+        }
+
+        return text;
+    }
+
+    private int spanWidth(int col, int columnSpan) {
+        if (columnSpan > 1) {
+            int width = 0;
+            for (int i = 0; i < columnSpan; i++) {
+                width += columnWidths[i + col];
+            }
+            return width;
+        } else {
+            return columnWidths[col];
+        }
+    }
+
+    private int spanFixedWidth(BitSet unfixedColumns, int col, int columnSpan) {
+        if (columnSpan > 1) {
+            int width = 0;
+            for (int i = 0; i < columnSpan; i++) {
+                if (!unfixedColumns.get(i)) {
+                    width += columnWidths[i + col];
+                }
+            }
+            return width;
+        } else {
+            return columnWidths[col];
+        }
+    }
+
+    private static class ColumnSpan {
+        final int startColumn;
+        final int columnSpan;
+        final int width;
+        int additionalWidth;
+
+        public ColumnSpan(final int startColumn, final int columnSpan, final int width) {
+            this.startColumn = startColumn;
+            this.columnSpan = columnSpan;
+            this.width = width;
+            this.additionalWidth = 0;
+        }
+    }
+
+    private CellAlignment adjustCellAlignment(CellAlignment alignment) {
+        switch (options.leftAlignMarker) {
+            case ADD:
+                if (alignment == null || alignment == CellAlignment.NONE) alignment = CellAlignment.LEFT;
+                break;
+            case REMOVE:
+                if (alignment == CellAlignment.LEFT) alignment = CellAlignment.NONE;
+                break;
+
+            default:
+                break;
+        }
+        return alignment;
+    }
+
     @SuppressWarnings("WeakerAccess")
     public static class TableCell {
         public final static TableCell NULL = new TableCell(SubSequence.NULL, " ", BasedSequence.NULL, 1, 0, CellAlignment.NONE);
@@ -649,14 +798,33 @@ public class Table {
             this.columnSpan = columnSpan;
             this.alignment = alignment != null ? alignment : CellAlignment.NONE;
         }
+
+        TableCell withColumnSpan(int columnSpan) { return new TableCell(openMarker, text, closeMarker, rowSpan, columnSpan, alignment); }
+
+        TableCell withText(CharSequence text) { return new TableCell(openMarker, text, closeMarker, rowSpan, columnSpan, alignment); }
+
+        TableCell withRowSpan(int rowSpan) { return new TableCell(openMarker, text, closeMarker, rowSpan, columnSpan, alignment); }
+
+        TableCell withAlignment(CellAlignment alignment) { return new TableCell(openMarker, text, closeMarker, rowSpan, columnSpan, alignment); }
+    }
+    
+    public static class TableSeparatorRow extends TableRow {
+        @Override
+        protected TableCell defaultCell() {
+            return new TableCell("---", 1,1);
+        }
     }
 
     @SuppressWarnings("WeakerAccess")
     public static class TableRow {
-        public final List<TableCell> cells;
+        protected final List<TableCell> cells;
 
         TableRow() {
             cells = new ArrayList<TableCell>();
+        }
+
+        public List<TableCell> getCells() {
+            return cells;
         }
 
         public int getColumns() {
@@ -670,6 +838,137 @@ public class Table {
                 columns += cell.columnSpan;
             }
             return columns;
+        }
+
+        int getTotalColumns() {
+            return columnOf(cells.size());
+        }
+
+        int columnOf(int index) {
+            return columnOfOrNull(index);
+        }
+
+        Integer columnOfOrNull(Integer index) {
+            if (index == null) return null;
+
+            int columns = 0;
+
+            int iMax = maxLimit(index, cells.size());
+            for (int i = 0; i < iMax; i++) {
+                TableCell cell = cells.get(i);
+                columns += cell.columnSpan;
+            }
+
+            return columns;
+        }
+
+        void appendColumns(int count) {
+            for (int i = 0; i < count; i++) {
+                // add empty column
+                addColumn(cells.size());
+            }
+        }
+        
+        protected TableCell defaultCell() {
+            return new TableCell(" ", 1, 1);
+        }
+
+        private void addColumn(int index) {
+            cells.add(index, defaultCell());
+        }
+
+        void insertColumns(int column, int count) {
+            if (count <= 0) return;
+
+            int totalColumns = this.getTotalColumns();
+
+            if (column >= getTotalColumns()) {
+                // append to the end
+                appendColumns(count);
+            } else {
+                // insert in the middle
+                int index = indexOf(column);
+                int cellColumn = columnOf(index);
+
+                if (cellColumn > column) {
+                    // spanning column, we expand its span
+                    TableCell cell = cells.get(index);
+                    cells.remove(index);
+                    cells.add(index, cell.withColumnSpan(cell.columnSpan + count));
+                } else {
+                    for (int i = 0; i < count; i++) {
+                        addColumn(index);
+                    }
+                }
+            }
+        }
+
+        void deleteColumns(int column, int count) {
+            int remaining = count;
+            int index = indexOf(column);
+            while (index < cells.size() && remaining > 0) {
+                TableCell cell = cells.get(index);
+                cells.remove(index);
+                ;
+                if (cell.columnSpan > remaining) {
+                    cells.add(index, cell.withColumnSpan(cell.columnSpan - remaining));
+                }
+                remaining -= cell.columnSpan;
+            }
+        }
+
+        private TableCell[] explicitColumns() {
+            TableCell[] explicitColumns = new TableCell[getTotalColumns()];
+
+            int explicitIndex = 0;
+            for (TableCell cell : cells) {
+                explicitColumns[explicitIndex] = cell;
+                explicitIndex += cell.columnSpan;
+            }
+            return explicitColumns;
+        }
+
+        private void addExplicitColumns(TableCell[] explicitColumns) {
+            TableCell lastCell = null;
+
+            for (int i = 0; i < explicitColumns.length; i++) {
+                TableCell cell = explicitColumns[i];
+                if (cell == null) {
+                    if (lastCell == null) {
+                        lastCell = new TableCell("", 0, 1);
+                    } else {
+                        lastCell = lastCell.withColumnSpan(lastCell.columnSpan + 1);
+                    }
+                } else {
+                    if (lastCell != null) cells.add(lastCell);
+                    cell.withColumnSpan(1);
+                }
+            }
+
+            if (lastCell != null) {
+                cells.add(lastCell);
+            }
+        }
+
+        void moveColumn(int fromColumn, int toColumn) {
+            int maxColumn = getTotalColumns();
+            if (fromColumn != toColumn && fromColumn < maxColumn && toColumn < maxColumn) {
+                TableCell[] explicitColumns = explicitColumns();
+
+                TableCell fromCell = explicitColumns[fromColumn];
+                if (toColumn < fromColumn) {
+                    // shift in between columns right
+                    System.arraycopy(explicitColumns, toColumn, explicitColumns, toColumn + 1, fromColumn - toColumn);
+                } else {
+                    // shift in between columns left
+                    System.arraycopy(explicitColumns, fromColumn + 1, explicitColumns, fromColumn, toColumn - fromColumn);
+                }
+                explicitColumns[toColumn] = fromCell;
+
+                // reconstruct cells
+                cells.clear();
+                addExplicitColumns(explicitColumns);
+            }
         }
 
         public TableRow expandTo(int column) {
@@ -688,6 +987,35 @@ public class Table {
             cells.set(column, cell);
         }
 
+        boolean isEmptyColumn(int column) {
+            int index = indexOf(column);
+            return index >= cells.size() || cells.get(index).text.isBlank();
+        }
+
+        boolean isEmpty() {
+            for (TableCell cell : cells) {
+                if (!cell.text.isBlank()) return false;
+            }
+            return true;
+        }
+
+        int indexOf(int column) {
+            return indexOfOrNull(column);
+        }
+
+        Integer indexOfOrNull(Integer column) {
+            if (column == null) return null;
+
+            int columns = 0;
+            int index = 0;
+            for (TableCell cell : cells) {
+                if (columns >= column) break;
+                columns += cell.columnSpan;
+                index++;
+            }
+            return index;
+        }
+
         public void cleanup() {
             int column = 0;
             while (column < cells.size()) {
@@ -698,15 +1026,34 @@ public class Table {
         }
     }
 
+    public static class TableSeparatorSection extends TableSection {
+        @Override
+        protected TableRow defaultRow() {
+            return new TableSeparatorRow();
+        }
+    }
+    
     @SuppressWarnings("WeakerAccess")
     public static class TableSection {
-        public final List<TableRow> rows = new ArrayList<TableRow>();
-        public int row;
-        public int column;
+        public final ArrayList<TableRow> rows = new ArrayList<>();
+        protected int row;
+        protected int column;
 
         public TableSection() {
             row = 0;
             column = 0;
+        }
+
+        public ArrayList<TableRow> getRows() {
+            return rows;
+        }
+
+        public int getRow() {
+            return row;
+        }
+
+        public int getColumn() {
+            return column;
         }
 
         public void nextRow() {
@@ -730,7 +1077,7 @@ public class Table {
 
         public TableRow expandTo(int row, TableCell cell) {
             while (row >= rows.size()) {
-                TableRow tableRow = new TableRow();
+                TableRow tableRow = defaultRow();
                 rows.add(tableRow);
             }
             return rows.get(row);
@@ -742,11 +1089,15 @@ public class Table {
 
         public TableRow expandTo(int row, int column, TableCell cell) {
             while (row >= rows.size()) {
-                TableRow tableRow = new TableRow();
+                TableRow tableRow = defaultRow();
                 tableRow.expandTo(column, cell);
                 rows.add(tableRow);
             }
             return rows.get(row).expandTo(column);
+        }
+
+        protected TableRow defaultRow() {
+            return new TableRow();
         }
 
         public TableRow get(int row) {

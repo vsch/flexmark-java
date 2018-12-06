@@ -6,7 +6,10 @@ import com.vladsch.flexmark.ast.Document;
 import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.spec.SpecReader;
+import com.vladsch.flexmark.util.Utils;
 import com.vladsch.flexmark.util.options.DataHolder;
+import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.BasedSequenceImpl;
 import org.junit.AssumptionViolatedException;
 
 import java.io.InputStream;
@@ -47,13 +50,27 @@ public class DumpSpecReader extends SpecReader {
             ignoredCase = true;
         }
 
+        IParse parserWithOptions = testCase.parser().withOptions(options);
+        IRender rendererWithOptions = testCase.renderer().withOptions(options);
+
         String parseSource = example.getSource();
         if (options != null && options.get(RenderingTestCase.NO_FILE_EOL)) {
             parseSource = trimTrailingEOL(parseSource);
         }
 
-        IParse parserWithOptions = testCase.parser().withOptions(options);
-        IRender rendererWithOptions = testCase.renderer().withOptions(options);
+        BasedSequence input;
+        String sourcePrefix = RenderingTestCase.SOURCE_PREFIX.getFrom(parserWithOptions.getOptions());
+        String sourceSuffix = RenderingTestCase.SOURCE_SUFFIX.getFrom(parserWithOptions.getOptions());
+        String sourceIndent = RenderingTestCase.SOURCE_INDENT.getFrom(parserWithOptions.getOptions());
+
+        if (!sourcePrefix.isEmpty() || !sourceSuffix.isEmpty()) {
+            String combinedSource = sourcePrefix + Utils.suffixWith(parseSource, "\n") + sourceSuffix;
+            input = BasedSequenceImpl.of(combinedSource).subSequence(sourcePrefix.length(), combinedSource.length() - sourceSuffix.length());
+        } else {
+            input = BasedSequenceImpl.of(parseSource);
+        }
+
+        input = RenderingTestCase.stripIndent(input, sourceIndent);
 
         Node includedDocument = null;
 
@@ -68,7 +85,7 @@ public class DumpSpecReader extends SpecReader {
         }
 
         long start = System.nanoTime();
-        Node node = parserWithOptions.parse(parseSource);
+        Node node = parserWithOptions.parse(input);
         long parse = System.nanoTime();
 
         if (node instanceof Document && includedDocument instanceof Document) {
@@ -82,7 +99,7 @@ public class DumpSpecReader extends SpecReader {
         boolean embedTimed = RenderingTestCase.EMBED_TIMED.getFrom(node.getDocument());
 
         if (timed || embedTimed) {
-            System.out.println(String.format(RenderingTestCase.TIMED_FORMAT_STRING, (parse - start)/1000000.0, (render - parse)/1000000.0, (render - start)/1000000.0));
+            System.out.println(String.format(RenderingTestCase.TIMED_FORMAT_STRING, example.getSection() == null ? "" : example.getSection().trim() + ": " + example.getExampleNumber(), (parse - start) / 1000000.0, (render - parse) / 1000000.0, (render - start) / 1000000.0));
         }
 
         final String actualAST = testCase.ast(node);
@@ -93,7 +110,7 @@ public class DumpSpecReader extends SpecReader {
         testCase.addSpecExample(example, node, options, ignoredCase, actualHTML, actualAST);
 
         if (embedTimed) {
-            sb.append(String.format(RenderingTestCase.TIMED_FORMAT_STRING, (parse - start)/1000000.0, (render - parse)/1000000.0, (render - start)/1000000.0));
+            sb.append(String.format(RenderingTestCase.TIMED_FORMAT_STRING, example.getSection() == null ? "" : example.getSection().trim() + ": " + example.getExampleNumber(), (parse - start) / 1000000.0, (render - parse) / 1000000.0, (render - start) / 1000000.0));
         }
 
         // include source so that diff can be used to update spec
@@ -140,7 +157,7 @@ public class DumpSpecReader extends SpecReader {
     public static String showTabs(String s) {
         if (s == null) return "";
         // Tabs are shown as "rightwards arrow →" for easier comparison and IntelliJ dummy identifier as ⎮23ae, CR ⏎ 23ce
-        return s.replace("\u2192", "&#2192;").replace("\t", "\u2192").replace("\u23ae", "&#23ae;").replace("\u001f", "\u23ae").replace("\u23ce", "&#23ce").replace("\r","\u23ce");
+        return s.replace("\u2192", "&#2192;").replace("\t", "\u2192").replace("\u23ae", "&#23ae;").replace("\u001f", "\u23ae").replace("\u23ce", "&#23ce").replace("\r", "\u23ce");
     }
 
     public static String unShowTabs(String s) {

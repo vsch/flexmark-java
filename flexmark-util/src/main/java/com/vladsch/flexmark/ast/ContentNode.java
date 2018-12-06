@@ -76,12 +76,12 @@ public abstract class ContentNode extends Node implements Content {
 
     @Override
     public BasedSequence getContentChars() {
-        return SegmentedSequence.of(lineSegments, getChars().subSequence(getChars().length()));
+        return SegmentedSequence.of(lineSegments);
     }
 
     @Override
     public BasedSequence getContentChars(int startLine, int endLine) {
-        return SegmentedSequence.of(getContentLines(startLine, endLine), getChars());
+        return SegmentedSequence.of(getContentLines(startLine, endLine));
     }
 
     public void setContentLines(List<BasedSequence> contentLines) {

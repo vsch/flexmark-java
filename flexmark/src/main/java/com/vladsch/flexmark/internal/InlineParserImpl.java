@@ -448,7 +448,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
                 node = node.getNext();
                 unlink.unlink();
             }
-            BasedSequence literal = SegmentedSequence.of(sb, first.getChars());
+            BasedSequence literal = SegmentedSequence.of(sb);
             first.setChars(literal);
         }
     }
@@ -603,7 +603,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
     @Override
     public boolean flushTextNode() {
         if (currentText != null) {
-            block.appendChild(new Text(SegmentedSequence.of(currentText, BasedSequence.NULL)));
+            block.appendChild(new Text(SegmentedSequence.of(currentText)));
             currentText = null;
             return true;
         }
@@ -711,7 +711,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
         node.setChars(input.subSequence(index, index + 1));
 
         if (currentText != null) {
-            BasedSequence prevText = SegmentedSequence.of(currentText, BasedSequence.NULL);
+            BasedSequence prevText = SegmentedSequence.of(currentText);
             currentText = null;
 
             // see if need to trim some off the end

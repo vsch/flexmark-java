@@ -433,7 +433,7 @@ public class DocumentParser implements ParserState {
      * @return Document node of the resulting AST
      */
     public Document parse(CharSequence source) {
-        BasedSequence input = source instanceof BasedSequence ? (BasedSequence) source : SubSequence.of(source);
+        BasedSequence input = SubSequence.of(source);
         int lineStart = 0;
         int lineBreak;
         int lineEOL;

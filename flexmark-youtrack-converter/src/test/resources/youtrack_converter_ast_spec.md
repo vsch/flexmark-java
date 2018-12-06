@@ -1011,7 +1011,7 @@ Document[0, 29]
           Text[14, 17] chars:[14, 17, "---"]
     TableBody[19, 28]
       TableRow[19, 28] rowNumber=1
-        TableCell[19, 28] span textOpen:[19, 20, "|"] text:[21, 25, "span"] textClose:[26, 28, "||"]
+        TableCell[19, 28] span=2 textOpen:[19, 20, "|"] text:[21, 25, "span"] textClose:[26, 28, "||"]
           Text[21, 25] chars:[21, 25, "span"]
 ````````````````````````````````
 
@@ -1050,7 +1050,7 @@ Document[0, 38]
           Text[23, 26] chars:[23, 26, "---"]
     TableBody[28, 37]
       TableRow[28, 37] rowNumber=1
-        TableCell[28, 37] span textOpen:[28, 29, "|"] text:[30, 34, "span"] textClose:[35, 37, "||"]
+        TableCell[28, 37] span=2 textOpen:[28, 29, "|"] text:[30, 34, "span"] textClose:[35, 37, "||"]
           Text[30, 34] chars:[30, 34, "span"]
 ````````````````````````````````
 

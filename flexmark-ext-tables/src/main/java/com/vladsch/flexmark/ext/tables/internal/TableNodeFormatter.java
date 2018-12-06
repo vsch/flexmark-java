@@ -17,7 +17,6 @@ import com.vladsch.flexmark.util.options.DataHolder;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.regex.Pattern;
 
 import static com.vladsch.flexmark.formatter.RenderPurpose.FORMAT;
 
@@ -96,7 +95,7 @@ public class TableNodeFormatter implements NodeFormatter {
     }
 
     private void render(final TableBlock node, final NodeFormatterContext context, MarkdownWriter markdown) {
-        myTable = new Table(options, linePrefix, intellijDummyIdentifier);
+        myTable = new Table(options);
 
         switch (context.getRenderPurpose()) {
             case TRANSLATION_SPANS:
@@ -112,10 +111,10 @@ public class TableNodeFormatter implements NodeFormatter {
                 context.renderChildren(node);
 
                 // output table
-                myTable.finalizeTable();
+                myTable.finalizeTable(intellijDummyIdentifier);
                 if (myTable.getMaxColumns() > 0) {
                     markdown.blankLine();
-                    myTable.appendTable(markdown);
+                    myTable.appendTable(markdown, linePrefix, intellijDummyIdentifier);
                     markdown.blankLine();
                 }
         }
