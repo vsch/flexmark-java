@@ -58,7 +58,7 @@ public class MarkdownTableTest {
 
     private MarkdownTable getTable(String markdown) {
         MarkdownTable table = getTables(markdown)[0];
-        table.cleanup();
+        table.normalize();
         return table;
     }
 

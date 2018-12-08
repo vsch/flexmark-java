@@ -112,11 +112,11 @@ public class TableNodeFormatter implements NodeFormatter {
 
                 // allow table manipulation, mostly for testing
                 if (options.tableManipulator != NULL) {
-                    myTable.cleanup();
+                    myTable.normalize();
                     options.tableManipulator.apply(myTable, node);
                 }
 
-                myTable.cleanup();
+                myTable.normalize();
                 if (myTable.getMaxColumns() > 0) {
                     // output table
                     markdown.blankLine();
