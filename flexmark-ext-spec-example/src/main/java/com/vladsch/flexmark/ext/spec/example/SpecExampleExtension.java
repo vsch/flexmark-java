@@ -22,13 +22,13 @@ import com.vladsch.flexmark.util.options.MutableDataHolder;
  * </p>
  */
 public class SpecExampleExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension {
-    public static final DataKey<Boolean> SPEC_EXAMPLE_RENDER_RAW_HTML = new DataKey<Boolean>("SPEC_EXAMPLE_RENDER_RAW_HTML", true);
-    public static final DataKey<String> SPEC_EXAMPLE_RENDERED_HTML_PREFIX = new DataKey<String>("SPEC_EXAMPLE_RENDERED_HTML_PREFIX", "<div style=\"border:solid #cccccc 1px;padding:0 20px 10px 20px;\">");
-    public static final DataKey<String> SPEC_EXAMPLE_RENDERED_HTML_SUFFIX = new DataKey<String>("SPEC_EXAMPLE_RENDERED_HTML_SUFFIX", "</div>");
-    public static final DataKey<RenderAs> SPEC_EXAMPLE_RENDER_AS = new DataKey<RenderAs>("SPEC_EXAMPLE_RENDER_AS", RenderAs.FENCED_CODE);
-    public static final DataKey<String> SPEC_EXAMPLE_BREAK = new DataKey<String>("SPEC_EXAMPLE_BREAK", SpecReader.EXAMPLE_BREAK);
-    public static final DataKey<String> SPEC_TYPE_BREAK = new DataKey<String>("SPEC_TYPE_BREAK", SpecReader.TYPE_BREAK);
-    public static final DataKey<Boolean> SPEC_OPTION_NODES = new DataKey<Boolean>("SPEC_OPTION_NODES", true);
+    public static final DataKey<Boolean> SPEC_EXAMPLE_RENDER_RAW_HTML = new DataKey<>("SPEC_EXAMPLE_RENDER_RAW_HTML", true);
+    public static final DataKey<String> SPEC_EXAMPLE_RENDERED_HTML_PREFIX = new DataKey<>("SPEC_EXAMPLE_RENDERED_HTML_PREFIX", "<div style=\"border:solid #cccccc 1px;padding:0 20px 10px 20px;\">");
+    public static final DataKey<String> SPEC_EXAMPLE_RENDERED_HTML_SUFFIX = new DataKey<>("SPEC_EXAMPLE_RENDERED_HTML_SUFFIX", "</div>");
+    public static final DataKey<RenderAs> SPEC_EXAMPLE_RENDER_AS = new DataKey<>("SPEC_EXAMPLE_RENDER_AS", RenderAs.FENCED_CODE);
+    public static final DataKey<String> SPEC_EXAMPLE_BREAK = new DataKey<>("SPEC_EXAMPLE_BREAK", SpecReader.EXAMPLE_BREAK);
+    public static final DataKey<String> SPEC_TYPE_BREAK = new DataKey<>("SPEC_TYPE_BREAK", SpecReader.TYPE_BREAK);
+    public static final DataKey<Boolean> SPEC_OPTION_NODES = new DataKey<>("SPEC_OPTION_NODES", true);
 
     private SpecExampleExtension() {
     }

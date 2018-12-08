@@ -18,7 +18,7 @@ public class AttributesNodeFormatter implements PhasedNodeFormatter {
     public static final DataKey<Map<String, String>> ATTRIBUTE_TRANSLATION_MAP = new DataKey<Map<String, String>>("ATTRIBUTE_TRANSLATION_MAP", new HashMap<String, String>()); // assign attributes to text if previous is not a space
     public static final DataKey<Map<String, String>> ATTRIBUTE_TRANSLATED_MAP = new DataKey<Map<String, String>>("ATTRIBUTE_TRANSLATED_MAP", new HashMap<String, String>()); // assign attributes to text if previous is not a space
     public static final DataKey<Map<String, String>> ATTRIBUTE_ORIGINAL_ID_MAP = new DataKey<Map<String, String>>("ATTRIBUTE_ORIGINAL_ID_MAP", new HashMap<String, String>()); // assign attributes to text if previous is not a space
-    public static final DataKey<Integer> ATTRIBUTE_TRANSLATION_ID = new DataKey<Integer>("ATTRIBUTE_TRANSLATION_ID", 0); // next attribute index
+    public static final DataKey<Integer> ATTRIBUTE_TRANSLATION_ID = new DataKey<>("ATTRIBUTE_TRANSLATION_ID", 0); // next attribute index
 
     private Map<String, String> attributeTranslationMap;
     private Map<String, String> attributeTranslatedMap;

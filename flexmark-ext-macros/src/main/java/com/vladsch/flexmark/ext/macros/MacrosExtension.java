@@ -29,20 +29,20 @@ public class MacrosExtension implements Parser.ParserExtension
         , Parser.ReferenceHoldingExtension
         , Formatter.FormatterExtension
 {
-    public static final DataKey<KeepType> MACRO_DEFINITIONS_KEEP = new DataKey<KeepType>("MACRO_DEFINITIONS_KEEP", KeepType.FIRST); // standard option to allow control over how to handle duplicates
-    public static final DataKey<MacroDefinitionRepository> MACRO_DEFINITIONS = new DataKey<MacroDefinitionRepository>("MACRO_DEFINITIONS", new DataValueFactory<MacroDefinitionRepository>() {
+    public static final DataKey<KeepType> MACRO_DEFINITIONS_KEEP = new DataKey<>("MACRO_DEFINITIONS_KEEP", KeepType.FIRST); // standard option to allow control over how to handle duplicates
+    public static final DataKey<MacroDefinitionRepository> MACRO_DEFINITIONS = new DataKey<>("MACRO_DEFINITIONS", new DataValueFactory<MacroDefinitionRepository>() {
         @Override
         public MacroDefinitionRepository create(DataHolder options) { return new MacroDefinitionRepository(options); }
     });
-    //public static final DataKey<Boolean> MACROS_OPTION1 = new DataKey<Boolean>("MACROS_OPTION1", false);
-    //public static final DataKey<String> MACROS_OPTION2 = new DataKey<String>("MACROS_OPTION2", "default");
-    //public static final DataKey<Integer> MACROS_OPTION3 = new DataKey<Integer>("MACROS_OPTION3", Integer.MAX_VALUE);
-    // public static final DataKey<String> LOCAL_ONLY_TARGET_CLASS = new DataKey<String>("LOCAL_ONLY_TARGET_CLASS", "local-only");
-    // public static final DataKey<String> MISSING_TARGET_CLASS = new DataKey<String>("MISSING_TARGET_CLASS", "absent");
+    //public static final DataKey<Boolean> MACROS_OPTION1 = new DataKey<>("MACROS_OPTION1", false);
+    //public static final DataKey<String> MACROS_OPTION2 = new DataKey<>("MACROS_OPTION2", "default");
+    //public static final DataKey<Integer> MACROS_OPTION3 = new DataKey<>("MACROS_OPTION3", Integer.MAX_VALUE);
+    // public static final DataKey<String> LOCAL_ONLY_TARGET_CLASS = new DataKey<>("LOCAL_ONLY_TARGET_CLASS", "local-only");
+    // public static final DataKey<String> MISSING_TARGET_CLASS = new DataKey<>("MISSING_TARGET_CLASS", "absent");
     // formatter options
-    public static final DataKey<ElementPlacement> MACRO_DEFINITIONS_PLACEMENT = new DataKey<ElementPlacement>("MACRO_DEFINITIONS_PLACEMENT", ElementPlacement.AS_IS);
-    public static final DataKey<ElementPlacementSort> MACRO_DEFINITIONS_SORT = new DataKey<ElementPlacementSort>("MACRO_DEFINITIONS_SORT", ElementPlacementSort.AS_IS);
-    public static final DataKey<Boolean> SOURCE_WRAP_MACRO_REFERENCES = new DataKey<Boolean>("SOURCE_WRAP_MACRO_REFERENCES", false);
+    public static final DataKey<ElementPlacement> MACRO_DEFINITIONS_PLACEMENT = new DataKey<>("MACRO_DEFINITIONS_PLACEMENT", ElementPlacement.AS_IS);
+    public static final DataKey<ElementPlacementSort> MACRO_DEFINITIONS_SORT = new DataKey<>("MACRO_DEFINITIONS_SORT", ElementPlacementSort.AS_IS);
+    public static final DataKey<Boolean> SOURCE_WRAP_MACRO_REFERENCES = new DataKey<>("SOURCE_WRAP_MACRO_REFERENCES", false);
 
     private MacrosExtension() {
     }

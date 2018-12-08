@@ -82,8 +82,8 @@ import static com.vladsch.flexmark.html.renderer.LinkStatus.UNKNOWN;
 
 @SuppressWarnings({ "WeakerAccess", "MethodOnlyUsedFromInnerClass", "MethodMayBeStatic", "OverlyCoupledClass" })
 public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
-    public static final DataKey<Integer> LIST_ITEM_NUMBER = new DataKey<Integer>("LIST_ITEM_NUMBER", 0);
-    public static final DataKey<ListSpacing> LIST_ITEM_SPACING = new DataKey<ListSpacing>("LIST_ITEM_SPACING", (ListSpacing) null);
+    public static final DataKey<Integer> LIST_ITEM_NUMBER = new DataKey<>("LIST_ITEM_NUMBER", 0);
+    public static final DataKey<ListSpacing> LIST_ITEM_SPACING = new DataKey<>("LIST_ITEM_SPACING", (ListSpacing) null);
     public static final HashSet<DocxRendererPhase> RENDERING_PHASES = new HashSet<DocxRendererPhase>(Arrays.asList(
             DocxRendererPhase.COLLECT,
             DocxRendererPhase.DOCUMENT_TOP,

@@ -24,7 +24,7 @@ public class CustomContextDataSample {
 
     }
 
-    public static final DataKey<XhtmlContent> XHTML_CONTENT = new DataKey<XhtmlContent>("XHTML_CONTENT", (XhtmlContent)null);
+    public static final DataKey<XhtmlContent> XHTML_CONTENT = new DataKey<>("XHTML_CONTENT", (XhtmlContent) null);
 
     static class CustomExtension implements HtmlRenderer.HtmlRendererExtension {
         @Override

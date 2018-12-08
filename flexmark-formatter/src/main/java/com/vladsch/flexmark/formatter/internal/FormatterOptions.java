@@ -87,7 +87,7 @@ public class FormatterOptions {
         referenceSort = Formatter.REFERENCE_SORT.getFrom(options);
         keepImageLinksAtStart = Formatter.KEEP_IMAGE_LINKS_AT_START.getFrom(options);
         keepExplicitLinksAtStart = Formatter.KEEP_EXPLICIT_LINKS_AT_START.getFrom(options);
-        charWidthProvider = Formatter.CHAR_WIDTH_PROVIDER.getFrom(options);
+        charWidthProvider = Formatter.FORMAT_CHAR_WIDTH_PROVIDER.getFrom(options);
         keepHardLineBreaks = Formatter.KEEP_HARD_LINE_BREAKS.getFrom(options);
         keepSoftLineBreaks = Formatter.KEEP_SOFT_LINE_BREAKS.getFrom(options);
         appendTransferredReferences = Formatter.APPEND_TRANSFERRED_REFERENCES.getFrom(options);

@@ -2,7 +2,7 @@
 <java version="1.8.0_152-release" class="java.beans.XMLDecoder">
  <object class="com.vladsch.MissingInActions.settings.BatchSearchReplaceSettings" id="BatchSearchReplaceSettings0">
   <void property="batchPresetName">
-   <string>Docx Style Names</string>
+      <string>Flexmark Deprecated</string>
   </void>
   <void property="batchPresets">
    <void method="put">
@@ -83,106 +83,207 @@ username
     </object>
    </void>
    <void method="put">
-    <string>JavaFxDebugger</string>
+       <string>ProcessPostConditionProcessTemplate</string>
     <object class="com.vladsch.MissingInActions.settings.BatchSearchReplace">
-     <void property="optionsText">
-      <string>
-
-
-
-
-
-
-?
-?
-?
-?
-?
-?
-?
-?
-?
-?
-?
-
-
-
-
-
-
-
-</string>
-     </void>
      <void property="replaceText">
-      <string>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+         <string>processPostConditionId
+             processTemplateId
 </string>
      </void>
      <void property="searchText">
-      <string>skipInlineStrong
-skipInlineEmphasis
-skipInlineCode
-skipInlineDel
-skipInlineIns
-skipInlineSub
-skipInlineSup
-_a_
-_b_
-_c_
-_d_
-_e_
-_f_
-_g_
-_h_
-_i_
-_j_
-_k_
-extInlineStrong
-extInlineEmphasis
-extInlineCode
-extInlineDel
-extInlineIns
-extInlineSub
-extInlineSup
+         <string>id
+             processtemplate
 </string>
      </void>
     </object>
    </void>
    <void method="put">
-    <string>ProcessPostConditionProcessTemplate</string>
+       <string>Rename id and other columns (43-45)</string>
     <object class="com.vladsch.MissingInActions.settings.BatchSearchReplace">
+        <void property="optionsText">
+            <string>b
+
+                # change to IS NOT NULL of date column
+
+                # read as is, remove from update/insert
+
+                # if date is needed add seconds in `duration` to startAt date
+
+                # read as is, remove from update/insert
+                # change to IS NOT NULL of date column
+            </string>
+        </void>
      <void property="replaceText">
-      <string>processPostConditionId
-processTemplateId
-</string>
+         <string>processInstanceId
+             stepId
+             Accountable_Documents
+             Consulted_Documents
+             TriggeredProcess
+             Documents
+             Informed_Documents
+             InputType.radioButton
+             Responsible_Documents
+             accountableList
+             step_SubProcesses
+             approvalProcessInstanceId
+             approvalProcessInstanceId
+             approvalProcess
+             approvalProcessId
+             approved
+             backStepId
+             checked
+             optionState
+             checkLists
+             consultedList
+             contentId
+             contentInstanceId
+             contentTypeId
+             createdAt
+             triggeredProcess
+             step_TriggeredProcesses
+             duration
+             documentId
+             processId
+             processInstanceIds
+             informedList
+             negativePostConditionId
+             originDocumentId
+             originProcessId
+             originStepId
+             image
+             images
+             positivePostConditionId
+             postConditionTypeId
+             postConditionsArray
+             step_PostConditions
+             preConditionsArray
+             preConditionTypeId
+             step_PreConditions
+             url
+             processPreConditionId
+             conditionTypeId
+             stepId
+             stepInstance
+             stepInstanceId
+             stepInstances
+             step
+             stepId
+             steps
+             stepPostConditionId
+             stepPreConditionId
+             process
+             processId
+             processIds
+             optionList
+             optionListInstanceId
+             optionLists
+             optionState
+             step_responsibleList
+             responsibleList
+             stepTriggeredProcesses
+             stepInstanceIds
+             stepPostConditions
+             stepPreConditions
+             step_ResponsibleList
+             stepTypeId
+             stepInstances
+             stepsData
+             taskId
+             trainingProcess
+             trainingProcessId
+             contentTypeId
+             inputTypeId
+             updatedAt
+             text
+             userInput.inputTypeId
+             inputInstanceId
+         </string>
      </void>
      <void property="searchText">
-      <string>id
-processtemplate
-</string>
+         <string>-id
+             -id
+             Accountable_DocumentTemplates
+             Consulted_DocumentTemplates
+             DerivedProcess
+             DocumentTemplates
+             Informed_DocumentTemplates
+             InputType.radioButton
+             Responsible_DocumentTemplates
+             accountable
+             addProcessToProcessStepArray
+             approveProcessInstance
+             approveProcessInstanceId
+             approveProcessTemplate
+             approveProcessTemplateId
+             approved
+             backStepTemplateId
+             checked
+             checkedStatus
+             checklists
+             consulted
+             contentComponentId
+             contentComponentInstanceId
+             contentComponentTypeId
+             createdAt
+             derivedProcess
+             derivedProcesses
+             duration
+             id
+             -id
+             ids
+             informed
+             negativePostCondition
+             originDocumentTemplateId
+             originProcessTemplateId
+             originStepTemplateId
+             picture
+             pictures
+             positivePostCondition
+             postConditionType
+             postConditionsArray
+             postconditions
+             preConditionsArray
+             prerequisiteType
+             prerequisites
+             preview
+             processPrerequisiteId
+             processStepConditionId
+             processStepId
+             processStepInstance
+             processStepInstanceId
+             processStepInstances
+             processStepTemplate
+             processStepTemplateId
+             processStepTemplates
+             processStepsPostConditionId
+             processStepsPrerequisiteId
+             processTemplate
+             processTemplateId
+             processTemplateIds
+             radioButton
+             radioButtonInstanceId
+             radioButtons
+             radioState
+             responsible
+             responsible
+             stepDerivedProcesses
+             stepIds
+             stepPostconditions
+             stepPrerequisites
+             stepResponsible
+             stepType
+             steps
+             stepsData
+             taskTemplateId
+             trainingProcessTemplate
+             trainingProcessTemplateId
+             typeOf
+             typeOf
+             updatedAt
+             userInput
+             userInput.typeOf
+             userInputInstanceId
+         </string>
      </void>
     </object>
    </void>
@@ -203,6 +304,61 @@ updatedat
      </void>
     </object>
    </void>
+      <void method="put">
+          <string>Rename status column (46)</string>
+          <object class="com.vladsch.MissingInActions.settings.BatchSearchReplace">
+              <void property="optionsText">
+                  <string>w
+                      -
+                      -
+                      -
+                      -
+                      -
+                      -
+                      -
+                      -
+                      w
+                      w
+                  </string>
+              </void>
+              <void property="replaceText">
+                  <string>statusTypeId
+                      Option[Int]
+                      Option[Int]
+
+                      StatusTypes
+                      StatusTypes
+                      StatusTypes.OPEN
+                      StatusTypes.NEW
+                      StatusTypes.OPEN
+                      StatusTypes.NEW
+                      StatusTypes.done
+                  </string>
+              </void>
+              <void property="searchText">
+                  <string>status
+                      -Option[String]
+                      -String
+                      -Documents
+                      -Processes
+                      -ProcessInstances
+                      -StepInstances
+                      -Tasks
+                      -TaskInstances
+                      InstanceStatusType
+                      StatusType
+                      &quot;started&quot;
+                      &quot;offen&quot;
+                      &quot;in Bearbeitung&quot;
+                      &quot;new&quot;
+                      &quot;done&quot;
+                  </string>
+              </void>
+              <void property="wholeWord">
+                  <boolean>false</boolean>
+              </void>
+          </object>
+      </void>
    <void method="put">
     <string>ContentComponentVideoInstances</string>
     <object class="com.vladsch.MissingInActions.settings.BatchSearchReplace">
@@ -230,22 +386,206 @@ updatedat
     </object>
    </void>
    <void method="put">
-    <string>ProcessPostConditions</string>
-    <object class="com.vladsch.MissingInActions.settings.BatchSearchReplace">
-     <void property="replaceText">
-      <string>conditionTypeId
+       <string>Rename Table id columns (43-45)</string>
+       <object class="com.vladsch.MissingInActions.settings.BatchSearchReplace">
+           <void property="optionsText">
+               <string>w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   b
+                   b
+                   b
+                   b
+                   b
+                   b
+                   b
+                   b
+                   b
+                   b
+                   b
+                   b
+                   b
+                   b
+                   b
+                   b
+                   b
+                   b
+                   b
+                   b
+                   b
+                   b
+                   b
+                   b
+                   b
+               </string>
+           </void>
+           <void property="replaceText">
+               <string>AuditLogs
+                   ChangeHistories
+                   ChangeLogs
+                   Clients
+                   ConditionTypes
+                   ContentCheckListInstances
+                   ContentCheckLists
+                   ContentInputInstances
+                   ContentInputs
+                   ContentInstances
+                   ContentOptionListInstances
+                   ContentOptionLists
+                   Contents
+                   ContentTypes
+                   InputTypes
+                   Processes
+                   ProcessInstances
+                   ProcessPostConditions
+                   ProcessPreConditions
+                   StepInstances
+                   StepPostConditions
+                   StepPreConditions
+                   Steps
+                   TaskInstances
+                   Tasks
+                   AuditLog
+                   ChangeHistory
+                   ChangeLog
+                   Client
+                   ConditionType
+                   ContentCheckListInstance
+                   ContentCheckList
+                   ContentInputInstance
+                   ContentInput
+                   ContentInstance
+                   ContentOptionListInstance
+                   ContentOptionList
+                   Content
+                   ContentType
+                   InputType
+                   Process
+                   ProcessInstance
+                   ProcessPostCondition
+                   ProcessPreCondition
+                   StepInstance
+                   StepPostCondition
+                   StepPreCondition
+                   Step
+                   TaskInstance
+                   Task
+               </string>
+           </void>
+           <void property="searchText">
+               <string>AuditLogs
+                   ChangeHistories
+                   ChangeLogs
+                   Clients
+                   ConditionTypes
+                   ContentCheckListInstances
+                   ContentCheckLists
+                   ContentInputInstances
+                   ContentInputs
+                   ContentInstances
+                   ContentOptionListInstances
+                   ContentOptionLists
+                   Contents
+                   ContentTypes
+                   InputTypes
+                   Processes
+                   ProcessInstances
+                   ProcessPostConditions
+                   ProcessPreConditions
+                   StepInstances
+                   StepPostConditions
+                   StepPreConditions
+                   Steps
+                   TaskInstances
+                   Tasks
+                   AuditLog
+                   ChangeHistory
+                   ChangeLog
+                   Client
+                   ConditionType
+                   ContentCheckListInstance
+                   ContentCheckList
+                   ContentInputInstance
+                   ContentInput
+                   ContentInstance
+                   ContentOptionListInstance
+                   ContentOptionList
+                   Content
+                   ContentType
+                   InputType
+                   Process
+                   ProcessInstance
+                   ProcessPostCondition
+                   ProcessPreCondition
+                   StepInstance
+                   StepPostCondition
+                   StepPreCondition
+                   Step
+                   TaskInstance
+                   Task
+               </string>
+           </void>
+           <void property="wholeWord">
+               <boolean>false</boolean>
+           </void>
+       </object>
+   </void>
+      <void method="put">
+          <string>Rename approve to approval</string>
+          <object class="com.vladsch.MissingInActions.settings.BatchSearchReplace">
+              <void property="replaceText">
+                  <string>approvalProcessId
+                      approvalProcessInstanceId
+                  </string>
+              </void>
+              <void property="searchText">
+                  <string>checked
+                      approved
+                      approveProcessId
+                      approveProcessInstanceId
+                  </string>
+              </void>
+          </object>
+      </void>
+      <void method="put">
+          <string>ProcessPostConditions</string>
+          <object class="com.vladsch.MissingInActions.settings.BatchSearchReplace">
+              <void property="replaceText">
+                  <string>conditionTypeId
 processTemplateId
 processTemplateId
 </string>
-     </void>
-     <void property="searchText">
-      <string>conditiontype
+              </void>
+              <void property="searchText">
+                  <string>conditiontype
 processtemplate
 processTemplate_id
 </string>
-     </void>
-    </object>
-   </void>
+              </void>
+          </object>
+      </void>
    <void method="put">
     <string>ProcessStepsPostConditionProcessTemplate</string>
     <object class="com.vladsch.MissingInActions.settings.BatchSearchReplace">
@@ -375,116 +715,142 @@ user
     </object>
    </void>
    <void method="put">
-    <string>Informed_TaskTemplates</string>
+       <string>AAA</string>
+       <object class="com.vladsch.MissingInActions.settings.BatchSearchReplace">
+           <void property="optionsText">
+               <string>
+
+               </string>
+           </void>
+           <void property="replaceText">
+               <string>FORMAT_TABLE_LEAD_TRAIL_PIPES
+                   FORMAT_TABLE_SPACE_AROUND_PIPES
+                   FORMAT_TABLE_ADJUST_COLUMN_WIDTH
+                   FORMAT_TABLE_APPLY_COLUMN_ALIGNMENT
+                   FORMAT_TABLE_FILL_MISSING_COLUMNS
+                   FORMAT_TABLE_LEFT_ALIGN_MARKER
+                   FORMAT_TABLE_MIN_SEPARATOR_COLUMN_WIDTH
+                   FORMAT_TABLE_MIN_SEPARATOR_DASHES
+                   FORMAT_TABLE_TRIM_CELL_WHITESPACE
+                   FORMAT_CHAR_WIDTH_PROVIDER
+                   FORMAT_TABLE_CAPTION
+               </string>
+           </void>
+           <void property="searchText">
+               <string>LEAD_TRAIL_PIPES
+                   SPACE_AROUND_PIPES
+                   ADJUST_COLUMN_WIDTH
+                   APPLY_COLUMN_ALIGNMENT
+                   FILL_MISSING_COLUMNS
+                   LEFT_ALIGN_MARKER
+                   MIN_SEPARATOR_COLUMN_WIDTH
+                   MIN_SEPARATOR_DASHES
+                   TRIM_CELL_WHITESPACE
+                   CHAR_WIDTH_PROVIDER
+                   REMOVE_CAPTION
+               </string>
+           </void>
+       </object>
+   </void>
+      <void method="put">
+          <string>Informed_TaskTemplates</string>
+          <object class="com.vladsch.MissingInActions.settings.BatchSearchReplace">
+              <void property="replaceText">
+                  <string>userUuid
+</string>
+              </void>
+              <void property="searchText">
+                  <string>username
+</string>
+              </void>
+          </object>
+      </void>
+   <void method="put">
+       <string>Refactoring Name Changes</string>
     <object class="com.vladsch.MissingInActions.settings.BatchSearchReplace">
      <void property="replaceText">
-      <string>userUuid
-</string>
+         <string>approveProcessInstanceId
+             approvedAt
+             approveProcessTemplateId
+             checkedAt
+             checkedAt
+             clientId
+             conditionTypeId
+             contentComponentId
+             contentComponentId
+             contentComponentInstanceId
+             contentComponentId
+             createdAt
+             deadlineAt
+             duration
+             doneAt
+             inputAt
+             inputTypeId
+             originStepTemplateId
+             originProcessTemplateId
+             previousVersionId
+             processStepInstanceId
+             processStepId
+             processStepTemplateId
+             processTemplateId
+             processStepTemplateId
+             processStepTemplateId
+             processTemplateId
+             processStepTemplateId
+             taskInstanceId
+             trainingProcessTemplateId
+             updatedAt
+             userUuid
+             userUuid
+         </string>
      </void>
      <void property="searchText">
-      <string>username
-</string>
+         <string>approveProcessInstance
+             approvedat
+             approveprocess
+             checkedDate
+             checkedat
+             client
+             conditiontype
+             contentComponent
+             contentComponentID
+             contentComponentInstance
+             contentComponent_id
+             createdat
+             deadline
+             deadline_
+             doneDate
+             inputDate
+             inputType
+             origStepTemplateId
+             originTemplate
+             previousVersion
+             processStepInstanceID
+             processStep_id
+             processStep_id_
+             processTemplate_id
+             processstep
+             processsteptemplate
+             processtemplate
+             processteptemplate
+             taskTemplateId
+             trainingsprocess
+             updatedat
+             user
+             username
+         </string>
      </void>
     </object>
    </void>
    <void method="put">
-    <string>ContentComponentVideo</string>
+       <string>ContentComponentVideo</string>
     <object class="com.vladsch.MissingInActions.settings.BatchSearchReplace">
      <void property="replaceText">
-      <string>contentComponentId
+         <string>contentComponentId
 </string>
      </void>
      <void property="searchText">
-      <string>contentComponent
-</string>
-     </void>
-    </object>
-   </void>
-   <void method="put">
-    <string>Flexmark Html Parser</string>
-    <object class="com.vladsch.MissingInActions.settings.BatchSearchReplace">
-     <void property="optionsText">
-      <string>
-
-
-
-
-
-
-?
-?
-?
-?
-?
-?
-?
-?
-?
-?
-?
-
-
-
-
-
-
-
-</string>
-     </void>
-     <void property="replaceText">
-      <string>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</string>
-     </void>
-     <void property="searchText">
-      <string>skipInlineStrong
-skipInlineEmphasis
-skipInlineCode
-skipInlineDel
-skipInlineIns
-skipInlineSub
-skipInlineSup
-_a_
-_b_
-_c_
-_d_
-_e_
-_f_
-_g_
-_h_
-_i_
-_j_
-_k_
-extInlineStrong
-extInlineEmphasis
-extInlineCode
-extInlineDel
-extInlineIns
-extInlineSub
-extInlineSup
+         <string>contentComponent
 </string>
      </void>
     </object>
@@ -526,10 +892,470 @@ processTemplate_id
     </object>
    </void>
    <void method="put">
-    <string>ProcessTemplates</string>
-    <object class="com.vladsch.MissingInActions.settings.BatchSearchReplace">
-     <void property="replaceText">
-      <string>approvedAt
+       <string>Rename Table id and other columns (43-45)</string>
+       <object class="com.vladsch.MissingInActions.settings.BatchSearchReplace">
+           <void property="optionsText">
+               <string>w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   b
+                   b
+                   b
+                   b
+                   b
+                   b
+                   b
+                   b
+                   b
+                   b
+                   b
+                   b
+                   b
+                   b
+                   b
+                   b
+                   b
+                   b
+                   b
+                   b
+                   b
+                   b
+                   b
+                   b
+                   b
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   b
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w # change to IS NOT NULL of date column
+                   w # change to IS NOT NULL of date column
+                   w # read as is, remove from update/insert
+                   w # if date is needed add seconds in `duration` to startAt date
+                   w # read as is, remove from update/insert
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+                   w
+               </string>
+           </void>
+           <void property="replaceText">
+               <string>AuditLogs
+                   ChangeHistories
+                   ChangeLogs
+                   Clients
+                   ConditionTypes
+                   ContentCheckListInstances
+                   ContentCheckLists
+                   ContentInputInstances
+                   ContentInputs
+                   ContentInstances
+                   ContentOptionListInstances
+                   ContentOptionLists
+                   Contents
+                   ContentTypes
+                   InputTypes
+                   Processes
+                   ProcessInstances
+                   ProcessPostConditions
+                   ProcessPreConditions
+                   StepInstances
+                   StepPostConditions
+                   StepPreConditions
+                   Steps
+                   TaskInstances
+                   Tasks
+                   AuditLog
+                   ChangeHistory
+                   ChangeLog
+                   Client
+                   ConditionType
+                   ContentCheckListInstance
+                   ContentCheckList
+                   ContentInputInstance
+                   ContentInput
+                   ContentInstance
+                   ContentOptionListInstance
+                   ContentOptionList
+                   Content
+                   ContentType
+                   InputType
+                   Process
+                   ProcessInstance
+                   ProcessPostCondition
+                   ProcessPreCondition
+                   StepInstance
+                   StepPostCondition
+                   StepPreCondition
+                   Step
+                   TaskInstance
+                   Task
+                   approvalProcessInstanceId
+                   approvalProcessId
+                   backStepId
+                   contentId
+                   contentInstanceId
+                   contentTypeId
+                   negativePostConditionId
+                   originProcessId
+                   originStepId
+                   positivePostConditionId
+                   processPreConditionId
+                   stepInstanceId
+                   stepPostConditionId
+                   stepPreConditionId
+                   stepId
+                   processId
+                   optionState
+                   taskId
+                   trainingProcessId
+                   text
+                   id
+                   Accountable_Processes
+                   Accountable_Tasks
+                   ChangeHistories
+                   ChangeLogs
+                   Consulted_ProcessInstances
+                   Consulted_Processes
+                   Consulted_Tasks
+                   ContentCheckLists
+                   ContentCheckListInstances
+                   ContentInstances
+                   ContentImages
+                   ContentImageInstances
+                   ContentOptionLists
+                   ContentOptionListInstances
+                   ContentTables
+                   ContentTableInstances
+                   ContentTexts
+                   ContentTextInstances
+                   ContentTypes
+                   ContentInputs
+                   ContentInputInstances
+                   ContentVideos
+                   ContentVideoInstances
+                   Content_Steps
+                   Contents
+                   Step_TriggeredProcess
+                   Step_TriggeredProcesses
+                   Informed_ProcessInstances
+                   Informed_Processes
+                   Informed_Tasks
+                   Process_PostConditions
+                   Process_PreConditions
+                   ProcessPreConditions
+                   StepInstances
+                   Steps
+                   StepPostCondition_Processes
+                   StepPostConditions
+                   StepPreCondition_Processes
+                   StepPreConditions
+                   Step_SubProcesses
+                   Processes
+                   Responsible_ProcessInstances
+                   Responsible_Steps
+                   Responsible_Processes
+                   Responsible_Tasks
+                   Tasks
+                   approved
+                   checked
+                   createdAt
+                   duration
+                   updatedAt
+                   step_PreConditions
+                   step_PostConditions
+                   stepPreConditions
+                   stepPostConditions
+                   step_TriggeredProcesses
+                   stepTriggeredProcesses
+                   step_SubProcesses
+                   responsibleList
+                   accountableList
+                   consultedList
+                   informedList
+                   step_ResponsibleList
+                   step
+                   triggeredProcess
+                   TriggeredProcess
+                   process
+               </string>
+           </void>
+           <void property="searchText">
+               <string>AuditLogs
+                   ChangeHistories
+                   ChangeLogs
+                   Clients
+                   ConditionTypes
+                   ContentCheckListInstances
+                   ContentCheckLists
+                   ContentInputInstances
+                   ContentInputs
+                   ContentInstances
+                   ContentOptionListInstances
+                   ContentOptionLists
+                   Contents
+                   ContentTypes
+                   InputTypes
+                   Processes
+                   ProcessInstances
+                   ProcessPostConditions
+                   ProcessPreConditions
+                   StepInstances
+                   StepPostConditions
+                   StepPreConditions
+                   Steps
+                   TaskInstances
+                   Tasks
+                   AuditLog
+                   ChangeHistory
+                   ChangeLog
+                   Client
+                   ConditionType
+                   ContentCheckListInstance
+                   ContentCheckList
+                   ContentInputInstance
+                   ContentInput
+                   ContentInstance
+                   ContentOptionListInstance
+                   ContentOptionList
+                   Content
+                   ContentType
+                   InputType
+                   Process
+                   ProcessInstance
+                   ProcessPostCondition
+                   ProcessPreCondition
+                   StepInstance
+                   StepPostCondition
+                   StepPreCondition
+                   Step
+                   TaskInstance
+                   Task
+                   approveProcessInstanceId
+                   approveProcessTemplateId
+                   backStepTemplateId
+                   contentComponentId
+                   contentComponentInstanceId
+                   contentComponentTypeId
+                   negativePostCondition
+                   originProcessTemplateId
+                   originStepTemplateId
+                   positivePostCondition
+                   processPrerequisiteId
+                   processStepInstanceId
+                   processStepsPostConditionId
+                   processStepsPrerequisiteId
+                   processStepTemplateId
+                   processTemplateId
+                   radioState
+                   taskTemplateId
+                   trainingProcessTemplateId
+                   userInput
+                   id
+                   Accountable_ProcessTemplates
+                   Accountable_TaskTemplates
+                   ChangeHistory
+                   Changelog
+                   Consulted_ProcessInstance
+                   Consulted_ProcessTemplates
+                   Consulted_TaskTemplates
+                   ContentComponentChecklist
+                   ContentComponentChecklistInstances
+                   ContentComponentInstances
+                   ContentComponentPicture
+                   ContentComponentPictureInstances
+                   ContentComponentRadioButton
+                   ContentComponentRadioButtonInstances
+                   ContentComponentTable
+                   ContentComponentTableInstances
+                   ContentComponentText
+                   ContentComponentTextInstances
+                   ContentComponentTypes
+                   ContentComponentUserInput
+                   ContentComponentUserInputInstances
+                   ContentComponentVideo
+                   ContentComponentVideoInstances
+                   ContentComponent_ProcessStepTemplate
+                   ContentComponents
+                   Step_DerivedProcess
+                   DerivedProcesses
+                   Informed_ProcessInstance
+                   Informed_ProcessTemplates
+                   Informed_TaskTemplates
+                   ProcessPostConditionProcessTemplate
+                   ProcessPrerequisiteProcessTemplate
+                   ProcessPrerequisites
+                   ProcessStepInstances
+                   ProcessStepTemplates
+                   ProcessStepsPostConditionProcessTemplate
+                   ProcessStepsPostConditions
+                   ProcessStepsPrerequisiteProcessTemplate
+                   ProcessStepsPrerequisites
+                   ProcessStepsTemplates_ProcessTemplates
+                   ProcessTemplates
+                   Responsible_ProcessInstance
+                   Responsible_ProcessStepTemplates
+                   Responsible_ProcessTemplates
+                   Responsible_TaskTemplates
+                   TaskTemplates
+                   approved
+                   checked
+                   createdAt
+                   duration
+                   updatedAt
+                   prerequisites
+                   postconditions
+                   stepPrerequisites
+                   stepPostconditions
+                   derivedProcesses
+                   stepDerivedProcesses
+                   addProcessToProcessStepArray
+                   responsible
+                   accountable
+                   consulted
+                   informed
+                   stepResponsible
+                   processStepTemplate
+                   derivedProcess
+                   DerivedProcess
+                   processTemplate
+               </string>
+           </void>
+           <void property="wholeWord">
+               <boolean>false</boolean>
+           </void>
+       </object>
+   </void>
+      <void method="put">
+          <string>Table columns changes (43-45)</string>
+          <object class="com.vladsch.MissingInActions.settings.BatchSearchReplace">
+              <void property="optionsText">
+                  <string># change to IS NOT NULL of date column
+                      # change to IS NOT NULL of date column
+                      # read as is, remove from update/insert
+                      # if date is needed add seconds in `duration` to startAt date
+                      # read as is, remove from update/insert
+                  </string>
+              </void>
+              <void property="replaceText">
+                  <string>approved
+                      checked
+                      createdAt
+                      duration
+                      updatedAt
+                  </string>
+              </void>
+              <void property="searchText">
+                  <string>approved
+                      checked
+                      createdAt
+                      duration
+                      updatedAt
+                  </string>
+              </void>
+          </object>
+      </void>
+      <void method="put">
+          <string>ProcessTemplates</string>
+          <object class="com.vladsch.MissingInActions.settings.BatchSearchReplace">
+              <void property="replaceText">
+                  <string>approvedAt
 approveProcessTemplateId
 approveProcessInstanceId
 checkedAt
@@ -541,9 +1367,9 @@ previousVersionId
 trainingProcessTemplateId
 updatedAt
 </string>
-     </void>
-     <void property="searchText">
-      <string>approvedat
+              </void>
+              <void property="searchText">
+                  <string>approvedat
 approveprocess
 approveProcessInstance
 checkedat
@@ -555,9 +1381,60 @@ previousVersion
 trainingsprocess
 updatedat
 </string>
-     </void>
-    </object>
-   </void>
+              </void>
+          </object>
+      </void>
+      <void method="put">
+          <string>Rename Table columns (43-45)</string>
+          <object class="com.vladsch.MissingInActions.settings.BatchSearchReplace">
+              <void property="replaceText">
+                  <string>approvalProcessInstanceId
+                      approvalProcessId
+                      backStepId
+                      contentId
+                      contentInstanceId
+                      contentTypeId
+                      negativePostConditionId
+                      originProcessId
+                      originStepId
+                      positivePostConditionId
+                      processPreConditionId
+                      stepInstanceId
+                      stepsPostConditionId
+                      stepPreConditionId
+                      stepId
+                      processId
+                      optionState
+                      taskId
+                      trainingProcessId
+                      text
+                  </string>
+              </void>
+              <void property="searchText">
+                  <string>approveProcessInstanceId
+                      approveProcessTemplateId
+                      backStepTemplateId
+                      contentComponentId
+                      contentComponentInstanceId
+                      contentComponentTypeId
+                      negativePostCondition
+                      originProcessTemplateId
+                      originStepTemplateId
+                      positivePostCondition
+                      processPrerequisiteId
+                      processStepInstanceId
+                      processStepsPostConditionId
+                      processStepsPrerequisiteId
+                      processStepTemplateId
+                      processTemplateId
+                      radioState
+                      taskTemplateId
+                      trainingProcessTemplateId
+                      userInput
+                  </string>
+              </void>
+          </object>
+      </void>
    <void method="put">
     <string>ContentComponentTableInstances</string>
     <object class="com.vladsch.MissingInActions.settings.BatchSearchReplace">
@@ -707,6 +1584,127 @@ updatedat
      </void>
     </object>
    </void>
+      <void method="put">
+          <string>Fix constraint case</string>
+          <object class="com.vladsch.MissingInActions.settings.BatchSearchReplace">
+              <void property="replaceText">
+                  <string>Accountable_ProcessInstance
+                      Accountable_TaskInstances
+                      AuditLogs
+                      ChangeHistory
+                      Changelog
+                      Clients
+                      ConditionTypes
+                      Consulted_ProcessInstance
+                      Consulted_ProcessTemplates
+                      Consulted_TaskInstances
+                      Consulted_TaskTemplates
+                      ContentComponent_ProcessStepTemplate
+                      ContentComponentChecklist
+                      ContentComponentChecklistInstances
+                      ContentComponentInstances
+                      ContentComponentPicture
+                      ContentComponentPictureInstances
+                      ContentComponentRadioButton
+                      ContentComponentRadioButtonInstances
+                      ContentComponents
+                      ContentComponentTable
+                      ContentComponentTableInstances
+                      ContentComponentText
+                      ContentComponentTextInstances
+                      ContentComponentTypes
+                      ContentComponentUserInput
+                      ContentComponentUserInputInstances
+                      ContentComponentVideo
+                      ContentComponentVideoInstances
+                      DerivedProcesses
+                      Informed_ProcessInstance
+                      Informed_ProcessTemplates
+                      Informed_TaskInstances
+                      Informed_TaskTemplates
+                      InputTypes
+                      ProcessInstances
+                      ProcessPostConditionProcessTemplate
+                      ProcessPostConditions
+                      ProcessPrerequisiteProcessTemplate
+                      ProcessPrerequisites
+                      ProcessStepInstances
+                      ProcessStepsPostConditionProcessTemplate
+                      ProcessStepsPostConditions
+                      ProcessStepsPrerequisiteProcessTemplate
+                      ProcessStepsPrerequisites
+                      ProcessStepsTemplates_ProcessTemplates
+                      ProcessStepTemplates
+                      ProcessTemplates
+                      Responsible_ProcessInstance
+                      Responsible_ProcessStepTemplates
+                      Responsible_ProcessTemplates
+                      Responsible_TaskInstances
+                      Responsible_TaskTemplates
+                      TaskInstances
+                      TaskTemplates
+                  </string>
+              </void>
+              <void property="searchText">
+                  <string>accountable_processinstance
+                      accountable_taskinstances
+                      auditlogs
+                      changehistory
+                      changelog
+                      clients
+                      conditiontypes
+                      consulted_processinstance
+                      consulted_processtemplates
+                      consulted_taskinstances
+                      consulted_tasktemplates
+                      contentcomponent_processsteptemplate
+                      contentcomponentchecklist
+                      contentcomponentchecklistinstances
+                      contentcomponentinstances
+                      contentcomponentpicture
+                      contentcomponentpictureinstances
+                      contentcomponentradiobutton
+                      contentcomponentradiobuttoninstances
+                      contentcomponents
+                      contentcomponenttable
+                      contentcomponenttableinstances
+                      contentcomponenttext
+                      contentcomponenttextinstances
+                      contentcomponenttypes
+                      contentcomponentuserinput
+                      contentcomponentuserinputinstances
+                      contentcomponentvideo
+                      contentcomponentvideoinstances
+                      derivedprocesses
+                      informed_processinstance
+                      informed_processtemplates
+                      informed_taskinstances
+                      informed_tasktemplates
+                      inputtypes
+                      processinstances
+                      processpostconditionprocesstemplate
+                      processpostconditions
+                      processprerequisiteprocesstemplate
+                      processprerequisites
+                      processstepinstances
+                      processstepspostconditionprocesstemplate
+                      processstepspostconditions
+                      processstepsprerequisiteprocesstemplate
+                      processstepsprerequisites
+                      processstepstemplates_processtemplates
+                      processsteptemplates
+                      processtemplates
+                      responsible_processinstance
+                      responsible_processsteptemplates
+                      responsible_processtemplates
+                      responsible_taskinstances
+                      responsible_tasktemplates
+                      taskinstances
+                      tasktemplates
+                  </string>
+              </void>
+          </object>
+      </void>
    <void method="put">
     <string>Informed_TaskInstances</string>
     <object class="com.vladsch.MissingInActions.settings.BatchSearchReplace">
@@ -768,7 +1766,108 @@ username
     </object>
    </void>
    <void method="put">
-    <string>Responsible_ProcessStepTemplates</string>
+       <string>Rename Tables to Standard (43-45)</string>
+    <object class="com.vladsch.MissingInActions.settings.BatchSearchReplace">
+     <void property="replaceText">
+         <string>Accountable_Processes
+             Accountable_Tasks
+             ChangeHistories
+             ChangeLogs
+             Consulted_ProcessInstances
+             Consulted_Processes
+             Consulted_Tasks
+             ContentCheckLists
+             ContentCheckListInstances
+             ContentInstances
+             ContentImages
+             ContentImageInstances
+             ContentOptionLists
+             ContentOptionListInstances
+             ContentTables
+             ContentTableInstances
+             ContentTexts
+             ContentTextInstances
+             ContentTypes
+             ContentInputs
+             ContentInputInstances
+             ContentVideos
+             ContentVideoInstances
+             Content_Steps
+             Contents
+             Step_TriggeredProcesses
+             Informed_ProcessInstances
+             Informed_Processes
+             Informed_Tasks
+             Process_PostConditions
+             Process_PreConditions
+             ProcessPreConditions
+             StepInstances
+             Steps
+             StepPostCondition_Processes
+             StepPostConditions
+             StepPreCondition_Processes
+             StepPreConditions
+             Step_Processes
+             Processes
+             Responsible_ProcessInstances
+             Responsible_Steps
+             Responsible_Processes
+             Responsible_Tasks
+             Tasks
+         </string>
+     </void>
+     <void property="searchText">
+         <string>Accountable_ProcessTemplates
+             Accountable_TaskTemplates
+             ChangeHistory
+             Changelog
+             Consulted_ProcessInstance
+             Consulted_ProcessTemplates
+             Consulted_TaskTemplates
+             ContentComponentChecklist
+             ContentComponentChecklistInstances
+             ContentComponentInstances
+             ContentComponentPicture
+             ContentComponentPictureInstances
+             ContentComponentRadioButton
+             ContentComponentRadioButtonInstances
+             ContentComponentTable
+             ContentComponentTableInstances
+             ContentComponentText
+             ContentComponentTextInstances
+             ContentComponentTypes
+             ContentComponentUserInput
+             ContentComponentUserInputInstances
+             ContentComponentVideo
+             ContentComponentVideoInstances
+             ContentComponent_ProcessStepTemplate
+             ContentComponents
+             DerivedProcesses
+             Informed_ProcessInstance
+             Informed_ProcessTemplates
+             Informed_TaskTemplates
+             ProcessPostConditionProcessTemplate
+             ProcessPrerequisiteProcessTemplate
+             ProcessPrerequisites
+             ProcessStepInstances
+             ProcessStepTemplates
+             ProcessStepsPostConditionProcessTemplate
+             ProcessStepsPostConditions
+             ProcessStepsPrerequisiteProcessTemplate
+             ProcessStepsPrerequisites
+             ProcessStepsTemplates_ProcessTemplates
+             ProcessTemplates
+             Responsible_ProcessInstance
+             Responsible_ProcessStepTemplates
+             Responsible_ProcessTemplates
+             Responsible_TaskTemplates
+             TaskTemplates
+         </string>
+     </void>
+    </object>
+   </void>
+   <void method="put">
+       <string>Responsible_ProcessStepTemplates</string>
     <object class="com.vladsch.MissingInActions.settings.BatchSearchReplace">
      <void property="replaceText">
       <string>userUuid
@@ -781,53 +1880,27 @@ username
     </object>
    </void>
    <void method="put">
-    <string>Accountable_ProcessInstance</string>
+       <string>Accountable_ProcessInstance</string>
     <object class="com.vladsch.MissingInActions.settings.BatchSearchReplace">
      <void property="replaceText">
-      <string>userUuid
+         <string>userUuid
 </string>
      </void>
      <void property="searchText">
-      <string>username
+         <string>username
 </string>
      </void>
     </object>
    </void>
    <void method="put">
-    <string>ContentComponentRadioButton</string>
+       <string>ContentComponentRadioButton</string>
     <object class="com.vladsch.MissingInActions.settings.BatchSearchReplace">
      <void property="replaceText">
-      <string>contentComponentId
+         <string>contentComponentId
 </string>
      </void>
      <void property="searchText">
-      <string>contentComponent
-</string>
-     </void>
-    </object>
-   </void>
-   <void method="put">
-    <string>MiaDemo</string>
-    <object class="com.vladsch.MissingInActions.settings.BatchSearchReplace">
-     <void property="optionsText">
-      <string>
-
-
-
-</string>
-     </void>
-     <void property="replaceText">
-      <string>add
-fix
-change
-NotFound
-</string>
-     </void>
-     <void property="searchText">
-      <string>Add
-Fix
-Change
-NotFound
+         <string>contentComponent
 </string>
      </void>
     </object>
@@ -856,26 +1929,6 @@ username
      </void>
      <void property="searchText">
       <string>contentComponent
-</string>
-     </void>
-    </object>
-   </void>
-   <void method="put">
-    <string>Temp</string>
-    <object class="com.vladsch.MissingInActions.settings.BatchSearchReplace">
-     <void property="optionsText">
-      <string>
-
-</string>
-     </void>
-     <void property="replaceText">
-      <string>
-
-</string>
-     </void>
-     <void property="searchText">
-      <string>myOnPausedParamsRunnable
-DEBUGGER_PAUSED
 </string>
      </void>
     </object>
@@ -966,92 +2019,125 @@ updatedat
     </object>
    </void>
    <void method="put">
-    <string>Docx Styles</string>
+       <string>Consulted_TaskTemplates</string>
     <object class="com.vladsch.MissingInActions.settings.BatchSearchReplace">
-     <void property="optionsText">
-      <string>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</string>
-     </void>
      <void property="replaceText">
-      <string>Normal
-ParagraphTextBody
-BodyText
-PreformattedText
-Quotations
-AsideBlock
-HorizontalLine
-TableCaption
-TableContents
-TableHeading
-Footnote
-StrongEmphasis
-Emphasis
-Strikethrough
-Subscript
-Superscript
-Underlined
-SourceText
-Hyperlink
-FootnoteReference
-EndnoteReference
+         <string>userUuid
 </string>
      </void>
      <void property="searchText">
-      <string>DEFAULT_STYLE
-LOOSE_PARAGRAPH_STYLE
-TIGHT_PARAGRAPH_STYLE
-PREFORMATTED_TEXT_STYLE
-BLOCK_QUOTE_STYLE
-ASIDE_BLOCK_STYLE
-HORIZONTAL_LINE_STYLE
-TABLE_CAPTION
-TABLE_CONTENTS
-TABLE_HEADING
-FOOTNOTE_STYLE
-BOLD_STYLE
-ITALIC_STYLE
-STRIKE_THROUGH_STYLE
-SUBSCRIPT_STYLE
-SUPERSCRIPT_STYLE
-INS_STYLE
-INLINE_CODE_STYLE
-HYPERLINK_STYLE
-FOOTNOTE_ANCHOR_STYLE
-ENDNOTE_ANCHOR_STYLE
+         <string>username
 </string>
      </void>
     </object>
    </void>
    <void method="put">
-    <string>Consulted_TaskTemplates</string>
+       <string>Rename Tables to Standard</string>
     <object class="com.vladsch.MissingInActions.settings.BatchSearchReplace">
      <void property="replaceText">
-      <string>userUuid
-</string>
+         <string>Accountable_Processes
+             Accountable_Tasks
+             ChangeHistories
+             ChangeLogs
+             Consulted_ProcessInstances
+             Consulted_Processes
+             Consulted_Tasks
+             ContentCheckLists
+             ContentCheckListInstances
+             ContentInstances
+             ContentPictures
+             ContentPictureInstances
+             ContentOptionLists
+             ContentOptionListInstances
+             ContentTables
+             ContentTableInstances
+             ContentTexts
+             ContentTextInstances
+             ContentTypes
+             ContentInputs
+             ContentInputInstances
+             ContentVideos
+             ContentVideoInstances
+             Content_Steps
+             Contents
+             Step_TriggeredProcesses
+             Informed_ProcessInstances
+             Informed_Processes
+             Informed_Tasks
+             Process_PostConditions
+             Process_PreConditions
+             ProcessPreConditions
+             StepInstances
+             Steps
+             StepPostCondition_Processes
+             StepPostConditions
+             StepPreCondition_Processes
+             StepPreConditions
+             Step_Processes
+             Processes
+             Responsible_ProcessInstances
+             Responsible_ProcessSteps
+             Responsible_Processes
+             Responsible_Tasks
+             Tasks
+             ContentImages
+             ContentImageInstances
+             Accountable_ProcessInstances
+         </string>
      </void>
      <void property="searchText">
-      <string>username
-</string>
+         <string>Accountable_ProcessTemplates
+             Accountable_TaskTemplates
+             ChangeHistory
+             Changelog
+             Consulted_ProcessInstance
+             Consulted_ProcessTemplates
+             Consulted_TaskTemplates
+             ContentComponentChecklist
+             ContentComponentChecklistInstances
+             ContentComponentInstances
+             ContentComponentPicture
+             ContentComponentPictureInstances
+             ContentComponentRadioButton
+             ContentComponentRadioButtonInstances
+             ContentComponentTable
+             ContentComponentTableInstances
+             ContentComponentText
+             ContentComponentTextInstances
+             ContentComponentTypes
+             ContentComponentUserInput
+             ContentComponentUserInputInstances
+             ContentComponentVideo
+             ContentComponentVideoInstances
+             ContentComponent_ProcessStepTemplate
+             ContentComponents
+             DerivedProcesses
+             Informed_ProcessInstance
+             Informed_ProcessTemplates
+             Informed_TaskTemplates
+             ProcessPostConditionProcessTemplate
+             ProcessPrerequisiteProcessTemplate
+             ProcessPrerequisites
+             ProcessStepInstances
+             ProcessStepTemplates
+             ProcessStepsPostConditionProcessTemplate
+             ProcessStepsPostConditions
+             ProcessStepsPrerequisiteProcessTemplate
+             ProcessStepsPrerequisites
+             ProcessStepsTemplates_ProcessTemplates
+             ProcessTemplates
+             Responsible_ProcessInstance
+             Responsible_ProcessStepTemplates
+             Responsible_ProcessTemplates
+             Responsible_TaskTemplates
+             TaskTemplates
+             ContentPictures
+             ContentPictureInstances
+             Accountable_ProcessInstance
+         </string>
+     </void>
+        <void property="wholeWord">
+            <boolean>false</boolean>
      </void>
     </object>
    </void>
@@ -1111,95 +2197,6 @@ updatedAt
      <void property="searchText">
       <string>createdat
 updatedat
-</string>
-     </void>
-    </object>
-   </void>
-   <void method="put">
-    <string>Docx Style Names</string>
-    <object class="com.vladsch.MissingInActions.settings.BatchSearchReplace">
-     <void property="optionsText">
-      <string>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</string>
-     </void>
-     <void property="replaceText">
-      <string>AsideBlock
-BodyText
-Emphasis
-endnote reference
-footer
-Footnote
-footnote reference
-footnote text
-header
-Horizontal Line
-Hyperlink
-Normal
-Paragraph Text Body
-Preformatted Text
-Quotations
-SourceText
-Strikethrough
-Strong Emphasis
-Subscript
-Superscript
-Table Caption
-Table Contents
-Table Grid
-Table Heading
-Underlined
-</string>
-     </void>
-     <void property="searchText">
-      <string>AsideBlock
-BodyText
-Emphasis
-EndnoteReference
-Footer
-Footnote
-FootnoteReference
-FootnoteText
-Header
-HorizontalLine
-Hyperlink
-Normal
-ParagraphTextBody
-PreformattedText
-Quotations
-SourceText
-Strikethrough
-StrongEmphasis
-Subscript
-Superscript
-TableCaption
-TableContents
-TableGrid
-TableHeading
-Underlined
 </string>
      </void>
     </object>
@@ -1293,18 +2290,84 @@ processTemplate_id
     </object>
    </void>
    <void method="put">
-    <string>ContentComponentText</string>
-    <object class="com.vladsch.MissingInActions.settings.BatchSearchReplace">
-     <void property="replaceText">
-      <string>contentComponentId
-</string>
-     </void>
-     <void property="searchText">
-      <string>contentComponent
-</string>
-     </void>
-    </object>
+       <string>Flexmark Deprecated</string>
+       <object class="com.vladsch.MissingInActions.settings.BatchSearchReplace">
+           <void property="optionsText">
+               <string>
+
+                   !
+                   !
+
+                   !
+               </string>
+           </void>
+           <void property="replaceText">
+               <string>FORMAT_TABLE_LEAD_TRAIL_PIPES
+                   FORMAT_TABLE_SPACE_AROUND_PIPES
+                   FORMAT_TABLE_ADJUST_COLUMN_WIDTH
+                   FORMAT_TABLE_APPLY_COLUMN_ALIGNMENT
+                   FORMAT_TABLE_FILL_MISSING_COLUMNS
+                   FORMAT_TABLE_LEFT_ALIGN_MARKER
+                   FORMAT_TABLE_MIN_SEPARATOR_COLUMN_WIDTH
+                   MIN_SEPARATOR_DASHES
+                   TRIM_CELL_WHITESPACE
+                   FORMAT_CHAR_WIDTH_PROVIDER
+                   FORMAT_TABLE_CAPTION
+                   FORMAT_TABLE_LEAD_TRAIL_PIPES
+                   FORMAT_TABLE_SPACE_AROUND_PIPES
+                   FORMAT_TABLE_ADJUST_COLUMN_WIDTH
+                   FORMAT_TABLE_APPLY_COLUMN_ALIGNMENT
+                   FORMAT_TABLE_FILL_MISSING_COLUMNS
+                   FORMAT_TABLE_CAPTION
+                   FORMAT_TABLE_LEFT_ALIGN_MARKER
+                   FORMAT_TABLE_MIN_SEPARATOR_COLUMN_WIDTH
+                   FORMAT_TABLE_MIN_SEPARATOR_DASHES
+                   TablesExtension.FORMAT_TABLE_CAPTION, TableCaptionHandling.REMOVE
+                   TablesExtension.FORMAT_TABLE_CAPTION, TableCaptionHandling.AS_IS
+                   MIN_SEPARATOR_DASHES
+               </string>
+           </void>
+           <void property="searchText">
+               <string>LEAD_TRAIL_PIPES
+                   SPACE_AROUND_PIPES
+                   ADJUST_COLUMN_WIDTH
+                   APPLY_COLUMN_ALIGNMENT
+                   FILL_MISSING_COLUMNS
+                   LEFT_ALIGN_MARKER
+                   MIN_SEPARATOR_COLUMN_WIDTH
+                   MIN_SEPARATOR_DASHES
+                   TRIM_CELL_WHITESPACE
+                   CHAR_WIDTH_PROVIDER
+                   REMOVE_CAPTION
+                   FORMAT_LEAD_TRAIL_PIPES
+                   FORMAT_SPACE_AROUND_PIPES
+                   FORMAT_ADJUST_COLUMN_WIDTH
+                   FORMAT_APPLY_COLUMN_ALIGNMENT
+                   FORMAT_FILL_MISSING_COLUMNS
+                   FORMAT_REMOVE_CAPTION
+                   FORMAT_LEFT_ALIGN_MARKER
+                   FORMAT_MIN_SEPARATOR_COLUMN_WIDTH
+                   FORMAT_MIN_SEPARATOR_DASHES
+                   TablesExtension.FORMAT_REMOVE_CAPTION, true
+                   TablesExtension.FORMAT_REMOVE_CAPTION, false
+                   FORMAT_TABLE_MIN_SEPARATOR_DASHES
+               </string>
+           </void>
+       </object>
    </void>
+      <void method="put">
+          <string>ContentComponentText</string>
+          <object class="com.vladsch.MissingInActions.settings.BatchSearchReplace">
+              <void property="replaceText">
+                  <string>contentComponentId
+</string>
+              </void>
+              <void property="searchText">
+                  <string>contentComponent
+</string>
+              </void>
+          </object>
+      </void>
    <void method="put">
     <string>Consulted_ProcessTemplates</string>
     <object class="com.vladsch.MissingInActions.settings.BatchSearchReplace">
@@ -1342,85 +2405,62 @@ user
    <void property="optionsText">
     <string>
 
+        !
+        !
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        !
 </string>
    </void>
    <void property="replaceText">
-    <string>AsideBlock
-BodyText
-Emphasis
-endnote reference
-footer
-Footnote
-footnote reference
-footnote text
-header
-Horizontal Line
-Hyperlink
-Normal
-Paragraph Text Body
-Preformatted Text
-Quotations
-SourceText
-Strikethrough
-Strong Emphasis
-Subscript
-Superscript
-Table Caption
-Table Contents
-Table Grid
-Table Heading
-Underlined
+       <string>FORMAT_TABLE_LEAD_TRAIL_PIPES
+           FORMAT_TABLE_SPACE_AROUND_PIPES
+           FORMAT_TABLE_ADJUST_COLUMN_WIDTH
+           FORMAT_TABLE_APPLY_COLUMN_ALIGNMENT
+           FORMAT_TABLE_FILL_MISSING_COLUMNS
+           FORMAT_TABLE_LEFT_ALIGN_MARKER
+           FORMAT_TABLE_MIN_SEPARATOR_COLUMN_WIDTH
+           MIN_SEPARATOR_DASHES
+           TRIM_CELL_WHITESPACE
+           FORMAT_CHAR_WIDTH_PROVIDER
+           FORMAT_TABLE_CAPTION
+           FORMAT_TABLE_LEAD_TRAIL_PIPES
+           FORMAT_TABLE_SPACE_AROUND_PIPES
+           FORMAT_TABLE_ADJUST_COLUMN_WIDTH
+           FORMAT_TABLE_APPLY_COLUMN_ALIGNMENT
+           FORMAT_TABLE_FILL_MISSING_COLUMNS
+           FORMAT_TABLE_CAPTION
+           FORMAT_TABLE_LEFT_ALIGN_MARKER
+           FORMAT_TABLE_MIN_SEPARATOR_COLUMN_WIDTH
+           FORMAT_TABLE_MIN_SEPARATOR_DASHES
+           TablesExtension.FORMAT_TABLE_CAPTION, TableCaptionHandling.REMOVE
+           TablesExtension.FORMAT_TABLE_CAPTION, TableCaptionHandling.AS_IS
+           MIN_SEPARATOR_DASHES
 </string>
    </void>
    <void property="searchText">
-    <string>AsideBlock
-BodyText
-Emphasis
-EndnoteReference
-Footer
-Footnote
-FootnoteReference
-FootnoteText
-Header
-HorizontalLine
-Hyperlink
-Normal
-ParagraphTextBody
-PreformattedText
-Quotations
-SourceText
-Strikethrough
-StrongEmphasis
-Subscript
-Superscript
-TableCaption
-TableContents
-TableGrid
-TableHeading
-Underlined
+       <string>LEAD_TRAIL_PIPES
+           SPACE_AROUND_PIPES
+           ADJUST_COLUMN_WIDTH
+           APPLY_COLUMN_ALIGNMENT
+           FILL_MISSING_COLUMNS
+           LEFT_ALIGN_MARKER
+           MIN_SEPARATOR_COLUMN_WIDTH
+           MIN_SEPARATOR_DASHES
+           TRIM_CELL_WHITESPACE
+           CHAR_WIDTH_PROVIDER
+           REMOVE_CAPTION
+           FORMAT_LEAD_TRAIL_PIPES
+           FORMAT_SPACE_AROUND_PIPES
+           FORMAT_ADJUST_COLUMN_WIDTH
+           FORMAT_APPLY_COLUMN_ALIGNMENT
+           FORMAT_FILL_MISSING_COLUMNS
+           FORMAT_REMOVE_CAPTION
+           FORMAT_LEFT_ALIGN_MARKER
+           FORMAT_MIN_SEPARATOR_COLUMN_WIDTH
+           FORMAT_MIN_SEPARATOR_DASHES
+           TablesExtension.FORMAT_REMOVE_CAPTION, true
+           TablesExtension.FORMAT_REMOVE_CAPTION, false
+           FORMAT_TABLE_MIN_SEPARATOR_DASHES
 </string>
    </void>
   </void>

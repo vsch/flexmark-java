@@ -33,7 +33,7 @@ import java.util.Arrays;
 import static com.vladsch.flexmark.profiles.pegdown.Extensions.*;
 
 public class PegdownOptionsAdapter {
-    public static final DataKey<Integer> PEGDOWN_EXTENSIONS = new DataKey<Integer>("PEGDOWN_EXTENSIONS", ALL);
+    public static final DataKey<Integer> PEGDOWN_EXTENSIONS = new DataKey<>("PEGDOWN_EXTENSIONS", ALL);
 
     private final MutableDataSet myOptions;
     private int myPegdownExtensions = 0;

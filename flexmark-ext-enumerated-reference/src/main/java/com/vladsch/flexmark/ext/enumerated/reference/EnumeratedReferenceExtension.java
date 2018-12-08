@@ -29,14 +29,14 @@ public class EnumeratedReferenceExtension implements Parser.ParserExtension
         , Parser.ReferenceHoldingExtension
         , Formatter.FormatterExtension
 {
-    public static final DataKey<KeepType> ENUMERATED_REFERENCES_KEEP = new DataKey<KeepType>("ENUMERATED_REFERENCES_KEEP", KeepType.FIRST); // standard option to allow control over how to handle duplicates
-    public static final DataKey<EnumeratedReferenceRepository> ENUMERATED_REFERENCES = new DataKey<EnumeratedReferenceRepository>("ENUMERATED_REFERENCES", new DataValueFactory<EnumeratedReferenceRepository>() {
+    public static final DataKey<KeepType> ENUMERATED_REFERENCES_KEEP = new DataKey<>("ENUMERATED_REFERENCES_KEEP", KeepType.FIRST); // standard option to allow control over how to handle duplicates
+    public static final DataKey<EnumeratedReferenceRepository> ENUMERATED_REFERENCES = new DataKey<>("ENUMERATED_REFERENCES", new DataValueFactory<EnumeratedReferenceRepository>() {
         @Override
         public EnumeratedReferenceRepository create(DataHolder options) {
             return new EnumeratedReferenceRepository(options);
         }
     });
-    public static final DataKey<EnumeratedReferences> ENUMERATED_REFERENCE_ORDINALS = new DataKey<EnumeratedReferences>("ENUMERATED_REFERENCE_ORDINALS", new DataValueFactory<EnumeratedReferences>() {
+    public static final DataKey<EnumeratedReferences> ENUMERATED_REFERENCE_ORDINALS = new DataKey<>("ENUMERATED_REFERENCE_ORDINALS", new DataValueFactory<EnumeratedReferences>() {
         @Override
         public EnumeratedReferences create(DataHolder options) {
             return new EnumeratedReferences(options);
@@ -44,8 +44,8 @@ public class EnumeratedReferenceExtension implements Parser.ParserExtension
     });
 
     // formatter options
-    public static final DataKey<ElementPlacement> ENUMERATED_REFERENCE_PLACEMENT = new DataKey<ElementPlacement>("ENUMERATED_REFERENCE_PLACEMENT", ElementPlacement.AS_IS);
-    public static final DataKey<ElementPlacementSort> ENUMERATED_REFERENCE_SORT = new DataKey<ElementPlacementSort>("ENUMERATED_REFERENCE_SORT", ElementPlacementSort.AS_IS);
+    public static final DataKey<ElementPlacement> ENUMERATED_REFERENCE_PLACEMENT = new DataKey<>("ENUMERATED_REFERENCE_PLACEMENT", ElementPlacement.AS_IS);
+    public static final DataKey<ElementPlacementSort> ENUMERATED_REFERENCE_SORT = new DataKey<>("ENUMERATED_REFERENCE_SORT", ElementPlacementSort.AS_IS);
 
     private EnumeratedReferenceExtension() {
     }

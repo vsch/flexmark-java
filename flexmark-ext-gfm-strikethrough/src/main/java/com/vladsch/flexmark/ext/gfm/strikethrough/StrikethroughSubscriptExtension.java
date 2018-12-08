@@ -22,10 +22,10 @@ import com.vladsch.flexmark.util.options.MutableDataHolder;
  * </p>
  */
 public class StrikethroughSubscriptExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension {
-    public static final DataKey<String> STRIKETHROUGH_STYLE_HTML_OPEN = new DataKey<String>("STRIKETHROUGH_STYLE_HTML_OPEN", (String)null);
-    public static final DataKey<String> STRIKETHROUGH_STYLE_HTML_CLOSE = new DataKey<String>("STRIKETHROUGH_STYLE_HTML_CLOSE", (String)null);
-    public static final DataKey<String> SUBSCRIPT_STYLE_HTML_OPEN = new DataKey<String>("SUBSCRIPT_STYLE_HTML_OPEN", (String)null);
-    public static final DataKey<String> SUBSCRIPT_STYLE_HTML_CLOSE = new DataKey<String>("SUBSCRIPT_STYLE_HTML_CLOSE", (String)null);
+    public static final DataKey<String> STRIKETHROUGH_STYLE_HTML_OPEN = new DataKey<>("STRIKETHROUGH_STYLE_HTML_OPEN", (String) null);
+    public static final DataKey<String> STRIKETHROUGH_STYLE_HTML_CLOSE = new DataKey<>("STRIKETHROUGH_STYLE_HTML_CLOSE", (String) null);
+    public static final DataKey<String> SUBSCRIPT_STYLE_HTML_OPEN = new DataKey<>("SUBSCRIPT_STYLE_HTML_OPEN", (String) null);
+    public static final DataKey<String> SUBSCRIPT_STYLE_HTML_CLOSE = new DataKey<>("SUBSCRIPT_STYLE_HTML_CLOSE", (String) null);
 
     private StrikethroughSubscriptExtension() {
     }

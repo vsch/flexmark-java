@@ -20,8 +20,8 @@ import java.util.Set;
 public class CustomLinkResolverSample {
     static final DataHolder OPTIONS = new MutableDataSet().set(Parser.EXTENSIONS, Arrays.asList(CustomExtension.create()));
 
-    public static final DataKey<String> DOC_RELATIVE_URL = new DataKey<String>("DOC_RELATIVE_URL", "");
-    public static final DataKey<String> DOC_ROOT_URL = new DataKey<String>("DOC_ROOT_URL", "");
+    public static final DataKey<String> DOC_RELATIVE_URL = new DataKey<>("DOC_RELATIVE_URL", "");
+    public static final DataKey<String> DOC_ROOT_URL = new DataKey<>("DOC_ROOT_URL", "");
 
     static final Parser PARSER = Parser.builder(OPTIONS).build();
     static final HtmlRenderer RENDERER = HtmlRenderer.builder(OPTIONS).build();

@@ -20,13 +20,13 @@ import com.vladsch.flexmark.util.options.MutableDataHolder;
  * </p>
  */
 public class AnchorLinkExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension {
-    public static final DataKey<Boolean> ANCHORLINKS_WRAP_TEXT = new DataKey<Boolean>("ANCHORLINKS_WRAP_TEXT", true);
-    public static final DataKey<String> ANCHORLINKS_TEXT_PREFIX = new DataKey<String>("ANCHORLINKS_TEXT_PREFIX", "");
-    public static final DataKey<String> ANCHORLINKS_TEXT_SUFFIX = new DataKey<String>("ANCHORLINKS_TEXT_SUFFIX", "");
-    public static final DataKey<String> ANCHORLINKS_ANCHOR_CLASS = new DataKey<String>("ANCHORLINKS_ANCHOR_CLASS", "");
-    public static final DataKey<Boolean> ANCHORLINKS_SET_NAME = new DataKey<Boolean>("ANCHORLINKS_SET_NAME", false);
-    public static final DataKey<Boolean> ANCHORLINKS_SET_ID = new DataKey<Boolean>("ANCHORLINKS_SET_ID", true);
-    public static final DataKey<Boolean> ANCHORLINKS_NO_BLOCK_QUOTE = new DataKey<Boolean>("ANCHORLINKS_NO_BLOCK_QUOTE", false);
+    public static final DataKey<Boolean> ANCHORLINKS_WRAP_TEXT = new DataKey<>("ANCHORLINKS_WRAP_TEXT", true);
+    public static final DataKey<String> ANCHORLINKS_TEXT_PREFIX = new DataKey<>("ANCHORLINKS_TEXT_PREFIX", "");
+    public static final DataKey<String> ANCHORLINKS_TEXT_SUFFIX = new DataKey<>("ANCHORLINKS_TEXT_SUFFIX", "");
+    public static final DataKey<String> ANCHORLINKS_ANCHOR_CLASS = new DataKey<>("ANCHORLINKS_ANCHOR_CLASS", "");
+    public static final DataKey<Boolean> ANCHORLINKS_SET_NAME = new DataKey<>("ANCHORLINKS_SET_NAME", false);
+    public static final DataKey<Boolean> ANCHORLINKS_SET_ID = new DataKey<>("ANCHORLINKS_SET_ID", true);
+    public static final DataKey<Boolean> ANCHORLINKS_NO_BLOCK_QUOTE = new DataKey<>("ANCHORLINKS_NO_BLOCK_QUOTE", false);
 
     private AnchorLinkExtension() {
     }

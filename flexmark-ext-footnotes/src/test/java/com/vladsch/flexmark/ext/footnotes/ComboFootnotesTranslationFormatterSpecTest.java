@@ -34,7 +34,7 @@ public class ComboFootnotesTranslationFormatterSpecTest extends ComboSpecTestCas
             .set(Parser.HEADING_NO_ATX_SPACE, true)
             .set(Formatter.MAX_TRAILING_BLANK_LINES, 0);
 
-    static final DataKey<Boolean> DETAILS = new DataKey<Boolean>("DETAILS", SHOW_INTERMEDIATE);
+    static final DataKey<Boolean> DETAILS = new DataKey<>("DETAILS", SHOW_INTERMEDIATE);
 
     private static final Map<String, DataHolder> optionsMap = new HashMap<String, DataHolder>();
     static {

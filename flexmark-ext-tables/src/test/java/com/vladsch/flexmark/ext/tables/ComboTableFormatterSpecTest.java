@@ -1,17 +1,16 @@
 package com.vladsch.flexmark.ext.tables;
 
-import com.vladsch.flexmark.ast.util.Parsing;
 import com.vladsch.flexmark.formatter.internal.Formatter;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.spec.SpecReader;
 import com.vladsch.flexmark.test.ComboSpecTestCase;
+import com.vladsch.flexmark.util.format.TableFormatOptions;
 import com.vladsch.flexmark.util.format.options.DiscretionaryText;
 import com.vladsch.flexmark.util.format.options.TableCaptionHandling;
 import com.vladsch.flexmark.util.mappers.CharWidthProvider;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.MutableDataSet;
-import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.BasedSequenceImpl;
 import org.junit.runners.Parameterized;
 
@@ -24,8 +23,7 @@ public class ComboTableFormatterSpecTest extends ComboSpecTestCase {
             //.set(HtmlRenderer.PERCENT_ENCODE_URLS, true)
             .set(Parser.EXTENSIONS, Collections.singleton(TablesExtension.create()))
             .set(Parser.LISTS_AUTO_LOOSE, false)
-            .set(Parser.BLANK_LINES_IN_AST, true)
-            ;
+            .set(Parser.BLANK_LINES_IN_AST, true);
 
     private static final Map<String, DataHolder> optionsMap = new HashMap<String, DataHolder>();
     static {
@@ -35,35 +33,39 @@ public class ComboTableFormatterSpecTest extends ComboSpecTestCase {
                 .set(TablesExtension.DISCARD_EXTRA_COLUMNS, true)
                 .set(TablesExtension.HEADER_SEPARATOR_COLUMN_MATCH, true)
         );
-        optionsMap.put("no-caption", new MutableDataSet().set(TablesExtension.FORMAT_REMOVE_CAPTION, true));
-        optionsMap.put("no-alignment", new MutableDataSet().set(TablesExtension.FORMAT_APPLY_COLUMN_ALIGNMENT, false));
-        optionsMap.put("no-width", new MutableDataSet().set(TablesExtension.FORMAT_ADJUST_COLUMN_WIDTH, false));
-        optionsMap.put("keep-whitespace", new MutableDataSet().set(TablesExtension.TRIM_CELL_WHITESPACE, false));
-        optionsMap.put("lead-trail-pipes", new MutableDataSet().set(TablesExtension.FORMAT_LEAD_TRAIL_PIPES, false));
-        optionsMap.put("space-around-pipe", new MutableDataSet().set(TablesExtension.FORMAT_SPACE_AROUND_PIPES, false));
-        optionsMap.put("adjust-column-width", new MutableDataSet().set(TablesExtension.FORMAT_ADJUST_COLUMN_WIDTH, false));
-        optionsMap.put("apply-column-alignment", new MutableDataSet().set(TablesExtension.FORMAT_APPLY_COLUMN_ALIGNMENT, false));
-        optionsMap.put("fill-missing-columns", new MutableDataSet().set(TablesExtension.FORMAT_FILL_MISSING_COLUMNS, true));
-        optionsMap.put("left-align-marker-as-is", new MutableDataSet().set(TablesExtension.FORMAT_LEFT_ALIGN_MARKER, DiscretionaryText.AS_IS));
-        optionsMap.put("left-align-marker-add", new MutableDataSet().set(TablesExtension.FORMAT_LEFT_ALIGN_MARKER, DiscretionaryText.ADD));
-        optionsMap.put("left-align-marker-remove", new MutableDataSet().set(TablesExtension.FORMAT_LEFT_ALIGN_MARKER, DiscretionaryText.REMOVE));
+        optionsMap.put("no-caption", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_CAPTION, TableCaptionHandling.REMOVE));
+        optionsMap.put("no-alignment", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_APPLY_COLUMN_ALIGNMENT, false));
+        optionsMap.put("no-width", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_ADJUST_COLUMN_WIDTH, false));
+        optionsMap.put("keep-whitespace", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_TRIM_CELL_WHITESPACE, false));
+        optionsMap.put("lead-trail-pipes", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_LEAD_TRAIL_PIPES, false));
+        optionsMap.put("space-around-pipe", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_SPACE_AROUND_PIPES, false));
+        optionsMap.put("adjust-column-width", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_ADJUST_COLUMN_WIDTH, false));
+        optionsMap.put("apply-column-alignment", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_APPLY_COLUMN_ALIGNMENT, false));
+        optionsMap.put("fill-missing-columns", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_FILL_MISSING_COLUMNS, true));
+        optionsMap.put("left-align-marker-as-is", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_LEFT_ALIGN_MARKER, DiscretionaryText.AS_IS));
+        optionsMap.put("left-align-marker-add", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_LEFT_ALIGN_MARKER, DiscretionaryText.ADD));
+        optionsMap.put("left-align-marker-remove", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_LEFT_ALIGN_MARKER, DiscretionaryText.REMOVE));
         optionsMap.put("dummy-identifier", new MutableDataSet().set(Parser.INTELLIJ_DUMMY_IDENTIFIER, true));
         optionsMap.put("line-prefix", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_INDENT_PREFIX, ">   "));
+        optionsMap.put("add-caption-spaces", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_CAPTION_SPACES, DiscretionaryText.ADD));
+        optionsMap.put("remove-caption-spaces", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_CAPTION_SPACES, DiscretionaryText.REMOVE));
+        optionsMap.put("add-caption", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_CAPTION, TableCaptionHandling.ADD));
+        optionsMap.put("remove-empty-caption", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_CAPTION, TableCaptionHandling.REMOVE_EMPTY));
+        optionsMap.put("remove-caption", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_CAPTION, TableCaptionHandling.REMOVE));
         optionsMap.put("markdown-navigator", new MutableDataSet()
                 .set(TablesExtension.FORMAT_TABLE_INDENT_PREFIX, "")
-                .set(TablesExtension.FORMAT_MIN_SEPARATOR_COLUMN_WIDTH, 3)
-                .set(TablesExtension.FORMAT_LEAD_TRAIL_PIPES, true)
-                .set(TablesExtension.FORMAT_ADJUST_COLUMN_WIDTH, true)
-                .set(TablesExtension.FORMAT_FILL_MISSING_COLUMNS, true)
-                .set(TablesExtension.FORMAT_LEFT_ALIGN_MARKER, DiscretionaryText.ADD)
+                .set(TablesExtension.FORMAT_TABLE_MIN_SEPARATOR_COLUMN_WIDTH, 3)
+                .set(TablesExtension.FORMAT_TABLE_LEAD_TRAIL_PIPES, true)
+                .set(TablesExtension.FORMAT_TABLE_ADJUST_COLUMN_WIDTH, true)
+                .set(TablesExtension.FORMAT_TABLE_FILL_MISSING_COLUMNS, true)
+                .set(TablesExtension.FORMAT_TABLE_LEFT_ALIGN_MARKER, DiscretionaryText.ADD)
                 .set(TablesExtension.FORMAT_TABLE_CAPTION_SPACES, DiscretionaryText.AS_IS)
-                .set(TablesExtension.FORMAT_SPACE_AROUND_PIPES, true)
+                .set(TablesExtension.FORMAT_TABLE_SPACE_AROUND_PIPES, true)
                 .set(TablesExtension.FORMAT_TABLE_CAPTION, TableCaptionHandling.AS_IS)
-                .set(TablesExtension.FORMAT_APPLY_COLUMN_ALIGNMENT, true)
-                .set(TablesExtension.MIN_SEPARATOR_DASHES, 3)
-                .set(TablesExtension.FORMAT_REMOVE_CAPTION, false)
-                .set(TablesExtension.TRIM_CELL_WHITESPACE, true)
-.set(TablesExtension.FORMAT_CHAR_WIDTH_PROVIDER, new CharWidthProvider() {
+                .set(TablesExtension.FORMAT_TABLE_APPLY_COLUMN_ALIGNMENT, true)
+                .set(TablesExtension.FORMAT_TABLE_MIN_SEPARATOR_DASHES, 3)
+                //.set(TablesExtension.FORMAT_TABLE_TRIM_CELL_WHITESPACE, true)
+                .set(TablesExtension.FORMAT_CHAR_WIDTH_PROVIDER, new CharWidthProvider() {
                     @Override
                     public int spaceWidth() {
                         return 1;
@@ -71,12 +73,12 @@ public class ComboTableFormatterSpecTest extends ComboSpecTestCase {
 
                     @Override
                     public int charWidth(final char c) {
-                        return c == Parsing.INTELLIJ_DUMMY_IDENTIFIER.charAt(0) ? 0: 1;
+                        return c == TableFormatOptions.INTELLIJ_DUMMY_IDENTIFIER_CHAR ? 0 : 1;
                     }
 
                     @Override
                     public int charWidth(final CharSequence s) {
-                        return BasedSequenceImpl.of(s).countNotChars(Parsing.INTELLIJ_DUMMY_IDENTIFIER.charAt(0));
+                        return BasedSequenceImpl.of(s).countNotChars(TableFormatOptions.INTELLIJ_DUMMY_IDENTIFIER_CHAR);
                     }
                 })
         );

@@ -30,10 +30,8 @@ import org.docx4j.openpackaging.exceptions.InvalidFormatException;
 import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
 import org.docx4j.openpackaging.parts.Part;
 import org.docx4j.openpackaging.parts.WordprocessingML.MainDocumentPart;
-import org.docx4j.openpackaging.parts.WordprocessingML.StyleDefinitionsPart;
 import org.docx4j.wml.CTBookmark;
 import org.docx4j.wml.Numbering;
-import org.docx4j.wml.Style;
 import org.docx4j.wml.Styles;
 
 import java.io.*;
@@ -45,16 +43,16 @@ import java.util.*;
  */
 @SuppressWarnings("WeakerAccess")
 public class DocxRenderer implements IRender {
-    public static final DataKey<String> STYLES_XML = new DataKey<String>("STYLES_XML", getResourceString("/styles.xml"));
-    public static final DataKey<String> NUMBERING_XML = new DataKey<String>("NUMBERING_XML", getResourceString("/numbering.xml"));
+    public static final DataKey<String> STYLES_XML = new DataKey<>("STYLES_XML", getResourceString("/styles.xml"));
+    public static final DataKey<String> NUMBERING_XML = new DataKey<>("NUMBERING_XML", getResourceString("/numbering.xml"));
 
-    public static final DataKey<Boolean> RENDER_BODY_ONLY = new DataKey<Boolean>("RENDER_BODY_ONLY", false);
-    public static final DataKey<Integer> MAX_IMAGE_WIDTH = new DataKey<Integer>("MAX_IMAGE_WIDTH", 0);
+    public static final DataKey<Boolean> RENDER_BODY_ONLY = new DataKey<>("RENDER_BODY_ONLY", false);
+    public static final DataKey<Integer> MAX_IMAGE_WIDTH = new DataKey<>("MAX_IMAGE_WIDTH", 0);
 
-    public static final DataKey<Boolean> DEFAULT_LINK_RESOLVER = new DataKey<Boolean>("DEFAULT_LINK_RESOLVER", true);
-    public static final DataKey<String> DOC_RELATIVE_URL = new DataKey<String>("DOC_RELATIVE_URL", "");
-    public static final DataKey<String> DOC_ROOT_URL = new DataKey<String>("DOC_ROOT_URL", "");
-    public static final DataKey<Boolean> PREFIX_WWW_LINKS = new DataKey<Boolean>("PREFIX_WWW_LINKS", true);
+    public static final DataKey<Boolean> DEFAULT_LINK_RESOLVER = new DataKey<>("DEFAULT_LINK_RESOLVER", true);
+    public static final DataKey<String> DOC_RELATIVE_URL = new DataKey<>("DOC_RELATIVE_URL", "");
+    public static final DataKey<String> DOC_ROOT_URL = new DataKey<>("DOC_ROOT_URL", "");
+    public static final DataKey<Boolean> PREFIX_WWW_LINKS = new DataKey<>("PREFIX_WWW_LINKS", true);
 
     // same keys, same function also available here for convenience
     public static final DataKey<Boolean> RECHECK_UNDEFINED_REFERENCES = HtmlRenderer.RECHECK_UNDEFINED_REFERENCES;
@@ -69,69 +67,69 @@ public class DocxRenderer implements IRender {
     public static final DataKey<Boolean> SUPPRESS_HTML_COMMENT_BLOCKS = HtmlRenderer.SUPPRESS_HTML_COMMENT_BLOCKS;
     public static final DataKey<Boolean> SUPPRESS_INLINE_HTML = HtmlRenderer.SUPPRESS_INLINE_HTML;
     public static final DataKey<Boolean> SUPPRESS_INLINE_HTML_COMMENTS = HtmlRenderer.SUPPRESS_INLINE_HTML_COMMENTS;
-    public static final DataKey<Boolean> LINEBREAK_ON_INLINE_HTML_BR = new DataKey<Boolean>("LINEBREAK_ON_INLINE_HTML_BR", true);
-    public static final DataKey<Boolean> TABLE_CAPTION_TO_PARAGRAPH = new DataKey<Boolean>("TABLE_CAPTION_TO_PARAGRAPH", true);
-    public static final DataKey<Boolean> TABLE_CAPTION_BEFORE_TABLE = new DataKey<Boolean>("TABLE_CAPTION_BEFORE_TABLE", false);
-    public static final DataKey<Integer> TABLE_PREFERRED_WIDTH_PCT = new DataKey<Integer>("TABLE_PREFERRED_WIDTH_PCT", 0);
-    public static final DataKey<Integer> TABLE_LEFT_INDENT = new DataKey<Integer>("TABLE_LEFT_INDENT", 120);
-    public static final DataKey<String> TABLE_STYLE = new DataKey<String>("TABLE_STYLE", "");
-    public static final DataKey<Boolean> TOC_GENERATE = new DataKey<Boolean>("TOC_GENERATE", false);
-    public static final DataKey<String> TOC_INSTRUCTION = new DataKey<String>("TOC_INSTRUCTION", "TOC \\o \"1-3\" \\h \\z \\u ");
-    public static final DataKey<Boolean> LOG_IMAGE_PROCESSING = new DataKey<Boolean>("LOG_IMAGE_PROCESSING", false);
-    public static final DataKey<Boolean> NO_CHARACTER_STYLES = new DataKey<Boolean>("NO_CHARACTER_STYLES", false);
-    public static final DataKey<String> CODE_HIGHLIGHT_SHADING = new DataKey<String>("CODE_HIGHLIGHT_SHADING", "");
-    public static final DataKey<Boolean> ERRORS_TO_STDERR = new DataKey<Boolean>("ERRORS_TO_STDERR", false);
-    public static final DataKey<String> ERROR_SOURCE_FILE = new DataKey<String>("ERROR_SOURCE_FILE", "");
-    public static final DataKey<Double> DOC_EMOJI_IMAGE_VERT_OFFSET = new DataKey<Double>("DOC_EMOJI_IMAGE_VERT_OFFSET", -0.10);  // offset emoji images down by 10% of the line height, final value rounded to nearest pt so can create jumps in position
-    public static final DataKey<Double> DOC_EMOJI_IMAGE_VERT_SIZE = new DataKey<Double>("DOC_EMOJI_IMAGE_VERT_SIZE", 1.05);  // size of image as factor of line height range >0
+    public static final DataKey<Boolean> LINEBREAK_ON_INLINE_HTML_BR = new DataKey<>("LINEBREAK_ON_INLINE_HTML_BR", true);
+    public static final DataKey<Boolean> TABLE_CAPTION_TO_PARAGRAPH = new DataKey<>("TABLE_CAPTION_TO_PARAGRAPH", true);
+    public static final DataKey<Boolean> TABLE_CAPTION_BEFORE_TABLE = new DataKey<>("TABLE_CAPTION_BEFORE_TABLE", false);
+    public static final DataKey<Integer> TABLE_PREFERRED_WIDTH_PCT = new DataKey<>("TABLE_PREFERRED_WIDTH_PCT", 0);
+    public static final DataKey<Integer> TABLE_LEFT_INDENT = new DataKey<>("TABLE_LEFT_INDENT", 120);
+    public static final DataKey<String> TABLE_STYLE = new DataKey<>("TABLE_STYLE", "");
+    public static final DataKey<Boolean> TOC_GENERATE = new DataKey<>("TOC_GENERATE", false);
+    public static final DataKey<String> TOC_INSTRUCTION = new DataKey<>("TOC_INSTRUCTION", "TOC \\o \"1-3\" \\h \\z \\u ");
+    public static final DataKey<Boolean> LOG_IMAGE_PROCESSING = new DataKey<>("LOG_IMAGE_PROCESSING", false);
+    public static final DataKey<Boolean> NO_CHARACTER_STYLES = new DataKey<>("NO_CHARACTER_STYLES", false);
+    public static final DataKey<String> CODE_HIGHLIGHT_SHADING = new DataKey<>("CODE_HIGHLIGHT_SHADING", "");
+    public static final DataKey<Boolean> ERRORS_TO_STDERR = new DataKey<>("ERRORS_TO_STDERR", false);
+    public static final DataKey<String> ERROR_SOURCE_FILE = new DataKey<>("ERROR_SOURCE_FILE", "");
+    public static final DataKey<Double> DOC_EMOJI_IMAGE_VERT_OFFSET = new DataKey<>("DOC_EMOJI_IMAGE_VERT_OFFSET", -0.10);  // offset emoji images down by 10% of the line height, final value rounded to nearest pt so can create jumps in position
+    public static final DataKey<Double> DOC_EMOJI_IMAGE_VERT_SIZE = new DataKey<>("DOC_EMOJI_IMAGE_VERT_SIZE", 1.05);  // size of image as factor of line height range >0
 
     // for compatibility with HtmlIdGenerator these are placed here
     public static final DataKey<Boolean> HEADER_ID_GENERATOR_RESOLVE_DUPES = HtmlRenderer.HEADER_ID_GENERATOR_RESOLVE_DUPES;
     public static final DataKey<String> HEADER_ID_GENERATOR_TO_DASH_CHARS = HtmlRenderer.HEADER_ID_GENERATOR_TO_DASH_CHARS;
     public static final DataKey<Boolean> HEADER_ID_GENERATOR_NO_DUPED_DASHES = HtmlRenderer.HEADER_ID_GENERATOR_NO_DUPED_DASHES;
     public static final DataKey<Boolean> RENDER_HEADER_ID = HtmlRenderer.RENDER_HEADER_ID;
-    public static final DataKey<String> LOCAL_HYPERLINK_SUFFIX = new DataKey<String>("LOCAL_HYPERLINK_SUFFIX", "");
-    public static final DataKey<String> LOCAL_HYPERLINK_MISSING_HIGHLIGHT = new DataKey<String>("LOCAL_HYPERLINK_MISSING_HIGHLIGHT", "red");
-    public static final DataKey<String> LOCAL_HYPERLINK_MISSING_FORMAT = new DataKey<String>("LOCAL_HYPERLINK_MISSING_FORMAT", "Missing target id: #%s");
-    //public static final DataKey<String> FIRST_HEADING_ID_SUFFIX = new DataKey<String>("FIRST_HEADING_ID_SUFFIX", "");
+    public static final DataKey<String> LOCAL_HYPERLINK_SUFFIX = new DataKey<>("LOCAL_HYPERLINK_SUFFIX", "");
+    public static final DataKey<String> LOCAL_HYPERLINK_MISSING_HIGHLIGHT = new DataKey<>("LOCAL_HYPERLINK_MISSING_HIGHLIGHT", "red");
+    public static final DataKey<String> LOCAL_HYPERLINK_MISSING_FORMAT = new DataKey<>("LOCAL_HYPERLINK_MISSING_FORMAT", "Missing target id: #%s");
+    //public static final DataKey<String> FIRST_HEADING_ID_SUFFIX = new DataKey<>("FIRST_HEADING_ID_SUFFIX", "");
 
-    public static final DataKey<String> ASIDE_BLOCK_STYLE = new DataKey<String>("ASIDE_BLOCK_STYLE", "AsideBlock");
-    public static final DataKey<String> BLOCK_QUOTE_STYLE = new DataKey<String>("BLOCK_QUOTE_STYLE", "Quotations");
-    public static final DataKey<String> BOLD_STYLE = new DataKey<String>("BOLD_STYLE", "StrongEmphasis");
-    public static final DataKey<String> DEFAULT_STYLE = new DataKey<String>("DEFAULT_STYLE", "Normal");
-    public static final DataKey<String> ENDNOTE_ANCHOR_STYLE = new DataKey<String>("ENDNOTE_ANCHOR_STYLE", "EndnoteReference");
-    public static final DataKey<String> FOOTER = new DataKey<String>("FOOTER", "Footer");
-    public static final DataKey<String> FOOTNOTE_ANCHOR_STYLE = new DataKey<String>("FOOTNOTE_ANCHOR_STYLE", "FootnoteReference");
-    public static final DataKey<String> FOOTNOTE_STYLE = new DataKey<String>("FOOTNOTE_STYLE", "Footnote");
-    public static final DataKey<String> FOOTNOTE_TEXT = new DataKey<String>("FOOTNOTE_TEXT", "FootnoteText");
-    public static final DataKey<String> HEADER = new DataKey<String>("HEADER", "Header");
-    public static final DataKey<String> HEADING_1 = new DataKey<String>("HEADING_1", "Heading1");
-    public static final DataKey<String> HEADING_2 = new DataKey<String>("HEADING_2", "Heading2");
-    public static final DataKey<String> HEADING_3 = new DataKey<String>("HEADING_3", "Heading3");
-    public static final DataKey<String> HEADING_4 = new DataKey<String>("HEADING_4", "Heading4");
-    public static final DataKey<String> HEADING_5 = new DataKey<String>("HEADING_5", "Heading5");
-    public static final DataKey<String> HEADING_6 = new DataKey<String>("HEADING_6", "Heading6");
-    public static final DataKey<String> HORIZONTAL_LINE_STYLE = new DataKey<String>("HORIZONTAL_LINE_STYLE", "HorizontalLine");
-    public static final DataKey<String> HYPERLINK_STYLE = new DataKey<String>("HYPERLINK_STYLE", "Hyperlink");
-    public static final DataKey<String> INLINE_CODE_STYLE = new DataKey<String>("INLINE_CODE_STYLE", "SourceText");
-    public static final DataKey<String> INS_STYLE = new DataKey<String>("INS_STYLE", "Underlined");
-    public static final DataKey<String> ITALIC_STYLE = new DataKey<String>("ITALIC_STYLE", "Emphasis");
-    public static final DataKey<String> LOOSE_PARAGRAPH_STYLE = new DataKey<String>("LOOSE_PARAGRAPH_STYLE", "ParagraphTextBody");
-    public static final DataKey<String> PREFORMATTED_TEXT_STYLE = new DataKey<String>("PREFORMATTED_TEXT_STYLE", "PreformattedText");
-    public static final DataKey<String> STRIKE_THROUGH_STYLE = new DataKey<String>("STRIKE_THROUGH_STYLE", "Strikethrough");
-    public static final DataKey<String> SUBSCRIPT_STYLE = new DataKey<String>("SUBSCRIPT_STYLE", "Subscript");
-    public static final DataKey<String> SUPERSCRIPT_STYLE = new DataKey<String>("SUPERSCRIPT_STYLE", "Superscript");
-    public static final DataKey<String> TABLE_CAPTION = new DataKey<String>("TABLE_CAPTION", "TableCaption");
-    public static final DataKey<String> TABLE_CONTENTS = new DataKey<String>("TABLE_CONTENTS", "TableContents");
-    public static final DataKey<String> TABLE_GRID = new DataKey<String>("TABLE_GRID", "TableGrid");
-    public static final DataKey<String> TABLE_HEADING = new DataKey<String>("TABLE_HEADING", "TableHeading");
-    public static final DataKey<String> TIGHT_PARAGRAPH_STYLE = new DataKey<String>("TIGHT_PARAGRAPH_STYLE", "BodyText");
+    public static final DataKey<String> ASIDE_BLOCK_STYLE = new DataKey<>("ASIDE_BLOCK_STYLE", "AsideBlock");
+    public static final DataKey<String> BLOCK_QUOTE_STYLE = new DataKey<>("BLOCK_QUOTE_STYLE", "Quotations");
+    public static final DataKey<String> BOLD_STYLE = new DataKey<>("BOLD_STYLE", "StrongEmphasis");
+    public static final DataKey<String> DEFAULT_STYLE = new DataKey<>("DEFAULT_STYLE", "Normal");
+    public static final DataKey<String> ENDNOTE_ANCHOR_STYLE = new DataKey<>("ENDNOTE_ANCHOR_STYLE", "EndnoteReference");
+    public static final DataKey<String> FOOTER = new DataKey<>("FOOTER", "Footer");
+    public static final DataKey<String> FOOTNOTE_ANCHOR_STYLE = new DataKey<>("FOOTNOTE_ANCHOR_STYLE", "FootnoteReference");
+    public static final DataKey<String> FOOTNOTE_STYLE = new DataKey<>("FOOTNOTE_STYLE", "Footnote");
+    public static final DataKey<String> FOOTNOTE_TEXT = new DataKey<>("FOOTNOTE_TEXT", "FootnoteText");
+    public static final DataKey<String> HEADER = new DataKey<>("HEADER", "Header");
+    public static final DataKey<String> HEADING_1 = new DataKey<>("HEADING_1", "Heading1");
+    public static final DataKey<String> HEADING_2 = new DataKey<>("HEADING_2", "Heading2");
+    public static final DataKey<String> HEADING_3 = new DataKey<>("HEADING_3", "Heading3");
+    public static final DataKey<String> HEADING_4 = new DataKey<>("HEADING_4", "Heading4");
+    public static final DataKey<String> HEADING_5 = new DataKey<>("HEADING_5", "Heading5");
+    public static final DataKey<String> HEADING_6 = new DataKey<>("HEADING_6", "Heading6");
+    public static final DataKey<String> HORIZONTAL_LINE_STYLE = new DataKey<>("HORIZONTAL_LINE_STYLE", "HorizontalLine");
+    public static final DataKey<String> HYPERLINK_STYLE = new DataKey<>("HYPERLINK_STYLE", "Hyperlink");
+    public static final DataKey<String> INLINE_CODE_STYLE = new DataKey<>("INLINE_CODE_STYLE", "SourceText");
+    public static final DataKey<String> INS_STYLE = new DataKey<>("INS_STYLE", "Underlined");
+    public static final DataKey<String> ITALIC_STYLE = new DataKey<>("ITALIC_STYLE", "Emphasis");
+    public static final DataKey<String> LOOSE_PARAGRAPH_STYLE = new DataKey<>("LOOSE_PARAGRAPH_STYLE", "ParagraphTextBody");
+    public static final DataKey<String> PREFORMATTED_TEXT_STYLE = new DataKey<>("PREFORMATTED_TEXT_STYLE", "PreformattedText");
+    public static final DataKey<String> STRIKE_THROUGH_STYLE = new DataKey<>("STRIKE_THROUGH_STYLE", "Strikethrough");
+    public static final DataKey<String> SUBSCRIPT_STYLE = new DataKey<>("SUBSCRIPT_STYLE", "Subscript");
+    public static final DataKey<String> SUPERSCRIPT_STYLE = new DataKey<>("SUPERSCRIPT_STYLE", "Superscript");
+    public static final DataKey<String> TABLE_CAPTION = new DataKey<>("TABLE_CAPTION", "TableCaption");
+    public static final DataKey<String> TABLE_CONTENTS = new DataKey<>("TABLE_CONTENTS", "TableContents");
+    public static final DataKey<String> TABLE_GRID = new DataKey<>("TABLE_GRID", "TableGrid");
+    public static final DataKey<String> TABLE_HEADING = new DataKey<>("TABLE_HEADING", "TableHeading");
+    public static final DataKey<String> TIGHT_PARAGRAPH_STYLE = new DataKey<>("TIGHT_PARAGRAPH_STYLE", "BodyText");
 
     // Not used.
-    //public static final DataKey<String> BULLET_LIST_STYLE = new DataKey<String>("BULLET_LIST_STYLE", "BulletList");
-    //public static final DataKey<String> BLOCK_QUOTE_BULLET_LIST_STYLE = new DataKey<String>("BLOCK_QUOTE_BULLET_LIST_STYLE", "QuotationsBulletList");
-    //public static final DataKey<String> NUMBERED_LIST_STYLE = new DataKey<String>("NUMBERED_LIST_STYLE", "NumberedList");
-    //public static final DataKey<String> BLOCK_QUOTE_NUMBERED_LIST_STYLE = new DataKey<String>("BLOCK_QUOTE_NUMBERED_LIST_STYLE", "QuotationsNumberedList");
+    //public static final DataKey<String> BULLET_LIST_STYLE = new DataKey<>("BULLET_LIST_STYLE", "BulletList");
+    //public static final DataKey<String> BLOCK_QUOTE_BULLET_LIST_STYLE = new DataKey<>("BLOCK_QUOTE_BULLET_LIST_STYLE", "QuotationsBulletList");
+    //public static final DataKey<String> NUMBERED_LIST_STYLE = new DataKey<>("NUMBERED_LIST_STYLE", "NumberedList");
+    //public static final DataKey<String> BLOCK_QUOTE_NUMBERED_LIST_STYLE = new DataKey<>("BLOCK_QUOTE_NUMBERED_LIST_STYLE", "QuotationsNumberedList");
 
     // internal stuff
     public static final String EMOJI_RESOURCE_PREFIX = "emoji:";

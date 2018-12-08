@@ -4,7 +4,6 @@ import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.ext.admonition.AdmonitionBlock;
 import com.vladsch.flexmark.formatter.CustomNodeFormatter;
 import com.vladsch.flexmark.formatter.internal.*;
-import com.vladsch.flexmark.util.format.Table;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.sequence.RepeatedCharSequence;
 
@@ -14,8 +13,6 @@ import java.util.Set;
 
 public class AdmonitionNodeFormatter implements NodeFormatter {
     private final AdmonitionOptions options;
-
-    private Table myTable;
 
     public AdmonitionNodeFormatter(DataHolder options) {
         this.options = new AdmonitionOptions(options);

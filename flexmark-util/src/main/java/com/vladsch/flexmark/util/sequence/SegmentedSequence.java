@@ -15,8 +15,8 @@ public final class SegmentedSequence extends BasedSequenceImpl {
     private final int[] baseOffsets;      // list of base offsets, offset by baseStartOffset
     private final int baseStartOffset;    // start offset for baseOffsets of this sequence, offset from baseSeq for all chars, including non-base chars
     private final int length;             // length of this sequence
-    private Integer startOffset = null;   // this sequence's start offset in base or best guess when non-base characters are used
-    private Integer endOffset = null;     // this sequence's end offset in base or best guess when non-base characters are used
+    private final int startOffset;        // this sequence's start offset in base
+    private final int endOffset;   // this sequence's end offset in base
 
     @Override
     public Object getBase() {
@@ -34,33 +34,7 @@ public final class SegmentedSequence extends BasedSequenceImpl {
      * @return start in base sequence
      */
     public int getStartOffset() {
-        if (startOffset == null) {
-            startOffset = computeStartOffset();
-        }
         return startOffset;
-    }
-
-    private int computeStartOffset() {
-        assert baseStartOffset + length <= baseOffsets.length : "Sub-sequence offsets list length < baseStartOffset + sub-sequence length";
-
-        int iMax = baseOffsets.length;
-
-        if (nonBaseChars != null) {
-            // start is the first real start in this sequence or after it 
-            for (int i = baseStartOffset; i < iMax; i++) {
-                if (baseOffsets[i] >= 0) return baseOffsets[i];
-            }
-
-            // if no start in or after then it is previous real end
-            for (int i = baseStartOffset; i-- > 0; ) {
-                if (baseOffsets[i] >= 0) return baseOffsets[i] + 1;
-            }
-
-            return baseSeq.getStartOffset();  // better than 0, here we are no further than baseSeq start
-        }
-
-        // here there are no nonBaseChars, all sequences are based sequences
-        return baseStartOffset < iMax ? baseOffsets[baseStartOffset] : iMax > 0 ? baseOffsets[iMax - 1] : baseSeq.getStartOffset();
     }
 
     /**
@@ -69,31 +43,7 @@ public final class SegmentedSequence extends BasedSequenceImpl {
      * @return end in base sequence
      */
     public int getEndOffset() {
-        //if (endOffset == null) {
-        //    endOffset = computeEndOffset();
-        //}
-        //return endOffset;
-        return computeEndOffset();
-    }
-
-    private int computeEndOffset() {
-        // ensure that 0 length end returns start
-        if (length == 0) return getStartOffset();
-
-        int iMax = baseOffsets.length;
-
-        if (nonBaseChars != null) {
-            // end is the last real end in this sequence
-            for (int i = baseStartOffset + length; i-- > 0; ) {
-                if (baseOffsets[i] >= 0) return baseOffsets[i] + 1;
-            }
-
-            // failing that it is the same as start
-            return getStartOffset();
-        }
-
-        // here there are no nonBaseChars, all sequences are based sequences
-        return baseOffsets[baseStartOffset + length - 1] + 1;
+        return endOffset;
     }
 
     @Override
@@ -164,13 +114,20 @@ public final class SegmentedSequence extends BasedSequenceImpl {
             BasedSequence firstSegment = segments.get(0);
             BasedSequence base = firstSegment.getBaseSequence();
             ArrayList<BasedSequence> mergedSequences = new ArrayList<BasedSequence>();
+            int startOffset = -1;
+            int endOffset = -1;
 
             for (BasedSequence segment : segments) {
-                if (segment.isEmpty()) continue;  // skip empty sequences, they serve no purpose
+                if (segment.isNull()) continue;
 
                 if (base.getBase() != segment.getBase()) {
                     assert false : "all segments must come from the same base sequence";
                 }
+
+                if (startOffset == -1) startOffset = segment.getStartOffset();
+                endOffset = segment.getEndOffset();
+
+                if (segment.isEmpty()) continue;  // skip empty sequences, they serve no purpose
 
                 if (segment instanceof PrefixedSubSequence || segment instanceof SegmentedSequence) {
                     if (lastSegment != null) mergedSequences.add(lastSegment);
@@ -195,14 +152,16 @@ public final class SegmentedSequence extends BasedSequenceImpl {
             if (mergedSequences.size() == 1) {
                 return mergedSequences.get(0);
             } else if (mergedSequences.size() != 0) {
-                return new SegmentedSequence(mergedSequences);
+                return new SegmentedSequence(mergedSequences, startOffset, endOffset);
             }
         }
         return SubSequence.NULL;
     }
 
-    private SegmentedSequence(List<BasedSequence> segments) {
+    private SegmentedSequence(List<BasedSequence> segments, final int startOffset, final int endOffset) {
         this.baseSeq = segments.get(0).getBaseSequence();
+        this.startOffset = startOffset;
+        this.endOffset = endOffset;
 
         int length = 0;
 
@@ -257,6 +216,46 @@ public final class SegmentedSequence extends BasedSequenceImpl {
         this.baseStartOffset = baseStartOffset;
         this.nonBaseChars = nonBaseChars;
         this.length = length;
+        this.startOffset = computeStartOffset();
+        this.endOffset = computeEndOffset();
+    }
+
+    private int computeStartOffset() {
+        int iMax = baseOffsets.length;
+        assert baseStartOffset + length <= iMax : "Sub-sequence offsets list length < baseStartOffset + sub-sequence length";
+
+        if (nonBaseChars != null) {
+            // start is the first real start in this sequence or after it, in the parent 
+            for (int i = baseStartOffset; i < iMax; i++) {
+                if (baseOffsets[i] >= 0) return baseOffsets[i];
+            }
+
+            // if no real start after then it is the base's end since we had no real start after, these chars and after are all out of base chars
+            return baseSeq.getEndOffset();
+        }
+
+        // here there are no nonBaseChars, all sequences are based sequences or we are at end of parent base sequence
+        return baseStartOffset < iMax ? baseOffsets[baseStartOffset] : baseSeq.getEndOffset();
+    }
+
+    private int computeEndOffset() {
+        // ensure that 0 length end returns start
+        if (length == 0) return getStartOffset();
+
+        int iMax = baseOffsets.length;
+
+        if (nonBaseChars != null) {
+            // end is the last real end in this sequence
+            for (int i = baseStartOffset + length; i-- > 0; ) {
+                if (baseOffsets[i] >= 0) return baseOffsets[i] + 1;
+            }
+
+            // failing that it is the same as startOffset
+            return getStartOffset();
+        }
+
+        // here there are no nonBaseChars, all sequences are based sequences
+        return baseOffsets[baseStartOffset + length - 1] + 1;
     }
 
     @Override
@@ -278,7 +277,11 @@ public final class SegmentedSequence extends BasedSequenceImpl {
         int offset = baseOffsets[baseStartOffset + index];
 
         if (offset < 0) {
-            // KLUDGE: allows having characters which are not from original base sequence
+            /* KLUDGE: allows having characters which are not from original base sequence
+                       but with the only penalty for charAt access being an extra indirection,  
+                       which is a small price to pay for having the flexibility of adding out of 
+                       context text to the based sequence.
+             */
             return nonBaseChars[-offset - 1];
         }
         return baseSeq.charAt(offset);

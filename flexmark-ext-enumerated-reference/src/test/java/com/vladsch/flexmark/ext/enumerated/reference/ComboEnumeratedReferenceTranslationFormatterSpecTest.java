@@ -3,7 +3,6 @@ package com.vladsch.flexmark.ext.enumerated.reference;
 import com.vladsch.flexmark.IRender;
 import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.ext.attributes.AttributesExtension;
-import com.vladsch.flexmark.ext.tables.TablesExtension;
 import com.vladsch.flexmark.formatter.RenderPurpose;
 import com.vladsch.flexmark.formatter.TranslationHandler;
 import com.vladsch.flexmark.formatter.internal.Formatter;
@@ -12,7 +11,6 @@ import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.spec.SpecReader;
 import com.vladsch.flexmark.test.ComboSpecTestCase;
-import com.vladsch.flexmark.util.format.options.DiscretionaryText;
 import com.vladsch.flexmark.util.format.options.ElementPlacement;
 import com.vladsch.flexmark.util.format.options.ElementPlacementSort;
 import com.vladsch.flexmark.util.options.DataHolder;
@@ -37,7 +35,7 @@ public class ComboEnumeratedReferenceTranslationFormatterSpecTest extends ComboS
             .set(Parser.HEADING_NO_ATX_SPACE, true)
             .set(Formatter.MAX_TRAILING_BLANK_LINES, 0);
 
-    static final DataKey<Boolean> DETAILS = new DataKey<Boolean>("DETAILS", SHOW_INTERMEDIATE);
+    static final DataKey<Boolean> DETAILS = new DataKey<>("DETAILS", SHOW_INTERMEDIATE);
 
     private static final Map<String, DataHolder> optionsMap = new HashMap<String, DataHolder>();
     static {

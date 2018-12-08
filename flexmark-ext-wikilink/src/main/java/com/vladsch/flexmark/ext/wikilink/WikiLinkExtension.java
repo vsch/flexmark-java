@@ -24,13 +24,13 @@ import com.vladsch.flexmark.util.options.MutableDataHolder;
  * </p>
  */
 public class WikiLinkExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension {
-    public static final DataKey<Boolean> ALLOW_INLINES = new DataKey<Boolean>("ALLOW_INLINES", false);
-    public static final DataKey<Boolean> ALLOW_ANCHORS = new DataKey<Boolean>("ALLOW_ANCHORS", false);
-    public static final DataKey<Boolean> ALLOW_ANCHOR_ESCAPE = new DataKey<Boolean>("ALLOW_ANCHOR_ESCAPE", false);
-    public static final DataKey<Boolean> ALLOW_PIPE_ESCAPE = new DataKey<Boolean>("ALLOW_PIPE_ESCAPE", false);
-    public static final DataKey<Boolean> DISABLE_RENDERING = new DataKey<Boolean>("DISABLE_RENDERING", false);
-    public static final DataKey<Boolean> LINK_FIRST_SYNTAX = new DataKey<Boolean>("LINK_FIRST_SYNTAX", false);
-    public static final DataKey<String> LINK_PREFIX = new DataKey<String>("LINK_PREFIX", "");
+    public static final DataKey<Boolean> ALLOW_INLINES = new DataKey<>("ALLOW_INLINES", false);
+    public static final DataKey<Boolean> ALLOW_ANCHORS = new DataKey<>("ALLOW_ANCHORS", false);
+    public static final DataKey<Boolean> ALLOW_ANCHOR_ESCAPE = new DataKey<>("ALLOW_ANCHOR_ESCAPE", false);
+    public static final DataKey<Boolean> ALLOW_PIPE_ESCAPE = new DataKey<>("ALLOW_PIPE_ESCAPE", false);
+    public static final DataKey<Boolean> DISABLE_RENDERING = new DataKey<>("DISABLE_RENDERING", false);
+    public static final DataKey<Boolean> LINK_FIRST_SYNTAX = new DataKey<>("LINK_FIRST_SYNTAX", false);
+    public static final DataKey<String> LINK_PREFIX = new DataKey<>("LINK_PREFIX", "");
 
     /**
      * Link prefix to use for absolute wiki links starting with the <code>'/'</code> character.
@@ -41,7 +41,7 @@ public class WikiLinkExtension implements Parser.ParserExtension, HtmlRenderer.H
      */
     public static final DataKey<String> LINK_PREFIX_ABSOLUTE = new DynamicDefaultKey<>("LINK_PREFIX_ABSOLUTE", LINK_PREFIX);
 
-    public static final DataKey<String> IMAGE_PREFIX = new DataKey<String>("IMAGE_PREFIX", "");
+    public static final DataKey<String> IMAGE_PREFIX = new DataKey<>("IMAGE_PREFIX", "");
 
     /**
      * Image prefix to use for absolute wiki image sources starting with the <code>'/'</code> character.
@@ -52,9 +52,9 @@ public class WikiLinkExtension implements Parser.ParserExtension, HtmlRenderer.H
      */
     public static final DataKey<String> IMAGE_PREFIX_ABSOLUTE = new DynamicDefaultKey<String>("IMAGE_PREFIX_ABSOLUTE", IMAGE_PREFIX);
 
-    public static final DataKey<Boolean> IMAGE_LINKS = new DataKey<Boolean>("IMAGE_LINKS", false);
-    public static final DataKey<String> LINK_FILE_EXTENSION = new DataKey<String>("LINK_FILE_EXTENSION", "");
-    public static final DataKey<String> IMAGE_FILE_EXTENSION = new DataKey<String>("IMAGE_FILE_EXTENSION", "");
+    public static final DataKey<Boolean> IMAGE_LINKS = new DataKey<>("IMAGE_LINKS", false);
+    public static final DataKey<String> LINK_FILE_EXTENSION = new DataKey<>("LINK_FILE_EXTENSION", "");
+    public static final DataKey<String> IMAGE_FILE_EXTENSION = new DataKey<>("IMAGE_FILE_EXTENSION", "");
 
     /**
      * Characters to escape in wiki links.
@@ -65,14 +65,14 @@ public class WikiLinkExtension implements Parser.ParserExtension, HtmlRenderer.H
      * option {@link #LINK_REPLACE_CHARS}.
      * </p>
      */
-    public static final DataKey<String> LINK_ESCAPE_CHARS = new DataKey<String>("LINK_ESCAPE_CHARS", " +/<>");
+    public static final DataKey<String> LINK_ESCAPE_CHARS = new DataKey<>("LINK_ESCAPE_CHARS", " +/<>");
 
     /**
      * Characters to replace {@link #LINK_ESCAPE_CHARS} with.
      *
      * @see #LINK_ESCAPE_CHARS
      */
-    public static final DataKey<String> LINK_REPLACE_CHARS = new DataKey<String>("LINK_REPLACE_CHARS", "-----");
+    public static final DataKey<String> LINK_REPLACE_CHARS = new DataKey<>("LINK_REPLACE_CHARS", "-----");
 
     public static final LinkType WIKI_LINK = new LinkType("WIKI");
 

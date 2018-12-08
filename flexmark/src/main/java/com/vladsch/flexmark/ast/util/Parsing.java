@@ -1,6 +1,7 @@
 package com.vladsch.flexmark.ast.util;
 
 import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.util.format.TableFormatOptions;
 import com.vladsch.flexmark.util.html.Escaping;
 import com.vladsch.flexmark.util.options.DataHolder;
 
@@ -9,7 +10,9 @@ import java.util.regex.Pattern;
 import static com.vladsch.flexmark.parser.Parser.*;
 
 public class Parsing {
-    public static final String INTELLIJ_DUMMY_IDENTIFIER = "\u001f";
+    public static final char INTELLIJ_DUMMY_IDENTIFIER_CHAR = TableFormatOptions.INTELLIJ_DUMMY_IDENTIFIER_CHAR;
+    public static final String INTELLIJ_DUMMY_IDENTIFIER = TableFormatOptions.INTELLIJ_DUMMY_IDENTIFIER;
+
     public final String ADDITIONAL_CHARS;
     public final String EXCLUDED_0_TO_SPACE;
 

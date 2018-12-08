@@ -24,25 +24,25 @@ public class GitLabExtension implements Parser.ParserExtension
         , Formatter.FormatterExtension
         // , Parser.ReferenceHoldingExtension
 {
-    // public static final DataKey<KeepType> GIT_LABS_KEEP = new DataKey<KeepType>("GIT_LABS_KEEP", KeepType.FIRST); // standard option to allow control over how to handle duplicates
-    // public static final DataKey<GitLabRepository> GIT_LABS = new DataKey<GitLabRepository>("GIT_LABS", new DataValueFactory<GitLabRepository>() { @Override public GitLabRepository create(DataHolder options) { return new GitLabRepository(options); } });
-    public static final DataKey<Boolean> INS_PARSER = new DataKey<Boolean>("INS_PARSER", true);
-    public static final DataKey<Boolean> DEL_PARSER = new DataKey<Boolean>("DEL_PARSER", true);
-    public static final DataKey<Boolean> BLOCK_QUOTE_PARSER = new DataKey<Boolean>("BLOCK_QUOTE_PARSER", true);
-    public static final DataKey<Boolean> NESTED_BLOCK_QUOTES = new DataKey<Boolean>("NESTED_BLOCK_QUOTES", true);
-    public static final DataKey<Boolean> INLINE_MATH_PARSER = new DataKey<Boolean>("INLINE_MATH_PARSER", true);
-    public static final DataKey<Boolean> RENDER_BLOCK_MATH = new DataKey<Boolean>("RENDER_BLOCK_MATH", true);
-    public static final DataKey<Boolean> RENDER_BLOCK_MERMAID = new DataKey<Boolean>("RENDER_BLOCK_MERMAID", true);
-    public static final DataKey<Boolean> RENDER_VIDEO_IMAGES = new DataKey<Boolean>("RENDER_VIDEO_IMAGES", true);
-    public static final DataKey<Boolean> RENDER_VIDEO_LINK = new DataKey<Boolean>("RENDER_VIDEO_LINK", true);
+    // public static final DataKey<KeepType> GIT_LABS_KEEP = new DataKey<>("GIT_LABS_KEEP", KeepType.FIRST); // standard option to allow control over how to handle duplicates
+    // public static final DataKey<GitLabRepository> GIT_LABS = new DataKey<>("GIT_LABS", new DataValueFactory<GitLabRepository>() { @Override public GitLabRepository create(DataHolder options) { return new GitLabRepository(options); } });
+    public static final DataKey<Boolean> INS_PARSER = new DataKey<>("INS_PARSER", true);
+    public static final DataKey<Boolean> DEL_PARSER = new DataKey<>("DEL_PARSER", true);
+    public static final DataKey<Boolean> BLOCK_QUOTE_PARSER = new DataKey<>("BLOCK_QUOTE_PARSER", true);
+    public static final DataKey<Boolean> NESTED_BLOCK_QUOTES = new DataKey<>("NESTED_BLOCK_QUOTES", true);
+    public static final DataKey<Boolean> INLINE_MATH_PARSER = new DataKey<>("INLINE_MATH_PARSER", true);
+    public static final DataKey<Boolean> RENDER_BLOCK_MATH = new DataKey<>("RENDER_BLOCK_MATH", true);
+    public static final DataKey<Boolean> RENDER_BLOCK_MERMAID = new DataKey<>("RENDER_BLOCK_MERMAID", true);
+    public static final DataKey<Boolean> RENDER_VIDEO_IMAGES = new DataKey<>("RENDER_VIDEO_IMAGES", true);
+    public static final DataKey<Boolean> RENDER_VIDEO_LINK = new DataKey<>("RENDER_VIDEO_LINK", true);
 
-    public static final DataKey<String> INLINE_MATH_CLASS = new DataKey<String>("INLINE_MATH_CLASS", "katex");
-    public static final DataKey<String> BLOCK_MATH_CLASS = new DataKey<String>("BLOCK_MATH_CLASS", "katex");
-    public static final DataKey<String> BLOCK_MERMAID_CLASS = new DataKey<String>("BLOCK_MERMAID_CLASS", "mermaid");
-    public static final DataKey<String> VIDEO_IMAGE_CLASS = new DataKey<String>("VIDEO_IMAGE_CLASS", "video-container");
-    public static final DataKey<String> VIDEO_IMAGE_LINK_TEXT_FORMAT = new DataKey<String>("VIDEO_IMAGE_LINK_TEXT_FORMAT", "Download '%s'");
-    public static final DataKey<String> BLOCK_INFO_DELIMITERS = new DataKey<String>("BLOCK_INFO_DELIMITERS", " ");
-    public static final DataKey<String> VIDEO_IMAGE_EXTENSIONS = new DataKey<String>("VIDEO_IMAGE_EXTENSIONS", "mp4,m4v,mov,webm,ogv");
+    public static final DataKey<String> INLINE_MATH_CLASS = new DataKey<>("INLINE_MATH_CLASS", "katex");
+    public static final DataKey<String> BLOCK_MATH_CLASS = new DataKey<>("BLOCK_MATH_CLASS", "katex");
+    public static final DataKey<String> BLOCK_MERMAID_CLASS = new DataKey<>("BLOCK_MERMAID_CLASS", "mermaid");
+    public static final DataKey<String> VIDEO_IMAGE_CLASS = new DataKey<>("VIDEO_IMAGE_CLASS", "video-container");
+    public static final DataKey<String> VIDEO_IMAGE_LINK_TEXT_FORMAT = new DataKey<>("VIDEO_IMAGE_LINK_TEXT_FORMAT", "Download '%s'");
+    public static final DataKey<String> BLOCK_INFO_DELIMITERS = new DataKey<>("BLOCK_INFO_DELIMITERS", " ");
+    public static final DataKey<String> VIDEO_IMAGE_EXTENSIONS = new DataKey<>("VIDEO_IMAGE_EXTENSIONS", "mp4,m4v,mov,webm,ogv");
 
     private GitLabExtension() {
     }

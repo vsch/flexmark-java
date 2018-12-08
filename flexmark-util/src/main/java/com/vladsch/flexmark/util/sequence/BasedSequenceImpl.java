@@ -904,8 +904,7 @@ public abstract class BasedSequenceImpl implements BasedSequence {
 
     @Override
     public boolean isBlank() {
-        int trim = countChars(WHITESPACE_CHARS, 0, length());
-        return trim == length();
+        return isEmpty() || countChars(WHITESPACE_CHARS, 0, length()) == length();
     }
 
     @Override
@@ -1564,7 +1563,8 @@ public abstract class BasedSequenceImpl implements BasedSequence {
     public static BasedSequence of(CharSequence charSequence) {
         if (charSequence instanceof BasedSequence) return ((BasedSequence) charSequence);
         else if (charSequence instanceof String) return CharSubSequence.of(charSequence);
-        else return SubSequence.of(charSequence);
+        else if (charSequence != null) return SubSequence.of(charSequence);
+        return BasedSequence.NULL;
     }
 
     public static BasedSequence of(CharSequence charSequence, int start) {

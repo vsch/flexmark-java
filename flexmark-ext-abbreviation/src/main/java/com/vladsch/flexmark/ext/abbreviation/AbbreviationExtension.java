@@ -28,12 +28,12 @@ public class AbbreviationExtension implements Parser.ParserExtension, HtmlRender
     /**
      * A {@link DataKey} that is used to set the behavior of the abbreviations repository when duplicates are defined. {@link KeepType}
      */
-    public static final DataKey<KeepType> ABBREVIATIONS_KEEP = new DataKey<KeepType>("ABBREVIATIONS_KEEP", KeepType.FIRST);
+    public static final DataKey<KeepType> ABBREVIATIONS_KEEP = new DataKey<>("ABBREVIATIONS_KEEP", KeepType.FIRST);
 
     /**
      * A {@link DataKey} that is used to get the document's Node repository holding all the abbreviations defined in the current document.
      */
-    public static final DataKey<AbbreviationRepository> ABBREVIATIONS = new DataKey<AbbreviationRepository>("ABBREVIATIONS", new DataValueFactory<AbbreviationRepository>() {
+    public static final DataKey<AbbreviationRepository> ABBREVIATIONS = new DataKey<>("ABBREVIATIONS", new DataValueFactory<AbbreviationRepository>() {
         @Override
         public AbbreviationRepository create(DataHolder options) {
             return new AbbreviationRepository(options);
@@ -43,11 +43,11 @@ public class AbbreviationExtension implements Parser.ParserExtension, HtmlRender
     /**
      * A {@link DataKey} that is used to set the use links option when true, default is false and abbr tag will be used in the rendered HTML.
      */
-    public static final DataKey<Boolean> USE_LINKS = new DataKey<Boolean>("USE_LINKS", false);
+    public static final DataKey<Boolean> USE_LINKS = new DataKey<>("USE_LINKS", false);
 
     // format options
-    public static final DataKey<ElementPlacement> ABBREVIATIONS_PLACEMENT = new DataKey<ElementPlacement>("ABBREVIATIONS_PLACEMENT", ElementPlacement.AS_IS);
-    public static final DataKey<ElementPlacementSort> ABBREVIATIONS_SORT = new DataKey<ElementPlacementSort>("ABBREVIATIONS_SORT", ElementPlacementSort.AS_IS);
+    public static final DataKey<ElementPlacement> ABBREVIATIONS_PLACEMENT = new DataKey<>("ABBREVIATIONS_PLACEMENT", ElementPlacement.AS_IS);
+    public static final DataKey<ElementPlacementSort> ABBREVIATIONS_SORT = new DataKey<>("ABBREVIATIONS_SORT", ElementPlacementSort.AS_IS);
     
     public static final DataKey<Boolean> RECOMPUTE_ABBREVIATIONS_MAP = new DataKey<>("RECOMPUTE_ABBREVIATIONS_MAP", false);
 

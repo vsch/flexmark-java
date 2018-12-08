@@ -23,12 +23,12 @@ import com.vladsch.flexmark.util.options.MutableDataHolder;
  * </p>
  */
 public class EmojiExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension, Formatter.FormatterExtension {
-    public static final DataKey<String> ATTR_ALIGN = new DataKey<String>("ATTR_ALIGN", "absmiddle");
-    public static final DataKey<String> ATTR_IMAGE_SIZE = new DataKey<String>("ATTR_IMAGE_SIZE", "20");
-    public static final DataKey<String> ATTR_IMAGE_CLASS = new DataKey<String>("ATTR_IMAGE_CLASS", "");
-    public static final DataKey<String> ROOT_IMAGE_PATH = new DataKey<String>("ROOT_IMAGE_PATH", "/img/");
-    public static final DataKey<EmojiShortcutType> USE_SHORTCUT_TYPE = new DataKey<EmojiShortcutType>("USE_SHORTCUT_TYPE", EmojiShortcutType.EMOJI_CHEAT_SHEET);
-    public static final DataKey<EmojiImageType> USE_IMAGE_TYPE = new DataKey<EmojiImageType>("USE_IMAGE_TYPE", EmojiImageType.IMAGE_ONLY);
+    public static final DataKey<String> ATTR_ALIGN = new DataKey<>("ATTR_ALIGN", "absmiddle");
+    public static final DataKey<String> ATTR_IMAGE_SIZE = new DataKey<>("ATTR_IMAGE_SIZE", "20");
+    public static final DataKey<String> ATTR_IMAGE_CLASS = new DataKey<>("ATTR_IMAGE_CLASS", "");
+    public static final DataKey<String> ROOT_IMAGE_PATH = new DataKey<>("ROOT_IMAGE_PATH", "/img/");
+    public static final DataKey<EmojiShortcutType> USE_SHORTCUT_TYPE = new DataKey<>("USE_SHORTCUT_TYPE", EmojiShortcutType.EMOJI_CHEAT_SHEET);
+    public static final DataKey<EmojiImageType> USE_IMAGE_TYPE = new DataKey<>("USE_IMAGE_TYPE", EmojiImageType.IMAGE_ONLY);
 
     private EmojiExtension() {
     }

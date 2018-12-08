@@ -5,7 +5,7 @@ import com.vladsch.flexmark.ext.toc.SimTocBlock;
 import com.vladsch.flexmark.ext.toc.SimTocContent;
 import com.vladsch.flexmark.formatter.CustomNodeFormatter;
 import com.vladsch.flexmark.formatter.internal.*;
-import com.vladsch.flexmark.util.format.Table;
+import com.vladsch.flexmark.util.format.MarkdownTable;
 import com.vladsch.flexmark.util.format.TableFormatOptions;
 import com.vladsch.flexmark.util.options.DataHolder;
 
@@ -16,7 +16,7 @@ import java.util.Set;
 public class SimTocNodeFormatter implements NodeFormatter {
     private final TableFormatOptions options;
 
-    private Table myTable;
+    private MarkdownTable myTable;
 
     public SimTocNodeFormatter(DataHolder options) {
         this.options = new TableFormatOptions(options);

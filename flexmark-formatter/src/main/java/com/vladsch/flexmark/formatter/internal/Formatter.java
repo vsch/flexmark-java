@@ -37,7 +37,7 @@ public class Formatter implements IRender {
     /**
      * output control for FormattingAppendable, see {@link FormattingAppendable#setOptions(int)}
      */
-    public static final DataKey<Integer> FORMAT_FLAGS = new DataKey<Integer>("FORMAT_FLAGS", 0);
+    public static final DataKey<Integer> FORMAT_FLAGS = new DataKey<>("FORMAT_FLAGS", 0);
 
     // for convenience or these together and set FORMAT_FLAGS key above to the value, to have HtmlWriter apply these when rendering Html
     public static final int FORMAT_CONVERT_TABS = FormattingAppendable.CONVERT_TABS;
@@ -45,35 +45,41 @@ public class Formatter implements IRender {
     public static final int FORMAT_SUPPRESS_TRAILING_WHITESPACE = FormattingAppendable.SUPPRESS_TRAILING_WHITESPACE;
     public static final int FORMAT_ALL_OPTIONS = FormattingAppendable.FORMAT_ALL;
 
-    public static final DataKey<Integer> MAX_BLANK_LINES = new DataKey<Integer>("MAX_BLANK_LINES", 2);
-    public static final DataKey<Integer> MAX_TRAILING_BLANK_LINES = new DataKey<Integer>("MAX_TRAILING_BLANK_LINES", 1);
-    public static final DataKey<DiscretionaryText> SPACE_AFTER_ATX_MARKER = new DataKey<DiscretionaryText>("SPACE_AFTER_ATX_MARKER", DiscretionaryText.ADD);
-    public static final DataKey<Boolean> SETEXT_HEADER_EQUALIZE_MARKER = new DataKey<Boolean>("SETEXT_HEADER_EQUALIZE_MARKER", true);
-    public static final DataKey<EqualizeTrailingMarker> ATX_HEADER_TRAILING_MARKER = new DataKey<EqualizeTrailingMarker>("ATX_HEADER_TRAILING_MARKER", EqualizeTrailingMarker.AS_IS);
-    public static final DataKey<String> THEMATIC_BREAK = new DataKey<String>("THEMATIC_BREAK", (String) null);
-    public static final DataKey<Boolean> BLOCK_QUOTE_BLANK_LINES = new DataKey<Boolean>("BLOCK_QUOTE_BLANK_LINES", true);
-    public static final DataKey<BlockQuoteMarker> BLOCK_QUOTE_MARKERS = new DataKey<BlockQuoteMarker>("BLOCK_QUOTE_MARKERS", BlockQuoteMarker.ADD_COMPACT_WITH_SPACE);
-    public static final DataKey<Boolean> INDENTED_CODE_MINIMIZE_INDENT = new DataKey<Boolean>("INDENTED_CODE_MINIMIZE_INDENT", true);
-    public static final DataKey<Boolean> FENCED_CODE_MINIMIZE_INDENT = new DataKey<Boolean>("FENCED_CODE_MINIMIZE_INDENT", true);
-    public static final DataKey<Boolean> FENCED_CODE_MATCH_CLOSING_MARKER = new DataKey<Boolean>("FENCED_CODE_MATCH_CLOSING_MARKER", true);
-    public static final DataKey<Boolean> FENCED_CODE_SPACE_BEFORE_INFO = new DataKey<Boolean>("FENCED_CODE_SPACE_BEFORE_INFO", false);
-    public static final DataKey<Integer> FENCED_CODE_MARKER_LENGTH = new DataKey<Integer>("FENCED_CODE_MARKER_LENGTH", 3);
-    public static final DataKey<CodeFenceMarker> FENCED_CODE_MARKER_TYPE = new DataKey<CodeFenceMarker>("FENCED_CODE_MARKER_TYPE", CodeFenceMarker.ANY);
-    public static final DataKey<Boolean> LIST_ADD_BLANK_LINE_BEFORE = new DataKey<Boolean>("LIST_ADD_BLANK_LINE_BEFORE", false);
-    //public static final DataKey<Boolean> LIST_ALIGN_FIRST_LINE_TEXT = new DataKey<Boolean>("LIST_ALIGN_FIRST_LINE_TEXT", false);
-    //public static final DataKey<Boolean> LIST_ALIGN_CHILD_BLOCKS = new DataKey<Boolean>("LIST_ALIGN_CHILD_BLOCKS", true);
-    public static final DataKey<Boolean> LIST_RENUMBER_ITEMS = new DataKey<Boolean>("LIST_RENUMBER_ITEMS", true);
-    public static final DataKey<Boolean> LIST_REMOVE_EMPTY_ITEMS = new DataKey<Boolean>("LIST_REMOVE_EMPTY_ITEMS", false);
-    public static final DataKey<ListBulletMarker> LIST_BULLET_MARKER = new DataKey<ListBulletMarker>("LIST_BULLET_MARKER", ListBulletMarker.ANY);
-    public static final DataKey<ListNumberedMarker> LIST_NUMBERED_MARKER = new DataKey<ListNumberedMarker>("LIST_NUMBERED_MARKER", ListNumberedMarker.ANY);
-    public static final DataKey<ListSpacing> LIST_SPACING = new DataKey<ListSpacing>("LIST_SPACING", ListSpacing.AS_IS);
-    public static final DataKey<ElementPlacement> REFERENCE_PLACEMENT = new DataKey<ElementPlacement>("REFERENCE_PLACEMENT", ElementPlacement.AS_IS);
-    public static final DataKey<ElementPlacementSort> REFERENCE_SORT = new DataKey<ElementPlacementSort>("REFERENCE_SORT", ElementPlacementSort.AS_IS);
-    public static final DataKey<Boolean> KEEP_IMAGE_LINKS_AT_START = new DataKey<Boolean>("KEEP_IMAGE_LINKS_AT_START", false);
-    public static final DataKey<Boolean> KEEP_EXPLICIT_LINKS_AT_START = new DataKey<Boolean>("KEEP_EXPLICIT_LINKS_AT_START", false);
-    //public static final DataKey<TrailingSpaces> KEEP_TRAILING_SPACES = new DataKey<TrailingSpaces>("KEEP_TRAILING_SPACES", TrailingSpaces.KEEP_LINE_BREAK);
-    //public static final DataKey<TrailingSpaces> CODE_KEEP_TRAILING_SPACES = new DataKey<TrailingSpaces>("CODE_KEEP_TRAILING_SPACES", TrailingSpaces.KEEP_ALL);
-    public static final DataKey<CharWidthProvider> CHAR_WIDTH_PROVIDER = TableFormatOptions.CHAR_WIDTH_PROVIDER;
+    public static final DataKey<Integer> MAX_BLANK_LINES = new DataKey<>("MAX_BLANK_LINES", 2);
+    public static final DataKey<Integer> MAX_TRAILING_BLANK_LINES = new DataKey<>("MAX_TRAILING_BLANK_LINES", 1);
+    public static final DataKey<DiscretionaryText> SPACE_AFTER_ATX_MARKER = new DataKey<>("SPACE_AFTER_ATX_MARKER", DiscretionaryText.ADD);
+    public static final DataKey<Boolean> SETEXT_HEADER_EQUALIZE_MARKER = new DataKey<>("SETEXT_HEADER_EQUALIZE_MARKER", true);
+    public static final DataKey<EqualizeTrailingMarker> ATX_HEADER_TRAILING_MARKER = new DataKey<>("ATX_HEADER_TRAILING_MARKER", EqualizeTrailingMarker.AS_IS);
+    public static final DataKey<String> THEMATIC_BREAK = new DataKey<>("THEMATIC_BREAK", (String) null);
+    public static final DataKey<Boolean> BLOCK_QUOTE_BLANK_LINES = new DataKey<>("BLOCK_QUOTE_BLANK_LINES", true);
+    public static final DataKey<BlockQuoteMarker> BLOCK_QUOTE_MARKERS = new DataKey<>("BLOCK_QUOTE_MARKERS", BlockQuoteMarker.ADD_COMPACT_WITH_SPACE);
+    public static final DataKey<Boolean> INDENTED_CODE_MINIMIZE_INDENT = new DataKey<>("INDENTED_CODE_MINIMIZE_INDENT", true);
+    public static final DataKey<Boolean> FENCED_CODE_MINIMIZE_INDENT = new DataKey<>("FENCED_CODE_MINIMIZE_INDENT", true);
+    public static final DataKey<Boolean> FENCED_CODE_MATCH_CLOSING_MARKER = new DataKey<>("FENCED_CODE_MATCH_CLOSING_MARKER", true);
+    public static final DataKey<Boolean> FENCED_CODE_SPACE_BEFORE_INFO = new DataKey<>("FENCED_CODE_SPACE_BEFORE_INFO", false);
+    public static final DataKey<Integer> FENCED_CODE_MARKER_LENGTH = new DataKey<>("FENCED_CODE_MARKER_LENGTH", 3);
+    public static final DataKey<CodeFenceMarker> FENCED_CODE_MARKER_TYPE = new DataKey<>("FENCED_CODE_MARKER_TYPE", CodeFenceMarker.ANY);
+    public static final DataKey<Boolean> LIST_ADD_BLANK_LINE_BEFORE = new DataKey<>("LIST_ADD_BLANK_LINE_BEFORE", false);
+    //public static final DataKey<Boolean> LIST_ALIGN_FIRST_LINE_TEXT = new DataKey<>("LIST_ALIGN_FIRST_LINE_TEXT", false);
+    //public static final DataKey<Boolean> LIST_ALIGN_CHILD_BLOCKS = new DataKey<>("LIST_ALIGN_CHILD_BLOCKS", true);
+    public static final DataKey<Boolean> LIST_RENUMBER_ITEMS = new DataKey<>("LIST_RENUMBER_ITEMS", true);
+    public static final DataKey<Boolean> LIST_REMOVE_EMPTY_ITEMS = new DataKey<>("LIST_REMOVE_EMPTY_ITEMS", false);
+    public static final DataKey<ListBulletMarker> LIST_BULLET_MARKER = new DataKey<>("LIST_BULLET_MARKER", ListBulletMarker.ANY);
+    public static final DataKey<ListNumberedMarker> LIST_NUMBERED_MARKER = new DataKey<>("LIST_NUMBERED_MARKER", ListNumberedMarker.ANY);
+    public static final DataKey<ListSpacing> LIST_SPACING = new DataKey<>("LIST_SPACING", ListSpacing.AS_IS);
+    public static final DataKey<ElementPlacement> REFERENCE_PLACEMENT = new DataKey<>("REFERENCE_PLACEMENT", ElementPlacement.AS_IS);
+    public static final DataKey<ElementPlacementSort> REFERENCE_SORT = new DataKey<>("REFERENCE_SORT", ElementPlacementSort.AS_IS);
+    public static final DataKey<Boolean> KEEP_IMAGE_LINKS_AT_START = new DataKey<>("KEEP_IMAGE_LINKS_AT_START", false);
+    public static final DataKey<Boolean> KEEP_EXPLICIT_LINKS_AT_START = new DataKey<>("KEEP_EXPLICIT_LINKS_AT_START", false);
+    //public static final DataKey<TrailingSpaces> KEEP_TRAILING_SPACES = new DataKey<>("KEEP_TRAILING_SPACES", TrailingSpaces.KEEP_LINE_BREAK);
+    //public static final DataKey<TrailingSpaces> CODE_KEEP_TRAILING_SPACES = new DataKey<>("CODE_KEEP_TRAILING_SPACES", TrailingSpaces.KEEP_ALL);
+    public static final DataKey<CharWidthProvider> FORMAT_CHAR_WIDTH_PROVIDER = TableFormatOptions.FORMAT_CHAR_WIDTH_PROVIDER;
+
+    /**
+     * @deprecated use FORMAT_ prefixed name
+     */
+    @Deprecated public static final DataKey<CharWidthProvider> CHAR_WIDTH_PROVIDER = TableFormatOptions.FORMAT_CHAR_WIDTH_PROVIDER;
+
     public static final DataKey<TableCaptionHandling> FORMAT_TABLE_CAPTION = TableFormatOptions.FORMAT_TABLE_CAPTION;
     public static final DataKey<DiscretionaryText> FORMAT_TABLE_CAPTION_SPACES = TableFormatOptions.FORMAT_TABLE_CAPTION_SPACES;
     public static final DataKey<String> FORMAT_TABLE_INDENT_PREFIX = TableFormatOptions.FORMAT_TABLE_INDENT_PREFIX;
@@ -82,26 +88,15 @@ public class Formatter implements IRender {
     public static final DataKey<ParserEmulationProfile> FORMATTER_EMULATION_PROFILE = new DynamicDefaultKey<ParserEmulationProfile>("FORMATTER_EMULATION_PROFILE", Parser.PARSER_EMULATION_PROFILE);
 
     // used for translation phases of rendering
-    public static final DataKey<String> TRANSLATION_ID_FORMAT = new DataKey<String>("TRANSLATION_ID_FORMAT", "_%d_");
-    public static final DataKey<String> TRANSLATION_HTML_BLOCK_PREFIX = new DataKey<String>("TRANSLATION_HTML_BLOCK_PREFIX", "_");
-    public static final DataKey<String> TRANSLATION_EXCLUDE_PATTERN = new DataKey<String>("TRANSLATION_EXCLUDE_PATTERN", "^[^\\p{IsAlphabetic}]*$");
+    public static final DataKey<String> TRANSLATION_ID_FORMAT = new DataKey<>("TRANSLATION_ID_FORMAT", "_%d_");
+    public static final DataKey<String> TRANSLATION_HTML_BLOCK_PREFIX = new DataKey<>("TRANSLATION_HTML_BLOCK_PREFIX", "_");
+    public static final DataKey<String> TRANSLATION_EXCLUDE_PATTERN = new DataKey<>("TRANSLATION_EXCLUDE_PATTERN", "^[^\\p{IsAlphabetic}]*$");
     public static final DataKey<String> TRANSLATION_HTML_BLOCK_TAG_PATTERN = Parser.TRANSLATION_HTML_BLOCK_TAG_PATTERN;
     public static final DataKey<String> TRANSLATION_HTML_INLINE_TAG_PATTERN = Parser.TRANSLATION_HTML_INLINE_TAG_PATTERN;
-    
-    public static final DataKey<Boolean> KEEP_HARD_LINE_BREAKS = new DataKey<Boolean>("KEEP_HARD_LINE_BREAKS", true);
-    public static final DataKey<Boolean> KEEP_SOFT_LINE_BREAKS = new DataKey<Boolean>("KEEP_SOFT_LINE_BREAKS", true);
-    public static final DataKey<Boolean> APPEND_TRANSFERRED_REFERENCES = new DataKey<Boolean>("APPEND_TRANSFERRED_REFERENCES", false);
 
-    //public boolean USE_ACTUAL_CHAR_WIDTH = true;
-    //
-    //public boolean ESCAPE_SPECIAL_CHARS_ON_WRAP = true;
-    //public boolean UNESCAPE_SPECIAL_CHARS_ON_WRAP = true;
-    //
-    //// text formatting
-    //public boolean KEEP_HARD_BREAKS = true;
-    //public boolean KEEP_EMBEDDED_SPACES = false;
-    //public boolean WRAP_TEXT = true;
-    //public TrailingSpaces FLEXMARK_EXAMPLE_KEEP_TRAILING_SPACES = TrailingSpaces.KEEP_ALL;
+    public static final DataKey<Boolean> KEEP_HARD_LINE_BREAKS = new DataKey<>("KEEP_HARD_LINE_BREAKS", true);
+    public static final DataKey<Boolean> KEEP_SOFT_LINE_BREAKS = new DataKey<>("KEEP_SOFT_LINE_BREAKS", true);
+    public static final DataKey<Boolean> APPEND_TRANSFERRED_REFERENCES = new DataKey<>("APPEND_TRANSFERRED_REFERENCES", false);
 
     final List<NodeFormatterFactory> nodeFormatterFactories;
     final FormatterOptions formatterOptions;
@@ -274,14 +269,14 @@ public class Formatter implements IRender {
             super(other);
 
             List<Extension> extensions = new ArrayList<Extension>();
-            for (Extension extension: get(Parser.EXTENSIONS)) {
+            for (Extension extension : get(Parser.EXTENSIONS)) {
                 extensions.add(extension);
             }
 
             if (options != null) {
-                for (DataKey key: options.keySet()) {
+                for (DataKey key : options.keySet()) {
                     if (key == Parser.EXTENSIONS) {
-                        for (Extension extension: options.get(Parser.EXTENSIONS)) {
+                        for (Extension extension : options.get(Parser.EXTENSIONS)) {
                             extensions.add(extension);
                         }
                     } else {
@@ -323,7 +318,7 @@ public class Formatter implements IRender {
          */
         public Builder extensions(Iterable<? extends Extension> extensions) {
             // first give extensions a chance to modify options
-            for (Extension extension: extensions) {
+            for (Extension extension : extensions) {
                 if (extension instanceof FormatterExtension) {
                     if (!loadedExtensions.contains(extension)) {
                         FormatterExtension formatterExtension = (FormatterExtension) extension;
@@ -332,7 +327,7 @@ public class Formatter implements IRender {
                 }
             }
 
-            for (Extension extension: extensions) {
+            for (Extension extension : extensions) {
                 if (extension instanceof FormatterExtension) {
                     if (!loadedExtensions.contains(extension)) {
                         FormatterExtension formatterExtension = (FormatterExtension) extension;
@@ -412,7 +407,7 @@ public class Formatter implements IRender {
                 final Set<NodeFormattingHandler<?>> formattingHandlers = nodeFormatter.getNodeFormattingHandlers();
                 if (formattingHandlers == null) continue;
 
-                for (NodeFormattingHandler nodeType: formattingHandlers) {
+                for (NodeFormattingHandler nodeType : formattingHandlers) {
                     // Overwrite existing renderer
                     renderers.put(nodeType.getNodeType(), nodeType);
                 }
@@ -582,7 +577,7 @@ public class Formatter implements IRender {
                     myTranslationHandler.beginRendering((Document) node, subContext, subContext.markdown);
                 }
 
-                for (FormattingPhase phase: FormattingPhase.values()) {
+                for (FormattingPhase phase : FormattingPhase.values()) {
                     if (phase != FormattingPhase.DOCUMENT && !renderingPhases.contains(phase)) { continue; }
                     this.phase = phase;
                     // here we render multiple phases
@@ -595,7 +590,7 @@ public class Formatter implements IRender {
                         }
                     } else {
                         // go through all renderers that want this phase
-                        for (PhasedNodeFormatter phasedFormatter: phasedFormatters) {
+                        for (PhasedNodeFormatter phasedFormatter : phasedFormatters) {
                             if (phasedFormatter.getFormattingPhases().contains(phase)) {
                                 subContext.renderingNode = node;
                                 phasedFormatter.renderDocument(subContext, subContext.markdown, (Document) node, phase);

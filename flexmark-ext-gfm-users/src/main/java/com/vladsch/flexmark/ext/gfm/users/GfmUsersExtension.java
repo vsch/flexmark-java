@@ -23,11 +23,11 @@ import com.vladsch.flexmark.util.options.MutableDataHolder;
 public class GfmUsersExtension implements Parser.ParserExtension
         , HtmlRenderer.HtmlRendererExtension
 {
-    public static final DataKey<String> GIT_HUB_USERS_URL_ROOT = new DataKey<String>("GIT_HUB_USERS_URL_ROOT", "https://github.com");
-    public static final DataKey<String> GIT_HUB_USER_URL_PREFIX = new DataKey<String>("GIT_HUB_USER_URL_PREFIX", "/");
-    public static final DataKey<String> GIT_HUB_USER_URL_SUFFIX = new DataKey<String>("GIT_HUB_USER_URL_SUFFIX", "");
-    public static final DataKey<String> GIT_HUB_USER_HTML_PREFIX = new DataKey<String>("GIT_HUB_USER_HTML_PREFIX", "<strong>");
-    public static final DataKey<String> GIT_HUB_USER_HTML_SUFFIX = new DataKey<String>("GIT_HUB_USER_HTML_SUFFIX", "</strong>");
+    public static final DataKey<String> GIT_HUB_USERS_URL_ROOT = new DataKey<>("GIT_HUB_USERS_URL_ROOT", "https://github.com");
+    public static final DataKey<String> GIT_HUB_USER_URL_PREFIX = new DataKey<>("GIT_HUB_USER_URL_PREFIX", "/");
+    public static final DataKey<String> GIT_HUB_USER_URL_SUFFIX = new DataKey<>("GIT_HUB_USER_URL_SUFFIX", "");
+    public static final DataKey<String> GIT_HUB_USER_HTML_PREFIX = new DataKey<>("GIT_HUB_USER_HTML_PREFIX", "<strong>");
+    public static final DataKey<String> GIT_HUB_USER_HTML_SUFFIX = new DataKey<>("GIT_HUB_USER_HTML_SUFFIX", "</strong>");
 
     private GfmUsersExtension() {
     }

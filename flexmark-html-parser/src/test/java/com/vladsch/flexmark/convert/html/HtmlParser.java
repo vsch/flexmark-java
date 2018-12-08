@@ -9,8 +9,7 @@ import com.vladsch.flexmark.util.options.MutableDataSet;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 class HtmlParser extends IParseBase {
-    @SuppressWarnings("PointlessBitwiseExpression")
-    final static public DataKey<Integer> HTML_EXTENSIONS = new DataKey<Integer>("HTML_EXTENSIONS", 0
+    @SuppressWarnings("PointlessBitwiseExpression") final static public DataKey<Integer> HTML_EXTENSIONS = new DataKey<>("HTML_EXTENSIONS", 0
             //| Extensions.ABBREVIATIONS
             //| Extensions.EXTANCHORLINKS /*| Extensions.EXTANCHORLINKS_WRAP*/
             //| Extensions.AUTOLINKS
@@ -31,8 +30,8 @@ class HtmlParser extends IParseBase {
             //| Extensions.TRACE_PARSER
     );
 
-    final static public DataKey<Integer> HTML_EXTENSIONS_ADD = new DataKey<Integer>("HTML_EXTENSIONS_ADD", 0);
-    final static public DataKey<Integer> HTML_EXTENSIONS_REMOVE = new DataKey<Integer>("HTML_EXTENSIONS_REMOVE", 0);
+    final static public DataKey<Integer> HTML_EXTENSIONS_ADD = new DataKey<>("HTML_EXTENSIONS_ADD", 0);
+    final static public DataKey<Integer> HTML_EXTENSIONS_REMOVE = new DataKey<>("HTML_EXTENSIONS_REMOVE", 0);
 
     public static int getHtmlExtensions(DataHolder options) {
         return (HTML_EXTENSIONS.getFrom(options) | HTML_EXTENSIONS_ADD.getFrom(options)) & ~HTML_EXTENSIONS_REMOVE.getFrom(options);

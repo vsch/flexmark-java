@@ -13,8 +13,6 @@ import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.DataKey;
 import com.vladsch.flexmark.util.options.MutableDataHolder;
 
-import java.util.Map;
-
 /**
  * Extension for attributes
  * <p>
@@ -32,12 +30,12 @@ public class AttributesExtension implements Parser.ParserExtension
         , Formatter.FormatterExtension
         //, Parser.ReferenceHoldingExtension
 {
-    public static final DataKey<NodeAttributeRepository> NODE_ATTRIBUTES = new DataKey<NodeAttributeRepository>("NODE_ATTRIBUTES", new DataValueFactory<NodeAttributeRepository>() {
+    public static final DataKey<NodeAttributeRepository> NODE_ATTRIBUTES = new DataKey<>("NODE_ATTRIBUTES", new DataValueFactory<NodeAttributeRepository>() {
         @Override
         public NodeAttributeRepository create(DataHolder options) { return new NodeAttributeRepository(options); }
     });
-    public static final DataKey<KeepType> ATTRIBUTES_KEEP = new DataKey<KeepType>("ATTRIBUTES_KEEP", KeepType.FIRST); // standard option to allow control over how to handle duplicates
-    public static final DataKey<Boolean> ASSIGN_TEXT_ATTRIBUTES = new DataKey<Boolean>("ASSIGN_TEXT_ATTRIBUTES", true); // assign attributes to text if previous is not a space
+    public static final DataKey<KeepType> ATTRIBUTES_KEEP = new DataKey<>("ATTRIBUTES_KEEP", KeepType.FIRST); // standard option to allow control over how to handle duplicates
+    public static final DataKey<Boolean> ASSIGN_TEXT_ATTRIBUTES = new DataKey<>("ASSIGN_TEXT_ATTRIBUTES", true); // assign attributes to text if previous is not a space
 
     private AttributesExtension() {
     }

@@ -30,13 +30,13 @@ import java.util.Map;
 public class AdmonitionExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension, Formatter.FormatterExtension
         // , Parser.ReferenceHoldingExtension
 {
-    public static final DataKey<Integer> CONTENT_INDENT = new DataKey<Integer>("ADMONITION.CONTENT_INDENT", 4);
-    public static final DataKey<Boolean> ALLOW_LEADING_SPACE = new DataKey<Boolean>("ADMONITION.ALLOW_LEADING_SPACE", true);
-    public static final DataKey<Boolean> INTERRUPTS_PARAGRAPH = new DataKey<Boolean>("ADMONITION.INTERRUPTS_PARAGRAPH", true);
-    public static final DataKey<Boolean> INTERRUPTS_ITEM_PARAGRAPH = new DataKey<Boolean>("ADMONITION.INTERRUPTS_ITEM_PARAGRAPH", true);
-    public static final DataKey<Boolean> WITH_SPACES_INTERRUPTS_ITEM_PARAGRAPH = new DataKey<Boolean>("ADMONITION.WITH_SPACES_INTERRUPTS_ITEM_PARAGRAPH", true);
-    public static final DataKey<Boolean> ALLOW_LAZY_CONTINUATION = new DataKey<Boolean>("ADMONITION.ALLOW_LAZY_CONTINUATION", true);
-    public static final DataKey<String> UNRESOLVED_QUALIFIER = new DataKey<String>("ADMONITION.UNRESOLVED_QUALIFIER", "note");
+    public static final DataKey<Integer> CONTENT_INDENT = new DataKey<>("ADMONITION.CONTENT_INDENT", 4);
+    public static final DataKey<Boolean> ALLOW_LEADING_SPACE = new DataKey<>("ADMONITION.ALLOW_LEADING_SPACE", true);
+    public static final DataKey<Boolean> INTERRUPTS_PARAGRAPH = new DataKey<>("ADMONITION.INTERRUPTS_PARAGRAPH", true);
+    public static final DataKey<Boolean> INTERRUPTS_ITEM_PARAGRAPH = new DataKey<>("ADMONITION.INTERRUPTS_ITEM_PARAGRAPH", true);
+    public static final DataKey<Boolean> WITH_SPACES_INTERRUPTS_ITEM_PARAGRAPH = new DataKey<>("ADMONITION.WITH_SPACES_INTERRUPTS_ITEM_PARAGRAPH", true);
+    public static final DataKey<Boolean> ALLOW_LAZY_CONTINUATION = new DataKey<>("ADMONITION.ALLOW_LAZY_CONTINUATION", true);
+    public static final DataKey<String> UNRESOLVED_QUALIFIER = new DataKey<>("ADMONITION.UNRESOLVED_QUALIFIER", "note");
     public static final DataKey<Map<String, String>> QUALIFIER_TYPE_MAP = new DataKey<Map<String, String>>("ADMONITION.QUALIFIER_TYPE_MAP", getQualifierTypeValueFactory());
     public static final DataKey<Map<String, String>> QUALIFIER_TITLE_MAP = new DataKey<Map<String, String>>("ADMONITION.QUALIFIER_TITLE_MAP", getQualifierTitleValueFactory());
     public static final DataKey<Map<String, String>> TYPE_SVG_MAP = new DataKey<Map<String, String>>("ADMONITION.TYPE_SVG_MAP", getQualifierSvgValueFactory());

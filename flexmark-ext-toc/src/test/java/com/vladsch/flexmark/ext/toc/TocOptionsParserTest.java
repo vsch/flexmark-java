@@ -14,7 +14,6 @@ import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.spec.SpecReader;
 import com.vladsch.flexmark.test.ComboSpecTestCase;
 import com.vladsch.flexmark.util.Pair;
-import com.vladsch.flexmark.util.html.FormattingAppendable;
 import com.vladsch.flexmark.util.options.*;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import org.junit.runners.Parameterized;
@@ -32,8 +31,8 @@ public class TocOptionsParserTest extends ComboSpecTestCase {
             //.set(Parser.EXTENSIONS, Collections.singletonList(SimTocExtension.create()))
             ;
 
-    private static DataKey<TocOptions> TOC_OPTIONS = new DataKey<TocOptions>("TOC_OPTIONS", TocOptions.DEFAULT);
-    private static DataKey<Boolean> SIM_TOC = new DataKey<Boolean>("SIM_TOC", false);
+    private static DataKey<TocOptions> TOC_OPTIONS = new DataKey<>("TOC_OPTIONS", TocOptions.DEFAULT);
+    private static DataKey<Boolean> SIM_TOC = new DataKey<>("SIM_TOC", false);
 
     private static final Map<String, DataHolder> optionsMap = new HashMap<String, DataHolder>();
     static {

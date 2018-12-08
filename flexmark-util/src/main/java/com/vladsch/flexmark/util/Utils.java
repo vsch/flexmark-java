@@ -548,19 +548,27 @@ public class Utils {
     }
 
     public static Integer parseUnsignedIntOrNull(String text) {
+        return parseUnsignedIntOrNull(text, 10);
+    }
+
+    public static Integer parseUnsignedIntOrNull(String text, int radix) {
         try {
             if (text.startsWith("-")) {
                 return null;
             }
-            return Integer.parseInt(text);
+            return Integer.parseInt(text, radix);
         } catch (NumberFormatException ignored) {
             return null;
         }
     }
 
     public static Integer parseIntOrNull(String text) {
+        return parseIntOrNull(text, 10);
+    }
+
+    public static Integer parseIntOrNull(String text, int radix) {
         try {
-            return Integer.parseInt(text);
+            return Integer.parseInt(text, radix);
         } catch (NumberFormatException ignored) {
             return null;
         }

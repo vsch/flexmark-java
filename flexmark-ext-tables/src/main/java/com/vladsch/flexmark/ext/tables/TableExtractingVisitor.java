@@ -1,20 +1,19 @@
 package com.vladsch.flexmark.ext.tables;
 
-import com.vladsch.flexmark.ast.*;
-import com.vladsch.flexmark.ast.util.Parsing;
-import com.vladsch.flexmark.parser.Parser;
-import com.vladsch.flexmark.util.format.Table;
+import com.vladsch.flexmark.ast.Node;
+import com.vladsch.flexmark.ast.NodeVisitor;
+import com.vladsch.flexmark.ast.VisitHandler;
+import com.vladsch.flexmark.ast.Visitor;
+import com.vladsch.flexmark.util.format.MarkdownTable;
 import com.vladsch.flexmark.util.format.TableFormatOptions;
 import com.vladsch.flexmark.util.html.CellAlignment;
 import com.vladsch.flexmark.util.options.DataHolder;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class TableExtractingVisitor {
     private final TableFormatOptions options;
-    private final boolean isIntellijDummyIdentifier;
-    private final String intellijDummyIdentifier;
-    private final String linePrefix;
-
-    private Table myTable;
 
     private NodeVisitor myVisitor = new NodeVisitor(
             new VisitHandler<>(TableBlock.class, new Visitor<TableBlock>() {
@@ -61,16 +60,26 @@ public class TableExtractingVisitor {
             })
     );
 
+    private MarkdownTable myTable;
+    private final List<MarkdownTable> myTables;
+
     public TableExtractingVisitor(DataHolder options) {
         this.options = new TableFormatOptions(options);
-        linePrefix = TablesExtension.FORMAT_TABLE_INDENT_PREFIX.getFrom(options);
-        isIntellijDummyIdentifier = Parser.INTELLIJ_DUMMY_IDENTIFIER.getFrom(options);
-        intellijDummyIdentifier = isIntellijDummyIdentifier ? Parsing.INTELLIJ_DUMMY_IDENTIFIER : "";
+        myTables = new ArrayList<>();
+    }
+
+    public MarkdownTable[] getTables(Node node) {
+        myTable = null;
+        myVisitor.visit(node);
+        return myTables.toArray(new MarkdownTable[0]);
     }
 
     private void visit(final TableBlock node) {
-        myTable = new Table(options);
+        myTable = new MarkdownTable(options);
         myVisitor.visitChildren(node);
+        myTables.add(myTable);
+
+        myTable = null;
     }
 
     private void visit(final TableHead node) {
@@ -96,10 +105,10 @@ public class TableExtractingVisitor {
     }
 
     private void visit(final TableCaption node) {
-        myTable.setCaption(node.getOpeningMarker(), node.getText(), node.getClosingMarker());
+        myTable.setCaptionWithMarkers(node.getOpeningMarker(), node.getText(), node.getClosingMarker());
     }
 
     private void visit(final TableCell node) {
-        myTable.addCell(new Table.TableCell(node.getOpeningMarker(), options.trimCellWhitespace ? node.getText().trim() : node.getText(), node.getClosingMarker(), 1, node.getSpan(), node.getAlignment() == null ? CellAlignment.NONE : node.getAlignment().cellAlignment()));
+        myTable.addCell(new MarkdownTable.TableCell(node.getOpeningMarker(), options.trimCellWhitespace ? node.getText().trim() : node.getText(), node.getClosingMarker(), 1, node.getSpan(), node.getAlignment() == null ? CellAlignment.NONE : node.getAlignment().cellAlignment()));
     }
 }

@@ -33,43 +33,43 @@ import java.util.*;
  */
 @SuppressWarnings("WeakerAccess")
 public class HtmlRenderer implements IRender {
-    public static final DataKey<String> SOFT_BREAK = new DataKey<String>("SOFT_BREAK", "\n");
-    public static final DataKey<String> HARD_BREAK = new DataKey<String>("HARD_BREAK", "<br />\n");
-    public static final DataKey<String> STRONG_EMPHASIS_STYLE_HTML_OPEN = new DataKey<String>("STRONG_EMPHASIS_STYLE_HTML_OPEN", (String) null);
-    public static final DataKey<String> STRONG_EMPHASIS_STYLE_HTML_CLOSE = new DataKey<String>("STRONG_EMPHASIS_STYLE_HTML_CLOSE", (String) null);
-    public static final DataKey<String> EMPHASIS_STYLE_HTML_OPEN = new DataKey<String>("EMPHASIS_STYLE_HTML_OPEN", (String) null);
-    public static final DataKey<String> EMPHASIS_STYLE_HTML_CLOSE = new DataKey<String>("EMPHASIS_STYLE_HTML_CLOSE", (String) null);
-    public static final DataKey<String> CODE_STYLE_HTML_OPEN = new DataKey<String>("CODE_STYLE_HTML_OPEN", (String) null);
-    public static final DataKey<String> CODE_STYLE_HTML_CLOSE = new DataKey<String>("CODE_STYLE_HTML_CLOSE", (String) null);
-    public static final DataKey<String> INLINE_CODE_SPLICE_CLASS = new DataKey<String>("INLINE_CODE_SPLICE_CLASS", (String) null);
-    public static final DataKey<Boolean> PERCENT_ENCODE_URLS = new DataKey<Boolean>("PERCENT_ENCODE_URLS", false);
-    public static final DataKey<Integer> INDENT_SIZE = new DataKey<Integer>("INDENT_SIZE", 0);
-    public static final DataKey<Boolean> ESCAPE_HTML = new DataKey<Boolean>("ESCAPE_HTML", false);
+    public static final DataKey<String> SOFT_BREAK = new DataKey<>("SOFT_BREAK", "\n");
+    public static final DataKey<String> HARD_BREAK = new DataKey<>("HARD_BREAK", "<br />\n");
+    public static final DataKey<String> STRONG_EMPHASIS_STYLE_HTML_OPEN = new DataKey<>("STRONG_EMPHASIS_STYLE_HTML_OPEN", (String) null);
+    public static final DataKey<String> STRONG_EMPHASIS_STYLE_HTML_CLOSE = new DataKey<>("STRONG_EMPHASIS_STYLE_HTML_CLOSE", (String) null);
+    public static final DataKey<String> EMPHASIS_STYLE_HTML_OPEN = new DataKey<>("EMPHASIS_STYLE_HTML_OPEN", (String) null);
+    public static final DataKey<String> EMPHASIS_STYLE_HTML_CLOSE = new DataKey<>("EMPHASIS_STYLE_HTML_CLOSE", (String) null);
+    public static final DataKey<String> CODE_STYLE_HTML_OPEN = new DataKey<>("CODE_STYLE_HTML_OPEN", (String) null);
+    public static final DataKey<String> CODE_STYLE_HTML_CLOSE = new DataKey<>("CODE_STYLE_HTML_CLOSE", (String) null);
+    public static final DataKey<String> INLINE_CODE_SPLICE_CLASS = new DataKey<>("INLINE_CODE_SPLICE_CLASS", (String) null);
+    public static final DataKey<Boolean> PERCENT_ENCODE_URLS = new DataKey<>("PERCENT_ENCODE_URLS", false);
+    public static final DataKey<Integer> INDENT_SIZE = new DataKey<>("INDENT_SIZE", 0);
+    public static final DataKey<Boolean> ESCAPE_HTML = new DataKey<>("ESCAPE_HTML", false);
     public static final DataKey<Boolean> ESCAPE_HTML_BLOCKS = new DynamicDefaultKey<Boolean>("ESCAPE_HTML_BLOCKS", ESCAPE_HTML);
     public static final DataKey<Boolean> ESCAPE_HTML_COMMENT_BLOCKS = new DynamicDefaultKey<Boolean>("ESCAPE_HTML_COMMENT_BLOCKS", ESCAPE_HTML_BLOCKS);
     public static final DataKey<Boolean> ESCAPE_INLINE_HTML = new DynamicDefaultKey<Boolean>("ESCAPE_HTML_BLOCKS", ESCAPE_HTML);
     public static final DataKey<Boolean> ESCAPE_INLINE_HTML_COMMENTS = new DynamicDefaultKey<Boolean>("ESCAPE_INLINE_HTML_COMMENTS", ESCAPE_INLINE_HTML);
-    public static final DataKey<Boolean> SUPPRESS_HTML = new DataKey<Boolean>("SUPPRESS_HTML", false);
+    public static final DataKey<Boolean> SUPPRESS_HTML = new DataKey<>("SUPPRESS_HTML", false);
     public static final DataKey<Boolean> SUPPRESS_HTML_BLOCKS = new DynamicDefaultKey<Boolean>("SUPPRESS_HTML_BLOCKS", SUPPRESS_HTML);
     public static final DataKey<Boolean> SUPPRESS_HTML_COMMENT_BLOCKS = new DynamicDefaultKey<Boolean>("SUPPRESS_HTML_COMMENT_BLOCKS", SUPPRESS_HTML_BLOCKS);
     public static final DataKey<Boolean> SUPPRESS_INLINE_HTML = new DynamicDefaultKey<Boolean>("SUPPRESS_INLINE_HTML", SUPPRESS_HTML);
     public static final DataKey<Boolean> SUPPRESS_INLINE_HTML_COMMENTS = new DynamicDefaultKey<Boolean>("SUPPRESS_INLINE_HTML_COMMENTS", SUPPRESS_INLINE_HTML);
-    public static final DataKey<Boolean> SOURCE_WRAP_HTML = new DataKey<Boolean>("SOURCE_WRAP_HTML", false);
+    public static final DataKey<Boolean> SOURCE_WRAP_HTML = new DataKey<>("SOURCE_WRAP_HTML", false);
     public static final DataKey<Boolean> SOURCE_WRAP_HTML_BLOCKS = new DynamicDefaultKey<Boolean>("SOURCE_WRAP_HTML_BLOCKS", SOURCE_WRAP_HTML);
     //public static final DataKey<Boolean> SOURCE_WRAP_INLINE_HTML = new DynamicDefaultKey<>("SOURCE_WRAP_INLINE_HTML", SOURCE_WRAP_HTML::getFrom);
-    public static final DataKey<Boolean> HEADER_ID_GENERATOR_RESOLVE_DUPES = new DataKey<Boolean>("HEADER_ID_GENERATOR_RESOLVE_DUPES", true);
-    public static final DataKey<String> HEADER_ID_GENERATOR_TO_DASH_CHARS = new DataKey<String>("HEADER_ID_GENERATOR_TO_DASH_CHARS", " -_");
-    public static final DataKey<String> HEADER_ID_GENERATOR_NON_DASH_CHARS = new DataKey<String>("HEADER_ID_GENERATOR_NON_DASH_CHARS", "");
-    public static final DataKey<Boolean> HEADER_ID_GENERATOR_NO_DUPED_DASHES = new DataKey<Boolean>("HEADER_ID_GENERATOR_NO_DUPED_DASHES", false);
-    public static final DataKey<Boolean> HEADER_ID_GENERATOR_NON_ASCII_TO_LOWERCASE = new DataKey<Boolean>("HEADER_ID_GENERATOR_NON_ASCII_TO_LOWERCASE", true);
-    public static final DataKey<Boolean> RENDER_HEADER_ID = new DataKey<Boolean>("RENDER_HEADER_ID", false);
-    public static final DataKey<Boolean> GENERATE_HEADER_ID = new DataKey<Boolean>("GENERATE_HEADER_ID", true);
-    public static final DataKey<Boolean> DO_NOT_RENDER_LINKS = new DataKey<Boolean>("DO_NOT_RENDER_LINKS", false);
-    public static final DataKey<String> FENCED_CODE_LANGUAGE_CLASS_PREFIX = new DataKey<String>("FENCED_CODE_LANGUAGE_CLASS_PREFIX", "language-");
-    public static final DataKey<String> FENCED_CODE_NO_LANGUAGE_CLASS = new DataKey<String>("FENCED_CODE_NO_LANGUAGE_CLASS", "");
-    public static final DataKey<String> SOURCE_POSITION_ATTRIBUTE = new DataKey<String>("SOURCE_POSITION_ATTRIBUTE", "");
-    public static final DataKey<Boolean> SOURCE_POSITION_PARAGRAPH_LINES = new DataKey<Boolean>("SOURCE_POSITION_PARAGRAPH_LINES", false);
-    public static final DataKey<String> TYPE = new DataKey<String>("TYPE", "HTML");
+    public static final DataKey<Boolean> HEADER_ID_GENERATOR_RESOLVE_DUPES = new DataKey<>("HEADER_ID_GENERATOR_RESOLVE_DUPES", true);
+    public static final DataKey<String> HEADER_ID_GENERATOR_TO_DASH_CHARS = new DataKey<>("HEADER_ID_GENERATOR_TO_DASH_CHARS", " -_");
+    public static final DataKey<String> HEADER_ID_GENERATOR_NON_DASH_CHARS = new DataKey<>("HEADER_ID_GENERATOR_NON_DASH_CHARS", "");
+    public static final DataKey<Boolean> HEADER_ID_GENERATOR_NO_DUPED_DASHES = new DataKey<>("HEADER_ID_GENERATOR_NO_DUPED_DASHES", false);
+    public static final DataKey<Boolean> HEADER_ID_GENERATOR_NON_ASCII_TO_LOWERCASE = new DataKey<>("HEADER_ID_GENERATOR_NON_ASCII_TO_LOWERCASE", true);
+    public static final DataKey<Boolean> RENDER_HEADER_ID = new DataKey<>("RENDER_HEADER_ID", false);
+    public static final DataKey<Boolean> GENERATE_HEADER_ID = new DataKey<>("GENERATE_HEADER_ID", true);
+    public static final DataKey<Boolean> DO_NOT_RENDER_LINKS = new DataKey<>("DO_NOT_RENDER_LINKS", false);
+    public static final DataKey<String> FENCED_CODE_LANGUAGE_CLASS_PREFIX = new DataKey<>("FENCED_CODE_LANGUAGE_CLASS_PREFIX", "language-");
+    public static final DataKey<String> FENCED_CODE_NO_LANGUAGE_CLASS = new DataKey<>("FENCED_CODE_NO_LANGUAGE_CLASS", "");
+    public static final DataKey<String> SOURCE_POSITION_ATTRIBUTE = new DataKey<>("SOURCE_POSITION_ATTRIBUTE", "");
+    public static final DataKey<Boolean> SOURCE_POSITION_PARAGRAPH_LINES = new DataKey<>("SOURCE_POSITION_PARAGRAPH_LINES", false);
+    public static final DataKey<String> TYPE = new DataKey<>("TYPE", "HTML");
     public static final DataKey<ArrayList<TagRange>> TAG_RANGES = new DataKey<ArrayList<TagRange>>("TAG_RANGES", new DataValueFactory<ArrayList<TagRange>>() {
         @Override
         public ArrayList<TagRange> create(DataHolder value) {
@@ -77,24 +77,24 @@ public class HtmlRenderer implements IRender {
         }
     });
 
-    public static final DataKey<Boolean> RECHECK_UNDEFINED_REFERENCES = new DataKey<Boolean>("RECHECK_UNDEFINED_REFERENCES", false);
-    public static final DataKey<Boolean> OBFUSCATE_EMAIL = new DataKey<Boolean>("OBFUSCATE_EMAIL", false);
-    public static final DataKey<Boolean> OBFUSCATE_EMAIL_RANDOM = new DataKey<Boolean>("OBFUSCATE_EMAIL_RANDOM", true);
-    public static final DataKey<Boolean> HTML_BLOCK_OPEN_TAG_EOL = new DataKey<Boolean>("HTML_BLOCK_OPEN_TAG_EOL", true);
-    public static final DataKey<Boolean> HTML_BLOCK_CLOSE_TAG_EOL = new DataKey<Boolean>("HTML_BLOCK_CLOSE_TAG_EOL", true);
-    public static final DataKey<Boolean> UNESCAPE_HTML_ENTITIES = new DataKey<Boolean>("UNESCAPE_HTML_ENTITIES", true);
-    //public static final DataKey<Boolean> WRAP_TIGHT_ITEM_PARAGRAPH_IN_SPAN = new DataKey<Boolean>("WRAP_TIGHT_ITEM_PARAGRAPH_IN_SPAN", false);
-    public static final DataKey<String> AUTOLINK_WWW_PREFIX = new DataKey<String>("AUTOLINK_WWW_PREFIX", "http://");
+    public static final DataKey<Boolean> RECHECK_UNDEFINED_REFERENCES = new DataKey<>("RECHECK_UNDEFINED_REFERENCES", false);
+    public static final DataKey<Boolean> OBFUSCATE_EMAIL = new DataKey<>("OBFUSCATE_EMAIL", false);
+    public static final DataKey<Boolean> OBFUSCATE_EMAIL_RANDOM = new DataKey<>("OBFUSCATE_EMAIL_RANDOM", true);
+    public static final DataKey<Boolean> HTML_BLOCK_OPEN_TAG_EOL = new DataKey<>("HTML_BLOCK_OPEN_TAG_EOL", true);
+    public static final DataKey<Boolean> HTML_BLOCK_CLOSE_TAG_EOL = new DataKey<>("HTML_BLOCK_CLOSE_TAG_EOL", true);
+    public static final DataKey<Boolean> UNESCAPE_HTML_ENTITIES = new DataKey<>("UNESCAPE_HTML_ENTITIES", true);
+    //public static final DataKey<Boolean> WRAP_TIGHT_ITEM_PARAGRAPH_IN_SPAN = new DataKey<>("WRAP_TIGHT_ITEM_PARAGRAPH_IN_SPAN", false);
+    public static final DataKey<String> AUTOLINK_WWW_PREFIX = new DataKey<>("AUTOLINK_WWW_PREFIX", "http://");
 
     // regex for suppressed link prefixes
-    public static final DataKey<String> SUPPRESSED_LINKS = new DataKey<String>("SUPPRESSED_LINKS", "javascript:.*");
-    public static final DataKey<Boolean> NO_P_TAGS_USE_BR = new DataKey<Boolean>("NO_P_TAGS_USE_BR", false);
+    public static final DataKey<String> SUPPRESSED_LINKS = new DataKey<>("SUPPRESSED_LINKS", "javascript:.*");
+    public static final DataKey<Boolean> NO_P_TAGS_USE_BR = new DataKey<>("NO_P_TAGS_USE_BR", false);
 
     /**
      * output control for FormattingAppendable, see {@link com.vladsch.flexmark.util.html.FormattingAppendable#setOptions(int)}
      */
-    public static final DataKey<Integer> FORMAT_FLAGS = new DataKey<Integer>("FORMAT_FLAGS", 0);
-    public static final DataKey<Integer> MAX_TRAILING_BLANK_LINES = new DataKey<Integer>("MAX_TRAILING_BLANK_LINES", 1);
+    public static final DataKey<Integer> FORMAT_FLAGS = new DataKey<>("FORMAT_FLAGS", 0);
+    public static final DataKey<Integer> MAX_TRAILING_BLANK_LINES = new DataKey<>("MAX_TRAILING_BLANK_LINES", 1);
 
     // convenience pass through
     public static final int CONVERT_TABS = FormattingAppendable.CONVERT_TABS;

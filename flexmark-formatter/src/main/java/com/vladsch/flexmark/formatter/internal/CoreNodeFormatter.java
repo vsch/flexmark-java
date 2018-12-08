@@ -5,7 +5,6 @@ import com.vladsch.flexmark.ast.util.ReferenceRepository;
 import com.vladsch.flexmark.formatter.CustomNodeFormatter;
 import com.vladsch.flexmark.formatter.TranslatingSpanRender;
 import com.vladsch.flexmark.formatter.TranslationPlaceholderGenerator;
-import com.vladsch.flexmark.html.renderer.RenderingPhase;
 import com.vladsch.flexmark.parser.ListOptions;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.ParserEmulationProfile;
@@ -25,7 +24,6 @@ import com.vladsch.flexmark.util.sequence.RepeatedCharSequence;
 import java.util.*;
 
 import static com.vladsch.flexmark.formatter.RenderPurpose.FORMAT;
-import static com.vladsch.flexmark.formatter.internal.Formatter.APPEND_TRANSFERRED_REFERENCES;
 import static com.vladsch.flexmark.formatter.internal.FormattingPhase.DOCUMENT_BOTTOM;
 import static com.vladsch.flexmark.util.format.options.DiscretionaryText.ADD;
 import static com.vladsch.flexmark.util.format.options.DiscretionaryText.AS_IS;
@@ -33,8 +31,8 @@ import static com.vladsch.flexmark.util.sequence.BasedSequence.NULL;
 
 @SuppressWarnings("WeakerAccess")
 public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceRepository, Reference, RefNode> {
-    public static final DataKey<Integer> LIST_ITEM_NUMBER = new DataKey<Integer>("LIST_ITEM_NUMBER", 0);
-    public static final DataKey<ListSpacing> LIST_ITEM_SPACING = new DataKey<ListSpacing>("LIST_ITEM_SPACING", (ListSpacing) null);
+    public static final DataKey<Integer> LIST_ITEM_NUMBER = new DataKey<>("LIST_ITEM_NUMBER", 0);
+    public static final DataKey<ListSpacing> LIST_ITEM_SPACING = new DataKey<>("LIST_ITEM_SPACING", (ListSpacing) null);
 
     private final FormatterOptions formatterOptions;
     private final ListOptions listOptions;

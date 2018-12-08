@@ -21,8 +21,8 @@ import com.vladsch.flexmark.util.options.MutableDataHolder;
  * </p>
  */
 public class SuperscriptExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension {
-    public static final DataKey<String> SUPERSCRIPT_STYLE_HTML_OPEN = new DataKey<String>("SUPERSCRIPT_STYLE_HTML_OPEN", (String)null);
-    public static final DataKey<String> SUPERSCRIPT_STYLE_HTML_CLOSE = new DataKey<String>("SUPERSCRIPT_STYLE_HTML_CLOSE", (String)null);
+    public static final DataKey<String> SUPERSCRIPT_STYLE_HTML_OPEN = new DataKey<>("SUPERSCRIPT_STYLE_HTML_OPEN", (String) null);
+    public static final DataKey<String> SUPERSCRIPT_STYLE_HTML_CLOSE = new DataKey<>("SUPERSCRIPT_STYLE_HTML_CLOSE", (String) null);
 
     private SuperscriptExtension() {
     }

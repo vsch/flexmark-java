@@ -47,8 +47,8 @@ public class ComboAppHtmlParserTest extends ComboSpecTestCase {
         optionsMap.put("div-as-para", new MutableDataSet().set(FlexmarkHtmlParser.DIV_AS_PARAGRAPH, true));
         optionsMap.put("no-br-as-para-breaks", new MutableDataSet().set(FlexmarkHtmlParser.BR_AS_PARA_BREAKS, false));
         optionsMap.put("no-br-as-extra-blank-lines", new MutableDataSet().set(FlexmarkHtmlParser.BR_AS_EXTRA_BLANK_LINES, false));
-        optionsMap.put("table-no-alignment", new MutableDataSet().set(TableFormatOptions.APPLY_COLUMN_ALIGNMENT, false));
-        optionsMap.put("table-no-width", new MutableDataSet().set(TableFormatOptions.ADJUST_COLUMN_WIDTH, false));
+        optionsMap.put("table-no-alignment", new MutableDataSet().set(TableFormatOptions.FORMAT_TABLE_APPLY_COLUMN_ALIGNMENT, false));
+        optionsMap.put("table-no-width", new MutableDataSet().set(TableFormatOptions.FORMAT_TABLE_ADJUST_COLUMN_WIDTH, false));
         optionsMap.put("table-ignore-mid-heading", new MutableDataSet().set(FlexmarkHtmlParser.IGNORE_TABLE_HEADING_AFTER_ROWS, true));
         optionsMap.put("skip-inline-strong", new MutableDataSet().set(FlexmarkHtmlParser.SKIP_INLINE_STRONG, true));
         optionsMap.put("skip-inline-emphasis", new MutableDataSet().set(FlexmarkHtmlParser.SKIP_INLINE_EMPHASIS, true));

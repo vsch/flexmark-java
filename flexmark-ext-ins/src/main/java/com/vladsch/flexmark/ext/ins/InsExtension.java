@@ -21,8 +21,8 @@ import com.vladsch.flexmark.util.options.MutableDataHolder;
  * </p>
  */
 public class InsExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension {
-    public static final DataKey<String> INS_STYLE_HTML_OPEN = new DataKey<String>("INS_STYLE_HTML_OPEN", (String)null);
-    public static final DataKey<String> INS_STYLE_HTML_CLOSE = new DataKey<String>("INS_STYLE_HTML_CLOSE", (String)null);
+    public static final DataKey<String> INS_STYLE_HTML_OPEN = new DataKey<>("INS_STYLE_HTML_OPEN", (String) null);
+    public static final DataKey<String> INS_STYLE_HTML_CLOSE = new DataKey<>("INS_STYLE_HTML_CLOSE", (String) null);
 
     private InsExtension() {
     }

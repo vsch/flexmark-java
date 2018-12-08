@@ -23,9 +23,9 @@ import com.vladsch.flexmark.util.options.MutableDataHolder;
 
 // TODO: Rename this class to XWikiMacroExtension
 public class MacroExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension {
-    public static final DataKey<Boolean> ENABLE_INLINE_MACROS = new DataKey<Boolean>("ENABLE_INLINE_MACROS", true);
-    public static final DataKey<Boolean> ENABLE_BLOCK_MACROS = new DataKey<Boolean>("ENABLE_BLOCK_MACROS", true);
-    public static final DataKey<Boolean> ENABLE_RENDERING = new DataKey<Boolean>("ENABLE_RENDERING", false);
+    public static final DataKey<Boolean> ENABLE_INLINE_MACROS = new DataKey<>("ENABLE_INLINE_MACROS", true);
+    public static final DataKey<Boolean> ENABLE_BLOCK_MACROS = new DataKey<>("ENABLE_BLOCK_MACROS", true);
+    public static final DataKey<Boolean> ENABLE_RENDERING = new DataKey<>("ENABLE_RENDERING", false);
 
     private MacroExtension() {
     }

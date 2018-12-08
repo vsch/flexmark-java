@@ -283,6 +283,8 @@ public class ImageUtils {
      * http://stackoverflow.com/questions/7603400/how-to-make-a-rounded-corner-image-in-java
      */
     public static BufferedImage makeRoundedCorner(BufferedImage image, int cornerRadius, int borderWidth) {
+        if ((float) cornerRadius == 0) return image;
+
         int w = image.getWidth();
         int h = image.getHeight();
         BufferedImage output = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
@@ -298,15 +300,13 @@ public class ImageUtils {
         g2.setComposite(AlphaComposite.Src);
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2.setColor(Color.WHITE);
-        g2.fill(new RoundRectangle2D.Float(0, 0, w, h, cornerRadius, cornerRadius));
-        //        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.CLEAR));
-        //        g2.fillRect(0,0,256,256);
+
+        g2.fill(new RoundRectangle2D.Float(0, 0, w, h, (float) cornerRadius, (float) cornerRadius));
 
         // ... then compositing the image on top,
         // using the white shape from above as alpha source
         g2.setComposite(AlphaComposite.SrcAtop);
         g2.drawImage(image, 0, 0, null);
-        //UIUtil.drawImage(g2, image, 0, 0, null);
 
         g2.dispose();
         //output.setRGB(3, 3, 123);
@@ -321,17 +321,21 @@ public class ImageUtils {
 
         Graphics2D g2 = output.createGraphics();
         g2.setColor(borderColor);
-        g2.drawImage(image, borderWidth, borderWidth, null);
+        g2.drawImage(image, borderWidth, borderWidth, image.getWidth(), image.getHeight(), null);
         //UIUtil.drawImage(g2, image, 0, 0, null);
         g2.setStroke(new BasicStroke(borderWidth, BasicStroke.CAP_SQUARE, BasicStroke.JOIN_MITER, borderWidth));
         g2.setRenderingHint(
                 RenderingHints.KEY_ANTIALIASING,
                 RenderingHints.VALUE_ANTIALIAS_ON
         );
+        int width = w - borderWidth - 1;
+        int height = h - borderWidth - 1;
+        int halfBorder = borderWidth / 2;
         if (cornerRadius > 0) {
-            g2.drawRoundRect(borderWidth / 2, borderWidth / 2, w - borderWidth, h - borderWidth, cornerRadius, cornerRadius);
+            int adjustedRadius = cornerRadius + borderWidth;
+            g2.drawRoundRect(halfBorder, halfBorder, width, height, adjustedRadius, adjustedRadius);
         } else {
-            g2.drawRect(borderWidth / 2, borderWidth / 2, w - borderWidth, h - borderWidth);
+            g2.drawRect(halfBorder, halfBorder, width, height);
         }
         g2.dispose();
         //output.setRGB(3, 3, 123);
@@ -513,9 +517,9 @@ public class ImageUtils {
             BufferedImage image,
             BufferedImage outerImage,
             int x, int y, int w, int h,
-            Color borderColor, int borderWidth, int cornerRadius,
-            Color innerFillColor,
+            int borderWidth, int cornerRadius,
             Color outerFillColor,
+            final int outerBorderWidth,
             final int outerCornerRadius,
             boolean applyToImage
     ) {
@@ -541,9 +545,9 @@ public class ImageUtils {
             // first one, we need to fill it
             g2.setColor(outerFillColor);
             if (outerCornerRadius > 0) {
-                g2.fillRoundRect(0, 0, imgW, imgH, outerCornerRadius, outerCornerRadius);
+                g2.fillRoundRect(outerBorderWidth, outerBorderWidth, imgW - 2 * outerBorderWidth, imgH - 2 * outerBorderWidth, outerCornerRadius, outerCornerRadius);
             } else {
-                g2.fillRect(0, 0, imgW, imgH);
+                g2.fillRect(outerBorderWidth, outerBorderWidth, imgW - 2 * outerBorderWidth, imgH - 2 * outerBorderWidth);
             }
         }
 
@@ -571,9 +575,9 @@ public class ImageUtils {
             BufferedImage image,
             BufferedImage outerImage,
             int x, int y, int w, int h,
-            Color borderColor, int borderWidth,
-            Color innerFillColor,
+            int borderWidth,
             Color outerFillColor,
+            final int outerBorderWidth,
             final int outerCornerRadius,
             boolean applyToImage
     ) {
@@ -599,9 +603,9 @@ public class ImageUtils {
             // first one, we need to fill it
             g2.setColor(outerFillColor);
             if (outerCornerRadius > 0) {
-                g2.fillRoundRect(0, 0, imgW, imgH, outerCornerRadius, outerCornerRadius);
+                g2.fillRoundRect(outerBorderWidth, outerBorderWidth, imgW - 2 * outerBorderWidth, imgH - 2 * outerBorderWidth, outerCornerRadius, outerCornerRadius);
             } else {
-                g2.fillRect(0, 0, imgW, imgH);
+                g2.fillRect(outerBorderWidth, outerBorderWidth, imgW - 2 * outerBorderWidth, imgH - 2 * outerBorderWidth);
             }
         }
 

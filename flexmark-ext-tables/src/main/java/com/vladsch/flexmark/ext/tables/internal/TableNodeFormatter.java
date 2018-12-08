@@ -9,28 +9,28 @@ import com.vladsch.flexmark.formatter.CustomNodeFormatter;
 import com.vladsch.flexmark.formatter.TranslatingSpanRender;
 import com.vladsch.flexmark.formatter.internal.*;
 import com.vladsch.flexmark.parser.Parser;
-import com.vladsch.flexmark.util.format.Table;
+import com.vladsch.flexmark.util.format.MarkdownTable;
 import com.vladsch.flexmark.util.format.TableFormatOptions;
 import com.vladsch.flexmark.util.html.CellAlignment;
 import com.vladsch.flexmark.util.options.DataHolder;
+import com.vladsch.flexmark.util.sequence.BasedSequenceImpl;
 
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
 import static com.vladsch.flexmark.formatter.RenderPurpose.FORMAT;
+import static com.vladsch.flexmark.util.format.TableManipulator.NULL;
 
 public class TableNodeFormatter implements NodeFormatter {
     private final TableFormatOptions options;
     private final boolean isIntellijDummyIdentifier;
     private final String intellijDummyIdentifier;
-    private final String linePrefix;
 
-    private Table myTable;
+    private MarkdownTable myTable;
 
     public TableNodeFormatter(DataHolder options) {
         this.options = new TableFormatOptions(options);
-        linePrefix = TablesExtension.FORMAT_TABLE_INDENT_PREFIX.getFrom(options);
         isIntellijDummyIdentifier = Parser.INTELLIJ_DUMMY_IDENTIFIER.getFrom(options);
         intellijDummyIdentifier = isIntellijDummyIdentifier ? Parsing.INTELLIJ_DUMMY_IDENTIFIER : "";
     }
@@ -95,7 +95,7 @@ public class TableNodeFormatter implements NodeFormatter {
     }
 
     private void render(final TableBlock node, final NodeFormatterContext context, MarkdownWriter markdown) {
-        myTable = new Table(options);
+        myTable = new MarkdownTable(options);
 
         switch (context.getRenderPurpose()) {
             case TRANSLATION_SPANS:
@@ -110,11 +110,18 @@ public class TableNodeFormatter implements NodeFormatter {
             default:
                 context.renderChildren(node);
 
-                // output table
-                myTable.finalizeTable(intellijDummyIdentifier);
+                // allow table manipulation, mostly for testing
+                if (options.tableManipulator != NULL) {
+                    myTable.cleanup();
+                    options.tableManipulator.apply(myTable, node);
+                }
+
+                myTable.cleanup();
                 if (myTable.getMaxColumns() > 0) {
+                    // output table
                     markdown.blankLine();
-                    myTable.appendTable(markdown, linePrefix, intellijDummyIdentifier);
+                    myTable.finalizeTable();
+                    myTable.appendTable(markdown);
                     markdown.blankLine();
                 }
         }
@@ -150,9 +157,13 @@ public class TableNodeFormatter implements NodeFormatter {
 
     private void render(final TableCaption node, final NodeFormatterContext context, MarkdownWriter markdown) {
         if (context.getRenderPurpose() == FORMAT) {
-            myTable.setCaption(node.getOpeningMarker(), node.getText(), node.getClosingMarker());
+            myTable.setCaptionWithMarkers(node.getOpeningMarker(), node.getText(), node.getClosingMarker());
         } else {
-            if (!options.removeCaption) {
+            // KLUDGE: to reuse the table formatting logic of MarkdownTable
+            String dummyCaption = node.hasChildren() ? "dummy" : "";
+            String formattedCaption = MarkdownTable.formattedCaption(BasedSequenceImpl.of(dummyCaption), options);
+
+            if (formattedCaption != null) {
                 markdown.line().append(node.getOpeningMarker());
                 context.renderChildren(node);
                 markdown.append(node.getClosingMarker()).line();
@@ -162,7 +173,7 @@ public class TableNodeFormatter implements NodeFormatter {
 
     private void render(final TableCell node, final NodeFormatterContext context, MarkdownWriter markdown) {
         if (context.getRenderPurpose() == FORMAT) {
-            myTable.addCell(new Table.TableCell(node.getOpeningMarker(), options.trimCellWhitespace ? node.getText().trim() : node.getText(), node.getClosingMarker(), 1, node.getSpan(), node.getAlignment() == null ? CellAlignment.NONE : node.getAlignment().cellAlignment()));
+            myTable.addCell(new MarkdownTable.TableCell(node.getOpeningMarker(), options.trimCellWhitespace ? node.getText().trim() : node.getText(), node.getClosingMarker(), 1, node.getSpan(), node.getAlignment() == null ? CellAlignment.NONE : node.getAlignment().cellAlignment()));
         } else {
             if (node.getPrevious() == null) {
                 if (options.leadTrailPipes && node.getOpeningMarker().isEmpty()) markdown.append('|');

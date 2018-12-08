@@ -26,23 +26,23 @@ import com.vladsch.flexmark.util.options.MutableDataHolder;
  * </p>
  */
 public class FootnoteExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension, Parser.ReferenceHoldingExtension, Formatter.FormatterExtension {
-    public static final DataKey<KeepType> FOOTNOTES_KEEP = new DataKey<KeepType>("FOOTNOTES_KEEP", KeepType.FIRST);
+    public static final DataKey<KeepType> FOOTNOTES_KEEP = new DataKey<>("FOOTNOTES_KEEP", KeepType.FIRST);
 
-    public static final DataKey<FootnoteRepository> FOOTNOTES = new DataKey<FootnoteRepository>("FOOTNOTES", new DataValueFactory<FootnoteRepository>() {
+    public static final DataKey<FootnoteRepository> FOOTNOTES = new DataKey<>("FOOTNOTES", new DataValueFactory<FootnoteRepository>() {
         @Override
         public FootnoteRepository create(DataHolder options) {
             return new FootnoteRepository(options);
         }
     });
-    public static final DataKey<String> FOOTNOTE_REF_PREFIX = new DataKey<String>("FOOTNOTE_REF_PREFIX", "");
-    public static final DataKey<String> FOOTNOTE_REF_SUFFIX = new DataKey<String>("FOOTNOTE_REF_SUFFIX", "");
-    public static final DataKey<String> FOOTNOTE_BACK_REF_STRING = new DataKey<String>("FOOTNOTE_BACK_REF_STRING", "&#8617;");
-    public static final DataKey<String> FOOTNOTE_LINK_REF_CLASS = new DataKey<String>("FOOTNOTE_LINK_REF_CLASS", "footnote-ref");
-    public static final DataKey<String> FOOTNOTE_BACK_LINK_REF_CLASS = new DataKey<String>("FOOTNOTE_BACK_LINK_REF_CLASS", "footnote-backref");
+    public static final DataKey<String> FOOTNOTE_REF_PREFIX = new DataKey<>("FOOTNOTE_REF_PREFIX", "");
+    public static final DataKey<String> FOOTNOTE_REF_SUFFIX = new DataKey<>("FOOTNOTE_REF_SUFFIX", "");
+    public static final DataKey<String> FOOTNOTE_BACK_REF_STRING = new DataKey<>("FOOTNOTE_BACK_REF_STRING", "&#8617;");
+    public static final DataKey<String> FOOTNOTE_LINK_REF_CLASS = new DataKey<>("FOOTNOTE_LINK_REF_CLASS", "footnote-ref");
+    public static final DataKey<String> FOOTNOTE_BACK_LINK_REF_CLASS = new DataKey<>("FOOTNOTE_BACK_LINK_REF_CLASS", "footnote-backref");
 
     // formatter options
-    public static final DataKey<ElementPlacement> FOOTNOTE_PLACEMENT = new DataKey<ElementPlacement>("FOOTNOTE_PLACEMENT", ElementPlacement.AS_IS);
-    public static final DataKey<ElementPlacementSort> FOOTNOTE_SORT = new DataKey<ElementPlacementSort>("FOOTNOTE_SORT", ElementPlacementSort.AS_IS);
+    public static final DataKey<ElementPlacement> FOOTNOTE_PLACEMENT = new DataKey<>("FOOTNOTE_PLACEMENT", ElementPlacement.AS_IS);
+    public static final DataKey<ElementPlacementSort> FOOTNOTE_SORT = new DataKey<>("FOOTNOTE_SORT", ElementPlacementSort.AS_IS);
 
     private FootnoteExtension() {
     }

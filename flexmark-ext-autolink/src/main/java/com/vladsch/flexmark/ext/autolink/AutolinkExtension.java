@@ -20,8 +20,8 @@ import com.vladsch.flexmark.util.options.MutableDataHolder;
  */
 public class AutolinkExtension implements Parser.ParserExtension {
     //  regex to match all link texts which should be ignored for auto-linking
-    public static final DataKey<String> IGNORE_LINKS = new DataKey<String>("IGNORE_LINKS", "");
-    //public static final DataKey<Boolean> ALLOW_PROTOCOL_PREFIX_ONLY = new DataKey<Boolean>("ALLOW_PROTOCOL_PREFIX_ONLY", false);
+    public static final DataKey<String> IGNORE_LINKS = new DataKey<>("IGNORE_LINKS", "");
+    //public static final DataKey<Boolean> ALLOW_PROTOCOL_PREFIX_ONLY = new DataKey<>("ALLOW_PROTOCOL_PREFIX_ONLY", false);
 
     private AutolinkExtension() {
     }

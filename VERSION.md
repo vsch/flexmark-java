@@ -265,12 +265,27 @@ flexmark-java
 -------
 
 * [ ] Add: base64 embedded image link resolver option or a sample on how to do it
+* [ ] Add: tests for table move column function
+* Add: table manipulation functions to `MarkdownTable` to allow easy modification of a markdown
+  table which can then be output as formatted markdown text. This class implements table
+  formatting for the tables extension.
+* Add: to table formatter options:
+  *  `FORMAT_TABLE_CAPTION_SPACES` , default `DiscretionaryText.AS_IS`, how to handle spaces
+     after `[` and before `]` in formatted output |
+  *  `FORMAT_TABLE_INDENT_PREFIX` , default `""`, adds arbitrary prefix to tables in formatted
+     output |
+  *  `FORMAT_TABLE_MANIPULATOR` , default `TableManipulator.NULL`, interface invoked before
+     table is appended to formatted output. Allows table manipulation |
+  *  `FORMAT_CHAR_WIDTH_PROVIDER` , default `CharWidthProvider.NULL`, interface used to provide
+     actual characters widths so table formatting can take these into account |
 * Break: potentially breaking change, now FencedCode block with empty content returns
   `SubSequence.NULL` for content with no lines, previously returned empty string with start==end
   representing the position in the document where the content should have been. Affects only
   `FencedCodeBlock` and `AsideBlock`. Can use`FencedCodeBlock.getOpeningMarker().getEndOffset()
   \+ 1` if you need the position where the content would have been. Similarly for `AsideBlock`
-* Break: some breaking changes to `FormattingAppendableImpl` derived constructors. Now most 
+* Fix: `SegmentedSequence` start and end offsets to always be correct when contained segments
+  are all non-based characters.
+* Break: some breaking changes to `FormattingAppendableImpl` derived constructors. Now most
   arguments must be passed, no defaults. It was getting too messy to trace which constructors
   were used and what were the resulting options for the appendable.
 * Fix: with `HtmlRenderer.FORMAT_FLAGS` set to `HtmlRenderer.PASS_THROUGH` pre-formatted would
@@ -282,7 +297,7 @@ flexmark-java
 * Add: `Formatter.KEEP_HARD_LINE_BREAKS`, default true and `Formatter.KEEP_SOFT_LINE_BREAKS`
   default true. Setting to `false` will not output corresponding line break.
 * Add: `Formatter.APPEND_TRANSFERRED_REFERENCES`, default false. Setting to `true` will append
-  all transferred references to the bottom of the formatted document. 
+  all transferred references to the bottom of the formatted document.
 * Add: `NodeRepository` API to return referenced references from a given node.
 * Fix: Jira and YouTrack converters ignored `HtmlRenderer.RECHECK_UNDEFINED_REFERENCES`
 * Add: Base64 conversion to image utils

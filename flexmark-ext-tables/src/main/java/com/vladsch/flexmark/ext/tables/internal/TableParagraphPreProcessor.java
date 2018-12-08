@@ -71,7 +71,7 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
 
             @Override
             public boolean skipPrev(char c) {
-                return c == ' ' || c == '\t' /*|| c == Parsing.INTELLIJ_DUMMY_IDENTIFIER.charAt(0)*/;
+                return c == ' ' || c == '\t' /*|| c == TableFormatOptions.INTELLIJ_DUMMY_IDENTIFIER_CHAR*/;
                 //return false;
             }
 

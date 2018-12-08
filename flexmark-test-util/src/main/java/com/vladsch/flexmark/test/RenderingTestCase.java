@@ -30,11 +30,11 @@ public abstract class RenderingTestCase {
     public static final String TIMED_OPTION_NAME = "TIMED";
     public static final String EMBED_TIMED_OPTION_NAME = "EMBED_TIMED";
     public static final String TIMED_FORMAT_STRING = "Timing %s: parse %.3f ms, render %.3f ms, total %.3f\n";
-    public static final DataKey<Boolean> FAIL = new DataKey<Boolean>(FAIL_OPTION_NAME, false);
-    public static final DataKey<Boolean> IGNORE = new DataKey<Boolean>(IGNORE_OPTION_NAME, false);
-    public static final DataKey<Boolean> NO_FILE_EOL = new DataKey<Boolean>(NO_FILE_EOL_OPTION_NAME, true);
-    public static final DataKey<Boolean> TIMED = new DataKey<Boolean>(TIMED_OPTION_NAME, false);
-    public static final DataKey<Boolean> EMBED_TIMED = new DataKey<Boolean>(TIMED_OPTION_NAME, false);
+    public static final DataKey<Boolean> FAIL = new DataKey<>(FAIL_OPTION_NAME, false);
+    public static final DataKey<Boolean> IGNORE = new DataKey<>(IGNORE_OPTION_NAME, false);
+    public static final DataKey<Boolean> NO_FILE_EOL = new DataKey<>(NO_FILE_EOL_OPTION_NAME, true);
+    public static final DataKey<Boolean> TIMED = new DataKey<>(TIMED_OPTION_NAME, false);
+    public static final DataKey<Boolean> EMBED_TIMED = new DataKey<>(TIMED_OPTION_NAME, false);
     public static final DataKey<String> INCLUDED_DOCUMENT = new DataKey<>("INCLUDED_DOCUMENT", "");
     public static final DataKey<String> SOURCE_PREFIX = new DataKey<>("SOURCE_PREFIX", "");
     public static final DataKey<String> SOURCE_SUFFIX = new DataKey<>("SOURCE_SUFFIX", "");

@@ -11,8 +11,7 @@ import org.pegdown.PegDownProcessor;
 import org.pegdown.ast.RootNode;
 
 class PegdownParser extends IParseBase {
-    @SuppressWarnings("PointlessBitwiseExpression")
-    final static public DataKey<Integer> PEGDOWN_EXTENSIONS = new DataKey<Integer>("PEGDOWN_EXTENSIONS", 0
+    @SuppressWarnings("PointlessBitwiseExpression") final static public DataKey<Integer> PEGDOWN_EXTENSIONS = new DataKey<>("PEGDOWN_EXTENSIONS", 0
             //| Extensions.ABBREVIATIONS
             //| Extensions.EXTANCHORLINKS /*| Extensions.EXTANCHORLINKS_WRAP*/
             //| Extensions.AUTOLINKS
@@ -33,8 +32,8 @@ class PegdownParser extends IParseBase {
             //| Extensions.TRACE_PARSER
     );
 
-    final static public DataKey<Integer> PEGDOWN_EXTENSIONS_ADD = new DataKey<Integer>("PEGDOWN_EXTENSIONS_ADD", 0);
-    final static public DataKey<Integer> PEGDOWN_EXTENSIONS_REMOVE = new DataKey<Integer>("PEGDOWN_EXTENSIONS_REMOVE", 0);
+    final static public DataKey<Integer> PEGDOWN_EXTENSIONS_ADD = new DataKey<>("PEGDOWN_EXTENSIONS_ADD", 0);
+    final static public DataKey<Integer> PEGDOWN_EXTENSIONS_REMOVE = new DataKey<>("PEGDOWN_EXTENSIONS_REMOVE", 0);
 
     public static int getPegdownExtensions(DataHolder options) {
         return (PEGDOWN_EXTENSIONS.getFrom(options) | PEGDOWN_EXTENSIONS_ADD.getFrom(options)) & ~PEGDOWN_EXTENSIONS_REMOVE.getFrom(options);

@@ -6,6 +6,9 @@ import org.junit.runners.Suite;
 @Suite.SuiteClasses({
         ComboTableSpecTest.class,
         ComboTableFormatterSpecTest.class,
+        ComboTableManipulationSpecTest.class,
+        //TextCollectingVisitorTest.class,
+        MarkdownTableTest.class,
         //JiraTablesSpecTest.class,
 })
 public class ExtTablesTestSuite {
