@@ -256,6 +256,7 @@ flexmark-java
 
 * [ ] Add: Base64 image embedding in `HtmlRenderer` as an option with images processed by a
       handler.
+  * [ ] Add: base64 embedded image link resolver option or a sample on how to do it
 
 * [ ] Fix: #99, YamlFrontMatterBlockParser ignores multi-key list items
 
@@ -264,7 +265,6 @@ flexmark-java
 0.34.60
 -------
 
-* [ ] Add: base64 embedded image link resolver option or a sample on how to do it
 * [ ] Add: tests for table move column function
 * Add: table manipulation functions to `MarkdownTable` to allow easy modification of a markdown
   table which can then be output as formatted markdown text. This class implements table
