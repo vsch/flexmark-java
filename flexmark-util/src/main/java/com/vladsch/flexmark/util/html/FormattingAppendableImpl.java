@@ -966,6 +966,11 @@ public class FormattingAppendableImpl implements FormattingAppendable {
     }
 
     @Override
+    public int offsetWithPending() {
+        return myAppendable.getLength() + myPendingSpaces + myPendingEOL + (myPendingEOL > 0 ? myPrefix.length() : 0);
+    }
+
+    @Override
     public int column() {
         return myAppendable.getLength() - myLastEOLOffset;
     }

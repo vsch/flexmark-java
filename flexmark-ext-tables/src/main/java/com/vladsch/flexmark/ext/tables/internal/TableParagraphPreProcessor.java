@@ -246,27 +246,42 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
             }
 
             if (isIntellijDummyIdentifier) {
-                // need to combine leading and trailing id nodes with separators
-                NodeIterator nodes = new NodeIterator(tableRow.getFirstChild());
+                // combine leading intellij marker with next pipe and trailing with previous pipe
+                Node node = tableRow.getFirstChild();
+                if (node instanceof Text && node.getChars().equals(INTELLIJ_DUMMY_IDENTIFIER)) {
+                    // need to combine it with next separator and if no next, with previous one
+                    if (node.getNext() instanceof TableColumnSeparator) {
+                        Node sep = node.getNext();
+                        sep.setChars(node.getChars().baseSubSequence(node.getStartOffset(), sep.getEndOffset()));
+                        node.unlink();
+                    }
+                }
 
-                while (nodes.hasNext()) {
-                    Node node = nodes.next();
+                node = tableRow.getLastChild();
+                if (node instanceof Text && node.getChars().equals(INTELLIJ_DUMMY_IDENTIFIER)) {
+                    // need to combine it with next separator and if no next, with previous one
+                    if (node.getPrevious() instanceof TableColumnSeparator) {
+                        Node sep = node.getPrevious();
+                        sep.setChars(node.getChars().baseSubSequence(sep.getStartOffset(), node.getEndOffset()));
+                        node.unlink();
+                    }
+                }
+
+                // combine any intellij markers between pipes with next pipe since it is probably a span marker
+                node = tableRow.getFirstChild();
+
+                while (node != null) {
                     if (node instanceof Text && node.getChars().equals(INTELLIJ_DUMMY_IDENTIFIER)) {
-                        // need to combine it with next separator and if no next, with previous one
-                        if (nodes.hasNext() && nodes.peek() instanceof TableColumnSeparator) {
-                            Node sep = nodes.next();
+                        Node previous = node.getPrevious();
+                        Node next = node.getNext();
+                        if (previous instanceof TableColumnSeparator && next instanceof TableColumnSeparator && previous.getEndOffset() == node.getStartOffset() && node.getEndOffset() == next.getStartOffset()) {
+                            // need to combine it with next separator and if no next, with previous one
+                            Node sep = node.getNext();
                             sep.setChars(node.getChars().baseSubSequence(node.getStartOffset(), sep.getEndOffset()));
                             node.unlink();
-                        } else {
-                            // combine with previous
-                            Node prevNode = node.getPrevious();
-                            if (prevNode instanceof TableColumnSeparator) {
-                                // leading marker, not a real cell need to add it to the separator
-                                prevNode.setChars(node.getChars().baseSubSequence(prevNode.getStartOffset(), node.getEndOffset()));
-                                node.unlink();
-                            }
                         }
                     }
+                    node = node.getNext();
                 }
             }
 

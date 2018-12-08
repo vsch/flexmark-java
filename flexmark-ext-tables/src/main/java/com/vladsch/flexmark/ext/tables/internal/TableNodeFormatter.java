@@ -116,13 +116,25 @@ public class TableNodeFormatter implements NodeFormatter {
                     options.tableManipulator.apply(myTable, node);
                 }
 
-                myTable.normalize();
                 if (myTable.getMaxColumns() > 0) {
                     // output table
                     markdown.blankLine();
-                    myTable.finalizeTable();
                     myTable.appendTable(markdown);
                     markdown.blankLine();
+                    if (options.dumpIntellijOffsets) {
+                        int[] offsets = myTable.getIntelliJOffsets();
+                        if (offsets.length > 0) {
+                            markdown.append("\nIntelliJ Offsets").line();  // simulate flex example ast dump
+                            String sep = "  ";
+                            int i = 0;
+                            for (int offset : offsets) {
+                                i++;
+                                markdown.append(sep).append(String.format("%d[%d,%d (%d)]", i, offset, offset + 1, offset));
+                                sep = " ";
+                            }
+                            markdown.append("\n");
+                        }
+                    }
                 }
         }
 

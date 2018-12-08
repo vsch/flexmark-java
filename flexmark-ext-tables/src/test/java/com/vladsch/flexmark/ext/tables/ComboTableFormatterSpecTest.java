@@ -45,15 +45,17 @@ public class ComboTableFormatterSpecTest extends ComboSpecTestCase {
         optionsMap.put("left-align-marker-as-is", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_LEFT_ALIGN_MARKER, DiscretionaryText.AS_IS));
         optionsMap.put("left-align-marker-add", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_LEFT_ALIGN_MARKER, DiscretionaryText.ADD));
         optionsMap.put("left-align-marker-remove", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_LEFT_ALIGN_MARKER, DiscretionaryText.REMOVE));
-        optionsMap.put("dummy-identifier", new MutableDataSet().set(Parser.INTELLIJ_DUMMY_IDENTIFIER, true));
+        optionsMap.put("dummy-identifier", new MutableDataSet().set(Parser.INTELLIJ_DUMMY_IDENTIFIER, true).set(TableFormatOptions.FORMAT_TABLE_DUMP_INTELLIJ_OFFSETS, true));
         optionsMap.put("line-prefix", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_INDENT_PREFIX, ">   "));
         optionsMap.put("add-caption-spaces", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_CAPTION_SPACES, DiscretionaryText.ADD));
         optionsMap.put("remove-caption-spaces", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_CAPTION_SPACES, DiscretionaryText.REMOVE));
         optionsMap.put("add-caption", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_CAPTION, TableCaptionHandling.ADD));
         optionsMap.put("remove-empty-caption", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_CAPTION, TableCaptionHandling.REMOVE_EMPTY));
         optionsMap.put("remove-caption", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_CAPTION, TableCaptionHandling.REMOVE));
+        optionsMap.put("no-embed-intellij", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_EMBED_INTELLIJ_DUMMY_IDENTIFIER, false));
         optionsMap.put("markdown-navigator", new MutableDataSet()
                 .set(TablesExtension.FORMAT_TABLE_INDENT_PREFIX, "")
+                //.set(TablesExtension.FORMAT_TABLE_EMBED_INTELLIJ_DUMMY_IDENTIFIER, true)
                 .set(TablesExtension.FORMAT_TABLE_MIN_SEPARATOR_COLUMN_WIDTH, 3)
                 .set(TablesExtension.FORMAT_TABLE_LEAD_TRAIL_PIPES, true)
                 .set(TablesExtension.FORMAT_TABLE_ADJUST_COLUMN_WIDTH, true)

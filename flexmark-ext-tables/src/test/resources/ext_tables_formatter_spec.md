@@ -1209,9 +1209,11 @@ Should match
 ````````````````````````````````
 
 
+## Embed IntelliJ
+
 Should match
 
-```````````````````````````````` example(GFM: 14) options(markdown-navigator, dummy-identifier)
+```````````````````````````````` example(Embed IntelliJ: 1) options(markdown-navigator, dummy-identifier)
 |     Feature     | Basic | Enhanced |
 |:---------------: ⎮ |:-----:|:--------:|
 | ew Tab soasdsfd |   X   |    X     |
@@ -1229,10 +1231,13 @@ Should match
 | Support for De  |   X   |    X     |
 | Warning and Er  |   X   |    X     |
 
+IntelliJ Offsets
+1[56,57 (56)]
+
 ````````````````````````````````
 
 
-```````````````````````````````` example(GFM: 15) options(markdown-navigator, dummy-identifier)
+```````````````````````````````` example(Embed IntelliJ: 2) options(markdown-navigator, dummy-identifier)
 |     Feature     | Basic | Enhanced |
 |:----------------------------⎮------:|:-----:|:--------:|
 | ew Tab soasdsfd |   X   |    X     |
@@ -1244,10 +1249,13 @@ Should match
 | ew Tab soasdsfd |   X   |    X     |
 |    dfhighig     |   X   |    X     |
 
+IntelliJ Offsets
+1[56,57 (56)]
+
 ````````````````````````````````
 
 
-```````````````````````````````` example(GFM: 16) options(markdown-navigator, dummy-identifier)
+```````````````````````````````` example(Embed IntelliJ: 3) options(markdown-navigator, dummy-identifier)
 |     Feature     | Basic | Enhanced |
 |:----------⎮------:|:-----:|:--------:|
 | ew Tab soasdsfd |   X   |    X     |
@@ -1259,10 +1267,13 @@ Should match
 | ew Tab soasdsfd |   X   |    X     |
 |    dfhighig     |   X   |    X     |
 
+IntelliJ Offsets
+1[52,53 (52)]
+
 ````````````````````````````````
 
 
-```````````````````````````````` example(GFM: 17) options(markdown-navigator, dummy-identifier)
+```````````````````````````````` example(Embed IntelliJ: 4) options(markdown-navigator, dummy-identifier)
 |     Feature     | Basic | Enhanced |
 |:---------⎮------:|:-----:|:--------:|
 | ew Tab soasdsfd |   X   |    X     |
@@ -1274,10 +1285,13 @@ Should match
 | ew Tab soasdsfd |   X   |    X     |
 |    dfhighig     |   X   |    X     |
 
+IntelliJ Offsets
+1[51,52 (51)]
+
 ````````````````````````````````
 
 
-```````````````````````````````` example(GFM: 18) options(markdown-navigator, dummy-identifier)
+```````````````````````````````` example(Embed IntelliJ: 5) options(markdown-navigator, dummy-identifier)
 |     Feature     | Basic | Enhanced |
 |    ⎮          :----------------------------------:|:-----:|:--------:|
 | ew Tab soasdsfd |   X   |    X     |
@@ -1289,10 +1303,13 @@ Should match
 | ew Tab soasdsfd |   X   |    X     |
 |    dfhighig     |   X   |    X     |
 
+IntelliJ Offsets
+1[41,42 (41)]
+
 ````````````````````````````````
 
 
-```````````````````````````````` example(GFM: 19) options(markdown-navigator, dummy-identifier)
+```````````````````````````````` example(Embed IntelliJ: 6) options(markdown-navigator, dummy-identifier)
 |     Feature     | Basic | Enhanced |
 |:----------------------------------:            ⎮          |:-----:|:--------:|
 | ew Tab soasdsfd |   X   |    X     |
@@ -1304,10 +1321,13 @@ Should match
 | ew Tab soasdsfd |   X   |    X     |
 |    dfhighig     |   X   |    X     |
 
+IntelliJ Offsets
+1[56,57 (56)]
+
 ````````````````````````````````
 
 
-```````````````````````````````` example(GFM: 20) options(markdown-navigator, dummy-identifier)
+```````````````````````````````` example(Embed IntelliJ: 7) options(markdown-navigator, dummy-identifier)
 |     Feature     | Basic | Enhanced |
 |:----------------------------------:                      |:-----:|:--------:|
 | ew Tab soasdsfd     ⎮      |   X   |    X     |
@@ -1319,10 +1339,13 @@ Should match
 | ew Tab soasdsfd     ⎮ |   X   |    X     |
 |       dfhighig       |   X   |    X     |
 
+IntelliJ Offsets
+1[110,111 (110)]
+
 ````````````````````````````````
 
 
-```````````````````````````````` example(GFM: 21) options(markdown-navigator, line-prefix)
+```````````````````````````````` example(Embed IntelliJ: 8) options(markdown-navigator, line-prefix, dummy-identifier)
 |     Feature     | Basic | Enhanced |
 |:----------------------------------:                      |:-----:|:--------:|
 | ew Tab soasdsfd     ⎮      |   X   |    X     |
@@ -1333,6 +1356,163 @@ Should match
 >   |:--------------------:|:-----:|:--------:|
 >   | ew Tab soasdsfd     ⎮ |   X   |    X     |
 >   |       dfhighig       |   X   |    X     |
+
+IntelliJ Offsets
+1[122,123 (122)]
+
+````````````````````````````````
+
+
+## IntelliJ NoEmbed
+
+Should match
+
+```````````````````````````````` example(IntelliJ NoEmbed: 1) options(markdown-navigator, dummy-identifier, no-embed-intellij)
+|     Feature     | Basic | Enhanced |
+|:---------------: ⎮ |:-----:|:--------:|
+| ew Tab soasdsfd |   X   |    X     |
+|    dfhighig     |   X   |    X     |
+| Table syntax h  |   X   |    X     |
+| Support for De  |   X   |    X     |
+| Warning and Er  |   X   |    X     |
+
+.
+|     Feature     | Basic | Enhanced |
+|:---------------:|:-----:|:--------:|
+| ew Tab soasdsfd |   X   |    X     |
+|    dfhighig     |   X   |    X     |
+| Table syntax h  |   X   |    X     |
+| Support for De  |   X   |    X     |
+| Warning and Er  |   X   |    X     |
+
+IntelliJ Offsets
+1[56,57 (56)]
+
+````````````````````````````````
+
+
+```````````````````````````````` example(IntelliJ NoEmbed: 2) options(markdown-navigator, dummy-identifier, no-embed-intellij)
+|     Feature     | Basic | Enhanced |
+|:----------------------------⎮------:|:-----:|:--------:|
+| ew Tab soasdsfd |   X   |    X     |
+|    dfhighig     |   X   |    X     |
+
+.
+|     Feature     | Basic | Enhanced |
+|:---------------:|:-----:|:--------:|
+| ew Tab soasdsfd |   X   |    X     |
+|    dfhighig     |   X   |    X     |
+
+IntelliJ Offsets
+1[56,57 (56)]
+
+````````````````````````````````
+
+
+```````````````````````````````` example(IntelliJ NoEmbed: 3) options(markdown-navigator, dummy-identifier, no-embed-intellij)
+|     Feature     | Basic | Enhanced |
+|:----------⎮------:|:-----:|:--------:|
+| ew Tab soasdsfd |   X   |    X     |
+|    dfhighig     |   X   |    X     |
+
+.
+|     Feature     | Basic | Enhanced |
+|:---------------:|:-----:|:--------:|
+| ew Tab soasdsfd |   X   |    X     |
+|    dfhighig     |   X   |    X     |
+
+IntelliJ Offsets
+1[52,53 (52)]
+
+````````````````````````````````
+
+
+```````````````````````````````` example(IntelliJ NoEmbed: 4) options(markdown-navigator, dummy-identifier, no-embed-intellij)
+|     Feature     | Basic | Enhanced |
+|:---------⎮------:|:-----:|:--------:|
+| ew Tab soasdsfd |   X   |    X     |
+|    dfhighig     |   X   |    X     |
+
+.
+|     Feature     | Basic | Enhanced |
+|:---------------:|:-----:|:--------:|
+| ew Tab soasdsfd |   X   |    X     |
+|    dfhighig     |   X   |    X     |
+
+IntelliJ Offsets
+1[51,52 (51)]
+
+````````````````````````````````
+
+
+```````````````````````````````` example(IntelliJ NoEmbed: 5) options(markdown-navigator, dummy-identifier, no-embed-intellij)
+|     Feature     | Basic | Enhanced |
+|    ⎮          :----------------------------------:|:-----:|:--------:|
+| ew Tab soasdsfd |   X   |    X     |
+|    dfhighig     |   X   |    X     |
+
+.
+|     Feature     | Basic | Enhanced |
+|:---------------:|:-----:|:--------:|
+| ew Tab soasdsfd |   X   |    X     |
+|    dfhighig     |   X   |    X     |
+
+IntelliJ Offsets
+1[41,42 (41)]
+
+````````````````````````````````
+
+
+```````````````````````````````` example(IntelliJ NoEmbed: 6) options(markdown-navigator, dummy-identifier, no-embed-intellij)
+|     Feature     | Basic | Enhanced |
+|:----------------------------------:            ⎮          |:-----:|:--------:|
+| ew Tab soasdsfd |   X   |    X     |
+|    dfhighig     |   X   |    X     |
+
+.
+|     Feature     | Basic | Enhanced |
+|:---------------:|:-----:|:--------:|
+| ew Tab soasdsfd |   X   |    X     |
+|    dfhighig     |   X   |    X     |
+
+IntelliJ Offsets
+1[56,57 (56)]
+
+````````````````````````````````
+
+
+```````````````````````````````` example(IntelliJ NoEmbed: 7) options(markdown-navigator, dummy-identifier, no-embed-intellij)
+|     Feature     | Basic | Enhanced |
+|:----------------------------------:                      |:-----:|:--------:|
+| ew Tab soasdsfd     ⎮      |   X   |    X     |
+|    dfhighig     |   X   |    X     |
+
+.
+|       Feature        | Basic | Enhanced |
+|:--------------------:|:-----:|:--------:|
+| ew Tab soasdsfd      |   X   |    X     |
+|       dfhighig       |   X   |    X     |
+
+IntelliJ Offsets
+1[110,111 (110)]
+
+````````````````````````````````
+
+
+```````````````````````````````` example(IntelliJ NoEmbed: 8) options(markdown-navigator, line-prefix, dummy-identifier, no-embed-intellij)
+|     Feature     | Basic | Enhanced |
+|:----------------------------------:                      |:-----:|:--------:|
+| ew Tab soasdsfd     ⎮      |   X   |    X     |
+|    dfhighig     |   X   |    X     |
+
+.
+>   |       Feature        | Basic | Enhanced |
+>   |:--------------------:|:-----:|:--------:|
+>   | ew Tab soasdsfd      |   X   |    X     |
+>   |       dfhighig       |   X   |    X     |
+
+IntelliJ Offsets
+1[122,123 (122)]
 
 ````````````````````````````````
 

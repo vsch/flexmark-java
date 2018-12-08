@@ -372,6 +372,13 @@ public interface FormattingAppendable extends Appendable {
     int offset();
 
     /**
+     * Get offset after last append, include any pending: EOLs, and indents
+     *
+     * @return character offset after last append or flush
+     */
+    int offsetWithPending();
+
+    /**
      * Get column offset after last append, does not include any pending: EOLs, spaces nor indents
      *
      * @return column offset after last append or flush from previous EOL

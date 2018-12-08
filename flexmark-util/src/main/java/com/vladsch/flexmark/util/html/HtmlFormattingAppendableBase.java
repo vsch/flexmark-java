@@ -616,6 +616,9 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
     public int offset() { return out.offset(); }
 
     @Override
+    public int offsetWithPending() { return out.offsetWithPending(); }
+
+    @Override
     public int column() { return out.column(); }
 
     @Override

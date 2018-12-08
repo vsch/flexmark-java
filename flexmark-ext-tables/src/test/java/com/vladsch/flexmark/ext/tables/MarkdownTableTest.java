@@ -37,7 +37,6 @@ public class MarkdownTableTest {
 
     private String getFormattedTable(MarkdownTable table, String linePrefix, String intellijDummyIdentifier) {
         MarkdownWriter out = new MarkdownWriter(new StringBuilder(), MarkdownWriter.FORMAT_ALL);
-        table.finalizeTable();
         table.appendTable(out);
         out.flush();
         return out.toString();
@@ -48,7 +47,6 @@ public class MarkdownTableTest {
 
         for (MarkdownTable table : tables) {
             MarkdownWriter out = new MarkdownWriter(new StringBuilder(), MarkdownWriter.FORMAT_ALL);
-            table.finalizeTable();
             table.appendTable(out);
             out.flush();
             formatted.add(out.toString());
@@ -470,9 +468,45 @@ public class MarkdownTableTest {
         assertIndexOf(0, 4, table7.body.rows.get(5).indexOf(4));
     }
 
+    final static private String markdown8 = "some text\n\n" +
+            "| Header 1.1 | Header 1.2 | Header 1.3 | Header 1.4 | Header 1.5 |\n" +
+            "| Header 2.1 | Header 2.2 | Header 2.3 | Header 2.4 | Header 2.5 |\n" +
+            "|------------|------------|------------|------------|------------|\n" +
+            "| Data 1.1   | Data 1.2   | Data 1.3   | Data 1.4   | Data 1.5   |\n" +
+            "| Data 2.1               || Data 2.3   | Data 2.4   | Data 2.5   |\n" +
+            "| Data 3.1                           ||| Data 3.4   | Data 3.5   |\n" +
+            "| Data 4.1                                       |||| Data 4.5   |\n" +
+            "";
+
+    void assertCellInfo(String message, int row, int column, Integer insideCol, Integer insideOffset, MarkdownTable.CellOffsetInfo info) {
+        assertEquals(message, new MarkdownTable.CellOffsetInfo(null,null, row, column, insideCol, insideOffset).toString(), info.toString());
+    }
+
+    @Test
+    public void test_ExactColumn() {
+        MarkdownTable table8 = getTable(markdown8);
+        int offset = 11;
+
+        assertEquals(offset, table8.getTableStartOffset());
+        
+        assertCellInfo("", 0, 0, null, null, table8.getCellOffsetInfo(10));
+        assertCellInfo("", 0, 0, null, null, table8.getCellOffsetInfo(11));
+        assertCellInfo("", 0, 0, 0, 0, table8.getCellOffsetInfo(offset+1));
+        assertCellInfo("", 0, 0, 0, 1, table8.getCellOffsetInfo(offset+2));
+        
+        // last cell
+        assertCellInfo("", 0, 4, 4, 10, table8.getCellOffsetInfo(offset+64));
+        assertCellInfo("", 0, 5, null, null, table8.getCellOffsetInfo(offset+65));
+        
+        // line 2
+        assertCellInfo("", 1, 0, null, null, table8.getCellOffsetInfo(offset+67));
+        assertCellInfo("", 1, 0, 0, 0, table8.getCellOffsetInfo(offset+68));
+    }
+
     // these are tested with manipulators
     @Test
     public void allRows() {
+        
     }
 
     @Test

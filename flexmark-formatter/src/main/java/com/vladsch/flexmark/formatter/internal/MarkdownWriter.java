@@ -122,6 +122,7 @@ public class MarkdownWriter implements FormattingAppendable {
     @Override public int getLineCount()                                                                                         { return myAppendable.getLineCount(); }
     @Override public int getModCount()                                                                                          { return myAppendable.getModCount(); }
     @Override public int offset()                                                                                               { return myAppendable.offset(); }
+    @Override public int offsetWithPending()                                                                                    { return myAppendable.offsetWithPending(); }
     @Override public int column()                                                                                               { return myAppendable.column(); }
     @Override public int columnWith(final CharSequence csq, final int start, final int end)                                     { return myAppendable.columnWith(csq,start,end); }
     @Override public int lastOffset()                                                                                           { return myAppendable.lastOffset(); }
