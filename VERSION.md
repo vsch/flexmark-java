@@ -266,8 +266,18 @@ flexmark-java
 ------
 
 * [ ] Add: table navigation helpers, tests needed.
+* [ ] Test: navigation
+  * [ ] Cells next/prev
+  * [ ] Rows next/prev
+  * [ ] Next/Prev Tab
+* [ ] For next/prev tab in separator stop at start and end of cell for editing `:`
+* [ ] For next/prev tab in table navigate to end of text to allow continued typing
+* [ ] For next/prev tab in caption navigate to end of text like a cell
+* [ ] Add: option for table navigation to select cell text (excluding separator)
+* [ ] Test: `addTrackOffset()` for caption before/inside/after location. Add these to
+      `TableCellInfo` so the caption tests are not bastardized.
 * Add: inline parser will no longer process block nodes marked as `DoNotDecorate` with inline
-  processing extensions. To prevent undesired inline processing of table separator by
+  parser extensions to prevent undesired inline processing of nodes such as a table separator by
   typographic extension.
 * Add: table manipulation functions to `MarkdownTable` to allow easy modification of a markdown
   table which can then be output as formatted markdown text. This class implements table

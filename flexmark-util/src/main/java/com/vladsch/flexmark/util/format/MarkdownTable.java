@@ -28,6 +28,9 @@ public class MarkdownTable {
     private BasedSequence captionClose = BasedSequence.NULL;
     private boolean isHeading;
     private boolean isSeparator;
+    private int trackBeforeCaptionOffset = NOT_TRACKED;
+    private int trackCaptionOffset = NOT_TRACKED;
+    private int trackAfterCaptionOffset = NOT_TRACKED;
 
     // used by finalization and conversion to text
     private CellAlignment[] alignments;
@@ -220,12 +223,18 @@ public class MarkdownTable {
             // in the after span
             info.tableRow.cells.set(info.column, info.tableCell.withSpanTrackedOffset(offset - info.tableCell.getInsideEndOffset()));
             return true;
-        } else {
+        } else if (info.isAfterCells()) {
             // must be after the row, can go after the row.
-            assert info.isAfterCells();
             info.tableRow.setAfterOffset(offset);
             return true;
+        } else if (!captionOpen.isEmpty()) {
+            // must be after last row or on caption row 
+             if (offset <= captionOpen.getStartOffset()) trackBeforeCaptionOffset = offset;
+             else if (offset >= captionClose.getEndOffset()) trackAfterCaptionOffset = offset;
+             else trackCaptionOffset = offset;
+             return true;
         }
+        return false;
     }
 
     /*
