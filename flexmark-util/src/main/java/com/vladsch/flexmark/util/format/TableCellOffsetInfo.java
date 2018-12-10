@@ -33,11 +33,23 @@ public class TableCellOffsetInfo {
     }
 
     public boolean isBeforeCells() {
-        return tableRow != null && tableCell != null && insideColumn == null && offset < tableCell.getStartOffset();
+        return tableRow != null && tableCell != null && insideColumn == null && offset < tableCell.getStartOffset(getPreviousCell());
+    }
+
+    public TableCell getPreviousCell() {
+        return getPreviousCell(1);
+    }
+
+    public TableCell getPreviousCell(int offset) {
+        return getPreviousCell(tableRow, offset);
+    }
+
+    public TableCell getPreviousCell(TableRow tableRow, int offset) {
+        return column >= offset && tableRow != null ? tableRow.cells.get(column - offset) : null;
     }
 
     public boolean isInCellSpan() {
-        return tableRow != null && tableCell != null && insideColumn == null && offset >= tableCell.getStartOffset() && offset < tableCell.getEndOffset();
+        return tableRow != null && tableCell != null && insideColumn == null && offset >= tableCell.getStartOffset(getPreviousCell()) && offset < tableCell.getEndOffset();
     }
 
     public boolean isAfterCells() {
@@ -72,9 +84,12 @@ public class TableCellOffsetInfo {
      */
     public TableCellOffsetInfo offsetPreviousCell(Integer insideOffset) {
         if (isInsideColumn() && column > 0) {
-            TableCell cell = tableRow.cells.get(column - 1);
-            if (insideOffset == null) cell.textToInsideOffset(tableCell.insideToTextOffset(this.insideOffset == null ? 0 : this.insideOffset));
-            return table.getCellOffsetInfo(cell.getTextStartOffset() + (maxLimit(cell.getCellSize(), minLimit(0, insideOffset))));
+            TableCell cell = getPreviousCell();
+            TableCell previousCell = getPreviousCell(2);
+            if (insideOffset == null) {
+                cell.textToInsideOffset(tableCell.insideToTextOffset(this.insideOffset == null ? 0 : this.insideOffset, previousCell), previousCell);
+            }
+            return table.getCellOffsetInfo(cell.getTextStartOffset() + (maxLimit(cell.getCellSize(previousCell), minLimit(0, insideOffset))));
         }
         return null;
     }
@@ -87,9 +102,10 @@ public class TableCellOffsetInfo {
      */
     public TableCellOffsetInfo offsetNextCell(Integer insideOffset) {
         if (isInsideColumn() && column + 1 < tableRow.cells.size()) {
-            TableCell cell = tableRow.cells.get(column + 1);
-            if (insideOffset == null) cell.textToInsideOffset(tableCell.insideToTextOffset(this.insideOffset == null ? 0 : this.insideOffset));
-            return table.getCellOffsetInfo(cell.getTextStartOffset() + (maxLimit(cell.getCellSize(), minLimit(0, insideOffset))));
+            TableCell cell = getPreviousCell();
+            TableCell previousCell = getPreviousCell(2);
+            if (insideOffset == null) cell.textToInsideOffset(tableCell.insideToTextOffset(this.insideOffset == null ? 0 : this.insideOffset, previousCell), previousCell);
+            return table.getCellOffsetInfo(cell.getTextStartOffset() + (maxLimit(cell.getCellSize(previousCell), minLimit(0, insideOffset))));
         }
         return null;
     }
@@ -106,12 +122,13 @@ public class TableCellOffsetInfo {
             TableRow otherRow = allRows.get(this.row - 1);
             if (isInsideColumn() && column < otherRow.cells.size()) {
                 // transfer inside offset
-                TableCell cell = otherRow.cells.get(column);
-                if (insideOffset == null) cell.textToInsideOffset(tableCell.insideToTextOffset(this.insideOffset == null ? 0 : this.insideOffset));
-                return table.getCellOffsetInfo(cell.getTextStartOffset() + (maxLimit(cell.getCellSize(), minLimit(0, insideOffset))));
+                TableCell cell = getPreviousCell();
+                TableCell previousCell = getPreviousCell(2);
+                if (insideOffset == null) cell.textToInsideOffset(tableCell.insideToTextOffset(this.insideOffset == null ? 0 : this.insideOffset, previousCell), previousCell);
+                return table.getCellOffsetInfo(cell.getTextStartOffset() + (maxLimit(cell.getCellSize(previousCell), minLimit(0, insideOffset))));
             } else {
                 if (isBeforeCells()) {
-                    return table.getCellOffsetInfo(otherRow.cells.get(0).getStartOffset());
+                    return table.getCellOffsetInfo(otherRow.cells.get(0).getStartOffset(null));
                 } else {
                     return table.getCellOffsetInfo(otherRow.cells.get(otherRow.cells.size() - 1).getEndOffset());
                 }
@@ -133,11 +150,12 @@ public class TableCellOffsetInfo {
             if (isInsideColumn() && column < otherRow.cells.size()) {
                 // transfer inside offset
                 TableCell cell = otherRow.cells.get(column);
-                if (insideOffset == null) cell.textToInsideOffset(tableCell.insideToTextOffset(this.insideOffset == null ? 0 : this.insideOffset));
-                return table.getCellOffsetInfo(cell.getTextStartOffset() + (maxLimit(cell.getCellSize(), minLimit(0, insideOffset))));
+                TableCell previousCell = getPreviousCell(otherRow, 1);
+                if (insideOffset == null) cell.textToInsideOffset(tableCell.insideToTextOffset(this.insideOffset == null ? 0 : this.insideOffset, previousCell), previousCell);
+                return table.getCellOffsetInfo(cell.getTextStartOffset() + (maxLimit(cell.getCellSize(previousCell), minLimit(0, insideOffset))));
             } else {
                 if (isBeforeCells()) {
-                    return table.getCellOffsetInfo(otherRow.cells.get(0).getStartOffset());
+                    return table.getCellOffsetInfo(otherRow.cells.get(0).getStartOffset(null));
                 } else {
                     return table.getCellOffsetInfo(otherRow.cells.get(otherRow.cells.size() - 1).getEndOffset());
                 }
