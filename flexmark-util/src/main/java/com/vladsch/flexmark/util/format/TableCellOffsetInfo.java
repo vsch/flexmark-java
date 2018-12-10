@@ -1,5 +1,7 @@
 package com.vladsch.flexmark.util.format;
 
+import com.vladsch.flexmark.util.sequence.BasedSequence;
+
 import java.util.List;
 
 import static com.vladsch.flexmark.util.Utils.maxLimit;
@@ -186,18 +188,31 @@ public class TableCellOffsetInfo {
                 } else {
                     return table.getCellOffsetInfo(table.getCaptionOpen().getEndOffset());
                 }
-            } else {
-                List<TableRow> allRows = table.getAllRows();
-                TableRow lastRow = allRows.get(allRows.size() - 1);
-                TableCell lastCell = lastRow.cells.get(lastRow.cells.size() - 1);
-                int offset = lastCell.getEndOffset();
-                int eolPos = lastCell.text.endOfLineAnyEOL(offset);
-                return table.getCellOffsetInfo(offset + (eolPos == -1 ? 0 : eolPos + lastCell.text.eolLength(eolPos)));
             }
         } else {
             // go to next cell of this row
-            return table.getCellOffsetInfo(tableRow.cells.get(column+1).getTextStartOffset());
+            if (tableRow != null) {
+                return table.getCellOffsetInfo(tableRow.cells.get(column + 1).getTextStartOffset());
+            }
         }
+
+        // go after the table
+        BasedSequence baseSequence;
+        int offset;
+
+        if (!table.getCaptionOpen().isEmpty()) {
+            baseSequence = table.getCaptionClose().getBaseSequence();
+            offset = table.getCaptionClose().getEndOffset();
+        } else {
+            List<TableRow> allRows = table.getAllRows();
+            TableRow lastRow = allRows.get(allRows.size() - 1);
+            TableCell lastCell = lastRow.cells.get(lastRow.cells.size() - 1);
+            offset = lastCell.getEndOffset();
+            baseSequence = lastCell.text.getBaseSequence();
+        }
+        
+        int eolPos = baseSequence.endOfLineAnyEOL(offset);
+        return table.getCellOffsetInfo(eolPos == -1 ? offset : eolPos + baseSequence.eolLength(eolPos));
     }
 
     /**
@@ -223,7 +238,17 @@ public class TableCellOffsetInfo {
             return table.getCellOffsetInfo(otherRow.cells.get(otherRow.cells.size() - 1).getTextStartOffset());
         } else {
             // go to previous cell
-            return table.getCellOffsetInfo(tableRow.cells.get(column-1).getTextStartOffset());
+            if (tableRow != null) {
+                return table.getCellOffsetInfo(tableRow.cells.get(column - 1).getTextStartOffset());
+            } else {
+                // last cell of the last row
+                List<TableRow> allRows = table.getAllRows();
+                TableRow lastRow = allRows.get(allRows.size() - 1);
+                TableCell lastCell = lastRow.cells.get(lastRow.cells.size() - 1);
+
+                int offset = lastCell.getStartOffset(getPreviousCell(lastRow, lastRow.cells.size() - 1));
+                return table.getCellOffsetInfo(offset);
+            }
         }
     }
 

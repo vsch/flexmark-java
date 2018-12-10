@@ -276,6 +276,11 @@ flexmark-java
 * [ ] Add: option for table navigation to select cell text (excluding separator)
 * [ ] Test: `addTrackOffset()` for caption before/inside/after location. Add these to
       `TableCellInfo` so the caption tests are not bastardized.
+  * [ ] Add: `isBeforeCaption()`, `isInsideCaption()`, `isAfterCaption()`
+* [ ] Add: change offset tracking to provide nullable `Character` and `isDeleted` nullable
+      `Boolean`. `isDeleted` == `null`, neither deleted nor inserted, `true` - deleted, `false` -
+      inserted. Character null - unknown, else character typed, inserted or deleted. Then all
+      internal changes to what is needed will be isolated inside the `MarkdownTable` class.
 * Add: inline parser will no longer process block nodes marked as `DoNotDecorate` with inline
   parser extensions to prevent undesired inline processing of nodes such as a table separator by
   typographic extension.
