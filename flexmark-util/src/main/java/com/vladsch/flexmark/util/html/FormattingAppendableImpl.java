@@ -967,7 +967,7 @@ public class FormattingAppendableImpl implements FormattingAppendable {
 
     @Override
     public int offsetWithPending() {
-        return myAppendable.getLength() + myPendingSpaces + myPendingEOL + (myPendingEOL > 0 ? myPrefix.length() : 0);
+        return myAppendable.getLength() + (myModCountOfLastEOL == myModCount && haveOptions(SUPPRESS_TRAILING_WHITESPACE) ? 0 : myPendingSpaces) + myPendingEOL + (myPendingEOL > 0 ? myPrefix.length() : 0);
     }
 
     @Override

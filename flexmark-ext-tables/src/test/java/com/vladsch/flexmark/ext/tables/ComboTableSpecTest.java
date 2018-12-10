@@ -1,5 +1,6 @@
 package com.vladsch.flexmark.ext.tables;
 
+import com.vladsch.flexmark.ext.typographic.TypographicExtension;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.spec.SpecExample;
@@ -31,10 +32,10 @@ public class ComboTableSpecTest extends ComboSpecTestCase {
                 .set(TablesExtension.HEADER_SEPARATOR_COLUMN_MATCH, true)
         );
 
+        optionsMap.put("typographic", new MutableDataSet().set(Parser.EXTENSIONS, Arrays.asList(TablesExtension.create(), TypographicExtension.create())));
         optionsMap.put("keep-whitespace", new MutableDataSet().set(TablesExtension.TRIM_CELL_WHITESPACE, false));
         optionsMap.put("min-dashes-2", new MutableDataSet().set(TablesExtension.MIN_SEPARATOR_DASHES, 2));
         optionsMap.put("min-dashes-1", new MutableDataSet().set(TablesExtension.MIN_SEPARATOR_DASHES, 1));
-        optionsMap.put("intellij-identifier", new MutableDataSet().set(Parser.INTELLIJ_DUMMY_IDENTIFIER, true));
         optionsMap.put("strip-indent", new MutableDataSet().set(SOURCE_INDENT, "> > "));
         optionsMap.put("sub-parse", new MutableDataSet()
                 .set(SOURCE_PREFIX, "" +

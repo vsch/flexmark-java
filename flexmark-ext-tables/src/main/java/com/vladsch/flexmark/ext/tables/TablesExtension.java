@@ -56,7 +56,6 @@ public class TablesExtension implements Parser.ParserExtension, HtmlRenderer.Htm
     public static final DataKey<TableCaptionHandling> FORMAT_TABLE_CAPTION = TableFormatOptions.FORMAT_TABLE_CAPTION;
     public static final DataKey<DiscretionaryText> FORMAT_TABLE_CAPTION_SPACES = TableFormatOptions.FORMAT_TABLE_CAPTION_SPACES;
     public static final DataKey<String> FORMAT_TABLE_INDENT_PREFIX = TableFormatOptions.FORMAT_TABLE_INDENT_PREFIX;
-    public static final DataKey<Boolean> FORMAT_TABLE_EMBED_INTELLIJ_DUMMY_IDENTIFIER = TableFormatOptions.FORMAT_TABLE_EMBED_INTELLIJ_DUMMY_IDENTIFIER;
 
     /**
      * @deprecated use FORMAT_TABLE_ prefixed name

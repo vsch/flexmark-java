@@ -386,18 +386,22 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
         this.lastDelimiter = null;
         this.lastBracket = null;
 
+        boolean customOnly = (block instanceof DoNotDecorate);// || block.getAncestorOfType(DoNotDecorate.class) != null;
+        
         boolean moreToParse;
         do {
-            moreToParse = parseInline();
+            moreToParse = parseInline(customOnly);
         } while (moreToParse);
 
         processDelimiters(null);
         flushTextNode();
 
-        if (inlineParserExtensions != null) {
-            for (List<InlineParserExtension> extensionList : inlineParserExtensions.values()) {
-                for (InlineParserExtension extension : extensionList) {
-                    extension.finalizeBlock(this);
+        if (!customOnly) {
+            if (inlineParserExtensions != null) {
+                for (List<InlineParserExtension> extensionList : inlineParserExtensions.values()) {
+                    for (InlineParserExtension extension : extensionList) {
+                        extension.finalizeBlock(this);
+                    }
                 }
             }
         }
@@ -618,13 +622,18 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
      * @return false on failure true on success
      */
     protected boolean parseInline() {
-        boolean res;
+        return parseInline(false);
+    }
+
+    protected boolean parseInline(boolean customOnly) {
+        boolean res = false;
+        
         char c = peek();
         if (c == '\0') {
             return false;
         }
 
-        if (inlineParserExtensions != null) {
+        if (!customOnly && inlineParserExtensions != null) {
             List<InlineParserExtension> extensions = inlineParserExtensions.get(c);
             if (extensions != null) {
                 for (InlineParserExtension extension : extensions) {

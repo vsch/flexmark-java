@@ -3067,87 +3067,13 @@ These also test the methods for `MarkdownTable` which is used for actual table m
 ````````````````````````````````
 
 
-## IntelliJ Move
-
-```````````````````````````````` example(IntelliJ Move: 1) options(markdown-navigator, dummy-identifier, move-col-1-2)
-| Header 1.1 ⎮ | Header 1.2  | Header 1.3  | Header 1.4  | Header 1.5  |
-| Header 2.1 ⎮ | Header 2.2  | Header 2.3  | Header 2.4  | Header 2.5  |
-|---⎮|:---|---:|:---:|---|
-| Data 1.1 ⎮ |    Data 1.2  | Data 1.3  | Data 1.4  | Data 1.5  |
-| Data 2.1 ⎮ ||   Data 2.3  | Data 2.4  | Data 2.5  |
-| Data 3.1 ⎮ |||  Data 3.4  | Data 3.5  |
-| Data 4.1 ⎮ |||| Data 4.5  |
-| Data 5.1 ⎮ |||||
-| ⎮|||||
-| Data 6.1 ⎮ | Data 6.2  ||  Data 6.4  | Data 6.5  |
-| Data 7.1 ⎮ | Data 7.2  ||| Data 7.5  |
-| Data 8.1 ⎮ | Data 8.2  ||||
-| Data 9.1 ⎮ | Data 9.2  | Data 9.3  || Data 9.5  |
-| Data 10.1 ⎮ | Data 10.2  | Data 10.3  |||
-| Data 11.1 ⎮ | Data 11.2  | Data 11.3  | Data 11.4  ||
-
-.
-| Header 1.2 | Header 1.1 ⎮ | Header 1.3 | Header 1.4 | Header 1.5 |
-| Header 2.2 | Header 2.1 ⎮ | Header 2.3 | Header 2.4 | Header 2.5 |
-|:-----------|:---⎮---------|-----------:|:----------:|:-----------|
-| Data 1.2   | Data 1.1 ⎮   |   Data 1.3 |  Data 1.4  | Data 1.5   |
-| Data 2.1 ⎮               ||   Data 2.3 |  Data 2.4  | Data 2.5   |
-| Data 3.1 ⎮                           |||  Data 3.4  | Data 3.5   |
-| Data 4.1 ⎮                                       |||| Data 4.5   |
-| Data 5.1 ⎮                                                   |||||
-| ⎮                                                            |||||
-| Data 6.2   | Data 6.1 ⎮               ||  Data 6.4  | Data 6.5   |
-| Data 7.2   | Data 7.1 ⎮                           ||| Data 7.5   |
-| Data 8.2   | Data 8.1 ⎮                                       ||||
-| Data 9.2   | Data 9.1 ⎮   |               Data 9.3 || Data 9.5   |
-| Data 10.2  | Data 10.1 ⎮  |                          Data 10.3 |||
-| Data 11.2  | Data 11.1 ⎮  |  Data 11.3 |       Data 11.4        ||
-
-IntelliJ Offsets
-1[26,27 (26)] 2[95,96 (95)] 3[156,157 (156)] 4[231,232 (231)] 5[287,288 (287)] 6[356,357 (356)] 7[425,426 (425)] 8[494,495 (494)] 9[554,555 (554)] 10[645,646 (645)] 11[714,715 (714)] 12[783,784 (783)] 13[852,853 (852)] 14[922,923 (922)] 15[991,992 (991)]
-
-````````````````````````````````
-
-
-```````````````````````````````` example(IntelliJ Move: 2) options(markdown-navigator)
+```````````````````````````````` example(Move Col: 33) options(markdown-navigator)
 |---|:---|---:|:---:|---|
 |                                                             |||||
 
 .
 |:---|:---|---:|:---:|:---|
 |                     |||||
-
-````````````````````````````````
-
-
-```````````````````````````````` example(IntelliJ Move: 3) options(markdown-navigator, dummy-identifier, move-col-1-2)
-|---⎮|:---|---:|:---:|---|
-| Data 1.1 |    Data 1.2  | Data 1.3  | Data 1.4  | Data 1.5  |
-|  ⎮                                                           |||||
-
-.
-|:---------|:---⎮------|---------:|:--------:|:---------|
-| Data 1.2 | Data 1.1 | Data 1.3 | Data 1.4 | Data 1.5 |
-| ⎮                                                 |||||
-
-IntelliJ Offsets
-1[16,17 (16)] 2[117,118 (117)]
-
-````````````````````````````````
-
-
-```````````````````````````````` example(IntelliJ Move: 4) options(markdown-navigator, dummy-identifier, move-col-1-2)
-|---⎮|:---|---:|:---:|---|
-| Data 1.1 |    Data 1.2  | Data 1.3  | Data 1.4  | Data 1.5  |
-|                                                             ||⎮|||
-
-.
-|:---------|:---⎮------|---------:|:--------:|:---------|
-| Data 1.2 | Data 1.1 | Data 1.3 | Data 1.4 | Data 1.5 |
-|                                                  ||⎮|||
-
-IntelliJ Offsets
-1[16,17 (16)] 2[168,169 (168)]
 
 ````````````````````````````````
 

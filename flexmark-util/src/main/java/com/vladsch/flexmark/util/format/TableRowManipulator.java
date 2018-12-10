@@ -13,5 +13,5 @@ public interface TableRowManipulator {
      * @return action performed: <0 number of rows deleted, 0 - no change to rows, >0 - number of rows added, or BREAK to stop processing rows
      */
 
-    int apply(ArrayList<MarkdownTable.TableRow> rows, int index);
+    int apply(ArrayList<TableRow> rows, int index);
 }

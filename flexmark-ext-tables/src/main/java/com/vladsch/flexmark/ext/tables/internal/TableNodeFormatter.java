@@ -17,6 +17,7 @@ import com.vladsch.flexmark.util.sequence.BasedSequenceImpl;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import static com.vladsch.flexmark.formatter.RenderPurpose.FORMAT;
@@ -122,14 +123,14 @@ public class TableNodeFormatter implements NodeFormatter {
                     myTable.appendTable(markdown);
                     markdown.blankLine();
                     if (options.dumpIntellijOffsets) {
-                        int[] offsets = myTable.getIntelliJOffsets();
-                        if (offsets.length > 0) {
-                            markdown.append("\nIntelliJ Offsets").line();  // simulate flex example ast dump
+                        Map<Integer, Integer> offsets = myTable.getTrackedOffsets();
+                        if (offsets.size() > 0) {
+                            markdown.append("\nTracked Offsets").line();  // simulate flex example ast dump
                             String sep = "  ";
                             int i = 0;
-                            for (int offset : offsets) {
+                            for (Map.Entry<Integer, Integer> offset : offsets.entrySet()) {
                                 i++;
-                                markdown.append(sep).append(String.format("%d[%d,%d (%d)]", i, offset, offset + 1, offset));
+                                markdown.append(sep).append(String.format("%d:[%d,%d] was:[%d,%d]", i, offset.getValue(), offset.getValue() + 1, offset.getKey(), offset.getKey() + 1));
                                 sep = " ";
                             }
                             markdown.append("\n");
@@ -185,7 +186,7 @@ public class TableNodeFormatter implements NodeFormatter {
 
     private void render(final TableCell node, final NodeFormatterContext context, MarkdownWriter markdown) {
         if (context.getRenderPurpose() == FORMAT) {
-            myTable.addCell(new MarkdownTable.TableCell(node.getOpeningMarker(), options.trimCellWhitespace ? node.getText().trim() : node.getText(), node.getClosingMarker(), 1, node.getSpan(), node.getAlignment() == null ? CellAlignment.NONE : node.getAlignment().cellAlignment()));
+            myTable.addCell(new com.vladsch.flexmark.util.format.TableCell(node.getOpeningMarker(), options.trimCellWhitespace ? node.getText().trim() : node.getText(), node.getClosingMarker(), 1, node.getSpan(), node.getAlignment() == null ? CellAlignment.NONE : node.getAlignment().cellAlignment()));
         } else {
             if (node.getPrevious() == null) {
                 if (options.leadTrailPipes && node.getOpeningMarker().isEmpty()) markdown.append('|');

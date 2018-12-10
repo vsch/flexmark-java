@@ -29,10 +29,8 @@ public class TableFormatOptions implements MutableDataSetter {
     public static final DataKey<TableManipulator> FORMAT_TABLE_MANIPULATOR = new DataKey<>("FORMAT_TABLE_MANIPULATOR", TableManipulator.NULL);
 
     public static final DataKey<CharWidthProvider> FORMAT_CHAR_WIDTH_PROVIDER = new DataKey<>("FORMAT_CHAR_WIDTH_PROVIDER", CharWidthProvider.NULL);
-    public static final DataKey<Boolean> INTELLIJ_DUMMY_IDENTIFIER_ENABLED = new DataKey<>("INTELLIJ_DUMMY_IDENTIFIER", false);
-    public static final DataKey<Boolean> FORMAT_TABLE_EMBED_INTELLIJ_DUMMY_IDENTIFIER = new DataKey<>("FORMAT_TABLE_EMBED_INTELLIJ_DUMMY_IDENTIFIER", true);
     
-    public static final DataKey<Boolean> FORMAT_TABLE_DUMP_INTELLIJ_OFFSETS = new DataKey<>("FORMAT_TABLE_DUMP_INTELLIJ_OFFSETS", false);
+    public static final DataKey<Boolean> FORMAT_TABLE_DUMP_TRACKING_OFFSETS = new DataKey<>("FORMAT_TABLE_DUMP_TRACKING_OFFSETS", false);
 
     /**
      * @deprecated use FORMAT_TABLE_CAPTION with enum value, this option only has effect FORMAT_TABLE_CAPTION is set to AS_IS
@@ -93,8 +91,6 @@ public class TableFormatOptions implements MutableDataSetter {
     public final boolean removeCaption;
 
     public final boolean trimCellWhitespace;
-    public final boolean intellijDummyIdentifier;
-    public final boolean embedIntellijDummyIdentifier;
     public final boolean dumpIntellijOffsets;
     public final DiscretionaryText leftAlignMarker;
     public final TableCaptionHandling formatTableCaption;
@@ -130,10 +126,8 @@ public class TableFormatOptions implements MutableDataSetter {
         formatTableCaptionSpaces = FORMAT_TABLE_CAPTION_SPACES.getFrom(options);
         formatTableIndentPrefix = FORMAT_TABLE_INDENT_PREFIX.getFrom(options);
         trimCellWhitespace = FORMAT_TABLE_TRIM_CELL_WHITESPACE.getFrom(options);
-        intellijDummyIdentifier = INTELLIJ_DUMMY_IDENTIFIER_ENABLED.getFrom(options);
         tableManipulator = FORMAT_TABLE_MANIPULATOR.getFrom(options);
-        embedIntellijDummyIdentifier = FORMAT_TABLE_EMBED_INTELLIJ_DUMMY_IDENTIFIER.getFrom(options);
-        dumpIntellijOffsets = FORMAT_TABLE_DUMP_INTELLIJ_OFFSETS.getFrom(options);
+        dumpIntellijOffsets = FORMAT_TABLE_DUMP_TRACKING_OFFSETS.getFrom(options);
 
         spaceWidth = charWidthProvider.spaceWidth();
         spacePad = spaceAroundPipes ? 2 * spaceWidth : 0;
@@ -158,10 +152,8 @@ public class TableFormatOptions implements MutableDataSetter {
         dataHolder.set(FORMAT_TABLE_CAPTION_SPACES, formatTableCaptionSpaces);
         dataHolder.set(FORMAT_TABLE_INDENT_PREFIX, formatTableIndentPrefix);
         dataHolder.set(FORMAT_TABLE_TRIM_CELL_WHITESPACE, trimCellWhitespace);
-        dataHolder.set(INTELLIJ_DUMMY_IDENTIFIER_ENABLED, intellijDummyIdentifier);
         dataHolder.set(FORMAT_TABLE_MANIPULATOR, tableManipulator);
-        dataHolder.set(FORMAT_TABLE_EMBED_INTELLIJ_DUMMY_IDENTIFIER, embedIntellijDummyIdentifier);
-        dataHolder.set(FORMAT_TABLE_DUMP_INTELLIJ_OFFSETS, dumpIntellijOffsets);
+        dataHolder.set(FORMAT_TABLE_DUMP_TRACKING_OFFSETS, dumpIntellijOffsets);
         return dataHolder;
     }
 }

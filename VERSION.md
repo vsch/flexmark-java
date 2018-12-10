@@ -7,7 +7,7 @@ flexmark-java
 
 - [To Do](#to-do)
     - [Docx Converter](#docx-converter)
-- [0.34.60](#03460)
+- [0.35.0](#0350)
 - [0.34.58](#03458)
 - [0.34.56](#03456)
 - [0.34.53](#03453)
@@ -262,10 +262,13 @@ flexmark-java
 
 &nbsp;</details>
 
-0.34.60
--------
+0.35.0
+------
 
-* [ ] Add: tests for table move column function
+* [ ] Add: table navigation helpers, tests needed.
+* Add: inline parser will no longer process block nodes marked as `DoNotDecorate` with inline
+  processing extensions. To prevent undesired inline processing of table separator by
+  typographic extension.
 * Add: table manipulation functions to `MarkdownTable` to allow easy modification of a markdown
   table which can then be output as formatted markdown text. This class implements table
   formatting for the tables extension.
@@ -284,7 +287,7 @@ flexmark-java
   `FencedCodeBlock` and `AsideBlock`. Can use`FencedCodeBlock.getOpeningMarker().getEndOffset()
   \+ 1` if you need the position where the content would have been. Similarly for `AsideBlock`
 * Fix: `SegmentedSequence` start and end offsets to always be correct when contained segments
-  are all non-based characters.
+  are all non-based characters and computed on creation.
 * Break: some breaking changes to `FormattingAppendableImpl` derived constructors. Now most
   arguments must be passed, no defaults. It was getting too messy to trace which constructors
   were used and what were the resulting options for the appendable.

@@ -1131,6 +1131,11 @@ public abstract class BasedSequenceImpl implements BasedSequence {
     }
 
     @Override
+    public BasedSequence baseSubSequence(final int start) {
+        return baseSubSequence(start, getBaseSequence().getEndOffset());
+    }
+
+    @Override
     public BasedSequence trimTailBlankLines() {
         int iMax = length();
         int lastEOL = iMax;
@@ -1497,6 +1502,12 @@ public abstract class BasedSequenceImpl implements BasedSequence {
             return CharSubSequence.of(sb);
         }
         return this;
+    }
+
+    @Override
+    public int getColumnAtIndex(final int index) {
+        int lineStart = lastIndexOfAny(EOL_CHARS, index);
+        return index - (lineStart == -1 ? 0 : lineStart + eolLength(lineStart));
     }
 
     @Override

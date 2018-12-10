@@ -109,6 +109,6 @@ public class TableExtractingVisitor {
     }
 
     private void visit(final TableCell node) {
-        myTable.addCell(new MarkdownTable.TableCell(node.getOpeningMarker(), options.trimCellWhitespace ? node.getText().trim() : node.getText(), node.getClosingMarker(), 1, node.getSpan(), node.getAlignment() == null ? CellAlignment.NONE : node.getAlignment().cellAlignment()));
+        myTable.addCell(new com.vladsch.flexmark.util.format.TableCell(node.getOpeningMarker(), options.trimCellWhitespace ? node.getText().trim() : node.getText(), node.getClosingMarker(), 1, node.getSpan(), node.getAlignment() == null ? CellAlignment.NONE : node.getAlignment().cellAlignment()));
     }
 }

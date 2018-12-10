@@ -5,6 +5,7 @@ import com.vladsch.flexmark.ext.emoji.internal.EmojiShortcuts;
 import com.vladsch.flexmark.util.Utils;
 import com.vladsch.flexmark.util.format.MarkdownTable;
 import com.vladsch.flexmark.util.format.RomanNumeral;
+import com.vladsch.flexmark.util.format.TableCell;
 import com.vladsch.flexmark.util.format.TableFormatOptions;
 import com.vladsch.flexmark.util.html.Attribute;
 import com.vladsch.flexmark.util.html.Attributes;
@@ -1611,7 +1612,7 @@ public class FlexmarkHtmlParser {
 
         // skip cells defined by row spans in previous rows
         if (!myTableSuppressColumns) {
-            myTable.addCell(new MarkdownTable.TableCell(SubSequence.NULL, cellText.replace("\n", " "), BasedSequence.NULL, rowSpan, colSpan, alignment));
+            myTable.addCell(new TableCell(SubSequence.NULL, cellText.replace("\n", " "), BasedSequence.NULL, rowSpan, colSpan, alignment));
         }
     }
 

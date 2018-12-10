@@ -2501,15 +2501,11 @@ Document[0, 150]
     TableSeparator[26, 47]
       TableRow[26, 47]
         TableCell[26, 35] textOpen:[26, 27, "|"] text:[27, 34, "-------"] textClose:[34, 35, "|"]
-          TypographicSmarts[27, 30] typographic: &mdash; 
-          TypographicSmarts[30, 33] typographic: &mdash; 
-          Text[33, 34] chars:[33, 34, "-"]
+          Text[27, 34] chars:[27, 34, "-------"]
         TableCell[35, 40] text:[35, 39, "----"] textClose:[39, 40, "|"]
-          TypographicSmarts[35, 38] typographic: &mdash; 
-          Text[38, 39] chars:[38, 39, "-"]
+          Text[35, 39] chars:[35, 39, "----"]
         TableCell[40, 47] text:[40, 46, "------"] textClose:[46, 47, "|"]
-          TypographicSmarts[40, 43] typographic: &mdash; 
-          TypographicSmarts[43, 46] typographic: &mdash; 
+          Text[40, 46] chars:[40, 46, "------"]
     TableBody[48, 61]
       TableRow[48, 61] rowNumber=1
         TableCell[48, 56] textOpen:[48, 49, "|"] text:[49, 55, " line "] textClose:[55, 56, "|"]

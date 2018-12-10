@@ -4,9 +4,11 @@ import com.vladsch.flexmark.util.Utils;
 import com.vladsch.flexmark.util.collection.iteration.ReversiblePeekingIterable;
 import com.vladsch.flexmark.util.collection.iteration.ReversiblePeekingIterator;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
 import com.vladsch.flexmark.util.sequence.SegmentedSequence;
 import com.vladsch.flexmark.util.sequence.SubSequence;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public abstract class Node {
@@ -679,6 +681,49 @@ public abstract class Node {
         }
 
         return firstChild.getChars().baseSubSequence(firstChild.getStartOffset(), lastChild.getEndOffset());
+    }
+    
+    public BasedSequence getExactChildChars() {
+        if (firstChild == null || lastChild == null) {
+            return BasedSequence.NULL;
+        }
+
+        // this is not just base sequence between first and last child, 
+        // it will not include any out-of base chars if they are present, 
+        // in which case need to create a segmented sequence of all child text
+        Node child = getFirstChild();
+        ArrayList<BasedSequence> segments = null;
+        Node last = child;
+        
+        while (child != null) {
+            if (child.getChars() instanceof SegmentedSequence || child.getChars() instanceof PrefixedSubSequence) {
+                // this one will cause problems
+                if (segments == null) segments = new ArrayList<>();
+                if (last != child) {
+                    // insert chars between last child and this node
+                    if (last == child.getPrevious()) {
+                        segments.add(last.getChars());
+                    } else {
+                        segments.add(last.getChars().baseSubSequence(last.getStartOffset(), child.getPrevious().getEndOffset()));
+                    }
+                }
+                segments.add(child.getChars());
+                last = child.getNext();
+            }
+            child = child.getNext();
+        }
+
+        if (segments != null) {
+            child = getLastChild();
+            if (last != null) {
+                // insert chars between last child and this node
+                segments.add(last.getChars().baseSubSequence(last.getStartOffset(), child.getEndOffset()));
+            }
+            
+            return segments.size() == 1 ? segments.get(0) : SegmentedSequence.of(segments);
+        } else {
+            return firstChild.getChars().baseSubSequence(firstChild.getStartOffset(), lastChild.getEndOffset());
+        }
     }
 
     public Node getBlankLineSibling() {

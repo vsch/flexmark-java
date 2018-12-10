@@ -124,6 +124,14 @@ public interface BasedSequence extends CharSequence, Comparable<CharSequence> {
     BasedSequence baseSubSequence(int start, int end);
 
     /**
+     * Get a portion of the original sequence that this sequence is based on
+     *
+     * @param start offset from 0 of original sequence
+     * @return based sequence from start to the end
+     */
+    BasedSequence baseSubSequence(int start);
+
+    /**
      * Convenience method to get characters offset from end of sequence.
      * no exceptions are thrown, instead a \0 is returned for an invalid index positions
      *
@@ -1064,9 +1072,11 @@ public interface BasedSequence extends CharSequence, Comparable<CharSequence> {
      *
      * @param index index for which to get line information
      * @return Pair(line,column) where line and column are 0 based,
-     * throws IllegalArgumentExeption if index &lt; 0 or &gt; length.
+     * throws IllegalArgumentException if index &lt; 0 or &gt; length.
      */
     Pair<Integer, Integer> getLineColumnAtIndex(int index);
+    
+    int getColumnAtIndex(int index);
 
     class EmptyBasedSequence extends BasedSequenceImpl {
         @Override
