@@ -7,6 +7,7 @@ flexmark-java
 
 - [To Do](#to-do)
     - [Docx Converter](#docx-converter)
+- [0.35.2](#0352)
 - [0.35.0](#0350)
 - [0.34.58](#03458)
 - [0.34.56](#03456)
@@ -261,6 +262,12 @@ flexmark-java
 * [ ] Fix: #99, YamlFrontMatterBlockParser ignores multi-key list items
 
 &nbsp;</details>
+
+0.35.2
+------
+
+* Fix: empty table cells now contain a space so that the position of the cell's text in the file
+  is not lost.
 
 0.35.0
 ------

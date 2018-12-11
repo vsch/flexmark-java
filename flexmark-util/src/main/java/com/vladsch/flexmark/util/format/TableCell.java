@@ -79,7 +79,7 @@ public class TableCell {
         BasedSequence chars = BasedSequenceImpl.of(text);
         this.openMarker = BasedSequenceImpl.of(openMarker);
         this.closeMarker = BasedSequenceImpl.of(closeMarker);
-        BasedSequence useMarker = this.openMarker.isEmpty() ? this.closeMarker.subSequence(0,0) : this.openMarker.subSequence(this.openMarker.length());
+        BasedSequence useMarker = this.openMarker.isEmpty() ? this.closeMarker.subSequence(0, 0) : this.openMarker.subSequence(this.openMarker.length());
         this.text = chars.isEmpty() && chars != BasedSequence.NULL ? PrefixedSubSequence.of(" ", useMarker) : chars;
         this.rowSpan = rowSpan;
         this.columnSpan = columnSpan;
@@ -175,7 +175,7 @@ public class TableCell {
 
     /**
      * Returns the cell length occupied in the table
-     * 
+     *
      * @param previousCell previous cell or null for first cell
      *
      * @return length of the cell as occupied in the original file
@@ -188,9 +188,35 @@ public class TableCell {
      * Returns the cell prefix length occupied in the table
      *
      * @param previousCell previous cell or null for first cell
+     *
      * @return length of cell's prefix before actual text as occupied in the file
      */
     public int getCellPrefixLength(TableCell previousCell) {
         return getInsideStartOffset(previousCell) - getStartOffset(previousCell);
+    }
+
+    private CharSequence dumpSequence(BasedSequence sequence) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("{ \"").append(sequence.replace("\"", "\\\"")).append("\"")
+                .append(" [").append(sequence.getStartOffset()).append(", ").append(sequence.getEndOffset()).append("), length=").append(sequence.length())
+                .append("}");
+        return sb;
+    }
+
+    @Override
+    public String toString() {
+        return this.getClass().getSimpleName() + "{" +
+                "openMarker=" + dumpSequence(openMarker) +
+                ", text=" + dumpSequence(text) +
+                ", closeMarker=" + dumpSequence(closeMarker) +
+                ", columnSpan=" + columnSpan +
+                ", rowSpan=" + rowSpan +
+                ", alignment=" + alignment +
+                ", trackedTextOffset=" + trackedTextOffset +
+                ", spanTrackedOffset=" + spanTrackedOffset +
+                ", trackedTextAdjust=" + trackedTextAdjust +
+                ", afterSpace=" + afterSpace +
+                ", afterDelete=" + afterDelete +
+                '}';
     }
 }

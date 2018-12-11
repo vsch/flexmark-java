@@ -1,27 +1,15 @@
 package com.vladsch.flexmark.ext.tables;
 
-import com.vladsch.flexmark.ast.Node;
-import com.vladsch.flexmark.formatter.internal.MarkdownWriter;
 import com.vladsch.flexmark.html.HtmlWriter;
-import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.format.MarkdownTable;
-import com.vladsch.flexmark.util.format.TableCellOffsetInfo;
 import com.vladsch.flexmark.util.format.TableFormatOptions;
 import com.vladsch.flexmark.util.format.options.DiscretionaryText;
-import com.vladsch.flexmark.util.format.options.TableCaptionHandling;
-import com.vladsch.flexmark.util.mappers.CharWidthProvider;
-import com.vladsch.flexmark.util.options.DataHolder;
-import com.vladsch.flexmark.util.options.MutableDataSet;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.BasedSequenceImpl;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 
-import static com.vladsch.flexmark.util.format.TableFormatOptions.INTELLIJ_DUMMY_IDENTIFIER_CHAR;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -725,7 +713,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
                 "| Preview Tab so you can see what the rendered markdown will look like on GitHub. |   X   |    X     |    |    |\n" +
                 "|                               Syntax highlighting                               |   X   |    X     |    |    |\n" +
                 "", formattedTable.substring(0, offset) + "^" + formattedTable.substring(offset));
-        assertEquals(pos+1, offset);
+        assertEquals(pos + 1, offset);
     }
 
     @Test
@@ -874,6 +862,154 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
                 "| Syntax highlighting                                                             |   X   |    X     |    |\n" +
                 "", formattedTable.substring(0, offset) + "^" + formattedTable.substring(offset));
         assertEquals(pos, offset);
+    }
+
+    @Test
+    public void test_LeftAligned_BackspaceAfterEmpty() {
+        String markdown = "" +
+                "|  tex   | abcd | efg |\n" +
+                "|--------|------|-----|\n" +
+                "| dddd   | dddd | ddd |\n" +
+                "| adfasd |^    |     |\n" +
+                "";
+
+        int pos = markdown.indexOf("^");
+        BasedSequence source = BasedSequenceImpl.of(markdown.substring(0, pos) + markdown.substring(pos + 1));
+        MarkdownTable table = getTable(source, formatOptions("", null).toMutable().set(TableFormatOptions.FORMAT_TABLE_LEFT_ALIGN_MARKER, DiscretionaryText.AS_IS));
+        assertTrue(table.addTrackedOffset(pos, false, true));
+        HtmlWriter out = new HtmlWriter(new StringBuilder(), 0, HtmlWriter.FORMAT_ALL);
+        table.appendTable(out);
+        String formattedTable = out.getText();
+        Map<Integer, Integer> offsets = table.getTrackedOffsets();
+        int offset = offsets.get(pos);
+
+        assertEquals("" +
+                "|  tex   | abcd | efg |\n" +
+                "|--------|------|-----|\n" +
+                "| dddd   | dddd | ddd |\n" +
+                "| adfasd |      |     |\n" +
+                "", formattedTable);
+        assertEquals("" +
+                "|  tex   | abcd | efg |\n" +
+                "|--------|------|-----|\n" +
+                "| dddd   | dddd | ddd |\n" +
+                "| adfasd | ^     |     |\n" +
+                "", formattedTable.substring(0, offset) + "^" + formattedTable.substring(offset));
+        assertEquals(pos + 1, offset);
+    }
+
+    @Test
+    public void test_LeftAligned_Backspace2AfterEmpty() {
+        String markdown = "" +
+                "|  tex   | abcd | efg |\n" +
+                "|--------|------|-----|\n" +
+                "| dddd   | dddd | ddd |\n" +
+                "| adfasd | ^    |     |\n" +
+                "";
+
+        int pos = markdown.indexOf("^");
+        BasedSequence source = BasedSequenceImpl.of(markdown.substring(0, pos) + markdown.substring(pos + 1));
+        MarkdownTable table = getTable(source, formatOptions("", null).toMutable().set(TableFormatOptions.FORMAT_TABLE_LEFT_ALIGN_MARKER, DiscretionaryText.AS_IS));
+        assertTrue(table.addTrackedOffset(pos, false, true));
+        
+        //System.out.println("Table before: " + table.toString());
+        
+        HtmlWriter out = new HtmlWriter(new StringBuilder(), 0, HtmlWriter.FORMAT_ALL);
+        table.appendTable(out);
+        String formattedTable = out.getText();
+        Map<Integer, Integer> offsets = table.getTrackedOffsets();
+        int offset = offsets.get(pos);
+        
+        //System.out.println("pos " + pos + " -> " + offset);
+        //System.out.println("Table after: " + table.toString());
+
+        assertEquals("" +
+                "|  tex   | abcd | efg |\n" +
+                "|--------|------|-----|\n" +
+                "| dddd   | dddd | ddd |\n" +
+                "| adfasd |      |     |\n" +
+                "", formattedTable);
+        assertEquals("" +
+                "|  tex   | abcd | efg |\n" +
+                "|--------|------|-----|\n" +
+                "| dddd   | dddd | ddd |\n" +
+                "| adfasd | ^     |     |\n" +
+                "", formattedTable.substring(0, offset) + "^" + formattedTable.substring(offset));
+        assertEquals(pos, offset);
+    }
+
+    @Test
+    public void test_LeftAligned_Backspace4AfterEmpty() {
+        String markdown = "" +
+                "|  tex   | abcd | efg |\n" +
+                "|--------|------|-----|\n" +
+                "| dddd   | dddd | ddd |\n" +
+                "| adfasd |    ^|     |\n" +
+                "";
+
+        int pos = markdown.indexOf("^");
+        BasedSequence source = BasedSequenceImpl.of(markdown.substring(0, pos) + markdown.substring(pos + 1));
+        MarkdownTable table = getTable(source, formatOptions("", null).toMutable().set(TableFormatOptions.FORMAT_TABLE_LEFT_ALIGN_MARKER, DiscretionaryText.AS_IS));
+        assertTrue(table.addTrackedOffset(pos, true, true));
+        
+        //System.out.println("Table before: " + table.toString());
+        
+        HtmlWriter out = new HtmlWriter(new StringBuilder(), 0, HtmlWriter.FORMAT_ALL);
+        table.appendTable(out);
+        String formattedTable = out.getText();
+        Map<Integer, Integer> offsets = table.getTrackedOffsets();
+        int offset = offsets.get(pos);
+        
+        //System.out.println("pos " + pos + " -> " + offset);
+        //System.out.println("Table after: " + table.toString());
+
+        assertEquals("" +
+                "|  tex   | abcd | efg |\n" +
+                "|--------|------|-----|\n" +
+                "| dddd   | dddd | ddd |\n" +
+                "| adfasd |      |     |\n" +
+                "", formattedTable);
+        assertEquals("" +
+                "|  tex   | abcd | efg |\n" +
+                "|--------|------|-----|\n" +
+                "| dddd   | dddd | ddd |\n" +
+                "| adfasd |    ^  |     |\n" +
+                "", formattedTable.substring(0, offset) + "^" + formattedTable.substring(offset));
+        assertEquals(pos, offset);
+    }
+
+    @Test
+    public void test_LeftAligned_Type2AfterEmpty() {
+        String markdown = "" +
+                "|  tex   | abcd | efg |\n" +
+                "|--------|------|-----|\n" +
+                "| dddd   | dddd | ddd |\n" +
+                "| adfasd |  d^   |     |\n" +
+                "";
+
+        int pos = markdown.indexOf("^");
+        BasedSequence source = BasedSequenceImpl.of(markdown.substring(0, pos) + markdown.substring(pos + 1));
+        MarkdownTable table = getTable(source, formatOptions("", null).toMutable().set(TableFormatOptions.FORMAT_TABLE_LEFT_ALIGN_MARKER, DiscretionaryText.AS_IS));
+        assertTrue(table.addTrackedOffset(pos, false, true));
+        HtmlWriter out = new HtmlWriter(new StringBuilder(), 0, HtmlWriter.FORMAT_ALL);
+        table.appendTable(out);
+        String formattedTable = out.getText();
+        Map<Integer, Integer> offsets = table.getTrackedOffsets();
+        int offset = offsets.get(pos);
+
+        assertEquals("" +
+                "|  tex   | abcd | efg |\n" +
+                "|--------|------|-----|\n" +
+                "| dddd   | dddd | ddd |\n" +
+                "| adfasd | d    |     |\n" +
+                "", formattedTable);
+        assertEquals("" +
+                "|  tex   | abcd | efg |\n" +
+                "|--------|------|-----|\n" +
+                "| dddd   | dddd | ddd |\n" +
+                "| adfasd | d^    |     |\n" +
+                "", formattedTable.substring(0, offset) + "^" + formattedTable.substring(offset));
+        assertEquals(pos - 1, offset);
     }
 
     @Test
@@ -2254,7 +2390,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         int pos = markdown.indexOf("^");
         BasedSequence source = BasedSequenceImpl.of(markdown.substring(0, pos) + markdown.substring(pos + 1));
         MarkdownTable table = getTable(source, formatOptions("", null));
-        assertTrue(table.addTrackedOffset(pos, true,true));
+        assertTrue(table.addTrackedOffset(pos, true, true));
         HtmlWriter out = new HtmlWriter(new StringBuilder(), 0, HtmlWriter.FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.getText();
@@ -2294,7 +2430,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         int pos = markdown.indexOf("^");
         BasedSequence source = BasedSequenceImpl.of(markdown.substring(0, pos) + markdown.substring(pos + 1));
         MarkdownTable table = getTable(source, formatOptions("", null));
-        assertTrue(table.addTrackedOffset(pos, true,true));
+        assertTrue(table.addTrackedOffset(pos, true, true));
         HtmlWriter out = new HtmlWriter(new StringBuilder(), 0, HtmlWriter.FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.getText();

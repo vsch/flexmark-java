@@ -97,4 +97,20 @@ public class TableSection {
         }
         return columns;
     }
+    
+    private CharSequence dumpRows() {
+        StringBuilder sb = new StringBuilder();
+        for (TableRow row : rows) {
+            sb.append("  ").append(row.toString()).append("\n");
+        }
+        return sb;
+    }
+
+    @Override
+    public String toString() {
+        return this.getClass().getSimpleName() + "[" +
+                "sectionType=" + sectionType +
+                ", rows=[\n" + dumpRows() +
+                ']';
+    }
 }

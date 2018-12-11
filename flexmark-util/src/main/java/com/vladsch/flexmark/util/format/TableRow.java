@@ -314,4 +314,22 @@ public class TableRow {
         }
         normalized = true;
     }
+
+    private CharSequence dumpCells() {
+        StringBuilder sb = new StringBuilder();
+        for (TableCell cell : cells) {
+            sb.append("    ").append(cell.toString()).append("\n");
+        }
+        return sb;
+    }
+    
+    @Override
+    public String toString() {
+        return this.getClass().getSimpleName() + "{" +
+                " beforeOffset=" + beforeOffset +
+                ", afterOffset=" + afterOffset +
+                ", normalized=" + normalized +
+                ", cells=[\n" + dumpCells() + "    ]\n" +
+                "  }";
+    }
 }

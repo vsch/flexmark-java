@@ -1,6 +1,10 @@
 package com.vladsch.flexmark.ext.tables;
 
-import com.vladsch.flexmark.ast.*;
+import com.vladsch.flexmark.ast.CustomNode;
+import com.vladsch.flexmark.ast.DelimitedNode;
+import com.vladsch.flexmark.ast.Node;
+import com.vladsch.flexmark.ast.Text;
+import com.vladsch.flexmark.ast.WhiteSpace;
 import com.vladsch.flexmark.ast.util.TextNodeConverter;
 import com.vladsch.flexmark.util.html.CellAlignment;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
@@ -18,18 +22,26 @@ public class TableCell extends CustomNode implements DelimitedNode {
     private int span = 1;
 
     public void trimWhiteSpace() {
-        Node child = getFirstChild();
-        while (child != null && child instanceof WhiteSpace) {
+        Node firstChild = getFirstChild();
+        Node child = firstChild;
+
+        while (child instanceof WhiteSpace) {
             Node next = child.getNext();
             child.unlink();
             child = next;
         }
 
         child = getLastChild();
-        while (child != null && child instanceof WhiteSpace) {
+        while (child instanceof WhiteSpace) {
             Node next = child.getPrevious();
             child.unlink();
             child = next;
+        }
+
+        if (getFirstChild() == null && firstChild != null) {
+            // we keep a single space from the child 
+            Node text = new Text(firstChild.getChars().subSequence(0, 1));
+            appendChild(text);
         }
     }
 
@@ -37,7 +49,7 @@ public class TableCell extends CustomNode implements DelimitedNode {
         boolean hadWhitespace = false;
         Node child = getFirstChild();
 
-        while (child != null && child instanceof WhiteSpace) {
+        while (child instanceof WhiteSpace) {
             Node next = child.getNext();
             Text text = new Text(child.getChars());
             child.insertBefore(text);
@@ -47,7 +59,7 @@ public class TableCell extends CustomNode implements DelimitedNode {
         }
 
         child = getLastChild();
-        while (child != null && child instanceof WhiteSpace) {
+        while (child instanceof WhiteSpace) {
             Node previous = child.getPrevious();
             Text text = new Text(child.getChars());
             child.insertBefore(text);
@@ -149,10 +161,14 @@ public class TableCell extends CustomNode implements DelimitedNode {
 
         public CellAlignment cellAlignment() {
             switch (this) {
-                case CENTER: return CellAlignment.CENTER;
-                case LEFT: return CellAlignment.LEFT;
-                case RIGHT: return CellAlignment.RIGHT;
-                default: return CellAlignment.NONE;
+                case CENTER:
+                    return CellAlignment.CENTER;
+                case LEFT:
+                    return CellAlignment.LEFT;
+                case RIGHT:
+                    return CellAlignment.RIGHT;
+                default:
+                    return CellAlignment.NONE;
             }
         }
     }

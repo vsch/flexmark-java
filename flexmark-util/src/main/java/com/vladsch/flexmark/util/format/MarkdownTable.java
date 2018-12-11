@@ -1130,7 +1130,8 @@ public class MarkdownTable {
                     TableCell adjustedCell = row.cells.get(i);
                     if (adjustedCell.trackedTextOffset != NOT_TRACKED) {
                         int cellOffset = out.offsetWithPending();
-                        trackedOffsets.put(cell.trackedTextOffset + cell.getTextStartOffset(i == 0 ? null : row.cells.get(i - 1)), cellOffset + minLimit(adjustedCell.trackedTextOffset, 0) + adjustedCell.trackedTextAdjust);
+                        int adjustForBlank = cell.text.isBlank() ? -1 : 0;
+                        trackedOffsets.put(cell.trackedTextOffset + cell.getTextStartOffset(i == 0 ? null : row.cells.get(i - 1)), cellOffset + minLimit(adjustedCell.trackedTextOffset + adjustForBlank, 0) + adjustedCell.trackedTextAdjust);
                     }
                 }
 
@@ -1462,5 +1463,17 @@ public class MarkdownTable {
                     ", spanOffset=" + spanOffset +
                     '}';
         }
+    }
+
+    @Override
+    public String toString() {
+        return this.getClass().getSimpleName() + "{" +
+                "header=" + header +
+                ",\nseparator=" + separator +
+                ",\nbody=" + body +
+                ",\ncaption=" + caption +
+                ",\noptions=" + options +
+                ",\ntrackedOffsets=" + trackedOffsets +
+                "}";
     }
 }

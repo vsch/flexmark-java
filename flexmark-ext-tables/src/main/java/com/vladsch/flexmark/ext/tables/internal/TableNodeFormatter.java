@@ -3,6 +3,7 @@ package com.vladsch.flexmark.ext.tables.internal;
 import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.ast.Paragraph;
 import com.vladsch.flexmark.ast.Text;
+import com.vladsch.flexmark.ast.WhiteSpace;
 import com.vladsch.flexmark.ast.util.Parsing;
 import com.vladsch.flexmark.ext.tables.*;
 import com.vladsch.flexmark.formatter.CustomNodeFormatter;
@@ -28,6 +29,7 @@ public class TableNodeFormatter implements NodeFormatter {
     private final TableFormatOptions options;
     private final boolean isIntellijDummyIdentifier;
     private final String intellijDummyIdentifier;
+    private final boolean parserTrimCellWhiteSpace;
 
     private MarkdownTable myTable;
 
@@ -35,6 +37,7 @@ public class TableNodeFormatter implements NodeFormatter {
         this.options = new TableFormatOptions(options);
         isIntellijDummyIdentifier = Parser.INTELLIJ_DUMMY_IDENTIFIER.getFrom(options);
         intellijDummyIdentifier = isIntellijDummyIdentifier ? Parsing.INTELLIJ_DUMMY_IDENTIFIER : "";
+        parserTrimCellWhiteSpace = TablesExtension.TRIM_CELL_WHITESPACE.getFrom(options);
     }
 
     @Override
@@ -204,7 +207,7 @@ public class TableNodeFormatter implements NodeFormatter {
                 markdown.append(node.getOpeningMarker());
             }
 
-            if (!myTable.isSeparator() && options.spaceAroundPipes && !node.getText().startsWith(" ")) markdown.append(' ');
+            if (!myTable.isSeparator() && options.spaceAroundPipes && (!node.getText().startsWith(" ") || parserTrimCellWhiteSpace)) markdown.append(' ');
 
             final String[] childText = new String[] { "" };
 
@@ -216,7 +219,7 @@ public class TableNodeFormatter implements NodeFormatter {
                 }
             });
 
-            if (!myTable.isSeparator() && options.spaceAroundPipes && !childText[0].endsWith(" ")) markdown.append(' ');
+            if (!myTable.isSeparator() && options.spaceAroundPipes && (!childText[0].endsWith(" ") || parserTrimCellWhiteSpace)) markdown.append(' ');
             if (node.getNext() == null) {
                 if (options.leadTrailPipes && node.getClosingMarker().isEmpty()) markdown.append('|');
                 else markdown.append(node.getClosingMarker());

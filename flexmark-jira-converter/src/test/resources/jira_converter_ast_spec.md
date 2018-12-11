@@ -681,7 +681,7 @@ h1. Heading One
 |nov. 2. tue|10:00|4h 40m|
 |nov. 3. thu|11:00|4h|
 |nov. 7. mon|10:20|4h 20m|
-|total:||*13h*|
+|total:| |*13h*|
 
 Some paragraph.
 
@@ -745,7 +745,8 @@ Document[0, 382]
       TableRow[195, 228] rowNumber=4
         TableCell[195, 210] LEFT textOpen:[195, 196, "|"] text:[197, 203, "total:"] textClose:[209, 210, "|"]
           Text[197, 203] chars:[197, 203, "total:"]
-        TableCell[210, 218] LEFT textClose:[217, 218, "|"]
+        TableCell[210, 218] LEFT text:[210, 211, " "] textClose:[217, 218, "|"]
+          Text[210, 211] chars:[210, 211, " "]
         TableCell[218, 228] LEFT text:[219, 226, "**13h**"] textClose:[227, 228, "|"]
           StrongEmphasis[219, 226] textOpen:[219, 221, "**"] text:[221, 224, "13h"] textClose:[224, 226, "**"]
             Text[221, 224] chars:[221, 224, "13h"]
@@ -1413,57 +1414,57 @@ real life table
 |Supports Highlight JS in WebView preview|X|X|
 |*Multi-line Image URLs for embedding [gravizo.com] UML diagrams into markdown*|X|X|
 |Live Templates for common markdown elements|X|X|
-|*Enhanced Version Benefits*||X|
-|    Split Editor with Preview or HTML Text modes to view both source and preview||X|
-|    Toolbar for fast access to frequent operations||X|
-|    Language Injections for fenced code, HTML, Jekyll front matter and multi-line URL content||X|
-|    Code completions, refactoring, annotations and quick fixes to let you work faster||X|
-|    Navigation support with Line markers, Find usages, Go To Declaration for rapid navigation||X|
-|    Inspections to help you validate links, anchor refs, footnote refs||X|
-|    Complete GitHub wiki support for all links makes maintaining GitHub wiki pages a breeze||X|
-|    Jekyll front matter recognition in markdown documents||X|
-|    Emoji text to icon conversion using [Emoji Cheat Sheet] or GitHub emoji URLs||X|
-|    Wrap on typing and table formatting with column alignment||X|
-|    Character display width used for wrapping and table formatting||X|
-|    Structure view for Abbreviations, Headers, Tables, Footnotes, References and Document||X|
-|    Document formatting with text wrapping, list renumbering, aranging of elements, etc.||X|
-|    Table of Contents generation for any markdown parser, with many style options||X|
-|*As you type automation*||X|
-|    Double of bold/emphasis markers and remove inserted ones if a space is typed||X|
-|    Wrap text blocks to margins and indentation||X|
-|    ATX headers to match trailing {{#}} marker||X|
-|    Setext headers to match marker length to text||X|
-|    Format tables to pad column width, column alignment and spanning columns||X|
-|    Auto insert empty table row on {{<kbd>}}ENTER{{</kbd>}}||X|
-|    Auto delete empty table row/column on {{<kbd>}}BACKSPACE{{</kbd>}}||X|
-|    Auto insert table column when typing before first column or after last column of table||X|
-|    Actions to insert: table, row or column; delete: row or column||X|
-|    Auto insert list item on {{<kbd>}}ENTER{{</kbd>}}||X|
-|    Auto delete empty list item on {{<kbd>}}ENTER{{</kbd>}}||X|
-|    Auto delete empty list item on {{<kbd>}}BACKSPACE{{</kbd>}}||X|
-|    Indent or un-indent list item toolbar buttons and actions||X|
-|*Code Completions*||X|
-|    Absolute link address completions using https:// and file:// formats||X|
-|    Explicit and Image links are GitHub wiki aware||X|
-|    GitHub Issue # Completions after {{issues/}} link address and in text||X|
-|    GitHub special links: Issues, Pull requests, Graphs, and Pulse.||X|
-|    Link address completions for non-markdown files||X|
-|    Emoji text shortcuts completion||X|
-|    Java class, field and method completions in inline code elements||X|
-|*Intention Actions*||X|
-|    Change between relative and absolute https:// link addresses via intention action||X|
-|    Change between wiki links and explicit link||X|
-|    Intentions for links, wiki links, references and headers||X|
-|    Intention to format Setext Header marker to match marker length to text||X|
-|    Intention to swap Setext/Atx header format||X|
-|    Update table of contents quick fix intention||X|
-|    Intention to edit Table of Contents style options dialog with preview||X|
-|*Refactoring*||X|
-|    Automatic change from wiki link to explicit link when link target file is moved out of the wiki||X|
-|    File move refactoring of contained links. This completes the refactoring feature set||X|
-|    Refactoring for /, https:// and file:// absolute link addresses to project files||X|
-|    Refactoring of header text with update to referencing anchor link references||X|
-|    Anchor link reference refactoring with update to referenced header text||X|
+|*Enhanced Version Benefits*| |X|
+|    Split Editor with Preview or HTML Text modes to view both source and preview| |X|
+|    Toolbar for fast access to frequent operations| |X|
+|    Language Injections for fenced code, HTML, Jekyll front matter and multi-line URL content| |X|
+|    Code completions, refactoring, annotations and quick fixes to let you work faster| |X|
+|    Navigation support with Line markers, Find usages, Go To Declaration for rapid navigation| |X|
+|    Inspections to help you validate links, anchor refs, footnote refs| |X|
+|    Complete GitHub wiki support for all links makes maintaining GitHub wiki pages a breeze| |X|
+|    Jekyll front matter recognition in markdown documents| |X|
+|    Emoji text to icon conversion using [Emoji Cheat Sheet] or GitHub emoji URLs| |X|
+|    Wrap on typing and table formatting with column alignment| |X|
+|    Character display width used for wrapping and table formatting| |X|
+|    Structure view for Abbreviations, Headers, Tables, Footnotes, References and Document| |X|
+|    Document formatting with text wrapping, list renumbering, aranging of elements, etc.| |X|
+|    Table of Contents generation for any markdown parser, with many style options| |X|
+|*As you type automation*| |X|
+|    Double of bold/emphasis markers and remove inserted ones if a space is typed| |X|
+|    Wrap text blocks to margins and indentation| |X|
+|    ATX headers to match trailing {{#}} marker| |X|
+|    Setext headers to match marker length to text| |X|
+|    Format tables to pad column width, column alignment and spanning columns| |X|
+|    Auto insert empty table row on {{<kbd>}}ENTER{{</kbd>}}| |X|
+|    Auto delete empty table row/column on {{<kbd>}}BACKSPACE{{</kbd>}}| |X|
+|    Auto insert table column when typing before first column or after last column of table| |X|
+|    Actions to insert: table, row or column; delete: row or column| |X|
+|    Auto insert list item on {{<kbd>}}ENTER{{</kbd>}}| |X|
+|    Auto delete empty list item on {{<kbd>}}ENTER{{</kbd>}}| |X|
+|    Auto delete empty list item on {{<kbd>}}BACKSPACE{{</kbd>}}| |X|
+|    Indent or un-indent list item toolbar buttons and actions| |X|
+|*Code Completions*| |X|
+|    Absolute link address completions using https:// and file:// formats| |X|
+|    Explicit and Image links are GitHub wiki aware| |X|
+|    GitHub Issue # Completions after {{issues/}} link address and in text| |X|
+|    GitHub special links: Issues, Pull requests, Graphs, and Pulse.| |X|
+|    Link address completions for non-markdown files| |X|
+|    Emoji text shortcuts completion| |X|
+|    Java class, field and method completions in inline code elements| |X|
+|*Intention Actions*| |X|
+|    Change between relative and absolute https:// link addresses via intention action| |X|
+|    Change between wiki links and explicit link| |X|
+|    Intentions for links, wiki links, references and headers| |X|
+|    Intention to format Setext Header marker to match marker length to text| |X|
+|    Intention to swap Setext/Atx header format| |X|
+|    Update table of contents quick fix intention| |X|
+|    Intention to edit Table of Contents style options dialog with preview| |X|
+|*Refactoring*| |X|
+|    Automatic change from wiki link to explicit link when link target file is moved out of the wiki| |X|
+|    File move refactoring of contained links. This completes the refactoring feature set| |X|
+|    Refactoring for /, https:// and file:// absolute link addresses to project files| |X|
+|    Refactoring of header text with update to referencing anchor link references| |X|
+|    Anchor link reference refactoring with update to referenced header text| |X|
 
 .
 Document[0, 10153]
@@ -1630,7 +1631,8 @@ Document[0, 10153]
           StrongEmphasis[2862, 2891] textOpen:[2862, 2864, "**"] text:[2864, 2889, "Enhanced Version Benefits"] textClose:[2889, 2891, "**"]
             Text[2864, 2889] chars:[2864, 2889, "Enhan … efits"]
           Text[2891, 2891]
-        TableCell[2983, 2991] CENTER textClose:[2990, 2991, "|"]
+        TableCell[2983, 2991] CENTER text:[2983, 2984, " "] textClose:[2990, 2991, "|"]
+          Text[2983, 2984] chars:[2983, 2984, " "]
         TableCell[2991, 3002] CENTER text:[2995, 2996, "X"] textClose:[3001, 3002, "|"]
           Text[2995, 2996] chars:[2995, 2996, "X"]
       TableRow[3003, 3145] rowNumber=20
@@ -1640,7 +1642,8 @@ Document[0, 10153]
           HtmlEntity[3017, 3023] "&nbsp;"
           HtmlEntity[3023, 3029] "&nbsp;"
           Text[3029, 3105] chars:[3029, 3105, "Split … eview"]
-        TableCell[3126, 3134] CENTER textClose:[3133, 3134, "|"]
+        TableCell[3126, 3134] CENTER text:[3126, 3127, " "] textClose:[3133, 3134, "|"]
+          Text[3126, 3127] chars:[3126, 3127, " "]
         TableCell[3134, 3145] CENTER text:[3138, 3139, "X"] textClose:[3144, 3145, "|"]
           Text[3138, 3139] chars:[3138, 3139, "X"]
       TableRow[3146, 3288] rowNumber=21
@@ -1650,7 +1653,8 @@ Document[0, 10153]
           HtmlEntity[3160, 3166] "&nbsp;"
           HtmlEntity[3166, 3172] "&nbsp;"
           Text[3172, 3218] chars:[3172, 3218, "Toolb … tions"]
-        TableCell[3269, 3277] CENTER textClose:[3276, 3277, "|"]
+        TableCell[3269, 3277] CENTER text:[3269, 3270, " "] textClose:[3276, 3277, "|"]
+          Text[3269, 3270] chars:[3269, 3270, " "]
         TableCell[3277, 3288] CENTER text:[3281, 3282, "X"] textClose:[3287, 3288, "|"]
           Text[3281, 3282] chars:[3281, 3282, "X"]
       TableRow[3289, 3431] rowNumber=22
@@ -1660,7 +1664,8 @@ Document[0, 10153]
           HtmlEntity[3303, 3309] "&nbsp;"
           HtmlEntity[3309, 3315] "&nbsp;"
           Text[3315, 3404] chars:[3315, 3404, "Langu … ntent"]
-        TableCell[3412, 3420] CENTER textClose:[3419, 3420, "|"]
+        TableCell[3412, 3420] CENTER text:[3412, 3413, " "] textClose:[3419, 3420, "|"]
+          Text[3412, 3413] chars:[3412, 3413, " "]
         TableCell[3420, 3431] CENTER text:[3424, 3425, "X"] textClose:[3430, 3431, "|"]
           Text[3424, 3425] chars:[3424, 3425, "X"]
       TableRow[3432, 3574] rowNumber=23
@@ -1670,7 +1675,8 @@ Document[0, 10153]
           HtmlEntity[3446, 3452] "&nbsp;"
           HtmlEntity[3452, 3458] "&nbsp;"
           Text[3458, 3539] chars:[3458, 3539, "Code  … aster"]
-        TableCell[3555, 3563] CENTER textClose:[3562, 3563, "|"]
+        TableCell[3555, 3563] CENTER text:[3555, 3556, " "] textClose:[3562, 3563, "|"]
+          Text[3555, 3556] chars:[3555, 3556, " "]
         TableCell[3563, 3574] CENTER text:[3567, 3568, "X"] textClose:[3573, 3574, "|"]
           Text[3567, 3568] chars:[3567, 3568, "X"]
       TableRow[3575, 3717] rowNumber=24
@@ -1680,7 +1686,8 @@ Document[0, 10153]
           HtmlEntity[3589, 3595] "&nbsp;"
           HtmlEntity[3595, 3601] "&nbsp;"
           Text[3601, 3690] chars:[3601, 3690, "Navig … ation"]
-        TableCell[3698, 3706] CENTER textClose:[3705, 3706, "|"]
+        TableCell[3698, 3706] CENTER text:[3698, 3699, " "] textClose:[3705, 3706, "|"]
+          Text[3698, 3699] chars:[3698, 3699, " "]
         TableCell[3706, 3717] CENTER text:[3710, 3711, "X"] textClose:[3716, 3717, "|"]
           Text[3710, 3711] chars:[3710, 3711, "X"]
       TableRow[3718, 3860] rowNumber=25
@@ -1690,7 +1697,8 @@ Document[0, 10153]
           HtmlEntity[3732, 3738] "&nbsp;"
           HtmlEntity[3738, 3744] "&nbsp;"
           Text[3744, 3810] chars:[3744, 3810, "Inspe …  refs"]
-        TableCell[3841, 3849] CENTER textClose:[3848, 3849, "|"]
+        TableCell[3841, 3849] CENTER text:[3841, 3842, " "] textClose:[3848, 3849, "|"]
+          Text[3841, 3842] chars:[3841, 3842, " "]
         TableCell[3849, 3860] CENTER text:[3853, 3854, "X"] textClose:[3859, 3860, "|"]
           Text[3853, 3854] chars:[3853, 3854, "X"]
       TableRow[3861, 4003] rowNumber=26
@@ -1700,7 +1708,8 @@ Document[0, 10153]
           HtmlEntity[3875, 3881] "&nbsp;"
           HtmlEntity[3881, 3887] "&nbsp;"
           Text[3887, 3974] chars:[3887, 3974, "Compl … reeze"]
-        TableCell[3984, 3992] CENTER textClose:[3991, 3992, "|"]
+        TableCell[3984, 3992] CENTER text:[3984, 3985, " "] textClose:[3991, 3992, "|"]
+          Text[3984, 3985] chars:[3984, 3985, " "]
         TableCell[3992, 4003] CENTER text:[3996, 3997, "X"] textClose:[4002, 4003, "|"]
           Text[3996, 3997] chars:[3996, 3997, "X"]
       TableRow[4004, 4146] rowNumber=27
@@ -1710,7 +1719,8 @@ Document[0, 10153]
           HtmlEntity[4018, 4024] "&nbsp;"
           HtmlEntity[4024, 4030] "&nbsp;"
           Text[4030, 4083] chars:[4030, 4083, "Jekyl … ments"]
-        TableCell[4127, 4135] CENTER textClose:[4134, 4135, "|"]
+        TableCell[4127, 4135] CENTER text:[4127, 4128, " "] textClose:[4134, 4135, "|"]
+          Text[4127, 4128] chars:[4127, 4128, " "]
         TableCell[4135, 4146] CENTER text:[4139, 4140, "X"] textClose:[4145, 4146, "|"]
           Text[4139, 4140] chars:[4139, 4140, "X"]
       TableRow[4147, 4289] rowNumber=28
@@ -1723,7 +1733,8 @@ Document[0, 10153]
           LinkRef[4209, 4228] referenceOpen:[4209, 4210, "["] reference:[4210, 4227, "Emoji Cheat Sheet"] referenceClose:[4227, 4228, "]"]
             Text[4210, 4227] chars:[4210, 4227, "Emoji … Sheet"]
           Text[4228, 4249] chars:[4228, 4249, " or G …  URLs"]
-        TableCell[4270, 4278] CENTER textClose:[4277, 4278, "|"]
+        TableCell[4270, 4278] CENTER text:[4270, 4271, " "] textClose:[4277, 4278, "|"]
+          Text[4270, 4271] chars:[4270, 4271, " "]
         TableCell[4278, 4289] CENTER text:[4282, 4283, "X"] textClose:[4288, 4289, "|"]
           Text[4282, 4283] chars:[4282, 4283, "X"]
       TableRow[4290, 4432] rowNumber=29
@@ -1733,7 +1744,8 @@ Document[0, 10153]
           HtmlEntity[4304, 4310] "&nbsp;"
           HtmlEntity[4310, 4316] "&nbsp;"
           Text[4316, 4373] chars:[4316, 4373, "Wrap  … nment"]
-        TableCell[4413, 4421] CENTER textClose:[4420, 4421, "|"]
+        TableCell[4413, 4421] CENTER text:[4413, 4414, " "] textClose:[4420, 4421, "|"]
+          Text[4413, 4414] chars:[4413, 4414, " "]
         TableCell[4421, 4432] CENTER text:[4425, 4426, "X"] textClose:[4431, 4432, "|"]
           Text[4425, 4426] chars:[4425, 4426, "X"]
       TableRow[4433, 4575] rowNumber=30
@@ -1743,7 +1755,8 @@ Document[0, 10153]
           HtmlEntity[4447, 4453] "&nbsp;"
           HtmlEntity[4453, 4459] "&nbsp;"
           Text[4459, 4521] chars:[4459, 4521, "Chara … tting"]
-        TableCell[4556, 4564] CENTER textClose:[4563, 4564, "|"]
+        TableCell[4556, 4564] CENTER text:[4556, 4557, " "] textClose:[4563, 4564, "|"]
+          Text[4556, 4557] chars:[4556, 4557, " "]
         TableCell[4564, 4575] CENTER text:[4568, 4569, "X"] textClose:[4574, 4575, "|"]
           Text[4568, 4569] chars:[4568, 4569, "X"]
       TableRow[4576, 4718] rowNumber=31
@@ -1753,7 +1766,8 @@ Document[0, 10153]
           HtmlEntity[4590, 4596] "&nbsp;"
           HtmlEntity[4596, 4602] "&nbsp;"
           Text[4602, 4687] chars:[4602, 4687, "Struc … ument"]
-        TableCell[4699, 4707] CENTER textClose:[4706, 4707, "|"]
+        TableCell[4699, 4707] CENTER text:[4699, 4700, " "] textClose:[4706, 4707, "|"]
+          Text[4699, 4700] chars:[4699, 4700, " "]
         TableCell[4707, 4718] CENTER text:[4711, 4712, "X"] textClose:[4717, 4718, "|"]
           Text[4711, 4712] chars:[4711, 4712, "X"]
       TableRow[4719, 4861] rowNumber=32
@@ -1763,7 +1777,8 @@ Document[0, 10153]
           HtmlEntity[4733, 4739] "&nbsp;"
           HtmlEntity[4739, 4745] "&nbsp;"
           Text[4745, 4829] chars:[4745, 4829, "Docum …  etc."]
-        TableCell[4842, 4850] CENTER textClose:[4849, 4850, "|"]
+        TableCell[4842, 4850] CENTER text:[4842, 4843, " "] textClose:[4849, 4850, "|"]
+          Text[4842, 4843] chars:[4842, 4843, " "]
         TableCell[4850, 4861] CENTER text:[4854, 4855, "X"] textClose:[4860, 4861, "|"]
           Text[4854, 4855] chars:[4854, 4855, "X"]
       TableRow[4862, 5004] rowNumber=33
@@ -1773,7 +1788,8 @@ Document[0, 10153]
           HtmlEntity[4876, 4882] "&nbsp;"
           HtmlEntity[4882, 4888] "&nbsp;"
           Text[4888, 4965] chars:[4888, 4965, "Table … tions"]
-        TableCell[4985, 4993] CENTER textClose:[4992, 4993, "|"]
+        TableCell[4985, 4993] CENTER text:[4985, 4986, " "] textClose:[4992, 4993, "|"]
+          Text[4985, 4986] chars:[4985, 4986, " "]
         TableCell[4993, 5004] CENTER text:[4997, 4998, "X"] textClose:[5003, 5004, "|"]
           Text[4997, 4998] chars:[4997, 4998, "X"]
       TableRow[5005, 5147] rowNumber=34
@@ -1781,7 +1797,8 @@ Document[0, 10153]
           StrongEmphasis[5007, 5033] textOpen:[5007, 5009, "**"] text:[5009, 5031, "As you type automation"] textClose:[5031, 5033, "**"]
             Text[5009, 5031] chars:[5009, 5031, "As yo … ation"]
           Text[5033, 5033]
-        TableCell[5128, 5136] CENTER textClose:[5135, 5136, "|"]
+        TableCell[5128, 5136] CENTER text:[5128, 5129, " "] textClose:[5135, 5136, "|"]
+          Text[5128, 5129] chars:[5128, 5129, " "]
         TableCell[5136, 5147] CENTER text:[5140, 5141, "X"] textClose:[5146, 5147, "|"]
           Text[5140, 5141] chars:[5140, 5141, "X"]
       TableRow[5148, 5290] rowNumber=35
@@ -1791,7 +1808,8 @@ Document[0, 10153]
           HtmlEntity[5162, 5168] "&nbsp;"
           HtmlEntity[5168, 5174] "&nbsp;"
           Text[5174, 5250] chars:[5174, 5250, "Doubl … typed"]
-        TableCell[5271, 5279] CENTER textClose:[5278, 5279, "|"]
+        TableCell[5271, 5279] CENTER text:[5271, 5272, " "] textClose:[5278, 5279, "|"]
+          Text[5271, 5272] chars:[5271, 5272, " "]
         TableCell[5279, 5290] CENTER text:[5283, 5284, "X"] textClose:[5289, 5290, "|"]
           Text[5283, 5284] chars:[5283, 5284, "X"]
       TableRow[5291, 5433] rowNumber=36
@@ -1801,7 +1819,8 @@ Document[0, 10153]
           HtmlEntity[5305, 5311] "&nbsp;"
           HtmlEntity[5311, 5317] "&nbsp;"
           Text[5317, 5360] chars:[5317, 5360, "Wrap  … ation"]
-        TableCell[5414, 5422] CENTER textClose:[5421, 5422, "|"]
+        TableCell[5414, 5422] CENTER text:[5414, 5415, " "] textClose:[5421, 5422, "|"]
+          Text[5414, 5415] chars:[5414, 5415, " "]
         TableCell[5422, 5433] CENTER text:[5426, 5427, "X"] textClose:[5432, 5433, "|"]
           Text[5426, 5427] chars:[5426, 5427, "X"]
       TableRow[5434, 5576] rowNumber=37
@@ -1814,7 +1833,8 @@ Document[0, 10153]
           Code[5490, 5493] textOpen:[5490, 5491, "`"] text:[5491, 5492, "#"] textClose:[5492, 5493, "`"]
             Text[5491, 5492] chars:[5491, 5492, "#"]
           Text[5493, 5500] chars:[5493, 5500, " marker"]
-        TableCell[5557, 5565] CENTER textClose:[5564, 5565, "|"]
+        TableCell[5557, 5565] CENTER text:[5557, 5558, " "] textClose:[5564, 5565, "|"]
+          Text[5557, 5558] chars:[5557, 5558, " "]
         TableCell[5565, 5576] CENTER text:[5569, 5570, "X"] textClose:[5575, 5576, "|"]
           Text[5569, 5570] chars:[5569, 5570, "X"]
       TableRow[5577, 5719] rowNumber=38
@@ -1824,7 +1844,8 @@ Document[0, 10153]
           HtmlEntity[5591, 5597] "&nbsp;"
           HtmlEntity[5597, 5603] "&nbsp;"
           Text[5603, 5648] chars:[5603, 5648, "Setex …  text"]
-        TableCell[5700, 5708] CENTER textClose:[5707, 5708, "|"]
+        TableCell[5700, 5708] CENTER text:[5700, 5701, " "] textClose:[5707, 5708, "|"]
+          Text[5700, 5701] chars:[5700, 5701, " "]
         TableCell[5708, 5719] CENTER text:[5712, 5713, "X"] textClose:[5718, 5719, "|"]
           Text[5712, 5713] chars:[5712, 5713, "X"]
       TableRow[5720, 5862] rowNumber=39
@@ -1834,7 +1855,8 @@ Document[0, 10153]
           HtmlEntity[5734, 5740] "&nbsp;"
           HtmlEntity[5740, 5746] "&nbsp;"
           Text[5746, 5818] chars:[5746, 5818, "Forma … lumns"]
-        TableCell[5843, 5851] CENTER textClose:[5850, 5851, "|"]
+        TableCell[5843, 5851] CENTER text:[5843, 5844, " "] textClose:[5850, 5851, "|"]
+          Text[5843, 5844] chars:[5843, 5844, " "]
         TableCell[5851, 5862] CENTER text:[5855, 5856, "X"] textClose:[5861, 5862, "|"]
           Text[5855, 5856] chars:[5855, 5856, "X"]
       TableRow[5863, 6005] rowNumber=40
@@ -1848,7 +1870,8 @@ Document[0, 10153]
           Text[5925, 5930] chars:[5925, 5930, "ENTER"]
           HtmlInline[5930, 5936] chars:[5930, 5936, "</kbd>"]
           Text[5936, 5936]
-        TableCell[5986, 5994] CENTER textClose:[5993, 5994, "|"]
+        TableCell[5986, 5994] CENTER text:[5986, 5987, " "] textClose:[5993, 5994, "|"]
+          Text[5986, 5987] chars:[5986, 5987, " "]
         TableCell[5994, 6005] CENTER text:[5998, 5999, "X"] textClose:[6004, 6005, "|"]
           Text[5998, 5999] chars:[5998, 5999, "X"]
       TableRow[6006, 6148] rowNumber=41
@@ -1862,7 +1885,8 @@ Document[0, 10153]
           Text[6075, 6084] chars:[6075, 6084, "BACKSPACE"]
           HtmlInline[6084, 6090] chars:[6084, 6090, "</kbd>"]
           Text[6090, 6090]
-        TableCell[6129, 6137] CENTER textClose:[6136, 6137, "|"]
+        TableCell[6129, 6137] CENTER text:[6129, 6130, " "] textClose:[6136, 6137, "|"]
+          Text[6129, 6130] chars:[6129, 6130, " "]
         TableCell[6137, 6148] CENTER text:[6141, 6142, "X"] textClose:[6147, 6148, "|"]
           Text[6141, 6142] chars:[6141, 6142, "X"]
       TableRow[6149, 6291] rowNumber=42
@@ -1872,7 +1896,8 @@ Document[0, 10153]
           HtmlEntity[6163, 6169] "&nbsp;"
           HtmlEntity[6169, 6175] "&nbsp;"
           Text[6175, 6261] chars:[6175, 6261, "Auto  … table"]
-        TableCell[6272, 6280] CENTER textClose:[6279, 6280, "|"]
+        TableCell[6272, 6280] CENTER text:[6272, 6273, " "] textClose:[6279, 6280, "|"]
+          Text[6272, 6273] chars:[6272, 6273, " "]
         TableCell[6280, 6291] CENTER text:[6284, 6285, "X"] textClose:[6290, 6291, "|"]
           Text[6284, 6285] chars:[6284, 6285, "X"]
       TableRow[6292, 6434] rowNumber=43
@@ -1882,7 +1907,8 @@ Document[0, 10153]
           HtmlEntity[6306, 6312] "&nbsp;"
           HtmlEntity[6312, 6318] "&nbsp;"
           Text[6318, 6380] chars:[6318, 6380, "Actio … olumn"]
-        TableCell[6415, 6423] CENTER textClose:[6422, 6423, "|"]
+        TableCell[6415, 6423] CENTER text:[6415, 6416, " "] textClose:[6422, 6423, "|"]
+          Text[6415, 6416] chars:[6415, 6416, " "]
         TableCell[6423, 6434] CENTER text:[6427, 6428, "X"] textClose:[6433, 6434, "|"]
           Text[6427, 6428] chars:[6427, 6428, "X"]
       TableRow[6435, 6577] rowNumber=44
@@ -1896,7 +1922,8 @@ Document[0, 10153]
           Text[6491, 6496] chars:[6491, 6496, "ENTER"]
           HtmlInline[6496, 6502] chars:[6496, 6502, "</kbd>"]
           Text[6502, 6502]
-        TableCell[6558, 6566] CENTER textClose:[6565, 6566, "|"]
+        TableCell[6558, 6566] CENTER text:[6558, 6559, " "] textClose:[6565, 6566, "|"]
+          Text[6558, 6559] chars:[6558, 6559, " "]
         TableCell[6566, 6577] CENTER text:[6570, 6571, "X"] textClose:[6576, 6577, "|"]
           Text[6570, 6571] chars:[6570, 6571, "X"]
       TableRow[6578, 6720] rowNumber=45
@@ -1910,7 +1937,8 @@ Document[0, 10153]
           Text[6640, 6645] chars:[6640, 6645, "ENTER"]
           HtmlInline[6645, 6651] chars:[6645, 6651, "</kbd>"]
           Text[6651, 6651]
-        TableCell[6701, 6709] CENTER textClose:[6708, 6709, "|"]
+        TableCell[6701, 6709] CENTER text:[6701, 6702, " "] textClose:[6708, 6709, "|"]
+          Text[6701, 6702] chars:[6701, 6702, " "]
         TableCell[6709, 6720] CENTER text:[6713, 6714, "X"] textClose:[6719, 6720, "|"]
           Text[6713, 6714] chars:[6713, 6714, "X"]
       TableRow[6721, 6863] rowNumber=46
@@ -1924,7 +1952,8 @@ Document[0, 10153]
           Text[6783, 6792] chars:[6783, 6792, "BACKSPACE"]
           HtmlInline[6792, 6798] chars:[6792, 6798, "</kbd>"]
           Text[6798, 6798]
-        TableCell[6844, 6852] CENTER textClose:[6851, 6852, "|"]
+        TableCell[6844, 6852] CENTER text:[6844, 6845, " "] textClose:[6851, 6852, "|"]
+          Text[6844, 6845] chars:[6844, 6845, " "]
         TableCell[6852, 6863] CENTER text:[6856, 6857, "X"] textClose:[6862, 6863, "|"]
           Text[6856, 6857] chars:[6856, 6857, "X"]
       TableRow[6864, 7006] rowNumber=47
@@ -1934,7 +1963,8 @@ Document[0, 10153]
           HtmlEntity[6878, 6884] "&nbsp;"
           HtmlEntity[6884, 6890] "&nbsp;"
           Text[6890, 6947] chars:[6890, 6947, "Inden … tions"]
-        TableCell[6987, 6995] CENTER textClose:[6994, 6995, "|"]
+        TableCell[6987, 6995] CENTER text:[6987, 6988, " "] textClose:[6994, 6995, "|"]
+          Text[6987, 6988] chars:[6987, 6988, " "]
         TableCell[6995, 7006] CENTER text:[6999, 7000, "X"] textClose:[7005, 7006, "|"]
           Text[6999, 7000] chars:[6999, 7000, "X"]
       TableRow[7007, 7149] rowNumber=48
@@ -1942,7 +1972,8 @@ Document[0, 10153]
           StrongEmphasis[7009, 7029] textOpen:[7009, 7011, "**"] text:[7011, 7027, "Code Completions"] textClose:[7027, 7029, "**"]
             Text[7011, 7027] chars:[7011, 7027, "Code  … tions"]
           Text[7029, 7029]
-        TableCell[7130, 7138] CENTER textClose:[7137, 7138, "|"]
+        TableCell[7130, 7138] CENTER text:[7130, 7131, " "] textClose:[7137, 7138, "|"]
+          Text[7130, 7131] chars:[7130, 7131, " "]
         TableCell[7138, 7149] CENTER text:[7142, 7143, "X"] textClose:[7148, 7149, "|"]
           Text[7142, 7143] chars:[7142, 7143, "X"]
       TableRow[7150, 7292] rowNumber=49
@@ -1952,7 +1983,8 @@ Document[0, 10153]
           HtmlEntity[7164, 7170] "&nbsp;"
           HtmlEntity[7170, 7176] "&nbsp;"
           Text[7176, 7244] chars:[7176, 7244, "Absol … rmats"]
-        TableCell[7273, 7281] CENTER textClose:[7280, 7281, "|"]
+        TableCell[7273, 7281] CENTER text:[7273, 7274, " "] textClose:[7280, 7281, "|"]
+          Text[7273, 7274] chars:[7273, 7274, " "]
         TableCell[7281, 7292] CENTER text:[7285, 7286, "X"] textClose:[7291, 7292, "|"]
           Text[7285, 7286] chars:[7285, 7286, "X"]
       TableRow[7293, 7435] rowNumber=50
@@ -1962,7 +1994,8 @@ Document[0, 10153]
           HtmlEntity[7307, 7313] "&nbsp;"
           HtmlEntity[7313, 7319] "&nbsp;"
           Text[7319, 7365] chars:[7319, 7365, "Expli … aware"]
-        TableCell[7416, 7424] CENTER textClose:[7423, 7424, "|"]
+        TableCell[7416, 7424] CENTER text:[7416, 7417, " "] textClose:[7423, 7424, "|"]
+          Text[7416, 7417] chars:[7416, 7417, " "]
         TableCell[7424, 7435] CENTER text:[7428, 7429, "X"] textClose:[7434, 7435, "|"]
           Text[7428, 7429] chars:[7428, 7429, "X"]
       TableRow[7436, 7578] rowNumber=51
@@ -1975,7 +2008,8 @@ Document[0, 10153]
           Code[7495, 7504] textOpen:[7495, 7496, "`"] text:[7496, 7503, "issues/"] textClose:[7503, 7504, "`"]
             Text[7496, 7503] chars:[7496, 7503, "issues/"]
           Text[7504, 7529] chars:[7504, 7529, " link …  text"]
-        TableCell[7559, 7567] CENTER textClose:[7566, 7567, "|"]
+        TableCell[7559, 7567] CENTER text:[7559, 7560, " "] textClose:[7566, 7567, "|"]
+          Text[7559, 7560] chars:[7559, 7560, " "]
         TableCell[7567, 7578] CENTER text:[7571, 7572, "X"] textClose:[7577, 7578, "|"]
           Text[7571, 7572] chars:[7571, 7572, "X"]
       TableRow[7579, 7721] rowNumber=52
@@ -1985,7 +2019,8 @@ Document[0, 10153]
           HtmlEntity[7593, 7599] "&nbsp;"
           HtmlEntity[7599, 7605] "&nbsp;"
           Text[7605, 7668] chars:[7605, 7668, "GitHu … ulse."]
-        TableCell[7702, 7710] CENTER textClose:[7709, 7710, "|"]
+        TableCell[7702, 7710] CENTER text:[7702, 7703, " "] textClose:[7709, 7710, "|"]
+          Text[7702, 7703] chars:[7702, 7703, " "]
         TableCell[7710, 7721] CENTER text:[7714, 7715, "X"] textClose:[7720, 7721, "|"]
           Text[7714, 7715] chars:[7714, 7715, "X"]
       TableRow[7722, 7864] rowNumber=53
@@ -1995,7 +2030,8 @@ Document[0, 10153]
           HtmlEntity[7736, 7742] "&nbsp;"
           HtmlEntity[7742, 7748] "&nbsp;"
           Text[7748, 7795] chars:[7748, 7795, "Link  … files"]
-        TableCell[7845, 7853] CENTER textClose:[7852, 7853, "|"]
+        TableCell[7845, 7853] CENTER text:[7845, 7846, " "] textClose:[7852, 7853, "|"]
+          Text[7845, 7846] chars:[7845, 7846, " "]
         TableCell[7853, 7864] CENTER text:[7857, 7858, "X"] textClose:[7863, 7864, "|"]
           Text[7857, 7858] chars:[7857, 7858, "X"]
       TableRow[7865, 8007] rowNumber=54
@@ -2005,7 +2041,8 @@ Document[0, 10153]
           HtmlEntity[7879, 7885] "&nbsp;"
           HtmlEntity[7885, 7891] "&nbsp;"
           Text[7891, 7922] chars:[7891, 7922, "Emoji … etion"]
-        TableCell[7988, 7996] CENTER textClose:[7995, 7996, "|"]
+        TableCell[7988, 7996] CENTER text:[7988, 7989, " "] textClose:[7995, 7996, "|"]
+          Text[7988, 7989] chars:[7988, 7989, " "]
         TableCell[7996, 8007] CENTER text:[8000, 8001, "X"] textClose:[8006, 8007, "|"]
           Text[8000, 8001] chars:[8000, 8001, "X"]
       TableRow[8008, 8150] rowNumber=55
@@ -2015,7 +2052,8 @@ Document[0, 10153]
           HtmlEntity[8022, 8028] "&nbsp;"
           HtmlEntity[8028, 8034] "&nbsp;"
           Text[8034, 8098] chars:[8034, 8098, "Java  … ments"]
-        TableCell[8131, 8139] CENTER textClose:[8138, 8139, "|"]
+        TableCell[8131, 8139] CENTER text:[8131, 8132, " "] textClose:[8138, 8139, "|"]
+          Text[8131, 8132] chars:[8131, 8132, " "]
         TableCell[8139, 8150] CENTER text:[8143, 8144, "X"] textClose:[8149, 8150, "|"]
           Text[8143, 8144] chars:[8143, 8144, "X"]
       TableRow[8151, 8293] rowNumber=56
@@ -2023,7 +2061,8 @@ Document[0, 10153]
           StrongEmphasis[8153, 8174] textOpen:[8153, 8155, "**"] text:[8155, 8172, "Intention Actions"] textClose:[8172, 8174, "**"]
             Text[8155, 8172] chars:[8155, 8172, "Inten … tions"]
           Text[8174, 8174]
-        TableCell[8274, 8282] CENTER textClose:[8281, 8282, "|"]
+        TableCell[8274, 8282] CENTER text:[8274, 8275, " "] textClose:[8281, 8282, "|"]
+          Text[8274, 8275] chars:[8274, 8275, " "]
         TableCell[8282, 8293] CENTER text:[8286, 8287, "X"] textClose:[8292, 8293, "|"]
           Text[8286, 8287] chars:[8286, 8287, "X"]
       TableRow[8294, 8436] rowNumber=57
@@ -2033,7 +2072,8 @@ Document[0, 10153]
           HtmlEntity[8308, 8314] "&nbsp;"
           HtmlEntity[8314, 8320] "&nbsp;"
           Text[8320, 8401] chars:[8320, 8401, "Chang … ction"]
-        TableCell[8417, 8425] CENTER textClose:[8424, 8425, "|"]
+        TableCell[8417, 8425] CENTER text:[8417, 8418, " "] textClose:[8424, 8425, "|"]
+          Text[8417, 8418] chars:[8417, 8418, " "]
         TableCell[8425, 8436] CENTER text:[8429, 8430, "X"] textClose:[8435, 8436, "|"]
           Text[8429, 8430] chars:[8429, 8430, "X"]
       TableRow[8437, 8579] rowNumber=58
@@ -2043,7 +2083,8 @@ Document[0, 10153]
           HtmlEntity[8451, 8457] "&nbsp;"
           HtmlEntity[8457, 8463] "&nbsp;"
           Text[8463, 8506] chars:[8463, 8506, "Chang …  link"]
-        TableCell[8560, 8568] CENTER textClose:[8567, 8568, "|"]
+        TableCell[8560, 8568] CENTER text:[8560, 8561, " "] textClose:[8567, 8568, "|"]
+          Text[8560, 8561] chars:[8560, 8561, " "]
         TableCell[8568, 8579] CENTER text:[8572, 8573, "X"] textClose:[8578, 8579, "|"]
           Text[8572, 8573] chars:[8572, 8573, "X"]
       TableRow[8580, 8722] rowNumber=59
@@ -2053,7 +2094,8 @@ Document[0, 10153]
           HtmlEntity[8594, 8600] "&nbsp;"
           HtmlEntity[8600, 8606] "&nbsp;"
           Text[8606, 8662] chars:[8606, 8662, "Inten … aders"]
-        TableCell[8703, 8711] CENTER textClose:[8710, 8711, "|"]
+        TableCell[8703, 8711] CENTER text:[8703, 8704, " "] textClose:[8710, 8711, "|"]
+          Text[8703, 8704] chars:[8703, 8704, " "]
         TableCell[8711, 8722] CENTER text:[8715, 8716, "X"] textClose:[8721, 8722, "|"]
           Text[8715, 8716] chars:[8715, 8716, "X"]
       TableRow[8723, 8865] rowNumber=60
@@ -2063,7 +2105,8 @@ Document[0, 10153]
           HtmlEntity[8737, 8743] "&nbsp;"
           HtmlEntity[8743, 8749] "&nbsp;"
           Text[8749, 8820] chars:[8749, 8820, "Inten …  text"]
-        TableCell[8846, 8854] CENTER textClose:[8853, 8854, "|"]
+        TableCell[8846, 8854] CENTER text:[8846, 8847, " "] textClose:[8853, 8854, "|"]
+          Text[8846, 8847] chars:[8846, 8847, " "]
         TableCell[8854, 8865] CENTER text:[8858, 8859, "X"] textClose:[8864, 8865, "|"]
           Text[8858, 8859] chars:[8858, 8859, "X"]
       TableRow[8866, 9008] rowNumber=61
@@ -2073,7 +2116,8 @@ Document[0, 10153]
           HtmlEntity[8880, 8886] "&nbsp;"
           HtmlEntity[8886, 8892] "&nbsp;"
           Text[8892, 8934] chars:[8892, 8934, "Inten … ormat"]
-        TableCell[8989, 8997] CENTER textClose:[8996, 8997, "|"]
+        TableCell[8989, 8997] CENTER text:[8989, 8990, " "] textClose:[8996, 8997, "|"]
+          Text[8989, 8990] chars:[8989, 8990, " "]
         TableCell[8997, 9008] CENTER text:[9001, 9002, "X"] textClose:[9007, 9008, "|"]
           Text[9001, 9002] chars:[9001, 9002, "X"]
       TableRow[9009, 9151] rowNumber=62
@@ -2083,7 +2127,8 @@ Document[0, 10153]
           HtmlEntity[9023, 9029] "&nbsp;"
           HtmlEntity[9029, 9035] "&nbsp;"
           Text[9035, 9079] chars:[9035, 9079, "Updat … ntion"]
-        TableCell[9132, 9140] CENTER textClose:[9139, 9140, "|"]
+        TableCell[9132, 9140] CENTER text:[9132, 9133, " "] textClose:[9139, 9140, "|"]
+          Text[9132, 9133] chars:[9132, 9133, " "]
         TableCell[9140, 9151] CENTER text:[9144, 9145, "X"] textClose:[9150, 9151, "|"]
           Text[9144, 9145] chars:[9144, 9145, "X"]
       TableRow[9152, 9294] rowNumber=63
@@ -2093,7 +2138,8 @@ Document[0, 10153]
           HtmlEntity[9166, 9172] "&nbsp;"
           HtmlEntity[9172, 9178] "&nbsp;"
           Text[9178, 9247] chars:[9178, 9247, "Inten … eview"]
-        TableCell[9275, 9283] CENTER textClose:[9282, 9283, "|"]
+        TableCell[9275, 9283] CENTER text:[9275, 9276, " "] textClose:[9282, 9283, "|"]
+          Text[9275, 9276] chars:[9275, 9276, " "]
         TableCell[9283, 9294] CENTER text:[9287, 9288, "X"] textClose:[9293, 9294, "|"]
           Text[9287, 9288] chars:[9287, 9288, "X"]
       TableRow[9295, 9437] rowNumber=64
@@ -2101,7 +2147,8 @@ Document[0, 10153]
           StrongEmphasis[9297, 9312] textOpen:[9297, 9299, "**"] text:[9299, 9310, "Refactoring"] textClose:[9310, 9312, "**"]
             Text[9299, 9310] chars:[9299, 9310, "Refac … oring"]
           Text[9312, 9312]
-        TableCell[9418, 9426] CENTER textClose:[9425, 9426, "|"]
+        TableCell[9418, 9426] CENTER text:[9418, 9419, " "] textClose:[9425, 9426, "|"]
+          Text[9418, 9419] chars:[9418, 9419, " "]
         TableCell[9426, 9437] CENTER text:[9430, 9431, "X"] textClose:[9436, 9437, "|"]
           Text[9430, 9431] chars:[9430, 9431, "X"]
       TableRow[9438, 9580] rowNumber=65
@@ -2111,7 +2158,8 @@ Document[0, 10153]
           HtmlEntity[9452, 9458] "&nbsp;"
           HtmlEntity[9458, 9464] "&nbsp;"
           Text[9464, 9559] chars:[9464, 9559, "Autom …  wiki"]
-        TableCell[9561, 9569] CENTER textClose:[9568, 9569, "|"]
+        TableCell[9561, 9569] CENTER text:[9561, 9562, " "] textClose:[9568, 9569, "|"]
+          Text[9561, 9562] chars:[9561, 9562, " "]
         TableCell[9569, 9580] CENTER text:[9573, 9574, "X"] textClose:[9579, 9580, "|"]
           Text[9573, 9574] chars:[9573, 9574, "X"]
       TableRow[9581, 9723] rowNumber=66
@@ -2121,7 +2169,8 @@ Document[0, 10153]
           HtmlEntity[9595, 9601] "&nbsp;"
           HtmlEntity[9601, 9607] "&nbsp;"
           Text[9607, 9691] chars:[9607, 9691, "File  … e set"]
-        TableCell[9704, 9712] CENTER textClose:[9711, 9712, "|"]
+        TableCell[9704, 9712] CENTER text:[9704, 9705, " "] textClose:[9711, 9712, "|"]
+          Text[9704, 9705] chars:[9704, 9705, " "]
         TableCell[9712, 9723] CENTER text:[9716, 9717, "X"] textClose:[9722, 9723, "|"]
           Text[9716, 9717] chars:[9716, 9717, "X"]
       TableRow[9724, 9866] rowNumber=67
@@ -2131,7 +2180,8 @@ Document[0, 10153]
           HtmlEntity[9738, 9744] "&nbsp;"
           HtmlEntity[9744, 9750] "&nbsp;"
           Text[9750, 9830] chars:[9750, 9830, "Refac … files"]
-        TableCell[9847, 9855] CENTER textClose:[9854, 9855, "|"]
+        TableCell[9847, 9855] CENTER text:[9847, 9848, " "] textClose:[9854, 9855, "|"]
+          Text[9847, 9848] chars:[9847, 9848, " "]
         TableCell[9855, 9866] CENTER text:[9859, 9860, "X"] textClose:[9865, 9866, "|"]
           Text[9859, 9860] chars:[9859, 9860, "X"]
       TableRow[9867, 10009] rowNumber=68
@@ -2141,7 +2191,8 @@ Document[0, 10153]
           HtmlEntity[9881, 9887] "&nbsp;"
           HtmlEntity[9887, 9893] "&nbsp;"
           Text[9893, 9969] chars:[9893, 9969, "Refac … ences"]
-        TableCell[9990, 9998] CENTER textClose:[9997, 9998, "|"]
+        TableCell[9990, 9998] CENTER text:[9990, 9991, " "] textClose:[9997, 9998, "|"]
+          Text[9990, 9991] chars:[9990, 9991, " "]
         TableCell[9998, 10009] CENTER text:[10002, 10003, "X"] textClose:[10008, 10009, "|"]
           Text[10002, 10003] chars:[10002, 10003, "X"]
       TableRow[10010, 10152] rowNumber=69
@@ -2151,7 +2202,8 @@ Document[0, 10153]
           HtmlEntity[10024, 10030] "&nbsp;"
           HtmlEntity[10030, 10036] "&nbsp;"
           Text[10036, 10107] chars:[10036, 10107, "Ancho …  text"]
-        TableCell[10133, 10141] CENTER textClose:[10140, 10141, "|"]
+        TableCell[10133, 10141] CENTER text:[10133, 10134, " "] textClose:[10140, 10141, "|"]
+          Text[10133, 10134] chars:[10133, 10134, " "]
         TableCell[10141, 10152] CENTER text:[10145, 10146, "X"] textClose:[10151, 10152, "|"]
           Text[10145, 10146] chars:[10145, 10146, "X"]
 ````````````````````````````````

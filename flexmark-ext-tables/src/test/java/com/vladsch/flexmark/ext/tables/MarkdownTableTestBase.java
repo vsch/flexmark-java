@@ -84,7 +84,7 @@ public class MarkdownTableTestBase {
 
     DataHolder formatOptions(CharSequence tableIndentPrefix, DataHolder options) {
         MutableDataSet useOptions = (options == null ? new MutableDataSet() : new MutableDataSet(options))
-                .set(Parser.INTELLIJ_DUMMY_IDENTIFIER, true)
+                //.set(Parser.INTELLIJ_DUMMY_IDENTIFIER, true)
                 .set(TablesExtension.FORMAT_TABLE_INDENT_PREFIX, "")
                 .set(TablesExtension.FORMAT_TABLE_MIN_SEPARATOR_COLUMN_WIDTH, 3)
                 .set(TablesExtension.FORMAT_TABLE_LEAD_TRAIL_PIPES, true)
@@ -111,21 +111,6 @@ public class MarkdownTableTestBase {
                     @Override
                     public int charWidth(final CharSequence s) {
                         return BasedSequenceImpl.of(s).countNotChars(INTELLIJ_DUMMY_IDENTIFIER_CHAR);
-                    }
-                })
-
-                .set(TablesExtension.FORMAT_CHAR_WIDTH_PROVIDER, new CharWidthProvider() {
-                    public int spaceWidth() {
-                        return 1;
-                    }
-
-                    public int charWidth(char c) {
-                        return (c == INTELLIJ_DUMMY_IDENTIFIER_CHAR) ? 0 : 1;
-                    }
-
-                    public int charWidth(CharSequence s) {
-                        if (s == null) return 0;
-                        return s.length() - BasedSequenceImpl.of(s).countChars(INTELLIJ_DUMMY_IDENTIFIER_CHAR);
                     }
                 });
         return useOptions;
