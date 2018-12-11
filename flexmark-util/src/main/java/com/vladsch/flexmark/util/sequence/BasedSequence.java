@@ -26,6 +26,7 @@ public interface BasedSequence extends CharSequence, Comparable<CharSequence> {
     char EOL_CHAR = EOL_CHARS.charAt(1);
     char EOL_CHAR1 = EOL_CHARS.charAt(0);
     char EOL_CHAR2 = EOL_CHARS.charAt(1);
+    BasedSequence[] EMPTY_SEGMENTS = new BasedSequence[0];
 
     /**
      * @return the last character of the sequence or '\0' if empty

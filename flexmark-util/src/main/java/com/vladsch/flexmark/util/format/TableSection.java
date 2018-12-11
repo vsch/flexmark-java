@@ -4,11 +4,14 @@ import java.util.ArrayList;
 
 @SuppressWarnings("WeakerAccess")
 public class TableSection {
+    public final TableSectionType sectionType;
     public final ArrayList<TableRow> rows = new ArrayList<>();
     protected int row;
     protected int column;
 
-    public TableSection() {
+    public TableSection(TableSectionType sectionType) {
+        this.sectionType = sectionType;
+        
         row = 0;
         column = 0;
     }
@@ -65,8 +68,12 @@ public class TableSection {
         return rows.get(row).expandTo(column);
     }
 
-    protected TableRow defaultRow() {
+    public TableRow defaultRow() {
         return new TableRow();
+    }
+
+    public TableCell defaultCell() {
+        return TableCell.NULL;
     }
 
     public TableRow get(int row) {

@@ -23,6 +23,10 @@ import org.junit.runners.Suite;
         FormattingAppendableImplTest.class,
         RepeatedCharSequenceTest.class,
         HtmlFormattingAppendableBaseTest.class,
+        MaxAggregatorTest.class,
+        MinAggregatorTest.class,
+        BoundedMaxAggregatorTest.class,
+        BoundedMinAggregatorTest.class,
 })
 public class UtilsTestSuite {
 }

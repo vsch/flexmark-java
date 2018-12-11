@@ -1457,17 +1457,17 @@ public class FlexmarkHtmlParser {
                         processTableCaption(out, (Element) item);
                         break;
                     case TBODY:
-                        myTable.setHeading(false);
+                        myTable.setHeader(false);
                         processTableSection(out, (Element) item);
                         break;
                     case THEAD:
-                        myTable.setHeading(true);
+                        myTable.setHeader(true);
                         processTableSection(out, (Element) item);
                         break;
                     case TR:
                         Element tableRow = (Element) item;
                         Elements children = tableRow.children();
-                        myTable.setHeading(!children.isEmpty() && children.get(0).tagName().equalsIgnoreCase("th"));
+                        myTable.setHeader(!children.isEmpty() && children.get(0).tagName().equalsIgnoreCase("th"));
                         processTableRow(out, (Element) item);
                         break;
                 }
@@ -1501,23 +1501,23 @@ public class FlexmarkHtmlParser {
                 if (tagParam.tagType == TagType.TR) {
                     Element tableRow = (Element) node;
                     Elements children = tableRow.children();
-                    boolean wasHeading = myTable.isHeading();
+                    boolean wasHeading = myTable.getHeader();
                     if (!children.isEmpty()) {
                         if (children.get(0).tagName().equalsIgnoreCase("th")) {
-                            myTable.setHeading(true);
+                            myTable.setHeader(true);
                         }
                     }
-                    if (myTable.isHeading() && myTable.body.rows.size() > 0) {
+                    if (myTable.getHeader() && myTable.body.rows.size() > 0) {
                         if (myOptions.ignoreTableHeadingAfterRows) {
                             // ignore it
                             myTableSuppressColumns = true;
                         } else {
-                            myTable.setHeading(false);
+                            myTable.setHeader(false);
                         }
                     }
                     processTableRow(out, tableRow);
                     myTableSuppressColumns = false;
-                    myTable.setHeading(wasHeading);
+                    myTable.setHeader(wasHeading);
                 }
             } else {
                 processWrapped(out, element, true);

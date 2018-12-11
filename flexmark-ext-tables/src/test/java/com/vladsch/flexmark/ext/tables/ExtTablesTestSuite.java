@@ -7,8 +7,9 @@ import org.junit.runners.Suite;
         ComboTableSpecTest.class,
         ComboTableFormatterSpecTest.class,
         ComboTableManipulationSpecTest.class,
-        //TextCollectingVisitorTest.class,
+        TableTextCollectingVisitorTest.class,
         MarkdownTableTest.class,
+        TableCellOffsetInfoTest.class,
         //JiraTablesSpecTest.class,
 })
 public class ExtTablesTestSuite {

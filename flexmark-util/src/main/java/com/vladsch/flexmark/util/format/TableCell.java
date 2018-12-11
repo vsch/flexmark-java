@@ -6,11 +6,15 @@ import com.vladsch.flexmark.util.sequence.BasedSequenceImpl;
 import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
 import com.vladsch.flexmark.util.sequence.SubSequence;
 
-import static com.vladsch.flexmark.util.Utils.*;
+import static com.vladsch.flexmark.util.Utils.maxLimit;
+import static com.vladsch.flexmark.util.Utils.min;
+import static com.vladsch.flexmark.util.Utils.minLimit;
 
 @SuppressWarnings("WeakerAccess")
 public class TableCell {
     public final static TableCell NULL = new TableCell(SubSequence.NULL, " ", BasedSequence.NULL, 1, 0, CellAlignment.NONE);
+    public final static TableCell DEFAULT_CELL = new TableCell(SubSequence.NULL, " ", BasedSequence.NULL, 1, 1, CellAlignment.NONE);
+    public static final int NOT_TRACKED = Integer.MAX_VALUE;
 
     public final BasedSequence openMarker;
     public final BasedSequence text;
@@ -28,11 +32,22 @@ public class TableCell {
         this(BasedSequence.NULL, text, BasedSequence.NULL, rowSpan, columnSpan, CellAlignment.NONE);
     }
 
-    public TableCell(final CharSequence text, final int rowSpan, final int columnSpan, final CellAlignment alignment) {
+    public TableCell(
+            final CharSequence text,
+            final int rowSpan,
+            final int columnSpan,
+            final CellAlignment alignment
+    ) {
         this(BasedSequence.NULL, text, BasedSequence.NULL, rowSpan, columnSpan, alignment);
     }
 
-    public TableCell(CharSequence openMarker, final CharSequence text, CharSequence closeMarker, final int rowSpan, final int columnSpan) {
+    public TableCell(
+            CharSequence openMarker,
+            final CharSequence text,
+            CharSequence closeMarker,
+            final int rowSpan,
+            final int columnSpan
+    ) {
         this(openMarker, text, closeMarker, rowSpan, columnSpan, CellAlignment.NONE);
     }
 
@@ -44,7 +59,7 @@ public class TableCell {
             final int columnSpan,
             final CellAlignment alignment
     ) {
-        this(openMarker, text, closeMarker, rowSpan, columnSpan, alignment, MarkdownTable.NOT_TRACKED, MarkdownTable.NOT_TRACKED, 0, false, false);
+        this(openMarker, text, closeMarker, rowSpan, columnSpan, alignment, NOT_TRACKED, NOT_TRACKED, 0, false, false);
     }
 
     public TableCell(
@@ -59,12 +74,13 @@ public class TableCell {
             final int trackedTextAdjust,
             final boolean afterSpace,
             final boolean afterDelete
-            
+
     ) {
         BasedSequence chars = BasedSequenceImpl.of(text);
         this.openMarker = BasedSequenceImpl.of(openMarker);
-        this.text = chars.isEmpty() ? PrefixedSubSequence.of(" ", this.openMarker.subSequence(this.openMarker.length(), this.openMarker.length())) : chars;
         this.closeMarker = BasedSequenceImpl.of(closeMarker);
+        BasedSequence useMarker = this.openMarker.isEmpty() ? this.closeMarker.subSequence(0,0) : this.openMarker.subSequence(this.openMarker.length());
+        this.text = chars.isEmpty() && chars != BasedSequence.NULL ? PrefixedSubSequence.of(" ", useMarker) : chars;
         this.rowSpan = rowSpan;
         this.columnSpan = columnSpan;
         this.alignment = alignment != null ? alignment : CellAlignment.NONE;
@@ -75,9 +91,15 @@ public class TableCell {
         this.afterDelete = afterDelete;
     }
 
-    public TableCell withColumnSpan(int columnSpan) { return new TableCell(openMarker, text, closeMarker, rowSpan, columnSpan, alignment, trackedTextOffset, spanTrackedOffset == MarkdownTable.NOT_TRACKED ? MarkdownTable.NOT_TRACKED : min(spanTrackedOffset, columnSpan), trackedTextAdjust, afterSpace, afterDelete); }
+    public TableCell withColumnSpan(int columnSpan) { return new TableCell(openMarker, text, closeMarker, rowSpan, columnSpan, alignment, trackedTextOffset, spanTrackedOffset == NOT_TRACKED ? NOT_TRACKED : min(spanTrackedOffset, columnSpan), trackedTextAdjust, afterSpace, afterDelete); }
 
-    public TableCell withText(CharSequence text) { return new TableCell(openMarker, text, closeMarker, rowSpan, columnSpan, alignment, MarkdownTable.NOT_TRACKED, spanTrackedOffset, trackedTextAdjust, afterSpace, afterDelete); }
+    public TableCell withText(CharSequence text) { return new TableCell(openMarker, text, closeMarker, rowSpan, columnSpan, alignment, NOT_TRACKED, spanTrackedOffset, trackedTextAdjust, afterSpace, afterDelete); }
+
+    public TableCell withText(
+            CharSequence openMarker,
+            CharSequence text,
+            CharSequence closeMarker
+    ) { return new TableCell(openMarker, text, closeMarker, rowSpan, columnSpan, alignment, NOT_TRACKED, spanTrackedOffset, trackedTextAdjust, afterSpace, afterDelete); }
 
     public TableCell withRowSpan(int rowSpan) { return new TableCell(openMarker, text, closeMarker, rowSpan, columnSpan, alignment, trackedTextOffset, spanTrackedOffset, trackedTextAdjust, afterSpace, afterDelete); }
 
@@ -85,12 +107,16 @@ public class TableCell {
 
     public TableCell withTrackedOffset(int trackedTextOffset) { return new TableCell(openMarker, text, closeMarker, rowSpan, columnSpan, alignment, trackedTextOffset, spanTrackedOffset, trackedTextAdjust, afterSpace, afterDelete); }
 
-    public TableCell withTrackedOffset(int trackedTextOffset, boolean afterSpace, boolean afterSpaceDelete) { return new TableCell(openMarker, text, closeMarker, rowSpan, columnSpan, alignment, trackedTextOffset, spanTrackedOffset, trackedTextAdjust, afterSpace, afterSpaceDelete); }
-    
+    public TableCell withTrackedOffset(
+            int trackedTextOffset,
+            boolean afterSpace,
+            boolean afterSpaceDelete
+    ) { return new TableCell(openMarker, text, closeMarker, rowSpan, columnSpan, alignment, trackedTextOffset, spanTrackedOffset, trackedTextAdjust, afterSpace, afterSpaceDelete); }
+
     public TableCell withSpanTrackedOffset(int spanTrackedOffset) { return new TableCell(openMarker, text, closeMarker, rowSpan, columnSpan, alignment, trackedTextOffset, spanTrackedOffset, trackedTextAdjust, afterSpace, afterDelete); }
 
     public TableCell withTrackedTextAdjust(int trackedTextAdjust) { return new TableCell(openMarker, text, closeMarker, rowSpan, columnSpan, alignment, trackedTextOffset, spanTrackedOffset, trackedTextAdjust, afterSpace, afterDelete); }
-    
+
     public TableCell withAfterSpace(boolean afterSpace) { return new TableCell(openMarker, text, closeMarker, rowSpan, columnSpan, alignment, trackedTextOffset, spanTrackedOffset, trackedTextAdjust, afterSpace, afterDelete); }
 
     BasedSequence getLastSegment() {
@@ -109,14 +135,20 @@ public class TableCell {
         return previousCell != null ? previousCell.getEndOffset() : !openMarker.isEmpty() ? openMarker.getEndOffset() : text.getStartOffset();
     }
 
-    public int getTextStartOffset() {
-        return text.getStartOffset();
+    public int getTextStartOffset(TableCell previousCell) {
+        if (!text.isEmpty()) return text.getStartOffset();
+        else if (!openMarker.isEmpty()) return openMarker.getEndOffset() + 1;
+        else if (previousCell != null) return previousCell.getEndOffset() + 1;
+        else return closeMarker.getStartOffset() - 1;
     }
 
-    public int getTextEndOffset() {
-        return text.getEndOffset();
+    public int getTextEndOffset(TableCell previousCell) {
+        if (!text.isEmpty()) return text.getEndOffset();
+        else if (!openMarker.isEmpty()) return openMarker.getEndOffset() + 1;
+        else if (previousCell != null) return previousCell.getEndOffset() + 1;
+        else return closeMarker.getStartOffset() - 1;
     }
-    
+
     public int getInsideEndOffset() {
         return !closeMarker.isEmpty() ? closeMarker.getStartOffset() : text.getEndOffset();
     }
@@ -126,18 +158,18 @@ public class TableCell {
     }
 
     public int insideToTextOffset(int insideOffset, TableCell previousCell) {
-        return maxLimit(text.length(), minLimit(insideOffset - getInsideStartOffset(previousCell) + getTextStartOffset(), 0));
+        return maxLimit(text.length(), minLimit(insideOffset - getInsideStartOffset(previousCell) + getTextStartOffset(previousCell), 0));
     }
 
-    public int textToInsideOffset(int insideOffset,TableCell previousCell) {
-        return maxLimit(getCellSize(previousCell), minLimit(insideOffset - getTextStartOffset() + getInsideStartOffset(previousCell), 0));
+    public int textToInsideOffset(int insideOffset, TableCell previousCell) {
+        return maxLimit(getCellSize(previousCell), minLimit(insideOffset - getTextStartOffset(previousCell) + getInsideStartOffset(previousCell), 0));
     }
 
-    public boolean isInsideCell(int offset,TableCell previousCell) {
+    public boolean isInsideCell(int offset, TableCell previousCell) {
         return offset >= getInsideStartOffset(previousCell) && offset <= getInsideEndOffset();
     }
 
-    public boolean isAtCell(int offset,TableCell previousCell) {
+    public boolean isAtCell(int offset, TableCell previousCell) {
         return offset >= getInsideStartOffset(previousCell) && offset <= getInsideEndOffset();
     }
 

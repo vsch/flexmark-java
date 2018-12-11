@@ -265,22 +265,25 @@ flexmark-java
 0.35.0
 ------
 
-* [ ] Add: table navigation helpers, tests needed.
-* [ ] Test: navigation
+* Test: navigation
   * [ ] Cells next/prev
   * [ ] Rows next/prev
-  * [ ] Next/Prev Tab
-* [ ] For next/prev tab in separator stop at start and end of cell for editing `:`
-* [ ] For next/prev tab in table navigate to end of text to allow continued typing
-* [ ] For next/prev tab in caption navigate to end of text like a cell
-* [ ] Add: option for table navigation to select cell text (excluding separator)
-* [ ] Test: `addTrackOffset()` for caption before/inside/after location. Add these to
-      `TableCellInfo` so the caption tests are not bastardized.
-  * [ ] Add: `isBeforeCaption()`, `isInsideCaption()`, `isAfterCaption()`
-* [ ] Add: change offset tracking to provide nullable `Character` and `isDeleted` nullable
-      `Boolean`. `isDeleted` == `null`, neither deleted nor inserted, `true` - deleted, `false` -
-      inserted. Character null - unknown, else character typed, inserted or deleted. Then all
-      internal changes to what is needed will be isolated inside the `MarkdownTable` class.
+  * Next/Prev Tab
+* Add: For next/prev tab table navigation in:
+  * separator stop at start and end of cell for editing `:`
+  * header/body stop at end of text to allow continued typing
+  * caption navigate to end of text like a cell
+* Test: `addTrackOffset()` for caption before/inside/after location.
+  * Add: `isBeforeCaption()`, `isInsideCaption()`, `isAfterCaption()`
+* Fix: change offset tracking to provide nullable `Character` and `isDeleted`. `true` - deleted,
+  `false` - inserted/typed. Character null - unknown, else character typed, inserted or deleted.
+  Then all internal changes to what is needed will be isolated inside the `MarkdownTable` class.
+* Add: table navigation helpers
+* Fix: `TextCollectingVisitor` to handle not just inline nodes but paragraphs and optionally
+  other blocks. It now adds spaces between non-adjacent text nodes and adds a blank line between
+  paragraphs.
+* Add: `TableTextCollectingVisitor` which will extract the table text (without separator) and
+  add a blank line after the table.
 * Add: inline parser will no longer process block nodes marked as `DoNotDecorate` with inline
   parser extensions to prevent undesired inline processing of nodes such as a table separator by
   typographic extension.
@@ -3688,6 +3691,7 @@ the node's characters, independent of child node breakdown.
   title"Abbreviation Expansion Text">Abbreviation</abbr>`.
 
 ````````````````````````````````
+
 
 [Admonition Extension, Material for MkDocs]: https://squidfunk.github.io/mkdocs-material/extensions/admonition/
 

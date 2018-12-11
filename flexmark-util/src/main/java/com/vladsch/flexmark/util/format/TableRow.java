@@ -9,8 +9,8 @@ import static com.vladsch.flexmark.util.Utils.minLimit;
 @SuppressWarnings("WeakerAccess")
 public class TableRow {
     protected final List<TableCell> cells;
-    protected int beforeOffset = MarkdownTable.NOT_TRACKED;
-    protected int afterOffset = MarkdownTable.NOT_TRACKED;
+    protected int beforeOffset = TableCell.NOT_TRACKED;
+    protected int afterOffset = TableCell.NOT_TRACKED;
     private boolean normalized = true;
 
     public TableRow() {
@@ -274,6 +274,23 @@ public class TableRow {
             cells.add(cell);
         }
         return this;
+    }
+    
+    void fillMissingColumns(Integer minColumn, int maxColumns, TableCell empty) {
+        int columns = getSpannedColumns();
+        if (columns < maxColumns) {
+            if (minColumn == null || minColumn >= columns) {
+                // just add at the end
+                int count = cells.size() - 1 + maxColumns - columns;
+                expandTo(count, empty);
+            } else {
+                // insert at minColumn
+                int i = maxColumns - columns;
+                while (i-- > 0) {
+                    cells.add(minColumn, empty);
+                }
+            }
+        }
     }
 
     public void set(int column, TableCell cell) {

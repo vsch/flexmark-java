@@ -25,59 +25,7 @@ import static com.vladsch.flexmark.util.format.TableFormatOptions.INTELLIJ_DUMMY
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-public class MarkdownTableTest {
-
-    private MarkdownTable[] getTables(CharSequence markdown) {
-        return getTables(markdown, null);
-    }
-
-    private MarkdownTable[] getTables(CharSequence markdown, DataHolder options) {
-        if (options == null) {
-            options = new MutableDataSet()
-                    .set(Parser.EXTENSIONS, Arrays.asList(TablesExtension.create()));
-        } else {
-            options = new MutableDataSet(options)
-                    .set(Parser.EXTENSIONS, Arrays.asList(TablesExtension.create()));
-        }
-
-        Parser parser = Parser.builder(options).build();
-        Node document = parser.parse(BasedSequenceImpl.of(markdown));
-        TableExtractingVisitor tableVisitor = new TableExtractingVisitor(options);
-        return tableVisitor.getTables(document);
-    }
-
-    private String getFormattedTable(MarkdownTable table) {
-        return getFormattedTable(table, "", "");
-    }
-
-    private String getFormattedTable(MarkdownTable table, String linePrefix, String intellijDummyIdentifier) {
-        MarkdownWriter out = new MarkdownWriter(new StringBuilder(), MarkdownWriter.FORMAT_ALL);
-        table.appendTable(out);
-        out.flush();
-        return out.toString();
-    }
-
-    private String[] getFormattedTables(MarkdownTable[] tables) {
-        List<String> formatted = new ArrayList<>();
-
-        for (MarkdownTable table : tables) {
-            MarkdownWriter out = new MarkdownWriter(new StringBuilder(), MarkdownWriter.FORMAT_ALL);
-            table.appendTable(out);
-            out.flush();
-            formatted.add(out.toString());
-        }
-        return formatted.toArray(new String[0]);
-    }
-
-    private MarkdownTable getTable(CharSequence markdown) {
-        return getTable(markdown, null);
-    }
-
-    private MarkdownTable getTable(CharSequence markdown, DataHolder options) {
-        MarkdownTable table = getTables(markdown, options)[0];
-        table.normalize();
-        return table;
-    }
+public class MarkdownTableTest extends MarkdownTableTestBase {
 
     final static private String markdown1 = "" +
             "| First Header  |\n" +
@@ -114,21 +62,6 @@ public class MarkdownTableTest {
             "| git diff     | git diff2      |\n" +
             "| git diff     | git diff       | git diff3      |\n" +
             "| git diff     | git diff       | git diff       | git diff4      |\n" +
-            "[Table Caption]\n" +
-            "";
-
-    final static private String markdown5 = "" +
-            "| Left-aligned1 |\n" +
-            "| Left-aligned | Center-aligned2 |\n" +
-            "| Left-aligned | Center-aligned | Right-aligned3 |\n" +
-            "| Left-aligned | Center-aligned | Right-aligned | Right-aligned4 |\n" +
-            "|  |  |  |  |\n" +
-            "| :---         |     :---:      |          ---: |          ---: |\n" +
-            "| git status1  |\n" +
-            "| git diff     | git diff2      |\n" +
-            "| git diff     | git diff       | git diff3      |\n" +
-            "| git diff     | git diff       | git diff       | git diff4      |\n" +
-            "|  |  |  |  |\n" +
             "[Table Caption]\n" +
             "";
 
@@ -188,13 +121,13 @@ public class MarkdownTableTest {
         assertEquals("  ", table2.getCaption().toString());
         assertEquals("Table Caption", table3.getCaption().toString());
 
-        assertEquals("", table1.getCaptionOpen().toString());
-        assertEquals("[", table2.getCaptionOpen().toString());
-        assertEquals("[", table3.getCaptionOpen().toString());
+        assertEquals("", table1.getCaptionCell().openMarker.toString());
+        assertEquals("[", table2.getCaptionCell().openMarker.toString());
+        assertEquals("[", table3.getCaptionCell().openMarker.toString());
 
-        assertEquals("", table1.getCaptionClose().toString());
-        assertEquals("]", table2.getCaptionClose().toString());
-        assertEquals("]", table3.getCaptionClose().toString());
+        assertEquals("", table1.getCaptionCell().closeMarker.toString());
+        assertEquals("]", table2.getCaptionCell().closeMarker.toString());
+        assertEquals("]", table3.getCaptionCell().closeMarker.toString());
     }
 
     @Test
@@ -331,26 +264,26 @@ public class MarkdownTableTest {
     public void test_maxColumnsWithout() {
         MarkdownTable table4 = getTable(markdown4);
         // @formatter:off
-        assertEquals(0, table4.getMaxColumnsWithout(true, 0, 1, 2, 3, 4, 5, 6, 7, 8));
-        assertEquals(1, table4.getMaxColumnsWithout(true,    1, 2, 3, 4, 5, 6, 7, 8));
-        assertEquals(2, table4.getMaxColumnsWithout(true, 0,    2, 3, 4, 5, 6, 7, 8));
-        assertEquals(3, table4.getMaxColumnsWithout(true, 0, 1,    3, 4, 5, 6, 7, 8));
-        assertEquals(4, table4.getMaxColumnsWithout(true, 0, 1, 2,    4, 5, 6, 7, 8));
-        assertEquals(4, table4.getMaxColumnsWithout(true, 0, 1, 2, 3,    5, 6, 7, 8));
-        assertEquals(1, table4.getMaxColumnsWithout(true, 0, 1, 2, 3, 4,    6, 7, 8));
-        assertEquals(2, table4.getMaxColumnsWithout(true, 0, 1, 2, 3, 4, 5,    7, 8));
-        assertEquals(3, table4.getMaxColumnsWithout(true, 0, 1, 2, 3, 4, 5, 6,    8));
-        assertEquals(4, table4.getMaxColumnsWithout(true, 0, 1, 2, 3, 4, 5, 6, 7   ));
+        assertEquals(0, table4.getMaxColumnsWithoutRows(true, 0, 1, 2, 3, 4, 5, 6, 7, 8));
+        assertEquals(1, table4.getMaxColumnsWithoutRows(true,    1, 2, 3, 4, 5, 6, 7, 8));
+        assertEquals(2, table4.getMaxColumnsWithoutRows(true, 0,    2, 3, 4, 5, 6, 7, 8));
+        assertEquals(3, table4.getMaxColumnsWithoutRows(true, 0, 1,    3, 4, 5, 6, 7, 8));
+        assertEquals(4, table4.getMaxColumnsWithoutRows(true, 0, 1, 2,    4, 5, 6, 7, 8));
+        assertEquals(4, table4.getMaxColumnsWithoutRows(true, 0, 1, 2, 3,    5, 6, 7, 8));
+        assertEquals(1, table4.getMaxColumnsWithoutRows(true, 0, 1, 2, 3, 4,    6, 7, 8));
+        assertEquals(2, table4.getMaxColumnsWithoutRows(true, 0, 1, 2, 3, 4, 5,    7, 8));
+        assertEquals(3, table4.getMaxColumnsWithoutRows(true, 0, 1, 2, 3, 4, 5, 6,    8));
+        assertEquals(4, table4.getMaxColumnsWithoutRows(true, 0, 1, 2, 3, 4, 5, 6, 7   ));
    
-        assertEquals(0, table4.getMaxColumnsWithout(false, 0, 1, 2, 3, 4, 5, 6, 7));
-        assertEquals(1, table4.getMaxColumnsWithout(false,    1, 2, 3, 4, 5, 6, 7));
-        assertEquals(2, table4.getMaxColumnsWithout(false, 0,    2, 3, 4, 5, 6, 7));
-        assertEquals(3, table4.getMaxColumnsWithout(false, 0, 1,    3, 4, 5, 6, 7));
-        assertEquals(4, table4.getMaxColumnsWithout(false, 0, 1, 2,    4, 5, 6, 7));
-        assertEquals(1, table4.getMaxColumnsWithout(false, 0, 1, 2, 3,    5, 6, 7));
-        assertEquals(2, table4.getMaxColumnsWithout(false, 0, 1, 2, 3, 4,    6, 7));
-        assertEquals(3, table4.getMaxColumnsWithout(false, 0, 1, 2, 3, 4, 5,    7));
-        assertEquals(4, table4.getMaxColumnsWithout(false, 0, 1, 2, 3, 4, 5, 6   ));
+        assertEquals(0, table4.getMaxColumnsWithoutRows(false, 0, 1, 2, 3, 4, 5, 6, 7));
+        assertEquals(1, table4.getMaxColumnsWithoutRows(false,    1, 2, 3, 4, 5, 6, 7));
+        assertEquals(2, table4.getMaxColumnsWithoutRows(false, 0,    2, 3, 4, 5, 6, 7));
+        assertEquals(3, table4.getMaxColumnsWithoutRows(false, 0, 1,    3, 4, 5, 6, 7));
+        assertEquals(4, table4.getMaxColumnsWithoutRows(false, 0, 1, 2,    4, 5, 6, 7));
+        assertEquals(1, table4.getMaxColumnsWithoutRows(false, 0, 1, 2, 3,    5, 6, 7));
+        assertEquals(2, table4.getMaxColumnsWithoutRows(false, 0, 1, 2, 3, 4,    6, 7));
+        assertEquals(3, table4.getMaxColumnsWithoutRows(false, 0, 1, 2, 3, 4, 5,    7));
+        assertEquals(4, table4.getMaxColumnsWithoutRows(false, 0, 1, 2, 3, 4, 5, 6   ));
         // @formatter:on
     }
 
@@ -358,27 +291,27 @@ public class MarkdownTableTest {
     public void test_minColumnsWithout() {
         MarkdownTable table4 = getTable(markdown4);
         // @formatter:off
-        assertEquals(0, table4.getMinColumnsWithout(true, 0, 1, 2, 3, 4, 5, 6, 7, 8));
-        assertEquals(1, table4.getMinColumnsWithout(true,    1, 2, 3, 4, 5, 6, 7, 8));
-        assertEquals(2, table4.getMinColumnsWithout(true, 0,    2, 3, 4, 5, 6, 7, 8));
-        assertEquals(3, table4.getMinColumnsWithout(true, 0, 1,    3, 4, 5, 6, 7, 8));
-        assertEquals(4, table4.getMinColumnsWithout(true, 0, 1, 2,    4, 5, 6, 7, 8));
-        assertEquals(4, table4.getMinColumnsWithout(true, 0, 1, 2, 3,    5, 6, 7, 8));
-        assertEquals(1, table4.getMinColumnsWithout(true, 0, 1, 2, 3, 4,    6, 7, 8));
-        assertEquals(2, table4.getMinColumnsWithout(true, 0, 1, 2, 3, 4, 5,    7, 8));
-        assertEquals(3, table4.getMinColumnsWithout(true, 0, 1, 2, 3, 4, 5, 6,    8));
-        assertEquals(4, table4.getMinColumnsWithout(true, 0, 1, 2, 3, 4, 5, 6, 7   ));
-        assertEquals(1, table4.getMinColumnsWithout(true));
+        assertEquals(0, table4.getMinColumnsWithoutRows(true, 0, 1, 2, 3, 4, 5, 6, 7, 8));
+        assertEquals(1, table4.getMinColumnsWithoutRows(true,    1, 2, 3, 4, 5, 6, 7, 8));
+        assertEquals(2, table4.getMinColumnsWithoutRows(true, 0,    2, 3, 4, 5, 6, 7, 8));
+        assertEquals(3, table4.getMinColumnsWithoutRows(true, 0, 1,    3, 4, 5, 6, 7, 8));
+        assertEquals(4, table4.getMinColumnsWithoutRows(true, 0, 1, 2,    4, 5, 6, 7, 8));
+        assertEquals(4, table4.getMinColumnsWithoutRows(true, 0, 1, 2, 3,    5, 6, 7, 8));
+        assertEquals(1, table4.getMinColumnsWithoutRows(true, 0, 1, 2, 3, 4,    6, 7, 8));
+        assertEquals(2, table4.getMinColumnsWithoutRows(true, 0, 1, 2, 3, 4, 5,    7, 8));
+        assertEquals(3, table4.getMinColumnsWithoutRows(true, 0, 1, 2, 3, 4, 5, 6,    8));
+        assertEquals(4, table4.getMinColumnsWithoutRows(true, 0, 1, 2, 3, 4, 5, 6, 7   ));
+        assertEquals(1, table4.getMinColumnsWithoutRows(true));
 
-        assertEquals(0, table4.getMinColumnsWithout(false, 0, 1, 2, 3, 4, 5, 6, 7));
-        assertEquals(1, table4.getMinColumnsWithout(false,    1, 2, 3, 4, 5, 6, 7));
-        assertEquals(2, table4.getMinColumnsWithout(false, 0,    2, 3, 4, 5, 6, 7));
-        assertEquals(3, table4.getMinColumnsWithout(false, 0, 1,    3, 4, 5, 6, 7));
-        assertEquals(4, table4.getMinColumnsWithout(false, 0, 1, 2,    4, 5, 6, 7));
-        assertEquals(1, table4.getMinColumnsWithout(false, 0, 1, 2, 3,    5, 6, 7));
-        assertEquals(2, table4.getMinColumnsWithout(false, 0, 1, 2, 3, 4,    6, 7));
-        assertEquals(3, table4.getMinColumnsWithout(false, 0, 1, 2, 3, 4, 5,    7));
-        assertEquals(4, table4.getMinColumnsWithout(false, 0, 1, 2, 3, 4, 5, 6   ));
+        assertEquals(0, table4.getMinColumnsWithoutRows(false, 0, 1, 2, 3, 4, 5, 6, 7));
+        assertEquals(1, table4.getMinColumnsWithoutRows(false,    1, 2, 3, 4, 5, 6, 7));
+        assertEquals(2, table4.getMinColumnsWithoutRows(false, 0,    2, 3, 4, 5, 6, 7));
+        assertEquals(3, table4.getMinColumnsWithoutRows(false, 0, 1,    3, 4, 5, 6, 7));
+        assertEquals(4, table4.getMinColumnsWithoutRows(false, 0, 1, 2,    4, 5, 6, 7));
+        assertEquals(1, table4.getMinColumnsWithoutRows(false, 0, 1, 2, 3,    5, 6, 7));
+        assertEquals(2, table4.getMinColumnsWithoutRows(false, 0, 1, 2, 3, 4,    6, 7));
+        assertEquals(3, table4.getMinColumnsWithoutRows(false, 0, 1, 2, 3, 4, 5,    7));
+        assertEquals(4, table4.getMinColumnsWithoutRows(false, 0, 1, 2, 3, 4, 5, 6   ));
         // @formatter:on
     }
 
@@ -405,21 +338,28 @@ public class MarkdownTableTest {
         }
     }
 
+    final static private String markdown5 = "" +
+            "| Left-aligned1 |\n" +
+            "| Left-aligned | Center-aligned2 |\n" +
+            "| Left-aligned | Center-aligned | Right-aligned3 |\n" +
+            "| Left-aligned | Center-aligned | Right-aligned | Right-aligned4 |\n" +
+            "|  |  |  |  |\n" +
+            "| :---         |     :---:      |          ---: |          ---: |\n" +
+            "| git status1  |\n" +
+            "| git diff     | git diff2      |\n" +
+            "| git diff     | git diff       | git diff3      |\n" +
+            "| git diff     | git diff       | git diff       | git diff4      |\n" +
+            "|  |  |  |  |\n" +
+            "[Table Caption]\n" +
+            "";
+
     @Test
     public void test_isEmptyRow() {
         MarkdownTable table5 = getTable(markdown5);
         for (int i = 0; i < 10; i++) {
-            assertEquals("Row with sep: " + i, i == 4 || i == 10, table5.isEmptyRow(i, true));
-            assertEquals("Row without sep: " + i, i == 4 || i == 9, table5.isEmptyRow(i, false));
+            assertEquals("Row with sep: " + i, i == 4 || i == 10, table5.isAllRowsEmptyAt(i));
+            assertEquals("Row without sep: " + i, i == 4 || i == 9, table5.isContentRowsEmptyAt(i));
         }
-    }
-
-    void assertIndexOf(int expIndex, int expSpanOffset, MarkdownTable.IndexSpanOffset index) {
-        assertEquals(new MarkdownTable.IndexSpanOffset(expIndex, expSpanOffset).toString(), index.toString());
-    }
-
-    void assertIndexOf(String message, int expIndex, int expSpanOffset, MarkdownTable.IndexSpanOffset index) {
-        assertEquals(message, new MarkdownTable.IndexSpanOffset(expIndex, expSpanOffset).toString(), index.toString());
     }
 
     final static private String markdown7 = "" +
@@ -497,10 +437,6 @@ public class MarkdownTableTest {
             "| Data 4.1                                       |||| Data 4.5   |\n" +
             "";
 
-    void assertCellInfo(String message, int row, int column, Integer insideCol, Integer insideOffset, TableCellOffsetInfo info) {
-        assertEquals(message, new TableCellOffsetInfo(info.offset, info.table, info.section, null, null, row, column, insideCol, insideOffset).toString(), info.toString());
-    }
-
     @Test
     public void test_ExactColumn() {
         MarkdownTable table8 = getTable(markdown8);
@@ -521,55 +457,6 @@ public class MarkdownTableTest {
         // line 2
         assertCellInfo("", 1, 0, null, null, table8.getCellOffsetInfo(offset + 67));
         assertCellInfo("", 1, 0, 0, 0, table8.getCellOffsetInfo(offset + 68));
-    }
-
-    DataHolder formatOptions(CharSequence tableIndentPrefix, DataHolder options) {
-        MutableDataSet useOptions = (options == null ? new MutableDataSet() : new MutableDataSet(options))
-                .set(Parser.INTELLIJ_DUMMY_IDENTIFIER, true)
-                .set(TablesExtension.FORMAT_TABLE_INDENT_PREFIX, "")
-                .set(TablesExtension.FORMAT_TABLE_MIN_SEPARATOR_COLUMN_WIDTH, 3)
-                .set(TablesExtension.FORMAT_TABLE_LEAD_TRAIL_PIPES, true)
-                .set(TablesExtension.FORMAT_TABLE_ADJUST_COLUMN_WIDTH, true)
-                .set(TablesExtension.FORMAT_TABLE_FILL_MISSING_COLUMNS, true)
-                .set(TablesExtension.FORMAT_TABLE_LEFT_ALIGN_MARKER, DiscretionaryText.ADD)
-                .set(TablesExtension.FORMAT_TABLE_CAPTION_SPACES, DiscretionaryText.AS_IS)
-                .set(TablesExtension.FORMAT_TABLE_SPACE_AROUND_PIPES, true)
-                .set(TablesExtension.FORMAT_TABLE_APPLY_COLUMN_ALIGNMENT, true)
-                .set(TablesExtension.FORMAT_TABLE_MIN_SEPARATOR_DASHES, 3)
-                .set(TablesExtension.FORMAT_TABLE_CAPTION, TableCaptionHandling.AS_IS)
-                .set(TablesExtension.FORMAT_TABLE_TRIM_CELL_WHITESPACE, true)
-                .set(TablesExtension.FORMAT_CHAR_WIDTH_PROVIDER, new CharWidthProvider() {
-                    @Override
-                    public int spaceWidth() {
-                        return 1;
-                    }
-
-                    @Override
-                    public int charWidth(final char c) {
-                        return c == INTELLIJ_DUMMY_IDENTIFIER_CHAR ? 0 : 1;
-                    }
-
-                    @Override
-                    public int charWidth(final CharSequence s) {
-                        return BasedSequenceImpl.of(s).countNotChars(INTELLIJ_DUMMY_IDENTIFIER_CHAR);
-                    }
-                })
-
-                .set(TablesExtension.FORMAT_CHAR_WIDTH_PROVIDER, new CharWidthProvider() {
-                    public int spaceWidth() {
-                        return 1;
-                    }
-
-                    public int charWidth(char c) {
-                        return (c == INTELLIJ_DUMMY_IDENTIFIER_CHAR) ? 0 : 1;
-                    }
-
-                    public int charWidth(CharSequence s) {
-                        if (s == null) return 0;
-                        return s.length() - BasedSequenceImpl.of(s).countChars(INTELLIJ_DUMMY_IDENTIFIER_CHAR);
-                    }
-                });
-        return useOptions;
     }
 
     @Test
@@ -728,6 +615,117 @@ public class MarkdownTableTest {
                 "|                               Syntax highlighting                               |   X   |    X     |    |\n" +
                 "", formattedTable.substring(0, offset) + "^" + formattedTable.substring(offset));
         assertEquals(pos - 1, offset);
+    }
+
+    @Test
+    public void test_trackingOffset_BeforeCells() {
+        String markdown = "" +
+                "| Features                                                                        | Basic | Enhanced |    |\n" +
+                "^|:-------------------------------------------------------------------------------:|:-----:|:--------:|:---|\n" +
+                "| Works with builds 143.2730 or newer, product version IDEA 14.1.4                |   X   |    X     |    |\n" +
+                "| Preview Tab so you can see what the rendered markdown will look like on GitHub. |   X   |    X     |    |\n" +
+                "| Syntax highlighting                                                             |   X   |    X     |    |\n" +
+                "";
+
+        int pos = markdown.indexOf("^");
+        BasedSequence source = BasedSequenceImpl.of(markdown.substring(0, pos) + markdown.substring(pos + 1));
+        MarkdownTable table = getTable(source, formatOptions("", null));
+        assertTrue(table.addTrackedOffset(pos));
+        HtmlWriter out = new HtmlWriter(new StringBuilder(), 0, HtmlWriter.FORMAT_ALL);
+        table.appendTable(out);
+        String formattedTable = out.getText();
+        Map<Integer, Integer> offsets = table.getTrackedOffsets();
+        int offset = offsets.get(pos);
+
+        assertEquals("" +
+                "|                                    Features                                     | Basic | Enhanced |    |\n" +
+                "|:-------------------------------------------------------------------------------:|:-----:|:--------:|:---|\n" +
+                "|        Works with builds 143.2730 or newer, product version IDEA 14.1.4         |   X   |    X     |    |\n" +
+                "| Preview Tab so you can see what the rendered markdown will look like on GitHub. |   X   |    X     |    |\n" +
+                "|                               Syntax highlighting                               |   X   |    X     |    |\n" +
+                "", formattedTable);
+        assertEquals("" +
+                "|                                    Features                                     | Basic | Enhanced |    |\n" +
+                "^|:-------------------------------------------------------------------------------:|:-----:|:--------:|:---|\n" +
+                "|        Works with builds 143.2730 or newer, product version IDEA 14.1.4         |   X   |    X     |    |\n" +
+                "| Preview Tab so you can see what the rendered markdown will look like on GitHub. |   X   |    X     |    |\n" +
+                "|                               Syntax highlighting                               |   X   |    X     |    |\n" +
+                "", formattedTable.substring(0, offset) + "^" + formattedTable.substring(offset));
+        assertEquals(pos, offset);
+    }
+
+    @Test
+    public void test_trackingOffset_AfterCells() {
+        String markdown = "" +
+                "| Features                                                                        | Basic | Enhanced |    |\n" +
+                "|:-------------------------------------------------------------------------------:|:-----:|:--------:|:---|\n" +
+                "| Works with builds 143.2730 or newer, product version IDEA 14.1.4                |   X   |    X     |    |^\n" +
+                "| Preview Tab so you can see what the rendered markdown will look like on GitHub. |   X   |    X     |    |\n" +
+                "| Syntax highlighting                                                             |   X   |    X     |    |\n" +
+                "";
+
+        int pos = markdown.indexOf("^");
+        BasedSequence source = BasedSequenceImpl.of(markdown.substring(0, pos) + markdown.substring(pos + 1));
+        MarkdownTable table = getTable(source, formatOptions("", null));
+        assertTrue(table.addTrackedOffset(pos));
+        HtmlWriter out = new HtmlWriter(new StringBuilder(), 0, HtmlWriter.FORMAT_ALL);
+        table.appendTable(out);
+        String formattedTable = out.getText();
+        Map<Integer, Integer> offsets = table.getTrackedOffsets();
+        int offset = offsets.get(pos);
+
+        assertEquals("" +
+                "|                                    Features                                     | Basic | Enhanced |    |\n" +
+                "|:-------------------------------------------------------------------------------:|:-----:|:--------:|:---|\n" +
+                "|        Works with builds 143.2730 or newer, product version IDEA 14.1.4         |   X   |    X     |    |\n" +
+                "| Preview Tab so you can see what the rendered markdown will look like on GitHub. |   X   |    X     |    |\n" +
+                "|                               Syntax highlighting                               |   X   |    X     |    |\n" +
+                "", formattedTable);
+        assertEquals("" +
+                "|                                    Features                                     | Basic | Enhanced |    |\n" +
+                "|:-------------------------------------------------------------------------------:|:-----:|:--------:|:---|\n" +
+                "|        Works with builds 143.2730 or newer, product version IDEA 14.1.4         |   X   |    X     |    |^\n" +
+                "| Preview Tab so you can see what the rendered markdown will look like on GitHub. |   X   |    X     |    |\n" +
+                "|                               Syntax highlighting                               |   X   |    X     |    |\n" +
+                "", formattedTable.substring(0, offset) + "^" + formattedTable.substring(offset));
+        assertEquals(pos, offset);
+    }
+
+    @Test
+    public void test_trackingOffset_TypeAfterCells() {
+        String markdown = "" +
+                "| Features                                                                        | Basic | Enhanced |    |d^\n" +
+                "|:-------------------------------------------------------------------------------:|:-----:|:--------:|:---|\n" +
+                "| Works with builds 143.2730 or newer, product version IDEA 14.1.4                |   X   |    X     |    |\n" +
+                "| Preview Tab so you can see what the rendered markdown will look like on GitHub. |   X   |    X     |    |\n" +
+                "| Syntax highlighting                                                             |   X   |    X     |    |\n" +
+                "";
+
+        int pos = markdown.indexOf("^");
+        BasedSequence source = BasedSequenceImpl.of(markdown.substring(0, pos) + markdown.substring(pos + 1));
+        MarkdownTable table = getTable(source, formatOptions("", null));
+        assertTrue(table.addTrackedOffset(pos));
+        HtmlWriter out = new HtmlWriter(new StringBuilder(), 0, HtmlWriter.FORMAT_ALL);
+        table.appendTable(out);
+        String formattedTable = out.getText();
+        Map<Integer, Integer> offsets = table.getTrackedOffsets();
+        int offset = offsets.get(pos);
+
+        assertEquals("" +
+                "|                                    Features                                     | Basic | Enhanced |    | d  |\n" +
+                "|:-------------------------------------------------------------------------------:|:-----:|:--------:|:---|:---|\n" +
+                "|        Works with builds 143.2730 or newer, product version IDEA 14.1.4         |   X   |    X     |    |    |\n" +
+                "| Preview Tab so you can see what the rendered markdown will look like on GitHub. |   X   |    X     |    |    |\n" +
+                "|                               Syntax highlighting                               |   X   |    X     |    |    |\n" +
+                "", formattedTable);
+        assertEquals("" +
+                "|                                    Features                                     | Basic | Enhanced |    | d^  |\n" +
+                "|:-------------------------------------------------------------------------------:|:-----:|:--------:|:---|:---|\n" +
+                "|        Works with builds 143.2730 or newer, product version IDEA 14.1.4         |   X   |    X     |    |    |\n" +
+                "| Preview Tab so you can see what the rendered markdown will look like on GitHub. |   X   |    X     |    |    |\n" +
+                "|                               Syntax highlighting                               |   X   |    X     |    |    |\n" +
+                "", formattedTable.substring(0, offset) + "^" + formattedTable.substring(offset));
+        assertEquals(pos+1, offset);
     }
 
     @Test
@@ -1395,7 +1393,7 @@ public class MarkdownTableTest {
                 "| Preview Tab so you can see what the rendered markdown will look like on GitHub. |     X^ |    X     |    |\n" +
                 "| Syntax highlighting                                                             |     X |    X     |    |\n" +
                 "", formattedTable.substring(0, offset) + "^" + formattedTable.substring(offset));
-        assertEquals(pos-1, offset);
+        assertEquals(pos - 1, offset);
     }
 
     @Test
@@ -1432,7 +1430,7 @@ public class MarkdownTableTest {
                 "| Preview Tab so you can see what the rendered markdown will look like on GitHub. |    X ^ |    X     |    |\n" +
                 "| Syntax highlighting                                                             |     X |    X     |    |\n" +
                 "", formattedTable.substring(0, offset) + "^" + formattedTable.substring(offset));
-        assertEquals(pos-2, offset);
+        assertEquals(pos - 2, offset);
     }
 
     @Test
@@ -1960,6 +1958,406 @@ public class MarkdownTableTest {
                 "| Syntax highlighting                                                             |   X   |    X     |    |\n" +
                 "", formattedTable.substring(0, offset) + "^" + formattedTable.substring(offset));
         assertEquals(pos - 10, offset);
+    }
+
+    @Test
+    public void test_Caption_TypedAfter() {
+        String markdown = "" +
+                "| Features                                          | Basic | Enhanced |    |\n" +
+                "|:------------------------------------------------------------------|:-----:|:--------:|:---|\n" +
+                "| Works with builds 143.2730 or newer, product version IDEA 14.1.4                |   X   |    X     |    |\n" +
+                "| Preview Tab so you can see what the rendered markdown will look like on GitHub. |   X   |    X     |    |\n" +
+                "| Syntax highlighting                 |   X   |    X     |    |\n" +
+                "[testing^]\n" +
+                "";
+
+        int pos = markdown.indexOf("^");
+        BasedSequence source = BasedSequenceImpl.of(markdown.substring(0, pos) + markdown.substring(pos + 1));
+        MarkdownTable table = getTable(source, formatOptions("", null));
+        assertTrue(table.addTrackedOffset(pos, false));
+        HtmlWriter out = new HtmlWriter(new StringBuilder(), 0, HtmlWriter.FORMAT_ALL);
+        table.appendTable(out);
+        String formattedTable = out.getText();
+        Map<Integer, Integer> offsets = table.getTrackedOffsets();
+        int offset = offsets.get(pos);
+
+        assertEquals("" +
+                "| Features                                                                        | Basic | Enhanced |    |\n" +
+                "|:--------------------------------------------------------------------------------|:-----:|:--------:|:---|\n" +
+                "| Works with builds 143.2730 or newer, product version IDEA 14.1.4                |   X   |    X     |    |\n" +
+                "| Preview Tab so you can see what the rendered markdown will look like on GitHub. |   X   |    X     |    |\n" +
+                "| Syntax highlighting                                                             |   X   |    X     |    |\n" +
+                "[ testing ]\n" +
+                "", formattedTable);
+        assertEquals("" +
+                "| Features                                                                        | Basic | Enhanced |    |\n" +
+                "|:--------------------------------------------------------------------------------|:-----:|:--------:|:---|\n" +
+                "| Works with builds 143.2730 or newer, product version IDEA 14.1.4                |   X   |    X     |    |\n" +
+                "| Preview Tab so you can see what the rendered markdown will look like on GitHub. |   X   |    X     |    |\n" +
+                "| Syntax highlighting                                                             |   X   |    X     |    |\n" +
+                "[ testing^ ]\n" +
+                "", formattedTable.substring(0, offset) + "^" + formattedTable.substring(offset));
+        assertEquals(pos + 89, offset);
+    }
+
+    @Test
+    public void test_Caption_TypedSpaceAfterEmpty() {
+        String markdown = "" +
+                "| Features                                          | Basic | Enhanced |    |\n" +
+                "|:------------------------------------------------------------------|:-----:|:--------:|:---|\n" +
+                "| Works with builds 143.2730 or newer, product version IDEA 14.1.4                |   X   |    X     |    |\n" +
+                "| Preview Tab so you can see what the rendered markdown will look like on GitHub. |   X   |    X     |    |\n" +
+                "| Syntax highlighting                 |   X   |    X     |    |\n" +
+                "[ ^]\n" +
+                "";
+
+        int pos = markdown.indexOf("^");
+        BasedSequence source = BasedSequenceImpl.of(markdown.substring(0, pos) + markdown.substring(pos + 1));
+        MarkdownTable table = getTable(source, formatOptions("", null));
+        assertTrue(table.addTrackedOffset(pos, true));
+        HtmlWriter out = new HtmlWriter(new StringBuilder(), 0, HtmlWriter.FORMAT_ALL);
+        table.appendTable(out);
+        String formattedTable = out.getText();
+        Map<Integer, Integer> offsets = table.getTrackedOffsets();
+        int offset = offsets.get(pos);
+
+        assertEquals("" +
+                "| Features                                                                        | Basic | Enhanced |    |\n" +
+                "|:--------------------------------------------------------------------------------|:-----:|:--------:|:---|\n" +
+                "| Works with builds 143.2730 or newer, product version IDEA 14.1.4                |   X   |    X     |    |\n" +
+                "| Preview Tab so you can see what the rendered markdown will look like on GitHub. |   X   |    X     |    |\n" +
+                "| Syntax highlighting                                                             |   X   |    X     |    |\n" +
+                "[ ]\n" +
+                "", formattedTable);
+        assertEquals("" +
+                "| Features                                                                        | Basic | Enhanced |    |\n" +
+                "|:--------------------------------------------------------------------------------|:-----:|:--------:|:---|\n" +
+                "| Works with builds 143.2730 or newer, product version IDEA 14.1.4                |   X   |    X     |    |\n" +
+                "| Preview Tab so you can see what the rendered markdown will look like on GitHub. |   X   |    X     |    |\n" +
+                "| Syntax highlighting                                                             |   X   |    X     |    |\n" +
+                "[ ^]\n" +
+                "", formattedTable.substring(0, offset) + "^" + formattedTable.substring(offset));
+        assertEquals(pos + 88, offset);
+    }
+
+    @Test
+    public void test_Caption_Typed2SpaceAfterEmpty() {
+        String markdown = "" +
+                "| Features                                                                        | Basic | Enhanced |    |\n" +
+                "|:--------------------------------------------------------------------------------|:-----:|:--------:|:---|\n" +
+                "| Works with builds 143.2730 or newer, product version IDEA 14.1.4                |   X   |    X     |    |\n" +
+                "| Preview Tab so you can see what the rendered markdown will look like on GitHub. |   X   |    X     |    |\n" +
+                "| Syntax highlighting                                                             |   X   |    X     |    |\n" +
+                "[  ^]\n" +
+                "";
+
+        int pos = markdown.indexOf("^");
+        BasedSequence source = BasedSequenceImpl.of(markdown.substring(0, pos) + markdown.substring(pos + 1));
+        MarkdownTable table = getTable(source, formatOptions("", null));
+        assertTrue(table.addTrackedOffset(pos, true));
+        HtmlWriter out = new HtmlWriter(new StringBuilder(), 0, HtmlWriter.FORMAT_ALL);
+        table.appendTable(out);
+        String formattedTable = out.getText();
+        Map<Integer, Integer> offsets = table.getTrackedOffsets();
+        int offset = offsets.get(pos);
+
+        assertEquals("" +
+                "| Features                                                                        | Basic | Enhanced |    |\n" +
+                "|:--------------------------------------------------------------------------------|:-----:|:--------:|:---|\n" +
+                "| Works with builds 143.2730 or newer, product version IDEA 14.1.4                |   X   |    X     |    |\n" +
+                "| Preview Tab so you can see what the rendered markdown will look like on GitHub. |   X   |    X     |    |\n" +
+                "| Syntax highlighting                                                             |   X   |    X     |    |\n" +
+                "[ ]\n" +
+                "", formattedTable);
+        assertEquals("" +
+                "| Features                                                                        | Basic | Enhanced |    |\n" +
+                "|:--------------------------------------------------------------------------------|:-----:|:--------:|:---|\n" +
+                "| Works with builds 143.2730 or newer, product version IDEA 14.1.4                |   X   |    X     |    |\n" +
+                "| Preview Tab so you can see what the rendered markdown will look like on GitHub. |   X   |    X     |    |\n" +
+                "| Syntax highlighting                                                             |   X   |    X     |    |\n" +
+                "[ ^]\n" +
+                "", formattedTable.substring(0, offset) + "^" + formattedTable.substring(offset));
+        assertEquals(pos - 1, offset);
+    }
+
+    @Test
+    public void test_Caption_TypedSpaceAfter() {
+        String markdown = "" +
+                "| Features                                                                        | Basic | Enhanced |    |\n" +
+                "|:--------------------------------------------------------------------------------|:-----:|:--------:|:---|\n" +
+                "| Works with builds 143.2730 or newer, product version IDEA 14.1.4                |   X   |    X     |    |\n" +
+                "| Preview Tab so you can see what the rendered markdown will look like on GitHub. |   X   |    X     |    |\n" +
+                "| Syntax highlighting                                                             |   X   |    X     |    |\n" +
+                "[ testing ^ ]\n" +
+                "";
+
+        int pos = markdown.indexOf("^");
+        BasedSequence source = BasedSequenceImpl.of(markdown.substring(0, pos) + markdown.substring(pos + 1));
+        MarkdownTable table = getTable(source, formatOptions("", null));
+        assertTrue(table.addTrackedOffset(pos, false));
+        HtmlWriter out = new HtmlWriter(new StringBuilder(), 0, HtmlWriter.FORMAT_ALL);
+        table.appendTable(out);
+        String formattedTable = out.getText();
+        Map<Integer, Integer> offsets = table.getTrackedOffsets();
+        int offset = offsets.get(pos);
+
+        assertEquals("" +
+                "| Features                                                                        | Basic | Enhanced |    |\n" +
+                "|:--------------------------------------------------------------------------------|:-----:|:--------:|:---|\n" +
+                "| Works with builds 143.2730 or newer, product version IDEA 14.1.4                |   X   |    X     |    |\n" +
+                "| Preview Tab so you can see what the rendered markdown will look like on GitHub. |   X   |    X     |    |\n" +
+                "| Syntax highlighting                                                             |   X   |    X     |    |\n" +
+                "[ testing ]\n" +
+                "", formattedTable);
+        assertEquals("" +
+                "| Features                                                                        | Basic | Enhanced |    |\n" +
+                "|:--------------------------------------------------------------------------------|:-----:|:--------:|:---|\n" +
+                "| Works with builds 143.2730 or newer, product version IDEA 14.1.4                |   X   |    X     |    |\n" +
+                "| Preview Tab so you can see what the rendered markdown will look like on GitHub. |   X   |    X     |    |\n" +
+                "| Syntax highlighting                                                             |   X   |    X     |    |\n" +
+                "[ testing ^]\n" +
+                "", formattedTable.substring(0, offset) + "^" + formattedTable.substring(offset));
+        assertEquals(pos, offset);
+    }
+
+    @Test
+    public void test_Caption_Typed2SpacesAfter() {
+        String markdown = "" +
+                "| Features                                                                        | Basic | Enhanced |    |\n" +
+                "|:--------------------------------------------------------------------------------|:-----:|:--------:|:---|\n" +
+                "| Works with builds 143.2730 or newer, product version IDEA 14.1.4                |   X   |    X     |    |\n" +
+                "| Preview Tab so you can see what the rendered markdown will look like on GitHub. |   X   |    X     |    |\n" +
+                "| Syntax highlighting                                                             |   X   |    X     |    |\n" +
+                "[ testing  ^ ]\n" +
+                "";
+
+        int pos = markdown.indexOf("^");
+        BasedSequence source = BasedSequenceImpl.of(markdown.substring(0, pos) + markdown.substring(pos + 1));
+        MarkdownTable table = getTable(source, formatOptions("", null));
+        assertTrue(table.addTrackedOffset(pos, true));
+        HtmlWriter out = new HtmlWriter(new StringBuilder(), 0, HtmlWriter.FORMAT_ALL);
+        table.appendTable(out);
+        String formattedTable = out.getText();
+        Map<Integer, Integer> offsets = table.getTrackedOffsets();
+        int offset = offsets.get(pos);
+
+        assertEquals("" +
+                "| Features                                                                        | Basic | Enhanced |    |\n" +
+                "|:--------------------------------------------------------------------------------|:-----:|:--------:|:---|\n" +
+                "| Works with builds 143.2730 or newer, product version IDEA 14.1.4                |   X   |    X     |    |\n" +
+                "| Preview Tab so you can see what the rendered markdown will look like on GitHub. |   X   |    X     |    |\n" +
+                "| Syntax highlighting                                                             |   X   |    X     |    |\n" +
+                "[ testing  ]\n" +
+                "", formattedTable);
+        assertEquals("" +
+                "| Features                                                                        | Basic | Enhanced |    |\n" +
+                "|:--------------------------------------------------------------------------------|:-----:|:--------:|:---|\n" +
+                "| Works with builds 143.2730 or newer, product version IDEA 14.1.4                |   X   |    X     |    |\n" +
+                "| Preview Tab so you can see what the rendered markdown will look like on GitHub. |   X   |    X     |    |\n" +
+                "| Syntax highlighting                                                             |   X   |    X     |    |\n" +
+                "[ testing  ^]\n" +
+                "", formattedTable.substring(0, offset) + "^" + formattedTable.substring(offset));
+        assertEquals(pos, offset);
+    }
+
+    @Test
+    public void test_Caption_Typed3SpacesAfter() {
+        String markdown = "" +
+                "| Features                                                                        | Basic | Enhanced |    |\n" +
+                "|:--------------------------------------------------------------------------------|:-----:|:--------:|:---|\n" +
+                "| Works with builds 143.2730 or newer, product version IDEA 14.1.4                |   X   |    X     |    |\n" +
+                "| Preview Tab so you can see what the rendered markdown will look like on GitHub. |   X   |    X     |    |\n" +
+                "| Syntax highlighting                                                             |   X   |    X     |    |\n" +
+                "[ testing   ^ ]\n" +
+                "";
+
+        int pos = markdown.indexOf("^");
+        BasedSequence source = BasedSequenceImpl.of(markdown.substring(0, pos) + markdown.substring(pos + 1));
+        MarkdownTable table = getTable(source, formatOptions("", null));
+        assertTrue(table.addTrackedOffset(pos, true));
+        HtmlWriter out = new HtmlWriter(new StringBuilder(), 0, HtmlWriter.FORMAT_ALL);
+        table.appendTable(out);
+        String formattedTable = out.getText();
+        Map<Integer, Integer> offsets = table.getTrackedOffsets();
+        int offset = offsets.get(pos);
+
+        assertEquals("" +
+                "| Features                                                                        | Basic | Enhanced |    |\n" +
+                "|:--------------------------------------------------------------------------------|:-----:|:--------:|:---|\n" +
+                "| Works with builds 143.2730 or newer, product version IDEA 14.1.4                |   X   |    X     |    |\n" +
+                "| Preview Tab so you can see what the rendered markdown will look like on GitHub. |   X   |    X     |    |\n" +
+                "| Syntax highlighting                                                             |   X   |    X     |    |\n" +
+                "[ testing   ]\n" +
+                "", formattedTable);
+        assertEquals("" +
+                "| Features                                                                        | Basic | Enhanced |    |\n" +
+                "|:--------------------------------------------------------------------------------|:-----:|:--------:|:---|\n" +
+                "| Works with builds 143.2730 or newer, product version IDEA 14.1.4                |   X   |    X     |    |\n" +
+                "| Preview Tab so you can see what the rendered markdown will look like on GitHub. |   X   |    X     |    |\n" +
+                "| Syntax highlighting                                                             |   X   |    X     |    |\n" +
+                "[ testing   ^]\n" +
+                "", formattedTable.substring(0, offset) + "^" + formattedTable.substring(offset));
+        assertEquals(pos, offset);
+    }
+
+    @Test
+    public void test_Caption_Backspaces3After() {
+        String markdown = "" +
+                "| Features                                                                        | Basic | Enhanced |    |\n" +
+                "|:--------------------------------------------------------------------------------|:-----:|:--------:|:---|\n" +
+                "| Works with builds 143.2730 or newer, product version IDEA 14.1.4                |   X   |    X     |    |\n" +
+                "| Preview Tab so you can see what the rendered markdown will look like on GitHub. |   X   |    X     |    |\n" +
+                "| Syntax highlighting                                                             |   X   |    X     |    |\n" +
+                "[ testing  ^]\n" +
+                "";
+
+        int pos = markdown.indexOf("^");
+        BasedSequence source = BasedSequenceImpl.of(markdown.substring(0, pos) + markdown.substring(pos + 1));
+        MarkdownTable table = getTable(source, formatOptions("", null));
+        assertTrue(table.addTrackedOffset(pos, true, true));
+        HtmlWriter out = new HtmlWriter(new StringBuilder(), 0, HtmlWriter.FORMAT_ALL);
+        table.appendTable(out);
+        String formattedTable = out.getText();
+        Map<Integer, Integer> offsets = table.getTrackedOffsets();
+        int offset = offsets.get(pos);
+
+        assertEquals("" +
+                "| Features                                                                        | Basic | Enhanced |    |\n" +
+                "|:--------------------------------------------------------------------------------|:-----:|:--------:|:---|\n" +
+                "| Works with builds 143.2730 or newer, product version IDEA 14.1.4                |   X   |    X     |    |\n" +
+                "| Preview Tab so you can see what the rendered markdown will look like on GitHub. |   X   |    X     |    |\n" +
+                "| Syntax highlighting                                                             |   X   |    X     |    |\n" +
+                "[ testing  ]\n" +
+                "", formattedTable);
+        assertEquals("" +
+                "| Features                                                                        | Basic | Enhanced |    |\n" +
+                "|:--------------------------------------------------------------------------------|:-----:|:--------:|:---|\n" +
+                "| Works with builds 143.2730 or newer, product version IDEA 14.1.4                |   X   |    X     |    |\n" +
+                "| Preview Tab so you can see what the rendered markdown will look like on GitHub. |   X   |    X     |    |\n" +
+                "| Syntax highlighting                                                             |   X   |    X     |    |\n" +
+                "[ testing  ^]\n" +
+                "", formattedTable.substring(0, offset) + "^" + formattedTable.substring(offset));
+        assertEquals(pos, offset);
+    }
+
+    @Test
+    public void test_Caption_Backspaces2After() {
+        String markdown = "" +
+                "| Features                                                                        | Basic | Enhanced |    |\n" +
+                "|:--------------------------------------------------------------------------------|:-----:|:--------:|:---|\n" +
+                "| Works with builds 143.2730 or newer, product version IDEA 14.1.4                |   X   |    X     |    |\n" +
+                "| Preview Tab so you can see what the rendered markdown will look like on GitHub. |   X   |    X     |    |\n" +
+                "| Syntax highlighting                                                             |   X   |    X     |    |\n" +
+                "[ testing ^]\n" +
+                "";
+
+        int pos = markdown.indexOf("^");
+        BasedSequence source = BasedSequenceImpl.of(markdown.substring(0, pos) + markdown.substring(pos + 1));
+        MarkdownTable table = getTable(source, formatOptions("", null));
+        assertTrue(table.addTrackedOffset(pos, true,true));
+        HtmlWriter out = new HtmlWriter(new StringBuilder(), 0, HtmlWriter.FORMAT_ALL);
+        table.appendTable(out);
+        String formattedTable = out.getText();
+        Map<Integer, Integer> offsets = table.getTrackedOffsets();
+        int offset = offsets.get(pos);
+
+        assertEquals("" +
+                "| Features                                                                        | Basic | Enhanced |    |\n" +
+                "|:--------------------------------------------------------------------------------|:-----:|:--------:|:---|\n" +
+                "| Works with builds 143.2730 or newer, product version IDEA 14.1.4                |   X   |    X     |    |\n" +
+                "| Preview Tab so you can see what the rendered markdown will look like on GitHub. |   X   |    X     |    |\n" +
+                "| Syntax highlighting                                                             |   X   |    X     |    |\n" +
+                "[ testing ]\n" +
+                "", formattedTable);
+        assertEquals("" +
+                "| Features                                                                        | Basic | Enhanced |    |\n" +
+                "|:--------------------------------------------------------------------------------|:-----:|:--------:|:---|\n" +
+                "| Works with builds 143.2730 or newer, product version IDEA 14.1.4                |   X   |    X     |    |\n" +
+                "| Preview Tab so you can see what the rendered markdown will look like on GitHub. |   X   |    X     |    |\n" +
+                "| Syntax highlighting                                                             |   X   |    X     |    |\n" +
+                "[ testing ^]\n" +
+                "", formattedTable.substring(0, offset) + "^" + formattedTable.substring(offset));
+        assertEquals(pos, offset);
+    }
+
+    @Test
+    public void test_Caption_Backspaces1After() {
+        String markdown = "" +
+                "| Features                                                                        | Basic | Enhanced |    |\n" +
+                "|:--------------------------------------------------------------------------------|:-----:|:--------:|:---|\n" +
+                "| Works with builds 143.2730 or newer, product version IDEA 14.1.4                |   X   |    X     |    |\n" +
+                "| Preview Tab so you can see what the rendered markdown will look like on GitHub. |   X   |    X     |    |\n" +
+                "| Syntax highlighting                                                             |   X   |    X     |    |\n" +
+                "[ testing^]\n" +
+                "";
+
+        int pos = markdown.indexOf("^");
+        BasedSequence source = BasedSequenceImpl.of(markdown.substring(0, pos) + markdown.substring(pos + 1));
+        MarkdownTable table = getTable(source, formatOptions("", null));
+        assertTrue(table.addTrackedOffset(pos, true,true));
+        HtmlWriter out = new HtmlWriter(new StringBuilder(), 0, HtmlWriter.FORMAT_ALL);
+        table.appendTable(out);
+        String formattedTable = out.getText();
+        Map<Integer, Integer> offsets = table.getTrackedOffsets();
+        int offset = offsets.get(pos);
+
+        assertEquals("" +
+                "| Features                                                                        | Basic | Enhanced |    |\n" +
+                "|:--------------------------------------------------------------------------------|:-----:|:--------:|:---|\n" +
+                "| Works with builds 143.2730 or newer, product version IDEA 14.1.4                |   X   |    X     |    |\n" +
+                "| Preview Tab so you can see what the rendered markdown will look like on GitHub. |   X   |    X     |    |\n" +
+                "| Syntax highlighting                                                             |   X   |    X     |    |\n" +
+                "[ testing ]\n" +
+                "", formattedTable);
+        assertEquals("" +
+                "| Features                                                                        | Basic | Enhanced |    |\n" +
+                "|:--------------------------------------------------------------------------------|:-----:|:--------:|:---|\n" +
+                "| Works with builds 143.2730 or newer, product version IDEA 14.1.4                |   X   |    X     |    |\n" +
+                "| Preview Tab so you can see what the rendered markdown will look like on GitHub. |   X   |    X     |    |\n" +
+                "| Syntax highlighting                                                             |   X   |    X     |    |\n" +
+                "[ testing^ ]\n" +
+                "", formattedTable.substring(0, offset) + "^" + formattedTable.substring(offset));
+        assertEquals(pos, offset);
+    }
+
+    @Test
+    public void test_Caption_BackspaceAfter() {
+        String markdown = "" +
+                "| Features                                                                        | Basic | Enhanced |    |\n" +
+                "|:--------------------------------------------------------------------------------|:-----:|:--------:|:---|\n" +
+                "| Works with builds 143.2730 or newer, product version IDEA 14.1.4                |   X   |    X     |    |\n" +
+                "| Preview Tab so you can see what the rendered markdown will look like on GitHub. |   X   |    X     |    |\n" +
+                "| Syntax highlighting                                                             |   X   |    X     |    |\n" +
+                "[^]\n" +
+                "";
+
+        int pos = markdown.indexOf("^");
+        BasedSequence source = BasedSequenceImpl.of(markdown.substring(0, pos) + markdown.substring(pos + 1));
+        MarkdownTable table = getTable(source, formatOptions("", null));
+        assertTrue(table.addTrackedOffset(pos, true, true));
+        HtmlWriter out = new HtmlWriter(new StringBuilder(), 0, HtmlWriter.FORMAT_ALL);
+        table.appendTable(out);
+        String formattedTable = out.getText();
+        Map<Integer, Integer> offsets = table.getTrackedOffsets();
+        int offset = offsets.get(pos);
+
+        assertEquals("" +
+                "| Features                                                                        | Basic | Enhanced |    |\n" +
+                "|:--------------------------------------------------------------------------------|:-----:|:--------:|:---|\n" +
+                "| Works with builds 143.2730 or newer, product version IDEA 14.1.4                |   X   |    X     |    |\n" +
+                "| Preview Tab so you can see what the rendered markdown will look like on GitHub. |   X   |    X     |    |\n" +
+                "| Syntax highlighting                                                             |   X   |    X     |    |\n" +
+                "[ ]\n" +
+                "", formattedTable);
+        assertEquals("" +
+                "| Features                                                                        | Basic | Enhanced |    |\n" +
+                "|:--------------------------------------------------------------------------------|:-----:|:--------:|:---|\n" +
+                "| Works with builds 143.2730 or newer, product version IDEA 14.1.4                |   X   |    X     |    |\n" +
+                "| Preview Tab so you can see what the rendered markdown will look like on GitHub. |   X   |    X     |    |\n" +
+                "| Syntax highlighting                                                             |   X   |    X     |    |\n" +
+                "[ ^]\n" +
+                "", formattedTable.substring(0, offset) + "^" + formattedTable.substring(offset));
+        assertEquals(pos + 1, offset);
     }
 
     // these are tested with manipulators

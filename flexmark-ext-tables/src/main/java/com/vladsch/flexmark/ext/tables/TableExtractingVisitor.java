@@ -8,6 +8,7 @@ import com.vladsch.flexmark.util.format.MarkdownTable;
 import com.vladsch.flexmark.util.format.TableFormatOptions;
 import com.vladsch.flexmark.util.html.CellAlignment;
 import com.vladsch.flexmark.util.options.DataHolder;
+import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -84,7 +85,7 @@ public class TableExtractingVisitor {
 
     private void visit(final TableHead node) {
         myTable.setSeparator(false);
-        myTable.setHeading(true);
+        myTable.setHeader(true);
         myVisitor.visitChildren(node);
     }
 
@@ -95,7 +96,7 @@ public class TableExtractingVisitor {
 
     private void visit(final TableBody node) {
         myTable.setSeparator(false);
-        myTable.setHeading(false);
+        myTable.setHeader(false);
         myVisitor.visitChildren(node);
     }
 
@@ -109,6 +110,14 @@ public class TableExtractingVisitor {
     }
 
     private void visit(final TableCell node) {
-        myTable.addCell(new com.vladsch.flexmark.util.format.TableCell(node.getOpeningMarker(), options.trimCellWhitespace ? node.getText().trim() : node.getText(), node.getClosingMarker(), 1, node.getSpan(), node.getAlignment() == null ? CellAlignment.NONE : node.getAlignment().cellAlignment()));
+        BasedSequence text = node.getText();
+        if (options.trimCellWhitespace) {
+            if (text.isBlank() && !text.isEmpty()) {
+                text = text.subSequence(0, 1);
+            } else {
+                text = text.trim();
+            }
+        }
+        myTable.addCell(new com.vladsch.flexmark.util.format.TableCell(node.getOpeningMarker(), text, node.getClosingMarker(), 1, node.getSpan(), node.getAlignment() == null ? CellAlignment.NONE : node.getAlignment().cellAlignment()));
     }
 }

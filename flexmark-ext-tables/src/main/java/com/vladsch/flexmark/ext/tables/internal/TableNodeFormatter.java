@@ -13,6 +13,7 @@ import com.vladsch.flexmark.util.format.MarkdownTable;
 import com.vladsch.flexmark.util.format.TableFormatOptions;
 import com.vladsch.flexmark.util.html.CellAlignment;
 import com.vladsch.flexmark.util.options.DataHolder;
+import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.BasedSequenceImpl;
 
 import java.util.Arrays;
@@ -144,7 +145,7 @@ public class TableNodeFormatter implements NodeFormatter {
 
     private void render(final TableHead node, final NodeFormatterContext context, MarkdownWriter markdown) {
         myTable.setSeparator(false);
-        myTable.setHeading(true);
+        myTable.setHeader(true);
         context.renderChildren(node);
     }
 
@@ -155,7 +156,7 @@ public class TableNodeFormatter implements NodeFormatter {
 
     private void render(final TableBody node, final NodeFormatterContext context, MarkdownWriter markdown) {
         myTable.setSeparator(false);
-        myTable.setHeading(false);
+        myTable.setHeader(false);
         context.renderChildren(node);
     }
 
@@ -186,7 +187,15 @@ public class TableNodeFormatter implements NodeFormatter {
 
     private void render(final TableCell node, final NodeFormatterContext context, MarkdownWriter markdown) {
         if (context.getRenderPurpose() == FORMAT) {
-            myTable.addCell(new com.vladsch.flexmark.util.format.TableCell(node.getOpeningMarker(), options.trimCellWhitespace ? node.getText().trim() : node.getText(), node.getClosingMarker(), 1, node.getSpan(), node.getAlignment() == null ? CellAlignment.NONE : node.getAlignment().cellAlignment()));
+            BasedSequence text = node.getText();
+            if (options.trimCellWhitespace) {
+                if (text.isBlank() && !text.isEmpty()) {
+                    text = text.subSequence(0, 1);
+                } else {
+                    text = text.trim();
+                }
+            }
+            myTable.addCell(new com.vladsch.flexmark.util.format.TableCell(node.getOpeningMarker(), text, node.getClosingMarker(), 1, node.getSpan(), node.getAlignment() == null ? CellAlignment.NONE : node.getAlignment().cellAlignment()));
         } else {
             if (node.getPrevious() == null) {
                 if (options.leadTrailPipes && node.getOpeningMarker().isEmpty()) markdown.append('|');

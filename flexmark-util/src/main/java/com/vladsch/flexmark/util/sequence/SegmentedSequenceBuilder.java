@@ -3,8 +3,8 @@ package com.vladsch.flexmark.util.sequence;
 import java.util.ArrayList;
 
 /**
- * A CharSequence that references original char sequence and maps '\0' to '\uFFFD'
- * a subSequence() returns a sub-sequence from the original base sequence
+ * A CharSequence that references original char sequence and maps '\0' to '\uFFFD' a
+ * subSequence() returns a sub-sequence from the original base sequence
  */
 public final class SegmentedSequenceBuilder {
     private final ArrayList<BasedSequence> segments;
@@ -26,7 +26,14 @@ public final class SegmentedSequenceBuilder {
     }
 
     public SegmentedSequenceBuilder append(String str) {
-        return append(PrefixedSubSequence.of(str, base, 0,0));
+        BasedSequence useBase;
+        if (segments.isEmpty()) {
+            useBase = base.subSequence(0, 0);
+        } else {
+            useBase = segments.get(segments.size() - 1);
+            useBase = useBase.subSequence(useBase.length(), useBase.length());
+        }
+        return append(PrefixedSubSequence.of(str, useBase));
     }
 
     public BasedSequence toBasedSequence() {
@@ -34,15 +41,52 @@ public final class SegmentedSequenceBuilder {
     }
 
     public BasedSequence[] toSegments() {
-        return segments.toArray(new BasedSequence[segments.size()]);
+        return segments.toArray(BasedSequence.EMPTY_SEGMENTS);
+    }
+
+    public int length() {
+        int total = 0;
+        BasedSequence last = null;
+        for (BasedSequence s : segments) {
+            if (s.isEmpty()) continue;
+
+            if (last != null && last.getEndOffset() < s.getStartOffset() && (BasedSequence.WHITESPACE_CHARS.indexOf(last.charAt(last.length() - 1)) == -1) && BasedSequence.WHITESPACE_CHARS.indexOf(s.charAt(0)) == -1) {
+                total++;
+            }
+
+            total++;
+            last = s;
+        }
+        return total;
+    }
+
+    public boolean isEmpty() {
+        for (BasedSequence s : segments) {
+            if (!s.isEmpty()) return false;
+        }
+        return true;
     }
 
     @Override
     public String toString() {
         int total = 0;
-        for (BasedSequence s:segments) total += s.length();
-        StringBuilder sb = new StringBuilder(total);
-        for (BasedSequence s:segments) s.appendTo(sb);
+        StringBuilder sb = new StringBuilder();
+        BasedSequence last = null;
+        for (BasedSequence s : segments) {
+            if (s.isEmpty()) continue;
+
+            if (last != null && last.getEndOffset() < s.getStartOffset()
+                    && (BasedSequence.WHITESPACE_CHARS.indexOf(last.charAt(last.length() - 1)) == -1)
+                    && BasedSequence.WHITESPACE_CHARS.indexOf(s.charAt(0)) == -1
+                    && s.baseSubSequence(last.getEndOffset(), s.getStartOffset()).endsWith(" ")
+            ) {
+                sb.append(' ');
+            }
+
+            s.appendTo(sb);
+            last = s;
+        }
+
         return sb.toString();
     }
 }

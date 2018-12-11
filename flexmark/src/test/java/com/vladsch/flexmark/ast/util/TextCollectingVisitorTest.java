@@ -51,4 +51,19 @@ public class TextCollectingVisitorTest {
         final String text = collectingVisitor.collectAndGetText(document);
         assertEquals("fenced code\nlines\n", text);
     }
+
+    @Test
+    public void test_pararaphs() {
+        Parser parser = Parser.builder().build();
+        Node document = parser.parse("paragraph1\nwith some lazy continuation\n\nparagraph2\nwith more text");
+        TextCollectingVisitor collectingVisitor = new TextCollectingVisitor();
+        final String text = collectingVisitor.collectAndGetText(document);
+        assertEquals("" +
+                "paragraph1\n" +
+                "with some lazy continuation\n" +
+                "\n" +
+                "paragraph2\n" +
+                "with more text" +
+                "", text);
+    }
 }

@@ -1,9 +1,9 @@
 package com.vladsch.flexmark.util.format;
 
-public class TableSeparatorRow extends TableRow {
+public class TableCaptionRow extends TableRow {
 
     @Override
     public TableCell defaultCell() {
-        return TableSeparatorSection.DEFAULT_CELL;
+        return TableCaptionSection.NULL_CELL;
     }
 }
