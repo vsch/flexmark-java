@@ -92,12 +92,9 @@ public class MarkdownTable {
         setCaptionCell(captionCell.withText(captionCell.openMarker.isEmpty() ? "[" : captionCell.openMarker, caption, captionCell.closeMarker.isEmpty() ? "]" : captionCell.closeMarker));
     }
 
-    /**
+    /*
      * Used by visitor during table creation
      *
-     * @param captionOpen
-     * @param caption
-     * @param captionClose
      */
     public void setCaptionWithMarkers(
             final CharSequence captionOpen,
@@ -499,6 +496,7 @@ public class MarkdownTable {
      * Test a row for having all empty columns
      *
      * @param rowIndex index in allRows list
+     * @param sections sections to use for rows array generation
      *
      * @return true if row is empty or is a separator row
      */

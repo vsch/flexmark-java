@@ -251,7 +251,8 @@ public class Escaping {
     /**
      * Replace entities and backslash escapes with literal characters.
      *
-     * @param s          based sequence to un-escape
+     * @param s          sequence being changed
+     * @param remove     string to remove                  
      * @param textMapper replaced text mapper to update for the changed text
      * @return un-escaped sequence
      */
@@ -465,6 +466,7 @@ public class Escaping {
      * e-mail obfuscation from pegdown
      *
      * @param email e-mail url
+     * @param randomize true to randomize, false for testing
      * @return obfuscated e-mail url
      */
     public static String obfuscate(String email, boolean randomize) {

@@ -175,6 +175,8 @@ public class TableCell {
 
     /**
      * Returns the cell length occupied in the table
+     * 
+     * @param previousCell previous cell or null for first cell
      *
      * @return length of the cell as occupied in the original file
      */
@@ -185,6 +187,7 @@ public class TableCell {
     /**
      * Returns the cell prefix length occupied in the table
      *
+     * @param previousCell previous cell or null for first cell
      * @return length of cell's prefix before actual text as occupied in the file
      */
     public int getCellPrefixLength(TableCell previousCell) {

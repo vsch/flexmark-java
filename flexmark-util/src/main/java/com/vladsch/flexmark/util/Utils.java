@@ -233,7 +233,7 @@ public class Utils {
         }
     }
 
-    /**
+    /*
      * @deprecated Use removePrefix
      */
     @Deprecated
@@ -251,7 +251,7 @@ public class Utils {
         return "";
     }
 
-    /**
+    /*
      * @deprecated Use removePrefix
      */
     @Deprecated
@@ -292,7 +292,7 @@ public class Utils {
         return "";
     }
 
-    /**
+    /*
      * @deprecated Use removeSuffix
      */
     @Deprecated
@@ -310,7 +310,7 @@ public class Utils {
         return "";
     }
 
-    /**
+    /*
      * @deprecated Use removeSuffix
      */
     @Deprecated

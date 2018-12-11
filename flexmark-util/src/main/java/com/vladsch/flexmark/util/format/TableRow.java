@@ -102,11 +102,12 @@ public class TableRow {
     }
 
     /**
-     * NOTE: inserting into a cell span has the effect of expanding the span if the cell text is blank or insert count > 1
+     * NOTE: inserting into a cell span has the effect of expanding the span if the cell text is blank or insert count &gt; 1
      * or splitting the span if it is not blank and count == 1
      *
      * @param column column index before which to insert
      * @param count  number of columns to insert
+     * @param tableCell  table cell to insert, null for default
      */
     public void insertColumns(int column, int count, TableCell tableCell) {
         if (count <= 0 || column < 0) return;
@@ -226,42 +227,6 @@ public class TableRow {
             }
         }
     }
-
-/*
-    public TableCell[] denormalizedColumns() {
-        TableCell[] explicitColumns = new TableCell[getTotalColumns()];
-
-        int explicitIndex = 0;
-        for (TableCell cell : cells) {
-            if (cell == null || cell.columnSpan == 0) continue;
-            explicitColumns[explicitIndex] = cell;
-            explicitIndex += cell.columnSpan;
-        }
-        return explicitColumns;
-    }
-
-    public void addDenormalizedColumns(TableCell[] explicitColumns) {
-        TableCell lastCell = null;
-
-        for (int i = 0; i < explicitColumns.length; i++) {
-            TableCell cell = explicitColumns[i];
-            if (cell == null || cell.columnSpan == 0) {
-                if (lastCell == null) {
-                    lastCell = new TableCell("", 0, 1);
-                } else {
-                    lastCell = lastCell.withColumnSpan(lastCell.columnSpan + 1);
-                }
-            } else {
-                if (lastCell != null) cells.add(lastCell);
-                cell.withColumnSpan(1);
-            }
-        }
-
-        if (lastCell != null) {
-            cells.add(lastCell);
-        }
-    }
-*/
 
     public TableRow expandTo(int column) {
         return expandTo(column, TableCell.NULL);

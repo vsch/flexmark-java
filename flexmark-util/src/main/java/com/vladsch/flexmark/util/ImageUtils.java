@@ -279,7 +279,7 @@ public class ImageUtils {
         return null;
     }
 
-    /**
+    /*
      * http://stackoverflow.com/questions/7603400/how-to-make-a-rounded-corner-image-in-java
      */
     public static BufferedImage makeRoundedCorner(BufferedImage image, int cornerRadius, int borderWidth) {
@@ -623,7 +623,7 @@ public class ImageUtils {
         return output;
     }
 
-    /**
+    /*
      * http://stackoverflow.com/questions/2386064/how-do-i-crop-an-image-in-java
      */
     public static BufferedImage cropImage(BufferedImage image, int trimLeft, int trimRight, int trimTop, int trimBottom) {
@@ -631,7 +631,7 @@ public class ImageUtils {
         return output;
     }
 
-    /**
+    /*
      * http://stackoverflow.com/questions/464825/converting-transparent-gif-png-to-jpeg-using-java
      */
     public static BufferedImage removeAlpha(BufferedImage image) {
@@ -645,7 +645,7 @@ public class ImageUtils {
         return bufferedImage;
     }
 
-    /**
+    /*
      * http://stackoverflow.com/questions/665406/how-to-make-a-color-transparent-in-a-bufferedimage-and-save-as-png
      */
     public static Image toTransparent(BufferedImage image, final Color color, final int tolerance) {
