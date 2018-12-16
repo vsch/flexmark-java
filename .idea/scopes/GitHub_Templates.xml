@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="GitHub Templates" pattern="file[flexmark-java]:.github/ISSUE_TEMPLATE//*" />
+</component>

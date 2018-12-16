@@ -1,0 +1,20 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="CoreFormatterTestSuite" type="JUnit" factoryName="JUnit" folderName="Format" singleton="true">
+    <module name="flexmark-formatter" />
+    <extension name="coverage">
+      <pattern>
+        <option name="PATTERN" value="com.vladsch.flexmark.util.*" />
+        <option name="ENABLED" value="true" />
+      </pattern>
+    </extension>
+    <option name="PACKAGE_NAME" value="com.vladsch.flexmark.formatter" />
+    <option name="MAIN_CLASS_NAME" value="com.vladsch.flexmark.formatter.CoreFormatterTestSuite" />
+    <option name="METHOD_NAME" value="" />
+    <option name="VM_PARAMETERS" />
+    <option name="PARAMETERS" value="" />
+    <option name="WORKING_DIRECTORY" value="" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

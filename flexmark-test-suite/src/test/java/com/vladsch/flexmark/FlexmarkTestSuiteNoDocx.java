@@ -33,6 +33,7 @@ import com.vladsch.flexmark.ext.xwiki.macros.ExtXWikiMacroTestSuite;
 import com.vladsch.flexmark.ext.yaml.front.matter.ExtYamlFrontMatterTestSuite;
 import com.vladsch.flexmark.ext.youtube.embedded.ExtYouTubeLinkTestSuite;
 import com.vladsch.flexmark.ext.zzzzzz.ExtZzzzzzTestSuite;
+import com.vladsch.flexmark.formatter.CoreFormatterTestSuite;
 import com.vladsch.flexmark.integration.IntegrationTestSuite;
 import com.vladsch.flexmark.jira.converter.JiraConverterTestSuite;
 import com.vladsch.flexmark.profiles.pegdown.PegdownProfileTestSuite;
@@ -83,6 +84,7 @@ import org.junit.runners.Suite;
         YouTrackConverterTestSuite.class,
         IntegrationTestSuite.class,
         PegdownProfileTestSuite.class,
+        CoreFormatterTestSuite.class,
         FlexmarkFormatterTestSuite.class,
         //DocxConverterTestSuite.class,
         //ComboDocxUserSpecDisabled.class

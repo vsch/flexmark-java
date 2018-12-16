@@ -1,0 +1,19 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="TableCellOffsetInfoTest" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
+    <module name="flexmark-ext-tables" />
+    <extension name="coverage">
+      <pattern>
+        <option name="PATTERN" value="com.vladsch.flexmark.ext.tables.*" />
+        <option name="ENABLED" value="true" />
+      </pattern>
+    </extension>
+    <option name="PACKAGE_NAME" value="com.vladsch.flexmark.ext.tables" />
+    <option name="MAIN_CLASS_NAME" value="com.vladsch.flexmark.ext.tables.TableCellOffsetInfoTest" />
+    <option name="METHOD_NAME" value="" />
+    <option name="TEST_OBJECT" value="class" />
+    <option name="PARAMETERS" value="" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

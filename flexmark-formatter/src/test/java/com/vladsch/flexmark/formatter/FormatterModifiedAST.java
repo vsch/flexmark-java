@@ -1,6 +1,12 @@
 package com.vladsch.flexmark.formatter;
 
-import com.vladsch.flexmark.ast.*;
+import com.vladsch.flexmark.ast.Image;
+import com.vladsch.flexmark.ast.InlineLinkNode;
+import com.vladsch.flexmark.ast.Link;
+import com.vladsch.flexmark.ast.Node;
+import com.vladsch.flexmark.ast.NodeVisitor;
+import com.vladsch.flexmark.ast.VisitHandler;
+import com.vladsch.flexmark.ast.Visitor;
 import com.vladsch.flexmark.formatter.internal.Formatter;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.test.AstCollectingVisitor;
@@ -57,7 +63,7 @@ public class FormatterModifiedAST {
 
     public void visit(InlineLinkNode linkNode, final String replacemnt) {
         // This is called for all Text nodes. Override other visit methods for other node types.
-        linkNode.setUrlChars(PrefixedSubSequence.of(replacemnt, linkNode.getChars(), 0, 0));
+        linkNode.setUrlChars(PrefixedSubSequence.of(replacemnt, linkNode.getUrl(), 0, 0));
         linkNode.setCharsFromSegments();
     }
 
@@ -169,10 +175,10 @@ public class FormatterModifiedAST {
                 "  BulletList[0, 41] isTight\n" +
                 "    BulletListItem[0, 41] open:[0, 1, \"-\"] isTight hadBlankLineAfter\n" +
                 "      Paragraph[2, 41] isTrailingBlankLine\n" +
-                "        Link[2, 17] textOpen:[2, 3, \"[\"] text:[3, 7, \"link\"] textClose:[7, 8, \"]\"] linkOpen:[8, 9, \"(\"] url:[2, 2, \"replaced.txt#anchor\"] pageRef:[2, 2, \"replaced.txt\"] anchorMarker:[2, 2, \"#\"] anchorRef:[2, 2, \"anchor\"] linkClose:[17, 18, \")\"]\n" +
+                "        Link[2, 18] textOpen:[2, 3, \"[\"] text:[3, 7, \"link\"] textClose:[7, 8, \"]\"] linkOpen:[8, 9, \"(\"] url:[9, 9, \"replaced.txt#anchor\"] pageRef:[9, 9, \"replaced.txt\"] anchorMarker:[9, 9, \"#\"] anchorRef:[9, 9, \"anchor\"] linkClose:[17, 18, \")\"]\n" +
                 "          Text[3, 7] chars:[3, 7, \"link\"]\n" +
                 "        Text[18, 23] chars:[18, 23, \" and \"]\n" +
-                "        Image[23, 39] textOpen:[23, 25, \"![\"] text:[25, 30, \"image\"] textClose:[30, 31, \"]\"] linkOpen:[31, 32, \"(\"] url:[23, 23, \"replaced.png\"] pageRef:[23, 23, \"replaced.png\"] linkClose:[39, 40, \")\"]\n" +
+                "        Image[23, 40] textOpen:[23, 25, \"![\"] text:[25, 30, \"image\"] textClose:[30, 31, \"]\"] linkOpen:[31, 32, \"(\"] url:[32, 32, \"replaced.png\"] pageRef:[32, 32, \"replaced.png\"] linkClose:[39, 40, \")\"]\n" +
                 "          Text[25, 30] chars:[25, 30, \"image\"]\n" +
                 "  Paragraph[42, 52] isTrailingBlankLine\n" +
                 "    Text[42, 51] chars:[42, 51, \"next line\"]\n", ast);
