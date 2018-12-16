@@ -5766,12 +5766,13 @@ Document[0, 139]
           Paragraph[87, 97] isTrailingBlankLine
             Text[87, 95] chars:[87, 95, "item 1.1"]
   BlankLine[97, 100]
-  BlockQuote[100, 136] marker:[100, 101, ">"]
+  BlockQuote[100, 138] marker:[100, 101, ">"]
     Paragraph[102, 117] isTrailingBlankLine
       Text[102, 115] chars:[102, 115, "block … ote 1"]
+    BlankLine[117, 120]
     Paragraph[122, 136] isTrailingBlankLine
       Text[122, 135] chars:[122, 135, "block … ote 2"]
-  BlankLine[136, 138]
+    BlankLine[136, 138]
   BlankLine[138, 139]
 ````````````````````````````````
 
@@ -6130,7 +6131,8 @@ Document[0, 61]
 .
 Document[0, 66]
   HtmlBlock[0, 27]
-  BlockQuote[32, 33] marker:[32, 33, ">"]
+  BlockQuote[32, 34] marker:[32, 33, ">"]
+    BlankLine[32, 34]
   IndentedCodeBlock[39, 49]
   HtmlBlock[54, 65]
 ````````````````````````````````

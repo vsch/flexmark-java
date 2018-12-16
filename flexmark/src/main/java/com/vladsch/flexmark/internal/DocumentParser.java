@@ -698,15 +698,28 @@ public class DocumentParser implements ParserState {
             if (!allClosed) {
                 finalizeBlocks(unmatchedBlockParsers);
             }
+
             propagateLastLineBlank(blockParser, lastMatchedBlockParser);
 
+            if (blockParser.getBlock() instanceof KeepTrailingBlankLineContainer) {
+                if (blankLine != null) {
+                    blockParser.getBlock().appendChild(blankLine);
+                } else if (blank) {
+                    if (blockParser.isContainer() && !lineWithEOL.isBlank()) {
+                        // need to add it as a blank line if it is attributable to the block, otherwise there is no content
+                        blankLine = new BlankLine(lineWithEOL);
+                        blockParser.getBlock().appendChild(blankLine);
+                    }
+                } 
+            }
+            
             if (!blockParser.isContainer()) {
                 addLine();
             } else if (!blank) {
                 // inlineParser paragraph container for line
                 addChild(new ParagraphParser());
                 addLine();
-            }
+            } 
         }
     }
 
@@ -1097,7 +1110,7 @@ public class DocumentParser implements ParserState {
                 if (node instanceof BlankLineContainer) {
                     Node blankLine = node.getLastChild();
                     if (blankLine instanceof BlankLine) {
-                        while (blankLine instanceof BlankLine) {
+                        while (blankLine instanceof BlankLine && (!(node instanceof KeepTrailingBlankLineContainer) || blankLine.getChars().isBlank())) {
                             Node prevBlankLine = blankLine.getPrevious();
                             blankLine.unlink();
                             node.insertAfter(blankLine);

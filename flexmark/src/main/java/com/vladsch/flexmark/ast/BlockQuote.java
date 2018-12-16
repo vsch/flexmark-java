@@ -4,7 +4,7 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 import java.util.List;
 
-public class BlockQuote extends Block {
+public class BlockQuote extends Block implements KeepTrailingBlankLineContainer {
     private BasedSequence openingMarker = BasedSequence.NULL;
 
     @Override

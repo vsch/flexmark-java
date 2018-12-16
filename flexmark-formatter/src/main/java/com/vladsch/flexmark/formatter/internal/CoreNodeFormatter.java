@@ -22,6 +22,8 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.RepeatedCharSequence;
 
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static com.vladsch.flexmark.formatter.RenderPurpose.FORMAT;
 import static com.vladsch.flexmark.formatter.internal.FormattingPhase.DOCUMENT_BOTTOM;
@@ -382,8 +384,26 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
                 }
             }
         } else {
-            markdown.append(chars);
+            if (formatterOptions.keepSoftLineBreaks) {
+                markdown.append(chars);
+            } else {
+                markdown.append(stripSoftLineBreak(chars));
+            } 
         }
+    }
+    
+    private static CharSequence stripSoftLineBreak(CharSequence chars) {
+        StringBuffer sb = null;
+        Matcher matcher = Pattern.compile("\\s*(?:\r\n|\r|\n)\\s*").matcher(chars);
+        while (matcher.find()) {
+            if (sb == null) sb = new StringBuffer();
+            matcher.appendReplacement(sb," ");
+        }
+        if (sb != null) {
+            matcher.appendTail(sb);
+            return sb;
+        }
+        return chars;
     }
 
     private void render(BlankLine node, NodeFormatterContext context, MarkdownWriter markdown) {
@@ -926,7 +946,11 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
     }
 
     private void render(Text node, NodeFormatterContext context, MarkdownWriter markdown) {
-        markdown.append(node.getChars());
+        if (formatterOptions.keepSoftLineBreaks) {
+            markdown.append(node.getChars());
+        } else {
+            markdown.append(stripSoftLineBreak(node.getChars()));
+        }
     }
 
     private void render(TextBase node, NodeFormatterContext context, MarkdownWriter markdown) {
@@ -935,7 +959,11 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
 
     private void render(Code node, NodeFormatterContext context, MarkdownWriter markdown) {
         markdown.append(node.getOpeningMarker());
-        markdown.appendNonTranslating(node.getText());
+        if (formatterOptions.keepSoftLineBreaks) {
+            markdown.appendNonTranslating(node.getText());
+        } else {
+            markdown.append(stripSoftLineBreak(node.getText()));
+        }
         markdown.append(node.getOpeningMarker());
     }
 

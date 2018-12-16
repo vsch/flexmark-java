@@ -56,6 +56,7 @@ Document[0, 180]
 ````````````````````````````````
 
 
+
 ## Append References
 
 Without append just include
@@ -106,9 +107,10 @@ Document[0, 122]
 ````````````````````````````````
 
 
+
 With append just include
 
-```````````````````````````````` example(Append References: 2) options(append-references,)
+```````````````````````````````` example(Append References: 2) options(append-references)
 Text with footnote[^footnote] abbr, link ref [ref], image ref ![image], <<<macro1>>>
 
 Enumerated Ref{#enum:this}
@@ -166,5 +168,41 @@ Document[0, 133]
       Text[120, 129] chars:[120, 129, "enum:this"]
   BlankLine[131, 133]
 ````````````````````````````````
+
+
+
+## Issue xxx-01
+
+When no soft line breaks are used, soft line breaks in inline code, quotes, and other inline
+elements should be removed also
+
+```````````````````````````````` example(Issue xxx-01: 1) options(no-soft-breaks)
+"broken quoted
+string"
+.
+"broken quoted string"
+.
+Document[0, 22]
+  Paragraph[0, 22]
+    TypographicQuotes[0, 22] typographicOpening: &ldquo;  typographicClosing: &rdquo;  textOpen:[0, 1, "\""] text:[1, 21, "broken quoted\nstring"] textClose:[21, 22, "\""]
+      Text[1, 14] chars:[1, 14, "broke … uoted"]
+      SoftLineBreak[14, 15]
+      Text[15, 21] chars:[15, 21, "string"]
+````````````````````````````````
+
+
+
+```````````````````````````````` example(Issue xxx-01: 2) options(no-soft-breaks)
+`broken inline code 
+string`
+.
+`broken inline code string`
+.
+Document[0, 28]
+  Paragraph[0, 28]
+    Code[0, 28] textOpen:[0, 1, "`"] text:[1, 27, "broke … n inline code \nstring"] textClose:[27, 28, "`"]
+      Text[1, 27] chars:[1, 27, "broke … tring"]
+````````````````````````````````
+
 
 

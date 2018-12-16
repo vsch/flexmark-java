@@ -1627,3 +1627,16 @@ Issue #274, FlexmarkHtmlParser can not handle escaped tags correctly
 ````````````````````````````````
 
 
+## Issue 287
+
+Issue #287, ''flexmark-html-parser' The module has an mistake
+
+```````````````````````````````` example Issue 287: 1
+[flexmark-javaa\>](https://github.com/vsch/flexmark-java)
+.
+<a href="https://github.com/vsch/flexmark-java">flexmark-java</<!-- [[[read_end]]] -->a>
+````````````````````````````````
+
+
+
+

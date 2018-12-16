@@ -4594,7 +4594,8 @@ A block quote can be empty:
 </blockquote>
 .
 Document[0, 2]
-  BlockQuote[0, 1] marker:[0, 1, ">"]
+  BlockQuote[0, 2] marker:[0, 1, ">"]
+    BlankLine[0, 2]
 ````````````````````````````````
 
 
@@ -4607,7 +4608,10 @@ Document[0, 2]
 </blockquote>
 .
 Document[0, 9]
-  BlockQuote[0, 1] marker:[0, 1, ">"]
+  BlockQuote[0, 9] marker:[0, 1, ">"]
+    BlankLine[0, 2]
+    BlankLine[2, 6]
+    BlankLine[6, 9]
 ````````````````````````````````
 
 
@@ -4623,9 +4627,11 @@ A block quote can have initial or final blank lines:
 </blockquote>
 .
 Document[0, 12]
-  BlockQuote[0, 8] marker:[0, 1, ">"]
+  BlockQuote[0, 12] marker:[0, 1, ">"]
+    BlankLine[0, 2]
     Paragraph[4, 8] isTrailingBlankLine
       Text[4, 7] chars:[4, 7, "foo"]
+    BlankLine[8, 12]
 ````````````````````````````````
 
 
@@ -4695,6 +4701,7 @@ Document[0, 14]
   BlockQuote[0, 14] marker:[0, 1, ">"]
     Paragraph[2, 6] isTrailingBlankLine
       Text[2, 5] chars:[2, 5, "foo"]
+    BlankLine[6, 8]
     Paragraph[10, 14]
       Text[10, 13] chars:[10, 13, "bar"]
 ````````````````````````````````
@@ -4798,9 +4805,10 @@ baz
 <p>baz</p>
 .
 Document[0, 12]
-  BlockQuote[0, 6] marker:[0, 1, ">"]
+  BlockQuote[0, 8] marker:[0, 1, ">"]
     Paragraph[2, 6] isTrailingBlankLine
       Text[2, 5] chars:[2, 5, "bar"]
+    BlankLine[6, 8]
   Paragraph[8, 12]
     Text[8, 11] chars:[8, 11, "baz"]
 ````````````````````````````````
@@ -7122,12 +7130,13 @@ block quote:
 .
 Document[0, 18]
   BulletList[0, 18] isTight
-    BulletListItem[0, 10] open:[0, 1, "*"] isTight
+    BulletListItem[0, 14] open:[0, 1, "*"] isTight
       Paragraph[2, 4]
         Text[2, 3] chars:[2, 3, "a"]
-      BlockQuote[6, 10] marker:[6, 7, ">"]
+      BlockQuote[6, 14] marker:[6, 7, ">"]
         Paragraph[8, 10] isTrailingBlankLine
           Text[8, 9] chars:[8, 9, "b"]
+        BlankLine[10, 14]
     BulletListItem[14, 18] open:[14, 15, "*"] isTight
       Paragraph[16, 18]
         Text[16, 17] chars:[16, 17, "c"]

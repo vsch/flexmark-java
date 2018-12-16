@@ -1618,3 +1618,103 @@ Document[18, 514]
 ````````````````````````````````
 
 
+## Issue xxx-01
+
+Blank line at end of block quote not included in block quote
+
+```````````````````````````````` example(Issue xxx-01: 1) options(keep-blank-lines)
+> - Item
+>
+>       class Dummy {
+>           private final int intValue;
+> 
+>           public Dummy(int intValue) {
+>               this.intValue = intValue;
+>           }
+>       }
+>
+> #### Header
+>
+10. item
+1. items
+
+.
+<blockquote>
+  <ul>
+    <li>
+      <p>Item</p>
+      <pre><code>class Dummy {
+    private final int intValue;
+
+    public Dummy(int intValue) {
+        this.intValue = intValue;
+    }
+}
+</code></pre>
+    </li>
+  </ul>
+  <h4>Header</h4>
+</blockquote>
+<ol start="10">
+  <li>item</li>
+  <li>items</li>
+</ol>
+.
+Document[0, 220]
+  BlockQuote[0, 201] marker:[0, 1, ">"]
+    BulletList[2, 183] isLoose
+      BulletListItem[2, 183] open:[2, 3, "-"] isLoose hadBlankLineAfter
+        Paragraph[4, 9] isTrailingBlankLine
+          Text[4, 8] chars:[4, 8, "Item"]
+        BlankLine[9, 11]
+        IndentedCodeBlock[19, 183]
+    BlankLine[183, 185]
+    Heading[187, 198] textOpen:[187, 191, "####"] text:[192, 198, "Header"]
+      Text[192, 198] chars:[192, 198, "Header"]
+    BlankLine[199, 201]
+  OrderedList[201, 219] isTight start:10 delimiter:'.'
+    OrderedListItem[201, 210] open:[201, 204, "10."] isTight
+      Paragraph[205, 210]
+        Text[205, 209] chars:[205, 209, "item"]
+    OrderedListItem[210, 219] open:[210, 212, "1."] isTight hadBlankLineAfter
+      Paragraph[213, 219] isTrailingBlankLine
+        Text[213, 218] chars:[213, 218, "items"]
+  BlankLine[219, 220]
+````````````````````````````````
+
+
+```````````````````````````````` example(Issue xxx-01: 2) options(keep-blank-lines)
+> #### Header
+>
+
+.
+<blockquote>
+  <h4>Header</h4>
+</blockquote>
+.
+Document[0, 17]
+  BlockQuote[0, 16] marker:[0, 1, ">"]
+    Heading[2, 13] textOpen:[2, 6, "####"] text:[7, 13, "Header"]
+      Text[7, 13] chars:[7, 13, "Header"]
+    BlankLine[14, 16]
+  BlankLine[16, 17]
+````````````````````````````````
+
+
+```````````````````````````````` example Issue xxx-01: 3
+> #### Header
+>
+
+.
+<blockquote>
+  <h4>Header</h4>
+</blockquote>
+.
+Document[0, 17]
+  BlockQuote[0, 16] marker:[0, 1, ">"]
+    Heading[2, 13] textOpen:[2, 6, "####"] text:[7, 13, "Header"]
+      Text[7, 13] chars:[7, 13, "Header"]
+    BlankLine[14, 16]
+````````````````````````````````
+
+

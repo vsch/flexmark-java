@@ -18,7 +18,7 @@ public class AttributesNodePostProcessor extends NodePostProcessor {
     }
 
     public Node getAttributeOwner(NodeTracker state, AttributesNode attributesNode) {
-        Node previous = attributesNode.getPrevious();
+        Node previous = attributesNode.getPreviousAnyNot(BlankLine.class);
         Node next = attributesNode.getNext();
         Node attributeOwner;
         Node parent = attributesNode.getParent();
@@ -46,26 +46,28 @@ public class AttributesNodePostProcessor extends NodePostProcessor {
             //      7. attributes go to the parent
             if (parent instanceof Paragraph) {
                 if (parent.getParent() instanceof ParagraphItemContainer) {
-                    if (parent.getPrevious() == null) {
+                    Node parentPreviousNotBlankLine = parent.getPreviousAnyNot(BlankLine.class);
+                    if (parentPreviousNotBlankLine == null) {
                         //              1. attributes go to the paragraph parent's parent
                         attributeOwner = parent.getParent().getParent();
                     } else {
-                        if (attributesNode.getNextAnyNot(AttributesNode.class) == null) {
+                        if (attributesNode.getNextAnyNot(AttributesNode.class, BlankLine.class) == null) {
                             //                  2. attributes go to paragraph's previous sibling,
-                            attributeOwner = parent.getPrevious();
+                            attributeOwner = parentPreviousNotBlankLine;
                         } else {
                             //                  3. attributes go to the paragraph
                             attributeOwner = parent;
                         }
                     }
                 } else {
-                    if (attributesNode.getNextAnyNot(AttributesNode.class) == null) {
-                        if (parent.getPrevious() == null) {
+                    if (attributesNode.getNextAnyNot(AttributesNode.class, BlankLine.class) == null) {
+                        Node parentPreviousNotBlankLine = parent.getPreviousAnyNot(BlankLine.class);
+                        if (parentPreviousNotBlankLine == null) {
                             //                  4. attributes go to paragraph's parent
                             attributeOwner = parent.getParent();
                         } else {
                             //                  5. attributes go to paragraph's previous sibling,
-                            attributeOwner = parent.getPrevious();
+                            attributeOwner = parentPreviousNotBlankLine;
                         }
                     } else {
                         //              6. attributes go to the paragraph
