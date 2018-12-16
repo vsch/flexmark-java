@@ -267,6 +267,9 @@ flexmark-java
 ------
 
 * [ ] Add: sample for converting inline nodes to text nodes in node post processor.
+* Add: log4j logging to `DocumentParser`, when debug is enabled parser will log resulting AST
+  after parsing, paragraph pre-processing, block pre-processing and inline processing to isolate
+  where a problem is introduced by an extension into the AST.
 * Breaking: :warning: Potentially breaking change for some code if parsing with
   `Parser.BLANK_LINES_IN_AST` enabled. Last blank line of blocks is now moved out to the parent
   block. Greatest effect is on list items which previously held on to their last blank line,
