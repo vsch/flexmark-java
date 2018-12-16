@@ -1717,4 +1717,47 @@ Document[0, 17]
     BlankLine[14, 16]
 ````````````````````````````````
 
+Trailing blank lines in list should go to block quote not document
+
+```````````````````````````````` example Issue xxx-01: 4
+> 1. The first character of an end tag must be a U+003C LESS-THAN SIGN character (\<).
+> 
+
+.
+<blockquote>
+  <ol>
+    <li>The first character of an end tag must be a U+003C LESS-THAN SIGN character (&lt;).</li>
+  </ol>
+</blockquote>
+.
+Document[0, 91]
+  BlockQuote[0, 87] marker:[0, 1, ">"]
+    OrderedList[2, 87] isTight delimiter:'.'
+      OrderedListItem[2, 87] open:[2, 4, "1."] isTight hadBlankLineAfter
+        Paragraph[5, 87] isTrailingBlankLine
+          Text[5, 86] chars:[5, 86, "The f … (\<)."]
+````````````````````````````````
+
+
+```````````````````````````````` example(Issue xxx-01: 5) options(keep-blank-lines)
+> 1. The first character of an end tag must be a U+003C LESS-THAN SIGN character (\<).
+> 
+
+.
+<blockquote>
+  <ol>
+    <li>The first character of an end tag must be a U+003C LESS-THAN SIGN character (&lt;).</li>
+  </ol>
+</blockquote>
+.
+Document[0, 91]
+  BlockQuote[0, 90] marker:[0, 1, ">"]
+    OrderedList[2, 87] isTight delimiter:'.'
+      OrderedListItem[2, 87] open:[2, 4, "1."] isTight hadBlankLineAfter
+        Paragraph[5, 87] isTrailingBlankLine
+          Text[5, 86] chars:[5, 86, "The f … (\<)."]
+    BlankLine[87, 90]
+  BlankLine[90, 91]
+````````````````````````````````
+
 

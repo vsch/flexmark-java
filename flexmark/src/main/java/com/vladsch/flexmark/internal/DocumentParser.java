@@ -1108,12 +1108,19 @@ public class DocumentParser implements ParserState {
             while (node != null) {
                 Node next = node.getNext();
                 if (node instanceof BlankLineContainer) {
+                    Node ancestorKeepTrailingContainer = node.getAncestorOfType(KeepTrailingBlankLineContainer.class);
                     Node blankLine = node.getLastChild();
                     if (blankLine instanceof BlankLine) {
                         while (blankLine instanceof BlankLine && (!(node instanceof KeepTrailingBlankLineContainer) || blankLine.getChars().isBlank())) {
                             Node prevBlankLine = blankLine.getPrevious();
                             blankLine.unlink();
-                            node.insertAfter(blankLine);
+
+                            if (!blankLine.getChars().isBlank() && ancestorKeepTrailingContainer != null) {
+                                ancestorKeepTrailingContainer.appendChild(blankLine);
+                            } else {
+                                node.insertAfter(blankLine);
+                            } 
+                            
                             blankLine = prevBlankLine;
                         }
                         node.setCharsFromContentOnly();
