@@ -224,9 +224,7 @@ public class DocumentParser implements ParserState {
 
     private static class ParagraphDependencyHandler extends DependencyHandler<ParagraphPreProcessorFactory, ParagraphPreProcessorDependencyStage, ParagraphPreProcessorDependencies> {
         @Override
-        protected Class<? extends ParagraphPreProcessorFactory> getDependentClass(
-                ParagraphPreProcessorFactory dependent
-        ) {
+        protected Class<? extends ParagraphPreProcessorFactory> getDependentClass(ParagraphPreProcessorFactory dependent) {
             return dependent.getClass();
         }
 
@@ -258,9 +256,7 @@ public class DocumentParser implements ParserState {
 
     private static class CustomBlockParserDependencyHandler extends DependencyHandler<CustomBlockParserFactory, CustomBlockParserDependencyStage, CustomBlockParserDependencies> {
         @Override
-        protected Class<? extends CustomBlockParserFactory> getDependentClass(
-                CustomBlockParserFactory dependent
-        ) {
+        protected Class<? extends CustomBlockParserFactory> getDependentClass(CustomBlockParserFactory dependent) {
             return dependent.getClass();
         }
 
@@ -319,9 +315,7 @@ public class DocumentParser implements ParserState {
 
     private static class BlockDependencyHandler extends DependencyHandler<BlockPreProcessorFactory, BlockPreProcessorDependencyStage, BlockPreProcessorDependencies> {
         @Override
-        protected Class<? extends BlockPreProcessorFactory> getDependentClass(
-                BlockPreProcessorFactory dependent
-        ) {
+        protected Class<? extends BlockPreProcessorFactory> getDependentClass(BlockPreProcessorFactory dependent) {
             return dependent.getClass();
         }
 
@@ -375,10 +369,7 @@ public class DocumentParser implements ParserState {
         return documentBlockParser.getBlock();
     }
 
-    public static List<CustomBlockParserFactory> calculateBlockParserFactories(
-            DataHolder options,
-            List<CustomBlockParserFactory> customBlockParserFactories
-    ) {
+    public static List<CustomBlockParserFactory> calculateBlockParserFactories(DataHolder options, List<CustomBlockParserFactory> customBlockParserFactories) {
         List<CustomBlockParserFactory> list = new ArrayList<CustomBlockParserFactory>();
         // By having the custom factories come first, extensions are able to change behavior of core syntax.
         list.addAll(customBlockParserFactories);
@@ -454,7 +445,6 @@ public class DocumentParser implements ParserState {
      * The main parsing function. Returns a parsed document AST.
      *
      * @param source source sequence to parse
-     *
      * @return Document node of the resulting AST
      */
     public Document parse(CharSequence source) {
@@ -594,8 +584,8 @@ public class DocumentParser implements ParserState {
     }
 
     /**
-     * Analyze a line of text and update the document appropriately. We parse markdown text by calling this on each line
-     * of input, then finalizing the document.
+     * Analyze a line of text and update the document appropriately. We parse markdown text by calling this on each
+     * line of input, then finalizing the document.
      *
      * @param ln sequence of the current line
      */
@@ -683,14 +673,6 @@ public class DocumentParser implements ParserState {
             }
         }
 
-        //if (blankLine != null) {
-        //    if (nextPrefixClaimer != null) {
-        //        nextPrefixClaimer.getBlock().appendChild(blankLine);
-        //    } else if (lastPrefixClaimer != null) {
-        //        lastPrefixClaimer.getBlock().appendChild(blankLine);
-        //    }
-        //}
-
         List<BlockParser> unmatchedBlockParsers = new ArrayList<BlockParser>(activeBlockParsers.subList(matches, activeBlockParsers.size()));
         BlockParser lastMatchedBlockParser = activeBlockParsers.get(matches - 1);
         BlockParser blockParser = lastMatchedBlockParser;
@@ -709,12 +691,9 @@ public class DocumentParser implements ParserState {
 
         while (tryBlockStarts) {
             boolean wasBlank = blank;
-
             findNextNonSpace();
 
-            if (blank && !wasBlank) {
-                lastPrefixClaimer = blockParser;
-            }
+            if (blank && !wasBlank) lastPrefixClaimer = blockParser;
 
             // this is a little performance optimization:
             if (blank || (indent < myParsing.CODE_BLOCK_INDENT && Parsing.isLetter(line, nextNonSpace))) {
@@ -740,7 +719,6 @@ public class DocumentParser implements ParserState {
             }
 
             if (blockStart.isReplaceActiveBlockParser()) {
-                BlockParser activeParser = getActiveBlockParser();
                 removeActiveBlockParser();
             }
 
@@ -821,7 +799,6 @@ public class DocumentParser implements ParserState {
             index = nextNonSpace;
             column = nextNonSpaceColumn;
         }
-
         while (index < newIndex && index != line.length()) {
             advance();
         }
@@ -979,12 +956,11 @@ public class DocumentParser implements ParserState {
     }
 
     /**
-     * Add block parser of type T as a child of the currently active parsers. If the tip can't accept children, close
-     * and finalize it and try its parent, and so on til we find a block that can accept children.
+     * Add block parser of type T as a child of the currently active parsers. If the tip can't  accept children, close and finalize it and try
+     * its parent, and so on til we find a block that can accept children.
      *
      * @param <T>         block parser type
      * @param blockParser new block parser to add as a child
-     *
      * @return block parser instance added as a child.
      */
     private <T extends BlockParser> T addChild(T blockParser) {
@@ -1017,15 +993,10 @@ public class DocumentParser implements ParserState {
         old.getBlock().unlink();
     }
 
-    private void propagateLastLineBlank(
-            BlockParser blockParser,
-            BlockParser lastMatchedBlockParser
-    ) {
+    private void propagateLastLineBlank(BlockParser blockParser, BlockParser lastMatchedBlockParser) {
         if (blank) {
             Node lastChild = blockParser.getBlock().getLastChild();
-            if (lastChild != null) {
-                setLastLineBlank(lastChild, true);
-            }
+            if (lastChild != null) setLastLineBlank(lastChild, true);
         }
 
         // Block quote lines are never blank as they start with >
@@ -1044,8 +1015,7 @@ public class DocumentParser implements ParserState {
     }
 
     private void setLastLineBlank(Node node, boolean value) {
-        if (value) lastLineBlank.put(node, true);
-        else lastLineBlank.remove(node);
+        lastLineBlank.put(node, value);
     }
 
     @Override
@@ -1084,11 +1054,7 @@ public class DocumentParser implements ParserState {
      * @param stage        paragraph pre-processor dependency stage
      * @param processorMap paragraph pre-processor cache
      */
-    private void preProcessParagraph(
-            Paragraph block,
-            ParagraphPreProcessorDependencyStage stage,
-            ParagraphPreProcessorCache processorMap
-    ) {
+    private void preProcessParagraph(Paragraph block, ParagraphPreProcessorDependencyStage stage, ParagraphPreProcessorCache processorMap) {
         while (true) {
             boolean hadChanges = false;
 
@@ -1114,8 +1080,7 @@ public class DocumentParser implements ParserState {
                         int iMax = block.getLineCount();
                         int i;
                         for (i = 0; i < iMax; i++) {
-                            if (block.getLineChars(i).getEndOffset() > contentChars.getStartOffset())
-                                break;
+                            if (block.getLineChars(i).getEndOffset() > contentChars.getStartOffset()) break;
                         }
 
                         if (i >= iMax) {

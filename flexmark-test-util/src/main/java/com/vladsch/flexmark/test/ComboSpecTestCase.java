@@ -109,10 +109,10 @@ public abstract class ComboSpecTestCase extends FullSpecTestCase {
     }
 
     /**
-     * @return   false to not do full spec
+     * @return false to not do full spec
      */
     protected boolean fullTestSpecStarting() {
-      return true;
+        return true;
     }
 
     protected void fullTestSpecComplete() {
@@ -125,17 +125,17 @@ public abstract class ComboSpecTestCase extends FullSpecTestCase {
 
         if (fullTestSpecStarting()) {
 
-        String specResourcePath = getSpecResourceName();
-        String fullSpec = SpecReader.readSpec(specResourcePath);
-        SpecReader.readExamples(specResourcePath, this);
-        String actual = dumpSpecReader.getFullSpec();
+            String specResourcePath = getSpecResourceName();
+            String fullSpec = SpecReader.readSpec(specResourcePath);
+            SpecReader.readExamples(specResourcePath, this);
+            String actual = dumpSpecReader.getFullSpec();
 
-        if (outputActualFullSpec()) {
-            System.out.println(actual);
-        }
+            if (outputActualFullSpec()) {
+                System.out.println(actual);
+            }
 
-        fullTestSpecComplete();
-        assertEquals(fullSpec, actual);
+            fullTestSpecComplete();
+            assertEquals(fullSpec, actual);
         }
     }
 }

@@ -84,8 +84,12 @@ public class DumpSpecReader extends SpecReader {
             }
         }
 
+        boolean timed = RenderingTestCase.TIMED.getFrom(parserWithOptions.getOptions());
+        int iterations = timed ? RenderingTestCase.TIMED_ITERATIONS.getFrom(parserWithOptions.getOptions()) : 1;
+
         long start = System.nanoTime();
         Node node = parserWithOptions.parse(input);
+        for (int i = 1; i < iterations; i++) parserWithOptions.parse(input);
         long parse = System.nanoTime();
 
         if (node instanceof Document && includedDocument instanceof Document) {
@@ -93,13 +97,13 @@ public class DumpSpecReader extends SpecReader {
         }
 
         String actualHTML = rendererWithOptions.render(node);
+        for (int i = 1; i < iterations; i++) rendererWithOptions.render(node);
         long render = System.nanoTime();
 
-        boolean timed = RenderingTestCase.TIMED.getFrom(node.getDocument());
         boolean embedTimed = RenderingTestCase.EMBED_TIMED.getFrom(node.getDocument());
 
         if (timed || embedTimed) {
-            System.out.println(String.format(RenderingTestCase.TIMED_FORMAT_STRING, example.getSection() == null ? "" : example.getSection().trim() + ": " + example.getExampleNumber(), (parse - start) / 1000000.0, (render - parse) / 1000000.0, (render - start) / 1000000.0));
+            System.out.println(String.format(RenderingTestCase.TIMED_FORMAT_STRING, example.getSection() == null ? "" : example.getSection().trim() + ": " + example.getExampleNumber(), (parse - start) / 1000000.0/iterations, (render - parse) / 1000000.0/iterations, (render - start) / 1000000.0/iterations));
         }
 
         final String actualAST = testCase.ast(node);
@@ -110,7 +114,7 @@ public class DumpSpecReader extends SpecReader {
         testCase.addSpecExample(example, node, options, ignoredCase, actualHTML, actualAST);
 
         if (embedTimed) {
-            sb.append(String.format(RenderingTestCase.TIMED_FORMAT_STRING, example.getSection() == null ? "" : example.getSection().trim() + ": " + example.getExampleNumber(), (parse - start) / 1000000.0, (render - parse) / 1000000.0, (render - start) / 1000000.0));
+            sb.append(String.format(RenderingTestCase.TIMED_FORMAT_STRING, example.getSection() == null ? "" : example.getSection().trim() + ": " + example.getExampleNumber(), (parse - start) / 1000000.0/iterations, (render - parse) / 1000000.0/iterations, (render - start) / 1000000.0/iterations));
         }
 
         // include source so that diff can be used to update spec

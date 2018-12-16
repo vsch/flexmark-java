@@ -27,6 +27,7 @@ public abstract class RenderingTestCase {
     public static final String FAIL_OPTION_NAME = "FAIL";
     public static final String NO_FILE_EOL_OPTION_NAME = "NO_FILE_EOL";
     public static final String FILE_EOL_OPTION_NAME = "FILE_EOL";
+    public static final String TIMED_ITERATIONS_NAME = "TIMED_ITERATIONS_NAME";
     public static final String TIMED_OPTION_NAME = "TIMED";
     public static final String EMBED_TIMED_OPTION_NAME = "EMBED_TIMED";
     public static final String TIMED_FORMAT_STRING = "Timing %s: parse %.3f ms, render %.3f ms, total %.3f\n";
@@ -34,6 +35,7 @@ public abstract class RenderingTestCase {
     public static final DataKey<Boolean> IGNORE = new DataKey<>(IGNORE_OPTION_NAME, false);
     public static final DataKey<Boolean> NO_FILE_EOL = new DataKey<>(NO_FILE_EOL_OPTION_NAME, true);
     public static final DataKey<Boolean> TIMED = new DataKey<>(TIMED_OPTION_NAME, false);
+    public static final DataKey<Integer> TIMED_ITERATIONS = new DataKey<>(TIMED_ITERATIONS_NAME, 100);
     public static final DataKey<Boolean> EMBED_TIMED = new DataKey<>(TIMED_OPTION_NAME, false);
     public static final DataKey<String> INCLUDED_DOCUMENT = new DataKey<>("INCLUDED_DOCUMENT", "");
     public static final DataKey<String> SOURCE_PREFIX = new DataKey<>("SOURCE_PREFIX", "");
@@ -51,6 +53,7 @@ public abstract class RenderingTestCase {
      * Customize options for an example
      *
      * @param optionSet name of the options set to use
+     *
      * @return options or null to use default
      */
     public DataHolder options(String optionSet) {
@@ -63,6 +66,7 @@ public abstract class RenderingTestCase {
      *
      * @param example    spec example instance for which options are being processed
      * @param optionSets comma separate list of option set names
+     *
      * @return combined set from applying these options together
      */
     public DataHolder getOptions(SpecExample example, String optionSets) {
@@ -229,8 +233,12 @@ public abstract class RenderingTestCase {
             }
         }
 
+        boolean timed = TIMED.getFrom(parserWithOptions.getOptions());
+        int iterations = timed ? TIMED_ITERATIONS.getFrom(parserWithOptions.getOptions()) : 1;
+
         long start = System.nanoTime();
         Node node = parserWithOptions.parse(input);
+        for (int i = 1; i < iterations; i++) parserWithOptions.parse(input);
         long parse = System.nanoTime();
 
         if (node instanceof Document && includedDocument instanceof Document) {
@@ -238,13 +246,13 @@ public abstract class RenderingTestCase {
         }
 
         String html = rendererWithOptions.render(node);
+        for (int i = 1; i < iterations; i++) rendererWithOptions.render(node);
         long render = System.nanoTime();
 
-        boolean timed = TIMED.getFrom(node.getDocument());
         boolean embedTimed = EMBED_TIMED.getFrom(node.getDocument());
 
         if (timed || embedTimed) {
-            System.out.print(String.format(TIMED_FORMAT_STRING, "", (parse - start) / 1000000.0, (render - parse) / 1000000.0, (render - start) / 1000000.0));
+            System.out.print(String.format(TIMED_FORMAT_STRING, "", (parse - start) / 1000000.0 / iterations, (render - parse) / 1000000.0 / iterations, (render - start) / 1000000.0 / iterations));
         }
 
         testCase(node, options);
@@ -257,7 +265,7 @@ public abstract class RenderingTestCase {
         if (example() != null && example().getSection() != null) {
             StringBuilder outExpected = new StringBuilder();
             if (embedTimed) {
-                outExpected.append(String.format(TIMED_FORMAT_STRING, "", (parse - start) / 1000000.0, (render - parse) / 1000000.0, (render - start) / 1000000.0));
+                outExpected.append(String.format(TIMED_FORMAT_STRING, "", (parse - start) / 1000000.0 / iterations, (render - parse) / 1000000.0 / iterations, (render - start) / 1000000.0 / iterations));
             }
 
             DumpSpecReader.addSpecExample(outExpected, source, expectedHtml, "", optionsSet, true, example().getSection(), example().getExampleNumber());
@@ -269,7 +277,7 @@ public abstract class RenderingTestCase {
         } else {
             if (embedTimed) {
                 StringBuilder outExpected = new StringBuilder();
-                outExpected.append(String.format(TIMED_FORMAT_STRING, "", (parse - start) / 1000000.0, (render - parse) / 1000000.0, (render - start) / 1000000.0));
+                outExpected.append(String.format(TIMED_FORMAT_STRING, "", (parse - start) / 1000000.0 / iterations, (render - parse) / 1000000.0 / iterations, (render - start) / 1000000.0 / iterations));
                 outExpected.append(DumpSpecReader.addSpecExample(source, expectedHtml, "", optionsSet));
                 expected = outExpected.toString();
             } else {
@@ -326,8 +334,12 @@ public abstract class RenderingTestCase {
             }
         }
 
+        boolean timed = TIMED.getFrom(parserWithOptions.getOptions());
+        int iterations = timed ? TIMED_ITERATIONS.getFrom(parserWithOptions.getOptions()) : 1;
+
         long start = System.nanoTime();
         Node node = parserWithOptions.parse(input);
+        for (int i = 1; i < iterations; i++) parserWithOptions.parse(input);
         long parse = System.nanoTime();
 
         if (node instanceof Document && includedDocument instanceof Document) {
@@ -335,13 +347,13 @@ public abstract class RenderingTestCase {
         }
 
         String html = rendererWithOptions.render(node);
+        for (int i = 1; i < iterations; i++) rendererWithOptions.render(node);
         long render = System.nanoTime();
 
-        boolean timed = TIMED.getFrom(node.getDocument());
         boolean embedTimed = EMBED_TIMED.getFrom(node.getDocument());
 
         if (timed || embedTimed) {
-            System.out.print(String.format(TIMED_FORMAT_STRING, "", (parse - start) / 1000000.0, (render - parse) / 1000000.0, (render - start) / 1000000.0));
+            System.out.print(String.format(TIMED_FORMAT_STRING, "", (parse - start) / 1000000.0/iterations, (render - parse) / 1000000.0/iterations, (render - start) / 1000000.0/iterations));
         }
 
         testCase(node, options);
@@ -368,7 +380,7 @@ public abstract class RenderingTestCase {
         } else {
             if (embedTimed) {
                 StringBuilder outExpected = new StringBuilder();
-                outExpected.append(String.format(TIMED_FORMAT_STRING, (parse - start) / 1000000.0, (render - parse) / 1000000.0, (render - start) / 1000000.0));
+                outExpected.append(String.format(TIMED_FORMAT_STRING, (parse - start) / 1000000.0/iterations, (render - parse) / 1000000.0/iterations, (render - start) / 1000000.0/iterations));
                 outExpected.append(DumpSpecReader.addSpecExample(source, expectedHtml, "", optionsSet));
                 expected = outExpected.toString();
             } else {
