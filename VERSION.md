@@ -267,10 +267,16 @@ flexmark-java
 ------
 
 * [ ] Add: sample for converting inline nodes to text nodes in node post processor.
+* Breaking: :warning: Potentially breaking change for some code if parsing with
+  `Parser.BLANK_LINES_IN_AST` enabled. Last blank line of blocks is now moved out to the parent
+  block. Greatest effect is on list items which previously held on to their last blank line,
+  except for the last item in the list. Now all trailing blank lines are moved out to the parent
+  list. Therefore children of lists can be list items or blank lines, not just list items. This
+  makes blank line attribution more consistent.
 * Fix: #287, ''flexmark-html-parser' The module has an mistake
 * Fix: empty table cells now contain a space so that the position of the cell's text in the file
   is not lost.
-* Fix: Formatter inline elements leaveing embedded EOL sequences when
+* Fix: Formatter inline elements leaving embedded EOL sequences when
   `Formatter.KEEP_SOFT_LINE_BREAKS` is false.
 * Fix: trailing blank lines in block quotes are now left inside the block quote instead of
   moving them up to the document level if these blank lines are unambiguously attributable to
@@ -278,9 +284,9 @@ flexmark-java
   a trailing blank line is not attributable to the block element, block quotes have explicit
   prefix which identifies the blank line as part of the block quote.
   
-  :warning: a blank line node will be appended to the block quote even if
-  `Parser.BLANK_LINES_IN_AST` is `false` to force block quote to span the blank line as the only
-  way to extend the block quote enclosed chars to span the blank line.
+  :warning: trailing blank line nodes will be appended to the block quote even if
+  `Parser.BLANK_LINES_IN_AST` is `false` to force block quote to span the blank lines as the
+  only way to extend the block quote enclosed characters.
 
 0.35.0
 ------

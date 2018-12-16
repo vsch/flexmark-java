@@ -1,6 +1,12 @@
 package com.vladsch.flexmark.internal;
 
-import com.vladsch.flexmark.ast.*;
+import com.vladsch.flexmark.ast.BlankLine;
+import com.vladsch.flexmark.ast.BlankLineContainer;
+import com.vladsch.flexmark.ast.Block;
+import com.vladsch.flexmark.ast.Document;
+import com.vladsch.flexmark.ast.KeepTrailingBlankLineContainer;
+import com.vladsch.flexmark.ast.Node;
+import com.vladsch.flexmark.ast.Paragraph;
 import com.vladsch.flexmark.ast.util.ClassifyingBlockTracker;
 import com.vladsch.flexmark.ast.util.Parsing;
 import com.vladsch.flexmark.parser.InlineParser;
@@ -9,6 +15,7 @@ import com.vladsch.flexmark.parser.InlineParserFactory;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.block.*;
 import com.vladsch.flexmark.parser.delimiter.DelimiterProcessor;
+import com.vladsch.flexmark.test.AstCollectingVisitor;
 import com.vladsch.flexmark.util.Computable;
 import com.vladsch.flexmark.util.collection.ItemFactoryMap;
 import com.vladsch.flexmark.util.collection.iteration.ReversibleIterable;
@@ -21,11 +28,18 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.CharSubSequence;
 import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
 import com.vladsch.flexmark.util.sequence.SubSequence;
+import org.apache.log4j.Logger;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.Reader;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.BitSet;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import static com.vladsch.flexmark.parser.Parser.BLANK_LINES_IN_AST;
 import static com.vladsch.flexmark.parser.Parser.TRACK_DOCUMENT_LINES;
@@ -120,6 +134,7 @@ public class DocumentParser implements ParserState {
     private int nextNonSpaceColumn = 0;
     private int indent = 0;
     private boolean blank;
+    private BlankLine blankLine = null;
 
     private final List<BlockParserFactory> blockParserFactories;
     private final ParagraphPreProcessorDependencies paragraphPreProcessorDependencies;
@@ -209,7 +224,9 @@ public class DocumentParser implements ParserState {
 
     private static class ParagraphDependencyHandler extends DependencyHandler<ParagraphPreProcessorFactory, ParagraphPreProcessorDependencyStage, ParagraphPreProcessorDependencies> {
         @Override
-        protected Class<? extends ParagraphPreProcessorFactory> getDependentClass(ParagraphPreProcessorFactory dependent) {
+        protected Class<? extends ParagraphPreProcessorFactory> getDependentClass(
+                ParagraphPreProcessorFactory dependent
+        ) {
             return dependent.getClass();
         }
 
@@ -241,7 +258,9 @@ public class DocumentParser implements ParserState {
 
     private static class CustomBlockParserDependencyHandler extends DependencyHandler<CustomBlockParserFactory, CustomBlockParserDependencyStage, CustomBlockParserDependencies> {
         @Override
-        protected Class<? extends CustomBlockParserFactory> getDependentClass(CustomBlockParserFactory dependent) {
+        protected Class<? extends CustomBlockParserFactory> getDependentClass(
+                CustomBlockParserFactory dependent
+        ) {
             return dependent.getClass();
         }
 
@@ -300,7 +319,9 @@ public class DocumentParser implements ParserState {
 
     private static class BlockDependencyHandler extends DependencyHandler<BlockPreProcessorFactory, BlockPreProcessorDependencyStage, BlockPreProcessorDependencies> {
         @Override
-        protected Class<? extends BlockPreProcessorFactory> getDependentClass(BlockPreProcessorFactory dependent) {
+        protected Class<? extends BlockPreProcessorFactory> getDependentClass(
+                BlockPreProcessorFactory dependent
+        ) {
             return dependent.getClass();
         }
 
@@ -354,7 +375,10 @@ public class DocumentParser implements ParserState {
         return documentBlockParser.getBlock();
     }
 
-    public static List<CustomBlockParserFactory> calculateBlockParserFactories(DataHolder options, List<CustomBlockParserFactory> customBlockParserFactories) {
+    public static List<CustomBlockParserFactory> calculateBlockParserFactories(
+            DataHolder options,
+            List<CustomBlockParserFactory> customBlockParserFactories
+    ) {
         List<CustomBlockParserFactory> list = new ArrayList<CustomBlockParserFactory>();
         // By having the custom factories come first, extensions are able to change behavior of core syntax.
         list.addAll(customBlockParserFactories);
@@ -430,6 +454,7 @@ public class DocumentParser implements ParserState {
      * The main parsing function. Returns a parsed document AST.
      *
      * @param source source sequence to parse
+     *
      * @return Document node of the resulting AST
      */
     public Document parse(CharSequence source) {
@@ -569,8 +594,8 @@ public class DocumentParser implements ParserState {
     }
 
     /**
-     * Analyze a line of text and update the document appropriately. We parse markdown text by calling this on each
-     * line of input, then finalizing the document.
+     * Analyze a line of text and update the document appropriately. We parse markdown text by calling this on each line
+     * of input, then finalizing the document.
      *
      * @param ln sequence of the current line
      */
@@ -588,25 +613,34 @@ public class DocumentParser implements ParserState {
         // Set all_matched to false if not all containers match.
         // The document will always match, can be skipped
         int matches = 1;
-        Block blankLine = null;
+        blankLine = null;
 
-        if (blankLinesInAst) {
-            findNextNonSpace();
-            if (blank) {
-                // line became blank
+        findNextNonSpace();
+
+        if (blank) {
+            if (blankLinesInAst) {
+                // line was blank
                 blankLine = new BlankLine(lineWithEOL);
                 documentBlockParser.getBlock().appendChild(blankLine);
             }
         }
 
         for (BlockParser blockParser : activeBlockParsers.subList(1, activeBlockParsers.size())) {
+            boolean wasBlank = blank;
+
             findNextNonSpace();
 
-            if (blankLinesInAst) {
-                if (blank && blankLine == null) {
-                    // line became blank
-                    blankLine = new BlankLine(lineWithEOL);
-                    documentBlockParser.getBlock().appendChild(blankLine);
+            if (blank) {
+                if (blankLinesInAst) {
+                    if (blankLine == null) {
+                        // line became blank
+                        blankLine = new BlankLine(lineWithEOL);
+                        documentBlockParser.getBlock().appendChild(blankLine);
+                    }
+
+                    if (!wasBlank && blockParser.getBlock() instanceof BlankLineContainer) {
+                        blankLine.setClaimedBlankLine(blockParser.getBlock());
+                    }
                 }
             }
 
@@ -619,14 +653,27 @@ public class DocumentParser implements ParserState {
                 } else {
                     if (blockContinue.getNewIndex() != -1) {
                         setNewIndex(blockContinue.getNewIndex());
+                        if (!blank && blockParser.getBlock() instanceof BlankLineContainer) {
+                            findNextNonSpace();
+                            if (blank) {
+                                blankLine = new BlankLine(lineWithEOL, blockParser.getBlock());
+                                blockParser.getBlock().appendChild(blankLine);
+                            }
+                        }
                     } else if (blockContinue.getNewColumn() != -1) {
                         setNewColumn(blockContinue.getNewColumn());
+                        if (!blank && blockParser.getBlock() instanceof BlankLineContainer) {
+                            findNextNonSpace();
+                            if (blank) {
+                                blankLine = new BlankLine(lineWithEOL, blockParser.getBlock());
+                                blockParser.getBlock().appendChild(blankLine);
+                            }
+                        }
                     }
                     matches++;
 
-                    if (blankLine != null) {
+                    if (blankLine != null && (blankLinesInAst || blankLine.getClaimedBlankLine() == blockParser)) {
                         if (blockParser.getBlock() instanceof BlankLineContainer) {
-                            blankLine.unlink();
                             blockParser.getBlock().appendChild(blankLine);
                         }
                     }
@@ -635,6 +682,14 @@ public class DocumentParser implements ParserState {
                 break;
             }
         }
+
+        //if (blankLine != null) {
+        //    if (nextPrefixClaimer != null) {
+        //        nextPrefixClaimer.getBlock().appendChild(blankLine);
+        //    } else if (lastPrefixClaimer != null) {
+        //        lastPrefixClaimer.getBlock().appendChild(blankLine);
+        //    }
+        //}
 
         List<BlockParser> unmatchedBlockParsers = new ArrayList<BlockParser>(activeBlockParsers.subList(matches, activeBlockParsers.size()));
         BlockParser lastMatchedBlockParser = activeBlockParsers.get(matches - 1);
@@ -650,8 +705,16 @@ public class DocumentParser implements ParserState {
         // Unless last matched container is a code block, try new container starts,
         // adding children to the last matched container:
         boolean tryBlockStarts = blockParser.isInterruptible() || blockParser.isContainer();
+        BlockParser lastPrefixClaimer = null;
+
         while (tryBlockStarts) {
+            boolean wasBlank = blank;
+
             findNextNonSpace();
+
+            if (blank && !wasBlank) {
+                lastPrefixClaimer = blockParser;
+            }
 
             // this is a little performance optimization:
             if (blank || (indent < myParsing.CODE_BLOCK_INDENT && Parsing.isLetter(line, nextNonSpace))) {
@@ -677,6 +740,7 @@ public class DocumentParser implements ParserState {
             }
 
             if (blockStart.isReplaceActiveBlockParser()) {
+                BlockParser activeParser = getActiveBlockParser();
                 removeActiveBlockParser();
             }
 
@@ -701,25 +765,27 @@ public class DocumentParser implements ParserState {
 
             propagateLastLineBlank(blockParser, lastMatchedBlockParser);
 
-            if (blockParser.getBlock() instanceof KeepTrailingBlankLineContainer) {
-                if (blankLine != null) {
-                    blockParser.getBlock().appendChild(blankLine);
-                } else if (blank) {
-                    if (blockParser.isContainer() && !lineWithEOL.isBlank()) {
-                        // need to add it as a blank line if it is attributable to the block, otherwise there is no content
-                        blankLine = new BlankLine(lineWithEOL);
+            if (blank) {
+                if (blockParser.getBlock() instanceof KeepTrailingBlankLineContainer) {
+                    if (blankLine != null) {
                         blockParser.getBlock().appendChild(blankLine);
+                    } else {
+                        if (blockParser.isContainer() && lastPrefixClaimer == blockParser) {
+                            // need to add it as a blank line if it is attributable to the block, otherwise there is no content
+                            blankLine = new BlankLine(lineWithEOL, blockParser.getBlock());
+                            blockParser.getBlock().appendChild(blankLine);
+                        }
                     }
-                } 
+                }
             }
-            
+
             if (!blockParser.isContainer()) {
                 addLine();
             } else if (!blank) {
                 // inlineParser paragraph container for line
                 addChild(new ParagraphParser());
                 addLine();
-            } 
+            }
         }
     }
 
@@ -755,6 +821,7 @@ public class DocumentParser implements ParserState {
             index = nextNonSpace;
             column = nextNonSpaceColumn;
         }
+
         while (index < newIndex && index != line.length()) {
             advance();
         }
@@ -842,6 +909,21 @@ public class DocumentParser implements ParserState {
 
         Block block = blockParser.getBlock();
 
+        // move blank lines at end of block to parent if they are not claimed by the block
+        if (block.getParent() != null) {
+            Node lastChild = block.getLastChild();
+            if (lastChild instanceof BlankLine) {
+                if (((BlankLine) lastChild).getClaimedBlankLine() != block) {
+                    // move them to parent
+                    lastChild = lastChild.getFirstInChain();
+                    block.insertChainAfter(lastChild);
+                    block.setCharsFromContentOnly();
+                } else {
+                    int tmp = 0;
+                }
+            }
+        }
+
         blockParser.closeBlock(this);
         blockParser.finalizeClosedBlock();
 
@@ -877,8 +959,8 @@ public class DocumentParser implements ParserState {
     }
 
     /**
-     * Break out of all containing lists, resetting the tip of the document to the parent of the highest list,
-     * and finalizing all the lists. (This is used to implement the "two blank lines break of of all lists" feature.)
+     * Break out of all containing lists, resetting the tip of the document to the parent of the highest list, and
+     * finalizing all the lists. (This is used to implement the "two blank lines break of of all lists" feature.)
      *
      * @param blockParsers list of block parsers to break out on double blank line
      */
@@ -897,11 +979,12 @@ public class DocumentParser implements ParserState {
     }
 
     /**
-     * Add block parser of type T as a child of the currently active parsers. If the tip can't  accept children, close and finalize it and try
-     * its parent, and so on til we find a block that can accept children.
+     * Add block parser of type T as a child of the currently active parsers. If the tip can't accept children, close
+     * and finalize it and try its parent, and so on til we find a block that can accept children.
      *
      * @param <T>         block parser type
      * @param blockParser new block parser to add as a child
+     *
      * @return block parser instance added as a child.
      */
     private <T extends BlockParser> T addChild(T blockParser) {
@@ -934,9 +1017,15 @@ public class DocumentParser implements ParserState {
         old.getBlock().unlink();
     }
 
-    private void propagateLastLineBlank(BlockParser blockParser, BlockParser lastMatchedBlockParser) {
-        if (blank && blockParser.getBlock().getLastChild() != null) {
-            setLastLineBlank(blockParser.getBlock().getLastChild(), true);
+    private void propagateLastLineBlank(
+            BlockParser blockParser,
+            BlockParser lastMatchedBlockParser
+    ) {
+        if (blank) {
+            Node lastChild = blockParser.getBlock().getLastChild();
+            if (lastChild != null) {
+                setLastLineBlank(lastChild, true);
+            }
         }
 
         // Block quote lines are never blank as they start with >
@@ -955,7 +1044,8 @@ public class DocumentParser implements ParserState {
     }
 
     private void setLastLineBlank(Node node, boolean value) {
-        lastLineBlank.put(node, value);
+        if (value) lastLineBlank.put(node, true);
+        else lastLineBlank.remove(node);
     }
 
     @Override
@@ -994,7 +1084,11 @@ public class DocumentParser implements ParserState {
      * @param stage        paragraph pre-processor dependency stage
      * @param processorMap paragraph pre-processor cache
      */
-    private void preProcessParagraph(Paragraph block, ParagraphPreProcessorDependencyStage stage, ParagraphPreProcessorCache processorMap) {
+    private void preProcessParagraph(
+            Paragraph block,
+            ParagraphPreProcessorDependencyStage stage,
+            ParagraphPreProcessorCache processorMap
+    ) {
         while (true) {
             boolean hadChanges = false;
 
@@ -1020,7 +1114,8 @@ public class DocumentParser implements ParserState {
                         int iMax = block.getLineCount();
                         int i;
                         for (i = 0; i < iMax; i++) {
-                            if (block.getLineChars(i).getEndOffset() > contentChars.getStartOffset()) break;
+                            if (block.getLineChars(i).getEndOffset() > contentChars.getStartOffset())
+                                break;
                         }
 
                         if (i >= iMax) {
@@ -1085,50 +1180,42 @@ public class DocumentParser implements ParserState {
         }
     }
 
+    private static Logger LOG = Logger.getLogger(DocumentParser.class);
+
     private Document finalizeAndProcess() {
         finalizeBlocks(this.activeBlockParsers);
+
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("Parsed\n" + new AstCollectingVisitor().collectAndGetAstText(documentBlockParser.getBlock()));
+        }
 
         // need to run block pre-processors at this point, before inline processing
         currentPhase = ParserPhase.PRE_PROCESS_PARAGRAPHS;
         this.preProcessParagraphs();
+
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("Paragraphs PreProcessed\n" + new AstCollectingVisitor().collectAndGetAstText(documentBlockParser.getBlock()));
+        }
+
         currentPhase = ParserPhase.PRE_PROCESS_BLOCKS;
         this.preProcessBlocks();
+
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("Blocks PreProcessed\n" + new AstCollectingVisitor().collectAndGetAstText(documentBlockParser.getBlock()));
+        }
 
         // can naw run inline processing
         currentPhase = ParserPhase.PARSE_INLINES;
         this.processInlines();
 
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("Inline Processed\n" + new AstCollectingVisitor().collectAndGetAstText(documentBlockParser.getBlock()));
+        }
+
         currentPhase = ParserPhase.DONE;
         Document document = this.documentBlockParser.getBlock();
         inlineParser.finalizeDocument(document);
 
-        // move blank lines at bottom of BlankLineContainers to document
-        if (options.get(BLANK_LINES_IN_AST)) {
-            Node node = document.getFirstChild();
-            while (node != null) {
-                Node next = node.getNext();
-                if (node instanceof BlankLineContainer) {
-                    Node ancestorKeepTrailingContainer = node.getAncestorOfType(KeepTrailingBlankLineContainer.class);
-                    Node blankLine = node.getLastChild();
-                    if (blankLine instanceof BlankLine) {
-                        while (blankLine instanceof BlankLine && (!(node instanceof KeepTrailingBlankLineContainer) || blankLine.getChars().isBlank())) {
-                            Node prevBlankLine = blankLine.getPrevious();
-                            blankLine.unlink();
-
-                            if (!blankLine.getChars().isBlank() && ancestorKeepTrailingContainer != null) {
-                                ancestorKeepTrailingContainer.appendChild(blankLine);
-                            } else {
-                                node.insertAfter(blankLine);
-                            } 
-                            
-                            blankLine = prevBlankLine;
-                        }
-                        node.setCharsFromContentOnly();
-                    }
-                }
-                node = next;
-            }
-        }
         return document;
     }
 }

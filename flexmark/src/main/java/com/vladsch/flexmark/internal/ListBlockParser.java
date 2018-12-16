@@ -121,11 +121,13 @@ public class ListBlockParser extends AbstractBlockParser {
         if (state.getProperties().get(BLANK_LINES_IN_AST)) {
             // need to transfer trailing blank line nodes from last item to parent list
             ListBlock block = getBlock();
-            Node child = block.getLastChild();
+            
+            Node child = block.getFirstChildAnyNot(BlankLine.class);
 
-            if (child instanceof ListItem) {
+            while (child instanceof ListItem) {
                 // transfer its trailing blank lines to us
                 child.moveTrailingBlankLines();
+                child = child.getNextAnyNot(BlankLine.class);
             }
         }
 

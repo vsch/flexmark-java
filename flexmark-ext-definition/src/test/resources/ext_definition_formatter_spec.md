@@ -480,6 +480,21 @@ Definition Term
 
 Definition Term
 :   definition item
+.
+Document[0, 51]
+  BulletList[0, 14] isTight
+    BulletListItem[0, 14] open:[0, 1, "-"] isTight hadBlankLineAfter
+      Paragraph[2, 14] isTrailingBlankLine
+        Text[2, 13] chars:[2, 13, "bulle …  item"]
+  BlankLine[14, 15]
+  BlankLine[15, 16]
+  DefinitionList[16, 51] isTight
+    DefinitionTerm[16, 33]
+      Paragraph[16, 33]
+        Text[16, 31] chars:[16, 31, "Defin …  Term"]
+    DefinitionItem[33, 51] open:[33, 34, ":"] isTight
+      Paragraph[35, 51]
+        Text[35, 50] chars:[35, 50, "defin …  item"]
 ````````````````````````````````
 
 
@@ -812,10 +827,10 @@ Document[0, 47]
     DefinitionTerm[0, 7]
       Paragraph[0, 7]
         Text[0, 6] chars:[0, 6, "Term 1"]
-    DefinitionItem[7, 24] open:[7, 8, ":"] isTight hadBlankLineAfter
+    DefinitionItem[7, 23] open:[7, 8, ":"] isTight hadBlankLineAfter
       Paragraph[11, 23] isTrailingBlankLine
         Text[11, 22] chars:[11, 22, "Defin … tion1"]
-      BlankLine[23, 24]
+    BlankLine[23, 24]
     DefinitionTerm[24, 31]
       Paragraph[24, 31]
         Text[24, 30] chars:[24, 30, "Term 2"]

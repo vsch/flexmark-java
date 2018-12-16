@@ -51,6 +51,7 @@ Document[0, 180]
             Text[82, 97] chars:[82, 97, "unnum …  list"]
             HardLineBreak[97, 100]
             Text[101, 132] chars:[101, 132, "unnum …  line"]
+      BlankLine[133, 134]
       Paragraph[135, 180]
         Text[135, 180] chars:[135, 180, "numbe …  list"]
 ````````````````````````````````

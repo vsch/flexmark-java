@@ -1300,6 +1300,51 @@ Definition 1 paragraph 1 line 2 (lazy)
     Definition 1 paragraph 2 line 1 ...
     Definition 1 paragraph 2 line 2
 
+.
+<dl>
+  <dt>Term 1</dt>
+  <dt>Term 2</dt>
+  <dd>
+    <p>Definition 1 paragraph 1 line 1 ...
+    Definition 1 paragraph 1 line 2 (lazy)</p>
+    <p>Definition 1 paragraph 2 line 1 ...
+    Definition 1 paragraph 2 line 2</p>
+  </dd>
+</dl>
+.
+Document[0, 176]
+  DefinitionList[0, 175] isLoose
+    DefinitionTerm[0, 7]
+      Paragraph[0, 7]
+        Text[0, 6] chars:[0, 6, "Term 1"]
+    DefinitionTerm[7, 14]
+      Paragraph[7, 14]
+        Text[7, 13] chars:[7, 13, "Term 2"]
+    BlankLine[14, 15]
+    DefinitionItem[15, 175] open:[15, 16, ":"] isLoose hadBlankLineAfter
+      Paragraph[19, 94] isTrailingBlankLine
+        Text[19, 54] chars:[19, 54, "Defin … 1 ..."]
+        SoftLineBreak[54, 55]
+        Text[55, 93] chars:[55, 93, "Defin … lazy)"]
+      BlankLine[94, 99]
+      Paragraph[103, 175] isTrailingBlankLine
+        Text[103, 138] chars:[103, 138, "Defin … 1 ..."]
+        SoftLineBreak[138, 139]
+        Text[143, 174] chars:[143, 174, "Defin … ine 2"]
+  BlankLine[175, 176]
+````````````````````````````````
+
+
+```````````````````````````````` example(Blank Lines: 3) options(blank-lines-in-ast)
+Term 1
+Term 2
+
+:   Definition 1 paragraph 1 line 1 ...
+Definition 1 paragraph 1 line 2 (lazy)
+    
+    Definition 1 paragraph 2 line 1 ...
+    Definition 1 paragraph 2 line 2
+
 :   Definition 2 paragraph 1 line 1 ...
 Definition 2 paragraph 1 line 2 (lazy)
 

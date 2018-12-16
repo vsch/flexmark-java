@@ -404,7 +404,6 @@ woRK WiIth ![maARKDoWN](https://test.com/doc.png "teESt")
       1. list item 2.2.3
 .
 1. LiISt iIteEm 1
-
    1. LiISt iIteEm 1.1
    2. LiISt iIteEm 1.2
       1) LiISt iIteEm 1.2.1

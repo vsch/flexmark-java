@@ -1717,6 +1717,7 @@ Document[0, 17]
     BlankLine[14, 16]
 ````````````````````````````````
 
+
 Trailing blank lines in list should go to block quote not document
 
 ```````````````````````````````` example Issue xxx-01: 4
@@ -1731,11 +1732,12 @@ Trailing blank lines in list should go to block quote not document
 </blockquote>
 .
 Document[0, 91]
-  BlockQuote[0, 87] marker:[0, 1, ">"]
+  BlockQuote[0, 90] marker:[0, 1, ">"]
     OrderedList[2, 87] isTight delimiter:'.'
       OrderedListItem[2, 87] open:[2, 4, "1."] isTight hadBlankLineAfter
         Paragraph[5, 87] isTrailingBlankLine
           Text[5, 86] chars:[5, 86, "The f … (\<)."]
+    BlankLine[87, 90]
 ````````````````````````````````
 
 
@@ -1758,6 +1760,169 @@ Document[0, 91]
           Text[5, 86] chars:[5, 86, "The f … (\<)."]
     BlankLine[87, 90]
   BlankLine[90, 91]
+````````````````````````````````
+
+
+```````````````````````````````` example Issue xxx-01: 6
+> ##### 8.1.2.2. End tags
+> 
+> End tags must have the following format:
+> 
+> 1. The first character of an end tag must be a U+003C LESS-THAN SIGN character (\<).
+> 
+> 2. The second character of an end tag must be a U+002F SOLIDUS character (/).
+> 
+> 3. The next few characters of an end tag must be the element's
+>    [tag name](https://www.w3.org/TR/html5/syntax.html#tag-name).
+> 
+> 4. After the tag name, there may be one or more
+>    [space characters](https://www.w3.org/TR/html5/infrastructure.html#space-characters).
+> 
+> 5. Finally, end tags must be closed by a U+003E GREATER-THAN SIGN character (\>).
+> 
+
+.
+<blockquote>
+  <h5>8.1.2.2. End tags</h5>
+  <p>End tags must have the following format:</p>
+  <ol>
+    <li>
+      <p>The first character of an end tag must be a U+003C LESS-THAN SIGN character (&lt;).</p>
+    </li>
+    <li>
+      <p>The second character of an end tag must be a U+002F SOLIDUS character (/).</p>
+    </li>
+    <li>
+      <p>The next few characters of an end tag must be the element's
+      <a href="https://www.w3.org/TR/html5/syntax.html#tag-name">tag name</a>.</p>
+    </li>
+    <li>
+      <p>After the tag name, there may be one or more
+      <a href="https://www.w3.org/TR/html5/infrastructure.html#space-characters">space characters</a>.</p>
+    </li>
+    <li>
+      <p>Finally, end tags must be closed by a U+003E GREATER-THAN SIGN character (&gt;).</p>
+    </li>
+  </ol>
+</blockquote>
+.
+Document[0, 615]
+  BlockQuote[0, 614] marker:[0, 1, ">"]
+    Heading[2, 25] textOpen:[2, 7, "#####"] text:[8, 25, "8.1.2.2. End tags"]
+      Text[8, 25] chars:[8, 25, "8.1.2 …  tags"]
+    BlankLine[26, 29]
+    Paragraph[31, 72] isTrailingBlankLine
+      Text[31, 71] chars:[31, 71, "End t … rmat:"]
+    BlankLine[72, 75]
+    OrderedList[77, 611] isLoose delimiter:'.'
+      OrderedListItem[77, 162] open:[77, 79, "1."] isLoose hadBlankLineAfter
+        Paragraph[80, 162] isTrailingBlankLine
+          Text[80, 161] chars:[80, 161, "The f … (\<)."]
+      OrderedListItem[167, 245] open:[167, 169, "2."] isLoose hadBlankLineAfter
+        Paragraph[170, 245] isTrailingBlankLine
+          Text[170, 244] chars:[170, 244, "The s …  (/)."]
+      OrderedListItem[250, 380] open:[250, 252, "3."] isLoose hadBlankLineAfter
+        Paragraph[253, 380] isTrailingBlankLine
+          Text[253, 312] chars:[253, 312, "The n … ent's"]
+          SoftLineBreak[312, 313]
+          Link[318, 378] textOpen:[318, 319, "["] text:[319, 327, "tag name"] textClose:[327, 328, "]"] linkOpen:[328, 329, "("] url:[329, 377, "https://www.w3.org/TR/html5/syntax.html#tag-name"] pageRef:[329, 368, "https://www.w3.org/TR/html5/syntax.html"] anchorMarker:[368, 369, "#"] anchorRef:[369, 377, "tag-name"] linkClose:[377, 378, ")"]
+            Text[319, 327] chars:[319, 327, "tag name"]
+          Text[378, 379] chars:[378, 379, "."]
+      OrderedListItem[385, 524] open:[385, 387, "4."] isLoose hadBlankLineAfter
+        Paragraph[388, 524] isTrailingBlankLine
+          Text[388, 432] chars:[388, 432, "After …  more"]
+          SoftLineBreak[432, 433]
+          Link[438, 522] textOpen:[438, 439, "["] text:[439, 455, "space characters"] textClose:[455, 456, "]"] linkOpen:[456, 457, "("] url:[457, 521, "https://www.w3.org/TR/html5/infrastructure.html#space-characters"] pageRef:[457, 504, "https://www.w3.org/TR/html5/infrastructure.html"] anchorMarker:[504, 505, "#"] anchorRef:[505, 521, "space-characters"] linkClose:[521, 522, ")"]
+            Text[439, 455] chars:[439, 455, "space … cters"]
+          Text[522, 523] chars:[522, 523, "."]
+      OrderedListItem[529, 611] open:[529, 531, "5."] isLoose hadBlankLineAfter
+        Paragraph[532, 611] isTrailingBlankLine
+          Text[532, 610] chars:[532, 610, "Final … (\>)."]
+    BlankLine[611, 614]
+````````````````````````````````
+
+
+```````````````````````````````` example(Issue xxx-01: 7) options(keep-blank-lines)
+> ##### 8.1.2.2. End tags
+> 
+> End tags must have the following format:
+> 
+> 1. The first character of an end tag must be a U+003C LESS-THAN SIGN character (\<).
+> 
+> 2. The second character of an end tag must be a U+002F SOLIDUS character (/).
+> 
+> 3. The next few characters of an end tag must be the element's
+>    [tag name](https://www.w3.org/TR/html5/syntax.html#tag-name).
+> 
+> 4. After the tag name, there may be one or more
+>    [space characters](https://www.w3.org/TR/html5/infrastructure.html#space-characters).
+> 
+> 5. Finally, end tags must be closed by a U+003E GREATER-THAN SIGN character (\>).
+> 
+
+.
+<blockquote>
+  <h5>8.1.2.2. End tags</h5>
+  <p>End tags must have the following format:</p>
+  <ol>
+    <li>
+      <p>The first character of an end tag must be a U+003C LESS-THAN SIGN character (&lt;).</p>
+    </li>
+    <li>
+      <p>The second character of an end tag must be a U+002F SOLIDUS character (/).</p>
+    </li>
+    <li>
+      <p>The next few characters of an end tag must be the element's
+      <a href="https://www.w3.org/TR/html5/syntax.html#tag-name">tag name</a>.</p>
+    </li>
+    <li>
+      <p>After the tag name, there may be one or more
+      <a href="https://www.w3.org/TR/html5/infrastructure.html#space-characters">space characters</a>.</p>
+    </li>
+    <li>
+      <p>Finally, end tags must be closed by a U+003E GREATER-THAN SIGN character (&gt;).</p>
+    </li>
+  </ol>
+</blockquote>
+.
+Document[0, 615]
+  BlockQuote[0, 614] marker:[0, 1, ">"]
+    Heading[2, 25] textOpen:[2, 7, "#####"] text:[8, 25, "8.1.2.2. End tags"]
+      Text[8, 25] chars:[8, 25, "8.1.2 …  tags"]
+    BlankLine[26, 29]
+    Paragraph[31, 72] isTrailingBlankLine
+      Text[31, 71] chars:[31, 71, "End t … rmat:"]
+    BlankLine[72, 75]
+    OrderedList[77, 611] isLoose delimiter:'.'
+      OrderedListItem[77, 162] open:[77, 79, "1."] isLoose hadBlankLineAfter
+        Paragraph[80, 162] isTrailingBlankLine
+          Text[80, 161] chars:[80, 161, "The f … (\<)."]
+      BlankLine[162, 165]
+      OrderedListItem[167, 245] open:[167, 169, "2."] isLoose hadBlankLineAfter
+        Paragraph[170, 245] isTrailingBlankLine
+          Text[170, 244] chars:[170, 244, "The s …  (/)."]
+      BlankLine[245, 248]
+      OrderedListItem[250, 380] open:[250, 252, "3."] isLoose hadBlankLineAfter
+        Paragraph[253, 380] isTrailingBlankLine
+          Text[253, 312] chars:[253, 312, "The n … ent's"]
+          SoftLineBreak[312, 313]
+          Link[318, 378] textOpen:[318, 319, "["] text:[319, 327, "tag name"] textClose:[327, 328, "]"] linkOpen:[328, 329, "("] url:[329, 377, "https://www.w3.org/TR/html5/syntax.html#tag-name"] pageRef:[329, 368, "https://www.w3.org/TR/html5/syntax.html"] anchorMarker:[368, 369, "#"] anchorRef:[369, 377, "tag-name"] linkClose:[377, 378, ")"]
+            Text[319, 327] chars:[319, 327, "tag name"]
+          Text[378, 379] chars:[378, 379, "."]
+      BlankLine[380, 383]
+      OrderedListItem[385, 524] open:[385, 387, "4."] isLoose hadBlankLineAfter
+        Paragraph[388, 524] isTrailingBlankLine
+          Text[388, 432] chars:[388, 432, "After …  more"]
+          SoftLineBreak[432, 433]
+          Link[438, 522] textOpen:[438, 439, "["] text:[439, 455, "space characters"] textClose:[455, 456, "]"] linkOpen:[456, 457, "("] url:[457, 521, "https://www.w3.org/TR/html5/infrastructure.html#space-characters"] pageRef:[457, 504, "https://www.w3.org/TR/html5/infrastructure.html"] anchorMarker:[504, 505, "#"] anchorRef:[505, 521, "space-characters"] linkClose:[521, 522, ")"]
+            Text[439, 455] chars:[439, 455, "space … cters"]
+          Text[522, 523] chars:[522, 523, "."]
+      BlankLine[524, 527]
+      OrderedListItem[529, 611] open:[529, 531, "5."] isLoose hadBlankLineAfter
+        Paragraph[532, 611] isTrailingBlankLine
+          Text[532, 610] chars:[532, 610, "Final … (\>)."]
+    BlankLine[611, 614]
+  BlankLine[614, 615]
 ````````````````````````````````
 
 

@@ -5164,6 +5164,7 @@ Document[0, 22]
         BulletListItem[2, 8] open:[2, 3, "-"] isTight hadBlankLineAfter
           Paragraph[4, 8] isTrailingBlankLine
             Text[4, 7] chars:[4, 7, "one"]
+      BlankLine[8, 11]
       Paragraph[18, 22]
         Text[18, 21] chars:[18, 21, "two"]
 ````````````````````````````````

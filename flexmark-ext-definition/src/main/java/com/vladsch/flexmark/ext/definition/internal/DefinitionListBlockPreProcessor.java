@@ -1,5 +1,6 @@
 package com.vladsch.flexmark.ext.definition.internal;
 
+import com.vladsch.flexmark.ast.BlankLine;
 import com.vladsch.flexmark.ast.Block;
 import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.ext.definition.DefinitionItem;
@@ -24,6 +25,7 @@ public class DefinitionListBlockPreProcessor implements BlockPreProcessor {
     @Override
     public void preProcess(ParserState state, Block block) {
         Boolean blankLinesInAST = state.getProperties().get(BLANK_LINES_IN_AST);
+        
         if (block instanceof DefinitionList) {
             // need to propagate loose/tight
             final DefinitionList definitionList = (DefinitionList) block;
@@ -44,6 +46,10 @@ public class DefinitionListBlockPreProcessor implements BlockPreProcessor {
                 }
 
                 definitionList.setTight(isTight);
+            }
+
+            if (blankLinesInAST) {
+                definitionList.moveTrailingBlankLines();
             }
         }
     }

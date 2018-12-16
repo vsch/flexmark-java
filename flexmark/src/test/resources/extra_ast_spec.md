@@ -5792,17 +5792,13 @@ paragraph
   <li>
     <p>item 1</p>
     <ul>
-      <li>
-        <p>item 1.1</p>
-      </li>
+      <li>item 1.1</li>
     </ul>
   </li>
   <li>
     <p>item 2</p>
     <ul>
-      <li>
-        <p>item 2.1</p>
-      </li>
+      <li>item 2.1</li>
     </ul>
   </li>
 </ul>
@@ -5813,8 +5809,8 @@ Document[0, 69]
     BulletListItem[0, 23] open:[0, 1, "*"] isLoose
       Paragraph[2, 9]
         Text[2, 8] chars:[2, 8, "item 1"]
-      BulletList[11, 23] isLoose
-        BulletListItem[11, 23] open:[11, 12, "*"] isLoose hadBlankLineAfter
+      BulletList[11, 23] isTight
+        BulletListItem[11, 23] open:[11, 12, "*"] isTight hadBlankLineAfter
           Paragraph[13, 23] isTrailingBlankLine
             Text[13, 21] chars:[13, 21, "item 1.1"]
     BlankLine[23, 26]
@@ -5822,8 +5818,8 @@ Document[0, 69]
     BulletListItem[29, 52] open:[29, 30, "*"] isLoose
       Paragraph[31, 38]
         Text[31, 37] chars:[31, 37, "item 2"]
-      BulletList[40, 52] isLoose
-        BulletListItem[40, 52] open:[40, 41, "*"] isLoose hadBlankLineAfter
+      BulletList[40, 52] isTight
+        BulletListItem[40, 52] open:[40, 41, "*"] isTight hadBlankLineAfter
           Paragraph[42, 52] isTrailingBlankLine
             Text[42, 50] chars:[42, 50, "item 2.1"]
   BlankLine[52, 55]

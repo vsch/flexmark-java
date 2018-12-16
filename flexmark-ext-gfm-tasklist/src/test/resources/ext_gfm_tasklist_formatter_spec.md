@@ -827,8 +827,8 @@ Document[0, 67]
     TaskListItem[0, 18] open:[0, 1, "*"] openSuffix:[2, 5, "[ ]"] isLoose isNotDone
       Paragraph[6, 18]
         Text[6, 17] chars:[6, 17, "list  … tem 1"]
-    TaskListItem[18, 26] open:[18, 19, "*"] openSuffix:[20, 23, "[ ]"] isLoose hadBlankLineAfter isNotDone
-      BlankLine[25, 26]
+    TaskListItem[18, 23] open:[18, 19, "*"] openSuffix:[20, 23, "[ ]"] isLoose hadBlankLineAfter isNotDone
+    BlankLine[25, 26]
     TaskListItem[26, 44] open:[26, 27, "*"] openSuffix:[28, 31, "[ ]"] isLoose isNotDone
       Paragraph[32, 44]
         Text[32, 43] chars:[32, 43, "list  … tem 2"]
@@ -888,8 +888,8 @@ Document[0, 66]
     TaskListItem[0, 18] open:[0, 1, "*"] openSuffix:[2, 5, "[ ]"] isLoose isNotDone
       Paragraph[6, 18]
         Text[6, 17] chars:[6, 17, "list  … tem 1"]
-    TaskListItem[18, 26] open:[18, 19, "*"] openSuffix:[20, 23, "[ ]"] isLoose hadBlankLineAfter isNotDone
-      BlankLine[25, 26]
+    TaskListItem[18, 23] open:[18, 19, "*"] openSuffix:[20, 23, "[ ]"] isLoose hadBlankLineAfter isNotDone
+    BlankLine[25, 26]
     TaskListItem[26, 44] open:[26, 27, "*"] openSuffix:[28, 31, "[ ]"] isLoose isNotDone
       Paragraph[32, 44]
         Text[32, 43] chars:[32, 43, "list  … tem 2"]

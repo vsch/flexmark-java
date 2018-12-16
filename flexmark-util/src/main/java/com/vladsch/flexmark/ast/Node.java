@@ -220,6 +220,12 @@ public abstract class Node {
         return next;
     }
 
+    public Node getLastInChain() {
+        Node lastNode = this;
+        while (this.getClass().isInstance(lastNode.getNext())) lastNode = lastNode.getNext();
+        return lastNode;
+    }
+
     public int getStartOffset() {
         return chars == null ? 0 : chars.getStartOffset();
     }
@@ -234,6 +240,25 @@ public abstract class Node {
 
     public Node getPrevious() {
         return prev;
+    }
+
+    public void extractToFirstInChain(Node node) {
+        getFirstInChain().extractChainTo(node);
+    }
+
+    public void extractChainTo(Node node) {
+        Node lastNode = this;
+        do {
+            Node next = lastNode.getNext();
+            node.appendChild(lastNode);
+            lastNode = next;
+        } while (this.getClass().isInstance(lastNode));
+    }
+
+    public Node getFirstInChain() {
+        Node lastNode = this;
+        while (this.getClass().isInstance(lastNode.getPrevious())) lastNode = lastNode.getPrevious();
+        return lastNode;
     }
 
     public Node getPreviousAnyNot(Class... classes) {
@@ -548,7 +573,15 @@ public abstract class Node {
         segmentSpanChars(out, startOffset, endOffset, name, chars, "", "");
     }
 
-    public static void segmentSpanChars(StringBuilder out, int startOffset, int endOffset, String name, String chars1, String splice, String chars2) {
+    public static void segmentSpanChars(
+            StringBuilder out,
+            int startOffset,
+            int endOffset,
+            String name,
+            String chars1,
+            String splice,
+            String chars2
+    ) {
         if (name != null && !name.trim().isEmpty()) out.append(" ").append(name).append(":");
         out.append("[").append(startOffset).append(", ").append(endOffset);
         if (!chars1.isEmpty() || !chars2.isEmpty()) {
@@ -603,10 +636,17 @@ public abstract class Node {
     }
 
     public static void segmentSpanChars(StringBuilder out, BasedSequence sequence, String name) {
-        if (sequence.isNotNull()) segmentSpanChars(out, sequence.getStartOffset(), sequence.getEndOffset(), name, sequence.toString());
+        if (sequence.isNotNull())
+            segmentSpanChars(out, sequence.getStartOffset(), sequence.getEndOffset(), name, sequence.toString());
     }
 
-    public static void delimitedSegmentSpan(StringBuilder out, BasedSequence openingSequence, BasedSequence sequence, BasedSequence closingSequence, String name) {
+    public static void delimitedSegmentSpan(
+            StringBuilder out,
+            BasedSequence openingSequence,
+            BasedSequence sequence,
+            BasedSequence closingSequence,
+            String name
+    ) {
         segmentSpanChars(out, openingSequence.getStartOffset(), openingSequence.getEndOffset(), name + "Open", openingSequence.toString());
         if (sequence.length() <= 10) {
             segmentSpanChars(out, sequence.getStartOffset(), sequence.getEndOffset(), name, sequence.toVisibleWhitespaceString());
@@ -617,7 +657,13 @@ public abstract class Node {
         segmentSpanChars(out, closingSequence.getStartOffset(), closingSequence.getEndOffset(), name + "Close", closingSequence.toString());
     }
 
-    public static void delimitedSegmentSpanChars(StringBuilder out, BasedSequence openingSequence, BasedSequence sequence, BasedSequence closingSequence, String name) {
+    public static void delimitedSegmentSpanChars(
+            StringBuilder out,
+            BasedSequence openingSequence,
+            BasedSequence sequence,
+            BasedSequence closingSequence,
+            String name
+    ) {
         if (openingSequence.isNotNull())
             segmentSpanChars(out, openingSequence.getStartOffset(), openingSequence.getEndOffset(), name + "Open", openingSequence.toString());
         if (sequence.isNotNull())
@@ -682,7 +728,7 @@ public abstract class Node {
 
         return firstChild.getChars().baseSubSequence(firstChild.getStartOffset(), lastChild.getEndOffset());
     }
-    
+
     public BasedSequence getExactChildChars() {
         if (firstChild == null || lastChild == null) {
             return BasedSequence.NULL;
@@ -694,7 +740,7 @@ public abstract class Node {
         Node child = getFirstChild();
         ArrayList<BasedSequence> segments = null;
         Node last = child;
-        
+
         while (child != null) {
             if (child.getChars() instanceof SegmentedSequence || child.getChars() instanceof PrefixedSubSequence) {
                 // this one will cause problems
@@ -719,7 +765,7 @@ public abstract class Node {
                 // insert chars between last child and this node
                 segments.add(last.getChars().baseSubSequence(last.getStartOffset(), child.getEndOffset()));
             }
-            
+
             return segments.size() == 1 ? segments.get(0) : SegmentedSequence.of(segments);
         } else {
             return firstChild.getChars().baseSubSequence(firstChild.getStartOffset(), lastChild.getEndOffset());
@@ -729,7 +775,7 @@ public abstract class Node {
     public Node getBlankLineSibling() {
         // need to find the first node that can contain a blank line that is not the last non-blank line of its parent
         Node parent = this.parent;
-        Node lastBlankLineSibling = null;
+        Node lastBlankLineSibling = this;
         Node nextBlankLineSibling = this;
 
         while (parent.parent != null) {
@@ -751,18 +797,16 @@ public abstract class Node {
     public void moveTrailingBlankLines() {
         Node blankLine = getLastChild();
         if (blankLine instanceof BlankLine) {
-            Node blankLineSibling = getBlankLineSibling();
-            if (blankLineSibling != null) {
-                while (blankLine instanceof BlankLine) {
-                    Node node = blankLine.getPrevious();
-                    blankLine.unlink();
-                    blankLineSibling.insertAfter(blankLine);
-                    blankLine = node;
-                }
+            Node blankLinePos = getBlankLineSibling();
+            blankLine = blankLine.getFirstInChain();
+            blankLinePos.insertChainAfter(blankLine);
 
-                setCharsFromContentOnly();
-                blankLineSibling.getParent().setCharsFromContentOnly();
+            Node parent = this;
+            do {
+                parent.setCharsFromContentOnly();
+                parent = parent.parent;
             }
+            while (parent != blankLinePos.getParent());
         }
     }
 
@@ -808,5 +852,50 @@ public abstract class Node {
      */
     public void setCharsFromSegments() {
         setChars(getCharsFromSegments());
+    }
+
+    /**
+     * Append all from child to end of chain to this node
+     *
+     * @param firstNode first child in chain
+     */
+    public void appendChain(final Node firstNode) {
+        Node node = firstNode;
+        while (node != null) {
+            Node next = node.next;
+            appendChild(node);
+            node = next;
+        }
+    }
+
+    /**
+     * Append all from child to end of chain to this node
+     *
+     * @param firstNode first child in chain
+     */
+    public void insertChainAfter(final Node firstNode) {
+        Node posNode = this;
+        Node node = firstNode;
+        while (node != null) {
+            Node next = node.next;
+            posNode.insertAfter(node);
+            posNode = node;
+            node = next;
+        }
+    }
+
+    /**
+     * Append all from child to end of chain to this node
+     *
+     * @param firstNode first child in chain
+     */
+    public void insertChainBefore(final Node firstNode) {
+        Node posNode = this;
+        Node node = firstNode;
+        while (node != null) {
+            Node next = node.next;
+            posNode.insertBefore(node);
+            node = next;
+        }
     }
 }

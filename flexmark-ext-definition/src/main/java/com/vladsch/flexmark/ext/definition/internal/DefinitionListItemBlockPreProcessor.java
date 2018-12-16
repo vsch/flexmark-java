@@ -1,6 +1,10 @@
 package com.vladsch.flexmark.ext.definition.internal;
 
-import com.vladsch.flexmark.ast.*;
+import com.vladsch.flexmark.ast.BlankLine;
+import com.vladsch.flexmark.ast.Block;
+import com.vladsch.flexmark.ast.BlockContent;
+import com.vladsch.flexmark.ast.Node;
+import com.vladsch.flexmark.ast.Paragraph;
 import com.vladsch.flexmark.ext.definition.DefinitionItem;
 import com.vladsch.flexmark.ext.definition.DefinitionList;
 import com.vladsch.flexmark.ext.definition.DefinitionTerm;
@@ -20,9 +24,11 @@ import static com.vladsch.flexmark.parser.Parser.BLANK_LINES_IN_AST;
 
 public class DefinitionListItemBlockPreProcessor implements BlockPreProcessor {
     private final DefinitionOptions options;
+    Boolean blankLinesInAst;
 
     public DefinitionListItemBlockPreProcessor(DataHolder options) {
         this.options = new DefinitionOptions(options);
+        blankLinesInAst = BLANK_LINES_IN_AST.getFrom(options);
     }
 
     @Override
@@ -32,12 +38,20 @@ public class DefinitionListItemBlockPreProcessor implements BlockPreProcessor {
             // we add all these to the previous DefinitionList or add a new one if there isn't one
             final DefinitionItem definitionItem = (DefinitionItem) block;
             final Node previous = block.getPreviousAnyNot(BlankLine.class);
+            
+            Node trailingBlankLines = new DefinitionList();
+            
+            Node blankLine = definitionItem.getNext();
+            if (blankLine instanceof BlankLine) {
+                blankLine.extractChainTo(trailingBlankLines);
+            }
 
             if (previous instanceof Paragraph) {
                 final Paragraph paragraph = (Paragraph) previous;
                 Node afterParagraph = previous.getNext();
 
-                Node paragraphPrevious = paragraph.getPreviousAnyNot(BlankLine.class);
+                Node paragraphPreviousNonBlank = paragraph.getPreviousAnyNot(BlankLine.class);
+                Node paragraphPrevious = paragraph.getPrevious();
                 final Node paragraphParent = paragraph.getParent();
 
                 definitionItem.unlink();
@@ -47,10 +61,10 @@ public class DefinitionListItemBlockPreProcessor implements BlockPreProcessor {
                 final boolean hadPreviousList;
                 if (options.doubleBlankLineBreaksList) {
                     // intervening characters between previous paragraph and definition terms
-                    final BasedSequence interSpace = paragraphPrevious == null ? BasedSequence.NULL : BasedSequenceImpl.of(paragraphPrevious.getChars().baseSubSequence(paragraphPrevious.getChars().getEndOffset(), paragraph.getChars().getStartOffset()).normalizeEOL());
-                    hadPreviousList = paragraphPrevious instanceof DefinitionList && interSpace.countChars('\n') < 2;
+                    final BasedSequence interSpace = paragraphPreviousNonBlank == null ? BasedSequence.NULL : BasedSequenceImpl.of(paragraphPreviousNonBlank.getChars().baseSubSequence(paragraphPreviousNonBlank.getChars().getEndOffset(), paragraph.getChars().getStartOffset()).normalizeEOL());
+                    hadPreviousList = paragraphPreviousNonBlank instanceof DefinitionList && interSpace.countChars('\n') < 2;
                 } else {
-                    hadPreviousList = paragraphPrevious instanceof DefinitionList;
+                    hadPreviousList = paragraphPreviousNonBlank instanceof DefinitionList;
                 }
 
                 final DefinitionList definitionList = new DefinitionList();
@@ -79,7 +93,7 @@ public class DefinitionListItemBlockPreProcessor implements BlockPreProcessor {
                 }
 
                 // if have blank lines after paragraph need to move them after the last term
-                if (state.getProperties().get(BLANK_LINES_IN_AST) && afterParagraph instanceof BlankLine) {
+                if (blankLinesInAst && afterParagraph instanceof BlankLine) {
                     while (afterParagraph instanceof BlankLine) {
                         Node next = afterParagraph.getNext();
                         afterParagraph.unlink();
@@ -89,9 +103,10 @@ public class DefinitionListItemBlockPreProcessor implements BlockPreProcessor {
                 }
 
                 definitionList.appendChild(definitionItem);
+                definitionList.takeChildren(trailingBlankLines);
 
                 if (hadPreviousList) {
-                    final DefinitionList previousList = (DefinitionList) paragraphPrevious;
+                    final DefinitionList previousList = (DefinitionList) paragraphPreviousNonBlank;
                     previousList.takeChildren(definitionList);
                     for (Node node : definitionList.getChildren()) {
                         node.unlink();
@@ -102,7 +117,7 @@ public class DefinitionListItemBlockPreProcessor implements BlockPreProcessor {
                     previousList.setCharsFromContent();
                 } else {
                     // insert new one, after paragraphPrevious
-                    if (paragraphPrevious != null) {
+                    if (paragraphPreviousNonBlank != null) {
                         paragraphPrevious.insertAfter(definitionList);
                     } else {
                         if (paragraphParent.getFirstChild() != null) {
@@ -118,7 +133,9 @@ public class DefinitionListItemBlockPreProcessor implements BlockPreProcessor {
             } else if (previous instanceof DefinitionList) {
                 final DefinitionList previousList = (DefinitionList) previous;
                 definitionItem.unlink();
+                
                 previousList.appendChild(definitionItem);
+                previousList.takeChildren(trailingBlankLines);
                 previousList.setCharsFromContent();
             }
         }

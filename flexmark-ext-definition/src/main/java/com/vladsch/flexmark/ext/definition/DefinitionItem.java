@@ -1,6 +1,7 @@
 
 package com.vladsch.flexmark.ext.definition;
 
+import com.vladsch.flexmark.ast.KeepTrailingBlankLineContainer;
 import com.vladsch.flexmark.ast.ListItem;
 
 /**

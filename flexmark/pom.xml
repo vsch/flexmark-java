@@ -15,7 +15,6 @@
         <dependency>
             <groupId>com.vladsch.flexmark</groupId>
             <artifactId>flexmark-test-util</artifactId>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>com.vladsch.flexmark</groupId>
@@ -30,6 +29,11 @@
             <groupId>org.openjdk.jmh</groupId>
             <artifactId>jmh-generator-annprocess</artifactId>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.17</version>
         </dependency>
     </dependencies>
 

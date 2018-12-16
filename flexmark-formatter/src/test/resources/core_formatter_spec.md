@@ -2076,8 +2076,8 @@ Document[0, 51]
     BulletListItem[0, 14] open:[0, 1, "*"] isLoose
       Paragraph[2, 14]
         Text[2, 13] chars:[2, 13, "list  … tem 1"]
-    BulletListItem[14, 18] open:[14, 15, "*"] isLoose hadBlankLineAfter
-      BlankLine[17, 18]
+    BulletListItem[14, 15] open:[14, 15, "*"] isLoose hadBlankLineAfter
+    BlankLine[17, 18]
     BulletListItem[18, 32] open:[18, 19, "*"] isLoose
       Paragraph[20, 32]
         Text[20, 31] chars:[20, 31, "list  … tem 2"]
@@ -2137,8 +2137,8 @@ Document[0, 50]
     BulletListItem[0, 14] open:[0, 1, "*"] isLoose
       Paragraph[2, 14]
         Text[2, 13] chars:[2, 13, "list  … tem 1"]
-    BulletListItem[14, 18] open:[14, 15, "*"] isLoose hadBlankLineAfter
-      BlankLine[17, 18]
+    BulletListItem[14, 15] open:[14, 15, "*"] isLoose hadBlankLineAfter
+    BlankLine[17, 18]
     BulletListItem[18, 32] open:[18, 19, "*"] isLoose
       Paragraph[20, 32]
         Text[20, 31] chars:[20, 31, "list  … tem 2"]
@@ -2194,8 +2194,8 @@ Document[0, 54]
     OrderedListItem[0, 15] open:[0, 2, "1."] isLoose
       Paragraph[3, 15]
         Text[3, 14] chars:[3, 14, "list  … tem 1"]
-    OrderedListItem[15, 20] open:[15, 17, "1."] isLoose hadBlankLineAfter
-      BlankLine[19, 20]
+    OrderedListItem[15, 17] open:[15, 17, "1."] isLoose hadBlankLineAfter
+    BlankLine[19, 20]
     OrderedListItem[20, 35] open:[20, 22, "1."] isLoose
       Paragraph[23, 35]
         Text[23, 34] chars:[23, 34, "list  … tem 2"]
