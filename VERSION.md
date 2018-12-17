@@ -267,6 +267,12 @@ flexmark-java
 ------
 
 * [ ] Add: sample for converting inline nodes to text nodes in node post processor.
+* Fix: `ReplacedTextMapper` can only handle a single replacement set, while AutoLinkExtension
+  was applying a replacement on top of already replaced text.
+
+  :warning: Now any functions which perform replacements using `ReplacedTextMapper` need to
+  check if the passed in text mapper `isModified()` and if this is the case invoke
+  `startNestedReplacement(BasedSequence)`.
 * Add: log4j logging to `DocumentParser`, when debug is enabled parser will log resulting AST
   after parsing, paragraph pre-processing, block pre-processing and inline processing to isolate
   where a problem is introduced by an extension into the AST.
@@ -286,7 +292,7 @@ flexmark-java
   the block quote by having a block quote prefix on the line. Unlike other block elements where
   a trailing blank line is not attributable to the block element, block quotes have explicit
   prefix which identifies the blank line as part of the block quote.
-  
+
   :warning: trailing blank line nodes will be appended to the block quote even if
   `Parser.BLANK_LINES_IN_AST` is `false` to force block quote to span the blank lines as the
   only way to extend the block quote enclosed characters.
@@ -3720,7 +3726,6 @@ the node's characters, independent of child node breakdown.
   title"Abbreviation Expansion Text">Abbreviation</abbr>`.
 
 ````````````````````````````````
-
 
 [Admonition Extension, Material for MkDocs]: https://squidfunk.github.io/mkdocs-material/extensions/admonition/
 

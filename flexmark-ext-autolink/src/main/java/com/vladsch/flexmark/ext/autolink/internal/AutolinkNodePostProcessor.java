@@ -78,6 +78,7 @@ public class AutolinkNodePostProcessor extends NodePostProcessor {
         BasedSequence original = node.getChars();
         ReplacedTextMapper textMapper = new ReplacedTextMapper(original);
         BasedSequence literal = Escaping.unescape(original, textMapper);
+
         if (intellijDummyIdentifier) {
             literal = Escaping.removeAll(literal, "\u001f", textMapper);
         }

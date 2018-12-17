@@ -4074,3 +4074,186 @@ exporting the full document.</li>
 ````````````````````````````````
 
 
+## Issue xxx-02
+
+Caused segments out of order exception in Markdown Navigator, but cannot duplicate
+
+```````````````````````````````` example(Issue xxx-02: 1) options(dummy-identifier)
+# Next Minor Release
+
+ - **Bugs**
+    #240 & #1⎮ 
+    - Escape Key on https://thirteenag.github.io/wfp is not being stopped
+
+ - **Features**
+
+ - **Test, issue?**
+    - Possible improvement to obscured element detection:
+        - Use the middle point of the intersection of the selection rect and the bounding rect
+            rather than the middle point of the bounding rect, this catches cases where the bottom
+            half of the element is obscured, but not all of it
+
+     - Consider: querySelectorAll('*:enabled') may give all elements of concern, even Elements which are divs but have an onclick() enabled or listened to.
+
+
+ -  **Todo**
+    - Switch this._onKeyUp = ... .bind() to this.onKeyUp = ... .bind()
+
+# Next Major Release (3.2.0)
+ - **Bugs**
+    -
+
+ - **Features**
+    - Options GUI (minimal)
+
+ - **Test, issue?**
+    -
+
+
+# Known Bugs
+
+
+# Plans
+ - Create Updated Plugin Page
+ - Setup site using Jekyll
+ - Add Options GUI
+ - Better handling of label placement (separate from sizing rect, above &lt;SVG> Element)
+ - Highlight "greatest of types" elements differently than elements which do not meet the greatest of.
+    eg: 3 Buttons and 1 Anchor lassoed, the 3 Buttons would be highlighted in green vs the Anchor being highlighted in grey
+
+
+# Todo / Ideas
+ - Mutation Observer (clear DocElemRects, re-index if during drag)
+ - Resolve all inspection errors
+ - Externalize CSS Styles
+ - Compiler/minimizer for production build?
+ - docElem is a sandboxed global, replace document.documentElement references with docElem
+ - Refactor ElemDocRects / RectMapper to ElemCache/ElemCacher (to reflect new font-size cache functionality)
+
+# Test
+ -
+
+# Deferred / Possibly Won't Implement
+ - Add Elements that have cursor: pointer (and have a click handler?)
+
+# Feature Requests
+ - [Issue #91](https://github.com/cpriest/SnapLinksPlus/issues/91)-1 - Width of selection box independent of zoom factor... possibly doable with SVG since it has it's own coordinate system??
+
+<style>
+    del { opacity: .5; }
+    A { color: #36a3d9; text-decoration: underline; }
+    BODY { background-color: black; }
+    ARTICLE.markdown-body { padding: 35px !important; background-color: #1a1817 !important; }
+
+/*  span { position: relative; }
+    del::after {
+        border-bottom: 1px solid rgba(255,255,255,.4);
+        content: "";
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 50%;
+    } */
+</style>
+
+.
+<h1 id="next-minor-release">Next Minor Release</h1>
+<ul>
+  <li>
+    <p><strong>Bugs</strong>
+    #240 &amp; #1⎮</p>
+    <ul>
+      <li>Escape Key on <a href="https://thirteenag.github.io/wfp">https://thirteenag.github.io/wfp</a> is not being stopped</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Features</strong></p>
+  </li>
+  <li>
+    <p><strong>Test, issue?</strong></p>
+    <ul>
+      <li>
+        <p>Possible improvement to obscured element detection:</p>
+        <ul>
+          <li>Use the middle point of the intersection of the selection rect and the bounding rect
+          rather than the middle point of the bounding rect, this catches cases where the bottom
+          half of the element is obscured, but not all of it</li>
+        </ul>
+      </li>
+      <li>
+        <p>Consider: querySelectorAll('*:enabled') may give all elements of concern, even Elements which are divs but have an onclick() enabled or listened to.</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Todo</strong></p>
+    <ul>
+      <li>Switch this._onKeyUp = ... .bind() to this.onKeyUp = ... .bind()</li>
+    </ul>
+  </li>
+</ul>
+<h1 id="next-major-release-320">Next Major Release (3.2.0)</h1>
+<ul>
+  <li>
+    <h2 id="bugs"><strong>Bugs</strong></h2>
+  </li>
+  <li>
+    <p><strong>Features</strong></p>
+    <ul>
+      <li>Options GUI (minimal)</li>
+    </ul>
+  </li>
+  <li>
+    <h2 id="test-issue"><strong>Test, issue?</strong></h2>
+  </li>
+</ul>
+<h1 id="known-bugs">Known Bugs</h1>
+<h1 id="plans">Plans</h1>
+<ul>
+  <li>Create Updated Plugin Page</li>
+  <li>Setup site using Jekyll</li>
+  <li>Add Options GUI</li>
+  <li>Better handling of label placement (separate from sizing rect, above &lt;SVG&gt; Element)</li>
+  <li>Highlight &quot;greatest of types&quot; elements differently than elements which do not meet the greatest of.
+  eg: 3 Buttons and 1 Anchor lassoed, the 3 Buttons would be highlighted in green vs the Anchor being highlighted in grey</li>
+</ul>
+<h1 id="todo--ideas">Todo / Ideas</h1>
+<ul>
+  <li>Mutation Observer (clear DocElemRects, re-index if during drag)</li>
+  <li>Resolve all inspection errors</li>
+  <li>Externalize CSS Styles</li>
+  <li>Compiler/minimizer for production build?</li>
+  <li>docElem is a sandboxed global, replace document.documentElement references with docElem</li>
+  <li>Refactor ElemDocRects / RectMapper to ElemCache/ElemCacher (to reflect new font-size cache functionality)</li>
+</ul>
+<h1 id="test">Test</h1>
+<ul>
+  <li></li>
+</ul>
+<h1 id="deferred--possibly-wont-implement">Deferred / Possibly Won't Implement</h1>
+<ul>
+  <li>Add Elements that have cursor: pointer (and have a click handler?)</li>
+</ul>
+<h1 id="feature-requests">Feature Requests</h1>
+<ul>
+  <li><a href="https://github.com/cpriest/SnapLinksPlus/issues/91">Issue #91</a>-1 - Width of selection box independent of zoom factor... possibly doable with SVG since it has it's own coordinate system??</li>
+</ul>
+<style>
+    del { opacity: .5; }
+    A { color: #36a3d9; text-decoration: underline; }
+    BODY { background-color: black; }
+    ARTICLE.markdown-body { padding: 35px !important; background-color: #1a1817 !important; }
+
+/*  span { position: relative; }
+    del::after {
+        border-bottom: 1px solid rgba(255,255,255,.4);
+        content: "";
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 50%;
+    } */
+</style>
+````````````````````````````````
+
+

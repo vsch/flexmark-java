@@ -48,6 +48,7 @@ public class ComboParserTest extends ComboSpecTestCase {
                 .set(TablesExtension.DISCARD_EXTRA_COLUMNS, true)
                 .set(TablesExtension.HEADER_SEPARATOR_COLUMN_MATCH, true)
         );
+        optionsMap.put("dummy-identifier", new MutableDataSet().set(Parser.INTELLIJ_DUMMY_IDENTIFIER, true));
         optionsMap.put("fast-render", new MutableDataSet().set(HtmlRenderer.FORMAT_FLAGS, FormattingAppendable.PASS_THROUGH));
     }
 

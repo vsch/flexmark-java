@@ -3,7 +3,13 @@ package com.vladsch.flexmark.util;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Utils {
     public static String ifNullOr(String receiver, boolean condition, String altValue) {
@@ -48,7 +54,11 @@ public class Utils {
         return arg.run();
     }
 
-    public static String ifEmpty(String receiver, RunnableValue<String> ifEmptyArg, RunnableValue<String> ifNotEmptyArg) {
+    public static String ifEmpty(
+            String receiver,
+            RunnableValue<String> ifEmptyArg,
+            RunnableValue<String> ifNotEmptyArg
+    ) {
         return (receiver == null || receiver.isEmpty()) ? ifEmptyArg.run() : ifNotEmptyArg.run();
     }
 
@@ -340,7 +350,10 @@ public class Utils {
         return "";
     }
 
-    public static <T> List<? extends T> stringSorted(Collection<? extends T> receiver, final Computable<String, T> stringer) {
+    public static <T> List<? extends T> stringSorted(
+            Collection<? extends T> receiver,
+            final Computable<String, T> stringer
+    ) {
         ArrayList<? extends T> result = new ArrayList<T>(receiver);
         Collections.sort(result, new Comparator<T>() {
             @Override
@@ -355,7 +368,14 @@ public class Utils {
         return "(?:" + orEmpty(receiver) + ")";
     }
 
-    public static boolean regionMatches(CharSequence receiver, int thisOffset, String other, int otherOffset, int length, boolean ignoreCase) {
+    public static boolean regionMatches(
+            CharSequence receiver,
+            int thisOffset,
+            String other,
+            int otherOffset,
+            int length,
+            boolean ignoreCase
+    ) {
         if (ignoreCase) {
             for (int i = 0; i < length; i++) {
                 if (Character.toLowerCase(receiver.charAt(i + thisOffset)) != Character.toLowerCase(other.charAt(i + otherOffset)))
@@ -392,6 +412,7 @@ public class Utils {
      * Longest Common Prefix for a set of strings
      *
      * @param s array of strings or null
+     *
      * @return longest common prefix
      */
     public static String getLongestCommonPrefix(String... s) {
@@ -430,7 +451,8 @@ public class Utils {
         String delim = "";
         for (String elem : receiver) {
             if (elem != null && !elem.isEmpty() || !skipNullOrEmpty) {
-                if ((!skipNullOrEmpty || !elem.startsWith(delimiter) && !endsWith(result.toString(), delimiter))) result.append(delim);
+                if ((!skipNullOrEmpty || !elem.startsWith(delimiter) && !endsWith(result.toString(), delimiter)))
+                    result.append(delim);
                 delim = delimiter;
                 result.append(orEmpty(elem));
             }
@@ -448,7 +470,13 @@ public class Utils {
         return sb.toString();
     }
 
-    public static String join(Collection<String> items, String prefix, String suffix, String itemPrefix, String itemSuffix) {
+    public static String join(
+            Collection<String> items,
+            String prefix,
+            String suffix,
+            String itemPrefix,
+            String itemSuffix
+    ) {
         StringBuilder sb = new StringBuilder();
         sb.append(prefix);
         for (String item : items) {
@@ -600,5 +628,27 @@ public class Utils {
             });
         }
         return map;
+    }
+
+    public static <K, V> void removeIf(Map<K, V> receiver, Function<Map.Entry<K, V>, Boolean> removeFilter) {
+        ArrayList<K> keys = new ArrayList<>();
+        for (Map.Entry<K, V> entry : receiver.entrySet()) {
+            if (removeFilter.apply(entry)) {
+                keys.add(entry.getKey());
+            }
+        }
+
+        for (K key : keys) {
+            receiver.remove(key);
+        }
+    }
+
+    public static <K, V> void removeIf(Map<K, V> receiver, final BiFunction<K, V, Boolean> removeFilter) {
+        removeIf(receiver, new Function<Map.Entry<K, V>, Boolean>() {
+            @Override
+            public Boolean apply(final Map.Entry<K, V> entry) {
+                return removeFilter.apply(entry.getKey(), entry.getValue());
+            }
+        });
     }
 }

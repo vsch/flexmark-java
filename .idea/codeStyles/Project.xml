@@ -21,31 +21,22 @@
       <option name="OBJECT_LITERAL_WRAP" value="2" />
     </JSCodeStyleSettings>
     <JavaCodeStyleSettings>
-      <option name="FIELD_NAME_PREFIX" value="my" />
       <option name="PREFER_LONGER_NAMES" value="false" />
       <option name="GENERATE_FINAL_PARAMETERS" value="true" />
       <option name="DO_NOT_WRAP_AFTER_SINGLE_ANNOTATION" value="true" />
       <option name="BLANK_LINES_AROUND_INITIALIZER" value="0" />
-      <option name="CLASS_COUNT_TO_USE_IMPORT_ON_DEMAND" value="10" />
-      <option name="NAMES_COUNT_TO_USE_IMPORT_ON_DEMAND" value="10" />
       <option name="PACKAGES_TO_USE_IMPORT_ON_DEMAND">
         <value />
       </option>
-      <option name="JD_ADD_BLANK_AFTER_PARM_COMMENTS" value="true" />
-      <option name="JD_ADD_BLANK_AFTER_RETURN" value="true" />
-      <option name="JD_INDENT_ON_CONTINUATION" value="true" />
     </JavaCodeStyleSettings>
-    <JetCodeStyleSettings>
-      <option name="SPACE_AROUND_RANGE" value="true" />
-      <option name="WRAP_ELVIS_EXPRESSIONS" value="0" />
-    </JetCodeStyleSettings>
     <MarkdownNavigatorCodeStyleSettings>
       <option name="WRAP_ON_TYPING" value="1" />
+      <option name="KEEP_BLANK_LINES" value="1" />
       <option name="FORMAT_WITH_SOFT_WRAP" value="2" />
       <option name="LIST_ALIGN_FIRST_LINE_TEXT" value="true" />
       <option name="TASK_LIST_ITEM_CASE" value="1" />
+      <option name="BULLET_LIST_ITEM_MARKER" value="2" />
       <option name="NEW_BULLET_LIST_ITEM_MARKER" value="2" />
-      <option name="LIST_SPACING" value="1" />
       <option name="VERBATIM_MINIMIZE_INDENT" value="true" />
       <option name="CODE_FENCE_MINIMIZE_INDENT" value="true" />
       <option name="CODE_FENCE_MATCH_CLOSING_MARKER" value="true" />
@@ -63,9 +54,6 @@
       <option name="TOC_TITLE_LEVEL" value="3" />
       <option name="RIGHT_MARGIN" value="96" />
     </MarkdownNavigatorCodeStyleSettings>
-    <Properties>
-      <option name="KEEP_BLANK_LINES" value="true" />
-    </Properties>
     <XML>
       <option name="XML_ATTRIBUTE_WRAP" value="0" />
       <option name="XML_KEEP_BLANK_LINES" value="1" />
@@ -106,7 +94,6 @@
       <option name="KEEP_SIMPLE_BLOCKS_IN_ONE_LINE" value="true" />
       <option name="KEEP_SIMPLE_METHODS_IN_ONE_LINE" value="true" />
       <option name="KEEP_SIMPLE_CLASSES_IN_ONE_LINE" value="true" />
-      <option name="WRAP_COMMENTS" value="true" />
       <option name="FIELD_ANNOTATION_WRAP" value="1" />
       <option name="WRAP_ON_TYPING" value="0" />
       <indentOptions>

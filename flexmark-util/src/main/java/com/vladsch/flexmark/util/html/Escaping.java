@@ -199,6 +199,7 @@ public class Escaping {
      * Replace entities and backslash escapes with literal characters.
      *
      * @param s string to un-escape
+     *
      * @return un-escaped string
      */
     public static String unescapeString(CharSequence s) {
@@ -214,6 +215,7 @@ public class Escaping {
      *
      * @param s                string to un-escape
      * @param unescapeEntities true if HTML entities are to be unescaped
+     *
      * @return un-escaped string
      */
     public static String unescapeString(CharSequence s, boolean unescapeEntities) {
@@ -237,6 +239,7 @@ public class Escaping {
      *
      * @param s          based sequence to un-escape
      * @param textMapper replaced text mapper to update for the changed text
+     *
      * @return un-escaped sequence
      */
     public static BasedSequence unescape(BasedSequence s, ReplacedTextMapper textMapper) {
@@ -252,8 +255,9 @@ public class Escaping {
      * Replace entities and backslash escapes with literal characters.
      *
      * @param s          sequence being changed
-     * @param remove     string to remove                  
+     * @param remove     string to remove
      * @param textMapper replaced text mapper to update for the changed text
+     *
      * @return un-escaped sequence
      */
     public static BasedSequence removeAll(BasedSequence s, CharSequence remove, ReplacedTextMapper textMapper) {
@@ -269,6 +273,7 @@ public class Escaping {
      * Replace entities and backslash escapes with literal characters.
      *
      * @param s string to un-escape
+     *
      * @return un-escaped string
      */
     public static String unescapeHtml(CharSequence s) {
@@ -284,6 +289,7 @@ public class Escaping {
      *
      * @param s          based sequence to un-escape
      * @param textMapper replaced text mapper to update for the changed text
+     *
      * @return un-escaped sequence
      */
     public static BasedSequence unescapeHtml(BasedSequence s, ReplacedTextMapper textMapper) {
@@ -301,6 +307,7 @@ public class Escaping {
      * Append EOL sequence if sequence does not already end in EOL
      *
      * @param s sequence to convert
+     *
      * @return converted sequence
      */
     public static String normalizeEndWithEOL(CharSequence s) {
@@ -311,6 +318,7 @@ public class Escaping {
      * Normalize eol: embedded \r and \r\n are converted to \n
      *
      * @param s sequence to convert
+     *
      * @return converted sequence
      */
     public static String normalizeEOL(CharSequence s) {
@@ -322,6 +330,7 @@ public class Escaping {
      *
      * @param s          sequence to convert
      * @param endWithEOL true if an EOL is to be appended to the end of the sequence if not already ending with one.
+     *
      * @return converted sequence
      */
     public static String normalizeEOL(CharSequence s, boolean endWithEOL) {
@@ -356,6 +365,7 @@ public class Escaping {
      *
      * @param s          sequence to convert
      * @param textMapper text mapper to update for the replaced text
+     *
      * @return converted sequence
      */
     public static BasedSequence normalizeEndWithEOL(BasedSequence s, ReplacedTextMapper textMapper) {
@@ -367,6 +377,7 @@ public class Escaping {
      *
      * @param s          sequence to convert
      * @param textMapper text mapper to update for the replaced text
+     *
      * @return converted sequence
      */
     public static BasedSequence normalizeEOL(BasedSequence s, ReplacedTextMapper textMapper) {
@@ -381,6 +392,7 @@ public class Escaping {
      * @param s          sequence to convert
      * @param textMapper text mapper to update for the replaced text
      * @param endWithEOL whether an EOL is to be appended to the end of the sequence if it does not already end with one.
+     *
      * @return converted sequence
      */
     public static BasedSequence normalizeEOL(BasedSequence s, ReplacedTextMapper textMapper, boolean endWithEOL) {
@@ -388,6 +400,8 @@ public class Escaping {
         int lastPos = 0;
         boolean hadCR = false;
         boolean hadEOL = false;
+
+        if (textMapper.isModified()) textMapper.startNestedReplacement(s);
 
         for (int i = 0; i < iMax; i++) {
             char c = s.charAt(i);
@@ -426,6 +440,7 @@ public class Escaping {
 
     /**
      * @param s string to encode
+     *
      * @return encoded string
      */
     public static String percentEncodeUrl(CharSequence s) {
@@ -437,6 +452,7 @@ public class Escaping {
      *
      * @param s          sequence containing the link reference id
      * @param changeCase if true then reference will be converted to lowercase
+     *
      * @return normalized link reference id
      */
     public static String normalizeReference(CharSequence s, boolean changeCase) {
@@ -465,8 +481,9 @@ public class Escaping {
     /**
      * e-mail obfuscation from pegdown
      *
-     * @param email e-mail url
+     * @param email     e-mail url
      * @param randomize true to randomize, false for testing
+     *
      * @return obfuscated e-mail url
      */
     public static String obfuscate(String email, boolean randomize) {
@@ -500,6 +517,7 @@ public class Escaping {
      *
      * @param s          sequence containing the link reference id
      * @param changeCase if true then reference will be converted to lowercase
+     *
      * @return normalized link reference id
      */
     public static String normalizeReferenceChars(CharSequence s, boolean changeCase) {
@@ -517,6 +535,7 @@ public class Escaping {
      *
      * @param s    sequence to process
      * @param trim true if the sequence should also be trimmed
+     *
      * @return processed sequence
      */
     public static String collapseWhitespace(CharSequence s, boolean trim) {
@@ -565,6 +584,10 @@ public class Escaping {
 
     private static BasedSequence replaceAll(Pattern p, BasedSequence s, Replacer replacer, ReplacedTextMapper textMapper) {
         Matcher matcher = p.matcher(s);
+
+        if (textMapper.isModified()) {
+            textMapper.startNestedReplacement(s);
+        }
 
         if (!matcher.find()) {
             textMapper.addOriginalText(0, s.length());
