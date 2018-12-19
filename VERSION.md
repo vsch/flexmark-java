@@ -266,7 +266,12 @@ flexmark-java
 0.35.2
 ------
 
-* [ ] Add: sample for converting inline nodes to text nodes in node post processor.
+* Fix: base64 encoding function in `ImageUtils` to remove `\n` from encoded string.
+* Fix: Aside extension to use new `KeepTrailingBlankLineContainer` marker for blocks which have
+  a prefix which allows attribution of blank lines to the block.
+* Add: sample for converting inline nodes to text nodes in node post processor. Thanks to
+  **[@markkolich](https://github.com/markkolich)**. Merged #288, Adding
+  TokenReplacingPostProcessorSample and UnderlineExtensionSample
 * Fix: `ReplacedTextMapper` can only handle a single replacement set, while AutoLinkExtension
   was applying a replacement on top of already replaced text.
 

@@ -176,7 +176,8 @@ public class ImageUtils {
         try {
             ImageIO.write(image, "PNG", bos);
             byte[] imageBytes = bos.toByteArray();
-            imageString = new String(new BASE64Encoder().encode(imageBytes));
+            imageString = new String(new BASE64Encoder().encode(imageBytes)).replace("\n","");
+            //imageString = javax.xml.bind.DatatypeConverter.printBase64Binary(imageBytes);
             bos.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -192,9 +193,10 @@ public class ImageUtils {
 
         try {
             FileInputStream fileInputStreamReader = new FileInputStream(file);
-            byte[] bytes = new byte[(int) file.length()];
-            if (fileInputStreamReader.read(bytes) != -1) {
-                return "data:image/png;base64," + new String(new BASE64Encoder().encode(bytes));
+            byte[] imageBytes = new byte[(int) file.length()];
+            if (fileInputStreamReader.read(imageBytes) != -1) {
+                return "data:image/png;base64," + new String(new BASE64Encoder().encode(imageBytes)).replace("\n","");
+                //return "data:image/png;base64," + javax.xml.bind.DatatypeConverter.printBase64Binary(imageBytes);
             }
             return null;
         } catch (Throwable e) {

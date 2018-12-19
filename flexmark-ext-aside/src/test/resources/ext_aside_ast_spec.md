@@ -316,7 +316,8 @@ A block quote can be empty:
 <aside></aside>
 .
 Document[0, 2]
-  AsideBlock[0, 1] marker:[0, 1, "|"]
+  AsideBlock[0, 2] marker:[0, 1, "|"]
+    BlankLine[0, 2]
 ````````````````````````````````
 
 
@@ -328,7 +329,10 @@ Document[0, 2]
 <aside></aside>
 .
 Document[0, 9]
-  AsideBlock[0, 1] marker:[0, 1, "|"]
+  AsideBlock[0, 9] marker:[0, 1, "|"]
+    BlankLine[0, 2]
+    BlankLine[2, 6]
+    BlankLine[6, 9]
 ````````````````````````````````
 
 
@@ -344,9 +348,11 @@ A block quote can have initial or final blank lines:
 </aside>
 .
 Document[0, 12]
-  AsideBlock[0, 8] marker:[0, 1, "|"]
+  AsideBlock[0, 12] marker:[0, 1, "|"]
+    BlankLine[0, 2]
     Paragraph[4, 8] isTrailingBlankLine
       Text[4, 7] chars:[4, 7, "foo"]
+    BlankLine[8, 12]
 ````````````````````````````````
 
 
@@ -414,6 +420,7 @@ Document[0, 14]
   AsideBlock[0, 14] marker:[0, 1, "|"]
     Paragraph[2, 6] isTrailingBlankLine
       Text[2, 5] chars:[2, 5, "foo"]
+    BlankLine[6, 8]
     Paragraph[10, 14]
       Text[10, 13] chars:[10, 13, "bar"]
 ````````````````````````````````
@@ -516,9 +523,10 @@ baz
 <p>baz</p>
 .
 Document[0, 12]
-  AsideBlock[0, 6] marker:[0, 1, "|"]
+  AsideBlock[0, 8] marker:[0, 1, "|"]
     Paragraph[2, 6] isTrailingBlankLine
       Text[2, 5] chars:[2, 5, "bar"]
+    BlankLine[6, 8]
   Paragraph[8, 12]
     Text[8, 11] chars:[8, 11, "baz"]
 ````````````````````````````````
