@@ -43,7 +43,7 @@ following sample:
 <dependency>
     <groupId>com.vladsch.flexmark</groupId>
     <artifactId>flexmark-all</artifactId>
-    <version>0.35.0</version>
+    <version>0.35.2</version>
 </dependency>
 ```
 
@@ -86,7 +86,7 @@ public class BasicSample {
 #### Building via Gradle
 
 ```shell
-compile 'com.vladsch.flexmark:flexmark-all:0.35.0'
+compile 'com.vladsch.flexmark:flexmark-all:0.35.2'
 ```
 
 #### Building with Android Studio
