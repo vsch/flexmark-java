@@ -7,6 +7,7 @@ flexmark-java
 
 - [To Do](#to-do)
     - [Docx Converter](#docx-converter)
+- [0.35.4](#0354)
 - [0.35.2](#0352)
 - [0.35.0](#0350)
 - [0.34.58](#03458)
@@ -263,6 +264,11 @@ flexmark-java
 
 &nbsp;</details>
 
+0.35.4
+------
+
+* Add: html/ui helpers flexmark-util for use with Swing UI HTML generation
+
 0.35.2
 ------
 
@@ -306,8 +312,6 @@ flexmark-java
 ------
 
 * Test: navigation
-  * [ ] Cells next/prev
-  * [ ] Rows next/prev
   * Next/Prev Tab
 * Add: For next/prev tab table navigation in:
   * separator stop at start and end of cell for editing `:`

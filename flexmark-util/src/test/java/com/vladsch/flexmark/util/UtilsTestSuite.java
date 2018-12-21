@@ -2,6 +2,8 @@ package com.vladsch.flexmark.util;
 
 import com.vladsch.flexmark.util.collection.*;
 import com.vladsch.flexmark.util.html.HtmlFormattingAppendableBaseTest;
+import com.vladsch.flexmark.util.html.ui.HtmlBuilderTest;
+import com.vladsch.flexmark.util.html.ui.HtmlHelpersTest;
 import com.vladsch.flexmark.util.options.AttributeTest;
 import com.vladsch.flexmark.util.options.AttributesTest;
 import com.vladsch.flexmark.util.options.MutableAttributeTest;
@@ -27,6 +29,9 @@ import org.junit.runners.Suite;
         MinAggregatorTest.class,
         BoundedMaxAggregatorTest.class,
         BoundedMinAggregatorTest.class,
+        HtmlBuilderTest.class,
+        HtmlHelpersTest.class,
+        TemplateUtilTest.class,
 })
 public class UtilsTestSuite {
 }

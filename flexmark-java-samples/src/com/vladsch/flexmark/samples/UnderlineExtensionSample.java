@@ -47,7 +47,7 @@ public class UnderlineExtensionSample {
 
         @Override
         public BasedSequence[] getSegments() {
-            return new BasedSequence[] {openingMarker, text, closingMarker };
+            return new BasedSequence[] { openingMarker, text, closingMarker };
         }
 
         @Override
@@ -91,7 +91,6 @@ public class UnderlineExtensionSample {
         public void setClosingMarker(BasedSequence closingMarker) {
             this.closingMarker = closingMarker;
         }
-
     }
 
     static class UnderlineDelimiterProcessor implements DelimiterProcessor {
@@ -146,7 +145,6 @@ public class UnderlineExtensionSample {
                     closer.getLeadChars(delimitersUsed));
             opener.moveNodesBetweenDelimitersTo(underline, closer);
         }
-
     }
 
     static class UnderlineNodeRenderer implements NodeRenderer {
@@ -157,7 +155,6 @@ public class UnderlineExtensionSample {
             public NodeRenderer create(DataHolder options) {
                 return new UnderlineNodeRenderer();
             }
-
         }
 
         @Override
@@ -178,7 +175,6 @@ public class UnderlineExtensionSample {
 
             return set;
         }
-
     }
 
     /**
@@ -208,7 +204,6 @@ public class UnderlineExtensionSample {
         public static Extension create() {
             return new UnderlineExtension();
         }
-
     }
 
     public static void main(String[] args) {
@@ -220,5 +215,4 @@ public class UnderlineExtensionSample {
         // <p><strong>bold</strong> <em>italic</em> <ins>underline</ins> <em><ins>bold and underline</ins></em></p>
         System.out.println(html);
     }
-
 }

@@ -42,7 +42,6 @@ public class TokenReplacingPostProcessorSample {
             public NodePostProcessor create(Document document) {
                 return new LinkReplacingPostProcessor();
             }
-
         }
 
         @Override
@@ -65,7 +64,6 @@ public class TokenReplacingPostProcessorSample {
                 state.nodeRemoved(image);
             }
         }
-
     }
 
     /**
@@ -87,7 +85,6 @@ public class TokenReplacingPostProcessorSample {
         public static Extension create() {
             return new LinkReplacingExtension();
         }
-
     }
 
     public static void main(String[] args) {
@@ -99,5 +96,4 @@ public class TokenReplacingPostProcessorSample {
         // <p>foo bar <strong>baz</strong></p>
         System.out.println(html);
     }
-
 }
