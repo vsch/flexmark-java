@@ -22,6 +22,6 @@ import java.awt.Font;
 public class FontStyler extends HtmlStylerBase<Font> {
     @Override
     public String getStyle(final Font item) {
-        return item == null ? "" : String.format("font-family:%s;font-size:%dpt;font-style:normal;font-weight:normal", item.getFontName(), item.getSize());
+        return item == null ? "" : String.format("font-family:%s;font-size:%dpt;font-style:normal;font-weight:normal", item.getFamily(), item.getSize());
     }
 }
