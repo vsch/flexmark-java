@@ -4,7 +4,6 @@ import com.vladsch.flexmark.ast.*;
 import com.vladsch.flexmark.ext.tables.*;
 import com.vladsch.flexmark.internal.ReferencePreProcessorFactory;
 import com.vladsch.flexmark.parser.InlineParser;
-import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.block.CharacterNodeFactory;
 import com.vladsch.flexmark.parser.block.ParagraphPreProcessor;
 import com.vladsch.flexmark.parser.block.ParagraphPreProcessorFactory;
@@ -137,7 +136,7 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
         //intellijDummyIdentifier = isIntellijDummyIdentifier ? INTELLIJ_DUMMY_IDENTIFIER : "";
         this.TABLE_HEADER_SEPARATOR = getTableHeaderSeparator(this.options.minSeparatorDashes, "");
     }
-    
+
     private static class TableSeparatorRow extends TableRow implements DoNotDecorate {
         public TableSeparatorRow() {
         }
@@ -218,6 +217,10 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
                 sepList = inlineParser.parseCustom(fullRowLine, tableRow, pipeCharacters, pipeNodeMap);
                 if (rowNumber < separatorLineNumber) tableRowNumber = rowNumber + 1;
                 else tableRowNumber = rowNumber - separatorLineNumber;
+                
+                // can have table separators embedded inside inline elements, need to convert them to text
+                // and remove them from sepList
+                sepList = cleanUpInlinedSeparators(inlineParser, tableRow, sepList);
             }
 
             if (sepList == null) {
@@ -314,7 +317,7 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
 
                 // NOTE: here we get only chars which do not reflect out-of-base characters, prefixes and removed text 
                 tableCell.setText(tableCell.getChildChars());
-                
+
                 tableCell.setCharsFromContent();
                 tableCell.setSpan(span);
                 newTableRow.appendChild(tableCell);
@@ -360,6 +363,50 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
         block.insertBefore(tableBlock);
         state.blockAdded(tableBlock);
         return tableBlock.getChars().length();
+    }
+
+    List<Node> cleanUpInlinedSeparators(InlineParser inlineParser,TableRow tableRow, List<Node> sepList) {
+        // any separators which do not have tableRow as parent are embedded into inline elements and should be 
+        // converted back to text
+        ArrayList<Node> removedSeparators = null;
+        ArrayList<Node> mergeTextParents = null;
+        for (Node node : sepList) {
+            if (node.getParent() != tableRow) {
+                // embedded, convert it and surrounding whitespace to text
+                Node firstNode = node.getPrevious() instanceof WhiteSpace ? node.getPrevious() : node;
+                Node lastNode = node.getNext() instanceof WhiteSpace ? node.getNext() : node;
+                
+                Text text = new Text(node.getChars().baseSubSequence(firstNode.getStartOffset(), lastNode.getEndOffset()));
+                node.insertBefore(text);
+                node.unlink();
+                firstNode.unlink();
+                lastNode.unlink();
+                
+                if (removedSeparators == null) {
+                    removedSeparators = new ArrayList<>();
+                    mergeTextParents = new ArrayList<>();
+                }
+                
+                removedSeparators.add(node);
+                mergeTextParents.add(text.getParent());
+            }
+        }
+
+        if (mergeTextParents != null) {
+            for (Node parent : mergeTextParents) {
+                inlineParser.mergeTextNodes(parent.getFirstChild(), parent.getLastChild());
+            }
+
+            if (removedSeparators.size() == sepList.size()) {
+                return null;
+            } else {
+                ArrayList<Node> newSeparators = new ArrayList<>(sepList);
+                newSeparators.removeAll(removedSeparators);
+                return newSeparators;
+            }
+        }
+        
+        return sepList;
     }
 
     private List<TableCell.Alignment> parseAlignment(BasedSequence separatorLine) {

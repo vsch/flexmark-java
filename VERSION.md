@@ -7,6 +7,7 @@ flexmark-java
 
 - [To Do](#to-do)
     - [Docx Converter](#docx-converter)
+- [0.35.6](#0356)
 - [0.35.4](#0354)
 - [0.35.2](#0352)
 - [0.35.0](#0350)
@@ -263,6 +264,19 @@ flexmark-java
 * [ ] Fix: #99, YamlFrontMatterBlockParser ignores multi-key list items
 
 &nbsp;</details>
+
+0.35.6
+------
+
+* Fix: `MarkdownTable.fillMissingColumns()` would add empty columns not setting the proper
+  source offset, causing later `MarkdownTable.addTrackedOffset(int)` to fail
+* Fix: table extension parsing of table cells with inline elements containing table separator
+  characters would parse correctly but not convert inlined table separators back to text, so
+  these would not render.
+* Add: `FlexmarkHtmlParser.SKIP_FENCED_CODE`, default `false`. When enabled will convert fenced
+  code to indented code in generated markdown.
+* Add: `FlexmarkHtmlParser.SKIP_CHAR_ESCAPE`, default `false`. When enabled will not escape
+  special characters.
 
 0.35.4
 ------

@@ -1,5 +1,7 @@
 package com.vladsch.flexmark.util.format;
 
+import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,11 +22,11 @@ public class TableRow {
     public List<TableCell> getCells() {
         return cells;
     }
-    
+
     public int getColumns() {
         return cells.size();
     }
-    
+
     public int getTotalColumns() {
         return getSpannedColumns();
     }
@@ -105,9 +107,9 @@ public class TableRow {
      * NOTE: inserting into a cell span has the effect of expanding the span if the cell text is blank or insert count &gt; 1
      * or splitting the span if it is not blank and count == 1
      *
-     * @param column column index before which to insert
-     * @param count  number of columns to insert
-     * @param tableCell  table cell to insert, null for default
+     * @param column    column index before which to insert
+     * @param count     number of columns to insert
+     * @param tableCell table cell to insert, null for default
      */
     public void insertColumns(int column, int count, TableCell tableCell) {
         if (count <= 0 || column < 0) return;
@@ -240,20 +242,28 @@ public class TableRow {
         }
         return this;
     }
-    
-    void fillMissingColumns(Integer minColumn, int maxColumns, TableCell empty) {
+
+    void fillMissingColumns(Integer minColumn, int maxColumns) {
         int columns = getSpannedColumns();
         if (columns < maxColumns) {
+            int columnIndex = minColumn == null ? cells.size() : minColumn;
+            int count = maxColumns - columns;
+
             if (minColumn == null || minColumn >= columns) {
-                // just add at the end
-                int count = cells.size() - 1 + maxColumns - columns;
-                expandTo(count, empty);
-            } else {
-                // insert at minColumn
-                int i = maxColumns - columns;
-                while (i-- > 0) {
-                    cells.add(minColumn, empty);
-                }
+                columnIndex = cells.size();
+            }
+
+            TableCell empty = defaultCell();
+            TableCell prevCell = columnIndex > 0 ? cells.get(columnIndex - 1) : empty;
+
+            while (count-- > 0) {
+                // need to change its text to previous cell's end
+                int endOffset = prevCell.getEndOffset();
+                empty = empty.withText(PrefixedSubSequence.of(" ", prevCell.text.getBaseSequence(), endOffset, endOffset));
+
+                cells.add(columnIndex <= cells.size() ? columnIndex : cells.size(), empty);
+                prevCell = empty;
+                columnIndex++;
             }
         }
     }
@@ -322,7 +332,7 @@ public class TableRow {
         }
         return sb;
     }
-    
+
     @Override
     public String toString() {
         return this.getClass().getSimpleName() + "{" +

@@ -43,6 +43,8 @@ public class HtmlParserOptions implements MutableDataSetter {
     public boolean skipHeading5;
     public boolean skipHeading6;
     public boolean skipAttributes;
+    public boolean skipFencedCode;
+    public boolean skipCharEscape;
     public ExtensionConversion extInlineStrong;
     public ExtensionConversion extInlineEmphasis;
     public ExtensionConversion extInlineCode;
@@ -101,6 +103,8 @@ public class HtmlParserOptions implements MutableDataSetter {
         skipHeading5 = other.skipHeading5;
         skipHeading6 = other.skipHeading6;
         skipAttributes = other.skipAttributes;
+        skipFencedCode = other.skipFencedCode;
+        skipCharEscape = other.skipCharEscape;
         extInlineStrong = other.extInlineStrong;
         extInlineEmphasis = other.extInlineEmphasis;
         extInlineCode = other.extInlineCode;
@@ -156,6 +160,8 @@ public class HtmlParserOptions implements MutableDataSetter {
         skipHeading5 = FlexmarkHtmlParser.SKIP_HEADING_5.getFrom(options);
         skipHeading6 = FlexmarkHtmlParser.SKIP_HEADING_6.getFrom(options);
         skipAttributes = FlexmarkHtmlParser.SKIP_ATTRIBUTES.getFrom(options);
+        skipFencedCode = FlexmarkHtmlParser.SKIP_FENCED_CODE.getFrom(options);
+        skipCharEscape = FlexmarkHtmlParser.SKIP_CHAR_ESCAPE.getFrom(options);
         extInlineStrong = FlexmarkHtmlParser.EXT_INLINE_STRONG.getFrom(options);
         extInlineEmphasis = FlexmarkHtmlParser.EXT_INLINE_EMPHASIS.getFrom(options);
         extInlineCode = FlexmarkHtmlParser.EXT_INLINE_CODE.getFrom(options);
@@ -212,6 +218,8 @@ public class HtmlParserOptions implements MutableDataSetter {
         dataHolder.set(FlexmarkHtmlParser.SKIP_HEADING_5, skipHeading5);
         dataHolder.set(FlexmarkHtmlParser.SKIP_HEADING_6, skipHeading6);
         dataHolder.set(FlexmarkHtmlParser.SKIP_ATTRIBUTES, skipAttributes);
+        dataHolder.set(FlexmarkHtmlParser.SKIP_FENCED_CODE, skipFencedCode);
+        dataHolder.set(FlexmarkHtmlParser.SKIP_CHAR_ESCAPE, skipCharEscape);
         dataHolder.set(FlexmarkHtmlParser.EXT_INLINE_STRONG, extInlineStrong);
         dataHolder.set(FlexmarkHtmlParser.EXT_INLINE_EMPHASIS, extInlineEmphasis);
         dataHolder.set(FlexmarkHtmlParser.EXT_INLINE_CODE, extInlineCode);

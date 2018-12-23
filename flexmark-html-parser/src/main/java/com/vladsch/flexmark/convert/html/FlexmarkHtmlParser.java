@@ -9,9 +9,7 @@ import com.vladsch.flexmark.util.format.TableCell;
 import com.vladsch.flexmark.util.format.TableFormatOptions;
 import com.vladsch.flexmark.util.html.Attribute;
 import com.vladsch.flexmark.util.html.Attributes;
-import com.vladsch.flexmark.util.html.CellAlignment;
-import com.vladsch.flexmark.util.html.FormattingAppendable;
-import com.vladsch.flexmark.util.html.FormattingAppendableImpl;
+import com.vladsch.flexmark.util.html.*;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.DataKey;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
@@ -19,20 +17,10 @@ import com.vladsch.flexmark.util.sequence.BasedSequenceImpl;
 import com.vladsch.flexmark.util.sequence.RepeatedCharSequence;
 import com.vladsch.flexmark.util.sequence.SubSequence;
 import org.jsoup.Jsoup;
-import org.jsoup.nodes.Comment;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.nodes.Node;
-import org.jsoup.nodes.TextNode;
+import org.jsoup.nodes.*;
 import org.jsoup.select.Elements;
 
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.Stack;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -110,6 +98,8 @@ public class FlexmarkHtmlParser {
     public static final DataKey<Boolean> SKIP_HEADING_5 = new DataKey<>("SKIP_HEADING_5", false);
     public static final DataKey<Boolean> SKIP_HEADING_6 = new DataKey<>("SKIP_HEADING_6", false);
     public static final DataKey<Boolean> SKIP_ATTRIBUTES = new DataKey<>("SKIP_ATTRIBUTES", false);
+    public static final DataKey<Boolean> SKIP_FENCED_CODE = new DataKey<>("SKIP_FENCED_CODE", false);
+    public static final DataKey<Boolean> SKIP_CHAR_ESCAPE = new DataKey<>("SKIP_CHAR_ESCAPE", false);
 
     public static final DataKey<ExtensionConversion> EXT_INLINE_STRONG = new DataKey<>("EXT_INLINE_STRONG", ExtensionConversion.MARKDOWN);
     public static final DataKey<ExtensionConversion> EXT_INLINE_EMPHASIS = new DataKey<>("EXT_INLINE_EMPHASIS", ExtensionConversion.MARKDOWN);
@@ -359,7 +349,6 @@ public class FlexmarkHtmlParser {
      * Build parser
      *
      * @param options parser options
-     *
      * @return html parser instance
      */
     public static FlexmarkHtmlParser build(DataHolder options) {
@@ -385,7 +374,6 @@ public class FlexmarkHtmlParser {
      * Parse HTML with default options
      *
      * @param html html to be parsed
-     *
      * @return resulting markdown string
      */
     public static String parse(String html) {
@@ -396,7 +384,6 @@ public class FlexmarkHtmlParser {
      * Parse HTML with default options and max trailing blank lines
      *
      * @param html html to be parsed
-     *
      * @return resulting markdown string
      */
     public static String parse(String html, int maxBlankLines) {
@@ -409,7 +396,6 @@ public class FlexmarkHtmlParser {
      * @param html          html to be parsed
      * @param maxBlankLines max trailing blank lines, -1 will suppress trailing EOL
      * @param options       data holder for parsing options
-     *
      * @return resulting markdown string
      */
     public static String parse(String html, int maxBlankLines, DataHolder options) {
@@ -622,15 +608,17 @@ public class FlexmarkHtmlParser {
 
         if (!inCode) {
             // replace < > [ ] | ` by escaped versions
-            text = text.replace("\\", "\\\\");
-            text = text.replace("*", "\\*");
-            text = text.replace("~", "\\~");
-            text = text.replace("^", "\\^");
-            text = text.replace("&", "\\&");
-            text = text.replace("\u00A0", myOptions.nbspText);
-            text = text.replace("<", "\\<").replace(">", "\\>");
-            text = text.replace("[", "\\[").replace("]", "\\]");
-            text = text.replace("|", "\\|").replace("`", "\\`");
+            if (!myOptions.skipCharEscape) {
+                text = text.replace("\\", "\\\\");
+                text = text.replace("*", "\\*");
+                text = text.replace("~", "\\~");
+                text = text.replace("^", "\\^");
+                text = text.replace("&", "\\&");
+                text = text.replace("<", "\\<").replace(">", "\\>");
+                text = text.replace("[", "\\[").replace("]", "\\]");
+                text = text.replace("|", "\\|").replace("`", "\\`");
+                text = text.replace("\u00A0", myOptions.nbspText);
+            }
         } else {
             text = text.replace("\u00A0", " ");
         }
@@ -1182,7 +1170,7 @@ public class FlexmarkHtmlParser {
         int backTickCount = getMaxRepeatedChars(text, '`', 3);
         CharSequence backTicks = RepeatedCharSequence.of("`", backTickCount);
 
-        if (!className.isEmpty() || text.trim().isEmpty() || !hadCode) {
+        if (!myOptions.skipFencedCode && (!className.isEmpty() || text.trim().isEmpty() || !hadCode)) {
             out.blankLine().append(backTicks);
             if (!className.isEmpty()) {
                 out.append(className);

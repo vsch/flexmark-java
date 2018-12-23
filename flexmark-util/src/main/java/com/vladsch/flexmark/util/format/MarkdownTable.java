@@ -786,14 +786,12 @@ public class MarkdownTable {
         int maxColumns = getMaxColumns();
         if (minColumns < maxColumns) {
             // add empty cells to rows that have less
-            TableCell empty = TableCell.DEFAULT_CELL;
-
             for (TableRow row : header.rows) {
-                row.fillMissingColumns(minColumn, maxColumns, empty);
+                row.fillMissingColumns(minColumn, maxColumns);
             }
 
             for (TableRow row : body.rows) {
-                row.fillMissingColumns(minColumn, maxColumns, empty);
+                row.fillMissingColumns(minColumn, maxColumns);
             }
         }
     }

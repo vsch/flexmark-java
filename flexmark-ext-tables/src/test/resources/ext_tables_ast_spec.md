@@ -1777,9 +1777,64 @@ Document[0, 204]
 ````````````````````````````````
 
 
+## Inlines
+
+```````````````````````````````` example Inlines: 1
+| c | d |
+| --- | --- |
+| *a | b* |
+| `e | f` |
+| [g | h](http://a.com) |
+.
+<table>
+  <thead>
+    <tr><th>c</th><th>d</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><em>a | b</em></td></tr>
+    <tr><td><code>e | f</code></td></tr>
+    <tr><td><a href="http://a.com">g | h</a></td></tr>
+  </tbody>
+</table>
+.
+Document[0, 74]
+  TableBlock[0, 74]
+    TableHead[0, 9]
+      TableRow[0, 9] rowNumber=1
+        TableCell[0, 5] header textOpen:[0, 1, "|"] text:[2, 3, "c"] textClose:[4, 5, "|"]
+          Text[2, 3] chars:[2, 3, "c"]
+        TableCell[5, 9] header text:[6, 7, "d"] textClose:[8, 9, "|"]
+          Text[6, 7] chars:[6, 7, "d"]
+    TableSeparator[10, 23]
+      TableRow[10, 23]
+        TableCell[10, 17] textOpen:[10, 11, "|"] text:[12, 15, "---"] textClose:[16, 17, "|"]
+          Text[12, 15] chars:[12, 15, "---"]
+        TableCell[17, 23] text:[18, 21, "---"] textClose:[22, 23, "|"]
+          Text[18, 21] chars:[18, 21, "---"]
+    TableBody[24, 73]
+      TableRow[24, 35] rowNumber=1
+        TableCell[24, 35] textOpen:[24, 25, "|"] text:[26, 33, "*a | b*"] textClose:[34, 35, "|"]
+          Emphasis[26, 33] textOpen:[26, 27, "*"] text:[27, 32, "a | b"] textClose:[32, 33, "*"]
+            Text[27, 32] chars:[27, 32, "a | b"]
+          Text[33, 33]
+      TableRow[36, 47] rowNumber=2
+        TableCell[36, 47] textOpen:[36, 37, "|"] text:[38, 45, "`e | f`"] textClose:[46, 47, "|"]
+          Code[38, 45] textOpen:[38, 39, "`"] text:[39, 44, "e | f"] textClose:[44, 45, "`"]
+            Text[39, 44] chars:[39, 44, "e | f"]
+          Text[45, 45]
+      TableRow[48, 73] rowNumber=3
+        TableCell[48, 73] textOpen:[48, 49, "|"] text:[50, 71, "[g | h](http://a.com)"] textClose:[72, 73, "|"]
+          Link[50, 71] textOpen:[50, 51, "["] text:[51, 56, "g | h"] textClose:[56, 57, "]"] linkOpen:[57, 58, "("] url:[58, 70, "http://a.com"] pageRef:[58, 70, "http://a.com"] linkClose:[70, 71, ")"]
+            Text[51, 56] chars:[51, 56, "g | h"]
+          Text[71, 71]
+````````````````````````````````
+
+
+## Multiple 
+
 multiple tables parsed correctly
 
-```````````````````````````````` example Tables Extension: 56
+```````````````````````````````` example Multiple: 1
 not a table, followed by a table
 
 | col1 | col2|
@@ -1890,7 +1945,7 @@ Document[0, 199]
 
 multi row/column
 
-```````````````````````````````` example Tables Extension: 57
+```````````````````````````````` example Multiple: 2
 | col11 | col12| col13|
 | col21 | col22| col23|
 | col31 | col32| col33|
@@ -1972,7 +2027,7 @@ Document[0, 168]
 
 keep cell whitespace
 
-```````````````````````````````` example(Tables Extension: 58) options(keep-whitespace)
+```````````````````````````````` example(Multiple: 3) options(keep-whitespace)
  Abc  | Def
  --- | ---
  1 | 2
@@ -2011,7 +2066,7 @@ Document[0, 29]
 
 Custom class name
 
-```````````````````````````````` example(Tables Extension: 59) options(class-name)
+```````````````````````````````` example(Multiple: 4) options(class-name)
 Abc|Def
 ---|---
 .
@@ -2042,7 +2097,7 @@ Document[0, 15]
 
 in item
 
-```````````````````````````````` example(Tables Extension: 60) options(keep-whitespace)
+```````````````````````````````` example(Multiple: 5) options(keep-whitespace)
 - Add: live templates starting with `.`    
                                         
   | Element       | Abbreviation    | Expansion                                               |
@@ -2138,7 +2193,7 @@ Document[0, 564]
 
 real life table
 
-```````````````````````````````` example Tables Extension: 61
+```````````````````````````````` example Multiple: 6
 | Feature                                                                                                                 | Basic | Enhanced |
 |:------------------------------------------------------------------------------------------------------------------------|:-----:|:--------:|
 | Works with builds 143.2370 or newer, product version IDEA 15.0.6                                                        |   X   |    X     |

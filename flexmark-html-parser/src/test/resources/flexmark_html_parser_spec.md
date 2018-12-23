@@ -491,9 +491,11 @@ Expected <em>Nested</em> rendered HTML
 ````````````````````````````````
 
 
+## Escape Special Chars
+
 Escape special chars
 
-```````````````````````````````` example Bullet Lists: 5
+```````````````````````````````` example Escape Special Chars: 1
 The following instructions are for **\*nix** type systems, specifically this is a Linux example.
 .
 <span style="caret-color: rgb(36, 41, 46); color: rgb(36, 41, 46); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;; font-size: 16px; font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration: none; display: inline !important; float: none;">The following instructions are for<span class="Apple-converted-space"> </span></span><strong
@@ -502,7 +504,29 @@ The following instructions are for **\*nix** type systems, specifically this is 
 ````````````````````````````````
 
 
-```````````````````````````````` example Bullet Lists: 6
+Escape special chars skipped
+
+```````````````````````````````` example(Escape Special Chars: 2) options(skip-char-escape)
+The following instructions are for  ***nix**  type systems, specifically this is a Linux example.
+.
+<span style="caret-color: rgb(36, 41, 46); color: rgb(36, 41, 46); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;; font-size: 16px; font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration: none; display: inline !important; float: none;">The following instructions are for<span class="Apple-converted-space"> </span></span><strong
+    style="box-sizing: border-box; font-weight: 600; caret-color: rgb(36, 41, 46); color: rgb(36, 41, 46); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;; font-size: 16px; font-style: normal; font-variant-caps: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; text-decoration: none;">*nix</strong><span
+    style="caret-color: rgb(36, 41, 46); color: rgb(36, 41, 46); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;; font-size: 16px; font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration: none; display: inline !important; float: none;"><span class="Apple-converted-space"> </span>type systems, specifically this is a Linux example.</span>
+````````````````````````````````
+
+
+```````````````````````````````` example(Escape Special Chars: 3) options(skip-char-escape)
+| c | d | | - | - | | *a | b* | | `e | f` | | [g | h](http://a.com) |
+.
+<meta charset='utf-8'><span style="color: rgb(51, 51, 51); font-family: Consolas, Menlo, Monaco, &quot;Lucida Console&quot;, &quot;Liberation Mono&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Bitstream Vera Sans Mono&quot;, &quot;Courier New&quot;, monospace; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: pre; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(249, 249, 249); text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">| c | d |
+| - | - |
+| </span><span class="hljs-emphasis" style="color: rgb(51, 51, 51); font-family: Consolas, Menlo, Monaco, &quot;Lucida Console&quot;, &quot;Liberation Mono&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Bitstream Vera Sans Mono&quot;, &quot;Courier New&quot;, monospace; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: pre; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-style: initial; text-decoration-color: initial;">*a | b*</span><span style="color: rgb(51, 51, 51); font-family: Consolas, Menlo, Monaco, &quot;Lucida Console&quot;, &quot;Liberation Mono&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Bitstream Vera Sans Mono&quot;, &quot;Courier New&quot;, monospace; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: pre; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(249, 249, 249); text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;"> |
+| </span><span class="hljs-code" style="color: rgb(51, 51, 51); font-family: Consolas, Menlo, Monaco, &quot;Lucida Console&quot;, &quot;Liberation Mono&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Bitstream Vera Sans Mono&quot;, &quot;Courier New&quot;, monospace; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: pre; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-style: initial; text-decoration-color: initial;">`e | f`</span><span style="color: rgb(51, 51, 51); font-family: Consolas, Menlo, Monaco, &quot;Lucida Console&quot;, &quot;Liberation Mono&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Bitstream Vera Sans Mono&quot;, &quot;Courier New&quot;, monospace; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: pre; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(249, 249, 249); text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;"> |
+| [</span><span class="hljs-string" style="color: rgb(221, 17, 68); font-family: Consolas, Menlo, Monaco, &quot;Lucida Console&quot;, &quot;Liberation Mono&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Bitstream Vera Sans Mono&quot;, &quot;Courier New&quot;, monospace; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: pre; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-style: initial; text-decoration-color: initial;">g | h</span><span style="color: rgb(51, 51, 51); font-family: Consolas, Menlo, Monaco, &quot;Lucida Console&quot;, &quot;Liberation Mono&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Bitstream Vera Sans Mono&quot;, &quot;Courier New&quot;, monospace; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: pre; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(249, 249, 249); text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">](</span><span class="hljs-link" style="color: rgb(51, 51, 51); font-family: Consolas, Menlo, Monaco, &quot;Lucida Console&quot;, &quot;Liberation Mono&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Bitstream Vera Sans Mono&quot;, &quot;Courier New&quot;, monospace; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: pre; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-style: initial; text-decoration-color: initial;">http://a.com</span><span style="color: rgb(51, 51, 51); font-family: Consolas, Menlo, Monaco, &quot;Lucida Console&quot;, &quot;Liberation Mono&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Bitstream Vera Sans Mono&quot;, &quot;Courier New&quot;, monospace; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: pre; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(249, 249, 249); text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">) |</span>
+````````````````````````````````
+
+
+```````````````````````````````` example Escape Special Chars: 4
 [535 Closed](https://github.com/vsch/idea-multimarkdown/issues?q=is%3Aissue+is%3Aclosed)
 Author
 Labels
@@ -3019,7 +3043,20 @@ some back ticks in the ````code````
 ````````````````````````````````
 
 
-```````````````````````````````` example Fenced Code: 10
+## Skipped Fenced Code
+
+```````````````````````````````` example(Skipped Fenced Code: 1) options(skip-fenced-code)
+>         some back ticks in the ````code````
+
+.
+<blockquote>
+<pre><code class="java">    some back ticks in the ````code````
+</code></pre>
+</blockquote>
+````````````````````````````````
+
+
+```````````````````````````````` example Skipped Fenced Code: 2
 * item
   > 
   > `````markdown
@@ -3045,7 +3082,7 @@ some back ticks in the ````code````
 ````````````````````````````````
 
 
-```````````````````````````````` example Fenced Code: 11
+```````````````````````````````` example Skipped Fenced Code: 3
 * item
   >     
   >     some back ticks in the ````code````
@@ -3069,7 +3106,7 @@ some back ticks in the ````code````
 
 code with emphasis preserved
 
-```````````````````````````````` example(Fenced Code: 12) options(code-emphasis)
+```````````````````````````````` example(Skipped Fenced Code: 4) options(code-emphasis)
 ```html
 <html>
 <body>
@@ -3104,7 +3141,7 @@ code with emphasis preserved
 
 code with emphasis not preserved
 
-```````````````````````````````` example Fenced Code: 13
+```````````````````````````````` example Skipped Fenced Code: 5
 ```html
 <html>
 <body>

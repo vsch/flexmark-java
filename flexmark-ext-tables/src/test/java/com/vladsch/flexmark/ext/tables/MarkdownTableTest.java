@@ -911,15 +911,15 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         BasedSequence source = BasedSequenceImpl.of(markdown.substring(0, pos) + markdown.substring(pos + 1));
         MarkdownTable table = getTable(source, formatOptions("", null).toMutable().set(TableFormatOptions.FORMAT_TABLE_LEFT_ALIGN_MARKER, DiscretionaryText.AS_IS));
         assertTrue(table.addTrackedOffset(pos, false, true));
-        
+
         //System.out.println("Table before: " + table.toString());
-        
+
         HtmlWriter out = new HtmlWriter(new StringBuilder(), 0, HtmlWriter.FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.getText();
         Map<Integer, Integer> offsets = table.getTrackedOffsets();
         int offset = offsets.get(pos);
-        
+
         //System.out.println("pos " + pos + " -> " + offset);
         //System.out.println("Table after: " + table.toString());
 
@@ -951,15 +951,15 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         BasedSequence source = BasedSequenceImpl.of(markdown.substring(0, pos) + markdown.substring(pos + 1));
         MarkdownTable table = getTable(source, formatOptions("", null).toMutable().set(TableFormatOptions.FORMAT_TABLE_LEFT_ALIGN_MARKER, DiscretionaryText.AS_IS));
         assertTrue(table.addTrackedOffset(pos, true, true));
-        
+
         //System.out.println("Table before: " + table.toString());
-        
+
         HtmlWriter out = new HtmlWriter(new StringBuilder(), 0, HtmlWriter.FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.getText();
         Map<Integer, Integer> offsets = table.getTrackedOffsets();
         int offset = offsets.get(pos);
-        
+
         //System.out.println("pos " + pos + " -> " + offset);
         //System.out.println("Table after: " + table.toString());
 
@@ -2494,6 +2494,45 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
                 "[ ^]\n" +
                 "", formattedTable.substring(0, offset) + "^" + formattedTable.substring(offset));
         assertEquals(pos + 1, offset);
+    }
+
+    @Test
+    public void test_EmbeddedPipe() {
+        String markdown = "" +
+                "| c | d |\n" +
+                "| --- | --- |\n" +
+                "| ^*a | b* |\n" +
+                "| `e | f` |\n" +
+                "| [g | h](http://a.com) |\n" +
+                "";
+
+        int pos = markdown.indexOf("^");
+        BasedSequence source = BasedSequenceImpl.of(markdown.substring(0, pos) + markdown.substring(pos + 1));
+        MarkdownTable table = getTable(source, formatOptions("", null).toMutable().set(TablesExtension.FORMAT_TABLE_FILL_MISSING_COLUMNS, false));
+        table.fillMissingColumns();
+        
+        assertTrue(table.addTrackedOffset(pos, true, true));
+        HtmlWriter out = new HtmlWriter(new StringBuilder(), 0, HtmlWriter.FORMAT_ALL);
+        table.appendTable(out);
+        String formattedTable = out.getText();
+        Map<Integer, Integer> offsets = table.getTrackedOffsets();
+        int offset = offsets.get(pos);
+
+        assertEquals("" +
+                "| c                     | d  |\n" +
+                "|:----------------------|:---|\n" +
+                "| *a | b*               |    |\n" +
+                "| `e | f`               |    |\n" +
+                "| [g | h](http://a.com) |    |\n" +
+                "", formattedTable);
+        assertEquals("" +
+                "| c                     | d  |\n" +
+                "|:----------------------|:---|\n" +
+                "| ^*a | b*               |    |\n" +
+                "| `e | f`               |    |\n" +
+                "| [g | h](http://a.com) |    |\n" +
+                "", formattedTable.substring(0, offset) + "^" + formattedTable.substring(offset));
+        assertEquals(pos + 38, offset);
     }
 
     // these are tested with manipulators
