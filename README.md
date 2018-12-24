@@ -200,7 +200,7 @@ custom node renderer if you need to override the generated link HTML.
   [Customizing Docx Rendering](https://github.com/vsch/flexmark-java/wiki/Customizing-Docx-Rendering)
 
   Development of this module was sponsored by
-  [Johner Institut GmbH](http://www.johner-institut.de/).
+  [Johner Institut GmbH](https://www.johner-institut.de).
 * Update library to be [CommonMark (spec 0.28)] compliant and add
   `ParserEmulationProfile.COMMONMARK_0_27` and `ParserEmulationProfile.COMMONMARK_0_28` to allow
   selecting a specific spec version options.
