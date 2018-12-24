@@ -8,6 +8,7 @@ flexmark-java
 - [To Do](#to-do)
     - [Docx Converter](#docx-converter)
 - [0.40.0](#0400)
+- [0.35.8](#0358)
 - [0.35.6](#0356)
 - [0.35.4](#0354)
 - [0.35.2](#0352)
@@ -383,6 +384,11 @@ flexmark-java
       * `com.vladsch.flexmark.formatter.internal.PhasedNodeFormatter` to `com.vladsch.flexmark.formatter.PhasedNodeFormatter` 
       * `com.vladsch.flexmark.formatter.internal.NodeFormatterSubContext` to `com.vladsch.flexmark.formatter.NodeFormatterSubContext` 
 <!--@formatter:on-->
+
+0.35.8
+------
+
+* Fix: missing test scope on flexmark-test-utils
 
 0.35.6
 ------

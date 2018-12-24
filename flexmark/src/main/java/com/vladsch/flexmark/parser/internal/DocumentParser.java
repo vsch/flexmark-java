@@ -29,7 +29,6 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.CharSubSequence;
 import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
 import com.vladsch.flexmark.util.sequence.SubSequence;
-import org.apache.log4j.Logger;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -1146,37 +1145,37 @@ public class DocumentParser implements ParserState {
         }
     }
 
-    private static Logger LOG = Logger.getLogger(DocumentParser.class);
+    //private static Logger LOG = Logger.getLogger(DocumentParser.class);
 
     private Document finalizeAndProcess() {
         finalizeBlocks(this.activeBlockParsers);
 
-        if (LOG.isDebugEnabled()) {
-            LOG.debug("Parsed\n" + new AstCollectingVisitor().collectAndGetAstText(documentBlockParser.getBlock()));
-        }
+        //if (LOG.isDebugEnabled()) {
+        //    LOG.debug("Parsed\n" + new AstCollectingVisitor().collectAndGetAstText(documentBlockParser.getBlock()));
+        //}
 
         // need to run block pre-processors at this point, before inline processing
         currentPhase = ParserPhase.PRE_PROCESS_PARAGRAPHS;
         this.preProcessParagraphs();
 
-        if (LOG.isDebugEnabled()) {
-            LOG.debug("Paragraphs PreProcessed\n" + new AstCollectingVisitor().collectAndGetAstText(documentBlockParser.getBlock()));
-        }
+        //if (LOG.isDebugEnabled()) {
+        //    LOG.debug("Paragraphs PreProcessed\n" + new AstCollectingVisitor().collectAndGetAstText(documentBlockParser.getBlock()));
+        //}
 
         currentPhase = ParserPhase.PRE_PROCESS_BLOCKS;
         this.preProcessBlocks();
 
-        if (LOG.isDebugEnabled()) {
-            LOG.debug("Blocks PreProcessed\n" + new AstCollectingVisitor().collectAndGetAstText(documentBlockParser.getBlock()));
-        }
+        //if (LOG.isDebugEnabled()) {
+        //    LOG.debug("Blocks PreProcessed\n" + new AstCollectingVisitor().collectAndGetAstText(documentBlockParser.getBlock()));
+        //}
 
         // can naw run inline processing
         currentPhase = ParserPhase.PARSE_INLINES;
         this.processInlines();
 
-        if (LOG.isDebugEnabled()) {
-            LOG.debug("Inline Processed\n" + new AstCollectingVisitor().collectAndGetAstText(documentBlockParser.getBlock()));
-        }
+        //if (LOG.isDebugEnabled()) {
+        //    LOG.debug("Inline Processed\n" + new AstCollectingVisitor().collectAndGetAstText(documentBlockParser.getBlock()));
+        //}
 
         currentPhase = ParserPhase.DONE;
         Document document = this.documentBlockParser.getBlock();

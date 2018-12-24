@@ -15,7 +15,6 @@
         <dependency>
             <groupId>com.vladsch.flexmark</groupId>
             <artifactId>flexmark-test-util</artifactId>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>com.vladsch.flexmark</groupId>
@@ -35,6 +34,7 @@
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
             <version>1.2.17</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
