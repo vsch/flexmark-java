@@ -617,7 +617,7 @@ BSD (2-clause) licensed, see [LICENSE.txt] file.
 [LICENSE.txt]: LICENSE.txt
 [Markdown]: https://daringfireball.net/projects/markdown/
 [Markdown Navigator]: http://vladsch.com/product/markdown-navigator
-[MultiMarkdown]: http://fletcherpenney.net/multimarkdown/
+[MultiMarkdown]: https://fletcherpenney.net/multimarkdown
 [Open HTML To PDF]: https://github.com/danfickle/openhtmltopdf
 [pegdown]: http://pegdown.org
 [Pegdown - Achilles heel of the Markdown Navigator plugin]: http://vladsch.com/blog/15
