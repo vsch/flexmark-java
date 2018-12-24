@@ -7,6 +7,7 @@ flexmark-java
 
 - [To Do](#to-do)
     - [Docx Converter](#docx-converter)
+- [0.35.8](#0358)
 - [0.35.6](#0356)
 - [0.35.4](#0354)
 - [0.35.2](#0352)
@@ -264,6 +265,11 @@ flexmark-java
 * [ ] Fix: #99, YamlFrontMatterBlockParser ignores multi-key list items
 
 &nbsp;</details>
+
+0.35.8
+------
+
+* Fix: add missing test-scope to flexmark-test-util dependencies 
 
 0.35.6
 ------

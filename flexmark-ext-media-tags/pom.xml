@@ -4,7 +4,7 @@
     <parent>
         <groupId>com.vladsch.flexmark</groupId>
         <artifactId>flexmark-java</artifactId>
-        <version>0.35.6</version>
+        <version>0.36.8</version>
     </parent>
 
     <artifactId>flexmark-ext-media-tags</artifactId>
@@ -19,6 +19,7 @@
         <dependency>
             <groupId>com.vladsch.flexmark</groupId>
             <artifactId>flexmark-test-util</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 </project>

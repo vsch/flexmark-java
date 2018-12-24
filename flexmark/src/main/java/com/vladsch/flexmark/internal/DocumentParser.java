@@ -1,12 +1,6 @@
 package com.vladsch.flexmark.internal;
 
-import com.vladsch.flexmark.ast.BlankLine;
-import com.vladsch.flexmark.ast.BlankLineContainer;
-import com.vladsch.flexmark.ast.Block;
-import com.vladsch.flexmark.ast.Document;
-import com.vladsch.flexmark.ast.KeepTrailingBlankLineContainer;
-import com.vladsch.flexmark.ast.Node;
-import com.vladsch.flexmark.ast.Paragraph;
+import com.vladsch.flexmark.ast.*;
 import com.vladsch.flexmark.ast.util.ClassifyingBlockTracker;
 import com.vladsch.flexmark.ast.util.Parsing;
 import com.vladsch.flexmark.parser.InlineParser;
@@ -15,7 +9,6 @@ import com.vladsch.flexmark.parser.InlineParserFactory;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.block.*;
 import com.vladsch.flexmark.parser.delimiter.DelimiterProcessor;
-import com.vladsch.flexmark.test.AstCollectingVisitor;
 import com.vladsch.flexmark.util.Computable;
 import com.vladsch.flexmark.util.collection.ItemFactoryMap;
 import com.vladsch.flexmark.util.collection.iteration.ReversibleIterable;
@@ -28,18 +21,11 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.CharSubSequence;
 import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
 import com.vladsch.flexmark.util.sequence.SubSequence;
-import org.apache.log4j.Logger;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.Reader;
-import java.util.ArrayList;
-import java.util.BitSet;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import static com.vladsch.flexmark.parser.Parser.BLANK_LINES_IN_AST;
 import static com.vladsch.flexmark.parser.Parser.TRACK_DOCUMENT_LINES;
@@ -1145,37 +1131,37 @@ public class DocumentParser implements ParserState {
         }
     }
 
-    private static Logger LOG = Logger.getLogger(DocumentParser.class);
+    //private static Logger LOG = Logger.getLogger(DocumentParser.class);
 
     private Document finalizeAndProcess() {
         finalizeBlocks(this.activeBlockParsers);
 
-        if (LOG.isDebugEnabled()) {
-            LOG.debug("Parsed\n" + new AstCollectingVisitor().collectAndGetAstText(documentBlockParser.getBlock()));
-        }
+        //if (LOG.isDebugEnabled()) {
+        //    LOG.debug("Parsed\n" + new AstCollectingVisitor().collectAndGetAstText(documentBlockParser.getBlock()));
+        //}
 
         // need to run block pre-processors at this point, before inline processing
         currentPhase = ParserPhase.PRE_PROCESS_PARAGRAPHS;
         this.preProcessParagraphs();
 
-        if (LOG.isDebugEnabled()) {
-            LOG.debug("Paragraphs PreProcessed\n" + new AstCollectingVisitor().collectAndGetAstText(documentBlockParser.getBlock()));
-        }
+        //if (LOG.isDebugEnabled()) {
+        //    LOG.debug("Paragraphs PreProcessed\n" + new AstCollectingVisitor().collectAndGetAstText(documentBlockParser.getBlock()));
+        //}
 
         currentPhase = ParserPhase.PRE_PROCESS_BLOCKS;
         this.preProcessBlocks();
 
-        if (LOG.isDebugEnabled()) {
-            LOG.debug("Blocks PreProcessed\n" + new AstCollectingVisitor().collectAndGetAstText(documentBlockParser.getBlock()));
-        }
+        //if (LOG.isDebugEnabled()) {
+        //    LOG.debug("Blocks PreProcessed\n" + new AstCollectingVisitor().collectAndGetAstText(documentBlockParser.getBlock()));
+        //}
 
         // can naw run inline processing
         currentPhase = ParserPhase.PARSE_INLINES;
         this.processInlines();
 
-        if (LOG.isDebugEnabled()) {
-            LOG.debug("Inline Processed\n" + new AstCollectingVisitor().collectAndGetAstText(documentBlockParser.getBlock()));
-        }
+        //if (LOG.isDebugEnabled()) {
+        //    LOG.debug("Inline Processed\n" + new AstCollectingVisitor().collectAndGetAstText(documentBlockParser.getBlock()));
+        //}
 
         currentPhase = ParserPhase.DONE;
         Document document = this.documentBlockParser.getBlock();
