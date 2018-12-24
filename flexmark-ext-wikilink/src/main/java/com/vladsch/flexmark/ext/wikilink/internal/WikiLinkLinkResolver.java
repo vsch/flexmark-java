@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.ext.wikilink.internal;
 
-import com.vladsch.flexmark.ast.Node;
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.ext.wikilink.WikiImage;
 import com.vladsch.flexmark.html.LinkResolver;
 import com.vladsch.flexmark.html.LinkResolverFactory;

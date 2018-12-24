@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.ext.footnotes.internal;
 
-import com.vladsch.flexmark.ast.Node;
-import com.vladsch.flexmark.ast.NodeRepository;
+import com.vladsch.flexmark.util.ast.Node;
+import com.vladsch.flexmark.util.ast.NodeRepository;
 import com.vladsch.flexmark.ext.footnotes.Footnote;
 import com.vladsch.flexmark.ext.footnotes.FootnoteBlock;
 import com.vladsch.flexmark.ext.footnotes.FootnoteExtension;

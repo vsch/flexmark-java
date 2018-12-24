@@ -1,13 +1,11 @@
 package com.vladsch.flexmark.docx.converter.internal;
 
-import com.vladsch.flexmark.ast.Document;
+import com.vladsch.flexmark.docx.converter.*;
+import com.vladsch.flexmark.util.ast.*;
 import com.vladsch.flexmark.ast.Text;
 import com.vladsch.flexmark.ast.*;
 import com.vladsch.flexmark.ast.util.ReferenceRepository;
 import com.vladsch.flexmark.ast.util.TextCollectingVisitor;
-import com.vladsch.flexmark.docx.converter.CustomNodeDocxRenderer;
-import com.vladsch.flexmark.docx.converter.DocxRendererContext;
-import com.vladsch.flexmark.docx.converter.PhasedNodeDocxRenderer;
 import com.vladsch.flexmark.docx.converter.util.*;
 import com.vladsch.flexmark.ext.aside.AsideBlock;
 import com.vladsch.flexmark.ext.attributes.AttributesNode;
@@ -44,6 +42,7 @@ import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.superscript.Superscript;
 import com.vladsch.flexmark.util.ImageUtils;
 import com.vladsch.flexmark.util.Pair;
+import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.format.options.ListSpacing;
 import com.vladsch.flexmark.util.html.Attribute;
 import com.vladsch.flexmark.util.html.Attributes;

@@ -1,6 +1,7 @@
 package com.vladsch.flexmark;
 
-import com.vladsch.flexmark.ast.Document;
+import com.vladsch.flexmark.util.IParse;
+import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.ext.abbreviation.AbbreviationExtension;
 import com.vladsch.flexmark.ext.abbreviation.internal.AbbreviationRepository;
 import com.vladsch.flexmark.ext.anchorlink.AnchorLinkExtension;
@@ -25,7 +26,7 @@ import com.vladsch.flexmark.ext.toc.TocExtension;
 import com.vladsch.flexmark.ext.typographic.TypographicExtension;
 import com.vladsch.flexmark.ext.wikilink.WikiLinkExtension;
 import com.vladsch.flexmark.ext.yaml.front.matter.YamlFrontMatterExtension;
-import com.vladsch.flexmark.formatter.internal.Formatter;
+import com.vladsch.flexmark.formatter.Formatter;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.ParserEmulationProfile;
 import com.vladsch.flexmark.spec.SpecExample;

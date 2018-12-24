@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.ext.xwiki.macros.internal;
 
-import com.vladsch.flexmark.ast.Node;
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.ext.xwiki.macros.Macro;
 import com.vladsch.flexmark.ext.xwiki.macros.MacroAttribute;
 import com.vladsch.flexmark.ext.xwiki.macros.MacroBlock;

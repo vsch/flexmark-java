@@ -1,5 +1,6 @@
 package com.vladsch.flexmark.ast;
 
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 public abstract class LinkNodeBase extends Node {

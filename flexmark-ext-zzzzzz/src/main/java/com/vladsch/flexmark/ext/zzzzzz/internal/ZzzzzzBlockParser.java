@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.ext.zzzzzz.internal;
 
-import com.vladsch.flexmark.ast.Block;
-import com.vladsch.flexmark.ast.BlockContent;
+import com.vladsch.flexmark.util.ast.Block;
+import com.vladsch.flexmark.util.ast.BlockContent;
 import com.vladsch.flexmark.ext.zzzzzz.ZzzzzzBlock;
 import com.vladsch.flexmark.parser.InlineParser;
 import com.vladsch.flexmark.parser.block.*;

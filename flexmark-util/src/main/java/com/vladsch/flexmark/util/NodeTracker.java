@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.util;
 
-import com.vladsch.flexmark.ast.Node;
+import com.vladsch.flexmark.util.ast.Node;
 
 public interface NodeTracker {
     void nodeAdded(Node node);

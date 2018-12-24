@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.ext.gitlab.internal;
 
-import com.vladsch.flexmark.ast.Node;
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.ast.Text;
 import com.vladsch.flexmark.ext.gitlab.GitLabDel;
 import com.vladsch.flexmark.ext.gitlab.GitLabInline;

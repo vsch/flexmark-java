@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.ext.abbreviation.internal;
 
-import com.vladsch.flexmark.ast.Node;
-import com.vladsch.flexmark.ast.NodeRepository;
+import com.vladsch.flexmark.util.ast.Node;
+import com.vladsch.flexmark.util.ast.NodeRepository;
 import com.vladsch.flexmark.ext.abbreviation.Abbreviation;
 import com.vladsch.flexmark.ext.abbreviation.AbbreviationBlock;
 import com.vladsch.flexmark.ext.abbreviation.AbbreviationExtension;

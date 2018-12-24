@@ -1,20 +1,15 @@
 package com.vladsch.flexmark.ext.footnotes.internal;
 
-import com.vladsch.flexmark.ast.Document;
 import com.vladsch.flexmark.ext.footnotes.Footnote;
 import com.vladsch.flexmark.ext.footnotes.FootnoteBlock;
 import com.vladsch.flexmark.ext.footnotes.FootnoteExtension;
-import com.vladsch.flexmark.formatter.CustomNodeFormatter;
-import com.vladsch.flexmark.formatter.TranslatingSpanRender;
-import com.vladsch.flexmark.formatter.internal.*;
+import com.vladsch.flexmark.formatter.*;
 import com.vladsch.flexmark.util.format.options.ElementPlacement;
 import com.vladsch.flexmark.util.format.options.ElementPlacementSort;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.DataKey;
 
 import java.util.*;
-
-import static com.vladsch.flexmark.formatter.RenderPurpose.TRANSLATION_SPANS;
 
 public class FootnoteNodeFormatter extends NodeRepositoryFormatter<FootnoteRepository, FootnoteBlock, Footnote> {
     public static final DataKey<Map<String, String>> FOOTNOTE_TRANSLATION_MAP = new DataKey<Map<String, String>>("FOOTNOTE_TRANSLATION_MAP", new HashMap<String, String>()); // assign attributes to text if previous is not a space

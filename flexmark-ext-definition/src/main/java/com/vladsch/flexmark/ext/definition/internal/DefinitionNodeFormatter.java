@@ -1,14 +1,12 @@
 package com.vladsch.flexmark.ext.definition.internal;
 
-import com.vladsch.flexmark.ast.Node;
+import com.vladsch.flexmark.formatter.*;
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.ast.Paragraph;
 import com.vladsch.flexmark.ext.definition.DefinitionItem;
 import com.vladsch.flexmark.ext.definition.DefinitionList;
 import com.vladsch.flexmark.ext.definition.DefinitionTerm;
-import com.vladsch.flexmark.formatter.CustomNodeFormatter;
-import com.vladsch.flexmark.formatter.internal.*;
 import com.vladsch.flexmark.parser.ListOptions;
-import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.RepeatedCharSequence;

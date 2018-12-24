@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.docx.converter.util;
 
-import com.vladsch.flexmark.ast.Node;
-import com.vladsch.flexmark.docx.converter.internal.DocxRendererOptions;
+import com.vladsch.flexmark.util.ast.Node;
+import com.vladsch.flexmark.docx.converter.DocxRendererOptions;
 import com.vladsch.flexmark.html.renderer.AttributablePart;
 import com.vladsch.flexmark.util.html.Attributes;
 import org.docx4j.openpackaging.exceptions.Docx4JException;

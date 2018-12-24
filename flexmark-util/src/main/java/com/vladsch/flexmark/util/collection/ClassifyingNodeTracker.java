@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.util.collection;
 
-import com.vladsch.flexmark.ast.Node;
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.NodeTracker;
 import com.vladsch.flexmark.util.collection.iteration.ReversibleIterable;
 import com.vladsch.flexmark.util.collection.iteration.ReversibleIterator;

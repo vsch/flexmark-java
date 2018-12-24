@@ -3,7 +3,7 @@ package com.vladsch.flexmark.ext.yaml.front.matter;
 import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.ext.yaml.front.matter.internal.YamlFrontMatterBlockParser;
 import com.vladsch.flexmark.ext.yaml.front.matter.internal.YamlFrontMatterNodeFormatter;
-import com.vladsch.flexmark.formatter.internal.Formatter;
+import com.vladsch.flexmark.formatter.Formatter;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.options.MutableDataHolder;
 

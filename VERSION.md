@@ -7,6 +7,7 @@ flexmark-java
 
 - [To Do](#to-do)
     - [Docx Converter](#docx-converter)
+- [0.40.0](#0400)
 - [0.35.6](#0356)
 - [0.35.4](#0354)
 - [0.35.2](#0352)
@@ -264,6 +265,124 @@ flexmark-java
 * [ ] Fix: #99, YamlFrontMatterBlockParser ignores multi-key list items
 
 &nbsp;</details>
+
+0.40.0
+------
+
+* Fix: Java9+ Compatibility, IntelliJ Migration contained in
+  [migrate 0_35_x to 0_40_0.xml](/assets/migrations/migrate%20flexmark-java%200_35_x%20to%200_40_0.xml),
+  to use:
+
+  * copy to IntelliJ application settings to `migrations` subdirectory
+  * if you have the project which you want to migrate open, then close it
+  * open the project in IntelliJ Ultimate or Community
+  * update the flexmark-java dependency version to 0.40.0 (or later) and make sure the new
+    library is downloaded/updated in the project.
+  * use menu `Refactor` > `Migrate...`
+  * select `migrate flexmark-java 0.35.x to 0.40.0`
+  * press `Run`
+  * in the refactoring preview tool window that opens hit `Do Refactor`
+
+  :warning: In my projects, the IDE can miss some class migrations, especially on files which
+  are not open. Re-running the migration tends to apply the migration. In cases where migration
+  is not applied manual editing will be needed. In my projects `Document`, `Node` and
+  `Formatter` were the problem classes:
+  
+  * `com.vladsch.flexmark.ast.Document` to `com.vladsch.flexmark.util.ast.Document`
+  * `com.vladsch.flexmark.ast.Node` to `com.vladsch.flexmark.util.ast.Node`
+  * `com.vladsch.flexmark.formatter.internal.Formatter` to `com.vladsch.flexmark.formatter.Formatter` 
+  
+  :warning: `flexmark-docx-converter` and `flexmark-pdf-converter` cannot be used with Java 9+
+  modules because the underlying libraries used have package load conflicts that will be
+  resolved in a later release.
+
+<!--@formatter:off-->
+  * Fix: overlapping packages in different modules, change:
+    * `com.vladsch.flexmark.ast.AllNodesVisitor` to `com.vladsch.flexmark.util.ast.AllNodesVisitor`
+    * `com.vladsch.flexmark.ast.BlankLine` to `com.vladsch.flexmark.util.ast.BlankLine`
+    * `com.vladsch.flexmark.ast.BlankLineContainer` to `com.vladsch.flexmark.util.ast.BlankLineContainer`
+    * `com.vladsch.flexmark.ast.Block` to `com.vladsch.flexmark.util.ast.Block`
+    * `com.vladsch.flexmark.ast.BlockContent` to `com.vladsch.flexmark.util.ast.BlockContent`
+    * `com.vladsch.flexmark.ast.BlockNodeVisitor` to `com.vladsch.flexmark.util.ast.BlockNodeVisitor`
+    * `com.vladsch.flexmark.ast.Content` to `com.vladsch.flexmark.util.ast.Content`
+    * `com.vladsch.flexmark.ast.ContentNode` to `com.vladsch.flexmark.util.ast.ContentNode`
+    * `com.vladsch.flexmark.ast.CustomBlock` to `com.vladsch.flexmark.util.ast.CustomBlock`
+    * `com.vladsch.flexmark.ast.CustomNode` to `com.vladsch.flexmark.util.ast.CustomNode`
+    * `com.vladsch.flexmark.ast.DescendantNodeIterable` to `com.vladsch.flexmark.util.ast.DescendantNodeIterable`
+    * `com.vladsch.flexmark.ast.DescendantNodeIterator` to `com.vladsch.flexmark.util.ast.DescendantNodeIterator`
+    * `com.vladsch.flexmark.ast.Node` to `com.vladsch.flexmark.util.ast.Node`
+    * `com.vladsch.flexmark.ast.Document` to `com.vladsch.flexmark.util.ast.Document`
+    * `com.vladsch.flexmark.ast.DoNotCollectText` to `com.vladsch.flexmark.util.ast.DoNotCollectText`
+    * `com.vladsch.flexmark.ast.DoNotDecorate` to `com.vladsch.flexmark.util.ast.DoNotDecorate`
+    * `com.vladsch.flexmark.ast.DoNotLinkDecorate` to `com.vladsch.flexmark.util.ast.DoNotLinkDecorate`
+    * `com.vladsch.flexmark.ast.KeepTrailingBlankLineContainer` to `com.vladsch.flexmark.util.ast.KeepTrailingBlankLineContainer`
+    * `com.vladsch.flexmark.ast.NodeAdaptedVisitor` to `com.vladsch.flexmark.util.ast.NodeAdaptedVisitor`
+    * `com.vladsch.flexmark.ast.NodeAdaptingVisitHandler` to `com.vladsch.flexmark.util.ast.NodeAdaptingVisitHandler`
+    * `com.vladsch.flexmark.ast.NodeAdaptingVisitor` to `com.vladsch.flexmark.util.ast.NodeAdaptingVisitor`
+    * `com.vladsch.flexmark.ast.NodeIterable` to `com.vladsch.flexmark.util.ast.NodeIterable`
+    * `com.vladsch.flexmark.ast.NodeIterator` to `com.vladsch.flexmark.util.ast.NodeIterator`
+    * `com.vladsch.flexmark.ast.NodeRepository` to `com.vladsch.flexmark.util.ast.NodeRepository`
+    * `com.vladsch.flexmark.ast.NodeVisitor` to `com.vladsch.flexmark.util.ast.NodeVisitor`
+    * `com.vladsch.flexmark.ast.NodeVisitorBase` to `com.vladsch.flexmark.util.ast.NodeVisitorBase`
+    * `com.vladsch.flexmark.ast.NonRenderingInline` to `com.vladsch.flexmark.util.ast.NonRenderingInline`
+    * `com.vladsch.flexmark.ast.Package` to `com.vladsch.flexmark.util.ast.Package`
+    * `com.vladsch.flexmark.ast.ReferenceNode` to `com.vladsch.flexmark.util.ast.ReferenceNode`
+    * `com.vladsch.flexmark.ast.ReferencingNode` to `com.vladsch.flexmark.util.ast.ReferencingNode`
+    * `com.vladsch.flexmark.ast.VisitHandler` to `com.vladsch.flexmark.util.ast.VisitHandler`
+    * `com.vladsch.flexmark.ast.Visitor` to `com.vladsch.flexmark.util.ast.Visitor`
+    * `com.vladsch.flexmark.IParse` to `com.vladsch.flexmark.util.IParse`
+    * `com.vladsch.flexmark.IRender` to `com.vladsch.flexmark.util.IRender`
+    
+  * Fix: API classes under `internal` package:
+    * `flexmark`: 
+      * `com.vladsch.flexmark.internal.inline.AsteriskDelimiterProcessor` to `com.vladsch.flexmark.parser.core.delimiter.AsteriskDelimiterProcessor` 
+      * `com.vladsch.flexmark.internal.inline.EmphasisDelimiterProcessor` to `com.vladsch.flexmark.parser.core.delimiter.EmphasisDelimiterProcessor` 
+      * `com.vladsch.flexmark.internal.Bracket` to `com.vladsch.flexmark.parser.core.delimiter.Bracket` 
+      * `com.vladsch.flexmark.internal.Delimiter` to `com.vladsch.flexmark.parser.core.delimiter.Delimiter` 
+      * `com.vladsch.flexmark.internal.ThematicBreakOptions` to `com.vladsch.flexmark.internal.ThematicBreakParser.ThematicBreakOptions` 
+      * `com.vladsch.flexmark.internal.HeadingOptions` to `com.vladsch.flexmark.internal.HeadingParser.HeadingOptions` 
+      * `com.vladsch.flexmark.internal.BlockParserTracker` to `com.vladsch.flexmark.parser.block.BlockParserTracker` 
+      * `com.vladsch.flexmark.internal.BlockQuoteParser` to `com.vladsch.flexmark.parser.core.BlockQuoteParser` 
+      * `com.vladsch.flexmark.internal.DocumentBlockParser` to `com.vladsch.flexmark.parser.core.DocumentBlockParser` 
+      * `com.vladsch.flexmark.internal.FencedCodeBlockParser` to `com.vladsch.flexmark.parser.core.FencedCodeBlockParser` 
+      * `com.vladsch.flexmark.internal.HeadingParser` to `com.vladsch.flexmark.parser.core.HeadingParser` 
+      * `com.vladsch.flexmark.internal.IndentedCodeBlockParser` to `com.vladsch.flexmark.parser.core.IndentedCodeBlockParser` 
+      * `com.vladsch.flexmark.internal.ListBlockParser` to `com.vladsch.flexmark.parser.core.ListBlockParser` 
+      * `com.vladsch.flexmark.internal.ListItemParser` to `com.vladsch.flexmark.parser.core.ListItemParser` 
+      * `com.vladsch.flexmark.internal.ParagraphParser` to `com.vladsch.flexmark.parser.core.ParagraphParser` 
+      * `com.vladsch.flexmark.internal.ThematicBreakParser` to `com.vladsch.flexmark.parser.core.ThematicBreakParser` 
+      * `com.vladsch.flexmark.internal.HtmlBlockParser` to `com.vladsch.flexmark.parser.core.HtmlBlockParser` 
+      * `com.vladsch.flexmark.internal.ReferencePreProcessorFactory` to `com.vladsch.flexmark.parser.core.ReferencePreProcessorFactory` 
+      * `com.vladsch.flexmark.internal.InlineParserImpl` to `com.vladsch.flexmark.parser.internal.InlineParserImpl` 
+      * `com.vladsch.flexmark.internal.BlockStartImpl` to `com.vladsch.flexmark.parser.internal.BlockStartImpl` 
+      * `com.vladsch.flexmark.internal.BlockContinueImpl` to `com.vladsch.flexmark.parser.internal.BlockContinueImpl` 
+      * `com.vladsch.flexmark.internal.LinkRefProcessorData` to `com.vladsch.flexmark.parser.internal.LinkRefProcessorData` 
+      * `com.vladsch.flexmark.internal.CommonmarkInlineParser` to `com.vladsch.flexmark.parser.internal.CommonmarkInlineParser` 
+      * `com.vladsch.flexmark.internal.MatchedBlockParserImpl` to `com.vladsch.flexmark.parser.internal.MatchedBlockParserImpl` 
+      * `com.vladsch.flexmark.internal.PostProcessorManager` to `com.vladsch.flexmark.parser.internal.PostProcessorManager` 
+      * `com.vladsch.flexmark.internal.DocumentParser` to `com.vladsch.flexmark.parser.internal.DocumentParser` 
+      * `com.vladsch.flexmark.internal.HtmlDeepParser` to `com.vladsch.flexmark.parser.internal.HtmlDeepParser` 
+      
+      * resource `/com/vladsch/flexmark/internal/util/entities.properties` to `/com/vladsch/flexmark/util/html/entities.properties` in `flexmark-util` module
+      
+    * `flexmark-docx-converter`
+      * `com.vladsch.flexmark.docx.converter.internal.DocxRenderer` to `com.vladsch.flexmark.docx.converter.DocxRenderer` 
+      * `com.vladsch.flexmark.docx.converter.internal.DocxRendererPhase` to `com.vladsch.flexmark.docx.converter.DocxRendererPhase` 
+      * `com.vladsch.flexmark.docx.converter.internal.NodeDocxRendererHandler` to `com.vladsch.flexmark.docx.converter.NodeDocxRendererHandler` 
+      * `com.vladsch.flexmark.docx.converter.internal.DocxRendererOptions` to `com.vladsch.flexmark.docx.converter.DocxRendererOptions` 
+      
+    * `flexmark-formatter`
+      * `com.vladsch.flexmark.formatter.internal.Formatter` to `com.vladsch.flexmark.formatter.Formatter` 
+      * `com.vladsch.flexmark.formatter.internal.FormattingPhase` to `com.vladsch.flexmark.formatter.FormattingPhase` 
+      * `com.vladsch.flexmark.formatter.internal.MarkdownWriter` to `com.vladsch.flexmark.formatter.MarkdownWriter` 
+      * `com.vladsch.flexmark.formatter.internal.NodeFormatter` to `com.vladsch.flexmark.formatter.NodeFormatter` 
+      * `com.vladsch.flexmark.formatter.internal.NodeFormatterContext` to `com.vladsch.flexmark.formatter.NodeFormatterContext` 
+      * `com.vladsch.flexmark.formatter.internal.NodeFormatterFactory` to `com.vladsch.flexmark.formatter.NodeFormatterFactory` 
+      * `com.vladsch.flexmark.formatter.internal.NodeFormattingHandler` to `com.vladsch.flexmark.formatter.NodeFormattingHandler` 
+      * `com.vladsch.flexmark.formatter.internal.NodeRepositoryFormatter` to `com.vladsch.flexmark.formatter.NodeRepositoryFormatter` 
+      * `com.vladsch.flexmark.formatter.internal.PhasedNodeFormatter` to `com.vladsch.flexmark.formatter.PhasedNodeFormatter` 
+      * `com.vladsch.flexmark.formatter.internal.NodeFormatterSubContext` to `com.vladsch.flexmark.formatter.NodeFormatterSubContext` 
+<!--@formatter:on-->
 
 0.35.6
 ------

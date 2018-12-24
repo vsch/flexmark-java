@@ -1,7 +1,5 @@
 package com.vladsch.flexmark.docx.converter;
 
-import com.vladsch.flexmark.docx.converter.internal.NodeDocxRendererHandler;
-
 import java.util.Set;
 
 /**

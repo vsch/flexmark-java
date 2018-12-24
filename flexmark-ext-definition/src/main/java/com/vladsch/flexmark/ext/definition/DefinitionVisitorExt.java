@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.ext.definition;
 
-import com.vladsch.flexmark.ast.VisitHandler;
-import com.vladsch.flexmark.ast.Visitor;
+import com.vladsch.flexmark.util.ast.VisitHandler;
+import com.vladsch.flexmark.util.ast.Visitor;
 
 public class DefinitionVisitorExt {
     public static <V extends DefinitionVisitor> VisitHandler<?>[] VISIT_HANDLERS(final V visitor) {

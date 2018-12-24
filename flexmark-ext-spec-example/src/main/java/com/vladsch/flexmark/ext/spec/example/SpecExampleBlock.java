@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.ext.spec.example;
 
-import com.vladsch.flexmark.ast.CustomBlock;
+import com.vladsch.flexmark.util.ast.CustomBlock;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 import java.util.List;

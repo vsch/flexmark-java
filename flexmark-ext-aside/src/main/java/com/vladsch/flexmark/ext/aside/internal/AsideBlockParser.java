@@ -1,10 +1,10 @@
 package com.vladsch.flexmark.ext.aside.internal;
 
-import com.vladsch.flexmark.ast.Block;
+import com.vladsch.flexmark.parser.core.*;
+import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.ast.util.Parsing;
 import com.vladsch.flexmark.ext.aside.AsideBlock;
 import com.vladsch.flexmark.ext.aside.AsideExtension;
-import com.vladsch.flexmark.internal.*;
 import com.vladsch.flexmark.parser.block.*;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;

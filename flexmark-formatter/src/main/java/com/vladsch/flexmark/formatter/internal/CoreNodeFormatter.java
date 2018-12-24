@@ -2,15 +2,14 @@ package com.vladsch.flexmark.formatter.internal;
 
 import com.vladsch.flexmark.ast.*;
 import com.vladsch.flexmark.ast.util.ReferenceRepository;
-import com.vladsch.flexmark.formatter.CustomNodeFormatter;
-import com.vladsch.flexmark.formatter.TranslatingSpanRender;
-import com.vladsch.flexmark.formatter.TranslationPlaceholderGenerator;
+import com.vladsch.flexmark.formatter.*;
 import com.vladsch.flexmark.parser.ListOptions;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.ParserEmulationProfile;
 import com.vladsch.flexmark.util.Consumer;
 import com.vladsch.flexmark.util.Ref;
 import com.vladsch.flexmark.util.Utils;
+import com.vladsch.flexmark.util.ast.*;
 import com.vladsch.flexmark.util.format.options.ElementPlacement;
 import com.vladsch.flexmark.util.format.options.ElementPlacementSort;
 import com.vladsch.flexmark.util.format.options.ListSpacing;
@@ -26,7 +25,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static com.vladsch.flexmark.formatter.RenderPurpose.FORMAT;
-import static com.vladsch.flexmark.formatter.internal.FormattingPhase.DOCUMENT_BOTTOM;
+import static com.vladsch.flexmark.formatter.FormattingPhase.DOCUMENT_BOTTOM;
 import static com.vladsch.flexmark.util.format.options.DiscretionaryText.ADD;
 import static com.vladsch.flexmark.util.format.options.DiscretionaryText.AS_IS;
 import static com.vladsch.flexmark.util.sequence.BasedSequence.NULL;

@@ -1,8 +1,8 @@
 package com.vladsch.flexmark.util.collection;
 
-import com.vladsch.flexmark.ast.Document;
-import com.vladsch.flexmark.ast.Node;
-import com.vladsch.flexmark.ast.NodeVisitorBase;
+import com.vladsch.flexmark.util.ast.Document;
+import com.vladsch.flexmark.util.ast.Node;
+import com.vladsch.flexmark.util.ast.NodeVisitorBase;
 import com.vladsch.flexmark.util.Computable;
 import com.vladsch.flexmark.util.NodeTracker;
 

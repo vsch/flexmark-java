@@ -1,6 +1,10 @@
 package com.vladsch.flexmark.ast.util;
 
 import com.vladsch.flexmark.ast.*;
+import com.vladsch.flexmark.util.ast.Node;
+import com.vladsch.flexmark.util.ast.NodeVisitor;
+import com.vladsch.flexmark.util.ast.VisitHandler;
+import com.vladsch.flexmark.util.ast.Visitor;
 import com.vladsch.flexmark.util.sequence.Range;
 
 import java.util.ArrayList;

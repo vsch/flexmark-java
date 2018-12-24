@@ -1,9 +1,9 @@
 package com.vladsch.flexmark.ext.jekyll.front.matter.internal;
 
-import com.vladsch.flexmark.ast.Block;
-import com.vladsch.flexmark.ast.BlockContent;
+import com.vladsch.flexmark.util.ast.Block;
+import com.vladsch.flexmark.util.ast.BlockContent;
 import com.vladsch.flexmark.ext.jekyll.front.matter.JekyllFrontMatterBlock;
-import com.vladsch.flexmark.internal.DocumentBlockParser;
+import com.vladsch.flexmark.parser.core.DocumentBlockParser;
 import com.vladsch.flexmark.parser.InlineParser;
 import com.vladsch.flexmark.parser.block.*;
 import com.vladsch.flexmark.util.options.DataHolder;

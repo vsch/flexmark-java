@@ -1,14 +1,14 @@
 package com.vladsch.flexmark.ext.definition.internal;
 
-import com.vladsch.flexmark.ast.BlankLine;
-import com.vladsch.flexmark.ast.Block;
-import com.vladsch.flexmark.ast.BlockContent;
-import com.vladsch.flexmark.ast.Node;
+import com.vladsch.flexmark.util.ast.BlankLine;
+import com.vladsch.flexmark.util.ast.Block;
+import com.vladsch.flexmark.util.ast.BlockContent;
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.ast.Paragraph;
 import com.vladsch.flexmark.ext.definition.DefinitionItem;
 import com.vladsch.flexmark.ext.definition.DefinitionList;
 import com.vladsch.flexmark.ext.definition.DefinitionTerm;
-import com.vladsch.flexmark.internal.ParagraphParser;
+import com.vladsch.flexmark.parser.core.ParagraphParser;
 import com.vladsch.flexmark.parser.block.BlockPreProcessor;
 import com.vladsch.flexmark.parser.block.BlockPreProcessorFactory;
 import com.vladsch.flexmark.parser.block.ParserState;

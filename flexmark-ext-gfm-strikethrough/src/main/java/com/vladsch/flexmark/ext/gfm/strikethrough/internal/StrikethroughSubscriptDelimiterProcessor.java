@@ -1,10 +1,10 @@
 package com.vladsch.flexmark.ext.gfm.strikethrough.internal;
 
 import com.vladsch.flexmark.ast.DelimitedNode;
-import com.vladsch.flexmark.ast.Node;
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.ext.gfm.strikethrough.Strikethrough;
 import com.vladsch.flexmark.ext.gfm.strikethrough.Subscript;
-import com.vladsch.flexmark.internal.Delimiter;
+import com.vladsch.flexmark.parser.core.delimiter.Delimiter;
 import com.vladsch.flexmark.parser.InlineParser;
 import com.vladsch.flexmark.parser.delimiter.DelimiterProcessor;
 import com.vladsch.flexmark.parser.delimiter.DelimiterRun;

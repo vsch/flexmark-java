@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.ext.abbreviation;
 
-import com.vladsch.flexmark.ast.*;
 import com.vladsch.flexmark.ext.abbreviation.internal.AbbreviationRepository;
+import com.vladsch.flexmark.util.ast.*;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 /**

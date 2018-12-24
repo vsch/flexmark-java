@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.samples;
 
-import com.vladsch.flexmark.ast.Node;
-import com.vladsch.flexmark.ast.NodeVisitor;
+import com.vladsch.flexmark.util.ast.Node;
+import com.vladsch.flexmark.util.ast.NodeVisitor;
 import com.vladsch.flexmark.ext.xwiki.macros.*;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;

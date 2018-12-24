@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.ext.gitlab;
 
-import com.vladsch.flexmark.ast.VisitHandler;
-import com.vladsch.flexmark.ast.Visitor;
+import com.vladsch.flexmark.util.ast.VisitHandler;
+import com.vladsch.flexmark.util.ast.Visitor;
 
 public class GitLabVisitorExt {
     public static <V extends GitLabVisitor> VisitHandler<?>[] VISIT_HANDLERS(final V visitor) {

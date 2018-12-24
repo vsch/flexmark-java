@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.ext.enumerated.reference.internal;
 
-import com.vladsch.flexmark.ast.Block;
-import com.vladsch.flexmark.ast.BlockContent;
+import com.vladsch.flexmark.util.ast.Block;
+import com.vladsch.flexmark.util.ast.BlockContent;
 import com.vladsch.flexmark.ext.enumerated.reference.EnumeratedReferenceBlock;
 import com.vladsch.flexmark.ext.enumerated.reference.EnumeratedReferenceExtension;
 import com.vladsch.flexmark.parser.block.*;

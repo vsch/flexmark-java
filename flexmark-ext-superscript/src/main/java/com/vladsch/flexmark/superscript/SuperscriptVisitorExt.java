@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.superscript;
 
-import com.vladsch.flexmark.ast.VisitHandler;
-import com.vladsch.flexmark.ast.Visitor;
+import com.vladsch.flexmark.util.ast.VisitHandler;
+import com.vladsch.flexmark.util.ast.Visitor;
 
 public class SuperscriptVisitorExt {
     public static <V extends SuperscriptVisitor> VisitHandler<?>[] VISIT_HANDLERS(final V visitor) {

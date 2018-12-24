@@ -8,6 +8,7 @@ import com.vladsch.flexmark.html.renderer.NodeRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
 import com.vladsch.flexmark.html.renderer.NodeRendererFactory;
 import com.vladsch.flexmark.html.renderer.NodeRenderingHandler;
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.options.DataHolder;
 
 import java.util.Arrays;
@@ -21,7 +22,7 @@ public class ZzzzzzJiraRenderer implements NodeRenderer {
 
     @Override
     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
-        return new HashSet<NodeRenderingHandler<? extends com.vladsch.flexmark.ast.Node>>(Arrays.asList(
+        return new HashSet<NodeRenderingHandler<? extends Node>>(Arrays.asList(
                 // @formatter:off
                 new NodeRenderingHandler<Zzzzzz>(Zzzzzz.class, new CustomNodeRenderer<Zzzzzz>() { @Override public void render(Zzzzzz node, NodeRendererContext context, HtmlWriter html) { ZzzzzzJiraRenderer.this.render(node, context, html); } }),// zzzoptionszzz(CUSTOM_NODE)
                 new NodeRenderingHandler<ZzzzzzBlock>(ZzzzzzBlock.class, new CustomNodeRenderer<ZzzzzzBlock>() { @Override public void render(ZzzzzzBlock node, NodeRendererContext context, HtmlWriter html) { ZzzzzzJiraRenderer.this.render(node, context, html); } })// zzzoptionszzz(CUSTOM_BLOCK_NODE)

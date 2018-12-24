@@ -1,8 +1,6 @@
 package com.vladsch.flexmark.docx.converter;
 
-import com.vladsch.flexmark.ast.Node;
-import com.vladsch.flexmark.docx.converter.internal.DocxRendererOptions;
-import com.vladsch.flexmark.docx.converter.internal.DocxRendererPhase;
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.docx.converter.util.DocxContext;
 import com.vladsch.flexmark.html.renderer.LinkResolverContext;
 

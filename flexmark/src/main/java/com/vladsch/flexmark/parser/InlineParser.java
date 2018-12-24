@@ -1,11 +1,11 @@
 package com.vladsch.flexmark.parser;
 
-import com.vladsch.flexmark.ast.Document;
-import com.vladsch.flexmark.ast.Node;
+import com.vladsch.flexmark.util.ast.Document;
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.ast.Text;
 import com.vladsch.flexmark.ast.util.Parsing;
-import com.vladsch.flexmark.internal.Bracket;
-import com.vladsch.flexmark.internal.Delimiter;
+import com.vladsch.flexmark.parser.core.delimiter.Bracket;
+import com.vladsch.flexmark.parser.core.delimiter.Delimiter;
 import com.vladsch.flexmark.parser.block.CharacterNodeFactory;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 

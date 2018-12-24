@@ -144,7 +144,7 @@ public class Attributes {
     }
 
     @SuppressWarnings("unchecked")
-    public Set<Map.Entry<BasedSequence, Attribute>> entrySet() {
+    public Set<Map.Entry<String, Attribute>> entrySet() {
         return myAttributes != null ? myAttributes.entrySet() : Collections.EMPTY_SET;
     }
 

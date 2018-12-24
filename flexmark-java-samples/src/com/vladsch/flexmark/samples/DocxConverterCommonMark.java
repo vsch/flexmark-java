@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.samples;
 
-import com.vladsch.flexmark.ast.Node;
-import com.vladsch.flexmark.docx.converter.internal.DocxRenderer;
+import com.vladsch.flexmark.util.ast.Node;
+import com.vladsch.flexmark.docx.converter.DocxRenderer;
 import com.vladsch.flexmark.ext.definition.DefinitionExtension;
 import com.vladsch.flexmark.ext.emoji.EmojiExtension;
 import com.vladsch.flexmark.ext.footnotes.FootnoteExtension;

@@ -1,12 +1,12 @@
 package com.vladsch.flexmark.ext.macros;
 
-import com.vladsch.flexmark.IRender;
-import com.vladsch.flexmark.ast.Node;
+import com.vladsch.flexmark.util.IRender;
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.ext.gitlab.GitLabExtension;
 import com.vladsch.flexmark.ext.tables.TablesExtension;
 import com.vladsch.flexmark.formatter.RenderPurpose;
 import com.vladsch.flexmark.formatter.TranslationHandler;
-import com.vladsch.flexmark.formatter.internal.Formatter;
+import com.vladsch.flexmark.formatter.Formatter;
 import com.vladsch.flexmark.html.renderer.HeaderIdGenerator;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.spec.SpecExample;

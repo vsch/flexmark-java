@@ -2,7 +2,7 @@ package com.vladsch.flexmark.ext.toc;
 
 import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.ext.toc.internal.*;
-import com.vladsch.flexmark.formatter.internal.Formatter;
+import com.vladsch.flexmark.formatter.Formatter;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.html.renderer.AttributablePart;
 import com.vladsch.flexmark.parser.Parser;

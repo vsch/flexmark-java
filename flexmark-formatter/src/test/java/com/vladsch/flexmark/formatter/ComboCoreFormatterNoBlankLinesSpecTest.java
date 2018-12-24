@@ -1,6 +1,5 @@
 package com.vladsch.flexmark.formatter;
 
-import com.vladsch.flexmark.formatter.internal.Formatter;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.ParserEmulationProfile;
 import com.vladsch.flexmark.spec.SpecExample;

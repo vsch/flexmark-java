@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.parser.block;
 
-import com.vladsch.flexmark.internal.BlockContinueImpl;
+import com.vladsch.flexmark.parser.internal.BlockContinueImpl;
 
 /**
  * Result object for continuing parsing of a block, see static methods for constructors.

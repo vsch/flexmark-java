@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.parser.block;
 
-import com.vladsch.flexmark.ast.Block;
+import com.vladsch.flexmark.util.ast.Block;
 
 public interface BlockPreProcessor {
 

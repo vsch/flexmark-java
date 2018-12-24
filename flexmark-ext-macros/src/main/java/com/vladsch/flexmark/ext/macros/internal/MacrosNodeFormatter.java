@@ -1,13 +1,11 @@
 package com.vladsch.flexmark.ext.macros.internal;
 
-import com.vladsch.flexmark.ast.Node;
+import com.vladsch.flexmark.formatter.*;
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.ast.Paragraph;
 import com.vladsch.flexmark.ext.macros.MacroDefinitionBlock;
 import com.vladsch.flexmark.ext.macros.MacroReference;
 import com.vladsch.flexmark.ext.macros.MacrosExtension;
-import com.vladsch.flexmark.formatter.CustomNodeFormatter;
-import com.vladsch.flexmark.formatter.TranslatingSpanRender;
-import com.vladsch.flexmark.formatter.internal.*;
 import com.vladsch.flexmark.util.format.options.ElementPlacement;
 import com.vladsch.flexmark.util.format.options.ElementPlacementSort;
 import com.vladsch.flexmark.util.options.DataHolder;

@@ -4,6 +4,7 @@ import com.vladsch.flexmark.ast.*;
 import com.vladsch.flexmark.ext.anchorlink.AnchorLink;
 import com.vladsch.flexmark.parser.block.DocumentPostProcessor;
 import com.vladsch.flexmark.parser.block.DocumentPostProcessorFactory;
+import com.vladsch.flexmark.util.ast.*;
 
 public class AnchorLinkPostProcessor extends DocumentPostProcessor {
     private final AnchorLinkOptions options;

@@ -1,8 +1,8 @@
 package com.vladsch.flexmark.convert.html;
 
-import com.vladsch.flexmark.IParse;
-import com.vladsch.flexmark.IRender;
-import com.vladsch.flexmark.ast.Node;
+import com.vladsch.flexmark.util.IParse;
+import com.vladsch.flexmark.util.IRender;
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.spec.SpecReader;

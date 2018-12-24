@@ -1,9 +1,9 @@
 package com.vladsch.flexmark.ext.macros;
 
-import com.vladsch.flexmark.ast.Block;
-import com.vladsch.flexmark.ast.BlockContent;
-import com.vladsch.flexmark.ast.Node;
-import com.vladsch.flexmark.ast.ReferenceNode;
+import com.vladsch.flexmark.util.ast.Block;
+import com.vladsch.flexmark.util.ast.BlockContent;
+import com.vladsch.flexmark.util.ast.Node;
+import com.vladsch.flexmark.util.ast.ReferenceNode;
 import com.vladsch.flexmark.ext.macros.internal.MacroDefinitionRepository;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 

@@ -1,8 +1,7 @@
 package com.vladsch.flexmark.docx.converter;
 
-import com.vladsch.flexmark.IRender;
-import com.vladsch.flexmark.ast.Node;
-import com.vladsch.flexmark.docx.converter.internal.DocxRenderer;
+import com.vladsch.flexmark.util.IRender;
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.docx.converter.util.DocxContextImpl;
 import com.vladsch.flexmark.docx.converter.util.RunFormatProvider;
 import com.vladsch.flexmark.docx.converter.util.XmlDocxSorter;

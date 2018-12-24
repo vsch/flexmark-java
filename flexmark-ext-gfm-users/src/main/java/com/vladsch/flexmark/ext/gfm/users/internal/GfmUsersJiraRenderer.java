@@ -7,6 +7,7 @@ import com.vladsch.flexmark.html.renderer.NodeRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
 import com.vladsch.flexmark.html.renderer.NodeRendererFactory;
 import com.vladsch.flexmark.html.renderer.NodeRenderingHandler;
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.options.DataHolder;
 
 import java.util.Arrays;
@@ -22,7 +23,7 @@ public class GfmUsersJiraRenderer implements NodeRenderer {
 
     @Override
     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
-        return new HashSet<NodeRenderingHandler<? extends com.vladsch.flexmark.ast.Node>>(Arrays.asList(
+        return new HashSet<NodeRenderingHandler<? extends Node>>(Arrays.asList(
                 // @formatter:off
                 new NodeRenderingHandler<GfmUser>(GfmUser.class, new CustomNodeRenderer<GfmUser>() { @Override public void render(GfmUser node, NodeRendererContext context, HtmlWriter html) { GfmUsersJiraRenderer.this.render(node, context, html); } })
                 // @formatter:on

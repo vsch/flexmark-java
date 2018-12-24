@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.ext.admonition.internal;
 
-import com.vladsch.flexmark.ast.Document;
+import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.ext.admonition.AdmonitionBlock;
 import com.vladsch.flexmark.html.CustomNodeRenderer;
 import com.vladsch.flexmark.html.HtmlWriter;

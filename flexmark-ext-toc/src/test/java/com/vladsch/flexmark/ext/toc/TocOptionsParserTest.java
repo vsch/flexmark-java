@@ -1,8 +1,7 @@
 package com.vladsch.flexmark.ext.toc;
 
-import com.vladsch.flexmark.IParse;
-import com.vladsch.flexmark.IRender;
-import com.vladsch.flexmark.ast.*;
+import com.vladsch.flexmark.util.IParse;
+import com.vladsch.flexmark.util.IRender;
 import com.vladsch.flexmark.ext.toc.internal.SimTocOptionsParser;
 import com.vladsch.flexmark.ext.toc.internal.TocOptions;
 import com.vladsch.flexmark.ext.toc.internal.TocOptionsParser;
@@ -14,6 +13,7 @@ import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.spec.SpecReader;
 import com.vladsch.flexmark.test.ComboSpecTestCase;
 import com.vladsch.flexmark.util.Pair;
+import com.vladsch.flexmark.util.ast.*;
 import com.vladsch.flexmark.util.options.*;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import org.junit.runners.Parameterized;

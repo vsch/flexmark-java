@@ -1,25 +1,20 @@
 package com.vladsch.flexmark.ext.tables;
 
-import com.vladsch.flexmark.ast.Node;
-import com.vladsch.flexmark.formatter.internal.MarkdownWriter;
-import com.vladsch.flexmark.html.HtmlWriter;
+import com.vladsch.flexmark.util.ast.Node;
+import com.vladsch.flexmark.formatter.MarkdownWriter;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.format.MarkdownTable;
 import com.vladsch.flexmark.util.format.TableCellOffsetInfo;
-import com.vladsch.flexmark.util.format.TableFormatOptions;
 import com.vladsch.flexmark.util.format.options.DiscretionaryText;
 import com.vladsch.flexmark.util.format.options.TableCaptionHandling;
 import com.vladsch.flexmark.util.mappers.CharWidthProvider;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.MutableDataSet;
-import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.BasedSequenceImpl;
-import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 import static com.vladsch.flexmark.util.format.TableFormatOptions.INTELLIJ_DUMMY_IDENTIFIER_CHAR;
 import static org.junit.Assert.assertEquals;

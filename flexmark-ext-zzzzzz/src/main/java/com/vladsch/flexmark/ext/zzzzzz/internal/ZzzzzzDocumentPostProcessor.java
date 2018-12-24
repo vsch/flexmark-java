@@ -3,6 +3,7 @@ package com.vladsch.flexmark.ext.zzzzzz.internal;
 import com.vladsch.flexmark.ast.*;
 import com.vladsch.flexmark.parser.block.DocumentPostProcessor;
 import com.vladsch.flexmark.parser.block.DocumentPostProcessorFactory;
+import com.vladsch.flexmark.util.ast.*;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 public class ZzzzzzDocumentPostProcessor extends DocumentPostProcessor {

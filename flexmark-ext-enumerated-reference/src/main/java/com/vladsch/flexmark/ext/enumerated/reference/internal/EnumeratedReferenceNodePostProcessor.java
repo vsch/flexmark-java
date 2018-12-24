@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.ext.enumerated.reference.internal;
 
-import com.vladsch.flexmark.ast.Document;
-import com.vladsch.flexmark.ast.Node;
+import com.vladsch.flexmark.util.ast.Document;
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.ext.attributes.AttributeNode;
 import com.vladsch.flexmark.ext.attributes.AttributesNode;
 import com.vladsch.flexmark.ext.enumerated.reference.EnumeratedReferenceExtension;

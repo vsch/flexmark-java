@@ -7,6 +7,9 @@ import com.vladsch.flexmark.ext.attributes.AttributesNode;
 import com.vladsch.flexmark.parser.block.NodePostProcessor;
 import com.vladsch.flexmark.parser.block.NodePostProcessorFactory;
 import com.vladsch.flexmark.util.NodeTracker;
+import com.vladsch.flexmark.util.ast.BlankLine;
+import com.vladsch.flexmark.util.ast.Document;
+import com.vladsch.flexmark.util.ast.Node;
 
 public class AttributesNodePostProcessor extends NodePostProcessor {
     private final NodeAttributeRepository nodeAttributeRepository;

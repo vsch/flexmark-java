@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.util;
 
-import com.vladsch.flexmark.ast.Block;
+import com.vladsch.flexmark.util.ast.Block;
 
 public interface BlockTracker {
     void blockAdded(Block node);

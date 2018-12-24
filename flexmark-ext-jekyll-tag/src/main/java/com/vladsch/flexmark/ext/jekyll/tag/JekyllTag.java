@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.ext.jekyll.tag;
 
-import com.vladsch.flexmark.ast.CustomNode;
+import com.vladsch.flexmark.util.ast.CustomNode;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 /**

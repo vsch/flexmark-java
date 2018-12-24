@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.ext.zzzzzz.internal;
 
-import com.vladsch.flexmark.ast.Block;
+import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.ast.Heading;
 import com.vladsch.flexmark.parser.block.BlockPreProcessor;
 import com.vladsch.flexmark.parser.block.BlockPreProcessorFactory;

@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.ext.admonition;
 
-import com.vladsch.flexmark.ast.Block;
+import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 import java.util.List;

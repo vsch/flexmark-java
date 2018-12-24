@@ -2,6 +2,8 @@ package com.vladsch.flexmark.ext.gfm.tasklist;
 
 import com.vladsch.flexmark.ast.*;
 import com.vladsch.flexmark.parser.ListOptions;
+import com.vladsch.flexmark.util.ast.BlockContent;
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 

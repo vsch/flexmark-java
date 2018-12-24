@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.html.renderer;
 
-import com.vladsch.flexmark.ast.Node;
-import com.vladsch.flexmark.ast.NodeAdaptingVisitHandler;
+import com.vladsch.flexmark.util.ast.Node;
+import com.vladsch.flexmark.util.ast.NodeAdaptingVisitHandler;
 import com.vladsch.flexmark.html.CustomNodeRenderer;
 import com.vladsch.flexmark.html.HtmlWriter;
 

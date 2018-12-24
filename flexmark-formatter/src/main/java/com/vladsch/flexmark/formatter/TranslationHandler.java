@@ -1,8 +1,6 @@
 package com.vladsch.flexmark.formatter;
 
-import com.vladsch.flexmark.ast.Document;
-import com.vladsch.flexmark.formatter.internal.MarkdownWriter;
-import com.vladsch.flexmark.formatter.internal.NodeFormatterContext;
+import com.vladsch.flexmark.util.ast.Document;
 
 import java.util.List;
 

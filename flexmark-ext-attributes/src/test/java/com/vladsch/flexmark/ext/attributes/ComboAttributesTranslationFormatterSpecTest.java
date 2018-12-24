@@ -1,13 +1,13 @@
 package com.vladsch.flexmark.ext.attributes;
 
-import com.vladsch.flexmark.IRender;
-import com.vladsch.flexmark.ast.Node;
+import com.vladsch.flexmark.util.IRender;
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.ext.anchorlink.AnchorLinkExtension;
 import com.vladsch.flexmark.ext.emoji.EmojiExtension;
 import com.vladsch.flexmark.ext.toc.TocExtension;
 import com.vladsch.flexmark.formatter.RenderPurpose;
 import com.vladsch.flexmark.formatter.TranslationHandler;
-import com.vladsch.flexmark.formatter.internal.Formatter;
+import com.vladsch.flexmark.formatter.Formatter;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.html.renderer.HeaderIdGenerator;
 import com.vladsch.flexmark.parser.Parser;

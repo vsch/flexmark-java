@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.ext.zzzzzz.internal;
 
-import com.vladsch.flexmark.ast.Node;
-import com.vladsch.flexmark.ast.NodeRepository;
+import com.vladsch.flexmark.util.ast.Node;
+import com.vladsch.flexmark.util.ast.NodeRepository;
 import com.vladsch.flexmark.ext.zzzzzz.Zzzzzz;
 import com.vladsch.flexmark.ext.zzzzzz.ZzzzzzBlock;
 import com.vladsch.flexmark.ext.zzzzzz.ZzzzzzExtension;

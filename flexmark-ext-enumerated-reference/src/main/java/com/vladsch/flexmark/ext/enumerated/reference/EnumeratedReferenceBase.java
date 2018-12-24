@@ -2,12 +2,16 @@ package com.vladsch.flexmark.ext.enumerated.reference;
 
 import com.vladsch.flexmark.ast.*;
 import com.vladsch.flexmark.ext.enumerated.reference.internal.EnumeratedReferenceRepository;
+import com.vladsch.flexmark.util.ast.CustomNode;
+import com.vladsch.flexmark.util.ast.DoNotDecorate;
+import com.vladsch.flexmark.util.ast.Document;
+import com.vladsch.flexmark.util.ast.ReferencingNode;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 /**
  * A EnumeratedReference node
  */
-public class EnumeratedReferenceBase extends CustomNode  implements DelimitedNode, DoNotDecorate, ReferencingNode<EnumeratedReferenceRepository, EnumeratedReferenceBlock> {
+public class EnumeratedReferenceBase extends CustomNode implements DelimitedNode, DoNotDecorate, ReferencingNode<EnumeratedReferenceRepository, EnumeratedReferenceBlock> {
     protected BasedSequence openingMarker = BasedSequence.NULL;
     protected BasedSequence text = BasedSequence.NULL;
     protected BasedSequence closingMarker = BasedSequence.NULL;

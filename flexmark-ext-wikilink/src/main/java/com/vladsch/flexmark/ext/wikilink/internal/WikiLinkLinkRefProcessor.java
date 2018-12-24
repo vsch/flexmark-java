@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.ext.wikilink.internal;
 
-import com.vladsch.flexmark.ast.Document;
-import com.vladsch.flexmark.ast.Node;
+import com.vladsch.flexmark.util.ast.Document;
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.ast.util.TextCollectingVisitor;
 import com.vladsch.flexmark.ext.wikilink.WikiImage;
 import com.vladsch.flexmark.ext.wikilink.WikiLink;

@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.ext.toc;
 
-import com.vladsch.flexmark.ast.CustomNode;
-import com.vladsch.flexmark.ast.DoNotDecorate;
+import com.vladsch.flexmark.util.ast.CustomNode;
+import com.vladsch.flexmark.util.ast.DoNotDecorate;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 /**

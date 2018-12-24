@@ -3,6 +3,7 @@ package com.vladsch.flexmark.ext.enumerated.reference.internal;
 import com.vladsch.flexmark.ast.*;
 import com.vladsch.flexmark.ext.enumerated.reference.EnumeratedReferenceLink;
 import com.vladsch.flexmark.ext.enumerated.reference.EnumeratedReferenceText;
+import com.vladsch.flexmark.util.ast.*;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.SegmentedSequenceBuilder;
 

@@ -1,6 +1,7 @@
 package com.vladsch.flexmark.ast.util;
 
 import com.vladsch.flexmark.ast.*;
+import com.vladsch.flexmark.util.ast.Document;
 
 public interface BlockVisitor {
     void visit(final BlockQuote node);

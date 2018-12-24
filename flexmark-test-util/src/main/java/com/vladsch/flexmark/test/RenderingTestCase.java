@@ -1,9 +1,9 @@
 package com.vladsch.flexmark.test;
 
-import com.vladsch.flexmark.IParse;
-import com.vladsch.flexmark.IRender;
-import com.vladsch.flexmark.ast.Document;
-import com.vladsch.flexmark.ast.Node;
+import com.vladsch.flexmark.util.IParse;
+import com.vladsch.flexmark.util.IRender;
+import com.vladsch.flexmark.util.ast.Document;
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.util.Utils;
 import com.vladsch.flexmark.util.options.DataHolder;

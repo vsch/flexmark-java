@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.docx.converter.util;
 
-import com.vladsch.flexmark.docx.converter.internal.DocxRendererOptions;
+import com.vladsch.flexmark.docx.converter.DocxRendererOptions;
 import com.vladsch.flexmark.util.Utils;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;

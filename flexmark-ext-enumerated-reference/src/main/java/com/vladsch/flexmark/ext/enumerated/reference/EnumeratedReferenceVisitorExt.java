@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.ext.enumerated.reference;
 
-import com.vladsch.flexmark.ast.VisitHandler;
-import com.vladsch.flexmark.ast.Visitor;
+import com.vladsch.flexmark.util.ast.VisitHandler;
+import com.vladsch.flexmark.util.ast.Visitor;
 
 public class EnumeratedReferenceVisitorExt {
     public static <V extends EnumeratedReferenceVisitor> VisitHandler<?>[] VISIT_HANDLERS(final V visitor) {

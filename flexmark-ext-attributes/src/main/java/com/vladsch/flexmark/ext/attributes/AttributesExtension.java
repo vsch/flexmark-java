@@ -2,7 +2,7 @@ package com.vladsch.flexmark.ext.attributes;
 
 import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.ext.attributes.internal.*;
-import com.vladsch.flexmark.formatter.internal.Formatter;
+import com.vladsch.flexmark.formatter.Formatter;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.html.RendererBuilder;
 import com.vladsch.flexmark.html.RendererExtension;

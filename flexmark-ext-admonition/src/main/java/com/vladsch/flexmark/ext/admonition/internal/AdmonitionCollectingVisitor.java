@@ -1,9 +1,9 @@
 package com.vladsch.flexmark.ext.admonition.internal;
 
-import com.vladsch.flexmark.ast.Node;
-import com.vladsch.flexmark.ast.NodeVisitor;
-import com.vladsch.flexmark.ast.VisitHandler;
-import com.vladsch.flexmark.ast.Visitor;
+import com.vladsch.flexmark.util.ast.Node;
+import com.vladsch.flexmark.util.ast.NodeVisitor;
+import com.vladsch.flexmark.util.ast.VisitHandler;
+import com.vladsch.flexmark.util.ast.Visitor;
 import com.vladsch.flexmark.ext.admonition.AdmonitionBlock;
 
 import java.util.LinkedHashSet;

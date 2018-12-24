@@ -2,6 +2,10 @@ package com.vladsch.flexmark.test;
 
 import com.vladsch.flexmark.ast.*;
 import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.util.ast.Node;
+import com.vladsch.flexmark.util.ast.NodeVisitor;
+import com.vladsch.flexmark.util.ast.VisitHandler;
+import com.vladsch.flexmark.util.ast.Visitor;
 import org.junit.Test;
 
 import java.util.ArrayList;

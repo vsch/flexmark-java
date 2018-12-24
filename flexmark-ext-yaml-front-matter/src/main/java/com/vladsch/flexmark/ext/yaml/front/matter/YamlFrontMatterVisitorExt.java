@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.ext.yaml.front.matter;
 
-import com.vladsch.flexmark.ast.VisitHandler;
-import com.vladsch.flexmark.ast.Visitor;
+import com.vladsch.flexmark.util.ast.VisitHandler;
+import com.vladsch.flexmark.util.ast.Visitor;
 
 public class YamlFrontMatterVisitorExt {
     public static <V extends YamlFrontMatterVisitor> VisitHandler<?>[] VISIT_HANDLERS(final V visitor) {

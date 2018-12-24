@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.samples;
 
-import com.vladsch.flexmark.ast.Node;
-import com.vladsch.flexmark.docx.converter.internal.DocxRenderer;
+import com.vladsch.flexmark.util.ast.Node;
+import com.vladsch.flexmark.docx.converter.DocxRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.profiles.pegdown.Extensions;
 import com.vladsch.flexmark.profiles.pegdown.PegdownOptionsAdapter;

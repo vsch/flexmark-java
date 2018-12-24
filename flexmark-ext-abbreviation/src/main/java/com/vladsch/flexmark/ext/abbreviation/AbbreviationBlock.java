@@ -1,8 +1,8 @@
 package com.vladsch.flexmark.ext.abbreviation;
 
-import com.vladsch.flexmark.ast.CustomBlock;
-import com.vladsch.flexmark.ast.Node;
-import com.vladsch.flexmark.ast.ReferenceNode;
+import com.vladsch.flexmark.util.ast.CustomBlock;
+import com.vladsch.flexmark.util.ast.Node;
+import com.vladsch.flexmark.util.ast.ReferenceNode;
 import com.vladsch.flexmark.ext.abbreviation.internal.AbbreviationRepository;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 

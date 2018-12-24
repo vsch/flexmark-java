@@ -1,12 +1,15 @@
 package com.vladsch.flexmark.docx.converter.internal;
 
 import com.vladsch.flexmark.ast.*;
+import com.vladsch.flexmark.docx.converter.DocxRenderer;
 import com.vladsch.flexmark.html.LinkResolver;
 import com.vladsch.flexmark.html.LinkResolverFactory;
 import com.vladsch.flexmark.html.renderer.LinkResolverContext;
 import com.vladsch.flexmark.html.renderer.LinkStatus;
 import com.vladsch.flexmark.html.renderer.ResolvedLink;
 import com.vladsch.flexmark.util.Utils;
+import com.vladsch.flexmark.util.ast.Document;
+import com.vladsch.flexmark.util.ast.Node;
 
 import java.util.Set;
 

@@ -8,6 +8,7 @@ import com.vladsch.flexmark.html.renderer.NodeRendererContext;
 import com.vladsch.flexmark.html.renderer.NodeRendererFactory;
 import com.vladsch.flexmark.html.renderer.NodeRenderingHandler;
 import com.vladsch.flexmark.spec.SpecReader;
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.DelimitedBuilder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
@@ -30,7 +31,7 @@ public class SpecExampleNodeRenderer implements NodeRenderer
 
     @Override
     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
-        return new HashSet<NodeRenderingHandler<? extends com.vladsch.flexmark.ast.Node>>(Arrays.asList(
+        return new HashSet<NodeRenderingHandler<? extends Node>>(Arrays.asList(
                 new NodeRenderingHandler<SpecExampleBlock>(SpecExampleBlock.class, new CustomNodeRenderer<SpecExampleBlock>() {
                     @Override
                     public void render(SpecExampleBlock node, NodeRendererContext context, HtmlWriter html) {

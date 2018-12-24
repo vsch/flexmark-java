@@ -1,7 +1,6 @@
 package com.vladsch.flexmark.docx.converter;
 
-import com.vladsch.flexmark.ast.Document;
-import com.vladsch.flexmark.docx.converter.internal.DocxRendererPhase;
+import com.vladsch.flexmark.util.ast.Document;
 
 import java.util.Set;
 

@@ -3,10 +3,9 @@ package com.vladsch.flexmark.ext.abbreviation.internal;
 import com.vladsch.flexmark.ext.abbreviation.Abbreviation;
 import com.vladsch.flexmark.ext.abbreviation.AbbreviationBlock;
 import com.vladsch.flexmark.ext.abbreviation.AbbreviationExtension;
-import com.vladsch.flexmark.formatter.CustomNodeFormatter;
-import com.vladsch.flexmark.formatter.TranslatingSpanRender;
-import com.vladsch.flexmark.formatter.internal.Formatter;
-import com.vladsch.flexmark.formatter.internal.*;
+import com.vladsch.flexmark.formatter.*;
+import com.vladsch.flexmark.formatter.Formatter;
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.format.options.ElementPlacement;
 import com.vladsch.flexmark.util.format.options.ElementPlacementSort;
 import com.vladsch.flexmark.util.options.DataHolder;
@@ -63,7 +62,7 @@ public class AbbreviationNodeFormatter extends NodeRepositoryFormatter<Abbreviat
 
     @Override
     public Set<NodeFormattingHandler<?>> getNodeFormattingHandlers() {
-        return new HashSet<NodeFormattingHandler<? extends com.vladsch.flexmark.ast.Node>>(Arrays.asList(
+        return new HashSet<NodeFormattingHandler<? extends Node>>(Arrays.asList(
                 new NodeFormattingHandler<Abbreviation>(Abbreviation.class, new CustomNodeFormatter<Abbreviation>() {
                     @Override
                     public void render(Abbreviation node, NodeFormatterContext context, MarkdownWriter markdown) {

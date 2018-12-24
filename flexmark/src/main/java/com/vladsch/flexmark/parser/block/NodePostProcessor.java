@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.parser.block;
 
-import com.vladsch.flexmark.ast.Document;
+import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.parser.PostProcessor;
 
 public abstract class NodePostProcessor implements PostProcessor {

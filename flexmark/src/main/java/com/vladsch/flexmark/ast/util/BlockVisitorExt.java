@@ -1,6 +1,9 @@
 package com.vladsch.flexmark.ast.util;
 
 import com.vladsch.flexmark.ast.*;
+import com.vladsch.flexmark.util.ast.Document;
+import com.vladsch.flexmark.util.ast.VisitHandler;
+import com.vladsch.flexmark.util.ast.Visitor;
 
 public class BlockVisitorExt {
     public static <V extends BlockVisitor> VisitHandler<?>[] VISIT_HANDLERS(final V visitor) {

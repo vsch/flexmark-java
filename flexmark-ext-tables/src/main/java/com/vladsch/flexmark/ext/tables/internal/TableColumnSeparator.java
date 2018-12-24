@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.ext.tables.internal;
 
-import com.vladsch.flexmark.ast.DoNotDecorate;
-import com.vladsch.flexmark.ast.Node;
+import com.vladsch.flexmark.util.ast.DoNotDecorate;
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.ext.tables.TableCell;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.CharSubSequence;

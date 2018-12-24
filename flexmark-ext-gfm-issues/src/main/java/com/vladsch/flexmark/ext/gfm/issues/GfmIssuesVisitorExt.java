@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.ext.gfm.issues;
 
-import com.vladsch.flexmark.ast.VisitHandler;
-import com.vladsch.flexmark.ast.Visitor;
+import com.vladsch.flexmark.util.ast.VisitHandler;
+import com.vladsch.flexmark.util.ast.Visitor;
 
 public class GfmIssuesVisitorExt {
     public static <V extends GfmIssuesVisitor> VisitHandler<?>[] VISIT_HANDLERS(final V visitor) {

@@ -1,9 +1,9 @@
 package com.vladsch.flexmark.ast.util;
 
 import com.vladsch.flexmark.ast.AnchorRefTarget;
-import com.vladsch.flexmark.ast.Block;
-import com.vladsch.flexmark.ast.Node;
-import com.vladsch.flexmark.ast.NodeVisitorBase;
+import com.vladsch.flexmark.util.ast.Block;
+import com.vladsch.flexmark.util.ast.Node;
+import com.vladsch.flexmark.util.ast.NodeVisitorBase;
 
 /**
  * Abstract visitor that visits only children of blocks excluding Paragraphs

@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.test;
 
-import com.vladsch.flexmark.IParse;
-import com.vladsch.flexmark.IRender;
+import com.vladsch.flexmark.util.IParse;
+import com.vladsch.flexmark.util.IRender;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.ParserEmulationProfile;

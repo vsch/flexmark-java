@@ -5,7 +5,7 @@ import com.vladsch.flexmark.ext.tables.internal.TableJiraRenderer;
 import com.vladsch.flexmark.ext.tables.internal.TableNodeFormatter;
 import com.vladsch.flexmark.ext.tables.internal.TableNodeRenderer;
 import com.vladsch.flexmark.ext.tables.internal.TableParagraphPreProcessor;
-import com.vladsch.flexmark.formatter.internal.Formatter;
+import com.vladsch.flexmark.formatter.Formatter;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.format.TableFormatOptions;

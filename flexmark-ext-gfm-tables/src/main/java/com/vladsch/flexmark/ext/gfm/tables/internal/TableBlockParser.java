@@ -1,8 +1,8 @@
 package com.vladsch.flexmark.ext.gfm.tables.internal;
 
-import com.vladsch.flexmark.ast.Block;
-import com.vladsch.flexmark.ast.BlockContent;
-import com.vladsch.flexmark.ast.Node;
+import com.vladsch.flexmark.util.ast.Block;
+import com.vladsch.flexmark.util.ast.BlockContent;
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.ext.gfm.tables.*;
 import com.vladsch.flexmark.ext.gfm.tables.TableCell.Alignment;
 import com.vladsch.flexmark.parser.InlineParser;

@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.ext.abbreviation.internal;
 
-import com.vladsch.flexmark.ast.Block;
+import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.ext.abbreviation.AbbreviationBlock;
 import com.vladsch.flexmark.ext.abbreviation.AbbreviationExtension;
 import com.vladsch.flexmark.parser.InlineParser;

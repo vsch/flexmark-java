@@ -9,6 +9,10 @@ import com.vladsch.flexmark.parser.PostProcessorFactory;
 import com.vladsch.flexmark.parser.block.NodePostProcessor;
 import com.vladsch.flexmark.parser.block.NodePostProcessorFactory;
 import com.vladsch.flexmark.util.NodeTracker;
+import com.vladsch.flexmark.util.ast.DoNotDecorate;
+import com.vladsch.flexmark.util.ast.DoNotLinkDecorate;
+import com.vladsch.flexmark.util.ast.Document;
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.html.Escaping;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.ReplacedTextMapper;
@@ -16,8 +20,6 @@ import com.vladsch.flexmark.util.sequence.ReplacedTextMapper;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import static com.vladsch.flexmark.ext.abbreviation.AbbreviationExtension.RECOMPUTE_ABBREVIATIONS_MAP;
 
 public class AbbreviationNodePostProcessor extends NodePostProcessor {
     //public static final String SINGLE_QUOTES = "'’‘";

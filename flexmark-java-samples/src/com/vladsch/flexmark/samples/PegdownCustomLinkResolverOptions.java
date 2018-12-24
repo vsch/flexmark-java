@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.samples;
 
 import com.vladsch.flexmark.ast.Link;
-import com.vladsch.flexmark.ast.Node;
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.ext.wikilink.WikiImage;
 import com.vladsch.flexmark.ext.wikilink.WikiLink;
 import com.vladsch.flexmark.html.*;

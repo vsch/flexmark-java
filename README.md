@@ -27,7 +27,7 @@ than ideal and for pathological input either hangs or practically hangs during p
 
 ### Requirements
 
-* Java 7 or above
+* Java 7 or above, Java 9+ compatible
 * Android compatibility to be added
 * The project is on Maven: `com.vladsch.flexmark`
 * The core has no dependencies; for extensions, see below
@@ -43,7 +43,7 @@ following sample:
 <dependency>
     <groupId>com.vladsch.flexmark</groupId>
     <artifactId>flexmark-all</artifactId>
-    <version>0.35.6</version>
+    <version>0.40.0</version>
 </dependency>
 ```
 
@@ -53,14 +53,10 @@ Source:
 ```java
 package com.vladsch.flexmark.samples;
 
-import com.vladsch.flexmark.ast.Node;
-import com.vladsch.flexmark.ext.gfm.strikethrough.StrikethroughExtension;
-import com.vladsch.flexmark.ext.tables.TablesExtension;
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.options.MutableDataSet;
-
-import java.util.Arrays;
 
 public class BasicSample {
     public static void main(String[] args) {
@@ -86,7 +82,7 @@ public class BasicSample {
 #### Building via Gradle
 
 ```shell
-compile 'com.vladsch.flexmark:flexmark-all:0.35.6'
+compile 'com.vladsch.flexmark:flexmark-all:0.40.0'
 ```
 
 #### Building with Android Studio

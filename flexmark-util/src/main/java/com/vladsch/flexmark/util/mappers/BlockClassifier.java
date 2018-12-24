@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.util.mappers;
 
-import com.vladsch.flexmark.ast.Block;
+import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.util.Computable;
 
 public class BlockClassifier implements Computable<Class<? extends Block>, Block> {

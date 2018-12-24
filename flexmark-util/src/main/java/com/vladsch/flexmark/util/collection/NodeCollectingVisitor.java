@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.util.collection;
 
-import com.vladsch.flexmark.ast.Node;
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.Computable;
 
 import java.util.*;

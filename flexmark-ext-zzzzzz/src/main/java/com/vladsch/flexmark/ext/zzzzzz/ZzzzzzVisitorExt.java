@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.ext.zzzzzz;
 
-import com.vladsch.flexmark.ast.VisitHandler;
-import com.vladsch.flexmark.ast.Visitor;
+import com.vladsch.flexmark.util.ast.VisitHandler;
+import com.vladsch.flexmark.util.ast.Visitor;
 
 public class ZzzzzzVisitorExt {
     public static <V extends ZzzzzzVisitor> VisitHandler<?>[] VISIT_HANDLERS(final V visitor) {

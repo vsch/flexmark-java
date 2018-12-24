@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.ext.toc.internal;
 
 import com.vladsch.flexmark.ast.Heading;
-import com.vladsch.flexmark.ast.Node;
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.ast.util.HeadingCollectingVisitor;
 import com.vladsch.flexmark.ext.toc.SimTocBlock;
 import com.vladsch.flexmark.ext.toc.SimTocContent;

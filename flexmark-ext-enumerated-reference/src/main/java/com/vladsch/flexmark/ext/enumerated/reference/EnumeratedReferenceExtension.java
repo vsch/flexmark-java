@@ -2,7 +2,7 @@ package com.vladsch.flexmark.ext.enumerated.reference;
 
 import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.ext.enumerated.reference.internal.*;
-import com.vladsch.flexmark.formatter.internal.Formatter;
+import com.vladsch.flexmark.formatter.Formatter;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.KeepType;

@@ -1,8 +1,7 @@
 package com.vladsch.flexmark.ext.gitlab.internal;
 
 import com.vladsch.flexmark.ext.gitlab.GitLabBlockQuote;
-import com.vladsch.flexmark.formatter.CustomNodeFormatter;
-import com.vladsch.flexmark.formatter.internal.*;
+import com.vladsch.flexmark.formatter.*;
 import com.vladsch.flexmark.util.options.DataHolder;
 
 import java.util.Arrays;

@@ -6,6 +6,8 @@ import com.vladsch.flexmark.ext.toc.*;
 import com.vladsch.flexmark.parser.InlineParser;
 import com.vladsch.flexmark.parser.block.*;
 import com.vladsch.flexmark.util.Pair;
+import com.vladsch.flexmark.util.ast.Block;
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.ParsedOption;
 import com.vladsch.flexmark.util.sequence.BasedSequence;

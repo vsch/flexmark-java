@@ -1,8 +1,7 @@
 package com.vladsch.flexmark.formatter;
 
-import com.vladsch.flexmark.IRender;
-import com.vladsch.flexmark.ast.Node;
-import com.vladsch.flexmark.formatter.internal.Formatter;
+import com.vladsch.flexmark.util.IRender;
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.html.renderer.HeaderIdGenerator;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.ParserEmulationProfile;

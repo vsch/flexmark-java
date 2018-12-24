@@ -1,8 +1,8 @@
 package com.vladsch.flexmark.ext.macros.internal;
 
-import com.vladsch.flexmark.ast.Block;
-import com.vladsch.flexmark.ast.BlockContent;
-import com.vladsch.flexmark.ast.Node;
+import com.vladsch.flexmark.util.ast.Block;
+import com.vladsch.flexmark.util.ast.BlockContent;
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.ext.gitlab.GitLabBlockQuote;
 import com.vladsch.flexmark.ext.gitlab.internal.GitLabBlockQuoteParser;
 import com.vladsch.flexmark.ext.macros.MacroDefinitionBlock;

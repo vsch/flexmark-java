@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.ext.jekyll.tag;
 
-import com.vladsch.flexmark.ast.VisitHandler;
-import com.vladsch.flexmark.ast.Visitor;
+import com.vladsch.flexmark.util.ast.VisitHandler;
+import com.vladsch.flexmark.util.ast.Visitor;
 
 public class JekyllTagVisitorExt {
     public static <V extends JekyllTagVisitor> VisitHandler<?>[] VISIT_HANDLERS(final V visitor) {

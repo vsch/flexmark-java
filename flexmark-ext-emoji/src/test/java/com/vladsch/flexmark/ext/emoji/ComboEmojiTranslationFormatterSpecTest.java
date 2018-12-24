@@ -1,10 +1,10 @@
 package com.vladsch.flexmark.ext.emoji;
 
-import com.vladsch.flexmark.IRender;
-import com.vladsch.flexmark.ast.Node;
+import com.vladsch.flexmark.util.IRender;
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.formatter.RenderPurpose;
 import com.vladsch.flexmark.formatter.TranslationHandler;
-import com.vladsch.flexmark.formatter.internal.Formatter;
+import com.vladsch.flexmark.formatter.Formatter;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.html.renderer.HeaderIdGenerator;
 import com.vladsch.flexmark.parser.Parser;

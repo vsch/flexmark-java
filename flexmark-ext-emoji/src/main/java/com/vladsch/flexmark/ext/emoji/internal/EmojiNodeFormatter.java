@@ -1,8 +1,7 @@
 package com.vladsch.flexmark.ext.emoji.internal;
 
 import com.vladsch.flexmark.ext.emoji.Emoji;
-import com.vladsch.flexmark.formatter.CustomNodeFormatter;
-import com.vladsch.flexmark.formatter.internal.*;
+import com.vladsch.flexmark.formatter.*;
 import com.vladsch.flexmark.util.options.DataHolder;
 
 import java.util.HashSet;

@@ -1,7 +1,8 @@
 package com.vladsch.flexmark.parser.block;
 
-import com.vladsch.flexmark.ast.Block;
-import com.vladsch.flexmark.ast.BlockContent;
+import com.vladsch.flexmark.parser.core.ParagraphParser;
+import com.vladsch.flexmark.util.ast.Block;
+import com.vladsch.flexmark.util.ast.BlockContent;
 import com.vladsch.flexmark.parser.InlineParser;
 import com.vladsch.flexmark.util.options.MutableDataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
@@ -71,7 +72,7 @@ public interface BlockParser {
     boolean isParagraphParser();
 
     /**
-     * @return get the currently accumulated block content. May or may not be implemented by any parser except for the {@link com.vladsch.flexmark.internal.ParagraphParser} or one that returns true for {@link #isParagraphParser()}
+     * @return get the currently accumulated block content. May or may not be implemented by any parser except for the {@link ParagraphParser} or one that returns true for {@link #isParagraphParser()}
      */
     BlockContent getBlockContent();
 

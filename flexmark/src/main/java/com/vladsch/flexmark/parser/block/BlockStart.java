@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.parser.block;
 
-import com.vladsch.flexmark.internal.BlockStartImpl;
+import com.vladsch.flexmark.parser.internal.BlockStartImpl;
 
 /**
  * Result object for starting parsing of a block, see static methods for constructors.

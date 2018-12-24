@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.ext.escaped.character;
 
-import com.vladsch.flexmark.ast.DoNotDecorate;
-import com.vladsch.flexmark.ast.Node;
+import com.vladsch.flexmark.util.ast.DoNotDecorate;
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 /**

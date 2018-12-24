@@ -2,12 +2,16 @@ package com.vladsch.flexmark.ext.tables.internal;
 
 import com.vladsch.flexmark.ast.*;
 import com.vladsch.flexmark.ext.tables.*;
-import com.vladsch.flexmark.internal.ReferencePreProcessorFactory;
+import com.vladsch.flexmark.parser.core.ReferencePreProcessorFactory;
 import com.vladsch.flexmark.parser.InlineParser;
 import com.vladsch.flexmark.parser.block.CharacterNodeFactory;
 import com.vladsch.flexmark.parser.block.ParagraphPreProcessor;
 import com.vladsch.flexmark.parser.block.ParagraphPreProcessorFactory;
 import com.vladsch.flexmark.parser.block.ParserState;
+import com.vladsch.flexmark.util.ast.Block;
+import com.vladsch.flexmark.util.ast.DoNotDecorate;
+import com.vladsch.flexmark.util.ast.Node;
+import com.vladsch.flexmark.util.ast.NodeIterator;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 

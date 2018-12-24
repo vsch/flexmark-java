@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.ext.xwiki.macros;
 
-import com.vladsch.flexmark.ast.VisitHandler;
-import com.vladsch.flexmark.ast.Visitor;
+import com.vladsch.flexmark.util.ast.VisitHandler;
+import com.vladsch.flexmark.util.ast.Visitor;
 
 public class MacroVisitorExt {
     public static <V extends MacroVisitor> VisitHandler<?>[] VISIT_HANDLERS(final V visitor) {

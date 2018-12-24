@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.ext.zzzzzz.internal;
 
-import com.vladsch.flexmark.ast.Document;
+import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.ext.zzzzzz.Zzzzzz;
 import com.vladsch.flexmark.ext.zzzzzz.ZzzzzzBlock;
 import com.vladsch.flexmark.html.CustomNodeRenderer;
