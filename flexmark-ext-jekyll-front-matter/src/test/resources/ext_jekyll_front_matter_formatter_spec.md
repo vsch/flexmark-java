@@ -28,11 +28,34 @@ version:
 date: '2016-06-06'
 license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 ---
-
 ````````````````````````````````
 
 
-```````````````````````````````` example(JekyllFrontMatter: 2) options(references-document-top)
+preserve whitespaces in block
+
+```````````````````````````````` example JekyllFrontMatter: 2
+---
+linters:
+  - name: linter
+    rules:
+      - name: UseIsNanNotNanComparison
+        url:  https://github.com/HairyFotr/linter/blob/master/src/test/scala/LinterPluginTest.scala#L1930
+---
+.
+---
+linters:
+  - name: linter
+    rules:
+      - name: UseIsNanNotNanComparison
+        url:  https://github.com/HairyFotr/linter/blob/master/src/test/scala/LinterPluginTest.scala#L1930
+---
+.
+Document[0, 190]
+  JekyllFrontMatterBlock[0, 189] open:[0, 3] content:[4, 186] close:[186, 189]
+````````````````````````````````
+
+
+```````````````````````````````` example(JekyllFrontMatter: 3) options(references-document-top)
 ---
 title: JekyllFrontMatter Extension Spec
 author: 
@@ -81,7 +104,6 @@ version:
 date: '2016-06-06'
 license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 ...
-
 ````````````````````````````````
 
 

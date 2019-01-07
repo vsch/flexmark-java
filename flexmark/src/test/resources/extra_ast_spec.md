@@ -6128,7 +6128,6 @@ Document[0, 61]
 Document[0, 66]
   HtmlBlock[0, 27]
   BlockQuote[32, 34] marker:[32, 33, ">"]
-    BlankLine[32, 34]
   IndentedCodeBlock[39, 49]
   HtmlBlock[54, 65]
 ````````````````````````````````

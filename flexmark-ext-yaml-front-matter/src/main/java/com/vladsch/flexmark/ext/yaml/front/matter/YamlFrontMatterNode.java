@@ -1,37 +1,58 @@
 package com.vladsch.flexmark.ext.yaml.front.matter;
 
 import com.vladsch.flexmark.util.ast.CustomNode;
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class YamlFrontMatterNode extends CustomNode {
-    private String key;
-    private List<String> values;
+    private BasedSequence key;
+    //private List<BasedSequence> values;
 
     @Override
     public BasedSequence[] getSegments() {
-        return EMPTY_SEGMENTS;
+        return new BasedSequence[] { key };
     }
 
-    public YamlFrontMatterNode(String key, List<String> values) {
+    public YamlFrontMatterNode(BasedSequence key, List<BasedSequence> values) {
         this.key = key;
-        this.values = values;
+        //this.values = values;
+        for (BasedSequence value : values) {
+            appendChild(new YamlFrontMatterValue(value));
+        }
     }
 
     public String getKey() {
+        return key.toString();
+    }
+
+    public BasedSequence getKeySequence() {
         return key;
     }
 
-    public void setKey(String key) {
+    public void setKey(BasedSequence key) {
         this.key = key;
     }
 
     public List<String> getValues() {
-        return values;
+        ArrayList<String> list = new ArrayList<>();
+        Node child = getFirstChild();
+        while (child != null) {
+            list.add(child.getChars().toString());
+            child = child.getNext();
+        }
+        return list;
     }
 
-    public void setValues(List<String> values) {
-        this.values = values;
+    public List<BasedSequence> getValuesSequences() {
+        ArrayList<BasedSequence> list = new ArrayList<>();
+        Node child = getFirstChild();
+        while (child != null) {
+            list.add(child.getChars());
+            child = child.getNext();
+        }
+        return list;
     }
 }

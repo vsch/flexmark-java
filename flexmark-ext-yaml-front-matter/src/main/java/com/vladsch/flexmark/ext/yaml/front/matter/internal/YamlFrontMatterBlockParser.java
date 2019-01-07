@@ -1,14 +1,16 @@
 package com.vladsch.flexmark.ext.yaml.front.matter.internal;
 
-import com.vladsch.flexmark.util.ast.Block;
-import com.vladsch.flexmark.util.ast.BlockContent;
 import com.vladsch.flexmark.ext.yaml.front.matter.YamlFrontMatterBlock;
 import com.vladsch.flexmark.ext.yaml.front.matter.YamlFrontMatterNode;
-import com.vladsch.flexmark.parser.core.DocumentBlockParser;
 import com.vladsch.flexmark.parser.InlineParser;
 import com.vladsch.flexmark.parser.block.*;
+import com.vladsch.flexmark.parser.core.DocumentBlockParser;
+import com.vladsch.flexmark.util.ast.Block;
+import com.vladsch.flexmark.util.ast.BlockContent;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
+import com.vladsch.flexmark.util.sequence.SegmentedSequence;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,8 +27,8 @@ public class YamlFrontMatterBlockParser extends AbstractBlockParser {
 
     private boolean inYAMLBlock;
     private boolean inLiteral;
-    private String currentKey;
-    private List<String> currentValues;
+    private BasedSequence currentKey;
+    private List<BasedSequence> currentValues;
     private YamlFrontMatterBlock block;
     private BlockContent content;
 
@@ -34,7 +36,7 @@ public class YamlFrontMatterBlockParser extends AbstractBlockParser {
         inYAMLBlock = true;
         inLiteral = false;
         currentKey = null;
-        currentValues = new ArrayList<String>();
+        currentValues = new ArrayList<>();
         block = new YamlFrontMatterBlock();
         content = new BlockContent();
     }
@@ -68,7 +70,9 @@ public class YamlFrontMatterBlockParser extends AbstractBlockParser {
         if (inYAMLBlock) {
             if (REGEX_END.matcher(line).matches()) {
                 if (currentKey != null) {
-                    block.appendChild(new YamlFrontMatterNode(currentKey, currentValues));
+                    YamlFrontMatterNode child = new YamlFrontMatterNode(currentKey, currentValues);
+                    child.setCharsFromContent();
+                    block.appendChild(child);
                 }
                 // add the last line
                 addLine(state, line);
@@ -78,16 +82,18 @@ public class YamlFrontMatterBlockParser extends AbstractBlockParser {
             Matcher matcher = REGEX_METADATA.matcher(line);
             if (matcher.matches()) {
                 if (currentKey != null) {
-                    block.appendChild(new YamlFrontMatterNode(currentKey, currentValues));
+                    YamlFrontMatterNode child = new YamlFrontMatterNode(currentKey, currentValues);
+                    child.setCharsFromContent();
+                    block.appendChild(child);
                 }
 
                 inLiteral = false;
-                currentKey = matcher.group(1);
-                currentValues = new ArrayList<String>();
+                currentKey = line.subSequence(matcher.start(1), matcher.end(1));
+                currentValues = new ArrayList<BasedSequence>();
                 if ("|".equals(matcher.group(2))) {
                     inLiteral = true;
                 } else if (!"".equals(matcher.group(2))) {
-                    currentValues.add(matcher.group(2));
+                    currentValues.add(line.subSequence(matcher.start(2), matcher.end(2)));
                 }
 
                 return BlockContinue.atIndex(state.getIndex());
@@ -96,15 +102,16 @@ public class YamlFrontMatterBlockParser extends AbstractBlockParser {
                     matcher = REGEX_METADATA_LITERAL.matcher(line);
                     if (matcher.matches()) {
                         if (currentValues.size() == 1) {
-                            currentValues.set(0, currentValues.get(0) + "\n" + matcher.group(1).trim());
+                            BasedSequence combined = SegmentedSequence.of(currentValues.get(0), PrefixedSubSequence.of("\n", line.subSequence(matcher.start(1), matcher.end(1)).trim()));
+                            currentValues.set(0, combined);
                         } else {
-                            currentValues.add(matcher.group(1).trim());
+                            currentValues.add(line.subSequence(matcher.start(1), matcher.end(1)).trim());
                         }
                     }
                 } else {
                     matcher = REGEX_METADATA_LIST.matcher(line);
                     if (matcher.matches()) {
-                        currentValues.add(matcher.group(1));
+                        currentValues.add(line.subSequence(matcher.start(1), matcher.end(1)));
                     }
                 }
 

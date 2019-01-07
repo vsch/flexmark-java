@@ -795,7 +795,6 @@ Document[0, 31]
     Paragraph[2, 9] isTrailingBlankLine
       AttributesNode[2, 8] textOpen:[2, 3, "{"] text:[3, 7, ".red"] textClose:[7, 8, "}"]
         AttributeNode[3, 7] name:[3, 4, "."] value:[4, 7, "red"] isImplicit isClass
-    BlankLine[9, 12]
     Paragraph[14, 31]
       Text[14, 30] chars:[14, 30, "block …  text"]
 ````````````````````````````````
@@ -859,7 +858,6 @@ Document[0, 29]
   BlockQuote[0, 29] marker:[0, 1, ">"]
     Paragraph[2, 17] isTrailingBlankLine
       Text[2, 16] chars:[2, 16, "Some  … graph"]
-    BlankLine[17, 20]
     Paragraph[22, 29]
       AttributesNode[22, 28] textOpen:[22, 23, "{"] text:[23, 27, ".red"] textClose:[27, 28, "}"]
         AttributeNode[23, 27] name:[23, 24, "."] value:[24, 27, "red"] isImplicit isClass

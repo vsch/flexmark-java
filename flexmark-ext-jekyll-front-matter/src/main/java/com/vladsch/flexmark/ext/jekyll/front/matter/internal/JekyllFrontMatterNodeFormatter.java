@@ -31,7 +31,9 @@ public class JekyllFrontMatterNodeFormatter implements PhasedNodeFormatter {
         if (phase == FormattingPhase.DOCUMENT_FIRST) {
             final Node node = document.getFirstChild();
             if (node instanceof JekyllFrontMatterBlock) {
+                markdown.openPreFormatted(false);
                 markdown.append(node.getChars()).blankLine();
+                markdown.closePreFormatted();
             }
         }
     }

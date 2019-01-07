@@ -730,10 +730,8 @@ Document[0, 131]
         Text[4, 15] chars:[4, 15, "block … quote"]
         SoftLineBreak[15, 16]
         Text[18, 35] chars:[18, 35, "lazy  … ation"]
-    BlankLine[36, 39]
     FencedCodeBlock[41, 85] open:[41, 44, "~~~"] info:[44, 48, "info"] content:[51, 80] lines[2] close:[82, 85, "~~~"]
       Text[51, 80] chars:[51, 80, "      … code\n"]
-    BlankLine[87, 90]
     IndentedCodeBlock[96, 111]
     OrderedList[113, 131] isTight delimiter:'.'
       OrderedListItem[113, 131] open:[113, 115, "1."] isTight

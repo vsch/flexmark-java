@@ -16,7 +16,6 @@ import com.vladsch.flexmark.parser.InlineParserFactory;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.block.*;
 import com.vladsch.flexmark.parser.delimiter.DelimiterProcessor;
-import com.vladsch.flexmark.test.AstCollectingVisitor;
 import com.vladsch.flexmark.util.Computable;
 import com.vladsch.flexmark.util.collection.ItemFactoryMap;
 import com.vladsch.flexmark.util.collection.iteration.ReversibleIterable;

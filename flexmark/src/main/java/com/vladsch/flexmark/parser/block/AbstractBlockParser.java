@@ -1,8 +1,10 @@
 package com.vladsch.flexmark.parser.block;
 
+import com.vladsch.flexmark.parser.InlineParser;
+import com.vladsch.flexmark.util.ast.BlankLine;
 import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.util.ast.BlockContent;
-import com.vladsch.flexmark.parser.InlineParser;
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.options.MutableDataHolder;
 import com.vladsch.flexmark.util.options.MutableDataSet;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
@@ -43,8 +45,9 @@ public abstract class AbstractBlockParser implements BlockParser {
 
     /**
      * should be overridden in BlockQuote, FencedCode and ListItem
-     * @return true if the blank line should be propagated to parent
+     *
      * @param lastMatchedBlockParser the last matched block parser instance
+     * @return true if the blank line should be propagated to parent
      */
     @Override
     public boolean isPropagatingLastBlankLine(BlockParser lastMatchedBlockParser) {
@@ -86,5 +89,18 @@ public abstract class AbstractBlockParser implements BlockParser {
             mutableData = new MutableDataSet();
         }
         return mutableData;
+    }
+
+    public void removeBlankLines() {
+        // need to remove blank lines, these were used to extend block quote chars to include blank lines
+        Node child = getBlock().getFirstChild();
+
+        while (child != null) {
+            Node next = child.getNext();
+            if (child instanceof BlankLine) {
+                child.unlink();
+            }
+            child = next;
+        }
     }
 }

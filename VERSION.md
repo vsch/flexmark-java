@@ -7,6 +7,7 @@ flexmark-java
 
 - [To Do](#to-do)
     - [Docx Converter](#docx-converter)
+- [0.40.2](#0402)
 - [0.40.0](#0400)
 - [0.35.8](#0358)
 - [0.35.6](#0356)
@@ -266,6 +267,22 @@ flexmark-java
 * [ ] Fix: #99, YamlFrontMatterBlockParser ignores multi-key list items
 
 &nbsp;</details>
+
+0.40.2
+------
+
+* Fix: #294, BlankLine nodes within BlockQuote change in behaviour
+  * remove blank lines from AST for `BlockQuote` and `AsideBlock` nodes if
+    `Parser.BLANK_LINES_IN_AST` is not set.
+* Fix: #292, 0.40.0: JUnit is in the compile scope
+  * remove unnecessary ast collecting visitor in `DocumentParser`
+  * add test scope to flexmark pom
+* Fix: #293, YamlFrontMatterBlock rendered as markdown does not preserve nested lists
+  * Add: `YamlFrontMatterValue` node containing yaml value(s) inserted as children of
+    `YamlFrontMatterNode`
+  * Fix: change stored key as `BasedSequence` instead of string, can be retrieved as `YamlFrontMatterNode.getKeySequence()`
+  * Add: code to return `List<String>` from child nodes of `YamlFrontMatterNode`
+  * Fix: resolve offsets in `YamlFrontMatterNode` and `YamlFrontMatterValue` nodes.
 
 0.40.0
 ------

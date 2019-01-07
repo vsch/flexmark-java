@@ -1714,7 +1714,6 @@ Document[0, 17]
   BlockQuote[0, 16] marker:[0, 1, ">"]
     Heading[2, 13] textOpen:[2, 6, "####"] text:[7, 13, "Header"]
       Text[7, 13] chars:[7, 13, "Header"]
-    BlankLine[14, 16]
 ````````````````````````````````
 
 
@@ -1737,7 +1736,6 @@ Document[0, 91]
       OrderedListItem[2, 87] open:[2, 4, "1."] isTight hadBlankLineAfter
         Paragraph[5, 87] isTrailingBlankLine
           Text[5, 86] chars:[5, 86, "The f … (\<)."]
-    BlankLine[87, 90]
 ````````````````````````````````
 
 
@@ -1810,10 +1808,8 @@ Document[0, 615]
   BlockQuote[0, 614] marker:[0, 1, ">"]
     Heading[2, 25] textOpen:[2, 7, "#####"] text:[8, 25, "8.1.2.2. End tags"]
       Text[8, 25] chars:[8, 25, "8.1.2 …  tags"]
-    BlankLine[26, 29]
     Paragraph[31, 72] isTrailingBlankLine
       Text[31, 71] chars:[31, 71, "End t … rmat:"]
-    BlankLine[72, 75]
     OrderedList[77, 611] isLoose delimiter:'.'
       OrderedListItem[77, 162] open:[77, 79, "1."] isLoose hadBlankLineAfter
         Paragraph[80, 162] isTrailingBlankLine
@@ -1838,7 +1834,6 @@ Document[0, 615]
       OrderedListItem[529, 611] open:[529, 531, "5."] isLoose hadBlankLineAfter
         Paragraph[532, 611] isTrailingBlankLine
           Text[532, 610] chars:[532, 610, "Final … (\>)."]
-    BlankLine[611, 614]
 ````````````````````````````````
 
 

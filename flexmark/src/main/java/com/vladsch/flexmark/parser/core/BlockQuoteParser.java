@@ -1,11 +1,13 @@
 package com.vladsch.flexmark.parser.core;
 
+import com.vladsch.flexmark.util.ast.BlankLine;
 import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.ast.BlockQuote;
 import com.vladsch.flexmark.ast.ListItem;
 import com.vladsch.flexmark.ast.util.Parsing;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.block.*;
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
@@ -58,6 +60,10 @@ public class BlockQuoteParser extends AbstractBlockParser {
     @Override
     public void closeBlock(ParserState state) {
         block.setCharsFromContent();
+
+        if (!state.getProperties().get(Parser.BLANK_LINES_IN_AST)) {
+            removeBlankLines();
+        }
     }
 
     @Override

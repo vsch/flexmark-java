@@ -1,5 +1,6 @@
 package com.vladsch.flexmark.ext.aside.internal;
 
+import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.core.*;
 import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.ast.util.Parsing;
@@ -49,12 +50,16 @@ public class AsideBlockParser extends AbstractBlockParser {
     @Override
     public void closeBlock(ParserState state) {
         block.setCharsFromContent();
+
+        if (!state.getProperties().get(Parser.BLANK_LINES_IN_AST)) {
+            removeBlankLines();
+        }
     }
 
     @Override
     public BlockContinue tryContinue(ParserState state) {
         int nextNonSpace = state.getNextNonSpaceIndex();
-        boolean isMarker = false;
+        boolean isMarker;
         if (!state.isBlank() && ((isMarker = isMarker(state, nextNonSpace)) || (continueToBlankLine && lastWasBlankLine == 0))) {
             int newColumn = state.getColumn() + state.getIndent();
             lastWasBlankLine = 0;

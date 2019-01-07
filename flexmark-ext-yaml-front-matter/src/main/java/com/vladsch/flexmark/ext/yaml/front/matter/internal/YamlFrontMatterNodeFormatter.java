@@ -31,7 +31,9 @@ public class YamlFrontMatterNodeFormatter implements PhasedNodeFormatter {
         if (phase == FormattingPhase.DOCUMENT_FIRST) {
             final Node node = document.getFirstChild();
             if (node instanceof YamlFrontMatterBlock) {
+                markdown.openPreFormatted(false);
                 markdown.append(node.getChars()).blankLine();
+                markdown.closePreFormatted();
             }
         }
     }
