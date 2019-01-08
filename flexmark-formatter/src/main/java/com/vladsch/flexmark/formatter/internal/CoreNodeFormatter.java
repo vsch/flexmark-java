@@ -24,8 +24,8 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static com.vladsch.flexmark.formatter.RenderPurpose.FORMAT;
 import static com.vladsch.flexmark.formatter.FormattingPhase.DOCUMENT_BOTTOM;
+import static com.vladsch.flexmark.formatter.RenderPurpose.FORMAT;
 import static com.vladsch.flexmark.util.format.options.DiscretionaryText.ADD;
 import static com.vladsch.flexmark.util.format.options.DiscretionaryText.AS_IS;
 import static com.vladsch.flexmark.util.sequence.BasedSequence.NULL;
@@ -113,22 +113,22 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
             if (context.getFormatterOptions().appendTransferredReferences) {
                 // we will transfer all references which were not part of our document
                 ArrayList<DataKey<?>> keys = new ArrayList<>();
-                
+
                 for (DataKey<?> key : document.getAll().keySet()) {
                     if (document.get(key) instanceof NodeRepository) {
                         keys.add(key);
                     }
                 }
-                
+
                 Collections.sort(keys, new Comparator<DataKey<?>>() {
                     @Override
                     public int compare(final DataKey<?> o1, final DataKey<?> o2) {
                         return o1.getName().compareTo(o2.getName());
                     }
                 });
-                
+
                 boolean firstAppend = true;
-                        
+
                 for (DataKey<?> key : keys) {
                     if (document.get(key) instanceof NodeRepository) {
                         NodeRepository repository = (NodeRepository) key.getFrom(document);
@@ -142,7 +142,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
                                     if (firstAppend) {
                                         firstAppend = false;
                                         markdown.blankLine();
-                                    } 
+                                    }
                                     context.render(node);
                                 }
                             }
@@ -387,16 +387,16 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
                 markdown.append(chars);
             } else {
                 markdown.append(stripSoftLineBreak(chars));
-            } 
+            }
         }
     }
-    
+
     private static CharSequence stripSoftLineBreak(CharSequence chars) {
         StringBuffer sb = null;
         Matcher matcher = Pattern.compile("\\s*(?:\r\n|\r|\n)\\s*").matcher(chars);
         while (matcher.find()) {
             if (sb == null) sb = new StringBuffer();
-            matcher.appendReplacement(sb," ");
+            matcher.appendReplacement(sb, " ");
         }
         if (sb != null) {
             matcher.appendTail(sb);
@@ -1112,9 +1112,54 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
         }
     }
 
+    public static void appendWhiteSpaceBetween(
+            final MarkdownWriter markdown,
+            Node prev,
+            Node next,
+            boolean preserve,
+            boolean collapse,
+            boolean collapseToEOL
+    ) {
+        if (next != null && prev != null && (preserve || collapse)) {
+            appendWhiteSpaceBetween(markdown, prev.getChars(), next.getChars(), preserve, collapse, collapseToEOL);
+        }
+    }
+
+    public static void appendWhiteSpaceBetween(
+            final MarkdownWriter markdown,
+            BasedSequence prev,
+            BasedSequence next,
+            boolean preserve,
+            boolean collapse,
+            boolean collapseToEOL
+    ) {
+        if (next != null && prev != null && (preserve || collapse)) {
+            if (prev.getEndOffset() <= next.getStartOffset()) {
+                BasedSequence sequence = prev.baseSubSequence(prev.getEndOffset(), next.getStartOffset());
+                if (!sequence.isEmpty() && sequence.isBlank()) {
+                    if (!preserve) {
+                        if (collapseToEOL && sequence.indexOfAny(BasedSequence.EOL_CHARS) != -1) {
+                            markdown.append('\n');
+                        } else {
+                            markdown.append(' ');
+                        }
+                    } else {
+                        // need to set pre-formatted or spaces after eol are ignored assuming prefixes are used
+                        int saved = markdown.getOptions();
+                        markdown.setOptions(saved | FormattingAppendable.ALLOW_LEADING_WHITESPACE);
+                        markdown.append(sequence);
+                        markdown.setOptions(saved);
+                    }
+                }
+            } else {
+                // nodes reversed due to children being rendered before the parent
+            }
+        }
+    }
+
     private void render(Image node, NodeFormatterContext context, MarkdownWriter markdown) {
         markdown.lineIf(formatterOptions.keepImageLinksAtStart);
-        if (context.isTransformingText()) {
+        if (!formatterOptions.optimizedInlineRendering || context.isTransformingText()) {
             markdown.append(node.getTextOpeningMarker());
             markdown.appendTranslating(node.getText());
             markdown.append(node.getTextClosingMarker());
@@ -1140,7 +1185,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
 
     private void render(Link node, NodeFormatterContext context, MarkdownWriter markdown) {
         markdown.lineIf(formatterOptions.keepExplicitLinksAtStart);
-        if (context.isTransformingText()) {
+        if (!formatterOptions.optimizedInlineRendering || context.isTransformingText()) {
             markdown.append(node.getTextOpeningMarker());
             if (node.getText().isNotNull()) {
                 if (node.getFirstChildAny(HtmlInline.class) != null) {
@@ -1177,7 +1222,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
     }
 
     private void render(ImageRef node, NodeFormatterContext context, MarkdownWriter markdown) {
-        if (context.isTransformingText()) {
+        if (!formatterOptions.optimizedInlineRendering || context.isTransformingText()) {
             if (node.isReferenceTextCombined()) {
                 markdown.append(node.getReferenceOpeningMarker());
                 markdown.appendTranslating(node.getReference());
@@ -1201,9 +1246,10 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
     }
 
     private void render(final LinkRef node, NodeFormatterContext context, MarkdownWriter markdown) {
-        if (context.isTransformingText()) {
+        if (!formatterOptions.optimizedInlineRendering || context.isTransformingText()) {
             if (node.isReferenceTextCombined()) {
                 markdown.append(node.getReferenceOpeningMarker());
+                appendWhiteSpaceBetween(markdown, node.getReferenceOpeningMarker(), node.getReference(), true, false, false);
                 markdown.appendTranslating(node.getReference());
                 markdown.append(node.getReferenceClosingMarker());
 
@@ -1228,6 +1274,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
                 markdown.append(node.getTextClosingMarker());
 
                 markdown.append(node.getReferenceOpeningMarker());
+                appendWhiteSpaceBetween(markdown, node.getReferenceOpeningMarker(), node.getReference(), true, false, false);
                 markdown.appendTranslating(node.getReference());
                 markdown.append(node.getReferenceClosingMarker());
             }

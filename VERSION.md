@@ -7,6 +7,7 @@ flexmark-java
 
 - [To Do](#to-do)
     - [Docx Converter](#docx-converter)
+- [0.40.4](#0404)
 - [0.40.2](#0402)
 - [0.40.0](#0400)
 - [0.35.8](#0358)
@@ -268,6 +269,16 @@ flexmark-java
 
 &nbsp;</details>
 
+0.40.4
+------
+
+* Fix: #295, CoreNodeFormatter does not descend into children on Link nodes
+  * `Link`, `LinkRef`, `Image` and `ImageRef` node formatter renderer now descends into child nodes during
+    all formatting, not just translation formatting.
+* Add: `Formatter.OPTIMIZED_INLINE_RENDERING` default `false`. When set to `true` will use
+  previous rendering for links and images which appends the node characters without descending
+  into child nodes.
+
 0.40.2
 ------
 
@@ -449,7 +460,7 @@ flexmark-java
   except for the last item in the list. Now all trailing blank lines are moved out to the parent
   list. Therefore children of lists can be list items or blank lines, not just list items. This
   makes blank line attribution more consistent.
-* Fix: #287, ''flexmark-html-parser' The module has an mistake
+* Fix: #287, 'flexmark-html-parser' The module has an mistake
 * Fix: empty table cells now contain a space so that the position of the cell's text in the file
   is not lost.
 * Fix: Formatter inline elements leaving embedded EOL sequences when

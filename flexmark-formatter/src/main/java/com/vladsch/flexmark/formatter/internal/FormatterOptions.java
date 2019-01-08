@@ -47,6 +47,7 @@ public class FormatterOptions {
     public final boolean keepHardLineBreaks;
     public final boolean keepSoftLineBreaks;
     public final boolean appendTransferredReferences;
+    public final boolean optimizedInlineRendering;
     public final CharWidthProvider charWidthProvider;
     //public final TrailingSpaces keepTrailingSpaces;
     //public final TrailingSpaces codeKeepTrailingSpaces;
@@ -92,6 +93,7 @@ public class FormatterOptions {
         keepHardLineBreaks = Formatter.KEEP_HARD_LINE_BREAKS.getFrom(options);
         keepSoftLineBreaks = Formatter.KEEP_SOFT_LINE_BREAKS.getFrom(options);
         appendTransferredReferences = Formatter.APPEND_TRANSFERRED_REFERENCES.getFrom(options);
+        optimizedInlineRendering = Formatter.OPTIMIZED_INLINE_RENDERING.getFrom(options);
         //keepTrailingSpaces = Formatter.KEEP_TRAILING_SPACES.getFrom(options);
         //codeKeepTrailingSpaces = Formatter.CODE_KEEP_TRAILING_SPACES.getFrom(options);
     }

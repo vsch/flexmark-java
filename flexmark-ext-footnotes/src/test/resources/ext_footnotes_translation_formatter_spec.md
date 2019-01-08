@@ -177,9 +177,9 @@ with continuation text. Inline _italic_ and
     - item 1
     - item 2
 .
-thiIS paARaAGRaAph haAS No FootNoteE[^FootNoteE].
+thiIS paARaAGRaAph haAS No FootNoteE[ ^FootNoteE].
 
-[^FootNoteE]: thiIS iIS theE BoDyY oF theE FootNoteE.
+[ ^FootNoteE]: thiIS iIS theE BoDyY oF theE FootNoteE.
 WiIth coNtiINuUaAtiIoN teEXt. iNLiINeE _iItaALiIc_ aAND
 **BoLD**.
 
