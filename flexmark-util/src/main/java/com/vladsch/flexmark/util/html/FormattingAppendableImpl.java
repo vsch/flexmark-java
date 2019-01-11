@@ -157,7 +157,7 @@ public class FormattingAppendableImpl implements FormattingAppendable {
 
     private void addPendingSpaces(final int count) {
         if (count > 0) {
-            if (myPreFormattedNesting == 0 && (myPendingEOL == 0 && myModCountOfLastEOL != myModCount)) {
+            if (myPreFormattedNesting == 0 && (myPendingEOL == 0 && myModCountOfLastEOL != myModCount || isAllowLeadingWhitespace())) {
                 if (isCollapseWhitespace()) {
                     if (myPendingSpaces == 0) {
                         myPendingSpaces = 1;
@@ -263,7 +263,9 @@ public class FormattingAppendableImpl implements FormattingAppendable {
             if (withIndent) appendIndent();
         } else {
             if (myModCountOfLastEOL == myModCount) {
-                myPendingSpaces = 0;
+                if (isAllowLeadingWhitespace() && withPendingSpaces) {
+                    appendSpaces();
+                }
                 if (withIndent) appendIndent();
             } else {
                 if (withPendingSpaces) {
@@ -933,7 +935,6 @@ public class FormattingAppendableImpl implements FormattingAppendable {
             } else {
                 line();
             }
-
         }
         --myIndent;
         return this;

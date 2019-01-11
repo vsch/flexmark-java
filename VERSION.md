@@ -7,6 +7,7 @@ flexmark-java
 
 - [To Do](#to-do)
     - [Docx Converter](#docx-converter)
+- [0.40.6](#0406)
 - [0.40.4](#0404)
 - [0.40.2](#0402)
 - [0.40.0](#0400)
@@ -268,6 +269,17 @@ flexmark-java
 * [ ] Fix: #99, YamlFrontMatterBlockParser ignores multi-key list items
 
 &nbsp;</details>
+
+0.40.6
+------
+
+* Fix: `MarkdownTable.appendTable(FormattingAppendable)` to set
+  `FormattingAppendable.ALLOW_LEADING_WHITESPACE` so indentation prefix is not eliminated.
+* Fix: `FormattingAppendableImpl` to not skip pending spaces if
+  `FormattingAppendable.ALLOW_LEADING_WHITESPACE` is selected, these will be prefixed before
+  indent.
+* Add: `FlexmarkHtmlParser.SKIP_LINKS`, default `false`. When true links are converted to text
+  part of the link.
 
 0.40.4
 ------

@@ -2535,6 +2535,45 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         assertEquals(pos + 38, offset);
     }
 
+    @Test
+    public void test_indentPrefix() {
+        String markdown = "" +
+                "| c | d |\n" +
+                "| --- | --- |\n" +
+                "| ^*a | b* |\n" +
+                "| `e | f` |\n" +
+                "| [g | h](http://a.com) |\n" +
+                "";
+
+        int pos = markdown.indexOf("^");
+        BasedSequence source = BasedSequenceImpl.of(markdown.substring(0, pos) + markdown.substring(pos + 1));
+        MarkdownTable table = getTable(source, formatOptions("", null).toMutable().set(TablesExtension.FORMAT_TABLE_FILL_MISSING_COLUMNS, false).set(TablesExtension.FORMAT_TABLE_INDENT_PREFIX, "    "));
+        table.fillMissingColumns();
+        
+        assertTrue(table.addTrackedOffset(pos, true, true));
+        HtmlWriter out = new HtmlWriter(new StringBuilder(), 0, HtmlWriter.FORMAT_ALL);
+        table.appendTable(out);
+        String formattedTable = out.getText();
+        Map<Integer, Integer> offsets = table.getTrackedOffsets();
+        int offset = offsets.get(pos);
+
+        assertEquals("" +
+                "    | c                     | d  |\n" +
+                "    |:----------------------|:---|\n" +
+                "    | *a | b*               |    |\n" +
+                "    | `e | f`               |    |\n" +
+                "    | [g | h](http://a.com) |    |\n" +
+                "", formattedTable);
+        assertEquals("" +
+                "    | c                     | d  |\n" +
+                "    |:----------------------|:---|\n" +
+                "    | ^*a | b*               |    |\n" +
+                "    | `e | f`               |    |\n" +
+                "    | [g | h](http://a.com) |    |\n" +
+                "", formattedTable.substring(0, offset) + "^" + formattedTable.substring(offset));
+        assertEquals(pos + 50, offset);
+    }
+
     // these are tested with manipulators
     @Test
     public void allRows() {

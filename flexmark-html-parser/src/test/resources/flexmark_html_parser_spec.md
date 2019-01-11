@@ -1168,6 +1168,34 @@ http://example.com
 ````````````````````````````````
 
 
+```````````````````````````````` example(Links: 13) options(skip-links)
+http://example.com
+.
+<a href="http://example.com">http://example.com</a>
+````````````````````````````````
+
+
+```````````````````````````````` example(Links: 14) options(skip-links)
+http://example.com
+.
+<a href="http://example.com" title="Title">http://example.com</a>
+````````````````````````````````
+
+
+```````````````````````````````` example(Links: 15) options(skip-links)
+\[Text **Bold** \]
+.
+<a href="http://example.com">[Text <b>Bold</b>]</a>
+````````````````````````````````
+
+
+```````````````````````````````` example(Links: 16) options(skip-links, skip-inline-strong)
+\[Text Bold \]
+.
+<a href="http://example.com">[Text <b>Bold</b>]</a>
+````````````````````````````````
+
+
 ## Images
 
 Not images

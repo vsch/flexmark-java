@@ -99,6 +99,7 @@ public class FlexmarkHtmlParser {
     public static final DataKey<Boolean> SKIP_HEADING_6 = new DataKey<>("SKIP_HEADING_6", false);
     public static final DataKey<Boolean> SKIP_ATTRIBUTES = new DataKey<>("SKIP_ATTRIBUTES", false);
     public static final DataKey<Boolean> SKIP_FENCED_CODE = new DataKey<>("SKIP_FENCED_CODE", false);
+    public static final DataKey<Boolean> SKIP_LINKS = new DataKey<>("SKIP_LINKS", false);
     public static final DataKey<Boolean> SKIP_CHAR_ESCAPE = new DataKey<>("SKIP_CHAR_ESCAPE", false);
 
     public static final DataKey<ExtensionConversion> EXT_INLINE_STRONG = new DataKey<>("EXT_INLINE_STRONG", ExtensionConversion.MARKDOWN);
@@ -795,7 +796,7 @@ public class FlexmarkHtmlParser {
                     out.append(text);
                     if (myOptions.wrapAutoLinks) out.append('>');
                     transferIdToParent();
-                } else if (!href.startsWith("javascript:")) {
+                } else if (!myOptions.skipLinks && !href.startsWith("javascript:")) {
                     out.append('[');
                     out.append(text);
                     out.append(']');

@@ -44,6 +44,7 @@ public class HtmlParserOptions implements MutableDataSetter {
     public boolean skipHeading6;
     public boolean skipAttributes;
     public boolean skipFencedCode;
+    public boolean skipLinks;
     public boolean skipCharEscape;
     public ExtensionConversion extInlineStrong;
     public ExtensionConversion extInlineEmphasis;
@@ -104,6 +105,7 @@ public class HtmlParserOptions implements MutableDataSetter {
         skipHeading6 = other.skipHeading6;
         skipAttributes = other.skipAttributes;
         skipFencedCode = other.skipFencedCode;
+        skipLinks = other.skipLinks;
         skipCharEscape = other.skipCharEscape;
         extInlineStrong = other.extInlineStrong;
         extInlineEmphasis = other.extInlineEmphasis;
@@ -161,6 +163,7 @@ public class HtmlParserOptions implements MutableDataSetter {
         skipHeading6 = FlexmarkHtmlParser.SKIP_HEADING_6.getFrom(options);
         skipAttributes = FlexmarkHtmlParser.SKIP_ATTRIBUTES.getFrom(options);
         skipFencedCode = FlexmarkHtmlParser.SKIP_FENCED_CODE.getFrom(options);
+        skipLinks = FlexmarkHtmlParser.SKIP_LINKS.getFrom(options);
         skipCharEscape = FlexmarkHtmlParser.SKIP_CHAR_ESCAPE.getFrom(options);
         extInlineStrong = FlexmarkHtmlParser.EXT_INLINE_STRONG.getFrom(options);
         extInlineEmphasis = FlexmarkHtmlParser.EXT_INLINE_EMPHASIS.getFrom(options);
@@ -219,6 +222,7 @@ public class HtmlParserOptions implements MutableDataSetter {
         dataHolder.set(FlexmarkHtmlParser.SKIP_HEADING_6, skipHeading6);
         dataHolder.set(FlexmarkHtmlParser.SKIP_ATTRIBUTES, skipAttributes);
         dataHolder.set(FlexmarkHtmlParser.SKIP_FENCED_CODE, skipFencedCode);
+        dataHolder.set(FlexmarkHtmlParser.SKIP_LINKS, skipLinks);
         dataHolder.set(FlexmarkHtmlParser.SKIP_CHAR_ESCAPE, skipCharEscape);
         dataHolder.set(FlexmarkHtmlParser.EXT_INLINE_STRONG, extInlineStrong);
         dataHolder.set(FlexmarkHtmlParser.EXT_INLINE_EMPHASIS, extInlineEmphasis);

@@ -60,6 +60,7 @@ public class ComboFlexmarkHtmlParserTest extends ComboSpecTestCase {
         optionsMap.put("skip-heading-6", new MutableDataSet().set(FlexmarkHtmlParser.SKIP_HEADING_6, true));
         optionsMap.put("skip-attributes", new MutableDataSet().set(FlexmarkHtmlParser.SKIP_ATTRIBUTES, true));
         optionsMap.put("skip-fenced-code", new MutableDataSet().set(FlexmarkHtmlParser.SKIP_FENCED_CODE, true));
+        optionsMap.put("skip-links", new MutableDataSet().set(FlexmarkHtmlParser.SKIP_LINKS, true));
         optionsMap.put("skip-char-escape", new MutableDataSet().set(FlexmarkHtmlParser.SKIP_CHAR_ESCAPE, true));
         optionsMap.put("text-ext-inline-strong", new MutableDataSet().set(FlexmarkHtmlParser.EXT_INLINE_STRONG, ExtensionConversion.TEXT));
         optionsMap.put("text-ext-inline-emphasis", new MutableDataSet().set(FlexmarkHtmlParser.EXT_INLINE_EMPHASIS, ExtensionConversion.TEXT));
