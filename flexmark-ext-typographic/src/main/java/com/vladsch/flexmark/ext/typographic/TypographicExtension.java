@@ -29,6 +29,7 @@ public class TypographicExtension implements Parser.ParserExtension, HtmlRendere
      * @deprecated use {@link #ENABLE_SMARTS}
      */
     public static final DataKey<Boolean> TYPOGRAPHIC_SMARTS = ENABLE_SMARTS;
+    
     public static final DataKey<String> ANGLE_QUOTE_CLOSE = new DataKey<>("ANGLE_QUOTE_CLOSE", "&raquo;");
     public static final DataKey<String> ANGLE_QUOTE_OPEN = new DataKey<>("ANGLE_QUOTE_OPEN", "&laquo;");
     public static final DataKey<String> ANGLE_QUOTE_UNMATCHED = new DataKey<>("ANGLE_QUOTE_UNMATCHED", (String) null);
@@ -68,7 +69,9 @@ public class TypographicExtension implements Parser.ParserExtension, HtmlRendere
             parserBuilder.customDelimiterProcessor(new SingleQuoteDelimiterProcessor(options));
             parserBuilder.customDelimiterProcessor(new DoubleQuoteDelimiterProcessor(options));
         }
-        if (ENABLE_SMARTS.getFrom(parserBuilder)) parserBuilder.customInlineParserExtensionFactory(new SmartsInlineParser.Factory());
+        if (ENABLE_SMARTS.getFrom(parserBuilder)) {
+            parserBuilder.customInlineParserExtensionFactory(new SmartsInlineParser.Factory());
+        }
     }
 
     @Override

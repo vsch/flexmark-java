@@ -2,14 +2,18 @@ package com.vladsch.flexmark.ext.attributes.internal;
 
 import com.vladsch.flexmark.ast.*;
 import com.vladsch.flexmark.ext.attributes.AttributeNode;
+import com.vladsch.flexmark.ext.attributes.AttributesDelimiter;
 import com.vladsch.flexmark.ext.attributes.AttributesExtension;
 import com.vladsch.flexmark.ext.attributes.AttributesNode;
 import com.vladsch.flexmark.parser.block.NodePostProcessor;
 import com.vladsch.flexmark.parser.block.NodePostProcessorFactory;
 import com.vladsch.flexmark.util.NodeTracker;
 import com.vladsch.flexmark.util.ast.BlankLine;
+import com.vladsch.flexmark.util.ast.DoNotAttributeDecorate;
 import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.Node;
+
+import java.util.ArrayList;
 
 public class AttributesNodePostProcessor extends NodePostProcessor {
     private final NodeAttributeRepository nodeAttributeRepository;
@@ -21,7 +25,7 @@ public class AttributesNodePostProcessor extends NodePostProcessor {
     }
 
     public Node getAttributeOwner(NodeTracker state, AttributesNode attributesNode) {
-        Node previous = attributesNode.getPreviousAnyNot(BlankLine.class);
+        Node previous = attributesNode.getPreviousAnyNot(BlankLine.class, DoNotAttributeDecorate.class);
         Node next = attributesNode.getNext();
         Node attributeOwner;
         Node parent = attributesNode.getParent();
@@ -91,7 +95,110 @@ public class AttributesNodePostProcessor extends NodePostProcessor {
                     attributeOwner = parent;
                 }
             } else {
-                // attached, attributes go to previous node
+                // attached, attributes go to previous node, but may need to wrap spans containing DoNotAttributeDecorate in TextBase
+                if (myOptions.wrapNonAttributeText) {
+                    // find first previous not delimited by attribute
+                    Node first = attributesNode.getPrevious();
+                    Node lastNonAttributesNode = null;
+                    boolean hadDoNotDecorate = false;
+                    
+                    while (first != null && !(first instanceof AttributesNode)) {
+                        if (first instanceof DoNotAttributeDecorate) {
+                            hadDoNotDecorate = true;
+                        }
+                        lastNonAttributesNode = first;
+                        first = first.getPrevious();
+                    }
+
+                    if (hadDoNotDecorate) {
+                        // need to wrap in text base from first to attribute node
+                        TextBase textBase = new TextBase();
+                        while (lastNonAttributesNode != attributesNode) {
+                            Node nextNode = lastNonAttributesNode.getNext();
+                            lastNonAttributesNode.unlink();
+                            state.nodeRemoved(lastNonAttributesNode);
+                            textBase.appendChild(lastNonAttributesNode);
+                            lastNonAttributesNode = nextNode;
+                        }
+
+                        textBase.setCharsFromContent();
+                        attributesNode.insertBefore(textBase);
+                        state.nodeAddedWithDescendants(textBase);
+                        previous = textBase;
+                    }
+                }
+
+                if (myOptions.useEmptyImplicitAsSpanDelimiter) {
+                    // find first previous not delimited by unmatched attribute
+                    Node first = attributesNode.getPrevious();
+                    Node lastNonAttributesNode = null;
+                    boolean hadAttributeDelimiter = false;
+                    ArrayList<Node> unmatchedAttributes = new ArrayList<>();
+
+                    while (first != null) {
+                        if (first instanceof AttributesDelimiter) {
+                            if (!unmatchedAttributes.isEmpty()) {
+                                // match it and wrap in text
+                                Node lastNode = unmatchedAttributes.remove(unmatchedAttributes.size()-1);
+                                lastNonAttributesNode = first.getNext();
+                                if (lastNode != lastNonAttributesNode) {
+                                    TextBase textBase = new TextBase();
+
+                                    while (lastNonAttributesNode != lastNode) {
+                                        Node nextNode = lastNonAttributesNode.getNext();
+                                        lastNonAttributesNode.unlink();
+                                        state.nodeRemoved(lastNonAttributesNode);
+                                        textBase.appendChild(lastNonAttributesNode);
+                                        lastNonAttributesNode = nextNode;
+                                    }
+                                    textBase.setCharsFromContent();
+                                    lastNode.insertBefore(textBase);
+                                    state.nodeAddedWithDescendants(textBase);
+                                    lastNonAttributesNode = textBase;
+                                } else {
+                                    previous = first;
+                                }
+                            } else {
+                                // unmatched delimiter is our start span
+                                TextBase textBase = new TextBase();
+                                lastNonAttributesNode = first.getNext();
+
+                                if (lastNonAttributesNode != attributesNode) {
+                                    while (lastNonAttributesNode != attributesNode) {
+                                        Node nextNode = lastNonAttributesNode.getNext();
+                                        lastNonAttributesNode.unlink();
+                                        state.nodeRemoved(lastNonAttributesNode);
+                                        textBase.appendChild(lastNonAttributesNode);
+                                        lastNonAttributesNode = nextNode;
+                                    }
+
+                                    textBase.setCharsFromContent();
+                                    attributesNode.insertBefore(textBase);
+                                    state.nodeAddedWithDescendants(textBase);
+                                    previous = textBase;
+                                } else {
+                                    previous = first;
+                                }
+                                break;
+                            }
+                        } else if (first instanceof AttributesNode) {
+                            unmatchedAttributes.add(first);
+                        } else {
+                            lastNonAttributesNode = first;
+                        }
+                        
+                        first = first.getPrevious();
+                    }
+
+                    if (!unmatchedAttributes.isEmpty()) {
+                        // use the first unmatched as our end of attribute span
+                        previous = unmatchedAttributes.get(0);
+                        if (previous.getNext() != attributesNode) {
+                            previous = previous.getNext();
+                        }
+                    }
+                }
+
                 if (previous instanceof Text) {
                     // insert text base where text was
                     TextBase textBase = new TextBase(previous.getChars());
@@ -102,6 +209,9 @@ public class AttributesNodePostProcessor extends NodePostProcessor {
                     textBase.appendChild(previous);
                     state.nodeAddedWithChildren(textBase);
                     attributeOwner = textBase;
+                } else if (previous instanceof AttributesDelimiter) {
+                    // no owner, attributes go into aether
+                    attributeOwner = null;
                 } else {
                     if (previous instanceof AttributesNode) {
                         // we are spliced right up against previous attributes, give our attributes to the owner of previous attributes
@@ -157,15 +267,17 @@ public class AttributesNodePostProcessor extends NodePostProcessor {
             }
 
             Node attributeOwner = getAttributeOwner(state, attributesNode);
-            nodeAttributeRepository.put(attributeOwner, attributesNode);
+            if (attributeOwner != null) {
+                nodeAttributeRepository.put(attributeOwner, attributesNode);
 
-            // set the heading id for this node so the correct id will be used
-            if (attributeOwner instanceof AnchorRefTarget) {
-                for (Node attributeNode : attributesNode.getReversedChildren()) {
-                    if (attributeNode instanceof AttributeNode) {
-                        if (((AttributeNode) attributeNode).isId()) {
-                            ((AnchorRefTarget) attributeOwner).setAnchorRefId(((AttributeNode) attributeNode).getValue().toString());
-                            break;
+                // set the heading id for this node so the correct id will be used
+                if (attributeOwner instanceof AnchorRefTarget) {
+                    for (Node attributeNode : attributesNode.getReversedChildren()) {
+                        if (attributeNode instanceof AttributeNode) {
+                            if (((AttributeNode) attributeNode).isId()) {
+                                ((AnchorRefTarget) attributeOwner).setAnchorRefId(((AttributeNode) attributeNode).getValue().toString());
+                                break;
+                            }
                         }
                     }
                 }

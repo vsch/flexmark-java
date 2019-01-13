@@ -34,6 +34,7 @@ Document[0, 12]
     Text[10, 11] chars:[10, 11, "b"]
 ````````````````````````````````
 
+not quoted
 
 ```````````````````````````````` example TypographicQuotes: 2
 a"l"ordre"b

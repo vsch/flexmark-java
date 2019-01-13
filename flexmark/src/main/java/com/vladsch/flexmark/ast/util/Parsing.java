@@ -13,6 +13,9 @@ public class Parsing {
     public static final char INTELLIJ_DUMMY_IDENTIFIER_CHAR = TableFormatOptions.INTELLIJ_DUMMY_IDENTIFIER_CHAR;
     public static final String INTELLIJ_DUMMY_IDENTIFIER = TableFormatOptions.INTELLIJ_DUMMY_IDENTIFIER;
 
+    // save options for others to use when only parsing instance is available
+    public final DataHolder options;
+    
     public final String ADDITIONAL_CHARS;
     public final String EXCLUDED_0_TO_SPACE;
 
@@ -88,6 +91,7 @@ public class Parsing {
     public final String REG_CHAR_SP_PARENS;
 
     public Parsing(DataHolder options) {
+        this.options = options;
         this.intellijDummyIdentifier = Parser.INTELLIJ_DUMMY_IDENTIFIER.getFrom(options);
         this.htmlForTranslator = Parser.HTML_FOR_TRANSLATOR.getFrom(options);
         this.translationHtmlInlineTagPattern = Parser.TRANSLATION_HTML_INLINE_TAG_PATTERN.getFrom(options);

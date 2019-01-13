@@ -1,12 +1,13 @@
 package com.vladsch.flexmark.ext.typographic;
 
+import com.vladsch.flexmark.util.ast.DoNotAttributeDecorate;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 /**
  * A TypographicSmarts node
  */
-public class TypographicSmarts extends Node {
+public class TypographicSmarts extends Node implements DoNotAttributeDecorate {
     private String typographicText;
 
     public TypographicSmarts() {

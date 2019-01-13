@@ -280,6 +280,20 @@ flexmark-java
   indent.
 * Add: `FlexmarkHtmlParser.SKIP_LINKS`, default `false`. When true links are converted to text
   part of the link.
+* Add: `DoNotAttributeDecorate` interface to be implemented by all text nodes which do not
+  result in span-like rendering of their text, such as `TypographicSmarts`, `TypographicQuotes`
+  and `SoftLineBreak` but will erroneously create a break in the text and mess up attribute
+  assignment to text spans.
+* Add: `AttributesExtension.WRAP_NON_ATTRIBUTE_TEXT`, default `true`. When `false` does not wrap
+  nodes marked as `DoNotAttributeDecorate` in `TextBase`. When `true`, will allow intuitive
+  attribute processing for text containing `DoNotAttributeDecorate` as single text span instead
+  of one interrupted by the typographic smarts nodes.
+* Fix: `AttributesExtension` incorrectly parsed invalid empty sequences and absorbed the text
+  instead of skipping it. ie. `{}`, `{ }`, `{#}` and `{.}`
+* Add: `AttributesExtension.USE_EMPTY_IMPLICIT_AS_SPAN_DELIMITER`, default `false`. When set to
+  `true` will treat `{#}` or `{.}`, without embedded spaced, as start attribute span delimiter to
+  mark start of attribute assignment to text between `{.}` or `{#}` and the matching attributes
+  element. 
 
 0.40.4
 ------

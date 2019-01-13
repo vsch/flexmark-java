@@ -36,5 +36,7 @@
     <orderEntry type="module" module-name="flexmark-ext-definition" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-ext-tables" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-formatter" />
+    <orderEntry type="module" module-name="flexmark-ext-typographic" scope="TEST" />
+    <orderEntry type="module" module-name="flexmark-ext-escaped-character" scope="TEST" />
   </component>
 </module>

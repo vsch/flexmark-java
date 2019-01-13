@@ -95,6 +95,14 @@ For the rest of the specification the `options` following the example will conta
   * else
     * Cond 1.3 attributes are assigned to the text element
 
+To allow greater control of attribute assignment it is possible to set
+`USE_EMPTY_IMPLICIT_AS_SPAN_DELIMITER` to `true`, will treat `{.}` or `{#}` as markers for start
+of closest matching attributes node to give greater control of where attributes are attached in
+text.
+
+**NOTE**: If `ASSIGN_TEXT_ATTRIBUTES` is set to `false` then
+`USE_EMPTY_IMPLICIT_AS_SPAN_DELIMITER` option is ignored.
+
 attributes assigned to paragraph
 
 ```````````````````````````````` example(Text Node Previous Sibling: 1) options(no-text-attributes)
@@ -1772,9 +1780,547 @@ Document[0, 162]
 ````````````````````````````````
 
 
-## Trailing Spaces
+## Non-Attributes
 
-```````````````````````````````` example Trailing Spaces: 1
+wrap non-attributes by default
+
+```````````````````````````````` example Non-Attributes: 1
+This is a test. It works fine until a word like don't appears.{.style} Another style might follow.{.style2}
+.
+<p><span class="style">This is a test. It works fine until a word like don&rsquo;t appears.</span><span class="style2"> Another style might follow.</span></p>
+.
+Document[0, 108]
+  Paragraph[0, 108]
+    TextBase[0, 62] chars:[0, 62, "This  … ears."]
+      Text[0, 51] chars:[0, 51, "This  … e don"]
+      TypographicSmarts[51, 52] typographic: &rsquo; 
+      Text[52, 62] chars:[52, 62, "t appears."]
+    AttributesNode[62, 70] textOpen:[62, 63, "{"] text:[63, 69, ".style"] textClose:[69, 70, "}"]
+      AttributeNode[63, 69] name:[63, 64, "."] value:[64, 69, "style"] isImplicit isClass
+    TextBase[70, 98] chars:[70, 98, " Anot … llow."]
+      Text[70, 98] chars:[70, 98, " Anot … llow."]
+    AttributesNode[98, 107] textOpen:[98, 99, "{"] text:[99, 106, ".style2"] textClose:[106, 107, "}"]
+      AttributeNode[99, 106] name:[99, 100, "."] value:[100, 106, "style2"] isImplicit isClass
+````````````````````````````````
+
+
+```````````````````````````````` example Non-Attributes: 2
+This is a test. It works fine until a word like 'don't' appears.{.style} Another style might
+follow.{.style2}
+.
+<p><span class="style">This is a test. It works fine until a word like &lsquo;don&rsquo;t&rsquo; appears.</span><span class="style2"> Another style might
+follow.</span></p>
+.
+Document[0, 110]
+  Paragraph[0, 110]
+    TextBase[0, 64] chars:[0, 64, "This  … ears."]
+      Text[0, 48] chars:[0, 48, "This  … like "]
+      TypographicQuotes[48, 55] typographicOpening: &lsquo;  typographicClosing: &rsquo;  textOpen:[48, 49, "'"] text:[49, 54, "don't"] textClose:[54, 55, "'"]
+        Text[49, 52] chars:[49, 52, "don"]
+        TypographicSmarts[52, 53] typographic: &rsquo; 
+        Text[53, 54] chars:[53, 54, "t"]
+      Text[55, 64] chars:[55, 64, " appears."]
+    AttributesNode[64, 72] textOpen:[64, 65, "{"] text:[65, 71, ".style"] textClose:[71, 72, "}"]
+      AttributeNode[65, 71] name:[65, 66, "."] value:[66, 71, "style"] isImplicit isClass
+    TextBase[72, 100] chars:[72, 100, " Anot … llow."]
+      Text[72, 92] chars:[72, 92, " Anot … might"]
+      SoftLineBreak[92, 93]
+      Text[93, 100] chars:[93, 100, "follow."]
+    AttributesNode[100, 109] textOpen:[100, 101, "{"] text:[101, 108, ".style2"] textClose:[108, 109, "}"]
+      AttributeNode[101, 108] name:[101, 102, "."] value:[102, 108, "style2"] isImplicit isClass
+````````````````````````````````
+
+
+```````````````````````````````` example Non-Attributes: 3
+This is a test. It works fine until a word like don\'t appears.{.style} Another style might
+follow.{.style2}
+.
+<p><span class="style">This is a test. It works fine until a word like don't appears.</span><span class="style2"> Another style might
+follow.</span></p>
+.
+Document[0, 109]
+  Paragraph[0, 109]
+    TextBase[0, 63] chars:[0, 63, "This  … ears."]
+      Text[0, 51] chars:[0, 51, "This  … e don"]
+      EscapedCharacter[51, 53] textOpen:[51, 52, "\"] text:[52, 53, "'"]
+      Text[53, 63] chars:[53, 63, "t appears."]
+    AttributesNode[63, 71] textOpen:[63, 64, "{"] text:[64, 70, ".style"] textClose:[70, 71, "}"]
+      AttributeNode[64, 70] name:[64, 65, "."] value:[65, 70, "style"] isImplicit isClass
+    TextBase[71, 99] chars:[71, 99, " Anot … llow."]
+      Text[71, 91] chars:[71, 91, " Anot … might"]
+      SoftLineBreak[91, 92]
+      Text[92, 99] chars:[92, 99, "follow."]
+    AttributesNode[99, 108] textOpen:[99, 100, "{"] text:[100, 107, ".style2"] textClose:[107, 108, "}"]
+      AttributeNode[100, 107] name:[100, 101, "."] value:[101, 107, "style2"] isImplicit isClass
+````````````````````````````````
+
+
+```````````````````````````````` example(Non-Attributes: 4) options(dont-wrap-non-attributes)
+This is a test. It works fine until a word like don't appears.{.style} Another style might follow.{.style2}
+.
+<p>This is a test. It works fine until a word like don&rsquo;<span class="style">t appears.</span><span class="style2"> Another style might follow.</span></p>
+.
+Document[0, 107]
+  Paragraph[0, 107]
+    Text[0, 51] chars:[0, 51, "This  … e don"]
+    TypographicSmarts[51, 52] typographic: &rsquo; 
+    TextBase[52, 62] chars:[52, 62, "t appears."]
+      Text[52, 62] chars:[52, 62, "t appears."]
+    AttributesNode[62, 70] textOpen:[62, 63, "{"] text:[63, 69, ".style"] textClose:[69, 70, "}"]
+      AttributeNode[63, 69] name:[63, 64, "."] value:[64, 69, "style"] isImplicit isClass
+    TextBase[70, 98] chars:[70, 98, " Anot … llow."]
+      Text[70, 98] chars:[70, 98, " Anot … llow."]
+    AttributesNode[98, 107] textOpen:[98, 99, "{"] text:[99, 106, ".style2"] textClose:[106, 107, "}"]
+      AttributeNode[99, 106] name:[99, 100, "."] value:[100, 106, "style2"] isImplicit isClass
+````````````````````````````````
+
+
+```````````````````````````````` example(Non-Attributes: 5) options(dont-wrap-non-attributes)
+This is a test. It works fine until a word like 'don't' appears.{.style} Another style might follow.{.style2}
+.
+<p>This is a test. It works fine until a word like &lsquo;don&rsquo;t&rsquo;<span class="style"> appears.</span><span class="style2"> Another style might follow.</span></p>
+.
+Document[0, 109]
+  Paragraph[0, 109]
+    Text[0, 48] chars:[0, 48, "This  … like "]
+    TypographicQuotes[48, 55] typographicOpening: &lsquo;  typographicClosing: &rsquo;  textOpen:[48, 49, "'"] text:[49, 54, "don't"] textClose:[54, 55, "'"]
+      Text[49, 52] chars:[49, 52, "don"]
+      TypographicSmarts[52, 53] typographic: &rsquo; 
+      Text[53, 54] chars:[53, 54, "t"]
+    TextBase[55, 64] chars:[55, 64, " appears."]
+      Text[55, 64] chars:[55, 64, " appears."]
+    AttributesNode[64, 72] textOpen:[64, 65, "{"] text:[65, 71, ".style"] textClose:[71, 72, "}"]
+      AttributeNode[65, 71] name:[65, 66, "."] value:[66, 71, "style"] isImplicit isClass
+    TextBase[72, 100] chars:[72, 100, " Anot … llow."]
+      Text[72, 100] chars:[72, 100, " Anot … llow."]
+    AttributesNode[100, 109] textOpen:[100, 101, "{"] text:[101, 108, ".style2"] textClose:[108, 109, "}"]
+      AttributeNode[101, 108] name:[101, 102, "."] value:[102, 108, "style2"] isImplicit isClass
+````````````````````````````````
+
+
+```````````````````````````````` example(Non-Attributes: 6) options(dont-wrap-non-attributes)
+This is a test. It works fine until a word like don\'t appears.{.style} Another style might
+follow.{.style2}
+.
+<p><span class="style">This is a test. It works fine until a word like don't appears.</span> Another style might
+<span class="style2">follow.</span></p>
+.
+Document[0, 108]
+  Paragraph[0, 108]
+    TextBase[0, 63] chars:[0, 63, "This  … ears."]
+      Text[0, 51] chars:[0, 51, "This  … e don"]
+      EscapedCharacter[51, 53] textOpen:[51, 52, "\"] text:[52, 53, "'"]
+      Text[53, 63] chars:[53, 63, "t appears."]
+    AttributesNode[63, 71] textOpen:[63, 64, "{"] text:[64, 70, ".style"] textClose:[70, 71, "}"]
+      AttributeNode[64, 70] name:[64, 65, "."] value:[65, 70, "style"] isImplicit isClass
+    Text[71, 91] chars:[71, 91, " Anot … might"]
+    SoftLineBreak[91, 92]
+    TextBase[92, 99] chars:[92, 99, "follow."]
+      Text[92, 99] chars:[92, 99, "follow."]
+    AttributesNode[99, 108] textOpen:[99, 100, "{"] text:[100, 107, ".style2"] textClose:[107, 108, "}"]
+      AttributeNode[100, 107] name:[100, 101, "."] value:[101, 107, "style2"] isImplicit isClass
+````````````````````````````````
+
+
+## Attribute Span
+
+```````````````````````````````` example Attribute Span: 1
+Cond 1.2 text node{.red}
+.
+<p><span class="red">Cond 1.2 text node</span></p>
+.
+Document[0, 25]
+  Paragraph[0, 25]
+    TextBase[0, 18] chars:[0, 18, "Cond  …  node"]
+      Text[0, 18] chars:[0, 18, "Cond  …  node"]
+    AttributesNode[18, 24] textOpen:[18, 19, "{"] text:[19, 23, ".red"] textClose:[23, 24, "}"]
+      AttributeNode[19, 23] name:[19, 20, "."] value:[20, 23, "red"] isImplicit isClass
+````````````````````````````````
+
+
+can use empty for braces
+
+```````````````````````````````` example Attribute Span: 2
+Cond 1.2 text {}node
+.
+<p>Cond 1.2 text {}node</p>
+.
+Document[0, 21]
+  Paragraph[0, 21]
+    Text[0, 20] chars:[0, 20, "Cond  … }node"]
+````````````````````````````````
+
+
+empty attributes are just text
+
+```````````````````````````````` example Attribute Span: 3
+Cond 1.2 text {}node{.red}
+.
+<p><span class="red">Cond 1.2 text {}node</span></p>
+.
+Document[0, 27]
+  Paragraph[0, 27]
+    TextBase[0, 20] chars:[0, 20, "Cond  … }node"]
+      Text[0, 20] chars:[0, 20, "Cond  … }node"]
+    AttributesNode[20, 26] textOpen:[20, 21, "{"] text:[21, 25, ".red"] textClose:[25, 26, "}"]
+      AttributeNode[21, 25] name:[21, 22, "."] value:[22, 25, "red"] isImplicit isClass
+````````````````````````````````
+
+
+empty attributes are just text
+
+```````````````````````````````` example Attribute Span: 4
+Cond 1.2 text { }node{.red}
+.
+<p><span class="red">Cond 1.2 text { }node</span></p>
+.
+Document[0, 28]
+  Paragraph[0, 28]
+    TextBase[0, 21] chars:[0, 21, "Cond  … }node"]
+      Text[0, 21] chars:[0, 21, "Cond  … }node"]
+    AttributesNode[21, 27] textOpen:[21, 22, "{"] text:[22, 26, ".red"] textClose:[26, 27, "}"]
+      AttributeNode[22, 26] name:[22, 23, "."] value:[23, 26, "red"] isImplicit isClass
+````````````````````````````````
+
+
+can use empty class is just text
+
+```````````````````````````````` example Attribute Span: 5
+Cond 1.2 text {.}node{.red}
+.
+<p><span class="red">Cond 1.2 text {.}node</span></p>
+.
+Document[0, 28]
+  Paragraph[0, 28]
+    TextBase[0, 21] chars:[0, 21, "Cond  … }node"]
+      Text[0, 21] chars:[0, 21, "Cond  … }node"]
+    AttributesNode[21, 27] textOpen:[21, 22, "{"] text:[22, 26, ".red"] textClose:[26, 27, "}"]
+      AttributeNode[22, 26] name:[22, 23, "."] value:[23, 26, "red"] isImplicit isClass
+````````````````````````````````
+
+
+spaces in empty id is just text
+
+```````````````````````````````` example Attribute Span: 6
+Cond 1.2 text { #}node{.red}
+.
+<p><span class="red">Cond 1.2 text { #}node</span></p>
+.
+Document[0, 29]
+  Paragraph[0, 29]
+    TextBase[0, 22] chars:[0, 22, "Cond  … }node"]
+      Text[0, 22] chars:[0, 22, "Cond  … }node"]
+    AttributesNode[22, 28] textOpen:[22, 23, "{"] text:[23, 27, ".red"] textClose:[27, 28, "}"]
+      AttributeNode[23, 27] name:[23, 24, "."] value:[24, 27, "red"] isImplicit isClass
+````````````````````````````````
+
+
+```````````````````````````````` example Attribute Span: 7
+Cond 1.2 text {# }node{.red}
+.
+<p><span class="red">Cond 1.2 text {# }node</span></p>
+.
+Document[0, 29]
+  Paragraph[0, 29]
+    TextBase[0, 22] chars:[0, 22, "Cond  … }node"]
+      Text[0, 22] chars:[0, 22, "Cond  … }node"]
+    AttributesNode[22, 28] textOpen:[22, 23, "{"] text:[23, 27, ".red"] textClose:[27, 28, "}"]
+      AttributeNode[23, 27] name:[23, 24, "."] value:[24, 27, "red"] isImplicit isClass
+````````````````````````````````
+
+
+spaces in empty class is just text
+
+```````````````````````````````` example(Attribute Span: 8) options(empty-implicit-delimiters)
+Cond 1.2 text { .}node{.red}
+.
+<p><span class="red">Cond 1.2 text { .}node</span></p>
+.
+Document[0, 28]
+  Paragraph[0, 28]
+    TextBase[0, 22] chars:[0, 22, "Cond  … }node"]
+      Text[0, 22] chars:[0, 22, "Cond  … }node"]
+    AttributesNode[22, 28] textOpen:[22, 23, "{"] text:[23, 27, ".red"] textClose:[27, 28, "}"]
+      AttributeNode[23, 27] name:[23, 24, "."] value:[24, 27, "red"] isImplicit isClass
+````````````````````````````````
+
+
+```````````````````````````````` example(Attribute Span: 9) options(empty-implicit-delimiters)
+Cond 1.2 text {. }node{.red}
+.
+<p><span class="red">Cond 1.2 text {. }node</span></p>
+.
+Document[0, 28]
+  Paragraph[0, 28]
+    TextBase[0, 22] chars:[0, 22, "Cond  … }node"]
+      Text[0, 22] chars:[0, 22, "Cond  … }node"]
+    AttributesNode[22, 28] textOpen:[22, 23, "{"] text:[23, 27, ".red"] textClose:[27, 28, "}"]
+      AttributeNode[23, 27] name:[23, 24, "."] value:[24, 27, "red"] isImplicit isClass
+````````````````````````````````
+
+
+can use empty id is just text
+
+```````````````````````````````` example Attribute Span: 10
+Cond 1.2 text {#}node{.red}
+.
+<p><span class="red">Cond 1.2 text {#}node</span></p>
+.
+Document[0, 28]
+  Paragraph[0, 28]
+    TextBase[0, 21] chars:[0, 21, "Cond  … }node"]
+      Text[0, 21] chars:[0, 21, "Cond  … }node"]
+    AttributesNode[21, 27] textOpen:[21, 22, "{"] text:[22, 26, ".red"] textClose:[26, 27, "}"]
+      AttributeNode[22, 26] name:[22, 23, "."] value:[23, 26, "red"] isImplicit isClass
+````````````````````````````````
+
+
+can use empty class as delimiter
+
+```````````````````````````````` example(Attribute Span: 11) options(empty-implicit-delimiters)
+Cond 1.2 text {.}node{.red}
+.
+<p>Cond 1.2 text <span class="red">node</span></p>
+.
+Document[0, 27]
+  Paragraph[0, 27]
+    Text[0, 14] chars:[0, 14, "Cond  … text "]
+    AttributesDelimiter[14, 17] textOpen:[14, 15, "{"] text:[15, 16, "."] textClose:[16, 17, "}"]
+    TextBase[17, 21] chars:[17, 21, "node"]
+      Text[17, 21] chars:[17, 21, "node"]
+    AttributesNode[21, 27] textOpen:[21, 22, "{"] text:[22, 26, ".red"] textClose:[26, 27, "}"]
+      AttributeNode[22, 26] name:[22, 23, "."] value:[23, 26, "red"] isImplicit isClass
+````````````````````````````````
+
+
+```````````````````````````````` example(Attribute Span: 12) options(empty-implicit-delimiters)
+Cond 1.2 {.}text node{.red}
+.
+<p>Cond 1.2 <span class="red">text node</span></p>
+.
+Document[0, 27]
+  Paragraph[0, 27]
+    Text[0, 9] chars:[0, 9, "Cond 1.2 "]
+    AttributesDelimiter[9, 12] textOpen:[9, 10, "{"] text:[10, 11, "."] textClose:[11, 12, "}"]
+    TextBase[12, 21] chars:[12, 21, "text node"]
+      Text[12, 21] chars:[12, 21, "text node"]
+    AttributesNode[21, 27] textOpen:[21, 22, "{"] text:[22, 26, ".red"] textClose:[26, 27, "}"]
+      AttributeNode[22, 26] name:[22, 23, "."] value:[23, 26, "red"] isImplicit isClass
+````````````````````````````````
+
+
+can use empty id as delimiter
+
+```````````````````````````````` example(Attribute Span: 13) options(empty-implicit-delimiters)
+Cond 1.2 {#}text node{.red}
+.
+<p>Cond 1.2 <span class="red">text node</span></p>
+.
+Document[0, 27]
+  Paragraph[0, 27]
+    Text[0, 9] chars:[0, 9, "Cond 1.2 "]
+    AttributesDelimiter[9, 12] textOpen:[9, 10, "{"] text:[10, 11, "#"] textClose:[11, 12, "}"]
+    TextBase[12, 21] chars:[12, 21, "text node"]
+      Text[12, 21] chars:[12, 21, "text node"]
+    AttributesNode[21, 27] textOpen:[21, 22, "{"] text:[22, 26, ".red"] textClose:[26, 27, "}"]
+      AttributeNode[22, 26] name:[22, 23, "."] value:[23, 26, "red"] isImplicit isClass
+````````````````````````````````
+
+
+nesting is allowed
+
+```````````````````````````````` example(Attribute Span: 14) options(empty-implicit-delimiters)
+Cond {.}1.2 {#}text node{.red}{.green}
+.
+<p>Cond <span class="green">1.2 <span class="red">text node</span></span></p>
+.
+Document[0, 38]
+  Paragraph[0, 38]
+    Text[0, 5] chars:[0, 5, "Cond "]
+    AttributesDelimiter[5, 8] textOpen:[5, 6, "{"] text:[6, 7, "."] textClose:[7, 8, "}"]
+    TextBase[8, 30] chars:[8, 30, "1.2 { … .red}"]
+      Text[8, 12] chars:[8, 12, "1.2 "]
+      AttributesDelimiter[12, 15] textOpen:[12, 13, "{"] text:[13, 14, "#"] textClose:[14, 15, "}"]
+      TextBase[15, 24] chars:[15, 24, "text node"]
+        TextBase[15, 24] chars:[15, 24, "text node"]
+          Text[15, 24] chars:[15, 24, "text node"]
+      AttributesNode[24, 30] textOpen:[24, 25, "{"] text:[25, 29, ".red"] textClose:[29, 30, "}"]
+        AttributeNode[25, 29] name:[25, 26, "."] value:[26, 29, "red"] isImplicit isClass
+    AttributesNode[30, 38] textOpen:[30, 31, "{"] text:[31, 37, ".green"] textClose:[37, 38, "}"]
+      AttributeNode[31, 37] name:[31, 32, "."] value:[32, 37, "green"] isImplicit isClass
+````````````````````````````````
+
+
+```````````````````````````````` example(Attribute Span: 15) options(empty-implicit-delimiters)
+Cond {#}1.2 {.}text node{.red}{.green}
+.
+<p>Cond <span class="green">1.2 <span class="red">text node</span></span></p>
+.
+Document[0, 38]
+  Paragraph[0, 38]
+    Text[0, 5] chars:[0, 5, "Cond "]
+    AttributesDelimiter[5, 8] textOpen:[5, 6, "{"] text:[6, 7, "#"] textClose:[7, 8, "}"]
+    TextBase[8, 30] chars:[8, 30, "1.2 { … .red}"]
+      Text[8, 12] chars:[8, 12, "1.2 "]
+      AttributesDelimiter[12, 15] textOpen:[12, 13, "{"] text:[13, 14, "."] textClose:[14, 15, "}"]
+      TextBase[15, 24] chars:[15, 24, "text node"]
+        TextBase[15, 24] chars:[15, 24, "text node"]
+          Text[15, 24] chars:[15, 24, "text node"]
+      AttributesNode[24, 30] textOpen:[24, 25, "{"] text:[25, 29, ".red"] textClose:[29, 30, "}"]
+        AttributeNode[25, 29] name:[25, 26, "."] value:[26, 29, "red"] isImplicit isClass
+    AttributesNode[30, 38] textOpen:[30, 31, "{"] text:[31, 37, ".green"] textClose:[37, 38, "}"]
+      AttributeNode[31, 37] name:[31, 32, "."] value:[32, 37, "green"] isImplicit isClass
+````````````````````````````````
+
+
+```````````````````````````````` example(Attribute Span: 16) options(empty-implicit-delimiters)
+Cond {#}1.2 {#}text node{.red}{.green}
+.
+<p>Cond <span class="green">1.2 <span class="red">text node</span></span></p>
+.
+Document[0, 38]
+  Paragraph[0, 38]
+    Text[0, 5] chars:[0, 5, "Cond "]
+    AttributesDelimiter[5, 8] textOpen:[5, 6, "{"] text:[6, 7, "#"] textClose:[7, 8, "}"]
+    TextBase[8, 30] chars:[8, 30, "1.2 { … .red}"]
+      Text[8, 12] chars:[8, 12, "1.2 "]
+      AttributesDelimiter[12, 15] textOpen:[12, 13, "{"] text:[13, 14, "#"] textClose:[14, 15, "}"]
+      TextBase[15, 24] chars:[15, 24, "text node"]
+        TextBase[15, 24] chars:[15, 24, "text node"]
+          Text[15, 24] chars:[15, 24, "text node"]
+      AttributesNode[24, 30] textOpen:[24, 25, "{"] text:[25, 29, ".red"] textClose:[29, 30, "}"]
+        AttributeNode[25, 29] name:[25, 26, "."] value:[26, 29, "red"] isImplicit isClass
+    AttributesNode[30, 38] textOpen:[30, 31, "{"] text:[31, 37, ".green"] textClose:[37, 38, "}"]
+      AttributeNode[31, 37] name:[31, 32, "."] value:[32, 37, "green"] isImplicit isClass
+````````````````````````````````
+
+
+```````````````````````````````` example(Attribute Span: 17) options(empty-implicit-delimiters)
+Cond {.}1.2 {.}text node{.red}{.green}
+.
+<p>Cond <span class="green">1.2 <span class="red">text node</span></span></p>
+.
+Document[0, 38]
+  Paragraph[0, 38]
+    Text[0, 5] chars:[0, 5, "Cond "]
+    AttributesDelimiter[5, 8] textOpen:[5, 6, "{"] text:[6, 7, "."] textClose:[7, 8, "}"]
+    TextBase[8, 30] chars:[8, 30, "1.2 { … .red}"]
+      Text[8, 12] chars:[8, 12, "1.2 "]
+      AttributesDelimiter[12, 15] textOpen:[12, 13, "{"] text:[13, 14, "."] textClose:[14, 15, "}"]
+      TextBase[15, 24] chars:[15, 24, "text node"]
+        TextBase[15, 24] chars:[15, 24, "text node"]
+          Text[15, 24] chars:[15, 24, "text node"]
+      AttributesNode[24, 30] textOpen:[24, 25, "{"] text:[25, 29, ".red"] textClose:[29, 30, "}"]
+        AttributeNode[25, 29] name:[25, 26, "."] value:[26, 29, "red"] isImplicit isClass
+    AttributesNode[30, 38] textOpen:[30, 31, "{"] text:[31, 37, ".green"] textClose:[37, 38, "}"]
+      AttributeNode[31, 37] name:[31, 32, "."] value:[32, 37, "green"] isImplicit isClass
+````````````````````````````````
+
+
+```````````````````````````````` example(Attribute Span: 18) options(empty-implicit-delimiters)
+Cond {.}1.2 {.}{.red}{.green}
+.
+<p>Cond <span class="green">1.2 </span></p>
+.
+Document[0, 29]
+  Paragraph[0, 29]
+    Text[0, 5] chars:[0, 5, "Cond "]
+    AttributesDelimiter[5, 8] textOpen:[5, 6, "{"] text:[6, 7, "."] textClose:[7, 8, "}"]
+    TextBase[8, 21] chars:[8, 21, "1.2 { … .red}"]
+      Text[8, 12] chars:[8, 12, "1.2 "]
+      AttributesDelimiter[12, 15] textOpen:[12, 13, "{"] text:[13, 14, "."] textClose:[14, 15, "}"]
+      AttributesNode[15, 21] textOpen:[15, 16, "{"] text:[16, 20, ".red"] textClose:[20, 21, "}"]
+        AttributeNode[16, 20] name:[16, 17, "."] value:[17, 20, "red"] isImplicit isClass
+    AttributesNode[21, 29] textOpen:[21, 22, "{"] text:[22, 28, ".green"] textClose:[28, 29, "}"]
+      AttributeNode[22, 28] name:[22, 23, "."] value:[23, 28, "green"] isImplicit isClass
+````````````````````````````````
+
+
+```````````````````````````````` example(Attribute Span: 19) options(empty-implicit-delimiters)
+Cond {.}blue {.}green {.}red{.red}{.green}{.blue}{.rgb}
+.
+<p>Cond <span class="rgb"><span class="blue">blue <span class="green">green <span class="red">red</span></span></span></span></p>
+.
+Document[0, 55]
+  Paragraph[0, 55]
+    Text[0, 5] chars:[0, 5, "Cond "]
+    AttributesDelimiter[5, 8] textOpen:[5, 6, "{"] text:[6, 7, "."] textClose:[7, 8, "}"]
+    TextBase[8, 42] chars:[8, 42, "blue  … reen}"]
+      TextBase[8, 42] chars:[8, 42, "blue  … reen}"]
+        TextBase[8, 42] chars:[8, 42, "blue  … reen}"]
+          Text[8, 13] chars:[8, 13, "blue "]
+          AttributesDelimiter[13, 16] textOpen:[13, 14, "{"] text:[14, 15, "."] textClose:[15, 16, "}"]
+          TextBase[16, 34] chars:[16, 34, "green … .red}"]
+            TextBase[16, 34] chars:[16, 34, "green … .red}"]
+              Text[16, 22] chars:[16, 22, "green "]
+              AttributesDelimiter[22, 25] textOpen:[22, 23, "{"] text:[23, 24, "."] textClose:[24, 25, "}"]
+              TextBase[25, 28] chars:[25, 28, "red"]
+                TextBase[25, 28] chars:[25, 28, "red"]
+                  Text[25, 28] chars:[25, 28, "red"]
+              AttributesNode[28, 34] textOpen:[28, 29, "{"] text:[29, 33, ".red"] textClose:[33, 34, "}"]
+                AttributeNode[29, 33] name:[29, 30, "."] value:[30, 33, "red"] isImplicit isClass
+          AttributesNode[34, 42] textOpen:[34, 35, "{"] text:[35, 41, ".green"] textClose:[41, 42, "}"]
+            AttributeNode[35, 41] name:[35, 36, "."] value:[36, 41, "green"] isImplicit isClass
+    AttributesNode[42, 49] textOpen:[42, 43, "{"] text:[43, 48, ".blue"] textClose:[48, 49, "}"]
+      AttributeNode[43, 48] name:[43, 44, "."] value:[44, 48, "blue"] isImplicit isClass
+    AttributesNode[49, 55] textOpen:[49, 50, "{"] text:[50, 54, ".rgb"] textClose:[54, 55, "}"]
+      AttributeNode[50, 54] name:[50, 51, "."] value:[51, 54, "rgb"] isImplicit isClass
+````````````````````````````````
+
+
+```````````````````````````````` example(Attribute Span: 20) options(empty-implicit-delimiters)
+Cond {.}blue {.}green {.}red{.red}{.green}{.blue} rgb{.rgb}
+.
+<p>Cond <span class="blue">blue <span class="green">green <span class="red">red</span></span></span><span class="rgb"> rgb</span></p>
+.
+Document[0, 59]
+  Paragraph[0, 59]
+    Text[0, 5] chars:[0, 5, "Cond "]
+    AttributesDelimiter[5, 8] textOpen:[5, 6, "{"] text:[6, 7, "."] textClose:[7, 8, "}"]
+    TextBase[8, 42] chars:[8, 42, "blue  … reen}"]
+      TextBase[8, 42] chars:[8, 42, "blue  … reen}"]
+        Text[8, 13] chars:[8, 13, "blue "]
+        AttributesDelimiter[13, 16] textOpen:[13, 14, "{"] text:[14, 15, "."] textClose:[15, 16, "}"]
+        TextBase[16, 34] chars:[16, 34, "green … .red}"]
+          TextBase[16, 34] chars:[16, 34, "green … .red}"]
+            Text[16, 22] chars:[16, 22, "green "]
+            AttributesDelimiter[22, 25] textOpen:[22, 23, "{"] text:[23, 24, "."] textClose:[24, 25, "}"]
+            TextBase[25, 28] chars:[25, 28, "red"]
+              TextBase[25, 28] chars:[25, 28, "red"]
+                Text[25, 28] chars:[25, 28, "red"]
+            AttributesNode[28, 34] textOpen:[28, 29, "{"] text:[29, 33, ".red"] textClose:[33, 34, "}"]
+              AttributeNode[29, 33] name:[29, 30, "."] value:[30, 33, "red"] isImplicit isClass
+        AttributesNode[34, 42] textOpen:[34, 35, "{"] text:[35, 41, ".green"] textClose:[41, 42, "}"]
+          AttributeNode[35, 41] name:[35, 36, "."] value:[36, 41, "green"] isImplicit isClass
+    AttributesNode[42, 49] textOpen:[42, 43, "{"] text:[43, 48, ".blue"] textClose:[48, 49, "}"]
+      AttributeNode[43, 48] name:[43, 44, "."] value:[44, 48, "blue"] isImplicit isClass
+    TextBase[49, 53] chars:[49, 53, " rgb"]
+      Text[49, 53] chars:[49, 53, " rgb"]
+    AttributesNode[53, 59] textOpen:[53, 54, "{"] text:[54, 58, ".rgb"] textClose:[58, 59, "}"]
+      AttributeNode[54, 58] name:[54, 55, "."] value:[55, 58, "rgb"] isImplicit isClass
+````````````````````````````````
+
+
+## Embedded Spaces
+
+leading spaces
+
+```````````````````````````````` example Embedded Spaces: 1
+text {   attribute=value}
+.
+<p attribute="value">text</p>
+.
+Document[0, 26]
+  Paragraph[0, 26]
+    Text[0, 4] chars:[0, 4, "text"]
+    AttributesNode[5, 25] textOpen:[5, 6, "{"] text:[6, 24, "   attribute=value"] textClose:[24, 25, "}"]
+      AttributeNode[9, 24] name:[9, 18, "attribute"] sep:[18, 19, "="] value:[19, 24, "value"]
+````````````````````````````````
+
+
+trailing spaces
+
+```````````````````````````````` example Embedded Spaces: 2
 text {attribute=value   }
 .
 <p attribute="value">text</p>
@@ -1782,7 +2328,7 @@ text {attribute=value   }
 Document[0, 26]
   Paragraph[0, 26]
     Text[0, 4] chars:[0, 4, "text"]
-    AttributesNode[5, 25] textOpen:[5, 6, "{"] text:[6, 21, "attribute=value"] textClose:[24, 25, "}"]
+    AttributesNode[5, 25] textOpen:[5, 6, "{"] text:[6, 24, "attribute=value   "] textClose:[24, 25, "}"]
       AttributeNode[6, 21] name:[6, 15, "attribute"] sep:[15, 16, "="] value:[16, 21, "value"]
 ````````````````````````````````
 

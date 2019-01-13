@@ -42,5 +42,10 @@ set attributes for immediately preceding sibling element during HTML rendering.<
   <li><code>style</code> values are accumulated as a semicolon (<code>;</code>) separated list.</li>
   <li>all others override any previous values of the same name.</li>
 </ul>
+<p>Setting <code>USE_EMPTY_IMPLICIT_AS_SPAN_DELIMITER</code> to <code>true</code>, will treat <code>{.}</code> or <code>{#}</code> as markers
+for start of closest matching attributes node to give greater control of where attributes are
+attached in text.</p>
+<p><strong>NOTE</strong>: If <code>ASSIGN_TEXT_ATTRIBUTES</code> is set to <code>false</code> then
+<code>USE_EMPTY_IMPLICIT_AS_SPAN_DELIMITER</code> option is ignored.</p>
 </body>
 </html>

@@ -1,5 +1,6 @@
 package com.vladsch.flexmark.ext.attributes.internal;
 
+import com.vladsch.flexmark.ext.attributes.AttributesDelimiter;
 import com.vladsch.flexmark.formatter.*;
 import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.Node;
@@ -63,6 +64,12 @@ public class AttributesNodeFormatter implements PhasedNodeFormatter {
         set.add(new NodeFormattingHandler<AttributesNode>(AttributesNode.class, new CustomNodeFormatter<AttributesNode>() {
             @Override
             public void render(AttributesNode node, NodeFormatterContext context, MarkdownWriter markdown) {
+                AttributesNodeFormatter.this.render(node, context, markdown);
+            }
+        }));
+        set.add(new NodeFormattingHandler<AttributesDelimiter>(AttributesDelimiter.class, new CustomNodeFormatter<AttributesDelimiter>() {
+            @Override
+            public void render(AttributesDelimiter node, NodeFormatterContext context, MarkdownWriter markdown) {
                 AttributesNodeFormatter.this.render(node, context, markdown);
             }
         }));
