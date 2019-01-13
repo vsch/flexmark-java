@@ -89,7 +89,16 @@ public class AttributesNodePostProcessor extends NodePostProcessor {
             if ((!myOptions.assignTextAttributes && (previous instanceof Text || previous instanceof TextBase)) || previous.getChars().getEndOffset() < attributesNode.getStartOffset()) {
                 // either previous is text and no text attributes or not attached to the previous node
                 // then attributes go to parent
-                if (parent instanceof Paragraph && parent.getParent() instanceof ParagraphItemContainer) {
+                
+                if (myOptions.useEmptyImplicitAsSpanDelimiter) {
+                    // find first previous not delimited by unmatched attribute
+                    previous = matchDelimitedSpans(state, attributesNode, previous);
+                }
+
+                if (previous instanceof TextBase) {
+                    // use delimited span
+                    attributeOwner = previous;
+                } else if (parent instanceof Paragraph && parent.getParent() instanceof ParagraphItemContainer) {
                     attributeOwner = parent.getParent();
                 } else {
                     attributeOwner = parent;
@@ -101,7 +110,7 @@ public class AttributesNodePostProcessor extends NodePostProcessor {
                     Node first = attributesNode.getPrevious();
                     Node lastNonAttributesNode = null;
                     boolean hadDoNotDecorate = false;
-                    
+
                     while (first != null && !(first instanceof AttributesNode)) {
                         if (first instanceof DoNotAttributeDecorate) {
                             hadDoNotDecorate = true;
@@ -113,90 +122,14 @@ public class AttributesNodePostProcessor extends NodePostProcessor {
                     if (hadDoNotDecorate) {
                         // need to wrap in text base from first to attribute node
                         TextBase textBase = new TextBase();
-                        while (lastNonAttributesNode != attributesNode) {
-                            Node nextNode = lastNonAttributesNode.getNext();
-                            lastNonAttributesNode.unlink();
-                            state.nodeRemoved(lastNonAttributesNode);
-                            textBase.appendChild(lastNonAttributesNode);
-                            lastNonAttributesNode = nextNode;
-                        }
-
-                        textBase.setCharsFromContent();
-                        attributesNode.insertBefore(textBase);
-                        state.nodeAddedWithDescendants(textBase);
+                        textBaseWrap(state, lastNonAttributesNode, attributesNode, textBase);
                         previous = textBase;
                     }
                 }
 
                 if (myOptions.useEmptyImplicitAsSpanDelimiter) {
                     // find first previous not delimited by unmatched attribute
-                    Node first = attributesNode.getPrevious();
-                    Node lastNonAttributesNode = null;
-                    boolean hadAttributeDelimiter = false;
-                    ArrayList<Node> unmatchedAttributes = new ArrayList<>();
-
-                    while (first != null) {
-                        if (first instanceof AttributesDelimiter) {
-                            if (!unmatchedAttributes.isEmpty()) {
-                                // match it and wrap in text
-                                Node lastNode = unmatchedAttributes.remove(unmatchedAttributes.size()-1);
-                                lastNonAttributesNode = first.getNext();
-                                if (lastNode != lastNonAttributesNode) {
-                                    TextBase textBase = new TextBase();
-
-                                    while (lastNonAttributesNode != lastNode) {
-                                        Node nextNode = lastNonAttributesNode.getNext();
-                                        lastNonAttributesNode.unlink();
-                                        state.nodeRemoved(lastNonAttributesNode);
-                                        textBase.appendChild(lastNonAttributesNode);
-                                        lastNonAttributesNode = nextNode;
-                                    }
-                                    textBase.setCharsFromContent();
-                                    lastNode.insertBefore(textBase);
-                                    state.nodeAddedWithDescendants(textBase);
-                                    lastNonAttributesNode = textBase;
-                                } else {
-                                    previous = first;
-                                }
-                            } else {
-                                // unmatched delimiter is our start span
-                                TextBase textBase = new TextBase();
-                                lastNonAttributesNode = first.getNext();
-
-                                if (lastNonAttributesNode != attributesNode) {
-                                    while (lastNonAttributesNode != attributesNode) {
-                                        Node nextNode = lastNonAttributesNode.getNext();
-                                        lastNonAttributesNode.unlink();
-                                        state.nodeRemoved(lastNonAttributesNode);
-                                        textBase.appendChild(lastNonAttributesNode);
-                                        lastNonAttributesNode = nextNode;
-                                    }
-
-                                    textBase.setCharsFromContent();
-                                    attributesNode.insertBefore(textBase);
-                                    state.nodeAddedWithDescendants(textBase);
-                                    previous = textBase;
-                                } else {
-                                    previous = first;
-                                }
-                                break;
-                            }
-                        } else if (first instanceof AttributesNode) {
-                            unmatchedAttributes.add(first);
-                        } else {
-                            lastNonAttributesNode = first;
-                        }
-                        
-                        first = first.getPrevious();
-                    }
-
-                    if (!unmatchedAttributes.isEmpty()) {
-                        // use the first unmatched as our end of attribute span
-                        previous = unmatchedAttributes.get(0);
-                        if (previous.getNext() != attributesNode) {
-                            previous = previous.getNext();
-                        }
-                    }
+                    previous = matchDelimitedSpans(state, attributesNode, previous);
                 }
 
                 if (previous instanceof Text) {
@@ -225,6 +158,72 @@ public class AttributesNodePostProcessor extends NodePostProcessor {
         return attributeOwner;
     }
 
+    static Node matchDelimitedSpans(NodeTracker state, AttributesNode attributesNode, Node previous) {
+        Node first = attributesNode.getPrevious();
+        Node lastNonAttributesNode = null;
+        ArrayList<Node> unmatchedAttributes = new ArrayList<>();
+
+        while (first != null) {
+            if (first instanceof AttributesDelimiter) {
+                if (!unmatchedAttributes.isEmpty()) {
+                    // match it and wrap in text
+                    Node lastNode = unmatchedAttributes.remove(unmatchedAttributes.size() - 1);
+                    lastNonAttributesNode = first.getNext();
+                    if (lastNode != lastNonAttributesNode) {
+                        TextBase textBase = new TextBase();
+
+                        textBaseWrap(state, lastNonAttributesNode, lastNode, textBase);
+                        lastNonAttributesNode = textBase;
+                    } else {
+                        previous = first;
+                    }
+                } else {
+                    // unmatched delimiter is our start span
+                    TextBase textBase = new TextBase();
+                    lastNonAttributesNode = first.getNext();
+
+                    if (lastNonAttributesNode != attributesNode) {
+                        textBaseWrap(state, lastNonAttributesNode, attributesNode, textBase);
+                        previous = textBase;
+                    } else {
+                        previous = first;
+                    }
+                    break;
+                }
+            } else if (first instanceof AttributesNode) {
+                unmatchedAttributes.add(first);
+            } else {
+                lastNonAttributesNode = first;
+            }
+
+            first = first.getPrevious();
+        }
+
+        if (!unmatchedAttributes.isEmpty()) {
+            // use the first unmatched as our end of attribute span
+            previous = unmatchedAttributes.get(0);
+            Node previousNext = previous.getNext();
+            if (previousNext != null && previousNext != attributesNode) {
+                previous = previousNext;
+            }
+        }
+        
+        return previous;
+    }
+
+    static void textBaseWrap(final NodeTracker state, Node lastNonAttributesNode, final Node lastNode, final TextBase textBase) {
+        while (lastNonAttributesNode != lastNode) {
+            Node nextNode = lastNonAttributesNode.getNext();
+            lastNonAttributesNode.unlink();
+            state.nodeRemoved(lastNonAttributesNode);
+            textBase.appendChild(lastNonAttributesNode);
+            lastNonAttributesNode = nextNode;
+        }
+        textBase.setCharsFromContent();
+        lastNode.insertBefore(textBase);
+        state.nodeAddedWithDescendants(textBase);
+    }
+    
     @Override
     public void process(NodeTracker state, Node node) {
         if (node instanceof AttributesNode) {

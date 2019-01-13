@@ -2218,25 +2218,73 @@ Document[0, 38]
 
 
 ```````````````````````````````` example(Attribute Span: 18) options(empty-implicit-delimiters)
-Cond {.}1.2 {.}{.red}{.green}
+Cond {.}1.2 {.}text node{.red}{.green}
 .
-<p>Cond <span class="green">1.2 </span></p>
+<p>Cond <span class="green">1.2 <span class="red">text node</span></span></p>
 .
-Document[0, 29]
-  Paragraph[0, 29]
+Document[0, 38]
+  Paragraph[0, 38]
     Text[0, 5] chars:[0, 5, "Cond "]
     AttributesDelimiter[5, 8] textOpen:[5, 6, "{"] text:[6, 7, "."] textClose:[7, 8, "}"]
-    TextBase[8, 21] chars:[8, 21, "1.2 { … .red}"]
+    TextBase[8, 30] chars:[8, 30, "1.2 { … .red}"]
       Text[8, 12] chars:[8, 12, "1.2 "]
       AttributesDelimiter[12, 15] textOpen:[12, 13, "{"] text:[13, 14, "."] textClose:[14, 15, "}"]
-      AttributesNode[15, 21] textOpen:[15, 16, "{"] text:[16, 20, ".red"] textClose:[20, 21, "}"]
-        AttributeNode[16, 20] name:[16, 17, "."] value:[17, 20, "red"] isImplicit isClass
-    AttributesNode[21, 29] textOpen:[21, 22, "{"] text:[22, 28, ".green"] textClose:[28, 29, "}"]
-      AttributeNode[22, 28] name:[22, 23, "."] value:[23, 28, "green"] isImplicit isClass
+      TextBase[15, 24] chars:[15, 24, "text node"]
+        TextBase[15, 24] chars:[15, 24, "text node"]
+          Text[15, 24] chars:[15, 24, "text node"]
+      AttributesNode[24, 30] textOpen:[24, 25, "{"] text:[25, 29, ".red"] textClose:[29, 30, "}"]
+        AttributeNode[25, 29] name:[25, 26, "."] value:[26, 29, "red"] isImplicit isClass
+    AttributesNode[30, 38] textOpen:[30, 31, "{"] text:[31, 37, ".green"] textClose:[37, 38, "}"]
+      AttributeNode[31, 37] name:[31, 32, "."] value:[32, 37, "green"] isImplicit isClass
 ````````````````````````````````
 
 
+delimiters override assignment to parent
+
 ```````````````````````````````` example(Attribute Span: 19) options(empty-implicit-delimiters)
+Cond {.}1.2 {.}decorated text {.red} {.green}
+.
+<p>Cond <span class="green">1.2 <span class="red">decorated text </span></span></p>
+.
+Document[0, 45]
+  Paragraph[0, 45]
+    Text[0, 5] chars:[0, 5, "Cond "]
+    AttributesDelimiter[5, 8] textOpen:[5, 6, "{"] text:[6, 7, "."] textClose:[7, 8, "}"]
+    TextBase[8, 36] chars:[8, 36, "1.2 { … .red}"]
+      Text[8, 12] chars:[8, 12, "1.2 "]
+      AttributesDelimiter[12, 15] textOpen:[12, 13, "{"] text:[13, 14, "."] textClose:[14, 15, "}"]
+      TextBase[15, 30] chars:[15, 30, "decor … text "]
+        TextBase[15, 30] chars:[15, 30, "decor … text "]
+          Text[15, 30] chars:[15, 30, "decor … text "]
+      AttributesNode[30, 36] textOpen:[30, 31, "{"] text:[31, 35, ".red"] textClose:[35, 36, "}"]
+        AttributeNode[31, 35] name:[31, 32, "."] value:[32, 35, "red"] isImplicit isClass
+    AttributesNode[37, 45] textOpen:[37, 38, "{"] text:[38, 44, ".green"] textClose:[44, 45, "}"]
+      AttributeNode[38, 44] name:[38, 39, "."] value:[39, 44, "green"] isImplicit isClass
+````````````````````````````````
+
+
+unmatched goes to parent
+
+```````````````````````````````` example(Attribute Span: 20) options(empty-implicit-delimiters)
+Cond 1.2 {.}decorated text {.red} {.green}
+.
+<p class="green">Cond 1.2 <span class="red">decorated text </span></p>
+.
+Document[0, 42]
+  Paragraph[0, 42]
+    Text[0, 9] chars:[0, 9, "Cond 1.2 "]
+    AttributesDelimiter[9, 12] textOpen:[9, 10, "{"] text:[10, 11, "."] textClose:[11, 12, "}"]
+    TextBase[12, 27] chars:[12, 27, "decor … text "]
+      TextBase[12, 27] chars:[12, 27, "decor … text "]
+        Text[12, 27] chars:[12, 27, "decor … text "]
+    AttributesNode[27, 33] textOpen:[27, 28, "{"] text:[28, 32, ".red"] textClose:[32, 33, "}"]
+      AttributeNode[28, 32] name:[28, 29, "."] value:[29, 32, "red"] isImplicit isClass
+    AttributesNode[34, 42] textOpen:[34, 35, "{"] text:[35, 41, ".green"] textClose:[41, 42, "}"]
+      AttributeNode[35, 41] name:[35, 36, "."] value:[36, 41, "green"] isImplicit isClass
+````````````````````````````````
+
+
+```````````````````````````````` example(Attribute Span: 21) options(empty-implicit-delimiters)
 Cond {.}blue {.}green {.}red{.red}{.green}{.blue}{.rgb}
 .
 <p>Cond <span class="rgb"><span class="blue">blue <span class="green">green <span class="red">red</span></span></span></span></p>
@@ -2268,7 +2316,7 @@ Document[0, 55]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Attribute Span: 20) options(empty-implicit-delimiters)
+```````````````````````````````` example(Attribute Span: 22) options(empty-implicit-delimiters)
 Cond {.}blue {.}green {.}red{.red}{.green}{.blue} rgb{.rgb}
 .
 <p>Cond <span class="blue">blue <span class="green">green <span class="red">red</span></span></span><span class="rgb"> rgb</span></p>
