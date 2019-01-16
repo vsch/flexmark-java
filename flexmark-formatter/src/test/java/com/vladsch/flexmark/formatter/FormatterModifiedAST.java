@@ -3,12 +3,15 @@ package com.vladsch.flexmark.formatter;
 import com.vladsch.flexmark.ast.Image;
 import com.vladsch.flexmark.ast.InlineLinkNode;
 import com.vladsch.flexmark.ast.Link;
+import com.vladsch.flexmark.ast.Text;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.ast.NodeVisitor;
 import com.vladsch.flexmark.util.ast.VisitHandler;
 import com.vladsch.flexmark.util.ast.Visitor;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.test.AstCollectingVisitor;
+import com.vladsch.flexmark.util.collection.iteration.ReversiblePeekingIterable;
+import com.vladsch.flexmark.util.collection.iteration.ReversiblePeekingIterator;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.MutableDataSet;
 import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
@@ -181,6 +184,61 @@ public class FormatterModifiedAST {
                 "          Text[25, 30] chars:[25, 30, \"image\"]\n" +
                 "  Paragraph[42, 52] isTrailingBlankLine\n" +
                 "    Text[42, 51] chars:[42, 51, \"next line\"]\n", ast);
+
+        String formatted = RENDERER.render(document);
+
+        assertEquals(expected, formatted);
+
+        //System.out.println("input\n");
+        //System.out.println(input);
+        //System.out.println("\n\nFormatted\n");
+        //System.out.println(formatted);
+    }
+
+    @Test
+    public void test_LinkText() throws Exception {
+        final String input = "" +
+                "- [link](link.txt)\n" +
+                "\n" +
+                "next line\n" +
+                "\n";
+        final String expected = "" +
+                "- [LINK](link.txt)\n" +
+                "\n" +
+                "next line\n" +
+                "\n";
+        Node document = PARSER.parse(input);
+
+        final NodeVisitor[] visitor = new NodeVisitor[1];
+
+        visitor[0] = new NodeVisitor(
+                new VisitHandler<Link>(Link.class, new Visitor<Link>() {
+                    @Override
+                    public void visit(Link node) {
+                        ReversiblePeekingIterator<Node> childIte = node.getChildren().iterator();
+                        while (childIte.hasNext()){
+                            Node child = childIte.next();
+                            if (child instanceof Text){
+                                child.insertAfter(new Text("LINK"));
+                                childIte.remove();
+                            }
+                        }
+                        visitor[0].visitChildren(node);
+                    }
+                })
+        );
+
+        visitor[0].visit(document);
+
+        String ast = new AstCollectingVisitor().collectAndGetAstText(document);
+        assertEquals("Document[0, 31]\n" +
+                "  BulletList[0, 19] isTight\n" +
+                "    BulletListItem[0, 19] open:[0, 1, \"-\"] isTight hadBlankLineAfter\n" +
+                "      Paragraph[2, 19] isTrailingBlankLine\n" +
+                "        Link[2, 18] textOpen:[2, 3, \"[\"] text:[3, 7, \"link\"] textClose:[7, 8, \"]\"] linkOpen:[8, 9, \"(\"] url:[9, 17, \"link.txt\"] pageRef:[9, 17, \"link.txt\"] linkClose:[17, 18, \")\"]\n" +
+                "          Text[0, 4] chars:[0, 4, \"LINK\"]\n" +
+                "  Paragraph[20, 30] isTrailingBlankLine\n" +
+                "    Text[20, 29] chars:[20, 29, \"next line\"]\n", ast);
 
         String formatted = RENDERER.render(document);
 
