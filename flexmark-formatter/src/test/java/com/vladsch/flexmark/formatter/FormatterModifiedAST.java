@@ -219,7 +219,12 @@ public class FormatterModifiedAST {
                         while (childIte.hasNext()){
                             Node child = childIte.next();
                             if (child instanceof Text){
-                                child.insertAfter(new Text("LINK"));
+                                Text text = new Text("LINK");
+                                
+                                // have to update the parent link text to reflect changes to AST
+                                node.setText(text.getChars());
+                                
+                                child.insertAfter(text);
                                 childIte.remove();
                             }
                         }
@@ -235,7 +240,7 @@ public class FormatterModifiedAST {
                 "  BulletList[0, 19] isTight\n" +
                 "    BulletListItem[0, 19] open:[0, 1, \"-\"] isTight hadBlankLineAfter\n" +
                 "      Paragraph[2, 19] isTrailingBlankLine\n" +
-                "        Link[2, 18] textOpen:[2, 3, \"[\"] text:[3, 7, \"link\"] textClose:[7, 8, \"]\"] linkOpen:[8, 9, \"(\"] url:[9, 17, \"link.txt\"] pageRef:[9, 17, \"link.txt\"] linkClose:[17, 18, \")\"]\n" +
+                "        Link[2, 18] textOpen:[2, 3, \"[\"] text:[0, 4, \"LINK\"] textClose:[7, 8, \"]\"] linkOpen:[8, 9, \"(\"] url:[9, 17, \"link.txt\"] pageRef:[9, 17, \"link.txt\"] linkClose:[17, 18, \")\"]\n" +
                 "          Text[0, 4] chars:[0, 4, \"LINK\"]\n" +
                 "  Paragraph[20, 30] isTrailingBlankLine\n" +
                 "    Text[20, 29] chars:[20, 29, \"next line\"]\n", ast);
