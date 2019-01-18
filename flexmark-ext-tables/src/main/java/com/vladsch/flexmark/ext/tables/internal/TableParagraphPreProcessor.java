@@ -375,7 +375,7 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
         ArrayList<Node> removedSeparators = null;
         ArrayList<Node> mergeTextParents = null;
         for (Node node : sepList) {
-            if (node.getParent() != tableRow) {
+            if (node.getParent() != null && node.getParent() != tableRow) {
                 // embedded, convert it and surrounding whitespace to text
                 Node firstNode = node.getPrevious() instanceof WhiteSpace ? node.getPrevious() : node;
                 Node lastNode = node.getNext() instanceof WhiteSpace ? node.getNext() : node;

@@ -151,7 +151,9 @@ public class HtmlRenderer implements IRender {
         RendererDependencyHandler resolver = new RendererDependencyHandler();
         nodeRendererFactories = resolver.resolveDependencies(nodeRenderers).getNodeRendererFactories();
 
-        this.attributeProviderFactories = FlatDependencyHandler.computeDependencies(builder.attributeProviderFactories);
+        // KLUDGE: but for now works
+        List<AttributeProviderFactory> values = new ArrayList<>(builder.attributeProviderFactories.values());
+        this.attributeProviderFactories = FlatDependencyHandler.computeDependencies(values);
         this.linkResolverFactories = FlatDependencyHandler.computeDependencies(builder.linkResolverFactories);
     }
 
@@ -258,7 +260,7 @@ public class HtmlRenderer implements IRender {
      * Builder for configuring an {@link HtmlRenderer}. See methods for default configuration.
      */
     public static class Builder extends MutableDataSet implements RendererBuilder {
-        List<AttributeProviderFactory> attributeProviderFactories = new ArrayList<AttributeProviderFactory>();
+        Map<Class, AttributeProviderFactory> attributeProviderFactories = new LinkedHashMap<>();
         List<NodeRendererFactory> nodeRendererFactories = new ArrayList<NodeRendererFactory>();
         List<LinkResolverFactory> linkResolverFactories = new ArrayList<LinkResolverFactory>();
         private final HashSet<Extension> loadedExtensions = new HashSet<Extension>();
@@ -279,7 +281,7 @@ public class HtmlRenderer implements IRender {
         public Builder(Builder other) {
             super(other);
 
-            this.attributeProviderFactories.addAll(other.attributeProviderFactories);
+            this.attributeProviderFactories.putAll(other.attributeProviderFactories);
             this.nodeRendererFactories.addAll(other.nodeRendererFactories);
             this.linkResolverFactories.addAll(other.linkResolverFactories);
             this.loadedExtensions.addAll(other.loadedExtensions);
@@ -394,7 +396,7 @@ public class HtmlRenderer implements IRender {
          * @return {@code this}
          */
         public Builder attributeProviderFactory(AttributeProviderFactory attributeProviderFactory) {
-            this.attributeProviderFactories.add(attributeProviderFactory);
+            this.attributeProviderFactories.put(attributeProviderFactory.getClass(), attributeProviderFactory);
             return this;
         }
 

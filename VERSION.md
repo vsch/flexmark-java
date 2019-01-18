@@ -7,6 +7,7 @@ flexmark-java
 
 - [To Do](#to-do)
     - [Docx Converter](#docx-converter)
+- [0.40.8](#0408)
 - [0.40.6](#0406)
 - [0.40.4](#0404)
 - [0.40.2](#0402)
@@ -269,6 +270,14 @@ flexmark-java
 * [ ] Fix: #99, YamlFrontMatterBlockParser ignores multi-key list items
 
 &nbsp;</details>
+
+0.40.8
+------
+
+* Fix: change `AttributeProviderFactory` extensions to eliminate duplicate registrations of
+  factories. 
+* Fix: `AttributesExtension` to assign attributes to explicit/refs  links/images 
+* Fix: #299, FlexmarkHtmlParser produces extra empty list item for enclosing </p> element
 
 0.40.6
 ------

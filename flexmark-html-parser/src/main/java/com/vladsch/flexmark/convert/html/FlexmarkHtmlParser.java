@@ -1309,7 +1309,11 @@ public class FlexmarkHtmlParser {
                         processListItem(out, (Element) item, listState);
                         break;
                     case P:
-                        processListItem(out, (Element) item, listState);
+                        if (item.childNodeSize() > 0) {
+                            processListItem(out, (Element) item, listState);
+                        } else {
+                            skip();
+                        }
                         break;
                     default:
                         skip();

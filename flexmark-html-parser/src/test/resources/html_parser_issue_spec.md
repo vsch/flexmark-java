@@ -1638,5 +1638,20 @@ Issue #287, ''flexmark-html-parser' The module has an mistake
 ````````````````````````````````
 
 
+## Issue 299
+
+Issue #299, FlexmarkHtmlParser produces extra empty list item for enclosing </p> element
+
+```````````````````````````````` example Issue 299: 1
+**Note:**
+* First note.
+* Second note.
+
+.
+<p><b>Note:</b>
+<li>First note.</li>
+<li>Second note.</li>
+</p>
+````````````````````````````````
 
 

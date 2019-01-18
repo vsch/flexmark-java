@@ -44,6 +44,3 @@ Attribute which starts with `#` such as `#id-string` is equivalent to `id="id-st
 Setting `USE_EMPTY_IMPLICIT_AS_SPAN_DELIMITER` to `true`, will treat `{.}` or `{#}` as markers
 for start of closest matching attributes node to give greater control of where attributes are
 attached in text.
-
-**NOTE**: If `ASSIGN_TEXT_ATTRIBUTES` is set to `false` then
-`USE_EMPTY_IMPLICIT_AS_SPAN_DELIMITER` option is ignored.

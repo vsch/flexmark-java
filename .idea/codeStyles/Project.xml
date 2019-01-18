@@ -30,7 +30,7 @@
       </option>
     </JavaCodeStyleSettings>
     <MarkdownNavigatorCodeStyleSettings>
-      <option name="WRAP_ON_TYPING" value="1" />
+      <option name="WRAP_ON_TYPING" value="0" />
       <option name="KEEP_BLANK_LINES" value="1" />
       <option name="FORMAT_WITH_SOFT_WRAP" value="2" />
       <option name="LIST_ALIGN_FIRST_LINE_TEXT" value="true" />

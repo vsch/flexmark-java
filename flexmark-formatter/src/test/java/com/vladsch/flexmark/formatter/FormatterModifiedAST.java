@@ -222,7 +222,7 @@ public class FormatterModifiedAST {
                                 Text text = new Text("LINK");
                                 
                                 // have to update the parent link text to reflect changes to AST
-                                node.setText(text.getChars());
+                                node.setText(text.getChars());    
                                 
                                 child.insertAfter(text);
                                 childIte.remove();

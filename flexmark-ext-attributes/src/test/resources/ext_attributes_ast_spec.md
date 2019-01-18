@@ -2381,6 +2381,90 @@ Document[0, 26]
 ````````````````````````````````
 
 
+Attributes go to link or element
+
+```````````````````````````````` example Embedded Spaces: 3
+Work with
+[Markdown]{style="color:[[LINK]]"} files like you do with other languages in the IDE:
+
+[Markdown]: https://example.com
+.
+<p>Work with
+<a href="https://example.com" style="color:[[LINK]]">Markdown</a> files like you do with other languages in the IDE:</p>
+.
+Document[0, 129]
+  Paragraph[0, 96] isTrailingBlankLine
+    Text[0, 9] chars:[0, 9, "Work with"]
+    SoftLineBreak[9, 10]
+    LinkRef[10, 20] referenceOpen:[10, 11, "["] reference:[11, 19, "Markdown"] referenceClose:[19, 20, "]"]
+      Text[11, 19] chars:[11, 19, "Markdown"]
+    AttributesNode[20, 44] textOpen:[20, 21, "{"] text:[21, 43, "style=\"color:[[LINK]]\""] textClose:[43, 44, "}"]
+      AttributeNode[21, 43] name:[21, 26, "style"] sep:[26, 27, "="] valueOpen:[27, 28, "\""] value:[28, 42, "color:[[LINK]]"] valueClose:[42, 43, "\""]
+    Text[44, 95] chars:[44, 95, " file …  IDE:"]
+  Reference[97, 128] refOpen:[97, 98, "["] ref:[98, 106, "Markdown"] refClose:[106, 108, "]:"] url:[109, 128, "https://example.com"]
+````````````````````````````````
+
+
+```````````````````````````````` example Embedded Spaces: 4
+Work with
+![Markdown]{style="color:[[LINK]]"} files like you do with other languages in the IDE:
+
+[Markdown]: https://example.com/image.png
+.
+<p>Work with
+<img src="https://example.com/image.png" alt="Markdown" style="color:[[LINK]]" /> files like you do with other languages in the IDE:</p>
+.
+Document[0, 140]
+  Paragraph[0, 97] isTrailingBlankLine
+    Text[0, 9] chars:[0, 9, "Work with"]
+    SoftLineBreak[9, 10]
+    ImageRef[10, 21] referenceOpen:[10, 12, "!["] reference:[12, 20, "Markdown"] referenceClose:[20, 21, "]"]
+      Text[12, 20] chars:[12, 20, "Markdown"]
+    AttributesNode[21, 45] textOpen:[21, 22, "{"] text:[22, 44, "style=\"color:[[LINK]]\""] textClose:[44, 45, "}"]
+      AttributeNode[22, 44] name:[22, 27, "style"] sep:[27, 28, "="] valueOpen:[28, 29, "\""] value:[29, 43, "color:[[LINK]]"] valueClose:[43, 44, "\""]
+    Text[45, 96] chars:[45, 96, " file …  IDE:"]
+  Reference[98, 139] refOpen:[98, 99, "["] ref:[99, 107, "Markdown"] refClose:[107, 109, "]:"] url:[110, 139, "https://example.com/image.png"]
+````````````````````````````````
+
+
+```````````````````````````````` example Embedded Spaces: 5
+Work with
+[Markdown](https://example.com){style="color:[[LINK]]"} files like you do with other languages in the IDE:
+.
+<p>Work with
+<a href="https://example.com" style="color:[[LINK]]">Markdown</a> files like you do with other languages in the IDE:</p>
+.
+Document[0, 117]
+  Paragraph[0, 117]
+    Text[0, 9] chars:[0, 9, "Work with"]
+    SoftLineBreak[9, 10]
+    Link[10, 41] textOpen:[10, 11, "["] text:[11, 19, "Markdown"] textClose:[19, 20, "]"] linkOpen:[20, 21, "("] url:[21, 40, "https://example.com"] pageRef:[21, 40, "https://example.com"] linkClose:[40, 41, ")"]
+      Text[11, 19] chars:[11, 19, "Markdown"]
+    AttributesNode[41, 65] textOpen:[41, 42, "{"] text:[42, 64, "style=\"color:[[LINK]]\""] textClose:[64, 65, "}"]
+      AttributeNode[42, 64] name:[42, 47, "style"] sep:[47, 48, "="] valueOpen:[48, 49, "\""] value:[49, 63, "color:[[LINK]]"] valueClose:[63, 64, "\""]
+    Text[65, 116] chars:[65, 116, " file …  IDE:"]
+````````````````````````````````
+
+
+```````````````````````````````` example Embedded Spaces: 6
+Work with
+![Markdown](https://example.com/image.png){style="color:[[LINK]]"} files like you do with other languages in the IDE:
+.
+<p>Work with
+<img src="https://example.com/image.png" alt="Markdown" style="color:[[LINK]]" /> files like you do with other languages in the IDE:</p>
+.
+Document[0, 128]
+  Paragraph[0, 128]
+    Text[0, 9] chars:[0, 9, "Work with"]
+    SoftLineBreak[9, 10]
+    Image[10, 52] textOpen:[10, 12, "!["] text:[12, 20, "Markdown"] textClose:[20, 21, "]"] linkOpen:[21, 22, "("] url:[22, 51, "https://example.com/image.png"] pageRef:[22, 51, "https://example.com/image.png"] linkClose:[51, 52, ")"]
+      Text[12, 20] chars:[12, 20, "Markdown"]
+    AttributesNode[52, 76] textOpen:[52, 53, "{"] text:[53, 75, "style=\"color:[[LINK]]\""] textClose:[75, 76, "}"]
+      AttributeNode[53, 75] name:[53, 58, "style"] sep:[58, 59, "="] valueOpen:[59, 60, "\""] value:[60, 74, "color:[[LINK]]"] valueClose:[74, 75, "\""]
+    Text[76, 127] chars:[76, 127, " file …  IDE:"]
+````````````````````````````````
+
+
 ## Translator Encoding
 
 ```````````````````````````````` example Translator Encoding: 1
@@ -2427,4 +2511,6 @@ Document[0, 28]
       AttributeNode[10, 27] name:[10, 15, "style"] sep:[15, 16, "="] valueOpen:[16, 17, "\""] value:[17, 26, "color:red"] valueClose:[26, 27, "\""]
 ````````````````````````````````
 
+
+[Markdown]: https://daringfireball.net/projects/markdown
 

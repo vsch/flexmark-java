@@ -111,7 +111,7 @@ public class AttributesNodePostProcessor extends NodePostProcessor {
                     Node lastNonAttributesNode = null;
                     boolean hadDoNotDecorate = false;
 
-                    while (first != null && !(first instanceof AttributesNode)) {
+                    while (first != null && (first instanceof Text || first instanceof DoNotAttributeDecorate)) {
                         if (first instanceof DoNotAttributeDecorate) {
                             hadDoNotDecorate = true;
                         }
