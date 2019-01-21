@@ -83,7 +83,7 @@ public class AutolinkNodePostProcessor extends NodePostProcessor {
         Node lastNode = node;
 
         if (node.getNext() instanceof TypographicText) {
-            // we absorb this, just in case it is part of the node
+            // we absorb this, just in case it is part of the link
             if (node.getNext().getChars().isContinuationOf(combined)) {
                 Node typoGraphic = node.getNext();
                 ArrayList<BasedSequence> combinedSequences = new ArrayList<>();
@@ -187,8 +187,18 @@ public class AutolinkNodePostProcessor extends NodePostProcessor {
 
         if (lastEscaped > 0) {
             if (firstNode != lastNode) {
+                // remove all typographic nodes already processed and truncate sequence to exclude ones not processed
                 Node removeNode = firstNode.getNext();
+                int length = node.getChars().length();
+                
                 while (removeNode != null) {
+                    if (length >= lastEscaped) {
+                        // we are done, the rest should be excluded
+                        original = original.subSequence(0, length); 
+                        break;
+                    }
+                    
+                    length += removeNode.getChars().length();
                     Node next = removeNode.getNext();
                     removeNode.unlink();
                     state.nodeRemoved(removeNode);
@@ -199,7 +209,7 @@ public class AutolinkNodePostProcessor extends NodePostProcessor {
                 }
             }
 
-            if (lastEscaped != original.length()) {
+            if (lastEscaped < original.length()) {
                 BasedSequence escapedChars = original.subSequence(lastEscaped, original.length());
                 Node node1 = new Text(escapedChars);
                 if (textBase != null) {

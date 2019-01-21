@@ -364,6 +364,23 @@ Document[0, 75]
 ````````````````````````````````
 
 
+```````````````````````````````` example(Issue 300: 4) options(typographic-ext)
+Embedded in text https://youtu.be/L1--OW4j0Pw more text--with typographic following
+.
+<p>Embedded in text <a href="https://youtu.be/L1--OW4j0Pw">https://youtu.be/L1--OW4j0Pw</a> more text&ndash;with typographic following</p>
+.
+Document[0, 83]
+  Paragraph[0, 83]
+    TextBase[0, 83] chars:[0, 83, "Embed … owing"]
+      Text[0, 17] chars:[0, 17, "Embed … text "]
+      AutoLink[17, 45] text:[17, 45, "https://youtu.be/L1--OW4j0Pw"] pageRef:[17, 45, "https://youtu.be/L1--OW4j0Pw"]
+        Text[17, 45] chars:[17, 45, "https … 4j0Pw"]
+      Text[45, 55] chars:[45, 55, " more text"]
+    TypographicSmarts[55, 57] typographic: &ndash; 
+    Text[57, 83] chars:[57, 83, "with  … owing"]
+````````````````````````````````
+
+
 ## Issue xxx-1
 
 Issue, Autolink extension does not convert URI prefix without following text
