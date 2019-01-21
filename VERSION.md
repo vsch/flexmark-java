@@ -7,7 +7,7 @@ flexmark-java
 
 - [To Do](#to-do)
     - [Docx Converter](#docx-converter)
-- [Next 0.40.10](#next-04010)
+- [0.40.10](#04010)
 - [0.40.8](#0408)
 - [0.40.6](#0406)
 - [0.40.4](#0404)
@@ -272,8 +272,8 @@ flexmark-java
 
 &nbsp;</details>
 
-Next 0.40.10
-------------
+0.40.10
+-------
 
 * Fix: GitLab inline math parser to allow multi-line inline math elements
 * Fix: #295, CoreNodeFormatter does not descend into children on Link nodes, more like kludge,

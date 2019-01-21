@@ -1161,7 +1161,11 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
         markdown.lineIf(formatterOptions.keepImageLinksAtStart);
         if (!formatterOptions.optimizedInlineRendering || context.isTransformingText()) {
             markdown.append(node.getTextOpeningMarker());
-            markdown.appendTranslating(node.getText());
+            if (context.isTransformingText()) {
+                markdown.appendTranslating(node.getText());
+            } else {
+                context.renderChildren(node);
+            }
             markdown.append(node.getTextClosingMarker());
 
             markdown.append(node.getLinkOpeningMarker());
@@ -1187,16 +1191,10 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
         markdown.lineIf(formatterOptions.keepExplicitLinksAtStart);
         if (!formatterOptions.optimizedInlineRendering || context.isTransformingText()) {
             markdown.append(node.getTextOpeningMarker());
-            if (context.isTransformingText()) {
-                if (node.getText().isNotNull()) {
-                    if (node.getFirstChildAny(HtmlInline.class) != null) {
-                        context.renderChildren(node);
-                    } else {
-                        markdown.appendTranslating(node.getText());
-                    }
-                }
-            } else {
+            if (!context.isTransformingText() || node.getFirstChildAny(HtmlInline.class) != null) {
                 context.renderChildren(node);
+            } else {
+                markdown.appendTranslating(node.getText());
             }
             markdown.append(node.getTextClosingMarker());
 
@@ -1231,11 +1229,14 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
                 markdown.append(node.getReferenceClosingMarker());
 
                 markdown.append(node.getTextOpeningMarker());
-                if (node.getText().isNotNull()) markdown.appendTranslating(node.getText());
                 markdown.append(node.getTextClosingMarker());
             } else {
                 markdown.append(node.getTextOpeningMarker());
-                markdown.appendTranslating(node.getText());
+                if (context.isTransformingText()) {
+                    markdown.appendTranslating(node.getText());
+                } else {
+                    context.renderChildren(node);
+                }
                 markdown.append(node.getTextClosingMarker());
 
                 markdown.append(node.getReferenceOpeningMarker());
@@ -1256,22 +1257,13 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
                 markdown.append(node.getReferenceClosingMarker());
 
                 markdown.append(node.getTextOpeningMarker());
-                if (node.getText().isNotNull()) {
-                    if (node.getFirstChildAny(HtmlInline.class) != null) {
-                        context.renderChildren(node);
-                    } else {
-                        markdown.appendTranslating(node.getText());
-                    }
-                }
                 markdown.append(node.getTextClosingMarker());
             } else {
                 markdown.append(node.getTextOpeningMarker());
-                if (node.getText().isNotNull()) {
-                    if (node.getFirstChildAny(HtmlInline.class) != null) {
-                        context.renderChildren(node);
-                    } else {
-                        markdown.appendTranslating(node.getText());
-                    }
+                if (!context.isTransformingText() || node.getFirstChildAny(HtmlInline.class) != null) {
+                    context.renderChildren(node);
+                } else {
+                    markdown.appendTranslating(node.getText());
                 }
                 markdown.append(node.getTextClosingMarker());
 
