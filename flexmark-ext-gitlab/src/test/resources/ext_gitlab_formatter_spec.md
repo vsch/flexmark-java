@@ -170,6 +170,24 @@ Prefix $`a^2+b^2=c^2`$ suffix
 ````````````````````````````````
 
 
+```````````````````````````````` example Inline Math: 3
+prefix $`\Pr\left[\sum_{i=1}^k X_i > c \right] \leq 2^{-\Omega(c^2 k)}$$ $$\sum_{i=1}^\infty \frac{1}{2^i} = 1`$
+.
+prefix $`\Pr\left[\sum_{i=1}^k X_i > c \right] \leq 2^{-\Omega(c^2 k)}$$ $$\sum_{i=1}^\infty \frac{1}{2^i} = 1`$
+````````````````````````````````
+
+
+allow split lines
+
+```````````````````````````````` example Inline Math: 4
+prefix $`\Pr\left[\sum_{i=1}^k X_i > c \right] \leq 2^{-\Omega(c^2 k)}$$ 
+$$\sum_{i=1}^\infty \frac{1}{2^i} = 1`$
+.
+prefix $`\Pr\left[\sum_{i=1}^k X_i > c \right] \leq 2^{-\Omega(c^2 k)}$$ 
+$$\sum_{i=1}^\infty \frac{1}{2^i} = 1`$
+````````````````````````````````
+
+
 ## Fenced Code Math
 
 ```````````````````````````````` example Fenced Code Math: 1

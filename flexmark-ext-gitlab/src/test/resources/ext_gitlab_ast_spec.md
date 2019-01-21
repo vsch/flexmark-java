@@ -477,6 +477,34 @@ Document[0, 30]
 ````````````````````````````````
 
 
+```````````````````````````````` example Inline Math: 3
+prefix $`\Pr\left[\sum_{i=1}^k X_i > c \right] \leq 2^{-\Omega(c^2 k)}$$ $$\sum_{i=1}^\infty \frac{1}{2^i} = 1`$
+.
+<p>prefix <span class="katex">\Pr\left[\sum_{i=1}^k X_i &gt; c \right] \leq 2^{-\Omega(c^2 k)}$$ $$\sum_{i=1}^\infty \frac{1}{2^i} = 1</span></p>
+.
+Document[0, 113]
+  Paragraph[0, 113]
+    Text[0, 7] chars:[0, 7, "prefix "]
+    GitLabInlineMath[7, 112] textOpen:[7, 9, "$`"] text:[9, 110, "\Pr\left[\sum_{i=1}^k X_i > c \right] \leq 2^{-\Omega(c^2 k)}$$ $$\sum_{i=1}^\infty \frac{1}{2^i} = 1"] textClose:[110, 112, "`$"]
+````````````````````````````````
+
+
+allow split lines
+
+```````````````````````````````` example Inline Math: 4
+prefix $`\Pr\left[\sum_{i=1}^k X_i > c \right] \leq 2^{-\Omega(c^2 k)}$$ 
+$$\sum_{i=1}^\infty \frac{1}{2^i} = 1`$
+.
+<p>prefix <span class="katex">\Pr\left[\sum_{i=1}^k X_i &gt; c \right] \leq 2^{-\Omega(c^2 k)}$$ 
+$$\sum_{i=1}^\infty \frac{1}{2^i} = 1</span></p>
+.
+Document[0, 114]
+  Paragraph[0, 114]
+    Text[0, 7] chars:[0, 7, "prefix "]
+    GitLabInlineMath[7, 113] textOpen:[7, 9, "$`"] text:[9, 111, "\Pr\left[\sum_{i=1}^k X_i > c \right] \leq 2^{-\Omega(c^2 k)}$$ \n$$\sum_{i=1}^\infty \frac{1}{2^i} = 1"] textClose:[111, 113, "`$"]
+````````````````````````````````
+
+
 ## Fenced Code Math
 
 ```````````````````````````````` example Fenced Code Math: 1

@@ -11,7 +11,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class GitLabInlineMathParser implements InlineParserExtension {
-    Pattern MATH_PATTERN = Pattern.compile("\\$`(.*?)`\\$");
+    Pattern MATH_PATTERN = Pattern.compile("\\$`((?:.|\n)*?)`\\$");
     private final GitLabOptions options;
 
     public GitLabInlineMathParser(final InlineParser inlineParser) {

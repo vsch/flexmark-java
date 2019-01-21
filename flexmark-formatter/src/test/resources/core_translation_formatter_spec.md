@@ -1311,6 +1311,15 @@ heEaADiING
 ````````````````````````````````
 
 
+### Link Text Translation   
+
+```````````````````````````````` example Link Text Translation: 1
+[**Translated *Bold-Italic***](http://example.com)
+.
+[**tRaANSLaAteED *boLD-itaALiIc***](http://example.com)
+````````````````````````````````
+
+
 ### Reference Placement
 
 default
@@ -2036,6 +2045,7 @@ paARaAGRaAph teEXt WiIth eEmBeEDDeED LiINK [_1_](_2_) iIN iIt.
 paARaAGRaAph teEXt WiIth eEmBeEDDeED LiINK [eXaAmpLeE liINK](http://example.com) iIN iIt.
 ````````````````````````````````
 
+
 ## Issue 271
 
 Issue #271, Regression? Comments are presereved in 0.26.4 but removed in 0.34.40
@@ -2063,8 +2073,5 @@ taABLeE oF coNteENtS:
 
 <!-- /toc -->
 ````````````````````````````````
-
-
-
 
 

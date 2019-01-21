@@ -1183,24 +1183,26 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
         }
     }
 
-    private void render(Link node, NodeFormatterContext context, MarkdownWriter markdown) {
+    private void render(final Link node, NodeFormatterContext context, MarkdownWriter markdown) {
         markdown.lineIf(formatterOptions.keepExplicitLinksAtStart);
         if (!formatterOptions.optimizedInlineRendering || context.isTransformingText()) {
             markdown.append(node.getTextOpeningMarker());
-            if (node.getText().isNotNull()) {
-                if (node.getFirstChildAny(HtmlInline.class) != null) {
-                    context.renderChildren(node);
-                } else {
-                    markdown.appendTranslating(node.getText());
+            if (context.isTransformingText()) {
+                if (node.getText().isNotNull()) {
+                    if (node.getFirstChildAny(HtmlInline.class) != null) {
+                        context.renderChildren(node);
+                    } else {
+                        markdown.appendTranslating(node.getText());
+                    }
                 }
+            } else {
+                context.renderChildren(node);
             }
             markdown.append(node.getTextClosingMarker());
 
             markdown.append(node.getLinkOpeningMarker());
-
             markdown.append(node.getUrlOpeningMarker());
             markdown.appendNonTranslating(node.getPageRef());
-
             markdown.append(node.getAnchorMarker());
             if (node.getAnchorRef().isNotNull()) {
                 CharSequence anchorRef = context.transformAnchorRef(node.getPageRef(), node.getAnchorRef());

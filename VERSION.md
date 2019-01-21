@@ -7,6 +7,7 @@ flexmark-java
 
 - [To Do](#to-do)
     - [Docx Converter](#docx-converter)
+- [Next 0.40.10](#next-04010)
 - [0.40.8](#0408)
 - [0.40.6](#0406)
 - [0.40.4](#0404)
@@ -270,6 +271,14 @@ flexmark-java
 * [ ] Fix: #99, YamlFrontMatterBlockParser ignores multi-key list items
 
 &nbsp;</details>
+
+Next 0.40.10
+------------
+
+* Fix: GitLab inline math parser to allow multi-line inline math elements
+* Fix: #295, CoreNodeFormatter does not descend into children on Link nodes, more like kludge,
+  `Formatter.OPTIMIZED_INLINE_RENDERING` when `false` and not translating to always render
+  children of link text.
 
 0.40.8
 ------
