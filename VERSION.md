@@ -7,6 +7,7 @@ flexmark-java
 
 - [To Do](#to-do)
     - [Docx Converter](#docx-converter)
+- [0.40.12](#04012)
 - [0.40.10](#04010)
 - [0.40.8](#0408)
 - [0.40.6](#0406)
@@ -271,6 +272,15 @@ flexmark-java
 * [ ] Fix: #99, YamlFrontMatterBlockParser ignores multi-key list items
 
 &nbsp;</details>
+
+0.40.12
+-------
+
+* Fix: #300, Typography extension breaks some auto links
+* Add: `TypographicText` interface to mark nodes which hold text which is replaced with
+  typographic for rendering but treated as text for decoration processing. For now
+  `AutolinkExtension` is the only one making use of it to prevent typographic smarts from
+  breaking up a link and causing part of it to be left out of the URL.
 
 0.40.10
 -------

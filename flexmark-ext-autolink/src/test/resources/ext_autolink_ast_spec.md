@@ -317,6 +317,53 @@ Document[0, 19]
 ````````````````````````````````
 
 
+## Issue 300
+
+Issue #300, Typography extension breaks some auto links
+
+```````````````````````````````` example Issue 300: 1
+https://youtu.be/L1--OW4j0Pw
+.
+<p><a href="https://youtu.be/L1--OW4j0Pw">https://youtu.be/L1--OW4j0Pw</a></p>
+.
+Document[0, 29]
+  Paragraph[0, 29]
+    TextBase[0, 28] chars:[0, 28, "https … 4j0Pw"]
+      AutoLink[0, 28] text:[0, 28, "https://youtu.be/L1--OW4j0Pw"] pageRef:[0, 28, "https://youtu.be/L1--OW4j0Pw"]
+        Text[0, 28] chars:[0, 28, "https … 4j0Pw"]
+````````````````````````````````
+
+
+```````````````````````````````` example(Issue 300: 2) options(typographic-ext)
+https://youtu.be/L1--OW4j0Pw
+.
+<p><a href="https://youtu.be/L1--OW4j0Pw">https://youtu.be/L1--OW4j0Pw</a></p>
+.
+Document[0, 28]
+  Paragraph[0, 28]
+    TextBase[0, 28] chars:[0, 28, "https … 4j0Pw"]
+      AutoLink[0, 28] text:[0, 28, "https://youtu.be/L1--OW4j0Pw"] pageRef:[0, 28, "https://youtu.be/L1--OW4j0Pw"]
+        Text[0, 28] chars:[0, 28, "https … 4j0Pw"]
+````````````````````````````````
+
+
+```````````````````````````````` example(Issue 300: 3) options(typographic-ext)
+Embedded in text https://youtu.be/L1--OW4j0Pw -- with typographic following
+.
+<p>Embedded in text <a href="https://youtu.be/L1--OW4j0Pw">https://youtu.be/L1--OW4j0Pw</a> &ndash; with typographic following</p>
+.
+Document[0, 75]
+  Paragraph[0, 75]
+    TextBase[0, 46] chars:[0, 46, "Embed … j0Pw "]
+      Text[0, 17] chars:[0, 17, "Embed … text "]
+      AutoLink[17, 45] text:[17, 45, "https://youtu.be/L1--OW4j0Pw"] pageRef:[17, 45, "https://youtu.be/L1--OW4j0Pw"]
+        Text[17, 45] chars:[17, 45, "https … 4j0Pw"]
+      Text[45, 46] chars:[45, 46, " "]
+    TypographicSmarts[46, 48] typographic: &ndash; 
+    Text[48, 75] chars:[48, 75, " with … owing"]
+````````````````````````````````
+
+
 ## Issue xxx-1
 
 Issue, Autolink extension does not convert URI prefix without following text

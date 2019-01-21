@@ -1,5 +1,6 @@
 package com.vladsch.flexmark.ext.autolink;
 
+import com.vladsch.flexmark.ext.typographic.TypographicExtension;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
@@ -26,6 +27,7 @@ public class ComboAutolinkSpecTest extends ComboSpecTestCase {
         optionsMap.put("no-autolink", new MutableDataSet().set(Parser.EXTENSIONS, Collections.EMPTY_LIST));
         optionsMap.put("ignore-google", new MutableDataSet().set(AutolinkExtension.IGNORE_LINKS, "www.google.com"));
         optionsMap.put("intellij-dummy", new MutableDataSet().set(Parser.INTELLIJ_DUMMY_IDENTIFIER, true));
+        optionsMap.put("typographic-ext", new MutableDataSet().set(Parser.EXTENSIONS, Arrays.asList(AutolinkExtension.create(), TypographicExtension.create())));
         //        optionsMap.put("custom", new MutableDataSet()
         //                .set(AutolinkExtension.AUTOLINK, value)
         //        );
