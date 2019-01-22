@@ -7,6 +7,7 @@ flexmark-java
 
 - [To Do](#to-do)
     - [Docx Converter](#docx-converter)
+- [0.40.14](#04014)
 - [0.40.12](#04012)
 - [0.40.10](#04010)
 - [0.40.8](#0408)
@@ -272,6 +273,12 @@ flexmark-java
 * [ ] Fix: #99, YamlFrontMatterBlockParser ignores multi-key list items
 
 &nbsp;</details>
+
+0.40.14
+-------
+
+* Fix: `AutolinkExtension` removing leading `Typographic` nodes when the first link occurs in
+  text following the typographic node.
 
 0.40.12
 -------

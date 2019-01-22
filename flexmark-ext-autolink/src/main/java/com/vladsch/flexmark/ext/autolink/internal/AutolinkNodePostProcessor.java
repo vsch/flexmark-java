@@ -142,6 +142,14 @@ public class AutolinkNodePostProcessor extends NodePostProcessor {
             int startOffset = textMapper.originalOffset(link.getBeginIndex());
             processedNode = true;
 
+            if (lastEscaped == 0 && firstNode != lastNode) {
+                // need to see if we need to abort because the first link is not in the first text node
+                if (startOffset >= node.getChars().length()) {
+                    // skip this, it will be processed by next Text node processor
+                    return;
+                }
+            }
+
             if (wrapInTextBase) {
                 wrapInTextBase = false;
                 textBase = new TextBase(original);
@@ -190,14 +198,14 @@ public class AutolinkNodePostProcessor extends NodePostProcessor {
                 // remove all typographic nodes already processed and truncate sequence to exclude ones not processed
                 Node removeNode = firstNode.getNext();
                 int length = node.getChars().length();
-                
+
                 while (removeNode != null) {
                     if (length >= lastEscaped) {
                         // we are done, the rest should be excluded
-                        original = original.subSequence(0, length); 
+                        original = original.subSequence(0, length);
                         break;
                     }
-                    
+
                     length += removeNode.getChars().length();
                     Node next = removeNode.getNext();
                     removeNode.unlink();
