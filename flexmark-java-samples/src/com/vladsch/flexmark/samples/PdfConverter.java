@@ -82,6 +82,11 @@ public class PdfConverter {
         Node document = PARSER.parse(pegdown);
         String html = RENDERER.render(document);
 
+        html = "<!DOCTYPE html><html><head><meta charset=\"UTF-8\">\n" +
+                "\n" +  // add your stylesheets, scripts styles etc.
+                "</head><body>" + html + "\n" +
+                "</body></html>";
+
         PdfConverterExtension.exportToPdf("/Users/vlad/src/pdf/flexmark-java.pdf", html,"", OPTIONS);
     }
 }
