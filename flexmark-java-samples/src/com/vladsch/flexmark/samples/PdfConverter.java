@@ -81,9 +81,61 @@ public class PdfConverter {
 
         Node document = PARSER.parse(pegdown);
         String html = RENDERER.render(document);
+        
+        // add embedded fonts for non-latin character set rendering
+        // change file:///usr/local/fonts/ to your system's path for font installation Unix path 
+        // On windows the path should start with `file:/X:/...` where `X:/...` is the drive 
+        // letter followed by the full installation path.
+        String nonLatinFonts = "" +
+                "<style>\n" +
+                "@font-face {\n" +
+                "  font-family: 'noto-cjk';\n" +
+                "  src: url('file:///usr/local/fonts/arialuni.ttf');\n" +
+                "  font-weight: normal;\n" +
+                "  font-style: normal;\n" +
+                "}\n" +
+                "\n" +
+                "@font-face {\n" +
+                "  font-family: 'noto-serif';\n" +
+                "  src: url('file:///usr/local/fonts/NotoSerif-Regular.ttf');\n" +
+                "  font-weight: normal;\n" +
+                "  font-style: normal;\n" +
+                "}\n" +
+                "\n" +
+                "@font-face {\n" +
+                "  font-family: 'noto-sans';\n" +
+                "  src: url('file:///usr/local/fonts/NotoSans-Regular.ttf');\n" +
+                "  font-weight: normal;\n" +
+                "  font-style: normal;\n" +
+                "}\n" +
+                "\n" +
+                "@font-face {\n" +
+                "  font-family: 'noto-mono';\n" +
+                "  src: url('file:///usr/local/fonts/NotoMono-Regular.ttf');\n" +
+                "  font-weight: normal;\n" +
+                "  font-style: normal;\n" +
+                "}\n" +
+                "\n" +
+                "body {\n" +
+                "    font-family: 'noto-sans', 'noto-cjk', sans-serif;\n" +
+                "    overflow: hidden;\n" +
+                "    word-wrap: break-word;\n" +
+                "    font-size: 14px;\n" +
+                "}\n" +
+                "\n" +
+                "var,\n" +
+                "code,\n" +
+                "kbd,\n" +
+                "pre {\n" +
+                "    font: 0.9em 'noto-mono', Consolas, \"Liberation Mono\", Menlo, Courier, monospace;\n" +
+                "}\n" +
+                "</style>\n" +
+                "";
 
         html = "<!DOCTYPE html><html><head><meta charset=\"UTF-8\">\n" +
-                "\n" +  // add your stylesheets, scripts styles etc.
+                "" +  // add your stylesheets, scripts styles etc.
+                // uncomment line below for adding style for custom embedded fonts
+                // nonLatinFonts +
                 "</head><body>" + html + "\n" +
                 "</body></html>";
 
