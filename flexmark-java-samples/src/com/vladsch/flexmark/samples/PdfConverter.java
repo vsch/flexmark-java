@@ -83,9 +83,12 @@ public class PdfConverter {
         String html = RENDERER.render(document);
         
         // add embedded fonts for non-latin character set rendering
-        // change file:///usr/local/fonts/ to your system's path for font installation Unix path 
-        // On windows the path should start with `file:/X:/...` where `X:/...` is the drive 
+        // change file:///usr/local/fonts/ to your system's path for font installation Unix path or 
+        // on windows the path should start with `file:/X:/...` where `X:/...` is the drive 
         // letter followed by the full installation path.
+        //
+        // Google Noto fonts can be downloaded from https://www.google.com/get/noto/
+        // `arialuni.ttf` from https://www.wfonts.com/font/arial-unicode-ms
         String nonLatinFonts = "" +
                 "<style>\n" +
                 "@font-face {\n" +
