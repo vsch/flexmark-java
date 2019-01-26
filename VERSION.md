@@ -279,6 +279,8 @@ flexmark-java
 
 * Fix: `AutolinkExtension` removing leading `Typographic` nodes when the first link occurs in
   text following the typographic node.
+* Add: PDF converter sample with non-latin character set rendering information.
+* Fix: missing `simple_smile` emoji cheat sheet shortcut
 
 0.40.12
 -------
@@ -301,8 +303,8 @@ flexmark-java
 ------
 
 * Fix: change `AttributeProviderFactory` extensions to eliminate duplicate registrations of
-  factories. 
-* Fix: `AttributesExtension` to assign attributes to explicit/refs  links/images 
+  factories.
+* Fix: `AttributesExtension` to assign attributes to explicit/refs links/images
 * Fix: #299, FlexmarkHtmlParser produces extra empty list item for enclosing </p> element
 
 0.40.6
@@ -326,16 +328,16 @@ flexmark-java
 * Fix: `AttributesExtension` incorrectly parsed invalid empty sequences and absorbed the text
   instead of skipping it. ie. `{}`, `{ }`, `{#}` and `{.}`
 * Add: `AttributesExtension.USE_EMPTY_IMPLICIT_AS_SPAN_DELIMITER`, default `false`. When set to
-  `true` will treat `{#}` or `{.}`, without embedded spaced, as start attribute span delimiter to
-  mark start of attribute assignment to text between `{.}` or `{#}` and the matching attributes
-  element. 
+  `true` will treat `{#}` or `{.}`, without embedded spaced, as start attribute span delimiter
+  to mark start of attribute assignment to text between `{.}` or `{#}` and the matching
+  attributes element.
 
 0.40.4
 ------
 
 * Fix: #295, CoreNodeFormatter does not descend into children on Link nodes
-  * `Link`, `LinkRef`, `Image` and `ImageRef` node formatter renderer now descends into child nodes during
-    all formatting, not just translation formatting.
+  * `Link`, `LinkRef`, `Image` and `ImageRef` node formatter renderer now descends into child
+    nodes during all formatting, not just translation formatting.
 * Add: `Formatter.OPTIMIZED_INLINE_RENDERING` default `false`. When set to `true` will use
   previous rendering for links and images which appends the node characters without descending
   into child nodes.
@@ -352,7 +354,8 @@ flexmark-java
 * Fix: #293, YamlFrontMatterBlock rendered as markdown does not preserve nested lists
   * Add: `YamlFrontMatterValue` node containing yaml value(s) inserted as children of
     `YamlFrontMatterNode`
-  * Fix: change stored key as `BasedSequence` instead of string, can be retrieved as `YamlFrontMatterNode.getKeySequence()`
+  * Fix: change stored key as `BasedSequence` instead of string, can be retrieved as
+    `YamlFrontMatterNode.getKeySequence()`
   * Add: code to return `List<String>` from child nodes of `YamlFrontMatterNode`
   * Fix: resolve offsets in `YamlFrontMatterNode` and `YamlFrontMatterValue` nodes.
 
@@ -377,11 +380,12 @@ flexmark-java
   are not open. Re-running the migration tends to apply the migration. In cases where migration
   is not applied manual editing will be needed. In my projects `Document`, `Node` and
   `Formatter` were the problem classes:
-  
+
   * `com.vladsch.flexmark.ast.Document` to `com.vladsch.flexmark.util.ast.Document`
   * `com.vladsch.flexmark.ast.Node` to `com.vladsch.flexmark.util.ast.Node`
-  * `com.vladsch.flexmark.formatter.internal.Formatter` to `com.vladsch.flexmark.formatter.Formatter` 
-  
+  * `com.vladsch.flexmark.formatter.internal.Formatter` to
+    `com.vladsch.flexmark.formatter.Formatter`
+
   :warning: `flexmark-docx-converter` and `flexmark-pdf-converter` cannot be used with Java 9+
   modules because the underlying libraries used have package load conflicts that will be
   resolved in a later release.

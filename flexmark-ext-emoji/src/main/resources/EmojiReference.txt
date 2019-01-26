@@ -1183,6 +1183,7 @@ shower	objects	shower.png	unicode/1f6bf.png?v7	U+1F6BF	1f6bf.png	shower
 shrimp	nature	 	unicode/1f990.png?v7	U+1F990	1f990.png	shrimp
 sierra_leone	places	 	unicode/1f1f8-1f1f1.png?v7	U+1F1F8 U+1F1F1	1f1f8-1f1f1.png	Sierra Leone
 signal_strength	symbols	signal_strength.png	unicode/1f4f6.png?v7	U+1F4F6	1f4f6.png	antenna bars
+simple_smile	people	simple_smile.png	 	  	 	simple smile
 singapore	places	 	unicode/1f1f8-1f1ec.png?v7	U+1F1F8 U+1F1EC	1f1f8-1f1ec.png	Singapore
 sint_maarten	places	 	unicode/1f1f8-1f1fd.png?v7	U+1F1F8 U+1F1FD	1f1f8-1f1fd.png	Sint Maarten
 six	symbols	six.png	unicode/0036-20e3.png?v7	U+0036 U+FE0F U+20E3	0036-20e3.png	keycap: 6

@@ -2105,3 +2105,52 @@ autolinks extension
 ````````````````````````````````
 
 
+### Issue 302
+
+Issue #302, Markdown conversion to HTML of links and images don't convert near <p> block
+
+```````````````````````````````` example Issue 302: 1
+<p><strong>Note</strong>: When sent as a Bearer token</p> ![External Groups Whitelist field](images/external-groups-whitelist.png)
+.
+<p><strong>Note</strong>: When sent as a Bearer token</p> ![External Groups Whitelist field](images/external-groups-whitelist.png)
+.
+Document[0, 131]
+  HtmlBlock[0, 131]
+````````````````````````````````
+
+
+```````````````````````````````` example Issue 302: 2
+<strong>Note</strong>: When sent as a Bearer token ![External Groups Whitelist field](images/external-groups-whitelist.png)
+.
+<p><strong>Note</strong>: When sent as a Bearer token <img src="images/external-groups-whitelist.png" alt="External Groups Whitelist field" /></p>
+.
+Document[0, 124]
+  Paragraph[0, 124]
+    HtmlInline[0, 8] chars:[0, 8, "<strong>"]
+    Text[8, 12] chars:[8, 12, "Note"]
+    HtmlInline[12, 21] chars:[12, 21, "</strong>"]
+    Text[21, 51] chars:[21, 51, ": Whe … oken "]
+    Image[51, 123] textOpen:[51, 53, "!["] text:[53, 84, "External Groups Whitelist field"] textClose:[84, 85, "]"] linkOpen:[85, 86, "("] url:[86, 122, "images/external-groups-whitelist.png"] pageRef:[86, 122, "images/external-groups-whitelist.png"] linkClose:[122, 123, ")"]
+      Text[53, 84] chars:[53, 84, "Exter … field"]
+````````````````````````````````
+
+
+```````````````````````````````` example(Issue 302: 3) options(no-html-blocks)
+<p><strong>Note</strong>: When sent as a Bearer token</p> ![External Groups Whitelist field](images/external-groups-whitelist.png)
+.
+<p><p><strong>Note</strong>: When sent as a Bearer token</p> <img src="images/external-groups-whitelist.png" alt="External Groups Whitelist field" /></p>
+.
+Document[0, 130]
+  Paragraph[0, 130]
+    HtmlInline[0, 3] chars:[0, 3, "<p>"]
+    HtmlInline[3, 11] chars:[3, 11, "<strong>"]
+    Text[11, 15] chars:[11, 15, "Note"]
+    HtmlInline[15, 24] chars:[15, 24, "</strong>"]
+    Text[24, 53] chars:[24, 53, ": Whe … token"]
+    HtmlInline[53, 57] chars:[53, 57, "</p>"]
+    Text[57, 58] chars:[57, 58, " "]
+    Image[58, 130] textOpen:[58, 60, "!["] text:[60, 91, "External Groups Whitelist field"] textClose:[91, 92, "]"] linkOpen:[92, 93, "("] url:[93, 129, "images/external-groups-whitelist.png"] pageRef:[93, 129, "images/external-groups-whitelist.png"] linkClose:[129, 130, ")"]
+      Text[60, 91] chars:[60, 91, "Exter … field"]
+````````````````````````````````
+
+

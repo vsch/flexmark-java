@@ -1,7 +1,9 @@
 package com.vladsch.flexmark.samples;
 
 import com.vladsch.flexmark.Extension;
-import com.vladsch.flexmark.ast.*;
+import com.vladsch.flexmark.ast.Image;
+import com.vladsch.flexmark.ast.Link;
+import com.vladsch.flexmark.ast.Reference;
 import com.vladsch.flexmark.html.*;
 import com.vladsch.flexmark.html.HtmlRenderer.Builder;
 import com.vladsch.flexmark.html.HtmlRenderer.HtmlRendererExtension;
@@ -32,6 +34,7 @@ public class CustomLinkResolverSample {
         private final String docRelativeURL;
         private final String docRootURL;
         private final String[] relativeParts;
+
         public DocxLinkResolver(final LinkResolverContext context) {
             // can use context for custom settings
             // context.getDocument();
@@ -66,7 +69,6 @@ public class CustomLinkResolverSample {
                     // assume it is good
                     return link.withStatus(LinkStatus.VALID)
                             .withUrl(url);
-
                 } else if (url.startsWith("/")) {
                     if (docRootURL != null && !docRootURL.isEmpty()) {
                         // this one is root url, prefix with root url, without the trailing /
@@ -75,7 +77,6 @@ public class CustomLinkResolverSample {
                         return link.withStatus(LinkStatus.VALID)
                                 .withUrl(url);
                     }
-
                 } else if (!url.matches("^(?:[a-z]+:|#|\\?)")) {
                     // relative, we will process it as a relative path to the docRelativeURL
                     String pageRef = url;
@@ -85,8 +86,7 @@ public class CustomLinkResolverSample {
                         // remove anchor
                         suffix = url.substring(pos);
                         pageRef = url.substring(0, pos);
-                    }
-                    else if (url.contains("?")) {
+                    } else if (url.contains("?")) {
                         // remove query
                         suffix = url.substring(pos);
                         pageRef = url.substring(0, pos);
@@ -224,7 +224,6 @@ public class CustomLinkResolverSample {
             return set;
         }
     }
-
 
     // use the PARSER to parse and RENDERER to render with pegdown compatibility
     public static void main(String[] args) {

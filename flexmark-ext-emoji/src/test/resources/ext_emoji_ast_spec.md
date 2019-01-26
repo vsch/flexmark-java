@@ -750,6 +750,22 @@ Document[0, 85]
 ````````````````````````````````
 
 
+## Issue 304
+
+#304, EmojiExtension doesn't support all emoji listed at the Cheat Sheet
+
+```````````````````````````````` example(Issue 304: 1) options(use-cheat)
+:simple_smile:
+.
+<p><img src="/img/simple_smile.png" alt="emoji people:simple_smile" height="20" width="20" align="absmiddle" /></p>
+.
+Document[0, 14]
+  Paragraph[0, 14]
+    Emoji[0, 14] textOpen:[0, 1, ":"] text:[1, 13, "simple_smile"] textClose:[13, 14, ":"]
+      Text[1, 13] chars:[1, 13, "simpl … smile"]
+````````````````````````````````
+
+
 ## Issue, Unicode missing
 
 ```````````````````````````````` example(Issue, Unicode missing: 1) options(unicode-only)
