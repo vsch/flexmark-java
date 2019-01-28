@@ -7,6 +7,7 @@ flexmark-java
 
 - [To Do](#to-do)
     - [Docx Converter](#docx-converter)
+- [0.40.16](#04016)
 - [0.40.14](#04014)
 - [0.40.12](#04012)
 - [0.40.10](#04010)
@@ -270,9 +271,26 @@ flexmark-java
       handler.
   * [ ] Add: base64 embedded image link resolver option or a sample on how to do it
 
-* [ ] Fix: #99, YamlFrontMatterBlockParser ignores multi-key list items
+* [ ] Fix: [#99, YamlFrontMatterBlockParser ignores multi-key list items]
 
 &nbsp;</details>
+
+0.40.16
+-------
+
+* Fix: `EnumeratedReferenceExtension` would process GitHub issue link text as enumerated
+  reference. Now enumerated `reference` must start with a non-digit character to be interpreted
+  as enumerated reference.
+* Fix: Reference Text, Reference Id, Link Text and Image Alt Text child text was not trimmed in
+  the AST causing the parent text range to be smaller than the contained children's text range.
+* Add: `PdfConverterExtension.PROTECTION_POLICY`, default `null`. Set the protection policy for
+  the generated PDF document.
+  * Merge: [#306, PR: Add password protection support] thanks to
+    **[niksw7](https://github.com/niksw7)**
+* Add: `youtu.be` link handling to `YouTubeLinkExtension`
+  * Merge:
+    [#305, PR: add new youtube link style support to flexmark-ext-youtube-embedded for youtu.be/xyz(?t=123)]
+    thanks to **[jjYBdx4IL](https://github.com/jjYBdx4IL)**
 
 0.40.14
 -------
@@ -285,7 +303,7 @@ flexmark-java
 0.40.12
 -------
 
-* Fix: #300, Typography extension breaks some auto links
+* Fix: [#300, Typography extension breaks some auto links]
 * Add: `TypographicText` interface to mark nodes which hold text which is replaced with
   typographic for rendering but treated as text for decoration processing. For now
   `AutolinkExtension` is the only one making use of it to prevent typographic smarts from
@@ -295,9 +313,9 @@ flexmark-java
 -------
 
 * Fix: GitLab inline math parser to allow multi-line inline math elements
-* Fix: #295, CoreNodeFormatter does not descend into children on Link nodes, more like kludge,
-  `Formatter.OPTIMIZED_INLINE_RENDERING` when `false` and not translating to always render
-  children of link text.
+* Fix: [#295, CoreNodeFormatter does not descend into children on Link nodes] , more like
+  kludge, `Formatter.OPTIMIZED_INLINE_RENDERING` when `false` and not translating to always
+  render children of link text.
 
 0.40.8
 ------
@@ -305,7 +323,7 @@ flexmark-java
 * Fix: change `AttributeProviderFactory` extensions to eliminate duplicate registrations of
   factories.
 * Fix: `AttributesExtension` to assign attributes to explicit/refs links/images
-* Fix: #299, FlexmarkHtmlParser produces extra empty list item for enclosing </p> element
+* Fix: [#299, FlexmarkHtmlParser produces extra empty list item for eclosing \</p\> element]
 
 0.40.6
 ------
@@ -335,7 +353,7 @@ flexmark-java
 0.40.4
 ------
 
-* Fix: #295, CoreNodeFormatter does not descend into children on Link nodes
+* Fix: [#295, CoreNodeFormatter does not descend into children on Link nodes]
   * `Link`, `LinkRef`, `Image` and `ImageRef` node formatter renderer now descends into child
     nodes during all formatting, not just translation formatting.
 * Add: `Formatter.OPTIMIZED_INLINE_RENDERING` default `false`. When set to `true` will use
@@ -345,13 +363,13 @@ flexmark-java
 0.40.2
 ------
 
-* Fix: #294, BlankLine nodes within BlockQuote change in behaviour
+* Fix: [#294, BlankLine nodes within BlockQuote change in behaviour]
   * remove blank lines from AST for `BlockQuote` and `AsideBlock` nodes if
     `Parser.BLANK_LINES_IN_AST` is not set.
-* Fix: #292, 0.40.0: JUnit is in the compile scope
+* Fix: [#292, 0.40.0: JUnit is in the compile scope]
   * remove unnecessary ast collecting visitor in `DocumentParser`
   * add test scope to flexmark pom
-* Fix: #293, YamlFrontMatterBlock rendered as markdown does not preserve nested lists
+* Fix: [#293, YamlFrontMatterBlock rendered as markdown does not preserve nested lists]
   * Add: `YamlFrontMatterValue` node containing yaml value(s) inserted as children of
     `YamlFrontMatterNode`
   * Fix: change stored key as `BasedSequence` instead of string, can be retrieved as
@@ -362,9 +380,8 @@ flexmark-java
 0.40.0
 ------
 
-* Fix: Java9+ Compatibility, IntelliJ Migration contained in
-  [migrate 0_35_x to 0_40_0.xml](/assets/migrations/migrate%20flexmark-java%200_35_x%20to%200_40_0.xml),
-  to use:
+* Fix: Java9+ Compatibility, IntelliJ Migration contained in [migrate 0_35_x to 0_40_0.xml], to
+  use:
 
   * copy to IntelliJ application settings to `migrations` subdirectory
   * if you have the project which you want to migrate open, then close it
@@ -426,56 +443,56 @@ flexmark-java
     * `com.vladsch.flexmark.ast.Visitor` to `com.vladsch.flexmark.util.ast.Visitor`
     * `com.vladsch.flexmark.IParse` to `com.vladsch.flexmark.util.IParse`
     * `com.vladsch.flexmark.IRender` to `com.vladsch.flexmark.util.IRender`
-    
+
   * Fix: API classes under `internal` package:
-    * `flexmark`: 
-      * `com.vladsch.flexmark.internal.inline.AsteriskDelimiterProcessor` to `com.vladsch.flexmark.parser.core.delimiter.AsteriskDelimiterProcessor` 
-      * `com.vladsch.flexmark.internal.inline.EmphasisDelimiterProcessor` to `com.vladsch.flexmark.parser.core.delimiter.EmphasisDelimiterProcessor` 
-      * `com.vladsch.flexmark.internal.Bracket` to `com.vladsch.flexmark.parser.core.delimiter.Bracket` 
-      * `com.vladsch.flexmark.internal.Delimiter` to `com.vladsch.flexmark.parser.core.delimiter.Delimiter` 
-      * `com.vladsch.flexmark.internal.ThematicBreakOptions` to `com.vladsch.flexmark.internal.ThematicBreakParser.ThematicBreakOptions` 
-      * `com.vladsch.flexmark.internal.HeadingOptions` to `com.vladsch.flexmark.internal.HeadingParser.HeadingOptions` 
-      * `com.vladsch.flexmark.internal.BlockParserTracker` to `com.vladsch.flexmark.parser.block.BlockParserTracker` 
-      * `com.vladsch.flexmark.internal.BlockQuoteParser` to `com.vladsch.flexmark.parser.core.BlockQuoteParser` 
-      * `com.vladsch.flexmark.internal.DocumentBlockParser` to `com.vladsch.flexmark.parser.core.DocumentBlockParser` 
-      * `com.vladsch.flexmark.internal.FencedCodeBlockParser` to `com.vladsch.flexmark.parser.core.FencedCodeBlockParser` 
-      * `com.vladsch.flexmark.internal.HeadingParser` to `com.vladsch.flexmark.parser.core.HeadingParser` 
-      * `com.vladsch.flexmark.internal.IndentedCodeBlockParser` to `com.vladsch.flexmark.parser.core.IndentedCodeBlockParser` 
-      * `com.vladsch.flexmark.internal.ListBlockParser` to `com.vladsch.flexmark.parser.core.ListBlockParser` 
-      * `com.vladsch.flexmark.internal.ListItemParser` to `com.vladsch.flexmark.parser.core.ListItemParser` 
-      * `com.vladsch.flexmark.internal.ParagraphParser` to `com.vladsch.flexmark.parser.core.ParagraphParser` 
-      * `com.vladsch.flexmark.internal.ThematicBreakParser` to `com.vladsch.flexmark.parser.core.ThematicBreakParser` 
-      * `com.vladsch.flexmark.internal.HtmlBlockParser` to `com.vladsch.flexmark.parser.core.HtmlBlockParser` 
-      * `com.vladsch.flexmark.internal.ReferencePreProcessorFactory` to `com.vladsch.flexmark.parser.core.ReferencePreProcessorFactory` 
-      * `com.vladsch.flexmark.internal.InlineParserImpl` to `com.vladsch.flexmark.parser.internal.InlineParserImpl` 
-      * `com.vladsch.flexmark.internal.BlockStartImpl` to `com.vladsch.flexmark.parser.internal.BlockStartImpl` 
-      * `com.vladsch.flexmark.internal.BlockContinueImpl` to `com.vladsch.flexmark.parser.internal.BlockContinueImpl` 
-      * `com.vladsch.flexmark.internal.LinkRefProcessorData` to `com.vladsch.flexmark.parser.internal.LinkRefProcessorData` 
-      * `com.vladsch.flexmark.internal.CommonmarkInlineParser` to `com.vladsch.flexmark.parser.internal.CommonmarkInlineParser` 
-      * `com.vladsch.flexmark.internal.MatchedBlockParserImpl` to `com.vladsch.flexmark.parser.internal.MatchedBlockParserImpl` 
-      * `com.vladsch.flexmark.internal.PostProcessorManager` to `com.vladsch.flexmark.parser.internal.PostProcessorManager` 
-      * `com.vladsch.flexmark.internal.DocumentParser` to `com.vladsch.flexmark.parser.internal.DocumentParser` 
-      * `com.vladsch.flexmark.internal.HtmlDeepParser` to `com.vladsch.flexmark.parser.internal.HtmlDeepParser` 
-      
+    * `flexmark`:
+      * `com.vladsch.flexmark.internal.inline.AsteriskDelimiterProcessor` to `com.vladsch.flexmark.parser.core.delimiter.AsteriskDelimiterProcessor`
+      * `com.vladsch.flexmark.internal.inline.EmphasisDelimiterProcessor` to `com.vladsch.flexmark.parser.core.delimiter.EmphasisDelimiterProcessor`
+      * `com.vladsch.flexmark.internal.Bracket` to `com.vladsch.flexmark.parser.core.delimiter.Bracket`
+      * `com.vladsch.flexmark.internal.Delimiter` to `com.vladsch.flexmark.parser.core.delimiter.Delimiter`
+      * `com.vladsch.flexmark.internal.ThematicBreakOptions` to `com.vladsch.flexmark.internal.ThematicBreakParser.ThematicBreakOptions`
+      * `com.vladsch.flexmark.internal.HeadingOptions` to `com.vladsch.flexmark.internal.HeadingParser.HeadingOptions`
+      * `com.vladsch.flexmark.internal.BlockParserTracker` to `com.vladsch.flexmark.parser.block.BlockParserTracker`
+      * `com.vladsch.flexmark.internal.BlockQuoteParser` to `com.vladsch.flexmark.parser.core.BlockQuoteParser`
+      * `com.vladsch.flexmark.internal.DocumentBlockParser` to `com.vladsch.flexmark.parser.core.DocumentBlockParser`
+      * `com.vladsch.flexmark.internal.FencedCodeBlockParser` to `com.vladsch.flexmark.parser.core.FencedCodeBlockParser`
+      * `com.vladsch.flexmark.internal.HeadingParser` to `com.vladsch.flexmark.parser.core.HeadingParser`
+      * `com.vladsch.flexmark.internal.IndentedCodeBlockParser` to `com.vladsch.flexmark.parser.core.IndentedCodeBlockParser`
+      * `com.vladsch.flexmark.internal.ListBlockParser` to `com.vladsch.flexmark.parser.core.ListBlockParser`
+      * `com.vladsch.flexmark.internal.ListItemParser` to `com.vladsch.flexmark.parser.core.ListItemParser`
+      * `com.vladsch.flexmark.internal.ParagraphParser` to `com.vladsch.flexmark.parser.core.ParagraphParser`
+      * `com.vladsch.flexmark.internal.ThematicBreakParser` to `com.vladsch.flexmark.parser.core.ThematicBreakParser`
+      * `com.vladsch.flexmark.internal.HtmlBlockParser` to `com.vladsch.flexmark.parser.core.HtmlBlockParser`
+      * `com.vladsch.flexmark.internal.ReferencePreProcessorFactory` to `com.vladsch.flexmark.parser.core.ReferencePreProcessorFactory`
+      * `com.vladsch.flexmark.internal.InlineParserImpl` to `com.vladsch.flexmark.parser.internal.InlineParserImpl`
+      * `com.vladsch.flexmark.internal.BlockStartImpl` to `com.vladsch.flexmark.parser.internal.BlockStartImpl`
+      * `com.vladsch.flexmark.internal.BlockContinueImpl` to `com.vladsch.flexmark.parser.internal.BlockContinueImpl`
+      * `com.vladsch.flexmark.internal.LinkRefProcessorData` to `com.vladsch.flexmark.parser.internal.LinkRefProcessorData`
+      * `com.vladsch.flexmark.internal.CommonmarkInlineParser` to `com.vladsch.flexmark.parser.internal.CommonmarkInlineParser`
+      * `com.vladsch.flexmark.internal.MatchedBlockParserImpl` to `com.vladsch.flexmark.parser.internal.MatchedBlockParserImpl`
+      * `com.vladsch.flexmark.internal.PostProcessorManager` to `com.vladsch.flexmark.parser.internal.PostProcessorManager`
+      * `com.vladsch.flexmark.internal.DocumentParser` to `com.vladsch.flexmark.parser.internal.DocumentParser`
+      * `com.vladsch.flexmark.internal.HtmlDeepParser` to `com.vladsch.flexmark.parser.internal.HtmlDeepParser`
+
       * resource `/com/vladsch/flexmark/internal/util/entities.properties` to `/com/vladsch/flexmark/util/html/entities.properties` in `flexmark-util` module
-      
+
     * `flexmark-docx-converter`
-      * `com.vladsch.flexmark.docx.converter.internal.DocxRenderer` to `com.vladsch.flexmark.docx.converter.DocxRenderer` 
-      * `com.vladsch.flexmark.docx.converter.internal.DocxRendererPhase` to `com.vladsch.flexmark.docx.converter.DocxRendererPhase` 
-      * `com.vladsch.flexmark.docx.converter.internal.NodeDocxRendererHandler` to `com.vladsch.flexmark.docx.converter.NodeDocxRendererHandler` 
-      * `com.vladsch.flexmark.docx.converter.internal.DocxRendererOptions` to `com.vladsch.flexmark.docx.converter.DocxRendererOptions` 
-      
+      * `com.vladsch.flexmark.docx.converter.internal.DocxRenderer` to `com.vladsch.flexmark.docx.converter.DocxRenderer`
+      * `com.vladsch.flexmark.docx.converter.internal.DocxRendererPhase` to `com.vladsch.flexmark.docx.converter.DocxRendererPhase`
+      * `com.vladsch.flexmark.docx.converter.internal.NodeDocxRendererHandler` to `com.vladsch.flexmark.docx.converter.NodeDocxRendererHandler`
+      * `com.vladsch.flexmark.docx.converter.internal.DocxRendererOptions` to `com.vladsch.flexmark.docx.converter.DocxRendererOptions`
+
     * `flexmark-formatter`
-      * `com.vladsch.flexmark.formatter.internal.Formatter` to `com.vladsch.flexmark.formatter.Formatter` 
-      * `com.vladsch.flexmark.formatter.internal.FormattingPhase` to `com.vladsch.flexmark.formatter.FormattingPhase` 
-      * `com.vladsch.flexmark.formatter.internal.MarkdownWriter` to `com.vladsch.flexmark.formatter.MarkdownWriter` 
-      * `com.vladsch.flexmark.formatter.internal.NodeFormatter` to `com.vladsch.flexmark.formatter.NodeFormatter` 
-      * `com.vladsch.flexmark.formatter.internal.NodeFormatterContext` to `com.vladsch.flexmark.formatter.NodeFormatterContext` 
-      * `com.vladsch.flexmark.formatter.internal.NodeFormatterFactory` to `com.vladsch.flexmark.formatter.NodeFormatterFactory` 
-      * `com.vladsch.flexmark.formatter.internal.NodeFormattingHandler` to `com.vladsch.flexmark.formatter.NodeFormattingHandler` 
-      * `com.vladsch.flexmark.formatter.internal.NodeRepositoryFormatter` to `com.vladsch.flexmark.formatter.NodeRepositoryFormatter` 
-      * `com.vladsch.flexmark.formatter.internal.PhasedNodeFormatter` to `com.vladsch.flexmark.formatter.PhasedNodeFormatter` 
-      * `com.vladsch.flexmark.formatter.internal.NodeFormatterSubContext` to `com.vladsch.flexmark.formatter.NodeFormatterSubContext` 
+      * `com.vladsch.flexmark.formatter.internal.Formatter` to `com.vladsch.flexmark.formatter.Formatter`
+      * `com.vladsch.flexmark.formatter.internal.FormattingPhase` to `com.vladsch.flexmark.formatter.FormattingPhase`
+      * `com.vladsch.flexmark.formatter.internal.MarkdownWriter` to `com.vladsch.flexmark.formatter.MarkdownWriter`
+      * `com.vladsch.flexmark.formatter.internal.NodeFormatter` to `com.vladsch.flexmark.formatter.NodeFormatter`
+      * `com.vladsch.flexmark.formatter.internal.NodeFormatterContext` to `com.vladsch.flexmark.formatter.NodeFormatterContext`
+      * `com.vladsch.flexmark.formatter.internal.NodeFormatterFactory` to `com.vladsch.flexmark.formatter.NodeFormatterFactory`
+      * `com.vladsch.flexmark.formatter.internal.NodeFormattingHandler` to `com.vladsch.flexmark.formatter.NodeFormattingHandler`
+      * `com.vladsch.flexmark.formatter.internal.NodeRepositoryFormatter` to `com.vladsch.flexmark.formatter.NodeRepositoryFormatter`
+      * `com.vladsch.flexmark.formatter.internal.PhasedNodeFormatter` to `com.vladsch.flexmark.formatter.PhasedNodeFormatter`
+      * `com.vladsch.flexmark.formatter.internal.NodeFormatterSubContext` to `com.vladsch.flexmark.formatter.NodeFormatterSubContext`
 <!--@formatter:on-->
 
 0.35.8
@@ -508,8 +525,8 @@ flexmark-java
 * Fix: Aside extension to use new `KeepTrailingBlankLineContainer` marker for blocks which have
   a prefix which allows attribution of blank lines to the block.
 * Add: sample for converting inline nodes to text nodes in node post processor. Thanks to
-  **[@markkolich](https://github.com/markkolich)**. Merged #288, Adding
-  TokenReplacingPostProcessorSample and UnderlineExtensionSample
+  **[@markkolich](https://github.com/markkolich)**.
+  * Merged [#288, PR: Adding TokenReplacingPostProcessorSample and UnderlineExtensionSample]
 * Fix: `ReplacedTextMapper` can only handle a single replacement set, while AutoLinkExtension
   was applying a replacement on top of already replaced text.
 
@@ -525,7 +542,7 @@ flexmark-java
   except for the last item in the list. Now all trailing blank lines are moved out to the parent
   list. Therefore children of lists can be list items or blank lines, not just list items. This
   makes blank line attribution more consistent.
-* Fix: #287, 'flexmark-html-parser' The module has an mistake
+* Fix: [#287, ''flexmark-html-parser' The module has an mistake]
 * Fix: empty table cells now contain a space so that the position of the cell's text in the file
   is not lost.
 * Fix: Formatter inline elements leaving embedded EOL sequences when
@@ -619,8 +636,8 @@ flexmark-java
 0.34.56
 -------
 
-* Fix: #274, FlexmarkHtmlParser can not handle escaped tags correctly, now `<`, `>` and `&` are
-  also escaped.
+* Fix: [#274, FlexmarkHtmlParser can not handle escaped tags correctly], now `<`, `>` and `&`
+  are also escaped.
 
 0.34.53
 -------
@@ -667,7 +684,7 @@ flexmark-java
 0.34.44
 -------
 
-* Fix: #271, Regression? Comments are presereved in 0.26.4 but removed in 0.34.40
+* Fix: [#271, Regression? Comments are preserved in 0.26.4 but removed in 0.34.40]
   * Fix: formatter HTML comments in non-translating mode did not output comment markers
 * Fix: treat protocol prefix at the end of line as a valid link.
 
@@ -717,7 +734,7 @@ flexmark-java
 0.34.30
 -------
 
-* Fix: #268, Pipe characters are not escaped in Table (FlexmarkHtmlParser)
+* Fix: [#268, Pipe characters are not escaped in Table (FlexmarkHtmlParser)]
   * Fix: escape pipe characters in text (to avoid accidental use as table or other markup) when
     not inline code nor fenced code
   * Fix: escape back ticks when inside code
@@ -817,29 +834,30 @@ flexmark-java
 0.34.16
 -------
 
-* Fix: #254, customized HTML_BLOCK_TAGS Parser option seems not taken into account
+* Fix: [#254, customized HTML\_BLOCK\_TAGS Parser option seems not taken into account]
 
 0.34.14
 -------
 
-* Fix: #252, GfmUser and GfmIssue are not recognized if immediately followed by non-space
+* Fix:
+  [#252, GfmUser and GfmIssue are not recognized if immediately followed by non-space character]
   character, change regex to allow word break after user and issue
 
 0.34.12
 -------
 
-* Fix: merge #249, support Jira links titles thanks to [@qwazer](https://github.com/qwazer)
+* Fix: merge [#249, support Jira links titles] thanks to [@qwazer](https://github.com/qwazer)
 
 0.34.10
 -------
 
-* Fix: #247, Admonition Expression may lack a part of the text.
+* Fix: [#247, Admonition Expression may lack a part of the text.]
 * Add: `TocExtension.TOC_CONTENT`, `TocExtension.TOC_LIST`, `SimTocExtension.TOC_CONTENT`,
   `SimTocExtension.TOC_LIST` attributable parts for `div` and `ul`/`ol` HTML tags. Documented in
   [Table-of-Contents-Extension](../../wiki/Table-of-Contents-Extension)
   * Fix: `TOC` element to use `TITLE` option if one is defined. Default for `TOC` is `""`, for
     sim `TOC` it is `"Table of Contents"`
-* Fix: #248, Request to add CSS class of TOC
+* Fix: [#248, Request to add CSS class of TOC]
   * Add: `TocExtension.DIV_CLASS` default `""`, class attribute to use on table of content `div`
     wrapper, duplicated as `SimTocExtension.DIV_CLASS`
   * Add: `TocExtension.LIST_CLASS` default `""`, class attribute to use on table of content `ul`
@@ -848,15 +866,15 @@ flexmark-java
 0.34.8
 ------
 
-* Fix: #220, Jekyll Tag "include"
-* Fix: #245, Markdown output of multiple Definition Lists has a problem that list items merge.
+* Fix: [#220, Jekyll Tag "include"]
+* Fix: [#245, Markdown output of multiple Definition Lists has a problem that list items merge.]
   Blank lines were removed if `Parser.BLANK_LINES_IN_AST` is `false`
 
 0.34.6
 ------
 
-* Fix: #243, Markdown output of ImageRef syntax referencing ID is incorrect
-* Fix: #244, Duplicate footnotes have the problem of HTML ID collision conflict. Now each
+* Fix: [#243, Markdown output of ImageRef syntax referencing ID is incorrect]
+* Fix: [#244, Duplicate footnotes have the problem of HTML ID collision conflict.] Now each
   footnote reference adds a back references and the id of the back reference has `-#` suffix
   added except for the first back-reference, where `#` is an integer from 1..N
 
@@ -865,7 +883,7 @@ flexmark-java
 
 * Add: media tags extension thanks to Cornelia Schultz (GitHub @CorneliaXaos)
 * Change: convert class methods to static when possible
-* Fix: #239, flexmark-ext-youtube-embedded missing test case for `@` usage.
+* Fix: [#239, flexmark-ext-youtube-embedded missing test case for '@' usage.]
 * Fix: add ability to escape `@` for youtube links.
 
 0.34.2
@@ -902,7 +920,7 @@ flexmark-java
 0.32.24
 -------
 
-* Fix: #232, List continuation, add `Formatter.LIST_REMOVE_EMPTY_ITEMS`, default `false`. If
+* Fix: [#232, List continuation], add `Formatter.LIST_REMOVE_EMPTY_ITEMS`, default `false`. If
   `true` then empty list items or list items which only contain a `BlankLine` node are removed
   from the output.
 * Fix: formatter output of empty list items
@@ -911,7 +929,7 @@ flexmark-java
 0.32.22
 -------
 
-* Fix: #229, gfm-tasklist extension - add state class to list item
+* Fix: [#229, gfm-tasklist extension - add state class to list item]
   * Add: `TaskListExtension.ITEM_DONE_CLASS` and `TaskListExtension.ITEM_NOT_DONE_CLASS` `li`
     tag classes to use for done and not done items.
   * Add: `TaskListExtension.TIGHT_ITEM_CLASS` to complement the
@@ -919,14 +937,14 @@ flexmark-java
     `TaskListExtension.ITEM_CLASS`
   * Add: depreciation of `TaskListExtension.ITEM_CLASS` in favour of
     `TaskListExtension.TIGHT_ITEM_CLASS`
-* Fix: merge #231, Fix two small bugs in ext-toc, thanks to
+* Fix: merge [#231, PR: Fix two small bugs in ext-toc]
   [@BlueBoxWare](https://github.com/BlueBoxWare)
 * Add: `TaskListAttributeProviderSample` to `flexmark-java-samples` module.
 * Add: `GitHubParsingSample` to `flexmark-java-samples` module to show GitHub compatible parser
   setup.
 * Add: `ParserEmulationProfile.GITHUB` to reflect current GitHub profile, effectively it is
   `ParserEmulationProfile.COMMONMARK_0_28` with GitHub compatible id generator settings.
-* Fix: #221, XSS: Javascript execution through links, add `HtmlRenderer.SUPPRESSED_LINKS`
+* Fix: [#221, XSS: Javascript execution through links], add `HtmlRenderer.SUPPRESSED_LINKS`
   default `"javascript:.*"`, a regular expression to suppress any links that match. The test
   occurs before the link is resolved using a link resolver. Therefore any link matching will be
   suppressed before it is resolved. Likewise, a link resolver returning a suppressed link will
@@ -945,12 +963,12 @@ flexmark-java
 0.32.20
 -------
 
-* Fix: #225, BlankLine nodes within IndentedCodeBlock, also within fenced code block
+* Fix: [#225, BlankLine nodes within IndentedCodeBlock]
 
 0.32.18
 -------
 
-* Fix: #216, Wrong source positions for Tables with empty TableHead/TableBody
+* Fix: [#216, Wrong source positions for Tables with empty TableHead/TableBody]
 
 0.32.16
 -------
@@ -974,7 +992,7 @@ flexmark-java
 * Fix: Formatter for Tables now treats header column alignment as centered if no alignment
   marker is given for the column, body cells remain left aligned. This is default browser
   rendered table appearance.
-* Fix: #213, Attributes element does not allow spaces before closing }
+* Fix: [#213, Attributes element does not allow spaces before closing }]
 * Fix: update to open html to pdf 0.0.1-RC12
 
 0.32.12
@@ -1017,7 +1035,7 @@ flexmark-java
 0.32.4
 ------
 
-* Fix: #207, Issue extension does not support windows new lines, same for Gfm User extension.
+* Fix: [#207, Issue extension doesn't support windows new lines], same for Gfm User extension.
 
 0.32.2
 ------
@@ -1118,7 +1136,7 @@ flexmark-java
 0.30.0
 ------
 
-* Fix: #198, StringIndexOutOfBoundsException, in `AbbreviationExtension` if abbreviation
+* Fix: [#198, StringIndexOutOfBoundsException] in `AbbreviationExtension` if abbreviation
   definition had an empty abbreviation.
 
 * API Change: Refactoring of Interfaces to allow extensions only providing link resolver,
@@ -1237,7 +1255,7 @@ setting either will affect both keys. For information on these keys see
 
 * Fix: core node renderer renderLineBreak could cause NPE
 
-* Fix: #193, Support `<math>` tag as a block-forming tag
+* Fix: [#193, Support \<math\> tag as  a block-forming tag]
 
 * Add: `Parser.HTML_BLOCK_TAGS` to define the HTML tags treated as HTML block elements, defaults
   are: `address`, `article`, `aside`, `base`, `basefont`, `blockquote`, `body`, `caption`,
@@ -1251,7 +1269,7 @@ setting either will affect both keys. For information on these keys see
 0.28.32
 -------
 
-* Add: merge request #191, adding absolute wiki link and wiki image prefix options
+* Add: merge request [#191, Support absolute wiki links] and wiki image prefix options
 
 0.28.30
 -------
@@ -1315,13 +1333,13 @@ setting either will affect both keys. For information on these keys see
 0.28.18
 -------
 
-* Fix: #182, Disable parsing of certain elements, add `Parser.LISTS_ITEM_PREFIX_CHARS`, default
-  `"*-+"` to specify which characters start a list item.
+* Fix: [#182, Disable parsing of certain elements], add `Parser.LISTS_ITEM_PREFIX_CHARS`,
+  default `"*-+"` to specify which characters start a list item.
 
 0.28.16
 -------
 
-* Fix: #180, Formatter vs HtmlRenderer
+* Fix: [#180, Formatter vs HtmlRenderer]
   * Formatter ignored `Parser.LISTS_CODE_INDENT` and `Parser.LISTS_ITEM_INDENT` settings when
     rendering markdown from AST and used default of 4 spaces for code indent and 4 spaces for
     list item indent if parser family for formatter was `FIXED_INDENT`.
@@ -1331,10 +1349,10 @@ setting either will affect both keys. For information on these keys see
 0.28.14
 -------
 
-* Fix: #178, `AutolinkExtension` does not add `http://` to simple urls starting with `www.`
+* Fix: [#178, AutolinkExtension does not add http:// to simple urls starting with www.]
 
-* Fix: #176, docx converter creates a single long bullet list instead of starting a new list
-  when top level list items are interrupted.
+* Fix: [#176, docx-converter pandoc emulation mode], docx converter creates a single long bullet
+  list instead of starting a new list when top level list items are interrupted.
 
 0.28.12
 -------
@@ -1348,7 +1366,7 @@ setting either will affect both keys. For information on these keys see
 0.28.10
 -------
 
-* Fix: #176, docx-converter pandoc emulation mode, LibreOffice could not handle numbered lists
+* Fix: [#176, docx-converter pandoc emulation mode], LibreOffice could not handle numbered lists
   which worked with Word. LibreOffice needs to have the list numID preserved for the list
   whereas Word only needs it for the first list item, thereafter regular numID could be used.
 
@@ -1383,10 +1401,10 @@ setting either will affect both keys. For information on these keys see
 0.28.2
 ------
 
-* Fix: #169, HTML to Markdown Converter skips every second definition if there is no line break
-  between definitions
+* Fix:
+  [#169, HTML to Markdown Converter skips every second definition if there is no line break between definitions]
 
-* Fix: #172, Markdown parser cutting words out. Definition items used index instead of column
+* Fix: [#172, Markdown parser cutting words out]. Definition items used index instead of column
   based API for skipping leading spaces/tabs. If tabs were used then offset was wrong causing
   characters to be skipped.
 
@@ -1403,22 +1421,23 @@ setting either will affect both keys. For information on these keys see
 * API Change: add `DelimiterProcessor.skipNonOpenerCloser()`, for old behavior return false.
   When true then a delimiter occurrence is not an opener or closer will be skipped.
 
-* Fix: #168, Text with colons is incorrectly interpreted as an invalid emoji shortcut. Now
+* Fix: [#168, Text with colons is incorrectly interpreted as an invalid emoji shortcut]. Now
   invalid emoji shortcuts only allow characters which can make up a valid shortcut:
   `[a-z0-9_+-]` and if the `:` is not preceded or followed by a digit. The latter eliminates
   time strings as erroneously interpreted as an invalid emoji shortcut.
 
-* Fix: #163, BasedSequenceImpl.prefix seems broken. Unable to handle zero length string as
-  other. Add tests for this function
+* Fix:
+  [#163, BasedSequenceImpl.prefix seems broken. Unable to handle zero length string as other].
+  Add tests for this function
 
 * Fix: `BasedSequence.suffixOf` and add tests for this function
 
-* Fix: #162, BasedSequenceImpl.replace is broken. Add tests for this function
+* Fix: [#162, BasedSequenceImpl.replace is broken]. Add tests for this function
 
 0.27.4
 ------
 
-* Fix: #149, StringIndexOutOfBoundsException when parsing "<strong>\t</strong>"
+* Fix: [#149, StringIndexOutOfBoundsException when parsing "\<strong\>\t\</strong\>"]
 
 * Fix: `flexmark-html-parser` to generate markdown that will render closer to the HTML being
   converted.
@@ -1443,11 +1462,11 @@ setting either will affect both keys. For information on these keys see
 0.27.2
 ------
 
-* Fix: #158, HTML comments followed by plain text parse as HTML comment blocks. Add
+* Fix: [#158, HTML comments followed by plain text parse as HTML comment blocks]. Add
   `Parser.HTML_BLOCK_COMMENT_ONLY_FULL_LINE` default `false`, when true html comments parse as
   html block only when they are contained in one line and have no other text following them.
 
-* Fix: #149, StringIndexOutOfBoundsException when parsing "<strong>\t</strong>"
+* Fix: [#149, StringIndexOutOfBoundsException when parsing "\<strong\>\t\</strong\>"]
 
 0.27.0
 ------
@@ -1491,7 +1510,7 @@ setting either will affect both keys. For information on these keys see
 0.26.4
 ------
 
-* Fix: #146, Formatter missing blank line after HTML blocks. General formatter issue if
+* Fix: [#146, Formatter missing blank line after HTML blocks]. General formatter issue if
   `Parser.BLANK_LINES_IN_AST` was false. Affected elements:
 
   * Abbreviations
@@ -1507,7 +1526,8 @@ setting either will affect both keys. For information on these keys see
 0.26.2
 ------
 
-* Fix: #143, FlexmarkHtmlParser builders not static, merged #144, Update FlexmarkHtmlParser.java
+* Fix: [#143, FlexmarkHtmlParser builders not static]
+* Fix: merged [#144, PR: Update FlexmarkHtmlParser.java]
 
 * Fix: make html parser instance re-usable, now resets state for each parse invocation
 
@@ -1576,7 +1596,7 @@ setting either will affect both keys. For information on these keys see
 * Add: sample for url change in AST and output via formatter:
   [FormatterWithMods.java](https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/samples/FormatterWithMods.java)
 
-* Fix: #138, HTML to Markdown converter missing list end for two consecutive lists
+* Fix: [#138, HTML to Markdown converter missing list end for two consecutive lists]
 
 * Add: `FlexmarkHtmlParser.LISTS_END_ON_DOUBLE_BLANK` default `false`, when set to `true`
   consecutive lists are separated by double blank line, otherwise by an empty HTML comment line.
@@ -1595,7 +1615,7 @@ setting either will affect both keys. For information on these keys see
 0.22.16
 -------
 
-* Fix: #133, The pom.xml file's url should be update
+* Fix: [#133, The pom.xml file's url should be update]
 
 * Add: extra wiki link tests for combination with `TypographicExtension`
 
@@ -1764,7 +1784,7 @@ setting either will affect both keys. For information on these keys see
 0.20.2
 ------
 
-* Fix: #120, Fixed Indent mode always has the last list item as tight. Fixed Spaces parsing
+* Fix: [#120, Fixed Indent mode always has the last list item as tight.] Fixed Spaces parsing
   ignores blank line after last list item and does not check if previous item is loose either.
   Making it impossible to make the last item loose.
 
@@ -1775,21 +1795,23 @@ setting either will affect both keys. For information on these keys see
 0.20.0
 ------
 
-* API Change: #117, Add target attribute support to ResolvedLink and updates to the associated
-  core renderer code. Now `LinkResolver` can also set any attribute of the link via
-  `ResolvedLink.getAttributes()` and `ResolvedLink.getNonNullAttributes()` methods and
-  manipulate the desired attributes of the link.
+* API Change:
+  [#117, PR: Add target attribute support to ResolvedLink and updates to the associated core renderer code.]
+  Now `LinkResolver` can also set any attribute of the link via `ResolvedLink.getAttributes()`
+  and `ResolvedLink.getNonNullAttributes()` methods and manipulate the desired attributes of the
+  link.
 
 0.19.8
 ------
 
-* Fix: #112, Potential bug: Node.getChildOfType always returns null unless parent is an instance
-  of the desired class. Affected some list parsing in Old Gfm compatibility, which were bugs.
+* Fix:
+  [#112, Potential bug: Node.getChildOfType always returns null unless parent is an instance of the desired class]
+  Affected some list parsing in Old Gfm compatibility, which were bugs.
 
 0.19.6
 ------
 
-* Fix: #109, Image Ref missing title tag in rendered HTML, this bug also affects title tag of
+* Fix: [#109, Image Ref missing title tag in rendered HTML], this bug also affects title tag of
   link ref elements.
 
 * Fix: assertion error in `ImageRef` rendering.
@@ -1832,12 +1854,12 @@ setting either will affect both keys. For information on these keys see
 0.19.1
 ------
 
-* Fix: #97, Use UnsupportedOperationException
+* Fix: [#97, PR: Use UnsupportedOperationException]
 
 0.19.0
 ------
 
-* Fix: #93, Adding TextCollectingVisitor class handlers
+* Fix: [#93, Adding TextCollectingVisitor class handlers]
 
 * Change: add `Parser.FENCED_CODE_BLOCK_PARSER` as replacement for `Parser.CODE_CONTENT_BLOCK`
   with the latter marked as deprecated.
@@ -1849,14 +1871,14 @@ setting either will affect both keys. For information on these keys see
 0.18.9
 ------
 
-* Add: #86, how can use definition extension correctly ?, definition item spaced two or more
+* Add: [#86, how can use definition extension correctly ?], definition item spaced two or more
   blank lines from previous element when `DefinitionExtension.DOUBLE_BLANK_LINE_BREAKS_LIST` is
   true to not parse as definition item.
 
 0.18.8
 ------
 
-* Fix: #86, how can use definition extension correctly ?
+* Fix: [#86, how can use definition extension correctly ?]
 
 * Add: `DefinitionExtension.DOUBLE_BLANK_LINE_BREAKS_LIST`, default false. When true double
   blank line between definition item and next definition term will break a definition list.
@@ -1864,7 +1886,7 @@ setting either will affect both keys. For information on these keys see
 0.18.7
 ------
 
-* Fix: #91, DocumentParser Exception on Empty Documents
+* Fix: [#91, DocumentParser Exception on Empty Documents]
 
 0.18.6
 ------
@@ -1878,7 +1900,7 @@ setting either will affect both keys. For information on these keys see
 0.18.5
 ------
 
-* Fix: #83, Question: is there any way to keep every html entities as-is?, add
+* Fix: [#83, Question: is there any way to keep every html entities as-is?] add
   `HtmlRenderer.UNESCAPE_HTML_ENTITIES`, default `true`. Set to `false` to leave HTML entities
   as is in the rendered HTML.
 
@@ -1892,7 +1914,7 @@ setting either will affect both keys. For information on these keys see
 0.18.3
 ------
 
-* Add: #78, Space in link, option `Parser.SPACE_IN_LINK_URLS`, default `false`. When enabled
+* Add: [#78, Space in link], option `Parser.SPACE_IN_LINK_URLS`, default `false`. When enabled
   will allow spaces in link address as long as they are not followed by a `"`, used to start the
   title of the link. Link address wrapped in `<>` will include any trailing spaces.
 
@@ -1902,7 +1924,7 @@ setting either will affect both keys. For information on these keys see
 0.18.2
 ------
 
-* Fix: #76, HTML to Markdown hangs if comments included in Text nodes
+* Fix: [#76, HTML to Markdown hangs if comments included in Text nodes]
 
 * Add: MS-Word generated HTML list basic recognition: `1.`, `1)`, `A.`, `A)`, `a.`, `a)`, `IV.`,
   `IV)`, `iv.`, `iv)`
@@ -1933,9 +1955,8 @@ setting either will affect both keys. For information on these keys see
 
 * Fix: HTML to Markdown converter to add a space after empty list items
 
-* Fix: #75, Incorrect footnote link. `\r\n` sequence was not properly recognized in `Parsing`
-  patterns used by the parser, causing parsing discrepancies when EOL was not `\n` in many
-  elements.
+* Fix: #75 `\r\n` sequence was not properly recognized in `Parsing` patterns used by the parser,
+  causing parsing discrepancies when EOL was not `\n` in many elements.
 
 0.18.0
 ------
@@ -1951,28 +1972,28 @@ setting either will affect both keys. For information on these keys see
 0.17.4
 ------
 
-* Fix: #73, Can't nest code blocks in ordered list. GitHub Doc compatibility error in parsing
-  fenced code nested in list items.
+* Fix: [#73, Can't nest code blocks in ordered list] fenced code nested in list items.
 
 0.17.3
 ------
 
 * Fix: remove unused `flexmark-jira-parser` module from repo.
 
-* Fix: #72, Multiple angle quotes not being handled correctly
+* Fix: [#72, Mutiple angle quotes not being handled correctly]
 
 0.17.2
 ------
 
-* Fix: #70, parse failed for angle quotes if the end angle quote follows with a line feed or a
-  carriage return. Actual error was in `flexmark-ext-typographic` in
-  `QuoteDelimiterProcessorBase` not checking for sequence length.
+* Fix:
+  [#70, parse failed for angle quotes if the end angle quote follows with a line feed or a carriage return]
+  Actual error was in `flexmark-ext-typographic` in `QuoteDelimiterProcessorBase` not checking
+  for sequence length.
 
 0.17.1
 ------
 
-* Add: #69, Add options to allow changing the rendering of bold, italic and other styles with
-  different tags.
+* Add:
+  [#69, Add options to allow changing the rendering of bold, italic and other styles with different tags]
 
   The following `String` options are defined that will override the wrapper used for the HTML of
   styles. :warning: both open and close values must be set to non-null values for the setting to
@@ -2017,9 +2038,9 @@ API.
 0.16.1
 ------
 
-Fix: #67, Formatter with GitHubDoc emulation indented code of list items not indented enough
+Fix: [#67, Formatter with GitHubDoc emulation indented code of list items not indented enough]
 
-Fix: #65, Add some comments to `Extension`, `Parser.ParserExtension`,
+Fix: [#65, Add some comments] to `Extension`, `Parser.ParserExtension`,
 `Parser.ReferenceHoldingExtension` and `HtmlRenderer.HtmlRendererExtension`
 
 0.16.0
@@ -2029,14 +2050,14 @@ API Change: To fix #66 it was necessary to add more parameters to
 `BlockParser.canContain(ParserState, BlockParser, Block)` to allow for more testing whether a
 fenced code block can be contained by a list item.
 
-Fix: #66, GitHub Doc profile incorrect parsing of following markdown
+Fix: [#66, GitHub Doc profile incorrect parsing of following markdown]
 
 0.15.4
 ------
 
-Fix: #62, Autolinks extension for http:// and https:// links includes trailing spaces
+Fix: [#62, Autolinks extension for http:// and https:// links includes trailing spaces]
 
-Fix: #60, Kramdown parser discrepancy for mismatched ordered/ unordered list items. Now if both
+Fix: [#60, Kramdown parser discrepancy for mismatched ordered/ unordered list items] Now if both
 `LISTS_ITEM_TYPE_MISMATCH_TO_NEW_LIST` and `LISTS_ITEM_TYPE_MISMATCH_TO_SUB_LIST` are set to
 true then a new list will be created if the item had a blank line, otherwise a sub-list is
 created.
@@ -2089,26 +2110,27 @@ mismatched item type starts a new list.
 0.13.7
 ------
 
-* Fix: #56, Pegdown HARDWRAPS option adds an additional line break when using trailing spaces
+* Fix: [#56, Pegdown HARDWRAPS option adds an additional line break when using trailing spaces]
 
 * Add: test for pegdown HARDWRAPS extension.
 
 0.13.6
 ------
 
-* Fix: #55, Indented Link Reference Definitions not parsed correctly
+* Fix: [#55, Indented Link Reference Definitions not parsed correctly]
 
 0.13.5
 ------
 
-* Fix: #54 when two spaces followed by \r\n would not parse as HARD break.
+* Fix: [#54, 2 spaces at end of line is not recognized as a newline if the end of line has \r\n]
 
 0.13.4
 ------
 
-* Fix: #54, 2 spaces at end of line is not recognized as a newline if the end of line has \r\n
+* Fix: [#54, 2 spaces at end of line is not recognized as a newline if the end of line has \r\n]
 
-* Fix: related to #54, \r\n should not include \r as part of node's text
+* Fix: related to
+  [#54, 2 spaces at end of line is not recognized as a newline if the end of line has \r\n]
 
 * Add: option to HTML to Markdown to handle auto link conversion:
   * `FlexmarkHtmlParser.EXTRACT_AUTO_LINKS` default `true` to convert links which do not contain
@@ -2127,7 +2149,7 @@ mismatched item type starts a new list.
 0.13.3
 ------
 
-* Fix: #53, HTML to Markdown converter does handle pre wrapped text properly
+* Fix: [#53, HTML to Markdown converter does handle pre wrapped text properly]
 
 0.13.2
 ------
@@ -2150,22 +2172,22 @@ mismatched item type starts a new list.
 0.13.0
 ------
 
-* Add: #50, Add Email obfuscation?, using pegdown profile e-mail obfuscation is on by default.
+* Add: [#50, Add Email obfuscation?], using pegdown profile e-mail obfuscation is on by default.
   For CommonMark and other processors you will need to set `HtmlRenderer.OBFUSCATE_EMAIL` to
   `true`, if you need to have repeatability for testing then set
   `HtmlRenderer.OBFUSCATE_EMAIL_RANDOM` to `false`.
 
-* Add: #47, Add option to have BlankLine nodes in the AST. option `Parser.BLANK_LINES_IN_AST`
+* Add: [#47, Add option to have BlankLine nodes in the AST]. option `Parser.BLANK_LINES_IN_AST`
   which results in `BlankLine` nodes to be put into the AST for every blank line in the file.
 
   :warning: A blank line in terms of Markdown syntax is not necessarily a blank line in the
   file. Lines prefixed with `>` that are otherwise empty are blank lines inside the block quote
   and will be in the AST as blank lines.
 
-* Fix: #48, When `Parser.HEADING_NO_ATX_SPACE` is enabled trailing `###` should not require a
-  space
+* Fix:
+  [#48, When Parser.HEADING\_NO\_ATX\_SPACE is enabled trailing ### should not require a space]
 
-* Add: #49, Add `flexmark-formatter` module to render AST as markdown with formatting options,
+* Add: [#49, Add flexmark-formatter module to render AST as markdown with formatting options]
   and Formatting API that can be used by extensions to customize formatting markdown source of
   custom elements. This module implements formatting of core nodes, all unknown nodes are pass
   through as is. See [Markdown Formatter](../../wiki/Markdown-Formatter) for options.
@@ -2268,19 +2290,20 @@ mismatched item type starts a new list.
 0.11.10
 -------
 
-* Fix: #44, flexmark-profile-pegdown maven, pegdown profile module was misnamed in pom, no
+* Fix: [#44, flexmark-profile-pegdown maven], pegdown profile module was misnamed in pom, no
   errors but was not deploying.
 
 0.11.9
 ------
 
-* Fix: #43, Out of date documentation for Pegdown Migration Helper, caused by
+* Fix: [#43, Out of date documentation for Pegdown Migration Helper], caused by
   `flexmark-profile-pegdown` missing from project dependencies and not being updated.
 
 0.11.8
 ------
 
-* Fix: #42, Index out of bounds when XWiki macro match is rejected because of context mismatch
+* Fix:
+  [#42, Indext out of bounds when XWiki macro match is rejected because of context mismatch]
 
 0.11.7
 ------
@@ -2339,7 +2362,7 @@ mismatched item type starts a new list.
 0.11.4
 ------
 
-* Fix: #40, XWiki Ext Block Macros should not interrupt a paragraph
+* Fix: [#40, XWiki Ext Block Macros should not interrupt a paragraph]
 
 * Add: test for #40
 
@@ -2381,7 +2404,7 @@ mismatched item type starts a new list.
 0.11.0
 ------
 
-* Fix: #38, AutoLink extension does not recognize links with ampersand in the link
+* Fix: [#38, AutoLink extension does not recognize links with ampersand in the link]
 
 * Add: Footnote extension to use `Parser.LISTS_ITEM_INDENT` for determining which elements make
   up part of the footnote.
@@ -2464,10 +2487,10 @@ private static final DataHolder OPTIONS = new MutableDataSet()
 0.10.3
 ------
 
-* Fix: #36, Gfm Task Items incorrectly converts deeply indented content as indented code when
-  non-commonmark family
+* Fix:
+  [#36, Gfm Task Items incorrectly converts deeply indented content as indented code when non-commonmark family]
 
-* Fix: #34, Add option to Wiki link extension to escape the pipe separating text and link
+* Fix: [#34, Add option to Wiki link extension to escape the pipe separating text and link]
 
   * Add: `WikiLinkExtension.ALLOW_ANCHORS`, default `false`, to parse link for anchor refs. If
     link is text and page ref combined with anchor ref, then text will be without the trailing
@@ -2488,9 +2511,9 @@ private static final DataHolder OPTIONS = new MutableDataSet()
 0.10.2
 ------
 
-* Fix: #31, empty Gfm-Task list item nodes character span does not include the task marker
+* Fix: [#31, empty Gfm-Task list item nodes character span does not include the task marker]
 
-* Fix: #32, Thematic Break AST node includes the full line when embedded in other elements
+* Fix: [#32, Thematic Break AST node includes the full line when embedded in other elements]
 
 0.10.1
 ------
@@ -2585,7 +2608,7 @@ private static final DataHolder OPTIONS = new MutableDataSet()
 
   * `WikiLinkExtension.IMAGE_PREFIX`, default `""`, to add a prefix to file reference
 
-* Add: #24, DefinitionList extension doesn't seem to work, implemented definition lists as per
+* Add: [#24, DefinitionList extension doesn't seem to work], implemented definition lists as per
   PHP Markdown Extra.
 
 * API Change: paragraph rendering now can determine whether `<p>` wrapping is disabled by
@@ -2601,8 +2624,8 @@ private static final DataHolder OPTIONS = new MutableDataSet()
   previous line is blank. Also have `FILE_EOL` to reverse the condition. Default for tests now
   is `NO_FILE_EOL` to force tests without having the file EOL terminated.
 
-* Fix: #28, Table caption support?, add `TablesExtension.WITH_CAPTION` default `true`, when true
-  will parse table caption line, line after table with format `[` ... `]`
+* Fix: [#28, Table caption support?], add `TablesExtension.WITH_CAPTION` default `true`, when
+  true will parse table caption line, line after table with format `[` ... `]`
 
 * Change: methods that had `String` arguments to `CharSequence`
 
@@ -2612,7 +2635,7 @@ private static final DataHolder OPTIONS = new MutableDataSet()
 0.9.1
 -----
 
-* Fix: #27, Abbreviation node not called when 2 abbreviations, was expecting \n even at end of
+* Fix: [#27, Abbreviation node not called when 2 abbreviations],was expecting \n even at end of
   file.
 
 * Add: `RenderingTestCase.NO_FILE_EOL` option `NO_FILE_EOL` to test cases which will strip out
@@ -2848,8 +2871,10 @@ Extension changes:
   and just returning it or if `String` is passed then wrapping it in `StringBasedSequence` and
   if neither then wrap it in `SubSequence`.
 
-* Fix: #21, table column alignment was not taking accumulated spans in the row into account when
-  getting alignment for cell from table separator row.
+* Fix:
+  [#21, Table extension does not take accumulated extra spans into account when setting alignment for column]
+  table column alignment was not taking accumulated spans in the row into account when getting
+  alignment for cell from table separator row.
 
 * Fix: strike through extension was not rendering correctly for YouTrack conversion.
 
@@ -2919,8 +2944,8 @@ Most of the other element discrepancies are already addressable with existing pa
 :warning: Markdown.pl is emulated fairly well but without its abundant bugs. Use it at your own
 discretion.
 
-* Fix: #19, ArrayIndexOutOfBounds while parsing markdown with backslash as last character of
-  text block
+* Fix:
+  [#19, ArrayIndexOutOfBounds while parsing markdown with backslash as last character of text block]
 
 * Change: `SpecReader` to parse for headings only if spaces are present after leading `#`.
   Otherwise, leading github issue `#7` in the description is treated as a heading.
@@ -2932,20 +2957,20 @@ discretion.
 0.6.1
 -----
 
-* Fix: #13, Hard line breaks do not work if markdown text/files uses CR LF as line separator
+* Fix: [#13, Hard line breaks do not work if markdown text/files uses CR LF as line separator]
 
-* Fix: #14, Link reference definitions indented by spaces not recognized
+* Fix: [#14, Link reference definitions indented by spaces not recognized]
 
-* Fix: #17, IndentedCodeBlock endOffset too large?, Added an option
+* Fix: [#17, IndentedCodeBlock endOffset too large?]
   `Parser.INDENTED_CODE_NO_TRAILING_BLANK_LINES`
 
-* Fix: #18, Unclosed FencedCodeBlock endOffset too small
+* Fix: [#18, Unclosed FencedCodeBlock endOffset too small]
 
 * Add test for `Parser.HARD_LINE_BREAK_LIMIT` option
 
 * Change `HtmlRenderer.GENERATE_HEADER_ID` default to true
 
-* Fix #16, jira converter does not include lang= for fenced code with info
+* Fix [#16, jira converter does not include lang= for fenced code with info]
 
 * Fix jira converter to output to better handle loose lists, items and options
 
@@ -2962,7 +2987,7 @@ discretion.
 * Add `HtmlRenderer.SOURCE_WRAP_HTML` and `HtmlRenderer.SOURCE_WRAP_HTML_BLOCKS` options to wrap
   HTML blocks in `div` with source position information attribute.
 
-* Fix #10, Wrong startOffset in HardLineBreak
+* Fix [#10, Wrong startOffset in HardLineBreak]
 
 * Add `Parser.HARD_LINE_BREAK_LIMIT` false by default, when true only the last 2 spaces of a
   hard line break will be part of the node. The rest are part of the previous text node.
@@ -3021,8 +3046,8 @@ discretion.
   trailing EOL after then end of the sequence, skipping any spaces or tabs. Used to include EOL
   for closing code fence marker.
 
-* Fix #8, Fenced code closing sequence allows trailing spaces but not tabs. Tab added to ignored
-  trailing characters after the closing marker.
+* Fix [#8, Fenced code closing sequence allows trailing spaces but not tabs]. Tab added to
+  ignored trailing characters after the closing marker.
 
 0.4.14
 ------
@@ -3053,7 +3078,7 @@ discretion.
 0.4.13
 ------
 
-* Fix #5, SimToc did not unescape the title string when rendering
+* Fix [#5, SimToc does not unescape the title string when rendering]
 
 * Add `EmojiExtension.ATTR_IMAGE_SIZE` and `EmojiExtension.ATTR_ALIGN` options to control image
   size and align attributes for rendering
@@ -3071,9 +3096,9 @@ discretion.
 * Add `HtmlRenderer.HARD_BREAK` option so that GFM comment mode where soft wraps are turned into
   `<br>` and hard wraps are turned into `<br><br>` could be emulated. Are we having fun yet!?!?
 
-* Fix #6, List items are not properly marked as tight/loose
+* Fix [#6, List items are not properly marked as tight/loose]
 
-* Fix #7, Task list items not copying the original list item's tight/loose flag
+* Fix [#7, Task list items not copying the original list item's tight/loose flag]
 
 * Add `CoreNodeRenderer.LOOSE_LIST_ITEM` and `CoreNodeRenderer.TIGHT_LIST_ITEM` instances of
   `AttributablePart` to identify attributes used for generating `<li>` tag for list items.
@@ -3190,7 +3215,7 @@ discretion.
 0.4.9
 -----
 
-* Fix #3, Incorrect emphasis close marker source offset
+* Fix [#3, Incorrect emphasis close marker source offset]
 
 0.4.8
 -----
@@ -3751,7 +3776,7 @@ way.
 
 * Add ext-tables option HEADER_SEPARATOR_COLUMNS, if true will only recognize tables whose
   headers contain no more columns than the separator line. Default false, any number of columns
-  in header lines will be accepted.
+  in header lines will be accepted. #
 
 0.1.3
 -----
@@ -3968,5 +3993,110 @@ the node's characters, independent of child node breakdown.
 
 ````````````````````````````````
 
+[#10, Wrong startOffset in HardLineBreak]: https://github.com/vsch/flexmark-java/issues/10
+[#109, Image Ref missing title tag in rendered HTML]: https://github.com/vsch/flexmark-java/issues/109
+[#112, Potential bug: Node.getChildOfType always returns null unless parent is an instance of the desired class]: https://github.com/vsch/flexmark-java/issues/112
+[#117, PR: Add target attribute support to ResolvedLink and updates to the associated core renderer code.]: https://github.com/vsch/flexmark-java/pull/117
+[#120, Fixed Indent mode always has the last list item as tight.]: https://github.com/vsch/flexmark-java/issues/120
+[#13, Hard line breaks do not work if markdown text/files uses CR LF as line separator]: https://github.com/vsch/flexmark-java/issues/13
+[#133, The pom.xml file's url should be update]: https://github.com/vsch/flexmark-java/issues/133
+[#138, HTML to Markdown converter missing list end for two consecutive lists]: https://github.com/vsch/flexmark-java/issues/138
+[#14, Link reference definitions indented by spaces not recognized]: https://github.com/vsch/flexmark-java/issues/14
+[#143, FlexmarkHtmlParser builders not static]: https://github.com/vsch/flexmark-java/issues/143
+[#144, PR: Update FlexmarkHtmlParser.java]: https://github.com/vsch/flexmark-java/pull/144
+[#146, Formatter missing blank line after HTML blocks]: https://github.com/vsch/flexmark-java/issues/146
+[#149, StringIndexOutOfBoundsException when parsing "\<strong\>\t\</strong\>"]: https://github.com/vsch/flexmark-java/issues/149
+[#158, HTML comments followed by plain text parse as HTML comment blocks]: https://github.com/vsch/flexmark-java/issues/158
+[#16, jira converter does not include lang= for fenced code with info]: https://github.com/vsch/flexmark-java/issues/16
+[#162, BasedSequenceImpl.replace is broken]: https://github.com/vsch/flexmark-java/issues/162
+[#163, BasedSequenceImpl.prefix seems broken. Unable to handle zero length string as other]: https://github.com/vsch/flexmark-java/issues/163
+[#168, Text with colons is incorrectly interpreted as an invalid emoji shortcut]: https://github.com/vsch/flexmark-java/issues/168
+[#169, HTML to Markdown Converter skips every second definition if there is no line break between definitions]: https://github.com/vsch/flexmark-java/issues/169
+[#17, IndentedCodeBlock endOffset too large?]: https://github.com/vsch/flexmark-java/issues/17
+[#172, Markdown parser cutting words out]: https://github.com/vsch/flexmark-java/issues/172
+[#176, docx-converter pandoc emulation mode]: https://github.com/vsch/flexmark-java/issues/176
+[#178, AutolinkExtension does not add http:// to simple urls starting with www.]: https://github.com/vsch/flexmark-java/issues/178
+[#18, Unclosed FencedCodeBlock endOffset too small]: https://github.com/vsch/flexmark-java/issues/18
+[#180, Formatter vs HtmlRenderer]: https://github.com/vsch/flexmark-java/issues/180
+[#182, Disable parsing of certain elements]: https://github.com/vsch/flexmark-java/issues/182
+[#19, ArrayIndexOutOfBounds while parsing markdown with backslash as last character of text block]: https://github.com/vsch/flexmark-java/issues/19
+[#191, Support absolute wiki links]: https://github.com/vsch/flexmark-java/pull/191
+[#193, Support \<math\> tag as  a block-forming tag]: https://github.com/vsch/flexmark-java/issues/193
+[#198, StringIndexOutOfBoundsException]: https://github.com/vsch/flexmark-java/issues/198
+[#207, Issue extension doesn't support windows new lines]: https://github.com/vsch/flexmark-java/issues/207
+[#21, Table extension does not take accumulated extra spans into account when setting alignment for column]: https://github.com/vsch/flexmark-java/issues/21
+[#213, Attributes element does not allow spaces before closing }]: https://github.com/vsch/flexmark-java/issues/213
+[#216, Wrong source positions for Tables with empty TableHead/TableBody]: https://github.com/vsch/flexmark-java/issues/216
+[#220, Jekyll Tag "include"]: https://github.com/vsch/flexmark-java/issues/220
+[#221, XSS: Javascript execution through links]: https://github.com/vsch/flexmark-java/issues/221
+[#225, BlankLine nodes within IndentedCodeBlock]: https://github.com/vsch/flexmark-java/issues/225
+[#229, gfm-tasklist extension - add state class to list item]: https://github.com/vsch/flexmark-java/issues/229
+[#231, PR: Fix two small bugs in ext-toc]: https://github.com/vsch/flexmark-java/pull/231
+[#232, List continuation]: https://github.com/vsch/flexmark-java/issues/232
+[#239, flexmark-ext-youtube-embedded missing test case for '@' usage.]: https://github.com/vsch/flexmark-java/issues/239
+[#24, DefinitionList extension doesn't seem to work]: https://github.com/vsch/flexmark-java/issues/24
+[#243, Markdown output of ImageRef syntax referencing ID is incorrect]: https://github.com/vsch/flexmark-java/issues/243
+[#244, Duplicate footnotes have the problem of HTML ID collision conflict.]: https://github.com/vsch/flexmark-java/issues/244
+[#245, Markdown output of multiple Definition Lists has a problem that list items merge.]: https://github.com/vsch/flexmark-java/issues/245
+[#247, Admonition Expression may lack a part of the text.]: https://github.com/vsch/flexmark-java/issues/247
+[#248, Request to add CSS class of TOC]: https://github.com/vsch/flexmark-java/issues/248
+[#249, support Jira links titles]: https://github.com/vsch/flexmark-java/pull/249
+[#252, GfmUser and GfmIssue are not recognized if immediately followed by non-space character]: https://github.com/vsch/flexmark-java/issues/252
+[#254, customized HTML\_BLOCK\_TAGS Parser option seems not taken into account]: https://github.com/vsch/flexmark-java/issues/254
+[#268, Pipe characters are not escaped in Table (FlexmarkHtmlParser)]: https://github.com/vsch/flexmark-java/issues/268
+[#27, Abbreviation node not called when 2 abbreviations]: https://github.com/vsch/flexmark-java/issues/27
+[#271, Regression? Comments are preserved in 0.26.4 but removed in 0.34.40]: https://github.com/vsch/flexmark-java/issues/271
+[#274, FlexmarkHtmlParser can not handle escaped tags correctly]: https://github.com/vsch/flexmark-java/issues/274
+[#28, Table caption support?]: https://github.com/vsch/flexmark-java/issues/28
+[#287, ''flexmark-html-parser' The module has an mistake]: https://github.com/vsch/flexmark-java/issues/287
+[#288, PR: Adding TokenReplacingPostProcessorSample and UnderlineExtensionSample]: https://github.com/vsch/flexmark-java/pull/288
+[#292, 0.40.0: JUnit is in the compile scope]: https://github.com/vsch/flexmark-java/issues/292
+[#293, YamlFrontMatterBlock rendered as markdown does not preserve nested lists]: https://github.com/vsch/flexmark-java/issues/293
+[#294, BlankLine nodes within BlockQuote change in behaviour]: https://github.com/vsch/flexmark-java/issues/294
+[#295, CoreNodeFormatter does not descend into children on Link nodes]: https://github.com/vsch/flexmark-java/issues/295
+[#299, FlexmarkHtmlParser produces extra empty list item for eclosing \</p\> element]: https://github.com/vsch/flexmark-java/issues/299
+[#3, Incorrect emphasis close marker source offset]: https://github.com/vsch/flexmark-java/issues/3
+[#300, Typography extension breaks some auto links]: https://github.com/vsch/flexmark-java/issues/300
+[#305, PR: add new youtube link style support to flexmark-ext-youtube-embedded for youtu.be/xyz(?t=123)]: https://github.com/vsch/flexmark-java/pull/305
+[#306, PR: Add password protection support]: https://github.com/vsch/flexmark-java/pull/306
+[#31, empty Gfm-Task list item nodes character span does not include the task marker]: https://github.com/vsch/flexmark-java/issues/31
+[#32, Thematic Break AST node includes the full line when embedded in other elements]: https://github.com/vsch/flexmark-java/issues/32
+[#34, Add option to Wiki link extension to escape the pipe separating text and link]: https://github.com/vsch/flexmark-java/issues/34
+[#36, Gfm Task Items incorrectly converts deeply indented content as indented code when non-commonmark family]: https://github.com/vsch/flexmark-java/issues/36
+[#38, AutoLink extension does not recognize links with ampersand in the link]: https://github.com/vsch/flexmark-java/issues/38
+[#40, XWiki Ext Block Macros should not interrupt a paragraph]: https://github.com/vsch/flexmark-java/issues/40
+[#42, Indext out of bounds when XWiki macro match is rejected because of context mismatch]: https://github.com/vsch/flexmark-java/issues/42
+[#43, Out of date documentation for Pegdown Migration Helper]: https://github.com/vsch/flexmark-java/issues/43
+[#44, flexmark-profile-pegdown maven]: https://github.com/vsch/flexmark-java/issues/44
+[#47, Add option to have BlankLine nodes in the AST]: https://github.com/vsch/flexmark-java/issues/47
+[#48, When Parser.HEADING\_NO\_ATX\_SPACE is enabled trailing ### should not require a space]: https://github.com/vsch/flexmark-java/issues/48
+[#49, Add flexmark-formatter module to render AST as markdown with formatting options]: https://github.com/vsch/flexmark-java/issues/49
+[#5, SimToc does not unescape the title string when rendering]: https://github.com/vsch/flexmark-java/issues/5
+[#50, Add Email obfuscation?]: https://github.com/vsch/flexmark-java/issues/50
+[#53, HTML to Markdown converter does handle pre wrapped text properly]: https://github.com/vsch/flexmark-java/issues/53
+[#54, 2 spaces at end of line is not recognized as a newline if the end of line has \r\n]: https://github.com/vsch/flexmark-java/issues/54
+[#55, Indented Link Reference Definitions not parsed correctly]: https://github.com/vsch/flexmark-java/issues/55
+[#56, Pegdown HARDWRAPS option adds an additional line break when using trailing spaces]: https://github.com/vsch/flexmark-java/issues/56
+[#6, List items are not properly marked as tight/loose]: https://github.com/vsch/flexmark-java/issues/6
+[#60, Kramdown parser discrepancy for mismatched ordered/ unordered list items]: https://github.com/vsch/flexmark-java/issues/60
+[#62, Autolinks extension for http:// and https:// links includes trailing spaces]: https://github.com/vsch/flexmark-java/issues/62
+[#65, Add some comments]: https://github.com/vsch/flexmark-java/issues/65
+[#66, GitHub Doc profile incorrect parsing of following markdown]: https://github.com/vsch/flexmark-java/issues/66
+[#67, Formatter with GitHubDoc emulation indented code of list items not indented enough]: https://github.com/vsch/flexmark-java/issues/67
+[#69, Add options to allow changing the rendering of bold, italic and other styles with different tags]: https://github.com/vsch/flexmark-java/issues/69
+[#7, Task list items not copying the original list item's tight/loose flag]: https://github.com/vsch/flexmark-java/issues/7
+[#70, parse failed for angle quotes if the end angle quote follows with a line feed or a carriage return]: https://github.com/vsch/flexmark-java/issues/70
+[#72, Mutiple angle quotes not being handled correctly]: https://github.com/vsch/flexmark-java/issues/72
+[#73, Can't nest code blocks in ordered list]: https://github.com/vsch/flexmark-java/issues/73
+[#76, HTML to Markdown hangs if comments included in Text nodes]: https://github.com/vsch/flexmark-java/issues/76
+[#78, Space in link]: https://github.com/vsch/flexmark-java/issues/78
+[#8, Fenced code closing sequence allows trailing spaces but not tabs]: https://github.com/vsch/flexmark-java/issues/8
+[#83, Question: is there any way to keep every html entities as-is?]: https://github.com/vsch/flexmark-java/issues/83
+[#86, how can use definition extension correctly ?]: https://github.com/vsch/flexmark-java/issues/86
+[#91, DocumentParser Exception on Empty Documents]: https://github.com/vsch/flexmark-java/issues/91
+[#93, Adding TextCollectingVisitor class handlers]: https://github.com/vsch/flexmark-java/issues/93
+[#97, PR: Use UnsupportedOperationException]: https://github.com/vsch/flexmark-java/pull/97
+[#99, YamlFrontMatterBlockParser ignores multi-key list items]: https://github.com/vsch/flexmark-java/issues/99
 [Admonition Extension, Material for MkDocs]: https://squidfunk.github.io/mkdocs-material/extensions/admonition/
+[migrate 0_35_x to 0_40_0.xml]: /assets/migrations/migrate%20flexmark-java%200_35_x%20to%200_40_0.xml
 
