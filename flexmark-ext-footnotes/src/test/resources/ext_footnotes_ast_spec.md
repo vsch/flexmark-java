@@ -322,11 +322,11 @@ Document[0, 265]
   Paragraph[0, 44] isTrailingBlankLine
     Text[0, 30] chars:[0, 30, "This  … tnote"]
     LinkRef[30, 42] referenceOpen:[30, 31, "["] reference:[32, 41, "^footnote"] referenceClose:[41, 42, "]"]
-      Text[31, 41] chars:[31, 41, " ^footnote"]
+      Text[32, 41] chars:[32, 41, "^footnote"]
     Text[42, 43] chars:[42, 43, "."]
   Paragraph[45, 148] isTrailingBlankLine
     LinkRef[45, 57] referenceOpen:[45, 46, "["] reference:[47, 56, "^footnote"] referenceClose:[56, 57, "]"]
-      Text[46, 56] chars:[46, 56, " ^footnote"]
+      Text[47, 56] chars:[47, 56, "^footnote"]
     Text[57, 92] chars:[57, 92, ": Thi … note."]
     SoftLineBreak[92, 93]
     Text[93, 124] chars:[93, 124, "with  … line "]

@@ -144,8 +144,11 @@ public class PdfConverter {
                 "</head><body>" + html + "\n" +
                 "</body></html>";
 
-        PdfConverterExtension.exportToPdf("/Users/vlad/src/pdf/flexmark-java.pdf", html, "", OPTIONS, null);
-        PdfConverterExtension.exportToPdf("/Users/vlad/src/pdf/flexmark-java-pwd-protected.pdf", html, "", OPTIONS,
-                new StandardProtectionPolicy("opassword", "upassword", new AccessPermission()));
+        PdfConverterExtension.exportToPdf("/Users/vlad/src/pdf/flexmark-java.pdf", html, "", OPTIONS);
+        
+        // add PDF protection policy
+        OPTIONS.set(PdfConverterExtension.PROTECTION_POLICY, new StandardProtectionPolicy("opassword", "upassword", new AccessPermission()));
+        
+        PdfConverterExtension.exportToPdf("/Users/vlad/src/pdf/flexmark-java-pwd-protected.pdf", html, "", OPTIONS);
     }
 }

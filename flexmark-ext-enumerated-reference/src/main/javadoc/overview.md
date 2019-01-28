@@ -6,6 +6,8 @@ the category and `reference` is used to uniquely identify an element in the cate
 id of the element will be `type:reference` and this must be used by the enumerated reference
 label or link.
 
+:information_source: `type` must not start with a digit.
+
 To refer to the element in the document use the enumerated reference elements:
 
 1. A reference link syntax `[@type:reference]` converts to a link based on type pattern defined

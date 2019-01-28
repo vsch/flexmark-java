@@ -22,9 +22,11 @@ import java.io.OutputStream;
  * Extension for converting Markdown to PDF
  * <p>
  * After document is rendered pass the HTML result to
- * {@link #exportToPdf(OutputStream, String, String, DataHolder, ProtectionPolicy protectionPolicy)}
- * or {@link #exportToPdf(String, String, String, DataHolder, ProtectionPolicy protectionPolicy)}
+ * {@link #exportToPdf(OutputStream, String, String, DataHolder)}
+ * or {@link #exportToPdf(String, String, String, DataHolder)}
+ * or {@link #exportToPdf(String, String, String, PdfRendererBuilder.TextDirection)}
  * or {@link #exportToPdf(String, String, String, PdfRendererBuilder.TextDirection, ProtectionPolicy protectionPolicy)}
+ * or {@link #exportToPdf(OutputStream, String, String, PdfRendererBuilder.TextDirection)}
  * or {@link #exportToPdf(OutputStream, String, String, PdfRendererBuilder.TextDirection, ProtectionPolicy protectionPolicy)}
  * <p>
  * The parsed Markdown text is rendered to HTML then converted to PDF
@@ -32,9 +34,14 @@ import java.io.OutputStream;
  */
 public class PdfConverterExtension {
     public static final DataKey<PdfRendererBuilder.TextDirection> DEFAULT_TEXT_DIRECTION = new DataKey<PdfRendererBuilder.TextDirection>("DEFAULT_TEXT_DIRECTION", (PdfRendererBuilder.TextDirection) null);
+    public static final DataKey<ProtectionPolicy> PROTECTION_POLICY = new DataKey<>("PROTECTION_POLICY", (ProtectionPolicy) null);
 
-    public static void exportToPdf(String out, String html, String url, DataHolder options, ProtectionPolicy protectionPolicy) {
-        exportToPdf(out, html, url, options.get(DEFAULT_TEXT_DIRECTION), protectionPolicy);
+    public static void exportToPdf(String out, String html, String url, DataHolder options) {
+        exportToPdf(out, html, url, options.get(DEFAULT_TEXT_DIRECTION), options.get(PROTECTION_POLICY));
+    }
+
+    public static void exportToPdf(String out, String html, String url, final PdfRendererBuilder.TextDirection defaultTextDirection) {
+        exportToPdf(out, html, url, defaultTextDirection, null);
     }
 
     public static void exportToPdf(String out, String html, String url, final PdfRendererBuilder.TextDirection defaultTextDirection, ProtectionPolicy protectionPolicy) {
@@ -46,8 +53,12 @@ public class PdfConverterExtension {
         }
     }
 
-    public static void exportToPdf(final OutputStream os, final String html, final String url, final DataHolder options, ProtectionPolicy protectionPolicy) {
-        exportToPdf(os, html, url, options.get(DEFAULT_TEXT_DIRECTION), protectionPolicy);
+    public static void exportToPdf(final OutputStream os, final String html, final String url, final DataHolder options) {
+        exportToPdf(os, html, url, options.get(DEFAULT_TEXT_DIRECTION), options.get(PROTECTION_POLICY));
+    }
+
+    public static void exportToPdf(final OutputStream os, final String html, final String url, final PdfRendererBuilder.TextDirection defaultTextDirection) {
+        exportToPdf(os, html, url, defaultTextDirection, null);
     }
 
     public static void exportToPdf(final OutputStream os, final String html, final String url, final PdfRendererBuilder.TextDirection defaultTextDirection, final ProtectionPolicy protectionPolicy) {
@@ -62,6 +73,7 @@ public class PdfConverterExtension {
             builder.toStream(os);
             renderer = builder.buildPdfRenderer();
             PDDocument document = renderer.getPdfDocument();
+
             if (protectionPolicy != null)
                 document.protect(protectionPolicy);
 

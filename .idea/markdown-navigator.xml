@@ -55,10 +55,12 @@
         <option name="MACROS_EXT" value="true" />
         <option name="NO_TEXT_ATTRIBUTES" value="false" />
         <option name="PARSE_HTML_ANCHOR_ID" value="false" />
+        <option name="PLANTUML_FENCED_CODE" value="false" />
+        <option name="PUML_FENCED_CODE" value="false" />
         <option name="SIM_TOC_BLANK_LINE_SPACER" value="true" />
       </ParserOptions>
     </ParserSettings>
-    <HtmlSettings headerTopEnabled="false" headerBottomEnabled="false" bodyTopEnabled="false" bodyBottomEnabled="false" embedUrlContent="false" addPageHeader="true" embedImages="false" embedHttpImages="false" imageUriSerials="false" addDocTypeHtml="true">
+    <HtmlSettings headerTopEnabled="false" headerBottomEnabled="false" bodyTopEnabled="false" bodyBottomEnabled="false" embedUrlContent="false" addPageHeader="true" embedImages="false" embedHttpImages="false" imageUriSerials="false" addDocTypeHtml="true" noParaTags="false" plantUmlConversion="0" mathConversion="-1">
       <GeneratorProvider>
         <provider providerId="com.vladsch.idea.multimarkdown.editor.javafx.html.generator" providerName="JavaFx HTML Generator" />
       </GeneratorProvider>
@@ -107,7 +109,7 @@ code {
 }</cssText>
       <cssUriHistory />
     </CssSettings>
-    <HtmlExportSettings updateOnSave="false" parentDir="$ProjectFileDir$" targetDir="$ProjectFileDir$/out" cssDir="$ProjectFileDir$/out/export/css" scriptDir="$ProjectFileDir$/out/export/js" plainHtml="false" imageDir="$ProjectFileDir$/out/img" copyLinkedImages="false" imageUniquifyType="0" targetExt="" useTargetExt="false" noCssNoScripts="false" linkToExportedHtml="true" exportOnSettingsChange="true" regenerateOnProjectOpen="false" linkFormatType="HTTP_ABSOLUTE" />
+    <HtmlExportSettings updateOnSave="false" parentDir="$ProjectFileDir$" targetDir="$ProjectFileDir$/out" cssDir="$ProjectFileDir$/out/export/css" scriptDir="$ProjectFileDir$/out/export/js" plainHtml="false" imageDir="$ProjectFileDir$/out/img" copyLinkedImages="false" imageUniquifyType="0" targetPathType="2" targetExt="" useTargetExt="false" noCssNoScripts="false" useElementStyleAttribute="false" linkToExportedHtml="true" exportOnSettingsChange="true" regenerateOnProjectOpen="false" linkFormatType="HTTP_ABSOLUTE" />
     <LinkMapSettings>
       <textMaps />
     </LinkMapSettings>

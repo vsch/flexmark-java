@@ -69,7 +69,7 @@ public abstract class InlineLinkNode extends LinkNode {
 
     public InlineLinkNode(BasedSequence textOpeningMarker, BasedSequence text, BasedSequence textClosingMarker, BasedSequence linkOpeningMarker, BasedSequence url, BasedSequence titleOpeningMarker, BasedSequence title, BasedSequence titleClosingMarker, BasedSequence linkClosingMarker) {
         this.textOpeningMarker = textOpeningMarker;
-        this.text = text;
+        this.text = text.trim();
         this.textClosingMarker = textClosingMarker;
         this.linkOpeningMarker = linkOpeningMarker;
         this.url = url;
@@ -82,7 +82,7 @@ public abstract class InlineLinkNode extends LinkNode {
     public InlineLinkNode(BasedSequence chars, BasedSequence textOpeningMarker, BasedSequence text, BasedSequence textClosingMarker, BasedSequence linkOpeningMarker, BasedSequence url, BasedSequence titleOpeningMarker, BasedSequence title, BasedSequence titleClosingMarker, BasedSequence linkClosingMarker) {
         super(chars);
         this.textOpeningMarker = textOpeningMarker;
-        this.text = text;
+        this.text = text.trim();
         this.textClosingMarker = textClosingMarker;
         this.linkOpeningMarker = linkOpeningMarker;
         this.url = url;
@@ -94,7 +94,7 @@ public abstract class InlineLinkNode extends LinkNode {
 
     public InlineLinkNode(BasedSequence textOpeningMarker, BasedSequence text, BasedSequence textClosingMarker, BasedSequence linkOpeningMarker, BasedSequence url, BasedSequence linkClosingMarker) {
         this.textOpeningMarker = textOpeningMarker;
-        this.text = text;
+        this.text = text.trim();
         this.textClosingMarker = textClosingMarker;
         this.linkOpeningMarker = linkOpeningMarker;
         this.url = url;
@@ -104,7 +104,7 @@ public abstract class InlineLinkNode extends LinkNode {
     public InlineLinkNode(BasedSequence chars, BasedSequence textOpeningMarker, BasedSequence text, BasedSequence textClosingMarker, BasedSequence linkOpeningMarker, BasedSequence url, BasedSequence linkClosingMarker) {
         super(chars);
         this.textOpeningMarker = textOpeningMarker;
-        this.text = text;
+        this.text = text.trim();
         this.textClosingMarker = textClosingMarker;
         this.linkOpeningMarker = linkOpeningMarker;
         this.url = url;
@@ -132,7 +132,7 @@ public abstract class InlineLinkNode extends LinkNode {
     }
 
     public void setText(BasedSequence text) {
-        this.text = text;
+        this.text = text.trim();
     }
 
     public BasedSequence getTextClosingMarker() {

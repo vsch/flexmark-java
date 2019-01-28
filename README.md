@@ -43,7 +43,7 @@ following sample:
 <dependency>
     <groupId>com.vladsch.flexmark</groupId>
     <artifactId>flexmark-all</artifactId>
-    <version>0.40.14</version>
+    <version>0.40.16</version>
 </dependency>
 ```
 
@@ -82,7 +82,7 @@ public class BasicSample {
 #### Building via Gradle
 
 ```shell
-compile 'com.vladsch.flexmark:flexmark-all:0.40.14'
+compile 'com.vladsch.flexmark:flexmark-all:0.40.16'
 ```
 
 #### Building with Android Studio
@@ -173,7 +173,7 @@ custom node renderer if you need to override the generated link HTML.
 
 ### Latest Additions
 
-* Java9+ module compatibility 
+* Java9+ module compatibility
 * [Macros Extension](../../wiki/Macros-Extension) to allow arbitrary markdown content to be
   inserted as block or inline elements, allowing block elements to be used where only inline
   elements are allowed by syntax.

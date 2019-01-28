@@ -64,13 +64,13 @@ no spaces between brackets
 Document[0, 26]
   Paragraph[0, 8] isTrailingBlankLine
     LinkRef[0, 6] referenceOpen:[0, 1, "["] reference:[2, 5, "TOC"] referenceClose:[5, 6, "]"]
-      Text[1, 5] chars:[1, 5, " TOC"]
+      Text[2, 5] chars:[2, 5, "TOC"]
   Paragraph[9, 18] isTrailingBlankLine
     LinkRef[9, 16] referenceOpen:[9, 10, "["] reference:[11, 14, "TOC"] referenceClose:[15, 16, "]"]
-      Text[10, 15] chars:[10, 15, " TOC "]
+      Text[11, 14] chars:[11, 14, "TOC"]
   Paragraph[19, 26]
     LinkRef[19, 25] referenceOpen:[19, 20, "["] reference:[20, 23, "TOC"] referenceClose:[24, 25, "]"]
-      Text[20, 24] chars:[20, 24, "TOC "]
+      Text[20, 23] chars:[20, 23, "TOC"]
 ````````````````````````````````
 
 

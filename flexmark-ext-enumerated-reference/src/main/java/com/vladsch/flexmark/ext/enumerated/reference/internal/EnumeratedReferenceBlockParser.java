@@ -13,7 +13,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class EnumeratedReferenceBlockParser extends AbstractBlockParser {
-    static String ENUM_REF_ID = ".*";
+    static String ENUM_REF_ID = "(?:[^0-9].*)?";
     static Pattern ENUM_REF_ID_PATTERN = Pattern.compile("\\[[\\@|#]\\s*(" + ENUM_REF_ID + ")\\s*\\]");
     static Pattern ENUM_REF_DEF_PATTERN = Pattern.compile("^\\[[\\@]\\s*(" + ENUM_REF_ID + ")\\s*\\]:");
 

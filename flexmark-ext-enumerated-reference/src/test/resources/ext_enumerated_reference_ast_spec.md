@@ -19,6 +19,8 @@ Where [#] is replaced by the ordinal for the actual reference in the document. [
 to [@] when there is no id. It is treated as a placeholder for the ordinal number for the given
 type. Outside of a enumerated reference definition it will render `0`
 
+:information_source: `reference` must not start with a digit.
+
 no spaces between brackets
 
 ```````````````````````````````` example Enumerated Reference: 1
@@ -151,6 +153,24 @@ Document[0, 42]
   Paragraph[29, 41] isTrailingBlankLine
     EnumeratedReferenceLink[29, 40] textOpen:[29, 31, "[@"] text:[31, 39, "fig:test"] textClose:[39, 40, "]"]
       Text[31, 39] chars:[31, 39, "fig:test"]
+````````````````````````````````
+
+
+starting with digit is not a reference
+
+```````````````````````````````` example Enumerated Reference: 3
+[#123, GitHub Issue]
+
+[#123, GitHub Issue]: https://github.com/vsch/flexmark-java/issues/123
+
+.
+<p><a href="https://github.com/vsch/flexmark-java/issues/123">#123, GitHub Issue</a></p>
+.
+Document[0, 94]
+  Paragraph[0, 21] isTrailingBlankLine
+    LinkRef[0, 20] referenceOpen:[0, 1, "["] reference:[1, 19, "#123, GitHub Issue"] referenceClose:[19, 20, "]"]
+      Text[1, 19] chars:[1, 19, "#123, … Issue"]
+  Reference[22, 92] refOpen:[22, 23, "["] ref:[23, 41, "#123, GitHub Issue"] refClose:[41, 43, "]:"] url:[44, 92, "https://github.com/vsch/flexmark-java/issues/123"]
 ````````````````````````````````
 
 

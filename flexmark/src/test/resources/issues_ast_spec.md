@@ -798,7 +798,7 @@ Document[0, 49]
     BulletListItem[23, 36] open:[23, 24, "-"] isTight
       Paragraph[25, 36]
         LinkRef[25, 28] referenceOpen:[25, 26, "["] reference:[27, 27] referenceClose:[27, 28, "]"]
-          Text[26, 27] chars:[26, 27, " "]
+          Text[27, 27]
         Text[28, 35] chars:[28, 35, " Task 2"]
     BulletListItem[36, 49] open:[36, 37, "-"] isTight
       Paragraph[38, 49]
@@ -1404,12 +1404,12 @@ Issue xxx-2, leading spaces tab not part of indented code, which is correct
 ```````````````````````````````` example Issue xxx-2: 1
 [ www.google.com  ](https://www.google.com)
 .
-<p><a href="https://www.google.com"> www.google.com  </a></p>
+<p><a href="https://www.google.com">www.google.com</a></p>
 .
 Document[0, 44]
   Paragraph[0, 44]
-    Link[0, 43] textOpen:[0, 1, "["] text:[1, 18, " www.google.com  "] textClose:[18, 19, "]"] linkOpen:[19, 20, "("] url:[20, 42, "https://www.google.com"] pageRef:[20, 42, "https://www.google.com"] linkClose:[42, 43, ")"]
-      Text[1, 18] chars:[1, 18, " www. … com  "]
+    Link[0, 43] textOpen:[0, 1, "["] text:[2, 16, "www.google.com"] textClose:[18, 19, "]"] linkOpen:[19, 20, "("] url:[20, 42, "https://www.google.com"] pageRef:[20, 42, "https://www.google.com"] linkClose:[42, 43, ")"]
+      Text[2, 16] chars:[2, 16, "www.g … e.com"]
 ````````````````````````````````
 
 
@@ -2151,6 +2151,75 @@ Document[0, 130]
     Text[57, 58] chars:[57, 58, " "]
     Image[58, 130] textOpen:[58, 60, "!["] text:[60, 91, "External Groups Whitelist field"] textClose:[91, 92, "]"] linkOpen:[92, 93, "("] url:[93, 129, "images/external-groups-whitelist.png"] pageRef:[93, 129, "images/external-groups-whitelist.png"] linkClose:[129, 130, ")"]
       Text[60, 91] chars:[60, 91, "Exter … field"]
+````````````````````````````````
+
+
+### Issue xxx-03
+
+```````````````````````````````` example Issue xxx-03: 1
+[ text ]
+
+[ text  ]: http://example.com
+.
+<p><a href="http://example.com">text</a></p>
+.
+Document[0, 40]
+  Paragraph[0, 9] isTrailingBlankLine
+    LinkRef[0, 8] referenceOpen:[0, 1, "["] reference:[2, 6, "text"] referenceClose:[7, 8, "]"]
+      Text[2, 6] chars:[2, 6, "text"]
+  Reference[10, 39] refOpen:[10, 11, "["] ref:[12, 16, "text"] refClose:[18, 20, "]:"] url:[21, 39, "http://example.com"]
+````````````````````````````````
+
+
+```````````````````````````````` example Issue xxx-03: 2
+![ text ]
+
+[ text  ]: http://example.com
+.
+<p><img src="http://example.com" alt="text" /></p>
+.
+Document[0, 41]
+  Paragraph[0, 10] isTrailingBlankLine
+    ImageRef[0, 9] referenceOpen:[0, 2, "!["] reference:[3, 7, "text"] referenceClose:[8, 9, "]"]
+      Text[3, 7] chars:[3, 7, "text"]
+  Reference[11, 40] refOpen:[11, 12, "["] ref:[13, 17, "text"] refClose:[19, 21, "]:"] url:[22, 40, "http://example.com"]
+````````````````````````````````
+
+
+```````````````````````````````` example Issue xxx-03: 3
+[ text ](http://example.com)
+.
+<p><a href="http://example.com">text</a></p>
+.
+Document[0, 29]
+  Paragraph[0, 29]
+    Link[0, 28] textOpen:[0, 1, "["] text:[2, 6, "text"] textClose:[7, 8, "]"] linkOpen:[8, 9, "("] url:[9, 27, "http://example.com"] pageRef:[9, 27, "http://example.com"] linkClose:[27, 28, ")"]
+      Text[2, 6] chars:[2, 6, "text"]
+````````````````````````````````
+
+
+### Issue xxx-04
+
+nested lists should have correct offsets
+
+```````````````````````````````` example Issue xxx-04: 1
+* * list item
+.
+<ul>
+  <li>
+    <ul>
+      <li>list item</li>
+    </ul>
+  </li>
+</ul>
+.
+Document[0, 14]
+  BulletList[0, 14] isTight
+    BulletListItem[0, 14] open:[0, 1, "*"] isTight
+      BulletList[2, 14] isTight
+        BulletListItem[2, 14] open:[2, 3, "*"] isTight
+          Paragraph[4, 14]
+            Text[4, 13] chars:[4, 13, "list item"]
 ````````````````````````````````
 
 

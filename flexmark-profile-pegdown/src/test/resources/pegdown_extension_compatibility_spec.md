@@ -2486,7 +2486,9 @@ Multi-line code span
     <tr><td> line </td><td> ```{</td></tr>
   </tbody>
 </table>
-<p>&ldquo;key1&rdquo;: &ldquo;xxx&rdquo;, &ldquo;key2&rdquo;: [ &ldquo;xxx&rdquo;, &ldquo;zzz&rdquo; ] } <code>|</code>{ &ldquo;key1&rdquo;: &ldquo;xxx&rdquo;, &ldquo;key2&rdquo;: &ldquo;xxx&rdquo; }```|</p>
+<p>&ldquo;key1&rdquo;: &ldquo;xxx&rdquo;, &ldquo;key2&rdquo;: [
+&ldquo;xxx&rdquo;, &ldquo;zzz&rdquo; 
+] } <code>|</code>{ &ldquo;key1&rdquo;: &ldquo;xxx&rdquo;, &ldquo;key2&rdquo;: &ldquo;xxx&rdquo; }```|</p>
 .
 Document[0, 150]
   TableBlock[0, 62]
@@ -2524,14 +2526,14 @@ Document[0, 150]
       Text[78, 82] chars:[78, 82, "key2"]
     Text[83, 85] chars:[83, 85, ": "]
     LinkRef[85, 101] referenceOpen:[85, 86, "["] reference:[87, 99, "\"xxx\",\n\"zzz\""] referenceClose:[100, 101, "]"]
-      SoftLineBreak[86, 87]
+      SoftLineBreak[87, 87]
       TypographicQuotes[87, 92] typographicOpening: &ldquo;  typographicClosing: &rdquo;  textOpen:[87, 88, "\""] text:[88, 91, "xxx"] textClose:[91, 92, "\""]
         Text[88, 91] chars:[88, 91, "xxx"]
       Text[92, 93] chars:[92, 93, ","]
       SoftLineBreak[93, 94]
       TypographicQuotes[94, 99] typographicOpening: &ldquo;  typographicClosing: &rdquo;  textOpen:[94, 95, "\""] text:[95, 98, "zzz"] textClose:[98, 99, "\""]
         Text[95, 98] chars:[95, 98, "zzz"]
-      SoftLineBreak[99, 100]
+      SoftLineBreak[99, 99]
     SoftLineBreak[101, 102]
     Text[102, 104] chars:[102, 104, "} "]
     Code[104, 113] textOpen:[104, 107, "```"] text:[107, 110, "\n| "] textClose:[110, 113, "```"]

@@ -24,7 +24,7 @@ Document[0, 8]
     BulletListItem[0, 8] open:[0, 1, "-"] isTight
       Paragraph[2, 8]
         LinkRef[2, 5] referenceOpen:[2, 3, "["] reference:[4, 4] referenceClose:[4, 5, "]"]
-          Text[3, 4] chars:[3, 4, " "]
+          Text[4, 4]
         Text[5, 8] chars:[5, 8, "abc"]
 ````````````````````````````````
 
@@ -83,15 +83,15 @@ Document[0, 95]
     BulletListItem[5, 12] open:[5, 6, "-"] isTight
       Paragraph[7, 12]
         LinkRef[7, 11] referenceOpen:[7, 8, "["] reference:[8, 9, "x"] referenceClose:[10, 11, "]"]
-          Text[8, 10] chars:[8, 10, "x "]
+          Text[8, 9] chars:[8, 9, "x"]
     BulletListItem[12, 19] open:[12, 13, "-"] isTight
       Paragraph[14, 19]
         LinkRef[14, 18] referenceOpen:[14, 15, "["] reference:[16, 17, "x"] referenceClose:[17, 18, "]"]
-          Text[15, 17] chars:[15, 17, " x"]
+          Text[16, 17] chars:[16, 17, "x"]
     BulletListItem[19, 27] open:[19, 20, "-"] isTight
       Paragraph[21, 27]
         LinkRef[21, 26] referenceOpen:[21, 22, "["] reference:[23, 24, "x"] referenceClose:[25, 26, "]"]
-          Text[22, 25] chars:[22, 25, " x "]
+          Text[23, 24] chars:[23, 24, "x"]
     BulletListItem[27, 33] open:[27, 28, "-"] isTight
       Paragraph[29, 33]
         LinkRef[29, 32] referenceOpen:[29, 30, "["] reference:[30, 31, "a"] referenceClose:[31, 32, "]"]
@@ -99,7 +99,7 @@ Document[0, 95]
     BulletListItem[33, 42] open:[33, 34, "-"] isTight
       Paragraph[35, 42]
         LinkRef[35, 38] referenceOpen:[35, 36, "["] reference:[37, 37] referenceClose:[37, 38, "]"]
-          Text[36, 37] chars:[36, 37, " "]
+          Text[37, 37]
         Text[38, 41] chars:[38, 41, "abc"]
     BulletListItem[42, 51] open:[42, 43, "-"] isTight
       Paragraph[44, 51]
@@ -115,7 +115,7 @@ Document[0, 95]
       Paragraph[62, 72]
         Text[62, 63] chars:[62, 63, "a"]
         LinkRef[63, 66] referenceOpen:[63, 64, "["] reference:[65, 65] referenceClose:[65, 66, "]"]
-          Text[64, 65] chars:[64, 65, " "]
+          Text[65, 65]
         Text[66, 71] chars:[66, 71, " task"]
     BulletListItem[72, 84] open:[72, 73, "-"] isTight
       Paragraph[74, 84]
@@ -795,7 +795,7 @@ Document[0, 23]
     OrderedListItem[0, 12] open:[0, 2, "1."] isTight
       Paragraph[3, 12]
         LinkRef[3, 6] referenceOpen:[3, 4, "["] reference:[5, 5] referenceClose:[5, 6, "]"]
-          Text[4, 5] chars:[4, 5, " "]
+          Text[5, 5]
         Text[6, 11] chars:[6, 11, " task"]
     OrderedListItem[12, 23] open:[12, 14, "2."] isTight
       Paragraph[15, 23]

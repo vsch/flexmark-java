@@ -1521,10 +1521,10 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
 
                 // collapse any link refs contained in this link, they are duds, link takes precedence
                 // TODO: add a test to see if all link refs should be collapsed or just undefined ones
-                collapseLinkRefChildren(insertNode, null);
+                collapseLinkRefChildren(insertNode, null, true);
             } else if (insertNode instanceof RefNode) {
                 // have a link ref, collapse to text any tentative ones contained in it, they are duds
-                collapseLinkRefChildren(insertNode, true);
+                collapseLinkRefChildren(insertNode, true, true);
             }
 
             toRemove.unlink();
@@ -1549,14 +1549,14 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
         return false;
     }
 
-    protected static void collapseLinkRefChildren(Node node, Boolean isTentative) {
+    protected static void collapseLinkRefChildren(Node node, Boolean isTentative, final boolean trimFirstLastChild) {
         Node child = node.getFirstChild();
         boolean hadCollapse = false;
         while (child != null) {
             Node nextChild = child.getNext();
             if (child instanceof LinkRefDerived && (isTentative == null || isTentative == ((RefNode) child).isTentative())) {
                 // need to collapse this one, moving its text contents to text
-                collapseLinkRefChildren(child, isTentative);
+                collapseLinkRefChildren(child, isTentative, false);
                 child.unlink();
 
                 TextNodeConverter list = new TextNodeConverter(child.getChars());
@@ -1571,7 +1571,22 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
             child = nextChild;
         }
 
-        if (hadCollapse) TextNodeConverter.mergeTextNodes(node);
+        if (hadCollapse) {
+            TextNodeConverter.mergeTextNodes(node);
+        }
+
+        if (trimFirstLastChild) {
+            // trim first and last child text
+            Node firstChild = node.getFirstChild();
+            Node lastChild = node.getLastChild();
+
+            if (firstChild == lastChild) {
+                if (firstChild != null) firstChild.setChars(firstChild.getChars().trim());
+            } else {
+                if (firstChild != null) firstChild.setChars(firstChild.getChars().trimStart());
+                if (lastChild != null) lastChild.setChars(lastChild.getChars().trimEnd());
+            }
+        }
     }
 
     /**

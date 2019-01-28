@@ -3223,12 +3223,12 @@ Document[0, 40]
     BulletListItem[17, 29] open:[17, 18, "-"] isTight
       Paragraph[19, 29]
         LinkRef[19, 22] referenceOpen:[19, 20, "["] reference:[21, 21] referenceClose:[21, 22, "]"]
-          Text[20, 21] chars:[20, 21, " "]
+          Text[21, 21]
         Text[22, 28] chars:[22, 28, " task1"]
     BulletListItem[29, 40] open:[29, 30, "-"] isTight
       Paragraph[31, 40]
         LinkRef[31, 34] referenceOpen:[31, 32, "["] reference:[33, 33] referenceClose:[33, 34, "]"]
-          Text[32, 33] chars:[32, 33, " "]
+          Text[33, 33]
         Text[34, 40] chars:[34, 40, " task2"]
 ````````````````````````````````
 

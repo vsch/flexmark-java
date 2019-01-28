@@ -30,7 +30,7 @@ public class EnumeratedReferenceLinkRefProcessor implements LinkRefProcessor {
 
     @Override
     public boolean isMatch(BasedSequence nodeChars) {
-        return nodeChars.length() >= 3 && nodeChars.charAt(0) == '[' && (nodeChars.charAt(1) == '@' || nodeChars.charAt(1) == '#') && nodeChars.endCharAt(1) == ']';
+        return nodeChars.length() >= 3 && nodeChars.charAt(0) == '[' && (nodeChars.charAt(1) == '@' || nodeChars.charAt(1) == '#') && nodeChars.endCharAt(1) == ']' && (nodeChars.length() == 3 || !Character.isDigit(nodeChars.charAt(2)));
     }
 
     @Override

@@ -2935,7 +2935,7 @@ Document[0, 50]
     BulletListItem[24, 37] open:[24, 25, "-"] isTight
       Paragraph[26, 37]
         LinkRef[26, 29] referenceOpen:[26, 27, "["] reference:[28, 28] referenceClose:[28, 29, "]"]
-          Text[27, 28] chars:[27, 28, " "]
+          Text[28, 28]
         Text[29, 36] chars:[29, 36, " Task 2"]
     BulletListItem[37, 50] open:[37, 38, "-"] isTight
       Paragraph[39, 50]

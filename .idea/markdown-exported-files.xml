@@ -46,6 +46,7 @@
       <exportedFile path="$PROJECT_DIR$/flexmark-ext-jekyll-front-matter/src/main/javadoc/overview.html" settingsVersion="ED6B5AAF-E62A2F0F" />
     </htmlFiles>
     <imageFiles>
+      <exportedFile path="$PROJECT_DIR$/flexmark-ext-enumerated-reference/src/main/javadoc/information_source.png" settingsVersion="ED6B5AAF-E62A2F0F" />
       <exportedFile path="$PROJECT_DIR$/flexmark-ext-xwiki-macros/src/main/javadoc/information_source.png" settingsVersion="ED6B5AAF-E62A2F0F" />
       <exportedFile path="$PROJECT_DIR$/flexmark-ext-tables/src/main/javadoc/warning.png" settingsVersion="ED6B5AAF-E62A2F0F" />
     </imageFiles>

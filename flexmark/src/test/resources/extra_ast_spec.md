@@ -4500,7 +4500,7 @@ empty link ref
 Document[0, 4]
   Paragraph[0, 4]
     LinkRef[0, 3] referenceOpen:[0, 1, "["] reference:[2, 2] referenceClose:[2, 3, "]"]
-      Text[1, 2] chars:[1, 2, " "]
+      Text[2, 2]
 ````````````````````````````````
 
 
@@ -4514,7 +4514,7 @@ empty link ref
 Document[0, 6]
   Paragraph[0, 6]
     LinkRef[0, 5] referenceOpen:[0, 1, "["] reference:[2, 2] referenceClose:[2, 3, "]"] textOpen:[3, 4, "["] textClose:[4, 5, "]"]
-      Text[1, 2] chars:[1, 2, " "]
+      Text[2, 2]
 ````````````````````````````````
 
 
@@ -4528,7 +4528,7 @@ empty link ref
 Document[0, 7]
   Paragraph[0, 7]
     LinkRef[0, 6] textOpen:[0, 1, "["] text:[2, 2] textClose:[2, 3, "]"] referenceOpen:[3, 4, "["] reference:[5, 5] referenceClose:[5, 6, "]"]
-      Text[1, 2] chars:[1, 2, " "]
+      Text[2, 2]
 ````````````````````````````````
 
 
@@ -4542,7 +4542,7 @@ empty image ref
 Document[0, 5]
   Paragraph[0, 5]
     ImageRef[0, 4] referenceOpen:[0, 2, "!["] reference:[3, 3] referenceClose:[3, 4, "]"]
-      Text[2, 3] chars:[2, 3, " "]
+      Text[3, 3]
 ````````````````````````````````
 
 
@@ -4556,7 +4556,7 @@ empty link ref
 Document[0, 7]
   Paragraph[0, 7]
     ImageRef[0, 6] referenceOpen:[0, 2, "!["] reference:[3, 3] referenceClose:[3, 4, "]"] textOpen:[4, 5, "["] textClose:[5, 6, "]"]
-      Text[2, 3] chars:[2, 3, " "]
+      Text[3, 3]
 ````````````````````````````````
 
 
@@ -4570,7 +4570,7 @@ empty link ref
 Document[0, 8]
   Paragraph[0, 8]
     ImageRef[0, 7] textOpen:[0, 2, "!["] text:[3, 3] textClose:[3, 4, "]"] referenceOpen:[4, 5, "["] reference:[6, 6] referenceClose:[6, 7, "]"]
-      Text[2, 3] chars:[2, 3, " "]
+      Text[3, 3]
 ````````````````````````````````
 
 
@@ -5246,7 +5246,7 @@ Document[0, 455]
     BulletListItem[390, 455] open:[390, 391, "-"] isTight
       Paragraph[392, 455]
         LinkRef[392, 395] referenceOpen:[392, 393, "["] reference:[394, 394] referenceClose:[394, 395, "]"]
-          Text[393, 394] chars:[393, 394, " "]
+          Text[394, 394]
         Text[395, 400] chars:[395, 400, " item"]
         SoftLineBreak[400, 401]
         Text[401, 425] chars:[401, 425, "with  … lines"]
