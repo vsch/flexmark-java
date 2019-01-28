@@ -22,10 +22,10 @@ import java.io.OutputStream;
  * Extension for converting Markdown to PDF
  * <p>
  * After document is rendered pass the HTML result to
- * {@link #exportToPdf(OutputStream, String, String, DataHolder)}
- * or {@link #exportToPdf(String, String, String, DataHolder)}
- * or {@link #exportToPdf(String, String, String, PdfRendererBuilder.TextDirection)}
- * or {@link #exportToPdf(OutputStream, String, String, PdfRendererBuilder.TextDirection)}
+ * {@link #exportToPdf(OutputStream, String, String, DataHolder,ProtectionPolicy protectionPolicy)}
+ * or {@link #exportToPdf(String, String, String, DataHolder,ProtectionPolicy protectionPolicy)}
+ * or {@link #exportToPdf(String, String, String, PdfRendererBuilder.TextDirection,ProtectionPolicy protectionPolicy)}
+ * or {@link #exportToPdf(OutputStream, String, String, PdfRendererBuilder.TextDirection,ProtectionPolicy protectionPolicy)}
  * <p>
  * The parsed Markdown text is rendered to HTML then converted to PDF
  * </p>
