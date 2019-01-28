@@ -7,6 +7,8 @@ import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.*;
 import com.vladsch.flexmark.util.options.DataHolder;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -36,7 +38,23 @@ public class YouTubeLinkNodeRenderer implements NodeRenderer {
             // standard Link Rendering
             ResolvedLink resolvedLink = context.resolveLink(LinkType.LINK, node.getUrl().unescape(), null);
 
-            if (resolvedLink.getUrl().contains("www.youtube.com/watch")) {
+            URL url = null;
+            try {
+                url = new URL(resolvedLink.getUrl());
+            } catch (MalformedURLException e) {
+            }
+            
+            if (url != null && "youtu.be".equalsIgnoreCase(url.getHost())) {
+                html.attr("src", "https://www.youtube-nocookie.com/embed" + url.getFile().replace("?t=", "?start="));
+                html.attr("width", "560");
+                html.attr("height", "315");
+                html.attr("class", "youtube-embedded");
+                html.attr("allowfullscreen", "true");
+                html.attr("frameborder", "0");
+                html.attr("allow", "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture");
+                html.srcPos(node.getChars()).withAttr(resolvedLink).tag("iframe");
+                html.tag("/iframe");
+            } else if (resolvedLink.getUrl().contains("www.youtube.com/watch")) {
                 html.attr("src", resolvedLink.getUrl().replace("watch?v=".toLowerCase(), "embed/"));
                 html.attr("width", "420");
                 html.attr("height", "315");

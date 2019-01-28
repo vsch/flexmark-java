@@ -82,3 +82,31 @@ Document[0, 55]
 ````````````````````````````````
 
 
+New form, without start time
+```````````````````````````````` example YouTube embedded link transformer: 6
+@[test](https://youtu.be/BaA0hZ406YY)
+.
+<p><iframe src="https://www.youtube-nocookie.com/embed/BaA0hZ406YY" width="560" height="315" class="youtube-embedded" allowfullscreen="true" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"></iframe></p>
+.
+Document[0, 38]
+  Paragraph[0, 38]
+    Text[0, 0]
+    YouTubeLink[0, 37] textOpen:[0, 2, "@["] text:[2, 6, "test"] textClose:[6, 7, "]"] linkOpen:[7, 8, "("] url:[8, 36, "https://youtu.be/BaA0hZ406YY"] linkClose:[36, 37, ")"]
+      Text[2, 6] chars:[2, 6, "test"]
+````````````````````````````````
+
+
+New form, with start time
+```````````````````````````````` example YouTube embedded link transformer: 7
+@[test](https://youtu.be/BaA0hZ406YY?t=123)
+.
+<p><iframe src="https://www.youtube-nocookie.com/embed/BaA0hZ406YY?start=123" width="560" height="315" class="youtube-embedded" allowfullscreen="true" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"></iframe></p>
+.
+Document[0, 44]
+  Paragraph[0, 44]
+    Text[0, 0]
+    YouTubeLink[0, 43] textOpen:[0, 2, "@["] text:[2, 6, "test"] textClose:[6, 7, "]"] linkOpen:[7, 8, "("] url:[8, 42, "https://youtu.be/BaA0hZ406YY?t=123"] linkClose:[42, 43, ")"]
+      Text[2, 6] chars:[2, 6, "test"]
+````````````````````````````````
+
+
