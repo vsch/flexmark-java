@@ -22,10 +22,10 @@ import java.io.OutputStream;
  * Extension for converting Markdown to PDF
  * <p>
  * After document is rendered pass the HTML result to
- * {@link #exportToPdf(OutputStream, String, String, DataHolder,ProtectionPolicy protectionPolicy)}
- * or {@link #exportToPdf(String, String, String, DataHolder,ProtectionPolicy protectionPolicy)}
- * or {@link #exportToPdf(String, String, String, PdfRendererBuilder.TextDirection,ProtectionPolicy protectionPolicy)}
- * or {@link #exportToPdf(OutputStream, String, String, PdfRendererBuilder.TextDirection,ProtectionPolicy protectionPolicy)}
+ * {@link #exportToPdf(OutputStream, String, String, DataHolder, ProtectionPolicy protectionPolicy)}
+ * or {@link #exportToPdf(String, String, String, DataHolder, ProtectionPolicy protectionPolicy)}
+ * or {@link #exportToPdf(String, String, String, PdfRendererBuilder.TextDirection, ProtectionPolicy protectionPolicy)}
+ * or {@link #exportToPdf(OutputStream, String, String, PdfRendererBuilder.TextDirection, ProtectionPolicy protectionPolicy)}
  * <p>
  * The parsed Markdown text is rendered to HTML then converted to PDF
  * </p>
@@ -46,7 +46,7 @@ public class PdfConverterExtension {
         }
     }
 
-    public static void exportToPdf(final OutputStream os, final String html, final String url, final DataHolder options,ProtectionPolicy protectionPolicy) {
+    public static void exportToPdf(final OutputStream os, final String html, final String url, final DataHolder options, ProtectionPolicy protectionPolicy) {
         exportToPdf(os, html, url, options.get(DEFAULT_TEXT_DIRECTION), protectionPolicy);
     }
 
@@ -60,11 +60,9 @@ public class PdfConverterExtension {
             handleW3cDocument(html, url, builder);
 
             builder.toStream(os);
-            //builder.run();
             renderer = builder.buildPdfRenderer();
             PDDocument document = renderer.getPdfDocument();
             if (protectionPolicy != null)
-                //ProtectionPolicy password = new StandardProtectionPolicy("ownerPassword", "userpassword", new AccessPermission());
                 document.protect(protectionPolicy);
 
             renderer.layout();
