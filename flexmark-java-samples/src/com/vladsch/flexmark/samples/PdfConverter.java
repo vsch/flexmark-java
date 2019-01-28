@@ -1,13 +1,15 @@
 package com.vladsch.flexmark.samples;
 
-import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.pdf.converter.PdfConverterExtension;
 import com.vladsch.flexmark.profiles.pegdown.Extensions;
 import com.vladsch.flexmark.profiles.pegdown.PegdownOptionsAdapter;
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.options.MutableDataHolder;
 import org.apache.commons.io.IOUtils;
+import org.apache.pdfbox.pdmodel.encryption.AccessPermission;
+import org.apache.pdfbox.pdmodel.encryption.StandardProtectionPolicy;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -81,7 +83,7 @@ public class PdfConverter {
 
         Node document = PARSER.parse(pegdown);
         String html = RENDERER.render(document);
-        
+
         // add embedded fonts for non-latin character set rendering
         // change file:///usr/local/fonts/ to your system's path for font installation Unix path or 
         // on windows the path should start with `file:/X:/...` where `X:/...` is the drive 
@@ -142,6 +144,8 @@ public class PdfConverter {
                 "</head><body>" + html + "\n" +
                 "</body></html>";
 
-        PdfConverterExtension.exportToPdf("/Users/vlad/src/pdf/flexmark-java.pdf", html,"", OPTIONS);
+        PdfConverterExtension.exportToPdf("/Users/vlad/src/pdf/flexmark-java.pdf", html, "", OPTIONS, null);
+        PdfConverterExtension.exportToPdf("/Users/vlad/src/pdf/flexmark-java-pwd-protected.pdf", html, "", OPTIONS,
+                new StandardProtectionPolicy("opassword", "upassword", new AccessPermission()));
     }
 }
