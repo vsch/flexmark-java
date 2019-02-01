@@ -910,7 +910,7 @@ public class FlexmarkHtmlParser {
         while (lastPos < chars.length()) {
             int pos = chars.indexOf(c, lastPos);
             if (pos < 0) break;
-            int count = chars.countChars(c, pos);
+            int count = chars.countLeading(c, pos);
             if (minCount <= count) minCount = count + 1;
             lastPos = pos + count;
         }

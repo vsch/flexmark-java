@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.ext.attributes;
 
-import com.vladsch.flexmark.util.ast.CustomNode;
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.ast.DoNotDecorate;
 import com.vladsch.flexmark.util.html.Attribute;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
@@ -8,7 +8,7 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 /**
  * An Attribute node representing a single attribute name and value in attributes node
  */
-public class AttributeNode extends CustomNode implements DoNotDecorate {
+public class AttributeNode extends Node implements DoNotDecorate {
     protected BasedSequence name = BasedSequence.NULL;
     protected BasedSequence attributeSeparator = BasedSequence.NULL;
     protected BasedSequence openingMarker = BasedSequence.NULL;

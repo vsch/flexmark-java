@@ -259,7 +259,7 @@ public class DefinitionItemBlockParser extends AbstractBlockParser {
                     // intervening characters between previous paragraph and definition terms
                     lastChildAnyNot.setCharsFromContent();
                     final BasedSequence interSpace = BasedSequenceImpl.of(state.getLine().baseSubSequence(lastChildAnyNot.getEndOffset(), state.getLine().getStartOffset()).normalizeEOL());
-                    if (interSpace.countChars('\n') >= 2) {
+                    if (interSpace.countLeading('\n') >= 2) {
                         return BlockStart.none();
                     }
                 }
@@ -276,7 +276,7 @@ public class DefinitionItemBlockParser extends AbstractBlockParser {
                 ItemData itemData = parseItemMarker(options, state, state.getActiveBlockParser() instanceof ParagraphParser);
                 if (itemData != null) {
                     final BlockStart blockStart = BlockStart.of(new DefinitionItemBlockParser(state.getProperties(), itemData))
-                            .atColumn(itemData.markerColumn + itemData.contentOffset);
+                            .atColumn(itemData.markerColumn + itemData.itemMarker.length() + itemData.contentOffset);
                     return blockStart;
                 }
             }

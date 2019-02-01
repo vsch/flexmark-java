@@ -470,6 +470,72 @@ public abstract class BasedSequenceImpl implements BasedSequence {
         return -1;
     }
 
+    // @formatter:off
+    @Override public int countOf(char c)                                        { return countOf(c, 0, length()); }
+    @Override public int countOfNot(char c)                                     { return countOfNot(c, 0, length()); }
+    @Override public int countOf(char c, int fromIndex)                         { return countOf(c, fromIndex, length()); }
+    @Override public int countOfNot(char c, int fromIndex)                      { return countOfNot(c, fromIndex, length()); }
+    
+    @Override public int countOf()                                              { return countOfAny(BasedSequence.WHITESPACE_NO_EOL_CHARS, 0, length()); }
+    @Override public int countOfNot()                                           { return countOfAnyNot(BasedSequence.WHITESPACE_NO_EOL_CHARS, 0, length()); }
+    @Override public int countOfAny(CharSequence chars)                         { return countOfAny(chars, 0, length()); }
+    @Override public int countOfAnyNot(CharSequence chars)                      { return countOfAnyNot(chars, 0, length()); }
+    @Override public int countOfAny(CharSequence chars, int fromIndex)          { return countOfAny(chars, fromIndex, length()); }
+    @Override public int countOfAnyNot(CharSequence chars, int fromIndex)       { return countOfAnyNot(chars, fromIndex, length()); }
+    // @formatter:on
+
+    @Override
+    public int countOf(char c1, int startIndex, int fromIndex) {
+        if (startIndex < 0) startIndex = 0;
+        if (fromIndex >= length()) fromIndex = length();
+        else fromIndex++;
+        int count = 0;
+        for (int i = fromIndex; i-- > startIndex; ) {
+            final char c = charAt(i);
+            if (c == c1) count++;
+        }
+        return count;
+    }
+
+    @Override
+    public int countOfAny(CharSequence s, int fromIndex, int endIndex) {
+        BasedSequence sequence = of(s);
+        if (fromIndex < 0) fromIndex = 0;
+        if (endIndex > length()) endIndex = length();
+        int count = 0;
+        for (int i = fromIndex; i < endIndex; i++) {
+            char c = charAt(i);
+            if (sequence.indexOf(c) != -1) count++;
+        }
+        return count;
+    }
+
+    @Override
+    public int countOfNot(char c1, int startIndex, int fromIndex) {
+        if (startIndex < 0) startIndex = 0;
+        if (fromIndex >= length()) fromIndex = length();
+        else fromIndex++;
+        int count = 0;
+        for (int i = fromIndex; i-- > startIndex; ) {
+            final char c = charAt(i);
+            if (c != c1) count++;
+        }
+        return count;
+    }
+
+    @Override
+    public int countOfAnyNot(CharSequence s, int fromIndex, int endIndex) {
+        BasedSequence sequence = of(s);
+        if (fromIndex < 0) fromIndex = 0;
+        if (endIndex > length()) endIndex = length();
+        int count = 0;
+        for (int i = fromIndex; i < endIndex; i++) {
+            char c = charAt(i);
+            if (sequence.indexOf(c) == -1) count++;
+        }
+        return count;
+    }
+
     @Override
     public int startOfDelimitedBy(CharSequence s, int index) {
         if (index < 0) index = 0;
@@ -549,33 +615,56 @@ public abstract class BasedSequenceImpl implements BasedSequence {
     }
 
     // @formatter:off
-    @Override public int countLeading(char c)                                       { return countChars(c, 0, length()); }
-    @Override public int countLeadingNot(char c)                                    { return countNotChars(c, 0, length()); }
-    @Override public int countLeading(char c, int fromIndex)                        { return countChars(c, fromIndex, length()); }
-    @Override public int countLeadingNot(char c, int fromIndex)                     { return countNotChars(c, fromIndex, length()); }
-    @Override public int countLeading(char c, int fromIndex, int endIndex)          { return countChars(c, fromIndex, endIndex); }
-    @Override public int countLeadingNot(char c, int fromIndex, int endIndex)       { return countNotChars(c, fromIndex, endIndex); }
+    // these are duplicates and will be removed soon
+    // countChars -> countLeading
+    // countNotChars -> countLeadingNot
+    // countCharsReversed -> countTrailing
+    // countNotCharsReversed -> countTrailingNot
+    @Deprecated public int countChars(char c)                                                               { return countLeading(c); }   
+    @Deprecated public int countCharsReversed(char c)                                                       { return countTrailing(c); }   
+    @Deprecated public int countNotChars(char c)                                                            { return countLeadingNot(c); }    
+    @Deprecated public int countNotCharsReversed(char c)                                                    { return countTrailingNot(c); }    
 
-    @Override public int countTrailing(char c)                                      { return countCharsReversed(c, 0, length()); }
-    @Override public int countTrailingNot(char c)                                   { return countNotCharsReversed(c, 0, length()); }
-    @Override public int countTrailing(char c, int fromIndex)                       { return countCharsReversed(c, 0, fromIndex); }
-    @Override public int countTrailingNot(char c, int fromIndex)                    { return countNotCharsReversed(c, 0, fromIndex); }
-    @Override public int countTrailing(char c, int startIndex, int fromIndex)       { return countCharsReversed(c, startIndex, fromIndex); }
-    @Override public int countTrailingNot(char c, int startIndex, int fromIndex)    { return countNotCharsReversed(c, startIndex, fromIndex); }
+    @Deprecated public int countChars(char c, int startIndex)                                               { return countLeading(c, startIndex); }   
+    @Deprecated public int countCharsReversed(char c, int startIndex)                                       { return countTrailing(c, startIndex); }   
+    @Deprecated public int countNotChars(char c, int startIndex)                                            { return countLeadingNot(c, startIndex); }    
+    @Deprecated public int countNotCharsReversed(char c, int startIndex)                                    { return countTrailingNot(c, startIndex); }    
 
-    @Override public int countChars(char c)                                         { return countChars(c, 0, length()); }
-    @Override public int countNotChars(char c)                                      { return countNotChars(c, 0, length()); }
-    @Override public int countChars(char c, int fromIndex)                          { return countChars(c, fromIndex, length()); }
-    @Override public int countNotChars(char c, int fromIndex)                       { return countNotChars(c, fromIndex, length()); }
+    @Deprecated public int countChars(char c, int startIndex, int endIndex)                                 { return countLeading(c, startIndex, endIndex); }     
+    @Deprecated public int countNotChars(char c, int startIndex, int endIndex)                              { return countTrailingNot(c, startIndex, endIndex); }  
+    @Deprecated public int countCharsReversed(char c, int startIndex, int endIndex)                         { return countTrailing(c, startIndex, endIndex); }     
+    @Deprecated public int countNotCharsReversed(char c, int startIndex, int endIndex)                      { return countTrailingNot(c, startIndex, endIndex); }  
 
-    @Override public int countCharsReversed(char c)                                 { return countCharsReversed(c, 0, length()); }
-    @Override public int countNotCharsReversed(char c)                              { return countNotCharsReversed(c, 0, length()); }
-    @Override public int countCharsReversed(char c, int fromIndex)                  { return countCharsReversed(c, 0, fromIndex); }
-    @Override public int countNotCharsReversed(char c, int fromIndex)               { return countNotCharsReversed(c, 0, fromIndex); }
+    @Deprecated public int countChars(CharSequence chars)                                                   { return countLeading( chars); }
+    @Deprecated public int countCharsReversed(CharSequence chars)                                           { return countTrailing( chars); }
+    @Deprecated public int countNotChars(CharSequence chars)                                                { return countLeadingNot( chars); }
+    @Deprecated public int countNotCharsReversed(CharSequence chars)                                        { return countTrailingNot( chars); }
+    @Deprecated public int countChars(CharSequence chars, int startIndex)                                   { return countLeading(chars, startIndex); }
+    @Deprecated public int countCharsReversed(CharSequence chars, int startIndex)                           { return countTrailing(chars, startIndex); }
+    @Deprecated public int countNotChars(CharSequence chars, int startIndex)                                { return countLeadingNot(chars, startIndex); }
+    @Deprecated public int countNotCharsReversed(CharSequence chars, int startIndex)                        { return countTrailingNot(chars, startIndex); }
+
+    @Deprecated public int countChars(CharSequence chars, int startIndex, int endIndex)                     { return countLeading(chars, startIndex, endIndex); }     
+    @Deprecated public int countNotChars(CharSequence chars, int startIndex, int endIndex)                  { return countTrailingNot(chars, startIndex, endIndex); }  
+    @Deprecated public int countCharsReversed(CharSequence chars, int startIndex, int endIndex)             { return countTrailing(chars, startIndex, endIndex); }     
+    @Deprecated public int countNotCharsReversed(CharSequence chars, int startIndex, int endIndex)          { return countTrailingNot(chars, startIndex, endIndex); }  
+    // @formatter:on
+
+    // @formatter:off
+    @Override public int countLeading(char c)                                       { return this.countLeading(c, 0, length()); }
+    @Override public int countLeadingNot(char c)                                    { return this.countLeadingNot(c, 0, length()); }
+    @Override public int countLeading(char c, int fromIndex)                        { return this.countLeading(c, fromIndex, length()); }
+    @Override public int countLeadingNot(char c, int fromIndex)                     { return this.countLeadingNot(c, fromIndex, length()); }
+
+    @Override public int countTrailing(char c)                                      { return this.countTrailing(c, 0, length()); }
+    @Override public int countTrailingNot(char c)                                   { return this.countTrailingNot(c, 0, length()); }
+    @Override public int countTrailing(char c, int fromIndex)                       { return this.countTrailing(c, 0, fromIndex); }
+    @Override public int countTrailingNot(char c, int fromIndex)                    { return this.countTrailingNot(c, 0, fromIndex); }
+
     // @formatter:on
 
     @Override
-    public int countChars(char c, int fromIndex, int endIndex) {
+    public int countLeading(char c, int fromIndex, int endIndex) {
         if (fromIndex < 0) fromIndex = 0;
         if (endIndex > length()) endIndex = length();
         if (fromIndex > endIndex) fromIndex = endIndex;
@@ -584,7 +673,7 @@ public abstract class BasedSequenceImpl implements BasedSequence {
     }
 
     @Override
-    public int countCharsReversed(char c, int startIndex, int fromIndex) {
+    public int countTrailing(char c, int startIndex, int fromIndex) {
         if (startIndex < 0) startIndex = 0;
         if (fromIndex > length()) fromIndex = length();
         if (startIndex > fromIndex) startIndex = fromIndex;
@@ -593,7 +682,7 @@ public abstract class BasedSequenceImpl implements BasedSequence {
     }
 
     @Override
-    public int countNotChars(char c, int fromIndex, int endIndex) {
+    public int countLeadingNot(char c, int fromIndex, int endIndex) {
         if (fromIndex < 0) fromIndex = 0;
         if (endIndex > length()) endIndex = length();
         if (fromIndex > endIndex) fromIndex = endIndex;
@@ -602,7 +691,7 @@ public abstract class BasedSequenceImpl implements BasedSequence {
     }
 
     @Override
-    public int countNotCharsReversed(char c, int startIndex, int fromIndex) {
+    public int countTrailingNot(char c, int startIndex, int fromIndex) {
         if (startIndex < 0) startIndex = 0;
         if (fromIndex > length()) fromIndex = length();
         if (startIndex > fromIndex) startIndex = fromIndex;
@@ -611,33 +700,24 @@ public abstract class BasedSequenceImpl implements BasedSequence {
     }
 
     // @formatter:off
-    @Override public int countLeading(CharSequence chars)                                   { return countChars(chars, 0, length()); }
-    @Override public int countLeadingNot(CharSequence chars)                                { return countNotChars(chars, 0, length()); }
-    @Override public int countLeading(CharSequence chars, int fromIndex)                   { return countChars(chars, fromIndex, length()); }
-    @Override public int countLeadingNot(CharSequence chars, int fromIndex)                { return countNotChars(chars, fromIndex, length()); }
-    @Override public int countLeading(CharSequence chars, int fromIndex, int endIndex)     { return countChars(chars, fromIndex, endIndex); }
-    @Override public int countLeadingNot(CharSequence chars, int fromIndex, int endIndex)  { return countNotChars(chars, fromIndex, endIndex); }
+    @Override public int countLeading()                                          { return this.countLeading(BasedSequence.WHITESPACE_NO_EOL_CHARS, 0, length()); }
+    @Override public int countLeadingNot()                                       { return this.countLeadingNot(BasedSequence.WHITESPACE_NO_EOL_CHARS, 0, length()); }
+    @Override public int countTrailing()                                         { return this.countTrailing(BasedSequence.WHITESPACE_NO_EOL_CHARS, 0, length()); }
+    @Override public int countTrailingNot()                                      { return this.countTrailingNot(BasedSequence.WHITESPACE_NO_EOL_CHARS, 0, length()); }
+    
+    @Override public int countLeading(CharSequence chars)                        { return countLeading(chars, 0, length()); }
+    @Override public int countLeadingNot(CharSequence chars)                     { return countLeadingNot(chars, 0, length()); }
+    @Override public int countLeading(CharSequence chars, int fromIndex)         { return countLeading(chars, fromIndex, length()); }
+    @Override public int countLeadingNot(CharSequence chars, int fromIndex)      { return countLeadingNot(chars, fromIndex, length()); }
 
-    @Override public int countTrailing(CharSequence chars)                                  { return countCharsReversed(chars, 0, length()); }
-    @Override public int countTrailingNot(CharSequence chars)                               { return countNotCharsReversed(chars, 0, length()); }
-    @Override public int countTrailing(CharSequence chars, int fromIndex)                  { return countCharsReversed(chars, 0, fromIndex); }
-    @Override public int countTrailingNot(CharSequence chars, int fromIndex)               { return countNotCharsReversed(chars, 0, fromIndex); }
-    @Override public int countTrailing(CharSequence chars, int startIndex, int fromIndex)    { return countCharsReversed(chars, startIndex, fromIndex); }
-    @Override public int countTrailingNot(CharSequence chars, int startIndex, int fromIndex) { return countNotCharsReversed(chars, startIndex, fromIndex); }
-
-    @Override public int countChars(CharSequence chars)                                     { return countChars(chars, 0, length()); }
-    @Override public int countNotChars(CharSequence chars)                                  { return countNotChars(chars, 0, length()); }
-    @Override public int countChars(CharSequence chars, int fromIndex)                     { return countChars(chars, fromIndex, length()); }
-    @Override public int countNotChars(CharSequence chars, int fromIndex)                  { return countNotChars(chars, fromIndex, length()); }
-
-    @Override public int countCharsReversed(CharSequence chars)                             { return countCharsReversed(chars, 0, length()); }
-    @Override public int countNotCharsReversed(CharSequence chars)                          { return countNotCharsReversed(chars, 0, length()); }
-    @Override public int countCharsReversed(CharSequence chars, int fromIndex)             { return countCharsReversed(chars, 0, fromIndex); }
-    @Override public int countNotCharsReversed(CharSequence chars, int fromIndex)          { return countNotCharsReversed(chars, 0, fromIndex); }
+    @Override public int countTrailing(CharSequence chars)                       { return countTrailing(chars, 0, length()); }
+    @Override public int countTrailingNot(CharSequence chars)                    { return countTrailingNot(chars, 0, length()); }
+    @Override public int countTrailing(CharSequence chars, int fromIndex)        { return countTrailing(chars, 0, fromIndex); }
+    @Override public int countTrailingNot(CharSequence chars, int fromIndex)     { return countTrailingNot(chars, 0, fromIndex); }
     // @formatter:on
 
     @Override
-    public int countChars(CharSequence chars, int fromIndex, int endIndex) {
+    public int countLeading(CharSequence chars, int fromIndex, int endIndex) {
         if (fromIndex < 0) fromIndex = 0;
         if (endIndex > length()) endIndex = length();
         if (fromIndex > endIndex) fromIndex = endIndex;
@@ -672,7 +752,7 @@ public abstract class BasedSequenceImpl implements BasedSequence {
     }
 
     @Override
-    public int countCharsReversed(CharSequence chars, int startIndex, int fromIndex) {
+    public int countTrailing(CharSequence chars, int startIndex, int fromIndex) {
         if (startIndex < 0) startIndex = 0;
         if (fromIndex > length()) fromIndex = length();
         if (startIndex > fromIndex) startIndex = fromIndex;
@@ -681,7 +761,7 @@ public abstract class BasedSequenceImpl implements BasedSequence {
     }
 
     @Override
-    public int countNotChars(CharSequence chars, int fromIndex, int endIndex) {
+    public int countLeadingNot(CharSequence chars, int fromIndex, int endIndex) {
         if (fromIndex < 0) fromIndex = 0;
         if (endIndex > length()) endIndex = length();
         if (fromIndex > endIndex) fromIndex = endIndex;
@@ -690,7 +770,7 @@ public abstract class BasedSequenceImpl implements BasedSequence {
     }
 
     @Override
-    public int countNotCharsReversed(CharSequence chars, int startIndex, int fromIndex) {
+    public int countTrailingNot(CharSequence chars, int startIndex, int fromIndex) {
         if (startIndex < 0) startIndex = 0;
         if (fromIndex > length()) fromIndex = length();
         if (startIndex > fromIndex) startIndex = fromIndex;
@@ -699,59 +779,115 @@ public abstract class BasedSequenceImpl implements BasedSequence {
     }
 
     @Override
-    public BasedSequence trimStart(CharSequence chars) {
-        int trim = countChars(chars, 0, length());
+    public BasedSequence trimStart(int keepLength, CharSequence chars) {
+        int trim = Utils.maxLimit(countLeading(chars, 0, length()), length() - keepLength);
         return trim > 0 ? subSequence(trim, length()) : this;
     }
 
     @Override
-    public BasedSequence trimmedStart(CharSequence chars) {
-        int trim = countChars(chars, 0, length());
+    public BasedSequence trimmedStart(int keepLength, CharSequence chars) {
+        int trim = Utils.maxLimit(countLeading(chars, 0, length()), length() - keepLength);
         return trim > 0 ? subSequence(0, trim) : BasedSequence.NULL;
     }
 
     @Override
-    public BasedSequence trimEnd(CharSequence chars) {
-        int trim = countCharsReversed(chars, 0, length());
+    public BasedSequence trimEnd(int keepLength, CharSequence chars) {
+        int trim = Utils.maxLimit(countTrailing(chars, 0, length()), length() - keepLength);
         return trim > 0 ? subSequence(0, length() - trim) : this;
     }
 
     @Override
-    public BasedSequence trimmedEnd(CharSequence chars) {
-        int trim = countCharsReversed(chars, 0, length());
+    public BasedSequence trimmedEnd(int keepLength, CharSequence chars) {
+        int trim = Utils.maxLimit(countTrailing(chars, 0, length()), length() - keepLength);
         return trim > 0 ? subSequence(length() - trim) : BasedSequence.NULL;
     }
 
     @Override
+    public BasedSequence trimStart(CharSequence chars) {
+        return trimStart(0, chars);
+    }
+
+    @Override
+    public BasedSequence trimmedStart(CharSequence chars) {
+        return trimmedStart(0, chars);
+    }
+
+    @Override
+    public BasedSequence trimEnd(CharSequence chars) {
+        return trimEnd(0, chars);
+    }
+
+    @Override
+    public BasedSequence trimmedEnd(CharSequence chars) {
+        return trimmedEnd(0, chars);
+    }
+
+    @Override
     public BasedSequence trim(CharSequence chars) {
-        int trimStart = countChars(chars, 0, length());
-        int trimEnd = countCharsReversed(chars, 0, length());
+        int trimStart = countLeading(chars, 0, length());
+        int trimEnd = countTrailing(chars, 0, length());
         int trimmed = trimStart + trimEnd;
         return trimmed > 0 ? (trimmed >= length() ? subSequence(0, 0) : subSequence(trimStart, length() - trimEnd)) : this;
     }
 
     @Override
+    public BasedSequence trimStart(int keepLength) {
+        return trimStart(keepLength, WHITESPACE_CHARS);
+    }
+
+    @Override
+    public BasedSequence trimmedStart(int keepLength) {
+        return trimmedStart(keepLength, WHITESPACE_CHARS);
+    }
+
+    @Override
+    public BasedSequence trimEnd(int keepLength) {
+        return trimEnd(keepLength, WHITESPACE_CHARS);
+    }
+
+    @Override
+    public BasedSequence trimmedEnd(int keepLength) {
+        return trimmedEnd(keepLength, WHITESPACE_CHARS);
+    }
+
+    @Override
     public BasedSequence trimStart() {
-        int trim = countChars(WHITESPACE_CHARS, 0, length());
-        return trim > 0 ? subSequence(trim, length()) : this;
+        return trimStart(0, WHITESPACE_CHARS);
     }
 
     @Override
     public BasedSequence trimmedStart() {
-        int trim = countChars(WHITESPACE_CHARS, 0, length());
-        return trim > 0 ? subSequence(0, trim) : BasedSequence.NULL;
+        return trimmedStart(0, WHITESPACE_CHARS);
     }
 
     @Override
     public BasedSequence trimEnd() {
-        int trim = countCharsReversed(WHITESPACE_CHARS, 0, length());
-        return trim > 0 ? subSequence(0, length() - trim) : this;
+        return trimEnd(0, WHITESPACE_CHARS);
     }
 
     @Override
     public BasedSequence trimmedEnd() {
-        int trim = countCharsReversed(WHITESPACE_CHARS, 0, length());
-        return trim > 0 ? subSequence(length() - trim) : BasedSequence.NULL;
+        return trimmedEnd(0, WHITESPACE_CHARS);
+    }
+
+    @Override
+    public BasedSequence padStart(int length, char pad) {
+        return length <= length() ? this : PrefixedSubSequence.repeatOf(pad, length - length(), this);
+    }
+
+    @Override
+    public BasedSequence padEnd(int length, char pad) {
+        return length <= length() ? this : SegmentedSequence.of(this, PrefixedSubSequence.repeatOf(pad, length - length(), this.subSequence(length(), length())));
+    }
+
+    @Override
+    public BasedSequence padStart(int length) {
+        return padStart(length, ' ');
+    }
+
+    @Override
+    public BasedSequence padEnd(int length) {
+        return padEnd(length, ' ');
     }
 
     @Override
@@ -810,12 +946,12 @@ public abstract class BasedSequenceImpl implements BasedSequence {
 
     @Override
     public BasedSequence trim() {
-        int trimStart = countChars(WHITESPACE_CHARS, 0, length());
+        int trimStart = countLeading(WHITESPACE_CHARS, 0, length());
         if (trimStart == length()) {
             return subSequence(trimStart, trimStart);
         }
 
-        int trimEnd = countCharsReversed(WHITESPACE_CHARS, 0, length());
+        int trimEnd = countTrailing(WHITESPACE_CHARS, 0, length());
         return trimStart > 0 || trimEnd > 0 ? subSequence(trimStart, length() - trimEnd) : this;
     }
 
@@ -904,7 +1040,7 @@ public abstract class BasedSequenceImpl implements BasedSequence {
 
     @Override
     public boolean isBlank() {
-        return isEmpty() || countChars(WHITESPACE_CHARS, 0, length()) == length();
+        return isEmpty() || countLeading(WHITESPACE_CHARS, 0, length()) == length();
     }
 
     @Override

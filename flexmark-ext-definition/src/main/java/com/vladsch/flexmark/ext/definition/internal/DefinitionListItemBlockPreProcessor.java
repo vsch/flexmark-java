@@ -62,7 +62,7 @@ public class DefinitionListItemBlockPreProcessor implements BlockPreProcessor {
                 if (options.doubleBlankLineBreaksList) {
                     // intervening characters between previous paragraph and definition terms
                     final BasedSequence interSpace = paragraphPreviousNonBlank == null ? BasedSequence.NULL : BasedSequenceImpl.of(paragraphPreviousNonBlank.getChars().baseSubSequence(paragraphPreviousNonBlank.getChars().getEndOffset(), paragraph.getChars().getStartOffset()).normalizeEOL());
-                    hadPreviousList = paragraphPreviousNonBlank instanceof DefinitionList && interSpace.countChars('\n') < 2;
+                    hadPreviousList = paragraphPreviousNonBlank instanceof DefinitionList && interSpace.countLeading('\n') < 2;
                 } else {
                     hadPreviousList = paragraphPreviousNonBlank instanceof DefinitionList;
                 }

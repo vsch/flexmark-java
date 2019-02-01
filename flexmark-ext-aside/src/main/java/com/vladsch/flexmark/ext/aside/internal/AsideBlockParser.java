@@ -1,5 +1,6 @@
 package com.vladsch.flexmark.ext.aside.internal;
 
+import com.vladsch.flexmark.ast.ListItem;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.core.*;
 import com.vladsch.flexmark.util.ast.Block;
@@ -16,15 +17,24 @@ import java.util.Set;
 
 public class AsideBlockParser extends AbstractBlockParser {
 
+    public static final char MARKER_CHAR = '|';
     private final AsideBlock block = new AsideBlock();
+    private final boolean allowLeadingSpace;
     private final boolean continueToBlankLine;
     private final boolean ignoreBlankLine;
+    private final boolean interruptsParagraph;
+    private final boolean interruptsItemParagraph;
+    private final boolean withLeadSpacesInterruptsItemParagraph;
     private int lastWasBlankLine = 0;
 
     public AsideBlockParser(DataHolder options, BasedSequence marker) {
         block.setOpeningMarker(marker);
         continueToBlankLine = options.get(AsideExtension.EXTEND_TO_BLANK_LINE);
+        allowLeadingSpace = options.get(AsideExtension.ALLOW_LEADING_SPACE);
         ignoreBlankLine = options.get(AsideExtension.IGNORE_BLANK_LINE);
+        interruptsParagraph = options.get(AsideExtension.INTERRUPTS_PARAGRAPH);
+        interruptsItemParagraph = options.get(AsideExtension.INTERRUPTS_ITEM_PARAGRAPH);
+        withLeadSpacesInterruptsItemParagraph = options.get(AsideExtension.WITH_LEAD_SPACES_INTERRUPTS_ITEM_PARAGRAPH);
     }
 
     @Override
@@ -60,7 +70,7 @@ public class AsideBlockParser extends AbstractBlockParser {
     public BlockContinue tryContinue(ParserState state) {
         int nextNonSpace = state.getNextNonSpaceIndex();
         boolean isMarker;
-        if (!state.isBlank() && ((isMarker = isMarker(state, nextNonSpace)) || (continueToBlankLine && lastWasBlankLine == 0))) {
+        if (!state.isBlank() && ((isMarker = isMarker(state, nextNonSpace, false, false, allowLeadingSpace, interruptsParagraph, interruptsItemParagraph, withLeadSpacesInterruptsItemParagraph)) || (continueToBlankLine && lastWasBlankLine == 0))) {
             int newColumn = state.getColumn() + state.getIndent();
             lastWasBlankLine = 0;
 
@@ -82,14 +92,32 @@ public class AsideBlockParser extends AbstractBlockParser {
         }
     }
 
-    static boolean isMarker(ParserState state, int index) {
+    static boolean isMarker(
+            final ParserState state,
+            final int index,
+            final boolean inParagraph,
+            final boolean inParagraphListItem,
+            final boolean allowLeadingSpace,
+            final boolean interruptsParagraph,
+            final boolean interruptsItemParagraph,
+            final boolean withLeadSpacesInterruptsItemParagraph
+    ) {
         CharSequence line = state.getLine();
-        return state.getIndent() < state.getParsing().CODE_BLOCK_INDENT && index < line.length() && line.charAt(index) == '|';
+        if ((!inParagraph || interruptsParagraph) && index < line.length() && line.charAt(index) == MARKER_CHAR) {
+            if ((allowLeadingSpace || state.getIndent() == 0) && (!inParagraphListItem || interruptsItemParagraph)) {
+                if (inParagraphListItem && !withLeadSpacesInterruptsItemParagraph) {
+                    return state.getIndent() == 0;
+                } else {
+                    return state.getIndent() < state.getParsing().CODE_BLOCK_INDENT;
+                }
+            }
+        }
+        return false;
     }
 
     static boolean endsWithMarker(BasedSequence line) {
         int tailBlanks = line.countTrailing(BasedSequence.WHITESPACE_NBSP_CHARS);
-        return tailBlanks + 1 < line.length() && line.charAt(line.length() - tailBlanks - 1) == '|';
+        return tailBlanks + 1 < line.length() && line.charAt(line.length() - tailBlanks - 1) == MARKER_CHAR;
     }
 
     public static class Factory implements CustomBlockParserFactory {
@@ -99,15 +127,6 @@ public class AsideBlockParser extends AbstractBlockParser {
             HashSet<Class<? extends  CustomBlockParserFactory>> set = new HashSet<Class<? extends CustomBlockParserFactory>>();
             //set.add(BlockQuoteParser.Factory.class);
             return set;
-            //return new HashSet<>(Arrays.asList(
-            //        //BlockQuoteParser.Factory.class,
-            //        //HeadingParser.Factory.class,
-            //        //FencedCodeBlockParser.Factory.class,
-            //        //HtmlBlockParser.Factory.class,
-            //        //ThematicBreakParser.Factory.class,
-            //        //ListBlockParser.Factory.class,
-            //        //IndentedCodeBlockParser.Factory.class
-            //));
         }
 
         @Override
@@ -135,13 +154,25 @@ public class AsideBlockParser extends AbstractBlockParser {
     }
 
     private static class BlockFactory extends AbstractBlockParserFactory {
+        private final boolean allowLeadingSpace;
+        private final boolean interruptsParagraph;
+        private final boolean interruptsItemParagraph;
+        private final boolean withLeadSpacesInterruptsItemParagraph;
         BlockFactory(DataHolder options) {
             super(options);
+            allowLeadingSpace = AsideExtension.ALLOW_LEADING_SPACE.getFrom( options);
+            interruptsParagraph = AsideExtension.INTERRUPTS_PARAGRAPH.getFrom( options);
+            interruptsItemParagraph = AsideExtension.INTERRUPTS_ITEM_PARAGRAPH.getFrom( options);
+            withLeadSpacesInterruptsItemParagraph = AsideExtension.WITH_LEAD_SPACES_INTERRUPTS_ITEM_PARAGRAPH.getFrom( options);
         }
 
         public BlockStart tryStart(ParserState state, MatchedBlockParser matchedBlockParser) {
             int nextNonSpace = state.getNextNonSpaceIndex();
-            if (isMarker(state, nextNonSpace) && !endsWithMarker(state.getLine())) {
+            BlockParser matched = matchedBlockParser.getBlockParser();
+            boolean inParagraph = matched.isParagraphParser();
+            boolean inParagraphListItem = inParagraph && matched.getBlock().getParent() instanceof ListItem && matched.getBlock() == matched.getBlock().getParent().getFirstChild();
+
+            if (!endsWithMarker(state.getLine()) && isMarker(state, nextNonSpace, inParagraph, inParagraphListItem, allowLeadingSpace, interruptsParagraph, interruptsItemParagraph, withLeadSpacesInterruptsItemParagraph)) {
                 int newColumn = state.getColumn() + state.getIndent() + 1;
                 // optional following space or tab
                 if (Parsing.isSpaceOrTab(state.getLine(), nextNonSpace + 1)) {

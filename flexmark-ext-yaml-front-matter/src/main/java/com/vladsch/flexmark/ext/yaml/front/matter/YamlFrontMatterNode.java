@@ -1,13 +1,13 @@
 package com.vladsch.flexmark.ext.yaml.front.matter;
 
-import com.vladsch.flexmark.util.ast.CustomNode;
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class YamlFrontMatterNode extends CustomNode {
+public class YamlFrontMatterNode extends Node {
     private BasedSequence key;
     //private List<BasedSequence> values;
 

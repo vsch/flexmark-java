@@ -471,7 +471,7 @@ public class FormattingAppendableImpl implements FormattingAppendable {
                 if (pos == -1) break;
 
                 // spaces and tabs are only output if we don't have a pending EOL and they don't come before an EOL
-                int span = seq.countChars(myWhitespaceEOL, pos, end);
+                int span = seq.countLeading(myWhitespaceEOL, pos, end);
                 if (myPendingEOL == 0) {
                     int eolPos = seq.indexOf(myEOL, pos, pos + span);
                     if (eolPos != -1) {
@@ -597,7 +597,7 @@ public class FormattingAppendableImpl implements FormattingAppendable {
                 if (pos == -1) break;
 
                 // spaces and tabs are only output if we don't have a pending EOL and they don't come before an EOL
-                int span = seq.countChars(myWhitespaceEOL, pos, end);
+                int span = seq.countLeading(myWhitespaceEOL, pos, end);
                 if (myPendingEOL == 0) {
                     int eolPos = seq.indexOf(myEOL, pos, pos + span);
                     boolean handleSpaces = myPreFormattedNesting == 0 && (myPendingEOL == 0 && myModCountOfLastEOL != myModCount);

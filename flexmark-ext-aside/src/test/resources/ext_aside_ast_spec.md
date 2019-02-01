@@ -855,6 +855,264 @@ Document[0, 59]
 ````````````````````````````````
 
 
+## Issue MN-01
+
+blank line in block quoted list breaks list
+
+```````````````````````````````` example(Issue MN-01: 1) options(ignore-blank-line, extend-to-blank-line)
+> 1. item
+> 2. item
+
+> 3. item
+
+.
+<blockquote>
+  <ol>
+    <li>
+      <p>item</p>
+    </li>
+    <li>
+      <p>item</p>
+    </li>
+    <li>
+      <p>item</p>
+    </li>
+  </ol>
+</blockquote>
+.
+Document[0, 32]
+  BlockQuote[0, 31] marker:[0, 1, ">"]
+    OrderedList[2, 31] isLoose delimiter:'.'
+      OrderedListItem[2, 10] open:[2, 4, "1."] isLoose
+        Paragraph[5, 10]
+          Text[5, 9] chars:[5, 9, "item"]
+      OrderedListItem[12, 20] open:[12, 14, "2."] isLoose hadBlankLineAfter
+        Paragraph[15, 20] isTrailingBlankLine
+          Text[15, 19] chars:[15, 19, "item"]
+      OrderedListItem[23, 31] open:[23, 25, "3."] isLoose hadBlankLineAfter
+        Paragraph[26, 31] isTrailingBlankLine
+          Text[26, 30] chars:[26, 30, "item"]
+````````````````````````````````
+
+
+```````````````````````````````` example(Issue MN-01: 2) options(ignore-blank-line, extend-to-blank-line)
+| 1. item
+| 2. item
+
+| 3. item
+
+
+.
+<aside>
+  <ol>
+    <li>
+      <p>item</p>
+    </li>
+    <li>
+      <p>item</p>
+    </li>
+    <li>
+      <p>item</p>
+    </li>
+  </ol>
+</aside>
+.
+Document[0, 33]
+  AsideBlock[0, 31] marker:[0, 1, "|"]
+    OrderedList[2, 31] isLoose delimiter:'.'
+      OrderedListItem[2, 10] open:[2, 4, "1."] isLoose
+        Paragraph[5, 10]
+          Text[5, 9] chars:[5, 9, "item"]
+      OrderedListItem[12, 20] open:[12, 14, "2."] isLoose hadBlankLineAfter
+        Paragraph[15, 20] isTrailingBlankLine
+          Text[15, 19] chars:[15, 19, "item"]
+      OrderedListItem[23, 31] open:[23, 25, "3."] isLoose hadBlankLineAfter
+        Paragraph[26, 31] isTrailingBlankLine
+          Text[26, 30] chars:[26, 30, "item"]
+````````````````````````````````
+
+
+```````````````````````````````` example(Issue MN-01: 3) options(extend-to-blank-line)
+> 1. item
+> 2. item
+
+> 3. item
+
+.
+<blockquote>
+  <ol>
+    <li>item</li>
+    <li>item</li>
+  </ol>
+</blockquote>
+<blockquote>
+  <ol start="3">
+    <li>item</li>
+  </ol>
+</blockquote>
+.
+Document[0, 32]
+  BlockQuote[0, 20] marker:[0, 1, ">"]
+    OrderedList[2, 20] isTight delimiter:'.'
+      OrderedListItem[2, 10] open:[2, 4, "1."] isTight
+        Paragraph[5, 10]
+          Text[5, 9] chars:[5, 9, "item"]
+      OrderedListItem[12, 20] open:[12, 14, "2."] isTight
+        Paragraph[15, 20]
+          Text[15, 19] chars:[15, 19, "item"]
+  BlockQuote[21, 31] marker:[21, 22, ">"]
+    OrderedList[23, 31] isTight start:3 delimiter:'.'
+      OrderedListItem[23, 31] open:[23, 25, "3."] isTight
+        Paragraph[26, 31]
+          Text[26, 30] chars:[26, 30, "item"]
+````````````````````````````````
+
+
+```````````````````````````````` example(Issue MN-01: 4) options(extend-to-blank-line)
+| 1. item
+| 2. item
+
+| 3. item
+
+
+.
+<aside>
+  <ol>
+    <li>item</li>
+    <li>item</li>
+  </ol>
+</aside>
+<aside>
+  <ol start="3">
+    <li>item</li>
+  </ol>
+</aside>
+.
+Document[0, 33]
+  AsideBlock[0, 20] marker:[0, 1, "|"]
+    OrderedList[2, 20] isTight delimiter:'.'
+      OrderedListItem[2, 10] open:[2, 4, "1."] isTight
+        Paragraph[5, 10]
+          Text[5, 9] chars:[5, 9, "item"]
+      OrderedListItem[12, 20] open:[12, 14, "2."] isTight
+        Paragraph[15, 20]
+          Text[15, 19] chars:[15, 19, "item"]
+  AsideBlock[21, 31] marker:[21, 22, "|"]
+    OrderedList[23, 31] isTight start:3 delimiter:'.'
+      OrderedListItem[23, 31] open:[23, 25, "3."] isTight
+        Paragraph[26, 31]
+          Text[26, 30] chars:[26, 30, "item"]
+````````````````````````````````
+
+
+should match block quote parsing information
+
+```````````````````````````````` example(Issue MN-01: 5) options(ignore-blank-line, extend-to-blank-line)
+>>| asdf asldf alsdf asldf asdf as dflasdjflasjdf as;ldf lasdfj asldfj
+>>| asdfasdf asdf asdfasfd
+> 11. alalsdfkj alsdjf lsa;fdj l;as fd;l sadf;l sajdf;l jasdf;l saldfj
+>     da; sdlfja;sldfj ;als fdj;ajs fdl; sadfsdf jal;sfdj dsaf k
+> 12. asdlfj al;sfdj adsl;fk lajs fdlas df al;dsfj;asldfj
+>     asdf;asdfalsdkfj asldf jaslf;dj
+> 13. lasdkjf asl;dfj dsalf; j
+> 14. > safddsf
+> 15. asdfasfddsf
+
+.
+<blockquote>
+  <blockquote>
+    <aside>
+      <p>asdf asldf alsdf asldf asdf as dflasdjflasjdf as;ldf lasdfj asldfj
+      asdfasdf asdf asdfasfd
+      11. alalsdfkj alsdjf lsa;fdj l;as fd;l sadf;l sajdf;l jasdf;l saldfj
+      da; sdlfja;sldfj ;als fdj;ajs fdl; sadfsdf jal;sfdj dsaf k
+      12. asdlfj al;sfdj adsl;fk lajs fdlas df al;dsfj;asldfj
+      asdf;asdfalsdkfj asldf jaslf;dj
+      13. lasdkjf asl;dfj dsalf; j
+      14. &gt; safddsf
+      15. asdfasfddsf</p>
+    </aside>
+  </blockquote>
+</blockquote>
+.
+Document[0, 396]
+  BlockQuote[0, 395] marker:[0, 1, ">"]
+    BlockQuote[1, 395] marker:[1, 2, ">"]
+      AsideBlock[2, 395] marker:[2, 3, "|"]
+        Paragraph[4, 395] isTrailingBlankLine
+          Text[4, 70] chars:[4, 70, "asdf  … sldfj"]
+          SoftLineBreak[70, 71]
+          Text[75, 97] chars:[75, 97, "asdfa … fasfd"]
+          SoftLineBreak[97, 98]
+          Text[100, 168] chars:[100, 168, "11. a … aldfj"]
+          SoftLineBreak[168, 169]
+          Text[175, 233] chars:[175, 233, "da; s … saf k"]
+          SoftLineBreak[233, 234]
+          Text[236, 291] chars:[236, 291, "12. a … sldfj"]
+          SoftLineBreak[291, 292]
+          Text[298, 329] chars:[298, 329, "asdf; … lf;dj"]
+          SoftLineBreak[329, 330]
+          Text[332, 360] chars:[332, 360, "13. l … lf; j"]
+          SoftLineBreak[360, 361]
+          Text[363, 376] chars:[363, 376, "14. > … fddsf"]
+          SoftLineBreak[376, 377]
+          Text[379, 394] chars:[379, 394, "15. a … fddsf"]
+````````````````````````````````
+
+
+```````````````````````````````` example(Issue MN-01: 6) options(ignore-blank-line, extend-to-blank-line)
+||> asdf asldf alsdf asldf asdf as dflasdjflasjdf as;ldf lasdfj asldfj
+||> asdfasdf asdf asdfasfd
+| 11. alalsdfkj alsdjf lsa;fdj l;as fd;l sadf;l sajdf;l jasdf;l saldfj
+|     da; sdlfja;sldfj ;als fdj;ajs fdl; sadfsdf jal;sfdj dsaf k
+| 12. asdlfj al;sfdj adsl;fk lajs fdlas df al;dsfj;asldfj
+|     asdf;asdfalsdkfj asldf jaslf;dj
+| 13. lasdkjf asl;dfj dsalf; j
+| 14. | safddsf
+| 15. asdfasfddsf
+
+.
+<aside>
+  <aside>
+    <blockquote>
+      <p>asdf asldf alsdf asldf asdf as dflasdjflasjdf as;ldf lasdfj asldfj
+      asdfasdf asdf asdfasfd
+      11. alalsdfkj alsdjf lsa;fdj l;as fd;l sadf;l sajdf;l jasdf;l saldfj
+      da; sdlfja;sldfj ;als fdj;ajs fdl; sadfsdf jal;sfdj dsaf k
+      12. asdlfj al;sfdj adsl;fk lajs fdlas df al;dsfj;asldfj
+      asdf;asdfalsdkfj asldf jaslf;dj
+      13. lasdkjf asl;dfj dsalf; j
+      14. | safddsf
+      15. asdfasfddsf</p>
+    </blockquote>
+  </aside>
+</aside>
+.
+Document[0, 396]
+  AsideBlock[0, 395] marker:[0, 1, "|"]
+    AsideBlock[1, 395] marker:[1, 2, "|"]
+      BlockQuote[2, 395] marker:[2, 3, ">"]
+        Paragraph[4, 395] isTrailingBlankLine
+          Text[4, 70] chars:[4, 70, "asdf  … sldfj"]
+          SoftLineBreak[70, 71]
+          Text[75, 97] chars:[75, 97, "asdfa … fasfd"]
+          SoftLineBreak[97, 98]
+          Text[100, 168] chars:[100, 168, "11. a … aldfj"]
+          SoftLineBreak[168, 169]
+          Text[175, 233] chars:[175, 233, "da; s … saf k"]
+          SoftLineBreak[233, 234]
+          Text[236, 291] chars:[236, 291, "12. a … sldfj"]
+          SoftLineBreak[291, 292]
+          Text[298, 329] chars:[298, 329, "asdf; … lf;dj"]
+          SoftLineBreak[329, 330]
+          Text[332, 360] chars:[332, 360, "13. l … lf; j"]
+          SoftLineBreak[360, 361]
+          Text[363, 376] chars:[363, 376, "14. | … fddsf"]
+          SoftLineBreak[376, 377]
+          Text[379, 394] chars:[379, 394, "15. a … fddsf"]
+````````````````````````````````
+
+
 ## Source Position Attribute
 
 ```````````````````````````````` example(Source Position Attribute: 1) options(src-pos)

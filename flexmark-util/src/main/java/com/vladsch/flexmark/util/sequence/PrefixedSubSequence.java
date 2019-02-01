@@ -108,7 +108,11 @@ public final class PrefixedSubSequence extends BasedSequenceImpl {
         return obj == this || (obj instanceof CharSequence && toString().equals(obj.toString()));
     }
 
-    public static PrefixedSubSequence repeatOf(String prefix, int count, BasedSequence baseSeq) {
+    public static PrefixedSubSequence repeatOf(CharSequence prefix, int count, BasedSequence baseSeq) {
+        return of(RepeatedCharSequence.of(prefix, count).toString(), baseSeq, 0, baseSeq.length());
+    }
+
+    public static PrefixedSubSequence repeatOf(char prefix, int count, BasedSequence baseSeq) {
         return of(RepeatedCharSequence.of(prefix, count).toString(), baseSeq, 0, baseSeq.length());
     }
 

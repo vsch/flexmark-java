@@ -1,13 +1,13 @@
 package com.vladsch.flexmark.ext.gfm.issues;
 
-import com.vladsch.flexmark.util.ast.CustomNode;
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.ast.DoNotDecorate;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 /**
  * A GfmIssue node
  */
-public class GfmIssue extends CustomNode implements DoNotDecorate {
+public class GfmIssue extends Node implements DoNotDecorate {
     protected BasedSequence openingMarker = BasedSequence.NULL;
     protected BasedSequence text = BasedSequence.NULL;
 

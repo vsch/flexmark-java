@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.ext.zzzzzz;
 
-import com.vladsch.flexmark.util.ast.CustomNode;
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.ast.DelimitedNode;
 import com.vladsch.flexmark.util.ast.DoNotDecorate;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
@@ -8,7 +8,7 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 /**
  * A Zzzzzz node
  */
-public class Zzzzzz extends CustomNode implements DelimitedNode, DoNotDecorate {
+public class Zzzzzz extends Node implements DelimitedNode, DoNotDecorate {
     protected BasedSequence openingMarker = BasedSequence.NULL;
     protected BasedSequence text = BasedSequence.NULL;
     protected BasedSequence closingMarker = BasedSequence.NULL;

@@ -1491,6 +1491,94 @@ Document[0, 815]
 ````````````````````````````````
 
 
+Check indentation, there is a bug, this should parse as nested list items. it was not.
+
+```````````````````````````````` example Blank Lines: 4
+Definition
+: 1. dd asdlfalsdfj asldfj las;dfj l;asfdj als fjdl;asj fd;lajs
+       fdl;ajsdf l;ajsfdl;ajsf dl;asjfd l;ajsdf l;asdjfl;asdfj l;asfdj
+
+     2. asldfaslfdjasdfl;jasdfl;j
+
+.
+<dl>
+  <dt>Definition</dt>
+  <dd>
+    <ol>
+      <li>
+        <p>dd asdlfalsdfj asldfj las;dfj l;asfdj als fjdl;asj fd;lajs
+        fdl;ajsdf l;ajsfdl;ajsf dl;asjfd l;ajsdf l;asdjfl;asdfj l;asfdj</p>
+        <ol start="2">
+          <li>asldfaslfdjasdfl;jasdfl;j</li>
+        </ol>
+      </li>
+    </ol>
+  </dd>
+</dl>
+.
+Document[0, 182]
+  DefinitionList[0, 181] isTight
+    DefinitionTerm[0, 11]
+      Paragraph[0, 11]
+        Text[0, 10] chars:[0, 10, "Definition"]
+    DefinitionItem[11, 181] open:[11, 12, ":"] isTight hadBlankLineAfter
+      OrderedList[13, 181] isLoose delimiter:'.'
+        OrderedListItem[13, 181] open:[13, 15, "1."] isLoose hadBlankLineAfter
+          Paragraph[16, 146] isTrailingBlankLine
+            Text[16, 74] chars:[16, 74, "dd as … ;lajs"]
+            SoftLineBreak[74, 75]
+            Text[82, 145] chars:[82, 145, "fdl;a … asfdj"]
+          OrderedList[152, 181] isTight start:2 delimiter:'.'
+            OrderedListItem[152, 181] open:[152, 154, "2."] isTight hadBlankLineAfter
+              Paragraph[155, 181] isTrailingBlankLine
+                Text[155, 180] chars:[155, 180, "asldf … dfl;j"]
+````````````````````````````````
+
+
+```````````````````````````````` example(Blank Lines: 5) options(blank-lines-in-ast)
+Definition
+: 1. dd asdlfalsdfj asldfj las;dfj l;asfdj als fjdl;asj fd;lajs
+       fdl;ajsdf l;ajsfdl;ajsf dl;asjfd l;ajsdf l;asdjfl;asdfj l;asfdj
+
+     2. asldfaslfdjasdfl;jasdfl;j
+
+.
+<dl>
+  <dt>Definition</dt>
+  <dd>
+    <ol>
+      <li>
+        <p>dd asdlfalsdfj asldfj las;dfj l;asfdj als fjdl;asj fd;lajs
+        fdl;ajsdf l;ajsfdl;ajsf dl;asjfd l;ajsdf l;asdjfl;asdfj l;asfdj</p>
+        <ol start="2">
+          <li>asldfaslfdjasdfl;jasdfl;j</li>
+        </ol>
+      </li>
+    </ol>
+  </dd>
+</dl>
+.
+Document[0, 182]
+  DefinitionList[0, 181] isTight
+    DefinitionTerm[0, 11]
+      Paragraph[0, 11]
+        Text[0, 10] chars:[0, 10, "Definition"]
+    DefinitionItem[11, 181] open:[11, 12, ":"] isTight hadBlankLineAfter
+      OrderedList[13, 181] isLoose delimiter:'.'
+        OrderedListItem[13, 181] open:[13, 15, "1."] isLoose hadBlankLineAfter
+          Paragraph[16, 146] isTrailingBlankLine
+            Text[16, 74] chars:[16, 74, "dd as … ;lajs"]
+            SoftLineBreak[74, 75]
+            Text[82, 145] chars:[82, 145, "fdl;a … asfdj"]
+          BlankLine[146, 147]
+          OrderedList[152, 181] isTight start:2 delimiter:'.'
+            OrderedListItem[152, 181] open:[152, 154, "2."] isTight hadBlankLineAfter
+              Paragraph[155, 181] isTrailingBlankLine
+                Text[155, 180] chars:[155, 180, "asldf … dfl;j"]
+  BlankLine[181, 182]
+````````````````````````````````
+
+
 ## Suppress HTML block tag EOL
 
 ```````````````````````````````` example(Suppress HTML block tag EOL: 1) options(suppress-format-eol)

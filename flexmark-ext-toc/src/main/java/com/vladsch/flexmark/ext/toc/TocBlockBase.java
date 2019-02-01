@@ -1,12 +1,12 @@
 package com.vladsch.flexmark.ext.toc;
 
-import com.vladsch.flexmark.util.ast.CustomBlock;
+import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 /**
  * A TOC node
  */
-public abstract class TocBlockBase extends CustomBlock {
+public abstract class TocBlockBase extends Block {
     protected BasedSequence openingMarker = BasedSequence.NULL;
     protected BasedSequence tocKeyword = BasedSequence.NULL;
     protected BasedSequence style = BasedSequence.NULL;

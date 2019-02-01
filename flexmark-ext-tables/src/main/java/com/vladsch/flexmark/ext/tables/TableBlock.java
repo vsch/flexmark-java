@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.ext.tables;
 
 import com.vladsch.flexmark.util.ast.BlockContent;
-import com.vladsch.flexmark.util.ast.CustomBlock;
+import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Table block containing a {@link TableHead} and optionally a {@link TableBody}.
  */
-public class TableBlock extends CustomBlock {
+public class TableBlock extends Block {
     public TableBlock() {
     }
 

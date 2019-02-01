@@ -50,13 +50,19 @@ public class Parser implements IParse {
     public static final DataKey<Boolean> TRACK_DOCUMENT_LINES = new DataKey<>("TRACK_DOCUMENT_LINES", false);
 
     public static final DataKey<Boolean> BLOCK_QUOTE_PARSER = new DataKey<>("BLOCK_QUOTE_PARSER", true);
-    public static final DataKey<Boolean> BLOCK_QUOTE_TO_BLANK_LINE = new DataKey<>("BLOCK_QUOTE_TO_BLANK_LINE", false);
+    public static final DataKey<Boolean> BLOCK_QUOTE_EXTEND_TO_BLANK_LINE = new DataKey<>("BLOCK_QUOTE_EXTEND_TO_BLANK_LINE", false);
     public static final DataKey<Boolean> BLOCK_QUOTE_IGNORE_BLANK_LINE = new DataKey<>("BLOCK_QUOTE_IGNORE_BLANK_LINE", false);
     public static final DataKey<Boolean> BLOCK_QUOTE_ALLOW_LEADING_SPACE = new DataKey<>("BLOCK_QUOTE_ALLOW_LEADING_SPACE", true);
     public static final DataKey<Boolean> BLOCK_QUOTE_INTERRUPTS_PARAGRAPH = new DataKey<>("BLOCK_QUOTE_INTERRUPTS_PARAGRAPH", true);
     public static final DataKey<Boolean> BLOCK_QUOTE_INTERRUPTS_ITEM_PARAGRAPH = new DataKey<>("BLOCK_QUOTE_INTERRUPTS_ITEM_PARAGRAPH", true);
     public static final DataKey<Boolean> BLOCK_QUOTE_WITH_LEAD_SPACES_INTERRUPTS_ITEM_PARAGRAPH = new DataKey<>("BLOCK_QUOTE_WITH_LEAD_SPACES_INTERRUPTS_ITEM_PARAGRAPH", true);
 
+    /**
+     * @deprecated use BLOCK_QUOTE_EXTEND_TO_BLANK_LINE
+     */
+    @Deprecated
+    public static final DataKey<Boolean> BLOCK_QUOTE_TO_BLANK_LINE = BLOCK_QUOTE_EXTEND_TO_BLANK_LINE;
+    
     public static final DataKey<Boolean> FENCED_CODE_BLOCK_PARSER = new DataKey<>("FENCED_CODE_BLOCK_PARSER", true);
     public static final DataKey<Boolean> MATCH_CLOSING_FENCE_CHARACTERS = new DataKey<>("MATCH_CLOSING_FENCE_CHARACTERS", true);
     public static final DataKey<Boolean> FENCED_CODE_CONTENT_BLOCK = new DataKey<>("FENCED_CODE_CONTENT_BLOCK", false);

@@ -1,13 +1,13 @@
 package com.vladsch.flexmark.ext.gfm.strikethrough;
 
-import com.vladsch.flexmark.util.ast.CustomNode;
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.ast.DelimitedNode;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 /**
  * A Subscript node containing text and other inline nodes nodes as children.
  */
-public class Subscript extends CustomNode implements DelimitedNode {
+public class Subscript extends Node implements DelimitedNode {
     protected BasedSequence openingMarker = BasedSequence.NULL;
     protected BasedSequence text = BasedSequence.NULL;
     protected BasedSequence closingMarker = BasedSequence.NULL;

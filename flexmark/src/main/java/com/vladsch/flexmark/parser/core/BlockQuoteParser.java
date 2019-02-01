@@ -1,13 +1,11 @@
 package com.vladsch.flexmark.parser.core;
 
-import com.vladsch.flexmark.util.ast.BlankLine;
 import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.ast.BlockQuote;
 import com.vladsch.flexmark.ast.ListItem;
 import com.vladsch.flexmark.ast.util.Parsing;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.block.*;
-import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
@@ -18,6 +16,7 @@ import java.util.Set;
 
 public class BlockQuoteParser extends AbstractBlockParser {
 
+    public static final char MARKER_CHAR = '>';
     private final BlockQuote block = new BlockQuote();
     private final boolean allowLeadingSpace;
     private final boolean continueToBlankLine;
@@ -29,7 +28,7 @@ public class BlockQuoteParser extends AbstractBlockParser {
 
     public BlockQuoteParser(DataHolder options, BasedSequence marker) {
         block.setOpeningMarker(marker);
-        continueToBlankLine = options.get(Parser.BLOCK_QUOTE_TO_BLANK_LINE);
+        continueToBlankLine = options.get(Parser.BLOCK_QUOTE_EXTEND_TO_BLANK_LINE);
         allowLeadingSpace = options.get(Parser.BLOCK_QUOTE_ALLOW_LEADING_SPACE);
         ignoreBlankLine = options.get(Parser.BLOCK_QUOTE_IGNORE_BLANK_LINE);
         interruptsParagraph = options.get(Parser.BLOCK_QUOTE_INTERRUPTS_PARAGRAPH);
@@ -103,7 +102,7 @@ public class BlockQuoteParser extends AbstractBlockParser {
             final boolean withLeadSpacesInterruptsItemParagraph
     ) {
         CharSequence line = state.getLine();
-        if ((!inParagraph || interruptsParagraph) && index < line.length() && line.charAt(index) == '>') {
+        if ((!inParagraph || interruptsParagraph) && index < line.length() && line.charAt(index) == MARKER_CHAR) {
             if ((allowLeadingSpace || state.getIndent() == 0) && (!inParagraphListItem || interruptsItemParagraph)) {
                 if (inParagraphListItem && !withLeadSpacesInterruptsItemParagraph) {
                     return state.getIndent() == 0;

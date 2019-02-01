@@ -1,13 +1,13 @@
 package com.vladsch.flexmark.ext.zzzzzz;
 
-import com.vladsch.flexmark.util.ast.CustomBlock;
+import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 /**
  * A Zzzzzz block node
  */
-public class ZzzzzzBlock extends CustomBlock {
+public class ZzzzzzBlock extends Block {
     protected BasedSequence openingMarker = BasedSequence.NULL;
     protected BasedSequence text = BasedSequence.NULL;
     protected BasedSequence closingMarker = BasedSequence.NULL;

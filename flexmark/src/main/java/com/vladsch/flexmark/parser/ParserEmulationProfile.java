@@ -390,7 +390,7 @@ public enum ParserEmulationProfile implements MutableDataSetter {
         } else if (this == PEGDOWN || this == PEGDOWN_STRICT) {
             getOptions().setIn(dataHolder);
             dataHolder
-                    .set(Parser.BLOCK_QUOTE_TO_BLANK_LINE, true)
+                    .set(Parser.BLOCK_QUOTE_EXTEND_TO_BLANK_LINE, true)
                     .set(Parser.BLOCK_QUOTE_IGNORE_BLANK_LINE, true)
                     .set(Parser.BLOCK_QUOTE_ALLOW_LEADING_SPACE, false)
                     .set(Parser.INDENTED_CODE_NO_TRAILING_BLANK_LINES, true)

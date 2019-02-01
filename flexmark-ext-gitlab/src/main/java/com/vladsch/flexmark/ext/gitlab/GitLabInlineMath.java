@@ -1,13 +1,13 @@
 package com.vladsch.flexmark.ext.gitlab;
 
-import com.vladsch.flexmark.util.ast.CustomNode;
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.ast.DelimitedNode;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 /**
  * A Ins node
  */
-public class GitLabInlineMath extends CustomNode implements DelimitedNode {
+public class GitLabInlineMath extends Node implements DelimitedNode {
     protected BasedSequence openingMarker = BasedSequence.NULL;
     protected BasedSequence text = BasedSequence.NULL;
     protected BasedSequence closingMarker = BasedSequence.NULL;

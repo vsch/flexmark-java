@@ -2,7 +2,7 @@ package com.vladsch.flexmark.ext.footnotes;
 
 import com.vladsch.flexmark.ast.*;
 import com.vladsch.flexmark.ext.footnotes.internal.FootnoteRepository;
-import com.vladsch.flexmark.util.ast.CustomNode;
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.ast.DoNotDecorate;
 import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.ReferencingNode;
@@ -11,7 +11,7 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 /**
  * A Footnote referencing node
  */
-public class Footnote extends CustomNode implements DelimitedNode, DoNotDecorate, ReferencingNode<FootnoteRepository, FootnoteBlock> {
+public class Footnote extends Node implements DelimitedNode, DoNotDecorate, ReferencingNode<FootnoteRepository, FootnoteBlock> {
     protected BasedSequence openingMarker = BasedSequence.NULL;
     protected BasedSequence text = BasedSequence.NULL;
     protected BasedSequence closingMarker = BasedSequence.NULL;

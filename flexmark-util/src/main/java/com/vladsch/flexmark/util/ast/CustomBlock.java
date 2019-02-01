@@ -4,6 +4,11 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 import java.util.List;
 
+/**
+ * @deprecated Use Block directly, this adds nothing useful
+ */
+
+@Deprecated
 public abstract class CustomBlock extends Block {
     public CustomBlock() {
     }

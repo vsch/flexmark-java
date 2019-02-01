@@ -105,7 +105,7 @@ public class MarkdownTableTestBase {
 
                     @Override
                     public int charWidth(final CharSequence s) {
-                        return BasedSequenceImpl.of(s).countNotChars(INTELLIJ_DUMMY_IDENTIFIER_CHAR);
+                        return BasedSequenceImpl.of(s).countLeadingNot(INTELLIJ_DUMMY_IDENTIFIER_CHAR);
                     }
                 });
         return useOptions;

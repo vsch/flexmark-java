@@ -1067,7 +1067,7 @@ public class DocumentParser implements ParserState {
 
                     // skip leading blanks
                     BasedSequence blockChars = block.getChars();
-                    BasedSequence contentChars = blockChars.subSequence(pos + blockChars.countChars(BasedSequence.WHITESPACE_CHARS, pos, blockChars.length()));
+                    BasedSequence contentChars = blockChars.subSequence(pos + blockChars.countLeading(BasedSequence.WHITESPACE_CHARS, pos, blockChars.length()));
 
                     if (contentChars.isBlank()) {
                         // all used up

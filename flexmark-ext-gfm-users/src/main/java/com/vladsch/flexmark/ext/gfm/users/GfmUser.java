@@ -1,13 +1,13 @@
 package com.vladsch.flexmark.ext.gfm.users;
 
-import com.vladsch.flexmark.util.ast.CustomNode;
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.ast.DoNotDecorate;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 /**
  * A GfmUser node
  */
-public class GfmUser extends CustomNode implements DoNotDecorate {
+public class GfmUser extends Node implements DoNotDecorate {
     protected BasedSequence openingMarker = BasedSequence.NULL;
     protected BasedSequence text = BasedSequence.NULL;
 

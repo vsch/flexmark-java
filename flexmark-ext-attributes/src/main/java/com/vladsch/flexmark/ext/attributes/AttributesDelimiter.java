@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.ext.attributes;
 
 import com.vladsch.flexmark.ast.DelimitedNode;
-import com.vladsch.flexmark.util.ast.CustomNode;
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.ast.DoNotDecorate;
 import com.vladsch.flexmark.util.ast.NonRenderingInline;
 import com.vladsch.flexmark.util.sequence.BasedSequence;

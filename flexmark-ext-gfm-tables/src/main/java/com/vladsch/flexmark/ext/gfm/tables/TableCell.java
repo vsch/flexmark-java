@@ -1,13 +1,13 @@
 package com.vladsch.flexmark.ext.gfm.tables;
 
-import com.vladsch.flexmark.util.ast.CustomNode;
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.ast.DelimitedNode;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 /**
  * Table cell of a {@link TableRow} containing inline nodes.
  */
-public class TableCell extends CustomNode implements DelimitedNode {
+public class TableCell extends Node implements DelimitedNode {
     protected BasedSequence openingMarker = BasedSequence.NULL;
     protected BasedSequence text = BasedSequence.NULL;
     protected BasedSequence closingMarker = BasedSequence.NULL;

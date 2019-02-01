@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.samples;
 
 import com.vladsch.flexmark.Extension;
-import com.vladsch.flexmark.util.ast.CustomNode;
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.ast.DelimitedNode;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.html.CustomNodeRenderer;
@@ -39,7 +39,7 @@ public class UnderlineExtensionSample {
     static final Parser PARSER = Parser.builder(OPTIONS).build();
     static final HtmlRenderer RENDERER = HtmlRenderer.builder(OPTIONS).build();
 
-    static class Underline extends CustomNode implements DelimitedNode {
+    static class Underline extends Node implements DelimitedNode {
 
         private BasedSequence openingMarker = BasedSequence.NULL;
         private BasedSequence text = BasedSequence.NULL;

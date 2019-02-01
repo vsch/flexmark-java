@@ -72,7 +72,7 @@ public class ComboExtraSpecTest extends ComboSpecTestCase {
         optionsMap.put("dummy-identifier", new MutableDataSet().set(Parser.INTELLIJ_DUMMY_IDENTIFIER, true));
         optionsMap.put("code-no-trim-trailing", new MutableDataSet().set(Parser.INDENTED_CODE_NO_TRAILING_BLANK_LINES, false));
         optionsMap.put("ordered-dot-only", new MutableDataSet().set(Parser.LISTS_ORDERED_ITEM_DOT_ONLY, true));
-        optionsMap.put("block-quote-extend", new MutableDataSet().set(Parser.BLOCK_QUOTE_TO_BLANK_LINE, true));
+        optionsMap.put("block-quote-extend", new MutableDataSet().set(Parser.BLOCK_QUOTE_EXTEND_TO_BLANK_LINE, true));
         optionsMap.put("block-ignore-blank", new MutableDataSet().set(Parser.BLOCK_QUOTE_IGNORE_BLANK_LINE, true));
         optionsMap.put("html-block-start-only-on-block-tags", new MutableDataSet().set(Parser.HTML_BLOCK_START_ONLY_ON_BLOCK_TAGS, true));
         optionsMap.put("setext-marker-length", new MutableDataSet().set(Parser.HEADING_SETEXT_MARKER_LENGTH, 3));

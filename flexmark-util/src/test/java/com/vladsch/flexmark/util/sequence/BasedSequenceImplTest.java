@@ -306,4 +306,46 @@ public class BasedSequenceImplTest {
             assertEquals("Failed at " + j, info.get(j), atIndex);
         }
     }
+
+    @Test
+    public void test_trimEndTo() {
+        assertEquals("", BasedSequenceImpl.of("").trimEnd( 0,".\t").toString());
+        assertEquals("", BasedSequenceImpl.of(".").trimEnd( 0,".\t").toString());
+        assertEquals("", BasedSequenceImpl.of("..").trimEnd( 0,".\t").toString());
+        assertEquals(".", BasedSequenceImpl.of("..").trimEnd( 1,".\t").toString());
+        assertEquals(".", BasedSequenceImpl.of(".").trimEnd( 1,".\t").toString());
+        assertEquals(".", BasedSequenceImpl.of(".").trimEnd( 2,".\t").toString());
+        assertEquals("abc", BasedSequenceImpl.of("abc").trimEnd( 0,".\t").toString());
+        assertEquals(".abc", BasedSequenceImpl.of(".abc").trimEnd( 0,".\t").toString());
+        assertEquals("..abc", BasedSequenceImpl.of("..abc").trimEnd( 0,".\t").toString());
+        assertEquals("..abc", BasedSequenceImpl.of("..abc.").trimEnd( 0,".\t").toString());
+        assertEquals("..abc", BasedSequenceImpl.of("..abc..").trimEnd( 0,".\t").toString());
+        assertEquals("..abc", BasedSequenceImpl.of("..abc..").trimEnd( 4,".\t").toString());
+        assertEquals("..abc", BasedSequenceImpl.of("..abc..").trimEnd( 5,".\t").toString());
+        assertEquals("..abc.", BasedSequenceImpl.of("..abc....").trimEnd( 6,".\t").toString());
+        assertEquals("..abc..", BasedSequenceImpl.of("..abc....").trimEnd( 7,".\t").toString());
+        assertEquals("..abc...", BasedSequenceImpl.of("..abc....").trimEnd( 8,".\t").toString());
+    }
+
+    @Test
+    public void test_trimStartTo() {
+        assertEquals("", BasedSequenceImpl.of("").trimStart( 0,".\t").toString());
+        assertEquals("", BasedSequenceImpl.of(".").trimStart( 0,".\t").toString());
+        assertEquals("", BasedSequenceImpl.of("..").trimStart( 0,".\t").toString());
+        assertEquals(".", BasedSequenceImpl.of("..").trimStart( 1,".\t").toString());
+        assertEquals(".", BasedSequenceImpl.of(".").trimStart( 1,".\t").toString());
+        assertEquals(".", BasedSequenceImpl.of(".").trimStart( 2,".\t").toString());
+        assertEquals("..", BasedSequenceImpl.of("...").trimStart( 2,".\t").toString());
+        assertEquals("..", BasedSequenceImpl.of("....").trimStart( 2,".\t").toString());
+        assertEquals("abc", BasedSequenceImpl.of("abc").trimStart( 0,".\t").toString());
+        assertEquals("abc.", BasedSequenceImpl.of("abc.").trimStart( 0,".\t").toString());
+        assertEquals("abc..", BasedSequenceImpl.of(".abc..").trimStart( 0,".\t").toString());
+        assertEquals("abc..", BasedSequenceImpl.of("..abc..").trimStart( 0,".\t").toString());
+        assertEquals("abc..", BasedSequenceImpl.of(".abc..").trimStart( 0,".\t").toString());
+        assertEquals("abc..", BasedSequenceImpl.of(".abc..").trimStart( 4,".\t").toString());
+        assertEquals("abc..", BasedSequenceImpl.of(".abc..").trimStart( 5,".\t").toString());
+        assertEquals(".abc..", BasedSequenceImpl.of("..abc..").trimStart( 6,".\t").toString());
+        assertEquals("..abc..", BasedSequenceImpl.of("...abc..").trimStart( 7,".\t").toString());
+        assertEquals("...abc..", BasedSequenceImpl.of("...abc..").trimStart( 8,".\t").toString());
+    }
 }

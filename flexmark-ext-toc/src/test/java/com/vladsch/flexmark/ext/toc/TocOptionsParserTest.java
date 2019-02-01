@@ -64,7 +64,7 @@ public class TocOptionsParserTest extends ComboSpecTestCase {
         }
     }
 
-    private static class ParserNode extends CustomNode {
+    private static class ParserNode extends Node {
         private final String nodeType;
         private final ParsedOptionStatus status;
         private final String message;

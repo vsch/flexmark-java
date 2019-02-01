@@ -7,6 +7,7 @@ flexmark-java
 
 - [To Do](#to-do)
     - [Docx Converter](#docx-converter)
+- [0.40.18](#04018)
 - [0.40.16](#04016)
 - [0.40.14](#04014)
 - [0.40.12](#04012)
@@ -73,23 +74,23 @@ flexmark-java
 
 ## To Do
 
-* [ ] Change: Extensions wiki from table format for options to list, easier to maintain and read
-      when descriptions can benefit form complex formatting
+* Change: Extensions wiki from table format for options to list, easier to maintain and read
+  when descriptions can benefit form complex formatting
 
-* [ ] Fix: clean up and verify the Extensions wiki options lists for name changes, missing or
-      extra entries. Update description for better understanding
+* Fix: clean up and verify the Extensions wiki options lists for name changes, missing or extra
+  entries. Update description for better understanding
 
-* [ ] Add: generated HTML element positions to `TagRanges` to allow mapping from source offset
-      to HTML offset for the element(s). This is needed to allow synchronization with source
-      when using an attribute to hold the source information is not an option.
+* Add: generated HTML element positions to `TagRanges` to allow mapping from source offset to
+  HTML offset for the element(s). This is needed to allow synchronization with source when using
+  an attribute to hold the source information is not an option.
 
-* [ ] Fix: regex can go into infinite loop
+* Fix: regex can go into infinite loop
 
 * Change: complete parser profiles for variations within a family
   [Markdown Parser Emulation](MarkdownProcessorsEmulation.md).
-  * [ ] League/CommonMark
-  * [ ] Jekyll
-  * [ ] Php Markdown Extra
+  * League/CommonMark
+  * Jekyll
+  * Php Markdown Extra
   * CommonMark (default for family): `ParserEmulationProfile.COMMONMARK`
   * FixedIndent (default for family): `ParserEmulationProfile.FIXED_INDENT`
   * GitHub Comments (just CommonMark): `ParserEmulationProfile.COMMONMARK`
@@ -101,26 +102,69 @@ flexmark-java
   * Pegdown, with pegdown extensions use `PegdownOptionsAdapter` in `flexmark-profile-pegdown`
   * Pegdown, without pegdown extensions `ParserEmulationProfile.PEGDOWN`
 
-* [ ] Add hierarchical anchor id generation for headings: will splice parent heading id with
-      child id to create unique ids based on header hierarchy.
+* Add hierarchical anchor id generation for headings: will splice parent heading id with child
+  id to create unique ids based on header hierarchy.
 
-* [ ] Add macro module that would allow inserting arbitrary markdown into table cells. This
-      would be less readable but would give complete flexibility to generate tables with complex
-      content without changing the table syntax because the macro expansion would be done during
-      rendering not parsing.
+* Add macro module that would allow inserting arbitrary markdown into table cells. This would be
+  less readable but would give complete flexibility to generate tables with complex content
+  without changing the table syntax because the macro expansion would be done during rendering
+  not parsing.
 
 ### Docx Converter
 
-* [ ] Add: `DocxRenderer` options:
-  * [ ] `TABLE_WIDTH_TYPE` and `TABLE_WIDTH_VALUE` for table width control
+* Add: `DocxRenderer` options:
+  * `TABLE_WIDTH_TYPE` and `TABLE_WIDTH_VALUE` for table width control
 
-* [ ] Add: Base64 image embedding in `HtmlRenderer` as an option with images processed by a
-      handler.
-  * [ ] Add: base64 embedded image link resolver option or a sample on how to do it
+* Add: Base64 image embedding in `HtmlRenderer` as an option with images processed by a handler.
+  * Add: base64 embedded image link resolver option or a sample on how to do it
 
-* [ ] Fix: [#99, YamlFrontMatterBlockParser ignores multi-key list items]
+* Fix: [#99, YamlFrontMatterBlockParser ignores multi-key list items]
 
 &nbsp;</details>
+
+0.40.18
+-------
+
+* Fix: `AsideExtension` option keys to be dynamic data keys dependent on corresponding Parser
+  block quote options for their defaults.
+
+  :warning: This can potentially break code relying on versions of the extension before
+  `0.40.18` because parsing rules can change depending on which block quote options are changed
+  from their default values.
+
+  To ensure independent options for aside blocks and block quotes, set aside options explicitly.
+  The following will set all aside options to default values, independent from block quote
+  options:
+
+      .set(EXTEND_TO_BLANK_LINE, false)
+      .set(IGNORE_BLANK_LINE, false)
+      .set(ALLOW_LEADING_SPACE, true)
+      .set(INTERRUPTS_PARAGRAPH, true)
+      .set(INTERRUPTS_ITEM_PARAGRAPH, true)
+      .set(WITH_LEAD_SPACES_INTERRUPTS_ITEM_PARAGRAPH, true)
+
+* Deprecate: `Parser.BLOCK_QUOTE_TO_BLANK_LINE`, use more mnemonic
+  `Parser.BLOCK_QUOTE_EXTEND_TO_BLANK_LINE`
+* Deprecate: `CustomNode` and `CustomBlock`. `Block` and `Node` should be used directly. The
+  library aims to make no distinction between core and extension implementations, these classes
+  add no useful information.
+* Deprecate: BaseSequence had old named functions which were misleading and duplicated under
+  proper names:
+  * `countChars()` -> `countLeading()`
+  * `countCharsNot()` -> `countLeadingNot()`
+  * `countCharsReversed()` -> `countTrailing()`
+  * `countNotCharsReversed()` -> `countTrailingNot()`
+  
+  First of all they only counted leading characters which the name did not imply. Second they
+  were duplicated. 
+  
+  Add character counting functions:
+  
+  * `countOfAny()` 
+  * `countOfAnyNot()`
+
+* Fix: `DefinitionExtension` did not correctly set the child parse column, causing list items to
+  be expecting 1 extra space for child item recognition.
 
 0.40.16
 -------
@@ -431,14 +475,14 @@ flexmark-java
   table which can then be output as formatted markdown text. This class implements table
   formatting for the tables extension.
 * Add: to table formatter options:
-  *  `FORMAT_TABLE_CAPTION_SPACES` , default `DiscretionaryText.AS_IS`, how to handle spaces
-     after `[` and before `]` in formatted output |
-  *  `FORMAT_TABLE_INDENT_PREFIX` , default `""`, adds arbitrary prefix to tables in formatted
-     output |
-  *  `FORMAT_TABLE_MANIPULATOR` , default `TableManipulator.NULL`, interface invoked before
-     table is appended to formatted output. Allows table manipulation |
-  *  `FORMAT_CHAR_WIDTH_PROVIDER` , default `CharWidthProvider.NULL`, interface used to provide
-     actual characters widths so table formatting can take these into account |
+  * `FORMAT_TABLE_CAPTION_SPACES` , default `DiscretionaryText.AS_IS`, how to handle spaces
+    after `[` and before `]` in formatted output |
+  * `FORMAT_TABLE_INDENT_PREFIX` , default `""`, adds arbitrary prefix to tables in formatted
+    output |
+  * `FORMAT_TABLE_MANIPULATOR` , default `TableManipulator.NULL`, interface invoked before table
+    is appended to formatted output. Allows table manipulation |
+  * `FORMAT_CHAR_WIDTH_PROVIDER` , default `CharWidthProvider.NULL`, interface used to provide
+    actual characters widths so table formatting can take these into account |
 * Break: potentially breaking change, now FencedCode block with empty content returns
   `SubSequence.NULL` for content with no lines, previously returned empty string with start==end
   representing the position in the document where the content should have been. Affects only

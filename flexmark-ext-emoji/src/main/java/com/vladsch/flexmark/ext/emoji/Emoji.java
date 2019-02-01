@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.ext.emoji;
 
-import com.vladsch.flexmark.util.ast.CustomNode;
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.ast.DelimitedNode;
 import com.vladsch.flexmark.util.ast.DoNotCollectText;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
@@ -8,7 +8,7 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 /**
  * An emoji node containing emoji shortcut text
  */
-public class Emoji extends CustomNode implements DelimitedNode, DoNotCollectText {
+public class Emoji extends Node implements DelimitedNode, DoNotCollectText {
     protected BasedSequence openingMarker = BasedSequence.NULL;
     protected BasedSequence text = BasedSequence.NULL;
     protected BasedSequence closingMarker = BasedSequence.NULL;

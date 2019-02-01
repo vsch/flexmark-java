@@ -32,6 +32,7 @@ import org.junit.runners.Suite;
         HtmlBuilderTest.class,
         HtmlHelpersTest.class,
         TemplateUtilTest.class,
+        UtilsTest.class,
 })
 public class UtilsTestSuite {
 }

@@ -76,8 +76,9 @@ public interface BasedSequence extends CharSequence, Comparable<CharSequence> {
 
     /**
      * Get the range of indices that map into {@link #getBaseSequence()} with startOffset and endOffset
+     *
      * @param startOffset start offset into base sequence
-     * @param endOffset end offset into base sequence
+     * @param endOffset   end offset into base sequence
      * @return range into this sequence that spans start and end offset.
      */
     Range getIndexRange(int startOffset, int endOffset);
@@ -324,21 +325,25 @@ public interface BasedSequence extends CharSequence, Comparable<CharSequence> {
      * with fromIndex then this is taken as the start for leading and end for trailing methods
      * with fromIndex and endIndex, counting will start at fromIndex and stop at endIndex
      * <p>
+     * countLeading(): count contiguous leading space/tab characters in this sequence
      * countLeading(CharSequence): count contiguous leading characters from set in this sequence
      * countLeading(char): count contiguous leading characters from set in this sequence
      * countLeading(char,char): count contiguous leading characters from set in this sequence
      * countLeading(char,char,char): count contiguous leading characters from set in this sequence
      * <p>
+     * countLeadingNot(): count contiguous leading not space/tabs in this sequence
      * countLeadingNot(CharSequence): count contiguous leading characters not from set in this sequence
      * countLeadingNot(char): count contiguous leading characters not from set in this sequence
      * countLeadingNot(char,char): count contiguous leading characters not from set in this sequence
      * countLeadingNot(char,char,char): count contiguous leading characters not from set in this sequence
      * <p>
+     * countTrailing(): count contiguous leading space/tab in this sequence
      * countTrailing(CharSequence): count contiguous leading characters from set in this sequence
      * countTrailing(char): count contiguous leading characters from set in this sequence
      * countTrailing(char,char): count contiguous leading characters from set in this sequence
      * countTrailing(char,char,char): count contiguous leading characters from set in this sequence
      * <p>
+     * countTrailingNot(): count contiguous leading not space/tabs in this sequence
      * countTrailingNot(CharSequence): count contiguous leading characters not from set in this sequence
      * countTrailingNot(char): count contiguous leading characters not from set in this sequence
      * countTrailingNot(char,char): count contiguous leading characters not from set in this sequence
@@ -375,35 +380,62 @@ public interface BasedSequence extends CharSequence, Comparable<CharSequence> {
     int countTrailing(char c, int startIndex, int endIndex);
     int countTrailingNot(char c, int startIndex, int endIndex);
 
-    int countChars(char c);
-    int countCharsReversed(char c);
-    int countNotChars(char c);
-    int countNotCharsReversed(char c);
+    int countLeading();
+    int countLeadingNot();
+    int countTrailing();
+    int countTrailingNot();
+    int countOf();
+    int countOfNot();
+    
+    int countOf(char c);
+    int countOfNot(char c);
+    int countOf(char c, int startIndex);
+    int countOfNot(char c, int startIndex);
+    int countOf(char c, int startIndex, int endIndex);
+    int countOfNot(char c, int startIndex, int endIndex);
 
-    int countChars(char c, int startIndex);
-    int countCharsReversed(char c, int startIndex);
-    int countNotChars(char c, int startIndex);
-    int countNotCharsReversed(char c, int startIndex);
+    int countOfAny(CharSequence chars);
+    int countOfAnyNot(CharSequence chars);
+    int countOfAny(CharSequence chars, int startIndex);
+    int countOfAnyNot(CharSequence chars, int startIndex);
+    int countOfAny(CharSequence chars, int startIndex, int endIndex);
+    int countOfAnyNot(CharSequence chars, int startIndex, int endIndex);
 
-    int countChars(char c, int startIndex, int endIndex);
-    int countNotChars(char c, int startIndex, int endIndex);
-    int countCharsReversed(char c, int startIndex, int endIndex);
-    int countNotCharsReversed(char c, int startIndex, int endIndex);
+    // @formatter:off
+    // these are duplicates and will be removed soon
+    // countChars -> countLeading
+    // countNotChars -> countLeadingNot
+    // countCharsReversed -> countTrailing
+    // countNotCharsReversed -> countTrailingNot
+    @Deprecated int countChars(char c);
+    @Deprecated int countCharsReversed(char c);
+    @Deprecated int countNotChars(char c);
+    @Deprecated int countNotCharsReversed(char c);
 
-    int countChars(CharSequence chars);
-    int countCharsReversed(CharSequence chars);
-    int countNotChars(CharSequence chars);
-    int countNotCharsReversed(CharSequence chars);
+    @Deprecated int countChars(char c, int startIndex);
+    @Deprecated int countCharsReversed(char c, int startIndex);
+    @Deprecated int countNotChars(char c, int startIndex);
+    @Deprecated int countNotCharsReversed(char c, int startIndex);
 
-    int countChars(CharSequence chars, int startIndex);
-    int countCharsReversed(CharSequence chars, int startIndex);
-    int countNotChars(CharSequence chars, int startIndex);
-    int countNotCharsReversed(CharSequence chars, int startIndex);
+    @Deprecated int countChars(char c, int startIndex, int endIndex);
+    @Deprecated int countNotChars(char c, int startIndex, int endIndex);
+    @Deprecated int countCharsReversed(char c, int startIndex, int endIndex);
+    @Deprecated int countNotCharsReversed(char c, int startIndex, int endIndex);
 
-    int countChars(CharSequence chars, int startIndex, int endIndex);
-    int countNotChars(CharSequence chars, int startIndex, int endIndex);
-    int countCharsReversed(CharSequence chars, int startIndex, int endIndex);
-    int countNotCharsReversed(CharSequence chars, int startIndex, int endIndex);
+    @Deprecated int countChars(CharSequence chars);
+    @Deprecated int countCharsReversed(CharSequence chars);
+    @Deprecated int countNotChars(CharSequence chars);
+    @Deprecated int countNotCharsReversed(CharSequence chars);
+    @Deprecated int countChars(CharSequence chars, int startIndex);
+    @Deprecated int countCharsReversed(CharSequence chars, int startIndex);
+    @Deprecated int countNotChars(CharSequence chars, int startIndex);
+    @Deprecated int countNotCharsReversed(CharSequence chars, int startIndex);
+
+    @Deprecated int countChars(CharSequence chars, int startIndex, int endIndex);
+    @Deprecated int countNotChars(CharSequence chars, int startIndex, int endIndex);
+    @Deprecated int countCharsReversed(CharSequence chars, int startIndex, int endIndex);
+    @Deprecated int countNotCharsReversed(CharSequence chars, int startIndex, int endIndex);
+    // @formatter:on
 
     int countLeadingColumns(int startColumn, CharSequence chars);
 
@@ -414,9 +446,14 @@ public interface BasedSequence extends CharSequence, Comparable<CharSequence> {
      * <p>
      * If character set  in the form of character sequence is not passed in the {@link #WHITESPACE_CHARS} are assumed.
      *
-     * @param chars set of characters to trim from start of line
+     * @param keepLength minimum length of string to keep
+     * @param chars      set of characters to trim from start of line
      * @return sequence after it is trimmed
      */
+    BasedSequence trimStart(int keepLength, CharSequence chars);
+    BasedSequence trimEnd(int keepLength, CharSequence chars);
+    BasedSequence trimStart(int keepLength);
+    BasedSequence trimEnd(int keepLength);
     BasedSequence trimStart(CharSequence chars);
     BasedSequence trimEnd(CharSequence chars);
     BasedSequence trim(CharSequence chars);
@@ -425,14 +462,24 @@ public interface BasedSequence extends CharSequence, Comparable<CharSequence> {
     BasedSequence trim();
     BasedSequence trimEOL();
 
+    BasedSequence padStart(int length, char pad);
+    BasedSequence padEnd(int length, char pad);
+    BasedSequence padStart(int length);
+    BasedSequence padEnd(int length);
+
     /**
      * Get the characters Trimmed, Trimmed from start/end of this sequence, characters to trim are passed in the sequence argument
      * <p>
      * returns trimmed sequence or if nothing matched the original sequence
      *
-     * @param chars set of characters to trim from start of line
+     * @param keepLength minimum length of string to keep
+     * @param chars      set of characters to trim from start of line
      * @return part of the sequence that was trimmed from the start
      */
+    BasedSequence trimmedStart(int keepLength, CharSequence chars);
+    BasedSequence trimmedEnd(int keepLength, CharSequence chars);
+    BasedSequence trimmedStart(int keepLength);
+    BasedSequence trimmedEnd(int keepLength);
     BasedSequence trimmedStart(CharSequence chars);
     BasedSequence trimmedEnd(CharSequence chars);
     BasedSequence trimmedStart();
@@ -685,7 +732,7 @@ public interface BasedSequence extends CharSequence, Comparable<CharSequence> {
     /**
      * Test the sequence for a match to another CharSequence
      *
-     * @param chars characters to match against
+     * @param chars      characters to match against
      * @param ignoreCase case ignored when true
      * @return true if match
      */
@@ -694,7 +741,7 @@ public interface BasedSequence extends CharSequence, Comparable<CharSequence> {
     /**
      * Test the sequence for a match to another CharSequence
      *
-     * @param other characters to match against
+     * @param other      characters to match against
      * @param ignoreCase case ignored when true
      * @return true if match
      */
@@ -719,7 +766,7 @@ public interface BasedSequence extends CharSequence, Comparable<CharSequence> {
     /**
      * Test the sequence portion for a match to another CharSequence
      *
-     * @param chars characters to match against
+     * @param chars      characters to match against
      * @param ignoreCase case ignored when true
      * @return true if characters at the start of this sequence match
      */
@@ -774,8 +821,8 @@ public interface BasedSequence extends CharSequence, Comparable<CharSequence> {
     /**
      * Test the sequence portion for a match to another CharSequence, reverse order
      *
-     * @param chars    characters to match against
-     * @param endIndex index from which to start the match and proceed to 0
+     * @param chars      characters to match against
+     * @param endIndex   index from which to start the match and proceed to 0
      * @param ignoreCase case ignored when true
      * @return true if characters at the start index of this sequence match
      */
@@ -800,7 +847,7 @@ public interface BasedSequence extends CharSequence, Comparable<CharSequence> {
     /**
      * test if this sequence ends with given characters
      *
-     * @param suffix characters to test
+     * @param suffix     characters to test
      * @param ignoreCase case ignored when true
      * @return true if ends with suffix
      */
@@ -825,7 +872,7 @@ public interface BasedSequence extends CharSequence, Comparable<CharSequence> {
     /**
      * test if this sequence starts with given characters
      *
-     * @param prefix characters to test
+     * @param prefix     characters to test
      * @param ignoreCase case ignored when true
      * @return true if starts with prefix
      */
@@ -850,7 +897,7 @@ public interface BasedSequence extends CharSequence, Comparable<CharSequence> {
     /**
      * Remove suffix if present
      *
-     * @param suffix characters to remove
+     * @param suffix     characters to remove
      * @param ignoreCase case ignored when true
      * @return sequence with suffix removed, or same sequence if no suffix was present
      */
@@ -875,7 +922,7 @@ public interface BasedSequence extends CharSequence, Comparable<CharSequence> {
     /**
      * Remove prefix if present
      *
-     * @param prefix characters to remove
+     * @param prefix     characters to remove
      * @param ignoreCase case ignored when true
      * @return sequence with prefix removed, or same sequence if no prefix was present
      */
@@ -900,7 +947,7 @@ public interface BasedSequence extends CharSequence, Comparable<CharSequence> {
     /**
      * Remove suffix if present but only if this sequence is longer than the suffix
      *
-     * @param suffix characters to remove
+     * @param suffix     characters to remove
      * @param ignoreCase case ignored when true
      * @return sequence with suffix removed, or same sequence if no suffix was present
      */
@@ -925,7 +972,7 @@ public interface BasedSequence extends CharSequence, Comparable<CharSequence> {
     /**
      * Remove prefix if present but only if this sequence is longer than the suffix
      *
-     * @param prefix characters to remove
+     * @param prefix     characters to remove
      * @param ignoreCase case ignored when true
      * @return sequence with prefix removed, or same sequence if no prefix was present
      */
@@ -1050,6 +1097,7 @@ public interface BasedSequence extends CharSequence, Comparable<CharSequence> {
 
     /**
      * Get indices of all occurrences of a sequence
+     *
      * @param s sequence whose indices to find
      * @return array of indices
      */
@@ -1057,7 +1105,8 @@ public interface BasedSequence extends CharSequence, Comparable<CharSequence> {
 
     /**
      * Replace all occurrences of one sequence with another
-     * @param find sequence to find
+     *
+     * @param find    sequence to find
      * @param replace replacement sequence
      * @return array of indices
      */
@@ -1072,11 +1121,11 @@ public interface BasedSequence extends CharSequence, Comparable<CharSequence> {
      * Get the line and column information from index into sequence
      *
      * @param index index for which to get line information
-     * @return Pair(line,column) where line and column are 0 based,
+     * @return Pair(line, column) where line and column are 0 based,
      * throws IllegalArgumentException if index &lt; 0 or &gt; length.
      */
     Pair<Integer, Integer> getLineColumnAtIndex(int index);
-    
+
     int getColumnAtIndex(int index);
 
     class EmptyBasedSequence extends BasedSequenceImpl {

@@ -6,7 +6,7 @@ import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.block.*;
 import com.vladsch.flexmark.spec.SpecReader;
 import com.vladsch.flexmark.util.ast.Block;
-import com.vladsch.flexmark.util.ast.CustomBlock;
+import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.options.DataHolder;
@@ -132,7 +132,7 @@ public class ParserTest {
         void visit(DashBlock node);
     }
 
-    private static class DashBlock extends CustomBlock {
+    private static class DashBlock extends Block {
         DashBlock() {
         }
 

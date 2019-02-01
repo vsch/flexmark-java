@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.test;
 
-import com.vladsch.flexmark.util.ast.CustomNode;
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.ast.DelimitedNode;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.ast.Text;
@@ -182,7 +182,7 @@ public class DelimiterProcessorTest extends RenderingTestCase {
         void visit(UpperCaseNode node);
     }
 
-    private static class UpperCaseNode extends CustomNode implements DelimitedNode {
+    private static class UpperCaseNode extends Node implements DelimitedNode {
         protected BasedSequence openingMarker = BasedSequence.NULL;
         protected BasedSequence text = BasedSequence.NULL;
         protected BasedSequence closingMarker = BasedSequence.NULL;

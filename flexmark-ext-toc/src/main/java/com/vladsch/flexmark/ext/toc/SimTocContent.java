@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.ext.toc;
 
 import com.vladsch.flexmark.util.ast.BlockContent;
-import com.vladsch.flexmark.util.ast.CustomBlock;
+import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.util.ast.DoNotDecorate;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * A sim toc contents node containing all text that came after the sim toc node
  */
-public class SimTocContent extends CustomBlock implements DoNotDecorate {
+public class SimTocContent extends Block implements DoNotDecorate {
     @Override
     public BasedSequence[] getSegments() {
         //return EMPTY_SEGMENTS;

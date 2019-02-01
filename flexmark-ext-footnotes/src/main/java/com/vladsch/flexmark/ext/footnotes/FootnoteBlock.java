@@ -3,7 +3,7 @@ package com.vladsch.flexmark.ext.footnotes;
 import com.vladsch.flexmark.ast.*;
 import com.vladsch.flexmark.ext.footnotes.internal.FootnoteRepository;
 import com.vladsch.flexmark.parser.ListOptions;
-import com.vladsch.flexmark.util.ast.CustomBlock;
+import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.ast.ReferenceNode;
 import com.vladsch.flexmark.util.options.DataHolder;
@@ -12,7 +12,7 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 /**
  * A Footnote definition node containing text and other inline nodes nodes as children.
  */
-public class FootnoteBlock extends CustomBlock implements ReferenceNode<FootnoteRepository, FootnoteBlock, Footnote>, ParagraphItemContainer {
+public class FootnoteBlock extends Block implements ReferenceNode<FootnoteRepository, FootnoteBlock, Footnote>, ParagraphItemContainer {
     protected BasedSequence openingMarker = BasedSequence.NULL;
     protected BasedSequence text = BasedSequence.NULL;
     protected BasedSequence closingMarker = BasedSequence.NULL;

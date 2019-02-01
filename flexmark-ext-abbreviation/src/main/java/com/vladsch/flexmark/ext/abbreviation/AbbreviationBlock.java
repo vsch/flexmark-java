@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.ext.abbreviation;
 
-import com.vladsch.flexmark.util.ast.CustomBlock;
+import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.ast.ReferenceNode;
 import com.vladsch.flexmark.ext.abbreviation.internal.AbbreviationRepository;
@@ -9,7 +9,7 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 /**
  * A block node that contains the abbreviation definition
  */
-public class AbbreviationBlock extends CustomBlock implements ReferenceNode<AbbreviationRepository, AbbreviationBlock, Abbreviation> {
+public class AbbreviationBlock extends Block implements ReferenceNode<AbbreviationRepository, AbbreviationBlock, Abbreviation> {
     protected BasedSequence openingMarker = BasedSequence.NULL;
     protected BasedSequence text = BasedSequence.NULL;
     protected BasedSequence closingMarker = BasedSequence.NULL;

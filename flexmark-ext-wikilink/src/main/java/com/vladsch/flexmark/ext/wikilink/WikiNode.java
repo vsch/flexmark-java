@@ -1,10 +1,10 @@
 package com.vladsch.flexmark.ext.wikilink;
 
-import com.vladsch.flexmark.util.ast.CustomNode;
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.ast.DoNotDecorate;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
-public class WikiNode extends CustomNode implements DoNotDecorate {
+public class WikiNode extends Node implements DoNotDecorate {
     protected BasedSequence openingMarker = BasedSequence.NULL;
     protected BasedSequence link = BasedSequence.NULL;
     protected BasedSequence pageRef = BasedSequence.NULL;

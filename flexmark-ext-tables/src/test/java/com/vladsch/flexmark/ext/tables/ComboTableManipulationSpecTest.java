@@ -75,7 +75,7 @@ public class ComboTableManipulationSpecTest extends ComboSpecTestCase {
 
                     @Override
                     public int charWidth(final CharSequence s) {
-                        return BasedSequenceImpl.of(s).countNotChars(TableFormatOptions.INTELLIJ_DUMMY_IDENTIFIER_CHAR);
+                        return BasedSequenceImpl.of(s).countLeadingNot(TableFormatOptions.INTELLIJ_DUMMY_IDENTIFIER_CHAR);
                     }
                 })
         );

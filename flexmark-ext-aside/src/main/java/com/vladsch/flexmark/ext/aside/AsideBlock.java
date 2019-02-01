@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.ext.aside;
 
 import com.vladsch.flexmark.util.ast.BlockContent;
-import com.vladsch.flexmark.util.ast.CustomBlock;
+import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.util.ast.KeepTrailingBlankLineContainer;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * A ExtAside block node
  */
-public class AsideBlock extends CustomBlock implements KeepTrailingBlankLineContainer {
+public class AsideBlock extends Block implements KeepTrailingBlankLineContainer {
     private BasedSequence openingMarker = BasedSequence.NULL;
 
     @Override

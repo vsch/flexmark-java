@@ -20,8 +20,8 @@ public class ComboAsideSpecTest extends ComboSpecTestCase {
 
     private static final Map<String, DataHolder> optionsMap = new HashMap<String, DataHolder>();
     static {
-        optionsMap.put("extend-to-blank-line", new MutableDataSet().set(AsideExtension.EXTEND_TO_BLANK_LINE, true));
-        optionsMap.put("ignore-blank-line", new MutableDataSet().set(AsideExtension.IGNORE_BLANK_LINE, true));
+        optionsMap.put("extend-to-blank-line", new MutableDataSet().set(AsideExtension.EXTEND_TO_BLANK_LINE, true).set(Parser.BLOCK_QUOTE_EXTEND_TO_BLANK_LINE, true));
+        optionsMap.put("ignore-blank-line", new MutableDataSet().set(AsideExtension.IGNORE_BLANK_LINE, true).set(Parser.BLOCK_QUOTE_IGNORE_BLANK_LINE, true));
         optionsMap.put("blank-lines", new MutableDataSet().set(Parser.BLANK_LINES_IN_AST, true).set(NO_FILE_EOL, false));
         optionsMap.put("src-pos", new MutableDataSet().set(HtmlRenderer.SOURCE_POSITION_ATTRIBUTE, "md-pos"));
     }

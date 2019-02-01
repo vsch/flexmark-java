@@ -1,12 +1,12 @@
 package com.vladsch.flexmark.ext.jekyll.tag;
 
-import com.vladsch.flexmark.util.ast.CustomNode;
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 /**
  * A JekyllTag node
  */
-public class JekyllTag extends CustomNode  {
+public class JekyllTag extends Node  {
     protected BasedSequence openingMarker = BasedSequence.NULL;
     protected BasedSequence tag = BasedSequence.NULL;
     protected BasedSequence parameters = BasedSequence.NULL;

@@ -1,12 +1,12 @@
 package com.vladsch.flexmark.ext.xwiki.macros;
 
-import com.vladsch.flexmark.util.ast.CustomNode;
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 /**
  * A macros node
  */
-public class MacroClose extends CustomNode {
+public class MacroClose extends Node {
     protected BasedSequence openingMarker = BasedSequence.NULL;
     protected BasedSequence name = BasedSequence.NULL;
     protected BasedSequence closingMarker = BasedSequence.NULL;

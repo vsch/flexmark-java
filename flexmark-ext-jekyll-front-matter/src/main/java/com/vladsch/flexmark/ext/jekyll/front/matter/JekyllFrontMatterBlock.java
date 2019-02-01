@@ -1,14 +1,14 @@
 
 package com.vladsch.flexmark.ext.jekyll.front.matter;
 
-import com.vladsch.flexmark.util.ast.CustomBlock;
+import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 /**
  * A JekyllFrontMatter block node
  */
-public class JekyllFrontMatterBlock extends CustomBlock {
+public class JekyllFrontMatterBlock extends Block {
     protected BasedSequence openingMarker = BasedSequence.NULL;
     protected BasedSequence closingMarker = BasedSequence.NULL;
 

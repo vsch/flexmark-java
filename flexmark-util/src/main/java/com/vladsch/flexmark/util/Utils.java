@@ -1,15 +1,12 @@
 package com.vladsch.flexmark.util;
 
+import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.BasedSequenceImpl;
+
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Utils {
     public static String ifNullOr(String receiver, boolean condition, String altValue) {
@@ -66,6 +63,7 @@ public class Utils {
         return receiver == null || receiver.trim().isEmpty();
     }
 
+    // TODO: rewrite these to use BasedSequence implementation
     public static boolean isWhiteSpaceNoEOL(String receiver) {
         int iMax = receiver.length();
         for (int i = 0; i < iMax; i++) {
@@ -301,6 +299,10 @@ public class Utils {
         }
         return "";
     }
+    
+    public static BasedSequence asBased(CharSequence sequence) {
+        return BasedSequenceImpl.of(sequence);
+    }
 
     /*
      * @deprecated Use removeSuffix
@@ -412,7 +414,6 @@ public class Utils {
      * Longest Common Prefix for a set of strings
      *
      * @param s array of strings or null
-     *
      * @return longest common prefix
      */
     public static String getLongestCommonPrefix(String... s) {

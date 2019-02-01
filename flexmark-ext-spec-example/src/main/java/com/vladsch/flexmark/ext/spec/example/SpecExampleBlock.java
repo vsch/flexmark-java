@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.ext.spec.example;
 
-import com.vladsch.flexmark.util.ast.CustomBlock;
+import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 import java.util.List;
@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * A SpecExample block node
  */
-public class SpecExampleBlock extends CustomBlock {
+public class SpecExampleBlock extends Block {
     private BasedSequence openingMarker = BasedSequence.NULL;
     private BasedSequence exampleKeyword = BasedSequence.NULL;
     private BasedSequence coordOpeningMarker = BasedSequence.NULL;

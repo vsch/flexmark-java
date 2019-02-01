@@ -1,13 +1,13 @@
 package com.vladsch.flexmark.ext.xwiki.macros;
 
-import com.vladsch.flexmark.util.ast.CustomNode;
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.ast.DoNotDecorate;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 /**
  * A macros node
  */
-public class MacroAttribute extends CustomNode implements DoNotDecorate {
+public class MacroAttribute extends Node implements DoNotDecorate {
     protected BasedSequence attribute = BasedSequence.NULL;
     protected BasedSequence separator = BasedSequence.NULL;
     protected BasedSequence openingMarker = BasedSequence.NULL;
