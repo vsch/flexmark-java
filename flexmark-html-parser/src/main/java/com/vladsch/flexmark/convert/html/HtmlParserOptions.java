@@ -53,6 +53,7 @@ public class HtmlParserOptions implements MutableDataSetter {
     public ExtensionConversion extInlineIns;
     public ExtensionConversion extInlineSub;
     public ExtensionConversion extInlineSup;
+    public ExtensionConversion extMath;
     public char orderedListDelimiter;
     public char unorderedListDelimiter;
     public int definitionMarkerSpaces;
@@ -128,6 +129,7 @@ public class HtmlParserOptions implements MutableDataSetter {
         tableOptions = other.tableOptions;
         outputIdAttributeRegex = other.outputIdAttributeRegex;
         outputIdAttributeRegexPattern = other.outputIdAttributeRegexPattern;
+        extMath = other.extMath;
     }
 
     HtmlParserOptions(DataHolder options) {
@@ -172,6 +174,7 @@ public class HtmlParserOptions implements MutableDataSetter {
         extInlineIns = FlexmarkHtmlParser.EXT_INLINE_INS.getFrom(options);
         extInlineSub = FlexmarkHtmlParser.EXT_INLINE_SUB.getFrom(options);
         extInlineSup = FlexmarkHtmlParser.EXT_INLINE_SUP.getFrom(options);
+        extMath = FlexmarkHtmlParser.EXT_MATH.getFrom(options);
         orderedListDelimiter = FlexmarkHtmlParser.ORDERED_LIST_DELIMITER.getFrom(options);
         unorderedListDelimiter = FlexmarkHtmlParser.UNORDERED_LIST_DELIMITER.getFrom(options);
         definitionMarkerSpaces = FlexmarkHtmlParser.DEFINITION_MARKER_SPACES.getFrom(options);
@@ -242,6 +245,7 @@ public class HtmlParserOptions implements MutableDataSetter {
         dataHolder.set(FlexmarkHtmlParser.OUTPUT_ATTRIBUTES_NAMES_REGEX, outputAttributesNamesRegex);
         dataHolder.set(FlexmarkHtmlParser.TABLE_CELL_ALIGNMENT_MAP, tableCellAlignmentMap);
         dataHolder.set(FlexmarkHtmlParser.OUTPUT_ID_ATTRIBUTE_REGEX, outputIdAttributeRegex);
+        dataHolder.set(FlexmarkHtmlParser.EXT_MATH, extMath);
         dataHolder.setFrom(tableOptions);
         return dataHolder;
     }

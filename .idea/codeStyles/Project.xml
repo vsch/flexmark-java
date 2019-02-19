@@ -35,6 +35,7 @@
       <option name="FORMAT_WITH_SOFT_WRAP" value="2" />
       <option name="LIST_ALIGN_FIRST_LINE_TEXT" value="true" />
       <option name="TASK_LIST_ITEM_CASE" value="1" />
+      <option name="TASK_LIST_ITEM_PLACEMENT" value="4" />
       <option name="BULLET_LIST_ITEM_MARKER" value="2" />
       <option name="NEW_BULLET_LIST_ITEM_MARKER" value="2" />
       <option name="VERBATIM_MINIMIZE_INDENT" value="true" />

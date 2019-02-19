@@ -17,7 +17,7 @@ public final class SegmentedSequence extends BasedSequenceImpl {
     private final int baseStartOffset;    // start offset for baseOffsets of this sequence, offset from baseSeq for all chars, including non-base chars
     private final int length;             // length of this sequence
     private final int startOffset;        // this sequence's start offset in base
-    private final int endOffset;   // this sequence's end offset in base
+    private final int endOffset;          // this sequence's end offset in base
 
     @Override
     public Object getBase() {

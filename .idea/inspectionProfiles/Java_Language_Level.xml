@@ -342,7 +342,6 @@
     <inspection_tool class="AndroidMissingOnClickHandler" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="AndroidNonConstantResIdsInSwitch" enabled="false" level="ERROR" enabled_by_default="false" />
     <inspection_tool class="AndroidUnknownAttribute" enabled="false" level="WARNING" enabled_by_default="false" />
-    <inspection_tool class="Annotator" enabled="false" level="ERROR" enabled_by_default="false" />
     <inspection_tool class="Anonymous2MethodRef" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="AnonymousHasLambdaAlternative" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="AntDuplicateTargetsInspection" enabled="false" level="ERROR" enabled_by_default="false" />
@@ -816,6 +815,7 @@
       <option name="ignoreSubstringArguments" value="false" />
     </inspection_tool>
     <inspection_tool class="StringEquality" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="StringOperationCanBeSimplified" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="StringToString" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="StringTokenizerDelimiter" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="SubstringZero" enabled="false" level="WARNING" enabled_by_default="false" />

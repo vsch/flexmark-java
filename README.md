@@ -1,7 +1,7 @@
 ![Flexmark Icon Logo](/assets/images/flexmark-icon-logo%402x.png) flexmark-java
 ===============================================================================
 
-**flexmark-java** is a Java implementation of **CommonMark 0.28** spec parser using the blocks
+**flexmark-java** is a Java implementation of **[CommonMark (spec 0.28)]** parser using the blocks
 first, inlines after Markdown parsing architecture.
 
 Its strengths are speed, flexibility, Markdown source element based AST with details of the
@@ -19,7 +19,7 @@ plugin for JetBrains IDEs. [pegdown] has a great feature set but its speed in ge
 than ideal and for pathological input either hangs or practically hangs during parsing.
 
 [![Build status](https://travis-ci.org/vsch/flexmark-java.svg?branch=master)](https://travis-ci.org/vsch/flexmark-java)
-[![Maven Central status](https://img.shields.io/maven-central/v/com.vladsch.flexmark/flexmark.svg)](https://search.maven.org/search?q=g:com.vladsch.flexmark)
+[![Maven Central status](https://img.shields.io/maven-central/v/com.vladsch.flexmark/flexmark.svg)](https://search.maven.org/search?q=g:com.vladsch.flexmark)<!-- @IGNORE PREVIOUS: link -->
 [![Javadocs](https://www.javadoc.io/badge/com.vladsch.flexmark/flexmark.svg)](https://www.javadoc.io/doc/com.vladsch.flexmark/flexmark)
 
 <!-- [![codecov](https://codecov.io/gh/vsch/flexmark-java/branch/master/graph/badge.svg)](https://codecov.io/gh/vsch/flexmark-java) -->

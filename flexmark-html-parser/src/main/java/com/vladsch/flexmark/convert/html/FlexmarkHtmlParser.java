@@ -109,6 +109,7 @@ public class FlexmarkHtmlParser {
     public static final DataKey<ExtensionConversion> EXT_INLINE_INS = new DataKey<>("EXT_INLINE_INS", ExtensionConversion.MARKDOWN);
     public static final DataKey<ExtensionConversion> EXT_INLINE_SUB = new DataKey<>("EXT_INLINE_SUB", ExtensionConversion.MARKDOWN);
     public static final DataKey<ExtensionConversion> EXT_INLINE_SUP = new DataKey<>("EXT_INLINE_SUP", ExtensionConversion.MARKDOWN);
+    public static final DataKey<ExtensionConversion> EXT_MATH = new DataKey<>("EXT_MATH", ExtensionConversion.HTML);
 
     /**
      * If true then will ignore rows with th columns after rows with td columns have been
@@ -531,6 +532,8 @@ public class FlexmarkHtmlParser {
                 case TABLE                   : processed = processTable(out, (Element) node); break;
                 case _UNWRAPPED              : processed = processUnwrapped(out, node); break;
                 case _SPAN                   : processed = processSpan(out, (Element) node); break;
+                // TODO: implement math to markdown conversion
+                case MATH                    : outputHtml = true; if (myOptions.extMath.isParsed && myOptions.extMath != ExtensionConversion.MARKDOWN) processed = processMath(out, (Element) node); break;
                 case _WRAPPED                : processed = processWrapped(out, node, tagParam.param == null); break;
                 case _COMMENT                : processed = processComment(out, (Comment)node); break;
                 case _HEADING                : processed = processHeading(out, (Element) node); break;
@@ -894,13 +897,15 @@ public class FlexmarkHtmlParser {
 
     private boolean processCode(FormattingAppendable out, Element element) {
         skip();
-        BasedSequence text = SubSequence.of(element.ownText());
-        int backTickCount = getMaxRepeatedChars(text, '`', 1);
-        CharSequence backTicks = RepeatedCharSequence.of("`", backTickCount);
-        boolean oldInlineCode = myInlineCode;
-        myInlineCode = true;
-        processTextNodes(out, element, false, myOptions.skipInlineCode || myOptions.extInlineCode.isTextOnly ? "" : backTicks);
-        myInlineCode = oldInlineCode;
+        if (!myOptions.extInlineCode.isSuppressed) {
+            BasedSequence text = SubSequence.of(element.ownText());
+            int backTickCount = getMaxRepeatedChars(text, '`', 1);
+            CharSequence backTicks = RepeatedCharSequence.of("`", backTickCount);
+            boolean oldInlineCode = myInlineCode;
+            myInlineCode = true;
+            processTextNodes(out, element, false, myOptions.skipInlineCode || myOptions.extInlineCode.isTextOnly ? "" : backTicks);
+            myInlineCode = oldInlineCode;
+        }
         return true;
     }
 
@@ -919,20 +924,24 @@ public class FlexmarkHtmlParser {
 
     private boolean processDel(FormattingAppendable out, Element element) {
         skip();
-        if (!myOptions.preCodePreserveEmphasis && out.isPreFormatted()) {
-            wrapTextNodes(out, element, "", false);
-        } else {
-            wrapTextNodes(out, element, myOptions.skipInlineDel || myOptions.extInlineDel.isTextOnly ? "" : "~~", true);
+        if (!myOptions.extInlineDel.isSuppressed) {
+            if (!myOptions.preCodePreserveEmphasis && out.isPreFormatted()) {
+                wrapTextNodes(out, element, "", false);
+            } else {
+                wrapTextNodes(out, element, myOptions.skipInlineDel || myOptions.extInlineDel.isTextOnly ? "" : "~~", true);
+            }
         }
         return true;
     }
 
     private boolean processEmphasis(FormattingAppendable out, Element element) {
         skip();
-        if (!myOptions.preCodePreserveEmphasis && out.isPreFormatted()) {
-            wrapTextNodes(out, element, "", false);
-        } else {
-            wrapTextNodes(out, element, myOptions.skipInlineEmphasis || myOptions.extInlineEmphasis.isTextOnly ? "" : "*", true);
+        if (!myOptions.extInlineEmphasis.isSuppressed) {
+            if (!myOptions.preCodePreserveEmphasis && out.isPreFormatted()) {
+                wrapTextNodes(out, element, "", false);
+            } else {
+                wrapTextNodes(out, element, myOptions.skipInlineEmphasis || myOptions.extInlineEmphasis.isTextOnly ? "" : "*", true);
+            }
         }
         return true;
     }
@@ -1089,36 +1098,45 @@ public class FlexmarkHtmlParser {
 
     private boolean processIns(FormattingAppendable out, Element element) {
         skip();
-        if (!myOptions.preCodePreserveEmphasis && out.isPreFormatted()) {
-            wrapTextNodes(out, element, "", false);
-        } else {
-            wrapTextNodes(out, element, myOptions.skipInlineIns || myOptions.extInlineIns.isTextOnly ? "" : "++", true);
+        if (!myOptions.extInlineIns.isSuppressed) {
+            if (!myOptions.preCodePreserveEmphasis && out.isPreFormatted()) {
+                wrapTextNodes(out, element, "", false);
+            } else {
+                wrapTextNodes(out, element, myOptions.skipInlineIns || myOptions.extInlineIns.isTextOnly ? "" : "++", true);
+            }
         }
         return true;
     }
 
     private boolean processStrong(FormattingAppendable out, Element element) {
         skip();
-        if (!myOptions.preCodePreserveEmphasis && out.isPreFormatted()) {
-            wrapTextNodes(out, element, "", false);
-        } else {
-            wrapTextNodes(out, element, myOptions.skipInlineStrong || myOptions.extInlineStrong.isTextOnly ? "" : "**", true);
+        if (!myOptions.extInlineStrong.isSuppressed) {
+            if (!myOptions.preCodePreserveEmphasis && out.isPreFormatted()) {
+                wrapTextNodes(out, element, "", false);
+            } else {
+                wrapTextNodes(out, element, myOptions.skipInlineStrong || myOptions.extInlineStrong.isTextOnly ? "" : "**", true);
+            }
         }
         return true;
     }
 
     private boolean processSub(FormattingAppendable out, Element element) {
         skip();
-        if (myOptions.skipInlineSub || myOptions.extInlineSub.isTextOnly || !myOptions.preCodePreserveEmphasis && out.isPreFormatted()) {
-            wrapTextNodes(out, element, "", false);
-        } else {
-            wrapTextNodes(out, element, "~", false);
+        if (!myOptions.extInlineSub.isSuppressed) {
+            if (myOptions.skipInlineSub || myOptions.extInlineSub.isTextOnly || !myOptions.preCodePreserveEmphasis && out.isPreFormatted()) {
+                wrapTextNodes(out, element, "", false);
+            } else {
+                wrapTextNodes(out, element, "~", false);
+            }
         }
         return true;
     }
 
     private boolean processSup(FormattingAppendable out, Element element) {
         skip();
+        if (!myOptions.extInlineSup.isSuppressed) {
+
+        }
         if (myOptions.skipInlineSup || myOptions.extInlineSup.isTextOnly || !myOptions.preCodePreserveEmphasis && out.isPreFormatted()) {
             wrapTextNodes(out, element, "", false);
         } else {
@@ -1411,6 +1429,15 @@ public class FlexmarkHtmlParser {
         processHtmlTree(out, element, false);
         out.line();
         if (myOptions.divAsParagraph) out.blankLine();
+        return true;
+    }
+    
+    private boolean processMath(FormattingAppendable out, Element element) {
+        skip();
+        if (!myOptions.extMath.isSuppressed) {
+            boolean noWraps = myOptions.extMath.isTextOnly;
+            processTextNodes(out, element, false, noWraps ? "" : "$`", noWraps ? "" : "`$");
+        }
         return true;
     }
 
@@ -1814,6 +1841,7 @@ public class FlexmarkHtmlParser {
         _WRAPPED,
         _COMMENT,
         _TEXT,
+        MATH,
     }
 
     private static class TagParam {
@@ -1874,6 +1902,7 @@ public class FlexmarkHtmlParser {
         ourTagProcessors.put("thead", TagParam.tag(TagType.THEAD, null));
         ourTagProcessors.put("tr", TagParam.tag(TagType.TR, null));
         ourTagProcessors.put("ul", TagParam.tag(TagType.UL, null));
+        ourTagProcessors.put("math", TagParam.tag(TagType.MATH, null));
         ourTagProcessors.put("#comment", TagParam.tag(TagType._COMMENT, null));
         ourTagProcessors.put("#text", TagParam.tag(TagType._TEXT, null));
 

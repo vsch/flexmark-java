@@ -74,6 +74,11 @@ flexmark-java
 
 ## To Do
 
+* [ ] Add: For GitHub compatibility best to use [GitHub - github/cmark-gfm] test cases and
+      compare results of the two. Also add benchmarks [Benchmarks]
+
+* Add math detection and handling for HtmlParser
+
 * Change: Extensions wiki from table format for options to list, easier to maintain and read
   when descriptions can benefit form complex formatting
 
@@ -110,6 +115,14 @@ flexmark-java
   without changing the table syntax because the macro expansion would be done during rendering
   not parsing.
 
+* [ ] Add: GitBook Katex math extension: inline math `$$....$$` and block math:
+
+  ```markdown
+  $$    
+  .........
+  $$ 
+  ```
+
 ### Docx Converter
 
 * Add: `DocxRenderer` options:
@@ -125,6 +138,16 @@ flexmark-java
 0.40.18
 -------
 
+* [ ] Fix: implement an auto-links extension which can be incorporated into the core parser as
+      an option and automatically convert text to auto-links without the extra offset conversion
+      and parsing. Can be a simplified auto-links extension which only parses http://, https://,
+      file:// and mail links <vladimir@vladsch.com> vladimir@vladsch.com 
+* [ ] 
+* [ ] Fix: parser & html renderer for latest spec.txt
+* [ ] Fix: test case assert to include spec example file URL with line anchor for quick
+      navigation for failed tests to the spec example. see. Mardown Navigator
+      `ParamRowGenerator` class.
+* Fix: Update to latest version of [cmark/spec.txt] from [https://github.com/commonmark/cmark]
 * Fix: `AsideExtension` option keys to be dynamic data keys dependent on corresponding Parser
   block quote options for their defaults.
 
@@ -142,7 +165,6 @@ flexmark-java
       .set(INTERRUPTS_PARAGRAPH, true)
       .set(INTERRUPTS_ITEM_PARAGRAPH, true)
       .set(WITH_LEAD_SPACES_INTERRUPTS_ITEM_PARAGRAPH, true)
-
 * Deprecate: `Parser.BLOCK_QUOTE_TO_BLANK_LINE`, use more mnemonic
   `Parser.BLOCK_QUOTE_EXTEND_TO_BLANK_LINE`
 * Deprecate: `CustomNode` and `CustomBlock`. `Block` and `Node` should be used directly. The
@@ -154,17 +176,20 @@ flexmark-java
   * `countCharsNot()` -> `countLeadingNot()`
   * `countCharsReversed()` -> `countTrailing()`
   * `countNotCharsReversed()` -> `countTrailingNot()`
-  
-  First of all they only counted leading characters which the name did not imply. Second they
-  were duplicated. 
-  
-  Add character counting functions:
-  
-  * `countOfAny()` 
-  * `countOfAnyNot()`
 
-* Fix: `DefinitionExtension` did not correctly set the child parse column, causing list items to
-  be expecting 1 extra space for child item recognition.
+  First of all they only counted leading characters which the name did not imply. Second they
+  were duplicated.
+
+  Add character counting functions:
+
+  * `countOfAny()`
+  * `countOfAnyNot()`
+* Fix: `DefinitionExtension` does not correctly set the child parse column, causing list items
+  to be expecting 1 extra space for child item recognition.
+* Add: `ExtensionConversion.NONE` to suppress any output from corresponding element
+* Add: `FlexmarkHtmlParser.EXT_MATH`, default `ExtensionConversion.HTML`, for selecting `<math>`
+  tag processing. For now only `MARKDOWN` does nothing useful. Later it will be used to convert
+  math ml to GitLab math inline element.
 
 0.40.16
 -------
@@ -1162,4 +1187,8 @@ setting either will affect both keys. For information on these keys see
 [#99, YamlFrontMatterBlockParser ignores multi-key list items]: https://github.com/vsch/flexmark-java/issues/99
 [Admonition Extension, Material for MkDocs]: https://squidfunk.github.io/mkdocs-material/extensions/admonition/
 [migrate 0_35_x to 0_40_0.xml]: /assets/migrations/migrate%20flexmark-java%200_35_x%20to%200_40_0.xml
+[GitHub - github/cmark-gfm]: https://github.com/github/cmark-gfm "GitHub - github/cmark-gfm: GitHub's fork of cmark, a CommonMark parsing and rendering library and program in C"
+[Benchmarks]: https://github.com/github/cmark-gfm/blob/master/benchmarks.md
+[cmark/spec.txt]: https://github.com/commonmark/cmark/blob/master/test/spec.txt "cmark/spec.txt at master · commonmark/cmark · GitHub"
+[https://github.com/commonmark/cmark]: https://github.com/commonmark/cmark "GitHub - commonmark/cmark: CommonMark parsing and rendering library and program in C"
 

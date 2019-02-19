@@ -31,5 +31,5 @@ Defined in `TaskListExtension` class:
 * `FlexmarkHtmlParser.THEMATIC_BREAK`, default `"*** ** * ** ***"`, `<hr>` replacement
 
 Uses the excellent [jsoup](https://jsoup.org/) HTML parsing library and emoji shortcuts using
-[Emoji-Cheat-Sheet.com](http://www.emoji-cheat-sheet.com/)
+[Emoji-Cheat-Sheet.com](https://www.webfx.com/tools/emoji-cheat-sheet)
 

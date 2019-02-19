@@ -64,6 +64,9 @@ public class ComboAppHtmlParserTest extends ComboSpecTestCase {
         optionsMap.put("skip-heading-5", new MutableDataSet().set(FlexmarkHtmlParser.SKIP_HEADING_5, true));
         optionsMap.put("skip-heading-6", new MutableDataSet().set(FlexmarkHtmlParser.SKIP_HEADING_6, true));
         optionsMap.put("skip-attributes", new MutableDataSet().set(FlexmarkHtmlParser.SKIP_ATTRIBUTES, true));
+        optionsMap.put("math-none", new MutableDataSet().set(FlexmarkHtmlParser.EXT_MATH, ExtensionConversion.NONE));
+        optionsMap.put("math-text", new MutableDataSet().set(FlexmarkHtmlParser.EXT_MATH, ExtensionConversion.TEXT));
+        optionsMap.put("math-markdown", new MutableDataSet().set(FlexmarkHtmlParser.EXT_MATH, ExtensionConversion.MARKDOWN));
         // optionsMap.put("option1", new MutableDataSet().set(FlexmarkHtmlParserExtension.FLEXMARK_HTML_PARSER_OPTION1, true));
     }
 

@@ -9,19 +9,23 @@ import java.net.URLEncoder;
 import java.util.*;
 
 public class Utils {
-    public static String ifNullOr(String receiver, boolean condition, String altValue) {
+    public static <T> T ifNull(T receiver, T altValue) {
+        return (receiver == null) ? altValue : receiver;
+    }
+
+    public static <T> T ifNullOr(T receiver, boolean condition, T altValue) {
         return (receiver == null || condition) ? altValue : receiver;
     }
 
-    public static String ifNullOrNot(String receiver, boolean condition, String altValue) {
+    public static <T> T ifNullOrNot(T receiver, boolean condition, T altValue) {
         return receiver == null || !condition ? altValue : receiver;
     }
 
-    public static String ifNullOr(String receiver, Computable<Boolean, String> condition, String altValue) {
+    public static <T> T ifNullOr(T receiver, Computable<Boolean, T> condition, T altValue) {
         return (receiver == null || condition.compute(receiver)) ? altValue : receiver;
     }
 
-    public static String ifNullOrNot(String receiver, Computable<Boolean, String> condition, String altValue) {
+    public static <T> T ifNullOrNot(T receiver, Computable<Boolean, T> condition, T altValue) {
         return (receiver == null || !condition.compute(receiver)) ? altValue : receiver;
     }
 

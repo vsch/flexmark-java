@@ -12,7 +12,7 @@
           <option name="ANCHORLINKS" value="false" />
           <option name="ASIDE" value="true" />
           <option name="ATXHEADERSPACE" value="true" />
-          <option name="AUTOLINKS" value="true" />
+          <option name="AUTOLINKS" value="false" />
           <option name="DEFINITIONS" value="true" />
           <option name="DEFINITION_BREAK_DOUBLE_BLANK_LINE" value="false" />
           <option name="FENCED_CODE_BLOCKS" value="true" />

@@ -4163,3 +4163,183 @@ Uses `<strike>` tags instead of del.
 ````````````````````````````````
 
 
+## Wiki Page Drag/Drop
+
+Includes part of math ml text
+
+```````````````````````````````` example Wiki Page Drag/Drop: 1
+Then we calculate <math xmlns="http://www.w3.org/1998/Math/MathML" alttext="{\displaystyle \min
+\left\{d_{i}\right\}}">min{di}</math>![\min
+\left\{d_{i}\right\}](https://wikimedia.org/api/rest_v1/media/math/render/svg/e073d5ed25d56134b3c893a4a6313c952f62ad45) for intervals
+.
+<span style="caret-color: rgb(34, 34, 34); color: rgb(34, 34, 34);
+font-family: sans-serif; font-size: 14px; font-style: normal;
+font-variant-caps: normal; font-weight: normal; letter-spacing: normal;
+orphans: auto; text-align: start; text-indent: 0px; text-transform:
+none; white-space: normal; widows: auto; word-spacing: 0px;
+-webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;
+background-color: rgb(255, 255, 255); text-decoration: none; display:
+inline !important; float: none;">Then we calculate<span
+class="Apple-converted-space"> </span></span><span
+class="mwe-math-element" style="caret-color: rgb(34, 34, 34); color:
+rgb(34, 34, 34); font-family: sans-serif; font-size: 14px; font-style:
+normal; font-variant-caps: normal; font-weight: normal; letter-spacing:
+normal; orphans: auto; text-align: start; text-indent: 0px;
+text-transform: none; white-space: normal; widows: auto; word-spacing:
+0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;
+text-decoration: none;"><span class="mwe-math-mathml-inline
+mwe-math-mathml-a11y" style="display: none; clip: rect(1px, 1px, 1px,
+1px); overflow: hidden; position: absolute; width: 1px; height: 1px;
+opacity: 0; font-size: 16.520000457763672px;"><math
+xmlns="http://www.w3.org/1998/Math/MathML" alttext="{\displaystyle \min
+\left\{d_{i}\right\}}"><semantics><mrow class="MJX-TeXAtom-ORD"><mstyle
+displaystyle="true" scriptlevel="0"><mo movablelimits="true"
+form="prefix">min</mo><mrow><mo>{</mo><msub><mi>d</mi><mrow
+class="MJX-TeXAtom-ORD"><mi>i</mi></mrow></msub><mo>}</mo></mrow></mstyle></mrow></semantics></math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/e073d5ed25d56134b3c893a4a6313c952f62ad45"
+class="mwe-math-fallback-image-inline" aria-hidden="true" alt="\min
+\left\{d_{i}\right\}" style="border: 0px; vertical-align: -0.838ex;
+margin: 0px; display: inline-block; width: 8.596ex; height:
+2.843ex;"></span><span style="caret-color: rgb(34, 34, 34); color:
+rgb(34, 34, 34); font-family: sans-serif; font-size: 14px; font-style:
+normal; font-variant-caps: normal; font-weight: normal; letter-spacing:
+normal; orphans: auto; text-align: start; text-indent: 0px;
+text-transform: none; white-space: normal; widows: auto; word-spacing:
+0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;
+background-color: rgb(255, 255, 255); text-decoration: none; display:
+inline !important; float: none;"><span
+class="Apple-converted-space"> </span>for intervals</span>
+````````````````````````````````
+
+
+```````````````````````````````` example(Wiki Page Drag/Drop: 2) options(math-none)
+Then we calculate ![\min
+\left\{d_{i}\right\}](https://wikimedia.org/api/rest_v1/media/math/render/svg/e073d5ed25d56134b3c893a4a6313c952f62ad45) for intervals
+.
+<span style="caret-color: rgb(34, 34, 34); color: rgb(34, 34, 34);
+font-family: sans-serif; font-size: 14px; font-style: normal;
+font-variant-caps: normal; font-weight: normal; letter-spacing: normal;
+orphans: auto; text-align: start; text-indent: 0px; text-transform:
+none; white-space: normal; widows: auto; word-spacing: 0px;
+-webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;
+background-color: rgb(255, 255, 255); text-decoration: none; display:
+inline !important; float: none;">Then we calculate<span
+class="Apple-converted-space"> </span></span><span
+class="mwe-math-element" style="caret-color: rgb(34, 34, 34); color:
+rgb(34, 34, 34); font-family: sans-serif; font-size: 14px; font-style:
+normal; font-variant-caps: normal; font-weight: normal; letter-spacing:
+normal; orphans: auto; text-align: start; text-indent: 0px;
+text-transform: none; white-space: normal; widows: auto; word-spacing:
+0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;
+text-decoration: none;"><span class="mwe-math-mathml-inline
+mwe-math-mathml-a11y" style="display: none; clip: rect(1px, 1px, 1px,
+1px); overflow: hidden; position: absolute; width: 1px; height: 1px;
+opacity: 0; font-size: 16.520000457763672px;"><math
+xmlns="http://www.w3.org/1998/Math/MathML" alttext="{\displaystyle \min
+\left\{d_{i}\right\}}"><semantics><mrow class="MJX-TeXAtom-ORD"><mstyle
+displaystyle="true" scriptlevel="0"><mo movablelimits="true"
+form="prefix">min</mo><mrow><mo>{</mo><msub><mi>d</mi><mrow
+class="MJX-TeXAtom-ORD"><mi>i</mi></mrow></msub><mo>}</mo></mrow></mstyle></mrow></semantics></math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/e073d5ed25d56134b3c893a4a6313c952f62ad45"
+class="mwe-math-fallback-image-inline" aria-hidden="true" alt="\min
+\left\{d_{i}\right\}" style="border: 0px; vertical-align: -0.838ex;
+margin: 0px; display: inline-block; width: 8.596ex; height:
+2.843ex;"></span><span style="caret-color: rgb(34, 34, 34); color:
+rgb(34, 34, 34); font-family: sans-serif; font-size: 14px; font-style:
+normal; font-variant-caps: normal; font-weight: normal; letter-spacing:
+normal; orphans: auto; text-align: start; text-indent: 0px;
+text-transform: none; white-space: normal; widows: auto; word-spacing:
+0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;
+background-color: rgb(255, 255, 255); text-decoration: none; display:
+inline !important; float: none;"><span
+class="Apple-converted-space"> </span>for intervals</span>
+````````````````````````````````
+
+
+```````````````````````````````` example(Wiki Page Drag/Drop: 3) options(math-text)
+Then we calculate min{di}![\min
+\left\{d_{i}\right\}](https://wikimedia.org/api/rest_v1/media/math/render/svg/e073d5ed25d56134b3c893a4a6313c952f62ad45) for intervals
+.
+<span style="caret-color: rgb(34, 34, 34); color: rgb(34, 34, 34);
+font-family: sans-serif; font-size: 14px; font-style: normal;
+font-variant-caps: normal; font-weight: normal; letter-spacing: normal;
+orphans: auto; text-align: start; text-indent: 0px; text-transform:
+none; white-space: normal; widows: auto; word-spacing: 0px;
+-webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;
+background-color: rgb(255, 255, 255); text-decoration: none; display:
+inline !important; float: none;">Then we calculate<span
+class="Apple-converted-space"> </span></span><span
+class="mwe-math-element" style="caret-color: rgb(34, 34, 34); color:
+rgb(34, 34, 34); font-family: sans-serif; font-size: 14px; font-style:
+normal; font-variant-caps: normal; font-weight: normal; letter-spacing:
+normal; orphans: auto; text-align: start; text-indent: 0px;
+text-transform: none; white-space: normal; widows: auto; word-spacing:
+0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;
+text-decoration: none;"><span class="mwe-math-mathml-inline
+mwe-math-mathml-a11y" style="display: none; clip: rect(1px, 1px, 1px,
+1px); overflow: hidden; position: absolute; width: 1px; height: 1px;
+opacity: 0; font-size: 16.520000457763672px;"><math
+xmlns="http://www.w3.org/1998/Math/MathML" alttext="{\displaystyle \min
+\left\{d_{i}\right\}}"><semantics><mrow class="MJX-TeXAtom-ORD"><mstyle
+displaystyle="true" scriptlevel="0"><mo movablelimits="true"
+form="prefix">min</mo><mrow><mo>{</mo><msub><mi>d</mi><mrow
+class="MJX-TeXAtom-ORD"><mi>i</mi></mrow></msub><mo>}</mo></mrow></mstyle></mrow></semantics></math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/e073d5ed25d56134b3c893a4a6313c952f62ad45"
+class="mwe-math-fallback-image-inline" aria-hidden="true" alt="\min
+\left\{d_{i}\right\}" style="border: 0px; vertical-align: -0.838ex;
+margin: 0px; display: inline-block; width: 8.596ex; height:
+2.843ex;"></span><span style="caret-color: rgb(34, 34, 34); color:
+rgb(34, 34, 34); font-family: sans-serif; font-size: 14px; font-style:
+normal; font-variant-caps: normal; font-weight: normal; letter-spacing:
+normal; orphans: auto; text-align: start; text-indent: 0px;
+text-transform: none; white-space: normal; widows: auto; word-spacing:
+0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;
+background-color: rgb(255, 255, 255); text-decoration: none; display:
+inline !important; float: none;"><span
+class="Apple-converted-space"> </span>for intervals</span>
+````````````````````````````````
+
+
+Not implemented
+
+```````````````````````````````` example(Wiki Page Drag/Drop: 4) options(IGNORE, math-markdown)
+Then we calculate $`\displaystyle \min \left\{d_{i}\right\}`$![\min
+\left\{d_{i}\right\}](https://wikimedia.org/api/rest_v1/media/math/render/svg/e073d5ed25d56134b3c893a4a6313c952f62ad45)
+for intervals
+.
+<span style="caret-color: rgb(34, 34, 34); color: rgb(34, 34, 34);
+font-family: sans-serif; font-size: 14px; font-style: normal;
+font-variant-caps: normal; font-weight: normal; letter-spacing: normal;
+orphans: auto; text-align: start; text-indent: 0px; text-transform:
+none; white-space: normal; widows: auto; word-spacing: 0px;
+-webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;
+background-color: rgb(255, 255, 255); text-decoration: none; display:
+inline !important; float: none;">Then we calculate<span
+class="Apple-converted-space"> </span></span><span
+class="mwe-math-element" style="caret-color: rgb(34, 34, 34); color:
+rgb(34, 34, 34); font-family: sans-serif; font-size: 14px; font-style:
+normal; font-variant-caps: normal; font-weight: normal; letter-spacing:
+normal; orphans: auto; text-align: start; text-indent: 0px;
+text-transform: none; white-space: normal; widows: auto; word-spacing:
+0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;
+text-decoration: none;"><span class="mwe-math-mathml-inline
+mwe-math-mathml-a11y" style="display: none; clip: rect(1px, 1px, 1px,
+1px); overflow: hidden; position: absolute; width: 1px; height: 1px;
+opacity: 0; font-size: 16.520000457763672px;"><math
+xmlns="http://www.w3.org/1998/Math/MathML" alttext="{\displaystyle \min
+\left\{d_{i}\right\}}"><semantics><mrow class="MJX-TeXAtom-ORD"><mstyle
+displaystyle="true" scriptlevel="0"><mo movablelimits="true"
+form="prefix">min</mo><mrow><mo>{</mo><msub><mi>d</mi><mrow
+class="MJX-TeXAtom-ORD"><mi>i</mi></mrow></msub><mo>}</mo></mrow></mstyle></mrow></semantics></math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/e073d5ed25d56134b3c893a4a6313c952f62ad45"
+class="mwe-math-fallback-image-inline" aria-hidden="true" alt="\min
+\left\{d_{i}\right\}" style="border: 0px; vertical-align: -0.838ex;
+margin: 0px; display: inline-block; width: 8.596ex; height:
+2.843ex;"></span><span style="caret-color: rgb(34, 34, 34); color:
+rgb(34, 34, 34); font-family: sans-serif; font-size: 14px; font-style:
+normal; font-variant-caps: normal; font-weight: normal; letter-spacing:
+normal; orphans: auto; text-align: start; text-indent: 0px;
+text-transform: none; white-space: normal; widows: auto; word-spacing:
+0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;
+background-color: rgb(255, 255, 255); text-decoration: none; display:
+inline !important; float: none;"><span
+class="Apple-converted-space"> </span>for intervals</span>
+````````````````````````````````
+
+

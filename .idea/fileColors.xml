@@ -2,5 +2,6 @@
 <project version="4">
   <component name="SharedFileColors">
     <fileColor scope="Changed Files" color="edfbff" />
+    <fileColor scope="Flexmark Ext Overview" color="Violet" />
   </component>
 </project>

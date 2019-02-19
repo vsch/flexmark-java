@@ -3861,6 +3861,7 @@
       <w>strwrap</w>
       <w>studres</w>
       <w>sub</w>
+      <w>subsequence</w>
       <w>subset</w>
       <w>subset.data.frame</w>
       <w>subset.default</w>
