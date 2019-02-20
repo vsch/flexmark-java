@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="CommonMark Spec" pattern="file[flexmark-test-util]:src/main/resources/ast_spec.md" />
+</component>
