@@ -141,8 +141,8 @@ flexmark-java
 * [ ] Fix: implement an auto-links extension which can be incorporated into the core parser as
       an option and automatically convert text to auto-links without the extra offset conversion
       and parsing. Can be a simplified auto-links extension which only parses http://, https://,
-      file:// and mail links <vladimir@vladsch.com> vladimir@vladsch.com 
-* [ ] 
+      file:// and ftp://. Leaving the e-mail links and everything else to the post processing
+      extension.
 * [ ] Fix: parser & html renderer for latest spec.txt
 * [ ] Fix: test case assert to include spec example file URL with line anchor for quick
       navigation for failed tests to the spec example. see. Mardown Navigator
