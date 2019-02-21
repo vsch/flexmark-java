@@ -339,13 +339,13 @@ If you find a discrepancy please open an issue so it can be addressed.
 Major processor families are implemented and some family members also:
 
 * [CommonMark] for latest implemented spec, currently [CommonMark (spec 0.28)]
-  * [ ] &nbsp;[League/CommonMark]
+  * [ ] [League/CommonMark]
   * [CommonMark (spec 0.27)] for specific version compatibility
   * [CommonMark (spec 0.28)] for specific version compatibility
   * [GitHub] Comments
 * [ ] [Jekyll]
 * [Markdown.pl][Markdown]
-  * [ ] &nbsp;[Php Markdown Extra]
+  * [ ] [Php Markdown Extra]
   * [GitHub] Docs (old GitHub markdown parser)
 * [Kramdown]
 * FixedIndent
