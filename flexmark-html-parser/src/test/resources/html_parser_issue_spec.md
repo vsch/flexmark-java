@@ -15,7 +15,7 @@ Infinite loop on unwrap
 ```````````````````````````````` example Issue Tests: 1
 :heavy_check_mark:
 .
-<g-emoji alias="heavy_check_mark" fallback-src="https://assets-cdn.github.com/images/icons/emoji/unicode/2714.png" ios-version="6.0">✔️</g-emoji>
+<g-emoji alias="heavy_check_mark" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/2714.png" ios-version="6.0">✔️</g-emoji>
 ````````````````````````````````
 
 
