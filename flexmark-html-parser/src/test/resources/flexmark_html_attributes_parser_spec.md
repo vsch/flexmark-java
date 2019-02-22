@@ -3147,14 +3147,14 @@ sub
 ```````````````````````````````` example Emoji Shortcuts: 1
 :heavy_check_mark:
 .
-<g-emoji alias="heavy_check_mark" fallback-src="https://assets-cdn.github.com/images/icons/emoji/unicode/2714.png" ios-version="6.0">✔️</g-emoji>
+<g-emoji alias="heavy_check_mark" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/2714.png" ios-version="6.0">✔️</g-emoji>
 ````````````````````````````````
 
 
 ```````````````````````````````` example Emoji Shortcuts: 2
 :heavy_check_mark:
 .
-<g-emoji fallback-src="https://assets-cdn.github.com/images/icons/emoji/unicode/2714.png" ios-version="6.0">✔️</g-emoji>
+<g-emoji fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/2714.png" ios-version="6.0">✔️</g-emoji>
 ````````````````````````````````
 
 
@@ -3168,7 +3168,7 @@ sub
 ```````````````````````````````` example Emoji Shortcuts: 4
 :heavy_check_mark:
 .
-<img src="https://assets-cdn.github.com/images/icons/emoji/unicode/2714.png" alt="emoji symbols:heavy_check_mark" height="20" width="20" align="absmiddle" />
+<img src="https://github.githubassets.com/images/icons/emoji/unicode/2714.png" alt="emoji symbols:heavy_check_mark" height="20" width="20" align="absmiddle" />
 ````````````````````````````````
 
 

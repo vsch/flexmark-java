@@ -113,7 +113,7 @@ Converts :warning: to its emoji image
 :warning:
 .
 <h1>some leading text</h1>
-<p><img src="https://assets-cdn.github.com/images/icons/emoji/unicode/26a0.png?v7" alt="emoji places:warning" height="20" width="20" align="absmiddle" /></p>
+<p><img src="https://github.githubassets.com/images/icons/emoji/unicode/26a0.png?v7" alt="emoji places:warning" height="20" width="20" align="absmiddle" /></p>
 .
 Document[0, 30]
   Heading[0, 19] textOpen:[0, 1, "#"] text:[2, 19, "some leading text"]
@@ -131,7 +131,7 @@ Converts :warning: to its emoji image
 :warning:
 .
 <h1>some leading text</h1>
-<p><img src="https://assets-cdn.github.com/images/icons/emoji/unicode/26a0.png?v7" alt="emoji places:warning" height="20" width="20" align="absmiddle" /></p>
+<p><img src="https://github.githubassets.com/images/icons/emoji/unicode/26a0.png?v7" alt="emoji places:warning" height="20" width="20" align="absmiddle" /></p>
 .
 Document[0, 30]
   Heading[0, 19] textOpen:[0, 1, "#"] text:[2, 19, "some leading text"]
@@ -167,7 +167,7 @@ Should use github
 :basecamp:
 .
 <h1>some leading text</h1>
-<p><img src="https://assets-cdn.github.com/images/icons/emoji/basecamp.png?v7" alt="emoji symbols:basecamp" height="20" width="20" align="absmiddle" /></p>
+<p><img src="https://github.githubassets.com/images/icons/emoji/basecamp.png?v7" alt="emoji symbols:basecamp" height="20" width="20" align="absmiddle" /></p>
 .
 Document[0, 31]
   Heading[0, 19] textOpen:[0, 1, "#"] text:[2, 19, "some leading text"]
@@ -203,7 +203,7 @@ Should use github
 :basecamp:
 .
 <h1>some leading text</h1>
-<p><img src="https://assets-cdn.github.com/images/icons/emoji/basecamp.png?v7" alt="emoji symbols:basecamp" height="20" width="20" align="absmiddle" /></p>
+<p><img src="https://github.githubassets.com/images/icons/emoji/basecamp.png?v7" alt="emoji symbols:basecamp" height="20" width="20" align="absmiddle" /></p>
 .
 Document[0, 31]
   Heading[0, 19] textOpen:[0, 1, "#"] text:[2, 19, "some leading text"]
@@ -454,7 +454,7 @@ Document[0, 39]
 :warning:
 .
 <h1>some leading text</h1>
-<p><img src="https://assets-cdn.github.com/images/icons/emoji/unicode/26a0.png?v7" alt="emoji places:warning" height="20" width="20" align="absmiddle" /></p>
+<p><img src="https://github.githubassets.com/images/icons/emoji/unicode/26a0.png?v7" alt="emoji places:warning" height="20" width="20" align="absmiddle" /></p>
 .
 Document[0, 30]
   Heading[0, 19] textOpen:[0, 1, "#"] text:[2, 19, "some leading text"]
@@ -523,7 +523,7 @@ Can be known only to requested target
 :basecamp:
 .
 <h1>some leading text</h1>
-<p><img src="https://assets-cdn.github.com/images/icons/emoji/basecamp.png?v7" alt="emoji symbols:basecamp" height="20" width="20" align="absmiddle" /></p>
+<p><img src="https://github.githubassets.com/images/icons/emoji/basecamp.png?v7" alt="emoji symbols:basecamp" height="20" width="20" align="absmiddle" /></p>
 .
 Document[0, 31]
   Heading[0, 19] textOpen:[0, 1, "#"] text:[2, 19, "some leading text"]
@@ -541,7 +541,7 @@ Can be known only to requested target fallback from unicode
 :basecamp:
 .
 <h1>some leading text</h1>
-<p><img src="https://assets-cdn.github.com/images/icons/emoji/basecamp.png?v7" alt="emoji symbols:basecamp" height="20" width="20" align="absmiddle" /></p>
+<p><img src="https://github.githubassets.com/images/icons/emoji/basecamp.png?v7" alt="emoji symbols:basecamp" height="20" width="20" align="absmiddle" /></p>
 .
 Document[0, 31]
   Heading[0, 19] textOpen:[0, 1, "#"] text:[2, 19, "some leading text"]

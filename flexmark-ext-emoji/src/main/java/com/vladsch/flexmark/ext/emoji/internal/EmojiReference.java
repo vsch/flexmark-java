@@ -29,7 +29,7 @@ public class EmojiReference {
         }
     }
 
-    public static final String githubUrl = "https://assets-cdn.github.com/images/icons/emoji/";
+    public static final String githubUrl = "https://github.githubassets.com/images/icons/emoji/";
 
     private static ArrayList<Emoji> emojiList = null;
 
