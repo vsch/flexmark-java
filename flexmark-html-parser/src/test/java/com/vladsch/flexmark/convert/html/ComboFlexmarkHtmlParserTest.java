@@ -78,6 +78,17 @@ public class ComboFlexmarkHtmlParserTest extends ComboSpecTestCase {
         optionsMap.put("html-ext-inline-ins", new MutableDataSet().set(FlexmarkHtmlParser.EXT_INLINE_INS, ExtensionConversion.HTML));
         optionsMap.put("html-ext-inline-sub", new MutableDataSet().set(FlexmarkHtmlParser.EXT_INLINE_SUB, ExtensionConversion.HTML));
         optionsMap.put("html-ext-inline-sup", new MutableDataSet().set(FlexmarkHtmlParser.EXT_INLINE_SUP, ExtensionConversion.HTML));
+
+        optionsMap.put("links-none", new MutableDataSet().set(FlexmarkHtmlParser.EXT_INLINE_LINK, LinkConversion.NONE));
+        optionsMap.put("links-exp", new MutableDataSet().set(FlexmarkHtmlParser.EXT_INLINE_LINK, LinkConversion.MARKDOWN_EXPLICIT));
+        optionsMap.put("links-ref", new MutableDataSet().set(FlexmarkHtmlParser.EXT_INLINE_LINK, LinkConversion.MARKDOWN_REFERENCE));
+        optionsMap.put("links-text", new MutableDataSet().set(FlexmarkHtmlParser.EXT_INLINE_LINK, LinkConversion.TEXT));
+        optionsMap.put("links-html", new MutableDataSet().set(FlexmarkHtmlParser.EXT_INLINE_LINK, LinkConversion.HTML));
+        optionsMap.put("img-none", new MutableDataSet().set(FlexmarkHtmlParser.EXT_INLINE_IMAGE, LinkConversion.NONE));
+        optionsMap.put("img-exp", new MutableDataSet().set(FlexmarkHtmlParser.EXT_INLINE_IMAGE, LinkConversion.MARKDOWN_EXPLICIT));
+        optionsMap.put("img-ref", new MutableDataSet().set(FlexmarkHtmlParser.EXT_INLINE_IMAGE, LinkConversion.MARKDOWN_REFERENCE));
+        optionsMap.put("img-text", new MutableDataSet().set(FlexmarkHtmlParser.EXT_INLINE_IMAGE, LinkConversion.TEXT));
+        optionsMap.put("img-html", new MutableDataSet().set(FlexmarkHtmlParser.EXT_INLINE_IMAGE, LinkConversion.HTML));
     }
 
     private static final IParse PARSER = new HtmlParser(OPTIONS);

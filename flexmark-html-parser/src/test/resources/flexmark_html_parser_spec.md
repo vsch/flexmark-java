@@ -1196,6 +1196,167 @@ http://example.com
 ````````````````````````````````
 
 
+No links
+
+```````````````````````````````` example(Links: 17) options(no-autolinks, links-none)
+[http://example.com](http://example.com)
+.
+<a href="http://example.com">http://example.com</a>
+````````````````````````````````
+
+
+```````````````````````````````` example(Links: 18) options(skip-links, links-none)
+http://example.com
+.
+<a href="http://example.com">http://example.com</a>
+````````````````````````````````
+
+
+```````````````````````````````` example(Links: 19) options(skip-links, links-none)
+http://example.com
+.
+<a href="http://example.com" title="Title">http://example.com</a>
+````````````````````````````````
+
+
+```````````````````````````````` example(Links: 20) options(skip-links, links-none)
+\[Text **Bold** \]
+.
+<a href="http://example.com">[Text <b>Bold</b>]</a>
+````````````````````````````````
+
+
+```````````````````````````````` example(Links: 21) options(skip-links, skip-inline-strong, links-none)
+\[Text Bold \]
+.
+<a href="http://example.com">[Text <b>Bold</b>]</a>
+````````````````````````````````
+
+
+As text links
+
+```````````````````````````````` example(Links: 22) options(no-autolinks, links-text)
+http://example.com
+.
+<a href="http://example.com">http://example.com</a>
+````````````````````````````````
+
+
+```````````````````````````````` example(Links: 23) options(links-text)
+http://example.com
+.
+<a href="http://example.com">http://example.com</a>
+````````````````````````````````
+
+
+```````````````````````````````` example(Links: 24) options(links-text)
+http://example.com
+.
+<a href="http://example.com" title="Title">http://example.com</a>
+````````````````````````````````
+
+
+```````````````````````````````` example(Links: 25) options(links-text)
+\[Text **Bold** \]
+.
+<a href="http://example.com">[Text <b>Bold</b>]</a>
+````````````````````````````````
+
+
+```````````````````````````````` example(Links: 26) options(skip-inline-strong, links-text)
+\[Text Bold \]
+.
+<a href="http://example.com">[Text <b>Bold</b>]</a>
+````````````````````````````````
+
+
+As html
+
+```````````````````````````````` example(Links: 27) options(no-autolinks, links-html)
+<a href="http://example.com">http://example.com</a>
+.
+<a href="http://example.com">http://example.com</a>
+````````````````````````````````
+
+
+```````````````````````````````` example(Links: 28) options(links-html)
+<a href="http://example.com">http://example.com</a>
+.
+<a href="http://example.com">http://example.com</a>
+````````````````````````````````
+
+
+```````````````````````````````` example(Links: 29) options(links-html)
+<a href="http://example.com" title="Title">http://example.com</a>
+.
+<a href="http://example.com" title="Title">http://example.com</a>
+````````````````````````````````
+
+
+<!-- RELEASE: fix for release -->
+```````````````````````````````` example(Links: 30) options(links-html, IGNORE)
+<a href="http://example.com">\[Text <b>Bold</b>\]</a>
+.
+<a href="http://example.com">[Text <b>Bold</b>]</a>
+````````````````````````````````
+
+
+```````````````````````````````` example(Links: 31) options(skip-inline-strong, links-html)
+<a href="http://example.com">[Text <b>Bold</b>]</a>
+.
+<a href="http://example.com">[Text <b>Bold</b>]</a>
+````````````````````````````````
+
+
+As ref
+
+```````````````````````````````` example(Links: 32) options(no-autolinks, links-ref)
+[http://example.com][]
+
+[http://example.com]: http://example.com
+
+.
+<a href="http://example.com">http://example.com</a>
+````````````````````````````````
+
+
+```````````````````````````````` example(Links: 33) options(links-ref)
+http://example.com
+.
+<a href="http://example.com">http://example.com</a>
+````````````````````````````````
+
+
+```````````````````````````````` example(Links: 34) options(links-ref)
+[http://example.com][]
+
+[http://example.com]: http://example.com 'Title'
+
+.
+<a href="http://example.com" title="Title">http://example.com</a>
+````````````````````````````````
+
+
+```````````````````````````````` example(Links: 35) options(links-ref)
+[\[Text **Bold** \]][]
+
+[\[Text **Bold** \]]: http://example.com
+
+.
+<a href="http://example.com">[Text <b>Bold</b>]</a>
+````````````````````````````````
+
+
+```````````````````````````````` example(Links: 36) options(skip-inline-strong, links-ref)
+[\[Text Bold \]][]
+
+[\[Text Bold \]]: http://example.com
+
+.
+<a href="http://example.com">[Text <b>Bold</b>]</a>
+````````````````````````````````
+
+
 ## Images
 
 Not images
@@ -1251,6 +1412,153 @@ Not images
 Multi-line URL
 
 ```````````````````````````````` example Images: 8
+![alt](http://latex.codecogs.com/gif.latex?
+\begin{align*}
+x^2 + y^2 &= 1 \\
+y &= \sqrt{1 - x^2} \\
+\end{align*}
+"title")
+.
+<img src="http://latex.codecogs.com/gif.latex?%5Cbegin%7Balign*%7D%0Ax%5E2%20%2B%20y%5E2%20&amp;=%201%20%5C%5C%0Ay%20&amp;=%20%5Csqrt%7B1%20-%20x%5E2%7D%20%5C%5C%0A%5Cend%7Balign*%7D%0A" alt="alt" title="title" />
+````````````````````````````````
+
+
+No Images
+
+```````````````````````````````` example(Images: 9) options(img-none)
+![](http://example.com "Title")
+.
+<img src="http://example.com" title="Title">
+````````````````````````````````
+
+
+```````````````````````````````` example(Images: 10) options(img-none)
+![](http://example.com "Title")
+.
+<img src="http://example.com" alt="" title="Title">
+````````````````````````````````
+
+
+```````````````````````````````` example(Images: 11) options(img-none)
+![Alt](http://example.com "Title")
+.
+<img src="http://example.com" alt="Alt" title="Title">
+````````````````````````````````
+
+
+Multi-line URL
+
+```````````````````````````````` example(Images: 12) options(img-none)
+![alt](http://latex.codecogs.com/gif.latex?
+\begin{align*}
+x^2 + y^2 &= 1 \\
+y &= \sqrt{1 - x^2} \\
+\end{align*}
+"title")
+.
+<img src="http://latex.codecogs.com/gif.latex?%5Cbegin%7Balign*%7D%0Ax%5E2%20%2B%20y%5E2%20&amp;=%201%20%5C%5C%0Ay%20&amp;=%20%5Csqrt%7B1%20-%20x%5E2%7D%20%5C%5C%0A%5Cend%7Balign*%7D%0A" alt="alt" title="title" />
+````````````````````````````````
+
+
+Html images
+
+```````````````````````````````` example(Images: 13) options(img-html)
+<img src="http://example.com" title="Title">
+.
+<img src="http://example.com" title="Title">
+````````````````````````````````
+
+
+```````````````````````````````` example(Images: 14) options(img-html)
+<img src="http://example.com" alt="" title="Title">
+.
+<img src="http://example.com" alt="" title="Title">
+````````````````````````````````
+
+
+```````````````````````````````` example(Images: 15) options(img-html)
+<img src="http://example.com" alt="Alt" title="Title">
+.
+<img src="http://example.com" alt="Alt" title="Title">
+````````````````````````````````
+
+
+Multi-line URL
+
+```````````````````````````````` example(Images: 16) options(img-html)
+<img src="http://latex.codecogs.com/gif.latex?%5Cbegin%7Balign*%7D%0Ax%5E2%20%2B%20y%5E2%20&amp;=%201%20%5C%5C%0Ay%20&amp;=%20%5Csqrt%7B1%20-%20x%5E2%7D%20%5C%5C%0A%5Cend%7Balign*%7D%0A" alt="alt" title="title">
+.
+<img src="http://latex.codecogs.com/gif.latex?%5Cbegin%7Balign*%7D%0Ax%5E2%20%2B%20y%5E2%20&amp;=%201%20%5C%5C%0Ay%20&amp;=%20%5Csqrt%7B1%20-%20x%5E2%7D%20%5C%5C%0A%5Cend%7Balign*%7D%0A" alt="alt" title="title" />
+````````````````````````````````
+
+
+text only images
+
+```````````````````````````````` example(Images: 17) options(img-text)
+Title
+.
+<img src="http://example.com" title="Title">
+````````````````````````````````
+
+
+```````````````````````````````` example(Images: 18) options(img-text)
+Title
+.
+<img src="http://example.com" alt="" title="Title">
+````````````````````````````````
+
+
+```````````````````````````````` example(Images: 19) options(img-text)
+Alt
+.
+<img src="http://example.com" alt="Alt" title="Title">
+````````````````````````````````
+
+
+Multi-line URL
+
+```````````````````````````````` example(Images: 20) options(img-text)
+alt
+.
+<img src="http://latex.codecogs.com/gif.latex?%5Cbegin%7Balign*%7D%0Ax%5E2%20%2B%20y%5E2%20&amp;=%201%20%5C%5C%0Ay%20&amp;=%20%5Csqrt%7B1%20-%20x%5E2%7D%20%5C%5C%0A%5Cend%7Balign*%7D%0A" alt="alt" title="title" />
+````````````````````````````````
+
+
+ref images
+
+```````````````````````````````` example(Images: 21) options(img-ref)
+![image][]
+
+[image]: http://example.com 'Title'
+
+.
+<img src="http://example.com" title="Title">
+````````````````````````````````
+
+
+```````````````````````````````` example(Images: 22) options(img-ref)
+![image][]
+
+[image]: http://example.com 'Title'
+
+.
+<img src="http://example.com" alt="" title="Title">
+````````````````````````````````
+
+
+```````````````````````````````` example(Images: 23) options(img-ref)
+![Alt][]
+
+[Alt]: http://example.com 'Title'
+
+.
+<img src="http://example.com" alt="Alt" title="Title">
+````````````````````````````````
+
+
+Multi-line URL
+
+```````````````````````````````` example(Images: 24) options(img-ref)
 ![alt](http://latex.codecogs.com/gif.latex?
 \begin{align*}
 x^2 + y^2 &= 1 \\

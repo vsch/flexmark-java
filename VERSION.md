@@ -151,13 +151,20 @@ flexmark-java
 Next: 0.40.20
 -------------
 
-* [ ] Fix: update spec.txt to latest
+* [ ] Fix: Update to latest version of [cmark/spec.txt] from [https://github.com/commonmark/cmark]
 * [ ] Fix: parser & html renderer for latest spec.txt
 * [ ] Fix: implement an auto-links extension which can be incorporated into the core parser as
       an option and automatically convert text to auto-links without the extra offset conversion
       and parsing. Can be a simplified auto-links extension which only parses http://, https://,
       file:// and ftp://. Leaving the e-mail links and everything else to the post processing
       extension.
+* [ ] Add: `FlexmarkHtmlParser` options:
+  * [ ] `EXT_TABLES` conversion option not yet implemented.
+  * `EXT_INLINE_LINK` and `EXT_INLINE_IMAGE` option default `LinkConversion.MARKDOWN_EXPLICIT`,
+    specifies type of link and image conversion to apply: `NONE`, `MARKDOWN_EXPLICIT`,
+    `MARKDOWN_REFERENCE`, `TEXT`, `HTML`
+  * [ ] Fix: when rendering HTML as is for inline elements, have to escape contained special
+        markdown characters.
 
 0.40.18
 -------
@@ -176,7 +183,6 @@ Next: 0.40.20
   IntelliJ when JetBrains add this to console to handle such `file://` URLs:
   [YouTrack: IDEA-207453]
 * Fix: [#310, PR: Change URL of GitHub CDN] thanks to [benelog](https://github.com/benelog)
-* Fix: Update to latest version of [cmark/spec.txt] from [https://github.com/commonmark/cmark]
 * Fix: `AsideExtension` option keys to be dynamic data keys dependent on corresponding Parser
   block quote options for their defaults.
 

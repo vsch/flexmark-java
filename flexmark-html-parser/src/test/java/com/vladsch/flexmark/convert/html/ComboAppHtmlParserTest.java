@@ -1,16 +1,16 @@
 package com.vladsch.flexmark.convert.html;
 
-import com.vladsch.flexmark.spec.UrlString;
-import com.vladsch.flexmark.util.IParse;
-import com.vladsch.flexmark.util.IRender;
-import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.spec.SpecReader;
+import com.vladsch.flexmark.spec.UrlString;
 import com.vladsch.flexmark.test.ComboSpecTestCase;
 import com.vladsch.flexmark.test.DumpSpecReader;
 import com.vladsch.flexmark.test.FullSpecTestCase;
 import com.vladsch.flexmark.test.RenderingTestCase;
+import com.vladsch.flexmark.util.IParse;
+import com.vladsch.flexmark.util.IRender;
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.format.TableFormatOptions;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.MutableDataSet;
@@ -69,7 +69,6 @@ public class ComboAppHtmlParserTest extends ComboSpecTestCase {
         optionsMap.put("math-none", new MutableDataSet().set(FlexmarkHtmlParser.EXT_MATH, ExtensionConversion.NONE));
         optionsMap.put("math-text", new MutableDataSet().set(FlexmarkHtmlParser.EXT_MATH, ExtensionConversion.TEXT));
         optionsMap.put("math-markdown", new MutableDataSet().set(FlexmarkHtmlParser.EXT_MATH, ExtensionConversion.MARKDOWN));
-        // optionsMap.put("option1", new MutableDataSet().set(FlexmarkHtmlParserExtension.FLEXMARK_HTML_PARSER_OPTION1, true));
     }
 
     private static final IParse PARSER = new HtmlParser(OPTIONS);

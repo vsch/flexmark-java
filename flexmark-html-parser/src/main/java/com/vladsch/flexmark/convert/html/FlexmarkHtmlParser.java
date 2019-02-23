@@ -1,7 +1,9 @@
 package com.vladsch.flexmark.convert.html;
 
+import com.vladsch.flexmark.ast.Reference;
 import com.vladsch.flexmark.ext.emoji.internal.EmojiReference;
 import com.vladsch.flexmark.ext.emoji.internal.EmojiShortcuts;
+import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.Utils;
 import com.vladsch.flexmark.util.format.MarkdownTable;
 import com.vladsch.flexmark.util.format.RomanNumeral;
@@ -63,33 +65,38 @@ public class FlexmarkHtmlParser {
     public static final DataKey<Boolean> ADD_TRAILING_EOL = new DataKey<>("ADD_TRAILING_EOL", true);
 
     /**
-     * @deprecated Use SKIP_INLINE_STRONG set to ExtensionConversion.TEXT instead
+     * @deprecated Use EXT_INLINE_STRONG set to ExtensionConversion.TEXT instead
      */
-    public static final DataKey<Boolean> SKIP_INLINE_STRONG = new DataKey<>("SKIP_INLINE_STRONG", false);
+    @Deprecated public static final DataKey<Boolean> SKIP_INLINE_STRONG = new DataKey<>("SKIP_INLINE_STRONG", false);
     /**
-     * @deprecated Use SKIP_INLINE_EMPHASIS set to ExtensionConversion.TEXT instead
+     * @deprecated Use EXT_INLINE_EMPHASIS set to ExtensionConversion.TEXT instead
      */
-    public static final DataKey<Boolean> SKIP_INLINE_EMPHASIS = new DataKey<>("SKIP_INLINE_EMPHASIS", false);
+    @Deprecated public static final DataKey<Boolean> SKIP_INLINE_EMPHASIS = new DataKey<>("SKIP_INLINE_EMPHASIS", false);
     /**
-     * @deprecated Use SKIP_INLINE_CODE set to ExtensionConversion.TEXT instead
+     * @deprecated Use EXT_INLINE_CODE set to ExtensionConversion.TEXT instead
      */
-    public static final DataKey<Boolean> SKIP_INLINE_CODE = new DataKey<>("SKIP_INLINE_CODE", false);
+    @Deprecated public static final DataKey<Boolean> SKIP_INLINE_CODE = new DataKey<>("SKIP_INLINE_CODE", false);
     /**
-     * @deprecated Use SKIP_INLINE_DEL set to ExtensionConversion.TEXT instead
+     * @deprecated Use EXT_INLINE_DEL set to ExtensionConversion.TEXT instead
      */
-    public static final DataKey<Boolean> SKIP_INLINE_DEL = new DataKey<>("SKIP_INLINE_DEL", false);
+    @Deprecated public static final DataKey<Boolean> SKIP_INLINE_DEL = new DataKey<>("SKIP_INLINE_DEL", false);
     /**
-     * @deprecated Use SKIP_INLINE_INS set to ExtensionConversion.TEXT instead
+     * @deprecated Use EXT_INLINE_INS set to ExtensionConversion.TEXT instead
      */
-    public static final DataKey<Boolean> SKIP_INLINE_INS = new DataKey<>("SKIP_INLINE_INS", false);
+    @Deprecated public static final DataKey<Boolean> SKIP_INLINE_INS = new DataKey<>("SKIP_INLINE_INS", false);
     /**
-     * @deprecated Use SKIP_INLINE_SUB set to ExtensionConversion.TEXT instead
+     * @deprecated Use EXT_INLINE_SUB set to ExtensionConversion.TEXT instead
      */
-    public static final DataKey<Boolean> SKIP_INLINE_SUB = new DataKey<>("SKIP_INLINE_SUB", false);
+    @Deprecated public static final DataKey<Boolean> SKIP_INLINE_SUB = new DataKey<>("SKIP_INLINE_SUB", false);
     /**
-     * @deprecated Use SKIP_INLINE_SUP set to ExtensionConversion.TEXT instead
+     * @deprecated Use EXT_INLINE_SUP set to ExtensionConversion.TEXT instead
      */
-    public static final DataKey<Boolean> SKIP_INLINE_SUP = new DataKey<>("SKIP_INLINE_SUP", false);
+    @Deprecated public static final DataKey<Boolean> SKIP_INLINE_SUP = new DataKey<>("SKIP_INLINE_SUP", false);
+
+    /**
+     * @deprecated Use EXT_INLINE_LINKS set to LinksConversion.TEXT instead
+     */
+    @Deprecated public static final DataKey<Boolean> SKIP_LINKS = new DataKey<>("SKIP_LINKS", false);
 
     public static final DataKey<Boolean> SKIP_HEADING_1 = new DataKey<>("SKIP_HEADING_1", false);
     public static final DataKey<Boolean> SKIP_HEADING_2 = new DataKey<>("SKIP_HEADING_2", false);
@@ -99,7 +106,6 @@ public class FlexmarkHtmlParser {
     public static final DataKey<Boolean> SKIP_HEADING_6 = new DataKey<>("SKIP_HEADING_6", false);
     public static final DataKey<Boolean> SKIP_ATTRIBUTES = new DataKey<>("SKIP_ATTRIBUTES", false);
     public static final DataKey<Boolean> SKIP_FENCED_CODE = new DataKey<>("SKIP_FENCED_CODE", false);
-    public static final DataKey<Boolean> SKIP_LINKS = new DataKey<>("SKIP_LINKS", false);
     public static final DataKey<Boolean> SKIP_CHAR_ESCAPE = new DataKey<>("SKIP_CHAR_ESCAPE", false);
 
     public static final DataKey<ExtensionConversion> EXT_INLINE_STRONG = new DataKey<>("EXT_INLINE_STRONG", ExtensionConversion.MARKDOWN);
@@ -110,6 +116,11 @@ public class FlexmarkHtmlParser {
     public static final DataKey<ExtensionConversion> EXT_INLINE_SUB = new DataKey<>("EXT_INLINE_SUB", ExtensionConversion.MARKDOWN);
     public static final DataKey<ExtensionConversion> EXT_INLINE_SUP = new DataKey<>("EXT_INLINE_SUP", ExtensionConversion.MARKDOWN);
     public static final DataKey<ExtensionConversion> EXT_MATH = new DataKey<>("EXT_MATH", ExtensionConversion.HTML);
+
+    public static final DataKey<ExtensionConversion> EXT_TABLES = new DataKey<>("EXT_TABLES", ExtensionConversion.MARKDOWN);
+
+    public static final DataKey<LinkConversion> EXT_INLINE_LINK = new DataKey<>("EXT_INLINE_LINK", LinkConversion.MARKDOWN_EXPLICIT);
+    public static final DataKey<LinkConversion> EXT_INLINE_IMAGE = new DataKey<>("EXT_INLINE_IMAGE", LinkConversion.MARKDOWN_EXPLICIT);
 
     /**
      * If true then will ignore rows with th columns after rows with td columns have been
@@ -166,12 +177,17 @@ public class FlexmarkHtmlParser {
     private final Pattern specialCharsPattern;
 
     private Stack<State> myStateStack;
-    private Map<String, String> myAbbreviations;
+    private HashMap<String, String> myAbbreviations;
+    private HashMap<String, Reference> myReferenceUrlToIdMap;  // map of URL to reference node
+    private HashMap<String, String> myMacrosMap;               // macro name to macro content
     private State myState;
     private boolean myTrace;
     private boolean myInlineCode;
+    private Parser myParser = null;
+    private final DataHolder myFullOptions;
 
     private FlexmarkHtmlParser(DataHolder options) {
+        myFullOptions = options;
         myOptions = new HtmlParserOptions(options);
 
         if (myOptions.typographicQuotes && myOptions.typographicSmarts) {
@@ -191,6 +207,8 @@ public class FlexmarkHtmlParser {
     private void resetForParse() {
         myStateStack = new Stack<State>();
         myAbbreviations = new HashMap<String, String>();
+        myReferenceUrlToIdMap = new HashMap<String, Reference>();
+        myMacrosMap = new HashMap<String, String>();
         myState = null;
     }
 
@@ -327,13 +345,41 @@ public class FlexmarkHtmlParser {
         processHtmlTree(out, body, false);
 
         // output abbreviations if any
+        boolean needTrailingEOL = true;
+
         if (!myAbbreviations.isEmpty()) {
             out.blankLine();
             for (Map.Entry<String, String> entry : myAbbreviations.entrySet()) {
                 out.line().append("*[").append(entry.getKey()).append("]: ").append(entry.getValue()).line();
             }
             out.blankLine();
-        } else if (myOptions.addTrailingEol) {
+            needTrailingEOL = false;
+        }
+
+        // output references if any
+        if (!myReferenceUrlToIdMap.isEmpty()) {
+            out.blankLine();
+            for (Map.Entry<String, Reference> entry : myReferenceUrlToIdMap.entrySet()) {
+                out.line().append(entry.getValue().getChars()).line();
+            }
+            out.blankLine();
+            needTrailingEOL = false;
+        }
+
+        // output macros if any
+        if (!myMacrosMap.isEmpty()) {
+            for (Map.Entry<String, String> entry : myMacrosMap.entrySet()) {
+                out.blankLine();
+                out.append(">>>").append(entry.getKey()).line();
+                BasedSequence value = BasedSequenceImpl.of(entry.getValue());
+                out.append(value.trimEnd()).append("\n");
+                out.append("<<<\n");
+                out.blankLine();
+            }
+            needTrailingEOL = false;
+        }
+
+        if (needTrailingEOL && myOptions.addTrailingEol) {
             out.line();
         }
     }
@@ -511,21 +557,21 @@ public class FlexmarkHtmlParser {
                 case ABBR                    : processed = processAbbr(out, (Element) node); break;
                 case ASIDE                   : processed = processAside(out, (Element) node); break;
                 case BLOCKQUOTE              : processed = processBlockQuote(out, (Element) node); break;
-                case CODE                    : outputHtml = true; if (myOptions.extInlineCode.isParsed) processed = processCode(out, (Element) node); break;
-                case DEL                     : outputHtml = true; if (myOptions.extInlineDel.isParsed) processed = processDel(out, (Element) node); break;
+                case CODE                    : outputHtml = true; if (myOptions.extInlineCode.isParsed()) processed = processCode(out, (Element) node); break;
+                case DEL                     : outputHtml = true; if (myOptions.extInlineDel.isParsed()) processed = processDel(out, (Element) node); break;
                 case DIV                     : processed = processDiv(out, (Element) node); break;
                 case DL                      : processed = processDl(out, (Element) node); break;
-                case _EMPHASIS               : outputHtml = true; if (myOptions.extInlineEmphasis.isParsed) processed = processEmphasis(out, (Element) node); break;
+                case _EMPHASIS               : outputHtml = true; if (myOptions.extInlineEmphasis.isParsed()) processed = processEmphasis(out, (Element) node); break;
                 case HR                      : processed = processHr(out, (Element) node); break;
                 case IMG                     : processed = processImg(out, (Element) node); break;
                 case INPUT                   : processed = processInput(out, (Element)node); break;
-                case INS                     : outputHtml = true; if (myOptions.extInlineIns.isParsed) processed = processIns(out, (Element) node); break;
+                case INS                     : outputHtml = true; if (myOptions.extInlineIns.isParsed()) processed = processIns(out, (Element) node); break;
                 case OL                      : processed = processOl(out, (Element) node); break;
                 case P                       : processed = processP(out, (Element) node); break;
                 case PRE                     : processed = processPre(out, (Element) node); break;
-                case _STRONG_EMPHASIS        : outputHtml = true; if (myOptions.extInlineStrong.isParsed) processed = processStrong(out, (Element) node); break;
-                case SUB                     : outputHtml = true; if (myOptions.extInlineSub.isParsed) processed = processSub(out, (Element) node); break;
-                case SUP                     : outputHtml = true; if (myOptions.extInlineSup.isParsed) processed = processSup(out, (Element) node); break;
+                case _STRONG_EMPHASIS        : outputHtml = true; if (myOptions.extInlineStrong.isParsed()) processed = processStrong(out, (Element) node); break;
+                case SUB                     : outputHtml = true; if (myOptions.extInlineSub.isParsed()) processed = processSub(out, (Element) node); break;
+                case SUP                     : outputHtml = true; if (myOptions.extInlineSup.isParsed()) processed = processSup(out, (Element) node); break;
                 case SVG                     : processed = processSvg(out, (Element) node); break;
                 case UL                      : processed = processUl(out, (Element) node); break;
                 case LI                      : processed = processList(out, (Element) node, false, true); break;
@@ -533,7 +579,7 @@ public class FlexmarkHtmlParser {
                 case _UNWRAPPED              : processed = processUnwrapped(out, node); break;
                 case _SPAN                   : processed = processSpan(out, (Element) node); break;
                 // TODO: implement math to markdown conversion
-                case MATH                    : outputHtml = true; if (myOptions.extMath.isParsed && myOptions.extMath != ExtensionConversion.MARKDOWN) processed = processMath(out, (Element) node); break;
+                case MATH                    : outputHtml = true; if (myOptions.extMath.isParsed() && myOptions.extMath != ExtensionConversion.MARKDOWN) processed = processMath(out, (Element) node); break;
                 case _WRAPPED                : processed = processWrapped(out, node, tagParam.param == null); break;
                 case _COMMENT                : processed = processComment(out, (Comment)node); break;
                 case _HEADING                : processed = processHeading(out, (Element) node); break;
@@ -567,6 +613,8 @@ public class FlexmarkHtmlParser {
             final Node node,
             Boolean isBlock
     ) {
+        // RELEASE: fix for release, for inline HTML tags need to escape contained text for markdown special characters
+        //    and un-ignore flexmark_html_parser_spec.md: Links: 30 test
         if (node instanceof Element && (isBlock == null && ((Element) node).isBlock() || isBlock != null && isBlock)) {
             String s = node.toString();
             int pos = s.indexOf(">");
@@ -783,39 +831,99 @@ public class FlexmarkHtmlParser {
         return out.getText();
     }
 
+    private com.vladsch.flexmark.util.ast.Node parseMarkdown(String markdown) {
+        if (myParser == null) {
+            myParser = Parser.builder(myFullOptions).build();
+        }
+        return myParser.parse(markdown);
+    }
+
+    private Reference getOrCreateReference(String url, String text, String title) {
+        Reference reference = myReferenceUrlToIdMap.get(url);
+        if (reference != null) {
+            if (title != null && !title.trim().isEmpty()) {
+                if (reference.getTitle().isBlank()) {
+                    // just add it to the existing reference
+                    reference.setTitle(BasedSequenceImpl.of(title));
+                    return reference;
+                } else if (reference.getTitle().equals(title.trim())) {
+                    return reference;
+                }
+            }
+        }
+
+        // create a new one with URL and if no conflict with text as id
+        String referenceId = text;
+
+        if (myReferenceUrlToIdMap.containsKey(referenceId)) {
+            for (int i = 1; ; i++) {
+                referenceId = text + "_" + i;
+                if (!myReferenceUrlToIdMap.containsKey(referenceId)) {
+                    break;
+                }
+            }
+        }
+
+        StringBuilder sb = new StringBuilder().append("[").append(referenceId).append("]: ").append(url);
+
+        if (title != null && !title.trim().isEmpty()) {
+            sb.append(" '").append(title.replace("'", "\\'")).append("'");
+        }
+
+        com.vladsch.flexmark.util.ast.Node document = parseMarkdown(sb.toString());
+        reference = (Reference) document.getFirstChild();
+        myReferenceUrlToIdMap.put(url, reference);
+        return reference;
+    }
+
     private boolean processA(FormattingAppendable out, Element element) {
         skip();
 
         // see if it is an anchor or a link
         if (element.hasAttr("href")) {
-            pushState(element);
-            String text = Utils.removeStart(Utils.removeEnd(processTextNodes(element), '\n'), '\n');
-            String href = element.attr("href");
-            String title = element.hasAttr("title") ? element.attr("title") : null;
+            LinkConversion conv = myOptions.extInlineLink;
+            if (conv.isParsed()) {
+                pushState(element);
+                String text = Utils.removeStart(Utils.removeEnd(processTextNodes(element), '\n'), '\n');
+                String href = element.attr("href");
+                String title = element.hasAttr("title") ? element.attr("title") : null;
 
-            if (!text.isEmpty() || !href.contains("#")) {
-                if (myOptions.extractAutoLinks && href.equals(text) && (title == null || title.isEmpty())) {
-                    if (myOptions.wrapAutoLinks) out.append('<');
-                    out.append(text);
-                    if (myOptions.wrapAutoLinks) out.append('>');
-                    transferIdToParent();
-                } else if (!myOptions.skipLinks && !href.startsWith("javascript:")) {
-                    out.append('[');
-                    out.append(text);
-                    out.append(']');
-                    out.append('(').append(href);
-                    if (title != null)
-                        out.append(" \"").append(title.replace("\n", myOptions.eolInTitleAttribute).replace("\"", "\\\"")).append('"');
-                    out.append(")");
+                if (!text.isEmpty() || !href.contains("#")) {
+                    if (myOptions.extractAutoLinks && href.equals(text) && (title == null || title.isEmpty())) {
+                        if (myOptions.wrapAutoLinks) out.append('<');
+                        out.append(text);
+                        if (myOptions.wrapAutoLinks) out.append('>');
+                        transferIdToParent();
+                    } else if (!myOptions.skipLinks && !conv.isTextOnly() && !href.startsWith("javascript:")) {
+                        if (!conv.isReference()) {
+                            out.append('[');
+                            out.append(text);
+                            out.append(']');
+                            out.append('(').append(href);
+                            if (title != null)
+                                out.append(" \"").append(title.replace("\n", myOptions.eolInTitleAttribute).replace("\"", "\\\"")).append('"');
+                            out.append(")");
+                        } else {
+                            // need reference 
+                            Reference reference = getOrCreateReference(href, text, title);
+                            if (reference.getReference().equals(text)) {
+                                out.append('[').append(text).append("][]");
+                            } else {
+                                out.append('[').append(text).append("][").append(reference.getReference()).append(']');
+                            }
+                        }
+                    } else {
+                        out.append(text);
+                    }
+
+                    excludeAttributes("href", "title");
+                    popState(out);
                 } else {
-                    out.append(text);
+                    transferIdToParent();
+                    popState(null);
                 }
-
-                excludeAttributes("href", "title");
-                popState(out);
-            } else {
-                transferIdToParent();
-                popState(null);
+            } else if (!conv.isSuppressed()) {
+                processWrapped(out, element, null);
             }
         } else {
             boolean stripIdAttribute = false;
@@ -897,13 +1005,13 @@ public class FlexmarkHtmlParser {
 
     private boolean processCode(FormattingAppendable out, Element element) {
         skip();
-        if (!myOptions.extInlineCode.isSuppressed) {
+        if (!myOptions.extInlineCode.isSuppressed()) {
             BasedSequence text = SubSequence.of(element.ownText());
             int backTickCount = getMaxRepeatedChars(text, '`', 1);
             CharSequence backTicks = RepeatedCharSequence.of("`", backTickCount);
             boolean oldInlineCode = myInlineCode;
             myInlineCode = true;
-            processTextNodes(out, element, false, myOptions.skipInlineCode || myOptions.extInlineCode.isTextOnly ? "" : backTicks);
+            processTextNodes(out, element, false, myOptions.skipInlineCode || myOptions.extInlineCode.isTextOnly() ? "" : backTicks);
             myInlineCode = oldInlineCode;
         }
         return true;
@@ -924,11 +1032,11 @@ public class FlexmarkHtmlParser {
 
     private boolean processDel(FormattingAppendable out, Element element) {
         skip();
-        if (!myOptions.extInlineDel.isSuppressed) {
+        if (!myOptions.extInlineDel.isSuppressed()) {
             if (!myOptions.preCodePreserveEmphasis && out.isPreFormatted()) {
                 wrapTextNodes(out, element, "", false);
             } else {
-                wrapTextNodes(out, element, myOptions.skipInlineDel || myOptions.extInlineDel.isTextOnly ? "" : "~~", true);
+                wrapTextNodes(out, element, myOptions.skipInlineDel || myOptions.extInlineDel.isTextOnly() ? "" : "~~", true);
             }
         }
         return true;
@@ -936,11 +1044,11 @@ public class FlexmarkHtmlParser {
 
     private boolean processEmphasis(FormattingAppendable out, Element element) {
         skip();
-        if (!myOptions.extInlineEmphasis.isSuppressed) {
+        if (!myOptions.extInlineEmphasis.isSuppressed()) {
             if (!myOptions.preCodePreserveEmphasis && out.isPreFormatted()) {
                 wrapTextNodes(out, element, "", false);
             } else {
-                wrapTextNodes(out, element, myOptions.skipInlineEmphasis || myOptions.extInlineEmphasis.isTextOnly ? "" : "*", true);
+                wrapTextNodes(out, element, myOptions.skipInlineEmphasis || myOptions.extInlineEmphasis.isTextOnly() ? "" : "*", true);
             }
         }
         return true;
@@ -1034,23 +1142,54 @@ public class FlexmarkHtmlParser {
             if (emoji != null) {
                 out.append(':').append(emoji.shortcut).append(':');
             } else {
-                out.append("![");
-                if (element.hasAttr("alt"))
-                    out.append(element.attr("alt").replace("[", "\\[").replace("]", "\\]"));
-                out.append(']');
-                out.append('(');
-                int pos = src.indexOf('?');
-                int eol = pos < 0 ? pos : src.indexOf("%0A", pos);
-                if (pos > 0 && eol > 0) {
-                    out.append(src, 0, pos + 1);
-                    String decoded = Utils.urlDecode(src.substring(pos + 1).replace("+", "%2B"), "UTF8");
-                    out.line().append(decoded);
-                } else {
-                    out.append(src);
+                LinkConversion conv = myOptions.extInlineImage;
+                if (conv.isParsed()) {
+                    String alt = !element.hasAttr("alt") ? null
+                            : element.attr("alt").trim().replace("[", "\\[").replace("]", "\\]");
+
+                    if (alt != null && alt.isEmpty()) alt = null;
+
+                    String title = !element.hasAttr("title") ? null
+                            : element.attr("title").replace("\n", myOptions.eolInTitleAttribute).replace("\"", "\\\"");
+                    if (title != null && title.isEmpty()) title = null;
+
+                    if (!conv.isTextOnly()) {
+                        int pos = src.indexOf('?');
+                        int eol = pos < 0 ? pos : src.indexOf("%0A", pos);
+                        boolean isMultiLineUrl = pos > 0 && eol > 0;
+
+                        if (!conv.isReference() || isMultiLineUrl) {
+                            out.append("![");
+                            if (alt != null) out.append(alt);
+                            out.append(']').append('(');
+
+                            if (isMultiLineUrl) {
+                                out.append(src, 0, pos + 1);
+                                String decoded = Utils.urlDecode(src.substring(pos + 1).replace("+", "%2B"), "UTF8");
+                                out.line().append(decoded);
+                            } else {
+                                out.append(src);
+                            }
+
+                            if (title != null) out.append(" \"").append(title).append('"');
+                            out.append(")");
+                        } else {
+                            Reference reference = getOrCreateReference(src, alt == null ? "image" : alt, title);
+
+                            if (alt == null || reference.getReference().equals(alt)) {
+                                // use reference as is
+                                out.append("![").append(reference.getReference()).append("][]");
+                            } else {
+                                out.append("![").append(alt).append("][").append(reference.getReference()).append("]");
+                            }
+                        }
+                    } else {
+                        if (alt != null) out.append(alt);
+                        else if (title != null) out.append(title);
+                    }
+                } else if (!conv.isSuppressed()) {
+                    processWrapped(out, element, null);
                 }
-                if (element.hasAttr("title"))
-                    out.append(" \"").append(element.attr("title").replace("\n", myOptions.eolInTitleAttribute).replace("\"", "\\\"")).append('"');
-                out.append(")");
             }
         }
         return true;
@@ -1098,11 +1237,11 @@ public class FlexmarkHtmlParser {
 
     private boolean processIns(FormattingAppendable out, Element element) {
         skip();
-        if (!myOptions.extInlineIns.isSuppressed) {
+        if (!myOptions.extInlineIns.isSuppressed()) {
             if (!myOptions.preCodePreserveEmphasis && out.isPreFormatted()) {
                 wrapTextNodes(out, element, "", false);
             } else {
-                wrapTextNodes(out, element, myOptions.skipInlineIns || myOptions.extInlineIns.isTextOnly ? "" : "++", true);
+                wrapTextNodes(out, element, myOptions.skipInlineIns || myOptions.extInlineIns.isTextOnly() ? "" : "++", true);
             }
         }
         return true;
@@ -1110,11 +1249,11 @@ public class FlexmarkHtmlParser {
 
     private boolean processStrong(FormattingAppendable out, Element element) {
         skip();
-        if (!myOptions.extInlineStrong.isSuppressed) {
+        if (!myOptions.extInlineStrong.isSuppressed()) {
             if (!myOptions.preCodePreserveEmphasis && out.isPreFormatted()) {
                 wrapTextNodes(out, element, "", false);
             } else {
-                wrapTextNodes(out, element, myOptions.skipInlineStrong || myOptions.extInlineStrong.isTextOnly ? "" : "**", true);
+                wrapTextNodes(out, element, myOptions.skipInlineStrong || myOptions.extInlineStrong.isTextOnly() ? "" : "**", true);
             }
         }
         return true;
@@ -1122,8 +1261,8 @@ public class FlexmarkHtmlParser {
 
     private boolean processSub(FormattingAppendable out, Element element) {
         skip();
-        if (!myOptions.extInlineSub.isSuppressed) {
-            if (myOptions.skipInlineSub || myOptions.extInlineSub.isTextOnly || !myOptions.preCodePreserveEmphasis && out.isPreFormatted()) {
+        if (!myOptions.extInlineSub.isSuppressed()) {
+            if (myOptions.skipInlineSub || myOptions.extInlineSub.isTextOnly() || !myOptions.preCodePreserveEmphasis && out.isPreFormatted()) {
                 wrapTextNodes(out, element, "", false);
             } else {
                 wrapTextNodes(out, element, "~", false);
@@ -1134,10 +1273,10 @@ public class FlexmarkHtmlParser {
 
     private boolean processSup(FormattingAppendable out, Element element) {
         skip();
-        if (!myOptions.extInlineSup.isSuppressed) {
+        if (!myOptions.extInlineSup.isSuppressed()) {
 
         }
-        if (myOptions.skipInlineSup || myOptions.extInlineSup.isTextOnly || !myOptions.preCodePreserveEmphasis && out.isPreFormatted()) {
+        if (myOptions.skipInlineSup || myOptions.extInlineSup.isTextOnly() || !myOptions.preCodePreserveEmphasis && out.isPreFormatted()) {
             wrapTextNodes(out, element, "", false);
         } else {
             wrapTextNodes(out, element, "^", false);
@@ -1431,11 +1570,11 @@ public class FlexmarkHtmlParser {
         if (myOptions.divAsParagraph) out.blankLine();
         return true;
     }
-    
+
     private boolean processMath(FormattingAppendable out, Element element) {
         skip();
-        if (!myOptions.extMath.isSuppressed) {
-            boolean noWraps = myOptions.extMath.isTextOnly;
+        if (!myOptions.extMath.isSuppressed()) {
+            boolean noWraps = myOptions.extMath.isTextOnly();
             processTextNodes(out, element, false, noWraps ? "" : "$`", noWraps ? "" : "`$");
         }
         return true;
@@ -1634,7 +1773,6 @@ public class FlexmarkHtmlParser {
     }
 
     private void processTableCell(FormattingAppendable out, Element element) {
-
         String cellText = processTextNodes(element).trim().replaceAll("\\s*\n\\s*", " ");
         int colSpan = 1;
         int rowSpan = 1;
