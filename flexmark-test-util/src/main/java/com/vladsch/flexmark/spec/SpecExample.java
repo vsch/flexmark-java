@@ -1,5 +1,7 @@
 package com.vladsch.flexmark.spec;
 
+import java.net.URL;
+
 public class SpecExample {
     public static final SpecExample NULL = new SpecExample(null, "", 0, "", "");
 
@@ -10,22 +12,24 @@ public class SpecExample {
     private final String html;
     private final String ast;
     private final String comment;
+    private final UrlString fileUrl;
 
     public SpecExample(String optionsSet, String section, int exampleNumber, String source, String html) {
         this(optionsSet, section, exampleNumber, source, html, null);
     }
 
     public SpecExample(String optionsSet, String section, int exampleNumber, String source, String html, String ast) {
-        this(optionsSet, section, exampleNumber, source, html, null, null);
-
+        this(optionsSet, section, exampleNumber, source, html, null, null, null);
     }
-    public SpecExample(String optionsSet, String section, int exampleNumber, String source, String html, String ast, String comment) {
+
+    public SpecExample(String optionsSet, String section, int exampleNumber, String source, String html, String ast, String comment, final UrlString fileUrl) {
         this.section = section;
         this.exampleNumber = exampleNumber;
         this.source = source;
         this.html = html;
         this.ast = ast;
         this.comment = comment == null ? null : comment.trim();
+        this.fileUrl = fileUrl;
 
         if (optionsSet == null) {
             this.optionsSet = null;
@@ -36,12 +40,14 @@ public class SpecExample {
     }
 
     // @formatter:off
-    public SpecExample withOptionsSet(String optionsSet) { return new SpecExample(optionsSet, section, exampleNumber, source, html, ast, comment); }
-    public SpecExample withSection(String section) { return new SpecExample(optionsSet, section, exampleNumber, source, html, ast, comment); }
-    public SpecExample withExampleNumber(int exampleNumber) { return new SpecExample(optionsSet, section, exampleNumber, source, html, ast, comment); }
-    public SpecExample withSource(String source) { return new SpecExample(optionsSet, section, exampleNumber, source, html, ast, comment); }
-    public SpecExample withHtml(String html) { return new SpecExample(optionsSet, section, exampleNumber, source, html, ast, comment); }
-    public SpecExample withAst(String ast) { return new SpecExample(optionsSet, section, exampleNumber, source, html, ast, comment); }
+    public SpecExample withOptionsSet(String optionsSet) { return new SpecExample(optionsSet, section, exampleNumber, source, html, ast, comment, fileUrl ); }
+    public SpecExample withSection(String section) { return new SpecExample(optionsSet, section, exampleNumber, source, html, ast, comment, fileUrl ); }
+    public SpecExample withExampleNumber(int exampleNumber) { return new SpecExample(optionsSet, section, exampleNumber, source, html, ast, comment, fileUrl ); }
+    public SpecExample withSource(String source) { return new SpecExample(optionsSet, section, exampleNumber, source, html, ast, comment, fileUrl ); }
+    public SpecExample withHtml(String html) { return new SpecExample(optionsSet, section, exampleNumber, source, html, ast, comment, fileUrl ); }
+    public SpecExample withAst(String ast) { return new SpecExample(optionsSet, section, exampleNumber, source, html, ast, comment, fileUrl ); }
+    public SpecExample withFileUrl(UrlString fileUrl) { return new SpecExample(optionsSet, section, exampleNumber, source, html, ast, comment, fileUrl); }
+    public SpecExample withFileUrl(String fileUrl) { return new SpecExample(optionsSet, section, exampleNumber, source, html, ast, comment, new UrlString(fileUrl)); }
     // @formatter:on
 
     public boolean isFullSpecExample() {
@@ -62,6 +68,10 @@ public class SpecExample {
 
     public String getOptionsSet() {
         return optionsSet;
+    }
+
+    public UrlString getFileUrl() {
+        return fileUrl;
     }
 
     public String getSource() {

@@ -187,8 +187,7 @@ public class Attributes {
             if (!attribute.getValue().isEmpty()) sb.append("=").append("\"").append(attribute.getValue().replace("\"", "\\\"")).append("\"");
             sep = " ";
         }
-        return "Attributes{" +
-                "myAttributes=" + sb.toString() +
-                '}';
+        
+        return "Attributes{" + sb.toString() + '}';
     }
 }

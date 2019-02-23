@@ -105,6 +105,6 @@ public class ComboTableSpecTest extends ComboSpecTestCase {
         String source = readResource("/table.md");
         String html = readResource("/table.html");
 
-        assertRendering(source, html);
+        assertRendering(example.getFileUrl(), source, html);
     }
 }

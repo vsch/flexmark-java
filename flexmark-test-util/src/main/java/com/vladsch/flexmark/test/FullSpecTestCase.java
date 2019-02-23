@@ -8,6 +8,7 @@ import com.vladsch.flexmark.util.options.DataHolder;
 import org.junit.Test;
 
 import java.io.InputStream;
+import java.net.URL;
 
 import static org.junit.Assert.assertEquals;
 
@@ -17,7 +18,7 @@ public abstract class FullSpecTestCase extends RenderingTestCase implements Spec
     protected DumpSpecReader dumpSpecReader;
 
     @Override
-    public SpecReader create(InputStream inputStream) {
+    public SpecReader create(InputStream inputStream, final URL fileUrl) {
         dumpSpecReader = new DumpSpecReader(inputStream, this);
         return dumpSpecReader;
     }
@@ -52,7 +53,7 @@ public abstract class FullSpecTestCase extends RenderingTestCase implements Spec
     @Test
     public void testFullSpec() throws Exception {
         String specResourcePath = getSpecResourceName();
-        SpecReader.readExamples(specResourcePath, this);
+        SpecReader reader = SpecReader.createAndReadExamples(specResourcePath, this);
         String fullSpec = SpecReader.readSpec(specResourcePath);
         String actual = dumpSpecReader.getFullSpec();
 
@@ -60,6 +61,10 @@ public abstract class FullSpecTestCase extends RenderingTestCase implements Spec
             System.out.println(actual);
         }
 
-        assertEquals(fullSpec, actual);
+        if (reader.getFileUrl() != null) {
+            assertEquals(reader.getFileUrl().toString(), fullSpec, actual);
+        } else {
+            assertEquals(fullSpec, actual);
+        }
     }
 }

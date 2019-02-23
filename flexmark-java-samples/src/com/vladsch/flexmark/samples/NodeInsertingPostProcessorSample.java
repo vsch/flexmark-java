@@ -96,73 +96,12 @@ public class NodeInsertingPostProcessorSample {
         }
     }
 
-    // NOTE: EmbeddedAttributeProvider is part of flexmark core HtmlRenderer as of version 0.40.18 but provided here pre 0.40.18 release
-    public static class EmbeddedAttributeProvider implements AttributeProvider {
-        @Override
-        public void setAttributes(final Node node, final AttributablePart part, final Attributes attributes) {
-            if (part == AttributablePart.NODE) {
-                Node firstChild = node.getChildOfType(EmbeddedNodeAttributes.class);
-                if (firstChild instanceof EmbeddedNodeAttributes) {
-                    attributes.addValues(((EmbeddedNodeAttributes) firstChild).attributes);
-                }
-            }
-        }
-
-        public static AttributeProviderFactory Factory() {
-            return new IndependentAttributeProviderFactory() {
-                @Override
-                public AttributeProvider create(LinkResolverContext context) {
-                    //noinspection ReturnOfInnerClass
-                    return new EmbeddedAttributeProvider();
-                }
-            };
-        }
-
-        // so we can attach attributes to any node in the AST and have a generic attribute provider serve them up
-        static class EmbeddedNodeAttributes extends Node {
-            final Attributes attributes;
-
-            public EmbeddedNodeAttributes(Node parent, Attributes attributes) {
-                super(parent.getChars().subSequence(0,0));
-                this.attributes = attributes;
-            }
-
-            @Override
-            public BasedSequence[] getSegments() {
-                return Node.EMPTY_SEGMENTS;
-            }
-
-            @Override
-            public void astString(final StringBuilder out, final boolean withExtra) {
-                out.append(EmbeddedNodeAttributes.class.getSimpleName());
-                out.append("[").append(getStartOffset()).append(", ").append(getEndOffset()).append("]");
-                out.append(", attributes: ").append(attributes.toString());
-
-                if (withExtra) getAstExtra(out);
-            }
-
-            @Override
-            public void astExtraChars(final StringBuilder out) {
-            }
-        }
-    }
-    
     /**
      * An extension that registers a post processor which intentionally strips (replaces)
      * specific link and image-link tokens after parsing.
      */
-    static class NodeInsertingPostProcessorExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension {
+    static class NodeInsertingPostProcessorExtension implements Parser.ParserExtension {
         private NodeInsertingPostProcessorExtension() { }
-
-        @Override
-        public void rendererOptions(final MutableDataHolder options) {
-            // add any configuration settings to options you want to apply to everything, here
-        }
-
-        @Override
-        public void extend(final HtmlRenderer.Builder rendererBuilder, final String rendererType) {
-            rendererBuilder.attributeProviderFactory(EmbeddedAttributeProvider.Factory());
-        }
 
         @Override
         public void parserOptions(MutableDataHolder options) { }

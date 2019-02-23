@@ -43,7 +43,6 @@ import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
 
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import java.awt.*;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
@@ -52,7 +51,6 @@ import java.awt.geom.AffineTransform;
 import java.awt.geom.RoundRectangle2D;
 import java.awt.image.*;
 import java.io.*;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.regex.Pattern;
@@ -176,7 +174,7 @@ public class ImageUtils {
         try {
             ImageIO.write(image, "PNG", bos);
             byte[] imageBytes = bos.toByteArray();
-            imageString = new String(new BASE64Encoder().encode(imageBytes)).replace("\n","");
+            imageString = new String(new BASE64Encoder().encode(imageBytes)).replace("\n", "");
             //imageString = javax.xml.bind.DatatypeConverter.printBase64Binary(imageBytes);
             bos.close();
         } catch (IOException e) {
@@ -195,7 +193,7 @@ public class ImageUtils {
             FileInputStream fileInputStreamReader = new FileInputStream(file);
             byte[] imageBytes = new byte[(int) file.length()];
             if (fileInputStreamReader.read(imageBytes) != -1) {
-                return "data:image/png;base64," + new String(new BASE64Encoder().encode(imageBytes)).replace("\n","");
+                return "data:image/png;base64," + new String(new BASE64Encoder().encode(imageBytes)).replace("\n", "");
                 //return "data:image/png;base64," + javax.xml.bind.DatatypeConverter.printBase64Binary(imageBytes);
             }
             return null;
@@ -267,11 +265,21 @@ public class ImageUtils {
         return loadImageFromURL(imageURL, false);
     }
 
+    /**
+     * Load image from URL.
+     * 
+     * NOTE: Java7 JDK cannot load some images including GitHub emoji. Compiling this library with Java8 solves the problem.
+     * 
+     * @param imageURL  url of the image
+     * @param logImageProcessing  true if errors are to print to console
+     * @return image or null if failed to download.
+     */
     public static BufferedImage loadImageFromURL(String imageURL, boolean logImageProcessing) {
         if (imageURL != null) {
             try {
-                return toBufferedImage(new ImageIcon(new URL(imageURL)).getImage());
-            } catch (MalformedURLException e) {
+                Image image = ImageIO.read(new URL(imageURL));
+                return toBufferedImage(image);
+            } catch (IOException e) {
                 if (logImageProcessing) {
                     e.printStackTrace();
                 }
@@ -305,7 +313,7 @@ public class ImageUtils {
 
         g2.fill(new RoundRectangle2D.Float(0, 0, w, h, (float) cornerRadius, (float) cornerRadius));
 
-        // ... then compositing the image on top,
+        // ... then composing the image on top,
         // using the white shape from above as alpha source
         g2.setComposite(AlphaComposite.SrcAtop);
         g2.drawImage(image, 0, 0, null);

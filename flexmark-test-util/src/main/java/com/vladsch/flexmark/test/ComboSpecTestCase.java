@@ -10,6 +10,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
@@ -61,7 +62,7 @@ public abstract class ComboSpecTestCase extends FullSpecTestCase {
     }
 
     @Override
-    public SpecReader create(InputStream inputStream) {
+    public SpecReader create(InputStream inputStream, final URL fileUrl) {
         dumpSpecReader = new DumpSpecReader(inputStream, this);
         return dumpSpecReader;
     }
@@ -102,9 +103,9 @@ public abstract class ComboSpecTestCase extends FullSpecTestCase {
         if (!example.isSpecExample()) return;
 
         if (example.getAst() != null) {
-            assertRenderingAst(example.getSource(), example.getHtml(), example.getAst(), example.getOptionsSet());
+            assertRenderingAst(example.getFileUrl(), example.getSource(), example.getHtml(), example.getAst(), example.getOptionsSet());
         } else {
-            assertRendering(example.getSource(), example.getHtml(), example.getOptionsSet());
+            assertRendering(example.getFileUrl(), example.getSource(), example.getHtml(), example.getOptionsSet());
         }
     }
 
@@ -124,10 +125,9 @@ public abstract class ComboSpecTestCase extends FullSpecTestCase {
         if (!example.isFullSpecExample()) return;
 
         if (fullTestSpecStarting()) {
-
             String specResourcePath = getSpecResourceName();
             String fullSpec = SpecReader.readSpec(specResourcePath);
-            SpecReader.readExamples(specResourcePath, this);
+            SpecReader reader = SpecReader.createAndReadExamples(specResourcePath, this);
             String actual = dumpSpecReader.getFullSpec();
 
             if (outputActualFullSpec()) {
@@ -135,7 +135,12 @@ public abstract class ComboSpecTestCase extends FullSpecTestCase {
             }
 
             fullTestSpecComplete();
-            assertEquals(fullSpec, actual);
+
+            if (reader.getFileUrl() != null) {
+                assertEquals(reader.getFileUrl().toString(), fullSpec, actual);
+            } else {
+                assertEquals(fullSpec, actual);
+            }
         }
     }
 }

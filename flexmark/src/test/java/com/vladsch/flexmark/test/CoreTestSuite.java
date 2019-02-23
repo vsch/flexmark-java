@@ -25,6 +25,7 @@ import org.junit.runners.Suite;
         ComboIssuesSpecTest.class,
         TextCollectingVisitorTest.class,
         HtmlDeepParserTest.class,
+        HtmlEmbeddedAttributeTest.class,
 })
 public class CoreTestSuite {
 }

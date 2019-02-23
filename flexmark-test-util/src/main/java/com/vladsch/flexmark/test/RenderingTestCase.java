@@ -1,11 +1,12 @@
 package com.vladsch.flexmark.test;
 
+import com.vladsch.flexmark.spec.SpecExample;
+import com.vladsch.flexmark.spec.UrlString;
 import com.vladsch.flexmark.util.IParse;
 import com.vladsch.flexmark.util.IRender;
+import com.vladsch.flexmark.util.Utils;
 import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.Node;
-import com.vladsch.flexmark.spec.SpecExample;
-import com.vladsch.flexmark.util.Utils;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.DataKey;
 import com.vladsch.flexmark.util.options.MutableDataSet;
@@ -53,7 +54,6 @@ public abstract class RenderingTestCase {
      * Customize options for an example
      *
      * @param optionSet name of the options set to use
-     *
      * @return options or null to use default
      */
     public DataHolder options(String optionSet) {
@@ -66,7 +66,6 @@ public abstract class RenderingTestCase {
      *
      * @param example    spec example instance for which options are being processed
      * @param optionSets comma separate list of option set names
-     *
      * @return combined set from applying these options together
      */
     public DataHolder getOptions(SpecExample example, String optionSets) {
@@ -163,8 +162,12 @@ public abstract class RenderingTestCase {
         return parserWithOptions;
     }
 
+    protected void assertRendering(final UrlString fileUrl, String source, String expectedHtml) {
+        assertRendering(fileUrl, source, expectedHtml, null);
+    }
+
     protected void assertRendering(String source, String expectedHtml) {
-        assertRendering(source, expectedHtml, null);
+        assertRendering(null, source, expectedHtml, null);
     }
 
     /**
@@ -197,7 +200,7 @@ public abstract class RenderingTestCase {
         return result;
     }
 
-    protected void assertRendering(String source, String expectedHtml, String optionsSet) {
+    protected void assertRendering(final UrlString fileUrl, String source, String expectedHtml, String optionsSet) {
         DataHolder options = optionsSet == null ? null : getOptions(example(), optionsSet);
         String parseSource = source;
         IParse parserWithOptions = parser().withOptions(options);
@@ -290,14 +293,19 @@ public abstract class RenderingTestCase {
         if (options != null && options.get(FAIL)) {
             thrown.expect(ComparisonFailure.class);
         }
-        assertEquals(expected, actual);
+
+        if (fileUrl != null) {
+            assertEquals(fileUrl.toString(), expected, actual);
+        } else {
+            assertEquals(expected, actual);
+        }
     }
 
     //protected void assertRenderingAst(String source, String expectedHtml, String expectedAst) {
     //    assertRenderingAst(source, expectedHtml, expectedAst, null);
     //}
 
-    protected void assertRenderingAst(String source, String expectedHtml, String expectedAst, String optionsSet) {
+    protected void assertRenderingAst(final UrlString fileUrl, String source, String expectedHtml, String expectedAst, String optionsSet) {
         //assert options != null || optionsSet == null || optionsSet.isEmpty() : "Non empty optionsSet without any option customizations";
         DataHolder options = optionsSet == null ? null : getOptions(example(), optionsSet);
         String parseSource = source;
@@ -353,7 +361,7 @@ public abstract class RenderingTestCase {
         boolean embedTimed = EMBED_TIMED.getFrom(node.getDocument());
 
         if (timed || embedTimed) {
-            System.out.print(String.format(TIMED_FORMAT_STRING, "", (parse - start) / 1000000.0/iterations, (render - parse) / 1000000.0/iterations, (render - start) / 1000000.0/iterations));
+            System.out.print(String.format(TIMED_FORMAT_STRING, "", (parse - start) / 1000000.0 / iterations, (render - parse) / 1000000.0 / iterations, (render - start) / 1000000.0 / iterations));
         }
 
         testCase(node, options);
@@ -380,7 +388,7 @@ public abstract class RenderingTestCase {
         } else {
             if (embedTimed) {
                 StringBuilder outExpected = new StringBuilder();
-                outExpected.append(String.format(TIMED_FORMAT_STRING, (parse - start) / 1000000.0/iterations, (render - parse) / 1000000.0/iterations, (render - start) / 1000000.0/iterations));
+                outExpected.append(String.format(TIMED_FORMAT_STRING, (parse - start) / 1000000.0 / iterations, (render - parse) / 1000000.0 / iterations, (render - start) / 1000000.0 / iterations));
                 outExpected.append(DumpSpecReader.addSpecExample(source, expectedHtml, "", optionsSet));
                 expected = outExpected.toString();
             } else {
@@ -394,14 +402,19 @@ public abstract class RenderingTestCase {
         if (options != null && options.get(FAIL)) {
             thrown.expect(ComparisonFailure.class);
         }
-        assertEquals(expected, actual);
+
+        if (fileUrl != null) {
+            assertEquals(fileUrl.toString(), expected, actual);
+        } else {
+            assertEquals(expected, actual);
+        }
     }
 
     //protected void assertAst(String source, String expectedAst) {
     //    assertAst(source, expectedAst, null);
     //}
 
-    protected void assertAst(String source, String expectedAst, String optionsSet) {
+    protected void assertAst(final UrlString fileUrl, String source, String expectedAst, String optionsSet) {
         DataHolder options = optionsSet == null ? null : getOptions(example(), optionsSet);
         String parseSource = source;
 
@@ -429,6 +442,11 @@ public abstract class RenderingTestCase {
         }
         specExample(expected, actual, optionsSet);
         if (options != null && options.get(FAIL)) thrown.expect(ComparisonFailure.class);
-        assertEquals(expected, actual);
+
+        if (fileUrl != null) {
+            assertEquals(fileUrl.toString(), expected, actual);
+        } else {
+            assertEquals(expected, actual);
+        }
     }
 }

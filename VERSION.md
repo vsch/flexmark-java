@@ -6,7 +6,10 @@ flexmark-java
 [TOC]: # " "
 
 - [To Do](#to-do)
+    - [Tests](#tests)
+    - [Documentation/Wiki/JavaDoc](#documentationwikijavadoc)
     - [Docx Converter](#docx-converter)
+- [Next: 0.40.20](#next-04020)
 - [0.40.18](#04018)
 - [0.40.16](#04016)
 - [0.40.14](#04014)
@@ -74,8 +77,26 @@ flexmark-java
 
 ## To Do
 
+### Tests
+
 * [ ] Add: For GitHub compatibility best to use [GitHub - github/cmark-gfm] test cases and
       compare results of the two. Also add benchmarks [Benchmarks]
+
+### Documentation/Wiki/JavaDoc
+
+* [ ] Add: Wiki how to:
+  * [ ] Modify AST
+  * [ ] Detailed docs for each type of core node
+* [ ] Add: JavaDoc to all nodes briefly describing how to use them and add a link to wiki how to
+      for the block
+
+* [ ] Add: GitBook Katex math extension: inline math `$$....$$` and block math:
+
+  ```markdown
+  $$    
+  .........
+  $$ 
+  ```
 
 * Add math detection and handling for HtmlParser
 
@@ -115,14 +136,6 @@ flexmark-java
   without changing the table syntax because the macro expansion would be done during rendering
   not parsing.
 
-* [ ] Add: GitBook Katex math extension: inline math `$$....$$` and block math:
-
-  ```markdown
-  $$    
-  .........
-  $$ 
-  ```
-
 ### Docx Converter
 
 * Add: `DocxRenderer` options:
@@ -135,18 +148,34 @@ flexmark-java
 
 &nbsp;</details>
 
-0.40.18
--------
+Next: 0.40.20
+-------------
 
+* [ ] Fix: update spec.txt to latest
+* [ ] Fix: parser & html renderer for latest spec.txt
 * [ ] Fix: implement an auto-links extension which can be incorporated into the core parser as
       an option and automatically convert text to auto-links without the extra offset conversion
       and parsing. Can be a simplified auto-links extension which only parses http://, https://,
       file:// and ftp://. Leaving the e-mail links and everything else to the post processing
       extension.
-* [ ] Fix: parser & html renderer for latest spec.txt
-* [ ] Fix: test case assert to include spec example file URL with line anchor for quick
-      navigation for failed tests to the spec example. see. Mardown Navigator
-      `ParamRowGenerator` class.
+
+0.40.18
+-------
+
+* Add: `EmbeddedAttributeProvider` documentation and add it to the provider's list by default
+  unless `HtmlRenderer.EMBEDDED_NODE_PROVIDER` is set to false. Add attributes to nodes in the
+  AST by inserting a `EmbeddedAttributeProvider.EmbeddedNodeAttributes` node with the desired
+  attributes. See: [NodeInsertingPostProcessorSample.java] for example.
+* Add: document that `DocxRenderer` emoji with GitHub preferred is not able to download images,
+  compiling `ImageUtils` library with Java 8 eliminates the problem.
+* Add: resource file URL to `SpecReader` and add a message to all example tests with the file
+  URL with `:xxx` where `xxx` is the line number of the spec example in the file.
+
+  This will print the source location of the test in the console. Clicking the link goes right
+  to the spec source file and line of the failed test. Unfortunately this URL will only work in
+  IntelliJ when JetBrains add this to console to handle such `file://` URLs:
+  [YouTrack: IDEA-207453]
+* Fix: [#310, PR: Change URL of GitHub CDN] thanks to [benelog](https://github.com/benelog)
 * Fix: Update to latest version of [cmark/spec.txt] from [https://github.com/commonmark/cmark]
 * Fix: `AsideExtension` option keys to be dynamic data keys dependent on corresponding Parser
   block quote options for their defaults.
@@ -165,6 +194,7 @@ flexmark-java
       .set(INTERRUPTS_PARAGRAPH, true)
       .set(INTERRUPTS_ITEM_PARAGRAPH, true)
       .set(WITH_LEAD_SPACES_INTERRUPTS_ITEM_PARAGRAPH, true)
+
 * Deprecate: `Parser.BLOCK_QUOTE_TO_BLANK_LINE`, use more mnemonic
   `Parser.BLOCK_QUOTE_EXTEND_TO_BLANK_LINE`
 * Deprecate: `CustomNode` and `CustomBlock`. `Block` and `Node` should be used directly. The
@@ -410,7 +440,6 @@ flexmark-java
       * `com.vladsch.flexmark.formatter.internal.PhasedNodeFormatter` to `com.vladsch.flexmark.formatter.PhasedNodeFormatter`
       * `com.vladsch.flexmark.formatter.internal.NodeFormatterSubContext` to `com.vladsch.flexmark.formatter.NodeFormatterSubContext`
 <!--@formatter:on-->
-
 0.35.8
 ------
 
@@ -1112,7 +1141,6 @@ flexmark-java
   * `DocxRenderer.FIRST_HEADING_ID_SUFFIX`, default `""`, used to add a suffix to the id of the
     first heading of the document and any hyperlinks to it.
  -->
-
 For convenience these `HtmlRenderer` keys are aliased through `DocxRenderer`, keep in mind that
 setting either will affect both keys. For information on these keys see
 [`HtmlRenderer` options](https://github.com/vsch/flexmark-java/wiki/Extensions#renderer)
@@ -1142,7 +1170,6 @@ setting either will affect both keys. For information on these keys see
   * `DocxRenderer.NUMBERED_LIST_STYLE`, default "NumberedList"
   * `DocxRenderer.BLOCK_QUOTE_NUMBERED_LIST_STYLE`, default "QuotationsNumberedList"
  -->
-
 * `DocxRenderer.BOLD_STYLE`, default "StrongEmphasis"
 * `DocxRenderer.ITALIC_STYLE`, default "Emphasis"
 * `DocxRenderer.STRIKE_THROUGH_STYLE`, default "Strikethrough"
@@ -1184,11 +1211,14 @@ setting either will affect both keys. For information on these keys see
 [#300, Typography extension breaks some auto links]: https://github.com/vsch/flexmark-java/issues/300
 [#305, PR: add new youtube link style support to flexmark-ext-youtube-embedded for youtu.be/xyz(?t=123)]: https://github.com/vsch/flexmark-java/pull/305
 [#306, PR: Add password protection support]: https://github.com/vsch/flexmark-java/pull/306
+[#310, PR: Change URL of GitHub CDN]: https://github.com/vsch/flexmark-java/pull/310
 [#99, YamlFrontMatterBlockParser ignores multi-key list items]: https://github.com/vsch/flexmark-java/issues/99
 [Admonition Extension, Material for MkDocs]: https://squidfunk.github.io/mkdocs-material/extensions/admonition/
-[migrate 0_35_x to 0_40_0.xml]: /assets/migrations/migrate%20flexmark-java%200_35_x%20to%200_40_0.xml
-[GitHub - github/cmark-gfm]: https://github.com/github/cmark-gfm "GitHub - github/cmark-gfm: GitHub's fork of cmark, a CommonMark parsing and rendering library and program in C"
 [Benchmarks]: https://github.com/github/cmark-gfm/blob/master/benchmarks.md
 [cmark/spec.txt]: https://github.com/commonmark/cmark/blob/master/test/spec.txt "cmark/spec.txt at master · commonmark/cmark · GitHub"
+[GitHub - github/cmark-gfm]: https://github.com/github/cmark-gfm "GitHub - github/cmark-gfm: GitHub's fork of cmark, a CommonMark parsing and rendering library and program in C"
 [https://github.com/commonmark/cmark]: https://github.com/commonmark/cmark "GitHub - commonmark/cmark: CommonMark parsing and rendering library and program in C"
+[migrate 0_35_x to 0_40_0.xml]: /assets/migrations/migrate%20flexmark-java%200_35_x%20to%200_40_0.xml
+[NodeInsertingPostProcessorSample.java]: https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/samples/NodeInsertingPostProcessorSample.java
+[YouTrack: IDEA-207453]: https://youtrack.jetbrains.com/issue/IDEA-207453 "Add Conversion of ref anchor to UrlFilter for file line navigation"
 

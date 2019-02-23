@@ -1,14 +1,14 @@
 package com.vladsch.flexmark.html;
 
 import com.vladsch.flexmark.Extension;
-import com.vladsch.flexmark.util.IRender;
-import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.ast.HtmlBlock;
 import com.vladsch.flexmark.ast.HtmlInline;
-import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.html.renderer.*;
 import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.util.IRender;
 import com.vladsch.flexmark.util.Pair;
+import com.vladsch.flexmark.util.ast.Document;
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.collection.DataValueFactory;
 import com.vladsch.flexmark.util.collection.DynamicDefaultKey;
 import com.vladsch.flexmark.util.dependency.DependencyHandler;
@@ -89,6 +89,7 @@ public class HtmlRenderer implements IRender {
     // regex for suppressed link prefixes
     public static final DataKey<String> SUPPRESSED_LINKS = new DataKey<>("SUPPRESSED_LINKS", "javascript:.*");
     public static final DataKey<Boolean> NO_P_TAGS_USE_BR = new DataKey<>("NO_P_TAGS_USE_BR", false);
+    public static final DataKey<Boolean> EMBEDDED_ATTRIBUTE_PROVIDER = new DataKey<>("EMBEDDED_ATTRIBUTE_PROVIDER", true);
 
     /**
      * output control for FormattingAppendable, see {@link com.vladsch.flexmark.util.html.FormattingAppendable#setOptions(int)}
@@ -152,7 +153,13 @@ public class HtmlRenderer implements IRender {
         nodeRendererFactories = resolver.resolveDependencies(nodeRenderers).getNodeRendererFactories();
 
         // KLUDGE: but for now works
+        boolean addEmbedded = !builder.attributeProviderFactories.containsKey(EmbeddedAttributeProvider.Factory.getClass());
         List<AttributeProviderFactory> values = new ArrayList<>(builder.attributeProviderFactories.values());
+        if (addEmbedded && EMBEDDED_ATTRIBUTE_PROVIDER.getFrom(options)) {
+            // add it first so the rest can override it if needed
+            values.add(0, EmbeddedAttributeProvider.Factory);
+        }
+        
         this.attributeProviderFactories = FlatDependencyHandler.computeDependencies(values);
         this.linkResolverFactories = FlatDependencyHandler.computeDependencies(builder.linkResolverFactories);
     }

@@ -179,9 +179,9 @@ public abstract class FileSpecTestCase extends RenderingTestCase {
         if (!example.isSpecExample()) return;
 
         if (example.getAst() != null) {
-            assertRenderingAst(example.getSource(), example.getHtml(), example.getAst(), example.getOptionsSet());
+            assertRenderingAst(example.getFileUrl(), example.getSource(), example.getHtml(), example.getAst(), example.getOptionsSet());
         } else {
-            assertRendering(example.getSource(), example.getHtml(), example.getOptionsSet());
+            assertRendering(example.getFileUrl(), example.getSource(), example.getHtml(), example.getOptionsSet());
         }
     }
 }

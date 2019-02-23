@@ -1,5 +1,6 @@
 package com.vladsch.flexmark.convert.html;
 
+import com.vladsch.flexmark.spec.UrlString;
 import com.vladsch.flexmark.util.IParse;
 import com.vladsch.flexmark.util.IRender;
 import com.vladsch.flexmark.util.ast.Node;
@@ -17,6 +18,7 @@ import org.junit.ComparisonFailure;
 import org.junit.runners.Parameterized;
 
 import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -161,14 +163,14 @@ public class ComboFlexmarkHtmlParserTest extends ComboSpecTestCase {
     }
 
     @Override
-    public SpecReader create(InputStream inputStream) {
+    public SpecReader create(InputStream inputStream, final URL fileUrl) {
         dumpSpecReader = new HtmlSpecReader(inputStream, this);
         return dumpSpecReader;
     }
 
     // reverse source and html
     @Override
-    protected void assertRendering(String source, String expectedHtml, String optionsSet) {
+    protected void assertRendering(final UrlString fileUrl, String source, String expectedHtml, String optionsSet) {
         DataHolder options = optionsSet == null ? null : getOptions(example(), optionsSet);
         String parseSource = expectedHtml;
 
@@ -204,6 +206,11 @@ public class ComboFlexmarkHtmlParserTest extends ComboSpecTestCase {
         if (options != null && options.get(FAIL)) {
             thrown.expect(ComparisonFailure.class);
         }
-        assertEquals(expected, actual);
+        
+        if (fileUrl != null) {
+            assertEquals(fileUrl.toString(), expected, actual);
+        } else {
+            assertEquals(expected, actual);
+        }
     }
 }

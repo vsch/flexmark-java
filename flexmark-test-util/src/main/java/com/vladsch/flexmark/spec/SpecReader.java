@@ -6,6 +6,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,11 +38,15 @@ public class SpecReader {
     protected StringBuilder ast;
     protected StringBuilder comment;
     protected int exampleNumber = 0;
-
+    final protected URL fileUrl;
+    protected int lineNumber = 0;
+    protected int contentLineNumber = 0;
+    
     protected List<SpecExample> examples = new ArrayList<SpecExample>();
 
-    protected SpecReader(InputStream stream) {
+    protected SpecReader(InputStream stream, final URL fileUrl) {
         this.inputStream = stream;
+        this.fileUrl = fileUrl;
     }
 
     public static List<SpecExample> readExamples() {
@@ -55,12 +61,28 @@ public class SpecReader {
         return examples;
     }
 
+    public static SpecReader createAndReadExamples(String specResource, SpecReaderFactory readerFactory) {
+        try {
+            SpecReader reader;
+            InputStream stream = getSpecInputStream(specResource);
+            URL fileUrl = getSpecInputFileUrl(specResource);
+            if (readerFactory == null) reader = new SpecReader(stream, fileUrl);
+            else reader = readerFactory.create(stream, fileUrl);
+            reader.read();
+            return reader;
+            
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public static List<SpecExample> readExamples(String specResource, SpecReaderFactory readerFactory) {
         try {
             SpecReader reader;
             InputStream stream = getSpecInputStream(specResource);
-            if (readerFactory == null) reader = new SpecReader(stream);
-            else reader = readerFactory.create(stream);
+            URL fileUrl = getSpecInputFileUrl(specResource);
+            if (readerFactory == null) reader = new SpecReader(stream, fileUrl);
+            else reader = readerFactory.create(stream, fileUrl);
             return reader.read();
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -117,12 +139,20 @@ public class SpecReader {
         return stream;
     }
 
+    public static URL getSpecInputFileUrl(String specResource) {
+        String specPath = specResource != null ? specResource : "/spec.txt";
+        URL url = SpecReader.class.getResource(specPath);
+        return url;
+    }
+
     protected List<SpecExample> read() throws IOException {
         resetContents();
 
         String line;
+        lineNumber = 0;
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, Charset.forName("UTF-8")));
         while ((line = reader.readLine()) != null) {
+            lineNumber++;
             processLine(line);
         }
 
@@ -138,9 +168,14 @@ public class SpecReader {
         examples.add(example);
     }
 
+    public UrlString getFileUrl() {
+        return new UrlString(fileUrl, contentLineNumber);
+    }
+
     protected void processLine(String line) {
         boolean lineAbsorbed = false;
         boolean lineProcessed = false;
+        UrlString fileUrl = getFileUrl();
 
         switch (state) {
             case BEFORE:
@@ -157,6 +192,7 @@ public class SpecReader {
 
                     state = State.SOURCE;
                     exampleNumber++;
+                    contentLineNumber = lineNumber;
                     lineAbsorbed = true;
                 }
                 break;
@@ -174,7 +210,7 @@ public class SpecReader {
             case HTML:
                 if (line.equals(EXAMPLE_BREAK)) {
                     state = State.BEFORE;
-                    addSpecExample(new SpecExample(optionsSet, section, exampleNumber, source.toString(), html.toString(), null, comment == null ? null : comment.toString()));
+                    addSpecExample(new SpecExample(optionsSet, section, exampleNumber, source.toString(), html.toString(), null, comment == null ? null : comment.toString(), fileUrl));
                     resetContents();
                     lineAbsorbed = true;
                 } else if (line.equals(TYPE_BREAK)) {
@@ -189,7 +225,7 @@ public class SpecReader {
             case AST:
                 if (line.equals(EXAMPLE_BREAK)) {
                     state = State.BEFORE;
-                    addSpecExample(new SpecExample(optionsSet, section, exampleNumber, source.toString(), html.toString(), ast.toString(), comment == null ? null : comment.toString()));
+                    addSpecExample(new SpecExample(optionsSet, section, exampleNumber, source.toString(), html.toString(), ast.toString(), comment == null ? null : comment.toString(), fileUrl));
                     resetContents();
                     lineAbsorbed = true;
                 } else {
@@ -200,7 +236,7 @@ public class SpecReader {
         }
 
         if (!lineAbsorbed) {
-            if (lineProcessed)  {
+            if (lineProcessed) {
                 comment = null;
             } else if (section != null) {
                 if (comment == null) comment = new StringBuilder();
@@ -209,13 +245,14 @@ public class SpecReader {
             addSpecLine(line);
         }
     }
-
+    
     protected void resetContents() {
         optionsSet = "";
         source = new StringBuilder();
         html = new StringBuilder();
         ast = new StringBuilder();
         comment = null;
+        contentLineNumber = 0;
     }
 
     protected enum State {

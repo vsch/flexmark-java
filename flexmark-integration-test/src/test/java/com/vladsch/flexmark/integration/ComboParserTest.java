@@ -110,7 +110,7 @@ public class ComboParserTest extends ComboSpecTestCase {
         String source = readResource("/wrap.md");
         String html = readResource("/wrap.html");
 
-        assertRendering(source, html);
+        assertRendering(example.getFileUrl(), source, html);
     }
 
     @Test

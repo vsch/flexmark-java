@@ -2839,20 +2839,196 @@ TEXT :+1: TEXT
 ````````````````````````````````
 
 
-```````````````````````````````` example(Emoji: 3) options(emoji-github)
-# Heading 1 :+1:
+```````````````````````````````` example Emoji: 3
+TEXT ![](https://s3.amazonaws.com/vladsch-env/images/MNLogo.png) TEXT
+.
+<w:body>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="ParagraphTextBody"/>
+        </w:pPr>
+        <w:r>
+            <w:t xml:space="preserve">TEXT </w:t>
+        </w:r>
+        <w:r>
+            <w:drawing>
+                <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
+                    <wp:extent cx="2095500" cy="2095500"/>
+                    <wp:effectExtent b="0" l="0" r="0" t="0"/>
+                    <wp:docPr descr="" id="0" name="Image1"/>
+                    <wp:cNvGraphicFramePr>
+                        <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
+                    </wp:cNvGraphicFramePr>
+                    <a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
+                        <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                            <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                                <pic:nvPicPr>
+                                    <pic:cNvPr id="1" name="Image1"/>
+                                    <pic:cNvPicPr/>
+                                </pic:nvPicPr>
+                                <pic:blipFill>
+                                    <a:blip r:embed="rId3" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"/>
+                                    <a:stretch>
+                                    <a:fillRect/>
+                                    </a:stretch>
+                                </pic:blipFill>
+                                <pic:spPr>
+                                    <a:xfrm>
+                                    <a:off x="0" y="0"/>
+                                    <a:ext cx="2095500" cy="2095500"/>
+                                    </a:xfrm>
+                                    <a:prstGeom prst="rect">
+                                    <a:avLst/>
+                                    </a:prstGeom>
+                                </pic:spPr>
+                            </pic:pic>
+                        </a:graphicData>
+                    </a:graphic>
+                </wp:inline>
+            </w:drawing>
+        </w:r>
+        <w:r>
+            <w:t xml:space="preserve"> TEXT</w:t>
+        </w:r>
+    </w:p>
+</w:body>
+````````````````````````````````
 
-## Heading 2 :+1:
 
-### Heading 3 :+1:
+```````````````````````````````` example Emoji: 4
+TEXT ![](https://vladsch.com/images/MNLogo.png) TEXT
+.
+<w:body>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="ParagraphTextBody"/>
+        </w:pPr>
+        <w:r>
+            <w:t xml:space="preserve">TEXT </w:t>
+        </w:r>
+        <w:r>
+            <w:drawing>
+                <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
+                    <wp:extent cx="2095500" cy="2095500"/>
+                    <wp:effectExtent b="0" l="0" r="0" t="0"/>
+                    <wp:docPr descr="" id="0" name="Image1"/>
+                    <wp:cNvGraphicFramePr>
+                        <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
+                    </wp:cNvGraphicFramePr>
+                    <a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
+                        <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                            <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                                <pic:nvPicPr>
+                                    <pic:cNvPr id="1" name="Image1"/>
+                                    <pic:cNvPicPr/>
+                                </pic:nvPicPr>
+                                <pic:blipFill>
+                                    <a:blip r:embed="rId3" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"/>
+                                    <a:stretch>
+                                    <a:fillRect/>
+                                    </a:stretch>
+                                </pic:blipFill>
+                                <pic:spPr>
+                                    <a:xfrm>
+                                    <a:off x="0" y="0"/>
+                                    <a:ext cx="2095500" cy="2095500"/>
+                                    </a:xfrm>
+                                    <a:prstGeom prst="rect">
+                                    <a:avLst/>
+                                    </a:prstGeom>
+                                </pic:spPr>
+                            </pic:pic>
+                        </a:graphicData>
+                    </a:graphic>
+                </wp:inline>
+            </w:drawing>
+        </w:r>
+        <w:r>
+            <w:t xml:space="preserve"> TEXT</w:t>
+        </w:r>
+    </w:p>
+</w:body>
+````````````````````````````````
 
-#### Heading 4 :+1:
 
-##### Heading 5 :+1:
-
-###### Heading 6 :+1:
-
+```````````````````````````````` example Emoji: 5
 TEXT :+1: TEXT
+.
+<w:body>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="ParagraphTextBody"/>
+        </w:pPr>
+        <w:r>
+            <w:t xml:space="preserve">TEXT </w:t>
+        </w:r>
+        <w:r>
+            <w:rPr>
+                <w:position w:val="-2"/>
+            </w:rPr>
+            <w:drawing>
+                <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
+                    <wp:extent cx="146685" cy="146685"/>
+                    <wp:effectExtent b="0" l="0" r="0" t="0"/>
+                    <wp:docPr descr="emoji people:+1" id="0" name="Image1"/>
+                    <wp:cNvGraphicFramePr>
+                        <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
+                    </wp:cNvGraphicFramePr>
+                    <a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
+                        <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                            <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                                <pic:nvPicPr>
+                                    <pic:cNvPr id="1" name="Image1"/>
+                                    <pic:cNvPicPr/>
+                                </pic:nvPicPr>
+                                <pic:blipFill>
+                                    <a:blip r:embed="rId3" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"/>
+                                    <a:stretch>
+                                    <a:fillRect/>
+                                    </a:stretch>
+                                </pic:blipFill>
+                                <pic:spPr>
+                                    <a:xfrm>
+                                    <a:off x="0" y="0"/>
+                                    <a:ext cx="146685" cy="146685"/>
+                                    </a:xfrm>
+                                    <a:prstGeom prst="rect">
+                                    <a:avLst/>
+                                    </a:prstGeom>
+                                </pic:spPr>
+                            </pic:pic>
+                        </a:graphicData>
+                    </a:graphic>
+                </wp:inline>
+            </w:drawing>
+        </w:r>
+        <w:r>
+            <w:t xml:space="preserve"> TEXT</w:t>
+        </w:r>
+    </w:p>
+</w:body>
+````````````````````````````````
+
+
+## GitHub
+
+GitHub sourced images do not load with Java 7, disabled tests until Java 8 is minimal supported
+version.
+
+```````````````````````````````` example(GitHub: 1) options(IGNORED)
+# Heading 1 :basecamp:
+
+## Heading 2 :basecamp:
+
+### Heading 3 :basecamp:
+
+#### Heading 4 :basecamp:
+
+##### Heading 5 :basecamp:
+
+###### Heading 6 :basecamp:
+
+TEXT :basecamp: TEXT
 
 .
 <w:body>
@@ -3235,7 +3411,69 @@ TEXT :+1: TEXT
 ````````````````````````````````
 
 
-```````````````````````````````` example(Emoji: 4) options(emoji-github)
+```````````````````````````````` example(GitHub: 2) options(IGNORED)
+TEXT ![](https://github.githubassets.com/images/icons/emoji/unicode/1f44d.png) TEXT
+.
+<w:body>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="ParagraphTextBody"/>
+        </w:pPr>
+        <w:r>
+            <w:t xml:space="preserve">TEXT </w:t>
+        </w:r>
+        <w:r>
+            <w:drawing>
+                <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
+                    <wp:extent cx="2095500" cy="2095500"/>
+                    <wp:effectExtent b="0" l="0" r="0" t="0"/>
+                    <wp:docPr descr="" id="0" name="Image1"/>
+                    <wp:cNvGraphicFramePr>
+                        <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
+                    </wp:cNvGraphicFramePr>
+                    <a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
+                        <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                            <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                                <pic:nvPicPr>
+                                    <pic:cNvPr id="1" name="Image1"/>
+                                    <pic:cNvPicPr/>
+                                </pic:nvPicPr>
+                                <pic:blipFill>
+                                    <a:blip r:embed="rId3" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"/>
+                                    <a:stretch>
+                                    <a:fillRect/>
+                                    </a:stretch>
+                                </pic:blipFill>
+                                <pic:spPr>
+                                    <a:xfrm>
+                                    <a:off x="0" y="0"/>
+                                    <a:ext cx="2095500" cy="2095500"/>
+                                    </a:xfrm>
+                                    <a:prstGeom prst="rect">
+                                    <a:avLst/>
+                                    </a:prstGeom>
+                                </pic:spPr>
+                            </pic:pic>
+                        </a:graphicData>
+                    </a:graphic>
+                </wp:inline>
+            </w:drawing>
+        </w:r>
+        <w:r>
+            <w:t xml:space="preserve"> TEXT</w:t>
+        </w:r>
+    </w:p>
+</w:body>
+````````````````````````````````
+
+
+```````````````````````````````` example(GitHub: 3) options(emoji-github, IGNORED)
+TEXT :+1: TEXT
+.
+````````````````````````````````
+
+
+```````````````````````````````` example(GitHub: 4) options(emoji-github, IGNORED)
 # Heading 1 :basecamp:
 
 ## Heading 2 :basecamp:
@@ -3631,7 +3869,7 @@ TEXT :basecamp: TEXT
 ````````````````````````````````
 
 
-```````````````````````````````` example(Emoji: 5) options(emoji-unicode)
+```````````````````````````````` example(GitHub: 5) options(emoji-unicode)
 # Heading 1 :+1:
 
 ## Heading 2 :+1:

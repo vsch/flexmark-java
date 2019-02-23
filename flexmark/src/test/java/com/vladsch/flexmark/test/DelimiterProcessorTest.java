@@ -2,7 +2,6 @@ package com.vladsch.flexmark.test;
 
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.ast.DelimitedNode;
-import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.ast.Text;
 import com.vladsch.flexmark.html.CustomNodeRenderer;
 import com.vladsch.flexmark.html.HtmlRenderer;
@@ -49,16 +48,16 @@ public class DelimiterProcessorTest extends RenderingTestCase {
 
     @Test
     public void asymmetricDelimiter() {
-        assertRendering("{foo} bar", "<p>FOO bar</p>\n");
-        assertRendering("f{oo ba}r", "<p>fOO BAr</p>\n");
-        assertRendering("{{foo} bar", "<p>{FOO bar</p>\n");
-        assertRendering("{foo}} bar", "<p>FOO} bar</p>\n");
-        assertRendering("{{foo} bar}", "<p>FOO BAR</p>\n");
-        assertRendering("{foo bar", "<p>{foo bar</p>\n");
-        assertRendering("foo} bar", "<p>foo} bar</p>\n");
-        assertRendering("}foo} bar", "<p>}foo} bar</p>\n");
-        assertRendering("{foo{ bar", "<p>{foo{ bar</p>\n");
-        assertRendering("}foo{ bar", "<p>}foo{ bar</p>\n");
+        assertRendering( "{foo} bar", "<p>FOO bar</p>\n");
+        assertRendering( "f{oo ba}r", "<p>fOO BAr</p>\n");
+        assertRendering( "{{foo} bar", "<p>{FOO bar</p>\n");
+        assertRendering( "{foo}} bar", "<p>FOO} bar</p>\n");
+        assertRendering( "{{foo} bar}", "<p>FOO BAR</p>\n");
+        assertRendering( "{foo bar", "<p>{foo bar</p>\n");
+        assertRendering( "foo} bar", "<p>foo} bar</p>\n");
+        assertRendering( "}foo} bar", "<p>}foo} bar</p>\n");
+        assertRendering( "{foo{ bar", "<p>{foo{ bar</p>\n");
+        assertRendering( "}foo{ bar", "<p>}foo{ bar</p>\n");
     }
 
     @Override

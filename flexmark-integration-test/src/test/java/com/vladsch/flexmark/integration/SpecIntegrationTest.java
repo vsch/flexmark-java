@@ -45,7 +45,7 @@ public class SpecIntegrationTest extends SpecTestCase {
     public void testHtmlRendering() {
         String expectedHtml = OVERRIDDEN_EXAMPLES.get(example.getSource());
         if (expectedHtml != null) {
-            assertRendering(example.getSource(), expectedHtml);
+            assertRendering(example.getFileUrl(), example.getSource(), expectedHtml);
         } else {
             super.testHtmlRendering();
         }

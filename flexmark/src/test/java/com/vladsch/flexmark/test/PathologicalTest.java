@@ -34,58 +34,50 @@ public class PathologicalTest extends CoreRenderingTestCase {
         // this is limited by the stack size because visitor is recursive
         x = 500;
         assertRendering(
-                Strings.repeat("*a **a ", x) + "b" + Strings.repeat(" a** a*", x),
-                "<p>" + Strings.repeat("<em>a <strong>a ", x) + "b" +
+                Strings.repeat("*a **a ", x) + "b" + Strings.repeat(" a** a*", x), "<p>" + Strings.repeat("<em>a <strong>a ", x) + "b" +
                         Strings.repeat(" a</strong> a</em>", x) + "</p>\n");
     }
 
     @Test
     public void emphasisClosersWithNoOpeners() {
         assertRendering(
-                Strings.repeat("a_ ", x),
-                "<p>" + Strings.repeat("a_ ", x - 1) + "a_</p>\n");
+                Strings.repeat("a_ ", x), "<p>" + Strings.repeat("a_ ", x - 1) + "a_</p>\n");
     }
 
     @Test
     public void emphasisOpenersWithNoClosers() {
         assertRendering(
-                Strings.repeat("_a ", x),
-                "<p>" + Strings.repeat("_a ", x - 1) + "_a</p>\n");
+                Strings.repeat("_a ", x), "<p>" + Strings.repeat("_a ", x - 1) + "_a</p>\n");
     }
 
     @Test
     public void linkClosersWithNoOpeners() {
         assertRendering(
-                Strings.repeat("a] ", x),
-                "<p>" + Strings.repeat("a] ", x - 1) + "a]</p>\n");
+                Strings.repeat("a] ", x), "<p>" + Strings.repeat("a] ", x - 1) + "a]</p>\n");
     }
 
     @Test
     public void linkOpenersWithNoClosers() {
         assertRendering(
-                Strings.repeat("[a ", x),
-                "<p>" + Strings.repeat("[a ", x - 1) + "[a</p>\n");
+                Strings.repeat("[a ", x), "<p>" + Strings.repeat("[a ", x - 1) + "[a</p>\n");
     }
 
     @Test
     public void linkOpenersAndEmphasisClosers() {
         assertRendering(
-                Strings.repeat("[ a_ ", x),
-                "<p>" + Strings.repeat("[ a_ ", x - 1) + "[ a_</p>\n");
+                Strings.repeat("[ a_ ", x), "<p>" + Strings.repeat("[ a_ ", x - 1) + "[ a_</p>\n");
     }
 
     @Test
     public void mismatchedOpenersAndClosers() {
         assertRendering(
-                Strings.repeat("*a_ ", x),
-                "<p>" + Strings.repeat("*a_ ", x - 1) + "*a_</p>\n");
+                Strings.repeat("*a_ ", x), "<p>" + Strings.repeat("*a_ ", x - 1) + "*a_</p>\n");
     }
 
     @Test
     public void nestedBrackets() {
         assertRendering(
-                Strings.repeat("[", x) + "a" + Strings.repeat("]", x),
-                "<p>" + Strings.repeat("[", x) + "a" + Strings.repeat("]", x) + "</p>\n");
+                Strings.repeat("[", x) + "a" + Strings.repeat("]", x), "<p>" + Strings.repeat("[", x) + "a" + Strings.repeat("]", x) + "</p>\n");
     }
 
     @Test
@@ -93,8 +85,7 @@ public class PathologicalTest extends CoreRenderingTestCase {
         // this is limited by the stack size because visitor is recursive
         x = 500;
         assertRendering(
-                Strings.repeat("> ", x) + "a\n",
-                Strings.repeat("<blockquote>\n", x) + "<p>a</p>\n" +
+                Strings.repeat("> ", x) + "a\n", Strings.repeat("<blockquote>\n", x) + "<p>a</p>\n" +
                         Strings.repeat("</blockquote>\n", x));
     }
 }

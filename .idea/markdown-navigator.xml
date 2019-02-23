@@ -6,7 +6,7 @@
         <provider providerId="com.vladsch.idea.multimarkdown.editor.javafx.html.panel" providerName="JavaFX WebView" />
       </PanelProvider>
     </PreviewSettings>
-    <ParserSettings gitHubSyntaxChange="false" emojiShortcuts="0" emojiImages="0">
+    <ParserSettings gitHubSyntaxChange="false" emojiShortcuts="1" emojiImages="0">
       <PegdownExtensions>
         <option name="ABBREVIATIONS" value="false" />
         <option name="ANCHORLINKS" value="false" />
@@ -31,7 +31,7 @@
         <option name="TABLES" value="true" />
         <option name="TASKLISTITEMS" value="true" />
         <option name="TOC" value="true" />
-        <option name="WIKILINKS" value="false" />
+        <option name="WIKILINKS" value="true" />
       </PegdownExtensions>
       <ParserOptions>
         <option name="ADMONITION_EXT" value="false" />
@@ -40,12 +40,12 @@
         <option name="DUMMY" value="false" />
         <option name="EMOJI_SHORTCUTS" value="true" />
         <option name="ENUMERATED_REFERENCES_EXT" value="false" />
-        <option name="FLEXMARK_FRONT_MATTER" value="false" />
+        <option name="FLEXMARK_FRONT_MATTER" value="true" />
         <option name="GFM_LOOSE_BLANK_LINE_AFTER_ITEM_PARA" value="false" />
         <option name="GFM_TABLE_RENDERING" value="true" />
         <option name="GITBOOK_URL_ENCODING" value="false" />
         <option name="GITHUB_LISTS" value="false" />
-        <option name="GITHUB_WIKI_LINKS" value="false" />
+        <option name="GITHUB_WIKI_LINKS" value="true" />
         <option name="GITLAB_EXT" value="false" />
         <option name="GITLAB_MATH_EXT" value="false" />
         <option name="GITLAB_MERMAID_EXT" value="false" />

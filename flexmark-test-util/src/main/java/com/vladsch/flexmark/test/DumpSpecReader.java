@@ -22,7 +22,7 @@ public class DumpSpecReader extends SpecReader {
     protected StringBuilder exampleComment;
 
     public DumpSpecReader(InputStream stream, FullSpecTestCase testCase) {
-        super(stream);
+        super(stream, SpecReader.getSpecInputFileUrl(testCase.getSpecResourceName()));
         this.testCase = testCase;
     }
 
