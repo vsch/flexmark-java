@@ -1,8 +1,11 @@
 package com.vladsch.flexmark.convert.html;
 
+import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.spec.UrlString;
 import com.vladsch.flexmark.util.IParse;
 import com.vladsch.flexmark.util.IRender;
+import com.vladsch.flexmark.util.Ref;
+import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.spec.SpecExample;
@@ -89,6 +92,15 @@ public class ComboFlexmarkHtmlParserTest extends ComboSpecTestCase {
         optionsMap.put("img-ref", new MutableDataSet().set(FlexmarkHtmlParser.EXT_INLINE_IMAGE, LinkConversion.MARKDOWN_REFERENCE));
         optionsMap.put("img-text", new MutableDataSet().set(FlexmarkHtmlParser.EXT_INLINE_IMAGE, LinkConversion.TEXT));
         optionsMap.put("img-html", new MutableDataSet().set(FlexmarkHtmlParser.EXT_INLINE_IMAGE, LinkConversion.HTML));
+        
+        optionsMap.put("for-document", new MutableDataSet().set(FlexmarkHtmlParser.FOR_DOCUMENT, new Ref<Document>(linkDocument())));
+    }
+    
+    private static Document linkDocument() {
+        return Parser.builder().build().parse("" +
+                "[example.com]: http://example.com\n" +
+                "[example image]: http://example.com/image.png 'Title'\n" +
+                "");
     }
 
     private static final IParse PARSER = new HtmlParser(OPTIONS);

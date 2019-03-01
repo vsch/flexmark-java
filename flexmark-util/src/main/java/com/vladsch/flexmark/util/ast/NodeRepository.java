@@ -48,6 +48,10 @@ public abstract class NodeRepository<T> implements Map<String, T> {
     public T putRawKey(CharSequence key, T t) {
         return put(normalizeKey(key), t);
     }
+    
+    public Collection<T> getValues() {
+        return nodeMap.values();
+    }
 
     @Override
     public T put(String s, T t) {

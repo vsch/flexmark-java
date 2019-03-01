@@ -30,17 +30,17 @@ public class UrlString {
         if (externalForm.startsWith("file:/")) {
             String noFileProtocol = externalForm.substring("file:".length());
             if (noFileProtocol.contains(TARGET_TEST_CLASSES)) {
-                return FILE_PROTOCOL + noFileProtocol.replace(TARGET_TEST_CLASSES, "/src/test/resources/");
+                return noFileProtocol.replace(TARGET_TEST_CLASSES, "/src/test/resources/");
             } else {
                 int pos = noFileProtocol.indexOf(OUT_TEST);
                 if (pos > 0) {
                     int pathPos = noFileProtocol.indexOf("/", pos + OUT_TEST.length());
                     if (pathPos > 0) {
-                        return FILE_PROTOCOL + noFileProtocol.substring(0, pos) + "/" + noFileProtocol.substring(pos + OUT_TEST.length(), pathPos) + "/src/test/resources/" + noFileProtocol.substring(pathPos + 1);
+                        return noFileProtocol.substring(0, pos) + "/" + noFileProtocol.substring(pos + OUT_TEST.length(), pathPos) + "/src/test/resources/" + noFileProtocol.substring(pathPos + 1);
                     }
                 }
             }
-            return FILE_PROTOCOL + noFileProtocol;
+            return noFileProtocol;
         } else return externalForm;
     }
 

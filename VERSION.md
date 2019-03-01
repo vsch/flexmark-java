@@ -5,11 +5,8 @@ flexmark-java
 
 [TOC]: # " "
 
-- [To Do](#to-do)
-    - [Tests](#tests)
-    - [Documentation/Wiki/JavaDoc](#documentationwikijavadoc)
-    - [Docx Converter](#docx-converter)
-- [Next: 0.40.20](#next-04020)
+- [Next 0.40.22](#next-04022)
+- [0.40.20](#04020)
 - [0.40.18](#04018)
 - [0.40.16](#04016)
 - [0.40.14](#04014)
@@ -73,98 +70,47 @@ flexmark-java
 - [0.30.0](#0300)
 
 
-&nbsp;</details><details id="version-history"><summary>**To Do**</summary>
-
-## To Do
-
-### Tests
-
-* [ ] Add: For GitHub compatibility best to use [GitHub - github/cmark-gfm] test cases and
-      compare results of the two. Also add benchmarks [Benchmarks]
-
-### Documentation/Wiki/JavaDoc
-
-* [ ] Add: Wiki how to:
-  * [ ] Modify AST
-  * [ ] Detailed docs for each type of core node
-* [ ] Add: JavaDoc to all nodes briefly describing how to use them and add a link to wiki how to
-      for the block
-
-* [ ] Add: GitBook Katex math extension: inline math `$$....$$` and block math:
-
-  ```markdown
-  $$    
-  .........
-  $$ 
-  ```
-
-* Add math detection and handling for HtmlParser
-
-* Change: Extensions wiki from table format for options to list, easier to maintain and read
-  when descriptions can benefit form complex formatting
-
-* Fix: clean up and verify the Extensions wiki options lists for name changes, missing or extra
-  entries. Update description for better understanding
-
-* Add: generated HTML element positions to `TagRanges` to allow mapping from source offset to
-  HTML offset for the element(s). This is needed to allow synchronization with source when using
-  an attribute to hold the source information is not an option.
-
-* Fix: regex can go into infinite loop
-
-* Change: complete parser profiles for variations within a family
-  [Markdown Parser Emulation](MarkdownProcessorsEmulation.md).
-  * League/CommonMark
-  * Jekyll
-  * Php Markdown Extra
-  * CommonMark (default for family): `ParserEmulationProfile.COMMONMARK`
-  * FixedIndent (default for family): `ParserEmulationProfile.FIXED_INDENT`
-  * GitHub Comments (just CommonMark): `ParserEmulationProfile.COMMONMARK`
-  * GitHub Docs: (Now CommonMark): `ParserEmulationProfile.COMMONMARK`, old parsing was
-    `ParserEmulationProfile.GITHUB_DOC`
-  * Kramdown (default for family): `ParserEmulationProfile.KRAMDOWN`
-  * Markdown.pl (default for family): `ParserEmulationProfile.MARKDOWN`
-  * MultiMarkdown: `ParserEmulationProfile.MULTI_MARKDOWN`
-  * Pegdown, with pegdown extensions use `PegdownOptionsAdapter` in `flexmark-profile-pegdown`
-  * Pegdown, without pegdown extensions `ParserEmulationProfile.PEGDOWN`
-
-* Add hierarchical anchor id generation for headings: will splice parent heading id with child
-  id to create unique ids based on header hierarchy.
-
-* Add macro module that would allow inserting arbitrary markdown into table cells. This would be
-  less readable but would give complete flexibility to generate tables with complex content
-  without changing the table syntax because the macro expansion would be done during rendering
-  not parsing.
-
-### Docx Converter
-
-* Add: `DocxRenderer` options:
-  * `TABLE_WIDTH_TYPE` and `TABLE_WIDTH_VALUE` for table width control
-
-* Add: Base64 image embedding in `HtmlRenderer` as an option with images processed by a handler.
-  * Add: base64 embedded image link resolver option or a sample on how to do it
-
-* Fix: [#99, YamlFrontMatterBlockParser ignores multi-key list items]
-
 &nbsp;</details>
 
-Next: 0.40.20
--------------
+Next 0.40.22
+------------
 
-* [ ] Fix: Update to latest version of [cmark/spec.txt] from [https://github.com/commonmark/cmark]
-* [ ] Fix: parser & html renderer for latest spec.txt
-* [ ] Fix: implement an auto-links extension which can be incorporated into the core parser as
-      an option and automatically convert text to auto-links without the extra offset conversion
-      and parsing. Can be a simplified auto-links extension which only parses http://, https://,
-      file:// and ftp://. Leaving the e-mail links and everything else to the post processing
-      extension.
 * [ ] Add: `FlexmarkHtmlParser` options:
+  * [ ] Fix: [#313, Ability to override tags processing in FlexmarkHtmlParser]
   * [ ] `EXT_TABLES` conversion option not yet implemented.
+
+0.40.20
+-------
+
+* Fix: [#316, Github user extension incorrectly formats some text]
+  * Add: test to make sure previous character to `@` is not `isUnicodeIdentifierPart()`, `-` nor
+    `.`
+* Add: `FlexmarkHtmlParser` options:
+  * Fix: [#318, Ability to disable table caption in FlexmarkHtmlParser],
+    * Add: `TABLE_CAPTION` option as a convenience alias for `Formatter.FORMAT_TABLE_CAPTION`.
+      Add documentation to
+      [Extensions: Html To Markdown](../../wiki/Extensions#html-to-markdown)
+  * Fix: [#314, Ability to override character replacements map in FlexmarkHtmlParser],
+    * Add: `TYPOGRAPHIC_REPLACEMENT_MAP` option key taking a `Map<String,String>`, if not empty
+      will be used instead of the bundled map. Any typographic characters or HTML entities
+      missing from the map will be output without conversion. If you want to suppress a
+      typographic so it is not output add `""` to its mapped value.
+  * Fix:
+    [#317, FlexmarkHtmlParser outputs extra newline when converting nested \<ol\>, \<ul\> lists]
+  * Fix: when rendering raw HTML for inline elements, have to escape contained special markdown
+    characters.
+  * Add: `FOR_DOCUMENT` option to use as document into which the generated Markdown will be
+    inserted. This is to allow re-use matching references generated from HTML instead of new
+    ones.
   * `EXT_INLINE_LINK` and `EXT_INLINE_IMAGE` option default `LinkConversion.MARKDOWN_EXPLICIT`,
     specifies type of link and image conversion to apply: `NONE`, `MARKDOWN_EXPLICIT`,
     `MARKDOWN_REFERENCE`, `TEXT`, `HTML`
-  * [ ] Fix: when rendering HTML as is for inline elements, have to escape contained special
-        markdown characters.
+* Add: Remove reliance on [YouTrack: IDEA-207453] and instead change resource file URL to path
+  in `SpecReader` and add a message to all example tests with the file URL with `:xxx` where
+  `xxx` is the line number of the spec example in the file.
+
+  This will print the source location of the test in the console. Clicking the link goes right
+  to the spec source file and line of the failed test if [Awesome Console] plugin is installed.
 
 0.40.18
 -------
@@ -1218,8 +1164,14 @@ setting either will affect both keys. For information on these keys see
 [#305, PR: add new youtube link style support to flexmark-ext-youtube-embedded for youtu.be/xyz(?t=123)]: https://github.com/vsch/flexmark-java/pull/305
 [#306, PR: Add password protection support]: https://github.com/vsch/flexmark-java/pull/306
 [#310, PR: Change URL of GitHub CDN]: https://github.com/vsch/flexmark-java/pull/310
+[#313, Ability to override tags processing in FlexmarkHtmlParser]: https://github.com/vsch/flexmark-java/issues/313
+[#314, Ability to override character replacements map in FlexmarkHtmlParser]: https://github.com/vsch/flexmark-java/issues/314
+[#316, Github user extension incorrectly formats some text]: https://github.com/vsch/flexmark-java/issues/316
+[#317, FlexmarkHtmlParser outputs extra newline when converting nested \<ol\>, \<ul\> lists]: https://github.com/vsch/flexmark-java/issues/317
+[#318, Ability to disable table caption in FlexmarkHtmlParser]: https://github.com/vsch/flexmark-java/issues/318
 [#99, YamlFrontMatterBlockParser ignores multi-key list items]: https://github.com/vsch/flexmark-java/issues/99
 [Admonition Extension, Material for MkDocs]: https://squidfunk.github.io/mkdocs-material/extensions/admonition/
+[Awesome Console]: https://plugins.jetbrains.com/plugin/7677-awesome-console "Awesome Console"
 [Benchmarks]: https://github.com/github/cmark-gfm/blob/master/benchmarks.md
 [cmark/spec.txt]: https://github.com/commonmark/cmark/blob/master/test/spec.txt "cmark/spec.txt at master · commonmark/cmark · GitHub"
 [GitHub - github/cmark-gfm]: https://github.com/github/cmark-gfm "GitHub - github/cmark-gfm: GitHub's fork of cmark, a CommonMark parsing and rendering library and program in C"

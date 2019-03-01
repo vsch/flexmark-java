@@ -198,7 +198,6 @@ see more
   * Twitter
   * Facebook
   * 
-
 * 
 
 .
@@ -291,7 +290,6 @@ see more
   * <button class="share__button" data-action="share:twitter">Twitter</button>
   * <button class="share__button" data-action="share:facebook">Facebook</button>
   * <input class="share__button" value="http://disq.us/p/hgghs7" name="Link" title="Click to copy post link" data-action="copy-link" readonly>
-
 * 
 
 </menu> </footer>
@@ -1228,7 +1226,6 @@ Issue #MN-408
 * 
 * test
 * 
-
 .
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html>
@@ -1273,7 +1270,6 @@ Issue #MN-408
 * Vectors
 * 
 * Oligos
-
 .
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html>
@@ -1344,7 +1340,6 @@ Issue #138, HTML to Markdown converter missing list end for two consecutive list
 2. [Google](http://www.google.com)
 3. [Yahoo!](http://www.yahoo.com)
 4. [Another Example.com](http://www.example.com)
-
 .
 <p><strong>Ordered</strong></p>
 <ol>
@@ -1375,7 +1370,6 @@ end on double blank line
 2. [Google](http://www.google.com)
 3. [Yahoo!](http://www.yahoo.com)
 4. [Another Example.com](http://www.example.com)
-
 .
 <p><strong>Ordered</strong></p>
 <ol>
@@ -1652,6 +1646,28 @@ Issue #299, FlexmarkHtmlParser produces extra empty list item for enclosing </p>
 <li>First note.</li>
 <li>Second note.</li>
 </p>
+````````````````````````````````
+
+
+## Issue 317
+
+Issue #317
+
+```````````````````````````````` example Issue 317: 1
+1. P1
+2. P2
+   1. P2-1
+3. P3
+.
+<ol>
+    <li>P1</li>
+    <li>P2
+        <ol>
+            <li>P2-1</li>
+        </ol>
+    </li>
+    <li>P3</li>
+</ol>
 ````````````````````````````````
 
 

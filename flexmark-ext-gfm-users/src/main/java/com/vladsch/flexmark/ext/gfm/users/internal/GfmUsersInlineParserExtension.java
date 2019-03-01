@@ -10,7 +10,7 @@ import java.util.Set;
 import java.util.regex.Pattern;
 
 public class GfmUsersInlineParserExtension implements InlineParserExtension {
-   public static final Pattern GITHUB_USER = Pattern.compile("^(@)([a-z\\d](?:[a-z\\d]|-(?=[a-z\\d])){0,38})\\b", Pattern.CASE_INSENSITIVE);
+    public static final Pattern GITHUB_USER = Pattern.compile("^(@)([a-z\\d](?:[a-z\\d]|-(?=[a-z\\d])){0,38})\\b", Pattern.CASE_INSENSITIVE);
 
     public GfmUsersInlineParserExtension(final InlineParser inlineParser) {
 
@@ -28,17 +28,27 @@ public class GfmUsersInlineParserExtension implements InlineParserExtension {
 
     @Override
     public boolean parse(final InlineParser inlineParser) {
-        BasedSequence[] matches = inlineParser.matchWithGroups(GITHUB_USER);
-        if (matches != null) {
-            BasedSequence input = inlineParser.getInput();
-            inlineParser.flushTextNode();
+        int index = inlineParser.getIndex();
+        boolean isPossible = index == 0;
+        if (!isPossible) {
+            char c = inlineParser.getInput().charAt(index - 1);
+            if (!Character.isUnicodeIdentifierPart(c) && c != '-' && c != '.') {
+                isPossible = true;
+            }
+        }
+        if (isPossible) {
+            BasedSequence[] matches = inlineParser.matchWithGroups(GITHUB_USER);
+            if (matches != null) {
+                BasedSequence input = inlineParser.getInput();
+                inlineParser.flushTextNode();
 
-            BasedSequence openMarker = matches[1];
-            BasedSequence text = matches[2];
+                BasedSequence openMarker = matches[1];
+                BasedSequence text = matches[2];
 
-            GfmUser gitHubIssue = new GfmUser(openMarker, text);
-            inlineParser.getBlock().appendChild(gitHubIssue);
-            return true;
+                GfmUser gitHubIssue = new GfmUser(openMarker, text);
+                inlineParser.getBlock().appendChild(gitHubIssue);
+                return true;
+            }
         }
         return false;
     }

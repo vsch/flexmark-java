@@ -28,9 +28,33 @@ Document[0, 25]
 ````````````````````````````````
 
 
-Max 39 characters
+No e-mails, Issue #316,
 
 ```````````````````````````````` example GfmUsers: 2
+abc test@test.com
+.
+<p>abc test@test.com</p>
+.
+Document[0, 18]
+  Paragraph[0, 18]
+    Text[0, 17] chars:[0, 17, "abc t … t.com"]
+````````````````````````````````
+
+
+```````````````````````````````` example GfmUsers: 3
+abc_test@test.com
+.
+<p>abc_test@test.com</p>
+.
+Document[0, 18]
+  Paragraph[0, 18]
+    Text[0, 17] chars:[0, 17, "abc_t … t.com"]
+````````````````````````````````
+
+
+Max 39 characters
+
+```````````````````````````````` example GfmUsers: 4
 abc @1234567890123456789012345678901234567890
 .
 <p>abc @1234567890123456789012345678901234567890</p>
@@ -43,7 +67,7 @@ Document[0, 46]
 
 Max 39 characters
 
-```````````````````````````````` example GfmUsers: 3
+```````````````````````````````` example GfmUsers: 5
 abc @123456789012345678901234567890123456789
 .
 <p>abc <a href="https://github.com/123456789012345678901234567890123456789"><strong>@123456789012345678901234567890123456789</strong></a></p>
@@ -55,7 +79,7 @@ Document[0, 45]
 ````````````````````````````````
 
 
-```````````````````````````````` example GfmUsers: 4
+```````````````````````````````` example GfmUsers: 6
 abc @123-4 xyz
 .
 <p>abc <a href="https://github.com/123-4"><strong>@123-4</strong></a> xyz</p>
@@ -68,7 +92,7 @@ Document[0, 15]
 ````````````````````````````````
 
 
-```````````````````````````````` example GfmUsers: 5
+```````````````````````````````` example GfmUsers: 7
 abc @123
 .
 <p>abc <a href="https://github.com/123"><strong>@123</strong></a></p>
@@ -82,7 +106,7 @@ Document[0, 9]
 
 test CR/LF
 
-```````````````````````````````` example GfmUsers: 6
+```````````````````````````````` example GfmUsers: 8
 abc @123⏎
 
 .
@@ -97,7 +121,7 @@ Document[0, 11]
 
 test CR
 
-```````````````````````````````` example(GfmUsers: 7) options(NO_FILE_EOL)
+```````````````````````````````` example(GfmUsers: 9) options(NO_FILE_EOL)
 abc @123⏎
 .
 <p>abc <a href="https://github.com/123"><strong>@123</strong></a></p>
@@ -109,7 +133,7 @@ Document[0, 9]
 ````````````````````````````````
 
 
-```````````````````````````````` example GfmUsers: 8
+```````````````````````````````` example GfmUsers: 10
 abc @123
 
 .
@@ -122,7 +146,7 @@ Document[0, 10]
 ````````````````````````````````
 
 
-```````````````````````````````` example GfmUsers: 9
+```````````````````````````````` example GfmUsers: 11
 abc @123 xyz
 .
 <p>abc <a href="https://github.com/123"><strong>@123</strong></a> xyz</p>
@@ -135,7 +159,7 @@ Document[0, 13]
 ````````````````````````````````
 
 
-```````````````````````````````` example GfmUsers: 10
+```````````````````````````````` example GfmUsers: 12
 abc @123
 xyz
 .
@@ -151,7 +175,7 @@ Document[0, 13]
 ````````````````````````````````
 
 
-```````````````````````````````` example(GfmUsers: 11) options(root)
+```````````````````````````````` example(GfmUsers: 13) options(root)
 @123
 .
 <p><a href="http://github.com/123"><strong>@123</strong></a></p>
@@ -162,7 +186,7 @@ Document[0, 4]
 ````````````````````````````````
 
 
-```````````````````````````````` example(GfmUsers: 12) options(root, prefix)
+```````````````````````````````` example(GfmUsers: 14) options(root, prefix)
 @123
 .
 <p><a href="http://github.com?user=123"><strong>@123</strong></a></p>
@@ -173,7 +197,7 @@ Document[0, 4]
 ````````````````````````````````
 
 
-```````````````````````````````` example(GfmUsers: 13) options(root, suffix)
+```````````````````````````````` example(GfmUsers: 15) options(root, suffix)
 @123
 .
 <p><a href="http://github.com/123&amp;"><strong>@123</strong></a></p>
@@ -184,7 +208,7 @@ Document[0, 4]
 ````````````````````````````````
 
 
-```````````````````````````````` example(GfmUsers: 14) options(root, prefix, suffix)
+```````````````````````````````` example(GfmUsers: 16) options(root, prefix, suffix)
 @123
 .
 <p><a href="http://github.com?user=123&amp;"><strong>@123</strong></a></p>
@@ -195,7 +219,7 @@ Document[0, 4]
 ````````````````````````````````
 
 
-```````````````````````````````` example(GfmUsers: 15) options(root, prefix, suffix, plain)
+```````````````````````````````` example(GfmUsers: 17) options(root, prefix, suffix, plain)
 @123
 .
 <p><a href="http://github.com?user=123&amp;">@123</a></p>

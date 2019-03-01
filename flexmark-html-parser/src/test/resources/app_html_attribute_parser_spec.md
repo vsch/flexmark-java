@@ -4082,7 +4082,6 @@ Here are some resources you might find useful in getting started.
    * [Playground](http://www.arduino.cc/playground/) - User contributed documentation and help
    * [Arduino Forums](http://www.arduino.cc/forum/) - Official forums
    * [Arduino Reference](http://www.arduino.cc/en/Reference/HomePage) - Official reference manual
-
 .
 <h3 style="box-sizing: border-box; margin-bottom: 16px; margin-top: 24px; font-size: 1.25em; font-weight: 600; line-height: 1.25; caret-color: rgb(36, 41, 46); color: rgb(36, 41, 46); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;; font-style: normal; font-variant-caps: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration: none;"><a id="user-content-error-attempt-to-use-poisoned-sig_usart0_recv" class="anchor" aria-hidden="true" href="https://github.com/francoiscampbell/arduino-cmake/blob/master/README.original.rst#error-attempt-to-use-poisoned-sig_usart0_recv"
   <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">

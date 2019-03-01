@@ -10,7 +10,7 @@
       <PegdownExtensions>
         <option name="ABBREVIATIONS" value="false" />
         <option name="ANCHORLINKS" value="false" />
-        <option name="ASIDE" value="false" />
+        <option name="ASIDE" value="true" />
         <option name="ATXHEADERSPACE" value="true" />
         <option name="AUTOLINKS" value="false" />
         <option name="DEFINITIONS" value="false" />
