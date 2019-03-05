@@ -40,11 +40,7 @@ public class UtilsTest {
         Assert.assertEquals(0, Utils.count("?", ' ', 1, 1));
         Assert.assertEquals(0, Utils.count("teststring", "s", -1, 50));
 
-        /*
-        This assertion describes a current behaviour of count that appears incorrect.
-        We would expect this combination of inputs to return 0.
-        */
-        Assert.assertEquals(1, Utils.count("123456789", "8", 0, 3));
+        Assert.assertEquals(0, Utils.count("123456789", "8", 0, 3));
     }
 
     @Test
@@ -111,12 +107,7 @@ public class UtilsTest {
         Assert.assertEquals(new Integer(63), Utils.parseUnsignedIntOrNull("63"));
         Assert.assertEquals(new Integer(0), Utils.parseUnsignedIntOrNull("0"));
 
-        /*
-        This assertion describes a current behaviour of ParseUnsignedIntOrNull that appears incorrect.
-        We would expect -0 to be equivalent to 0, a valid unsigned int.
-        We could therefore expect this input to return Integer(0)
-        */
-        Assert.assertNull(Utils.parseUnsignedIntOrNull("-0"));
+        Assert.assertEquals((Integer) 0, Utils.parseUnsignedIntOrNull("-0"));
     }
 
 
@@ -260,19 +251,19 @@ public class UtilsTest {
     public void testWrapWith() {
         Assert.assertEquals("", Utils.wrapWith("", " ", " "));
         Assert.assertEquals(" ! ", Utils.wrapWith("!", ' ', ' '));
-        Assert.assertNotEquals(" ! ", Utils.wrapWith("!", " ", " "));
-        Assert.assertEquals("awrappedprefix", Utils.wrapWith("a", "prefix", "wrapped"));
-        Assert.assertEquals("abc1234", Utils.wrapWith("abc", "34", "12"));
-        Assert.assertEquals("", Utils.wrapWith("abc", "", "123"));
-        Assert.assertEquals("abc123", Utils.wrapWith("abc", "123", ""));
+        Assert.assertEquals(" ! ", Utils.wrapWith("!", " ", " "));
+        Assert.assertEquals("prefixawrapped", Utils.wrapWith("a", "prefix", "wrapped"));
+        Assert.assertEquals("34abc12", Utils.wrapWith("abc", "34", "12"));
+        Assert.assertEquals("abc123", Utils.wrapWith("abc", "", "123"));
+        Assert.assertEquals("123abc", Utils.wrapWith("abc", "123", ""));
         Assert.assertEquals(" a ", Utils.wrapWith("a", ' '));
-        Assert.assertEquals("", Utils.wrapWith("receiver", null, "suffix"));
+        Assert.assertEquals("receiversuffix", Utils.wrapWith("receiver", null, "suffix"));
         Assert.assertEquals("", Utils.wrapWith(null, "", ""));
 
         /*
         This assertion describes a current behaviour of WrapWith that appears incorrect.
         We would expect an output of prefixreceiversuffix given these inputs.
         */
-        Assert.assertEquals("receiversuffixprefix", Utils.wrapWith("receiver", "prefix", "suffix"));
+        Assert.assertEquals("prefixreceiversuffix", Utils.wrapWith("receiver", "prefix", "suffix"));
     }
 }

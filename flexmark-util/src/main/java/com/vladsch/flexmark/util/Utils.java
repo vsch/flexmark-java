@@ -94,7 +94,7 @@ public class Utils {
     }
 
     public static String wrapWith(String receiver, String prefix, String suffix) {
-        return (receiver == null || receiver.isEmpty()) ? "" : prefixWith(prefix, suffixWith(receiver, suffix));
+        return (receiver == null || receiver.isEmpty()) ? "" : prefixWith(suffixWith(receiver, suffix), prefix);
     }
 
     public static String suffixWith(String receiver, char suffix) {
@@ -113,7 +113,7 @@ public class Utils {
     }
 
     public static String suffixWith(String receiver, String suffix, boolean ignoreCase) {
-        if (receiver != null && !receiver.isEmpty() && !suffix.isEmpty() && !endsWith(receiver, suffix, ignoreCase)) {
+        if (receiver != null && !receiver.isEmpty() && suffix != null && !suffix.isEmpty() && !endsWith(receiver, suffix, ignoreCase)) {
             return receiver + (suffix);
         }
         return orEmpty(receiver);
@@ -135,7 +135,7 @@ public class Utils {
     }
 
     public static String prefixWith(String receiver, String prefix, boolean ignoreCase) {
-        if (receiver != null && !receiver.isEmpty() && !prefix.isEmpty() && !startsWith(receiver, prefix, ignoreCase))
+        if (receiver != null && !receiver.isEmpty() && prefix != null && !prefix.isEmpty() && !startsWith(receiver, prefix, ignoreCase))
             return prefix + receiver;
         return orEmpty(receiver);
     }
@@ -217,7 +217,7 @@ public class Utils {
         int lastIndex = Math.min(receiver.length(), endIndex);
         while (pos >= 0 && pos <= lastIndex) {
             pos = receiver.indexOf(c, pos);
-            if (pos < 0) break;
+            if (pos < 0 || pos > lastIndex) break;
             count++;
             pos++;
         }
@@ -586,10 +586,8 @@ public class Utils {
 
     public static Integer parseUnsignedIntOrNull(String text, int radix) {
         try {
-            if (text.startsWith("-")) {
-                return null;
-            }
-            return Integer.parseInt(text, radix);
+            int value = Integer.parseInt(text, radix);
+            return value >= 0 ? value : null; 
         } catch (NumberFormatException ignored) {
             return null;
         }

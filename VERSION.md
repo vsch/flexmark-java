@@ -5,6 +5,7 @@ flexmark-java
 
 [TOC]: # " "
 
+- [Future 0.50.0](#future-0500)
 - [Next 0.40.22](#next-04022)
 - [0.40.20](#04020)
 - [0.40.18](#04018)
@@ -72,12 +73,35 @@ flexmark-java
 
 &nbsp;</details>
 
-Next 0.40.22
-------------
+Future 0.50.0
+-------------
 
+* [ ] Add: discourse for flexmark-java feature discussions
+* [ ] Fix: `FormattingAppendable` deprecate all conditional formatting related methods and
+      methods only needed because of convoluted output construction.
+* [ ] Deprecate: all conditional formatting methods in `FormattingAppendable`
+* [ ] Add: `LineFormattingAppendable` to extend and eventually replace `FormattingAppendable`
+  1. provide same `append(...)`, `line()`, `blankLine()`, `indent()`, `prefix()`, etc. of
+     `FormattingAppendable` but leading, trailing whitespace options, applied when current line
+     is complete not during construction.
+  2. add `append(Collection<CharSequence>)` for easy appending of child rendered results
+  3. no callback methods and convoluted logic implementing indentations during content
+     construction since these can be easily applied to individual lines once they are generated.
+  5. provide implement `List<CharSequence>` interface for its content lines
+  4. provide `currentLine()` for last content line which does not yet have an EOL
+  6. provide `currentLineIndex()` as `int` for the index of the `currentLine()` value, will be
+     equal to `size()` if the current line has no content, ie. end of output after previousl
+     line terminated with EOL.
+  7. provide `result()` as `Collection<CharSequence>` where each char sequence represents a
+     single line of output.
 * [ ] Add: `FlexmarkHtmlParser` options:
   * [ ] Fix: [#313, Ability to override tags processing in FlexmarkHtmlParser]
   * [ ] `EXT_TABLES` conversion option not yet implemented.
+
+Next 0.40.22
+------------
+
+* Fix: merge util tests from [@James-Adam](https://github.com/James-Adam) and fix bugs 
 
 0.40.20
 -------
@@ -1169,14 +1193,14 @@ setting either will affect both keys. For information on these keys see
 [#316, Github user extension incorrectly formats some text]: https://github.com/vsch/flexmark-java/issues/316
 [#317, FlexmarkHtmlParser outputs extra newline when converting nested \<ol\>, \<ul\> lists]: https://github.com/vsch/flexmark-java/issues/317
 [#318, Ability to disable table caption in FlexmarkHtmlParser]: https://github.com/vsch/flexmark-java/issues/318
-[#99, YamlFrontMatterBlockParser ignores multi-key list items]: https://github.com/vsch/flexmark-java/issues/99
 [Admonition Extension, Material for MkDocs]: https://squidfunk.github.io/mkdocs-material/extensions/admonition/
 [Awesome Console]: https://plugins.jetbrains.com/plugin/7677-awesome-console "Awesome Console"
+[migrate 0_35_x to 0_40_0.xml]: /assets/migrations/migrate%20flexmark-java%200_35_x%20to%200_40_0.xml
+[NodeInsertingPostProcessorSample.java]: https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/samples/NodeInsertingPostProcessorSample.java
+[YouTrack: IDEA-207453]: https://youtrack.jetbrains.com/issue/IDEA-207453 "Add Conversion of ref anchor to UrlFilter for file line navigation"
+[#99, YamlFrontMatterBlockParser ignores multi-key list items]: https://github.com/vsch/flexmark-java/issues/99
 [Benchmarks]: https://github.com/github/cmark-gfm/blob/master/benchmarks.md
 [cmark/spec.txt]: https://github.com/commonmark/cmark/blob/master/test/spec.txt "cmark/spec.txt at master · commonmark/cmark · GitHub"
 [GitHub - github/cmark-gfm]: https://github.com/github/cmark-gfm "GitHub - github/cmark-gfm: GitHub's fork of cmark, a CommonMark parsing and rendering library and program in C"
 [https://github.com/commonmark/cmark]: https://github.com/commonmark/cmark "GitHub - commonmark/cmark: CommonMark parsing and rendering library and program in C"
-[migrate 0_35_x to 0_40_0.xml]: /assets/migrations/migrate%20flexmark-java%200_35_x%20to%200_40_0.xml
-[NodeInsertingPostProcessorSample.java]: https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/samples/NodeInsertingPostProcessorSample.java
-[YouTrack: IDEA-207453]: https://youtrack.jetbrains.com/issue/IDEA-207453 "Add Conversion of ref anchor to UrlFilter for file line navigation"
 
