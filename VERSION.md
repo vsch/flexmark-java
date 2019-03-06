@@ -6,6 +6,7 @@ flexmark-java
 [TOC]: # " "
 
 - [Future 0.50.0](#future-0500)
+- [0.40.24](#04024)
 - [0.40.22](#04022)
 - [0.40.20](#04020)
 - [0.40.18](#04018)
@@ -101,6 +102,11 @@ Future 0.50.0
 * [ ] Add: `FlexmarkHtmlParser` options:
   * [ ] Fix: [#313, Ability to override tags processing in FlexmarkHtmlParser]
   * [ ] `EXT_TABLES` conversion option not yet implemented.
+
+0.40.24
+-------
+
+* Fix: next
 
 0.40.22
 -------
