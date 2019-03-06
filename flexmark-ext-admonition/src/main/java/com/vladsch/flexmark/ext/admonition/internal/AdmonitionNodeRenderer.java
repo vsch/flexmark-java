@@ -55,7 +55,6 @@ public class AdmonitionNodeRenderer implements PhasedNodeRenderer {
                     String svgContent = options.typeSvgMap.get(info);
                     if (svgContent != null && !svgContent.isEmpty()) {
                         html.raw("<symbol id=\"adm-").raw(info).raw("\">").indent().line()
-                                .raw("<svg enable-background=\"new 0 0 24 24\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\">")
                                 .raw(svgContent).line()
                                 .unIndent().raw("</symbol>").line();
                     }
