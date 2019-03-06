@@ -6,7 +6,7 @@ flexmark-java
 [TOC]: # " "
 
 - [Future 0.50.0](#future-0500)
-- [Next 0.40.22](#next-04022)
+- [0.40.22](#04022)
 - [0.40.20](#04020)
 - [0.40.18](#04018)
 - [0.40.16](#04016)
@@ -79,7 +79,11 @@ Future 0.50.0
 * [ ] Add: discourse for flexmark-java feature discussions
 * [ ] Fix: `FormattingAppendable` deprecate all conditional formatting related methods and
       methods only needed because of convoluted output construction.
-* [ ] Deprecate: all conditional formatting methods in `FormattingAppendable`
+* [x] Deprecate: all conditional formatting methods in `FormattingAppendable`
+* [ ] Break: make Java 8 minimum version and use JDK 8 for compilation
+* [ ] Fix: Factor out BasedSequenceImpl functionality that does not depend on BasedSequence and
+      can be applied to any CharSequence into its own CharSequence interface with default
+      implementations.
 * [ ] Add: `LineFormattingAppendable` to extend and eventually replace `FormattingAppendable`
   1. provide same `append(...)`, `line()`, `blankLine()`, `indent()`, `prefix()`, etc. of
      `FormattingAppendable` but leading, trailing whitespace options, applied when current line
@@ -90,18 +94,19 @@ Future 0.50.0
   5. provide implement `List<CharSequence>` interface for its content lines
   4. provide `currentLine()` for last content line which does not yet have an EOL
   6. provide `currentLineIndex()` as `int` for the index of the `currentLine()` value, will be
-     equal to `size()` if the current line has no content, ie. end of output after previousl
-     line terminated with EOL.
+     equal to `size()` if the current line has no content, ie. end of output after previous line
+     terminated with EOL.
   7. provide `result()` as `Collection<CharSequence>` where each char sequence represents a
      single line of output.
 * [ ] Add: `FlexmarkHtmlParser` options:
   * [ ] Fix: [#313, Ability to override tags processing in FlexmarkHtmlParser]
   * [ ] `EXT_TABLES` conversion option not yet implemented.
 
-Next 0.40.22
-------------
+0.40.22
+-------
 
 * Fix: merge util tests from [@James-Adam](https://github.com/James-Adam) and fix bugs 
+* Fix: change to `MutableDataSet.set(DataKey<? extends T>, T)`
 
 0.40.20
 -------

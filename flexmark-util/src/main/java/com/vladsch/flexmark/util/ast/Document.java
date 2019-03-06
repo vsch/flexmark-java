@@ -82,7 +82,7 @@ public class Document extends Block implements MutableDataHolder {
     public <T> MutableDataHolder remove(final DataKey<T> key) { return dataSet.remove(key); }
 
     @Override
-    public <T> MutableDataHolder set(DataKey<T> key, T value) { return dataSet.set(key, value);}
+    public <T> MutableDataHolder set(DataKey<? extends T> key, T value) { return dataSet.set(key, value);}
 
     @Override
     public MutableDataHolder setFrom(MutableDataSetter dataSetter) { return dataSet.setFrom(dataSetter); }

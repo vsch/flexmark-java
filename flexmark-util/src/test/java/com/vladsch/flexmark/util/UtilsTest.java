@@ -259,11 +259,6 @@ public class UtilsTest {
         Assert.assertEquals(" a ", Utils.wrapWith("a", ' '));
         Assert.assertEquals("receiversuffix", Utils.wrapWith("receiver", null, "suffix"));
         Assert.assertEquals("", Utils.wrapWith(null, "", ""));
-
-        /*
-        This assertion describes a current behaviour of WrapWith that appears incorrect.
-        We would expect an output of prefixreceiversuffix given these inputs.
-        */
         Assert.assertEquals("prefixreceiversuffix", Utils.wrapWith("receiver", "prefix", "suffix"));
     }
 }
