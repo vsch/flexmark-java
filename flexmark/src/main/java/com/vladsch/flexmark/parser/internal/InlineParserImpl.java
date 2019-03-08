@@ -1681,6 +1681,10 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
             AutoLink node = new AutoLink(m.subSequence(0, 1), m.subSequence(1, m.length() - 1), m.subSequence(m.length() - 1, m.length()));
             appendNode(node);
             return true;
+        } else if (options.wwwAutoLinkElement && (m = match(myParsing.WWW_AUTOLINK)) != null) {
+            AutoLink node = new AutoLink(m.subSequence(0, 1), m.subSequence(1, m.length() - 1), m.subSequence(m.length() - 1, m.length()));
+            appendNode(node);
+            return true;
         } else {
             return false;
         }

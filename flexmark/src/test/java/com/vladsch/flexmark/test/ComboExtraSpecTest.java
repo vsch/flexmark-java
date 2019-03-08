@@ -90,6 +90,7 @@ public class ComboExtraSpecTest extends ComboSpecTestCase {
         optionsMap.put("suppress-format-eol", new MutableDataSet().set(HtmlRenderer.HTML_BLOCK_OPEN_TAG_EOL, false).set(HtmlRenderer.HTML_BLOCK_CLOSE_TAG_EOL, false).set(HtmlRenderer.INDENT_SIZE, 0));
         optionsMap.put("no-unescape-entities", new MutableDataSet().set(HtmlRenderer.UNESCAPE_HTML_ENTITIES, false));
         optionsMap.put("space-in-link-elements", new MutableDataSet().set(Parser.SPACE_IN_LINK_ELEMENTS, true));
+        optionsMap.put("www-auto-link-element", new MutableDataSet().set(Parser.WWW_AUTO_LINK_ELEMENT, true));
         optionsMap.put("directional-punctuation", new MutableDataSet().set(Parser.INLINE_DELIMITER_DIRECTIONAL_PUNCTUATIONS, true));
         optionsMap.put("deep-html-parsing", new MutableDataSet().set(Parser.HTML_BLOCK_DEEP_PARSER, true));
         optionsMap.put("code-soft-breaks", new MutableDataSet().set(Parser.CODE_SOFT_LINE_BREAKS, true).set(HtmlRenderer.SOFT_BREAK, "\n"));

@@ -106,7 +106,8 @@ Future 0.50.0
 0.40.24
 -------
 
-* Fix: next
+* Add: `Parser.WWW_AUTO_LINK_ELEMENT`, default `false`. If `true` then strings of the form
+  `<www.someurl>` will be parsed as auto-links
 
 0.40.22
 -------

@@ -4488,6 +4488,19 @@ Document[0, 26]
 ````````````````````````````````
 
 
+www. in auto-link elements
+
+```````````````````````````````` example(Links: 22) options(www-auto-link-element)
+<www.example.com>
+.
+<p><a href="http://www.example.com">www.example.com</a></p>
+.
+Document[0, 17]
+  Paragraph[0, 17]
+    AutoLink[0, 17] open:[0, 1, "<"] text:[1, 16, "www.example.com"] pageRef:[1, 16, "www.example.com"] close:[16, 17, ">"]
+````````````````````````````````
+
+
 ## LinkRefs and ImageRefs
 
 empty link ref
