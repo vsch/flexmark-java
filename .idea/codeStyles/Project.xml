@@ -48,6 +48,7 @@
       <option name="ABBREVIATIONS_SORT" value="2" />
       <option name="FOOTNOTE_SORT" value="2" />
       <option name="REFERENCE_SORT" value="2" />
+      <option name="SMART_EDIT_TABLES" value="true" />
       <option name="TABLE_LEFT_ALIGN_MARKER" value="0" />
       <option name="TOC_FORMAT_ON_SAVE" value="true" />
       <option name="TOC_GENERATE_TEXT_ONLY" value="true" />

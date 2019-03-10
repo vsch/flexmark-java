@@ -1,5 +1,6 @@
 package com.vladsch.flexmark.samples;
 
+import com.vladsch.flexmark.parser.ParserEmulationProfile;
 import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.ast.Heading;
 import com.vladsch.flexmark.util.ast.Node;
@@ -87,7 +88,7 @@ public class TitleExtract {
         void render(final Heading node, final NodeRendererContext context, final HtmlWriter html) {
             if (node.getLevel() == 1) {
                 // render without anchor link
-                final int extensions = context.getOptions().get(PegdownOptionsAdapter.PEGDOWN_EXTENSIONS);
+                final int extensions = context.getOptions().get(ParserEmulationProfile.PEGDOWN_EXTENSIONS);
                 if (context.getHtmlOptions().renderHeaderId || haveExtension(extensions,Extensions.ANCHORLINKS) || haveAllExtensions(extensions,Extensions.EXTANCHORLINKS | Extensions.EXTANCHORLINKS_WRAP) ) {
                     String id = context.getNodeId(node);
                     if (id != null) {

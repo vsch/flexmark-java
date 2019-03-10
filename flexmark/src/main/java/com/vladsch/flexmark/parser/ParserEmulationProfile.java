@@ -2,10 +2,7 @@ package com.vladsch.flexmark.parser;
 
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.util.KeepType;
-import com.vladsch.flexmark.util.options.DataHolder;
-import com.vladsch.flexmark.util.options.MutableDataHolder;
-import com.vladsch.flexmark.util.options.MutableDataSet;
-import com.vladsch.flexmark.util.options.MutableDataSetter;
+import com.vladsch.flexmark.util.options.*;
 
 public enum ParserEmulationProfile implements MutableDataSetter {
     COMMONMARK(null),
@@ -34,6 +31,15 @@ public enum ParserEmulationProfile implements MutableDataSetter {
     }
 
     public MutableListOptions getOptions() {
+        return getOptions(null);
+    }
+
+    /**
+     * Key used to hold user pegdown extension selection 
+     */
+    public static final DataKey<Integer> PEGDOWN_EXTENSIONS = new DataKey<>("PEGDOWN_EXTENSIONS", PegdownExtensions.ALL);
+    
+    public MutableListOptions getOptions(final DataHolder dataHolder) {
         if (family == FIXED_INDENT) {
             if (this == MULTI_MARKDOWN) {
                 return new MutableListOptions().setParserEmulationFamily(this)
@@ -76,6 +82,8 @@ public enum ParserEmulationProfile implements MutableDataSetter {
                         ;
             }
             if (this == PEGDOWN || this == PEGDOWN_STRICT) {
+                int pegdownExtensions = PEGDOWN_EXTENSIONS.getFrom(dataHolder); 
+                
                 return new MutableListOptions().setParserEmulationFamily(this)
                         .setAutoLoose(false)
                         .setAutoLooseOneLevelLists(false)
@@ -292,12 +300,12 @@ public enum ParserEmulationProfile implements MutableDataSetter {
     @Override
     public MutableDataHolder setIn(final MutableDataHolder dataHolder) {
         if (this == FIXED_INDENT) {
-            getOptions().setIn(dataHolder)
+            getOptions(dataHolder).setIn(dataHolder)
                     .set(Parser.STRONG_WRAPS_EMPHASIS, true)
                     .set(Parser.LINKS_ALLOW_MATCHED_PARENTHESES, false)
             ;
         } else if (this == KRAMDOWN) {
-            getOptions().setIn(dataHolder);
+            getOptions(dataHolder).setIn(dataHolder);
             dataHolder
                     .set(Parser.HEADING_NO_LEAD_SPACE, true)
                     .set(Parser.BLOCK_QUOTE_INTERRUPTS_PARAGRAPH, false)
@@ -316,7 +324,7 @@ public enum ParserEmulationProfile implements MutableDataSetter {
                     .set(Parser.LINKS_ALLOW_MATCHED_PARENTHESES, false)
             ;
         } else if (this == MARKDOWN) {
-            getOptions().setIn(dataHolder);
+            getOptions(dataHolder).setIn(dataHolder);
             dataHolder
                     .set(Parser.HEADING_NO_LEAD_SPACE, true)
                     .set(Parser.BLOCK_QUOTE_IGNORE_BLANK_LINE, true)
@@ -334,7 +342,7 @@ public enum ParserEmulationProfile implements MutableDataSetter {
                     .set(Parser.LINKS_ALLOW_MATCHED_PARENTHESES, false)
             ;
         } else if (this == GITHUB_DOC) {
-            getOptions().setIn(dataHolder);
+            getOptions(dataHolder).setIn(dataHolder);
             dataHolder
                     .set(Parser.BLOCK_QUOTE_IGNORE_BLANK_LINE, true)
                     .set(Parser.BLOCK_QUOTE_INTERRUPTS_PARAGRAPH, true)
@@ -358,7 +366,7 @@ public enum ParserEmulationProfile implements MutableDataSetter {
                     .set(HtmlRenderer.HEADER_ID_GENERATOR_NON_ASCII_TO_LOWERCASE, false)
             ;
         } else if (this == GITHUB) {
-            getOptions().setIn(dataHolder);
+            getOptions(dataHolder).setIn(dataHolder);
             dataHolder
                     // github change for heading Ids
                     .set(HtmlRenderer.HEADER_ID_GENERATOR_TO_DASH_CHARS, " -")
@@ -366,7 +374,7 @@ public enum ParserEmulationProfile implements MutableDataSetter {
                     .set(HtmlRenderer.HEADER_ID_GENERATOR_NON_ASCII_TO_LOWERCASE, false)
             ;
         } else if (this == MULTI_MARKDOWN) {
-            getOptions().setIn(dataHolder);
+            getOptions(dataHolder).setIn(dataHolder);
             dataHolder
                     .set(Parser.BLOCK_QUOTE_IGNORE_BLANK_LINE, true)
                     .set(Parser.BLOCK_QUOTE_WITH_LEAD_SPACES_INTERRUPTS_ITEM_PARAGRAPH, false)
@@ -388,7 +396,9 @@ public enum ParserEmulationProfile implements MutableDataSetter {
                     .set(Parser.LINKS_ALLOW_MATCHED_PARENTHESES, false)
             ;
         } else if (this == PEGDOWN || this == PEGDOWN_STRICT) {
-            getOptions().setIn(dataHolder);
+            int pegdownExtensions = PEGDOWN_EXTENSIONS.getFrom(dataHolder);
+            
+            getOptions(dataHolder).setIn(dataHolder);
             dataHolder
                     .set(Parser.BLOCK_QUOTE_EXTEND_TO_BLANK_LINE, true)
                     .set(Parser.BLOCK_QUOTE_IGNORE_BLANK_LINE, true)
@@ -403,13 +413,16 @@ public enum ParserEmulationProfile implements MutableDataSetter {
                     .set(HtmlRenderer.RENDER_HEADER_ID, false)
                     .set(HtmlRenderer.OBFUSCATE_EMAIL, true)
                     .set(HtmlRenderer.GENERATE_HEADER_ID, true)
-                    .set(HtmlRenderer.HEADER_ID_GENERATOR_RESOLVE_DUPES, false)
                     //.set(HtmlRenderer.HEADER_ID_GENERATOR_TO_DASH_CHARS, "")
                     .set(HtmlRenderer.HEADER_ID_GENERATOR_NO_DUPED_DASHES, true)
                     .set(HtmlRenderer.SOFT_BREAK, " ")
                     .set(Parser.STRONG_WRAPS_EMPHASIS, true)
                     .set(Parser.LINKS_ALLOW_MATCHED_PARENTHESES, false)
-            ;
+                    ;
+
+            if (haveAny(pegdownExtensions, PegdownExtensions.ANCHORLINKS)) {
+                dataHolder.set(HtmlRenderer.HEADER_ID_GENERATOR_RESOLVE_DUPES, false);
+            }
 
             if (this == PEGDOWN_STRICT) {
                 // deep HTML parsing for pegdown compatibility
@@ -440,5 +453,13 @@ public enum ParserEmulationProfile implements MutableDataSetter {
         }
 
         return dataHolder;
+    }
+
+    public static boolean haveAny(int extensions,  int mask) {
+        return (extensions & mask) != 0;
+    }
+
+    public static boolean haveAll(int extensions, int mask) {
+        return (extensions & mask) == mask;
     }
 }

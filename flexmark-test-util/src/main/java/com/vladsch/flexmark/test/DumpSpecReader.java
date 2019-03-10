@@ -15,6 +15,8 @@ import org.junit.AssumptionViolatedException;
 import java.io.InputStream;
 
 import static com.vladsch.flexmark.test.RenderingTestCase.FAIL;
+import static com.vladsch.flexmark.util.Utils.suffixWith;
+import static com.vladsch.flexmark.util.Utils.suffixWithEol;
 
 public class DumpSpecReader extends SpecReader {
     protected final StringBuilder sb = new StringBuilder();
@@ -64,7 +66,7 @@ public class DumpSpecReader extends SpecReader {
         String sourceIndent = RenderingTestCase.SOURCE_INDENT.getFrom(parserWithOptions.getOptions());
 
         if (!sourcePrefix.isEmpty() || !sourceSuffix.isEmpty()) {
-            String combinedSource = sourcePrefix + Utils.suffixWith(parseSource, "\n") + sourceSuffix;
+            String combinedSource = sourcePrefix + suffixWith(parseSource, "\n") + sourceSuffix;
             input = BasedSequenceImpl.of(combinedSource).subSequence(sourcePrefix.length(), combinedSource.length() - sourceSuffix.length());
         } else {
             input = BasedSequenceImpl.of(parseSource);
@@ -149,11 +151,11 @@ public class DumpSpecReader extends SpecReader {
         else sb.append(header.toString());
 
         if (ast != null) {
-            sb.append(showTabs(source + SpecReader.TYPE_BREAK + "\n" + html))
+            sb.append(showTabs(suffixWithEol(source) + SpecReader.TYPE_BREAK + "\n" + suffixWithEol(html)))
                     .append(SpecReader.TYPE_BREAK).append("\n")
                     .append(ast).append(SpecReader.EXAMPLE_BREAK).append("\n");
         } else {
-            sb.append(showTabs(source + SpecReader.TYPE_BREAK + "\n" + html))
+            sb.append(showTabs(suffixWithEol(source) + SpecReader.TYPE_BREAK + "\n" + suffixWithEol(html)))
                     .append(SpecReader.EXAMPLE_BREAK).append("\n");
         }
     }

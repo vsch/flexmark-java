@@ -33,7 +33,7 @@ import java.util.Arrays;
 import static com.vladsch.flexmark.profiles.pegdown.Extensions.*;
 
 public class PegdownOptionsAdapter {
-    public static final DataKey<Integer> PEGDOWN_EXTENSIONS = new DataKey<>("PEGDOWN_EXTENSIONS", ALL);
+    public static final DataKey<Integer> PEGDOWN_EXTENSIONS = ParserEmulationProfile.PEGDOWN_EXTENSIONS;
 
     private final MutableDataSet myOptions;
     private int myPegdownExtensions = 0;
@@ -62,30 +62,56 @@ public class PegdownOptionsAdapter {
         return optionsAdapter.getFlexmarkOptions(strictHtml, extensions);
     }
 
+    /**
+     * @deprecated  Use {@link #haveAnyExtensions(int)}
+     */
+    @Deprecated
     public boolean haveExtensions(int mask) {
-        return (myPegdownExtensions & mask) != 0;
+        return haveAnyExtensions(mask);
     }
 
+    /**
+     * @deprecated  Use {@link #haveAllExtensions(int)}
+     */
+    @Deprecated
     public boolean allExtensions(int mask) {
-        return (myPegdownExtensions & mask) == mask;
+        return haveAllExtensions(mask);
+    }
+
+    /**
+     * Test if any given extensions are set
+     * 
+     * @param mask extension flag mask
+     * @return true if any of the extensions given by the mask are set
+     */
+    public boolean haveAnyExtensions(int mask) {
+        return ParserEmulationProfile.haveAny(myPegdownExtensions, mask);
+    }
+
+    /**
+     * Test if all given extensions are set
+     * 
+     * @param mask extension flag mask
+     * @return true if any of the extensions given by the mask are set
+     */
+    public boolean haveAllExtensions(int mask) {
+        return ParserEmulationProfile.haveAll(myPegdownExtensions, mask);
     }
 
     public DataHolder getFlexmarkOptions(Extension... additionalExtensions) {
-        return getFlexmarkOptions(false,additionalExtensions);
+        return getFlexmarkOptions(false, additionalExtensions);
     }
 
     public DataHolder getFlexmarkOptions(boolean strictHtml, Extension... additionalExtensions) {
         if (myIsUpdateNeeded) {
             myIsUpdateNeeded = false;
             MutableDataSet options = myOptions;
-            ArrayList<Extension> extensions = new ArrayList<Extension>();
+            ArrayList<Extension> extensions = new ArrayList<Extension>(Arrays.asList(additionalExtensions));
 
             options.clear();
 
             // add this for extension use if needed
-            options.set(PEGDOWN_EXTENSIONS, myPegdownExtensions);
-
-            extensions.addAll(Arrays.asList(additionalExtensions));
+            options.set(ParserEmulationProfile.PEGDOWN_EXTENSIONS, myPegdownExtensions);
 
             // Setup List Options for Fixed List Indent profile
             options.setFrom(strictHtml ? ParserEmulationProfile.PEGDOWN_STRICT : ParserEmulationProfile.PEGDOWN);

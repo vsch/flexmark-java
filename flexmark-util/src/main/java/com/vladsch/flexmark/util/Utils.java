@@ -101,6 +101,10 @@ public class Utils {
         return suffixWith(receiver, suffix, false);
     }
 
+    public static String suffixWithEol(String receiver) {
+        return suffixWith(receiver, '\n', false);
+    }
+
     public static String suffixWith(String receiver, char suffix, boolean ignoreCase) {
         if (receiver != null && !receiver.isEmpty() && !endsWith(receiver, String.valueOf(suffix), ignoreCase)) {
             return receiver + suffix;

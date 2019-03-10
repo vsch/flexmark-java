@@ -92,8 +92,8 @@ Future 0.50.0
   2. add `append(Collection<CharSequence>)` for easy appending of child rendered results
   3. no callback methods and convoluted logic implementing indentations during content
      construction since these can be easily applied to individual lines once they are generated.
-  5. provide implement `List<CharSequence>` interface for its content lines
-  4. provide `currentLine()` for last content line which does not yet have an EOL
+  4. provide implement `List<CharSequence>` interface for its content lines
+  5. provide `currentLine()` for last content line which does not yet have an EOL
   6. provide `currentLineIndex()` as `int` for the index of the `currentLine()` value, will be
      equal to `size()` if the current line has no content, ie. end of output after previous line
      terminated with EOL.
@@ -108,11 +108,20 @@ Future 0.50.0
 
 * Add: `Parser.WWW_AUTO_LINK_ELEMENT`, default `false`. If `true` then strings of the form
   `<www.someurl>` will be parsed as auto-links
+* Fix: copy `Extensions` from `flexmark-profile-pegdown` module to `PegdownExtensions` in core
+  parser. Old class still available and extends the new named class.
+* Add: `ParserEmulationProfile.getOptions(DataHolder)` to `ParserEmulationProfile` to allow
+  using current option values in deciding what the settings should be for the profile. Used by
+  `ParserEmulationProfile.PEGDOWN`
+* Fix: [#323, TOC generation improvement], profile setting HeaderId generation to `false` even
+  though `PegdownExtensions.ANCHORLINKS` is not used
+* [ ] Add: css option to PDF export and use as default css from
+      [#323, TOC generation improvement], thanks to [@jvdvegt]
 
 0.40.22
 -------
 
-* Fix: merge util tests from [@James-Adam](https://github.com/James-Adam) and fix bugs 
+* Fix: merge util tests from [@James-Adam](https://github.com/James-Adam) and fix bugs
 * Fix: change to `MutableDataSet.set(DataKey<? extends T>, T)`
 
 0.40.20
@@ -145,7 +154,7 @@ Future 0.50.0
   in `SpecReader` and add a message to all example tests with the file URL with `:xxx` where
   `xxx` is the line number of the spec example in the file.
 
-  This will print the source location of the test in the console. Clicking the link goes right
+* This will print the source location of the test in the console. Clicking the link goes right
   to the spec source file and line of the failed test if [Awesome Console] plugin is installed.
 
 0.40.18
@@ -155,24 +164,28 @@ Future 0.50.0
   unless `HtmlRenderer.EMBEDDED_NODE_PROVIDER` is set to false. Add attributes to nodes in the
   AST by inserting a `EmbeddedAttributeProvider.EmbeddedNodeAttributes` node with the desired
   attributes. See: [NodeInsertingPostProcessorSample.java] for example.
+
 * Add: document that `DocxRenderer` emoji with GitHub preferred is not able to download images,
   compiling `ImageUtils` library with Java 8 eliminates the problem.
+
 * Add: resource file URL to `SpecReader` and add a message to all example tests with the file
   URL with `:xxx` where `xxx` is the line number of the spec example in the file.
 
-  This will print the source location of the test in the console. Clicking the link goes right
+* This will print the source location of the test in the console. Clicking the link goes right
   to the spec source file and line of the failed test. Unfortunately this URL will only work in
   IntelliJ when JetBrains add this to console to handle such `file://` URLs:
   [YouTrack: IDEA-207453]
+
 * Fix: [#310, PR: Change URL of GitHub CDN] thanks to [benelog](https://github.com/benelog)
+
 * Fix: `AsideExtension` option keys to be dynamic data keys dependent on corresponding Parser
   block quote options for their defaults.
 
-  :warning: This can potentially break code relying on versions of the extension before
+* :warning: This can potentially break code relying on versions of the extension before
   `0.40.18` because parsing rules can change depending on which block quote options are changed
   from their default values.
 
-  To ensure independent options for aside blocks and block quotes, set aside options explicitly.
+* To ensure independent options for aside blocks and block quotes, set aside options explicitly.
   The following will set all aside options to default values, independent from block quote
   options:
 
@@ -185,9 +198,11 @@ Future 0.50.0
 
 * Deprecate: `Parser.BLOCK_QUOTE_TO_BLANK_LINE`, use more mnemonic
   `Parser.BLOCK_QUOTE_EXTEND_TO_BLANK_LINE`
+
 * Deprecate: `CustomNode` and `CustomBlock`. `Block` and `Node` should be used directly. The
   library aims to make no distinction between core and extension implementations, these classes
   add no useful information.
+
 * Deprecate: BaseSequence had old named functions which were misleading and duplicated under
   proper names:
   * `countChars()` -> `countLeading()`
@@ -195,16 +210,19 @@ Future 0.50.0
   * `countCharsReversed()` -> `countTrailing()`
   * `countNotCharsReversed()` -> `countTrailingNot()`
 
-  First of all they only counted leading characters which the name did not imply. Second they
+* First of all they only counted leading characters which the name did not imply. Second they
   were duplicated.
 
-  Add character counting functions:
+* Add character counting functions:
 
   * `countOfAny()`
   * `countOfAnyNot()`
+
 * Fix: `DefinitionExtension` does not correctly set the child parse column, causing list items
   to be expecting 1 extra space for child item recognition.
+
 * Add: `ExtensionConversion.NONE` to suppress any output from corresponding element
+
 * Add: `FlexmarkHtmlParser.EXT_MATH`, default `ExtensionConversion.HTML`, for selecting `<math>`
   tag processing. For now only `MARKDOWN` does nothing useful. Later it will be used to convert
   math ml to GitLab math inline element.
@@ -327,7 +345,7 @@ Future 0.50.0
   * press `Run`
   * in the refactoring preview tool window that opens hit `Do Refactor`
 
-  :warning: In my projects, the IDE can miss some class migrations, especially on files which
+* :warning: In my projects, the IDE can miss some class migrations, especially on files which
   are not open. Re-running the migration tends to apply the migration. In cases where migration
   is not applied manual editing will be needed. In my projects `Document`, `Node` and
   `Formatter` were the problem classes:
@@ -337,7 +355,7 @@ Future 0.50.0
   * `com.vladsch.flexmark.formatter.internal.Formatter` to
     `com.vladsch.flexmark.formatter.Formatter`
 
-  :warning: `flexmark-docx-converter` and `flexmark-pdf-converter` cannot be used with Java 9+
+* :warning: `flexmark-docx-converter` and `flexmark-pdf-converter` cannot be used with Java 9+
   modules because the underlying libraries used have package load conflicts that will be
   resolved in a later release.
 
@@ -463,7 +481,7 @@ Future 0.50.0
 * Fix: `ReplacedTextMapper` can only handle a single replacement set, while AutoLinkExtension
   was applying a replacement on top of already replaced text.
 
-  :warning: Now any functions which perform replacements using `ReplacedTextMapper` need to
+* :warning: Now any functions which perform replacements using `ReplacedTextMapper` need to
   check if the passed in text mapper `isModified()` and if this is the case invoke
   `startNestedReplacement(BasedSequence)`.
 * Add: log4j logging to `DocumentParser`, when debug is enabled parser will log resulting AST
@@ -486,7 +504,7 @@ Future 0.50.0
   a trailing blank line is not attributable to the block element, block quotes have explicit
   prefix which identifies the blank line as part of the block quote.
 
-  :warning: trailing blank line nodes will be appended to the block quote even if
+* :warning: trailing blank line nodes will be appended to the block quote even if
   `Parser.BLANK_LINES_IN_AST` is `false` to force block quote to span the blank lines as the
   only way to extend the block quote enclosed characters.
 
@@ -695,13 +713,13 @@ Future 0.50.0
   * `EXT_INLINE_SUB` - sub
   * `EXT_INLINE_SUP` - sup
 
-  Available settings:
+* Available settings:
 
   * `ExtensionConversion.MARKDOWN` - convert to markdown
   * `ExtensionConversion.TEXT` - convert to inner text
   * `ExtensionConversion.HTML` - leave HTML as is
 
-  Corresponding `SKIP_` options have been deprecated since their function is duplicated by new
+* Corresponding `SKIP_` options have been deprecated since their function is duplicated by new
   options.
 
 0.34.26
@@ -883,10 +901,10 @@ Future 0.50.0
   suppressed before it is resolved. Likewise, a link resolver returning a suppressed link will
   not be suppressed since this is up to the custom link resolver to handle.
 
-  Suppressed links will render only the child nodes, effectively `[Something
+* Suppressed links will render only the child nodes, effectively `[Something
   New](javascript:alert(1))` will render as if it was `Something New`.
 
-  Link suppression based on URL prefixes does not apply to HTML inline or block elements. Use
+* Link suppression based on URL prefixes does not apply to HTML inline or block elements. Use
   HTML suppression options for this.
 * Add: `AutolinkExtension.IGNORE_LINKS` default `""`, a regex expression to match link text
   which should not be auto-linked. This can include full urls like `www.google.com` or parts by
@@ -1013,7 +1031,7 @@ Future 0.50.0
 * **Change**: `AttributesExtension.ASSIGN_TEXT_ATTRIBUTES`, default `true`. Set to `false` for
   backward compatibility.
 
-  When `true` attribute assignment rules to nodes are changed to allow text elements to get
+* When `true` attribute assignment rules to nodes are changed to allow text elements to get
   attributes. If an attribute element is spaced from the previous plain text element `some text
   {attributes}` then attributes are for the parent of the text. If they are attached to the text
   element `some text{attributes}` then they are assigned to the immediately preceding plain text
@@ -1021,11 +1039,11 @@ Future 0.50.0
   emphasis span, while `**bold text{attr}**` will wrap the text between the strong emphasis
   tags, in a span with given attributes.
 
-  If a plain text span is interrupted by an HTML comment then it is considered as two separate
+* If a plain text span is interrupted by an HTML comment then it is considered as two separate
   plain text spans. ie. `some <!---->text{attr}` will result in `some <!----><span
   attr>text</span>` rendering.
 
-  Full spec:
+* Full spec:
   [ext_attributes_ast_spec](flexmark-ext-attributes/src/test/resources/ext_attributes_ast_spec.md)
 
 * Fix: Attributes, when they are first child then delete leading spaces of following node first
@@ -1034,7 +1052,7 @@ Future 0.50.0
 * Add: Attribute syntax option allows `Attributes` on reference definition so that all elements
   referencing it, inherit the attributes.
 
-  To assign attributes to a reference definition you need to leave a blank line between the
+* To assign attributes to a reference definition you need to leave a blank line between the
   reference definition and the attributes element, placed by itself and followed by a blank
   line.
 
@@ -1086,10 +1104,10 @@ Future 0.50.0
     attribute provider. Such an extension can be used as is with `HtmlRenderer` and
     `DocxRenderer`
 
-    `RendererExtension.extend(RendererBuilder, String)` method of these gets passed
+  * `RendererExtension.extend(RendererBuilder, String)` method of these gets passed
     `RendererBuilder` instead of `HtmlRenderer.Builder`
 
-    extensions that implement both `RendererExtension` and `HtmlRendererExtension` will have
+  * extensions that implement both `RendererExtension` and `HtmlRendererExtension` will have
     only have the html renderer extension `extend` method called.
 
 * Add: `flexmark-ext-aside` handling to DocxConverter
@@ -1205,6 +1223,8 @@ setting either will affect both keys. For information on these keys see
 [#316, Github user extension incorrectly formats some text]: https://github.com/vsch/flexmark-java/issues/316
 [#317, FlexmarkHtmlParser outputs extra newline when converting nested \<ol\>, \<ul\> lists]: https://github.com/vsch/flexmark-java/issues/317
 [#318, Ability to disable table caption in FlexmarkHtmlParser]: https://github.com/vsch/flexmark-java/issues/318
+[#323, TOC generation improvement]: https://github.com/vsch/flexmark-java/issues/323
+[@jvdvegt]: https://github.com/jvdvegt
 [Admonition Extension, Material for MkDocs]: https://squidfunk.github.io/mkdocs-material/extensions/admonition/
 [Awesome Console]: https://plugins.jetbrains.com/plugin/7677-awesome-console "Awesome Console"
 [migrate 0_35_x to 0_40_0.xml]: /assets/migrations/migrate%20flexmark-java%200_35_x%20to%200_40_0.xml
