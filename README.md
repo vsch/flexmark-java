@@ -12,7 +12,7 @@ The API allows granular control of the parsing process and is optimized for pars
 number of installed extensions. The parser and extensions come with plenty of options for parser
 behavior and HTML rendering variations. The end goal is to have the parser and renderer be able
 to mimic other parsers with great degree of accuracy. This is now partially complete with the
-implementation of [Markdown Processor Family Emulation](#markdown-processor-emulation)
+implementation of [Markdown Processor Emulation](#markdown-processor-emulation)
 
 Motivation for this project was the need to replace [pegdown] parser in my [Markdown Navigator]
 plugin for JetBrains IDEs. [pegdown] has a great feature set but its speed in general is less
@@ -177,7 +177,7 @@ custom node renderer if you need to override the generated link HTML.
 * [Macros Extension](../../wiki/Macros-Extension) to allow arbitrary markdown content to be
   inserted as block or inline elements, allowing block elements to be used where only inline
   elements are allowed by syntax.
-* [Gitlab Flavoured Markdown Extensions](../../wiki/Extensions#gitlab-flavoured-markdown) for
+* [Extensions: Gitlab Flavoured Markdown](../../wiki/Extensions#gitlab-flavoured-markdown) for
   parsing and rendering GitLab markdown extensions.
 * OSGi module courtesy Dan Klco (GitHub [@klcodanr](https://github.com/klcodanr))
 * [Extensions: Media Tags](../../wiki/Extensions#media-tags) Media link transformer extension

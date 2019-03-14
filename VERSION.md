@@ -77,7 +77,6 @@ flexmark-java
 Future 0.50.0
 -------------
 
-* [ ] Add: discourse for flexmark-java feature discussions
 * [ ] Fix: `FormattingAppendable` deprecate all conditional formatting related methods and
       methods only needed because of convoluted output construction.
 * [x] Deprecate: all conditional formatting methods in `FormattingAppendable`
@@ -102,10 +101,18 @@ Future 0.50.0
 * [ ] Add: `FlexmarkHtmlParser` options:
   * [ ] Fix: [#313, Ability to override tags processing in FlexmarkHtmlParser]
   * [ ] `EXT_TABLES` conversion option not yet implemented.
+* [ ] Add: `<!-- @formatter:on -->` and `<!-- @formatter:on -->` tags to `Formatter` for
+      controlling non-formatting regions.
 
 0.40.24
 -------
 
+* Break: test case related classes changed to allow providing URL string for the file resource
+  used in the text instead of relying on heuristic conversion of resource URL to file path.
+* Fix: [#326, flexmark-html-parser - multiple \<code\> inside \<pre\> bug]
+* Fix: `EscapedCharacterExtension` disabled for `DoNotLinkDecorate` nodes if another extension
+  specified its `NodePostProcessorFactory` as dependent on `Text` with `DoNotDecorate` and
+  `DoNotLinkDecorate` and the extension was added after `EscapedCharacterExtension`
 * Add: `Parser.WWW_AUTO_LINK_ELEMENT`, default `false`. If `true` then strings of the form
   `<www.someurl>` will be parsed as auto-links
 * Fix: copy `Extensions` from `flexmark-profile-pegdown` module to `PegdownExtensions` in core
@@ -115,8 +122,31 @@ Future 0.50.0
   `ParserEmulationProfile.PEGDOWN`
 * Fix: [#323, TOC generation improvement], profile setting HeaderId generation to `false` even
   though `PegdownExtensions.ANCHORLINKS` is not used
-* [ ] Add: css option to PDF export and use as default css from
-      [#323, TOC generation improvement], thanks to [@jvdvegt]
+* Add: css option to PDF export and use as default css from
+      [#323, TOC generation improvement], thanks to @jvdvegt
+  * Add: `PdfConverterExtension.DEFAULT_CSS` data key with default value of embedded CSS. 
+  * Add: `PdfConverterExtension.embedCss(String html, String css)` will embed the css in html by
+    inserting it between `<head>` and `</head>` wrapped in `<style>` and `</style>`. Does its
+    best to generate valid HTML, use it if your don't want to bother creating your own HTML
+    document with embedded CSS.
+  
+  :information_source: Default CSS is only added if
+  `PdfConverterExtension.exportToPdf(OutputStream, String, String, DataHolder)` is used to
+  provide options. For all other calls you need to embed the default css into your HTML string
+  before exporting to PDF.
+* Fix: HTML parser link/image conversion to ref link and reference when cannot create a valid
+  reference fallback to generating explicit link instead.
+* Fix: HTML parser ignoring `NONE` for `FlexmarkHtmlParser.EXT_INLINE_LINK` and
+  `FlexmarkHtmlParser.EXT_INLINE_IMAGE` options
+* Fix: HTML parser to add blank line before block quote and aside if they are not the first
+  child of their parent.
+* Fix: HTML parser, divs always generated line before and after, instead of before if not first
+  child element and after if not last child element.
+* Add: `IParse.transferReferences(Document, Document, Boolean)`, to allow overriding repository
+  `KeepType` selected copying behaviour for references already defined in the destination
+  document.
+* Deprecate: `IParse.transferReferences(Document, Document)`, in favour of
+  `IParse.transferReferences(Document, Document, Boolean)`
 
 0.40.22
 -------
@@ -130,6 +160,7 @@ Future 0.50.0
 * Fix: [#316, Github user extension incorrectly formats some text]
   * Add: test to make sure previous character to `@` is not `isUnicodeIdentifierPart()`, `-` nor
     `.`
+
 * Add: `FlexmarkHtmlParser` options:
   * Fix: [#318, Ability to disable table caption in FlexmarkHtmlParser],
     * Add: `TABLE_CAPTION` option as a convenience alias for `Formatter.FORMAT_TABLE_CAPTION`.
@@ -150,6 +181,7 @@ Future 0.50.0
   * `EXT_INLINE_LINK` and `EXT_INLINE_IMAGE` option default `LinkConversion.MARKDOWN_EXPLICIT`,
     specifies type of link and image conversion to apply: `NONE`, `MARKDOWN_EXPLICIT`,
     `MARKDOWN_REFERENCE`, `TEXT`, `HTML`
+
 * Add: Remove reliance on [YouTrack: IDEA-207453] and instead change resource file URL to path
   in `SpecReader` and add a message to all example tests with the file URL with `:xxx` where
   `xxx` is the line number of the spec example in the file.
@@ -176,7 +208,7 @@ Future 0.50.0
   IntelliJ when JetBrains add this to console to handle such `file://` URLs:
   [YouTrack: IDEA-207453]
 
-* Fix: [#310, PR: Change URL of GitHub CDN] thanks to [benelog](https://github.com/benelog)
+* Fix: [#310, PR: Change URL of GitHub CDN] thanks to @benelog
 
 * Fix: `AsideExtension` option keys to be dynamic data keys dependent on corresponding Parser
   block quote options for their defaults.
@@ -473,31 +505,40 @@ Future 0.50.0
 ------
 
 * Fix: base64 encoding function in `ImageUtils` to remove `\n` from encoded string.
+
 * Fix: Aside extension to use new `KeepTrailingBlankLineContainer` marker for blocks which have
   a prefix which allows attribution of blank lines to the block.
+
 * Add: sample for converting inline nodes to text nodes in node post processor. Thanks to
   **[@markkolich](https://github.com/markkolich)**.
   * Merged [#288, PR: Adding TokenReplacingPostProcessorSample and UnderlineExtensionSample]
+
 * Fix: `ReplacedTextMapper` can only handle a single replacement set, while AutoLinkExtension
   was applying a replacement on top of already replaced text.
 
 * :warning: Now any functions which perform replacements using `ReplacedTextMapper` need to
   check if the passed in text mapper `isModified()` and if this is the case invoke
   `startNestedReplacement(BasedSequence)`.
+
 * Add: log4j logging to `DocumentParser`, when debug is enabled parser will log resulting AST
   after parsing, paragraph pre-processing, block pre-processing and inline processing to isolate
   where a problem is introduced by an extension into the AST.
+
 * Breaking: :warning: Potentially breaking change for some code if parsing with
   `Parser.BLANK_LINES_IN_AST` enabled. Last blank line of blocks is now moved out to the parent
   block. Greatest effect is on list items which previously held on to their last blank line,
   except for the last item in the list. Now all trailing blank lines are moved out to the parent
   list. Therefore children of lists can be list items or blank lines, not just list items. This
   makes blank line attribution more consistent.
+
 * Fix: [#287, ''flexmark-html-parser' The module has an mistake]
+
 * Fix: empty table cells now contain a space so that the position of the cell's text in the file
   is not lost.
+
 * Fix: Formatter inline elements leaving embedded EOL sequences when
   `Formatter.KEEP_SOFT_LINE_BREAKS` is false.
+
 * Fix: trailing blank lines in block quotes are now left inside the block quote instead of
   moving them up to the document level if these blank lines are unambiguously attributable to
   the block quote by having a block quote prefix on the line. Unlike other block elements where
@@ -738,7 +779,7 @@ Future 0.50.0
   `BasedSequenceImpl.countNotCharsReversed(char, int, int)` to not return -1, should return 0
 * Fix: `BasedSequenceImpl.spliceAtEnd()` not to fail if this or other is empty
 * Add: `GitLabExtension`, Documented in
-  [Gitlab Flavoured Markdown Extensions](../../wiki/Extensions#gitlab-flavoured-markdown)
+  [Extensions: Gitlab Flavoured Markdown](../../wiki/Extensions#gitlab-flavoured-markdown)
 
 0.34.22
 -------
@@ -797,7 +838,7 @@ Future 0.50.0
 0.34.12
 -------
 
-* Fix: merge [#249, support Jira links titles] thanks to [@qwazer](https://github.com/qwazer)
+* Fix: merge [#249, support Jira links titles] thanks to @qwazer
 
 0.34.10
 -------
@@ -888,13 +929,18 @@ Future 0.50.0
     `TaskListExtension.ITEM_CLASS`
   * Add: depreciation of `TaskListExtension.ITEM_CLASS` in favour of
     `TaskListExtension.TIGHT_ITEM_CLASS`
+
 * Fix: merge [#231, PR: Fix two small bugs in ext-toc]
   [@BlueBoxWare](https://github.com/BlueBoxWare)
+
 * Add: `TaskListAttributeProviderSample` to `flexmark-java-samples` module.
+
 * Add: `GitHubParsingSample` to `flexmark-java-samples` module to show GitHub compatible parser
   setup.
+
 * Add: `ParserEmulationProfile.GITHUB` to reflect current GitHub profile, effectively it is
   `ParserEmulationProfile.COMMONMARK_0_28` with GitHub compatible id generator settings.
+
 * Fix: [#221, XSS: Javascript execution through links], add `HtmlRenderer.SUPPRESSED_LINKS`
   default `"javascript:.*"`, a regular expression to suppress any links that match. The test
   occurs before the link is resolved using a link resolver. Therefore any link matching will be
@@ -906,6 +952,7 @@ Future 0.50.0
 
 * Link suppression based on URL prefixes does not apply to HTML inline or block elements. Use
   HTML suppression options for this.
+
 * Add: `AutolinkExtension.IGNORE_LINKS` default `""`, a regex expression to match link text
   which should not be auto-linked. This can include full urls like `www.google.com` or parts by
   including wildcard match patterns. Any recognized auto-link which matches the expression will
@@ -1098,8 +1145,10 @@ Future 0.50.0
   * `AttributesProviderFactory` pass only `LinkResolverContext` instead of
     `NodeRenderingContext` to allow for attribute provider extensions to be re-used with
     `DocxRender`
+
   * `HeadIdGenerator` pass only `LinkResolverContext` instead of `NodeRenderingContext` to allow
     for header id generator provider extensions to be re-used with `DocxRender`
+
   * new `RendererExtension` with only ability to register html id generator, link resolver and
     attribute provider. Such an extension can be used as is with `HtmlRenderer` and
     `DocxRenderer`
@@ -1224,15 +1273,10 @@ setting either will affect both keys. For information on these keys see
 [#317, FlexmarkHtmlParser outputs extra newline when converting nested \<ol\>, \<ul\> lists]: https://github.com/vsch/flexmark-java/issues/317
 [#318, Ability to disable table caption in FlexmarkHtmlParser]: https://github.com/vsch/flexmark-java/issues/318
 [#323, TOC generation improvement]: https://github.com/vsch/flexmark-java/issues/323
-[@jvdvegt]: https://github.com/jvdvegt
+[#326, flexmark-html-parser - multiple \<code\> inside \<pre\> bug]: https://github.com/vsch/flexmark-java/issues/326
 [Admonition Extension, Material for MkDocs]: https://squidfunk.github.io/mkdocs-material/extensions/admonition/
 [Awesome Console]: https://plugins.jetbrains.com/plugin/7677-awesome-console "Awesome Console"
 [migrate 0_35_x to 0_40_0.xml]: /assets/migrations/migrate%20flexmark-java%200_35_x%20to%200_40_0.xml
 [NodeInsertingPostProcessorSample.java]: https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/samples/NodeInsertingPostProcessorSample.java
 [YouTrack: IDEA-207453]: https://youtrack.jetbrains.com/issue/IDEA-207453 "Add Conversion of ref anchor to UrlFilter for file line navigation"
-[#99, YamlFrontMatterBlockParser ignores multi-key list items]: https://github.com/vsch/flexmark-java/issues/99
-[Benchmarks]: https://github.com/github/cmark-gfm/blob/master/benchmarks.md
-[cmark/spec.txt]: https://github.com/commonmark/cmark/blob/master/test/spec.txt "cmark/spec.txt at master · commonmark/cmark · GitHub"
-[GitHub - github/cmark-gfm]: https://github.com/github/cmark-gfm "GitHub - github/cmark-gfm: GitHub's fork of cmark, a CommonMark parsing and rendering library and program in C"
-[https://github.com/commonmark/cmark]: https://github.com/commonmark/cmark "GitHub - commonmark/cmark: CommonMark parsing and rendering library and program in C"
 

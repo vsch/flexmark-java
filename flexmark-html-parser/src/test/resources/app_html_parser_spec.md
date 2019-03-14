@@ -3942,36 +3942,66 @@ td
 text wrapped in div should be treated as having a hard break at the end.
 
 ```````````````````````````````` example Apple Mail: 1
-P.S. I will focus on the conversion of elements you listed in your prioritized list but will
-implement all markdown elements for the final version of the module. I like orthogonal solutions
+P.S. I will focus on the conversion of elements you listed in your prioritized list but will  
+implement all markdown elements for the final version of the module. I like orthogonal solutions  
 that require as little effort in use as much as possible.
 
 .
-<div style="color: rgb(0, 0, 0); font-family: 'American Typewriter'; font-size: 14px; font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><div><div>P.S. I will focus on the conversion of elements you listed in your prioritized list but will</div><div>implement all markdown elements for the final version of the module. I like orthogonal solutions</div><div>that require as little effort in use as much as possible.</div></div></div><br class="Apple-interchange-newline">
+<div style="color: rgb(0, 0, 0); font-family: 'American Typewriter'; font-size: 14px; font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">
+  <div>
+    <div>P.S. I will focus on the conversion of elements you listed in your prioritized list but will</div>
+    <div>implement all markdown elements for the final version of the module. I like orthogonal solutions</div>
+    <div>that require as little effort in use as much as possible.</div>
+  </div>
+</div><br class="Apple-interchange-newline">
 ````````````````````````````````
 
 
 ```````````````````````````````` example Apple Mail: 2
-For compartment at 20 C, chilled to 0 C gives 25%, 5 C gives 33%, 10 C gives 52%
+For compartment at 20 C, chilled to 0 C gives 25%, 5 C gives 33%, 10 C gives 52%  
 
-For compartment at 25 C, chilled to 0 C gives 19%, 5 C gives 25%, 10 C gives 39%
+For compartment at 25 C, chilled to 0 C gives 19%, 5 C gives 25%, 10 C gives 39%  
 
-For compartment at 30 C, chilled to 0 C gives 14%, 5 C gives 18%, 10 C gives 38%
+For compartment at 30 C, chilled to 0 C gives 14%, 5 C gives 18%, 10 C gives 38%  
 
 For compartment at 35 C, chilled to 0 C gives 11%, 5 C gives 14%, 10 C gives 22%
 
 .
-<div class="" style="color: rgb(0, 0, 0); font-family: AmericanTypewriter; font-size: 14px; font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><div class="">For compartment at 20 C, chilled to 0 C gives 25%, 5 C gives 33%, 10 C gives 52%</div></div><div class="" style="color: rgb(0, 0, 0); font-family: AmericanTypewriter; font-size: 14px; font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><br class=""></div><div class="" style="color: rgb(0, 0, 0); font-family: AmericanTypewriter; font-size: 14px; font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">For compartment at 25 C, chilled to 0 C gives 19%, 5 C gives 25%, 10 C gives 39%</div><div class="" style="color: rgb(0, 0, 0); font-family: AmericanTypewriter; font-size: 14px; font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><br class=""></div><div class="" style="color: rgb(0, 0, 0); font-family: AmericanTypewriter; font-size: 14px; font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><div class="">For compartment at 30 C, chilled to 0 C gives 14%, 5 C gives 18%, 10 C gives 38%</div></div><div class="" style="color: rgb(0, 0, 0); font-family: AmericanTypewriter; font-size: 14px; font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><br class=""></div><div class="" style="color: rgb(0, 0, 0); font-family: AmericanTypewriter; font-size: 14px; font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><div class="">For compartment at 35 C, chilled to 0 C gives 11%, 5 C gives 14%, 10 C gives 22%</div></div><br class="Apple-interchange-newline">
+<div class="" style="color: rgb(0, 0, 0); font-family: AmericanTypewriter; font-size: 14px; font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">
+  <div class="">For compartment at 20 C, chilled to 0 C gives 25%, 5 C gives 33%, 10 C gives 52%</div>
+</div>
+<div class="" style="color: rgb(0, 0, 0); font-family: AmericanTypewriter; font-size: 14px; font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><br class=""></div>
+<div class="" style="color: rgb(0, 0, 0); font-family: AmericanTypewriter; font-size: 14px; font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">For compartment at 25 C, chilled to 0 C gives 19%, 5 C gives 25%, 10 C gives 39%</div>
+<div class="" style="color: rgb(0, 0, 0); font-family: AmericanTypewriter; font-size: 14px; font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><br class=""></div>
+<div class="" style="color: rgb(0, 0, 0); font-family: AmericanTypewriter; font-size: 14px; font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">
+  <div class="">For compartment at 30 C, chilled to 0 C gives 14%, 5 C gives 18%, 10 C gives 38%</div>
+</div>
+<div class="" style="color: rgb(0, 0, 0); font-family: AmericanTypewriter; font-size: 14px; font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><br class=""></div>
+<div class="" style="color: rgb(0, 0, 0); font-family: AmericanTypewriter; font-size: 14px; font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">
+  <div class="">For compartment at 35 C, chilled to 0 C gives 11%, 5 C gives 14%, 10 C gives 22%</div>
+</div><br class="Apple-interchange-newline">
 ````````````````````````````````
 
 
 ```````````````````````````````` example(Apple Mail: 3) options(no-br-as-para-breaks)
-For compartment at 20 C, chilled to 0 C gives 25%, 5 C gives 33%, 10 C gives 52%
-For compartment at 25 C, chilled to 0 C gives 19%, 5 C gives 25%, 10 C gives 39%
-For compartment at 30 C, chilled to 0 C gives 14%, 5 C gives 18%, 10 C gives 38%
+For compartment at 20 C, chilled to 0 C gives 25%, 5 C gives 33%, 10 C gives 52%    
+For compartment at 25 C, chilled to 0 C gives 19%, 5 C gives 25%, 10 C gives 39%    
+For compartment at 30 C, chilled to 0 C gives 14%, 5 C gives 18%, 10 C gives 38%    
 For compartment at 35 C, chilled to 0 C gives 11%, 5 C gives 14%, 10 C gives 22%
 .
-<div class="" style="color: rgb(0, 0, 0); font-family: AmericanTypewriter; font-size: 14px; font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><div class="">For compartment at 20 C, chilled to 0 C gives 25%, 5 C gives 33%, 10 C gives 52%</div></div><div class="" style="color: rgb(0, 0, 0); font-family: AmericanTypewriter; font-size: 14px; font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><br class=""></div><div class="" style="color: rgb(0, 0, 0); font-family: AmericanTypewriter; font-size: 14px; font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">For compartment at 25 C, chilled to 0 C gives 19%, 5 C gives 25%, 10 C gives 39%</div><div class="" style="color: rgb(0, 0, 0); font-family: AmericanTypewriter; font-size: 14px; font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><br class=""></div><div class="" style="color: rgb(0, 0, 0); font-family: AmericanTypewriter; font-size: 14px; font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><div class="">For compartment at 30 C, chilled to 0 C gives 14%, 5 C gives 18%, 10 C gives 38%</div></div><div class="" style="color: rgb(0, 0, 0); font-family: AmericanTypewriter; font-size: 14px; font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><br class=""></div><div class="" style="color: rgb(0, 0, 0); font-family: AmericanTypewriter; font-size: 14px; font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><div class="">For compartment at 35 C, chilled to 0 C gives 11%, 5 C gives 14%, 10 C gives 22%</div></div><br class="Apple-interchange-newline">
+<div class="" style="color: rgb(0, 0, 0); font-family: AmericanTypewriter; font-size: 14px; font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">
+  <div class="">For compartment at 20 C, chilled to 0 C gives 25%, 5 C gives 33%, 10 C gives 52%</div>
+</div>
+<div class="" style="color: rgb(0, 0, 0); font-family: AmericanTypewriter; font-size: 14px; font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><br class=""></div>
+<div class="" style="color: rgb(0, 0, 0); font-family: AmericanTypewriter; font-size: 14px; font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">For compartment at 25 C, chilled to 0 C gives 19%, 5 C gives 25%, 10 C gives 39%</div>
+<div class="" style="color: rgb(0, 0, 0); font-family: AmericanTypewriter; font-size: 14px; font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><br class=""></div>
+<div class="" style="color: rgb(0, 0, 0); font-family: AmericanTypewriter; font-size: 14px; font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">
+  <div class="">For compartment at 30 C, chilled to 0 C gives 14%, 5 C gives 18%, 10 C gives 38%</div>
+</div>
+<div class="" style="color: rgb(0, 0, 0); font-family: AmericanTypewriter; font-size: 14px; font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><br class=""></div>
+<div class="" style="color: rgb(0, 0, 0); font-family: AmericanTypewriter; font-size: 14px; font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">
+  <div class="">For compartment at 35 C, chilled to 0 C gives 11%, 5 C gives 14%, 10 C gives 22%</div>
+</div><br class="Apple-interchange-newline">
 ````````````````````````````````
 
 
@@ -3993,12 +4023,24 @@ For compartment at 35 C, chilled to 0 C gives 11%, 5 C gives 14%, 10 C gives 22%
 <br />
 
 .
-<div class="" style="color: rgb(0, 0, 0); font-family: AmericanTypewriter; font-size: 14px; font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><div class="">For compartment at 20 C, chilled to 0 C gives 25%, 5 C gives 33%, 10 C gives 52%</div></div><div class="" style="color: rgb(0, 0, 0); font-family: AmericanTypewriter; font-size: 14px; font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><br class=""></div><div class="" style="color: rgb(0, 0, 0); font-family: AmericanTypewriter; font-size: 14px; font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">For compartment at 25 C, chilled to 0 C gives 19%, 5 C gives 25%, 10 C gives 39%</div><div class="" style="color: rgb(0, 0, 0); font-family: AmericanTypewriter; font-size: 14px; font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><br class=""></div><div class="" style="color: rgb(0, 0, 0); font-family: AmericanTypewriter; font-size: 14px; font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><div class="">For compartment at 30 C, chilled to 0 C gives 14%, 5 C gives 18%, 10 C gives 38%</div></div><div class="" style="color: rgb(0, 0, 0); font-family: AmericanTypewriter; font-size: 14px; font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><br class=""></div><div class="" style="color: rgb(0, 0, 0); font-family: AmericanTypewriter; font-size: 14px; font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><div class="">For compartment at 35 C, chilled to 0 C gives 11%, 5 C gives 14%, 10 C gives 22%</div></div><br class="Apple-interchange-newline">
+<div class="" style="color: rgb(0, 0, 0); font-family: AmericanTypewriter; font-size: 14px; font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">
+  <div class="">For compartment at 20 C, chilled to 0 C gives 25%, 5 C gives 33%, 10 C gives 52%</div>
+</div>
+<div class="" style="color: rgb(0, 0, 0); font-family: AmericanTypewriter; font-size: 14px; font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><br class=""></div>
+<div class="" style="color: rgb(0, 0, 0); font-family: AmericanTypewriter; font-size: 14px; font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">For compartment at 25 C, chilled to 0 C gives 19%, 5 C gives 25%, 10 C gives 39%</div>
+<div class="" style="color: rgb(0, 0, 0); font-family: AmericanTypewriter; font-size: 14px; font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><br class=""></div>
+<div class="" style="color: rgb(0, 0, 0); font-family: AmericanTypewriter; font-size: 14px; font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">
+  <div class="">For compartment at 30 C, chilled to 0 C gives 14%, 5 C gives 18%, 10 C gives 38%</div>
+</div>
+<div class="" style="color: rgb(0, 0, 0); font-family: AmericanTypewriter; font-size: 14px; font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><br class=""></div>
+<div class="" style="color: rgb(0, 0, 0); font-family: AmericanTypewriter; font-size: 14px; font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">
+  <div class="">For compartment at 35 C, chilled to 0 C gives 11%, 5 C gives 14%, 10 C gives 22%</div>
+</div><br class="Apple-interchange-newline">
 ````````````````````````````````
 
 
 ```````````````````````````````` example Apple Mail: 5
-Best regards,
+Best regards,  
 
 <br />
 
@@ -4011,7 +4053,7 @@ Vladimir.
 
 
 ```````````````````````````````` example(Apple Mail: 6) options(no-br-as-extra-blank-lines)
-Best regards,
+Best regards,  
 
 Vladimir.
 .
@@ -4022,9 +4064,9 @@ Vladimir.
 no blank line after salutation
 
 ```````````````````````````````` example Apple Mail: 7
-Hi Felix, 
+Hi Felix,  
 
-This is a test.
+This is a test.  
 
 Best regards,  
 
@@ -4045,6 +4087,55 @@ Vladimir.
     </div>
   </div>
 </div><br class="Apple-interchange-newline">
+````````````````````````````````
+
+
+```````````````````````````````` example Apple Mail: 8
+1. Project was created by a team working for a company. The company decided to OSS the project to help it move faster and because the project was not part of their "secret sauce". The project was an excellent idea that solved a hard problem: Bootstrap, React and others.
+2. Project hit a sweet-spot of solving a high cost problem and was done well. Got widely adopted where it became either a revenue generator for some large business or mission critical for it. The company or companies sponsored the project to support its further development and ensure their continued ability to rely on it. Linux, MySQL, and a few others. These cases are very rare compared to all OSS project attempts.
+3. Project had commercial interest from the start and used OSS to do the market penetration and marketing of their idea. They had financing or were revenue generating from the beginning. Most common case of success stories: GitHub, Discourse, Dropbox, etc.
+
+The one thing they all have in common is they had a good idea at the right time, were dedicated to improving their idea to make their project a success and were able sustain their efforts long enough to be recognized as a success.
+
+I think that would apply to any successful endeavour in history, to just OSS projects.
+.
+<ol style="caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0); font-family: &quot;American Typewriter&quot;; font-size: 14px; font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; text-decoration: none; margin-left: 1em; padding-left: 0.5em;">
+  <li style="margin: 1em 0px;">
+    <div style="margin: 0px;">Project was created by a team working for a company. The company decided to OSS the project to help it move faster and because the project was not part of their “secret sauce”. The project was an excellent idea that solved a hard problem: Bootstrap, React and others.</div>
+  </li>
+  <li style="margin: 1em 0px;">
+    <div style="margin: 0px;">Project hit a sweet-spot of solving a high cost problem and was done well. Got widely adopted where it became either a revenue generator for some large business or mission critical for it. The company or companies sponsored the project to support its further development and ensure their continued ability to rely on it. Linux, MySQL, and a few others. These cases are very rare compared to all OSS project attempts.</div>
+  </li>
+  <li style="margin: 1em 0px;">
+    <div style="margin: 0px;">Project had commercial interest from the start and used OSS to do the market penetration and marketing of their idea. They had financing or were revenue generating from the beginning. Most common case of success stories: GitHub, Discourse, Dropbox, etc.</div>
+  </li>
+</ol><p style="caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0); font-family: &quot;American Typewriter&quot;; font-size: 14px; font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; text-decoration: none; margin: 1.2em 0px;">The one thing they all have in common is they had a good idea at the right time, were dedicated to improving their idea to make their project a success and were able sustain their efforts long enough to be recognized as a success.</p><p
+    style="caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0); font-family: &quot;American Typewriter&quot;; font-size: 14px; font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; text-decoration: none; margin: 1.2em 0px;">I think that would apply to any successful endeavour in history, to just OSS projects.</p>
+````````````````````````````````
+
+
+```````````````````````````````` example Apple Mail: 9
+Best regards,  
+
+<br />
+
+<br />
+
+Vladimir Schneider  
+Mobile: 111111
+.
+<span style="caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0); font-family: AmericanTypewriter; font-size: 14px; font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; text-decoration: none; display: inline !important; float: none;">
+  <div class="">
+    <div dir="auto" class="" style="word-wrap: break-word; -webkit-nbsp-mode: space; line-break: after-white-space;">
+      <div style="caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0); font-family: &quot;American Typewriter&quot;; font-size: 14px; font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: none;">Best regards,</div>
+      <div style="caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0); font-family: &quot;American Typewriter&quot;; font-size: 14px; font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: none;"><br class=""></div>
+      <div style="caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0); font-family: &quot;American Typewriter&quot;; font-size: 14px; font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: none;"><br class=""></div>
+      <div style="caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0); font-family: &quot;American Typewriter&quot;; font-size: 14px; font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: none;"><br class=""></div>
+      <div style="caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0); font-family: &quot;American Typewriter&quot;; font-size: 14px; font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: none;">Vladimir Schneider</div>
+      <div style="caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0); font-family: &quot;American Typewriter&quot;; font-size: 14px; font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: none;">Mobile: 111111</div>
+    </div>
+  </div>
+</div>
 ````````````````````````````````
 
 
@@ -4392,7 +4483,7 @@ so contents can be extracted as Markdown:
 |----------------|
 | Space in title |
 
-[![@vsch](https://avatars3.githubusercontent.com/u/10299086?s=88&v=4)](https://github.com/vsch)
+[![@vsch](https://avatars3.githubusercontent.com/u/10299086?s=88&v=4)](https://github.com/vsch)  
 OwnerAuthor
 
 ### **[vsch](https://github.com/vsch)** commented [Feb 22, 2019](https://github.com/vsch/MarkdownTest/issues/5#issuecomment-466602055)

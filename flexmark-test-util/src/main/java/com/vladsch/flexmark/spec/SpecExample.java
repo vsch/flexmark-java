@@ -1,9 +1,9 @@
 package com.vladsch.flexmark.spec;
 
-import java.net.URL;
+import java.util.Objects;
 
 public class SpecExample {
-    public static final SpecExample NULL = new SpecExample(null, "", 0, "", "");
+    public static final SpecExample NULL = new SpecExample(null, "", 0, "", "", "", "", null);
 
     private final String optionsSet;
     private final String section;
@@ -51,7 +51,16 @@ public class SpecExample {
     // @formatter:on
 
     public boolean isFullSpecExample() {
-        return this == NULL;
+        return true
+                && Objects.equals(this.optionsSet, NULL.optionsSet)
+                && Objects.equals(this.section, NULL.section)
+                && this.exampleNumber == NULL.exampleNumber
+                && Objects.equals(this.source, NULL.source)
+                && Objects.equals(this.html, NULL.html)
+                && Objects.equals(this.ast, NULL.ast)
+                && Objects.equals(this.comment, NULL.comment)
+                //&& Objects.equals(this.fileUrl, NULL.fileUrl)
+                ;
     }
 
     public boolean isNull() {
@@ -59,7 +68,7 @@ public class SpecExample {
     }
 
     public boolean isSpecExample() {
-        return this != NULL;
+        return this != NULL && !isFullSpecExample();
     }
 
     public boolean isNotNull() {

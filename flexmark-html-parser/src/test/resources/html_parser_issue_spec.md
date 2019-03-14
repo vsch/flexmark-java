@@ -185,7 +185,7 @@ public class HtmlToPdf_yahp {
 
 
 ```````````````````````````````` example Issue Tests: 9
-priyanka • [3 years ago](http://www.rgagnon.com/javadetails/java-convert-html-to-pdf-using-yahp.html#comment-1055568391 "Monday, September 23, 2013 5:49 AM")
+priyanka • [3 years ago](http://www.rgagnon.com/javadetails/java-convert-html-to-pdf-using-yahp.html#comment-1055568391 "Monday, September 23, 2013 5:49 AM")  
 
 Though i am not getting any error ...no pdf is getting created
 
@@ -276,7 +276,7 @@ see more
 
 
 ```````````````````````````````` example(Issue Tests: 10) options(output-unknown)
-<header class="comment__header"> priyanka • [3 years ago](http://www.rgagnon.com/javadetails/java-convert-html-to-pdf-using-yahp.html#comment-1055568391 "Monday, September 23, 2013 5:49 AM") </header>
+<header class="comment__header"> priyanka • [3 years ago](http://www.rgagnon.com/javadetails/java-convert-html-to-pdf-using-yahp.html#comment-1055568391 "Monday, September 23, 2013 5:49 AM") </header>  
 
 Though i am not getting any error ...no pdf is getting created
 
@@ -409,7 +409,7 @@ empty headings
 GitHub file list
 
 ```````````````````````````````` example Issue Tests: 15
-![@danfickle](https://avatars2.githubusercontent.com/u/1415728?v=3&s=40) [danfickle](https://github.com/danfickle) [For](https://github.com/danfickle/openhtmltopdf/commit/bfdc7c96401bbedc36455b6ea086e310abe60e91 "For #52 - Do not output acroform dict in case where document contains no forms. [ci skip]") [#52](https://github.com/danfickle/openhtmltopdf/issues/52 "Adobe Reader promts for saving") [- Do not output acroform dict in case where document contains...](https://github.com/danfickle/openhtmltopdf/commit/bfdc7c96401bbedc36455b6ea086e310abe60e91 "For #52 - Do not output acroform dict in case where document contains no forms. [ci skip]") ...
+![@danfickle](https://avatars2.githubusercontent.com/u/1415728?v=3&s=40) [danfickle](https://github.com/danfickle) [For](https://github.com/danfickle/openhtmltopdf/commit/bfdc7c96401bbedc36455b6ea086e310abe60e91 "For #52 - Do not output acroform dict in case where document contains no forms. [ci skip]") [#52](https://github.com/danfickle/openhtmltopdf/issues/52 "Adobe Reader promts for saving") [- Do not output acroform dict in case where document contains...](https://github.com/danfickle/openhtmltopdf/commit/bfdc7c96401bbedc36455b6ea086e310abe60e91 "For #52 - Do not output acroform dict in case where document contains no forms. [ci skip]") ...  
 
 |---|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------|
 |   | [docs](https://github.com/danfickle/openhtmltopdf/tree/open-dev-v1/docs "docs")                                                                                        | [For](https://github.com/danfickle/openhtmltopdf/commit/d41eb81c246083b521f3e63f8685ace3620be3fe "For #8 - Update README and integration guide with RC8 version. [ci skip]") [#8](https://github.com/danfickle/openhtmltopdf/issues/8) [- Update README and integration guide with RC8 version. \[ci skip\]](https://github.com/danfickle/openhtmltopdf/commit/d41eb81c246083b521f3e63f8685ace3620be3fe "For #8 - Update README and integration guide with RC8 version. [ci skip]")                                                                   | 2 months ago |
@@ -761,7 +761,7 @@ don't create a multi-line image url if no new line after ?
 
 
 ```````````````````````````````` example Issue Tests: 21
-\<h3\>JavaScript is disabled in your browser or not supported!\</h3\>
+\<h3\>JavaScript is disabled in your browser or not supported!\</h3\>  
 View Options
 
 * Show description
@@ -770,7 +770,7 @@ View Options
 Click To Add a Title
 ====================
 
-[project: Kotlin State: -Fixed,-Duplicate,-Rejected,-{As Designed},-Obsolete type: Feature,{Feature Group} refactoring](/issues?q=project%3A+Kotlin+State%3A+-Fixed%2C-Duplicate%2C-Rejected%2C-%7BAs+Designed%7D%2C-Obsolete+++type%3A+Feature%2C%7BFeature+Group%7D++refactoring)
+[project: Kotlin State: -Fixed,-Duplicate,-Rejected,-{As Designed},-Obsolete type: Feature,{Feature Group} refactoring](/issues?q=project%3A+Kotlin+State%3A+-Fixed%2C-Duplicate%2C-Rejected%2C-%7BAs+Designed%7D%2C-Obsolete+++type%3A+Feature%2C%7BFeature+Group%7D++refactoring)  
 Only the first 2500 issues are exported because of the "Max Issues to Export" setting.
 
 Feature
@@ -1668,6 +1668,20 @@ Issue #317
     </li>
     <li>P3</li>
 </ol>
+````````````````````````````````
+
+
+## Issue 326
+
+Issue #326, flexmark-html-parser - multiple \<code\> inside \<pre\> bug
+
+```````````````````````````````` example Issue 326: 1
+    casa
+    asdf
+    ffdd
+
+.
+<pre><code>casa</code><br><code>asdf</code><br>ffdd</pre>
 ````````````````````````````````
 
 

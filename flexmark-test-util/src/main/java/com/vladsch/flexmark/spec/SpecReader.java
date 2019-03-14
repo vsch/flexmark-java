@@ -6,7 +6,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
@@ -38,13 +37,13 @@ public class SpecReader {
     protected StringBuilder ast;
     protected StringBuilder comment;
     protected int exampleNumber = 0;
-    final protected URL fileUrl;
+    final protected String fileUrl;
     protected int lineNumber = 0;
     protected int contentLineNumber = 0;
-    
+
     protected List<SpecExample> examples = new ArrayList<SpecExample>();
 
-    protected SpecReader(InputStream stream, final URL fileUrl) {
+    protected SpecReader(InputStream stream, final String fileUrl) {
         this.inputStream = stream;
         this.fileUrl = fileUrl;
     }
@@ -62,27 +61,36 @@ public class SpecReader {
     }
 
     public static SpecReader createAndReadExamples(String specResource, SpecReaderFactory readerFactory) {
+        URL fileUrl = getSpecInputFileUrl(specResource);
+        UrlString urlString = new UrlString(fileUrl);
+        return createAndReadExamples(specResource, readerFactory, urlString.toString());
+    }
+
+    public static SpecReader createAndReadExamples(String specResource, SpecReaderFactory readerFactory, String urlString) {
         try {
             SpecReader reader;
             InputStream stream = getSpecInputStream(specResource);
-            URL fileUrl = getSpecInputFileUrl(specResource);
-            if (readerFactory == null) reader = new SpecReader(stream, fileUrl);
-            else reader = readerFactory.create(stream, fileUrl);
+            if (readerFactory == null) reader = new SpecReader(stream, urlString);
+            else reader = readerFactory.create(stream, urlString);
             reader.read();
             return reader;
-            
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
     public static List<SpecExample> readExamples(String specResource, SpecReaderFactory readerFactory) {
+        URL fileUrl = getSpecInputFileUrl(specResource);
+        UrlString urlString = new UrlString(fileUrl);
+        return readExamples(specResource, readerFactory, urlString.toString());
+    }
+
+    public static List<SpecExample> readExamples(String specResource, SpecReaderFactory readerFactory, String urlString) {
         try {
             SpecReader reader;
             InputStream stream = getSpecInputStream(specResource);
-            URL fileUrl = getSpecInputFileUrl(specResource);
-            if (readerFactory == null) reader = new SpecReader(stream, fileUrl);
-            else reader = readerFactory.create(stream, fileUrl);
+            if (readerFactory == null) reader = new SpecReader(stream, urlString);
+            else reader = readerFactory.create(stream, urlString);
             return reader.read();
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -245,7 +253,7 @@ public class SpecReader {
             addSpecLine(line);
         }
     }
-    
+
     protected void resetContents() {
         optionsSet = "";
         source = new StringBuilder();

@@ -3942,8 +3942,8 @@ td
 text wrapped in div should be treated as having a hard break at the end.
 
 ```````````````````````````````` example Apple Mail: 1
-P.S. I will focus on the conversion of elements you listed in your prioritized list but will
-implement all markdown elements for the final version of the module. I like orthogonal solutions
+P.S. I will focus on the conversion of elements you listed in your prioritized list but will  
+implement all markdown elements for the final version of the module. I like orthogonal solutions  
 that require as little effort in use as much as possible.
 
 .
@@ -3952,11 +3952,11 @@ that require as little effort in use as much as possible.
 
 
 ```````````````````````````````` example Apple Mail: 2
-For compartment at 20 C, chilled to 0 C gives 25%, 5 C gives 33%, 10 C gives 52%
+For compartment at 20 C, chilled to 0 C gives 25%, 5 C gives 33%, 10 C gives 52%  
 
-For compartment at 25 C, chilled to 0 C gives 19%, 5 C gives 25%, 10 C gives 39%
+For compartment at 25 C, chilled to 0 C gives 19%, 5 C gives 25%, 10 C gives 39%  
 
-For compartment at 30 C, chilled to 0 C gives 14%, 5 C gives 18%, 10 C gives 38%
+For compartment at 30 C, chilled to 0 C gives 14%, 5 C gives 18%, 10 C gives 38%  
 
 For compartment at 35 C, chilled to 0 C gives 11%, 5 C gives 14%, 10 C gives 22%
 
@@ -3966,9 +3966,9 @@ For compartment at 35 C, chilled to 0 C gives 11%, 5 C gives 14%, 10 C gives 22%
 
 
 ```````````````````````````````` example(Apple Mail: 3) options(no-br-as-para-breaks)
-For compartment at 20 C, chilled to 0 C gives 25%, 5 C gives 33%, 10 C gives 52%
-For compartment at 25 C, chilled to 0 C gives 19%, 5 C gives 25%, 10 C gives 39%
-For compartment at 30 C, chilled to 0 C gives 14%, 5 C gives 18%, 10 C gives 38%
+For compartment at 20 C, chilled to 0 C gives 25%, 5 C gives 33%, 10 C gives 52%    
+For compartment at 25 C, chilled to 0 C gives 19%, 5 C gives 25%, 10 C gives 39%    
+For compartment at 30 C, chilled to 0 C gives 14%, 5 C gives 18%, 10 C gives 38%    
 For compartment at 35 C, chilled to 0 C gives 11%, 5 C gives 14%, 10 C gives 22%
 .
 <div class="" style="color: rgb(0, 0, 0); font-family: AmericanTypewriter; font-size: 14px; font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><div class="">For compartment at 20 C, chilled to 0 C gives 25%, 5 C gives 33%, 10 C gives 52%</div></div><div class="" style="color: rgb(0, 0, 0); font-family: AmericanTypewriter; font-size: 14px; font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><br class=""></div><div class="" style="color: rgb(0, 0, 0); font-family: AmericanTypewriter; font-size: 14px; font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">For compartment at 25 C, chilled to 0 C gives 19%, 5 C gives 25%, 10 C gives 39%</div><div class="" style="color: rgb(0, 0, 0); font-family: AmericanTypewriter; font-size: 14px; font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><br class=""></div><div class="" style="color: rgb(0, 0, 0); font-family: AmericanTypewriter; font-size: 14px; font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><div class="">For compartment at 30 C, chilled to 0 C gives 14%, 5 C gives 18%, 10 C gives 38%</div></div><div class="" style="color: rgb(0, 0, 0); font-family: AmericanTypewriter; font-size: 14px; font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><br class=""></div><div class="" style="color: rgb(0, 0, 0); font-family: AmericanTypewriter; font-size: 14px; font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><div class="">For compartment at 35 C, chilled to 0 C gives 11%, 5 C gives 14%, 10 C gives 22%</div></div><br class="Apple-interchange-newline">
@@ -3998,7 +3998,7 @@ For compartment at 35 C, chilled to 0 C gives 11%, 5 C gives 14%, 10 C gives 22%
 
 
 ```````````````````````````````` example Apple Mail: 5
-Best regards,
+Best regards,  
 
 <br />
 
@@ -4011,7 +4011,7 @@ Vladimir.
 
 
 ```````````````````````````````` example(Apple Mail: 6) options(no-br-as-extra-blank-lines)
-Best regards,
+Best regards,  
 
 Vladimir.
 .

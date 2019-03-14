@@ -1,12 +1,12 @@
 package com.vladsch.flexmark.test;
 
+import com.vladsch.flexmark.spec.SpecExample;
+import com.vladsch.flexmark.spec.SpecReader;
+import com.vladsch.flexmark.spec.UrlString;
 import com.vladsch.flexmark.util.IParse;
 import com.vladsch.flexmark.util.IRender;
 import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.Node;
-import com.vladsch.flexmark.spec.SpecExample;
-import com.vladsch.flexmark.spec.SpecReader;
-import com.vladsch.flexmark.util.Utils;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.BasedSequenceImpl;
@@ -18,13 +18,19 @@ import static com.vladsch.flexmark.test.RenderingTestCase.FAIL;
 import static com.vladsch.flexmark.util.Utils.suffixWith;
 import static com.vladsch.flexmark.util.Utils.suffixWithEol;
 
-public class DumpSpecReader extends SpecReader {
+public class DumpSpecReader extends SpecReader implements ActualExampleModifier {
     protected final StringBuilder sb = new StringBuilder();
     protected final FullSpecTestCase testCase;
     protected StringBuilder exampleComment;
+    protected final ActualExampleModifier exampleModifier;
 
-    public DumpSpecReader(InputStream stream, FullSpecTestCase testCase) {
-        super(stream, SpecReader.getSpecInputFileUrl(testCase.getSpecResourceName()));
+    public DumpSpecReader(InputStream stream, FullSpecTestCase testCase, ActualExampleModifier exampleModifier) {
+        this(stream, testCase, new UrlString(SpecReader.getSpecInputFileUrl(testCase.getSpecResourceName())).toString(), exampleModifier);
+    }
+
+    public DumpSpecReader(InputStream stream, FullSpecTestCase testCase, String fileUrl, ActualExampleModifier exampleModifier) {
+        super(stream, fileUrl);
+        this.exampleModifier = exampleModifier;
         this.testCase = testCase;
     }
 
@@ -35,6 +41,21 @@ public class DumpSpecReader extends SpecReader {
     @Override
     public void addSpecLine(String line) {
         sb.append(line).append("\n");
+    }
+
+    @Override
+    public String actualSource(final String source, final String optionSet) {
+        return exampleModifier.actualSource(source, optionSet);
+    }
+
+    @Override
+    public String actualHtml(final String html, final String optionSet) {
+        return exampleModifier.actualHtml(html, optionSet);
+    }
+
+    @Override
+    public String actualAst(final String ast, final String optionSet) {
+        return exampleModifier.actualAst(ast, optionSet);
     }
 
     @Override
@@ -89,8 +110,13 @@ public class DumpSpecReader extends SpecReader {
         boolean timed = RenderingTestCase.TIMED.getFrom(parserWithOptions.getOptions());
         int iterations = timed ? RenderingTestCase.TIMED_ITERATIONS.getFrom(parserWithOptions.getOptions()) : 1;
 
+        String inputText = input.toString();
+        String useSource = actualSource(inputText, optionsSet);
+        BasedSequence inputSource = inputText == useSource ? input : BasedSequenceImpl.of(useSource);
+
+        Node node = parserWithOptions.parse(inputSource);
+
         long start = System.nanoTime();
-        Node node = parserWithOptions.parse(input);
         for (int i = 1; i < iterations; i++) parserWithOptions.parse(input);
         long parse = System.nanoTime();
 
@@ -109,7 +135,7 @@ public class DumpSpecReader extends SpecReader {
         }
 
         final String actualAST = testCase.ast(node);
-        String html = !ignoredCase && testCase.useActualHtml() ? actualHTML : example.getHtml();
+        String html = !ignoredCase && testCase.useActualHtml() ? actualHtml(actualHTML, optionsSet) : example.getHtml();
         String ast = example.getAst() == null ? null : (!ignoredCase ? actualAST : example.getAst());
 
         // allow other formats to accumulate

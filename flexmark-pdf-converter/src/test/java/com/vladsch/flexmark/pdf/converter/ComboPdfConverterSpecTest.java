@@ -72,7 +72,17 @@ public class ComboPdfConverterSpecTest extends ComboSpecTestCase {
     }
 
     @Override
+    protected boolean fullTestSpecStarting() {
+        return true;
+    }
+
+    @Override
     public HtmlRenderer renderer() {
         return RENDERER;
+    }
+
+    @Override
+    public String actualHtml(final String html, final String optionSet) {
+        return PdfConverterExtension.embedCss(html, PdfConverterExtension.DEFAULT_CSS.getFrom(options(null)));
     }
 }

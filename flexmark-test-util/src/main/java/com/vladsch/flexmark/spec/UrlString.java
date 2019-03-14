@@ -6,18 +6,23 @@ public class UrlString {
     public static final String TARGET_TEST_CLASSES = "/target/test-classes/";
     public static final String OUT_TEST = "/out/test/";
     public static final String FILE_PROTOCOL = "file://";
+    public static final String TEST_RESOURCES = "/test/resources/";
     private final String fileUrl;
 
     public UrlString(final String fileUrl) {
-        this.fileUrl = fileUrl;
+        this(fileUrl, 0);
+    }
+
+    public UrlString(final String fileUrl, int lineNumber) {
+        this.fileUrl = (lineNumber > 0) ? fileUrl + ":" + (lineNumber + 1) : fileUrl;
     }
 
     public UrlString(final URL fileUrl) {
-        this.fileUrl = adjustedFileUrl(fileUrl);
+        this(adjustedFileUrl(fileUrl));
     }
 
     public UrlString(final URL fileUrl, int lineNumber) {
-        this.fileUrl = fileUrlWithLineNumber(fileUrl, lineNumber);
+        this(adjustedFileUrl(fileUrl), lineNumber);
     }
 
     @Override

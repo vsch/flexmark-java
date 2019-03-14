@@ -1,5 +1,6 @@
 package com.vladsch.flexmark.samples;
 
+import com.vladsch.flexmark.ext.toc.TocExtension;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.pdf.converter.PdfConverterExtension;
@@ -18,7 +19,11 @@ import java.io.StringWriter;
 public class PdfConverter {
     static final MutableDataHolder OPTIONS = PegdownOptionsAdapter.flexmarkOptions(
             Extensions.ALL & ~(Extensions.ANCHORLINKS | Extensions.EXTANCHORLINKS_WRAP)
-    ).toMutable();
+            , TocExtension.create()).toMutable()
+            .set(TocExtension.LIST_CLASS, PdfConverterExtension.DEFAULT_TOC_LIST_CLASS)
+            //.set(HtmlRenderer.GENERATE_HEADER_ID, true)
+            //.set(HtmlRenderer.RENDER_HEADER_ID, true)
+            ;
 
     static String getResourceFileContent(String resourcePath) {
         StringWriter writer = new StringWriter();
@@ -37,7 +42,10 @@ public class PdfConverter {
     }
 
     public static void main(String[] args) {
-        final String pegdown = "#Heading\n" +
+        final String pegdown = "" +
+                "[TOC]\n" +
+                "\n" +
+                "#Heading\n" +
                 "-----\n" +
                 "paragraph text \n" +
                 "lazy continuation\n" +
@@ -46,11 +54,15 @@ public class PdfConverter {
                 "    > block quote\n" +
                 "    lazy continuation\n" +
                 "\n" +
+                "\n## Heading 2" +
+                "\n" +
                 "~~~info\n" +
                 "   with uneven indent\n" +
                 "      with uneven indent\n" +
                 "indented code\n" +
                 "~~~ \n" +
+                "\n" +
+                "\n## Heading 3" +
                 "\n" +
                 "       with uneven indent\n" +
                 "          with uneven indent\n" +
@@ -150,5 +162,6 @@ public class PdfConverter {
         OPTIONS.set(PdfConverterExtension.PROTECTION_POLICY, new StandardProtectionPolicy("opassword", "upassword", new AccessPermission()));
         
         PdfConverterExtension.exportToPdf("/Users/vlad/src/pdf/flexmark-java-pwd-protected.pdf", html, "", OPTIONS);
+        System.out.println("Output PDF to /Users/vlad/src/pdf/flexmark-java-pwd-protected.pdf");
     }
 }

@@ -22,7 +22,7 @@ import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
 
-public abstract class RenderingTestCase {
+public abstract class RenderingTestCase implements ActualExampleModifier {
 
     public static final String IGNORE_OPTION_NAME = "IGNORE";
     public static final String FAIL_OPTION_NAME = "FAIL";
@@ -138,20 +138,23 @@ public abstract class RenderingTestCase {
         return new AstCollectingVisitor().collectAndGetAstText(node);
     }
 
-    protected void actualSource(String html, String optionSet) {
-
+    @Override
+    public String actualSource(String source, String optionSet) {
+        return source;
     }
 
     protected void testCase(Node node, DataHolder options) {
 
     }
 
-    protected void actualHtml(String html, String optionSet) {
-
+    @Override
+    public String actualHtml(String html, String optionSet) {
+        return html;
     }
 
-    protected void actualAst(String ast, String optionSet) {
-
+    @Override
+    public String actualAst(String ast, String optionSet) {
+        return ast;
     }
 
     protected void specExample(String expected, String actual, String optionSet) {
@@ -173,7 +176,7 @@ public abstract class RenderingTestCase {
     /**
      * @return return true if actual html should be used in comparison, else only actual AST will be used in compared
      */
-    protected boolean useActualHtml() {
+    public boolean useActualHtml() {
         return true;
     }
 
@@ -239,8 +242,12 @@ public abstract class RenderingTestCase {
         boolean timed = TIMED.getFrom(parserWithOptions.getOptions());
         int iterations = timed ? TIMED_ITERATIONS.getFrom(parserWithOptions.getOptions()) : 1;
 
+        String inputText = input.toString();
+        String useSource = actualSource(inputText, optionsSet);
+        BasedSequence inputSource = inputText == useSource ? input : BasedSequenceImpl.of(useSource);
+
         long start = System.nanoTime();
-        Node node = parserWithOptions.parse(input);
+        Node node = parserWithOptions.parse(inputSource);
         for (int i = 1; i < iterations; i++) parserWithOptions.parse(input);
         long parse = System.nanoTime();
 
@@ -259,7 +266,7 @@ public abstract class RenderingTestCase {
         }
 
         testCase(node, options);
-        actualHtml(html, optionsSet);
+        html = actualHtml(html, optionsSet);
         boolean useActualHtml = useActualHtml();
 
         // include source for better assertion errors
@@ -345,8 +352,12 @@ public abstract class RenderingTestCase {
         boolean timed = TIMED.getFrom(parserWithOptions.getOptions());
         int iterations = timed ? TIMED_ITERATIONS.getFrom(parserWithOptions.getOptions()) : 1;
 
+        String inputText = input.toString();
+        String useSource = actualSource(inputText, optionsSet);
+        BasedSequence inputSource = inputText == useSource ? input : BasedSequenceImpl.of(useSource);
+
         long start = System.nanoTime();
-        Node node = parserWithOptions.parse(input);
+        Node node = parserWithOptions.parse(inputSource);
         for (int i = 1; i < iterations; i++) parserWithOptions.parse(input);
         long parse = System.nanoTime();
 
@@ -365,9 +376,9 @@ public abstract class RenderingTestCase {
         }
 
         testCase(node, options);
-        actualHtml(html, optionsSet);
+        html = actualHtml(html, optionsSet);
         String ast = ast(node);
-        actualAst(ast, optionsSet);
+        ast = actualAst(ast, optionsSet);
         boolean useActualHtml = useActualHtml();
 
         // include source for better assertion errors
@@ -416,7 +427,7 @@ public abstract class RenderingTestCase {
 
     protected void assertAst(final UrlString fileUrl, String source, String expectedAst, String optionsSet) {
         DataHolder options = optionsSet == null ? null : getOptions(example(), optionsSet);
-        String parseSource = source;
+        String parseSource = actualSource(source, optionsSet);
 
         if (options != null && options.get(NO_FILE_EOL)) {
             parseSource = DumpSpecReader.trimTrailingEOL(parseSource);
@@ -424,7 +435,7 @@ public abstract class RenderingTestCase {
 
         Node node = parser().withOptions(options).parse(parseSource);
         String ast = ast(node);
-        actualAst(ast, optionsSet);
+        ast = actualAst(ast, optionsSet);
 
         String expected;
         String actual;

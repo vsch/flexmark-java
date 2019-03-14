@@ -406,4 +406,73 @@ Document[0, 9]
 ````````````````````````````````
 
 
+## Issue xxx-01
+
+References loose special characters when abbreviation extension is included
+
+```````````````````````````````` example(Issue xxx-01: 1) options(no-abbr)
+* [ ] Fix: [#326, flexmark-html-parser - multiple \<code\> inside \<pre\> bug]
+    
+[#326, flexmark-html-parser - multiple \<code\> inside \<pre\> bug]: https://github.com/vsch/flexmark-java/issues/326
+
+.
+<ul>
+  <li>[ ] Fix: <a href="https://github.com/vsch/flexmark-java/issues/326">#326, flexmark-html-parser - multiple &lt;code&gt; inside &lt;pre&gt; bug</a></li>
+</ul>
+.
+Document[0, 203]
+  BulletList[0, 79] isTight
+    BulletListItem[0, 79] open:[0, 1, "*"] isTight hadBlankLineAfter
+      Paragraph[2, 79] isTrailingBlankLine
+        LinkRef[2, 5] referenceOpen:[2, 3, "["] reference:[4, 4] referenceClose:[4, 5, "]"]
+          Text[4, 4]
+        Text[5, 11] chars:[5, 11, " Fix: "]
+        LinkRef[11, 78] referenceOpen:[11, 12, "["] reference:[12, 77, "#326, flexmark-html-parser - multiple \<code\> inside \<pre\> bug"] referenceClose:[77, 78, "]"]
+          TextBase[12, 77] chars:[12, 77, "#326, … > bug"]
+            Text[12, 50] chars:[12, 50, "#326, … iple "]
+            EscapedCharacter[50, 52] textOpen:[50, 51, "\"] text:[51, 52, "<"]
+            Text[52, 56] chars:[52, 56, "code"]
+            EscapedCharacter[56, 58] textOpen:[56, 57, "\"] text:[57, 58, ">"]
+            Text[58, 66] chars:[58, 66, " inside "]
+            EscapedCharacter[66, 68] textOpen:[66, 67, "\"] text:[67, 68, "<"]
+            Text[68, 71] chars:[68, 71, "pre"]
+            EscapedCharacter[71, 73] textOpen:[71, 72, "\"] text:[72, 73, ">"]
+            Text[73, 77] chars:[73, 77, " bug"]
+  Reference[84, 201] refOpen:[84, 85, "["] ref:[85, 150, "#326, flexmark-html-parser - multiple \<code\> inside \<pre\> bug"] refClose:[150, 152, "]:"] url:[153, 201, "https://github.com/vsch/flexmark-java/issues/326"]
+````````````````````````````````
+
+
+References loose special characters when abbreviation extension is included
+
+```````````````````````````````` example Issue xxx-01: 2
+* [ ] Fix: [#326, flexmark-html-parser - multiple \<code\> inside \<pre\> bug]
+
+[#326, flexmark-html-parser - multiple \<code\> inside \<pre\> bug]: https://github.com/vsch/flexmark-java/issues/326
+
+.
+<ul>
+  <li>[ ] Fix: <a href="https://github.com/vsch/flexmark-java/issues/326">#326, flexmark-html-parser - multiple &lt;code&gt; inside &lt;pre&gt; bug</a></li>
+</ul>
+.
+Document[0, 199]
+  BulletList[0, 79] isTight
+    BulletListItem[0, 79] open:[0, 1, "*"] isTight hadBlankLineAfter
+      Paragraph[2, 79] isTrailingBlankLine
+        LinkRef[2, 5] referenceOpen:[2, 3, "["] reference:[4, 4] referenceClose:[4, 5, "]"]
+          Text[4, 4]
+        Text[5, 11] chars:[5, 11, " Fix: "]
+        LinkRef[11, 78] referenceOpen:[11, 12, "["] reference:[12, 77, "#326, flexmark-html-parser - multiple \<code\> inside \<pre\> bug"] referenceClose:[77, 78, "]"]
+          TextBase[12, 77] chars:[12, 77, "#326, … > bug"]
+            Text[12, 50] chars:[12, 50, "#326, … iple "]
+            EscapedCharacter[50, 52] textOpen:[50, 51, "\"] text:[51, 52, "<"]
+            Text[52, 56] chars:[52, 56, "code"]
+            EscapedCharacter[56, 58] textOpen:[56, 57, "\"] text:[57, 58, ">"]
+            Text[58, 66] chars:[58, 66, " inside "]
+            EscapedCharacter[66, 68] textOpen:[66, 67, "\"] text:[67, 68, "<"]
+            Text[68, 71] chars:[68, 71, "pre"]
+            EscapedCharacter[71, 73] textOpen:[71, 72, "\"] text:[72, 73, ">"]
+            Text[73, 77] chars:[73, 77, " bug"]
+  Reference[80, 197] refOpen:[80, 81, "["] ref:[81, 146, "#326, flexmark-html-parser - multiple \<code\> inside \<pre\> bug"] refClose:[146, 148, "]:"] url:[149, 197, "https://github.com/vsch/flexmark-java/issues/326"]
+````````````````````````````````
+
 

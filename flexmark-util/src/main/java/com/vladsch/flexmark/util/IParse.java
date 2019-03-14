@@ -45,6 +45,7 @@ public interface IParse {
 
     /**
      * Return an IParse instance configured for passed in options
+     *
      * @param options options to use for a new instance
      * @return a new instance of IParse implementation with the given options applied
      */
@@ -52,8 +53,31 @@ public interface IParse {
 
     /**
      * Get Options for parsing
+     *
      * @return DataHolder for options
      */
     DataHolder getOptions();
+
+    /**
+     * Transfer reference definition between documents
+     *
+     * @param document destination document
+     * @param included source document
+     * @return true if any references were transferred
+     * @deprecated use {@link #transferReferences(Document, Document, Boolean)}
+     */
+    @Deprecated
     boolean transferReferences(Document document, Document included);
+
+    /**
+     * Transfer reference definition between documents
+     *
+     * @param document        destination document
+     * @param included        source document
+     * @param onlyIfUndefined true if only should transfer references not already defined in the destination document,
+     *                        false to transfer all,
+     *                        null to use repository's KEEP_TYPE to make the determination (if KEEP_FIRST then only transfer if undefined,
+     * @return true if any references were transferred
+     */
+    boolean transferReferences(Document document, Document included, Boolean onlyIfUndefined);
 }

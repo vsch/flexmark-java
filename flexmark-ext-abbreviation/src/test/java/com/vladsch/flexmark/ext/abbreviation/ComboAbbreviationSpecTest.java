@@ -1,5 +1,6 @@
 package com.vladsch.flexmark.ext.abbreviation;
 
+import com.vladsch.flexmark.ext.escaped.character.EscapedCharacterExtension;
 import com.vladsch.flexmark.ext.gfm.strikethrough.StrikethroughSubscriptExtension;
 import com.vladsch.flexmark.ext.ins.InsExtension;
 import com.vladsch.flexmark.ext.typographic.TypographicExtension;
@@ -21,6 +22,7 @@ public class ComboAbbreviationSpecTest extends ComboSpecTestCase {
             .set(HtmlRenderer.INDENT_SIZE, 2)
             .set(HtmlRenderer.PERCENT_ENCODE_URLS, true)
             .set(Parser.EXTENSIONS, Arrays.asList(
+                    EscapedCharacterExtension.create(),
                     AbbreviationExtension.create(),
                     TypographicExtension.create(),
                     InsExtension.create(),
@@ -32,6 +34,14 @@ public class ComboAbbreviationSpecTest extends ComboSpecTestCase {
     static {
         optionsMap.put("src-pos", new MutableDataSet().set(HtmlRenderer.SOURCE_POSITION_ATTRIBUTE, "md-pos"));
         optionsMap.put("links", new MutableDataSet().set(AbbreviationExtension.USE_LINKS, true));
+        optionsMap.put("no-abbr", new MutableDataSet().set(Parser.EXTENSIONS, Arrays.asList(
+                //AbbreviationExtension.create(),
+                EscapedCharacterExtension.create(),
+                //TypographicExtension.create(),
+                InsExtension.create(),
+                StrikethroughSubscriptExtension.create(),
+                SuperscriptExtension.create())
+        ));
     }
 
     static final Parser PARSER = Parser.builder(OPTIONS).build();

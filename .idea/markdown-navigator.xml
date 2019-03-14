@@ -22,7 +22,7 @@
         <option name="INSERTED" value="false" />
         <option name="QUOTES" value="false" />
         <option name="RELAXEDHRULES" value="true" />
-        <option name="SMARTS" value="false" />
+        <option name="SMARTS" value="true" />
         <option name="STRIKETHROUGH" value="true" />
         <option name="SUBSCRIPT" value="false" />
         <option name="SUPERSCRIPT" value="false" />

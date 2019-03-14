@@ -1,6 +1,9 @@
 package com.vladsch.flexmark.ast.util;
 
-import com.vladsch.flexmark.ast.*;
+import com.vladsch.flexmark.ast.ImageRef;
+import com.vladsch.flexmark.ast.LinkRef;
+import com.vladsch.flexmark.ast.RefNode;
+import com.vladsch.flexmark.ast.Reference;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.KeepType;
 import com.vladsch.flexmark.util.ValueRunnable;

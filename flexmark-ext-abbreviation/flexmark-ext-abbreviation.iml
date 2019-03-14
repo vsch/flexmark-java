@@ -21,5 +21,6 @@
     <orderEntry type="module" module-name="flexmark-ext-ins" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-ext-gfm-strikethrough" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-ext-superscript" scope="TEST" />
+    <orderEntry type="module" module-name="flexmark-ext-escaped-character" />
   </component>
 </module>

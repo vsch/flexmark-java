@@ -1,21 +1,21 @@
 package com.vladsch.flexmark.parser;
 
 import com.vladsch.flexmark.Extension;
-import com.vladsch.flexmark.util.IParse;
-import com.vladsch.flexmark.util.ast.Document;
-import com.vladsch.flexmark.util.ast.Node;
-import com.vladsch.flexmark.util.ast.NodeRepository;
 import com.vladsch.flexmark.ast.util.ReferenceRepository;
 import com.vladsch.flexmark.html.HtmlRenderer;
-import com.vladsch.flexmark.parser.internal.DocumentParser;
-import com.vladsch.flexmark.parser.internal.InlineParserImpl;
-import com.vladsch.flexmark.parser.internal.LinkRefProcessorData;
-import com.vladsch.flexmark.parser.internal.PostProcessorManager;
 import com.vladsch.flexmark.parser.block.BlockPreProcessorFactory;
 import com.vladsch.flexmark.parser.block.CustomBlockParserFactory;
 import com.vladsch.flexmark.parser.block.ParagraphPreProcessorFactory;
 import com.vladsch.flexmark.parser.delimiter.DelimiterProcessor;
+import com.vladsch.flexmark.parser.internal.DocumentParser;
+import com.vladsch.flexmark.parser.internal.InlineParserImpl;
+import com.vladsch.flexmark.parser.internal.LinkRefProcessorData;
+import com.vladsch.flexmark.parser.internal.PostProcessorManager;
+import com.vladsch.flexmark.util.IParse;
 import com.vladsch.flexmark.util.KeepType;
+import com.vladsch.flexmark.util.ast.Document;
+import com.vladsch.flexmark.util.ast.Node;
+import com.vladsch.flexmark.util.ast.NodeRepository;
 import com.vladsch.flexmark.util.collection.DataValueFactory;
 import com.vladsch.flexmark.util.collection.DynamicDefaultKey;
 import com.vladsch.flexmark.util.options.*;
@@ -62,7 +62,7 @@ public class Parser implements IParse {
      */
     @Deprecated
     public static final DataKey<Boolean> BLOCK_QUOTE_TO_BLANK_LINE = BLOCK_QUOTE_EXTEND_TO_BLANK_LINE;
-    
+
     public static final DataKey<Boolean> FENCED_CODE_BLOCK_PARSER = new DataKey<>("FENCED_CODE_BLOCK_PARSER", true);
     public static final DataKey<Boolean> MATCH_CLOSING_FENCE_CHARACTERS = new DataKey<>("MATCH_CLOSING_FENCE_CHARACTERS", true);
     public static final DataKey<Boolean> FENCED_CODE_CONTENT_BLOCK = new DataKey<>("FENCED_CODE_CONTENT_BLOCK", false);
@@ -408,6 +408,11 @@ public class Parser implements IParse {
 
     @Override
     public boolean transferReferences(Document document, Document included) {
+        return transferReferences(document, included, null);
+    }
+
+    @Override
+    public boolean transferReferences(Document document, Document included, Boolean onlyIfUndefined) {
         // transfer references from included to document
         boolean transferred = false;
 
@@ -422,7 +427,9 @@ public class Parser implements IParse {
 
         // transfer references
         if (document.contains(REFERENCES) && included.contains(REFERENCES)) {
-            if (transferReferences(REFERENCES.getFrom(document), REFERENCES.getFrom(included), REFERENCES_KEEP.getFrom(document) == KeepType.FIRST)) {
+            if (transferReferences(REFERENCES.getFrom(document), REFERENCES.getFrom(included),
+                    onlyIfUndefined != null ? onlyIfUndefined : REFERENCES_KEEP.getFrom(document) == KeepType.FIRST)
+            ) {
                 transferred = true;
             }
         }
@@ -433,16 +440,8 @@ public class Parser implements IParse {
         return transferred;
     }
 
-    public static <T extends Node> boolean transferReferences(NodeRepository<T> destination, NodeRepository<T> included, boolean ifUndefined) {
-        // copy references but only if they are not defined in the original document
-        boolean transferred = false;
-        for (Map.Entry<String, T> entry : included.entrySet()) {
-            if (!ifUndefined || !destination.containsKey(entry.getKey())) {
-                destination.put(entry.getKey(), entry.getValue());
-                transferred = true;
-            }
-        }
-        return transferred;
+    public static <T extends Node> boolean transferReferences(NodeRepository<T> destination, NodeRepository<T> included, boolean onlyIfUndefined) {
+        return NodeRepository.transferReferences(destination, included, onlyIfUndefined);
     }
 
     /**

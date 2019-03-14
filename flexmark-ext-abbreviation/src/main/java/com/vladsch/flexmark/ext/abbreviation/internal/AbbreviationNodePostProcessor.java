@@ -1,6 +1,7 @@
 package com.vladsch.flexmark.ext.abbreviation.internal;
 
-import com.vladsch.flexmark.ast.*;
+import com.vladsch.flexmark.ast.Text;
+import com.vladsch.flexmark.ast.TextBase;
 import com.vladsch.flexmark.ext.abbreviation.Abbreviation;
 import com.vladsch.flexmark.ext.abbreviation.AbbreviationBlock;
 import com.vladsch.flexmark.ext.abbreviation.AbbreviationExtension;
@@ -141,7 +142,6 @@ public class AbbreviationNodePostProcessor extends NodePostProcessor {
 
         public Factory() {
             super(false);
-
             addNodeWithExclusions(Text.class, DoNotDecorate.class, DoNotLinkDecorate.class);
         }
 

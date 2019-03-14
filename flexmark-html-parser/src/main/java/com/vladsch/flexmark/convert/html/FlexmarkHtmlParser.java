@@ -956,17 +956,35 @@ public class FlexmarkHtmlParser {
         }
 
         com.vladsch.flexmark.util.ast.Node document = parseMarkdown(sb.toString());
-        reference = (Reference) document.getFirstChild();
-        myReferenceUrlToReferenceMap.put(url, reference);
-        return reference;
+        com.vladsch.flexmark.util.ast.Node firstChild = document.getFirstChild();
+        if (firstChild instanceof Reference) {
+            reference = (Reference) firstChild;
+            myReferenceUrlToReferenceMap.put(url, reference);
+            return reference;
+        }
+        return null;
     }
 
+    private boolean hasChildrenOfType(Element element, Set<TagType> tagParams) {
+        for (Node child : element.children()) {
+            TagParam tagParam = getTagParam(child);
+            if (tagParams.contains(tagParam.tagType)) return true;
+        }
+        return false;
+    }
+
+    static HashSet<TagType> explicitLinkTextTags = new HashSet<>();
+    static {
+        explicitLinkTextTags.add(TagType.IMG);
+    }
     private boolean processA(FormattingAppendable out, Element element) {
         skip();
 
         // see if it is an anchor or a link
         if (element.hasAttr("href")) {
             LinkConversion conv = myOptions.extInlineLink;
+            if (conv.isSuppressed()) return true;
+
             if (conv.isParsed()) {
                 pushState(element);
                 String text = Utils.removeStart(Utils.removeEnd(processTextNodes(element), '\n'), '\n');
@@ -980,7 +998,22 @@ public class FlexmarkHtmlParser {
                         if (myOptions.wrapAutoLinks) out.append('>');
                         transferIdToParent();
                     } else if (!myOptions.skipLinks && !conv.isTextOnly() && !href.startsWith("javascript:")) {
-                        if (!conv.isReference()) {
+                        boolean handled = false;
+
+                        if (conv.isReference() && !hasChildrenOfType(element, explicitLinkTextTags)) {
+                            // need reference 
+                            Reference reference = getOrCreateReference(href, text, title);
+                            if (reference != null) {
+                                handled = true;
+                                if (reference.getReference().equals(text)) {
+                                    out.append('[').append(text).append("][]");
+                                } else {
+                                    out.append('[').append(text).append("][").append(reference.getReference()).append(']');
+                                }
+                            }
+                        }
+
+                        if (!handled) {
                             out.append('[');
                             out.append(text);
                             out.append(']');
@@ -988,14 +1021,6 @@ public class FlexmarkHtmlParser {
                             if (title != null)
                                 out.append(" \"").append(title.replace("\n", myOptions.eolInTitleAttribute).replace("\"", "\\\"")).append('"');
                             out.append(")");
-                        } else {
-                            // need reference 
-                            Reference reference = getOrCreateReference(href, text, title);
-                            if (reference.getReference().equals(text)) {
-                                out.append('[').append(text).append("][]");
-                            } else {
-                                out.append('[').append(text).append("][").append(reference.getReference()).append(']');
-                            }
                         }
                     } else {
                         out.append(text);
@@ -1070,8 +1095,30 @@ public class FlexmarkHtmlParser {
         return true;
     }
 
+    private boolean isFirstChild(Element element) {
+        for (Node node : element.parent().children()) {
+            if (node instanceof Element) {
+                return element == node;
+            }
+        }
+        return false;
+    }
+
+    private boolean isLastChild(Element element) {
+        Elements children = element.children();
+        int i = children.size();
+        while (i-- > 0) {
+            Node node = children.get(i);
+            if (node instanceof Element) {
+                return element == node;
+            }
+        }
+        return false;
+    }
+
     private boolean processAside(FormattingAppendable out, Element element) {
         skip();
+        if (isFirstChild(element)) out.append("\n");
         out.pushPrefix();
         out.addPrefix("| ");
         processHtmlTree(out, element, true);
@@ -1081,6 +1128,7 @@ public class FlexmarkHtmlParser {
 
     private boolean processBlockQuote(FormattingAppendable out, Element element) {
         skip();
+        if (isFirstChild(element)) out.append("\n");
         out.pushPrefix();
         out.addPrefix("> ");
         processHtmlTree(out, element, true);
@@ -1228,6 +1276,8 @@ public class FlexmarkHtmlParser {
                 out.append(':').append(emoji.shortcut).append(':');
             } else {
                 LinkConversion conv = myOptions.extInlineImage;
+                if (conv.isSuppressed()) return true;
+
                 if (conv.isParsed()) {
                     String alt = !element.hasAttr("alt") ? null
                             : element.attr("alt").trim().replace("[", "\\[").replace("]", "\\]");
@@ -1242,8 +1292,23 @@ public class FlexmarkHtmlParser {
                         int pos = src.indexOf('?');
                         int eol = pos < 0 ? pos : src.indexOf("%0A", pos);
                         boolean isMultiLineUrl = pos > 0 && eol > 0;
+                        boolean handled = false;
 
-                        if (!conv.isReference() || isMultiLineUrl) {
+                        if (conv.isReference() && !isMultiLineUrl) {
+                            Reference reference = getOrCreateReference(src, alt == null ? "image" : alt, title);
+                            if (reference != null) {
+                                handled = true;
+
+                                if (alt == null || reference.getReference().equals(alt)) {
+                                    // use reference as is
+                                    out.append("![").append(reference.getReference()).append("][]");
+                                } else {
+                                    out.append("![").append(alt).append("][").append(reference.getReference()).append("]");
+                                }
+                            }
+                        }
+
+                        if (!handled) {
                             out.append("![");
                             if (alt != null) out.append(alt);
                             out.append(']').append('(');
@@ -1258,15 +1323,6 @@ public class FlexmarkHtmlParser {
 
                             if (title != null) out.append(" \"").append(title).append('"');
                             out.append(")");
-                        } else {
-                            Reference reference = getOrCreateReference(src, alt == null ? "image" : alt, title);
-
-                            if (alt == null || reference.getReference().equals(alt)) {
-                                // use reference as is
-                                out.append("![").append(reference.getReference()).append("][]");
-                            } else {
-                                out.append("![").append(alt).append("][").append(reference.getReference()).append("]");
-                            }
                         }
                     } else {
                         if (alt != null) out.append(alt);
@@ -1380,30 +1436,35 @@ public class FlexmarkHtmlParser {
     private boolean processPre(FormattingAppendable out, Element element) {
         pushState(element);
 
-        Node next = peek();
-
         String text;
         boolean hadCode = false;
         String className = "";
 
-        if (next != null && (next.nodeName().equalsIgnoreCase("code") || next.nodeName().equalsIgnoreCase("tt"))) {
-            hadCode = true;
-            Element code = (Element) next;
-            //text = code.toString();
-            FormattingAppendable preText = new FormattingAppendableImpl(out.getOptions() & ~(FormattingAppendable.COLLAPSE_WHITESPACE | FormattingAppendable.SUPPRESS_TRAILING_WHITESPACE));
-            preText.openPreFormatted(false);
-            processHtmlTree(preText, code, false);
-            preText.closePreFormatted();
-            text = preText.getText(2);
-            skip(1);
-            className = Utils.removeStart(code.className(), "language-");
-        } else {
-            FormattingAppendable preText = new FormattingAppendableImpl(out.getOptions() & ~(FormattingAppendable.COLLAPSE_WHITESPACE | FormattingAppendable.SUPPRESS_TRAILING_WHITESPACE));
-            preText.openPreFormatted(false);
-            processHtmlTree(preText, element, false);
-            preText.closePreFormatted();
-            text = preText.getText(2);
+        FormattingAppendable preText = new FormattingAppendableImpl(out.getOptions() & ~(FormattingAppendable.COLLAPSE_WHITESPACE | FormattingAppendable.SUPPRESS_TRAILING_WHITESPACE));
+        preText.openPreFormatted(false);
+
+        Node next = peek();
+        while (next != null) {
+            if (next.nodeName().equalsIgnoreCase("code") || next.nodeName().equalsIgnoreCase("tt")) {
+                hadCode = true;
+                Element code = (Element) next;
+                //text = code.toString();
+                processHtmlTree(preText, code, false);
+                if (className.isEmpty()) className = Utils.removeStart(code.className(), "language-");
+            } else if (next.nodeName().equalsIgnoreCase("br")) {
+                preText.append("\n");
+            } else if (next.nodeName().equalsIgnoreCase("#text")) {
+                preText.append(((TextNode)next).getWholeText());
+            } else {
+                processHtmlTree(preText, next, false);
+            }
+
+            next();
+            next = peek();
         }
+
+        preText.closePreFormatted();
+        text = preText.getText(2);
 
         //int start = text.indexOf('>');
         //int end = text.lastIndexOf('<');
@@ -1505,7 +1566,7 @@ public class FlexmarkHtmlParser {
         }
         return false;
     }
-    
+
     private boolean processList(
             FormattingAppendable out,
             Element element,
@@ -1651,10 +1712,28 @@ public class FlexmarkHtmlParser {
     private boolean processDiv(FormattingAppendable out, Element element) {
         // unwrap and process content
         skip();
-        out.line();
+        if (!isFirstChild(element)) {
+            int pendingEOL = out.getPendingEOL();
+            if (pendingEOL < 2) {
+                out.setPendingEOL(0);
+                int pendingSpace = out.getPendingSpace();
+                out.flush(0);
+                if (pendingSpace < 2) {
+                    out.openPreFormatted(true);
+                    out.append(RepeatedCharSequence.of(' ', Utils.minLimit(0, 2 - pendingSpace)));
+                    out.closePreFormatted();
+                }
+                out.setPendingEOL(pendingEOL);
+            }
+            out.line();
+        }
+
         processHtmlTree(out, element, false);
-        out.line();
-        if (myOptions.divAsParagraph) out.blankLine();
+
+        if (!isLastChild(element)) {
+            out.line();
+            if (myOptions.divAsParagraph) out.blankLine();
+        }
         return true;
     }
 

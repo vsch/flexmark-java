@@ -3,7 +3,7 @@ package com.vladsch.flexmark.util;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.BasedSequenceImpl;
 
-import java.io.UnsupportedEncodingException;
+import java.io.*;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.*;
@@ -307,7 +307,7 @@ public class Utils {
         }
         return "";
     }
-    
+
     public static BasedSequence asBased(CharSequence sequence) {
         return BasedSequenceImpl.of(sequence);
     }
@@ -591,7 +591,7 @@ public class Utils {
     public static Integer parseUnsignedIntOrNull(String text, int radix) {
         try {
             int value = Integer.parseInt(text, radix);
-            return value >= 0 ? value : null; 
+            return value >= 0 ? value : null;
         } catch (NumberFormatException ignored) {
             return null;
         }
@@ -657,5 +657,34 @@ public class Utils {
                 return removeFilter.apply(entry.getKey(), entry.getValue());
             }
         });
+    }
+
+    public static void streamAppend(StringBuilder sb, InputStream inputStream) {
+        BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
+        try {
+            while (true) {
+                String line = br.readLine();
+                if (line == null) {
+                    break;
+                }
+
+                sb.append(line).append('\n');
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                br.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public static String getResourceAsString(String resourcePath, Class clazz) {
+        InputStream stream = clazz.getResourceAsStream(resourcePath);
+        StringBuilder sb = new StringBuilder();
+        streamAppend(sb, stream);
+        return sb.toString();
     }
 }

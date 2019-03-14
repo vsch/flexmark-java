@@ -6,6 +6,9 @@ import com.openhtmltopdf.bidi.support.ICUBidiSplitter;
 import com.openhtmltopdf.outputdevice.helper.BaseRendererBuilder;
 import com.openhtmltopdf.pdfboxout.PdfBoxRenderer;
 import com.openhtmltopdf.pdfboxout.PdfRendererBuilder;
+import com.vladsch.flexmark.util.Utils;
+import com.vladsch.flexmark.util.collection.DataValueFactory;
+import com.vladsch.flexmark.util.collection.DynamicDefaultKey;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.DataKey;
 import org.apache.pdfbox.pdmodel.PDDocument;
@@ -35,8 +38,55 @@ import java.io.OutputStream;
 public class PdfConverterExtension {
     public static final DataKey<PdfRendererBuilder.TextDirection> DEFAULT_TEXT_DIRECTION = new DataKey<PdfRendererBuilder.TextDirection>("DEFAULT_TEXT_DIRECTION", (PdfRendererBuilder.TextDirection) null);
     public static final DataKey<ProtectionPolicy> PROTECTION_POLICY = new DataKey<>("PROTECTION_POLICY", (ProtectionPolicy) null);
+    public static final String DEFAULT_CSS_RESOURCE_PATH = "/default.css";
+    public static final String DEFAULT_TOC_LIST_CLASS = "toc";
+
+    public static final DataKey<String> DEFAULT_CSS = new DynamicDefaultKey<String>("DEFAULT_CSS", new DataValueFactory<String>() {
+        @Override
+        public String create(final DataHolder value) {
+            return Utils.getResourceAsString(DEFAULT_CSS_RESOURCE_PATH, PdfConverterExtension.class);
+        }
+    });
+
+    public static String embedCss(String html, String css) {
+        if (css != null && !css.isEmpty()) {
+            int pos = html.indexOf("</head>");
+            String prefix = "<style>\n";
+            String suffix = "\n</style>";
+            String tail = "";
+            if (pos == -1) {
+                pos = html.indexOf("<html>");
+                if (pos != -1) {
+                    pos += 6;
+                    prefix = "<head>" + prefix;
+                    suffix = suffix + "</head>";
+                } else {
+                    pos = html.indexOf("<body>");
+                    if (pos != -1) {
+                        prefix = "<html><head>" + prefix;
+                        suffix = suffix + "</head>";
+                        tail = "</html>\n";
+                    } else {
+                        pos = 0;
+                        prefix = "<html><head>" + prefix;
+                        suffix = suffix + "</head><body>\n";
+                        tail = "</body></html>\n";
+                    }
+                }
+            }
+
+            if (pos != -1) {
+                StringBuilder sb = new StringBuilder();
+                sb.append(html.subSequence(0, pos)).append(prefix).append(css).append(suffix).append(html.subSequence(pos, html.length())).append(tail);
+                return sb.toString();
+            }
+        }
+        return html;
+    }
 
     public static void exportToPdf(String out, String html, String url, DataHolder options) {
+        String css = DEFAULT_CSS.getFrom(options);
+        html = embedCss(html, css);
         exportToPdf(out, html, url, options.get(DEFAULT_TEXT_DIRECTION), options.get(PROTECTION_POLICY));
     }
 

@@ -30,6 +30,11 @@ public abstract class IParseBase implements IParse {
 
     @Override
     public boolean transferReferences(final Document document, final Document included) {
+        return transferReferences(document, included, null);
+    }
+
+    @Override
+    public boolean transferReferences(final Document document, final Document included, Boolean onlyIfUndefined) {
         return false;
     }
     

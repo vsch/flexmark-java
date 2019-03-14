@@ -501,22 +501,22 @@ The following instructions are for **\*nix** type systems, specifically this is 
 
 
 ```````````````````````````````` example Bullet Lists: 6
-[535 Closed](https://github.com/vsch/idea-multimarkdown/issues?q=is%3Aissue+is%3Aclosed)
-Author
-Labels
-Projects
+[535 Closed](https://github.com/vsch/idea-multimarkdown/issues?q=is%3Aissue+is%3Aclosed)  
+Author  
+Labels  
+Projects  
 Milestones
-Assignee Sort
+Assignee Sort  
 
-*
-  [Emoji suggestions do not filter as you type](https://github.com/vsch/idea-multimarkdown/issues/624)[bug](https://github.com/vsch/idea-multimarkdown/issues?q=is%3Aissue+is%3Aopen+label%3Abug "bug")
-  #624 opened 15 days ago by [jcfranco](https://github.com/vsch/idea-multimarkdown/issues?q=is%3Aissue+is%3Aopen+author%3Ajcfranco "Open issues created by jcfranco")
+*    
+  [Emoji suggestions do not filter as you type](https://github.com/vsch/idea-multimarkdown/issues/624)[bug](https://github.com/vsch/idea-multimarkdown/issues?q=is%3Aissue+is%3Aopen+label%3Abug "bug")  
+  #624 opened 15 days ago by [jcfranco](https://github.com/vsch/idea-multimarkdown/issues?q=is%3Aissue+is%3Aopen+author%3Ajcfranco "Open issues created by jcfranco")    
   [1](https://github.com/vsch/idea-multimarkdown/issues/624)
   {#issue_624}
 {#issue_624}
-*
-  [Directory linking occasionally broken](https://github.com/vsch/idea-multimarkdown/issues/623)[bug](https://github.com/vsch/idea-multimarkdown/issues?q=is%3Aissue+is%3Aopen+label%3Abug "bug") [fix available](https://github.com/vsch/idea-multimarkdown/issues?q=is%3Aissue+is%3Aopen+label%3A%22fix+available%22 "fix available") [fixed for next release](https://github.com/vsch/idea-multimarkdown/issues?q=is%3Aissue+is%3Aopen+label%3A%22fixed+for+next+release%22 "fixed for next release")
-  #623 opened 15 days ago by [mhaas](https://github.com/vsch/idea-multimarkdown/issues?q=is%3Aissue+is%3Aopen+author%3Amhaas "Open issues created by mhaas")
+*    
+  [Directory linking occasionally broken](https://github.com/vsch/idea-multimarkdown/issues/623)[bug](https://github.com/vsch/idea-multimarkdown/issues?q=is%3Aissue+is%3Aopen+label%3Abug "bug") [fix available](https://github.com/vsch/idea-multimarkdown/issues?q=is%3Aissue+is%3Aopen+label%3A%22fix+available%22 "fix available") [fixed for next release](https://github.com/vsch/idea-multimarkdown/issues?q=is%3Aissue+is%3Aopen+label%3A%22fixed+for+next+release%22 "fixed for next release")  
+  #623 opened 15 days ago by [mhaas](https://github.com/vsch/idea-multimarkdown/issues?q=is%3Aissue+is%3Aopen+author%3Amhaas "Open issues created by mhaas")    
   [4](https://github.com/vsch/idea-multimarkdown/issues/623)
   {#issue_623}
 {#issue_623}

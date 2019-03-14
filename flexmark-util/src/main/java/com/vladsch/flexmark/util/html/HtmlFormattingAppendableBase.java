@@ -10,8 +10,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Stack;
 
-import static com.vladsch.flexmark.util.html.FormattingAppendable.PASS_THROUGH;
-
 @SuppressWarnings("unchecked")
 public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase> implements HtmlFormattingAppendable {
     private final FormattingAppendable out;
@@ -581,6 +579,11 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
     }
 
     @Override
+    public int getPendingSpace() {
+        return out.getPendingSpace();
+    }
+
+    @Override
     public boolean isPendingEOL() {
         return out.isPendingSpace();
     }
@@ -588,6 +591,11 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
     @Override
     public int getPendingEOL() {
         return out.getPendingEOL();
+    }
+
+    @Override
+    public void setPendingEOL(final int pendingEOL) {
+        out.setPendingEOL(pendingEOL);
     }
 
     @Override

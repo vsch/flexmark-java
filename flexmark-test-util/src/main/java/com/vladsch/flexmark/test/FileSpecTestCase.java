@@ -26,51 +26,6 @@ public abstract class FileSpecTestCase extends RenderingTestCase {
     protected abstract String dumpDir();
     protected abstract String dumpHeader();
 
-    @Override
-    protected void actualSource(String source, String optionSet) {
-        //if (dumpDir() != null) {
-        //    File file = new File(dumpDir() + example.getSection() + ".html");
-        //    FileOutputStream outputStream = null;
-        //    try {
-        //        outputStream = new FileOutputStream(file);
-        //        outputStream.write(html.getBytes(Charset.defaultCharset()));
-        //        outputStream.close();
-        //    } catch (IOException e) {
-        //        e.printStackTrace();
-        //    }
-        //}
-    }
-
-    @Override
-    protected void actualHtml(String html, String optionSet) {
-        //if (dumpDir() != null) {
-        //    File file = new File(dumpDir() + example.getSection() + ".html");
-        //    FileOutputStream outputStream = null;
-        //    try {
-        //        outputStream = new FileOutputStream(file);
-        //        outputStream.write(html.getBytes(Charset.defaultCharset()));
-        //        outputStream.close();
-        //    } catch (IOException e) {
-        //        e.printStackTrace();
-        //    }
-        //}
-    }
-
-    @Override
-    protected void actualAst(String ast, String optionSet) {
-        //if (dumpDir() != null) {
-        //    File file = new File(dumpDir() + example.getSection() + "_ast.md");
-        //    FileOutputStream outputStream = null;
-        //    try {
-        //        outputStream = new FileOutputStream(file);
-        //        outputStream.write(node.getBytes(Charset.defaultCharset()));
-        //        outputStream.close();
-        //    } catch (IOException e) {
-        //        e.printStackTrace();
-        //    }
-        //}
-    }
-
     protected void specExample(String expected, String actual, String optionSet) {
         if (dumpDir() != null) {
             File file = new File(dumpDir() + example.getSection() + "_ast_spec.md");
@@ -145,13 +100,6 @@ public abstract class FileSpecTestCase extends RenderingTestCase {
             data.add(new Object[] { example });
         }
         return data;
-    }
-
-    /**
-     * @return return true if actual html should be used in comparison, else only actual AST will be used in compared
-     */
-    protected boolean useActualHtml() {
-        return true;
     }
 
     protected static String readResource(String resourcePath) {

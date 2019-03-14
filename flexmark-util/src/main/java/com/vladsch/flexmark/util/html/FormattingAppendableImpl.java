@@ -186,7 +186,7 @@ public class FormattingAppendableImpl implements FormattingAppendable {
         }
     }
 
-    private void setPendingEOL(int pendingEOL) {
+    public void setPendingEOLRaw(int pendingEOL) {
         if (myPassThrough) {
             if (myAppendable.getLength() > 0) {
                 myPendingEOL = pendingEOL;
@@ -204,6 +204,11 @@ public class FormattingAppendableImpl implements FormattingAppendable {
         }
 
         mySpacesAfterEOL = 0;
+    }
+
+    @Override
+    public void setPendingEOL(int pendingEOL) {
+        myPendingEOL = pendingEOL;
     }
 
     private void resetPendingEOL() {
@@ -380,7 +385,7 @@ public class FormattingAppendableImpl implements FormattingAppendable {
             }
         } else {
             if (c == myEOL) {
-                setPendingEOL(1);
+                setPendingEOLRaw(1);
             } else {
                 if (myWhitespace.indexOf(c) != -1) {
                     addPendingSpaces(1);
@@ -477,7 +482,7 @@ public class FormattingAppendableImpl implements FormattingAppendable {
                     if (eolPos != -1) {
                         // we don't output the spaces after the EOL but make EOL pending
                         if (eolPos > pos && !haveOptions(SUPPRESS_TRAILING_WHITESPACE)) addPendingSpaces(eolPos - pos);
-                        setPendingEOL(1);
+                        setPendingEOLRaw(1);
                     } else {
                         // no eol, make spaces pending
                         addPendingSpaces(span);
@@ -832,13 +837,13 @@ public class FormattingAppendableImpl implements FormattingAppendable {
 
     @Override
     public FormattingAppendable line() {
-        setPendingEOL(1);
+        setPendingEOLRaw(1);
         return this;
     }
 
     @Override
     public FormattingAppendable addLine() {
-        setPendingEOL(myPendingEOL + 1);
+        setPendingEOLRaw(myPendingEOL + 1);
         return this;
     }
 
@@ -862,7 +867,7 @@ public class FormattingAppendableImpl implements FormattingAppendable {
                 frame.myLineRef = lineRef;
             }
         }
-        setPendingEOL(1);
+        setPendingEOLRaw(1);
         return this;
     }
 
@@ -874,7 +879,7 @@ public class FormattingAppendableImpl implements FormattingAppendable {
 
     @Override
     public FormattingAppendable blankLine() {
-        setPendingEOL(2);
+        setPendingEOLRaw(2);
         return this;
     }
 
@@ -886,7 +891,7 @@ public class FormattingAppendableImpl implements FormattingAppendable {
 
     @Override
     public FormattingAppendable blankLine(final int count) {
-        if (count > 0) setPendingEOL(count + 1);
+        if (count > 0) setPendingEOLRaw(count + 1);
         return this;
     }
 
@@ -1010,6 +1015,11 @@ public class FormattingAppendableImpl implements FormattingAppendable {
     @Override
     public boolean isPendingSpace() {
         return myPendingSpaces > 0;
+    }
+
+    @Override
+    public int getPendingSpace() {
+        return myPendingSpaces;
     }
 
     @Override

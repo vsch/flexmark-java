@@ -189,6 +189,13 @@ public interface FormattingAppendable extends Appendable {
     FormattingAppendable popPrefix();
 
     /**
+     * Kludge to allow inserting spaces before the already pending EOL in HTML parser
+     *
+     * @param pendingEOL how many pending EOLs to set
+     */
+    void setPendingEOL(int pendingEOL);
+
+    /**
      * Add runnable to run after the given pending EOL is output to the stream.
      * if current pendingEOL is N then will run after pendingEOL == atPendingEOL and EOL is output
      *
@@ -451,6 +458,7 @@ public interface FormattingAppendable extends Appendable {
      */
     boolean isPendingSpace();
 
+    int getPendingSpace();
     /**
      * see if there is a pending space
      *

@@ -13,10 +13,10 @@ public abstract class NodeRepository<T> implements Map<String, T> {
 
     public abstract DataKey<? extends NodeRepository<T>> getDataKey();
     public abstract DataKey<KeepType> getKeepDataKey();
-    
+
     // function implementing extraction of referenced elements by given node or its children
     public abstract Set<T> getReferencedElements(Node parent);
-    
+
     protected void visitNodes(Node parent, final ValueRunnable<Node> runnable, Class<? extends Node>... classes) {
         ArrayList<VisitHandler<?>> handlers = new ArrayList<>();
         for (Class<? extends Node> clazz : classes) {
@@ -48,9 +48,21 @@ public abstract class NodeRepository<T> implements Map<String, T> {
     public T putRawKey(CharSequence key, T t) {
         return put(normalizeKey(key), t);
     }
-    
+
     public Collection<T> getValues() {
         return nodeMap.values();
+    }
+
+    public static <T> boolean transferReferences(NodeRepository<T> destination, NodeRepository<T> included, boolean onlyIfUndefined) {
+        // copy references but only if they are not defined in the original document
+        boolean transferred = false;
+        for (Map.Entry<String, T> entry : included.entrySet()) {
+            if (!onlyIfUndefined || !destination.containsKey(entry.getKey())) {
+                destination.put(entry.getKey(), entry.getValue());
+                transferred = true;
+            }
+        }
+        return transferred;
     }
 
     @Override

@@ -1,24 +1,20 @@
 package com.vladsch.flexmark.convert.html;
 
-import com.vladsch.flexmark.spec.UrlString;
-import com.vladsch.flexmark.util.IParse;
-import com.vladsch.flexmark.util.IRender;
-import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.spec.SpecReader;
+import com.vladsch.flexmark.spec.UrlString;
 import com.vladsch.flexmark.test.ComboSpecTestCase;
 import com.vladsch.flexmark.test.DumpSpecReader;
-import com.vladsch.flexmark.test.FullSpecTestCase;
-import com.vladsch.flexmark.test.RenderingTestCase;
+import com.vladsch.flexmark.util.IParse;
+import com.vladsch.flexmark.util.IRender;
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.MutableDataSet;
-import org.junit.AssumptionViolatedException;
 import org.junit.ComparisonFailure;
 import org.junit.runners.Parameterized;
 
 import java.io.InputStream;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -124,44 +120,9 @@ public class ComboFlexmarkHtmlAttributesParserTest extends ComboSpecTestCase {
         return RENDERER;
     }
 
-    private static class HtmlSpecReader extends DumpSpecReader {
-        public HtmlSpecReader(final InputStream stream, final FullSpecTestCase testCase) {
-            super(stream, testCase);
-        }
-
-        @Override
-        protected void addSpecExample(SpecExample example) {
-            DataHolder options;
-            boolean ignoredCase = false;
-            try {
-                options = testCase.getOptions(example, example.getOptionsSet());
-            } catch (AssumptionViolatedException ignored) {
-                ignoredCase = true;
-                options = null;
-            }
-
-            if (options != null && options.get(FAIL)) {
-                ignoredCase = true;
-            }
-
-            String parseSource = example.getHtml();
-            if (options != null && options.get(RenderingTestCase.NO_FILE_EOL)) {
-                parseSource = trimTrailingEOL(parseSource);
-            }
-
-            Node node = testCase.parser().withOptions(options).parse(parseSource);
-            String source = !ignoredCase && testCase.useActualHtml() ? testCase.renderer().withOptions(options).render(node) : example.getSource();
-            String html = example.getHtml();
-            String ast = example.getAst() == null ? null : (!ignoredCase ? testCase.ast(node) : example.getAst());
-
-            // include source so that diff can be used to update spec
-            addSpecExample(sb, source, html, ast, example.getOptionsSet(), testCase.includeExampleCoords(), example.getSection(), example.getExampleNumber());
-        }
-    }
-
     @Override
-    public SpecReader create(InputStream inputStream, final URL fileUrl) {
-        dumpSpecReader = new HtmlSpecReader(inputStream, this);
+    public SpecReader create(InputStream inputStream, final String fileUrl) {
+        dumpSpecReader = new HtmlSpecReader(inputStream, this, fileUrl, this);
         return dumpSpecReader;
     }
 

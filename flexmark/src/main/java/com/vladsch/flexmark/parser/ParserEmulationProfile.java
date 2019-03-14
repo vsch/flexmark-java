@@ -410,18 +410,18 @@ public enum ParserEmulationProfile implements MutableDataSetter {
                     .set(Parser.PARSE_INNER_HTML_COMMENTS, true)
                     .set(Parser.SPACE_IN_LINK_ELEMENTS, true)
 
-                    .set(HtmlRenderer.RENDER_HEADER_ID, false)
                     .set(HtmlRenderer.OBFUSCATE_EMAIL, true)
                     .set(HtmlRenderer.GENERATE_HEADER_ID, true)
                     //.set(HtmlRenderer.HEADER_ID_GENERATOR_TO_DASH_CHARS, "")
                     .set(HtmlRenderer.HEADER_ID_GENERATOR_NO_DUPED_DASHES, true)
+                    .set(HtmlRenderer.HEADER_ID_GENERATOR_RESOLVE_DUPES, false)
                     .set(HtmlRenderer.SOFT_BREAK, " ")
                     .set(Parser.STRONG_WRAPS_EMPHASIS, true)
                     .set(Parser.LINKS_ALLOW_MATCHED_PARENTHESES, false)
                     ;
 
             if (haveAny(pegdownExtensions, PegdownExtensions.ANCHORLINKS)) {
-                dataHolder.set(HtmlRenderer.HEADER_ID_GENERATOR_RESOLVE_DUPES, false);
+                dataHolder.set(HtmlRenderer.RENDER_HEADER_ID, false);
             }
 
             if (this == PEGDOWN_STRICT) {

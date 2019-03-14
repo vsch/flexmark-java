@@ -1,9 +1,9 @@
 package com.vladsch.flexmark.parser.internal;
 
-import com.vladsch.flexmark.util.ast.Document;
-import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.parser.PostProcessor;
 import com.vladsch.flexmark.parser.PostProcessorFactory;
+import com.vladsch.flexmark.util.ast.Document;
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.collection.ClassifyingNodeTracker;
 import com.vladsch.flexmark.util.collection.NodeClassifierVisitor;
 import com.vladsch.flexmark.util.collection.OrderedSet;
@@ -144,7 +144,8 @@ public class PostProcessorManager {
                             Set<Class<?>> classes = nodeMap.get(entry.getKey());
                             final Set<Class<?>> value = entry.getValue();
                             if (classes == null) {
-                                classes = value;
+                                // copy so it is not modified by additional dependencies injecting other exclusions by mistake
+                                classes = new HashSet(value);
                                 //noinspection unchecked
                                 nodeMap.put((Class<? extends Node>) entry.getKey(), classes);
                             } else {

@@ -10,7 +10,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
@@ -59,12 +58,6 @@ public abstract class ComboSpecTestCase extends FullSpecTestCase {
             data.add(new Object[] { example });
         }
         return data;
-    }
-
-    @Override
-    public SpecReader create(InputStream inputStream, final URL fileUrl) {
-        dumpSpecReader = new DumpSpecReader(inputStream, this);
-        return dumpSpecReader;
     }
 
     /**
@@ -127,7 +120,8 @@ public abstract class ComboSpecTestCase extends FullSpecTestCase {
         if (fullTestSpecStarting()) {
             String specResourcePath = getSpecResourceName();
             String fullSpec = SpecReader.readSpec(specResourcePath);
-            SpecReader reader = SpecReader.createAndReadExamples(specResourcePath, this);
+            SpecReader reader = example == null || example.getFileUrl() == null ? SpecReader.createAndReadExamples(specResourcePath, this)
+                    : SpecReader.createAndReadExamples(specResourcePath, this, example.getFileUrl().toString());
             String actual = dumpSpecReader.getFullSpec();
 
             if (outputActualFullSpec()) {

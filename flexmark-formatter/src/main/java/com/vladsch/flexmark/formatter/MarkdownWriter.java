@@ -1,9 +1,9 @@
 package com.vladsch.flexmark.formatter;
 
 import com.vladsch.flexmark.ast.BlockQuote;
-import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.Consumer;
 import com.vladsch.flexmark.util.Ref;
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.html.ConditionalFormatter;
 import com.vladsch.flexmark.util.html.FormattingAppendable;
 import com.vladsch.flexmark.util.html.FormattingAppendableImpl;
@@ -128,11 +128,16 @@ public class MarkdownWriter implements FormattingAppendable {
     @Override public int lastOffset()                                                                                           { return myAppendable.lastOffset(); }
     @Override public int getOptions()                                                                                           { return myAppendable.getOptions(); }
     @Override public int getPushedPrefixCount()                                                                                 { return myAppendable.getPushedPrefixCount(); }
+
+    @Override
+    public int getPendingSpace() { return myAppendable.getPendingSpace(); }
     @Override public int getPendingEOL()                                                                                        { return myAppendable.getPendingEOL(); }
+
+    @Override
+    public void setPendingEOL(final int pendingEOL) { myAppendable.setPendingEOL(pendingEOL); }
     @Override public IOException getIOException()                                                                               { return myAppendable.getIOException(); }
     @Override public String getText()                                                                                           { return myAppendable.getText(); }
     @Override public String getText(final int maxBlankLines)                                                                    { return myAppendable.getText(maxBlankLines); }
-
     @Override public MarkdownWriter addAfterEolRunnable(final int atPendingEOL, final Runnable runnable)                        { myAppendable.addAfterEolRunnable(atPendingEOL, runnable); return this; }
     @Override public MarkdownWriter addLine()                                                                                   { myAppendable.addLine(); return this; }
     @Override public MarkdownWriter addPrefix(final CharSequence prefix)                                                        { myAppendable.addPrefix(prefix); return this; }
