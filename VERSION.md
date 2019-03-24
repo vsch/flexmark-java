@@ -6,6 +6,7 @@ flexmark-java
 [TOC]: # " "
 
 - [Future 0.50.0](#future-0500)
+- [0.40.26](#04026)
 - [0.40.24](#04024)
 - [0.40.22](#04022)
 - [0.40.20](#04020)
@@ -103,6 +104,14 @@ Future 0.50.0
   * [ ] `EXT_TABLES` conversion option not yet implemented.
 * [ ] Add: `<!-- @formatter:on -->` and `<!-- @formatter:on -->` tags to `Formatter` for
       controlling non-formatting regions.
+
+0.40.26
+-------
+
+* Fix: upgrade dependencies
+  * OpenHtmlToPdf -> 0.0.1-RC19 
+  * docx4j -> 6.1.2 
+* Add: parse int or default to `Utils.java`
 
 0.40.24
 -------

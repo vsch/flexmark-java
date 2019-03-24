@@ -609,6 +609,31 @@ public class Utils {
         }
     }
 
+    public static int parseUnsignedIntOrDefault(String text, int defaultValue) {
+        return parseUnsignedIntOrDefault(text, defaultValue, 10);
+    }
+
+    public static int parseUnsignedIntOrDefault(String text, int defaultValue, int radix) {
+        try {
+            int value = Integer.parseInt(text, radix);
+            return value >= 0 ? value : defaultValue;
+        } catch (NumberFormatException ignored) {
+            return defaultValue;
+        }
+    }
+
+    public static int parseIntOrDefault(String text, int defaultValue) {
+        return parseIntOrDefault(text, defaultValue, 10);
+    }
+
+    public static int parseIntOrDefault(String text, int defaultValue, int radix) {
+        try {
+            return Integer.parseInt(text, radix);
+        } catch (NumberFormatException ignored) {
+            return defaultValue;
+        }
+    }
+
     static public <T extends Comparable<T>> int compareNullable(T i1, T i2) {
         if (i1 == null || i2 == null) return 0;
         else return i1.compareTo(i2);

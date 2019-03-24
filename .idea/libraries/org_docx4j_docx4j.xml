@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="org.docx4j:docx4j" type="repository">
-    <properties maven-id="org.docx4j:docx4j:6.0.1" />
+    <properties maven-id="org.docx4j:docx4j:6.1.2" />
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/lib/docx4j-6.0.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/docx4j-6.1.2.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/jaxb-svg11-1.0.2.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/mbassador-1.2.4.2.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/slf4j-api-1.7.25.jar!/" />

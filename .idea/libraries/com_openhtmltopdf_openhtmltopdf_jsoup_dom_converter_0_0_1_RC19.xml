@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="com.openhtmltopdf:openhtmltopdf-jsoup-dom-converter:0.0.1-RC19" type="repository">
+    <properties maven-id="com.openhtmltopdf:openhtmltopdf-jsoup-dom-converter:0.0.1-RC19" />
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/openhtmltopdf-jsoup-dom-converter-0.0.1-RC19.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jsoup-1.9.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

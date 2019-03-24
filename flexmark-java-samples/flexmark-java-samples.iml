@@ -41,10 +41,10 @@
     <orderEntry type="module" module-name="flexmark-formatter" />
     <orderEntry type="module" module-name="flexmark-pdf-converter" />
     <orderEntry type="library" name="org.apache.directory.studio:org.apache.commons.io:2.4" level="project" />
-    <orderEntry type="library" name="com.openhtmltopdf:openhtmltopdf-core:0.0.1-RC13" level="project" />
-    <orderEntry type="library" name="com.openhtmltopdf:openhtmltopdf-jsoup-dom-converter:0.0.1-RC13" level="project" />
-    <orderEntry type="library" name="com.openhtmltopdf:openhtmltopdf-pdfbox:0.0.1-RC13" level="project" />
-    <orderEntry type="library" name="com.openhtmltopdf:openhtmltopdf-rtl-support:0.0.1-RC13" level="project" />
+    <orderEntry type="library" name="com.openhtmltopdf:openhtmltopdf-core:0.0.1-RC19" level="project" />
+    <orderEntry type="library" name="com.openhtmltopdf:openhtmltopdf-jsoup-dom-converter:0.0.1-RC19" level="project" />
+    <orderEntry type="library" name="com.openhtmltopdf:openhtmltopdf-pdfbox:0.0.1-RC19" level="project" />
+    <orderEntry type="library" name="com.openhtmltopdf:openhtmltopdf-rtl-support:0.0.1-RC19" level="project" />
     <orderEntry type="module" module-name="flexmark-html-parser" />
     <orderEntry type="module" module-name="flexmark-docx-converter" />
     <orderEntry type="module" module-name="flexmark-ext-admonition" />
