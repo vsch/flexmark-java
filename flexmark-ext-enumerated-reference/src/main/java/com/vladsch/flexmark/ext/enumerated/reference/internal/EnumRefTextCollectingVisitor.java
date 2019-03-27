@@ -71,7 +71,7 @@ public class EnumRefTextCollectingVisitor {
 
     /**
      * @param node format node
-     * @deprecated use {@link #collect(EnumeratedReferenceRendering[], String)}
+     * @deprecated use {@link #collect(BasedSequence, EnumeratedReferenceRendering[], String)}
      */
     @Deprecated
     public void collect(Node node) {
@@ -81,7 +81,7 @@ public class EnumRefTextCollectingVisitor {
 
     /**
      * @param node format node
-     * @deprecated use {@link #collectAndGetText(EnumeratedReferenceRendering[], String)}
+     * @deprecated use {@link #collectAndGetText(BasedSequence, EnumeratedReferenceRendering[], String)}
      */
     @Deprecated
     public String collectAndGetText(Node node) {
@@ -91,7 +91,7 @@ public class EnumRefTextCollectingVisitor {
 
     /**
      * @param node format node
-     * @deprecated use {@link #collectAndGetSegments(EnumeratedReferenceRendering[], String)}
+     * @deprecated use {@link #collectAndGetSegments(BasedSequence, EnumeratedReferenceRendering[], String)}
      */
     @Deprecated
     public BasedSequence[] collectAndGetSegments(Node node) {
@@ -101,7 +101,7 @@ public class EnumRefTextCollectingVisitor {
 
     /**
      * @param node format node
-     * @deprecated use {@link #collectAndGetSequence(EnumeratedReferenceRendering[], String)}
+     * @deprecated use {@link #collectAndGetSequence(BasedSequence, EnumeratedReferenceRendering[], String)}
      */
     @Deprecated
     public BasedSequence collectAndGetSequence(Node node) {

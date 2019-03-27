@@ -10,10 +10,11 @@ public interface EnumeratedOrdinalRenderer {
     
     /**
      * Render final reference format
-     *  @param referenceOrdinal
-     * @param referenceFormat reference format or null
-     * @param defaultText     default text to use if referenceFormat is null or not being used
-     * @param needSeparator   true if need to add separator character before adding text or rendering reference format 
+     *
+     * @param referenceOrdinal ordinal for the reference
+     * @param referenceFormat  reference format or null
+     * @param defaultText      default text to use if referenceFormat is null or not being used
+     * @param needSeparator    true if need to add separator character before adding text or rendering reference format
      */
     void render(final int referenceOrdinal, EnumeratedReferenceBlock referenceFormat, final String defaultText, final boolean needSeparator);
 
