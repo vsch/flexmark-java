@@ -6,6 +6,7 @@ flexmark-java
 [TOC]: # " "
 
 - [Future 0.50.0](#future-0500)
+- [0.40.30](#04030)
 - [0.40.28](#04028)
 - [0.40.26](#04026)
 - [0.40.24](#04024)
@@ -105,6 +106,14 @@ Future 0.50.0
   * [ ] `EXT_TABLES` conversion option not yet implemented.
 * [ ] Add: `<!-- @formatter:on -->` and `<!-- @formatter:on -->` tags to `Formatter` for
       controlling non-formatting regions.
+
+0.40.30
+-------
+
+* Fix: limit `EnumeratedReferenceBlock` to single line of text without processing other block
+  elements.
+* Fix: change `Abbreviations` to custom block parser from paragraph pre-processor. Allows
+  abbreviation definitions without preceding blank line.
 
 0.40.28
 -------

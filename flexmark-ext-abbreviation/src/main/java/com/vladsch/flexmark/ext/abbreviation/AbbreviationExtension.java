@@ -84,7 +84,8 @@ public class AbbreviationExtension implements Parser.ParserExtension, HtmlRender
 
     @Override
     public void extend(Parser.Builder parserBuilder) {
-        parserBuilder.paragraphPreProcessorFactory(AbbreviationParagraphPreProcessor.Factory());
+        parserBuilder.customBlockParserFactory(new AbbreviationBlockParser.Factory());
+        //parserBuilder.paragraphPreProcessorFactory(AbbreviationParagraphPreProcessor.Factory());
         parserBuilder.postProcessorFactory(new AbbreviationNodePostProcessor.Factory());
     }
 

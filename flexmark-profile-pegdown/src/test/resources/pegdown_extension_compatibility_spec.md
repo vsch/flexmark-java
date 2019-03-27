@@ -125,7 +125,7 @@ Paragraph with second line having a reference
 *[test]: test abbreviation
 
 .
-<p>Paragraph with second line having a reference *[test]: test abbreviation</p>
+<p>Paragraph with second line having a reference</p>
 ````````````````````````````````
 
 

@@ -153,7 +153,8 @@ Paragraph with second line having a reference
 
 .
 paARaAGRaAph WiIth SeEcoND LiINeE haAViING aA ReEFeEReENceE
-*[teESt]: teESt aABBReEViIaAtiIoN
+
+*[test]: teESt aABBReEViIaAtiIoN
 ````````````````````````````````
 
 

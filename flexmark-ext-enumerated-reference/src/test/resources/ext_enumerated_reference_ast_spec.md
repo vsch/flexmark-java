@@ -13,7 +13,7 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 Converts `[@type:reference]` to enumerated reference based on type pattern defined in enumerated
 reference definition of the form:
 
-[@type]: Type content [#]
+    Type content [#]
 
 Where [#] is replaced by the ordinal for the actual reference in the document. [@] is equivalent
 to [@] when there is no id. It is treated as a placeholder for the ordinal number for the given
@@ -115,12 +115,12 @@ Document[0, 285]
     EnumeratedReferenceLink[230, 241] textOpen:[230, 232, "[@"] text:[232, 240, "tbl:test"] textClose:[240, 241, "]"]
       Text[232, 240] chars:[232, 240, "tbl:test"]
   EnumeratedReferenceBlock[244, 264] open:[244, 246] text:[246, 249] close:[249, 251] enumeratedReference:[252, 264]
-    Paragraph[252, 264] isTrailingBlankLine
+    Paragraph[252, 264]
       Text[252, 259] chars:[252, 259, "Figure "]
       EnumeratedReferenceText[259, 262] textOpen:[259, 261, "[#"] text:[261, 261] textClose:[261, 262, "]"]
       Text[262, 263] chars:[262, 263, "."]
   EnumeratedReferenceBlock[265, 284] open:[265, 267] text:[267, 270] close:[270, 272] enumeratedReference:[273, 284]
-    Paragraph[273, 284] isTrailingBlankLine
+    Paragraph[273, 284]
       Text[273, 279] chars:[273, 279, "Table "]
       EnumeratedReferenceText[279, 282] textOpen:[279, 281, "[#"] text:[281, 281] textClose:[281, 282, "]"]
       Text[282, 283] chars:[282, 283, "."]
@@ -192,7 +192,7 @@ Document[0, 45]
       Text[4, 7] chars:[4, 7, "hdr"]
     Text[8, 25] chars:[8, 25, " Numb … ading"]
   EnumeratedReferenceBlock[31, 44] open:[31, 33] text:[33, 36] close:[36, 38] enumeratedReference:[39, 44]
-    Paragraph[39, 44] isTrailingBlankLine
+    Paragraph[39, 44]
       EnumeratedReferenceText[39, 42] textOpen:[39, 41, "[#"] text:[41, 41] textClose:[41, 42, "]"]
       Text[42, 43] chars:[42, 43, "."]
 ````````````````````````````````
@@ -219,7 +219,7 @@ Document[0, 76]
       Text[35, 38] chars:[35, 38, "hdr"]
     Text[39, 56] chars:[39, 56, " Numb … ading"]
   EnumeratedReferenceBlock[62, 75] open:[62, 64] text:[64, 67] close:[67, 69] enumeratedReference:[70, 75]
-    Paragraph[70, 75] isTrailingBlankLine
+    Paragraph[70, 75]
       EnumeratedReferenceText[70, 73] textOpen:[70, 72, "[#"] text:[72, 72] textClose:[72, 73, "]"]
       Text[73, 74] chars:[73, 74, "."]
 ````````````````````````````````
@@ -271,11 +271,11 @@ Document[0, 231]
       Text[159, 169] chars:[159, 169, "hdr1:hdr2:"]
     Text[170, 191] chars:[170, 191, " Numb … g 2.1"]
   EnumeratedReferenceBlock[197, 211] open:[197, 199] text:[199, 203] close:[203, 205] enumeratedReference:[206, 211]
-    Paragraph[206, 211] isTrailingBlankLine
+    Paragraph[206, 211]
       EnumeratedReferenceText[206, 209] textOpen:[206, 208, "[#"] text:[208, 208] textClose:[208, 209, "]"]
       Text[209, 210] chars:[209, 210, "."]
   EnumeratedReferenceBlock[216, 230] open:[216, 218] text:[218, 222] close:[222, 224] enumeratedReference:[225, 230]
-    Paragraph[225, 230] isTrailingBlankLine
+    Paragraph[225, 230]
       EnumeratedReferenceText[225, 228] textOpen:[225, 227, "[#"] text:[227, 227] textClose:[227, 228, "]"]
       Text[228, 229] chars:[228, 229, "."]
 ````````````````````````````````
@@ -320,10 +320,10 @@ Document[0, 186]
       Text[116, 126] chars:[116, 126, "hdr1:hdr2:"]
     Text[127, 148] chars:[127, 148, " Numb … g 2.1"]
   EnumeratedReferenceBlock[154, 167] open:[154, 156] text:[156, 160] close:[160, 162] enumeratedReference:[163, 167]
-    Paragraph[163, 167] isTrailingBlankLine
+    Paragraph[163, 167]
       EnumeratedReferenceText[163, 166] textOpen:[163, 165, "[#"] text:[165, 165] textClose:[165, 166, "]"]
   EnumeratedReferenceBlock[172, 185] open:[172, 174] text:[174, 178] close:[178, 180] enumeratedReference:[181, 185]
-    Paragraph[181, 185] isTrailingBlankLine
+    Paragraph[181, 185]
       EnumeratedReferenceText[181, 184] textOpen:[181, 183, "[#"] text:[183, 183] textClose:[183, 184, "]"]
 ````````````````````````````````
 
@@ -457,6 +457,98 @@ Document[0, 373]
     Paragraph[368, 373]
       EnumeratedReferenceText[368, 371] textOpen:[368, 370, "[#"] text:[370, 370] textClose:[370, 371, "]"]
       Text[371, 372] chars:[371, 372, "."]
+````````````````````````````````
+
+
+No block elements, only text parsing so the following is not a list item
+
+```````````````````````````````` example Heading: 7
+# [#hd1] Heading 1
+
+[@hd1]: * list [#]
+.
+<h1>* list 1 Heading 1</h1>
+.
+Document[0, 39]
+  Heading[0, 18] textOpen:[0, 1, "#"] text:[2, 18, "[#hd1] Heading 1"]
+    EnumeratedReferenceText[2, 8] textOpen:[2, 4, "[#"] text:[4, 7, "hd1"] textClose:[7, 8, "]"]
+      Text[4, 7] chars:[4, 7, "hd1"]
+    Text[8, 18] chars:[8, 18, " Heading 1"]
+  EnumeratedReferenceBlock[20, 39] open:[20, 22] text:[22, 25] close:[25, 27] enumeratedReference:[28, 39]
+    Paragraph[28, 39]
+      Text[28, 35] chars:[28, 35, "* list "]
+      EnumeratedReferenceText[35, 38] textOpen:[35, 37, "[#"] text:[37, 37] textClose:[37, 38, "]"]
+````````````````````````````````
+
+
+```````````````````````````````` example Heading: 8
+# [#hd1] Heading 1
+
+[@hd1]: *list* [#]
+.
+<h1><em>list</em> 1 Heading 1</h1>
+.
+Document[0, 39]
+  Heading[0, 18] textOpen:[0, 1, "#"] text:[2, 18, "[#hd1] Heading 1"]
+    EnumeratedReferenceText[2, 8] textOpen:[2, 4, "[#"] text:[4, 7, "hd1"] textClose:[7, 8, "]"]
+      Text[4, 7] chars:[4, 7, "hd1"]
+    Text[8, 18] chars:[8, 18, " Heading 1"]
+  EnumeratedReferenceBlock[20, 39] open:[20, 22] text:[22, 25] close:[25, 27] enumeratedReference:[28, 39]
+    Paragraph[28, 39]
+      Emphasis[28, 34] textOpen:[28, 29, "*"] text:[29, 33, "list"] textClose:[33, 34, "*"]
+        Text[29, 33] chars:[29, 33, "list"]
+      Text[34, 35] chars:[34, 35, " "]
+      EnumeratedReferenceText[35, 38] textOpen:[35, 37, "[#"] text:[37, 37] textClose:[37, 38, "]"]
+````````````````````````````````
+
+
+```````````````````````````````` example Heading: 9
+# [#hd1] Heading 1
+
+[hd1]: https://example.com
+[@hd1]: *list* [#]
+.
+<h1><em>list</em> 1 Heading 1</h1>
+.
+Document[0, 66]
+  Heading[0, 18] textOpen:[0, 1, "#"] text:[2, 18, "[#hd1] Heading 1"]
+    EnumeratedReferenceText[2, 8] textOpen:[2, 4, "[#"] text:[4, 7, "hd1"] textClose:[7, 8, "]"]
+      Text[4, 7] chars:[4, 7, "hd1"]
+    Text[8, 18] chars:[8, 18, " Heading 1"]
+  Reference[20, 46] refOpen:[20, 21, "["] ref:[21, 24, "hd1"] refClose:[24, 26, "]:"] url:[27, 46, "https://example.com"]
+  EnumeratedReferenceBlock[47, 66] open:[47, 49] text:[49, 52] close:[52, 54] enumeratedReference:[55, 66]
+    Paragraph[55, 66]
+      Emphasis[55, 61] textOpen:[55, 56, "*"] text:[56, 60, "list"] textClose:[60, 61, "*"]
+        Text[56, 60] chars:[56, 60, "list"]
+      Text[61, 62] chars:[61, 62, " "]
+      EnumeratedReferenceText[62, 65] textOpen:[62, 64, "[#"] text:[64, 64] textClose:[64, 65, "]"]
+````````````````````````````````
+
+
+```````````````````````````````` example Heading: 10
+# [#hd1] Heading 1
+
+[hd1]: https://example.com
+[@hd1]: *list* [#]
+Following paragraph text
+.
+<h1><em>list</em> 1 Heading 1</h1>
+<p>Following paragraph text</p>
+.
+Document[0, 91]
+  Heading[0, 18] textOpen:[0, 1, "#"] text:[2, 18, "[#hd1] Heading 1"]
+    EnumeratedReferenceText[2, 8] textOpen:[2, 4, "[#"] text:[4, 7, "hd1"] textClose:[7, 8, "]"]
+      Text[4, 7] chars:[4, 7, "hd1"]
+    Text[8, 18] chars:[8, 18, " Heading 1"]
+  Reference[20, 46] refOpen:[20, 21, "["] ref:[21, 24, "hd1"] refClose:[24, 26, "]:"] url:[27, 46, "https://example.com"]
+  EnumeratedReferenceBlock[47, 66] open:[47, 49] text:[49, 52] close:[52, 54] enumeratedReference:[55, 66]
+    Paragraph[55, 66]
+      Emphasis[55, 61] textOpen:[55, 56, "*"] text:[56, 60, "list"] textClose:[60, 61, "*"]
+        Text[56, 60] chars:[56, 60, "list"]
+      Text[61, 62] chars:[61, 62, " "]
+      EnumeratedReferenceText[62, 65] textOpen:[62, 64, "[#"] text:[64, 64] textClose:[64, 65, "]"]
+  Paragraph[66, 91]
+    Text[66, 90] chars:[66, 90, "Follo …  text"]
 ````````````````````````````````
 
 

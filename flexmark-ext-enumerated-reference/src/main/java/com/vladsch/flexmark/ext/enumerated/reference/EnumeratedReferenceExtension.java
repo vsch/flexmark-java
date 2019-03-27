@@ -74,6 +74,7 @@ public class EnumeratedReferenceExtension implements Parser.ParserExtension
 
     @Override
     public void extend(Parser.Builder parserBuilder) {
+        //parserBuilder.paragraphPreProcessorFactory(EnumeratedReferenceParagraphPreProcessor.Factory());
         parserBuilder.postProcessorFactory(new EnumeratedReferenceNodePostProcessor.Factory());
         parserBuilder.customBlockParserFactory(new EnumeratedReferenceBlockParser.Factory());
         parserBuilder.linkRefProcessorFactory(new EnumeratedReferenceLinkRefProcessor.Factory());

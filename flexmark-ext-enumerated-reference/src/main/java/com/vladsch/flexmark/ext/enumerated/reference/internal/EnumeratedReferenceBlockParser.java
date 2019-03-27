@@ -1,10 +1,13 @@
 package com.vladsch.flexmark.ext.enumerated.reference.internal;
 
-import com.vladsch.flexmark.util.ast.Block;
-import com.vladsch.flexmark.util.ast.BlockContent;
+import com.vladsch.flexmark.ast.Paragraph;
 import com.vladsch.flexmark.ext.enumerated.reference.EnumeratedReferenceBlock;
 import com.vladsch.flexmark.ext.enumerated.reference.EnumeratedReferenceExtension;
+import com.vladsch.flexmark.parser.InlineParser;
 import com.vladsch.flexmark.parser.block.*;
+import com.vladsch.flexmark.util.ast.Block;
+import com.vladsch.flexmark.util.ast.BlockContent;
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
@@ -15,7 +18,7 @@ import java.util.regex.Pattern;
 public class EnumeratedReferenceBlockParser extends AbstractBlockParser {
     static String ENUM_REF_ID = "(?:[^0-9].*)?";
     static Pattern ENUM_REF_ID_PATTERN = Pattern.compile("\\[[\\@|#]\\s*(" + ENUM_REF_ID + ")\\s*\\]");
-    static Pattern ENUM_REF_DEF_PATTERN = Pattern.compile("^\\[[\\@]\\s*(" + ENUM_REF_ID + ")\\s*\\]:");
+    static Pattern ENUM_REF_DEF_PATTERN = Pattern.compile("^(\\[[\\@]\\s*(" + ENUM_REF_ID + ")\\s*\\]:)\\s+");
 
     private final EnumeratedReferenceBlock block = new EnumeratedReferenceBlock();
     private final EnumeratedReferenceOptions options;
@@ -38,27 +41,12 @@ public class EnumeratedReferenceBlockParser extends AbstractBlockParser {
 
     @Override
     public BlockContinue tryContinue(ParserState state) {
-        final int nonSpaceIndex = state.getNextNonSpaceIndex();
-        if (state.isBlank()) {
-            if (block.getFirstChild() == null) {
-                // Blank line after empty list item
-                return BlockContinue.none();
-            } else {
-                return BlockContinue.atIndex(nonSpaceIndex);
-            }
-        }
-
-        if (state.getIndent() >= options.contentIndent) {
-            int contentIndent = state.getIndex() + options.contentIndent;
-            return BlockContinue.atIndex(contentIndent);
-        } else {
-            return BlockContinue.none();
-        }
+        return BlockContinue.none();
     }
 
     @Override
     public void addLine(ParserState state, BasedSequence line) {
-        content.add(line, state.getIndent());
+        throw new IllegalStateException("Abbreviation Blocks hold a single line");
     }
 
     @Override
@@ -74,13 +62,21 @@ public class EnumeratedReferenceBlockParser extends AbstractBlockParser {
     }
 
     @Override
+    public void parseInlines(InlineParser inlineParser) {
+        Node paragraph = block.getFirstChild();
+        if (paragraph != null) {
+            inlineParser.parse(paragraph.getChars(), paragraph);
+        }
+    }
+
+    @Override
     public boolean isContainer() {
         return true;
     }
 
     @Override
     public boolean canContain(ParserState state, BlockParser blockParser, Block block) {
-        return true;
+        return blockParser.isParagraphParser();
     }
 
     public static class Factory implements CustomBlockParserFactory {
@@ -119,17 +115,17 @@ public class EnumeratedReferenceBlockParser extends AbstractBlockParser {
                 return BlockStart.none();
             }
 
-            BasedSequence line = state.getLine();
+            BasedSequence line = state.getLineWithEOL();
             int nextNonSpace = state.getNextNonSpaceIndex();
 
             BasedSequence trySequence = line.subSequence(nextNonSpace, line.length());
             Matcher matcher = ENUM_REF_DEF_PATTERN.matcher(trySequence);
             if (matcher.find()) {
                 // abbreviation definition
-                int openingStart = nextNonSpace + matcher.start();
-                int openingEnd = nextNonSpace + matcher.end();
+                int openingStart = nextNonSpace + matcher.start(1);
+                int openingEnd = nextNonSpace + matcher.end(1);
                 BasedSequence openingMarker = line.subSequence(openingStart, openingStart + 2);
-                BasedSequence text = line.subSequence(openingStart + 2, openingEnd - 2).trim();
+                BasedSequence text = line.subSequence(matcher.start(2), matcher.end(2));
                 BasedSequence closingMarker = line.subSequence(openingEnd - 2, openingEnd);
 
                 int contentOffset = options.contentIndent;
@@ -138,9 +134,14 @@ public class EnumeratedReferenceBlockParser extends AbstractBlockParser {
                 enumeratedReferenceBlockParser.block.setOpeningMarker(openingMarker);
                 enumeratedReferenceBlockParser.block.setText(text);
                 enumeratedReferenceBlockParser.block.setClosingMarker(closingMarker);
+                BasedSequence enumeratedReference = trySequence.subSequence(matcher.end());
+                enumeratedReferenceBlockParser.block.setEnumeratedReference(enumeratedReference);
+                Paragraph paragraph = new Paragraph(enumeratedReference);
+                enumeratedReferenceBlockParser.block.appendChild(paragraph);
+                enumeratedReferenceBlockParser.block.setCharsFromContent();
 
                 return BlockStart.of(enumeratedReferenceBlockParser)
-                        .atIndex(openingEnd);
+                        .atIndex(line.length());
             } else {
                 return BlockStart.none();
             }

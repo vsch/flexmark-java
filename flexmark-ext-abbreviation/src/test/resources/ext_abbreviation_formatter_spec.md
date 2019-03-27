@@ -143,6 +143,7 @@ Paragraph with second line having a reference
 
 .
 Paragraph with second line having a reference
+
 *[test]: test abbreviation
 
 ````````````````````````````````

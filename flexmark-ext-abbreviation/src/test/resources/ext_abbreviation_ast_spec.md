@@ -197,17 +197,12 @@ Paragraph with second line having a reference
 *[test]: test abbreviation
 
 .
-<p>Paragraph with second line having a reference
-*[test]: test abbreviation</p>
+<p>Paragraph with second line having a reference</p>
 .
 Document[0, 74]
-  Paragraph[0, 73] isTrailingBlankLine
+  Paragraph[0, 46]
     Text[0, 45] chars:[0, 45, "Parag … rence"]
-    SoftLineBreak[45, 46]
-    Text[46, 47] chars:[46, 47, "*"]
-    LinkRef[47, 53] referenceOpen:[47, 48, "["] reference:[48, 52, "test"] referenceClose:[52, 53, "]"]
-      Text[48, 52] chars:[48, 52, "test"]
-    Text[53, 72] chars:[53, 72, ": tes … ation"]
+  AbbreviationBlock[46, 72] open:[46, 48] text:[48, 52] close:[52, 54] abbreviation:[55, 72]
 ````````````````````````````````
 
 
