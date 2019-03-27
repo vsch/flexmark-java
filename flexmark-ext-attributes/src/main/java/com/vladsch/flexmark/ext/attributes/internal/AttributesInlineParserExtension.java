@@ -1,6 +1,7 @@
 package com.vladsch.flexmark.ext.attributes.internal;
 
 import com.vladsch.flexmark.ext.attributes.AttributeNode;
+import com.vladsch.flexmark.ext.attributes.AttributesDelimiter;
 import com.vladsch.flexmark.ext.attributes.AttributesNode;
 import com.vladsch.flexmark.parser.InlineParser;
 import com.vladsch.flexmark.parser.InlineParserExtension;
@@ -38,13 +39,15 @@ public class AttributesInlineParserExtension implements InlineParserExtension {
                 // see what we have
                 // open, see if open/close
                 BasedSequence attributesText = input.subSequence(matcher.start(1), matcher.end(1));
-                AttributesNode attributes = new AttributesNode(attributesOpen.subSequence(0, 1), attributesText, attributesOpen.endSequence(1));
+                AttributesNode attributes = attributesText.equals("#") || attributesText.equals(".") ? new AttributesDelimiter(attributesOpen.subSequence(0, 1), attributesText, attributesOpen.endSequence(1)) 
+                        : new AttributesNode(attributesOpen.subSequence(0, 1), attributesText, attributesOpen.endSequence(1));
+                
                 attributes.setCharsFromContent();
 
                 int leadingSpaces = attributesText.countLeading(" \t");
                 // give it to the text node
                 if (leadingSpaces > 0) {
-                    inlineParser.appendText(attributesText,0,leadingSpaces);
+                    inlineParser.appendText(attributesText, 0, leadingSpaces);
                     attributesText = attributesText.subSequence(leadingSpaces);
                 }
 
@@ -52,7 +55,7 @@ public class AttributesInlineParserExtension implements InlineParserExtension {
                 inlineParser.getBlock().appendChild(attributes);
 
                 BasedSequence attributeText = attributesText.trim();
-                if (!attributeText.isEmpty()) {
+                if (!attributeText.isEmpty() && attributes instanceof AttributesNode) {
                     // have some attribute text
                     // parse attributes
                     Matcher attributeMatcher = parsing.ATTRIBUTE.matcher(attributeText);

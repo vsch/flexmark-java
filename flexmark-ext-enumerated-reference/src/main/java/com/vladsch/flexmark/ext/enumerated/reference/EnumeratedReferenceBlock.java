@@ -9,7 +9,7 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 /**
  * A EnumeratedReference block node
  */
-public class EnumeratedReferenceBlock extends CustomBlock implements ReferenceNode<EnumeratedReferenceRepository, EnumeratedReferenceBlock, EnumeratedReferenceText>, ParagraphItemContainer {
+public class EnumeratedReferenceBlock extends Block implements ReferenceNode<EnumeratedReferenceRepository, EnumeratedReferenceBlock, EnumeratedReferenceText>, ParagraphItemContainer {
     protected BasedSequence openingMarker = BasedSequence.NULL;
     protected BasedSequence text = BasedSequence.NULL;
     protected BasedSequence closingMarker = BasedSequence.NULL;

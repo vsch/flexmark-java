@@ -1,8 +1,7 @@
 package com.vladsch.flexmark.ext.enumerated.reference.internal;
 
 import com.vladsch.flexmark.ast.*;
-import com.vladsch.flexmark.ext.enumerated.reference.EnumeratedReferenceLink;
-import com.vladsch.flexmark.ext.enumerated.reference.EnumeratedReferenceText;
+import com.vladsch.flexmark.ext.enumerated.reference.*;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.SegmentedSequenceBuilder;
 
@@ -10,9 +9,15 @@ import com.vladsch.flexmark.util.sequence.SegmentedSequenceBuilder;
 public class EnumRefTextCollectingVisitor {
     private SegmentedSequenceBuilder out;
     private final NodeVisitor myVisitor;
-    private final int ordinal;
+    private int myOrdinal;
+
+    public EnumRefTextCollectingVisitor() {
+        this(0);
+    }
 
     public EnumRefTextCollectingVisitor(int ordinal) {
+        myOrdinal = ordinal;
+
         myVisitor = new NodeVisitor(
                 new VisitHandler<Text>(Text.class, new Visitor<Text>() {
                     @Override
@@ -57,30 +62,93 @@ public class EnumRefTextCollectingVisitor {
                     }
                 })
         );
-        this.ordinal = ordinal;
     }
 
     public String getText() {
         return out.toString();
     }
 
+    /**
+     * @param node format node
+     * @deprecated use {@link #collect(BasedSequence, EnumeratedReferenceRendering[], String)}
+     */
+    @Deprecated
     public void collect(Node node) {
         out = new SegmentedSequenceBuilder(node.getChars());
         myVisitor.visit(node);
     }
 
+    /**
+     * @param node format node
+     * @deprecated use {@link #collectAndGetText(BasedSequence, EnumeratedReferenceRendering[], String)}
+     */
+    @Deprecated
     public String collectAndGetText(Node node) {
         collect(node);
         return out.toString();
     }
 
+    /**
+     * @param node format node
+     * @deprecated use {@link #collectAndGetSegments(BasedSequence, EnumeratedReferenceRendering[], String)}
+     */
+    @Deprecated
     public BasedSequence[] collectAndGetSegments(Node node) {
         collect(node);
         return out.toSegments();
     }
 
+    /**
+     * @param node format node
+     * @deprecated use {@link #collectAndGetSequence(BasedSequence, EnumeratedReferenceRendering[], String)}
+     */
+    @Deprecated
     public BasedSequence collectAndGetSequence(Node node) {
         collect(node);
+        return out.toBasedSequence();
+    }
+
+    public void collect(BasedSequence basedSequence, final EnumeratedReferenceRendering[] renderings, final String defaultFormat) {
+        out = new SegmentedSequenceBuilder(basedSequence);
+        
+        EnumeratedReferences.renderReferenceOrdinals(renderings, defaultFormat, new EnumeratedOrdinalRenderer() {
+            @Override
+            public void startRendering(final EnumeratedReferenceRendering[] renderings) {
+                
+            }
+
+            @Override
+            public void render(final int referenceOrdinal, final EnumeratedReferenceBlock referenceFormat, final String defaultText, final boolean needSeparator) {
+                if (needSeparator) out.append(".");
+
+                if (referenceFormat != null) {
+                    myOrdinal = referenceOrdinal;
+                    collect(referenceFormat);
+                } else {
+                    // use default text
+                    out.append(defaultText);
+                }
+            }
+
+            @Override
+            public void endRendering() {
+
+            }
+        });
+    }
+
+    public String collectAndGetText(BasedSequence basedSequence, EnumeratedReferenceRendering[] renderings, final String defaultFormat) {
+        collect(basedSequence, renderings, defaultFormat);
+        return out.toString();
+    }
+
+    public BasedSequence[] collectAndGetSegments(BasedSequence basedSequence, EnumeratedReferenceRendering[] renderings, final String defaultFormat) {
+        collect(basedSequence, renderings, defaultFormat);
+        return out.toSegments();
+    }
+
+    public BasedSequence collectAndGetSequence(BasedSequence basedSequence, EnumeratedReferenceRendering[] renderings, final String defaultFormat) {
+        collect(basedSequence, renderings, defaultFormat);
         return out.toBasedSequence();
     }
 
@@ -89,7 +157,7 @@ public class EnumRefTextCollectingVisitor {
 
         if (text.isEmpty()) {
             // placeholder for ordinal
-            out.append(String.valueOf(ordinal));
+            out.append(String.valueOf(myOrdinal));
         }
     }
 
@@ -98,7 +166,7 @@ public class EnumRefTextCollectingVisitor {
 
         if (text.isEmpty()) {
             // placeholder for ordinal
-            out.append(String.valueOf(ordinal));
+            out.append(String.valueOf(myOrdinal));
         }
     }
 
@@ -108,7 +176,7 @@ public class EnumRefTextCollectingVisitor {
 
     private void visit(HardLineBreak node) {
         final BasedSequence chars = node.getChars();
-        out.append(chars.subSequence(chars.length()-1, chars.length()));
+        out.append(chars.subSequence(chars.length() - 1, chars.length()));
     }
 
     private void visit(HtmlEntity node) {

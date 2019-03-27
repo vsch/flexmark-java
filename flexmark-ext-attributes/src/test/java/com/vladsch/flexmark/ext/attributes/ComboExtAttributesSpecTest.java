@@ -3,8 +3,10 @@ package com.vladsch.flexmark.ext.attributes;
 import com.vladsch.flexmark.ext.anchorlink.AnchorLinkExtension;
 import com.vladsch.flexmark.ext.definition.DefinitionExtension;
 import com.vladsch.flexmark.ext.emoji.EmojiExtension;
+import com.vladsch.flexmark.ext.escaped.character.EscapedCharacterExtension;
 import com.vladsch.flexmark.ext.tables.TablesExtension;
 import com.vladsch.flexmark.ext.toc.TocExtension;
+import com.vladsch.flexmark.ext.typographic.TypographicExtension;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.spec.SpecExample;
@@ -28,6 +30,8 @@ public class ComboExtAttributesSpecTest extends ComboSpecTestCase {
                     TocExtension.create(),
                     EmojiExtension.create(),
                     DefinitionExtension.create(),
+                    EscapedCharacterExtension.create(),
+                    TypographicExtension.create(),
                     TablesExtension.create()
             ));
 
@@ -40,6 +44,8 @@ public class ComboExtAttributesSpecTest extends ComboSpecTestCase {
         );
         optionsMap.put("text-attributes", new MutableDataSet().set(AttributesExtension.ASSIGN_TEXT_ATTRIBUTES, true));
         optionsMap.put("no-text-attributes", new MutableDataSet().set(AttributesExtension.ASSIGN_TEXT_ATTRIBUTES, false));
+        optionsMap.put("dont-wrap-non-attributes", new MutableDataSet().set(AttributesExtension.WRAP_NON_ATTRIBUTE_TEXT, false));
+        optionsMap.put("empty-implicit-delimiters", new MutableDataSet().set(AttributesExtension.USE_EMPTY_IMPLICIT_AS_SPAN_DELIMITER, true));
         optionsMap.put("src-pos", new MutableDataSet().set(HtmlRenderer.SOURCE_POSITION_ATTRIBUTE, "md-pos"));
     }
 

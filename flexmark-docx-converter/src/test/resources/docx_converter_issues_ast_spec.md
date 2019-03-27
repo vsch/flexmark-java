@@ -3235,7 +3235,7 @@ TEXT :+1: TEXT
 ````````````````````````````````
 
 
-```````````````````````````````` example(Emoji: 4) options(emoji-github)
+```````````````````````````````` example(Emoji: 4) options(emoji-github, IGNORE)
 # Heading 1 :basecamp:
 
 ## Heading 2 :basecamp:

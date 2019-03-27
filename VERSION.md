@@ -7,6 +7,7 @@ flexmark-java
 
 - [To Do](#to-do)
     - [Docx Converter](#docx-converter)
+- [0.35.10](#03510)
 - [0.35.8](#0358)
 - [0.35.6](#0356)
 - [0.35.4](#0354)
@@ -265,6 +266,11 @@ flexmark-java
 * [ ] Fix: #99, YamlFrontMatterBlockParser ignores multi-key list items
 
 &nbsp;</details>
+
+0.35.10
+-------
+
+* Add: compound enum refs and enum refs in headings without element reference. 
 
 0.35.8
 ------

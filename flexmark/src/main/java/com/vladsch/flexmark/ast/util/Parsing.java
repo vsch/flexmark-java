@@ -13,6 +13,9 @@ public class Parsing {
     public static final char INTELLIJ_DUMMY_IDENTIFIER_CHAR = TableFormatOptions.INTELLIJ_DUMMY_IDENTIFIER_CHAR;
     public static final String INTELLIJ_DUMMY_IDENTIFIER = TableFormatOptions.INTELLIJ_DUMMY_IDENTIFIER;
 
+    // save options for others to use when only parsing instance is available
+    public final DataHolder options;
+    
     public final String ADDITIONAL_CHARS;
     public final String EXCLUDED_0_TO_SPACE;
 
@@ -52,6 +55,7 @@ public class Parsing {
     public final Pattern TICKS_HERE;
     public final Pattern EMAIL_AUTOLINK;
     public final Pattern AUTOLINK;
+    public final Pattern WWW_AUTOLINK;
     public final Pattern SPNL;
     public final Pattern SPNL_URL;
     public final Pattern SPNI;
@@ -88,6 +92,7 @@ public class Parsing {
     public final String REG_CHAR_SP_PARENS;
 
     public Parsing(DataHolder options) {
+        this.options = options;
         this.intellijDummyIdentifier = Parser.INTELLIJ_DUMMY_IDENTIFIER.getFrom(options);
         this.htmlForTranslator = Parser.HTML_FOR_TRANSLATOR.getFrom(options);
         this.translationHtmlInlineTagPattern = Parser.TRANSLATION_HTML_INLINE_TAG_PATTERN.getFrom(options);
@@ -156,6 +161,10 @@ public class Parsing {
                 "^<([a-zA-Z0-9" + ADDITIONAL_CHARS + ".!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9" + ADDITIONAL_CHARS + "](?:[a-zA-Z0-9" + ADDITIONAL_CHARS + "-]{0,61}[a-zA-Z0-9" + ADDITIONAL_CHARS + "])?(?:\\.[a-zA-Z0-9" + ADDITIONAL_CHARS + "](?:[a-zA-Z0-9" + ADDITIONAL_CHARS + "-]{0,61}[a-zA-Z0-9" + ADDITIONAL_CHARS + "])?)*)>");
         this.AUTOLINK = Pattern.compile(
                 "^<[a-zA-Z][a-zA-Z0-9" + ADDITIONAL_CHARS + ".+-]{1,31}:[^<>" + EXCLUDED_0_TO_SPACE + "]*>");
+        
+        this.WWW_AUTOLINK = Pattern.compile(
+                "^<(?:w" + ADDITIONAL_CHARS + "?){3,3}\\.[^<>" + EXCLUDED_0_TO_SPACE + "]*>");
+        
         this.SPNL = Pattern.compile("^(?:[ \t])*(?:" + EOL + "(?:[ \t])*)?");
         this.SPNL_URL = Pattern.compile("^(?:[ \t])*" + EOL);
         this.SPNI = Pattern.compile("^ {0,3}");
