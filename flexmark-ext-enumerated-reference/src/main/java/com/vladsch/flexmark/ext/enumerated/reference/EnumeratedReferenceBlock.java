@@ -1,7 +1,6 @@
 package com.vladsch.flexmark.ext.enumerated.reference;
 
 import com.vladsch.flexmark.ast.*;
-import com.vladsch.flexmark.ext.enumerated.reference.internal.EnumeratedReferenceRepository;
 import com.vladsch.flexmark.parser.ListOptions;
 import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.util.ast.Node;

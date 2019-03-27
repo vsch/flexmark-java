@@ -6,6 +6,7 @@ flexmark-java
 [TOC]: # " "
 
 - [Future 0.50.0](#future-0500)
+- [0.40.32](#04032)
 - [0.40.30](#04030)
 - [0.40.28](#04028)
 - [0.40.26](#04026)
@@ -106,6 +107,12 @@ Future 0.50.0
   * [ ] `EXT_TABLES` conversion option not yet implemented.
 * [ ] Add: `<!-- @formatter:on -->` and `<!-- @formatter:on -->` tags to `Formatter` for
       controlling non-formatting regions.
+
+0.40.32
+-------
+
+* Fix: compound enumerated references in attributes ids and outside of headings to output with
+  last enumerated reference ordinal.
 
 0.40.30
 -------

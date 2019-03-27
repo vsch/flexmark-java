@@ -9,17 +9,22 @@ import com.vladsch.flexmark.util.sequence.SegmentedSequenceBuilder;
 @SuppressWarnings("WeakerAccess")
 public class EnumRefTextCollectingVisitor {
     private SegmentedSequenceBuilder out;
-    private final NodeVisitor myVisitor;
-    private int myOrdinal;
+    private final NodeVisitor visitor;
+    private Runnable ordinalRunnable;
 
     public EnumRefTextCollectingVisitor() {
-        this(0);
+        this(-1);
     }
 
-    public EnumRefTextCollectingVisitor(int ordinal) {
-        myOrdinal = ordinal;
+    public EnumRefTextCollectingVisitor(final int ordinal) {
+        ordinalRunnable = ordinal < 0 ? null : new Runnable() {
+            @Override
+            public void run() {
+                out.append(String.valueOf(ordinal));
+            }
+        };
 
-        myVisitor = new NodeVisitor(
+        visitor = new NodeVisitor(
                 new VisitHandler<Text>(Text.class, new Visitor<Text>() {
                     @Override
                     public void visit(Text node) {
@@ -76,7 +81,7 @@ public class EnumRefTextCollectingVisitor {
     @Deprecated
     public void collect(Node node) {
         out = new SegmentedSequenceBuilder(node.getChars());
-        myVisitor.visit(node);
+        visitor.visit(node);
     }
 
     /**
@@ -111,32 +116,60 @@ public class EnumRefTextCollectingVisitor {
 
     public void collect(BasedSequence basedSequence, final EnumeratedReferenceRendering[] renderings, final String defaultFormat) {
         out = new SegmentedSequenceBuilder(basedSequence);
-        
-        EnumeratedReferences.renderReferenceOrdinals(renderings, defaultFormat, new EnumeratedOrdinalRenderer() {
-            @Override
-            public void startRendering(final EnumeratedReferenceRendering[] renderings) {
-                
-            }
-
-            @Override
-            public void render(final int referenceOrdinal, final EnumeratedReferenceBlock referenceFormat, final String defaultText, final boolean needSeparator) {
-                if (needSeparator) out.append(".");
-
-                if (referenceFormat != null) {
-                    myOrdinal = referenceOrdinal;
-                    collect(referenceFormat);
-                } else {
-                    // use default text
-                    out.append(defaultText);
-                }
-            }
-
-            @Override
-            public void endRendering() {
-
-            }
-        });
+        EnumeratedReferences.renderReferenceOrdinals(renderings, new OrdinalRenderer(this));
     }
+
+    private static class OrdinalRenderer implements EnumeratedOrdinalRenderer {
+        final EnumRefTextCollectingVisitor renderer;
+
+        public OrdinalRenderer(final EnumRefTextCollectingVisitor renderer) {
+            this.renderer = renderer;
+        }
+
+        @Override
+        public void startRendering(final EnumeratedReferenceRendering[] renderings) {
+
+        }
+
+        @Override
+        public void setEnumOrdinalRunnable(final Runnable runnable) {
+            renderer.ordinalRunnable = runnable;
+        }
+
+        @Override
+        public Runnable getEnumOrdinalRunnable() {
+            return renderer.ordinalRunnable;
+        }
+
+        @Override
+        public void render(final int referenceOrdinal, final EnumeratedReferenceBlock referenceFormat, final String defaultText, final boolean needSeparator) {
+            final Runnable compoundRunnable = renderer.ordinalRunnable;
+
+            if (referenceFormat != null) {
+                renderer.ordinalRunnable = new Runnable() {
+                    @Override
+                    public void run() {
+                        if (compoundRunnable != null) compoundRunnable.run();
+                        renderer.out.append(String.valueOf(referenceOrdinal));
+                        if (needSeparator) renderer.out.append(".");
+                    }
+                };
+
+                renderer.visitor.visitChildren(referenceFormat);
+            } else {
+                renderer.out.append(defaultText + " ");
+                if (compoundRunnable != null) compoundRunnable.run();
+                renderer.out.append(String.valueOf(referenceOrdinal));
+                if (needSeparator) renderer.out.append(".");
+            }
+        }
+
+        @Override
+        public void endRendering() {
+
+        }
+    }
+
 
     public String collectAndGetText(BasedSequence basedSequence, EnumeratedReferenceRendering[] renderings, final String defaultFormat) {
         collect(basedSequence, renderings, defaultFormat);
@@ -158,7 +191,7 @@ public class EnumRefTextCollectingVisitor {
 
         if (text.isEmpty()) {
             // placeholder for ordinal
-            out.append(String.valueOf(myOrdinal));
+            if (ordinalRunnable != null) ordinalRunnable.run();
         }
     }
 
@@ -167,7 +200,7 @@ public class EnumRefTextCollectingVisitor {
 
         if (text.isEmpty()) {
             // placeholder for ordinal
-            out.append(String.valueOf(myOrdinal));
+            if (ordinalRunnable != null) ordinalRunnable.run();
         }
     }
 

@@ -2299,7 +2299,13 @@ See [@tmp:test]
                 <w:rPr>
                     <w:rStyle w:val="Hyperlink"/>
                 </w:rPr>
-                <w:t xml:space="preserve">tmp 1</w:t>
+                <w:t xml:space="preserve">tmp </w:t>
+            </w:r>
+            <w:r>
+                <w:rPr>
+                    <w:rStyle w:val="Hyperlink"/>
+                </w:rPr>
+                <w:t xml:space="preserve">1</w:t>
             </w:r>
             <w:r>
                 <w:fldChar w:fldCharType="end"/>

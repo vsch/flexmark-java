@@ -3,6 +3,7 @@ package com.vladsch.flexmark.ext.enumerated.reference.internal;
 import com.vladsch.flexmark.ast.Paragraph;
 import com.vladsch.flexmark.ext.enumerated.reference.EnumeratedReferenceBlock;
 import com.vladsch.flexmark.ext.enumerated.reference.EnumeratedReferenceExtension;
+import com.vladsch.flexmark.ext.enumerated.reference.EnumeratedReferenceRepository;
 import com.vladsch.flexmark.parser.InlineParser;
 import com.vladsch.flexmark.parser.block.*;
 import com.vladsch.flexmark.util.ast.Block;

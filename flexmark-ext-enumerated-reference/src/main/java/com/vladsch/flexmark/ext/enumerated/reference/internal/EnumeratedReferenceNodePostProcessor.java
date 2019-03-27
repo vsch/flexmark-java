@@ -1,7 +1,9 @@
 package com.vladsch.flexmark.ext.enumerated.reference.internal;
 
 import com.vladsch.flexmark.ast.Heading;
+import com.vladsch.flexmark.ext.enumerated.reference.EnumeratedReferenceRepository;
 import com.vladsch.flexmark.ext.enumerated.reference.EnumeratedReferenceText;
+import com.vladsch.flexmark.ext.enumerated.reference.EnumeratedReferences;
 import com.vladsch.flexmark.html.renderer.HeaderIdGenerator;
 import com.vladsch.flexmark.html.renderer.HtmlIdGenerator;
 import com.vladsch.flexmark.util.ast.Document;

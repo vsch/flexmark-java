@@ -1,15 +1,16 @@
-package com.vladsch.flexmark.ext.enumerated.reference.internal;
+package com.vladsch.flexmark.ext.enumerated.reference;
 
-import com.vladsch.flexmark.ext.enumerated.reference.*;
+import com.vladsch.flexmark.ext.enumerated.reference.internal.EnumeratedReferenceNodeRenderer;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.options.DataHolder;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class EnumeratedReferences {
     public static final String EMPTY_TYPE = "";
     public static final int[] EMPTY_ORDINALS = new int[0];
-            
+
     private final EnumeratedReferenceRepository referenceRepository;
     private final HashMap<String, Integer> enumerationCounters;
     private final HashMap<String, int[]> enumeratedReferenceOrdinals;
@@ -22,7 +23,7 @@ public class EnumeratedReferences {
 
     public void add(final String text) {
         String type = EnumeratedReferenceRepository.getType(text);
-        
+
         String[] types = type.split(":");
         int[] ordinals = new int[types.length];
 
@@ -53,7 +54,7 @@ public class EnumeratedReferences {
                     ordinal = enumerationCounters.get(nestedTypeKey) + 1;
                     enumerationCounters.put(nestedTypeKey, ordinal);
                 }
-                
+
                 ordinals[i] = ordinal;
             }
         }
@@ -66,7 +67,7 @@ public class EnumeratedReferences {
      * @param text anchor id with type reference
      * @return ordinal or 0 for anchor id
      * @deprecated only returns the last ordinal for the text, does not support compound ordinal numbering
-     *                      use {@link #getEnumeratedReferenceOrdinals(String)} to get compound ordinals
+     * use {@link #getEnumeratedReferenceOrdinals(String)} to get compound ordinals
      */
     @Deprecated
     public int getOrdinal(final String text) {
@@ -92,7 +93,7 @@ public class EnumeratedReferences {
 
         String[] types = type.split(":");
         EnumeratedReferenceRendering[] renderings = new EnumeratedReferenceRendering[types.length];
-        
+
         int[] ordinals = enumeratedReferenceOrdinals.get(text);
 
         if (ordinals == null) {
@@ -106,42 +107,65 @@ public class EnumeratedReferences {
             int ordinal = i < ordinals.length ? ordinals[i] : 0;
             renderings[i] = new EnumeratedReferenceRendering(referenceFormat, typeText, ordinal);
         }
-        
+
         return renderings;
     }
-    
-    public void renderReferenceOrdinals(final String text, final String defaultFormat, EnumeratedOrdinalRenderer renderer) {
+
+    public void renderReferenceOrdinals(final String text, EnumeratedOrdinalRenderer renderer) {
         EnumeratedReferenceRendering[] renderings = getEnumeratedReferenceOrdinals(text);
-        renderReferenceOrdinals(renderings, defaultFormat, renderer);
+        renderReferenceOrdinals(renderings, renderer);
     }
-    
-    public static void renderReferenceOrdinals(EnumeratedReferenceRendering[] renderings, final String defaultFormat, EnumeratedOrdinalRenderer renderer) {
-        boolean needSeparator = false;
-        
-        String useDefaultFormat = defaultFormat == null ? "%s %d" : defaultFormat;
-        
+
+    public static void renderReferenceOrdinals(EnumeratedReferenceRendering[] renderings, final EnumeratedOrdinalRenderer renderer) {
         renderer.startRendering(renderings);
+
+        // need to accumulate all compound formats and output on final format's [#] 
+        final ArrayList<CompoundEnumeratedReferenceRendering> compoundReferences = new ArrayList<>();
+        
+        final EnumeratedReferenceRendering lastRendering = renderings[renderings.length-1];
         
         for (EnumeratedReferenceRendering rendering : renderings) {
             int ordinal = rendering.referenceOrdinal;
-            
-            String defaultText = String.format(useDefaultFormat, rendering.referenceType, rendering.referenceOrdinal);
-            
-            renderer.render(ordinal, rendering.referenceFormat, defaultText, needSeparator);
-            
-            if (rendering.referenceFormat != null) {
-                Node lastChild = rendering.referenceFormat.getLastChild();
-                while (lastChild != null && !(lastChild instanceof EnumeratedReferenceBase)) {
-                    lastChild = lastChild.getLastChild();
+
+            String defaultText = rendering.referenceType;
+
+            boolean needSeparator = false;
+
+            if (rendering != lastRendering) {
+                if (rendering.referenceFormat != null) {
+                    Node lastChild = rendering.referenceFormat.getLastChild();
+                    while (lastChild != null && !(lastChild instanceof EnumeratedReferenceBase)) {
+                        lastChild = lastChild.getLastChild();
+                    }
+                    needSeparator = lastChild instanceof EnumeratedReferenceBase && ((EnumeratedReferenceBase) lastChild).getText().isEmpty();
+                } else {
+                    needSeparator = true;
                 }
-                
-                needSeparator = lastChild instanceof EnumeratedReferenceBase && ((EnumeratedReferenceBase) lastChild).getText().isEmpty();
-            } else {
-                char c = defaultText.charAt(defaultText.length() - 1);
-                needSeparator = Character.isUnicodeIdentifierPart(c);
             }
+            
+            compoundReferences.add(new CompoundEnumeratedReferenceRendering(ordinal, rendering.referenceFormat, defaultText, needSeparator));
         }
+
+        final int iMax = compoundReferences.size() - 1;
+        Runnable wasRunnable = renderer.getEnumOrdinalRunnable();
+        
+        renderer.setEnumOrdinalRunnable(new Runnable() {
+            @Override
+            public void run() {
+                for (int i = 0; i < iMax; i++) {
+                    CompoundEnumeratedReferenceRendering rendering = compoundReferences.get(i);
+                    Runnable wasRunnable = renderer.getEnumOrdinalRunnable();
+                    renderer.setEnumOrdinalRunnable(null);
+                    renderer.render(rendering.ordinal, rendering.referenceFormat, rendering.defaultText, rendering.needSeparator);
+                    renderer.setEnumOrdinalRunnable(wasRunnable);
+                }
+            }
+        });
+
+        CompoundEnumeratedReferenceRendering rendering = compoundReferences.get(iMax);
+        renderer.render(rendering.ordinal, rendering.referenceFormat, rendering.defaultText, rendering.needSeparator);
+        renderer.setEnumOrdinalRunnable(wasRunnable);
         
         renderer.endRendering();
-    } 
+    }
 }

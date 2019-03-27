@@ -3,6 +3,7 @@ package com.vladsch.flexmark.ext.enumerated.reference.internal;
 import com.vladsch.flexmark.ast.Paragraph;
 import com.vladsch.flexmark.ext.enumerated.reference.EnumeratedReferenceBlock;
 import com.vladsch.flexmark.ext.enumerated.reference.EnumeratedReferenceExtension;
+import com.vladsch.flexmark.ext.enumerated.reference.EnumeratedReferenceRepository;
 import com.vladsch.flexmark.parser.block.ParagraphPreProcessor;
 import com.vladsch.flexmark.parser.block.ParagraphPreProcessorFactory;
 import com.vladsch.flexmark.parser.block.ParserState;

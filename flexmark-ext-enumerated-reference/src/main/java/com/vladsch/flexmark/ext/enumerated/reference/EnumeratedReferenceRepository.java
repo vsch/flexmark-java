@@ -1,8 +1,7 @@
-package com.vladsch.flexmark.ext.enumerated.reference.internal;
+package com.vladsch.flexmark.ext.enumerated.reference;
 
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.ast.NodeRepository;
-import com.vladsch.flexmark.ext.enumerated.reference.*;
 import com.vladsch.flexmark.util.KeepType;
 import com.vladsch.flexmark.util.ValueRunnable;
 import com.vladsch.flexmark.util.options.DataHolder;

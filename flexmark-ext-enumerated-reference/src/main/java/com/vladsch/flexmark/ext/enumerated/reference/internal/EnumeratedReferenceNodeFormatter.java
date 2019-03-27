@@ -1,10 +1,7 @@
 package com.vladsch.flexmark.ext.enumerated.reference.internal;
 
 import com.vladsch.flexmark.ext.attributes.internal.AttributesNodeFormatter;
-import com.vladsch.flexmark.ext.enumerated.reference.EnumeratedReferenceBlock;
-import com.vladsch.flexmark.ext.enumerated.reference.EnumeratedReferenceExtension;
-import com.vladsch.flexmark.ext.enumerated.reference.EnumeratedReferenceLink;
-import com.vladsch.flexmark.ext.enumerated.reference.EnumeratedReferenceText;
+import com.vladsch.flexmark.ext.enumerated.reference.*;
 import com.vladsch.flexmark.formatter.*;
 import com.vladsch.flexmark.util.format.options.ElementPlacement;
 import com.vladsch.flexmark.util.format.options.ElementPlacementSort;

@@ -552,3 +552,67 @@ Document[0, 91]
 ````````````````````````````````
 
 
+## Compound
+
+```````````````````````````````` example Compound: 1
+# [#hd1] Heading 1
+
+![image-base64.png](https://github.com/vsch/MarkdownTest/raw/master/image-base64.png) {#hd1:fig:img1} 
+[#hd1:fig:img1]
+
+# [#hd1] Heading 2
+
+![image-base64.png](https://github.com/vsch/MarkdownTest/raw/master/image-base64.png) {#hd1:fig:img2} 
+[#hd1:fig:img2]
+
+[@hd1]: [#].
+[@fig]: Figure [#].
+.
+<h1>1. Heading 1</h1>
+<p><img src="https://github.com/vsch/MarkdownTest/raw/master/image-base64.png" alt="image-base64.png" /><span id="hd1:fig:img1"> </span>
+Figure 1.1.</p>
+<h1>2. Heading 2</h1>
+<p><img src="https://github.com/vsch/MarkdownTest/raw/master/image-base64.png" alt="image-base64.png" /><span id="hd1:fig:img2"> </span>
+Figure 2.1.</p>
+.
+Document[0, 313]
+  Heading[0, 18] textOpen:[0, 1, "#"] text:[2, 18, "[#hd1] Heading 1"]
+    EnumeratedReferenceText[2, 8] textOpen:[2, 4, "[#"] text:[4, 7, "hd1"] textClose:[7, 8, "]"]
+      Text[4, 7] chars:[4, 7, "hd1"]
+    Text[8, 18] chars:[8, 18, " Heading 1"]
+  Paragraph[20, 139] isTrailingBlankLine
+    Image[20, 105] textOpen:[20, 22, "!["] text:[22, 38, "image-base64.png"] textClose:[38, 39, "]"] linkOpen:[39, 40, "("] url:[40, 104, "https://github.com/vsch/MarkdownTest/raw/master/image-base64.png"] pageRef:[40, 104, "https://github.com/vsch/MarkdownTest/raw/master/image-base64.png"] linkClose:[104, 105, ")"]
+      Text[22, 38] chars:[22, 38, "image … 4.png"]
+    TextBase[105, 106] chars:[105, 106, " "]
+      Text[105, 106] chars:[105, 106, " "]
+    AttributesNode[106, 121] textOpen:[106, 107, "{"] text:[107, 120, "#hd1:fig:img1"] textClose:[120, 121, "}"]
+      AttributeNode[107, 120] name:[107, 108, "#"] value:[108, 120, "hd1:fig:img1"] isImplicit isId
+    SoftLineBreak[122, 123]
+    EnumeratedReferenceText[123, 138] textOpen:[123, 125, "[#"] text:[125, 137, "hd1:fig:img1"] textClose:[137, 138, "]"]
+      Text[125, 137] chars:[125, 137, "hd1:f … :img1"]
+  Heading[140, 158] textOpen:[140, 141, "#"] text:[142, 158, "[#hd1] Heading 2"]
+    EnumeratedReferenceText[142, 148] textOpen:[142, 144, "[#"] text:[144, 147, "hd1"] textClose:[147, 148, "]"]
+      Text[144, 147] chars:[144, 147, "hd1"]
+    Text[148, 158] chars:[148, 158, " Heading 2"]
+  Paragraph[160, 279] isTrailingBlankLine
+    Image[160, 245] textOpen:[160, 162, "!["] text:[162, 178, "image-base64.png"] textClose:[178, 179, "]"] linkOpen:[179, 180, "("] url:[180, 244, "https://github.com/vsch/MarkdownTest/raw/master/image-base64.png"] pageRef:[180, 244, "https://github.com/vsch/MarkdownTest/raw/master/image-base64.png"] linkClose:[244, 245, ")"]
+      Text[162, 178] chars:[162, 178, "image … 4.png"]
+    TextBase[245, 246] chars:[245, 246, " "]
+      Text[245, 246] chars:[245, 246, " "]
+    AttributesNode[246, 261] textOpen:[246, 247, "{"] text:[247, 260, "#hd1:fig:img2"] textClose:[260, 261, "}"]
+      AttributeNode[247, 260] name:[247, 248, "#"] value:[248, 260, "hd1:fig:img2"] isImplicit isId
+    SoftLineBreak[262, 263]
+    EnumeratedReferenceText[263, 278] textOpen:[263, 265, "[#"] text:[265, 277, "hd1:fig:img2"] textClose:[277, 278, "]"]
+      Text[265, 277] chars:[265, 277, "hd1:f … :img2"]
+  EnumeratedReferenceBlock[280, 293] open:[280, 282] text:[282, 285] close:[285, 287] enumeratedReference:[288, 293]
+    Paragraph[288, 293]
+      EnumeratedReferenceText[288, 291] textOpen:[288, 290, "[#"] text:[290, 290] textClose:[290, 291, "]"]
+      Text[291, 292] chars:[291, 292, "."]
+  EnumeratedReferenceBlock[293, 313] open:[293, 295] text:[295, 298] close:[298, 300] enumeratedReference:[301, 313]
+    Paragraph[301, 313]
+      Text[301, 308] chars:[301, 308, "Figure "]
+      EnumeratedReferenceText[308, 311] textOpen:[308, 310, "[#"] text:[310, 310] textClose:[310, 311, "]"]
+      Text[311, 312] chars:[311, 312, "."]
+````````````````````````````````
+
+

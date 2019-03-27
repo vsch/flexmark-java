@@ -14,8 +14,6 @@ import com.vladsch.flexmark.ext.emoji.internal.EmojiOptions;
 import com.vladsch.flexmark.ext.emoji.internal.EmojiResolvedShortcut;
 import com.vladsch.flexmark.ext.enumerated.reference.*;
 import com.vladsch.flexmark.ext.enumerated.reference.internal.EnumRefTextCollectingVisitor;
-import com.vladsch.flexmark.ext.enumerated.reference.internal.EnumeratedReferenceRepository;
-import com.vladsch.flexmark.ext.enumerated.reference.internal.EnumeratedReferences;
 import com.vladsch.flexmark.ext.footnotes.Footnote;
 import com.vladsch.flexmark.ext.footnotes.FootnoteBlock;
 import com.vladsch.flexmark.ext.gfm.strikethrough.Strikethrough;
@@ -103,7 +101,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
     private long[] numberedLists = new long[128];
     private long[] bulletLists = new long[128];
     private EnumeratedReferences enumeratedOrdinals;
-    int ordinal;
+    Runnable ordinalRunnable;
     private final HtmlIdGenerator headerIdGenerator; // used for enumerated text reference
 
     private void ensureNumberedListLength(int level) {
@@ -137,7 +135,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
         listOptions = ListOptions.getFrom(options);
         footnoteIDs = new HashMap<Node, BigInteger>();
         lastTocBlock = null;
-        ordinal = 0;
+        ordinalRunnable = null;
 
         final MutableScopedDataSet options1 = new MutableScopedDataSet(options);
         options1.set(EmojiExtension.ROOT_IMAGE_PATH, DocxRenderer.DOC_EMOJI_ROOT_IMAGE_PATH.getFrom(options));
@@ -1700,7 +1698,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
 
         if (text.isEmpty()) {
             // placeholder for ordinal
-            docx.text(String.valueOf(ordinal));
+            if (ordinalRunnable != null) ordinalRunnable.run();
         } else {
             String type = EnumeratedReferenceRepository.getType(text.toString());
             if (type.isEmpty() || text.equals(type + ":")) {
@@ -1711,29 +1709,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
                 }
             }
 
-            enumeratedOrdinals.renderReferenceOrdinals(text, null, new EnumeratedOrdinalRenderer() {
-                @Override
-                public void startRendering(final EnumeratedReferenceRendering[] renderings) {
-
-                }
-
-                @Override
-                public void render(final int referenceOrdinal, final EnumeratedReferenceBlock referenceFormat, final String defaultText, final boolean needSeparator) {
-                    if (needSeparator) docx.text(".");
-
-                    if (referenceFormat != null) {
-                        CoreNodeDocxRenderer.this.ordinal = referenceOrdinal;
-                        docx.renderChildren(referenceFormat);
-                    } else {
-                        docx.text(defaultText.toString());
-                    }
-                }
-
-                @Override
-                public void endRendering() {
-
-                }
-            });
+            enumeratedOrdinals.renderReferenceOrdinals(text, new OrdinalRenderer(CoreNodeDocxRenderer.this, docx));
         }
     }
 
@@ -1742,7 +1718,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
 
         if (text.isEmpty()) {
             // placeholder for ordinal
-            docx.text(String.valueOf(ordinal));
+            if (ordinalRunnable != null) ordinalRunnable.run();
         } else {
             final EnumeratedReferenceRendering[] renderings = enumeratedOrdinals.getEnumeratedReferenceOrdinals(text);
 
@@ -1757,32 +1733,65 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
             renderURL(node.getText(), docx, "#" + text, attributes, new Runnable() {
                 @Override
                 public void run() {
-                    EnumeratedReferences.renderReferenceOrdinals(renderings, null, new EnumeratedOrdinalRenderer() {
-                        @Override
-                        public void startRendering(final EnumeratedReferenceRendering[] renderings) {
-                            
-                        }
-
-                        @Override
-                        public void render(final int referenceOrdinal, final EnumeratedReferenceBlock referenceFormat, final String defaultText, final boolean needSeparator) {
-                            if (needSeparator) docx.text(".");
-                            
-                            if (referenceFormat != null) {
-                                CoreNodeDocxRenderer.this.ordinal = referenceOrdinal;
-                                docx.renderChildren(referenceFormat);
-                            } else {
-                                // no format, just output ordinal
-                                docx.text(defaultText);
-                            }
-                        }
-
-                        @Override
-                        public void endRendering() {
-
-                        }
-                    });
+                    EnumeratedReferences.renderReferenceOrdinals(renderings, new OrdinalRenderer(CoreNodeDocxRenderer.this, docx));
                 }
             });
+        }
+    }
+
+    private static class OrdinalRenderer implements EnumeratedOrdinalRenderer {
+        final CoreNodeDocxRenderer renderer;
+        final DocxRendererContext docx;
+
+        public OrdinalRenderer(final CoreNodeDocxRenderer renderer, final DocxRendererContext docx) {
+            this.renderer = renderer;
+            this.docx = docx;
+        }
+
+        @Override
+        public void startRendering(final EnumeratedReferenceRendering[] renderings) {
+
+        }
+
+        @Override
+        public void setEnumOrdinalRunnable(final Runnable runnable) {
+            renderer.ordinalRunnable = runnable;
+        }
+
+        @Override
+        public Runnable getEnumOrdinalRunnable() {
+            return renderer.ordinalRunnable;
+        }
+
+        @Override
+        public void render(final int referenceOrdinal, final EnumeratedReferenceBlock referenceFormat, final String defaultText, final boolean needSeparator) {
+            final Runnable compoundRunnable = renderer.ordinalRunnable;
+
+            if (referenceFormat != null) {
+                renderer.ordinalRunnable = new Runnable() {
+                    @Override
+                    public void run() {
+                        if (compoundRunnable != null) compoundRunnable.run();
+                        docx.text(String.valueOf(referenceOrdinal));
+                        if (needSeparator) docx.text(".");
+                    }
+                };
+
+                docx.renderChildren(referenceFormat);
+            } else {
+                if (compoundRunnable != null) {
+                    docx.text(defaultText + " ");
+                    if (compoundRunnable != null) compoundRunnable.run();
+                    docx.text(referenceOrdinal + (needSeparator ? "." : ""));
+                } else {
+                    docx.text(defaultText + " " + referenceOrdinal + (needSeparator ? "." : ""));
+                }
+            }
+        }
+
+        @Override
+        public void endRendering() {
+
         }
     }
 

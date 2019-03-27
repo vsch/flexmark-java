@@ -18,12 +18,12 @@ public class EnumeratedReferenceNodeRenderer implements PhasedNodeRenderer
 {
     private final EnumeratedReferenceOptions options;
     private EnumeratedReferences enumeratedOrdinals;
-    private int ordinal;
+    private Runnable ordinalRunnable;
     private final HtmlIdGenerator headerIdGenerator; // used for enumerated text reference
 
     public EnumeratedReferenceNodeRenderer(DataHolder options) {
         this.options = new EnumeratedReferenceOptions(options);
-        ordinal = 0;
+        ordinalRunnable = null;
         headerIdGenerator = new HeaderIdGenerator.Factory().create();
     }
 
@@ -60,27 +60,13 @@ public class EnumeratedReferenceNodeRenderer implements PhasedNodeRenderer
 
         if (text.isEmpty()) {
             // placeholder for ordinal
-            html.text(String.valueOf(ordinal));
+            if (ordinalRunnable != null) ordinalRunnable.run();
         } else {
-            enumeratedOrdinals.renderReferenceOrdinals(text, null, new EnumeratedOrdinalRenderer() {
+            enumeratedOrdinals.renderReferenceOrdinals(text, new OrdinalRenderer(this, context, html) {
                 @Override
                 public void startRendering(final EnumeratedReferenceRendering[] renderings) {
                     String title = new EnumRefTextCollectingVisitor().collectAndGetText(node.getChars().getBaseSequence(), renderings, null);
                     html.withAttr().attr("href", "#" + text).attr("title", title).tag("a");
-                }
-
-                @Override
-                public void render(final int referenceOrdinal, final EnumeratedReferenceBlock referenceFormat, final String defaultText, final boolean needSeparator) {
-                    EnumeratedReferenceNodeRenderer.this.ordinal = referenceOrdinal;
-                    if (needSeparator) {
-                        html.text(".");
-                    }
-
-                    if (referenceFormat != null) {
-                        context.renderChildren(referenceFormat);
-                    } else {
-                        html.text(defaultText);
-                    }
                 }
 
                 @Override
@@ -96,10 +82,10 @@ public class EnumeratedReferenceNodeRenderer implements PhasedNodeRenderer
 
         if (text.isEmpty()) {
             // placeholder for ordinal
-            html.text(String.valueOf(ordinal));
+            if (ordinalRunnable != null) ordinalRunnable.run();
         } else {
             String type = EnumeratedReferenceRepository.getType(text.toString());
-            
+
             if (type.isEmpty() || text.equals(type + ":")) {
                 Node parent = node.getAncestorOfType(Heading.class);
 
@@ -108,29 +94,62 @@ public class EnumeratedReferenceNodeRenderer implements PhasedNodeRenderer
                 }
             }
 
-            enumeratedOrdinals.renderReferenceOrdinals(text, null, new EnumeratedOrdinalRenderer() {
-                @Override
-                public void startRendering(final EnumeratedReferenceRendering[] renderings) {
-                    
-                }
+            enumeratedOrdinals.renderReferenceOrdinals(text, new OrdinalRenderer(this, context, html));
+        }
+    }
 
-                @Override
-                public void render(final int referenceOrdinal, final EnumeratedReferenceBlock referenceFormat, final String defaultText, final boolean needSeparator) {
-                    if (needSeparator) html.text(".");
-                    
-                    if (referenceFormat != null) {
-                        EnumeratedReferenceNodeRenderer.this.ordinal = referenceOrdinal;
-                        context.renderChildren(referenceFormat);
-                    } else {
-                        html.text(defaultText);
+    private static class OrdinalRenderer implements EnumeratedOrdinalRenderer {
+        final EnumeratedReferenceNodeRenderer renderer;
+        final NodeRendererContext context;
+        final HtmlWriter html;
+
+        public OrdinalRenderer(final EnumeratedReferenceNodeRenderer renderer, final NodeRendererContext context, final HtmlWriter html) {
+            this.renderer = renderer;
+            this.context = context;
+            this.html = html;
+        }
+
+        @Override
+        public void startRendering(final EnumeratedReferenceRendering[] renderings) {
+
+        }
+
+        @Override
+        public void setEnumOrdinalRunnable(final Runnable runnable) {
+            renderer.ordinalRunnable = runnable;
+        }
+
+        @Override
+        public Runnable getEnumOrdinalRunnable() {
+            return renderer.ordinalRunnable;
+        }
+
+        @Override
+        public void render(final int referenceOrdinal, final EnumeratedReferenceBlock referenceFormat, final String defaultText, final boolean needSeparator) {
+            final Runnable compoundRunnable = renderer.ordinalRunnable;
+
+            if (referenceFormat != null) {
+                renderer.ordinalRunnable = new Runnable() {
+                    @Override
+                    public void run() {
+                        if (compoundRunnable != null) compoundRunnable.run();
+                        html.text(String.valueOf(referenceOrdinal));
+                        if (needSeparator) html.text(".");
                     }
-                }
+                };
 
-                @Override
-                public void endRendering() {
+                context.renderChildren(referenceFormat);
+            } else {
+                html.text(defaultText + " ");
+                if (compoundRunnable != null) compoundRunnable.run();
+                html.text(String.valueOf(referenceOrdinal));
+                if (needSeparator) html.text(".");
+            }
+        }
 
-                }
-            });
+        @Override
+        public void endRendering() {
+
         }
     }
 
