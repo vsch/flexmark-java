@@ -174,3 +174,289 @@ Document[0, 94]
 ````````````````````````````````
 
 
+## Heading
+
+Allow using empty format ref in heading
+
+```````````````````````````````` example Heading: 1
+# [#hdr] Numbered Heading
+    
+[@hdr]: [#].
+
+.
+<h1>1. Numbered Heading</h1>
+.
+Document[0, 45]
+  Heading[0, 25] textOpen:[0, 1, "#"] text:[2, 25, "[#hdr] Numbered Heading"]
+    EnumeratedReferenceText[2, 8] textOpen:[2, 4, "[#"] text:[4, 7, "hdr"] textClose:[7, 8, "]"]
+      Text[4, 7] chars:[4, 7, "hdr"]
+    Text[8, 25] chars:[8, 25, " Numb … ading"]
+  EnumeratedReferenceBlock[31, 44] open:[31, 33] text:[33, 36] close:[36, 38] enumeratedReference:[39, 44]
+    Paragraph[39, 44] isTrailingBlankLine
+      EnumeratedReferenceText[39, 42] textOpen:[39, 41, "[#"] text:[41, 41] textClose:[41, 42, "]"]
+      Text[42, 43] chars:[42, 43, "."]
+````````````````````````````````
+
+
+```````````````````````````````` example Heading: 2
+# [#hdr] Numbered Heading
+    
+# [#hdr] Numbered Heading
+    
+[@hdr]: [#].
+
+.
+<h1>1. Numbered Heading</h1>
+<h1>2. Numbered Heading</h1>
+.
+Document[0, 76]
+  Heading[0, 25] textOpen:[0, 1, "#"] text:[2, 25, "[#hdr] Numbered Heading"]
+    EnumeratedReferenceText[2, 8] textOpen:[2, 4, "[#"] text:[4, 7, "hdr"] textClose:[7, 8, "]"]
+      Text[4, 7] chars:[4, 7, "hdr"]
+    Text[8, 25] chars:[8, 25, " Numb … ading"]
+  Heading[31, 56] textOpen:[31, 32, "#"] text:[33, 56, "[#hdr] Numbered Heading"]
+    EnumeratedReferenceText[33, 39] textOpen:[33, 35, "[#"] text:[35, 38, "hdr"] textClose:[38, 39, "]"]
+      Text[35, 38] chars:[35, 38, "hdr"]
+    Text[39, 56] chars:[39, 56, " Numb … ading"]
+  EnumeratedReferenceBlock[62, 75] open:[62, 64] text:[64, 67] close:[67, 69] enumeratedReference:[70, 75]
+    Paragraph[70, 75] isTrailingBlankLine
+      EnumeratedReferenceText[70, 73] textOpen:[70, 72, "[#"] text:[72, 72] textClose:[72, 73, "]"]
+      Text[73, 74] chars:[73, 74, "."]
+````````````````````````````````
+
+
+Compound numbering
+
+```````````````````````````````` example Heading: 3
+## [#hdr1:hdr2:] Numbered Heading 0.1
+    
+# [#hdr1] Numbered Heading 1
+    
+## [#hdr1:hdr2:] Numbered Heading 1.1
+    
+# [#hdr1] Numbered Heading 2
+    
+## [#hdr1:hdr2:] Numbered Heading 2.1
+    
+[@hdr1]: [#].
+    
+[@hdr2]: [#].
+
+.
+<h2>0.1. Numbered Heading 0.1</h2>
+<h1>1. Numbered Heading 1</h1>
+<h2>1.1. Numbered Heading 1.1</h2>
+<h1>2. Numbered Heading 2</h1>
+<h2>2.1. Numbered Heading 2.1</h2>
+.
+Document[0, 231]
+  Heading[0, 37] textOpen:[0, 2, "##"] text:[3, 37, "[#hdr1:hdr2:] Numbered Heading 0.1"]
+    EnumeratedReferenceText[3, 16] textOpen:[3, 5, "[#"] text:[5, 15, "hdr1:hdr2:"] textClose:[15, 16, "]"]
+      Text[5, 15] chars:[5, 15, "hdr1:hdr2:"]
+    Text[16, 37] chars:[16, 37, " Numb … g 0.1"]
+  Heading[43, 71] textOpen:[43, 44, "#"] text:[45, 71, "[#hdr1] Numbered Heading 1"]
+    EnumeratedReferenceText[45, 52] textOpen:[45, 47, "[#"] text:[47, 51, "hdr1"] textClose:[51, 52, "]"]
+      Text[47, 51] chars:[47, 51, "hdr1"]
+    Text[52, 71] chars:[52, 71, " Numb … ing 1"]
+  Heading[77, 114] textOpen:[77, 79, "##"] text:[80, 114, "[#hdr1:hdr2:] Numbered Heading 1.1"]
+    EnumeratedReferenceText[80, 93] textOpen:[80, 82, "[#"] text:[82, 92, "hdr1:hdr2:"] textClose:[92, 93, "]"]
+      Text[82, 92] chars:[82, 92, "hdr1:hdr2:"]
+    Text[93, 114] chars:[93, 114, " Numb … g 1.1"]
+  Heading[120, 148] textOpen:[120, 121, "#"] text:[122, 148, "[#hdr1] Numbered Heading 2"]
+    EnumeratedReferenceText[122, 129] textOpen:[122, 124, "[#"] text:[124, 128, "hdr1"] textClose:[128, 129, "]"]
+      Text[124, 128] chars:[124, 128, "hdr1"]
+    Text[129, 148] chars:[129, 148, " Numb … ing 2"]
+  Heading[154, 191] textOpen:[154, 156, "##"] text:[157, 191, "[#hdr1:hdr2:] Numbered Heading 2.1"]
+    EnumeratedReferenceText[157, 170] textOpen:[157, 159, "[#"] text:[159, 169, "hdr1:hdr2:"] textClose:[169, 170, "]"]
+      Text[159, 169] chars:[159, 169, "hdr1:hdr2:"]
+    Text[170, 191] chars:[170, 191, " Numb … g 2.1"]
+  EnumeratedReferenceBlock[197, 211] open:[197, 199] text:[199, 203] close:[203, 205] enumeratedReference:[206, 211]
+    Paragraph[206, 211] isTrailingBlankLine
+      EnumeratedReferenceText[206, 209] textOpen:[206, 208, "[#"] text:[208, 208] textClose:[208, 209, "]"]
+      Text[209, 210] chars:[209, 210, "."]
+  EnumeratedReferenceBlock[216, 230] open:[216, 218] text:[218, 222] close:[222, 224] enumeratedReference:[225, 230]
+    Paragraph[225, 230] isTrailingBlankLine
+      EnumeratedReferenceText[225, 228] textOpen:[225, 227, "[#"] text:[227, 227] textClose:[227, 228, "]"]
+      Text[228, 229] chars:[228, 229, "."]
+````````````````````````````````
+
+
+`.` appended by default if last element for format is empty Enumerated Reference Text or Link
+
+```````````````````````````````` example Heading: 4
+# [#hdr1] Numbered Heading 1
+    
+## [#hdr1:hdr2:] Numbered Heading 1.1
+    
+# [#hdr1] Numbered Heading 2
+    
+## [#hdr1:hdr2:] Numbered Heading 2.1
+    
+[@hdr1]: [#]
+    
+[@hdr2]: [#]
+
+.
+<h1>1 Numbered Heading 1</h1>
+<h2>1.1 Numbered Heading 1.1</h2>
+<h1>2 Numbered Heading 2</h1>
+<h2>2.1 Numbered Heading 2.1</h2>
+.
+Document[0, 186]
+  Heading[0, 28] textOpen:[0, 1, "#"] text:[2, 28, "[#hdr1] Numbered Heading 1"]
+    EnumeratedReferenceText[2, 9] textOpen:[2, 4, "[#"] text:[4, 8, "hdr1"] textClose:[8, 9, "]"]
+      Text[4, 8] chars:[4, 8, "hdr1"]
+    Text[9, 28] chars:[9, 28, " Numb … ing 1"]
+  Heading[34, 71] textOpen:[34, 36, "##"] text:[37, 71, "[#hdr1:hdr2:] Numbered Heading 1.1"]
+    EnumeratedReferenceText[37, 50] textOpen:[37, 39, "[#"] text:[39, 49, "hdr1:hdr2:"] textClose:[49, 50, "]"]
+      Text[39, 49] chars:[39, 49, "hdr1:hdr2:"]
+    Text[50, 71] chars:[50, 71, " Numb … g 1.1"]
+  Heading[77, 105] textOpen:[77, 78, "#"] text:[79, 105, "[#hdr1] Numbered Heading 2"]
+    EnumeratedReferenceText[79, 86] textOpen:[79, 81, "[#"] text:[81, 85, "hdr1"] textClose:[85, 86, "]"]
+      Text[81, 85] chars:[81, 85, "hdr1"]
+    Text[86, 105] chars:[86, 105, " Numb … ing 2"]
+  Heading[111, 148] textOpen:[111, 113, "##"] text:[114, 148, "[#hdr1:hdr2:] Numbered Heading 2.1"]
+    EnumeratedReferenceText[114, 127] textOpen:[114, 116, "[#"] text:[116, 126, "hdr1:hdr2:"] textClose:[126, 127, "]"]
+      Text[116, 126] chars:[116, 126, "hdr1:hdr2:"]
+    Text[127, 148] chars:[127, 148, " Numb … g 2.1"]
+  EnumeratedReferenceBlock[154, 167] open:[154, 156] text:[156, 160] close:[160, 162] enumeratedReference:[163, 167]
+    Paragraph[163, 167] isTrailingBlankLine
+      EnumeratedReferenceText[163, 166] textOpen:[163, 165, "[#"] text:[165, 165] textClose:[165, 166, "]"]
+  EnumeratedReferenceBlock[172, 185] open:[172, 174] text:[174, 178] close:[178, 180] enumeratedReference:[181, 185]
+    Paragraph[181, 185] isTrailingBlankLine
+      EnumeratedReferenceText[181, 184] textOpen:[181, 183, "[#"] text:[183, 183] textClose:[183, 184, "]"]
+````````````````````````````````
+
+
+```````````````````````````````` example Heading: 5
+# [#hd1] Heading 1
+
+# [#hd1] Heading 2
+
+# [#hd1] Heading 3
+
+[@hd1]: [#].
+.
+<h1>1. Heading 1</h1>
+<h1>2. Heading 2</h1>
+<h1>3. Heading 3</h1>
+.
+Document[0, 73]
+  Heading[0, 18] textOpen:[0, 1, "#"] text:[2, 18, "[#hd1] Heading 1"]
+    EnumeratedReferenceText[2, 8] textOpen:[2, 4, "[#"] text:[4, 7, "hd1"] textClose:[7, 8, "]"]
+      Text[4, 7] chars:[4, 7, "hd1"]
+    Text[8, 18] chars:[8, 18, " Heading 1"]
+  Heading[20, 38] textOpen:[20, 21, "#"] text:[22, 38, "[#hd1] Heading 2"]
+    EnumeratedReferenceText[22, 28] textOpen:[22, 24, "[#"] text:[24, 27, "hd1"] textClose:[27, 28, "]"]
+      Text[24, 27] chars:[24, 27, "hd1"]
+    Text[28, 38] chars:[28, 38, " Heading 2"]
+  Heading[40, 58] textOpen:[40, 41, "#"] text:[42, 58, "[#hd1] Heading 3"]
+    EnumeratedReferenceText[42, 48] textOpen:[42, 44, "[#"] text:[44, 47, "hd1"] textClose:[47, 48, "]"]
+      Text[44, 47] chars:[44, 47, "hd1"]
+    Text[48, 58] chars:[48, 58, " Heading 3"]
+  EnumeratedReferenceBlock[60, 73] open:[60, 62] text:[62, 65] close:[65, 67] enumeratedReference:[68, 73]
+    Paragraph[68, 73]
+      EnumeratedReferenceText[68, 71] textOpen:[68, 70, "[#"] text:[70, 70] textClose:[70, 71, "]"]
+      Text[71, 72] chars:[71, 72, "."]
+````````````````````````````````
+
+
+```````````````````````````````` example Heading: 6
+# [#hd1] Heading 1
+
+## [#hd1:hd2:] Heading 1.1
+
+### [#hd1:hd2:hd3:] Heading 1.1.1
+
+### [#hd1:hd2:hd3:] Heading 1.1.2
+
+## [#hd1:hd2:] Heading 1.2
+
+### [#hd1:hd2:hd3:] Heading 1.2.1
+
+### [#hd1:hd2:hd3:] Heading 1.2.2
+
+# [#hd1] Heading 2
+
+## [#hd1:hd2:] Heading 2.1
+
+### [#hd1:hd2:hd3:] Heading 2.1.1
+
+### [#hd1:hd2:hd3:] Heading 2.1.2
+
+[@hd1]: [#].
+[@hd2]: [#].
+[@hd3]: [#].
+.
+<h1>1. Heading 1</h1>
+<h2>1.1. Heading 1.1</h2>
+<h3>1.1.1. Heading 1.1.1</h3>
+<h3>1.1.2. Heading 1.1.2</h3>
+<h2>1.2. Heading 1.2</h2>
+<h3>1.2.1. Heading 1.2.1</h3>
+<h3>1.2.2. Heading 1.2.2</h3>
+<h1>2. Heading 2</h1>
+<h2>2.1. Heading 2.1</h2>
+<h3>2.1.1. Heading 2.1.1</h3>
+<h3>2.1.2. Heading 2.1.2</h3>
+.
+Document[0, 373]
+  Heading[0, 18] textOpen:[0, 1, "#"] text:[2, 18, "[#hd1] Heading 1"]
+    EnumeratedReferenceText[2, 8] textOpen:[2, 4, "[#"] text:[4, 7, "hd1"] textClose:[7, 8, "]"]
+      Text[4, 7] chars:[4, 7, "hd1"]
+    Text[8, 18] chars:[8, 18, " Heading 1"]
+  Heading[20, 46] textOpen:[20, 22, "##"] text:[23, 46, "[#hd1:hd2:] Heading 1.1"]
+    EnumeratedReferenceText[23, 34] textOpen:[23, 25, "[#"] text:[25, 33, "hd1:hd2:"] textClose:[33, 34, "]"]
+      Text[25, 33] chars:[25, 33, "hd1:hd2:"]
+    Text[34, 46] chars:[34, 46, " Head … g 1.1"]
+  Heading[48, 81] textOpen:[48, 51, "###"] text:[52, 81, "[#hd1:hd2:hd3:] Heading 1.1.1"]
+    EnumeratedReferenceText[52, 67] textOpen:[52, 54, "[#"] text:[54, 66, "hd1:hd2:hd3:"] textClose:[66, 67, "]"]
+      Text[54, 66] chars:[54, 66, "hd1:h … :hd3:"]
+    Text[67, 81] chars:[67, 81, " Head … 1.1.1"]
+  Heading[83, 116] textOpen:[83, 86, "###"] text:[87, 116, "[#hd1:hd2:hd3:] Heading 1.1.2"]
+    EnumeratedReferenceText[87, 102] textOpen:[87, 89, "[#"] text:[89, 101, "hd1:hd2:hd3:"] textClose:[101, 102, "]"]
+      Text[89, 101] chars:[89, 101, "hd1:h … :hd3:"]
+    Text[102, 116] chars:[102, 116, " Head … 1.1.2"]
+  Heading[118, 144] textOpen:[118, 120, "##"] text:[121, 144, "[#hd1:hd2:] Heading 1.2"]
+    EnumeratedReferenceText[121, 132] textOpen:[121, 123, "[#"] text:[123, 131, "hd1:hd2:"] textClose:[131, 132, "]"]
+      Text[123, 131] chars:[123, 131, "hd1:hd2:"]
+    Text[132, 144] chars:[132, 144, " Head … g 1.2"]
+  Heading[146, 179] textOpen:[146, 149, "###"] text:[150, 179, "[#hd1:hd2:hd3:] Heading 1.2.1"]
+    EnumeratedReferenceText[150, 165] textOpen:[150, 152, "[#"] text:[152, 164, "hd1:hd2:hd3:"] textClose:[164, 165, "]"]
+      Text[152, 164] chars:[152, 164, "hd1:h … :hd3:"]
+    Text[165, 179] chars:[165, 179, " Head … 1.2.1"]
+  Heading[181, 214] textOpen:[181, 184, "###"] text:[185, 214, "[#hd1:hd2:hd3:] Heading 1.2.2"]
+    EnumeratedReferenceText[185, 200] textOpen:[185, 187, "[#"] text:[187, 199, "hd1:hd2:hd3:"] textClose:[199, 200, "]"]
+      Text[187, 199] chars:[187, 199, "hd1:h … :hd3:"]
+    Text[200, 214] chars:[200, 214, " Head … 1.2.2"]
+  Heading[216, 234] textOpen:[216, 217, "#"] text:[218, 234, "[#hd1] Heading 2"]
+    EnumeratedReferenceText[218, 224] textOpen:[218, 220, "[#"] text:[220, 223, "hd1"] textClose:[223, 224, "]"]
+      Text[220, 223] chars:[220, 223, "hd1"]
+    Text[224, 234] chars:[224, 234, " Heading 2"]
+  Heading[236, 262] textOpen:[236, 238, "##"] text:[239, 262, "[#hd1:hd2:] Heading 2.1"]
+    EnumeratedReferenceText[239, 250] textOpen:[239, 241, "[#"] text:[241, 249, "hd1:hd2:"] textClose:[249, 250, "]"]
+      Text[241, 249] chars:[241, 249, "hd1:hd2:"]
+    Text[250, 262] chars:[250, 262, " Head … g 2.1"]
+  Heading[264, 297] textOpen:[264, 267, "###"] text:[268, 297, "[#hd1:hd2:hd3:] Heading 2.1.1"]
+    EnumeratedReferenceText[268, 283] textOpen:[268, 270, "[#"] text:[270, 282, "hd1:hd2:hd3:"] textClose:[282, 283, "]"]
+      Text[270, 282] chars:[270, 282, "hd1:h … :hd3:"]
+    Text[283, 297] chars:[283, 297, " Head … 2.1.1"]
+  Heading[299, 332] textOpen:[299, 302, "###"] text:[303, 332, "[#hd1:hd2:hd3:] Heading 2.1.2"]
+    EnumeratedReferenceText[303, 318] textOpen:[303, 305, "[#"] text:[305, 317, "hd1:hd2:hd3:"] textClose:[317, 318, "]"]
+      Text[305, 317] chars:[305, 317, "hd1:h … :hd3:"]
+    Text[318, 332] chars:[318, 332, " Head … 2.1.2"]
+  EnumeratedReferenceBlock[334, 347] open:[334, 336] text:[336, 339] close:[339, 341] enumeratedReference:[342, 347]
+    Paragraph[342, 347]
+      EnumeratedReferenceText[342, 345] textOpen:[342, 344, "[#"] text:[344, 344] textClose:[344, 345, "]"]
+      Text[345, 346] chars:[345, 346, "."]
+  EnumeratedReferenceBlock[347, 360] open:[347, 349] text:[349, 352] close:[352, 354] enumeratedReference:[355, 360]
+    Paragraph[355, 360]
+      EnumeratedReferenceText[355, 358] textOpen:[355, 357, "[#"] text:[357, 357] textClose:[357, 358, "]"]
+      Text[358, 359] chars:[358, 359, "."]
+  EnumeratedReferenceBlock[360, 373] open:[360, 362] text:[362, 365] close:[365, 367] enumeratedReference:[368, 373]
+    Paragraph[368, 373]
+      EnumeratedReferenceText[368, 371] textOpen:[368, 370, "[#"] text:[370, 370] textClose:[370, 371, "]"]
+      Text[371, 372] chars:[371, 372, "."]
+````````````````````````````````
+
+

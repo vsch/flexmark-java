@@ -18,7 +18,7 @@ public class EnumeratedReferenceRepository extends NodeRepository<EnumeratedRefe
     private ArrayList<EnumeratedReferenceBlock> referencedEnumeratedReferenceBlocks = new ArrayList<EnumeratedReferenceBlock>();
 
     public static String getType(final String text) {
-        int pos = text.indexOf(':');
+        int pos = text.lastIndexOf(':');
         if (pos > 0) {
             return text.subSequence(0, pos).toString();
         } else {

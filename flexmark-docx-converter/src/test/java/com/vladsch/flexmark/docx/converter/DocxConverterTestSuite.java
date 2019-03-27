@@ -7,6 +7,9 @@ import org.junit.runners.Suite;
         ComboDocxConverterSpecTest.class,
         ComboEnDocxConverterSpecTest.class,
         ComboDeDocxConverterSpecTest.class,
+        ComboDocxConverterSpec2Test.class,
+        ComboEnDocxConverterSpec2Test.class,
+        ComboDeDocxConverterSpec2Test.class,
         ComboDocxConverterIssuesSpecTest.class,
         //ComboDocxUserSpecDisabled.class, // added to test suite so it runs locally but not  on the travis
 })

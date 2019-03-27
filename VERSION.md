@@ -6,6 +6,7 @@ flexmark-java
 [TOC]: # " "
 
 - [Future 0.50.0](#future-0500)
+- [0.40.28](#04028)
 - [0.40.26](#04026)
 - [0.40.24](#04024)
 - [0.40.22](#04022)
@@ -104,6 +105,13 @@ Future 0.50.0
   * [ ] `EXT_TABLES` conversion option not yet implemented.
 * [ ] Add: `<!-- @formatter:on -->` and `<!-- @formatter:on -->` tags to `Formatter` for
       controlling non-formatting regions.
+
+0.40.28
+-------
+
+* Add: enumerated reference text in heading to be used with only a format reference, the id is
+  taken from the heading attributes.
+* Add: compound enumerated references for creating legal numbering for enumerated references.
 
 0.40.26
 -------

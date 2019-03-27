@@ -1,8 +1,8 @@
 ![Flexmark Icon Logo](/assets/images/flexmark-icon-logo%402x.png) flexmark-java
 ===============================================================================
 
-**flexmark-java** is a Java implementation of **[CommonMark (spec 0.28)]** parser using the blocks
-first, inlines after Markdown parsing architecture.
+**flexmark-java** is a Java implementation of **[CommonMark (spec 0.28)]** parser using the
+blocks first, inlines after Markdown parsing architecture.
 
 Its strengths are speed, flexibility, Markdown source element based AST with details of the
 source position down to individual characters of lexemes that make up the element and
@@ -20,7 +20,7 @@ than ideal and for pathological input either hangs or practically hangs during p
 
 ### master [![Build status](https://travis-ci.org/vsch/flexmark-java.svg?branch=master)](https://travis-ci.org/vsch/flexmark-java)
 
-### latest [![Maven Central status](https://img.shields.io/maven-central/v/com.vladsch.flexmark/flexmark.svg)](https://search.maven.org/search?q=g:com.vladsch.flexmark)<!-- @IGNORE PREVIOUS: link --> [![Build status](https://travis-ci.org/vsch/flexmark-java.svg?branch=0.40.26)](https://travis-ci.org/vsch/flexmark-java) [![Javadocs](https://www.javadoc.io/badge/com.vladsch.flexmark/flexmark.svg)](https://www.javadoc.io/doc/com.vladsch.flexmark/flexmark)
+### latest [![Maven Central status](https://img.shields.io/maven-central/v/com.vladsch.flexmark/flexmark.svg)](https://search.maven.org/search?q=g:com.vladsch.flexmark)<!-- @IGNORE PREVIOUS: link --> [![Build status](https://travis-ci.org/vsch/flexmark-java.svg?branch=0.40.28)](https://travis-ci.org/vsch/flexmark-java) [![Javadocs](https://www.javadoc.io/badge/com.vladsch.flexmark/flexmark.svg)](https://www.javadoc.io/doc/com.vladsch.flexmark/flexmark)
 
 <!-- [![codecov](https://codecov.io/gh/vsch/flexmark-java/branch/master/graph/badge.svg)](https://codecov.io/gh/vsch/flexmark-java) -->
 [![GitQ](https://gitq.com/badge.svg)](https://gitq.com/vsch/flexmark-java)
@@ -43,7 +43,7 @@ following sample:
 <dependency>
     <groupId>com.vladsch.flexmark</groupId>
     <artifactId>flexmark-all</artifactId>
-    <version>0.40.26</version>
+    <version>0.40.28</version>
 </dependency>
 ```
 
@@ -82,7 +82,7 @@ public class BasicSample {
 #### Building via Gradle
 
 ```shell
-compile 'com.vladsch.flexmark:flexmark-all:0.40.26'
+compile 'com.vladsch.flexmark:flexmark-all:0.40.28'
 ```
 
 #### Building with Android Studio
@@ -98,8 +98,7 @@ packagingOptions {
 }
 ```
 
-More information can be found in the documentation:
-[Wiki Home](../../wiki)
+More information can be found in the documentation: [Wiki Home](../../wiki)
 &nbsp;&nbsp;&nbsp;&nbsp;[Usage Examples](../../wiki/Usage)
 &nbsp;&nbsp;&nbsp;&nbsp;[Extension Details](../../wiki/Extensions)
 &nbsp;&nbsp;&nbsp;&nbsp;[Writing Extensions](../../wiki/Writing-Extensions)
@@ -174,6 +173,9 @@ custom node renderer if you need to override the generated link HTML.
 ### Latest Additions
 
 * Java9+ module compatibility
+* Compound Enumerated References
+  [Enumerated References Extension](../../wiki/Enumerated-References-Extension) for creating
+  legal numbering for elements and headings.
 * [Macros Extension](../../wiki/Macros-Extension) to allow arbitrary markdown content to be
   inserted as block or inline elements, allowing block elements to be used where only inline
   elements are allowed by syntax.
@@ -427,7 +429,6 @@ earlier versions of this project.
 |--|:----|:----|:----|
 |  | :x: | :x: | :x: |
 -->
-
 ###### (1)
 
 flexmark-java pathological input of 100,000 `[` parses in 68ms, 100,000 `]` in 57ms, 100,000

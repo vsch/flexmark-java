@@ -1,21 +1,17 @@
 package com.vladsch.flexmark.ext.enumerated.reference.internal;
 
-import com.vladsch.flexmark.util.ast.Document;
-import com.vladsch.flexmark.util.ast.Node;
-import com.vladsch.flexmark.ext.enumerated.reference.EnumeratedReferenceBlock;
-import com.vladsch.flexmark.ext.enumerated.reference.EnumeratedReferenceExtension;
-import com.vladsch.flexmark.ext.enumerated.reference.EnumeratedReferenceLink;
-import com.vladsch.flexmark.ext.enumerated.reference.EnumeratedReferenceText;
+import com.vladsch.flexmark.ast.Heading;
+import com.vladsch.flexmark.ext.enumerated.reference.*;
 import com.vladsch.flexmark.html.CustomNodeRenderer;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.*;
+import com.vladsch.flexmark.util.ast.Document;
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.options.DataHolder;
 
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
-
-import static com.vladsch.flexmark.html.renderer.RenderingPhase.BODY_TOP;
 
 public class EnumeratedReferenceNodeRenderer implements PhasedNodeRenderer
         // , PhasedNodeRenderer
@@ -23,22 +19,27 @@ public class EnumeratedReferenceNodeRenderer implements PhasedNodeRenderer
     private final EnumeratedReferenceOptions options;
     private EnumeratedReferences enumeratedOrdinals;
     private int ordinal;
+    private final HtmlIdGenerator headerIdGenerator; // used for enumerated text reference
 
     public EnumeratedReferenceNodeRenderer(DataHolder options) {
         this.options = new EnumeratedReferenceOptions(options);
         ordinal = 0;
+        headerIdGenerator = new HeaderIdGenerator.Factory().create();
     }
 
     @Override
     public Set<RenderingPhase> getRenderingPhases() {
         LinkedHashSet<RenderingPhase> phaseSet = new LinkedHashSet<>();
-        phaseSet.add(BODY_TOP);
+        phaseSet.add(RenderingPhase.HEAD_TOP);
+        phaseSet.add(RenderingPhase.BODY_TOP);
         return phaseSet;
     }
 
     @Override
     public void renderDocument(final NodeRendererContext context, final HtmlWriter html, final Document document, final RenderingPhase phase) {
-        if (phase == BODY_TOP) {
+        if (phase == RenderingPhase.HEAD_TOP) {
+            headerIdGenerator.generateIds(document);
+        } else if (phase == RenderingPhase.BODY_TOP) {
             enumeratedOrdinals = EnumeratedReferenceExtension.ENUMERATED_REFERENCE_ORDINALS.getFrom(document);
         }
     }
@@ -54,52 +55,82 @@ public class EnumeratedReferenceNodeRenderer implements PhasedNodeRenderer
         return set;
     }
 
-    private void render(EnumeratedReferenceLink node, NodeRendererContext context, HtmlWriter html) {
+    private void render(final EnumeratedReferenceLink node, final NodeRendererContext context, final HtmlWriter html) {
         final String text = node.getText().toString();
 
         if (text.isEmpty()) {
             // placeholder for ordinal
             html.text(String.valueOf(ordinal));
         } else {
-            Node referenceFormat = enumeratedOrdinals.getFormatNode(text);
-            int wasOrdinal = ordinal;
-            ordinal = enumeratedOrdinals.getOrdinal(text);
-            if (referenceFormat != null) {
-                String title = new EnumRefTextCollectingVisitor(ordinal).collectAndGetText(referenceFormat);
-                html.withAttr().attr("href", "#" + text).attr("title", title).tag("a");
-                context.renderChildren(referenceFormat);
-                html.tag("/a");
-            } else {
-                // no format, just output type space ordinal
-                final String defaultText = String.format("%s %d", EnumeratedReferenceRepository.getType(text), ordinal);
-                html.withAttr().attr("href", "#" + text).attr("title", defaultText).tag("a");
-                html.text(defaultText);
-                html.tag("/a");
-            }
-            ordinal = wasOrdinal;
+            enumeratedOrdinals.renderReferenceOrdinals(text, null, new EnumeratedOrdinalRenderer() {
+                @Override
+                public void startRendering(final EnumeratedReferenceRendering[] renderings) {
+                    String title = new EnumRefTextCollectingVisitor().collectAndGetText(node.getChars().getBaseSequence(), renderings, null);
+                    html.withAttr().attr("href", "#" + text).attr("title", title).tag("a");
+                }
+
+                @Override
+                public void render(final int referenceOrdinal, final EnumeratedReferenceBlock referenceFormat, final String defaultText, final boolean needSeparator) {
+                    EnumeratedReferenceNodeRenderer.this.ordinal = referenceOrdinal;
+                    if (needSeparator) {
+                        html.text(".");
+                    }
+
+                    if (referenceFormat != null) {
+                        context.renderChildren(referenceFormat);
+                    } else {
+                        html.text(defaultText);
+                    }
+                }
+
+                @Override
+                public void endRendering() {
+                    html.tag("/a");
+                }
+            });
         }
     }
 
-    private void render(EnumeratedReferenceText node, NodeRendererContext context, HtmlWriter html) {
-        final String text = node.getText().toString();
+    private void render(EnumeratedReferenceText node, final NodeRendererContext context, final HtmlWriter html) {
+        String text = node.getText().toString();
 
         if (text.isEmpty()) {
             // placeholder for ordinal
             html.text(String.valueOf(ordinal));
         } else {
-            Node referenceFormat = enumeratedOrdinals.getFormatNode(text);
-            int wasOrdinal = ordinal;
-            ordinal = enumeratedOrdinals.getOrdinal(text);
+            String type = EnumeratedReferenceRepository.getType(text.toString());
+            
+            if (type.isEmpty() || text.equals(type + ":")) {
+                Node parent = node.getAncestorOfType(Heading.class);
 
-            final String defaultText = String.format("%s %d", EnumeratedReferenceRepository.getType(text), ordinal);
-
-            if (referenceFormat != null) {
-                context.renderChildren(referenceFormat);
-            } else {
-                // no format, just output ordinal
-                html.text(defaultText);
+                if (parent instanceof Heading) {
+                    text = (type.isEmpty() ? text : type) + ":" + headerIdGenerator.getId(parent);
+                }
             }
-            ordinal = wasOrdinal;
+
+            enumeratedOrdinals.renderReferenceOrdinals(text, null, new EnumeratedOrdinalRenderer() {
+                @Override
+                public void startRendering(final EnumeratedReferenceRendering[] renderings) {
+                    
+                }
+
+                @Override
+                public void render(final int referenceOrdinal, final EnumeratedReferenceBlock referenceFormat, final String defaultText, final boolean needSeparator) {
+                    if (needSeparator) html.text(".");
+                    
+                    if (referenceFormat != null) {
+                        EnumeratedReferenceNodeRenderer.this.ordinal = referenceOrdinal;
+                        context.renderChildren(referenceFormat);
+                    } else {
+                        html.text(defaultText);
+                    }
+                }
+
+                @Override
+                public void endRendering() {
+
+                }
+            });
         }
     }
 

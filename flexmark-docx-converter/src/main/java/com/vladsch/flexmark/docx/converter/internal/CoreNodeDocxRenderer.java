@@ -1,11 +1,10 @@
 package com.vladsch.flexmark.docx.converter.internal;
 
-import com.vladsch.flexmark.docx.converter.*;
-import com.vladsch.flexmark.util.ast.*;
 import com.vladsch.flexmark.ast.Text;
 import com.vladsch.flexmark.ast.*;
 import com.vladsch.flexmark.ast.util.ReferenceRepository;
 import com.vladsch.flexmark.ast.util.TextCollectingVisitor;
+import com.vladsch.flexmark.docx.converter.*;
 import com.vladsch.flexmark.docx.converter.util.*;
 import com.vladsch.flexmark.ext.aside.AsideBlock;
 import com.vladsch.flexmark.ext.attributes.AttributesNode;
@@ -13,10 +12,7 @@ import com.vladsch.flexmark.ext.emoji.Emoji;
 import com.vladsch.flexmark.ext.emoji.EmojiExtension;
 import com.vladsch.flexmark.ext.emoji.internal.EmojiOptions;
 import com.vladsch.flexmark.ext.emoji.internal.EmojiResolvedShortcut;
-import com.vladsch.flexmark.ext.enumerated.reference.EnumeratedReferenceBlock;
-import com.vladsch.flexmark.ext.enumerated.reference.EnumeratedReferenceExtension;
-import com.vladsch.flexmark.ext.enumerated.reference.EnumeratedReferenceLink;
-import com.vladsch.flexmark.ext.enumerated.reference.EnumeratedReferenceText;
+import com.vladsch.flexmark.ext.enumerated.reference.*;
 import com.vladsch.flexmark.ext.enumerated.reference.internal.EnumRefTextCollectingVisitor;
 import com.vladsch.flexmark.ext.enumerated.reference.internal.EnumeratedReferenceRepository;
 import com.vladsch.flexmark.ext.enumerated.reference.internal.EnumeratedReferences;
@@ -34,15 +30,14 @@ import com.vladsch.flexmark.ext.tables.*;
 import com.vladsch.flexmark.ext.toc.SimTocBlock;
 import com.vladsch.flexmark.ext.toc.TocBlock;
 import com.vladsch.flexmark.ext.toc.TocBlockBase;
-import com.vladsch.flexmark.html.renderer.AttributablePart;
-import com.vladsch.flexmark.html.renderer.LinkType;
-import com.vladsch.flexmark.html.renderer.ResolvedLink;
+import com.vladsch.flexmark.html.renderer.*;
 import com.vladsch.flexmark.parser.ListOptions;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.superscript.Superscript;
 import com.vladsch.flexmark.util.ImageUtils;
 import com.vladsch.flexmark.util.Pair;
 import com.vladsch.flexmark.util.ast.Document;
+import com.vladsch.flexmark.util.ast.*;
 import com.vladsch.flexmark.util.format.options.ListSpacing;
 import com.vladsch.flexmark.util.html.Attribute;
 import com.vladsch.flexmark.util.html.Attributes;
@@ -109,6 +104,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
     private long[] bulletLists = new long[128];
     private EnumeratedReferences enumeratedOrdinals;
     int ordinal;
+    private final HtmlIdGenerator headerIdGenerator; // used for enumerated text reference
 
     private void ensureNumberedListLength(int level) {
         if (numberedLists.length < level) {
@@ -146,6 +142,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
         final MutableScopedDataSet options1 = new MutableScopedDataSet(options);
         options1.set(EmojiExtension.ROOT_IMAGE_PATH, DocxRenderer.DOC_EMOJI_ROOT_IMAGE_PATH.getFrom(options));
         emojiOptions = new EmojiOptions(options1);
+        headerIdGenerator = new HeaderIdGenerator.Factory().create();
     }
 
     @Override
@@ -160,6 +157,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
             case COLLECT:
                 // get resolved styles
                 options = docx.getDocxRendererOptions();
+                headerIdGenerator.generateIds(document);
                 break;
 
             case DOCUMENT_TOP:
@@ -1698,39 +1696,57 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
     }
 
     private void render(EnumeratedReferenceText node, final DocxRendererContext docx) {
-        final String text = node.getText().toString();
+        String text = node.getText().toString();
 
         if (text.isEmpty()) {
             // placeholder for ordinal
             docx.text(String.valueOf(ordinal));
         } else {
-            Node referenceFormat = enumeratedOrdinals.getFormatNode(text);
+            String type = EnumeratedReferenceRepository.getType(text.toString());
+            if (type.isEmpty() || text.equals(type + ":")) {
+                Node parent = node.getAncestorOfType(Heading.class);
 
-            int wasOrdinal = ordinal;
-            ordinal = enumeratedOrdinals.getOrdinal(text);
-            if (referenceFormat != null) {
-                docx.renderChildren(referenceFormat);
-            } else {
-                // no format, just output ordinal
-                docx.text(String.valueOf(ordinal));
+                if (parent instanceof Heading) {
+                    text = (type.isEmpty() ? text : type) + ":" + headerIdGenerator.getId(parent);
+                }
             }
-            ordinal = wasOrdinal;
+
+            enumeratedOrdinals.renderReferenceOrdinals(text, null, new EnumeratedOrdinalRenderer() {
+                @Override
+                public void startRendering(final EnumeratedReferenceRendering[] renderings) {
+
+                }
+
+                @Override
+                public void render(final int referenceOrdinal, final EnumeratedReferenceBlock referenceFormat, final String defaultText, final boolean needSeparator) {
+                    if (needSeparator) docx.text(".");
+
+                    if (referenceFormat != null) {
+                        CoreNodeDocxRenderer.this.ordinal = referenceOrdinal;
+                        docx.renderChildren(referenceFormat);
+                    } else {
+                        docx.text(defaultText.toString());
+                    }
+                }
+
+                @Override
+                public void endRendering() {
+
+                }
+            });
         }
     }
 
-    private void render(EnumeratedReferenceLink node, final DocxRendererContext docx) {
+    private void render(final EnumeratedReferenceLink node, final DocxRendererContext docx) {
         final String text = node.getText().toString();
 
         if (text.isEmpty()) {
             // placeholder for ordinal
             docx.text(String.valueOf(ordinal));
         } else {
-            final Node referenceFormat = enumeratedOrdinals.getFormatNode(text);
-            int wasOrdinal = ordinal;
-            ordinal = enumeratedOrdinals.getOrdinal(text);
+            final EnumeratedReferenceRendering[] renderings = enumeratedOrdinals.getEnumeratedReferenceOrdinals(text);
 
-            final String defaultText = String.format("%s %d", EnumeratedReferenceRepository.getType(text), ordinal);
-            String title = referenceFormat != null ? new EnumRefTextCollectingVisitor(ordinal).collectAndGetText(referenceFormat) : defaultText;
+            String title = new EnumRefTextCollectingVisitor().collectAndGetText(node.getChars().getBaseSequence(), renderings, null);
             Attributes attributes = new Attributes();
 
             if (title != null) {
@@ -1738,8 +1754,35 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
             }
 
             attributes = docx.extendRenderingNodeAttributes(AttributablePart.NODE, attributes);
-            renderURL(node.getText(), docx, "#" + text, attributes, new EnumeratedReferenceRenderer(docx, referenceFormat, defaultText));
-            ordinal = wasOrdinal;
+            renderURL(node.getText(), docx, "#" + text, attributes, new Runnable() {
+                @Override
+                public void run() {
+                    EnumeratedReferences.renderReferenceOrdinals(renderings, null, new EnumeratedOrdinalRenderer() {
+                        @Override
+                        public void startRendering(final EnumeratedReferenceRendering[] renderings) {
+                            
+                        }
+
+                        @Override
+                        public void render(final int referenceOrdinal, final EnumeratedReferenceBlock referenceFormat, final String defaultText, final boolean needSeparator) {
+                            if (needSeparator) docx.text(".");
+                            
+                            if (referenceFormat != null) {
+                                CoreNodeDocxRenderer.this.ordinal = referenceOrdinal;
+                                docx.renderChildren(referenceFormat);
+                            } else {
+                                // no format, just output ordinal
+                                docx.text(defaultText);
+                            }
+                        }
+
+                        @Override
+                        public void endRendering() {
+
+                        }
+                    });
+                }
+            });
         }
     }
 
@@ -1871,28 +1914,6 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
                 }
             });
             myDocx.renderChildren(myFootnoteBlock);
-        }
-    }
-
-    private static class EnumeratedReferenceRenderer implements Runnable {
-        private final DocxRendererContext myDocx;
-        private final Node myReferenceFormat;
-        private final String myDefaultText;
-
-        public EnumeratedReferenceRenderer(final DocxRendererContext docx, final Node referenceFormat, final String defaultText) {
-            myDocx = docx;
-            myReferenceFormat = referenceFormat;
-            myDefaultText = defaultText;
-        }
-
-        @Override
-        public void run() {
-            if (myReferenceFormat != null) {
-                myDocx.renderChildren(myReferenceFormat);
-            } else {
-                // no format, just output ordinal
-                myDocx.text(myDefaultText);
-            }
         }
     }
 

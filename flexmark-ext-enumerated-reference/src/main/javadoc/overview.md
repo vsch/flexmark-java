@@ -103,3 +103,86 @@ Will render as:
 <p>See <a href="#tbl:test"><span>Table 1.</span></a></p>
 ```
 
+## Enumerated Reference Text in Headings
+
+Because headings contain their own anchor id an enumerated reference with only a `type` is
+allowed in headings and has the effect of adding an incremented counter to heading text.
+
+```markdown
+# [#hd1] Heading 1
+
+# [#hd1] Heading 2
+
+# [#hd1] Heading 3
+
+[@hd1]: [#].
+```
+
+Will render as:
+
+```html
+<h1>1. Heading 1</h1>
+<h1>2. Heading 2</h1>
+<h1>3. Heading 3</h1>
+```
+
+## Compound Types
+
+Compound enumerated reference types are created by including more than one type reference with
+`:` separating each type.
+
+The effect of compound reference is that all child reference counters are reset to 1 for change
+in parent type's ordinal allowing creation of legal numbering using enumerated references.
+
+:information_source: When combining enumerated type ordinal strings for compound enumerated
+reference if the last element of the enumerated format definition is an empty enumerated
+reference text `[#]` or empty enumerated reference link `[@]` then a `.` will be added after the
+parent enumerated ordinal text.
+
+:information_source: For compound type for headings without an element id, a trailing `:` is
+needed to prevent the last `type` from being interpreted as the element id.
+
+```markdown
+# [#hd1] Heading 1
+
+## [#hd1:hd2:] Heading 1.1
+
+### [#hd1:hd2:hd3:] Heading 1.1.1
+
+### [#hd1:hd2:hd3:] Heading 1.1.2
+
+## [#hd1:hd2:] Heading 1.2
+
+### [#hd1:hd2:hd3:] Heading 1.2.1
+
+### [#hd1:hd2:hd3:] Heading 1.2.2
+
+# [#hd1] Heading 2
+
+## [#hd1:hd2:] Heading 2.1
+
+### [#hd1:hd2:hd3:] Heading 2.1.1
+
+### [#hd1:hd2:hd3:] Heading 2.1.2
+
+[@hd1]: [#].
+[@hd2]: [#].
+[@hd2]: [#].
+```
+
+Will render as:
+
+```html
+<h1>1. Heading 1</h1>
+<h2>1.1. Heading 1.1</h2>
+<h3>1.1.1. Heading 1.1.1</h3>
+<h3>1.1.2. Heading 1.1.2</h3>
+<h2>1.2. Heading 1.2</h2>
+<h3>1.2.1. Heading 1.2.1</h3>
+<h3>1.2.2. Heading 1.2.2</h3>
+<h1>2. Heading 2</h1>
+<h2>2.1. Heading 2.1</h2>
+<h3>2.1.1. Heading 2.1.1</h3>
+<h3>2.1.2. Heading 2.1.2</h3>
+```
+
