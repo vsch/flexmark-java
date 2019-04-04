@@ -6,6 +6,7 @@ flexmark-java
 [TOC]: # " "
 
 - [Future 0.50.0](#future-0500)
+- [0.40.34](#04034)
 - [0.40.32](#04032)
 - [0.40.30](#04030)
 - [0.40.28](#04028)
@@ -107,6 +108,15 @@ Future 0.50.0
   * [ ] `EXT_TABLES` conversion option not yet implemented.
 * [ ] Add: `<!-- @formatter:on -->` and `<!-- @formatter:on -->` tags to `Formatter` for
       controlling non-formatting regions.
+
+0.40.34
+-------
+
+* Fix: [#328, Html2mark - missing newline when paragraph followed by div] 
+* Fix: [#331, Ability to replace empty \<p\> with \<br\> during html2mark conversion] 
+* Fix: NPE in `TableParagraphPreProcessor`
+* Fix: `AutolinkNodePostProcessor` processing links out of order causing sequence end/start
+  reversal.
 
 0.40.32
 -------
@@ -1312,4 +1322,8 @@ setting either will affect both keys. For information on these keys see
 [migrate 0_35_x to 0_40_0.xml]: /assets/migrations/migrate%20flexmark-java%200_35_x%20to%200_40_0.xml
 [NodeInsertingPostProcessorSample.java]: https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/samples/NodeInsertingPostProcessorSample.java
 [YouTrack: IDEA-207453]: https://youtrack.jetbrains.com/issue/IDEA-207453 "Add Conversion of ref anchor to UrlFilter for file line navigation"
+[#328, Html2mark - missing newline when paragraph followed by div]: https://github.com/vsch/flexmark-java/issues/328
+[#331, Ability to replace empty \<p\> with \<br\> during html2mark conversion]: https://github.com/vsch/flexmark-java/issues/331
+
+
 

@@ -1,13 +1,15 @@
 package com.vladsch.flexmark.ext.tables.internal;
 
-import com.vladsch.flexmark.ast.*;
+import com.vladsch.flexmark.ast.Paragraph;
+import com.vladsch.flexmark.ast.Text;
+import com.vladsch.flexmark.ast.WhiteSpace;
 import com.vladsch.flexmark.ext.tables.*;
-import com.vladsch.flexmark.parser.core.ReferencePreProcessorFactory;
 import com.vladsch.flexmark.parser.InlineParser;
 import com.vladsch.flexmark.parser.block.CharacterNodeFactory;
 import com.vladsch.flexmark.parser.block.ParagraphPreProcessor;
 import com.vladsch.flexmark.parser.block.ParagraphPreProcessorFactory;
 import com.vladsch.flexmark.parser.block.ParserState;
+import com.vladsch.flexmark.parser.core.ReferencePreProcessorFactory;
 import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.util.ast.DoNotDecorate;
 import com.vladsch.flexmark.util.ast.Node;
@@ -221,10 +223,12 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
                 sepList = inlineParser.parseCustom(fullRowLine, tableRow, pipeCharacters, pipeNodeMap);
                 if (rowNumber < separatorLineNumber) tableRowNumber = rowNumber + 1;
                 else tableRowNumber = rowNumber - separatorLineNumber;
-                
+
                 // can have table separators embedded inside inline elements, need to convert them to text
                 // and remove them from sepList
-                sepList = cleanUpInlinedSeparators(inlineParser, tableRow, sepList);
+                if (sepList != null) {
+                    sepList = cleanUpInlinedSeparators(inlineParser, tableRow, sepList);
+                }
             }
 
             if (sepList == null) {
@@ -369,7 +373,7 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
         return tableBlock.getChars().length();
     }
 
-    List<Node> cleanUpInlinedSeparators(InlineParser inlineParser,TableRow tableRow, List<Node> sepList) {
+    List<Node> cleanUpInlinedSeparators(InlineParser inlineParser, TableRow tableRow, List<Node> sepList) {
         // any separators which do not have tableRow as parent are embedded into inline elements and should be 
         // converted back to text
         ArrayList<Node> removedSeparators = null;
@@ -379,18 +383,18 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
                 // embedded, convert it and surrounding whitespace to text
                 Node firstNode = node.getPrevious() instanceof WhiteSpace ? node.getPrevious() : node;
                 Node lastNode = node.getNext() instanceof WhiteSpace ? node.getNext() : node;
-                
+
                 Text text = new Text(node.getChars().baseSubSequence(firstNode.getStartOffset(), lastNode.getEndOffset()));
                 node.insertBefore(text);
                 node.unlink();
                 firstNode.unlink();
                 lastNode.unlink();
-                
+
                 if (removedSeparators == null) {
                     removedSeparators = new ArrayList<>();
                     mergeTextParents = new ArrayList<>();
                 }
-                
+
                 removedSeparators.add(node);
                 mergeTextParents.add(text.getParent());
             }
@@ -409,7 +413,7 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
                 return newSeparators;
             }
         }
-        
+
         return sepList;
     }
 

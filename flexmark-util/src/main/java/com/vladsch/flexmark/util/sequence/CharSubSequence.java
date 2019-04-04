@@ -41,8 +41,16 @@ public final class CharSubSequence extends BasedSequenceImpl {
     }
 
     private CharSubSequence(CharSubSequence baseSeq, int start, int end) {
+        //if (start < 0 || end < 0 || end < start) {
+        //    int tmp = 0;
+        //}
         assert start >= 0 && end >= 0 && end >= start;
+
+        //if (start <= 0 && end >= baseSeq.length()) {
+        //    int tmp = 0;
+        //}
         assert start > 0 || end < baseSeq.length();
+
         base = baseSeq;
         baseChars = baseSeq.baseChars;
         startOffset = base.startOffset + start;

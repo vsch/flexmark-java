@@ -1096,9 +1096,11 @@ public class FlexmarkHtmlParser {
     }
 
     private boolean isFirstChild(Element element) {
-        for (Node node : element.parent().children()) {
+        for (Node node : element.parent().childNodes()) {
             if (node instanceof Element) {
                 return element == node;
+            } else if (node.nodeName().equals("#text") && !node.outerHtml().trim().isEmpty()) {
+                break;
             }
         }
         return false;
@@ -1348,7 +1350,13 @@ public class FlexmarkHtmlParser {
             isDefinitionItemParagraph = tagName.equalsIgnoreCase("dd");
         }
         out.blankLineIf(!(isItemParagraph || isDefinitionItemParagraph));
-        processTextNodes(out, element, false);
+        if (element.childNodeSize() == 0) {
+            if (myOptions.brAsExtraBlankLines) {
+                out.append("<br />").blankLine();
+            }
+        } else {
+            processTextNodes(out, element, false);
+        }
         out.blankLineIf(isItemParagraph || isDefinitionItemParagraph).line();
         return true;
     }
@@ -1454,7 +1462,7 @@ public class FlexmarkHtmlParser {
             } else if (next.nodeName().equalsIgnoreCase("br")) {
                 preText.append("\n");
             } else if (next.nodeName().equalsIgnoreCase("#text")) {
-                preText.append(((TextNode)next).getWholeText());
+                preText.append(((TextNode) next).getWholeText());
             } else {
                 processHtmlTree(preText, next, false);
             }
@@ -1713,19 +1721,23 @@ public class FlexmarkHtmlParser {
         // unwrap and process content
         skip();
         if (!isFirstChild(element)) {
-            int pendingEOL = out.getPendingEOL();
-            if (pendingEOL < 2) {
-                out.setPendingEOL(0);
-                int pendingSpace = out.getPendingSpace();
-                out.flush(0);
-                if (pendingSpace < 2) {
-                    out.openPreFormatted(true);
-                    out.append(RepeatedCharSequence.of(' ', Utils.minLimit(0, 2 - pendingSpace)));
-                    out.closePreFormatted();
+            if (!myOptions.divAsParagraph) {
+                int pendingEOL = out.getPendingEOL();
+                if (pendingEOL < 2) {
+                    out.setPendingEOL(0);
+                    int pendingSpace = out.getPendingSpace();
+                    out.flush(0);
+                    if (pendingSpace < 2) {
+                        out.openPreFormatted(true);
+                        out.append(RepeatedCharSequence.of(' ', Utils.minLimit(0, 2 - pendingSpace)));
+                        out.closePreFormatted();
+                    }
+                    out.setPendingEOL(pendingEOL);
                 }
-                out.setPendingEOL(pendingEOL);
+                out.line();
+            } else {
+                out.blankLine();
             }
-            out.line();
         }
 
         processHtmlTree(out, element, false);

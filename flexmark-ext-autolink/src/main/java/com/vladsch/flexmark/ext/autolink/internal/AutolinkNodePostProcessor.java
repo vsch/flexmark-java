@@ -1,12 +1,20 @@
 package com.vladsch.flexmark.ext.autolink.internal;
 
-import com.vladsch.flexmark.ast.*;
+import com.vladsch.flexmark.ast.AutoLink;
+import com.vladsch.flexmark.ast.LinkNode;
+import com.vladsch.flexmark.ast.MailLink;
+import com.vladsch.flexmark.ast.Text;
+import com.vladsch.flexmark.ast.TextBase;
 import com.vladsch.flexmark.ext.autolink.AutolinkExtension;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.block.NodePostProcessor;
 import com.vladsch.flexmark.parser.block.NodePostProcessorFactory;
 import com.vladsch.flexmark.util.NodeTracker;
-import com.vladsch.flexmark.util.ast.*;
+import com.vladsch.flexmark.util.ast.DoNotDecorate;
+import com.vladsch.flexmark.util.ast.DoNotLinkDecorate;
+import com.vladsch.flexmark.util.ast.Document;
+import com.vladsch.flexmark.util.ast.Node;
+import com.vladsch.flexmark.util.ast.TypographicText;
 import com.vladsch.flexmark.util.html.Escaping;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.ReplacedTextMapper;
@@ -17,12 +25,11 @@ import org.nibor.autolink.LinkType;
 
 import java.util.ArrayList;
 import java.util.EnumSet;
-import java.util.Iterator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class AutolinkNodePostProcessor extends NodePostProcessor {
-    final static private Pattern URI_SUFFIX = Pattern.compile("\\b([a-z][a-z0-9+.-]*://\\s*)$");
+    final static private Pattern URI_PREFIX = Pattern.compile("\\b([a-z][a-z0-9+.-]*://)(?:\\s|$)");
 
     private final Pattern ignoredLinks;
     private final boolean intellijDummyIdentifier;
@@ -109,12 +116,33 @@ public class AutolinkNodePostProcessor extends NodePostProcessor {
         }
 
         Iterable<LinkSpan> links = linkExtractor.extractLinks(literal);
-        ArrayList<LinkSpan> linksList = null;
+        ArrayList<LinkSpan> linksList = new ArrayList<LinkSpan>();
 
-        final Matcher matcher = URI_SUFFIX.matcher(literal);
-        if (matcher.find()) {
-            linksList = new ArrayList<LinkSpan>();
-            linksList.add(new DummyLinkSpan(LinkType.URL, matcher.start(1), matcher.end(1)));
+        for (LinkSpan link : links) {
+            linksList.add(link);
+        }
+
+        final Matcher matcher = URI_PREFIX.matcher(literal);
+        while (matcher.find()) {
+            int start = matcher.start(1);
+            int end = matcher.end(1);
+
+            if (linksList.isEmpty()) {
+                linksList.add(new DummyLinkSpan(LinkType.URL, start, end));
+            } else {
+                int iMax = linksList.size();
+                for (int i = 0; i < iMax; i++) {
+                    LinkSpan link = linksList.get(i);
+                    if (end < link.getBeginIndex()) {
+                        // insert here
+                        linksList.add(i, new DummyLinkSpan(LinkType.URL, start, end));
+                        break;
+                    } else if (start >= link.getBeginIndex() && end <= link.getEndIndex()) {
+                        // overlap, skip
+                        break;
+                    }
+                }
+            }
         }
 
         int lastEscaped = 0;
@@ -122,20 +150,7 @@ public class AutolinkNodePostProcessor extends NodePostProcessor {
         TextBase textBase = wrapInTextBase || !(node.getParent() instanceof TextBase) ? null : (TextBase) node.getParent();
         boolean processedNode = false;
 
-        int iMax = linksList == null ? 0 : linksList.size();
-        int i = 0;
-
-        for (Iterator<LinkSpan> iterator = links.iterator(); ; ) {
-            LinkSpan link;
-
-            if (iterator.hasNext()) {
-                link = iterator.next();
-            } else if (i < iMax) {
-                link = linksList.get(i++);
-            } else {
-                break;
-            }
-
+        for (LinkSpan link : linksList) {
             BasedSequence linkText = literal.subSequence(link.getBeginIndex(), link.getEndIndex()).trimEnd();
             if (isIgnoredLinkPrefix(linkText)) continue;
 
@@ -157,7 +172,7 @@ public class AutolinkNodePostProcessor extends NodePostProcessor {
                 state.nodeAdded(textBase);
             }
 
-            if (startOffset != lastEscaped) {
+            if (startOffset > lastEscaped) {
                 BasedSequence escapedChars = original.subSequence(lastEscaped, startOffset);
                 Node node1 = new Text(escapedChars);
                 if (textBase != null) {
@@ -166,6 +181,8 @@ public class AutolinkNodePostProcessor extends NodePostProcessor {
                     node.insertBefore(node1);
                 }
                 state.nodeAdded(node1);
+            //} else if (startOffset < lastEscaped) {
+            //    int tmp = 0;
             }
 
             final BasedSequence linkChars = linkText.baseSubSequence(linkText.getStartOffset(), linkText.getEndOffset());

@@ -3904,3 +3904,77 @@ etc.
 ````````````````````````````````
 
 
+## Issue 331
+
+Issue #331
+
+```````````````````````````````` example Issue 331: 1
+1
+
+<br />
+
+2
+.
+<p>1</p>
+<p></p>
+<p>2</p>
+````````````````````````````````
+
+
+## Issue 328
+
+Issue #328
+
+```````````````````````````````` example Issue 328: 1
+Paragraph 1  
+Paragraph 2
+.
+<p>Paragraph 1</p>
+<div>Paragraph 2</div>
+````````````````````````````````
+
+
+DIV_AS_PARAGRAPH true
+
+```````````````````````````````` example(Issue 328: 2) options(div-as-para)
+Paragraph 1
+
+Paragraph 2
+
+.
+<p>Paragraph 1</p>
+<div>Paragraph 2</div>
+````````````````````````````````
+
+
+```````````````````````````````` example Issue 328: 3
+Paragraph 1  
+Text  
+Paragraph 2
+.
+<div>Paragraph 1</div>
+<div>
+    Text
+    <div>Paragraph 2</div>
+</div>
+````````````````````````````````
+
+
+DIV_AS_PARAGRAPH true
+
+```````````````````````````````` example(Issue 328: 4) options(div-as-para)
+Paragraph 1
+
+Text
+
+Paragraph 2
+
+.
+<div>Paragraph 1</div>
+<div>
+    Text
+    <div>Paragraph 2</div>
+</div>
+````````````````````````````````
+
+

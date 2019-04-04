@@ -4257,3 +4257,103 @@ Caused segments out of order exception in Markdown Navigator, but cannot duplica
 ````````````````````````````````
 
 
+## Issue xxx.3
+
+```````````````````````````````` example Issue xxx.3: 1
+Supported Capabilities
+======================
+
+Here is a non-comprehensive table of git commands and features whose equivalent
+is supported by go-git.
+
+| Feature                               | Status | Notes |
+|---------------------------------------|--------|-------|
+| **protocols** |
+| http(s):// (dumb)                     | ✖ |
+| http(s):// (smart)                    | ✔ |
+| git://                                | ✔ |
+| ssh://                                | ✔ |
+| file://                               | ✔ |
+
+.
+<h1 id="supported-capabilities">Supported Capabilities</h1>
+<p>Here is a non-comprehensive table of git commands and features whose equivalent
+is supported by go-git.</p>
+<table>
+  <thead>
+    <tr><th>Feature</th><th>Status</th><th>Notes</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>protocols</strong></td></tr>
+    <tr><td>http(s):// (dumb)</td><td>✖</td></tr>
+    <tr><td>http(s):// (smart)</td><td>✔</td></tr>
+    <tr><td><a href="git://">git://</a></td><td>✔</td></tr>
+    <tr><td><a href="ssh://">ssh://</a></td><td>✔</td></tr>
+    <tr><td><a href="file://">file://</a></td><td>✔</td></tr>
+  </tbody>
+</table>
+.
+Document[0, 519]
+  Heading[0, 45] text:[0, 22, "Supported Capabilities"] textClose:[23, 45, "======================"]
+    Text[0, 22] chars:[0, 22, "Suppo … ities"]
+  Paragraph[47, 151] isTrailingBlankLine
+    Text[47, 126] chars:[47, 126, "Here  … alent"]
+    SoftLineBreak[126, 127]
+    Text[127, 150] chars:[127, 150, "is su … -git."]
+  TableBlock[152, 518]
+    TableHead[152, 210]
+      TableRow[152, 210] rowNumber=1
+        TableCell[152, 193] header textOpen:[152, 153, "|"] text:[154, 161, "Feature"] textClose:[192, 193, "|"]
+          Text[154, 161] chars:[154, 161, "Feature"]
+        TableCell[193, 202] header text:[194, 200, "Status"] textClose:[201, 202, "|"]
+          Text[194, 200] chars:[194, 200, "Status"]
+        TableCell[202, 210] header text:[203, 208, "Notes"] textClose:[209, 210, "|"]
+          Text[203, 208] chars:[203, 208, "Notes"]
+    TableSeparator[211, 269]
+      TableRow[211, 269]
+        TableCell[211, 252] textOpen:[211, 212, "|"] text:[212, 251, "---------------------------------------"] textClose:[251, 252, "|"]
+          Text[212, 251] chars:[212, 251, "----- … -----"]
+        TableCell[252, 261] text:[252, 260, "--------"] textClose:[260, 261, "|"]
+          Text[252, 260] chars:[252, 260, "--------"]
+        TableCell[261, 269] text:[261, 268, "-------"] textClose:[268, 269, "|"]
+          Text[261, 268] chars:[261, 268, "-------"]
+    TableBody[270, 517]
+      TableRow[270, 287] rowNumber=1
+        TableCell[270, 287] textOpen:[270, 271, "|"] text:[272, 285, "**protocols**"] textClose:[286, 287, "|"]
+          StrongEmphasis[272, 285] textOpen:[272, 274, "**"] text:[274, 283, "protocols"] textClose:[283, 285, "**"]
+            Text[274, 283] chars:[274, 283, "protocols"]
+          Text[285, 285]
+      TableRow[288, 333] rowNumber=2
+        TableCell[288, 329] textOpen:[288, 289, "|"] text:[290, 307, "http(s):// (dumb)"] textClose:[328, 329, "|"]
+          Text[290, 307] chars:[290, 307, "http( … dumb)"]
+        TableCell[329, 333] text:[330, 331, "✖"] textClose:[332, 333, "|"]
+          Text[330, 331] chars:[330, 331, "✖"]
+      TableRow[334, 379] rowNumber=3
+        TableCell[334, 375] textOpen:[334, 335, "|"] text:[336, 354, "http(s):// (smart)"] textClose:[374, 375, "|"]
+          Text[336, 354] chars:[336, 354, "http( … mart)"]
+        TableCell[375, 379] text:[376, 377, "✔"] textClose:[378, 379, "|"]
+          Text[376, 377] chars:[376, 377, "✔"]
+      TableRow[380, 425] rowNumber=4
+        TableCell[380, 421] textOpen:[380, 381, "|"] text:[382, 388, "git://"] textClose:[420, 421, "|"]
+          TextBase[382, 388] chars:[382, 388, "git://"]
+            AutoLink[382, 388] text:[382, 388, "git://"] pageRef:[382, 388, "git://"]
+              Text[382, 388] chars:[382, 388, "git://"]
+        TableCell[421, 425] text:[422, 423, "✔"] textClose:[424, 425, "|"]
+          Text[422, 423] chars:[422, 423, "✔"]
+      TableRow[426, 471] rowNumber=5
+        TableCell[426, 467] textOpen:[426, 427, "|"] text:[428, 434, "ssh://"] textClose:[466, 467, "|"]
+          TextBase[428, 434] chars:[428, 434, "ssh://"]
+            AutoLink[428, 434] text:[428, 434, "ssh://"] pageRef:[428, 434, "ssh://"]
+              Text[428, 434] chars:[428, 434, "ssh://"]
+        TableCell[467, 471] text:[468, 469, "✔"] textClose:[470, 471, "|"]
+          Text[468, 469] chars:[468, 469, "✔"]
+      TableRow[472, 517] rowNumber=6
+        TableCell[472, 513] textOpen:[472, 473, "|"] text:[474, 481, "file://"] textClose:[512, 513, "|"]
+          TextBase[474, 481] chars:[474, 481, "file://"]
+            AutoLink[474, 481] text:[474, 481, "file://"] pageRef:[474, 481, "file://"]
+              Text[474, 481] chars:[474, 481, "file://"]
+        TableCell[513, 517] text:[514, 515, "✔"] textClose:[516, 517, "|"]
+          Text[514, 515] chars:[514, 515, "✔"]
+````````````````````````````````
+
+

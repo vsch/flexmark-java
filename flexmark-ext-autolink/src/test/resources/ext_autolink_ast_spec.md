@@ -424,16 +424,14 @@ Document[0, 8]
 ```````````````````````````````` example Issue xxx-1: 2
 http://abc http://
 .
-<p><a href="http://abc">http://abc</a> <a href="http://">http://</a></p>
+<p><a href="http://abc">http://abc</a> http://</p>
 .
 Document[0, 19]
   Paragraph[0, 19]
     TextBase[0, 18] chars:[0, 18, "http: … tp://"]
       AutoLink[0, 10] text:[0, 10, "http://abc"] pageRef:[0, 10, "http://abc"]
         Text[0, 10] chars:[0, 10, "http://abc"]
-      Text[10, 11] chars:[10, 11, " "]
-      AutoLink[11, 18] text:[11, 18, "http://"] pageRef:[11, 18, "http://"]
-        Text[11, 18] chars:[11, 18, "http://"]
+      Text[10, 18] chars:[10, 18, " http://"]
 ````````````````````````````````
 
 
