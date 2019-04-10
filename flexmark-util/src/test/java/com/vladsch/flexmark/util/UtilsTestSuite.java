@@ -23,6 +23,7 @@ import org.junit.runners.Suite;
         MutableAttributeTest.class,
         AttributesTest.class,
         FormattingAppendableImplTest.class,
+        LineFormattingAppendableImplTest.class,
         RepeatedCharSequenceTest.class,
         HtmlFormattingAppendableBaseTest.class,
         MaxAggregatorTest.class,

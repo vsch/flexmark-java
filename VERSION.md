@@ -6,6 +6,7 @@ flexmark-java
 [TOC]: # " "
 
 - [Future 0.50.0](#future-0500)
+- [0.40.36](#04036)
 - [0.40.34](#04034)
 - [0.40.32](#04032)
 - [0.40.30](#04030)
@@ -82,38 +83,34 @@ flexmark-java
 Future 0.50.0
 -------------
 
-* [ ] Fix: `FormattingAppendable` deprecate all conditional formatting related methods and
-      methods only needed because of convoluted output construction.
-* [x] Deprecate: all conditional formatting methods in `FormattingAppendable`
-* [ ] Break: make Java 8 minimum version and use JDK 8 for compilation
+* [x] Break: make Java 8 minimum version and use JDK 8 for compilation
+  * [ ] Convert anonymous classes to lambda where possible.
+  * [ ] Remove classes from utils which are implemented in Java 8
+* [x] Add: `LineFormattingAppendable` and `LineFormattingAppendableImpl`
+  * [x] Fix: deprecate `FormattingAppendable` to be replaced by `LineFormattingAppendable`
+  * [x] Fix: deprecate `FormattingAppendableImpl` to be replaced by
+        `LineFormattingAppendableImpl`
+  * [ ] Fix: replace all uses of `FormattingAppendable` by `LineFormattingAppendable`
+  * [ ] Fix: replace all uses of `FormattingAppendableImpl` by `LineFormattingAppendableImpl`
 * [ ] Fix: Factor out BasedSequenceImpl functionality that does not depend on BasedSequence and
       can be applied to any CharSequence into its own CharSequence interface with default
       implementations.
-* [ ] Add: `LineFormattingAppendable` to extend and eventually replace `FormattingAppendable`
-  1. provide same `append(...)`, `line()`, `blankLine()`, `indent()`, `prefix()`, etc. of
-     `FormattingAppendable` but leading, trailing whitespace options, applied when current line
-     is complete not during construction.
-  2. add `append(Collection<CharSequence>)` for easy appending of child rendered results
-  3. no callback methods and convoluted logic implementing indentations during content
-     construction since these can be easily applied to individual lines once they are generated.
-  4. provide implement `List<CharSequence>` interface for its content lines
-  5. provide `currentLine()` for last content line which does not yet have an EOL
-  6. provide `currentLineIndex()` as `int` for the index of the `currentLine()` value, will be
-     equal to `size()` if the current line has no content, ie. end of output after previous line
-     terminated with EOL.
-  7. provide `result()` as `Collection<CharSequence>` where each char sequence represents a
-     single line of output.
 * [ ] Add: `FlexmarkHtmlParser` options:
   * [ ] Fix: [#313, Ability to override tags processing in FlexmarkHtmlParser]
   * [ ] `EXT_TABLES` conversion option not yet implemented.
 * [ ] Add: `<!-- @formatter:on -->` and `<!-- @formatter:on -->` tags to `Formatter` for
       controlling non-formatting regions.
 
+0.40.36
+-------
+
+* Fix:
+
 0.40.34
 -------
 
-* Fix: [#328, Html2mark - missing newline when paragraph followed by div] 
-* Fix: [#331, Ability to replace empty \<p\> with \<br\> during html2mark conversion] 
+* Fix: [#328, Html2mark - missing newline when paragraph followed by div]
+* Fix: [#331, Ability to replace empty \<p\> with \<br\> during html2mark conversion]
 * Fix: NPE in `TableParagraphPreProcessor`
 * Fix: `AutolinkNodePostProcessor` processing links out of order causing sequence end/start
   reversal.
@@ -143,8 +140,8 @@ Future 0.50.0
 -------
 
 * Fix: upgrade dependencies
-  * OpenHtmlToPdf -> 0.0.1-RC19 
-  * docx4j -> 6.1.2 
+  * OpenHtmlToPdf -> 0.0.1-RC19
+  * docx4j -> 6.1.2
 * Add: parse int or default to `Utils.java`
 
 0.40.24
@@ -165,14 +162,14 @@ Future 0.50.0
   `ParserEmulationProfile.PEGDOWN`
 * Fix: [#323, TOC generation improvement], profile setting HeaderId generation to `false` even
   though `PegdownExtensions.ANCHORLINKS` is not used
-* Add: css option to PDF export and use as default css from
-      [#323, TOC generation improvement], thanks to @jvdvegt
-  * Add: `PdfConverterExtension.DEFAULT_CSS` data key with default value of embedded CSS. 
+* Add: css option to PDF export and use as default css from [#323, TOC generation improvement],
+  thanks to @jvdvegt
+  * Add: `PdfConverterExtension.DEFAULT_CSS` data key with default value of embedded CSS.
   * Add: `PdfConverterExtension.embedCss(String html, String css)` will embed the css in html by
     inserting it between `<head>` and `</head>` wrapped in `<style>` and `</style>`. Does its
     best to generate valid HTML, use it if your don't want to bother creating your own HTML
     document with embedded CSS.
-  
+
   :information_source: Default CSS is only added if
   `PdfConverterExtension.exportToPdf(OutputStream, String, String, DataHolder)` is used to
   provide options. For all other calls you need to embed the default css into your HTML string
@@ -1317,13 +1314,11 @@ setting either will affect both keys. For information on these keys see
 [#318, Ability to disable table caption in FlexmarkHtmlParser]: https://github.com/vsch/flexmark-java/issues/318
 [#323, TOC generation improvement]: https://github.com/vsch/flexmark-java/issues/323
 [#326, flexmark-html-parser - multiple \<code\> inside \<pre\> bug]: https://github.com/vsch/flexmark-java/issues/326
+[#328, Html2mark - missing newline when paragraph followed by div]: https://github.com/vsch/flexmark-java/issues/328
+[#331, Ability to replace empty \<p\> with \<br\> during html2mark conversion]: https://github.com/vsch/flexmark-java/issues/331
 [Admonition Extension, Material for MkDocs]: https://squidfunk.github.io/mkdocs-material/extensions/admonition/
 [Awesome Console]: https://plugins.jetbrains.com/plugin/7677-awesome-console "Awesome Console"
 [migrate 0_35_x to 0_40_0.xml]: /assets/migrations/migrate%20flexmark-java%200_35_x%20to%200_40_0.xml
 [NodeInsertingPostProcessorSample.java]: https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/samples/NodeInsertingPostProcessorSample.java
 [YouTrack: IDEA-207453]: https://youtrack.jetbrains.com/issue/IDEA-207453 "Add Conversion of ref anchor to UrlFilter for file line navigation"
-[#328, Html2mark - missing newline when paragraph followed by div]: https://github.com/vsch/flexmark-java/issues/328
-[#331, Ability to replace empty \<p\> with \<br\> during html2mark conversion]: https://github.com/vsch/flexmark-java/issues/331
-
-
 

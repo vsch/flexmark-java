@@ -12,6 +12,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Stack;
 
+/**
+ * @deprecated use {@link LineFormattingAppendableImpl} instead
+ */
+@Deprecated
 public class FormattingAppendableImpl implements FormattingAppendable {
     private final LengthTrackingAppendable myAppendable;
     private final Stack<ConditionalFrame> myConditionalFrames;
@@ -50,6 +54,7 @@ public class FormattingAppendableImpl implements FormattingAppendable {
     private int myIndentOffset;
     private BasedSequence myPrefix;
     private BasedSequence myIndentPrefix;
+    private final Stack<BasedSequence> myPrefixStack;
 
     private int mySpacesAfterEOL;
 
@@ -58,7 +63,6 @@ public class FormattingAppendableImpl implements FormattingAppendable {
 
     // accumulated spaces and tabs that we were not sure would need to be output
     private int myPendingSpaces;
-    private final Stack<BasedSequence> myPrefixStack;
     private boolean myPassThrough;
 
     public FormattingAppendableImpl(final int formatOptions) {

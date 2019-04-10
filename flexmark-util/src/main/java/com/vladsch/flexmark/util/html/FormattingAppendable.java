@@ -30,8 +30,10 @@ import java.io.IOException;
  * &lt;li&gt;item text
  * child text
  * &lt;/li&gt;
+ * @deprecated  Use {@link LineFormattingAppendable} instead
  */
 @SuppressWarnings({ "UnusedReturnValue", "SameParameterValue" })
+@Deprecated
 public interface FormattingAppendable extends Appendable {
     // no IOExceptions are thrown, you can get the first IOException or null if did not have any
     IOException getIOException();
