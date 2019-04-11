@@ -1,18 +1,15 @@
 package com.vladsch.flexmark.jira.converter;
 
-import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.jira.converter.internal.JiraConverterNodeRenderer;
 import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.util.builder.Extension;
 import com.vladsch.flexmark.util.options.MutableDataHolder;
 
 /**
  * Extension for jira_converters
  * <p>
  * Create it with {@link #create()} and then configure it on the builders
- * ({@link com.vladsch.flexmark.parser.Parser.Builder#extensions(Iterable)},
- * {@link com.vladsch.flexmark.html.HtmlRenderer.Builder#extensions(Iterable)}).
- * </p>
  * <p>
  * The markdown AST is turned into JIRA formatted text
  * </p>

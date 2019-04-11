@@ -1,11 +1,11 @@
 package com.vladsch.flexmark.ext.xwiki.macros;
 
-import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.ext.xwiki.macros.internal.MacroBlockParser;
 import com.vladsch.flexmark.ext.xwiki.macros.internal.MacroInlineParser;
 import com.vladsch.flexmark.ext.xwiki.macros.internal.MacroNodeRenderer;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.util.builder.Extension;
 import com.vladsch.flexmark.util.options.DataKey;
 import com.vladsch.flexmark.util.options.MutableDataHolder;
 
@@ -13,12 +13,8 @@ import com.vladsch.flexmark.util.options.MutableDataHolder;
  * Extension for macros
  * <p>
  * Create it with {@link #create()} and then configure it on the builders
- * ({@link com.vladsch.flexmark.parser.Parser.Builder#extensions(Iterable)},
- * {@link com.vladsch.flexmark.html.HtmlRenderer.Builder#extensions(Iterable)}).
- * </p>
  * <p>
  * The parsed macros text is turned into {@link Macro} nodes.
- * </p>
  */
 
 // TODO: Rename this class to XWikiMacroExtension

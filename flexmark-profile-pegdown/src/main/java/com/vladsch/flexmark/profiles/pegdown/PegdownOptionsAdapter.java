@@ -1,6 +1,5 @@
 package com.vladsch.flexmark.profiles.pegdown;
 
-import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.ext.abbreviation.AbbreviationExtension;
 import com.vladsch.flexmark.ext.anchorlink.AnchorLinkExtension;
 import com.vladsch.flexmark.ext.autolink.AutolinkExtension;
@@ -23,6 +22,7 @@ import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.ParserEmulationProfile;
 import com.vladsch.flexmark.superscript.SuperscriptExtension;
 import com.vladsch.flexmark.util.KeepType;
+import com.vladsch.flexmark.util.builder.Extension;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.DataKey;
 import com.vladsch.flexmark.util.options.MutableDataSet;

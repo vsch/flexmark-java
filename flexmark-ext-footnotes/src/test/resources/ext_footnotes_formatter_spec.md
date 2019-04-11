@@ -11,7 +11,7 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 ## Footnotes
 
 Converts footnote references and definitions to footnotes in the HTML page. A footnote is a link
-reference starting with a ^ with the definition being the same: [^ref]: footnote.
+reference starting with a ^ with the definition being the same: `[^ref]: footnote`.
 
 A footnote definition is a container block that can contain any element as long as it is
 indented by 4 spaces or a tab from the indent level of the footnote.

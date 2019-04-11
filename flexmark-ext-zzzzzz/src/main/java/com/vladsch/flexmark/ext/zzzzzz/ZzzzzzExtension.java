@@ -1,11 +1,11 @@
 package com.vladsch.flexmark.ext.zzzzzz;
 
-import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.ext.zzzzzz.internal.*;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.html.renderer.LinkStatus;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.KeepType;
+import com.vladsch.flexmark.util.builder.Extension;
 import com.vladsch.flexmark.util.collection.DataValueFactory;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.DataKey;
@@ -15,12 +15,8 @@ import com.vladsch.flexmark.util.options.MutableDataHolder;
  * Extension for zzzzzzs
  * <p>
  * Create it with {@link #create()} and then configure it on the builders
- * ({@link com.vladsch.flexmark.parser.Parser.Builder#extensions(Iterable)},
- * {@link com.vladsch.flexmark.html.HtmlRenderer.Builder#extensions(Iterable)}).
- * </p>
  * <p>
  * The parsed zzzzzz text is turned into {@link Zzzzzz} nodes.
- * </p>
  */
 public class ZzzzzzExtension implements Parser.ParserExtension
         , HtmlRenderer.HtmlRendererExtension // zzzoptionszzz(NODE_RENDERER, PHASED_NODE_RENDERER)

@@ -1,11 +1,11 @@
 package com.vladsch.flexmark.ext.toc;
 
-import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.ext.toc.internal.*;
 import com.vladsch.flexmark.formatter.Formatter;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.html.renderer.AttributablePart;
 import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.util.builder.Extension;
 import com.vladsch.flexmark.util.options.DataKey;
 import com.vladsch.flexmark.util.options.MutableDataHolder;
 
@@ -13,13 +13,9 @@ import com.vladsch.flexmark.util.options.MutableDataHolder;
  * Extension for tocs
  * <p>
  * Create it with {@link #create()} and then configure it on the builders
- * ({@link Parser.Builder#extensions(Iterable)},
- * {@link HtmlRenderer.Builder#extensions(Iterable)}).
- * </p>
  * <p>
  * The parsed [TOC] text is turned into {@link SimTocBlock} nodes.
  * Rendered into table of contents based on the headings in the document
- * </p>
  */
 public class SimTocExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension, Formatter.FormatterExtension {
     // duplicated here for convenience

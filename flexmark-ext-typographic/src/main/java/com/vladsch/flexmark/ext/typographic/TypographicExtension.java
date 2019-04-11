@@ -1,9 +1,9 @@
 package com.vladsch.flexmark.ext.typographic;
 
-import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.ext.typographic.internal.*;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.util.builder.Extension;
 import com.vladsch.flexmark.util.options.DataKey;
 import com.vladsch.flexmark.util.options.MutableDataHolder;
 
@@ -11,12 +11,8 @@ import com.vladsch.flexmark.util.options.MutableDataHolder;
  * Extension for typographics
  * <p>
  * Create it with {@link #create()} and then configure it on the builders
- * ({@link com.vladsch.flexmark.parser.Parser.Builder#extensions(Iterable)},
- * {@link com.vladsch.flexmark.html.HtmlRenderer.Builder#extensions(Iterable)}).
- * </p>
  * <p>
  * The parsed typographic text is turned into {@link TypographicQuotes} and {@link TypographicSmarts} nodes.
- * </p>
  */
 public class TypographicExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension {
     public static final DataKey<Boolean> ENABLE_QUOTES = new DataKey<>("ENABLE_QUOTES", true);

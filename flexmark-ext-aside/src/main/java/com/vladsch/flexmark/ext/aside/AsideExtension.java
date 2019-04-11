@@ -1,10 +1,10 @@
 package com.vladsch.flexmark.ext.aside;
 
-import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.ext.aside.internal.AsideBlockParser;
 import com.vladsch.flexmark.ext.aside.internal.AsideNodeRenderer;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.util.builder.Extension;
 import com.vladsch.flexmark.util.collection.DynamicDefaultKey;
 import com.vladsch.flexmark.util.options.MutableDataHolder;
 
@@ -12,12 +12,8 @@ import com.vladsch.flexmark.util.options.MutableDataHolder;
  * Extension for ext_asides
  * <p>
  * Create it with {@link #create()} and then configure it on the builders
- * ({@link com.vladsch.flexmark.parser.Parser.Builder#extensions(Iterable)},
- * {@link com.vladsch.flexmark.html.HtmlRenderer.Builder#extensions(Iterable)}).
- * </p>
  * <p>
  * The parsed pipe prefixed text is turned into {@link AsideBlock} nodes.
- * </p>
  */
 public class AsideExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension {
     public static final DynamicDefaultKey<Boolean> EXTEND_TO_BLANK_LINE = new DynamicDefaultKey<>("EXTEND_TO_BLANK_LINE", Parser.BLOCK_QUOTE_EXTEND_TO_BLANK_LINE);

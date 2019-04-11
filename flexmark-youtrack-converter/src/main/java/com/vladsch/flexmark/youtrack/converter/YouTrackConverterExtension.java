@@ -1,8 +1,8 @@
 package com.vladsch.flexmark.youtrack.converter;
 
-import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.util.builder.Extension;
 import com.vladsch.flexmark.util.options.MutableDataHolder;
 import com.vladsch.flexmark.youtrack.converter.internal.YouTrackConverterNodeRenderer;
 
@@ -10,9 +10,6 @@ import com.vladsch.flexmark.youtrack.converter.internal.YouTrackConverterNodeRen
  * Extension for youtrack_converters
  * <p>
  * Create it with {@link #create()} and then configure it on the builders
- * ({@link com.vladsch.flexmark.parser.Parser.Builder#extensions(Iterable)},
- * {@link com.vladsch.flexmark.html.HtmlRenderer.Builder#extensions(Iterable)}).
- * </p>
  * <p>
  * The markdown AST is turned into YOUTRACK formatted text
  * </p>

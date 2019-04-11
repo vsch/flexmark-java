@@ -1,11 +1,11 @@
 package com.vladsch.flexmark.ext.gfm.issues;
 
-import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.ext.gfm.issues.internal.GfmIssuesInlineParserExtension;
 import com.vladsch.flexmark.ext.gfm.issues.internal.GfmIssuesJiraRenderer;
 import com.vladsch.flexmark.ext.gfm.issues.internal.GfmIssuesNodeRenderer;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.util.builder.Extension;
 import com.vladsch.flexmark.util.options.DataKey;
 import com.vladsch.flexmark.util.options.MutableDataHolder;
 
@@ -13,12 +13,8 @@ import com.vladsch.flexmark.util.options.MutableDataHolder;
  * Extension for GitHub Issues
  * <p>
  * Create it with {@link #create()} and then configure it on the builders
- * ({@link com.vladsch.flexmark.parser.Parser.Builder#extensions(Iterable)},
- * {@link com.vladsch.flexmark.html.HtmlRenderer.Builder#extensions(Iterable)}).
- * </p>
  * <p>
  * The parsed GitHub issue text is turned into {@link GfmIssue} nodes.
- * </p>
  */
 public class GfmIssuesExtension implements Parser.ParserExtension
         , HtmlRenderer.HtmlRendererExtension

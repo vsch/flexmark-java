@@ -1,6 +1,5 @@
 package com.vladsch.flexmark.ext.wikilink;
 
-import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.ext.wikilink.internal.WikiLinkJiraRenderer;
 import com.vladsch.flexmark.ext.wikilink.internal.WikiLinkLinkRefProcessor;
 import com.vladsch.flexmark.ext.wikilink.internal.WikiLinkLinkResolver;
@@ -8,6 +7,7 @@ import com.vladsch.flexmark.ext.wikilink.internal.WikiLinkNodeRenderer;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.html.renderer.LinkType;
 import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.util.builder.Extension;
 import com.vladsch.flexmark.util.collection.DynamicDefaultKey;
 import com.vladsch.flexmark.util.options.DataKey;
 import com.vladsch.flexmark.util.options.MutableDataHolder;
@@ -16,12 +16,8 @@ import com.vladsch.flexmark.util.options.MutableDataHolder;
  * Extension for wikilinks
  * <p>
  * Create it with {@link #create()} and then configure it on the builders
- * ({@link com.vladsch.flexmark.parser.Parser.Builder#extensions(Iterable)},
- * {@link com.vladsch.flexmark.html.HtmlRenderer.Builder#extensions(Iterable)}).
- * </p>
  * <p>
  * The parsed emoji shortcuts text regions are turned into {@link com.vladsch.flexmark.ext.wikilink.WikiLink} nodes.
- * </p>
  */
 public class WikiLinkExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension {
     public static final DataKey<Boolean> ALLOW_INLINES = new DataKey<>("ALLOW_INLINES", false);

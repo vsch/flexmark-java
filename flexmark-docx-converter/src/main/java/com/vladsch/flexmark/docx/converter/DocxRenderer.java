@@ -1,12 +1,7 @@
 package com.vladsch.flexmark.docx.converter;
 
-import com.vladsch.flexmark.Extension;
-import com.vladsch.flexmark.docx.converter.internal.*;
-import com.vladsch.flexmark.util.IRender;
-import com.vladsch.flexmark.util.ast.AllNodesVisitor;
-import com.vladsch.flexmark.util.ast.Block;
-import com.vladsch.flexmark.util.ast.Document;
-import com.vladsch.flexmark.util.ast.Node;
+import com.vladsch.flexmark.docx.converter.internal.CoreNodeDocxRenderer;
+import com.vladsch.flexmark.docx.converter.internal.DocxLinkResolver;
 import com.vladsch.flexmark.docx.converter.util.DocumentContentHandler;
 import com.vladsch.flexmark.docx.converter.util.DocxContextImpl;
 import com.vladsch.flexmark.docx.converter.util.XmlDocxSorter;
@@ -14,7 +9,13 @@ import com.vladsch.flexmark.docx.converter.util.XmlFormatter;
 import com.vladsch.flexmark.ext.emoji.EmojiExtension;
 import com.vladsch.flexmark.html.*;
 import com.vladsch.flexmark.html.renderer.*;
-import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.util.IRender;
+import com.vladsch.flexmark.util.ast.AllNodesVisitor;
+import com.vladsch.flexmark.util.ast.Block;
+import com.vladsch.flexmark.util.ast.Document;
+import com.vladsch.flexmark.util.ast.Node;
+import com.vladsch.flexmark.util.builder.BuilderBase;
+import com.vladsch.flexmark.util.builder.Extension;
 import com.vladsch.flexmark.util.collection.*;
 import com.vladsch.flexmark.util.dependency.FlatDependencyHandler;
 import com.vladsch.flexmark.util.html.Attributes;
@@ -321,11 +322,10 @@ public class DocxRenderer implements IRender {
     /**
      * Builder for configuring an {@link DocxRenderer}. See methods for default configuration.
      */
-    public static class Builder extends MutableDataSet implements RendererBuilder {
+    public static class Builder extends BuilderBase<Builder> implements RendererBuilder {
         List<AttributeProviderFactory> attributeProviderFactories = new ArrayList<AttributeProviderFactory>();
         List<NodeDocxRendererFactory> nodeDocxRendererFactories = new ArrayList<NodeDocxRendererFactory>();
         List<LinkResolverFactory> linkResolverFactories = new ArrayList<LinkResolverFactory>();
-        private final HashSet<Extension> loadedExtensions = new HashSet<Extension>();
         HeaderIdGeneratorFactory htmlIdGeneratorFactory = null;
 
         public Builder() {
@@ -334,44 +334,57 @@ public class DocxRenderer implements IRender {
 
         public Builder(DataHolder options) {
             super(options);
-
-            if (options.contains(Parser.EXTENSIONS)) {
-                extensions(get(Parser.EXTENSIONS));
-            }
+            loadExtensions();
         }
 
         public Builder(Builder other) {
             super(other);
 
             this.attributeProviderFactories.addAll(other.attributeProviderFactories);
-            this.nodeDocxRendererFactories.addAll(other.nodeDocxRendererFactories);
+            //this.nodeDocxRendererFactories.addAll(other.nodeDocxRendererFactories);
             this.linkResolverFactories.addAll(other.linkResolverFactories);
-            this.loadedExtensions.addAll(other.loadedExtensions);
             this.htmlIdGeneratorFactory = other.htmlIdGeneratorFactory;
         }
 
         public Builder(Builder other, DataHolder options) {
-            super(other);
+            this(other);
+            withOptions(options);
+        }
 
-            List<Extension> extensions = new ArrayList<Extension>();
-            for (Extension extension : get(Parser.EXTENSIONS)) {
-                extensions.add(extension);
+        @Override
+        protected void removeApiPoint(final Object apiPoint) {
+            if (apiPoint instanceof AttributeProviderFactory) this.attributeProviderFactories.remove(apiPoint);
+            else if (apiPoint instanceof NodeDocxRendererFactory) this.nodeDocxRendererFactories.remove(apiPoint);
+            else if (apiPoint instanceof LinkResolverFactory) this.linkResolverFactories.remove(apiPoint);
+            else if (apiPoint instanceof HeaderIdGeneratorFactory) this.htmlIdGeneratorFactory = null;
+            else {
+                throw new IllegalStateException("Unknown data point type: " + apiPoint.getClass().getName());
             }
+        }
 
-            if (options != null) {
-                for (DataKey key : options.keySet()) {
-                    if (key == Parser.EXTENSIONS) {
-                        for (Extension extension : options.get(Parser.EXTENSIONS)) {
-                            extensions.add(extension);
-                        }
-                    } else {
-                        set(key, options.get(key));
-                    }
-                }
+        @Override
+        protected void preloadExtension(final Extension extension) {
+            if (extension instanceof DocxRendererExtension) {
+                DocxRendererExtension docxRendererExtension = (DocxRendererExtension) extension;
+                docxRendererExtension.rendererOptions(this);
+            } else if (extension instanceof RendererExtension) {
+                RendererExtension docxRendererExtension = (RendererExtension) extension;
+                docxRendererExtension.rendererOptions(this);
             }
+        }
 
-            set(Parser.EXTENSIONS, extensions);
-            extensions(extensions);
+        @Override
+        protected boolean loadExtension(final Extension extension) {
+            if (extension instanceof DocxRendererExtension) {
+                DocxRendererExtension docxRendererExtension = (DocxRendererExtension) extension;
+                docxRendererExtension.extend(this);
+                return true;
+            } else if (extension instanceof RendererExtension) {
+                RendererExtension htmlRendererExtension = (RendererExtension) extension;
+                htmlRendererExtension.extend(this, this.get(HtmlRenderer.TYPE));
+                return true;
+            }
+            return false;
         }
 
         /**
@@ -394,6 +407,7 @@ public class DocxRenderer implements IRender {
         @SuppressWarnings("UnusedReturnValue")
         public Builder nodeFormatterFactory(NodeDocxRendererFactory nodeDocxRendererFactory) {
             this.nodeDocxRendererFactories.add(nodeDocxRendererFactory);
+            addExtensionApiPoint(nodeDocxRendererFactory);
             return this;
         }
 
@@ -410,6 +424,7 @@ public class DocxRenderer implements IRender {
         @Override
         public Builder linkResolverFactory(LinkResolverFactory linkResolverFactory) {
             this.linkResolverFactories.add(linkResolverFactory);
+            addExtensionApiPoint(linkResolverFactory);
             return this;
         }
 
@@ -422,6 +437,7 @@ public class DocxRenderer implements IRender {
         @Override
         public Builder attributeProviderFactory(AttributeProviderFactory attributeProviderFactory) {
             this.attributeProviderFactories.add(attributeProviderFactory);
+            addExtensionApiPoint(attributeProviderFactory);
             return this;
         }
 
@@ -438,44 +454,7 @@ public class DocxRenderer implements IRender {
                 throw new IllegalStateException("custom header id factory is already set to " + htmlIdGeneratorFactory.getClass().getName());
             }
             this.htmlIdGeneratorFactory = htmlIdGeneratorFactory;
-            return this;
-        }
-
-        /**
-         * @param extensions extensions to use on this HTML renderer
-         * @return {@code this}
-         */
-        public Builder extensions(Iterable<? extends Extension> extensions) {
-            // first give extensions a chance to modify options
-            for (Extension extension : extensions) {
-                if (extension instanceof DocxRendererExtension) {
-                    if (!loadedExtensions.contains(extension)) {
-                        DocxRendererExtension docxRendererExtension = (DocxRendererExtension) extension;
-                        docxRendererExtension.rendererOptions(this);
-                    }
-                } else if (extension instanceof RendererExtension) {
-                    if (!loadedExtensions.contains(extension)) {
-                        RendererExtension docxRendererExtension = (RendererExtension) extension;
-                        docxRendererExtension.rendererOptions(this);
-                    }
-                }
-            }
-
-            for (Extension extension : extensions) {
-                if (extension instanceof DocxRendererExtension) {
-                    if (!loadedExtensions.contains(extension)) {
-                        DocxRendererExtension docxRendererExtension = (DocxRendererExtension) extension;
-                        docxRendererExtension.extend(this);
-                        loadedExtensions.add(docxRendererExtension);
-                    }
-                } else if (extension instanceof RendererExtension) {
-                    if (!loadedExtensions.contains(extension)) {
-                        RendererExtension htmlRendererExtension = (RendererExtension) extension;
-                        htmlRendererExtension.extend(this, this.get(HtmlRenderer.TYPE));
-                        loadedExtensions.add(htmlRendererExtension);
-                    }
-                }
-            }
+            addExtensionApiPoint(htmlIdGeneratorFactory);
             return this;
         }
     }

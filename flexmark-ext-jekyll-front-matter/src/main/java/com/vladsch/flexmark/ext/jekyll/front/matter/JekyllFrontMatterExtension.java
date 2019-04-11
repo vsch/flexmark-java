@@ -1,25 +1,21 @@
 
 package com.vladsch.flexmark.ext.jekyll.front.matter;
 
-import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.ext.jekyll.front.matter.internal.JekyllFrontMatterBlockParser;
 import com.vladsch.flexmark.ext.jekyll.front.matter.internal.JekyllFrontMatterNodeFormatter;
 import com.vladsch.flexmark.ext.jekyll.front.matter.internal.JekyllFrontMatterNodeRenderer;
 import com.vladsch.flexmark.formatter.Formatter;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.util.builder.Extension;
 import com.vladsch.flexmark.util.options.MutableDataHolder;
 
 /**
  * Extension for jekyll_front_matters
  * <p>
  * Create it with {@link #create()} and then configure it on the builders
- * ({@link com.vladsch.flexmark.parser.Parser.Builder#extensions(Iterable)},
- * {@link com.vladsch.flexmark.html.HtmlRenderer.Builder#extensions(Iterable)}).
- * </p>
  * <p>
  * The parsed jekyll_front_matter text is turned into {@link JekyllFrontMatterBlock} nodes.
- * </p>
  */
 public class JekyllFrontMatterExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension, Formatter.FormatterExtension {
     private JekyllFrontMatterExtension() {

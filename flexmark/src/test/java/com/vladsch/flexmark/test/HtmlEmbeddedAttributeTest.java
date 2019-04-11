@@ -1,6 +1,5 @@
 package com.vladsch.flexmark.test;
 
-import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.ast.Paragraph;
 import com.vladsch.flexmark.html.EmbeddedAttributeProvider;
 import com.vladsch.flexmark.html.HtmlRenderer;
@@ -10,6 +9,7 @@ import com.vladsch.flexmark.parser.block.NodePostProcessorFactory;
 import com.vladsch.flexmark.util.NodeTracker;
 import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.Node;
+import com.vladsch.flexmark.util.builder.Extension;
 import com.vladsch.flexmark.util.html.Attributes;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.MutableDataHolder;

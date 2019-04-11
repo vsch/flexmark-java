@@ -1,18 +1,17 @@
 package com.vladsch.flexmark.profiles.pegdown;
 
+import com.vladsch.flexmark.ext.anchorlink.AnchorLinkExtension;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.spec.SpecReader;
 import com.vladsch.flexmark.test.ComboSpecTestCase;
+import com.vladsch.flexmark.util.builder.BuilderBase;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.MutableDataSet;
 import org.junit.runners.Parameterized;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static com.vladsch.flexmark.profiles.pegdown.Extensions.*;
 
@@ -29,7 +28,8 @@ public class ComboPegdownExtensionCompatibilitySpecTest extends ComboSpecTestCas
     static {
         optionsMap.put("hard-breaks", PegdownOptionsAdapter.flexmarkOptions((ALL & ~HARDWRAPS) | (ALL_OPTIONALS & ~(EXTANCHORLINKS | EXTANCHORLINKS_WRAP)) | HARDWRAPS)/*.toMutable().remove(Parser.EXTENSIONS)*/);
         optionsMap.put("anchor-links", PegdownOptionsAdapter.flexmarkOptions((ALL & ~HARDWRAPS) | (ALL_OPTIONALS & ~(EXTANCHORLINKS | EXTANCHORLINKS_WRAP)) | ANCHORLINKS)/*.toMutable().remove(Parser.EXTENSIONS)*/);
-        optionsMap.put("no-anchor-links", PegdownOptionsAdapter.flexmarkOptions((ALL & ~(HARDWRAPS | ANCHORLINKS)) | (ALL_OPTIONALS & ~(EXTANCHORLINKS | EXTANCHORLINKS_WRAP)))/*.toMutable().remove(Parser.EXTENSIONS)*/);
+        optionsMap.put("no-anchor-links", PegdownOptionsAdapter.flexmarkOptions((ALL & ~(HARDWRAPS | ANCHORLINKS)) | (ALL_OPTIONALS & ~(EXTANCHORLINKS | EXTANCHORLINKS_WRAP)))
+                .toMutable().set(BuilderBase.UNLOAD_EXTENSIONS, Collections.singleton(AnchorLinkExtension.create())));
         optionsMap.put("code-soft-breaks", new MutableDataSet().set(Parser.CODE_SOFT_LINE_BREAKS, true).set(HtmlRenderer.SOFT_BREAK, "\n"));
         optionsMap.put("code-soft-break-spaces", new MutableDataSet().set(Parser.CODE_SOFT_LINE_BREAKS, true).set(HtmlRenderer.SOFT_BREAK, " \t"));
     }

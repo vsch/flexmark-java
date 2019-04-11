@@ -1,6 +1,5 @@
 package com.vladsch.flexmark.ext.attributes;
 
-import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.ext.attributes.internal.*;
 import com.vladsch.flexmark.formatter.Formatter;
 import com.vladsch.flexmark.html.HtmlRenderer;
@@ -8,6 +7,7 @@ import com.vladsch.flexmark.html.RendererBuilder;
 import com.vladsch.flexmark.html.RendererExtension;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.KeepType;
+import com.vladsch.flexmark.util.builder.Extension;
 import com.vladsch.flexmark.util.collection.DataValueFactory;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.DataKey;
@@ -17,12 +17,8 @@ import com.vladsch.flexmark.util.options.MutableDataHolder;
  * Extension for attributes
  * <p>
  * Create it with {@link #create()} and then configure it on the builders
- * ({@link com.vladsch.flexmark.parser.Parser.Builder#extensions(Iterable)},
- * {@link com.vladsch.flexmark.html.HtmlRenderer.Builder#extensions(Iterable)}).
- * </p>
  * <p>
  * The parsed attributes text is turned into {@link AttributesNode} nodes.
- * </p>
  */
 public class AttributesExtension implements Parser.ParserExtension
         , RendererExtension

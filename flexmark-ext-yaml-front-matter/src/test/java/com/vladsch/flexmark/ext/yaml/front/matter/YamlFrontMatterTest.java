@@ -1,11 +1,11 @@
 package com.vladsch.flexmark.ext.yaml.front.matter;
 
-import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.test.RenderingTestCase;
+import com.vladsch.flexmark.util.builder.Extension;
 import org.junit.Test;
 
 import java.util.Collections;

@@ -1,12 +1,12 @@
 package com.vladsch.flexmark.ext.spec.example;
 
-import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.ext.spec.example.internal.RenderAs;
 import com.vladsch.flexmark.ext.spec.example.internal.SpecExampleBlockParser;
 import com.vladsch.flexmark.ext.spec.example.internal.SpecExampleNodeRenderer;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.spec.SpecReader;
+import com.vladsch.flexmark.util.builder.Extension;
 import com.vladsch.flexmark.util.options.DataKey;
 import com.vladsch.flexmark.util.options.MutableDataHolder;
 
@@ -14,12 +14,8 @@ import com.vladsch.flexmark.util.options.MutableDataHolder;
  * Extension for spec_examples
  * <p>
  * Create it with {@link #create()} and then configure it on the builders
- * ({@link com.vladsch.flexmark.parser.Parser.Builder#extensions(Iterable)},
- * {@link com.vladsch.flexmark.html.HtmlRenderer.Builder#extensions(Iterable)}).
- * </p>
  * <p>
  * The parsed spec_example text is turned into {@link com.vladsch.flexmark.spec.SpecExample} nodes.
- * </p>
  */
 public class SpecExampleExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension {
     public static final DataKey<Boolean> SPEC_EXAMPLE_RENDER_RAW_HTML = new DataKey<>("SPEC_EXAMPLE_RENDER_RAW_HTML", true);

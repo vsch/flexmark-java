@@ -3,14 +3,17 @@ package com.vladsch.flexmark.test;
 import com.vladsch.flexmark.ast.FencedCodeBlock;
 import com.vladsch.flexmark.ast.Image;
 import com.vladsch.flexmark.ast.Link;
-import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.html.*;
 import com.vladsch.flexmark.html.renderer.*;
 import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.html.Attributes;
 import com.vladsch.flexmark.util.options.DataHolder;
+import com.vladsch.flexmark.util.options.DataKey;
+import com.vladsch.flexmark.util.options.MutableDataSet;
 import org.junit.Test;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -173,7 +176,6 @@ public class HtmlRendererTest {
                             public void render(Link node, NodeRendererContext context, HtmlWriter html) {
                                 if (node.getText().equals("bar")) {
                                     context.getHtmlWriter().text("test");
-
                                 } else {
                                     context.delegateRender();
                                 }
@@ -208,12 +210,11 @@ public class HtmlRendererTest {
                             public void render(Link node, NodeRendererContext context, HtmlWriter html) {
                                 if (node.getText().equals("bar")) {
                                     context.getHtmlWriter().text("test");
-
                                 } else {
                                     StringBuilder out = new StringBuilder();
-                                    NodeRendererContext subContext = context.getDelegatedSubContext(out,true);
+                                    NodeRendererContext subContext = context.getDelegatedSubContext(out, true);
                                     if (node.getText().equals("raw")) {
-                                       subContext.doNotRenderLinks();
+                                        subContext.doNotRenderLinks();
                                     }
                                     subContext.delegateRender();
                                     html.raw(out);
@@ -397,6 +398,52 @@ public class HtmlRendererTest {
     public void imageAltTextWithEntities() {
         assertEquals("<p><img src=\"/url\" alt=\"foo \u00E4\" /></p>\n",
                 defaultRenderer().render(parse("![foo &auml;](/url)\n")));
+    }
+
+    static class CustomLinkResolverImpl implements LinkResolver {
+        public static final DataKey<String> DOC_RELATIVE_URL = new DataKey<>("DOC_RELATIVE_URL", "");
+        
+        final String docUrl;
+
+        public CustomLinkResolverImpl(final LinkResolverContext context) {
+            docUrl = DOC_RELATIVE_URL.getFrom(context.getOptions());
+        }
+
+        @Override
+        public ResolvedLink resolveLink(final Node node, final LinkResolverContext context, final ResolvedLink link) {
+            if (node instanceof Link) {
+                Link linkNode = (Link) node;
+                if (linkNode.getUrl().equals("/url")) {
+                    return link.withUrl("www.url.com" + docUrl);
+                }
+            }
+            return null;
+        }
+
+        static class Factory extends IndependentLinkResolverFactory {
+            @Override
+            public LinkResolver create(final LinkResolverContext context) {
+                return new CustomLinkResolverImpl(context);
+            }
+        }
+    }
+
+    @Test
+    public void withOptions_customLinkResolver() {
+        // make sure custom link resolver is preserved when using withOptions() on HTML builder
+        final DataHolder OPTIONS = new MutableDataSet().set(CustomLinkResolverImpl.DOC_RELATIVE_URL, "/url");
+        final DataHolder OPTIONS1 = new MutableDataSet().set(CustomLinkResolverImpl.DOC_RELATIVE_URL, "/url1");
+        final DataHolder OPTIONS2 = new MutableDataSet().set(CustomLinkResolverImpl.DOC_RELATIVE_URL, "/url2");
+        HtmlRenderer renderer = HtmlRenderer.builder(OPTIONS).linkResolverFactory(new CustomLinkResolverImpl.Factory()).build();
+        HtmlRenderer renderer1 = renderer.withOptions(OPTIONS1);
+        HtmlRenderer renderer2 = renderer.withOptions(OPTIONS2);
+        String rendered = renderer.render(parse("foo [bar](/url)"));
+        String rendered1 = renderer1.render(parse("foo [bar](/url)"));
+        String rendered2 = renderer2.render(parse("foo [bar](/url)"));
+
+        assertEquals("<p>foo <a href=\"www.url.com/url\">bar</a></p>\n", rendered);
+        assertEquals("<p>foo <a href=\"www.url.com/url1\">bar</a></p>\n", rendered1);
+        assertEquals("<p>foo <a href=\"www.url.com/url2\">bar</a></p>\n", rendered2);
     }
 
     private static HtmlRenderer defaultRenderer() {

@@ -1,6 +1,5 @@
 package com.vladsch.flexmark.ext.tables;
 
-import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.ext.tables.internal.TableJiraRenderer;
 import com.vladsch.flexmark.ext.tables.internal.TableNodeFormatter;
 import com.vladsch.flexmark.ext.tables.internal.TableNodeRenderer;
@@ -8,6 +7,7 @@ import com.vladsch.flexmark.ext.tables.internal.TableParagraphPreProcessor;
 import com.vladsch.flexmark.formatter.Formatter;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.util.builder.Extension;
 import com.vladsch.flexmark.util.format.TableFormatOptions;
 import com.vladsch.flexmark.util.format.TableManipulator;
 import com.vladsch.flexmark.util.format.options.DiscretionaryText;
@@ -20,12 +20,8 @@ import com.vladsch.flexmark.util.options.MutableDataHolder;
  * Extension for GFM tables using "|" pipes (GitHub Flavored Markdown).
  * <p>
  * Create it with {@link #create()} and then configure it on the builders
- * ({@link com.vladsch.flexmark.parser.Parser.Builder#extensions(Iterable)},
- * {@link com.vladsch.flexmark.html.HtmlRenderer.Builder#extensions(Iterable)}).
- * </p>
  * <p>
  * The parsed tables are turned into {@link TableBlock} blocks.
- * </p>
  */
 @SuppressWarnings("WeakerAccess")
 public class TablesExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension, Formatter.FormatterExtension {

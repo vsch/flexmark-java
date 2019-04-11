@@ -1,12 +1,12 @@
 package com.vladsch.flexmark.ext.admonition;
 
-import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.ext.admonition.internal.AdmonitionBlockParser;
 import com.vladsch.flexmark.ext.admonition.internal.AdmonitionNodeFormatter;
 import com.vladsch.flexmark.ext.admonition.internal.AdmonitionNodeRenderer;
 import com.vladsch.flexmark.formatter.Formatter;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.util.builder.Extension;
 import com.vladsch.flexmark.util.collection.DataValueFactory;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.DataKey;
@@ -20,12 +20,8 @@ import java.util.Map;
  * Extension for admonitions
  * <p>
  * Create it with {@link #create()} and then configure it on the builders
- * ({@link com.vladsch.flexmark.parser.Parser.Builder#extensions(Iterable)},
- * {@link com.vladsch.flexmark.html.HtmlRenderer.Builder#extensions(Iterable)}).
- * </p>
  * <p>
  * The parsed admonition text is turned into {@link AdmonitionBlock} nodes.
- * </p>
  */
 public class AdmonitionExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension, Formatter.FormatterExtension
         // , Parser.ReferenceHoldingExtension
