@@ -113,8 +113,19 @@ Future 0.50.0
 0.42.0
 ------
 
-* Fix: [#332, withOptions forgets about old link resolvers] 
-  * Break: move `com.vladsch.flexmark.Extension` to `com.vladsch.flexmark.util.builder.Extension`
+* Fix: [#332, withOptions forgets about old link resolvers]
+  * Break: move `com.vladsch.flexmark.Extension` to
+    `com.vladsch.flexmark.util.builder.Extension`
+  * Fix: IntelliJ Migration contained in [migrate flexmark-java 0_40_x to 0_42_0], to use:
+    * copy to IntelliJ application settings to `migrations` subdirectory
+    * if you have the project which you want to migrate open, then close it
+    * open the project in IntelliJ Ultimate or Community
+    * update the flexmark-java dependency version to 0.42.0 (or later) and make sure the new
+      library is downloaded/updated in the project.
+    * use menu `Refactor` > `Migrate...`
+    * select `migrate flexmark-java 0.42.x to 0.50.0`
+    * press `Run`
+    * in the refactoring preview tool window that opens hit `Do Refactor`
   * Add: common builder base to handle unloading extensions
   * Add: `BuilderBase.RELOAD_EXTENSIONS` default `true`, if `true` then will unload loaded
     extension from the builder when `withOptions()` is used on: `Parser`, `HtmlRenderer`,
@@ -122,11 +133,11 @@ Future 0.50.0
     loaded. The latter is slightly faster because loaded extensions are not re-loaded but will
     not change extension configuration for loaded extensions based on new options.
   * Fix: `HtmlParser.Builder` constructor with options does not preserve all already loaded
-    extensions and custom api factories 
+    extensions and custom api factories
   * Fix: `Parser.Builder` constructor with options does not preserve all already loaded
-    extensions and custom api factories 
+    extensions and custom api factories
   * Fix: `Formatter.Builder` constructor with options does not preserve all already loaded
-    extensions and custom api factories 
+    extensions and custom api factories
   * Fix: `DocxRenderer.Builder` constructor with options does not preserve all already loaded
     extensions and custom api factories
   * Add: `BuilderBase.UNLOAD_EXTENSIONS`, default `Extension.EMPTY_LIST`, all extensions in the
@@ -136,8 +147,8 @@ Future 0.50.0
 0.40.34
 -------
 
-* Fix: [#328, Html2mark - missing newline when paragraph followed by div] 
-* Fix: [#331, Ability to replace empty \<p\> with \<br\> during html2mark conversion] 
+* Fix: [#328, Html2mark - missing newline when paragraph followed by div]
+* Fix: [#331, Ability to replace empty \<p\> with \<br\> during html2mark conversion]
 * Fix: NPE in `TableParagraphPreProcessor`
 * Fix: `AutolinkNodePostProcessor` processing links out of order causing sequence end/start
   reversal.
@@ -167,8 +178,8 @@ Future 0.50.0
 -------
 
 * Fix: upgrade dependencies
-  * OpenHtmlToPdf -> 0.0.1-RC19 
-  * docx4j -> 6.1.2 
+  * OpenHtmlToPdf -> 0.0.1-RC19
+  * docx4j -> 6.1.2
 * Add: parse int or default to `Utils.java`
 
 0.40.24
@@ -189,14 +200,14 @@ Future 0.50.0
   `ParserEmulationProfile.PEGDOWN`
 * Fix: [#323, TOC generation improvement], profile setting HeaderId generation to `false` even
   though `PegdownExtensions.ANCHORLINKS` is not used
-* Add: css option to PDF export and use as default css from
-      [#323, TOC generation improvement], thanks to @jvdvegt
-  * Add: `PdfConverterExtension.DEFAULT_CSS` data key with default value of embedded CSS. 
+* Add: css option to PDF export and use as default css from [#323, TOC generation improvement],
+  thanks to @jvdvegt
+  * Add: `PdfConverterExtension.DEFAULT_CSS` data key with default value of embedded CSS.
   * Add: `PdfConverterExtension.embedCss(String html, String css)` will embed the css in html by
     inserting it between `<head>` and `</head>` wrapped in `<style>` and `</style>`. Does its
     best to generate valid HTML, use it if your don't want to bother creating your own HTML
     document with embedded CSS.
-  
+
   :information_source: Default CSS is only added if
   `PdfConverterExtension.exportToPdf(OutputStream, String, String, DataHolder)` is used to
   provide options. For all other calls you need to embed the default css into your HTML string
@@ -1341,15 +1352,13 @@ setting either will affect both keys. For information on these keys see
 [#318, Ability to disable table caption in FlexmarkHtmlParser]: https://github.com/vsch/flexmark-java/issues/318
 [#323, TOC generation improvement]: https://github.com/vsch/flexmark-java/issues/323
 [#326, flexmark-html-parser - multiple \<code\> inside \<pre\> bug]: https://github.com/vsch/flexmark-java/issues/326
-[Admonition Extension, Material for MkDocs]: https://squidfunk.github.io/mkdocs-material/extensions/admonition/
-[Awesome Console]: https://plugins.jetbrains.com/plugin/7677-awesome-console "Awesome Console"
-[migrate 0_35_x to 0_40_0.xml]: /assets/migrations/migrate%20flexmark-java%200_35_x%20to%200_40_0.xml
-[NodeInsertingPostProcessorSample.java]: https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/samples/NodeInsertingPostProcessorSample.java
-[YouTrack: IDEA-207453]: https://youtrack.jetbrains.com/issue/IDEA-207453 "Add Conversion of ref anchor to UrlFilter for file line navigation"
 [#328, Html2mark - missing newline when paragraph followed by div]: https://github.com/vsch/flexmark-java/issues/328
 [#331, Ability to replace empty \<p\> with \<br\> during html2mark conversion]: https://github.com/vsch/flexmark-java/issues/331
 [#332, withOptions forgets about old link resolvers]: https://github.com/vsch/flexmark-java/issues/332
-
-
-
+[Admonition Extension, Material for MkDocs]: https://squidfunk.github.io/mkdocs-material/extensions/admonition/
+[Awesome Console]: https://plugins.jetbrains.com/plugin/7677-awesome-console "Awesome Console"
+[migrate 0_35_x to 0_40_0.xml]: /assets/migrations/migrate%20flexmark-java%200_35_x%20to%200_40_0.xml
+[migrate flexmark-java 0_40_x to 0_42_0]: https://github.com/vsch/flexmark-java/blob/master/assets/migrations/migrate%20flexmark-java%200_40_x%20to%200_42_0.xml
+[NodeInsertingPostProcessorSample.java]: https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/samples/NodeInsertingPostProcessorSample.java
+[YouTrack: IDEA-207453]: https://youtrack.jetbrains.com/issue/IDEA-207453 "Add Conversion of ref anchor to UrlFilter for file line navigation"
 
