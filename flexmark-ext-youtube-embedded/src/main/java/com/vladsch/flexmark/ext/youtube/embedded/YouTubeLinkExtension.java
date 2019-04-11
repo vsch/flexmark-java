@@ -1,10 +1,10 @@
 package com.vladsch.flexmark.ext.youtube.embedded;
 
-import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.ext.youtube.embedded.internal.YouTubeLinkNodePostProcessor;
 import com.vladsch.flexmark.ext.youtube.embedded.internal.YouTubeLinkNodeRenderer;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.util.builder.Extension;
 import com.vladsch.flexmark.util.options.MutableDataHolder;
 
 public class YouTubeLinkExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension {

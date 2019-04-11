@@ -1,14 +1,14 @@
 package com.vladsch.flexmark.html;
 
-import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.ast.HtmlBlock;
 import com.vladsch.flexmark.ast.HtmlInline;
 import com.vladsch.flexmark.html.renderer.*;
-import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.IRender;
 import com.vladsch.flexmark.util.Pair;
 import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.Node;
+import com.vladsch.flexmark.util.builder.BuilderBase;
+import com.vladsch.flexmark.util.builder.Extension;
 import com.vladsch.flexmark.util.collection.DataValueFactory;
 import com.vladsch.flexmark.util.collection.DynamicDefaultKey;
 import com.vladsch.flexmark.util.dependency.DependencyHandler;
@@ -159,7 +159,7 @@ public class HtmlRenderer implements IRender {
             // add it first so the rest can override it if needed
             values.add(0, EmbeddedAttributeProvider.Factory);
         }
-        
+
         this.attributeProviderFactories = FlatDependencyHandler.computeDependencies(values);
         this.linkResolverFactories = FlatDependencyHandler.computeDependencies(builder.linkResolverFactories);
     }
@@ -266,11 +266,10 @@ public class HtmlRenderer implements IRender {
     /**
      * Builder for configuring an {@link HtmlRenderer}. See methods for default configuration.
      */
-    public static class Builder extends MutableDataSet implements RendererBuilder {
+    public static class Builder extends BuilderBase<Builder> implements RendererBuilder {
         Map<Class, AttributeProviderFactory> attributeProviderFactories = new LinkedHashMap<>();
         List<NodeRendererFactory> nodeRendererFactories = new ArrayList<NodeRendererFactory>();
         List<LinkResolverFactory> linkResolverFactories = new ArrayList<LinkResolverFactory>();
-        private final HashSet<Extension> loadedExtensions = new HashSet<Extension>();
         HeaderIdGeneratorFactory htmlIdGeneratorFactory = null;
 
         public Builder() {
@@ -279,48 +278,57 @@ public class HtmlRenderer implements IRender {
 
         public Builder(DataHolder options) {
             super(options);
-
-            if (options.contains(Parser.EXTENSIONS)) {
-                extensions(get(Parser.EXTENSIONS));
-            }
+            loadExtensions();
         }
 
         public Builder(Builder other) {
             super(other);
 
             this.attributeProviderFactories.putAll(other.attributeProviderFactories);
-            this.nodeRendererFactories.addAll(other.nodeRendererFactories);
+            //this.nodeRendererFactories.addAll(other.nodeRendererFactories);
             this.linkResolverFactories.addAll(other.linkResolverFactories);
-            this.loadedExtensions.addAll(other.loadedExtensions);
             this.htmlIdGeneratorFactory = other.htmlIdGeneratorFactory;
         }
 
         public Builder(Builder other, DataHolder options) {
-            super(other);
+            this(other);
+            withOptions(options);
+        }
 
-            List<Extension> extensions = new ArrayList<Extension>();
-            HashSet<Class> extensionSet = new HashSet<Class>();
-            for (Extension extension : get(Parser.EXTENSIONS)) {
-                extensions.add(extension);
-                extensionSet.add(extension.getClass());
+        @Override
+        protected void removeApiPoint(final Object apiPoint) {
+            if (apiPoint instanceof AttributeProviderFactory) this.attributeProviderFactories.remove(apiPoint.getClass());
+            else if (apiPoint instanceof NodeRendererFactory) this.nodeRendererFactories.remove(apiPoint);
+            else if (apiPoint instanceof LinkResolverFactory) this.linkResolverFactories.remove(apiPoint);
+            else if (apiPoint instanceof HeaderIdGeneratorFactory) this.htmlIdGeneratorFactory = null;
+            else {
+                throw new IllegalStateException("Unknown data point type: " + apiPoint.getClass().getName());
             }
+        }
 
-            if (options != null) {
-                for (DataKey key : options.keySet()) {
-                    if (key == Parser.EXTENSIONS) {
-                        for (Extension extension : options.get(Parser.EXTENSIONS)) {
-                            if (!extensionSet.contains(extension.getClass())) {
-                                extensions.add(extension);
-                            }
-                        }
-                    } else {
-                        set(key, options.get(key));
-                    }
-                }
+        @Override
+        protected void preloadExtension(final Extension extension) {
+            if (extension instanceof HtmlRendererExtension) {
+                HtmlRendererExtension htmlRendererExtension = (HtmlRendererExtension) extension;
+                htmlRendererExtension.rendererOptions(this);
+            } else if (extension instanceof RendererExtension) {
+                RendererExtension htmlRendererExtension = (RendererExtension) extension;
+                htmlRendererExtension.rendererOptions(this);
             }
+        }
 
-            set(Parser.EXTENSIONS, extensions);
-            extensions(extensions);
+        @Override
+        protected boolean loadExtension(final Extension extension) {
+            if (extension instanceof HtmlRendererExtension) {
+                HtmlRendererExtension htmlRendererExtension = (HtmlRendererExtension) extension;
+                htmlRendererExtension.extend(this, this.get(HtmlRenderer.TYPE));
+                return true;
+            } else if (extension instanceof RendererExtension) {
+                RendererExtension htmlRendererExtension = (RendererExtension) extension;
+                htmlRendererExtension.extend(this, this.get(HtmlRenderer.TYPE));
+                return true;
+            }
+            return false;
         }
 
         /**
@@ -404,6 +412,7 @@ public class HtmlRenderer implements IRender {
          */
         public Builder attributeProviderFactory(AttributeProviderFactory attributeProviderFactory) {
             this.attributeProviderFactories.put(attributeProviderFactory.getClass(), attributeProviderFactory);
+            addExtensionApiPoint(attributeProviderFactory);
             return this;
         }
 
@@ -419,6 +428,7 @@ public class HtmlRenderer implements IRender {
          */
         public Builder nodeRendererFactory(NodeRendererFactory nodeRendererFactory) {
             this.nodeRendererFactories.add(nodeRendererFactory);
+            addExtensionApiPoint(nodeRendererFactory);
             return this;
         }
 
@@ -434,6 +444,7 @@ public class HtmlRenderer implements IRender {
          */
         public Builder linkResolverFactory(LinkResolverFactory linkResolverFactory) {
             this.linkResolverFactories.add(linkResolverFactory);
+            addExtensionApiPoint(linkResolverFactory);
             return this;
         }
 
@@ -449,44 +460,7 @@ public class HtmlRenderer implements IRender {
                 throw new IllegalStateException("custom header id factory is already set to " + htmlIdGeneratorFactory.getClass().getName());
             }
             this.htmlIdGeneratorFactory = htmlIdGeneratorFactory;
-            return this;
-        }
-
-        /**
-         * @param extensions extensions to use on this HTML renderer
-         * @return {@code this}
-         */
-        public Builder extensions(Iterable<? extends Extension> extensions) {
-            // first give extensions a chance to modify options
-            for (Extension extension : extensions) {
-                if (extension instanceof HtmlRendererExtension) {
-                    if (!loadedExtensions.contains(extension)) {
-                        HtmlRendererExtension htmlRendererExtension = (HtmlRendererExtension) extension;
-                        htmlRendererExtension.rendererOptions(this);
-                    }
-                } else if (extension instanceof RendererExtension) {
-                    if (!loadedExtensions.contains(extension)) {
-                        RendererExtension htmlRendererExtension = (RendererExtension) extension;
-                        htmlRendererExtension.rendererOptions(this);
-                    }
-                }
-            }
-
-            for (Extension extension : extensions) {
-                if (extension instanceof HtmlRendererExtension) {
-                    if (!loadedExtensions.contains(extension)) {
-                        HtmlRendererExtension htmlRendererExtension = (HtmlRendererExtension) extension;
-                        htmlRendererExtension.extend(this, this.get(HtmlRenderer.TYPE));
-                        loadedExtensions.add(htmlRendererExtension);
-                    }
-                } else if (extension instanceof RendererExtension) {
-                    if (!loadedExtensions.contains(extension)) {
-                        RendererExtension htmlRendererExtension = (RendererExtension) extension;
-                        htmlRendererExtension.extend(this, this.get(HtmlRenderer.TYPE));
-                        loadedExtensions.add(htmlRendererExtension);
-                    }
-                }
-            }
+            addExtensionApiPoint(htmlIdGeneratorFactory);
             return this;
         }
     }

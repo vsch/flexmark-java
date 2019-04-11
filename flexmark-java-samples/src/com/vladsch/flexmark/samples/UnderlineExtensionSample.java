@@ -1,9 +1,7 @@
 package com.vladsch.flexmark.samples;
 
-import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.ast.DelimitedNode;
-import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.html.CustomNodeRenderer;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.html.HtmlWriter;
@@ -16,6 +14,7 @@ import com.vladsch.flexmark.parser.InlineParser;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.delimiter.DelimiterProcessor;
 import com.vladsch.flexmark.parser.delimiter.DelimiterRun;
+import com.vladsch.flexmark.util.builder.Extension;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.MutableDataHolder;
 import com.vladsch.flexmark.util.options.MutableDataSet;

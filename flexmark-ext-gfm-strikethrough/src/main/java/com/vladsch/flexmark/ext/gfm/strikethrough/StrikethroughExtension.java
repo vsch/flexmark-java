@@ -1,12 +1,12 @@
 package com.vladsch.flexmark.ext.gfm.strikethrough;
 
-import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.ext.gfm.strikethrough.internal.StrikethroughDelimiterProcessor;
 import com.vladsch.flexmark.ext.gfm.strikethrough.internal.StrikethroughJiraRenderer;
 import com.vladsch.flexmark.ext.gfm.strikethrough.internal.StrikethroughNodeRenderer;
 import com.vladsch.flexmark.ext.gfm.strikethrough.internal.StrikethroughYouTrackRenderer;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.util.builder.Extension;
 import com.vladsch.flexmark.util.options.DataKey;
 import com.vladsch.flexmark.util.options.MutableDataHolder;
 
@@ -14,12 +14,8 @@ import com.vladsch.flexmark.util.options.MutableDataHolder;
  * Extension for GFM strikethrough using ~~ (GitHub Flavored Markdown).
  * <p>
  * Create it with {@link #create()} and then configure it on the builders
- * ({@link com.vladsch.flexmark.parser.Parser.Builder#extensions(Iterable)},
- * {@link com.vladsch.flexmark.html.HtmlRenderer.Builder#extensions(Iterable)}).
- * </p>
  * <p>
  * The parsed strikethrough text regions are turned into {@link Strikethrough} nodes.
- * </p>
  */
 public class StrikethroughExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension {
     public static final DataKey<String> STRIKETHROUGH_STYLE_HTML_OPEN = StrikethroughSubscriptExtension.STRIKETHROUGH_STYLE_HTML_OPEN;

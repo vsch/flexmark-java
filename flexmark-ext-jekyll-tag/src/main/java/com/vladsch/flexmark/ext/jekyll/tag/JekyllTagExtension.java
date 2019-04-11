@@ -1,11 +1,11 @@
 package com.vladsch.flexmark.ext.jekyll.tag;
 
-import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.ext.jekyll.tag.internal.JekyllTagBlockParser;
 import com.vladsch.flexmark.ext.jekyll.tag.internal.JekyllTagInlineParserExtension;
 import com.vladsch.flexmark.ext.jekyll.tag.internal.JekyllTagNodeRenderer;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.util.builder.Extension;
 import com.vladsch.flexmark.util.collection.DataValueFactory;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.DataKey;
@@ -19,12 +19,8 @@ import java.util.Map;
  * Extension for jekyll_tags
  * <p>
  * Create it with {@link #create()} and then configure it on the builders
- * ({@link com.vladsch.flexmark.parser.Parser.Builder#extensions(Iterable)},
- * {@link com.vladsch.flexmark.html.HtmlRenderer.Builder#extensions(Iterable)}).
- * </p>
  * <p>
  * The parsed jekyll_tag text is turned into {@link JekyllTag} nodes.
- * </p>
  */
 public class JekyllTagExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension {
     public static final DataKey<Boolean> ENABLE_INLINE_TAGS = new DataKey<>("ENABLE_INLINE_TAGS", true);

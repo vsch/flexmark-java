@@ -1,6 +1,5 @@
 package com.vladsch.flexmark.ext.gfm.tables;
 
-import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.html.AttributeProvider;
 import com.vladsch.flexmark.html.AttributeProviderFactory;
@@ -11,6 +10,7 @@ import com.vladsch.flexmark.html.renderer.LinkResolverContext;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.test.RenderingTestCase;
+import com.vladsch.flexmark.util.builder.Extension;
 import com.vladsch.flexmark.util.html.Attributes;
 import org.junit.Test;
 

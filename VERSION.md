@@ -6,7 +6,7 @@ flexmark-java
 [TOC]: # " "
 
 - [Future 0.50.0](#future-0500)
-- [0.40.36](#04036)
+- [0.42.0](#0420)
 - [0.40.34](#04034)
 - [0.40.32](#04032)
 - [0.40.30](#04030)
@@ -101,10 +101,28 @@ Future 0.50.0
 * [ ] Add: `<!-- @formatter:on -->` and `<!-- @formatter:on -->` tags to `Formatter` for
       controlling non-formatting regions.
 
-0.40.36
--------
+0.42.0
+------
 
-* Fix:
+* Fix: [#332, withOptions forgets about old link resolvers] 
+  * Break: move `com.vladsch.flexmark.Extension` to `com.vladsch.flexmark.util.builder.Extension`
+  * Add: common builder base to handle unloading extensions
+  * Add: `BuilderBase.RELOAD_EXTENSIONS` default `true`, if `true` then will unload loaded
+    extension from the builder when `withOptions()` is used on: `Parser`, `HtmlRenderer`,
+    `Formatter` or `DocxRenderer`. If `false` then will not reload extensions which are already
+    loaded. The latter is slightly faster because loaded extensions are not re-loaded but will
+    not change extension configuration for loaded extensions based on new options.
+  * Fix: `HtmlParser.Builder` constructor with options does not preserve all already loaded
+    extensions and custom api factories 
+  * Fix: `Parser.Builder` constructor with options does not preserve all already loaded
+    extensions and custom api factories 
+  * Fix: `Formatter.Builder` constructor with options does not preserve all already loaded
+    extensions and custom api factories 
+  * Fix: `DocxRenderer.Builder` constructor with options does not preserve all already loaded
+    extensions and custom api factories
+  * Add: `BuilderBase.UNLOAD_EXTENSIONS`, default `Extension.EMPTY_LIST`, all extensions in the
+    list will be removed. Used only when using `withOptions()` and providing new options with
+    this key set. Used during testing to remove default extensions.
 
 0.40.34
 -------
@@ -1321,4 +1339,10 @@ setting either will affect both keys. For information on these keys see
 [migrate 0_35_x to 0_40_0.xml]: /assets/migrations/migrate%20flexmark-java%200_35_x%20to%200_40_0.xml
 [NodeInsertingPostProcessorSample.java]: https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/samples/NodeInsertingPostProcessorSample.java
 [YouTrack: IDEA-207453]: https://youtrack.jetbrains.com/issue/IDEA-207453 "Add Conversion of ref anchor to UrlFilter for file line navigation"
+[#328, Html2mark - missing newline when paragraph followed by div]: https://github.com/vsch/flexmark-java/issues/328
+[#331, Ability to replace empty \<p\> with \<br\> during html2mark conversion]: https://github.com/vsch/flexmark-java/issues/331
+[#332, withOptions forgets about old link resolvers]: https://github.com/vsch/flexmark-java/issues/332
+
+
+
 

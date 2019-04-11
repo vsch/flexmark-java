@@ -1,4 +1,4 @@
-package com.vladsch.flexmark;
+package com.vladsch.flexmark.util.builder;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -15,8 +15,6 @@ import java.util.Set;
  * Bor convenience and by convention, classes that implement this method
  * also have a static create() method that returns an instance of the extension.
  *
- * @see com.vladsch.flexmark.parser.Parser.ParserExtension
- * @see com.vladsch.flexmark.html.HtmlRenderer.HtmlRendererExtension
  */
 public interface Extension {
     Set<Extension> EMPTY_SET = new HashSet<Extension>();

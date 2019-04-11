@@ -1,11 +1,11 @@
 package com.vladsch.flexmark.ext.macros;
 
-import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.ext.macros.internal.*;
 import com.vladsch.flexmark.formatter.Formatter;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.KeepType;
+import com.vladsch.flexmark.util.builder.Extension;
 import com.vladsch.flexmark.util.collection.DataValueFactory;
 import com.vladsch.flexmark.util.format.options.ElementPlacement;
 import com.vladsch.flexmark.util.format.options.ElementPlacementSort;
@@ -14,15 +14,11 @@ import com.vladsch.flexmark.util.options.DataKey;
 import com.vladsch.flexmark.util.options.MutableDataHolder;
 
 /**
- * Extension for macross
+ * Extension for macros
  * <p>
  * Create it with {@link #create()} and then configure it on the builders
- * ({@link com.vladsch.flexmark.parser.Parser.Builder#extensions(Iterable)},
- * {@link com.vladsch.flexmark.html.HtmlRenderer.Builder#extensions(Iterable)}).
- * </p>
  * <p>
  * The parsed macros text is turned into {@link MacroReference} nodes.
- * </p>
  */
 public class MacrosExtension implements Parser.ParserExtension
         , HtmlRenderer.HtmlRendererExtension

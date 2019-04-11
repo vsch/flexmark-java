@@ -1,6 +1,5 @@
 package com.vladsch.flexmark.parser;
 
-import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.ast.util.ReferenceRepository;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.block.BlockPreProcessorFactory;
@@ -16,9 +15,14 @@ import com.vladsch.flexmark.util.KeepType;
 import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.ast.NodeRepository;
+import com.vladsch.flexmark.util.builder.BuilderBase;
+import com.vladsch.flexmark.util.builder.Extension;
 import com.vladsch.flexmark.util.collection.DataValueFactory;
 import com.vladsch.flexmark.util.collection.DynamicDefaultKey;
-import com.vladsch.flexmark.util.options.*;
+import com.vladsch.flexmark.util.options.DataHolder;
+import com.vladsch.flexmark.util.options.DataKey;
+import com.vladsch.flexmark.util.options.DataSet;
+import com.vladsch.flexmark.util.options.MutableDataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.CharSubSequence;
 
@@ -36,7 +40,8 @@ import java.util.*;
  * }</pre>
  */
 public class Parser implements IParse {
-    public static final DataKey<Iterable<Extension>> EXTENSIONS = new DataKey<Iterable<Extension>>("EXTENSIONS", Extension.EMPTY_LIST);
+    public static final DataKey<Iterable<Extension>> EXTENSIONS = BuilderBase.EXTENSIONS;
+
     public static final DataKey<KeepType> REFERENCES_KEEP = new DataKey<>("REFERENCES_KEEP", KeepType.FIRST);
     public static final DataKey<ReferenceRepository> REFERENCES = new DataKey<>("REFERENCES", new DataValueFactory<ReferenceRepository>() {
         @Override
@@ -398,7 +403,7 @@ public class Parser implements IParse {
     }
 
     public Parser withOptions(DataHolder options) {
-        return options == null ? this : (options.contains(EXTENSIONS) ? new Parser(new Builder(options)) : new Parser(new Builder(builder, options)));
+        return options == null ? this : new Parser(new Builder(builder, options));
     }
 
     @Override
@@ -447,7 +452,7 @@ public class Parser implements IParse {
     /**
      * Builder for configuring a {@link Parser}.
      */
-    public static class Builder extends MutableDataSet {
+    public static class Builder extends BuilderBase<Builder> {
         private final List<CustomBlockParserFactory> blockParserFactories = new ArrayList<CustomBlockParserFactory>();
         private final List<DelimiterProcessor> delimiterProcessors = new ArrayList<DelimiterProcessor>();
         private final List<PostProcessorFactory> postProcessorFactories = new ArrayList<PostProcessorFactory>();
@@ -456,14 +461,10 @@ public class Parser implements IParse {
         private final List<LinkRefProcessorFactory> linkRefProcessors = new ArrayList<LinkRefProcessorFactory>();
         private final List<InlineParserExtensionFactory> inlineParserExtensionFactories = new ArrayList<InlineParserExtensionFactory>();
         private InlineParserFactory inlineParserFactory = null;
-        private final HashSet<ParserExtension> loadedExtensions = new HashSet<ParserExtension>();
 
         public Builder(DataHolder options) {
             super(options);
-
-            if (contains(EXTENSIONS)) {
-                extensions(get(EXTENSIONS));
-            }
+            loadExtensions();
         }
 
         public Builder() {
@@ -472,6 +473,7 @@ public class Parser implements IParse {
 
         public Builder(Builder other) {
             super(other);
+
             blockParserFactories.addAll(other.blockParserFactories);
             delimiterProcessors.addAll(other.delimiterProcessors);
             postProcessorFactories.addAll(other.postProcessorFactories);
@@ -480,35 +482,11 @@ public class Parser implements IParse {
             linkRefProcessors.addAll(other.linkRefProcessors);
             inlineParserFactory = other.inlineParserFactory;
             inlineParserExtensionFactories.addAll(other.inlineParserExtensionFactories);
-            loadedExtensions.addAll(other.loadedExtensions);
         }
 
         public Builder(Builder other, DataHolder options) {
-            super(other);
-
-            List<Extension> extensions = new ArrayList<Extension>();
-            HashSet<Class> extensionSet = new HashSet<Class>();
-            for (Extension extension : get(EXTENSIONS)) {
-                extensions.add(extension);
-                extensionSet.add(extension.getClass());
-            }
-
-            if (options != null) {
-                for (DataKey key : options.keySet()) {
-                    if (key == EXTENSIONS) {
-                        for (Extension extension : options.get(EXTENSIONS)) {
-                            if (!extensionSet.contains(extension.getClass())) {
-                                extensions.add(extension);
-                            }
-                        }
-                    } else {
-                        set(key, options.get(key));
-                    }
-                }
-            }
-
-            set(EXTENSIONS, extensions);
-            extensions(extensions);
+            this(other);
+            withOptions(options);
         }
 
         /**
@@ -518,30 +496,37 @@ public class Parser implements IParse {
             return new Parser(this);
         }
 
-        /**
-         * @param extensions extensions to use on this parser
-         * @return {@code this}
-         */
-        public Builder extensions(Iterable<? extends Extension> extensions) {
-            // first give extensions a chance to modify parser options
-            for (Extension extension : extensions) {
-                if (extension instanceof ParserExtension) {
-                    if (!loadedExtensions.contains(extension)) {
-                        ParserExtension parserExtension = (ParserExtension) extension;
-                        parserExtension.parserOptions(this);
-                    }
-                }
+        @Override
+        protected void removeApiPoint(final Object apiPoint) {
+            if (apiPoint instanceof CustomBlockParserFactory) this.blockParserFactories.remove(apiPoint);
+            else if (apiPoint instanceof DelimiterProcessor) this.delimiterProcessors.remove(apiPoint);
+            else if (apiPoint instanceof PostProcessorFactory) this.postProcessorFactories.remove(apiPoint);
+            else if (apiPoint instanceof ParagraphPreProcessorFactory) this.paragraphPreProcessorFactories.remove(apiPoint);
+            else if (apiPoint instanceof BlockPreProcessorFactory) this.blockPreProcessorFactories.remove(apiPoint);
+            else if (apiPoint instanceof LinkRefProcessorFactory) this.linkRefProcessors.remove(apiPoint);
+            else if (apiPoint instanceof InlineParserExtensionFactory) this.inlineParserExtensionFactories.remove(apiPoint);
+            else if (apiPoint instanceof InlineParserFactory) this.inlineParserFactory = null;
+            else {
+                throw new IllegalStateException("Unknown data point type: " + apiPoint.getClass().getName());
             }
-            for (Extension extension : extensions) {
-                if (extension instanceof ParserExtension) {
-                    if (!loadedExtensions.contains(extension)) {
-                        ParserExtension parserExtension = (ParserExtension) extension;
-                        parserExtension.extend(this);
-                        loadedExtensions.add(parserExtension);
-                    }
-                }
+        }
+
+        @Override
+        protected void preloadExtension(final Extension extension) {
+            if (extension instanceof ParserExtension) {
+                ParserExtension parserExtension = (ParserExtension) extension;
+                parserExtension.parserOptions(this);
             }
-            return this;
+        }
+
+        @Override
+        protected boolean loadExtension(final Extension extension) {
+            if (extension instanceof ParserExtension) {
+                ParserExtension parserExtension = (ParserExtension) extension;
+                parserExtension.extend(this);
+                return true;
+            }
+            return false;
         }
 
         /**
@@ -556,11 +541,13 @@ public class Parser implements IParse {
          */
         public Builder customBlockParserFactory(CustomBlockParserFactory blockParserFactory) {
             blockParserFactories.add(blockParserFactory);
+            addExtensionApiPoint(blockParserFactory);
             return this;
         }
 
         public Builder customInlineParserExtensionFactory(InlineParserExtensionFactory inlineParserExtensionFactory) {
             inlineParserExtensionFactories.add(inlineParserExtensionFactory);
+            addExtensionApiPoint(inlineParserExtensionFactory);
             return this;
         }
 
@@ -569,31 +556,37 @@ public class Parser implements IParse {
                 throw new IllegalStateException("custom inline parser factory is already set to " + inlineParserFactory.getClass().getName());
             }
             inlineParserFactory = blockParserFactory;
+            addExtensionApiPoint(blockParserFactory);
             return this;
         }
 
         public Builder customDelimiterProcessor(DelimiterProcessor delimiterProcessor) {
             delimiterProcessors.add(delimiterProcessor);
+            addExtensionApiPoint(delimiterProcessor);
             return this;
         }
 
         public Builder postProcessorFactory(PostProcessorFactory postProcessorFactory) {
             postProcessorFactories.add(postProcessorFactory);
+            addExtensionApiPoint(postProcessorFactory);
             return this;
         }
 
         public Builder paragraphPreProcessorFactory(ParagraphPreProcessorFactory paragraphPreProcessorFactory) {
             paragraphPreProcessorFactories.add(paragraphPreProcessorFactory);
+            addExtensionApiPoint(paragraphPreProcessorFactory);
             return this;
         }
 
         public Builder blockPreProcessorFactory(BlockPreProcessorFactory blockPreProcessorFactory) {
             blockPreProcessorFactories.add(blockPreProcessorFactory);
+            addExtensionApiPoint(blockPreProcessorFactory);
             return this;
         }
 
         public Builder linkRefProcessorFactory(LinkRefProcessorFactory linkRefProcessor) {
             linkRefProcessors.add(linkRefProcessor);
+            addExtensionApiPoint(linkRefProcessor);
             return this;
         }
     }

@@ -1,19 +1,21 @@
 package com.vladsch.flexmark.formatter;
 
-import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.formatter.internal.CoreNodeFormatter;
 import com.vladsch.flexmark.formatter.internal.FormatterOptions;
 import com.vladsch.flexmark.formatter.internal.TranslationHandlerImpl;
-import com.vladsch.flexmark.util.IRender;
-import com.vladsch.flexmark.util.ast.Document;
-import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.html.AttributeProviderFactory;
 import com.vladsch.flexmark.html.LinkResolverFactory;
 import com.vladsch.flexmark.html.renderer.HeaderIdGenerator;
 import com.vladsch.flexmark.html.renderer.HeaderIdGeneratorFactory;
 import com.vladsch.flexmark.html.renderer.HtmlIdGeneratorFactory;
+import com.vladsch.flexmark.html.renderer.NodeRendererFactory;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.ParserEmulationProfile;
+import com.vladsch.flexmark.util.IRender;
+import com.vladsch.flexmark.util.ast.Document;
+import com.vladsch.flexmark.util.ast.Node;
+import com.vladsch.flexmark.util.builder.BuilderBase;
+import com.vladsch.flexmark.util.builder.Extension;
 import com.vladsch.flexmark.util.collection.DynamicDefaultKey;
 import com.vladsch.flexmark.util.collection.NodeCollectingVisitor;
 import com.vladsch.flexmark.util.collection.SubClassingBag;
@@ -22,7 +24,6 @@ import com.vladsch.flexmark.util.format.options.*;
 import com.vladsch.flexmark.util.html.FormattingAppendable;
 import com.vladsch.flexmark.util.mappers.CharWidthProvider;
 import com.vladsch.flexmark.util.options.*;
-import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 import java.util.*;
 
@@ -240,11 +241,10 @@ public class Formatter implements IRender {
     /**
      * Builder for configuring an {@link Formatter}. See methods for default configuration.
      */
-    public static class Builder extends MutableDataSet {
+    public static class Builder extends BuilderBase<Builder> {
         List<AttributeProviderFactory> attributeProviderFactories = new ArrayList<AttributeProviderFactory>();
         List<NodeFormatterFactory> nodeFormatterFactories = new ArrayList<NodeFormatterFactory>();
         List<LinkResolverFactory> linkResolverFactories = new ArrayList<LinkResolverFactory>();
-        private final HashSet<FormatterExtension> loadedExtensions = new HashSet<FormatterExtension>();
         HeaderIdGeneratorFactory htmlIdGeneratorFactory = null;
 
         public Builder() {
@@ -253,44 +253,21 @@ public class Formatter implements IRender {
 
         public Builder(DataHolder options) {
             super(options);
-
-            if (options.contains(Parser.EXTENSIONS)) {
-                extensions(get(Parser.EXTENSIONS));
-            }
+            loadExtensions();
         }
 
         public Builder(Builder other) {
             super(other);
 
             this.attributeProviderFactories.addAll(other.attributeProviderFactories);
-            this.nodeFormatterFactories.addAll(other.nodeFormatterFactories);
+            //this.nodeFormatterFactories.addAll(other.nodeFormatterFactories); // not re-used
             this.linkResolverFactories.addAll(other.linkResolverFactories);
-            this.loadedExtensions.addAll(other.loadedExtensions);
-            this.htmlIdGeneratorFactory = other.htmlIdGeneratorFactory;
+            //this.htmlIdGeneratorFactory = other.htmlIdGeneratorFactory;
         }
 
         public Builder(Builder other, DataHolder options) {
-            super(other);
-
-            List<Extension> extensions = new ArrayList<Extension>();
-            for (Extension extension : get(Parser.EXTENSIONS)) {
-                extensions.add(extension);
-            }
-
-            if (options != null) {
-                for (DataKey key : options.keySet()) {
-                    if (key == Parser.EXTENSIONS) {
-                        for (Extension extension : options.get(Parser.EXTENSIONS)) {
-                            extensions.add(extension);
-                        }
-                    } else {
-                        set(key, options.get(key));
-                    }
-                }
-            }
-
-            set(Parser.EXTENSIONS, extensions);
-            extensions(extensions);
+            this(other);
+            withOptions(options);
         }
 
         /**
@@ -298,6 +275,35 @@ public class Formatter implements IRender {
          */
         public Formatter build() {
             return new Formatter(this);
+        }
+
+        @Override
+        protected void removeApiPoint(final Object apiPoint) {
+            if (apiPoint instanceof AttributeProviderFactory) this.attributeProviderFactories.remove(apiPoint.getClass());
+            else if (apiPoint instanceof NodeFormatterFactory) this.nodeFormatterFactories.remove(apiPoint);
+            else if (apiPoint instanceof LinkResolverFactory) this.linkResolverFactories.remove(apiPoint);
+            else if (apiPoint instanceof HeaderIdGeneratorFactory) this.htmlIdGeneratorFactory = null;
+            else {
+                throw new IllegalStateException("Unknown data point type: " + apiPoint.getClass().getName());
+            }
+        }
+
+        @Override
+        protected void preloadExtension(final Extension extension) {
+            if (extension instanceof FormatterExtension) {
+                FormatterExtension formatterExtension = (FormatterExtension) extension;
+                formatterExtension.rendererOptions(this);
+            }
+        }
+
+        @Override
+        protected boolean loadExtension(final Extension extension) {
+            if (extension instanceof FormatterExtension) {
+                FormatterExtension formatterExtension = (FormatterExtension) extension;
+                formatterExtension.extend(this);
+                return true;
+            }
+            return false;
         }
 
         /**
@@ -313,33 +319,6 @@ public class Formatter implements IRender {
         @SuppressWarnings("UnusedReturnValue")
         public Builder nodeFormatterFactory(NodeFormatterFactory nodeFormatterFactory) {
             this.nodeFormatterFactories.add(nodeFormatterFactory);
-            return this;
-        }
-
-        /**
-         * @param extensions extensions to use on this HTML renderer
-         * @return {@code this}
-         */
-        public Builder extensions(Iterable<? extends Extension> extensions) {
-            // first give extensions a chance to modify options
-            for (Extension extension : extensions) {
-                if (extension instanceof FormatterExtension) {
-                    if (!loadedExtensions.contains(extension)) {
-                        FormatterExtension formatterExtension = (FormatterExtension) extension;
-                        formatterExtension.rendererOptions(this);
-                    }
-                }
-            }
-
-            for (Extension extension : extensions) {
-                if (extension instanceof FormatterExtension) {
-                    if (!loadedExtensions.contains(extension)) {
-                        FormatterExtension formatterExtension = (FormatterExtension) extension;
-                        formatterExtension.extend(this);
-                        loadedExtensions.add(formatterExtension);
-                    }
-                }
-            }
             return this;
         }
     }

@@ -1,9 +1,9 @@
 package com.vladsch.flexmark.samples;
 
-import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.html.RendererBuilder;
 import com.vladsch.flexmark.html.RendererExtension;
 import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.util.builder.Extension;
 import com.vladsch.flexmark.util.options.DataSet;
 import com.vladsch.flexmark.util.options.MutableDataHolder;
 

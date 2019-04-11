@@ -1,19 +1,16 @@
 package com.vladsch.flexmark.ext.gfm.tables;
 
-import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.ext.gfm.tables.internal.TableBlockParser;
 import com.vladsch.flexmark.ext.gfm.tables.internal.TableNodeRenderer;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.util.builder.Extension;
 import com.vladsch.flexmark.util.options.MutableDataHolder;
 
 /**
  * Extension for GFM tables using "|" pipes (GitHub Flavored Markdown).
  * <p>
  * Create it with {@link #create()} and then configure it on the builders
- * ({@link com.vladsch.flexmark.parser.Parser.Builder#extensions(Iterable)},
- * {@link com.vladsch.flexmark.html.HtmlRenderer.Builder#extensions(Iterable)}).
- * </p>
  * <p>
  * The parsed tables are turned into {@link TableBlock} blocks.
  * </p>

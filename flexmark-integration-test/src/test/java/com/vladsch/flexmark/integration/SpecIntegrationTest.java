@@ -1,6 +1,5 @@
 package com.vladsch.flexmark.integration;
 
-import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.ext.autolink.AutolinkExtension;
 import com.vladsch.flexmark.ext.gfm.strikethrough.StrikethroughExtension;
 import com.vladsch.flexmark.ext.gfm.tables.TablesExtension;
@@ -9,6 +8,7 @@ import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.test.SpecTestCase;
+import com.vladsch.flexmark.util.builder.Extension;
 import org.junit.Test;
 
 import java.util.Arrays;

@@ -1,13 +1,10 @@
 package com.vladsch.flexmark.samples;
 
-import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.ast.Image;
 import com.vladsch.flexmark.ast.ImageRef;
 import com.vladsch.flexmark.ast.Paragraph;
 import com.vladsch.flexmark.ast.Text;
 import com.vladsch.flexmark.html.*;
-import com.vladsch.flexmark.html.renderer.AttributablePart;
-import com.vladsch.flexmark.html.renderer.LinkResolverContext;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.block.NodePostProcessor;
 import com.vladsch.flexmark.parser.block.NodePostProcessorFactory;
@@ -15,6 +12,7 @@ import com.vladsch.flexmark.test.AstCollectingVisitor;
 import com.vladsch.flexmark.util.NodeTracker;
 import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.Node;
+import com.vladsch.flexmark.util.builder.Extension;
 import com.vladsch.flexmark.util.html.Attributes;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.MutableDataHolder;
