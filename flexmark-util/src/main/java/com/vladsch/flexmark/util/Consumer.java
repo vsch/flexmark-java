@@ -9,12 +9,9 @@ package com.vladsch.flexmark.util;
  * whose functional method is {@link #accept(Object)}.
  *
  * @param <T> the type of the input to the operation
+ * @deprecated use java.util.function.BiConsumer
  */
-public interface Consumer<T> {
-    /**
-     * Performs this operation on the given argument.
-     *
-     * @param t the input argument
-     */
-    void accept(T t);
+@Deprecated
+public interface Consumer<T> extends java.util.function.Consumer<T> {
+    
 }

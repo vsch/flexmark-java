@@ -12,13 +12,9 @@ package com.vladsch.flexmark.util;
  * @param <T> the type of the first argument to the operation
  * @param <U> the type of the second argument to the operation
  * @see Consumer
+ * @deprecated use java.util.function.BiConsumer
  */
-public interface BiConsumer<T, U> {
-    /**
-     * Performs this operation on the given arguments.
-     *
-     * @param t the first input argument
-     * @param u the second input argument
-     */
-    void accept(T t, U u);
+@Deprecated
+public interface BiConsumer<T, U> extends java.util.function.BiConsumer<T, U> {
+
 }

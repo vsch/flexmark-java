@@ -8,12 +8,9 @@ package com.vladsch.flexmark.util;
  * <p>This is a <a href="package-summary.html">functional interface</a>
  * whose functional method is {@link #accept(int)}.
  *
+ * @deprecated use java.util.function.BiConsumer
  */
-public interface IntConsumer {
-    /**
-     * Performs this operation on the given argument.
-     *
-     * @param t the input argument
-     */
-    void accept(int t);
+@Deprecated
+public interface IntConsumer extends java.util.function.IntConsumer {
+    
 }

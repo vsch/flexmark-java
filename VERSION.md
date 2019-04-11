@@ -84,6 +84,17 @@ Future 0.50.0
 -------------
 
 * [x] Break: make Java 8 minimum version and use JDK 8 for compilation
+  * Fix: IntelliJ Migration contained in [migrate flexmark-java 0_40_x to 0_42_0](/assets/migrations/migrate%20flexmark-java%200_40_x%20to%200_42_0.xml),
+    to use:
+    * copy to IntelliJ application settings to `migrations` subdirectory
+    * if you have the project which you want to migrate open, then close it
+    * open the project in IntelliJ Ultimate or Community
+    * update the flexmark-java dependency version to 0.42.0 (or later) and make sure the new
+      library is downloaded/updated in the project.
+    * use menu `Refactor` > `Migrate...`
+    * select `migrate flexmark-java 0.42.x to 0.50.0`
+    * press `Run`
+    * in the refactoring preview tool window that opens hit `Do Refactor`
   * [ ] Convert anonymous classes to lambda where possible.
   * [ ] Remove classes from utils which are implemented in Java 8
 * [x] Add: `LineFormattingAppendable` and `LineFormattingAppendableImpl`
@@ -104,8 +115,20 @@ Future 0.50.0
 0.42.0
 ------
 
-* Fix: [#332, withOptions forgets about old link resolvers] 
-  * Break: move `com.vladsch.flexmark.Extension` to `com.vladsch.flexmark.util.builder.Extension`
+* Fix: [#332, withOptions forgets about old link resolvers]
+  * Break: move `com.vladsch.flexmark.Extension` to
+    `com.vladsch.flexmark.util.builder.Extension`
+  * Fix: IntelliJ Migration contained in [migrate flexmark-java 0_40_x to 0_42_0](/assets/migrations/migrate%20flexmark-java%200_40_x%20to%200_42_0.xml),
+    to use:
+    * copy to IntelliJ application settings to `migrations` subdirectory
+    * if you have the project which you want to migrate open, then close it
+    * open the project in IntelliJ Ultimate or Community
+    * update the flexmark-java dependency version to 0.42.0 (or later) and make sure the new
+      library is downloaded/updated in the project.
+    * use menu `Refactor` > `Migrate...`
+    * select `migrate flexmark-java 0.42.x to 0.50.0`
+    * press `Run`
+    * in the refactoring preview tool window that opens hit `Do Refactor`
   * Add: common builder base to handle unloading extensions
   * Add: `BuilderBase.RELOAD_EXTENSIONS` default `true`, if `true` then will unload loaded
     extension from the builder when `withOptions()` is used on: `Parser`, `HtmlRenderer`,
@@ -113,11 +136,11 @@ Future 0.50.0
     loaded. The latter is slightly faster because loaded extensions are not re-loaded but will
     not change extension configuration for loaded extensions based on new options.
   * Fix: `HtmlParser.Builder` constructor with options does not preserve all already loaded
-    extensions and custom api factories 
+    extensions and custom api factories
   * Fix: `Parser.Builder` constructor with options does not preserve all already loaded
-    extensions and custom api factories 
+    extensions and custom api factories
   * Fix: `Formatter.Builder` constructor with options does not preserve all already loaded
-    extensions and custom api factories 
+    extensions and custom api factories
   * Fix: `DocxRenderer.Builder` constructor with options does not preserve all already loaded
     extensions and custom api factories
   * Add: `BuilderBase.UNLOAD_EXTENSIONS`, default `Extension.EMPTY_LIST`, all extensions in the
@@ -1334,15 +1357,10 @@ setting either will affect both keys. For information on these keys see
 [#326, flexmark-html-parser - multiple \<code\> inside \<pre\> bug]: https://github.com/vsch/flexmark-java/issues/326
 [#328, Html2mark - missing newline when paragraph followed by div]: https://github.com/vsch/flexmark-java/issues/328
 [#331, Ability to replace empty \<p\> with \<br\> during html2mark conversion]: https://github.com/vsch/flexmark-java/issues/331
+[#332, withOptions forgets about old link resolvers]: https://github.com/vsch/flexmark-java/issues/332
 [Admonition Extension, Material for MkDocs]: https://squidfunk.github.io/mkdocs-material/extensions/admonition/
 [Awesome Console]: https://plugins.jetbrains.com/plugin/7677-awesome-console "Awesome Console"
 [migrate 0_35_x to 0_40_0.xml]: /assets/migrations/migrate%20flexmark-java%200_35_x%20to%200_40_0.xml
 [NodeInsertingPostProcessorSample.java]: https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/samples/NodeInsertingPostProcessorSample.java
 [YouTrack: IDEA-207453]: https://youtrack.jetbrains.com/issue/IDEA-207453 "Add Conversion of ref anchor to UrlFilter for file line navigation"
-[#328, Html2mark - missing newline when paragraph followed by div]: https://github.com/vsch/flexmark-java/issues/328
-[#331, Ability to replace empty \<p\> with \<br\> during html2mark conversion]: https://github.com/vsch/flexmark-java/issues/331
-[#332, withOptions forgets about old link resolvers]: https://github.com/vsch/flexmark-java/issues/332
-
-
-
 
