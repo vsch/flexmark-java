@@ -6,9 +6,9 @@ import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.block.*;
 import com.vladsch.flexmark.spec.SpecReader;
 import com.vladsch.flexmark.util.ast.Block;
-import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.Node;
+import com.vladsch.flexmark.util.collection.iteration.ReversiblePeekingIterator;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.MutableDataHolder;
 import com.vladsch.flexmark.util.options.MutableDataSet;
@@ -120,6 +120,192 @@ public class ParserTest {
         assertEquals("node end line number", 3, list.getEndLineNumber());
     }
 
+    @Test
+    public void blockquotesWithLfLineBreaks() {
+        
+        //---------------------- --1------ ---2------ ---3--------
+        //--------------01234567 890123456 7890123456 789012345678
+        String given = "> line1\n> line2 \n> line3  \n> line4    \n";
+        Parser parser = Parser.builder().build();
+        Document document = parser.parse(given);
+        
+        assertThat(document.getFirstChild(), instanceOf(BlockQuote.class));
+        assertThat(document.getFirstChild().getFirstChild(), instanceOf(Paragraph.class));
+        ReversiblePeekingIterator<Node> it = document.getFirstChild().getFirstChild().getChildIterator();
+       
+        assertTrue(it.hasNext());
+        Node node = it.next();
+        assertThat(node, instanceOf(Text.class));
+        assertEquals("line1", node.getChars().toString());
+        assertEquals(2, node.getStartOffset());
+        assertEquals(7, node.getEndOffset());
+                
+        assertTrue(it.hasNext());
+        node= it.next();
+        assertThat(node, instanceOf(SoftLineBreak.class));
+        assertEquals(7, node.getStartOffset());
+        assertEquals(8, node.getEndOffset());
+
+        assertTrue(it.hasNext());
+        node= it.next();
+        assertThat(node, instanceOf(Text.class));
+        assertEquals("line2", node.getChars().toString());
+        assertEquals(10, node.getStartOffset());
+        assertEquals(15, node.getEndOffset());
+
+        assertTrue(it.hasNext());
+        node= it.next();
+        assertThat(node, instanceOf(SoftLineBreak.class));
+        assertEquals(16, node.getStartOffset());
+        assertEquals(17, node.getEndOffset());
+
+        assertTrue(it.hasNext());
+        node= it.next();
+        assertThat(node, instanceOf(Text.class));
+        assertEquals("line3", node.getChars().toString());
+        assertEquals(19, node.getStartOffset());
+        assertEquals(24, node.getEndOffset());
+
+        assertTrue(it.hasNext());
+        node= it.next();
+        assertThat(node, instanceOf(HardLineBreak.class));
+        assertEquals(24, node.getStartOffset());
+        assertEquals(27, node.getEndOffset());
+
+        assertTrue(it.hasNext());
+        node= it.next();
+        assertThat(node, instanceOf(Text.class));
+        assertEquals("line4", node.getChars().toString());
+        assertEquals(29, node.getStartOffset());
+        assertEquals(34, node.getEndOffset());
+
+        assertFalse(it.hasNext());
+    }
+
+    @Test
+    public void blockquotesWithCrLineBreaks() {
+        
+        //---------------------- --1------ ---2------ ---3--------
+        //--------------01234567 890123456 7890123456 789012345678
+        String given = "> line1\r> line2 \r> line3  \r> line4    \r";
+        Parser parser = Parser.builder().build();
+        Document document = parser.parse(given);
+        
+        assertThat(document.getFirstChild(), instanceOf(BlockQuote.class));
+        assertThat(document.getFirstChild().getFirstChild(), instanceOf(Paragraph.class));
+        ReversiblePeekingIterator<Node> it = document.getFirstChild().getFirstChild().getChildIterator();
+       
+        assertTrue(it.hasNext());
+        Node node = it.next();
+        assertThat(node, instanceOf(Text.class));
+        assertEquals("line1", node.getChars().toString());
+        assertEquals(2, node.getStartOffset());
+        assertEquals(7, node.getEndOffset());
+                
+        assertTrue(it.hasNext());
+        node= it.next();
+        assertThat(node, instanceOf(SoftLineBreak.class));
+        assertEquals(7, node.getStartOffset());
+        assertEquals(8, node.getEndOffset());
+
+        assertTrue(it.hasNext());
+        node= it.next();
+        assertThat(node, instanceOf(Text.class));
+        assertEquals("line2", node.getChars().toString());
+        assertEquals(10, node.getStartOffset());
+        assertEquals(15, node.getEndOffset());
+
+        assertTrue(it.hasNext());
+        node= it.next();
+        assertThat(node, instanceOf(SoftLineBreak.class));
+        assertEquals(16, node.getStartOffset());
+        assertEquals(17, node.getEndOffset());
+
+        assertTrue(it.hasNext());
+        node= it.next();
+        assertThat(node, instanceOf(Text.class));
+        assertEquals("line3", node.getChars().toString());
+        assertEquals(19, node.getStartOffset());
+        assertEquals(24, node.getEndOffset());
+
+        assertTrue(it.hasNext());
+        node= it.next();
+        assertThat(node, instanceOf(HardLineBreak.class));
+        assertEquals(24, node.getStartOffset());
+        assertEquals(27, node.getEndOffset());
+
+        assertTrue(it.hasNext());
+        node= it.next();
+        assertThat(node, instanceOf(Text.class));
+        assertEquals("line4", node.getChars().toString());
+        assertEquals(29, node.getStartOffset());
+        assertEquals(34, node.getEndOffset());
+
+        assertFalse(it.hasNext());
+    }
+        
+    @Test
+    public void blockquotesWithCrLfLineBreaks() {
+        
+        //---------------------- - -1------- - -2-------- - 3---------4- -
+        //--------------01234567 8 901234567 8 9012345678 9 012345678901 2
+        String given = "> line1\r\n> line2 \r\n> line3  \r\n> line4    \r\n";
+        Parser parser = Parser.builder().build();
+        Document document = parser.parse(given);
+        
+        assertThat(document.getFirstChild(), instanceOf(BlockQuote.class));
+        assertThat(document.getFirstChild().getFirstChild(), instanceOf(Paragraph.class));
+        ReversiblePeekingIterator<Node> it = document.getFirstChild().getFirstChild().getChildIterator();
+       
+        assertTrue(it.hasNext());
+        Node node = it.next();
+        assertThat(node, instanceOf(Text.class));
+        assertEquals("line1", node.getChars().toString());
+        assertEquals(2, node.getStartOffset());
+        assertEquals(7, node.getEndOffset());
+                
+        assertTrue(it.hasNext());
+        node= it.next();
+        assertThat(node, instanceOf(SoftLineBreak.class));
+        assertEquals(7, node.getStartOffset());
+        assertEquals(9, node.getEndOffset());
+
+        assertTrue(it.hasNext());
+        node= it.next();
+        assertThat(node, instanceOf(Text.class));
+        assertEquals("line2", node.getChars().toString());
+        assertEquals(11, node.getStartOffset());
+        assertEquals(16, node.getEndOffset());
+
+        assertTrue(it.hasNext());
+        node= it.next();
+        assertThat(node, instanceOf(SoftLineBreak.class));
+        assertEquals(17, node.getStartOffset());
+        assertEquals(19, node.getEndOffset());
+
+        assertTrue(it.hasNext());
+        node= it.next();
+        assertThat(node, instanceOf(Text.class));
+        assertEquals("line3", node.getChars().toString());
+        assertEquals(21, node.getStartOffset());
+        assertEquals(26, node.getEndOffset());
+
+        assertTrue(it.hasNext());
+        node= it.next();
+        assertThat(node, instanceOf(HardLineBreak.class));
+        assertEquals(26, node.getStartOffset());
+        assertEquals(30, node.getEndOffset());
+
+        assertTrue(it.hasNext());
+        node= it.next();
+        assertThat(node, instanceOf(Text.class));
+        assertEquals("line4", node.getChars().toString());
+        assertEquals(32, node.getStartOffset());
+        assertEquals(37, node.getEndOffset());
+
+        assertFalse(it.hasNext());
+    }
+    
     private String firstText(Node n) {
         while (!(n instanceof Text)) {
             assertThat(n, notNullValue());
