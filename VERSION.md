@@ -6,6 +6,7 @@ flexmark-java
 [TOC]: # " "
 
 - [Future 0.50.0](#future-0500)
+- [0.42.2](#0422)
 - [0.42.0](#0420)
 - [0.40.34](#04034)
 - [0.40.32](#04032)
@@ -111,6 +112,12 @@ Future 0.50.0
 * [ ] Add: `<!-- @formatter:on -->` and `<!-- @formatter:on -->` tags to `Formatter` for
       controlling non-formatting regions.
 
+0.42.2
+------
+
+* Fix: [#334, CR line separators don’t produce line break nodes],
+  * merge: [#335, PR: Fix CR-only line separator handling] thanks to **[Kijimuna]**
+
 0.42.0
 ------
 
@@ -118,13 +125,13 @@ Future 0.50.0
   * Break: move `com.vladsch.flexmark.Extension` to
     `com.vladsch.flexmark.util.builder.Extension`
   * Fix: IntelliJ Migration contained in [migrate flexmark-java 0_40_x to 0_42_0], to use:
-    * copy to IntelliJ application settings to `migrations` subdirectory
+    * copy to IntelliJ application settings to `migration` subdirectory
     * if you have the project which you want to migrate open, then close it
     * open the project in IntelliJ Ultimate or Community
     * update the flexmark-java dependency version to 0.42.0 (or later) and make sure the new
       library is downloaded/updated in the project.
     * use menu `Refactor` > `Migrate...`
-    * select `migrate flexmark-java 0.40.x to 0.42.0`
+    * select `migrate flexmark-java 0.42.x to 0.50.0`
     * press `Run`
     * in the refactoring preview tool window that opens hit `Do Refactor`
   * Add: common builder base to handle unloading extensions
@@ -1356,11 +1363,27 @@ setting either will affect both keys. For information on these keys see
 [#328, Html2mark - missing newline when paragraph followed by div]: https://github.com/vsch/flexmark-java/issues/328
 [#331, Ability to replace empty \<p\> with \<br\> during html2mark conversion]: https://github.com/vsch/flexmark-java/issues/331
 [#332, withOptions forgets about old link resolvers]: https://github.com/vsch/flexmark-java/issues/332
+[#328, Html2mark - missing newline when paragraph followed by div]: https://github.com/vsch/flexmark-java/issues/328
+[#331, Ability to replace empty \<p\> with \<br\> during html2mark conversion]: https://github.com/vsch/flexmark-java/issues/331
+[#332, withOptions forgets about old link resolvers]: https://github.com/vsch/flexmark-java/issues/332
+[#334, CR line separators don’t produce line break nodes]: https://github.com/vsch/flexmark-java/issues/334
+[#335, PR: Fix CR-only line separator handling]: https://github.com/vsch/flexmark-java/pull/335
 [Admonition Extension, Material for MkDocs]: https://squidfunk.github.io/mkdocs-material/extensions/admonition/
 [Awesome Console]: https://plugins.jetbrains.com/plugin/7677-awesome-console "Awesome Console"
+[Kijimuna]: https://github.com/Kijimuna
 [migrate 0_35_x to 0_40_0.xml]: /assets/migrations/migrate%20flexmark-java%200_35_x%20to%200_40_0.xml
 [migrate flexmark-java 0_40_x to 0_42_0]: https://github.com/vsch/flexmark-java/blob/master/assets/migrations/migrate%20flexmark-java%200_40_x%20to%200_42_0.xml
 [migrate flexmark-java 0_42_x to 0_50_0.xml]: https://github.com/vsch/flexmark-java/blob/master/assets/migrations/migrate%20flexmark-java%200_42_x%20to%200_50_0.xml
 [NodeInsertingPostProcessorSample.java]: https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/samples/NodeInsertingPostProcessorSample.java
 [YouTrack: IDEA-207453]: https://youtrack.jetbrains.com/issue/IDEA-207453 "Add Conversion of ref anchor to UrlFilter for file line navigation"
+[#328, Html2mark - missing newline when paragraph followed by div]: https://github.com/vsch/flexmark-java/issues/328
+[#331, Ability to replace empty \<p\> with \<br\> during html2mark conversion]: https://github.com/vsch/flexmark-java/issues/331
+[#332, withOptions forgets about old link resolvers]: https://github.com/vsch/flexmark-java/issues/332
 
+
+
+
+
+[#335, PR: Fix CR-only line separator handling]: https://github.com/vsch/flexmark-java/pull/335
+[Kijimuna]: https://github.com/Kijimuna
+[#334, CR line separators don’t produce line break nodes]: https://github.com/vsch/flexmark-java/issues/334

@@ -227,6 +227,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
     public static BitSet calculateSpecialCharacters(DataHolder options, BitSet delimiterCharacters) {
         BitSet bitSet = new BitSet();
         bitSet.or(delimiterCharacters);
+        bitSet.set('\r');
         bitSet.set('\n');
         bitSet.set('`');
         bitSet.set('[');
@@ -662,6 +663,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
         }
 
         switch (c) {
+            case '\r':
             case '\n':
                 res = parseNewline();
                 break;
@@ -921,9 +923,9 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
      */
     @Override
     public boolean parseNewline() {
-        boolean crLf = index > 0 && input.charAt(index - 1) == '\r';
+        boolean crLf = index < input.length() - 1 && input.charAt(index + 1) == '\n';
         int crLfDelta = crLf ? 1 : 0;
-        index++; // assume we're at a \n
+        index += 1 + crLfDelta;
 
         // We're gonna add a new node in any case and we need to check the last text node, so flush outstanding text.
         flushTextNode();
@@ -931,29 +933,20 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
         Node lastChild = block.getLastChild();
         // Check previous text for trailing spaces.
         // The "endsWith" is an optimization to avoid an RE match in the common case.
-        if (lastChild instanceof Text && (lastChild.getChars().endsWith(" ") || crLf && lastChild.getChars().endsWith(" \r"))) {
+        if (lastChild instanceof Text && (lastChild.getChars().endsWith(" "))) {
             Text text = (Text) lastChild;
             BasedSequence literal = text.getChars();
             Matcher matcher = myParsing.FINAL_SPACE.matcher(literal);
-            int spaces = matcher.find() ? matcher.end() - matcher.start() - crLfDelta : 0;
+            int spaces = matcher.find() ? matcher.end() - matcher.start() : 0;
             appendNode(spaces >= 2 ? new HardLineBreak(input.subSequence(index - (options.hardLineBreakLimit ? 3 + crLfDelta : spaces + 1 + crLfDelta), index)) : new SoftLineBreak(input.subSequence(index - 1 - crLfDelta, index)));
-            if (spaces + crLfDelta > 0) {
+            if (spaces > 0) {
                 if (literal.length() > spaces) {
-                    lastChild.setChars(literal.subSequence(0, literal.length() - spaces - crLfDelta).trimEnd());
+                    lastChild.setChars(literal.subSequence(0, literal.length() - spaces).trimEnd());
                 } else {
                     lastChild.unlink();
                 }
             }
         } else {
-            if (crLf && lastChild instanceof Text) {
-                Text text = (Text) lastChild;
-                BasedSequence literal = text.getChars();
-                if (literal.length() > 1) {
-                    lastChild.setChars(literal.subSequence(0, literal.length() - crLfDelta).trimEnd());
-                } else {
-                    lastChild.unlink();
-                }
-            }
             appendNode(new SoftLineBreak(input.subSequence(index - 1 - crLfDelta, index)));
         }
 
