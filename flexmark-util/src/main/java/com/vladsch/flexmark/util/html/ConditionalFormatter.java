@@ -1,5 +1,6 @@
 package com.vladsch.flexmark.util.html;
 
+@Deprecated
 public interface ConditionalFormatter {
     /**
      * Text, line or indent was appended

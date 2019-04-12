@@ -195,26 +195,26 @@ indented code
 > 2. numbered item 2   
 .
 > # Heading
-> 
+>
 > -----
-> 
+>
 > paragraph text
 > lazy continuation
 > * list item
-> 
+>
 >> block quote
 >> lazy continuation
-> 
+>
 > ~~~info
 >    with uneven indent
 >       with uneven indent
 > indented code
 > ~~~
->     
+>
 >        with uneven indent
 >           with uneven indent
 >     indented code
-> 
+>
 > 1. numbered item 1
 > 2. numbered item 2
 

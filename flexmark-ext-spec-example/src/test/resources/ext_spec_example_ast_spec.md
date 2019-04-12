@@ -870,9 +870,9 @@ Document[0, 56]
   </dd>
   <dt>Rendered Html</dt>
   <dd><div style="border:solid #cccccc 1px;padding:0 20px 10px 20px;"><p>Markdown only</p>
-  <ul>
-    <li>List item</li>
-  </ul></div>
+<ul>
+  <li>List item</li>
+</ul></div>
   </dd>
   <dt>AST</dt>
   <dd>
@@ -1085,9 +1085,9 @@ Document[0, 56]
   </dd>
   <dt>Rendered Html</dt>
   <dd><div style="border:solid #cccccc 1px;padding:0 20px 10px 20px;"><p>Markdown only</p>
-  <ul>
-    <li>List item</li>
-  </ul></div>
+<ul>
+  <li>List item</li>
+</ul></div>
   </dd>
   <dt>AST</dt>
   <dd>

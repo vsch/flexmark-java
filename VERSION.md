@@ -84,8 +84,7 @@ Future 0.50.0
 -------------
 
 * [x] Break: make Java 8 minimum version and use JDK 8 for compilation
-  * Fix: IntelliJ Migration contained in [migrate flexmark-java 0_40_x to 0_42_0](/assets/migrations/migrate%20flexmark-java%200_40_x%20to%200_42_0.xml),
-    to use:
+  * Fix: IntelliJ Migration contained in [migrate flexmark-java 0_42_x to 0_50_0.xml], to use:
     * copy to IntelliJ application settings to `migrations` subdirectory
     * if you have the project which you want to migrate open, then close it
     * open the project in IntelliJ Ultimate or Community
@@ -118,15 +117,14 @@ Future 0.50.0
 * Fix: [#332, withOptions forgets about old link resolvers]
   * Break: move `com.vladsch.flexmark.Extension` to
     `com.vladsch.flexmark.util.builder.Extension`
-  * Fix: IntelliJ Migration contained in [migrate flexmark-java 0_40_x to 0_42_0](/assets/migrations/migrate%20flexmark-java%200_40_x%20to%200_42_0.xml),
-    to use:
+  * Fix: IntelliJ Migration contained in [migrate flexmark-java 0_40_x to 0_42_0], to use:
     * copy to IntelliJ application settings to `migrations` subdirectory
     * if you have the project which you want to migrate open, then close it
     * open the project in IntelliJ Ultimate or Community
     * update the flexmark-java dependency version to 0.42.0 (or later) and make sure the new
       library is downloaded/updated in the project.
     * use menu `Refactor` > `Migrate...`
-    * select `migrate flexmark-java 0.42.x to 0.50.0`
+    * select `migrate flexmark-java 0.40.x to 0.42.0`
     * press `Run`
     * in the refactoring preview tool window that opens hit `Do Refactor`
   * Add: common builder base to handle unloading extensions
@@ -1361,6 +1359,8 @@ setting either will affect both keys. For information on these keys see
 [Admonition Extension, Material for MkDocs]: https://squidfunk.github.io/mkdocs-material/extensions/admonition/
 [Awesome Console]: https://plugins.jetbrains.com/plugin/7677-awesome-console "Awesome Console"
 [migrate 0_35_x to 0_40_0.xml]: /assets/migrations/migrate%20flexmark-java%200_35_x%20to%200_40_0.xml
+[migrate flexmark-java 0_40_x to 0_42_0]: https://github.com/vsch/flexmark-java/blob/master/assets/migrations/migrate%20flexmark-java%200_40_x%20to%200_42_0.xml
+[migrate flexmark-java 0_42_x to 0_50_0.xml]: https://github.com/vsch/flexmark-java/blob/master/assets/migrations/migrate%20flexmark-java%200_42_x%20to%200_50_0.xml
 [NodeInsertingPostProcessorSample.java]: https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/samples/NodeInsertingPostProcessorSample.java
 [YouTrack: IDEA-207453]: https://youtrack.jetbrains.com/issue/IDEA-207453 "Add Conversion of ref anchor to UrlFilter for file line navigation"
 

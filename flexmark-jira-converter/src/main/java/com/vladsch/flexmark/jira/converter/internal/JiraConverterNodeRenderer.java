@@ -180,9 +180,11 @@ public class JiraConverterNodeRenderer implements NodeRenderer {
 
     private void render(BlockQuote node, NodeRendererContext context, HtmlWriter html) {
         html.line().raw("{quote}").line();
+        html.pushPrefix();
         inBlockQuote++;
         context.renderChildren(node);
         inBlockQuote--;
+        html.popPrefix();
         html.line().raw("{quote}").blankLine();
     }
 

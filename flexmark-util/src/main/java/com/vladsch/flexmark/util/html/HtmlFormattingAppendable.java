@@ -2,11 +2,12 @@ package com.vladsch.flexmark.util.html;
 
 import java.util.List;
 import java.util.Stack;
+import com.vladsch.flexmark.util.html.LineFormattingAppendable;
 
 /**
  * Used to help with HTML output generation and formatting of HTML
  */
-public interface HtmlFormattingAppendable extends FormattingAppendable {
+public interface HtmlFormattingAppendable extends LineFormattingAppendable {
     Attributes getAttributes();
     HtmlFormattingAppendable setAttributes(Attributes attributes);
     boolean inPre();
@@ -26,11 +27,17 @@ public interface HtmlFormattingAppendable extends FormattingAppendable {
     public Stack<String> getOpenTags();
     public List<String> getOpenTagsAfterLast(CharSequence latestTag);
 
-    HtmlFormattingAppendable withCondLine();
+    @Deprecated
+    default HtmlFormattingAppendable withCondLine() {
+        return withCondLineOnChildText();
+    }
+    
+    HtmlFormattingAppendable withCondLineOnChildText();
     HtmlFormattingAppendable withCondIndent();
 
     HtmlFormattingAppendable tagVoid(CharSequence tagName);
     HtmlFormattingAppendable tag(CharSequence tagName);
+    HtmlFormattingAppendable tag(CharSequence tagName, Runnable runnable);
     HtmlFormattingAppendable tag(CharSequence tagName, boolean voidElement);
     HtmlFormattingAppendable tag(CharSequence tagName, final boolean withIndent, final boolean withLine, Runnable runnable);
 

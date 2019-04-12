@@ -26,16 +26,12 @@ import java.util.HashMap;
 
 @SuppressWarnings("WeakerAccess")
 public class HtmlBuilder extends HtmlFormattingAppendableBase<HtmlBuilder> {
-    private final Appendable myBuilder;
-
     public HtmlBuilder() {
-        super(new StringBuilder(), 0, FormattingAppendable.PASS_THROUGH);
-        myBuilder = getAppendable();
+        super(0, LineFormattingAppendable.PASS_THROUGH);
     }
 
     public HtmlBuilder(final int indentSize, final int formatOptions) {
-        super(new StringBuilder(), indentSize, formatOptions);
-        myBuilder = getAppendable();
+        super(indentSize, formatOptions);
     }
 
     @SuppressWarnings({ "UnusedReturnValue", "WeakerAccess" })
@@ -50,13 +46,7 @@ public class HtmlBuilder extends HtmlFormattingAppendableBase<HtmlBuilder> {
     public String toFinalizedString() {
         //if (!myOpenTags.isEmpty()) throw new IllegalStateException("Unclosed tags on toHtml call: " + tagStack());
         closeAllTags();
-        flush();
-        return myBuilder.toString();
-    }
-
-    @Override
-    public String toString() {
-        return myBuilder.toString();
+        return toString(0);
     }
 
     @SuppressWarnings("WeakerAccess")

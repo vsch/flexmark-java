@@ -1,7 +1,8 @@
 package com.vladsch.flexmark.util.collection;
 
-import com.vladsch.flexmark.util.BiFunction;
 import org.junit.Test;
+
+import java.util.function.BiFunction;
 
 import static org.junit.Assert.assertEquals;
 

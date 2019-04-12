@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.util.collection;
 
-import com.vladsch.flexmark.util.Function;
+import java.util.function.Function;
 import com.vladsch.flexmark.util.collection.iteration.*;
 
 import java.util.*;

@@ -813,14 +813,14 @@ NeEXt LiINeE
 .
 >> BLocK QuUoteE
 >> LaAZyY coNtiINuUaAtiIoN
-> 
+>
 > ~~~info
 >      indented code
 >    code
 > ~~~
->     
+>
 >      indented code
-> 
+>
 > 1. NuUmBeEReED iIteEm 1
 ````````````````````````````````
 
@@ -847,26 +847,26 @@ NeEXt LiINeE
 > 2. numbered item 2   
 .
 > # heEaADiING
-> 
+>
 > -----
-> 
+>
 > paARaAGRaAph teEXt
 > LaAZyY coNtiINuUaAtiIoN
 > * LiISt iIteEm
-> 
+>
 >> BLocK QuUoteE
 >> LaAZyY coNtiINuUaAtiIoN
-> 
+>
 > ~~~info
 >         with uneven indent
 >            with uneven indent
 >      indented code
 > ~~~
->     
+>
 >         with uneven indent
 >            with uneven indent
 >      indented code
-> 
+>
 > 1. NuUmBeEReED iIteEm 1
 > 2. NuUmBeEReED iIteEm 2
 ````````````````````````````````
@@ -894,26 +894,26 @@ NeEXt LiINeE
 > 2. numbered item 2   
 .
 > # heEaADiING
-> 
+>
 > -----
-> 
+>
 > paARaAGRaAph teEXt
 > LaAZyY coNtiINuUaAtiIoN
 > * LiISt iIteEm
-> 
+>
 > > BLocK QuUoteE
 > > LaAZyY coNtiINuUaAtiIoN
-> 
+>
 > ~~~info
 >         with uneven indent
 >            with uneven indent
 >      indented code
 > ~~~
->     
+>
 >         with uneven indent
 >            with uneven indent
 >      indented code
-> 
+>
 > 1. NuUmBeEReED iIteEm 1
 > 2. NuUmBeEReED iIteEm 2
 ````````````````````````````````
@@ -1829,11 +1829,7 @@ Handle proper GitHub indented code in list items
 .
 * iIteEm
 
-        
-
   * SuUB-iIteEm
-
-          
 ````````````````````````````````
 
 
@@ -1848,11 +1844,7 @@ Handle proper GitHub indented code in list items
 .
 1. iIteEm
 
-        
-
    1. SuUB-iIteEm
-
-           
 ````````````````````````````````
 
 

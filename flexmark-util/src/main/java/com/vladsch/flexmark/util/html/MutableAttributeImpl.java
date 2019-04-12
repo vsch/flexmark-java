@@ -1,9 +1,8 @@
 package com.vladsch.flexmark.util.html;
 
-import com.vladsch.flexmark.util.BiConsumer;
-
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.function.BiConsumer;
 
 public class MutableAttributeImpl implements MutableAttribute {
     private final String myName;

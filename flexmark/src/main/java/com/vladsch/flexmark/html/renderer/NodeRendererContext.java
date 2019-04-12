@@ -38,21 +38,19 @@ public interface NodeRendererContext extends LinkResolverContext {
      * Creates a child rendering context that can be used to collect rendered html text. The child context inherits
      * everything but the HtmlRenderer, renderedNode, renderingHandler and doNotRenderLinksNesting from the parent.
      *
-     * @param out           appendable to use for generated html
      * @param inheritIndent whether the html writer of the sub-context should inherit the current context's indentation level or start with 0 indentation
      * @return a new rendering context with a given appendable for its output
      */
-    NodeRendererContext getSubContext(Appendable out, boolean inheritIndent);
+    NodeRendererContext getSubContext(boolean inheritIndent);
 
     /**
      * Creates a child rendering context that can be used to collect rendered html text of the previously registered node renderer. The child context inherits
      * everything but the HtmlRenderer and doNotRenderLinksNesting from the parent.
      *
-     * @param out           appendable to use for generated html
      * @param inheritIndent whether the html writer of the sub-context should inherit the current context's indentation level or start with 0 indentation
      * @return a new rendering context with a given appendable for its output
      */
-    NodeRendererContext getDelegatedSubContext(Appendable out, boolean inheritIndent);
+    NodeRendererContext getDelegatedSubContext(boolean inheritIndent);
 
     /**
      * pass node rendering to previously registered handler

@@ -16,11 +16,11 @@ import com.vladsch.flexmark.util.dependency.FlatDependencyHandler;
 import com.vladsch.flexmark.util.dependency.ResolvedDependencies;
 import com.vladsch.flexmark.util.html.Attributes;
 import com.vladsch.flexmark.util.html.Escaping;
-import com.vladsch.flexmark.util.html.FormattingAppendable;
 import com.vladsch.flexmark.util.options.*;
 import com.vladsch.flexmark.util.sequence.TagRange;
 
 import java.util.*;
+import com.vladsch.flexmark.util.html.LineFormattingAppendable;
 
 /**
  * Renders a tree of nodes to HTML.
@@ -92,19 +92,19 @@ public class HtmlRenderer implements IRender {
     public static final DataKey<Boolean> EMBEDDED_ATTRIBUTE_PROVIDER = new DataKey<>("EMBEDDED_ATTRIBUTE_PROVIDER", true);
 
     /**
-     * output control for FormattingAppendable, see {@link com.vladsch.flexmark.util.html.FormattingAppendable#setOptions(int)}
+     * output control for FormattingAppendable, see {@link LineFormattingAppendable#setOptions(int)}
      */
     public static final DataKey<Integer> FORMAT_FLAGS = new DataKey<>("FORMAT_FLAGS", 0);
     public static final DataKey<Integer> MAX_TRAILING_BLANK_LINES = new DataKey<>("MAX_TRAILING_BLANK_LINES", 1);
 
     // convenience pass through
-    public static final int CONVERT_TABS = FormattingAppendable.CONVERT_TABS;
-    public static final int COLLAPSE_WHITESPACE = FormattingAppendable.COLLAPSE_WHITESPACE;
-    public static final int SUPPRESS_TRAILING_WHITESPACE = FormattingAppendable.SUPPRESS_TRAILING_WHITESPACE;
-    public static final int PREFIX_AFTER_PENDING_EOL = FormattingAppendable.PREFIX_AFTER_PENDING_EOL;
-    public static final int PASS_THROUGH = FormattingAppendable.PASS_THROUGH;
-    public static final int ALLOW_LEADING_WHITESPACE = FormattingAppendable.ALLOW_LEADING_WHITESPACE;
-    public static final int FORMAT_ALL = FormattingAppendable.FORMAT_ALL;
+    public static final int CONVERT_TABS = LineFormattingAppendable.CONVERT_TABS;
+    public static final int COLLAPSE_WHITESPACE = LineFormattingAppendable.COLLAPSE_WHITESPACE;
+    public static final int SUPPRESS_TRAILING_WHITESPACE = LineFormattingAppendable.SUPPRESS_TRAILING_WHITESPACE;
+    public static final int PREFIX_AFTER_PENDING_EOL = LineFormattingAppendable.PREFIX_AFTER_PENDING_EOL;
+    public static final int PASS_THROUGH = LineFormattingAppendable.PASS_THROUGH;
+    public static final int ALLOW_LEADING_WHITESPACE = LineFormattingAppendable.ALLOW_LEADING_WHITESPACE;
+    public static final int FORMAT_ALL = LineFormattingAppendable.FORMAT_ALL;
 
     /**
      * Stores pairs of equivalent renderer types to allow extensions to resolve types not known to them
@@ -114,10 +114,10 @@ public class HtmlRenderer implements IRender {
     public static final DataKey<List<Pair<String, String>>> RENDERER_TYPE_EQUIVALENCE = new DataKey<List<Pair<String, String>>>("RENDERER_TYPE_EQUIVALENCE", Collections.<Pair<String, String>>emptyList());
 
     // for convenience or these together and set FORMAT_FLAGS key above to the value, to have HtmlWriter apply these when rendering Html
-    public static final int FORMAT_CONVERT_TABS = FormattingAppendable.CONVERT_TABS;
-    public static final int FORMAT_COLLAPSE_WHITESPACE = FormattingAppendable.COLLAPSE_WHITESPACE;
-    public static final int FORMAT_SUPPRESS_TRAILING_WHITESPACE = FormattingAppendable.SUPPRESS_TRAILING_WHITESPACE;
-    public static final int FORMAT_ALL_OPTIONS = FormattingAppendable.FORMAT_ALL;
+    public static final int FORMAT_CONVERT_TABS = LineFormattingAppendable.CONVERT_TABS;
+    public static final int FORMAT_COLLAPSE_WHITESPACE = LineFormattingAppendable.COLLAPSE_WHITESPACE;
+    public static final int FORMAT_SUPPRESS_TRAILING_WHITESPACE = LineFormattingAppendable.SUPPRESS_TRAILING_WHITESPACE;
+    public static final int FORMAT_ALL_OPTIONS = LineFormattingAppendable.FORMAT_ALL;
 
     // now not final only to allow disposal of resources
     private final List<AttributeProviderFactory> attributeProviderFactories;
@@ -195,9 +195,9 @@ public class HtmlRenderer implements IRender {
      * @param output appendable to use for the output
      */
     public void render(Node node, Appendable output) {
-        MainNodeRenderer renderer = new MainNodeRenderer(options, new HtmlWriter(output, htmlOptions.indentSize, htmlOptions.formatFlags, !htmlOptions.htmlBlockOpenTagEol, !htmlOptions.htmlBlockCloseTagEol), node.getDocument());
+        MainNodeRenderer renderer = new MainNodeRenderer(options, new HtmlWriter(htmlOptions.indentSize, htmlOptions.formatFlags, !htmlOptions.htmlBlockOpenTagEol, !htmlOptions.htmlBlockCloseTagEol), node.getDocument());
         renderer.render(node);
-        renderer.flush(htmlOptions.maxTrailingBlankLines);
+        renderer.flushTo(output, htmlOptions.maxTrailingBlankLines);
         renderer.dispose();
     }
 
@@ -208,9 +208,9 @@ public class HtmlRenderer implements IRender {
      * @param output appendable to use for the output
      */
     public void render(Node node, Appendable output, int maxTrailingBlankLines) {
-        MainNodeRenderer renderer = new MainNodeRenderer(options, new HtmlWriter(output, htmlOptions.indentSize, htmlOptions.formatFlags, !htmlOptions.htmlBlockOpenTagEol, !htmlOptions.htmlBlockCloseTagEol), node.getDocument());
+        MainNodeRenderer renderer = new MainNodeRenderer(options, new HtmlWriter(htmlOptions.indentSize, htmlOptions.formatFlags, !htmlOptions.htmlBlockOpenTagEol, !htmlOptions.htmlBlockCloseTagEol), node.getDocument());
         renderer.render(node);
-        renderer.flush(maxTrailingBlankLines);
+        renderer.flushTo(output, maxTrailingBlankLines);
         renderer.dispose();
     }
 
@@ -750,16 +750,16 @@ public class HtmlRenderer implements IRender {
         }
 
         @Override
-        public NodeRendererContext getSubContext(Appendable out, boolean inheritIndent) {
-            HtmlWriter htmlWriter = new HtmlWriter(getHtmlWriter(), out, inheritIndent);
+        public NodeRendererContext getSubContext(boolean inheritIndent) {
+            HtmlWriter htmlWriter = new HtmlWriter(getHtmlWriter(), inheritIndent);
             htmlWriter.setContext(this);
             //noinspection ReturnOfInnerClass
             return new SubNodeRenderer(this, htmlWriter, false);
         }
 
         @Override
-        public NodeRendererContext getDelegatedSubContext(final Appendable out, final boolean inheritIndent) {
-            HtmlWriter htmlWriter = new HtmlWriter(getHtmlWriter(), out, inheritIndent);
+        public NodeRendererContext getDelegatedSubContext(final boolean inheritIndent) {
+            HtmlWriter htmlWriter = new HtmlWriter(getHtmlWriter(), inheritIndent);
             htmlWriter.setContext(this);
             //noinspection ReturnOfInnerClass
             return new SubNodeRenderer(this, htmlWriter, true);
@@ -913,16 +913,16 @@ public class HtmlRenderer implements IRender {
             }
 
             @Override
-            public NodeRendererContext getSubContext(Appendable out, boolean inheritIndent) {
-                HtmlWriter htmlWriter = new HtmlWriter(this.htmlWriter, out, inheritIndent);
+            public NodeRendererContext getSubContext(boolean inheritIndent) {
+                HtmlWriter htmlWriter = new HtmlWriter(this.htmlWriter, inheritIndent);
                 htmlWriter.setContext(this);
                 //noinspection ReturnOfInnerClass
                 return new SubNodeRenderer(myMainNodeRenderer, htmlWriter, false);
             }
 
             @Override
-            public NodeRendererContext getDelegatedSubContext(final Appendable out, final boolean inheritIndent) {
-                HtmlWriter htmlWriter = new HtmlWriter(this.htmlWriter, out, inheritIndent);
+            public NodeRendererContext getDelegatedSubContext(final boolean inheritIndent) {
+                HtmlWriter htmlWriter = new HtmlWriter(this.htmlWriter, inheritIndent);
                 htmlWriter.setContext(this);
                 //noinspection ReturnOfInnerClass
                 return new SubNodeRenderer(myMainNodeRenderer, htmlWriter, true);

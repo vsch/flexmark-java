@@ -1802,9 +1802,9 @@ Test where lazy continuation affects list item processing.
 .
 <ul>
     <li>item 1
-    * item 2</li>
+        * item 2</li>
     <li>item 3
-    * item 4</li>
+        * item 4</li>
 </ul>
 .
 Document[0, 51]
@@ -2133,23 +2133,23 @@ Document[0, 296]
     <li>item 3</li>
     <li>item 4</li>
     <li>
-    <pre><code>item 5
+        <pre><code>item 5
 </code></pre>
     </li>
     <li>
-    <pre><code> item 6
+        <pre><code> item 6
 </code></pre>
     </li>
     <li>
-    <pre><code>  item 7
+        <pre><code>  item 7
 </code></pre>
     </li>
     <li>
-    <pre><code>   item 8
+        <pre><code>   item 8
 </code></pre>
     </li>
     <li>
-    <pre><code>    item 9
+        <pre><code>    item 9
 </code></pre>
     </li>
 </ul>

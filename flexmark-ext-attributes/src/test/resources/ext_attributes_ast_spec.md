@@ -758,7 +758,7 @@ definition term
   <dt>definition term</dt>
   <dd>definition item 1</dd>
   <dd>definition item 2
-  <p class="red">some text</p>
+    <p class="red">some text</p>
   </dd>
 </dl>
 .

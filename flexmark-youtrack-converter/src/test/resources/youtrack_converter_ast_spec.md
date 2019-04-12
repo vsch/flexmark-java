@@ -189,7 +189,7 @@ Multi-paragraph
 > paragraph.
 .
 > simple block quote paragraph.
-> 
+>
 > another block quote paragraph.
 
 .

@@ -415,7 +415,7 @@ public class CoreNodeRenderer implements NodeRenderer {
                 }
             });
         } else {
-            html.srcPosWithEOL(node.getChars()).withAttr(LOOSE_LIST_ITEM).tagIndent("li", new Runnable() {
+            html.srcPosWithEOL(node.getChars()).withAttr(LOOSE_LIST_ITEM).withCondIndent().tagLine("li", new Runnable() {
                 @Override
                 public void run() {
                     html.text(node.getMarkerSuffix().unescape());
@@ -718,7 +718,7 @@ public class CoreNodeRenderer implements NodeRenderer {
                 html.text(normalizeEOL);
             }
         } else {
-            html.rawPre((normalizeEOL));
+            html.rawPre(normalizeEOL);
         }
 
         if (node instanceof HtmlBlock) {

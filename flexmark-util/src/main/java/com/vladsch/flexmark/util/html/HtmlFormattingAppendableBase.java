@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.util.html;
 
-import com.vladsch.flexmark.util.Ref;
 import com.vladsch.flexmark.util.Utils;
+import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.RepeatedCharSequence;
 
 import java.io.IOException;
@@ -12,22 +12,23 @@ import java.util.Stack;
 
 @SuppressWarnings("unchecked")
 public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase> implements HtmlFormattingAppendable {
-    private final FormattingAppendable out;
+    private LineFormattingAppendable out;
 
     private Attributes currentAttributes;
-    private boolean indentIndentingChildren = false;
+    private boolean indentOnFirstEol = false;
     private boolean lineOnChildText = false;
     private boolean withAttributes = false;
     private boolean suppressOpenTagLine = false;
     private boolean suppressCloseTagLine = false;
     private final Stack<String> myOpenTags = new Stack<String>();
 
-    public HtmlFormattingAppendableBase(FormattingAppendable other, Appendable out, boolean inheritIndent) {
-        this(out, inheritIndent ? other.getIndentPrefix().length() : 0, other.getOptions());
+    public HtmlFormattingAppendableBase(LineFormattingAppendable other, boolean inheritIndent) {
+        this.out = new LineFormattingAppendableImpl(other.getOptions());
+        this.out.setIndentPrefix(other.getIndentPrefix());
     }
 
-    public HtmlFormattingAppendableBase(Appendable out, int indentSize, final int formatOptions) {
-        this.out = new FormattingAppendableImpl(out, formatOptions);
+    public HtmlFormattingAppendableBase(int indentSize, final int formatOptions) {
+        this.out = new LineFormattingAppendableImpl(formatOptions);
         this.out.setIndentPrefix(RepeatedCharSequence.of(" ", indentSize).toString());
     }
 
@@ -46,6 +47,11 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
     public T setSuppressCloseTagLine(boolean suppressCloseTagLine) {
         this.suppressCloseTagLine = suppressCloseTagLine;
         return (T) this;
+    }
+
+    @Override
+    public String toString() {
+        return out.toString();
     }
 
     @Override
@@ -83,6 +89,14 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
 
     @Override
     public T rawPre(CharSequence s) {
+        // if previous pre-formatted did not have an EOL and this one does, need to transfer the EOL
+        // to previous pre-formatted to have proper handling of first/last line, otherwise this opening 
+        // pre-formatted, blows away previous last line pre-formatted information
+        if (out.getPendingEOL() == 0 && s.length() > 0 && s.charAt(0) == '\n') {
+            out.line();
+            s = s.subSequence(1, s.length());
+        }
+
         out.openPreFormatted(true)
                 .append(s)
                 .closePreFormatted();
@@ -91,12 +105,9 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
 
     @Override
     public T rawIndentedPre(CharSequence s) {
-        CharSequence prefix = out.getPrefix();
-        out.setPrefix(out.getTotalIndentPrefix());
-        out.openPreFormatted(false)
+        out.openPreFormatted(true)
                 .append(s)
                 .closePreFormatted();
-        out.setPrefix(prefix);
         return (T) this;
     }
 
@@ -156,20 +167,25 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
     }
 
     @Override
-    public T withCondLine() {
+    public T withCondLineOnChildText() {
         lineOnChildText = true;
         return (T) this;
     }
 
     @Override
     public T withCondIndent() {
-        indentIndentingChildren = true;
+        indentOnFirstEol = true;
         return (T) this;
     }
 
     @Override
     public T tag(CharSequence tagName) {
         return tag(tagName, false);
+    }
+
+    @Override
+    public T tag(CharSequence tagName, Runnable runnable) {
+        return tag(tagName, false, false, runnable);
     }
 
     @Override
@@ -278,67 +294,57 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
 
     @Override
     public T tag(CharSequence tagName, final boolean withIndent, final boolean withLine, Runnable runnable) {
+        final boolean isLineOnChildText = lineOnChildText;
+        final boolean isIndentOnFirstEol = indentOnFirstEol;
+        lineOnChildText = false;
+        indentOnFirstEol = false;
+
         if (withIndent && !suppressOpenTagLine) {
-            out.willIndent();
             out.line();
         }
 
         tag(tagName, false);
 
-        if (withIndent) out.indent();
+        if (withIndent && !isIndentOnFirstEol) out.indent();
 
         if ((out.getOptions() & PASS_THROUGH) != 0) {
             runnable.run();
         } else {
-            final boolean isLineOnChildText = lineOnChildText;
-            final boolean isIndentIndentingChildren = indentIndentingChildren;
-            lineOnChildText = false;
-            indentIndentingChildren = false;
+            boolean[] hadConditionalIndent = new boolean[] { false };
+            Runnable indentOnFirstEol = new Runnable() {
+                @Override
+                public void run() {
+                    hadConditionalIndent[0] = true;
+                }
+            };
 
-            if (isLineOnChildText || isIndentIndentingChildren) {
-                out.openConditional(new ConditionalFormatter() {
-                    @Override
-                    public void apply(final boolean firstAppend, final boolean onIndent, final boolean onLine, final boolean onText) {
-                        if (onIndent) {
-                            if (isIndentIndentingChildren) out.indent();
-                            else out.line();
-                        } else if (firstAppend) {
-                            if (isLineOnChildText) {
-                                out.line();
-                            } else if (onLine) {
-                                // don't suppress the child new line
-                                out.line();
-                            }
-                        }
-                    }
-                });
+            if (isLineOnChildText) out.setLineOnFirstText();
+
+            if (isIndentOnFirstEol) {
+                out.addIndentOnFirstEOL(indentOnFirstEol);
             }
 
             runnable.run();
 
-            if (isLineOnChildText || isIndentIndentingChildren) {
-                out.closeConditional(new ConditionalFormatter() {
-                    @Override
-                    public void apply(final boolean firstAppend, final boolean onIndent, final boolean onLine, final boolean onText) {
-                        if (onIndent) {
-                            if (isIndentIndentingChildren) out.unIndent();
-                            //else buffer.line();
-                        } else if (onText && isLineOnChildText) {
-                            out.line();
-                        }
-                    }
-                });
+            if (isLineOnChildText) out.clearLineOnFirstText();
+
+            if (hadConditionalIndent[0]) {
+                out.unIndentNoEol();
+            } else {
+                out.removeIndentOnFirstEOL(indentOnFirstEol);
             }
         }
 
-        if (withIndent) out.unIndent();
+        if (withIndent && !isIndentOnFirstEol) out.unIndent();
 
         // don't rely on unIndent() doing a line, it will only do so if there was text since indent()
         if (withLine && !suppressCloseTagLine) out.line();
 
         closeTag(tagName);
 
-        if (withIndent && !suppressCloseTagLine) out.line();
+        if (withIndent && !suppressCloseTagLine) {
+            out.line();
+        }
 
         return (T) this;
     }
@@ -382,19 +388,12 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
     // delegated to FormattingAppendable
 
     @Override
-    public Appendable getAppendable() { return out.getAppendable(); }
-
-    @Override
     public int getOptions() { return out.getOptions(); }
 
     @Override
     public T setOptions(final int options) {
         out.setOptions(options);
         return (T) this;
-    }
-
-    public int getModCount() {
-        return out.getModCount();
     }
 
     public boolean isPreFormatted() {
@@ -409,11 +408,6 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
     public T addLine() {
         out.addLine();
         return (T) this;
-    }
-
-    @Override
-    public int getPushedPrefixCount() {
-        return out.getPushedPrefixCount();
     }
 
     public T blankLine() {
@@ -441,18 +435,9 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
         return (T) this;
     }
 
-    public T willIndent() {
-        out.willIndent();
-        return (T) this;
-    }
-
     public T unIndent() {
         out.unIndent();
         return (T) this;
-    }
-
-    public IOException getIOException() {
-        return out.getIOException();
     }
 
     @Override
@@ -470,31 +455,6 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
     @Override
     public T append(final char c) {
         out.append(c);
-        return (T) this;
-    }
-
-    @Override
-    public String getText() {
-        return out.getText();
-    }
-
-    @Override
-    public String getText(int maxBlankLines) {
-        return out.getText(maxBlankLines);
-    }
-
-    public T flush() {
-        out.flush();
-        return (T) this;
-    }
-
-    public T flushWhitespaces() {
-        out.flush();
-        return (T) this;
-    }
-
-    public T flush(final int maxBlankLines) {
-        out.flush(maxBlankLines);
         return (T) this;
     }
 
@@ -523,6 +483,18 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
     }
 
     @Override
+    public T setPrefix(final CharSequence prefix, boolean afterEol) {
+        out.setPrefix(prefix, afterEol);
+        return (T) this;
+    }
+
+    @Override
+    public T addPrefix(final CharSequence prefix, boolean afterEol) {
+        out.addPrefix(prefix, afterEol);
+        return (T) this;
+    }
+
+    @Override
     public T pushPrefix() {
         out.pushPrefix();
         return (T) this;
@@ -535,23 +507,8 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
     }
 
     @Override
-    public T addAfterEolRunnable(final int atPendingEOL, final Runnable runnable) {
-        out.addAfterEolRunnable(atPendingEOL, runnable);
-        return (T) this;
-    }
-
-    @Override
-    public CharSequence getTotalIndentPrefix() {
-        return out.getTotalIndentPrefix();
-    }
-
-    public T line(final Ref<Boolean> lineRef) {
-        out.line(lineRef);
-        return (T) this;
-    }
-
-    public T lineIf(final Ref<Boolean> lineRef) {
-        out.lineIf(lineRef);
+    public T popPrefix(boolean afterEol) {
+        out.popPrefix(afterEol);
         return (T) this;
     }
 
@@ -573,64 +530,9 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
         return (T) this;
     }
 
-    @Override
-    public boolean isPendingSpace() {
-        return out.isPendingSpace();
-    }
-
-    @Override
-    public int getPendingSpace() {
-        return out.getPendingSpace();
-    }
-
-    @Override
-    public boolean isPendingEOL() {
-        return out.isPendingSpace();
-    }
-
-    @Override
-    public int getPendingEOL() {
-        return out.getPendingEOL();
-    }
-
-    @Override
-    public void setPendingEOL(final int pendingEOL) {
-        out.setPendingEOL(pendingEOL);
-    }
-
-    @Override
-    public int getIndent() { return out.getIndent(); }
-
-    @Override
-    public T setIndentOffset(final int indentOffset) {
-        out.setIndentOffset(indentOffset);
-        return (T) this;
-    }
-
     public int getLineCount() {
         return out.getLineCount();
     }
-
-    @Override
-    public T lastOffset(final Ref<Integer> refOffset) {
-        out.lastOffset(refOffset);
-        return (T) this;
-    }
-
-    @Override
-    public int lastOffset() { return out.lastOffset(); }
-
-    @Override
-    public int offset() { return out.offset(); }
-
-    @Override
-    public int offsetWithPending() { return out.offsetWithPending(); }
-
-    @Override
-    public int column() { return out.column(); }
-
-    @Override
-    public int columnWith(final CharSequence csq, final int start, final int end) { return out.columnWith(csq, start, end); }
 
     @Override
     public T openPreFormatted(final boolean keepIndent) {
@@ -644,13 +546,71 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
         return (T) this;
     }
 
-    public T openConditional(final ConditionalFormatter openFormatter) {
-        out.openConditional(openFormatter);
-        return (T) this;
-    }
+    // @formatter:off
+    @Override
+    public LineFormattingAppendable append(final LineFormattingAppendable lines, final int startLine, final int endLine) {return out.append(lines, startLine, endLine);}
 
-    public T closeConditional(final ConditionalFormatter closeFormatter) {
-        out.closeConditional(closeFormatter);
-        return (T) this;
-    }
+    @Override
+    public LineFormattingAppendable prefixLines(final CharSequence prefix, final int startLine, final int endLine) {return out.prefixLines(prefix, startLine, endLine);}
+
+    @Override
+    public List<CharSequence> getLines(final int startLine, final int endLine) {return out.getLines(startLine, endLine);}
+
+    @Override
+    public List<CharSequence> getLineContents(final int startLine, final int endLine) {return out.getLineContents(startLine, endLine);}
+
+    @Override
+    public List<BasedSequence> getLinePrefixes(final int startLine, final int endLine) {return out.getLinePrefixes(startLine, endLine);}
+
+    @Override
+    public int column() {return out.column();}
+
+    @Override
+    public int offset() { return out.offset();}
+
+    @Override
+    public int offsetWithPending() { return out.offsetWithPending();}
+
+    @Override
+    public String toString(final int maxBlankLines) {return out.toString(maxBlankLines);}
+
+    @Override
+    public boolean isPendingSpace() {return out.isPendingSpace();}
+
+    @Override
+    public int getPendingEOL() {return out.getPendingEOL();}
+
+    @Override
+    public int getPendingSpace() {return out.getPendingSpace();}
+
+    @Override
+    public boolean isPreFormattedLine(final int line) {return out.isPreFormattedLine(line);}
+
+    @Override
+    public LineFormattingAppendable appendTo(final Appendable out, final int maxBlankLines, final CharSequence prefix, final int startLine, final int endLine) throws IOException {this.out.appendTo(out, maxBlankLines, prefix, startLine, endLine); return (T)this;}
+
+    @Override
+    public LineFormattingAppendable openPreFormatted() {out.openPreFormatted(); return (T)this;}
+
+    @Override
+    public LineFormattingAppendable prefixLines(final CharSequence prefix, final boolean addAfterLinePrefix, final int startLine, final int endLine) {out.prefixLines(prefix, addAfterLinePrefix, startLine, endLine); return (T)this;}
+
+    @Override
+    public LineFormattingAppendable lineWithTrailingSpaces(int count) {out.lineWithTrailingSpaces(count); return (T)this;}
+
+    @Override
+    public LineFormattingAppendable removeLines(final int startLine, final int endLine) {out.removeLines(startLine, endLine); return (T)this;}
+
+    @Override
+    public LineFormattingAppendable lineOnFirstText(boolean value) {out.lineOnFirstText(value); return (T)this;}
+
+    @Override
+    public LineFormattingAppendable addIndentOnFirstEOL(Runnable runnable) {out.addIndentOnFirstEOL(runnable); return (T)this;}
+
+    @Override
+    public LineFormattingAppendable removeIndentOnFirstEOL(Runnable runnable) {out.removeIndentOnFirstEOL(runnable); return (T)this;}
+
+    @Override
+    public LineFormattingAppendable unIndentNoEol() {out.unIndentNoEol(); return (T)this;}
+    // @formatter:on
 }

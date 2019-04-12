@@ -29,9 +29,9 @@ public class TableCellOffsetInfoTest extends MarkdownTableTestBase {
         int pos = markdown.indexOf("^");
         BasedSequence source = BasedSequenceImpl.of(markdown.substring(0, pos) + markdown.substring(pos + 1));
         MarkdownTable table = getTable(source, formatOptions("", null).toMutable().set(TableFormatOptions.FORMAT_TABLE_LEFT_ALIGN_MARKER, DiscretionaryText.AS_IS));
-        HtmlWriter out = new HtmlWriter(new StringBuilder(), 0, HtmlWriter.FORMAT_ALL);
+        HtmlWriter out = new HtmlWriter(0, HtmlWriter.FORMAT_ALL);
         table.appendTable(out);
-        String formattedTable = out.getText();
+        String formattedTable = out.toString(0);
         TableCellOffsetInfo offsetInfo = table.getCellOffsetInfo(pos);
 
         assertEquals("" +
@@ -72,9 +72,9 @@ public class TableCellOffsetInfoTest extends MarkdownTableTestBase {
         int pos = markdown.indexOf("^");
         BasedSequence source = BasedSequenceImpl.of(markdown.substring(0, pos) + markdown.substring(pos + 1));
         MarkdownTable table = getTable(source, formatOptions("", null));
-        HtmlWriter out = new HtmlWriter(new StringBuilder(), 0, HtmlWriter.FORMAT_ALL);
+        HtmlWriter out = new HtmlWriter(0, HtmlWriter.FORMAT_ALL);
         table.appendTable(out);
-        String formattedTable = out.getText();
+        String formattedTable = out.toString(0);
         TableCellOffsetInfo offsetInfo = table.getCellOffsetInfo(pos);
 
         assertEquals("" +
@@ -361,9 +361,9 @@ public class TableCellOffsetInfoTest extends MarkdownTableTestBase {
         int pos = markdown.indexOf("^");
         BasedSequence source = BasedSequenceImpl.of(markdown.substring(0, pos) + markdown.substring(pos + 1));
         MarkdownTable table = getTable(source, formatOptions("", null));
-        HtmlWriter out = new HtmlWriter(new StringBuilder(), 0, HtmlWriter.FORMAT_ALL);
+        HtmlWriter out = new HtmlWriter(0, HtmlWriter.FORMAT_ALL);
         table.appendTable(out);
-        String formattedTable = out.getText();
+        String formattedTable = out.toString(0);
         TableCellOffsetInfo offsetInfo = table.getCellOffsetInfo(pos);
 
         assertEquals("" +

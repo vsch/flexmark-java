@@ -1,7 +1,5 @@
 package com.vladsch.flexmark.ext.toc;
 
-import com.vladsch.flexmark.util.IParse;
-import com.vladsch.flexmark.util.IRender;
 import com.vladsch.flexmark.ext.toc.internal.SimTocOptionsParser;
 import com.vladsch.flexmark.ext.toc.internal.TocOptions;
 import com.vladsch.flexmark.ext.toc.internal.TocOptionsParser;
@@ -12,12 +10,18 @@ import com.vladsch.flexmark.spec.IRenderBase;
 import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.spec.SpecReader;
 import com.vladsch.flexmark.test.ComboSpecTestCase;
+import com.vladsch.flexmark.util.IParse;
+import com.vladsch.flexmark.util.IRender;
 import com.vladsch.flexmark.util.Pair;
-import com.vladsch.flexmark.util.ast.*;
+import com.vladsch.flexmark.util.ast.Node;
+import com.vladsch.flexmark.util.ast.NodeVisitor;
+import com.vladsch.flexmark.util.ast.VisitHandler;
+import com.vladsch.flexmark.util.ast.Visitor;
 import com.vladsch.flexmark.util.options.*;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import org.junit.runners.Parameterized;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -57,7 +61,8 @@ public class TocOptionsParserTest extends ComboSpecTestCase {
             return new VisitHandler<?>[] {
                     new VisitHandler<ParserNode>(ParserNode.class, new Visitor<ParserNode>() {
                         @Override
-                        public void visit(ParserNode node) {visitor.visit(node);
+                        public void visit(ParserNode node) {
+                            visitor.visit(node);
                         }
                     }),
             };
@@ -229,10 +234,14 @@ public class TocOptionsParserTest extends ComboSpecTestCase {
         public void render(Node node, Appendable output) {
             assert node instanceof ParserNode;
             TocOptions tocOptions = getOptions().get(TOC_OPTIONS);
-            final HtmlWriter html = new HtmlWriter(output, 2, 0);
+            final HtmlWriter html = new HtmlWriter(2, 0);
             RenderingVisitor visitor = new RenderingVisitor(html, tocOptions);
             visitor.render(node);
-            html.flush();
+            try {
+                html.appendTo(output, 0);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
         @Override

@@ -38,7 +38,7 @@ public class EnumeratedReferenceNodeFormatter extends NodeRepositoryFormatter<En
     @Override
     public void renderReferenceBlock(final EnumeratedReferenceBlock node, final NodeFormatterContext context, final MarkdownWriter markdown) {
         markdown.blankLine().append("[@").appendNonTranslating(node.getText()).append("]: ");
-        markdown.pushPrefix().addPrefix("    ");
+        markdown.pushPrefix().addPrefix("    ", true);
         context.renderChildren(node);
         markdown.popPrefix();
         markdown.blankLine();

@@ -7,6 +7,8 @@ import java.io.*;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.*;
+import java.util.function.BiFunction;
+import java.util.function.Function;
 
 public class Utils {
     public static <T> T ifNull(T receiver, T altValue) {

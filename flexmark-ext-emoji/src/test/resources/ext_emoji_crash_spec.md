@@ -458,83 +458,83 @@ Converts :warning: to its emoji image
 <h5>This Release To Do</h5>
 <ul>
   <li>[ ] Add: when typing in the text field for change link to reference, automatically enable the
-  add reference text if reference id is different from original</li>
+    add reference text if reference id is different from original</li>
   <li>[ ] Add: paste image into document, use content preview and replace whatever is selected or
-  under caret not just full links. Default to reuse the name at caret. Directory to be
-  configurable by scope of the destination file.</li>
+    under caret not just full links. Default to reuse the name at caret. Directory to be
+    configurable by scope of the destination file.</li>
   <li>[ ] Add: transpose table, best to add <code>copy to clipboard transposed table</code></li>
   <li>[ ] Add: update parser configuration to new flexmark-java options.</li>
   <li>[ ] Fix: Swing preview HTML table has body row count reset or reversed so first row is like
-  heading.</li>
+    heading.</li>
   <li>[ ] Add: parser emulation family to parser configuration</li>
   <li>[ ] Add: parser profile needs to be passed to functions handling formatting and prefix
-  generation. Now this can vary significantly from one parser family to another.</li>
+    generation. Now this can vary significantly from one parser family to another.</li>
   <li>[ ] Fix: when ENTER deletes a list item prefix inserts extra blank line</li>
   <li>[ ] Remove: smart asterisk, underscore and tilde handlers and options.</li>
   <li>[ ] Add: option for escaping special cases for <code>*</code>, <code>-</code>, <code>+</code>, <code>#</code> <em><code>N.</code></em> where <em>N</em> is numeric
-  with a <code>\</code> so that it is not mis-interpreted as a special char at first non-blank of a
-  wrapped line. If one is found in such a position then it should be annotated with a
-  warning and a quick fix to escape it, unless it is the first non-blank of the list item's
-  text. The <code>#</code> affects current implementation but should only be escaped if it lands
-  exactly on the items child indent position, if parser rules don't allow leading spaces
-  before ATX headings.</li>
+    with a <code>\</code> so that it is not mis-interpreted as a special char at first non-blank of a
+    wrapped line. If one is found in such a position then it should be annotated with a
+    warning and a quick fix to escape it, unless it is the first non-blank of the list item's
+    text. The <code>#</code> affects current implementation but should only be escaped if it lands
+    exactly on the items child indent position, if parser rules don't allow leading spaces
+    before ATX headings.</li>
   <li>[ ] Add: join processor to remove bullet list marker when joining next line item</li>
   <li>[ ] Fix: CommonMark and Commonmark to CommonMark</li>
   <li>[ ] Add: other parser profiles and appropriate options to allow using these:
-  * [ ] CommonMark: GitHub Comments
-  * [ ] Kramdown: GitHub Docs, GitHub Wiki Pages, Jekyll
-  * [ ] FixedIndent: MultiMarkdown, PanDocs, Pegdown</li>
+    * [ ] CommonMark: GitHub Comments
+    * [ ] Kramdown: GitHub Docs, GitHub Wiki Pages, Jekyll
+    * [ ] FixedIndent: MultiMarkdown, PanDocs, Pegdown</li>
   <li>[ ] Add: <code>PARSE_JEKYLL_MACROS_IN_URLS</code> option for parser and to Parser settings to enable
-  parsing of jekyll macros in urls with spaces between macro and braces.</li>
+    parsing of jekyll macros in urls with spaces between macro and braces.</li>
   <li>[ ] Fix: cursor navigation very slow in table with few rows but very long text in columns: see
-  <code>Extensions.md</code> in <code>flexmark-java</code> wiki. Suspect is figuring out table context for toolbar
-  button state update.</li>
+    <code>Extensions.md</code> in <code>flexmark-java</code> wiki. Suspect is figuring out table context for toolbar
+    button state update.</li>
   <li>[ ] Fix: inserting list item above in a loose list should not insert blank line below current
-  item since we are inserting above and not affecting the current item.</li>
+    item since we are inserting above and not affecting the current item.</li>
   <li>[ ] Add: List syntax dependent list item action behavior.
-  - [x] Add: flexmark option to recognize empty list sub-items option to PARSER purpose.
-  - [x] Fix: psi list item prefix reporting to match fixed4, github and CommonMark list
-  processing settings.
-  * [x] Fix: list indent for nested items should not indent to more than (listLevel)*4 + 3
-  in fixed 4 mode, and check if also in GitHub compatible mode
-  - [ ] Fix: indent/un-indent for other than fixed 4 has to re-indent child items to the
-  parent's new indent level. Otherwise parsing of the children will be off. Right now
-  works only for fixed4</li>
+    - [x] Add: flexmark option to recognize empty list sub-items option to PARSER purpose.
+    - [x] Fix: psi list item prefix reporting to match fixed4, github and CommonMark list
+    processing settings.
+    * [x] Fix: list indent for nested items should not indent to more than (listLevel)*4 + 3
+    in fixed 4 mode, and check if also in GitHub compatible mode
+    - [ ] Fix: indent/un-indent for other than fixed 4 has to re-indent child items to the
+    parent's new indent level. Otherwise parsing of the children will be off. Right now
+    works only for fixed4</li>
   <li>[ ] Add: List syntax dependent list format behavior.
-  * [ ] GitHub enforces styleSettings.LIST_ALIGN_CHILD_BLOCKS and has a maximum for prefix
-  marker start
-  * [ ] CommonMark enforces styleSettings.LIST_ALIGN_CHILD_BLOCKS and have no maximum for
-  prefix as long as it matches the parent item's content indent
-  * [ ]</li>
+    * [ ] GitHub enforces styleSettings.LIST_ALIGN_CHILD_BLOCKS and has a maximum for prefix
+    marker start
+    * [ ] CommonMark enforces styleSettings.LIST_ALIGN_CHILD_BLOCKS and have no maximum for
+    prefix as long as it matches the parent item's content indent
+    * [ ]</li>
 </ul>
 <ul>
   <li>[ ] Fix: Un-indent item action leaves leading indent if it was aligned to parent's left text
-  edge.</li>
+    edge.</li>
 </ul>
 <h5>Next Release To Do</h5>
 <ul>
   <li>[ ] Add: state persistence for JavaFX script parameters and modify the <code>details</code> opener and
-  Collapse Markdown scripts to use these for initializing the open/close state.</li>
+    Collapse Markdown scripts to use these for initializing the open/close state.</li>
   <li>[ ] Add: save the persistence for JavaFX with the document state so that it is restored when
-  the document opens.</li>
+    the document opens.</li>
   <li>[ ] Fix: When pasting text that contains ref links over a selection that already has these
-  references, after the paste the references are deleted but new ones are not added. Put a
-  check if possible to ignore any existing references in a selection since they will be
-  deleted by the paste.</li>
+    references, after the paste the references are deleted but new ones are not added. Put a
+    check if possible to ignore any existing references in a selection since they will be
+    deleted by the paste.</li>
   <li>[ ] Fix: can't modify PSI inside on save listener.</li>
   <li>[ ] Add: GitHub links should offer the same change relative/http: intention as the rest of the
-  links.</li>
+    links.</li>
   <li>[ ] Fix: HRule colors the whole line even when it is in a list item</li>
   <li>[ ] Fix: SimToc requires default settings option so that rendering will reflect project
-  settings not defaults of flexmark-java SimToc extension. For now renders what is in the
-  document.</li>
+    settings not defaults of flexmark-java SimToc extension. For now renders what is in the
+    document.</li>
   <li>[ ] Fix: Link Map
-  * [ ] implement <code>ExpandedItemRendererComponentWrapper</code> for table cells so that the
-  extended tooltip does not hide an error tooltip.</li>
+    * [ ] implement <code>ExpandedItemRendererComponentWrapper</code> for table cells so that the
+    extended tooltip does not hide an error tooltip.</li>
   <li>[ ] Add: ability to move a lookup-up to the start of an element's location so that completions
-  for emoji shortcuts and links located in heading elements can be properly aligned.</li>
+    for emoji shortcuts and links located in heading elements can be properly aligned.</li>
   <li>[ ] Fix: take a look at the toolbar implementation to see if it can be made to put in a drop
-  down for buttons that don't fit.</li>
+    down for buttons that don't fit.</li>
   <li>[ ] Add: source synchronization for Swing preview window</li>
   <li>[ ] Add: source synchronization for HTML plain text previews</li>
 </ul>
@@ -548,25 +548,25 @@ Converts :warning: to its emoji image
 <h3>2.2.0.12 - Compatibility &amp; Enhancement Release</h3>
 <ul>
   <li>[ ] Add: format option to sort task lists with completed ones last, leaving the order
-  otherwise unchanged, with option to remove task marker for done tasks. Non task items
-  sorted like completed task items.</li>
+    otherwise unchanged, with option to remove task marker for done tasks. Non task items
+    sorted like completed task items.</li>
   <li>Fix: all inline toggling actions to remove markers if caret is between markers and no
-  intervening text, as occurs when toggle action was just used to inserted markers.</li>
+    intervening text, as occurs when toggle action was just used to inserted markers.</li>
   <li>Add: all inline toggling actions take punctuation characters that they will not wrap by
-  default if caret is on them or the current word to wrap ends on them. Default
-  punctuation symbols in settings: <code>.,;:!?</code>. If the caret is right after one of them then
-  default behavior is to wrap the word immediately before the punctuation characters.</li>
+    default if caret is on them or the current word to wrap ends on them. Default
+    punctuation symbols in settings: <code>.,;:!?</code>. If the caret is right after one of them then
+    default behavior is to wrap the word immediately before the punctuation characters.</li>
   <li>Change: Added option to Main Settings <code>Inline code toggle like other text style actions</code>
-  change inline code action to work just like bold, italic and strike through, instead of
-  continuously adding back ticks when at the end of word.</li>
+    change inline code action to work just like bold, italic and strike through, instead of
+    continuously adding back ticks when at the end of word.</li>
   <li>Fix: references or links to <code>raw/master/*.png</code> showed as unresolved when on wiki home because
-  only image links would handle the optional wiki prefix from home page for image files.</li>
+    only image links would handle the optional wiki prefix from home page for image files.</li>
   <li>Fix: backspace at end of file after <code>#</code> did nothing.</li>
   <li>Fix: Header marker equalization was broken.</li>
   <li>Fix: CSS when task list item is first level, bullet sub-items mess up items</li>
   <li>Fix: when inserting list item above in a loose list, adds a blank line right after the
-  first line of the next item, even if the item has more than one line of text. Should not
-  add blank line after the next item at all.</li>
+    first line of the next item, even if the item has more than one line of text. Should not
+    add blank line after the next item at all.</li>
   <li>Add: surround live templates for:
     <ul>
       <li>fenced code,</li>
@@ -576,15 +576,15 @@ Converts :warning: to its emoji image
   </li>
   <li>Add: Markdown context for Live Templates</li>
   <li>Fix: Table body and head should not use node text for breadcrumb. Row does that causing double
-  breadcrumb text to appear.</li>
+    breadcrumb text to appear.</li>
   <li>Add: definition lists implementation from flexmark-java</li>
   <li>Fix: format document did not preserve block quotes on fenced code</li>
   <li>Change: image links to http://github.com/user/project/blob are now always flagged with a
-  warning regardless of whether they are part of an image link or reference.</li>
+    warning regardless of whether they are part of an image link or reference.</li>
   <li>Add: <code>&lt;html&gt;&lt;/html&gt;</code> wrapper tags to <code>JavaFxHtmlGenerator</code> and <code>SwingHtmlGenerator</code></li>
   <li>Add: <code>NO_FILE_EOL</code> to flexmark example options as built-in option</li>
   <li>Add: updated to flexmark-java 0.9.0, added subscript/superscript/ins extensions to parser
-  options. Can be used with Jira, Copy HTML mime</li>
+    options. Can be used with Jira, Copy HTML mime</li>
   <li>Add: Toc options for table of contents list generation options:
     <ul>
       <li>hierarchy: as before hierarchical list of headings in document order</li>
@@ -595,45 +595,45 @@ Converts :warning: to its emoji image
     </ul>
   </li>
   <li>Change: for parsing purposes all bullets interrupt all paragraphs. Eliminate the possibility
-  of wrap on typing merging a block of list items when one of them is edited to non-list item.</li>
+    of wrap on typing merging a block of list items when one of them is edited to non-list item.</li>
   <li>Add: wrap on typing and document format to respect the <code>@formatter:off</code>/<code>@formatter:on</code> tags</li>
   <li>Change: refactor all the settings to use settable component list where possible.</li>
   <li>Fix: Copy HTML mime formatted text to use CSS settings only if the profile name is
-  <code>COPY_HTML_MIME</code>, otherwise use internal defaults.</li>
+    <code>COPY_HTML_MIME</code>, otherwise use internal defaults.</li>
   <li>Fix: table column alignment was not taking accumulated span offset in the table row when
-  getting alignment for the column from separator row.</li>
+    getting alignment for the column from separator row.</li>
   <li>Add: <code>Copy markdown document or selection as HTML mime formatted text</code> action that will copy
-  document or selection to the clipboard in HTML format that will paste as formatted text into
-  applications that handle HTML formatted text. Useful for pasting rendered markdown in e-mails.
-  To override the default styles and parser options for rendered HTML create a profile named
-  <code>COPY_HTML_MIME</code> and override CSS Text. Use
-  <code>/com/vladsch/idea/multimarkdown/html_mime_default.css</code> as a starting template. All style
-  settings must be contained in a single matching entry since they are set in each element and
-  there is no stylesheet and the &quot;css&quot; text is parsed and its style added to the element's style
-  attribute. The &quot;parent&quot; selector is based on Markdown AST hierarchy and not actual HTML which
-  at the time attributes are applied does not exist, so any HTML tags surrounding Markdown
-  elements will have no effect. Also the classes are hardcoded into the attribute provider such
-  as: <code>tr.odd</code>, <code>tr.even</code> and <code>li.loose</code> based again on Markdown AST.</li>
+    document or selection to the clipboard in HTML format that will paste as formatted text into
+    applications that handle HTML formatted text. Useful for pasting rendered markdown in e-mails.
+    To override the default styles and parser options for rendered HTML create a profile named
+    <code>COPY_HTML_MIME</code> and override CSS Text. Use
+    <code>/com/vladsch/idea/multimarkdown/html_mime_default.css</code> as a starting template. All style
+    settings must be contained in a single matching entry since they are set in each element and
+    there is no stylesheet and the &quot;css&quot; text is parsed and its style added to the element's style
+    attribute. The &quot;parent&quot; selector is based on Markdown AST hierarchy and not actual HTML which
+    at the time attributes are applied does not exist, so any HTML tags surrounding Markdown
+    elements will have no effect. Also the classes are hardcoded into the attribute provider such
+    as: <code>tr.odd</code>, <code>tr.even</code> and <code>li.loose</code> based again on Markdown AST.</li>
   <li>Add: option to not load GIF images, later if possible to not animate them just display the
-  first frame. Really messes up preview and scrolling. Even crashed PhpStorm needing a power
-  down because it would not be killed. Same with IDEA but force quit worked.</li>
+    first frame. Really messes up preview and scrolling. Even crashed PhpStorm needing a power
+    down because it would not be killed. Same with IDEA but force quit worked.</li>
   <li>Fix: In profiles Stylesheet and HTML override project settings options were reversed in the
-  code. Html controlled Stylesheet and Stylesheet controlled HTML.</li>
+    code. Html controlled Stylesheet and Stylesheet controlled HTML.</li>
   <li>Fix: Copy Jira and YouTrack heading would not have text if <code>Anchor Links</code> parser option was
-  selected.</li>
+    selected.</li>
   <li>Add: option to not load GIF images, later if possible to not animate them just display the
-  first frame. Really messes up preview and scrolling. Even crashed PhpStorm needing a power
-  down because it would not be killed.</li>
+    first frame. Really messes up preview and scrolling. Even crashed PhpStorm needing a power
+    down because it would not be killed.</li>
   <li>Add: formatter control tags support</li>
   <li>Add: Copy YouTrack formatted text, like Jira but with differences</li>
   <li>Fix: Copy Jira formatted text adding extra blank line in block quote</li>
   <li>Add: fenced/indented code trailing space trimming options.</li>
   <li>Add: flexmark-java flexmark example trailing space trimming options.</li>
   <li>Add: fenced code style option <code>Space before language info</code> to put a space between opening
-  marker and language info string</li>
+    marker and language info string</li>
   <li>Fix: disable backspace, enter and typed character handlers in multi-caret mode.</li>
   <li>Add: multi-invoke for inline code completion to select fully qualified names or just simple
-  names. Make simple name the default. Very annoying to get full names in docs.</li>
+    names. Make simple name the default. Very annoying to get full names in docs.</li>
 </ul>
 <h3>2.2.0 - Compatibility &amp; Enhancement Release</h3>
 <h4>Basic &amp; Enhanced Editions</h4>
@@ -644,12 +644,12 @@ Converts :warning: to its emoji image
   <li>Fix #335, Markdown Navigator breaks the line end whitespace trimming feature of EditorConfig</li>
   <li>Change: remove all <strong>pegdown</strong> dependencies</li>
   <li>Change: remove tab previews and enable split editor for basic edition, with fixed position
-  restoring.</li>
+    restoring.</li>
   <li>Add: basic version now has split editor</li>
   <li>Fix: Slow scrolling with JavaFX WebView, was also causing unacceptable typing response for
-  files of 500+ lines. Caused by WebView handling of CSS parameters not code.</li>
+    files of 500+ lines. Caused by WebView handling of CSS parameters not code.</li>
   <li>Fix: reimplemented JavaFX WebView integration with interruptible rendering to favour typing
-  response.</li>
+    response.</li>
   <li>Add: #225, code highlight line number via Prism.js highlighter option</li>
   <li>Fix: #313, Changing fonts causes WebStorm to freeze</li>
   <li>Add: #316, Make shared settings Project specific</li>
@@ -657,55 +657,55 @@ Converts :warning: to its emoji image
   <li>Fix: Implement multi-line URL image links in flexmark-java</li>
   <li>Fix: #327, IntelliJ IDEA 2016.3 EAP API change incompatibility.</li>
   <li>Fix: #328, wiki link can use <code></code>, <code>-</code>, <code>+</code>, <code>&lt;</code> or <code>&gt;</code> to match a <code>-</code> in the file name. Added
-  stub index for links to make file reference search efficient.</li>
+    stub index for links to make file reference search efficient.</li>
   <li>Change: document icons to match 2016.3 style</li>
 </ul>
 <h4>Enhanced Edition</h4>
 <ul>
   <li>Fix: Rename refactoring of referencing elements broken by stub index work</li>
   <li>Add: JavaFX WebView script provider <code>Details tag opener</code> to open all <code>&lt;details&gt;</code> tags in
-  preview so the content can be seen while editing</li>
+    preview so the content can be seen while editing</li>
   <li>Add: collapsible headers and markdown scripts</li>
   <li>Fix: setting change export now forces to re-export files in case some settings changed that
-  affect the content of exported files.</li>
+    affect the content of exported files.</li>
   <li>Change list toolbar icons to be simpler and more distinguishable. they all look alike.</li>
   <li>Add: link map move up/down groups within tree node</li>
   <li>Add: link map add quick fix to move errant mapping group to <code>unused</code> link type so config can
-  be saved.</li>
+    be saved.</li>
   <li>Add: jekyll templates by adding an option to create a initial content when creating a mapping
-  text group: empty, sample1,... each sample is based on element type</li>
+    text group: empty, sample1,... each sample is based on element type</li>
   <li>Fix: splitting a line right after list item marker would be inconsistent and not result in a
-  new list item above the current one.</li>
+    new list item above the current one.</li>
   <li>Fix: bump up the index file version numbers</li>
   <li>Change: disabled swing synchronization until it works properly</li>
   <li>Add: warning that prism syntax highlighter slows typing response also added for Fire Bug Lite</li>
   <li>Fix: document format would sometimes wrap early.</li>
   <li>Fix: swing css files not to have embedded <code>&lt;</code> in comments to eliminate <code>Unterminated Comment</code>
-  exception when using <code>Embed stylesheet URL content</code> option in HTML Generation with Swing
-  browser</li>
+    exception when using <code>Embed stylesheet URL content</code> option in HTML Generation with Swing
+    browser</li>
   <li>Fix: swing browser pane to process HTML header for stylesheet links and load them. Now Swing
-  browser can be used with exported HTML documents and a fast way to play with Swing stylesheet
-  by embedding it in the HTML to get live update in the preview.</li>
+    browser can be used with exported HTML documents and a fast way to play with Swing stylesheet
+    by embedding it in the HTML to get live update in the preview.</li>
   <li>Add: warning to Prism.js and Fire Bug Lite that they can affect preview display and typing
-  response.</li>
+    response.</li>
   <li>Add: preview update delay tweak, default of 500ms makes typing a breeze and preview updates
-  half second later.</li>
+    half second later.</li>
   <li>Fix: export on smart mode exit broke exporting all together</li>
   <li>Fix: style sheets need url prefix when displaying HTML</li>
   <li>Add: Re-Export action that will ignore modification time and force re-exporting of all
-  required files.</li>
+    required files.</li>
   <li>Fix: added a short time delay to running export after settings change or project open.</li>
   <li>Add: option to not wrap on typing when soft wrap is enabled for the editor</li>
   <li>Fix: #340, 2.1.1.40 Fail to re-gen HTML files when HTML already exists</li>
   <li>Add: option for format document with soft wraps: disabled, enabled and infinite margins. Will
-  remove all soft breaks when formatting the document.</li>
+    remove all soft breaks when formatting the document.</li>
   <li>Fix: balloon on html project export</li>
   <li>Add: link text completion for GitHub issue titles. Completes same as in text. Fast way to link
-  to issues and have the title in the link.</li>
+    to issues and have the title in the link.</li>
   <li>Add: #314, Export .html files (as part of build?)
     <ul>
       <li>exported files are limited to being under the project base directory to prevent erroneous
-      target directory from writing to the file system in unexpected location.</li>
+        target directory from writing to the file system in unexpected location.</li>
       <li>copy custom font file if stylesheet has reference to it</li>
       <li>optionally use relative links to:
         <ul>
@@ -719,9 +719,9 @@ Converts :warning: to its emoji image
     </ul>
   </li>
   <li>Fix : Jira copy to add blank lines for loosely spaced lists and after the last list item of
-  the outer-most list and the next element</li>
+    the outer-most list and the next element</li>
   <li>Add: scope based rendering profiles allowing fine grained control on markdown rendering
-  options.</li>
+    options.</li>
   <li>Add: #319, Synchronize source caret to preview element on click.</li>
   <li>Add: #283, print html preview for now only for JavaFx</li>
   <li>Add: #174, Suggestion: URL-to-filename transformation rules for image previews
@@ -729,18 +729,18 @@ Converts :warning: to its emoji image
       <li>Options to map from markdown link text to GitHub based link reference. ie. <code>{{ static_root }}</code> --&gt; <code>/</code></li>
       <li>Options to map from GitHub based link reference to markdown link text. ie. <code>/</code> --&gt; <code>{{ static_root }}</code></li>
       <li>With scope based rendering profiles this mapping can be customized for specific files
-      and/or directories</li>
+        and/or directories</li>
     </ul>
   </li>
   <li>Add: #331, Add markdown context aware trailing space removal</li>
   <li>Add: #329, Now can delete all previously generated file through HTML export or just the files
-  that were previously generated and will no longer be generated in the current configuration.</li>
+    that were previously generated and will no longer be generated in the current configuration.</li>
   <li>Add: Update HTML Export on project settings change option.</li>
   <li>Fix: #330, unexpected HTML export files on save.</li>
   <li>Fix: exported HTML was missing custom CSS text from Stylesheet options.</li>
   <li>Add: HTML Export will export any HTML files that were exported with different settings</li>
   <li>Add: Export Markdown to HTML action will export all changed files and delete any invalid ones
-  from previous exports.</li>
+    from previous exports.</li>
   <li>Add: HTML Export to display error on export of different sources to same target</li>
   <li>Add: progress indicator to HTML Export and make it backgroundable and cancellable.</li>
   <li>Add: Soft wrap at right margin option to application settings for markdown documents.</li>
@@ -748,15 +748,15 @@ Converts :warning: to its emoji image
   <li>Fix: linked map settings adding empty group on settings load in migration code</li>
   <li>Add: #332, refactor file name reference in jekyll front matter when renaming file</li>
   <li>Fix: when Prism.js is used as highlighter, scrolling to source with caret in the code part of
-  the fenced code would always scroll to top of document.</li>
+    the fenced code would always scroll to top of document.</li>
   <li>Fix: #320, ArrayIndexOutOfBoundsException at BlockQuoteAddAction</li>
   <li>Fix: JavaFX preview synchronize to caret would mess up for heading and fenced code in list
-  items.</li>
+    items.</li>
   <li>Fix: Edit TOC dialog did not add a space between <code>levels=...</code> and the next option</li>
   <li>Fix: Jira copy failed to include <code>:lang=</code> for fenced code and did not add an extra blank line
-  after the fenced code</li>
+    after the fenced code</li>
   <li>Fix: flexmark-java options refactoring exception and make dialog reflect position and
-  selection of element being renamed.</li>
+    selection of element being renamed.</li>
 </ul>
 <h3>2.1.1 - Bug Fix &amp; Enhancement Release</h3>
 <h4>Basic &amp; Enhanced Editions</h4>
@@ -764,7 +764,7 @@ Converts :warning: to its emoji image
   <li>Fix: #299, Tables not syntax highlighted in basic version.</li>
   <li>Add: List syntax options: CommonMark, Fixed, GitHub.</li>
   <li>Add: #301, License activation not working for some network security configurations, Option to
-  use non-secure connection for license activation.</li>
+    use non-secure connection for license activation.</li>
   <li>Fix: #302, IndexOutOfBoundsException: Index out of range: 190</li>
   <li>Fix: #307, NegativeArraySizeException when opening .md.erb file, IDE bug</li>
   <li>Change: update Kotlin to 1.0.4</li>
@@ -773,18 +773,18 @@ Converts :warning: to its emoji image
 <ul>
   <li>Fix: #305, Document Format indents Footmarks converting them to code blocks</li>
   <li>Add: #306, Copy/Cut of reference links, images or footnote references to include the
-  references and footnotes on paste.</li>
+    references and footnotes on paste.</li>
   <li>Add: #300, Breadcrumbs support for Markdown documents</li>
   <li>Fix: breadcrumbs to show heading hierarchy as parents, including headings nested within other
-  elements like list items, block quotes, etc.</li>
+    elements like list items, block quotes, etc.</li>
   <li>Add: breadcrumb option to show element text and maximum number of characters of text to use
-  (10-60, 30 default).</li>
+    (10-60, 30 default).</li>
   <li>Fix: breadcrumb setext heading to use atx equivalent text</li>
   <li>Fix: breadcrumbs to show paragraph text instead of <code>Text Block</code></li>
   <li>Add: Copy as JIRA formatted text action. Copy selection or whole document to clipboard as JIRA
-  formatted text.</li>
+    formatted text.</li>
   <li>Fix: #308, Wiki vcs repo not recognized in 2016.3 due to API changes. Affects to http:...
-  absolute link conversion from non wiki markdown files to wiki target files.</li>
+    absolute link conversion from non wiki markdown files to wiki target files.</li>
   <li>Add: on paste reference link format resolution for new destination file</li>
   <li>Add: on paste link format resolution for new destination file</li>
 </ul>
@@ -804,16 +804,16 @@ Converts :warning: to its emoji image
 <ul>
   <li>Fix: remove e-mail validation from fetch license dialog.</li>
   <li>Fix: typing at the start of text of a numbered list item with wrap on typing enabled would
-  delete the character as soon as it was typed.</li>
+    delete the character as soon as it was typed.</li>
   <li>Fix: wrap on typing would stop wrapping text when space was typed. Caused by the IDE no longer
-  generating pre-char typed handler calls for some yet unknown reasons.</li>
+    generating pre-char typed handler calls for some yet unknown reasons.</li>
   <li>Fix: remove wrap on typing disabling when typing back ticks or back slashes because it was
-  only needed due to pegdown parser quirks.</li>
+    only needed due to pegdown parser quirks.</li>
   <li>Fix: #288, IndexOutOfBoundsException</li>
   <li>Fix: #294, Structure view text not compatible with text search.
     <ol>
       <li>Headings: searchable text is the heading text, greyed out text is the heading id with <code>#</code>
-      prefixed showing the ref anchor for the heading</li>
+        prefixed showing the ref anchor for the heading</li>
       <li>Images: searchable text is the image link, greyed out text is the alt text</li>
       <li>List Items: searchable text is the first line of the item text</li>
       <li>Links: searchable text is the link url, greyed out text is the link text</li>
@@ -822,35 +822,35 @@ Converts :warning: to its emoji image
     </ol>
   </li>
   <li>Fix: #296, License expiration not handled properly by plugin for versions released before
-  license expired</li>
+    license expired</li>
   <li>Fix: #297, Code Fence only minimizes leading spaces of the first code line during formatting</li>
   <li>Fix: #298, Formatting list items with empty text and first item a Atx heading, moves the
-  heading before the list item</li>
+    heading before the list item</li>
 </ul>
 <h3>2.0.0 - New Parser Release</h3>
 <h4>Basic &amp; Enhanced Editions</h4>
 <ul>
   <li>Fix: #282, Child paragraphs of tight list items are merged into the item text in preview
-  instead of being a separate paragraph.</li>
+    instead of being a separate paragraph.</li>
   <li>Change: Component name for Markdown Navigator application shared settings changed to <code>Markdown Navigator</code> from a confusing <code>ApplicationShared</code>. Did't realize that the component name was
-  used for display in import/export settings dialog.</li>
+    used for display in import/export settings dialog.</li>
   <li>Fix: JavaFX and Swing stylesheets to better match GFM rendering.</li>
   <li>Add: Flexmark parser used for Swing preview rendering and plain HTML text previews.</li>
   <li>Add: allow task list items from ordered list items like GitHub, rendering is the same as
-  bullet items.</li>
+    bullet items.</li>
   <li>Fix: emoji renderer was not setting image height, width nor align attributes</li>
   <li>Fix: emoji parser flags were not being passed to HTML Renderer</li>
   <li>Add: Flexmark parser used for JavaFX Html preview rendering.</li>
   <li>Add: Debug setting to allow switching to pegdown for HTML rendering for debug and comparison
-  purposes.</li>
+    purposes.</li>
   <li>Change: update flexmark-java parser to spec 0.26 with more intuitive emphasis parsing</li>
   <li>Add: skeleton error reporter to make reporting plugin errors more convenient and also more
-  complete. No server code yet. For now disabled.</li>
+    complete. No server code yet. For now disabled.</li>
   <li>Fix: With lexer as syntax highlighter deleting the last space after <code>[ ]</code> would cause an
-  exception that was trapped but it would mess up syntax highlighting</li>
+    exception that was trapped but it would mess up syntax highlighting</li>
   <li>Fix: parser would accept ordered lists using <code>)</code> delimiter, as per CommonMark spec.</li>
   <li>Add: flexmark parser as the default option for lexer, parser and external annotator. Typing
-  response is amazing. Some elements still missing:
+    response is amazing. Some elements still missing:
     <ul>
       <li>Definitions</li>
       <li>Typographic: Quotes, Smarts</li>
@@ -862,28 +862,28 @@ Converts :warning: to its emoji image
 <ul>
   <li>Change: Move pegdown timeout from parser settings to debug settings. <img src="/img/grinning.png" alt="emoji people:grinning" height="20" width="20" align="absmiddle" /></li>
   <li>Add: use actual char width to fix for wrap on typing fix when typing right before start of
-  line elements.</li>
+    line elements.</li>
   <li>Add: GFM table rendering option to render tables text that GFM would render as text.</li>
   <li>Fix: wrap on typing right before an element set to always be at the beginning of line would
-  always put the caret right before the element after wrapping, typing the next word and space
-  would wrap the word to the previous line, leaving the caret at the start of line. Now the
-  caret is kept at the end of the previous line making caret behaviour more natural.</li>
+    always put the caret right before the element after wrapping, typing the next word and space
+    would wrap the word to the previous line, leaving the caret at the start of line. Now the
+    caret is kept at the end of the previous line making caret behaviour more natural.</li>
   <li>Fix: split editor layout change actions and preview content change actions now restore focus
-  back to the text editor. Now they can be used in keyboard shortcuts without interrupting
-  typing by needing a mouse click to restore focus.</li>
+    back to the text editor. Now they can be used in keyboard shortcuts without interrupting
+    typing by needing a mouse click to restore focus.</li>
   <li>Add: source position information to list items.</li>
   <li>Fix: link text suggestion provider to remove any <code>..</code> directory references</li>
   <li>Fix: Refine JavaFX scroll preview to source position and highlighting to work more intuitively
-  for block elements, images and address JavaFX WebView DOM element offset quirks.</li>
+    for block elements, images and address JavaFX WebView DOM element offset quirks.</li>
   <li>Add: JavaFX scroll preview to source position and various highlight options to show which
-  element in the source has focus.</li>
+    element in the source has focus.</li>
   <li>Add: flexmark spec example rendering options: fenced code, sections, definition list</li>
   <li>Change: simulated TOC to allow <code>''</code> for titles to match what is allowed in references</li>
   <li>Add: list annotation and quick fixes when list items are inconsistent. i.e. bullet and
-  numbered items mixed in one list.</li>
+    numbered items mixed in one list.</li>
   <li>Add: table annotations and reformat quick fix</li>
   <li>Add: parser option for generated TOC to include a blank line spacer after the <code>[TOC]:#</code> marker
-  to increase compatibility with existing markdown parsers.</li>
+    to increase compatibility with existing markdown parsers.</li>
 </ul>
 .
 Document[0, 26736]

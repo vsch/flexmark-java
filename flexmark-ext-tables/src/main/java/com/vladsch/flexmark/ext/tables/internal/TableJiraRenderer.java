@@ -1,5 +1,6 @@
 package com.vladsch.flexmark.ext.tables.internal;
 
+import com.vladsch.flexmark.ast.BlockQuote;
 import com.vladsch.flexmark.ext.tables.*;
 import com.vladsch.flexmark.html.CustomNodeRenderer;
 import com.vladsch.flexmark.html.HtmlWriter;
@@ -64,9 +65,37 @@ public class TableJiraRenderer implements NodeRenderer {
         ));
     }
 
+    private HtmlWriter tailBlankLine(Node node, HtmlWriter html) {
+        return tailBlankLine(node, 1, html);
+    }
+
+    public boolean isLastBlockQuoteChild(Node node) {
+        Node parent = node.getParent();
+        return parent instanceof BlockQuote && parent.getLastChild() == node;
+    }
+
+    public HtmlWriter tailBlankLine(Node node, int count, HtmlWriter html) {
+        if (isLastBlockQuoteChild(node)) {
+            // Needed to not add block quote prefix to trailing blank lines
+            //if (getPushedPrefixCount() > 0) {
+            //    flush(-1); // clear pending lines so pop prefix is not delayed, if PREFIX_AFTER_PENDING_EOL is enabled
+            //    popPrefix();
+            //    pushPrefix();
+            //}
+            CharSequence prefix = html.getPrefix();
+            html.popPrefix();
+            html.blankLine(count);
+            html.pushPrefix();
+            html.setPrefix(prefix, false);
+        } else {
+            html.blankLine(count);
+        }
+        return html;
+    }
+
     private void render(TableBlock node, NodeRendererContext context, HtmlWriter html) {
         context.renderChildren(node);
-        html.blankLine();
+        tailBlankLine(node, html);
     }
 
     private void render(TableHead node, NodeRendererContext context, HtmlWriter html) {

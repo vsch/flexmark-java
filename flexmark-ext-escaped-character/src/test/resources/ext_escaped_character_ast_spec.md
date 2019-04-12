@@ -62,7 +62,7 @@ Document[0, 29]
   <li>some item
     <ul>
       <li>some sub item
-      continuation        \</li>
+        continuation        \</li>
       <li>another sub item</li>
     </ul>
   </li>

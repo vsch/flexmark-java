@@ -8,7 +8,6 @@ import com.vladsch.flexmark.html.LinkResolverFactory;
 import com.vladsch.flexmark.html.renderer.HeaderIdGenerator;
 import com.vladsch.flexmark.html.renderer.HeaderIdGeneratorFactory;
 import com.vladsch.flexmark.html.renderer.HtmlIdGeneratorFactory;
-import com.vladsch.flexmark.html.renderer.NodeRendererFactory;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.ParserEmulationProfile;
 import com.vladsch.flexmark.util.IRender;
@@ -21,7 +20,7 @@ import com.vladsch.flexmark.util.collection.NodeCollectingVisitor;
 import com.vladsch.flexmark.util.collection.SubClassingBag;
 import com.vladsch.flexmark.util.format.TableFormatOptions;
 import com.vladsch.flexmark.util.format.options.*;
-import com.vladsch.flexmark.util.html.FormattingAppendable;
+import com.vladsch.flexmark.util.html.LineFormattingAppendable;
 import com.vladsch.flexmark.util.mappers.CharWidthProvider;
 import com.vladsch.flexmark.util.options.*;
 
@@ -39,15 +38,15 @@ import java.util.*;
 @SuppressWarnings("WeakerAccess")
 public class Formatter implements IRender {
     /**
-     * output control for FormattingAppendable, see {@link FormattingAppendable#setOptions(int)}
+     * output control for FormattingAppendable, see {@link LineFormattingAppendable#setOptions(int)}
      */
     public static final DataKey<Integer> FORMAT_FLAGS = new DataKey<>("FORMAT_FLAGS", 0);
 
     // for convenience or these together and set FORMAT_FLAGS key above to the value, to have HtmlWriter apply these when rendering Html
-    public static final int FORMAT_CONVERT_TABS = FormattingAppendable.CONVERT_TABS;
-    public static final int FORMAT_COLLAPSE_WHITESPACE = FormattingAppendable.COLLAPSE_WHITESPACE;
-    public static final int FORMAT_SUPPRESS_TRAILING_WHITESPACE = FormattingAppendable.SUPPRESS_TRAILING_WHITESPACE;
-    public static final int FORMAT_ALL_OPTIONS = FormattingAppendable.FORMAT_ALL;
+    public static final int FORMAT_CONVERT_TABS = LineFormattingAppendable.CONVERT_TABS;
+    public static final int FORMAT_COLLAPSE_WHITESPACE = LineFormattingAppendable.COLLAPSE_WHITESPACE;
+    public static final int FORMAT_SUPPRESS_TRAILING_WHITESPACE = LineFormattingAppendable.SUPPRESS_TRAILING_WHITESPACE;
+    public static final int FORMAT_ALL_OPTIONS = LineFormattingAppendable.FORMAT_ALL;
 
     public static final DataKey<Integer> MAX_BLANK_LINES = new DataKey<>("MAX_BLANK_LINES", 2);
     public static final DataKey<Integer> MAX_TRAILING_BLANK_LINES = new DataKey<>("MAX_TRAILING_BLANK_LINES", 1);
@@ -167,9 +166,9 @@ public class Formatter implements IRender {
      * @param output appendable to use for the output
      */
     public void render(Node node, Appendable output) {
-        MainNodeFormatter renderer = new MainNodeFormatter(options, new MarkdownWriter(output, formatterOptions.formatFlags), node.getDocument(), null);
+        MainNodeFormatter renderer = new MainNodeFormatter(options, new MarkdownWriter(formatterOptions.formatFlags), node.getDocument(), null);
         renderer.render(node);
-        renderer.flush(formatterOptions.maxTrailingBlankLines);
+        renderer.flushTo(output, formatterOptions.maxTrailingBlankLines);
     }
 
     /**
@@ -179,9 +178,9 @@ public class Formatter implements IRender {
      * @param output appendable to use for the output
      */
     public void render(Node node, Appendable output, int maxTrailingBlankLines) {
-        MainNodeFormatter renderer = new MainNodeFormatter(options, new MarkdownWriter(output, formatterOptions.formatFlags), node.getDocument(), null);
+        MainNodeFormatter renderer = new MainNodeFormatter(options, new MarkdownWriter(formatterOptions.formatFlags), node.getDocument(), null);
         renderer.render(node);
-        renderer.flush(maxTrailingBlankLines);
+        renderer.flushTo(output, maxTrailingBlankLines);
     }
 
     /**
@@ -204,9 +203,9 @@ public class Formatter implements IRender {
      */
     public void translationRender(Node node, Appendable output, TranslationHandler translationHandler, RenderPurpose renderPurpose) {
         translationHandler.setRenderPurpose(renderPurpose);
-        MainNodeFormatter renderer = new MainNodeFormatter(options, new MarkdownWriter(output, formatterOptions.formatFlags /*| FormattingAppendable.PASS_THROUGH*/), node.getDocument(), translationHandler);
+        MainNodeFormatter renderer = new MainNodeFormatter(options, new MarkdownWriter(formatterOptions.formatFlags /*| FormattingAppendable.PASS_THROUGH*/), node.getDocument(), translationHandler);
         renderer.render(node);
-        renderer.flush(formatterOptions.maxTrailingBlankLines);
+        renderer.flushTo(output, formatterOptions.maxTrailingBlankLines);
     }
 
     /**
@@ -217,9 +216,9 @@ public class Formatter implements IRender {
      */
     public void translationRender(Node node, Appendable output, int maxTrailingBlankLines, TranslationHandler translationHandler, RenderPurpose renderPurpose) {
         translationHandler.setRenderPurpose(renderPurpose);
-        MainNodeFormatter renderer = new MainNodeFormatter(options, new MarkdownWriter(output, formatterOptions.formatFlags /*| FormattingAppendable.PASS_THROUGH*/), node.getDocument(), translationHandler);
+        MainNodeFormatter renderer = new MainNodeFormatter(options, new MarkdownWriter(formatterOptions.formatFlags /*| FormattingAppendable.PASS_THROUGH*/), node.getDocument(), translationHandler);
         renderer.render(node);
-        renderer.flush(maxTrailingBlankLines);
+        renderer.flushTo(output, maxTrailingBlankLines);
     }
 
     /**
@@ -547,7 +546,7 @@ public class Formatter implements IRender {
 
         @Override
         public NodeFormatterContext getSubContext(Appendable out) {
-            MarkdownWriter writer = new MarkdownWriter(out, getMarkdown().getOptions());
+            MarkdownWriter writer = new MarkdownWriter(getMarkdown().getOptions());
             writer.setContext(this);
             //noinspection ReturnOfInnerClass
             return new SubNodeFormatter(this, writer);
@@ -674,7 +673,7 @@ public class Formatter implements IRender {
 
             @Override
             public NodeFormatterContext getSubContext(Appendable out) {
-                MarkdownWriter htmlWriter = new MarkdownWriter(out, this.markdown.getOptions());
+                MarkdownWriter htmlWriter = new MarkdownWriter(this.markdown.getOptions());
                 htmlWriter.setContext(this);
                 //noinspection ReturnOfInnerClass
                 return new SubNodeFormatter(myMainNodeRenderer, htmlWriter);

@@ -889,22 +889,22 @@ when content indent > code indent becomes code
 .
 <ul>
   <li>
-  <pre><code>task
+    <pre><code>task
 </code></pre>
   </li>
   <li>
-  <pre><code>[ ] task
+    <pre><code>[ ] task
 </code></pre>
   </li>
 </ul>
 <!-- -->
 <ol>
   <li>
-  <pre><code>task
+    <pre><code>task
 </code></pre>
   </li>
   <li>
-  <pre><code>[ ] task
+    <pre><code>[ ] task
 </code></pre>
   </li>
 </ol>
@@ -937,22 +937,22 @@ when content indent > code indent becomes code
 .
 <ul>
   <li>
-  <pre><code>task
+    <pre><code>task
 </code></pre>
   </li>
   <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;
-  <pre><code> task
+    <pre><code> task
 </code></pre>
   </li>
 </ul>
 <!-- -->
 <ol>
   <li>
-  <pre><code>task
+    <pre><code>task
 </code></pre>
   </li>
   <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;
-  <pre><code>task
+    <pre><code>task
 </code></pre>
   </li>
 </ol>
@@ -1023,14 +1023,14 @@ all should be src pos wrapped
 .
 <ol>
   <li class="task-list-item" md-pos="0-67"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;<span md-pos="7-11">item</span>
-  <span md-pos="12-36">with multiple lazy lines</span>
-  <span md-pos="37-66">all should be src pos wrapped</span></li>
+    <span md-pos="12-36">with multiple lazy lines</span>
+    <span md-pos="37-66">all should be src pos wrapped</span></li>
 </ol>
 <!-- -->
 <ul>
   <li class="task-list-item" md-pos="76-141"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;<span md-pos="82-86">item</span>
-  <span md-pos="87-111">with multiple lazy lines</span>
-  <span md-pos="112-141">all should be src pos wrapped</span></li>
+    <span md-pos="87-111">with multiple lazy lines</span>
+    <span md-pos="112-141">all should be src pos wrapped</span></li>
 </ul>
 .
 Document[0, 141]
@@ -1137,23 +1137,23 @@ Deep indent testing, commonmark
   <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;item 3</li>
   <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;item 4</li>
   <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;
-  <pre><code>item 5
+    <pre><code>item 5
 </code></pre>
   </li>
   <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;
-  <pre><code> item 6
+    <pre><code> item 6
 </code></pre>
   </li>
   <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;
-  <pre><code>  item 7
+    <pre><code>  item 7
 </code></pre>
   </li>
   <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;
-  <pre><code>   item 8
+    <pre><code>   item 8
 </code></pre>
   </li>
   <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;
-  <pre><code>    item 9
+    <pre><code>    item 9
 </code></pre>
   </li>
 </ul>

@@ -135,7 +135,7 @@ not a definition
 .
 <ul>
   <li>bullet item
-  : definition item</li>
+    : definition item</li>
 </ul>
 .
 Document[0, 33]
@@ -156,7 +156,7 @@ not a definition
 .
 <ol>
   <li>numbered item
-  : definition item</li>
+    : definition item</li>
 </ol>
 .
 Document[0, 36]
@@ -663,14 +663,14 @@ Term 2
 <dl>
   <dt>Term 1</dt>
   <dd>Definition 1 line 1 ...
-  Definition 1 line 2</dd>
+    Definition 1 line 2</dd>
   <dd>Definition 2 line 1 ...
-  Definition 2 line 2</dd>
+    Definition 2 line 2</dd>
   <dt>Term 2</dt>
   <dd>Definition 3 line 2 ...
-  Definition 3 line 2</dd>
+    Definition 3 line 2</dd>
   <dd>Definition 4 line 2 ...
-  Definition 4 line 2</dd>
+    Definition 4 line 2</dd>
 </dl>
 .
 Document[0, 216]
@@ -1064,7 +1064,7 @@ Definition **Term**
 <dl>
   <dt>Definition <strong>Term</strong></dt>
   <dd>definition <code>item</code>
-  <p>paragraph</p>
+    <p>paragraph</p>
     <ul>
       <li>bullet item
         <ul>
@@ -1756,18 +1756,18 @@ and <a href="http://www.tpope.net/node/106">expanded upon by Tim Pope</a>.</p>
 <dl>
   <dt>commitmessage.maxSubjectLength</dt>
   <dd>Maximum length of the commit message's subject line. Defaults
-  to 50 if not specified or less than 0.</dd>
+    to 50 if not specified or less than 0.</dd>
   <dt>commitmessage.maxLineLength</dt>
   <dd>Maximum length of a line in the commit message's body. Defaults
-  to 72 if not specified or less than 0.</dd>
+    to 72 if not specified or less than 0.</dd>
   <dt>commitmessage.longLinesThreshold</dt>
   <dd>Percentage of commit message lines allowed to exceed the
-  maximum length before a warning or error is generated. Defaults
-  to 33 if not specified or less than 0.</dd>
+    maximum length before a warning or error is generated. Defaults
+    to 33 if not specified or less than 0.</dd>
   <dt>commitmessage.rejectTooLong</dt>
   <dd>If set to <code>true</code>, reject commits whose subject or line
-  length exceeds the maximum allowed length. If not
-  specified, defaults to <code>false</code>.</dd>
+    length exceeds the maximum allowed length. If not
+    specified, defaults to <code>false</code>.</dd>
 </dl>
 .
 Document[0, 1834]

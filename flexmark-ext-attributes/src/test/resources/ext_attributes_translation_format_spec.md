@@ -452,7 +452,7 @@ Assigned to block quote
 > block quote text
 .
 > {.red}
-> 
+>
 > BLocK QuUoteE teEXt
 ````````````````````````````````
 
@@ -495,7 +495,7 @@ Assigned to previous paragraph in the block quote
 > {.red}
 .
 > someE paARaAGRaAph
-> 
+>
 > {.red}
 ````````````````````````````````
 

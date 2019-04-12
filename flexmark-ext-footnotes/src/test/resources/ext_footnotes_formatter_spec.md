@@ -173,7 +173,7 @@ with continuation text. Inline _italic_ and
 
     Multiple paragraphs are supported as other 
     markdown elements such as lists.
-    
+
     - item 1
     - item 2
 
@@ -434,7 +434,7 @@ This paragraph has a footnote[^2].
 [^2]: This is the body of the footnote.
 
         Another paragraph of the footnote
-        
+
             indented code of the footnote
 
 Not a paragraph of the footnote
@@ -479,7 +479,7 @@ This paragraph has a footnote[^1].
 [^2]: This is the body of the footnote.
 
         Another paragraph of the footnote
-        
+
             indented code of the footnote
 
     Not a paragraph of the footnote
@@ -489,7 +489,7 @@ This paragraph has a footnote[^1].
 [^3]: This is the body of the footnote.
 
         Another paragraph of the footnote
-        
+
             indented code of the footnote
 
     Not a paragraph of the footnote
@@ -499,7 +499,7 @@ This paragraph has a footnote[^3].
 [^1]: This is the body of the footnote.
 
         Another paragraph of the footnote
-        
+
             indented code of the footnote
 
     Not a paragraph of the footnote
@@ -541,19 +541,19 @@ Not a paragraph of the footnote
 [^2]: This is the body of the footnote.
 
         Another paragraph of the footnote
-        
+
             indented code of the footnote
 
 [^3]: This is the body of the footnote.
 
         Another paragraph of the footnote
-        
+
             indented code of the footnote
 
 [^1]: This is the body of the footnote.
 
         Another paragraph of the footnote
-        
+
             indented code of the footnote
 
 This paragraph has a footnote[^1].
@@ -616,19 +616,19 @@ Not a paragraph of the footnote
 [^2]: This is the body of the footnote.
 
         Another paragraph of the footnote
-        
+
             indented code of the footnote
 
 [^3]: This is the body of the footnote.
 
         Another paragraph of the footnote
-        
+
             indented code of the footnote
 
 [^1]: This is the body of the footnote.
 
         Another paragraph of the footnote
-        
+
             indented code of the footnote
 
 ````````````````````````````````
@@ -670,19 +670,19 @@ This paragraph has a footnote[^1].
 [^2]: This is the body of the footnote.
 
         Another paragraph of the footnote
-        
+
             indented code of the footnote
 
 [^3]: This is the body of the footnote.
 
         Another paragraph of the footnote
-        
+
             indented code of the footnote
 
 [^1]: This is the body of the footnote.
 
         Another paragraph of the footnote
-        
+
             indented code of the footnote
 
 Not a paragraph of the footnote
@@ -741,19 +741,19 @@ This paragraph has a footnote[^3].
 [^2]: This is the body of the footnote.
 
         Another paragraph of the footnote
-        
+
             indented code of the footnote
 
 [^3]: This is the body of the footnote.
 
         Another paragraph of the footnote
-        
+
             indented code of the footnote
 
 [^1]: This is the body of the footnote.
 
         Another paragraph of the footnote
-        
+
             indented code of the footnote
 
 Not a paragraph of the footnote
@@ -806,19 +806,19 @@ Not a paragraph of the footnote
 [^1]: This is the body of the footnote.
 
         Another paragraph of the footnote
-        
+
             indented code of the footnote
 
 [^2]: This is the body of the footnote.
 
         Another paragraph of the footnote
-        
+
             indented code of the footnote
 
 [^3]: This is the body of the footnote.
 
         Another paragraph of the footnote
-        
+
             indented code of the footnote
 
 ````````````````````````````````
@@ -870,19 +870,19 @@ Not a paragraph of the footnote
 [^1]: This is the body of the footnote.
 
         Another paragraph of the footnote
-        
+
             indented code of the footnote
 
 [^3]: This is the body of the footnote.
 
         Another paragraph of the footnote
-        
+
             indented code of the footnote
 
 [^2]: This is the body of the footnote.
 
         Another paragraph of the footnote
-        
+
             indented code of the footnote
 
 ````````````````````````````````

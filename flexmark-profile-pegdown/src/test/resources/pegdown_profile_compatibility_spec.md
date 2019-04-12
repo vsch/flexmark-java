@@ -1703,8 +1703,8 @@ paragraph, the second is indented code
   <li>test
     <ul>
       <li>sub item
-      <p>sub item child para</p>
-      <p>indented code</p>
+        <p>sub item child para</p>
+        <p>indented code</p>
       </li>
     </ul>
   </li>
@@ -1714,8 +1714,8 @@ paragraph, the second is indented code
   <li>test
     <ol>
       <li>sub item
-      <p>sub item child para</p>
-      <p>indented code</p>
+        <p>sub item child para</p>
+        <p>indented code</p>
       </li>
     </ol>
   </li>
@@ -2030,21 +2030,21 @@ Test how headings in list items are handled, leading space allowed or not
 .
 <ul>
   <li>item 1
-  <h1>Heading 1</h1>
-  <p>## Heading 2</p>
-  <p>### Heading 3</p>
-  <p>#### Heading 4</p>
-  <pre><code>##### Heading 5
+    <h1>Heading 1</h1>
+    <p>## Heading 2</p>
+    <p>### Heading 3</p>
+    <p>#### Heading 4</p>
+    <pre><code>##### Heading 5
 
  ###### Heading 6
 </code></pre>
     <ul>
       <li>item 2
-      <h1>Heading 1</h1>
-      <p>## Heading 2</p>
-      <p>### Heading 3</p>
-      <p>#### Heading 3</p>
-      <pre><code>##### Heading 5
+        <h1>Heading 1</h1>
+        <p>## Heading 2</p>
+        <p>### Heading 3</p>
+        <p>#### Heading 3</p>
+        <pre><code>##### Heading 5
 
  ###### Heading 6
 </code></pre>
@@ -2382,13 +2382,13 @@ Whether block quotes with leading space can interrupt item paragraph
 .
 <ul>
   <li>item 1
-  <p>&gt; block quoted text</p>
+    <p>&gt; block quoted text</p>
   </li>
 </ul>
 <!-- list break -->
 <ol>
   <li>item 1
-  <p>&gt; block quoted text</p>
+    <p>&gt; block quoted text</p>
   </li>
 </ol>
 .

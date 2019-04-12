@@ -1,10 +1,10 @@
 package com.vladsch.flexmark.ext.admonition.internal;
 
-import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.ext.admonition.AdmonitionBlock;
 import com.vladsch.flexmark.html.CustomNodeRenderer;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.*;
+import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.html.Attribute;
 import com.vladsch.flexmark.util.options.DataHolder;
 
@@ -49,7 +49,7 @@ public class AdmonitionNodeRenderer implements PhasedNodeRenderer {
             }
 
             if (!resolvedQualifiers.isEmpty()) {
-                html.line().attr("xmlns","http://www.w3.org/2000/svg").attr(Attribute.CLASS_ATTR, "adm-hidden").withAttr(ADMONITION_SVG_OBJECT_PART)
+                html.line().attr("xmlns", "http://www.w3.org/2000/svg").attr(Attribute.CLASS_ATTR, "adm-hidden").withAttr(ADMONITION_SVG_OBJECT_PART)
                         .tag("svg").indent().line();
                 for (String info : resolvedQualifiers) {
                     String svgContent = options.typeSvgMap.get(info);
@@ -122,11 +122,8 @@ public class AdmonitionNodeRenderer implements PhasedNodeRenderer {
             html.withAttr(ADMONITION_TITLE_PART).tag("span").text(title).closeTag("span").line();
             html.closeTag("div").line();
 
-            html.attr(Attribute.CLASS_ATTR, "adm-body").withAttr(ADMONITION_BODY_PART).tag("div").indent().line();
+            html.attr(Attribute.CLASS_ATTR, "adm-body").withAttr(ADMONITION_BODY_PART).withCondIndent().tagLine("div", () -> context.renderChildren(node));
 
-            context.renderChildren(node);
-
-            html.unIndent().closeTag("div").line();
             html.closeTag("div").line();
         }
     }

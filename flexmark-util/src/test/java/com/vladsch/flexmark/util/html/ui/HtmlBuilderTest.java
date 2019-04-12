@@ -41,7 +41,23 @@ public class HtmlBuilderTest {
             }
         });
         assertEquals("<ul>\n<li>item1</li>\n</ul>\n", fa.toFinalizedString());
+    }
 
+
+    @Test
+    public void test_Basic2() throws Exception {
+        final HtmlBuilder fa2 = new HtmlBuilder();
+        fa2.withCondIndent().tag("tbody", new Runnable() {
+            @Override
+            public void run() {
+
+            }
+        });
+        assertEquals("<tbody></tbody>\n", fa2.toFinalizedString());
+    }
+    
+    @Test
+    public void test_Basic3() throws Exception {
         final HtmlBuilder fa1 = new HtmlBuilder();
         fa1.tagIndent("ul", new Runnable() {
             @Override
@@ -67,26 +83,17 @@ public class HtmlBuilderTest {
         });
         assertEquals("<ul>\n<li>item1\n<ul>\n<li>item1</li>\n</ul>\n</li>\n</ul>\n",fa1.toFinalizedString());
 
-        final HtmlBuilder fa2 = new HtmlBuilder();
-        fa2.withCondLine().tagIndent("tbody", new Runnable() {
-            @Override
-            public void run() {
-
-            }
-        });
-        assertEquals("<tbody></tbody>\n", fa2.toFinalizedString());
-
         HtmlBuilder fa3 = new HtmlBuilder();
         fa3.attr("style", "color:#ff0000").span();
-        assertEquals("<span style=\"color:#ff0000\"></span>", fa3.toFinalizedString());
+        assertEquals("<span style=\"color:#ff0000\"></span>\n", fa3.toFinalizedString());
 
         fa3 = new HtmlBuilder();
         fa3.attr("style", "color:#ff0000").attr("style", "color:#00ff00").span();
-        assertEquals("<span style=\"color:#00ff00\"></span>", fa3.toFinalizedString());
+        assertEquals("<span style=\"color:#00ff00\"></span>\n", fa3.toFinalizedString());
 
         fa3 = new HtmlBuilder();
         fa3.attr("style", "color:#ff0000").attr("style", "color:#00ff00").span().closeSpan();
-        assertEquals("<span style=\"color:#00ff00\"></span>", fa3.toFinalizedString());
+        assertEquals("<span style=\"color:#00ff00\"></span>\n", fa3.toFinalizedString());
     }
 
     @Test
@@ -96,19 +103,19 @@ public class HtmlBuilderTest {
         fa = new HtmlBuilder();
         //noinspection UseJBColor
         fa.attr(Color.RED).span();
-        assertEquals("<span style=\"color:#ff0000\"></span>", fa.toFinalizedString());
+        assertEquals("<span style=\"color:#ff0000\"></span>\n", fa.toFinalizedString());
 
         fa = new HtmlBuilder();
         fa.attr(Color.RED).attr(Color.GREEN).span();
-        assertEquals("<span style=\"color:#00ff00\"></span>", fa.toFinalizedString());
+        assertEquals("<span style=\"color:#00ff00\"></span>\n", fa.toFinalizedString());
 
         fa = new HtmlBuilder();
         fa.attr(Color.RED).attr(Color.GREEN).span().closeSpan();
-        assertEquals("<span style=\"color:#00ff00\"></span>", fa.toFinalizedString());
+        assertEquals("<span style=\"color:#00ff00\"></span>\n", fa.toFinalizedString());
 
         fa = new HtmlBuilder();
         fa.attr(Color.RED).attr(BackgroundColor.GREEN).span().closeSpan();
-        assertEquals("<span style=\"color:#ff0000;background-color:#00ff00\"></span>", fa.toFinalizedString());
+        assertEquals("<span style=\"color:#ff0000;background-color:#00ff00\"></span>\n", fa.toFinalizedString());
     }
 
     @Test
@@ -119,74 +126,74 @@ public class HtmlBuilderTest {
 
         fa = new HtmlBuilder();
         fa.attr(font).span();
-        assertEquals("<span style=\"font-family:Dialog;font-size:12pt;font-style:normal;font-weight:normal\"></span>", fa.toFinalizedString());
+        assertEquals("<span style=\"font-family:Dialog;font-size:12pt;font-style:normal;font-weight:normal\"></span>\n", fa.toFinalizedString());
 
         fa = new HtmlBuilder();
         fa.attr(font).attr(FontStyle.PLAIN).span();
-        assertEquals("<span style=\"font-family:Dialog;font-size:12pt;font-style:normal;font-weight:normal\"></span>", fa.toFinalizedString());
+        assertEquals("<span style=\"font-family:Dialog;font-size:12pt;font-style:normal;font-weight:normal\"></span>\n", fa.toFinalizedString());
 
         fa = new HtmlBuilder();
         fa.attr(font).attr(FontStyle.PLAIN).attr(FontStyle.BOLD).span();
-        assertEquals("<span style=\"font-family:Dialog;font-size:12pt;font-style:normal;font-weight:bold\"></span>", fa.toFinalizedString());
+        assertEquals("<span style=\"font-family:Dialog;font-size:12pt;font-style:normal;font-weight:bold\"></span>\n", fa.toFinalizedString());
 
         fa = new HtmlBuilder();
         fa.attr(font).attr(FontStyle.PLAIN).attr(FontStyle.ITALIC).span();
-        assertEquals("<span style=\"font-family:Dialog;font-size:12pt;font-style:italic;font-weight:normal\"></span>", fa.toFinalizedString());
+        assertEquals("<span style=\"font-family:Dialog;font-size:12pt;font-style:italic;font-weight:normal\"></span>\n", fa.toFinalizedString());
 
         fa = new HtmlBuilder();
         fa.attr(font).attr(FontStyle.PLAIN).attr(FontStyle.BOLD_ITALIC).span();
-        assertEquals("<span style=\"font-family:Dialog;font-size:12pt;font-style:italic;font-weight:bold\"></span>", fa.toFinalizedString());
+        assertEquals("<span style=\"font-family:Dialog;font-size:12pt;font-style:italic;font-weight:bold\"></span>\n", fa.toFinalizedString());
 
         fa = new HtmlBuilder();
         fa.attr(font).attr(FontStyle.BOLD).span();
-        assertEquals("<span style=\"font-family:Dialog;font-size:12pt;font-style:normal;font-weight:bold\"></span>", fa.toFinalizedString());
+        assertEquals("<span style=\"font-family:Dialog;font-size:12pt;font-style:normal;font-weight:bold\"></span>\n", fa.toFinalizedString());
 
         fa = new HtmlBuilder();
         fa.attr(font).attr(FontStyle.BOLD).attr(FontStyle.PLAIN).span();
-        assertEquals("<span style=\"font-family:Dialog;font-size:12pt;font-style:normal;font-weight:normal\"></span>", fa.toFinalizedString());
+        assertEquals("<span style=\"font-family:Dialog;font-size:12pt;font-style:normal;font-weight:normal\"></span>\n", fa.toFinalizedString());
 
         fa = new HtmlBuilder();
         fa.attr(font).attr(FontStyle.BOLD).attr(FontStyle.ITALIC).span();
-        assertEquals("<span style=\"font-family:Dialog;font-size:12pt;font-style:italic;font-weight:normal\"></span>", fa.toFinalizedString());
+        assertEquals("<span style=\"font-family:Dialog;font-size:12pt;font-style:italic;font-weight:normal\"></span>\n", fa.toFinalizedString());
 
         fa = new HtmlBuilder();
         fa.attr(font).attr(FontStyle.BOLD).attr(FontStyle.BOLD_ITALIC).span();
-        assertEquals("<span style=\"font-family:Dialog;font-size:12pt;font-style:italic;font-weight:bold\"></span>", fa.toFinalizedString());
+        assertEquals("<span style=\"font-family:Dialog;font-size:12pt;font-style:italic;font-weight:bold\"></span>\n", fa.toFinalizedString());
 
         fa = new HtmlBuilder();
         fa.attr(font).attr(FontStyle.ITALIC).span();
-        assertEquals("<span style=\"font-family:Dialog;font-size:12pt;font-style:italic;font-weight:normal\"></span>", fa.toFinalizedString());
+        assertEquals("<span style=\"font-family:Dialog;font-size:12pt;font-style:italic;font-weight:normal\"></span>\n", fa.toFinalizedString());
 
         fa = new HtmlBuilder();
         fa.attr(font).attr(FontStyle.ITALIC).attr(FontStyle.PLAIN).span();
-        assertEquals("<span style=\"font-family:Dialog;font-size:12pt;font-style:normal;font-weight:normal\"></span>", fa.toFinalizedString());
+        assertEquals("<span style=\"font-family:Dialog;font-size:12pt;font-style:normal;font-weight:normal\"></span>\n", fa.toFinalizedString());
 
         fa = new HtmlBuilder();
         fa.attr(font).attr(FontStyle.ITALIC).attr(FontStyle.BOLD).span();
-        assertEquals("<span style=\"font-family:Dialog;font-size:12pt;font-style:normal;font-weight:bold\"></span>", fa.toFinalizedString());
+        assertEquals("<span style=\"font-family:Dialog;font-size:12pt;font-style:normal;font-weight:bold\"></span>\n", fa.toFinalizedString());
 
         fa = new HtmlBuilder();
         fa.attr(font).attr(FontStyle.ITALIC).attr(FontStyle.BOLD_ITALIC).span();
-        assertEquals("<span style=\"font-family:Dialog;font-size:12pt;font-style:italic;font-weight:bold\"></span>", fa.toFinalizedString());
+        assertEquals("<span style=\"font-family:Dialog;font-size:12pt;font-style:italic;font-weight:bold\"></span>\n", fa.toFinalizedString());
 
         fa = new HtmlBuilder();
         fa.attr(font).attr(FontStyle.BOLD_ITALIC).span();
-        assertEquals("<span style=\"font-family:Dialog;font-size:12pt;font-style:italic;font-weight:bold\"></span>", fa.toFinalizedString());
+        assertEquals("<span style=\"font-family:Dialog;font-size:12pt;font-style:italic;font-weight:bold\"></span>\n", fa.toFinalizedString());
 
         fa = new HtmlBuilder();
         fa.attr(font).attr(FontStyle.BOLD_ITALIC).attr(FontStyle.PLAIN).span();
-        assertEquals("<span style=\"font-family:Dialog;font-size:12pt;font-style:normal;font-weight:normal\"></span>", fa.toFinalizedString());
+        assertEquals("<span style=\"font-family:Dialog;font-size:12pt;font-style:normal;font-weight:normal\"></span>\n", fa.toFinalizedString());
 
         fa = new HtmlBuilder();
         fa.attr(font).attr(FontStyle.BOLD_ITALIC).attr(FontStyle.BOLD).span();
-        assertEquals("<span style=\"font-family:Dialog;font-size:12pt;font-style:normal;font-weight:bold\"></span>", fa.toFinalizedString());
+        assertEquals("<span style=\"font-family:Dialog;font-size:12pt;font-style:normal;font-weight:bold\"></span>\n", fa.toFinalizedString());
 
         fa = new HtmlBuilder();
         fa.attr(font).attr(FontStyle.BOLD_ITALIC).attr(FontStyle.ITALIC).span();
-        assertEquals("<span style=\"font-family:Dialog;font-size:12pt;font-style:italic;font-weight:normal\"></span>", fa.toFinalizedString());
+        assertEquals("<span style=\"font-family:Dialog;font-size:12pt;font-style:italic;font-weight:normal\"></span>\n", fa.toFinalizedString());
 
         fa = new HtmlBuilder();
         fa.attr(font).attr(FontStyle.BOLD).attr(FontStyle.ITALIC).attr(Color.DARK_GRAY).attr(BackgroundColor.LIGHT_GRAY).span();
-        assertEquals("<span style=\"font-family:Dialog;font-size:12pt;font-style:italic;font-weight:normal;color:#404040;background-color:#c0c0c0\"></span>", fa.toFinalizedString());
+        assertEquals("<span style=\"font-family:Dialog;font-size:12pt;font-style:italic;font-weight:normal;color:#404040;background-color:#c0c0c0\"></span>\n", fa.toFinalizedString());
     }
 }

@@ -1,6 +1,5 @@
 package com.vladsch.flexmark.util.collection;
 
-import com.vladsch.flexmark.util.IntConsumer;
 import com.vladsch.flexmark.util.collection.iteration.BitSetIterator;
 import com.vladsch.flexmark.util.collection.iteration.ReversibleIterable;
 import com.vladsch.flexmark.util.collection.iteration.ReversibleIterator;
@@ -11,6 +10,7 @@ import java.nio.LongBuffer;
 import java.util.BitSet;
 import java.util.Collection;
 import java.util.Set;
+import java.util.function.IntConsumer;
 
 public class BitIntegerSet implements Set<Integer>, ReversibleIterable<Integer> {
     private final BitSet myBits;

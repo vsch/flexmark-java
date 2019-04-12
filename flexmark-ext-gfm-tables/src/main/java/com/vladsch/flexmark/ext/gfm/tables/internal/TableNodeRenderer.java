@@ -74,7 +74,7 @@ public class TableNodeRenderer implements NodeRenderer {
             return;
         }
 
-        html.withAttr().withCondLine().tagIndent("thead", new Runnable() {
+        html.withAttr().withCondIndent().tagLine("thead", new Runnable() {
             @Override
             public void run() {
                 context.renderChildren(tableHead);
@@ -91,7 +91,7 @@ public class TableNodeRenderer implements NodeRenderer {
             return;
         }
 
-        html.withAttr().withCondLine().tagIndent("tbody", new Runnable() {
+        html.withAttr().withCondIndent().tagLine("tbody", new Runnable() {
             @Override
             public void run() {
                 context.renderChildren(tableBody);

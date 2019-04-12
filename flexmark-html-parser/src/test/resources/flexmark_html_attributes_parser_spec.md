@@ -507,18 +507,15 @@ Labels
 Projects  
 Milestones
 Assignee Sort  
-
-*    
+*  
   [Emoji suggestions do not filter as you type](https://github.com/vsch/idea-multimarkdown/issues/624)[bug](https://github.com/vsch/idea-multimarkdown/issues?q=is%3Aissue+is%3Aopen+label%3Abug "bug")  
-  #624 opened 15 days ago by [jcfranco](https://github.com/vsch/idea-multimarkdown/issues?q=is%3Aissue+is%3Aopen+author%3Ajcfranco "Open issues created by jcfranco")    
-  [1](https://github.com/vsch/idea-multimarkdown/issues/624)
-  {#issue_624}
+  #624 opened 15 days ago by [jcfranco](https://github.com/vsch/idea-multimarkdown/issues?q=is%3Aissue+is%3Aopen+author%3Ajcfranco "Open issues created by jcfranco")  
+  [1](https://github.com/vsch/idea-multimarkdown/issues/624){#issue_624}
 {#issue_624}
-*    
+*  
   [Directory linking occasionally broken](https://github.com/vsch/idea-multimarkdown/issues/623)[bug](https://github.com/vsch/idea-multimarkdown/issues?q=is%3Aissue+is%3Aopen+label%3Abug "bug") [fix available](https://github.com/vsch/idea-multimarkdown/issues?q=is%3Aissue+is%3Aopen+label%3A%22fix+available%22 "fix available") [fixed for next release](https://github.com/vsch/idea-multimarkdown/issues?q=is%3Aissue+is%3Aopen+label%3A%22fixed+for+next+release%22 "fixed for next release")  
-  #623 opened 15 days ago by [mhaas](https://github.com/vsch/idea-multimarkdown/issues?q=is%3Aissue+is%3Aopen+author%3Amhaas "Open issues created by mhaas")    
-  [4](https://github.com/vsch/idea-multimarkdown/issues/623)
-  {#issue_623}
+  #623 opened 15 days ago by [mhaas](https://github.com/vsch/idea-multimarkdown/issues?q=is%3Aissue+is%3Aopen+author%3Amhaas "Open issues created by mhaas")  
+  [4](https://github.com/vsch/idea-multimarkdown/issues/623){#issue_623}
 {#issue_623}
 * {#issue_622}
 {#issue_622}
@@ -769,11 +766,11 @@ Assignee Sort
 
 ```````````````````````````````` example Block Quotes: 14
 > * item 1
-> 
+>
 > * item 2
-> 
+>
 > * item 3
-> 
+>
 > * item 4
 
 .
@@ -790,13 +787,13 @@ Assignee Sort
 
 ```````````````````````````````` example Block Quotes: 15
 * item 1
-  > 
+
   > * item 1
-  > 
+  >
   > * item 2
-  > 
+  >
   > * item 3
-  > 
+  >
   > * item 4
 
 * item 2
@@ -827,19 +824,19 @@ Assignee Sort
 
 ```````````````````````````````` example Block Quotes: 16
 > * item 1
->   
+>
 >   * item 1
->   
+>
 >   * item 2
->   
+>
 >   * item 3
->   
+>
 >   * item 4
-> 
+>
 > * item 2
-> 
+>
 > * item 3
-> 
+>
 > * item 4
 
 .
@@ -892,11 +889,11 @@ Assignee Sort
 
 ```````````````````````````````` example Block Quotes: 19
 > 1. item 1
-> 
+>
 > 2. item 2
-> 
+>
 > 3. item 3
-> 
+>
 > 4. item 4
 
 .
@@ -913,13 +910,13 @@ Assignee Sort
 
 ```````````````````````````````` example Block Quotes: 20
 1. item 1
-   > 
+
    > 1. item 1
-   > 
+   >
    > 2. item 2
-   > 
+   >
    > 3. item 3
-   > 
+   >
    > 4. item 4
 
 2. item 2
@@ -950,19 +947,19 @@ Assignee Sort
 
 ```````````````````````````````` example Block Quotes: 21
 > 1. item 1
->    
+>
 >    1. item 1
->    
+>
 >    2. item 2
->    
+>
 >    3. item 3
->    
+>
 >    4. item 4
-> 
+>
 > 2. item 2
-> 
+>
 > 3. item 3
-> 
+>
 > 4. item 4
 
 .
@@ -1096,7 +1093,7 @@ links
 
 
 ```````````````````````````````` example Links: 7
-[\[Text **Bold** \]](http://example.com)
+[\[Text **Bold**\]](http://example.com)
 .
 <a href="http://example.com">[Text <b>Bold</b>]</a>
 ````````````````````````````````
@@ -2790,7 +2787,7 @@ Definition **Term**
 
     * bullet item
       * sub item
-    > 
+
     > block quote
 .
 <dl>
@@ -3016,7 +3013,7 @@ some back ticks in the ````code````
 
 ```````````````````````````````` example Fenced Code: 10
 * item
-  > 
+
   > `````markdown
   > some back ticks in the ````code````
   > * item
@@ -3042,7 +3039,7 @@ some back ticks in the ````code````
 
 ```````````````````````````````` example Fenced Code: 11
 * item
-  >     
+
   >     some back ticks in the ````code````
   >     * item
   >       * sub-item

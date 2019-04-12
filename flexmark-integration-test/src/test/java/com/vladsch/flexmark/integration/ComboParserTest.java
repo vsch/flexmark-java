@@ -15,7 +15,7 @@ import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.spec.SpecReader;
 import com.vladsch.flexmark.test.ComboSpecTestCase;
-import com.vladsch.flexmark.util.html.FormattingAppendable;
+import com.vladsch.flexmark.util.html.LineFormattingAppendable;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.MutableDataSet;
 import org.junit.Test;
@@ -49,7 +49,7 @@ public class ComboParserTest extends ComboSpecTestCase {
                 .set(TablesExtension.HEADER_SEPARATOR_COLUMN_MATCH, true)
         );
         optionsMap.put("dummy-identifier", new MutableDataSet().set(Parser.INTELLIJ_DUMMY_IDENTIFIER, true));
-        optionsMap.put("fast-render", new MutableDataSet().set(HtmlRenderer.FORMAT_FLAGS, FormattingAppendable.PASS_THROUGH));
+        optionsMap.put("fast-render", new MutableDataSet().set(HtmlRenderer.FORMAT_FLAGS, LineFormattingAppendable.PASS_THROUGH));
     }
 
     static final Parser PARSER = Parser.builder(OPTIONS).build();

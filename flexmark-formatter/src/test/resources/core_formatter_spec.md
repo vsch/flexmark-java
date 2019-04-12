@@ -139,6 +139,29 @@ indented code
 
 
 ```````````````````````````````` example(Formatter: 3) options(format-fixed-indent, atx-space-add, atx-trailing-add, list-no-renumber-items, block-quote-compact-with-space, fenced-code-spaced-info, list-bullet-plus, fenced-code-marker-backtick, fenced-code-marker-length, fenced-code-minimize, indented-code-minimize)
+1. numbered item 1   
+    
+2. numbered item 2
+   1. numbered item 2   
+   
+             with uneven indent
+                with uneven indent
+          indented code
+.
+1. numbered item 1
+
+2. numbered item 2
+
+    1. numbered item 2
+
+               with uneven indent
+                  with uneven indent
+            indented code
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Formatter: 4) options(format-fixed-indent, atx-space-add, atx-trailing-add, list-no-renumber-items, block-quote-compact-with-space, fenced-code-spaced-info, list-bullet-plus, fenced-code-marker-backtick, fenced-code-marker-length, fenced-code-minimize, indented-code-minimize)
 #Heading
 -----
 paragraph text 
@@ -212,6 +235,18 @@ indented code
 ```````````````````````````````` example Lists: 1
 * list item 1
   * list item 1.1
+    * list item 1.1.1
+.
+* list item 1
+  * list item 1.1
+    * list item 1.1.1
+
+````````````````````````````````
+
+
+```````````````````````````````` example Lists: 2
+* list item 1
+  * list item 1.1
   * list item 1.2
     * list item 1.2.1
     * list item 1.2.2
@@ -239,7 +274,7 @@ indented code
 ````````````````````````````````
 
 
-```````````````````````````````` example Lists: 2
+```````````````````````````````` example Lists: 3
 1. list item 1
    1. list item 1.1
    1. list item 1.2
@@ -269,7 +304,7 @@ indented code
 ````````````````````````````````
 
 
-```````````````````````````````` example Lists: 3
+```````````````````````````````` example Lists: 4
 1. list item 1
    1. list item 1.1
    1. list item 1.2
@@ -300,7 +335,7 @@ indented code
 ````````````````````````````````
 
 
-```````````````````````````````` example Lists: 4
+```````````````````````````````` example Lists: 5
 1. list item 1
    1. list item 1.1
    1) list item 1.2
@@ -312,7 +347,7 @@ indented code
 ````````````````````````````````
 
 
-```````````````````````````````` example(Lists: 5) options(list-numbered-dot)
+```````````````````````````````` example(Lists: 6) options(list-numbered-dot)
 1. list item 1
    1. list item 1.1
    1) list item 1.2
@@ -324,7 +359,7 @@ indented code
 ````````````````````````````````
 
 
-```````````````````````````````` example(Lists: 6) options(list-numbered-paren)
+```````````````````````````````` example(Lists: 7) options(list-numbered-paren)
 1. list item 1
    1. list item 1.1
    1) list item 1.2
@@ -336,32 +371,14 @@ indented code
 ````````````````````````````````
 
 
-```````````````````````````````` example Lists: 7
-paragraph
-* item 1
-* item 2
-  * item 2.1
-  * item 2.2
-.
-paragraph
-* item 1
-* item 2
-  * item 2.1
-  * item 2.2
-
-````````````````````````````````
-
-
 ```````````````````````````````` example Lists: 8
 paragraph
-
 * item 1
 * item 2
   * item 2.1
   * item 2.2
 .
 paragraph
-
 * item 1
 * item 2
   * item 2.1
@@ -372,6 +389,24 @@ paragraph
 
 ```````````````````````````````` example Lists: 9
 paragraph
+
+* item 1
+* item 2
+  * item 2.1
+  * item 2.2
+.
+paragraph
+
+* item 1
+* item 2
+  * item 2.1
+  * item 2.2
+
+````````````````````````````````
+
+
+```````````````````````````````` example Lists: 10
+paragraph
 1. item 1
 1. item 2
    1. item 2.1
@@ -382,29 +417,29 @@ paragraph
 2. item 2
    1. item 2.1
    2. item 2.2
-
-````````````````````````````````
-
-
-```````````````````````````````` example(Lists: 10) options(list-add-blank-line-before)
-paragraph
-* item 1
-* item 2
-  * item 2.1
-  * item 2.2
-.
-paragraph
-
-* item 1
-* item 2
-  * item 2.1
-  * item 2.2
 
 ````````````````````````````````
 
 
 ```````````````````````````````` example(Lists: 11) options(list-add-blank-line-before)
 paragraph
+* item 1
+* item 2
+  * item 2.1
+  * item 2.2
+.
+paragraph
+
+* item 1
+* item 2
+  * item 2.1
+  * item 2.2
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Lists: 12) options(list-add-blank-line-before)
+paragraph
 1. item 1
 1. item 2
    1. item 2.1
@@ -420,7 +455,7 @@ paragraph
 ````````````````````````````````
 
 
-```````````````````````````````` example(Lists: 12) options(list-bullet-asterisk)
+```````````````````````````````` example(Lists: 13) options(list-bullet-asterisk)
 + item 1
 + item 2
   + item 2.1
@@ -434,7 +469,7 @@ paragraph
 ````````````````````````````````
 
 
-```````````````````````````````` example(Lists: 13) options(list-bullet-plus)
+```````````````````````````````` example(Lists: 14) options(list-bullet-plus)
 * item 1
 * item 2
   * item 2.1
@@ -448,7 +483,7 @@ paragraph
 ````````````````````````````````
 
 
-```````````````````````````````` example(Lists: 14) options(list-bullet-dash)
+```````````````````````````````` example(Lists: 15) options(list-bullet-dash)
 * item 1
 * item 2
   * item 2.1
@@ -462,7 +497,7 @@ paragraph
 ````````````````````````````````
 
 
-```````````````````````````````` example(Lists: 15) options(list-no-renumber-items)
+```````````````````````````````` example(Lists: 16) options(list-no-renumber-items)
 1. item 1
 1. item 2
    1. item 2.1
@@ -476,7 +511,7 @@ paragraph
 ````````````````````````````````
 
 
-```````````````````````````````` example(Lists: 16) options(list-no-renumber-items, list-numbered-paren)
+```````````````````````````````` example(Lists: 17) options(list-no-renumber-items, list-numbered-paren)
 1. item 1
 1. item 2
    1. item 2.1
@@ -490,7 +525,7 @@ paragraph
 ````````````````````````````````
 
 
-```````````````````````````````` example(Lists: 17) options(list-no-renumber-items, list-numbered-dot)
+```````````````````````````````` example(Lists: 18) options(list-no-renumber-items, list-numbered-dot)
 1) item 1
 1) item 2
    1) item 2.1
@@ -506,7 +541,7 @@ paragraph
 
 list spacing
 
-```````````````````````````````` example Lists: 18
+```````````````````````````````` example Lists: 19
 * item 1
 * item 2
   * item 2.1
@@ -528,7 +563,7 @@ list spacing
 ````````````````````````````````
 
 
-```````````````````````````````` example(Lists: 19) options(list-spacing-loose)
+```````````````````````````````` example(Lists: 20) options(list-spacing-loose)
 * item 1
 * item 2
   * item 2.1
@@ -550,7 +585,7 @@ list spacing
 ````````````````````````````````
 
 
-```````````````````````````````` example(Lists: 20) options(list-spacing-tight)
+```````````````````````````````` example(Lists: 21) options(list-spacing-tight)
 * item 1
 * item 2
   * item 2.1
@@ -568,7 +603,7 @@ list spacing
 ````````````````````````````````
 
 
-```````````````````````````````` example(Lists: 21) options(list-spacing-loosen)
+```````````````````````````````` example(Lists: 22) options(list-spacing-loosen)
 * item 1
 * item 2
   * item 2.1
@@ -585,25 +620,6 @@ list spacing
 
   * item 2.2
 
-* item 3
-
-````````````````````````````````
-
-
-```````````````````````````````` example(Lists: 22) options(list-spacing-tighten)
-* item 1
-* item 2
-  * item 2.1
-  
-  * item 2.2
-  
-* item 3
-.
-* item 1
-* item 2
-  * item 2.1
-
-  * item 2.2
 * item 3
 
 ````````````````````````````````
@@ -617,6 +633,25 @@ list spacing
   * item 2.2
   
 * item 3
+.
+* item 1
+* item 2
+  * item 2.1
+
+  * item 2.2
+* item 3
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Lists: 24) options(list-spacing-tighten)
+* item 1
+* item 2
+  * item 2.1
+  
+  * item 2.2
+  
+* item 3
 
 paragraph
 .
@@ -631,7 +666,7 @@ paragraph
 ````````````````````````````````
 
 
-```````````````````````````````` example(Lists: 24) options(list-spacing-tight)
+```````````````````````````````` example(Lists: 25) options(list-spacing-tight)
 * item 1
 * item 2
   * item 2.1
@@ -654,7 +689,7 @@ paragraph
 
 list family changing
 
-```````````````````````````````` example(Lists: 25) options(format-fixed-indent)
+```````````````````````````````` example(Lists: 26) options(format-fixed-indent)
 * item 1
 * item 2
   * item 2.1
@@ -676,7 +711,7 @@ list family changing
 ````````````````````````````````
 
 
-```````````````````````````````` example Lists: 26
+```````````````````````````````` example Lists: 27
 - [link](link.txt)
 
 next line
@@ -687,7 +722,7 @@ next line
 ````````````````````````````````
 
 
-```````````````````````````````` example Lists: 27
+```````````````````````````````` example Lists: 28
 - [link](link.txt)
 
 next line
@@ -701,6 +736,55 @@ next line
 ### Block Quotes
 
 ```````````````````````````````` example(Block Quotes: 1) options(block-quote-compact-with-space, fenced-code-minimize)
+> 1. numbered item 1
+
+.
+> 1. numbered item 1
+
+.
+Document[0, 22]
+  BlockQuote[0, 21] marker:[0, 1, ">"]
+    OrderedList[2, 21] isTight delimiter:'.'
+      OrderedListItem[2, 21] open:[2, 4, "1."] isTight
+        Paragraph[5, 21]
+          Text[5, 20] chars:[5, 20, "numbe … tem 1"]
+  BlankLine[21, 22]
+````````````````````````````````
+
+
+```````````````````````````````` example(Block Quotes: 2) options(block-quote-compact-with-space, fenced-code-minimize)
+> 1. numbered item 1
+.
+> 1. numbered item 1
+
+.
+Document[0, 20]
+  BlockQuote[0, 20] marker:[0, 1, ">"]
+    OrderedList[2, 20] isTight delimiter:'.'
+      OrderedListItem[2, 20] open:[2, 4, "1."] isTight
+        Paragraph[5, 20]
+          Text[5, 20] chars:[5, 20, "numbe … tem 1"]
+````````````````````````````````
+
+
+```````````````````````````````` example(Block Quotes: 3) options(block-quote-compact-with-space, fenced-code-minimize)
+> 1. numbered item 1
+>
+.
+> 1. numbered item 1
+>
+.
+Document[0, 22]
+  BlockQuote[0, 22] marker:[0, 1, ">"]
+    OrderedList[2, 21] isTight delimiter:'.'
+      OrderedListItem[2, 21] open:[2, 4, "1."] isTight hadBlankLineAfter
+        Paragraph[5, 21] isTrailingBlankLine
+          Text[5, 20] chars:[5, 20, "numbe … tem 1"]
+    BlankLine[21, 22]
+````````````````````````````````
+
+
+```````````````````````````````` example(Block Quotes: 4) options(block-quote-compact-with-space, fenced-code-minimize)
 > > block quote
 > lazy continuation
 > 
@@ -714,14 +798,14 @@ next line
 .
 >> block quote
 >> lazy continuation
-> 
+>
 > ~~~info
 >   indented code
 > code
 > ~~~
->     
+>
 >     indented code
-> 
+>
 > 1. numbered item 1
 
 .
@@ -744,7 +828,7 @@ Document[0, 131]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Block Quotes: 2) options(block-quote-compact-with-space)
+```````````````````````````````` example(Block Quotes: 5) options(block-quote-compact-with-space)
 > #Heading
 > -----
 > paragraph text 
@@ -766,33 +850,33 @@ Document[0, 131]
 > 2. numbered item 2   
 .
 > # Heading
-> 
+>
 > -----
-> 
+>
 > paragraph text
 > lazy continuation
 > * list item
-> 
+>
 >> block quote
 >> lazy continuation
-> 
+>
 > ~~~info
 >    with uneven indent
 >       with uneven indent
 > indented code
 > ~~~
->     
+>
 >        with uneven indent
 >           with uneven indent
 >     indented code
-> 
+>
 > 1. numbered item 1
 > 2. numbered item 2
 
 ````````````````````````````````
 
 
-```````````````````````````````` example(Block Quotes: 3) options(block-quote-spaced)
+```````````````````````````````` example(Block Quotes: 6) options(block-quote-spaced)
 > #Heading
 > -----
 > paragraph text 
@@ -814,33 +898,33 @@ Document[0, 131]
 > 2. numbered item 2   
 .
 > # Heading
-> 
+>
 > -----
-> 
+>
 > paragraph text
 > lazy continuation
 > * list item
-> 
+>
 > > block quote
 > > lazy continuation
-> 
+>
 > ~~~info
 >    with uneven indent
 >       with uneven indent
 > indented code
 > ~~~
->     
+>
 >        with uneven indent
 >           with uneven indent
 >     indented code
-> 
+>
 > 1. numbered item 1
 > 2. numbered item 2
 
 ````````````````````````````````
 
 
-```````````````````````````````` example Block Quotes: 4
+```````````````````````````````` example Block Quotes: 7
 paragraph text 
 lazy continuation
 * list item
@@ -857,7 +941,7 @@ lazy continuation
 ````````````````````````````````
 
 
-```````````````````````````````` example(Block Quotes: 5) options(no-block-quote-blank-lines)
+```````````````````````````````` example(Block Quotes: 8) options(no-block-quote-blank-lines)
 paragraph text 
 lazy continuation
 * list item
@@ -2484,4 +2568,5 @@ Document[0, 163]
   BlankLine[148, 149]
   HtmlCommentBlock[149, 163]
 ````````````````````````````````
+
 

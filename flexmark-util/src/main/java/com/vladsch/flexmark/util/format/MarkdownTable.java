@@ -1,13 +1,13 @@
 package com.vladsch.flexmark.util.format;
 
-import com.vladsch.flexmark.util.BiFunction;
+import java.util.function.BiFunction;
 import com.vladsch.flexmark.util.Ref;
 import com.vladsch.flexmark.util.Utils;
 import com.vladsch.flexmark.util.collection.MaxAggregator;
 import com.vladsch.flexmark.util.collection.MinAggregator;
 import com.vladsch.flexmark.util.format.options.DiscretionaryText;
 import com.vladsch.flexmark.util.html.CellAlignment;
-import com.vladsch.flexmark.util.html.FormattingAppendable;
+import com.vladsch.flexmark.util.html.LineFormattingAppendable;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.BasedSequenceImpl;
@@ -796,14 +796,14 @@ public class MarkdownTable {
         }
     }
 
-    public void appendTable(final FormattingAppendable out) {
+    public void appendTable(final LineFormattingAppendable out) {
         // we will prepare the separator based on max columns
         Ref<Integer> delta = new Ref<Integer>(0);
         String linePrefix = options.formatTableIndentPrefix;
         trackedOffsets.clear();
 
         int formatterOptions = out.getOptions();
-        out.setOptions((formatterOptions & ~FormattingAppendable.COLLAPSE_WHITESPACE) | FormattingAppendable.ALLOW_LEADING_WHITESPACE);
+        out.setOptions((formatterOptions & ~(LineFormattingAppendable.COLLAPSE_WHITESPACE | LineFormattingAppendable.SUPPRESS_TRAILING_WHITESPACE)) | LineFormattingAppendable.ALLOW_LEADING_WHITESPACE);
 
         finalizeTable();
 
@@ -1017,7 +1017,7 @@ public class MarkdownTable {
     }
 
     public static void appendFormattedCaption(
-            final FormattingAppendable out,
+            final LineFormattingAppendable out,
             final BasedSequence caption,
             final TableFormatOptions options
     ) {
@@ -1087,7 +1087,7 @@ public class MarkdownTable {
     }
 
     private void appendRows(
-            final FormattingAppendable out,
+            final LineFormattingAppendable out,
             List<TableRow> rows,
             final boolean isHeader,
             final String linePrefix,
@@ -1159,7 +1159,7 @@ public class MarkdownTable {
     }
 
     private void appendColumnSpan(
-            final FormattingAppendable out,
+            final LineFormattingAppendable out,
             int span,
             int cellInsideEndOffset,
             int trackedSpanOffset,

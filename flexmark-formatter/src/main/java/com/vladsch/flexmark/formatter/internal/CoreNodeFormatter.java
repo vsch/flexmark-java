@@ -6,14 +6,12 @@ import com.vladsch.flexmark.formatter.*;
 import com.vladsch.flexmark.parser.ListOptions;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.ParserEmulationProfile;
-import com.vladsch.flexmark.util.Consumer;
-import com.vladsch.flexmark.util.Ref;
 import com.vladsch.flexmark.util.Utils;
 import com.vladsch.flexmark.util.ast.*;
 import com.vladsch.flexmark.util.format.options.ElementPlacement;
 import com.vladsch.flexmark.util.format.options.ElementPlacementSort;
 import com.vladsch.flexmark.util.format.options.ListSpacing;
-import com.vladsch.flexmark.util.html.FormattingAppendable;
+import com.vladsch.flexmark.util.html.LineFormattingAppendable;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.DataKey;
 import com.vladsch.flexmark.util.options.MutableDataHolder;
@@ -21,6 +19,7 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.RepeatedCharSequence;
 
 import java.util.*;
+import java.util.function.Consumer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -406,7 +405,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
     }
 
     private void render(BlankLine node, NodeFormatterContext context, MarkdownWriter markdown) {
-        if (context.getDocument().get(LIST_ITEM_SPACING) == null) {
+        if (context.getDocument().get(LIST_ITEM_SPACING) == null && markdown.offsetWithPending() > 0) {
             if (!(node.getPrevious() == null || node.getPrevious() instanceof BlankLine)) {
                 blankLines = 0;
             }
@@ -458,8 +457,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
                     break;
             }
         } else {
-            Ref<Integer> ref = new Ref<Integer>(markdown.offset());
-            markdown.lastOffset(ref);
+            int lastOffset = markdown.offsetWithPending() + 1;
             context.translatingRefTargetSpan(node, new TranslatingSpanRender() {
                 @Override
                 public void render(final NodeFormatterContext context, final MarkdownWriter writer) {
@@ -469,7 +467,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
             markdown.line();
 
             if (formatterOptions.setextHeaderEqualizeMarker) {
-                markdown.repeat(node.getClosingMarker().charAt(0), Utils.minLimit(markdown.offset() - ref.value, formatterOptions.minSetextMarkerLength));
+                markdown.repeat(node.getClosingMarker().charAt(0), Utils.minLimit(markdown.offset() - lastOffset, formatterOptions.minSetextMarkerLength));
             } else {
                 markdown.append(node.getClosingMarker());
             }
@@ -510,8 +508,8 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
 
         // delay prefix after EOL
         int markdownOptions = markdown.getOptions();
-        markdown.setOptions(markdownOptions | FormattingAppendable.PREFIX_AFTER_PENDING_EOL);
-        markdown.setPrefix(combinedPrefix);
+        markdown.setOptions(markdownOptions | LineFormattingAppendable.PREFIX_AFTER_PENDING_EOL);
+        markdown.setPrefix(combinedPrefix, false);
         markdown.setOptions(markdownOptions);
 
         context.renderChildren(node);
@@ -653,7 +651,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
             }
         }
         markdown.closePreFormatted();
-        markdown.popPrefix();
+        markdown.popPrefix(true);
         markdown.tailBlankLine();
     }
 
@@ -729,7 +727,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
         document.set(LIST_ITEM_NUMBER, listItemNumber);
 
         if (!node.isOrDescendantOfType(ListItem.class)) {
-            markdown.blankLine();
+            markdown.tailBlankLine();
         }
     }
 
@@ -789,20 +787,24 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
                     throw new IllegalStateException("Missing case for ListBulletMarker " + options.listBulletMarker.name());
             }
         }
+
+        CharSequence prefix = options.itemContentIndent ? RepeatedCharSequence.of(' ', openingMarker.length() + (listOptions.isItemContentAfterSuffix() ? markerSuffix.length() : 0) + 1)
+                : RepeatedCharSequence.of(" ", listOptions.getItemIndent()).toString();
+
+        markdown.pushPrefix().addPrefix(prefix, true);
+
         markdown.append(openingMarker).append(' ').append(markerSuffix);
-        markdown.pushPrefix().addPrefix(options.itemContentIndent ? RepeatedCharSequence.of(' ', openingMarker.length() + (listOptions.isItemContentAfterSuffix() ? markerSuffix.length() : 0) + 1)
-                : RepeatedCharSequence.of(" ", listOptions.getItemIndent()).toString());
 
         if (node.hasChildren() && node.getFirstChildAnyNot(BlankLine.class) != null) {
             context.renderChildren(node);
             if (addBlankLineLooseItems && (node.isLoose() || node.getDocument().get(LIST_ITEM_SPACING) == ListSpacing.LOOSE)) {
-                markdown.blankLine();
+                markdown.tailBlankLine();
             }
         } else {
             if (node.isLoose()) {
-                markdown.blankLine();
+                markdown.tailBlankLine();
             } else {
-                markdown.addLine();
+                markdown.line();
             }
         }
         markdown.popPrefix();
@@ -1146,7 +1148,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
                     } else {
                         // need to set pre-formatted or spaces after eol are ignored assuming prefixes are used
                         int saved = markdown.getOptions();
-                        markdown.setOptions(saved | FormattingAppendable.ALLOW_LEADING_WHITESPACE);
+                        markdown.setOptions(saved | LineFormattingAppendable.ALLOW_LEADING_WHITESPACE);
                         markdown.append(sequence);
                         markdown.setOptions(saved);
                     }

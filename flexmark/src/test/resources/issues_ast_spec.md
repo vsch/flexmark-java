@@ -2024,8 +2024,8 @@ autolinks extension
         <p>Possible improvement to obscured element detection:</p>
         <ul>
           <li>Use the middle point of the intersection of the selection rect and the bounding rect
-          rather than the middle point of the bounding rect, this catches cases where the bottom
-          half of the element is obscured, but not all of it</li>
+            rather than the middle point of the bounding rect, this catches cases where the bottom
+            half of the element is obscured, but not all of it</li>
         </ul>
       </li>
       <li>
@@ -2063,7 +2063,7 @@ autolinks extension
   <li>Add Options GUI</li>
   <li>Better handling of label placement (separate from sizing rect, above &lt;SVG&gt; Element)</li>
   <li>Highlight &quot;greatest of types&quot; elements differently than elements which do not meet the greatest of.
-  eg: 3 Buttons and 1 Anchor lassoed, the 3 Buttons would be highlighted in green vs the Anchor being highlighted in grey</li>
+    eg: 3 Buttons and 1 Anchor lassoed, the 3 Buttons would be highlighted in green vs the Anchor being highlighted in grey</li>
 </ul>
 <h1>Todo / Ideas</h1>
 <ul>

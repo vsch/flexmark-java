@@ -186,24 +186,51 @@ public class YouTrackConverterNodeRenderer implements NodeRenderer
         String s = repeat("=", node.getLevel());
         html.line().raw(s);
         context.renderChildren(node);
-        html.raw(s).blankLine();
+        html.raw(s);
+        tailBlankLine(node, html);
+    }
+
+    private HtmlWriter tailBlankLine(Node node, HtmlWriter html) {
+        return tailBlankLine(node, 1, html);
+    }
+
+    public boolean isLastBlockQuoteChild(Node node) {
+        Node parent = node.getParent();
+        return parent instanceof BlockQuote && parent.getLastChild() == node;
+    }
+
+    public HtmlWriter tailBlankLine(Node node, int count, HtmlWriter html) {
+        if (isLastBlockQuoteChild(node)) {
+            // Needed to not add block quote prefix to trailing blank lines
+            //if (getPushedPrefixCount() > 0) {
+            //    flush(-1); // clear pending lines so pop prefix is not delayed, if PREFIX_AFTER_PENDING_EOL is enabled
+            //    popPrefix();
+            //    pushPrefix();
+            //}
+            CharSequence prefix = html.getPrefix();
+            html.popPrefix();
+            html.blankLine(count);
+            html.pushPrefix();
+            html.setPrefix(prefix, false);
+        } else {
+            html.blankLine(count);
+        }
+        return html;
     }
 
     private void render(BlockQuote node, NodeRendererContext context, HtmlWriter html) {
         inBlockQuote++;
         String repeat = repeat(">", inBlockQuote) + " ";
 
+        html.pushPrefix();
         html.line().setPrefix("").raw(repeat);
         html.setPrefix(repeat);
         context.renderChildren(node);
 
         inBlockQuote--;
-        if (inBlockQuote > 0) {
-            html.setPrefix(repeat(">", inBlockQuote) + " ");
-        } else {
-            html.setPrefix("");
-        }
-        html.blankLine();
+        html.popPrefix();
+        
+        tailBlankLine(node, html);
     }
 
     private void render(FencedCodeBlock node, NodeRendererContext context, HtmlWriter html) {
@@ -215,11 +242,13 @@ public class YouTrackConverterNodeRenderer implements NodeRenderer
         }
 
         html.raw(node.getContentChars().normalizeEOL());
-        html.line().raw("{code}").blankLine();
+        html.line().raw("{code}");
+        tailBlankLine(node, html);
     }
 
     private void render(ThematicBreak node, NodeRendererContext context, HtmlWriter html) {
-        html.line().raw("-----").blankLine();
+        html.line().raw("-----");
+        tailBlankLine(node, html);
     }
 
     private void render(IndentedCodeBlock node, NodeRendererContext context, HtmlWriter html) {
@@ -253,7 +282,7 @@ public class YouTrackConverterNodeRenderer implements NodeRenderer
         } else {
             context.renderChildren(node);
             if (node.getFirstChild().getNext() != null) {
-                html.blankLine();
+                tailBlankLine(node, html);
             }
         }
     }
@@ -262,7 +291,7 @@ public class YouTrackConverterNodeRenderer implements NodeRenderer
         context.renderChildren(node);
         if (node.getParent() instanceof Document) {
             if (node.getLastChild() == null || listOptions.isTightListItem((ListItem) node.getLastChild())) {
-                html.blankLine();
+                tailBlankLine(node, html);
             }
         }
     }
@@ -294,7 +323,7 @@ public class YouTrackConverterNodeRenderer implements NodeRenderer
         if (inBlockQuote > 0 && node.getNext() == null) {
             html.line();
         } else {
-            html.blankLine();
+            tailBlankLine(node, html);
         }
     }
 

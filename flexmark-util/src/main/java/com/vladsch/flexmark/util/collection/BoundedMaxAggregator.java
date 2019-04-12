@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.util.collection;
 
-import com.vladsch.flexmark.util.BiFunction;
+import java.util.function.BiFunction;
 
 public class BoundedMaxAggregator implements BiFunction<Integer, Integer, Integer> {
     final public int maxBound;

@@ -179,7 +179,7 @@ with blank line
 <p>content</p>
 <ul>
   <li>bullet item
-  text</li>
+    text</li>
 </ul>
 <!-- list break -->
 <ol>

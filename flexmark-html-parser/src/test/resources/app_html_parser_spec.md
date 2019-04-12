@@ -2775,53 +2775,53 @@ Word Samples, paren list, default
 ```````````````````````````````` example(MS Word 2011 for Mac: 5) options(paren-lists)
 1. Equipment
 
-1. Chemicals
+2. Chemicals
 
-1. Consumables
+3. Consumables
 
-1. Enzymes
+4. Enzymes
 
-1. GMO
+5. GMO
 
 1. Equipment
 
-1. Chemicals
+2. Chemicals
 
-1. Consumables
+3. Consumables
 
-1. Enzymes
+4. Enzymes
 
-1. GMO
+5. GMO
 
 1) Equipment
 
-1) Chemicals
+2) Chemicals
 
-1) Consumables
+3) Consumables
 
-1) Enzymes
+4) Enzymes
 
-1) GMO
-
-1. Equipment
-
-1. Chemicals
-
-1. Consumables
-
-1. Enzymes
-
-1. GMO
+5) GMO
 
 1. Equipment
 
-1. Chemicals
+2. Chemicals
 
-1. Consumables
+3. Consumables
 
-1. Enzymes
+4. Enzymes
 
-1. GMO
+5. GMO
+
+1. Equipment
+
+2. Chemicals
+
+3. Consumables
+
+4. Enzymes
+
+5. GMO
 
 .
 <html xmlns:o="urn:schemas-microsoft-com:office:office"
@@ -3984,9 +3984,9 @@ For compartment at 35 C, chilled to 0 C gives 11%, 5 C gives 14%, 10 C gives 22%
 
 
 ```````````````````````````````` example(Apple Mail: 3) options(no-br-as-para-breaks)
-For compartment at 20 C, chilled to 0 C gives 25%, 5 C gives 33%, 10 C gives 52%    
-For compartment at 25 C, chilled to 0 C gives 19%, 5 C gives 25%, 10 C gives 39%    
-For compartment at 30 C, chilled to 0 C gives 14%, 5 C gives 18%, 10 C gives 38%    
+For compartment at 20 C, chilled to 0 C gives 25%, 5 C gives 33%, 10 C gives 52%  
+For compartment at 25 C, chilled to 0 C gives 19%, 5 C gives 25%, 10 C gives 39%  
+For compartment at 30 C, chilled to 0 C gives 14%, 5 C gives 18%, 10 C gives 38%  
 For compartment at 35 C, chilled to 0 C gives 11%, 5 C gives 14%, 10 C gives 22%
 .
 <div class="" style="color: rgb(0, 0, 0); font-family: AmericanTypewriter; font-size: 14px; font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">

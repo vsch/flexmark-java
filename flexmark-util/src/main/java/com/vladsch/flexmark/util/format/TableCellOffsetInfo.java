@@ -1,6 +1,5 @@
 package com.vladsch.flexmark.util.format;
 
-import com.vladsch.flexmark.util.BiFunction;
 import com.vladsch.flexmark.util.collection.BoundedMaxAggregator;
 import com.vladsch.flexmark.util.collection.BoundedMinAggregator;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
@@ -9,6 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.BiFunction;
 
 import static com.vladsch.flexmark.util.Utils.maxLimit;
 import static com.vladsch.flexmark.util.Utils.minLimit;

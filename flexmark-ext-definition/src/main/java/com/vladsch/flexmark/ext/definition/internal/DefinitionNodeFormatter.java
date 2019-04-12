@@ -1,12 +1,12 @@
 package com.vladsch.flexmark.ext.definition.internal;
 
-import com.vladsch.flexmark.formatter.*;
-import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.ast.Paragraph;
 import com.vladsch.flexmark.ext.definition.DefinitionItem;
 import com.vladsch.flexmark.ext.definition.DefinitionList;
 import com.vladsch.flexmark.ext.definition.DefinitionTerm;
+import com.vladsch.flexmark.formatter.*;
 import com.vladsch.flexmark.parser.ListOptions;
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.RepeatedCharSequence;
@@ -66,7 +66,7 @@ public class DefinitionNodeFormatter implements NodeFormatter {
 
     private void render(final DefinitionItem node, final NodeFormatterContext context, final MarkdownWriter markdown) {
         BasedSequence openMarkerChars = node.getChars().prefixOf(node.getFirstChild().getChars());
-        BasedSequence openMarker = openMarkerChars.subSequence(0,1);
+        BasedSequence openMarker = openMarkerChars.subSequence(0, 1);
         BasedSequence openMarkerSpaces = openMarkerChars.subSequence(1);
 
         if (options.markerSpaces >= 1 && openMarkerSpaces.length() != options.markerSpaces) {
@@ -74,13 +74,19 @@ public class DefinitionNodeFormatter implements NodeFormatter {
         }
 
         switch (options.markerType) {
-            case ANY: break;
-            case COLON: openMarker = SubSequence.of(":"); break;
-            case TILDE: openMarker = SubSequence.of("~"); break;
+            case ANY:
+                break;
+            case COLON:
+                openMarker = SubSequence.of(":");
+                break;
+            case TILDE:
+                openMarker = SubSequence.of("~");
+                break;
         }
 
         markdown.line().append(openMarker).append(openMarkerSpaces);
-        markdown.pushPrefix().addPrefix(RepeatedCharSequence.of(' ', context.getFormatterOptions().itemContentIndent ? openMarker.length() + openMarkerSpaces.length() : listOptions.getItemIndent()));
+        RepeatedCharSequence prefix = RepeatedCharSequence.of(' ', context.getFormatterOptions().itemContentIndent ? openMarker.length() + openMarkerSpaces.length() : listOptions.getItemIndent());
+        markdown.pushPrefix().addPrefix(prefix);
         context.renderChildren(node);
         markdown.popPrefix();
 

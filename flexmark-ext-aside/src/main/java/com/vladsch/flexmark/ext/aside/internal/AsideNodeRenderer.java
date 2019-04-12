@@ -32,7 +32,7 @@ public class AsideNodeRenderer implements NodeRenderer {
     }
 
     private void render(final AsideBlock node, final NodeRendererContext context, HtmlWriter html) {
-        html.withAttr().tagIndent("aside", new Runnable() {
+        html.withAttr().withCondIndent().tagLine("aside", new Runnable() {
             @Override
             public void run() {
                 context.renderChildren(node);

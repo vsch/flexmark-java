@@ -186,9 +186,7 @@ public class HtmlToPdf_yahp {
 
 ```````````````````````````````` example Issue Tests: 9
 priyanka • [3 years ago](http://www.rgagnon.com/javadetails/java-convert-html-to-pdf-using-yahp.html#comment-1055568391 "Monday, September 23, 2013 5:49 AM")  
-
 Though i am not getting any error ...no pdf is getting created
-
 see more
 * [2](# "")
 * •
@@ -277,9 +275,7 @@ see more
 
 ```````````````````````````````` example(Issue Tests: 10) options(output-unknown)
 <header class="comment__header"> priyanka • [3 years ago](http://www.rgagnon.com/javadetails/java-convert-html-to-pdf-using-yahp.html#comment-1055568391 "Monday, September 23, 2013 5:49 AM") </header>  
-
 Though i am not getting any error ...no pdf is getting created
-
 see more
 <footer class="comment__footer"> <menu class="comment-footer__menu">
 * [2](# "")
@@ -1511,7 +1507,7 @@ Issue pre/tt, convert <pre><tt> to indented code
 ```````````````````````````````` example Issue pre/tt: 1
 Test
 
-    
+
             _____     _           
            / ____|   (_)          
      _   _| |     ___ _ _ __ ___  

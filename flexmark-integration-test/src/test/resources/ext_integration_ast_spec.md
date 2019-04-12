@@ -844,14 +844,14 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
     <ul>
       <li>Spaces in file name were url encoded</li>
       <li>Copy dragging a file leaves its original directory instead of setting it to the closest
-      or best guess based on the destination file. Should be the same as if the image was
-      pasted into the file. If the destination directory is the same as the source then a new
-      name should be generated to uniquify it.</li>
+        or best guess based on the destination file. Should be the same as if the image was
+        pasted into the file. If the destination directory is the same as the source then a new
+        name should be generated to uniquify it.</li>
     </ul>
   </li>
   <li>Add: in Paste/Modify Image if dragging the highlight selection without having highlight
-  enabled or no border, inner nor outer fill enabled, will enable highlight and border to
-  provide feedback otherwise it is confusing.
+    enabled or no border, inner nor outer fill enabled, will enable highlight and border to
+    provide feedback otherwise it is confusing.
     <ul>
       <li>Add: drag selection can be used for cropping if image tab is selected and <code>Use mouse selection only for highlight</code> is not selected.</li>
       <li>Fix: only copy image to transparent if Image tab is selected. The rest leave as is.</li>
@@ -862,8 +862,8 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
   <li>Add: option to disable synthetic highlight attributes.
     <ul>
       <li>Fix: #648, too many element types registered, Option for full syntax highlighter
-      combinations, disabling creates minimal set to reduce the limit of short index for these in
-      the IDE.</li>
+        combinations, disabling creates minimal set to reduce the limit of short index for these in
+        the IDE.</li>
     </ul>
   </li>
   <li>Add: Code Style option to treat <code>Hard Wraps</code> parser option as if soft-wraps are enabled.</li>
@@ -1123,11 +1123,11 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
     <p>Add: anchor link completion on external URLs which do not resolve to a project file.</p>
     <ul>
       <li>Special handling if file extension matches a Markdown Language extension, will download the
-      markdown file and will render it as HTML to extract anchor definitions</li>
+        markdown file and will render it as HTML to extract anchor definitions</li>
       <li>Special handling for GitHub (ones starting with <a href="http://">http://</a> or <a href="https://">https://</a> followed by github.com)
         <ul>
           <li>markdown files: If the link is to a <code>blob</code> type then will use <code>raw</code> type URL to get
-          Markdown so it can be correctly rendered as HTML to extract anchor definitions.</li>
+            Markdown so it can be correctly rendered as HTML to extract anchor definitions.</li>
           <li>html content:
             <ul>
               <li>remove <code>user-content-</code> prefix from anchor refs (GitHub adds these automatically)</li>
@@ -1139,7 +1139,7 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
       <li>Special handling for GitLab (ones starting with <a href="http://">http://</a> or <a href="https://">https://</a> followed by gitlab.com)
         <ul>
           <li>markdown files: If the link is to a <code>blob</code> type then will use <code>raw</code> type URL to get
-          Markdown so it can be correctly rendered as HTML to extract anchor definitions.</li>
+            Markdown so it can be correctly rendered as HTML to extract anchor definitions.</li>
           <li>html content:
             <ul>
               <li>remove <code>[0-9a-fA-F]{32}-[0-9a-fA-F]{40}</code> looking anchor ids</li>
@@ -1153,25 +1153,25 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 <h3 id="260---bug-fix--enhancement-release">2.6.0 - Bug Fix &amp; Enhancement Release</h3>
 <ul>
   <li>Fix: change definition indent maximum to 4, beyond which it converts the text to indented
-  code.</li>
+    code.</li>
   <li>Fix: definition formatting would not add indent removal causing contained block quote prefix
-  to be doubled</li>
+    to be doubled</li>
   <li>Add: option to remove prefixes when joining lines</li>
   <li>Fix: move code style <code>Continuation Lines</code> indent into <code>Text</code> code style panel.</li>
   <li>Add: <code>Left Justified</code> option to ordered list style options</li>
   <li>Fix: force code style parser settings to CommonMark</li>
   <li>Fix: change code style sample parsing flags to modify parser flags to allow formatting all
-  sample elements.</li>
+    sample elements.</li>
   <li>Fix: settings &quot;Manage...&quot; exception in DataGrip without an open project. Now uses user home
-  dir as default directory without an open project.</li>
+    dir as default directory without an open project.</li>
   <li>Fix: fenced code and indented code indented with tabs would not minimize indent during
-  formatting.</li>
+    formatting.</li>
   <li>Fix: HTML to markdown conversion
     <ul>
       <li>Fix: #268, Pipe characters are not escaped in Table (FlexmarkHtmlParser)
         <ul>
           <li>Fix: escape pipe characters in text (to avoid accidental use as table or other markup)
-          when not inline code nor fenced code</li>
+            when not inline code nor fenced code</li>
           <li>Fix: escape back ticks when inside code</li>
           <li>Fix: disable escaping of <code>[]</code> when inside code
             <ul>
@@ -1186,67 +1186,67 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
   <li>Fix: <code>FlexmarkHtmlParser.BR_AS_EXTRA_BLANK_LINES</code> now adds <code>&lt;br /&gt;</code> followed by blank line</li>
   <li>Fix: JavaFx Browser initialization bug introduced by 2016.3 compatibility fix.</li>
   <li>Add: &quot;Paste HTML&quot; button to HTML Paste Options dialog to paste HTML without conversion to
-  markdown.</li>
+    markdown.</li>
   <li>Fix: clean up code style formatting and preview of style changes
     <ul>
       <li>style changes are now highlighted to properly reflect the last change, not whole document
-      reformat changes</li>
+        reformat changes</li>
       <li>prefix changes would not be applied (or formatted) if text wrap for paragraphs was disabled,
-      affected list items, definitions, block quotes</li>
+        affected list items, definitions, block quotes</li>
       <li>block quote prefix (compact with space) always inserted space after firs <code>&gt;</code> instead of last
-      <code>&gt;</code></li>
+        <code>&gt;</code></li>
       <li>TOC with html language option would not update preview</li>
       <li>Remove unused list formatting options</li>
     </ul>
   </li>
   <li>Add: link text suggestion for user label <code>@username</code> for GitHub user links of the form:
-  <code>https://github.com/username</code></li>
+    <code>https://github.com/username</code></li>
   <li>Change: remove runtime null assertions for function arguments</li>
   <li>Fix: scroll sync not working in 2018.3 EAP</li>
   <li>Fix: change lambdas to functions to have <code>arguments</code> available (causing exception in JetBrains
-  Open JDK 1.8.0_152-release-1293-b10 x86_64</li>
+    Open JDK 1.8.0_152-release-1293-b10 x86_64</li>
   <li>Add: extra diagnostic information for Swing Browser <code>EmptyStackException</code></li>
   <li>Fix: diagnostic/1759, kotlin arguments erroneously defined as not nullable.</li>
   <li>Fix: 2016.3 compatibility</li>
   <li>Fix: markdown code style settings to be created from file when available to allow IDE scope
-  based resolution for markdown files to work properly.</li>
+    based resolution for markdown files to work properly.</li>
   <li>Add: HTML Settings option <code>Add &lt;!DOCTYPE html&gt;</code> to enable/disable having doc type at top of
-  document. Required by Katex to work.</li>
+    document. Required by Katex to work.</li>
   <li>Fix: update emoji icons</li>
   <li>Fix: GitLab math blocks to display as blocks instead of inlines</li>
   <li>Fix: disable tab overrides if there is a selection in the editor or multiple carets</li>
   <li>Change: split math and chart options from GitLab so that each can be selected without GitLab
-  extensions if GitLab extensions are not selected.</li>
+    extensions if GitLab extensions are not selected.</li>
   <li>Add:
-  <a href="https://gitlab.com/gitlab-org/gitlab-ce/blob/master/doc/user/markdown.md">GitLab Flavoured Markdown</a>
-  parsing and rendering functionality
+    <a href="https://gitlab.com/gitlab-org/gitlab-ce/blob/master/doc/user/markdown.md">GitLab Flavoured Markdown</a>
+    parsing and rendering functionality
     <ul>
       <li>Math inline using <code>$``$</code> and fenced code blocks with info of <code>math</code> using
-      <a href="https://github.com/Khan/KaTeX">Katex</a></li>
+        <a href="https://github.com/Khan/KaTeX">Katex</a></li>
       <li>Chart fenced code blocks with info of <code>mermaid</code> using
-      <a href="https://github.com/knsv/mermaid">Mermaid</a></li>
+        <a href="https://github.com/knsv/mermaid">Mermaid</a></li>
       <li>Inserted text (underlined) via <code>{+text+}</code> or <code>[+text+]</code></li>
       <li>Deleted text (strike through) via <code>{-text-}</code> or <code>[-text-]</code></li>
       <li>Multiline block quotes using <code>&gt;&gt;&gt;</code> at start of line to mark block start and <code>&lt;&lt;&lt;</code> at start
-      of line to mark block end.
-      <a href="https://gitlab.com/gitlab-org/gitlab-ce/blob/master/doc/user/markdown.md#multiline-blockquote">GFM: Multiline Blockquote</a></li>
+        of line to mark block end.
+        <a href="https://gitlab.com/gitlab-org/gitlab-ce/blob/master/doc/user/markdown.md#multiline-blockquote">GFM: Multiline Blockquote</a></li>
       <li>Video image link rendering
-      <a href="https://gitlab.com/gitlab-org/gitlab-ce/blob/master/doc/user/markdown.md#videos">GFM: Videos</a></li>
+        <a href="https://gitlab.com/gitlab-org/gitlab-ce/blob/master/doc/user/markdown.md#videos">GFM: Videos</a></li>
     </ul>
   </li>
   <li>Fix: disable tab override when popup is showing to allow tab to be used for completions.</li>
   <li>Fix: with CommonMark list type bullet list item after ordered list and vice versa, would allow
-  indentation in error.</li>
+    indentation in error.</li>
   <li>Fix: #469, pressing tab in a empty list item should indent the list
     <ul>
       <li>added option &quot;List item indentation&quot; under &quot;Tab/Backtab Overrides&quot; which enables using
-      tab/backtab to change list item indentation</li>
+        tab/backtab to change list item indentation</li>
     </ul>
   </li>
   <li>Fix: #541, using tab to move to the next table cell
     <ul>
       <li>added option &quot;Table Navigation&quot; under &quot;Tab/Backtab Overrides&quot; which enables using
-      tab/backtab to navigate table cells</li>
+        tab/backtab to navigate table cells</li>
     </ul>
   </li>
   <li>Fix: GitHub issue completions for 2018.3 EAP</li>
@@ -1255,7 +1255,7 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
   <li>Fix: remove auto links from spellchecking elements</li>
   <li>Fix: partial fix for list item needs blank line annotation for list in block quotes</li>
   <li>Fix: #610, hope can have more paste option, add HTML paste options to suppress conversion of
-  inline and heading elements</li>
+    inline and heading elements</li>
   <li>Fix: #623, Directory linking occasionally broken</li>
   <li>Fix: compatibility with versions 2017.</li>
   <li>Fix: possibly fix diagnostic pycharm exception on migrate code settings</li>
@@ -1264,10 +1264,10 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
   <li>Change: update source code for 2018.2 API changes.</li>
   <li>Fix: #621, plugin oom in goland, potential memory leak</li>
   <li>Fix: #615, Plugin can't initialize in multi-user setup, now temp directory
-  <code>.markdownNavigator</code> is created under the user's home directory</li>
+    <code>.markdownNavigator</code> is created under the user's home directory</li>
   <li>Fix: #620, Check keyboard shortcut changes wrong list item</li>
   <li>Fix: #619, Create unchecked list item when pressing enter next to a line with a checked list
-  item</li>
+    item</li>
   <li>Fix: reference paste to add line references to link text in the form: <code>: Line #</code> or <code>: Lines #-#</code></li>
   <li>Fix: diagnostic/1575, <code>node.treeNext must not be null</code></li>
   <li>Fix: wrong range calculation for #612 fix</li>
@@ -1280,27 +1280,27 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 <ul>
   <li>Fix: High Sierra JavaFx issue, implement JavaFX initialization as per Markdown Support.</li>
   <li>Add: Document Translation using Yandex.Translate and flexmark-java translation helper API,
-  configured in debug settings. This is a temporary implementation which will be moved to its
-  own plugin in the future.</li>
+    configured in debug settings. This is a temporary implementation which will be moved to its
+    own plugin in the future.</li>
   <li>Fix: diagnostic/NPE on JavaFX WebView save editor state.</li>
   <li>Add: conversion of emoji from HTML mime copied back from Apple mail.</li>
   <li>Fix: paste image file name from link name would not be URI decoded.</li>
   <li>Add: folding of list items longer than one line of text</li>
   <li>Fix: #590, &quot;Create directories and folder&quot; does only create directory on first hit.</li>
   <li>Fix: #591, uncomment does not remove leading space, removed padding spaces from comment
-  prefix/suffix.</li>
+    prefix/suffix.</li>
   <li>Fix: shorten toolbar by moving more rare actions to popup menus: list, table, misc and copy</li>
   <li>Fix: wrap on typing <code>&gt;</code> to insert block quote level into existing block quote or using
-  backspace to remove a block quote level</li>
+    backspace to remove a block quote level</li>
   <li>Fix: wrap on typing backspace in footnote definition would replicate the first line prefix on
-  continuation lines</li>
+    continuation lines</li>
   <li>Fix: inserting an EOL in a list item before text matching bullet list marker or numbered would
-  double the list marker on the resulting line</li>
+    double the list marker on the resulting line</li>
   <li>Add: option for escape/unescape all numbered list lead-in of <code>number.</code> when wrapping text.</li>
   <li>Fix: diagnostic java.lang.RuntimeException in ImageUtils.getImageFromTransferable when pasting
-  an image</li>
+    an image</li>
   <li>Fix: java.lang.Throwable: Invalid file: DB VirtualFile: table when caused sometimes by file
-  watcher requesting markdown files be re-parsed</li>
+    watcher requesting markdown files be re-parsed</li>
   <li>Fix: diagnostic java.lang.IllegalArgumentException: Argument for @NotNull parameter 'project'</li>
   <li>Fix: accept license code when extra spaces are added before EOL in e-mail.</li>
   <li>Fix: diagnostic/ prevSibling should not be null.</li>
@@ -1309,14 +1309,14 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
   <li>Fix: file types by specific extension completion did not work</li>
   <li>Fix: link resolution would not find files with nested extensions like <code>blade.php</code></li>
   <li>Change: toggle inline attribute when the caret is at the end of a non-space span now restores
-  the caret position when applying the style instead of end of the span, inside the markers.
-  More natural when inlining a word to continue typing.</li>
+    the caret position when applying the style instead of end of the span, inside the markers.
+    More natural when inlining a word to continue typing.</li>
   <li>Fix: #575, Broken Spell Checker, spell checking not working on paragraph text for basic
-  plugin.</li>
+    plugin.</li>
   <li>Fix: JavaFX detection with Android Studio 3.0</li>
   <li>Fix: #434, Spellchecker context menu is duplicated</li>
   <li>Add: <code>Use rename for spelling error intention</code> to allow turning off <code>Rename to:</code> spellchecking
-  intention and use the regular <code>Change to:</code> intention.</li>
+    intention and use the regular <code>Change to:</code> intention.</li>
   <li>Fix: remove old storage macros</li>
 </ul>
 <h3 id="252---bug-fix--enhancement-release">2.5.2 - Bug Fix &amp; Enhancement Release</h3>
@@ -1530,7 +1530,7 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
       <li>Fix: launching on an anchor and cancelling, does not show intention until file is edited.</li>
       <li>Add: do a partial match for anchor when no anchors match exactly.</li>
       <li>Add: filter text box to filter anchor list (show all partials, the rest hidden) otherwise
-      too many in the list.</li>
+        too many in the list.</li>
     </ul>
   </li>
   <li>
@@ -1561,12 +1561,12 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
           <li>Images: image files only</li>
           <li>Unicode and Images: use Unicode characters when available, image file otherwise</li>
           <li>Unicode Only: only use unicode characters, don't recognize shortcuts which have no unicode
-          equivalent.</li>
+            equivalent.</li>
         </ul>
       </li>
       <li>Add: option to preview settings to replace Unicode emoji characters which have a
-      corresponding image file with the image file. This allows preview browser to display Unicode
-      emoji for which the browser would display unrecognized character symbol instead.</li>
+        corresponding image file with the image file. This allows preview browser to display Unicode
+        emoji for which the browser would display unrecognized character symbol instead.</li>
     </ul>
   </li>
   <li>
@@ -1671,7 +1671,7 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
       <li><code>Export Settings</code></li>
       <li><code>Import Settings</code></li>
       <li><code>Reset Settings</code> to reset settings to default. Project defaults, current project settings
-      and markdown navigator application settings.</li>
+        and markdown navigator application settings.</li>
     </ul>
     <p>These actions copy from current unsaved project settings and to current unsaved project
     settings therefore you can modify settings, copy to project defaults (or export) and then
@@ -1755,14 +1755,14 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
     <ul>
       <li><strong><a href="https://github.com/vsch/flexmark-java/wiki/Attributes-Extension">Attributes</a></strong> and</li>
       <li><strong><a href="https://github.com/vsch/flexmark-java/wiki/Enumerated-References-Extension">Enumerated References</a></strong>
-      parser extensions</li>
+        parser extensions</li>
       <li>Add: heading intentions to add/remove explicit id</li>
       <li>Add: completions for link anchors to id attribute values</li>
       <li>Add: completions for enumerated references and reference formats</li>
       <li>Add: formatting options and formatting for Enumerated References</li>
       <li>Add: error/unused annotations for enumerated reference, enumerated format and attribute id</li>
       <li>Add: refactoring/navigation for Enumerated Reference format id's, Attribute Id's, Enumerated
-      Reference link/text.</li>
+        Reference link/text.</li>
     </ul>
   </li>
   <li>
@@ -1796,13 +1796,13 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 <ul>
   <li>Fix: #517, Invalid tool tip for &quot;Show Breadcrumb text&quot;</li>
   <li>Change: #520, Not working: As you type automation: Double of bold/emphasis markers and remove
-  inserted ones if a space is typed. Enable these options in code style, disabled by default.</li>
+    inserted ones if a space is typed. Enable these options in code style, disabled by default.</li>
   <li>Fix: #509, Text with colons is incorrectly interpreted as an invalid emoji shortcut</li>
   <li>Add: #507, How to be sure that HTML auto generated link will have unchanged url. Link format
-  option for HTML export: page relative, project relative, http: absolute, file: absolute if
-  option <code>Link to exported HTML</code> is not selected.</li>
+    option for HTML export: page relative, project relative, http: absolute, file: absolute if
+    option <code>Link to exported HTML</code> is not selected.</li>
   <li>Add: #466, Indents with 4 spaces instead of 2 as I like. Code style option for indent size
-  added sets number of spaces to insert when pressing tab.</li>
+    added sets number of spaces to insert when pressing tab.</li>
   <li>Change: Remove attribute and settings migration from pre 2.3.0 versions.</li>
   <li>Add: nested heading outline collapsing</li>
   <li>Fix: improved HTML to markdown conversion from Apple Mail copied text.</li>
@@ -1811,34 +1811,34 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
   <li>Fix: line markers generate for leaf elements only, performance improvement</li>
   <li>Fix: swing preview on linux not showing fixed pitch font for code</li>
   <li>Fix: Task list items now require indent at task item marker not item content, to match GitHub
-  parsing rules. Indenting to content column treats children as inline code and child list items
-  not separated by a blank line as lazy continuation lines.</li>
+    parsing rules. Indenting to content column treats children as inline code and child list items
+    not separated by a blank line as lazy continuation lines.</li>
   <li>Fix: formatter for new task item indentation rules.</li>
   <li>Fix: remove <code>Replace File Content</code> option from non-image target ref drop downs in paste/modify
-  image dialog, and all link options from copy/drop image dialog and link drop/paste ref options
-  dialog.</li>
+    image dialog, and all link options from copy/drop image dialog and link drop/paste ref options
+    dialog.</li>
   <li>Fix: #489, Paste Image does not create file if parent directory does not exist.</li>
   <li>Fix: #484, Open links in preview, not browser. Option added to preview settings to have page
-  relative and repo relative links resolve to GitHub files when selected. When not selected they
-  resolve to local project files.</li>
+    relative and repo relative links resolve to GitHub files when selected. When not selected they
+    resolve to local project files.</li>
   <li>Fix: #486, Multi-line links do not preview correctly, when in <code>Line</code> preview element highlight
-  mode.</li>
+    mode.</li>
   <li>Fix: #481, Will not allow me to crop beyond 200px, now limits are derived from the image
-  dimensions and image operations.</li>
+    dimensions and image operations.</li>
   <li>Fix: Update to latest flexmark-java supporting CommonMark Spec 0.28.</li>
   <li>Fix: TOC entries would exclude typographic characters when &quot;text only&quot; option was used with
-  typographic parser extension enabled.</li>
+    typographic parser extension enabled.</li>
   <li>Fix: HTML to Markdown not adding HTML comment between consecutive lists</li>
   <li>Fix: #479, Multi-line URL images are not converted in PDF export or Copy HTML Mime</li>
   <li>Add: Show &quot;Apply all '...'&quot; intention on any element option to allow showing file level
-  intentions to be available on any element. Otherwise only shown on elements which they affect.</li>
+    intentions to be available on any element. Otherwise only shown on elements which they affect.</li>
   <li>Add: enable image intentions on multi-line URL image links</li>
   <li>Add: Code Folding option in settings for embedded image links</li>
   <li>Add: HTML generation options to convert image links to embedded images, with separate option
-  for <a href="http://">http://</a> and <a href="https://">https://</a> image urls.</li>
+    for <a href="http://">http://</a> and <a href="https://">https://</a> image urls.</li>
   <li>Add: base64 embedded image display in Swing Preview browser</li>
   <li>Add: <code>Base64 Encoded</code> as a link format for pasted images and dropped files to the Paste Image
-  dialog.</li>
+    dialog.</li>
   <li>Fix: base64 encode intention would keep path of url if it was present</li>
   <li>Fix: image reference links to references with base64 encoded images would show as unresolved</li>
   <li>Add: intentions to convert images to base64 encoding and vice-versa</li>
@@ -1847,60 +1847,60 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
   <li>Fix: dropping a file in a document appends <code>null</code> string to the file name in error.</li>
   <li>Fix: #468, Move (refactoring) of .md files breaks links to sections in same file.</li>
   <li>Fix: reference paste with line ref anchor would always paste page relative format URL
-  regardless of the link paste format (set with file copy drop action).</li>
+    regardless of the link paste format (set with file copy drop action).</li>
   <li>Fix: diagnostics/713, tree view icon update before <code>FileManager</code> has been initialized will to
-  return markdown file type (without resolving sub-type).</li>
+    return markdown file type (without resolving sub-type).</li>
   <li>Add: Convert markdown to HTML intention for fenced code and indented code blocks.</li>
   <li>Fix: unresolved link references would be rendered in HTML instead of being treated as plain
-  text. Broken by <code>Reference</code> link map code.</li>
+    text. Broken by <code>Reference</code> link map code.</li>
   <li>Fix: paste reference past end of line will insert spaces to caret column before inserting
-  link.</li>
+    link.</li>
   <li>Fix: links from FQN references with spaces did not url encode the link.</li>
   <li>Fix: reference to link conversion for PhpStorm to truncate the reference at the <code>:</code> since
-  PhpStorm is not able to convert FQN strings with class method names.</li>
+    PhpStorm is not able to convert FQN strings with class method names.</li>
   <li>Add: use QualifiedNameProviders to resolve reference to link conversion.</li>
   <li>Add: logic to not convert qualified string to link when caret is inside inline code, fenced
-  code or between two back-ticks.</li>
+    code or between two back-ticks.</li>
   <li>Fix: HTTP links with anchor refs should not highlight anchor links as unresolved.</li>
   <li>Add: paste of file reference with or without line number converted to paste of link with
-  GitHub line ref anchor added if line number is part of the reference. This will insert/replace
-  link.</li>
+    GitHub line ref anchor added if line number is part of the reference. This will insert/replace
+    link.</li>
   <li>Fix: non-vcs projects links without a path would show unresolved even when files exist.</li>
 </ul>
 <h3 id="238---bug-fix-release">2.3.8 - Bug Fix Release</h3>
 <ul>
   <li>Add: GitHub Line reference anchors in the form <code>L#</code> or <code>L#-L#</code> for line ranges. Now navigating
-  to such an anchor in a project file will move the caret to the line and if second form is used
-  select the lines.</li>
+    to such an anchor in a project file will move the caret to the line and if second form is used
+    select the lines.</li>
   <li>Add: with JavaFX browser clicking on task item box in preview toggles open/closed task status
-  in source.</li>
+    in source.</li>
   <li>Fix: image refs and image links to non-raw GitHub image files to show as warning. Only show
-  warning for references not in raw when referenced by image refs.</li>
+    warning for references not in raw when referenced by image refs.</li>
   <li>Add: Apply all '...' in file intentions where these make sense.</li>
   <li>Add: intention to convert between typographic symbols and markdown smarts/quotes extension
-  text.</li>
+    text.</li>
   <li>Add: <code>HTML block deep parsing</code> parser option to allow better handling of raw text tag parsing
-  when they are not the first tag on the first line of the block.</li>
+    when they are not the first tag on the first line of the block.</li>
   <li>Add: split inline code class <code>line-spliced</code> for code elements split across multiple lines not
-  to appear as two inline code elements in preview.</li>
+    to appear as two inline code elements in preview.</li>
   <li>Fix: HTML generation with line source line highlighting when inline styling spans source lines</li>
   <li>Add: #74, Launching external URLs inside the browser, now <code>navigate to declaration</code> opens url
-  in browser, ftp or mail client depending on the link. Can also use line markers for navigation
-  of these elements.</li>
+    in browser, ftp or mail client depending on the link. Can also use line markers for navigation
+    of these elements.</li>
   <li>Fix: parsing of lists in fixed 4 spaces mode would not allow last item to be loose</li>
   <li>Fix: reference to non-image but not used as image target warning not raw.</li>
   <li>Fix: exception when navigating next/previous table cells in editor without an associated
-  virtual file.</li>
+    virtual file.</li>
   <li>Fix: #461, TOC with HTML generated content causes exception if skipping heading levels</li>
   <li>Fix: #460, TOC options do not change default Heading level</li>
   <li>Fix: #459, PDF export does not resolve local ref anchors</li>
   <li>Fix: #456, Register r markdown code chunk prefix</li>
   <li>Fix: #453, Option to hide toolbar</li>
   <li>Fix: #454, Incorrect filename inspection error, weak warning now only for wiki link targets
-  that contain spaces in resolved link.</li>
+    that contain spaces in resolved link.</li>
   <li>Fix: flexmark-java issue 109, image ref loosing title tag.</li>
   <li>Add: GitBook compatible include tags when <code>GitBook compatibility mode</code> is enabled in <code>Parser</code>
-  options.</li>
+    options.</li>
   <li>Fix: Nested stub index exception in reference search</li>
   <li>Fix: breadcrumb tooltip of task items would be missing the task item marker</li>
   <li>Fix: completions broken on Windows</li>
@@ -1911,55 +1911,55 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
   <li>Fix: #447, Exported HTML has unexpected CSS and JS URLs</li>
   <li>Fix: #445, there should no be default language injection in bare code chunks</li>
   <li>Add: handling of optional quotes for jekyll include tags. Either single <code>'</code> or double <code>&quot;</code>
-  quotes will be ignored if the file name is wrapped in them.</li>
+    quotes will be ignored if the file name is wrapped in them.</li>
   <li>Fix: API break with version 2016.2.3 by using EditorModificationUtil methods missing from that
-  version.</li>
+    version.</li>
   <li>Fix: #444, Markdown Navigator 2.3.7 breaks paste of github checkout url</li>
   <li>Fix: #441, false positive typo annotation in header, caused by using IdentifierSplitter
-  instead of TextSplitter to handle elements that can have references.</li>
+    instead of TextSplitter to handle elements that can have references.</li>
   <li>Fix: #442, Image Paste in Windows always pastes absolute <a href="file://">file://</a> regardless of selection</li>
   <li>Add: Insert table column on right actions and changed description of previous action to insert
-  table column on left.</li>
+    table column on left.</li>
   <li>Fix: exception when exporting PDF or Copy HTML Mime</li>
   <li>Fix: #440, Auto links should not appear in fenced code</li>
   <li>Add: #411, Network drives links are not resolved correctly, URI links outside of project now
-  error highlighted if the file does not exist</li>
+    error highlighted if the file does not exist</li>
   <li>Add: #433, Support external links for the Link Map (eg. JIRA link), Reference to Link Map to
-  allow creating automatic reference URLs from Reference IDs</li>
+    allow creating automatic reference URLs from Reference IDs</li>
 </ul>
 <h3 id="237---bug-fix-release">2.3.7 - Bug Fix Release</h3>
 <ul>
   <li>Fix: parser erroneously processing escape <code>\</code> is encountered in fenced code and causing a
-  parsing exception.</li>
+    parsing exception.</li>
 </ul>
 <h3 id="236---bug-fix--enhancement-release">2.3.6 - Bug Fix &amp; Enhancement Release</h3>
 <ul>
   <li>Fix: intermittent index out of bounds exception if document is edited after parsing but before
-  AST is built.</li>
+    AST is built.</li>
   <li>Fix: #438, Markdown Syntax Change looses TOC element in source</li>
   <li>Add: annotation to detect when list syntax is set to GitHub</li>
   <li>Fix: #432, Add a way to disable the startup notification</li>
   <li>Fix: #436, Header link results in bad Table of Contents entry formatting</li>
   <li>Fix: #411, Network drives links are not resolved correctly, for <code>file://</code> which is outside the
-  project and any module directory structure.</li>
+    project and any module directory structure.</li>
   <li>Fix: NPE in settings under rare conditions</li>
   <li>Fix: assertion failure in settings under rare timing conditions</li>
   <li>Fix: paste NPE when pasting into link with empty address</li>
   <li>Fix: drag/drop without copy modifier of image files uses last non-image link format instead of
-  last used image link format.</li>
+    last used image link format.</li>
   <li>Fix: diagnostic id:208, invalid virtual file in line painter</li>
   <li>Add: option to break definition list on two or more blank lines</li>
   <li>Fix: #428, Lack of encoding declaration when exporting in html</li>
   <li>Add: Global page zoom for JavaFX preview in application settings so that project preview zoom
-  does not need to be changed when project is opened on a machine with different HIDPI. Now can
-  leave project zoom to 1.00 and change global zoom to desired value.</li>
+    does not need to be changed when project is opened on a machine with different HIDPI. Now can
+    leave project zoom to 1.00 and change global zoom to desired value.</li>
   <li>Fix: #426, Cannot add images from clipboard or drag and drop under Windows</li>
   <li>Fix: Setext heading to not show heading id on marker line</li>
   <li>Add: #425, Add Heading anchor ID display in editor</li>
   <li>Fix: #424, NoClassDefFoundError in WS 2017.1</li>
   <li>Fix: #421, NoSuchFieldError on startup after upgrading plugin on IDEs version 2016.1</li>
   <li>Fix: image link from non-wiki page to image in wiki would show as unresolved by annotator when
-  it was resolved by line marker and preview.</li>
+    it was resolved by line marker and preview.</li>
 </ul>
 <h3 id="235---bug-fix--enhancement-release">2.3.5 - Bug Fix &amp; Enhancement Release</h3>
 <ul>
@@ -1968,76 +1968,76 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
   <li>Fix: #419, Bread crumbs broken when running in 2017.1</li>
   <li>Fix: licensed features highlight now full balloon notification.</li>
   <li>Fix: detection when containing file and target file of a link are not under the same VCS root
-  when the containing file is in a sub-directory of target VCS root but has its own root.</li>
+    when the containing file is in a sub-directory of target VCS root but has its own root.</li>
   <li>Fix: #416, NPE version 2.3.4 (w/license)</li>
   <li>Fix: #415, Setting default right margin in code style markdown settings disables wrapping</li>
   <li>Fix: #414, Exception when starting IDEA</li>
   <li>Fix: do not hide wrap on typing and table auto format buttons even when these are disabled.</li>
   <li>Fix: drag/drop image files should only show copy dialog if no drop action information or it is
-  a drop copy action</li>
+    a drop copy action</li>
   <li>Add: plugin exception reporting to <code>vladsch.com</code> without effort.</li>
   <li>Fix: wiki to main repo links would not resolve. Erroneously treated two vcs repos as separate.</li>
   <li>Fix: clipboard mime text/html now has higher priority than file list and image on the
-  clipboard.</li>
+    clipboard.</li>
   <li>Add: operation options for non-image drop/paste file based on caret location</li>
   <li>Add: <code>Copy Modified Image to Clipboard</code> in Copy/Paste Image Dialog to replace clipboard image
-  contents with modified image, can use it to replace image on clipboard then Cancel dialog to
-  not modify the Markdown document but still have the modified image on the clipboard.</li>
+    contents with modified image, can use it to replace image on clipboard then Cancel dialog to
+    not modify the Markdown document but still have the modified image on the clipboard.</li>
   <li>Add: Copy/Modify Image intention that will open the Image Copy/Paste Dialog for the image
-  content of a link element at caret position. Works with local files and URLs. Get the option
-  to change directory, file name and modify the image.</li>
+    content of a link element at caret position. Works with local files and URLs. Get the option
+    to change directory, file name and modify the image.</li>
   <li>Fix: <code>http://</code> and <code>https://</code> addresses to project files would be ignored due to a typo in the
-  code.</li>
+    code.</li>
   <li>Fix: update to flexmark-java 18.2, HTML to Markdown hang fix and MS-Word and MS-Excel HTML
-  quirks handling fixed.</li>
+    quirks handling fixed.</li>
   <li>Fix: link resolution logic to work for multi-vcs-root projects and modules not under project
-  root.</li>
+    root.</li>
   <li>Fix: update to flexmark-java 18.1, HTML to Markdown adds space after empty list items.</li>
   <li>Add: Markdown application settings for:
     <ul>
       <li><code>Use clipboard text/html content when available</code> disabled by default, enabling it will allow
-      pasting text/html when available</li>
+        pasting text/html when available</li>
       <li><code>Convert HTML content to Markdown</code> enabled by default, disabling will paste text/html
-      content without conversion to Markdown</li>
+        content without conversion to Markdown</li>
     </ul>
   </li>
   <li>Add: <code>Delete empty list items</code> intention on lists to delete all empty list items</li>
   <li>Fix: HTML to Markdown converter to not ignore text in lists which is not included in list item
-  but instead to put this text into a new list item.</li>
+    but instead to put this text into a new list item.</li>
   <li>Add: aside extension which uses leading pipe <code>|</code> to mark an aside block just like block quote
-  uses leading greater than <code>&gt;</code> to mark a block quote element</li>
+    uses leading greater than <code>&gt;</code> to mark a block quote element</li>
   <li>Add: pasting file list into markdown document inserts links the same as dropping files with
-  copy action.</li>
+    copy action.</li>
   <li>Add: confirmation dialog when original markdown file is going to be overwritten with
-  transformed content when pasting file list or drag and dropping files.</li>
+    transformed content when pasting file list or drag and dropping files.</li>
   <li>Fix: absolute <code>http://..../wiki</code> link to wiki home page would to resolve as a file reference.</li>
   <li>Fix: drag/drop wiki page files would ignore link address format and always insert page
-  relative link.</li>
+    relative link.</li>
   <li>Fix: style auto wrapping when caret at end of word that is at end of file without trailing
-  EOL.</li>
+    EOL.</li>
   <li>Add: future API for drag/drop handling code to eliminate the need for replacing editor
-  drag/drop handler.</li>
+    drag/drop handler.</li>
   <li>Add: highlight selection in preview, <code>Show source selection in preview</code> enabled by default.
-  Wraps selection in <code>&lt;span&gt;</code> with <code>selection-highlight</code> class.</li>
+    Wraps selection in <code>&lt;span&gt;</code> with <code>selection-highlight</code> class.</li>
   <li>Add: #399, Highlight search results in preview, <code>Show source search highlights in preview</code>
-  enabled by default. Wraps highlights in <code>&lt;span&gt;</code> with <code>search-highlight</code> class.</li>
+    enabled by default. Wraps highlights in <code>&lt;span&gt;</code> with <code>search-highlight</code> class.</li>
   <li>Fix: text drag/drop not working because of MarkdownPasteHandler</li>
   <li>Add: option to enable drag/drop handler replacement to allow &quot;Copy&quot; extended file drag/drop
-  action at the expense of text drag/drop. Disabled by default in settings <code>Languages &amp; Frameworks &gt; Markdown</code></li>
+    action at the expense of text drag/drop. Disabled by default in settings <code>Languages &amp; Frameworks &gt; Markdown</code></li>
   <li>Fix: loosen/tighten list action to not mark a list as loose when blank line precedes the first
-  list item.</li>
+    list item.</li>
   <li>Fix: #404, Conversion from CommonMark or FixedIndent to GitHub does not properly indent code
-  blocks in list items</li>
+    blocks in list items</li>
   <li>Fix: #403, Indented code in list items not indented enough with GitHub list parser option</li>
   <li>Change: link color in Preview and Editor Colors to match new GitHub colors</li>
   <li>Fix: #400, Better code color consistency needed. Now same as Fenced Code/Verbatim. Also change
-  copy Markdown as HTML formatted text and PDF export to align inline code color with indented
-  and fenced code.</li>
+    copy Markdown as HTML formatted text and PDF export to align inline code color with indented
+    and fenced code.</li>
   <li>Fix: #398, Poor alignment between source and preview when using &quot;Sync source to preview&quot;. Now
-  there is an option to vertically align synchronized position in Preview Settings, selected by
-  default.</li>
+    there is an option to vertically align synchronized position in Preview Settings, selected by
+    default.</li>
   <li>Fix: #402, PDF Export action fails silently if no text is selected in document instead of
-  exporting the full document.</li>
+    exporting the full document.</li>
 </ul>
 ````````````````````````````````
 
@@ -4176,8 +4176,8 @@ Caused segments out of order exception in Markdown Navigator, but cannot duplica
         <p>Possible improvement to obscured element detection:</p>
         <ul>
           <li>Use the middle point of the intersection of the selection rect and the bounding rect
-          rather than the middle point of the bounding rect, this catches cases where the bottom
-          half of the element is obscured, but not all of it</li>
+            rather than the middle point of the bounding rect, this catches cases where the bottom
+            half of the element is obscured, but not all of it</li>
         </ul>
       </li>
       <li>
@@ -4215,7 +4215,7 @@ Caused segments out of order exception in Markdown Navigator, but cannot duplica
   <li>Add Options GUI</li>
   <li>Better handling of label placement (separate from sizing rect, above &lt;SVG&gt; Element)</li>
   <li>Highlight &quot;greatest of types&quot; elements differently than elements which do not meet the greatest of.
-  eg: 3 Buttons and 1 Anchor lassoed, the 3 Buttons would be highlighted in green vs the Anchor being highlighted in grey</li>
+    eg: 3 Buttons and 1 Anchor lassoed, the 3 Buttons would be highlighted in green vs the Anchor being highlighted in grey</li>
 </ul>
 <h1 id="todo--ideas">Todo / Ideas</h1>
 <ul>

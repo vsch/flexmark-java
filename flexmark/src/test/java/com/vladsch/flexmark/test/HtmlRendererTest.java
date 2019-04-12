@@ -13,7 +13,6 @@ import com.vladsch.flexmark.util.options.DataKey;
 import com.vladsch.flexmark.util.options.MutableDataSet;
 import org.junit.Test;
 
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -211,13 +210,13 @@ public class HtmlRendererTest {
                                 if (node.getText().equals("bar")) {
                                     context.getHtmlWriter().text("test");
                                 } else {
-                                    StringBuilder out = new StringBuilder();
-                                    NodeRendererContext subContext = context.getDelegatedSubContext(out, true);
+                                    NodeRendererContext subContext = context.getDelegatedSubContext(true);
                                     if (node.getText().equals("raw")) {
                                         subContext.doNotRenderLinks();
                                     }
                                     subContext.delegateRender();
-                                    html.raw(out);
+                                    String s = subContext.getHtmlWriter().toString(-1);
+                                    html.raw(s);
                                 }
                             }
                         }));

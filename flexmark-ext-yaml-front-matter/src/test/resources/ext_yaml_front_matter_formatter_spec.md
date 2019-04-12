@@ -28,6 +28,7 @@ version:
 date: '2016-06-06'
 license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 ---
+
 .
 Document[0, 160]
   YamlFrontMatterBlock[0, 159]
@@ -60,6 +61,7 @@ linters:
       - name: UseIsNanNotNanComparison
         url:  https://github.com/HairyFotr/linter/blob/master/src/test/scala/LinterPluginTest.scala#L1930
 ---
+
 .
 Document[0, 190]
   YamlFrontMatterBlock[0, 189]

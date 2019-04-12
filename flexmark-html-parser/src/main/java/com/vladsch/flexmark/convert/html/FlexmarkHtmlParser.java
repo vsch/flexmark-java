@@ -29,6 +29,8 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static com.vladsch.flexmark.util.Utils.minLimit;
+
 @SuppressWarnings({ "WeakerAccess", "SameParameterValue" })
 public class FlexmarkHtmlParser {
     public static final DataKey<Boolean> LIST_CONTENT_INDENT = new DataKey<>("LIST_CONTENT_INDENT", true);
@@ -42,6 +44,7 @@ public class FlexmarkHtmlParser {
     public static final DataKey<Boolean> WRAP_AUTO_LINKS = new DataKey<>("WRAP_AUTO_LINKS", false);
     public static final DataKey<Boolean> RENDER_COMMENTS = new DataKey<>("RENDER_COMMENTS", false);
     public static final DataKey<Boolean> DOT_ONLY_NUMERIC_LISTS = new DataKey<>("DOT_ONLY_NUMERIC_LISTS", true);
+    public static final DataKey<Boolean> COMMENT_ORIGINAL_NON_NUMERIC_LIST_ITEM = new DataKey<>("COMMENT_ORIGINAL_NON_NUMERIC_LIST_ITEM", false);
     public static final DataKey<Boolean> PRE_CODE_PRESERVE_EMPHASIS = new DataKey<>("PRE_CODE_PRESERVE_EMPHASIS", false);
     public static final DataKey<Character> ORDERED_LIST_DELIMITER = new DataKey<>("ORDERED_LIST_DELIMITER", '.');
     public static final DataKey<Character> UNORDERED_LIST_DELIMITER = new DataKey<>("UNORDERED_LIST_DELIMITER", '*');
@@ -172,10 +175,12 @@ public class FlexmarkHtmlParser {
         specialCharsMap.put("&emdash;", "---");
     }
 
-    private static final Pattern NUMERIC_DOT_LIST = Pattern.compile("^\\d+\\.$");
-    private static final Pattern NUMERIC_PAREN_LIST = Pattern.compile("^\\d+\\)$");
-    private static final Pattern NON_NUMERIC_DOT_LIST = Pattern.compile("^(?:(?:" + RomanNumeral.ROMAN_NUMERAL.pattern() + ")|(?:" + RomanNumeral.LOWERCASE_ROMAN_NUMERAL.pattern() + ")|[a-z]+|[A-Z]+)\\.$");
-    private static final Pattern NON_NUMERIC_PAREN_LIST = Pattern.compile("^(?:[a-z]+|[A-Z]+)\\)$");
+    private static final Pattern NUMERIC_DOT_LIST = Pattern.compile("^(\\d+)\\.\\s*$");
+    private static final Pattern NUMERIC_PAREN_LIST = Pattern.compile("^(\\d+)\\)\\s*$");
+    private static final Pattern NON_NUMERIC_DOT_LIST = Pattern.compile("^((?:(?:" + RomanNumeral.ROMAN_NUMERAL.pattern() + ")|(?:" + RomanNumeral.LOWERCASE_ROMAN_NUMERAL.pattern() + ")|[a-z]+|[A-Z]+))\\.\\s*$");
+    private static final Pattern NON_NUMERIC_PAREN_LIST = Pattern.compile("^((?:[a-z]+|[A-Z]+))\\)\\s*$");
+    private static final Pattern BULLET_LIST = Pattern.compile("^([·])\\s*$");
+    private static final Pattern ALPHA_NUMERAL = Pattern.compile("^[a-z]+|[A-Z]+$");
 
     public static final DataKey<Map<Object, CellAlignment>> TABLE_CELL_ALIGNMENT_MAP = new DataKey<Map<Object, CellAlignment>>("TABLE_CELL_ALIGNMENT_MAP", tableCellAlignments);
 
@@ -254,9 +259,9 @@ public class FlexmarkHtmlParser {
         }
     }
 
-    int outputAttributes(FormattingAppendable out, final String initialSep) {
+    int outputAttributes(LineFormattingAppendable out, final String initialSep) {
         Attributes attributes = myState.myAttributes;
-        int startOffset = out.offset();
+        int startOffset = out.offsetWithPending();
 
         if (!attributes.isEmpty() && !myOptions.skipAttributes) {
             // have some
@@ -311,7 +316,7 @@ public class FlexmarkHtmlParser {
             myState.myAttributes.clear();
         }
 
-        return out.offset() - startOffset;
+        return out.offsetWithPending() - startOffset;
     }
 
     void processAttributes(Node node) {
@@ -355,7 +360,7 @@ public class FlexmarkHtmlParser {
      * @param out  formatting appendable to append the resulting Markdown
      * @param html html to be parsed
      */
-    public void parse(FormattingAppendable out, String html) {
+    public void parse(LineFormattingAppendable out, String html) {
         resetForParse();
 
         Document document = Jsoup.parse(html);
@@ -363,11 +368,10 @@ public class FlexmarkHtmlParser {
         Element body = document.body();
 
         if (myTrace) {
-            FormattingAppendableImpl trace = new FormattingAppendableImpl(0);
+            LineFormattingAppendableImpl trace = new LineFormattingAppendableImpl(0);
             trace.setIndentPrefix("  ");
             dumpHtmlTree(trace, body);
-            trace.flush();
-            System.out.println(trace.getAppendable());
+            System.out.println(trace.toString(0));
         }
 
         processHtmlTree(out, body, false);
@@ -440,7 +444,7 @@ public class FlexmarkHtmlParser {
         return new FlexmarkHtmlParser(options);
     }
 
-    public void dumpHtmlTree(FormattingAppendable out, Node node) {
+    public void dumpHtmlTree(LineFormattingAppendable out, Node node) {
         out.line().append(node.nodeName());
         for (org.jsoup.nodes.Attribute attribute : node.attributes().asList()) {
             out.append(' ').append(attribute.getKey()).append("=\"").append(attribute.getValue()).append("\"");
@@ -484,10 +488,10 @@ public class FlexmarkHtmlParser {
      * @return resulting markdown string
      */
     public static String parse(String html, int maxBlankLines, DataHolder options) {
-        FormattingAppendableImpl out = new FormattingAppendableImpl(FormattingAppendable.SUPPRESS_TRAILING_WHITESPACE | FormattingAppendable.COLLAPSE_WHITESPACE);
+        LineFormattingAppendableImpl out = new LineFormattingAppendableImpl(LineFormattingAppendable.SUPPRESS_TRAILING_WHITESPACE | LineFormattingAppendable.COLLAPSE_WHITESPACE | LineFormattingAppendable.PREFIX_PRE_FORMATTED);
         FlexmarkHtmlParser parser = new FlexmarkHtmlParser(options);
         parser.parse(out, html);
-        return out.getText(maxBlankLines);
+        return out.toString(maxBlankLines);
     }
 
     private static class State {
@@ -547,7 +551,7 @@ public class FlexmarkHtmlParser {
     }
 
     private void processHtmlTree(
-            FormattingAppendable out,
+            LineFormattingAppendable out,
             Node parent,
             boolean outputAttributes
     ) {
@@ -555,7 +559,7 @@ public class FlexmarkHtmlParser {
     }
 
     private void processHtmlTree(
-            FormattingAppendable out,
+            LineFormattingAppendable out,
             Node parent,
             boolean outputAttributes,
             Runnable prePopAction
@@ -581,7 +585,7 @@ public class FlexmarkHtmlParser {
         popState(outputAttributes ? out : null);
     }
 
-    private void processElement(FormattingAppendable out, Node node) {
+    private void processElement(LineFormattingAppendable out, Node node) {
         TagParam tagParam = getTagParam(node);
         boolean processed = false;
         boolean outputHtml = false;
@@ -643,7 +647,7 @@ public class FlexmarkHtmlParser {
         }
     }
 
-    private boolean processUnwrapped(FormattingAppendable out, Node element) {
+    private boolean processUnwrapped(LineFormattingAppendable out, Node element) {
         // unwrap and process content
         skip();
         processHtmlTree(out, element, false);
@@ -651,7 +655,7 @@ public class FlexmarkHtmlParser {
     }
 
     private boolean processWrapped(
-            final FormattingAppendable out,
+            final LineFormattingAppendable out,
             final Node node,
             Boolean isBlock,
             final boolean escapeMarkdown
@@ -677,7 +681,7 @@ public class FlexmarkHtmlParser {
         return true;
     }
 
-    private void appendOuterHtml(Node node, FormattingAppendable out) {
+    private void appendOuterHtml(Node node, LineFormattingAppendable out) {
         String text = node.outerHtml();
         int head = text.indexOf(">");
         int tail = text.lastIndexOf("</");
@@ -762,18 +766,21 @@ public class FlexmarkHtmlParser {
         return text;
     }
 
-    private boolean processText(FormattingAppendable out, TextNode node) {
+    private boolean processText(LineFormattingAppendable out, TextNode node) {
         skip();
         if (out.isPreFormatted()) {
             out.append(prepareText(node.getWholeText(), true));
         } else {
-            out.append(prepareText(node.text()));
+            String text = prepareText(node.text());
+            if (out.offsetWithPending() != 0 || !text.trim().isEmpty()) {
+                out.append(text);
+            }
         }
         return true;
     }
 
     private void processTextNodes(
-            FormattingAppendable out,
+            LineFormattingAppendable out,
             Node node,
             final boolean stripIdAttribute
     ) {
@@ -781,7 +788,7 @@ public class FlexmarkHtmlParser {
     }
 
     private void processTextNodes(
-            FormattingAppendable out,
+            LineFormattingAppendable out,
             Node node,
             final boolean stripIdAttribute,
             CharSequence wrapText
@@ -790,7 +797,7 @@ public class FlexmarkHtmlParser {
     }
 
     private void processTextNodes(
-            FormattingAppendable out,
+            LineFormattingAppendable out,
             Node node,
             final boolean stripIdAttribute,
             CharSequence textPrefix,
@@ -810,6 +817,25 @@ public class FlexmarkHtmlParser {
                 skip();
             } else if (child instanceof Element) {
                 processElement(out, child);
+                //} else if (child instanceof Comment) {
+                //    // see if it is an if
+                //    String data = ((Comment) child).getData();
+                //    if (data.startsWith("[if ")) {
+                //        // skip till [endif]
+                //        skip();
+                //        while ((child = peek()) != null) {
+                //            if (child instanceof Comment) {
+                //                data = ((Comment) child).getData();
+                //                if (data.trim().equals("[endif]")) {
+                //                    skip();
+                //                    break;
+                //                }
+                //            }   
+                //            skip();
+                //        }
+                //    } else {
+                //        skip();
+                //    }
             } else {
                 skip();
             }
@@ -828,7 +854,7 @@ public class FlexmarkHtmlParser {
     }
 
     private void wrapTextNodes(
-            FormattingAppendable out,
+            LineFormattingAppendable out,
             Node node,
             CharSequence wrapText,
             boolean needSpaceAround
@@ -848,7 +874,7 @@ public class FlexmarkHtmlParser {
                 text = text.substring(prefixBefore.length());
             } else {
                 // if we already have space or nothing before us
-                addSpaceBefore = !(out.isPendingEOL() || out.isPendingSpace() || out.getModCount() == 0);
+                addSpaceBefore = !(out.getPendingEOL() == 0 || out.isPendingSpace() || out.offsetWithPending() == 0 || out.getPendingEOL() > 0);
             }
 
             if (!text.isEmpty() && "\u00A0 \t\n".indexOf(text.charAt(text.length() - 1)) != -1) {
@@ -896,7 +922,7 @@ public class FlexmarkHtmlParser {
         pushState(node);
 
         Node child;
-        FormattingAppendable out = new FormattingAppendableImpl(0);
+        LineFormattingAppendable out = new LineFormattingAppendableImpl(0);
 
         while ((child = peek()) != null) {
             if (child instanceof TextNode) {
@@ -912,7 +938,7 @@ public class FlexmarkHtmlParser {
 
         transferIdToParent();
         popState(null);
-        return out.getText();
+        return out.toString(-1);
     }
 
     private com.vladsch.flexmark.util.ast.Node parseMarkdown(String markdown) {
@@ -977,7 +1003,7 @@ public class FlexmarkHtmlParser {
     static {
         explicitLinkTextTags.add(TagType.IMG);
     }
-    private boolean processA(FormattingAppendable out, Element element) {
+    private boolean processA(LineFormattingAppendable out, Element element) {
         skip();
 
         // see if it is an anchor or a link
@@ -987,7 +1013,8 @@ public class FlexmarkHtmlParser {
 
             if (conv.isParsed()) {
                 pushState(element);
-                String text = Utils.removeStart(Utils.removeEnd(processTextNodes(element), '\n'), '\n');
+                String textNodes = processTextNodes(element);
+                String text = textNodes.trim();
                 String href = element.attr("href");
                 String title = element.hasAttr("title") ? element.attr("title") : null;
 
@@ -1048,19 +1075,19 @@ public class FlexmarkHtmlParser {
         return true;
     }
 
-    private boolean processBr(FormattingAppendable out, Element element) {
+    private boolean processBr(LineFormattingAppendable out, Element element) {
         skip();
         if (out.isPreFormatted()) {
             out.append('\n');
         } else {
             int options = out.getOptions();
-            out.setOptions(options & ~(FormattingAppendable.SUPPRESS_TRAILING_WHITESPACE | FormattingAppendable.COLLAPSE_WHITESPACE));
+            out.setOptions(options & ~(LineFormattingAppendable.SUPPRESS_TRAILING_WHITESPACE | LineFormattingAppendable.COLLAPSE_WHITESPACE));
             if (out.getPendingEOL() == 0) {
                 // hard break
                 out.repeat(' ', 2).line();
             } else {
                 if (out.getPendingEOL() == 1) {
-                    final String s = out.getAppendable().toString();
+                    final String s = out.toString();
                     if (!s.endsWith("<br />")) {
                         // this is a paragraph break
                         if (myOptions.brAsParaBreaks) {
@@ -1084,7 +1111,7 @@ public class FlexmarkHtmlParser {
         return true;
     }
 
-    private boolean processAbbr(FormattingAppendable out, Element element) {
+    private boolean processAbbr(LineFormattingAppendable out, Element element) {
         skip();
 
         // see if it is an anchor or a link
@@ -1107,7 +1134,7 @@ public class FlexmarkHtmlParser {
     }
 
     private boolean isLastChild(Element element) {
-        Elements children = element.children();
+        Elements children = element.parent().children();
         int i = children.size();
         while (i-- > 0) {
             Node node = children.get(i);
@@ -1118,27 +1145,29 @@ public class FlexmarkHtmlParser {
         return false;
     }
 
-    private boolean processAside(FormattingAppendable out, Element element) {
+    private boolean processAside(LineFormattingAppendable out, Element element) {
         skip();
-        if (isFirstChild(element)) out.append("\n");
+        if (isFirstChild(element)) out.line();
         out.pushPrefix();
         out.addPrefix("| ");
         processHtmlTree(out, element, true);
+        out.line();
         out.popPrefix();
         return true;
     }
 
-    private boolean processBlockQuote(FormattingAppendable out, Element element) {
+    private boolean processBlockQuote(LineFormattingAppendable out, Element element) {
         skip();
-        if (isFirstChild(element)) out.append("\n");
+        if (isFirstChild(element)) out.line();
         out.pushPrefix();
         out.addPrefix("> ");
         processHtmlTree(out, element, true);
+        out.line();
         out.popPrefix();
         return true;
     }
 
-    private boolean processCode(FormattingAppendable out, Element element) {
+    private boolean processCode(LineFormattingAppendable out, Element element) {
         skip();
         if (!myOptions.extInlineCode.isSuppressed()) {
             BasedSequence text = SubSequence.of(element.ownText());
@@ -1165,31 +1194,31 @@ public class FlexmarkHtmlParser {
         return minCount;
     }
 
-    private boolean processDel(FormattingAppendable out, Element element) {
+    private boolean processDel(LineFormattingAppendable out, Element element) {
         skip();
         if (!myOptions.extInlineDel.isSuppressed()) {
             if (!myOptions.preCodePreserveEmphasis && out.isPreFormatted()) {
                 wrapTextNodes(out, element, "", false);
             } else {
-                wrapTextNodes(out, element, myOptions.skipInlineDel || myOptions.extInlineDel.isTextOnly() ? "" : "~~", true);
+                wrapTextNodes(out, element, myOptions.skipInlineDel || myOptions.extInlineDel.isTextOnly() ? "" : "~~", element.nextElementSibling() != null);
             }
         }
         return true;
     }
 
-    private boolean processEmphasis(FormattingAppendable out, Element element) {
+    private boolean processEmphasis(LineFormattingAppendable out, Element element) {
         skip();
         if (!myOptions.extInlineEmphasis.isSuppressed()) {
             if (!myOptions.preCodePreserveEmphasis && out.isPreFormatted()) {
                 wrapTextNodes(out, element, "", false);
             } else {
-                wrapTextNodes(out, element, myOptions.skipInlineEmphasis || myOptions.extInlineEmphasis.isTextOnly() ? "" : "*", true);
+                wrapTextNodes(out, element, myOptions.skipInlineEmphasis || myOptions.extInlineEmphasis.isTextOnly() ? "" : "*", element.nextElementSibling() != null);
             }
         }
         return true;
     }
 
-    private boolean processHeading(FormattingAppendable out, Element element) {
+    private boolean processHeading(LineFormattingAppendable out, Element element) {
         skip();
 
         TagParam tagParam = getTagParam(element);
@@ -1228,7 +1257,7 @@ public class FlexmarkHtmlParser {
                         if (myOptions.setextHeadings && level <= 2) {
                             out.append(headingText);
                             int extraChars = outputAttributes(out, " ");
-                            out.line().repeat(level == 1 ? '=' : '-', Utils.minLimit(headingText.length() + extraChars, myOptions.minSetextHeadingMarkerLength));
+                            out.line().repeat(level == 1 ? '=' : '-', minLimit(headingText.length() + extraChars, myOptions.minSetextHeadingMarkerLength));
                         } else {
                             out.repeat('#', level).append(' ');
                             out.append(headingText);
@@ -1242,13 +1271,13 @@ public class FlexmarkHtmlParser {
         return true;
     }
 
-    private boolean processHr(FormattingAppendable out, Element element) {
+    private boolean processHr(LineFormattingAppendable out, Element element) {
         skip();
         out.blankLine().append(myOptions.thematicBreak).blankLine();
         return true;
     }
 
-    private boolean processImg(FormattingAppendable out, Element element) {
+    private boolean processImg(LineFormattingAppendable out, Element element) {
         skip();
 
         // see if it is an anchor or a link
@@ -1338,7 +1367,39 @@ public class FlexmarkHtmlParser {
         return true;
     }
 
-    private boolean processP(FormattingAppendable out, Element element) {
+    public LineFormattingAppendable tailBlankLine(LineFormattingAppendable out, Element element) {
+        return tailBlankLine(out, element, 1);
+    }
+
+    public boolean isLastBlockQuoteChild(Element node) {
+        while (node.nextElementSibling() == null) {
+            Element parent = node.parent();
+            if (parent == null) break;
+            if (parent.nodeName().toLowerCase().equals("blockquote")) return true;
+            node = parent;
+        }
+        return false;
+    }
+
+    public LineFormattingAppendable tailBlankLine(LineFormattingAppendable out, Element element, int count) {
+        if (isLastBlockQuoteChild(element)) {
+            // Needed to not add block quote prefix to trailing blank lines
+            CharSequence prefix = out.getPrefix();
+            int pos = prefix.toString().lastIndexOf('>');
+            if (pos != -1) {
+                out.setPrefix(prefix.subSequence(0, pos));
+            } else {
+                out.setPrefix("");
+            }
+            out.blankLine(count);
+            out.setPrefix(prefix, false);
+        } else {
+            out.blankLine(count);
+        }
+        return out;
+    }
+
+    private boolean processP(LineFormattingAppendable out, Element element) {
         skip();
         boolean isItemParagraph = false;
         boolean isDefinitionItemParagraph = false;
@@ -1349,7 +1410,7 @@ public class FlexmarkHtmlParser {
             isItemParagraph = tagName.equalsIgnoreCase("li");
             isDefinitionItemParagraph = tagName.equalsIgnoreCase("dd");
         }
-        out.blankLineIf(!(isItemParagraph || isDefinitionItemParagraph));
+        out.blankLineIf(!(isItemParagraph || isDefinitionItemParagraph || isFirstChild(element)));
         if (element.childNodeSize() == 0) {
             if (myOptions.brAsExtraBlankLines) {
                 out.append("<br />").blankLine();
@@ -1357,11 +1418,15 @@ public class FlexmarkHtmlParser {
         } else {
             processTextNodes(out, element, false);
         }
-        out.blankLineIf(isItemParagraph || isDefinitionItemParagraph).line();
+        out.line();
+
+        if (isItemParagraph || isDefinitionItemParagraph) {
+            tailBlankLine(out, element);
+        }
         return true;
     }
 
-    private boolean processInput(FormattingAppendable out, Element element) {
+    private boolean processInput(LineFormattingAppendable out, Element element) {
         boolean isItemParagraph = false;
 
         Element firstElementSibling = element.firstElementSibling();
@@ -1384,31 +1449,31 @@ public class FlexmarkHtmlParser {
         return false;
     }
 
-    private boolean processIns(FormattingAppendable out, Element element) {
+    private boolean processIns(LineFormattingAppendable out, Element element) {
         skip();
         if (!myOptions.extInlineIns.isSuppressed()) {
             if (!myOptions.preCodePreserveEmphasis && out.isPreFormatted()) {
                 wrapTextNodes(out, element, "", false);
             } else {
-                wrapTextNodes(out, element, myOptions.skipInlineIns || myOptions.extInlineIns.isTextOnly() ? "" : "++", true);
+                wrapTextNodes(out, element, myOptions.skipInlineIns || myOptions.extInlineIns.isTextOnly() ? "" : "++", element.nextElementSibling() != null);
             }
         }
         return true;
     }
 
-    private boolean processStrong(FormattingAppendable out, Element element) {
+    private boolean processStrong(LineFormattingAppendable out, Element element) {
         skip();
         if (!myOptions.extInlineStrong.isSuppressed()) {
             if (!myOptions.preCodePreserveEmphasis && out.isPreFormatted()) {
                 wrapTextNodes(out, element, "", false);
             } else {
-                wrapTextNodes(out, element, myOptions.skipInlineStrong || myOptions.extInlineStrong.isTextOnly() ? "" : "**", true);
+                wrapTextNodes(out, element, myOptions.skipInlineStrong || myOptions.extInlineStrong.isTextOnly() ? "" : "**", element.nextElementSibling() != null);
             }
         }
         return true;
     }
 
-    private boolean processSub(FormattingAppendable out, Element element) {
+    private boolean processSub(LineFormattingAppendable out, Element element) {
         skip();
         if (!myOptions.extInlineSub.isSuppressed()) {
             if (myOptions.skipInlineSub || myOptions.extInlineSub.isTextOnly() || !myOptions.preCodePreserveEmphasis && out.isPreFormatted()) {
@@ -1420,7 +1485,7 @@ public class FlexmarkHtmlParser {
         return true;
     }
 
-    private boolean processSup(FormattingAppendable out, Element element) {
+    private boolean processSup(LineFormattingAppendable out, Element element) {
         skip();
         if (!myOptions.extInlineSup.isSuppressed()) {
 
@@ -1433,7 +1498,7 @@ public class FlexmarkHtmlParser {
         return true;
     }
 
-    private boolean processSvg(FormattingAppendable out, Element element) {
+    private boolean processSvg(LineFormattingAppendable out, Element element) {
         if (element.hasClass("octicon")) {
             skip();
             return true;
@@ -1441,14 +1506,14 @@ public class FlexmarkHtmlParser {
         return false;
     }
 
-    private boolean processPre(FormattingAppendable out, Element element) {
+    private boolean processPre(LineFormattingAppendable out, Element element) {
         pushState(element);
 
         String text;
         boolean hadCode = false;
         String className = "";
 
-        FormattingAppendable preText = new FormattingAppendableImpl(out.getOptions() & ~(FormattingAppendable.COLLAPSE_WHITESPACE | FormattingAppendable.SUPPRESS_TRAILING_WHITESPACE));
+        LineFormattingAppendable preText = new LineFormattingAppendableImpl(out.getOptions() & ~(LineFormattingAppendable.COLLAPSE_WHITESPACE | LineFormattingAppendable.SUPPRESS_TRAILING_WHITESPACE));
         preText.openPreFormatted(false);
 
         Node next = peek();
@@ -1472,7 +1537,7 @@ public class FlexmarkHtmlParser {
         }
 
         preText.closePreFormatted();
-        text = preText.getText(2);
+        text = preText.toString(2);
 
         //int start = text.indexOf('>');
         //int end = text.lastIndexOf('<');
@@ -1491,7 +1556,8 @@ public class FlexmarkHtmlParser {
             out.openPreFormatted(true);
             out.append(text.isEmpty() ? "\n" : text);
             out.closePreFormatted();
-            out.line().append(backTicks).blankLine();
+            out.line().append(backTicks).line();
+            tailBlankLine(out, element);
         } else {
             // we indent the whole thing by 4 spaces
             out.blankLine();
@@ -1500,7 +1566,8 @@ public class FlexmarkHtmlParser {
             out.openPreFormatted(true);
             out.append(text.isEmpty() ? "\n" : text);
             out.closePreFormatted();
-            out.blankLine();
+            out.line();
+            tailBlankLine(out, element);
             out.popPrefix();
         }
 
@@ -1527,7 +1594,7 @@ public class FlexmarkHtmlParser {
         }
     }
 
-    private void processListItem(FormattingAppendable out, Element item, ListState listState) {
+    private void processListItem(LineFormattingAppendable out, Element item, ListState listState) {
         skip();
         pushState(item);
 
@@ -1537,15 +1604,19 @@ public class FlexmarkHtmlParser {
 
         out.line().append(itemPrefix);
         out.pushPrefix();
-        out.addPrefix(childPrefix);
-        int offset = out.offset();
+        out.addPrefix(childPrefix, true);
+        int offset = out.offsetWithPending();
         processHtmlTree(out, item, true);
-        if (offset == out.offset()) {
+        if (offset == out.offsetWithPending()) {
             // completely empty, add space and make sure it is not suppressed
-            out.append(' ');
-            out.flushWhitespaces();
+            int options = out.getOptions();
+            out.setOptions((options | LineFormattingAppendable.ALLOW_LEADING_WHITESPACE) & ~(LineFormattingAppendable.SUPPRESS_TRAILING_WHITESPACE));
+            //out.append(' ');
+            out.line();
+            out.setOptions(options);
+        } else {
+            out.line();
         }
-        out.line();
         out.popPrefix();
         popState(out);
     }
@@ -1576,7 +1647,7 @@ public class FlexmarkHtmlParser {
     }
 
     private boolean processList(
-            FormattingAppendable out,
+            LineFormattingAppendable out,
             Element element,
             boolean isNumbered,
             boolean isFakeList
@@ -1585,7 +1656,7 @@ public class FlexmarkHtmlParser {
             skip();
             pushState(element);
 
-            if (!haveListItemAncestor(myState.myParent)) {
+            if (!haveListItemAncestor(myState.myParent) && !isFirstChild(element)) {
                 out.blankLine();
             }
         }
@@ -1645,15 +1716,15 @@ public class FlexmarkHtmlParser {
         return true;
     }
 
-    private boolean processOl(FormattingAppendable out, Element element) {
+    private boolean processOl(LineFormattingAppendable out, Element element) {
         return processList(out, element, true, false);
     }
 
-    private boolean processUl(FormattingAppendable out, Element element) {
+    private boolean processUl(LineFormattingAppendable out, Element element) {
         return processList(out, element, false, false);
     }
 
-    private void processDefinition(FormattingAppendable out, Element item) {
+    private void processDefinition(LineFormattingAppendable out, Element item) {
         pushState(item);
         int options = out.getOptions();
         Elements children = item.children();
@@ -1667,21 +1738,22 @@ public class FlexmarkHtmlParser {
 
         CharSequence childPrefix = RepeatedCharSequence.of(" ", myOptions.listContentIndent ? myOptions.definitionMarkerSpaces + 1 : 4);
 
-        out.line().setOptions(options & ~FormattingAppendable.COLLAPSE_WHITESPACE);
+        out.line().setOptions(options & ~LineFormattingAppendable.COLLAPSE_WHITESPACE);
         out.append(':').repeat(' ', myOptions.definitionMarkerSpaces);
         out.pushPrefix();
-        out.addPrefix(childPrefix);
+        out.addPrefix(childPrefix, true);
         out.setOptions(options);
         if (firstIsPara) {
             processHtmlTree(out, item, true);
         } else {
             processTextNodes(out, item, false);
         }
+        out.line();
         out.popPrefix();
         popState(out);
     }
 
-    private boolean processDl(FormattingAppendable out, Element element) {
+    private boolean processDl(LineFormattingAppendable out, Element element) {
         skip();
         pushState(element);
 
@@ -1717,24 +1789,28 @@ public class FlexmarkHtmlParser {
         return true;
     }
 
-    private boolean processDiv(FormattingAppendable out, Element element) {
+    private boolean processDiv(LineFormattingAppendable out, Element element) {
         // unwrap and process content
         skip();
         if (!isFirstChild(element)) {
             if (!myOptions.divAsParagraph) {
                 int pendingEOL = out.getPendingEOL();
-                if (pendingEOL < 2) {
-                    out.setPendingEOL(0);
+                if (pendingEOL == 0) {
+                    // no trailing line or spaces, add break spaces and line
                     int pendingSpace = out.getPendingSpace();
-                    out.flush(0);
+                    out.lineWithTrailingSpaces(minLimit(0, 2 - pendingSpace));
+                } else if (pendingEOL == 1) {
+                    // may need to replace last line to add trailing break spaces
+                    int lineCount = out.getLineCount();
+                    CharSequence lineContent = out.getLineContent(lineCount - 1);
+                    int pendingSpace = BasedSequenceImpl.of(lineContent).countTrailing(BasedSequence.WHITESPACE_NO_EOL_CHARS);
                     if (pendingSpace < 2) {
-                        out.openPreFormatted(true);
-                        out.append(RepeatedCharSequence.of(' ', Utils.minLimit(0, 2 - pendingSpace)));
-                        out.closePreFormatted();
+                        // replace last line 
+                        out.removeLines(lineCount - 1, lineCount);
+                        out.append(lineContent);
+                        out.lineWithTrailingSpaces(2 - pendingSpace);
                     }
-                    out.setPendingEOL(pendingEOL);
                 }
-                out.line();
             } else {
                 out.blankLine();
             }
@@ -1749,7 +1825,7 @@ public class FlexmarkHtmlParser {
         return true;
     }
 
-    private boolean processMath(FormattingAppendable out, Element element) {
+    private boolean processMath(LineFormattingAppendable out, Element element) {
         skip();
         if (!myOptions.extMath.isSuppressed()) {
             boolean noWraps = myOptions.extMath.isTextOnly();
@@ -1758,30 +1834,67 @@ public class FlexmarkHtmlParser {
         return true;
     }
 
-    private boolean processSpan(FormattingAppendable out, Element element) {
+    private boolean matchingText(Pattern pattern, String text, String[] match) {
+        Matcher matcher = pattern.matcher(text);
+        if (matcher.matches()) {
+            if (matcher.groupCount() > 0) {
+                match[0] = matcher.group(1);
+            } else {
+                match[0] = matcher.group();
+            }
+            return true;
+        }
+        return false;
+    }
+
+    private String convertNumeric(String text) {
+        text = text.trim();
+
+        if (RomanNumeral.LIMITED_ROMAN_NUMERAL.matcher(text).matches() || RomanNumeral.LIMITED_LOWERCASE_ROMAN_NUMERAL.matcher(text).matches()) {
+            RomanNumeral numeral = new RomanNumeral(text);
+            return String.valueOf(numeral.toInt());
+        } else if (ALPHA_NUMERAL.matcher(text).matches()) {
+            int value = 0;
+            text = text.toUpperCase();
+            int iMax = text.length();
+            for (int i = 0; i < iMax; i++) {
+                char c = text.charAt(i);
+                value *= 'Z' - 'A' + 1;
+                value += c - 'A' + 1;
+            }
+            return String.valueOf(value);
+        }
+        return "1";
+    }
+
+    private boolean processSpan(LineFormattingAppendable out, Element element) {
         // unwrap and process content
         if (element.hasAttr("style")) {
             String style = element.attr("style");
             if (style.equals("mso-list:Ignore")) {
                 skip();
+                String[] match = new String[] { "1" };
                 String text = processTextNodes(element);
-                if (NUMERIC_DOT_LIST.matcher(text).matches()) {
+                if (matchingText(NUMERIC_DOT_LIST, text, match)) {
                     out.append(text).append(' ');
-                } else if (NUMERIC_PAREN_LIST.matcher(text).matches()) {
+                } else if (matchingText(NUMERIC_PAREN_LIST, text, match)) {
                     if (myOptions.dotOnlyNumericLists) {
-                        out.append(text, 0, text.length() - 1).append(". ");
+                        out.append(match[0]).append(". ");
                     } else {
-                        out.append(text).append(' ');
+                        out.append(match[0]).append(") ");
                     }
-                } else if (NON_NUMERIC_DOT_LIST.matcher(text).matches()) {
-                    out.append("1. ");
-                } else if (NON_NUMERIC_PAREN_LIST.matcher(text).matches()) {
+                } else if (matchingText(NON_NUMERIC_DOT_LIST, text, match)) {
+                    out.append(convertNumeric(match[0])).append(". ");
+                    if (myOptions.commentOriginalNonNumericListItem) out.append(" <!-- ").append(match[0]).append(" -->");
+                } else if (matchingText(NON_NUMERIC_PAREN_LIST, text, match)) {
                     if (myOptions.dotOnlyNumericLists) {
-                        out.append("1. ");
+                        out.append(convertNumeric(match[0])).append(". ");
+                        if (myOptions.commentOriginalNonNumericListItem) out.append(" <!-- ").append(match[0]).append(" -->");
                     } else {
-                        out.append("1) ");
+                        out.append(convertNumeric(match[0])).append(") ");
+                        if (myOptions.commentOriginalNonNumericListItem) out.append(" <!-- ").append(match[0]).append(" -->");
                     }
-                } else if (text.equals("·")) {
+                } else if (BULLET_LIST.matcher(text).matches()) {
                     out.append("* ");
                 } else {
                     out.append("* ").append(text);
@@ -1802,7 +1915,7 @@ public class FlexmarkHtmlParser {
         return true;
     }
 
-    private boolean processEmoji(FormattingAppendable out, Element element) {
+    private boolean processEmoji(LineFormattingAppendable out, Element element) {
         if (element.tagName().equalsIgnoreCase("g-emoji")) {
             if (element.hasAttr("alias")) {
                 skip();
@@ -1821,7 +1934,7 @@ public class FlexmarkHtmlParser {
         return false;
     }
 
-    private boolean processComment(FormattingAppendable out, Comment element) {
+    private boolean processComment(LineFormattingAppendable out, Comment element) {
         skip();
         if (myOptions.renderComments) {
             out.append("<!--").append(element.getData()).append("-->");
@@ -1836,7 +1949,7 @@ public class FlexmarkHtmlParser {
     private MarkdownTable myTable;
     private boolean myTableSuppressColumns = false;
 
-    private boolean processTable(FormattingAppendable out, Element table) {
+    private boolean processTable(LineFormattingAppendable out, Element table) {
         MarkdownTable oldTable = myTable;
 
         skip();
@@ -1880,7 +1993,7 @@ public class FlexmarkHtmlParser {
         if (sepColumns > 0) {
             out.blankLine();
             myTable.appendTable(out);
-            out.blankLine();
+            tailBlankLine(out, table);
         }
 
         myTable = oldTable;
@@ -1888,7 +2001,7 @@ public class FlexmarkHtmlParser {
         return true;
     }
 
-    private void processTableSection(FormattingAppendable out, Element element) {
+    private void processTableSection(LineFormattingAppendable out, Element element) {
         pushState(element);
 
         Node node;
@@ -1924,7 +2037,7 @@ public class FlexmarkHtmlParser {
         popState(out);
     }
 
-    private void processTableRow(FormattingAppendable out, Element element) {
+    private void processTableRow(LineFormattingAppendable out, Element element) {
         pushState(element);
 
         Node node;
@@ -1946,11 +2059,11 @@ public class FlexmarkHtmlParser {
         popState(out);
     }
 
-    private void processTableCaption(FormattingAppendable out, Element element) {
+    private void processTableCaption(LineFormattingAppendable out, Element element) {
         myTable.setCaption(processTextNodes(element).trim());
     }
 
-    private void processTableCell(FormattingAppendable out, Element element) {
+    private void processTableCell(LineFormattingAppendable out, Element element) {
         String cellText = processTextNodes(element).trim().replaceAll("\\s*\n\\s*", " ");
         int colSpan = 1;
         int rowSpan = 1;
@@ -2071,7 +2184,7 @@ public class FlexmarkHtmlParser {
         }
     }
 
-    private void popState(FormattingAppendable out) {
+    private void popState(LineFormattingAppendable out) {
         if (myStateStack.isEmpty())
             throw new IllegalStateException("popState with an empty stack");
         if (out != null) outputAttributes(out, "");

@@ -505,7 +505,7 @@ The following instructions are for **\*nix** type systems, specifically this is 
 Escape special chars skipped
 
 ```````````````````````````````` example(Escape Special Chars: 2) options(skip-char-escape)
-The following instructions are for  ***nix**  type systems, specifically this is a Linux example.
+The following instructions are for ***nix**  type systems, specifically this is a Linux example.
 .
 <span style="caret-color: rgb(36, 41, 46); color: rgb(36, 41, 46); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;; font-size: 16px; font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration: none; display: inline !important; float: none;">The following instructions are for<span class="Apple-converted-space"> </span></span><strong
     style="box-sizing: border-box; font-weight: 600; caret-color: rgb(36, 41, 46); color: rgb(36, 41, 46); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;; font-size: 16px; font-style: normal; font-variant-caps: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; text-decoration: none;">*nix</strong><span
@@ -531,14 +531,13 @@ Labels
 Projects  
 Milestones
 Assignee Sort  
-
-*    
+*  
   [Emoji suggestions do not filter as you type](https://github.com/vsch/idea-multimarkdown/issues/624)[bug](https://github.com/vsch/idea-multimarkdown/issues?q=is%3Aissue+is%3Aopen+label%3Abug "bug")  
-  #624 opened 15 days ago by [jcfranco](https://github.com/vsch/idea-multimarkdown/issues?q=is%3Aissue+is%3Aopen+author%3Ajcfranco "Open issues created by jcfranco")    
+  #624 opened 15 days ago by [jcfranco](https://github.com/vsch/idea-multimarkdown/issues?q=is%3Aissue+is%3Aopen+author%3Ajcfranco "Open issues created by jcfranco")  
   [1](https://github.com/vsch/idea-multimarkdown/issues/624)
-*    
+*  
   [Directory linking occasionally broken](https://github.com/vsch/idea-multimarkdown/issues/623)[bug](https://github.com/vsch/idea-multimarkdown/issues?q=is%3Aissue+is%3Aopen+label%3Abug "bug") [fix available](https://github.com/vsch/idea-multimarkdown/issues?q=is%3Aissue+is%3Aopen+label%3A%22fix+available%22 "fix available") [fixed for next release](https://github.com/vsch/idea-multimarkdown/issues?q=is%3Aissue+is%3Aopen+label%3A%22fixed+for+next+release%22 "fixed for next release")  
-  #623 opened 15 days ago by [mhaas](https://github.com/vsch/idea-multimarkdown/issues?q=is%3Aissue+is%3Aopen+author%3Amhaas "Open issues created by mhaas")    
+  #623 opened 15 days ago by [mhaas](https://github.com/vsch/idea-multimarkdown/issues?q=is%3Aissue+is%3Aopen+author%3Amhaas "Open issues created by mhaas")  
   [4](https://github.com/vsch/idea-multimarkdown/issues/623)
 * 
 
@@ -868,11 +867,11 @@ Assignee Sort
 
 ```````````````````````````````` example Block Quotes: 14
 > * item 1
-> 
+>
 > * item 2
-> 
+>
 > * item 3
-> 
+>
 > * item 4
 
 .
@@ -889,13 +888,38 @@ Assignee Sort
 
 ```````````````````````````````` example Block Quotes: 15
 * item 1
-  > 
+
   > * item 1
-  > 
+  >
   > * item 2
-  > 
+
+* item 2
+
+.
+<ul>
+<li>
+  <p>item 1</p>
+<blockquote>
+  <ul>
+  <li><p>item 1</p></li>
+  <li><p>item 2</p></li>
+  </ul>
+</blockquote>
+</li>
+<li><p>item 2</p></li>
+</ul>
+````````````````````````````````
+
+
+```````````````````````````````` example Block Quotes: 16
+* item 1
+
+  > * item 1
+  >
+  > * item 2
+  >
   > * item 3
-  > 
+  >
   > * item 4
 
 * item 2
@@ -924,21 +948,21 @@ Assignee Sort
 ````````````````````````````````
 
 
-```````````````````````````````` example Block Quotes: 16
+```````````````````````````````` example Block Quotes: 17
 > * item 1
->   
+>
 >   * item 1
->   
+>
 >   * item 2
->   
+>
 >   * item 3
->   
+>
 >   * item 4
-> 
+>
 > * item 2
-> 
+>
 > * item 3
-> 
+>
 > * item 4
 
 .
@@ -961,7 +985,7 @@ Assignee Sort
 ````````````````````````````````
 
 
-```````````````````````````````` example Block Quotes: 17
+```````````````````````````````` example Block Quotes: 18
 > 1. item
 .
 <blockquote>
@@ -972,7 +996,7 @@ Assignee Sort
 ````````````````````````````````
 
 
-```````````````````````````````` example Block Quotes: 18
+```````````````````````````````` example Block Quotes: 19
 > 1. item 1
 > 2. item 2
 > 3. item 3
@@ -989,13 +1013,13 @@ Assignee Sort
 ````````````````````````````````
 
 
-```````````````````````````````` example Block Quotes: 19
+```````````````````````````````` example Block Quotes: 20
 > 1. item 1
-> 
+>
 > 2. item 2
-> 
+>
 > 3. item 3
-> 
+>
 > 4. item 4
 
 .
@@ -1010,15 +1034,15 @@ Assignee Sort
 ````````````````````````````````
 
 
-```````````````````````````````` example Block Quotes: 20
+```````````````````````````````` example Block Quotes: 21
 1. item 1
-   > 
+
    > 1. item 1
-   > 
+   >
    > 2. item 2
-   > 
+   >
    > 3. item 3
-   > 
+   >
    > 4. item 4
 
 2. item 2
@@ -1047,21 +1071,21 @@ Assignee Sort
 ````````````````````````````````
 
 
-```````````````````````````````` example Block Quotes: 21
+```````````````````````````````` example Block Quotes: 22
 > 1. item 1
->    
+>
 >    1. item 1
->    
+>
 >    2. item 2
->    
+>
 >    3. item 3
->    
+>
 >    4. item 4
-> 
+>
 > 2. item 2
-> 
+>
 > 3. item 3
-> 
+>
 > 4. item 4
 
 .
@@ -1195,7 +1219,7 @@ links
 
 
 ```````````````````````````````` example Links: 7
-[\[Text **Bold** \]](http://example.com)
+[\[Text **Bold**\]](http://example.com)
 .
 <a href="http://example.com">[Text <b>Bold</b>]</a>
 ````````````````````````````````
@@ -1253,14 +1277,14 @@ http://example.com
 
 
 ```````````````````````````````` example(Links: 15) options(skip-links)
-\[Text **Bold** \]
+\[Text **Bold**\]
 .
 <a href="http://example.com">[Text <b>Bold</b>]</a>
 ````````````````````````````````
 
 
 ```````````````````````````````` example(Links: 16) options(skip-links, skip-inline-strong)
-\[Text Bold \]
+\[Text Bold\]
 .
 <a href="http://example.com">[Text <b>Bold</b>]</a>
 ````````````````````````````````
@@ -1322,14 +1346,14 @@ http://example.com
 
 
 ```````````````````````````````` example(Links: 25) options(links-text)
-\[Text **Bold** \]
+\[Text **Bold**\]
 .
 <a href="http://example.com">[Text <b>Bold</b>]</a>
 ````````````````````````````````
 
 
 ```````````````````````````````` example(Links: 26) options(skip-inline-strong, links-text)
-\[Text Bold \]
+\[Text Bold\]
 .
 <a href="http://example.com">[Text <b>Bold</b>]</a>
 ````````````````````````````````
@@ -1402,9 +1426,9 @@ http://example.com
 
 
 ```````````````````````````````` example(Links: 35) options(links-ref)
-[\[Text **Bold** \]][]
+[\[Text **Bold**\]][]
 
-[\[Text **Bold** \]]: http://example.com
+[\[Text **Bold**\]]: http://example.com
 
 .
 <a href="http://example.com">[Text <b>Bold</b>]</a>
@@ -1412,9 +1436,9 @@ http://example.com
 
 
 ```````````````````````````````` example(Links: 36) options(skip-inline-strong, links-ref)
-[\[Text Bold \]][]
+[\[Text Bold\]][]
 
-[\[Text Bold \]]: http://example.com
+[\[Text Bold\]]: http://example.com
 
 .
 <a href="http://example.com">[Text <b>Bold</b>]</a>
@@ -3249,7 +3273,7 @@ Definition **Term**
 
     * bullet item
       * sub item
-    > 
+
     > block quote
 .
 <dl>
@@ -3488,7 +3512,7 @@ some back ticks in the ````code````
 
 ```````````````````````````````` example Skipped Fenced Code: 2
 * item
-  > 
+
   > `````markdown
   > some back ticks in the ````code````
   > * item
@@ -3514,7 +3538,7 @@ some back ticks in the ````code````
 
 ```````````````````````````````` example Skipped Fenced Code: 3
 * item
-  >     
+
   >     some back ticks in the ````code````
   >     * item
   >       * sub-item
@@ -3940,7 +3964,6 @@ DIV_AS_PARAGRAPH true
 Paragraph 1
 
 Paragraph 2
-
 .
 <p>Paragraph 1</p>
 <div>Paragraph 2</div>
@@ -3968,7 +3991,6 @@ Paragraph 1
 Text
 
 Paragraph 2
-
 .
 <div>Paragraph 1</div>
 <div>

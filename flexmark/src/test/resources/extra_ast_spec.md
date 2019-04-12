@@ -167,7 +167,7 @@ with lazy continuation
   <li>item
     <ul>
       <li>sub item<br />
-      with lazy continuation</li>
+        with lazy continuation</li>
     </ul>
   </li>
 </ul>
@@ -195,7 +195,7 @@ Document[0, 46]
   <li>item
     <ul>
       <li>sub item<br />
-      with lazy continuation</li>
+        with lazy continuation</li>
     </ul>
   </li>
 </ul>
@@ -634,7 +634,7 @@ Minimum setext marker length 3 in lists
 .
 <ul>
   <li>item
-  -</li>
+    -</li>
 </ul>
 .
 Document[0, 15]
@@ -1368,7 +1368,7 @@ starting with 1.
 <ol>
   <li>this is a list</li>
   <li>item 1
-  2. item 2</li>
+    2. item 2</li>
 </ol>
 .
 Document[0, 40]
@@ -1397,7 +1397,7 @@ This is a paragraph
 <ol start="2">
   <li>this is a list</li>
   <li>item 1
-  2. item 2</li>
+    2. item 2</li>
 </ol>
 .
 Document[0, 60]
@@ -1973,7 +1973,7 @@ following child paragraph
     </ul>
   </li>
   <li>item 2 paragraph
-  <p>paragraph</p>
+    <p>paragraph</p>
   </li>
 </ul>
 .
@@ -2440,7 +2440,7 @@ lazy continuation
 .
 <ol>
   <li>item 1
-  lazy continuation</li>
+    lazy continuation</li>
   <li>item 2</li>
 </ol>
 .
@@ -2467,7 +2467,7 @@ lazy continuation
 .
 <ol>
   <li>item 1
-  lazy continuation
+    lazy continuation
     <ol>
       <li>item 1.1</li>
     </ol>
@@ -2534,9 +2534,9 @@ nested, no ordered start, no ordered para break, no ordered item paragraph break
 .
 <ol>
   <li>item 1
-  3. item 2
-  2. item 2.1
-  1. item 3</li>
+    3. item 2
+    2. item 2.1
+    1. item 3</li>
 </ol>
 .
 Document[0, 44]
@@ -2704,9 +2704,9 @@ nested, no bullet para break, no bullet item paragraph break
 .
 <ul>
   <li>item 1
-  - item 2
-  - item 2.1
-  - item 3</li>
+    - item 2
+    - item 2.1
+    - item 3</li>
 </ul>
 .
 Document[0, 39]
@@ -2912,7 +2912,7 @@ Nested in other elements
 <blockquote>
   <ul>
     <li>
-    <hr />
+      <hr />
     </li>
   </ul>
 </blockquote>
@@ -5164,8 +5164,8 @@ all should be src pos wrapped
 <span md-pos="41-70">all should be src pos wrapped</span></p>
 <ul>
   <li md-pos="72-134"><span md-pos="74-78">item</span>
-  <span md-pos="79-103">with multiple lazy lines</span>
-  <span md-pos="104-133">all should be src pos wrapped</span></li>
+    <span md-pos="79-103">with multiple lazy lines</span>
+    <span md-pos="104-133">all should be src pos wrapped</span></li>
 </ul>
 <!-- -->
 <ul>
@@ -5192,15 +5192,15 @@ all should be src pos wrapped
 <!-- -->
 <ol>
   <li md-pos="308-371"><span md-pos="311-315">item</span>
-  <span md-pos="316-340">with multiple lazy lines</span>
-  <span md-pos="341-370">all should be src pos wrapped</span></li>
+    <span md-pos="316-340">with multiple lazy lines</span>
+    <span md-pos="341-370">all should be src pos wrapped</span></li>
   <li md-pos="371-379"><span md-pos="374-378">item</span></li>
 </ol>
 <!-- -->
 <ul>
   <li md-pos="390-455"><span md-pos="392-400">[ ] item</span>
-  <span md-pos="401-425">with multiple lazy lines</span>
-  <span md-pos="426-455">all should be src pos wrapped</span></li>
+    <span md-pos="401-425">with multiple lazy lines</span>
+    <span md-pos="426-455">all should be src pos wrapped</span></li>
 </ul>
 .
 Document[0, 455]
@@ -5387,14 +5387,14 @@ all should be src pos wrapped
 .
 <ul>
   <li md-pos="0-62"><span md-pos="2-6">item</span>
-  <span md-pos="7-31">with multiple lazy lines</span>
-  <span md-pos="32-61">all should be src pos wrapped</span></li>
+    <span md-pos="7-31">with multiple lazy lines</span>
+    <span md-pos="32-61">all should be src pos wrapped</span></li>
 </ul>
 <!-- -->
 <ol>
   <li md-pos="73-136"><span md-pos="76-80">item</span>
-  <span md-pos="81-105">with multiple lazy lines</span>
-  <span md-pos="106-135">all should be src pos wrapped</span></li>
+    <span md-pos="81-105">with multiple lazy lines</span>
+    <span md-pos="106-135">all should be src pos wrapped</span></li>
 </ol>
 .
 Document[0, 137]
@@ -5541,7 +5541,7 @@ Embedded headings Markdown Navigator options
 .
 <ol>
   <li>Some Lists
-  <h1>Test</h1>
+    <h1>Test</h1>
   </li>
 </ol>
 .
@@ -6676,8 +6676,8 @@ Document[0, 31]
 .
 <ul>
   <li>list item
-  + lazy continuation
-  - lazy continuation</li>
+    + lazy continuation
+    - lazy continuation</li>
 </ul>
 .
 Document[0, 53]

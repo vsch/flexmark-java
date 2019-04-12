@@ -105,7 +105,7 @@ public class TableNodeFormatter implements NodeFormatter {
             case TRANSLATED:
                 markdown.blankLine();
                 context.renderChildren(node);
-                markdown.blankLine();
+                markdown.tailBlankLine();
                 break;
 
             case FORMAT:
@@ -122,7 +122,7 @@ public class TableNodeFormatter implements NodeFormatter {
                     // output table
                     markdown.blankLine();
                     myTable.appendTable(markdown);
-                    markdown.blankLine();
+                    markdown.tailBlankLine();
                     if (options.dumpIntellijOffsets) {
                         Map<Integer, Integer> offsets = myTable.getTrackedOffsets();
                         if (offsets.size() > 0) {
@@ -212,7 +212,7 @@ public class TableNodeFormatter implements NodeFormatter {
                 @Override
                 public void render(final NodeFormatterContext context, final MarkdownWriter writer) {
                     context.renderChildren(node);
-                    childText[0] = writer.getText();
+                    childText[0] = writer.toString(-1);
                 }
             });
 

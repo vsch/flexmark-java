@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.docx.converter.util;
 
-import com.vladsch.flexmark.util.Consumer;
-import com.vladsch.flexmark.util.Function;
+import java.util.function.Consumer;
+import java.util.function.Function;
 import com.vladsch.flexmark.util.Pair;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;

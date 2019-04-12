@@ -2,6 +2,8 @@ package com.vladsch.flexmark.formatter;
 
 import com.vladsch.flexmark.util.ast.Node;
 
+import java.io.IOException;
+
 public abstract class NodeFormatterSubContext implements NodeFormatterContext {
     final protected MarkdownWriter markdown;
     Node renderingNode;
@@ -23,11 +25,12 @@ public abstract class NodeFormatterSubContext implements NodeFormatterContext {
         return markdown;
     }
 
-    public void flush() {
-        markdown.line().flush();
-    }
-
-    public void flush(int maxBlankLines) {
-        markdown.line().flush(maxBlankLines);
+    public void flushTo(Appendable out, int maxBlankLines) {
+        markdown.line();
+        try {
+            markdown.appendTo(out, maxBlankLines);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

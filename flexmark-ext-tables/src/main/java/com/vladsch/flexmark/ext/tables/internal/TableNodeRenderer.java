@@ -80,11 +80,11 @@ public class TableNodeRenderer implements NodeRenderer {
             public void run() {
                 context.renderChildren(node);
             }
-        });
+        }).line();
     }
 
     private void render(final TableHead node, final NodeRendererContext context, HtmlWriter html) {
-        html.withAttr().withCondLine().tagIndent("thead", new Runnable() {
+        html.withAttr().withCondIndent().tagLine("thead", new Runnable() {
             @Override
             public void run() {
                 context.renderChildren(node);
@@ -97,7 +97,7 @@ public class TableNodeRenderer implements NodeRenderer {
     }
 
     private void render(final TableBody node, final NodeRendererContext context, HtmlWriter html) {
-        html.withAttr().withCondLine().tagIndent("tbody", new Runnable() {
+        html.withAttr().withCondIndent().tagLine("tbody", new Runnable() {
             @Override
             public void run() {
                 context.renderChildren(node);

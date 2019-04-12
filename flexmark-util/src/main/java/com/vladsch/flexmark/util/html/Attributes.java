@@ -1,7 +1,6 @@
 package com.vladsch.flexmark.util.html;
 
-import com.vladsch.flexmark.util.BiConsumer;
-import com.vladsch.flexmark.util.sequence.BasedSequence;
+import java.util.function.BiConsumer;
 
 import java.util.*;
 

@@ -6,7 +6,6 @@ import com.vladsch.flexmark.ext.toc.SimTocContent;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.AttributablePart;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
-import com.vladsch.flexmark.html.renderer.TextCollectingAppendable;
 import com.vladsch.flexmark.util.Computable;
 import com.vladsch.flexmark.util.Pair;
 import com.vladsch.flexmark.util.Paired;
@@ -16,6 +15,7 @@ import com.vladsch.flexmark.util.html.Escaping;
 import com.vladsch.flexmark.util.DelimitedBuilder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
+import java.io.IOException;
 import java.util.*;
 
 @SuppressWarnings("WeakerAccess")
@@ -114,7 +114,7 @@ public class TocUtils {
             } else if (lastLevel == headerLevel) {
                 if (openedItems[lastLevel]) {
                     if (openedList[lastLevel]) html.unIndent().tag(listClose).line();
-                    html.lineIf(openedItemAppendCount[lastLevel] != html.getModCount()).tag("/li").line();
+                    html.lineIf(openedItemAppendCount[lastLevel] != html.offsetWithPending()).tag("/li").line();
                 }
                 openedItems[lastLevel] = false;
                 openedList[lastLevel] = false;
@@ -123,7 +123,7 @@ public class TocUtils {
                 for (int lv = lastLevel; lv >= headerLevel; lv--) {
                     if (openedItems[lv]) {
                         if (openedList[lv]) html.unIndent().tag(listClose).unIndent().line();
-                        html.lineIf(openedItemAppendCount[lastLevel] != html.getModCount()).tag("/li").line();
+                        html.lineIf(openedItemAppendCount[lastLevel] != html.offsetWithPending()).tag("/li").line();
                     }
                     openedItems[lv] = false;
                     openedList[lv] = false;
@@ -142,13 +142,13 @@ public class TocUtils {
             }
 
             lastLevel = headerLevel;
-            openedItemAppendCount[headerLevel] = html.getModCount();
+            openedItemAppendCount[headerLevel] = html.offsetWithPending();
         }
 
         for (int i = lastLevel; i >= 1; i--) {
             if (openedItems[i]) {
                 if (openedList[i]) html.unIndent().tag(listClose).unIndent().line();
-                html.lineIf(openedItemAppendCount[lastLevel] != html.getModCount()).tag("/li").line();
+                html.lineIf(openedItemAppendCount[lastLevel] != html.offsetWithPending()).tag("/li").line();
             }
         }
 
@@ -188,8 +188,7 @@ public class TocUtils {
             if (tocOptions.isTextOnly) {
                 headingContent = getHeadingText(heading).toString();
             } else {
-                TextCollectingAppendable out = getHeadingContent(context, heading);
-                headingContent = out.getHtml();
+                headingContent = getHeadingContent(context, heading);
 
                 if (needText) {
                     headingTexts.put(headingContent, getHeadingText(heading).toString());
@@ -242,12 +241,11 @@ public class TocUtils {
         return Escaping.escapeHtml(new TextCollectingVisitor().collectAndGetText(header), false);
     }
 
-    private static TextCollectingAppendable getHeadingContent(NodeRendererContext context, Heading header) {
-        TextCollectingAppendable out = new TextCollectingAppendable();
-        NodeRendererContext subContext = context.getSubContext(out, false);
+    private static String getHeadingContent(NodeRendererContext context, Heading header) {
+        NodeRendererContext subContext = context.getSubContext(false);
         subContext.doNotRenderLinks();
         subContext.renderChildren(header);
-        return out;
+        return subContext.getHtmlWriter().toString(-1);
     }
 
     public static List<String> markdownHeaderTexts(List<Heading> headings, TocOptions tocOptions) {

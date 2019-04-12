@@ -3,6 +3,8 @@ package com.vladsch.flexmark.html;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
 
+import java.io.IOException;
+
 public abstract class NodeRendererSubContext implements NodeRendererContext {
     final HtmlWriter htmlWriter;
     Node renderingNode;
@@ -19,12 +21,13 @@ public abstract class NodeRendererSubContext implements NodeRendererContext {
         return htmlWriter;
     }
 
-    public void flush() {
-        htmlWriter.line().flush();
-    }
-
-    public void flush(int maxBlankLines) {
-        htmlWriter.line().flush(maxBlankLines);
+    public void flushTo(Appendable out, int maxBlankLines) {
+        htmlWriter.line();
+        try {
+            htmlWriter.appendTo(out, maxBlankLines);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     protected int getDoNotRenderLinksNesting() {

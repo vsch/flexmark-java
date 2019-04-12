@@ -49,20 +49,18 @@ public class MarkdownTableTestBase {
             String linePrefix,
             String intellijDummyIdentifier
     ) {
-        MarkdownWriter out = new MarkdownWriter(new StringBuilder(), MarkdownWriter.FORMAT_ALL);
+        MarkdownWriter out = new MarkdownWriter(MarkdownWriter.FORMAT_ALL);
         table.appendTable(out);
-        out.flush();
-        return out.toString();
+        return out.toString(0);
     }
 
     protected String[] getFormattedTables(MarkdownTable[] tables) {
         List<String> formatted = new ArrayList<>();
 
         for (MarkdownTable table : tables) {
-            MarkdownWriter out = new MarkdownWriter(new StringBuilder(), MarkdownWriter.FORMAT_ALL);
+            MarkdownWriter out = new MarkdownWriter(MarkdownWriter.FORMAT_ALL);
             table.appendTable(out);
-            out.flush();
-            formatted.add(out.toString());
+            formatted.add(out.toString(0));
         }
         return formatted.toArray(new String[0]);
     }
