@@ -5,7 +5,6 @@ flexmark-java
 
 [TOC]: # " "
 
-- [Future 0.50.0](#future-0500)
 - [0.42.2](#0422)
 - [0.42.0](#0420)
 - [0.40.34](#04034)
@@ -81,36 +80,6 @@ flexmark-java
 
 &nbsp;</details>
 
-Future 0.50.0
--------------
-
-* [ ] Fix: `FormattingAppendable` deprecate all conditional formatting related methods and
-      methods only needed because of convoluted output construction.
-* [x] Deprecate: all conditional formatting methods in `FormattingAppendable`
-* [ ] Break: make Java 8 minimum version and use JDK 8 for compilation
-* [ ] Fix: Factor out BasedSequenceImpl functionality that does not depend on BasedSequence and
-      can be applied to any CharSequence into its own CharSequence interface with default
-      implementations.
-* [ ] Add: `LineFormattingAppendable` to extend and eventually replace `FormattingAppendable`
-  1. provide same `append(...)`, `line()`, `blankLine()`, `indent()`, `prefix()`, etc. of
-     `FormattingAppendable` but leading, trailing whitespace options, applied when current line
-     is complete not during construction.
-  2. add `append(Collection<CharSequence>)` for easy appending of child rendered results
-  3. no callback methods and convoluted logic implementing indentations during content
-     construction since these can be easily applied to individual lines once they are generated.
-  4. provide implement `List<CharSequence>` interface for its content lines
-  5. provide `currentLine()` for last content line which does not yet have an EOL
-  6. provide `currentLineIndex()` as `int` for the index of the `currentLine()` value, will be
-     equal to `size()` if the current line has no content, ie. end of output after previous line
-     terminated with EOL.
-  7. provide `result()` as `Collection<CharSequence>` where each char sequence represents a
-     single line of output.
-* [ ] Add: `FlexmarkHtmlParser` options:
-  * [ ] Fix: [#313, Ability to override tags processing in FlexmarkHtmlParser]
-  * [ ] `EXT_TABLES` conversion option not yet implemented.
-* [ ] Add: `<!-- @formatter:on -->` and `<!-- @formatter:on -->` tags to `Formatter` for
-      controlling non-formatting regions.
-
 0.42.2
 ------
 
@@ -124,7 +93,7 @@ Future 0.50.0
   * Break: move `com.vladsch.flexmark.Extension` to
     `com.vladsch.flexmark.util.builder.Extension`
   * Fix: IntelliJ Migration contained in [migrate flexmark-java 0_40_x to 0_42_0], to use:
-    * copy to IntelliJ application settings to `migrations` subdirectory
+    * copy to IntelliJ application settings to `migration` subdirectory
     * if you have the project which you want to migrate open, then close it
     * open the project in IntelliJ Ultimate or Community
     * update the flexmark-java dependency version to 0.42.0 (or later) and make sure the new
