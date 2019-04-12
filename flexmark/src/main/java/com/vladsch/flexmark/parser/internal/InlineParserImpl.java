@@ -922,10 +922,10 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
      * @return true
      */
     @Override
-    public boolean parseNewline() {   
-        boolean crLf = index < input.length()-1 && input.charAt(index + 1) == '\n';
+    public boolean parseNewline() {
+        boolean crLf = index < input.length() - 1 && input.charAt(index + 1) == '\n';
         int crLfDelta = crLf ? 1 : 0;
-        index += 1 + crLfDelta; 
+        index += 1 + crLfDelta;
 
         // We're gonna add a new node in any case and we need to check the last text node, so flush outstanding text.
         flushTextNode();

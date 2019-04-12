@@ -6,6 +6,7 @@ flexmark-java
 [TOC]: # " "
 
 - [Future 0.50.0](#future-0500)
+- [0.42.2](#0422)
 - [0.42.0](#0420)
 - [0.40.34](#04034)
 - [0.40.32](#04032)
@@ -109,6 +110,12 @@ Future 0.50.0
   * [ ] `EXT_TABLES` conversion option not yet implemented.
 * [ ] Add: `<!-- @formatter:on -->` and `<!-- @formatter:on -->` tags to `Formatter` for
       controlling non-formatting regions.
+
+0.42.2
+------
+
+* Fix: [#334, CR line separators don’t produce line break nodes],
+  * merge: [#335, PR: Fix CR-only line separator handling] thanks to **[Kijimuna]**
 
 0.42.0
 ------
@@ -1355,8 +1362,11 @@ setting either will affect both keys. For information on these keys see
 [#328, Html2mark - missing newline when paragraph followed by div]: https://github.com/vsch/flexmark-java/issues/328
 [#331, Ability to replace empty \<p\> with \<br\> during html2mark conversion]: https://github.com/vsch/flexmark-java/issues/331
 [#332, withOptions forgets about old link resolvers]: https://github.com/vsch/flexmark-java/issues/332
+[#334, CR line separators don’t produce line break nodes]: https://github.com/vsch/flexmark-java/issues/334
+[#335, PR: Fix CR-only line separator handling]: https://github.com/vsch/flexmark-java/pull/335
 [Admonition Extension, Material for MkDocs]: https://squidfunk.github.io/mkdocs-material/extensions/admonition/
 [Awesome Console]: https://plugins.jetbrains.com/plugin/7677-awesome-console "Awesome Console"
+[Kijimuna]: https://github.com/Kijimuna
 [migrate 0_35_x to 0_40_0.xml]: /assets/migrations/migrate%20flexmark-java%200_35_x%20to%200_40_0.xml
 [migrate flexmark-java 0_40_x to 0_42_0]: https://github.com/vsch/flexmark-java/blob/master/assets/migrations/migrate%20flexmark-java%200_40_x%20to%200_42_0.xml
 [NodeInsertingPostProcessorSample.java]: https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/samples/NodeInsertingPostProcessorSample.java
