@@ -172,7 +172,7 @@ public class Parsing {
         this.REST_OF_LINE = Pattern.compile("^.*" + EOL);
         this.UNICODE_WHITESPACE_CHAR = Pattern.compile("^[\\p{Zs}\t\r\n\f]");
         this.WHITESPACE = Pattern.compile("\\s+");
-        this.FINAL_SPACE = Pattern.compile(" *\r?$");
+        this.FINAL_SPACE = Pattern.compile(" *$");
         this.LINE_END = Pattern.compile("^[ \t]*(?:" + EOL + "|$)");
         this.TAGNAME = "[A-Za-z" + ADDITIONAL_CHARS + "][A-Za-z0-9" + ADDITIONAL_CHARS + "-]*";
         this.ATTRIBUTENAME = "[a-zA-Z" + ADDITIONAL_CHARS + "_:][a-zA-Z0-9" + ADDITIONAL_CHARS + ":._-]*";
