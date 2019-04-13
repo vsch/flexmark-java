@@ -96,13 +96,13 @@ Future 0.50.0
     * press `Run`
     * in the refactoring preview tool window that opens hit `Do Refactor`
   * [ ] Convert anonymous classes to lambda where possible.
-  * [ ] Remove classes from utils which are implemented in Java 8
+  * [x] Remove classes from utils which are implemented in Java 8
 * [x] Add: `LineFormattingAppendable` and `LineFormattingAppendableImpl`
   * [x] Fix: deprecate `FormattingAppendable` to be replaced by `LineFormattingAppendable`
   * [x] Fix: deprecate `FormattingAppendableImpl` to be replaced by
         `LineFormattingAppendableImpl`
-  * [ ] Fix: replace all uses of `FormattingAppendable` by `LineFormattingAppendable`
-  * [ ] Fix: replace all uses of `FormattingAppendableImpl` by `LineFormattingAppendableImpl`
+  * [x] Fix: replace all uses of `FormattingAppendable` by `LineFormattingAppendable`
+  * [x] Fix: replace all uses of `FormattingAppendableImpl` by `LineFormattingAppendableImpl`
 * [ ] Fix: Factor out BasedSequenceImpl functionality that does not depend on BasedSequence and
       can be applied to any CharSequence into its own CharSequence interface with default
       implementations.
@@ -115,7 +115,7 @@ Future 0.50.0
 0.42.2
 ------
 
-* Fix: [#334, CR line separators don’t produce line break nodes],
+* Fix: [#334, CR line separators don't produce line break nodes],
   * merge: [#335, PR: Fix CR-only line separator handling] thanks to **[Kijimuna]**
 
 0.42.0
@@ -1363,10 +1363,7 @@ setting either will affect both keys. For information on these keys see
 [#328, Html2mark - missing newline when paragraph followed by div]: https://github.com/vsch/flexmark-java/issues/328
 [#331, Ability to replace empty \<p\> with \<br\> during html2mark conversion]: https://github.com/vsch/flexmark-java/issues/331
 [#332, withOptions forgets about old link resolvers]: https://github.com/vsch/flexmark-java/issues/332
-[#328, Html2mark - missing newline when paragraph followed by div]: https://github.com/vsch/flexmark-java/issues/328
-[#331, Ability to replace empty \<p\> with \<br\> during html2mark conversion]: https://github.com/vsch/flexmark-java/issues/331
-[#332, withOptions forgets about old link resolvers]: https://github.com/vsch/flexmark-java/issues/332
-[#334, CR line separators don’t produce line break nodes]: https://github.com/vsch/flexmark-java/issues/334
+[#334, CR line separators don't produce line break nodes]: https://github.com/vsch/flexmark-java/issues/334
 [#335, PR: Fix CR-only line separator handling]: https://github.com/vsch/flexmark-java/pull/335
 [Admonition Extension, Material for MkDocs]: https://squidfunk.github.io/mkdocs-material/extensions/admonition/
 [Awesome Console]: https://plugins.jetbrains.com/plugin/7677-awesome-console "Awesome Console"
@@ -1376,14 +1373,3 @@ setting either will affect both keys. For information on these keys see
 [migrate flexmark-java 0_42_x to 0_50_0.xml]: https://github.com/vsch/flexmark-java/blob/master/assets/migrations/migrate%20flexmark-java%200_42_x%20to%200_50_0.xml
 [NodeInsertingPostProcessorSample.java]: https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/samples/NodeInsertingPostProcessorSample.java
 [YouTrack: IDEA-207453]: https://youtrack.jetbrains.com/issue/IDEA-207453 "Add Conversion of ref anchor to UrlFilter for file line navigation"
-[#328, Html2mark - missing newline when paragraph followed by div]: https://github.com/vsch/flexmark-java/issues/328
-[#331, Ability to replace empty \<p\> with \<br\> during html2mark conversion]: https://github.com/vsch/flexmark-java/issues/331
-[#332, withOptions forgets about old link resolvers]: https://github.com/vsch/flexmark-java/issues/332
-
-
-
-
-
-[#335, PR: Fix CR-only line separator handling]: https://github.com/vsch/flexmark-java/pull/335
-[Kijimuna]: https://github.com/Kijimuna
-[#334, CR line separators don’t produce line break nodes]: https://github.com/vsch/flexmark-java/issues/334

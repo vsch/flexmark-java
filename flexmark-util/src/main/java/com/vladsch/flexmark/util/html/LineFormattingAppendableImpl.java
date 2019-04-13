@@ -29,9 +29,10 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
 
     // accumulated text and line information
     private StringBuilder myAppendable;
-    final private ArrayList<BasedSequence> myLines;      // line contents
+    final private ArrayList<BasedSequence> myLines;     // line contents
     final private ArrayList<BasedSequence> myPrefixes;  // line prefixes
-    private int myTextLength; // accumulated length of all offsets
+    private int myTextLength;                           // accumulated length of all offsets
+    private int myPrefixLength;                         // accumulated length of all prefixes
 
     // indent level to use after the next \n and before text is appended
     private BasedSequence myPrefix;
@@ -55,6 +56,7 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
         myPreFormattedLastLine = -1;
         myLineStart = 0;
         myTextLength = 0;
+        myPrefixLength = 0;
         myAllWhitespace = true;
         myWasWhitespace = false;
         myAppendable = new StringBuilder();
@@ -249,11 +251,14 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
 
         myLines.add(range.isNull() ? BasedSequence.NULL : range.subSequence(myAppendable));
         if (range.isEmpty() && !prefix.isEmpty()) {
-            myPrefixes.add(prefix.trimEnd());
+            prefix = prefix.trimEnd();
+            myPrefixes.add(prefix);
         } else {
             myPrefixes.add(prefix);
         }
+
         myTextLength += range.getSpan() + 1;
+        myPrefixLength += prefix.length();
     }
 
     private void appendEol() {
@@ -265,13 +270,13 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
         myAllWhitespace = true;
         myWasWhitespace = false;
         myLineOnFirstText = 0;
-        
+
         rawIndentsOnFirstEol();
     }
 
     private void rawIndentsOnFirstEol() {
         myPrefix = myPrefixAfterEol;
-        
+
         while (!myIndentsOnFirstEol.isEmpty()) {
             Runnable runnable = myIndentsOnFirstEol.remove(myIndentsOnFirstEol.size() - 1);
             rawIndent();
@@ -350,12 +355,20 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
      *
      * @return would be offset after adding EOL - 1
      */
-    private int offsetAfterEol() {
+    private int offsetAfterEol(boolean includePrefixes) {
         Pair<Range, BasedSequence> rangePrefixAfterEol = getRangePrefixAfterEol();
         if (rangePrefixAfterEol.getFirst().isNull()) {
-            return myTextLength;
+            return includePrefixes ? myTextLength + myPrefixLength : myTextLength;
         } else {
-            return myTextLength + rangePrefixAfterEol.getFirst().getSpan();
+            Range range = rangePrefixAfterEol.getFirst();
+            BasedSequence prefix = rangePrefixAfterEol.getSecond();
+
+            if (range.isEmpty() && !prefix.isEmpty()) {
+                prefix = prefix.trimEnd();
+            }
+
+            return includePrefixes ? myTextLength + rangePrefixAfterEol.getFirst().getSpan() + myPrefixLength + prefix.length()
+                    : myTextLength + rangePrefixAfterEol.getFirst().getSpan();
         }
     }
 
@@ -555,8 +568,9 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
             int count = useEndLine - useStartLine;
             while (count-- > 0) {
                 BasedSequence line = myLines.remove(startLine);
-                myPrefixes.remove(startLine);
+                BasedSequence prefix = myPrefixes.remove(startLine);
                 myTextLength -= line.length() + 1;
+                myPrefixLength -= prefix.length();
             }
         }
         return this;
@@ -712,12 +726,22 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
 
     @Override
     public int offset() {
-        return myTextLength;
+        return myTextLength + myPrefixLength;
     }
 
     @Override
     public int offsetWithPending() {
-        return offsetAfterEol();
+        return offsetAfterEol(true);
+    }
+
+    @Override
+    public int textOnlyOffset() {
+        return myTextLength;
+    }
+
+    @Override
+    public int textOnlyOffsetWithPending() {
+        return offsetAfterEol(false);
     }
 
     @Override
@@ -738,7 +762,7 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
 
     @Override
     public int getPendingEOL() {
-        int withPending = offsetWithPending();
+        int withPending = textOnlyOffsetWithPending();
 
         if (withPending == myTextLength) {
             // use count of blank lines+1

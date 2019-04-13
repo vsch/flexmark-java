@@ -90,7 +90,7 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
     @Override
     public T rawPre(CharSequence s) {
         // if previous pre-formatted did not have an EOL and this one does, need to transfer the EOL
-        // to previous pre-formatted to have proper handling of first/last line, otherwise this opening 
+        // to previous pre-formatted to have proper handling of first/last line, otherwise this opening
         // pre-formatted, blows away previous last line pre-formatted information
         if (out.getPendingEOL() == 0 && s.length() > 0 && s.charAt(0) == '\n') {
             out.line();
@@ -385,232 +385,61 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
         return (T) this;
     }
 
-    // delegated to FormattingAppendable
-
-    @Override
-    public int getOptions() { return out.getOptions(); }
-
-    @Override
-    public T setOptions(final int options) {
-        out.setOptions(options);
-        return (T) this;
-    }
-
-    public boolean isPreFormatted() {
-        return out.isPreFormatted();
-    }
-
-    public T line() {
-        out.line();
-        return (T) this;
-    }
-
-    public T addLine() {
-        out.addLine();
-        return (T) this;
-    }
-
-    public T blankLine() {
-        out.blankLine();
-        return (T) this;
-    }
-
-    public T blankLine(final int count) {
-        out.blankLine(count);
-        return (T) this;
-    }
-
-    public T blankLineIf(final boolean predicate) {
-        out.blankLineIf(predicate);
-        return (T) this;
-    }
-
-    public T lineIf(boolean predicate) {
-        out.lineIf(predicate);
-        return (T) this;
-    }
-
-    public T indent() {
-        out.indent();
-        return (T) this;
-    }
-
-    public T unIndent() {
-        out.unIndent();
-        return (T) this;
-    }
-
-    @Override
-    public T append(final CharSequence csq) {
-        out.append(csq);
-        return (T) this;
-    }
-
-    @Override
-    public T append(final CharSequence csq, final int start, final int end) {
-        out.append(csq, start, end);
-        return (T) this;
-    }
-
-    @Override
-    public T append(final char c) {
-        out.append(c);
-        return (T) this;
-    }
-
-    @Override
-    public CharSequence getIndentPrefix() { return out.getIndentPrefix(); }
-
-    @Override
-    public T setIndentPrefix(final CharSequence prefix) {
-        out.setIndentPrefix(prefix);
-        return (T) this;
-    }
-
-    @Override
-    public CharSequence getPrefix() { return out.getPrefix(); }
-
-    @Override
-    public T setPrefix(final CharSequence prefix) {
-        out.setPrefix(prefix);
-        return (T) this;
-    }
-
-    @Override
-    public T addPrefix(final CharSequence prefix) {
-        out.addPrefix(prefix);
-        return (T) this;
-    }
-
-    @Override
-    public T setPrefix(final CharSequence prefix, boolean afterEol) {
-        out.setPrefix(prefix, afterEol);
-        return (T) this;
-    }
-
-    @Override
-    public T addPrefix(final CharSequence prefix, boolean afterEol) {
-        out.addPrefix(prefix, afterEol);
-        return (T) this;
-    }
-
-    @Override
-    public T pushPrefix() {
-        out.pushPrefix();
-        return (T) this;
-    }
-
-    @Override
-    public T popPrefix() {
-        out.popPrefix();
-        return (T) this;
-    }
-
-    @Override
-    public T popPrefix(boolean afterEol) {
-        out.popPrefix(afterEol);
-        return (T) this;
-    }
-
-    @Override
-    public T repeat(final char c, final int count) {
-        out.repeat(c, count);
-        return (T) this;
-    }
-
-    @Override
-    public T repeat(final CharSequence csq, final int count) {
-        out.repeat(csq, count);
-        return (T) this;
-    }
-
-    @Override
-    public T repeat(final CharSequence csq, final int start, final int end, final int count) {
-        out.repeat(csq, start, end, count);
-        return (T) this;
-    }
-
-    public int getLineCount() {
-        return out.getLineCount();
-    }
-
-    @Override
-    public T openPreFormatted(final boolean keepIndent) {
-        out.openPreFormatted(true);
-        return (T) this;
-    }
-
-    @Override
-    public T closePreFormatted() {
-        out.closePreFormatted();
-        return (T) this;
-    }
-
+    // delegated to LineFormattingAppendable
     // @formatter:off
-    @Override
-    public LineFormattingAppendable append(final LineFormattingAppendable lines, final int startLine, final int endLine) {return out.append(lines, startLine, endLine);}
-
-    @Override
-    public LineFormattingAppendable prefixLines(final CharSequence prefix, final int startLine, final int endLine) {return out.prefixLines(prefix, startLine, endLine);}
-
-    @Override
-    public List<CharSequence> getLines(final int startLine, final int endLine) {return out.getLines(startLine, endLine);}
-
-    @Override
-    public List<CharSequence> getLineContents(final int startLine, final int endLine) {return out.getLineContents(startLine, endLine);}
-
-    @Override
-    public List<BasedSequence> getLinePrefixes(final int startLine, final int endLine) {return out.getLinePrefixes(startLine, endLine);}
-
-    @Override
-    public int column() {return out.column();}
-
-    @Override
-    public int offset() { return out.offset();}
-
-    @Override
-    public int offsetWithPending() { return out.offsetWithPending();}
-
-    @Override
-    public String toString(final int maxBlankLines) {return out.toString(maxBlankLines);}
-
-    @Override
-    public boolean isPendingSpace() {return out.isPendingSpace();}
-
-    @Override
-    public int getPendingEOL() {return out.getPendingEOL();}
-
-    @Override
-    public int getPendingSpace() {return out.getPendingSpace();}
-
-    @Override
-    public boolean isPreFormattedLine(final int line) {return out.isPreFormattedLine(line);}
-
-    @Override
-    public LineFormattingAppendable appendTo(final Appendable out, final int maxBlankLines, final CharSequence prefix, final int startLine, final int endLine) throws IOException {this.out.appendTo(out, maxBlankLines, prefix, startLine, endLine); return (T)this;}
-
-    @Override
-    public LineFormattingAppendable openPreFormatted() {out.openPreFormatted(); return (T)this;}
-
-    @Override
-    public LineFormattingAppendable prefixLines(final CharSequence prefix, final boolean addAfterLinePrefix, final int startLine, final int endLine) {out.prefixLines(prefix, addAfterLinePrefix, startLine, endLine); return (T)this;}
-
-    @Override
-    public LineFormattingAppendable lineWithTrailingSpaces(int count) {out.lineWithTrailingSpaces(count); return (T)this;}
-
-    @Override
-    public LineFormattingAppendable removeLines(final int startLine, final int endLine) {out.removeLines(startLine, endLine); return (T)this;}
-
-    @Override
-    public LineFormattingAppendable lineOnFirstText(boolean value) {out.lineOnFirstText(value); return (T)this;}
-
-    @Override
-    public LineFormattingAppendable addIndentOnFirstEOL(Runnable runnable) {out.addIndentOnFirstEOL(runnable); return (T)this;}
-
-    @Override
-    public LineFormattingAppendable removeIndentOnFirstEOL(Runnable runnable) {out.removeIndentOnFirstEOL(runnable); return (T)this;}
-
-    @Override
-    public LineFormattingAppendable unIndentNoEol() {out.unIndentNoEol(); return (T)this;}
+    @Override public boolean isPendingSpace()                                                                                           { return out.isPendingSpace(); }
+    @Override public boolean isPreFormatted()                                                                                           { return out.isPreFormatted(); }
+    @Override public boolean isPreFormattedLine(int line)                                                                               { return out.isPreFormattedLine(line); }
+    @Override public CharSequence getIndentPrefix()                                                                                     { return out.getIndentPrefix(); }
+    @Override public CharSequence getPrefix()                                                                                           { return out.getPrefix(); }
+    @Override public int column()                                                                                                       { return out.column(); }
+    @Override public int getLineCount()                                                                                                 { return out.getLineCount(); }
+    @Override public int getOptions()                                                                                                   { return out.getOptions(); }
+    @Override public int getPendingEOL()                                                                                                { return out.getPendingEOL(); }
+    @Override public int getPendingSpace()                                                                                              { return out.getPendingSpace(); }
+    @Override public int offset()                                                                                                       { return out.offset(); }
+    @Override public int offsetWithPending()                                                                                            { return out.offsetWithPending(); }
+    @Override public int textOnlyOffset()                                                                                               { return out.textOnlyOffset(); }
+    @Override public int textOnlyOffsetWithPending()                                                                                    { return out.textOnlyOffsetWithPending(); }
+    @Override public List<BasedSequence> getLinePrefixes(int startLine, int endLine)                                                    { return out.getLinePrefixes(startLine, endLine); }
+    @Override public List<CharSequence> getLineContents(int startLine, int endLine)                                                     { return out.getLineContents(startLine, endLine); }
+    @Override public List<CharSequence> getLines(int startLine, int endLine)                                                            { return out.getLines(startLine, endLine); }
+    @Override public String toString(int maxBlankLines)                                                                                 { return out.toString(maxBlankLines); }
+    @Override public T addIndentOnFirstEOL(Runnable runnable)                                                                           { out.addIndentOnFirstEOL(runnable);  return (T)this; }
+    @Override public T addLine()                                                                                                        { out.addLine(); return (T)this; }
+    @Override public T addPrefix(CharSequence prefix)                                                                                   { out.addPrefix(prefix); return (T)this; }
+    @Override public T addPrefix(CharSequence prefix, boolean afterEol)                                                                 { out.addPrefix(prefix, afterEol);  return (T)this; }
+    @Override public T append(char c)                                                                                                   { out.append(c); return (T)this; }
+    @Override public T append(CharSequence csq)                                                                                         { out.append(csq); return (T)this; }
+    @Override public T append(CharSequence csq, int start, int end)                                                                     { out.append(csq, start, end); return (T)this; }
+    @Override public T append(LineFormattingAppendable lines, int startLine, int endLine)                                               { out.append(lines, startLine, endLine);  return (T)this; }
+    @Override public T appendTo(Appendable out, int maxBlankLines, CharSequence prefix, int startLine, int endLine) throws IOException  { this.out.appendTo(out, maxBlankLines, prefix, startLine, endLine);  return (T)this; }
+    @Override public T blankLine()                                                                                                      { out.blankLine(); return (T)this; }
+    @Override public T blankLine(int count)                                                                                             { out.blankLine(count); return (T)this; }
+    @Override public T blankLineIf(boolean predicate)                                                                                   { out.blankLineIf(predicate); return (T)this; }
+    @Override public T closePreFormatted()                                                                                              { out.closePreFormatted(); return (T)this; }
+    @Override public T indent()                                                                                                         { out.indent(); return (T)this; }
+    @Override public T line()                                                                                                           { out.line(); return (T)this; }
+    @Override public T lineIf(boolean predicate)                                                                                        { out.lineIf(predicate); return (T)this; }
+    @Override public T lineOnFirstText(boolean value)                                                                                   { out.lineOnFirstText(value);  return (T)this; }
+    @Override public T lineWithTrailingSpaces(int count)                                                                                { out.lineWithTrailingSpaces(count);  return (T)this; }
+    @Override public T openPreFormatted()                                                                                               { out.openPreFormatted();  return (T)this; }
+    @Override public T openPreFormatted(boolean keepIndent)                                                                             { out.openPreFormatted(true); return (T)this; }
+    @Override public T popPrefix()                                                                                                      { out.popPrefix(); return (T)this; }
+    @Override public T popPrefix(boolean afterEol)                                                                                      { out.popPrefix(afterEol); return (T)this; }
+    @Override public T prefixLines(CharSequence prefix, boolean addAfterLinePrefix, int startLine, int endLine)                         { out.prefixLines(prefix, addAfterLinePrefix, startLine, endLine);  return (T)this; }
+    @Override public T prefixLines(CharSequence prefix, int startLine, int endLine)                                                     { out.prefixLines(prefix, startLine, endLine);  return (T)this; }
+    @Override public T pushPrefix()                                                                                                     { out.pushPrefix(); return (T)this; }
+    @Override public T removeIndentOnFirstEOL(Runnable runnable)                                                                        { out.removeIndentOnFirstEOL(runnable);  return (T)this; }
+    @Override public T removeLines(int startLine, int endLine)                                                                          { out.removeLines(startLine, endLine);  return (T)this; }
+    @Override public T repeat(char c, int count)                                                                                        { out.repeat(c, count); return (T)this; }
+    @Override public T repeat(CharSequence csq, int count)                                                                              { out.repeat(csq, count); return (T)this; }
+    @Override public T repeat(CharSequence csq, int start, int end, int count)                                                          { out.repeat(csq, start, end, count); return (T)this; }
+    @Override public T setIndentPrefix(CharSequence prefix)                                                                             { out.setIndentPrefix(prefix); return (T)this; }
+    @Override public T setOptions(int options)                                                                                          { out.setOptions(options); return (T)this; }
+    @Override public T setPrefix(CharSequence prefix)                                                                                   { out.setPrefix(prefix); return (T)this; }
+    @Override public T setPrefix(CharSequence prefix, boolean afterEol)                                                                 { out.setPrefix(prefix, afterEol); return (T)this; }
+    @Override public T unIndent()                                                                                                       { out.unIndent(); return (T)this; }
+    @Override public T unIndentNoEol()                                                                                                  { out.unIndentNoEol();  return (T)this; }
     // @formatter:on
 }

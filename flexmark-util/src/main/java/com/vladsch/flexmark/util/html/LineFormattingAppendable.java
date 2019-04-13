@@ -272,7 +272,8 @@ public interface LineFormattingAppendable extends Appendable {
     int column();
 
     /**
-     * Get text offset of all output lines (not including any pending line() call)
+     * Get text offset of all output lines (not including any text not included because it is not yet terminated by line() call)
+     * NOTE: this includes prefixes
      *
      * @return offset of text as would be returned if all current lines were taken (without prefixes)
      */
@@ -280,10 +281,27 @@ public interface LineFormattingAppendable extends Appendable {
 
     /**
      * Get column offset after last append
+     * NOTE: this includes prefixes
      *
-     * @return offset as would be returned by {@link #offset()} after line() call
+     * @return offset as would be returned by {@link #offset()} after line() call less 1 for EOL
      */
     int offsetWithPending();
+
+    /**
+     * Get text offset of all output lines (not including any text not included because it is not yet terminated by line() call)
+     * NOTE: this does not include prefixes
+     *
+     * @return offset of text as would be returned if all current lines were taken (without prefixes)
+     */
+    int textOnlyOffset();
+
+    /**
+     * Get column offset after last append
+     * NOTE: this does not include prefixes
+     *
+     * @return offset as would be returned by {@link #offset()} after line() call less 1 for EOL
+     */
+    int textOnlyOffsetWithPending();
 
     /**
      * Test if trailing text ends in space or tab
