@@ -1,11 +1,11 @@
 package com.vladsch.flexmark.ext.tables;
 
-import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.formatter.Formatter;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.spec.SpecReader;
 import com.vladsch.flexmark.test.ComboSpecTestCase;
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.format.MarkdownTable;
 import com.vladsch.flexmark.util.format.TableFormatOptions;
 import com.vladsch.flexmark.util.format.TableManipulator;
@@ -90,7 +90,7 @@ public class ComboTableManipulationSpecTest extends ComboSpecTestCase {
         optionsMap.put("delete-row-7-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.deleteRows(6, 1);}}));
         optionsMap.put("delete-row-8-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.deleteRows(7, 1);}}));
         optionsMap.put("delete-row-9-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.deleteRows(8, 1);}}));
-        
+
         optionsMap.put("delete-row-1-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.deleteRows(0, 2);}}));
         optionsMap.put("delete-row-2-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.deleteRows(1, 2);}}));
         optionsMap.put("delete-row-3-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.deleteRows(2, 2);}}));
@@ -100,7 +100,7 @@ public class ComboTableManipulationSpecTest extends ComboSpecTestCase {
         optionsMap.put("delete-row-7-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.deleteRows(6, 2);}}));
         optionsMap.put("delete-row-8-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.deleteRows(7, 2);}}));
         optionsMap.put("delete-row-9-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.deleteRows(8, 2);}}));
-        
+
         optionsMap.put("insert-row-1-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.insertRows(0, 1);}}));
         optionsMap.put("insert-row-2-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.insertRows(1, 1);}}));
         optionsMap.put("insert-row-3-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.insertRows(2, 1);}}));
@@ -110,7 +110,7 @@ public class ComboTableManipulationSpecTest extends ComboSpecTestCase {
         optionsMap.put("insert-row-7-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.insertRows(6, 1);}}));
         optionsMap.put("insert-row-8-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.insertRows(7, 1);}}));
         optionsMap.put("insert-row-9-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.insertRows(8, 1);}}));
-        
+
         optionsMap.put("insert-row-1-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.insertRows(0, 2);}}));
         optionsMap.put("insert-row-2-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.insertRows(1, 2);}}));
         optionsMap.put("insert-row-3-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.insertRows(2, 2);}}));
@@ -120,7 +120,7 @@ public class ComboTableManipulationSpecTest extends ComboSpecTestCase {
         optionsMap.put("insert-row-7-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.insertRows(6, 2);}}));
         optionsMap.put("insert-row-8-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.insertRows(7, 2);}}));
         optionsMap.put("insert-row-9-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.insertRows(8, 2);}}));
-        
+
         optionsMap.put("delete-col-0-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.deleteColumns(-1, 1);}}));
         optionsMap.put("delete-col-1-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.deleteColumns(0, 1);}}));
         optionsMap.put("delete-col-2-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.deleteColumns(1, 1);}}));
@@ -131,7 +131,7 @@ public class ComboTableManipulationSpecTest extends ComboSpecTestCase {
         optionsMap.put("delete-col-7-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.deleteColumns(6, 1);}}));
         optionsMap.put("delete-col-8-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.deleteColumns(7, 1);}}));
         optionsMap.put("delete-col-9-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.deleteColumns(8, 1);}}));
-        
+
         optionsMap.put("delete-col-1-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.deleteColumns(0, 2);}}));
         optionsMap.put("delete-col-2-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.deleteColumns(1, 2);}}));
         optionsMap.put("delete-col-3-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.deleteColumns(2, 2);}}));
@@ -141,7 +141,7 @@ public class ComboTableManipulationSpecTest extends ComboSpecTestCase {
         optionsMap.put("delete-col-7-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.deleteColumns(6, 2);}}));
         optionsMap.put("delete-col-8-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.deleteColumns(7, 2);}}));
         optionsMap.put("delete-col-9-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.deleteColumns(8, 2);}}));
-        
+
         optionsMap.put("insert-col-0-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.insertColumns(-1, 1);}}));
         optionsMap.put("insert-col-1-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.insertColumns(0, 1);}}));
         optionsMap.put("insert-col-2-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.insertColumns(1, 1);}}));
@@ -152,7 +152,7 @@ public class ComboTableManipulationSpecTest extends ComboSpecTestCase {
         optionsMap.put("insert-col-7-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.insertColumns(6, 1);}}));
         optionsMap.put("insert-col-8-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.insertColumns(7, 1);}}));
         optionsMap.put("insert-col-9-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.insertColumns(8, 1);}}));
-        
+
         optionsMap.put("insert-col-1-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.insertColumns(0, 2);}}));
         optionsMap.put("insert-col-2-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.insertColumns(1, 2);}}));
         optionsMap.put("insert-col-3-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.insertColumns(2, 2);}}));
@@ -162,10 +162,10 @@ public class ComboTableManipulationSpecTest extends ComboSpecTestCase {
         optionsMap.put("insert-col-7-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.insertColumns(6, 2);}}));
         optionsMap.put("insert-col-8-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.insertColumns(7, 2);}}));
         optionsMap.put("insert-col-9-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.insertColumns(8, 2);}}));
-        
+
         optionsMap.put("move-col-0-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.moveColumn(-1, 1);}}));
         optionsMap.put("move-col-2-0", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.moveColumn(1, -1);}}));
-        
+
         optionsMap.put("move-col-1-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.moveColumn(0, 0);}}));
         optionsMap.put("move-col-1-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.moveColumn(0, 1);}}));
         optionsMap.put("move-col-1-3", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.moveColumn(0, 2);}}));
@@ -173,7 +173,7 @@ public class ComboTableManipulationSpecTest extends ComboSpecTestCase {
         optionsMap.put("move-col-1-5", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.moveColumn(0, 4);}}));
         optionsMap.put("move-col-1-6", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.moveColumn(0, 5);}}));
         optionsMap.put("move-col-1-7", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.moveColumn(0, 6);}}));
-        
+
         optionsMap.put("move-col-2-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.moveColumn(1, 0);}}));
         optionsMap.put("move-col-2-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.moveColumn(1, 1);}}));
         optionsMap.put("move-col-2-3", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.moveColumn(1, 2);}}));
@@ -181,7 +181,7 @@ public class ComboTableManipulationSpecTest extends ComboSpecTestCase {
         optionsMap.put("move-col-2-5", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.moveColumn(1, 4);}}));
         optionsMap.put("move-col-2-6", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.moveColumn(1, 5);}}));
         optionsMap.put("move-col-2-7", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.moveColumn(1, 6);}}));
-        
+
         optionsMap.put("move-col-3-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.moveColumn(2, 0);}}));
         optionsMap.put("move-col-3-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.moveColumn(2, 1);}}));
         optionsMap.put("move-col-3-3", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.moveColumn(2, 2);}}));
@@ -189,7 +189,7 @@ public class ComboTableManipulationSpecTest extends ComboSpecTestCase {
         optionsMap.put("move-col-3-5", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.moveColumn(2, 4);}}));
         optionsMap.put("move-col-3-6", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.moveColumn(2, 5);}}));
         optionsMap.put("move-col-3-7", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.moveColumn(2, 6);}}));
-        
+
         optionsMap.put("move-col-4-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.moveColumn(3, 0);}}));
         optionsMap.put("move-col-4-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.moveColumn(3, 1);}}));
         optionsMap.put("move-col-4-3", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.moveColumn(3, 2);}}));
@@ -197,7 +197,7 @@ public class ComboTableManipulationSpecTest extends ComboSpecTestCase {
         optionsMap.put("move-col-4-5", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.moveColumn(3, 4);}}));
         optionsMap.put("move-col-4-6", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.moveColumn(3, 5);}}));
         optionsMap.put("move-col-4-7", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.moveColumn(3, 6);}}));
-        
+
         optionsMap.put("move-col-5-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.moveColumn(4, 0);}}));
         optionsMap.put("move-col-5-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.moveColumn(4, 1);}}));
         optionsMap.put("move-col-5-3", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.moveColumn(4, 2);}}));
@@ -205,7 +205,7 @@ public class ComboTableManipulationSpecTest extends ComboSpecTestCase {
         optionsMap.put("move-col-5-5", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.moveColumn(4, 4);}}));
         optionsMap.put("move-col-5-6", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.moveColumn(4, 5);}}));
         optionsMap.put("move-col-5-7", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.moveColumn(4, 6);}}));
-        
+
         optionsMap.put("move-col-6-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.moveColumn(5, 0);}}));
         optionsMap.put("move-col-6-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.moveColumn(5, 1);}}));
         optionsMap.put("move-col-6-3", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.moveColumn(5, 2);}}));
@@ -213,7 +213,7 @@ public class ComboTableManipulationSpecTest extends ComboSpecTestCase {
         optionsMap.put("move-col-6-5", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.moveColumn(5, 4);}}));
         optionsMap.put("move-col-6-6", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.moveColumn(5, 5);}}));
         optionsMap.put("move-col-6-7", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.moveColumn(5, 6);}}));
-        
+
         // @formatter:on
     }
 

@@ -30,8 +30,6 @@ public class GfmUsersNodeRenderer implements NodeRenderer
         return set;
     }
 
-
-
     private void render(GfmUser node, NodeRendererContext context, HtmlWriter html) {
         if (context.isDoNotRenderLinks()) {
             html.text(node.getChars());

@@ -15,12 +15,12 @@ public class UtilsTest {
     public void testCompareNullable() {
         Assert.assertEquals(0, Utils.compareNullable(null, false));
         Assert.assertEquals(0, Utils.compareNullable(true, true));
-        Assert.assertTrue(Utils.contained(-339_763_186, new Object[]{-339_763_186}));
-        Assert.assertTrue(Utils.contained(0, new int[]{0}));
-        Assert.assertFalse(Utils.contained(-2_147_483_647, new Object[]{}));
-        Assert.assertFalse(Utils.contained(-1_547_722_752, new Object[]{-339_763_186}));
-        Assert.assertFalse(Utils.contained(0, new int[]{}));
-        Assert.assertFalse(Utils.contained(0, new int[]{1}));
+        Assert.assertTrue(Utils.contained(-339_763_186, new Object[] { -339_763_186 }));
+        Assert.assertTrue(Utils.contained(0, new int[] { 0 }));
+        Assert.assertFalse(Utils.contained(-2_147_483_647, new Object[] { }));
+        Assert.assertFalse(Utils.contained(-1_547_722_752, new Object[] { -339_763_186 }));
+        Assert.assertFalse(Utils.contained(0, new int[] { }));
+        Assert.assertFalse(Utils.contained(0, new int[] { 1 }));
     }
 
     @Test
@@ -45,10 +45,10 @@ public class UtilsTest {
 
     @Test
     public void testJoin() {
-        Assert.assertEquals("prefixsuffix", Utils.join(new String[] {}, "prefix", "suffix", "$", "#"));
+        Assert.assertEquals("prefixsuffix", Utils.join(new String[] { }, "prefix", "suffix", "$", "#"));
         Assert.assertEquals("prefixsuffix", Utils.join(new ArrayList<String>(), "prefix", "suffix", "        ", "!!!!"));
-        Assert.assertEquals("itemPrefix1itemSuffixitemPrefix2itemSuffix", Utils.join(new String[] {"1", "2"}, "", "", "itemPrefix", "itemSuffix"));
-        Assert.assertEquals("list#1-#2-end", Utils.join(new String[]{"1", "2"}, "list", "end", "#", "-"));
+        Assert.assertEquals("itemPrefix1itemSuffixitemPrefix2itemSuffix", Utils.join(new String[] { "1", "2" }, "", "", "itemPrefix", "itemSuffix"));
+        Assert.assertEquals("list#1-#2-end", Utils.join(new String[] { "1", "2" }, "list", "end", "#", "-"));
     }
 
     @Test
@@ -110,7 +110,6 @@ public class UtilsTest {
         Assert.assertEquals((Integer) 0, Utils.parseUnsignedIntOrNull("-0"));
     }
 
-
     @Test
     public void testPrefixWith() {
         Assert.assertEquals(" teststring", Utils.prefixWith("teststring", ' ', false));
@@ -142,7 +141,6 @@ public class UtilsTest {
         Assert.assertEquals("(?:)", Utils.regexGroup(null));
     }
 
-
     @Test
     public void testRegionMatches() {
         Assert.assertTrue(Utils.regionMatches("???", 10, "?", 5, 0, false));
@@ -165,12 +163,11 @@ public class UtilsTest {
     public void testRemoveAnyPrefix() {
         Assert.assertEquals("", Utils.removeAnyPrefix(null, null));
         Assert.assertEquals("testString", Utils.removeAnyPrefix("testString"));
-        Assert.assertEquals("testString", Utils.removeAnyPrefix("testString", new String[] {null}));
+        Assert.assertEquals("testString", Utils.removeAnyPrefix("testString", new String[] { null }));
         Assert.assertEquals("testString!", Utils.removeAnyPrefix("testString!", "!"));
         Assert.assertEquals("testStrin!g", Utils.removeAnyPrefix("testStrin!g", "!"));
         Assert.assertEquals("testString", Utils.removeAnyPrefix("!testString", "!"));
     }
-
 
     @Test
     public void testRemovePrefix() {
@@ -204,7 +201,6 @@ public class UtilsTest {
         Utils.repeat(null, 268_435_456);
     }
 
-
     @Test
     public void testStartsWith() {
         Assert.assertFalse(Utils.startsWith("??????????"));
@@ -212,8 +208,7 @@ public class UtilsTest {
         Assert.assertFalse(Utils.startsWith("", "????"));
         Assert.assertFalse(Utils.startsWith("?", "???"));
         Assert.assertFalse(Utils.startsWith("????????", "??????????", "?????????"));
-        Assert.assertFalse(Utils.startsWith(null, true, new String[] {}));
-
+        Assert.assertFalse(Utils.startsWith(null, true, new String[] { }));
 
         Assert.assertTrue(Utils.startsWith("aaa???", "aaa"));
         Assert.assertTrue(Utils.startsWith("testString", "testString"));
@@ -224,25 +219,25 @@ public class UtilsTest {
     }
 
     @Test
-    public void testStartsWithNullPointerException1(){
+    public void testStartsWithNullPointerException1() {
         thrown.expect(NullPointerException.class);
-        Utils.startsWith("?", new String[] {null});
+        Utils.startsWith("?", new String[] { null });
     }
 
     @Test
-    public void testStartsWithNullPointerException2(){
+    public void testStartsWithNullPointerException2() {
         thrown.expect(NullPointerException.class);
-        Utils.startsWith("", new String[] {null});
+        Utils.startsWith("", new String[] { null });
     }
 
     @Test
-    public void testStartsWithNullPointerException3(){
+    public void testStartsWithNullPointerException3() {
         thrown.expect(NullPointerException.class);
         Utils.startsWith("", null, " ??????");
     }
 
     @Test
-    public void testStartsWithNullPointerException4(){
+    public void testStartsWithNullPointerException4() {
         thrown.expect(NullPointerException.class);
         Utils.startsWith("testString", null, null, null);
     }

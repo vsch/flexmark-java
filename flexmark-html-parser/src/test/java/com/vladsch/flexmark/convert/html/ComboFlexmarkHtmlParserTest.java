@@ -89,12 +89,11 @@ public class ComboFlexmarkHtmlParserTest extends ComboSpecTestCase {
         optionsMap.put("img-ref", new MutableDataSet().set(FlexmarkHtmlParser.EXT_INLINE_IMAGE, LinkConversion.MARKDOWN_REFERENCE));
         optionsMap.put("img-text", new MutableDataSet().set(FlexmarkHtmlParser.EXT_INLINE_IMAGE, LinkConversion.TEXT));
         optionsMap.put("img-html", new MutableDataSet().set(FlexmarkHtmlParser.EXT_INLINE_IMAGE, LinkConversion.HTML));
-        
+
         optionsMap.put("typo-map", new MutableDataSet().set(FlexmarkHtmlParser.TYPOGRAPHIC_REPLACEMENT_MAP, getTypographicReplacement()));
-        
+
         optionsMap.put("for-document", new MutableDataSet().set(FlexmarkHtmlParser.FOR_DOCUMENT, new Ref<Document>(linkDocument())));
     }
-    
     private static Map<String, String> getTypographicReplacement() {
         HashMap<String, String> map = new HashMap<>();
         map.put("“", "''");
@@ -118,7 +117,7 @@ public class ComboFlexmarkHtmlParserTest extends ComboSpecTestCase {
         map.put("&emdash;", "---");
         return map;
     }
-    
+
     private static Document linkDocument() {
         return Parser.builder().build().parse("" +
                 "[example.com]: http://example.com\n" +
@@ -217,7 +216,7 @@ public class ComboFlexmarkHtmlParserTest extends ComboSpecTestCase {
         if (options != null && options.get(FAIL)) {
             thrown.expect(ComparisonFailure.class);
         }
-        
+
         if (fileUrl != null) {
             assertEquals(fileUrl.toString(), expected, actual);
         } else {

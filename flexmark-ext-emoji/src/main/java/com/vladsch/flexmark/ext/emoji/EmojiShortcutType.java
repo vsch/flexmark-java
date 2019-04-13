@@ -4,7 +4,8 @@ public enum EmojiShortcutType {
     EMOJI_CHEAT_SHEET(true, false),
     GITHUB(false, true),
     ANY_EMOJI_CHEAT_SHEET_PREFERRED(true, true),
-    ANY_GITHUB_PREFERRED(true, true),;
+    ANY_GITHUB_PREFERRED(true, true),
+    ;
 
     public final boolean isEmojiCheatSheet;
     public final boolean isGitHub;
@@ -25,7 +26,7 @@ public enum EmojiShortcutType {
             case ANY_GITHUB_PREFERRED:
                 return gitHub != null ? gitHub : emojiCheatSheet;
         }
-        assert false : "Missing Case Statement" ;
+        assert false : "Missing Case Statement";
         return null;
     }
 }

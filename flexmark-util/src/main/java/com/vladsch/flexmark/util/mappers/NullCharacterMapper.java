@@ -7,5 +7,4 @@ public class NullCharacterMapper implements CharMapper {
     public char map(char c) {
         return c == '\0' ? '\uFFFD' : c;
     }
-
 }

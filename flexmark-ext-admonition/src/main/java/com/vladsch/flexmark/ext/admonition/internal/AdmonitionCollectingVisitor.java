@@ -1,10 +1,10 @@
 package com.vladsch.flexmark.ext.admonition.internal;
 
+import com.vladsch.flexmark.ext.admonition.AdmonitionBlock;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.ast.NodeVisitor;
 import com.vladsch.flexmark.util.ast.VisitHandler;
 import com.vladsch.flexmark.util.ast.Visitor;
-import com.vladsch.flexmark.ext.admonition.AdmonitionBlock;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -42,5 +42,4 @@ public class AdmonitionCollectingVisitor {
     void visit(AdmonitionBlock node) {
         qualifiers.add(node.getInfo().toString());
     }
-
 }

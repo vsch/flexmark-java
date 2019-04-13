@@ -25,8 +25,8 @@ class GfmUsersOptions implements MutableDataSetter {
         dataHolder.set(GfmUsersExtension.GIT_HUB_USERS_URL_ROOT, gitHubIssuesUrlRoot);
         dataHolder.set(GfmUsersExtension.GIT_HUB_USER_URL_PREFIX, gitHubIssueUrlPrefix);
         dataHolder.set(GfmUsersExtension.GIT_HUB_USER_URL_SUFFIX, gitHubIssueUrlSuffix);
-        dataHolder.set(GfmUsersExtension.GIT_HUB_USER_HTML_PREFIX,gitHubUserTextPrefix);
-        dataHolder.set(GfmUsersExtension.GIT_HUB_USER_HTML_SUFFIX,gitHubUserTextSuffix);
+        dataHolder.set(GfmUsersExtension.GIT_HUB_USER_HTML_PREFIX, gitHubUserTextPrefix);
+        dataHolder.set(GfmUsersExtension.GIT_HUB_USER_HTML_SUFFIX, gitHubUserTextSuffix);
         return dataHolder;
     }
 }

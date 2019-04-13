@@ -13,9 +13,9 @@ public class AdmonitionOptions {
     public final boolean withSpacesInterruptsItemParagraph;
     public final boolean allowLazyContinuation;
     public final String unresolvedQualifier;
-    public final Map<String,String> qualifierTypeMap;
-    public final Map<String,String> qualifierTitleMap;
-    public final Map<String,String> typeSvgMap;
+    public final Map<String, String> qualifierTypeMap;
+    public final Map<String, String> qualifierTitleMap;
+    public final Map<String, String> typeSvgMap;
 
     public AdmonitionOptions(DataHolder options) {
         contentIndent = AdmonitionExtension.CONTENT_INDENT.getFrom(options);

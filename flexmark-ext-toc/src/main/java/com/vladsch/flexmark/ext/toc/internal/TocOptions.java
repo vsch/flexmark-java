@@ -161,8 +161,8 @@ public class TocOptions implements Immutable<TocOptions, TocOptions.AsMutable>, 
 
         this.isAstAddOptions = isAstAddOptions;
         this.isBlankLineSpacer = isBlankLineSpacer;
-        this.divClass = divClass instanceof String ? (String)divClass : String.valueOf(divClass);
-        this.listClass = listClass instanceof String ? (String)listClass : String.valueOf(listClass);
+        this.divClass = divClass instanceof String ? (String) divClass : String.valueOf(divClass);
+        this.listClass = listClass instanceof String ? (String) listClass : String.valueOf(listClass);
         this.isCaseSensitiveTocTag = isCaseSensitiveTocTag;
     }
 

@@ -1,10 +1,10 @@
 package com.vladsch.flexmark.ext.toc.internal;
 
-import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.ast.util.Parsing;
 import com.vladsch.flexmark.ext.toc.TocBlock;
 import com.vladsch.flexmark.parser.InlineParser;
 import com.vladsch.flexmark.parser.block.*;
+import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
@@ -23,7 +23,8 @@ public class TocBlockParser extends AbstractBlockParser {
         public TocParsing(DataHolder options) {
             super(options);
             if (CASE_SENSITIVE_TOC_TAG.getFrom(options)) {
-                this.TOC_BLOCK_START = Pattern.compile("^\\[TOC(?:\\s+([^\\]]+))?]\\s*$");;
+                this.TOC_BLOCK_START = Pattern.compile("^\\[TOC(?:\\s+([^\\]]+))?]\\s*$");
+                ;
             } else {
                 this.TOC_BLOCK_START = Pattern.compile("^\\[(?i:TOC)(?:\\s+([^\\]]+))?]\\s*$");
             }

@@ -1,10 +1,10 @@
 package com.vladsch.flexmark.ext.footnotes;
 
-import com.vladsch.flexmark.ast.*;
+import com.vladsch.flexmark.ast.DelimitedNode;
 import com.vladsch.flexmark.ext.footnotes.internal.FootnoteRepository;
-import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.ast.DoNotDecorate;
 import com.vladsch.flexmark.util.ast.Document;
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.ast.ReferencingNode;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
@@ -26,8 +26,6 @@ public class Footnote extends Node implements DelimitedNode, DoNotDecorate, Refe
     }
 
     protected int referenceOrdinal;
-
-
 
     @Override
     public BasedSequence getReference() {

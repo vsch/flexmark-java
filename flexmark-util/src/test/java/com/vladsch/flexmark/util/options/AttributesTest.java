@@ -63,6 +63,5 @@ public class AttributesTest {
         assertEquals("add value", "id1", attributes.getValue("id"));
         assertEquals("contains added attribute", true, attributes.contains("id"));
         assertEquals("contains added value", true, attributes.containsValue("id", "id1"));
-
     }
 }

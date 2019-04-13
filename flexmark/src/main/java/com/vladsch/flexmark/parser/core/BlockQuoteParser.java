@@ -1,11 +1,11 @@
 package com.vladsch.flexmark.parser.core;
 
-import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.ast.BlockQuote;
 import com.vladsch.flexmark.ast.ListItem;
 import com.vladsch.flexmark.ast.util.Parsing;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.block.*;
+import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
@@ -149,12 +149,13 @@ public class BlockQuoteParser extends AbstractBlockParser {
         private final boolean interruptsParagraph;
         private final boolean interruptsItemParagraph;
         private final boolean withLeadSpacesInterruptsItemParagraph;
+
         BlockFactory(DataHolder options) {
             super(options);
-            allowLeadingSpace = Parser.BLOCK_QUOTE_ALLOW_LEADING_SPACE.getFrom( options);
-            interruptsParagraph = Parser.BLOCK_QUOTE_INTERRUPTS_PARAGRAPH.getFrom( options);
-            interruptsItemParagraph = Parser.BLOCK_QUOTE_INTERRUPTS_ITEM_PARAGRAPH.getFrom( options);
-            withLeadSpacesInterruptsItemParagraph = Parser.BLOCK_QUOTE_WITH_LEAD_SPACES_INTERRUPTS_ITEM_PARAGRAPH.getFrom( options);
+            allowLeadingSpace = Parser.BLOCK_QUOTE_ALLOW_LEADING_SPACE.getFrom(options);
+            interruptsParagraph = Parser.BLOCK_QUOTE_INTERRUPTS_PARAGRAPH.getFrom(options);
+            interruptsItemParagraph = Parser.BLOCK_QUOTE_INTERRUPTS_ITEM_PARAGRAPH.getFrom(options);
+            withLeadSpacesInterruptsItemParagraph = Parser.BLOCK_QUOTE_WITH_LEAD_SPACES_INTERRUPTS_ITEM_PARAGRAPH.getFrom(options);
         }
 
         public BlockStart tryStart(ParserState state, MatchedBlockParser matchedBlockParser) {

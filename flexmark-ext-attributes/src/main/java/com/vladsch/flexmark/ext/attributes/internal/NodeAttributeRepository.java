@@ -1,9 +1,9 @@
 package com.vladsch.flexmark.ext.attributes.internal;
 
-import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.ext.attributes.AttributesExtension;
 import com.vladsch.flexmark.ext.attributes.AttributesNode;
 import com.vladsch.flexmark.util.KeepType;
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.DataKey;
 

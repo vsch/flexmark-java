@@ -1,6 +1,7 @@
 package com.vladsch.flexmark.ext.gitlab;
 
-import com.vladsch.flexmark.ast.*;
+import com.vladsch.flexmark.ast.Paragraph;
+import com.vladsch.flexmark.ast.ParagraphContainer;
 import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.util.ast.BlockContent;
 import com.vladsch.flexmark.util.sequence.BasedSequence;

@@ -1,10 +1,13 @@
 package com.vladsch.flexmark.ext.gfm.tasklist.internal;
 
-import com.vladsch.flexmark.ast.*;
+import com.vladsch.flexmark.ast.BulletList;
+import com.vladsch.flexmark.ast.ListBlock;
+import com.vladsch.flexmark.ast.OrderedList;
+import com.vladsch.flexmark.ast.Paragraph;
 import com.vladsch.flexmark.ext.gfm.tasklist.TaskListItem;
 import com.vladsch.flexmark.ext.gfm.tasklist.TaskListItemPlacement;
 import com.vladsch.flexmark.formatter.*;
-import com.vladsch.flexmark.formatter.internal.*;
+import com.vladsch.flexmark.formatter.internal.CoreNodeFormatter;
 import com.vladsch.flexmark.parser.ListOptions;
 import com.vladsch.flexmark.util.ast.BlankLine;
 import com.vladsch.flexmark.util.ast.Block;

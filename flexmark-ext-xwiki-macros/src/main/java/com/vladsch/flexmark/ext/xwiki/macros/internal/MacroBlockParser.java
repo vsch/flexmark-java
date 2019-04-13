@@ -1,8 +1,5 @@
 package com.vladsch.flexmark.ext.xwiki.macros.internal;
 
-import com.vladsch.flexmark.util.ast.Block;
-import com.vladsch.flexmark.util.ast.BlockContent;
-import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.ast.Paragraph;
 import com.vladsch.flexmark.ast.util.Parsing;
 import com.vladsch.flexmark.ext.xwiki.macros.Macro;
@@ -11,6 +8,9 @@ import com.vladsch.flexmark.ext.xwiki.macros.MacroBlock;
 import com.vladsch.flexmark.ext.xwiki.macros.MacroClose;
 import com.vladsch.flexmark.parser.InlineParser;
 import com.vladsch.flexmark.parser.block.*;
+import com.vladsch.flexmark.util.ast.Block;
+import com.vladsch.flexmark.util.ast.BlockContent;
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
@@ -256,7 +256,7 @@ public class MacroBlockParser extends AbstractBlockParser {
                             BasedSequence attributeClose = !isQuoted ? BasedSequence.NULL : attributeValue.endSequence(1, 0);
 
                             if (isQuoted) {
-                                attributeValue = attributeValue.midSequence(1,-1);
+                                attributeValue = attributeValue.midSequence(1, -1);
                             }
 
                             MacroAttribute attribute = new MacroAttribute(attributeName, attributeSeparator, attributeOpen, attributeValue, attributeClose);

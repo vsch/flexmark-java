@@ -18,6 +18,6 @@ class SmartsParsing {
         this.ELIPSIS_SPACED = ". . .";
         this.EN_DASH = "--";
         this.EM_DASH = "---";
-        this.SMARTS = Pattern.compile("(^\\Q"+ELIPSIS_SPACED+"\\E|^\\Q"+ELIPSIS+"\\E|^\\Q"+EM_DASH+"\\E|^\\Q"+EN_DASH+"\\E)");
+        this.SMARTS = Pattern.compile("(^\\Q" + ELIPSIS_SPACED + "\\E|^\\Q" + ELIPSIS + "\\E|^\\Q" + EM_DASH + "\\E|^\\Q" + EN_DASH + "\\E)");
     }
 }

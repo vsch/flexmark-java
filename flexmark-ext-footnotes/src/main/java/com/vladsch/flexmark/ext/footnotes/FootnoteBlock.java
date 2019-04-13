@@ -1,6 +1,7 @@
 package com.vladsch.flexmark.ext.footnotes;
 
-import com.vladsch.flexmark.ast.*;
+import com.vladsch.flexmark.ast.Paragraph;
+import com.vladsch.flexmark.ast.ParagraphItemContainer;
 import com.vladsch.flexmark.ext.footnotes.internal.FootnoteRepository;
 import com.vladsch.flexmark.parser.ListOptions;
 import com.vladsch.flexmark.util.ast.Block;

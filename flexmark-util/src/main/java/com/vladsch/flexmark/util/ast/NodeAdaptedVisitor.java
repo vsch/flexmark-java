@@ -6,6 +6,7 @@ import java.util.Map;
 
 /**
  * Intended to be extended by specific type of node visitor
+ *
  * @param <H> subclass of {@link NodeAdaptingVisitHandler}
  */
 public abstract class NodeAdaptedVisitor<H extends NodeAdaptingVisitHandler<?, ?>> {

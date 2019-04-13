@@ -2,7 +2,6 @@ package com.vladsch.flexmark.util.html;
 
 import java.util.List;
 import java.util.Stack;
-import com.vladsch.flexmark.util.html.LineFormattingAppendable;
 
 /**
  * Used to help with HTML output generation and formatting of HTML
@@ -31,7 +30,7 @@ public interface HtmlFormattingAppendable extends LineFormattingAppendable {
     default HtmlFormattingAppendable withCondLine() {
         return withCondLineOnChildText();
     }
-    
+
     HtmlFormattingAppendable withCondLineOnChildText();
     HtmlFormattingAppendable withCondIndent();
 

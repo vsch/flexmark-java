@@ -1,9 +1,9 @@
 package com.vladsch.flexmark.parser.core;
 
-import com.vladsch.flexmark.parser.Parser;
-import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.ast.ThematicBreak;
+import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.block.*;
+import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
@@ -101,7 +101,7 @@ public class ThematicBreakParser extends AbstractBlockParser {
 
     static class ThematicBreakOptions {
         final boolean relaxedStart;
-    
+
         public ThematicBreakOptions(DataHolder options) {
             this.relaxedStart = Parser.THEMATIC_BREAK_RELAXED_START.getFrom(options);
         }

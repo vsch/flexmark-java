@@ -18,15 +18,15 @@ public class ThreadLocalOptionsExtension implements
 
     /**
      * Set the per thread options for flexmark-java.
-     *
+     * <p>
      * Must be called from the thread to set options to be set for
      * all flexmark-java code which uses this extension.
-     *
+     * <p>
      * CAUTION: Do not try to make mutable data values shared.
      * setAll() copies values of keys so immutable data valued
      * keys: Boolean, String, Integer, enums, etc., are good to
      * go as is.
-     *
+     * <p>
      * For mutable values you will need to add extra code to address
      * these or you will be hunting down overwrites of data from
      * another thread.

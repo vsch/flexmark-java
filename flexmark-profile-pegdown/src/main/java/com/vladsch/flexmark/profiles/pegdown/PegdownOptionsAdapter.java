@@ -63,7 +63,7 @@ public class PegdownOptionsAdapter {
     }
 
     /**
-     * @deprecated  Use {@link #haveAnyExtensions(int)}
+     * @deprecated Use {@link #haveAnyExtensions(int)}
      */
     @Deprecated
     public boolean haveExtensions(int mask) {
@@ -71,7 +71,7 @@ public class PegdownOptionsAdapter {
     }
 
     /**
-     * @deprecated  Use {@link #haveAllExtensions(int)}
+     * @deprecated Use {@link #haveAllExtensions(int)}
      */
     @Deprecated
     public boolean allExtensions(int mask) {
@@ -80,7 +80,7 @@ public class PegdownOptionsAdapter {
 
     /**
      * Test if any given extensions are set
-     * 
+     *
      * @param mask extension flag mask
      * @return true if any of the extensions given by the mask are set
      */
@@ -90,7 +90,7 @@ public class PegdownOptionsAdapter {
 
     /**
      * Test if all given extensions are set
-     * 
+     *
      * @param mask extension flag mask
      * @return true if any of the extensions given by the mask are set
      */

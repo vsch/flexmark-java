@@ -11,7 +11,7 @@ public class TableSection {
 
     public TableSection(TableSectionType sectionType) {
         this.sectionType = sectionType;
-        
+
         row = 0;
         column = 0;
     }
@@ -97,7 +97,7 @@ public class TableSection {
         }
         return columns;
     }
-    
+
     private CharSequence dumpRows() {
         StringBuilder sb = new StringBuilder();
         for (TableRow row : rows) {

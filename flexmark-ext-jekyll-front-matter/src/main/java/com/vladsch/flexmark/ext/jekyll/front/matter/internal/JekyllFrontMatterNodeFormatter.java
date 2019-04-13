@@ -1,10 +1,9 @@
-
 package com.vladsch.flexmark.ext.jekyll.front.matter.internal;
 
+import com.vladsch.flexmark.ext.jekyll.front.matter.JekyllFrontMatterBlock;
 import com.vladsch.flexmark.formatter.*;
 import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.Node;
-import com.vladsch.flexmark.ext.jekyll.front.matter.JekyllFrontMatterBlock;
 import com.vladsch.flexmark.util.options.DataHolder;
 
 import java.util.Arrays;

@@ -23,5 +23,4 @@ public abstract class BlockStart {
     public abstract BlockStart atColumn(int newColumn);
 
     public abstract BlockStart replaceActiveBlockParser();
-
 }

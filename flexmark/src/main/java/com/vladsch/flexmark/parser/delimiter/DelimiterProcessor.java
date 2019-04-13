@@ -1,8 +1,8 @@
 package com.vladsch.flexmark.parser.delimiter;
 
-import com.vladsch.flexmark.util.ast.Node;
-import com.vladsch.flexmark.parser.core.delimiter.Delimiter;
 import com.vladsch.flexmark.parser.InlineParser;
+import com.vladsch.flexmark.parser.core.delimiter.Delimiter;
+import com.vladsch.flexmark.util.ast.Node;
 
 /**
  * Custom delimiter processor for additional delimiters besides {@code _} and {@code *}.
@@ -10,7 +10,6 @@ import com.vladsch.flexmark.parser.InlineParser;
  * Note that implementations of this need to be thread-safe, the same instance may be used by multiple parsers.
  */
 public interface DelimiterProcessor {
-
 
     /**
      * @return the character that marks the beginning of a delimited node, must not clash with any built-in special
@@ -65,15 +64,14 @@ public interface DelimiterProcessor {
     /**
      * Decide whether this delimiter can be an open delimiter
      *
-     *
-     * @param before                        string before delimiter or '\n' if none
-     * @param after                         string after delimiter or '\n' if none
-     * @param leftFlanking                  is left flanking delimiter
-     * @param rightFlanking                 is right flanking delimiter
-     * @param beforeIsPunctuation           is punctuation before
-     * @param afterIsPunctuation            is punctuation after
-     * @param beforeIsWhitespace            is whitespace before
-     * @param afterIsWhiteSpace             is whitespace after
+     * @param before              string before delimiter or '\n' if none
+     * @param after               string after delimiter or '\n' if none
+     * @param leftFlanking        is left flanking delimiter
+     * @param rightFlanking       is right flanking delimiter
+     * @param beforeIsPunctuation is punctuation before
+     * @param afterIsPunctuation  is punctuation after
+     * @param beforeIsWhitespace  is whitespace before
+     * @param afterIsWhiteSpace   is whitespace after
      * @return true if can be open delimiter
      */
     boolean canBeOpener(final String before, final String after, boolean leftFlanking, boolean rightFlanking, boolean beforeIsPunctuation, boolean afterIsPunctuation, boolean beforeIsWhitespace, boolean afterIsWhiteSpace);
@@ -81,21 +79,21 @@ public interface DelimiterProcessor {
     /**
      * Decide whether this delimiter can be a close delimiter
      *
-     *
-     * @param before                        string before delimiter or '\n' if none
-     * @param after                         string after delimiter or '\n' if none
-     * @param leftFlanking                  is left flanking delimiter
-     * @param rightFlanking                 is right flanking delimiter
-     * @param beforeIsPunctuation           is punctuation before
-     * @param afterIsPunctuation            is punctuation after
-     * @param beforeIsWhitespace            is whitespace before
-     * @param afterIsWhiteSpace             is whitespace after
+     * @param before              string before delimiter or '\n' if none
+     * @param after               string after delimiter or '\n' if none
+     * @param leftFlanking        is left flanking delimiter
+     * @param rightFlanking       is right flanking delimiter
+     * @param beforeIsPunctuation is punctuation before
+     * @param afterIsPunctuation  is punctuation after
+     * @param beforeIsWhitespace  is whitespace before
+     * @param afterIsWhiteSpace   is whitespace after
      * @return true if can be open delimiter
      */
     boolean canBeCloser(final String before, final String after, boolean leftFlanking, boolean rightFlanking, boolean beforeIsPunctuation, boolean afterIsPunctuation, boolean beforeIsWhitespace, boolean afterIsWhiteSpace);
 
     /**
      * Whether to skip delimiters that cannot be openers or closers
+     *
      * @return true if to skip
      */
     boolean skipNonOpenerCloser();

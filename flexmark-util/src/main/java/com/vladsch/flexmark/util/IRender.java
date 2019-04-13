@@ -21,6 +21,7 @@ public interface IRender {
 
     /**
      * Get Options for parsing
+     *
      * @return DataHolder for options
      */
     DataHolder getOptions();

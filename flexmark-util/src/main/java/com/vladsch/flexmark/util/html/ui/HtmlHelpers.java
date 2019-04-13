@@ -74,7 +74,7 @@ public class HtmlHelpers {
     }
 
     public static String toHtmlString(java.awt.Color color) {
-        return (color == null) ? "#000000" : String.format("#%02x%02x%02x", color.getRed(),color.getGreen(),color.getBlue());
+        return (color == null) ? "#000000" : String.format("#%02x%02x%02x", color.getRed(), color.getGreen(), color.getBlue());
     }
 
     public static java.awt.Color mixedColor(java.awt.Color originalColor, java.awt.Color overlayColor) {
@@ -87,7 +87,7 @@ public class HtmlHelpers {
         //hsbMixed[1] = hsbColor[1].rangeLimit(hsbError[1].max(0.3f).min(0.5f), 1.0f)
         //hsbMixed[2] = hsbColor[2].rangeLimit(hsbError[2].max(0.3f).min(0.5f), 1.0f)
         //return Color.getHSBColor(hsbMixed[0], hsbMixed[1], hsbMixed[2])
-        
+
         // incorrect translation from kotlin
         //hsbMixed[0] = hsbError[0];
         //hsbMixed[1] = min(max(rangeLimit(hsbColor[1], hsbError[1], 0.3f), 0.5f), 1.0f);

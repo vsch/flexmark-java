@@ -1,12 +1,12 @@
 package com.vladsch.flexmark.test;
 
-import com.vladsch.flexmark.util.IParse;
-import com.vladsch.flexmark.util.IRender;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.ParserEmulationProfile;
 import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.spec.SpecReader;
+import com.vladsch.flexmark.util.IParse;
+import com.vladsch.flexmark.util.IRender;
 import com.vladsch.flexmark.util.KeepType;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.MutableDataSet;

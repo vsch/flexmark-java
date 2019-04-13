@@ -8,8 +8,8 @@ public interface DataHolder {
     Collection<DataKey> keySet();
     boolean contains(DataKey key);
     <T> T get(DataKey<T> key);
-    
+
     MutableDataHolder toMutable();
-    
+
     DataHolder toImmutable();
 }

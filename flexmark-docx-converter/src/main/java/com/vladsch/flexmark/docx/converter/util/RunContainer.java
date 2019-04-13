@@ -13,6 +13,7 @@ public interface RunContainer {
 
     /**
      * Get the last R of the container or null if there is none
+     *
      * @return last R or none
      */
     R getLastR();

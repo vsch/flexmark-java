@@ -38,7 +38,7 @@ public class GitLabInlineMathParser implements InlineParserExtension {
 
                 BasedSequence mathOpen = input.subSequence(matcher.start(), matcher.start(1));
                 BasedSequence mathClosed = input.subSequence(matcher.end(1), matcher.end());
-                GitLabInlineMath inlineMath = new GitLabInlineMath(mathOpen, mathOpen.baseSubSequence(mathOpen.getEndOffset(),mathClosed.getStartOffset()), mathClosed);
+                GitLabInlineMath inlineMath = new GitLabInlineMath(mathOpen, mathOpen.baseSubSequence(mathOpen.getEndOffset(), mathClosed.getStartOffset()), mathClosed);
                 inlineParser.getBlock().appendChild(inlineMath);
                 return true;
             }

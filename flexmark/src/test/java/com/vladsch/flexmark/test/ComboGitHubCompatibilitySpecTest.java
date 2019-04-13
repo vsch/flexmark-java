@@ -23,8 +23,7 @@ public class ComboGitHubCompatibilitySpecTest extends ComboExtraSpecTest {
             .set(HtmlRenderer.INDENT_SIZE, 4)
             .set(HtmlRenderer.PERCENT_ENCODE_URLS, true)
             .set(HtmlRenderer.RENDER_HEADER_ID, true)
-            .set(HtmlRenderer.SOFT_BREAK, " ")
-            ;
+            .set(HtmlRenderer.SOFT_BREAK, " ");
 
     private static final Map<String, DataHolder> optionsMap = new HashMap<String, DataHolder>();
     static {

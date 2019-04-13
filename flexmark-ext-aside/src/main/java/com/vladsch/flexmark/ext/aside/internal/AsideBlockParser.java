@@ -1,13 +1,13 @@
 package com.vladsch.flexmark.ext.aside.internal;
 
 import com.vladsch.flexmark.ast.ListItem;
-import com.vladsch.flexmark.parser.Parser;
-import com.vladsch.flexmark.parser.core.*;
-import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.ast.util.Parsing;
 import com.vladsch.flexmark.ext.aside.AsideBlock;
 import com.vladsch.flexmark.ext.aside.AsideExtension;
+import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.block.*;
+import com.vladsch.flexmark.parser.core.*;
+import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
@@ -124,7 +124,7 @@ public class AsideBlockParser extends AbstractBlockParser {
         @SuppressWarnings("UnnecessaryLocalVariable")
         @Override
         public Set<Class<? extends CustomBlockParserFactory>> getAfterDependents() {
-            HashSet<Class<? extends  CustomBlockParserFactory>> set = new HashSet<Class<? extends CustomBlockParserFactory>>();
+            HashSet<Class<? extends CustomBlockParserFactory>> set = new HashSet<Class<? extends CustomBlockParserFactory>>();
             //set.add(BlockQuoteParser.Factory.class);
             return set;
         }
@@ -158,12 +158,13 @@ public class AsideBlockParser extends AbstractBlockParser {
         private final boolean interruptsParagraph;
         private final boolean interruptsItemParagraph;
         private final boolean withLeadSpacesInterruptsItemParagraph;
+
         BlockFactory(DataHolder options) {
             super(options);
-            allowLeadingSpace = AsideExtension.ALLOW_LEADING_SPACE.getFrom( options);
-            interruptsParagraph = AsideExtension.INTERRUPTS_PARAGRAPH.getFrom( options);
-            interruptsItemParagraph = AsideExtension.INTERRUPTS_ITEM_PARAGRAPH.getFrom( options);
-            withLeadSpacesInterruptsItemParagraph = AsideExtension.WITH_LEAD_SPACES_INTERRUPTS_ITEM_PARAGRAPH.getFrom( options);
+            allowLeadingSpace = AsideExtension.ALLOW_LEADING_SPACE.getFrom(options);
+            interruptsParagraph = AsideExtension.INTERRUPTS_PARAGRAPH.getFrom(options);
+            interruptsItemParagraph = AsideExtension.INTERRUPTS_ITEM_PARAGRAPH.getFrom(options);
+            withLeadSpacesInterruptsItemParagraph = AsideExtension.WITH_LEAD_SPACES_INTERRUPTS_ITEM_PARAGRAPH.getFrom(options);
         }
 
         public BlockStart tryStart(ParserState state, MatchedBlockParser matchedBlockParser) {

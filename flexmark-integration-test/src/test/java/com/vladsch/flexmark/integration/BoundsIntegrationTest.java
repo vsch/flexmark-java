@@ -1,9 +1,9 @@
 package com.vladsch.flexmark.integration;
 
-import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.spec.SpecReader;
+import com.vladsch.flexmark.util.ast.Node;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -32,7 +32,7 @@ public class BoundsIntegrationTest {
         List<SpecExample> examples = SpecReader.readExamples();
         List<Object[]> data = new ArrayList<Object[]>();
         for (SpecExample example : examples) {
-            data.add(new Object[]{example.getSource()});
+            data.add(new Object[] { example.getSource() });
         }
         return data;
     }

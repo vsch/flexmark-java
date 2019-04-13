@@ -1,6 +1,9 @@
 package com.vladsch.flexmark.ext.gitlab.internal;
 
-import com.vladsch.flexmark.ast.*;
+import com.vladsch.flexmark.ast.FencedCodeBlock;
+import com.vladsch.flexmark.ast.Image;
+import com.vladsch.flexmark.ast.ImageRef;
+import com.vladsch.flexmark.ast.Reference;
 import com.vladsch.flexmark.ast.util.ReferenceRepository;
 import com.vladsch.flexmark.ast.util.TextCollectingVisitor;
 import com.vladsch.flexmark.ext.gitlab.GitLabBlockQuote;
@@ -130,7 +133,7 @@ public class GitLabNodeRenderer implements NodeRenderer
 
         pos = bareUrl.lastIndexOf('.');
         if (pos != -1) {
-            String extension = bareUrl.substring(pos+1);
+            String extension = bareUrl.substring(pos + 1);
             if (options.videoImageExtensionSet.contains(extension)) {
                 //<div class="video-container">
                 //<video src="video.mp4" width="400" controls="true"></video>
@@ -143,7 +146,7 @@ public class GitLabNodeRenderer implements NodeRenderer
                         html.srcPos(srcNode.getChars())
                                 .attr("src", url)
                                 .attr("width", "400")
-                                .attr("controls","true")
+                                .attr("controls", "true")
                                 .withAttr(VIDEO)
                                 .tag("video")
                                 .tag("/video")
@@ -153,8 +156,8 @@ public class GitLabNodeRenderer implements NodeRenderer
                             html.tag("p")
                                     .attr("href", url)
                                     .attr("target", "_blank")
-                                    .attr("rel","noopener noreferrer")
-                                    .attr("title",String.format(options.videoImageLinkTextFormat, altText))
+                                    .attr("rel", "noopener noreferrer")
+                                    .attr("title", String.format(options.videoImageLinkTextFormat, altText))
                                     .withAttr(VIDEO_LINK)
                                     .tag("a")
                                     .text(altText)

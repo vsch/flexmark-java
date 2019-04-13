@@ -1,13 +1,13 @@
 package com.vladsch.flexmark.ext.definition.internal;
 
-import com.vladsch.flexmark.ast.*;
+import com.vladsch.flexmark.ast.Paragraph;
 import com.vladsch.flexmark.ast.util.Parsing;
 import com.vladsch.flexmark.ext.definition.DefinitionItem;
-import com.vladsch.flexmark.parser.core.DocumentBlockParser;
-import com.vladsch.flexmark.parser.core.ParagraphParser;
 import com.vladsch.flexmark.parser.InlineParser;
 import com.vladsch.flexmark.parser.ParserEmulationProfile;
 import com.vladsch.flexmark.parser.block.*;
+import com.vladsch.flexmark.parser.core.DocumentBlockParser;
+import com.vladsch.flexmark.parser.core.ParagraphParser;
 import com.vladsch.flexmark.util.ast.BlankLine;
 import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.util.ast.Document;

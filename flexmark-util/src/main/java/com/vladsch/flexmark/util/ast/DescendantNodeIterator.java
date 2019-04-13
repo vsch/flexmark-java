@@ -70,7 +70,7 @@ public class DescendantNodeIterator implements ReversiblePeekingIterator<Node> {
     }
 
     public void forEachRemaining(Consumer<? super Node> consumer) {
-        if ( consumer == null)
+        if (consumer == null)
             throw new NullPointerException();
 
         while (hasNext()) {

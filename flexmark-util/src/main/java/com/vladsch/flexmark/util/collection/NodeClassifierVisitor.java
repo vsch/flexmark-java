@@ -1,10 +1,10 @@
 package com.vladsch.flexmark.util.collection;
 
+import com.vladsch.flexmark.util.Computable;
+import com.vladsch.flexmark.util.NodeTracker;
 import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.ast.NodeVisitorBase;
-import com.vladsch.flexmark.util.Computable;
-import com.vladsch.flexmark.util.NodeTracker;
 
 import java.util.*;
 
@@ -63,7 +63,7 @@ public class NodeClassifierVisitor extends NodeVisitorBase implements NodeTracke
                 if (parentIndex == -1) {
                     throw new IllegalStateException("Parent node: " + node.getParent() + " of " + node + " is not tracked, some post processor forgot to call tracker.nodeAdded().");
                 }
-    
+
                 BitSet ancestorBitSet = myNodeAncestryMap.get(parentIndex);
                 myNodeAncestryBitSet.setValue(ancestorBitSet);
             }

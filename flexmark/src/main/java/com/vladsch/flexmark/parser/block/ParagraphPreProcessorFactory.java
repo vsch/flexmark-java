@@ -11,5 +11,6 @@ public interface ParagraphPreProcessorFactory extends ComputableFactory<Paragrap
      * @param state parser state, document blocks have already been parsed at this stage
      * @return block pre-processor
      */
-    @Override ParagraphPreProcessor create(ParserState state);
+    @Override
+    ParagraphPreProcessor create(ParserState state);
 }

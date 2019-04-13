@@ -23,7 +23,7 @@ public class TemplateUtil {
         public MappedResolver() {
             this(new HashMap<String, String>());
         }
-        
+
         public MappedResolver set(String name, String value) {
             myMap.put(name, value);
             return this;

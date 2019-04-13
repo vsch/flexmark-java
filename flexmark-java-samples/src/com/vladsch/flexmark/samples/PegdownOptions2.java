@@ -1,10 +1,10 @@
 package com.vladsch.flexmark.samples;
 
-import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.profiles.pegdown.Extensions;
 import com.vladsch.flexmark.profiles.pegdown.PegdownOptionsAdapter;
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.options.MutableDataHolder;
 
 public class PegdownOptions2 {
@@ -31,7 +31,6 @@ public class PegdownOptions2 {
         Node document = PARSER.parse(data);
         processed = RENDERER.render(document);
     }
-
     public static void main(String[] args) {
         final MutableDataHolder OPTIONS = PegdownOptionsAdapter.flexmarkOptions(
                 Extensions.ALL - (headerLinks ? 0 : Extensions.ANCHORLINKS)

@@ -4,15 +4,14 @@ import java.util.ArrayList;
 
 /**
  * Class which tracks text replacements to provide original offset from modified offset.
- *
+ * <p>
  * This is needed when the original based sequence needs to be un-escaped but offsets to original escaped text
  * are needed.
- *
+ * <p>
  * These replacements can be nested so that you can track replacements of replaced text.
  * To add nested replacements use startNestedReplacement()
- *
+ * <p>
  * when isModified() returns true then the text mapper is already used and nested replacements need to be applied
- *
  */
 public class ReplacedTextMapper {
     private ReplacedTextMapper parent;

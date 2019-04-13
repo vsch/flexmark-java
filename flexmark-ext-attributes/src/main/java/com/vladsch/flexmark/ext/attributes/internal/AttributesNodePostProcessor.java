@@ -88,8 +88,8 @@ public class AttributesNodePostProcessor extends NodePostProcessor {
         } else {
             if ((!myOptions.assignTextAttributes && (previous instanceof Text || previous instanceof TextBase)) || previous.getChars().getEndOffset() < attributesNode.getStartOffset()) {
                 // either previous is text and no text attributes or not attached to the previous node
-                // then attributes go to parent unless overridden by delimited attribute spans 
-                
+                // then attributes go to parent unless overridden by delimited attribute spans
+
                 if (myOptions.useEmptyImplicitAsSpanDelimiter) {
                     // find first previous not delimited by unmatched attribute
                     previous = matchDelimitedSpans(state, attributesNode, previous);
@@ -207,7 +207,7 @@ public class AttributesNodePostProcessor extends NodePostProcessor {
                 previous = previousNext;
             }
         }
-        
+
         return previous;
     }
 
@@ -223,7 +223,7 @@ public class AttributesNodePostProcessor extends NodePostProcessor {
         lastNode.insertBefore(textBase);
         state.nodeAddedWithDescendants(textBase);
     }
-    
+
     @Override
     public void process(NodeTracker state, Node node) {
         if (node instanceof AttributesNode) {

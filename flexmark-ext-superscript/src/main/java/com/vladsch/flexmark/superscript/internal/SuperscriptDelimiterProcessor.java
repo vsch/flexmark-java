@@ -1,11 +1,11 @@
 package com.vladsch.flexmark.superscript.internal;
 
-import com.vladsch.flexmark.util.ast.Node;
-import com.vladsch.flexmark.parser.core.delimiter.Delimiter;
 import com.vladsch.flexmark.parser.InlineParser;
+import com.vladsch.flexmark.parser.core.delimiter.Delimiter;
 import com.vladsch.flexmark.parser.delimiter.DelimiterProcessor;
 import com.vladsch.flexmark.parser.delimiter.DelimiterRun;
 import com.vladsch.flexmark.superscript.Superscript;
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 public class SuperscriptDelimiterProcessor implements DelimiterProcessor {

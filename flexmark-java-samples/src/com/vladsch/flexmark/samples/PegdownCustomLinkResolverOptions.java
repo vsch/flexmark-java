@@ -1,7 +1,6 @@
 package com.vladsch.flexmark.samples;
 
 import com.vladsch.flexmark.ast.Link;
-import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.ext.wikilink.WikiImage;
 import com.vladsch.flexmark.ext.wikilink.WikiLink;
 import com.vladsch.flexmark.html.*;
@@ -9,6 +8,7 @@ import com.vladsch.flexmark.html.renderer.*;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.profiles.pegdown.Extensions;
 import com.vladsch.flexmark.profiles.pegdown.PegdownOptionsAdapter;
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.MutableDataHolder;
 
@@ -108,7 +108,9 @@ public class PegdownCustomLinkResolverOptions {
                 // return null if renderer does not delegate or delegates only to core node renderer
                 return null;
             }
-        };
+        }
+
+        ;
 
         @Override
         public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
@@ -143,7 +145,6 @@ public class PegdownCustomLinkResolverOptions {
             return set;
         }
     }
-
 
     // use the PARSER to parse and RENDERER to render with pegdown compatibility
     public static void main(String[] args) {

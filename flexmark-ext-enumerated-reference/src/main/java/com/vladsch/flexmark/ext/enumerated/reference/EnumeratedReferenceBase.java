@@ -1,9 +1,9 @@
 package com.vladsch.flexmark.ext.enumerated.reference;
 
-import com.vladsch.flexmark.ast.*;
-import com.vladsch.flexmark.util.ast.Node;
+import com.vladsch.flexmark.ast.DelimitedNode;
 import com.vladsch.flexmark.util.ast.DoNotDecorate;
 import com.vladsch.flexmark.util.ast.Document;
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.ast.ReferencingNode;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 

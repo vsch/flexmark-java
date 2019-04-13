@@ -1,19 +1,19 @@
 package com.vladsch.flexmark.ext.enumerated.reference.internal;
 
 import com.vladsch.flexmark.ast.Heading;
+import com.vladsch.flexmark.ext.attributes.AttributeNode;
+import com.vladsch.flexmark.ext.attributes.AttributesNode;
+import com.vladsch.flexmark.ext.enumerated.reference.EnumeratedReferenceExtension;
 import com.vladsch.flexmark.ext.enumerated.reference.EnumeratedReferenceRepository;
 import com.vladsch.flexmark.ext.enumerated.reference.EnumeratedReferenceText;
 import com.vladsch.flexmark.ext.enumerated.reference.EnumeratedReferences;
 import com.vladsch.flexmark.html.renderer.HeaderIdGenerator;
 import com.vladsch.flexmark.html.renderer.HtmlIdGenerator;
-import com.vladsch.flexmark.util.ast.Document;
-import com.vladsch.flexmark.util.ast.Node;
-import com.vladsch.flexmark.ext.attributes.AttributeNode;
-import com.vladsch.flexmark.ext.attributes.AttributesNode;
-import com.vladsch.flexmark.ext.enumerated.reference.EnumeratedReferenceExtension;
 import com.vladsch.flexmark.parser.block.NodePostProcessor;
 import com.vladsch.flexmark.parser.block.NodePostProcessorFactory;
 import com.vladsch.flexmark.util.NodeTracker;
+import com.vladsch.flexmark.util.ast.Document;
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 public class EnumeratedReferenceNodePostProcessor extends NodePostProcessor {
@@ -47,7 +47,7 @@ public class EnumeratedReferenceNodePostProcessor extends NodePostProcessor {
                     BasedSequence text = ((EnumeratedReferenceText) child).getText();
                     String type = EnumeratedReferenceRepository.getType(text.toString());
                     if (type.isEmpty() || text.equals(type + ":")) {
-                        String id = (type.isEmpty() ? text : type) + ":" + headerIdGenerator.getId(node); 
+                        String id = (type.isEmpty() ? text : type) + ":" + headerIdGenerator.getId(node);
                         enumeratedReferences.add(id);
                     }
                 }

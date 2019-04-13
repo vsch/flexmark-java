@@ -1,6 +1,9 @@
 package com.vladsch.flexmark.parser.core;
 
-import com.vladsch.flexmark.ast.*;
+import com.vladsch.flexmark.ast.BulletList;
+import com.vladsch.flexmark.ast.ListBlock;
+import com.vladsch.flexmark.ast.ListItem;
+import com.vladsch.flexmark.ast.OrderedList;
 import com.vladsch.flexmark.ast.util.Parsing;
 import com.vladsch.flexmark.parser.ListOptions;
 import com.vladsch.flexmark.parser.ParserEmulationProfile;
@@ -124,7 +127,7 @@ public class ListBlockParser extends AbstractBlockParser {
         if (state.getProperties().get(BLANK_LINES_IN_AST)) {
             // need to transfer trailing blank line nodes from last item to parent list
             ListBlock block = getBlock();
-            
+
             Node child = block.getFirstChildAnyNot(BlankLine.class);
 
             while (child instanceof ListItem) {

@@ -1,7 +1,5 @@
 package com.vladsch.flexmark.docx.converter;
 
-import com.vladsch.flexmark.util.IRender;
-import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.docx.converter.util.DocxContextImpl;
 import com.vladsch.flexmark.docx.converter.util.RunFormatProvider;
 import com.vladsch.flexmark.docx.converter.util.XmlDocxSorter;
@@ -26,6 +24,8 @@ import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.spec.SpecReader;
 import com.vladsch.flexmark.superscript.SuperscriptExtension;
 import com.vladsch.flexmark.test.ComboSpecTestCase;
+import com.vladsch.flexmark.util.IRender;
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.html.Attributes;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.MutableDataSet;
@@ -84,7 +84,6 @@ public class ComboDeDocxConverterSpecTest extends ComboSpecTestCase {
     // The spec says URL-escaping is optional, but the examples assume that it's enabled.
     private static final DocxRenderer RENDERER = DocxRenderer.builder(OPTIONS).build();
     private static final String TEMPLATE_XML = "/DE-Template.xml";
-
     static {
         //optionsMap.put("src-pos", new MutableDataSet().set(HtmlRenderer.SOURCE_POSITION_ATTRIBUTE, "md-pos"));
         //optionsMap.put("option1", new MutableDataSet().set(DocxConverterExtension.DOCX_CONVERTER_OPTION1, true));

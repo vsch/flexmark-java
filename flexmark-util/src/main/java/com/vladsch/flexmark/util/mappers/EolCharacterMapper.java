@@ -7,5 +7,4 @@ public class EolCharacterMapper implements CharMapper {
     public char map(char c) {
         return '\n';
     }
-
 }

@@ -1,9 +1,9 @@
 package com.vladsch.flexmark.parser.core;
 
-import com.vladsch.flexmark.util.ast.BlockContent;
 import com.vladsch.flexmark.ast.Paragraph;
 import com.vladsch.flexmark.parser.InlineParser;
 import com.vladsch.flexmark.parser.block.*;
+import com.vladsch.flexmark.util.ast.BlockContent;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 public class ParagraphParser extends AbstractBlockParser {

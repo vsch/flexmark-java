@@ -4,7 +4,7 @@ import org.junit.runners.Suite;
 
 @org.junit.runner.RunWith(Suite.class)
 @Suite.SuiteClasses({
-    BoundsIntegrationTest.class,
+        BoundsIntegrationTest.class,
         SpecIntegrationTest.class,
         ComboParserTest.class,
 })

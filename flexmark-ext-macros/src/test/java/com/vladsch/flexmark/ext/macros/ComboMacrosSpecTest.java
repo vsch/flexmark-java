@@ -23,8 +23,7 @@ public class ComboMacrosSpecTest extends ComboSpecTestCase {
             .set(GitLabExtension.RENDER_BLOCK_MERMAID, false)
             .set(GitLabExtension.DEL_PARSER, false)
             .set(GitLabExtension.INS_PARSER, false)
-            .set(GitLabExtension.RENDER_VIDEO_IMAGES, false)
-            ;
+            .set(GitLabExtension.RENDER_VIDEO_IMAGES, false);
 
     private static final Map<String, DataHolder> optionsMap = new HashMap<String, DataHolder>();
     static {

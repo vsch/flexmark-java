@@ -1,6 +1,5 @@
 package com.vladsch.flexmark.ext.youtube.embedded.internal;
 
-import com.vladsch.flexmark.ast.Link;
 import com.vladsch.flexmark.ext.youtube.embedded.YouTubeLink;
 import com.vladsch.flexmark.html.CustomNodeRenderer;
 import com.vladsch.flexmark.html.HtmlWriter;
@@ -43,7 +42,7 @@ public class YouTubeLinkNodeRenderer implements NodeRenderer {
                 url = new URL(resolvedLink.getUrl());
             } catch (MalformedURLException e) {
             }
-            
+
             if (url != null && "youtu.be".equalsIgnoreCase(url.getHost())) {
                 html.attr("src", "https://www.youtube-nocookie.com/embed" + url.getFile().replace("?t=", "?start="));
                 html.attr("width", "560");

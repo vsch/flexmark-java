@@ -68,7 +68,8 @@ public class DocxHelper {
         ADD_OTHER,
         MAX_OTHER,
         MIN_OTHER,
-        RANGE,;
+        RANGE,
+        ;
 
         BigInteger combine(BigInteger orig, BigInteger copy, BigInteger other) {
             if (this == ADD) {

@@ -33,6 +33,6 @@ public class LinkStatus {
     }
 
     public boolean isStatus(CharSequence status) {
-        return myName.equals(status instanceof String ? (String)status:String.valueOf(status));
+        return myName.equals(status instanceof String ? (String) status : String.valueOf(status));
     }
 }

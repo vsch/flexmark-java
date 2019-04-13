@@ -199,7 +199,7 @@ public class OrderedMultiMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V
 
         myInKeyUpdate = true;
         if (myHost != null && !myHost.skipHostUpdate()) {
-            myHost.removing(index, new Pair<K, V>((K)null, v));
+            myHost.removing(index, new Pair<K, V>((K) null, v));
         }
         Object r = myKeySet.removeIndexHosted(index);
         myInKeyUpdate = false;

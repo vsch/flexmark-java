@@ -1,10 +1,10 @@
 package com.vladsch.flexmark.ext.gfm.strikethrough;
 
-import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.test.RenderingTestCase;
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.builder.Extension;
 import org.junit.Test;
 
@@ -26,54 +26,54 @@ public class StrikethroughTest extends RenderingTestCase {
 
     @Test
     public void oneTildeIsNotEnough() {
-        assertRendering( "~foo~", "<p>~foo~</p>\n");
+        assertRendering("~foo~", "<p>~foo~</p>\n");
     }
 
     @Test
     public void twoTildesYay() {
-        assertRendering( "~~foo~~", "<p><del>foo</del></p>\n");
+        assertRendering("~~foo~~", "<p><del>foo</del></p>\n");
     }
 
     @Test
     public void fourTildesNope() {
-        assertRendering( "foo ~~~~", "<p>foo ~~~~</p>\n");
+        assertRendering("foo ~~~~", "<p>foo ~~~~</p>\n");
     }
 
     @Test
     public void unmatched() {
-        assertRendering( "~~foo", "<p>~~foo</p>\n");
-        assertRendering( "foo~~", "<p>foo~~</p>\n");
+        assertRendering("~~foo", "<p>~~foo</p>\n");
+        assertRendering("foo~~", "<p>foo~~</p>\n");
     }
 
     @Test
     public void threeInnerThree() {
-        assertRendering( "~~~foo~~~", "<p>~<del>foo</del>~</p>\n");
+        assertRendering("~~~foo~~~", "<p>~<del>foo</del>~</p>\n");
     }
 
     @Test
     public void twoInnerThree() {
-        assertRendering( "~~foo~~~", "<p><del>foo</del>~</p>\n");
+        assertRendering("~~foo~~~", "<p><del>foo</del>~</p>\n");
     }
 
     @Test
     public void tildesInside() {
-        assertRendering( "~~foo~bar~~", "<p><del>foo~bar</del></p>\n");
-        assertRendering( "~~foo~~bar~~", "<p><del>foo</del>bar~~</p>\n");
-        assertRendering( "~~foo~~~bar~~", "<p><del>foo</del>~bar~~</p>\n");
-        assertRendering( "~~foo~~~~bar~~", "<p><del>foo</del><del>bar</del></p>\n");
-        assertRendering( "~~foo~~~~~bar~~", "<p><del>foo</del>~<del>bar</del></p>\n");
-        assertRendering( "~~foo~~~~~~bar~~", "<p><del>foo</del>~~<del>bar</del></p>\n");
-        assertRendering( "~~foo~~~~~~~bar~~", "<p><del>foo</del>~~~<del>bar</del></p>\n");
+        assertRendering("~~foo~bar~~", "<p><del>foo~bar</del></p>\n");
+        assertRendering("~~foo~~bar~~", "<p><del>foo</del>bar~~</p>\n");
+        assertRendering("~~foo~~~bar~~", "<p><del>foo</del>~bar~~</p>\n");
+        assertRendering("~~foo~~~~bar~~", "<p><del>foo</del><del>bar</del></p>\n");
+        assertRendering("~~foo~~~~~bar~~", "<p><del>foo</del>~<del>bar</del></p>\n");
+        assertRendering("~~foo~~~~~~bar~~", "<p><del>foo</del>~~<del>bar</del></p>\n");
+        assertRendering("~~foo~~~~~~~bar~~", "<p><del>foo</del>~~~<del>bar</del></p>\n");
     }
 
     @Test
     public void strikethroughWholeParagraphWithOtherDelimiters() {
-        assertRendering( "~~Paragraph with *emphasis* and __strong emphasis__~~", "<p><del>Paragraph with <em>emphasis</em> and <strong>strong emphasis</strong></del></p>\n");
+        assertRendering("~~Paragraph with *emphasis* and __strong emphasis__~~", "<p><del>Paragraph with <em>emphasis</em> and <strong>strong emphasis</strong></del></p>\n");
     }
 
     @Test
     public void insideBlockQuote() {
-        assertRendering( "> strike ~~that~~", "<blockquote>\n<p>strike <del>that</del></p>\n</blockquote>\n");
+        assertRendering("> strike ~~that~~", "<blockquote>\n<p>strike <del>that</del></p>\n</blockquote>\n");
     }
 
     @Test

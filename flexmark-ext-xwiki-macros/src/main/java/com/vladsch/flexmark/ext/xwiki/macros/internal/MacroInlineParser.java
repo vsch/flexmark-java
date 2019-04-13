@@ -101,7 +101,7 @@ public class MacroInlineParser implements InlineParserExtension {
                             BasedSequence attributeClose = !isQuoted ? BasedSequence.NULL : attributeValue.endSequence(1, 0);
 
                             if (isQuoted) {
-                                attributeValue = attributeValue.midSequence(1,-1);
+                                attributeValue = attributeValue.midSequence(1, -1);
                             }
 
                             MacroAttribute attribute = new MacroAttribute(attributeName, attributeSeparator, attributeOpen, attributeValue, attributeClose);

@@ -262,7 +262,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         assertEquals(2, table4.getMaxColumnsWithoutRows(true, 0, 1, 2, 3, 4, 5,    7, 8));
         assertEquals(3, table4.getMaxColumnsWithoutRows(true, 0, 1, 2, 3, 4, 5, 6,    8));
         assertEquals(4, table4.getMaxColumnsWithoutRows(true, 0, 1, 2, 3, 4, 5, 6, 7   ));
-   
+
         assertEquals(0, table4.getMaxColumnsWithoutRows(false, 0, 1, 2, 3, 4, 5, 6, 7));
         assertEquals(1, table4.getMaxColumnsWithoutRows(false,    1, 2, 3, 4, 5, 6, 7));
         assertEquals(2, table4.getMaxColumnsWithoutRows(false, 0,    2, 3, 4, 5, 6, 7));
@@ -2510,7 +2510,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         BasedSequence source = BasedSequenceImpl.of(markdown.substring(0, pos) + markdown.substring(pos + 1));
         MarkdownTable table = getTable(source, formatOptions("", null).toMutable().set(TablesExtension.FORMAT_TABLE_FILL_MISSING_COLUMNS, false));
         table.fillMissingColumns();
-        
+
         assertTrue(table.addTrackedOffset(pos, true, true));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.FORMAT_ALL);
         table.appendTable(out);
@@ -2549,7 +2549,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         BasedSequence source = BasedSequenceImpl.of(markdown.substring(0, pos) + markdown.substring(pos + 1));
         MarkdownTable table = getTable(source, formatOptions("", null).toMutable().set(TablesExtension.FORMAT_TABLE_FILL_MISSING_COLUMNS, false).set(TablesExtension.FORMAT_TABLE_INDENT_PREFIX, "    "));
         table.fillMissingColumns();
-        
+
         assertTrue(table.addTrackedOffset(pos, true, true));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.FORMAT_ALL);
         table.appendTable(out);

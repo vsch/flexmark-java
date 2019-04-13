@@ -13,8 +13,8 @@ public interface ParaContainer {
 
     /**
      * Get the last P of the container or null if there is none
+     *
      * @return last P or none
      */
     P getLastP();
-
 }

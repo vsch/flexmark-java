@@ -21,5 +21,4 @@ public interface CharWidthProvider {
             return s.length();
         }
     };
-
 }

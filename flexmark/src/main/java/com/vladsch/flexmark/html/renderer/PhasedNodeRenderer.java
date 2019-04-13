@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.html.renderer;
 
-import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.html.HtmlWriter;
+import com.vladsch.flexmark.util.ast.Document;
 
 import java.util.Set;
 

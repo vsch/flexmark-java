@@ -101,7 +101,7 @@ public class PostProcessorManager {
                         if (excluded != null) {
                             index = classifyingNodeTracker.getItems().indexOf(node);
                             if (index != -1) {
-                                 nodeAncestors = classifyingNodeTracker.getNodeAncestryMap().get(index);
+                                nodeAncestors = classifyingNodeTracker.getNodeAncestryMap().get(index);
                                 if (nodeAncestors != null) {
                                     nodeExclusions = classifyingNodeTracker.getExclusionSet().indexBitSet(excluded);
                                     nodeExclusions.and(nodeAncestors);

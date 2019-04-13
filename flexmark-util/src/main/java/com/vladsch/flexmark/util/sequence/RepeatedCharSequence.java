@@ -4,11 +4,11 @@ package com.vladsch.flexmark.util.sequence;
  * CharSequence that repeats in a wraparound the given sequence.
  * <p>
  * Partial repeat occurs when start % length() &gt;0 and/or end % length() &gt;0
- *
+ * <p>
  * The hashCode is purposefully matched to the string equivalent or this.toString().hashCode()
  */
 public class RepeatedCharSequence implements CharSequence {
-    public static RepeatedCharSequence NULL = new RepeatedCharSequence(SubSequence.NULL,0, 0);
+    public static RepeatedCharSequence NULL = new RepeatedCharSequence(SubSequence.NULL, 0, 0);
 
     private final CharSequence myChars;
     private final int myStartIndex;
@@ -43,7 +43,7 @@ public class RepeatedCharSequence implements CharSequence {
 
     public RepeatedCharSequence repeat(int count) {
         final int endIndex = myStartIndex + (myEndIndex - myStartIndex) * count;
-        return myStartIndex >= myEndIndex ? NULL  : myEndIndex == endIndex ? this : new RepeatedCharSequence(myChars, myStartIndex, endIndex);
+        return myStartIndex >= myEndIndex ? NULL : myEndIndex == endIndex ? this : new RepeatedCharSequence(myChars, myStartIndex, endIndex);
     }
 
     @Override

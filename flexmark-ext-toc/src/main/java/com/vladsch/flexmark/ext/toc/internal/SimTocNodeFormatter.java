@@ -1,9 +1,9 @@
 package com.vladsch.flexmark.ext.toc.internal;
 
-import com.vladsch.flexmark.formatter.*;
-import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.ext.toc.SimTocBlock;
 import com.vladsch.flexmark.ext.toc.SimTocContent;
+import com.vladsch.flexmark.formatter.*;
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.format.MarkdownTable;
 import com.vladsch.flexmark.util.format.TableFormatOptions;
 import com.vladsch.flexmark.util.options.DataHolder;

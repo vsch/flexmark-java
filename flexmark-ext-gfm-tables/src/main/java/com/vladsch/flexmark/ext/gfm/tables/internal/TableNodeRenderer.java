@@ -70,7 +70,7 @@ public class TableNodeRenderer implements NodeRenderer {
     }
 
     private void render(final TableHead tableHead, final NodeRendererContext context, HtmlWriter html) {
-        if(!tableHead.hasChildren()) {
+        if (!tableHead.hasChildren()) {
             return;
         }
 
@@ -87,7 +87,7 @@ public class TableNodeRenderer implements NodeRenderer {
     }
 
     private void render(final TableBody tableBody, final NodeRendererContext context, HtmlWriter html) {
-        if(!tableBody.hasChildren()) {
+        if (!tableBody.hasChildren()) {
             return;
         }
 

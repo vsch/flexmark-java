@@ -814,7 +814,7 @@ public class OrderedMultiMapTest {
             final int finalJ = j;
             validator.reset().id(j)
                     .expectRemoving(j, Pair.of(String.valueOf(j), (Integer) null))
-                    .expectRemoving(j, Pair.of((String)null, j))
+                    .expectRemoving(j, Pair.of((String) null, j))
                     .repeat(2).onCond(j == 1).expectClearing()
                     .test(new Runnable() {
                         @Override

@@ -10,8 +10,12 @@ public enum TableConversion {
     HTML;                           // pass through tag as HTML
 
     boolean isParsed() { return this != HTML; }
+
     boolean isTextOnly() { return this == TEXT; }
+
     boolean isSuppressed() { return this == NONE; }
+
     boolean isUnwrapSingleCell() { return this == MARKDOWN_NO_SINGLE_CELL || this == MARKDOWN_MACROS_NO_SINGLE_CELL; }
+
     boolean isMacros() { return this == MARKDOWN_MACROS || this == MARKDOWN_MACROS_NO_SINGLE_CELL; }
 }

@@ -18,9 +18,9 @@ class ZzzzzzOptions implements MutableDataSetter {
 
     @Override
     public MutableDataHolder setIn(final MutableDataHolder dataHolder) {
-        dataHolder.set(ZzzzzzExtension.ZZZZZZ_OPTION1,zzzzzzOption1);
-        dataHolder.set(ZzzzzzExtension.ZZZZZZ_OPTION2,zzzzzzOption2);
-        dataHolder.set(ZzzzzzExtension.ZZZZZZ_OPTION3,zzzzzzOption3);
+        dataHolder.set(ZzzzzzExtension.ZZZZZZ_OPTION1, zzzzzzOption1);
+        dataHolder.set(ZzzzzzExtension.ZZZZZZ_OPTION2, zzzzzzOption2);
+        dataHolder.set(ZzzzzzExtension.ZZZZZZ_OPTION3, zzzzzzOption3);
         return dataHolder;
     }
 }

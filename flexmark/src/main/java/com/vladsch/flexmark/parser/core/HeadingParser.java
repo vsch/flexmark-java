@@ -1,13 +1,13 @@
 package com.vladsch.flexmark.parser.core;
 
-import com.vladsch.flexmark.util.ast.Block;
-import com.vladsch.flexmark.util.ast.BlockContent;
 import com.vladsch.flexmark.ast.Heading;
 import com.vladsch.flexmark.ast.ListItem;
 import com.vladsch.flexmark.ast.util.Parsing;
 import com.vladsch.flexmark.parser.InlineParser;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.block.*;
+import com.vladsch.flexmark.util.ast.Block;
+import com.vladsch.flexmark.util.ast.BlockContent;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
@@ -204,7 +204,7 @@ public class HeadingParser extends AbstractBlockParser {
         final boolean noLeadSpace;
         final boolean canInterruptItemParagraph;
         final int setextMarkerLength;
-    
+
         public HeadingOptions(DataHolder options) {
             this.noAtxSpace = Parser.HEADING_NO_ATX_SPACE.getFrom(options);
             this.noEmptyHeadingWithoutSpace = Parser.HEADING_NO_EMPTY_HEADING_WITHOUT_SPACE.getFrom(options);

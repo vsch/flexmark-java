@@ -27,8 +27,7 @@ public class ComboMacrosFormatterSpecTest extends ComboSpecTestCase {
             .set(GitLabExtension.INS_PARSER, false)
             .set(GitLabExtension.RENDER_VIDEO_IMAGES, false)
             .set(Parser.LISTS_AUTO_LOOSE, false)
-            .set(Parser.BLANK_LINES_IN_AST, true)
-            ;
+            .set(Parser.BLANK_LINES_IN_AST, true);
 
     private static final Map<String, DataHolder> optionsMap = new HashMap<String, DataHolder>();
     static {

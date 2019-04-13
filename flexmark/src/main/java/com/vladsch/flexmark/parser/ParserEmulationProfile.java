@@ -16,7 +16,8 @@ public enum ParserEmulationProfile implements MutableDataSetter {
     GITHUB(COMMONMARK),
     MULTI_MARKDOWN(FIXED_INDENT),
     PEGDOWN(FIXED_INDENT),
-    PEGDOWN_STRICT(FIXED_INDENT),;
+    PEGDOWN_STRICT(FIXED_INDENT),
+    ;
 
     public final ParserEmulationProfile family;
 
@@ -35,10 +36,10 @@ public enum ParserEmulationProfile implements MutableDataSetter {
     }
 
     /**
-     * Key used to hold user pegdown extension selection 
+     * Key used to hold user pegdown extension selection
      */
     public static final DataKey<Integer> PEGDOWN_EXTENSIONS = new DataKey<>("PEGDOWN_EXTENSIONS", PegdownExtensions.ALL);
-    
+
     public MutableListOptions getOptions(final DataHolder dataHolder) {
         if (family == FIXED_INDENT) {
             if (this == MULTI_MARKDOWN) {
@@ -82,8 +83,8 @@ public enum ParserEmulationProfile implements MutableDataSetter {
                         ;
             }
             if (this == PEGDOWN || this == PEGDOWN_STRICT) {
-                int pegdownExtensions = PEGDOWN_EXTENSIONS.getFrom(dataHolder); 
-                
+                int pegdownExtensions = PEGDOWN_EXTENSIONS.getFrom(dataHolder);
+
                 return new MutableListOptions().setParserEmulationFamily(this)
                         .setAutoLoose(false)
                         .setAutoLooseOneLevelLists(false)
@@ -397,7 +398,7 @@ public enum ParserEmulationProfile implements MutableDataSetter {
             ;
         } else if (this == PEGDOWN || this == PEGDOWN_STRICT) {
             int pegdownExtensions = PEGDOWN_EXTENSIONS.getFrom(dataHolder);
-            
+
             getOptions(dataHolder).setIn(dataHolder);
             dataHolder
                     .set(Parser.BLOCK_QUOTE_EXTEND_TO_BLANK_LINE, true)
@@ -418,7 +419,7 @@ public enum ParserEmulationProfile implements MutableDataSetter {
                     .set(HtmlRenderer.SOFT_BREAK, " ")
                     .set(Parser.STRONG_WRAPS_EMPHASIS, true)
                     .set(Parser.LINKS_ALLOW_MATCHED_PARENTHESES, false)
-                    ;
+            ;
 
             if (haveAny(pegdownExtensions, PegdownExtensions.ANCHORLINKS)) {
                 dataHolder.set(HtmlRenderer.RENDER_HEADER_ID, false);
@@ -455,7 +456,7 @@ public enum ParserEmulationProfile implements MutableDataSetter {
         return dataHolder;
     }
 
-    public static boolean haveAny(int extensions,  int mask) {
+    public static boolean haveAny(int extensions, int mask) {
         return (extensions & mask) != 0;
     }
 

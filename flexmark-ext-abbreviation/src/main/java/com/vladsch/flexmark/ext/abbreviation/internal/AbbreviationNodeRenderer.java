@@ -69,5 +69,4 @@ public class AbbreviationNodeRenderer implements NodeRenderer {
             return new AbbreviationNodeRenderer(options);
         }
     }
-
 }

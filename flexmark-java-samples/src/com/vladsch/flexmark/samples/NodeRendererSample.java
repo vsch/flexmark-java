@@ -134,7 +134,6 @@ public class NodeRendererSample {
         }
     }
 
-
     static String commonMark(String markdown) {
         MutableDataHolder options = new MutableDataSet();
         options.set(Parser.EXTENSIONS, Arrays.asList(AutolinkExtension.create(), SampleExtension.create()));

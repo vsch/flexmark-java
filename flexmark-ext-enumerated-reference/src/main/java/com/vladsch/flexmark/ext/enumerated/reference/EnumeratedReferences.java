@@ -1,6 +1,5 @@
 package com.vladsch.flexmark.ext.enumerated.reference;
 
-import com.vladsch.flexmark.ext.enumerated.reference.internal.EnumeratedReferenceNodeRenderer;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.options.DataHolder;
 
@@ -119,11 +118,11 @@ public class EnumeratedReferences {
     public static void renderReferenceOrdinals(EnumeratedReferenceRendering[] renderings, final EnumeratedOrdinalRenderer renderer) {
         renderer.startRendering(renderings);
 
-        // need to accumulate all compound formats and output on final format's [#] 
+        // need to accumulate all compound formats and output on final format's [#]
         final ArrayList<CompoundEnumeratedReferenceRendering> compoundReferences = new ArrayList<>();
-        
-        final EnumeratedReferenceRendering lastRendering = renderings[renderings.length-1];
-        
+
+        final EnumeratedReferenceRendering lastRendering = renderings[renderings.length - 1];
+
         for (EnumeratedReferenceRendering rendering : renderings) {
             int ordinal = rendering.referenceOrdinal;
 
@@ -142,13 +141,13 @@ public class EnumeratedReferences {
                     needSeparator = true;
                 }
             }
-            
+
             compoundReferences.add(new CompoundEnumeratedReferenceRendering(ordinal, rendering.referenceFormat, defaultText, needSeparator));
         }
 
         final int iMax = compoundReferences.size() - 1;
         Runnable wasRunnable = renderer.getEnumOrdinalRunnable();
-        
+
         renderer.setEnumOrdinalRunnable(new Runnable() {
             @Override
             public void run() {
@@ -165,7 +164,7 @@ public class EnumeratedReferences {
         CompoundEnumeratedReferenceRendering rendering = compoundReferences.get(iMax);
         renderer.render(rendering.ordinal, rendering.referenceFormat, rendering.defaultText, rendering.needSeparator);
         renderer.setEnumOrdinalRunnable(wasRunnable);
-        
+
         renderer.endRendering();
     }
 }

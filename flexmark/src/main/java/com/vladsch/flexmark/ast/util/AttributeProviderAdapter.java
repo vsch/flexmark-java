@@ -1,8 +1,8 @@
 package com.vladsch.flexmark.ast.util;
 
+import com.vladsch.flexmark.html.renderer.AttributablePart;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.ast.NodeAdaptedVisitor;
-import com.vladsch.flexmark.html.renderer.AttributablePart;
 import com.vladsch.flexmark.util.html.Attributes;
 
 import java.util.Collection;

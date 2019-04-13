@@ -16,11 +16,11 @@ import com.vladsch.flexmark.util.dependency.FlatDependencyHandler;
 import com.vladsch.flexmark.util.dependency.ResolvedDependencies;
 import com.vladsch.flexmark.util.html.Attributes;
 import com.vladsch.flexmark.util.html.Escaping;
+import com.vladsch.flexmark.util.html.LineFormattingAppendable;
 import com.vladsch.flexmark.util.options.*;
 import com.vladsch.flexmark.util.sequence.TagRange;
 
 import java.util.*;
-import com.vladsch.flexmark.util.html.LineFormattingAppendable;
 
 /**
  * Renders a tree of nodes to HTML.

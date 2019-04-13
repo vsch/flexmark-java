@@ -84,7 +84,6 @@ public class ComboDeDocxConverterSpec2Test extends ComboSpecTestCase {
     // The spec says URL-escaping is optional, but the examples assume that it's enabled.
     private static final DocxRenderer RENDERER = DocxRenderer.builder(OPTIONS).build();
     private static final String TEMPLATE_XML = "/DE-Template.xml";
-
     static {
         //optionsMap.put("src-pos", new MutableDataSet().set(HtmlRenderer.SOURCE_POSITION_ATTRIBUTE, "md-pos"));
         //optionsMap.put("option1", new MutableDataSet().set(DocxConverterExtension.DOCX_CONVERTER_OPTION1, true));

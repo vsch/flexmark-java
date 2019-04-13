@@ -1,6 +1,7 @@
 package com.vladsch.flexmark.ext.zzzzzz.internal;
 
-import com.vladsch.flexmark.ast.*;
+import com.vladsch.flexmark.ast.Text;
+import com.vladsch.flexmark.ast.TextBase;
 import com.vladsch.flexmark.parser.block.NodePostProcessor;
 import com.vladsch.flexmark.parser.block.NodePostProcessorFactory;
 import com.vladsch.flexmark.util.NodeTracker;
@@ -32,13 +33,12 @@ public class ZzzzzzNodePostProcessor extends NodePostProcessor {
                 state.nodeAdded(textBase);
             }
         }
-
     }
 
     public static class Factory extends NodePostProcessorFactory {
         public Factory() {
             super(false);
-            
+
             addNodeWithExclusions(Text.class, DoNotDecorate.class/*, Heading.class*/);
             //addNodes(HtmlBlock.class, HtmlCommentBlock.class);
         }

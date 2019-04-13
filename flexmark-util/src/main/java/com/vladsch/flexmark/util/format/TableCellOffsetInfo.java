@@ -140,7 +140,6 @@ public class TableCellOffsetInfo {
      *
      * @param insideOffset offset inside the cell, null if same as the current cell inside
      *                     offset
-     *
      * @return offset in previous cell or null
      */
     public TableCellOffsetInfo previousCellOffset(Integer insideOffset) {
@@ -161,7 +160,6 @@ public class TableCellOffsetInfo {
      * CAUTION: NOT TESTED
      *
      * @param insideOffset offset inside the cell, null if same as th
-     *
      * @return offset in previous cell or null
      */
     public TableCellOffsetInfo nextCellOffset(Integer insideOffset) {
@@ -181,7 +179,6 @@ public class TableCellOffsetInfo {
      * CAUTION: NOT TESTED
      *
      * @param insideOffset offset inside the cell, null if same as th
-     *
      * @return offset in previous cell or null
      */
     public TableCellOffsetInfo previousRowOffset(Integer insideOffset) {
@@ -212,7 +209,6 @@ public class TableCellOffsetInfo {
      * CAUTION: NOT TESTED
      *
      * @param insideOffset offset inside the cell, null if same as th
-     *
      * @return offset in previous cell or null
      */
     public TableCellOffsetInfo nextRowOffset(Integer insideOffset) {
@@ -241,7 +237,6 @@ public class TableCellOffsetInfo {
      * Available if somewhere in table
      *
      * @param stopPointsMap stop points of interest map by section or null
-     *
      * @return next stop point offset or offset after end of table
      */
     public TableCellOffsetInfo nextOffsetStop(final Map<TableSectionType, Integer> stopPointsMap) {
@@ -265,7 +260,6 @@ public class TableCellOffsetInfo {
      * Available if somewhere in table
      *
      * @param stopPointsMap stop points of interest map by section or null for default
-     *
      * @return previous stop point offset or start of table offset
      */
     public TableCellOffsetInfo previousOffsetStop(final Map<TableSectionType, Integer> stopPointsMap) {
@@ -300,14 +294,13 @@ public class TableCellOffsetInfo {
      * Return the next/previous stop point of interest
      * <p>
      * NOTE: not terribly efficient because it goes through all cells of all rows. Only intended
-     *       for UI use where this is not an issue since it is done per user key
+     * for UI use where this is not an issue since it is done per user key
      *
      * @param offset        current offset
      * @param table         for table
      * @param stopPointsMap map of stop points by section or null for default
      * @param nextOffset    true if next offset stop point, false for previous stop point of
      *                      interest
-     *
      * @return stop point found or -1 if not found
      */
     private static int getStopOffset(

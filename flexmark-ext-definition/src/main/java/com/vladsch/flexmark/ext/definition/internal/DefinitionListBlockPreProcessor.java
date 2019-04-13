@@ -1,12 +1,12 @@
 package com.vladsch.flexmark.ext.definition.internal;
 
-import com.vladsch.flexmark.util.ast.Block;
-import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.ext.definition.DefinitionItem;
 import com.vladsch.flexmark.ext.definition.DefinitionList;
 import com.vladsch.flexmark.parser.block.BlockPreProcessor;
 import com.vladsch.flexmark.parser.block.BlockPreProcessorFactory;
 import com.vladsch.flexmark.parser.block.ParserState;
+import com.vladsch.flexmark.util.ast.Block;
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.options.DataHolder;
 
 import java.util.HashSet;
@@ -24,7 +24,7 @@ public class DefinitionListBlockPreProcessor implements BlockPreProcessor {
     @Override
     public void preProcess(ParserState state, Block block) {
         Boolean blankLinesInAST = state.getProperties().get(BLANK_LINES_IN_AST);
-        
+
         if (block instanceof DefinitionList) {
             // need to propagate loose/tight
             final DefinitionList definitionList = (DefinitionList) block;

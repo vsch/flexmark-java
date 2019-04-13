@@ -97,8 +97,8 @@ public class PdfConverter {
         String html = RENDERER.render(document);
 
         // add embedded fonts for non-latin character set rendering
-        // change file:///usr/local/fonts/ to your system's path for font installation Unix path or 
-        // on windows the path should start with `file:/X:/...` where `X:/...` is the drive 
+        // change file:///usr/local/fonts/ to your system's path for font installation Unix path or
+        // on windows the path should start with `file:/X:/...` where `X:/...` is the drive
         // letter followed by the full installation path.
         //
         // Google Noto fonts can be downloaded from https://www.google.com/get/noto/
@@ -157,10 +157,10 @@ public class PdfConverter {
                 "</body></html>";
 
         PdfConverterExtension.exportToPdf("/Users/vlad/src/pdf/flexmark-java.pdf", html, "", OPTIONS);
-        
+
         // add PDF protection policy
         OPTIONS.set(PdfConverterExtension.PROTECTION_POLICY, new StandardProtectionPolicy("opassword", "upassword", new AccessPermission()));
-        
+
         PdfConverterExtension.exportToPdf("/Users/vlad/src/pdf/flexmark-java-pwd-protected.pdf", html, "", OPTIONS);
         System.out.println("Output PDF to /Users/vlad/src/pdf/flexmark-java-pwd-protected.pdf");
     }

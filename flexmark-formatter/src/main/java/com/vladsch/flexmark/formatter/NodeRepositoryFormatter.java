@@ -123,7 +123,7 @@ public abstract class NodeRepositoryFormatter<R extends NodeRepository<B>, B ext
                     // get all ref nodes and figure out which ones are unused
                     unusedReferences.addAll(referenceList);
                     final Iterable<? extends Node> nodes = context.nodesOfType(getNodeClasses());
-                    for (Node node: nodes) {
+                    for (Node node : nodes) {
                         N referencingNode = lastReference == null ? null : lastReference.getReferencingNode(node);
                         if (referencingNode != null) {
                             B referenceBlock = referencingNode.getReferenceNode(referenceRepository);
@@ -168,7 +168,7 @@ public abstract class NodeRepositoryFormatter<R extends NodeRepository<B>, B ext
             case SORT_UNUSED_LAST:
                 ArrayList<B> used = new ArrayList<B>();
                 ArrayList<B> unused = new ArrayList<B>();
-                for (B footnote: references) {
+                for (B footnote : references) {
                     if (unusedReferences.contains(footnote)) {
                         unused.add(footnote);
                     } else {
@@ -184,7 +184,7 @@ public abstract class NodeRepositoryFormatter<R extends NodeRepository<B>, B ext
         }
 
         markdown.blankLine();
-        for (B reference: references) {
+        for (B reference : references) {
             renderReferenceBlock(reference, context, markdown);
         }
         markdown.blankLine();

@@ -1,11 +1,11 @@
 package com.vladsch.flexmark.ext.spec.example.internal;
 
+import com.vladsch.flexmark.ext.spec.example.*;
+import com.vladsch.flexmark.parser.block.*;
 import com.vladsch.flexmark.parser.core.*;
 import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.util.ast.BlockContent;
 import com.vladsch.flexmark.util.ast.Node;
-import com.vladsch.flexmark.ext.spec.example.*;
-import com.vladsch.flexmark.parser.block.*;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 

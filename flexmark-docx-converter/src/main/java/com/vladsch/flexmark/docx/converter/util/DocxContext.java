@@ -1,8 +1,8 @@
 package com.vladsch.flexmark.docx.converter.util;
 
-import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.docx.converter.DocxRendererOptions;
 import com.vladsch.flexmark.html.renderer.AttributablePart;
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.html.Attributes;
 import org.docx4j.openpackaging.exceptions.Docx4JException;
 import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
@@ -109,7 +109,7 @@ public interface DocxContext<T> extends DocxContextFrameProvider<T> {
     /**
      * Insert bookmark start into current P
      *
-     * @param bookmarkName  name of the bookmark (optional), if not given the it will be BM_{id}
+     * @param bookmarkName    name of the bookmark (optional), if not given the it will be BM_{id}
      * @param isBlockBookmark
      * @return CTBookmark
      */
@@ -118,7 +118,7 @@ public interface DocxContext<T> extends DocxContextFrameProvider<T> {
     /**
      * Insert bookmark end into current P for given bookmark
      *
-     * @param bookmarkStart starting bookmark to close
+     * @param bookmarkStart   starting bookmark to close
      * @param isBlockBookmark
      * @return CTMarkupRange
      */
@@ -128,7 +128,7 @@ public interface DocxContext<T> extends DocxContextFrameProvider<T> {
      * Get a hyperlink to a bookmark in the document
      *
      * @param bookmarkName name of the bookmark to link to
-     * @param linkText text of the link
+     * @param linkText     text of the link
      * @return hyperlink
      */
     P.Hyperlink createBookmarkHyperlink(String bookmarkName, String linkText);
@@ -227,16 +227,17 @@ public interface DocxContext<T> extends DocxContextFrameProvider<T> {
 
     /**
      * Get id for a node
-     * @param node    node
-     * @return  id string or null if none
+     *
+     * @param node node
+     * @return id string or null if none
      */
     String getNodeId(Node node);
 
     /**
      * Get a valid bookmark for given id
      *
-     * @param id    node id
-     * @return      mapped to valid bookmark name
+     * @param id node id
+     * @return mapped to valid bookmark name
      */
     String getValidBookmarkName(String id);
 

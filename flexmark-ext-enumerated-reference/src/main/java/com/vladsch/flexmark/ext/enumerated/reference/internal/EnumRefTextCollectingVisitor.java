@@ -170,7 +170,6 @@ public class EnumRefTextCollectingVisitor {
         }
     }
 
-
     public String collectAndGetText(BasedSequence basedSequence, EnumeratedReferenceRendering[] renderings, final String defaultFormat) {
         collect(basedSequence, renderings, defaultFormat);
         return out.toString();

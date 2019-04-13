@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.test;
 
-import com.vladsch.flexmark.ast.*;
+import com.vladsch.flexmark.ast.Text;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.ast.Node;

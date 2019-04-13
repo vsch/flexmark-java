@@ -2,7 +2,7 @@ package com.vladsch.flexmark.parser.block;
 
 /**
  * Current Parser Phase as the document is parsed.
- * 
+ *
  * <p><em>This enum is not visible by clients.</em></p>
  */
 public enum ParserPhase {

@@ -21,7 +21,7 @@ public class TocBlock extends TocBlockBase {
 
     @Override
     public BasedSequence[] getSegments() {
-        BasedSequence[] nodeSegments = new BasedSequence[]{openingMarker, tocKeyword, style, closingMarker};
+        BasedSequence[] nodeSegments = new BasedSequence[] { openingMarker, tocKeyword, style, closingMarker };
         if (lineSegments.size() == 0) return nodeSegments;
         BasedSequence[] allSegments = new BasedSequence[lineSegments.size() + nodeSegments.length];
         lineSegments.toArray(allSegments);

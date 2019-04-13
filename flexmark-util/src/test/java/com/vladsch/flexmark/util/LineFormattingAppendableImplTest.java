@@ -1,6 +1,7 @@
 package com.vladsch.flexmark.util;
 
-import com.vladsch.flexmark.util.html.*;
+import com.vladsch.flexmark.util.html.LineFormattingAppendable;
+import com.vladsch.flexmark.util.html.LineFormattingAppendableImpl;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -79,7 +80,7 @@ public class LineFormattingAppendableImplTest {
 
         sb = new StringBuilder();
         fa = new LineFormattingAppendableImpl(LineFormattingAppendable.FORMAT_ALL);
-        fa.append("abc").line().blankLine().appendTo(sb,1);
+        fa.append("abc").line().blankLine().appendTo(sb, 1);
         assertEquals("abc\n\n", sb.toString());
 
         sb = new StringBuilder();

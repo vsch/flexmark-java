@@ -1,4 +1,3 @@
-
 package com.vladsch.flexmark.ext.definition;
 
 public interface DefinitionVisitor {

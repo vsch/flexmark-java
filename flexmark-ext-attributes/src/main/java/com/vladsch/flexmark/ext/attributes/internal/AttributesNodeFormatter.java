@@ -1,11 +1,11 @@
 package com.vladsch.flexmark.ext.attributes.internal;
 
+import com.vladsch.flexmark.ext.attributes.AttributeNode;
 import com.vladsch.flexmark.ext.attributes.AttributesDelimiter;
+import com.vladsch.flexmark.ext.attributes.AttributesNode;
 import com.vladsch.flexmark.formatter.*;
 import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.Node;
-import com.vladsch.flexmark.ext.attributes.AttributeNode;
-import com.vladsch.flexmark.ext.attributes.AttributesNode;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.DataKey;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
@@ -160,7 +160,7 @@ public class AttributesNodeFormatter implements PhasedNodeFormatter {
         if (context.isTransformingText()) {
             markdown.append(node.getOpeningMarker());
             boolean firstChild = true;
-            for (Node child: node.getChildren()) {
+            for (Node child : node.getChildren()) {
                 AttributeNode attributeNode = (AttributeNode) child;
                 if (!firstChild) markdown.append(' ');
                 if (attributeNode.isId()) {

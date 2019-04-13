@@ -1,12 +1,5 @@
 package com.vladsch.flexmark.parser.internal;
 
-import com.vladsch.flexmark.parser.core.*;
-import com.vladsch.flexmark.util.ast.BlankLine;
-import com.vladsch.flexmark.util.ast.BlankLineContainer;
-import com.vladsch.flexmark.util.ast.Block;
-import com.vladsch.flexmark.util.ast.Document;
-import com.vladsch.flexmark.util.ast.KeepTrailingBlankLineContainer;
-import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.ast.Paragraph;
 import com.vladsch.flexmark.ast.util.ClassifyingBlockTracker;
 import com.vladsch.flexmark.ast.util.Parsing;
@@ -15,8 +8,10 @@ import com.vladsch.flexmark.parser.InlineParserExtensionFactory;
 import com.vladsch.flexmark.parser.InlineParserFactory;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.block.*;
+import com.vladsch.flexmark.parser.core.*;
 import com.vladsch.flexmark.parser.delimiter.DelimiterProcessor;
 import com.vladsch.flexmark.util.Computable;
+import com.vladsch.flexmark.util.ast.*;
 import com.vladsch.flexmark.util.collection.ItemFactoryMap;
 import com.vladsch.flexmark.util.collection.iteration.ReversibleIterable;
 import com.vladsch.flexmark.util.dependency.DependencyHandler;
@@ -32,13 +27,7 @@ import com.vladsch.flexmark.util.sequence.SubSequence;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.Reader;
-import java.util.ArrayList;
-import java.util.BitSet;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import static com.vladsch.flexmark.parser.Parser.BLANK_LINES_IN_AST;
 import static com.vladsch.flexmark.parser.Parser.TRACK_DOCUMENT_LINES;

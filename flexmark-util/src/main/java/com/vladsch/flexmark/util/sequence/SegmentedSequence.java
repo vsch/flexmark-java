@@ -226,7 +226,7 @@ public final class SegmentedSequence extends BasedSequenceImpl {
         assert baseStartOffset + length <= iMax : "Sub-sequence offsets list length < baseStartOffset + sub-sequence length";
 
         if (nonBaseChars != null) {
-            // start is the first real start in this sequence or after it, in the parent 
+            // start is the first real start in this sequence or after it, in the parent
             for (int i = baseStartOffset; i < iMax; i++) {
                 if (baseOffsets[i] >= 0) return baseOffsets[i];
             }
@@ -279,8 +279,8 @@ public final class SegmentedSequence extends BasedSequenceImpl {
 
         if (offset < 0) {
             /* KLUDGE: allows having characters which are not from original base sequence
-                       but with the only penalty for charAt access being an extra indirection,  
-                       which is a small price to pay for having the flexibility of adding out of 
+                       but with the only penalty for charAt access being an extra indirection,
+                       which is a small price to pay for having the flexibility of adding out of
                        context text to the based sequence.
              */
             return nonBaseChars[-offset - 1];
@@ -326,8 +326,7 @@ public final class SegmentedSequence extends BasedSequenceImpl {
     public boolean equals(Object obj) {
         return obj == this || (obj instanceof CharSequence && toString().equals(obj.toString()));
     }
-    
-    
+
     public static BasedSequence of(BasedSequence... segments) {
         return of(Arrays.asList(segments));
     }

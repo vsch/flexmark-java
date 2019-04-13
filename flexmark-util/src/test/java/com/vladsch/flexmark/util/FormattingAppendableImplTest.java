@@ -42,26 +42,26 @@ public class FormattingAppendableImplTest {
         fa.lastOffset(ref);
         assertEquals(0, fa.lastOffset());
         assertEquals(0, fa.offset());
-        assertEquals(-1, (int)ref.value);
+        assertEquals(-1, (int) ref.value);
         fa.flush();
         assertEquals("", sb.toString());
         assertEquals(0, fa.lastOffset());
         assertEquals(0, fa.offset());
-        assertEquals(-1, (int)ref.value);
+        assertEquals(-1, (int) ref.value);
 
         fa.append('a');
         ref1.value = -1;
         fa.lastOffset(ref1);
         assertEquals(0, fa.lastOffset());
         assertEquals(1, fa.offset());
-        assertEquals(0, (int)ref.value);
-        assertEquals(-1, (int)ref1.value);
+        assertEquals(0, (int) ref.value);
+        assertEquals(-1, (int) ref1.value);
         fa.flush();
         assertEquals("a", sb.toString());
         assertEquals(1, fa.lastOffset());
         assertEquals(1, fa.offset());
-        assertEquals(0, (int)ref.value);
-        assertEquals(-1, (int)ref1.value);
+        assertEquals(0, (int) ref.value);
+        assertEquals(-1, (int) ref1.value);
 
         sb = new StringBuilder();
         fa = new FormattingAppendableImpl(sb, FormattingAppendable.FORMAT_ALL);
@@ -70,14 +70,14 @@ public class FormattingAppendableImplTest {
         fa.append('a').lastOffset(ref).append('b').append('c').lastOffset(ref1).line();
         assertEquals(2, fa.lastOffset());
         assertEquals(3, fa.offset());
-        assertEquals(1, (int)ref.value);
-        assertEquals(-1, (int)ref1.value);
+        assertEquals(1, (int) ref.value);
+        assertEquals(-1, (int) ref1.value);
         fa.flush();
         assertEquals("abc\n", sb.toString());
         assertEquals(3, fa.lastOffset());
         assertEquals(4, fa.offset());
-        assertEquals(1, (int)ref.value);
-        assertEquals(-1, (int)ref1.value);
+        assertEquals(1, (int) ref.value);
+        assertEquals(-1, (int) ref1.value);
 
         sb = new StringBuilder();
         fa = new FormattingAppendableImpl(sb, FormattingAppendable.FORMAT_ALL);
@@ -643,5 +643,4 @@ public class FormattingAppendableImplTest {
     }
 
     // TODO: add delayed prefix tests
-
 }

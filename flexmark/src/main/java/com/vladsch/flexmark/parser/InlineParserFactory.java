@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.parser;
 
-import com.vladsch.flexmark.parser.internal.LinkRefProcessorData;
 import com.vladsch.flexmark.parser.delimiter.DelimiterProcessor;
+import com.vladsch.flexmark.parser.internal.LinkRefProcessorData;
 import com.vladsch.flexmark.util.options.DataHolder;
 
 import java.util.BitSet;
@@ -14,7 +14,7 @@ public interface InlineParserFactory {
             BitSet specialCharacters,
             BitSet delimiterCharacters,
             Map<Character,
-            DelimiterProcessor> delimiterProcessors,
+                    DelimiterProcessor> delimiterProcessors,
             LinkRefProcessorData linkRefProcessors,
             List<InlineParserExtensionFactory> inlineParserExtensions
     );

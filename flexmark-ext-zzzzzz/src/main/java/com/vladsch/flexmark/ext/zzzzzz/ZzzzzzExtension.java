@@ -23,7 +23,10 @@ public class ZzzzzzExtension implements Parser.ParserExtension
         , Parser.ReferenceHoldingExtension //zzzoptionszzz(CUSTOM_NODE_REPOSITORY)
 {
     public static final DataKey<KeepType> ZZZZZZS_KEEP = new DataKey<>("ZZZZZZS_KEEP", KeepType.FIRST); //zzzoptionszzz(CUSTOM_NODE_REPOSITORY) standard option to allow control over how to handle duplicates
-    public static final DataKey<ZzzzzzRepository> ZZZZZZS = new DataKey<>("ZZZZZZS", new DataValueFactory<ZzzzzzRepository>() {@Override public ZzzzzzRepository create(DataHolder options) { return new ZzzzzzRepository(options); }}); //zzzoptionszzz(CUSTOM_NODE_REPOSITORY)
+    public static final DataKey<ZzzzzzRepository> ZZZZZZS = new DataKey<>("ZZZZZZS", new DataValueFactory<ZzzzzzRepository>() {
+        @Override
+        public ZzzzzzRepository create(DataHolder options) { return new ZzzzzzRepository(options); }
+    }); //zzzoptionszzz(CUSTOM_NODE_REPOSITORY)
     public static final DataKey<Boolean> ZZZZZZ_OPTION1 = new DataKey<>("ZZZZZZ_OPTION1", false); //zzzoptionszzz(CUSTOM_PROPERTIES)
     public static final DataKey<String> ZZZZZZ_OPTION2 = new DataKey<>("ZZZZZZ_OPTION2", "default"); //zzzoptionszzz(CUSTOM_PROPERTIES)
     public static final DataKey<Integer> ZZZZZZ_OPTION3 = new DataKey<>("ZZZZZZ_OPTION3", Integer.MAX_VALUE); //zzzoptionszzz(CUSTOM_PROPERTIES)

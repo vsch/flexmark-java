@@ -1,13 +1,13 @@
 package com.vladsch.flexmark.ext.anchorlink.internal;
 
 import com.vladsch.flexmark.ast.BlockQuote;
-import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.ast.Heading;
-import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.ext.anchorlink.AnchorLink;
 import com.vladsch.flexmark.parser.block.NodePostProcessor;
 import com.vladsch.flexmark.parser.block.NodePostProcessorFactory;
 import com.vladsch.flexmark.util.NodeTracker;
+import com.vladsch.flexmark.util.ast.Document;
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.options.DataHolder;
 
 import static com.vladsch.flexmark.ext.anchorlink.AnchorLinkExtension.ANCHORLINKS_NO_BLOCK_QUOTE;

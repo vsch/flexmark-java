@@ -18,5 +18,4 @@ public class LowerCaseMapper implements CharMapper {
     public char map(char c) {
         return c == '\0' ? '\uFFFD' : Character.toLowerCase(c);
     }
-
 }

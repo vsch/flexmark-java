@@ -1,8 +1,8 @@
 package com.vladsch.flexmark.convert.html;
 
+import com.vladsch.flexmark.spec.IParseBase;
 import com.vladsch.flexmark.util.IParse;
 import com.vladsch.flexmark.util.ast.Node;
-import com.vladsch.flexmark.spec.IParseBase;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.DataKey;
 import com.vladsch.flexmark.util.options.MutableDataSet;

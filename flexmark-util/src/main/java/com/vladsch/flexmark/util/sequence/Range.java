@@ -191,7 +191,7 @@ public class Range {
         return myStart == other.myEnd;
     }
 
-    public Range include( Range other) {
+    public Range include(Range other) {
         return other.isNull() ? (this.isNull() ? NULL : this) : expandToInclude(other);
     }
 
@@ -203,7 +203,7 @@ public class Range {
         return this.isNull() ? new Range(start, end) : expandToInclude(start, end);
     }
 
-    public Range expandToInclude( Range other) {
+    public Range expandToInclude(Range other) {
         return expandToInclude(other.myStart, other.myEnd);
     }
 

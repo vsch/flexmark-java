@@ -1,8 +1,7 @@
 package com.vladsch.flexmark.util.html;
 
-import java.util.function.BiConsumer;
-
 import java.util.*;
+import java.util.function.BiConsumer;
 
 public class Attributes {
     public static final Attributes EMPTY = new Attributes();
@@ -49,7 +48,7 @@ public class Attributes {
      * class and style append new values to existing ones
      * others set it to the new value
      *
-     * @param key attribute name
+     * @param key   attribute name
      * @param value new value
      * @return new attribute
      */
@@ -186,7 +185,7 @@ public class Attributes {
             if (!attribute.getValue().isEmpty()) sb.append("=").append("\"").append(attribute.getValue().replace("\"", "\\\"")).append("\"");
             sep = " ";
         }
-        
+
         return "Attributes{" + sb.toString() + '}';
     }
 }

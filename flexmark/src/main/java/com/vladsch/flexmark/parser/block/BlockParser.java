@@ -1,9 +1,9 @@
 package com.vladsch.flexmark.parser.block;
 
+import com.vladsch.flexmark.parser.InlineParser;
 import com.vladsch.flexmark.parser.core.ParagraphParser;
 import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.util.ast.BlockContent;
-import com.vladsch.flexmark.parser.InlineParser;
 import com.vladsch.flexmark.util.options.MutableDataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
@@ -20,10 +20,9 @@ public interface BlockParser {
     boolean isContainer();
 
     /**
-     *
-     * @param state parser state
-     * @param blockParser  block parser
-     *@param block new block being started  @return true if this block parser's block can contain the given block type, false if it cannot
+     * @param state       parser state
+     * @param blockParser block parser
+     * @param block       new block being started  @return true if this block parser's block can contain the given block type, false if it cannot
      */
     boolean canContain(ParserState state, BlockParser blockParser, Block block);
 
@@ -106,8 +105,7 @@ public interface BlockParser {
     /**
      * Allows block parsers to determine if they can be interrupted by other block parsers
      *
-     * @param blockParserFactory  interrupting block parser
-     *
+     * @param blockParserFactory interrupting block parser
      * @return true if can interrupt.
      */
     boolean canInterruptBy(BlockParserFactory blockParserFactory);

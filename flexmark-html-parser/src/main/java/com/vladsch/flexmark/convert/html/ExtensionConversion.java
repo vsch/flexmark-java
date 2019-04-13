@@ -7,6 +7,8 @@ public enum ExtensionConversion {
     HTML;                           // pass through tag as HTML
 
     boolean isParsed() { return this != HTML; }
+
     boolean isTextOnly() { return this == TEXT; }
+
     boolean isSuppressed() { return this == NONE; }
 }

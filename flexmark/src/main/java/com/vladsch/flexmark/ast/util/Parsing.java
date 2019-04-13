@@ -15,7 +15,7 @@ public class Parsing {
 
     // save options for others to use when only parsing instance is available
     public final DataHolder options;
-    
+
     public final String ADDITIONAL_CHARS;
     public final String EXCLUDED_0_TO_SPACE;
 
@@ -161,10 +161,10 @@ public class Parsing {
                 "^<([a-zA-Z0-9" + ADDITIONAL_CHARS + ".!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9" + ADDITIONAL_CHARS + "](?:[a-zA-Z0-9" + ADDITIONAL_CHARS + "-]{0,61}[a-zA-Z0-9" + ADDITIONAL_CHARS + "])?(?:\\.[a-zA-Z0-9" + ADDITIONAL_CHARS + "](?:[a-zA-Z0-9" + ADDITIONAL_CHARS + "-]{0,61}[a-zA-Z0-9" + ADDITIONAL_CHARS + "])?)*)>");
         this.AUTOLINK = Pattern.compile(
                 "^<[a-zA-Z][a-zA-Z0-9" + ADDITIONAL_CHARS + ".+-]{1,31}:[^<>" + EXCLUDED_0_TO_SPACE + "]*>");
-        
+
         this.WWW_AUTOLINK = Pattern.compile(
                 "^<(?:w" + ADDITIONAL_CHARS + "?){3,3}\\.[^<>" + EXCLUDED_0_TO_SPACE + "]*>");
-        
+
         this.SPNL = Pattern.compile("^(?:[ \t])*(?:" + EOL + "(?:[ \t])*)?");
         this.SPNL_URL = Pattern.compile("^(?:[ \t])*" + EOL);
         this.SPNI = Pattern.compile("^ {0,3}");

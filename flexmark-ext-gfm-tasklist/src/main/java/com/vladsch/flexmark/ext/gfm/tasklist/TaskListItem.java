@@ -1,6 +1,8 @@
 package com.vladsch.flexmark.ext.gfm.tasklist;
 
-import com.vladsch.flexmark.ast.*;
+import com.vladsch.flexmark.ast.ListItem;
+import com.vladsch.flexmark.ast.OrderedListItem;
+import com.vladsch.flexmark.ast.Paragraph;
 import com.vladsch.flexmark.parser.ListOptions;
 import com.vladsch.flexmark.util.ast.BlockContent;
 import com.vladsch.flexmark.util.ast.Node;

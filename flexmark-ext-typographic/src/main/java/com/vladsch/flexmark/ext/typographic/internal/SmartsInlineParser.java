@@ -4,7 +4,6 @@ import com.vladsch.flexmark.ext.typographic.TypographicSmarts;
 import com.vladsch.flexmark.parser.InlineParser;
 import com.vladsch.flexmark.parser.InlineParserExtension;
 import com.vladsch.flexmark.parser.InlineParserExtensionFactory;
-import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 import java.util.Set;
@@ -23,7 +22,7 @@ public class SmartsInlineParser implements InlineParserExtension {
 
     @Override
     public void finalizeBlock(final InlineParser inlineParser) {
-        
+
     }
 
     @Override

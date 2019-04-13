@@ -25,5 +25,4 @@ public class BlockContinue {
     public static BlockContinue finished() {
         return new BlockContinueImpl(-1, -1, true);
     }
-
 }

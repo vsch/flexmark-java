@@ -19,8 +19,7 @@ public class ComboKramdownCompatibilitySpecTest extends ComboExtraSpecTest {
     private static final DataHolder OPTIONS = new MutableDataSet()
             .setFrom(ParserEmulationProfile.KRAMDOWN)
             .set(HtmlRenderer.INDENT_SIZE, 4)
-            .set(HtmlRenderer.PERCENT_ENCODE_URLS, true)
-            ;
+            .set(HtmlRenderer.PERCENT_ENCODE_URLS, true);
 
     private static final Map<String, DataHolder> optionsMap = new HashMap<String, DataHolder>();
     static {

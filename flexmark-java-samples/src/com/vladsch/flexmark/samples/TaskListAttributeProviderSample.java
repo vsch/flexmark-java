@@ -1,6 +1,5 @@
 package com.vladsch.flexmark.samples;
 
-import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.ext.gfm.tasklist.TaskListExtension;
 import com.vladsch.flexmark.ext.gfm.tasklist.TaskListItem;
 import com.vladsch.flexmark.html.AttributeProvider;
@@ -11,6 +10,7 @@ import com.vladsch.flexmark.html.renderer.AttributablePart;
 import com.vladsch.flexmark.html.renderer.CoreNodeRenderer;
 import com.vladsch.flexmark.html.renderer.LinkResolverContext;
 import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.html.Attributes;
 import com.vladsch.flexmark.util.options.MutableDataHolder;
 import com.vladsch.flexmark.util.options.MutableDataSet;
@@ -61,8 +61,8 @@ public class TaskListAttributeProviderSample {
         MutableDataHolder options = new MutableDataSet();
         options.set(Parser.EXTENSIONS, Arrays.asList(TaskListExtension.create(), SampleExtension.create()));
 
-        options.set(TaskListExtension.ITEM_DONE_MARKER,"");
-        options.set(TaskListExtension.ITEM_NOT_DONE_MARKER,"");
+        options.set(TaskListExtension.ITEM_DONE_MARKER, "");
+        options.set(TaskListExtension.ITEM_NOT_DONE_MARKER, "");
 
         Parser parser = Parser.builder(options).build();
         Node document = parser.parse(markdown);

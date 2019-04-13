@@ -1,8 +1,8 @@
 package com.vladsch.flexmark.ext.tables;
 
-import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.formatter.MarkdownWriter;
 import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.format.MarkdownTable;
 import com.vladsch.flexmark.util.format.TableCellOffsetInfo;
 import com.vladsch.flexmark.util.format.options.DiscretionaryText;
@@ -18,7 +18,6 @@ import java.util.List;
 
 import static com.vladsch.flexmark.util.format.TableFormatOptions.INTELLIJ_DUMMY_IDENTIFIER_CHAR;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 public class MarkdownTableTestBase {
     protected MarkdownTable[] getTables(CharSequence markdown) {
@@ -132,6 +131,5 @@ public class MarkdownTableTestBase {
     ) {
         assertEquals(message, new TableCellOffsetInfo(info.offset, info.table, info.section, null, null, row, column, insideCol, insideOffset).toString(), info.toString());
     }
-
 }
 

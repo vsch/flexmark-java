@@ -1,6 +1,9 @@
 package com.vladsch.flexmark.samples;
 
-import com.vladsch.flexmark.ast.*;
+import com.vladsch.flexmark.ast.Image;
+import com.vladsch.flexmark.ast.Link;
+import com.vladsch.flexmark.ast.LinkNodeBase;
+import com.vladsch.flexmark.ast.Reference;
 import com.vladsch.flexmark.formatter.Formatter;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.ast.Node;
@@ -66,7 +69,7 @@ public class FormatterWithMods {
 
         private void visit(LinkNodeBase node) {
             if (node.getPageRef().endsWith("replace.com")) {
-                node.setUrlChars(PrefixedSubSequence.of("http://replaced.com", node.getPageRef().subSequence(0,0)));
+                node.setUrlChars(PrefixedSubSequence.of("http://replaced.com", node.getPageRef().subSequence(0, 0)));
                 node.setChars(SegmentedSequence.of(Arrays.asList(node.getSegmentsForChars())));
             }
         }

@@ -23,8 +23,7 @@ public class ComboCoreFormatterSpecTest extends ComboSpecTestCase {
             //.set(HtmlRenderer.PERCENT_ENCODE_URLS, true)
             //.set(Parser.EXTENSIONS, Collections.singleton(FormatterExtension.create()))
             .set(Parser.BLANK_LINES_IN_AST, true)
-            .set(Parser.HEADING_NO_ATX_SPACE, true)
-            ;
+            .set(Parser.HEADING_NO_ATX_SPACE, true);
 
     private static final Map<String, DataHolder> optionsMap = new HashMap<String, DataHolder>();
     static {

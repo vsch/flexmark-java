@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.ext.enumerated.reference;
 
 public class EnumeratedReferenceRendering {
-    public final EnumeratedReferenceBlock referenceFormat; 
+    public final EnumeratedReferenceBlock referenceFormat;
     public final String referenceType;
     public final int referenceOrdinal;
 

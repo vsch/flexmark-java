@@ -1,6 +1,5 @@
 package com.vladsch.flexmark.util.format;
 
-import java.util.function.BiFunction;
 import com.vladsch.flexmark.util.Ref;
 import com.vladsch.flexmark.util.Utils;
 import com.vladsch.flexmark.util.collection.MaxAggregator;
@@ -14,18 +13,10 @@ import com.vladsch.flexmark.util.sequence.BasedSequenceImpl;
 import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
 import com.vladsch.flexmark.util.sequence.RepeatedCharSequence;
 
-import java.util.ArrayList;
-import java.util.BitSet;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.function.BiFunction;
 
-import static com.vladsch.flexmark.util.Utils.contained;
-import static com.vladsch.flexmark.util.Utils.max;
-import static com.vladsch.flexmark.util.Utils.maxLimit;
-import static com.vladsch.flexmark.util.Utils.min;
-import static com.vladsch.flexmark.util.Utils.minLimit;
-import static com.vladsch.flexmark.util.Utils.rangeLimit;
+import static com.vladsch.flexmark.util.Utils.*;
 import static com.vladsch.flexmark.util.format.TableCell.NOT_TRACKED;
 import static com.vladsch.flexmark.util.format.options.DiscretionaryText.ADD;
 
@@ -446,7 +437,6 @@ public class MarkdownTable {
      * empty
      *
      * @param column index in allRows list
-     *
      * @return true if column is empty for all rows, separator row excluded
      */
     public boolean isEmptyColumn(final int column) {
@@ -474,7 +464,6 @@ public class MarkdownTable {
      * Test a row for having all empty columns
      *
      * @param rowIndex index in allRows list
-     *
      * @return true if row is empty or is a separator row
      */
     public boolean isAllRowsEmptyAt(int rowIndex) {
@@ -485,7 +474,6 @@ public class MarkdownTable {
      * Test a row for having all empty columns
      *
      * @param rowIndex index in allRows list
-     *
      * @return true if row is empty or is a separator row
      */
     public boolean isContentRowsEmptyAt(int rowIndex) {
@@ -497,7 +485,6 @@ public class MarkdownTable {
      *
      * @param rowIndex index in allRows list
      * @param sections sections to use for rows array generation
-     *
      * @return true if row is empty or is a separator row
      */
     private boolean isEmptyRowAt(int rowIndex, TableSection[] sections) {

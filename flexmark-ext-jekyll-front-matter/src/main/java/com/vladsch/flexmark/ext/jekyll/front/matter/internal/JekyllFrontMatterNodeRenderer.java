@@ -1,4 +1,3 @@
-
 package com.vladsch.flexmark.ext.jekyll.front.matter.internal;
 
 import com.vladsch.flexmark.ext.jekyll.front.matter.JekyllFrontMatterBlock;

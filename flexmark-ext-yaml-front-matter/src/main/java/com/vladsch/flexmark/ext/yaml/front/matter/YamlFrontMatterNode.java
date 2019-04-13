@@ -1,7 +1,6 @@
 package com.vladsch.flexmark.ext.yaml.front.matter;
 
 import com.vladsch.flexmark.util.ast.Node;
-import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 import java.util.ArrayList;

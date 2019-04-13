@@ -1,10 +1,10 @@
 package com.vladsch.flexmark.samples;
 
-import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.ast.util.TextCollectingVisitor;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.profiles.pegdown.Extensions;
 import com.vladsch.flexmark.profiles.pegdown.PegdownOptionsAdapter;
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.MutableDataSet;
 
@@ -72,5 +72,4 @@ public class MarkdownToText {
         System.out.println("\n\nText\n");
         System.out.println(text);
     }
-
 }

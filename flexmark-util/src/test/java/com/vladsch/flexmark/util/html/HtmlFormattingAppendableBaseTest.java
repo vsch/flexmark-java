@@ -33,7 +33,8 @@ public class HtmlFormattingAppendableBaseTest {
     public void test_basic2() throws Exception {
         final HtmlFormattingAppendableBase fa2 = new HtmlFormattingAppendableBase(2, LineFormattingAppendable.FORMAT_ALL);
 
-        fa2.withCondLineOnChildText().withCondIndent().tag("tbody", () -> { });
+        fa2.withCondLineOnChildText().withCondIndent().tag("tbody", () -> {
+        });
 
         assertEquals("<tbody></tbody>\n", fa2.toString(0));
     }
@@ -59,7 +60,7 @@ public class HtmlFormattingAppendableBaseTest {
             fa.withCondIndent().tagLine("li", () -> fa.text("item1\ntwo line text"));
             fa.withCondIndent().tagLine("li", () -> fa.text("item1"));
         });
-        
+
         assertEquals("" +
                 "<ul>\n" +
                 "  <li>item1\n" +
@@ -82,7 +83,7 @@ public class HtmlFormattingAppendableBaseTest {
             assertEquals("ul, li", tags);
             fa.text("item1");
         }));
-        
+
         fa.closeTag("span");
 
         assertEquals("<span>\n<ul>\n  <li>item1</li>\n</ul>\n</span>\n", fa.toString(0));

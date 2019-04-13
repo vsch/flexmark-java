@@ -12,7 +12,7 @@ public class AstCollectingVisitor extends NodeVisitorBase {
     public String getAst() {
         return output.toString();
     }
-    
+
     public void clear() {
         output = new StringBuilder();
         indent = 0;
@@ -34,12 +34,12 @@ public class AstCollectingVisitor extends NodeVisitorBase {
     protected void appendPendingEOL() {
         if (eolPending) appendEOL();
     }
-    
+
     public String collectAndGetAstText(Node node) {
         visit(node);
         return getAst();
     }
-    
+
     public void collect(Node node) {
         visit(node);
     }

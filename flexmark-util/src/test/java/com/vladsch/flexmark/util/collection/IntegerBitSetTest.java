@@ -7,7 +7,7 @@ public class IntegerBitSetTest {
     @Test
     public void name() throws Exception {
         int i;
-        
+
         i = -1 >>> -2;
         int tmp = 0;
     }

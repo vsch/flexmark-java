@@ -6,16 +6,11 @@ import com.vladsch.flexmark.ext.toc.SimTocContent;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.AttributablePart;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
-import com.vladsch.flexmark.util.Computable;
-import com.vladsch.flexmark.util.Pair;
-import com.vladsch.flexmark.util.Paired;
-import com.vladsch.flexmark.util.ValueRunnable;
+import com.vladsch.flexmark.util.*;
 import com.vladsch.flexmark.util.html.Attribute;
 import com.vladsch.flexmark.util.html.Escaping;
-import com.vladsch.flexmark.util.DelimitedBuilder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
-import java.io.IOException;
 import java.util.*;
 
 @SuppressWarnings("WeakerAccess")

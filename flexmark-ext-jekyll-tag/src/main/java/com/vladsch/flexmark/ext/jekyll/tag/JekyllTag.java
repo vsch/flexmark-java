@@ -6,7 +6,7 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 /**
  * A JekyllTag node
  */
-public class JekyllTag extends Node  {
+public class JekyllTag extends Node {
     protected BasedSequence openingMarker = BasedSequence.NULL;
     protected BasedSequence tag = BasedSequence.NULL;
     protected BasedSequence parameters = BasedSequence.NULL;

@@ -131,7 +131,7 @@ public class DumpSpecReader extends SpecReader implements ActualExampleModifier 
         boolean embedTimed = RenderingTestCase.EMBED_TIMED.getFrom(node.getDocument());
 
         if (timed || embedTimed) {
-            System.out.println(String.format(RenderingTestCase.TIMED_FORMAT_STRING, example.getSection() == null ? "" : example.getSection().trim() + ": " + example.getExampleNumber(), (parse - start) / 1000000.0/iterations, (render - parse) / 1000000.0/iterations, (render - start) / 1000000.0/iterations));
+            System.out.println(String.format(RenderingTestCase.TIMED_FORMAT_STRING, example.getSection() == null ? "" : example.getSection().trim() + ": " + example.getExampleNumber(), (parse - start) / 1000000.0 / iterations, (render - parse) / 1000000.0 / iterations, (render - start) / 1000000.0 / iterations));
         }
 
         final String actualAST = testCase.ast(node);
@@ -142,7 +142,7 @@ public class DumpSpecReader extends SpecReader implements ActualExampleModifier 
         testCase.addSpecExample(example, node, options, ignoredCase, actualHTML, actualAST);
 
         if (embedTimed) {
-            sb.append(String.format(RenderingTestCase.TIMED_FORMAT_STRING, example.getSection() == null ? "" : example.getSection().trim() + ": " + example.getExampleNumber(), (parse - start) / 1000000.0/iterations, (render - parse) / 1000000.0/iterations, (render - start) / 1000000.0/iterations));
+            sb.append(String.format(RenderingTestCase.TIMED_FORMAT_STRING, example.getSection() == null ? "" : example.getSection().trim() + ": " + example.getExampleNumber(), (parse - start) / 1000000.0 / iterations, (render - parse) / 1000000.0 / iterations, (render - start) / 1000000.0 / iterations));
         }
 
         // include source so that diff can be used to update spec

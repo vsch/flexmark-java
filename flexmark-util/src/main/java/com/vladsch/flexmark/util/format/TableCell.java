@@ -6,9 +6,7 @@ import com.vladsch.flexmark.util.sequence.BasedSequenceImpl;
 import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
 import com.vladsch.flexmark.util.sequence.SubSequence;
 
-import static com.vladsch.flexmark.util.Utils.maxLimit;
-import static com.vladsch.flexmark.util.Utils.min;
-import static com.vladsch.flexmark.util.Utils.minLimit;
+import static com.vladsch.flexmark.util.Utils.*;
 
 @SuppressWarnings("WeakerAccess")
 public class TableCell {
@@ -24,7 +22,7 @@ public class TableCell {
     public final CellAlignment alignment;
     public final int trackedTextOffset; // offset in the text
     public final int spanTrackedOffset; // offset in the span if span > 1
-    public final int trackedTextAdjust; // adjustment to the resulting tracked position due to alignment  
+    public final int trackedTextAdjust; // adjustment to the resulting tracked position due to alignment
     public final boolean afterSpace; // if adjustment should be done after space
     public final boolean afterDelete; // if adjustment should be done as if after delete
 
@@ -177,7 +175,6 @@ public class TableCell {
      * Returns the cell length occupied in the table
      *
      * @param previousCell previous cell or null for first cell
-     *
      * @return length of the cell as occupied in the original file
      */
     public int getCellLength(TableCell previousCell) {
@@ -188,7 +185,6 @@ public class TableCell {
      * Returns the cell prefix length occupied in the table
      *
      * @param previousCell previous cell or null for first cell
-     *
      * @return length of cell's prefix before actual text as occupied in the file
      */
     public int getCellPrefixLength(TableCell previousCell) {

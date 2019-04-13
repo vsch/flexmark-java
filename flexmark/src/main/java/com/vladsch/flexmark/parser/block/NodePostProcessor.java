@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.parser.block;
 
-import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.parser.PostProcessor;
+import com.vladsch.flexmark.util.ast.Document;
 
 public abstract class NodePostProcessor implements PostProcessor {
     /**
@@ -10,6 +10,6 @@ public abstract class NodePostProcessor implements PostProcessor {
      */
     @Override
     public final Document processDocument(Document document) {
-       return document;
+        return document;
     }
 }

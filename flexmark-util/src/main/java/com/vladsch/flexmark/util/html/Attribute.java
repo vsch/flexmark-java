@@ -26,6 +26,7 @@ public interface Attribute extends Immutable<Attribute, MutableAttribute> {
 
     /**
      * See if the attribute contains the value (if attribute has list delimiter set) or is equal to the value if no list delimiter is set
+     *
      * @param value name part of the attribute value list or the value if the attribute does not have a value list delimiter
      * @return true if the attribute contains the valueName
      */
@@ -42,14 +43,14 @@ public interface Attribute extends Immutable<Attribute, MutableAttribute> {
 
     /**
      * Add a new value or values depending on list and name delimiter settings and value content
-     *
+     * <p>
      * If the attribute does not have a list delimiter then its value will be set
      * to the given value.
-     *
+     * <p>
      * If the attribute has a list delimiter but not name delimiter then value
      * will be split by list delimiter and all values will be added to the attribute's
      * value list. New ones added at the end, old ones left as is.
-     *
+     * <p>
      * If the attribute has a list delimiter and a name delimiter then value will
      * be split by list delimiter and the name portion of each value will
      * be used to find duplicates whose value will be replaced. New ones added at the
@@ -62,14 +63,14 @@ public interface Attribute extends Immutable<Attribute, MutableAttribute> {
 
     /**
      * Add a new value or values depending on list and name delimiter settings and value content.
-     *
+     * <p>
      * If the attribute does not have a list delimiter and its value is equal
      * to the given value then its value is set to empty
-     *
+     * <p>
      * If the attribute has a list delimiter but not name delimiter then value
      * will be split by list delimiter and any values in attribute's value list
      * will be removed
-     *
+     * <p>
      * If the attribute has a list delimiter and a name delimiter then value will
      * be split by list delimiter and only the name portion of each value will
      * be used for removal from the attribute's value list

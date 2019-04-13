@@ -37,7 +37,7 @@ public abstract class IParseBase implements IParse {
     public boolean transferReferences(final Document document, final Document included, Boolean onlyIfUndefined) {
         return false;
     }
-    
+
     @Override
     public Node parseReader(Reader input) throws IOException {
         BufferedReader bufferedReader;

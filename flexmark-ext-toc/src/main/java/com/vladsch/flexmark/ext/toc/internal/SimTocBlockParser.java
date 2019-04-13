@@ -1,8 +1,13 @@
 package com.vladsch.flexmark.ext.toc.internal;
 
-import com.vladsch.flexmark.ast.*;
+import com.vladsch.flexmark.ast.Heading;
+import com.vladsch.flexmark.ast.HtmlBlock;
+import com.vladsch.flexmark.ast.ListBlock;
 import com.vladsch.flexmark.ast.util.Parsing;
-import com.vladsch.flexmark.ext.toc.*;
+import com.vladsch.flexmark.ext.toc.SimTocBlock;
+import com.vladsch.flexmark.ext.toc.SimTocContent;
+import com.vladsch.flexmark.ext.toc.SimTocOption;
+import com.vladsch.flexmark.ext.toc.SimTocOptionList;
 import com.vladsch.flexmark.parser.InlineParser;
 import com.vladsch.flexmark.parser.block.*;
 import com.vladsch.flexmark.util.Pair;

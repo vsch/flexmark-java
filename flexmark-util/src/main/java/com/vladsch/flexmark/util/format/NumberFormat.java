@@ -5,7 +5,8 @@ public enum NumberFormat {
     ARABIC,
     LETTERS,
     ROMAN,
-    CUSTOM,;
+    CUSTOM,
+    ;
 
     public static String getFormat(NumberFormat format, int count) {
         switch (format) {

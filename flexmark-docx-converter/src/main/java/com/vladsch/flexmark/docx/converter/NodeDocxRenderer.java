@@ -23,7 +23,7 @@ public interface NodeDocxRenderer {
      * Return mapping of all nodes whose children should be wrapped in a bookmark if the parent node
      * has an id attribute. Default for block nodes to have a bookmark before the node element and for
      * inline nodes to have a bookmark around the element.
-     *
+     * <p>
      * CAUTION: final classes need to be returned, not super classes. Comparison is done by hash on class
      *
      * @return the nodes of interest to this formatter during formatting.

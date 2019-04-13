@@ -37,7 +37,7 @@ public class EmbeddedAttributeProvider implements AttributeProvider {
         final Attributes attributes;
 
         public EmbeddedNodeAttributes(Node parent, Attributes attributes) {
-            super(parent.getChars().subSequence(0,0));
+            super(parent.getChars().subSequence(0, 0));
             this.attributes = attributes;
         }
 
@@ -51,7 +51,7 @@ public class EmbeddedAttributeProvider implements AttributeProvider {
             out.append(EmbeddedNodeAttributes.class.getSimpleName());
             out.append("[").append(getStartOffset()).append(", ").append(getEndOffset()).append("]");
             out.append(", attributes: ").append(attributes.toString());
-            
+
             if (withExtra) getAstExtra(out);
         }
 

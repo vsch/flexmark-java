@@ -2,9 +2,9 @@ package com.vladsch.flexmark.parser.core;
 
 import com.vladsch.flexmark.ast.*;
 import com.vladsch.flexmark.ast.util.Parsing;
-import com.vladsch.flexmark.parser.internal.HtmlDeepParser;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.block.*;
+import com.vladsch.flexmark.parser.internal.HtmlDeepParser;
 import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.util.ast.BlockContent;
 import com.vladsch.flexmark.util.options.DataHolder;

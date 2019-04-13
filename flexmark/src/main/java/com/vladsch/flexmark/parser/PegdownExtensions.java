@@ -154,13 +154,13 @@ public interface PegdownExtensions {
 
     /**
      * ![alt](.....?
-     *
+     * <p>
      * )
-     *
+     * <p>
      * ![alt](.....?
-     *
+     * <p>
      * "title")
-     *
+     * <p>
      * Enables MULTI_LINE_IMAGE_URLS extension which allows image urls of the form above.
      * any text at all until ) or "title") at the begining of a line.
      * Used for displaying UML diagrams with gravizo.com
@@ -187,7 +187,6 @@ public interface PegdownExtensions {
      * between [ ][] and plain [ ] for refLink and ![ ][] and plain ![ ] for RefImage
      */
     static final int INSERTED = 0x40000000;
-
 
     static final int UNUSABLE = 0x80000000;
 

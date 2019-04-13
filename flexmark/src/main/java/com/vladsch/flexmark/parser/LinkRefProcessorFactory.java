@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.parser;
 
-import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ComputableFactory;
+import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.options.DataHolder;
 
 /**
@@ -12,8 +12,8 @@ public interface LinkRefProcessorFactory extends ComputableFactory<LinkRefProces
     /**
      * Whether the image ref is desired, if not then ! will be stripped off the prefix and treated as plain text
      *
-     * @return true if ! is part of the desired element, false otherwise
      * @param options options
+     * @return true if ! is part of the desired element, false otherwise
      */
     boolean getWantExclamationPrefix(DataHolder options);
 
@@ -24,8 +24,8 @@ public interface LinkRefProcessorFactory extends ComputableFactory<LinkRefProces
      * When {@code >0} then preview of next characters is used and if they will match then inner reference will not be created to
      * allow outer one to match the desired element
      *
-     * @return nesting level for references, {@code >0} for nesting
      * @param options options
+     * @return nesting level for references, {@code >0} for nesting
      */
     int getBracketNestingLevel(DataHolder options);
 

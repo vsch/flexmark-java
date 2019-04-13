@@ -1,6 +1,5 @@
 package com.vladsch.flexmark.ext.gfm.tables;
 
-import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.html.AttributeProvider;
 import com.vladsch.flexmark.html.AttributeProviderFactory;
 import com.vladsch.flexmark.html.HtmlRenderer;
@@ -10,6 +9,7 @@ import com.vladsch.flexmark.html.renderer.LinkResolverContext;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.test.RenderingTestCase;
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.builder.Extension;
 import com.vladsch.flexmark.util.html.Attributes;
 import org.junit.Test;
@@ -33,18 +33,18 @@ public class TablesTest extends RenderingTestCase {
 
     @Test
     public void mustHaveHeaderAndSeparator() {
-        assertRendering( "Abc|Def", "<p>Abc|Def</p>\n");
-        assertRendering( "Abc | Def", "<p>Abc | Def</p>\n");
+        assertRendering("Abc|Def", "<p>Abc|Def</p>\n");
+        assertRendering("Abc | Def", "<p>Abc | Def</p>\n");
     }
 
     @Test
     public void separatorMustBeThreeOrMore() {
-        assertRendering( "Abc|Def\n-|-", "<table>\n" +
+        assertRendering("Abc|Def\n-|-", "<table>\n" +
                 "<thead>\n" +
                 "<tr><th>Abc</th><th>Def</th></tr>\n" +
                 "</thead>\n" +
                 "</table>\n");
-        assertRendering( "Abc|Def\n--|--", "<table>\n" +
+        assertRendering("Abc|Def\n--|--", "<table>\n" +
                 "<thead>\n" +
                 "<tr><th>Abc</th><th>Def</th></tr>\n" +
                 "</thead>\n" +
@@ -53,17 +53,17 @@ public class TablesTest extends RenderingTestCase {
 
     @Test
     public void separatorCanNotHaveLeadingSpaceThenPipe() {
-        assertRendering( "Abc|Def\n |---|---", "<p>Abc|Def\n|---|---</p>\n");
+        assertRendering("Abc|Def\n |---|---", "<p>Abc|Def\n|---|---</p>\n");
     }
 
     @Test
     public void headerMustBeOneLine() {
-        assertRendering( "No\nAbc|Def\n---|---", "<p>No\nAbc|Def\n---|---</p>\n");
+        assertRendering("No\nAbc|Def\n---|---", "<p>No\nAbc|Def\n---|---</p>\n");
     }
 
     @Test
     public void oneHeadNoBody() {
-        assertRendering( "Abc|Def\n---|---", "<table>\n" +
+        assertRendering("Abc|Def\n---|---", "<table>\n" +
                 "<thead>\n" +
                 "<tr><th>Abc</th><th>Def</th></tr>\n" +
                 "</thead>\n" +
@@ -77,14 +77,14 @@ public class TablesTest extends RenderingTestCase {
                 "<tr><th>Abc</th></tr>\n" +
                 "</thead>\n" +
                 "</table>\n";
-        assertRendering( "|Abc\n|---\n", expected);
-        assertRendering( "|Abc|\n|---|\n", expected);
-        assertRendering( "Abc|\n---|\n", expected);
+        assertRendering("|Abc\n|---\n", expected);
+        assertRendering("|Abc|\n|---|\n", expected);
+        assertRendering("Abc|\n---|\n", expected);
 
         // Pipe required on separator
-        assertRendering( "|Abc\n---\n", "<h2>|Abc</h2>\n");
+        assertRendering("|Abc\n---\n", "<h2>|Abc</h2>\n");
         // Pipe required on head
-        assertRendering( "Abc\n|---\n", "<p>Abc\n|---</p>\n");
+        assertRendering("Abc\n|---\n", "<p>Abc\n|---</p>\n");
     }
 
     @Test
@@ -97,15 +97,15 @@ public class TablesTest extends RenderingTestCase {
                 "<tr><td>1</td></tr>\n" +
                 "</tbody>\n" +
                 "</table>\n";
-        assertRendering( "|Abc\n|---\n|1", expected);
-        assertRendering( "|Abc|\n|---|\n|1|", expected);
-        assertRendering( "Abc|\n---|\n1|", expected);
+        assertRendering("|Abc\n|---\n|1", expected);
+        assertRendering("|Abc|\n|---|\n|1|", expected);
+        assertRendering("Abc|\n---|\n1|", expected);
 
         // Pipe required on separator
-        assertRendering( "|Abc\n---\n|1", "<h2>|Abc</h2>\n<p>|1</p>\n");
+        assertRendering("|Abc\n---\n|1", "<h2>|Abc</h2>\n<p>|1</p>\n");
 
         // Pipe required on body
-        assertRendering( "|Abc\n|---\n1\n", "<table>\n" +
+        assertRendering("|Abc\n|---\n1\n", "<table>\n" +
                 "<thead>\n" +
                 "<tr><th>Abc</th></tr>\n" +
                 "</thead>\n" +
@@ -115,7 +115,7 @@ public class TablesTest extends RenderingTestCase {
 
     @Test
     public void oneHeadOneBody() {
-        assertRendering( "Abc|Def\n---|---\n1|2", "<table>\n" +
+        assertRendering("Abc|Def\n---|---\n1|2", "<table>\n" +
                 "<thead>\n" +
                 "<tr><th>Abc</th><th>Def</th></tr>\n" +
                 "</thead>\n" +
@@ -127,12 +127,12 @@ public class TablesTest extends RenderingTestCase {
 
     @Test
     public void separatorMustNotHaveLessPartsThanHead() {
-        assertRendering( "Abc|Def|Ghi\n---|---\n1|2|3", "<p>Abc|Def|Ghi\n---|---\n1|2|3</p>\n");
+        assertRendering("Abc|Def|Ghi\n---|---\n1|2|3", "<p>Abc|Def|Ghi\n---|---\n1|2|3</p>\n");
     }
 
     @Test
     public void padding() {
-        assertRendering( " Abc  | Def \n --- | --- \n 1 | 2 ", "<table>\n" +
+        assertRendering(" Abc  | Def \n --- | --- \n 1 | 2 ", "<table>\n" +
                 "<thead>\n" +
                 "<tr><th>Abc</th><th>Def</th></tr>\n" +
                 "</thead>\n" +
@@ -144,7 +144,7 @@ public class TablesTest extends RenderingTestCase {
 
     @Test
     public void paddingWithCodeBlockIndentation() {
-        assertRendering( "Abc|Def\n---|---\n    1|2", "<table>\n" +
+        assertRendering("Abc|Def\n---|---\n    1|2", "<table>\n" +
                 "<thead>\n" +
                 "<tr><th>Abc</th><th>Def</th></tr>\n" +
                 "</thead>\n" +
@@ -156,7 +156,7 @@ public class TablesTest extends RenderingTestCase {
 
     @Test
     public void pipesOnOutside() {
-        assertRendering( "|Abc|Def|\n|---|---|\n|1|2|", "<table>\n" +
+        assertRendering("|Abc|Def|\n|---|---|\n|1|2|", "<table>\n" +
                 "<thead>\n" +
                 "<tr><th>Abc</th><th>Def</th></tr>\n" +
                 "</thead>\n" +
@@ -168,7 +168,7 @@ public class TablesTest extends RenderingTestCase {
 
     @Test
     public void inlineElements() {
-        assertRendering( "*Abc*|Def\n---|---\n1|2", "<table>\n" +
+        assertRendering("*Abc*|Def\n---|---\n1|2", "<table>\n" +
                 "<thead>\n" +
                 "<tr><th><em>Abc</em></th><th>Def</th></tr>\n" +
                 "</thead>\n" +
@@ -180,7 +180,7 @@ public class TablesTest extends RenderingTestCase {
 
     @Test
     public void escapedPipe() {
-        assertRendering( "Abc|Def\n---|---\n1\\|2|20", "<table>\n" +
+        assertRendering("Abc|Def\n---|---\n1\\|2|20", "<table>\n" +
                 "<thead>\n" +
                 "<tr><th>Abc</th><th>Def</th></tr>\n" +
                 "</thead>\n" +
@@ -192,7 +192,7 @@ public class TablesTest extends RenderingTestCase {
 
     @Test
     public void escapedBackslash() {
-        assertRendering( "Abc|Def\n---|---\n1\\\\|2", "<table>\n" +
+        assertRendering("Abc|Def\n---|---\n1\\\\|2", "<table>\n" +
                 "<thead>\n" +
                 "<tr><th>Abc</th><th>Def</th></tr>\n" +
                 "</thead>\n" +
@@ -204,7 +204,7 @@ public class TablesTest extends RenderingTestCase {
 
     @Test
     public void alignLeft() {
-        assertRendering( "Abc|Def\n:---|---\n1|2", "<table>\n" +
+        assertRendering("Abc|Def\n:---|---\n1|2", "<table>\n" +
                 "<thead>\n" +
                 "<tr><th align=\"left\">Abc</th><th>Def</th></tr>\n" +
                 "</thead>\n" +
@@ -216,7 +216,7 @@ public class TablesTest extends RenderingTestCase {
 
     @Test
     public void alignRight() {
-        assertRendering( "Abc|Def\n---:|---\n1|2", "<table>\n" +
+        assertRendering("Abc|Def\n---:|---\n1|2", "<table>\n" +
                 "<thead>\n" +
                 "<tr><th align=\"right\">Abc</th><th>Def</th></tr>\n" +
                 "</thead>\n" +
@@ -228,7 +228,7 @@ public class TablesTest extends RenderingTestCase {
 
     @Test
     public void alignCenter() {
-        assertRendering( "Abc|Def\n:---:|---\n1|2", "<table>\n" +
+        assertRendering("Abc|Def\n:---:|---\n1|2", "<table>\n" +
                 "<thead>\n" +
                 "<tr><th align=\"center\">Abc</th><th>Def</th></tr>\n" +
                 "</thead>\n" +
@@ -240,7 +240,7 @@ public class TablesTest extends RenderingTestCase {
 
     @Test
     public void alignCenterSecond() {
-        assertRendering( "Abc|Def\n---|:---:\n1|2", "<table>\n" +
+        assertRendering("Abc|Def\n---|:---:\n1|2", "<table>\n" +
                 "<thead>\n" +
                 "<tr><th>Abc</th><th align=\"center\">Def</th></tr>\n" +
                 "</thead>\n" +
@@ -252,7 +252,7 @@ public class TablesTest extends RenderingTestCase {
 
     @Test
     public void alignLeftWithSpaces() {
-        assertRendering( "Abc|Def\n :--- |---\n1|2", "<table>\n" +
+        assertRendering("Abc|Def\n :--- |---\n1|2", "<table>\n" +
                 "<thead>\n" +
                 "<tr><th align=\"left\">Abc</th><th>Def</th></tr>\n" +
                 "</thead>\n" +
@@ -264,15 +264,15 @@ public class TablesTest extends RenderingTestCase {
 
     @Test
     public void alignmentMarkerMustBeNextToDashes() {
-        assertRendering( "Abc|Def\n: ---|---", "<p>Abc|Def\n: ---|---</p>\n");
-        assertRendering( "Abc|Def\n--- :|---", "<p>Abc|Def\n--- :|---</p>\n");
-        assertRendering( "Abc|Def\n---|: ---", "<p>Abc|Def\n---|: ---</p>\n");
-        assertRendering( "Abc|Def\n---|--- :", "<p>Abc|Def\n---|--- :</p>\n");
+        assertRendering("Abc|Def\n: ---|---", "<p>Abc|Def\n: ---|---</p>\n");
+        assertRendering("Abc|Def\n--- :|---", "<p>Abc|Def\n--- :|---</p>\n");
+        assertRendering("Abc|Def\n---|: ---", "<p>Abc|Def\n---|: ---</p>\n");
+        assertRendering("Abc|Def\n---|--- :", "<p>Abc|Def\n---|--- :</p>\n");
     }
 
     @Test
     public void bodyCanNotHaveMoreColumnsThanHead() {
-        assertRendering( "Abc|Def\n---|---\n1|2|3", "<table>\n" +
+        assertRendering("Abc|Def\n---|---\n1|2|3", "<table>\n" +
                 "<thead>\n" +
                 "<tr><th>Abc</th><th>Def</th></tr>\n" +
                 "</thead>\n" +
@@ -284,7 +284,7 @@ public class TablesTest extends RenderingTestCase {
 
     @Test
     public void bodyWithFewerColumnsThanHeadResultsInEmptyCells() {
-        assertRendering( "Abc|Def|Ghi\n---|---|---\n1|2", "<table>\n" +
+        assertRendering("Abc|Def|Ghi\n---|---|---\n1|2", "<table>\n" +
                 "<thead>\n" +
                 "<tr><th>Abc</th><th>Def</th><th>Ghi</th></tr>\n" +
                 "</thead>\n" +
@@ -296,7 +296,7 @@ public class TablesTest extends RenderingTestCase {
 
     @Test
     public void insideBlockQuote() {
-        assertRendering( "> Abc|Def\n> ---|---\n> 1|2", "<blockquote>\n" +
+        assertRendering("> Abc|Def\n> ---|---\n> 1|2", "<blockquote>\n" +
                 "<table>\n" +
                 "<thead>\n" +
                 "<tr><th>Abc</th><th>Def</th></tr>\n" +
@@ -310,7 +310,7 @@ public class TablesTest extends RenderingTestCase {
 
     @Test
     public void tableEndWithoutEmptyLine() {
-        assertRendering( "Abc|Def\n---|---\n1|2\ntable, you are over", "<table>\n" +
+        assertRendering("Abc|Def\n---|---\n1|2\ntable, you are over", "<table>\n" +
                 "<thead>\n" +
                 "<tr><th>Abc</th><th>Def</th></tr>\n" +
                 "</thead>\n" +

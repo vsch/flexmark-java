@@ -1,6 +1,5 @@
 package com.vladsch.flexmark.util.builder;
 
-import com.vladsch.flexmark.util.ast.NodeRepository;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.DataKey;
 import com.vladsch.flexmark.util.options.MutableDataSet;
@@ -15,7 +14,7 @@ public abstract class BuilderBase<T extends BuilderBase> extends MutableDataSet 
     // loaded extensions
     private final HashSet<Class> loadedExtensions = new HashSet<>();
 
-    // map of which api points were loaded by which extensions 
+    // map of which api points were loaded by which extensions
     private final HashMap<Class, HashSet<Object>> extensionApiPoints = new HashMap<>();
     private Extension currentExtension;
 

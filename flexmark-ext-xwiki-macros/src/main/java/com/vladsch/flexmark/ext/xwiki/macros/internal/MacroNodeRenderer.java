@@ -1,6 +1,5 @@
 package com.vladsch.flexmark.ext.xwiki.macros.internal;
 
-import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.ext.xwiki.macros.Macro;
 import com.vladsch.flexmark.ext.xwiki.macros.MacroAttribute;
 import com.vladsch.flexmark.ext.xwiki.macros.MacroBlock;
@@ -11,6 +10,7 @@ import com.vladsch.flexmark.html.renderer.NodeRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
 import com.vladsch.flexmark.html.renderer.NodeRendererFactory;
 import com.vladsch.flexmark.html.renderer.NodeRenderingHandler;
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.options.DataHolder;
 
 import java.util.HashSet;

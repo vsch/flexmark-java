@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.parser;
 
-import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ComputableFactory;
+import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.dependency.Dependent;
 
 import java.util.Map;

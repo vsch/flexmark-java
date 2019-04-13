@@ -1,6 +1,5 @@
 package com.vladsch.flexmark.integration;
 
-import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.ext.abbreviation.AbbreviationExtension;
 import com.vladsch.flexmark.ext.autolink.AutolinkExtension;
 import com.vladsch.flexmark.ext.emoji.EmojiExtension;
@@ -15,6 +14,7 @@ import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.spec.SpecReader;
 import com.vladsch.flexmark.test.ComboSpecTestCase;
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.html.LineFormattingAppendable;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.MutableDataSet;
@@ -125,5 +125,4 @@ public class ComboParserTest extends ComboSpecTestCase {
         //String html = readResource("/table.html");
         //assertRendering(source, html);
     }
-
 }

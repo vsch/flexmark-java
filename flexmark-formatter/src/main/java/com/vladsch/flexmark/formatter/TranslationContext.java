@@ -6,20 +6,20 @@ import com.vladsch.flexmark.util.options.MutableDataHolder;
 public interface TranslationContext {
     /**
      * Get the reason this format rendering is being performed
+     *
      * @return RenderPurpose for current rendering
      */
     RenderPurpose getRenderPurpose();
 
     /**
      * Get MutableDataHolder for storing this translation run values across render purpose phases
-     *
      */
 
     MutableDataHolder getTranslationStore();
 
     /**
      * Returns false if special translation functions are no-ops
-     *
+     * <p>
      * During {@link RenderPurpose#TRANSLATION_SPANS} this is true
      * During {@link RenderPurpose#TRANSLATED_SPANS} this is true
      * During {@link RenderPurpose#TRANSLATED} this is true
@@ -41,30 +41,30 @@ public interface TranslationContext {
 
     /**
      * Transform non-translating text
-     *
+     * <p>
      * During {@link RenderPurpose#TRANSLATION_SPANS} this converts text to non-translating placeholder based on ordinal id
      * During {@link RenderPurpose#TRANSLATED_SPANS} this returns the non-translating placeholder based on ordinal id
      * During {@link RenderPurpose#TRANSLATED} this returns the original non-translating text for the nonTranslatingText (placeholder)
      *
-     * @param prefix              prefix to use on non-translating placeholder so it is interpreted as a proper element during parsing
-     * @param nonTranslatingText  non-rendering text of the node (content will depend on translation phase)
-     * @param suffix              suffix to use on non-translating placeholder so it is interpreted as a proper element during parsing
-     * @param suffix2             suffix to use on non-translating placeholder so it is interpreted as a proper element during parsing
+     * @param prefix             prefix to use on non-translating placeholder so it is interpreted as a proper element during parsing
+     * @param nonTranslatingText non-rendering text of the node (content will depend on translation phase)
+     * @param suffix             suffix to use on non-translating placeholder so it is interpreted as a proper element during parsing
+     * @param suffix2            suffix to use on non-translating placeholder so it is interpreted as a proper element during parsing
      * @return text to be used in rendering for this phase
      */
     CharSequence transformNonTranslating(final CharSequence prefix, final CharSequence nonTranslatingText, final CharSequence suffix, final CharSequence suffix2);
 
     /**
      * Transform translating text but which is contextually isolated from the text block in which it is located ie. link reference or image reference
-     *
+     * <p>
      * During {@link RenderPurpose#TRANSLATION_SPANS} this converts text to non-translating placeholder based on ordinal id and adds it to translation snippets
      * During {@link RenderPurpose#TRANSLATED_SPANS} this returns the non-translating placeholder based on ordinal id
      * During {@link RenderPurpose#TRANSLATED} this returns the translated text for the translatingText (placeholder)
      *
-     * @param prefix              prefix to use on non-translating placeholder so it is interpreted as a proper element during parsing
-     * @param translatingText     translating but isolated text of the node (content will depend on translation phase)
-     * @param suffix              suffix to use on non-translating placeholder so it is interpreted as a proper element during parsing
-     * @param suffix2             suffix to use on non-translating placeholder so it is interpreted as a proper element during parsing
+     * @param prefix          prefix to use on non-translating placeholder so it is interpreted as a proper element during parsing
+     * @param translatingText translating but isolated text of the node (content will depend on translation phase)
+     * @param suffix          suffix to use on non-translating placeholder so it is interpreted as a proper element during parsing
+     * @param suffix2         suffix to use on non-translating placeholder so it is interpreted as a proper element during parsing
      * @return text to be used in rendering for this phase
      */
     CharSequence transformTranslating(final CharSequence prefix, final CharSequence translatingText, final CharSequence suffix, final CharSequence suffix2);
@@ -82,26 +82,25 @@ public interface TranslationContext {
 
     /**
      * Separate translation span. Will generate a paragraph of text which should be translated as one piece
-     *
+     * <p>
      * During {@link RenderPurpose#TRANSLATION_SPANS} this adds the generated output to translation spans
      * During {@link RenderPurpose#TRANSLATED_SPANS} output from renderer is suppressed, instead outputs corresponding translated span
      * During {@link RenderPurpose#TRANSLATED} calls render
-     *
      */
     void translatingSpan(TranslatingSpanRender render);
 
     /**
      * Separate non-translation span. Will generate a paragraph of text which will not be translated
-     *
+     * <p>
      * During {@link RenderPurpose#TRANSLATION_SPANS} this adds the generated output to translation spans
      * During {@link RenderPurpose#TRANSLATED_SPANS} output from renderer is suppressed, instead outputs corresponding translated span
      * During {@link RenderPurpose#TRANSLATED} calls render
-     *
      */
     void nonTranslatingSpan(TranslatingSpanRender render);
 
     /**
      * Separate translation span which is also a ref target
+     *
      * @param target
      * @param render
      */
@@ -110,8 +109,8 @@ public interface TranslationContext {
     /**
      * Temporarily change the format for placeholders
      *
-     * @param generator   placeholder generator
-     * @param render      render which will be used with the custom generator
+     * @param generator placeholder generator
+     * @param render    render which will be used with the custom generator
      */
     void customPlaceholderFormat(TranslationPlaceholderGenerator generator, TranslatingSpanRender render);
 }

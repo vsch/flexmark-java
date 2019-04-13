@@ -8,6 +8,7 @@ import java.util.List;
 public interface ContentContainer {
     /**
      * Get the content list
+     *
      * @return list of content
      */
     List<Object> getContent();
@@ -20,13 +21,13 @@ public interface ContentContainer {
     RelationshipsPart getRelationshipsPart();
 
     /*
-    * Get the part
+     * Get the part
      */
     Part getContainerPart();
 
     /**
      * Get the last added content element.
-     *
+     * <p>
      * May not be the last element of {@link #getContent()} if elements
      * are being inserted into the middle of content.
      *
@@ -36,9 +37,8 @@ public interface ContentContainer {
 
     /**
      * Add element to content
-     *
+     * <p>
      * May not be added at the end of content but inserted into the content list
-     *
      */
     void addContentElement(Object element);
 }

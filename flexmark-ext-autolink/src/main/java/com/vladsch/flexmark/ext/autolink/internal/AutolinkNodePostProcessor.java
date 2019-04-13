@@ -1,20 +1,12 @@
 package com.vladsch.flexmark.ext.autolink.internal;
 
-import com.vladsch.flexmark.ast.AutoLink;
-import com.vladsch.flexmark.ast.LinkNode;
-import com.vladsch.flexmark.ast.MailLink;
-import com.vladsch.flexmark.ast.Text;
-import com.vladsch.flexmark.ast.TextBase;
+import com.vladsch.flexmark.ast.*;
 import com.vladsch.flexmark.ext.autolink.AutolinkExtension;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.block.NodePostProcessor;
 import com.vladsch.flexmark.parser.block.NodePostProcessorFactory;
 import com.vladsch.flexmark.util.NodeTracker;
-import com.vladsch.flexmark.util.ast.DoNotDecorate;
-import com.vladsch.flexmark.util.ast.DoNotLinkDecorate;
-import com.vladsch.flexmark.util.ast.Document;
-import com.vladsch.flexmark.util.ast.Node;
-import com.vladsch.flexmark.util.ast.TypographicText;
+import com.vladsch.flexmark.util.ast.*;
 import com.vladsch.flexmark.util.html.Escaping;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.ReplacedTextMapper;
@@ -181,8 +173,8 @@ public class AutolinkNodePostProcessor extends NodePostProcessor {
                     node.insertBefore(node1);
                 }
                 state.nodeAdded(node1);
-            //} else if (startOffset < lastEscaped) {
-            //    int tmp = 0;
+                //} else if (startOffset < lastEscaped) {
+                //    int tmp = 0;
             }
 
             final BasedSequence linkChars = linkText.baseSubSequence(linkText.getStartOffset(), linkText.getEndOffset());

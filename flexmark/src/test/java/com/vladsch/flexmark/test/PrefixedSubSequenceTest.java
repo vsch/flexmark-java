@@ -27,7 +27,6 @@ public class PrefixedSubSequenceTest {
         assertEquals('f', substring.charAt(6));
     }
 
-
     @Test
     public void testSubSequence() {
         assertEquals("0", substring.subSequence(0, 1).toString());
@@ -42,5 +41,4 @@ public class PrefixedSubSequenceTest {
         assertEquals("3de", substring.subSequence(3, 6).toString());
         assertEquals("def", substring.subSequence(4, 7).toString());
     }
-
 }

@@ -1,17 +1,17 @@
 package com.vladsch.flexmark.ext.definition.internal;
 
-import com.vladsch.flexmark.util.ast.BlankLine;
-import com.vladsch.flexmark.util.ast.Block;
-import com.vladsch.flexmark.util.ast.BlockContent;
-import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.ast.Paragraph;
 import com.vladsch.flexmark.ext.definition.DefinitionItem;
 import com.vladsch.flexmark.ext.definition.DefinitionList;
 import com.vladsch.flexmark.ext.definition.DefinitionTerm;
-import com.vladsch.flexmark.parser.core.ParagraphParser;
 import com.vladsch.flexmark.parser.block.BlockPreProcessor;
 import com.vladsch.flexmark.parser.block.BlockPreProcessorFactory;
 import com.vladsch.flexmark.parser.block.ParserState;
+import com.vladsch.flexmark.parser.core.ParagraphParser;
+import com.vladsch.flexmark.util.ast.BlankLine;
+import com.vladsch.flexmark.util.ast.Block;
+import com.vladsch.flexmark.util.ast.BlockContent;
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.BasedSequenceImpl;
@@ -38,9 +38,9 @@ public class DefinitionListItemBlockPreProcessor implements BlockPreProcessor {
             // we add all these to the previous DefinitionList or add a new one if there isn't one
             final DefinitionItem definitionItem = (DefinitionItem) block;
             final Node previous = block.getPreviousAnyNot(BlankLine.class);
-            
+
             Node trailingBlankLines = new DefinitionList();
-            
+
             Node blankLine = definitionItem.getNext();
             if (blankLine instanceof BlankLine) {
                 blankLine.extractChainTo(trailingBlankLines);
@@ -133,7 +133,7 @@ public class DefinitionListItemBlockPreProcessor implements BlockPreProcessor {
             } else if (previous instanceof DefinitionList) {
                 final DefinitionList previousList = (DefinitionList) previous;
                 definitionItem.unlink();
-                
+
                 previousList.appendChild(definitionItem);
                 previousList.takeChildren(trailingBlankLines);
                 previousList.setCharsFromContent();

@@ -267,11 +267,11 @@ public class ImageUtils {
 
     /**
      * Load image from URL.
-     * 
+     * <p>
      * NOTE: Java7 JDK cannot load some images including GitHub emoji. Compiling this library with Java8 solves the problem.
-     * 
-     * @param imageURL  url of the image
-     * @param logImageProcessing  true if errors are to print to console
+     *
+     * @param imageURL           url of the image
+     * @param logImageProcessing true if errors are to print to console
      * @return image or null if failed to download.
      */
     public static BufferedImage loadImageFromURL(String imageURL, boolean logImageProcessing) {

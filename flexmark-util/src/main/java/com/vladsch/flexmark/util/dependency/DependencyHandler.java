@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.util.dependency;
 
-import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.util.Ref;
+import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.util.collection.iteration.ReversibleIndexedIterator;
 
 import java.util.*;

@@ -71,22 +71,22 @@
                     <w:name w:val="Default"/>
                     <w:basedOn w:val="Normal"/>
                     <w:qFormat/>
-                    <w:pPr />
-                    <w:rPr />
+                    <w:pPr/>
+                    <w:rPr/>
                 </w:style>
                 <w:style w:styleId="BodyText" w:type="paragraph">
                     <w:name w:val="Body Text"/>
                     <w:basedOn w:val="Normal"/>
                     <w:qFormat/>
-                    <w:pPr />
-                    <w:rPr />
+                    <w:pPr/>
+                    <w:rPr/>
                 </w:style>
                 <w:style w:styleId="Heading" w:type="paragraph">
                     <w:name w:val="Heading"/>
                     <w:basedOn w:val="Normal"/>
                     <w:qFormat/>
-                    <w:pPr />
-                    <w:rPr />
+                    <w:pPr/>
+                    <w:rPr/>
                 </w:style>
                 <w:style w:styleId="Heading1" w:type="paragraph">
                     <w:name w:val="Heading 1"/>
@@ -231,7 +231,7 @@
                         <w:spacing w:after="0" w:before="480"/>
                         <w:outlineLvl w:val="9"/>
                     </w:pPr>
-                    <w:rPr />
+                    <w:rPr/>
                 </w:style>
                 <w:style w:styleId="StrongEmphasis" w:type="character">
                     <w:name w:val="Strong Emphasis"/>
@@ -387,7 +387,7 @@
                             <w:left w:color="CCCCCC" w:space="9" w:sz="16" w:val="single"/>
                         </w:pBdr>
                         <w:bidi w:val="false"/>
-                        <w:spacing w:after="140" w:before="140" />
+                        <w:spacing w:after="140" w:before="140"/>
                         <w:ind w:hanging="0" w:left="240" w:right="0"/>
                         <w:jc w:val="left"/>
                     </w:pPr>
@@ -404,14 +404,14 @@
                             <w:left w:color="3366FF" w:space="9" w:sz="16" w:val="single"/>
                         </w:pBdr>
                         <w:bidi w:val="false"/>
-                        <w:spacing w:after="140" w:before="140" />
+                        <w:spacing w:after="140" w:before="140"/>
                         <w:ind w:hanging="0" w:left="240" w:right="0"/>
                         <w:jc w:val="left"/>
                     </w:pPr>
                     <w:rPr>
-<!--
-                        <w:color w:val="666666"/>
--->
+                        <!--
+                                                <w:color w:val="666666"/>
+                        -->
                     </w:rPr>
                 </w:style>
                 <w:style w:styleId="PreformattedText" w:type="paragraph">

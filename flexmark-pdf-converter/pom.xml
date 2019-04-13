@@ -59,19 +59,19 @@
             <artifactId>openhtmltopdf-jsoup-dom-converter</artifactId>
             <version>${openhtml.version}</version>
         </dependency>
-<!--
-        <dependency>
-            &lt;!&ndash; Optional, leave out if you do not need logging via slf4j. &ndash;&gt;
-            <groupId>com.openhtmltopdf</groupId>
-            <artifactId>openhtmltopdf-slf4j</artifactId>
-            <version>${openhtml.version}</version>
-        </dependency>
-        <dependency>
-            &lt;!&ndash; Optional, leave out if you do not need logging via log4j. &ndash;&gt;
-            <groupId>com.openhtmltopdf</groupId>
-            <artifactId>openhtmltopdf-log4j</artifactId>
-            <version>${openhtml.version}</version>
-        </dependency>
--->
+        <!--
+                <dependency>
+                    &lt;!&ndash; Optional, leave out if you do not need logging via slf4j. &ndash;&gt;
+                    <groupId>com.openhtmltopdf</groupId>
+                    <artifactId>openhtmltopdf-slf4j</artifactId>
+                    <version>${openhtml.version}</version>
+                </dependency>
+                <dependency>
+                    &lt;!&ndash; Optional, leave out if you do not need logging via log4j. &ndash;&gt;
+                    <groupId>com.openhtmltopdf</groupId>
+                    <artifactId>openhtmltopdf-log4j</artifactId>
+                    <version>${openhtml.version}</version>
+                </dependency>
+        -->
     </dependencies>
 </project>

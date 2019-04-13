@@ -1,10 +1,10 @@
 package com.vladsch.flexmark.ext.enumerated.reference.internal;
 
-import com.vladsch.flexmark.util.ast.Document;
-import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.ext.enumerated.reference.*;
 import com.vladsch.flexmark.parser.LinkRefProcessor;
 import com.vladsch.flexmark.parser.LinkRefProcessorFactory;
+import com.vladsch.flexmark.util.ast.Document;
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
@@ -49,7 +49,6 @@ public class EnumeratedReferenceLinkRefProcessor implements LinkRefProcessor {
             enumeratedReferenceText.setEnumeratedReferenceBlock(enumeratedReferenceBlock);
             return enumeratedReferenceText;
         }
-
     }
 
     @Override

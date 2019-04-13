@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.html;
 
-import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
+import com.vladsch.flexmark.util.ast.Node;
 
 import java.io.IOException;
 

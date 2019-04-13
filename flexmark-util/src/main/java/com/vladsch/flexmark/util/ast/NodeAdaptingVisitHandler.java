@@ -2,6 +2,7 @@ package com.vladsch.flexmark.util.ast;
 
 /**
  * intended to be extended with specific handler function. see {@link VisitHandler}
+ *
  * @param <N> subclass of {@link Node}
  * @param <A> subclass of {@link NodeAdaptingVisitor}
  */
@@ -34,7 +35,7 @@ public abstract class NodeAdaptingVisitHandler<N extends Node, A extends NodeAda
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        NodeAdaptingVisitHandler<?,?> other = (NodeAdaptingVisitHandler<?,?>) o;
+        NodeAdaptingVisitHandler<?, ?> other = (NodeAdaptingVisitHandler<?, ?>) o;
 
         if (myClass != other.myClass) return false;
         return myAdapter == other.myAdapter;

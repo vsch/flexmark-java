@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.ast.util;
 
-import com.vladsch.flexmark.ast.*;
+import com.vladsch.flexmark.ast.Heading;
 import com.vladsch.flexmark.util.ast.*;
 
 import java.util.ArrayList;

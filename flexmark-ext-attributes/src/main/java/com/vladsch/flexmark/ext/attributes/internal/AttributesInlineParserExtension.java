@@ -39,9 +39,9 @@ public class AttributesInlineParserExtension implements InlineParserExtension {
                 // see what we have
                 // open, see if open/close
                 BasedSequence attributesText = input.subSequence(matcher.start(1), matcher.end(1));
-                AttributesNode attributes = attributesText.equals("#") || attributesText.equals(".") ? new AttributesDelimiter(attributesOpen.subSequence(0, 1), attributesText, attributesOpen.endSequence(1)) 
+                AttributesNode attributes = attributesText.equals("#") || attributesText.equals(".") ? new AttributesDelimiter(attributesOpen.subSequence(0, 1), attributesText, attributesOpen.endSequence(1))
                         : new AttributesNode(attributesOpen.subSequence(0, 1), attributesText, attributesOpen.endSequence(1));
-                
+
                 attributes.setCharsFromContent();
 
                 int leadingSpaces = attributesText.countLeading(" \t");

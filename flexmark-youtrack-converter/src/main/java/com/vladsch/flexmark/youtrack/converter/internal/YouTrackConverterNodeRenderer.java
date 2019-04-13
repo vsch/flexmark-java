@@ -229,7 +229,7 @@ public class YouTrackConverterNodeRenderer implements NodeRenderer
 
         inBlockQuote--;
         html.popPrefix();
-        
+
         tailBlankLine(node, html);
     }
 

@@ -27,7 +27,7 @@ public class TextCollectingVisitor {
             System.arraycopy(classList, 0, result, index, classList.length);
             index += classList.length;
         }
-        
+
         return result;
     }
 
@@ -71,7 +71,8 @@ public class TextCollectingVisitor {
                         TextCollectingVisitor.this.visit(node);
                     }
                 })
-        ) {
+        )
+        {
             @Override
             public void visit(final Node node) {
                 VisitHandler handler = myCustomHandlersMap.get(node.getClass());

@@ -1,6 +1,8 @@
 package com.vladsch.flexmark.parser.core;
 
-import com.vladsch.flexmark.ast.*;
+import com.vladsch.flexmark.ast.CodeBlock;
+import com.vladsch.flexmark.ast.FencedCodeBlock;
+import com.vladsch.flexmark.ast.Text;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.block.*;
 import com.vladsch.flexmark.util.ast.Block;

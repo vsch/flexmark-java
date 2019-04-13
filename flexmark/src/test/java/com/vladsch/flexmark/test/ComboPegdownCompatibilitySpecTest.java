@@ -18,8 +18,7 @@ public class ComboPegdownCompatibilitySpecTest extends ComboExtraSpecTest {
     private static final String SPEC_RESOURCE = "/pegdown_compatibility_spec.md";
     static final DataHolder OPTIONS = new MutableDataSet().setFrom(ParserEmulationProfile.PEGDOWN_STRICT)
             .set(HtmlRenderer.INDENT_SIZE, 2)
-            .set(HtmlRenderer.PERCENT_ENCODE_URLS, true)
-            ;
+            .set(HtmlRenderer.PERCENT_ENCODE_URLS, true);
 
     private static final Map<String, DataHolder> optionsMap = new HashMap<String, DataHolder>();
     static {

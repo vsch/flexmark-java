@@ -3,12 +3,12 @@ package com.vladsch.flexmark.util.collection;
 import com.vladsch.flexmark.util.Computable;
 
 public class CopyOnWriteRef<T> {
-    private T myValue; 
+    private T myValue;
     private int myReferenceCount;
-    private Computable<T,T> myCloner;
+    private Computable<T, T> myCloner;
     private boolean myMutable;
 
-    public CopyOnWriteRef(T value, Computable<T,T> cloner) {
+    public CopyOnWriteRef(T value, Computable<T, T> cloner) {
         myValue = value;
         myReferenceCount = 0;
         myCloner = cloner;
@@ -17,12 +17,12 @@ public class CopyOnWriteRef<T> {
     public T getPeek() {
         return myValue;
     }
-    
+
     public T getImmutable() {
         if (myValue != null) myReferenceCount++;
         return myValue;
     }
-    
+
     public T getMutable() {
         if (myReferenceCount > 0) {
             myValue = myCloner.compute(myValue);
@@ -30,7 +30,7 @@ public class CopyOnWriteRef<T> {
         }
         return myValue;
     }
-    
+
     public void setValue(T value) {
         myReferenceCount = 0;
         myValue = myCloner.compute(value);

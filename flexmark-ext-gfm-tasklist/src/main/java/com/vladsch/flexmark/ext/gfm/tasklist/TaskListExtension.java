@@ -34,7 +34,9 @@ public class TaskListExtension implements Parser.ParserExtension, HtmlRenderer.H
     public static final DataKey<String> ITEM_DONE_CLASS = new DataKey<>("ITEM_DONE_CLASS", "");
     public static final DataKey<String> ITEM_NOT_DONE_CLASS = new DataKey<>("ITEM_NOT_DONE_CLASS", "");
 
-    /** @deprecated use TIGHT_ITEM_CLASS instead */
+    /**
+     * @deprecated use TIGHT_ITEM_CLASS instead
+     */
     public static final DataKey<String> ITEM_CLASS = TIGHT_ITEM_CLASS;
 
     // formatting options
@@ -65,7 +67,7 @@ public class TaskListExtension implements Parser.ParserExtension, HtmlRenderer.H
 
     @Override
     public void parserOptions(final MutableDataHolder options) {
-        ListOptions.addItemMarkerSuffixes(options, "[ ]", "[x]", "[X]" );
+        ListOptions.addItemMarkerSuffixes(options, "[ ]", "[x]", "[X]");
     }
 
     @Override

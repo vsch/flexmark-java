@@ -1,6 +1,8 @@
 package com.vladsch.flexmark.samples;
 
-import com.vladsch.flexmark.ast.*;
+import com.vladsch.flexmark.ast.InlineLinkNode;
+import com.vladsch.flexmark.ast.Link;
+import com.vladsch.flexmark.ast.Text;
 import com.vladsch.flexmark.html.CustomNodeRenderer;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.html.HtmlWriter;

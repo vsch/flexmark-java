@@ -1,6 +1,9 @@
 package com.vladsch.flexmark.samples;
 
-import com.vladsch.flexmark.ast.*;
+import com.vladsch.flexmark.ast.Link;
+import com.vladsch.flexmark.ast.LinkNode;
+import com.vladsch.flexmark.ast.Text;
+import com.vladsch.flexmark.ast.TextBase;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.PostProcessor;

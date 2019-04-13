@@ -4,7 +4,7 @@ import org.junit.runners.Suite;
 
 @org.junit.runner.RunWith(Suite.class)
 @Suite.SuiteClasses({
-    StrikethroughTest.class,
+        StrikethroughTest.class,
         StrikethroughTest.class,
         ComboStrikethroughSpecTest.class,
         ComboSubscriptSpecTest.class,

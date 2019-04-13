@@ -1,7 +1,5 @@
 package com.vladsch.flexmark;
 
-import com.vladsch.flexmark.util.IParse;
-import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.ext.abbreviation.AbbreviationExtension;
 import com.vladsch.flexmark.ext.abbreviation.internal.AbbreviationRepository;
 import com.vladsch.flexmark.ext.anchorlink.AnchorLinkExtension;
@@ -33,6 +31,8 @@ import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.spec.SpecReader;
 import com.vladsch.flexmark.superscript.SuperscriptExtension;
 import com.vladsch.flexmark.test.ComboSpecTestCase;
+import com.vladsch.flexmark.util.IParse;
+import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.format.options.ElementPlacement;
 import com.vladsch.flexmark.util.format.options.ElementPlacementSort;
 import com.vladsch.flexmark.util.options.DataHolder;

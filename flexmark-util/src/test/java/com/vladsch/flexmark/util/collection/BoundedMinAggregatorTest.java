@@ -1,7 +1,8 @@
 package com.vladsch.flexmark.util.collection;
 
-import java.util.function.BiFunction;
 import org.junit.Test;
+
+import java.util.function.BiFunction;
 
 import static org.junit.Assert.assertEquals;
 
@@ -21,6 +22,6 @@ public class BoundedMinAggregatorTest {
         assertEquals((Integer) null, reduce(new BoundedMinAggregator(3), (Integer) null));
         assertEquals(4, (int) reduce(new BoundedMinAggregator(3), 1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
         assertEquals(6, (int) reduce(new BoundedMinAggregator(5), 1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
-        assertEquals(null,reduce(new BoundedMinAggregator(10), 1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
+        assertEquals(null, reduce(new BoundedMinAggregator(10), 1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
     }
 }

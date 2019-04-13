@@ -4,7 +4,8 @@ import com.vladsch.flexmark.ast.Image;
 import com.vladsch.flexmark.ast.ImageRef;
 import com.vladsch.flexmark.ast.Paragraph;
 import com.vladsch.flexmark.ast.Text;
-import com.vladsch.flexmark.html.*;
+import com.vladsch.flexmark.html.EmbeddedAttributeProvider;
+import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.block.NodePostProcessor;
 import com.vladsch.flexmark.parser.block.NodePostProcessorFactory;
@@ -77,7 +78,7 @@ public class NodeInsertingPostProcessorSample {
 
                 // create a paragraph for the text
                 Paragraph paragraph = new Paragraph(text.getChars());
-                
+
                 // this will allows us add attributes in the AST without needing to modify the attribute provider
                 Attributes attributes = new Attributes();
                 attributes.addValue("class", "caption");
@@ -133,7 +134,7 @@ public class NodeInsertingPostProcessorSample {
 
         System.out.println("\n---- HTML ------------------------\n");
         System.out.println(html);
-        
+
         System.out.println("\n---- AST ------------------------\n");
         System.out.println(new AstCollectingVisitor().collectAndGetAstText(document));
     }

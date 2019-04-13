@@ -1,9 +1,6 @@
 package com.vladsch.flexmark.samples;
 
-import com.vladsch.flexmark.parser.ParserEmulationProfile;
-import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.ast.Heading;
-import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.ast.util.TextCollectingVisitor;
 import com.vladsch.flexmark.ext.anchorlink.AnchorLink;
 import com.vladsch.flexmark.ext.anchorlink.internal.AnchorLinkNodeRenderer;
@@ -13,8 +10,11 @@ import com.vladsch.flexmark.html.HtmlRenderer.HtmlRendererExtension;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.*;
 import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.parser.ParserEmulationProfile;
 import com.vladsch.flexmark.profiles.pegdown.Extensions;
 import com.vladsch.flexmark.profiles.pegdown.PegdownOptionsAdapter;
+import com.vladsch.flexmark.util.ast.Block;
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.MutableDataHolder;
 
@@ -69,7 +69,7 @@ public class TitleExtract {
         void render(final AnchorLink node, final NodeRendererContext context, final HtmlWriter html) {
             Node parent = node.getParent();
 
-            if (parent instanceof Heading && ((Heading)parent).getLevel() == 1) {
+            if (parent instanceof Heading && ((Heading) parent).getLevel() == 1) {
                 // render without anchor link
                 context.renderChildren(node);
             } else {
@@ -89,7 +89,7 @@ public class TitleExtract {
             if (node.getLevel() == 1) {
                 // render without anchor link
                 final int extensions = context.getOptions().get(ParserEmulationProfile.PEGDOWN_EXTENSIONS);
-                if (context.getHtmlOptions().renderHeaderId || haveExtension(extensions,Extensions.ANCHORLINKS) || haveAllExtensions(extensions,Extensions.EXTANCHORLINKS | Extensions.EXTANCHORLINKS_WRAP) ) {
+                if (context.getHtmlOptions().renderHeaderId || haveExtension(extensions, Extensions.ANCHORLINKS) || haveAllExtensions(extensions, Extensions.EXTANCHORLINKS | Extensions.EXTANCHORLINKS_WRAP)) {
                     String id = context.getNodeId(node);
                     if (id != null) {
                         html.attr("id", id);

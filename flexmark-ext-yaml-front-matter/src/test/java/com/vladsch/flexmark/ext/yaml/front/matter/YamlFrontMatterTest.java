@@ -1,10 +1,10 @@
 package com.vladsch.flexmark.ext.yaml.front.matter;
 
-import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.test.RenderingTestCase;
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.builder.Extension;
 import org.junit.Test;
 
@@ -46,7 +46,7 @@ public class YamlFrontMatterTest extends RenderingTestCase {
         assertEquals(1, data.get("hello").size());
         assertEquals("world", data.get("hello").get(0));
 
-        assertRendering( input, rendered);
+        assertRendering(input, rendered);
     }
 
     @Test
@@ -68,7 +68,7 @@ public class YamlFrontMatterTest extends RenderingTestCase {
         assertEquals("key", data.keySet().iterator().next());
         assertEquals(0, data.get("key").size());
 
-        assertRendering( input, rendered);
+        assertRendering(input, rendered);
     }
 
     @Test
@@ -94,7 +94,7 @@ public class YamlFrontMatterTest extends RenderingTestCase {
         assertEquals("value1", data.get("list").get(0));
         assertEquals("value2", data.get("list").get(1));
 
-        assertRendering( input, rendered);
+        assertRendering(input, rendered);
     }
 
     @Test
@@ -119,7 +119,7 @@ public class YamlFrontMatterTest extends RenderingTestCase {
         assertEquals(1, data.get("literal").size());
         assertEquals("hello markdown!\nliteral thing...", data.get("literal").get(0));
 
-        assertRendering( input, rendered);
+        assertRendering(input, rendered);
     }
 
     @Test
@@ -143,7 +143,7 @@ public class YamlFrontMatterTest extends RenderingTestCase {
         assertEquals(1, data.get("literal").size());
         assertEquals("- hello markdown!", data.get("literal").get(0));
 
-        assertRendering( input, rendered);
+        assertRendering(input, rendered);
     }
 
     @Test
@@ -182,7 +182,7 @@ public class YamlFrontMatterTest extends RenderingTestCase {
         assertEquals("value1", data.get("list").get(0));
         assertEquals("value2", data.get("list").get(1));
 
-        assertRendering( input, rendered);
+        assertRendering(input, rendered);
     }
 
     @Test
@@ -202,7 +202,7 @@ public class YamlFrontMatterTest extends RenderingTestCase {
 
         assertTrue(data.isEmpty());
 
-        assertRendering( input, rendered);
+        assertRendering(input, rendered);
     }
 
     @Test
@@ -219,7 +219,7 @@ public class YamlFrontMatterTest extends RenderingTestCase {
 
         assertTrue(data.isEmpty());
 
-        assertRendering( input, rendered);
+        assertRendering(input, rendered);
     }
 
     @Override

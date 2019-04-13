@@ -1,219 +1,220 @@
 <MarkdownNavigator.ExportedProjectSettings>
-  <option name="myName" value="" havePreviewSettings="true" haveParserSettings="true" haveHtmlSettings="true" haveCssSettings="true" haveHtmlExportSettings="true" haveLinkMapSettings="true" profileName="">
-    <PreviewSettings splitEditorLayout="FIRST" splitEditorPreview="PREVIEW" useGrayscaleRendering="false" zoomFactor="1.0" maxImageWidth="0" showGitHubPageIfSynced="false" allowBrowsingInPreview="false" synchronizePreviewPosition="true" highlightPreviewType="LINE" highlightFadeOut="2" highlightOnTyping="false" synchronizeSourcePosition="true" verticallyAlignSourceAndPreviewSyncPosition="true" showSearchHighlightsInPreview="true" showSelectionInPreview="true" openRemoteLinks="true" replaceUnicodeEmoji="false" lastLayoutSetsDefault="false">
-      <PanelProvider>
-        <provider providerId="com.vladsch.idea.multimarkdown.editor.javafx.html.panel" providerName="JavaFX WebView" />
-      </PanelProvider>
-    </PreviewSettings>
-      <ParserSettings gitHubSyntaxChange="false" emojiShortcuts="1" emojiImages="0">
-      <PegdownExtensions>
-          <option name="ABBREVIATIONS" value="false"/>
-        <option name="ANCHORLINKS" value="false" />
-        <option name="ASIDE" value="true" />
-        <option name="ATXHEADERSPACE" value="true" />
-          <option name="AUTOLINKS" value="false"/>
-          <option name="DEFINITIONS" value="false"/>
-        <option name="DEFINITION_BREAK_DOUBLE_BLANK_LINE" value="false" />
-        <option name="FENCED_CODE_BLOCKS" value="true" />
-          <option name="FOOTNOTES" value="false"/>
-        <option name="HARDWRAPS" value="false" />
-        <option name="HTML_DEEP_PARSER" value="false" />
-          <option name="INSERTED" value="false"/>
-          <option name="QUOTES" value="false"/>
-        <option name="RELAXEDHRULES" value="true" />
-          <option name="SMARTS" value="false"/>
-        <option name="STRIKETHROUGH" value="true" />
-          <option name="SUBSCRIPT" value="false"/>
-          <option name="SUPERSCRIPT" value="false"/>
-        <option name="SUPPRESS_HTML_BLOCKS" value="false" />
-        <option name="SUPPRESS_INLINE_HTML" value="false" />
-        <option name="TABLES" value="true" />
-        <option name="TASKLISTITEMS" value="true" />
-        <option name="TOC" value="true" />
-        <option name="WIKILINKS" value="true" />
-      </PegdownExtensions>
-      <ParserOptions>
-          <option name="ADMONITION_EXT" value="false"/>
-          <option name="ATTRIBUTES_EXT" value="false"/>
-        <option name="COMMONMARK_LISTS" value="true" />
-        <option name="DUMMY" value="false" />
-        <option name="EMOJI_SHORTCUTS" value="true" />
-          <option name="ENUMERATED_REFERENCES_EXT" value="false"/>
-        <option name="FLEXMARK_FRONT_MATTER" value="true" />
-        <option name="GFM_LOOSE_BLANK_LINE_AFTER_ITEM_PARA" value="false" />
-          <option name="GFM_TABLE_RENDERING" value="true"/>
-        <option name="GITBOOK_URL_ENCODING" value="false" />
-        <option name="GITHUB_LISTS" value="false" />
-        <option name="GITHUB_WIKI_LINKS" value="true" />
-          <option name="GITLAB_EXT" value="false"/>
-        <option name="GITLAB_MATH_EXT" value="false" />
-        <option name="GITLAB_MERMAID_EXT" value="false" />
-          <option name="HEADER_ID_NON_ASCII_TO_LOWERCASE" value="false"/>
-        <option name="HEADER_ID_NO_DUPED_DASHES" value="false" />
-          <option name="JEKYLL_FRONT_MATTER" value="false"/>
-          <option name="MACROS_EXT" value="false"/>
-        <option name="NO_TEXT_ATTRIBUTES" value="false" />
-        <option name="PARSE_HTML_ANCHOR_ID" value="false" />
-          <option name="PLANTUML_FENCED_CODE" value="false"/>
-          <option name="PUML_FENCED_CODE" value="false"/>
-        <option name="SIM_TOC_BLANK_LINE_SPACER" value="true" />
-      </ParserOptions>
-    </ParserSettings>
-      <HtmlSettings headerTopEnabled="false" headerBottomEnabled="false" bodyTopEnabled="false" bodyBottomEnabled="false" embedUrlContent="false" addPageHeader="true" embedImages="false" embedHttpImages="false" imageUriSerials="false" addDocTypeHtml="true" noParaTags="false" plantUmlConversion="0" mathConversion="-1">
-      <GeneratorProvider>
-        <provider providerId="com.vladsch.idea.multimarkdown.editor.javafx.html.generator" providerName="JavaFx HTML Generator" />
-      </GeneratorProvider>
-      <headerTop />
-      <headerBottom />
-      <bodyTop />
-      <bodyBottom />
-    </HtmlSettings>
-    <CssSettings previewScheme="UI_SCHEME" cssUri="" isCssUriEnabled="false" isCssUriSerial="true" isCssTextEnabled="true" isDynamicPageWidth="true">
-      <StylesheetProvider>
-        <provider providerId="com.vladsch.idea.multimarkdown.editor.javafx.html.css" providerName="Default JavaFx Stylesheet" />
-      </StylesheetProvider>
-      <ScriptProviders>
-        <provider providerId="com.vladsch.idea.multimarkdown.editor.github-collapse-markdown.html.script" providerName="GitHub Collapse Markdown" />
-      </ScriptProviders>
-      <cssText>.markdown-body,
-.wiki-body {
-    font-family: Arial, &quot;Helvetica Neue&quot;, &quot;Segoe UI&quot;, freesans, sans-serif;
-    font-size: 16px;
-    line-height: 1.6;
-}
-
-code { 
-    background-color:#f0f0f0;
-    border-radius:2px;
-    padding:1px 0 0 0;
-    border:1px solid #e0e0e0;
-    font-family:Consolas,Inconsolata,Courier,monospace;
-    font-size:0.9em;color:#b00042; 
-}
-
-.search-highlight {
-    border: solid 1px #000;
-    padding: 1px;
-    background-color: #ffff00;
-    color: #000;
-}
-
-.selection-highlight {
-    color:#000;
-    padding:1px 0 1px 0;
-    border: solid 1px #52CC7A;
-    background-color: #B5FFCE;
-}</cssText>
-      <cssUriHistory />
-    </CssSettings>
-      <HtmlExportSettings updateOnSave="false" parentDir="$ProjectFileDir$" targetDir="$ProjectFileDir$/out" cssDir="$ProjectFileDir$/out/export/css" scriptDir="$ProjectFileDir$/out/export/js" plainHtml="false" imageDir="$ProjectFileDir$/out/img" copyLinkedImages="false" imageUniquifyType="0" targetPathType="2" targetExt="" useTargetExt="false" noCssNoScripts="false" useElementStyleAttribute="false" linkToExportedHtml="true" exportOnSettingsChange="true" regenerateOnProjectOpen="false" linkFormatType="HTTP_ABSOLUTE"/>
-    <LinkMapSettings>
-      <textMaps />
-    </LinkMapSettings>
-  </option>
-    <settings default="" pdf-export="" plain-text-search-scope="Project Files">
-    <profile>
-      <option name="myName" value="COPY_HTML_MIME" havePreviewSettings="true" haveParserSettings="true" haveHtmlSettings="true" haveCssSettings="true" haveHtmlExportSettings="true" haveLinkMapSettings="true" profileName="COPY_HTML_MIME">
-        <PreviewSettings splitEditorLayout="FIRST" splitEditorPreview="PREVIEW" useGrayscaleRendering="false" zoomFactor="0.8" maxImageWidth="600" showGitHubPageIfSynced="false" allowBrowsingInPreview="false" synchronizePreviewPosition="false" highlightPreviewType="LINE" highlightFadeOut="5" highlightOnTyping="false" synchronizeSourcePosition="false" verticallyAlignSourceAndPreviewSyncPosition="true" showSearchHighlightsInPreview="true" showSelectionInPreview="true" openRemoteLinks="true" replaceUnicodeEmoji="false" lastLayoutSetsDefault="false">
-          <PanelProvider>
-            <provider providerId="com.vladsch.idea.multimarkdown.editor.javafx.html.panel" providerName="JavaFX WebView" />
-          </PanelProvider>
+    <option name="myName" value="" havePreviewSettings="true" haveParserSettings="true" haveHtmlSettings="true" haveCssSettings="true" haveHtmlExportSettings="true" haveLinkMapSettings="true" profileName="">
+        <PreviewSettings splitEditorLayout="FIRST" splitEditorPreview="PREVIEW" useGrayscaleRendering="false" zoomFactor="1.0" maxImageWidth="0" showGitHubPageIfSynced="false" allowBrowsingInPreview="false" synchronizePreviewPosition="true" highlightPreviewType="LINE" highlightFadeOut="2" highlightOnTyping="false" synchronizeSourcePosition="true" verticallyAlignSourceAndPreviewSyncPosition="true" showSearchHighlightsInPreview="true" showSelectionInPreview="true" openRemoteLinks="true" replaceUnicodeEmoji="false" lastLayoutSetsDefault="false">
+            <PanelProvider>
+                <provider providerId="com.vladsch.idea.multimarkdown.editor.javafx.html.panel" providerName="JavaFX WebView"/>
+            </PanelProvider>
         </PreviewSettings>
-        <ParserSettings gitHubSyntaxChange="false" emojiShortcuts="0" emojiImages="0">
-          <PegdownExtensions>
-            <option name="ABBREVIATIONS" value="true" />
-            <option name="ANCHORLINKS" value="false" />
-            <option name="ASIDE" value="true" />
-            <option name="ATXHEADERSPACE" value="true" />
-            <option name="AUTOLINKS" value="true" />
-            <option name="DEFINITIONS" value="true" />
-            <option name="DEFINITION_BREAK_DOUBLE_BLANK_LINE" value="false" />
-            <option name="FENCED_CODE_BLOCKS" value="true" />
-            <option name="FOOTNOTES" value="true" />
-            <option name="HARDWRAPS" value="false" />
-            <option name="HTML_DEEP_PARSER" value="true" />
-            <option name="INSERTED" value="true" />
-            <option name="QUOTES" value="true" />
-            <option name="RELAXEDHRULES" value="true" />
-            <option name="SMARTS" value="true" />
-            <option name="STRIKETHROUGH" value="true" />
-            <option name="SUBSCRIPT" value="true" />
-            <option name="SUPERSCRIPT" value="true" />
-            <option name="SUPPRESS_HTML_BLOCKS" value="false" />
-            <option name="SUPPRESS_INLINE_HTML" value="false" />
-            <option name="TABLES" value="true" />
-            <option name="TASKLISTITEMS" value="true" />
-            <option name="TOC" value="true" />
-            <option name="WIKILINKS" value="true" />
-          </PegdownExtensions>
-          <ParserOptions>
-            <option name="ADMONITION_EXT" value="true" />
-            <option name="ATTRIBUTES_EXT" value="true" />
-            <option name="COMMONMARK_LISTS" value="false" />
-            <option name="DUMMY" value="false" />
-            <option name="EMOJI_SHORTCUTS" value="true" />
-            <option name="ENUMERATED_REFERENCES_EXT" value="true" />
-            <option name="FLEXMARK_FRONT_MATTER" value="true" />
-            <option name="GFM_LOOSE_BLANK_LINE_AFTER_ITEM_PARA" value="false" />
-            <option name="GFM_TABLE_RENDERING" value="false" />
-            <option name="GITBOOK_URL_ENCODING" value="true" />
-            <option name="GITHUB_LISTS" value="true" />
-            <option name="GITHUB_WIKI_LINKS" value="true" />
-            <option name="GITLAB_EXT" value="false" />
-              <option name="GITLAB_MATH_EXT" value="true"/>
-              <option name="GITLAB_MERMAID_EXT" value="true"/>
-              <option name="HEADER_ID_NON_ASCII_TO_LOWERCASE" value="false"/>
-            <option name="HEADER_ID_NO_DUPED_DASHES" value="false" />
-            <option name="JEKYLL_FRONT_MATTER" value="false" />
-              <option name="MACROS_EXT" value="true"/>
-            <option name="NO_TEXT_ATTRIBUTES" value="false" />
-            <option name="PARSE_HTML_ANCHOR_ID" value="true" />
-              <option name="PLANTUML_FENCED_CODE" value="false"/>
-              <option name="PUML_FENCED_CODE" value="false"/>
-            <option name="SIM_TOC_BLANK_LINE_SPACER" value="true" />
-          </ParserOptions>
+        <ParserSettings gitHubSyntaxChange="false" emojiShortcuts="1" emojiImages="0">
+            <PegdownExtensions>
+                <option name="ABBREVIATIONS" value="false"/>
+                <option name="ANCHORLINKS" value="false"/>
+                <option name="ASIDE" value="true"/>
+                <option name="ATXHEADERSPACE" value="true"/>
+                <option name="AUTOLINKS" value="false"/>
+                <option name="DEFINITIONS" value="false"/>
+                <option name="DEFINITION_BREAK_DOUBLE_BLANK_LINE" value="false"/>
+                <option name="FENCED_CODE_BLOCKS" value="true"/>
+                <option name="FOOTNOTES" value="false"/>
+                <option name="HARDWRAPS" value="false"/>
+                <option name="HTML_DEEP_PARSER" value="false"/>
+                <option name="INSERTED" value="false"/>
+                <option name="QUOTES" value="false"/>
+                <option name="RELAXEDHRULES" value="true"/>
+                <option name="SMARTS" value="false"/>
+                <option name="STRIKETHROUGH" value="true"/>
+                <option name="SUBSCRIPT" value="false"/>
+                <option name="SUPERSCRIPT" value="false"/>
+                <option name="SUPPRESS_HTML_BLOCKS" value="false"/>
+                <option name="SUPPRESS_INLINE_HTML" value="false"/>
+                <option name="TABLES" value="true"/>
+                <option name="TASKLISTITEMS" value="true"/>
+                <option name="TOC" value="true"/>
+                <option name="WIKILINKS" value="true"/>
+            </PegdownExtensions>
+            <ParserOptions>
+                <option name="ADMONITION_EXT" value="false"/>
+                <option name="ATTRIBUTES_EXT" value="false"/>
+                <option name="COMMONMARK_LISTS" value="true"/>
+                <option name="DUMMY" value="false"/>
+                <option name="EMOJI_SHORTCUTS" value="true"/>
+                <option name="ENUMERATED_REFERENCES_EXT" value="false"/>
+                <option name="FLEXMARK_FRONT_MATTER" value="true"/>
+                <option name="GFM_LOOSE_BLANK_LINE_AFTER_ITEM_PARA" value="false"/>
+                <option name="GFM_TABLE_RENDERING" value="true"/>
+                <option name="GITBOOK_URL_ENCODING" value="false"/>
+                <option name="GITHUB_LISTS" value="false"/>
+                <option name="GITHUB_WIKI_LINKS" value="true"/>
+                <option name="GITLAB_EXT" value="false"/>
+                <option name="GITLAB_MATH_EXT" value="false"/>
+                <option name="GITLAB_MERMAID_EXT" value="false"/>
+                <option name="HEADER_ID_NON_ASCII_TO_LOWERCASE" value="false"/>
+                <option name="HEADER_ID_NO_DUPED_DASHES" value="false"/>
+                <option name="JEKYLL_FRONT_MATTER" value="false"/>
+                <option name="MACROS_EXT" value="false"/>
+                <option name="NO_TEXT_ATTRIBUTES" value="false"/>
+                <option name="PARSE_HTML_ANCHOR_ID" value="false"/>
+                <option name="PLANTUML_FENCED_CODE" value="false"/>
+                <option name="PUML_FENCED_CODE" value="false"/>
+                <option name="SIM_TOC_BLANK_LINE_SPACER" value="true"/>
+            </ParserOptions>
         </ParserSettings>
-          <HtmlSettings headerTopEnabled="false" headerBottomEnabled="false" bodyTopEnabled="false" bodyBottomEnabled="false" embedUrlContent="false" addPageHeader="false" embedImages="true" embedHttpImages="false" imageUriSerials="false" addDocTypeHtml="true" noParaTags="false" plantUmlConversion="0" mathConversion="-1">
-          <GeneratorProvider>
-            <provider providerId="com.vladsch.idea.multimarkdown.editor.javafx.html.generator" providerName="JavaFx HTML Generator" />
-          </GeneratorProvider>
-          <headerTop />
-          <headerBottom />
-          <bodyTop />
-          <bodyBottom />
+        <HtmlSettings headerTopEnabled="false" headerBottomEnabled="false" bodyTopEnabled="false" bodyBottomEnabled="false" embedUrlContent="false" addPageHeader="true" embedImages="false" embedHttpImages="false" imageUriSerials="false" addDocTypeHtml="true" noParaTags="false" plantUmlConversion="0" mathConversion="-1">
+            <GeneratorProvider>
+                <provider providerId="com.vladsch.idea.multimarkdown.editor.javafx.html.generator" providerName="JavaFx HTML Generator"/>
+            </GeneratorProvider>
+            <headerTop/>
+            <headerBottom/>
+            <bodyTop/>
+            <bodyBottom/>
         </HtmlSettings>
         <CssSettings previewScheme="UI_SCHEME" cssUri="" isCssUriEnabled="false" isCssUriSerial="true" isCssTextEnabled="true" isDynamicPageWidth="true">
-          <StylesheetProvider>
-            <provider providerId="com.vladsch.idea.multimarkdown.editor.javafx.html.css" providerName="Default JavaFx Stylesheet" />
-          </StylesheetProvider>
+            <StylesheetProvider>
+                <provider providerId="com.vladsch.idea.multimarkdown.editor.javafx.html.css" providerName="Default JavaFx Stylesheet"/>
+            </StylesheetProvider>
             <ScriptProviders>
-                <provider providerId="com.vladsch.idea.multimarkdown.editor.katex.html.script" providerName="Katex Script"/>
-                <provider providerId="com.vladsch.idea.multimarkdown.editor.mermaid.html.script" providerName="Mermaid Script"/>
+                <provider providerId="com.vladsch.idea.multimarkdown.editor.github-collapse-markdown.html.script" providerName="GitHub Collapse Markdown"/>
             </ScriptProviders>
-          <cssText>code { background-color:#f0f0f0;border-radius:2px;padding:1px 2px 0 2px;border:1px solid #e0e0e0;font-family:Consolas,Inconsolata,Courier,monospace;font-size:0.9em;color:#bb002f; }</cssText>
-          <cssUriHistory />
+            <cssText>.markdown-body,
+                .wiki-body {
+                font-family: Arial, &quot;Helvetica Neue&quot;, &quot;Segoe UI&quot;, freesans, sans-serif;
+                font-size: 16px;
+                line-height: 1.6;
+                }
+
+                code {
+                background-color:#f0f0f0;
+                border-radius:2px;
+                padding:1px 0 0 0;
+                border:1px solid #e0e0e0;
+                font-family:Consolas,Inconsolata,Courier,monospace;
+                font-size:0.9em;color:#b00042;
+                }
+
+                .search-highlight {
+                border: solid 1px #000;
+                padding: 1px;
+                background-color: #ffff00;
+                color: #000;
+                }
+
+                .selection-highlight {
+                color:#000;
+                padding:1px 0 1px 0;
+                border: solid 1px #52CC7A;
+                background-color: #B5FFCE;
+                }
+            </cssText>
+            <cssUriHistory/>
         </CssSettings>
-          <HtmlExportSettings updateOnSave="false" parentDir="$ProjectFileDir$" targetDir="$ProjectFileDir$/out/export" cssDir="$ProjectFileDir$/out/export/css" scriptDir="$ProjectFileDir$/out/export/js" plainHtml="false" imageDir="$ProjectFileDir$/out/export/img" copyLinkedImages="true" imageUniquifyType="0" targetPathType="2" targetExt="" useTargetExt="false" noCssNoScripts="false" useElementStyleAttribute="false" linkToExportedHtml="true" exportOnSettingsChange="true" regenerateOnProjectOpen="false" linkFormatType="HTTP_ABSOLUTE"/>
+        <HtmlExportSettings updateOnSave="false" parentDir="$ProjectFileDir$" targetDir="$ProjectFileDir$/out" cssDir="$ProjectFileDir$/out/export/css" scriptDir="$ProjectFileDir$/out/export/js" plainHtml="false" imageDir="$ProjectFileDir$/out/img" copyLinkedImages="false" imageUniquifyType="0" targetPathType="2" targetExt="" useTargetExt="false" noCssNoScripts="false" useElementStyleAttribute="false" linkToExportedHtml="true" exportOnSettingsChange="true" regenerateOnProjectOpen="false" linkFormatType="HTTP_ABSOLUTE"/>
         <LinkMapSettings>
-          <textMaps>
-            <textMapGroup groupName="Map to Public Repo" elementType="LINK_ADDRESS" paramText="" textSample="https://github.com/vsch/idea-multimarkdown/" fileRefSample="https://github.com/vsch/idea-multimarkdown2/">
-              <textMap>
-                <linkEntry isRegEx="false">
-                  <pattern>https://github.com/vsch/idea-multimarkdown/</pattern>
-                  <replaceWith>https://github.com/vsch/idea-multimarkdown2/</replaceWith>
-                </linkEntry>
-              </textMap>
-              <fileRefMap>
-                <linkEntry isRegEx="false">
-                  <pattern>https://github.com/vsch/idea-multimarkdown2/</pattern>
-                  <replaceWith>https://github.com/vsch/idea-multimarkdown/</replaceWith>
-                </linkEntry>
-              </fileRefMap>
-            </textMapGroup>
-          </textMaps>
+            <textMaps/>
         </LinkMapSettings>
-      </option>
-    </profile>
+    </option>
+    <settings default="" pdf-export="" plain-text-search-scope="Project Files">
+        <profile>
+            <option name="myName" value="COPY_HTML_MIME" havePreviewSettings="true" haveParserSettings="true" haveHtmlSettings="true" haveCssSettings="true" haveHtmlExportSettings="true" haveLinkMapSettings="true" profileName="COPY_HTML_MIME">
+                <PreviewSettings splitEditorLayout="FIRST" splitEditorPreview="PREVIEW" useGrayscaleRendering="false" zoomFactor="0.8" maxImageWidth="600" showGitHubPageIfSynced="false" allowBrowsingInPreview="false" synchronizePreviewPosition="false" highlightPreviewType="LINE" highlightFadeOut="5" highlightOnTyping="false" synchronizeSourcePosition="false" verticallyAlignSourceAndPreviewSyncPosition="true" showSearchHighlightsInPreview="true" showSelectionInPreview="true" openRemoteLinks="true" replaceUnicodeEmoji="false" lastLayoutSetsDefault="false">
+                    <PanelProvider>
+                        <provider providerId="com.vladsch.idea.multimarkdown.editor.javafx.html.panel" providerName="JavaFX WebView"/>
+                    </PanelProvider>
+                </PreviewSettings>
+                <ParserSettings gitHubSyntaxChange="false" emojiShortcuts="0" emojiImages="0">
+                    <PegdownExtensions>
+                        <option name="ABBREVIATIONS" value="true"/>
+                        <option name="ANCHORLINKS" value="false"/>
+                        <option name="ASIDE" value="true"/>
+                        <option name="ATXHEADERSPACE" value="true"/>
+                        <option name="AUTOLINKS" value="true"/>
+                        <option name="DEFINITIONS" value="true"/>
+                        <option name="DEFINITION_BREAK_DOUBLE_BLANK_LINE" value="false"/>
+                        <option name="FENCED_CODE_BLOCKS" value="true"/>
+                        <option name="FOOTNOTES" value="true"/>
+                        <option name="HARDWRAPS" value="false"/>
+                        <option name="HTML_DEEP_PARSER" value="true"/>
+                        <option name="INSERTED" value="true"/>
+                        <option name="QUOTES" value="true"/>
+                        <option name="RELAXEDHRULES" value="true"/>
+                        <option name="SMARTS" value="true"/>
+                        <option name="STRIKETHROUGH" value="true"/>
+                        <option name="SUBSCRIPT" value="true"/>
+                        <option name="SUPERSCRIPT" value="true"/>
+                        <option name="SUPPRESS_HTML_BLOCKS" value="false"/>
+                        <option name="SUPPRESS_INLINE_HTML" value="false"/>
+                        <option name="TABLES" value="true"/>
+                        <option name="TASKLISTITEMS" value="true"/>
+                        <option name="TOC" value="true"/>
+                        <option name="WIKILINKS" value="true"/>
+                    </PegdownExtensions>
+                    <ParserOptions>
+                        <option name="ADMONITION_EXT" value="true"/>
+                        <option name="ATTRIBUTES_EXT" value="true"/>
+                        <option name="COMMONMARK_LISTS" value="false"/>
+                        <option name="DUMMY" value="false"/>
+                        <option name="EMOJI_SHORTCUTS" value="true"/>
+                        <option name="ENUMERATED_REFERENCES_EXT" value="true"/>
+                        <option name="FLEXMARK_FRONT_MATTER" value="true"/>
+                        <option name="GFM_LOOSE_BLANK_LINE_AFTER_ITEM_PARA" value="false"/>
+                        <option name="GFM_TABLE_RENDERING" value="false"/>
+                        <option name="GITBOOK_URL_ENCODING" value="true"/>
+                        <option name="GITHUB_LISTS" value="true"/>
+                        <option name="GITHUB_WIKI_LINKS" value="true"/>
+                        <option name="GITLAB_EXT" value="false"/>
+                        <option name="GITLAB_MATH_EXT" value="true"/>
+                        <option name="GITLAB_MERMAID_EXT" value="true"/>
+                        <option name="HEADER_ID_NON_ASCII_TO_LOWERCASE" value="false"/>
+                        <option name="HEADER_ID_NO_DUPED_DASHES" value="false"/>
+                        <option name="JEKYLL_FRONT_MATTER" value="false"/>
+                        <option name="MACROS_EXT" value="true"/>
+                        <option name="NO_TEXT_ATTRIBUTES" value="false"/>
+                        <option name="PARSE_HTML_ANCHOR_ID" value="true"/>
+                        <option name="PLANTUML_FENCED_CODE" value="false"/>
+                        <option name="PUML_FENCED_CODE" value="false"/>
+                        <option name="SIM_TOC_BLANK_LINE_SPACER" value="true"/>
+                    </ParserOptions>
+                </ParserSettings>
+                <HtmlSettings headerTopEnabled="false" headerBottomEnabled="false" bodyTopEnabled="false" bodyBottomEnabled="false" embedUrlContent="false" addPageHeader="false" embedImages="true" embedHttpImages="false" imageUriSerials="false" addDocTypeHtml="true" noParaTags="false" plantUmlConversion="0" mathConversion="-1">
+                    <GeneratorProvider>
+                        <provider providerId="com.vladsch.idea.multimarkdown.editor.javafx.html.generator" providerName="JavaFx HTML Generator"/>
+                    </GeneratorProvider>
+                    <headerTop/>
+                    <headerBottom/>
+                    <bodyTop/>
+                    <bodyBottom/>
+                </HtmlSettings>
+                <CssSettings previewScheme="UI_SCHEME" cssUri="" isCssUriEnabled="false" isCssUriSerial="true" isCssTextEnabled="true" isDynamicPageWidth="true">
+                    <StylesheetProvider>
+                        <provider providerId="com.vladsch.idea.multimarkdown.editor.javafx.html.css" providerName="Default JavaFx Stylesheet"/>
+                    </StylesheetProvider>
+                    <ScriptProviders>
+                        <provider providerId="com.vladsch.idea.multimarkdown.editor.katex.html.script" providerName="Katex Script"/>
+                        <provider providerId="com.vladsch.idea.multimarkdown.editor.mermaid.html.script" providerName="Mermaid Script"/>
+                    </ScriptProviders>
+                    <cssText>code { background-color:#f0f0f0;border-radius:2px;padding:1px 2px 0 2px;border:1px solid #e0e0e0;font-family:Consolas,Inconsolata,Courier,monospace;font-size:0.9em;color:#bb002f; }</cssText>
+                    <cssUriHistory/>
+                </CssSettings>
+                <HtmlExportSettings updateOnSave="false" parentDir="$ProjectFileDir$" targetDir="$ProjectFileDir$/out/export" cssDir="$ProjectFileDir$/out/export/css" scriptDir="$ProjectFileDir$/out/export/js" plainHtml="false" imageDir="$ProjectFileDir$/out/export/img" copyLinkedImages="true" imageUniquifyType="0" targetPathType="2" targetExt="" useTargetExt="false" noCssNoScripts="false" useElementStyleAttribute="false" linkToExportedHtml="true" exportOnSettingsChange="true" regenerateOnProjectOpen="false" linkFormatType="HTTP_ABSOLUTE"/>
+                <LinkMapSettings>
+                    <textMaps>
+                        <textMapGroup groupName="Map to Public Repo" elementType="LINK_ADDRESS" paramText="" textSample="https://github.com/vsch/idea-multimarkdown/" fileRefSample="https://github.com/vsch/idea-multimarkdown2/">
+                            <textMap>
+                                <linkEntry isRegEx="false">
+                                    <pattern>https://github.com/vsch/idea-multimarkdown/</pattern>
+                                    <replaceWith>https://github.com/vsch/idea-multimarkdown2/</replaceWith>
+                                </linkEntry>
+                            </textMap>
+                            <fileRefMap>
+                                <linkEntry isRegEx="false">
+                                    <pattern>https://github.com/vsch/idea-multimarkdown2/</pattern>
+                                    <replaceWith>https://github.com/vsch/idea-multimarkdown/</replaceWith>
+                                </linkEntry>
+                            </fileRefMap>
+                        </textMapGroup>
+                    </textMaps>
+                </LinkMapSettings>
+            </option>
+        </profile>
         <profile>
             <option name="myName" value="GitHub Templates" havePreviewSettings="true" haveParserSettings="true" haveHtmlSettings="true" haveCssSettings="true" haveHtmlExportSettings="true" haveLinkMapSettings="true" profileName="GitHub Templates">
                 <PreviewSettings splitEditorLayout="FIRST" splitEditorPreview="PREVIEW" useGrayscaleRendering="false" zoomFactor="1.0" maxImageWidth="0" showGitHubPageIfSynced="false" allowBrowsingInPreview="false" synchronizePreviewPosition="true" highlightPreviewType="LINE" highlightFadeOut="2" highlightOnTyping="false" synchronizeSourcePosition="true" verticallyAlignSourceAndPreviewSyncPosition="true" showSearchHighlightsInPreview="true" showSelectionInPreview="true" openRemoteLinks="true" replaceUnicodeEmoji="false" lastLayoutSetsDefault="false">
@@ -329,156 +330,157 @@ code {
                 </LinkMapSettings>
             </option>
         </profile>
-    <profile>
-      <option name="myName" value="OVERVIEW" havePreviewSettings="true" haveParserSettings="true" haveHtmlSettings="true" haveCssSettings="true" haveHtmlExportSettings="true" haveLinkMapSettings="true" profileName="OVERVIEW">
-        <PreviewSettings splitEditorLayout="FIRST" splitEditorPreview="PREVIEW" useGrayscaleRendering="false" zoomFactor="1.0" maxImageWidth="0" showGitHubPageIfSynced="false" allowBrowsingInPreview="false" synchronizePreviewPosition="true" highlightPreviewType="LINE" highlightFadeOut="10" highlightOnTyping="true" synchronizeSourcePosition="true" verticallyAlignSourceAndPreviewSyncPosition="true" showSearchHighlightsInPreview="true" showSelectionInPreview="true" openRemoteLinks="true" replaceUnicodeEmoji="true" lastLayoutSetsDefault="false">
-          <PanelProvider>
-            <provider providerId="com.vladsch.idea.multimarkdown.editor.javafx.html.panel" providerName="JavaFX WebView" />
-          </PanelProvider>
-        </PreviewSettings>
-        <ParserSettings gitHubSyntaxChange="false" emojiShortcuts="3" emojiImages="0">
-          <PegdownExtensions>
-            <option name="ABBREVIATIONS" value="true" />
-            <option name="ANCHORLINKS" value="false" />
-            <option name="ASIDE" value="true" />
-            <option name="ATXHEADERSPACE" value="true" />
-              <option name="AUTOLINKS" value="false"/>
-            <option name="DEFINITIONS" value="true" />
-            <option name="DEFINITION_BREAK_DOUBLE_BLANK_LINE" value="false" />
-            <option name="FENCED_CODE_BLOCKS" value="true" />
-            <option name="FOOTNOTES" value="true" />
-            <option name="HARDWRAPS" value="false" />
-            <option name="HTML_DEEP_PARSER" value="false" />
-            <option name="INSERTED" value="true" />
-            <option name="QUOTES" value="true" />
-            <option name="RELAXEDHRULES" value="true" />
-            <option name="SMARTS" value="true" />
-            <option name="STRIKETHROUGH" value="true" />
-            <option name="SUBSCRIPT" value="true" />
-            <option name="SUPERSCRIPT" value="true" />
-            <option name="SUPPRESS_HTML_BLOCKS" value="false" />
-            <option name="SUPPRESS_INLINE_HTML" value="false" />
-            <option name="TABLES" value="true" />
-            <option name="TASKLISTITEMS" value="true" />
-            <option name="TOC" value="true" />
-            <option name="WIKILINKS" value="true" />
-          </PegdownExtensions>
-          <ParserOptions>
-            <option name="ADMONITION_EXT" value="true" />
-            <option name="ATTRIBUTES_EXT" value="true" />
-            <option name="COMMONMARK_LISTS" value="true" />
-            <option name="DUMMY" value="false" />
-            <option name="EMOJI_SHORTCUTS" value="true" />
-            <option name="ENUMERATED_REFERENCES_EXT" value="true" />
-            <option name="FLEXMARK_FRONT_MATTER" value="true" />
-            <option name="GFM_LOOSE_BLANK_LINE_AFTER_ITEM_PARA" value="true" />
-            <option name="GFM_TABLE_RENDERING" value="false" />
-            <option name="GITBOOK_URL_ENCODING" value="true" />
-            <option name="GITHUB_LISTS" value="false" />
-            <option name="GITHUB_WIKI_LINKS" value="true" />
-            <option name="GITLAB_EXT" value="false" />
-            <option name="GITLAB_MATH_EXT" value="false" />
-            <option name="GITLAB_MERMAID_EXT" value="false" />
-              <option name="HEADER_ID_NON_ASCII_TO_LOWERCASE" value="false"/>
-            <option name="HEADER_ID_NO_DUPED_DASHES" value="false" />
-            <option name="JEKYLL_FRONT_MATTER" value="false" />
-              <option name="MACROS_EXT" value="false"/>
-            <option name="NO_TEXT_ATTRIBUTES" value="false" />
-            <option name="PARSE_HTML_ANCHOR_ID" value="true" />
-              <option name="PLANTUML_FENCED_CODE" value="false"/>
-              <option name="PUML_FENCED_CODE" value="false"/>
-            <option name="SIM_TOC_BLANK_LINE_SPACER" value="true" />
-          </ParserOptions>
-        </ParserSettings>
-          <HtmlSettings headerTopEnabled="false" headerBottomEnabled="false" bodyTopEnabled="false" bodyBottomEnabled="false" embedUrlContent="false" addPageHeader="false" embedImages="false" embedHttpImages="false" imageUriSerials="false" addDocTypeHtml="false" noParaTags="false" plantUmlConversion="0" mathConversion="-1">
-          <GeneratorProvider>
-            <provider providerId="com.vladsch.idea.multimarkdown.editor.javafx.html.generator" providerName="JavaFx HTML Generator" />
-          </GeneratorProvider>
-          <headerTop />
-          <headerBottom />
-          <bodyTop />
-          <bodyBottom />
-        </HtmlSettings>
-        <CssSettings previewScheme="UI_SCHEME" cssUri="" isCssUriEnabled="false" isCssUriSerial="true" isCssTextEnabled="true" isDynamicPageWidth="true">
-          <StylesheetProvider>
-            <provider providerId="com.vladsch.idea.multimarkdown.editor.javafx.html.css" providerName="Default JavaFx Stylesheet" />
-          </StylesheetProvider>
-          <ScriptProviders />
-          <cssText>.markdown-body,
-.wiki-body {
-    font-family: Arial, &quot;Helvetica Neue&quot;, &quot;Segoe UI&quot;, freesans, sans-serif;
-    font-size: 16px;
-    line-height: 1.6;
-}
+        <profile>
+            <option name="myName" value="OVERVIEW" havePreviewSettings="true" haveParserSettings="true" haveHtmlSettings="true" haveCssSettings="true" haveHtmlExportSettings="true" haveLinkMapSettings="true" profileName="OVERVIEW">
+                <PreviewSettings splitEditorLayout="FIRST" splitEditorPreview="PREVIEW" useGrayscaleRendering="false" zoomFactor="1.0" maxImageWidth="0" showGitHubPageIfSynced="false" allowBrowsingInPreview="false" synchronizePreviewPosition="true" highlightPreviewType="LINE" highlightFadeOut="10" highlightOnTyping="true" synchronizeSourcePosition="true" verticallyAlignSourceAndPreviewSyncPosition="true" showSearchHighlightsInPreview="true" showSelectionInPreview="true" openRemoteLinks="true" replaceUnicodeEmoji="true" lastLayoutSetsDefault="false">
+                    <PanelProvider>
+                        <provider providerId="com.vladsch.idea.multimarkdown.editor.javafx.html.panel" providerName="JavaFX WebView"/>
+                    </PanelProvider>
+                </PreviewSettings>
+                <ParserSettings gitHubSyntaxChange="false" emojiShortcuts="3" emojiImages="0">
+                    <PegdownExtensions>
+                        <option name="ABBREVIATIONS" value="true"/>
+                        <option name="ANCHORLINKS" value="false"/>
+                        <option name="ASIDE" value="true"/>
+                        <option name="ATXHEADERSPACE" value="true"/>
+                        <option name="AUTOLINKS" value="false"/>
+                        <option name="DEFINITIONS" value="true"/>
+                        <option name="DEFINITION_BREAK_DOUBLE_BLANK_LINE" value="false"/>
+                        <option name="FENCED_CODE_BLOCKS" value="true"/>
+                        <option name="FOOTNOTES" value="true"/>
+                        <option name="HARDWRAPS" value="false"/>
+                        <option name="HTML_DEEP_PARSER" value="false"/>
+                        <option name="INSERTED" value="true"/>
+                        <option name="QUOTES" value="true"/>
+                        <option name="RELAXEDHRULES" value="true"/>
+                        <option name="SMARTS" value="true"/>
+                        <option name="STRIKETHROUGH" value="true"/>
+                        <option name="SUBSCRIPT" value="true"/>
+                        <option name="SUPERSCRIPT" value="true"/>
+                        <option name="SUPPRESS_HTML_BLOCKS" value="false"/>
+                        <option name="SUPPRESS_INLINE_HTML" value="false"/>
+                        <option name="TABLES" value="true"/>
+                        <option name="TASKLISTITEMS" value="true"/>
+                        <option name="TOC" value="true"/>
+                        <option name="WIKILINKS" value="true"/>
+                    </PegdownExtensions>
+                    <ParserOptions>
+                        <option name="ADMONITION_EXT" value="true"/>
+                        <option name="ATTRIBUTES_EXT" value="true"/>
+                        <option name="COMMONMARK_LISTS" value="true"/>
+                        <option name="DUMMY" value="false"/>
+                        <option name="EMOJI_SHORTCUTS" value="true"/>
+                        <option name="ENUMERATED_REFERENCES_EXT" value="true"/>
+                        <option name="FLEXMARK_FRONT_MATTER" value="true"/>
+                        <option name="GFM_LOOSE_BLANK_LINE_AFTER_ITEM_PARA" value="true"/>
+                        <option name="GFM_TABLE_RENDERING" value="false"/>
+                        <option name="GITBOOK_URL_ENCODING" value="true"/>
+                        <option name="GITHUB_LISTS" value="false"/>
+                        <option name="GITHUB_WIKI_LINKS" value="true"/>
+                        <option name="GITLAB_EXT" value="false"/>
+                        <option name="GITLAB_MATH_EXT" value="false"/>
+                        <option name="GITLAB_MERMAID_EXT" value="false"/>
+                        <option name="HEADER_ID_NON_ASCII_TO_LOWERCASE" value="false"/>
+                        <option name="HEADER_ID_NO_DUPED_DASHES" value="false"/>
+                        <option name="JEKYLL_FRONT_MATTER" value="false"/>
+                        <option name="MACROS_EXT" value="false"/>
+                        <option name="NO_TEXT_ATTRIBUTES" value="false"/>
+                        <option name="PARSE_HTML_ANCHOR_ID" value="true"/>
+                        <option name="PLANTUML_FENCED_CODE" value="false"/>
+                        <option name="PUML_FENCED_CODE" value="false"/>
+                        <option name="SIM_TOC_BLANK_LINE_SPACER" value="true"/>
+                    </ParserOptions>
+                </ParserSettings>
+                <HtmlSettings headerTopEnabled="false" headerBottomEnabled="false" bodyTopEnabled="false" bodyBottomEnabled="false" embedUrlContent="false" addPageHeader="false" embedImages="false" embedHttpImages="false" imageUriSerials="false" addDocTypeHtml="false" noParaTags="false" plantUmlConversion="0" mathConversion="-1">
+                    <GeneratorProvider>
+                        <provider providerId="com.vladsch.idea.multimarkdown.editor.javafx.html.generator" providerName="JavaFx HTML Generator"/>
+                    </GeneratorProvider>
+                    <headerTop/>
+                    <headerBottom/>
+                    <bodyTop/>
+                    <bodyBottom/>
+                </HtmlSettings>
+                <CssSettings previewScheme="UI_SCHEME" cssUri="" isCssUriEnabled="false" isCssUriSerial="true" isCssTextEnabled="true" isDynamicPageWidth="true">
+                    <StylesheetProvider>
+                        <provider providerId="com.vladsch.idea.multimarkdown.editor.javafx.html.css" providerName="Default JavaFx Stylesheet"/>
+                    </StylesheetProvider>
+                    <ScriptProviders/>
+                    <cssText>.markdown-body,
+                        .wiki-body {
+                        font-family: Arial, &quot;Helvetica Neue&quot;, &quot;Segoe UI&quot;, freesans, sans-serif;
+                        font-size: 16px;
+                        line-height: 1.6;
+                        }
 
-code { 
-    background-color:#f0f0f0;
-    border-radius:2px;
-    padding:1px 0 0 0;
-    border:1px solid #e0e0e0;
-    font-family:Consolas,Inconsolata,Courier,monospace;
-    font-size:0.9em;color:#b00042; 
-}
+                        code {
+                        background-color:#f0f0f0;
+                        border-radius:2px;
+                        padding:1px 0 0 0;
+                        border:1px solid #e0e0e0;
+                        font-family:Consolas,Inconsolata,Courier,monospace;
+                        font-size:0.9em;color:#b00042;
+                        }
 
-.search-highlight {
-    border: solid 1px #000;
-    padding: 1px;
-    background-color: #ffff00;
-    color: #000;
-}
+                        .search-highlight {
+                        border: solid 1px #000;
+                        padding: 1px;
+                        background-color: #ffff00;
+                        color: #000;
+                        }
 
-.selection-highlight {
-    color:#000;
-    padding:1px 0 1px 0;
-    border: solid 1px #52CC7A;
-    background-color: #B5FFCE;
-}</cssText>
-          <cssUriHistory />
-        </CssSettings>
-          <HtmlExportSettings updateOnSave="true" parentDir="$ModuleFileDir$/src/main/javadoc" targetDir="$ModuleFileDir$/src/main/javadoc" cssDir="$ModuleFileDir$/src/main/javadoc/css" scriptDir="$ModuleFileDir$/src/main/javadoc/js" plainHtml="false" imageDir="$ModuleFileDir$/src/main/javadoc" copyLinkedImages="true" imageUniquifyType="1" targetPathType="2" targetExt="" useTargetExt="false" noCssNoScripts="true" useElementStyleAttribute="false" linkToExportedHtml="true" exportOnSettingsChange="true" regenerateOnProjectOpen="false" linkFormatType="HTTP_ABSOLUTE"/>
-        <LinkMapSettings>
-          <textMaps />
-        </LinkMapSettings>
-      </option>
-    </profile>
-    <scope-profiles>
-      <element scope="Flexmark Ext Overview" profile="OVERVIEW" />
-        <element scope="GitHub Templates" profile="GitHub Templates"/>
-    </scope-profiles>
-  </settings>
-  <MarkdownNavigatorHistory>
-    <component>
-        <PasteImageHistory filename="Issue315_AsideExtension.png" directory="/Users/vlad/src/projects/flexmark-java/FlexmarkJavaAssets/doc/images" onPasteImageTargetRef="2" onPasteLinkText="0" onPasteImageElement="1" onPasteLinkElement="2" onPasteReferenceElement="2" cornerRadius="17" borderColor="-16777216" transparentColor="-1" borderWidth="1" trimTop="0" trimBottom="0" trimLeft="0" trimRight="0" transparent="false" roundCorners="false" showPreview="true" bordered="false" scaled="true" cropped="false" hideInapplicableOperations="true" preserveLinkFormat="false" scale="30" scalingInterpolation="1" transparentTolerance="0" saveAsDefaultOnOK="true" linkFormat="0" addHighlights="false" showHighlightCoordinates="false" showHighlights="false" mouseSelectionAddsHighlight="true" outerFilled="true" outerFillColor="-16777216" outerFillTransparent="true" outerFillAlpha="30">
-            <highlightList>
-                <ImageHighlight top="81" left="26" right="258" bottom="109" roundCorners="true" cornerRadius="10" bordered="true" borderColor="-3341249" borderWidth="2" innerFilled="false" innerFillColor="-256" innerFillTransparent="true" innerFillAlpha="30" shape="1"/>
-                <ImageHighlight top="183" left="258" right="714" bottom="232" roundCorners="true" cornerRadius="10" bordered="true" borderColor="-3341249" borderWidth="2" innerFilled="false" innerFillColor="-256" innerFillTransparent="true" innerFillAlpha="30" shape="1"/>
-            </highlightList>
-        <directories>
-            <option name="/Users/vlad/src/projects/flexmark-java/FlexmarkJavaAssets/doc/comms/youtrack/images"/>
-            <option name="/Users/vlad/src/projects/flexmark-java/FlexmarkJavaAssets/doc/comms/issues/images"/>
-            <option name="/Users/vlad/src/projects/flexmark-java/flexmark-docx-converter/src/main/resources/emoji"/>
-            <option name="/Users/vlad/src/projects/flexmark-java/flexmark-ext-tables/src/main/javadoc"/>
-            <option name="/Users/vlad/src/projects/flexmark-java/flexmark-ext-admonition/src/main/resources/images"/>
-          <option name="/Users/vlad/src/projects/flexmark-java/flexmark-docx-converter/src/test/resources/05-SW-Software-Development/media" />
-            <option name="/Users/vlad/src/projects/flexmark-java/FlexmarkJavaAssets/doc/comms/issues"/>
-          <option name="/Users/vlad/src/projects/flexmark-java/assets/images" />
-            <option name="/Users/vlad/src/projects/flexmark-java/flexmark-ext-xwiki-macros/src/main/javadoc"/>
-          <option name="/Users/vlad/src/projects/flexmark-java/flexmark-java.wiki/resources" />
-            <option name="/Users/vlad/src/projects/flexmark-java/flexmark-ext-admonition/src/main/javadoc"/>
-            <option name="/Users/vlad/src/projects/flexmark-java/flexmark-ext-enumerated-reference/src/main/javadoc"/>
-            <option name="/Users/vlad/src/projects/flexmark-java/FlexmarkJavaAssets/doc/images"/>
-        </directories>
-        <filenames />
-      </PasteImageHistory>
-        <CopyImageHistory filename="" directory="/Users/vlad/src/projects/flexmark-java/assets/images" onPasteImageTargetRef="0" onPasteLinkText="0" onPasteImageElement="1" onPasteLinkElement="2" onPasteReferenceElement="2" cornerRadius="20" borderColor="-16777216" transparentColor="-1" borderWidth="1" trimTop="0" trimBottom="0" trimLeft="0" trimRight="0" transparent="false" roundCorners="false" showPreview="true" bordered="false" scaled="false" cropped="false" hideInapplicableOperations="false" preserveLinkFormat="false" scale="50" scalingInterpolation="1" transparentTolerance="0" saveAsDefaultOnOK="false" linkFormat="2" addHighlights="false" showHighlightCoordinates="true" showHighlights="false" mouseSelectionAddsHighlight="false" outerFilled="false" outerFillColor="-16777216" outerFillTransparent="true" outerFillAlpha="30">
-            <highlightList/>
-        <directories>
-          <option name="/Users/vlad/src/projects/flexmark-java/assets/images" />
-        </directories>
-        <filenames />
-      </CopyImageHistory>
-        <PasteLinkHistory onPasteImageTargetRef="2" onPasteTargetRef="2" onPasteLinkText="0" onPasteImageElement="1" onPasteLinkElement="1" onPasteWikiElement="1" onPasteReferenceElement="1" hideInapplicableOperations="false" preserveLinkFormat="false" useHeadingForLinkText="false" saveAsDefaultOnOK="false" linkFormat="2"/>
-    </component>
-  </MarkdownNavigatorHistory>
+                        .selection-highlight {
+                        color:#000;
+                        padding:1px 0 1px 0;
+                        border: solid 1px #52CC7A;
+                        background-color: #B5FFCE;
+                        }
+                    </cssText>
+                    <cssUriHistory/>
+                </CssSettings>
+                <HtmlExportSettings updateOnSave="true" parentDir="$ModuleFileDir$/src/main/javadoc" targetDir="$ModuleFileDir$/src/main/javadoc" cssDir="$ModuleFileDir$/src/main/javadoc/css" scriptDir="$ModuleFileDir$/src/main/javadoc/js" plainHtml="false" imageDir="$ModuleFileDir$/src/main/javadoc" copyLinkedImages="true" imageUniquifyType="1" targetPathType="2" targetExt="" useTargetExt="false" noCssNoScripts="true" useElementStyleAttribute="false" linkToExportedHtml="true" exportOnSettingsChange="true" regenerateOnProjectOpen="false" linkFormatType="HTTP_ABSOLUTE"/>
+                <LinkMapSettings>
+                    <textMaps/>
+                </LinkMapSettings>
+            </option>
+        </profile>
+        <scope-profiles>
+            <element scope="Flexmark Ext Overview" profile="OVERVIEW"/>
+            <element scope="GitHub Templates" profile="GitHub Templates"/>
+        </scope-profiles>
+    </settings>
+    <MarkdownNavigatorHistory>
+        <component>
+            <PasteImageHistory filename="Issue315_AsideExtension.png" directory="/Users/vlad/src/projects/flexmark-java/FlexmarkJavaAssets/doc/images" onPasteImageTargetRef="2" onPasteLinkText="0" onPasteImageElement="1" onPasteLinkElement="2" onPasteReferenceElement="2" cornerRadius="17" borderColor="-16777216" transparentColor="-1" borderWidth="1" trimTop="0" trimBottom="0" trimLeft="0" trimRight="0" transparent="false" roundCorners="false" showPreview="true" bordered="false" scaled="true" cropped="false" hideInapplicableOperations="true" preserveLinkFormat="false" scale="30" scalingInterpolation="1" transparentTolerance="0" saveAsDefaultOnOK="true" linkFormat="0" addHighlights="false" showHighlightCoordinates="false" showHighlights="false" mouseSelectionAddsHighlight="true" outerFilled="true" outerFillColor="-16777216" outerFillTransparent="true" outerFillAlpha="30">
+                <highlightList>
+                    <ImageHighlight top="81" left="26" right="258" bottom="109" roundCorners="true" cornerRadius="10" bordered="true" borderColor="-3341249" borderWidth="2" innerFilled="false" innerFillColor="-256" innerFillTransparent="true" innerFillAlpha="30" shape="1"/>
+                    <ImageHighlight top="183" left="258" right="714" bottom="232" roundCorners="true" cornerRadius="10" bordered="true" borderColor="-3341249" borderWidth="2" innerFilled="false" innerFillColor="-256" innerFillTransparent="true" innerFillAlpha="30" shape="1"/>
+                </highlightList>
+                <directories>
+                    <option name="/Users/vlad/src/projects/flexmark-java/FlexmarkJavaAssets/doc/comms/youtrack/images"/>
+                    <option name="/Users/vlad/src/projects/flexmark-java/FlexmarkJavaAssets/doc/comms/issues/images"/>
+                    <option name="/Users/vlad/src/projects/flexmark-java/flexmark-docx-converter/src/main/resources/emoji"/>
+                    <option name="/Users/vlad/src/projects/flexmark-java/flexmark-ext-tables/src/main/javadoc"/>
+                    <option name="/Users/vlad/src/projects/flexmark-java/flexmark-ext-admonition/src/main/resources/images"/>
+                    <option name="/Users/vlad/src/projects/flexmark-java/flexmark-docx-converter/src/test/resources/05-SW-Software-Development/media"/>
+                    <option name="/Users/vlad/src/projects/flexmark-java/FlexmarkJavaAssets/doc/comms/issues"/>
+                    <option name="/Users/vlad/src/projects/flexmark-java/assets/images"/>
+                    <option name="/Users/vlad/src/projects/flexmark-java/flexmark-ext-xwiki-macros/src/main/javadoc"/>
+                    <option name="/Users/vlad/src/projects/flexmark-java/flexmark-java.wiki/resources"/>
+                    <option name="/Users/vlad/src/projects/flexmark-java/flexmark-ext-admonition/src/main/javadoc"/>
+                    <option name="/Users/vlad/src/projects/flexmark-java/flexmark-ext-enumerated-reference/src/main/javadoc"/>
+                    <option name="/Users/vlad/src/projects/flexmark-java/FlexmarkJavaAssets/doc/images"/>
+                </directories>
+                <filenames/>
+            </PasteImageHistory>
+            <CopyImageHistory filename="" directory="/Users/vlad/src/projects/flexmark-java/assets/images" onPasteImageTargetRef="0" onPasteLinkText="0" onPasteImageElement="1" onPasteLinkElement="2" onPasteReferenceElement="2" cornerRadius="20" borderColor="-16777216" transparentColor="-1" borderWidth="1" trimTop="0" trimBottom="0" trimLeft="0" trimRight="0" transparent="false" roundCorners="false" showPreview="true" bordered="false" scaled="false" cropped="false" hideInapplicableOperations="false" preserveLinkFormat="false" scale="50" scalingInterpolation="1" transparentTolerance="0" saveAsDefaultOnOK="false" linkFormat="2" addHighlights="false" showHighlightCoordinates="true" showHighlights="false" mouseSelectionAddsHighlight="false" outerFilled="false" outerFillColor="-16777216" outerFillTransparent="true" outerFillAlpha="30">
+                <highlightList/>
+                <directories>
+                    <option name="/Users/vlad/src/projects/flexmark-java/assets/images"/>
+                </directories>
+                <filenames/>
+            </CopyImageHistory>
+            <PasteLinkHistory onPasteImageTargetRef="2" onPasteTargetRef="2" onPasteLinkText="0" onPasteImageElement="1" onPasteLinkElement="1" onPasteWikiElement="1" onPasteReferenceElement="1" hideInapplicableOperations="false" preserveLinkFormat="false" useHeadingForLinkText="false" saveAsDefaultOnOK="false" linkFormat="2"/>
+        </component>
+    </MarkdownNavigatorHistory>
     <DocumentSettings showHtmlPreview="true" verbatimLangInjections="true" htmlLangInjections="true" multiLineImageUrlInjections="true" softWraps="1" iconGutters="true" softWrapAtMargin="true" showEmojiInGutter="false" showBreadcrumbText="true" maxBreadcrumbText="30" previewScrollDelay="250" typingUpdateDelay="50" enableAnnotator="true" hideDisabledButtons="false" hideToolbar="false" disableGifImages="true" codeLikeStyleToggle="true" overrideEditorDragDropHandler="false" toggleStylePunctuations=".,:;!?" htmlMimeMaxImageWidth="100%" htmlMimeFontFamily="" pdfMaxImageWidth="504pt" pdfFontFamily="" detectHtmlOnPaste="true" textSplitLayoutToggle="true" asteriskItalics="true" verticalSplitPreview="false" convertHtmlOnPaste="true" showHeadingID="false" useRenameSpellingFix="true" usePasteHandler="true" includeDirsInCompletion="true" enableLineMarkers="true" tabOverrideTables="true" tabOverrideTablesSelect="false" tabOverrideLists="true" tabOverrideSmartEditChars="true" showApplyAllIntentionsEverywhere="true" askHtmlOptionsOnPaste="true" fullHighlightCombinations="true" htmlPasteAddTrailingEol="false" htmlPasteSkipInlineStrong="false" htmlPasteSkipInlineEmphasis="false" htmlPasteSkipInlineCode="false" htmlPasteSkipInlineDel="false" htmlPasteSkipInlineIns="false" htmlPasteSkipInlineSub="false" htmlPasteSkipInlineSup="false" htmlPasteSkipHeading1="false" htmlPasteSkipHeading2="false" htmlPasteSkipHeading3="false" htmlPasteSkipHeading4="false" htmlPasteSkipHeading5="false" htmlPasteSkipHeading6="false" htmlPasteSkipAttributes="false" htmlPasteSkipFencedCode="false" htmlPasteLink="2" htmlPasteImage="2" htmlPasteSkipMath="false" htmlPasteTextMath="false" htmlPasteSkipCharEscape="false" joinStripPrefix="true" completeRemoteUrlAnchors="true" validateRemoteUrlAnchors="true" validateRemoteUrlLinks="true" smartEditUnderscore="false" smartEditAsterisks="false" smartEditTildes="false" smartEditBackTicks="false" enterAddsListItem="true" enterRemovesListItem="true" backspaceRemovesListItem="true" enterDeletesEmptyTableColumns="true" enterDeletesEmptyTableRows="true" enterInsertTableRows="true" enterInsertBlockQuote="true" enterAddsHardBreakOnSplit="true" wrapOnlyOnTypingSpace="false" showUrlPageForDocumentation="true" autoPopUpPlainTextCompletions="false" ignoreFencedCodeContent="true" insertGitHubIssueCompletion="3" droppedLinkInsertAs="1" taskFetchLimit="100" remoteContentCacheExpiration="3600000" remoteContentRequests="4" zoomFactor="0.9" syntaxHighlighting="1" structureView="2" documentIcon="0" wikiIcon="2"/>
 </MarkdownNavigator.ExportedProjectSettings>

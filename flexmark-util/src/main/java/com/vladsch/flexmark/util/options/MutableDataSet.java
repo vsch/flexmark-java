@@ -58,7 +58,7 @@ public class MutableDataSet extends DataSet implements MutableDataHolder {
         }
     }
 
-    public static MutableDataSet merge(DataHolder...dataHolders) {
+    public static MutableDataSet merge(DataHolder... dataHolders) {
         MutableDataSet dataSet = new MutableDataSet();
         for (DataHolder dataHolder : dataHolders) {
             if (dataHolder != null) dataSet.dataSet.putAll(dataHolder.getAll());

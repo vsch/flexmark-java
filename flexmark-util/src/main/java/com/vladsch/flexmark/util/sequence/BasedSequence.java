@@ -386,7 +386,7 @@ public interface BasedSequence extends CharSequence, Comparable<CharSequence> {
     int countTrailingNot();
     int countOf();
     int countOfNot();
-    
+
     int countOf(char c);
     int countOfNot(char c);
     int countOf(char c, int startIndex);

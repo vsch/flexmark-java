@@ -1,15 +1,15 @@
 package com.vladsch.flexmark.ext.abbreviation;
 
-import com.vladsch.flexmark.util.IRender;
-import com.vladsch.flexmark.util.ast.Node;
+import com.vladsch.flexmark.formatter.Formatter;
 import com.vladsch.flexmark.formatter.RenderPurpose;
 import com.vladsch.flexmark.formatter.TranslationHandler;
-import com.vladsch.flexmark.formatter.Formatter;
 import com.vladsch.flexmark.html.renderer.HeaderIdGenerator;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.spec.SpecReader;
 import com.vladsch.flexmark.test.ComboSpecTestCase;
+import com.vladsch.flexmark.util.IRender;
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.format.options.ElementPlacement;
 import com.vladsch.flexmark.util.format.options.ElementPlacementSort;
 import com.vladsch.flexmark.util.options.DataHolder;
@@ -115,7 +115,7 @@ public class ComboAbbreviationTranslationFormatterSpecTest extends ComboSpecTest
             }
 
             final ArrayList<CharSequence> translatedTexts = new ArrayList<>(translatingTexts.size());
-            for (CharSequence text: translatingTexts) {
+            for (CharSequence text : translatingTexts) {
                 final CharSequence translated = translate(text);
                 translatedTexts.add(translated);
                 try {
@@ -189,7 +189,7 @@ public class ComboAbbreviationTranslationFormatterSpecTest extends ComboSpecTest
         // NULL example runs full spec test
         data.add(new Object[] { SpecExample.NULL });
 
-        for (SpecExample example: examples) {
+        for (SpecExample example : examples) {
             data.add(new Object[] { example });
         }
         return data;

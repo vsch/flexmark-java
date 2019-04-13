@@ -18,5 +18,4 @@ public class TableRow extends Node {
     public TableRow(BasedSequence chars) {
         super(chars);
     }
-
 }

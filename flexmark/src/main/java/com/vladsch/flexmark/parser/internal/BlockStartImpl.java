@@ -47,5 +47,4 @@ public class BlockStartImpl extends BlockStart {
         this.replaceActiveBlockParser = true;
         return this;
     }
-
 }

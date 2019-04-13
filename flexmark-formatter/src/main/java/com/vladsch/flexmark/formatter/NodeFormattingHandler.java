@@ -11,6 +11,6 @@ public class NodeFormattingHandler<N extends Node> extends NodeAdaptingVisitHand
     @Override
     public void render(Node node, NodeFormatterContext context, MarkdownWriter markdown) {
         //noinspection unchecked
-        myAdapter.render((N)node, context, markdown);
+        myAdapter.render((N) node, context, markdown);
     }
 }

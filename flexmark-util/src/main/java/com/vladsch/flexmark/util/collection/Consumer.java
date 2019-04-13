@@ -9,7 +9,6 @@ package com.vladsch.flexmark.util.collection;
  * whose functional method is {@link #accept(Object)}.
  *
  * @param <T> the type of the input to the operation
- *
  */
 public interface Consumer<T> {
 

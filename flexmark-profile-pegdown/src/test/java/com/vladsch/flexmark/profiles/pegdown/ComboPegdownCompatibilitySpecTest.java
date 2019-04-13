@@ -20,8 +20,7 @@ public class ComboPegdownCompatibilitySpecTest extends ComboSpecTestCase {
     ).toMutable()
             .set(HtmlRenderer.OBFUSCATE_EMAIL_RANDOM, false)
             .set(HtmlRenderer.INDENT_SIZE, 2)
-            .set(HtmlRenderer.PERCENT_ENCODE_URLS, true)
-            ;
+            .set(HtmlRenderer.PERCENT_ENCODE_URLS, true);
 
     private static final Map<String, DataHolder> optionsMap = new HashMap<String, DataHolder>();
     static {

@@ -401,7 +401,7 @@ public class HtmlRendererTest {
 
     static class CustomLinkResolverImpl implements LinkResolver {
         public static final DataKey<String> DOC_RELATIVE_URL = new DataKey<>("DOC_RELATIVE_URL", "");
-        
+
         final String docUrl;
 
         public CustomLinkResolverImpl(final LinkResolverContext context) {

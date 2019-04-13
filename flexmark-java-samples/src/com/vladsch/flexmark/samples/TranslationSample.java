@@ -1,12 +1,12 @@
 package com.vladsch.flexmark.samples;
 
-import com.vladsch.flexmark.util.ast.Document;
-import com.vladsch.flexmark.util.ast.Node;
+import com.vladsch.flexmark.formatter.Formatter;
 import com.vladsch.flexmark.formatter.RenderPurpose;
 import com.vladsch.flexmark.formatter.TranslationHandler;
-import com.vladsch.flexmark.formatter.Formatter;
 import com.vladsch.flexmark.html.renderer.HeaderIdGenerator;
 import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.util.ast.Document;
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.options.MutableDataSet;
 
 import java.util.ArrayList;
@@ -71,7 +71,7 @@ public class TranslationSample {
 
         // 4. Have the strings translated by your translation service of preference
         final ArrayList<CharSequence> translatedTexts = new ArrayList<>(translatingTexts.size());
-        for (CharSequence text: translatingTexts) {
+        for (CharSequence text : translatingTexts) {
             final CharSequence translated = translate(text);
 
             // simulated translation

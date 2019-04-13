@@ -3,7 +3,6 @@ package com.vladsch.flexmark.util.html;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 import java.io.IOException;
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -413,7 +412,7 @@ public interface LineFormattingAppendable extends Appendable {
     /**
      * Add a new line, keep trailing spaces if there was any unterminated text appended
      *
-     * @param count   number of trailing spaces to add
+     * @param count number of trailing spaces to add
      * @return this
      */
     LineFormattingAppendable lineWithTrailingSpaces(int count);
@@ -572,7 +571,7 @@ public interface LineFormattingAppendable extends Appendable {
      * <p>
      * This appends the sequence to current prefix
      *
-     * @param prefix prefix characters to add to current prefix for new lines appended after this is set
+     * @param prefix   prefix characters to add to current prefix for new lines appended after this is set
      * @param afterEol if true prefix will take effect after EOL
      * @return this
      */
@@ -584,7 +583,7 @@ public interface LineFormattingAppendable extends Appendable {
      * <p>
      * This appends the sequence to current prefix
      *
-     * @param prefix prefix characters to add to current prefix for new lines appended after this is set
+     * @param prefix   prefix characters to add to current prefix for new lines appended after this is set
      * @param afterEol if true prefix will take effect after EOL
      * @return this
      */

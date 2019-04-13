@@ -81,10 +81,10 @@ public class ColorStyler extends HtmlStylerBase<Color> {
             if (a.isEmpty()) {
                 a = "ff";
             }
-            
+
             return new Color(parse(r), parse(g), parse(b), parse(a));
         }
-        
+
         Integer rgb = nameColorMap.get(colorName);
         return rgb == null ? null : new Color(rgb);
     }

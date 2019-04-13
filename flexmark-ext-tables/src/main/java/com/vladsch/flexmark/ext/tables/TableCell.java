@@ -1,11 +1,10 @@
 package com.vladsch.flexmark.ext.tables;
 
-import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.ast.DelimitedNode;
-import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.ast.Text;
 import com.vladsch.flexmark.ast.WhiteSpace;
 import com.vladsch.flexmark.ast.util.TextNodeConverter;
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.html.CellAlignment;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
@@ -39,7 +38,7 @@ public class TableCell extends Node implements DelimitedNode {
         }
 
         if (getFirstChild() == null && firstChild != null) {
-            // we keep a single space from the child 
+            // we keep a single space from the child
             Node text = new Text(firstChild.getChars().subSequence(0, 1));
             appendChild(text);
         }

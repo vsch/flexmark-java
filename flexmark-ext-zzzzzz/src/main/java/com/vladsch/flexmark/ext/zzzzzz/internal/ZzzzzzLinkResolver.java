@@ -1,10 +1,10 @@
 package com.vladsch.flexmark.ext.zzzzzz.internal;
 
-import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.html.LinkResolver;
 import com.vladsch.flexmark.html.LinkResolverFactory;
 import com.vladsch.flexmark.html.renderer.LinkResolverContext;
 import com.vladsch.flexmark.html.renderer.ResolvedLink;
+import com.vladsch.flexmark.util.ast.Node;
 
 import java.util.Set;
 
@@ -38,5 +38,4 @@ public class ZzzzzzLinkResolver implements LinkResolver {
             return new ZzzzzzLinkResolver(context);
         }
     }
-
 }

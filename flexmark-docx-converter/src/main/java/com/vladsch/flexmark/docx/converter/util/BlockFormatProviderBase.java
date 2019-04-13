@@ -145,7 +145,7 @@ public class BlockFormatProviderBase<T> implements BlockFormatProvider<T> {
         }
 
         final Style style = getStyle();
-        if (style != null && style.getRPr()  != null) {
+        if (style != null && style.getRPr() != null) {
             StyleUtil.apply(myDocx.getHelper().getExplicitRPr(style.getRPr()), rPr);
         }
     }

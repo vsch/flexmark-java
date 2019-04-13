@@ -13,7 +13,7 @@ public interface PhasedNodeDocxRenderer extends NodeDocxRenderer {
     /**
      * Render the specified node.
      *
-     * @param docx  docx renderer context instance
+     * @param docx     docx renderer context instance
      * @param document the document node to render
      * @param phase    rendering phase for which to generate the output. Will be any of {@link DocxRendererPhase} except {@link DocxRendererPhase#DOCUMENT} because this phase is used for the non-phased node rendering
      */

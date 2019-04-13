@@ -16,7 +16,6 @@ public class NodeIterable implements ReversiblePeekingIterable<Node> {
         this.reversed = reversed;
     }
 
-
     @Override
     public ReversiblePeekingIterator<Node> iterator() {
         return new NodeIterator(firstNode, lastNode, reversed);

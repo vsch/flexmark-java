@@ -14,6 +14,7 @@ import com.vladsch.flexmark.util.options.MutableDataHolder;
  * <p>
  * The parsed tables are turned into {@link TableBlock} blocks.
  * </p>
+ *
  * @deprecated this module is not maintained or updated, use flexmark-ext-tables extension which can
  * be configured for GFM table compatibility and has more options
  */

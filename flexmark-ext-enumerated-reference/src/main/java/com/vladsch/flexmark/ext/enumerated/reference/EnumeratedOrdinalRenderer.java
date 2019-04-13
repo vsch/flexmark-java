@@ -1,7 +1,5 @@
 package com.vladsch.flexmark.ext.enumerated.reference;
 
-import java.util.List;
-
 public interface EnumeratedOrdinalRenderer {
     /**
      * Start of rendering for all renderings
@@ -36,8 +34,8 @@ public interface EnumeratedOrdinalRenderer {
      *                         the runnable is saved before this call and restored after so there is no need to save its value.
      *                         <p>
      *                         NOTE: if referenceFormat is null and the current runnable is not null then it should be run
-     *                           after output of default text and before output of referenceOrdinal, to make sure that parent compound
-     *                           ordinal formats are output.
+     *                         after output of default text and before output of referenceOrdinal, to make sure that parent compound
+     *                         ordinal formats are output.
      */
     void render(final int referenceOrdinal, EnumeratedReferenceBlock referenceFormat, final String defaultText, final boolean needSeparator);
 

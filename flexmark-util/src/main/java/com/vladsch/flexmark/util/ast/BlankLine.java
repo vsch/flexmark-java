@@ -4,7 +4,7 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 public class BlankLine extends Block {
     private Block claimedBlankLine = null;
-    
+
     public boolean isClaimed() {
         return claimedBlankLine != null;
     }

@@ -1,9 +1,9 @@
 package com.vladsch.flexmark.util.collection;
 
-import java.util.function.Function;
 import com.vladsch.flexmark.util.collection.iteration.*;
 
 import java.util.*;
+import java.util.function.Function;
 
 @SuppressWarnings("WeakerAccess")
 public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {

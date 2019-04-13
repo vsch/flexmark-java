@@ -30,7 +30,8 @@ import java.io.IOException;
  * &lt;li&gt;item text
  * child text
  * &lt;/li&gt;
- * @deprecated  Use {@link LineFormattingAppendable} instead
+ *
+ * @deprecated Use {@link LineFormattingAppendable} instead
  */
 @SuppressWarnings({ "UnusedReturnValue", "SameParameterValue" })
 @Deprecated
@@ -157,7 +158,7 @@ public interface FormattingAppendable extends Appendable {
     /**
      * Set prefix to append after a new line character for every line before the indent prefix in normal
      * and after a new line in pre-formatted sections
-     *
+     * <p>
      * if PREFIX_AFTER_PENDING_EOL is enabled then prefix will take effect after pending EOLs are output
      *
      * @param prefix prefix characters for new lines appended after this is set
@@ -168,7 +169,7 @@ public interface FormattingAppendable extends Appendable {
     /**
      * Set prefix to append after a new line character for every line before the indent prefix in normal
      * and after a new line in pre-formatted sections
-     *
+     * <p>
      * This appends the sequence to current prefix
      *
      * @param prefix prefix characters to add to current prefix for new lines appended after this is set
@@ -202,7 +203,7 @@ public interface FormattingAppendable extends Appendable {
      * if current pendingEOL is N then will run after pendingEOL == atPendingEOL and EOL is output
      *
      * @param atPendingEOL pending EOL level
-     * @param runnable  runnable to run once this EOL is output
+     * @param runnable     runnable to run once this EOL is output
      * @return this
      */
     FormattingAppendable addAfterEolRunnable(int atPendingEOL, Runnable runnable);
@@ -219,6 +220,7 @@ public interface FormattingAppendable extends Appendable {
      * <p>
      * Actual new line character is only appended if there is real data
      * appended and it did not contain a new line as the last character
+     *
      * @return this
      */
     FormattingAppendable line();
@@ -228,6 +230,7 @@ public interface FormattingAppendable extends Appendable {
      * <p>
      * Actual new line character is only appended if there is real data
      * appended and it did not contain a new line as the last character
+     *
      * @return this
      */
     FormattingAppendable addLine();
@@ -356,9 +359,9 @@ public interface FormattingAppendable extends Appendable {
 
     /**
      * Get offset before the next append, but right after pending: EOLs, spaces or indents were added
-     *
+     * <p>
      * Next append of text (non EOL/spaces) will set the reference, following appends will have not effect
-     *
+     * <p>
      * Unlike {@link #lastOffset()} flush() does not change the value of the reference, only actual character appending.
      *
      * @param refOffset reference where to store offset, if no appending was done then value is not changed
@@ -407,7 +410,7 @@ public interface FormattingAppendable extends Appendable {
     /**
      * Open a pre-formatted section. No monitoring of text is done, all text is output as is while nesting count &gt;0
      *
-     * @param keepIndent       if true, if there is pending indent it will be appended before entering pre-format mode
+     * @param keepIndent if true, if there is pending indent it will be appended before entering pre-format mode
      * @return this
      */
     FormattingAppendable openPreFormatted(final boolean keepIndent);

@@ -27,11 +27,11 @@ public abstract class BooleanOptionParser<T> implements OptionParser<T> {
     @Override
     public Pair<T, List<ParsedOption<T>>> parseOption(BasedSequence optionText, T options, MessageProvider provider) {
         if (optionText.isEmpty()) {
-            return new Pair<T, List<ParsedOption<T>>>(setOptions(options), (List<ParsedOption<T>>)Collections.<ParsedOption<T>>singletonList(new ParsedOption(optionText, this, ParsedOptionStatus.VALID)));
+            return new Pair<T, List<ParsedOption<T>>>(setOptions(options), (List<ParsedOption<T>>) Collections.<ParsedOption<T>>singletonList(new ParsedOption(optionText, this, ParsedOptionStatus.VALID)));
         } else {
             if (provider == null) provider = MessageProvider.DEFAULT;
             String message = provider.message(KEY_OPTION_0_PARAMETERS_1_IGNORED, OPTION_0_PARAMETERS_1_IGNORED, myOptionName, optionText);
-            return new Pair<T, List<ParsedOption<T>>>(setOptions(options), (List<ParsedOption<T>>)Collections.<ParsedOption<T>>singletonList(new ParsedOption(optionText, this, ParsedOptionStatus.IGNORED, Collections.singletonList(new ParserMessage(optionText, ParsedOptionStatus.IGNORED, message)))));
+            return new Pair<T, List<ParsedOption<T>>>(setOptions(options), (List<ParsedOption<T>>) Collections.<ParsedOption<T>>singletonList(new ParsedOption(optionText, this, ParsedOptionStatus.IGNORED, Collections.singletonList(new ParserMessage(optionText, ParsedOptionStatus.IGNORED, message)))));
         }
     }
 

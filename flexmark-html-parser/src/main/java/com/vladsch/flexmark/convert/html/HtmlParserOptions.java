@@ -74,7 +74,7 @@ public class HtmlParserOptions implements MutableDataSetter {
     public TableFormatOptions tableOptions;
 
     HtmlParserOptions() {
-       this((DataHolder) null);
+        this((DataHolder) null);
     }
 
     HtmlParserOptions(HtmlParserOptions other) {
@@ -200,7 +200,7 @@ public class HtmlParserOptions implements MutableDataSetter {
         outputIdAttributeRegex = FlexmarkHtmlParser.OUTPUT_ID_ATTRIBUTE_REGEX.getFrom(options);
         outputIdAttributeRegexPattern = Pattern.compile(outputIdAttributeRegex);
         tableCellAlignmentMap = FlexmarkHtmlParser.TABLE_CELL_ALIGNMENT_MAP.getFrom(options);
-        tableOptions =  new TableFormatOptions(options);
+        tableOptions = new TableFormatOptions(options);
     }
 
     @Override

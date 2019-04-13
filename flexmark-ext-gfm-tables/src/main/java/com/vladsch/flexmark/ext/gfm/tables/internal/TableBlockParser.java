@@ -1,12 +1,12 @@
 package com.vladsch.flexmark.ext.gfm.tables.internal;
 
-import com.vladsch.flexmark.util.ast.Block;
-import com.vladsch.flexmark.util.ast.BlockContent;
-import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.ext.gfm.tables.*;
 import com.vladsch.flexmark.ext.gfm.tables.TableCell.Alignment;
 import com.vladsch.flexmark.parser.InlineParser;
 import com.vladsch.flexmark.parser.block.*;
+import com.vladsch.flexmark.util.ast.Block;
+import com.vladsch.flexmark.util.ast.BlockContent;
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 

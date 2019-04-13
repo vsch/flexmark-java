@@ -10,26 +10,26 @@ coverage:
     project:
       default:
         target: auto
-        branches: 
-        - master
+        branches:
+          - master
 
     patch:
       default:
         target: auto
-        branches: 
-        - master
+        branches:
+          - master
 
     changes:
       default:
-        branches: 
-        - master
+        branches:
+          - master
 
-  ignore: 
-  - .*/test/.*
+  ignore:
+    - .*/test/.*
 
 comment:
   layout: "header, diff, changes, sunburst, uncovered, tree"
-  branches: 
-  - master
+  branches:
+    - master
   behavior: default
-  
+

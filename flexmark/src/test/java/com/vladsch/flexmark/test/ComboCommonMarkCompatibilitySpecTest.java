@@ -20,8 +20,7 @@ public class ComboCommonMarkCompatibilitySpecTest extends ComboExtraSpecTest {
             .setFrom(ParserEmulationProfile.COMMONMARK.getOptions())
             .set(HtmlRenderer.INDENT_SIZE, 4)
             .set(HtmlRenderer.PERCENT_ENCODE_URLS, true)
-            .set(HtmlRenderer.RENDER_HEADER_ID, true)
-            ;
+            .set(HtmlRenderer.RENDER_HEADER_ID, true);
 
     private static final Map<String, DataHolder> optionsMap = new HashMap<String, DataHolder>();
     static {

@@ -1,7 +1,5 @@
 package com.vladsch.flexmark.docx.converter.util;
 
-import java.util.function.Consumer;
-import java.util.function.Function;
 import com.vladsch.flexmark.util.Pair;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
@@ -16,6 +14,8 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.StringReader;
 import java.util.*;
 import java.util.Map.Entry;
+import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 

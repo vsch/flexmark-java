@@ -54,7 +54,7 @@
                             <classpathScope>test</classpathScope>
                             <arguments>
                                 <argument>-classpath</argument>
-                                <classpath />
+                                <classpath/>
                                 <argument>com.vladsch.flexmark.test.SpecBenchmark</argument>
                             </arguments>
                         </configuration>
