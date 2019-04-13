@@ -116,7 +116,7 @@ Future 0.50.0
 0.42.4
 ------
 
-* Fix: Trailing URI only prefix auto-links do not get parsed
+* Fix: Trailing URI prefix only auto-links do not get parsed
 
 0.42.2
 ------
