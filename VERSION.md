@@ -6,6 +6,7 @@ flexmark-java
 [TOC]: # " "
 
 - [Future 0.50.0](#future-0500)
+- [0.42.4](#0424)
 - [0.42.2](#0422)
 - [0.42.0](#0420)
 - [0.40.34](#04034)
@@ -111,6 +112,11 @@ Future 0.50.0
   * [ ] `EXT_TABLES` conversion option not yet implemented.
 * [ ] Add: `<!-- @formatter:on -->` and `<!-- @formatter:on -->` tags to `Formatter` for
       controlling non-formatting regions.
+
+0.42.4
+------
+
+* Fix: Trailing URI only prefix auto-links do not get parsed
 
 0.42.2
 ------

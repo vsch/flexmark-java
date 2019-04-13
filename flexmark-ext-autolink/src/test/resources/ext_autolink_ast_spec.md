@@ -231,9 +231,50 @@ Document[0, 77]
 ````````````````````````````````
 
 
+```````````````````````````````` example Autolink: 13
+http:// some text https:// some text ftp:// some text file:// some text
+
+.
+<p><a href="http://">http://</a> some text <a href="https://">https://</a> some text <a href="ftp://">ftp://</a> some text <a href="file://">file://</a> some text</p>
+.
+Document[0, 73]
+  Paragraph[0, 72] isTrailingBlankLine
+    TextBase[0, 71] chars:[0, 71, "http: …  text"]
+      AutoLink[0, 7] text:[0, 7, "http://"] pageRef:[0, 7, "http://"]
+        Text[0, 7] chars:[0, 7, "http://"]
+      Text[7, 18] chars:[7, 18, " some … text "]
+      AutoLink[18, 26] text:[18, 26, "https://"] pageRef:[18, 26, "https://"]
+        Text[18, 26] chars:[18, 26, "https://"]
+      Text[26, 37] chars:[26, 37, " some … text "]
+      AutoLink[37, 43] text:[37, 43, "ftp://"] pageRef:[37, 43, "ftp://"]
+        Text[37, 43] chars:[37, 43, "ftp://"]
+      Text[43, 54] chars:[43, 54, " some … text "]
+      AutoLink[54, 61] text:[54, 61, "file://"] pageRef:[54, 61, "file://"]
+        Text[54, 61] chars:[54, 61, "file://"]
+      Text[61, 71] chars:[61, 71, " some text"]
+````````````````````````````````
+
+
+```````````````````````````````` example Autolink: 14
+http:// or https://
+
+.
+<p><a href="http://">http://</a> or <a href="https://">https://</a></p>
+.
+Document[0, 21]
+  Paragraph[0, 20] isTrailingBlankLine
+    TextBase[0, 19] chars:[0, 19, "http: … ps://"]
+      AutoLink[0, 7] text:[0, 7, "http://"] pageRef:[0, 7, "http://"]
+        Text[0, 7] chars:[0, 7, "http://"]
+      Text[7, 11] chars:[7, 11, " or "]
+      AutoLink[11, 19] text:[11, 19, "https://"] pageRef:[11, 19, "https://"]
+        Text[11, 19] chars:[11, 19, "https://"]
+````````````````````````````````
+
+
 Don't process fenced code blocks
 
-```````````````````````````````` example Autolink: 13
+```````````````````````````````` example Autolink: 15
 ```
 http://example.com 
 ```
@@ -424,14 +465,16 @@ Document[0, 8]
 ```````````````````````````````` example Issue xxx-1: 2
 http://abc http://
 .
-<p><a href="http://abc">http://abc</a> http://</p>
+<p><a href="http://abc">http://abc</a> <a href="http://">http://</a></p>
 .
 Document[0, 19]
   Paragraph[0, 19]
     TextBase[0, 18] chars:[0, 18, "http: … tp://"]
       AutoLink[0, 10] text:[0, 10, "http://abc"] pageRef:[0, 10, "http://abc"]
         Text[0, 10] chars:[0, 10, "http://abc"]
-      Text[10, 18] chars:[10, 18, " http://"]
+      Text[10, 11] chars:[10, 11, " "]
+      AutoLink[11, 18] text:[11, 18, "http://"] pageRef:[11, 18, "http://"]
+        Text[11, 18] chars:[11, 18, "http://"]
 ````````````````````````````````
 
 

@@ -123,16 +123,24 @@ public class AutolinkNodePostProcessor extends NodePostProcessor {
                 linksList.add(new DummyLinkSpan(LinkType.URL, start, end));
             } else {
                 int iMax = linksList.size();
+                boolean skip = false;
+
                 for (int i = 0; i < iMax; i++) {
                     LinkSpan link = linksList.get(i);
                     if (end < link.getBeginIndex()) {
                         // insert here
                         linksList.add(i, new DummyLinkSpan(LinkType.URL, start, end));
+                        skip = true;
                         break;
                     } else if (start >= link.getBeginIndex() && end <= link.getEndIndex()) {
                         // overlap, skip
+                        skip = true;
                         break;
                     }
+                }
+
+                if (!skip) {
+                    linksList.add(new DummyLinkSpan(LinkType.URL, start, end));
                 }
             }
         }
