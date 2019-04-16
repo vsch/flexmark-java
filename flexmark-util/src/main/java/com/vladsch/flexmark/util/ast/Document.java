@@ -52,17 +52,29 @@ public class Document extends Block implements MutableDataHolder {
         }
     }
 
-    public int getLineNumber(int offset) {
+    /**
+     * Get line number at offset
+     *
+     * Next line starts after the EOL sequence.
+     * offsets between \r and \n are considered part of the same line as offset before \r.
+     *
+     * @param offset  offset in document text
+     * @return  line number at offset
+     */
+    public int getLineNumber(final int offset) {
         if (lineSegments == EMPTY_LIST) {
-            BasedSequence preText = getChars().baseSubSequence(0, Utils.maxLimit(offset, getChars().length()));
+            BasedSequence preText = getChars().baseSubSequence(0, Utils.maxLimit(offset + 1, getChars().length()));
+
             if (preText.isEmpty()) return 0;
             int lineNumber = 0;
             int nextLineEnd = preText.endOfLineAnyEOL(0);
             final int length = preText.length();
             while (nextLineEnd < length) {
-                lineNumber++;
-                nextLineEnd = preText.endOfLineAnyEOL(nextLineEnd + 1);
+                int lengthWithEOL = nextLineEnd + preText.eolLength(nextLineEnd);
+                if (offset >= lengthWithEOL) lineNumber++; // do not treat offset between \r and \n as complete line
+                nextLineEnd = preText.endOfLineAnyEOL(lengthWithEOL);
             }
+
             return lineNumber;
         } else {
             final int iMax = lineSegments.size();

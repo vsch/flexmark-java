@@ -1,5 +1,6 @@
 package com.vladsch.flexmark.util;
 
+import com.vladsch.flexmark.util.ast.DocumentTest;
 import com.vladsch.flexmark.util.collection.*;
 import com.vladsch.flexmark.util.html.HtmlFormattingAppendableBaseTest;
 import com.vladsch.flexmark.util.html.ui.HtmlBuilderTest;
@@ -16,6 +17,7 @@ import org.junit.runners.Suite;
         IntegerBitSetTest.class,
         OrderedSetTest.class,
         OrderedMapTest.class,
+        DocumentTest.class,
         OrderedMultiMapTest.class,
         ClassificationBagTest.class,
         BasedSequenceImplTest.class,
