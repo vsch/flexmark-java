@@ -5,6 +5,7 @@ flexmark-java
 
 [TOC]: # " "
 
+- [0.42.6](#0426)
 - [0.42.4](#0424)
 - [0.42.2](#0422)
 - [0.42.0](#0420)
@@ -80,6 +81,12 @@ flexmark-java
 
 
 &nbsp;</details>
+
+0.42.6
+------
+
+* Fix: [#338, getLineNumber incorrect with Windows end of line separators]
+  * merge: [#339, PR: Fix to line number when using Windows EOL characters.] thanks to
 
 0.42.4
 ------
@@ -1346,4 +1353,8 @@ setting either will affect both keys. For information on these keys see
 [migrate flexmark-java 0_40_x to 0_42_0]: https://github.com/vsch/flexmark-java/blob/master/assets/migrations/migrate%20flexmark-java%200_40_x%20to%200_42_0.xml
 [NodeInsertingPostProcessorSample.java]: https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/samples/NodeInsertingPostProcessorSample.java
 [YouTrack: IDEA-207453]: https://youtrack.jetbrains.com/issue/IDEA-207453 "Add Conversion of ref anchor to UrlFilter for file line navigation"
+[#338, getLineNumber incorrect with Windows end of line separators]: https://github.com/vsch/flexmark-java/issues/338
+[#339, PR: Fix to line number when using Windows EOL characters.]: https://github.com/vsch/flexmark-java/pull/339
+
+
 
