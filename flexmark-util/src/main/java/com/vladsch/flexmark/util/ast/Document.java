@@ -61,7 +61,7 @@ public class Document extends Block implements MutableDataHolder {
             final int length = preText.length();
             while (nextLineEnd < length) {
                 lineNumber++;
-                nextLineEnd = preText.endOfLineAnyEOL(nextLineEnd + 1);
+                nextLineEnd = preText.endOfLineAnyEOL(nextLineEnd + preText.eolLength(nextLineEnd));
             }
             return lineNumber;
         } else {
