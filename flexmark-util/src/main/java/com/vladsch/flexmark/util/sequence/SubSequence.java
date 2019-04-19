@@ -73,16 +73,6 @@ public final class SubSequence extends BasedSequenceImpl {
     }
 
     @Override
-    public SubSequence subSequence(final Range range) {
-        return subSequence(range.getStart(), range.getEnd());
-    }
-
-    @Override
-    public SubSequence subSequence(final int start) {
-        return subSequence(start, length());
-    }
-
-    @Override
     public SubSequence subSequence(int start, int end) {
         if (start >= 0 && end <= endOffset - startOffset) {
             return baseSubSequence(startOffset + start, startOffset + end);
@@ -102,12 +92,6 @@ public final class SubSequence extends BasedSequenceImpl {
             throw new StringIndexOutOfBoundsException("SubCharSequence index: " + start + " out of range: 0, " + length());
         }
         throw new StringIndexOutOfBoundsException("SubCharSequence index: " + end + " out of range: 0, " + length());
-    }
-
-    @Override
-    public BasedSequence appendTo(final StringBuilder out, final int start, final int end) {
-        out.append(baseSeq, startOffset + start, startOffset + end);
-        return this;
     }
 
     @Override
