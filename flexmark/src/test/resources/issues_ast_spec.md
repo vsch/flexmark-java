@@ -2223,3 +2223,38 @@ Document[0, 14]
 ````````````````````````````````
 
 
+### Issue 341
+
+Issue #341, already fixed.
+
+```````````````````````````````` example(Issue 341: 1) options(keep-blank-lines)
+1. List item 1:
+   * List item 1 sub list 1 item 1
+
+   List item 1 para 1
+.
+<ol>
+  <li>
+    <p>List item 1:</p>
+    <ul>
+      <li>List item 1 sub list 1 item 1</li>
+    </ul>
+    <p>List item 1 para 1</p>
+  </li>
+</ol>
+.
+Document[0, 73]
+  OrderedList[0, 73] isLoose delimiter:'.'
+    OrderedListItem[0, 73] open:[0, 2, "1."] isLoose hadBlankLine
+      Paragraph[3, 16]
+        Text[3, 15] chars:[3, 15, "List  … em 1:"]
+      BulletList[19, 51] isTight
+        BulletListItem[19, 51] open:[19, 20, "*"] isTight hadBlankLineAfter
+          Paragraph[21, 51] isTrailingBlankLine
+            Text[21, 50] chars:[21, 50, "List  … tem 1"]
+      BlankLine[51, 52]
+      Paragraph[55, 73]
+        Text[55, 73] chars:[55, 73, "List  … ara 1"]
+````````````````````````````````
+
+

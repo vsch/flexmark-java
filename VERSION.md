@@ -28,6 +28,7 @@ flexmark-java
 - [0.40.4](#0404)
 - [0.40.2](#0402)
 - [0.40.0](#0400)
+- [0.35.10](#03510)
 - [0.35.8](#0358)
 - [0.35.6](#0356)
 - [0.35.4](#0354)
@@ -105,9 +106,10 @@ Future 0.50.0
         `LineFormattingAppendableImpl`
   * [x] Fix: replace all uses of `FormattingAppendable` by `LineFormattingAppendable`
   * [x] Fix: replace all uses of `FormattingAppendableImpl` by `LineFormattingAppendableImpl`
-* [ ] Fix: Factor out BasedSequenceImpl functionality that does not depend on BasedSequence and
-      can be applied to any CharSequence into its own CharSequence interface with default
-      implementations.
+* [x] Fix: Factor out BasedSequenceImpl functionality that does not depend on BasedSequence and
+      can be applied to any CharSequence into its own `RichCharSequence` interface with default
+      abstract implementation in `RichCharSequenceBase` and implementation in
+      `RichCharSequenceImpl`.
 * [ ] Add: `FlexmarkHtmlParser` options:
   * [ ] Fix: [#313, Ability to override tags processing in FlexmarkHtmlParser]
   * [ ] `EXT_TABLES` conversion option not yet implemented.
@@ -577,6 +579,12 @@ Future 0.50.0
       * `com.vladsch.flexmark.formatter.internal.PhasedNodeFormatter` to `com.vladsch.flexmark.formatter.PhasedNodeFormatter`
       * `com.vladsch.flexmark.formatter.internal.NodeFormatterSubContext` to `com.vladsch.flexmark.formatter.NodeFormatterSubContext`
 <!--@formatter:on-->
+
+0.35.10
+-------
+
+* Add: compound enum refs and enum refs in headings without element reference.
+
 0.35.8
 ------
 
@@ -1378,6 +1386,8 @@ setting either will affect both keys. For information on these keys see
 [#332, withOptions forgets about old link resolvers]: https://github.com/vsch/flexmark-java/issues/332
 [#334, CR line separators don't produce line break nodes]: https://github.com/vsch/flexmark-java/issues/334
 [#335, PR: Fix CR-only line separator handling]: https://github.com/vsch/flexmark-java/pull/335
+[#338, getLineNumber incorrect with Windows end of line separators]: https://github.com/vsch/flexmark-java/issues/338
+[#339, PR: Fix to line number when using Windows EOL characters.]: https://github.com/vsch/flexmark-java/pull/339
 [Admonition Extension, Material for MkDocs]: https://squidfunk.github.io/mkdocs-material/extensions/admonition/
 [Awesome Console]: https://plugins.jetbrains.com/plugin/7677-awesome-console "Awesome Console"
 [Kijimuna]: https://github.com/Kijimuna
@@ -1386,5 +1396,4 @@ setting either will affect both keys. For information on these keys see
 [migrate flexmark-java 0_42_x to 0_50_0.xml]: https://github.com/vsch/flexmark-java/blob/master/assets/migrations/migrate%20flexmark-java%200_42_x%20to%200_50_0.xml
 [NodeInsertingPostProcessorSample.java]: https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/samples/NodeInsertingPostProcessorSample.java
 [YouTrack: IDEA-207453]: https://youtrack.jetbrains.com/issue/IDEA-207453 "Add Conversion of ref anchor to UrlFilter for file line navigation"
-[#338, getLineNumber incorrect with Windows end of line separators]: https://github.com/vsch/flexmark-java/issues/338
-[#339, PR: Fix to line number when using Windows EOL characters.]: https://github.com/vsch/flexmark-java/pull/339
+
