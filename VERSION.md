@@ -27,6 +27,7 @@ flexmark-java
 - [0.40.4](#0404)
 - [0.40.2](#0402)
 - [0.40.0](#0400)
+- [0.35.10](#03510)
 - [0.35.8](#0358)
 - [0.35.6](#0356)
 - [0.35.4](#0354)
@@ -545,6 +546,12 @@ flexmark-java
       * `com.vladsch.flexmark.formatter.internal.PhasedNodeFormatter` to `com.vladsch.flexmark.formatter.PhasedNodeFormatter`
       * `com.vladsch.flexmark.formatter.internal.NodeFormatterSubContext` to `com.vladsch.flexmark.formatter.NodeFormatterSubContext`
 <!--@formatter:on-->
+
+0.35.10
+-------
+
+* Add: compound enum refs and enum refs in headings without element reference.
+
 0.35.8
 ------
 
