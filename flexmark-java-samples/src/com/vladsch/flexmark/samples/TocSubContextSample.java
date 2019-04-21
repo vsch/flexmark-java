@@ -32,7 +32,7 @@ public class TocSubContextSample {
     static class CustomNodeRenderer implements NodeRenderer {
         public static class Factory implements DelegatingNodeRendererFactory {
             @Override
-            public NodeRenderer create(final DataHolder options) {
+            public NodeRenderer create(DataHolder options) {
                 return new CustomNodeRenderer();
             }
 
@@ -54,23 +54,18 @@ public class TocSubContextSample {
             HashSet<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
             set.add(new NodeRenderingHandler<TocBlock>(TocBlock.class, new com.vladsch.flexmark.html.CustomNodeRenderer<TocBlock>() {
                 @Override
-                public void render(TocBlock node, NodeRendererContext context, final HtmlWriter html) {
+                public void render(TocBlock node, NodeRendererContext context, HtmlWriter html) {
                     // test the node to see if it needs overriding
-                    final StringBuilder sb = new StringBuilder();
-                    NodeRendererContext subContext = context.getDelegatedSubContext(sb, true);
+                    NodeRendererContext subContext = context.getDelegatedSubContext(true);
                     subContext.delegateRender();
+                    String tocText = subContext.getHtmlWriter().toString(0);
 
                     // output to separate stream
                     System.out.println("---- TOC HTML --------------------");
-                    System.out.println(sb);
+                    System.out.print(tocText);
                     System.out.println("----------------------------------\n");
 
-                    html.tagLineIndent("div", new Runnable() {
-                        @Override
-                        public void run() {
-                            html.raw(sb);
-                        }
-                    });
+                    html.tagLineIndent("div", () -> html.append(subContext.getHtmlWriter()));
                 }
             }));
 
@@ -80,12 +75,12 @@ public class TocSubContextSample {
 
     static class CustomExtension implements HtmlRendererExtension {
         @Override
-        public void rendererOptions(final MutableDataHolder options) {
+        public void rendererOptions(MutableDataHolder options) {
 
         }
 
         @Override
-        public void extend(final Builder rendererBuilder, final String rendererType) {
+        public void extend(Builder rendererBuilder, String rendererType) {
             rendererBuilder.nodeRendererFactory(new CustomNodeRenderer.Factory());
         }
 

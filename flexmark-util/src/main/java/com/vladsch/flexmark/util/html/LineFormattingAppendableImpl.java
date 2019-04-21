@@ -64,9 +64,9 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
         myPrefixes = new ArrayList<>();
         myPrefixStack = new Stack<>();
         myIndentPrefixStack = new Stack<>();
-        myPrefix = BasedSequence.NULL;
-        myPrefixAfterEol = BasedSequence.NULL;
-        myIndentPrefix = BasedSequence.NULL;
+        myPrefix = BasedSequence.EMPTY;
+        myPrefixAfterEol = BasedSequence.EMPTY;
+        myIndentPrefix = BasedSequence.EMPTY;
         myLineOnFirstText = 0;
         myIndentsOnFirstEol = new ArrayList<>();
     }

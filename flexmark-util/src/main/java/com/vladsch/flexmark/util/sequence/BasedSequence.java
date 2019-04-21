@@ -14,6 +14,7 @@ import java.util.Locale;
 @SuppressWarnings("SameParameterValue")
 public interface BasedSequence extends RichCharSequence<BasedSequence> {
     BasedSequence NULL = new EmptyBasedSequence();
+    BasedSequence EMPTY = new EmptyBasedSequence();
     BasedSequence EOL = CharSubSequence.of(RichCharSequence.EOL);
     BasedSequence SPACE = CharSubSequence.of(RichCharSequence.SPACE);
     List<BasedSequence> EMPTY_LIST = new ArrayList<BasedSequence>();
