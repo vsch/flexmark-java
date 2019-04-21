@@ -105,7 +105,7 @@ public class TocSubContextSample {
                 "### Heading 1.1.1\n" +
                 "### Heading 1.1.2  **_some bold italic_**\n" +
                 "");
-        String html = RENDERER.render(document);  // "<p>This is <em>Sparta</em> <a href="document.html">document</a> and this is not a link (eliminated)</p>\n"
+        String html = RENDERER.render(document);
         System.out.println(html);
     }
 }
