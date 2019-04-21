@@ -57,11 +57,9 @@ public class TocSubContextSample2 {
                 @Override
                 public void render(TocBlock node, NodeRendererContext context, HtmlWriter html) {
                     // test the node to see if it needs overriding
-                    StringBuilder sb = new StringBuilder();
-                    NodeRendererContext subContext = context.getDelegatedSubContext(sb, true);
+                    NodeRendererContext subContext = context.getDelegatedSubContext(true);
                     subContext.delegateRender();
-                    subContext.getHtmlWriter().flush();
-                    String tocText = sb.toString();
+                    String tocText = subContext.getHtmlWriter().toString(0);
 
                     context.getDocument().set(TOC_HTML, tocText);
                     //html.tagLineIndent("div", () -> html.append(subContext.getHtmlWriter()));
