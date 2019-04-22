@@ -4,7 +4,7 @@ import com.vladsch.flexmark.ext.abbreviation.Abbreviation;
 import com.vladsch.flexmark.ext.abbreviation.AbbreviationBlock;
 import com.vladsch.flexmark.ext.abbreviation.AbbreviationExtension;
 import com.vladsch.flexmark.util.KeepType;
-import com.vladsch.flexmark.util.ValueRunnable;
+import java.util.function.Consumer;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.ast.NodeRepository;
 import com.vladsch.flexmark.util.options.DataHolder;
@@ -33,14 +33,11 @@ public class AbbreviationRepository extends NodeRepository<AbbreviationBlock> {
     @Override
     public Set<AbbreviationBlock> getReferencedElements(final Node parent) {
         final HashSet<AbbreviationBlock> references = new HashSet<>();
-        visitNodes(parent, new ValueRunnable<Node>() {
-            @Override
-            public void run(final Node value) {
-                if (value instanceof Abbreviation) {
-                    AbbreviationBlock reference = ((Abbreviation) value).getReferenceNode(AbbreviationRepository.this);
-                    if (reference != null) {
-                        references.add(reference);
-                    }
+        visitNodes(parent, value -> {
+            if (value instanceof Abbreviation) {
+                AbbreviationBlock reference = ((Abbreviation) value).getReferenceNode(AbbreviationRepository.this);
+                if (reference != null) {
+                    references.add(reference);
                 }
             }
         }, Abbreviation.class);

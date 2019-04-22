@@ -4,7 +4,7 @@ import com.vladsch.flexmark.ext.macros.MacroDefinitionBlock;
 import com.vladsch.flexmark.ext.macros.MacroReference;
 import com.vladsch.flexmark.ext.macros.MacrosExtension;
 import com.vladsch.flexmark.util.KeepType;
-import com.vladsch.flexmark.util.ValueRunnable;
+import java.util.function.Consumer;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.ast.NodeRepository;
 import com.vladsch.flexmark.util.options.DataHolder;
@@ -61,14 +61,11 @@ public class MacroDefinitionRepository extends NodeRepository<MacroDefinitionBlo
     @Override
     public Set<MacroDefinitionBlock> getReferencedElements(final Node parent) {
         final HashSet<MacroDefinitionBlock> references = new HashSet<>();
-        visitNodes(parent, new ValueRunnable<Node>() {
-            @Override
-            public void run(final Node value) {
-                if (value instanceof MacroReference) {
-                    MacroDefinitionBlock reference = ((MacroReference) value).getReferenceNode(MacroDefinitionRepository.this);
-                    if (reference != null) {
-                        references.add(reference);
-                    }
+        visitNodes(parent, value -> {
+            if (value instanceof MacroReference) {
+                MacroDefinitionBlock reference = ((MacroReference) value).getReferenceNode(MacroDefinitionRepository.this);
+                if (reference != null) {
+                    references.add(reference);
                 }
             }
         }, MacroReference.class);

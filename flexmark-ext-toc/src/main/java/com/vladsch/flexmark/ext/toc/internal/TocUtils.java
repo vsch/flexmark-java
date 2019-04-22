@@ -12,6 +12,7 @@ import com.vladsch.flexmark.util.html.Escaping;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 import java.util.*;
+import java.util.function.Consumer;
 
 @SuppressWarnings("WeakerAccess")
 public class TocUtils {
@@ -287,12 +288,9 @@ public class TocUtils {
             }
         };
 
-        ValueRunnable<Integer> listClose = new ValueRunnable<Integer>() {
-            @Override
-            public void run(Integer level) {
-                if (tocOptions.isNumbered) {
-                    headingNumbers[level] = 0;
-                }
+        Consumer<Integer> listClose = level -> {
+            if (tocOptions.isNumbered) {
+                headingNumbers[level] = 0;
             }
         };
 
@@ -324,7 +322,7 @@ public class TocUtils {
                 for (int lv = lastLevel; lv >= headerLevel + 1; lv--) {
                     if (openedItems[lv]) {
                         html.unIndent();
-                        listClose.run(lv);
+                        listClose.accept(lv);
                     }
                 }
                 html.line();

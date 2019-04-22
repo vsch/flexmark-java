@@ -100,6 +100,10 @@ Future 0.50.0
     * in the refactoring preview tool window that opens hit `Do Refactor`
   * [ ] Convert anonymous classes to lambda where possible.
   * [x] Remove classes from utils which are implemented in Java 8
+  * [x] replace `RunnableValue` with `Supplier`, requires changing `run()` with `get()`
+    * Delete `RunnableValue`
+  * [x] replace `ValueRunnable` with `Consumer`, requires changing `run()` with `accept()`
+    * Delete `ValueRunnable`
 * [x] Add: `LineFormattingAppendable` and `LineFormattingAppendableImpl`
   * [x] Fix: deprecate `FormattingAppendable` to be replaced by `LineFormattingAppendable`
   * [x] Fix: deprecate `FormattingAppendableImpl` to be replaced by

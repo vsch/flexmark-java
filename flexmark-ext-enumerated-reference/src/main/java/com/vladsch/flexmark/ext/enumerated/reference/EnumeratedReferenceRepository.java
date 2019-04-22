@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.ext.enumerated.reference;
 
 import com.vladsch.flexmark.util.KeepType;
-import com.vladsch.flexmark.util.ValueRunnable;
+import java.util.function.Consumer;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.ast.NodeRepository;
 import com.vladsch.flexmark.util.options.DataHolder;
@@ -48,14 +48,11 @@ public class EnumeratedReferenceRepository extends NodeRepository<EnumeratedRefe
     @Override
     public Set<EnumeratedReferenceBlock> getReferencedElements(final Node parent) {
         final HashSet<EnumeratedReferenceBlock> references = new HashSet<>();
-        visitNodes(parent, new ValueRunnable<Node>() {
-            @Override
-            public void run(final Node value) {
-                if (value instanceof EnumeratedReferenceBase) {
-                    EnumeratedReferenceBlock reference = ((EnumeratedReferenceBase) value).getReferenceNode(EnumeratedReferenceRepository.this);
-                    if (reference != null) {
-                        references.add(reference);
-                    }
+        visitNodes(parent, value -> {
+            if (value instanceof EnumeratedReferenceBase) {
+                EnumeratedReferenceBlock reference = ((EnumeratedReferenceBase) value).getReferenceNode(EnumeratedReferenceRepository.this);
+                if (reference != null) {
+                    references.add(reference);
                 }
             }
         }, EnumeratedReferenceText.class, EnumeratedReferenceLink.class);

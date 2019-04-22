@@ -9,6 +9,7 @@ import java.net.URLEncoder;
 import java.util.*;
 import java.util.function.BiFunction;
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 public class Utils {
     public static <T> T ifNull(T receiver, T altValue) {
@@ -52,17 +53,17 @@ public class Utils {
         return (receiver == null || receiver.isEmpty()) ? ifEmptyArg : ifNotEmptyArg;
     }
 
-    public static String ifEmpty(String receiver, RunnableValue<String> arg) {
+    public static String ifEmpty(String receiver, Supplier<String> arg) {
         if (receiver != null && !receiver.isEmpty()) return receiver;
-        return arg.run();
+        return arg.get();
     }
 
     public static String ifEmpty(
             String receiver,
-            RunnableValue<String> ifEmptyArg,
-            RunnableValue<String> ifNotEmptyArg
+            Supplier<String> ifEmptyArg,
+            Supplier<String> ifNotEmptyArg
     ) {
-        return (receiver == null || receiver.isEmpty()) ? ifEmptyArg.run() : ifNotEmptyArg.run();
+        return (receiver == null || receiver.isEmpty()) ? ifEmptyArg.get() : ifNotEmptyArg.get();
     }
 
     public static boolean isBlank(String receiver) {
@@ -641,11 +642,11 @@ public class Utils {
         else return i1.compareTo(i2);
     }
 
-    public static <K, V> V putIfMissing(Map<K, V> receiver, K key, RunnableValue<V> value) {
+    public static <K, V> V putIfMissing(Map<K, V> receiver, K key, Supplier<V> value) {
         V elem = receiver.get(key);
 
         if (elem == null) {
-            elem = value.run();
+            elem = value.get();
             receiver.put(key, elem);
         }
         return elem;
@@ -654,12 +655,7 @@ public class Utils {
     public static <K, V> Map<K, V> withDefaults(Map<K, V> receiver, Map<K, V> defaults) {
         HashMap<K, V> map = new HashMap<K, V>(receiver);
         for (final Map.Entry<K, V> entry : defaults.entrySet()) {
-            putIfMissing(map, entry.getKey(), new RunnableValue<V>() {
-                @Override
-                public V run() {
-                    return entry.getValue();
-                }
-            });
+            putIfMissing(map, entry.getKey(), entry::getValue);
         }
         return map;
     }
@@ -678,12 +674,7 @@ public class Utils {
     }
 
     public static <K, V> void removeIf(Map<K, V> receiver, final BiFunction<K, V, Boolean> removeFilter) {
-        removeIf(receiver, new Function<Map.Entry<K, V>, Boolean>() {
-            @Override
-            public Boolean apply(final Map.Entry<K, V> entry) {
-                return removeFilter.apply(entry.getKey(), entry.getValue());
-            }
-        });
+        removeIf(receiver, entry -> removeFilter.apply(entry.getKey(), entry.getValue()));
     }
 
     public static void streamAppend(StringBuilder sb, InputStream inputStream) {

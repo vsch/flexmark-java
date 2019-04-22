@@ -6,7 +6,7 @@ import com.vladsch.flexmark.ast.RefNode;
 import com.vladsch.flexmark.ast.Reference;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.KeepType;
-import com.vladsch.flexmark.util.ValueRunnable;
+import java.util.function.Consumer;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.ast.NodeRepository;
 import com.vladsch.flexmark.util.html.Escaping;
@@ -39,14 +39,11 @@ public class ReferenceRepository extends NodeRepository<Reference> {
     @Override
     public Set<Reference> getReferencedElements(final Node parent) {
         final HashSet<Reference> references = new HashSet<>();
-        visitNodes(parent, new ValueRunnable<Node>() {
-            @Override
-            public void run(final Node value) {
-                if (value instanceof RefNode) {
-                    Reference reference = ((RefNode) value).getReferenceNode(ReferenceRepository.this);
-                    if (reference != null) {
-                        references.add(reference);
-                    }
+        visitNodes(parent, value -> {
+            if (value instanceof RefNode) {
+                Reference reference = ((RefNode) value).getReferenceNode(ReferenceRepository.this);
+                if (reference != null) {
+                    references.add(reference);
                 }
             }
         }, LinkRef.class, ImageRef.class);
