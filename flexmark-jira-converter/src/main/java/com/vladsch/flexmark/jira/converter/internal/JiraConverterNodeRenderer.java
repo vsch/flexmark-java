@@ -270,7 +270,7 @@ public class JiraConverterNodeRenderer implements NodeRenderer {
         html.line();
     }
 
-    private void renderLooseParagraph(final Paragraph node, final NodeRendererContext context, final HtmlWriter html) {
+    private void renderLooseParagraph(Paragraph node, NodeRendererContext context, HtmlWriter html) {
         renderTextBlockParagraphLines(node, context, html);
 
         if (inBlockQuote > 0 && node.getNext() == null) {
@@ -494,7 +494,7 @@ public class JiraConverterNodeRenderer implements NodeRenderer {
 
     public static class Factory implements NodeRendererFactory {
         @Override
-        public NodeRenderer create(final DataHolder options) {
+        public NodeRenderer apply(DataHolder options) {
             return new JiraConverterNodeRenderer(options);
         }
     }

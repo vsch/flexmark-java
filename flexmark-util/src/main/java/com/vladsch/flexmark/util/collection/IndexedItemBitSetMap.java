@@ -1,28 +1,28 @@
 package com.vladsch.flexmark.util.collection;
 
-import com.vladsch.flexmark.util.Computable;
+import java.util.function.Function;
 
 import java.util.BitSet;
 
 public class IndexedItemBitSetMap<K, M> extends IndexedItemSetMapBase<K, BitSet, M> {
-    private final Computable<K, M> myComputable;
+    private final Function<M, K> myComputable;
 
-    public IndexedItemBitSetMap(Computable<K, M> computable) {
+    public IndexedItemBitSetMap(Function<M, K> computable) {
         this(computable, 0);
     }
 
-    public IndexedItemBitSetMap(Computable<K, M> computable, int capacity) {
+    public IndexedItemBitSetMap(Function<M, K> computable, int capacity) {
         super(capacity);
         this.myComputable = computable;
     }
 
-    public Computable<K, M> getComputable() {
+    public Function<M, K> getComputable() {
         return myComputable;
     }
 
     @Override
     public K mapKey(M key) {
-        return myComputable.compute(key);
+        return myComputable.apply(key);
     }
 
     @Override

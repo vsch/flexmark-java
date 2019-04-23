@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.parser;
 
-import com.vladsch.flexmark.util.ComputableFactory;
+import java.util.function.Function;
 import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.options.DataHolder;
 
@@ -8,7 +8,7 @@ import com.vladsch.flexmark.util.options.DataHolder;
  * Processing of elements which are based on a link ref: [] or ![]
  * This includes footnote references [^...] and wiki links [[...]]
  */
-public interface LinkRefProcessorFactory extends ComputableFactory<LinkRefProcessor, Document> {
+public interface LinkRefProcessorFactory extends Function<Document, LinkRefProcessor> {
     /**
      * Whether the image ref is desired, if not then ! will be stripped off the prefix and treated as plain text
      *
@@ -36,5 +36,5 @@ public interface LinkRefProcessorFactory extends ComputableFactory<LinkRefProces
      * @return link ref processor
      */
     @Override
-    LinkRefProcessor create(Document document);
+    LinkRefProcessor apply(Document document);
 }

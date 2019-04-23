@@ -9,7 +9,6 @@ import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.builder.BuilderBase;
 import com.vladsch.flexmark.util.builder.Extension;
-import com.vladsch.flexmark.util.collection.DataValueFactory;
 import com.vladsch.flexmark.util.collection.DynamicDefaultKey;
 import com.vladsch.flexmark.util.dependency.DependencyHandler;
 import com.vladsch.flexmark.util.dependency.FlatDependencyHandler;
@@ -70,12 +69,7 @@ public class HtmlRenderer implements IRender {
     public static final DataKey<String> SOURCE_POSITION_ATTRIBUTE = new DataKey<>("SOURCE_POSITION_ATTRIBUTE", "");
     public static final DataKey<Boolean> SOURCE_POSITION_PARAGRAPH_LINES = new DataKey<>("SOURCE_POSITION_PARAGRAPH_LINES", false);
     public static final DataKey<String> TYPE = new DataKey<>("TYPE", "HTML");
-    public static final DataKey<ArrayList<TagRange>> TAG_RANGES = new DataKey<ArrayList<TagRange>>("TAG_RANGES", new DataValueFactory<ArrayList<TagRange>>() {
-        @Override
-        public ArrayList<TagRange> create(DataHolder value) {
-            return new ArrayList<TagRange>();
-        }
-    });
+    public static final DataKey<ArrayList<TagRange>> TAG_RANGES = new DataKey<ArrayList<TagRange>>("TAG_RANGES", value -> new ArrayList<TagRange>());
 
     public static final DataKey<Boolean> RECHECK_UNDEFINED_REFERENCES = new DataKey<>("RECHECK_UNDEFINED_REFERENCES", false);
     public static final DataKey<Boolean> OBFUSCATE_EMAIL = new DataKey<>("OBFUSCATE_EMAIL", false);
@@ -589,7 +583,7 @@ public class HtmlRenderer implements IRender {
 
             for (int i = nodeRendererFactories.size() - 1; i >= 0; i--) {
                 NodeRendererFactory nodeRendererFactory = nodeRendererFactories.get(i);
-                NodeRenderer nodeRenderer = nodeRendererFactory.create(this.getOptions());
+                NodeRenderer nodeRenderer = nodeRendererFactory.apply(this.getOptions());
                 for (NodeRenderingHandler nodeType : nodeRenderer.getNodeRenderingHandlers()) {
                     // Overwrite existing renderer
                     NodeRenderingHandlerWrapper handlerWrapper = new NodeRenderingHandlerWrapper(nodeType, renderers.get(nodeType.getNodeType()));
@@ -603,12 +597,12 @@ public class HtmlRenderer implements IRender {
             }
 
             for (int i = 0; i < linkResolverFactories.size(); i++) {
-                myLinkResolvers[i] = linkResolverFactories.get(i).create(this);
+                myLinkResolvers[i] = linkResolverFactories.get(i).apply(this);
             }
 
             this.attributeProviders = new AttributeProvider[attributeProviderFactories.size()];
             for (int i = 0; i < attributeProviderFactories.size(); i++) {
-                attributeProviders[i] = attributeProviderFactories.get(i).create(this);
+                attributeProviders[i] = attributeProviderFactories.get(i).apply(this);
             }
         }
 

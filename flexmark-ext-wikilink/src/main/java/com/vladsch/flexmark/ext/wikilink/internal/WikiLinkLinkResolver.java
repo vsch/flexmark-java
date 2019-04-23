@@ -83,7 +83,7 @@ public class WikiLinkLinkResolver implements LinkResolver {
         }
 
         @Override
-        public LinkResolver create(LinkResolverContext context) {
+        public LinkResolver apply(LinkResolverContext context) {
             return new WikiLinkLinkResolver(context);
         }
     }

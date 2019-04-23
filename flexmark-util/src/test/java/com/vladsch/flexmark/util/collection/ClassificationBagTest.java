@@ -1,15 +1,15 @@
 package com.vladsch.flexmark.util.collection;
 
-import com.vladsch.flexmark.util.Computable;
+import java.util.function.Function;
 import org.junit.Assert;
 import org.junit.Test;
 
 public class ClassificationBagTest {
     @Test
     public void testBasic() throws Exception {
-        ClassificationBag<Class<?>, Object> bag = new ClassificationBag<Class<?>, Object>(new Computable<Class<?>, Object>() {
+        ClassificationBag<Class<?>, Object> bag = new ClassificationBag<Class<?>, Object>(new Function<Object, Class<?>>() {
             @Override
-            public Class<?> compute(Object value) {
+            public Class<?> apply(Object value) {
                 return value.getClass();
             }
         });
@@ -85,9 +85,9 @@ public class ClassificationBagTest {
 
     @Test
     public void testInterleave() throws Exception {
-        ClassificationBag<Class<?>, Object> bag = new ClassificationBag<Class<?>, Object>(new Computable<Class<?>, Object>() {
+        ClassificationBag<Class<?>, Object> bag = new ClassificationBag<Class<?>, Object>(new Function<Object, Class<?>>() {
             @Override
-            public Class<?> compute(Object value) {
+            public Class<?> apply(Object value) {
                 return value.getClass();
             }
         });

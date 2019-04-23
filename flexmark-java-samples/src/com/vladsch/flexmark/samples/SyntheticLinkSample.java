@@ -102,7 +102,7 @@ public class SyntheticLinkSample {
             }
 
             @Override
-            public NodePostProcessor create(Document document) {
+            public NodePostProcessor apply(Document document) {
                 return new SyntheticLinkPostProcessor(document);
             }
         }
@@ -131,7 +131,7 @@ public class SyntheticLinkSample {
 
         public static class Factory extends DocumentPostProcessorFactory {
             @Override
-            public PostProcessor create(Document document) {
+            public PostProcessor apply(Document document) {
                 return new AppendedMarkdownPostProcessor(document);
             }
 

@@ -159,7 +159,7 @@ public class EnumeratedReferenceNodeRenderer implements PhasedNodeRenderer
 
     public static class Factory implements NodeRendererFactory {
         @Override
-        public NodeRenderer create(final DataHolder options) {
+        public NodeRenderer apply(final DataHolder options) {
             return new EnumeratedReferenceNodeRenderer(options);
         }
     }

@@ -21,7 +21,7 @@ public class YouTubeLinkNodePostProcessor extends NodePostProcessor {
             Node previous = node.getPrevious();
 
             if (previous instanceof Text) {
-                final BasedSequence chars = previous.getChars();
+                BasedSequence chars = previous.getChars();
                 if (chars.endsWith("@") && chars.isContinuedBy(node.getChars())) {
                     int prevBackslash = chars.subSequence(0, chars.length() - 1).countTrailing('\\');
                     if ((prevBackslash & 1) == 0) {
@@ -48,7 +48,7 @@ public class YouTubeLinkNodePostProcessor extends NodePostProcessor {
         }
 
         @Override
-        public NodePostProcessor create(Document document) {
+        public NodePostProcessor apply(Document document) {
             return new YouTubeLinkNodePostProcessor(document);
         }
     }

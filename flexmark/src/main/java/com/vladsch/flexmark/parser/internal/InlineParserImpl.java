@@ -148,7 +148,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
 
         linkRefProcessors = new ArrayList<LinkRefProcessor>(linkRefProcessorsData.processors.size());
         for (LinkRefProcessorFactory factory : linkRefProcessorsData.processors) {
-            linkRefProcessors.add(factory.create(document));
+            linkRefProcessors.add(factory.apply(document));
         }
 
         // create custom processors
@@ -161,7 +161,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
                 for (InlineParserExtensionFactory factory : entry.getValue()) {
                     InlineParserExtension parserExtension = parserExtensionMap.get(factory);
                     if (parserExtension == null) {
-                        parserExtension = factory.create(this);
+                        parserExtension = factory.apply(this);
                         parserExtensionMap.put(factory, parserExtension);
                     }
                     extensionList.add(parserExtension);
@@ -724,7 +724,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
         CharacterNodeFactory factory = customSpecialCharacterFactoryMap.get(c);
         if (factory == null) return false;
 
-        Node node = factory.create();
+        Node node = factory.get();
         node.setChars(input.subSequence(index, index + 1));
 
         if (currentText != null) {

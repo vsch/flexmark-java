@@ -67,7 +67,7 @@ public class PostProcessorManager {
             boolean hadGlobal = false;
             for (PostProcessorFactory dependent : stage.dependents) {
                 if (dependent.affectsGlobalScope()) {
-                    document = dependent.create(document).processDocument(document);
+                    document = dependent.apply(document).processDocument(document);
                     hadGlobal = true;
                     // assume it no longer reflects reality;
                     classifyingNodeTracker = null;
@@ -83,7 +83,7 @@ public class PostProcessorManager {
                     }
 
                     Map<Class<?>, Set<Class<?>>> dependentNodeTypes = dependent.getNodeTypes();
-                    PostProcessor postProcessor = dependent.create(document);
+                    PostProcessor postProcessor = dependent.apply(document);
                     BitSet exclusionSet = new BitSet();
                     for (Set<Class<?>> excluded : dependentNodeTypes.values()) {
                         BitSet mapped = classifyingNodeTracker.getExclusionSet().indexBitSet(excluded);
@@ -129,7 +129,7 @@ public class PostProcessorManager {
         public PostProcessorDependencyStage(List<PostProcessorFactory> dependents) {
             // compute mappings
             HashMap<Class<? extends Node>, Set<Class<?>>> nodeMap = new HashMap<Class<? extends Node>, Set<Class<?>>>();
-            final boolean[] haveExclusions = { false };
+            boolean[] haveExclusions = { false };
 
             for (PostProcessorFactory dependent : dependents) {
                 Map<Class<?>, Set<Class<?>>> types = dependent.getNodeTypes();
@@ -142,7 +142,7 @@ public class PostProcessorManager {
                         if (Node.class.isAssignableFrom(entry.getKey())) {
                             //noinspection SuspiciousMethodCalls
                             Set<Class<?>> classes = nodeMap.get(entry.getKey());
-                            final Set<Class<?>> value = entry.getValue();
+                            Set<Class<?>> value = entry.getValue();
                             if (classes == null) {
                                 // copy so it is not modified by additional dependencies injecting other exclusions by mistake
                                 classes = new HashSet(value);
@@ -206,7 +206,7 @@ public class PostProcessorManager {
         }
 
         @Override
-        protected DependentItemMap<PostProcessorFactory> prioritize(final DependentItemMap<PostProcessorFactory> dependentMap) {
+        protected DependentItemMap<PostProcessorFactory> prioritize(DependentItemMap<PostProcessorFactory> dependentMap) {
             // put globals last
             List<DependentItemMap.Entry<Class, DependentItem<PostProcessorFactory>>> prioritized = dependentMap.entries();
             Collections.sort(prioritized, new Comparator<DependentItemMap.Entry<Class, DependentItem<PostProcessorFactory>>>() {

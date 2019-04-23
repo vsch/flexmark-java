@@ -38,12 +38,7 @@ public class AdmonitionExtension implements Parser.ParserExtension, HtmlRenderer
     public static final DataKey<Map<String, String>> TYPE_SVG_MAP = new DataKey<Map<String, String>>("ADMONITION.TYPE_SVG_MAP", getQualifierSvgValueFactory());
 
     private static DataValueFactory<Map<String, String>> getQualifierTypeValueFactory() {
-        return new DataValueFactory<Map<String, String>>() {
-            @Override
-            public Map<String, String> create(final DataHolder value) {
-                return getQualifierTypeMap();
-            }
-        };
+        return value -> getQualifierTypeMap();
     }
 
     public static Map<String, String> getQualifierTypeMap() {
@@ -94,12 +89,7 @@ public class AdmonitionExtension implements Parser.ParserExtension, HtmlRenderer
     }
 
     private static DataValueFactory<Map<String, String>> getQualifierTitleValueFactory() {
-        return new DataValueFactory<Map<String, String>>() {
-            @Override
-            public Map<String, String> create(final DataHolder value) {
-                return getQualifierTitleMap();
-            }
-        };
+        return value -> getQualifierTitleMap();
     }
 
     public static Map<String, String> getQualifierTitleMap() {
@@ -149,12 +139,7 @@ public class AdmonitionExtension implements Parser.ParserExtension, HtmlRenderer
     }
 
     private static DataValueFactory<Map<String, String>> getQualifierSvgValueFactory() {
-        return new DataValueFactory<Map<String, String>>() {
-            @Override
-            public Map<String, String> create(final DataHolder value) {
-                return getQualifierSvgValueMap();
-            }
-        };
+        return value -> getQualifierSvgValueMap();
     }
 
     public static Map<String, String> getQualifierSvgValueMap() {
@@ -197,7 +182,7 @@ public class AdmonitionExtension implements Parser.ParserExtension, HtmlRenderer
         return getInputStreamContent(AdmonitionExtension.class.getResourceAsStream("/admonition.js"));
     }
 
-    public static void copy(final Reader reader, final Writer writer) throws IOException {
+    public static void copy(Reader reader, Writer writer) throws IOException {
         char[] buffer = new char[4096];
         int n;
         while (-1 != (n = reader.read(buffer))) {
@@ -215,17 +200,17 @@ public class AdmonitionExtension implements Parser.ParserExtension, HtmlRenderer
     }
 
     @Override
-    public void extend(final Formatter.Builder builder) {
+    public void extend(Formatter.Builder builder) {
         builder.nodeFormatterFactory(new AdmonitionNodeFormatter.Factory());
     }
 
     @Override
-    public void rendererOptions(final MutableDataHolder options) {
+    public void rendererOptions(MutableDataHolder options) {
 
     }
 
     @Override
-    public void parserOptions(final MutableDataHolder options) {
+    public void parserOptions(MutableDataHolder options) {
 
     }
 

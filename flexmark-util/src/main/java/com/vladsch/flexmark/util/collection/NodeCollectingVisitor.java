@@ -1,17 +1,13 @@
 package com.vladsch.flexmark.util.collection;
 
-import com.vladsch.flexmark.util.Computable;
+import java.util.function.Function;
 import com.vladsch.flexmark.util.ast.Node;
 
 import java.util.*;
 
 public class NodeCollectingVisitor {
-    public static final Computable<Class, Node> NODE_CLASSIFIER = new Computable<Class, Node>() {
-        @Override
-        public Class compute(final Node value) {
-            return value.getClass();
-        }
-    };
+    public static final Function<Node, Class> NODE_CLASSIFIER = Node::getClass;
+    private static final Class[] EMPTY_CLASSES = new Class[0];
 
     private final HashMap<Class, List<Class>> mySubClassMap;
     private final HashSet<Class> myIncluded;
@@ -20,7 +16,7 @@ public class NodeCollectingVisitor {
     private final Class[] myClasses;
 
     public NodeCollectingVisitor(Set<Class> classes) {
-        myClasses = classes.toArray(new Class[classes.size()]);
+        myClasses = classes.toArray(EMPTY_CLASSES);
 
         mySubClassMap = new HashMap<Class, List<Class>>();
         myIncluded = new HashSet<Class>();
@@ -77,7 +73,7 @@ public class NodeCollectingVisitor {
         visitChildren(node);
     }
 
-    private void visitChildren(final Node parent) {
+    private void visitChildren(Node parent) {
         Node node = parent.getFirstChild();
         while (node != null) {
             // A subclass of this visitor might modify the node, resulting in getNext returning a different node or no

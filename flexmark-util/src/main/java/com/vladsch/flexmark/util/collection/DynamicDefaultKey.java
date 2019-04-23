@@ -19,10 +19,10 @@ public class DynamicDefaultKey<T> extends DataKey<T> {
      * @param name       See {@link #getName()}.
      * @param defaultKey The {@link DataKey} to take the default value from.
      */
-    public DynamicDefaultKey(String name, final DataKey<? extends T> defaultKey) {
+    public DynamicDefaultKey(String name, DataKey<? extends T> defaultKey) {
         this(name, new DataValueFactory<T>() {
             @Override
-            public T create(DataHolder value) {
+            public T apply(DataHolder value) {
                 return defaultKey.getFrom(value);
             }
         });
@@ -30,6 +30,6 @@ public class DynamicDefaultKey<T> extends DataKey<T> {
 
     @Override
     public T getDefaultValue(DataHolder holder) {
-        return getFactory().create(holder);
+        return getFactory().apply(holder);
     }
 }

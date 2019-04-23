@@ -147,7 +147,7 @@ public class DocxLinkResolver implements LinkResolver {
         }
 
         @Override
-        public LinkResolver create(final LinkResolverContext context) {
+        public LinkResolver apply(final LinkResolverContext context) {
             return new DocxLinkResolver(context);
         }
     }

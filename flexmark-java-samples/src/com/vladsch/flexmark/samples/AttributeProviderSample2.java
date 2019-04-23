@@ -48,7 +48,7 @@ public class AttributeProviderSample2 {
         static AttributeProviderFactory Factory() {
             return new IndependentAttributeProviderFactory() {
                 @Override
-                public AttributeProvider create(LinkResolverContext context) {
+                public AttributeProvider apply(LinkResolverContext context) {
                     //noinspection ReturnOfInnerClass
                     return new SampleAttributeProvider();
                 }

@@ -1,13 +1,13 @@
 package com.vladsch.flexmark.parser;
 
-import com.vladsch.flexmark.util.ComputableFactory;
+import java.util.function.Function;
 import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.dependency.Dependent;
 
 import java.util.Map;
 import java.util.Set;
 
-public interface PostProcessorFactory extends ComputableFactory<PostProcessor, Document>, Dependent<PostProcessorFactory> {
+public interface PostProcessorFactory extends Function<Document, PostProcessor>, Dependent<PostProcessorFactory> {
     /**
      * A map of nodes of interest as keys and values a set of classes, if implemented by an ancestors then the node should be excluded from processing by this processor
      * i.e. DoNotDecorate.class if the processor adds links so that existing links will be ignored.
@@ -21,5 +21,5 @@ public interface PostProcessorFactory extends ComputableFactory<PostProcessor, D
      * @return post processor for the document
      */
     @Override
-    PostProcessor create(Document document);
+    PostProcessor apply(Document document);
 }

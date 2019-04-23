@@ -84,7 +84,7 @@ public class AttributesAttributeProvider implements AttributeProvider {
         //}
 
         @Override
-        public AttributeProvider create(LinkResolverContext context) {
+        public AttributeProvider apply(LinkResolverContext context) {
             return new AttributesAttributeProvider(context);
         }
     }

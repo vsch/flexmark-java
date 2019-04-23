@@ -1,16 +1,16 @@
 package com.vladsch.flexmark.util.mappers;
 
-import com.vladsch.flexmark.util.Computable;
+import java.util.function.Function;
 import com.vladsch.flexmark.util.ast.Node;
 
-public class NodeClassifier implements Computable<Class<?>, Node> {
+public class NodeClassifier implements Function<Node, Class<?>> {
     public static final NodeClassifier INSTANCE = new NodeClassifier();
 
     private NodeClassifier() {
     }
 
     @Override
-    public Class<?> compute(Node value) {
+    public Class<?> apply(Node value) {
         return value.getClass();
     }
 }

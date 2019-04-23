@@ -41,12 +41,7 @@ public class PdfConverterExtension {
     public static final String DEFAULT_CSS_RESOURCE_PATH = "/default.css";
     public static final String DEFAULT_TOC_LIST_CLASS = "toc";
 
-    public static final DataKey<String> DEFAULT_CSS = new DynamicDefaultKey<String>("DEFAULT_CSS", new DataValueFactory<String>() {
-        @Override
-        public String create(final DataHolder value) {
-            return Utils.getResourceAsString(DEFAULT_CSS_RESOURCE_PATH, PdfConverterExtension.class);
-        }
-    });
+    public static final DataKey<String> DEFAULT_CSS = new DynamicDefaultKey<String>("DEFAULT_CSS", value -> Utils.getResourceAsString(DEFAULT_CSS_RESOURCE_PATH, PdfConverterExtension.class));
 
     public static String embedCss(String html, String css) {
         if (css != null && !css.isEmpty()) {

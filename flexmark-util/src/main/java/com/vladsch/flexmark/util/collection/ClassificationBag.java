@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.util.collection;
 
-import com.vladsch.flexmark.util.Computable;
+import java.util.function.Function;
 import com.vladsch.flexmark.util.collection.iteration.BitSetIterable;
 import com.vladsch.flexmark.util.collection.iteration.IndexedIterable;
 import com.vladsch.flexmark.util.collection.iteration.ReversibleIterable;
@@ -14,19 +14,19 @@ public class ClassificationBag<K, V> {
     private final IndexedItemBitSetMap<K, V> myBag;
     private final CollectionHost<V> myHost;
 
-    public ClassificationBag(Computable<K, V> mapper) {
+    public ClassificationBag(Function<V, K> mapper) {
         this(0, mapper);
     }
 
-    public ClassificationBag(Computable<K, V> mapper, CollectionHost<V> host) {
+    public ClassificationBag(Function<V, K> mapper, CollectionHost<V> host) {
         this(0, mapper, host);
     }
 
-    public ClassificationBag(int capacity, Computable<K, V> mapper) {
+    public ClassificationBag(int capacity, Function<V, K> mapper) {
         this(capacity, mapper, null);
     }
 
-    public ClassificationBag(int capacity, Computable<K, V> mapper, CollectionHost<V> host) {
+    public ClassificationBag(int capacity, Function<V, K> mapper, CollectionHost<V> host) {
         this.myHost = host;
         this.myItems = new OrderedSet<V>(capacity, new CollectionHost<V>() {
             @Override

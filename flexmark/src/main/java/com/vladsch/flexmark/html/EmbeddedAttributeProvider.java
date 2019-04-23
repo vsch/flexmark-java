@@ -13,7 +13,7 @@ public class EmbeddedAttributeProvider implements AttributeProvider {
 
     public static final IndependentAttributeProviderFactory Factory = new IndependentAttributeProviderFactory() {
         @Override
-        public AttributeProvider create(LinkResolverContext context) {
+        public AttributeProvider apply(LinkResolverContext context) {
             //noinspection ReturnOfInnerClass
             return new EmbeddedAttributeProvider();
         }

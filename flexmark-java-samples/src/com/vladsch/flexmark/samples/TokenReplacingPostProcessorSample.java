@@ -43,7 +43,7 @@ public class TokenReplacingPostProcessorSample {
             }
 
             @Override
-            public NodePostProcessor create(Document document) {
+            public NodePostProcessor apply(Document document) {
                 return new LinkReplacingPostProcessor();
             }
         }

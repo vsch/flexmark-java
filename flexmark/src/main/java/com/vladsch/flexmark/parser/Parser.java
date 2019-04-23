@@ -43,12 +43,7 @@ public class Parser implements IParse {
     public static final DataKey<Iterable<Extension>> EXTENSIONS = BuilderBase.EXTENSIONS;
 
     public static final DataKey<KeepType> REFERENCES_KEEP = new DataKey<>("REFERENCES_KEEP", KeepType.FIRST);
-    public static final DataKey<ReferenceRepository> REFERENCES = new DataKey<>("REFERENCES", new DataValueFactory<ReferenceRepository>() {
-        @Override
-        public ReferenceRepository create(DataHolder options) {
-            return new ReferenceRepository(options);
-        }
-    });
+    public static final DataKey<ReferenceRepository> REFERENCES = new DataKey<>("REFERENCES", ReferenceRepository::new);
 
     public static final DataKey<Boolean> ASTERISK_DELIMITER_PROCESSOR = new DataKey<>("ASTERISK_DELIMITER_PROCESSOR", true);
 
@@ -134,7 +129,7 @@ public class Parser implements IParse {
     public static final DataKey<Boolean> HTML_BLOCK_START_ONLY_ON_BLOCK_TAGS = new DynamicDefaultKey<Boolean>("HTML_BLOCK_START_ONLY_ON_BLOCK_TAGS", HTML_BLOCK_DEEP_PARSER);
     public static final DataKey<List<String>> HTML_BLOCK_TAGS = new DataKey<List<String>>("HTML_BLOCK_TAGS", new DataValueFactory<List<String>>() {
         @Override
-        public List<String> create(final DataHolder value) {
+        public List<String> apply(DataHolder value) {
             return Arrays.asList(
                     "address",
                     "article",
@@ -497,7 +492,7 @@ public class Parser implements IParse {
         }
 
         @Override
-        protected void removeApiPoint(final Object apiPoint) {
+        protected void removeApiPoint(Object apiPoint) {
             if (apiPoint instanceof CustomBlockParserFactory) this.blockParserFactories.remove(apiPoint);
             else if (apiPoint instanceof DelimiterProcessor) this.delimiterProcessors.remove(apiPoint);
             else if (apiPoint instanceof PostProcessorFactory) this.postProcessorFactories.remove(apiPoint);
@@ -512,7 +507,7 @@ public class Parser implements IParse {
         }
 
         @Override
-        protected void preloadExtension(final Extension extension) {
+        protected void preloadExtension(Extension extension) {
             if (extension instanceof ParserExtension) {
                 ParserExtension parserExtension = (ParserExtension) extension;
                 parserExtension.parserOptions(this);
@@ -520,7 +515,7 @@ public class Parser implements IParse {
         }
 
         @Override
-        protected boolean loadExtension(final Extension extension) {
+        protected boolean loadExtension(Extension extension) {
             if (extension instanceof ParserExtension) {
                 ParserExtension parserExtension = (ParserExtension) extension;
                 parserExtension.extend(this);

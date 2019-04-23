@@ -81,7 +81,7 @@ public class AbbreviationParagraphPreProcessor implements ParagraphPreProcessor 
             }
 
             @Override
-            public ParagraphPreProcessor create(ParserState state) {
+            public ParagraphPreProcessor apply(ParserState state) {
                 return new AbbreviationParagraphPreProcessor(state.getProperties());
             }
         };

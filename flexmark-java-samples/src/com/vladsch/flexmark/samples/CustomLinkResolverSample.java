@@ -148,7 +148,7 @@ public class CustomLinkResolverSample {
             }
 
             @Override
-            public LinkResolver create(final LinkResolverContext context) {
+            public LinkResolver apply(final LinkResolverContext context) {
                 return new com.vladsch.flexmark.docx.converter.internal.DocxLinkResolver(context);
             }
         }
@@ -174,7 +174,7 @@ public class CustomLinkResolverSample {
     static class CustomLinkRenderer implements NodeRenderer {
         public static class Factory implements DelegatingNodeRendererFactory {
             @Override
-            public NodeRenderer create(final DataHolder options) {
+            public NodeRenderer apply(final DataHolder options) {
                 return new CustomLinkRenderer();
             }
 

@@ -83,7 +83,7 @@ public class YouTubeLinkSample {
             }
 
             @Override
-            public NodePostProcessor create(Document document) {
+            public NodePostProcessor apply(Document document) {
                 return new YouTubeLinkNodePostProcessor(document);
             }
         }
@@ -125,7 +125,7 @@ public class YouTubeLinkSample {
 
         public static class Factory implements NodeRendererFactory {
             @Override
-            public NodeRenderer create(final DataHolder options) {
+            public NodeRenderer apply(final DataHolder options) {
                 return new YouTubeLinkNodeRenderer(options);
             }
         }

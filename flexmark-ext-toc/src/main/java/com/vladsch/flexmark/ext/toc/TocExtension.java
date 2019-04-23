@@ -41,12 +41,7 @@ public class TocExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRe
 
     // format options
     public static final DataKey<SimTocGenerateOnFormat> FORMAT_UPDATE_ON_FORMAT = new DataKey<>("FORMAT_UPDATE_ON_FORMAT", SimTocGenerateOnFormat.UPDATE);
-    public static final DataKey<TocOptions> FORMAT_OPTIONS = new DataKey<>("FORMAT_OPTIONS", new DataValueFactory<TocOptions>() {
-        @Override
-        public TocOptions create(DataHolder options) {
-            return new TocOptions(options, false);
-        }
-    });
+    public static final DataKey<TocOptions> FORMAT_OPTIONS = new DataKey<>("FORMAT_OPTIONS", options -> new TocOptions(options, false));
 
     private TocExtension() {
     }

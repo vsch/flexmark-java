@@ -1,9 +1,9 @@
 package com.vladsch.flexmark.parser;
 
-import com.vladsch.flexmark.util.ComputableFactory;
+import java.util.function.Function;
 import com.vladsch.flexmark.util.dependency.Dependent;
 
-public interface InlineParserExtensionFactory extends ComputableFactory<InlineParserExtension, InlineParser>, Dependent<InlineParserExtensionFactory> {
+public interface InlineParserExtensionFactory extends Function<InlineParser, InlineParserExtension>, Dependent<InlineParserExtensionFactory> {
     /**
      * Starting Characters for this inline processor
      *
@@ -17,5 +17,5 @@ public interface InlineParserExtensionFactory extends ComputableFactory<InlinePa
      * @param inlineParser inline parser instance
      * @return inline parser extension
      */
-    InlineParserExtension create(InlineParser inlineParser);
+    InlineParserExtension apply(InlineParser inlineParser);
 }

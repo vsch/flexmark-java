@@ -70,7 +70,7 @@ public class GfmUsersInlineParserExtension implements InlineParserExtension {
         }
 
         @Override
-        public InlineParserExtension create(final InlineParser inlineParser) {
+        public InlineParserExtension apply(final InlineParser inlineParser) {
             return new GfmUsersInlineParserExtension(inlineParser);
         }
 

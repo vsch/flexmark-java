@@ -52,7 +52,7 @@ public class MutableDataSet extends DataSet implements MutableDataHolder {
         if (dataSet.containsKey(key)) {
             return key.getValue(dataSet.get(key));
         } else {
-            T newValue = factory.create(this);
+            T newValue = factory.apply(this);
             dataSet.put(key, newValue);
             return newValue;
         }

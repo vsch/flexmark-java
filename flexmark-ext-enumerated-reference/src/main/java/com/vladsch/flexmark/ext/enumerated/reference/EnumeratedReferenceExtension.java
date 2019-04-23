@@ -30,18 +30,8 @@ public class EnumeratedReferenceExtension implements Parser.ParserExtension
         , Formatter.FormatterExtension
 {
     public static final DataKey<KeepType> ENUMERATED_REFERENCES_KEEP = new DataKey<>("ENUMERATED_REFERENCES_KEEP", KeepType.FIRST); // standard option to allow control over how to handle duplicates
-    public static final DataKey<EnumeratedReferenceRepository> ENUMERATED_REFERENCES = new DataKey<>("ENUMERATED_REFERENCES", new DataValueFactory<EnumeratedReferenceRepository>() {
-        @Override
-        public EnumeratedReferenceRepository create(DataHolder options) {
-            return new EnumeratedReferenceRepository(options);
-        }
-    });
-    public static final DataKey<EnumeratedReferences> ENUMERATED_REFERENCE_ORDINALS = new DataKey<>("ENUMERATED_REFERENCE_ORDINALS", new DataValueFactory<EnumeratedReferences>() {
-        @Override
-        public EnumeratedReferences create(DataHolder options) {
-            return new EnumeratedReferences(options);
-        }
-    });
+    public static final DataKey<EnumeratedReferenceRepository> ENUMERATED_REFERENCES = new DataKey<>("ENUMERATED_REFERENCES", EnumeratedReferenceRepository::new);
+    public static final DataKey<EnumeratedReferences> ENUMERATED_REFERENCE_ORDINALS = new DataKey<>("ENUMERATED_REFERENCE_ORDINALS", EnumeratedReferences::new);
 
     // formatter options
     public static final DataKey<ElementPlacement> ENUMERATED_REFERENCE_PLACEMENT = new DataKey<>("ENUMERATED_REFERENCE_PLACEMENT", ElementPlacement.AS_IS);
@@ -55,17 +45,17 @@ public class EnumeratedReferenceExtension implements Parser.ParserExtension
     }
 
     @Override
-    public void rendererOptions(final MutableDataHolder options) {
+    public void rendererOptions(MutableDataHolder options) {
 
     }
 
     @Override
-    public void parserOptions(final MutableDataHolder options) {
+    public void parserOptions(MutableDataHolder options) {
 
     }
 
     @Override
-    public boolean transferReferences(final MutableDataHolder document, final DataHolder included) {
+    public boolean transferReferences(MutableDataHolder document, DataHolder included) {
         if (document.contains(ENUMERATED_REFERENCES) && included.contains(ENUMERATED_REFERENCES)) {
             return Parser.transferReferences(ENUMERATED_REFERENCES.getFrom(document), ENUMERATED_REFERENCES.getFrom(included), ENUMERATED_REFERENCES_KEEP.getFrom(document) == KeepType.FIRST);
         }
@@ -81,7 +71,7 @@ public class EnumeratedReferenceExtension implements Parser.ParserExtension
     }
 
     @Override
-    public void extend(final Formatter.Builder builder) {
+    public void extend(Formatter.Builder builder) {
         builder.nodeFormatterFactory(new EnumeratedReferenceNodeFormatter.Factory());
     }
 

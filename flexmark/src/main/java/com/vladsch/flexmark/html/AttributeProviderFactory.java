@@ -1,12 +1,12 @@
 package com.vladsch.flexmark.html;
 
 import com.vladsch.flexmark.html.renderer.LinkResolverContext;
-import com.vladsch.flexmark.util.ComputableFactory;
+import java.util.function.Function;
 import com.vladsch.flexmark.util.dependency.Dependent;
 
 import java.util.Set;
 
-public interface AttributeProviderFactory extends ComputableFactory<AttributeProvider, LinkResolverContext>, Dependent<AttributeProviderFactory> {
+public interface AttributeProviderFactory extends Function<LinkResolverContext, AttributeProvider>, Dependent<AttributeProviderFactory> {
     @Override
     Set<Class<? extends AttributeProviderFactory>> getAfterDependents();
 
@@ -17,5 +17,5 @@ public interface AttributeProviderFactory extends ComputableFactory<AttributePro
     boolean affectsGlobalScope();
 
     @Override
-    AttributeProvider create(LinkResolverContext context);
+    AttributeProvider apply(LinkResolverContext context);
 }

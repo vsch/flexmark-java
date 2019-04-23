@@ -26,10 +26,7 @@ public class MacrosExtension implements Parser.ParserExtension
         , Formatter.FormatterExtension
 {
     public static final DataKey<KeepType> MACRO_DEFINITIONS_KEEP = new DataKey<>("MACRO_DEFINITIONS_KEEP", KeepType.FIRST); // standard option to allow control over how to handle duplicates
-    public static final DataKey<MacroDefinitionRepository> MACRO_DEFINITIONS = new DataKey<>("MACRO_DEFINITIONS", new DataValueFactory<MacroDefinitionRepository>() {
-        @Override
-        public MacroDefinitionRepository create(DataHolder options) { return new MacroDefinitionRepository(options); }
-    });
+    public static final DataKey<MacroDefinitionRepository> MACRO_DEFINITIONS = new DataKey<>("MACRO_DEFINITIONS", MacroDefinitionRepository::new);
     //public static final DataKey<Boolean> MACROS_OPTION1 = new DataKey<>("MACROS_OPTION1", false);
     //public static final DataKey<String> MACROS_OPTION2 = new DataKey<>("MACROS_OPTION2", "default");
     //public static final DataKey<Integer> MACROS_OPTION3 = new DataKey<>("MACROS_OPTION3", Integer.MAX_VALUE);
@@ -48,17 +45,17 @@ public class MacrosExtension implements Parser.ParserExtension
     }
 
     @Override
-    public void rendererOptions(final MutableDataHolder options) {
+    public void rendererOptions(MutableDataHolder options) {
 
     }
 
     @Override
-    public void parserOptions(final MutableDataHolder options) {
+    public void parserOptions(MutableDataHolder options) {
 
     }
 
     @Override
-    public boolean transferReferences(final MutableDataHolder document, final DataHolder included) {
+    public boolean transferReferences(MutableDataHolder document, DataHolder included) {
         // cannot optimize based on macros in this document, repository is not accessed until rendering
         if (/*document.contains(MACRO_DEFINITIONS) &&*/ included.contains(MACRO_DEFINITIONS)) {
             return Parser.transferReferences(MACRO_DEFINITIONS.getFrom(document), MACRO_DEFINITIONS.getFrom(included), MACRO_DEFINITIONS_KEEP.getFrom(document) == KeepType.FIRST);
@@ -67,7 +64,7 @@ public class MacrosExtension implements Parser.ParserExtension
     }
 
     @Override
-    public void extend(final Formatter.Builder builder) {
+    public void extend(Formatter.Builder builder) {
         builder.nodeFormatterFactory(new MacrosNodeFormatter.Factory());
     }
 

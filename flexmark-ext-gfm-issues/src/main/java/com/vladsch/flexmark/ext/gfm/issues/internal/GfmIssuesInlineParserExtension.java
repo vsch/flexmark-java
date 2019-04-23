@@ -12,22 +12,22 @@ import java.util.regex.Pattern;
 public class GfmIssuesInlineParserExtension implements InlineParserExtension {
     public static final Pattern GITHUB_ISSUE = Pattern.compile("^(#)(\\d+)\\b");
 
-    public GfmIssuesInlineParserExtension(final InlineParser inlineParser) {
+    public GfmIssuesInlineParserExtension(InlineParser inlineParser) {
 
     }
 
     @Override
-    public void finalizeDocument(final InlineParser inlineParser) {
+    public void finalizeDocument(InlineParser inlineParser) {
 
     }
 
     @Override
-    public void finalizeBlock(final InlineParser inlineParser) {
+    public void finalizeBlock(InlineParser inlineParser) {
 
     }
 
     @Override
-    public boolean parse(final InlineParser inlineParser) {
+    public boolean parse(InlineParser inlineParser) {
         BasedSequence[] matches = inlineParser.matchWithGroups(GITHUB_ISSUE);
         if (matches != null) {
             BasedSequence input = inlineParser.getInput();
@@ -60,7 +60,7 @@ public class GfmIssuesInlineParserExtension implements InlineParserExtension {
         }
 
         @Override
-        public InlineParserExtension create(final InlineParser inlineParser) {
+        public InlineParserExtension apply(InlineParser inlineParser) {
             return new GfmIssuesInlineParserExtension(inlineParser);
         }
 

@@ -33,7 +33,7 @@ public class TocSubContextSample2 {
     static class CustomNodeRenderer implements NodeRenderer {
         public static class Factory implements DelegatingNodeRendererFactory {
             @Override
-            public NodeRenderer create(DataHolder options) {
+            public NodeRenderer apply(DataHolder options) {
                 return new CustomNodeRenderer();
             }
 

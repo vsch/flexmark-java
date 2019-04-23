@@ -9,7 +9,7 @@ public class DataKey<T> {
 
     public DataKey(String name, DataValueFactory<T> factory) {
         this.name = name;
-        this.defaultValue = factory.create(null);
+        this.defaultValue = factory.apply(null);
         this.factory = factory;
     }
 
@@ -25,23 +25,13 @@ public class DataKey<T> {
      * @param defaultKey The {@link DataKey} to take the default value from.
      */
     private DataKey(String name, final DataKey<? extends T> defaultKey) {
-        this(name, new DataValueFactory<T>() {
-            @Override
-            public T create(DataHolder value) {
-                return defaultKey.getFrom(value);
-            }
-        });
+        this(name, defaultKey::getFrom);
     }
 
     public DataKey(String name, final T defaultValue) {
         this.name = name;
         this.defaultValue = defaultValue;
-        this.factory = new DataValueFactory<T>() {
-            @Override
-            public T create(DataHolder options) {
-                return defaultValue;
-            }
-        };
+        this.factory = options -> defaultValue;
     }
 
     public String getName() {
@@ -69,7 +59,7 @@ public class DataKey<T> {
         if (defaultValue != null) {
             return "DataKey<" + defaultValue.getClass().getName().substring(defaultValue.getClass().getPackage().getName().length() + 1) + "> " + name;
         } else {
-            T defaultValue = factory.create(null);
+            T defaultValue = factory.apply(null);
             if (defaultValue != null) {
                 return "DataKey<" + defaultValue.getClass().getName().substring(defaultValue.getClass().getPackage().getName().length() + 1) + "> " + name;
             } else {

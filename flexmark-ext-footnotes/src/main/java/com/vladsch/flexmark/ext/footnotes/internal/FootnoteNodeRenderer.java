@@ -150,7 +150,7 @@ public class FootnoteNodeRenderer implements PhasedNodeRenderer {
 
     public static class Factory implements NodeRendererFactory {
         @Override
-        public NodeRenderer create(final DataHolder options) {
+        public NodeRenderer apply(final DataHolder options) {
             return new FootnoteNodeRenderer(options);
         }
     }

@@ -92,7 +92,7 @@ public class ZzzzzzAttributeProvider implements AttributeProvider {
         //}
 
         @Override
-        public AttributeProvider create(LinkResolverContext context) {
+        public AttributeProvider apply(LinkResolverContext context) {
             return new ZzzzzzAttributeProvider(context);
         }
     }

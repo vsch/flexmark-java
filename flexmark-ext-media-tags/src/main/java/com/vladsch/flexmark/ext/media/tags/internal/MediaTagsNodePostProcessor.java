@@ -67,7 +67,7 @@ public class MediaTagsNodePostProcessor extends NodePostProcessor {
         }
 
         @Override
-        public NodePostProcessor create(Document document) {
+        public NodePostProcessor apply(Document document) {
             return new MediaTagsNodePostProcessor(document);
         }
     }

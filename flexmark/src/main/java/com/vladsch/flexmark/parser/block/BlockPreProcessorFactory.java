@@ -1,12 +1,12 @@
 package com.vladsch.flexmark.parser.block;
 
-import com.vladsch.flexmark.util.ComputableFactory;
+import java.util.function.Function;
 import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.util.dependency.Dependent;
 
 import java.util.Set;
 
-public interface BlockPreProcessorFactory extends ComputableFactory<BlockPreProcessor, ParserState>, Dependent<BlockPreProcessorFactory> {
+public interface BlockPreProcessorFactory extends Function<ParserState, BlockPreProcessor>, Dependent<BlockPreProcessorFactory> {
     /**
      * Block types that this pre-processors processes
      *
@@ -20,5 +20,5 @@ public interface BlockPreProcessorFactory extends ComputableFactory<BlockPreProc
      * @param state parser state, document blocks have already been parsed at this stage
      * @return block pre-processor
      */
-    BlockPreProcessor create(ParserState state);
+    BlockPreProcessor apply(ParserState state);
 }

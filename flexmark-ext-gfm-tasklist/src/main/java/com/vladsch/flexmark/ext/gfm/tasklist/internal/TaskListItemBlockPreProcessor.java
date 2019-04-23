@@ -64,7 +64,7 @@ public class TaskListItemBlockPreProcessor implements BlockPreProcessor {
         }
 
         @Override
-        public BlockPreProcessor create(ParserState state) {
+        public BlockPreProcessor apply(ParserState state) {
             return new TaskListItemBlockPreProcessor(state.getProperties());
         }
     }

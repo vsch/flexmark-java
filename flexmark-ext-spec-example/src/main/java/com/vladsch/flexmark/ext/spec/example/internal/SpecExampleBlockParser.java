@@ -310,7 +310,7 @@ public class SpecExampleBlockParser extends AbstractBlockParser {
         }
 
         @Override
-        public BlockParserFactory create(DataHolder options) {
+        public BlockParserFactory apply(DataHolder options) {
             return new SpecExampleBlockParser.BlockFactory(options);
         }
     }

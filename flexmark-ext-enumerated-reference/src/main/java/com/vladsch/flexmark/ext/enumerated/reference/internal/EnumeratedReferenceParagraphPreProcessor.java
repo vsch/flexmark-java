@@ -16,8 +16,8 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-// NOT USED, Parsing is done by EnumeratedReferenceBlockParser, 
-// otherwise Reference definitions take priority if preceded by reference definition 
+// NOT USED, Parsing is done by EnumeratedReferenceBlockParser,
+// otherwise Reference definitions take priority if preceded by reference definition
 // because parser processor keeps going after first match
 // to get around this need to add ReferenceParagraphPreProcessor set of leading characters
 // which make it not a reference id
@@ -90,7 +90,7 @@ public class EnumeratedReferenceParagraphPreProcessor implements ParagraphPrePro
             }
 
             @Override
-            public ParagraphPreProcessor create(ParserState state) {
+            public ParagraphPreProcessor apply(ParserState state) {
                 return new EnumeratedReferenceParagraphPreProcessor(state.getProperties());
             }
         };

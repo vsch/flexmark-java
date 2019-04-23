@@ -24,7 +24,7 @@ public class ReferencePreProcessorFactory implements ParagraphPreProcessorFactor
     }
 
     @Override
-    public ParagraphPreProcessor create(ParserState state) {
+    public ParagraphPreProcessor apply(ParserState state) {
         return ((InlineParserImpl) state.getInlineParser());
     }
 }

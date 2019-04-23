@@ -1,15 +1,15 @@
 package com.vladsch.flexmark.util.mappers;
 
-import com.vladsch.flexmark.util.Computable;
+import java.util.function.Function;
 
-public class ObjectClassifier implements Computable<Class<?>, Object> {
+public class ObjectClassifier implements Function<Object, Class<?>> {
     public static final ObjectClassifier INSTANCE = new ObjectClassifier();
 
     private ObjectClassifier() {
     }
 
     @Override
-    public Class<?> compute(Object value) {
+    public Class<?> apply(Object value) {
         return value.getClass();
     }
 }

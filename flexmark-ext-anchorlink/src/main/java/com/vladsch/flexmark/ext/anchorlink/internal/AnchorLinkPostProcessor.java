@@ -53,7 +53,7 @@ public class AnchorLinkPostProcessor extends DocumentPostProcessor {
 
     public static class Factory extends DocumentPostProcessorFactory {
         @Override
-        public DocumentPostProcessor create(Document document) {
+        public DocumentPostProcessor apply(Document document) {
             return new AnchorLinkPostProcessor(document);
         }
     }

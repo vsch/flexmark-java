@@ -90,7 +90,7 @@ public class CustomContextDataSample {
             }
 
             @Override
-            public LinkResolver create(final LinkResolverContext context) {
+            public LinkResolver apply(final LinkResolverContext context) {
                 return new CustomLinkResolver(context);
             }
         }

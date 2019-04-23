@@ -54,7 +54,7 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
             }
 
             @Override
-            public Node create() {
+            public Node get() {
                 return new TableColumnSeparator();
             }
         });
@@ -80,7 +80,7 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
             }
 
             @Override
-            public Node create() {
+            public Node get() {
                 return new TableColumnSeparator();
             }
         });
@@ -105,7 +105,7 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
             }
 
             @Override
-            public ParagraphPreProcessor create(ParserState state) {
+            public ParagraphPreProcessor apply(ParserState state) {
                 return new TableParagraphPreProcessor(state.getProperties());
             }
         };
@@ -323,7 +323,7 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
                 if (options.trimCellWhitespace) tableCell.trimWhiteSpace();
                 else tableCell.mergeWhiteSpace();
 
-                // NOTE: here we get only chars which do not reflect out-of-base characters, prefixes and removed text 
+                // NOTE: here we get only chars which do not reflect out-of-base characters, prefixes and removed text
                 tableCell.setText(tableCell.getChildChars());
 
                 tableCell.setCharsFromContent();
@@ -374,7 +374,7 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
     }
 
     List<Node> cleanUpInlinedSeparators(InlineParser inlineParser, TableRow tableRow, List<Node> sepList) {
-        // any separators which do not have tableRow as parent are embedded into inline elements and should be 
+        // any separators which do not have tableRow as parent are embedded into inline elements and should be
         // converted back to text
         ArrayList<Node> removedSeparators = null;
         ArrayList<Node> mergeTextParents = null;

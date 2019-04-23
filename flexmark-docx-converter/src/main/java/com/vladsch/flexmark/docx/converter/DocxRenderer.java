@@ -34,6 +34,7 @@ import org.docx4j.wml.Styles;
 
 import java.io.*;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 /**
@@ -132,16 +133,13 @@ public class DocxRenderer implements IRender {
     // internal stuff
     public static final String EMOJI_RESOURCE_PREFIX = "emoji:";
 
-    public static final DynamicDefaultKey<String> DOC_EMOJI_ROOT_IMAGE_PATH = new DynamicDefaultKey<String>("DOC_EMOJI_ROOT_IMAGE_PATH", new DataValueFactory<String>() {
-        @Override
-        public String create(final DataHolder options) {
-            if (options != null && options.contains(EmojiExtension.ROOT_IMAGE_PATH)) {
-                return options.get(EmojiExtension.ROOT_IMAGE_PATH);
-            }
-
-            // kludge it to use our resources
-            return EMOJI_RESOURCE_PREFIX;
+    public static final DynamicDefaultKey<String> DOC_EMOJI_ROOT_IMAGE_PATH = new DynamicDefaultKey<String>("DOC_EMOJI_ROOT_IMAGE_PATH", options -> {
+        if (options != null && options.contains(EmojiExtension.ROOT_IMAGE_PATH)) {
+            return options.get(EmojiExtension.ROOT_IMAGE_PATH);
         }
+
+        // kludge it to use our resources
+        return EMOJI_RESOURCE_PREFIX;
     });
 
     final List<NodeDocxRendererFactory> nodeFormatterFactories;
@@ -201,13 +199,13 @@ public class DocxRenderer implements IRender {
     }
 
     public static WordprocessingMLPackage getDefaultTemplate(String emptyXMLResourcePath) {
-        final InputStream inputStream = getResourceInputStream(emptyXMLResourcePath);
+        InputStream inputStream = getResourceInputStream(emptyXMLResourcePath);
         return getDefaultTemplate(inputStream);
     }
 
     public static WordprocessingMLPackage getDefaultTemplate(InputStream inputStream) {
         try {
-            final WordprocessingMLPackage mlPackage = WordprocessingMLPackage.load(inputStream);
+            WordprocessingMLPackage mlPackage = WordprocessingMLPackage.load(inputStream);
             return mlPackage;
         } catch (Docx4JException e) {
             e.printStackTrace();
@@ -215,7 +213,7 @@ public class DocxRenderer implements IRender {
         return null;
     }
 
-    static void setDefaultStyleAndNumbering(WordprocessingMLPackage out, final DataHolder options) {
+    static void setDefaultStyleAndNumbering(WordprocessingMLPackage out, DataHolder options) {
         try {
             // (main doc part it if necessary)
             MainDocumentPart documentPart = out.getMainDocumentPart();
@@ -230,7 +228,7 @@ public class DocxRenderer implements IRender {
 
             if (documentPart.getStyleDefinitionsPart() == null) {
                 Part stylesPart = new org.docx4j.openpackaging.parts.WordprocessingML.StyleDefinitionsPart();
-                final Styles styles = (Styles) XmlUtils.unmarshalString(STYLES_XML.getFrom(options));
+                Styles styles = (Styles) XmlUtils.unmarshalString(STYLES_XML.getFrom(options));
                 ((org.docx4j.openpackaging.parts.WordprocessingML.StyleDefinitionsPart) stylesPart).setJaxbElement(styles);
                 documentPart.addTargetPart(stylesPart); // NB - add it to main doc part, not package!
                 assert documentPart.getStyleDefinitionsPart() != null : "Styles failed to set";
@@ -239,7 +237,7 @@ public class DocxRenderer implements IRender {
             if (documentPart.getNumberingDefinitionsPart() == null) {
                 // add it
                 Part numberingPart = new org.docx4j.openpackaging.parts.WordprocessingML.NumberingDefinitionsPart();
-                final Numbering numbering = (Numbering) XmlUtils.unmarshalString(NUMBERING_XML.getFrom(options));
+                Numbering numbering = (Numbering) XmlUtils.unmarshalString(NUMBERING_XML.getFrom(options));
                 ((org.docx4j.openpackaging.parts.WordprocessingML.NumberingDefinitionsPart) numberingPart).setJaxbElement(numbering);
                 documentPart.addTargetPart(numberingPart); // NB - add it to main doc part, not package!
                 assert documentPart.getNumberingDefinitionsPart() != null : "Numbering failed to set";
@@ -294,7 +292,7 @@ public class DocxRenderer implements IRender {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         try {
             mlPackage.save(outputStream, Docx4J.FLAG_SAVE_FLAT_XML);
-            final String s = options.get(RENDER_BODY_ONLY) ? XmlFormatter.formatDocumentBody(outputStream.toString("UTF-8"))
+            String s = options.get(RENDER_BODY_ONLY) ? XmlFormatter.formatDocumentBody(outputStream.toString("UTF-8"))
                     : XmlDocxSorter.sortDocumentParts(outputStream.toString("UTF-8"));
             return s;
         } catch (Docx4JException e) {
@@ -306,7 +304,7 @@ public class DocxRenderer implements IRender {
     }
 
     @Override
-    public void render(final Node node, final Appendable output) {
+    public void render(Node node, Appendable output) {
         String docx = render(node);
         try {
             output.append(docx);
@@ -352,7 +350,7 @@ public class DocxRenderer implements IRender {
         }
 
         @Override
-        protected void removeApiPoint(final Object apiPoint) {
+        protected void removeApiPoint(Object apiPoint) {
             if (apiPoint instanceof AttributeProviderFactory) this.attributeProviderFactories.remove(apiPoint);
             else if (apiPoint instanceof NodeDocxRendererFactory) this.nodeDocxRendererFactories.remove(apiPoint);
             else if (apiPoint instanceof LinkResolverFactory) this.linkResolverFactories.remove(apiPoint);
@@ -363,7 +361,7 @@ public class DocxRenderer implements IRender {
         }
 
         @Override
-        protected void preloadExtension(final Extension extension) {
+        protected void preloadExtension(Extension extension) {
             if (extension instanceof DocxRendererExtension) {
                 DocxRendererExtension docxRendererExtension = (DocxRendererExtension) extension;
                 docxRendererExtension.rendererOptions(this);
@@ -374,7 +372,7 @@ public class DocxRenderer implements IRender {
         }
 
         @Override
-        protected boolean loadExtension(final Extension extension) {
+        protected boolean loadExtension(Extension extension) {
             if (extension instanceof DocxRendererExtension) {
                 DocxRendererExtension docxRendererExtension = (DocxRendererExtension) extension;
                 docxRendererExtension.extend(this);
@@ -522,9 +520,9 @@ public class DocxRenderer implements IRender {
             this.document = document;
             this.renderers = new HashMap<Class<?>, NodeDocxRendererHandler>(32);
             this.renderingPhases = new HashSet<DocxRendererPhase>(DocxRendererPhase.values().length);
-            final Set<Class> collectNodeTypes = new HashSet<Class>(100);
+            Set<Class> collectNodeTypes = new HashSet<Class>(100);
             this.phasedFormatters = new ArrayList<PhasedNodeDocxRenderer>(nodeFormatterFactories.size());
-            final Boolean defaultLinkResolver = DEFAULT_LINK_RESOLVER.getFrom(options);
+            Boolean defaultLinkResolver = DEFAULT_LINK_RESOLVER.getFrom(options);
             this.myLinkResolvers = new LinkResolver[linkResolverFactories.size() + (defaultLinkResolver ? 1 : 0)];
             this.htmlIdGenerator = htmlIdGeneratorFactory != null ? htmlIdGeneratorFactory.create(this)
                     : new HeaderIdGenerator.Factory().create(this);
@@ -542,24 +540,24 @@ public class DocxRenderer implements IRender {
             this.myRunFormatProviders.put(document, this);
 
             for (int i = 0; i < linkResolverFactories.size(); i++) {
-                myLinkResolvers[i] = linkResolverFactories.get(i).create(this);
+                myLinkResolvers[i] = linkResolverFactories.get(i).apply(this);
             }
 
             if (defaultLinkResolver) {
                 // add the default link resolver
-                myLinkResolvers[linkResolverFactories.size()] = new DocxLinkResolver.Factory().create(this);
+                myLinkResolvers[linkResolverFactories.size()] = new DocxLinkResolver.Factory().apply(this);
             }
 
             this.myAttributeProviders = new AttributeProvider[attributeProviderFactories.size()];
             for (int i = 0; i < attributeProviderFactories.size(); i++) {
-                myAttributeProviders[i] = attributeProviderFactories.get(i).create(this);
+                myAttributeProviders[i] = attributeProviderFactories.get(i).apply(this);
             }
 
             // The first node renderer for a node type "wins".
             for (int i = nodeFormatterFactories.size() - 1; i >= 0; i--) {
                 NodeDocxRendererFactory nodeDocxRendererFactory = nodeFormatterFactories.get(i);
                 NodeDocxRenderer nodeDocxRenderer = nodeDocxRendererFactory.create(this.getOptions());
-                final Set<NodeDocxRendererHandler<?>> formattingHandlers = nodeDocxRenderer.getNodeFormattingHandlers();
+                Set<NodeDocxRendererHandler<?>> formattingHandlers = nodeDocxRenderer.getNodeFormattingHandlers();
                 if (formattingHandlers == null) continue;
 
                 for (NodeDocxRendererHandler nodeType : formattingHandlers) {
@@ -631,7 +629,7 @@ public class DocxRenderer implements IRender {
         }
 
         @Override
-        public String getValidBookmarkName(final String id) {
+        public String getValidBookmarkName(String id) {
             String validBookmark = idToValidBookmark.get(id);
             if (validBookmark != null) {
                 return validBookmark;
@@ -658,7 +656,7 @@ public class DocxRenderer implements IRender {
         }
 
         @Override
-        public Node getNodeFromId(final String nodeId) {
+        public Node getNodeFromId(String nodeId) {
             return nodeIdMap.getFirst(nodeId);
         }
 
@@ -720,23 +718,23 @@ public class DocxRenderer implements IRender {
         }
 
         @Override
-        public final Iterable<? extends Node> nodesOfType(final Class<?>[] classes) {
+        public final Iterable<? extends Node> nodesOfType(Class<?>[] classes) {
             return collectedNodes == null ? NULL_ITERABLE : collectedNodes.itemsOfType(Node.class, classes);
         }
 
         @Override
-        public final Iterable<? extends Node> nodesOfType(final Collection<Class<?>> classes) {
+        public final Iterable<? extends Node> nodesOfType(Collection<Class<?>> classes) {
             //noinspection unchecked
             return collectedNodes == null ? NULL_ITERABLE : collectedNodes.itemsOfType(Node.class, classes);
         }
 
         @Override
-        public final Iterable<? extends Node> reversedNodesOfType(final Class<?>[] classes) {
+        public final Iterable<? extends Node> reversedNodesOfType(Class<?>[] classes) {
             return collectedNodes == null ? NULL_ITERABLE : collectedNodes.reversedItemsOfType(Node.class, classes);
         }
 
         @Override
-        public final Iterable<? extends Node> reversedNodesOfType(final Collection<Class<?>> classes) {
+        public final Iterable<? extends Node> reversedNodesOfType(Collection<Class<?>> classes) {
             //noinspection unchecked
             return collectedNodes == null ? NULL_ITERABLE : collectedNodes.reversedItemsOfType(Node.class, classes);
         }
@@ -780,14 +778,14 @@ public class DocxRenderer implements IRender {
         }
 
         @Override
-        public void render(final Node node) {
+        public void render(Node node) {
             if (node instanceof Document) {
                 htmlIdGenerator.generateIds(document);
 
                 // now create a map of node to id so we can validate hyperlinks
                 new AllNodesVisitor() {
                     @Override
-                    protected void process(final Node node) {
+                    protected void process(Node node) {
                         String id = calculateNodeId(node);
                         if (id != null && !id.isEmpty()) {
                             nodeIdMap.add(node, id);
@@ -826,25 +824,25 @@ public class DocxRenderer implements IRender {
                 }
 
                 if (nodeRenderer != null) {
-                    final NodeDocxRendererHandler finalNodeRenderer = nodeRenderer;
-                    final Node oldNode = MainDocxRenderer.this.renderingNode;
+                    NodeDocxRendererHandler finalNodeRenderer = nodeRenderer;
+                    Node oldNode = MainDocxRenderer.this.renderingNode;
                     renderingNode = node;
 
                     contextFramed(new Runnable() {
                         @Override
                         public void run() {
-                            final String id = getNodeId(node);
+                            String id = getNodeId(node);
                             if (id != null && !id.isEmpty()) {
                                 if (!bookmarkWrapsChildren.contains(node.getClass())) {
-                                    final boolean isBlockBookmark = node instanceof Block;
+                                    boolean isBlockBookmark = node instanceof Block;
                                     if (isBlockBookmark) {
                                         // put bookmark before the block element
-                                        final CTBookmark bookmarkStart = createBookmarkStart(id, true);
+                                        CTBookmark bookmarkStart = createBookmarkStart(id, true);
                                         createBookmarkEnd(bookmarkStart, true);
                                         finalNodeRenderer.render(renderingNode, MainDocxRenderer.this);
                                     } else {
                                         // wrap bookmark around the inline element
-                                        final CTBookmark bookmarkStart = createBookmarkStart(id, false);
+                                        CTBookmark bookmarkStart = createBookmarkStart(id, false);
                                         finalNodeRenderer.render(renderingNode, MainDocxRenderer.this);
                                         createBookmarkEnd(bookmarkStart, false);
                                     }
@@ -864,7 +862,7 @@ public class DocxRenderer implements IRender {
             }
         }
 
-        void renderChildrenUnwrapped(final Node parent) {
+        void renderChildrenUnwrapped(Node parent) {
             Node node = parent.getFirstChild();
             while (node != null) {
                 Node next = node.getNext();
@@ -873,11 +871,11 @@ public class DocxRenderer implements IRender {
             }
         }
 
-        public void renderChildren(final Node parent) {
-            final String id = getNodeId(parent);
+        public void renderChildren(Node parent) {
+            String id = getNodeId(parent);
             if (id != null && !id.isEmpty()) {
                 if (bookmarkWrapsChildren.contains(parent.getClass())) {
-                    final CTBookmark bookmarkStart = createBookmarkStart(id, false);
+                    CTBookmark bookmarkStart = createBookmarkStart(id, false);
                     renderChildrenUnwrapped(parent);
                     createBookmarkEnd(bookmarkStart, false);
                     //contextFramed(new Runnable() {
@@ -904,7 +902,7 @@ public class DocxRenderer implements IRender {
             InputStream stream = getResourceInputStream(resourcePath);
             StringBuilder sb = new StringBuilder();
             String line;
-            BufferedReader reader = new BufferedReader(new InputStreamReader(stream, Charset.forName("UTF-8")));
+            BufferedReader reader = new BufferedReader(new InputStreamReader(stream, StandardCharsets.UTF_8));
             while ((line = reader.readLine()) != null) {
                 sb.append(line);
                 sb.append("\n");

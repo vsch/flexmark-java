@@ -151,7 +151,7 @@ public class UnderlineExtensionSample {
         public static class Factory implements NodeRendererFactory {
 
             @Override
-            public NodeRenderer create(DataHolder options) {
+            public NodeRenderer apply(DataHolder options) {
                 return new UnderlineNodeRenderer();
             }
         }

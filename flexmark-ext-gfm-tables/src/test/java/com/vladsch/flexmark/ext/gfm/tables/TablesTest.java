@@ -325,7 +325,7 @@ public class TablesTest extends RenderingTestCase {
     public void attributeProviderIsApplied() {
         AttributeProviderFactory factory = new IndependentAttributeProviderFactory() {
             @Override
-            public AttributeProvider create(LinkResolverContext context) {
+            public AttributeProvider apply(LinkResolverContext context) {
                 return new AttributeProvider() {
                     @Override
                     public void setAttributes(Node node, AttributablePart part, Attributes attributes) {

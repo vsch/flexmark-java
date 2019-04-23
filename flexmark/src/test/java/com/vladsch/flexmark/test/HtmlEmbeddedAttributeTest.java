@@ -63,7 +63,7 @@ public class HtmlEmbeddedAttributeTest {
             }
 
             @Override
-            public NodePostProcessor create(Document document) {
+            public NodePostProcessor apply(Document document) {
                 return new TestNodePostProcessor();
             }
         }
@@ -92,12 +92,12 @@ public class HtmlEmbeddedAttributeTest {
         private TestNodePostProcessorExtension() { }
 
         @Override
-        public void rendererOptions(final MutableDataHolder options) {
+        public void rendererOptions(MutableDataHolder options) {
             // add any configuration settings to options you want to apply to everything, here
         }
 
         @Override
-        public void extend(final HtmlRenderer.Builder rendererBuilder, final String rendererType) {
+        public void extend(HtmlRenderer.Builder rendererBuilder, String rendererType) {
             rendererBuilder.attributeProviderFactory(EmbeddedAttributeProvider.Factory);
         }
 

@@ -87,7 +87,7 @@ public class HtmlRendererTest {
     public void attributeProviderForCodeBlock() {
         AttributeProviderFactory factory = new IndependentAttributeProviderFactory() {
             @Override
-            public AttributeProvider create(LinkResolverContext context) {
+            public AttributeProvider apply(LinkResolverContext context) {
                 //noinspection ReturnOfInnerClass
                 return new AttributeProvider() {
                     @Override
@@ -116,7 +116,7 @@ public class HtmlRendererTest {
     public void attributeProviderForImage() {
         AttributeProviderFactory factory = new IndependentAttributeProviderFactory() {
             @Override
-            public AttributeProvider create(LinkResolverContext context) {
+            public AttributeProvider apply(LinkResolverContext context) {
                 return new AttributeProvider() {
                     @Override
                     public void setAttributes(Node node, AttributablePart part, Attributes attributes) {
@@ -136,9 +136,9 @@ public class HtmlRendererTest {
 
     @Test
     public void overrideNodeRender() {
-        final NodeRendererFactory nodeRendererFactory = new NodeRendererFactory() {
+        NodeRendererFactory nodeRendererFactory = new NodeRendererFactory() {
             @Override
-            public NodeRenderer create(final DataHolder options) {
+            public NodeRenderer apply(DataHolder options) {
                 return new NodeRenderer() {
                     @Override
                     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
@@ -163,9 +163,9 @@ public class HtmlRendererTest {
 
     @Test
     public void overrideInheritNodeRender() {
-        final NodeRendererFactory nodeRendererFactory = new NodeRendererFactory() {
+        NodeRendererFactory nodeRendererFactory = new NodeRendererFactory() {
             @Override
-            public NodeRenderer create(final DataHolder options) {
+            public NodeRenderer apply(DataHolder options) {
                 return new NodeRenderer() {
                     @Override
                     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
@@ -197,9 +197,9 @@ public class HtmlRendererTest {
 
     @Test
     public void overrideInheritNodeRenderSubContext() {
-        final NodeRendererFactory nodeRendererFactory = new NodeRendererFactory() {
+        NodeRendererFactory nodeRendererFactory = new NodeRendererFactory() {
             @Override
-            public NodeRenderer create(final DataHolder options) {
+            public NodeRenderer apply(DataHolder options) {
                 return new NodeRenderer() {
                     @Override
                     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
@@ -243,9 +243,9 @@ public class HtmlRendererTest {
 
     @Test
     public void overrideInheritDependentNodeRender() {
-        final NodeRendererFactory nodeRendererFactory = new NodeRendererFactory() {
+        NodeRendererFactory nodeRendererFactory = new NodeRendererFactory() {
             @Override
-            public NodeRenderer create(final DataHolder options) {
+            public NodeRenderer apply(DataHolder options) {
                 return new NodeRenderer() {
                     @Override
                     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
@@ -269,9 +269,9 @@ public class HtmlRendererTest {
             }
         };
 
-        final NodeRendererFactory nodeRendererFactory2 = new DelegatingNodeRendererFactory() {
+        NodeRendererFactory nodeRendererFactory2 = new DelegatingNodeRendererFactory() {
             @Override
-            public NodeRenderer create(final DataHolder options) {
+            public NodeRenderer apply(DataHolder options) {
                 return new NodeRenderer() {
                     @Override
                     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
@@ -310,9 +310,9 @@ public class HtmlRendererTest {
 
     @Test
     public void overrideInheritDependentNodeRenderReversed() {
-        final NodeRendererFactory nodeRendererFactory = new NodeRendererFactory() {
+        NodeRendererFactory nodeRendererFactory = new NodeRendererFactory() {
             @Override
-            public NodeRenderer create(final DataHolder options) {
+            public NodeRenderer apply(DataHolder options) {
                 return new NodeRenderer() {
                     @Override
                     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
@@ -336,9 +336,9 @@ public class HtmlRendererTest {
             }
         };
 
-        final NodeRendererFactory nodeRendererFactory2 = new DelegatingNodeRendererFactory() {
+        NodeRendererFactory nodeRendererFactory2 = new DelegatingNodeRendererFactory() {
             @Override
-            public NodeRenderer create(final DataHolder options) {
+            public NodeRenderer apply(DataHolder options) {
                 return new NodeRenderer() {
                     @Override
                     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
@@ -404,12 +404,12 @@ public class HtmlRendererTest {
 
         final String docUrl;
 
-        public CustomLinkResolverImpl(final LinkResolverContext context) {
+        public CustomLinkResolverImpl(LinkResolverContext context) {
             docUrl = DOC_RELATIVE_URL.getFrom(context.getOptions());
         }
 
         @Override
-        public ResolvedLink resolveLink(final Node node, final LinkResolverContext context, final ResolvedLink link) {
+        public ResolvedLink resolveLink(Node node, LinkResolverContext context, ResolvedLink link) {
             if (node instanceof Link) {
                 Link linkNode = (Link) node;
                 if (linkNode.getUrl().equals("/url")) {
@@ -421,7 +421,7 @@ public class HtmlRendererTest {
 
         static class Factory extends IndependentLinkResolverFactory {
             @Override
-            public LinkResolver create(final LinkResolverContext context) {
+            public LinkResolver apply(LinkResolverContext context) {
                 return new CustomLinkResolverImpl(context);
             }
         }
@@ -430,9 +430,9 @@ public class HtmlRendererTest {
     @Test
     public void withOptions_customLinkResolver() {
         // make sure custom link resolver is preserved when using withOptions() on HTML builder
-        final DataHolder OPTIONS = new MutableDataSet().set(CustomLinkResolverImpl.DOC_RELATIVE_URL, "/url");
-        final DataHolder OPTIONS1 = new MutableDataSet().set(CustomLinkResolverImpl.DOC_RELATIVE_URL, "/url1");
-        final DataHolder OPTIONS2 = new MutableDataSet().set(CustomLinkResolverImpl.DOC_RELATIVE_URL, "/url2");
+        DataHolder OPTIONS = new MutableDataSet().set(CustomLinkResolverImpl.DOC_RELATIVE_URL, "/url");
+        DataHolder OPTIONS1 = new MutableDataSet().set(CustomLinkResolverImpl.DOC_RELATIVE_URL, "/url1");
+        DataHolder OPTIONS2 = new MutableDataSet().set(CustomLinkResolverImpl.DOC_RELATIVE_URL, "/url2");
         HtmlRenderer renderer = HtmlRenderer.builder(OPTIONS).linkResolverFactory(new CustomLinkResolverImpl.Factory()).build();
         HtmlRenderer renderer1 = renderer.withOptions(OPTIONS1);
         HtmlRenderer renderer2 = renderer.withOptions(OPTIONS2);

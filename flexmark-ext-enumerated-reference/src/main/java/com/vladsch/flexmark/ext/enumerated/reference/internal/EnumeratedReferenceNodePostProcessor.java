@@ -62,7 +62,7 @@ public class EnumeratedReferenceNodePostProcessor extends NodePostProcessor {
         }
 
         @Override
-        public NodePostProcessor create(Document document) {
+        public NodePostProcessor apply(Document document) {
             return new EnumeratedReferenceNodePostProcessor(document);
         }
     }

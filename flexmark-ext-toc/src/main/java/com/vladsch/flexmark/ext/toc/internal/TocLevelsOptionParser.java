@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.ext.toc.internal;
 
-import com.vladsch.flexmark.util.Computable;
+import java.util.function.Function;
 import com.vladsch.flexmark.util.DelimitedBuilder;
 import com.vladsch.flexmark.util.Pair;
 import com.vladsch.flexmark.util.Utils;
@@ -60,16 +60,13 @@ public class TocLevelsOptionParser implements OptionParser<TocOptions> {
         int i = 0;
 
         final MessageProvider finalProvider = provider;
-        Computable<Integer, BasedSequence> convertWithMessage = new Computable<Integer, BasedSequence>() {
-            @Override
-            public Integer compute(BasedSequence option) {
-                try {
-                    return option.isEmpty() ? null : Integer.parseInt(option.toString());
-                } catch (Exception ignored) {
-                    parserParams.add(new ParserMessage(option, ParsedOptionStatus.ERROR, finalProvider.message(KEY_OPTION_0_VALUE_1_NOT_INTEGER, OPTION_0_VALUE_1_NOT_INTEGER, myOptionName, option)));
-                    parserParams.skip = true;
-                    return null;
-                }
+        Function<BasedSequence, Integer> convertWithMessage = option -> {
+            try {
+                return option.isEmpty() ? null : Integer.parseInt(option.toString());
+            } catch (Exception ignored) {
+                parserParams.add(new ParserMessage(option, ParsedOptionStatus.ERROR, finalProvider.message(KEY_OPTION_0_VALUE_1_NOT_INTEGER, OPTION_0_VALUE_1_NOT_INTEGER, myOptionName, option)));
+                parserParams.skip = true;
+                return null;
             }
         };
 
@@ -81,12 +78,12 @@ public class TocLevelsOptionParser implements OptionParser<TocOptions> {
             parserParams.skip = false;
 
             if (optionRange.length == 2) {
-                rangeStart = convertWithMessage.compute(optionRange[0]);
-                rangeEnd = convertWithMessage.compute(optionRange[1]);
+                rangeStart = convertWithMessage.apply(optionRange[0]);
+                rangeEnd = convertWithMessage.apply(optionRange[1]);
                 if (rangeStart == null) rangeStart = 1;
                 if (rangeEnd == null) rangeEnd = 6;
             } else {
-                rangeStart = convertWithMessage.compute(optionRange[0]);
+                rangeStart = convertWithMessage.apply(optionRange[0]);
                 rangeEnd = rangeStart;
             }
 

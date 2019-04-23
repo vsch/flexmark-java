@@ -50,7 +50,7 @@ public class ZzzzzzParagraphPreProcessor implements ParagraphPreProcessor {
             }
 
             @Override
-            public Node create() {
+            public Node get() {
                 return new ZzzzzzBlock();
             }
         });
@@ -91,7 +91,7 @@ public class ZzzzzzParagraphPreProcessor implements ParagraphPreProcessor {
             }
 
             @Override
-            public ParagraphPreProcessor create(ParserState state) {
+            public ParagraphPreProcessor apply(ParserState state) {
                 return new ZzzzzzParagraphPreProcessor(state.getProperties());
             }
         };

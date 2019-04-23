@@ -101,12 +101,12 @@ public class DelimiterProcessorTest extends RenderingTestCase {
         }
 
         @Override
-        public boolean canBeOpener(final String before, final String after, boolean leftFlanking, boolean rightFlanking, boolean beforeIsPunctuation, boolean afterIsPunctuation, boolean beforeIsWhitespace, boolean afterIsWhiteSpace) {
+        public boolean canBeOpener(String before, String after, boolean leftFlanking, boolean rightFlanking, boolean beforeIsPunctuation, boolean afterIsPunctuation, boolean beforeIsWhitespace, boolean afterIsWhiteSpace) {
             return leftFlanking;
         }
 
         @Override
-        public boolean canBeCloser(final String before, final String after, boolean leftFlanking, boolean rightFlanking, boolean beforeIsPunctuation, boolean afterIsPunctuation, boolean beforeIsWhitespace, boolean afterIsWhiteSpace) {
+        public boolean canBeCloser(String before, String after, boolean leftFlanking, boolean rightFlanking, boolean beforeIsPunctuation, boolean afterIsPunctuation, boolean beforeIsWhitespace, boolean afterIsWhiteSpace) {
             return rightFlanking;
         }
 
@@ -116,7 +116,7 @@ public class DelimiterProcessorTest extends RenderingTestCase {
         }
 
         @Override
-        public Node unmatchedDelimiterNode(InlineParser inlineParser, final DelimiterRun delimiter) {
+        public Node unmatchedDelimiterNode(InlineParser inlineParser, DelimiterRun delimiter) {
             return null;
         }
 
@@ -151,17 +151,17 @@ public class DelimiterProcessorTest extends RenderingTestCase {
         }
 
         @Override
-        public Node unmatchedDelimiterNode(InlineParser inlineParser, final DelimiterRun delimiter) {
+        public Node unmatchedDelimiterNode(InlineParser inlineParser, DelimiterRun delimiter) {
             return null;
         }
 
         @Override
-        public boolean canBeOpener(final String before, final String after, boolean leftFlanking, boolean rightFlanking, boolean beforeIsPunctuation, boolean afterIsPunctuation, boolean beforeIsWhitespace, boolean afterIsWhiteSpace) {
+        public boolean canBeOpener(String before, String after, boolean leftFlanking, boolean rightFlanking, boolean beforeIsPunctuation, boolean afterIsPunctuation, boolean beforeIsWhitespace, boolean afterIsWhiteSpace) {
             return leftFlanking;
         }
 
         @Override
-        public boolean canBeCloser(final String before, final String after, boolean leftFlanking, boolean rightFlanking, boolean beforeIsPunctuation, boolean afterIsPunctuation, boolean beforeIsWhitespace, boolean afterIsWhiteSpace) {
+        public boolean canBeCloser(String before, String after, boolean leftFlanking, boolean rightFlanking, boolean beforeIsPunctuation, boolean afterIsPunctuation, boolean beforeIsWhitespace, boolean afterIsWhiteSpace) {
             return rightFlanking;
         }
 
@@ -234,7 +234,7 @@ public class DelimiterProcessorTest extends RenderingTestCase {
         UpperCaseNodeRendererFactory() {}
 
         @Override
-        public NodeRenderer create(DataHolder options) {
+        public NodeRenderer apply(DataHolder options) {
             return new UpperCaseNodeRenderer(options);
         }
     }

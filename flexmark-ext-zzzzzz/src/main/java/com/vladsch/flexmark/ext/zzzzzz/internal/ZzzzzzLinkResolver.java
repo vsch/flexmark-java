@@ -34,7 +34,7 @@ public class ZzzzzzLinkResolver implements LinkResolver {
         }
 
         @Override
-        public LinkResolver create(LinkResolverContext context) {
+        public LinkResolver apply(LinkResolverContext context) {
             return new ZzzzzzLinkResolver(context);
         }
     }

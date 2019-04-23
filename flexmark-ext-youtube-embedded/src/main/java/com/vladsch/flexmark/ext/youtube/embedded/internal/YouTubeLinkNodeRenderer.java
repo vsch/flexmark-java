@@ -18,7 +18,7 @@ public class YouTubeLinkNodeRenderer implements NodeRenderer {
 
     @Override
     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
-        final YouTubeLinkNodeRenderer self = this;
+        YouTubeLinkNodeRenderer self = this;
 
         HashSet<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
         set.add(new NodeRenderingHandler<YouTubeLink>(YouTubeLink.class, new CustomNodeRenderer<YouTubeLink>() {
@@ -30,7 +30,7 @@ public class YouTubeLinkNodeRenderer implements NodeRenderer {
         return set;
     }
 
-    private void render(final YouTubeLink node, final NodeRendererContext context, final HtmlWriter html) {
+    private void render(YouTubeLink node, NodeRendererContext context, HtmlWriter html) {
         if (context.isDoNotRenderLinks()) {
             context.renderChildren(node);
         } else {
@@ -77,7 +77,7 @@ public class YouTubeLinkNodeRenderer implements NodeRenderer {
 
     public static class Factory implements NodeRendererFactory {
         @Override
-        public NodeRenderer create(final DataHolder options) {
+        public NodeRenderer apply(DataHolder options) {
             return new YouTubeLinkNodeRenderer(options);
         }
     }

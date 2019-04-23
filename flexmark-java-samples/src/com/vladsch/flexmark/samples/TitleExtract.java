@@ -120,7 +120,7 @@ public class TitleExtract {
 
         public static class Factory implements DelegatingNodeRendererFactory {
             @Override
-            public NodeRenderer create(final DataHolder options) {
+            public NodeRenderer apply(final DataHolder options) {
                 return new HeadingNodeRenderer(options);
             }
 

@@ -13,6 +13,7 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 import java.util.*;
 import java.util.function.Consumer;
+import java.util.function.Function;
 
 @SuppressWarnings("WeakerAccess")
 public class TocUtils {
@@ -275,16 +276,13 @@ public class TocUtils {
         final int[] headingNumbers = new int[7];
         final boolean[] openedItems = new boolean[7];
 
-        Computable<String, Integer> listOpen = new Computable<String, Integer>() {
-            @Override
-            public String compute(Integer level) {
-                openedItems[level] = true;
-                if (tocOptions.isNumbered) {
-                    int v = ++headingNumbers[level];
-                    return v + ". ";
-                } else {
-                    return "- ";
-                }
+        Function<Integer, String> listOpen = level -> {
+            openedItems[level] = true;
+            if (tocOptions.isNumbered) {
+                int v = ++headingNumbers[level];
+                return v + ". ";
+            } else {
+                return "- ";
             }
         };
 
@@ -328,7 +326,7 @@ public class TocUtils {
                 html.line();
             }
 
-            html.line().raw(listOpen.compute(headerLevel));
+            html.line().raw(listOpen.apply(headerLevel));
             html.raw(headerText);
 
             lastLevel = headerLevel;

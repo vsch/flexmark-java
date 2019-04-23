@@ -30,8 +30,7 @@ public class JekyllTagExtension implements Parser.ParserExtension, HtmlRenderer.
     public static final DataKey<Map<String, String>> INCLUDED_HTML = new DataKey<Map<String, String>>("INCLUDED_HTML", (Map<String, String>) null);
     //public static final DataKey<Map<String, Document>> INCLUDED_DOCUMENTS = new DataKey<Map<String, Document>>("INCLUDED_DOCUMENTS", (Map<String, Document>) null);
     public static final DataKey<List<JekyllTag>> TAG_LIST = new DataKey<List<JekyllTag>>("TAG_LIST", new DataValueFactory<List<JekyllTag>>() {
-        @Override
-        public List<JekyllTag> create(DataHolder options) {
+        public List<JekyllTag> apply(DataHolder options) {
             return new ArrayList<JekyllTag>();
         }
     });

@@ -24,12 +24,7 @@ import com.vladsch.flexmark.util.options.MutableDataHolder;
 public class FootnoteExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension, Parser.ReferenceHoldingExtension, Formatter.FormatterExtension {
     public static final DataKey<KeepType> FOOTNOTES_KEEP = new DataKey<>("FOOTNOTES_KEEP", KeepType.FIRST);
 
-    public static final DataKey<FootnoteRepository> FOOTNOTES = new DataKey<>("FOOTNOTES", new DataValueFactory<FootnoteRepository>() {
-        @Override
-        public FootnoteRepository create(DataHolder options) {
-            return new FootnoteRepository(options);
-        }
-    });
+    public static final DataKey<FootnoteRepository> FOOTNOTES = new DataKey<>("FOOTNOTES", FootnoteRepository::new);
     public static final DataKey<String> FOOTNOTE_REF_PREFIX = new DataKey<>("FOOTNOTE_REF_PREFIX", "");
     public static final DataKey<String> FOOTNOTE_REF_SUFFIX = new DataKey<>("FOOTNOTE_REF_SUFFIX", "");
     public static final DataKey<String> FOOTNOTE_BACK_REF_STRING = new DataKey<>("FOOTNOTE_BACK_REF_STRING", "&#8617;");
@@ -48,22 +43,22 @@ public class FootnoteExtension implements Parser.ParserExtension, HtmlRenderer.H
     }
 
     @Override
-    public void extend(final Formatter.Builder builder) {
+    public void extend(Formatter.Builder builder) {
         builder.nodeFormatterFactory(new FootnoteNodeFormatter.Factory());
     }
 
     @Override
-    public void rendererOptions(final MutableDataHolder options) {
+    public void rendererOptions(MutableDataHolder options) {
 
     }
 
     @Override
-    public void parserOptions(final MutableDataHolder options) {
+    public void parserOptions(MutableDataHolder options) {
 
     }
 
     @Override
-    public boolean transferReferences(final MutableDataHolder document, final DataHolder included) {
+    public boolean transferReferences(MutableDataHolder document, DataHolder included) {
         if (document.contains(FOOTNOTES) && included.contains(FOOTNOTES)) {
             return Parser.transferReferences(FOOTNOTES.getFrom(document), FOOTNOTES.getFrom(included), FOOTNOTES_KEEP.getFrom(document) == KeepType.FIRST);
         }

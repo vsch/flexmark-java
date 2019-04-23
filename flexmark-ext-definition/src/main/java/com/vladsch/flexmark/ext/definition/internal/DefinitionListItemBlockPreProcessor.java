@@ -165,7 +165,7 @@ public class DefinitionListItemBlockPreProcessor implements BlockPreProcessor {
         }
 
         @Override
-        public BlockPreProcessor create(ParserState state) {
+        public BlockPreProcessor apply(ParserState state) {
             return new DefinitionListItemBlockPreProcessor(state.getProperties());
         }
     }

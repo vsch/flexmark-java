@@ -271,7 +271,7 @@ public class HtmlBlockParser extends AbstractBlockParser {
         }
 
         @Override
-        public BlockParserFactory create(DataHolder options) {
+        public BlockParserFactory apply(DataHolder options) {
             return new BlockFactory(options);
         }
     }

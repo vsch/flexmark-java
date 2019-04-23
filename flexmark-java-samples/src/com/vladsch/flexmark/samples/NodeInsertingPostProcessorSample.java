@@ -47,7 +47,7 @@ public class NodeInsertingPostProcessorSample {
             }
 
             @Override
-            public NodePostProcessor create(Document document) {
+            public NodePostProcessor apply(Document document) {
                 return new NodeInsertingPostProcessor();
             }
         }

@@ -101,9 +101,16 @@ Future 0.50.0
   * [ ] Convert anonymous classes to lambda where possible.
   * [x] Remove classes from utils which are implemented in Java 8
   * [x] replace `RunnableValue` with `Supplier`, requires changing `run()` with `get()`
-    * Delete `RunnableValue`
   * [x] replace `ValueRunnable` with `Consumer`, requires changing `run()` with `accept()`
-    * Delete `ValueRunnable`
+  * [x] replace `Factory` with `Supplier`, requires changing `create()` with `get()`
+  * [x] replace `Computable` with `Function`, requires changing `compute()` with `apply()` and
+        reversing template parameters.
+  * [x] replace `ComputableFactory` with `Function`, requires changing `create()` with
+        `apply()` and reversing template parameters.
+  * [x] replace `ComputeFactory` with `Function`, requires changing `create()` with
+        `apply()` and reversing template parameters.
+  * [x] replace all factory interfaces to be compatible with `Function` interface and change
+        `create()` with `apply()`
 * [x] Add: `LineFormattingAppendable` and `LineFormattingAppendableImpl`
   * [x] Fix: deprecate `FormattingAppendable` to be replaced by `LineFormattingAppendable`
   * [x] Fix: deprecate `FormattingAppendableImpl` to be replaced by

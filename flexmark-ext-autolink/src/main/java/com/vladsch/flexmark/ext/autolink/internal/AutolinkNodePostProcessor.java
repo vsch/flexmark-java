@@ -261,7 +261,7 @@ public class AutolinkNodePostProcessor extends NodePostProcessor {
         }
 
         @Override
-        public NodePostProcessor create(Document document) {
+        public NodePostProcessor apply(Document document) {
             return new AutolinkNodePostProcessor(document);
         }
     }

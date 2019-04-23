@@ -1,8 +1,9 @@
 package com.vladsch.flexmark.util.collection;
 
-import com.vladsch.flexmark.util.ComputeFactory;
+import java.util.function.Function;
 import com.vladsch.flexmark.util.options.DataHolder;
 
-public interface DataValueFactory<T> extends ComputeFactory<T, DataHolder> {
+public interface DataValueFactory<T> extends Function<DataHolder, T> {
 
 }
+

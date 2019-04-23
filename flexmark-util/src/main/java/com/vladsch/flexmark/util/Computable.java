@@ -1,5 +1,5 @@
 package com.vladsch.flexmark.util;
 
-public interface Computable<R, V> {
+public interface Computable<V, R> {
     R compute(V value);
 }

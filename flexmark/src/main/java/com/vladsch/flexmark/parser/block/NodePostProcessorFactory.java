@@ -50,5 +50,5 @@ public abstract class NodePostProcessorFactory implements PostProcessorFactory {
     }
 
     @Override
-    abstract public NodePostProcessor create(Document document);
+    abstract public NodePostProcessor apply(Document document);
 }

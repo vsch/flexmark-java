@@ -26,10 +26,7 @@ public class AttributesExtension implements Parser.ParserExtension
         , Formatter.FormatterExtension
         //, Parser.ReferenceHoldingExtension
 {
-    public static final DataKey<NodeAttributeRepository> NODE_ATTRIBUTES = new DataKey<>("NODE_ATTRIBUTES", new DataValueFactory<NodeAttributeRepository>() {
-        @Override
-        public NodeAttributeRepository create(DataHolder options) { return new NodeAttributeRepository(options); }
-    });
+    public static final DataKey<NodeAttributeRepository> NODE_ATTRIBUTES = new DataKey<>("NODE_ATTRIBUTES", NodeAttributeRepository::new);
     public static final DataKey<KeepType> ATTRIBUTES_KEEP = new DataKey<>("ATTRIBUTES_KEEP", KeepType.FIRST); // standard option to allow control over how to handle duplicates
     public static final DataKey<Boolean> ASSIGN_TEXT_ATTRIBUTES = new DataKey<>("ASSIGN_TEXT_ATTRIBUTES", true); // assign attributes to text if previous is not a space
     public static final DataKey<Boolean> WRAP_NON_ATTRIBUTE_TEXT = new DataKey<>("WRAP_NON_ATTRIBUTE_TEXT", true);
@@ -43,7 +40,7 @@ public class AttributesExtension implements Parser.ParserExtension
     }
 
     @Override
-    public void parserOptions(final MutableDataHolder options) {
+    public void parserOptions(MutableDataHolder options) {
 
     }
 
@@ -54,17 +51,17 @@ public class AttributesExtension implements Parser.ParserExtension
     }
 
     @Override
-    public void extend(final Formatter.Builder builder) {
+    public void extend(Formatter.Builder builder) {
         builder.nodeFormatterFactory(new AttributesNodeFormatter.Factory());
     }
 
     @Override
-    public void rendererOptions(final MutableDataHolder options) {
+    public void rendererOptions(MutableDataHolder options) {
 
     }
 
     @Override
-    public void extend(final HtmlRenderer.Builder rendererBuilder, final String rendererType) {
+    public void extend(HtmlRenderer.Builder rendererBuilder, String rendererType) {
         if (ASSIGN_TEXT_ATTRIBUTES.getFrom(rendererBuilder)) {
             rendererBuilder.nodeRendererFactory(new AttributesNodeRenderer.Factory());
         }
@@ -72,7 +69,7 @@ public class AttributesExtension implements Parser.ParserExtension
     }
 
     @Override
-    public void extend(final RendererBuilder rendererBuilder, final String rendererType) {
+    public void extend(RendererBuilder rendererBuilder, String rendererType) {
         //rendererBuilder.nodeRendererFactory(new AttributesNodeRenderer.Factory());
         rendererBuilder.attributeProviderFactory(new AttributesAttributeProvider.Factory());
     }

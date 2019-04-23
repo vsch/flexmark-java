@@ -10,7 +10,7 @@ import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.block.*;
 import com.vladsch.flexmark.parser.core.*;
 import com.vladsch.flexmark.parser.delimiter.DelimiterProcessor;
-import com.vladsch.flexmark.util.Computable;
+import java.util.function.Function;
 import com.vladsch.flexmark.util.ast.*;
 import com.vladsch.flexmark.util.collection.ItemFactoryMap;
 import com.vladsch.flexmark.util.collection.iteration.ReversibleIterable;
@@ -174,14 +174,14 @@ public class DocumentParser implements ParserState {
         blockTracker.blockRemovedWithDescendants(node);
     }
 
-    private static class BlockParserMapper implements Computable<Block, BlockParser> {
+    private static class BlockParserMapper implements Function<BlockParser, Block> {
         public static final BlockParserMapper INSTANCE = new BlockParserMapper();
 
         private BlockParserMapper() {
         }
 
         @Override
-        public Block compute(BlockParser value) {
+        public Block apply(BlockParser value) {
             return value.getBlock();
         }
     }
@@ -332,7 +332,7 @@ public class DocumentParser implements ParserState {
 
         ArrayList<BlockParserFactory> blockParserFactories = new ArrayList<BlockParserFactory>(customBlockParserFactories.size());
         for (CustomBlockParserFactory factory : customBlockParserFactories) {
-            blockParserFactories.add(factory.create(options));
+            blockParserFactories.add(factory.apply(options));
         }
 
         this.blockParserFactories = blockParserFactories;
@@ -1123,7 +1123,7 @@ public class DocumentParser implements ParserState {
             for (BlockPreProcessorDependencyStage preProcessorStage : blockPreProcessorDependencies.getDependentStages()) {
                 for (BlockPreProcessorFactory factory : preProcessorStage.dependents) {
                     ReversibleIterable<Block> blockList = blockTracker.getNodeClassifier().getCategoryItems(Block.class, factory.getBlockTypes());
-                    BlockPreProcessor blockPreProcessor = factory.create(this);
+                    BlockPreProcessor blockPreProcessor = factory.apply(this);
 
                     for (Block block : blockList) {
                         blockPreProcessor.preProcess(this, block);

@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.util.collection;
 
-import com.vladsch.flexmark.util.Computable;
+import java.util.function.Function;
 import com.vladsch.flexmark.util.NodeTracker;
 import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.Node;
@@ -13,10 +13,7 @@ public class NodeClassifierVisitor extends NodeVisitorBase implements NodeTracke
     private final OrderedSet<Class<?>> myExclusionSet;
     private final HashMap<Integer, BitSet> myNodeAncestryMap;
     private final Stack<BitSet> myNodeAncestryBitSetStack = new Stack<BitSet>();
-    private final CopyOnWriteRef<BitSet> myNodeAncestryBitSet = new CopyOnWriteRef<BitSet>(new BitSet(), new Computable<BitSet, BitSet>() {
-        @Override
-        public BitSet compute(BitSet value) {return value != null ? (BitSet) value.clone() : new BitSet();}
-    });
+    private final CopyOnWriteRef<BitSet> myNodeAncestryBitSet = new CopyOnWriteRef<BitSet>(new BitSet(), value -> value != null ? (BitSet) value.clone() : new BitSet());
 
     private static final BitSet EMPTY_SET = new BitSet();
     private boolean myClassificationDone = false;

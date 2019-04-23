@@ -24,12 +24,12 @@ public class Utils {
         return receiver == null || !condition ? altValue : receiver;
     }
 
-    public static <T> T ifNullOr(T receiver, Computable<Boolean, T> condition, T altValue) {
-        return (receiver == null || condition.compute(receiver)) ? altValue : receiver;
+    public static <T> T ifNullOr(T receiver, Function<T, Boolean> condition, T altValue) {
+        return (receiver == null || condition.apply(receiver)) ? altValue : receiver;
     }
 
-    public static <T> T ifNullOrNot(T receiver, Computable<Boolean, T> condition, T altValue) {
-        return (receiver == null || !condition.compute(receiver)) ? altValue : receiver;
+    public static <T> T ifNullOrNot(T receiver, Function<T, Boolean> condition, T altValue) {
+        return (receiver == null || !condition.apply(receiver)) ? altValue : receiver;
     }
 
     public static String ifNullOrEmpty(String receiver, String altValue) {
@@ -365,15 +365,10 @@ public class Utils {
 
     public static <T> List<? extends T> stringSorted(
             Collection<? extends T> receiver,
-            final Computable<String, T> stringer
+            final Function<T, String> stringer
     ) {
         ArrayList<? extends T> result = new ArrayList<T>(receiver);
-        Collections.sort(result, new Comparator<T>() {
-            @Override
-            public int compare(T o1, T o2) {
-                return stringer.compute(o1).compareTo(stringer.compute(o2));
-            }
-        });
+        Collections.sort(result, (Comparator<T>) (o1, o2) -> stringer.apply(o1).compareTo(stringer.apply(o2)));
         return result;
     }
 

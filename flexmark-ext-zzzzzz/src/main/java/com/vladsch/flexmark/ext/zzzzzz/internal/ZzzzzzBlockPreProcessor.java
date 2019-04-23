@@ -45,7 +45,7 @@ public class ZzzzzzBlockPreProcessor implements BlockPreProcessor {
         }
 
         @Override
-        public BlockPreProcessor create(ParserState state) {
+        public BlockPreProcessor apply(ParserState state) {
             return new ZzzzzzBlockPreProcessor(state.getProperties());
         }
     }

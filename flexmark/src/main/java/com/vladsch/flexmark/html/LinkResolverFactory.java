@@ -1,12 +1,12 @@
 package com.vladsch.flexmark.html;
 
 import com.vladsch.flexmark.html.renderer.LinkResolverContext;
-import com.vladsch.flexmark.util.ComputableFactory;
+import java.util.function.Function;
 import com.vladsch.flexmark.util.dependency.Dependent;
 
 import java.util.Set;
 
-public interface LinkResolverFactory extends ComputableFactory<LinkResolver, LinkResolverContext>, Dependent<LinkResolverFactory> {
+public interface LinkResolverFactory extends Function<LinkResolverContext, LinkResolver>, Dependent<LinkResolverFactory> {
     @Override
     Set<Class<? extends LinkResolverFactory>> getAfterDependents();
 
@@ -17,5 +17,5 @@ public interface LinkResolverFactory extends ComputableFactory<LinkResolver, Lin
     boolean affectsGlobalScope();
 
     @Override
-    LinkResolver create(LinkResolverContext context);
+    LinkResolver apply(LinkResolverContext context);
 }

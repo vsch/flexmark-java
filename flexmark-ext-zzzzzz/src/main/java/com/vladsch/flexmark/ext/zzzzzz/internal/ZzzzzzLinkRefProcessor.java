@@ -56,7 +56,7 @@ public class ZzzzzzLinkRefProcessor implements LinkRefProcessor {
 
     public static class Factory implements LinkRefProcessorFactory {
         @Override
-        public LinkRefProcessor create(Document document) {
+        public LinkRefProcessor apply(Document document) {
             return new ZzzzzzLinkRefProcessor(document);
         }
 

@@ -29,12 +29,7 @@ public class AbbreviationExtension implements Parser.ParserExtension, HtmlRender
     /**
      * A {@link DataKey} that is used to get the document's Node repository holding all the abbreviations defined in the current document.
      */
-    public static final DataKey<AbbreviationRepository> ABBREVIATIONS = new DataKey<>("ABBREVIATIONS", new DataValueFactory<AbbreviationRepository>() {
-        @Override
-        public AbbreviationRepository create(DataHolder options) {
-            return new AbbreviationRepository(options);
-        }
-    });
+    public static final DataKey<AbbreviationRepository> ABBREVIATIONS = new DataKey<>("ABBREVIATIONS", AbbreviationRepository::new);
 
     /**
      * A {@link DataKey} that is used to set the use links option when true, default is false and abbr tag will be used in the rendered HTML.

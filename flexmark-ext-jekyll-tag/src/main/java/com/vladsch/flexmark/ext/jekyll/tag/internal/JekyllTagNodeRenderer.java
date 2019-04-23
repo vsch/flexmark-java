@@ -50,7 +50,7 @@ public class JekyllTagNodeRenderer implements NodeRenderer {
 
     public static class Factory implements NodeRendererFactory {
         @Override
-        public NodeRenderer create(final DataHolder options) {
+        public NodeRenderer apply(final DataHolder options) {
             return new JekyllTagNodeRenderer(options);
         }
     }

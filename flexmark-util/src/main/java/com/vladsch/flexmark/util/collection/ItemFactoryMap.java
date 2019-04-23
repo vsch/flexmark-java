@@ -1,14 +1,14 @@
 package com.vladsch.flexmark.util.collection;
 
-import com.vladsch.flexmark.util.ComputableFactory;
+import java.util.function.Function;
 
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-public class ItemFactoryMap<I, P> implements Map<ComputableFactory<I, P>, I> {
-    protected final HashMap<ComputableFactory<I, P>, I> itemMap;
+public class ItemFactoryMap<I, P> implements Map<Function<P, I>, I> {
+    protected final HashMap<Function<P, I>, I> itemMap;
     protected final P param;
 
     public ItemFactoryMap(P param) {
@@ -16,14 +16,14 @@ public class ItemFactoryMap<I, P> implements Map<ComputableFactory<I, P>, I> {
     }
 
     public ItemFactoryMap(P param, int capacity) {
-        this.itemMap = new HashMap<ComputableFactory<I, P>, I>(capacity);
+        this.itemMap = new HashMap<Function<P, I>, I>(capacity);
         this.param = param;
     }
 
-    public I getItem(ComputableFactory<I, P> factory) {
+    public I getItem(Function<P, I> factory) {
         I item = itemMap.get(factory);
         if (item == null) {
-            item = factory.create(param);
+            item = factory.apply(param);
             itemMap.put(factory, item);
         }
         return item;
@@ -31,8 +31,8 @@ public class ItemFactoryMap<I, P> implements Map<ComputableFactory<I, P>, I> {
 
     @Override
     public I get(Object o) {
-        if (o instanceof ComputableFactory) {
-            return getItem((ComputableFactory<I, P>) o);
+        if (o instanceof Function) {
+            return getItem((Function<P, I>) o);
         }
         return null;
     }
@@ -47,10 +47,10 @@ public class ItemFactoryMap<I, P> implements Map<ComputableFactory<I, P>, I> {
     public boolean containsKey(Object o) {return itemMap.containsKey(o);}
 
     @Override
-    public I put(ComputableFactory<I, P> factory, I i) {return itemMap.put(factory, i);}
+    public I put(Function<P, I> factory, I i) {return itemMap.put(factory, i);}
 
     @Override
-    public void putAll(Map<? extends ComputableFactory<I, P>, ? extends I> map) {itemMap.putAll(map);}
+    public void putAll(Map<? extends Function<P, I>, ? extends I> map) {itemMap.putAll(map);}
 
     @Override
     public I remove(Object o) {return itemMap.remove(o);}
@@ -62,11 +62,11 @@ public class ItemFactoryMap<I, P> implements Map<ComputableFactory<I, P>, I> {
     public boolean containsValue(Object o) {return itemMap.containsValue(o);}
 
     @Override
-    public Set<ComputableFactory<I, P>> keySet() {return itemMap.keySet();}
+    public Set<Function<P, I>> keySet() {return itemMap.keySet();}
 
     @Override
     public Collection<I> values() {return itemMap.values();}
 
     @Override
-    public Set<Entry<ComputableFactory<I, P>, I>> entrySet() {return itemMap.entrySet();}
+    public Set<Entry<Function<P, I>, I>> entrySet() {return itemMap.entrySet();}
 }
