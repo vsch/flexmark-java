@@ -112,15 +112,19 @@ public class InlineCodeCustomRenderingSample {
         Node document = PARSER.parse("" +
                 "`test`\n" +
                 "\n" +
+                "``test``\n" +
+                "\n" +
                 "```test```\n" +
+                "\n" +
+                "````test````\n" +
                 "");
         String html = RENDERER.render(document);
-        System.out.println("````markdown");
+        System.out.println("``````markdown");
         System.out.println(document.getChars());
-        System.out.println("````");
+        System.out.println("``````");
         System.out.println("");
-        System.out.println("````html");
+        System.out.println("``````html");
         System.out.println(html);
-        System.out.println("````");
+        System.out.println("``````");
     }
 }
