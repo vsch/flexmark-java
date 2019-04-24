@@ -2,9 +2,7 @@ package com.vladsch.flexmark.samples;
 
 import com.vladsch.flexmark.ast.Code;
 import com.vladsch.flexmark.ast.Text;
-import com.vladsch.flexmark.ext.toc.TocBlock;
 import com.vladsch.flexmark.ext.toc.TocExtension;
-import com.vladsch.flexmark.ext.toc.internal.TocNodeRenderer;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.html.HtmlRenderer.Builder;
 import com.vladsch.flexmark.html.HtmlRenderer.HtmlRendererExtension;
@@ -82,7 +80,6 @@ public class InlineCodeCustomRenderingSample {
                             html.text(Escaping.collapseWhitespace(node.getText(), true));
                         }
                         html.tag("/pre");
-
                     } else {
                         context.delegateRender();
                     }
