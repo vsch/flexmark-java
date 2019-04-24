@@ -32,13 +32,13 @@ public class InlineCodeCustomRenderingSample {
     static class CustomNodeRenderer implements NodeRenderer {
         private final boolean codeSoftLineBreaks;
 
-        public CustomNodeRenderer(final DataHolder options) {
+        public CustomNodeRenderer(DataHolder options) {
             codeSoftLineBreaks = Parser.CODE_SOFT_LINE_BREAKS.getFrom(options);
         }
 
         public static class Factory implements DelegatingNodeRendererFactory {
             @Override
-            public NodeRenderer create(final DataHolder options) {
+            public NodeRenderer apply(DataHolder options) {
                 return new CustomNodeRenderer(options);
             }
 
@@ -60,7 +60,7 @@ public class InlineCodeCustomRenderingSample {
             HashSet<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
             set.add(new NodeRenderingHandler<Code>(Code.class, new com.vladsch.flexmark.html.CustomNodeRenderer<Code>() {
                 @Override
-                public void render(Code node, NodeRendererContext context, final HtmlWriter html) {
+                public void render(Code node, NodeRendererContext context, HtmlWriter html) {
                     // test the node to see if it needs overriding
                     if (node.getOpeningMarker().length() == 3) {
                         if (context.getHtmlOptions().sourcePositionParagraphLines) {
@@ -92,12 +92,12 @@ public class InlineCodeCustomRenderingSample {
 
     static class CustomExtension implements HtmlRendererExtension {
         @Override
-        public void rendererOptions(final MutableDataHolder options) {
+        public void rendererOptions(MutableDataHolder options) {
 
         }
 
         @Override
-        public void extend(final Builder rendererBuilder, final String rendererType) {
+        public void extend(Builder rendererBuilder, String rendererType) {
             rendererBuilder.nodeRendererFactory(new CustomNodeRenderer.Factory());
         }
 
