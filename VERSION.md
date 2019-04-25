@@ -5,7 +5,7 @@ flexmark-java
 
 [TOC]: # " "
 
-- [Future 0.50.0](#future-0500)
+- [Future 0.50.2](#future-0502)
 - [0.42.6](#0426)
 - [0.42.4](#0424)
 - [0.42.2](#0422)
@@ -84,7 +84,7 @@ flexmark-java
 
 &nbsp;</details>
 
-Future 0.50.0
+Future 0.50.2
 -------------
 
 * [x] Break: make Java 8 minimum version and use JDK 8 for compilation
