@@ -11,7 +11,7 @@
     <entry oldName="com.vladsch.flexmark.util.html.FormattingAppendableImpl" newName="com.vladsch.flexmark.util.html.LineFormattingAppendableImpl" type="class"/>
     <entry oldName="com.vladsch.flexmark.util.RunnableValue" newName="java.util.function.Supplier" type="class"/>
     <entry oldName="com.vladsch.flexmark.util.ValueRunnable" newName="java.util.function.Consumer" type="class"/>
-    <entry oldName="com.vladsch.flexmark.util.Supplier" newName="java.util.function.Supplier" type="class"/>
+    <entry oldName="com.vladsch.flexmark.util.Factory" newName="java.util.function.Supplier" type="class"/>
     <entry oldName="com.vladsch.flexmark.util.Computable" newName="java.util.function.Function" type="class"/>
     <entry oldName="com.vladsch.flexmark.util.ComputableFactory" newName="java.util.function.Function" type="class"/>
     <entry oldName="com.vladsch.flexmark.util.ComputeFactory" newName="java.util.function.Function" type="class"/>
