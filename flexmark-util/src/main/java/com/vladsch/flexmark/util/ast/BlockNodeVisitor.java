@@ -22,7 +22,7 @@ public class BlockNodeVisitor extends NodeVisitor {
     }
 
     @Override
-    public void visit(final Node node) {
+    public void visit(Node node) {
         if (node instanceof Block) {
             super.visit(node);
         }

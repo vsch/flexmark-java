@@ -411,7 +411,7 @@ public class OrderedSet<E> implements Set<E>, Iterable<E> {
 
     @Override
     public boolean addAll(Collection<? extends E> collection) {
-        final boolean[] changed = { false };
+        boolean[] changed = { false };
         for (E e : collection) {
             if (add(e)) changed[0] = true;
         }
@@ -430,26 +430,6 @@ public class OrderedSet<E> implements Set<E>, Iterable<E> {
                 removeSet.clear(index);
             }
         }
-
-        // Java6
-        //int index = myValueList.size();
-        //if (index == 0) return false;
-        //int[] indices = new int[removeSet.cardinality()];
-        //index = -1;
-        //int i = 0;
-        //
-        //while (true) {
-        //    index = removeSet.nextSetBit(index + 1);
-        //    if (index == -1) break;
-        //    indices[i++] = index;
-        //}
-        //
-        //boolean changed = false;
-        //while (i-- > 0) {
-        //    index = indices[i];
-        //    remove(myValueList.get(index));
-        //    changed = true;
-        //}
 
         // Java7
         int index = myValueList.size();

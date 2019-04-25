@@ -79,7 +79,7 @@ public abstract class Node {
         return count;
     }
 
-    public Node getOldestAncestorOfTypeAfter(final Class ancestor, final Class after) {
+    public Node getOldestAncestorOfTypeAfter(Class ancestor, Class after) {
         Node parent = getParent();
         Node oldestAncestor = null;
         while (parent != null) {
@@ -734,8 +734,8 @@ public abstract class Node {
             return BasedSequence.NULL;
         }
 
-        // this is not just base sequence between first and last child, 
-        // it will not include any out-of base chars if they are present, 
+        // this is not just base sequence between first and last child,
+        // it will not include any out-of base chars if they are present,
         // in which case need to create a segmented sequence of all child text
         Node child = getFirstChild();
         ArrayList<BasedSequence> segments = null;
@@ -819,7 +819,7 @@ public abstract class Node {
     }
 
     public int getEndLineNumber() {
-        final int endOffset = chars.getEndOffset();
+        int endOffset = chars.getEndOffset();
         return getDocument().getLineNumber(endOffset > 0 ? endOffset - 1 : endOffset);
     }
 
@@ -859,7 +859,7 @@ public abstract class Node {
      *
      * @param firstNode first child in chain
      */
-    public void appendChain(final Node firstNode) {
+    public void appendChain(Node firstNode) {
         Node node = firstNode;
         while (node != null) {
             Node next = node.next;
@@ -873,7 +873,7 @@ public abstract class Node {
      *
      * @param firstNode first child in chain
      */
-    public void insertChainAfter(final Node firstNode) {
+    public void insertChainAfter(Node firstNode) {
         Node posNode = this;
         Node node = firstNode;
         while (node != null) {
@@ -889,7 +889,7 @@ public abstract class Node {
      *
      * @param firstNode first child in chain
      */
-    public void insertChainBefore(final Node firstNode) {
+    public void insertChainBefore(Node firstNode) {
         Node posNode = this;
         Node node = firstNode;
         while (node != null) {

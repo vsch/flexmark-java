@@ -1,9 +1,9 @@
 package com.vladsch.flexmark.util.ast;
 
-import com.vladsch.flexmark.util.collection.Consumer;
 import com.vladsch.flexmark.util.collection.iteration.ReversiblePeekingIterator;
 
 import java.util.Stack;
+import java.util.function.Consumer;
 
 public class DescendantNodeIterator implements ReversiblePeekingIterator<Node> {
     private final boolean isReversed;

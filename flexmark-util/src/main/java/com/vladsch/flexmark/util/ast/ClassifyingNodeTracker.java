@@ -1,11 +1,11 @@
-package com.vladsch.flexmark.util.collection;
+package com.vladsch.flexmark.util.ast;
 
-import com.vladsch.flexmark.util.NodeTracker;
-import com.vladsch.flexmark.util.ast.Node;
+import com.vladsch.flexmark.util.collection.ClassificationBag;
+import com.vladsch.flexmark.util.collection.OrderedMap;
+import com.vladsch.flexmark.util.collection.OrderedSet;
 import com.vladsch.flexmark.util.collection.iteration.ReversibleIterable;
 import com.vladsch.flexmark.util.collection.iteration.ReversibleIterator;
 import com.vladsch.flexmark.util.collection.iteration.ReversiblePeekingIterable;
-import com.vladsch.flexmark.util.mappers.NodeClassifier;
 
 import java.util.BitSet;
 import java.util.HashMap;
@@ -95,18 +95,11 @@ public class ClassifyingNodeTracker implements NodeTracker {
     @Override
     public void nodeRemoved(Node node) {
         nodeRemovedWithDescendants(node);
-        //validateUnlinked(node);
-        //myNodeClassifier.remove(node);
-        //if (myHost != null) myHost.nodeRemoved(node);
     }
 
     @Override
     public void nodeRemovedWithChildren(Node node) {
         nodeRemovedWithDescendants(node);
-        //validateUnlinked(node);
-        //myNodeClassifier.add(node);
-        //removeNodes(node.getChildren());
-        //if (myHost != null) myHost.nodeRemovedWithChildren(node);
     }
 
     @Override

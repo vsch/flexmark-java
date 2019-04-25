@@ -3,6 +3,7 @@ package com.vladsch.flexmark.util.collection;
 import com.vladsch.flexmark.util.collection.iteration.*;
 
 import java.util.*;
+import java.util.function.Consumer;
 import java.util.function.Function;
 
 @SuppressWarnings("WeakerAccess")
@@ -379,7 +380,7 @@ public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
         return entryIterator();
     }
 
-    public void forEach(Consumer<? super Map.Entry<K, V>> consumer) {
+    public void forEach(Consumer<? super Entry<K, V>> consumer) {
         Iterator<Map.Entry<K, V>> iterator = iterator();
         while (iterator.hasNext()) {
             consumer.accept(iterator.next());

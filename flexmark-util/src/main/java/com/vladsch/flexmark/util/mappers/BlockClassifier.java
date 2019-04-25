@@ -1,7 +1,8 @@
 package com.vladsch.flexmark.util.mappers;
 
-import java.util.function.Function;
 import com.vladsch.flexmark.util.ast.Block;
+
+import java.util.function.Function;
 
 public class BlockClassifier implements Function<Block, Class<? extends Block>> {
     public static final BlockClassifier INSTANCE = new BlockClassifier();

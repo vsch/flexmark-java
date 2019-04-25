@@ -47,14 +47,14 @@ public class AttributeImpl implements Attribute {
     }
 
     @SuppressWarnings("WeakerAccess")
-    public static int indexOfValue(final CharSequence value, final CharSequence valueName, final char valueListDelimiter, final char valueNameDelimiter) {
+    public static int indexOfValue(CharSequence value, CharSequence valueName, char valueListDelimiter, char valueNameDelimiter) {
         if (valueName.length() == 0 || value.length() == 0) return -1;
 
         if (valueListDelimiter == NUL) {
             return value.equals(valueName) ? 0 : -1;
         } else {
             int lastPos = 0;
-            final BasedSequence subSeq = SubSequence.of(value);
+            BasedSequence subSeq = SubSequence.of(value);
             while (lastPos < value.length()) {
                 int pos = subSeq.indexOf(valueName, lastPos);
                 if (pos == -1) break;
@@ -82,24 +82,24 @@ public class AttributeImpl implements Attribute {
     }
 
     @Override
-    public Attribute replaceValue(final CharSequence value) {
+    public Attribute replaceValue(CharSequence value) {
         return value.equals(myValue) ? this : of(myName, value, myValueListDelimiter, myValueNameDelimiter);
     }
 
     @Override
-    public Attribute setValue(final CharSequence value) {
+    public Attribute setValue(CharSequence value) {
         MutableAttribute mutable = toMutable().setValue(value);
         return mutable.equals(this) ? this : mutable.toImmutable();
     }
 
     @Override
-    public Attribute removeValue(final CharSequence value) {
+    public Attribute removeValue(CharSequence value) {
         MutableAttribute mutable = toMutable().removeValue(value);
         return mutable.equals(this) ? this : mutable.toImmutable();
     }
 
     @Override
-    public boolean equals(final Object o) {
+    public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Attribute)) return false;
 

@@ -48,7 +48,7 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
     private int myLineOnFirstText;      // issue EOL on first text
     private ArrayList<Runnable> myIndentsOnFirstEol;    // issue indents on first eol
 
-    public LineFormattingAppendableImpl(final int formatOptions) {
+    public LineFormattingAppendableImpl(int formatOptions) {
         myOptions = formatOptions;
         myPassThrough = haveOptions(PASS_THROUGH);
         myPreFormattedNesting = 0;
@@ -77,7 +77,7 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
     }
 
     @Override
-    public LineFormattingAppendable setOptions(final int options) {
+    public LineFormattingAppendable setOptions(int options) {
         myOptions = options;
         return this;
     }
@@ -108,7 +108,7 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
     }
 
     @Override
-    public LineFormattingAppendable setIndentPrefix(final CharSequence prefix) {
+    public LineFormattingAppendable setIndentPrefix(CharSequence prefix) {
         myIndentPrefix = prefix == null ? BasedSequence.NULL : BasedSequenceImpl.of(prefix);
         return this;
     }
@@ -119,7 +119,7 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
     }
 
     @Override
-    public LineFormattingAppendable addPrefix(final CharSequence prefix, boolean afterEol) {
+    public LineFormattingAppendable addPrefix(CharSequence prefix, boolean afterEol) {
         if (!myPassThrough) {
             if (afterEol) {
                 myPrefixAfterEol = combinedPrefix(myPrefixAfterEol, prefix);
@@ -132,7 +132,7 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
     }
 
     @Override
-    public LineFormattingAppendable setPrefix(final CharSequence prefix, boolean afterEol) {
+    public LineFormattingAppendable setPrefix(CharSequence prefix, boolean afterEol) {
         if (!myPassThrough) {
             if (afterEol) {
                 myPrefixAfterEol = prefix == null ? BasedSequence.NULL : BasedSequenceImpl.of(prefix);
@@ -372,7 +372,7 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
         }
     }
 
-    private void appendImpl(final char c) {
+    private void appendImpl(char c) {
         if (myPassThrough) {
             if (c == EOL) {
                 appendEol();
@@ -446,7 +446,7 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
         }
     }
 
-    private void appendImpl(final CharSequence csq, final int start, final int end) {
+    private void appendImpl(CharSequence csq, int start, int end) {
         int i = start;
         while (i < end) {
             appendImpl(csq.charAt(i++));
@@ -454,19 +454,19 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
     }
 
     @Override
-    public LineFormattingAppendable append(final CharSequence csq) {
+    public LineFormattingAppendable append(CharSequence csq) {
         appendImpl(csq, 0, csq.length());
         return this;
     }
 
     @Override
-    public LineFormattingAppendable append(final CharSequence csq, final int start, final int end) {
+    public LineFormattingAppendable append(CharSequence csq, int start, int end) {
         appendImpl(csq, start, end);
         return this;
     }
 
     @Override
-    public LineFormattingAppendable append(final char c) {
+    public LineFormattingAppendable append(char c) {
         appendImpl(c);
         return this;
     }
@@ -504,12 +504,12 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
     }
 
     @Override
-    public boolean isPreFormattedLine(final int line) {
+    public boolean isPreFormattedLine(int line) {
         return getLinePrefix(line).isNull();
     }
 
     @Override
-    public LineFormattingAppendable append(final LineFormattingAppendable lineAppendable, int startLine, int endLine) {
+    public LineFormattingAppendable append(LineFormattingAppendable lineAppendable, int startLine, int endLine) {
         List<CharSequence> lines = lineAppendable.getLineContents(startLine, endLine);
         List<BasedSequence> prefixes = lineAppendable.getLinePrefixes(startLine, endLine);
 
@@ -533,9 +533,9 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
     }
 
     @Override
-    public LineFormattingAppendable prefixLines(final CharSequence prefix, boolean addAfterLinePrefix, final int startLine, final int endLine) {
-        final int useStartLine = minLimit(startLine, 0);
-        final int useEndLine = maxLimit(endLine, getLineCount());
+    public LineFormattingAppendable prefixLines(CharSequence prefix, boolean addAfterLinePrefix, int startLine, int endLine) {
+        int useStartLine = minLimit(startLine, 0);
+        int useEndLine = maxLimit(endLine, getLineCount());
 
         if (prefix != null && prefix.length() > 0 && useStartLine < useEndLine) {
             // now need to add prefix to line contents
@@ -560,9 +560,9 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
     }
 
     @Override
-    public LineFormattingAppendable removeLines(final int startLine, final int endLine) {
-        final int useStartLine = minLimit(startLine, 0);
-        final int useEndLine = maxLimit(endLine, getLineCount());
+    public LineFormattingAppendable removeLines(int startLine, int endLine) {
+        int useStartLine = minLimit(startLine, 0);
+        int useEndLine = maxLimit(endLine, getLineCount());
 
         if (useStartLine < useEndLine) {
             int count = useEndLine - useStartLine;
@@ -593,7 +593,7 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
     }
 
     @Override
-    public List<CharSequence> getLineContents(final int startOffset, final int endOffset) {
+    public List<CharSequence> getLineContents(int startOffset, int endOffset) {
         line();
         ArrayList<CharSequence> result = new ArrayList<>();
         int iMax = Utils.maxLimit(endOffset, myLines.size());
@@ -606,7 +606,7 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
     }
 
     @Override
-    public List<BasedSequence> getLinePrefixes(final int startOffset, final int endOffset) {
+    public List<BasedSequence> getLinePrefixes(int startOffset, int endOffset) {
         line();
         ArrayList<BasedSequence> result = new ArrayList<>();
         int iMax = Utils.maxLimit(endOffset, myLines.size());
@@ -618,7 +618,7 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
     }
 
     @Override
-    public List<CharSequence> getLines(final int startOffset, final int endOffset) {
+    public List<CharSequence> getLines(int startOffset, int endOffset) {
         line();
         StringBuilder sb = new StringBuilder();
 
@@ -640,7 +640,7 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
     }
 
     @Override
-    public LineFormattingAppendable appendTo(final Appendable out, final int maxBlankLines, CharSequence prefix, int startLine, int endLine) throws IOException {
+    public LineFormattingAppendable appendTo(Appendable out, int maxBlankLines, CharSequence prefix, int startLine, int endLine) throws IOException {
         line();
         int removeBlankLines = minLimit(trailingBlankLines() - minLimit(maxBlankLines, 0), 0);
 
@@ -688,7 +688,7 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
     }
 
     @Override
-    public LineFormattingAppendable lineIf(final boolean predicate) {
+    public LineFormattingAppendable lineIf(boolean predicate) {
         if (predicate) line();
         return this;
     }
@@ -701,13 +701,13 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
     }
 
     @Override
-    public LineFormattingAppendable blankLineIf(final boolean predicate) {
+    public LineFormattingAppendable blankLineIf(boolean predicate) {
         if (predicate) blankLine();
         return this;
     }
 
     @Override
-    public LineFormattingAppendable blankLine(final int count) {
+    public LineFormattingAppendable blankLine(int count) {
         line();
         int addBlankLines = count - trailingBlankLines();
         appendEol(addBlankLines);
@@ -816,7 +816,7 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
     }
 
     @Override
-    public LineFormattingAppendable removeIndentOnFirstEOL(final Runnable runnable) {
+    public LineFormattingAppendable removeIndentOnFirstEOL(Runnable runnable) {
         myIndentsOnFirstEol.remove(runnable);
         return this;
     }

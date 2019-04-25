@@ -25,13 +25,13 @@ import java.util.HashMap;
 @SuppressWarnings({ "WeakerAccess" })
 public class ColorStyler extends HtmlStylerBase<Color> {
     @Override
-    public String getStyle(final Color item) {
+    public String getStyle(Color item) {
         if (item instanceof BackgroundColor) return String.format("background-color:#%s", ColorStyler.getColorValue(item));
         else return item == null ? "" : String.format("color:#%s", getColorValue(item));
     }
 
     @SuppressWarnings("UseJBColor")
-    public static Color getNamedColor(final String colorName) {
+    public static Color getNamedColor(String colorName) {
         if (colorName.startsWith("#")) {
             // extract rgb from it
             Integer color = Utils.parseIntOrNull(colorName.substring(1), 16);
@@ -106,7 +106,7 @@ public class ColorStyler extends HtmlStylerBase<Color> {
 
     public static String getColorNameOrRGB(Color item) {
         if (item != null) {
-            final int rgb = item.getRGB();
+            int rgb = item.getRGB();
             String colorName = colorNameMap.get(rgb & 0x00ffffff);
             return colorName != null ? colorName : String.format("rgb(%d,%d,%d)", item.getRed(), item.getGreen(), item.getBlue());
         }

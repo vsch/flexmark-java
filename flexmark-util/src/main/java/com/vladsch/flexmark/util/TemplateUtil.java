@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 public class TemplateUtil {
     final public static Resolver NULL_RESOLVER = new Resolver() {
         @Override
-        public String resolve(final String[] groups) {
+        public String resolve(String[] groups) {
             return null;
         }
     };
@@ -16,7 +16,7 @@ public class TemplateUtil {
     public static class MappedResolver implements Resolver {
         final protected Map<String, String> myMap;
 
-        public MappedResolver(final Map<String, String> map) {
+        public MappedResolver(Map<String, String> map) {
             myMap = map;
         }
 
@@ -34,7 +34,7 @@ public class TemplateUtil {
         }
 
         @Override
-        public String resolve(final String[] groups) {
+        public String resolve(String[] groups) {
             return groups.length > 2 ? null : myMap.get(groups[1]);
         }
     }

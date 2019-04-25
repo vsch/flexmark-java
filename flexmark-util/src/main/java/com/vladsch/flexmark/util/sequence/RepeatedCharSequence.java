@@ -15,7 +15,7 @@ public class RepeatedCharSequence implements CharSequence {
     private final int myEndIndex;
     private int myHash;
 
-    private RepeatedCharSequence(final CharSequence chars, int startIndex, int endIndex) {
+    private RepeatedCharSequence(CharSequence chars, int startIndex, int endIndex) {
         myChars = chars;
         myStartIndex = startIndex;
         myEndIndex = endIndex;
@@ -27,13 +27,13 @@ public class RepeatedCharSequence implements CharSequence {
     }
 
     @Override
-    public char charAt(final int index) {
+    public char charAt(int index) {
         if (index < 0 || index >= myEndIndex - myStartIndex) throw new IndexOutOfBoundsException();
         return myChars.charAt((myStartIndex + index) % myChars.length());
     }
 
     @Override
-    public CharSequence subSequence(final int start, final int end) {
+    public CharSequence subSequence(int start, int end) {
         if (start >= 0 && start <= end && end <= myEndIndex - myStartIndex) {
             return (start == end) ? NULL : start == myStartIndex && end == myEndIndex ? this : new RepeatedCharSequence(myChars, myStartIndex + start, myStartIndex + end);
         }
@@ -42,7 +42,7 @@ public class RepeatedCharSequence implements CharSequence {
     }
 
     public RepeatedCharSequence repeat(int count) {
-        final int endIndex = myStartIndex + (myEndIndex - myStartIndex) * count;
+        int endIndex = myStartIndex + (myEndIndex - myStartIndex) * count;
         return myStartIndex >= myEndIndex ? NULL : myEndIndex == endIndex ? this : new RepeatedCharSequence(myChars, myStartIndex, endIndex);
     }
 
@@ -70,15 +70,15 @@ public class RepeatedCharSequence implements CharSequence {
         return sb.toString();
     }
 
-    public static RepeatedCharSequence of(final char c, final int count) {
+    public static RepeatedCharSequence of(char c, int count) {
         return new RepeatedCharSequence(String.valueOf(c), 0, count);
     }
 
-    public static RepeatedCharSequence of(final CharSequence chars, final int count) {
+    public static RepeatedCharSequence of(CharSequence chars, int count) {
         return new RepeatedCharSequence(chars, 0, chars.length() * count);
     }
 
-    public static RepeatedCharSequence of(final CharSequence chars, final int start, final int end) {
+    public static RepeatedCharSequence of(CharSequence chars, int start, int end) {
         return new RepeatedCharSequence(chars, start, end);
     }
 }

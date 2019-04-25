@@ -18,5 +18,5 @@ public interface TableRowManipulator {
      * number of rows added, or BREAK to stop processing rows
      */
 
-    int apply(final TableRow row, final int allRowsIndex, ArrayList<TableRow> rows, int index);
+    int apply(TableRow row, int allRowsIndex, ArrayList<TableRow> rows, int index);
 }

@@ -5,6 +5,7 @@ import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
 import com.vladsch.flexmark.util.sequence.ReplacedTextMapper;
 
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -150,7 +151,7 @@ public class Escaping {
                     sb.append(s, 1, s.length());
                 }
             } else {
-                byte[] bytes = s.getBytes(Charset.forName("UTF-8"));
+                byte[] bytes = s.getBytes(StandardCharsets.UTF_8);
                 for (byte b : bytes) {
                     sb.append('%');
                     sb.append(HEX_DIGITS[(b >> 4) & 0xF]);
@@ -172,7 +173,7 @@ public class Escaping {
                     textMapper.addOriginalText(startIndex + 1, endIndex);
                 }
             } else {
-                byte[] bytes = s.toString().getBytes(Charset.forName("UTF-8"));
+                byte[] bytes = s.toString().getBytes(StandardCharsets.UTF_8);
                 StringBuilder sbItem = new StringBuilder();
 
                 for (byte b : bytes) {

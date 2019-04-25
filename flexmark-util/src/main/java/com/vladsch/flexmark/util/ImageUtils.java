@@ -65,7 +65,7 @@ public class ImageUtils {
         return getImageFromTransferable(transferable);
     }
 
-    public static Image getImageFromTransferable(final Transferable transferable) {
+    public static Image getImageFromTransferable(Transferable transferable) {
         try {
             if (transferable != null && transferable.isDataFlavorSupported(DataFlavor.imageFlavor)) {
                 return (Image) transferable.getTransferData(DataFlavor.imageFlavor);
@@ -218,7 +218,7 @@ public class ImageUtils {
                     byte[] imageBytes = new BASE64Decoder().decodeBuffer(encodedImage);
 
                     ByteArrayInputStream bis = new ByteArrayInputStream(imageBytes);
-                    final BufferedImage bufferedImage = ImageIO.read(bis);
+                    BufferedImage bufferedImage = ImageIO.read(bis);
                     bis.close();
                     return bufferedImage;
                 }
@@ -251,7 +251,7 @@ public class ImageUtils {
                 byte[] imageBytes = new BASE64Decoder().decodeBuffer(encodedImage);
 
                 ByteArrayInputStream bis = new ByteArrayInputStream(imageBytes);
-                final BufferedImage bufferedImage = ImageIO.read(bis);
+                BufferedImage bufferedImage = ImageIO.read(bis);
                 bis.close();
                 return bufferedImage;
             }
@@ -366,7 +366,7 @@ public class ImageUtils {
 
         if (invert) {
             // invert
-            final int rgb = image.getRGB(x + w / 2, y + h / 2);
+            int rgb = image.getRGB(x + w / 2, y + h / 2);
             borderColor = Color.getColor("", ~(rgb & 0xFFFFFF));
         }
 
@@ -407,7 +407,7 @@ public class ImageUtils {
 
         if (invert) {
             // invert
-            final int rgb = image.getRGB(x + w / 2, y + h / 2);
+            int rgb = image.getRGB(x + w / 2, y + h / 2);
             borderColor = Color.getColor("", ~(rgb & 0xFFFFFF));
         }
 
@@ -529,8 +529,8 @@ public class ImageUtils {
             int x, int y, int w, int h,
             int borderWidth, int cornerRadius,
             Color outerFillColor,
-            final int outerBorderWidth,
-            final int outerCornerRadius,
+            int outerBorderWidth,
+            int outerCornerRadius,
             boolean applyToImage
     ) {
         //BufferedImage output = UIUtil.createImage(w, h, BufferedImage.TYPE_INT_ARGB);
@@ -587,8 +587,8 @@ public class ImageUtils {
             int x, int y, int w, int h,
             int borderWidth,
             Color outerFillColor,
-            final int outerBorderWidth,
-            final int outerCornerRadius,
+            int outerBorderWidth,
+            int outerCornerRadius,
             boolean applyToImage
     ) {
         //BufferedImage output = UIUtil.createImage(w, h, BufferedImage.TYPE_INT_ARGB);
@@ -658,7 +658,7 @@ public class ImageUtils {
     /*
      * http://stackoverflow.com/questions/665406/how-to-make-a-color-transparent-in-a-bufferedimage-and-save-as-png
      */
-    public static Image toTransparent(BufferedImage image, final Color color, final int tolerance) {
+    public static Image toTransparent(BufferedImage image, Color color, int tolerance) {
         //        ImageFilter filter = new RGBImageFilter() {
         //            public final int filterRGB(int x, int y, int rgb) {
         //                return (rgb << 8) & 0xFF000000;

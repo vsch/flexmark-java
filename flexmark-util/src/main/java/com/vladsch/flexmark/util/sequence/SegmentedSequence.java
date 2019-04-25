@@ -48,7 +48,7 @@ public final class SegmentedSequence extends BasedSequenceImpl {
     }
 
     @Override
-    public Range getIndexRange(final int startOffset, final int endOffset) {
+    public Range getIndexRange(int startOffset, int endOffset) {
         // we assume that start/end is within our range
         int start = MIN_VALUE;
         int end = MIN_VALUE;
@@ -159,7 +159,7 @@ public final class SegmentedSequence extends BasedSequenceImpl {
         return SubSequence.NULL;
     }
 
-    private SegmentedSequence(List<BasedSequence> segments, final int startOffset, final int endOffset) {
+    private SegmentedSequence(List<BasedSequence> segments, int startOffset, int endOffset) {
         this.baseSeq = segments.get(0).getBaseSequence();
         this.startOffset = startOffset;
         this.endOffset = endOffset;

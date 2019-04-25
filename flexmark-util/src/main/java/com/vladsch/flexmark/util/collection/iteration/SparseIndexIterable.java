@@ -5,6 +5,7 @@ import java.util.BitSet;
 /**
  * @deprecated not tested
  */
+@Deprecated
 public class SparseIndexIterable implements ReversibleIterable<Integer> {
     private final int[] myStarts;
     private final int[] myEnds;

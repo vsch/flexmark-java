@@ -12,12 +12,12 @@ public interface CharWidthProvider {
         }
 
         @Override
-        public int charWidth(final char c) {
+        public int charWidth(char c) {
             return 1;
         }
 
         @Override
-        public int charWidth(final CharSequence s) {
+        public int charWidth(CharSequence s) {
             return s.length();
         }
     };

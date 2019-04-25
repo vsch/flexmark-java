@@ -6,7 +6,7 @@ public class TableCaptionSection extends TableSection {
     public static final TableCell NULL_CELL = new TableCell(BasedSequence.NULL, BasedSequence.NULL, BasedSequence.NULL, 1, 0);
     public static final TableCell DEFAULT_CELL = new TableCell("[", "", "]", 1, 1);
 
-    public TableCaptionSection(final TableSectionType sectionType) {
+    public TableCaptionSection(TableSectionType sectionType) {
         super(sectionType);
     }
 

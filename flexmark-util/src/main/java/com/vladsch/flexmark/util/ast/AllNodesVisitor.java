@@ -7,7 +7,7 @@ public abstract class AllNodesVisitor {
         visitChildren(node);
     }
 
-    private void visitChildren(final Node parent) {
+    private void visitChildren(Node parent) {
         Node node = parent.getFirstChild();
         while (node != null) {
             // A subclass of this visitor might modify the node, resulting in getNext returning a different node or no

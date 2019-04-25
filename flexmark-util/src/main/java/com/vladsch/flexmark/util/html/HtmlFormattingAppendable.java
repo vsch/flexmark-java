@@ -38,7 +38,7 @@ public interface HtmlFormattingAppendable extends LineFormattingAppendable {
     HtmlFormattingAppendable tag(CharSequence tagName);
     HtmlFormattingAppendable tag(CharSequence tagName, Runnable runnable);
     HtmlFormattingAppendable tag(CharSequence tagName, boolean voidElement);
-    HtmlFormattingAppendable tag(CharSequence tagName, final boolean withIndent, final boolean withLine, Runnable runnable);
+    HtmlFormattingAppendable tag(CharSequence tagName, boolean withIndent, boolean withLine, Runnable runnable);
 
     HtmlFormattingAppendable tagVoidLine(CharSequence tagName);
     HtmlFormattingAppendable tagLine(CharSequence tagName);

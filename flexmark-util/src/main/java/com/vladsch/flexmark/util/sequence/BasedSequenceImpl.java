@@ -1,16 +1,8 @@
 package com.vladsch.flexmark.util.sequence;
 
-import com.vladsch.flexmark.util.Pair;
 import com.vladsch.flexmark.util.Utils;
 import com.vladsch.flexmark.util.html.Escaping;
 import com.vladsch.flexmark.util.mappers.CharMapper;
-import com.vladsch.flexmark.util.mappers.LowerCaseMapper;
-import com.vladsch.flexmark.util.mappers.UpperCaseMapper;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
 
 /**
  * A CharSequence that references original char sequence and maps '\0' to '\uFFFD'

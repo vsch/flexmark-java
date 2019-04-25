@@ -1,6 +1,5 @@
-package com.vladsch.flexmark.util;
+package com.vladsch.flexmark.util.ast;
 
-import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.options.DataHolder;
 
 /**

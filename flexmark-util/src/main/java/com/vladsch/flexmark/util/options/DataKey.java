@@ -1,12 +1,16 @@
 package com.vladsch.flexmark.util.options;
 
-import com.vladsch.flexmark.util.collection.DataValueFactory;
-
 public class DataKey<T> {
     private final String name;
     private final DataValueFactory<T> factory;
     private final T defaultValue;
 
+    /**
+     * Creates a DataKey with a computed default value dynamically.
+     *
+     * @param name    See {@link #getName()}.
+     * @param factory data value factory for creating a new default value for the key
+     */
     public DataKey(String name, DataValueFactory<T> factory) {
         this.name = name;
         this.defaultValue = factory.apply(null);
@@ -14,24 +18,20 @@ public class DataKey<T> {
     }
 
     /**
-     * Creates a {@link DataKey} with a dynamic fallback to the value of another key.
+     * Creates a DataKey with a dynamic default value taken from a value of another key
      * <p>
-     * NOTE: for proper delegation of one key to another you need to use
-     * {@link com.vladsch.flexmark.util.collection.DynamicDefaultKey} which does not cache the
-     * returned default value but will always delegate to it until this key
+     * does not cache the returned default value but will always delegate to another key until this key
      * gets its own value set.
      *
      * @param name       See {@link #getName()}.
-     * @param defaultKey The {@link DataKey} to take the default value from.
+     * @param defaultKey The DataKey to take the default value from at time of construction.
      */
-    private DataKey(String name, final DataKey<? extends T> defaultKey) {
+    public DataKey(String name, DataKey<? extends T> defaultKey) {
         this(name, defaultKey::getFrom);
     }
 
-    public DataKey(String name, final T defaultValue) {
-        this.name = name;
-        this.defaultValue = defaultValue;
-        this.factory = options -> defaultValue;
+    public DataKey(String name, T defaultValue) {
+        this(name, options -> defaultValue);
     }
 
     public String getName() {
@@ -43,11 +43,7 @@ public class DataKey<T> {
     }
 
     public T getDefaultValue(DataHolder holder) {
-        return defaultValue;
-    }
-
-    public T getValue(Object value) {
-        return (T) value;
+        return holder == null ? defaultValue : factory.apply(holder);
     }
 
     public T getFrom(DataHolder holder) {

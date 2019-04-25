@@ -1,10 +1,9 @@
 package com.vladsch.flexmark.util.ast;
 
-import com.vladsch.flexmark.util.KeepType;
-import java.util.function.Consumer;
 import com.vladsch.flexmark.util.options.DataKey;
 
 import java.util.*;
+import java.util.function.Consumer;
 
 public abstract class NodeRepository<T> implements Map<String, T> {
     protected final ArrayList<T> nodeList = new ArrayList<T>();
@@ -17,7 +16,7 @@ public abstract class NodeRepository<T> implements Map<String, T> {
     // function implementing extraction of referenced elements by given node or its children
     public abstract Set<T> getReferencedElements(Node parent);
 
-    protected void visitNodes(Node parent, final Consumer<Node> runnable, Class<? extends Node>... classes) {
+    protected void visitNodes(Node parent, Consumer<Node> runnable, Class<? extends Node>... classes) {
         ArrayList<VisitHandler<?>> handlers = new ArrayList<>();
         for (Class<? extends Node> clazz : classes) {
             handlers.add(
@@ -29,7 +28,7 @@ public abstract class NodeRepository<T> implements Map<String, T> {
                     })
             );
         }
-        final NodeVisitor visitor = new NodeVisitor(handlers);
+        NodeVisitor visitor = new NodeVisitor(handlers);
         visitor.visit(parent);
     }
 

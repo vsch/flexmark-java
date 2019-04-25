@@ -8,7 +8,6 @@ import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.html.renderer.LinkType;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.builder.Extension;
-import com.vladsch.flexmark.util.collection.DynamicDefaultKey;
 import com.vladsch.flexmark.util.options.DataKey;
 import com.vladsch.flexmark.util.options.MutableDataHolder;
 
@@ -35,7 +34,7 @@ public class WikiLinkExtension implements Parser.ParserExtension, HtmlRenderer.H
      * Will get its value from option {@link #LINK_PREFIX} until its own value is set.
      * </p>
      */
-    public static final DataKey<String> LINK_PREFIX_ABSOLUTE = new DynamicDefaultKey<>("LINK_PREFIX_ABSOLUTE", LINK_PREFIX);
+    public static final DataKey<String> LINK_PREFIX_ABSOLUTE = new DataKey<String>("LINK_PREFIX_ABSOLUTE", LINK_PREFIX);
 
     public static final DataKey<String> IMAGE_PREFIX = new DataKey<>("IMAGE_PREFIX", "");
 
@@ -46,7 +45,7 @@ public class WikiLinkExtension implements Parser.ParserExtension, HtmlRenderer.H
      * Will get its value from option {@link #IMAGE_PREFIX} until its own value is set.
      * </p>
      */
-    public static final DataKey<String> IMAGE_PREFIX_ABSOLUTE = new DynamicDefaultKey<String>("IMAGE_PREFIX_ABSOLUTE", IMAGE_PREFIX);
+    public static final DataKey<String> IMAGE_PREFIX_ABSOLUTE = new DataKey<String>("IMAGE_PREFIX_ABSOLUTE", IMAGE_PREFIX);
 
     public static final DataKey<Boolean> IMAGE_LINKS = new DataKey<>("IMAGE_LINKS", false);
     public static final DataKey<String> LINK_FILE_EXTENSION = new DataKey<>("LINK_FILE_EXTENSION", "");

@@ -7,7 +7,7 @@ public interface TableManipulator {
 
     final TableManipulator NULL = new TableManipulator() {
         @Override
-        public void apply(final MarkdownTable table, final Node tableNoe) {
+        public void apply(MarkdownTable table, Node tableNoe) {
 
         }
     };

@@ -89,12 +89,13 @@ Future 0.50.0
 
 * [x] Break: make Java 8 minimum version and use JDK 8 for compilation
   * Fix: IntelliJ Migration contained in [migrate flexmark-java 0_42_x to 0_50_0.xml], to use:
-    * copy to IntelliJ application settings to `migrations` subdirectory
+    * copy to IntelliJ application settings to `migration` subdirectory
     * if you have the project which you want to migrate open, then close it
     * open the project in IntelliJ Ultimate or Community
     * update the flexmark-java dependency version to 0.42.0 (or later) and make sure the new
       library is downloaded/updated in the project.
-    * use menu `Refactor` > `Migrate...`
+    * use menu `Refactor` > `Migrate...` or search everywhere (double shift activation) and
+      search for migrate action.
     * select `migrate flexmark-java 0.42.x to 0.50.0`
     * press `Run`
     * in the refactoring preview tool window that opens hit `Do Refactor`
@@ -105,18 +106,40 @@ Future 0.50.0
   * [x] replace `Factory` with `Supplier`, requires changing `create()` with `get()`
   * [x] replace `Computable` with `Function`, requires changing `compute()` with `apply()` and
         reversing template parameters.
-  * [x] replace `ComputableFactory` with `Function`, requires changing `create()` with
-        `apply()` and reversing template parameters.
-  * [x] replace `ComputeFactory` with `Function`, requires changing `create()` with
-        `apply()` and reversing template parameters.
+  * [x] replace `ComputableFactory` with `Function`, requires changing `create()` with `apply()`
+        and reversing template parameters.
+  * [x] replace `ComputeFactory` with `Function`, requires changing `create()` with `apply()`
+        and reversing template parameters.
   * [x] replace all factory interfaces to be compatible with `Function` interface and change
         `create()` with `apply()`
+  * [x] replace `com.vladsch.flexmark.util.collection.Consumer` with
+        `java.util.function.Consumer`
+  * [x] clean up `DataKey` and `DataHolder` related classes
+    * [x] move `com.vladsch.flexmark.util.collection.DataValueFactory` to
+          `com.vladsch.flexmark.util.DataValueFactory`
+    * [x] replace `com.vladsch.flexmark.util.collection.DynamicDefaultKey` with
+          `com.vladsch.flexmark.util.options.DataKey`
+    * [x] change `MutableDataHolder.getOrCompute(DataKey<T>, DataValueFactory<T>)` to
+          `MutableDataHolder.getOrCompute(DataKey<T>)` with the data value factory taken from
+          they key.
+  * [x] remove unused `ItemIndexSetMap`, use `IndexedItemSetMap` instead
+  * [x] move `flexmark-util` Node related classes and interfaces to `com.vladsch.flexmark.util.ast`
+    * [x] move `com.vladsch.flexmark.util.NodeTracker` to `com.vladsch.flexmark.util.ast.NodeTracker`
+    * [x] move `com.vladsch.flexmark.util.BlockTracker` to `com.vladsch.flexmark.util.ast.BlockTracker`
+    * [x] move `com.vladsch.flexmark.util.KeepType` to `com.vladsch.flexmark.util.ast.KeepType`
+    * [x] move `com.vladsch.flexmark.util.IParse` to `com.vladsch.flexmark.util.ast.IParse`
+    * [x] move `com.vladsch.flexmark.util.IRender` to `com.vladsch.flexmark.util.ast.IRender`
+    * [x] move `com.vladsch.flexmark.util.collection.NodeClassifierVisitor` to `com.vladsch.flexmark.util.ast.NodeClassifierVisitor`
+    * [x] move `com.vladsch.flexmark.util.collection.NodeCollectingVisitor` to `com.vladsch.flexmark.util.ast.NodeCollectingVisitor`
+    * [x] move `com.vladsch.flexmark.util.collection.ClassifyingNodeTracker` to `com.vladsch.flexmark.util.ast.ClassifyingNodeTracker`
+    * [x] move `com.vladsch.flexmark.util.mappers.NodeClassifier` to `com.vladsch.flexmark.util.ast.NodeClassifier`
 * [x] Add: `LineFormattingAppendable` and `LineFormattingAppendableImpl`
   * [x] Fix: deprecate `FormattingAppendable` to be replaced by `LineFormattingAppendable`
   * [x] Fix: deprecate `FormattingAppendableImpl` to be replaced by
         `LineFormattingAppendableImpl`
   * [x] Fix: replace all uses of `FormattingAppendable` by `LineFormattingAppendable`
   * [x] Fix: replace all uses of `FormattingAppendableImpl` by `LineFormattingAppendableImpl`
+  * [x] Delete: `FormattingAppendable` and `FormattingAppendableImpl`
 * [x] Fix: Factor out BasedSequenceImpl functionality that does not depend on BasedSequence and
       can be applied to any CharSequence into its own `RichCharSequence` interface with default
       abstract implementation in `RichCharSequenceBase` and implementation in
@@ -590,7 +613,6 @@ Future 0.50.0
       * `com.vladsch.flexmark.formatter.internal.PhasedNodeFormatter` to `com.vladsch.flexmark.formatter.PhasedNodeFormatter`
       * `com.vladsch.flexmark.formatter.internal.NodeFormatterSubContext` to `com.vladsch.flexmark.formatter.NodeFormatterSubContext`
 <!--@formatter:on-->
-
 0.35.10
 -------
 

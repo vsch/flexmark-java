@@ -21,7 +21,7 @@ public abstract class BuilderBase<T extends BuilderBase> extends MutableDataSet 
     /**
      * Remove apiPoint from state information
      *
-     * @param apiPoint
+     * @param apiPoint api point object
      */
     protected abstract void removeApiPoint(Object apiPoint);
 
@@ -78,11 +78,7 @@ public abstract class BuilderBase<T extends BuilderBase> extends MutableDataSet 
 
         if (extension != null) {
             Class<? extends Extension> extensionClass = extension.getClass();
-            HashSet<Object> apiPoints = extensionApiPoints.get(extensionClass);
-            if (apiPoints == null) {
-                apiPoints = new HashSet<>();
-                extensionApiPoints.put(extensionClass, apiPoints);
-            }
+            HashSet<Object> apiPoints = extensionApiPoints.computeIfAbsent(extensionClass, k -> new HashSet<>());
             apiPoints.add(apiPoint);
         }
     }
@@ -109,13 +105,12 @@ public abstract class BuilderBase<T extends BuilderBase> extends MutableDataSet 
     /**
      * Tracks keys set by extension initialization
      *
-     * @param key
-     * @param value
-     * @param <T>
-     * @return
+     * @param key   data key
+     * @param value value for the key
+     * @return builder
      */
     @Override
-    public <T> MutableDataSet set(final DataKey<? extends T> key, final T value) {
+    public <T> MutableDataSet set(DataKey<? extends T> key, T value) {
         addExtensionApiPoint(key);
         return super.set(key, value);
     }

@@ -6,7 +6,7 @@ public class LengthTrackingAppendableImpl implements LengthTrackingAppendable {
     private final Appendable myAppendable;
     private int myLength;
 
-    public LengthTrackingAppendableImpl(final Appendable appendable) {
+    public LengthTrackingAppendableImpl(Appendable appendable) {
         myAppendable = appendable;
         myLength = 0;
     }
@@ -17,21 +17,21 @@ public class LengthTrackingAppendableImpl implements LengthTrackingAppendable {
     }
 
     @Override
-    public LengthTrackingAppendable append(final CharSequence csq) throws IOException {
+    public LengthTrackingAppendable append(CharSequence csq) throws IOException {
         myAppendable.append(csq);
         myLength += csq.length();
         return this;
     }
 
     @Override
-    public LengthTrackingAppendable append(final CharSequence csq, final int start, final int end) throws IOException {
+    public LengthTrackingAppendable append(CharSequence csq, int start, int end) throws IOException {
         myAppendable.append(csq, start, end);
         myLength += end - start;
         return this;
     }
 
     @Override
-    public LengthTrackingAppendable append(final char c) throws IOException {
+    public LengthTrackingAppendable append(char c) throws IOException {
         myAppendable.append(c);
         myLength++;
         return this;
@@ -41,7 +41,7 @@ public class LengthTrackingAppendableImpl implements LengthTrackingAppendable {
         return myAppendable;
     }
 
-    public static LengthTrackingAppendable of(final Appendable appendable) {
+    public static LengthTrackingAppendable of(Appendable appendable) {
         return new LengthTrackingAppendableImpl(appendable);
     }
 

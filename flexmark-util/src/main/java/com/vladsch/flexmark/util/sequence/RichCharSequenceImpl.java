@@ -25,12 +25,12 @@ final public class RichCharSequenceImpl extends RichCharSequenceBase<RichCharSeq
     }
 
     @Override
-    public RichCharSequenceImpl sequenceOf(final CharSequence charSequence, final int startIndex, final int endIndex) {
+    public RichCharSequenceImpl sequenceOf(CharSequence charSequence, int startIndex, int endIndex) {
         return of(charSequence, startIndex, endIndex);
     }
 
     @Override
-    public RichCharSequenceImpl subSequence(final int start, final int end) {
+    public RichCharSequenceImpl subSequence(int start, int end) {
         if (start == 0 && end == charSequence.length()) return this;
         return new RichCharSequenceImpl(charSequence.subSequence(start, end));
     }
@@ -41,7 +41,7 @@ final public class RichCharSequenceImpl extends RichCharSequenceBase<RichCharSeq
     }
 
     @Override
-    public char charAt(final int index) {
+    public char charAt(int index) {
         return charSequence.charAt(index);
     }
 

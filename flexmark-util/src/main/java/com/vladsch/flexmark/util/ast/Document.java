@@ -1,7 +1,6 @@
 package com.vladsch.flexmark.util.ast;
 
 import com.vladsch.flexmark.util.Utils;
-import com.vladsch.flexmark.util.collection.DataValueFactory;
 import com.vladsch.flexmark.util.options.*;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
@@ -38,14 +37,14 @@ public class Document extends Block implements MutableDataHolder {
     }
 
     @Override
-    public MutableDataHolder setIn(final MutableDataHolder dataHolder) {
+    public MutableDataHolder setIn(MutableDataHolder dataHolder) {
         return dataSet.setIn(dataHolder);
     }
 
     @Override
     public int getLineCount() {
         if (lineSegments == EMPTY_LIST) {
-            final char c = getChars().lastChar();
+            char c = getChars().lastChar();
             return (c == '\n' || c == '\r' ? 0 : 1) + getLineNumber(getChars().length());
         } else {
             return lineSegments.size();
@@ -54,21 +53,21 @@ public class Document extends Block implements MutableDataHolder {
 
     /**
      * Get line number at offset
-     *
+     * <p>
      * Next line starts after the EOL sequence.
      * offsets between \r and \n are considered part of the same line as offset before \r.
      *
-     * @param offset  offset in document text
-     * @return  line number at offset
+     * @param offset offset in document text
+     * @return line number at offset
      */
-    public int getLineNumber(final int offset) {
+    public int getLineNumber(int offset) {
         if (lineSegments == EMPTY_LIST) {
             BasedSequence preText = getChars().baseSubSequence(0, Utils.maxLimit(offset + 1, getChars().length()));
 
             if (preText.isEmpty()) return 0;
             int lineNumber = 0;
             int nextLineEnd = preText.endOfLineAnyEOL(0);
-            final int length = preText.length();
+            int length = preText.length();
             while (nextLineEnd < length) {
                 int lengthWithEOL = nextLineEnd + preText.eolLength(nextLineEnd);
                 if (offset >= lengthWithEOL) lineNumber++; // do not treat offset between \r and \n as complete line
@@ -77,7 +76,7 @@ public class Document extends Block implements MutableDataHolder {
 
             return lineNumber;
         } else {
-            final int iMax = lineSegments.size();
+            int iMax = lineSegments.size();
             for (int i = 0; i < iMax; i++) {
                 if (offset < lineSegments.get(i).getEndOffset()) {
                     return i;
@@ -88,10 +87,10 @@ public class Document extends Block implements MutableDataHolder {
     }
 
     @Override
-    public <T> T getOrCompute(DataKey<T> key, DataValueFactory<T> factory) { return dataSet.getOrCompute(key, factory); }
+    public <T> T getOrCompute(DataKey<T> key) { return dataSet.getOrCompute(key); }
 
     @Override
-    public <T> MutableDataHolder remove(final DataKey<T> key) { return dataSet.remove(key); }
+    public <T> MutableDataHolder remove(DataKey<T> key) { return dataSet.remove(key); }
 
     @Override
     public <T> MutableDataHolder set(DataKey<? extends T> key, T value) { return dataSet.set(key, value);}

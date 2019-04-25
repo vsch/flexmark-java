@@ -9,7 +9,7 @@ public class MaxAggregator implements BiFunction<Integer, Integer, Integer> {
     }
 
     @Override
-    public Integer apply(final Integer aggregate, final Integer next) {
+    public Integer apply(Integer aggregate, Integer next) {
         return next == null || aggregate != null && aggregate >= next ? aggregate : next;
     }
 }

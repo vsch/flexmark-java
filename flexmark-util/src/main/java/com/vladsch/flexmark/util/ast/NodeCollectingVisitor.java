@@ -1,9 +1,10 @@
-package com.vladsch.flexmark.util.collection;
+package com.vladsch.flexmark.util.ast;
 
-import java.util.function.Function;
-import com.vladsch.flexmark.util.ast.Node;
+import com.vladsch.flexmark.util.collection.ClassificationBag;
+import com.vladsch.flexmark.util.collection.SubClassingBag;
 
 import java.util.*;
+import java.util.function.Function;
 
 public class NodeCollectingVisitor {
     public static final Function<Node, Class> NODE_CLASSIFIER = Node::getClass;

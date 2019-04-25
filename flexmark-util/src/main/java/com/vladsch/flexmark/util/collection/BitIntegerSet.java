@@ -10,6 +10,7 @@ import java.nio.LongBuffer;
 import java.util.BitSet;
 import java.util.Collection;
 import java.util.Set;
+import java.util.function.Consumer;
 import java.util.function.IntConsumer;
 
 public class BitIntegerSet implements Set<Integer>, ReversibleIterable<Integer> {

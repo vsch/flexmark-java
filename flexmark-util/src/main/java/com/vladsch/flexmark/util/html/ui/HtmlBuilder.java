@@ -30,7 +30,7 @@ public class HtmlBuilder extends HtmlFormattingAppendableBase<HtmlBuilder> {
         super(0, LineFormattingAppendable.PASS_THROUGH);
     }
 
-    public HtmlBuilder(final int indentSize, final int formatOptions) {
+    public HtmlBuilder(int indentSize, int formatOptions) {
         super(indentSize, formatOptions);
     }
 
@@ -60,7 +60,7 @@ public class HtmlBuilder extends HtmlFormattingAppendableBase<HtmlBuilder> {
                 if (styler == null) throw new IllegalStateException("Don't know how to style " + convert.getClass().getSimpleName());
 
                 //noinspection unchecked
-                final String value = styler.getStyle(styler.getStyleable(convert));
+                String value = styler.getStyle(styler.getStyleable(convert));
                 if (value != null && !value.isEmpty()) {
                     Attribute style = AttributeImpl.of(Attribute.STYLE_ATTR, value);
                     super.attr(style);
@@ -72,24 +72,24 @@ public class HtmlBuilder extends HtmlFormattingAppendableBase<HtmlBuilder> {
     }
 
     @Override
-    public HtmlBuilder attr(final CharSequence name, final CharSequence value) {
+    public HtmlBuilder attr(CharSequence name, CharSequence value) {
         super.withAttr();
         return super.attr(name, value);
     }
 
-    public HtmlBuilder style(final CharSequence value) {
+    public HtmlBuilder style(CharSequence value) {
         super.withAttr();
         return super.attr(Attribute.STYLE_ATTR, value);
     }
 
     @Override
-    public HtmlBuilder attr(final Attribute... attribute) {
+    public HtmlBuilder attr(Attribute... attribute) {
         super.withAttr();
         return super.attr(attribute);
     }
 
     @Override
-    public HtmlBuilder attr(final Attributes attributes) {
+    public HtmlBuilder attr(Attributes attributes) {
         super.withAttr();
         return super.attr(attributes);
     }
@@ -104,15 +104,15 @@ public class HtmlBuilder extends HtmlFormattingAppendableBase<HtmlBuilder> {
         return closeSpan();
     }
 
-    public HtmlBuilder span(final boolean withLine, final Runnable runnable) {
+    public HtmlBuilder span(boolean withLine, Runnable runnable) {
         return tag("span", false, withLine, runnable);
     }
 
-    public HtmlBuilder span(final Runnable runnable) {
+    public HtmlBuilder span(Runnable runnable) {
         return span(false, runnable);
     }
 
-    public HtmlBuilder spanLine(final Runnable runnable) {
+    public HtmlBuilder spanLine(Runnable runnable) {
         return span(true, runnable);
     }
 
@@ -123,13 +123,13 @@ public class HtmlBuilder extends HtmlFormattingAppendableBase<HtmlBuilder> {
     // statics
     public static final HashMap<Class, HtmlStyler> stylerMap = new HashMap<>();
     static {
-        final ColorStyler colorStyler = new ColorStyler();
+        ColorStyler colorStyler = new ColorStyler();
         stylerMap.put(BackgroundColor.class, colorStyler);
         stylerMap.put(Color.class, colorStyler);
         //stylerMap.put(JBColor.class, colorStyler);
         stylerMap.put(java.awt.Color.class, colorStyler);
 
-        final FontStyler fontStyler = new FontStyler();
+        FontStyler fontStyler = new FontStyler();
         stylerMap.put(Font.class, fontStyler);
         stylerMap.put(FontUIResource.class, fontStyler);
 
@@ -163,7 +163,7 @@ public class HtmlBuilder extends HtmlFormattingAppendableBase<HtmlBuilder> {
         HtmlStyler styler = getHtmlStyler(item);
         if (styler != null) {
             //noinspection unchecked
-            final String value = styler.getStyle(styler.getStyleable(item));
+            String value = styler.getStyle(styler.getStyleable(item));
             if (value != null && !value.isEmpty()) {
                 return AttributeImpl.of(Attribute.STYLE_ATTR, value);
             }

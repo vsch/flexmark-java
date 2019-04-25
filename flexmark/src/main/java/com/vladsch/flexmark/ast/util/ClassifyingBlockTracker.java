@@ -2,7 +2,7 @@ package com.vladsch.flexmark.ast.util;
 
 import com.vladsch.flexmark.parser.block.BlockParser;
 import com.vladsch.flexmark.parser.block.BlockParserTracker;
-import com.vladsch.flexmark.util.BlockTracker;
+import com.vladsch.flexmark.util.ast.BlockTracker;
 import com.vladsch.flexmark.util.Paired;
 import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.util.ast.Node;
@@ -11,7 +11,7 @@ import com.vladsch.flexmark.util.collection.CollectionHost;
 import com.vladsch.flexmark.util.collection.OrderedMultiMap;
 import com.vladsch.flexmark.util.collection.OrderedSet;
 import com.vladsch.flexmark.util.collection.iteration.ReversiblePeekingIterable;
-import com.vladsch.flexmark.util.mappers.NodeClassifier;
+import com.vladsch.flexmark.util.ast.NodeClassifier;
 
 public class ClassifyingBlockTracker implements BlockTracker, BlockParserTracker {
     protected final ClassificationBag<Class<?>, Node> nodeClassifier = new ClassificationBag<Class<?>, Node>(NodeClassifier.INSTANCE);

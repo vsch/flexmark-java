@@ -48,13 +48,13 @@ public final class MappedSequence extends BasedSequenceImpl {
 
     @Override
     public BasedSequence subSequence(int start, int end) {
-        final BasedSequence baseSequence = base.subSequence(start, end);
+        BasedSequence baseSequence = base.subSequence(start, end);
         return baseSequence == base ? this : new MappedSequence(mapper, baseSequence);
     }
 
     @Override
-    public BasedSequence baseSubSequence(final int start, final int end) {
-        final BasedSequence baseSequence = base.subSequence(start, end);
+    public BasedSequence baseSubSequence(int start, int end) {
+        BasedSequence baseSequence = base.subSequence(start, end);
         return baseSequence == base ? this : new MappedSequence(mapper, baseSequence);
     }
 
@@ -79,7 +79,7 @@ public final class MappedSequence extends BasedSequenceImpl {
     }
 
     @Override
-    public int getIndexOffset(final int index) {
+    public int getIndexOffset(int index) {
         return base.getIndexOffset(index);
     }
 

@@ -1,11 +1,10 @@
 package com.vladsch.flexmark.util.collection;
 
-import java.util.function.Function;
-
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Function;
 
 public class KeyedItemFactoryMap<K, I, P> implements Map<K, Function<P, I>> {
     protected final HashMap<K, Function<P, I>> factoryMap;

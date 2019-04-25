@@ -1,11 +1,7 @@
 package com.vladsch.flexmark.util.sequence;
 
-import com.vladsch.flexmark.util.Pair;
-import com.vladsch.flexmark.util.mappers.CharMapper;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 /**
  * A CharSequence that references original char sequence and maps '\0' to '\uFFFD'

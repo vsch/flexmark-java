@@ -95,7 +95,7 @@ public final class PrefixedSubSequence extends BasedSequenceImpl {
 
     @Override
     public String toString() {
-        return prefix + String.valueOf(base);
+        return prefix + base;
     }
 
     @Override

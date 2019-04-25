@@ -40,15 +40,15 @@ public class TableCellOffsetInfo {
     final public Integer insideOffset;      // offset from start of column or null if not inside column
 
     public TableCellOffsetInfo(
-            final int offset,
-            final MarkdownTable table,
-            final TableSection section,
-            final TableRow tableRow,
-            final TableCell tableCell,
-            final int row,
-            final int column,
-            final Integer insideColumn,
-            final Integer insideOffset
+            int offset,
+            MarkdownTable table,
+            TableSection section,
+            TableRow tableRow,
+            TableCell tableCell,
+            int row,
+            int column,
+            Integer insideColumn,
+            Integer insideOffset
     ) {
         this.offset = offset;
         this.table = table;
@@ -239,7 +239,7 @@ public class TableCellOffsetInfo {
      * @param stopPointsMap stop points of interest map by section or null
      * @return next stop point offset or offset after end of table
      */
-    public TableCellOffsetInfo nextOffsetStop(final Map<TableSectionType, Integer> stopPointsMap) {
+    public TableCellOffsetInfo nextOffsetStop(Map<TableSectionType, Integer> stopPointsMap) {
         int stopOffset = getStopOffset(offset, table, stopPointsMap, true);
         if (stopOffset != -1) {
             return table.getCellOffsetInfo(stopOffset);
@@ -262,7 +262,7 @@ public class TableCellOffsetInfo {
      * @param stopPointsMap stop points of interest map by section or null for default
      * @return previous stop point offset or start of table offset
      */
-    public TableCellOffsetInfo previousOffsetStop(final Map<TableSectionType, Integer> stopPointsMap) {
+    public TableCellOffsetInfo previousOffsetStop(Map<TableSectionType, Integer> stopPointsMap) {
         int stopOffset = getStopOffset(offset, table, stopPointsMap, false);
         if (stopOffset != -1) {
             return table.getCellOffsetInfo(stopOffset);
@@ -304,23 +304,23 @@ public class TableCellOffsetInfo {
      * @return stop point found or -1 if not found
      */
     private static int getStopOffset(
-            final int offset,
-            final MarkdownTable table,
+            int offset,
+            MarkdownTable table,
             Map<TableSectionType, Integer> stopPointsMap,
-            final boolean nextOffset
+            boolean nextOffset
     ) {
-        final Integer[] result = new Integer[] { null };
+        Integer[] result = new Integer[] { null };
 
-        final Map<TableSectionType, Integer> useStopPointsMap = stopPointsMap == null ? DEFAULT_STOP_POINTS_MAP : stopPointsMap;
-        final BiFunction<Integer, Integer, Integer> aggregator = nextOffset ? new BoundedMinAggregator(offset) : new BoundedMaxAggregator(offset);
+        Map<TableSectionType, Integer> useStopPointsMap = stopPointsMap == null ? DEFAULT_STOP_POINTS_MAP : stopPointsMap;
+        BiFunction<Integer, Integer, Integer> aggregator = nextOffset ? new BoundedMinAggregator(offset) : new BoundedMaxAggregator(offset);
 
         table.forAllSectionRows(new TableRowManipulator() {
             @Override
             public int apply(
-                    final TableRow row,
-                    final int allRowsIndex,
-                    final ArrayList<TableRow> rows,
-                    final int index
+                    TableRow row,
+                    int allRowsIndex,
+                    ArrayList<TableRow> rows,
+                    int index
             ) {
                 TableSection section = table.getAllRowsSection(allRowsIndex);
                 if (!row.cells.isEmpty() && useStopPointsMap.containsKey(section.sectionType)) {

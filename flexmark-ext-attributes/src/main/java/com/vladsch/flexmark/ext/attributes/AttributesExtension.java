@@ -6,10 +6,8 @@ import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.html.RendererBuilder;
 import com.vladsch.flexmark.html.RendererExtension;
 import com.vladsch.flexmark.parser.Parser;
-import com.vladsch.flexmark.util.KeepType;
+import com.vladsch.flexmark.util.ast.KeepType;
 import com.vladsch.flexmark.util.builder.Extension;
-import com.vladsch.flexmark.util.collection.DataValueFactory;
-import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.DataKey;
 import com.vladsch.flexmark.util.options.MutableDataHolder;
 

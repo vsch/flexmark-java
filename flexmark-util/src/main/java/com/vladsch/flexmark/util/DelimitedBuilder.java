@@ -204,7 +204,7 @@ public class DelimitedBuilder {
         return had();
     }
 
-    public DelimitedBuilder appendCodePoint(final int codePoint) {
+    public DelimitedBuilder appendCodePoint(int codePoint) {
         doPending();
         out.appendCodePoint(codePoint);
         return had();

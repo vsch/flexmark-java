@@ -26,52 +26,52 @@ public class TableCell {
     public final boolean afterSpace; // if adjustment should be done after space
     public final boolean afterDelete; // if adjustment should be done as if after delete
 
-    public TableCell(final CharSequence text, final int rowSpan, final int columnSpan) {
+    public TableCell(CharSequence text, int rowSpan, int columnSpan) {
         this(BasedSequence.NULL, text, BasedSequence.NULL, rowSpan, columnSpan, CellAlignment.NONE);
     }
 
     public TableCell(
-            final CharSequence text,
-            final int rowSpan,
-            final int columnSpan,
-            final CellAlignment alignment
+            CharSequence text,
+            int rowSpan,
+            int columnSpan,
+            CellAlignment alignment
     ) {
         this(BasedSequence.NULL, text, BasedSequence.NULL, rowSpan, columnSpan, alignment);
     }
 
     public TableCell(
             CharSequence openMarker,
-            final CharSequence text,
+            CharSequence text,
             CharSequence closeMarker,
-            final int rowSpan,
-            final int columnSpan
+            int rowSpan,
+            int columnSpan
     ) {
         this(openMarker, text, closeMarker, rowSpan, columnSpan, CellAlignment.NONE);
     }
 
     public TableCell(
-            final CharSequence openMarker,
-            final CharSequence text,
-            final CharSequence closeMarker,
-            final int rowSpan,
-            final int columnSpan,
-            final CellAlignment alignment
+            CharSequence openMarker,
+            CharSequence text,
+            CharSequence closeMarker,
+            int rowSpan,
+            int columnSpan,
+            CellAlignment alignment
     ) {
         this(openMarker, text, closeMarker, rowSpan, columnSpan, alignment, NOT_TRACKED, NOT_TRACKED, 0, false, false);
     }
 
     public TableCell(
-            final CharSequence openMarker,
-            final CharSequence text,
-            final CharSequence closeMarker,
-            final int rowSpan,
-            final int columnSpan,
-            final CellAlignment alignment,
-            final int trackedTextOffset,
-            final int spanTrackedOffset,
-            final int trackedTextAdjust,
-            final boolean afterSpace,
-            final boolean afterDelete
+            CharSequence openMarker,
+            CharSequence text,
+            CharSequence closeMarker,
+            int rowSpan,
+            int columnSpan,
+            CellAlignment alignment,
+            int trackedTextOffset,
+            int spanTrackedOffset,
+            int trackedTextAdjust,
+            boolean afterSpace,
+            boolean afterDelete
 
     ) {
         BasedSequence chars = BasedSequenceImpl.of(text);

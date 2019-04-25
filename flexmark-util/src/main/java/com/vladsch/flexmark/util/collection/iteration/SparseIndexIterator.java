@@ -1,12 +1,12 @@
 package com.vladsch.flexmark.util.collection.iteration;
 
-import com.vladsch.flexmark.util.collection.Consumer;
-
 import java.util.NoSuchElementException;
+import java.util.function.Consumer;
 
 /**
  * @deprecated not tested
  */
+@Deprecated
 public class SparseIndexIterator implements ReversibleIterator<Integer> {
     private final int[] myStarts;
     private final int[] myEnds;

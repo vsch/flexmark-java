@@ -13,7 +13,7 @@ public class BlankLine extends Block {
         return claimedBlankLine;
     }
 
-    public BlankLine setClaimedBlankLine(final Block claimedBlankLine) {
+    public BlankLine setClaimedBlankLine(Block claimedBlankLine) {
         this.claimedBlankLine = claimedBlankLine;
         return this;
     }
@@ -23,7 +23,7 @@ public class BlankLine extends Block {
         setCharsFromContent();
     }
 
-    public BlankLine(BasedSequence chars, final Block claimedBlankLine) {
+    public BlankLine(BasedSequence chars, Block claimedBlankLine) {
         super(chars);
         setCharsFromContent();
         this.claimedBlankLine = claimedBlankLine;

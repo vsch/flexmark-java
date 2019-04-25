@@ -27,7 +27,7 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
         this.out.setIndentPrefix(other.getIndentPrefix());
     }
 
-    public HtmlFormattingAppendableBase(int indentSize, final int formatOptions) {
+    public HtmlFormattingAppendableBase(int indentSize, int formatOptions) {
         this.out = new LineFormattingAppendableImpl(formatOptions);
         this.out.setIndentPrefix(RepeatedCharSequence.of(" ", indentSize).toString());
     }
@@ -223,7 +223,7 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
     }
 
     @Override
-    public List<String> getOpenTagsAfterLast(final CharSequence latestTag) {
+    public List<String> getOpenTagsAfterLast(CharSequence latestTag) {
         if (myOpenTags.isEmpty()) return Collections.EMPTY_LIST;
 
         List<String> tagList = new ArrayList<String>(myOpenTags);
@@ -279,7 +279,7 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
     }
 
     @Override
-    public T closeTag(final CharSequence tagName) {
+    public T closeTag(CharSequence tagName) {
         if (tagName.length() == 0) throw new IllegalStateException("closeTag called with tag:'" + tagName + "'");
 
         if (tagName.charAt(0) == '/') {
@@ -293,9 +293,9 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
     }
 
     @Override
-    public T tag(CharSequence tagName, final boolean withIndent, final boolean withLine, Runnable runnable) {
-        final boolean isLineOnChildText = lineOnChildText;
-        final boolean isIndentOnFirstEol = indentOnFirstEol;
+    public T tag(CharSequence tagName, boolean withIndent, boolean withLine, Runnable runnable) {
+        boolean isLineOnChildText = lineOnChildText;
+        boolean isIndentOnFirstEol = indentOnFirstEol;
         lineOnChildText = false;
         indentOnFirstEol = false;
 
@@ -350,37 +350,37 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
     }
 
     @Override
-    public T tagVoidLine(final CharSequence tagName) {
+    public T tagVoidLine(CharSequence tagName) {
         lineIf(!suppressOpenTagLine).tagVoid(tagName).lineIf(!suppressCloseTagLine);
         return (T) this;
     }
 
     @Override
-    public T tagLine(final CharSequence tagName) {
+    public T tagLine(CharSequence tagName) {
         lineIf(!suppressOpenTagLine).tag(tagName).lineIf(!suppressCloseTagLine);
         return (T) this;
     }
 
     @Override
-    public T tagLine(final CharSequence tagName, final boolean voidElement) {
+    public T tagLine(CharSequence tagName, boolean voidElement) {
         lineIf(!suppressOpenTagLine).tag(tagName, voidElement).lineIf(!suppressCloseTagLine);
         return (T) this;
     }
 
     @Override
-    public T tagLine(final CharSequence tagName, final Runnable runnable) {
+    public T tagLine(CharSequence tagName, Runnable runnable) {
         lineIf(!suppressOpenTagLine).tag(tagName, false, false, runnable).lineIf(!suppressCloseTagLine);
         return (T) this;
     }
 
     @Override
-    public T tagIndent(final CharSequence tagName, final Runnable runnable) {
+    public T tagIndent(CharSequence tagName, Runnable runnable) {
         tag(tagName, true, false, runnable);
         return (T) this;
     }
 
     @Override
-    public T tagLineIndent(final CharSequence tagName, final Runnable runnable) {
+    public T tagLineIndent(CharSequence tagName, Runnable runnable) {
         tag(tagName, true, true, runnable);
         return (T) this;
     }

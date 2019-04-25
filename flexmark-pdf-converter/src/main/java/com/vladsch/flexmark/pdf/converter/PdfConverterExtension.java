@@ -7,8 +7,6 @@ import com.openhtmltopdf.outputdevice.helper.BaseRendererBuilder;
 import com.openhtmltopdf.pdfboxout.PdfBoxRenderer;
 import com.openhtmltopdf.pdfboxout.PdfRendererBuilder;
 import com.vladsch.flexmark.util.Utils;
-import com.vladsch.flexmark.util.collection.DataValueFactory;
-import com.vladsch.flexmark.util.collection.DynamicDefaultKey;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.DataKey;
 import org.apache.pdfbox.pdmodel.PDDocument;
@@ -41,7 +39,7 @@ public class PdfConverterExtension {
     public static final String DEFAULT_CSS_RESOURCE_PATH = "/default.css";
     public static final String DEFAULT_TOC_LIST_CLASS = "toc";
 
-    public static final DataKey<String> DEFAULT_CSS = new DynamicDefaultKey<String>("DEFAULT_CSS", value -> Utils.getResourceAsString(DEFAULT_CSS_RESOURCE_PATH, PdfConverterExtension.class));
+    public static final DataKey<String> DEFAULT_CSS = new DataKey<String>("DEFAULT_CSS", value -> Utils.getResourceAsString(DEFAULT_CSS_RESOURCE_PATH, PdfConverterExtension.class));
 
     public static String embedCss(String html, String css) {
         if (css != null && !css.isEmpty()) {

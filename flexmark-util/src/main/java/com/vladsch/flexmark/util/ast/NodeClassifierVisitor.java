@@ -1,10 +1,8 @@
-package com.vladsch.flexmark.util.collection;
+package com.vladsch.flexmark.util.ast;
 
-import java.util.function.Function;
-import com.vladsch.flexmark.util.NodeTracker;
-import com.vladsch.flexmark.util.ast.Document;
-import com.vladsch.flexmark.util.ast.Node;
-import com.vladsch.flexmark.util.ast.NodeVisitorBase;
+import com.vladsch.flexmark.util.collection.CopyOnWriteRef;
+import com.vladsch.flexmark.util.collection.OrderedMap;
+import com.vladsch.flexmark.util.collection.OrderedSet;
 
 import java.util.*;
 
@@ -102,7 +100,7 @@ public class NodeClassifierVisitor extends NodeVisitorBase implements NodeTracke
                         // get the index of this exclusion
                         int i = myExclusionSet.indexOf(nodeType);
                         assert i != -1;
-                        if (!bitSet.get(i) && !nodeAncestryBitSet.isMutable()) {
+                        if (!bitSet.get(i)) {
                             bitSet = nodeAncestryBitSet.getMutable();
                             bitSet.set(i);
                         }

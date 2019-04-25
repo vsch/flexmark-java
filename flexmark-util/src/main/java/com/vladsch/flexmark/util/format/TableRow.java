@@ -44,7 +44,7 @@ public class TableRow {
         return beforeOffset;
     }
 
-    public void setBeforeOffset(final int beforeOffset) {
+    public void setBeforeOffset(int beforeOffset) {
         this.beforeOffset = beforeOffset;
     }
 
@@ -52,7 +52,7 @@ public class TableRow {
         return afterOffset;
     }
 
-    public void setAfterOffset(final int afterOffset) {
+    public void setAfterOffset(int afterOffset) {
         this.afterOffset = afterOffset;
     }
 
@@ -129,12 +129,12 @@ public class TableRow {
             int spanOffset = indexSpan.spanOffset;
 
             if (spanOffset > 0 && index < cells.size()) {
-                // spanning column, we expand its span or split into 2 
+                // spanning column, we expand its span or split into 2
                 TableCell cell = cells.get(index);
 
                 //if (cell.columnSpan == 0) throw new IllegalStateException("TableRow.insertColumns must be called only after 0-span dummy columns have been removed by calling normalize() on table, section or row");
                 if (tableCell.text.isBlank() || count > 1) {
-                    // expand span 
+                    // expand span
                     cells.remove(index);
                     cells.add(index, cell.withColumnSpan(cell.columnSpan + count));
                 } else {
@@ -318,7 +318,7 @@ public class TableRow {
     public void normalize() {
         int column = 0;
         while (column < cells.size()) {
-            final TableCell cell = cells.get(column);
+            TableCell cell = cells.get(column);
             if (cell == null || cell == TableCell.NULL) cells.remove(column);
             else column++;
         }

@@ -10,15 +10,14 @@ import com.vladsch.flexmark.parser.internal.DocumentParser;
 import com.vladsch.flexmark.parser.internal.InlineParserImpl;
 import com.vladsch.flexmark.parser.internal.LinkRefProcessorData;
 import com.vladsch.flexmark.parser.internal.PostProcessorManager;
-import com.vladsch.flexmark.util.IParse;
-import com.vladsch.flexmark.util.KeepType;
+import com.vladsch.flexmark.util.ast.IParse;
+import com.vladsch.flexmark.util.ast.KeepType;
 import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.ast.NodeRepository;
 import com.vladsch.flexmark.util.builder.BuilderBase;
 import com.vladsch.flexmark.util.builder.Extension;
-import com.vladsch.flexmark.util.collection.DataValueFactory;
-import com.vladsch.flexmark.util.collection.DynamicDefaultKey;
+import com.vladsch.flexmark.util.options.DataValueFactory;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.DataKey;
 import com.vladsch.flexmark.util.options.DataSet;
@@ -126,7 +125,7 @@ public class Parser implements IParse {
     public static final DataKey<Boolean> HTML_BLOCK_DEEP_PARSER = new DataKey<>("HTML_BLOCK_DEEP_PARSER", false);
     public static final DataKey<Boolean> HTML_BLOCK_DEEP_PARSE_NON_BLOCK = new DataKey<>("HTML_BLOCK_DEEP_PARSE_NON_BLOCK", true);
     public static final DataKey<Boolean> HTML_BLOCK_COMMENT_ONLY_FULL_LINE = new DataKey<>("HTML_BLOCK_COMMENT_ONLY_FULL_LINE", false);
-    public static final DataKey<Boolean> HTML_BLOCK_START_ONLY_ON_BLOCK_TAGS = new DynamicDefaultKey<Boolean>("HTML_BLOCK_START_ONLY_ON_BLOCK_TAGS", HTML_BLOCK_DEEP_PARSER);
+    public static final DataKey<Boolean> HTML_BLOCK_START_ONLY_ON_BLOCK_TAGS = new DataKey<Boolean>("HTML_BLOCK_START_ONLY_ON_BLOCK_TAGS", HTML_BLOCK_DEEP_PARSER);
     public static final DataKey<List<String>> HTML_BLOCK_TAGS = new DataKey<List<String>>("HTML_BLOCK_TAGS", new DataValueFactory<List<String>>() {
         @Override
         public List<String> apply(DataHolder value) {
@@ -303,7 +302,7 @@ public class Parser implements IParse {
     public static final DataKey<String> LISTS_ITEM_PREFIX_CHARS = new DataKey<>("LISTS_ITEM_PREFIX_CHARS", "*-+");
 
     // separate setting for CODE_BLOCK_INDENT
-    public static final DataKey<Integer> CODE_BLOCK_INDENT = new DynamicDefaultKey<Integer>("CODE_BLOCK_INDENT", LISTS_ITEM_INDENT);
+    public static final DataKey<Integer> CODE_BLOCK_INDENT = new DataKey<Integer>("CODE_BLOCK_INDENT", LISTS_ITEM_INDENT);
 
     private final List<CustomBlockParserFactory> blockParserFactories;
     private final Map<Character, DelimiterProcessor> delimiterProcessors;

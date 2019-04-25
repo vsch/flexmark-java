@@ -1,8 +1,7 @@
 package com.vladsch.flexmark.util.collection;
 
-import java.util.function.Function;
-
 import java.util.BitSet;
+import java.util.function.Function;
 
 public class IndexedItemBitSetMap<K, M> extends IndexedItemSetMapBase<K, BitSet, M> {
     private final Function<M, K> myComputable;

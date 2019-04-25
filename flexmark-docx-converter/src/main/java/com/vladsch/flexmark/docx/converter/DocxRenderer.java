@@ -9,11 +9,7 @@ import com.vladsch.flexmark.docx.converter.util.XmlFormatter;
 import com.vladsch.flexmark.ext.emoji.EmojiExtension;
 import com.vladsch.flexmark.html.*;
 import com.vladsch.flexmark.html.renderer.*;
-import com.vladsch.flexmark.util.IRender;
-import com.vladsch.flexmark.util.ast.AllNodesVisitor;
-import com.vladsch.flexmark.util.ast.Block;
-import com.vladsch.flexmark.util.ast.Document;
-import com.vladsch.flexmark.util.ast.Node;
+import com.vladsch.flexmark.util.ast.*;
 import com.vladsch.flexmark.util.builder.BuilderBase;
 import com.vladsch.flexmark.util.builder.Extension;
 import com.vladsch.flexmark.util.collection.*;
@@ -33,7 +29,6 @@ import org.docx4j.wml.Numbering;
 import org.docx4j.wml.Styles;
 
 import java.io.*;
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 
@@ -133,7 +128,7 @@ public class DocxRenderer implements IRender {
     // internal stuff
     public static final String EMOJI_RESOURCE_PREFIX = "emoji:";
 
-    public static final DynamicDefaultKey<String> DOC_EMOJI_ROOT_IMAGE_PATH = new DynamicDefaultKey<String>("DOC_EMOJI_ROOT_IMAGE_PATH", options -> {
+    public static final DataKey<String> DOC_EMOJI_ROOT_IMAGE_PATH = new DataKey<String>("DOC_EMOJI_ROOT_IMAGE_PATH", options -> {
         if (options != null && options.contains(EmojiExtension.ROOT_IMAGE_PATH)) {
             return options.get(EmojiExtension.ROOT_IMAGE_PATH);
         }

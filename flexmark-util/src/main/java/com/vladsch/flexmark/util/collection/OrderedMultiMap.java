@@ -5,6 +5,7 @@ import com.vladsch.flexmark.util.Paired;
 import com.vladsch.flexmark.util.collection.iteration.*;
 
 import java.util.*;
+import java.util.function.Consumer;
 
 public class OrderedMultiMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
     private final OrderedSet<K> myKeySet;
@@ -461,10 +462,7 @@ public class OrderedMultiMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V
         }
 
         ArrayList<V> values = new ArrayList<V>(myKeySet.size());
-        ReversibleIndexedIterator<V> iterator = myValueSet.iterator();
-        while (iterator.hasNext()) {
-            values.add(iterator.next());
-        }
+        values.addAll(myValueSet);
         return values;
     }
 
@@ -478,10 +476,7 @@ public class OrderedMultiMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V
         }
 
         ArrayList<K> values = new ArrayList<K>(myValueSet.size());
-        ReversibleIndexedIterator<K> iterator = myKeySet.iterator();
-        while (iterator.hasNext()) {
-            values.add(iterator.next());
-        }
+        values.addAll(myKeySet);
         return values;
     }
 

@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -47,7 +48,7 @@ public class Html5Entities {
 
     public static BasedSequence entityToSequence(BasedSequence input) {
         Matcher matcher = NUMERIC_PATTERN.matcher(input);
-        final BasedSequence baseSeq = input.subSequence(0, 0);
+        BasedSequence baseSeq = input.subSequence(0, 0);
 
         if (matcher.find()) {
             int base = matcher.end() == 2 ? 10 : 16;
@@ -74,7 +75,7 @@ public class Html5Entities {
     private static Map<String, String> readEntities() {
         Map<String, String> entities = new HashMap<String, String>();
         InputStream stream = Html5Entities.class.getResourceAsStream(ENTITY_PATH);
-        Charset charset = Charset.forName("UTF-8");
+        Charset charset = StandardCharsets.UTF_8;
         try {
             String line;
             InputStreamReader streamReader = new InputStreamReader(stream, charset);

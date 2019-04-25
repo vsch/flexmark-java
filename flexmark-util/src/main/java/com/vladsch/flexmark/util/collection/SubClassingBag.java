@@ -11,7 +11,7 @@ public class SubClassingBag<T> {
     private final ClassificationBag<Class, T> myItems;
     private final HashMap<Class, BitSet> mySubClassMap;
 
-    public SubClassingBag(final ClassificationBag<Class, T> items, final HashMap<Class, List<Class>> subClassMap) {
+    public SubClassingBag(ClassificationBag<Class, T> items, HashMap<Class, List<Class>> subClassMap) {
         myItems = items;
         mySubClassMap = new HashMap<Class, BitSet>();
 
@@ -28,19 +28,19 @@ public class SubClassingBag<T> {
         return myItems.getItems();
     }
 
-    public boolean contains(final T item) {
+    public boolean contains(T item) {
         return myItems.contains(item);
     }
 
-    public boolean containsType(final Class type) {
+    public boolean containsType(Class type) {
         return myItems.containsCategory(type);
     }
 
-    public BitSet getTypeSet(final Class category) {
+    public BitSet getTypeSet(Class category) {
         return mySubClassMap.get(category);
     }
 
-    public int getTypeCount(final Class category) {
+    public int getTypeCount(Class category) {
         BitSet bitSet = mySubClassMap.get(category);
         return bitSet == null ? 0 : bitSet.cardinality();
     }

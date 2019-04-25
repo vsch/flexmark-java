@@ -24,7 +24,6 @@ import org.junit.runners.Suite;
         AttributeTest.class,
         MutableAttributeTest.class,
         AttributesTest.class,
-        FormattingAppendableImplTest.class,
         LineFormattingAppendableImplTest.class,
         RepeatedCharSequenceTest.class,
         HtmlFormattingAppendableBaseTest.class,

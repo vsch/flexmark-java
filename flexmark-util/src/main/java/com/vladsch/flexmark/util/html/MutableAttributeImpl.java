@@ -75,7 +75,7 @@ public class MutableAttributeImpl implements MutableAttribute {
 
                         int endPos = pos == -1 ? myValue.length() : pos;
                         if (lastPos < endPos) {
-                            final String value = myValue.substring(lastPos, endPos);
+                            String value = myValue.substring(lastPos, endPos);
                             int namePos = myValueNameDelimiter != NUL ? value.indexOf(myValueNameDelimiter) : -1;
 
                             if (namePos == -1) {
@@ -140,7 +140,7 @@ public class MutableAttributeImpl implements MutableAttribute {
     }
 
     public MutableAttributeImpl replaceValue(CharSequence value) {
-        final String useValue = value == null ? "" : String.valueOf(value);
+        String useValue = value == null ? "" : String.valueOf(value);
         if (myValue == null || value == null || !myValue.equals(useValue)) {
             myValue = useValue;
             myValues = null;
@@ -151,11 +151,11 @@ public class MutableAttributeImpl implements MutableAttribute {
     public MutableAttributeImpl setValue(CharSequence value) {
         if (myValueListDelimiter != NUL) {
             if (value != null && value.length() != 0) {
-                final Map<String, String> valueMap = getValueMap();
+                Map<String, String> valueMap = getValueMap();
 
                 forEachValue(value, new BiConsumer<String, String>() {
                     @Override
-                    public void accept(final String itemName, final String itemValue) {
+                    public void accept(String itemName, String itemValue) {
                         if (myValueNameDelimiter != NUL && itemValue.isEmpty()) {
                             valueMap.remove(itemName);
                         } else {
@@ -176,7 +176,7 @@ public class MutableAttributeImpl implements MutableAttribute {
         return this;
     }
 
-    private void forEachValue(final CharSequence value, BiConsumer<String, String> consumer) {
+    private void forEachValue(CharSequence value, BiConsumer<String, String> consumer) {
         String useValue = value == null ? "" : String.valueOf(value);
         int lastPos = 0;
         while (lastPos < useValue.length()) {
@@ -184,11 +184,11 @@ public class MutableAttributeImpl implements MutableAttribute {
 
             int endPos = pos == -1 ? useValue.length() : pos;
             if (lastPos < endPos) {
-                final String valueItem = useValue.substring(lastPos, endPos).trim();
+                String valueItem = useValue.substring(lastPos, endPos).trim();
                 if (!valueItem.isEmpty()) {
-                    final int namePos = myValueNameDelimiter == NUL ? -1 : valueItem.indexOf(myValueNameDelimiter);
-                    final String itemName = namePos == -1 ? valueItem : valueItem.substring(0, namePos);
-                    final String itemValue = namePos == -1 ? "" : valueItem.substring(namePos + 1);
+                    int namePos = myValueNameDelimiter == NUL ? -1 : valueItem.indexOf(myValueNameDelimiter);
+                    String itemName = namePos == -1 ? valueItem : valueItem.substring(0, namePos);
+                    String itemValue = namePos == -1 ? "" : valueItem.substring(namePos + 1);
 
                     consumer.accept(itemName, itemValue);
                 }
@@ -202,12 +202,12 @@ public class MutableAttributeImpl implements MutableAttribute {
     public MutableAttributeImpl removeValue(CharSequence value) {
         if (myValueListDelimiter != NUL) {
             if (value != null && value.length() != 0) {
-                final Map<String, String> valueMap = getValueMap();
-                final boolean[] removed = { false };
+                Map<String, String> valueMap = getValueMap();
+                boolean[] removed = { false };
 
                 forEachValue(value, new BiConsumer<String, String>() {
                     @Override
-                    public void accept(final String itemName, final String itemValue) {
+                    public void accept(String itemName, String itemValue) {
                         if (valueMap.remove(itemName) != null) {
                             removed[0] = true;
                         }
@@ -230,7 +230,7 @@ public class MutableAttributeImpl implements MutableAttribute {
     }
 
     @Override
-    public boolean equals(final Object o) {
+    public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Attribute)) return false;
 

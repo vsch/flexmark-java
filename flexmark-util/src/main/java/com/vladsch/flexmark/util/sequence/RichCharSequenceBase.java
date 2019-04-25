@@ -27,7 +27,6 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
         charMap.put('\f', "\\f");
         charMap.put('\t', "\\u2192");
     }
-
     public <S extends RichCharSequence<S>> S firstNonNull(S... sequences) {
         if (sequences.length > 0) {
             S NULL = sequences[0].nullSequence();
@@ -370,7 +369,7 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
         if (fromIndex >= length()) fromIndex = length();
         else fromIndex++;
         for (int i = fromIndex; i-- > startIndex; ) {
-            final char c = charAt(i);
+            char c = charAt(i);
             if (c == c1 || c == c2) return i;
         }
         return -1;
@@ -382,7 +381,7 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
         if (fromIndex >= length()) fromIndex = length();
         else fromIndex++;
         for (int i = fromIndex; i-- > startIndex; ) {
-            final char c = charAt(i);
+            char c = charAt(i);
             if (c == c1 || c == c2 || c == c3) return i;
         }
         return -1;
@@ -406,7 +405,7 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
                 if (fromIndex >= length()) fromIndex = length();
                 else fromIndex++;
                 for (int i = fromIndex; i-- > startIndex; ) {
-                    final char c = charAt(i);
+                    char c = charAt(i);
                     if (sequence.indexOf(c) != -1) return i;
                 }
         }
@@ -441,7 +440,7 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
         if (fromIndex >= length()) fromIndex = length();
         else fromIndex++;
         for (int i = fromIndex; i-- > startIndex; ) {
-            final char c = charAt(i);
+            char c = charAt(i);
             if (c != c1 && c != c2) return i;
         }
         return -1;
@@ -453,7 +452,7 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
         if (fromIndex >= length()) fromIndex = length();
         else fromIndex++;
         for (int i = fromIndex; i-- > startIndex; ) {
-            final char c = charAt(i);
+            char c = charAt(i);
             if (c != c1 && c != c2 && c != c3) return i;
         }
         return -1;
@@ -477,7 +476,7 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
                 if (fromIndex >= length()) fromIndex = length();
                 else fromIndex++;
                 for (int i = fromIndex; i-- > startIndex; ) {
-                    final char c = charAt(i);
+                    char c = charAt(i);
                     if (sequence.indexOf(c) == -1) return i;
                 }
         }
@@ -505,7 +504,7 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
         else fromIndex++;
         int count = 0;
         for (int i = fromIndex; i-- > startIndex; ) {
-            final char c = charAt(i);
+            char c = charAt(i);
             if (c == c1) count++;
         }
         return count;
@@ -531,7 +530,7 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
         else fromIndex++;
         int count = 0;
         for (int i = fromIndex; i-- > startIndex; ) {
-            final char c = charAt(i);
+            char c = charAt(i);
             if (c != c1) count++;
         }
         return count;
@@ -619,12 +618,12 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
     }
 
     @Override
-    final public T lineAt(final int index) {
+    final public T lineAt(int index) {
         return subSequence(startOfLine(index), endOfLine(index));
     }
 
     @Override
-    final public T lineAtAnyEOL(final int index) {
+    final public T lineAtAnyEOL(int index) {
         return subSequence(startOfLineAnyEOL(index), endOfLineAnyEOL(index));
     }
 
@@ -912,7 +911,7 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
     @Override
     final public T trimEOL() {
         int trim = eolLength();
-        return trim > 0 ? subSequence(0, length() - trim) : (T)this;
+        return trim > 0 ? subSequence(0, length() - trim) : (T) this;
     }
 
     @Override
@@ -929,41 +928,41 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
         }
 
         int trimEnd = countTrailing(WHITESPACE_CHARS, 0, length());
-        return trimStart > 0 || trimEnd > 0 ? subSequence(trimStart, length() - trimEnd) : (T)this;
+        return trimStart > 0 || trimEnd > 0 ? subSequence(trimStart, length() - trimEnd) : (T) this;
     }
 
     @Override
     final public T ifNull(T other) {
-        return isNull() ? other : (T)this;
+        return isNull() ? other : (T) this;
     }
 
     @Override
     final public T ifNullEmptyAfter(T other) {
-        return isNull() ? other.subSequence(other.length(), other.length()) : (T)this;
+        return isNull() ? other.subSequence(other.length(), other.length()) : (T) this;
     }
 
     @Override
     final public T ifNullEmptyBefore(T other) {
-        return isNull() ? other.subSequence(0, 0) : (T)this;
+        return isNull() ? other.subSequence(0, 0) : (T) this;
     }
 
     @Override
     final public T nullIfEmpty() {
-        return isEmpty() ? nullSequence() : (T)this;
+        return isEmpty() ? nullSequence() : (T) this;
     }
 
     @Override
     final public T nullIfBlank() {
-        return isBlank() ? nullSequence() : (T)this;
+        return isBlank() ? nullSequence() : (T) this;
     }
 
     @Override
     final public T nullIf(boolean condition) {
-        return condition ? nullSequence() : (T)this;
+        return condition ? nullSequence() : (T) this;
     }
 
     @Override
-    final public T nullIf(final CharSequence... matches) {
+    final public T nullIf(CharSequence... matches) {
         for (CharSequence match : matches) {
             if (matches(match)) return nullSequence();
         }
@@ -971,7 +970,7 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
     }
 
     @Override
-    final public T nullIfNot(final CharSequence... matches) {
+    final public T nullIfNot(CharSequence... matches) {
         for (CharSequence match : matches) {
             if (matches(match)) return (T) this;
         }
@@ -979,7 +978,7 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
     }
 
     @Override
-    final public T nullIfStartsWith(final CharSequence... matches) {
+    final public T nullIfStartsWith(CharSequence... matches) {
         for (CharSequence match : matches) {
             if (startsWith(match)) return nullSequence();
         }
@@ -987,7 +986,7 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
     }
 
     @Override
-    final public T nullIfStartsWithNot(final CharSequence... matches) {
+    final public T nullIfStartsWithNot(CharSequence... matches) {
         for (CharSequence match : matches) {
             if (startsWith(match)) return (T) this;
         }
@@ -995,7 +994,7 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
     }
 
     @Override
-    final public T nullIfEndsWith(final CharSequence... matches) {
+    final public T nullIfEndsWith(CharSequence... matches) {
         for (CharSequence match : matches) {
             if (endsWith(match)) return nullSequence();
         }
@@ -1003,7 +1002,7 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
     }
 
     @Override
-    final public T nullIfEndsWithNot(final CharSequence... matches) {
+    final public T nullIfEndsWithNot(CharSequence... matches) {
         for (CharSequence match : matches) {
             if (endsWith(match)) return (T) this;
         }
@@ -1042,22 +1041,22 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
 
     @Override
     final public T removeSuffix(CharSequence suffix) {
-        return !endsWith(suffix) ? (T)this : subSequence(0, length() - suffix.length());
+        return !endsWith(suffix) ? (T) this : subSequence(0, length() - suffix.length());
     }
 
     @Override
     final public T removePrefix(CharSequence prefix) {
-        return !startsWith(prefix) ? (T)this : subSequence(prefix.length(), length());
+        return !startsWith(prefix) ? (T) this : subSequence(prefix.length(), length());
     }
 
     @Override
     final public T removeProperSuffix(CharSequence suffix) {
-        return length() <= suffix.length() || !endsWith(suffix) ? (T)this : subSequence(0, length() - suffix.length());
+        return length() <= suffix.length() || !endsWith(suffix) ? (T) this : subSequence(0, length() - suffix.length());
     }
 
     @Override
     final public T removeProperPrefix(CharSequence prefix) {
-        return length() <= prefix.length() || !startsWith(prefix) ? (T)this : subSequence(prefix.length(), length());
+        return length() <= prefix.length() || !startsWith(prefix) ? (T) this : subSequence(prefix.length(), length());
     }
 
     @Override
@@ -1072,22 +1071,22 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
 
     @Override
     final public T removeSuffixIgnoreCase(CharSequence suffix) {
-        return !endsWithIgnoreCase(suffix) ? (T)this : subSequence(0, length() - suffix.length());
+        return !endsWithIgnoreCase(suffix) ? (T) this : subSequence(0, length() - suffix.length());
     }
 
     @Override
     final public T removePrefixIgnoreCase(CharSequence prefix) {
-        return !startsWithIgnoreCase(prefix) ? (T)this : subSequence(prefix.length(), length());
+        return !startsWithIgnoreCase(prefix) ? (T) this : subSequence(prefix.length(), length());
     }
 
     @Override
     final public T removeProperSuffixIgnoreCase(CharSequence suffix) {
-        return length() <= suffix.length() || !endsWithIgnoreCase(suffix) ? (T)this : subSequence(0, length() - suffix.length());
+        return length() <= suffix.length() || !endsWithIgnoreCase(suffix) ? (T) this : subSequence(0, length() - suffix.length());
     }
 
     @Override
     final public T removeProperPrefixIgnoreCase(CharSequence prefix) {
-        return length() <= prefix.length() || !startsWithIgnoreCase(prefix) ? (T)this : subSequence(prefix.length(), length());
+        return length() <= prefix.length() || !startsWithIgnoreCase(prefix) ? (T) this : subSequence(prefix.length(), length());
     }
 
     @Override
@@ -1102,22 +1101,22 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
 
     @Override
     final public T removeSuffix(CharSequence suffix, boolean ignoreCase) {
-        return !endsWith(suffix, ignoreCase) ? (T)this : subSequence(0, length() - suffix.length());
+        return !endsWith(suffix, ignoreCase) ? (T) this : subSequence(0, length() - suffix.length());
     }
 
     @Override
     final public T removePrefix(CharSequence prefix, boolean ignoreCase) {
-        return !startsWith(prefix, ignoreCase) ? (T)this : subSequence(prefix.length(), length());
+        return !startsWith(prefix, ignoreCase) ? (T) this : subSequence(prefix.length(), length());
     }
 
     @Override
     final public T removeProperSuffix(CharSequence suffix, boolean ignoreCase) {
-        return length() <= suffix.length() || !endsWith(suffix, ignoreCase) ? (T)this : subSequence(0, length() - suffix.length());
+        return length() <= suffix.length() || !endsWith(suffix, ignoreCase) ? (T) this : subSequence(0, length() - suffix.length());
     }
 
     @Override
     final public T removeProperPrefix(CharSequence prefix, boolean ignoreCase) {
-        return length() <= prefix.length() || !startsWith(prefix, ignoreCase) ? (T)this : subSequence(prefix.length(), length());
+        return length() <= prefix.length() || !startsWith(prefix, ignoreCase) ? (T) this : subSequence(prefix.length(), length());
     }
 
     @Override
@@ -1192,8 +1191,8 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
 
         if (ignoreCase) {
             for (int i = 0; i < iMax; i++) {
-                final char c1 = chars.charAt(i);
-                final char c2 = charAt(i + startIndex);
+                char c1 = chars.charAt(i);
+                char c2 = charAt(i + startIndex);
                 if (c1 != c2) {
                     char u1 = Character.toUpperCase(c1);
                     char u2 = Character.toUpperCase(c2);
@@ -1437,17 +1436,17 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
     }
 
     @Override
-    final public T appendTo(final StringBuilder out) {
+    final public T appendTo(StringBuilder out) {
         return appendTo(out, 0, length());
     }
 
     @Override
-    final public T appendTo(final StringBuilder out, final int start) {
+    final public T appendTo(StringBuilder out, int start) {
         return appendTo(out, start, length());
     }
 
     @Override
-    final public T appendTo(final StringBuilder out, final int start, final int end) {
+    final public T appendTo(StringBuilder out, int start, int end) {
         out.append(this, start, end);
         return (T) this;
     }
@@ -1473,8 +1472,8 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
     }
 
     @Override
-    final public int[] indexOfAll(final CharSequence s) {
-        final int length = s.length();
+    final public int[] indexOfAll(CharSequence s) {
+        int length = s.length();
         if (length == 0) return EMPTY_INDICES;
         int pos = indexOf(s);
         if (pos == -1) return EMPTY_INDICES;
@@ -1493,11 +1492,11 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
     }
 
     @Override
-    final public T replace(final CharSequence find, final CharSequence replace) {
+    final public T replace(CharSequence find, CharSequence replace) {
         int[] indices = indexOfAll(find);
         if (indices.length == 0) return (T) this;
 
-        final int iMax = indices.length;
+        int iMax = indices.length;
         StringBuilder sb = new StringBuilder(length() + (replace.length() - find.length()) * iMax);
         int i = 0;
         int lastPos = 0;
@@ -1516,7 +1515,7 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
     }
 
     @Override
-    final public T append(final CharSequence... others) {
+    final public T append(CharSequence... others) {
         if (others.length > 0) {
             int total = 0;
             for (CharSequence other : others) total += other.length();
@@ -1531,13 +1530,13 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
     }
 
     @Override
-    final public int getColumnAtIndex(final int index) {
+    final public int getColumnAtIndex(int index) {
         int lineStart = lastIndexOfAny(EOL_CHARS, index);
         return index - (lineStart == -1 ? 0 : lineStart + eolLength(lineStart));
     }
 
     @Override
-    final public Pair<Integer, Integer> getLineColumnAtIndex(final int index) {
+    final public Pair<Integer, Integer> getLineColumnAtIndex(int index) {
         int iMax = length();
         if (index < 0 || index > iMax) {
             throw new IllegalArgumentException("Index: " + index + " out of range [0, " + iMax + "]");

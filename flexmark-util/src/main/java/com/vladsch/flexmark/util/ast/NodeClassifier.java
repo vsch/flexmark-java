@@ -1,7 +1,6 @@
-package com.vladsch.flexmark.util.mappers;
+package com.vladsch.flexmark.util.ast;
 
 import java.util.function.Function;
-import com.vladsch.flexmark.util.ast.Node;
 
 public class NodeClassifier implements Function<Node, Class<?>> {
     public static final NodeClassifier INSTANCE = new NodeClassifier();

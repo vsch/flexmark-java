@@ -365,7 +365,7 @@ public class Utils {
 
     public static <T> List<? extends T> stringSorted(
             Collection<? extends T> receiver,
-            final Function<T, String> stringer
+            Function<T, String> stringer
     ) {
         ArrayList<? extends T> result = new ArrayList<T>(receiver);
         Collections.sort(result, (Comparator<T>) (o1, o2) -> stringer.apply(o1).compareTo(stringer.apply(o2)));
@@ -431,7 +431,7 @@ public class Utils {
         int jMax = s.length;
 
         for (int j = 1; j < jMax; j++) {
-            final String sj = s[j];
+            String sj = s[j];
             if (iMax > sj.length()) iMax = sj.length();
         }
 
@@ -649,7 +649,7 @@ public class Utils {
 
     public static <K, V> Map<K, V> withDefaults(Map<K, V> receiver, Map<K, V> defaults) {
         HashMap<K, V> map = new HashMap<K, V>(receiver);
-        for (final Map.Entry<K, V> entry : defaults.entrySet()) {
+        for (Map.Entry<K, V> entry : defaults.entrySet()) {
             putIfMissing(map, entry.getKey(), entry::getValue);
         }
         return map;
@@ -668,7 +668,7 @@ public class Utils {
         }
     }
 
-    public static <K, V> void removeIf(Map<K, V> receiver, final BiFunction<K, V, Boolean> removeFilter) {
+    public static <K, V> void removeIf(Map<K, V> receiver, BiFunction<K, V, Boolean> removeFilter) {
         removeIf(receiver, entry -> removeFilter.apply(entry.getKey(), entry.getValue()));
     }
 

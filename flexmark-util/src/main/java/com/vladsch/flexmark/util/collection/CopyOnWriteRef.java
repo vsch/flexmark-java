@@ -6,7 +6,6 @@ public class CopyOnWriteRef<T> {
     private T myValue;
     private int myReferenceCount;
     private Function<T, T> myCloner;
-    private boolean myMutable;
 
     public CopyOnWriteRef(T value, Function<T, T> cloner) {
         myValue = value;

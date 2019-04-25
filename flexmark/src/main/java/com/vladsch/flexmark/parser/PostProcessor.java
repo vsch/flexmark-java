@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.parser;
 
-import com.vladsch.flexmark.util.NodeTracker;
+import com.vladsch.flexmark.util.ast.NodeTracker;
 import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.Node;
 

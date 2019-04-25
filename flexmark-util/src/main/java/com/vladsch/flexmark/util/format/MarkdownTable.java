@@ -78,7 +78,7 @@ public class MarkdownTable {
         return getCaptionCell().text;
     }
 
-    public void setCaption(final CharSequence caption) {
+    public void setCaption(CharSequence caption) {
         TableCell captionCell = getCaptionCell();
         setCaptionCell(captionCell.withText(captionCell.openMarker.isEmpty() ? "[" : captionCell.openMarker, caption, captionCell.closeMarker.isEmpty() ? "]" : captionCell.closeMarker));
     }
@@ -88,9 +88,9 @@ public class MarkdownTable {
      *
      */
     public void setCaptionWithMarkers(
-            final CharSequence captionOpen,
-            final CharSequence caption,
-            final CharSequence captionClose
+            CharSequence captionOpen,
+            CharSequence caption,
+            CharSequence captionClose
     ) {
         setCaptionCell(new TableCell(captionOpen, options.formatTableCaptionSpaces == DiscretionaryText.AS_IS ? caption : BasedSequenceImpl.of(caption).trim(), captionClose, 1, 1));
     }
@@ -141,11 +141,11 @@ public class MarkdownTable {
         return max(headingColumns, separatorColumns, bodyColumns);
     }
 
-    public int getMinColumnsWithoutColumns(boolean withSeparator, final int... skipColumns) {
+    public int getMinColumnsWithoutColumns(boolean withSeparator, int... skipColumns) {
         return aggregateTotalColumnsWithoutColumns(withSeparator ? ALL_TABLE_ROWS : ALL_CONTENT_ROWS, MinAggregator.INSTANCE, skipColumns);
     }
 
-    public int getMaxColumnsWithoutColumns(boolean withSeparator, final int... skipColumns) {
+    public int getMaxColumnsWithoutColumns(boolean withSeparator, int... skipColumns) {
         return aggregateTotalColumnsWithoutColumns(withSeparator ? ALL_TABLE_ROWS : ALL_CONTENT_ROWS, MaxAggregator.INSTANCE, skipColumns);
     }
 
@@ -172,7 +172,7 @@ public class MarkdownTable {
         return 0;
     }
 
-    public TableCellOffsetInfo getCellOffsetInfo(final int offset) {
+    public TableCellOffsetInfo getCellOffsetInfo(int offset) {
         int r = 0;
         for (TableRow row : getAllSectionRows()) {
             row.normalizeIfNeeded();
@@ -328,8 +328,8 @@ public class MarkdownTable {
     }
 
     public void deleteRows(int rowIndex, int count) {
-        final int maxColumns = getMaxColumns();
-        final boolean handled[] = new boolean[] { false };
+        int maxColumns = getMaxColumns();
+        boolean handled[] = new boolean[] { false };
         if (rowIndex <= header.rows.size()) {
             int i = count;
             while (i-- > 0 && rowIndex < header.rows.size()) {
@@ -344,9 +344,9 @@ public class MarkdownTable {
         }
     }
 
-    public void insertRows(final int rowIndex, final int count) {
-        final int maxColumns = getMaxColumns();
-        final boolean handled[] = new boolean[] { false };
+    public void insertRows(int rowIndex, int count) {
+        int maxColumns = getMaxColumns();
+        boolean handled[] = new boolean[] { false };
         if (rowIndex <= header.rows.size()) {
             insertRows(header.rows, rowIndex, count, maxColumns);
         } else {
@@ -355,10 +355,10 @@ public class MarkdownTable {
     }
 
     private void insertRows(
-            final ArrayList<TableRow> rows,
-            final int index,
-            final int count,
-            final int maxColumns
+            ArrayList<TableRow> rows,
+            int index,
+            int count,
+            int maxColumns
     ) {
         int i = count;
         while (i-- > 0) {
@@ -372,14 +372,14 @@ public class MarkdownTable {
         }
     }
 
-    public void insertColumns(final int column, final int count) {
+    public void insertColumns(int column, int count) {
         forAllContentRows(new TableRowManipulator() {
             @Override
             public int apply(
-                    final TableRow row,
-                    final int allRowsIndex,
-                    final ArrayList<TableRow> rows,
-                    final int index
+                    TableRow row,
+                    int allRowsIndex,
+                    ArrayList<TableRow> rows,
+                    int index
             ) {
                 rows.get(index).insertColumns(column, count);
                 return 0;
@@ -392,14 +392,14 @@ public class MarkdownTable {
         }
     }
 
-    public void deleteColumns(final int column, final int count) {
+    public void deleteColumns(int column, int count) {
         forAllContentRows(new TableRowManipulator() {
             @Override
             public int apply(
-                    final TableRow row,
-                    final int allRowsIndex,
-                    final ArrayList<TableRow> rows,
-                    final int index
+                    TableRow row,
+                    int allRowsIndex,
+                    ArrayList<TableRow> rows,
+                    int index
             ) {
                 rows.get(index).deleteColumns(column, count);
                 return 0;
@@ -412,14 +412,14 @@ public class MarkdownTable {
         }
     }
 
-    public void moveColumn(final int fromColumn, final int toColumn) {
+    public void moveColumn(int fromColumn, int toColumn) {
         forAllContentRows(new TableRowManipulator() {
             @Override
             public int apply(
-                    final TableRow row,
-                    final int allRowsIndex,
-                    final ArrayList<TableRow> rows,
-                    final int index
+                    TableRow row,
+                    int allRowsIndex,
+                    ArrayList<TableRow> rows,
+                    int index
             ) {
                 rows.get(index).moveColumn(fromColumn, toColumn);
                 return 0;
@@ -439,15 +439,15 @@ public class MarkdownTable {
      * @param column index in allRows list
      * @return true if column is empty for all rows, separator row excluded
      */
-    public boolean isEmptyColumn(final int column) {
-        final boolean[] result = new boolean[] { true };
+    public boolean isEmptyColumn(int column) {
+        boolean[] result = new boolean[] { true };
         forAllContentRows(new TableRowManipulator() {
             @Override
             public int apply(
-                    final TableRow row,
-                    final int allRowsIndex,
-                    final ArrayList<TableRow> rows,
-                    final int index
+                    TableRow row,
+                    int allRowsIndex,
+                    ArrayList<TableRow> rows,
+                    int index
             ) {
                 if (!row.isEmptyColumn(column)) {
                     result[0] = false;
@@ -488,14 +488,14 @@ public class MarkdownTable {
      * @return true if row is empty or is a separator row
      */
     private boolean isEmptyRowAt(int rowIndex, TableSection[] sections) {
-        final boolean[] result = new boolean[] { false };
+        boolean[] result = new boolean[] { false };
         forAllSectionsRows(rowIndex, 1, sections, new TableRowManipulator() {
             @Override
             public int apply(
-                    final TableRow row,
-                    final int allRowsIndex,
-                    final ArrayList<TableRow> rows,
-                    final int index
+                    TableRow row,
+                    int allRowsIndex,
+                    ArrayList<TableRow> rows,
+                    int index
             ) {
                 if (row.isEmpty()) {
                     result[0] = true;
@@ -517,7 +517,7 @@ public class MarkdownTable {
         return isHeading;
     }
 
-    public void setHeader(final boolean header) {
+    public void setHeader(boolean header) {
         isHeading = header;
     }
 
@@ -525,7 +525,7 @@ public class MarkdownTable {
         return isSeparator;
     }
 
-    public void setSeparator(final boolean separator) {
+    public void setSeparator(boolean separator) {
         isSeparator = separator;
     }
 
@@ -547,7 +547,7 @@ public class MarkdownTable {
         if (isSeparator && (cell.columnSpan != 1 || cell.rowSpan != 1))
             throw new IllegalStateException("Separator columns cannot span rows/columns");
 
-        final TableRow currentRow = tableSection.get(tableSection.row);
+        TableRow currentRow = tableSection.get(tableSection.row);
 
         // skip cells that are already set
         while (tableSection.column < currentRow.cells.size() && currentRow.cells.get(tableSection.column) != null)
@@ -783,7 +783,7 @@ public class MarkdownTable {
         }
     }
 
-    public void appendTable(final LineFormattingAppendable out) {
+    public void appendTable(LineFormattingAppendable out) {
         // we will prepare the separator based on max columns
         Ref<Integer> delta = new Ref<Integer>(0);
         String linePrefix = options.formatTableIndentPrefix;
@@ -1004,9 +1004,9 @@ public class MarkdownTable {
     }
 
     public static void appendFormattedCaption(
-            final LineFormattingAppendable out,
-            final BasedSequence caption,
-            final TableFormatOptions options
+            LineFormattingAppendable out,
+            BasedSequence caption,
+            TableFormatOptions options
     ) {
         String formattedCaption = formattedCaption(caption, options);
         if (formattedCaption != null) {
@@ -1015,8 +1015,8 @@ public class MarkdownTable {
     }
 
     public static String formattedCaption(
-            final BasedSequence caption,
-            final TableFormatOptions options
+            BasedSequence caption,
+            TableFormatOptions options
     ) {
         boolean append = caption.isNotNull();
 
@@ -1074,11 +1074,11 @@ public class MarkdownTable {
     }
 
     private void appendRows(
-            final LineFormattingAppendable out,
+            LineFormattingAppendable out,
             List<TableRow> rows,
-            final boolean isHeader,
-            final String linePrefix,
-            final Ref<Integer> delta
+            boolean isHeader,
+            String linePrefix,
+            Ref<Integer> delta
     ) {
         for (TableRow row : rows) {
             int j = 0;
@@ -1146,7 +1146,7 @@ public class MarkdownTable {
     }
 
     private void appendColumnSpan(
-            final LineFormattingAppendable out,
+            LineFormattingAppendable out,
             int span,
             int cellInsideEndOffset,
             int trackedSpanOffset,
@@ -1173,15 +1173,15 @@ public class MarkdownTable {
     }
 
     private BasedSequence cellText(
-            final List<TableCell> cells,
-            final int index,
-            final boolean withTrackedOffset,
-            final boolean isHeader,
+            List<TableCell> cells,
+            int index,
+            boolean withTrackedOffset,
+            boolean isHeader,
             int width,
             CellAlignment alignment,
             Ref<Integer> accumulatedDelta
     ) {
-        final TableCell cell = cells.get(index);
+        TableCell cell = cells.get(index);
         TableCell adjustedCell = cell;
         BasedSequence text = cell.text;
         boolean needsPadding = cell.trackedTextOffset != NOT_TRACKED && cell.trackedTextOffset >= cell.text.length();
@@ -1201,7 +1201,7 @@ public class MarkdownTable {
             }
         }
 
-        final int length = options.charWidthProvider.charWidth(text);
+        int length = options.charWidthProvider.charWidth(text);
         if (options.adjustColumnWidth && (length < width || cell.trackedTextOffset > cell.text.length())) {
             if (!options.applyColumnAlignment || alignment == null || alignment == CellAlignment.NONE) {
                 alignment = isHeader && options.leftAlignMarker != ADD ? CellAlignment.CENTER : CellAlignment.LEFT;
@@ -1313,7 +1313,7 @@ public class MarkdownTable {
         final int width;
         int additionalWidth;
 
-        public ColumnSpan(final int startColumn, final int columnSpan, final int width) {
+        public ColumnSpan(int startColumn, int columnSpan, int width) {
             this.startColumn = startColumn;
             this.columnSpan = columnSpan;
             this.width = width;
@@ -1338,19 +1338,19 @@ public class MarkdownTable {
     }
 
     private int aggregateTotalColumnsWithoutColumns(
-            final TableSection[] sections,
-            final BiFunction<Integer, Integer, Integer> aggregator,
-            final int... skipColumns
+            TableSection[] sections,
+            BiFunction<Integer, Integer, Integer> aggregator,
+            int... skipColumns
     ) {
-        final Integer[] columns = new Integer[] { null };
+        Integer[] columns = new Integer[] { null };
 
         forAllSectionsRows(0, Integer.MAX_VALUE, sections, new TableRowManipulator() {
             @Override
             public int apply(
-                    final TableRow row,
-                    final int allRowsIndex,
-                    final ArrayList<TableRow> rows,
-                    final int index
+                    TableRow row,
+                    int allRowsIndex,
+                    ArrayList<TableRow> rows,
+                    int index
             ) {
                 int iMax = row.cells.size();
                 int count = 0;
@@ -1368,19 +1368,19 @@ public class MarkdownTable {
     }
 
     private int aggregateTotalColumnsWithoutRows(
-            final TableSection[] sections,
-            final BiFunction<Integer, Integer, Integer> aggregator,
-            final int... skipRows
+            TableSection[] sections,
+            BiFunction<Integer, Integer, Integer> aggregator,
+            int... skipRows
     ) {
-        final Integer[] columns = new Integer[] { null };
+        Integer[] columns = new Integer[] { null };
 
         forAllSectionsRows(0, Integer.MAX_VALUE, sections, new TableRowManipulator() {
             @Override
             public int apply(
-                    final TableRow row,
-                    final int allRowsIndex,
-                    final ArrayList<TableRow> rows,
-                    final int index
+                    TableRow row,
+                    int allRowsIndex,
+                    ArrayList<TableRow> rows,
+                    int index
             ) {
                 if (!contained(allRowsIndex, skipRows)) {
                     int totalColumns = row.getTotalColumns();
@@ -1395,10 +1395,10 @@ public class MarkdownTable {
     }
 
     private void forAllSectionsRows(
-            final int startIndex,
-            final int count,
-            final TableSection[] sections,
-            final TableRowManipulator manipulator
+            int startIndex,
+            int count,
+            TableSection[] sections,
+            TableRowManipulator manipulator
     ) {
         if (count <= 0) return;
         int remaining = count;
@@ -1436,7 +1436,7 @@ public class MarkdownTable {
         public final int index;
         public final int spanOffset;
 
-        public IndexSpanOffset(final int index, final int spanOffset) {
+        public IndexSpanOffset(int index, int spanOffset) {
             this.index = index;
             this.spanOffset = spanOffset;
         }

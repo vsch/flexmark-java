@@ -8,7 +8,7 @@ public class FormattedCounter {
     private final String myDelimiter;
     private int myCount;
 
-    public FormattedCounter(final NumberFormat format, final Boolean lowercase, final String delimiter) {
+    public FormattedCounter(NumberFormat format, Boolean lowercase, String delimiter) {
         myFormat = format;
         myLowercase = lowercase;
         myDelimiter = delimiter;

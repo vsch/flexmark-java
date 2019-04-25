@@ -150,7 +150,7 @@ public interface LineFormattingAppendable extends Appendable {
      * @param endLine            end line offset
      * @return this
      */
-    LineFormattingAppendable prefixLines(final CharSequence prefix, boolean addAfterLinePrefix, final int startLine, final int endLine);
+    LineFormattingAppendable prefixLines(CharSequence prefix, boolean addAfterLinePrefix, int startLine, int endLine);
 
     /**
      * Get Lines without EOL
@@ -445,7 +445,7 @@ public interface LineFormattingAppendable extends Appendable {
      * @param predicate when true append blank line
      * @return this
      */
-    LineFormattingAppendable blankLineIf(final boolean predicate);
+    LineFormattingAppendable blankLineIf(boolean predicate);
 
     /**
      * Add a blank lines, if there isn't already given number of blank lines appended.

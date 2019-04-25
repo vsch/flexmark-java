@@ -21,7 +21,7 @@ public class NodeVisitor extends NodeAdaptedVisitor<VisitHandler<?>> {
         super(handlers);
     }
 
-    public void visitChildren(final Node parent) {
+    public void visitChildren(Node parent) {
         Node node = parent.getFirstChild();
         while (node != null) {
             // A subclass of this visitor might modify the node, resulting in getNext returning a different node or no
@@ -32,7 +32,7 @@ public class NodeVisitor extends NodeAdaptedVisitor<VisitHandler<?>> {
         }
     }
 
-    public void visit(final Node node) {
+    public void visit(Node node) {
         VisitHandler handler = myCustomHandlersMap.get(node.getClass());
         if (handler != null) {
             handler.visit(node);
@@ -41,7 +41,7 @@ public class NodeVisitor extends NodeAdaptedVisitor<VisitHandler<?>> {
         }
     }
 
-    public void visitNodeOnly(final Node node) {
+    public void visitNodeOnly(Node node) {
         VisitHandler handler = myCustomHandlersMap.get(node.getClass());
         if (handler != null) {
             handler.visit(node);

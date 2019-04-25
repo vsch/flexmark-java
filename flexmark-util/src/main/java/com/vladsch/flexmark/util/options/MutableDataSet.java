@@ -1,7 +1,5 @@
 package com.vladsch.flexmark.util.options;
 
-import com.vladsch.flexmark.util.collection.DataValueFactory;
-
 public class MutableDataSet extends DataSet implements MutableDataHolder {
     public MutableDataSet() {
         super();
@@ -31,14 +29,14 @@ public class MutableDataSet extends DataSet implements MutableDataHolder {
     }
 
     @Override
-    public MutableDataHolder setIn(final MutableDataHolder dataHolder) {
+    public MutableDataHolder setIn(MutableDataHolder dataHolder) {
         dataHolder.setAll(this);
         return dataHolder;
     }
 
     @Override
     public <T> T get(DataKey<T> key) {
-        return getOrCompute(key, key.getFactory());
+        return getOrCompute(key);
     }
 
     @Override
@@ -48,11 +46,11 @@ public class MutableDataSet extends DataSet implements MutableDataHolder {
     }
 
     @Override
-    public <T> T getOrCompute(DataKey<T> key, DataValueFactory<T> factory) {
+    public <T> T getOrCompute(DataKey<T> key) {
         if (dataSet.containsKey(key)) {
-            return key.getValue(dataSet.get(key));
+            return (T) dataSet.get(key);
         } else {
-            T newValue = factory.apply(this);
+            T newValue = key.getDefaultValue(this);
             dataSet.put(key, newValue);
             return newValue;
         }

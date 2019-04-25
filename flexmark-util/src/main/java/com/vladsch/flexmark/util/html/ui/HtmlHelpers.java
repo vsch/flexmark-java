@@ -44,7 +44,7 @@ public class HtmlHelpers {
         return err.replace("\n", "<br>");
     }
 
-    public static void setRegExError(String error, JTextPane jTextPane, final Font textFont, final BackgroundColor validTextFieldBackground, final BackgroundColor warningTextFieldBackground) {
+    public static void setRegExError(String error, JTextPane jTextPane, Font textFont, BackgroundColor validTextFieldBackground, BackgroundColor warningTextFieldBackground) {
         HtmlBuilder html = new HtmlBuilder();
         html.tag("html").style("margin:2px;vertical-align:middle;").attr(validTextFieldBackground, textFont).tag("body");
         html.attr(warningTextFieldBackground).tag("div");
@@ -78,9 +78,9 @@ public class HtmlHelpers {
     }
 
     public static java.awt.Color mixedColor(java.awt.Color originalColor, java.awt.Color overlayColor) {
-        final float[] hsbColor = java.awt.Color.RGBtoHSB(originalColor.getRed(), originalColor.getGreen(), originalColor.getBlue(), new float[3]);
-        final float[] hsbError = java.awt.Color.RGBtoHSB(overlayColor.getRed(), overlayColor.getGreen(), overlayColor.getBlue(), new float[3]);
-        final float[] hsbMixed = new float[3];
+        float[] hsbColor = java.awt.Color.RGBtoHSB(originalColor.getRed(), originalColor.getGreen(), originalColor.getBlue(), new float[3]);
+        float[] hsbError = java.awt.Color.RGBtoHSB(overlayColor.getRed(), overlayColor.getGreen(), overlayColor.getBlue(), new float[3]);
+        float[] hsbMixed = new float[3];
 
         // kotlin code
         //hsbMixed[0] = hsbError[0]

@@ -18,5 +18,14 @@
     <entry oldName="com.vladsch.flexmark.util.collection.Consumer" newName="java.util.function.Consumer" type="class"/>
     <entry oldName="com.vladsch.flexmark.util.collection.DataValueFactory" newName="com.vladsch.flexmark.util.options.DataValueFactory" type="class"/>
     <entry oldName="com.vladsch.flexmark.util.collection.DynamicDefaultKey" newName="com.vladsch.flexmark.util.options.DataKey" type="class"/>
+    <entry oldName="com.vladsch.flexmark.util.NodeTracker" newName="com.vladsch.flexmark.util.ast.NodeTracker" type="class"/>
+    <entry oldName="com.vladsch.flexmark.util.BlockTracker" newName="com.vladsch.flexmark.util.ast.BlockTracker" type="class"/>
+    <entry oldName="com.vladsch.flexmark.util.KeepType" newName="com.vladsch.flexmark.util.ast.KeepType" type="class"/>
+    <entry oldName="com.vladsch.flexmark.util.IParse" newName="com.vladsch.flexmark.util.ast.IParse" type="class"/>
+    <entry oldName="com.vladsch.flexmark.util.IRender" newName="com.vladsch.flexmark.util.ast.IRender" type="class"/>
+    <entry oldName="com.vladsch.flexmark.util.collection.NodeClassifierVisitor" newName="com.vladsch.flexmark.util.ast.NodeClassifierVisitor" type="class"/>
+    <entry oldName="com.vladsch.flexmark.util.collection.NodeCollectingVisitor" newName="com.vladsch.flexmark.util.ast.NodeCollectingVisitor" type="class"/>
+    <entry oldName="com.vladsch.flexmark.util.collection.ClassifyingNodeTracker" newName="com.vladsch.flexmark.util.ast.ClassifyingNodeTracker" type="class"/>
+    <entry oldName="com.vladsch.flexmark.util.mappers.NodeClassifier" newName="com.vladsch.flexmark.util.ast.NodeClassifier" type="class"/>
 </migrationMap>
 
