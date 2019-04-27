@@ -2,7 +2,7 @@ package com.vladsch.flexmark.parser;
 
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.util.ast.KeepType;
-import com.vladsch.flexmark.util.options.*;
+import com.vladsch.flexmark.util.data.*;
 
 public enum ParserEmulationProfile implements MutableDataSetter {
     COMMONMARK(null),

@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.html;
 
 import com.vladsch.flexmark.util.Utils;
-import com.vladsch.flexmark.util.options.DataHolder;
+import com.vladsch.flexmark.util.data.DataHolder;
 
 import java.util.regex.Pattern;
 

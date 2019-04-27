@@ -1,4 +1,4 @@
-package com.vladsch.flexmark.util.options;
+package com.vladsch.flexmark.util.data;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -12,8 +12,7 @@ public class DataSet implements DataHolder {
     }
 
     public DataSet(DataHolder other) {
-        dataSet = new HashMap<DataKey, Object>();
-        dataSet.putAll(other.getAll());
+        dataSet = new HashMap<DataKey, Object>(other.getAll());
     }
 
     @Override

@@ -15,8 +15,8 @@ import com.vladsch.flexmark.util.format.options.TableCaptionHandling;
 import com.vladsch.flexmark.util.html.Attribute;
 import com.vladsch.flexmark.util.html.Attributes;
 import com.vladsch.flexmark.util.html.*;
-import com.vladsch.flexmark.util.options.DataHolder;
-import com.vladsch.flexmark.util.options.DataKey;
+import com.vladsch.flexmark.util.data.DataHolder;
+import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.BasedSequenceImpl;
 import com.vladsch.flexmark.util.sequence.RepeatedCharSequence;
@@ -830,7 +830,7 @@ public class FlexmarkHtmlParser {
                 //                    skip();
                 //                    break;
                 //                }
-                //            }   
+                //            }
                 //            skip();
                 //        }
                 //    } else {
@@ -1028,7 +1028,7 @@ public class FlexmarkHtmlParser {
                         boolean handled = false;
 
                         if (conv.isReference() && !hasChildrenOfType(element, explicitLinkTextTags)) {
-                            // need reference 
+                            // need reference
                             Reference reference = getOrCreateReference(href, text, title);
                             if (reference != null) {
                                 handled = true;
@@ -1805,7 +1805,7 @@ public class FlexmarkHtmlParser {
                     CharSequence lineContent = out.getLineContent(lineCount - 1);
                     int pendingSpace = BasedSequenceImpl.of(lineContent).countTrailing(BasedSequence.WHITESPACE_NO_EOL_CHARS);
                     if (pendingSpace < 2) {
-                        // replace last line 
+                        // replace last line
                         out.removeLines(lineCount - 1, lineCount);
                         out.append(lineContent);
                         out.lineWithTrailingSpaces(2 - pendingSpace);

@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.formatter;
 
 import com.vladsch.flexmark.util.ast.Node;
-import com.vladsch.flexmark.util.options.MutableDataHolder;
+import com.vladsch.flexmark.util.data.MutableDataHolder;
 
 public interface TranslationContext {
     /**

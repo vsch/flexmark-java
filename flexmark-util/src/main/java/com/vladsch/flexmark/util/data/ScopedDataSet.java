@@ -1,19 +1,19 @@
-package com.vladsch.flexmark.util.options;
+package com.vladsch.flexmark.util.data;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MutableScopedDataSet extends MutableDataSet {
+public class ScopedDataSet extends DataSet {
     protected final DataHolder parent;
 
-    public MutableScopedDataSet(DataHolder parent) {
+    public ScopedDataSet(DataHolder parent) {
         super();
         this.parent = parent;
     }
 
-    public MutableScopedDataSet(DataHolder parent, MutableDataHolder other) {
+    public ScopedDataSet(DataHolder parent, DataHolder other) {
         super(other);
         this.parent = parent;
     }
@@ -25,7 +25,10 @@ public class MutableScopedDataSet extends MutableDataSet {
     @Override
     public Map<DataKey, Object> getAll() {
         if (parent != null) {
-            HashMap<DataKey, Object> all = new HashMap<DataKey, Object>(super.getAll());
+            HashMap<DataKey, Object> all = new HashMap<DataKey, Object>();
+
+            all.putAll(super.getAll());
+
             for (DataKey key : parent.keySet()) {
                 if (!contains(key)) {
                     all.put(key, parent.get(key));
@@ -41,7 +44,10 @@ public class MutableScopedDataSet extends MutableDataSet {
     @Override
     public Collection<DataKey> keySet() {
         if (parent != null) {
-            ArrayList<DataKey> all = new ArrayList<DataKey>(super.keySet());
+            ArrayList<DataKey> all = new ArrayList<DataKey>();
+
+            all.addAll(super.keySet());
+
             for (DataKey key : parent.keySet()) {
                 if (!contains(key)) {
                     all.add(key);

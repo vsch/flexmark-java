@@ -133,6 +133,16 @@ Future 0.50.2
     * [x] move `com.vladsch.flexmark.util.collection.NodeCollectingVisitor` to `com.vladsch.flexmark.util.ast.NodeCollectingVisitor`
     * [x] move `com.vladsch.flexmark.util.collection.ClassifyingNodeTracker` to `com.vladsch.flexmark.util.ast.ClassifyingNodeTracker`
     * [x] move `com.vladsch.flexmark.util.mappers.NodeClassifier` to `com.vladsch.flexmark.util.ast.NodeClassifier`
+  * [x] move data key/set/holder classes to `flexmark.util.data` package from `flexmark.util.options` package
+    * [x] move `com.vladsch.flexmark.util.options.DataHolder` to `com.vladsch.flexmark.util.data.DataHolder`
+    * [x] move `com.vladsch.flexmark.util.options.MutableDataSet` to `com.vladsch.flexmark.util.data.MutableDataSet`
+    * [x] move `com.vladsch.flexmark.util.options.MutableScopedDataSet` to `com.vladsch.flexmark.util.data.MutableScopedDataSet`
+    * [x] move `com.vladsch.flexmark.util.options.ScopedDataSet` to `com.vladsch.flexmark.util.data.ScopedDataSet`
+    * [x] move `com.vladsch.flexmark.util.options.DataValueFactory` to `com.vladsch.flexmark.util.data.DataValueFactory`
+    * [x] move `com.vladsch.flexmark.util.options.MutableDataHolder` to `com.vladsch.flexmark.util.data.MutableDataHolder`
+    * [x] move `com.vladsch.flexmark.util.options.DataSet` to `com.vladsch.flexmark.util.data.DataSet`
+    * [x] move `com.vladsch.flexmark.util.options.MutableDataSetter` to `com.vladsch.flexmark.util.data.MutableDataSetter`
+    * [x] move `com.vladsch.flexmark.util.options.DataKey` to `com.vladsch.flexmark.util.data.DataKey`
 * [x] Add: `LineFormattingAppendable` and `LineFormattingAppendableImpl`
   * [x] Fix: deprecate `FormattingAppendable` to be replaced by `LineFormattingAppendable`
   * [x] Fix: deprecate `FormattingAppendableImpl` to be replaced by
@@ -140,9 +150,9 @@ Future 0.50.2
   * [x] Fix: replace all uses of `FormattingAppendable` by `LineFormattingAppendable`
   * [x] Fix: replace all uses of `FormattingAppendableImpl` by `LineFormattingAppendableImpl`
   * [x] Delete: `FormattingAppendable` and `FormattingAppendableImpl`
-* [x] Fix: Factor out BasedSequenceImpl functionality that does not depend on BasedSequence and
-      can be applied to any CharSequence into its own `RichCharSequence` interface with default
-      abstract implementation in `RichCharSequenceBase` and implementation in
+* [x] Fix: Factor out BasedSequenceImpl functionality that does not depend on `BasedSequence`
+      and can be applied to any CharSequence into its own `RichCharSequence` interface with
+      default abstract implementation in `RichCharSequenceBase` and implementation in
       `RichCharSequenceImpl`.
 * [ ] Add: `FlexmarkHtmlParser` options:
   * [ ] Fix: [#313, Ability to override tags processing in FlexmarkHtmlParser]

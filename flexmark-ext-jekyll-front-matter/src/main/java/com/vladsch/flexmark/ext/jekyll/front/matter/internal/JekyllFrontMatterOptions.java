@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.ext.jekyll.front.matter.internal;
 
-import com.vladsch.flexmark.util.options.DataHolder;
+import com.vladsch.flexmark.util.data.DataHolder;
 
 class JekyllFrontMatterOptions {
     //public final boolean jekyllFrontFatter;

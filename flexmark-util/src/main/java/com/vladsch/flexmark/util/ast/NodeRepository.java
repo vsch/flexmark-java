@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.util.ast;
 
-import com.vladsch.flexmark.util.options.DataKey;
+import com.vladsch.flexmark.util.data.DataKey;
 
 import java.util.*;
 import java.util.function.Consumer;

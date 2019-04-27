@@ -2,9 +2,9 @@ package com.vladsch.flexmark.parser;
 
 import com.vladsch.flexmark.ast.*;
 import com.vladsch.flexmark.util.ast.Block;
-import com.vladsch.flexmark.util.options.DataHolder;
-import com.vladsch.flexmark.util.options.MutableDataHolder;
-import com.vladsch.flexmark.util.options.MutableDataSetter;
+import com.vladsch.flexmark.util.data.DataHolder;
+import com.vladsch.flexmark.util.data.MutableDataHolder;
+import com.vladsch.flexmark.util.data.MutableDataSetter;
 
 import java.util.Arrays;
 

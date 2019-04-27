@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.util.ast;
 
-import com.vladsch.flexmark.util.options.MutableDataSet;
+import com.vladsch.flexmark.util.data.MutableDataSet;
 import com.vladsch.flexmark.util.sequence.BasedSequenceImpl;
 import org.junit.Test;
 

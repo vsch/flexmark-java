@@ -7,8 +7,8 @@ import com.vladsch.flexmark.ext.gfm.strikethrough.internal.SubscriptDelimiterPro
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.builder.Extension;
-import com.vladsch.flexmark.util.options.DataKey;
-import com.vladsch.flexmark.util.options.MutableDataHolder;
+import com.vladsch.flexmark.util.data.DataKey;
+import com.vladsch.flexmark.util.data.MutableDataHolder;
 
 /**
  * Extension for GFM strikethrough using ~~ (GitHub Flavored Markdown).

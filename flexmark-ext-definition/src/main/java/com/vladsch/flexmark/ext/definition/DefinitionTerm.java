@@ -4,7 +4,7 @@ import com.vladsch.flexmark.ast.ListItem;
 import com.vladsch.flexmark.ast.Paragraph;
 import com.vladsch.flexmark.parser.ListOptions;
 import com.vladsch.flexmark.util.ast.Node;
-import com.vladsch.flexmark.util.options.DataHolder;
+import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 /**

@@ -2,7 +2,7 @@ package com.vladsch.flexmark.ext.gitlab.internal;
 
 import com.vladsch.flexmark.ext.gitlab.GitLabBlockQuote;
 import com.vladsch.flexmark.formatter.*;
-import com.vladsch.flexmark.util.options.DataHolder;
+import com.vladsch.flexmark.util.data.DataHolder;
 
 import java.util.Arrays;
 import java.util.HashSet;

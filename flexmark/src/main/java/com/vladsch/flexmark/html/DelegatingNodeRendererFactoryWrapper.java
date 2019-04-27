@@ -5,7 +5,7 @@ import com.vladsch.flexmark.html.renderer.NodeRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRendererFactory;
 import java.util.function.Function;
 import com.vladsch.flexmark.util.dependency.Dependent;
-import com.vladsch.flexmark.util.options.DataHolder;
+import com.vladsch.flexmark.util.data.DataHolder;
 
 import java.util.HashSet;
 import java.util.List;

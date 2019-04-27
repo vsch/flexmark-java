@@ -1,9 +1,9 @@
 package com.vladsch.flexmark.ext.attributes.internal;
 
 import com.vladsch.flexmark.ext.attributes.AttributesExtension;
-import com.vladsch.flexmark.util.options.DataHolder;
-import com.vladsch.flexmark.util.options.MutableDataHolder;
-import com.vladsch.flexmark.util.options.MutableDataSetter;
+import com.vladsch.flexmark.util.data.DataHolder;
+import com.vladsch.flexmark.util.data.MutableDataHolder;
+import com.vladsch.flexmark.util.data.MutableDataSetter;
 
 class AttributesOptions implements MutableDataSetter {
     public final boolean assignTextAttributes;

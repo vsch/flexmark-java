@@ -1,4 +1,4 @@
-package com.vladsch.flexmark.util.options;
+package com.vladsch.flexmark.util.data;
 
 import java.util.Collection;
 import java.util.Map;

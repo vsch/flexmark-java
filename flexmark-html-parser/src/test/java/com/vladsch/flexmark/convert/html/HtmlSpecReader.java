@@ -6,7 +6,7 @@ import com.vladsch.flexmark.test.DumpSpecReader;
 import com.vladsch.flexmark.test.FullSpecTestCase;
 import com.vladsch.flexmark.test.RenderingTestCase;
 import com.vladsch.flexmark.util.ast.Node;
-import com.vladsch.flexmark.util.options.DataHolder;
+import com.vladsch.flexmark.util.data.DataHolder;
 import org.junit.AssumptionViolatedException;
 
 import java.io.InputStream;

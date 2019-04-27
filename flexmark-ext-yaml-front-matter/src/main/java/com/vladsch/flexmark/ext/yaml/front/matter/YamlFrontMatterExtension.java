@@ -5,7 +5,7 @@ import com.vladsch.flexmark.ext.yaml.front.matter.internal.YamlFrontMatterNodeFo
 import com.vladsch.flexmark.formatter.Formatter;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.builder.Extension;
-import com.vladsch.flexmark.util.options.MutableDataHolder;
+import com.vladsch.flexmark.util.data.MutableDataHolder;
 
 /**
  * Extension for YAML-like metadata.

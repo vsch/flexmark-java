@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.util.ast;
 
-import com.vladsch.flexmark.util.options.DataHolder;
+import com.vladsch.flexmark.util.data.DataHolder;
 
 /**
  * Render interface for rendering implementation for RenderingTestCase

@@ -18,10 +18,6 @@ public class Range {
 
     public int component2() { return myEnd; }
 
-    //public TextRange asTextRange() {
-    //    return new TextRange(myStart, myEnd);
-    //}
-
     public Range(int start, int end) {
         myStart = start;
         myEnd = end;
@@ -211,10 +207,6 @@ public class Range {
     public Range expandToInclude(int start, int end) {
         return withRange(myStart > start ? start : myStart, myEnd < end ? end : myEnd);
     }
-
-    //public boolean equals(TextRange o) {
-    //    return myStart == o.getStartOffset() && myEnd == o.getEndOffset();
-    //}
 
     @Override
     public boolean equals(Object o) {

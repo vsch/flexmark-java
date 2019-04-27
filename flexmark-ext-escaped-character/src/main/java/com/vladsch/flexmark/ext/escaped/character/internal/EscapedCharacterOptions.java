@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.ext.escaped.character.internal;
 
-import com.vladsch.flexmark.util.options.DataHolder;
+import com.vladsch.flexmark.util.data.DataHolder;
 
 class EscapedCharacterOptions {
     //public final boolean escaped_characterOption1;

@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.formatter;
 
-import com.vladsch.flexmark.util.options.DataHolder;
+import com.vladsch.flexmark.util.data.DataHolder;
 
 /**
  * Factory for instantiating new node renderers when rendering is done.

@@ -5,7 +5,7 @@ import com.vladsch.flexmark.spec.SpecReader;
 import com.vladsch.flexmark.spec.SpecReaderFactory;
 import com.vladsch.flexmark.spec.UrlString;
 import com.vladsch.flexmark.util.ast.Node;
-import com.vladsch.flexmark.util.options.DataHolder;
+import com.vladsch.flexmark.util.data.DataHolder;
 import org.junit.Test;
 
 import java.io.InputStream;

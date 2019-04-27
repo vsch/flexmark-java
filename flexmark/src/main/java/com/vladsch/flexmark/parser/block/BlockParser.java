@@ -4,7 +4,7 @@ import com.vladsch.flexmark.parser.InlineParser;
 import com.vladsch.flexmark.parser.core.ParagraphParser;
 import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.util.ast.BlockContent;
-import com.vladsch.flexmark.util.options.MutableDataHolder;
+import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 /**

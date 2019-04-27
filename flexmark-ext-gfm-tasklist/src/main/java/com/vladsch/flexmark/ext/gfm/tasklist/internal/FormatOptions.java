@@ -3,9 +3,9 @@ package com.vladsch.flexmark.ext.gfm.tasklist.internal;
 import com.vladsch.flexmark.ext.gfm.tasklist.TaskListExtension;
 import com.vladsch.flexmark.ext.gfm.tasklist.TaskListItemCase;
 import com.vladsch.flexmark.ext.gfm.tasklist.TaskListItemPlacement;
-import com.vladsch.flexmark.util.options.DataHolder;
-import com.vladsch.flexmark.util.options.MutableDataHolder;
-import com.vladsch.flexmark.util.options.MutableDataSetter;
+import com.vladsch.flexmark.util.data.DataHolder;
+import com.vladsch.flexmark.util.data.MutableDataHolder;
+import com.vladsch.flexmark.util.data.MutableDataSetter;
 
 @SuppressWarnings("WeakerAccess")
 public class FormatOptions implements MutableDataSetter {

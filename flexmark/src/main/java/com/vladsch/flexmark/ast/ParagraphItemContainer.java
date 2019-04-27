@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.ast;
 
 import com.vladsch.flexmark.parser.ListOptions;
-import com.vladsch.flexmark.util.options.DataHolder;
+import com.vladsch.flexmark.util.data.DataHolder;
 
 public interface ParagraphItemContainer {
     boolean isItemParagraph(Paragraph node);

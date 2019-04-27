@@ -1,9 +1,9 @@
 package com.vladsch.flexmark.ext.gfm.issues.internal;
 
 import com.vladsch.flexmark.ext.gfm.issues.GfmIssuesExtension;
-import com.vladsch.flexmark.util.options.DataHolder;
-import com.vladsch.flexmark.util.options.MutableDataHolder;
-import com.vladsch.flexmark.util.options.MutableDataSetter;
+import com.vladsch.flexmark.util.data.DataHolder;
+import com.vladsch.flexmark.util.data.MutableDataHolder;
+import com.vladsch.flexmark.util.data.MutableDataSetter;
 
 class GfmIssuesOptions implements MutableDataSetter {
     public final String gitHubIssuesUrlRoot;

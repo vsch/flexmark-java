@@ -3,7 +3,7 @@ package com.vladsch.flexmark.ext.definition.internal;
 import com.vladsch.flexmark.ext.definition.DefinitionExtension;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.ParserEmulationProfile;
-import com.vladsch.flexmark.util.options.DataHolder;
+import com.vladsch.flexmark.util.data.DataHolder;
 
 @SuppressWarnings("WeakerAccess")
 class DefinitionOptions {

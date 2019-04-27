@@ -1,4 +1,4 @@
-package com.vladsch.flexmark.util.options;
+package com.vladsch.flexmark.util.data;
 
 public interface MutableDataSetter {
     MutableDataHolder setIn(MutableDataHolder dataHolder);

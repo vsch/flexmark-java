@@ -3,7 +3,7 @@ package com.vladsch.flexmark.ast.util;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.format.TableFormatOptions;
 import com.vladsch.flexmark.util.html.Escaping;
-import com.vladsch.flexmark.util.options.DataHolder;
+import com.vladsch.flexmark.util.data.DataHolder;
 
 import java.util.regex.Pattern;
 

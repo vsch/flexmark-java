@@ -3,7 +3,7 @@ package com.vladsch.flexmark.ext.admonition.internal;
 import com.vladsch.flexmark.ext.admonition.AdmonitionBlock;
 import com.vladsch.flexmark.formatter.*;
 import com.vladsch.flexmark.util.ast.Node;
-import com.vladsch.flexmark.util.options.DataHolder;
+import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.sequence.RepeatedCharSequence;
 
 import java.util.Arrays;

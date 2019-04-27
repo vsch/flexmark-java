@@ -16,8 +16,8 @@
     <entry oldName="com.vladsch.flexmark.util.ComputableFactory" newName="java.util.function.Function" type="class"/>
     <entry oldName="com.vladsch.flexmark.util.ComputeFactory" newName="java.util.function.Function" type="class"/>
     <entry oldName="com.vladsch.flexmark.util.collection.Consumer" newName="java.util.function.Consumer" type="class"/>
-    <entry oldName="com.vladsch.flexmark.util.collection.DataValueFactory" newName="com.vladsch.flexmark.util.options.DataValueFactory" type="class"/>
-    <entry oldName="com.vladsch.flexmark.util.collection.DynamicDefaultKey" newName="com.vladsch.flexmark.util.options.DataKey" type="class"/>
+    <entry oldName="com.vladsch.flexmark.util.collection.DataValueFactory" newName="com.vladsch.flexmark.util.data.DataValueFactory" type="class"/>
+    <entry oldName="com.vladsch.flexmark.util.collection.DynamicDefaultKey" newName="com.vladsch.flexmark.util.data.DataKey" type="class"/>
     <entry oldName="com.vladsch.flexmark.util.NodeTracker" newName="com.vladsch.flexmark.util.ast.NodeTracker" type="class"/>
     <entry oldName="com.vladsch.flexmark.util.BlockTracker" newName="com.vladsch.flexmark.util.ast.BlockTracker" type="class"/>
     <entry oldName="com.vladsch.flexmark.util.KeepType" newName="com.vladsch.flexmark.util.ast.KeepType" type="class"/>
@@ -27,5 +27,14 @@
     <entry oldName="com.vladsch.flexmark.util.collection.NodeCollectingVisitor" newName="com.vladsch.flexmark.util.ast.NodeCollectingVisitor" type="class"/>
     <entry oldName="com.vladsch.flexmark.util.collection.ClassifyingNodeTracker" newName="com.vladsch.flexmark.util.ast.ClassifyingNodeTracker" type="class"/>
     <entry oldName="com.vladsch.flexmark.util.mappers.NodeClassifier" newName="com.vladsch.flexmark.util.ast.NodeClassifier" type="class"/>
+    <entry oldName="com.vladsch.flexmark.util.options.DataHolder" newName="com.vladsch.flexmark.util.data.DataHolder" type="class"/>
+    <entry oldName="com.vladsch.flexmark.util.options.MutableDataSetter" newName="com.vladsch.flexmark.util.data.MutableDataSetter" type="class"/>
+    <entry oldName="com.vladsch.flexmark.util.options.MutableDataSet" newName="com.vladsch.flexmark.util.data.MutableDataSet" type="class"/>
+    <entry oldName="com.vladsch.flexmark.util.options.ScopedDataSet" newName="com.vladsch.flexmark.util.data.ScopedDataSet" type="class"/>
+    <entry oldName="com.vladsch.flexmark.util.options.MutableDataHolder" newName="com.vladsch.flexmark.util.data.MutableDataHolder" type="class"/>
+    <entry oldName="com.vladsch.flexmark.util.options.MutableScopedDataSet" newName="com.vladsch.flexmark.util.data.MutableScopedDataSet" type="class"/>
+    <entry oldName="com.vladsch.flexmark.util.options.DataValueFactory" newName="com.vladsch.flexmark.util.data.DataValueFactory" type="class"/>
+    <entry oldName="com.vladsch.flexmark.util.options.DataSet" newName="com.vladsch.flexmark.util.data.DataSet" type="class"/>
+    <entry oldName="com.vladsch.flexmark.util.options.DataKey" newName="com.vladsch.flexmark.util.data.DataKey" type="class"/>
 </migrationMap>
 

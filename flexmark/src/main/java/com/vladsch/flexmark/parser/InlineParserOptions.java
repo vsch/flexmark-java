@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.parser;
 
-import com.vladsch.flexmark.util.options.DataHolder;
+import com.vladsch.flexmark.util.data.DataHolder;
 
 public class InlineParserOptions {
     public final boolean matchLookaheadFirst;

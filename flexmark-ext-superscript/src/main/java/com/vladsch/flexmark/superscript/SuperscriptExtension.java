@@ -6,8 +6,8 @@ import com.vladsch.flexmark.superscript.internal.SuperscriptDelimiterProcessor;
 import com.vladsch.flexmark.superscript.internal.SuperscriptJiraRenderer;
 import com.vladsch.flexmark.superscript.internal.SuperscriptNodeRenderer;
 import com.vladsch.flexmark.util.builder.Extension;
-import com.vladsch.flexmark.util.options.DataKey;
-import com.vladsch.flexmark.util.options.MutableDataHolder;
+import com.vladsch.flexmark.util.data.DataKey;
+import com.vladsch.flexmark.util.data.MutableDataHolder;
 
 /**
  * Extension for superscripts

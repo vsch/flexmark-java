@@ -11,8 +11,8 @@ import com.vladsch.flexmark.util.ast.NodeVisitor;
 import com.vladsch.flexmark.util.ast.VisitHandler;
 import com.vladsch.flexmark.util.ast.Visitor;
 import com.vladsch.flexmark.util.collection.iteration.ReversiblePeekingIterator;
-import com.vladsch.flexmark.util.options.DataHolder;
-import com.vladsch.flexmark.util.options.MutableDataSet;
+import com.vladsch.flexmark.util.data.DataHolder;
+import com.vladsch.flexmark.util.data.MutableDataSet;
 import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
 import org.junit.Test;
 
@@ -225,7 +225,7 @@ public class FormatterModifiedAST {
                                 Text text = new Text("LINK");
 
                                 // have to update the parent link text to reflect changes to AST
-                                //node.setText(text.getChars());    
+                                //node.setText(text.getChars());
 
                                 child.insertAfter(text);
                                 childIte.remove();

@@ -122,15 +122,8 @@ public class ReplacedTextMapper {
                 if (originalIndex > region.getOriginalRange().getEnd()) {
                     originalIndex = region.getOriginalRange().getEnd();
                 }
-
-                //originalIndex -= original.getStartOffset();
                 break;
             }
-
-            //if (region == regions.get(regions.size() - 1) && region.getReplaced().getEndOffset() == replacedIndex) {
-            //    originalIndex = region.getOriginal().getEndOffset() - original.getStartOffset();
-            //    break;
-            //}
         }
 
         return parentOriginalOffset(originalIndex);

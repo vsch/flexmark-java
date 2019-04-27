@@ -134,7 +134,7 @@ public abstract class BasedSequenceImpl extends RichCharSequenceBase<BasedSequen
 
     @Override
     public boolean equals(Object other) {
-        return (this == other) || other != null && other instanceof CharSequence && ((CharSequence) other).length() == length() && matchChars((CharSequence) other, 0, false);
+        return (this == other) || other instanceof CharSequence && ((CharSequence) other).length() == length() && matchChars((CharSequence) other, 0, false);
     }
 
     @Override
@@ -144,7 +144,7 @@ public abstract class BasedSequenceImpl extends RichCharSequenceBase<BasedSequen
 
     @Override
     public boolean equals(Object other, boolean ignoreCase) {
-        return (this == other) || other != null && other instanceof CharSequence && ((CharSequence) other).length() == length() && matchChars((CharSequence) other, 0, ignoreCase);
+        return (this == other) || other instanceof CharSequence && ((CharSequence) other).length() == length() && matchChars((CharSequence) other, 0, ignoreCase);
     }
 
     @Override

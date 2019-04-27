@@ -17,11 +17,11 @@ import com.vladsch.flexmark.util.builder.BuilderBase;
 import com.vladsch.flexmark.util.builder.Extension;
 import com.vladsch.flexmark.util.ast.NodeCollectingVisitor;
 import com.vladsch.flexmark.util.collection.SubClassingBag;
+import com.vladsch.flexmark.util.data.*;
 import com.vladsch.flexmark.util.format.TableFormatOptions;
 import com.vladsch.flexmark.util.format.options.*;
 import com.vladsch.flexmark.util.html.LineFormattingAppendable;
 import com.vladsch.flexmark.util.mappers.CharWidthProvider;
-import com.vladsch.flexmark.util.options.*;
 
 import java.util.*;
 

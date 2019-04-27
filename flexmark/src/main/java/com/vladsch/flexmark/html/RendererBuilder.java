@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.html;
 
 import com.vladsch.flexmark.html.renderer.HeaderIdGeneratorFactory;
-import com.vladsch.flexmark.util.options.DataHolder;
+import com.vladsch.flexmark.util.data.DataHolder;
 
 /**
  * Extension point for RenderingExtensions that only provide attributes, link resolvers or html id generators

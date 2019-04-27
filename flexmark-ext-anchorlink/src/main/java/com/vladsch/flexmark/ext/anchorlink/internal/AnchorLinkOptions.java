@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.ext.anchorlink.internal;
 
 import com.vladsch.flexmark.ext.anchorlink.AnchorLinkExtension;
-import com.vladsch.flexmark.util.options.DataHolder;
+import com.vladsch.flexmark.util.data.DataHolder;
 
 class AnchorLinkOptions {
     public final boolean wrapText;

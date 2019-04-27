@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.ext.wikilink.internal;
 
 import com.vladsch.flexmark.ext.wikilink.WikiLinkExtension;
-import com.vladsch.flexmark.util.options.DataHolder;
+import com.vladsch.flexmark.util.data.DataHolder;
 
 public class WikiLinkOptions {
     public final boolean allowInlines;

@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.ext.enumerated.reference;
 
 import com.vladsch.flexmark.util.ast.Node;
-import com.vladsch.flexmark.util.options.DataHolder;
+import com.vladsch.flexmark.util.data.DataHolder;
 
 import java.util.ArrayList;
 import java.util.HashMap;
