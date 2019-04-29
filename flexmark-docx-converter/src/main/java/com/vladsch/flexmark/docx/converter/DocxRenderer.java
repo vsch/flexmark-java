@@ -645,7 +645,7 @@ public class DocxRenderer implements IRender {
                 baseSerial = 0;
             }
             baseIdToSerial.put(baseId, baseSerial + 1);
-            validBookmark = String.format("%s-%d", baseId, baseSerial);
+            validBookmark = String.format(Locale.US, "%s-%d", baseId, baseSerial);
             idToValidBookmark.put(id, validBookmark);
             return validBookmark;
         }

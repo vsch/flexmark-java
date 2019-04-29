@@ -14,10 +14,7 @@ import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.BasedSequenceImpl;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import static com.vladsch.flexmark.formatter.RenderPurpose.FORMAT;
 import static com.vladsch.flexmark.util.format.TableManipulator.NULL;
@@ -131,7 +128,7 @@ public class TableNodeFormatter implements NodeFormatter {
                             int i = 0;
                             for (Map.Entry<Integer, Integer> offset : offsets.entrySet()) {
                                 i++;
-                                markdown.append(sep).append(String.format("%d:[%d,%d] was:[%d,%d]", i, offset.getValue(), offset.getValue() + 1, offset.getKey(), offset.getKey() + 1));
+                                markdown.append(sep).append(String.format(Locale.US, "%d:[%d,%d] was:[%d,%d]", i, offset.getValue(), offset.getValue() + 1, offset.getKey(), offset.getKey() + 1));
                                 sep = " ";
                             }
                             markdown.append("\n");

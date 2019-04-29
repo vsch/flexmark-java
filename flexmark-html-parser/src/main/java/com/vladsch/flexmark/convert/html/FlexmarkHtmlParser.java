@@ -1587,7 +1587,7 @@ public class FlexmarkHtmlParser {
 
         String getItemPrefix(final HtmlParserOptions options) {
             if (isNumbered) {
-                return String.format("%d%c ", itemCount, options.orderedListDelimiter);
+                return String.format(Locale.US, "%d%c ", itemCount, options.orderedListDelimiter);
             } else {
                 return String.format("%c ", options.unorderedListDelimiter);
             }

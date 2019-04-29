@@ -765,7 +765,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
             if (options.listRenumberItems) {
                 Document document = context.getDocument();
                 Integer itemNumber = document.get(LIST_ITEM_NUMBER);
-                openingMarker = String.format("%d%c", itemNumber++, delimiter);
+                openingMarker = String.format(Locale.US, "%d%c", itemNumber++, delimiter);
                 document.set(LIST_ITEM_NUMBER, itemNumber);
             } else {
                 openingMarker = String.format("%s%c", number, delimiter);
@@ -929,7 +929,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
     static final TranslationPlaceholderGenerator htmlEntityPlaceholderGenerator = new TranslationPlaceholderGenerator() {
         @Override
         public String getPlaceholder(final int index) {
-            return String.format("&#%d;", index);
+            return String.format(Locale.US, "&#%d;", index);
         }
     };
 

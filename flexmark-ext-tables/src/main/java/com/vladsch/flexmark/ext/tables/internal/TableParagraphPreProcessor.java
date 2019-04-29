@@ -118,7 +118,8 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
         int minCol = minColumnDashes >= 1 ? minColumnDashes : 1;
         int minColDash = minColumnDashes >= 2 ? minColumnDashes - 1 : 1;
         int minColDashes = minColumnDashes >= 3 ? minColumnDashes - 2 : 1;
-        String COL = String.format("(?:" + "\\s*-{%d,}\\s*|\\s*:-{%d,}\\s*|\\s*-{%d,}:\\s*|\\s*:-{%d,}:\\s*" + ")", minCol, minColDash, minColDash, minColDashes);
+        // to prevent conversion to arabic numbers, using string
+        String COL = String.format(Locale.US, "(?:" + "\\s*-{%d,}\\s*|\\s*:-{%d,}\\s*|\\s*-{%d,}:\\s*|\\s*:-{%d,}:\\s*" + ")", minCol, minColDash, minColDash, minColDashes);
 
         boolean noIntelliJ = intellijDummyIdentifier.isEmpty();
         String add = noIntelliJ ? "" : INTELLIJ_DUMMY_IDENTIFIER;
