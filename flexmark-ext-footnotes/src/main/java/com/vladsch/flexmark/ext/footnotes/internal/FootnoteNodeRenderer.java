@@ -12,6 +12,7 @@ import com.vladsch.flexmark.util.options.DataHolder;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Locale;
 import java.util.Set;
 
 public class FootnoteNodeRenderer implements PhasedNodeRenderer {
@@ -103,7 +104,7 @@ public class FootnoteNodeRenderer implements PhasedNodeRenderer {
 
                                             int iMax = footnoteBlock.getFootnoteReferences();
                                             for (int i = 0; i < iMax; i++) {
-                                                html.attr("href", "#fnref-" + footnoteOrdinal + (i == 0 ? "" : String.format("-%d", i)));
+                                                html.attr("href", "#fnref-" + footnoteOrdinal + (i == 0 ? "" : String.format(Locale.US, "-%d", i)));
                                                 if (!options.footnoteBackLinkRefClass.isEmpty()) html.attr("class", options.footnoteBackLinkRefClass);
                                                 html.line().withAttr().tag("a");
                                                 html.raw(options.footnoteBackRefString);
@@ -134,7 +135,7 @@ public class FootnoteNodeRenderer implements PhasedNodeRenderer {
         } else {
             final int footnoteOrdinal = footnoteBlock.getFootnoteOrdinal();
             int i = node.getReferenceOrdinal();
-            html.attr("id", "fnref-" + footnoteOrdinal + (i == 0 ? "" : String.format("-%d", i)));
+            html.attr("id", "fnref-" + footnoteOrdinal + (i == 0 ? "" : String.format(Locale.US, "-%d", i)));
             html.srcPos(node.getChars()).withAttr().tag("sup", false, false, new Runnable() {
                 @Override
                 public void run() {

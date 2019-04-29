@@ -21,6 +21,7 @@ import com.vladsch.flexmark.util.Utils;
 
 import java.awt.Color;
 import java.util.HashMap;
+import java.util.Locale;
 
 @SuppressWarnings({ "WeakerAccess" })
 public class ColorStyler extends HtmlStylerBase<Color> {
@@ -81,10 +82,10 @@ public class ColorStyler extends HtmlStylerBase<Color> {
             if (a.isEmpty()) {
                 a = "ff";
             }
-            
+
             return new Color(parse(r), parse(g), parse(b), parse(a));
         }
-        
+
         Integer rgb = nameColorMap.get(colorName);
         return rgb == null ? null : new Color(rgb);
     }
@@ -98,8 +99,8 @@ public class ColorStyler extends HtmlStylerBase<Color> {
     }
 
     public static String getColorValue(Color item) {
-        return item == null ? "" : item.getAlpha() != 255 ? String.format("rgba(%d,%d,%d,%d)", item.getRed(), item.getGreen(), item.getBlue(), item.getAlpha())
-                : String.format("%02x%02x%02x", item.getRed(), item.getGreen(), item.getBlue());
+        return item == null ? "" : item.getAlpha() != 255 ? String.format(Locale.US, "rgba(%d,%d,%d,%d)", item.getRed(), item.getGreen(), item.getBlue(), item.getAlpha())
+                : String.format(Locale.US, "%02x%02x%02x", item.getRed(), item.getGreen(), item.getBlue());
     }
 
     @SuppressWarnings("WeakerAccess")
@@ -108,7 +109,7 @@ public class ColorStyler extends HtmlStylerBase<Color> {
         if (item != null) {
             final int rgb = item.getRGB();
             String colorName = colorNameMap.get(rgb & 0x00ffffff);
-            return colorName != null ? colorName : String.format("rgb(%d,%d,%d)", item.getRed(), item.getGreen(), item.getBlue());
+            return colorName != null ? colorName : String.format(Locale.US, "rgb(%d,%d,%d)", item.getRed(), item.getGreen(), item.getBlue());
         }
         return "";
     }

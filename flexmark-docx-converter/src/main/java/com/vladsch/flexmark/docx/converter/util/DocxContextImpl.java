@@ -24,10 +24,7 @@ import org.docx4j.wml.R.Separator;
 
 import javax.xml.bind.JAXBElement;
 import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public abstract class DocxContextImpl<T> implements DocxContext<T>, BlockFormatProvider<T>, RunFormatProvider<T>, ParaContainer, RunContainer, ContentContainer {
@@ -389,7 +386,7 @@ public abstract class DocxContextImpl<T> implements DocxContext<T>, BlockFormatP
         if (bookmarkName != null && !bookmarkName.isEmpty()) {
             bm.setName(getValidBookmarkName(bookmarkName));
         } else {
-            bm.setName(String.format("BM_%d", id));
+            bm.setName(String.format(Locale.US, "BM_%d", id));
         }
         JAXBElement<CTBookmark> bmStart = myFactory.createBodyBookmarkStart(bm);
         if (isBlockBookmark) {

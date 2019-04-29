@@ -18,10 +18,11 @@
 package com.vladsch.flexmark.util.html.ui;
 
 import java.awt.Font;
+import java.util.Locale;
 
 public class FontStyler extends HtmlStylerBase<Font> {
     @Override
     public String getStyle(final Font item) {
-        return item == null ? "" : String.format("font-family:%s;font-size:%dpt;font-style:normal;font-weight:normal", item.getFamily(), item.getSize());
+        return item == null ? "" : String.format(Locale.US, "font-family:%s;font-size:%dpt;font-style:normal;font-weight:normal", item.getFamily(), item.getSize());
     }
 }

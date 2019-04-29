@@ -5,6 +5,7 @@ flexmark-java
 
 [TOC]: # " "
 
+- [Next 0.42.8](#next-0428)
 - [0.42.6](#0426)
 - [0.42.4](#0424)
 - [0.42.2](#0422)
@@ -82,6 +83,12 @@ flexmark-java
 
 
 &nbsp;</details>
+
+Next 0.42.8
+-----------
+
+* Fix: add explicit `Locale.US` to `String.format()` when using `%d` for integers to prevent
+  conversion to arabic on Java 11.
 
 0.42.6
 ------

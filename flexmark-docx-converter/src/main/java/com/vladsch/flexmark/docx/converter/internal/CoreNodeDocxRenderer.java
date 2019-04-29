@@ -965,7 +965,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
                     } else {
                         sourceFile = String.format("in %s:", sourceFile);
                     }
-                    System.err.println(String.format("    WARN: Invalid anchor target '%s' %s%d:%d", nodeId, sourceFile, atIndex.getFirst() + 1, atIndex.getSecond() + 2));
+                    System.err.println(String.format(Locale.US, "    WARN: Invalid anchor target '%s' %s%d:%d", nodeId, sourceFile, atIndex.getFirst() + 1, atIndex.getSecond() + 2));
                 }
             }
             final String anchor = docx.getValidBookmarkName(nodeId) + options.localHyperlinkSuffix;
@@ -1356,7 +1356,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
         BufferedImage image = null;
         int id1 = imageId++;
         int id2 = imageId++;
-        String filenameHint = String.format("Image%d", id1 / 2 + 1);
+        String filenameHint = String.format(Locale.US, "Image%d", id1 / 2 + 1);
         int cx;
 
         if (url.startsWith(DocxRenderer.EMOJI_RESOURCE_PREFIX)) {

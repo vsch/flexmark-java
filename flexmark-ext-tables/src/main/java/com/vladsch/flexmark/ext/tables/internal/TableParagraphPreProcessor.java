@@ -118,7 +118,8 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
         int minCol = minColumnDashes >= 1 ? minColumnDashes : 1;
         int minColDash = minColumnDashes >= 2 ? minColumnDashes - 1 : 1;
         int minColDashes = minColumnDashes >= 3 ? minColumnDashes - 2 : 1;
-        String COL = String.format("(?:" + "\\s*-{%d,}\\s*|\\s*:-{%d,}\\s*|\\s*-{%d,}:\\s*|\\s*:-{%d,}:\\s*" + ")", minCol, minColDash, minColDash, minColDashes);
+        // to prevent conversion to arabic numbers, using string
+        String COL = String.format(Locale.US, "(?:" + "\\s*-{%d,}\\s*|\\s*:-{%d,}\\s*|\\s*-{%d,}:\\s*|\\s*:-{%d,}:\\s*" + ")", minCol, minColDash, minColDash, minColDashes);
 
         boolean noIntelliJ = intellijDummyIdentifier.isEmpty();
         String add = noIntelliJ ? "" : INTELLIJ_DUMMY_IDENTIFIER;
@@ -323,7 +324,7 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
                 if (options.trimCellWhitespace) tableCell.trimWhiteSpace();
                 else tableCell.mergeWhiteSpace();
 
-                // NOTE: here we get only chars which do not reflect out-of-base characters, prefixes and removed text 
+                // NOTE: here we get only chars which do not reflect out-of-base characters, prefixes and removed text
                 tableCell.setText(tableCell.getChildChars());
 
                 tableCell.setCharsFromContent();
@@ -374,7 +375,7 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
     }
 
     List<Node> cleanUpInlinedSeparators(InlineParser inlineParser, TableRow tableRow, List<Node> sepList) {
-        // any separators which do not have tableRow as parent are embedded into inline elements and should be 
+        // any separators which do not have tableRow as parent are embedded into inline elements and should be
         // converted back to text
         ArrayList<Node> removedSeparators = null;
         ArrayList<Node> mergeTextParents = null;
