@@ -13,9 +13,9 @@ import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.builder.Extension;
 import com.vladsch.flexmark.util.html.Escaping;
-import com.vladsch.flexmark.util.options.DataHolder;
-import com.vladsch.flexmark.util.options.MutableDataHolder;
-import com.vladsch.flexmark.util.options.MutableDataSet;
+import com.vladsch.flexmark.util.data.DataHolder;
+import com.vladsch.flexmark.util.data.MutableDataHolder;
+import com.vladsch.flexmark.util.data.MutableDataSet;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -32,13 +32,13 @@ public class ParagraphCustomRenderingSample {
     static class CustomNodeRenderer implements NodeRenderer {
         private final boolean codeSoftLineBreaks;
 
-        public CustomNodeRenderer(final DataHolder options) {
+        public CustomNodeRenderer(DataHolder options) {
             codeSoftLineBreaks = Parser.CODE_SOFT_LINE_BREAKS.getFrom(options);
         }
 
         public static class Factory implements DelegatingNodeRendererFactory {
             @Override
-            public NodeRenderer create(final DataHolder options) {
+            public NodeRenderer apply(DataHolder options) {
                 return new CustomNodeRenderer(options);
             }
 
@@ -60,7 +60,7 @@ public class ParagraphCustomRenderingSample {
             HashSet<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
             set.add(new NodeRenderingHandler<Paragraph>(Paragraph.class, new com.vladsch.flexmark.html.CustomNodeRenderer<Paragraph>() {
                 @Override
-                public void render(Paragraph node, NodeRendererContext context, final HtmlWriter html) {
+                public void render(Paragraph node, NodeRendererContext context, HtmlWriter html) {
                     html.withAttr().tag("div");
                     context.delegateRender();
                     html.tag("/div");
@@ -73,12 +73,12 @@ public class ParagraphCustomRenderingSample {
 
     static class CustomExtension implements HtmlRendererExtension {
         @Override
-        public void rendererOptions(final MutableDataHolder options) {
+        public void rendererOptions(MutableDataHolder options) {
 
         }
 
         @Override
-        public void extend(final Builder rendererBuilder, final String rendererType) {
+        public void extend(Builder rendererBuilder, String rendererType) {
             rendererBuilder.nodeRendererFactory(new CustomNodeRenderer.Factory());
         }
 
