@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="com.openhtmltopdf:openhtmltopdf-core:0.0.1-RC15" type="repository">
+    <properties maven-id="com.openhtmltopdf:openhtmltopdf-core:0.0.1-RC15" />
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/openhtmltopdf-core-0.0.1-RC15.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

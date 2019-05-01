@@ -6,7 +6,7 @@ flexmark-java
 [TOC]: # " "
 
 - [0.50.4](#0504)
-- [Next 0.42.8](#next-0428)
+- [0.42.8](#0428)
 - [0.42.6](#0426)
 - [0.42.4](#0424)
 - [0.42.2](#0422)
@@ -162,9 +162,11 @@ flexmark-java
 * [ ] Add: `<!-- @formatter:on -->` and `<!-- @formatter:on -->` tags to `Formatter` for
       controlling non-formatting regions.
 
-Next 0.42.8
------------
+0.42.8
+------
 
+* Add: PDF converter landscape sample [PdfLandscapeConverter.java]
+* Fix: revert to OpenHtmlToPDF version 0.0.1-RC15 which is the last Java 7 byte code version
 * Fix: fill missing columns StringIndexOutOfBoundsException when prev cell consists of
   consecutive pipes without text
 * Fix: add explicit `Locale.US` to `String.format()` when using `%d` for integers to prevent
@@ -1449,4 +1451,5 @@ setting either will affect both keys. For information on these keys see
 [NodeInsertingPostProcessorSample.java]: https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/samples/NodeInsertingPostProcessorSample.java
 [YouTrack: IDEA-207453]: https://youtrack.jetbrains.com/issue/IDEA-207453 "Add Conversion of ref anchor to UrlFilter for file line navigation"
 [#313, Ability to override tags processing in FlexmarkHtmlParser]: https://github.com/vsch/flexmark-java/issues/313
+[PdfLandscapeConverter.java]: https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/samples/PdfLandscapeConverter.java
 
