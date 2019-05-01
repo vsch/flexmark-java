@@ -5,7 +5,7 @@ flexmark-java
 
 [TOC]: # " "
 
-- [Next 0.42.8](#next-0428)
+- [0.42.8](#0428)
 - [0.42.6](#0426)
 - [0.42.4](#0424)
 - [0.42.2](#0422)
@@ -84,9 +84,11 @@ flexmark-java
 
 &nbsp;</details>
 
-Next 0.42.8
------------
+0.42.8
+------
 
+* Add: PDF converter landscape sample
+* Fix: revert to OpenHtmlToPDF version 0.0.1-RC15 which is the last Java 7 byte code version
 * Fix: fill missing columns StringIndexOutOfBoundsException when prev cell consists of
   consecutive pipes without text
 * Fix: add explicit `Locale.US` to `String.format()` when using `%d` for integers to prevent
