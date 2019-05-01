@@ -5,7 +5,7 @@ flexmark-java
 
 [TOC]: # " "
 
-- [Future 0.50.2](#future-0502)
+- [0.50.4](#0504)
 - [Next 0.42.8](#next-0428)
 - [0.42.6](#0426)
 - [0.42.4](#0424)
@@ -85,9 +85,10 @@ flexmark-java
 
 &nbsp;</details>
 
-Future 0.50.2
--------------
+0.50.4
+------
 
+* Fix: html to markdown string not add EOL by default.
 * [x] Break: make Java 8 minimum version and use JDK 8 for compilation
   * Fix: IntelliJ Migration contained in [migrate flexmark-java 0_42_x to 0_50_0.xml], to use:
     * copy to IntelliJ application settings to `migration` subdirectory

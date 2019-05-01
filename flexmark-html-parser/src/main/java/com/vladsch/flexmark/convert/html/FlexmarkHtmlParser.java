@@ -259,7 +259,7 @@ public class FlexmarkHtmlParser {
         }
     }
 
-    int outputAttributes(LineFormattingAppendable out, final String initialSep) {
+    int outputAttributes(LineFormattingAppendable out, String initialSep) {
         Attributes attributes = myState.myAttributes;
         int startOffset = out.offsetWithPending();
 
@@ -323,7 +323,7 @@ public class FlexmarkHtmlParser {
         Attributes attributes = myState.myAttributes;
 
         if (myOptions.outputAttributesIdAttr || !myOptions.outputAttributesNamesRegex.isEmpty()) {
-            final org.jsoup.nodes.Attributes nodeAttributes = node.attributes();
+            org.jsoup.nodes.Attributes nodeAttributes = node.attributes();
             boolean idDone = false;
             if (myOptions.outputAttributesIdAttr) {
                 String id = nodeAttributes.get("id");
@@ -350,7 +350,7 @@ public class FlexmarkHtmlParser {
         }
     }
 
-    public void setTrace(final boolean trace) {
+    public void setTrace(boolean trace) {
         myTrace = trace;
     }
 
@@ -491,7 +491,9 @@ public class FlexmarkHtmlParser {
         LineFormattingAppendableImpl out = new LineFormattingAppendableImpl(LineFormattingAppendable.SUPPRESS_TRAILING_WHITESPACE | LineFormattingAppendable.COLLAPSE_WHITESPACE | LineFormattingAppendable.PREFIX_PRE_FORMATTED);
         FlexmarkHtmlParser parser = new FlexmarkHtmlParser(options);
         parser.parse(out, html);
-        return out.toString(maxBlankLines);
+        boolean eolEnd = maxBlankLines >= 0 && out.getPendingEOL() > 0;
+        String s = out.toString(maxBlankLines);
+        return eolEnd ? s : Utils.removeSuffix(s,"\n");
     }
 
     private static class State {
@@ -501,7 +503,7 @@ public class FlexmarkHtmlParser {
         final Attributes myAttributes;
         private LinkedList<Runnable> myPrePopActions;
 
-        State(final Node parent) {
+        State(Node parent) {
             myParent = parent;
             myElements = parent.childNodes();
             myIndex = 0;
@@ -655,10 +657,10 @@ public class FlexmarkHtmlParser {
     }
 
     private boolean processWrapped(
-            final LineFormattingAppendable out,
-            final Node node,
+            LineFormattingAppendable out,
+            Node node,
             Boolean isBlock,
-            final boolean escapeMarkdown
+            boolean escapeMarkdown
     ) {
         if (node instanceof Element && (isBlock == null && ((Element) node).isBlock() || isBlock != null && isBlock)) {
             String s = node.toString();
@@ -712,7 +714,7 @@ public class FlexmarkHtmlParser {
         return prepareText(text, myInlineCode);
     }
 
-    private String prepareText(String text, final boolean inCode) {
+    private String prepareText(String text, boolean inCode) {
         if (specialCharsPattern != null) {
             Matcher matcher = specialCharsPattern.matcher(text);
             int length = text.length();
@@ -782,7 +784,7 @@ public class FlexmarkHtmlParser {
     private void processTextNodes(
             LineFormattingAppendable out,
             Node node,
-            final boolean stripIdAttribute
+            boolean stripIdAttribute
     ) {
         processTextNodes(out, node, stripIdAttribute, null, null);
     }
@@ -790,7 +792,7 @@ public class FlexmarkHtmlParser {
     private void processTextNodes(
             LineFormattingAppendable out,
             Node node,
-            final boolean stripIdAttribute,
+            boolean stripIdAttribute,
             CharSequence wrapText
     ) {
         processTextNodes(out, node, stripIdAttribute, wrapText, wrapText);
@@ -799,7 +801,7 @@ public class FlexmarkHtmlParser {
     private void processTextNodes(
             LineFormattingAppendable out,
             Node node,
-            final boolean stripIdAttribute,
+            boolean stripIdAttribute,
             CharSequence textPrefix,
             CharSequence textSuffix
     ) {
@@ -1087,7 +1089,7 @@ public class FlexmarkHtmlParser {
                 out.repeat(' ', 2).line();
             } else {
                 if (out.getPendingEOL() == 1) {
-                    final String s = out.toString();
+                    String s = out.toString();
                     if (!s.endsWith("<br />")) {
                         // this is a paragraph break
                         if (myOptions.brAsParaBreaks) {
@@ -1181,7 +1183,7 @@ public class FlexmarkHtmlParser {
         return true;
     }
 
-    private int getMaxRepeatedChars(final CharSequence text, final char c, int minCount) {
+    private int getMaxRepeatedChars(CharSequence text, char c, int minCount) {
         BasedSequence chars = BasedSequenceImpl.of(text);
         int lastPos = 0;
         while (lastPos < chars.length()) {
@@ -1580,12 +1582,12 @@ public class FlexmarkHtmlParser {
         boolean isNumbered;
         int itemCount;
 
-        ListState(final boolean isNumbered) {
+        ListState(boolean isNumbered) {
             this.isNumbered = isNumbered;
             itemCount = 0;
         }
 
-        String getItemPrefix(final HtmlParserOptions options) {
+        String getItemPrefix(HtmlParserOptions options) {
             if (isNumbered) {
                 return String.format(Locale.US, "%d%c ", itemCount, options.orderedListDelimiter);
             } else {
@@ -1661,8 +1663,8 @@ public class FlexmarkHtmlParser {
             }
         }
 
-        final Element previousElementSibling = element.previousElementSibling();
-        final String tag = previousElementSibling == null ? null : previousElementSibling.tagName().toUpperCase();
+        Element previousElementSibling = element.previousElementSibling();
+        String tag = previousElementSibling == null ? null : previousElementSibling.tagName().toUpperCase();
         if (tag != null && tag.equals(element.tagName().toUpperCase()) && (tag.equals("UL") || tag.equals("OL"))) {
             if (myOptions.listsEndOnDoubleBlank) {
                 out.blankLine(2);
@@ -1942,7 +1944,7 @@ public class FlexmarkHtmlParser {
         return true;
     }
 
-    private TagParam getTagParam(final Node node) {
+    private TagParam getTagParam(Node node) {
         return ourTagProcessors.get(node.nodeName().toLowerCase());
     }
 
@@ -2089,7 +2091,7 @@ public class FlexmarkHtmlParser {
             alignment = CellAlignment.getAlignment(element.attr("align"));
         } else {
             // see if has class that matches
-            final Set<String> classNames = element.classNames();
+            Set<String> classNames = element.classNames();
             if (!classNames.isEmpty()) {
                 for (String clazz : classNames) {
                     CellAlignment cellAlignment = myOptions.tableCellAlignmentMap.get(clazz);
@@ -2134,7 +2136,7 @@ public class FlexmarkHtmlParser {
     void transferIdToParent() {
         if (myStateStack.isEmpty())
             throw new IllegalStateException("transferIdToParent with an empty stack");
-        final Attribute attribute = myState.myAttributes.get("id");
+        Attribute attribute = myState.myAttributes.get("id");
         myState.myAttributes.remove("id");
         if (attribute != null && !attribute.getValue().isEmpty()) {
             State state = myStateStack.peek();
@@ -2147,7 +2149,7 @@ public class FlexmarkHtmlParser {
     private void transferToParentExcept(String... excludes) {
         if (myStateStack.isEmpty())
             throw new IllegalStateException("transferIdToParent with an empty stack");
-        final Attributes attributes = new Attributes(myState.myAttributes);
+        Attributes attributes = new Attributes(myState.myAttributes);
         myState.myAttributes.clear();
 
         for (String exclude : excludes) {
@@ -2156,7 +2158,7 @@ public class FlexmarkHtmlParser {
         }
 
         if (!attributes.isEmpty()) {
-            final State parentState = myStateStack.peek();
+            State parentState = myStateStack.peek();
             for (String attrName : attributes.keySet()) {
                 parentState.myAttributes.addValue(attributes.get(attrName));
             }
@@ -2166,7 +2168,7 @@ public class FlexmarkHtmlParser {
     private void transferToParentOnly(String... includes) {
         if (myStateStack.isEmpty())
             throw new IllegalStateException("transferIdToParent with an empty stack");
-        final Attributes attributes = new Attributes();
+        Attributes attributes = new Attributes();
 
         for (String include : includes) {
             Attribute attribute = myState.myAttributes.get(include);
@@ -2177,7 +2179,7 @@ public class FlexmarkHtmlParser {
         }
 
         if (!attributes.isEmpty()) {
-            final State parentState = myStateStack.peek();
+            State parentState = myStateStack.peek();
             for (String attrName : attributes.keySet()) {
                 parentState.myAttributes.addValue(attributes.get(attrName));
             }
@@ -2277,7 +2279,7 @@ public class FlexmarkHtmlParser {
         final TagType tagType;
         final Object param;
 
-        TagParam(final TagType tagType, final Object param) {
+        TagParam(TagType tagType, Object param) {
             this.tagType = tagType;
             this.param = param;
         }
