@@ -948,7 +948,7 @@ real life table
 ````````````````````````````````
 
 
-## GFM 
+## GFM
 
 invalid table:
 
@@ -1205,6 +1205,22 @@ Should match
 | Supports Highl   |   X   |    X     |
 | **Multi-line I   |   X   |    X     |
 | Supports **Jav   |   X   |    X     |
+
+````````````````````````````````
+
+
+## Diagnostic/3095
+
+Exception in fill table columns when cell text is empty
+
+```````````````````````````````` example(Diagnostic/3095: 1) options(fill-missing-columns)
+| one | two | three |
+|-----|-----|-------|
+||
+.
+| one | two | three |
+|-----|-----|-------|
+|     |     |       |
 
 ````````````````````````````````
 

@@ -129,12 +129,12 @@ public class TableRow {
             int spanOffset = indexSpan.spanOffset;
 
             if (spanOffset > 0 && index < cells.size()) {
-                // spanning column, we expand its span or split into 2 
+                // spanning column, we expand its span or split into 2
                 TableCell cell = cells.get(index);
 
                 //if (cell.columnSpan == 0) throw new IllegalStateException("TableRow.insertColumns must be called only after 0-span dummy columns have been removed by calling normalize() on table, section or row");
                 if (tableCell.text.isBlank() || count > 1) {
-                    // expand span 
+                    // expand span
                     cells.remove(index);
                     cells.add(index, cell.withColumnSpan(cell.columnSpan + count));
                 } else {
@@ -259,7 +259,8 @@ public class TableRow {
             while (count-- > 0) {
                 // need to change its text to previous cell's end
                 int endOffset = prevCell.getEndOffset();
-                empty = empty.withText(PrefixedSubSequence.of(" ", prevCell.text.getBaseSequence(), endOffset, endOffset));
+                // diagnostic/3095, text is not the right source for the sequence if closeMarker is not empty
+                empty = empty.withText(PrefixedSubSequence.of(" ", prevCell.getLastSegment().getBaseSequence(), endOffset, endOffset));
 
                 cells.add(columnIndex <= cells.size() ? columnIndex : cells.size(), empty);
                 prevCell = empty;
