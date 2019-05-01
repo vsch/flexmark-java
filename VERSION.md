@@ -165,6 +165,8 @@ flexmark-java
 Next 0.42.8
 -----------
 
+* Fix: fill missing columns StringIndexOutOfBoundsException when prev cell consists of
+  consecutive pipes without text
 * Fix: add explicit `Locale.US` to `String.format()` when using `%d` for integers to prevent
   conversion to arabic on Java 11.
 
@@ -631,7 +633,6 @@ Next 0.42.8
       * `com.vladsch.flexmark.formatter.internal.PhasedNodeFormatter` to `com.vladsch.flexmark.formatter.PhasedNodeFormatter`
       * `com.vladsch.flexmark.formatter.internal.NodeFormatterSubContext` to `com.vladsch.flexmark.formatter.NodeFormatterSubContext`
 <!--@formatter:on-->
-
 0.35.10
 -------
 
@@ -1426,7 +1427,6 @@ setting either will affect both keys. For information on these keys see
 [#305, PR: add new youtube link style support to flexmark-ext-youtube-embedded for youtu.be/xyz(?t=123)]: https://github.com/vsch/flexmark-java/pull/305
 [#306, PR: Add password protection support]: https://github.com/vsch/flexmark-java/pull/306
 [#310, PR: Change URL of GitHub CDN]: https://github.com/vsch/flexmark-java/pull/310
-[#313, Ability to override tags processing in FlexmarkHtmlParser]: https://github.com/vsch/flexmark-java/issues/313
 [#314, Ability to override character replacements map in FlexmarkHtmlParser]: https://github.com/vsch/flexmark-java/issues/314
 [#316, Github user extension incorrectly formats some text]: https://github.com/vsch/flexmark-java/issues/316
 [#317, FlexmarkHtmlParser outputs extra newline when converting nested \<ol\>, \<ul\> lists]: https://github.com/vsch/flexmark-java/issues/317
@@ -1438,6 +1438,8 @@ setting either will affect both keys. For information on these keys see
 [#332, withOptions forgets about old link resolvers]: https://github.com/vsch/flexmark-java/issues/332
 [#334, CR line separators don't produce line break nodes]: https://github.com/vsch/flexmark-java/issues/334
 [#335, PR: Fix CR-only line separator handling]: https://github.com/vsch/flexmark-java/pull/335
+[#338, getLineNumber incorrect with Windows end of line separators]: https://github.com/vsch/flexmark-java/issues/338
+[#339, PR: Fix to line number when using Windows EOL characters.]: https://github.com/vsch/flexmark-java/pull/339
 [Admonition Extension, Material for MkDocs]: https://squidfunk.github.io/mkdocs-material/extensions/admonition/
 [Awesome Console]: https://plugins.jetbrains.com/plugin/7677-awesome-console "Awesome Console"
 [Kijimuna]: https://github.com/Kijimuna
@@ -1446,8 +1448,5 @@ setting either will affect both keys. For information on these keys see
 [migrate flexmark-java 0_42_x to 0_50_0.xml]: https://github.com/vsch/flexmark-java/blob/master/assets/migrations/migrate%20flexmark-java%200_42_x%20to%200_50_0.xml
 [NodeInsertingPostProcessorSample.java]: https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/samples/NodeInsertingPostProcessorSample.java
 [YouTrack: IDEA-207453]: https://youtrack.jetbrains.com/issue/IDEA-207453 "Add Conversion of ref anchor to UrlFilter for file line navigation"
-[#338, getLineNumber incorrect with Windows end of line separators]: https://github.com/vsch/flexmark-java/issues/338
-[#339, PR: Fix to line number when using Windows EOL characters.]: https://github.com/vsch/flexmark-java/pull/339
-
-
+[#313, Ability to override tags processing in FlexmarkHtmlParser]: https://github.com/vsch/flexmark-java/issues/313
 
