@@ -20,12 +20,12 @@ import java.util.Set;
 public class NodeRendererSample {
     static class SampleExtension implements HtmlRenderer.HtmlRendererExtension {
         @Override
-        public void rendererOptions(final MutableDataHolder options) {
+        public void rendererOptions(MutableDataHolder options) {
             // add any configuration settings to options you want to apply to everything, here
         }
 
         @Override
-        public void extend(final HtmlRenderer.Builder rendererBuilder, final String rendererType) {
+        public void extend(HtmlRenderer.Builder rendererBuilder, String rendererType) {
             rendererBuilder.nodeRendererFactory(new SampleNodeRenderer.Factory());
         }
 
@@ -128,7 +128,7 @@ public class NodeRendererSample {
 
         public static class Factory implements NodeRendererFactory {
             @Override
-            public NodeRenderer apply(final DataHolder options) {
+            public NodeRenderer apply(DataHolder options) {
                 return new SampleNodeRenderer(options);
             }
         }
@@ -145,7 +145,7 @@ public class NodeRendererSample {
         Parser parser = Parser.builder(options).build();
         Node document = parser.parse(markdown);
         HtmlRenderer renderer = HtmlRenderer.builder(options).build();
-        final String html = renderer.render(document);
+        String html = renderer.render(document);
         return html;
     }
 

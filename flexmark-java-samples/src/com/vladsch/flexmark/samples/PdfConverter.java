@@ -31,7 +31,7 @@ public class PdfConverter {
         return writer.toString();
     }
 
-    private static void getResourceFileContent(final StringWriter writer, final String resourcePath) {
+    private static void getResourceFileContent(StringWriter writer, String resourcePath) {
         InputStream inputStream = PdfConverter.class.getResourceAsStream(resourcePath);
         try {
             IOUtils.copy(inputStream, writer, "UTF-8");
@@ -42,7 +42,7 @@ public class PdfConverter {
     }
 
     public static void main(String[] args) {
-        final String pegdown = "" +
+        String pegdown = "" +
                 "[TOC]\n" +
                 "\n" +
                 "#Heading\n" +
@@ -90,8 +90,8 @@ public class PdfConverter {
         System.out.println("pegdown\n");
         System.out.println(pegdown);
 
-        final Parser PARSER = Parser.builder(OPTIONS).build();
-        final HtmlRenderer RENDERER = HtmlRenderer.builder(OPTIONS).build();
+        Parser PARSER = Parser.builder(OPTIONS).build();
+        HtmlRenderer RENDERER = HtmlRenderer.builder(OPTIONS).build();
 
         Node document = PARSER.parse(pegdown);
         String html = RENDERER.render(document);

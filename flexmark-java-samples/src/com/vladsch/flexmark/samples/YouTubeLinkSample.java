@@ -10,9 +10,9 @@ import com.vladsch.flexmark.html.renderer.*;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.block.NodePostProcessor;
 import com.vladsch.flexmark.parser.block.NodePostProcessorFactory;
-import com.vladsch.flexmark.util.ast.NodeTracker;
 import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.Node;
+import com.vladsch.flexmark.util.ast.NodeTracker;
 import com.vladsch.flexmark.util.builder.Extension;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
@@ -26,7 +26,7 @@ public class YouTubeLinkSample {
         public YouTubeLink() {
         }
 
-        public YouTubeLink(final Link other) {
+        public YouTubeLink(Link other) {
             super(other.getChars().baseSubSequence(other.getChars().getStartOffset() - 1, other.getChars().getEndOffset()),
                     other.getChars().baseSubSequence(other.getChars().getStartOffset() - 1, other.getTextOpeningMarker().getEndOffset()),
                     other.getText(),
@@ -41,7 +41,7 @@ public class YouTubeLinkSample {
         }
 
         @Override
-        public void setTextChars(final BasedSequence textChars) {
+        public void setTextChars(BasedSequence textChars) {
             int textCharsLength = textChars.length();
             this.textOpeningMarker = textChars.subSequence(0, 1);
             this.text = textChars.subSequence(1, textCharsLength - 1).trim();
@@ -59,7 +59,7 @@ public class YouTubeLinkSample {
                 Node previous = node.getPrevious();
 
                 if (previous instanceof Text) {
-                    final BasedSequence chars = previous.getChars();
+                    BasedSequence chars = previous.getChars();
                     if (chars.endsWith("@") && chars.isContinuedBy(node.getChars())) {
                         // trim previous chars to remove '@'
                         previous.setChars(chars.subSequence(0, chars.length() - 1));
@@ -106,7 +106,7 @@ public class YouTubeLinkSample {
             return set;
         }
 
-        private void render(final YouTubeLink node, final NodeRendererContext context, final HtmlWriter html) {
+        private void render(YouTubeLink node, NodeRendererContext context, HtmlWriter html) {
             if (context.isDoNotRenderLinks()) {
                 context.renderChildren(node);
             } else {
@@ -125,7 +125,7 @@ public class YouTubeLinkSample {
 
         public static class Factory implements NodeRendererFactory {
             @Override
-            public NodeRenderer apply(final DataHolder options) {
+            public NodeRenderer apply(DataHolder options) {
                 return new YouTubeLinkNodeRenderer(options);
             }
         }
@@ -145,12 +145,12 @@ public class YouTubeLinkSample {
         }
 
         @Override
-        public void rendererOptions(final MutableDataHolder options) {
+        public void rendererOptions(MutableDataHolder options) {
 
         }
 
         @Override
-        public void parserOptions(final MutableDataHolder options) {
+        public void parserOptions(MutableDataHolder options) {
 
         }
 

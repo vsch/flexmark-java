@@ -206,7 +206,7 @@ public class UnderlineExtensionSample {
     }
 
     public static void main(String[] args) {
-        final String original = "**bold** _italic_ +underline+ *+bold and underline+*";
+        String original = "**bold** _italic_ +underline+ *+bold and underline+*";
 
         Node document = PARSER.parse(original);
         String html = RENDERER.render(document);

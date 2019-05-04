@@ -7,9 +7,9 @@ import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.block.NodePostProcessor;
 import com.vladsch.flexmark.parser.block.NodePostProcessorFactory;
-import com.vladsch.flexmark.util.ast.NodeTracker;
 import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.Node;
+import com.vladsch.flexmark.util.ast.NodeTracker;
 import com.vladsch.flexmark.util.builder.Extension;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
@@ -92,7 +92,7 @@ public class TokenReplacingPostProcessorSample {
     }
 
     public static void main(String[] args) {
-        final String original = "[foo](http://example.com) ![bar](http://example.com) **baz**";
+        String original = "[foo](http://example.com) ![bar](http://example.com) **baz**";
 
         Node document = PARSER.parse(original);
         String html = RENDERER.render(document);

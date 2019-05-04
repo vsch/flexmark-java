@@ -65,7 +65,7 @@ public class JekyllIncludeFileSample {
             }
         }
 
-        final String html = renderer.render(document);
+        String html = renderer.render(document);
         return html;
     }
 

@@ -24,7 +24,7 @@ public class MarkdownToYouTrack {
     // use the PARSER to parse and RENDERER to parse pegdown indentation rules and render CommonMark
 
     public static void main(String[] args) {
-        final String markdown = "Heading\n" +
+        String markdown = "Heading\n" +
                 "-----\n" +
                 "paragraph text \n" +
                 "lazy continuation\n" +

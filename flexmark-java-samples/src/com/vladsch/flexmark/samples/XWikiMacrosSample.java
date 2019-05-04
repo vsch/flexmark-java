@@ -23,10 +23,10 @@ public class XWikiMacrosSample implements MacroVisitor {
     );
 
     @Override
-    public void visit(final Macro node) {
+    public void visit(Macro node) {
         if (!node.isBlockMacro()) {
             // collect attributes
-            final Map<String, String> attributes = node.getAttributes();
+            Map<String, String> attributes = node.getAttributes();
             String content = node.getMacroContentChars().toString();
             boolean isBlock = false;
 
@@ -35,14 +35,14 @@ public class XWikiMacrosSample implements MacroVisitor {
     }
 
     @Override
-    public void visit(final MacroClose node) {
+    public void visit(MacroClose node) {
 
     }
 
     @Override
-    public void visit(final MacroBlock node) {
+    public void visit(MacroBlock node) {
         // collect attributes
-        final Map<String, String> attributes = node.getAttributes();
+        Map<String, String> attributes = node.getAttributes();
         String content = node.getMacroContentChars().toString();
         boolean isBlock = true;
 

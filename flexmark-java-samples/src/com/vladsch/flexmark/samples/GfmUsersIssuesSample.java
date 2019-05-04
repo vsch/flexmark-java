@@ -16,10 +16,10 @@ import java.util.Arrays;
 
 public class GfmUsersIssuesSample {
     public static void main(String[] args) {
-        final MutableDataHolder options = new MutableDataSet()
+        MutableDataHolder options = new MutableDataSet()
                 .set(Parser.EXTENSIONS, Arrays.asList(StrikethroughExtension.create(), GfmUsersExtension.create(), GfmIssuesExtension.create(), AutolinkExtension.create()));
-        final Parser parser = Parser.builder(options).build();
-        final Document document = parser.parse("Hello, @world, and #1!");
+        Parser parser = Parser.builder(options).build();
+        Document document = parser.parse("Hello, @world, and #1!");
         new NodeVisitor(new VisitHandler<?>[] { }) {
             @Override
             public void visit(Node node) {

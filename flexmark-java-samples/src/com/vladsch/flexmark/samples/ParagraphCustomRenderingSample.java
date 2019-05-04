@@ -1,9 +1,6 @@
 package com.vladsch.flexmark.samples;
 
-import com.vladsch.flexmark.ast.Code;
 import com.vladsch.flexmark.ast.Paragraph;
-import com.vladsch.flexmark.ast.Text;
-import com.vladsch.flexmark.ext.toc.TocExtension;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.html.HtmlRenderer.Builder;
 import com.vladsch.flexmark.html.HtmlRenderer.HtmlRendererExtension;
@@ -12,7 +9,6 @@ import com.vladsch.flexmark.html.renderer.*;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.builder.Extension;
-import com.vladsch.flexmark.util.html.Escaping;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;

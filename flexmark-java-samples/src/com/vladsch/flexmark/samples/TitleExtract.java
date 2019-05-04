@@ -30,12 +30,12 @@ public class TitleExtract {
 
     static class HeadingExtension implements HtmlRendererExtension {
         @Override
-        public void rendererOptions(final MutableDataHolder options) {
+        public void rendererOptions(MutableDataHolder options) {
             // add any configuration settings to options you want to apply to everything, here
         }
 
         @Override
-        public void extend(final HtmlRenderer.Builder rendererBuilder, final String rendererType) {
+        public void extend(HtmlRenderer.Builder rendererBuilder, String rendererType) {
             rendererBuilder.nodeRendererFactory(new HeadingNodeRenderer.Factory());
         }
 
@@ -66,7 +66,7 @@ public class TitleExtract {
             ));
         }
 
-        void render(final AnchorLink node, final NodeRendererContext context, final HtmlWriter html) {
+        void render(AnchorLink node, NodeRendererContext context, HtmlWriter html) {
             Node parent = node.getParent();
 
             if (parent instanceof Heading && ((Heading) parent).getLevel() == 1) {
@@ -85,10 +85,10 @@ public class TitleExtract {
             return (extensions & flags) == flags;
         }
 
-        void render(final Heading node, final NodeRendererContext context, final HtmlWriter html) {
+        void render(Heading node, NodeRendererContext context, HtmlWriter html) {
             if (node.getLevel() == 1) {
                 // render without anchor link
-                final int extensions = context.getOptions().get(ParserEmulationProfile.PEGDOWN_EXTENSIONS);
+                int extensions = context.getOptions().get(ParserEmulationProfile.PEGDOWN_EXTENSIONS);
                 if (context.getHtmlOptions().renderHeaderId || haveExtension(extensions, Extensions.ANCHORLINKS) || haveAllExtensions(extensions, Extensions.EXTANCHORLINKS | Extensions.EXTANCHORLINKS_WRAP)) {
                     String id = context.getNodeId(node);
                     if (id != null) {
@@ -120,7 +120,7 @@ public class TitleExtract {
 
         public static class Factory implements DelegatingNodeRendererFactory {
             @Override
-            public NodeRenderer apply(final DataHolder options) {
+            public NodeRenderer apply(DataHolder options) {
                 return new HeadingNodeRenderer(options);
             }
 

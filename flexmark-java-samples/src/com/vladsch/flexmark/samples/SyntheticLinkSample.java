@@ -12,15 +12,15 @@ import com.vladsch.flexmark.parser.block.DocumentPostProcessor;
 import com.vladsch.flexmark.parser.block.DocumentPostProcessorFactory;
 import com.vladsch.flexmark.parser.block.NodePostProcessor;
 import com.vladsch.flexmark.parser.block.NodePostProcessorFactory;
-import com.vladsch.flexmark.util.ast.NodeTracker;
 import com.vladsch.flexmark.util.ast.DoNotLinkDecorate;
 import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.Node;
+import com.vladsch.flexmark.util.ast.NodeTracker;
 import com.vladsch.flexmark.util.builder.Extension;
-import com.vladsch.flexmark.util.html.Escaping;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
+import com.vladsch.flexmark.util.html.Escaping;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
 import com.vladsch.flexmark.util.sequence.ReplacedTextMapper;
@@ -38,7 +38,7 @@ public class SyntheticLinkSample {
         }
 
         @Override
-        public void process(final NodeTracker state, final Node node) {
+        public void process(NodeTracker state, Node node) {
             BasedSequence original = node.getChars();
             ReplacedTextMapper textMapper = new ReplacedTextMapper(original);
             BasedSequence literal = Escaping.unescape(original, textMapper);
@@ -113,7 +113,7 @@ public class SyntheticLinkSample {
         }
 
         @Override
-        public Document processDocument(final Document document) {
+        public Document processDocument(Document document) {
             // here you can append some markdown text but keep it based on original input by
             // using PrefixedSubSequence with only prefix without any characters from input string
 
@@ -160,7 +160,7 @@ public class SyntheticLinkSample {
         }
 
         @Override
-        public void parserOptions(final MutableDataHolder options) {
+        public void parserOptions(MutableDataHolder options) {
 
         }
     }

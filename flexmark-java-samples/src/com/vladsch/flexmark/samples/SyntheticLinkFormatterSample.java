@@ -8,10 +8,10 @@ import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.builder.Extension;
-import com.vladsch.flexmark.util.html.Escaping;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
+import com.vladsch.flexmark.util.html.Escaping;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
 import com.vladsch.flexmark.util.sequence.ReplacedTextMapper;
@@ -42,7 +42,7 @@ public class SyntheticLinkFormatterSample {
         }
 
         @Override
-        public void renderDocument(final NodeFormatterContext context, final MarkdownWriter markdown, final Document document, final FormattingPhase phase) {
+        public void renderDocument(NodeFormatterContext context, MarkdownWriter markdown, Document document, FormattingPhase phase) {
             switch (phase) {
                 case DOCUMENT_BOTTOM:
                     markdown.blankLine();
@@ -105,7 +105,7 @@ public class SyntheticLinkFormatterSample {
 
         static class Factory implements NodeFormatterFactory {
             @Override
-            public NodeFormatter create(final DataHolder options) {
+            public NodeFormatter create(DataHolder options) {
                 return new SyntheticLinkNodeFormatter(options);
             }
         }
@@ -120,12 +120,12 @@ public class SyntheticLinkFormatterSample {
         }
 
         @Override
-        public void rendererOptions(final MutableDataHolder options) {
+        public void rendererOptions(MutableDataHolder options) {
 
         }
 
         @Override
-        public void extend(final Formatter.Builder builder) {
+        public void extend(Formatter.Builder builder) {
             builder.nodeFormatterFactory(new SyntheticLinkNodeFormatter.Factory());
         }
     }

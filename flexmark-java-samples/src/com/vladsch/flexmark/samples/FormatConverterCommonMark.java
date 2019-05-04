@@ -42,7 +42,7 @@ public class FormatConverterCommonMark {
             .set(Parser.LISTS_ITEM_INDENT, 4);
 
     public static void main(String[] args) {
-        final String markdown = "Text\n" +
+        String markdown = "Text\n" +
                 "\n" +
                 "1. numbered list one\n" +
                 " - unnumbered list\n" +
@@ -56,9 +56,9 @@ public class FormatConverterCommonMark {
         System.out.println(markdown);
         System.out.println("\n--------------------------------------------------------------------------------\n");
 
-        final Parser PARSER = Parser.builder(OPTIONS).build();
-        final Formatter RENDERER = Formatter.builder(OPTIONS).build();
-        final Formatter RENDERER_FIXED4 = Formatter.builder(FORMATTER_OPTIONS).build();
+        Parser PARSER = Parser.builder(OPTIONS).build();
+        Formatter RENDERER = Formatter.builder(OPTIONS).build();
+        Formatter RENDERER_FIXED4 = Formatter.builder(FORMATTER_OPTIONS).build();
 
         Node document = PARSER.parse(markdown);
 

@@ -46,19 +46,19 @@ public class ThreadLocalOptionsExtension implements
     }
 
     @Override
-    public void parserOptions(final MutableDataHolder options) {
+    public void parserOptions(MutableDataHolder options) {
         // copy thread local options to builder
         options.setAll(threadOptions.get());
     }
 
     @Override
-    public void rendererOptions(final MutableDataHolder options) {
+    public void rendererOptions(MutableDataHolder options) {
         // copy thread local options to builder
         options.setAll(threadOptions.get());
     }
 
     @Override
-    public void extend(final RendererBuilder rendererBuilder, final String rendererType) {
+    public void extend(RendererBuilder rendererBuilder, String rendererType) {
 
     }
 }

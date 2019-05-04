@@ -23,12 +23,12 @@ public class PegdownCustomLinkResolverOptions {
 
     static class CustomExtension implements HtmlRenderer.HtmlRendererExtension {
         @Override
-        public void rendererOptions(final MutableDataHolder options) {
+        public void rendererOptions(MutableDataHolder options) {
 
         }
 
         @Override
-        public void extend(final HtmlRenderer.Builder rendererBuilder, final String rendererType) {
+        public void extend(HtmlRenderer.Builder rendererBuilder, String rendererType) {
             rendererBuilder.linkResolverFactory(new CustomLinkResolver.Factory());
             rendererBuilder.nodeRendererFactory(new CustomLinkRenderer.Factory());
         }
@@ -39,14 +39,14 @@ public class PegdownCustomLinkResolverOptions {
     }
 
     static class CustomLinkResolver implements LinkResolver {
-        public CustomLinkResolver(final LinkResolverContext context) {
+        public CustomLinkResolver(LinkResolverContext context) {
             // can use context for custom settings
             // context.getDocument();
             // context.getHtmlOptions();
         }
 
         @Override
-        public ResolvedLink resolveLink(final Node node, final LinkResolverContext context, final ResolvedLink link) {
+        public ResolvedLink resolveLink(Node node, LinkResolverContext context, ResolvedLink link) {
             // you can also set/clear/modify attributes through ResolvedLink.getAttributes() and ResolvedLink.getNonNullAttributes()
 
             if (node instanceof WikiImage) {
@@ -84,7 +84,7 @@ public class PegdownCustomLinkResolverOptions {
             }
 
             @Override
-            public LinkResolver apply(final LinkResolverContext context) {
+            public LinkResolver apply(LinkResolverContext context) {
                 return new CustomLinkResolver(context);
             }
         }
@@ -93,7 +93,7 @@ public class PegdownCustomLinkResolverOptions {
     static class CustomLinkRenderer implements NodeRenderer {
         public static class Factory implements DelegatingNodeRendererFactory {
             @Override
-            public NodeRenderer apply(final DataHolder options) {
+            public NodeRenderer apply(DataHolder options) {
                 return new CustomLinkRenderer();
             }
 

@@ -54,7 +54,7 @@ public class TranslationSample {
         Parser PARSER = Parser.builder(OPTIONS).build();
         Formatter FORMATTER = Formatter.builder(OPTIONS).build();
 
-        final String markdown = "This is [*Sparta*](http://sparta.com)";
+        String markdown = "This is [*Sparta*](http://sparta.com)";
 
         System.out.println(markdown);
         System.out.append("--------------------------\n");
@@ -63,16 +63,16 @@ public class TranslationSample {
         Document node = PARSER.parse(markdown);
 
         // 2. Format the document to get markdown strings for translation
-        final TranslationHandler handler = FORMATTER.getTranslationHandler(new HeaderIdGenerator.Factory());
-        final String formattedOutput = FORMATTER.translationRender(node, handler, RenderPurpose.TRANSLATION_SPANS);
+        TranslationHandler handler = FORMATTER.getTranslationHandler(new HeaderIdGenerator.Factory());
+        String formattedOutput = FORMATTER.translationRender(node, handler, RenderPurpose.TRANSLATION_SPANS);
 
         // 3. Get the strings to be translated from translation handler
-        final List<String> translatingTexts = handler.getTranslatingTexts();
+        List<String> translatingTexts = handler.getTranslatingTexts();
 
         // 4. Have the strings translated by your translation service of preference
-        final ArrayList<CharSequence> translatedTexts = new ArrayList<>(translatingTexts.size());
+        ArrayList<CharSequence> translatedTexts = new ArrayList<>(translatingTexts.size());
         for (CharSequence text : translatingTexts) {
-            final CharSequence translated = translate(text);
+            CharSequence translated = translate(text);
 
             // simulated translation
             translatedTexts.add(translated);
@@ -87,13 +87,13 @@ public class TranslationSample {
 
         // 6. Generate markdown with placeholders for non-translating string and out of context translations
         // the rest will already contain translated text
-        final String partial = FORMATTER.translationRender(node, handler, RenderPurpose.TRANSLATED_SPANS);
+        String partial = FORMATTER.translationRender(node, handler, RenderPurpose.TRANSLATED_SPANS);
 
         // 7. Parse the document with placeholders
         Node partialDoc = PARSER.parse(partial);
 
         // 8. Generate the final translated markdown
-        final String translated = FORMATTER.translationRender(partialDoc, handler, RenderPurpose.TRANSLATED);
+        String translated = FORMATTER.translationRender(partialDoc, handler, RenderPurpose.TRANSLATED);
 
         System.out.println(translated);
 

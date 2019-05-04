@@ -53,7 +53,7 @@ public class DocxConverterCommonMark {
         return writer.toString();
     }
 
-    private static void getResourceFileContent(final StringWriter writer, final String resourcePath) {
+    private static void getResourceFileContent(StringWriter writer, String resourcePath) {
         InputStream inputStream = DocxConverterCommonMark.class.getResourceAsStream(resourcePath);
         try {
             IOUtils.copy(inputStream, writer, "UTF-8");
@@ -64,7 +64,7 @@ public class DocxConverterCommonMark {
     }
 
     public static void main(String[] args) {
-        final String markdown = "### header\n" +
+        String markdown = "### header\n" +
                 "1. List item started from 1\n" +
                 "### header \n" +
                 "1. List item started from 1\n" +
@@ -75,8 +75,8 @@ public class DocxConverterCommonMark {
         System.out.println("markdown\n");
         System.out.println(markdown);
 
-        final Parser PARSER = Parser.builder(OPTIONS).build();
-        final DocxRenderer RENDERER = DocxRenderer.builder(OPTIONS).build();
+        Parser PARSER = Parser.builder(OPTIONS).build();
+        DocxRenderer RENDERER = DocxRenderer.builder(OPTIONS).build();
 
         Node document = PARSER.parse(markdown);
 
@@ -84,7 +84,7 @@ public class DocxConverterCommonMark {
         String xml = RENDERER.render(document);
 
         // or to control the package
-        final WordprocessingMLPackage template = DocxRenderer.getDefaultTemplate();
+        WordprocessingMLPackage template = DocxRenderer.getDefaultTemplate();
         RENDERER.render(document, template);
 
         File file = new File("/Users/vlad/src/pdf/flexmark-java-issue-176.docx");

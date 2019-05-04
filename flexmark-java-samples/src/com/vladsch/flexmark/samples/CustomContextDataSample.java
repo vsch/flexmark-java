@@ -28,12 +28,12 @@ public class CustomContextDataSample {
 
     static class CustomExtension implements HtmlRenderer.HtmlRendererExtension {
         @Override
-        public void rendererOptions(final MutableDataHolder options) {
+        public void rendererOptions(MutableDataHolder options) {
 
         }
 
         @Override
-        public void extend(final HtmlRenderer.Builder rendererBuilder, final String rendererType) {
+        public void extend(HtmlRenderer.Builder rendererBuilder, String rendererType) {
             rendererBuilder.linkResolverFactory(new CustomLinkResolver.Factory());
         }
 
@@ -44,14 +44,14 @@ public class CustomContextDataSample {
 
     static class CustomLinkResolver implements LinkResolver {
 
-        public CustomLinkResolver(final LinkResolverContext options) {
+        public CustomLinkResolver(LinkResolverContext options) {
             // can use context for custom settings
             // context.getDocument();
             // context.getHtmlOptions();
         }
 
         @Override
-        public ResolvedLink resolveLink(final Node node, final LinkResolverContext context, final ResolvedLink link) {
+        public ResolvedLink resolveLink(Node node, LinkResolverContext context, ResolvedLink link) {
             Document document = node.getDocument();
             XhtmlContent xhtmlContent = document.get(XHTML_CONTENT);
 
@@ -90,14 +90,14 @@ public class CustomContextDataSample {
             }
 
             @Override
-            public LinkResolver apply(final LinkResolverContext context) {
+            public LinkResolver apply(LinkResolverContext context) {
                 return new CustomLinkResolver(context);
             }
         }
     }
 
     public static void main(String[] args) {
-        final DataHolder options = PegdownOptionsAdapter.flexmarkOptions(Extensions.ALL, CustomExtension.create());
+        DataHolder options = PegdownOptionsAdapter.flexmarkOptions(Extensions.ALL, CustomExtension.create());
 
         Parser parser = Parser.builder(options).build();
         HtmlRenderer renderer = HtmlRenderer.builder(options).build();

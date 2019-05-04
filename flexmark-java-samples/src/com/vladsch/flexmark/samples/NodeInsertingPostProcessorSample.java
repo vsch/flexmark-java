@@ -10,14 +10,14 @@ import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.block.NodePostProcessor;
 import com.vladsch.flexmark.parser.block.NodePostProcessorFactory;
 import com.vladsch.flexmark.test.AstCollectingVisitor;
-import com.vladsch.flexmark.util.ast.NodeTracker;
 import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.Node;
+import com.vladsch.flexmark.util.ast.NodeTracker;
 import com.vladsch.flexmark.util.builder.Extension;
-import com.vladsch.flexmark.util.html.Attributes;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
+import com.vladsch.flexmark.util.html.Attributes;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
 
@@ -116,7 +116,7 @@ public class NodeInsertingPostProcessorSample {
     }
 
     public static void main(String[] args) {
-        final String original = "![Figure 1. Some description here.](http://example.com/image.png) **baz**\n" +
+        String original = "![Figure 1. Some description here.](http://example.com/image.png) **baz**\n" +
                 "\n" +
                 "![bar]\n" +
                 "\n" +

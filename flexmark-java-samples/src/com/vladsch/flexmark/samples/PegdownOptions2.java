@@ -32,7 +32,7 @@ public class PegdownOptions2 {
         processed = RENDERER.render(document);
     }
     public static void main(String[] args) {
-        final MutableDataHolder OPTIONS = PegdownOptionsAdapter.flexmarkOptions(
+        MutableDataHolder OPTIONS = PegdownOptionsAdapter.flexmarkOptions(
                 Extensions.ALL - (headerLinks ? 0 : Extensions.ANCHORLINKS)
                         - (hardwrap ? 0 : Extensions.HARDWRAPS) + (allowHtml ? 0 : Extensions.SUPPRESS_ALL_HTML)
                 // add your extra extensions here
@@ -42,8 +42,8 @@ public class PegdownOptions2 {
                 //.set(HtmlRenderer.FENCED_CODE_LANGUAGE_CLASS_PREFIX,"")
                 ;
 
-        final Parser PARSER = Parser.builder(OPTIONS).build();
-        final HtmlRenderer RENDERER = HtmlRenderer.builder(OPTIONS).build();
+        Parser PARSER = Parser.builder(OPTIONS).build();
+        HtmlRenderer RENDERER = HtmlRenderer.builder(OPTIONS).build();
 
         String input = "[[test page]]" +
                 "";

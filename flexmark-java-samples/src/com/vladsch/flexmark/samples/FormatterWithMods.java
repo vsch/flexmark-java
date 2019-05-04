@@ -77,7 +77,7 @@ public class FormatterWithMods {
 
     // use the PARSER to parse and RENDERER to parse pegdown indentation rules and render CommonMark
     public static void main(String[] args) {
-        final String original = "#Heading\n" +
+        String original = "#Heading\n" +
                 "-----\n" +
                 "paragraph text \n" +
                 "[Not Changed](https://example.com#23)\n" +

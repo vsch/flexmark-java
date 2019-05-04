@@ -8,13 +8,6 @@ import com.vladsch.flexmark.profiles.pegdown.Extensions;
 import com.vladsch.flexmark.profiles.pegdown.PegdownOptionsAdapter;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
-import org.apache.commons.io.IOUtils;
-import org.apache.pdfbox.pdmodel.encryption.AccessPermission;
-import org.apache.pdfbox.pdmodel.encryption.StandardProtectionPolicy;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.StringWriter;
 
 public class PdfLandscapeConverter {
     static final MutableDataHolder OPTIONS = PegdownOptionsAdapter.flexmarkOptions(
@@ -26,7 +19,7 @@ public class PdfLandscapeConverter {
             ;
 
     public static void main(String[] args) {
-        final String markdown = "" +
+        String markdown = "" +
                 "Heading\n" +
                 "=======\n" +
                 "\n" +
@@ -61,8 +54,8 @@ public class PdfLandscapeConverter {
         System.out.println("pegdown\n");
         System.out.println(markdown);
 
-        final Parser PARSER = Parser.builder(OPTIONS).build();
-        final HtmlRenderer RENDERER = HtmlRenderer.builder(OPTIONS).build();
+        Parser PARSER = Parser.builder(OPTIONS).build();
+        HtmlRenderer RENDERER = HtmlRenderer.builder(OPTIONS).build();
 
         Node document = PARSER.parse(markdown);
         String html = RENDERER.render(document);
@@ -93,7 +86,6 @@ public class PdfLandscapeConverter {
                 "</style>" +
                 "</head><body class='landscape'>" + html + "\n" +
                 "</body></html>";
-
 
         // add PDF protection policy
         //OPTIONS.set(PdfConverterExtension.PROTECTION_POLICY, new StandardProtectionPolicy("opassword", "upassword", new AccessPermission()));

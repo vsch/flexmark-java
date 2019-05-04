@@ -35,7 +35,7 @@ public class CustomLinkResolverSample {
         private final String docRootURL;
         private final String[] relativeParts;
 
-        public DocxLinkResolver(final LinkResolverContext context) {
+        public DocxLinkResolver(LinkResolverContext context) {
             // can use context for custom settings
             // context.getDocument();
             // context.getHtmlOptions();
@@ -54,7 +54,7 @@ public class CustomLinkResolverSample {
         }
 
         @Override
-        public ResolvedLink resolveLink(final Node node, final LinkResolverContext context, final ResolvedLink link) {
+        public ResolvedLink resolveLink(Node node, LinkResolverContext context, ResolvedLink link) {
             Document document = node.getDocument();
 
             if (node instanceof Image || node instanceof Link || node instanceof Reference) {
@@ -148,7 +148,7 @@ public class CustomLinkResolverSample {
             }
 
             @Override
-            public LinkResolver apply(final LinkResolverContext context) {
+            public LinkResolver apply(LinkResolverContext context) {
                 return new com.vladsch.flexmark.docx.converter.internal.DocxLinkResolver(context);
             }
         }
@@ -156,12 +156,12 @@ public class CustomLinkResolverSample {
 
     static class CustomExtension implements HtmlRendererExtension {
         @Override
-        public void rendererOptions(final MutableDataHolder options) {
+        public void rendererOptions(MutableDataHolder options) {
 
         }
 
         @Override
-        public void extend(final Builder rendererBuilder, final String rendererType) {
+        public void extend(Builder rendererBuilder, String rendererType) {
             rendererBuilder.linkResolverFactory(new DocxLinkResolver.Factory());
             rendererBuilder.nodeRendererFactory(new CustomLinkRenderer.Factory());
         }
@@ -174,7 +174,7 @@ public class CustomLinkResolverSample {
     static class CustomLinkRenderer implements NodeRenderer {
         public static class Factory implements DelegatingNodeRendererFactory {
             @Override
-            public NodeRenderer apply(final DataHolder options) {
+            public NodeRenderer apply(DataHolder options) {
                 return new CustomLinkRenderer();
             }
 
