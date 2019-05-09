@@ -365,4 +365,20 @@ public class LineFormattingAppendableImplTest {
         assertEquals("  <p>this is a paragraph\n    <div style=''>    some text\n    some more text\n  </div>\n", fa.toString(0));
         assertEquals(4, fa.getLineCount());
     }
+
+    @Test
+    public void test_leadingSpace() throws Exception {
+        String indent = "";
+        LineFormattingAppendable fa = new LineFormattingAppendableImpl((LineFormattingAppendable.FORMAT_ALL & ~LineFormattingAppendable.COLLAPSE_WHITESPACE) | LineFormattingAppendable.ALLOW_LEADING_WHITESPACE);
+        fa.setIndentPrefix(indent);
+
+        fa.append("  abc");
+        assertEquals("  abc\n", fa.toString(0));
+
+        fa.append("     def");
+        assertEquals("  abc\n     def\n", fa.toString(0));
+
+        fa.append("a");
+        assertEquals("  abc\n     def\na\n", fa.toString(0));
+    }
 }

@@ -49,11 +49,19 @@ public class SpecReader {
     }
 
     public static List<SpecExample> readExamples() {
-        return readExamples(null, null);
+        return readExamples(null, null, null);
     }
 
     public static List<SpecExample> readExamples(String specResource) {
-        List<SpecExample> examples = readExamples(specResource, null);
+        List<SpecExample> examples = readExamples(specResource, null,null);
+        if (examples.size() == 0) {
+            throw new IllegalStateException("No examples were found in " + specResource);
+        }
+        return examples;
+    }
+
+    public static List<SpecExample> readExamples(String specResource, String urlString) {
+        List<SpecExample> examples = readExamples(specResource, null, urlString);
         if (examples.size() == 0) {
             throw new IllegalStateException("No examples were found in " + specResource);
         }

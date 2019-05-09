@@ -5,7 +5,7 @@ flexmark-java
 
 [TOC]: # " "
 
-- [0.50.4](#0504)
+- [0.50.6](#0506)
 - [0.42.8](#0428)
 - [0.42.6](#0426)
 - [0.42.4](#0424)
@@ -85,9 +85,11 @@ flexmark-java
 
 &nbsp;</details>
 
-0.50.4
+0.50.6
 ------
 
+* Fix: add `SpecReader.readExamples(String, String)` which takes resource name and file URL to
+  allow for non-standard resource file locations.
 * Fix: html to markdown string not add EOL by default.
 * [x] Break: make Java 8 minimum version and use JDK 8 for compilation
   * Fix: IntelliJ Migration contained in [migrate flexmark-java 0_42_x to 0_50_0.xml], to use:
