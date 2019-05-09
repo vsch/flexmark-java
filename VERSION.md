@@ -6,6 +6,7 @@ flexmark-java
 [TOC]: # " "
 
 - [0.50.6](#0506)
+- [0.42.10](#04210)
 - [0.42.8](#0428)
 - [0.42.6](#0426)
 - [0.42.4](#0424)
@@ -163,6 +164,11 @@ flexmark-java
   * [ ] `EXT_TABLES` conversion option not yet implemented.
 * [ ] Add: `<!-- @formatter:on -->` and `<!-- @formatter:on -->` tags to `Formatter` for
       controlling non-formatting regions.
+
+0.42.10
+-------
+
+* Fix: [#348, WRAP\_AUTO\_LINKS defaults to false, Markdown loses a potential useful link]
 
 0.42.8
 ------
@@ -1454,4 +1460,6 @@ setting either will affect both keys. For information on these keys see
 [YouTrack: IDEA-207453]: https://youtrack.jetbrains.com/issue/IDEA-207453 "Add Conversion of ref anchor to UrlFilter for file line navigation"
 [#313, Ability to override tags processing in FlexmarkHtmlParser]: https://github.com/vsch/flexmark-java/issues/313
 [PdfLandscapeConverter.java]: https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/samples/PdfLandscapeConverter.java
+[#348, WRAP\_AUTO\_LINKS defaults to false, Markdown loses a potential useful link]: https://github.com/vsch/flexmark-java/issues/348
+
 
