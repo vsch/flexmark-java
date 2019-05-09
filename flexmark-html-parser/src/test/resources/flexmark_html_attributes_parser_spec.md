@@ -393,7 +393,7 @@ H<sup>2</sup>O
 ````````````````````````````````
 
 
-## Nested Emphasis 
+## Nested Emphasis
 
 ```````````````````````````````` example(Nested Emphasis: 1) options(text-ext-inline-strong, html-ext-inline-emphasis)
 Expected <em>Nested</em> rendered HTML
@@ -1102,7 +1102,7 @@ links
 auto links
 
 ```````````````````````````````` example Links: 8
-http://example.com
+<http://example.com>
 .
 <a href="http://example.com">http://example.com</a>
 ````````````````````````````````
@@ -1123,7 +1123,7 @@ http://example.com
 
 
 ```````````````````````````````` example Links: 11
-http://example.com
+<http://example.com>
 .
 <a href="http://example.com" title="">http://example.com</a>
 ````````````````````````````````
@@ -3159,7 +3159,7 @@ sub
 ````````````````````````````````
 
 
-## ID Prefix 
+## ID Prefix
 
 GitHub Heading ID Stripped Out
 

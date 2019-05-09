@@ -89,6 +89,7 @@ flexmark-java
 0.50.6
 ------
 
+* Break: change `FlexmarkHtmlParser.WRAP_AUTO_LINKS` default to true
 * Fix: add `SpecReader.readExamples(String, String)` which takes resource name and file URL to
   allow for non-standard resource file locations.
 * Fix: html to markdown string not add EOL by default.

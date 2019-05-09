@@ -393,7 +393,7 @@ H<sup>2</sup>O
 ````````````````````````````````
 
 
-## Nested Emphasis 
+## Nested Emphasis
 
 ```````````````````````````````` example(Nested Emphasis: 1) options(text-ext-inline-strong, html-ext-inline-emphasis)
 Expected <em>Nested</em> rendered HTML
@@ -1228,7 +1228,7 @@ links
 auto links
 
 ```````````````````````````````` example Links: 8
-http://example.com
+<http://example.com>
 .
 <a href="http://example.com">http://example.com</a>
 ````````````````````````````````
@@ -1241,49 +1241,56 @@ http://example.com
 ````````````````````````````````
 
 
-```````````````````````````````` example Links: 10
+```````````````````````````````` example(Links: 10) options(no-wrap-autolinks)
+http://example.com
+.
+<a href="http://example.com">http://example.com</a>
+````````````````````````````````
+
+
+```````````````````````````````` example Links: 11
 [http://example.com](http://example.com "Title")
 .
 <a href="http://example.com" title="Title">http://example.com</a>
 ````````````````````````````````
 
 
-```````````````````````````````` example Links: 11
-http://example.com
+```````````````````````````````` example Links: 12
+<http://example.com>
 .
 <a href="http://example.com" title="">http://example.com</a>
 ````````````````````````````````
 
 
-```````````````````````````````` example(Links: 12) options(no-autolinks)
+```````````````````````````````` example(Links: 13) options(no-autolinks)
 [http://example.com](http://example.com)
 .
 <a href="http://example.com">http://example.com</a>
 ````````````````````````````````
 
 
-```````````````````````````````` example(Links: 13) options(skip-links)
-http://example.com
+```````````````````````````````` example(Links: 14) options(skip-links)
+<http://example.com>
 .
 <a href="http://example.com">http://example.com</a>
 ````````````````````````````````
 
 
-```````````````````````````````` example(Links: 14) options(skip-links)
+```````````````````````````````` example(Links: 15) options(skip-links)
 http://example.com
 .
 <a href="http://example.com" title="Title">http://example.com</a>
 ````````````````````````````````
 
 
-```````````````````````````````` example(Links: 15) options(skip-links)
+```````````````````````````````` example(Links: 16) options(skip-links)
 \[Text **Bold**\]
 .
 <a href="http://example.com">[Text <b>Bold</b>]</a>
 ````````````````````````````````
 
 
-```````````````````````````````` example(Links: 16) options(skip-links, skip-inline-strong)
+```````````````````````````````` example(Links: 17) options(skip-links, skip-inline-strong)
 \[Text Bold\]
 .
 <a href="http://example.com">[Text <b>Bold</b>]</a>
@@ -1292,13 +1299,7 @@ http://example.com
 
 No links
 
-```````````````````````````````` example(Links: 17) options(no-autolinks, links-none)
-.
-<a href="http://example.com">http://example.com</a>
-````````````````````````````````
-
-
-```````````````````````````````` example(Links: 18) options(skip-links, links-none)
+```````````````````````````````` example(Links: 18) options(no-autolinks, links-none)
 .
 <a href="http://example.com">http://example.com</a>
 ````````````````````````````````
@@ -1306,17 +1307,23 @@ No links
 
 ```````````````````````````````` example(Links: 19) options(skip-links, links-none)
 .
-<a href="http://example.com" title="Title">http://example.com</a>
+<a href="http://example.com">http://example.com</a>
 ````````````````````````````````
 
 
 ```````````````````````````````` example(Links: 20) options(skip-links, links-none)
 .
+<a href="http://example.com" title="Title">http://example.com</a>
+````````````````````````````````
+
+
+```````````````````````````````` example(Links: 21) options(skip-links, links-none)
+.
 <a href="http://example.com">[Text <b>Bold</b>]</a>
 ````````````````````````````````
 
 
-```````````````````````````````` example(Links: 21) options(skip-links, skip-inline-strong, links-none)
+```````````````````````````````` example(Links: 22) options(skip-links, skip-inline-strong, links-none)
 .
 <a href="http://example.com">[Text <b>Bold</b>]</a>
 ````````````````````````````````
@@ -1324,14 +1331,7 @@ No links
 
 As text links
 
-```````````````````````````````` example(Links: 22) options(no-autolinks, links-text)
-http://example.com
-.
-<a href="http://example.com">http://example.com</a>
-````````````````````````````````
-
-
-```````````````````````````````` example(Links: 23) options(links-text)
+```````````````````````````````` example(Links: 23) options(no-autolinks, links-text)
 http://example.com
 .
 <a href="http://example.com">http://example.com</a>
@@ -1339,20 +1339,27 @@ http://example.com
 
 
 ```````````````````````````````` example(Links: 24) options(links-text)
+<http://example.com>
+.
+<a href="http://example.com">http://example.com</a>
+````````````````````````````````
+
+
+```````````````````````````````` example(Links: 25) options(links-text)
 http://example.com
 .
 <a href="http://example.com" title="Title">http://example.com</a>
 ````````````````````````````````
 
 
-```````````````````````````````` example(Links: 25) options(links-text)
+```````````````````````````````` example(Links: 26) options(links-text)
 \[Text **Bold**\]
 .
 <a href="http://example.com">[Text <b>Bold</b>]</a>
 ````````````````````````````````
 
 
-```````````````````````````````` example(Links: 26) options(skip-inline-strong, links-text)
+```````````````````````````````` example(Links: 27) options(skip-inline-strong, links-text)
 \[Text Bold\]
 .
 <a href="http://example.com">[Text <b>Bold</b>]</a>
@@ -1361,14 +1368,7 @@ http://example.com
 
 As html
 
-```````````````````````````````` example(Links: 27) options(no-autolinks, links-html)
-<a href="http://example.com">http://example.com</a>
-.
-<a href="http://example.com">http://example.com</a>
-````````````````````````````````
-
-
-```````````````````````````````` example(Links: 28) options(links-html)
+```````````````````````````````` example(Links: 28) options(no-autolinks, links-html)
 <a href="http://example.com">http://example.com</a>
 .
 <a href="http://example.com">http://example.com</a>
@@ -1376,20 +1376,27 @@ As html
 
 
 ```````````````````````````````` example(Links: 29) options(links-html)
+<a href="http://example.com">http://example.com</a>
+.
+<a href="http://example.com">http://example.com</a>
+````````````````````````````````
+
+
+```````````````````````````````` example(Links: 30) options(links-html)
 <a href="http://example.com" title="Title">http://example.com</a>
 .
 <a href="http://example.com" title="Title">http://example.com</a>
 ````````````````````````````````
 
 
-```````````````````````````````` example(Links: 30) options(links-html)
+```````````````````````````````` example(Links: 31) options(links-html)
 <a href="http://example.com">\[Text <b>Bold</b>\]</a>
 .
 <a href="http://example.com">[Text <b>Bold</b>]</a>
 ````````````````````````````````
 
 
-```````````````````````````````` example(Links: 31) options(skip-inline-strong, links-html)
+```````````````````````````````` example(Links: 32) options(skip-inline-strong, links-html)
 <a href="http://example.com">\[Text <b>Bold</b>\]</a>
 .
 <a href="http://example.com">[Text <b>Bold</b>]</a>
@@ -1398,7 +1405,7 @@ As html
 
 As ref
 
-```````````````````````````````` example(Links: 32) options(no-autolinks, links-ref)
+```````````````````````````````` example(Links: 33) options(no-autolinks, links-ref)
 [http://example.com][]
 
 [http://example.com]: http://example.com
@@ -1408,14 +1415,14 @@ As ref
 ````````````````````````````````
 
 
-```````````````````````````````` example(Links: 33) options(links-ref)
-http://example.com
+```````````````````````````````` example(Links: 34) options(links-ref)
+<http://example.com>
 .
 <a href="http://example.com">http://example.com</a>
 ````````````````````````````````
 
 
-```````````````````````````````` example(Links: 34) options(links-ref)
+```````````````````````````````` example(Links: 35) options(links-ref)
 [http://example.com][]
 
 [http://example.com]: http://example.com 'Title'
@@ -1425,7 +1432,7 @@ http://example.com
 ````````````````````````````````
 
 
-```````````````````````````````` example(Links: 35) options(links-ref)
+```````````````````````````````` example(Links: 36) options(links-ref)
 [\[Text **Bold**\]][]
 
 [\[Text **Bold**\]]: http://example.com
@@ -1435,7 +1442,7 @@ http://example.com
 ````````````````````````````````
 
 
-```````````````````````````````` example(Links: 36) options(skip-inline-strong, links-ref)
+```````````````````````````````` example(Links: 37) options(skip-inline-strong, links-ref)
 [\[Text Bold\]][]
 
 [\[Text Bold\]]: http://example.com
@@ -1445,7 +1452,7 @@ http://example.com
 ````````````````````````````````
 
 
-```````````````````````````````` example(Links: 37) options(links-ref)
+```````````````````````````````` example(Links: 38) options(links-ref)
 [![alt](image.png)](http://example.com)
 .
 <a href="http://example.com"><img src="image.png" alt="alt"></a>
@@ -1454,14 +1461,14 @@ http://example.com
 
 As ref re-use document
 
-```````````````````````````````` example(Links: 38) options(no-autolinks, links-ref, for-document)
+```````````````````````````````` example(Links: 39) options(no-autolinks, links-ref, for-document)
 [http://example.com][example.com]
 .
 <a href="http://example.com">http://example.com</a>
 ````````````````````````````````
 
 
-```````````````````````````````` example(Links: 39) options(links-none)
+```````````````````````````````` example(Links: 40) options(links-none)
 .
 <a href="http://example.com">http://example.com</a>
 ````````````````````````````````
@@ -3997,6 +4004,33 @@ Paragraph 2
     Text
     <div>Paragraph 2</div>
 </div>
+````````````````````````````````
+
+
+## Issue 348
+
+Issue #348, wrap auto links needs to be on to convert auto-links
+
+```````````````````````````````` example(Issue 348: 1) options(no-wrap-autolinks)
+This doesn't get rendered: https://google.com [This does.](https://google.com)
+.
+<p>This doesn't get rendered: <a href="https://google.com" rel="nofollow">https://google.com</a> <a href="https://google.com" rel="nofollow">This does.</a></p> 
+````````````````````````````````
+
+
+default to wrap
+
+```````````````````````````````` example Issue 348: 2
+This doesn't get rendered: <https://google.com> [This does.](https://google.com)
+.
+<p>This doesn't get rendered: <a href="https://google.com" rel="nofollow">https://google.com</a> <a href="https://google.com" rel="nofollow">This does.</a></p> 
+````````````````````````````````
+
+
+```````````````````````````````` example(Issue 348: 3) options(wrap-autolinks)
+This doesn't get rendered: <https://google.com> [This does.](https://google.com)
+.
+<p>This doesn't get rendered: <a href="https://google.com" rel="nofollow">https://google.com</a> <a href="https://google.com" rel="nofollow">This does.</a></p> 
 ````````````````````````````````
 
 
