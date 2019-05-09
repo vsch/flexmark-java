@@ -4139,7 +4139,7 @@ Mobile: 111111
 ````````````````````````````````
 
 
-## Office Libre 
+## Office Libre
 
 Uses `<strike>` tags instead of del.
 
@@ -4570,6 +4570,33 @@ OwnerAuthor
     </div>
   </div>
 </div>
+````````````````````````````````
+
+
+## Issue 348
+
+Issue #348, wrap auto links needs to be on to convert auto-links
+
+```````````````````````````````` example(Issue 348: 1) options(no-wrap-autolinks)
+This doesn't get rendered: https://google.com [This does.](https://google.com)
+.
+<p>This doesn't get rendered: <a href="https://google.com" rel="nofollow">https://google.com</a> <a href="https://google.com" rel="nofollow">This does.</a></p> 
+````````````````````````````````
+
+
+default to no wrap
+
+```````````````````````````````` example(Issue 348: 2) options(no-wrap-autolinks)
+This doesn't get rendered: https://google.com [This does.](https://google.com)
+.
+<p>This doesn't get rendered: <a href="https://google.com" rel="nofollow">https://google.com</a> <a href="https://google.com" rel="nofollow">This does.</a></p> 
+````````````````````````````````
+
+
+```````````````````````````````` example(Issue 348: 3) options(wrap-autolinks)
+This doesn't get rendered: <https://google.com> [This does.](https://google.com)
+.
+<p>This doesn't get rendered: <a href="https://google.com" rel="nofollow">https://google.com</a> <a href="https://google.com" rel="nofollow">This does.</a></p> 
 ````````````````````````````````
 
 
