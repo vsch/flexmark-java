@@ -205,6 +205,11 @@ public class TranslationHandlerImpl implements TranslationHandler {
                         }
                         return refId;
                     }
+                } else {
+                    final String resolvedAnchorRef = myNonTranslatingTexts.get(placeholderId);
+                    if (resolvedAnchorRef != null) {
+                        return resolvedAnchorRef;
+                    }
                 }
 
             case FORMAT:
