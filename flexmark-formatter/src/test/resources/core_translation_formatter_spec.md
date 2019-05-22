@@ -1311,12 +1311,41 @@ heEaADiING
 ````````````````````````````````
 
 
-### Link Text Translation   
+### Link Text Translation
 
 ```````````````````````````````` example Link Text Translation: 1
 [**Translated *Bold-Italic***](http://example.com)
 .
 [**tRaANSLaAteED *boLD-itaALiIc***](http://example.com)
+````````````````````````````````
+
+
+```````````````````````````````` example Link Text Translation: 2
+[Translated](http://example.com#anchor)
+.
+[tRaANSLaAteED](http://example.com#anchor)
+````````````````````````````````
+
+
+```````````````````````````````` example Link Text Translation: 3
+# Anchora
+    
+[Translated](http://example.com#anchora)
+.
+# aNchoRaA
+
+[tRaANSLaAteED](http://example.com#anchora)
+````````````````````````````````
+
+
+```````````````````````````````` example Link Text Translation: 4
+# Anchora
+    
+[Translated](#anchora)
+.
+# aNchoRaA
+
+[tRaANSLaAteED](#anchoraa)
 ````````````````````````````````
 
 
@@ -2066,7 +2095,7 @@ taABLeE oF coNteENtS:
 
 <!-- toc DeEpthfRom:2 -->
 
-- [quUiIcKStaARt](command-line#_1_)
+- [quUiIcKStaARt](command-line#quickstart)
   - [liIBRaARyY](#library)
   - [commaAND-LiINeE](#command-line)
 - [teEaAm](#team)

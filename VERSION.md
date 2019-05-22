@@ -88,6 +88,7 @@ flexmark-java
 0.42.10
 -------
 
+* Fix: [#349, Translation Helper bugs]
 * Fix: [#348, WRAP\_AUTO\_LINKS defaults to false, Markdown loses a potential useful link]
 
 0.42.8
@@ -1380,5 +1381,7 @@ setting either will affect both keys. For information on these keys see
 [#313, Ability to override tags processing in FlexmarkHtmlParser]: https://github.com/vsch/flexmark-java/issues/313
 [PdfLandscapeConverter.java]: https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/samples/PdfLandscapeConverter.java
 [#348, WRAP\_AUTO\_LINKS defaults to false, Markdown loses a potential useful link]: https://github.com/vsch/flexmark-java/issues/348
+[#349, Translation Helper bugs]: https://github.com/vsch/flexmark-java/issues/349
+
 
 

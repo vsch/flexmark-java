@@ -1,10 +1,10 @@
 package com.vladsch.flexmark.formatter.internal;
 
 import com.vladsch.flexmark.formatter.*;
-import com.vladsch.flexmark.util.ast.Document;
-import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.html.renderer.HtmlIdGenerator;
 import com.vladsch.flexmark.html.renderer.HtmlIdGeneratorFactory;
+import com.vladsch.flexmark.util.ast.Document;
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.MutableDataSet;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
@@ -94,7 +94,7 @@ public class TranslationHandlerImpl implements TranslationHandler {
         HashMap<String, Integer> repeatedTranslatingIndices = new HashMap<>();
 
         // collect all the translating snippets first
-        for (Map.Entry<String, String> entry: myTranslatingTexts.entrySet()) {
+        for (Map.Entry<String, String> entry : myTranslatingTexts.entrySet()) {
             if (!isBlank(entry.getValue()) && !myPlaceHolderMarkerPattern.matcher(entry.getValue()).matches()) {
                 // see if it is repeating
                 if (!repeatedTranslatingIndices.containsKey(entry.getValue())) {
@@ -106,7 +106,7 @@ public class TranslationHandlerImpl implements TranslationHandler {
             }
         }
 
-        for (CharSequence text: myTranslatingSpans) {
+        for (CharSequence text : myTranslatingSpans) {
             if (!isBlank(text) && !myPlaceHolderMarkerPattern.matcher(text).matches()) {
                 translatingSnippets.add(text.toString());
             }
@@ -128,7 +128,7 @@ public class TranslationHandlerImpl implements TranslationHandler {
         final int placeholderSize = myTranslatingPlaceholders.size();
         HashMap<String, Integer> repeatedTranslatingIndices = new HashMap<>();
 
-        for (Map.Entry<String, String> entry: myTranslatingTexts.entrySet()) {
+        for (Map.Entry<String, String> entry : myTranslatingTexts.entrySet()) {
             if (!isBlank(entry.getValue()) && !myPlaceHolderMarkerPattern.matcher(entry.getValue()).matches()) {
                 final Integer index = repeatedTranslatingIndices.get(entry.getValue());
                 if (index == null) {
@@ -145,7 +145,7 @@ public class TranslationHandlerImpl implements TranslationHandler {
             }
         }
 
-        for (CharSequence text: myTranslatingSpans) {
+        for (CharSequence text : myTranslatingSpans) {
             if (!isBlank(text) && !myPlaceHolderMarkerPattern.matcher(text).matches()) {
                 myTranslatedSpans.add(translatedTexts.get(i).toString());
                 i++;
@@ -204,6 +204,11 @@ public class TranslationHandlerImpl implements TranslationHandler {
                             }
                         }
                         return refId;
+                    }
+                } else {
+                    final String resolvedAnchorRef = myNonTranslatingTexts.get(placeholderId);
+                    if (resolvedAnchorRef != null) {
+                        return resolvedAnchorRef;
                     }
                 }
 

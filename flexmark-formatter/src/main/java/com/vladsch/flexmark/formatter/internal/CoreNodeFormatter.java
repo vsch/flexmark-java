@@ -1201,11 +1201,14 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
             markdown.append(node.getLinkOpeningMarker());
             markdown.append(node.getUrlOpeningMarker());
             markdown.appendNonTranslating(node.getPageRef());
+
             markdown.append(node.getAnchorMarker());
+
             if (node.getAnchorRef().isNotNull()) {
                 CharSequence anchorRef = context.transformAnchorRef(node.getPageRef(), node.getAnchorRef());
                 markdown.append(anchorRef);
             }
+
             markdown.append(node.getUrlClosingMarker());
 
             if (node.getTitleOpeningMarker().isNotNull()) {
