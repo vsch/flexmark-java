@@ -47,7 +47,7 @@ public class TranslationHandlerImpl implements TranslationHandler {
     private HtmlIdGenerator myIdGenerator;
     private TranslationPlaceholderGenerator myPlaceholderGenerator;
 
-    public TranslationHandlerImpl(final DataHolder options, final FormatterOptions formatterOptions, HtmlIdGeneratorFactory idGeneratorFactory) {
+    public TranslationHandlerImpl(DataHolder options, FormatterOptions formatterOptions, HtmlIdGeneratorFactory idGeneratorFactory) {
         myFormatterOptions = formatterOptions;
         myIdGeneratorFactory = idGeneratorFactory;
         myNonTranslatingTexts = new HashMap<>();
@@ -71,7 +71,7 @@ public class TranslationHandlerImpl implements TranslationHandler {
     }
 
     @Override
-    public void beginRendering(final Document node, NodeFormatterContext context, MarkdownWriter appendable) {
+    public void beginRendering(Document node, NodeFormatterContext context, MarkdownWriter appendable) {
         // collect anchor ref ids
         myWriter = appendable;
         myIdGenerator = myIdGeneratorFactory.create();
@@ -125,12 +125,12 @@ public class TranslationHandlerImpl implements TranslationHandler {
         // collect all the translating snippets first
         int i = 0;
         int iMax = translatedTexts.size();
-        final int placeholderSize = myTranslatingPlaceholders.size();
+        int placeholderSize = myTranslatingPlaceholders.size();
         HashMap<String, Integer> repeatedTranslatingIndices = new HashMap<>();
 
         for (Map.Entry<String, String> entry : myTranslatingTexts.entrySet()) {
             if (!isBlank(entry.getValue()) && !myPlaceHolderMarkerPattern.matcher(entry.getValue()).matches()) {
-                final Integer index = repeatedTranslatingIndices.get(entry.getValue());
+                Integer index = repeatedTranslatingIndices.get(entry.getValue());
                 if (index == null) {
                     if (i >= placeholderSize) break;
                     // new, index
@@ -157,7 +157,7 @@ public class TranslationHandlerImpl implements TranslationHandler {
     }
 
     @Override
-    public void setRenderPurpose(final RenderPurpose renderPurpose) {
+    public void setRenderPurpose(RenderPurpose renderPurpose) {
         myAnchorId = 0;
         myTranslatingSpanId = 0;
         myPlaceholderId = 0;
@@ -176,7 +176,7 @@ public class TranslationHandlerImpl implements TranslationHandler {
     }
 
     @Override
-    public CharSequence transformAnchorRef(final CharSequence pageRef, final CharSequence anchorRef) {
+    public CharSequence transformAnchorRef(CharSequence pageRef, CharSequence anchorRef) {
         switch (myRenderPurpose) {
             case TRANSLATION_SPANS:
                 String replacedTextId = String.format(myFormatterOptions.translationIdFormat, ++myAnchorId);
@@ -187,8 +187,8 @@ public class TranslationHandlerImpl implements TranslationHandler {
                 return String.format(myFormatterOptions.translationIdFormat, ++myAnchorId);
 
             case TRANSLATED:
-                final String placeholderId = String.format(myFormatterOptions.translationIdFormat, ++myAnchorId);
-                final String resolvedPageRef = myNonTranslatingTexts.get(pageRef.toString());
+                String placeholderId = String.format(myFormatterOptions.translationIdFormat, ++myAnchorId);
+                String resolvedPageRef = myNonTranslatingTexts.get(pageRef.toString());
 
                 if (resolvedPageRef != null && resolvedPageRef.length() == 0) {
                     // self reference, add it to the list
@@ -206,7 +206,7 @@ public class TranslationHandlerImpl implements TranslationHandler {
                         return refId;
                     }
                 } else {
-                    final String resolvedAnchorRef = myNonTranslatingTexts.get(placeholderId);
+                    String resolvedAnchorRef = myNonTranslatingTexts.get(placeholderId);
                     if (resolvedAnchorRef != null) {
                         return resolvedAnchorRef;
                     }
@@ -219,7 +219,7 @@ public class TranslationHandlerImpl implements TranslationHandler {
     }
 
     @Override
-    public void customPlaceholderFormat(final TranslationPlaceholderGenerator generator, final TranslatingSpanRender render) {
+    public void customPlaceholderFormat(TranslationPlaceholderGenerator generator, TranslatingSpanRender render) {
         if (myRenderPurpose != TRANSLATED_SPANS) {
             TranslationPlaceholderGenerator savedGenerator = myPlaceholderGenerator;
             myPlaceholderGenerator = generator;
@@ -236,8 +236,8 @@ public class TranslationHandlerImpl implements TranslationHandler {
     private String renderInSubContext(TranslatingSpanRender render, boolean copyToMain) {
         StringBuilder span = new StringBuilder();
         MarkdownWriter savedMarkdown = myWriter;
-        final NodeFormatterContext subContext = myWriter.getContext().getSubContext(span);
-        final MarkdownWriter writer = subContext.getMarkdown();
+        NodeFormatterContext subContext = myWriter.getContext().getSubContext(span);
+        MarkdownWriter writer = subContext.getMarkdown();
         myWriter = writer;
 
         render.render(subContext, writer);
@@ -264,7 +264,7 @@ public class TranslationHandlerImpl implements TranslationHandler {
             case TRANSLATION_SPANS: {
                 String spanText = renderInSubContext(render, true);
                 if (target != null) {
-                    final String id = myIdGenerator.getId(target);
+                    String id = myIdGenerator.getId(target);
                     myOriginalRefTargets.put(id, myTranslatingSpans.size());
                 }
 
@@ -276,10 +276,10 @@ public class TranslationHandlerImpl implements TranslationHandler {
                 // we output translated text instead of render
                 String spanText = renderInSubContext(render, false);
 
-                final String translated = myTranslatedSpans.get(myTranslatingSpanId);
+                String translated = myTranslatedSpans.get(myTranslatingSpanId);
 
                 if (target != null) {
-                    final String id = myIdGenerator.getId(translated);
+                    String id = myIdGenerator.getId(translated);
                     myTranslatedRefTargets.put(myTranslatingSpanId, id);
                 }
 
@@ -291,7 +291,7 @@ public class TranslationHandlerImpl implements TranslationHandler {
 
             case TRANSLATED:
                 if (target != null) {
-                    final String id = myIdGenerator.getId(target);
+                    String id = myIdGenerator.getId(target);
                     myTranslatedRefTargets.put(myTranslatingSpanId, id);
                 }
                 myTranslatingSpanId++;
@@ -320,7 +320,7 @@ public class TranslationHandlerImpl implements TranslationHandler {
             case TRANSLATED_SPANS: {
                 // we output translated text instead of render
                 String spanText = renderInSubContext(render, false);
-                final String translated = myNonTranslatingSpans.get(myNonTranslatingSpanId);
+                String translated = myNonTranslatingSpans.get(myNonTranslatingSpanId);
                 myNonTranslatingSpanId++;
                 myWriter.append(translated);
                 return;
@@ -339,14 +339,14 @@ public class TranslationHandlerImpl implements TranslationHandler {
         }
     }
 
-    public String getPlaceholderId(String format, int placeholderId, final CharSequence prefix, final CharSequence suffix, final CharSequence suffix2) {
+    public String getPlaceholderId(String format, int placeholderId, CharSequence prefix, CharSequence suffix, CharSequence suffix2) {
         String replacedTextId = myPlaceholderGenerator != null ? myPlaceholderGenerator.getPlaceholder(placeholderId) : String.format(format, placeholderId);
         if (prefix == null && suffix == null && suffix2 == null) return replacedTextId;
 
         return addPrefixSuffix(replacedTextId, prefix, suffix, suffix2);
     }
 
-    public static String addPrefixSuffix(CharSequence placeholderId, final CharSequence prefix, final CharSequence suffix, final CharSequence suffix2) {
+    public static String addPrefixSuffix(CharSequence placeholderId, CharSequence prefix, CharSequence suffix, CharSequence suffix2) {
         if (prefix == null && suffix == null && suffix2 == null) return placeholderId.toString();
 
         StringBuilder sb = new StringBuilder();
@@ -358,7 +358,7 @@ public class TranslationHandlerImpl implements TranslationHandler {
     }
 
     @Override
-    public CharSequence transformNonTranslating(final CharSequence prefix, final CharSequence nonTranslatingText, final CharSequence suffix, final CharSequence suffix2) {
+    public CharSequence transformNonTranslating(CharSequence prefix, CharSequence nonTranslatingText, CharSequence suffix, CharSequence suffix2) {
         switch (myRenderPurpose) {
             case TRANSLATION_SPANS:
                 // need to transfer trailing EOLs to id
@@ -366,7 +366,7 @@ public class TranslationHandlerImpl implements TranslationHandler {
                 if (suffix2 != null) {
                     trimmedEOL = suffix2;
                 } else {
-                    final BasedSequence basedSequence = BasedSequenceImpl.of(nonTranslatingText);
+                    BasedSequence basedSequence = BasedSequenceImpl.of(nonTranslatingText);
                     trimmedEOL = basedSequence.trimmedEOL();
                 }
                 String replacedTextId = getPlaceholderId(myFormatterOptions.translationIdFormat, ++myPlaceholderId, prefix, suffix, trimmedEOL);
@@ -394,7 +394,7 @@ public class TranslationHandlerImpl implements TranslationHandler {
     }
 
     @Override
-    public CharSequence transformTranslating(final CharSequence prefix, final CharSequence translatingText, final CharSequence suffix, final CharSequence suffix2) {
+    public CharSequence transformTranslating(CharSequence prefix, CharSequence translatingText, CharSequence suffix, CharSequence suffix2) {
         switch (myRenderPurpose) {
             case TRANSLATION_SPANS:
                 String replacedTextId = getPlaceholderId(myFormatterOptions.translationIdFormat, ++myPlaceholderId, prefix, suffix, suffix2);

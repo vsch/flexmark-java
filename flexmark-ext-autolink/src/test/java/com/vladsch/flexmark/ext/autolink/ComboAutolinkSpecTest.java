@@ -85,8 +85,8 @@ public class ComboAutolinkSpecTest extends ComboSpecTestCase {
     public void testSpecTxt() throws Exception {
         if (!example.isFullSpecExample()) return;
 
-        final HtmlRenderer RENDERER = HtmlRenderer.builder(OPTIONS).build();
-        final Parser PARSER = Parser.builder(OPTIONS).build();
+        HtmlRenderer RENDERER = HtmlRenderer.builder(OPTIONS).build();
+        Parser PARSER = Parser.builder(OPTIONS).build();
 
         String source = readResource("/spec.txt");
         Node node = PARSER.parse(source);

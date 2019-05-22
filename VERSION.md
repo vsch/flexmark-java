@@ -5,7 +5,7 @@ flexmark-java
 
 [TOC]: # " "
 
-- [0.50.6](#0506)
+- [0.50.8](#0508)
 - [0.42.10](#04210)
 - [0.42.8](#0428)
 - [0.42.6](#0426)
@@ -86,9 +86,11 @@ flexmark-java
 
 &nbsp;</details>
 
-0.50.6
+0.50.8
 ------
 
+* Fix: [#349, Translation Helper bugs]
+* Fix: [#348, WRAP\_AUTO\_LINKS defaults to false, Markdown loses a potential useful link]
 * Break: change `FlexmarkHtmlParser.WRAP_AUTO_LINKS` default to true
 * Fix: add `SpecReader.readExamples(String, String)` which takes resource name and file URL to
   allow for non-standard resource file locations.

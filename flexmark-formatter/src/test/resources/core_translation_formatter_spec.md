@@ -1349,6 +1349,17 @@ heEaADiING
 ````````````````````````````````
 
 
+```````````````````````````````` example Link Text Translation: 5
+# Anchora
+    
+[Translated](#anchors)
+.
+# aNchoRaA
+
+[tRaANSLaAteED](#anchors)
+````````````````````````````````
+
+
 ### Reference Placement
 
 default
