@@ -8,6 +8,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -130,11 +131,16 @@ public class SpecReader {
         StringBuilder sb = new StringBuilder();
         try {
             String line;
-            BufferedReader reader = new BufferedReader(new InputStreamReader(getSpecInputStream(specResource), Charset.forName("UTF-8")));
+            InputStream inputStream = getSpecInputStream(specResource);
+            InputStreamReader streamReader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
+            BufferedReader reader = new BufferedReader(streamReader);
             while ((line = reader.readLine()) != null) {
                 sb.append(line);
                 sb.append("\n");
             }
+            reader.close();
+            streamReader.close();
+            inputStream.close();
             return sb.toString();
         } catch (IOException e) {
             throw new RuntimeException(e);
