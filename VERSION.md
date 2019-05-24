@@ -5,7 +5,7 @@ flexmark-java
 
 [TOC]: # " "
 
-- [0.50.8](#0508)
+- [0.50.12](#05012)
 - [0.42.12](#04212)
 - [0.42.10](#04210)
 - [0.42.8](#0428)
@@ -87,8 +87,8 @@ flexmark-java
 
 &nbsp;</details>
 
-0.50.8
-------
+0.50.12
+-------
 
 * Fix: [#349, Translation Helper bugs]
 * Fix: [#348, WRAP\_AUTO\_LINKS defaults to false, Markdown loses a potential useful link]
