@@ -2110,7 +2110,7 @@ taABLeE oF coNteENtS:
 
 <!-- toc DeEpthfRom:2 -->
 
-- [quUiIcKStaARt](command-line#quickstart)
+- [quUiIcKStaARt](#quickstart)
   - [liIBRaARyY](#library)
   - [commaAND-LiINeE](#command-line)
 - [teEaAm](#team)

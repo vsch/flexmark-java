@@ -190,7 +190,7 @@ public class TranslationHandlerImpl implements TranslationHandler {
 
             case TRANSLATED:
                 final String anchorIdText = String.format(myFormatterOptions.translationIdFormat, ++myAnchorId);
-                final String resolvedPageRef = myAnchorTexts.get(pageRef.toString());
+                final String resolvedPageRef = myNonTranslatingTexts.get(pageRef.toString());
 
                 if (resolvedPageRef != null && resolvedPageRef.length() == 0) {
                     // self reference, add it to the list
