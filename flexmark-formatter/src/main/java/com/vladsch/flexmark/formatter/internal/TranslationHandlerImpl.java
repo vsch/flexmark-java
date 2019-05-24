@@ -22,6 +22,7 @@ import static java.lang.Character.isWhitespace;
 public class TranslationHandlerImpl implements TranslationHandler {
     final FormatterOptions myFormatterOptions;
     final HashMap<String, String> myNonTranslatingTexts;      // map placeholder to non-translating text replaced before translation so it can be replaced after translation
+    final HashMap<String, String> myAnchorTexts;              // map anchor id to non-translating text replaced before translation so it can be replaced after translation
     final HashMap<String, String> myTranslatingTexts;         // map placeholder to translating original text which is to be translated separately from its context and is replaced with placeholder for main context translation
     final HashMap<String, String> myTranslatedTexts;          // map placeholder to translated text which is to be translated separately from its context and was replaced with placeholder for main context translation
     final ArrayList<String> myTranslatingPlaceholders;        // list of placeholders to index in translating and translated texts
@@ -51,6 +52,7 @@ public class TranslationHandlerImpl implements TranslationHandler {
         myFormatterOptions = formatterOptions;
         myIdGeneratorFactory = idGeneratorFactory;
         myNonTranslatingTexts = new HashMap<>();
+        myAnchorTexts = new HashMap<>();
         myTranslatingTexts = new HashMap<>();
         myTranslatedTexts = new HashMap<>();
         myOriginalAnchors = new HashMap<>();
@@ -180,19 +182,19 @@ public class TranslationHandlerImpl implements TranslationHandler {
         switch (myRenderPurpose) {
             case TRANSLATION_SPANS:
                 String replacedTextId = String.format(myFormatterOptions.translationIdFormat, ++myAnchorId);
-                myNonTranslatingTexts.put(replacedTextId, anchorRef.toString());
+                myAnchorTexts.put(replacedTextId, anchorRef.toString());
                 return replacedTextId;
 
             case TRANSLATED_SPANS:
                 return String.format(myFormatterOptions.translationIdFormat, ++myAnchorId);
 
             case TRANSLATED:
-                final String placeholderId = String.format(myFormatterOptions.translationIdFormat, ++myAnchorId);
-                final String resolvedPageRef = myNonTranslatingTexts.get(pageRef.toString());
+                final String anchorIdText = String.format(myFormatterOptions.translationIdFormat, ++myAnchorId);
+                final String resolvedPageRef = myAnchorTexts.get(pageRef.toString());
 
                 if (resolvedPageRef != null && resolvedPageRef.length() == 0) {
                     // self reference, add it to the list
-                    String refId = myNonTranslatingTexts.get(placeholderId);
+                    String refId = myAnchorTexts.get(anchorIdText);
                     if (refId != null) {
                         // original ref id for the heading we should have them all
                         Integer spanIndex = myOriginalRefTargets.get(refId);
@@ -206,7 +208,7 @@ public class TranslationHandlerImpl implements TranslationHandler {
                         return refId;
                     }
                 } else {
-                    final String resolvedAnchorRef = myNonTranslatingTexts.get(placeholderId);
+                    final String resolvedAnchorRef = myAnchorTexts.get(anchorIdText);
                     if (resolvedAnchorRef != null) {
                         return resolvedAnchorRef;
                     }

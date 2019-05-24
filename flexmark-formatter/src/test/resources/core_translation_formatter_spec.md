@@ -1311,6 +1311,21 @@ heEaADiING
 ````````````````````````````````
 
 
+```````````````````````````````` example Fenced Code: 12
+```java
+  System.out.println("Hello world");
+```
+This is [Sparta](http://sparta.com#anchor)
+
+.
+```java
+  System.out.println("Hello world");
+```
+
+thiIS iIS [spaARtaA](http://sparta.com#anchor)
+````````````````````````````````
+
+
 ### Link Text Translation
 
 ```````````````````````````````` example Link Text Translation: 1

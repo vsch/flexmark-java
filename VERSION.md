@@ -5,6 +5,7 @@ flexmark-java
 
 [TOC]: # " "
 
+- [0.42.12](#04212)
 - [0.42.10](#04210)
 - [0.42.8](#0428)
 - [0.42.6](#0426)
@@ -84,6 +85,12 @@ flexmark-java
 
 
 &nbsp;</details>
+
+0.42.12
+-------
+
+* Fix: [#349, Translation Helper bugs], mix-up between anchors and other non-translating
+  elements after translation.
 
 0.42.10
 -------
