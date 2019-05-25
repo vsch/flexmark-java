@@ -1476,7 +1476,7 @@ Examples
 ````````````````````````````````
 
 
-## Issue 
+## Issue
 
 Issue #, image alt text not escaped for `[` and `]` in the text.
 
@@ -1591,7 +1591,7 @@ abc|[]
 ````````````````````````````````
 
 
-## Issue 274 
+## Issue 274
 
 Issue #274, FlexmarkHtmlParser can not handle escaped tags correctly
 
@@ -1682,6 +1682,24 @@ Issue #326, flexmark-html-parser - multiple \<code\> inside \<pre\> bug
 
 .
 <pre><code>casa</code><br><code>asdf</code><br>ffdd</pre>
+````````````````````````````````
+
+
+## Issue xxx-01
+
+links in indented code should be converted to URL
+
+```````````````````````````````` example Issue xxx-01: 1
+    \```java
+      System.out.println("Hello world");
+    \```
+    This is [Sparta](http://sparta.com#anchor)
+
+.
+<pre><code>\```java
+  System.out.println("Hello world");
+\```
+This is [Sparta](<a href="http://sparta.com/#anchor">http://sparta.com#anchor</a>)
 ````````````````````````````````
 
 

@@ -985,7 +985,20 @@ public class FlexmarkHtmlParser {
             LinkConversion conv = myOptions.extInlineLink;
             if (conv.isSuppressed()) return true;
 
-            if (conv.isParsed()) {
+            if (out.isPreFormatted()) {
+                // in preformatted text links convert to URLs
+                String href = element.attr("href");
+                String useHref = href;
+                int slashIndex = href.lastIndexOf('/');
+                if (slashIndex != -1) {
+                    int hashIndex = href.indexOf('#', slashIndex);
+                    if (hashIndex != -1 && slashIndex + 1 == hashIndex) {
+                        // remove trailing / from page ref
+                        useHref = useHref.substring(0, slashIndex) + useHref.substring(hashIndex);
+                    }
+                }
+                out.append(useHref);
+            } else if (conv.isParsed()) {
                 pushState(element);
                 String text = Utils.removeStart(Utils.removeEnd(processTextNodes(element), '\n'), '\n');
                 String href = element.attr("href");
