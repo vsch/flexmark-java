@@ -6,6 +6,7 @@ flexmark-java
 [TOC]: # " "
 
 - [0.50.12](#05012)
+- [Next 0.42.14](#next-04214)
 - [0.42.12](#04212)
 - [0.42.10](#04210)
 - [0.42.8](#0428)
@@ -170,6 +171,11 @@ flexmark-java
   * [ ] `EXT_TABLES` conversion option not yet implemented.
 * [ ] Add: `<!-- @formatter:on -->` and `<!-- @formatter:on -->` tags to `Formatter` for
       controlling non-formatting regions.
+
+Next 0.42.14
+------------
+
+* Fix: HTML parser converts `a` tags in preformatted text to links, should convert to URL only
 
 0.42.12
 -------
@@ -1468,7 +1474,6 @@ setting either will affect both keys. For information on these keys see
 [Kijimuna]: https://github.com/Kijimuna
 [migrate 0_35_x to 0_40_0.xml]: /assets/migrations/migrate%20flexmark-java%200_35_x%20to%200_40_0.xml
 [migrate flexmark-java 0_40_x to 0_42_0]: https://github.com/vsch/flexmark-java/blob/master/assets/migrations/migrate%20flexmark-java%200_40_x%20to%200_42_0.xml
-[migrate flexmark-java 0_42_x to 0_50_0.xml]: https://github.com/vsch/flexmark-java/blob/master/assets/migrations/migrate%20flexmark-java%200_42_x%20to%200_50_0.xml
 [NodeInsertingPostProcessorSample.java]: https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/samples/NodeInsertingPostProcessorSample.java
 [YouTrack: IDEA-207453]: https://youtrack.jetbrains.com/issue/IDEA-207453 "Add Conversion of ref anchor to UrlFilter for file line navigation"
 [#313, Ability to override tags processing in FlexmarkHtmlParser]: https://github.com/vsch/flexmark-java/issues/313
