@@ -90,6 +90,8 @@ flexmark-java
 0.50.12
 -------
 
+* Fix: [#349, Translation Helper bugs], mix-up between anchors and other non-translating
+  elements after translation.
 * Fix: [#349, Translation Helper bugs]
 * Fix: [#348, WRAP\_AUTO\_LINKS defaults to false, Markdown loses a potential useful link]
 * Break: change `FlexmarkHtmlParser.WRAP_AUTO_LINKS` default to true
