@@ -1817,13 +1817,15 @@ public class FlexmarkHtmlParser {
                 } else if (pendingEOL == 1) {
                     // may need to replace last line to add trailing break spaces
                     int lineCount = out.getLineCount();
-                    CharSequence lineContent = out.getLineContent(lineCount - 1);
-                    int pendingSpace = BasedSequenceImpl.of(lineContent).countTrailing(BasedSequence.WHITESPACE_NO_EOL_CHARS);
-                    if (pendingSpace < 2) {
-                        // replace last line
-                        out.removeLines(lineCount - 1, lineCount);
-                        out.append(lineContent);
-                        out.lineWithTrailingSpaces(2 - pendingSpace);
+                    if (lineCount > 0) {
+                        CharSequence lineContent = out.getLineContent(lineCount - 1);
+                        int pendingSpace = BasedSequenceImpl.of(lineContent).countTrailing(BasedSequence.WHITESPACE_NO_EOL_CHARS);
+                        if (pendingSpace < 2) {
+                            // replace last line
+                            out.removeLines(lineCount - 1, lineCount);
+                            out.append(lineContent);
+                            out.lineWithTrailingSpaces(2 - pendingSpace);
+                        }
                     }
                 }
             } else {

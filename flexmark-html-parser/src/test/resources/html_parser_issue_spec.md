@@ -1699,3 +1699,45 @@ This is [Sparta](<a href="http://sparta.com/#anchor">http://sparta.com#anchor</a
 ````````````````````````````````
 
 
+## Issue
+
+Issue [#351, Is there any special format requirement for processing html data to markdown]
+
+```````````````````````````````` example Issue: 1
+[test](/)
+=========
+
+.
+<!doctype html>
+<html>
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+</head>
+<body>
+<div class="container logo-search">
+    <div class="col search row-search-mobile">
+        <form action="index.html">
+            <input autocomplete="off" class="placeholder" name="s" placeholder="search">
+        </form>
+    </div>
+    <div class="row">
+        <div class="col logo">
+            <h1><a href="/">test</a></h1>
+        </div>
+        <div class="col right-list">
+            <button class="btn btn-responsive-nav btn-inverse" data-target=".nav-main-collapse" data-toggle="collapse"
+                    id="pull" style=""><i class="fa fa-navicon"></i></button>
+        </div>
+        <div class="col search search-desktop last">
+            <form action="#last" target="_blank">
+                <input autocomplete="off" class="placeholder" id="s" name="s" placeholder="search">
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+````````````````````````````````
+
+[#351, Is there any special format requirement for processing html data to markdown]: https://github.com/vsch/flexmark-java/issues/351
+
