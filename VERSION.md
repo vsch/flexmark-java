@@ -176,6 +176,7 @@ flexmark-java
 Next 0.42.14
 ------------
 
+* Fix: [#351, Is there any special format requirement for processing html data to markdown]
 * Fix: HTML parser converts `a` tags in preformatted text to links, should convert to URL only
 
 0.42.12

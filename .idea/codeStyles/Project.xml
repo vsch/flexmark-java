@@ -55,6 +55,9 @@
       <option name="TOC_TITLE_LEVEL" value="3" />
       <option name="RIGHT_MARGIN" value="96" />
     </MarkdownNavigatorCodeStyleSettings>
+    <ScalaCodeStyleSettings>
+      <option name="MULTILINE_STRING_SUPPORT" value="-1" />
+    </ScalaCodeStyleSettings>
     <XML>
       <option name="XML_ATTRIBUTE_WRAP" value="0" />
       <option name="XML_KEEP_BLANK_LINES" value="1" />
