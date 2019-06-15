@@ -1,14 +1,14 @@
 ---
 title: GitLab Extension Formatter Spec
 author: Vladimir Schneider
-version: 1.0 
+version: 1.0
 date: '2018-09-07'
 license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 ...
 
 ---
 
-# GitLab  
+# GitLab
 
 Parses and renders GitLab Flavoured Markdown.
 
@@ -34,31 +34,31 @@ Parses and renders GitLab Flavoured Markdown.
 * Graphing via Mermaid as fenced code with `mermaid` info string, via Mermaid inclusion similar
   to Math solution above.
 
-## Block Quotes 
+## Block Quotes
 
 ```````````````````````````````` example Block Quotes: 1
 >>>
 Block Quote Contents
 
 A paragraph
-<<<
+>>>
 .
 >>>
 Block Quote Contents
 
 A paragraph
-<<<
+>>>
 ````````````````````````````````
 
 
 ```````````````````````````````` example Block Quotes: 2
 >>>
 Block Quote Contents
-<<<
+>>>
 .
 >>>
 Block Quote Contents
-<<<
+>>>
 ````````````````````````````````
 
 
@@ -69,15 +69,17 @@ nested quotes
 Block Quote Contents
 >>>
 Nested Block Quote Contents
-<<<
-<<<
+>>>
+>>>
 .
 >>>
 Block Quote Contents
 >>>
+
 Nested Block Quote Contents
-<<<
-<<<
+
+>>>
+>>>
 ````````````````````````````````
 
 
@@ -86,27 +88,31 @@ Nested Block Quote Contents
 Block Quote Contents
 >>>
 Nested Block Quote Contents
-<<<
+>>>
 Some more text
 >>>
 Another Nested Block Quote Contents
-<<<
-<<<
+>>>
+>>>
 .
 >>>
 Block Quote Contents
 >>>
+
 Nested Block Quote Contents
-<<<
+
+>>>
 Some more text
 >>>
+
 Another Nested Block Quote Contents
-<<<
-<<<
+
+>>>
+>>>
 ````````````````````````````````
 
 
-## Inline 
+## Inline
 
 matched
 

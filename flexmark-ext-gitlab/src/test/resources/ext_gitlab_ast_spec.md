@@ -1,14 +1,14 @@
 ---
 title: GitLab Extension Spec
 author: Vladimir Schneider
-version: 1.0 
+version: 1.0
 date: '2018-08-30'
 license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 ...
 
 ---
 
-# GitLab  
+# GitLab
 
 Parses and renders GitLab Flavoured Markdown.
 
@@ -34,14 +34,14 @@ Parses and renders GitLab Flavoured Markdown.
 * Graphing via Mermaid as fenced code with `mermaid` info string, via Mermaid inclusion similar
   to Math solution above.
 
-## Block Quotes 
+## Block Quotes
 
 ```````````````````````````````` example Block Quotes: 1
 >>>
 Block Quote Contents
 
 A paragraph
-<<<
+>>>
 .
 <blockquote>
   <p>Block Quote Contents</p>
@@ -49,7 +49,7 @@ A paragraph
 </blockquote>
 .
 Document[0, 42]
-  GitLabBlockQuote[0, 42] open:[0, 3, ">>>"] openTrail:[3, 4, "\n"] close:[38, 41, "<<<"] closeTrail:[41, 42, "\n"]
+  GitLabBlockQuote[0, 42] open:[0, 3, ">>>"] openTrail:[3, 4, "\n"] close:[38, 41, ">>>"] closeTrail:[41, 42, "\n"]
     Paragraph[4, 25] isTrailingBlankLine
       Text[4, 24] chars:[4, 24, "Block … tents"]
     Paragraph[26, 38] isTrailingBlankLine
@@ -60,14 +60,14 @@ Document[0, 42]
 ```````````````````````````````` example Block Quotes: 2
 >>>
 Block Quote Contents
-<<<
+>>>
 .
 <blockquote>
   <p>Block Quote Contents</p>
 </blockquote>
 .
 Document[0, 29]
-  GitLabBlockQuote[0, 29] open:[0, 3, ">>>"] openTrail:[3, 4, "\n"] close:[25, 28, "<<<"] closeTrail:[28, 29, "\n"]
+  GitLabBlockQuote[0, 29] open:[0, 3, ">>>"] openTrail:[3, 4, "\n"] close:[25, 28, ">>>"] closeTrail:[28, 29, "\n"]
     Paragraph[4, 25] isTrailingBlankLine
       Text[4, 24] chars:[4, 24, "Block … tents"]
 ````````````````````````````````
@@ -76,7 +76,7 @@ Document[0, 29]
 ```````````````````````````````` example(Block Quotes: 3) options(no-quotes)
 >>>
 Block Quote Contents
-<<<
+>>>
 .
 <blockquote>
   <blockquote>
@@ -84,17 +84,23 @@ Block Quote Contents
     </blockquote>
   </blockquote>
 </blockquote>
-<p>Block Quote Contents
-&lt;&lt;&lt;</p>
+<p>Block Quote Contents</p>
+<blockquote>
+  <blockquote>
+    <blockquote>
+    </blockquote>
+  </blockquote>
+</blockquote>
 .
 Document[0, 28]
   BlockQuote[0, 4] marker:[0, 1, ">"]
     BlockQuote[0, 4] marker:[1, 2, ">"]
       BlockQuote[0, 4] marker:[2, 3, ">"]
-  Paragraph[4, 28]
+  Paragraph[4, 25]
     Text[4, 24] chars:[4, 24, "Block … tents"]
-    SoftLineBreak[24, 25]
-    Text[25, 28] chars:[25, 28, "<<<"]
+  BlockQuote[25, 28] marker:[25, 26, ">"]
+    BlockQuote[25, 28] marker:[26, 27, ">"]
+      BlockQuote[25, 28] marker:[27, 28, ">"]
 ````````````````````````````````
 
 
@@ -105,23 +111,23 @@ nested quotes
 Block Quote Contents
 >>>
 Nested Block Quote Contents
-<<<
-<<<
+>>>
+>>>
 .
 <blockquote>
   <p>Block Quote Contents</p>
-  <blockquote>
-    <p>Nested Block Quote Contents</p>
-  </blockquote>
+</blockquote>
+<p>Nested Block Quote Contents</p>
+<blockquote>
 </blockquote>
 .
 Document[0, 65]
-  GitLabBlockQuote[0, 65] open:[0, 3, ">>>"] openTrail:[3, 4, "\n"] close:[61, 64, "<<<"] closeTrail:[64, 65, "\n"]
-    Paragraph[4, 25]
+  GitLabBlockQuote[0, 29] open:[0, 3, ">>>"] openTrail:[3, 4, "\n"] close:[25, 28, ">>>"] closeTrail:[28, 29, "\n"]
+    Paragraph[4, 25] isTrailingBlankLine
       Text[4, 24] chars:[4, 24, "Block … tents"]
-    GitLabBlockQuote[25, 61] open:[25, 28, ">>>"] openTrail:[28, 29, "\n"] close:[57, 60, "<<<"] closeTrail:[60, 61, "\n"]
-      Paragraph[29, 57] isTrailingBlankLine
-        Text[29, 56] chars:[29, 56, "Neste … tents"]
+  Paragraph[29, 57]
+    Text[29, 56] chars:[29, 56, "Neste … tents"]
+  GitLabBlockQuote[57, 65] open:[57, 60, ">>>"] openTrail:[60, 61, "\n"] close:[61, 64, ">>>"] closeTrail:[64, 65, "\n"]
 ````````````````````````````````
 
 
@@ -130,32 +136,23 @@ Document[0, 65]
 Block Quote Contents
 >>>
 Nested Block Quote Contents
-<<<
-<<<
+>>>
+>>>
 .
 <blockquote>
   <p>Block Quote Contents</p>
-  <blockquote>
-    <blockquote>
-      <blockquote>
-      </blockquote>
-    </blockquote>
-  </blockquote>
-  <p>Nested Block Quote Contents</p>
 </blockquote>
-<p>&lt;&lt;&lt;</p>
+<p>Nested Block Quote Contents</p>
+<blockquote>
+</blockquote>
 .
 Document[0, 64]
-  GitLabBlockQuote[0, 61] open:[0, 3, ">>>"] openTrail:[3, 4, "\n"] close:[57, 60, "<<<"] closeTrail:[60, 61, "\n"]
-    Paragraph[4, 25]
+  GitLabBlockQuote[0, 29] open:[0, 3, ">>>"] openTrail:[3, 4, "\n"] close:[25, 28, ">>>"] closeTrail:[28, 29, "\n"]
+    Paragraph[4, 25] isTrailingBlankLine
       Text[4, 24] chars:[4, 24, "Block … tents"]
-    BlockQuote[25, 29] marker:[25, 26, ">"]
-      BlockQuote[25, 29] marker:[26, 27, ">"]
-        BlockQuote[25, 29] marker:[27, 28, ">"]
-    Paragraph[29, 57] isTrailingBlankLine
-      Text[29, 56] chars:[29, 56, "Neste … tents"]
-  Paragraph[61, 64]
-    Text[61, 64] chars:[61, 64, "<<<"]
+  Paragraph[29, 57]
+    Text[29, 56] chars:[29, 56, "Neste … tents"]
+  GitLabBlockQuote[57, 64] open:[57, 60, ">>>"] openTrail:[60, 61, "\n"] close:[61, 64, ">>>"] closeTrail:[64, 64]
 ````````````````````````````````
 
 
@@ -164,40 +161,40 @@ Document[0, 64]
 Block Quote Contents
 >>>
 Nested Block Quote Contents
-<<<
+>>>
 Some more text
 >>>
 Another Nested Block Quote Contents
-<<<
-<<<
+>>>
+>>>
 .
 <blockquote>
   <p>Block Quote Contents</p>
-  <blockquote>
-    <p>Nested Block Quote Contents</p>
-  </blockquote>
+</blockquote>
+<p>Nested Block Quote Contents</p>
+<blockquote>
   <p>Some more text</p>
-  <blockquote>
-    <p>Another Nested Block Quote Contents</p>
-  </blockquote>
+</blockquote>
+<p>Another Nested Block Quote Contents</p>
+<blockquote>
 </blockquote>
 .
 Document[0, 124]
-  GitLabBlockQuote[0, 124] open:[0, 3, ">>>"] openTrail:[3, 4, "\n"] close:[120, 123, "<<<"] closeTrail:[123, 124, "\n"]
-    Paragraph[4, 25]
+  GitLabBlockQuote[0, 29] open:[0, 3, ">>>"] openTrail:[3, 4, "\n"] close:[25, 28, ">>>"] closeTrail:[28, 29, "\n"]
+    Paragraph[4, 25] isTrailingBlankLine
       Text[4, 24] chars:[4, 24, "Block … tents"]
-    GitLabBlockQuote[25, 61] open:[25, 28, ">>>"] openTrail:[28, 29, "\n"] close:[57, 60, "<<<"] closeTrail:[60, 61, "\n"]
-      Paragraph[29, 57] isTrailingBlankLine
-        Text[29, 56] chars:[29, 56, "Neste … tents"]
-    Paragraph[61, 76]
+  Paragraph[29, 57]
+    Text[29, 56] chars:[29, 56, "Neste … tents"]
+  GitLabBlockQuote[57, 80] open:[57, 60, ">>>"] openTrail:[60, 61, "\n"] close:[76, 79, ">>>"] closeTrail:[79, 80, "\n"]
+    Paragraph[61, 76] isTrailingBlankLine
       Text[61, 75] chars:[61, 75, "Some  …  text"]
-    GitLabBlockQuote[76, 120] open:[76, 79, ">>>"] openTrail:[79, 80, "\n"] close:[116, 119, "<<<"] closeTrail:[119, 120, "\n"]
-      Paragraph[80, 116] isTrailingBlankLine
-        Text[80, 115] chars:[80, 115, "Anoth … tents"]
+  Paragraph[80, 116]
+    Text[80, 115] chars:[80, 115, "Anoth … tents"]
+  GitLabBlockQuote[116, 124] open:[116, 119, ">>>"] openTrail:[119, 120, "\n"] close:[120, 123, ">>>"] closeTrail:[123, 124, "\n"]
 ````````````````````````````````
 
 
-## Inline 
+## Inline
 
 unmatched
 
@@ -824,23 +821,23 @@ Document[0, 19]
 Block Quote Contents
 >>>
 Nested Block Quote Contents
-<<<
-<<<
+>>>
+>>>
 .
 <blockquote>
   <p md-pos="4-25">Block Quote Contents</p>
-  <blockquote>
-    <p md-pos="29-57">Nested Block Quote Contents</p>
-  </blockquote>
+</blockquote>
+<p md-pos="29-57">Nested Block Quote Contents</p>
+<blockquote>
 </blockquote>
 .
 Document[0, 64]
-  GitLabBlockQuote[0, 64] open:[0, 3, ">>>"] openTrail:[3, 4, "\n"] close:[61, 64, "<<<"] closeTrail:[64, 64]
-    Paragraph[4, 25]
+  GitLabBlockQuote[0, 29] open:[0, 3, ">>>"] openTrail:[3, 4, "\n"] close:[25, 28, ">>>"] closeTrail:[28, 29, "\n"]
+    Paragraph[4, 25] isTrailingBlankLine
       Text[4, 24] chars:[4, 24, "Block … tents"]
-    GitLabBlockQuote[25, 61] open:[25, 28, ">>>"] openTrail:[28, 29, "\n"] close:[57, 60, "<<<"] closeTrail:[60, 61, "\n"]
-      Paragraph[29, 57] isTrailingBlankLine
-        Text[29, 56] chars:[29, 56, "Neste … tents"]
+  Paragraph[29, 57]
+    Text[29, 56] chars:[29, 56, "Neste … tents"]
+  GitLabBlockQuote[57, 64] open:[57, 60, ">>>"] openTrail:[60, 61, "\n"] close:[61, 64, ">>>"] closeTrail:[64, 64]
 ````````````````````````````````
 
 

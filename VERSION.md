@@ -5,7 +5,7 @@ flexmark-java
 
 [TOC]: # " "
 
-- [0.50.14](#05014)
+- [0.50.16](#05016)
 - [Next 0.42.14](#next-04214)
 - [0.42.12](#04212)
 - [0.42.10](#04210)
@@ -88,9 +88,13 @@ flexmark-java
 
 &nbsp;</details>
 
-0.50.14
+0.50.16
 -------
 
+* Fix: GitLab block quotes should have `>>>` as termination, not `<<<`, macros are still
+  terminated by `>>>` to allow nested block quotes in macros. Affects:
+  * HTML converter
+  * Formatter
 * Fix: [#351, Is there any special format requirement for processing html data to markdown]
 * Fix: [#349, Translation Helper bugs], mix-up between anchors and other non-translating
   elements after translation.

@@ -4979,7 +4979,7 @@ GitLab block quotes formatting
 ```````````````````````````````` example GitLab: 2
 >>>
 Block Quote
-<<<
+>>>
 .
 <w:body>
     <w:p>
@@ -5021,8 +5021,8 @@ GitLab block quotes formatting
 Block Quote
 >>>
 Nested Block Quote
-<<<
-<<<
+>>>
+>>>
 .
 <w:body>
     <w:p>
@@ -5056,16 +5056,8 @@ Nested Block Quote
     <w:p>
         <w:pPr>
             <w:pStyle w:val="ParagraphTextBody"/>
-            <w:pBdr>
-                <w:left w:color="CCCCCC" w:frame="true" w:shadow="true"
-                    w:space="9" w:sz="16" w:val="single"/>
-            </w:pBdr>
-            <w:ind w:left="480" w:right="0"/>
         </w:pPr>
         <w:r>
-            <w:rPr>
-                <w:color w:val="666666"/>
-            </w:rPr>
             <w:t xml:space="preserve">Nested Block Quote</w:t>
         </w:r>
     </w:p>

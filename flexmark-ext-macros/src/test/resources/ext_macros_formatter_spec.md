@@ -1,14 +1,14 @@
 ---
 title: Macros Extension Formatter Spec
-author: Vladimir Schneider 
-version: 1.0 
+author: Vladimir Schneider
+version: 1.0
 date: '2018-09-07'
 license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 ...
 
 ---
 
-## Macros  
+## Macros
 
 Converts macros text to macro definitions and macro references.
 
@@ -168,7 +168,7 @@ GitLab multi-line block quotes
 >>>macro
 >>>
 Block Quote
-<<<
+>>>
 <<<
 
 Plain text <<<macro>>>
@@ -176,14 +176,14 @@ Plain text <<<macro>>>
 >>>macro
 >>>
 Block Quote
-<<<
+>>>
 <<<
 
 Plain text <<<macro>>>
 .
 Document[0, 57]
   MacroDefinitionBlock[0, 33] open:[0, 3, ">>>"] name:[3, 8, "macro"] openTrail:[8, 8] close:[29, 32, "<<<"] closeTrail:[32, 33, "\n"]
-    GitLabBlockQuote[9, 29] open:[9, 12, ">>>"] openTrail:[12, 13, "\n"] close:[25, 28, "<<<"] closeTrail:[28, 29, "\n"]
+    GitLabBlockQuote[9, 29] open:[9, 12, ">>>"] openTrail:[12, 13, "\n"] close:[25, 28, ">>>"] closeTrail:[28, 29, "\n"]
       Paragraph[13, 25] isTrailingBlankLine
         Text[13, 24] chars:[13, 24, "Block … Quote"]
   BlankLine[33, 34]
@@ -211,21 +211,27 @@ Plain text <<<macro>>>
 >>>
 Block Quote
 >>>
+
 Nested Block Quote
+
 <<<
+
 <<<
 <<<
 
 Plain text <<<macro>>>
 .
 Document[0, 84]
-  MacroDefinitionBlock[0, 60] open:[0, 3, ">>>"] name:[3, 8, "macro"] openTrail:[8, 8] close:[56, 59, "<<<"] closeTrail:[59, 60, "\n"]
-    GitLabBlockQuote[9, 56] open:[9, 12, ">>>"] openTrail:[12, 13, "\n"] close:[52, 55, "<<<"] closeTrail:[55, 56, "\n"]
-      Paragraph[13, 25]
+  MacroDefinitionBlock[0, 52] open:[0, 3, ">>>"] name:[3, 8, "macro"] openTrail:[8, 8] close:[48, 51, "<<<"] closeTrail:[51, 52, "\n"]
+    GitLabBlockQuote[9, 29] open:[9, 12, ">>>"] openTrail:[12, 13, "\n"] close:[25, 28, ">>>"] closeTrail:[28, 29, "\n"]
+      Paragraph[13, 25] isTrailingBlankLine
         Text[13, 24] chars:[13, 24, "Block … Quote"]
-      GitLabBlockQuote[25, 52] open:[25, 28, ">>>"] openTrail:[28, 29, "\n"] close:[48, 51, "<<<"] closeTrail:[51, 52, "\n"]
-        Paragraph[29, 48] isTrailingBlankLine
-          Text[29, 47] chars:[29, 47, "Neste … Quote"]
+    Paragraph[29, 48] isTrailingBlankLine
+      Text[29, 47] chars:[29, 47, "Neste … Quote"]
+  Paragraph[52, 60] isTrailingBlankLine
+    Text[52, 55] chars:[52, 55, "<<<"]
+    SoftLineBreak[55, 56]
+    Text[56, 59] chars:[56, 59, "<<<"]
   BlankLine[60, 61]
   Paragraph[61, 84]
     Text[61, 72] chars:[61, 72, "Plain … text "]

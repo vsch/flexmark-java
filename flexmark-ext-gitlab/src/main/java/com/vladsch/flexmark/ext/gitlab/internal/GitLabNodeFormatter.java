@@ -36,7 +36,7 @@ public class GitLabNodeFormatter implements NodeFormatter {
     private void render(GitLabBlockQuote node, NodeFormatterContext context, MarkdownWriter markdown) {
         markdown.append(">>>").line();
         context.renderChildren(node);
-        markdown.append("<<<").line();
+        markdown.append(">>>").line();
     }
 
     public static class Factory implements NodeFormatterFactory {
