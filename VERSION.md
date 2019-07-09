@@ -5,6 +5,7 @@ flexmark-java
 
 [TOC]: # " "
 
+- [Next](#next)
 - [0.50.18](#05018)
 - [0.50.16](#05016)
 - [Next 0.42.14](#next-04214)
@@ -89,11 +90,21 @@ flexmark-java
 
 &nbsp;</details>
 
+Next
+----
+
+* [ ] Add: `FlexmarkHtmlParser` options:
+  * [ ] `EXT_TABLES` conversion option not yet implemented.
+* [ ] Add: `<!-- @formatter:on -->` and `<!-- @formatter:on -->` tags to `Formatter` for
+      controlling non-formatting regions.
+
 0.50.18
 -------
 
 * Add: `flexmark-html2md-converter` module which implements HTML to Markdown conversion with an
-  extension API to allow customizing the conversion process. Sample: [HtmlToMarkdownCustomizedSample.java]
+  extension API to allow customizing the conversion process. Sample:
+  [HtmlToMarkdownCustomizedSample.java]
+  * [x] Fix: [#313, Ability to override tags processing in FlexmarkHtmlParser]
 * Fix: deprecate the old `flexmark-html-parser` classes
 
 0.50.16
@@ -148,26 +159,43 @@ flexmark-java
           `MutableDataHolder.getOrCompute(DataKey<T>)` with the data value factory taken from
           they key.
   * [x] remove unused `ItemIndexSetMap`, use `IndexedItemSetMap` instead
-  * [x] move `flexmark-util` Node related classes and interfaces to `com.vladsch.flexmark.util.ast`
-    * [x] move `com.vladsch.flexmark.util.NodeTracker` to `com.vladsch.flexmark.util.ast.NodeTracker`
-    * [x] move `com.vladsch.flexmark.util.BlockTracker` to `com.vladsch.flexmark.util.ast.BlockTracker`
+  * [x] move `flexmark-util` Node related classes and interfaces to
+        `com.vladsch.flexmark.util.ast`
+    * [x] move `com.vladsch.flexmark.util.NodeTracker` to
+          `com.vladsch.flexmark.util.ast.NodeTracker`
+    * [x] move `com.vladsch.flexmark.util.BlockTracker` to
+          `com.vladsch.flexmark.util.ast.BlockTracker`
     * [x] move `com.vladsch.flexmark.util.KeepType` to `com.vladsch.flexmark.util.ast.KeepType`
     * [x] move `com.vladsch.flexmark.util.IParse` to `com.vladsch.flexmark.util.ast.IParse`
     * [x] move `com.vladsch.flexmark.util.IRender` to `com.vladsch.flexmark.util.ast.IRender`
-    * [x] move `com.vladsch.flexmark.util.collection.NodeClassifierVisitor` to `com.vladsch.flexmark.util.ast.NodeClassifierVisitor`
-    * [x] move `com.vladsch.flexmark.util.collection.NodeCollectingVisitor` to `com.vladsch.flexmark.util.ast.NodeCollectingVisitor`
-    * [x] move `com.vladsch.flexmark.util.collection.ClassifyingNodeTracker` to `com.vladsch.flexmark.util.ast.ClassifyingNodeTracker`
-    * [x] move `com.vladsch.flexmark.util.mappers.NodeClassifier` to `com.vladsch.flexmark.util.ast.NodeClassifier`
-  * [x] move data key/set/holder classes to `flexmark.util.data` package from `flexmark.util.options` package
-    * [x] move `com.vladsch.flexmark.util.options.DataHolder` to `com.vladsch.flexmark.util.data.DataHolder`
-    * [x] move `com.vladsch.flexmark.util.options.MutableDataSet` to `com.vladsch.flexmark.util.data.MutableDataSet`
-    * [x] move `com.vladsch.flexmark.util.options.MutableScopedDataSet` to `com.vladsch.flexmark.util.data.MutableScopedDataSet`
-    * [x] move `com.vladsch.flexmark.util.options.ScopedDataSet` to `com.vladsch.flexmark.util.data.ScopedDataSet`
-    * [x] move `com.vladsch.flexmark.util.options.DataValueFactory` to `com.vladsch.flexmark.util.data.DataValueFactory`
-    * [x] move `com.vladsch.flexmark.util.options.MutableDataHolder` to `com.vladsch.flexmark.util.data.MutableDataHolder`
-    * [x] move `com.vladsch.flexmark.util.options.DataSet` to `com.vladsch.flexmark.util.data.DataSet`
-    * [x] move `com.vladsch.flexmark.util.options.MutableDataSetter` to `com.vladsch.flexmark.util.data.MutableDataSetter`
-    * [x] move `com.vladsch.flexmark.util.options.DataKey` to `com.vladsch.flexmark.util.data.DataKey`
+    * [x] move `com.vladsch.flexmark.util.collection.NodeClassifierVisitor` to
+          `com.vladsch.flexmark.util.ast.NodeClassifierVisitor`
+    * [x] move `com.vladsch.flexmark.util.collection.NodeCollectingVisitor` to
+          `com.vladsch.flexmark.util.ast.NodeCollectingVisitor`
+    * [x] move `com.vladsch.flexmark.util.collection.ClassifyingNodeTracker` to
+          `com.vladsch.flexmark.util.ast.ClassifyingNodeTracker`
+    * [x] move `com.vladsch.flexmark.util.mappers.NodeClassifier` to
+          `com.vladsch.flexmark.util.ast.NodeClassifier`
+  * [x] move data key/set/holder classes to `flexmark.util.data` package from
+        `flexmark.util.options` package
+    * [x] move `com.vladsch.flexmark.util.options.DataHolder` to
+          `com.vladsch.flexmark.util.data.DataHolder`
+    * [x] move `com.vladsch.flexmark.util.options.MutableDataSet` to
+          `com.vladsch.flexmark.util.data.MutableDataSet`
+    * [x] move `com.vladsch.flexmark.util.options.MutableScopedDataSet` to
+          `com.vladsch.flexmark.util.data.MutableScopedDataSet`
+    * [x] move `com.vladsch.flexmark.util.options.ScopedDataSet` to
+          `com.vladsch.flexmark.util.data.ScopedDataSet`
+    * [x] move `com.vladsch.flexmark.util.options.DataValueFactory` to
+          `com.vladsch.flexmark.util.data.DataValueFactory`
+    * [x] move `com.vladsch.flexmark.util.options.MutableDataHolder` to
+          `com.vladsch.flexmark.util.data.MutableDataHolder`
+    * [x] move `com.vladsch.flexmark.util.options.DataSet` to
+          `com.vladsch.flexmark.util.data.DataSet`
+    * [x] move `com.vladsch.flexmark.util.options.MutableDataSetter` to
+          `com.vladsch.flexmark.util.data.MutableDataSetter`
+    * [x] move `com.vladsch.flexmark.util.options.DataKey` to
+          `com.vladsch.flexmark.util.data.DataKey`
 * [x] Add: `LineFormattingAppendable` and `LineFormattingAppendableImpl`
   * [x] Fix: deprecate `FormattingAppendable` to be replaced by `LineFormattingAppendable`
   * [x] Fix: deprecate `FormattingAppendableImpl` to be replaced by
@@ -179,11 +207,6 @@ flexmark-java
       and can be applied to any CharSequence into its own `RichCharSequence` interface with
       default abstract implementation in `RichCharSequenceBase` and implementation in
       `RichCharSequenceImpl`.
-* [ ] Add: `FlexmarkHtmlParser` options:
-  * [ ] Fix: [#313, Ability to override tags processing in FlexmarkHtmlParser]
-  * [ ] `EXT_TABLES` conversion option not yet implemented.
-* [ ] Add: `<!-- @formatter:on -->` and `<!-- @formatter:on -->` tags to `Formatter` for
-      controlling non-formatting regions.
 
 Next 0.42.14
 ------------
@@ -1470,6 +1493,7 @@ setting either will affect both keys. For information on these keys see
 [#305, PR: add new youtube link style support to flexmark-ext-youtube-embedded for youtu.be/xyz(?t=123)]: https://github.com/vsch/flexmark-java/pull/305
 [#306, PR: Add password protection support]: https://github.com/vsch/flexmark-java/pull/306
 [#310, PR: Change URL of GitHub CDN]: https://github.com/vsch/flexmark-java/pull/310
+[#313, Ability to override tags processing in FlexmarkHtmlParser]: https://github.com/vsch/flexmark-java/issues/313
 [#314, Ability to override character replacements map in FlexmarkHtmlParser]: https://github.com/vsch/flexmark-java/issues/314
 [#316, Github user extension incorrectly formats some text]: https://github.com/vsch/flexmark-java/issues/316
 [#317, FlexmarkHtmlParser outputs extra newline when converting nested \<ol\>, \<ul\> lists]: https://github.com/vsch/flexmark-java/issues/317
@@ -1483,21 +1507,17 @@ setting either will affect both keys. For information on these keys see
 [#335, PR: Fix CR-only line separator handling]: https://github.com/vsch/flexmark-java/pull/335
 [#338, getLineNumber incorrect with Windows end of line separators]: https://github.com/vsch/flexmark-java/issues/338
 [#339, PR: Fix to line number when using Windows EOL characters.]: https://github.com/vsch/flexmark-java/pull/339
+[#348, WRAP\_AUTO\_LINKS defaults to false, Markdown loses a potential useful link]: https://github.com/vsch/flexmark-java/issues/348
+[#349, Translation Helper bugs]: https://github.com/vsch/flexmark-java/issues/349
+[#351, Is there any special format requirement for processing html data to markdown]: https://github.com/vsch/flexmark-java/issues/351
 [Admonition Extension, Material for MkDocs]: https://squidfunk.github.io/mkdocs-material/extensions/admonition/
 [Awesome Console]: https://plugins.jetbrains.com/plugin/7677-awesome-console "Awesome Console"
+[HtmlToMarkdownCustomizedSample.java]: https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/samples/HtmlToMarkdownCustomizedSample.java
 [Kijimuna]: https://github.com/Kijimuna
 [migrate 0_35_x to 0_40_0.xml]: /assets/migrations/migrate%20flexmark-java%200_35_x%20to%200_40_0.xml
 [migrate flexmark-java 0_40_x to 0_42_0]: https://github.com/vsch/flexmark-java/blob/master/assets/migrations/migrate%20flexmark-java%200_40_x%20to%200_42_0.xml
 [migrate flexmark-java 0_42_x to 0_50_0.xml]: https://github.com/vsch/flexmark-java/blob/master/assets/migrations/migrate%20flexmark-java%200_42_x%20to%200_50_0.xml
 [NodeInsertingPostProcessorSample.java]: https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/samples/NodeInsertingPostProcessorSample.java
-[YouTrack: IDEA-207453]: https://youtrack.jetbrains.com/issue/IDEA-207453 "Add Conversion of ref anchor to UrlFilter for file line navigation"
-[#313, Ability to override tags processing in FlexmarkHtmlParser]: https://github.com/vsch/flexmark-java/issues/313
 [PdfLandscapeConverter.java]: https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/samples/PdfLandscapeConverter.java
-[#348, WRAP\_AUTO\_LINKS defaults to false, Markdown loses a potential useful link]: https://github.com/vsch/flexmark-java/issues/348
-[#349, Translation Helper bugs]: https://github.com/vsch/flexmark-java/issues/349
-[#351, Is there any special format requirement for processing html data to markdown]: https://github.com/vsch/flexmark-java/issues/351
-[HtmlToMarkdownCustomizedSample.java]: https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/samples/HtmlToMarkdownCustomizedSample.java
-
-
-
+[YouTrack: IDEA-207453]: https://youtrack.jetbrains.com/issue/IDEA-207453 "Add Conversion of ref anchor to UrlFilter for file line navigation"
 
