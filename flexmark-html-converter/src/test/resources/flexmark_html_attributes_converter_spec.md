@@ -126,77 +126,77 @@ H^2^O
 
 ## Skipped Emphasis
 
-```````````````````````````````` example(Skipped Emphasis: 13) options(text-ext-inline-strong)
+```````````````````````````````` example(Skipped Emphasis: 1) options(text-ext-inline-strong)
 Expected rendered HTML
 .
 <p><strong>Expected</strong> rendered HTML</p>
 ````````````````````````````````
 
 
-```````````````````````````````` example(Skipped Emphasis: 14) options(text-ext-inline-strong)
+```````````````````````````````` example(Skipped Emphasis: 2) options(text-ext-inline-strong)
 Expected rendered HTML
 .
 <p><b>Expected</b> rendered HTML</p>
 ````````````````````````````````
 
 
-```````````````````````````````` example(Skipped Emphasis: 15) options(text-ext-inline-emphasis)
+```````````````````````````````` example(Skipped Emphasis: 3) options(text-ext-inline-emphasis)
 Expected rendered HTML
 .
 <p><em>Expected</em> rendered HTML</p>
 ````````````````````````````````
 
 
-```````````````````````````````` example(Skipped Emphasis: 16) options(text-ext-inline-emphasis)
+```````````````````````````````` example(Skipped Emphasis: 4) options(text-ext-inline-emphasis)
 Expected rendered HTML
 .
 <p><i>Expected</i> rendered HTML</p>
 ````````````````````````````````
 
 
-```````````````````````````````` example(Skipped Emphasis: 17) options(text-ext-inline-ins)
+```````````````````````````````` example(Skipped Emphasis: 5) options(text-ext-inline-ins)
 Expected rendered HTML
 .
 <p><ins>Expected</ins> rendered HTML</p>
 ````````````````````````````````
 
 
-```````````````````````````````` example(Skipped Emphasis: 18) options(text-ext-inline-del)
+```````````````````````````````` example(Skipped Emphasis: 6) options(text-ext-inline-del)
 Expected rendered HTML
 .
 <p><del>Expected</del> rendered HTML</p>
 ````````````````````````````````
 
 
-```````````````````````````````` example(Skipped Emphasis: 19) options(text-ext-inline-sub)
+```````````````````````````````` example(Skipped Emphasis: 7) options(text-ext-inline-sub)
 Expected rendered HTML
 .
 <p><sub>Expected</sub> rendered HTML</p>
 ````````````````````````````````
 
 
-```````````````````````````````` example(Skipped Emphasis: 20) options(text-ext-inline-sub)
+```````````````````````````````` example(Skipped Emphasis: 8) options(text-ext-inline-sub)
 H2O
 .
 <p>H<sub>2</sub>O</p>
 ````````````````````````````````
 
 
-```````````````````````````````` example(Skipped Emphasis: 21) options(text-ext-inline-sup)
+```````````````````````````````` example(Skipped Emphasis: 9) options(text-ext-inline-sup)
 Expected rendered HTML
 .
 <p><sup>Expected</sup> rendered HTML</p>
 ````````````````````````````````
 
 
-```````````````````````````````` example(Skipped Emphasis: 22) options(text-ext-inline-sup)
+```````````````````````````````` example(Skipped Emphasis: 10) options(text-ext-inline-sup)
 H2O
 .
 <p>H<sup>2</sup>O</p>
 ````````````````````````````````
 
 
-```````````````````````````````` example(Skipped Emphasis: 23) options(text-ext-inline-code)
+```````````````````````````````` example(Skipped Emphasis: 11) options(text-ext-inline-code)
 Expected rendered HTML
 .
 <p><code>Expected</code> rendered HTML</p>
@@ -205,7 +205,7 @@ Expected rendered HTML
 
 ``Expected `a``
 
-```````````````````````````````` example(Skipped Emphasis: 24) options(text-ext-inline-code)
+```````````````````````````````` example(Skipped Emphasis: 12) options(text-ext-inline-code)
 Expected `a rendered HTML
 .
 <p><code>Expected `a</code> rendered HTML</p>

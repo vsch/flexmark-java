@@ -12,6 +12,7 @@ import org.jsoup.nodes.Node;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Stack;
 
 /**
  * The context for node rendering, including configuration and functionality for the node renderer to use.
@@ -80,6 +81,7 @@ public interface HtmlNodeConverterContext extends NodeContext<Node, HtmlNodeConv
     HashMap<String, Reference> getReferenceUrlToReferenceMap();
     HashSet<Reference> getExternalReferences();
     boolean isTrace();
+    Stack<HtmlConverterState> getStateStack();
     void setTrace(boolean trace);
     com.vladsch.flexmark.util.ast.Node parseMarkdown(String markdown);
     Reference getOrCreateReference(String url, String text, String title);
@@ -135,5 +137,5 @@ public interface HtmlNodeConverterContext extends NodeContext<Node, HtmlNodeConv
 
     void inlineCode(Runnable inlineRunnable);
     void processConditional(ExtensionConversion extensionConversion, Node node, Runnable processNode);
-    void renderDefault();
+    void renderDefault(Node node);
 }

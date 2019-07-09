@@ -5,6 +5,8 @@ import com.vladsch.flexmark.ast.util.ReferenceRepository;
 import com.vladsch.flexmark.ext.emoji.internal.EmojiReference;
 import com.vladsch.flexmark.ext.emoji.internal.EmojiShortcuts;
 import com.vladsch.flexmark.html.converter.*;
+import com.vladsch.flexmark.html.renderer.LinkType;
+import com.vladsch.flexmark.html.renderer.ResolvedLink;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.Utils;
 import com.vladsch.flexmark.util.data.DataHolder;
@@ -43,13 +45,6 @@ public class HtmlConverterCoreNodeRenderer implements PhasedHtmlNodeRenderer {
     final private HtmlConverterOptions myHtmlConverterOptions;
     private MarkdownTable myTable;
     private boolean myTableSuppressColumns = false;
-
-    public static class Factory implements HtmlNodeRendererFactory {
-        @Override
-        public HtmlNodeRenderer apply(DataHolder options) {
-            return new HtmlConverterCoreNodeRenderer(options);
-        }
-    }
 
     public HtmlConverterCoreNodeRenderer(DataHolder options) {
         myHtmlConverterOptions = new HtmlConverterOptions(options);
@@ -251,9 +246,9 @@ public class HtmlConverterCoreNodeRenderer implements PhasedHtmlNodeRenderer {
     }
 
     // Node Converters
-    private void processDefault(Node element, HtmlNodeConverterContext context, HtmlMarkdownWriter out) {
+    private void processDefault(Node node, HtmlNodeConverterContext context, HtmlMarkdownWriter out) {
         // by default output nothing for unspecified tags
-        context.renderDefault();
+        context.renderDefault(node);
         //context.skip();
     }
 
@@ -265,13 +260,15 @@ public class HtmlConverterCoreNodeRenderer implements PhasedHtmlNodeRenderer {
             LinkConversion conv = myHtmlConverterOptions.extInlineLink;
             if (conv.isSuppressed()) return;
 
+            String href = element.attr("href");
+            ResolvedLink resolvedLink = context.resolveLink(LinkType.LINK, href, false);
+            String useHref = resolvedLink.getUrl();
+
             if (out.isPreFormatted()) {
                 // in preformatted text links convert to URLs
-                String href = element.attr("href");
-                String useHref = href;
-                int slashIndex = href.lastIndexOf('/');
+                int slashIndex = useHref.lastIndexOf('/');
                 if (slashIndex != -1) {
-                    int hashIndex = href.indexOf('#', slashIndex);
+                    int hashIndex = useHref.indexOf('#', slashIndex);
                     if (hashIndex != -1 && slashIndex + 1 == hashIndex) {
                         // remove trailing / from page ref
                         useHref = useHref.substring(0, slashIndex) + useHref.substring(hashIndex);
@@ -282,21 +279,20 @@ public class HtmlConverterCoreNodeRenderer implements PhasedHtmlNodeRenderer {
                 context.pushState(element);
                 String textNodes = context.processTextNodes(element);
                 String text = textNodes.trim();
-                String href = element.attr("href");
                 String title = element.hasAttr("title") ? element.attr("title") : null;
 
-                if (!text.isEmpty() || !href.contains("#")) {
+                if (!text.isEmpty() || !useHref.contains("#")) {
                     if (myHtmlConverterOptions.extractAutoLinks && href.equals(text) && (title == null || title.isEmpty())) {
                         if (myHtmlConverterOptions.wrapAutoLinks) out.append('<');
-                        out.append(text);
+                        out.append(useHref);
                         if (myHtmlConverterOptions.wrapAutoLinks) out.append('>');
                         context.transferIdToParent();
-                    } else if (!conv.isTextOnly() && !href.startsWith("javascript:")) {
+                    } else if (!conv.isTextOnly() && !useHref.startsWith("javascript:")) {
                         boolean handled = false;
 
                         if (conv.isReference() && !hasChildrenOfType(element, explicitLinkTextTags)) {
                             // need reference
-                            Reference reference = context.getOrCreateReference(href, text, title);
+                            Reference reference = context.getOrCreateReference(useHref, text, title);
                             if (reference != null) {
                                 handled = true;
                                 if (reference.getReference().equals(text)) {
@@ -311,13 +307,17 @@ public class HtmlConverterCoreNodeRenderer implements PhasedHtmlNodeRenderer {
                             out.append('[');
                             out.append(text);
                             out.append(']');
-                            out.append('(').append(href);
+                            out.append('(').append(useHref);
                             if (title != null)
                                 out.append(" \"").append(title.replace("\n", myHtmlConverterOptions.eolInTitleAttribute).replace("\"", "\\\"")).append('"');
                             out.append(")");
                         }
                     } else {
-                        out.append(text);
+                        if (href.equals(text)) {
+                            out.append(useHref);
+                        } else {
+                            out.append(text);
+                        }
                     }
 
                     context.excludeAttributes("href", "title");
@@ -539,7 +539,7 @@ public class HtmlConverterCoreNodeRenderer implements PhasedHtmlNodeRenderer {
             }
         }
 
-        context.renderDefault();
+        context.renderDefault(element);
     }
 
     private void processEmphasis(Element element, HtmlNodeConverterContext context, HtmlMarkdownWriter out) {
@@ -600,13 +600,15 @@ public class HtmlConverterCoreNodeRenderer implements PhasedHtmlNodeRenderer {
                     if (title != null && title.isEmpty()) title = null;
 
                     if (!conv.isTextOnly()) {
-                        int pos = src.indexOf('?');
-                        int eol = pos < 0 ? pos : src.indexOf("%0A", pos);
+                        ResolvedLink resolvedLink = context.resolveLink(LinkType.IMAGE, src, false);
+                        String useSrc = resolvedLink.getUrl();
+                        int pos = useSrc.indexOf('?');
+                        int eol = pos < 0 ? pos : useSrc.indexOf("%0A", pos);
                         boolean isMultiLineUrl = pos > 0 && eol > 0;
                         boolean handled = false;
 
                         if (conv.isReference() && !isMultiLineUrl) {
-                            Reference reference = context.getOrCreateReference(src, alt == null ? "image" : alt, title);
+                            Reference reference = context.getOrCreateReference(useSrc, alt == null ? "image" : alt, title);
                             if (reference != null) {
                                 handled = true;
 
@@ -625,11 +627,11 @@ public class HtmlConverterCoreNodeRenderer implements PhasedHtmlNodeRenderer {
                             out.append(']').append('(');
 
                             if (isMultiLineUrl) {
-                                out.append(src, 0, pos + 1);
-                                String decoded = Utils.urlDecode(src.substring(pos + 1).replace("+", "%2B"), "UTF8");
+                                out.append(useSrc, 0, pos + 1);
+                                String decoded = Utils.urlDecode(useSrc.substring(pos + 1).replace("+", "%2B"), "UTF8");
                                 out.line().append(decoded);
                             } else {
-                                out.append(src);
+                                out.append(useSrc);
                             }
 
                             if (title != null) out.append(" \"").append(title).append('"');
@@ -666,7 +668,7 @@ public class HtmlConverterCoreNodeRenderer implements PhasedHtmlNodeRenderer {
                 return;
             }
         }
-        context.renderDefault();
+        context.renderDefault(element);
     }
 
     private void processIns(Element element, HtmlNodeConverterContext context, HtmlMarkdownWriter out) {
@@ -850,7 +852,7 @@ public class HtmlConverterCoreNodeRenderer implements PhasedHtmlNodeRenderer {
         if (element.hasClass("octicon")) {
             context.skip();
         } else {
-            context.renderDefault();
+            context.renderDefault(element);
         }
     }
 

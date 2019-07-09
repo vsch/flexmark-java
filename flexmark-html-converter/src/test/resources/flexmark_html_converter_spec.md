@@ -1295,44 +1295,85 @@ http://example.com
 ````````````````````````````````
 
 
-```````````````````````````````` example(Links: 18) options(links-text)
+custom resolver
+
+```````````````````````````````` example(Links: 18) options(links-text, link-resolver)
+<https://example.com>
+.
+<a href="http://example.com">http://example.com</a>
+````````````````````````````````
+
+
+```````````````````````````````` example(Links: 19) options(links-text)
 http://example.com
 .
 <a href="http://example.com" title="Title">http://example.com</a>
 ````````````````````````````````
 
 
-```````````````````````````````` example(Links: 19) options(links-text)
+custom resolver
+
+```````````````````````````````` example(Links: 20) options(links-text, link-resolver)
+https://example.com
+.
+<a href="http://example.com" title="Title">http://example.com</a>
+````````````````````````````````
+
+
+```````````````````````````````` example(Links: 21) options(links-text)
 \[Text **Bold**\]
 .
 <a href="http://example.com">[Text <b>Bold</b>]</a>
 ````````````````````````````````
 
 
+custom resolver
+
+```````````````````````````````` example(Links: 22) options(link-resolver)
+[](https://example.com)
+.
+<a href="http://example.com"></a>
+````````````````````````````````
+
+
 As html
 
-```````````````````````````````` example(Links: 20) options(no-autolinks, links-html)
+```````````````````````````````` example(Links: 23) options(no-autolinks, links-html)
 <a href="http://example.com">http://example.com</a>
 .
 <a href="http://example.com">http://example.com</a>
 ````````````````````````````````
 
 
-```````````````````````````````` example(Links: 21) options(links-html)
+```````````````````````````````` example(Links: 24) options(links-html)
 <a href="http://example.com">http://example.com</a>
 .
 <a href="http://example.com">http://example.com</a>
 ````````````````````````````````
 
 
-```````````````````````````````` example(Links: 22) options(links-html)
+```````````````````````````````` example(Links: 25) options(no-autolinks, links-html, link-resolver)
+<a href="http://example.com">http://example.com</a>
+.
+<a href="http://example.com">http://example.com</a>
+````````````````````````````````
+
+
+```````````````````````````````` example(Links: 26) options(links-html, link-resolver)
+<a href="http://example.com">http://example.com</a>
+.
+<a href="http://example.com">http://example.com</a>
+````````````````````````````````
+
+
+```````````````````````````````` example(Links: 27) options(links-html)
 <a href="http://example.com" title="Title">http://example.com</a>
 .
 <a href="http://example.com" title="Title">http://example.com</a>
 ````````````````````````````````
 
 
-```````````````````````````````` example(Links: 23) options(links-html)
+```````````````````````````````` example(Links: 28) options(links-html)
 <a href="http://example.com">\[Text <b>Bold</b>\]</a>
 .
 <a href="http://example.com">[Text <b>Bold</b>]</a>
@@ -1341,7 +1382,7 @@ As html
 
 As ref
 
-```````````````````````````````` example(Links: 24) options(no-autolinks, links-ref)
+```````````````````````````````` example(Links: 29) options(no-autolinks, links-ref)
 [http://example.com][]
 
 [http://example.com]: http://example.com
@@ -1351,24 +1392,33 @@ As ref
 ````````````````````````````````
 
 
-```````````````````````````````` example(Links: 25) options(links-ref)
+```````````````````````````````` example(Links: 30) options(links-ref)
 <http://example.com>
 .
 <a href="http://example.com">http://example.com</a>
 ````````````````````````````````
 
 
-```````````````````````````````` example(Links: 26) options(links-ref)
+custom resolver
+
+```````````````````````````````` example(Links: 31) options(links-ref, link-resolver)
 [http://example.com][]
 
-[http://example.com]: http://example.com 'Title'
+[http://example.com]: https://example.com 'Title'
 
 .
 <a href="http://example.com" title="Title">http://example.com</a>
 ````````````````````````````````
 
 
-```````````````````````````````` example(Links: 27) options(links-ref)
+```````````````````````````````` example(Links: 32) options(links-ref, link-resolver)
+<https://example.com>
+.
+<a href="http://example.com">http://example.com</a>
+````````````````````````````````
+
+
+```````````````````````````````` example(Links: 33) options(links-ref)
 [\[Text **Bold**\]][]
 
 [\[Text **Bold**\]]: http://example.com
@@ -1378,7 +1428,7 @@ As ref
 ````````````````````````````````
 
 
-```````````````````````````````` example(Links: 28) options(links-ref)
+```````````````````````````````` example(Links: 34) options(links-ref)
 [![alt](image.png)](http://example.com)
 .
 <a href="http://example.com"><img src="image.png" alt="alt"></a>
@@ -1387,14 +1437,14 @@ As ref
 
 As ref re-use document
 
-```````````````````````````````` example(Links: 29) options(no-autolinks, links-ref, for-document)
+```````````````````````````````` example(Links: 35) options(no-autolinks, links-ref, for-document)
 [http://example.com][example.com]
 .
 <a href="http://example.com">http://example.com</a>
 ````````````````````````````````
 
 
-```````````````````````````````` example(Links: 30) options(links-none)
+```````````````````````````````` example(Links: 36) options(links-none)
 .
 <a href="http://example.com">http://example.com</a>
 ````````````````````````````````
@@ -1431,21 +1481,35 @@ Not images
 ````````````````````````````````
 
 
-```````````````````````````````` example Images: 5
-![](http://example.com/image.png "Title")
+```````````````````````````````` example(Images: 5) options(link-resolver)
+![Alt](https://example.com/image.png)
 .
-<img src="http://example.com/image.png" title="Title">
+<img src="http://example.com/image.png" alt="Alt">
 ````````````````````````````````
 
 
 ```````````````````````````````` example Images: 6
 ![](http://example.com/image.png "Title")
 .
+<img src="http://example.com/image.png" title="Title">
+````````````````````````````````
+
+
+```````````````````````````````` example(Images: 7) options(link-resolver)
+![](https://example.com/image.png "Title")
+.
+<img src="http://example.com/image.png" title="Title">
+````````````````````````````````
+
+
+```````````````````````````````` example Images: 8
+![](http://example.com/image.png "Title")
+.
 <img src="http://example.com/image.png" alt="" title="Title">
 ````````````````````````````````
 
 
-```````````````````````````````` example Images: 7
+```````````````````````````````` example Images: 9
 ![Alt](http://example.com/image.png "Title")
 .
 <img src="http://example.com/image.png" alt="Alt" title="Title">
@@ -1454,8 +1518,20 @@ Not images
 
 Multi-line URL
 
-```````````````````````````````` example Images: 8
+```````````````````````````````` example Images: 10
 ![alt](http://latex.codecogs.com/gif.latex?
+\begin{align*}
+x^2 + y^2 &= 1 \\
+y &= \sqrt{1 - x^2} \\
+\end{align*}
+"title")
+.
+<img src="http://latex.codecogs.com/gif.latex?%5Cbegin%7Balign*%7D%0Ax%5E2%20%2B%20y%5E2%20&amp;=%201%20%5C%5C%0Ay%20&amp;=%20%5Csqrt%7B1%20-%20x%5E2%7D%20%5C%5C%0A%5Cend%7Balign*%7D%0A" alt="alt" title="title" />
+````````````````````````````````
+
+
+```````````````````````````````` example(Images: 11) options(link-resolver)
+![alt](https://latex.codecogs.com/gif.latex?
 \begin{align*}
 x^2 + y^2 &= 1 \\
 y &= \sqrt{1 - x^2} \\
@@ -1468,19 +1544,19 @@ y &= \sqrt{1 - x^2} \\
 
 No Images
 
-```````````````````````````````` example(Images: 9) options(img-none)
+```````````````````````````````` example(Images: 12) options(img-none)
 .
 <img src="http://example.com/image.png" title="Title">
 ````````````````````````````````
 
 
-```````````````````````````````` example(Images: 10) options(img-none)
+```````````````````````````````` example(Images: 13) options(img-none)
 .
 <img src="http://example.com/image.png" alt="" title="Title">
 ````````````````````````````````
 
 
-```````````````````````````````` example(Images: 11) options(img-none)
+```````````````````````````````` example(Images: 14) options(img-none)
 .
 <img src="http://example.com/image.png" alt="Alt" title="Title">
 ````````````````````````````````
@@ -1488,7 +1564,7 @@ No Images
 
 Multi-line URL
 
-```````````````````````````````` example(Images: 12) options(img-none)
+```````````````````````````````` example(Images: 15) options(img-none)
 .
 <img src="http://latex.codecogs.com/gif.latex?%5Cbegin%7Balign*%7D%0Ax%5E2%20%2B%20y%5E2%20&amp;=%201%20%5C%5C%0Ay%20&amp;=%20%5Csqrt%7B1%20-%20x%5E2%7D%20%5C%5C%0A%5Cend%7Balign*%7D%0A" alt="alt" title="title" />
 ````````````````````````````````
@@ -1496,21 +1572,28 @@ Multi-line URL
 
 Html images
 
-```````````````````````````````` example(Images: 13) options(img-html)
+```````````````````````````````` example(Images: 16) options(img-html)
 <img src="http://example.com/image.png" title="Title">
 .
 <img src="http://example.com/image.png" title="Title">
 ````````````````````````````````
 
 
-```````````````````````````````` example(Images: 14) options(img-html)
+```````````````````````````````` example(Images: 17) options(img-html)
 <img src="http://example.com/image.png" alt="" title="Title">
 .
 <img src="http://example.com/image.png" alt="" title="Title">
 ````````````````````````````````
 
 
-```````````````````````````````` example(Images: 15) options(img-html)
+```````````````````````````````` example(Images: 18) options(img-html)
+<img src="http://example.com/image.png" alt="Alt" title="Title">
+.
+<img src="http://example.com/image.png" alt="Alt" title="Title">
+````````````````````````````````
+
+
+```````````````````````````````` example(Images: 19) options(img-html, link-resolver)
 <img src="http://example.com/image.png" alt="Alt" title="Title">
 .
 <img src="http://example.com/image.png" alt="Alt" title="Title">
@@ -1519,7 +1602,7 @@ Html images
 
 Multi-line URL
 
-```````````````````````````````` example(Images: 16) options(img-html)
+```````````````````````````````` example(Images: 20) options(img-html)
 <img src="http://latex.codecogs.com/gif.latex?%5Cbegin%7Balign*%7D%0Ax%5E2%20%2B%20y%5E2%20&amp;=%201%20%5C%5C%0Ay%20&amp;=%20%5Csqrt%7B1%20-%20x%5E2%7D%20%5C%5C%0A%5Cend%7Balign*%7D%0A" alt="alt" title="title">
 .
 <img src="http://latex.codecogs.com/gif.latex?%5Cbegin%7Balign*%7D%0Ax%5E2%20%2B%20y%5E2%20&amp;=%201%20%5C%5C%0Ay%20&amp;=%20%5Csqrt%7B1%20-%20x%5E2%7D%20%5C%5C%0A%5Cend%7Balign*%7D%0A" alt="alt" title="title" />
@@ -1528,21 +1611,21 @@ Multi-line URL
 
 text only images
 
-```````````````````````````````` example(Images: 17) options(img-text)
+```````````````````````````````` example(Images: 21) options(img-text)
 Title
 .
 <img src="http://example.com/image.png" title="Title">
 ````````````````````````````````
 
 
-```````````````````````````````` example(Images: 18) options(img-text)
+```````````````````````````````` example(Images: 22) options(img-text)
 Title
 .
 <img src="http://example.com/image.png" alt="" title="Title">
 ````````````````````````````````
 
 
-```````````````````````````````` example(Images: 19) options(img-text)
+```````````````````````````````` example(Images: 23) options(img-text)
 Alt
 .
 <img src="http://example.com/image.png" alt="Alt" title="Title">
@@ -1551,7 +1634,7 @@ Alt
 
 Multi-line URL
 
-```````````````````````````````` example(Images: 20) options(img-text)
+```````````````````````````````` example(Images: 24) options(img-text)
 alt
 .
 <img src="http://latex.codecogs.com/gif.latex?%5Cbegin%7Balign*%7D%0Ax%5E2%20%2B%20y%5E2%20&amp;=%201%20%5C%5C%0Ay%20&amp;=%20%5Csqrt%7B1%20-%20x%5E2%7D%20%5C%5C%0A%5Cend%7Balign*%7D%0A" alt="alt" title="title" />
@@ -1560,7 +1643,7 @@ alt
 
 ref images
 
-```````````````````````````````` example(Images: 21) options(img-ref)
+```````````````````````````````` example(Images: 25) options(img-ref)
 ![image][]
 
 [image]: http://example.com/image.png 'Title'
@@ -1570,7 +1653,17 @@ ref images
 ````````````````````````````````
 
 
-```````````````````````````````` example(Images: 22) options(img-ref)
+```````````````````````````````` example(Images: 26) options(img-ref, link-resolver)
+![image][]
+
+[image]: https://example.com/image.png 'Title'
+
+.
+<img src="http://example.com/image.png" title="Title">
+````````````````````````````````
+
+
+```````````````````````````````` example(Images: 27) options(img-ref)
 ![image][]
 
 [image]: http://example.com/image.png 'Title'
@@ -1580,7 +1673,7 @@ ref images
 ````````````````````````````````
 
 
-```````````````````````````````` example(Images: 23) options(img-ref)
+```````````````````````````````` example(Images: 28) options(img-ref)
 ![Alt][]
 
 [Alt]: http://example.com/image.png 'Title'
@@ -1592,7 +1685,7 @@ ref images
 
 Multi-line URL
 
-```````````````````````````````` example(Images: 24) options(img-ref)
+```````````````````````````````` example(Images: 29) options(img-ref)
 ![alt](http://latex.codecogs.com/gif.latex?
 \begin{align*}
 x^2 + y^2 &= 1 \\
@@ -1606,7 +1699,7 @@ y &= \sqrt{1 - x^2} \\
 
 As ref re-use document
 
-```````````````````````````````` example(Images: 25) options(img-ref, for-document)
+```````````````````````````````` example(Images: 30) options(img-ref, for-document)
 ![Alt][example image]
 .
 <img src="http://example.com/image.png" alt="Alt" title="Title">
@@ -1615,7 +1708,7 @@ As ref re-use document
 
 none
 
-```````````````````````````````` example(Images: 26) options(img-none)
+```````````````````````````````` example(Images: 31) options(img-none)
 .
 <img src="http://example.com/image.png" alt="Alt" title="Title">
 ````````````````````````````````
@@ -3858,105 +3951,6 @@ etc.
 ---
 .
 &emdash;
-````````````````````````````````
-
-
-## Issue 331
-
-Issue #331
-
-```````````````````````````````` example Issue 331: 1
-1
-
-<br />
-
-2
-.
-<p>1</p>
-<p></p>
-<p>2</p>
-````````````````````````````````
-
-
-## Issue 328
-
-Issue #328
-
-```````````````````````````````` example Issue 328: 1
-Paragraph 1  
-Paragraph 2
-.
-<p>Paragraph 1</p>
-<div>Paragraph 2</div>
-````````````````````````````````
-
-
-DIV_AS_PARAGRAPH true
-
-```````````````````````````````` example(Issue 328: 2) options(div-as-para)
-Paragraph 1
-
-Paragraph 2
-.
-<p>Paragraph 1</p>
-<div>Paragraph 2</div>
-````````````````````````````````
-
-
-```````````````````````````````` example Issue 328: 3
-Paragraph 1  
-Text  
-Paragraph 2
-.
-<div>Paragraph 1</div>
-<div>
-    Text
-    <div>Paragraph 2</div>
-</div>
-````````````````````````````````
-
-
-DIV_AS_PARAGRAPH true
-
-```````````````````````````````` example(Issue 328: 4) options(div-as-para)
-Paragraph 1
-
-Text
-
-Paragraph 2
-.
-<div>Paragraph 1</div>
-<div>
-    Text
-    <div>Paragraph 2</div>
-</div>
-````````````````````````````````
-
-
-## Issue 348
-
-Issue #348, wrap auto links needs to be on to convert auto-links
-
-```````````````````````````````` example(Issue 348: 1) options(no-wrap-autolinks)
-This doesn't get rendered: https://google.com [This does.](https://google.com)
-.
-<p>This doesn't get rendered: <a href="https://google.com" rel="nofollow">https://google.com</a> <a href="https://google.com" rel="nofollow">This does.</a></p> 
-````````````````````````````````
-
-
-default to wrap
-
-```````````````````````````````` example Issue 348: 2
-This doesn't get rendered: <https://google.com> [This does.](https://google.com)
-.
-<p>This doesn't get rendered: <a href="https://google.com" rel="nofollow">https://google.com</a> <a href="https://google.com" rel="nofollow">This does.</a></p> 
-````````````````````````````````
-
-
-```````````````````````````````` example(Issue 348: 3) options(wrap-autolinks)
-This doesn't get rendered: <https://google.com> [This does.](https://google.com)
-.
-<p>This doesn't get rendered: <a href="https://google.com" rel="nofollow">https://google.com</a> <a href="https://google.com" rel="nofollow">This does.</a></p> 
 ````````````````````````````````
 
 

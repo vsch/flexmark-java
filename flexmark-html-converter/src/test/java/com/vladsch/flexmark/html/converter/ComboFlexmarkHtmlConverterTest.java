@@ -7,10 +7,10 @@ import com.vladsch.flexmark.spec.SpecReader;
 import com.vladsch.flexmark.spec.UrlString;
 import com.vladsch.flexmark.test.ComboSpecTestCase;
 import com.vladsch.flexmark.test.DumpSpecReader;
-import com.vladsch.flexmark.util.ast.IParse;
-import com.vladsch.flexmark.util.ast.IRender;
 import com.vladsch.flexmark.util.Ref;
 import com.vladsch.flexmark.util.ast.Document;
+import com.vladsch.flexmark.util.ast.IParse;
+import com.vladsch.flexmark.util.ast.IRender;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
@@ -18,10 +18,7 @@ import org.junit.ComparisonFailure;
 import org.junit.runners.Parameterized;
 
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static org.junit.Assert.assertEquals;
 
@@ -86,6 +83,7 @@ public class ComboFlexmarkHtmlConverterTest extends ComboSpecTestCase {
         optionsMap.put("typo-map", new MutableDataSet().set(FlexmarkHtmlConverter.TYPOGRAPHIC_REPLACEMENT_MAP, getTypographicReplacement()));
 
         optionsMap.put("for-document", new MutableDataSet().set(FlexmarkHtmlConverter.FOR_DOCUMENT, new Ref<Document>(linkDocument())));
+        optionsMap.put("link-resolver", new MutableDataSet().set(Parser.EXTENSIONS, Arrays.asList(HtmlConverterTextExtension.create())));
     }
     private static Map<String, String> getTypographicReplacement() {
         HashMap<String, String> map = new HashMap<>();

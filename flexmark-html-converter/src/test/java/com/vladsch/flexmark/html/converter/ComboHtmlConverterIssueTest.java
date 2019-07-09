@@ -63,6 +63,8 @@ public class ComboHtmlConverterIssueTest extends ComboSpecTestCase {
         optionsMap.put("html-ext-inline-ins", new MutableDataSet().set(FlexmarkHtmlConverter.EXT_INLINE_INS, ExtensionConversion.HTML));
         optionsMap.put("html-ext-inline-sub", new MutableDataSet().set(FlexmarkHtmlConverter.EXT_INLINE_SUB, ExtensionConversion.HTML));
         optionsMap.put("html-ext-inline-sup", new MutableDataSet().set(FlexmarkHtmlConverter.EXT_INLINE_SUP, ExtensionConversion.HTML));
+        optionsMap.put("no-wrap-autolinks", new MutableDataSet().set(FlexmarkHtmlConverter.WRAP_AUTO_LINKS, false));
+        optionsMap.put("div-as-para", new MutableDataSet().set(FlexmarkHtmlConverter.DIV_AS_PARAGRAPH, true));
     }
 
     private static final IParse PARSER = new HtmlConverter(OPTIONS);

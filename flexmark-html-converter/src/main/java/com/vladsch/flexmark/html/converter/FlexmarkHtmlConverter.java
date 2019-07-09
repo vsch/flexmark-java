@@ -266,7 +266,7 @@ public class FlexmarkHtmlConverter {
         }
 
         // Add as last. This means clients can override the rendering of core nodes if they want by default
-        HtmlConverterCoreNodeRenderer.Factory nodeRendererFactory = new HtmlConverterCoreNodeRenderer.Factory();
+        HtmlConverterCoreNodeRendererFactory nodeRendererFactory = new HtmlConverterCoreNodeRendererFactory();
         nodeRenderers.add(new DelegatingNodeRendererFactoryWrapper(nodeRenderers, nodeRendererFactory));
 
         FlexmarkHtmlConverter.RendererDependencyHandler resolver = new FlexmarkHtmlConverter.RendererDependencyHandler();
@@ -622,7 +622,7 @@ public class FlexmarkHtmlConverter {
 
             out.setContext(this);
 
-            myHtmlConverterOptions = new HtmlConverterOptions(options);
+            myHtmlConverterOptions = new HtmlConverterOptions(myOptions);
 
             if (myHtmlConverterOptions.typographicQuotes && myHtmlConverterOptions.typographicSmarts) {
                 specialCharsPattern = Pattern.compile(TYPOGRAPHIC_QUOTES_PIPED + "|" + TYPOGRAPHIC_SMARTS_PIPED);
@@ -695,6 +695,11 @@ public class FlexmarkHtmlConverter {
         }
 
         @Override
+        public Stack<HtmlConverterState> getStateStack() {
+            return myStateStack;
+        }
+
+        @Override
         public void setTrace(boolean trace) {
             myTrace = trace;
         }
@@ -758,11 +763,13 @@ public class FlexmarkHtmlConverter {
 
         @Override
         public ResolvedLink resolveLink(LinkType linkType, CharSequence url, Attributes attributes, Boolean urlEncode) {
-            HashMap<String, ResolvedLink> resolvedLinks = resolvedLinkMap.computeIfAbsent(linkType, k -> new HashMap<String, ResolvedLink>());
+            // Resolved links not cached to allow resolving to different targets by more than URL
+            //HashMap<String, ResolvedLink> resolvedLinks = resolvedLinkMap.computeIfAbsent(linkType, k -> new HashMap<String, ResolvedLink>());
 
             String urlSeq = String.valueOf(url);
-            ResolvedLink resolvedLink = resolvedLinks.get(urlSeq);
-            if (resolvedLink == null) {
+            //ResolvedLink resolvedLink = resolvedLinks.get(urlSeq);
+            ResolvedLink resolvedLink;
+            //if (resolvedLink == null) {
                 resolvedLink = new ResolvedLink(linkType, urlSeq, attributes);
 
                 if (!urlSeq.isEmpty()) {
@@ -775,8 +782,8 @@ public class FlexmarkHtmlConverter {
                 }
 
                 // put it in the map
-                resolvedLinks.put(urlSeq, resolvedLink);
-            }
+                //resolvedLinks.put(urlSeq, resolvedLink);
+            //}
 
             return resolvedLink;
         }
@@ -1132,33 +1139,6 @@ public class FlexmarkHtmlConverter {
             return "";
         }
 
-        void processHtmlTree(
-                HtmlNodeConverterSubContext context,
-                Node parent,
-                boolean outputAttributes,
-                Runnable prePopAction
-        ) {
-            pushState(parent);
-            HtmlConverterState oldState = myState;
-
-            if (prePopAction != null) {
-                oldState.addPrePopAction(prePopAction);
-            }
-
-            Node node;
-
-            while ((node = peek()) != null) {
-                renderNode(node, context);
-            }
-
-            if (oldState != myState) {
-                throw new IllegalStateException("State not equal after process " + dumpState());
-            }
-
-            oldState.runPrePopActions();
-            popState(outputAttributes ? context.markdown : null);
-        }
-
         // processing related helpers
         @Override
         public void processUnwrapped(Node element) {
@@ -1173,7 +1153,7 @@ public class FlexmarkHtmlConverter {
 
         @Override
         public void processWrapped(Node node, Boolean isBlock, boolean escapeMarkdown) {
-            processWrapped(this, node, isBlock, escapeMarkdown);
+            FlexmarkHtmlConverter.processWrapped(this, node, isBlock, escapeMarkdown);
         }
 
         @Override
@@ -1188,126 +1168,12 @@ public class FlexmarkHtmlConverter {
 
         @Override
         public void processTextNodes(Node node, boolean stripIdAttribute, CharSequence textPrefix, CharSequence textSuffix) {
-            processTextNodes(this, node, stripIdAttribute, textPrefix, textSuffix);
-        }
-
-        void processTextNodes(HtmlNodeConverterContext context, Node node, boolean stripIdAttribute, CharSequence textPrefix, CharSequence textSuffix) {
-            pushState(node);
-
-            Node child;
-
-            LineFormattingAppendable markdown = context.getMarkdown();
-
-            while ((child = peek()) != null) {
-                if (child instanceof TextNode) {
-                    if (textPrefix != null && textPrefix.length() > 0) markdown.append(textPrefix);
-                    String text = ((TextNode) child).getWholeText();
-                    String preparedText = prepareText(text);
-                    markdown.append(preparedText);
-                    if (textSuffix != null && textSuffix.length() > 0) markdown.append(textSuffix);
-                    skip();
-                } else if (child instanceof Element) {
-                    render(child);
-                    //} else if (child instanceof Comment) {
-                    //    // see if it is an if
-                    //    String data = ((Comment) child).getData();
-                    //    if (data.startsWith("[if ")) {
-                    //        // skip till [endif]
-                    //        skip();
-                    //        while ((child = peek()) != null) {
-                    //            if (child instanceof Comment) {
-                    //                data = ((Comment) child).getData();
-                    //                if (data.trim().equals("[endif]")) {
-                    //                    skip();
-                    //                    break;
-                    //                }
-                    //            }
-                    //            skip();
-                    //        }
-                    //    } else {
-                    //        skip();
-                    //    }
-                } else {
-                    skip();
-                }
-            }
-
-            if (stripIdAttribute) {
-                excludeAttributes("id");
-            }
-
-            // last text node gives up id to parent
-            int nodeCount = node.parent().childNodeSize();
-            if (node.parent().childNode(nodeCount - 1) == node) {
-                transferIdToParent();
-            }
-            popState(markdown);
+            FlexmarkHtmlConverter.processTextNodes(this, node, stripIdAttribute, textPrefix, textSuffix);
         }
 
         @Override
         public void wrapTextNodes(Node node, CharSequence wrapText, boolean needSpaceAround) {
-            wrapTextNodes(this, node, wrapText, needSpaceAround);
-        }
-
-        void wrapTextNodes(HtmlNodeConverterContext context, Node node, CharSequence wrapText, boolean needSpaceAround) {
-            String text = context.processTextNodes(node);
-            String prefixBefore = null;
-            String appendAfter = null;
-            boolean addSpaceBefore = false;
-            boolean addSpaceAfter = false;
-            HtmlMarkdownWriter out = context.getMarkdown();
-
-            if (!text.isEmpty() && needSpaceAround) {
-                if ("\u00A0 \t\n".indexOf(text.charAt(0)) != -1) {
-                    prefixBefore = context.prepareText(text.substring(0, 1));
-                    text = text.substring(1);
-                } else if (text.startsWith("&nbsp;")) {
-                    prefixBefore = "&nbsp;";
-                    text = text.substring(prefixBefore.length());
-                } else {
-                    // if we already have space or nothing before us
-                    addSpaceBefore = !(out.getPendingEOL() == 0 || out.isPendingSpace() || out.offsetWithPending() == 0 || out.getPendingEOL() > 0);
-                }
-
-                if (!text.isEmpty() && "\u00A0 \t\n".indexOf(text.charAt(text.length() - 1)) != -1) {
-                    appendAfter = context.prepareText(text.substring(text.length() - 1));
-                    text = text.substring(0, text.length() - 1);
-                } else if (text.endsWith("&nbsp;")) {
-                    appendAfter = "&nbsp;";
-                    text = text.substring(0, text.length() - appendAfter.length());
-                } else {
-                    // if next is not text space
-                    Node next = context.peek();
-                    addSpaceAfter = true;
-
-                    if (next instanceof TextNode) {
-                        String nextText = ((TextNode) next).getWholeText();
-                        if (!nextText.isEmpty() && Character.isWhitespace(nextText.charAt(0))) {
-                            addSpaceAfter = false;
-                        }
-                    }
-                }
-            }
-
-            if (!text.isEmpty()) {
-                // need to trim end of string
-                int pos = text.length() - 1;
-                while (pos >= 0 && Character.isWhitespace(text.charAt(pos))) pos--;
-                pos++;
-
-                if (pos > 0) {
-                    if (prefixBefore != null) out.append(prefixBefore);
-                    if (addSpaceBefore) out.append(' ');
-
-                    text = text.substring(0, pos);
-                    out.append(wrapText);
-                    out.append(text);
-                    out.append(wrapText);
-
-                    if (appendAfter != null) out.append(appendAfter);
-                    if (addSpaceAfter) out.append(' ');
-                }
-            }
+            FlexmarkHtmlConverter.wrapTextNodes(this, node, wrapText, needSpaceAround);
         }
 
         @Override
@@ -1334,62 +1200,9 @@ public class FlexmarkHtmlConverter {
             return subContext.getMarkdown().toString(-1);
         }
 
-        public void processWrapped(
-                HtmlNodeConverterSubContext context,
-                Node node,
-                Boolean isBlock,
-                boolean escapeMarkdown
-        ) {
-            if (node instanceof Element && (isBlock == null && ((Element) node).isBlock() || isBlock != null && isBlock)) {
-                String s = node.toString();
-                int pos = s.indexOf(">");
-                context.markdown.lineIf(isBlock != null).append(s.substring(0, pos + 1)).lineIf(isBlock != null);
-                next();
-
-                processHtmlTree(context, node, false, null);
-
-                int endPos = s.lastIndexOf("<");
-                context.markdown.lineIf(isBlock != null).append(s.substring(endPos)).lineIf(isBlock != null);
-            } else {
-                if (escapeMarkdown) {
-                    appendOuterHtml(context, node);
-                } else {
-                    context.markdown.append(node.toString());
-                }
-                next();
-            }
-        }
-
         @Override
         public void appendOuterHtml(Node node) {
-            appendOuterHtml(this, node);
-        }
-
-        void appendOuterHtml(HtmlNodeConverterSubContext context, Node node) {
-            String text = node.outerHtml();
-            int head = text.indexOf(">");
-            int tail = text.lastIndexOf("</");
-            if (head != -1 && tail != -1) {
-                context.markdown.append(text.substring(0, head + 1));
-
-                int iMax = node.childNodeSize();
-                if (iMax > 0) {
-                    for (int i = 0; i < iMax; i++) {
-                        appendOuterHtml(context, node.childNode(i));
-                    }
-                } else {
-                    // this text we escape
-                    context.markdown.append(escapeSpecialChars(text.substring(head + 1, tail)));
-                }
-                context.markdown.append(text.substring(tail));
-            } else {
-                if (head == -1) {
-                    context.markdown.append(escapeSpecialChars(text));
-                } else {
-                    // this text we don't escape it is a single tag
-                    context.markdown.append(text);
-                }
-            }
+            FlexmarkHtmlConverter.appendOuterHtml(this, node);
         }
 
         @Override
@@ -1476,31 +1289,12 @@ public class FlexmarkHtmlConverter {
 
         @Override
         public void processConditional(ExtensionConversion extensionConversion, Node node, Runnable processNode) {
-            processConditional(this, extensionConversion, node, processNode);
-        }
-
-        void processConditional(HtmlNodeConverterContext context, ExtensionConversion extensionConversion, Node node, Runnable processNode) {
-            if (extensionConversion.isParsed()) {
-                context.skip();
-                if (!extensionConversion.isSuppressed()) {
-                    processNode.run();
-                }
-            } else {
-                context.processWrapped(node, null, true);
-            }
+            FlexmarkHtmlConverter.processConditional(this, extensionConversion, node, processNode);
         }
 
         @Override
-        public void renderDefault() {
-            processDefault(this);
-        }
-
-        void processDefault(HtmlNodeConverterSubContext subContext) {
-            if (myHtmlConverterOptions.outputUnknownTags) {
-                subContext.processWrapped(subContext.getCurrentNode(), null, false);
-            } else {
-                processUnwrapped(subContext.getCurrentNode());
-            }
+        public void renderDefault(Node node) {
+            FlexmarkHtmlConverter.processDefault(this, node, getHtmlConverterOptions().outputUnknownTags);
         }
 
         @SuppressWarnings("WeakerAccess")
@@ -1531,7 +1325,7 @@ public class FlexmarkHtmlConverter {
 
             @Override
             public Node getCurrentNode() {
-                return myMainNodeRenderer.getCurrentNode();
+                return myRenderingNode;
             }
 
             @Override
@@ -1544,7 +1338,7 @@ public class FlexmarkHtmlConverter {
 
             @Override
             public void renderChildren(Node parent, boolean outputAttributes, Runnable prePopAction) {
-                myMainNodeRenderer.processHtmlTree(this, parent, outputAttributes, prePopAction);
+                FlexmarkHtmlConverter.processHtmlTree(this, parent, outputAttributes, prePopAction);
             }
 
             @Override
@@ -1659,12 +1453,12 @@ public class FlexmarkHtmlConverter {
 
             @Override
             public void processWrapped(Node node, Boolean isBlock, boolean escapeMarkdown) {
-                myMainNodeRenderer.processWrapped(this, node, isBlock, escapeMarkdown);
+                FlexmarkHtmlConverter.processWrapped(this, node, isBlock, escapeMarkdown);
             }
 
             @Override
             public void appendOuterHtml(Node node) {
-                myMainNodeRenderer.appendOuterHtml(this, node);
+                FlexmarkHtmlConverter.appendOuterHtml(this, node);
             }
 
             @Override
@@ -1719,22 +1513,22 @@ public class FlexmarkHtmlConverter {
 
             @Override
             public void processTextNodes(Node node, boolean stripIdAttribute, CharSequence textPrefix, CharSequence textSuffix) {
-                myMainNodeRenderer.processTextNodes(this, node, stripIdAttribute, textPrefix, textSuffix);
+                FlexmarkHtmlConverter.processTextNodes(this, node, stripIdAttribute, textPrefix, textSuffix);
             }
 
             @Override
             public void wrapTextNodes(Node node, CharSequence wrapText, boolean needSpaceAround) {
-                myMainNodeRenderer.wrapTextNodes(this, node, wrapText, needSpaceAround);
+                FlexmarkHtmlConverter.wrapTextNodes(this, node, wrapText, needSpaceAround);
             }
 
             @Override
             public void processConditional(ExtensionConversion extensionConversion, Node node, Runnable processNode) {
-                myMainNodeRenderer.processConditional(this, extensionConversion, node, processNode);
+                FlexmarkHtmlConverter.processConditional(this, extensionConversion, node, processNode);
             }
 
             @Override
-            public void renderDefault() {
-                myMainNodeRenderer.processDefault(this);
+            public void renderDefault(Node node) {
+                FlexmarkHtmlConverter.processDefault(this, node, getHtmlConverterOptions().outputUnknownTags);
             }
 
             @Override
@@ -1748,9 +1542,233 @@ public class FlexmarkHtmlConverter {
             }
 
             @Override
-            public void setTrace(final boolean trace) {
+            public void setTrace(boolean trace) {
                 myMainNodeRenderer.setTrace(trace);
             }
+
+            @Override
+            public Stack<HtmlConverterState> getStateStack() {
+                return myMainNodeRenderer.getStateStack();
+            }
+        }
+    }
+
+    static void processTextNodes(HtmlNodeConverterContext context, Node node, boolean stripIdAttribute, CharSequence textPrefix, CharSequence textSuffix) {
+        context.pushState(node);
+
+        Node child;
+
+        LineFormattingAppendable markdown = context.getMarkdown();
+
+        while ((child = context.peek()) != null) {
+            if (child instanceof TextNode) {
+                if (textPrefix != null && textPrefix.length() > 0) markdown.append(textPrefix);
+                String text = ((TextNode) child).getWholeText();
+                String preparedText = context.prepareText(text);
+                markdown.append(preparedText);
+                if (textSuffix != null && textSuffix.length() > 0) markdown.append(textSuffix);
+                context.skip();
+            } else if (child instanceof Element) {
+                context.render(child);
+                //} else if (child instanceof Comment) {
+                //    // see if it is an if
+                //    String data = ((Comment) child).getData();
+                //    if (data.startsWith("[if ")) {
+                //        // skip till [endif]
+                //        skip();
+                //        while ((child = peek()) != null) {
+                //            if (child instanceof Comment) {
+                //                data = ((Comment) child).getData();
+                //                if (data.trim().equals("[endif]")) {
+                //                    skip();
+                //                    break;
+                //                }
+                //            }
+                //            skip();
+                //        }
+                //    } else {
+                //        skip();
+                //    }
+            } else {
+                context.skip();
+            }
+        }
+
+        if (stripIdAttribute) {
+            context.excludeAttributes("id");
+        }
+
+        // last text node gives up id to parent
+        int nodeCount = node.parent().childNodeSize();
+        if (node.parent().childNode(nodeCount - 1) == node) {
+            context.transferIdToParent();
+        }
+        context.popState(markdown);
+    }
+
+    static void wrapTextNodes(HtmlNodeConverterContext context, Node node, CharSequence wrapText, boolean needSpaceAround) {
+        String text = context.processTextNodes(node);
+        String prefixBefore = null;
+        String appendAfter = null;
+        boolean addSpaceBefore = false;
+        boolean addSpaceAfter = false;
+        HtmlMarkdownWriter out = context.getMarkdown();
+
+        if (!text.isEmpty() && needSpaceAround) {
+            if ("\u00A0 \t\n".indexOf(text.charAt(0)) != -1) {
+                prefixBefore = context.prepareText(text.substring(0, 1));
+                text = text.substring(1);
+            } else if (text.startsWith("&nbsp;")) {
+                prefixBefore = "&nbsp;";
+                text = text.substring(prefixBefore.length());
+            } else {
+                // if we already have space or nothing before us
+                addSpaceBefore = !(out.getPendingEOL() == 0 || out.isPendingSpace() || out.offsetWithPending() == 0 || out.getPendingEOL() > 0);
+            }
+
+            if (!text.isEmpty() && "\u00A0 \t\n".indexOf(text.charAt(text.length() - 1)) != -1) {
+                appendAfter = context.prepareText(text.substring(text.length() - 1));
+                text = text.substring(0, text.length() - 1);
+            } else if (text.endsWith("&nbsp;")) {
+                appendAfter = "&nbsp;";
+                text = text.substring(0, text.length() - appendAfter.length());
+            } else {
+                // if next is not text space
+                Node next = context.peek();
+                addSpaceAfter = true;
+
+                if (next instanceof TextNode) {
+                    String nextText = ((TextNode) next).getWholeText();
+                    if (!nextText.isEmpty() && Character.isWhitespace(nextText.charAt(0))) {
+                        addSpaceAfter = false;
+                    }
+                }
+            }
+        }
+
+        if (!text.isEmpty()) {
+            // need to trim end of string
+            int pos = text.length() - 1;
+            while (pos >= 0 && Character.isWhitespace(text.charAt(pos))) pos--;
+            pos++;
+
+            if (pos > 0) {
+                if (prefixBefore != null) out.append(prefixBefore);
+                if (addSpaceBefore) out.append(' ');
+
+                text = text.substring(0, pos);
+                out.append(wrapText);
+                out.append(text);
+                out.append(wrapText);
+
+                if (appendAfter != null) out.append(appendAfter);
+                if (addSpaceAfter) out.append(' ');
+            }
+        }
+    }
+
+    static void processConditional(HtmlNodeConverterContext context, ExtensionConversion extensionConversion, Node node, Runnable processNode) {
+        if (extensionConversion.isParsed()) {
+            context.skip();
+            if (!extensionConversion.isSuppressed()) {
+                processNode.run();
+            }
+        } else {
+            context.processWrapped(node, null, true);
+        }
+    }
+
+    static void appendOuterHtml(HtmlNodeConverterSubContext context, Node node) {
+        String text = node.outerHtml();
+        int head = text.indexOf(">");
+        int tail = text.lastIndexOf("</");
+        if (head != -1 && tail != -1) {
+            context.markdown.append(text.substring(0, head + 1));
+
+            int iMax = node.childNodeSize();
+            if (iMax > 0) {
+                for (int i = 0; i < iMax; i++) {
+                    appendOuterHtml(context, node.childNode(i));
+                }
+            } else {
+                // this text we escape
+                context.markdown.append(context.escapeSpecialChars(text.substring(head + 1, tail)));
+            }
+            context.markdown.append(text.substring(tail));
+        } else {
+            if (head == -1) {
+                context.markdown.append(context.escapeSpecialChars(text));
+            } else {
+                // this text we don't escape it is a single tag
+                context.markdown.append(text);
+            }
+        }
+    }
+
+    static public void processWrapped(HtmlNodeConverterSubContext context, Node node, Boolean isBlock, boolean escapeMarkdown) {
+        if (node instanceof Element && (isBlock == null && ((Element) node).isBlock() || isBlock != null && isBlock)) {
+            String s = node.toString();
+            int pos = s.indexOf(">");
+            context.markdown.lineIf(isBlock != null).append(s.substring(0, pos + 1)).lineIf(isBlock != null);
+            context.next();
+
+            processHtmlTree(context, node, false, null);
+
+            int endPos = s.lastIndexOf("<");
+            context.markdown.lineIf(isBlock != null).append(s.substring(endPos)).lineIf(isBlock != null);
+        } else {
+            if (escapeMarkdown) {
+                appendOuterHtml(context, node);
+            } else {
+                context.markdown.append(node.toString());
+            }
+            context.next();
+        }
+    }
+
+    static void processHtmlTree(HtmlNodeConverterSubContext context, Node parent, boolean outputAttributes, Runnable prePopAction) {
+        context.pushState(parent);
+        HtmlConverterState oldState = context.getState();
+
+        if (prePopAction != null) {
+            oldState.addPrePopAction(prePopAction);
+        }
+
+        Node node;
+
+        while ((node = context.peek()) != null) {
+            context.render(node);
+        }
+
+        if (oldState != context.getState()) {
+            throw new IllegalStateException("State not equal after process " + dumpState(context));
+        }
+
+        oldState.runPrePopActions();
+        context.popState(outputAttributes ? context.markdown : null);
+    }
+
+    static String dumpState(HtmlNodeConverterContext context) {
+        Stack<HtmlConverterState> stateStack = context.getStateStack();
+
+        if (!stateStack.isEmpty()) {
+            StringBuilder sb = new StringBuilder();
+
+            while (!stateStack.isEmpty()) {
+                HtmlConverterState state = stateStack.pop();
+                sb.append("\n").append(state == null ? "null" : state.toString());
+            }
+
+            return sb.toString();
+        }
+        return "";
+    }
+
+    static void processDefault(HtmlNodeConverterSubContext subContext, Node node, boolean outputUnknownTags) {
+        if (outputUnknownTags) {
+            subContext.processWrapped(node, null, false);
+        } else {
+            subContext.processUnwrapped(node);
         }
     }
 }

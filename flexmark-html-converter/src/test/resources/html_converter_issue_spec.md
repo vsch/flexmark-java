@@ -422,7 +422,7 @@ GitHub file list
 |   | [.cvsignore](https://github.com/danfickle/openhtmltopdf/blob/open-dev-v1/.cvsignore ".cvsignore")                                                                      | [.](https://github.com/danfickle/openhtmltopdf/commit/81951cc933fffdf85a5b5fbe274bd9c181c1daed ".")                                                                                                                                                                                                                                                                                                                                                                                                                                                   | 8 years ago  |
 |   | [.gitignore](https://github.com/danfickle/openhtmltopdf/blob/open-dev-v1/.gitignore ".gitignore")                                                                      | [For](https://github.com/danfickle/openhtmltopdf/commit/04742bbc076613fc809fe05ca254269598f996bf "For #1 - Set up Apache PDF-BOX 2 output device module.") [#1](https://github.com/danfickle/openhtmltopdf/issues/1) [- Set up Apache PDF-BOX 2 output device module.](https://github.com/danfickle/openhtmltopdf/commit/04742bbc076613fc809fe05ca254269598f996bf "For #1 - Set up Apache PDF-BOX 2 output device module.")                                                                                                                           | a year ago   |
 |   | [.hgignore](https://github.com/danfickle/openhtmltopdf/blob/open-dev-v1/.hgignore ".hgignore")                                                                         | [Add .hgignore for those using hg-git](https://github.com/danfickle/openhtmltopdf/commit/011613889106579f70d33e6ec78a77168ee54424 "Add .hgignore for those using hg-git --HG-- rename : .gitignore => .hgignore")                                                                                                                                                                                                                                                                                                                                     | 7 years ago  |
-|   | [.travis.yml](https://github.com/danfickle/openhtmltopdf/blob/open-dev-v1/.travis.yml ".travis.yml")                                                                   | [Continuous integration with travis.](https://github.com/danfickle/openhtmltopdf/commit/6c79ddb644ecc7ab2617480b4b8207de7adec6f3 "Continuous integration with travis.  Primarily so we stay compatible with Java 7.")                                                                                                                                                                                                                                                                                                                                 | 7 months ago |
+|   | [.travis.yml](https://github.com/danfickle/openhtmltopdf/blob/open-dev-v1/.travis.yml ".travis.yml")                                                                   | [Continuous integration with travis.](https://github.com/danfickle/openhtmltopdf/commit/6c79ddb644ecc7ab2617480b4b8207de7adec6f3 "Continuous integration with travis. Primarily so we stay compatible with Java 7.")                                                                                                                                                                                                                                                                                                                                  | 7 months ago |
 |   | [LICENSE](https://github.com/danfickle/openhtmltopdf/blob/open-dev-v1/LICENSE "LICENSE")                                                                               | [For](https://github.com/danfickle/openhtmltopdf/commit/f4dfeb9faf89f4108ed6a50b67392073b9dde02a "For #8 - Update LICENSE.") [#8](https://github.com/danfickle/openhtmltopdf/issues/8) [- Update LICENSE.](https://github.com/danfickle/openhtmltopdf/commit/f4dfeb9faf89f4108ed6a50b67392073b9dde02a "For #8 - Update LICENSE.")                                                                                                                                                                                                                     | 7 months ago |
 |   | [LICENSE-LGPL-2.1.txt](https://github.com/danfickle/openhtmltopdf/blob/open-dev-v1/LICENSE-LGPL-2.1.txt "LICENSE-LGPL-2.1.txt")                                        | [- change (back) license to 2.1 or later](https://github.com/danfickle/openhtmltopdf/commit/21c4dd319d5a7fac397bda10d60bb07a34782f1c "- change (back) license to 2.1 or later - include all LICENSE files in the jars")                                                                                                                                                                                                                                                                                                                               | 2 years ago  |
 |   | [LICENSE-LGPL-3.txt](https://github.com/danfickle/openhtmltopdf/blob/open-dev-v1/LICENSE-LGPL-3.txt "LICENSE-LGPL-3.txt")                                              | [- license update LGPL version 2.1 to 3](https://github.com/danfickle/openhtmltopdf/commit/a1ea2f09424b35ad2988453f70dc820872eb5ce0 "- license update LGPL version 2.1 to 3 - added license text of GPLv3 (mandatory) - links updated - added license information in poms - added license includes for jars")                                                                                                                                                                                                                                         | 2 years ago  |
@@ -1749,6 +1749,105 @@ method when htmltomarkdown
 ![](//img.alicdn.com/tfscom/TB1mR4xPpXXXXXvapXXXXXXXXXX.jpg)
 .
 <img src="//img.alicdn.com/tfscom/TB1mR4xPpXXXXXvapXXXXXXXXXX.jpg" >
+````````````````````````````````
+
+
+## Issue 331
+
+Issue #331
+
+```````````````````````````````` example Issue 331: 1
+1
+
+<br />
+
+2
+.
+<p>1</p>
+<p></p>
+<p>2</p>
+````````````````````````````````
+
+
+## Issue 328
+
+Issue #328
+
+```````````````````````````````` example Issue 328: 1
+Paragraph 1  
+Paragraph 2
+.
+<p>Paragraph 1</p>
+<div>Paragraph 2</div>
+````````````````````````````````
+
+
+DIV_AS_PARAGRAPH true
+
+```````````````````````````````` example(Issue 328: 2) options(div-as-para)
+Paragraph 1
+
+Paragraph 2
+.
+<p>Paragraph 1</p>
+<div>Paragraph 2</div>
+````````````````````````````````
+
+
+```````````````````````````````` example Issue 328: 3
+Paragraph 1  
+Text  
+Paragraph 2
+.
+<div>Paragraph 1</div>
+<div>
+    Text
+    <div>Paragraph 2</div>
+</div>
+````````````````````````````````
+
+
+DIV_AS_PARAGRAPH true
+
+```````````````````````````````` example(Issue 328: 4) options(div-as-para)
+Paragraph 1
+
+Text
+
+Paragraph 2
+.
+<div>Paragraph 1</div>
+<div>
+    Text
+    <div>Paragraph 2</div>
+</div>
+````````````````````````````````
+
+
+## Issue 348
+
+Issue #348, wrap auto links needs to be on to convert auto-links
+
+```````````````````````````````` example(Issue 348: 1) options(no-wrap-autolinks)
+This doesn't get rendered: https://google.com [This does.](https://google.com)
+.
+<p>This doesn't get rendered: <a href="https://google.com" rel="nofollow">https://google.com</a> <a href="https://google.com" rel="nofollow">This does.</a></p> 
+````````````````````````````````
+
+
+default to wrap
+
+```````````````````````````````` example Issue 348: 2
+This doesn't get rendered: <https://google.com> [This does.](https://google.com)
+.
+<p>This doesn't get rendered: <a href="https://google.com" rel="nofollow">https://google.com</a> <a href="https://google.com" rel="nofollow">This does.</a></p> 
+````````````````````````````````
+
+
+```````````````````````````````` example(Issue 348: 3) options(wrap-autolinks)
+This doesn't get rendered: <https://google.com> [This does.](https://google.com)
+.
+<p>This doesn't get rendered: <a href="https://google.com" rel="nofollow">https://google.com</a> <a href="https://google.com" rel="nofollow">This does.</a></p> 
 ````````````````````````````````
 
 
