@@ -1699,11 +1699,11 @@ This is [Sparta](<a href="http://sparta.com/#anchor">http://sparta.com#anchor</a
 ````````````````````````````````
 
 
-## Issue
+## Issue 351
 
 Issue [#351, Is there any special format requirement for processing html data to markdown]
 
-```````````````````````````````` example Issue: 1
+```````````````````````````````` example Issue 351: 1
 [test](/)
 =========
 
@@ -1739,5 +1739,19 @@ Issue [#351, Is there any special format requirement for processing html data to
 </html>
 ````````````````````````````````
 
+
+## Issue 353
+
+Issue [#353, How to self modify parse method when htmltomarkdown] , How to self modify parse
+method when htmltomarkdown
+
+```````````````````````````````` example Issue 353: 1
+![](//img.alicdn.com/tfscom/TB1mR4xPpXXXXXvapXXXXXXXXXX.jpg)
+.
+<img src="//img.alicdn.com/tfscom/TB1mR4xPpXXXXXvapXXXXXXXXXX.jpg" >
+````````````````````````````````
+
+
 [#351, Is there any special format requirement for processing html data to markdown]: https://github.com/vsch/flexmark-java/issues/351
+[#353, How to self modify parse method when htmltomarkdown]: https://github.com/vsch/flexmark-java/issues/353
 

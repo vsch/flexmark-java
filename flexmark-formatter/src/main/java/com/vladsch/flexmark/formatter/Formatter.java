@@ -544,7 +544,7 @@ public class Formatter implements IRender {
         }
 
         @Override
-        public NodeFormatterContext getSubContext(Appendable out) {
+        public NodeFormatterContext getSubContext() {
             MarkdownWriter writer = new MarkdownWriter(getMarkdown().getOptions());
             writer.setContext(this);
             //noinspection ReturnOfInnerClass
@@ -671,7 +671,7 @@ public class Formatter implements IRender {
             }
 
             @Override
-            public NodeFormatterContext getSubContext(Appendable out) {
+            public NodeFormatterContext getSubContext() {
                 MarkdownWriter htmlWriter = new MarkdownWriter(this.markdown.getOptions());
                 htmlWriter.setContext(this);
                 //noinspection ReturnOfInnerClass

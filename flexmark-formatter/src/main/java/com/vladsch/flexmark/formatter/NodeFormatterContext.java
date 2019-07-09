@@ -4,6 +4,7 @@ import com.vladsch.flexmark.formatter.internal.CoreNodeFormatter;
 import com.vladsch.flexmark.formatter.internal.FormatterOptions;
 import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.Node;
+import com.vladsch.flexmark.util.format.NodeContext;
 import com.vladsch.flexmark.util.format.options.ElementPlacementSort;
 import com.vladsch.flexmark.util.data.DataHolder;
 
@@ -12,20 +13,11 @@ import java.util.Collection;
 /**
  * The context for node rendering, including configuration and functionality for the node renderer to use.
  */
-public interface NodeFormatterContext extends TranslationContext {
+public interface NodeFormatterContext extends NodeContext<Node, NodeFormatterContext>, TranslationContext {
     /**
      * @return the HTML writer to use
      */
     MarkdownWriter getMarkdown();
-
-    /**
-     * Creates a child rendering context that can be used to collect rendered html text. The child context inherits
-     * everything but the HtmlRenderer and doNotRenderLinksNesting from the parent.
-     *
-     * @param out appendable to use for generated html
-     * @return a new rendering context with a given appendable for its output
-     */
-    NodeFormatterContext getSubContext(Appendable out);
 
     /**
      * Render the specified node and its children using the configured renderers. This should be used to render child
@@ -64,11 +56,6 @@ public interface NodeFormatterContext extends TranslationContext {
      * @return the {@link Document} node of the current context
      */
     Document getDocument();
-
-    /**
-     * @return the current node being rendered
-     */
-    Node getCurrentNode();
 
     /**
      * Get iterable of nodes of given types, in order of their appearance in the document tree, depth first traversal.

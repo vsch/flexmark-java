@@ -56,5 +56,6 @@
     <orderEntry type="module" module-name="flexmark-test-util" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-util" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-youtrack-converter" scope="TEST" />
+    <orderEntry type="module" module-name="flexmark-html-converter" scope="TEST" />
   </component>
 </module>

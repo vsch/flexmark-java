@@ -60,6 +60,7 @@
         <module>flexmark-ext-zzzzzz</module>
         <module>flexmark-formatter</module>
         <module>flexmark-html-parser</module>
+        <module>flexmark-html-converter</module>
         <module>flexmark-integration-test</module>
         <module>flexmark-jira-converter</module>
         <module>flexmark-pdf-converter</module>
@@ -392,6 +393,11 @@
             <dependency>
                 <groupId>com.vladsch.flexmark</groupId>
                 <artifactId>flexmark-html-parser</artifactId>
+                <version>0.50.16</version>
+            </dependency>
+            <dependency>
+                <groupId>com.vladsch.flexmark</groupId>
+                <artifactId>flexmark-html-converter</artifactId>
                 <version>0.50.16</version>
             </dependency>
             <dependency>

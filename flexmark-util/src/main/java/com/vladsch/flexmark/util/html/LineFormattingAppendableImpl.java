@@ -662,7 +662,23 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
 
     @Override
     public LineFormattingAppendable line() {
-        if (myPreFormattedNesting > 0 || myLineStart < myAppendable.length() || haveOptions(ALLOW_LEADING_EOL)) appendImpl(EOL);
+        if (myPreFormattedNesting > 0 || myLineStart < myAppendable.length() || haveOptions(ALLOW_LEADING_EOL)) {
+            //// see if really have something that will be kept
+            //BasedSequence pendingText = BasedSequenceImpl.of(myAppendable.subSequence(myLineStart, myAppendable.length()));
+            //
+            //if (!haveOptions(ALLOW_LEADING_WHITESPACE)) {
+            //   pendingText = pendingText.trimEnd();
+            //}
+            //
+            //if (haveOptions(SUPPRESS_TRAILING_WHITESPACE)) {
+            //   pendingText = pendingText.trimStart();
+            //}
+            //
+            //if (!pendingText.isEmpty()) {
+            //    appendImpl(EOL);
+            //}
+            appendImpl(EOL);
+        }
         else {
             rawIndentsOnFirstEol();
         }

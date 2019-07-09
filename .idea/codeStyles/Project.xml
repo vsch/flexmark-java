@@ -21,6 +21,8 @@
       <option name="OBJECT_LITERAL_WRAP" value="2" />
     </JSCodeStyleSettings>
     <JavaCodeStyleSettings>
+      <option name="FIELD_NAME_PREFIX" value="my" />
+      <option name="STATIC_FIELD_NAME_PREFIX" value="our" />
       <option name="PREFER_LONGER_NAMES" value="false" />
       <option name="GENERATE_FINAL_PARAMETERS" value="true" />
       <option name="DO_NOT_WRAP_AFTER_SINGLE_ANNOTATION" value="true" />
@@ -30,7 +32,7 @@
       </option>
     </JavaCodeStyleSettings>
     <MarkdownNavigatorCodeStyleSettings>
-      <option name="WRAP_ON_TYPING" value="1" />
+      <option name="WRAP_ON_TYPING" value="0" />
       <option name="KEEP_BLANK_LINES" value="1" />
       <option name="FORMAT_WITH_SOFT_WRAP" value="2" />
       <option name="LIST_ALIGN_FIRST_LINE_TEXT" value="true" />

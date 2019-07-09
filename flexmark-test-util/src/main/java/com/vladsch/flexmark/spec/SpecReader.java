@@ -54,7 +54,9 @@ public class SpecReader {
     }
 
     public static List<SpecExample> readExamples(String specResource) {
-        List<SpecExample> examples = readExamples(specResource, null,null);
+        URL fileUrl = getSpecInputFileUrl(specResource);
+        UrlString urlString = new UrlString(fileUrl);
+        List<SpecExample> examples = readExamples(specResource, null, urlString.toString());
         if (examples.size() == 0) {
             throw new IllegalStateException("No examples were found in " + specResource);
         }

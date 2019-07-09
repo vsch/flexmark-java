@@ -33,6 +33,7 @@ import com.vladsch.flexmark.ext.yaml.front.matter.ExtYamlFrontMatterTestSuite;
 import com.vladsch.flexmark.ext.youtube.embedded.ExtYouTubeLinkTestSuite;
 import com.vladsch.flexmark.ext.zzzzzz.ExtZzzzzzTestSuite;
 import com.vladsch.flexmark.formatter.CoreFormatterTestSuite;
+import com.vladsch.flexmark.html.converter.FlexmarkHtmlConverterTestSuite;
 import com.vladsch.flexmark.integration.IntegrationTestSuite;
 import com.vladsch.flexmark.jira.converter.JiraConverterTestSuite;
 import com.vladsch.flexmark.profiles.pegdown.PegdownProfileTestSuite;
@@ -79,6 +80,7 @@ import org.junit.runners.Suite;
         ExtYouTubeLinkTestSuite.class,
         ExtZzzzzzTestSuite.class,
         FlexmarkHtmlParserTestSuite.class,
+        FlexmarkHtmlConverterTestSuite.class,
         JiraConverterTestSuite.class,
         YouTrackConverterTestSuite.class,
         IntegrationTestSuite.class,

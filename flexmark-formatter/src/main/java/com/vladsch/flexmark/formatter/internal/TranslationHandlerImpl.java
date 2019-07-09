@@ -238,7 +238,7 @@ public class TranslationHandlerImpl implements TranslationHandler {
     private String renderInSubContext(TranslatingSpanRender render, boolean copyToMain) {
         StringBuilder span = new StringBuilder();
         MarkdownWriter savedMarkdown = myWriter;
-        NodeFormatterContext subContext = myWriter.getContext().getSubContext(span);
+        NodeFormatterContext subContext = myWriter.getContext().getSubContext();
         MarkdownWriter writer = subContext.getMarkdown();
         myWriter = writer;
 

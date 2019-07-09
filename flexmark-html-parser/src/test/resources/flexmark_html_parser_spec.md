@@ -3052,6 +3052,7 @@ Term 2
     Definition 3 line 2
 :   Definition 4 line 2 ...
     Definition 4 line 2
+
 .
 <dl>
   <dt>Term 1</dt>
