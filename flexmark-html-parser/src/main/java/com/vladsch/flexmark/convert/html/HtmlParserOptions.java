@@ -10,6 +10,13 @@ import com.vladsch.flexmark.util.data.MutableDataSetter;
 import java.util.Map;
 import java.util.regex.Pattern;
 
+/**
+ * @deprecated Use HtmlParserOptions from flexmark-html2md-converter module instead.
+ * The latter is an extensible version of HTML conversion module with the same features as flexmark-html-parser.
+ *
+ * This class is here for backward compatibility and is no longer maintained.
+ */
+@Deprecated
 @SuppressWarnings({ "WeakerAccess", "deprecation" })
 public class HtmlParserOptions implements MutableDataSetter {
     public boolean listContentIndent;

@@ -55,5 +55,6 @@
     <orderEntry type="module" module-name="flexmark-ext-media-tags" />
     <orderEntry type="module" module-name="flexmark-ext-youtube-embedded" />
     <orderEntry type="library" name="org.docx4j:docx4j" level="project" />
+    <orderEntry type="module" module-name="flexmark-html2md-converter" />
   </component>
 </module>

@@ -7,6 +7,8 @@ import com.vladsch.flexmark.ext.emoji.internal.EmojiShortcuts;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.Ref;
 import com.vladsch.flexmark.util.Utils;
+import com.vladsch.flexmark.util.data.DataHolder;
+import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.format.MarkdownTable;
 import com.vladsch.flexmark.util.format.RomanNumeral;
 import com.vladsch.flexmark.util.format.TableCell;
@@ -15,8 +17,6 @@ import com.vladsch.flexmark.util.format.options.TableCaptionHandling;
 import com.vladsch.flexmark.util.html.Attribute;
 import com.vladsch.flexmark.util.html.Attributes;
 import com.vladsch.flexmark.util.html.*;
-import com.vladsch.flexmark.util.data.DataHolder;
-import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.BasedSequenceImpl;
 import com.vladsch.flexmark.util.sequence.RepeatedCharSequence;
@@ -31,7 +31,14 @@ import java.util.regex.Pattern;
 
 import static com.vladsch.flexmark.util.Utils.minLimit;
 
+/**
+ * @deprecated Use FlexmarkHtmlConverter from flexmark-html2md-converter module instead.
+ * The latter is an extensible version of HTML conversion module with the same features as flexmark-html-parser.
+ *
+ * This class is here for backward compatibility and is no longer maintained.
+ */
 @SuppressWarnings({ "WeakerAccess", "SameParameterValue" })
+@Deprecated
 public class FlexmarkHtmlParser {
     public static final DataKey<Boolean> LIST_CONTENT_INDENT = new DataKey<>("LIST_CONTENT_INDENT", true);
     public static final DataKey<Boolean> SETEXT_HEADINGS = new DataKey<>("SETEXT_HEADINGS", true);
@@ -493,7 +500,7 @@ public class FlexmarkHtmlParser {
         parser.parse(out, html);
         boolean eolEnd = maxBlankLines >= 0 && out.getPendingEOL() > 0;
         String s = out.toString(maxBlankLines);
-        return eolEnd ? s : Utils.removeSuffix(s,"\n");
+        return eolEnd ? s : Utils.removeSuffix(s, "\n");
     }
 
     private static class State {

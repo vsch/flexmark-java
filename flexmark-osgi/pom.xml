@@ -7,7 +7,7 @@
     <parent>
         <groupId>com.vladsch.flexmark</groupId>
         <artifactId>flexmark-java</artifactId>
-        <version>0.50.16</version>
+        <version>0.50.18</version>
     </parent>
 
     <artifactId>flexmark-osgi</artifactId>
@@ -180,7 +180,7 @@
         </dependency>
         <dependency>
             <groupId>com.vladsch.flexmark</groupId>
-            <artifactId>flexmark-html-converter</artifactId>
+            <artifactId>flexmark-html2md-converter</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>

@@ -1,6 +1,6 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="FlexmarkHtmlConverterTestSuite" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
-    <module name="flexmark-html-converter" />
+    <module name="flexmark-html2md-converter" />
     <extension name="coverage">
       <pattern>
         <option name="PATTERN" value="com.vladsch.flexmark.html.converter.*" />

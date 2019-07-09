@@ -51,7 +51,7 @@
     <orderEntry type="module" module-name="flexmark-formatter" />
     <orderEntry type="module" module-name="flexmark-formatter-test-suite" />
     <orderEntry type="module" module-name="flexmark-html-parser" />
-    <orderEntry type="module" module-name="flexmark-html-converter" />
+    <orderEntry type="module" module-name="flexmark-html2md-converter" />
     <orderEntry type="module" module-name="flexmark-integration-test" />
     <orderEntry type="module" module-name="flexmark-java-samples" />
     <orderEntry type="module" module-name="flexmark-jira-converter" />

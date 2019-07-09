@@ -5,6 +5,7 @@ flexmark-java
 
 [TOC]: # " "
 
+- [0.50.18](#05018)
 - [0.50.16](#05016)
 - [Next 0.42.14](#next-04214)
 - [0.42.12](#04212)
@@ -87,6 +88,13 @@ flexmark-java
 
 
 &nbsp;</details>
+
+0.50.18
+-------
+
+* Add: `flexmark-html2md-converter` module which implements HTML to Markdown conversion with an
+  extension API to allow customizing the conversion process. Sample: [HtmlToMarkdownCustomizedSample.java]
+* Fix: deprecate the old `flexmark-html-parser` classes
 
 0.50.16
 -------
@@ -1488,6 +1496,7 @@ setting either will affect both keys. For information on these keys see
 [#348, WRAP\_AUTO\_LINKS defaults to false, Markdown loses a potential useful link]: https://github.com/vsch/flexmark-java/issues/348
 [#349, Translation Helper bugs]: https://github.com/vsch/flexmark-java/issues/349
 [#351, Is there any special format requirement for processing html data to markdown]: https://github.com/vsch/flexmark-java/issues/351
+[HtmlToMarkdownCustomizedSample.java]: https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/samples/HtmlToMarkdownCustomizedSample.java
 
 
 

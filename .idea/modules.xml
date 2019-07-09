@@ -41,8 +41,8 @@
       <module fileurl="file://$PROJECT_DIR$/flexmark-ext-zzzzzz/flexmark-ext-zzzzzz.iml" filepath="$PROJECT_DIR$/flexmark-ext-zzzzzz/flexmark-ext-zzzzzz.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-formatter/flexmark-formatter.iml" filepath="$PROJECT_DIR$/flexmark-formatter/flexmark-formatter.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-formatter-test-suite/flexmark-formatter-test-suite.iml" filepath="$PROJECT_DIR$/flexmark-formatter-test-suite/flexmark-formatter-test-suite.iml" />
-      <module fileurl="file://$PROJECT_DIR$/flexmark-html-converter/flexmark-html-converter.iml" filepath="$PROJECT_DIR$/flexmark-html-converter/flexmark-html-converter.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-html-parser/flexmark-html-parser.iml" filepath="$PROJECT_DIR$/flexmark-html-parser/flexmark-html-parser.iml" />
+      <module fileurl="file://$PROJECT_DIR$/flexmark-html2md-converter/flexmark-html2md-converter.iml" filepath="$PROJECT_DIR$/flexmark-html2md-converter/flexmark-html2md-converter.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-integration-test/flexmark-integration-test.iml" filepath="$PROJECT_DIR$/flexmark-integration-test/flexmark-integration-test.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-java.iml" filepath="$PROJECT_DIR$/flexmark-java.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-java-samples/flexmark-java-samples.iml" filepath="$PROJECT_DIR$/flexmark-java-samples/flexmark-java-samples.iml" />
