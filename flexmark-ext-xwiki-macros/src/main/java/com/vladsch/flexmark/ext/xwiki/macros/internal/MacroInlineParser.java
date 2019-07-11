@@ -4,6 +4,7 @@ import com.vladsch.flexmark.ext.xwiki.macros.Macro;
 import com.vladsch.flexmark.ext.xwiki.macros.MacroAttribute;
 import com.vladsch.flexmark.ext.xwiki.macros.MacroClose;
 import com.vladsch.flexmark.parser.InlineParser;
+import com.vladsch.flexmark.parser.LightInlineParser;
 import com.vladsch.flexmark.parser.InlineParserExtension;
 import com.vladsch.flexmark.parser.InlineParserExtensionFactory;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
@@ -17,7 +18,7 @@ public class MacroInlineParser implements InlineParserExtension {
     private final MacroParsing parsing;
     private List<Macro> openMacros;
 
-    public MacroInlineParser(final InlineParser inlineParser) {
+    public MacroInlineParser(final LightInlineParser inlineParser) {
         this.parsing = new MacroParsing(inlineParser.getParsing());
         this.openMacros = new ArrayList<Macro>();
     }
@@ -37,7 +38,7 @@ public class MacroInlineParser implements InlineParserExtension {
     }
 
     @Override
-    public boolean parse(final InlineParser inlineParser) {
+    public boolean parse(final LightInlineParser inlineParser) {
         if (inlineParser.peek(1) == '{') {
             BasedSequence input = inlineParser.getInput();
             int index = inlineParser.getIndex();
@@ -136,8 +137,8 @@ public class MacroInlineParser implements InlineParserExtension {
         }
 
         @Override
-        public InlineParserExtension apply(final InlineParser inlineParser) {
-            return new MacroInlineParser(inlineParser);
+        public InlineParserExtension apply(final LightInlineParser lightInlineParser) {
+            return new MacroInlineParser(lightInlineParser);
         }
 
         @Override

@@ -2,6 +2,7 @@ package com.vladsch.flexmark.ext.gfm.users.internal;
 
 import com.vladsch.flexmark.ext.gfm.users.GfmUser;
 import com.vladsch.flexmark.parser.InlineParser;
+import com.vladsch.flexmark.parser.LightInlineParser;
 import com.vladsch.flexmark.parser.InlineParserExtension;
 import com.vladsch.flexmark.parser.InlineParserExtensionFactory;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
@@ -12,7 +13,7 @@ import java.util.regex.Pattern;
 public class GfmUsersInlineParserExtension implements InlineParserExtension {
     public static final Pattern GITHUB_USER = Pattern.compile("^(@)([a-z\\d](?:[a-z\\d]|-(?=[a-z\\d])){0,38})\\b", Pattern.CASE_INSENSITIVE);
 
-    public GfmUsersInlineParserExtension(final InlineParser inlineParser) {
+    public GfmUsersInlineParserExtension(final LightInlineParser inlineParser) {
 
     }
 
@@ -27,7 +28,7 @@ public class GfmUsersInlineParserExtension implements InlineParserExtension {
     }
 
     @Override
-    public boolean parse(final InlineParser inlineParser) {
+    public boolean parse(final LightInlineParser inlineParser) {
         int index = inlineParser.getIndex();
         boolean isPossible = index == 0;
         if (!isPossible) {
@@ -70,8 +71,8 @@ public class GfmUsersInlineParserExtension implements InlineParserExtension {
         }
 
         @Override
-        public InlineParserExtension apply(final InlineParser inlineParser) {
-            return new GfmUsersInlineParserExtension(inlineParser);
+        public InlineParserExtension apply(final LightInlineParser lightInlineParser) {
+            return new GfmUsersInlineParserExtension(lightInlineParser);
         }
 
         @Override

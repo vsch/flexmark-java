@@ -2,6 +2,7 @@ package com.vladsch.flexmark.ext.typographic.internal;
 
 import com.vladsch.flexmark.ext.typographic.TypographicSmarts;
 import com.vladsch.flexmark.parser.InlineParser;
+import com.vladsch.flexmark.parser.LightInlineParser;
 import com.vladsch.flexmark.parser.InlineParserExtension;
 import com.vladsch.flexmark.parser.InlineParserExtensionFactory;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
@@ -11,7 +12,7 @@ import java.util.Set;
 public class SmartsInlineParser implements InlineParserExtension {
     private final SmartsParsing parsing;
 
-    public SmartsInlineParser(final InlineParser inlineParser) {
+    public SmartsInlineParser(final LightInlineParser inlineParser) {
         this.parsing = new SmartsParsing(inlineParser.getParsing());
     }
 
@@ -26,7 +27,7 @@ public class SmartsInlineParser implements InlineParserExtension {
     }
 
     @Override
-    public boolean parse(final InlineParser inlineParser) {
+    public boolean parse(final LightInlineParser inlineParser) {
         BasedSequence match = inlineParser.match(parsing.SMARTS);
         if (match != null) {
             BasedSequence input = inlineParser.getInput();
@@ -64,8 +65,8 @@ public class SmartsInlineParser implements InlineParserExtension {
         }
 
         @Override
-        public InlineParserExtension apply(final InlineParser inlineParser) {
-            return new SmartsInlineParser(inlineParser);
+        public InlineParserExtension apply(final LightInlineParser lightInlineParser) {
+            return new SmartsInlineParser(lightInlineParser);
         }
 
         @Override

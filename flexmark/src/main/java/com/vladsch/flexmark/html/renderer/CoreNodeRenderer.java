@@ -322,7 +322,7 @@ public class CoreNodeRenderer implements NodeRenderer {
 
         BasedSequence info = node.getInfo();
         if (info.isNotNull() && !info.isBlank()) {
-            BasedSequence language = node.getInfoDelimitedByAny(" ");
+            BasedSequence language = node.getInfoDelimitedByAny(" \t");
             html.attr("class", context.getHtmlOptions().languageClassPrefix + language.unescape());
         } else {
             String noLanguageClass = context.getHtmlOptions().noLanguageClass.trim();

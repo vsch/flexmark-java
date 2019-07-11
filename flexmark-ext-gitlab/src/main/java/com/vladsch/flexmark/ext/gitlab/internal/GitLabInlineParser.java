@@ -5,6 +5,7 @@ import com.vladsch.flexmark.ext.gitlab.GitLabDel;
 import com.vladsch.flexmark.ext.gitlab.GitLabInline;
 import com.vladsch.flexmark.ext.gitlab.GitLabIns;
 import com.vladsch.flexmark.parser.InlineParser;
+import com.vladsch.flexmark.parser.LightInlineParser;
 import com.vladsch.flexmark.parser.InlineParserExtension;
 import com.vladsch.flexmark.parser.InlineParserExtensionFactory;
 import com.vladsch.flexmark.util.ast.Node;
@@ -19,7 +20,7 @@ public class GitLabInlineParser implements InlineParserExtension {
     private final List<GitLabInline> openInlines;
     private final GitLabOptions options;
 
-    public GitLabInlineParser(final InlineParser inlineParser) {
+    public GitLabInlineParser(final LightInlineParser inlineParser) {
         openInlines = new ArrayList<GitLabInline>();
         options = new GitLabOptions(inlineParser.getDocument());
     }
@@ -43,7 +44,7 @@ public class GitLabInlineParser implements InlineParserExtension {
     }
 
     @Override
-    public boolean parse(final InlineParser inlineParser) {
+    public boolean parse(final LightInlineParser inlineParser) {
         final char firstChar = inlineParser.peek();
         final char secondChar = inlineParser.peek(1);
         if ((firstChar == '{' || firstChar == '[') && (options.insParser && secondChar == '+' || options.delParser && secondChar == '-')) {
@@ -110,8 +111,8 @@ public class GitLabInlineParser implements InlineParserExtension {
         }
 
         @Override
-        public InlineParserExtension apply(final InlineParser inlineParser) {
-            return new GitLabInlineParser(inlineParser);
+        public InlineParserExtension apply(final LightInlineParser lightInlineParser) {
+            return new GitLabInlineParser(lightInlineParser);
         }
 
         @Override

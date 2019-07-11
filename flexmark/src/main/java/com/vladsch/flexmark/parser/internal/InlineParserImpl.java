@@ -1,7 +1,6 @@
 package com.vladsch.flexmark.parser.internal;
 
 import com.vladsch.flexmark.ast.*;
-import com.vladsch.flexmark.ast.util.Parsing;
 import com.vladsch.flexmark.ast.util.ReferenceRepository;
 import com.vladsch.flexmark.ast.util.TextNodeConverter;
 import com.vladsch.flexmark.parser.*;
@@ -25,11 +24,9 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.SegmentedSequence;
 
 import java.util.*;
-import java.util.regex.MatchResult;
 import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
-public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
+public class InlineParserImpl extends LightInlineParserImpl implements InlineParser, ParagraphPreProcessor {
     static class InlineParserDependencyStage {
         final List<InlineParserExtensionFactory> dependents;
 
@@ -118,11 +115,6 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
      */
     protected ReferenceRepository referenceRepository;
 
-    protected Node block;
-
-    protected BasedSequence input;
-    protected int index;
-
     /**
      * Top delimiter (emphasis, strong emphasis or custom emphasis). (Brackets are on a separate stack, different
      * from the algorithm described in the spec.)
@@ -134,17 +126,10 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
      */
     private Bracket lastBracket;
 
-    protected ArrayList<BasedSequence> currentText;
-
-    protected Document document;
-
-    protected final InlineParserOptions options;
-
     @Override
-    public void initializeDocument(Parsing parsing, Document document) {
+    public void initializeDocument(Document document) {
         this.document = document;
         this.referenceRepository = document.get(Parser.REFERENCES);
-        this.myParsing = parsing;
 
         linkRefProcessors = new ArrayList<LinkRefProcessor>(linkRefProcessorsData.processors.size());
         for (LinkRefProcessorFactory factory : linkRefProcessorsData.processors) {
@@ -188,16 +173,6 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
         }
     }
 
-    public ArrayList<BasedSequence> getCurrentText() {
-        if (currentText == null) {
-            currentText = new ArrayList<BasedSequence>();
-        }
-
-        return currentText;
-    }
-
-    protected Parsing myParsing;
-
     public InlineParserImpl(
             DataHolder options,
             BitSet specialCharacters,
@@ -206,8 +181,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
             LinkRefProcessorData linkRefProcessorsData,
             List<InlineParserExtensionFactory> inlineParserExtensionFactories
     ) {
-        this.myParsing = new Parsing(options);
-        this.options = new InlineParserOptions(options);
+        super(options);
         this.delimiterProcessors = delimiterProcessors;
         this.linkRefProcessorsData = linkRefProcessorsData;
         this.delimiterCharacters = delimiterCharacters;
@@ -254,12 +228,12 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
     }
 
     // nothing to add, this is for extensions.
-    public static LinkRefProcessorData calculateLinkRefProcessors(final DataHolder options, List<LinkRefProcessorFactory> linkRefProcessors) {
+    public static LinkRefProcessorData calculateLinkRefProcessors(DataHolder options, List<LinkRefProcessorFactory> linkRefProcessors) {
         if (linkRefProcessors.size() > 1) {
             List<LinkRefProcessorFactory> sortedLinkProcessors = new ArrayList<LinkRefProcessorFactory>(linkRefProcessors.size());
             sortedLinkProcessors.addAll(linkRefProcessors);
 
-            final int[] maxNestingLevelRef = new int[] { 0 };
+            int[] maxNestingLevelRef = new int[] { 0 };
 
             Collections.sort(sortedLinkProcessors, new Comparator<LinkRefProcessorFactory>() {
                 @Override
@@ -325,21 +299,6 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
     }
 
     @Override
-    public BasedSequence getInput() {
-        return input;
-    }
-
-    @Override
-    public int getIndex() {
-        return index;
-    }
-
-    @Override
-    public void setIndex(final int index) {
-        this.index = index;
-    }
-
-    @Override
     public Delimiter getLastDelimiter() {
         return lastDelimiter;
     }
@@ -347,26 +306,6 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
     @Override
     public Bracket getLastBracket() {
         return lastBracket;
-    }
-
-    @Override
-    public Document getDocument() {
-        return document;
-    }
-
-    @Override
-    public InlineParserOptions getOptions() {
-        return options;
-    }
-
-    @Override
-    public Parsing getParsing() {
-        return myParsing;
-    }
-
-    @Override
-    public Node getBlock() {
-        return block;
     }
 
     @Override
@@ -491,22 +430,6 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
         return contentChars.getStartOffset() - block.getChars().getStartOffset();
     }
 
-    @Override
-    public void moveNodes(Node fromNode, Node toNode) {
-        if (fromNode != toNode) {
-            Node next = fromNode.getNext();
-            while (next != null) {
-                Node nextNode = next.getNext();
-                next.unlink();
-                fromNode.appendChild(next);
-                if (next == toNode) break;
-                next = nextNode;
-            }
-        }
-
-        fromNode.setCharsFromContent();
-    }
-
     /**
      * Attempt to parse a reference definition, modifying the internal reference map.
      *
@@ -586,39 +509,6 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
         block.insertBefore(reference);
 
         return index - startIndex;
-    }
-
-    public void appendText(BasedSequence text) {
-        getCurrentText().add(text);
-    }
-
-    @Override
-    public void appendText(BasedSequence text, int beginIndex, int endIndex) {
-        getCurrentText().add(text.subSequence(beginIndex, endIndex));
-    }
-
-    @Override
-    public void appendNode(Node node) {
-        flushTextNode();
-        block.appendChild(node);
-    }
-
-    // In some cases, we don't want the text to be appended to an existing node, we need it separate
-    @Override
-    public Text appendSeparateText(BasedSequence text) {
-        Text node = new Text(text);
-        appendNode(node);
-        return node;
-    }
-
-    @Override
-    public boolean flushTextNode() {
-        if (currentText != null) {
-            block.appendChild(new Text(SegmentedSequence.of(currentText)));
-            currentText = null;
-            return true;
-        }
-        return false;
     }
 
     /**
@@ -765,158 +655,6 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
     }
 
     /**
-     * If RE matches at current index in the input, advance index and return the match; otherwise return null.
-     *
-     * @param re pattern to match
-     * @return sequence matched or null
-     */
-    @Override
-    public BasedSequence match(Pattern re) {
-        if (index >= input.length()) {
-            return null;
-        }
-        Matcher matcher = re.matcher(input);
-        matcher.region(index, input.length());
-        boolean m = matcher.find();
-        if (m) {
-            index = matcher.end();
-            MatchResult result = matcher.toMatchResult();
-            return input.subSequence(result.start(), result.end());
-        } else {
-            return null;
-        }
-    }
-
-    /**
-     * If RE matches at current index in the input, advance index and return the match; otherwise return null.
-     *
-     * @param re pattern to match
-     * @return sequence matched or null
-     */
-    @Override
-    public BasedSequence[] matchWithGroups(Pattern re) {
-        if (index >= input.length()) {
-            return null;
-        }
-        Matcher matcher = re.matcher(input);
-        matcher.region(index, input.length());
-        boolean m = matcher.find();
-        if (m) {
-            index = matcher.end();
-            MatchResult result = matcher.toMatchResult();
-            final int iMax = matcher.groupCount() + 1;
-            BasedSequence[] results = new BasedSequence[iMax];
-            results[0] = input.subSequence(result.start(), result.end());
-            for (int i = 1; i < iMax; i++) {
-                if (matcher.group(i) != null) {
-                    results[i] = input.subSequence(result.start(i), result.end(i));
-                } else {
-                    results[i] = null;
-                }
-            }
-            return results;
-        } else {
-            return null;
-        }
-    }
-
-    /**
-     * If RE matches at current index in the input, advance index and return the match; otherwise return null.
-     *
-     * @param re pattern to match
-     * @return matched matcher or null
-     */
-    @Override
-    public Matcher matcher(Pattern re) {
-        if (index >= input.length()) {
-            return null;
-        }
-        Matcher matcher = re.matcher(input);
-        matcher.region(index, input.length());
-        boolean m = matcher.find();
-        if (m) {
-            index = matcher.end();
-            return matcher;
-        } else {
-            return null;
-        }
-    }
-
-    /**
-     * @return the char at the current input index, or {@code '\0'} in case there are no more characters.
-     */
-    @Override
-    public char peek() {
-        if (index < input.length()) {
-            return input.charAt(index);
-        } else {
-            return '\0';
-        }
-    }
-
-    @Override
-    public char peek(int ahead) {
-        if (index + ahead < input.length()) {
-            return input.charAt(index + ahead);
-        } else {
-            return '\0';
-        }
-    }
-
-    /**
-     * Parse zero or more space characters, including at most one newline and zero or more spaces.
-     *
-     * @return true
-     */
-    @Override
-    public boolean spnl() {
-        match(myParsing.SPNL);
-        return true;
-    }
-
-    /**
-     * Parse zero or more non-indent spaces
-     *
-     * @return true
-     */
-    @Override
-    public boolean nonIndentSp() {
-        match(myParsing.SPNI);
-        return true;
-    }
-
-    /**
-     * Parse zero or more spaces
-     *
-     * @return true
-     */
-    @Override
-    public boolean sp() {
-        match(myParsing.SP);
-        return true;
-    }
-
-    /**
-     * Parse zero or more space characters, including at one newline.
-     *
-     * @return true
-     */
-    @Override
-    public boolean spnlUrl() {
-        return match(myParsing.SPNL_URL) != null;
-    }
-
-    /**
-     * Parse to end of line, including EOL
-     *
-     * @return characters parsed or null if no end of line
-     */
-    @Override
-    public BasedSequence toEOL() {
-        return match(myParsing.REST_OF_LINE);
-    }
-
-    /**
      * Parse a newline. If it was preceded by two spaces, append a hard line break; otherwise a soft line break.
      *
      * @return true
@@ -994,19 +732,19 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
             if (matched.equals(ticks)) {
                 int ticksLength = ticks.length();
                 BasedSequence content = input.subSequence(afterOpenTicks - ticksLength, index - ticksLength);
-                final BasedSequence codeText = input.subSequence(afterOpenTicks, index - ticksLength);
+                BasedSequence codeText = input.subSequence(afterOpenTicks, index - ticksLength);
                 Code node = new Code(input.subSequence(afterOpenTicks - ticksLength, afterOpenTicks), codeText, input.subSequence(index - ticksLength, index));
 
                 if (options.codeSoftLineBreaks) {
                     // add softbreaks to code ast
-                    final int length = codeText.length();
+                    int length = codeText.length();
                     int lastPos = 0;
                     while (lastPos < length) {
                         int softBreak = codeText.indexOfAny("\n\r", lastPos);
                         int pos = softBreak == -1 ? length : softBreak;
                         int lineBreak = pos;
 
-                        final Text textNode = new Text(codeText.subSequence(lastPos, pos));
+                        Text textNode = new Text(codeText.subSequence(lastPos, pos));
                         node.appendChild(textNode);
 
                         lastPos = pos;
@@ -1027,7 +765,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
                         }
                     }
                 } else {
-                    final Text textNode = new Text(codeText);
+                    Text textNode = new Text(codeText);
                     node.appendChild(textNode);
                 }
 
@@ -1424,15 +1162,15 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
             if (linkRefProcessorMatch != null) {
                 // may need to adjust children's text because some characters were part of the processor's opener/closer
                 if (insertNode.hasChildren()) {
-                    final BasedSequence original = insertNode.getChildChars();
-                    final BasedSequence text = linkRefProcessorMatch.processor.adjustInlineText(document, insertNode);
+                    BasedSequence original = insertNode.getChildChars();
+                    BasedSequence text = linkRefProcessorMatch.processor.adjustInlineText(document, insertNode);
 
                     // may need to remove some delimiters if they span across original and changed text boundary or if now they are outside text boundary
                     Delimiter delimiter = lastDelimiter;
                     while (delimiter != null) {
                         Delimiter prevDelimiter = delimiter.getPrevious();
 
-                        final BasedSequence delimiterChars = delimiter.getInput().subSequence(delimiter.getStartIndex(), delimiter.getEndIndex());
+                        BasedSequence delimiterChars = delimiter.getInput().subSequence(delimiter.getStartIndex(), delimiter.getEndIndex());
                         if (original.containsAllOf(delimiterChars)) {
                             if (!text.containsAllOf(delimiterChars) || !linkRefProcessorMatch.processor.allowDelimiters(delimiterChars, document, insertNode)) {
                                 // remove it
@@ -1446,7 +1184,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
                     if (!text.containsAllOf(original)) {
                         // now need to truncate child text
                         for (Node node : insertNode.getChildren()) {
-                            final BasedSequence nodeChars = node.getChars();
+                            BasedSequence nodeChars = node.getChars();
                             if (text.containsSomeOf(nodeChars)) {
                                 if (!text.containsAllOf(nodeChars)) {
                                     // truncate the contents to intersection of node's chars and adjusted chars
@@ -1542,7 +1280,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
         return false;
     }
 
-    protected static void collapseLinkRefChildren(Node node, Boolean isTentative, final boolean trimFirstLastChild) {
+    protected static void collapseLinkRefChildren(Node node, Boolean isTentative, boolean trimFirstLastChild) {
         Node child = node.getFirstChild();
         boolean hadCollapse = false;
         while (child != null) {
@@ -1625,7 +1363,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
                 return null;
             } else {
                 // spec 0.27 compatibility
-                final BasedSequence matched = match(myParsing.LINK_DESTINATION);
+                BasedSequence matched = match(myParsing.LINK_DESTINATION);
                 return matched != null && options.spaceInLinkUrls ? matched.trimEnd(BasedSequence.SPACE) : matched;
             }
         }

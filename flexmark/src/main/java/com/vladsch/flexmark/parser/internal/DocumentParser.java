@@ -328,7 +328,7 @@ public class DocumentParser implements ParserState {
             InlineParser inlineParser
     ) {
         this.options = options;
-        this.myParsing = new Parsing(options);
+        this.myParsing = inlineParser.getParsing();
 
         ArrayList<BlockParserFactory> blockParserFactories = new ArrayList<BlockParserFactory>(customBlockParserFactories.size());
         for (CustomBlockParserFactory factory : customBlockParserFactories) {
@@ -444,7 +444,7 @@ public class DocumentParser implements ParserState {
         lineNumber = 0;
 
         documentBlockParser.initializeDocument(options, input);
-        inlineParser.initializeDocument(myParsing, documentBlockParser.getBlock());
+        inlineParser.initializeDocument(documentBlockParser.getBlock());
 
         currentPhase = ParserPhase.PARSE_BLOCKS;
 

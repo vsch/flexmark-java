@@ -5,7 +5,7 @@ flexmark-java
 
 [TOC]: # " "
 
-- [Next](#next)
+- [0.50.20](#05020)
 - [0.50.18](#05018)
 - [0.50.16](#05016)
 - [Next 0.42.14](#next-04214)
@@ -90,9 +90,13 @@ flexmark-java
 
 &nbsp;</details>
 
-Next
-----
+0.50.20
+------
 
+* Add: allow attributes after fenced code info string as last non-blank text after the info
+  string.
+  * Add: `AttributesExtension.FENCED_CODE_INFO_ATTRIBUTES` default `true`, if false will not
+    parse attributes after the fenced code info string
 * [ ] Add: `FlexmarkHtmlParser` options:
   * [ ] `EXT_TABLES` conversion option not yet implemented.
 * [ ] Add: `<!-- @formatter:on -->` and `<!-- @formatter:on -->` tags to `Formatter` for

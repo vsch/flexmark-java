@@ -9,11 +9,13 @@ class AttributesOptions implements MutableDataSetter {
     public final boolean assignTextAttributes;
     public final boolean wrapNonAttributeText;
     public final boolean useEmptyImplicitAsSpanDelimiter;
+    public final boolean fencedCodeInfoAttributes;
 
     public AttributesOptions(DataHolder options) {
         assignTextAttributes = AttributesExtension.ASSIGN_TEXT_ATTRIBUTES.getFrom(options);
         wrapNonAttributeText = AttributesExtension.WRAP_NON_ATTRIBUTE_TEXT.getFrom(options);
         useEmptyImplicitAsSpanDelimiter = AttributesExtension.USE_EMPTY_IMPLICIT_AS_SPAN_DELIMITER.getFrom(options);
+        fencedCodeInfoAttributes = AttributesExtension.FENCED_CODE_INFO_ATTRIBUTES.getFrom(options);
     }
 
     @Override
@@ -21,6 +23,7 @@ class AttributesOptions implements MutableDataSetter {
         dataHolder.set(AttributesExtension.ASSIGN_TEXT_ATTRIBUTES, assignTextAttributes);
         dataHolder.set(AttributesExtension.WRAP_NON_ATTRIBUTE_TEXT, wrapNonAttributeText);
         dataHolder.set(AttributesExtension.USE_EMPTY_IMPLICIT_AS_SPAN_DELIMITER, useEmptyImplicitAsSpanDelimiter);
+        dataHolder.set(AttributesExtension.FENCED_CODE_INFO_ATTRIBUTES, fencedCodeInfoAttributes);
         return dataHolder;
     }
 }

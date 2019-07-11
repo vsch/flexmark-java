@@ -2,6 +2,7 @@ package com.vladsch.flexmark.ext.macros.internal;
 
 import com.vladsch.flexmark.ext.macros.MacroReference;
 import com.vladsch.flexmark.parser.InlineParser;
+import com.vladsch.flexmark.parser.LightInlineParser;
 import com.vladsch.flexmark.parser.InlineParserExtension;
 import com.vladsch.flexmark.parser.InlineParserExtensionFactory;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
@@ -13,7 +14,7 @@ public class MacrosInlineParserExtension implements InlineParserExtension {
     static Pattern MACRO_REFERENCE = Pattern.compile("<<<([\\w_-]+)>>>");
     static Pattern MACRO_REFERENCE_INTELLIJ = Pattern.compile("<<<([\u001f\\w_-]+)>>>");
 
-    public MacrosInlineParserExtension(final InlineParser inlineParser) {
+    public MacrosInlineParserExtension(final LightInlineParser inlineParser) {
 
     }
 
@@ -28,7 +29,7 @@ public class MacrosInlineParserExtension implements InlineParserExtension {
     }
 
     @Override
-    public boolean parse(final InlineParser inlineParser) {
+    public boolean parse(final LightInlineParser inlineParser) {
         final BasedSequence match = inlineParser.match(inlineParser.getParsing().intellijDummyIdentifier ? MACRO_REFERENCE_INTELLIJ : MACRO_REFERENCE);
 
         if (match != null) {
@@ -58,8 +59,8 @@ public class MacrosInlineParserExtension implements InlineParserExtension {
         }
 
         @Override
-        public InlineParserExtension apply(final InlineParser inlineParser) {
-            return new MacrosInlineParserExtension(inlineParser);
+        public InlineParserExtension apply(final LightInlineParser lightInlineParser) {
+            return new MacrosInlineParserExtension(lightInlineParser);
         }
 
         @Override

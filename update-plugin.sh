@@ -22,6 +22,12 @@ echo updated out/artifacts/flexmark-parent.jar in ../idea-multimarkdown2/lib
 #cp out/artifacts/flexmark-util.jar ../idea-multimarkdown2/lib
 #echo updated out/artifacts/flexmark-util.jar in ../idea-multimarkdown2/lib
 
+cp out/artifacts/flexmark-parent.jar ../idea-multimarkdown1/lib
+echo updated out/artifacts/flexmark-parent.jar in ../idea-multimarkdown1/lib
+
+#cp out/artifacts/flexmark-util.jar ../idea-multimarkdown1/lib
+#echo updated out/artifacts/flexmark-util.jar in ../idea-multimarkdown1/lib
+
 #cp out/artifacts/flexmark-util.jar ../tree-iteration/lib
 #echo updated out/artifacts/flexmark-util.jar in ../tree-iteration/lib
 cp out/artifacts/flexmark-parent.jar ../tree-iteration/lib

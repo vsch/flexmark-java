@@ -30,7 +30,6 @@
       <element id="module-output" name="flexmark-ext-ins" />
       <element id="module-output" name="flexmark-ext-superscript" />
       <element id="module-output" name="flexmark-ext-jekyll-tag" />
-      <element id="module-output" name="flexmark-html-parser" />
       <element id="module-output" name="flexmark-formatter" />
       <element id="module-output" name="flexmark-pdf-converter" />
       <element id="module-output" name="flexmark-ext-gfm-issues" />
@@ -44,6 +43,12 @@
       <element id="module-output" name="flexmark-ext-macros" />
       <element id="module-output" name="flexmark-ext-media-tags" />
       <element id="module-output" name="flexmark-ext-youtube-embedded" />
+      <element id="module-output" name="flexmark-html2md-converter" />
+      <element id="library" level="project" name="jsoup-1.8.3" />
+      <element id="library" level="project" name="log4j:log4j:1.2.17" />
+      <element id="library" level="project" name="Maven: junit:junit:4.12" />
+      <element id="library" level="project" name="Maven: org.hamcrest:hamcrest-core:1.3" />
+      <element id="module-output" name="flexmark-util" />
     </root>
   </artifact>
 </component>

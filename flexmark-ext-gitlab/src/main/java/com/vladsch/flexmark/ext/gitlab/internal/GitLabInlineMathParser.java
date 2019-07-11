@@ -2,6 +2,7 @@ package com.vladsch.flexmark.ext.gitlab.internal;
 
 import com.vladsch.flexmark.ext.gitlab.GitLabInlineMath;
 import com.vladsch.flexmark.parser.InlineParser;
+import com.vladsch.flexmark.parser.LightInlineParser;
 import com.vladsch.flexmark.parser.InlineParserExtension;
 import com.vladsch.flexmark.parser.InlineParserExtensionFactory;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
@@ -14,7 +15,7 @@ public class GitLabInlineMathParser implements InlineParserExtension {
     Pattern MATH_PATTERN = Pattern.compile("\\$`((?:.|\n)*?)`\\$");
     private final GitLabOptions options;
 
-    public GitLabInlineMathParser(final InlineParser inlineParser) {
+    public GitLabInlineMathParser(final LightInlineParser inlineParser) {
         options = new GitLabOptions(inlineParser.getDocument());
     }
 
@@ -29,7 +30,7 @@ public class GitLabInlineMathParser implements InlineParserExtension {
     }
 
     @Override
-    public boolean parse(final InlineParser inlineParser) {
+    public boolean parse(final LightInlineParser inlineParser) {
         if (inlineParser.peek(1) == '`') {
             BasedSequence input = inlineParser.getInput();
             Matcher matcher = inlineParser.matcher(MATH_PATTERN);
@@ -63,8 +64,8 @@ public class GitLabInlineMathParser implements InlineParserExtension {
         }
 
         @Override
-        public InlineParserExtension apply(final InlineParser inlineParser) {
-            return new GitLabInlineMathParser(inlineParser);
+        public InlineParserExtension apply(final LightInlineParser lightInlineParser) {
+            return new GitLabInlineMathParser(lightInlineParser);
         }
 
         @Override

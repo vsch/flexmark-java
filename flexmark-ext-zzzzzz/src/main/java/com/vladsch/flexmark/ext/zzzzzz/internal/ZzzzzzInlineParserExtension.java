@@ -2,6 +2,7 @@ package com.vladsch.flexmark.ext.zzzzzz.internal;
 
 import com.vladsch.flexmark.ext.zzzzzz.Zzzzzz;
 import com.vladsch.flexmark.parser.InlineParser;
+import com.vladsch.flexmark.parser.LightInlineParser;
 import com.vladsch.flexmark.parser.InlineParserExtension;
 import com.vladsch.flexmark.parser.InlineParserExtensionFactory;
 
@@ -12,7 +13,7 @@ import java.util.Set;
 public class ZzzzzzInlineParserExtension implements InlineParserExtension {
     private List<Zzzzzz> openZzzzzzs;
 
-    public ZzzzzzInlineParserExtension(final InlineParser inlineParser) {
+    public ZzzzzzInlineParserExtension(final LightInlineParser inlineParser) {
         this.openZzzzzzs = new ArrayList<Zzzzzz>();
     }
 
@@ -31,7 +32,7 @@ public class ZzzzzzInlineParserExtension implements InlineParserExtension {
     }
 
     @Override
-    public boolean parse(final InlineParser inlineParser) {
+    public boolean parse(final LightInlineParser inlineParser) {
         return false;
     }
 
@@ -52,8 +53,8 @@ public class ZzzzzzInlineParserExtension implements InlineParserExtension {
         }
 
         @Override
-        public InlineParserExtension apply(final InlineParser inlineParser) {
-            return new ZzzzzzInlineParserExtension(inlineParser);
+        public InlineParserExtension apply(final LightInlineParser lightInlineParser) {
+            return new ZzzzzzInlineParserExtension(lightInlineParser);
         }
 
         @Override

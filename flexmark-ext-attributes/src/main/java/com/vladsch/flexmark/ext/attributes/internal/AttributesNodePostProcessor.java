@@ -5,19 +5,20 @@ import com.vladsch.flexmark.ext.attributes.AttributeNode;
 import com.vladsch.flexmark.ext.attributes.AttributesDelimiter;
 import com.vladsch.flexmark.ext.attributes.AttributesExtension;
 import com.vladsch.flexmark.ext.attributes.AttributesNode;
+import com.vladsch.flexmark.parser.LightInlineParser;
+import com.vladsch.flexmark.parser.LightInlineParserImpl;
 import com.vladsch.flexmark.parser.block.NodePostProcessor;
 import com.vladsch.flexmark.parser.block.NodePostProcessorFactory;
-import com.vladsch.flexmark.util.ast.NodeTracker;
-import com.vladsch.flexmark.util.ast.BlankLine;
-import com.vladsch.flexmark.util.ast.DoNotAttributeDecorate;
-import com.vladsch.flexmark.util.ast.Document;
-import com.vladsch.flexmark.util.ast.Node;
+import com.vladsch.flexmark.util.ast.*;
+import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 import java.util.ArrayList;
 
 public class AttributesNodePostProcessor extends NodePostProcessor {
     private final NodeAttributeRepository nodeAttributeRepository;
     private final AttributesOptions myOptions;
+    private LightInlineParser myLightInlineParser;
+    private AttributesInlineParserExtension myParserExtension;
 
     public AttributesNodePostProcessor(Document document) {
         nodeAttributeRepository = AttributesExtension.NODE_ATTRIBUTES.getFrom(document);
@@ -282,12 +283,75 @@ public class AttributesNodePostProcessor extends NodePostProcessor {
                 }
             }
         }
+
+        if (node instanceof FencedCodeBlock && myOptions.fencedCodeInfoAttributes) {
+            // see if has { after the first word
+            FencedCodeBlock fencedCodeBlock = (FencedCodeBlock) node;
+
+            BasedSequence info = fencedCodeBlock.getInfo();
+            BasedSequence language = fencedCodeBlock.getInfoDelimitedByAny(" \t");
+            BasedSequence infoTail = info.subSequence(language.length()).trimStart();
+
+            int pos = infoTail.indexOf('{');
+            if (pos >= 0) {
+                // have possible attributes
+                if (myLightInlineParser == null) {
+                    myLightInlineParser = new LightInlineParserImpl(node.getDocument());
+                    myParserExtension = new AttributesInlineParserExtension(myLightInlineParser);
+                }
+
+                myLightInlineParser.setInput(infoTail);
+                myLightInlineParser.setIndex(pos);
+                AttributesNode dummyBlock = new AttributesNode();
+                myLightInlineParser.setBlock(dummyBlock); // dummy to hold possibly parsed attributes
+
+                while (true) {
+                    int startIndex = myLightInlineParser.getIndex();
+                    boolean parsed = myParserExtension.parse(myLightInlineParser);
+
+                    myLightInlineParser.spnl();
+                    int index = myLightInlineParser.getIndex() + (myLightInlineParser.getIndex() == startIndex ? 1 : 0);
+                    pos = infoTail.indexOf('{', index);
+                    if (pos == -1) break;
+
+                    if (!parsed || !infoTail.subSequence(index, pos).isBlank()) {
+                        // ignore any parsed attributes since they are not consecutive
+                        dummyBlock.removeChildren();
+                    }
+
+                    myLightInlineParser.setIndex(pos);
+                }
+
+                if (dummyBlock.hasChildren()) {
+                    // attributes added to block, move them as first child of fencedCode
+                    Node firstAttributes = dummyBlock.getFirstChild();
+                    Node lastAttributes = dummyBlock.getLastChild();
+
+                    // truncate info to exclude attributes
+                    fencedCodeBlock.setInfo(fencedCodeBlock.getChars().baseSubSequence(info.getStartOffset(), firstAttributes.getStartOffset()));
+                    fencedCodeBlock.setAttributes(fencedCodeBlock.getChars().baseSubSequence(firstAttributes.getStartOffset(), lastAttributes.getEndOffset()));
+
+                    for (Node attributesNode : dummyBlock.getChildren()) {
+                        if (myLightInlineParser.getIndex() >= myLightInlineParser.getInput().length()) {
+                            if (fencedCodeBlock.hasChildren()) {
+                                fencedCodeBlock.getLastChild().insertBefore(attributesNode);
+                            } else {
+                                fencedCodeBlock.appendChild(attributesNode);
+                            }
+
+                            // set attributes owner
+                            nodeAttributeRepository.put(fencedCodeBlock, (AttributesNode) attributesNode);
+                        }
+                    }
+                }
+            }
+        }
     }
 
     public static class Factory extends NodePostProcessorFactory {
         public Factory() {
             super(false);
-            addNodes(AttributesNode.class);
+            addNodes(AttributesNode.class, FencedCodeBlock.class);
         }
 
         @Override

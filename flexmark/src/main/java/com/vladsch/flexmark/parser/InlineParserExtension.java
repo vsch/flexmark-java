@@ -8,6 +8,7 @@ public interface InlineParserExtension {
      * Parse input
      *
      * @return true if character input was processed
+     * @param inlineParser
      */
-    boolean parse(InlineParser inlineParser);
+    boolean parse(LightInlineParser inlineParser);
 }

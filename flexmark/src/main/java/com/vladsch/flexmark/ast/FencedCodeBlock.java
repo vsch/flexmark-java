@@ -10,6 +10,7 @@ public class FencedCodeBlock extends Block implements DoNotDecorate {
     private int fenceIndent;
     private BasedSequence openingMarker = BasedSequence.NULL;
     private BasedSequence info = BasedSequence.NULL;
+    private BasedSequence attributes = BasedSequence.NULL;
     private BasedSequence closingMarker = BasedSequence.NULL;
 
     @Override
@@ -18,6 +19,7 @@ public class FencedCodeBlock extends Block implements DoNotDecorate {
         int lines = getContentLines().size();
         segmentSpanChars(out, openingMarker, "open");
         segmentSpanChars(out, info, "info");
+        segmentSpanChars(out, attributes, "attributes");
         segmentSpan(out, content, "content");
         out.append(" lines[").append(lines).append("]");
         segmentSpanChars(out, closingMarker, "close");
@@ -25,7 +27,7 @@ public class FencedCodeBlock extends Block implements DoNotDecorate {
 
     @Override
     public BasedSequence[] getSegments() {
-        return new BasedSequence[] { openingMarker, info, getContentChars(), closingMarker };
+        return new BasedSequence[] { openingMarker, info, attributes, getContentChars(), closingMarker };
     }
 
     public FencedCodeBlock() {
@@ -72,6 +74,14 @@ public class FencedCodeBlock extends Block implements DoNotDecorate {
      */
     public BasedSequence getInfo() {
         return info;
+    }
+
+    public BasedSequence getAttributes() {
+        return attributes;
+    }
+
+    public void setAttributes(BasedSequence attributes) {
+        this.attributes = attributes;
     }
 
     public BasedSequence getInfoDelimitedByAny(CharSequence delimiters) {

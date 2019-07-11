@@ -1,6 +1,5 @@
 package com.vladsch.flexmark.parser.internal;
 
-import com.vladsch.flexmark.ast.util.Parsing;
 import com.vladsch.flexmark.parser.InlineParserExtensionFactory;
 import com.vladsch.flexmark.parser.delimiter.DelimiterProcessor;
 import com.vladsch.flexmark.util.ast.Document;
@@ -19,7 +18,7 @@ public class CommonmarkInlineParser extends InlineParserImpl {
     }
 
     @Override
-    public void initializeDocument(Parsing parsing, Document document) {
-        super.initializeDocument(parsing, document);
+    public void initializeDocument(Document document) {
+        super.initializeDocument(document);
     }
 }

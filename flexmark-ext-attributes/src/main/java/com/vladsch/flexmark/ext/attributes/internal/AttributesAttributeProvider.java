@@ -7,6 +7,7 @@ import com.vladsch.flexmark.ext.attributes.AttributesNode;
 import com.vladsch.flexmark.html.AttributeProvider;
 import com.vladsch.flexmark.html.IndependentAttributeProviderFactory;
 import com.vladsch.flexmark.html.renderer.AttributablePart;
+import com.vladsch.flexmark.html.renderer.CoreNodeRenderer;
 import com.vladsch.flexmark.html.renderer.LinkResolverContext;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.html.Attribute;
@@ -16,6 +17,7 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 import java.util.ArrayList;
 
+import static com.vladsch.flexmark.html.renderer.AttributablePart.NODE;
 import static com.vladsch.flexmark.util.html.Attribute.CLASS_ATTR;
 
 public class AttributesAttributeProvider implements AttributeProvider {
@@ -28,38 +30,40 @@ public class AttributesAttributeProvider implements AttributeProvider {
 
     @Override
     public void setAttributes(Node node, AttributablePart part, Attributes attributes) {
-        ArrayList<AttributesNode> nodeAttributesList = nodeAttributeRepository.get(node);
-        if (nodeAttributesList != null) {
-            // add these as attributes
-            for (AttributesNode nodeAttributes : nodeAttributesList) {
-                for (Node attribute : nodeAttributes.getChildren()) {
-                    if (!(attribute instanceof AttributeNode)) continue;
+        if (part != CoreNodeRenderer.CODE_CONTENT) {
+            ArrayList<AttributesNode> nodeAttributesList = nodeAttributeRepository.get(node);
+            if (nodeAttributesList != null) {
+                // add these as attributes
+                for (AttributesNode nodeAttributes : nodeAttributesList) {
+                    for (Node attribute : nodeAttributes.getChildren()) {
+                        if (!(attribute instanceof AttributeNode)) continue;
 
-                    final AttributeNode attributeNode = (AttributeNode) attribute;
-                    if (!attributeNode.isImplicitName()) {
-                        final BasedSequence attributeNodeName = attributeNode.getName();
-                        if (attributeNodeName.isNotNull() && !attributeNodeName.isBlank()) {
-                            if (!attributeNodeName.equals(CLASS_ATTR)) {
-                                attributes.remove(attributeNodeName);
-                            }
-                            attributes.addValue(attributeNodeName, attributeNode.getValue());
-                        } else {
-                            // empty then ignore
-                        }
-                    } else {
-                        // implicit
-                        if (attributeNode.isClass()) {
-                            attributes.addValue(CLASS_ATTR, attributeNode.getValue());
-                        } else if (attributeNode.isId()) {
-                            if (node instanceof AnchorRefTarget) {
-                                // was already provided via setAnchorRefId
+                        final AttributeNode attributeNode = (AttributeNode) attribute;
+                        if (!attributeNode.isImplicitName()) {
+                            final BasedSequence attributeNodeName = attributeNode.getName();
+                            if (attributeNodeName.isNotNull() && !attributeNodeName.isBlank()) {
+                                if (!attributeNodeName.equals(CLASS_ATTR)) {
+                                    attributes.remove(attributeNodeName);
+                                }
+                                attributes.addValue(attributeNodeName, attributeNode.getValue());
                             } else {
-                                attributes.remove(Attribute.ID_ATTR);
-                                attributes.addValue(Attribute.ID_ATTR, attributeNode.getValue());
+                                // empty then ignore
                             }
                         } else {
-                            // unknown
-                            throw new IllegalStateException("Implicit attribute yet not class or id");
+                            // implicit
+                            if (attributeNode.isClass()) {
+                                attributes.addValue(CLASS_ATTR, attributeNode.getValue());
+                            } else if (attributeNode.isId()) {
+                                if (node instanceof AnchorRefTarget) {
+                                    // was already provided via setAnchorRefId
+                                } else {
+                                    attributes.remove(Attribute.ID_ATTR);
+                                    attributes.addValue(Attribute.ID_ATTR, attributeNode.getValue());
+                                }
+                            } else {
+                                // unknown
+                                throw new IllegalStateException("Implicit attribute yet not class or id");
+                            }
                         }
                     }
                 }
