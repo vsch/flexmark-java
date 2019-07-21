@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 HOME_DIR="/Users/vlad/src/projects/flexmark-java"
 
-cd ${HOME_DIR}
+cd ${HOME_DIR} || exit
 
 #cp out/artifacts/flexmark-util.jar ../MissingInActions/lib
 #echo updated out/artifacts/flexmark-util.jar in ../MissingInActions/lib

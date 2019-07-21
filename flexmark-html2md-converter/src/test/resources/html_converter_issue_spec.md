@@ -1851,6 +1851,63 @@ This doesn't get rendered: <https://google.com> [This does.](https://google.com)
 ````````````````````````````````
 
 
+## Issue 357
+
+Issue [#357, HTML to markdown and removed nested list]
+
+```````````````````````````````` example Issue 357: 1
+* 1
+* 2
+  * 2.1
+* 3
+* 4
+  * 4.1
+* 5
+.
+<ul> 
+ <li>1</li> 
+ <li>2</li> 
+ <ul>
+  <li>2.1</li>
+ </ul> 
+ <li>3</li> 
+ <li>4
+  <ul> 
+   <li>4.1</li> 
+  </ul> 
+ </li> 
+ <li>5</li> 
+</ul>
+````````````````````````````````
+
+
+```````````````````````````````` example Issue 357: 2
+* 2.1
+* 1
+* 2
+* 3
+* 4
+  * 4.1
+* 5
+.
+<ul> 
+ <ul>
+  <li>2.1</li>
+ </ul> 
+ <li>1</li> 
+ <li>2</li> 
+ <li>3</li> 
+ <li>4
+  <ul> 
+   <li>4.1</li> 
+  </ul> 
+ </li> 
+ <li>5</li> 
+</ul>
+````````````````````````````````
+
+
 [#351, Is there any special format requirement for processing html data to markdown]: https://github.com/vsch/flexmark-java/issues/351
 [#353, How to self modify parse method when htmltomarkdown]: https://github.com/vsch/flexmark-java/issues/353
+[#357, HTML to markdown and removed nested list]: https://github.com/vsch/flexmark-java/issues/357
 

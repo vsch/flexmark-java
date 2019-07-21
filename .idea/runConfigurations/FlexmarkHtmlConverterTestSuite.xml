@@ -7,8 +7,8 @@
         <option name="ENABLED" value="true" />
       </pattern>
     </extension>
-    <option name="PACKAGE_NAME" value="com.vladsch.flexmark.html.converter" />
-    <option name="MAIN_CLASS_NAME" value="com.vladsch.flexmark.html.converter.FlexmarkHtmlConverterTestSuite" />
+    <option name="PACKAGE_NAME" value="com.vladsch.flexmark.html2md.converter" />
+    <option name="MAIN_CLASS_NAME" value="com.vladsch.flexmark.html2md.converter.FlexmarkHtmlConverterTestSuite" />
     <option name="METHOD_NAME" value="" />
     <option name="TEST_OBJECT" value="class" />
     <option name="PARAMETERS" value="" />

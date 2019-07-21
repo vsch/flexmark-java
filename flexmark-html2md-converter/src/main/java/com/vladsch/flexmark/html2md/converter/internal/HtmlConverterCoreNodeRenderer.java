@@ -755,12 +755,13 @@ public class HtmlConverterCoreNodeRenderer implements PhasedHtmlNodeRenderer {
             HtmlNodeConverterContext context, HtmlMarkdownWriter out,
             Element element,
             boolean isNumbered,
-            boolean isFakeList
+            boolean isFakeList,
+            boolean isNestedList
     ) {
         if (!isFakeList) {
             context.pushState(element);
 
-            if (!haveListItemAncestor(context.getState().getParent()) && !isFirstChild(element)) {
+            if (!isNestedList && !haveListItemAncestor(context.getState().getParent()) && !isFirstChild(element)) {
                 out.blankLine();
             }
         }
@@ -787,11 +788,15 @@ public class HtmlConverterCoreNodeRenderer implements PhasedHtmlNodeRenderer {
         }
 
         Node item = element;
+        boolean hadListItem = false;
 
         do {
+            boolean isNumberedList = false;
+
             switch (item.nodeName().toLowerCase()) {
                 case FlexmarkHtmlConverter.LI_NODE:
                     handleListItem(context, out, (Element) item, listState);
+                    hadListItem = true;
                     break;
 
                 case FlexmarkHtmlConverter.P_NODE:
@@ -800,13 +805,35 @@ public class HtmlConverterCoreNodeRenderer implements PhasedHtmlNodeRenderer {
                     }
                     break;
 
+                case FlexmarkHtmlConverter.OL_NODE:
+                    isNumberedList = true;
+
+                case FlexmarkHtmlConverter.UL_NODE:
+                    if (item != element && item.childNodeSize() > 0) {
+                        if (hadListItem) {
+                            CharSequence itemPrefix = listState.getItemPrefix(this.myHtmlConverterOptions);
+                            CharSequence childPrefix = RepeatedCharSequence.of(" ", myHtmlConverterOptions.listContentIndent ? itemPrefix.length() : 4);
+                            //out.line().append(itemPrefix);
+                            out.pushPrefix();
+                            out.addPrefix(childPrefix, true);
+                        }
+
+                        handleList(context, out, (Element) item, isNumberedList, false, true);
+
+                        if (hadListItem) {
+                            out.popPrefix();
+                        }
+                    }
+                    break;
+
                 default:
                     //context.processWrapped(item, true, false);
+                    context.render(item);
                     break;
             }
         } while ((item = context.next()) != null);
 
-        if (element.nextElementSibling() != null) {
+        if (!isNestedList && element.nextElementSibling() != null) {
             out.blankLine();
         }
 
@@ -816,15 +843,15 @@ public class HtmlConverterCoreNodeRenderer implements PhasedHtmlNodeRenderer {
     }
 
     private void processLi(Element element, HtmlNodeConverterContext context, HtmlMarkdownWriter out) {
-        handleList(context, out, element, false, true);
+        handleList(context, out, element, false, true, false);
     }
 
     private void processOl(Element element, HtmlNodeConverterContext context, HtmlMarkdownWriter out) {
-        handleList(context, out, element, true, false);
+        handleList(context, out, element, true, false, false);
     }
 
     private void processUl(Element element, HtmlNodeConverterContext context, HtmlMarkdownWriter out) {
-        handleList(context, out, element, false, false);
+        handleList(context, out, element, false, false, false);
     }
 
     private void processSvg(Element element, HtmlNodeConverterContext context, HtmlMarkdownWriter out) {

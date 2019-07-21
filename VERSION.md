@@ -5,6 +5,7 @@ flexmark-java
 
 [TOC]: # " "
 
+- [To Do](#to-do)
 - [0.50.20](#05020)
 - [0.50.18](#05018)
 - [0.50.16](#05016)
@@ -90,17 +91,21 @@ flexmark-java
 
 &nbsp;</details>
 
-0.50.20
-------
+### To Do
 
+* [ ] Add: `FlexmarkHtmlConverter` options:
+  * [ ] `EXT_TABLES` conversion option not yet implemented.
+* [ ] Add: `<!-- @formatter:on -->` and `<!-- @formatter:on -->` tags to `Formatter` for
+      controlling non-formatting regions.
+
+0.50.20
+-------
+
+* Fix: [#357, HTML to markdown and removed nested list]
 * Add: allow attributes after fenced code info string as last non-blank text after the info
   string.
   * Add: `AttributesExtension.FENCED_CODE_INFO_ATTRIBUTES` default `true`, if false will not
     parse attributes after the fenced code info string
-* [ ] Add: `FlexmarkHtmlParser` options:
-  * [ ] `EXT_TABLES` conversion option not yet implemented.
-* [ ] Add: `<!-- @formatter:on -->` and `<!-- @formatter:on -->` tags to `Formatter` for
-      controlling non-formatting regions.
 
 0.50.18
 -------
@@ -1514,6 +1519,7 @@ setting either will affect both keys. For information on these keys see
 [#348, WRAP\_AUTO\_LINKS defaults to false, Markdown loses a potential useful link]: https://github.com/vsch/flexmark-java/issues/348
 [#349, Translation Helper bugs]: https://github.com/vsch/flexmark-java/issues/349
 [#351, Is there any special format requirement for processing html data to markdown]: https://github.com/vsch/flexmark-java/issues/351
+[#357, HTML to markdown and removed nested list]: https://github.com/vsch/flexmark-java/issues/357
 [Admonition Extension, Material for MkDocs]: https://squidfunk.github.io/mkdocs-material/extensions/admonition/
 [Awesome Console]: https://plugins.jetbrains.com/plugin/7677-awesome-console "Awesome Console"
 [HtmlToMarkdownCustomizedSample.java]: https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/samples/HtmlToMarkdownCustomizedSample.java
