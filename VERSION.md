@@ -93,15 +93,15 @@ flexmark-java
 
 ### To Do
 
-* [ ] Add: `FlexmarkHtmlConverter` options:
-  * [ ] `EXT_TABLES` conversion option not yet implemented.
 * [ ] Add: `<!-- @formatter:on -->` and `<!-- @formatter:on -->` tags to `Formatter` for
       controlling non-formatting regions.
+* [ ] Convert anonymous classes to lambda where possible.
 
 0.50.20
 -------
 
 * Fix: [#357, HTML to markdown and removed nested list]
+* Remove: `FlexmarkHtmlConverter.EXT_TABLES` unused conversion option.
 * Add: allow attributes after fenced code info string as last non-blank text after the info
   string.
   * Add: `AttributesExtension.FENCED_CODE_INFO_ATTRIBUTES` default `true`, if false will not
@@ -113,7 +113,7 @@ flexmark-java
 * Add: `flexmark-html2md-converter` module which implements HTML to Markdown conversion with an
   extension API to allow customizing the conversion process. Sample:
   [HtmlToMarkdownCustomizedSample.java]
-  * [x] Fix: [#313, Ability to override tags processing in FlexmarkHtmlParser]
+  * Fix: [#313, Ability to override tags processing in FlexmarkHtmlParser]
 * Fix: deprecate the old `flexmark-html-parser` classes
 
 0.50.16
@@ -132,7 +132,7 @@ flexmark-java
 * Fix: add `SpecReader.readExamples(String, String)` which takes resource name and file URL to
   allow for non-standard resource file locations.
 * Fix: html to markdown string not add EOL by default.
-* [x] Break: make Java 8 minimum version and use JDK 8 for compilation
+* Break: make Java 8 minimum version and use JDK 8 for compilation
   * Fix: IntelliJ Migration contained in [migrate flexmark-java 0_42_x to 0_50_0.xml], to use:
     * copy to IntelliJ application settings to `migration` subdirectory
     * if you have the project which you want to migrate open, then close it
@@ -144,75 +144,74 @@ flexmark-java
     * select `migrate flexmark-java 0.42.x to 0.50.0`
     * press `Run`
     * in the refactoring preview tool window that opens hit `Do Refactor`
-  * [ ] Convert anonymous classes to lambda where possible.
-  * [x] Remove classes from utils which are implemented in Java 8
-  * [x] replace `RunnableValue` with `Supplier`, requires changing `run()` with `get()`
-  * [x] replace `ValueRunnable` with `Consumer`, requires changing `run()` with `accept()`
-  * [x] replace `Factory` with `Supplier`, requires changing `create()` with `get()`
-  * [x] replace `Computable` with `Function`, requires changing `compute()` with `apply()` and
+  * Remove classes from utils which are implemented in Java 8
+  * replace `RunnableValue` with `Supplier`, requires changing `run()` with `get()`
+  * replace `ValueRunnable` with `Consumer`, requires changing `run()` with `accept()`
+  * replace `Factory` with `Supplier`, requires changing `create()` with `get()`
+  * replace `Computable` with `Function`, requires changing `compute()` with `apply()` and
         reversing template parameters.
-  * [x] replace `ComputableFactory` with `Function`, requires changing `create()` with `apply()`
+  * replace `ComputableFactory` with `Function`, requires changing `create()` with `apply()`
         and reversing template parameters.
-  * [x] replace `ComputeFactory` with `Function`, requires changing `create()` with `apply()`
+  * replace `ComputeFactory` with `Function`, requires changing `create()` with `apply()`
         and reversing template parameters.
-  * [x] replace all factory interfaces to be compatible with `Function` interface and change
+  * replace all factory interfaces to be compatible with `Function` interface and change
         `create()` with `apply()`
-  * [x] replace `com.vladsch.flexmark.util.collection.Consumer` with
+  * replace `com.vladsch.flexmark.util.collection.Consumer` with
         `java.util.function.Consumer`
-  * [x] clean up `DataKey` and `DataHolder` related classes
-    * [x] move `com.vladsch.flexmark.util.collection.DataValueFactory` to
+  * clean up `DataKey` and `DataHolder` related classes
+    * move `com.vladsch.flexmark.util.collection.DataValueFactory` to
           `com.vladsch.flexmark.util.DataValueFactory`
-    * [x] replace `com.vladsch.flexmark.util.collection.DynamicDefaultKey` with
+    * replace `com.vladsch.flexmark.util.collection.DynamicDefaultKey` with
           `com.vladsch.flexmark.util.options.DataKey`
-    * [x] change `MutableDataHolder.getOrCompute(DataKey<T>, DataValueFactory<T>)` to
+    * change `MutableDataHolder.getOrCompute(DataKey<T>, DataValueFactory<T>)` to
           `MutableDataHolder.getOrCompute(DataKey<T>)` with the data value factory taken from
           they key.
-  * [x] remove unused `ItemIndexSetMap`, use `IndexedItemSetMap` instead
-  * [x] move `flexmark-util` Node related classes and interfaces to
+  * remove unused `ItemIndexSetMap`, use `IndexedItemSetMap` instead
+  * move `flexmark-util` Node related classes and interfaces to
         `com.vladsch.flexmark.util.ast`
-    * [x] move `com.vladsch.flexmark.util.NodeTracker` to
+    * move `com.vladsch.flexmark.util.NodeTracker` to
           `com.vladsch.flexmark.util.ast.NodeTracker`
-    * [x] move `com.vladsch.flexmark.util.BlockTracker` to
+    * move `com.vladsch.flexmark.util.BlockTracker` to
           `com.vladsch.flexmark.util.ast.BlockTracker`
-    * [x] move `com.vladsch.flexmark.util.KeepType` to `com.vladsch.flexmark.util.ast.KeepType`
-    * [x] move `com.vladsch.flexmark.util.IParse` to `com.vladsch.flexmark.util.ast.IParse`
-    * [x] move `com.vladsch.flexmark.util.IRender` to `com.vladsch.flexmark.util.ast.IRender`
-    * [x] move `com.vladsch.flexmark.util.collection.NodeClassifierVisitor` to
+    * move `com.vladsch.flexmark.util.KeepType` to `com.vladsch.flexmark.util.ast.KeepType`
+    * move `com.vladsch.flexmark.util.IParse` to `com.vladsch.flexmark.util.ast.IParse`
+    * move `com.vladsch.flexmark.util.IRender` to `com.vladsch.flexmark.util.ast.IRender`
+    * move `com.vladsch.flexmark.util.collection.NodeClassifierVisitor` to
           `com.vladsch.flexmark.util.ast.NodeClassifierVisitor`
-    * [x] move `com.vladsch.flexmark.util.collection.NodeCollectingVisitor` to
+    * move `com.vladsch.flexmark.util.collection.NodeCollectingVisitor` to
           `com.vladsch.flexmark.util.ast.NodeCollectingVisitor`
-    * [x] move `com.vladsch.flexmark.util.collection.ClassifyingNodeTracker` to
+    * move `com.vladsch.flexmark.util.collection.ClassifyingNodeTracker` to
           `com.vladsch.flexmark.util.ast.ClassifyingNodeTracker`
-    * [x] move `com.vladsch.flexmark.util.mappers.NodeClassifier` to
+    * move `com.vladsch.flexmark.util.mappers.NodeClassifier` to
           `com.vladsch.flexmark.util.ast.NodeClassifier`
-  * [x] move data key/set/holder classes to `flexmark.util.data` package from
+  * move data key/set/holder classes to `flexmark.util.data` package from
         `flexmark.util.options` package
-    * [x] move `com.vladsch.flexmark.util.options.DataHolder` to
+    * move `com.vladsch.flexmark.util.options.DataHolder` to
           `com.vladsch.flexmark.util.data.DataHolder`
-    * [x] move `com.vladsch.flexmark.util.options.MutableDataSet` to
+    * move `com.vladsch.flexmark.util.options.MutableDataSet` to
           `com.vladsch.flexmark.util.data.MutableDataSet`
-    * [x] move `com.vladsch.flexmark.util.options.MutableScopedDataSet` to
+    * move `com.vladsch.flexmark.util.options.MutableScopedDataSet` to
           `com.vladsch.flexmark.util.data.MutableScopedDataSet`
-    * [x] move `com.vladsch.flexmark.util.options.ScopedDataSet` to
+    * move `com.vladsch.flexmark.util.options.ScopedDataSet` to
           `com.vladsch.flexmark.util.data.ScopedDataSet`
-    * [x] move `com.vladsch.flexmark.util.options.DataValueFactory` to
+    * move `com.vladsch.flexmark.util.options.DataValueFactory` to
           `com.vladsch.flexmark.util.data.DataValueFactory`
-    * [x] move `com.vladsch.flexmark.util.options.MutableDataHolder` to
+    * move `com.vladsch.flexmark.util.options.MutableDataHolder` to
           `com.vladsch.flexmark.util.data.MutableDataHolder`
-    * [x] move `com.vladsch.flexmark.util.options.DataSet` to
+    * move `com.vladsch.flexmark.util.options.DataSet` to
           `com.vladsch.flexmark.util.data.DataSet`
-    * [x] move `com.vladsch.flexmark.util.options.MutableDataSetter` to
+    * move `com.vladsch.flexmark.util.options.MutableDataSetter` to
           `com.vladsch.flexmark.util.data.MutableDataSetter`
-    * [x] move `com.vladsch.flexmark.util.options.DataKey` to
+    * move `com.vladsch.flexmark.util.options.DataKey` to
           `com.vladsch.flexmark.util.data.DataKey`
-* [x] Add: `LineFormattingAppendable` and `LineFormattingAppendableImpl`
-  * [x] Fix: deprecate `FormattingAppendable` to be replaced by `LineFormattingAppendable`
-  * [x] Fix: deprecate `FormattingAppendableImpl` to be replaced by
+* Add: `LineFormattingAppendable` and `LineFormattingAppendableImpl`
+  * Fix: deprecate `FormattingAppendable` to be replaced by `LineFormattingAppendable`
+  * Fix: deprecate `FormattingAppendableImpl` to be replaced by
         `LineFormattingAppendableImpl`
-  * [x] Fix: replace all uses of `FormattingAppendable` by `LineFormattingAppendable`
-  * [x] Fix: replace all uses of `FormattingAppendableImpl` by `LineFormattingAppendableImpl`
-  * [x] Delete: `FormattingAppendable` and `FormattingAppendableImpl`
-* [x] Fix: Factor out BasedSequenceImpl functionality that does not depend on `BasedSequence`
+  * Fix: replace all uses of `FormattingAppendable` by `LineFormattingAppendable`
+  * Fix: replace all uses of `FormattingAppendableImpl` by `LineFormattingAppendableImpl`
+  * Delete: `FormattingAppendable` and `FormattingAppendableImpl`
+* Fix: Factor out BasedSequenceImpl functionality that does not depend on `BasedSequence`
       and can be applied to any CharSequence into its own `RichCharSequence` interface with
       default abstract implementation in `RichCharSequenceBase` and implementation in
       `RichCharSequenceImpl`.

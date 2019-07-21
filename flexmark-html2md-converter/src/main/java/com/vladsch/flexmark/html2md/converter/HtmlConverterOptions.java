@@ -47,7 +47,6 @@ public class HtmlConverterOptions implements MutableDataSetter {
     public ExtensionConversion extInlineSub;
     public ExtensionConversion extInlineSup;
     public ExtensionConversion extMath;
-    public ExtensionConversion extTables;
     public LinkConversion extInlineLink;
     public LinkConversion extInlineImage;
     public char orderedListDelimiter;
@@ -124,7 +123,6 @@ public class HtmlConverterOptions implements MutableDataSetter {
         outputIdAttributeRegex = other.outputIdAttributeRegex;
         outputIdAttributeRegexPattern = other.outputIdAttributeRegexPattern;
         extMath = other.extMath;
-        extTables = other.extTables;
         extInlineLink = other.extInlineLink;
         extInlineImage = other.extInlineImage;
         formatFlags = other.formatFlags;
@@ -170,7 +168,6 @@ public class HtmlConverterOptions implements MutableDataSetter {
         extInlineSub = FlexmarkHtmlConverter.EXT_INLINE_SUB.getFrom(options);
         extInlineSup = FlexmarkHtmlConverter.EXT_INLINE_SUP.getFrom(options);
         extMath = FlexmarkHtmlConverter.EXT_MATH.getFrom(options);
-        extTables = FlexmarkHtmlConverter.EXT_TABLES.getFrom(options);
         extInlineLink = FlexmarkHtmlConverter.EXT_INLINE_LINK.getFrom(options);
         extInlineImage = FlexmarkHtmlConverter.EXT_INLINE_IMAGE.getFrom(options);
         orderedListDelimiter = FlexmarkHtmlConverter.ORDERED_LIST_DELIMITER.getFrom(options);
@@ -242,7 +239,6 @@ public class HtmlConverterOptions implements MutableDataSetter {
         dataHolder.set(FlexmarkHtmlConverter.TABLE_CELL_ALIGNMENT_MAP, tableCellAlignmentMap);
         dataHolder.set(FlexmarkHtmlConverter.OUTPUT_ID_ATTRIBUTE_REGEX, outputIdAttributeRegex);
         dataHolder.set(FlexmarkHtmlConverter.EXT_MATH, extMath);
-        dataHolder.set(FlexmarkHtmlConverter.EXT_TABLES, extTables);
         dataHolder.set(FlexmarkHtmlConverter.EXT_INLINE_LINK, extInlineLink);
         dataHolder.set(FlexmarkHtmlConverter.EXT_INLINE_IMAGE, extInlineImage);
         dataHolder.setFrom(tableOptions);
