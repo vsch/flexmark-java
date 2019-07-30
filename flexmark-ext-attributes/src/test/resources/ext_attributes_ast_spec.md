@@ -1716,6 +1716,50 @@ Document[0, 146]
 ````````````````````````````````
 
 
+```````````````````````````````` example Headings Tests: 8
+### Heading with trailing { style='color:red' } More Text
+.
+<h3 id="heading-with-trailing--more-text"><span style="color:red">Heading with trailing </span> More Text</h3>
+.
+Document[0, 58]
+  Heading[0, 57] textOpen:[0, 3, "###"] text:[4, 57, "Heading with trailing { style='color:red' } More Text"]
+    TextBase[4, 26] chars:[4, 26, "Headi … ling "]
+      Text[4, 26] chars:[4, 26, "Headi … ling "]
+    AttributesNode[26, 47] textOpen:[26, 27, "{"] text:[27, 46, " style='color:red' "] textClose:[46, 47, "}"]
+      AttributeNode[28, 45] name:[28, 33, "style"] sep:[33, 34, "="] valueOpen:[34, 35, "'"] value:[35, 44, "color:red"] valueClose:[44, 45, "'"]
+    Text[47, 57] chars:[47, 57, " More Text"]
+````````````````````````````````
+
+
+```````````````````````````````` example Headings Tests: 9
+### Heading with trailing{ style='color:red' } More Text
+.
+<h3 id="heading-with-trailing-more-text"><span style="color:red">Heading with trailing</span> More Text</h3>
+.
+Document[0, 57]
+  Heading[0, 56] textOpen:[0, 3, "###"] text:[4, 56, "Heading with trailing{ style='color:red' } More Text"]
+    TextBase[4, 25] chars:[4, 25, "Headi … iling"]
+      Text[4, 25] chars:[4, 25, "Headi … iling"]
+    AttributesNode[25, 46] textOpen:[25, 26, "{"] text:[26, 45, " style='color:red' "] textClose:[45, 46, "}"]
+      AttributeNode[27, 44] name:[27, 32, "style"] sep:[32, 33, "="] valueOpen:[33, 34, "'"] value:[34, 43, "color:red"] valueClose:[43, 44, "'"]
+    Text[46, 56] chars:[46, 56, " More Text"]
+````````````````````````````````
+
+
+```````````````````````````````` example Headings Tests: 10
+### Heading with trailing{ style='color:red' }
+.
+<h3 id="heading-with-trailing"><span style="color:red">Heading with trailing</span></h3>
+.
+Document[0, 47]
+  Heading[0, 46] textOpen:[0, 3, "###"] text:[4, 46, "Heading with trailing{ style='color:red' }"]
+    TextBase[4, 25] chars:[4, 25, "Headi … iling"]
+      Text[4, 25] chars:[4, 25, "Headi … iling"]
+    AttributesNode[25, 46] textOpen:[25, 26, "{"] text:[26, 45, " style='color:red' "] textClose:[45, 46, "}"]
+      AttributeNode[27, 44] name:[27, 32, "style"] sep:[32, 33, "="] valueOpen:[33, 34, "'"] value:[34, 43, "color:red"] valueClose:[43, 44, "'"]
+````````````````````````````````
+
+
 ## TOC
 
 Default rendering with emphasis

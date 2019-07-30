@@ -6,6 +6,7 @@ flexmark-java
 [TOC]: # " "
 
 - [To Do](#to-do)
+- [0.50.22](#05022)
 - [0.50.20](#05020)
 - [0.50.18](#05018)
 - [0.50.16](#05016)
@@ -96,6 +97,11 @@ flexmark-java
 * [ ] Add: `<!-- @formatter:on -->` and `<!-- @formatter:on -->` tags to `Formatter` for
       controlling non-formatting regions.
 * [ ] Convert anonymous classes to lambda where possible.
+
+0.50.22
+-------
+
+* Fix: Attributes with spaces after `{` generated wrong previous text offsets
 
 0.50.20
 -------
