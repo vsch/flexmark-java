@@ -41,10 +41,10 @@
                 <dc:title>Sehr geehrter Herr Wagner</dc:title>
                 <dc:creator>Stefan Schroff</dc:creator>
                 <cp:lastModifiedBy>Vladimir Schneider</cp:lastModifiedBy>
-                <cp:revision>10</cp:revision>
+                <cp:revision>11</cp:revision>
                 <cp:lastPrinted>2014-07-10T13:36:00Z</cp:lastPrinted>
                 <dcterms:created xsi:type="dcterms:W3CDTF">2019-08-01T16:52:00Z</dcterms:created>
-                <dcterms:modified xsi:type="dcterms:W3CDTF">2019-08-01T18:27:00Z</dcterms:modified>
+                <dcterms:modified xsi:type="dcterms:W3CDTF">2019-08-01T18:42:00Z</dcterms:modified>
             </cp:coreProperties>
         </pkg:xmlData>
     </pkg:part>
@@ -61,7 +61,13 @@
                 <Company>Microsoft</Company>
                 <DocSecurity>0</DocSecurity>
                 <HeadingPairs>
-                    <vt:vector baseType="variant" size="2">
+                    <vt:vector baseType="variant" size="4">
+                        <vt:variant>
+                            <vt:lpstr>Title</vt:lpstr>
+                        </vt:variant>
+                        <vt:variant>
+                            <vt:i4>1</vt:i4>
+                        </vt:variant>
                         <vt:variant>
                             <vt:lpstr>Titel</vt:lpstr>
                         </vt:variant>
@@ -79,11 +85,12 @@
                 <SharedDoc>false</SharedDoc>
                 <Template>Normal.dotm</Template>
                 <TitlesOfParts>
-                    <vt:vector baseType="lpstr" size="1">
+                    <vt:vector baseType="lpstr" size="2">
+                        <vt:lpstr>Sehr geehrter Herr Wagner</vt:lpstr>
                         <vt:lpstr>Sehr geehrter Herr Wagner</vt:lpstr>
                     </vt:vector>
                 </TitlesOfParts>
-                <TotalTime>71</TotalTime>
+                <TotalTime>79</TotalTime>
                 <Words>0</Words>
             </Properties>
         </pkg:xmlData>
@@ -1303,8 +1310,8 @@
                 xmlns:wpg="http://schemas.microsoft.com/office/word/2010/wordprocessingGroup"
                 xmlns:wpi="http://schemas.microsoft.com/office/word/2010/wordprocessingInk" xmlns:wps="http://schemas.microsoft.com/office/word/2010/wordprocessingShape">
                 <w:footnote w:id="-1" w:type="separator">
-                    <w:p w14:paraId="746C4BA8" w14:textId="77777777"
-                        w:rsidP="005C2DA3" w:rsidR="00843084" w:rsidRDefault="00843084">
+                    <w:p w14:paraId="5751BAD6" w14:textId="77777777"
+                        w:rsidP="005C2DA3" w:rsidR="00676F19" w:rsidRDefault="00676F19">
                         <w:pPr>
                             <w:spacing w:after="0"/>
                         </w:pPr>
@@ -1314,8 +1321,8 @@
                     </w:p>
                 </w:footnote>
                 <w:footnote w:id="0" w:type="continuationSeparator">
-                    <w:p w14:paraId="70C6710C" w14:textId="77777777"
-                        w:rsidP="005C2DA3" w:rsidR="00843084" w:rsidRDefault="00843084">
+                    <w:p w14:paraId="5443273A" w14:textId="77777777"
+                        w:rsidP="005C2DA3" w:rsidR="00676F19" w:rsidRDefault="00676F19">
                         <w:pPr>
                             <w:spacing w:after="0"/>
                         </w:pPr>
@@ -1360,8 +1367,8 @@
                 xmlns:wpg="http://schemas.microsoft.com/office/word/2010/wordprocessingGroup"
                 xmlns:wpi="http://schemas.microsoft.com/office/word/2010/wordprocessingInk" xmlns:wps="http://schemas.microsoft.com/office/word/2010/wordprocessingShape">
                 <w:endnote w:id="-1" w:type="separator">
-                    <w:p w14:paraId="7A23A7CE" w14:textId="77777777"
-                        w:rsidP="005C2DA3" w:rsidR="00843084" w:rsidRDefault="00843084">
+                    <w:p w14:paraId="7AAFF58E" w14:textId="77777777"
+                        w:rsidP="005C2DA3" w:rsidR="00676F19" w:rsidRDefault="00676F19">
                         <w:pPr>
                             <w:spacing w:after="0"/>
                         </w:pPr>
@@ -1371,8 +1378,8 @@
                     </w:p>
                 </w:endnote>
                 <w:endnote w:id="0" w:type="continuationSeparator">
-                    <w:p w14:paraId="4A92FF25" w14:textId="77777777"
-                        w:rsidP="005C2DA3" w:rsidR="00843084" w:rsidRDefault="00843084">
+                    <w:p w14:paraId="11909D65" w14:textId="77777777"
+                        w:rsidP="005C2DA3" w:rsidR="00676F19" w:rsidRDefault="00676F19">
                         <w:pPr>
                             <w:spacing w:after="0"/>
                         </w:pPr>
@@ -1418,7 +1425,7 @@
                 xmlns:wpi="http://schemas.microsoft.com/office/word/2010/wordprocessingInk" xmlns:wps="http://schemas.microsoft.com/office/word/2010/wordprocessingShape">
                 <w:body>
                     <w:p w14:paraId="7AC45561" w14:textId="758B9BDB"
-                        w:rsidP="00FD3FFE" w:rsidR="00EF1B0E"
+                        w:rsidP="00C448CA" w:rsidR="00EF1B0E"
                         w:rsidRDefault="00EF1B0E" w:rsidRPr="00B901DB">
                         <w:pPr>
                             <w:pStyle w:val="List4"/>
@@ -1614,6 +1621,7 @@
                     <w:rsid w:val="00651B59"/>
                     <w:rsid w:val="0065361A"/>
                     <w:rsid w:val="00656460"/>
+                    <w:rsid w:val="00676F19"/>
                     <w:rsid w:val="006A27D0"/>
                     <w:rsid w:val="006A74F6"/>
                     <w:rsid w:val="006B5946"/>
@@ -1626,6 +1634,7 @@
                     <w:rsid w:val="007448B3"/>
                     <w:rsid w:val="00752B85"/>
                     <w:rsid w:val="00770A4C"/>
+                    <w:rsid w:val="007720FE"/>
                     <w:rsid w:val="0079786C"/>
                     <w:rsid w:val="007A629F"/>
                     <w:rsid w:val="007A7EB6"/>
@@ -1641,7 +1650,6 @@
                     <w:rsid w:val="00824AAE"/>
                     <w:rsid w:val="00832744"/>
                     <w:rsid w:val="00841141"/>
-                    <w:rsid w:val="00843084"/>
                     <w:rsid w:val="00851EE3"/>
                     <w:rsid w:val="008A0B98"/>
                     <w:rsid w:val="008A1ED2"/>
@@ -1699,6 +1707,7 @@
                     <w:rsid w:val="00C138B0"/>
                     <w:rsid w:val="00C16F74"/>
                     <w:rsid w:val="00C3793D"/>
+                    <w:rsid w:val="00C448CA"/>
                     <w:rsid w:val="00C57CE1"/>
                     <w:rsid w:val="00C6113E"/>
                     <w:rsid w:val="00C84D88"/>
@@ -3019,9 +3028,8 @@
                     <w:rsid w:val="00FD3FFE"/>
                     <w:pPr>
                         <w:numPr>
-                            <w:numId w:val="3"/>
+                            <w:numId w:val="6"/>
                         </w:numPr>
-                        <w:ind w:hanging="357" w:left="641"/>
                         <w:contextualSpacing/>
                     </w:pPr>
                 </w:style>
@@ -3031,7 +3039,7 @@
                     <w:rsid w:val="00FD3FFE"/>
                     <w:pPr>
                         <w:numPr>
-                            <w:numId w:val="4"/>
+                            <w:numId w:val="3"/>
                         </w:numPr>
                         <w:ind w:hanging="357" w:left="924"/>
                     </w:pPr>
@@ -3042,7 +3050,7 @@
                     <w:rsid w:val="00FD3FFE"/>
                     <w:pPr>
                         <w:numPr>
-                            <w:numId w:val="5"/>
+                            <w:numId w:val="4"/>
                         </w:numPr>
                         <w:ind w:hanging="357" w:left="1208"/>
                     </w:pPr>
@@ -3053,7 +3061,7 @@
                     <w:rsid w:val="00FD3FFE"/>
                     <w:pPr>
                         <w:numPr>
-                            <w:numId w:val="6"/>
+                            <w:numId w:val="5"/>
                         </w:numPr>
                         <w:ind w:hanging="357" w:left="1491"/>
                     </w:pPr>
@@ -3192,7 +3200,7 @@
                     <w:lvl w:ilvl="0">
                         <w:start w:val="1"/>
                         <w:numFmt w:val="bullet"/>
-                        <w:pStyle w:val="ListBullet5"/>
+                        <w:pStyle w:val="ListBullet2"/>
                         <w:lvlText w:val=""/>
                         <w:lvlJc w:val="left"/>
                         <w:pPr>
@@ -3290,43 +3298,53 @@
                     </w:lvl>
                     <w:lvl w:ilvl="7">
                         <w:start w:val="1"/>
-                        <w:numFmt w:val="lowerLetter"/>
-                        <w:lvlText w:val="%8."/>
+                        <w:numFmt w:val="bullet"/>
+                        <w:lvlText w:val=""/>
                         <w:lvlJc w:val="left"/>
                         <w:pPr>
                             <w:ind w:hanging="360" w:left="2880"/>
                         </w:pPr>
+                        <w:rPr>
+                            <w:rFonts w:ascii="Wingdings"
+                                w:hAnsi="Wingdings" w:hint="default"/>
+                            <w:color w:val="C00000"/>
+                        </w:rPr>
                     </w:lvl>
                     <w:lvl w:ilvl="8">
                         <w:start w:val="1"/>
-                        <w:numFmt w:val="lowerRoman"/>
-                        <w:lvlText w:val="%9."/>
+                        <w:numFmt w:val="bullet"/>
+                        <w:lvlText w:val=""/>
                         <w:lvlJc w:val="left"/>
                         <w:pPr>
                             <w:ind w:hanging="360" w:left="3240"/>
                         </w:pPr>
+                        <w:rPr>
+                            <w:rFonts w:ascii="Wingdings"
+                                w:hAnsi="Wingdings" w:hint="default"/>
+                            <w:color w:val="C00000"/>
+                        </w:rPr>
                     </w:lvl>
                 </w:abstractNum>
                 <w:abstractNum w15:restartNumberingAfterBreak="0" w:abstractNumId="2">
-                    <w:nsid w:val="39EA0BBD"/>
+                    <w:nsid w:val="04CA5D79"/>
                     <w:multiLevelType w:val="multilevel"/>
                     <w:tmpl w:val="0409001D"/>
                     <w:numStyleLink w:val="BulletList"/>
                 </w:abstractNum>
                 <w:abstractNum w15:restartNumberingAfterBreak="0" w:abstractNumId="3">
-                    <w:nsid w:val="4DEE62A3"/>
+                    <w:nsid w:val="39EA0BBD"/>
                     <w:multiLevelType w:val="multilevel"/>
                     <w:tmpl w:val="0409001D"/>
                     <w:numStyleLink w:val="BulletList"/>
                 </w:abstractNum>
                 <w:abstractNum w15:restartNumberingAfterBreak="0" w:abstractNumId="4">
-                    <w:nsid w:val="5F841838"/>
+                    <w:nsid w:val="4DEE62A3"/>
                     <w:multiLevelType w:val="multilevel"/>
                     <w:tmpl w:val="0409001D"/>
                     <w:numStyleLink w:val="BulletList"/>
                 </w:abstractNum>
                 <w:abstractNum w15:restartNumberingAfterBreak="0" w:abstractNumId="5">
-                    <w:nsid w:val="774E4609"/>
+                    <w:nsid w:val="5F841838"/>
                     <w:multiLevelType w:val="multilevel"/>
                     <w:tmpl w:val="0409001D"/>
                     <w:numStyleLink w:val="BulletList"/>
@@ -3335,13 +3353,13 @@
                     <w:abstractNumId w:val="1"/>
                 </w:num>
                 <w:num w:numId="2">
-                    <w:abstractNumId w:val="4"/>
-                </w:num>
-                <w:num w:numId="3">
                     <w:abstractNumId w:val="5"/>
                 </w:num>
-                <w:num w:numId="4">
+                <w:num w:numId="3">
                     <w:abstractNumId w:val="0"/>
+                </w:num>
+                <w:num w:numId="4">
+                    <w:abstractNumId w:val="4"/>
                 </w:num>
                 <w:num w:numId="5">
                     <w:abstractNumId w:val="3"/>
