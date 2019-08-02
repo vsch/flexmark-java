@@ -6,6 +6,7 @@ flexmark-java
 [TOC]: # " "
 
 - [To Do](#to-do)
+- [0.50.24](#05024)
 - [0.50.22](#05022)
 - [0.50.20](#05020)
 - [0.50.18](#05018)
@@ -97,6 +98,12 @@ flexmark-java
 * [ ] Add: `<!-- @formatter:on -->` and `<!-- @formatter:on -->` tags to `Formatter` for
       controlling non-formatting regions.
 * [ ] Convert anonymous classes to lambda where possible.
+
+0.50.24
+-------
+
+* Fix: update docx4j to version 8.1.2
+* Fix: update jsoup to version 1.11.3
 
 0.50.22
 -------

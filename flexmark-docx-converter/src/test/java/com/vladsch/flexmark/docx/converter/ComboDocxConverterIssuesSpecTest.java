@@ -311,6 +311,11 @@ public class ComboDocxConverterIssuesSpecTest extends ComboSpecTestCase {
         File file2 = new File(String.format("%s%s.xml", PROJECT_ROOT_DIRECTORY, FILE_ALL_TESTS_DUMP_NAME));
         WordprocessingMLPackage mlPackage = myPackage;
 
+        File parentDir = file.getParentFile();
+        if (!parentDir.exists()) {
+            parentDir.mkdirs();
+        }
+
         try {
             mlPackage.save(file, Docx4J.FLAG_SAVE_ZIP_FILE);
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();

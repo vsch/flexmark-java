@@ -536,7 +536,7 @@ plain **Bold ~~Bold-strike-through~~** text
             <w:pStyle w:val="ParagraphTextBody"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
-                <w:numId w:val="4"/>
+                <w:numId w:val="2"/>
             </w:numPr>
         </w:pPr>
         <w:r>
@@ -557,7 +557,7 @@ plain **Bold ~~Bold-strike-through~~** text
             <w:pStyle w:val="ParagraphTextBody"/>
             <w:numPr>
                 <w:ilvl w:val="1"/>
-                <w:numId w:val="5"/>
+                <w:numId w:val="2"/>
             </w:numPr>
         </w:pPr>
         <w:r>
@@ -652,7 +652,7 @@ tight lists
             <w:pStyle w:val="BodyText"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
-                <w:numId w:val="4"/>
+                <w:numId w:val="2"/>
             </w:numPr>
         </w:pPr>
         <w:r>
@@ -664,7 +664,7 @@ tight lists
             <w:pStyle w:val="BodyText"/>
             <w:numPr>
                 <w:ilvl w:val="1"/>
-                <w:numId w:val="5"/>
+                <w:numId w:val="2"/>
             </w:numPr>
         </w:pPr>
         <w:r>
@@ -676,7 +676,7 @@ tight lists
             <w:pStyle w:val="BodyText"/>
             <w:numPr>
                 <w:ilvl w:val="1"/>
-                <w:numId w:val="5"/>
+                <w:numId w:val="2"/>
             </w:numPr>
         </w:pPr>
         <w:r>
@@ -688,7 +688,7 @@ tight lists
             <w:pStyle w:val="BodyText"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
-                <w:numId w:val="4"/>
+                <w:numId w:val="2"/>
             </w:numPr>
         </w:pPr>
         <w:r>
@@ -700,7 +700,7 @@ tight lists
             <w:pStyle w:val="BodyText"/>
             <w:numPr>
                 <w:ilvl w:val="1"/>
-                <w:numId w:val="6"/>
+                <w:numId w:val="2"/>
             </w:numPr>
         </w:pPr>
         <w:r>
@@ -712,7 +712,7 @@ tight lists
             <w:pStyle w:val="BodyText"/>
             <w:numPr>
                 <w:ilvl w:val="1"/>
-                <w:numId w:val="6"/>
+                <w:numId w:val="2"/>
             </w:numPr>
         </w:pPr>
         <w:r>
@@ -741,7 +741,7 @@ loose lists
             <w:pStyle w:val="ParagraphTextBody"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
-                <w:numId w:val="4"/>
+                <w:numId w:val="2"/>
             </w:numPr>
         </w:pPr>
         <w:r>
@@ -753,7 +753,7 @@ loose lists
             <w:pStyle w:val="BodyText"/>
             <w:numPr>
                 <w:ilvl w:val="1"/>
-                <w:numId w:val="5"/>
+                <w:numId w:val="2"/>
             </w:numPr>
         </w:pPr>
         <w:r>
@@ -765,7 +765,7 @@ loose lists
             <w:pStyle w:val="BodyText"/>
             <w:numPr>
                 <w:ilvl w:val="1"/>
-                <w:numId w:val="5"/>
+                <w:numId w:val="2"/>
             </w:numPr>
         </w:pPr>
         <w:r>
@@ -777,7 +777,7 @@ loose lists
             <w:pStyle w:val="ParagraphTextBody"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
-                <w:numId w:val="4"/>
+                <w:numId w:val="2"/>
             </w:numPr>
         </w:pPr>
         <w:r>
@@ -789,7 +789,7 @@ loose lists
             <w:pStyle w:val="BodyText"/>
             <w:numPr>
                 <w:ilvl w:val="1"/>
-                <w:numId w:val="6"/>
+                <w:numId w:val="2"/>
             </w:numPr>
         </w:pPr>
         <w:r>
@@ -801,7 +801,7 @@ loose lists
             <w:pStyle w:val="BodyText"/>
             <w:numPr>
                 <w:ilvl w:val="1"/>
-                <w:numId w:val="6"/>
+                <w:numId w:val="2"/>
             </w:numPr>
         </w:pPr>
         <w:r>
@@ -832,7 +832,7 @@ loose lists
             <w:pStyle w:val="ParagraphTextBody"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
-                <w:numId w:val="4"/>
+                <w:numId w:val="2"/>
             </w:numPr>
         </w:pPr>
         <w:r>
@@ -844,7 +844,7 @@ loose lists
             <w:pStyle w:val="ParagraphTextBody"/>
             <w:numPr>
                 <w:ilvl w:val="1"/>
-                <w:numId w:val="5"/>
+                <w:numId w:val="2"/>
             </w:numPr>
         </w:pPr>
         <w:r>
@@ -856,7 +856,7 @@ loose lists
             <w:pStyle w:val="ParagraphTextBody"/>
             <w:numPr>
                 <w:ilvl w:val="1"/>
-                <w:numId w:val="5"/>
+                <w:numId w:val="2"/>
             </w:numPr>
         </w:pPr>
         <w:r>
@@ -868,7 +868,7 @@ loose lists
             <w:pStyle w:val="ParagraphTextBody"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
-                <w:numId w:val="4"/>
+                <w:numId w:val="2"/>
             </w:numPr>
         </w:pPr>
         <w:r>
@@ -880,7 +880,7 @@ loose lists
             <w:pStyle w:val="ParagraphTextBody"/>
             <w:numPr>
                 <w:ilvl w:val="1"/>
-                <w:numId w:val="6"/>
+                <w:numId w:val="2"/>
             </w:numPr>
         </w:pPr>
         <w:r>
@@ -892,11 +892,159 @@ loose lists
             <w:pStyle w:val="ParagraphTextBody"/>
             <w:numPr>
                 <w:ilvl w:val="1"/>
-                <w:numId w:val="6"/>
+                <w:numId w:val="2"/>
             </w:numPr>
         </w:pPr>
         <w:r>
             <w:t xml:space="preserve">list 2.2</w:t>
+        </w:r>
+    </w:p>
+</w:body>
+````````````````````````````````
+
+
+full list items
+
+```````````````````````````````` example Lists: 6
+* list 1 
+  * list 2
+    * list 3
+      * list 4
+        * list 5
+.
+<w:body>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="BodyText"/>
+            <w:numPr>
+                <w:ilvl w:val="0"/>
+                <w:numId w:val="2"/>
+            </w:numPr>
+        </w:pPr>
+        <w:r>
+            <w:t xml:space="preserve">list 1</w:t>
+        </w:r>
+    </w:p>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="BodyText"/>
+            <w:numPr>
+                <w:ilvl w:val="1"/>
+                <w:numId w:val="2"/>
+            </w:numPr>
+        </w:pPr>
+        <w:r>
+            <w:t xml:space="preserve">list 2</w:t>
+        </w:r>
+    </w:p>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="BodyText"/>
+            <w:numPr>
+                <w:ilvl w:val="2"/>
+                <w:numId w:val="2"/>
+            </w:numPr>
+        </w:pPr>
+        <w:r>
+            <w:t xml:space="preserve">list 3</w:t>
+        </w:r>
+    </w:p>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="BodyText"/>
+            <w:numPr>
+                <w:ilvl w:val="3"/>
+                <w:numId w:val="2"/>
+            </w:numPr>
+        </w:pPr>
+        <w:r>
+            <w:t xml:space="preserve">list 4</w:t>
+        </w:r>
+    </w:p>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="BodyText"/>
+            <w:numPr>
+                <w:ilvl w:val="4"/>
+                <w:numId w:val="2"/>
+            </w:numPr>
+        </w:pPr>
+        <w:r>
+            <w:t xml:space="preserve">list 5</w:t>
+        </w:r>
+    </w:p>
+</w:body>
+````````````````````````````````
+
+
+full list items
+
+```````````````````````````````` example Lists: 7
+1. list 1 
+   1. list 2
+      1. list 3
+         1. list 4
+            1. list 5
+.
+<w:body>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="BodyText"/>
+            <w:numPr>
+                <w:ilvl w:val="0"/>
+                <w:numId w:val="4"/>
+            </w:numPr>
+        </w:pPr>
+        <w:r>
+            <w:t xml:space="preserve">list 1</w:t>
+        </w:r>
+    </w:p>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="BodyText"/>
+            <w:numPr>
+                <w:ilvl w:val="1"/>
+                <w:numId w:val="5"/>
+            </w:numPr>
+        </w:pPr>
+        <w:r>
+            <w:t xml:space="preserve">list 2</w:t>
+        </w:r>
+    </w:p>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="BodyText"/>
+            <w:numPr>
+                <w:ilvl w:val="2"/>
+                <w:numId w:val="6"/>
+            </w:numPr>
+        </w:pPr>
+        <w:r>
+            <w:t xml:space="preserve">list 3</w:t>
+        </w:r>
+    </w:p>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="BodyText"/>
+            <w:numPr>
+                <w:ilvl w:val="3"/>
+                <w:numId w:val="7"/>
+            </w:numPr>
+        </w:pPr>
+        <w:r>
+            <w:t xml:space="preserve">list 4</w:t>
+        </w:r>
+    </w:p>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="BodyText"/>
+            <w:numPr>
+                <w:ilvl w:val="4"/>
+                <w:numId w:val="8"/>
+            </w:numPr>
+        </w:pPr>
+        <w:r>
+            <w:t xml:space="preserve">list 5</w:t>
         </w:r>
     </w:p>
 </w:body>
@@ -1215,7 +1363,7 @@ lazy continuation
             <w:pStyle w:val="BodyText"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
-                <w:numId w:val="4"/>
+                <w:numId w:val="2"/>
             </w:numPr>
         </w:pPr>
         <w:r>
@@ -1709,7 +1857,6 @@ Sample paragraph with **bold** *italic* ***bold-italic*** ++underline++ ~~strike
     * list 3
       * list 4
         * list 5
-          * list 6
 
 <!-- HTML Comment  -->
 
@@ -1998,7 +2145,7 @@ code
             <w:pStyle w:val="ParagraphTextBody"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
-                <w:numId w:val="4"/>
+                <w:numId w:val="2"/>
             </w:numPr>
         </w:pPr>
         <w:r>
@@ -2062,7 +2209,7 @@ code
             <w:pStyle w:val="ParagraphTextBody"/>
             <w:numPr>
                 <w:ilvl w:val="1"/>
-                <w:numId w:val="5"/>
+                <w:numId w:val="2"/>
             </w:numPr>
         </w:pPr>
         <w:r>
@@ -2076,6 +2223,66 @@ code
         </w:pPr>
         <w:r>
             <w:t xml:space="preserve">with some text</w:t>
+        </w:r>
+    </w:p>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="BodyText"/>
+            <w:numPr>
+                <w:ilvl w:val="2"/>
+                <w:numId w:val="2"/>
+            </w:numPr>
+        </w:pPr>
+        <w:r>
+            <w:t xml:space="preserve">list 3</w:t>
+        </w:r>
+    </w:p>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="BodyText"/>
+            <w:numPr>
+                <w:ilvl w:val="3"/>
+                <w:numId w:val="2"/>
+            </w:numPr>
+        </w:pPr>
+        <w:r>
+            <w:t xml:space="preserve">list 4</w:t>
+        </w:r>
+    </w:p>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="BodyText"/>
+            <w:numPr>
+                <w:ilvl w:val="4"/>
+                <w:numId w:val="2"/>
+            </w:numPr>
+        </w:pPr>
+        <w:r>
+            <w:t xml:space="preserve">list 5</w:t>
+        </w:r>
+    </w:p>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="ParagraphTextBody"/>
+            <w:numPr>
+                <w:ilvl w:val="0"/>
+                <w:numId w:val="4"/>
+            </w:numPr>
+        </w:pPr>
+        <w:r>
+            <w:t xml:space="preserve">list 1</w:t>
+        </w:r>
+    </w:p>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="BodyText"/>
+            <w:numPr>
+                <w:ilvl w:val="1"/>
+                <w:numId w:val="5"/>
+            </w:numPr>
+        </w:pPr>
+        <w:r>
+            <w:t xml:space="preserve">list 2</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -2116,82 +2323,10 @@ code
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
-            <w:numPr>
-                <w:ilvl w:val="5"/>
-                <w:numId w:val="9"/>
-            </w:numPr>
-        </w:pPr>
-        <w:r>
-            <w:t xml:space="preserve">list 6</w:t>
-        </w:r>
-    </w:p>
-    <w:p>
-        <w:pPr>
             <w:pStyle w:val="ParagraphTextBody"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
-                <w:numId w:val="10"/>
-            </w:numPr>
-        </w:pPr>
-        <w:r>
-            <w:t xml:space="preserve">list 1</w:t>
-        </w:r>
-    </w:p>
-    <w:p>
-        <w:pPr>
-            <w:pStyle w:val="BodyText"/>
-            <w:numPr>
-                <w:ilvl w:val="1"/>
-                <w:numId w:val="11"/>
-            </w:numPr>
-        </w:pPr>
-        <w:r>
-            <w:t xml:space="preserve">list 2</w:t>
-        </w:r>
-    </w:p>
-    <w:p>
-        <w:pPr>
-            <w:pStyle w:val="BodyText"/>
-            <w:numPr>
-                <w:ilvl w:val="2"/>
-                <w:numId w:val="12"/>
-            </w:numPr>
-        </w:pPr>
-        <w:r>
-            <w:t xml:space="preserve">list 3</w:t>
-        </w:r>
-    </w:p>
-    <w:p>
-        <w:pPr>
-            <w:pStyle w:val="BodyText"/>
-            <w:numPr>
-                <w:ilvl w:val="3"/>
-                <w:numId w:val="13"/>
-            </w:numPr>
-        </w:pPr>
-        <w:r>
-            <w:t xml:space="preserve">list 4</w:t>
-        </w:r>
-    </w:p>
-    <w:p>
-        <w:pPr>
-            <w:pStyle w:val="BodyText"/>
-            <w:numPr>
-                <w:ilvl w:val="4"/>
-                <w:numId w:val="14"/>
-            </w:numPr>
-        </w:pPr>
-        <w:r>
-            <w:t xml:space="preserve">list 5</w:t>
-        </w:r>
-    </w:p>
-    <w:p>
-        <w:pPr>
-            <w:pStyle w:val="ParagraphTextBody"/>
-            <w:numPr>
-                <w:ilvl w:val="0"/>
-                <w:numId w:val="10"/>
+                <w:numId w:val="4"/>
             </w:numPr>
         </w:pPr>
         <w:r>
@@ -2203,7 +2338,7 @@ code
             <w:pStyle w:val="BodyText"/>
             <w:numPr>
                 <w:ilvl w:val="1"/>
-                <w:numId w:val="15"/>
+                <w:numId w:val="9"/>
             </w:numPr>
         </w:pPr>
         <w:r>
@@ -2325,7 +2460,7 @@ code
             <w:pStyle w:val="BodyText"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
-                <w:numId w:val="16"/>
+                <w:numId w:val="10"/>
             </w:numPr>
             <w:pBdr>
                 <w:left w:color="CCCCCC" w:frame="true" w:shadow="true"
@@ -2345,7 +2480,7 @@ code
             <w:pStyle w:val="BodyText"/>
             <w:numPr>
                 <w:ilvl w:val="1"/>
-                <w:numId w:val="17"/>
+                <w:numId w:val="2"/>
             </w:numPr>
             <w:pBdr>
                 <w:left w:color="CCCCCC" w:frame="true" w:shadow="true"
@@ -2873,7 +3008,6 @@ Sample paragraph with **bold** *italic* ***bold-italic*** ++underline++ ~~strike
     * list 3
       * list 4
         * list 5
-          * list 6
 
 <!-- HTML Comment  -->
 
@@ -3162,7 +3296,7 @@ code
             <w:pStyle w:val="ParagraphTextBody"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
-                <w:numId w:val="4"/>
+                <w:numId w:val="2"/>
             </w:numPr>
         </w:pPr>
         <w:r>
@@ -3183,7 +3317,7 @@ code
             <w:pStyle w:val="ParagraphTextBody"/>
             <w:numPr>
                 <w:ilvl w:val="1"/>
-                <w:numId w:val="5"/>
+                <w:numId w:val="2"/>
             </w:numPr>
         </w:pPr>
         <w:r>
@@ -3197,6 +3331,66 @@ code
         </w:pPr>
         <w:r>
             <w:t xml:space="preserve">with some text</w:t>
+        </w:r>
+    </w:p>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="BodyText"/>
+            <w:numPr>
+                <w:ilvl w:val="2"/>
+                <w:numId w:val="2"/>
+            </w:numPr>
+        </w:pPr>
+        <w:r>
+            <w:t xml:space="preserve">list 3</w:t>
+        </w:r>
+    </w:p>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="BodyText"/>
+            <w:numPr>
+                <w:ilvl w:val="3"/>
+                <w:numId w:val="2"/>
+            </w:numPr>
+        </w:pPr>
+        <w:r>
+            <w:t xml:space="preserve">list 4</w:t>
+        </w:r>
+    </w:p>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="BodyText"/>
+            <w:numPr>
+                <w:ilvl w:val="4"/>
+                <w:numId w:val="2"/>
+            </w:numPr>
+        </w:pPr>
+        <w:r>
+            <w:t xml:space="preserve">list 5</w:t>
+        </w:r>
+    </w:p>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="ParagraphTextBody"/>
+            <w:numPr>
+                <w:ilvl w:val="0"/>
+                <w:numId w:val="4"/>
+            </w:numPr>
+        </w:pPr>
+        <w:r>
+            <w:t xml:space="preserve">list 1</w:t>
+        </w:r>
+    </w:p>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="BodyText"/>
+            <w:numPr>
+                <w:ilvl w:val="1"/>
+                <w:numId w:val="5"/>
+            </w:numPr>
+        </w:pPr>
+        <w:r>
+            <w:t xml:space="preserve">list 2</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -3237,82 +3431,10 @@ code
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
-            <w:numPr>
-                <w:ilvl w:val="5"/>
-                <w:numId w:val="9"/>
-            </w:numPr>
-        </w:pPr>
-        <w:r>
-            <w:t xml:space="preserve">list 6</w:t>
-        </w:r>
-    </w:p>
-    <w:p>
-        <w:pPr>
             <w:pStyle w:val="ParagraphTextBody"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
-                <w:numId w:val="10"/>
-            </w:numPr>
-        </w:pPr>
-        <w:r>
-            <w:t xml:space="preserve">list 1</w:t>
-        </w:r>
-    </w:p>
-    <w:p>
-        <w:pPr>
-            <w:pStyle w:val="BodyText"/>
-            <w:numPr>
-                <w:ilvl w:val="1"/>
-                <w:numId w:val="11"/>
-            </w:numPr>
-        </w:pPr>
-        <w:r>
-            <w:t xml:space="preserve">list 2</w:t>
-        </w:r>
-    </w:p>
-    <w:p>
-        <w:pPr>
-            <w:pStyle w:val="BodyText"/>
-            <w:numPr>
-                <w:ilvl w:val="2"/>
-                <w:numId w:val="12"/>
-            </w:numPr>
-        </w:pPr>
-        <w:r>
-            <w:t xml:space="preserve">list 3</w:t>
-        </w:r>
-    </w:p>
-    <w:p>
-        <w:pPr>
-            <w:pStyle w:val="BodyText"/>
-            <w:numPr>
-                <w:ilvl w:val="3"/>
-                <w:numId w:val="13"/>
-            </w:numPr>
-        </w:pPr>
-        <w:r>
-            <w:t xml:space="preserve">list 4</w:t>
-        </w:r>
-    </w:p>
-    <w:p>
-        <w:pPr>
-            <w:pStyle w:val="BodyText"/>
-            <w:numPr>
-                <w:ilvl w:val="4"/>
-                <w:numId w:val="14"/>
-            </w:numPr>
-        </w:pPr>
-        <w:r>
-            <w:t xml:space="preserve">list 5</w:t>
-        </w:r>
-    </w:p>
-    <w:p>
-        <w:pPr>
-            <w:pStyle w:val="ParagraphTextBody"/>
-            <w:numPr>
-                <w:ilvl w:val="0"/>
-                <w:numId w:val="10"/>
+                <w:numId w:val="4"/>
             </w:numPr>
         </w:pPr>
         <w:r>
@@ -3324,7 +3446,7 @@ code
             <w:pStyle w:val="BodyText"/>
             <w:numPr>
                 <w:ilvl w:val="1"/>
-                <w:numId w:val="15"/>
+                <w:numId w:val="9"/>
             </w:numPr>
         </w:pPr>
         <w:r>
@@ -3446,7 +3568,7 @@ code
             <w:pStyle w:val="BodyText"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
-                <w:numId w:val="16"/>
+                <w:numId w:val="10"/>
             </w:numPr>
             <w:pBdr>
                 <w:left w:color="CCCCCC" w:frame="true" w:shadow="true"
@@ -3466,7 +3588,7 @@ code
             <w:pStyle w:val="BodyText"/>
             <w:numPr>
                 <w:ilvl w:val="1"/>
-                <w:numId w:val="17"/>
+                <w:numId w:val="2"/>
             </w:numPr>
             <w:pBdr>
                 <w:left w:color="CCCCCC" w:frame="true" w:shadow="true"
@@ -4229,7 +4351,7 @@ code
             <w:pStyle w:val="ParagraphTextBody"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
-                <w:numId w:val="4"/>
+                <w:numId w:val="2"/>
             </w:numPr>
         </w:pPr>
         <w:r>
@@ -4284,6 +4406,30 @@ code
             <w:pStyle w:val="BodyText"/>
             <w:numPr>
                 <w:ilvl w:val="1"/>
+                <w:numId w:val="2"/>
+            </w:numPr>
+        </w:pPr>
+        <w:r>
+            <w:t xml:space="preserve">list 2</w:t>
+        </w:r>
+    </w:p>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="ParagraphTextBody"/>
+            <w:numPr>
+                <w:ilvl w:val="0"/>
+                <w:numId w:val="4"/>
+            </w:numPr>
+        </w:pPr>
+        <w:r>
+            <w:t xml:space="preserve">list 1</w:t>
+        </w:r>
+    </w:p>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="BodyText"/>
+            <w:numPr>
+                <w:ilvl w:val="1"/>
                 <w:numId w:val="5"/>
             </w:numPr>
         </w:pPr>
@@ -4296,31 +4442,7 @@ code
             <w:pStyle w:val="ParagraphTextBody"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
-                <w:numId w:val="6"/>
-            </w:numPr>
-        </w:pPr>
-        <w:r>
-            <w:t xml:space="preserve">list 1</w:t>
-        </w:r>
-    </w:p>
-    <w:p>
-        <w:pPr>
-            <w:pStyle w:val="BodyText"/>
-            <w:numPr>
-                <w:ilvl w:val="1"/>
-                <w:numId w:val="7"/>
-            </w:numPr>
-        </w:pPr>
-        <w:r>
-            <w:t xml:space="preserve">list 2</w:t>
-        </w:r>
-    </w:p>
-    <w:p>
-        <w:pPr>
-            <w:pStyle w:val="ParagraphTextBody"/>
-            <w:numPr>
-                <w:ilvl w:val="0"/>
-                <w:numId w:val="6"/>
+                <w:numId w:val="4"/>
             </w:numPr>
         </w:pPr>
         <w:r>
@@ -4332,7 +4454,7 @@ code
             <w:pStyle w:val="BodyText"/>
             <w:numPr>
                 <w:ilvl w:val="1"/>
-                <w:numId w:val="8"/>
+                <w:numId w:val="6"/>
             </w:numPr>
         </w:pPr>
         <w:r>
@@ -4424,7 +4546,7 @@ code
             <w:pStyle w:val="BodyText"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
-                <w:numId w:val="9"/>
+                <w:numId w:val="7"/>
             </w:numPr>
             <w:pBdr>
                 <w:left w:color="CCCCCC" w:frame="true" w:shadow="true"
@@ -4444,7 +4566,7 @@ code
             <w:pStyle w:val="BodyText"/>
             <w:numPr>
                 <w:ilvl w:val="1"/>
-                <w:numId w:val="10"/>
+                <w:numId w:val="2"/>
             </w:numPr>
             <w:pBdr>
                 <w:left w:color="CCCCCC" w:frame="true" w:shadow="true"
@@ -6360,7 +6482,7 @@ block quote with bullet list
             <w:pStyle w:val="BodyText"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
-                <w:numId w:val="4"/>
+                <w:numId w:val="2"/>
             </w:numPr>
             <w:pBdr>
                 <w:left w:color="CCCCCC" w:frame="true" w:shadow="true"
@@ -6380,7 +6502,7 @@ block quote with bullet list
             <w:pStyle w:val="BodyText"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
-                <w:numId w:val="4"/>
+                <w:numId w:val="2"/>
             </w:numPr>
             <w:pBdr>
                 <w:left w:color="CCCCCC" w:frame="true" w:shadow="true"
@@ -6434,7 +6556,7 @@ block quote with bullet nested list
             <w:pStyle w:val="BodyText"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
-                <w:numId w:val="4"/>
+                <w:numId w:val="2"/>
             </w:numPr>
             <w:pBdr>
                 <w:left w:color="CCCCCC" w:frame="true" w:shadow="true"
@@ -6454,7 +6576,7 @@ block quote with bullet nested list
             <w:pStyle w:val="BodyText"/>
             <w:numPr>
                 <w:ilvl w:val="1"/>
-                <w:numId w:val="5"/>
+                <w:numId w:val="2"/>
             </w:numPr>
             <w:pBdr>
                 <w:left w:color="CCCCCC" w:frame="true" w:shadow="true"
@@ -6511,7 +6633,7 @@ block quote with bullet list nested beyond border space limit
             <w:pStyle w:val="BodyText"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
-                <w:numId w:val="4"/>
+                <w:numId w:val="2"/>
             </w:numPr>
             <w:pBdr>
                 <w:left w:color="CCCCCC" w:frame="true" w:shadow="true"
@@ -6531,7 +6653,7 @@ block quote with bullet list nested beyond border space limit
             <w:pStyle w:val="BodyText"/>
             <w:numPr>
                 <w:ilvl w:val="1"/>
-                <w:numId w:val="5"/>
+                <w:numId w:val="2"/>
             </w:numPr>
             <w:pBdr>
                 <w:left w:color="CCCCCC" w:frame="true" w:shadow="true"
@@ -6551,7 +6673,7 @@ block quote with bullet list nested beyond border space limit
             <w:pStyle w:val="BodyText"/>
             <w:numPr>
                 <w:ilvl w:val="2"/>
-                <w:numId w:val="6"/>
+                <w:numId w:val="2"/>
             </w:numPr>
             <w:pBdr>
                 <w:left w:color="CCCCCC" w:frame="true" w:shadow="true"
@@ -6571,7 +6693,7 @@ block quote with bullet list nested beyond border space limit
             <w:pStyle w:val="BodyText"/>
             <w:numPr>
                 <w:ilvl w:val="3"/>
-                <w:numId w:val="7"/>
+                <w:numId w:val="2"/>
             </w:numPr>
             <w:pBdr>
                 <w:left w:color="CCCCCC" w:frame="true" w:shadow="true"
@@ -6591,7 +6713,7 @@ block quote with bullet list nested beyond border space limit
             <w:pStyle w:val="BodyText"/>
             <w:numPr>
                 <w:ilvl w:val="4"/>
-                <w:numId w:val="8"/>
+                <w:numId w:val="2"/>
             </w:numPr>
             <w:pBdr>
                 <w:left w:color="CCCCCC" w:frame="true" w:shadow="true"
@@ -6927,7 +7049,7 @@ list with block quote
             <w:pStyle w:val="ParagraphTextBody"/>
             <w:numPr>
                 <w:ilvl w:val="1"/>
-                <w:numId w:val="5"/>
+                <w:numId w:val="2"/>
             </w:numPr>
         </w:pPr>
         <w:r>
@@ -7069,7 +7191,7 @@ list with block quote
             <w:pStyle w:val="ParagraphTextBody"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
-                <w:numId w:val="5"/>
+                <w:numId w:val="2"/>
             </w:numPr>
             <w:pBdr>
                 <w:left w:color="CCCCCC" w:frame="true" w:shadow="true"
@@ -7132,7 +7254,7 @@ list with block quote
             <w:pStyle w:val="BodyText"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
-                <w:numId w:val="6"/>
+                <w:numId w:val="5"/>
             </w:numPr>
         </w:pPr>
         <w:r>
@@ -7144,7 +7266,7 @@ list with block quote
             <w:pStyle w:val="ParagraphTextBody"/>
             <w:numPr>
                 <w:ilvl w:val="1"/>
-                <w:numId w:val="7"/>
+                <w:numId w:val="2"/>
             </w:numPr>
         </w:pPr>
         <w:r>
@@ -7180,7 +7302,7 @@ list with block quote
             <w:pStyle w:val="ParagraphTextBody"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
-                <w:numId w:val="8"/>
+                <w:numId w:val="6"/>
             </w:numPr>
             <w:pBdr>
                 <w:left w:color="CCCCCC" w:frame="true" w:shadow="true"
@@ -7225,7 +7347,7 @@ list with block quote
             <w:pStyle w:val="ParagraphTextBody"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
-                <w:numId w:val="9"/>
+                <w:numId w:val="2"/>
             </w:numPr>
             <w:pBdr>
                 <w:left w:color="CCCCCC" w:frame="true" w:shadow="true"
@@ -7317,7 +7439,7 @@ list with block quote
             <w:pStyle w:val="BodyText"/>
             <w:numPr>
                 <w:ilvl w:val="1"/>
-                <w:numId w:val="5"/>
+                <w:numId w:val="2"/>
             </w:numPr>
         </w:pPr>
         <w:r>
@@ -7344,7 +7466,7 @@ list with block quote
             <w:pStyle w:val="BodyText"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
-                <w:numId w:val="6"/>
+                <w:numId w:val="5"/>
             </w:numPr>
             <w:pBdr>
                 <w:left w:color="CCCCCC" w:frame="true" w:shadow="true"
@@ -7453,7 +7575,7 @@ aside block with bullet list
             <w:pStyle w:val="BodyText"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
-                <w:numId w:val="4"/>
+                <w:numId w:val="2"/>
             </w:numPr>
             <w:pBdr>
                 <w:left w:color="3366FF" w:frame="true" w:shadow="true"
@@ -7470,7 +7592,7 @@ aside block with bullet list
             <w:pStyle w:val="BodyText"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
-                <w:numId w:val="4"/>
+                <w:numId w:val="2"/>
             </w:numPr>
             <w:pBdr>
                 <w:left w:color="3366FF" w:frame="true" w:shadow="true"
@@ -7521,7 +7643,7 @@ aside block with bullet nested list
             <w:pStyle w:val="BodyText"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
-                <w:numId w:val="4"/>
+                <w:numId w:val="2"/>
             </w:numPr>
             <w:pBdr>
                 <w:left w:color="3366FF" w:frame="true" w:shadow="true"
@@ -7538,7 +7660,7 @@ aside block with bullet nested list
             <w:pStyle w:val="BodyText"/>
             <w:numPr>
                 <w:ilvl w:val="1"/>
-                <w:numId w:val="5"/>
+                <w:numId w:val="2"/>
             </w:numPr>
             <w:pBdr>
                 <w:left w:color="3366FF" w:frame="true" w:shadow="true"
@@ -7592,7 +7714,7 @@ aside block with bullet list nested beyond border space limit
             <w:pStyle w:val="BodyText"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
-                <w:numId w:val="4"/>
+                <w:numId w:val="2"/>
             </w:numPr>
             <w:pBdr>
                 <w:left w:color="3366FF" w:frame="true" w:shadow="true"
@@ -7609,7 +7731,7 @@ aside block with bullet list nested beyond border space limit
             <w:pStyle w:val="BodyText"/>
             <w:numPr>
                 <w:ilvl w:val="1"/>
-                <w:numId w:val="5"/>
+                <w:numId w:val="2"/>
             </w:numPr>
             <w:pBdr>
                 <w:left w:color="3366FF" w:frame="true" w:shadow="true"
@@ -7626,7 +7748,7 @@ aside block with bullet list nested beyond border space limit
             <w:pStyle w:val="BodyText"/>
             <w:numPr>
                 <w:ilvl w:val="2"/>
-                <w:numId w:val="6"/>
+                <w:numId w:val="2"/>
             </w:numPr>
             <w:pBdr>
                 <w:left w:color="3366FF" w:frame="true" w:shadow="true"
@@ -7643,7 +7765,7 @@ aside block with bullet list nested beyond border space limit
             <w:pStyle w:val="BodyText"/>
             <w:numPr>
                 <w:ilvl w:val="3"/>
-                <w:numId w:val="7"/>
+                <w:numId w:val="2"/>
             </w:numPr>
             <w:pBdr>
                 <w:left w:color="3366FF" w:frame="true" w:shadow="true"
@@ -7660,7 +7782,7 @@ aside block with bullet list nested beyond border space limit
             <w:pStyle w:val="BodyText"/>
             <w:numPr>
                 <w:ilvl w:val="4"/>
-                <w:numId w:val="8"/>
+                <w:numId w:val="2"/>
             </w:numPr>
             <w:pBdr>
                 <w:left w:color="3366FF" w:frame="true" w:shadow="true"
@@ -7987,7 +8109,7 @@ list with aside block
             <w:pStyle w:val="ParagraphTextBody"/>
             <w:numPr>
                 <w:ilvl w:val="1"/>
-                <w:numId w:val="5"/>
+                <w:numId w:val="2"/>
             </w:numPr>
         </w:pPr>
         <w:r>
@@ -8123,7 +8245,7 @@ list with aside block
             <w:pStyle w:val="ParagraphTextBody"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
-                <w:numId w:val="5"/>
+                <w:numId w:val="2"/>
             </w:numPr>
             <w:pBdr>
                 <w:left w:color="3366FF" w:frame="true" w:shadow="true"
@@ -8180,7 +8302,7 @@ list with aside block
             <w:pStyle w:val="BodyText"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
-                <w:numId w:val="6"/>
+                <w:numId w:val="5"/>
             </w:numPr>
         </w:pPr>
         <w:r>
@@ -8192,7 +8314,7 @@ list with aside block
             <w:pStyle w:val="ParagraphTextBody"/>
             <w:numPr>
                 <w:ilvl w:val="1"/>
-                <w:numId w:val="7"/>
+                <w:numId w:val="2"/>
             </w:numPr>
         </w:pPr>
         <w:r>
@@ -8228,7 +8350,7 @@ list with aside block
             <w:pStyle w:val="ParagraphTextBody"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
-                <w:numId w:val="8"/>
+                <w:numId w:val="6"/>
             </w:numPr>
             <w:pBdr>
                 <w:left w:color="3366FF" w:frame="true" w:shadow="true"
@@ -8267,7 +8389,7 @@ list with aside block
             <w:pStyle w:val="ParagraphTextBody"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
-                <w:numId w:val="9"/>
+                <w:numId w:val="2"/>
             </w:numPr>
             <w:pBdr>
                 <w:left w:color="3366FF" w:frame="true" w:shadow="true"
@@ -8353,7 +8475,7 @@ list with aside block
             <w:pStyle w:val="BodyText"/>
             <w:numPr>
                 <w:ilvl w:val="1"/>
-                <w:numId w:val="5"/>
+                <w:numId w:val="2"/>
             </w:numPr>
         </w:pPr>
         <w:r>
@@ -8380,7 +8502,7 @@ list with aside block
             <w:pStyle w:val="BodyText"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
-                <w:numId w:val="6"/>
+                <w:numId w:val="5"/>
             </w:numPr>
             <w:pBdr>
                 <w:left w:color="3366FF" w:frame="true" w:shadow="true"

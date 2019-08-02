@@ -36,13 +36,13 @@ import com.vladsch.flexmark.util.ImageUtils;
 import com.vladsch.flexmark.util.Pair;
 import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.*;
+import com.vladsch.flexmark.util.data.DataHolder;
+import com.vladsch.flexmark.util.data.DataKey;
+import com.vladsch.flexmark.util.data.MutableScopedDataSet;
 import com.vladsch.flexmark.util.format.options.ListSpacing;
 import com.vladsch.flexmark.util.html.Attribute;
 import com.vladsch.flexmark.util.html.Attributes;
 import com.vladsch.flexmark.util.html.Escaping;
-import com.vladsch.flexmark.util.data.DataHolder;
-import com.vladsch.flexmark.util.data.DataKey;
-import com.vladsch.flexmark.util.data.MutableScopedDataSet;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import org.docx4j.UnitsOfMeasurement;
 import org.docx4j.dml.wordprocessingDrawing.Inline;
@@ -67,7 +67,7 @@ import java.io.File;
 import java.math.BigInteger;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 import static com.vladsch.flexmark.html.renderer.LinkStatus.UNKNOWN;
@@ -137,7 +137,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
         lastTocBlock = null;
         ordinalRunnable = null;
 
-        final MutableScopedDataSet options1 = new MutableScopedDataSet(options);
+        MutableScopedDataSet options1 = new MutableScopedDataSet(options);
         options1.set(EmojiExtension.ROOT_IMAGE_PATH, DocxRenderer.DOC_EMOJI_ROOT_IMAGE_PATH.getFrom(options));
         emojiOptions = new EmojiOptions(options1);
         headerIdGenerator = new HeaderIdGenerator.Factory().create();
@@ -149,7 +149,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
     }
 
     @Override
-    public void renderDocument(final DocxRendererContext docx, final Document document, final DocxRendererPhase phase) {
+    public void renderDocument(DocxRendererContext docx, Document document, DocxRendererPhase phase) {
         // here non-rendered elements can be collected so that they are rendered in another part of the document
         switch (phase) {
             case COLLECT:
@@ -206,7 +206,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
         //));
     }
 
-    public ReferenceRepository getRepository(final DataHolder options) {
+    public ReferenceRepository getRepository(DataHolder options) {
         return options.get(Parser.REFERENCES);
     }
 
@@ -216,374 +216,374 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
                 // Generic unknown node formatter
                 new NodeDocxRendererHandler<>(Node.class, new CustomNodeDocxRenderer<Node>() {
                     @Override
-                    public void render(final Node node, final DocxRendererContext docx) {
+                    public void render(Node node, DocxRendererContext docx) {
                         CoreNodeDocxRenderer.this.render(node, docx);
                     }
                 }),
                 new NodeDocxRendererHandler<AutoLink>(AutoLink.class, new CustomNodeDocxRenderer<AutoLink>() {
                     @Override
-                    public void render(final AutoLink node, final DocxRendererContext docx) {
+                    public void render(AutoLink node, DocxRendererContext docx) {
                         CoreNodeDocxRenderer.this.render(node, docx);
                     }
                 }),
                 new NodeDocxRendererHandler<BlankLine>(BlankLine.class, new CustomNodeDocxRenderer<BlankLine>() {
                     @Override
-                    public void render(final BlankLine node, final DocxRendererContext docx) {
+                    public void render(BlankLine node, DocxRendererContext docx) {
                         CoreNodeDocxRenderer.this.render(node, docx);
                     }
                 }),
                 new NodeDocxRendererHandler<BlockQuote>(BlockQuote.class, new CustomNodeDocxRenderer<BlockQuote>() {
                     @Override
-                    public void render(final BlockQuote node, final DocxRendererContext docx) {
+                    public void render(BlockQuote node, DocxRendererContext docx) {
                         CoreNodeDocxRenderer.this.render(node, docx);
                     }
                 }),
                 new NodeDocxRendererHandler<GitLabBlockQuote>(GitLabBlockQuote.class, new CustomNodeDocxRenderer<GitLabBlockQuote>() {
                     @Override
-                    public void render(final GitLabBlockQuote node, final DocxRendererContext docx) {
+                    public void render(GitLabBlockQuote node, DocxRendererContext docx) {
                         CoreNodeDocxRenderer.this.render(node, docx);
                     }
                 }),
                 new NodeDocxRendererHandler<AsideBlock>(AsideBlock.class, new CustomNodeDocxRenderer<AsideBlock>() {
                     @Override
-                    public void render(final AsideBlock node, final DocxRendererContext docx) {
+                    public void render(AsideBlock node, DocxRendererContext docx) {
                         CoreNodeDocxRenderer.this.render(node, docx);
                     }
                 }),
                 new NodeDocxRendererHandler<Code>(Code.class, new CustomNodeDocxRenderer<Code>() {
                     @Override
-                    public void render(final Code node, final DocxRendererContext docx) {
+                    public void render(Code node, DocxRendererContext docx) {
                         CoreNodeDocxRenderer.this.render(node, docx);
                     }
                 }),
                 new NodeDocxRendererHandler<Document>(Document.class, new CustomNodeDocxRenderer<Document>() {
                     @Override
-                    public void render(final Document node, final DocxRendererContext docx) {
+                    public void render(Document node, DocxRendererContext docx) {
                         CoreNodeDocxRenderer.this.render(node, docx);
                     }
                 }),
                 new NodeDocxRendererHandler<Emphasis>(Emphasis.class, new CustomNodeDocxRenderer<Emphasis>() {
                     @Override
-                    public void render(final Emphasis node, final DocxRendererContext docx) {
+                    public void render(Emphasis node, DocxRendererContext docx) {
                         CoreNodeDocxRenderer.this.render(node, docx);
                     }
                 }),
                 new NodeDocxRendererHandler<StrongEmphasis>(StrongEmphasis.class, new CustomNodeDocxRenderer<StrongEmphasis>() {
                     @Override
-                    public void render(final StrongEmphasis node, final DocxRendererContext docx) {
+                    public void render(StrongEmphasis node, DocxRendererContext docx) {
                         CoreNodeDocxRenderer.this.render(node, docx);
                     }
                 }),
                 new NodeDocxRendererHandler<Ins>(Ins.class, new CustomNodeDocxRenderer<Ins>() {
                     @Override
-                    public void render(final Ins node, final DocxRendererContext docx) {
+                    public void render(Ins node, DocxRendererContext docx) {
                         CoreNodeDocxRenderer.this.render(node, docx);
                     }
                 }),
                 new NodeDocxRendererHandler<GitLabIns>(GitLabIns.class, new CustomNodeDocxRenderer<GitLabIns>() {
                     @Override
-                    public void render(final GitLabIns node, final DocxRendererContext docx) {
+                    public void render(GitLabIns node, DocxRendererContext docx) {
                         CoreNodeDocxRenderer.this.render(node, docx);
                     }
                 }),
                 new NodeDocxRendererHandler<MacroReference>(MacroReference.class, new CustomNodeDocxRenderer<MacroReference>() {
                     @Override
-                    public void render(final MacroReference node, final DocxRendererContext docx) {
+                    public void render(MacroReference node, DocxRendererContext docx) {
                         CoreNodeDocxRenderer.this.render(node, docx);
                     }
                 }),
                 new NodeDocxRendererHandler<MacroDefinitionBlock>(MacroDefinitionBlock.class, new CustomNodeDocxRenderer<MacroDefinitionBlock>() {
                     @Override
-                    public void render(final MacroDefinitionBlock node, final DocxRendererContext docx) {
+                    public void render(MacroDefinitionBlock node, DocxRendererContext docx) {
                         CoreNodeDocxRenderer.this.render(node, docx);
                     }
                 }),
                 new NodeDocxRendererHandler<Strikethrough>(Strikethrough.class, new CustomNodeDocxRenderer<Strikethrough>() {
                     @Override
-                    public void render(final Strikethrough node, final DocxRendererContext docx) {
+                    public void render(Strikethrough node, DocxRendererContext docx) {
                         CoreNodeDocxRenderer.this.render(node, docx);
                     }
                 }),
                 new NodeDocxRendererHandler<GitLabDel>(GitLabDel.class, new CustomNodeDocxRenderer<GitLabDel>() {
                     @Override
-                    public void render(final GitLabDel node, final DocxRendererContext docx) {
+                    public void render(GitLabDel node, DocxRendererContext docx) {
                         CoreNodeDocxRenderer.this.render(node, docx);
                     }
                 }),
                 new NodeDocxRendererHandler<Superscript>(Superscript.class, new CustomNodeDocxRenderer<Superscript>() {
                     @Override
-                    public void render(final Superscript node, final DocxRendererContext docx) {
+                    public void render(Superscript node, DocxRendererContext docx) {
                         CoreNodeDocxRenderer.this.render(node, docx);
                     }
                 }),
                 new NodeDocxRendererHandler<Subscript>(Subscript.class, new CustomNodeDocxRenderer<Subscript>() {
                     @Override
-                    public void render(final Subscript node, final DocxRendererContext docx) {
+                    public void render(Subscript node, DocxRendererContext docx) {
                         CoreNodeDocxRenderer.this.render(node, docx);
                     }
                 }),
                 new NodeDocxRendererHandler<FencedCodeBlock>(FencedCodeBlock.class, new CustomNodeDocxRenderer<FencedCodeBlock>() {
                     @Override
-                    public void render(final FencedCodeBlock node, final DocxRendererContext docx) {
+                    public void render(FencedCodeBlock node, DocxRendererContext docx) {
                         CoreNodeDocxRenderer.this.render(node, docx);
                     }
                 }),
                 new NodeDocxRendererHandler<Footnote>(Footnote.class, new CustomNodeDocxRenderer<Footnote>() {
                     @Override
-                    public void render(final Footnote node, final DocxRendererContext docx) {
+                    public void render(Footnote node, DocxRendererContext docx) {
                         CoreNodeDocxRenderer.this.render(node, docx);
                     }
                 }),
                 new NodeDocxRendererHandler<FootnoteBlock>(FootnoteBlock.class, new CustomNodeDocxRenderer<FootnoteBlock>() {
                     @Override
-                    public void render(final FootnoteBlock node, final DocxRendererContext docx) {
+                    public void render(FootnoteBlock node, DocxRendererContext docx) {
                         CoreNodeDocxRenderer.this.render(node, docx);
                     }
                 }),
                 new NodeDocxRendererHandler<HardLineBreak>(HardLineBreak.class, new CustomNodeDocxRenderer<HardLineBreak>() {
                     @Override
-                    public void render(final HardLineBreak node, final DocxRendererContext docx) {
+                    public void render(HardLineBreak node, DocxRendererContext docx) {
                         CoreNodeDocxRenderer.this.render(node, docx);
                     }
                 }),
                 new NodeDocxRendererHandler<Heading>(Heading.class, new CustomNodeDocxRenderer<Heading>() {
                     @Override
-                    public void render(final Heading node, final DocxRendererContext docx) {
+                    public void render(Heading node, DocxRendererContext docx) {
                         CoreNodeDocxRenderer.this.render(node, docx);
                     }
                 }),
                 new NodeDocxRendererHandler<HtmlBlock>(HtmlBlock.class, new CustomNodeDocxRenderer<HtmlBlock>() {
                     @Override
-                    public void render(final HtmlBlock node, final DocxRendererContext docx) {
+                    public void render(HtmlBlock node, DocxRendererContext docx) {
                         CoreNodeDocxRenderer.this.render(node, docx);
                     }
                 }),
                 new NodeDocxRendererHandler<HtmlCommentBlock>(HtmlCommentBlock.class, new CustomNodeDocxRenderer<HtmlCommentBlock>() {
                     @Override
-                    public void render(final HtmlCommentBlock node, final DocxRendererContext docx) {
+                    public void render(HtmlCommentBlock node, DocxRendererContext docx) {
                         CoreNodeDocxRenderer.this.render(node, docx);
                     }
                 }),
                 new NodeDocxRendererHandler<HtmlInnerBlock>(HtmlInnerBlock.class, new CustomNodeDocxRenderer<HtmlInnerBlock>() {
                     @Override
-                    public void render(final HtmlInnerBlock node, final DocxRendererContext docx) {
+                    public void render(HtmlInnerBlock node, DocxRendererContext docx) {
                         CoreNodeDocxRenderer.this.render(node, docx);
                     }
                 }),
                 new NodeDocxRendererHandler<HtmlInnerBlockComment>(HtmlInnerBlockComment.class, new CustomNodeDocxRenderer<HtmlInnerBlockComment>() {
                     @Override
-                    public void render(final HtmlInnerBlockComment node, final DocxRendererContext docx) {
+                    public void render(HtmlInnerBlockComment node, DocxRendererContext docx) {
                         CoreNodeDocxRenderer.this.render(node, docx);
                     }
                 }),
                 new NodeDocxRendererHandler<HtmlEntity>(HtmlEntity.class, new CustomNodeDocxRenderer<HtmlEntity>() {
                     @Override
-                    public void render(final HtmlEntity node, final DocxRendererContext docx) {
+                    public void render(HtmlEntity node, DocxRendererContext docx) {
                         CoreNodeDocxRenderer.this.render(node, docx);
                     }
                 }),
                 new NodeDocxRendererHandler<HtmlInline>(HtmlInline.class, new CustomNodeDocxRenderer<HtmlInline>() {
                     @Override
-                    public void render(final HtmlInline node, final DocxRendererContext docx) {
+                    public void render(HtmlInline node, DocxRendererContext docx) {
                         CoreNodeDocxRenderer.this.render(node, docx);
                     }
                 }),
                 new NodeDocxRendererHandler<HtmlInlineComment>(HtmlInlineComment.class, new CustomNodeDocxRenderer<HtmlInlineComment>() {
                     @Override
-                    public void render(final HtmlInlineComment node, final DocxRendererContext docx) {
+                    public void render(HtmlInlineComment node, DocxRendererContext docx) {
                         CoreNodeDocxRenderer.this.render(node, docx);
                     }
                 }),
                 new NodeDocxRendererHandler<Image>(Image.class, new CustomNodeDocxRenderer<Image>() {
                     @Override
-                    public void render(final Image node, final DocxRendererContext docx) {
+                    public void render(Image node, DocxRendererContext docx) {
                         CoreNodeDocxRenderer.this.render(node, docx);
                     }
                 }),
                 new NodeDocxRendererHandler<ImageRef>(ImageRef.class, new CustomNodeDocxRenderer<ImageRef>() {
                     @Override
-                    public void render(final ImageRef node, final DocxRendererContext docx) {
+                    public void render(ImageRef node, DocxRendererContext docx) {
                         CoreNodeDocxRenderer.this.render(node, docx);
                     }
                 }),
                 new NodeDocxRendererHandler<IndentedCodeBlock>(IndentedCodeBlock.class, new CustomNodeDocxRenderer<IndentedCodeBlock>() {
                     @Override
-                    public void render(final IndentedCodeBlock node, final DocxRendererContext docx) {
+                    public void render(IndentedCodeBlock node, DocxRendererContext docx) {
                         CoreNodeDocxRenderer.this.render(node, docx);
                     }
                 }),
                 new NodeDocxRendererHandler<Link>(Link.class, new CustomNodeDocxRenderer<Link>() {
                     @Override
-                    public void render(final Link node, final DocxRendererContext docx) {
+                    public void render(Link node, DocxRendererContext docx) {
                         CoreNodeDocxRenderer.this.render(node, docx);
                     }
                 }),
                 new NodeDocxRendererHandler<LinkRef>(LinkRef.class, new CustomNodeDocxRenderer<LinkRef>() {
                     @Override
-                    public void render(final LinkRef node, final DocxRendererContext docx) {
+                    public void render(LinkRef node, DocxRendererContext docx) {
                         CoreNodeDocxRenderer.this.render(node, docx);
                     }
                 }),
                 new NodeDocxRendererHandler<BulletList>(BulletList.class, new CustomNodeDocxRenderer<BulletList>() {
                     @Override
-                    public void render(final BulletList node, final DocxRendererContext docx) {
+                    public void render(BulletList node, DocxRendererContext docx) {
                         CoreNodeDocxRenderer.this.render(node, docx);
                     }
                 }),
                 new NodeDocxRendererHandler<OrderedList>(OrderedList.class, new CustomNodeDocxRenderer<OrderedList>() {
                     @Override
-                    public void render(final OrderedList node, final DocxRendererContext docx) {
+                    public void render(OrderedList node, DocxRendererContext docx) {
                         CoreNodeDocxRenderer.this.render(node, docx);
                     }
                 }),
                 new NodeDocxRendererHandler<BulletListItem>(BulletListItem.class, new CustomNodeDocxRenderer<BulletListItem>() {
                     @Override
-                    public void render(final BulletListItem node, final DocxRendererContext docx) {
+                    public void render(BulletListItem node, DocxRendererContext docx) {
                         CoreNodeDocxRenderer.this.render(node, docx);
                     }
                 }),
                 new NodeDocxRendererHandler<OrderedListItem>(OrderedListItem.class, new CustomNodeDocxRenderer<OrderedListItem>() {
                     @Override
-                    public void render(final OrderedListItem node, final DocxRendererContext docx) {
+                    public void render(OrderedListItem node, DocxRendererContext docx) {
                         CoreNodeDocxRenderer.this.render(node, docx);
                     }
                 }),
                 new NodeDocxRendererHandler<MailLink>(MailLink.class, new CustomNodeDocxRenderer<MailLink>() {
                     @Override
-                    public void render(final MailLink node, final DocxRendererContext docx) {
+                    public void render(MailLink node, DocxRendererContext docx) {
                         CoreNodeDocxRenderer.this.render(node, docx);
                     }
                 }),
                 new NodeDocxRendererHandler<Paragraph>(Paragraph.class, new CustomNodeDocxRenderer<Paragraph>() {
                     @Override
-                    public void render(final Paragraph node, final DocxRendererContext docx) {
+                    public void render(Paragraph node, DocxRendererContext docx) {
                         CoreNodeDocxRenderer.this.render(node, docx);
                     }
                 }),
                 new NodeDocxRendererHandler<Reference>(Reference.class, new CustomNodeDocxRenderer<Reference>() {
                     @Override
-                    public void render(final Reference node, final DocxRendererContext docx) {
+                    public void render(Reference node, DocxRendererContext docx) {
                         CoreNodeDocxRenderer.this.render(node, docx);
                     }
                 }),
                 new NodeDocxRendererHandler<SoftLineBreak>(SoftLineBreak.class, new CustomNodeDocxRenderer<SoftLineBreak>() {
                     @Override
-                    public void render(final SoftLineBreak node, final DocxRendererContext docx) {
+                    public void render(SoftLineBreak node, DocxRendererContext docx) {
                         CoreNodeDocxRenderer.this.render(node, docx);
                     }
                 }),
                 new NodeDocxRendererHandler<StrongEmphasis>(StrongEmphasis.class, new CustomNodeDocxRenderer<StrongEmphasis>() {
                     @Override
-                    public void render(final StrongEmphasis node, final DocxRendererContext docx) {
+                    public void render(StrongEmphasis node, DocxRendererContext docx) {
                         CoreNodeDocxRenderer.this.render(node, docx);
                     }
                 }),
                 new NodeDocxRendererHandler<Text>(Text.class, new CustomNodeDocxRenderer<Text>() {
                     @Override
-                    public void render(final Text node, final DocxRendererContext docx) {
+                    public void render(Text node, DocxRendererContext docx) {
                         CoreNodeDocxRenderer.this.render(node, docx);
                     }
                 }),
                 new NodeDocxRendererHandler<TextBase>(TextBase.class, new CustomNodeDocxRenderer<TextBase>() {
                     @Override
-                    public void render(final TextBase node, final DocxRendererContext docx) {
+                    public void render(TextBase node, DocxRendererContext docx) {
                         CoreNodeDocxRenderer.this.render(node, docx);
                     }
                 }),
                 new NodeDocxRendererHandler<ThematicBreak>(ThematicBreak.class, new CustomNodeDocxRenderer<ThematicBreak>() {
                     @Override
-                    public void render(final ThematicBreak node, final DocxRendererContext docx) {
+                    public void render(ThematicBreak node, DocxRendererContext docx) {
                         CoreNodeDocxRenderer.this.render(node, docx);
                     }
                 }),
                 new NodeDocxRendererHandler<TableBlock>(TableBlock.class, new CustomNodeDocxRenderer<TableBlock>() {
                     @Override
-                    public void render(TableBlock node, final DocxRendererContext docx) {
+                    public void render(TableBlock node, DocxRendererContext docx) {
                         CoreNodeDocxRenderer.this.render(node, docx);
                     }
                 }),
                 new NodeDocxRendererHandler<TableHead>(TableHead.class, new CustomNodeDocxRenderer<TableHead>() {
                     @Override
-                    public void render(TableHead node, final DocxRendererContext docx) {
+                    public void render(TableHead node, DocxRendererContext docx) {
                         CoreNodeDocxRenderer.this.render(node, docx);
                     }
                 }),
                 new NodeDocxRendererHandler<TableSeparator>(TableSeparator.class, new CustomNodeDocxRenderer<TableSeparator>() {
                     @Override
-                    public void render(TableSeparator node, final DocxRendererContext docx) {
+                    public void render(TableSeparator node, DocxRendererContext docx) {
                         CoreNodeDocxRenderer.this.render(node, docx);
                     }
                 }),
                 new NodeDocxRendererHandler<TableBody>(TableBody.class, new CustomNodeDocxRenderer<TableBody>() {
                     @Override
-                    public void render(TableBody node, final DocxRendererContext docx) {
+                    public void render(TableBody node, DocxRendererContext docx) {
                         CoreNodeDocxRenderer.this.render(node, docx);
                     }
                 }),
                 new NodeDocxRendererHandler<TableRow>(TableRow.class, new CustomNodeDocxRenderer<TableRow>() {
                     @Override
-                    public void render(TableRow node, final DocxRendererContext docx) {
+                    public void render(TableRow node, DocxRendererContext docx) {
                         CoreNodeDocxRenderer.this.render(node, docx);
                     }
                 }),
                 new NodeDocxRendererHandler<TableCell>(TableCell.class, new CustomNodeDocxRenderer<TableCell>() {
                     @Override
-                    public void render(TableCell node, final DocxRendererContext docx) {
+                    public void render(TableCell node, DocxRendererContext docx) {
                         CoreNodeDocxRenderer.this.render(node, docx);
                     }
                 }),
                 new NodeDocxRendererHandler<TableCaption>(TableCaption.class, new CustomNodeDocxRenderer<TableCaption>() {
                     @Override
-                    public void render(TableCaption node, final DocxRendererContext docx) {
+                    public void render(TableCaption node, DocxRendererContext docx) {
                         CoreNodeDocxRenderer.this.render(node, docx);
                     }
                 }),
                 new NodeDocxRendererHandler<TocBlock>(TocBlock.class, new CustomNodeDocxRenderer<TocBlock>() {
                     @Override
-                    public void render(TocBlock node, final DocxRendererContext docx) {
+                    public void render(TocBlock node, DocxRendererContext docx) {
                         CoreNodeDocxRenderer.this.render(node, docx);
                     }
                 }),
                 new NodeDocxRendererHandler<SimTocBlock>(SimTocBlock.class, new CustomNodeDocxRenderer<SimTocBlock>() {
                     @Override
-                    public void render(SimTocBlock node, final DocxRendererContext docx) {
+                    public void render(SimTocBlock node, DocxRendererContext docx) {
                         CoreNodeDocxRenderer.this.render(node, docx);
                     }
                 }),
                 new NodeDocxRendererHandler<EnumeratedReferenceText>(EnumeratedReferenceText.class, new CustomNodeDocxRenderer<EnumeratedReferenceText>() {
                     @Override
-                    public void render(EnumeratedReferenceText node, final DocxRendererContext docx) {
+                    public void render(EnumeratedReferenceText node, DocxRendererContext docx) {
                         CoreNodeDocxRenderer.this.render(node, docx);
                     }
                 }),
                 new NodeDocxRendererHandler<EnumeratedReferenceLink>(EnumeratedReferenceLink.class, new CustomNodeDocxRenderer<EnumeratedReferenceLink>() {
                     @Override
-                    public void render(EnumeratedReferenceLink node, final DocxRendererContext docx) {
+                    public void render(EnumeratedReferenceLink node, DocxRendererContext docx) {
                         CoreNodeDocxRenderer.this.render(node, docx);
                     }
                 }),
                 new NodeDocxRendererHandler<EnumeratedReferenceBlock>(EnumeratedReferenceBlock.class, new CustomNodeDocxRenderer<EnumeratedReferenceBlock>() {
                     @Override
-                    public void render(EnumeratedReferenceBlock node, final DocxRendererContext docx) {
+                    public void render(EnumeratedReferenceBlock node, DocxRendererContext docx) {
                         CoreNodeDocxRenderer.this.render(node, docx);
                     }
                 }),
                 new NodeDocxRendererHandler<AttributesNode>(AttributesNode.class, new CustomNodeDocxRenderer<AttributesNode>() {
                     @Override
-                    public void render(AttributesNode node, final DocxRendererContext docx) {
+                    public void render(AttributesNode node, DocxRendererContext docx) {
                         CoreNodeDocxRenderer.this.render(node, docx);
                     }
                 }),
                 new NodeDocxRendererHandler<Emoji>(Emoji.class, new CustomNodeDocxRenderer<Emoji>() {
                     @Override
-                    public void render(Emoji node, final DocxRendererContext docx) {
+                    public void render(Emoji node, DocxRendererContext docx) {
                         CoreNodeDocxRenderer.this.render(node, docx);
                     }
                 })
         ));
     }
 
-    private void render(final Node node, final DocxRendererContext docx) {
+    private void render(Node node, DocxRendererContext docx) {
         BasedSequence chars = node.getChars();
         MainDocumentPart mdp = docx.getDocxDocument();
         if (node instanceof Block) {
@@ -595,16 +595,16 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
         }
     }
 
-    private void render(final BlankLine node, final DocxRendererContext docx) {
+    private void render(BlankLine node, DocxRendererContext docx) {
         // not rendered
     }
 
-    private void render(final Document node, final DocxRendererContext docx) {
+    private void render(Document node, DocxRendererContext docx) {
         // No rendering itself
         docx.renderChildren(node);
     }
 
-    private void render(final Paragraph node, final DocxRendererContext docx) {
+    private void render(Paragraph node, DocxRendererContext docx) {
         if (node.getParent() instanceof EnumeratedReferenceBlock) {
             // we need to unwrap the paragraphs
             //final String text = new TextCollectingVisitor().collectAndGetText(node);
@@ -635,7 +635,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
         }
     }
 
-    private void render(final Text node, final DocxRendererContext docx) {
+    private void render(Text node, DocxRendererContext docx) {
         docx.text(node.getChars().unescape());
 
 /*
@@ -647,80 +647,80 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
 */
     }
 
-    private void render(final TextBase node, final DocxRendererContext docx) {
+    private void render(TextBase node, DocxRendererContext docx) {
         docx.renderChildren(node);
     }
 
-    private void render(final Emphasis node, final DocxRendererContext docx) {
+    private void render(Emphasis node, DocxRendererContext docx) {
         docx.setRunFormatProvider(new ItalicRunFormatProvider<>(docx, options.noCharacterStyles));
         docx.renderChildren(node);
     }
 
-    private void render(final StrongEmphasis node, final DocxRendererContext docx) {
+    private void render(StrongEmphasis node, DocxRendererContext docx) {
         docx.setRunFormatProvider(new BoldRunFormatProvider<>(docx, options.noCharacterStyles));
         docx.renderChildren(node);
     }
 
-    private void render(final Subscript node, final DocxRendererContext docx) {
+    private void render(Subscript node, DocxRendererContext docx) {
         docx.setRunFormatProvider(new SubscriptRunFormatProvider<>(docx, options.noCharacterStyles));
         docx.renderChildren(node);
     }
 
-    private void render(final Superscript node, final DocxRendererContext docx) {
+    private void render(Superscript node, DocxRendererContext docx) {
         docx.setRunFormatProvider(new SuperscriptRunFormatProvider<>(docx, options.noCharacterStyles));
         docx.renderChildren(node);
     }
 
-    private void render(final Strikethrough node, final DocxRendererContext docx) {
+    private void render(Strikethrough node, DocxRendererContext docx) {
         docx.setRunFormatProvider(new StrikethroughRunFormatProvider<>(docx, options.noCharacterStyles));
         docx.renderChildren(node);
     }
 
-    private void render(final GitLabDel node, final DocxRendererContext docx) {
+    private void render(GitLabDel node, DocxRendererContext docx) {
         docx.setRunFormatProvider(new StrikethroughRunFormatProvider<>(docx, options.noCharacterStyles));
         docx.renderChildren(node);
     }
 
-    private void render(final Ins node, final DocxRendererContext docx) {
+    private void render(Ins node, DocxRendererContext docx) {
         docx.setRunFormatProvider(new UnderlineRunFormatProvider<>(docx, options.noCharacterStyles));
         docx.renderChildren(node);
     }
 
-    private void render(final GitLabIns node, final DocxRendererContext docx) {
+    private void render(GitLabIns node, DocxRendererContext docx) {
         docx.setRunFormatProvider(new UnderlineRunFormatProvider<>(docx, options.noCharacterStyles));
         docx.renderChildren(node);
     }
 
-    private void render(final Code node, final DocxRendererContext docx) {
+    private void render(Code node, DocxRendererContext docx) {
         docx.setRunFormatProvider(new SourceCodeRunFormatProvider<>(docx, options.noCharacterStyles, options.codeHighlightShading));
         docx.renderChildren(node);
     }
 
-    private void render(final Heading node, final DocxRendererContext docx) {
+    private void render(Heading node, DocxRendererContext docx) {
         docx.setBlockFormatProvider(new HeadingBlockFormatProvider<>(docx, node.getLevel() - 1));
         docx.createP();
         docx.renderChildren(node);
     }
 
-    private void render(final BlockQuote node, final DocxRendererContext docx) {
-        final int level = node.countDirectAncestorsOfType(null, BlockQuote.class) + 1;
+    private void render(BlockQuote node, DocxRendererContext docx) {
+        int level = node.countDirectAncestorsOfType(null, BlockQuote.class) + 1;
         docx.setBlockFormatProvider(new QuotedFormatProvider<>(docx, level, docx.getRenderingOptions().BLOCK_QUOTE_STYLE));
         docx.renderChildren(node);
     }
 
-    private void render(final GitLabBlockQuote node, final DocxRendererContext docx) {
-        final int level = node.countDirectAncestorsOfType(null, BlockQuote.class) + 1;
+    private void render(GitLabBlockQuote node, DocxRendererContext docx) {
+        int level = node.countDirectAncestorsOfType(null, BlockQuote.class) + 1;
         docx.setBlockFormatProvider(new QuotedFormatProvider<>(docx, level, docx.getRenderingOptions().BLOCK_QUOTE_STYLE));
         docx.renderChildren(node);
     }
 
-    private void render(final AsideBlock node, final DocxRendererContext docx) {
-        final int level = node.countDirectAncestorsOfType(null, BlockQuote.class) + 1;
+    private void render(AsideBlock node, DocxRendererContext docx) {
+        int level = node.countDirectAncestorsOfType(null, BlockQuote.class) + 1;
         docx.setBlockFormatProvider(new QuotedFormatProvider<>(docx, level, docx.getRenderingOptions().ASIDE_BLOCK_STYLE));
         docx.renderChildren(node);
     }
 
-    private void render(final ThematicBreak node, final DocxRendererContext docx) {
+    private void render(ThematicBreak node, DocxRendererContext docx) {
         // Create object for p
         docx.setBlockFormatProvider(new BlockFormatProviderBase<>(docx, docx.getDocxRendererOptions().HORIZONTAL_LINE_STYLE));
 
@@ -729,8 +729,8 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
         docx.createR();
     }
 
-    private void render(final MacroReference node, final DocxRendererContext docx) {
-        final MacroDefinitionBlock macroDefinitionBlock = node.getReferenceNode(docx.getDocument());
+    private void render(MacroReference node, DocxRendererContext docx) {
+        MacroDefinitionBlock macroDefinitionBlock = node.getReferenceNode(docx.getDocument());
         if (macroDefinitionBlock != null) {
             if (macroDefinitionBlock.hasChildren() && !macroDefinitionBlock.isInExpansion()) {
                 try {
@@ -751,88 +751,98 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
         }
     }
 
-    private void render(final MacroDefinitionBlock node, final DocxRendererContext docx) {
+    private void render(MacroDefinitionBlock node, DocxRendererContext docx) {
 
     }
 
-    private void render(final FencedCodeBlock node, final DocxRendererContext docx) {
+    private void render(FencedCodeBlock node, DocxRendererContext docx) {
         List<BasedSequence> lines = node.getContentLines();
         docx.renderFencedCodeLines(lines);
     }
 
-    private void render(final IndentedCodeBlock node, final DocxRendererContext docx) {
+    private void render(IndentedCodeBlock node, DocxRendererContext docx) {
         List<BasedSequence> lines = node.getContentLines();
         docx.renderFencedCodeLines(lines);
     }
 
-    public void renderList(final ListBlock node, final DocxRendererContext docx) {
+    public void renderList(ListBlock node, DocxRendererContext docx) {
         docx.renderChildren(node);
     }
 
-    private void render(final BulletList node, final DocxRendererContext docx) {
+    private void render(BulletList node, DocxRendererContext docx) {
         renderList(node, docx);
     }
 
-    private void render(final OrderedList node, final DocxRendererContext docx) {
+    private void render(OrderedList node, DocxRendererContext docx) {
         renderList(node, docx);
     }
 
-    private void render(final BulletListItem node, final DocxRendererContext docx) {
+    private void render(BulletListItem node, DocxRendererContext docx) {
         renderListItem(node, docx);
     }
 
-    private void render(final OrderedListItem node, final DocxRendererContext docx) {
+    private void render(OrderedListItem node, DocxRendererContext docx) {
         renderListItem(node, docx);
     }
 
-    private void renderListItem(final ListItem node, final DocxRendererContext docx) {
-        final int nesting = node.countDirectAncestorsOfType(ListItem.class, BulletList.class, OrderedList.class);
-        final DocxRendererOptions options = docx.getDocxRendererOptions();
-        final String listTextStyle = listOptions.isTightListItem(node) ? options.TIGHT_PARAGRAPH_STYLE : options.LOOSE_PARAGRAPH_STYLE;
+    private void renderListItem(ListItem node, DocxRendererContext docx) {
+        int nesting = node.countDirectAncestorsOfType(ListItem.class, BulletList.class, OrderedList.class);
+        DocxRendererOptions options = docx.getDocxRendererOptions();
+        String listTextStyle = listOptions.isTightListItem(node) ? options.TIGHT_PARAGRAPH_STYLE : options.LOOSE_PARAGRAPH_STYLE;
 
         //final boolean inBlockQuote = node.getAncestorOfType(BlockQuote.class) != null;
-        final boolean wantNumbered = node instanceof OrderedListItem;
+        boolean wantNumbered = node instanceof OrderedListItem;
+
         long numId = (wantNumbered ? 3 : 2);// + (inBlockQuote ? 2 : 0);
+        int listLevel = nesting - 1;
+
+        // see if have ListBullet style for unordered list and ListNumber for numbered list
+        String listStyleId = wantNumbered ? "ListNumber" : "ListBullet";
+        Style listStyle = docx.getHelper().getStyle(listStyleId);
+        if (listStyle != null) {
+            PPrBase.NumPr numPr = listStyle.getPPr().getNumPr();
+            if (numPr != null) {
+                numId = numPr.getNumId().getVal().longValue();
+            }
+        }
+
         int newNum = 1;
-        final int listLevel = nesting - 1;
-        final NumberingDefinitionsPart ndp = docx.getDocxDocument().getNumberingDefinitionsPart();
+        NumberingDefinitionsPart ndp = docx.getDocxDocument().getNumberingDefinitionsPart();
+        long idNum = numId;
 
         if (node.getParent() instanceof OrderedList) {
             if (node == node.getParent().getFirstChild()) {
                 newNum = listOptions.isOrderedListManualStart() ? ((OrderedList) node.getParent()).getStartNumber() : 1;
-                numId = ndp.restart(numId, listLevel, newNum);
+                idNum = ndp.restart(numId, listLevel, newNum);
                 ensureNumberedListLength(listLevel);
-                numberedLists[listLevel] = numId;
+                numberedLists[listLevel] = idNum;
             } else {
-                numId = numberedLists[listLevel];
+                idNum = numberedLists[listLevel];
             }
         } else if (node.getParent() instanceof BulletList) {
             if (node == node.getParent().getFirstChild()) {
-                newNum = 1;
-                numId = ndp.restart(numId, listLevel, newNum);
+                idNum = numId;
                 ensureBulletListLength(listLevel);
-                bulletLists[listLevel] = numId;
+                bulletLists[listLevel] = idNum;
             } else {
-                numId = bulletLists[listLevel];
+                idNum = bulletLists[listLevel];
             }
         }
-
-        final long idNum = numId;
 
         docx.setBlockFormatProvider(new ListItemBlockFormatProvider<>(docx, listTextStyle, idNum, listLevel, ListItem.class, ListBlock.class));
         docx.renderChildren(node);
     }
 
-    private void render(final SoftLineBreak node, final DocxRendererContext docx) {
+    private void render(SoftLineBreak node, DocxRendererContext docx) {
         docx.text(" ");
     }
 
-    private void render(final HardLineBreak node, final DocxRendererContext docx) {
+    private void render(HardLineBreak node, DocxRendererContext docx) {
         // add a line break
         docx.addLineBreak();
     }
 
-    private void render(HtmlBlock node, final DocxRendererContext docx) {
+    private void render(HtmlBlock node, DocxRendererContext docx) {
         if (node.hasChildren()) {
             // inner blocks handle rendering
             docx.renderChildren(node);
@@ -841,19 +851,19 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
         }
     }
 
-    private void render(HtmlCommentBlock node, final DocxRendererContext docx) {
+    private void render(HtmlCommentBlock node, DocxRendererContext docx) {
         renderHtmlBlock(node, docx, docx.getDocxRendererOptions().suppressHtmlCommentBlocks, true || docx.getDocxRendererOptions().escapeHtmlCommentBlocks);
     }
 
-    private void render(HtmlInnerBlock node, final DocxRendererContext docx) {
+    private void render(HtmlInnerBlock node, DocxRendererContext docx) {
         renderHtmlBlock(node, docx, docx.getDocxRendererOptions().suppressHtmlBlocks, true || docx.getDocxRendererOptions().escapeHtmlBlocks);
     }
 
-    private void render(HtmlInnerBlockComment node, final DocxRendererContext docx) {
+    private void render(HtmlInnerBlockComment node, DocxRendererContext docx) {
         renderHtmlBlock(node, docx, docx.getDocxRendererOptions().suppressHtmlCommentBlocks, true || docx.getDocxRendererOptions().escapeHtmlCommentBlocks);
     }
 
-    public void renderHtmlBlock(final HtmlBlockBase node, final DocxRendererContext docx, boolean suppress, boolean escape) {
+    public void renderHtmlBlock(HtmlBlockBase node, DocxRendererContext docx, boolean suppress, boolean escape) {
         if (suppress) return;
 
         if (escape) {
@@ -872,14 +882,14 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
             //docx.text(normalizeEOL);
         } else {
             try {
-                docx.getDocxDocument().addAltChunk(AltChunkType.Html, node.getChars().toString().getBytes(Charset.forName("UTF-8")));
+                docx.getDocxDocument().addAltChunk(AltChunkType.Html, node.getChars().toString().getBytes(StandardCharsets.UTF_8));
             } catch (Docx4JException e) {
                 e.printStackTrace();
             }
         }
     }
 
-    private void render(final HtmlInline node, final DocxRendererContext docx) {
+    private void render(HtmlInline node, DocxRendererContext docx) {
         //if (docx.getDocxRendererOptions().sourceWrapInlineHtml) {
         //    html.srcPos(node.getChars()).withAttr(AttributablePart.NODE_POSITION).tag("span");
         //}
@@ -889,11 +899,11 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
         //}
     }
 
-    private void render(final HtmlInlineComment node, final DocxRendererContext docx) {
+    private void render(HtmlInlineComment node, DocxRendererContext docx) {
         renderInlineHtml(node, docx, docx.getDocxRendererOptions().suppressInlineHtmlComments, true || docx.getDocxRendererOptions().escapeInlineHtmlComments);
     }
 
-    public void renderInlineHtml(final HtmlInlineBase node, final DocxRendererContext docx, boolean suppress, boolean escape) {
+    public void renderInlineHtml(HtmlInlineBase node, DocxRendererContext docx, boolean suppress, boolean escape) {
         if (linebreakOnInlineHtmlBr && node.getChars().unescape().matches("<br\\s*/?>")) {
             // start a new hard-break
             docx.addLineBreak();
@@ -919,28 +929,28 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
         }
     }
 
-    private void render(final Reference node, final DocxRendererContext docx) {
+    private void render(Reference node, DocxRendererContext docx) {
 
     }
 
-    private void render(final HtmlEntity node, final DocxRendererContext docx) {
+    private void render(HtmlEntity node, DocxRendererContext docx) {
         docx.text(node.getChars().unescape());
     }
 
-    private void renderURL(final BasedSequence urlSource, final DocxRendererContext docx, final String linkUrl) {
+    private void renderURL(BasedSequence urlSource, DocxRendererContext docx, String linkUrl) {
         renderURL(urlSource, docx, linkUrl, linkUrl);
     }
 
-    private void renderURL(final BasedSequence urlSource, final DocxRendererContext docx, final String linkUrl, final String linkText) {
+    private void renderURL(BasedSequence urlSource, DocxRendererContext docx, String linkUrl, String linkText) {
         renderURL(urlSource, docx, linkUrl, null, new UrlRenderer(docx, linkText, linkUrl));
     }
 
-    private void renderURL(final BasedSequence urlSrc, final DocxRendererContext docx, final String linkUrl, final Attributes attributes, final Runnable runnable) {
+    private void renderURL(BasedSequence urlSrc, DocxRendererContext docx, String linkUrl, Attributes attributes, Runnable runnable) {
         P p = docx.getP();
 
         String linkTitle = attributes != null && attributes.contains(Attribute.TITLE_ATTR) ? attributes.getValue(Attribute.TITLE_ATTR) : "";
 
-        final P.Hyperlink hyperlink = docx.getFactory().createPHyperlink();
+        P.Hyperlink hyperlink = docx.getFactory().createPHyperlink();
         JAXBElement<P.Hyperlink> wrappedHyperlink = docx.getFactory().createPHyperlink(hyperlink);
         p.getContent().add(wrappedHyperlink);
         String highlightMissing = "";
@@ -951,14 +961,14 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
             // local, we use anchor
 
             // see if we need to adjust it
-            final String nodeId = linkUrl.substring(1);
+            String nodeId = linkUrl.substring(1);
             if (docx.getNodeFromId(nodeId) == null) {
                 highlightMissing = docx.getRenderingOptions().localHyperlinkMissingHighlight;
                 linkTooltipText = String.format(docx.getRenderingOptions().localHyperlinkMissingFormat, nodeId);
 
                 if (docx.getDocxRendererOptions().errorsToStdErr) {
                     // output details of error
-                    final Pair<Integer, Integer> atIndex = urlSrc.getBaseSequence().getLineColumnAtIndex(urlSrc.getStartOffset());
+                    Pair<Integer, Integer> atIndex = urlSrc.getBaseSequence().getLineColumnAtIndex(urlSrc.getStartOffset());
                     String sourceFile = docx.getDocxRendererOptions().errorSourceFile;
                     if (sourceFile.isEmpty()) {
                         sourceFile = "on line ";
@@ -968,7 +978,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
                     System.err.println(String.format(Locale.US, "    WARN: Invalid anchor target '%s' %s%d:%d", nodeId, sourceFile, atIndex.getFirst() + 1, atIndex.getSecond() + 2));
                 }
             }
-            final String anchor = docx.getValidBookmarkName(nodeId) + options.localHyperlinkSuffix;
+            String anchor = docx.getValidBookmarkName(nodeId) + options.localHyperlinkSuffix;
             hyperlink.setAnchor(anchor);
             linkUrlText = String.format("#%s", anchor);
         } else {
@@ -1033,16 +1043,16 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
         }
     }
 
-    private void render(final AutoLink node, final DocxRendererContext docx) {
-        final String url = node.getChars().unescape();
+    private void render(AutoLink node, DocxRendererContext docx) {
+        String url = node.getChars().unescape();
         renderURL(node.getChars(), docx, url);
     }
 
-    private void render(final MailLink node, final DocxRendererContext docx) {
+    private void render(MailLink node, DocxRendererContext docx) {
         renderURL(node.getChars(), docx, "mailto:" + node.getChars().unescape());
     }
 
-    private void render(final Link node, final DocxRendererContext docx) {
+    private void render(Link node, DocxRendererContext docx) {
         ResolvedLink resolvedLink = docx.resolveLink(LinkType.LINK, node.getUrl().unescape(), null, null);
 
         // we have a title part, use that
@@ -1059,7 +1069,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
         renderURL(node.getUrl(), docx, resolvedLink.getUrl(), attributes, new ChildRenderer(docx, node));
     }
 
-    private void render(final LinkRef node, final DocxRendererContext docx) {
+    private void render(LinkRef node, DocxRendererContext docx) {
         ResolvedLink resolvedLink = null;
 
         if (!node.isDefined() && recheckUndefinedReferences) {
@@ -1150,7 +1160,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
         return longValue;
     }
 
-    public R newImage(final DocxRendererContext docx, byte[] bytes, String filenameHint, Attributes attributes, int id1, int id2) {
+    public R newImage(DocxRendererContext docx, byte[] bytes, String filenameHint, Attributes attributes, int id1, int id2) {
         try {
             BinaryPartAbstractImage imagePart = null;
             imagePart = BinaryPartAbstractImage.createImagePart(docx.getPackage(), docx.getContainerPart(), bytes);
@@ -1197,7 +1207,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
         return null;
     }
 
-    private void render(final Image node, final DocxRendererContext docx) {
+    private void render(Image node, DocxRendererContext docx) {
         String altText = new TextCollectingVisitor().collectAndGetText(node);
         ResolvedLink resolvedLink = docx.resolveLink(LinkType.IMAGE, node.getUrl().unescape(), null, null);
         String url = resolvedLink.getUrl();
@@ -1219,8 +1229,8 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
         renderImage(docx, url, attributes);
     }
 
-    private void render(final Emoji node, final DocxRendererContext docx) {
-        final EmojiResolvedShortcut shortcut = EmojiResolvedShortcut.getEmojiText(node, emojiOptions.useShortcutType, emojiOptions.useImageType, emojiOptions.rootImagePath);
+    private void render(Emoji node, DocxRendererContext docx) {
+        EmojiResolvedShortcut shortcut = EmojiResolvedShortcut.getEmojiText(node, emojiOptions.useShortcutType, emojiOptions.useImageType, emojiOptions.rootImagePath);
 
         if (shortcut.emoji == null || shortcut.emojiText == null) {
             // output as text
@@ -1256,7 +1266,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
                 StyleUtil.apply(paraRPr, rPr);
 
                 // now see if we have line height
-                final HpsMeasure sz = rPr.getSz();
+                HpsMeasure sz = rPr.getSz();
                 long l = -1;
                 if (sz != null) {
                     l = sz.getVal().longValue();
@@ -1297,7 +1307,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
         }
     }
 
-    private void render(final ImageRef node, final DocxRendererContext docx) {
+    private void render(ImageRef node, DocxRendererContext docx) {
         ResolvedLink resolvedLink;
 
         if (!node.isDefined() && recheckUndefinedReferences) {
@@ -1352,7 +1362,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
         }
     }
 
-    private R renderImage(final DocxRendererContext docx, String url, final Attributes attributes) {
+    private R renderImage(DocxRendererContext docx, String url, Attributes attributes) {
         BufferedImage image = null;
         int id1 = imageId++;
         int id2 = imageId++;
@@ -1402,14 +1412,14 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
     private Tbl myTbl;
     private Tr myTr;
 
-    private void render(final TableBlock node, final DocxRendererContext docx) {
+    private void render(TableBlock node, DocxRendererContext docx) {
         // if we have a caption and it goes before the table, we add it here
-        final Node caption = node.getFirstChildAny(TableCaption.class);
+        Node caption = node.getFirstChildAny(TableCaption.class);
         if (caption != null && tableCaptionBeforeTable) {
             renderTableCaption((TableCaption) caption, docx);
         }
 
-        final Tbl savedTbl = myTbl;
+        Tbl savedTbl = myTbl;
 
         myTbl = docx.getFactory().createTbl();
         JAXBElement<org.docx4j.wml.Tbl> tblWrapped = docx.getFactory().createHdrTbl(myTbl);
@@ -1463,7 +1473,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
         TblWidth tblInd = docx.getFactory().createTblWidth();
         tblpr.setTblInd(tblInd);
         tblInd.setType("dxa");
-        final BigInteger tableInd = BigInteger.valueOf(tableLeftIndent).add(docx.getHelper().safeIndLeft(pPr.getInd()));
+        BigInteger tableInd = BigInteger.valueOf(tableLeftIndent).add(docx.getHelper().safeIndLeft(pPr.getInd()));
         tblInd.setW(tableInd);
 
         docx.setBlockFormatProvider(new IsolatingBlockFormatProvider<>(docx));
@@ -1554,19 +1564,19 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
         myTbl = savedTbl;
     }
 
-    private void render(final TableHead node, final DocxRendererContext docx) {
+    private void render(TableHead node, DocxRendererContext docx) {
         docx.renderChildren(node);
     }
 
-    private void render(TableSeparator tableSeparator, final DocxRendererContext docx) {
+    private void render(TableSeparator tableSeparator, DocxRendererContext docx) {
 
     }
 
-    private void render(final TableBody node, final DocxRendererContext docx) {
+    private void render(TableBody node, DocxRendererContext docx) {
         docx.renderChildren(node);
     }
 
-    private void render(final TableRow node, final DocxRendererContext docx) {
+    private void render(TableRow node, DocxRendererContext docx) {
         Tr savedTr = myTr;
         myTr = docx.getFactory().createTr();
         myTbl.getContent().add(myTr);
@@ -1586,7 +1596,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
         myTr = savedTr;
     }
 
-    private void render(final TableCaption node, final DocxRendererContext docx) {
+    private void render(TableCaption node, DocxRendererContext docx) {
         // TODO: figure out how to set caption
         // table caption not yet supported by docx4j API
         //final TblPr tblPr = myTbl.getTblPr();
@@ -1597,17 +1607,17 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
         }
     }
 
-    private void renderTableCaption(final TableCaption node, final DocxRendererContext docx) {
+    private void renderTableCaption(TableCaption node, DocxRendererContext docx) {
         if (tableCaptionToParagraph) {
             docx.contextFramed(new TableCaptionRenderer(docx, node));
         }
     }
 
-    private void render(final TableCell node, final DocxRendererContext docx) {
+    private void render(TableCell node, DocxRendererContext docx) {
         String styleName = node.isHeader() ? docx.getDocxRendererOptions().TABLE_HEADING : docx.getDocxRendererOptions().TABLE_CONTENTS;
 
         // Create object for tc (wrapped in JAXBElement)
-        final Tc tc = docx.getFactory().createTc();
+        Tc tc = docx.getFactory().createTc();
         JAXBElement<org.docx4j.wml.Tc> tcWrapped = docx.getFactory().createTrTc(tc);
         myTr.getContent().add(tcWrapped);
         // Create object for tcPr
@@ -1624,7 +1634,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
             }
         }
 
-        final boolean[] firstP = new boolean[] { true };
+        boolean[] firstP = new boolean[] { true };
         docx.setContentContainer(new TableCellContentContainer(tc, docx, firstP));
         docx.setBlockFormatProvider(new BlockFormatProviderBase<>(docx, styleName));
         docx.setParaContainer(new TableCellParaContainer(node, tc, docx, firstP));
@@ -1656,24 +1666,24 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
         throw new IllegalStateException("Unknown alignment: " + alignment);
     }
 
-    private void render(FootnoteBlock node, final DocxRendererContext docx) {
+    private void render(FootnoteBlock node, DocxRendererContext docx) {
 
     }
 
-    private void render(Footnote node, final DocxRendererContext docx) {
-        final FootnoteBlock footnoteBlock = node.getFootnoteBlock();
+    private void render(Footnote node, DocxRendererContext docx) {
+        FootnoteBlock footnoteBlock = node.getFootnoteBlock();
         if (footnoteBlock == null) {
             //just text
-            final org.docx4j.wml.Text text = docx.addWrappedText();
+            org.docx4j.wml.Text text = docx.addWrappedText();
             text.setValue("[^");
             docx.renderChildren(node);
-            final org.docx4j.wml.Text text1 = docx.addWrappedText();
+            org.docx4j.wml.Text text1 = docx.addWrappedText();
             text1.setValue("]");
         } else {
             try {
                 BigInteger footnoteId = footnoteIDs.containsKey(footnoteBlock) ? footnoteIDs.get(footnoteBlock) : BigInteger.ZERO;
-                final CTFtnEdn ftnEdn = docx.addFootnote(footnoteId);
-                final BigInteger ftnEdnId = ftnEdn.getId();
+                CTFtnEdn ftnEdn = docx.addFootnote(footnoteId);
+                BigInteger ftnEdnId = ftnEdn.getId();
                 if (ftnEdnId.compareTo(footnoteId) != 0) {
                     // Word does not like re-using footnotes, so we create a new one for every reference
                     //footnoteIDs.put(footnoteBlock, ftnEdnId);
@@ -1685,15 +1695,15 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
         }
     }
 
-    private void render(TocBlock node, final DocxRendererContext docx) {
+    private void render(TocBlock node, DocxRendererContext docx) {
         lastTocBlock = node;
     }
 
-    private void render(SimTocBlock node, final DocxRendererContext docx) {
+    private void render(SimTocBlock node, DocxRendererContext docx) {
         lastTocBlock = node;
     }
 
-    private void render(EnumeratedReferenceText node, final DocxRendererContext docx) {
+    private void render(EnumeratedReferenceText node, DocxRendererContext docx) {
         String text = node.getText().toString();
 
         if (text.isEmpty()) {
@@ -1713,14 +1723,14 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
         }
     }
 
-    private void render(final EnumeratedReferenceLink node, final DocxRendererContext docx) {
-        final String text = node.getText().toString();
+    private void render(EnumeratedReferenceLink node, DocxRendererContext docx) {
+        String text = node.getText().toString();
 
         if (text.isEmpty()) {
             // placeholder for ordinal
             if (ordinalRunnable != null) ordinalRunnable.run();
         } else {
-            final EnumeratedReferenceRendering[] renderings = enumeratedOrdinals.getEnumeratedReferenceOrdinals(text);
+            EnumeratedReferenceRendering[] renderings = enumeratedOrdinals.getEnumeratedReferenceOrdinals(text);
 
             String title = new EnumRefTextCollectingVisitor().collectAndGetText(node.getChars().getBaseSequence(), renderings, null);
             Attributes attributes = new Attributes();
@@ -1743,18 +1753,18 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
         final CoreNodeDocxRenderer renderer;
         final DocxRendererContext docx;
 
-        public OrdinalRenderer(final CoreNodeDocxRenderer renderer, final DocxRendererContext docx) {
+        public OrdinalRenderer(CoreNodeDocxRenderer renderer, DocxRendererContext docx) {
             this.renderer = renderer;
             this.docx = docx;
         }
 
         @Override
-        public void startRendering(final EnumeratedReferenceRendering[] renderings) {
+        public void startRendering(EnumeratedReferenceRendering[] renderings) {
 
         }
 
         @Override
-        public void setEnumOrdinalRunnable(final Runnable runnable) {
+        public void setEnumOrdinalRunnable(Runnable runnable) {
             renderer.ordinalRunnable = runnable;
         }
 
@@ -1764,8 +1774,8 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
         }
 
         @Override
-        public void render(final int referenceOrdinal, final EnumeratedReferenceBlock referenceFormat, final String defaultText, final boolean needSeparator) {
-            final Runnable compoundRunnable = renderer.ordinalRunnable;
+        public void render(int referenceOrdinal, EnumeratedReferenceBlock referenceFormat, String defaultText, boolean needSeparator) {
+            Runnable compoundRunnable = renderer.ordinalRunnable;
 
             if (referenceFormat != null) {
                 renderer.ordinalRunnable = new Runnable() {
@@ -1795,11 +1805,11 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
         }
     }
 
-    private void render(EnumeratedReferenceBlock node, final DocxRendererContext docx) {
+    private void render(EnumeratedReferenceBlock node, DocxRendererContext docx) {
 
     }
 
-    private void render(AttributesNode node, final DocxRendererContext docx) {
+    private void render(AttributesNode node, DocxRendererContext docx) {
 
     }
 
@@ -1808,7 +1818,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
         private final String myLinkText;
         private final String myLinkUrl;
 
-        public UrlRenderer(final DocxRendererContext docx, final String linkText, final String linkUrl) {
+        public UrlRenderer(DocxRendererContext docx, String linkText, String linkUrl) {
             myDocx = docx;
             myLinkText = linkText;
             myLinkUrl = linkUrl;
@@ -1824,18 +1834,18 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
     private static class UrlRunContainer implements RunContainer {
         private final P.Hyperlink myHyperlink;
 
-        public UrlRunContainer(final P.Hyperlink hyperlink) {myHyperlink = hyperlink;}
+        public UrlRunContainer(P.Hyperlink hyperlink) {myHyperlink = hyperlink;}
 
         @Override
-        public void addR(final R r) {
+        public void addR(R r) {
             myHyperlink.getContent().add(r);
         }
 
         @Override
         public R getLastR() {
-            final List<Object> content = myHyperlink.getContent();
+            List<Object> content = myHyperlink.getContent();
             if (content == null || content.size() == 0) return null;
-            final Object o = content.get(content.size() - 1);
+            Object o = content.get(content.size() - 1);
             return o instanceof R ? (R) o : null;
         }
     }
@@ -1844,7 +1854,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
         private final DocxRendererContext myDocx;
         private final Node myNode;
 
-        public ChildRenderer(final DocxRendererContext docx, final Node node) {
+        public ChildRenderer(DocxRendererContext docx, Node node) {
             myDocx = docx;
             myNode = node;
         }
@@ -1860,7 +1870,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
         final CTFtnEdn myFtnEdn;
         private final FootnoteBlock myFootnoteBlock;
 
-        public FootnoteFrame(final DocxRendererContext docx, final CTFtnEdn ftnEdn, final FootnoteBlock footnoteBlock) {
+        public FootnoteFrame(DocxRendererContext docx, CTFtnEdn ftnEdn, FootnoteBlock footnoteBlock) {
             myDocx = docx;
             myFtnEdn = ftnEdn;
             myFootnoteBlock = footnoteBlock;
@@ -1872,15 +1882,15 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
             myDocx.setRunFormatProvider(new FootnoteRunFormatProvider<>(myDocx));
             myDocx.setParaContainer(new ParaContainer() {
                 @Override
-                public void addP(final P p) {
+                public void addP(P p) {
                     myFtnEdn.getContent().add(p);
                 }
 
                 @Override
                 public P getLastP() {
-                    final List<Object> content = myFtnEdn.getContent();
+                    List<Object> content = myFtnEdn.getContent();
                     if (content == null || content.size() == 0) return null;
-                    final Object o = content.get(content.size() - 1);
+                    Object o = content.get(content.size() - 1);
                     return o instanceof P ? (P) o : null;
                 }
             });
@@ -1913,12 +1923,12 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
 
                 @Override
                 public Object getLastContentElement() {
-                    final List<Object> content = getContent();
+                    List<Object> content = getContent();
                     return content != null && content.size() > 0 ? content.get(content.size() - 1) : null;
                 }
 
                 @Override
-                public void addContentElement(final Object element) {
+                public void addContentElement(Object element) {
                     getContent().add(element);
                 }
             });
@@ -1930,7 +1940,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
         private final DocxRendererContext myDocx;
         private final TableCaption myNode;
 
-        public TableCaptionRenderer(final DocxRendererContext docx, final TableCaption node) {
+        public TableCaptionRenderer(DocxRendererContext docx, TableCaption node) {
             myDocx = docx;
             myNode = node;
         }
@@ -1949,7 +1959,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
         private final Part myContainerPart;
         private final boolean[] myFirstP;
 
-        public TableCellContentContainer(final Tc tc, final DocxRendererContext docx, final boolean[] firstP) {
+        public TableCellContentContainer(Tc tc, DocxRendererContext docx, boolean[] firstP) {
             myTc = tc;
             myDocx = docx;
             myFirstP = firstP;
@@ -1973,12 +1983,12 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
 
         @Override
         public Object getLastContentElement() {
-            final List<Object> content = myTc.getContent();
+            List<Object> content = myTc.getContent();
             return content != null && content.size() > 0 ? content.get(content.size() - 1) : null;
         }
 
         @Override
-        public void addContentElement(final Object element) {
+        public void addContentElement(Object element) {
             myTc.getContent().add(element);
             myFirstP[0] = false;
         }
@@ -1990,7 +2000,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
         private final DocxRendererContext myDocx;
         private final boolean[] myFirstP;
 
-        public TableCellParaContainer(final TableCell node, final Tc tc, final DocxRendererContext docx, final boolean[] firstP) {
+        public TableCellParaContainer(TableCell node, Tc tc, DocxRendererContext docx, boolean[] firstP) {
             myNode = node;
             myTc = tc;
             myDocx = docx;
@@ -1998,14 +2008,14 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
         }
 
         @Override
-        public void addP(final P p) {
+        public void addP(P p) {
             myFirstP[0] = false;
             myTc.getContent().add(p);
         }
 
         @Override
         public P getLastP() {
-            final List<Object> content = myTc.getContent();
+            List<Object> content = myTc.getContent();
             if (myFirstP[0] && (content == null || content.size() == 0)) {
                 // Create object for p
                 P p = myDocx.createP();
@@ -2024,7 +2034,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
             }
 
             if (content == null || content.size() == 0) return null;
-            final Object o = content.get(content.size() - 1);
+            Object o = content.get(content.size() - 1);
             return o instanceof P ? (P) o : null;
         }
     }

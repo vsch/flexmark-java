@@ -50,7 +50,9 @@ public class ComboDeDocxConverterSpecTest extends ComboSpecTestCase {
     private static final String FILE_TEST_CASE_DUMP_LOCATION = "/flexmark-docx-converter/src/test/resources/docx_converter_de_ast_spec/";
     private static final String FILE_ALL_TESTS_DUMP_NAME = FILE_TEST_CASE_DUMP_LOCATION + "AllTests";
 
-    private static final String SPEC_RESOURCE = "/docx_converter_ast_spec.md";
+    private static final String SPEC_RESOURCE = "/docx_converter_de_ast_spec.md";
+    private static final String TEMPLATE_XML = "/DE-Template.xml";
+
     private static final DataHolder OPTIONS = new MutableDataSet()
             .set(HtmlRenderer.INDENT_SIZE, 2)
             .set(Parser.EXTENSIONS, Arrays.asList(
@@ -74,6 +76,7 @@ public class ComboDeDocxConverterSpecTest extends ComboSpecTestCase {
             .set(DocxRenderer.DOC_RELATIVE_URL, String.format("file://%s", PROJECT_ROOT_DIRECTORY))
             .set(DocxRenderer.DOC_ROOT_URL, String.format("file://%s/assets", PROJECT_ROOT_DIRECTORY))
             .set(DocxRenderer.SUPPRESS_HTML, true)
+            .set(DocxRenderer.DEFAULT_TEMPLATE_RESOURCE, TEMPLATE_XML)
             //.set(HtmlRenderer.PERCENT_ENCODE_URLS, true)
             ;
 
@@ -83,7 +86,6 @@ public class ComboDeDocxConverterSpecTest extends ComboSpecTestCase {
     private static final Parser PARSER = Parser.builder(OPTIONS).build();
     // The spec says URL-escaping is optional, but the examples assume that it's enabled.
     private static final DocxRenderer RENDERER = DocxRenderer.builder(OPTIONS).build();
-    private static final String TEMPLATE_XML = "/DE-Template.xml";
     static {
         //optionsMap.put("src-pos", new MutableDataSet().set(HtmlRenderer.SOURCE_POSITION_ATTRIBUTE, "md-pos"));
         //optionsMap.put("option1", new MutableDataSet().set(DocxConverterExtension.DOCX_CONVERTER_OPTION1, true));
@@ -309,6 +311,11 @@ public class ComboDeDocxConverterSpecTest extends ComboSpecTestCase {
         File file = new File(String.format("%s%s.docx", PROJECT_ROOT_DIRECTORY, FILE_ALL_TESTS_DUMP_NAME));
         File file2 = new File(String.format("%s%s.xml", PROJECT_ROOT_DIRECTORY, FILE_ALL_TESTS_DUMP_NAME));
         WordprocessingMLPackage mlPackage = myPackage;
+
+        File parentDir = file.getParentFile();
+        if (!parentDir.exists()) {
+            parentDir.mkdirs();
+        }
 
         try {
             mlPackage.save(file, Docx4J.FLAG_SAVE_ZIP_FILE);

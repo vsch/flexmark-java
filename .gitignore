@@ -20,3 +20,5 @@ target/
 /FlexmarkJavaAssets/EmojiReference/EmojiList-v11.0.html
 /flexmark-docx-converter/src/test/resources/omml2mathml.xsl
 /.idea/serialmonitor_settings.xml
+/flexmark-pdf-converter/src/test/resources/html_sample.html
+/flexmark-docx-converter/src/test/resources/docx_converter_ast_spec2/

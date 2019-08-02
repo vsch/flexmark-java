@@ -47,7 +47,7 @@ public class ComboDocxConverterSpec2Test extends ComboSpecTestCase {
     static final boolean DUMP_TEST_CASE_FILES = !SKIP_IGNORED_TESTS;
     static final boolean DUMP_ALL_TESTS_FILES = !SKIP_IGNORED_TESTS;
     static final String PROJECT_ROOT_DIRECTORY = "/Users/vlad/src/projects/flexmark-java";
-    static final String FILE_TEST_CASE_DUMP_LOCATION = "/flexmark-docx-converter/src/test/resources/docx_converter_ast_spec/";
+    static final String FILE_TEST_CASE_DUMP_LOCATION = "/flexmark-docx-converter/src/test/resources/docx_converter_ast_spec2/";
     static final String FILE_ALL_TESTS_DUMP_NAME = FILE_TEST_CASE_DUMP_LOCATION + "AllTests2";
 
     private static final String SPEC_RESOURCE = "/docx_converter_ast_spec2.md";
@@ -308,6 +308,11 @@ public class ComboDocxConverterSpec2Test extends ComboSpecTestCase {
         File file = new File(String.format("%s%s.docx", PROJECT_ROOT_DIRECTORY, FILE_ALL_TESTS_DUMP_NAME));
         File file2 = new File(String.format("%s%s.xml", PROJECT_ROOT_DIRECTORY, FILE_ALL_TESTS_DUMP_NAME));
         WordprocessingMLPackage mlPackage = myPackage;
+
+        File parentDir = file.getParentFile();
+        if (!parentDir.exists()) {
+            parentDir.mkdirs();
+        }
 
         try {
             mlPackage.save(file, Docx4J.FLAG_SAVE_ZIP_FILE);

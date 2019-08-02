@@ -936,7 +936,7 @@ Aside Block Numbered List
             <w:pStyle w:val="ParagraphTextBody"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
-                <w:numId w:val="5"/>
+                <w:numId w:val="2"/>
             </w:numPr>
         </w:pPr>
         <w:r>
@@ -948,7 +948,7 @@ Aside Block Numbered List
             <w:pStyle w:val="ParagraphTextBody"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
-                <w:numId w:val="5"/>
+                <w:numId w:val="2"/>
             </w:numPr>
         </w:pPr>
         <w:r>
@@ -968,7 +968,7 @@ Aside Block Numbered List
             <w:pStyle w:val="BodyText"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
-                <w:numId w:val="6"/>
+                <w:numId w:val="2"/>
             </w:numPr>
         </w:pPr>
         <w:r>
@@ -980,7 +980,7 @@ Aside Block Numbered List
             <w:pStyle w:val="BodyText"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
-                <w:numId w:val="6"/>
+                <w:numId w:val="2"/>
             </w:numPr>
         </w:pPr>
         <w:r>
@@ -1070,7 +1070,7 @@ Aside Block Numbered List
             <w:pStyle w:val="BodyText"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
-                <w:numId w:val="7"/>
+                <w:numId w:val="2"/>
             </w:numPr>
         </w:pPr>
         <w:r>
@@ -1091,7 +1091,7 @@ Aside Block Numbered List
             <w:pStyle w:val="BodyText"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
-                <w:numId w:val="7"/>
+                <w:numId w:val="2"/>
             </w:numPr>
         </w:pPr>
         <w:r>
@@ -1112,7 +1112,7 @@ Aside Block Numbered List
             <w:pStyle w:val="BodyText"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
-                <w:numId w:val="7"/>
+                <w:numId w:val="2"/>
             </w:numPr>
         </w:pPr>
         <w:r>
@@ -1133,7 +1133,7 @@ Aside Block Numbered List
             <w:pStyle w:val="BodyText"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
-                <w:numId w:val="7"/>
+                <w:numId w:val="2"/>
             </w:numPr>
         </w:pPr>
         <w:r>
@@ -1154,7 +1154,7 @@ Aside Block Numbered List
             <w:pStyle w:val="BodyText"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
-                <w:numId w:val="7"/>
+                <w:numId w:val="2"/>
             </w:numPr>
         </w:pPr>
         <w:r>
@@ -1175,7 +1175,7 @@ Aside Block Numbered List
             <w:pStyle w:val="BodyText"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
-                <w:numId w:val="7"/>
+                <w:numId w:val="2"/>
             </w:numPr>
         </w:pPr>
         <w:r>
@@ -1196,7 +1196,7 @@ Aside Block Numbered List
             <w:pStyle w:val="BodyText"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
-                <w:numId w:val="7"/>
+                <w:numId w:val="2"/>
             </w:numPr>
         </w:pPr>
         <w:r>
@@ -1217,7 +1217,7 @@ Aside Block Numbered List
             <w:pStyle w:val="BodyText"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
-                <w:numId w:val="7"/>
+                <w:numId w:val="2"/>
             </w:numPr>
         </w:pPr>
         <w:r>
@@ -1240,7 +1240,7 @@ Aside Block Numbered List
             <w:pStyle w:val="BodyText"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
-                <w:numId w:val="7"/>
+                <w:numId w:val="2"/>
             </w:numPr>
         </w:pPr>
         <w:r>
@@ -1450,7 +1450,7 @@ Aside Block Numbered List
             <w:pStyle w:val="BodyText"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
-                <w:numId w:val="8"/>
+                <w:numId w:val="2"/>
             </w:numPr>
         </w:pPr>
         <w:r>
@@ -1462,7 +1462,7 @@ Aside Block Numbered List
             <w:pStyle w:val="BodyText"/>
             <w:numPr>
                 <w:ilvl w:val="1"/>
-                <w:numId w:val="9"/>
+                <w:numId w:val="2"/>
             </w:numPr>
         </w:pPr>
         <w:r>
@@ -1474,7 +1474,7 @@ Aside Block Numbered List
             <w:pStyle w:val="BodyText"/>
             <w:numPr>
                 <w:ilvl w:val="2"/>
-                <w:numId w:val="10"/>
+                <w:numId w:val="2"/>
             </w:numPr>
         </w:pPr>
         <w:r>
@@ -1486,7 +1486,7 @@ Aside Block Numbered List
             <w:pStyle w:val="BodyText"/>
             <w:numPr>
                 <w:ilvl w:val="3"/>
-                <w:numId w:val="11"/>
+                <w:numId w:val="2"/>
             </w:numPr>
         </w:pPr>
         <w:r>
@@ -1498,7 +1498,7 @@ Aside Block Numbered List
             <w:pStyle w:val="BodyText"/>
             <w:numPr>
                 <w:ilvl w:val="4"/>
-                <w:numId w:val="12"/>
+                <w:numId w:val="2"/>
             </w:numPr>
         </w:pPr>
         <w:r>
@@ -1510,7 +1510,7 @@ Aside Block Numbered List
             <w:pStyle w:val="BodyText"/>
             <w:numPr>
                 <w:ilvl w:val="5"/>
-                <w:numId w:val="13"/>
+                <w:numId w:val="2"/>
             </w:numPr>
         </w:pPr>
         <w:r>
@@ -1522,7 +1522,7 @@ Aside Block Numbered List
             <w:pStyle w:val="BodyText"/>
             <w:numPr>
                 <w:ilvl w:val="6"/>
-                <w:numId w:val="14"/>
+                <w:numId w:val="2"/>
             </w:numPr>
         </w:pPr>
         <w:r>
@@ -1534,7 +1534,7 @@ Aside Block Numbered List
             <w:pStyle w:val="BodyText"/>
             <w:numPr>
                 <w:ilvl w:val="7"/>
-                <w:numId w:val="15"/>
+                <w:numId w:val="2"/>
             </w:numPr>
         </w:pPr>
         <w:r>
@@ -1546,7 +1546,7 @@ Aside Block Numbered List
             <w:pStyle w:val="BodyText"/>
             <w:numPr>
                 <w:ilvl w:val="8"/>
-                <w:numId w:val="16"/>
+                <w:numId w:val="2"/>
             </w:numPr>
         </w:pPr>
         <w:r>
@@ -1566,7 +1566,7 @@ Aside Block Numbered List
             <w:pStyle w:val="BodyText"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
-                <w:numId w:val="17"/>
+                <w:numId w:val="5"/>
             </w:numPr>
         </w:pPr>
         <w:r>
@@ -1578,7 +1578,7 @@ Aside Block Numbered List
             <w:pStyle w:val="BodyText"/>
             <w:numPr>
                 <w:ilvl w:val="1"/>
-                <w:numId w:val="18"/>
+                <w:numId w:val="6"/>
             </w:numPr>
         </w:pPr>
         <w:r>
@@ -1590,7 +1590,7 @@ Aside Block Numbered List
             <w:pStyle w:val="BodyText"/>
             <w:numPr>
                 <w:ilvl w:val="2"/>
-                <w:numId w:val="19"/>
+                <w:numId w:val="7"/>
             </w:numPr>
         </w:pPr>
         <w:r>
@@ -1602,7 +1602,7 @@ Aside Block Numbered List
             <w:pStyle w:val="BodyText"/>
             <w:numPr>
                 <w:ilvl w:val="3"/>
-                <w:numId w:val="20"/>
+                <w:numId w:val="8"/>
             </w:numPr>
         </w:pPr>
         <w:r>
@@ -1614,7 +1614,7 @@ Aside Block Numbered List
             <w:pStyle w:val="BodyText"/>
             <w:numPr>
                 <w:ilvl w:val="4"/>
-                <w:numId w:val="21"/>
+                <w:numId w:val="9"/>
             </w:numPr>
         </w:pPr>
         <w:r>
@@ -1626,7 +1626,7 @@ Aside Block Numbered List
             <w:pStyle w:val="BodyText"/>
             <w:numPr>
                 <w:ilvl w:val="5"/>
-                <w:numId w:val="22"/>
+                <w:numId w:val="10"/>
             </w:numPr>
         </w:pPr>
         <w:r>
@@ -1638,7 +1638,7 @@ Aside Block Numbered List
             <w:pStyle w:val="BodyText"/>
             <w:numPr>
                 <w:ilvl w:val="6"/>
-                <w:numId w:val="23"/>
+                <w:numId w:val="11"/>
             </w:numPr>
         </w:pPr>
         <w:r>
@@ -1650,7 +1650,7 @@ Aside Block Numbered List
             <w:pStyle w:val="BodyText"/>
             <w:numPr>
                 <w:ilvl w:val="7"/>
-                <w:numId w:val="24"/>
+                <w:numId w:val="12"/>
             </w:numPr>
         </w:pPr>
         <w:r>
@@ -1662,7 +1662,7 @@ Aside Block Numbered List
             <w:pStyle w:val="BodyText"/>
             <w:numPr>
                 <w:ilvl w:val="8"/>
-                <w:numId w:val="25"/>
+                <w:numId w:val="13"/>
             </w:numPr>
         </w:pPr>
         <w:r>
@@ -1688,7 +1688,7 @@ Aside Block Numbered List
             <w:pStyle w:val="BodyText"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
-                <w:numId w:val="26"/>
+                <w:numId w:val="2"/>
             </w:numPr>
             <w:pBdr>
                 <w:left w:color="CCCCCC" w:frame="true" w:shadow="true"
@@ -1708,7 +1708,7 @@ Aside Block Numbered List
             <w:pStyle w:val="BodyText"/>
             <w:numPr>
                 <w:ilvl w:val="1"/>
-                <w:numId w:val="27"/>
+                <w:numId w:val="2"/>
             </w:numPr>
             <w:pBdr>
                 <w:left w:color="CCCCCC" w:frame="true" w:shadow="true"
@@ -1728,7 +1728,7 @@ Aside Block Numbered List
             <w:pStyle w:val="BodyText"/>
             <w:numPr>
                 <w:ilvl w:val="2"/>
-                <w:numId w:val="28"/>
+                <w:numId w:val="2"/>
             </w:numPr>
             <w:pBdr>
                 <w:left w:color="CCCCCC" w:frame="true" w:shadow="true"
@@ -1748,7 +1748,7 @@ Aside Block Numbered List
             <w:pStyle w:val="BodyText"/>
             <w:numPr>
                 <w:ilvl w:val="3"/>
-                <w:numId w:val="29"/>
+                <w:numId w:val="2"/>
             </w:numPr>
             <w:pBdr>
                 <w:left w:color="CCCCCC" w:frame="true" w:shadow="true"
@@ -1788,7 +1788,7 @@ Aside Block Numbered List
             <w:pStyle w:val="BodyText"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
-                <w:numId w:val="30"/>
+                <w:numId w:val="14"/>
             </w:numPr>
             <w:pBdr>
                 <w:left w:color="CCCCCC" w:frame="true" w:shadow="true"
@@ -1808,7 +1808,7 @@ Aside Block Numbered List
             <w:pStyle w:val="BodyText"/>
             <w:numPr>
                 <w:ilvl w:val="1"/>
-                <w:numId w:val="31"/>
+                <w:numId w:val="15"/>
             </w:numPr>
             <w:pBdr>
                 <w:left w:color="CCCCCC" w:frame="true" w:shadow="true"
@@ -1828,7 +1828,7 @@ Aside Block Numbered List
             <w:pStyle w:val="BodyText"/>
             <w:numPr>
                 <w:ilvl w:val="2"/>
-                <w:numId w:val="32"/>
+                <w:numId w:val="16"/>
             </w:numPr>
             <w:pBdr>
                 <w:left w:color="CCCCCC" w:frame="true" w:shadow="true"
@@ -1848,7 +1848,7 @@ Aside Block Numbered List
             <w:pStyle w:val="BodyText"/>
             <w:numPr>
                 <w:ilvl w:val="3"/>
-                <w:numId w:val="33"/>
+                <w:numId w:val="17"/>
             </w:numPr>
             <w:pBdr>
                 <w:left w:color="CCCCCC" w:frame="true" w:shadow="true"
@@ -1888,7 +1888,7 @@ Aside Block Numbered List
             <w:pStyle w:val="BodyText"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
-                <w:numId w:val="34"/>
+                <w:numId w:val="2"/>
             </w:numPr>
             <w:pBdr>
                 <w:left w:color="3366FF" w:frame="true" w:shadow="true"
@@ -1905,7 +1905,7 @@ Aside Block Numbered List
             <w:pStyle w:val="BodyText"/>
             <w:numPr>
                 <w:ilvl w:val="1"/>
-                <w:numId w:val="35"/>
+                <w:numId w:val="2"/>
             </w:numPr>
             <w:pBdr>
                 <w:left w:color="3366FF" w:frame="true" w:shadow="true"
@@ -1922,7 +1922,7 @@ Aside Block Numbered List
             <w:pStyle w:val="BodyText"/>
             <w:numPr>
                 <w:ilvl w:val="2"/>
-                <w:numId w:val="36"/>
+                <w:numId w:val="2"/>
             </w:numPr>
             <w:pBdr>
                 <w:left w:color="3366FF" w:frame="true" w:shadow="true"
@@ -1939,7 +1939,7 @@ Aside Block Numbered List
             <w:pStyle w:val="BodyText"/>
             <w:numPr>
                 <w:ilvl w:val="3"/>
-                <w:numId w:val="37"/>
+                <w:numId w:val="2"/>
             </w:numPr>
             <w:pBdr>
                 <w:left w:color="3366FF" w:frame="true" w:shadow="true"
@@ -1976,7 +1976,7 @@ Aside Block Numbered List
             <w:pStyle w:val="BodyText"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
-                <w:numId w:val="38"/>
+                <w:numId w:val="18"/>
             </w:numPr>
             <w:pBdr>
                 <w:left w:color="3366FF" w:frame="true" w:shadow="true"
@@ -1993,7 +1993,7 @@ Aside Block Numbered List
             <w:pStyle w:val="BodyText"/>
             <w:numPr>
                 <w:ilvl w:val="1"/>
-                <w:numId w:val="39"/>
+                <w:numId w:val="19"/>
             </w:numPr>
             <w:pBdr>
                 <w:left w:color="3366FF" w:frame="true" w:shadow="true"
@@ -2010,7 +2010,7 @@ Aside Block Numbered List
             <w:pStyle w:val="BodyText"/>
             <w:numPr>
                 <w:ilvl w:val="2"/>
-                <w:numId w:val="40"/>
+                <w:numId w:val="20"/>
             </w:numPr>
             <w:pBdr>
                 <w:left w:color="3366FF" w:frame="true" w:shadow="true"
@@ -2027,7 +2027,7 @@ Aside Block Numbered List
             <w:pStyle w:val="BodyText"/>
             <w:numPr>
                 <w:ilvl w:val="3"/>
-                <w:numId w:val="41"/>
+                <w:numId w:val="21"/>
             </w:numPr>
             <w:pBdr>
                 <w:left w:color="3366FF" w:frame="true" w:shadow="true"
@@ -3021,347 +3021,10 @@ TEXT :+1: TEXT
 GitHub sourced images do not load with Java 7, disabled tests until Java 8 is minimal supported
 version.
 
-```````````````````````````````` example(GitHub: 1) options(IGNORED)
-# Heading 1 :basecamp:
-
-## Heading 2 :basecamp:
-
-### Heading 3 :basecamp:
-
-#### Heading 4 :basecamp:
-
-##### Heading 5 :basecamp:
-
-###### Heading 6 :basecamp:
-
+```````````````````````````````` example(GitHub: 1) options(emoji-github)
 TEXT :basecamp: TEXT
-
 .
 <w:body>
-    <w:bookmarkStart w:id="1" w:name="heading-1"/>
-    <w:bookmarkEnd w:id="1"/>
-    <w:p>
-        <w:pPr>
-            <w:pStyle w:val="Heading1"/>
-            <w:numPr>
-                <w:ilvl w:val="0"/>
-                <w:numId w:val="0"/>
-            </w:numPr>
-        </w:pPr>
-        <w:r>
-            <w:t xml:space="preserve">Heading 1 </w:t>
-        </w:r>
-        <w:r>
-            <w:rPr>
-                <w:position w:val="-5"/>
-            </w:rPr>
-            <w:drawing>
-                <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
-                    <wp:extent cx="306705" cy="306705"/>
-                    <wp:effectExtent b="0" l="0" r="0" t="0"/>
-                    <wp:docPr descr="emoji people:+1" id="0" name="Image1"/>
-                    <wp:cNvGraphicFramePr>
-                        <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
-                    </wp:cNvGraphicFramePr>
-                    <a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
-                        <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
-                            <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
-                                <pic:nvPicPr>
-                                    <pic:cNvPr id="1" name="Image1"/>
-                                    <pic:cNvPicPr/>
-                                </pic:nvPicPr>
-                                <pic:blipFill>
-                                    <a:blip r:embed="rId3" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"/>
-                                    <a:stretch>
-                                    <a:fillRect/>
-                                    </a:stretch>
-                                </pic:blipFill>
-                                <pic:spPr>
-                                    <a:xfrm>
-                                    <a:off x="0" y="0"/>
-                                    <a:ext cx="306705" cy="306705"/>
-                                    </a:xfrm>
-                                    <a:prstGeom prst="rect">
-                                    <a:avLst/>
-                                    </a:prstGeom>
-                                </pic:spPr>
-                            </pic:pic>
-                        </a:graphicData>
-                    </a:graphic>
-                </wp:inline>
-            </w:drawing>
-        </w:r>
-    </w:p>
-    <w:bookmarkStart w:id="2" w:name="heading-2"/>
-    <w:bookmarkEnd w:id="2"/>
-    <w:p>
-        <w:pPr>
-            <w:pStyle w:val="Heading2"/>
-            <w:numPr>
-                <w:ilvl w:val="1"/>
-                <w:numId w:val="0"/>
-            </w:numPr>
-        </w:pPr>
-        <w:r>
-            <w:t xml:space="preserve">Heading 2 </w:t>
-        </w:r>
-        <w:r>
-            <w:rPr>
-                <w:position w:val="-4"/>
-            </w:rPr>
-            <w:drawing>
-                <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
-                    <wp:extent cx="266700" cy="266700"/>
-                    <wp:effectExtent b="0" l="0" r="0" t="0"/>
-                    <wp:docPr descr="emoji people:+1" id="2" name="Image2"/>
-                    <wp:cNvGraphicFramePr>
-                        <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
-                    </wp:cNvGraphicFramePr>
-                    <a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
-                        <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
-                            <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
-                                <pic:nvPicPr>
-                                    <pic:cNvPr id="3" name="Image2"/>
-                                    <pic:cNvPicPr/>
-                                </pic:nvPicPr>
-                                <pic:blipFill>
-                                    <a:blip r:embed="rId4" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"/>
-                                    <a:stretch>
-                                    <a:fillRect/>
-                                    </a:stretch>
-                                </pic:blipFill>
-                                <pic:spPr>
-                                    <a:xfrm>
-                                    <a:off x="0" y="0"/>
-                                    <a:ext cx="266700" cy="266700"/>
-                                    </a:xfrm>
-                                    <a:prstGeom prst="rect">
-                                    <a:avLst/>
-                                    </a:prstGeom>
-                                </pic:spPr>
-                            </pic:pic>
-                        </a:graphicData>
-                    </a:graphic>
-                </wp:inline>
-            </w:drawing>
-        </w:r>
-    </w:p>
-    <w:bookmarkStart w:id="3" w:name="heading-3"/>
-    <w:bookmarkEnd w:id="3"/>
-    <w:p>
-        <w:pPr>
-            <w:pStyle w:val="Heading3"/>
-            <w:numPr>
-                <w:ilvl w:val="2"/>
-                <w:numId w:val="0"/>
-            </w:numPr>
-        </w:pPr>
-        <w:r>
-            <w:t xml:space="preserve">Heading 3 </w:t>
-        </w:r>
-        <w:r>
-            <w:rPr>
-                <w:position w:val="-4"/>
-            </w:rPr>
-            <w:drawing>
-                <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
-                    <wp:extent cx="226695" cy="226695"/>
-                    <wp:effectExtent b="0" l="0" r="0" t="0"/>
-                    <wp:docPr descr="emoji people:+1" id="4" name="Image3"/>
-                    <wp:cNvGraphicFramePr>
-                        <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
-                    </wp:cNvGraphicFramePr>
-                    <a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
-                        <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
-                            <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
-                                <pic:nvPicPr>
-                                    <pic:cNvPr id="5" name="Image3"/>
-                                    <pic:cNvPicPr/>
-                                </pic:nvPicPr>
-                                <pic:blipFill>
-                                    <a:blip r:embed="rId5" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"/>
-                                    <a:stretch>
-                                    <a:fillRect/>
-                                    </a:stretch>
-                                </pic:blipFill>
-                                <pic:spPr>
-                                    <a:xfrm>
-                                    <a:off x="0" y="0"/>
-                                    <a:ext cx="226695" cy="226695"/>
-                                    </a:xfrm>
-                                    <a:prstGeom prst="rect">
-                                    <a:avLst/>
-                                    </a:prstGeom>
-                                </pic:spPr>
-                            </pic:pic>
-                        </a:graphicData>
-                    </a:graphic>
-                </wp:inline>
-            </w:drawing>
-        </w:r>
-    </w:p>
-    <w:bookmarkStart w:id="4" w:name="heading-4"/>
-    <w:bookmarkEnd w:id="4"/>
-    <w:p>
-        <w:pPr>
-            <w:pStyle w:val="Heading4"/>
-            <w:numPr>
-                <w:ilvl w:val="3"/>
-                <w:numId w:val="0"/>
-            </w:numPr>
-        </w:pPr>
-        <w:r>
-            <w:t xml:space="preserve">Heading 4 </w:t>
-        </w:r>
-        <w:r>
-            <w:rPr>
-                <w:position w:val="-3"/>
-            </w:rPr>
-            <w:drawing>
-                <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
-                    <wp:extent cx="186690" cy="186690"/>
-                    <wp:effectExtent b="0" l="0" r="0" t="0"/>
-                    <wp:docPr descr="emoji people:+1" id="6" name="Image4"/>
-                    <wp:cNvGraphicFramePr>
-                        <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
-                    </wp:cNvGraphicFramePr>
-                    <a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
-                        <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
-                            <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
-                                <pic:nvPicPr>
-                                    <pic:cNvPr id="7" name="Image4"/>
-                                    <pic:cNvPicPr/>
-                                </pic:nvPicPr>
-                                <pic:blipFill>
-                                    <a:blip r:embed="rId6" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"/>
-                                    <a:stretch>
-                                    <a:fillRect/>
-                                    </a:stretch>
-                                </pic:blipFill>
-                                <pic:spPr>
-                                    <a:xfrm>
-                                    <a:off x="0" y="0"/>
-                                    <a:ext cx="186690" cy="186690"/>
-                                    </a:xfrm>
-                                    <a:prstGeom prst="rect">
-                                    <a:avLst/>
-                                    </a:prstGeom>
-                                </pic:spPr>
-                            </pic:pic>
-                        </a:graphicData>
-                    </a:graphic>
-                </wp:inline>
-            </w:drawing>
-        </w:r>
-    </w:p>
-    <w:bookmarkStart w:id="5" w:name="heading-5"/>
-    <w:bookmarkEnd w:id="5"/>
-    <w:p>
-        <w:pPr>
-            <w:pStyle w:val="Heading5"/>
-            <w:numPr>
-                <w:ilvl w:val="4"/>
-                <w:numId w:val="0"/>
-            </w:numPr>
-        </w:pPr>
-        <w:r>
-            <w:t xml:space="preserve">Heading 5 </w:t>
-        </w:r>
-        <w:r>
-            <w:rPr>
-                <w:position w:val="-2"/>
-            </w:rPr>
-            <w:drawing>
-                <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
-                    <wp:extent cx="146685" cy="146685"/>
-                    <wp:effectExtent b="0" l="0" r="0" t="0"/>
-                    <wp:docPr descr="emoji people:+1" id="8" name="Image5"/>
-                    <wp:cNvGraphicFramePr>
-                        <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
-                    </wp:cNvGraphicFramePr>
-                    <a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
-                        <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
-                            <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
-                                <pic:nvPicPr>
-                                    <pic:cNvPr id="9" name="Image5"/>
-                                    <pic:cNvPicPr/>
-                                </pic:nvPicPr>
-                                <pic:blipFill>
-                                    <a:blip r:embed="rId7" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"/>
-                                    <a:stretch>
-                                    <a:fillRect/>
-                                    </a:stretch>
-                                </pic:blipFill>
-                                <pic:spPr>
-                                    <a:xfrm>
-                                    <a:off x="0" y="0"/>
-                                    <a:ext cx="146685" cy="146685"/>
-                                    </a:xfrm>
-                                    <a:prstGeom prst="rect">
-                                    <a:avLst/>
-                                    </a:prstGeom>
-                                </pic:spPr>
-                            </pic:pic>
-                        </a:graphicData>
-                    </a:graphic>
-                </wp:inline>
-            </w:drawing>
-        </w:r>
-    </w:p>
-    <w:bookmarkStart w:id="6" w:name="heading-6"/>
-    <w:bookmarkEnd w:id="6"/>
-    <w:p>
-        <w:pPr>
-            <w:pStyle w:val="Heading6"/>
-            <w:numPr>
-                <w:ilvl w:val="5"/>
-                <w:numId w:val="0"/>
-            </w:numPr>
-        </w:pPr>
-        <w:r>
-            <w:t xml:space="preserve">Heading 6 </w:t>
-        </w:r>
-        <w:r>
-            <w:rPr>
-                <w:position w:val="-2"/>
-            </w:rPr>
-            <w:drawing>
-                <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
-                    <wp:extent cx="146685" cy="146685"/>
-                    <wp:effectExtent b="0" l="0" r="0" t="0"/>
-                    <wp:docPr descr="emoji people:+1" id="10" name="Image6"/>
-                    <wp:cNvGraphicFramePr>
-                        <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
-                    </wp:cNvGraphicFramePr>
-                    <a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
-                        <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
-                            <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
-                                <pic:nvPicPr>
-                                    <pic:cNvPr id="11" name="Image6"/>
-                                    <pic:cNvPicPr/>
-                                </pic:nvPicPr>
-                                <pic:blipFill>
-                                    <a:blip r:embed="rId8" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"/>
-                                    <a:stretch>
-                                    <a:fillRect/>
-                                    </a:stretch>
-                                </pic:blipFill>
-                                <pic:spPr>
-                                    <a:xfrm>
-                                    <a:off x="0" y="0"/>
-                                    <a:ext cx="146685" cy="146685"/>
-                                    </a:xfrm>
-                                    <a:prstGeom prst="rect">
-                                    <a:avLst/>
-                                    </a:prstGeom>
-                                </pic:spPr>
-                            </pic:pic>
-                        </a:graphicData>
-                    </a:graphic>
-                </wp:inline>
-            </w:drawing>
-        </w:r>
-    </w:p>
     <w:p>
         <w:pPr>
             <w:pStyle w:val="ParagraphTextBody"/>
@@ -3377,7 +3040,7 @@ TEXT :basecamp: TEXT
                 <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
                     <wp:extent cx="146685" cy="146685"/>
                     <wp:effectExtent b="0" l="0" r="0" t="0"/>
-                    <wp:docPr descr="emoji people:+1" id="12" name="Image7"/>
+                    <wp:docPr descr="emoji symbols:basecamp" id="0" name="Image1"/>
                     <wp:cNvGraphicFramePr>
                         <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
                     </wp:cNvGraphicFramePr>
@@ -3385,11 +3048,11 @@ TEXT :basecamp: TEXT
                         <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
                             <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
                                 <pic:nvPicPr>
-                                    <pic:cNvPr id="13" name="Image7"/>
+                                    <pic:cNvPr id="1" name="Image1"/>
                                     <pic:cNvPicPr/>
                                 </pic:nvPicPr>
                                 <pic:blipFill>
-                                    <a:blip r:embed="rId9" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"/>
+                                    <a:blip r:embed="rId3" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"/>
                                     <a:stretch>
                                     <a:fillRect/>
                                     </a:stretch>
@@ -3417,69 +3080,7 @@ TEXT :basecamp: TEXT
 ````````````````````````````````
 
 
-```````````````````````````````` example(GitHub: 2) options(IGNORED)
-TEXT ![](https://github.githubassets.com/images/icons/emoji/unicode/1f44d.png) TEXT
-.
-<w:body>
-    <w:p>
-        <w:pPr>
-            <w:pStyle w:val="ParagraphTextBody"/>
-        </w:pPr>
-        <w:r>
-            <w:t xml:space="preserve">TEXT </w:t>
-        </w:r>
-        <w:r>
-            <w:drawing>
-                <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
-                    <wp:extent cx="2095500" cy="2095500"/>
-                    <wp:effectExtent b="0" l="0" r="0" t="0"/>
-                    <wp:docPr descr="" id="0" name="Image1"/>
-                    <wp:cNvGraphicFramePr>
-                        <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
-                    </wp:cNvGraphicFramePr>
-                    <a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
-                        <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
-                            <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
-                                <pic:nvPicPr>
-                                    <pic:cNvPr id="1" name="Image1"/>
-                                    <pic:cNvPicPr/>
-                                </pic:nvPicPr>
-                                <pic:blipFill>
-                                    <a:blip r:embed="rId3" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"/>
-                                    <a:stretch>
-                                    <a:fillRect/>
-                                    </a:stretch>
-                                </pic:blipFill>
-                                <pic:spPr>
-                                    <a:xfrm>
-                                    <a:off x="0" y="0"/>
-                                    <a:ext cx="2095500" cy="2095500"/>
-                                    </a:xfrm>
-                                    <a:prstGeom prst="rect">
-                                    <a:avLst/>
-                                    </a:prstGeom>
-                                </pic:spPr>
-                            </pic:pic>
-                        </a:graphicData>
-                    </a:graphic>
-                </wp:inline>
-            </w:drawing>
-        </w:r>
-        <w:r>
-            <w:t xml:space="preserve"> TEXT</w:t>
-        </w:r>
-    </w:p>
-</w:body>
-````````````````````````````````
-
-
-```````````````````````````````` example(GitHub: 3) options(emoji-github, IGNORED)
-TEXT :+1: TEXT
-.
-````````````````````````````````
-
-
-```````````````````````````````` example(GitHub: 4) options(emoji-github, IGNORED)
+```````````````````````````````` example(GitHub: 2) options(emoji-github, IGNORED)
 # Heading 1 :basecamp:
 
 ## Heading 2 :basecamp:
@@ -3875,7 +3476,518 @@ TEXT :basecamp: TEXT
 ````````````````````````````````
 
 
-```````````````````````````````` example(GitHub: 5) options(emoji-unicode)
+```````````````````````````````` example GitHub: 3
+TEXT ![](https://github.githubassets.com/images/icons/emoji/unicode/1f44d.png) TEXT
+.
+<w:body>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="ParagraphTextBody"/>
+        </w:pPr>
+        <w:r>
+            <w:t xml:space="preserve">TEXT </w:t>
+        </w:r>
+        <w:r>
+            <w:drawing>
+                <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
+                    <wp:extent cx="609600" cy="609600"/>
+                    <wp:effectExtent b="0" l="0" r="0" t="0"/>
+                    <wp:docPr descr="" id="0" name="Image1"/>
+                    <wp:cNvGraphicFramePr>
+                        <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
+                    </wp:cNvGraphicFramePr>
+                    <a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
+                        <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                            <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                                <pic:nvPicPr>
+                                    <pic:cNvPr id="1" name="Image1"/>
+                                    <pic:cNvPicPr/>
+                                </pic:nvPicPr>
+                                <pic:blipFill>
+                                    <a:blip r:embed="rId3" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"/>
+                                    <a:stretch>
+                                    <a:fillRect/>
+                                    </a:stretch>
+                                </pic:blipFill>
+                                <pic:spPr>
+                                    <a:xfrm>
+                                    <a:off x="0" y="0"/>
+                                    <a:ext cx="609600" cy="609600"/>
+                                    </a:xfrm>
+                                    <a:prstGeom prst="rect">
+                                    <a:avLst/>
+                                    </a:prstGeom>
+                                </pic:spPr>
+                            </pic:pic>
+                        </a:graphicData>
+                    </a:graphic>
+                </wp:inline>
+            </w:drawing>
+        </w:r>
+        <w:r>
+            <w:t xml:space="preserve"> TEXT</w:t>
+        </w:r>
+    </w:p>
+</w:body>
+````````````````````````````````
+
+
+```````````````````````````````` example(GitHub: 4) options(emoji-github)
+TEXT :+1: TEXT
+.
+<w:body>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="ParagraphTextBody"/>
+        </w:pPr>
+        <w:r>
+            <w:t xml:space="preserve">TEXT </w:t>
+        </w:r>
+        <w:r>
+            <w:rPr>
+                <w:position w:val="-2"/>
+            </w:rPr>
+            <w:drawing>
+                <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
+                    <wp:extent cx="146685" cy="146685"/>
+                    <wp:effectExtent b="0" l="0" r="0" t="0"/>
+                    <wp:docPr descr="emoji people:+1" id="0" name="Image1"/>
+                    <wp:cNvGraphicFramePr>
+                        <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
+                    </wp:cNvGraphicFramePr>
+                    <a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
+                        <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                            <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                                <pic:nvPicPr>
+                                    <pic:cNvPr id="1" name="Image1"/>
+                                    <pic:cNvPicPr/>
+                                </pic:nvPicPr>
+                                <pic:blipFill>
+                                    <a:blip r:embed="rId3" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"/>
+                                    <a:stretch>
+                                    <a:fillRect/>
+                                    </a:stretch>
+                                </pic:blipFill>
+                                <pic:spPr>
+                                    <a:xfrm>
+                                    <a:off x="0" y="0"/>
+                                    <a:ext cx="146685" cy="146685"/>
+                                    </a:xfrm>
+                                    <a:prstGeom prst="rect">
+                                    <a:avLst/>
+                                    </a:prstGeom>
+                                </pic:spPr>
+                            </pic:pic>
+                        </a:graphicData>
+                    </a:graphic>
+                </wp:inline>
+            </w:drawing>
+        </w:r>
+        <w:r>
+            <w:t xml:space="preserve"> TEXT</w:t>
+        </w:r>
+    </w:p>
+</w:body>
+````````````````````````````````
+
+
+```````````````````````````````` example(GitHub: 5) options(emoji-github)
+# Heading 1 :basecamp:
+
+## Heading 2 :basecamp:
+
+### Heading 3 :basecamp:
+
+#### Heading 4 :basecamp:
+
+##### Heading 5 :basecamp:
+
+###### Heading 6 :basecamp:
+
+TEXT :basecamp: TEXT
+
+.
+<w:body>
+    <w:bookmarkStart w:id="1" w:name="heading-1"/>
+    <w:bookmarkEnd w:id="1"/>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="Heading1"/>
+            <w:numPr>
+                <w:ilvl w:val="0"/>
+                <w:numId w:val="0"/>
+            </w:numPr>
+        </w:pPr>
+        <w:r>
+            <w:t xml:space="preserve">Heading 1 </w:t>
+        </w:r>
+        <w:r>
+            <w:rPr>
+                <w:position w:val="-5"/>
+            </w:rPr>
+            <w:drawing>
+                <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
+                    <wp:extent cx="306705" cy="306705"/>
+                    <wp:effectExtent b="0" l="0" r="0" t="0"/>
+                    <wp:docPr descr="emoji symbols:basecamp" id="0" name="Image1"/>
+                    <wp:cNvGraphicFramePr>
+                        <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
+                    </wp:cNvGraphicFramePr>
+                    <a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
+                        <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                            <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                                <pic:nvPicPr>
+                                    <pic:cNvPr id="1" name="Image1"/>
+                                    <pic:cNvPicPr/>
+                                </pic:nvPicPr>
+                                <pic:blipFill>
+                                    <a:blip r:embed="rId3" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"/>
+                                    <a:stretch>
+                                    <a:fillRect/>
+                                    </a:stretch>
+                                </pic:blipFill>
+                                <pic:spPr>
+                                    <a:xfrm>
+                                    <a:off x="0" y="0"/>
+                                    <a:ext cx="306705" cy="306705"/>
+                                    </a:xfrm>
+                                    <a:prstGeom prst="rect">
+                                    <a:avLst/>
+                                    </a:prstGeom>
+                                </pic:spPr>
+                            </pic:pic>
+                        </a:graphicData>
+                    </a:graphic>
+                </wp:inline>
+            </w:drawing>
+        </w:r>
+    </w:p>
+    <w:bookmarkStart w:id="2" w:name="heading-2"/>
+    <w:bookmarkEnd w:id="2"/>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="Heading2"/>
+            <w:numPr>
+                <w:ilvl w:val="1"/>
+                <w:numId w:val="0"/>
+            </w:numPr>
+        </w:pPr>
+        <w:r>
+            <w:t xml:space="preserve">Heading 2 </w:t>
+        </w:r>
+        <w:r>
+            <w:rPr>
+                <w:position w:val="-4"/>
+            </w:rPr>
+            <w:drawing>
+                <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
+                    <wp:extent cx="266700" cy="266700"/>
+                    <wp:effectExtent b="0" l="0" r="0" t="0"/>
+                    <wp:docPr descr="emoji symbols:basecamp" id="2" name="Image2"/>
+                    <wp:cNvGraphicFramePr>
+                        <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
+                    </wp:cNvGraphicFramePr>
+                    <a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
+                        <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                            <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                                <pic:nvPicPr>
+                                    <pic:cNvPr id="3" name="Image2"/>
+                                    <pic:cNvPicPr/>
+                                </pic:nvPicPr>
+                                <pic:blipFill>
+                                    <a:blip r:embed="rId4" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"/>
+                                    <a:stretch>
+                                    <a:fillRect/>
+                                    </a:stretch>
+                                </pic:blipFill>
+                                <pic:spPr>
+                                    <a:xfrm>
+                                    <a:off x="0" y="0"/>
+                                    <a:ext cx="266700" cy="266700"/>
+                                    </a:xfrm>
+                                    <a:prstGeom prst="rect">
+                                    <a:avLst/>
+                                    </a:prstGeom>
+                                </pic:spPr>
+                            </pic:pic>
+                        </a:graphicData>
+                    </a:graphic>
+                </wp:inline>
+            </w:drawing>
+        </w:r>
+    </w:p>
+    <w:bookmarkStart w:id="3" w:name="heading-3"/>
+    <w:bookmarkEnd w:id="3"/>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="Heading3"/>
+            <w:numPr>
+                <w:ilvl w:val="2"/>
+                <w:numId w:val="0"/>
+            </w:numPr>
+        </w:pPr>
+        <w:r>
+            <w:t xml:space="preserve">Heading 3 </w:t>
+        </w:r>
+        <w:r>
+            <w:rPr>
+                <w:position w:val="-4"/>
+            </w:rPr>
+            <w:drawing>
+                <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
+                    <wp:extent cx="226695" cy="226695"/>
+                    <wp:effectExtent b="0" l="0" r="0" t="0"/>
+                    <wp:docPr descr="emoji symbols:basecamp" id="4" name="Image3"/>
+                    <wp:cNvGraphicFramePr>
+                        <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
+                    </wp:cNvGraphicFramePr>
+                    <a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
+                        <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                            <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                                <pic:nvPicPr>
+                                    <pic:cNvPr id="5" name="Image3"/>
+                                    <pic:cNvPicPr/>
+                                </pic:nvPicPr>
+                                <pic:blipFill>
+                                    <a:blip r:embed="rId5" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"/>
+                                    <a:stretch>
+                                    <a:fillRect/>
+                                    </a:stretch>
+                                </pic:blipFill>
+                                <pic:spPr>
+                                    <a:xfrm>
+                                    <a:off x="0" y="0"/>
+                                    <a:ext cx="226695" cy="226695"/>
+                                    </a:xfrm>
+                                    <a:prstGeom prst="rect">
+                                    <a:avLst/>
+                                    </a:prstGeom>
+                                </pic:spPr>
+                            </pic:pic>
+                        </a:graphicData>
+                    </a:graphic>
+                </wp:inline>
+            </w:drawing>
+        </w:r>
+    </w:p>
+    <w:bookmarkStart w:id="4" w:name="heading-4"/>
+    <w:bookmarkEnd w:id="4"/>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="Heading4"/>
+            <w:numPr>
+                <w:ilvl w:val="3"/>
+                <w:numId w:val="0"/>
+            </w:numPr>
+        </w:pPr>
+        <w:r>
+            <w:t xml:space="preserve">Heading 4 </w:t>
+        </w:r>
+        <w:r>
+            <w:rPr>
+                <w:position w:val="-3"/>
+            </w:rPr>
+            <w:drawing>
+                <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
+                    <wp:extent cx="186690" cy="186690"/>
+                    <wp:effectExtent b="0" l="0" r="0" t="0"/>
+                    <wp:docPr descr="emoji symbols:basecamp" id="6" name="Image4"/>
+                    <wp:cNvGraphicFramePr>
+                        <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
+                    </wp:cNvGraphicFramePr>
+                    <a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
+                        <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                            <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                                <pic:nvPicPr>
+                                    <pic:cNvPr id="7" name="Image4"/>
+                                    <pic:cNvPicPr/>
+                                </pic:nvPicPr>
+                                <pic:blipFill>
+                                    <a:blip r:embed="rId6" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"/>
+                                    <a:stretch>
+                                    <a:fillRect/>
+                                    </a:stretch>
+                                </pic:blipFill>
+                                <pic:spPr>
+                                    <a:xfrm>
+                                    <a:off x="0" y="0"/>
+                                    <a:ext cx="186690" cy="186690"/>
+                                    </a:xfrm>
+                                    <a:prstGeom prst="rect">
+                                    <a:avLst/>
+                                    </a:prstGeom>
+                                </pic:spPr>
+                            </pic:pic>
+                        </a:graphicData>
+                    </a:graphic>
+                </wp:inline>
+            </w:drawing>
+        </w:r>
+    </w:p>
+    <w:bookmarkStart w:id="5" w:name="heading-5"/>
+    <w:bookmarkEnd w:id="5"/>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="Heading5"/>
+            <w:numPr>
+                <w:ilvl w:val="4"/>
+                <w:numId w:val="0"/>
+            </w:numPr>
+        </w:pPr>
+        <w:r>
+            <w:t xml:space="preserve">Heading 5 </w:t>
+        </w:r>
+        <w:r>
+            <w:rPr>
+                <w:position w:val="-2"/>
+            </w:rPr>
+            <w:drawing>
+                <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
+                    <wp:extent cx="146685" cy="146685"/>
+                    <wp:effectExtent b="0" l="0" r="0" t="0"/>
+                    <wp:docPr descr="emoji symbols:basecamp" id="8" name="Image5"/>
+                    <wp:cNvGraphicFramePr>
+                        <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
+                    </wp:cNvGraphicFramePr>
+                    <a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
+                        <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                            <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                                <pic:nvPicPr>
+                                    <pic:cNvPr id="9" name="Image5"/>
+                                    <pic:cNvPicPr/>
+                                </pic:nvPicPr>
+                                <pic:blipFill>
+                                    <a:blip r:embed="rId7" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"/>
+                                    <a:stretch>
+                                    <a:fillRect/>
+                                    </a:stretch>
+                                </pic:blipFill>
+                                <pic:spPr>
+                                    <a:xfrm>
+                                    <a:off x="0" y="0"/>
+                                    <a:ext cx="146685" cy="146685"/>
+                                    </a:xfrm>
+                                    <a:prstGeom prst="rect">
+                                    <a:avLst/>
+                                    </a:prstGeom>
+                                </pic:spPr>
+                            </pic:pic>
+                        </a:graphicData>
+                    </a:graphic>
+                </wp:inline>
+            </w:drawing>
+        </w:r>
+    </w:p>
+    <w:bookmarkStart w:id="6" w:name="heading-6"/>
+    <w:bookmarkEnd w:id="6"/>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="Heading6"/>
+            <w:numPr>
+                <w:ilvl w:val="5"/>
+                <w:numId w:val="0"/>
+            </w:numPr>
+        </w:pPr>
+        <w:r>
+            <w:t xml:space="preserve">Heading 6 </w:t>
+        </w:r>
+        <w:r>
+            <w:rPr>
+                <w:position w:val="-2"/>
+            </w:rPr>
+            <w:drawing>
+                <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
+                    <wp:extent cx="146685" cy="146685"/>
+                    <wp:effectExtent b="0" l="0" r="0" t="0"/>
+                    <wp:docPr descr="emoji symbols:basecamp" id="10" name="Image6"/>
+                    <wp:cNvGraphicFramePr>
+                        <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
+                    </wp:cNvGraphicFramePr>
+                    <a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
+                        <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                            <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                                <pic:nvPicPr>
+                                    <pic:cNvPr id="11" name="Image6"/>
+                                    <pic:cNvPicPr/>
+                                </pic:nvPicPr>
+                                <pic:blipFill>
+                                    <a:blip r:embed="rId8" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"/>
+                                    <a:stretch>
+                                    <a:fillRect/>
+                                    </a:stretch>
+                                </pic:blipFill>
+                                <pic:spPr>
+                                    <a:xfrm>
+                                    <a:off x="0" y="0"/>
+                                    <a:ext cx="146685" cy="146685"/>
+                                    </a:xfrm>
+                                    <a:prstGeom prst="rect">
+                                    <a:avLst/>
+                                    </a:prstGeom>
+                                </pic:spPr>
+                            </pic:pic>
+                        </a:graphicData>
+                    </a:graphic>
+                </wp:inline>
+            </w:drawing>
+        </w:r>
+    </w:p>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="ParagraphTextBody"/>
+        </w:pPr>
+        <w:r>
+            <w:t xml:space="preserve">TEXT </w:t>
+        </w:r>
+        <w:r>
+            <w:rPr>
+                <w:position w:val="-2"/>
+            </w:rPr>
+            <w:drawing>
+                <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
+                    <wp:extent cx="146685" cy="146685"/>
+                    <wp:effectExtent b="0" l="0" r="0" t="0"/>
+                    <wp:docPr descr="emoji symbols:basecamp" id="12" name="Image7"/>
+                    <wp:cNvGraphicFramePr>
+                        <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
+                    </wp:cNvGraphicFramePr>
+                    <a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
+                        <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                            <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                                <pic:nvPicPr>
+                                    <pic:cNvPr id="13" name="Image7"/>
+                                    <pic:cNvPicPr/>
+                                </pic:nvPicPr>
+                                <pic:blipFill>
+                                    <a:blip r:embed="rId9" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"/>
+                                    <a:stretch>
+                                    <a:fillRect/>
+                                    </a:stretch>
+                                </pic:blipFill>
+                                <pic:spPr>
+                                    <a:xfrm>
+                                    <a:off x="0" y="0"/>
+                                    <a:ext cx="146685" cy="146685"/>
+                                    </a:xfrm>
+                                    <a:prstGeom prst="rect">
+                                    <a:avLst/>
+                                    </a:prstGeom>
+                                </pic:spPr>
+                            </pic:pic>
+                        </a:graphicData>
+                    </a:graphic>
+                </wp:inline>
+            </w:drawing>
+        </w:r>
+        <w:r>
+            <w:t xml:space="preserve"> TEXT</w:t>
+        </w:r>
+    </w:p>
+</w:body>
+````````````````````````````````
+
+
+```````````````````````````````` example(GitHub: 6) options(emoji-unicode)
 # Heading 1 :+1:
 
 ## Heading 2 :+1:

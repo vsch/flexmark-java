@@ -119,6 +119,9 @@ public class DocxRenderer implements IRender {
     public static final DataKey<String> TABLE_HEADING = new DataKey<>("TABLE_HEADING", "TableHeading");
     public static final DataKey<String> TIGHT_PARAGRAPH_STYLE = new DataKey<>("TIGHT_PARAGRAPH_STYLE", "BodyText");
 
+
+    public static final DataKey<String> DEFAULT_TEMPLATE_RESOURCE = new DataKey<>("TIGHT_PARAGRAPH_STYLE", "/empty.xml");
+
     // Not used.
     //public static final DataKey<String> BULLET_LIST_STYLE = new DataKey<>("BULLET_LIST_STYLE", "BulletList");
     //public static final DataKey<String> BLOCK_QUOTE_BULLET_LIST_STYLE = new DataKey<>("BLOCK_QUOTE_BULLET_LIST_STYLE", "QuotationsBulletList");
@@ -190,7 +193,7 @@ public class DocxRenderer implements IRender {
     }
 
     public static WordprocessingMLPackage getDefaultTemplate() {
-        return getDefaultTemplate("/empty.xml");
+        return getDefaultTemplate(DEFAULT_TEMPLATE_RESOURCE.getFrom(null));
     }
 
     public static WordprocessingMLPackage getDefaultTemplate(String emptyXMLResourcePath) {
@@ -282,7 +285,8 @@ public class DocxRenderer implements IRender {
      * @return the rendered HTML
      */
     public String render(Node node) {
-        WordprocessingMLPackage mlPackage = getDefaultTemplate();
+        String resourcePath = DEFAULT_TEMPLATE_RESOURCE.getFrom(getOptions());
+        WordprocessingMLPackage mlPackage = getDefaultTemplate(resourcePath);
         render(node, mlPackage);
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         try {
