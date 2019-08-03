@@ -6,6 +6,7 @@ flexmark-java
 [TOC]: # " "
 
 - [To Do](#to-do)
+- [Next 0.50.28](#next-05028)
 - [0.50.26](#05026)
 - [0.50.24](#05024)
 - [0.50.22](#05022)
@@ -100,6 +101,14 @@ flexmark-java
       controlling non-formatting regions.
 * [ ] Convert anonymous classes to lambda where possible.
 
+Next 0.50.28
+------------
+
+* Add: `DocxRenderer.BULLET_LIST_STYLE` default `"BulletList"`, numbering style to use for
+  bullet list item paragraph.
+* Add: `DocxRenderer.NUMBERED_LIST_STYLE` default `"NumberedList"`, numbering style to use for
+  numbered list item paragraph.
+
 0.50.26
 -------
 
@@ -171,72 +180,69 @@ flexmark-java
   * replace `ValueRunnable` with `Consumer`, requires changing `run()` with `accept()`
   * replace `Factory` with `Supplier`, requires changing `create()` with `get()`
   * replace `Computable` with `Function`, requires changing `compute()` with `apply()` and
-        reversing template parameters.
-  * replace `ComputableFactory` with `Function`, requires changing `create()` with `apply()`
-        and reversing template parameters.
-  * replace `ComputeFactory` with `Function`, requires changing `create()` with `apply()`
-        and reversing template parameters.
+    reversing template parameters.
+  * replace `ComputableFactory` with `Function`, requires changing `create()` with `apply()` and
+    reversing template parameters.
+  * replace `ComputeFactory` with `Function`, requires changing `create()` with `apply()` and
+    reversing template parameters.
   * replace all factory interfaces to be compatible with `Function` interface and change
-        `create()` with `apply()`
-  * replace `com.vladsch.flexmark.util.collection.Consumer` with
-        `java.util.function.Consumer`
+    `create()` with `apply()`
+  * replace `com.vladsch.flexmark.util.collection.Consumer` with `java.util.function.Consumer`
   * clean up `DataKey` and `DataHolder` related classes
     * move `com.vladsch.flexmark.util.collection.DataValueFactory` to
-          `com.vladsch.flexmark.util.DataValueFactory`
+      `com.vladsch.flexmark.util.DataValueFactory`
     * replace `com.vladsch.flexmark.util.collection.DynamicDefaultKey` with
-          `com.vladsch.flexmark.util.options.DataKey`
+      `com.vladsch.flexmark.util.options.DataKey`
     * change `MutableDataHolder.getOrCompute(DataKey<T>, DataValueFactory<T>)` to
-          `MutableDataHolder.getOrCompute(DataKey<T>)` with the data value factory taken from
-          they key.
+      `MutableDataHolder.getOrCompute(DataKey<T>)` with the data value factory taken from they
+      key.
   * remove unused `ItemIndexSetMap`, use `IndexedItemSetMap` instead
-  * move `flexmark-util` Node related classes and interfaces to
-        `com.vladsch.flexmark.util.ast`
+  * move `flexmark-util` Node related classes and interfaces to `com.vladsch.flexmark.util.ast`
     * move `com.vladsch.flexmark.util.NodeTracker` to
-          `com.vladsch.flexmark.util.ast.NodeTracker`
+      `com.vladsch.flexmark.util.ast.NodeTracker`
     * move `com.vladsch.flexmark.util.BlockTracker` to
-          `com.vladsch.flexmark.util.ast.BlockTracker`
+      `com.vladsch.flexmark.util.ast.BlockTracker`
     * move `com.vladsch.flexmark.util.KeepType` to `com.vladsch.flexmark.util.ast.KeepType`
     * move `com.vladsch.flexmark.util.IParse` to `com.vladsch.flexmark.util.ast.IParse`
     * move `com.vladsch.flexmark.util.IRender` to `com.vladsch.flexmark.util.ast.IRender`
     * move `com.vladsch.flexmark.util.collection.NodeClassifierVisitor` to
-          `com.vladsch.flexmark.util.ast.NodeClassifierVisitor`
+      `com.vladsch.flexmark.util.ast.NodeClassifierVisitor`
     * move `com.vladsch.flexmark.util.collection.NodeCollectingVisitor` to
-          `com.vladsch.flexmark.util.ast.NodeCollectingVisitor`
+      `com.vladsch.flexmark.util.ast.NodeCollectingVisitor`
     * move `com.vladsch.flexmark.util.collection.ClassifyingNodeTracker` to
-          `com.vladsch.flexmark.util.ast.ClassifyingNodeTracker`
+      `com.vladsch.flexmark.util.ast.ClassifyingNodeTracker`
     * move `com.vladsch.flexmark.util.mappers.NodeClassifier` to
-          `com.vladsch.flexmark.util.ast.NodeClassifier`
+      `com.vladsch.flexmark.util.ast.NodeClassifier`
   * move data key/set/holder classes to `flexmark.util.data` package from
-        `flexmark.util.options` package
+    `flexmark.util.options` package
     * move `com.vladsch.flexmark.util.options.DataHolder` to
-          `com.vladsch.flexmark.util.data.DataHolder`
+      `com.vladsch.flexmark.util.data.DataHolder`
     * move `com.vladsch.flexmark.util.options.MutableDataSet` to
-          `com.vladsch.flexmark.util.data.MutableDataSet`
+      `com.vladsch.flexmark.util.data.MutableDataSet`
     * move `com.vladsch.flexmark.util.options.MutableScopedDataSet` to
-          `com.vladsch.flexmark.util.data.MutableScopedDataSet`
+      `com.vladsch.flexmark.util.data.MutableScopedDataSet`
     * move `com.vladsch.flexmark.util.options.ScopedDataSet` to
-          `com.vladsch.flexmark.util.data.ScopedDataSet`
+      `com.vladsch.flexmark.util.data.ScopedDataSet`
     * move `com.vladsch.flexmark.util.options.DataValueFactory` to
-          `com.vladsch.flexmark.util.data.DataValueFactory`
+      `com.vladsch.flexmark.util.data.DataValueFactory`
     * move `com.vladsch.flexmark.util.options.MutableDataHolder` to
-          `com.vladsch.flexmark.util.data.MutableDataHolder`
+      `com.vladsch.flexmark.util.data.MutableDataHolder`
     * move `com.vladsch.flexmark.util.options.DataSet` to
-          `com.vladsch.flexmark.util.data.DataSet`
+      `com.vladsch.flexmark.util.data.DataSet`
     * move `com.vladsch.flexmark.util.options.MutableDataSetter` to
-          `com.vladsch.flexmark.util.data.MutableDataSetter`
+      `com.vladsch.flexmark.util.data.MutableDataSetter`
     * move `com.vladsch.flexmark.util.options.DataKey` to
-          `com.vladsch.flexmark.util.data.DataKey`
+      `com.vladsch.flexmark.util.data.DataKey`
 * Add: `LineFormattingAppendable` and `LineFormattingAppendableImpl`
   * Fix: deprecate `FormattingAppendable` to be replaced by `LineFormattingAppendable`
-  * Fix: deprecate `FormattingAppendableImpl` to be replaced by
-        `LineFormattingAppendableImpl`
+  * Fix: deprecate `FormattingAppendableImpl` to be replaced by `LineFormattingAppendableImpl`
   * Fix: replace all uses of `FormattingAppendable` by `LineFormattingAppendable`
   * Fix: replace all uses of `FormattingAppendableImpl` by `LineFormattingAppendableImpl`
   * Delete: `FormattingAppendable` and `FormattingAppendableImpl`
-* Fix: Factor out BasedSequenceImpl functionality that does not depend on `BasedSequence`
-      and can be applied to any CharSequence into its own `RichCharSequence` interface with
-      default abstract implementation in `RichCharSequenceBase` and implementation in
-      `RichCharSequenceImpl`.
+* Fix: Factor out BasedSequenceImpl functionality that does not depend on `BasedSequence` and
+  can be applied to any CharSequence into its own `RichCharSequence` interface with default
+  abstract implementation in `RichCharSequenceBase` and implementation in
+  `RichCharSequenceImpl`.
 
 Next 0.42.14
 ------------

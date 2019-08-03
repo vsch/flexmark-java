@@ -24,6 +24,8 @@ import org.docx4j.openpackaging.exceptions.InvalidFormatException;
 import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
 import org.docx4j.openpackaging.parts.Part;
 import org.docx4j.openpackaging.parts.WordprocessingML.MainDocumentPart;
+import org.docx4j.openpackaging.parts.WordprocessingML.NumberingDefinitionsPart;
+import org.docx4j.openpackaging.parts.WordprocessingML.StyleDefinitionsPart;
 import org.docx4j.wml.CTBookmark;
 import org.docx4j.wml.Numbering;
 import org.docx4j.wml.Styles;
@@ -119,14 +121,11 @@ public class DocxRenderer implements IRender {
     public static final DataKey<String> TABLE_HEADING = new DataKey<>("TABLE_HEADING", "TableHeading");
     public static final DataKey<String> TIGHT_PARAGRAPH_STYLE = new DataKey<>("TIGHT_PARAGRAPH_STYLE", "BodyText");
 
-
     public static final DataKey<String> DEFAULT_TEMPLATE_RESOURCE = new DataKey<>("TIGHT_PARAGRAPH_STYLE", "/empty.xml");
 
-    // Not used.
-    //public static final DataKey<String> BULLET_LIST_STYLE = new DataKey<>("BULLET_LIST_STYLE", "BulletList");
-    //public static final DataKey<String> BLOCK_QUOTE_BULLET_LIST_STYLE = new DataKey<>("BLOCK_QUOTE_BULLET_LIST_STYLE", "QuotationsBulletList");
-    //public static final DataKey<String> NUMBERED_LIST_STYLE = new DataKey<>("NUMBERED_LIST_STYLE", "NumberedList");
-    //public static final DataKey<String> BLOCK_QUOTE_NUMBERED_LIST_STYLE = new DataKey<>("BLOCK_QUOTE_NUMBERED_LIST_STYLE", "QuotationsNumberedList");
+    // Now Used.
+    public static final DataKey<String> BULLET_LIST_STYLE = new DataKey<>("BULLET_LIST_STYLE", "BulletList");
+    public static final DataKey<String> NUMBERED_LIST_STYLE = new DataKey<>("NUMBERED_LIST_STYLE", "NumberedList");
 
     // internal stuff
     public static final String EMOJI_RESOURCE_PREFIX = "emoji:";
@@ -157,12 +156,7 @@ public class DocxRenderer implements IRender {
         this.nodeFormatterFactories.addAll(builder.nodeDocxRendererFactories);
 
         // Add as last. This means clients can override the rendering of core nodes if they want.
-        this.nodeFormatterFactories.add(new NodeDocxRendererFactory() {
-            @Override
-            public NodeDocxRenderer create(DataHolder options) {
-                return new CoreNodeDocxRenderer(options);
-            }
-        });
+        this.nodeFormatterFactories.add(CoreNodeDocxRenderer::new);
 
         this.attributeProviderFactories = FlatDependencyHandler.computeDependencies(builder.attributeProviderFactories);
         this.linkResolverFactories = FlatDependencyHandler.computeDependencies(builder.linkResolverFactories);
@@ -225,18 +219,18 @@ public class DocxRenderer implements IRender {
             }
 
             if (documentPart.getStyleDefinitionsPart() == null) {
-                Part stylesPart = new org.docx4j.openpackaging.parts.WordprocessingML.StyleDefinitionsPart();
+                StyleDefinitionsPart stylesPart = new org.docx4j.openpackaging.parts.WordprocessingML.StyleDefinitionsPart();
                 Styles styles = (Styles) XmlUtils.unmarshalString(STYLES_XML.getFrom(options));
-                ((org.docx4j.openpackaging.parts.WordprocessingML.StyleDefinitionsPart) stylesPart).setJaxbElement(styles);
+                stylesPart.setJaxbElement(styles);
                 documentPart.addTargetPart(stylesPart); // NB - add it to main doc part, not package!
                 assert documentPart.getStyleDefinitionsPart() != null : "Styles failed to set";
             }
 
             if (documentPart.getNumberingDefinitionsPart() == null) {
                 // add it
-                Part numberingPart = new org.docx4j.openpackaging.parts.WordprocessingML.NumberingDefinitionsPart();
+                NumberingDefinitionsPart numberingPart = new org.docx4j.openpackaging.parts.WordprocessingML.NumberingDefinitionsPart();
                 Numbering numbering = (Numbering) XmlUtils.unmarshalString(NUMBERING_XML.getFrom(options));
-                ((org.docx4j.openpackaging.parts.WordprocessingML.NumberingDefinitionsPart) numberingPart).setJaxbElement(numbering);
+                numberingPart.setJaxbElement(numbering);
                 documentPart.addTargetPart(numberingPart); // NB - add it to main doc part, not package!
                 assert documentPart.getNumberingDefinitionsPart() != null : "Numbering failed to set";
             }
@@ -486,12 +480,7 @@ public class DocxRenderer implements IRender {
         }
     };
 
-    final static Iterable<? extends Node> NULL_ITERABLE = new Iterable<Node>() {
-        @Override
-        public Iterator<Node> iterator() {
-            return null;
-        }
-    };
+    final static Iterable<? extends Node> NULL_ITERABLE = (Iterable<Node>) () -> null;
 
     private class MainDocxRenderer extends DocxContextImpl<Node> implements DocxRendererContext {
         private final Document document;
@@ -745,11 +734,7 @@ public class DocxRenderer implements IRender {
 
         @Override
         public ResolvedLink resolveLink(LinkType linkType, CharSequence url, Attributes attributes, Boolean urlEncode) {
-            HashMap<String, ResolvedLink> resolvedLinks = resolvedLinkMap.get(linkType);
-            if (resolvedLinks == null) {
-                resolvedLinks = new HashMap<String, ResolvedLink>();
-                resolvedLinkMap.put(linkType, resolvedLinks);
-            }
+            HashMap<String, ResolvedLink> resolvedLinks = resolvedLinkMap.computeIfAbsent(linkType, k -> new HashMap<String, ResolvedLink>());
 
             String urlSeq = String.valueOf(url);
             ResolvedLink resolvedLink = resolvedLinks.get(urlSeq);
@@ -827,32 +812,29 @@ public class DocxRenderer implements IRender {
                     Node oldNode = MainDocxRenderer.this.renderingNode;
                     renderingNode = node;
 
-                    contextFramed(new Runnable() {
-                        @Override
-                        public void run() {
-                            String id = getNodeId(node);
-                            if (id != null && !id.isEmpty()) {
-                                if (!bookmarkWrapsChildren.contains(node.getClass())) {
-                                    boolean isBlockBookmark = node instanceof Block;
-                                    if (isBlockBookmark) {
-                                        // put bookmark before the block element
-                                        CTBookmark bookmarkStart = createBookmarkStart(id, true);
-                                        createBookmarkEnd(bookmarkStart, true);
-                                        finalNodeRenderer.render(renderingNode, MainDocxRenderer.this);
-                                    } else {
-                                        // wrap bookmark around the inline element
-                                        CTBookmark bookmarkStart = createBookmarkStart(id, false);
-                                        finalNodeRenderer.render(renderingNode, MainDocxRenderer.this);
-                                        createBookmarkEnd(bookmarkStart, false);
-                                    }
-                                } else {
+                    contextFramed(() -> {
+                        String id = getNodeId(node);
+                        if (id != null && !id.isEmpty()) {
+                            if (!bookmarkWrapsChildren.contains(node.getClass())) {
+                                boolean isBlockBookmark = node instanceof Block;
+                                if (isBlockBookmark) {
+                                    // put bookmark before the block element
+                                    CTBookmark bookmarkStart = createBookmarkStart(id, true);
+                                    createBookmarkEnd(bookmarkStart, true);
                                     finalNodeRenderer.render(renderingNode, MainDocxRenderer.this);
+                                } else {
+                                    // wrap bookmark around the inline element
+                                    CTBookmark bookmarkStart = createBookmarkStart(id, false);
+                                    finalNodeRenderer.render(renderingNode, MainDocxRenderer.this);
+                                    createBookmarkEnd(bookmarkStart, false);
                                 }
                             } else {
                                 finalNodeRenderer.render(renderingNode, MainDocxRenderer.this);
                             }
-                            renderingNode = oldNode;
+                        } else {
+                            finalNodeRenderer.render(renderingNode, MainDocxRenderer.this);
                         }
+                        renderingNode = oldNode;
                     });
                 } else {
                     // default behavior is controlled by generic Node.class that is implemented in CoreNodeDocxRenderer

@@ -101,6 +101,8 @@ public class DocxRendererOptions {
     public final String TABLE_GRID;
     public final String TABLE_HEADING;
     public final String TIGHT_PARAGRAPH_STYLE;
+    public final String BULLET_LIST_STYLE;
+    public final String NUMBERED_LIST_STYLE;
     public final String[] HEADINGS;
 
     final HashMap<String, String> styleIdToStyleName;
@@ -178,6 +180,8 @@ public class DocxRendererOptions {
         TABLE_GRID = resolveStyleId(DocxRenderer.TABLE_GRID.getFrom(options), !isResolved);
         TABLE_HEADING = resolveStyleId(DocxRenderer.TABLE_HEADING.getFrom(options), !isResolved);
         TIGHT_PARAGRAPH_STYLE = resolveStyleId(DocxRenderer.TIGHT_PARAGRAPH_STYLE.getFrom(options), !isResolved);
+        BULLET_LIST_STYLE = resolveStyleId(DocxRenderer.BULLET_LIST_STYLE.getFrom(options), !isResolved);
+        NUMBERED_LIST_STYLE = resolveStyleId(DocxRenderer.NUMBERED_LIST_STYLE.getFrom(options), !isResolved);
 
         HEADINGS = new String[] {
                 HEADING_1,
@@ -250,6 +254,8 @@ public class DocxRendererOptions {
         TABLE_GRID = resolveStyleId(other.TABLE_GRID, other.isResolved);
         TABLE_HEADING = resolveStyleId(other.TABLE_HEADING, other.isResolved);
         TIGHT_PARAGRAPH_STYLE = resolveStyleId(other.TIGHT_PARAGRAPH_STYLE, other.isResolved);
+        BULLET_LIST_STYLE = resolveStyleId(other.BULLET_LIST_STYLE, other.isResolved);
+        NUMBERED_LIST_STYLE = resolveStyleId(other.NUMBERED_LIST_STYLE, other.isResolved);
 
         HEADINGS = other.isResolved ? other.HEADINGS :
                 new String[] {
