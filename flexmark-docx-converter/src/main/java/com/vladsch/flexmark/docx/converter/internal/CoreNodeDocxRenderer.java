@@ -797,7 +797,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
         int listLevel = nesting - 1;
 
         // see if have ListBullet style for unordered list and ListNumber for numbered list
-        String listStyleId = wantNumbered ? "ListNumber" : "ListBullet";
+        String listStyleId = wantNumbered ? "NumberedList" : "BulletList";
         Style listStyle = docx.getHelper().getStyle(listStyleId);
         if (listStyle != null) {
             PPrBase.NumPr numPr = listStyle.getPPr().getNumPr();

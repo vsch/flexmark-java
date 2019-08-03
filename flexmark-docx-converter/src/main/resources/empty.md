@@ -13,21 +13,23 @@ conversion process.
    size of this style, if desired.
 2. You may have two "Heading" styles. Open Format/Styles and delete one of the duplicates. Keep
    the one that is closest to what you want for headings. **NOTE:** even if the headings in this
-   document look good, with a duplicate "Heading" style there is guarantee which one will be
+   document look good, with a duplicate "Heading" style there is no guarantee which one will be
    used when documents are generated from this template.
 3. All Heading... styles inherit from docx style "Heading", to change the heading font you
    should change this style.
-4. In the document pages change styles given by name after `docx style "..."` do not yet change
+4. Ordered Lists use numbering list style `NumberedList`
+5. Unordered Lists use numbering list style `BulletList`
+6. In the document pages change styles given by name after `docx style "..."` do not yet change
    the text.
-5. Change page footer/header text and formatting, as you like. They are used as is in the
+7. Change page footer/header text and formatting, as you like. They are used as is in the
    conversion process. Make sure you have at least 3 pages so you can see styles for first page,
    even page and odd page.
-6. When done changing styles and headers/footers, delete any document page content you don't
+8. When done changing styles and headers/footers, delete any document page content you don't
    want to be included in every conversion. You can do select all and delete if all the content
    will come from markdown.
-7. Save it under the name you wish to use as the empty document template for conversion.
-8. You can make changes to styles directly in the saved document but if you deleted the text
-   with these styles, you will not be able to preview the results.
+9. Save it under the name you wish to use as the empty document template for conversion.
+10. You can make changes to styles directly in the saved document but if you deleted the text
+    with these styles, you will not be able to preview the results.
 
 The following document content can be used to preview changes to formatting styles and make
 changes to them.
@@ -94,7 +96,7 @@ TIGHT_PARAGRAPH_STYLE docx style named "Body Text" is used for tightly spaced li
 
 **Table Styles**
 
-| TABLE_HEADING docx style named "Table Heading"   | TABLE_HEADING  |
+|  TABLE_HEADING docx style named "Table Heading"  | TABLE_HEADING  |
 |--------------------------------------------------|----------------|
 | TABLE_CONTENTS docx style named "Table Contents" | TABLE_CONTENTS |
 | TABLE_CONTENTS                                   | TABLE_CONTENTS |
@@ -108,7 +110,8 @@ Changes can be made but this has to be done in the flexmark-java docx converter 
 resource. Then conversion with this basic template should be run against the `empty.md` file to
 generate this docx starter template.
 
-Bullet list (default bullet list style)
+Bullet list (Given by numbering list style `BulletList` or default numbering list style if one
+is not given)
 
 * Bullet Level 1
   * Bullet Level 2
@@ -120,7 +123,8 @@ Bullet list (default bullet list style)
               * Bullet Level 8
                 * Bullet Level 9
 
-Numbered List (default numbered list style)
+Numbered List (Given by numbering list style `NumberedList` or default numbering list style if
+one is not given)
 
 1. Numbered Level 1
    1. Numbered Level 2

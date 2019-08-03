@@ -40,10 +40,10 @@
                 <dc:title>Sehr geehrter Herr Wagner</dc:title>
                 <dc:creator>Stefan Schroff</dc:creator>
                 <cp:lastModifiedBy>Vladimir Schneider</cp:lastModifiedBy>
-                <cp:revision>34</cp:revision>
+                <cp:revision>32</cp:revision>
                 <cp:lastPrinted>2014-07-10T13:36:00Z</cp:lastPrinted>
                 <dcterms:created xsi:type="dcterms:W3CDTF">2019-08-01T16:52:00Z</dcterms:created>
-                <dcterms:modified xsi:type="dcterms:W3CDTF">2019-08-03T14:03:00Z</dcterms:modified>
+                <dcterms:modified xsi:type="dcterms:W3CDTF">2019-08-01T21:12:00Z</dcterms:modified>
             </cp:coreProperties>
         </pkg:xmlData>
     </pkg:part>
@@ -89,7 +89,7 @@
                         <vt:lpstr>Sehr geehrter Herr Wagner</vt:lpstr>
                     </vt:vector>
                 </TitlesOfParts>
-                <TotalTime>134</TotalTime>
+                <TotalTime>131</TotalTime>
                 <Words>0</Words>
             </Properties>
         </pkg:xmlData>
@@ -973,8 +973,8 @@
                          xmlns:wpg="http://schemas.microsoft.com/office/word/2010/wordprocessingGroup"
                          xmlns:wpi="http://schemas.microsoft.com/office/word/2010/wordprocessingInk" xmlns:wps="http://schemas.microsoft.com/office/word/2010/wordprocessingShape">
                 <w:footnote w:id="-1" w:type="separator">
-                    <w:p w14:paraId="2975246B" w14:textId="77777777"
-                         w:rsidP="005C2DA3" w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+                    <w:p w14:paraId="588F3993" w14:textId="77777777"
+                         w:rsidP="005C2DA3" w:rsidR="003A71BE" w:rsidRDefault="003A71BE">
                         <w:pPr>
                             <w:spacing w:after="0"/>
                         </w:pPr>
@@ -984,8 +984,8 @@
                     </w:p>
                 </w:footnote>
                 <w:footnote w:id="0" w:type="continuationSeparator">
-                    <w:p w14:paraId="1E5B885C" w14:textId="77777777"
-                         w:rsidP="005C2DA3" w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+                    <w:p w14:paraId="6FBF250E" w14:textId="77777777"
+                         w:rsidP="005C2DA3" w:rsidR="003A71BE" w:rsidRDefault="003A71BE">
                         <w:pPr>
                             <w:spacing w:after="0"/>
                         </w:pPr>
@@ -1030,8 +1030,8 @@
                         xmlns:wpg="http://schemas.microsoft.com/office/word/2010/wordprocessingGroup"
                         xmlns:wpi="http://schemas.microsoft.com/office/word/2010/wordprocessingInk" xmlns:wps="http://schemas.microsoft.com/office/word/2010/wordprocessingShape">
                 <w:endnote w:id="-1" w:type="separator">
-                    <w:p w14:paraId="436DBDE0" w14:textId="77777777"
-                         w:rsidP="005C2DA3" w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+                    <w:p w14:paraId="23C049DB" w14:textId="77777777"
+                         w:rsidP="005C2DA3" w:rsidR="003A71BE" w:rsidRDefault="003A71BE">
                         <w:pPr>
                             <w:spacing w:after="0"/>
                         </w:pPr>
@@ -1041,8 +1041,8 @@
                     </w:p>
                 </w:endnote>
                 <w:endnote w:id="0" w:type="continuationSeparator">
-                    <w:p w14:paraId="54CBD314" w14:textId="77777777"
-                         w:rsidP="005C2DA3" w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+                    <w:p w14:paraId="3E390A27" w14:textId="77777777"
+                         w:rsidP="005C2DA3" w:rsidR="003A71BE" w:rsidRDefault="003A71BE">
                         <w:pPr>
                             <w:spacing w:after="0"/>
                         </w:pPr>
@@ -1088,7 +1088,7 @@
                         xmlns:wpi="http://schemas.microsoft.com/office/word/2010/wordprocessingInk" xmlns:wps="http://schemas.microsoft.com/office/word/2010/wordprocessingShape">
                 <w:body>
                     <w:p w14:paraId="05F8A951" w14:textId="17651ACC"
-                         w:rsidP="00797E3F" w:rsidR="00882252"
+                         w:rsidP="00882252" w:rsidR="00882252"
                          w:rsidRDefault="00882252" w:rsidRPr="00882252">
                         <w:bookmarkStart w:id="0" w:name="_GoBack"/>
                         <w:bookmarkEnd w:id="0"/>
@@ -1191,7 +1191,6 @@
                     <w:rsid w:val="000B5277"/>
                     <w:rsid w:val="000D1D15"/>
                     <w:rsid w:val="000E6076"/>
-                    <w:rsid w:val="000E6B48"/>
                     <w:rsid w:val="000F5D19"/>
                     <w:rsid w:val="00100EEB"/>
                     <w:rsid w:val="00123A57"/>
@@ -1313,7 +1312,6 @@
                     <w:rsid w:val="00770A4C"/>
                     <w:rsid w:val="007720FE"/>
                     <w:rsid w:val="0079786C"/>
-                    <w:rsid w:val="00797E3F"/>
                     <w:rsid w:val="007A629F"/>
                     <w:rsid w:val="007A66BA"/>
                     <w:rsid w:val="007A7EB6"/>
@@ -1457,7 +1455,6 @@
                     <w:rsid w:val="00F20555"/>
                     <w:rsid w:val="00F210FA"/>
                     <w:rsid w:val="00F317D4"/>
-                    <w:rsid w:val="00F31E11"/>
                     <w:rsid w:val="00F33748"/>
                     <w:rsid w:val="00F5375E"/>
                     <w:rsid w:val="00F54898"/>
@@ -2929,7 +2926,7 @@
                     <w:rsid w:val="007A66BA"/>
                     <w:pPr>
                         <w:numPr>
-                            <w:numId w:val="40"/>
+                            <w:numId w:val="35"/>
                         </w:numPr>
                         <w:contextualSpacing/>
                     </w:pPr>
@@ -3374,16 +3371,6 @@
                         <w:color w:themeColor="accent1" w:val="4F81BD"/>
                     </w:rPr>
                 </w:style>
-                <w:style w:customStyle="1" w:styleId="NumberedList" w:type="numbering">
-                    <w:name w:val="NumberedList"/>
-                    <w:uiPriority w:val="99"/>
-                    <w:rsid w:val="000E6B48"/>
-                    <w:pPr>
-                        <w:numPr>
-                            <w:numId w:val="37"/>
-                        </w:numPr>
-                    </w:pPr>
-                </w:style>
             </w:styles>
         </pkg:xmlData>
     </pkg:part>
@@ -3647,28 +3634,16 @@
                 <w:abstractNum w15:restartNumberingAfterBreak="0" w:abstractNumId="7">
                     <w:nsid w:val="14150CDA"/>
                     <w:multiLevelType w:val="multilevel"/>
-                    <w:tmpl w:val="3266D91E"/>
+                    <w:tmpl w:val="CD4EAAA0"/>
                     <w:numStyleLink w:val="1ai"/>
                 </w:abstractNum>
                 <w:abstractNum w15:restartNumberingAfterBreak="0" w:abstractNumId="8">
                     <w:nsid w:val="145C35C3"/>
                     <w:multiLevelType w:val="multilevel"/>
-                    <w:tmpl w:val="3266D91E"/>
+                    <w:tmpl w:val="CD4EAAA0"/>
                     <w:numStyleLink w:val="1ai"/>
                 </w:abstractNum>
                 <w:abstractNum w15:restartNumberingAfterBreak="0" w:abstractNumId="9">
-                    <w:nsid w:val="156868F7"/>
-                    <w:multiLevelType w:val="multilevel"/>
-                    <w:tmpl w:val="B34C0640"/>
-                    <w:numStyleLink w:val="NumberedList"/>
-                </w:abstractNum>
-                <w:abstractNum w15:restartNumberingAfterBreak="0" w:abstractNumId="10">
-                    <w:nsid w:val="195D2D7E"/>
-                    <w:multiLevelType w:val="multilevel"/>
-                    <w:tmpl w:val="B34C0640"/>
-                    <w:numStyleLink w:val="NumberedList"/>
-                </w:abstractNum>
-                <w:abstractNum w15:restartNumberingAfterBreak="0" w:abstractNumId="11">
                     <w:nsid w:val="1D5575A2"/>
                     <w:multiLevelType w:val="multilevel"/>
                     <w:tmpl w:val="1B1C6A92"/>
@@ -3769,7 +3744,7 @@
                         </w:pPr>
                     </w:lvl>
                 </w:abstractNum>
-                <w:abstractNum w15:restartNumberingAfterBreak="0" w:abstractNumId="12">
+                <w:abstractNum w15:restartNumberingAfterBreak="0" w:abstractNumId="10">
                     <w:nsid w:val="20DC41E2"/>
                     <w:multiLevelType w:val="multilevel"/>
                     <w:tmpl w:val="1009001D"/>
@@ -3855,31 +3830,31 @@
                         </w:pPr>
                     </w:lvl>
                 </w:abstractNum>
-                <w:abstractNum w15:restartNumberingAfterBreak="0" w:abstractNumId="13">
+                <w:abstractNum w15:restartNumberingAfterBreak="0" w:abstractNumId="11">
                     <w:nsid w:val="26D45575"/>
                     <w:multiLevelType w:val="multilevel"/>
-                    <w:tmpl w:val="3266D91E"/>
+                    <w:tmpl w:val="CD4EAAA0"/>
                     <w:numStyleLink w:val="1ai"/>
                 </w:abstractNum>
-                <w:abstractNum w15:restartNumberingAfterBreak="0" w:abstractNumId="14">
+                <w:abstractNum w15:restartNumberingAfterBreak="0" w:abstractNumId="12">
                     <w:nsid w:val="27B51678"/>
                     <w:multiLevelType w:val="multilevel"/>
                     <w:tmpl w:val="0409001D"/>
                     <w:numStyleLink w:val="BulletList"/>
                 </w:abstractNum>
-                <w:abstractNum w15:restartNumberingAfterBreak="0" w:abstractNumId="15">
+                <w:abstractNum w15:restartNumberingAfterBreak="0" w:abstractNumId="13">
                     <w:nsid w:val="324F3325"/>
                     <w:multiLevelType w:val="multilevel"/>
                     <w:tmpl w:val="0409001D"/>
                     <w:numStyleLink w:val="BulletList"/>
                 </w:abstractNum>
-                <w:abstractNum w15:restartNumberingAfterBreak="0" w:abstractNumId="16">
+                <w:abstractNum w15:restartNumberingAfterBreak="0" w:abstractNumId="14">
                     <w:nsid w:val="3E7C6E1B"/>
                     <w:multiLevelType w:val="multilevel"/>
                     <w:tmpl w:val="0409001D"/>
                     <w:numStyleLink w:val="BulletList"/>
                 </w:abstractNum>
-                <w:abstractNum w15:restartNumberingAfterBreak="0" w:abstractNumId="17">
+                <w:abstractNum w15:restartNumberingAfterBreak="0" w:abstractNumId="15">
                     <w:nsid w:val="404D178A"/>
                     <w:multiLevelType w:val="multilevel"/>
                     <w:tmpl w:val="8144AB5A"/>
@@ -3966,14 +3941,15 @@
                         </w:pPr>
                     </w:lvl>
                 </w:abstractNum>
-                <w:abstractNum w15:restartNumberingAfterBreak="0" w:abstractNumId="18">
+                <w:abstractNum w15:restartNumberingAfterBreak="0" w:abstractNumId="16">
                     <w:nsid w:val="4A305907"/>
                     <w:multiLevelType w:val="multilevel"/>
-                    <w:tmpl w:val="3266D91E"/>
+                    <w:tmpl w:val="CD4EAAA0"/>
                     <w:styleLink w:val="1ai"/>
                     <w:lvl w:ilvl="0">
                         <w:start w:val="1"/>
                         <w:numFmt w:val="decimal"/>
+                        <w:pStyle w:val="ListNumber"/>
                         <w:lvlText w:val="%1)"/>
                         <w:lvlJc w:val="left"/>
                         <w:pPr>
@@ -4053,43 +4029,43 @@
                         </w:pPr>
                     </w:lvl>
                 </w:abstractNum>
-                <w:abstractNum w15:restartNumberingAfterBreak="0" w:abstractNumId="19">
+                <w:abstractNum w15:restartNumberingAfterBreak="0" w:abstractNumId="17">
                     <w:nsid w:val="4A350BD6"/>
                     <w:multiLevelType w:val="multilevel"/>
                     <w:tmpl w:val="0409001D"/>
                     <w:numStyleLink w:val="BulletList"/>
                 </w:abstractNum>
-                <w:abstractNum w15:restartNumberingAfterBreak="0" w:abstractNumId="20">
+                <w:abstractNum w15:restartNumberingAfterBreak="0" w:abstractNumId="18">
                     <w:nsid w:val="4F3C7B8B"/>
                     <w:multiLevelType w:val="multilevel"/>
-                    <w:tmpl w:val="3266D91E"/>
+                    <w:tmpl w:val="CD4EAAA0"/>
+                    <w:numStyleLink w:val="1ai"/>
+                </w:abstractNum>
+                <w:abstractNum w15:restartNumberingAfterBreak="0" w:abstractNumId="19">
+                    <w:nsid w:val="54B97A0C"/>
+                    <w:multiLevelType w:val="multilevel"/>
+                    <w:tmpl w:val="CD4EAAA0"/>
+                    <w:numStyleLink w:val="1ai"/>
+                </w:abstractNum>
+                <w:abstractNum w15:restartNumberingAfterBreak="0" w:abstractNumId="20">
+                    <w:nsid w:val="5DB4183F"/>
+                    <w:multiLevelType w:val="multilevel"/>
+                    <w:tmpl w:val="CD4EAAA0"/>
                     <w:numStyleLink w:val="1ai"/>
                 </w:abstractNum>
                 <w:abstractNum w15:restartNumberingAfterBreak="0" w:abstractNumId="21">
-                    <w:nsid w:val="54B97A0C"/>
-                    <w:multiLevelType w:val="multilevel"/>
-                    <w:tmpl w:val="3266D91E"/>
-                    <w:numStyleLink w:val="1ai"/>
-                </w:abstractNum>
-                <w:abstractNum w15:restartNumberingAfterBreak="0" w:abstractNumId="22">
-                    <w:nsid w:val="5DB4183F"/>
-                    <w:multiLevelType w:val="multilevel"/>
-                    <w:tmpl w:val="3266D91E"/>
-                    <w:numStyleLink w:val="1ai"/>
-                </w:abstractNum>
-                <w:abstractNum w15:restartNumberingAfterBreak="0" w:abstractNumId="23">
                     <w:nsid w:val="634B09F6"/>
                     <w:multiLevelType w:val="multilevel"/>
                     <w:tmpl w:val="0409001D"/>
                     <w:numStyleLink w:val="BulletList"/>
                 </w:abstractNum>
-                <w:abstractNum w15:restartNumberingAfterBreak="0" w:abstractNumId="24">
+                <w:abstractNum w15:restartNumberingAfterBreak="0" w:abstractNumId="22">
                     <w:nsid w:val="65A35FA4"/>
                     <w:multiLevelType w:val="multilevel"/>
                     <w:tmpl w:val="0409001D"/>
                     <w:numStyleLink w:val="BulletList"/>
                 </w:abstractNum>
-                <w:abstractNum w15:restartNumberingAfterBreak="0" w:abstractNumId="25">
+                <w:abstractNum w15:restartNumberingAfterBreak="0" w:abstractNumId="23">
                     <w:nsid w:val="6A0B7EB9"/>
                     <w:multiLevelType w:val="singleLevel"/>
                     <w:tmpl w:val="C778BDD4"/>
@@ -4103,138 +4079,17 @@
                         </w:pPr>
                     </w:lvl>
                 </w:abstractNum>
-                <w:abstractNum w15:restartNumberingAfterBreak="0" w:abstractNumId="26">
+                <w:abstractNum w15:restartNumberingAfterBreak="0" w:abstractNumId="24">
                     <w:nsid w:val="6DA056E2"/>
                     <w:multiLevelType w:val="multilevel"/>
-                    <w:tmpl w:val="3266D91E"/>
+                    <w:tmpl w:val="CD4EAAA0"/>
                     <w:numStyleLink w:val="1ai"/>
                 </w:abstractNum>
-                <w:abstractNum w15:restartNumberingAfterBreak="0" w:abstractNumId="27">
-                    <w:nsid w:val="71244089"/>
-                    <w:multiLevelType w:val="multilevel"/>
-                    <w:tmpl w:val="B34C0640"/>
-                    <w:styleLink w:val="NumberedList"/>
-                    <w:lvl w:ilvl="0">
-                        <w:start w:val="1"/>
-                        <w:numFmt w:val="decimal"/>
-                        <w:pStyle w:val="ListNumber"/>
-                        <w:lvlText w:val="%1."/>
-                        <w:lvlJc w:val="left"/>
-                        <w:pPr>
-                            <w:ind w:hanging="360" w:left="360"/>
-                        </w:pPr>
-                        <w:rPr>
-                            <w:rFonts w:hint="default"/>
-                        </w:rPr>
-                    </w:lvl>
-                    <w:lvl w:ilvl="1">
-                        <w:start w:val="1"/>
-                        <w:numFmt w:val="lowerLetter"/>
-                        <w:lvlText w:val="%2."/>
-                        <w:lvlJc w:val="left"/>
-                        <w:pPr>
-                            <w:ind w:hanging="360" w:left="720"/>
-                        </w:pPr>
-                        <w:rPr>
-                            <w:rFonts w:hint="default"/>
-                        </w:rPr>
-                    </w:lvl>
-                    <w:lvl w:ilvl="2">
-                        <w:start w:val="1"/>
-                        <w:numFmt w:val="lowerRoman"/>
-                        <w:lvlText w:val="%3."/>
-                        <w:lvlJc w:val="left"/>
-                        <w:pPr>
-                            <w:ind w:hanging="360" w:left="1080"/>
-                        </w:pPr>
-                        <w:rPr>
-                            <w:rFonts w:hint="default"/>
-                        </w:rPr>
-                    </w:lvl>
-                    <w:lvl w:ilvl="3">
-                        <w:start w:val="1"/>
-                        <w:numFmt w:val="decimal"/>
-                        <w:lvlText w:val="(%4)"/>
-                        <w:lvlJc w:val="left"/>
-                        <w:pPr>
-                            <w:ind w:hanging="360" w:left="1440"/>
-                        </w:pPr>
-                        <w:rPr>
-                            <w:rFonts w:hint="default"/>
-                        </w:rPr>
-                    </w:lvl>
-                    <w:lvl w:ilvl="4">
-                        <w:start w:val="1"/>
-                        <w:numFmt w:val="lowerLetter"/>
-                        <w:lvlText w:val="(%5)"/>
-                        <w:lvlJc w:val="left"/>
-                        <w:pPr>
-                            <w:ind w:hanging="360" w:left="1800"/>
-                        </w:pPr>
-                        <w:rPr>
-                            <w:rFonts w:hint="default"/>
-                        </w:rPr>
-                    </w:lvl>
-                    <w:lvl w:ilvl="5">
-                        <w:start w:val="1"/>
-                        <w:numFmt w:val="lowerRoman"/>
-                        <w:lvlText w:val="(%6)"/>
-                        <w:lvlJc w:val="left"/>
-                        <w:pPr>
-                            <w:ind w:hanging="360" w:left="2160"/>
-                        </w:pPr>
-                        <w:rPr>
-                            <w:rFonts w:hint="default"/>
-                        </w:rPr>
-                    </w:lvl>
-                    <w:lvl w:ilvl="6">
-                        <w:start w:val="1"/>
-                        <w:numFmt w:val="decimal"/>
-                        <w:lvlText w:val="%7)"/>
-                        <w:lvlJc w:val="left"/>
-                        <w:pPr>
-                            <w:ind w:hanging="360" w:left="2520"/>
-                        </w:pPr>
-                        <w:rPr>
-                            <w:rFonts w:hint="default"/>
-                        </w:rPr>
-                    </w:lvl>
-                    <w:lvl w:ilvl="7">
-                        <w:start w:val="1"/>
-                        <w:numFmt w:val="lowerLetter"/>
-                        <w:lvlText w:val="%8)"/>
-                        <w:lvlJc w:val="left"/>
-                        <w:pPr>
-                            <w:ind w:hanging="360" w:left="2880"/>
-                        </w:pPr>
-                        <w:rPr>
-                            <w:rFonts w:hint="default"/>
-                        </w:rPr>
-                    </w:lvl>
-                    <w:lvl w:ilvl="8">
-                        <w:start w:val="1"/>
-                        <w:numFmt w:val="lowerRoman"/>
-                        <w:lvlText w:val="%9)"/>
-                        <w:lvlJc w:val="left"/>
-                        <w:pPr>
-                            <w:ind w:hanging="360" w:left="3240"/>
-                        </w:pPr>
-                        <w:rPr>
-                            <w:rFonts w:hint="default"/>
-                        </w:rPr>
-                    </w:lvl>
-                </w:abstractNum>
-                <w:abstractNum w15:restartNumberingAfterBreak="0" w:abstractNumId="28">
+                <w:abstractNum w15:restartNumberingAfterBreak="0" w:abstractNumId="25">
                     <w:nsid w:val="74E25195"/>
                     <w:multiLevelType w:val="multilevel"/>
-                    <w:tmpl w:val="3266D91E"/>
+                    <w:tmpl w:val="CD4EAAA0"/>
                     <w:numStyleLink w:val="1ai"/>
-                </w:abstractNum>
-                <w:abstractNum w15:restartNumberingAfterBreak="0" w:abstractNumId="29">
-                    <w:nsid w:val="75EE7722"/>
-                    <w:multiLevelType w:val="multilevel"/>
-                    <w:tmpl w:val="B34C0640"/>
-                    <w:numStyleLink w:val="NumberedList"/>
                 </w:abstractNum>
                 <w:num w:numId="1">
                     <w:abstractNumId w:val="6"/>
@@ -4243,37 +4098,37 @@
                     <w:abstractNumId w:val="5"/>
                 </w:num>
                 <w:num w:numId="3">
-                    <w:abstractNumId w:val="15"/>
-                </w:num>
-                <w:num w:numId="4">
-                    <w:abstractNumId w:val="23"/>
-                </w:num>
-                <w:num w:numId="5">
-                    <w:abstractNumId w:val="16"/>
-                </w:num>
-                <w:num w:numId="6">
-                    <w:abstractNumId w:val="24"/>
-                </w:num>
-                <w:num w:numId="7">
-                    <w:abstractNumId w:val="18"/>
-                </w:num>
-                <w:num w:numId="8">
-                    <w:abstractNumId w:val="17"/>
-                </w:num>
-                <w:num w:numId="9">
                     <w:abstractNumId w:val="13"/>
                 </w:num>
+                <w:num w:numId="4">
+                    <w:abstractNumId w:val="21"/>
+                </w:num>
+                <w:num w:numId="5">
+                    <w:abstractNumId w:val="14"/>
+                </w:num>
+                <w:num w:numId="6">
+                    <w:abstractNumId w:val="22"/>
+                </w:num>
+                <w:num w:numId="7">
+                    <w:abstractNumId w:val="16"/>
+                </w:num>
+                <w:num w:numId="8">
+                    <w:abstractNumId w:val="15"/>
+                </w:num>
+                <w:num w:numId="9">
+                    <w:abstractNumId w:val="11"/>
+                </w:num>
                 <w:num w:numId="10">
-                    <w:abstractNumId w:val="20"/>
+                    <w:abstractNumId w:val="18"/>
                 </w:num>
                 <w:num w:numId="11">
-                    <w:abstractNumId w:val="28"/>
+                    <w:abstractNumId w:val="25"/>
                 </w:num>
                 <w:num w:numId="12">
-                    <w:abstractNumId w:val="26"/>
+                    <w:abstractNumId w:val="24"/>
                 </w:num>
                 <w:num w:numId="13">
-                    <w:abstractNumId w:val="18"/>
+                    <w:abstractNumId w:val="16"/>
                 </w:num>
                 <w:num w:numId="14">
                     <w:abstractNumId w:val="0"/>
@@ -4309,52 +4164,40 @@
                     <w:abstractNumId w:val="8"/>
                 </w:num>
                 <w:num w:numId="25">
-                    <w:abstractNumId w:val="25"/>
+                    <w:abstractNumId w:val="23"/>
                 </w:num>
                 <w:num w:numId="26">
-                    <w:abstractNumId w:val="21"/>
-                </w:num>
-                <w:num w:numId="27">
                     <w:abstractNumId w:val="19"/>
                 </w:num>
+                <w:num w:numId="27">
+                    <w:abstractNumId w:val="17"/>
+                </w:num>
                 <w:num w:numId="28">
-                    <w:abstractNumId w:val="11"/>
+                    <w:abstractNumId w:val="9"/>
                 </w:num>
                 <w:num w:numId="29">
-                    <w:abstractNumId w:val="11"/>
+                    <w:abstractNumId w:val="9"/>
                 </w:num>
                 <w:num w:numId="30">
-                    <w:abstractNumId w:val="11"/>
+                    <w:abstractNumId w:val="9"/>
                 </w:num>
                 <w:num w:numId="31">
-                    <w:abstractNumId w:val="11"/>
+                    <w:abstractNumId w:val="9"/>
                 </w:num>
                 <w:num w:numId="32">
-                    <w:abstractNumId w:val="11"/>
+                    <w:abstractNumId w:val="9"/>
                 </w:num>
                 <w:num w:numId="33">
-                    <w:abstractNumId w:val="11"/>
+                    <w:abstractNumId w:val="9"/>
                 </w:num>
                 <w:num w:numId="34">
-                    <w:abstractNumId w:val="14"/>
+                    <w:abstractNumId w:val="12"/>
                 </w:num>
                 <w:num w:numId="35">
-                    <w:abstractNumId w:val="18"/>
+                    <w:abstractNumId w:val="16"/>
                 </w:num>
                 <w:num w:numId="36">
-                    <w:abstractNumId w:val="18"/>
-                </w:num>
-                <w:num w:numId="37">
-                    <w:abstractNumId w:val="27"/>
-                </w:num>
-                <w:num w:numId="38">
-                    <w:abstractNumId w:val="10"/>
-                </w:num>
-                <w:num w:numId="39">
-                    <w:abstractNumId w:val="29"/>
-                </w:num>
-                <w:num w:numId="40">
-                    <w:abstractNumId w:val="9"/>
+                    <w:abstractNumId w:val="16"/>
                 </w:num>
                 <w:numIdMacAtCleanup w:val="13"/>
             </w:numbering>

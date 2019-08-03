@@ -2,6 +2,7 @@ package com.vladsch.flexmark.docx.converter.util;
 
 import com.vladsch.flexmark.docx.converter.DocxRendererOptions;
 import org.docx4j.model.PropertyResolver;
+import org.docx4j.model.listnumbering.AbstractListNumberingDefinition;
 import org.docx4j.model.styles.StyleUtil;
 import org.docx4j.openpackaging.exceptions.Docx4JException;
 import org.docx4j.openpackaging.packages.WordprocessingMLPackage;

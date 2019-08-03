@@ -6,6 +6,7 @@ flexmark-java
 [TOC]: # " "
 
 - [To Do](#to-do)
+- [0.50.26](#05026)
 - [0.50.24](#05024)
 - [0.50.22](#05022)
 - [0.50.20](#05020)
@@ -98,6 +99,14 @@ flexmark-java
 * [ ] Add: `<!-- @formatter:on -->` and `<!-- @formatter:on -->` tags to `Formatter` for
       controlling non-formatting regions.
 * [ ] Convert anonymous classes to lambda where possible.
+
+0.50.26
+-------
+
+* Fix: docx converter to use `BulletList` and `NumberedList` numbering list styles for list
+  conversions to allow easy list item styling for multi-level lists
+  * Add: `DocxConverterEmpty` to samples for generating `flexmark-empty-template.docx` from
+    `empty.md` and `empty.xml`
 
 0.50.24
 -------

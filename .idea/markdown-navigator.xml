@@ -16,7 +16,7 @@
         <option name="DEFINITIONS" value="false" />
         <option name="DEFINITION_BREAK_DOUBLE_BLANK_LINE" value="false" />
         <option name="FENCED_CODE_BLOCKS" value="true" />
-        <option name="FOOTNOTES" value="false" />
+        <option name="FOOTNOTES" value="true" />
         <option name="HARDWRAPS" value="false" />
         <option name="HTML_DEEP_PARSER" value="false" />
         <option name="INSERTED" value="false" />
