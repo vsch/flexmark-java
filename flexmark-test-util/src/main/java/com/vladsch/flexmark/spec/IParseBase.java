@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.spec;
 
-import com.vladsch.flexmark.util.ast.IParse;
 import com.vladsch.flexmark.util.ast.Document;
+import com.vladsch.flexmark.util.ast.IParse;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
@@ -29,12 +29,12 @@ public abstract class IParseBase implements IParse {
     }
 
     @Override
-    public boolean transferReferences(final Document document, final Document included) {
+    public boolean transferReferences(Document document, Document included) {
         return transferReferences(document, included, null);
     }
 
     @Override
-    public boolean transferReferences(final Document document, final Document included, Boolean onlyIfUndefined) {
+    public boolean transferReferences(Document document, Document included, Boolean onlyIfUndefined) {
         return false;
     }
 

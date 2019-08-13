@@ -37,7 +37,7 @@ public class Bracket {
         return allowed;
     }
 
-    public void setAllowed(final boolean allowed) {
+    public void setAllowed(boolean allowed) {
         this.allowed = allowed;
     }
 
@@ -45,7 +45,7 @@ public class Bracket {
         return bracketAfter;
     }
 
-    public void setBracketAfter(final boolean bracketAfter) {
+    public void setBracketAfter(boolean bracketAfter) {
         this.bracketAfter = bracketAfter;
     }
 

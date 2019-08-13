@@ -5,7 +5,6 @@ import com.vladsch.flexmark.ext.autolink.AutolinkExtension;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.block.NodePostProcessor;
 import com.vladsch.flexmark.parser.block.NodePostProcessorFactory;
-import com.vladsch.flexmark.util.ast.NodeTracker;
 import com.vladsch.flexmark.util.ast.*;
 import com.vladsch.flexmark.util.html.Escaping;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
@@ -36,7 +35,7 @@ public class AutolinkNodePostProcessor extends NodePostProcessor {
         intellijDummyIdentifier = Parser.INTELLIJ_DUMMY_IDENTIFIER.getFrom(document);
     }
 
-    public boolean isIgnoredLinkPrefix(final CharSequence url) {
+    public boolean isIgnoredLinkPrefix(CharSequence url) {
         if (ignoredLinks != null) {
             Matcher matcher = ignoredLinks.matcher(url);
             return matcher.matches();
@@ -49,7 +48,7 @@ public class AutolinkNodePostProcessor extends NodePostProcessor {
         private final int beginIndex;
         private final int endIndex;
 
-        public DummyLinkSpan(final LinkType linkType, final int beginIndex, final int endIndex) {
+        public DummyLinkSpan(LinkType linkType, int beginIndex, int endIndex) {
             this.linkType = linkType;
             this.beginIndex = beginIndex;
             this.endIndex = endIndex;
@@ -114,7 +113,7 @@ public class AutolinkNodePostProcessor extends NodePostProcessor {
             linksList.add(link);
         }
 
-        final Matcher matcher = URI_PREFIX.matcher(literal);
+        Matcher matcher = URI_PREFIX.matcher(literal);
         while (matcher.find()) {
             int start = matcher.start(1);
             int end = matcher.end(1);
@@ -185,7 +184,7 @@ public class AutolinkNodePostProcessor extends NodePostProcessor {
                 //    int tmp = 0;
             }
 
-            final BasedSequence linkChars = linkText.baseSubSequence(linkText.getStartOffset(), linkText.getEndOffset());
+            BasedSequence linkChars = linkText.baseSubSequence(linkText.getStartOffset(), linkText.getEndOffset());
             Text contentNode = new Text(linkChars);
             LinkNode linkNode;
 

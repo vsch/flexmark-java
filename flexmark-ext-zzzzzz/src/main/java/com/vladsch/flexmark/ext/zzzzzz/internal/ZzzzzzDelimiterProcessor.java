@@ -26,12 +26,12 @@ public class ZzzzzzDelimiterProcessor implements DelimiterProcessor {
     }
 
     @Override
-    public boolean canBeOpener(final String before, final String after, boolean leftFlanking, boolean rightFlanking, boolean beforeIsPunctuation, boolean afterIsPunctuation, boolean beforeIsWhitespace, boolean afterIsWhiteSpace) {
+    public boolean canBeOpener(String before, String after, boolean leftFlanking, boolean rightFlanking, boolean beforeIsPunctuation, boolean afterIsPunctuation, boolean beforeIsWhitespace, boolean afterIsWhiteSpace) {
         return leftFlanking;
     }
 
     @Override
-    public boolean canBeCloser(final String before, final String after, boolean leftFlanking, boolean rightFlanking, boolean beforeIsPunctuation, boolean afterIsPunctuation, boolean beforeIsWhitespace, boolean afterIsWhiteSpace) {
+    public boolean canBeCloser(String before, String after, boolean leftFlanking, boolean rightFlanking, boolean beforeIsPunctuation, boolean afterIsPunctuation, boolean beforeIsWhitespace, boolean afterIsWhiteSpace) {
         return rightFlanking;
     }
 
@@ -50,7 +50,7 @@ public class ZzzzzzDelimiterProcessor implements DelimiterProcessor {
     }
 
     @Override
-    public Node unmatchedDelimiterNode(InlineParser inlineParser, final DelimiterRun delimiter) {
+    public Node unmatchedDelimiterNode(InlineParser inlineParser, DelimiterRun delimiter) {
         return null;
     }
 

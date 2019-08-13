@@ -1,8 +1,9 @@
 package com.vladsch.flexmark.parser.block;
 
-import java.util.function.Function;
-import com.vladsch.flexmark.util.dependency.Dependent;
 import com.vladsch.flexmark.util.data.DataHolder;
+import com.vladsch.flexmark.util.dependency.Dependent;
+
+import java.util.function.Function;
 
 /**
  * Custom block parser factory to create parser instance specific block parser factory

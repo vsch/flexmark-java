@@ -25,17 +25,17 @@ public class JekyllFrontMatterExtension implements Parser.ParserExtension, HtmlR
     }
 
     @Override
-    public void extend(final Formatter.Builder builder) {
+    public void extend(Formatter.Builder builder) {
         builder.nodeFormatterFactory(new JekyllFrontMatterNodeFormatter.Factory());
     }
 
     @Override
-    public void rendererOptions(final MutableDataHolder options) {
+    public void rendererOptions(MutableDataHolder options) {
 
     }
 
     @Override
-    public void parserOptions(final MutableDataHolder options) {
+    public void parserOptions(MutableDataHolder options) {
 
     }
 

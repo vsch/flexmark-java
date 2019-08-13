@@ -3,7 +3,7 @@ package com.vladsch.flexmark.convert.html;
 /**
  * @deprecated Use public enum ExtensionConversion { from flexmark-html2md-converter module instead.
  * The latter is an extensible version of HTML conversion module with the same features as flexmark-html-parser.
- *
+ * <p>
  * This class is here for backward compatibility and is no longer maintained.
  */
 @Deprecated

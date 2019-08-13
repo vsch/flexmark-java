@@ -8,13 +8,13 @@ import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.ParserEmulationProfile;
 import com.vladsch.flexmark.util.Utils;
 import com.vladsch.flexmark.util.ast.*;
+import com.vladsch.flexmark.util.data.DataHolder;
+import com.vladsch.flexmark.util.data.DataKey;
+import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.format.options.ElementPlacement;
 import com.vladsch.flexmark.util.format.options.ElementPlacementSort;
 import com.vladsch.flexmark.util.format.options.ListSpacing;
 import com.vladsch.flexmark.util.html.LineFormattingAppendable;
-import com.vladsch.flexmark.util.data.DataHolder;
-import com.vladsch.flexmark.util.data.DataKey;
-import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.RepeatedCharSequence;
 
@@ -58,7 +58,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
     }
 
     @Override
-    public ReferenceRepository getRepository(final DataHolder options) {
+    public ReferenceRepository getRepository(DataHolder options) {
         return options.get(Parser.REFERENCES);
     }
 
@@ -73,7 +73,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
     }
 
     @Override
-    public void renderReferenceBlock(final Reference node, final NodeFormatterContext context, final MarkdownWriter markdown) {
+    public void renderReferenceBlock(Reference node, NodeFormatterContext context, MarkdownWriter markdown) {
         if (context.isTransformingText()) {
             markdown.append(node.getOpeningMarker());
             markdown.appendTranslating(node.getReference());
@@ -105,7 +105,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
     }
 
     @Override
-    public void renderDocument(final NodeFormatterContext context, final MarkdownWriter markdown, final Document document, final FormattingPhase phase) {
+    public void renderDocument(NodeFormatterContext context, MarkdownWriter markdown, Document document, FormattingPhase phase) {
         super.renderDocument(context, markdown, document, phase);
 
         if (phase == DOCUMENT_BOTTOM) {
@@ -121,7 +121,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
 
                 Collections.sort(keys, new Comparator<DataKey<?>>() {
                     @Override
-                    public int compare(final DataKey<?> o1, final DataKey<?> o2) {
+                    public int compare(DataKey<?> o1, DataKey<?> o2) {
                         return o1.getName().compareTo(o2.getName());
                     }
                 });
@@ -420,7 +420,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
         context.renderChildren(node);
     }
 
-    private void render(final Heading node, final NodeFormatterContext context, final MarkdownWriter markdown) {
+    private void render(Heading node, NodeFormatterContext context, MarkdownWriter markdown) {
         markdown.blankLine();
         if (node.isAtxHeading()) {
             markdown.append(node.getOpeningMarker());
@@ -431,7 +431,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
 
             context.translatingRefTargetSpan(node, new TranslatingSpanRender() {
                 @Override
-                public void render(final NodeFormatterContext context, final MarkdownWriter writer) {
+                public void render(NodeFormatterContext context, MarkdownWriter writer) {
                     context.renderChildren(node);
                 }
             });
@@ -460,7 +460,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
             int lastOffset = markdown.offsetWithPending() + 1;
             context.translatingRefTargetSpan(node, new TranslatingSpanRender() {
                 @Override
-                public void render(final NodeFormatterContext context, final MarkdownWriter writer) {
+                public void render(NodeFormatterContext context, MarkdownWriter writer) {
                     context.renderChildren(node);
                 }
             });
@@ -475,7 +475,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
         markdown.tailBlankLine();
     }
 
-    private void render(final BlockQuote node, final NodeFormatterContext context, final MarkdownWriter markdown) {
+    private void render(BlockQuote node, NodeFormatterContext context, MarkdownWriter markdown) {
         String prefix = node.getOpeningMarker().toString();
         boolean compactPrefix = false;
 
@@ -655,11 +655,11 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
         markdown.tailBlankLine();
     }
 
-    private void render(final BulletList node, final NodeFormatterContext context, MarkdownWriter markdown) {
+    private void render(BulletList node, NodeFormatterContext context, MarkdownWriter markdown) {
         renderList(node, context, markdown);
     }
 
-    private void render(final OrderedList node, final NodeFormatterContext context, MarkdownWriter markdown) {
+    private void render(OrderedList node, NodeFormatterContext context, MarkdownWriter markdown) {
         renderList(node, context, markdown);
     }
 
@@ -671,7 +671,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
         renderListItem(node, context, markdown, listOptions, "", false);
     }
 
-    public static void renderList(final ListBlock node, final NodeFormatterContext context, MarkdownWriter markdown) {
+    public static void renderList(ListBlock node, NodeFormatterContext context, MarkdownWriter markdown) {
         ArrayList<Node> itemList = new ArrayList<Node>();
         Node item = node.getFirstChild();
         while (item != null) {
@@ -681,7 +681,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
         renderList(node, context, markdown, itemList);
     }
 
-    public static void renderList(final ListBlock node, final NodeFormatterContext context, MarkdownWriter markdown, List<Node> itemList) {
+    public static void renderList(ListBlock node, NodeFormatterContext context, MarkdownWriter markdown, List<Node> itemList) {
         if (context.getFormatterOptions().listAddBlankLineBefore && !node.isOrDescendantOfType(ListItem.class)) {
             markdown.blankLine();
         }
@@ -732,13 +732,13 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
     }
 
     public static void renderListItem(
-            final ListItem node,
-            final NodeFormatterContext context,
-            final MarkdownWriter markdown,
-            final ListOptions listOptions, CharSequence markerSuffix,
-            final boolean addBlankLineLooseItems
+            ListItem node,
+            NodeFormatterContext context,
+            MarkdownWriter markdown,
+            ListOptions listOptions, CharSequence markerSuffix,
+            boolean addBlankLineLooseItems
     ) {
-        final FormatterOptions options = context.getFormatterOptions();
+        FormatterOptions options = context.getFormatterOptions();
 
         if (options.listRemoveEmptyItems && !(node.hasChildren() && node.getFirstChildAnyNot(BlankLine.class) != null)) {
             return;
@@ -823,10 +823,10 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
     }
 
     @SuppressWarnings("WeakerAccess")
-    public static void renderTextBlockParagraphLines(final Node node, final NodeFormatterContext context, final MarkdownWriter markdown) {
+    public static void renderTextBlockParagraphLines(Node node, NodeFormatterContext context, MarkdownWriter markdown) {
         context.translatingSpan(new TranslatingSpanRender() {
             @Override
-            public void render(final NodeFormatterContext context, final MarkdownWriter writer) {
+            public void render(NodeFormatterContext context, MarkdownWriter writer) {
                 context.renderChildren(node);
             }
         });
@@ -834,22 +834,22 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
     }
 
     @SuppressWarnings("WeakerAccess")
-    public static void renderLooseParagraph(final Paragraph node, final NodeFormatterContext context, final MarkdownWriter markdown) {
+    public static void renderLooseParagraph(Paragraph node, NodeFormatterContext context, MarkdownWriter markdown) {
         markdown.blankLine();
         renderTextBlockParagraphLines(node, context, markdown);
         markdown.tailBlankLine();
     }
 
     @SuppressWarnings("WeakerAccess")
-    public static void renderLooseItemParagraph(final Paragraph node, final NodeFormatterContext context, final MarkdownWriter markdown) {
+    public static void renderLooseItemParagraph(Paragraph node, NodeFormatterContext context, MarkdownWriter markdown) {
         renderTextBlockParagraphLines(node, context, markdown);
         markdown.tailBlankLine();
     }
 
-    private void render(final Paragraph node, final NodeFormatterContext context, final MarkdownWriter markdown) {
+    private void render(Paragraph node, NodeFormatterContext context, MarkdownWriter markdown) {
         if (node.getParent() instanceof ParagraphContainer) {
-            final boolean startWrappingDisabled = ((ParagraphContainer) node.getParent()).isParagraphStartWrappingDisabled(node);
-            final boolean endWrappingDisabled = ((ParagraphContainer) node.getParent()).isParagraphEndWrappingDisabled(node);
+            boolean startWrappingDisabled = ((ParagraphContainer) node.getParent()).isParagraphStartWrappingDisabled(node);
+            boolean endWrappingDisabled = ((ParagraphContainer) node.getParent()).isParagraphEndWrappingDisabled(node);
             if (startWrappingDisabled || endWrappingDisabled) {
                 if (!startWrappingDisabled) markdown.blankLine();
                 renderTextBlockParagraphLines(node, context, markdown);
@@ -928,18 +928,18 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
 
     static final TranslationPlaceholderGenerator htmlEntityPlaceholderGenerator = new TranslationPlaceholderGenerator() {
         @Override
-        public String getPlaceholder(final int index) {
+        public String getPlaceholder(int index) {
             return String.format(Locale.US, "&#%d;", index);
         }
     };
 
-    private void render(final HtmlEntity node, NodeFormatterContext context, final MarkdownWriter markdown) {
+    private void render(HtmlEntity node, NodeFormatterContext context, MarkdownWriter markdown) {
         if (context.getRenderPurpose() == FORMAT) {
             markdown.append(node.getChars());
         } else {
             context.customPlaceholderFormat(htmlEntityPlaceholderGenerator, new TranslatingSpanRender() {
                 @Override
-                public void render(final NodeFormatterContext context, final MarkdownWriter markdown) {
+                public void render(NodeFormatterContext context, MarkdownWriter markdown) {
                     markdown.appendNonTranslating(node.getChars());
                 }
             });
@@ -997,7 +997,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
 
     private void render(HtmlCommentBlock node, NodeFormatterContext context, MarkdownWriter markdown) {
         // here we need to make it translating, it is a comment
-        final BasedSequence text = node.getChars().subSequence(4, node.getChars().length() - 4);
+        BasedSequence text = node.getChars().subSequence(4, node.getChars().length() - 4);
         markdown.appendTranslating("<!--", text, "-->", node.getChars().trimmedEOL());
         //markdown.append(node.getChars());
     }
@@ -1023,7 +1023,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
 
     private void render(HtmlInnerBlockComment node, NodeFormatterContext context, MarkdownWriter markdown) {
         // here we need to make it translating, it is a comment
-        final BasedSequence text = node.getChars().subSequence(4, node.getChars().length() - 3);
+        BasedSequence text = node.getChars().subSequence(4, node.getChars().length() - 3);
         markdown.appendTranslating("<!--", text, "-->");
         //markdown.append(node.getChars());
     }
@@ -1048,7 +1048,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
 
     private void render(HtmlInlineComment node, NodeFormatterContext context, MarkdownWriter markdown) {
         // TODO: this really needs to be parsed but we won't do it
-        final BasedSequence text = node.getChars().subSequence(4, node.getChars().length() - 3);
+        BasedSequence text = node.getChars().subSequence(4, node.getChars().length() - 3);
         markdown.appendTranslating("<!--", text, "-->");
     }
 
@@ -1059,7 +1059,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
     public static final DataKey<Boolean> UNWRAPPED_AUTO_LINKS = new DataKey<>("UNWRAPPED_AUTO_LINKS", false);
     public static final DataKey<HashSet<String>> UNWRAPPED_AUTO_LINKS_MAP = new DataKey<>("UNWRAPPED_AUTO_LINKS_MAP", new HashSet<String>());
 
-    private void render(AutoLink node, NodeFormatterContext context, final MarkdownWriter markdown) {
+    private void render(AutoLink node, NodeFormatterContext context, MarkdownWriter markdown) {
         renderAutoLink(node, context, markdown, "hh://", ".h");
     }
 
@@ -1067,7 +1067,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
         renderAutoLink(node, context, markdown, null, "@1.h");
     }
 
-    private void renderAutoLink(final DelimitedLinkNode node, final NodeFormatterContext context, final MarkdownWriter markdown, final String prefix, final String suffix) {
+    private void renderAutoLink(DelimitedLinkNode node, NodeFormatterContext context, MarkdownWriter markdown, String prefix, String suffix) {
         if (context.isTransformingText()) {
             switch (context.getRenderPurpose()) {
                 case TRANSLATION_SPANS:
@@ -1077,7 +1077,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
                         markdown.append("<");
                         markdown.appendNonTranslating(prefix, node.getText(), suffix, null, new Consumer<String>() {
                             @Override
-                            public void accept(final String s) {
+                            public void accept(String s) {
                                 myTranslationStore.get(UNWRAPPED_AUTO_LINKS_MAP).add(s);
                             }
                         });
@@ -1115,7 +1115,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
     }
 
     public static void appendWhiteSpaceBetween(
-            final MarkdownWriter markdown,
+            MarkdownWriter markdown,
             Node prev,
             Node next,
             boolean preserve,
@@ -1128,7 +1128,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
     }
 
     public static void appendWhiteSpaceBetween(
-            final MarkdownWriter markdown,
+            MarkdownWriter markdown,
             BasedSequence prev,
             BasedSequence next,
             boolean preserve,
@@ -1189,7 +1189,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
         }
     }
 
-    private void render(final Link node, NodeFormatterContext context, MarkdownWriter markdown) {
+    private void render(Link node, NodeFormatterContext context, MarkdownWriter markdown) {
         markdown.lineIf(formatterOptions.keepExplicitLinksAtStart);
         if (!formatterOptions.optimizedInlineRendering || context.isTransformingText()) {
             markdown.append(node.getTextOpeningMarker());
@@ -1253,7 +1253,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
         }
     }
 
-    private void render(final LinkRef node, NodeFormatterContext context, MarkdownWriter markdown) {
+    private void render(LinkRef node, NodeFormatterContext context, MarkdownWriter markdown) {
         if (!formatterOptions.optimizedInlineRendering || context.isTransformingText()) {
             if (node.isReferenceTextCombined()) {
                 markdown.append(node.getReferenceOpeningMarker());

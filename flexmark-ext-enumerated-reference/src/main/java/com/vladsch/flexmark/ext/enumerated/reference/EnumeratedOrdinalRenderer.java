@@ -37,7 +37,7 @@ public interface EnumeratedOrdinalRenderer {
      *                         after output of default text and before output of referenceOrdinal, to make sure that parent compound
      *                         ordinal formats are output.
      */
-    void render(final int referenceOrdinal, EnumeratedReferenceBlock referenceFormat, final String defaultText, final boolean needSeparator);
+    void render(int referenceOrdinal, EnumeratedReferenceBlock referenceFormat, String defaultText, boolean needSeparator);
 
     /**
      * After Rendering is complete

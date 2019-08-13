@@ -83,11 +83,11 @@ public class AdmonitionBlock extends Block {
         return titleOpeningMarker;
     }
 
-    public void setTitleOpeningMarker(final BasedSequence titleOpeningMarker) {
+    public void setTitleOpeningMarker(BasedSequence titleOpeningMarker) {
         this.titleOpeningMarker = titleOpeningMarker;
     }
 
-    public void setTitle(final BasedSequence title) {
+    public void setTitle(BasedSequence title) {
         this.title = title;
     }
 
@@ -95,7 +95,7 @@ public class AdmonitionBlock extends Block {
         return titleClosingMarker;
     }
 
-    public void setTitleClosingMarker(final BasedSequence titleClosingMarker) {
+    public void setTitleClosingMarker(BasedSequence titleClosingMarker) {
         this.titleClosingMarker = titleClosingMarker;
     }
 

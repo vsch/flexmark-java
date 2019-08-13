@@ -17,7 +17,7 @@ public abstract class LinkNodeBase extends Node {
     public LinkNodeBase() {
     }
 
-    public LinkNodeBase(final BasedSequence chars) {
+    public LinkNodeBase(BasedSequence chars) {
         super(chars);
     }
 

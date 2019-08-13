@@ -2,9 +2,9 @@ package com.vladsch.flexmark.ext.typographic.internal;
 
 import com.vladsch.flexmark.ext.typographic.TypographicSmarts;
 import com.vladsch.flexmark.parser.InlineParser;
-import com.vladsch.flexmark.parser.LightInlineParser;
 import com.vladsch.flexmark.parser.InlineParserExtension;
 import com.vladsch.flexmark.parser.InlineParserExtensionFactory;
+import com.vladsch.flexmark.parser.LightInlineParser;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 import java.util.Set;
@@ -12,22 +12,22 @@ import java.util.Set;
 public class SmartsInlineParser implements InlineParserExtension {
     private final SmartsParsing parsing;
 
-    public SmartsInlineParser(final LightInlineParser inlineParser) {
+    public SmartsInlineParser(LightInlineParser inlineParser) {
         this.parsing = new SmartsParsing(inlineParser.getParsing());
     }
 
     @Override
-    public void finalizeDocument(final InlineParser inlineParser) {
+    public void finalizeDocument(InlineParser inlineParser) {
 
     }
 
     @Override
-    public void finalizeBlock(final InlineParser inlineParser) {
+    public void finalizeBlock(InlineParser inlineParser) {
 
     }
 
     @Override
-    public boolean parse(final LightInlineParser inlineParser) {
+    public boolean parse(LightInlineParser inlineParser) {
         BasedSequence match = inlineParser.match(parsing.SMARTS);
         if (match != null) {
             BasedSequence input = inlineParser.getInput();
@@ -65,7 +65,7 @@ public class SmartsInlineParser implements InlineParserExtension {
         }
 
         @Override
-        public InlineParserExtension apply(final LightInlineParser lightInlineParser) {
+        public InlineParserExtension apply(LightInlineParser lightInlineParser) {
             return new SmartsInlineParser(lightInlineParser);
         }
 

@@ -4,7 +4,7 @@ import com.vladsch.flexmark.util.ast.VisitHandler;
 import com.vladsch.flexmark.util.ast.Visitor;
 
 public class SpecExampleVisitorExt {
-    public static <V extends SpecExampleVisitor> VisitHandler<?>[] VISIT_HANDLERS(final V visitor) {
+    public static <V extends SpecExampleVisitor> VisitHandler<?>[] VISIT_HANDLERS(V visitor) {
         return new VisitHandler<?>[] {
                 new VisitHandler<SpecExampleAst>(SpecExampleAst.class, new Visitor<SpecExampleAst>() {
                     @Override

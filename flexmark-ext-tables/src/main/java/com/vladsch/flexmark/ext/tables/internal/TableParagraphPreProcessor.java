@@ -148,7 +148,7 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
         public TableSeparatorRow() {
         }
 
-        public TableSeparatorRow(final BasedSequence chars) {
+        public TableSeparatorRow(BasedSequence chars) {
             super(chars);
         }
     }

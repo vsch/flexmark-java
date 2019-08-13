@@ -40,7 +40,7 @@ public class AttributesNodeFormatter implements PhasedNodeFormatter {
     }
 
     @Override
-    public void renderDocument(final NodeFormatterContext context, final MarkdownWriter markdown, final Document document, final FormattingPhase phase) {
+    public void renderDocument(NodeFormatterContext context, MarkdownWriter markdown, Document document, FormattingPhase phase) {
         // reset storage for attribute keys and attributes map
         if (context.isTransformingText()) {
             if (context.getRenderPurpose() == TRANSLATION_SPANS) {
@@ -207,7 +207,7 @@ public class AttributesNodeFormatter implements PhasedNodeFormatter {
 
     public static class Factory implements NodeFormatterFactory {
         @Override
-        public NodeFormatter create(final DataHolder options) {
+        public NodeFormatter create(DataHolder options) {
             return new AttributesNodeFormatter(options);
         }
     }

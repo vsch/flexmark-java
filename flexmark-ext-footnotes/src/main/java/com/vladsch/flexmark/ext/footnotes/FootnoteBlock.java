@@ -23,7 +23,7 @@ public class FootnoteBlock extends Block implements ReferenceNode<FootnoteReposi
     private int footnoteReferences = 0;
 
     @Override
-    public int compareTo(final FootnoteBlock other) {
+    public int compareTo(FootnoteBlock other) {
         return text.compareTo(other.text);
     }
 
@@ -31,12 +31,12 @@ public class FootnoteBlock extends Block implements ReferenceNode<FootnoteReposi
         return footnoteReferences;
     }
 
-    public void setFootnoteReferences(final int footnoteReferences) {
+    public void setFootnoteReferences(int footnoteReferences) {
         this.footnoteReferences = footnoteReferences;
     }
 
     @Override
-    public Footnote getReferencingNode(final Node node) {
+    public Footnote getReferencingNode(Node node) {
         return node instanceof Footnote ? (Footnote) node : null;
     }
 
@@ -118,12 +118,12 @@ public class FootnoteBlock extends Block implements ReferenceNode<FootnoteReposi
     }
 
     @Override
-    public boolean isItemParagraph(final Paragraph node) {
+    public boolean isItemParagraph(Paragraph node) {
         return node == getFirstChild();
     }
 
     @Override
-    public boolean isParagraphWrappingDisabled(final Paragraph node, final ListOptions listOptions, final DataHolder options) {
+    public boolean isParagraphWrappingDisabled(Paragraph node, ListOptions listOptions, DataHolder options) {
         return false;
     }
 }

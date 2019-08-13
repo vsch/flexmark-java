@@ -60,7 +60,7 @@ public class TableNodeRenderer implements NodeRenderer {
         ));
     }
 
-    private void render(final TableBlock tableBlock, final NodeRendererContext context, HtmlWriter html) {
+    private void render(TableBlock tableBlock, NodeRendererContext context, HtmlWriter html) {
         html.withAttr().tagIndent("table", new Runnable() {
             @Override
             public void run() {
@@ -69,7 +69,7 @@ public class TableNodeRenderer implements NodeRenderer {
         });
     }
 
-    private void render(final TableHead tableHead, final NodeRendererContext context, HtmlWriter html) {
+    private void render(TableHead tableHead, NodeRendererContext context, HtmlWriter html) {
         if (!tableHead.hasChildren()) {
             return;
         }
@@ -86,7 +86,7 @@ public class TableNodeRenderer implements NodeRenderer {
 
     }
 
-    private void render(final TableBody tableBody, final NodeRendererContext context, HtmlWriter html) {
+    private void render(TableBody tableBody, NodeRendererContext context, HtmlWriter html) {
         if (!tableBody.hasChildren()) {
             return;
         }
@@ -99,7 +99,7 @@ public class TableNodeRenderer implements NodeRenderer {
         });
     }
 
-    private void render(final TableRow tableRow, final NodeRendererContext context, HtmlWriter html) {
+    private void render(TableRow tableRow, NodeRendererContext context, HtmlWriter html) {
         html.withAttr().tagLine("tr", new Runnable() {
             @Override
             public void run() {
@@ -132,7 +132,7 @@ public class TableNodeRenderer implements NodeRenderer {
 
     public static class Factory implements NodeRendererFactory {
         @Override
-        public NodeRenderer apply(final DataHolder options) {
+        public NodeRenderer apply(DataHolder options) {
             return new TableNodeRenderer(options);
         }
     }

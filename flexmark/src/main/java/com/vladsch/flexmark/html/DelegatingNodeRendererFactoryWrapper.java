@@ -3,13 +3,13 @@ package com.vladsch.flexmark.html;
 import com.vladsch.flexmark.html.renderer.DelegatingNodeRendererFactory;
 import com.vladsch.flexmark.html.renderer.NodeRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRendererFactory;
-import java.util.function.Function;
-import com.vladsch.flexmark.util.dependency.Dependent;
 import com.vladsch.flexmark.util.data.DataHolder;
+import com.vladsch.flexmark.util.dependency.Dependent;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Function;
 
 /**
  * Factory for instantiating new node renderers with dependencies

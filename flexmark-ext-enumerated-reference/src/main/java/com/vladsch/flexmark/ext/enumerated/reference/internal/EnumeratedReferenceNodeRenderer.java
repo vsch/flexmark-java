@@ -36,7 +36,7 @@ public class EnumeratedReferenceNodeRenderer implements PhasedNodeRenderer
     }
 
     @Override
-    public void renderDocument(final NodeRendererContext context, final HtmlWriter html, final Document document, final RenderingPhase phase) {
+    public void renderDocument(NodeRendererContext context, HtmlWriter html, Document document, RenderingPhase phase) {
         if (phase == RenderingPhase.HEAD_TOP) {
             headerIdGenerator.generateIds(document);
         } else if (phase == RenderingPhase.BODY_TOP) {
@@ -55,8 +55,8 @@ public class EnumeratedReferenceNodeRenderer implements PhasedNodeRenderer
         return set;
     }
 
-    private void render(final EnumeratedReferenceLink node, final NodeRendererContext context, final HtmlWriter html) {
-        final String text = node.getText().toString();
+    private void render(EnumeratedReferenceLink node, NodeRendererContext context, HtmlWriter html) {
+        String text = node.getText().toString();
 
         if (text.isEmpty()) {
             // placeholder for ordinal
@@ -64,7 +64,7 @@ public class EnumeratedReferenceNodeRenderer implements PhasedNodeRenderer
         } else {
             enumeratedOrdinals.renderReferenceOrdinals(text, new OrdinalRenderer(this, context, html) {
                 @Override
-                public void startRendering(final EnumeratedReferenceRendering[] renderings) {
+                public void startRendering(EnumeratedReferenceRendering[] renderings) {
                     String title = new EnumRefTextCollectingVisitor().collectAndGetText(node.getChars().getBaseSequence(), renderings, null);
                     html.withAttr().attr("href", "#" + text).attr("title", title).tag("a");
                 }
@@ -77,7 +77,7 @@ public class EnumeratedReferenceNodeRenderer implements PhasedNodeRenderer
         }
     }
 
-    private void render(EnumeratedReferenceText node, final NodeRendererContext context, final HtmlWriter html) {
+    private void render(EnumeratedReferenceText node, NodeRendererContext context, HtmlWriter html) {
         String text = node.getText().toString();
 
         if (text.isEmpty()) {
@@ -103,19 +103,19 @@ public class EnumeratedReferenceNodeRenderer implements PhasedNodeRenderer
         final NodeRendererContext context;
         final HtmlWriter html;
 
-        public OrdinalRenderer(final EnumeratedReferenceNodeRenderer renderer, final NodeRendererContext context, final HtmlWriter html) {
+        public OrdinalRenderer(EnumeratedReferenceNodeRenderer renderer, NodeRendererContext context, HtmlWriter html) {
             this.renderer = renderer;
             this.context = context;
             this.html = html;
         }
 
         @Override
-        public void startRendering(final EnumeratedReferenceRendering[] renderings) {
+        public void startRendering(EnumeratedReferenceRendering[] renderings) {
 
         }
 
         @Override
-        public void setEnumOrdinalRunnable(final Runnable runnable) {
+        public void setEnumOrdinalRunnable(Runnable runnable) {
             renderer.ordinalRunnable = runnable;
         }
 
@@ -125,8 +125,8 @@ public class EnumeratedReferenceNodeRenderer implements PhasedNodeRenderer
         }
 
         @Override
-        public void render(final int referenceOrdinal, final EnumeratedReferenceBlock referenceFormat, final String defaultText, final boolean needSeparator) {
-            final Runnable compoundRunnable = renderer.ordinalRunnable;
+        public void render(int referenceOrdinal, EnumeratedReferenceBlock referenceFormat, String defaultText, boolean needSeparator) {
+            Runnable compoundRunnable = renderer.ordinalRunnable;
 
             if (referenceFormat != null) {
                 renderer.ordinalRunnable = new Runnable() {
@@ -159,7 +159,7 @@ public class EnumeratedReferenceNodeRenderer implements PhasedNodeRenderer
 
     public static class Factory implements NodeRendererFactory {
         @Override
-        public NodeRenderer apply(final DataHolder options) {
+        public NodeRenderer apply(DataHolder options) {
             return new EnumeratedReferenceNodeRenderer(options);
         }
     }

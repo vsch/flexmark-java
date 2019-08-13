@@ -4,9 +4,9 @@ import com.vladsch.flexmark.ext.toc.SimTocBlock;
 import com.vladsch.flexmark.ext.toc.SimTocContent;
 import com.vladsch.flexmark.formatter.*;
 import com.vladsch.flexmark.util.ast.Node;
+import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.format.MarkdownTable;
 import com.vladsch.flexmark.util.format.TableFormatOptions;
-import com.vladsch.flexmark.util.data.DataHolder;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -44,17 +44,17 @@ public class SimTocNodeFormatter implements NodeFormatter {
         ));
     }
 
-    private void render(final SimTocBlock node, final NodeFormatterContext context, MarkdownWriter markdown) {
+    private void render(SimTocBlock node, NodeFormatterContext context, MarkdownWriter markdown) {
         markdown.openPreFormatted(false).append(node.getChars()).closePreFormatted();
     }
 
-    private void render(final SimTocContent node, final NodeFormatterContext context, MarkdownWriter markdown) {
+    private void render(SimTocContent node, NodeFormatterContext context, MarkdownWriter markdown) {
         return;
     }
 
     public static class Factory implements NodeFormatterFactory {
         @Override
-        public NodeFormatter create(final DataHolder options) {
+        public NodeFormatter create(DataHolder options) {
             return new SimTocNodeFormatter(options);
         }
     }

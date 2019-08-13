@@ -160,7 +160,7 @@ public class HtmlBlockParser extends AbstractBlockParser {
     }
 
     @Override
-    public boolean canInterruptBy(final BlockParserFactory blockParserFactory) {
+    public boolean canInterruptBy(BlockParserFactory blockParserFactory) {
         return myHtmlBlockDeepParseMarkdownInterruptsClosed
                 && deepParser != null
                 && !(blockParserFactory instanceof HtmlBlockParser.Factory
@@ -169,7 +169,7 @@ public class HtmlBlockParser extends AbstractBlockParser {
     }
 
     @Override
-    public boolean canContain(final ParserState state, final BlockParser blockParser, final Block block) {
+    public boolean canContain(ParserState state, BlockParser blockParser, Block block) {
         return false;
     }
 
@@ -325,14 +325,14 @@ public class HtmlBlockParser extends AbstractBlockParser {
 
                         Pattern opener = myPatterns.BLOCK_PATTERNS[blockType][0];
                         Pattern closer = myPatterns.BLOCK_PATTERNS[blockType][1];
-                        final Matcher matcher = opener.matcher(line.subSequence(nextNonSpace, line.length()));
+                        Matcher matcher = opener.matcher(line.subSequence(nextNonSpace, line.length()));
                         boolean matches = matcher.find();
 
                         // TEST: non-interrupting of paragraphs by HTML comments
                         if (matches && (myHtmlCommentBlocksInterruptParagraph || blockType != myPatterns.COMMENT_PATTERN_INDEX || !(matchedBlockParser.getBlockParser() instanceof ParagraphParser))) {
                             // Issue #158, HTML Comment followed by text
                             if (blockType == myPatterns.COMMENT_PATTERN_INDEX && myHtmlBlockCommentOnlyFullLine) {
-                                final Matcher endMatcher = myPatterns.BLOCK_PATTERNS[myPatterns.COMMENT_PATTERN_INDEX][1].matcher(line.subSequence(matcher.end(), line.length()));
+                                Matcher endMatcher = myPatterns.BLOCK_PATTERNS[myPatterns.COMMENT_PATTERN_INDEX][1].matcher(line.subSequence(matcher.end(), line.length()));
                                 if (endMatcher.find()) {
                                     // see if nothing follows
                                     BasedSequence trailing = line.subSequence(endMatcher.end(), line.length()).trim();

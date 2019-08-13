@@ -1,7 +1,8 @@
 package com.vladsch.flexmark.parser;
 
-import java.util.function.Function;
 import com.vladsch.flexmark.util.dependency.Dependent;
+
+import java.util.function.Function;
 
 public interface InlineParserExtensionFactory extends Function<LightInlineParser, InlineParserExtension>, Dependent<InlineParserExtensionFactory> {
     /**

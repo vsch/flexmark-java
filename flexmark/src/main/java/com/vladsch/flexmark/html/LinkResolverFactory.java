@@ -1,10 +1,10 @@
 package com.vladsch.flexmark.html;
 
 import com.vladsch.flexmark.html.renderer.LinkResolverContext;
-import java.util.function.Function;
 import com.vladsch.flexmark.util.dependency.Dependent;
 
 import java.util.Set;
+import java.util.function.Function;
 
 public interface LinkResolverFactory extends Function<LinkResolverContext, LinkResolver>, Dependent<LinkResolverFactory> {
     @Override

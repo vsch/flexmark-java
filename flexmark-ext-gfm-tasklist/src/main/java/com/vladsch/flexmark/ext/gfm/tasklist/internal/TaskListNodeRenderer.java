@@ -51,9 +51,9 @@ public class TaskListNodeRenderer implements NodeRenderer {
         return set;
     }
 
-    void render(final TaskListItem node, final NodeRendererContext context, final HtmlWriter html) {
-        final BasedSequence sourceText = context.getHtmlOptions().sourcePositionParagraphLines || node.getFirstChild() == null ? node.getChars() : node.getFirstChild().getChars();
-        final String itemDoneStatusClass = node.isItemDoneMarker() ? itemDoneClass : itemNotDoneClass;
+    void render(TaskListItem node, NodeRendererContext context, HtmlWriter html) {
+        BasedSequence sourceText = context.getHtmlOptions().sourcePositionParagraphLines || node.getFirstChild() == null ? node.getChars() : node.getFirstChild().getChars();
+        String itemDoneStatusClass = node.isItemDoneMarker() ? itemDoneClass : itemNotDoneClass;
         if (listOptions.isTightListItem(node)) {
             if (!tightItemClass.isEmpty()) html.attr("class", tightItemClass);
             if (!itemDoneStatusClass.isEmpty() && !itemDoneStatusClass.equals(tightItemClass)) html.attr("class", itemDoneStatusClass);
@@ -85,7 +85,7 @@ public class TaskListNodeRenderer implements NodeRenderer {
 
     public static class Factory implements NodeRendererFactory {
         @Override
-        public NodeRenderer apply(final DataHolder options) {
+        public NodeRenderer apply(DataHolder options) {
             return new TaskListNodeRenderer(options);
         }
     }

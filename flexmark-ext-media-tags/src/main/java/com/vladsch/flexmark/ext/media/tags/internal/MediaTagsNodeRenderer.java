@@ -18,7 +18,7 @@ public class MediaTagsNodeRenderer implements NodeRenderer {
 
     @Override
     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
-        final MediaTagsNodeRenderer self = this;
+        MediaTagsNodeRenderer self = this;
 
         HashSet<NodeRenderingHandler<?>> set = new HashSet<>();
 
@@ -56,7 +56,7 @@ public class MediaTagsNodeRenderer implements NodeRenderer {
         return set;
     }
 
-    private void renderAudioLink(final AudioLink node, final NodeRendererContext context, final HtmlWriter html) {
+    private void renderAudioLink(AudioLink node, NodeRendererContext context, HtmlWriter html) {
         if (context.isDoNotRenderLinks()) {
             context.renderChildren(node);
         } else {
@@ -78,7 +78,7 @@ public class MediaTagsNodeRenderer implements NodeRenderer {
         }
     }
 
-    private void renderEmbedLink(final EmbedLink node, final NodeRendererContext context, final HtmlWriter html) {
+    private void renderEmbedLink(EmbedLink node, NodeRendererContext context, HtmlWriter html) {
         if (context.isDoNotRenderLinks()) {
             context.renderChildren(node);
         } else {
@@ -91,7 +91,7 @@ public class MediaTagsNodeRenderer implements NodeRenderer {
         }
     }
 
-    private void renderPictureLink(final PictureLink node, final NodeRendererContext context, final HtmlWriter html) {
+    private void renderPictureLink(PictureLink node, NodeRendererContext context, HtmlWriter html) {
         if (context.isDoNotRenderLinks()) {
             context.renderChildren(node);
         } else {
@@ -118,7 +118,7 @@ public class MediaTagsNodeRenderer implements NodeRenderer {
         }
     }
 
-    private void renderVideoLink(final VideoLink node, final NodeRendererContext context, final HtmlWriter html) {
+    private void renderVideoLink(VideoLink node, NodeRendererContext context, HtmlWriter html) {
         if (context.isDoNotRenderLinks()) {
             context.renderChildren(node);
         } else {
@@ -142,7 +142,7 @@ public class MediaTagsNodeRenderer implements NodeRenderer {
 
     public static class Factory implements NodeRendererFactory {
         @Override
-        public NodeRenderer apply(final DataHolder options) {
+        public NodeRenderer apply(DataHolder options) {
             return new MediaTagsNodeRenderer(options);
         }
     }

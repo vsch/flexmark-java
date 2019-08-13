@@ -31,7 +31,7 @@ public class AnchorLinkNodeRenderer implements NodeRenderer {
         return set;
     }
 
-    private void render(final AnchorLink node, final NodeRendererContext context, final HtmlWriter html) {
+    private void render(AnchorLink node, NodeRendererContext context, HtmlWriter html) {
         if (context.isDoNotRenderLinks()) {
             if (options.wrapText) {
                 context.renderChildren(node);
@@ -69,7 +69,7 @@ public class AnchorLinkNodeRenderer implements NodeRenderer {
 
     public static class Factory implements NodeRendererFactory {
         @Override
-        public NodeRenderer apply(final DataHolder options) {
+        public NodeRenderer apply(DataHolder options) {
             return new AnchorLinkNodeRenderer(options);
         }
     }

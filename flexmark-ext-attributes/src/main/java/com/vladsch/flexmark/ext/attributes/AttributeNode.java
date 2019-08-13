@@ -67,7 +67,7 @@ public class AttributeNode extends Node implements DoNotDecorate {
         return name;
     }
 
-    public void setName(final BasedSequence name) {
+    public void setName(BasedSequence name) {
         this.name = name;
     }
 
@@ -75,7 +75,7 @@ public class AttributeNode extends Node implements DoNotDecorate {
         return attributeSeparator;
     }
 
-    public void setAttributeSeparator(final BasedSequence attributeSeparator) {
+    public void setAttributeSeparator(BasedSequence attributeSeparator) {
         this.attributeSeparator = attributeSeparator;
     }
 
@@ -83,7 +83,7 @@ public class AttributeNode extends Node implements DoNotDecorate {
         return value;
     }
 
-    public void setValue(final BasedSequence value) {
+    public void setValue(BasedSequence value) {
         this.value = value;
     }
 

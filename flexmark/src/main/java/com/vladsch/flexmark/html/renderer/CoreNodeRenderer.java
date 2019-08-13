@@ -13,10 +13,10 @@ import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.ast.NonRenderingInline;
+import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.html.Attribute;
 import com.vladsch.flexmark.util.html.Attributes;
 import com.vladsch.flexmark.util.html.Escaping;
-import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.Range;
 
@@ -279,7 +279,7 @@ public class CoreNodeRenderer implements NodeRenderer {
     }
 
     @SuppressWarnings("MethodMayBeStatic")
-    void render(final Heading node, final NodeRendererContext context, final HtmlWriter html) {
+    void render(Heading node, NodeRendererContext context, HtmlWriter html) {
         if (context.getHtmlOptions().renderHeaderId) {
             String id = context.getNodeId(node);
             if (id != null) {
@@ -307,7 +307,7 @@ public class CoreNodeRenderer implements NodeRenderer {
     }
 
     @SuppressWarnings("MethodMayBeStatic")
-    void render(final BlockQuote node, final NodeRendererContext context, final HtmlWriter html) {
+    void render(BlockQuote node, NodeRendererContext context, HtmlWriter html) {
         html.withAttr().tagLineIndent("blockquote", new Runnable() {
             @Override
             public void run() {
@@ -377,7 +377,7 @@ public class CoreNodeRenderer implements NodeRenderer {
     }
 
     @SuppressWarnings("MethodMayBeStatic")
-    void render(final BulletList node, final NodeRendererContext context, HtmlWriter html) {
+    void render(BulletList node, NodeRendererContext context, HtmlWriter html) {
         html.withAttr().tagIndent("ul", new Runnable() {
             @Override
             public void run() {
@@ -386,7 +386,7 @@ public class CoreNodeRenderer implements NodeRenderer {
         });
     }
 
-    void render(final OrderedList node, final NodeRendererContext context, HtmlWriter html) {
+    void render(OrderedList node, NodeRendererContext context, HtmlWriter html) {
         int start = node.getStartNumber();
         if (listOptions.isOrderedListManualStart() && start != 1) html.attr("start", String.valueOf(start));
         html.withAttr().tagIndent("ol", new Runnable() {
@@ -405,7 +405,7 @@ public class CoreNodeRenderer implements NodeRenderer {
         renderListItem(node, context, html);
     }
 
-    private void renderListItem(final ListItem node, final NodeRendererContext context, final HtmlWriter html) {
+    private void renderListItem(ListItem node, NodeRendererContext context, HtmlWriter html) {
         if (listOptions.isTightListItem(node)) {
             html.srcPosWithEOL(node.getChars()).withAttr(TIGHT_LIST_ITEM).withCondIndent().tagLine("li", new Runnable() {
                 @Override
@@ -425,7 +425,7 @@ public class CoreNodeRenderer implements NodeRenderer {
         }
     }
 
-    public void renderTextBlockParagraphLines(final Paragraph node, final NodeRendererContext context, final HtmlWriter html, final boolean wrapTextInSpan) {
+    public void renderTextBlockParagraphLines(Paragraph node, NodeRendererContext context, HtmlWriter html, boolean wrapTextInSpan) {
         if (context.getHtmlOptions().sourcePositionParagraphLines) {
             if (node.hasChildren()) {
                 LineCollectingVisitor breakCollectingVisitor = new LineCollectingVisitor();
@@ -452,9 +452,9 @@ public class CoreNodeRenderer implements NodeRenderer {
         }
     }
 
-    private void outputSourceLineSpan(final Node parentNode, final Node startNode, final Node endNode, final HtmlWriter html) {
+    private void outputSourceLineSpan(Node parentNode, Node startNode, Node endNode, HtmlWriter html) {
         int startOffset = startNode.getStartOffset();
-        final Range range = myLines.get(myNextLine);
+        Range range = myLines.get(myNextLine);
         int eolLength = myEOLs.get(myNextLine);
 
         // remove trailing spaces from text
@@ -475,8 +475,8 @@ public class CoreNodeRenderer implements NodeRenderer {
         html.srcPos(startOffset, endOffset).withAttr(PARAGRAPH_LINE).tag("span");
     }
 
-    private void outputNextLineBreakSpan(final Node node, final HtmlWriter html, final boolean outputBreakText) {
-        final Range range = myLines.get(myNextLine);
+    private void outputNextLineBreakSpan(Node node, HtmlWriter html, boolean outputBreakText) {
+        Range range = myLines.get(myNextLine);
         int eolLength = myEOLs.get(myNextLine);
         myNextLine++;
 
@@ -494,7 +494,7 @@ public class CoreNodeRenderer implements NodeRenderer {
         nextLineStartOffset += node.getChars().baseSubSequence(nextLineStartOffset, node.getChars().getBaseSequence().length()).countLeading(BasedSequence.WHITESPACE_NO_EOL_CHARS);
     }
 
-    private void renderLooseParagraph(final Paragraph node, final NodeRendererContext context, final HtmlWriter html) {
+    private void renderLooseParagraph(Paragraph node, NodeRendererContext context, HtmlWriter html) {
         if (context.getHtmlOptions().noPTagsUseBr) {
             renderTextBlockParagraphLines(node, context, html, false);
             html.tagVoid("br").tagVoid("br").line();
@@ -508,7 +508,7 @@ public class CoreNodeRenderer implements NodeRenderer {
         }
     }
 
-    void render(final Paragraph node, final NodeRendererContext context, final HtmlWriter html) {
+    void render(Paragraph node, NodeRendererContext context, HtmlWriter html) {
         if (node.getFirstChildAnyNot(NonRenderingInline.class) != null) {
             if (!(node.getParent() instanceof ParagraphItemContainer)
                     || !((ParagraphItemContainer) node.getParent()).isParagraphWrappingDisabled(node, listOptions, context.getOptions())) {
@@ -519,12 +519,12 @@ public class CoreNodeRenderer implements NodeRenderer {
         }
     }
 
-    private boolean renderLineBreak(String breakText, final String suppressInTag, final Node node, NodeRendererContext context, HtmlWriter html) {
+    private boolean renderLineBreak(String breakText, String suppressInTag, Node node, NodeRendererContext context, HtmlWriter html) {
         if (myLines != null && myNextLine < myLines.size()) {
             // here we may need to close tags opened since the span tag
             List<String> openTags = html.getOpenTagsAfterLast("span");
             int iMax = openTags.size();
-            final boolean outputBreakText = iMax == 0 || suppressInTag == null || !suppressInTag.equalsIgnoreCase(openTags.get(iMax - 1));
+            boolean outputBreakText = iMax == 0 || suppressInTag == null || !suppressInTag.equalsIgnoreCase(openTags.get(iMax - 1));
 
             if (!outputBreakText && !html.isPendingSpace()) {
                 // we add a space for EOL
@@ -556,7 +556,7 @@ public class CoreNodeRenderer implements NodeRenderer {
     }
 
     void render(SoftLineBreak node, NodeRendererContext context, HtmlWriter html) {
-        final String softBreak = context.getHtmlOptions().softBreak;
+        String softBreak = context.getHtmlOptions().softBreak;
         if (context.getHtmlOptions().sourcePositionParagraphLines) {
             if (renderLineBreak(softBreak, softBreak.equals("\n") || softBreak.equals("\r\n") || softBreak.equals("\r") ? "code" : null, node, context, html)) {
                 return;
@@ -660,7 +660,7 @@ public class CoreNodeRenderer implements NodeRenderer {
     @SuppressWarnings("MethodMayBeStatic")
     void render(HtmlBlock node, NodeRendererContext context, HtmlWriter html) {
         html.line();
-        final HtmlRendererOptions htmlOptions = context.getHtmlOptions();
+        HtmlRendererOptions htmlOptions = context.getHtmlOptions();
 
         if (htmlOptions.sourceWrapHtmlBlocks) {
             html.srcPos(node.getChars()).withAttr(AttributablePart.NODE_POSITION).tag("div").indent().line();
@@ -695,7 +695,7 @@ public class CoreNodeRenderer implements NodeRenderer {
         renderHtmlBlock(node, context, html, context.getHtmlOptions().suppressHtmlCommentBlocks, context.getHtmlOptions().escapeHtmlCommentBlocks, false);
     }
 
-    public static void renderHtmlBlock(HtmlBlockBase node, NodeRendererContext context, HtmlWriter html, boolean suppress, boolean escape, final boolean trimSpaces) {
+    public static void renderHtmlBlock(HtmlBlockBase node, NodeRendererContext context, HtmlWriter html, boolean suppress, boolean escape, boolean trimSpaces) {
         if (suppress) return;
 
         if (node instanceof HtmlBlock)
@@ -765,7 +765,7 @@ public class CoreNodeRenderer implements NodeRenderer {
         }
     }
 
-    public static boolean isSuppressedLinkPrefix(final CharSequence url, NodeRendererContext context) {
+    public static boolean isSuppressedLinkPrefix(CharSequence url, NodeRendererContext context) {
         Pattern suppressedLinks = context.getHtmlOptions().suppressedLinks;
         if (suppressedLinks != null) {
             Matcher matcher = suppressedLinks.matcher(url);
@@ -775,8 +775,8 @@ public class CoreNodeRenderer implements NodeRenderer {
     }
 
     @SuppressWarnings("MethodMayBeStatic")
-    void render(AutoLink node, NodeRendererContext context, final HtmlWriter html) {
-        final String text = node.getText().toString();
+    void render(AutoLink node, NodeRendererContext context, HtmlWriter html) {
+        String text = node.getText().toString();
         if (context.isDoNotRenderLinks() || isSuppressedLinkPrefix(node.getUrl(), context)) {
             html.text(text);
         } else {
@@ -869,10 +869,10 @@ public class CoreNodeRenderer implements NodeRenderer {
     }
 
     private void renderChildrenSourceLineWrapped(
-            final Node node,
-            final BasedSequence nodeChildText,
-            final NodeRendererContext context,
-            final HtmlWriter html
+            Node node,
+            BasedSequence nodeChildText,
+            NodeRendererContext context,
+            HtmlWriter html
     ) {
         // if have SOFT BREAK or HARD BREAK as child then we open our own span
         if (context.getHtmlOptions().sourcePositionParagraphLines && nodeChildText.indexOfAny(EOL_CHARS) >= 0) {
@@ -1005,7 +1005,7 @@ public class CoreNodeRenderer implements NodeRenderer {
 
     public static class Factory implements NodeRendererFactory {
         @Override
-        public NodeRenderer apply(final DataHolder options) {
+        public NodeRenderer apply(DataHolder options) {
             return new CoreNodeRenderer(options);
         }
     }

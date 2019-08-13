@@ -79,7 +79,7 @@ public abstract class AbstractBlockParser implements BlockParser {
     }
 
     @Override
-    public boolean canInterruptBy(final BlockParserFactory blockParserFactory) {
+    public boolean canInterruptBy(BlockParserFactory blockParserFactory) {
         return true;
     }
 

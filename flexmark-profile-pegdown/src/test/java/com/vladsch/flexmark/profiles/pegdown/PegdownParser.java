@@ -52,7 +52,7 @@ class PegdownParser extends IParseBase {
     public static class PegdownRootNode extends Node {
         public final RootNode myRootNode;
 
-        public PegdownRootNode(final RootNode rootNode) {
+        public PegdownRootNode(RootNode rootNode) {
             myRootNode = rootNode;
         }
 
@@ -65,14 +65,14 @@ class PegdownParser extends IParseBase {
     @Override
     public Node parse(BasedSequence input) {
         // here we make the lexer parse the input sequence from start to finish and accumulate everything in custom nodes
-        final int pegdownExtensions = getPegdownExtensions(getOptions());
+        int pegdownExtensions = getPegdownExtensions(getOptions());
         RootNode rootNode = new PegDownProcessor(pegdownExtensions).parseMarkdown(input.toString().toCharArray());
         return new PegdownRootNode(rootNode);
     }
 
     @Override
     public IParse withOptions(DataHolder options) {
-        final MutableDataSet mutableDataSet = new MutableDataSet(getOptions());
+        MutableDataSet mutableDataSet = new MutableDataSet(getOptions());
         if (options != null) mutableDataSet.setAll(options);
         return new PegdownParser(mutableDataSet);
     }

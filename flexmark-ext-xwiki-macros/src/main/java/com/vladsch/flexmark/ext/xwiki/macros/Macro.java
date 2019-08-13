@@ -75,7 +75,7 @@ public class Macro extends Node {
         return attributeText;
     }
 
-    public void setAttributeText(final BasedSequence attributeText) {
+    public void setAttributeText(BasedSequence attributeText) {
         this.attributeText = attributeText;
     }
 
@@ -85,7 +85,7 @@ public class Macro extends Node {
     }
 
     public Map<String, String> getAttributes() {
-        final Map<String, String> attributes = new LinkedHashMap<String, String>();
+        Map<String, String> attributes = new LinkedHashMap<String, String>();
         Node child = getFirstChild();
         while (child != null) {
             if (child instanceof MacroAttribute) {

@@ -5,9 +5,9 @@ import com.vladsch.flexmark.formatter.Formatter;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.builder.Extension;
-import com.vladsch.flexmark.util.format.options.DefinitionMarker;
 import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
+import com.vladsch.flexmark.util.format.options.DefinitionMarker;
 
 /**
  * Extension for definitions
@@ -34,17 +34,17 @@ public class DefinitionExtension implements Parser.ParserExtension, HtmlRenderer
     }
 
     @Override
-    public void extend(final Formatter.Builder builder) {
+    public void extend(Formatter.Builder builder) {
         builder.nodeFormatterFactory(new DefinitionNodeFormatter.Factory());
     }
 
     @Override
-    public void rendererOptions(final MutableDataHolder options) {
+    public void rendererOptions(MutableDataHolder options) {
 
     }
 
     @Override
-    public void parserOptions(final MutableDataHolder options) {
+    public void parserOptions(MutableDataHolder options) {
 
     }
 

@@ -47,7 +47,7 @@ public class HeaderIdGenerator implements HtmlIdGenerator, Disposable {
         }.visit(document);
     }
 
-    String generateId(final String text) {
+    String generateId(String text) {
         if (!text.isEmpty()) {
             String baseRefId = generateId(text, toDashChars, nonDashChars, noDupedDashes, nonAsciiToLowercase);
 
@@ -74,12 +74,12 @@ public class HeaderIdGenerator implements HtmlIdGenerator, Disposable {
     }
 
     @Override
-    public String getId(final CharSequence text) {
+    public String getId(CharSequence text) {
         return generateId(text.toString());
     }
 
     @SuppressWarnings("WeakerAccess")
-    public static String generateId(CharSequence headerText, String toDashChars, boolean noDupedDashes, final boolean nonAsciiToLowercase) {
+    public static String generateId(CharSequence headerText, String toDashChars, boolean noDupedDashes, boolean nonAsciiToLowercase) {
         return generateId(headerText, toDashChars, null, noDupedDashes, nonAsciiToLowercase);
     }
 
@@ -120,7 +120,7 @@ public class HeaderIdGenerator implements HtmlIdGenerator, Disposable {
         return baseRefId.toString();
     }
 
-    public static boolean isAlphabetic(final char c) {
+    public static boolean isAlphabetic(char c) {
         return (((((1 << Character.UPPERCASE_LETTER) |
                 (1 << Character.LOWERCASE_LETTER) |
                 (1 << Character.TITLECASE_LETTER) |

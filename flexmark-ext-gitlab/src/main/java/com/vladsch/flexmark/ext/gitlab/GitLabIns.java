@@ -9,11 +9,11 @@ public class GitLabIns extends GitLabInline {
     public GitLabIns() {
     }
 
-    public GitLabIns(final BasedSequence chars) {
+    public GitLabIns(BasedSequence chars) {
         super(chars);
     }
 
-    public GitLabIns(final BasedSequence openingMarker, final BasedSequence text, final BasedSequence closingMarker) {
+    public GitLabIns(BasedSequence openingMarker, BasedSequence text, BasedSequence closingMarker) {
         super(openingMarker, text, closingMarker);
     }
 }

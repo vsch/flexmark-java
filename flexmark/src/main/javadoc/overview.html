@@ -1,6 +1,6 @@
 <html>
 <head>
-<meta charset="UTF-8">
+  <meta charset="UTF-8">
 </head>
 <body>
 <p><strong>Java implementation of CommonMark for parsing markdown and rendering to HTML (core library)</strong></p>
@@ -13,21 +13,21 @@ import com.vladsch.flexmark.util.data.MutableDataSet;
 class Main {
     static void main(String[] args) {
         MutableDataSet options = new MutableDataSet();
-        //Optionally Select Emulation Profile: 
-        //     COMMONMARK (default), FIXED_INDENT, KRAMDOWN, 
+        //Optionally Select Emulation Profile:
+        //     COMMONMARK (default), FIXED_INDENT, KRAMDOWN,
         //     MARKDOWN, GITHUB_DOC, MULTI_MARKDOWN, PEGDOWN
         // options.setFrom(ParserEmulationProfile.KRAMDOWN);
-        
+
         // Optionally, tweak behavior
         options.set(HtmlRenderer.ESCAPE_HTML, true);
-        
+
         Parser parser = Parser.builder(options).build();
         HtmlRenderer renderer = HtmlRenderer.builder(options).build();
 
         Node document = parser.parse(&quot;This is *Sparta*&quot;);
         renderer.render(document);  // &quot;&lt;p&gt;This is &lt;em&gt;Sparta&lt;/em&gt;&lt;/p&gt;\n&quot;
     }
-}        
+}
 </code></pre>
 <p>See the following packages for details:</p>
 <ul>

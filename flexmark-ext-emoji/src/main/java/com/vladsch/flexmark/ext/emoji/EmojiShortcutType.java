@@ -10,7 +10,7 @@ public enum EmojiShortcutType {
     public final boolean isEmojiCheatSheet;
     public final boolean isGitHub;
 
-    EmojiShortcutType(final boolean isEmojiCheatSheet, final boolean isGitHub) {
+    EmojiShortcutType(boolean isEmojiCheatSheet, boolean isGitHub) {
         this.isEmojiCheatSheet = isEmojiCheatSheet;
         this.isGitHub = isGitHub;
     }

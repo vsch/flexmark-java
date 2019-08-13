@@ -40,12 +40,12 @@ public class ZzzzzzLinkRefProcessor implements LinkRefProcessor {
     }
 
     @Override
-    public boolean allowDelimiters(final BasedSequence chars, final Document document, final Node node) {
+    public boolean allowDelimiters(BasedSequence chars, Document document, Node node) {
         return true;
     }
 
     @Override
-    public void updateNodeElements(final Document document, final Node node) {
+    public void updateNodeElements(Document document, Node node) {
 
     }
 

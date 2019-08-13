@@ -113,7 +113,7 @@ public class TocOptions implements Immutable<TocOptions, TocOptions.AsMutable>, 
     }
 
     @Override
-    public MutableDataHolder setIn(final MutableDataHolder dataHolder) {
+    public MutableDataHolder setIn(MutableDataHolder dataHolder) {
         dataHolder.set(TocExtension.LEVELS, levels);
         dataHolder.set(TocExtension.IS_TEXT_ONLY, isTextOnly);
         dataHolder.set(TocExtension.IS_NUMBERED, isNumbered);
@@ -332,7 +332,7 @@ public class TocOptions implements Immutable<TocOptions, TocOptions.AsMutable>, 
         }
 
         @Override
-        public MutableDataHolder setIn(final MutableDataHolder dataHolder) {
+        public MutableDataHolder setIn(MutableDataHolder dataHolder) {
             return toImmutable().setIn(dataHolder);
         }
 
@@ -347,7 +347,7 @@ public class TocOptions implements Immutable<TocOptions, TocOptions.AsMutable>, 
         }
 
         @Override
-        public boolean equals(final Object o) {
+        public boolean equals(Object o) {
             if (this == o) return true;
             if (!(o instanceof TocOptions || o instanceof TocOptions.AsMutable)) return false;
 

@@ -43,4 +43,3 @@ echo updated out/artifacts/flexmark-parent.jar in ../markdown-profiling/lib
 
 cp out/artifacts/flexmark-parent.jar ../MarkdownTest/lib
 echo updated out/artifacts/flexmark-parent.jar in ../MarkdownTest/lib
-

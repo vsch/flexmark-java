@@ -12,7 +12,7 @@ public class EmbedLink extends AbstractMediaLink {
         super(PREFIX, TYPE);
     }
 
-    public EmbedLink(final Link other) {
+    public EmbedLink(Link other) {
         super(PREFIX, TYPE, other);
     }
 

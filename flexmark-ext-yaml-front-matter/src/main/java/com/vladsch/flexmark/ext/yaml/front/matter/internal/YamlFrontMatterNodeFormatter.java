@@ -26,9 +26,9 @@ public class YamlFrontMatterNodeFormatter implements PhasedNodeFormatter {
     }
 
     @Override
-    public void renderDocument(final NodeFormatterContext context, final MarkdownWriter markdown, final Document document, final FormattingPhase phase) {
+    public void renderDocument(NodeFormatterContext context, MarkdownWriter markdown, Document document, FormattingPhase phase) {
         if (phase == FormattingPhase.DOCUMENT_FIRST) {
-            final Node node = document.getFirstChild();
+            Node node = document.getFirstChild();
             if (node instanceof YamlFrontMatterBlock) {
                 markdown.openPreFormatted(false);
                 markdown.append(node.getChars()).blankLine();
@@ -55,7 +55,7 @@ public class YamlFrontMatterNodeFormatter implements PhasedNodeFormatter {
 
     public static class Factory implements NodeFormatterFactory {
         @Override
-        public NodeFormatter create(final DataHolder options) {
+        public NodeFormatter create(DataHolder options) {
             return new YamlFrontMatterNodeFormatter(options);
         }
     }

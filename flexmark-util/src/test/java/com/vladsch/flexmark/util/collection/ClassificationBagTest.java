@@ -1,8 +1,9 @@
 package com.vladsch.flexmark.util.collection;
 
-import java.util.function.Function;
 import org.junit.Assert;
 import org.junit.Test;
+
+import java.util.function.Function;
 
 public class ClassificationBagTest {
     @Test

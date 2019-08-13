@@ -6,9 +6,9 @@ import com.vladsch.flexmark.parser.ParserEmulationProfile;
 import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.spec.SpecReader;
 import com.vladsch.flexmark.test.ComboSpecTestCase;
-import com.vladsch.flexmark.util.format.options.DefinitionMarker;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
+import com.vladsch.flexmark.util.format.options.DefinitionMarker;
 import org.junit.runners.Parameterized;
 
 import java.util.*;

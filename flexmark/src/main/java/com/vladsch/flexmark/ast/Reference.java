@@ -48,12 +48,12 @@ public class Reference extends LinkNodeBase implements ReferenceNode<ReferenceRe
     }
 
     @Override
-    public int compareTo(final Reference other) {
+    public int compareTo(Reference other) {
         return getReference().compareTo(other.getReference());
     }
 
     @Override
-    public RefNode getReferencingNode(final Node node) {
+    public RefNode getReferencingNode(Node node) {
         return node instanceof RefNode ? (RefNode) node : null;
     }
 

@@ -27,7 +27,7 @@ public class MacroDefinitionBlock extends Block implements ReferenceNode<MacroDe
         return footnoteReferences;
     }
 
-    public void setFootnoteReferences(final int footnoteReferences) {
+    public void setFootnoteReferences(int footnoteReferences) {
         this.footnoteReferences = footnoteReferences;
     }
 
@@ -59,7 +59,7 @@ public class MacroDefinitionBlock extends Block implements ReferenceNode<MacroDe
         return inExpansion;
     }
 
-    public void setInExpansion(final boolean inExpansion) {
+    public void setInExpansion(boolean inExpansion) {
         this.inExpansion = inExpansion;
     }
 
@@ -78,12 +78,12 @@ public class MacroDefinitionBlock extends Block implements ReferenceNode<MacroDe
     }
 
     @Override
-    public MacroReference getReferencingNode(final Node node) {
+    public MacroReference getReferencingNode(Node node) {
         return node instanceof MacroReference ? (MacroReference) node : null;
     }
 
     @Override
-    public int compareTo(final MacroDefinitionBlock o) {
+    public int compareTo(MacroDefinitionBlock o) {
         return name.compareTo(o.name);
     }
 
@@ -114,7 +114,7 @@ public class MacroDefinitionBlock extends Block implements ReferenceNode<MacroDe
         return name;
     }
 
-    public void setName(final BasedSequence name) {
+    public void setName(BasedSequence name) {
         this.name = name;
     }
 
@@ -122,7 +122,7 @@ public class MacroDefinitionBlock extends Block implements ReferenceNode<MacroDe
         return closingMarker;
     }
 
-    public void setClosingMarker(final BasedSequence closingMarker) {
+    public void setClosingMarker(BasedSequence closingMarker) {
         this.closingMarker = closingMarker;
     }
 
@@ -130,7 +130,7 @@ public class MacroDefinitionBlock extends Block implements ReferenceNode<MacroDe
         return openingTrailing;
     }
 
-    public void setOpeningTrailing(final BasedSequence openingTrailing) {
+    public void setOpeningTrailing(BasedSequence openingTrailing) {
         this.openingTrailing = openingTrailing;
     }
 
@@ -138,7 +138,7 @@ public class MacroDefinitionBlock extends Block implements ReferenceNode<MacroDe
         return closingTrailing;
     }
 
-    public void setClosingTrailing(final BasedSequence closingTrailing) {
+    public void setClosingTrailing(BasedSequence closingTrailing) {
         this.closingTrailing = closingTrailing;
     }
 }

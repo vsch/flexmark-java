@@ -2,10 +2,10 @@ package com.vladsch.flexmark.formatter;
 
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.util.ast.*;
-import com.vladsch.flexmark.util.format.options.ElementPlacement;
-import com.vladsch.flexmark.util.format.options.ElementPlacementSort;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKey;
+import com.vladsch.flexmark.util.format.options.ElementPlacement;
+import com.vladsch.flexmark.util.format.options.ElementPlacementSort;
 
 import java.util.*;
 
@@ -47,11 +47,11 @@ public abstract class NodeRepositoryFormatter<R extends NodeRepository<B>, B ext
         }
     }
 
-    public String modifyTransformedReference(String transformedReferenceId, final NodeFormatterContext context) {
+    public String modifyTransformedReference(String transformedReferenceId, NodeFormatterContext context) {
         return transformedReferenceId;
     }
 
-    protected String transformReferenceId(final String nodeText, final NodeFormatterContext context) {
+    protected String transformReferenceId(String nodeText, NodeFormatterContext context) {
         if (context.isTransformingText()) {
             String transformed;
 
@@ -94,7 +94,7 @@ public abstract class NodeRepositoryFormatter<R extends NodeRepository<B>, B ext
 
         myComparator = new Comparator<B>() {
             @Override
-            public int compare(final B o1, final B o2) {
+            public int compare(B o1, B o2) {
                 return o1.compareTo(o2);
             }
         };
@@ -106,7 +106,7 @@ public abstract class NodeRepositoryFormatter<R extends NodeRepository<B>, B ext
     }
 
     @Override
-    public void renderDocument(final NodeFormatterContext context, final MarkdownWriter markdown, final Document document, final FormattingPhase phase) {
+    public void renderDocument(NodeFormatterContext context, MarkdownWriter markdown, Document document, FormattingPhase phase) {
         // here non-rendered elements can be collected so that they are rendered in another part of the document
         myContext = context;
 
@@ -122,7 +122,7 @@ public abstract class NodeRepositoryFormatter<R extends NodeRepository<B>, B ext
                 if (getTranslationReferencePlacement() != ElementPlacement.AS_IS && getReferenceSort() == ElementPlacementSort.SORT_UNUSED_LAST) {
                     // get all ref nodes and figure out which ones are unused
                     unusedReferences.addAll(referenceList);
-                    final Iterable<? extends Node> nodes = context.nodesOfType(getNodeClasses());
+                    Iterable<? extends Node> nodes = context.nodesOfType(getNodeClasses());
                     for (Node node : nodes) {
                         N referencingNode = lastReference == null ? null : lastReference.getReferencingNode(node);
                         if (referencingNode != null) {
@@ -154,7 +154,7 @@ public abstract class NodeRepositoryFormatter<R extends NodeRepository<B>, B ext
         }
     }
 
-    private void formatReferences(final NodeFormatterContext context, MarkdownWriter markdown) {
+    private void formatReferences(NodeFormatterContext context, MarkdownWriter markdown) {
         ArrayList<B> references = new ArrayList<B>(referenceList);
 
         switch (getReferenceSort()) {

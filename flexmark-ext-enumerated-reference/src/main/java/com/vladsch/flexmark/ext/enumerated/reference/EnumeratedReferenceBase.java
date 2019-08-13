@@ -22,12 +22,12 @@ public class EnumeratedReferenceBase extends Node implements DelimitedNode, DoNo
     }
 
     @Override
-    public EnumeratedReferenceBlock getReferenceNode(final Document document) {
+    public EnumeratedReferenceBlock getReferenceNode(Document document) {
         return enumeratedReferenceBlock;
     }
 
     @Override
-    public EnumeratedReferenceBlock getReferenceNode(final EnumeratedReferenceRepository repository) {
+    public EnumeratedReferenceBlock getReferenceNode(EnumeratedReferenceRepository repository) {
         if (enumeratedReferenceBlock != null || text.isEmpty()) return enumeratedReferenceBlock;
         enumeratedReferenceBlock = getEnumeratedReferenceBlock(repository);
         return enumeratedReferenceBlock;

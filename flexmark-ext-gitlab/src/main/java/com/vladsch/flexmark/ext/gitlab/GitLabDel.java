@@ -9,11 +9,11 @@ public class GitLabDel extends GitLabInline {
     public GitLabDel() {
     }
 
-    public GitLabDel(final BasedSequence chars) {
+    public GitLabDel(BasedSequence chars) {
         super(chars);
     }
 
-    public GitLabDel(final BasedSequence openingMarker, final BasedSequence text, final BasedSequence closingMarker) {
+    public GitLabDel(BasedSequence openingMarker, BasedSequence text, BasedSequence closingMarker) {
         super(openingMarker, text, closingMarker);
     }
 }

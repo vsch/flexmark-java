@@ -53,7 +53,7 @@ public class LightInlineParserImpl implements LightInlineParser {
     }
 
     @Override
-    public void setIndex(final int index) {
+    public void setIndex(int index) {
         this.index = index;
     }
 
@@ -177,7 +177,7 @@ public class LightInlineParserImpl implements LightInlineParser {
         if (m) {
             index = matcher.end();
             MatchResult result = matcher.toMatchResult();
-            final int iMax = matcher.groupCount() + 1;
+            int iMax = matcher.groupCount() + 1;
             BasedSequence[] results = new BasedSequence[iMax];
             results[0] = input.subSequence(result.start(), result.end());
             for (int i = 1; i < iMax; i++) {

@@ -1,6 +1,5 @@
 package com.vladsch.flexmark.ext.toc.internal;
 
-import java.util.function.Function;
 import com.vladsch.flexmark.util.DelimitedBuilder;
 import com.vladsch.flexmark.util.Pair;
 import com.vladsch.flexmark.util.Utils;
@@ -11,6 +10,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 
 public class TocLevelsOptionParser implements OptionParser<TocOptions> {
     public static final String OPTION_0_VALUE_1_NOT_IN_RANGE = "{0} option value {1} is not an integer in the range [1, 6]";

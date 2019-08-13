@@ -31,7 +31,7 @@ public class AsideNodeRenderer implements NodeRenderer {
         return set;
     }
 
-    private void render(final AsideBlock node, final NodeRendererContext context, HtmlWriter html) {
+    private void render(AsideBlock node, NodeRendererContext context, HtmlWriter html) {
         html.withAttr().withCondIndent().tagLine("aside", new Runnable() {
             @Override
             public void run() {
@@ -42,7 +42,7 @@ public class AsideNodeRenderer implements NodeRenderer {
 
     public static class Factory implements NodeRendererFactory {
         @Override
-        public NodeRenderer apply(final DataHolder options) {
+        public NodeRenderer apply(DataHolder options) {
             return new AsideNodeRenderer(options);
         }
     }

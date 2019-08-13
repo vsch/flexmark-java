@@ -6,9 +6,9 @@ import com.vladsch.flexmark.ext.jekyll.tag.internal.JekyllTagNodeRenderer;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.builder.Extension;
-import com.vladsch.flexmark.util.data.DataValueFactory;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKey;
+import com.vladsch.flexmark.util.data.DataValueFactory;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 
 import java.util.ArrayList;
@@ -43,12 +43,12 @@ public class JekyllTagExtension implements Parser.ParserExtension, HtmlRenderer.
     }
 
     @Override
-    public void rendererOptions(final MutableDataHolder options) {
+    public void rendererOptions(MutableDataHolder options) {
 
     }
 
     @Override
-    public void parserOptions(final MutableDataHolder options) {
+    public void parserOptions(MutableDataHolder options) {
 
     }
 

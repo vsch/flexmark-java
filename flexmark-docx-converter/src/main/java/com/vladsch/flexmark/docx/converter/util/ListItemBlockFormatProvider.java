@@ -12,7 +12,7 @@ public class ListItemBlockFormatProvider<T> extends BlockFormatProviderBase<T> {
     private final int myListLevel;
     private final Class[] mySkipContextFrameClasses;
 
-    public ListItemBlockFormatProvider(final DocxContext<T> docx, final String listStyle, final long idNum, final int listLevel, Class... skipContextFrameClasses) {
+    public ListItemBlockFormatProvider(DocxContext<T> docx, String listStyle, long idNum, int listLevel, Class... skipContextFrameClasses) {
         super(docx, listStyle);
         myDocx = docx;
         myIdNum = idNum;
@@ -21,7 +21,7 @@ public class ListItemBlockFormatProvider<T> extends BlockFormatProviderBase<T> {
     }
 
     @Override
-    public void getPPr(final PPr pPr) {
+    public void getPPr(PPr pPr) {
         if (myPCount == 0) {
             // Create object for numPr
             PPrBase.NumPr numPr = myDocx.getFactory().createPPrBaseNumPr();
@@ -38,10 +38,10 @@ public class ListItemBlockFormatProvider<T> extends BlockFormatProviderBase<T> {
             ilvl.setVal(BigInteger.valueOf(myListLevel));
         } else {
             // need to inherit indent from our base style
-            final NumberingDefinitionsPart ndp = myDocx.getDocxDocument().getNumberingDefinitionsPart();
+            NumberingDefinitionsPart ndp = myDocx.getDocxDocument().getNumberingDefinitionsPart();
             PPrBase.Ind ind = ndp.getInd(String.valueOf(myIdNum), String.valueOf(myListLevel));
             if (ind != null) {
-                final DocxHelper helper = myDocx.getHelper();
+                DocxHelper helper = myDocx.getHelper();
                 helper.ensureInd(pPr);
                 pPr.getInd().setLeft(helper.safeIndLeft(ind));
                 pPr.getInd().setHanging(BigInteger.ZERO);
@@ -68,7 +68,7 @@ public class ListItemBlockFormatProvider<T> extends BlockFormatProviderBase<T> {
     }
 
     @Override
-    protected void inheritBdr(final PPr pPr, final PPr parentPPr) {
+    protected void inheritBdr(PPr pPr, PPr parentPPr) {
         super.inheritBdr(pPr, parentPPr);
     }
 }

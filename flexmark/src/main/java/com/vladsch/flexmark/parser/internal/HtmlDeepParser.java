@@ -21,7 +21,7 @@ public class HtmlDeepParser {
         public final Pattern close;
         public final boolean caseInsentive;
 
-        HtmlMatch(final String open, final String close, final boolean caseInsentive) {
+        HtmlMatch(String open, String close, boolean caseInsentive) {
             this.open = open == null ? null : Pattern.compile(open, caseInsentive ? Pattern.CASE_INSENSITIVE : 0);
             this.close = close == null ? null : Pattern.compile(close, caseInsentive ? Pattern.CASE_INSENSITIVE : 0);
             this.caseInsentive = caseInsentive;
@@ -149,7 +149,7 @@ public class HtmlDeepParser {
     }
 
     // handle optional closing tags
-    private void openTag(final String tagName) {
+    private void openTag(String tagName) {
         if (!myOpenTags.isEmpty()) {
             String lastTag = myOpenTags.get(myOpenTags.size() - 1);
 
@@ -163,7 +163,7 @@ public class HtmlDeepParser {
         myOpenTags.add(tagName);
     }
 
-    public void parseHtmlChunk(CharSequence html, boolean blockTagsOnly, final boolean parseNonBlock, final boolean firstOpenTagOnOneLine) {
+    public void parseHtmlChunk(CharSequence html, boolean blockTagsOnly, boolean parseNonBlock, boolean firstOpenTagOnOneLine) {
         if (myHtmlCount == 0 && myHtmlMatch != null) {
             myHtmlCount++;
         }
@@ -220,17 +220,17 @@ public class HtmlDeepParser {
                 Matcher matcher = START_PATTERN.matcher(html);
                 if (!matcher.find()) break;
 
-                final CharSequence nextHtml = html.subSequence(matcher.end(), html.length());
-                final String match = matcher.group();
+                CharSequence nextHtml = html.subSequence(matcher.end(), html.length());
+                String match = matcher.group();
                 int iMax = PATTERN_MAP.length;
                 myClosingPattern = null;
 
                 for (int i = 1; i < iMax; i++) {
                     if (matcher.group(i) == null) continue;
 
-                    final String group = matcher.group(i).toLowerCase();
+                    String group = matcher.group(i).toLowerCase();
                     HtmlMatch htmlMatch = PATTERN_MAP[i];
-                    final boolean isBlockTag = myBlockTags.contains(group);
+                    boolean isBlockTag = myBlockTags.contains(group);
 
                     if ((blockTagsOnly || !parseNonBlock) && matcher.start() > 0) {
                         // nothing but blanks allowed before first pattern match when block tags only
@@ -284,7 +284,7 @@ public class HtmlDeepParser {
                         myHtmlMatch = htmlMatch;
                         myHtmlCount++;
                         for (int j = jMax; j-- > 0; ) {
-                            final String openTag = myOpenTags.get(j);
+                            String openTag = myOpenTags.get(j);
                             if (openTag.equals(group)) {
                                 // drop all to end of stack
                                 for (int k = jMax; k-- > j; ) {

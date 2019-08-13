@@ -6,7 +6,7 @@ public class CompoundEnumeratedReferenceRendering {
     final public String defaultText;
     final public boolean needSeparator;
 
-    public CompoundEnumeratedReferenceRendering(final int ordinal, final EnumeratedReferenceBlock referenceFormat, final String defaultText, final boolean needSeparator) {
+    public CompoundEnumeratedReferenceRendering(int ordinal, EnumeratedReferenceBlock referenceFormat, String defaultText, boolean needSeparator) {
         this.ordinal = ordinal;
         this.referenceFormat = referenceFormat;
         this.defaultText = defaultText;

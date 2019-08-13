@@ -3,9 +3,9 @@ package com.vladsch.flexmark.test;
 import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.spec.SpecReader;
 import com.vladsch.flexmark.spec.UrlString;
+import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.IParse;
 import com.vladsch.flexmark.util.ast.IRender;
-import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
@@ -44,17 +44,17 @@ public class DumpSpecReader extends SpecReader implements ActualExampleModifier 
     }
 
     @Override
-    public String actualSource(final String source, final String optionSet) {
+    public String actualSource(String source, String optionSet) {
         return exampleModifier.actualSource(source, optionSet);
     }
 
     @Override
-    public String actualHtml(final String html, final String optionSet) {
+    public String actualHtml(String html, String optionSet) {
         return exampleModifier.actualHtml(html, optionSet);
     }
 
     @Override
-    public String actualAst(final String ast, final String optionSet) {
+    public String actualAst(String ast, String optionSet) {
         return exampleModifier.actualAst(ast, optionSet);
     }
 
@@ -134,7 +134,7 @@ public class DumpSpecReader extends SpecReader implements ActualExampleModifier 
             System.out.println(String.format(RenderingTestCase.TIMED_FORMAT_STRING, example.getSection() == null ? "" : example.getSection().trim() + ": " + example.getExampleNumber(), (parse - start) / 1000000.0 / iterations, (render - parse) / 1000000.0 / iterations, (render - start) / 1000000.0 / iterations));
         }
 
-        final String actualAST = testCase.ast(node);
+        String actualAST = testCase.ast(node);
         String html = !ignoredCase && testCase.useActualHtml() ? actualHtml(actualHTML, optionsSet) : example.getHtml();
         String ast = example.getAst() == null ? null : (!ignoredCase ? actualAST : example.getAst());
 

@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.ext.macros;
 
 public interface MacrosVisitor {
-    void visit(final MacroReference node);
-    void visit(final MacroDefinitionBlock node);
+    void visit(MacroReference node);
+    void visit(MacroDefinitionBlock node);
 }

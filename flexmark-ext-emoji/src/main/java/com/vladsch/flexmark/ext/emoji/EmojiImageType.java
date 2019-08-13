@@ -9,7 +9,7 @@ public enum EmojiImageType {
     public final boolean isUnicode;
     public final boolean isImage;
 
-    EmojiImageType(final boolean isUnicode, final boolean isImage) {
+    EmojiImageType(boolean isUnicode, boolean isImage) {
         this.isUnicode = isUnicode;
         this.isImage = isImage;
     }

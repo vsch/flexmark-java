@@ -4,7 +4,7 @@ import com.vladsch.flexmark.util.ast.VisitHandler;
 import com.vladsch.flexmark.util.ast.Visitor;
 
 public class YamlFrontMatterVisitorExt {
-    public static <V extends YamlFrontMatterVisitor> VisitHandler<?>[] VISIT_HANDLERS(final V visitor) {
+    public static <V extends YamlFrontMatterVisitor> VisitHandler<?>[] VISIT_HANDLERS(V visitor) {
         return new VisitHandler<?>[] {
                 new VisitHandler<YamlFrontMatterNode>(YamlFrontMatterNode.class, new Visitor<YamlFrontMatterNode>() {
                     @Override

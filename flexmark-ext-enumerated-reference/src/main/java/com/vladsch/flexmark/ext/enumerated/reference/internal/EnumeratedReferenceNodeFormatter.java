@@ -3,9 +3,9 @@ package com.vladsch.flexmark.ext.enumerated.reference.internal;
 import com.vladsch.flexmark.ext.attributes.internal.AttributesNodeFormatter;
 import com.vladsch.flexmark.ext.enumerated.reference.*;
 import com.vladsch.flexmark.formatter.*;
+import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.format.options.ElementPlacement;
 import com.vladsch.flexmark.util.format.options.ElementPlacementSort;
-import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 import java.util.Arrays;
@@ -21,7 +21,7 @@ public class EnumeratedReferenceNodeFormatter extends NodeRepositoryFormatter<En
     }
 
     @Override
-    public EnumeratedReferenceRepository getRepository(final DataHolder options) {
+    public EnumeratedReferenceRepository getRepository(DataHolder options) {
         return EnumeratedReferenceExtension.ENUMERATED_REFERENCES.getFrom(options);
     }
 
@@ -36,7 +36,7 @@ public class EnumeratedReferenceNodeFormatter extends NodeRepositoryFormatter<En
     }
 
     @Override
-    public void renderReferenceBlock(final EnumeratedReferenceBlock node, final NodeFormatterContext context, final MarkdownWriter markdown) {
+    public void renderReferenceBlock(EnumeratedReferenceBlock node, NodeFormatterContext context, MarkdownWriter markdown) {
         markdown.blankLine().append("[@").appendNonTranslating(node.getText()).append("]: ");
         markdown.pushPrefix().addPrefix("    ", true);
         context.renderChildren(node);
@@ -99,7 +99,7 @@ public class EnumeratedReferenceNodeFormatter extends NodeRepositoryFormatter<En
         }
     }
 
-    private void render(final EnumeratedReferenceText node, NodeFormatterContext context, final MarkdownWriter markdown) {
+    private void render(EnumeratedReferenceText node, NodeFormatterContext context, MarkdownWriter markdown) {
         markdown.append("[#");
         if (context.isTransformingText()) {
             renderReferenceText(node.getText(), context, markdown);
@@ -109,7 +109,7 @@ public class EnumeratedReferenceNodeFormatter extends NodeRepositoryFormatter<En
         markdown.append("]");
     }
 
-    private void render(final EnumeratedReferenceLink node, NodeFormatterContext context, final MarkdownWriter markdown) {
+    private void render(EnumeratedReferenceLink node, NodeFormatterContext context, MarkdownWriter markdown) {
         markdown.append("[@");
         if (context.isTransformingText()) {
             if (context.isTransformingText()) {
@@ -125,7 +125,7 @@ public class EnumeratedReferenceNodeFormatter extends NodeRepositoryFormatter<En
 
     public static class Factory implements NodeFormatterFactory {
         @Override
-        public NodeFormatter create(final DataHolder options) {
+        public NodeFormatter create(DataHolder options) {
             return new EnumeratedReferenceNodeFormatter(options);
         }
     }

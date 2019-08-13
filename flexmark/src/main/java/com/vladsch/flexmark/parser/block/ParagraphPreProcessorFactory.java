@@ -1,7 +1,8 @@
 package com.vladsch.flexmark.parser.block;
 
-import java.util.function.Function;
 import com.vladsch.flexmark.util.dependency.Dependent;
+
+import java.util.function.Function;
 
 public interface ParagraphPreProcessorFactory extends Function<ParserState, ParagraphPreProcessor>, Dependent<ParagraphPreProcessorFactory> {
 

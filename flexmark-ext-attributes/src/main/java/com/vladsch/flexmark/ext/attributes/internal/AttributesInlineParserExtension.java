@@ -4,9 +4,9 @@ import com.vladsch.flexmark.ext.attributes.AttributeNode;
 import com.vladsch.flexmark.ext.attributes.AttributesDelimiter;
 import com.vladsch.flexmark.ext.attributes.AttributesNode;
 import com.vladsch.flexmark.parser.InlineParser;
-import com.vladsch.flexmark.parser.LightInlineParser;
 import com.vladsch.flexmark.parser.InlineParserExtension;
 import com.vladsch.flexmark.parser.InlineParserExtensionFactory;
+import com.vladsch.flexmark.parser.LightInlineParser;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 import java.util.Set;
@@ -15,21 +15,21 @@ import java.util.regex.Matcher;
 public class AttributesInlineParserExtension implements InlineParserExtension {
     private final AttributeParsing parsing;
 
-    public AttributesInlineParserExtension(final LightInlineParser inlineParser) {
+    public AttributesInlineParserExtension(LightInlineParser inlineParser) {
         this.parsing = new AttributeParsing(inlineParser.getParsing());
     }
 
     @Override
-    public void finalizeDocument(final InlineParser inlineParser) {
+    public void finalizeDocument(InlineParser inlineParser) {
 
     }
 
     @Override
-    public void finalizeBlock(final InlineParser inlineParser) {
+    public void finalizeBlock(InlineParser inlineParser) {
     }
 
     @Override
-    public boolean parse(final LightInlineParser inlineParser) {
+    public boolean parse(LightInlineParser inlineParser) {
         if (inlineParser.peek(1) != '{') {
             int index = inlineParser.getIndex();
             BasedSequence input = inlineParser.getInput();
@@ -101,7 +101,7 @@ public class AttributesInlineParserExtension implements InlineParserExtension {
         }
 
         @Override
-        public InlineParserExtension apply(final LightInlineParser inlineParser) {
+        public InlineParserExtension apply(LightInlineParser inlineParser) {
             return new AttributesInlineParserExtension(inlineParser);
         }
 

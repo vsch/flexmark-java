@@ -35,7 +35,7 @@ public class InsJiraRenderer implements NodeRenderer {
 
     public static class Factory implements NodeRendererFactory {
         @Override
-        public NodeRenderer apply(final DataHolder options) {
+        public NodeRenderer apply(DataHolder options) {
             return new InsJiraRenderer(options);
         }
     }

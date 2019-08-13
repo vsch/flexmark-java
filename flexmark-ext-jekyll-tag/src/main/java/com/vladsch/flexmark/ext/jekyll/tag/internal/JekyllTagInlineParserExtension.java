@@ -3,9 +3,9 @@ package com.vladsch.flexmark.ext.jekyll.tag.internal;
 import com.vladsch.flexmark.ext.jekyll.tag.JekyllTag;
 import com.vladsch.flexmark.ext.jekyll.tag.JekyllTagExtension;
 import com.vladsch.flexmark.parser.InlineParser;
-import com.vladsch.flexmark.parser.LightInlineParser;
 import com.vladsch.flexmark.parser.InlineParserExtension;
 import com.vladsch.flexmark.parser.InlineParserExtensionFactory;
+import com.vladsch.flexmark.parser.LightInlineParser;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 import java.util.List;
@@ -16,22 +16,22 @@ public class JekyllTagInlineParserExtension implements InlineParserExtension {
     private final JekyllTagParsing parsing;
     private final boolean listIncludesOnly;
 
-    public JekyllTagInlineParserExtension(final LightInlineParser lightInlineParser) {
+    public JekyllTagInlineParserExtension(LightInlineParser lightInlineParser) {
         this.parsing = new JekyllTagParsing(lightInlineParser.getParsing());
         this.listIncludesOnly = JekyllTagExtension.LIST_INCLUDES_ONLY.getFrom(lightInlineParser.getDocument());
     }
 
     @Override
-    public void finalizeDocument(final InlineParser inlineParser) {
+    public void finalizeDocument(InlineParser inlineParser) {
 
     }
 
     @Override
-    public void finalizeBlock(final InlineParser inlineParser) {
+    public void finalizeBlock(InlineParser inlineParser) {
     }
 
     @Override
-    public boolean parse(final LightInlineParser inlineParser) {
+    public boolean parse(LightInlineParser inlineParser) {
         if (inlineParser.peek(1) == '%' && (inlineParser.peek(2) == ' ' || inlineParser.peek(2) == '\t')) {
             BasedSequence input = inlineParser.getInput();
             Matcher matcher = inlineParser.matcher(parsing.MACRO_TAG);
@@ -73,7 +73,7 @@ public class JekyllTagInlineParserExtension implements InlineParserExtension {
         }
 
         @Override
-        public InlineParserExtension apply(final LightInlineParser lightInlineParser) {
+        public InlineParserExtension apply(LightInlineParser lightInlineParser) {
             return new JekyllTagInlineParserExtension(lightInlineParser);
         }
 

@@ -10,11 +10,11 @@ import com.vladsch.flexmark.spec.SpecReader;
 import com.vladsch.flexmark.test.ComboSpecTestCase;
 import com.vladsch.flexmark.util.ast.IRender;
 import com.vladsch.flexmark.util.ast.Node;
-import com.vladsch.flexmark.util.format.options.ElementPlacement;
-import com.vladsch.flexmark.util.format.options.ElementPlacementSort;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.data.MutableDataSet;
+import com.vladsch.flexmark.util.format.options.ElementPlacement;
+import com.vladsch.flexmark.util.format.options.ElementPlacementSort;
 import org.junit.runners.Parameterized;
 
 import java.io.IOException;
@@ -85,7 +85,7 @@ public class ComboAbbreviationTranslationFormatterSpecTest extends ComboSpecTest
     static class TranslationFormatter implements IRender {
         final Formatter myFormatter;
 
-        public TranslationFormatter(final Formatter formatter) {
+        public TranslationFormatter(Formatter formatter) {
             myFormatter = formatter;
         }
 
@@ -95,14 +95,14 @@ public class ComboAbbreviationTranslationFormatterSpecTest extends ComboSpecTest
         }
 
         @Override
-        public void render(final Node node, final Appendable output) {
-            final TranslationHandler handler = myFormatter.getTranslationHandler(new HeaderIdGenerator.Factory());
-            final String formattedOutput = myFormatter.translationRender(node, handler, RenderPurpose.TRANSLATION_SPANS);
+        public void render(Node node, Appendable output) {
+            TranslationHandler handler = myFormatter.getTranslationHandler(new HeaderIdGenerator.Factory());
+            String formattedOutput = myFormatter.translationRender(node, handler, RenderPurpose.TRANSLATION_SPANS);
 
             // now need to output translation strings, delimited
-            final List<String> translatingTexts = handler.getTranslatingTexts();
+            List<String> translatingTexts = handler.getTranslatingTexts();
 
-            final boolean showIntermediate = node.getDocument().get(DETAILS);
+            boolean showIntermediate = node.getDocument().get(DETAILS);
 
             try {
                 if (showIntermediate) {
@@ -114,9 +114,9 @@ public class ComboAbbreviationTranslationFormatterSpecTest extends ComboSpecTest
                 e.printStackTrace();
             }
 
-            final ArrayList<CharSequence> translatedTexts = new ArrayList<>(translatingTexts.size());
+            ArrayList<CharSequence> translatedTexts = new ArrayList<>(translatingTexts.size());
             for (CharSequence text : translatingTexts) {
-                final CharSequence translated = translate(text);
+                CharSequence translated = translate(text);
                 translatedTexts.add(translated);
                 try {
                     if (showIntermediate) {
@@ -138,7 +138,7 @@ public class ComboAbbreviationTranslationFormatterSpecTest extends ComboSpecTest
             }
 
             handler.setTranslatedTexts(translatedTexts);
-            final String partial = myFormatter.translationRender(node, handler, RenderPurpose.TRANSLATED_SPANS);
+            String partial = myFormatter.translationRender(node, handler, RenderPurpose.TRANSLATED_SPANS);
 
             if (showIntermediate) {
                 try {
@@ -149,7 +149,7 @@ public class ComboAbbreviationTranslationFormatterSpecTest extends ComboSpecTest
                 }
             }
             Node partialDoc = PARSER.parse(partial);
-            final String translated = myFormatter.translationRender(partialDoc, handler, RenderPurpose.TRANSLATED);
+            String translated = myFormatter.translationRender(partialDoc, handler, RenderPurpose.TRANSLATED);
             try {
                 output.append(translated);
             } catch (IOException e) {
@@ -158,14 +158,14 @@ public class ComboAbbreviationTranslationFormatterSpecTest extends ComboSpecTest
         }
 
         @Override
-        public String render(final Node node) {
+        public String render(Node node) {
             StringBuilder sb = new StringBuilder();
             render(node, sb);
             return sb.toString();
         }
 
         @Override
-        public IRender withOptions(final DataHolder options) {
+        public IRender withOptions(DataHolder options) {
             return new TranslationFormatter(myFormatter.withOptions(options));
         }
     }

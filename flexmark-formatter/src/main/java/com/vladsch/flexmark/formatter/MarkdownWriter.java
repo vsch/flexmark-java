@@ -3,12 +3,7 @@ package com.vladsch.flexmark.formatter;
 import com.vladsch.flexmark.ast.BlockQuote;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.format.MarkdownWriterBase;
-import com.vladsch.flexmark.util.html.LineFormattingAppendable;
-import com.vladsch.flexmark.util.html.LineFormattingAppendableImpl;
-import com.vladsch.flexmark.util.sequence.BasedSequence;
 
-import java.io.IOException;
-import java.util.List;
 import java.util.function.Consumer;
 
 public class MarkdownWriter extends MarkdownWriterBase<MarkdownWriter, Node, NodeFormatterContext> {
@@ -41,19 +36,19 @@ public class MarkdownWriter extends MarkdownWriterBase<MarkdownWriter, Node, Nod
         return this;
     }
 
-    public MarkdownWriter appendNonTranslating(final CharSequence csq) {
+    public MarkdownWriter appendNonTranslating(CharSequence csq) {
         return appendNonTranslating(null, csq, null, null);
     }
 
-    public MarkdownWriter appendNonTranslating(final CharSequence prefix, final CharSequence csq) {
+    public MarkdownWriter appendNonTranslating(CharSequence prefix, CharSequence csq) {
         return appendNonTranslating(prefix, csq, null, null);
     }
 
-    public MarkdownWriter appendNonTranslating(final CharSequence prefix, final CharSequence csq, final CharSequence suffix) {
+    public MarkdownWriter appendNonTranslating(CharSequence prefix, CharSequence csq, CharSequence suffix) {
         return appendNonTranslating(prefix, csq, suffix, null);
     }
 
-    public MarkdownWriter appendNonTranslating(final CharSequence prefix, final CharSequence csq, final CharSequence suffix, final CharSequence suffix2) {
+    public MarkdownWriter appendNonTranslating(CharSequence prefix, CharSequence csq, CharSequence suffix, CharSequence suffix2) {
         if (context.isTransformingText()) {
             append(context.transformNonTranslating(prefix, csq, suffix, suffix2));
         } else {
@@ -62,7 +57,7 @@ public class MarkdownWriter extends MarkdownWriterBase<MarkdownWriter, Node, Nod
         return this;
     }
 
-    public MarkdownWriter appendNonTranslating(final CharSequence prefix, final CharSequence csq, final CharSequence suffix, final CharSequence suffix2, Consumer<String> placeholderConsumer) {
+    public MarkdownWriter appendNonTranslating(CharSequence prefix, CharSequence csq, CharSequence suffix, CharSequence suffix2, Consumer<String> placeholderConsumer) {
         if (context.isTransformingText()) {
             append(context.transformNonTranslating(prefix, csq, suffix, suffix2));
         } else {
@@ -71,19 +66,19 @@ public class MarkdownWriter extends MarkdownWriterBase<MarkdownWriter, Node, Nod
         return this;
     }
 
-    public MarkdownWriter appendTranslating(final CharSequence csq) {
+    public MarkdownWriter appendTranslating(CharSequence csq) {
         return appendTranslating(null, csq, null, null);
     }
 
-    public MarkdownWriter appendTranslating(final CharSequence prefix, final CharSequence csq) {
+    public MarkdownWriter appendTranslating(CharSequence prefix, CharSequence csq) {
         return appendTranslating(prefix, csq, null, null);
     }
 
-    public MarkdownWriter appendTranslating(final CharSequence prefix, final CharSequence csq, final CharSequence suffix) {
+    public MarkdownWriter appendTranslating(CharSequence prefix, CharSequence csq, CharSequence suffix) {
         return appendTranslating(prefix, csq, suffix, null);
     }
 
-    public MarkdownWriter appendTranslating(final CharSequence prefix, final CharSequence csq, final CharSequence suffix, final CharSequence suffix2) {
+    public MarkdownWriter appendTranslating(CharSequence prefix, CharSequence csq, CharSequence suffix, CharSequence suffix2) {
         if (context.isTransformingText()) {
             append(context.transformTranslating(prefix, csq, suffix, suffix2));
         } else {

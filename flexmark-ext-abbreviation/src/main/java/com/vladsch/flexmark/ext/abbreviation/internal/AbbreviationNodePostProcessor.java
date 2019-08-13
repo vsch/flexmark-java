@@ -9,11 +9,7 @@ import com.vladsch.flexmark.ext.autolink.internal.AutolinkNodePostProcessor;
 import com.vladsch.flexmark.parser.PostProcessorFactory;
 import com.vladsch.flexmark.parser.block.NodePostProcessor;
 import com.vladsch.flexmark.parser.block.NodePostProcessorFactory;
-import com.vladsch.flexmark.util.ast.NodeTracker;
-import com.vladsch.flexmark.util.ast.DoNotDecorate;
-import com.vladsch.flexmark.util.ast.DoNotLinkDecorate;
-import com.vladsch.flexmark.util.ast.Document;
-import com.vladsch.flexmark.util.ast.Node;
+import com.vladsch.flexmark.util.ast.*;
 import com.vladsch.flexmark.util.html.Escaping;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.ReplacedTextMapper;
@@ -34,7 +30,7 @@ public class AbbreviationNodePostProcessor extends NodePostProcessor {
         computeAbbreviations(document);
     }
 
-    private void computeAbbreviations(final Document document) {
+    private void computeAbbreviations(Document document) {
         AbbreviationRepository abbrRepository = document.get(AbbreviationExtension.ABBREVIATIONS);
 
         if (!abbrRepository.isEmpty()) {

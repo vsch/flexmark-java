@@ -1,9 +1,9 @@
 package com.vladsch.flexmark.ext.macros.internal;
 
 import com.vladsch.flexmark.ext.macros.MacrosExtension;
+import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.format.options.ElementPlacement;
 import com.vladsch.flexmark.util.format.options.ElementPlacementSort;
-import com.vladsch.flexmark.util.data.DataHolder;
 
 public class MacroFormatOptions {
 

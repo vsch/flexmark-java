@@ -212,7 +212,7 @@ public class AttributesNodePostProcessor extends NodePostProcessor {
         return previous;
     }
 
-    static void textBaseWrap(final NodeTracker state, Node lastNonAttributesNode, final Node lastNode, final TextBase textBase) {
+    static void textBaseWrap(NodeTracker state, Node lastNonAttributesNode, Node lastNode, TextBase textBase) {
         while (lastNonAttributesNode != lastNode) {
             Node nextNode = lastNonAttributesNode.getNext();
             lastNonAttributesNode.unlink();

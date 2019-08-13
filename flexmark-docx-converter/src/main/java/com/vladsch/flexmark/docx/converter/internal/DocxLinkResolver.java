@@ -21,7 +21,7 @@ public class DocxLinkResolver implements LinkResolver {
     private final String[] relativeParts;
     private final boolean prefixWwwLinks;
 
-    public DocxLinkResolver(final LinkResolverContext context) {
+    public DocxLinkResolver(LinkResolverContext context) {
         // can use context for custom settings
         // context.getDocument();
         // context.getHtmlOptions();
@@ -41,7 +41,7 @@ public class DocxLinkResolver implements LinkResolver {
     }
 
     @Override
-    public ResolvedLink resolveLink(final Node node, final LinkResolverContext context, final ResolvedLink link) {
+    public ResolvedLink resolveLink(Node node, LinkResolverContext context, ResolvedLink link) {
         Document document = node.getDocument();
 
         if (node instanceof Image || node instanceof Link || node instanceof Reference) {
@@ -147,7 +147,7 @@ public class DocxLinkResolver implements LinkResolver {
         }
 
         @Override
-        public LinkResolver apply(final LinkResolverContext context) {
+        public LinkResolver apply(LinkResolverContext context) {
             return new DocxLinkResolver(context);
         }
     }

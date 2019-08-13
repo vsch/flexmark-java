@@ -12,7 +12,7 @@ public class AdmonitionRepository {
         return referencedAdmonitionQualifiers;
     }
 
-    public void addAdmonitionQualifier(final String qualifier) {
+    public void addAdmonitionQualifier(String qualifier) {
         referencedAdmonitionQualifiers.add(qualifier);
     }
 

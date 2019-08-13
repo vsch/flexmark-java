@@ -5,12 +5,12 @@ import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.spec.SpecReader;
 import com.vladsch.flexmark.test.ComboSpecTestCase;
+import com.vladsch.flexmark.util.data.DataHolder;
+import com.vladsch.flexmark.util.data.MutableDataSet;
 import com.vladsch.flexmark.util.format.TableFormatOptions;
 import com.vladsch.flexmark.util.format.options.DiscretionaryText;
 import com.vladsch.flexmark.util.format.options.TableCaptionHandling;
 import com.vladsch.flexmark.util.mappers.CharWidthProvider;
-import com.vladsch.flexmark.util.data.DataHolder;
-import com.vladsch.flexmark.util.data.MutableDataSet;
 import com.vladsch.flexmark.util.sequence.BasedSequenceImpl;
 import org.junit.runners.Parameterized;
 
@@ -72,12 +72,12 @@ public class ComboTableFormatterSpecTest extends ComboSpecTestCase {
                     }
 
                     @Override
-                    public int charWidth(final char c) {
+                    public int charWidth(char c) {
                         return c == TableFormatOptions.INTELLIJ_DUMMY_IDENTIFIER_CHAR ? 0 : 1;
                     }
 
                     @Override
-                    public int charWidth(final CharSequence s) {
+                    public int charWidth(CharSequence s) {
                         return BasedSequenceImpl.of(s).countLeadingNot(TableFormatOptions.INTELLIJ_DUMMY_IDENTIFIER_CHAR);
                     }
                 })

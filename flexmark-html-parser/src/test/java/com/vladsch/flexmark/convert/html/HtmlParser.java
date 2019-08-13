@@ -50,7 +50,7 @@ class HtmlParser extends IParseBase {
     public static class RootNode extends Node {
         public final String myRootNode;
 
-        public RootNode(final String rootNode) {
+        public RootNode(String rootNode) {
             myRootNode = rootNode;
         }
 
@@ -69,7 +69,7 @@ class HtmlParser extends IParseBase {
 
     @Override
     public IParse withOptions(DataHolder options) {
-        final MutableDataSet mutableDataSet = new MutableDataSet(getOptions());
+        MutableDataSet mutableDataSet = new MutableDataSet(getOptions());
         if (options != null) mutableDataSet.setAll(options);
         return new HtmlParser(mutableDataSet);
     }

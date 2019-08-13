@@ -28,12 +28,12 @@ public class TablesExtension implements Parser.ParserExtension, HtmlRenderer.Htm
     }
 
     @Override
-    public void rendererOptions(final MutableDataHolder options) {
+    public void rendererOptions(MutableDataHolder options) {
 
     }
 
     @Override
-    public void parserOptions(final MutableDataHolder options) {
+    public void parserOptions(MutableDataHolder options) {
 
     }
 

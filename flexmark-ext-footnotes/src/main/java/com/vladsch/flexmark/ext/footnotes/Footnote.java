@@ -21,7 +21,7 @@ public class Footnote extends Node implements DelimitedNode, DoNotDecorate, Refe
         return referenceOrdinal;
     }
 
-    public void setReferenceOrdinal(final int referenceOrdinal) {
+    public void setReferenceOrdinal(int referenceOrdinal) {
         this.referenceOrdinal = referenceOrdinal;
     }
 
@@ -33,14 +33,14 @@ public class Footnote extends Node implements DelimitedNode, DoNotDecorate, Refe
     }
 
     @Override
-    public FootnoteBlock getReferenceNode(final Document document) {
+    public FootnoteBlock getReferenceNode(Document document) {
         if (footnoteBlock != null || text.isEmpty()) return footnoteBlock;
         footnoteBlock = getFootnoteBlock(document.get(FootnoteExtension.FOOTNOTES));
         return footnoteBlock;
     }
 
     @Override
-    public FootnoteBlock getReferenceNode(final FootnoteRepository repository) {
+    public FootnoteBlock getReferenceNode(FootnoteRepository repository) {
         if (footnoteBlock != null || text.isEmpty()) return footnoteBlock;
         footnoteBlock = getFootnoteBlock(repository);
         return footnoteBlock;

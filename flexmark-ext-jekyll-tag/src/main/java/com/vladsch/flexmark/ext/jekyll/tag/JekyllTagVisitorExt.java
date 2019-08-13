@@ -4,7 +4,7 @@ import com.vladsch.flexmark.util.ast.VisitHandler;
 import com.vladsch.flexmark.util.ast.Visitor;
 
 public class JekyllTagVisitorExt {
-    public static <V extends JekyllTagVisitor> VisitHandler<?>[] VISIT_HANDLERS(final V visitor) {
+    public static <V extends JekyllTagVisitor> VisitHandler<?>[] VISIT_HANDLERS(V visitor) {
         return new VisitHandler<?>[] {
                 // @formatter:off
                 new VisitHandler<JekyllTag>(JekyllTag.class, new Visitor<JekyllTag>() { @Override public void visit(JekyllTag node) { visitor.visit(node); } }),

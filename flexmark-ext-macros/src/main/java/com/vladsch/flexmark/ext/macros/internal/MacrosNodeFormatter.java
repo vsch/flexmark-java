@@ -6,10 +6,10 @@ import com.vladsch.flexmark.ext.macros.MacroReference;
 import com.vladsch.flexmark.ext.macros.MacrosExtension;
 import com.vladsch.flexmark.formatter.*;
 import com.vladsch.flexmark.util.ast.Node;
-import com.vladsch.flexmark.util.format.options.ElementPlacement;
-import com.vladsch.flexmark.util.format.options.ElementPlacementSort;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKey;
+import com.vladsch.flexmark.util.format.options.ElementPlacement;
+import com.vladsch.flexmark.util.format.options.ElementPlacementSort;
 
 import java.util.*;
 
@@ -23,7 +23,7 @@ public class MacrosNodeFormatter extends NodeRepositoryFormatter<MacroDefinition
     }
 
     @Override
-    public MacroDefinitionRepository getRepository(final DataHolder options) {
+    public MacroDefinitionRepository getRepository(DataHolder options) {
         return MacrosExtension.MACRO_DEFINITIONS.getFrom(options);
     }
 
@@ -38,7 +38,7 @@ public class MacrosNodeFormatter extends NodeRepositoryFormatter<MacroDefinition
     }
 
     @Override
-    public void renderReferenceBlock(final MacroDefinitionBlock node, final NodeFormatterContext context, final MarkdownWriter markdown) {
+    public void renderReferenceBlock(MacroDefinitionBlock node, NodeFormatterContext context, MarkdownWriter markdown) {
         markdown.blankLine().append(">>>").append(transformReferenceId(node.getName().toString(), context)).line();
         Node child = node.getFirstChild();
         if (child instanceof Paragraph && child == node.getLastChild()) {
@@ -81,13 +81,13 @@ public class MacrosNodeFormatter extends NodeRepositoryFormatter<MacroDefinition
         renderReference(node, context, markdown);
     }
 
-    private void render(final MacroReference node, final NodeFormatterContext context, final MarkdownWriter markdown) {
+    private void render(MacroReference node, NodeFormatterContext context, MarkdownWriter markdown) {
         markdown.append("<<<");
         if (context.isTransformingText()) {
-            final String referenceId = transformReferenceId(node.getText().toString(), context);
+            String referenceId = transformReferenceId(node.getText().toString(), context);
             context.nonTranslatingSpan(new TranslatingSpanRender() {
                 @Override
-                public void render(final NodeFormatterContext context, final MarkdownWriter markdown) {
+                public void render(NodeFormatterContext context, MarkdownWriter markdown) {
                     markdown.append(referenceId);
                 }
             });
@@ -99,7 +99,7 @@ public class MacrosNodeFormatter extends NodeRepositoryFormatter<MacroDefinition
 
     public static class Factory implements NodeFormatterFactory {
         @Override
-        public NodeFormatter create(final DataHolder options) {
+        public NodeFormatter create(DataHolder options) {
             return new MacrosNodeFormatter(options);
         }
     }

@@ -22,7 +22,7 @@ public class FormatOptions implements MutableDataSetter {
     }
 
     @Override
-    public MutableDataHolder setIn(final MutableDataHolder dataHolder) {
+    public MutableDataHolder setIn(MutableDataHolder dataHolder) {
         dataHolder.set(TaskListExtension.FORMAT_LIST_ITEM_CASE, taskListItemCase);
         dataHolder.set(TaskListExtension.FORMAT_LIST_ITEM_PLACEMENT, taskListItemPlacement);
         return dataHolder;

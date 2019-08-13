@@ -3,12 +3,12 @@ package com.vladsch.flexmark.docx.converter.util;
 import org.docx4j.wml.RPr;
 
 public class SubscriptRunFormatProvider<T> extends RunFormatProviderBase<T> {
-    public SubscriptRunFormatProvider(final DocxContext<T> docx, boolean noCharacterStyles) {
+    public SubscriptRunFormatProvider(DocxContext<T> docx, boolean noCharacterStyles) {
         super(docx, docx.getRenderingOptions().SUBSCRIPT_STYLE, noCharacterStyles, null);
     }
 
     @Override
-    public void getRPr(final RPr rPr) {
+    public void getRPr(RPr rPr) {
         super.getRPr(rPr);
         //
         //// Create object for sz

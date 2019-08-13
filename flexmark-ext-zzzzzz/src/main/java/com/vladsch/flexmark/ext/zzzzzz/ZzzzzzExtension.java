@@ -38,17 +38,17 @@ public class ZzzzzzExtension implements Parser.ParserExtension
     }
 
     @Override
-    public void rendererOptions(final MutableDataHolder options) {
+    public void rendererOptions(MutableDataHolder options) {
 
     }
 
     @Override
-    public void parserOptions(final MutableDataHolder options) {
+    public void parserOptions(MutableDataHolder options) {
 
     }
 
     @Override
-    public boolean transferReferences(final MutableDataHolder document, final DataHolder included) {
+    public boolean transferReferences(MutableDataHolder document, DataHolder included) {
         if (document.contains(ZZZZZZS) && included.contains(ZZZZZZS)) {
             return Parser.transferReferences(ZZZZZZS.getFrom(document), ZZZZZZS.getFrom(included), ZZZZZZS_KEEP.getFrom(document) == KeepType.FIRST);
         }

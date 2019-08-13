@@ -27,7 +27,7 @@ public class AutolinkExtension implements Parser.ParserExtension {
     }
 
     @Override
-    public void parserOptions(final MutableDataHolder options) {
+    public void parserOptions(MutableDataHolder options) {
 
     }
 

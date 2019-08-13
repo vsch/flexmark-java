@@ -38,13 +38,13 @@ public interface BlockFormatProvider<T> extends FormatProvider<T> {
     // PShading getPShading();
 
     // get the final PPr for the next P of this provider
-    void getPPr(final PPr pPr);
+    void getPPr(PPr pPr);
 
     // get the final ParaRPr for the next P of this provider
-    void getParaRPr(final RPr rPr);
+    void getParaRPr(RPr rPr);
 
     // to allow formatter to track first P formatting
-    void adjustPPrForFormatting(final PPr pP);
+    void adjustPPrForFormatting(PPr pP);
 
     BlockFormatProvider<T> getBlockParent();
 }

@@ -4,7 +4,7 @@ import com.vladsch.flexmark.util.ast.VisitHandler;
 import com.vladsch.flexmark.util.ast.Visitor;
 
 public class SuperscriptVisitorExt {
-    public static <V extends SuperscriptVisitor> VisitHandler<?>[] VISIT_HANDLERS(final V visitor) {
+    public static <V extends SuperscriptVisitor> VisitHandler<?>[] VISIT_HANDLERS(V visitor) {
         return new VisitHandler<?>[] {
                 // @formatter:off
                 new VisitHandler<Superscript>(Superscript.class, new Visitor<Superscript>() { @Override public void visit(Superscript node) { visitor.visit(node); } }),

@@ -74,7 +74,7 @@ public interface DelimiterProcessor {
      * @param afterIsWhiteSpace   is whitespace after
      * @return true if can be open delimiter
      */
-    boolean canBeOpener(final String before, final String after, boolean leftFlanking, boolean rightFlanking, boolean beforeIsPunctuation, boolean afterIsPunctuation, boolean beforeIsWhitespace, boolean afterIsWhiteSpace);
+    boolean canBeOpener(String before, String after, boolean leftFlanking, boolean rightFlanking, boolean beforeIsPunctuation, boolean afterIsPunctuation, boolean beforeIsWhitespace, boolean afterIsWhiteSpace);
 
     /**
      * Decide whether this delimiter can be a close delimiter
@@ -89,7 +89,7 @@ public interface DelimiterProcessor {
      * @param afterIsWhiteSpace   is whitespace after
      * @return true if can be open delimiter
      */
-    boolean canBeCloser(final String before, final String after, boolean leftFlanking, boolean rightFlanking, boolean beforeIsPunctuation, boolean afterIsPunctuation, boolean beforeIsWhitespace, boolean afterIsWhiteSpace);
+    boolean canBeCloser(String before, String after, boolean leftFlanking, boolean rightFlanking, boolean beforeIsPunctuation, boolean afterIsPunctuation, boolean beforeIsWhitespace, boolean afterIsWhiteSpace);
 
     /**
      * Whether to skip delimiters that cannot be openers or closers

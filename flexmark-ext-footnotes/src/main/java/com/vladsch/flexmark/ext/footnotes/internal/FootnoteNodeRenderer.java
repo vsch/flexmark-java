@@ -55,11 +55,11 @@ public class FootnoteNodeRenderer implements PhasedNodeRenderer {
     }
 
     @Override
-    public void renderDocument(final NodeRendererContext context, final HtmlWriter html, Document document, RenderingPhase phase) {
+    public void renderDocument(NodeRendererContext context, HtmlWriter html, Document document, RenderingPhase phase) {
         if (phase == RenderingPhase.BODY_TOP) {
             if (recheckUndefinedReferences) {
                 // need to see if have undefined footnotes that were defined after parsing
-                final boolean[] hadNewFootnotes = { false };
+                boolean[] hadNewFootnotes = { false };
                 NodeVisitor visitor = new NodeVisitor(
                         new VisitHandler<Footnote>(Footnote.class, new Visitor<Footnote>() {
                             @Override
@@ -94,8 +94,8 @@ public class FootnoteNodeRenderer implements PhasedNodeRenderer {
                         html.tagIndent("ol", new Runnable() {
                             @Override
                             public void run() {
-                                for (final FootnoteBlock footnoteBlock : footnoteRepository.getReferencedFootnoteBlocks()) {
-                                    final int footnoteOrdinal = footnoteBlock.getFootnoteOrdinal();
+                                for (FootnoteBlock footnoteBlock : footnoteRepository.getReferencedFootnoteBlocks()) {
+                                    int footnoteOrdinal = footnoteBlock.getFootnoteOrdinal();
                                     html.attr("id", "fn-" + footnoteOrdinal);
                                     html.withAttr().tagIndent("li", new Runnable() {
                                         @Override
@@ -125,7 +125,7 @@ public class FootnoteNodeRenderer implements PhasedNodeRenderer {
 
     }
 
-    private void render(Footnote node, NodeRendererContext context, final HtmlWriter html) {
+    private void render(Footnote node, NodeRendererContext context, HtmlWriter html) {
         FootnoteBlock footnoteBlock = node.getFootnoteBlock();
         if (footnoteBlock == null) {
             //just text
@@ -133,7 +133,7 @@ public class FootnoteNodeRenderer implements PhasedNodeRenderer {
             context.renderChildren(node);
             html.raw("]");
         } else {
-            final int footnoteOrdinal = footnoteBlock.getFootnoteOrdinal();
+            int footnoteOrdinal = footnoteBlock.getFootnoteOrdinal();
             int i = node.getReferenceOrdinal();
             html.attr("id", "fnref-" + footnoteOrdinal + (i == 0 ? "" : String.format(Locale.US, "-%d", i)));
             html.srcPos(node.getChars()).withAttr().tag("sup", false, false, new Runnable() {
@@ -142,7 +142,7 @@ public class FootnoteNodeRenderer implements PhasedNodeRenderer {
                     if (!options.footnoteLinkRefClass.isEmpty()) html.attr("class", options.footnoteLinkRefClass);
                     html.attr("href", "#fn-" + footnoteOrdinal);
                     html.withAttr().tag("a");
-                    html.raw(options.footnoteRefPrefix + String.valueOf(footnoteOrdinal) + options.footnoteRefSuffix);
+                    html.raw(options.footnoteRefPrefix + footnoteOrdinal + options.footnoteRefSuffix);
                     html.tag("/a");
                 }
             });
@@ -151,7 +151,7 @@ public class FootnoteNodeRenderer implements PhasedNodeRenderer {
 
     public static class Factory implements NodeRendererFactory {
         @Override
-        public NodeRenderer apply(final DataHolder options) {
+        public NodeRenderer apply(DataHolder options) {
             return new FootnoteNodeRenderer(options);
         }
     }

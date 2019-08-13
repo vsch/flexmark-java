@@ -16,12 +16,12 @@ public class AbbreviationBlock extends Block implements ReferenceNode<Abbreviati
     protected BasedSequence abbreviation = BasedSequence.NULL;
 
     @Override
-    public Abbreviation getReferencingNode(final Node node) {
+    public Abbreviation getReferencingNode(Node node) {
         return node instanceof Abbreviation ? (Abbreviation) node : null;
     }
 
     @Override
-    public int compareTo(final AbbreviationBlock o) {
+    public int compareTo(AbbreviationBlock o) {
         return text.compareTo(o.getText());
     }
 

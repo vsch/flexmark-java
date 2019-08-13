@@ -2,9 +2,9 @@ package com.vladsch.flexmark.ext.macros.internal;
 
 import com.vladsch.flexmark.ext.macros.MacroReference;
 import com.vladsch.flexmark.parser.InlineParser;
-import com.vladsch.flexmark.parser.LightInlineParser;
 import com.vladsch.flexmark.parser.InlineParserExtension;
 import com.vladsch.flexmark.parser.InlineParserExtensionFactory;
+import com.vladsch.flexmark.parser.LightInlineParser;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 import java.util.Set;
@@ -14,23 +14,23 @@ public class MacrosInlineParserExtension implements InlineParserExtension {
     static Pattern MACRO_REFERENCE = Pattern.compile("<<<([\\w_-]+)>>>");
     static Pattern MACRO_REFERENCE_INTELLIJ = Pattern.compile("<<<([\u001f\\w_-]+)>>>");
 
-    public MacrosInlineParserExtension(final LightInlineParser inlineParser) {
+    public MacrosInlineParserExtension(LightInlineParser inlineParser) {
 
     }
 
     @Override
-    public void finalizeDocument(final InlineParser inlineParser) {
+    public void finalizeDocument(InlineParser inlineParser) {
 
     }
 
     @Override
-    public void finalizeBlock(final InlineParser inlineParser) {
+    public void finalizeBlock(InlineParser inlineParser) {
 
     }
 
     @Override
-    public boolean parse(final LightInlineParser inlineParser) {
-        final BasedSequence match = inlineParser.match(inlineParser.getParsing().intellijDummyIdentifier ? MACRO_REFERENCE_INTELLIJ : MACRO_REFERENCE);
+    public boolean parse(LightInlineParser inlineParser) {
+        BasedSequence match = inlineParser.match(inlineParser.getParsing().intellijDummyIdentifier ? MACRO_REFERENCE_INTELLIJ : MACRO_REFERENCE);
 
         if (match != null) {
             BasedSequence name = match.midSequence(3, -3);
@@ -59,7 +59,7 @@ public class MacrosInlineParserExtension implements InlineParserExtension {
         }
 
         @Override
-        public InlineParserExtension apply(final LightInlineParser lightInlineParser) {
+        public InlineParserExtension apply(LightInlineParser lightInlineParser) {
             return new MacrosInlineParserExtension(lightInlineParser);
         }
 

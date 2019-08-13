@@ -1,11 +1,11 @@
 package com.vladsch.flexmark.convert.html;
 
 import com.vladsch.flexmark.util.Utils;
-import com.vladsch.flexmark.util.format.TableFormatOptions;
-import com.vladsch.flexmark.util.html.CellAlignment;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSetter;
+import com.vladsch.flexmark.util.format.TableFormatOptions;
+import com.vladsch.flexmark.util.html.CellAlignment;
 
 import java.util.Map;
 import java.util.regex.Pattern;
@@ -13,7 +13,7 @@ import java.util.regex.Pattern;
 /**
  * @deprecated Use HtmlParserOptions from flexmark-html2md-converter module instead.
  * The latter is an extensible version of HTML conversion module with the same features as flexmark-html-parser.
- *
+ * <p>
  * This class is here for backward compatibility and is no longer maintained.
  */
 @Deprecated
@@ -211,7 +211,7 @@ public class HtmlParserOptions implements MutableDataSetter {
     }
 
     @Override
-    public MutableDataHolder setIn(final MutableDataHolder dataHolder) {
+    public MutableDataHolder setIn(MutableDataHolder dataHolder) {
         dataHolder.set(FlexmarkHtmlParser.LIST_CONTENT_INDENT, listContentIndent);
         dataHolder.set(FlexmarkHtmlParser.SETEXT_HEADINGS, setextHeadings);
         dataHolder.set(FlexmarkHtmlParser.OUTPUT_UNKNOWN_TAGS, outputUnknownTags);

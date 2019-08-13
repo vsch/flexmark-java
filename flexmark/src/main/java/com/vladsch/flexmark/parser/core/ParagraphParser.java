@@ -58,7 +58,7 @@ public class ParagraphParser extends AbstractBlockParser {
 
     public static class Factory implements BlockParserFactory {
         @Override
-        public BlockStart tryStart(final ParserState state, final MatchedBlockParser matchedBlockParser) {
+        public BlockStart tryStart(ParserState state, MatchedBlockParser matchedBlockParser) {
             return null;
         }
     }

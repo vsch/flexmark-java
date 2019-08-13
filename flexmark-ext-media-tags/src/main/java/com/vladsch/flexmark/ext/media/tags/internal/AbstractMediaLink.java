@@ -16,7 +16,7 @@ public abstract class AbstractMediaLink extends InlineLinkNode {
         this.TYPE = type;
     }
 
-    public AbstractMediaLink(String prefix, String type, final Link other) {
+    public AbstractMediaLink(String prefix, String type, Link other) {
         super(other.getChars().baseSubSequence(other.getChars().getStartOffset() - prefix.length(), other.getChars().getEndOffset()),
                 other.getChars().baseSubSequence(other.getChars().getStartOffset() - prefix.length(), other.getTextOpeningMarker().getEndOffset()),
                 other.getText(),
@@ -40,7 +40,7 @@ public abstract class AbstractMediaLink extends InlineLinkNode {
     }
 
     @Override
-    public void setTextChars(final BasedSequence textChars) {
+    public void setTextChars(BasedSequence textChars) {
         verifyBasedSequence(textChars, 0);
 
         int textCharsLength = textChars.length();
@@ -49,7 +49,7 @@ public abstract class AbstractMediaLink extends InlineLinkNode {
         textClosingMarker = textChars.subSequence(textCharsLength - 1, textCharsLength);
     }
 
-    protected final void verifyBasedSequence(final BasedSequence chars, int startOffset) {
+    protected final void verifyBasedSequence(BasedSequence chars, int startOffset) {
         if (!chars.baseSubSequence(startOffset, startOffset + PREFIX.length()).matches(PREFIX)) {
             throw new IllegalArgumentException(String.format(INVALID_SEQUENCE, TYPE, PREFIX));
         }

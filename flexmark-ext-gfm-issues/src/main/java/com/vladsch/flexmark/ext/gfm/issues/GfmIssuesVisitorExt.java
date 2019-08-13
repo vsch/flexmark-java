@@ -4,7 +4,7 @@ import com.vladsch.flexmark.util.ast.VisitHandler;
 import com.vladsch.flexmark.util.ast.Visitor;
 
 public class GfmIssuesVisitorExt {
-    public static <V extends GfmIssuesVisitor> VisitHandler<?>[] VISIT_HANDLERS(final V visitor) {
+    public static <V extends GfmIssuesVisitor> VisitHandler<?>[] VISIT_HANDLERS(V visitor) {
         return new VisitHandler<?>[] {
                 // @formatter:off
                 new VisitHandler<GfmIssue>(GfmIssue.class, new Visitor<GfmIssue>() {

@@ -17,7 +17,7 @@ public abstract class NodeFormatterSubContext implements NodeFormatterContext {
         return renderingNode;
     }
 
-    public void setRenderingNode(final Node renderingNode) {
+    public void setRenderingNode(Node renderingNode) {
         this.renderingNode = renderingNode;
     }
 

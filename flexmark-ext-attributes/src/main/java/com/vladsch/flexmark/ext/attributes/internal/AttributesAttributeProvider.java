@@ -10,14 +10,13 @@ import com.vladsch.flexmark.html.renderer.AttributablePart;
 import com.vladsch.flexmark.html.renderer.CoreNodeRenderer;
 import com.vladsch.flexmark.html.renderer.LinkResolverContext;
 import com.vladsch.flexmark.util.ast.Node;
+import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.html.Attribute;
 import com.vladsch.flexmark.util.html.Attributes;
-import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 import java.util.ArrayList;
 
-import static com.vladsch.flexmark.html.renderer.AttributablePart.NODE;
 import static com.vladsch.flexmark.util.html.Attribute.CLASS_ATTR;
 
 public class AttributesAttributeProvider implements AttributeProvider {

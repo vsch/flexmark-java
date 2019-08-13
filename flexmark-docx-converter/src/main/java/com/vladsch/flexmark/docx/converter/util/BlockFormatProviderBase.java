@@ -14,7 +14,7 @@ public class BlockFormatProviderBase<T> implements BlockFormatProvider<T> {
     protected final String myBaseStyleId;
     protected int myPCount;
 
-    public BlockFormatProviderBase(final DocxContext<T> docx, final String baseStyleId) {
+    public BlockFormatProviderBase(DocxContext<T> docx, String baseStyleId) {
         myDocx = docx;
         myFrame = docx.getContextFrame();
         myParent = docx.getBlockFormatProvider();
@@ -23,7 +23,7 @@ public class BlockFormatProviderBase<T> implements BlockFormatProvider<T> {
     }
 
     @Override
-    public void adjustPPrForFormatting(final PPr pP) {
+    public void adjustPPrForFormatting(PPr pP) {
         myPCount++;
     }
 
@@ -103,7 +103,7 @@ public class BlockFormatProviderBase<T> implements BlockFormatProvider<T> {
     }
 
     @Override
-    public void getPPr(final PPr pPr) {
+    public void getPPr(PPr pPr) {
         // Create object for pStyle if one does not already exist
         if (myBaseStyleId != null) {
             PPrBase.PStyle basePStyle = myDocx.getFactory().createPPrBasePStyle();
@@ -140,13 +140,13 @@ public class BlockFormatProviderBase<T> implements BlockFormatProvider<T> {
     }
 
     @Override
-    public void getParaRPr(final RPr rPr) {
+    public void getParaRPr(RPr rPr) {
         BlockFormatProvider<T> parent = getStyleParent();
         if (parent != null) {
             parent.getParaRPr(rPr);
         }
 
-        final Style style = getStyle();
+        Style style = getStyle();
         if (style != null && style.getRPr() != null) {
             StyleUtil.apply(myDocx.getHelper().getExplicitRPr(style.getRPr()), rPr);
         }

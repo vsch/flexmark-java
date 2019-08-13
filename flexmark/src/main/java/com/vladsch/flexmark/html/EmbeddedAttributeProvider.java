@@ -23,7 +23,7 @@ public class EmbeddedAttributeProvider implements AttributeProvider {
     }
 
     @Override
-    public void setAttributes(final Node node, final AttributablePart part, final Attributes attributes) {
+    public void setAttributes(Node node, AttributablePart part, Attributes attributes) {
         if (part == AttributablePart.NODE) {
             Node firstChild = node.getChildOfType(EmbeddedNodeAttributes.class);
             if (firstChild instanceof EmbeddedNodeAttributes) {
@@ -47,7 +47,7 @@ public class EmbeddedAttributeProvider implements AttributeProvider {
         }
 
         @Override
-        public void astString(final StringBuilder out, final boolean withExtra) {
+        public void astString(StringBuilder out, boolean withExtra) {
             out.append(EmbeddedNodeAttributes.class.getSimpleName());
             out.append("[").append(getStartOffset()).append(", ").append(getEndOffset()).append("]");
             out.append(", attributes: ").append(attributes.toString());
@@ -56,7 +56,7 @@ public class EmbeddedAttributeProvider implements AttributeProvider {
         }
 
         @Override
-        public void astExtraChars(final StringBuilder out) {
+        public void astExtraChars(StringBuilder out) {
         }
     }
 }

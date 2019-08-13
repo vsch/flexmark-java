@@ -19,12 +19,12 @@ public class EnumeratedReferenceBlock extends Block implements ReferenceNode<Enu
     protected BasedSequence enumeratedReference = BasedSequence.NULL;
 
     @Override
-    public int compareTo(final EnumeratedReferenceBlock other) {
+    public int compareTo(EnumeratedReferenceBlock other) {
         return getText().compareTo(other.getText());
     }
 
     @Override
-    public EnumeratedReferenceText getReferencingNode(final Node node) {
+    public EnumeratedReferenceText getReferencingNode(Node node) {
         return node instanceof EnumeratedReferenceText ? (EnumeratedReferenceText) node : null;
     }
 
@@ -81,12 +81,12 @@ public class EnumeratedReferenceBlock extends Block implements ReferenceNode<Enu
     }
 
     @Override
-    public boolean isItemParagraph(final Paragraph node) {
+    public boolean isItemParagraph(Paragraph node) {
         return node == getFirstChild();
     }
 
     @Override
-    public boolean isParagraphWrappingDisabled(final Paragraph node, final ListOptions listOptions, final DataHolder options) {
+    public boolean isParagraphWrappingDisabled(Paragraph node, ListOptions listOptions, DataHolder options) {
         return true;
     }
 }

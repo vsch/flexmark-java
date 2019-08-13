@@ -63,7 +63,7 @@ public class XmlDocxSorter {
         public Node node;
         public final int index;
 
-        public DocxPartEntry(final int ordinal, final String contentType, final String name) {
+        public DocxPartEntry(int ordinal, String contentType, String name) {
             this.ordinal = ordinal;
             this.contentType = contentType;
             this.name = name;
@@ -173,12 +173,12 @@ public class XmlDocxSorter {
             "webSettings", XMLNS_WORDPROCESSING
     ));
 
-    static String xmlnsPrefix(Node node, final String xmlns) {
+    static String xmlnsPrefix(Node node, String xmlns) {
         String xmlnsPrefix = "";
         if (xmlns != null && !xmlns.isEmpty()) {
             xmlnsPrefix = forAllAttributesUntil(node, null, null, null, new Function<Node, String>() {
                 @Override
-                public String apply(final Node a) {
+                public String apply(Node a) {
                     if (a.getNodeName().startsWith("xmlns:") || a.getNodeName().startsWith("xmlns:")) {
                         if (a.getNodeValue().equals(xmlns)) {
                             // we have it
@@ -193,10 +193,10 @@ public class XmlDocxSorter {
                 // search in parent
                 xmlnsPrefix = forAllParentsUntil(node, "", new Function<Node, String>() {
                     @Override
-                    public String apply(final Node p) {
+                    public String apply(Node p) {
                         return forAllAttributesUntil(p, null, null, null, new Function<Node, String>() {
                             @Override
-                            public String apply(final Node a) {
+                            public String apply(Node a) {
                                 if (a.getNodeName().startsWith("xmlns:") || a.getNodeName().startsWith("xmlns:")) {
                                     if (a.getNodeValue().equals(xmlns)) {
                                         // we have it
@@ -213,17 +213,17 @@ public class XmlDocxSorter {
         return xmlnsPrefix;
     }
 
-    static void forAllParents(final Node node, final Consumer<Node> consumer) {
+    static void forAllParents(Node node, Consumer<Node> consumer) {
         forAllParentsUntil(node, null, new Function<Node, Object>() {
             @Override
-            public Object apply(final Node n) {
+            public Object apply(Node n) {
                 consumer.accept(n);
                 return null;
             }
         });
     }
 
-    static <T> T forAllParentsUntil(final Node node, final T defaultValue, final Function<Node, T> function) {
+    static <T> T forAllParentsUntil(Node node, T defaultValue, Function<Node, T> function) {
         Node parentNode = node.getParentNode();
 
         while (parentNode != null) {
@@ -237,35 +237,35 @@ public class XmlDocxSorter {
         return defaultValue;
     }
 
-    static void forAllChildren(final Node node, final Consumer<Node> consumer) {
+    static void forAllChildren(Node node, Consumer<Node> consumer) {
         forAllChildren(node, null, null, consumer);
     }
 
-    static void forAllChildren(final Node node, final String xmlns, final String[] tagNames, final Consumer<Node> consumer) {
+    static void forAllChildren(Node node, String xmlns, String[] tagNames, Consumer<Node> consumer) {
         forAllChildrenUntil(node, null, xmlns, tagNames, new Function<Node, Object>() {
             @Override
-            public Object apply(final Node n) {
+            public Object apply(Node n) {
                 consumer.accept(n);
                 return null;
             }
         });
     }
 
-    static <T> T forAllChildrenUntil(final Node node, final Function<Node, T> function) {
+    static <T> T forAllChildrenUntil(Node node, Function<Node, T> function) {
         return forAllChildrenUntil(node, null, null, null, function);
     }
 
-    static <T> T forAllChildrenUntil(final Node node, final T defaultValue, final Function<Node, T> function) {
+    static <T> T forAllChildrenUntil(Node node, T defaultValue, Function<Node, T> function) {
         return forAllChildrenUntil(node, defaultValue, null, null, function);
     }
 
-    static <T> T forAllChildrenUntil(final Node node, final String xmlns, final String[] tagNames, final Function<Node, T> function) {
+    static <T> T forAllChildrenUntil(Node node, String xmlns, String[] tagNames, Function<Node, T> function) {
         return forAllChildrenUntil(node, null, xmlns, tagNames, function);
     }
 
-    static <T> T forAllChildrenUntil(final Node node, final T defaultValue, final String xmlns, final String[] tagNames, final Function<Node, T> function) {
+    static <T> T forAllChildrenUntil(Node node, T defaultValue, String xmlns, String[] tagNames, Function<Node, T> function) {
         if (node.hasChildNodes()) {
-            final NodeList childNodes = node.getChildNodes();
+            NodeList childNodes = node.getChildNodes();
             int iMax = childNodes.getLength();
             for (int i = 0; i < iMax; i++) {
                 Node child = childNodes.item(i);
@@ -291,32 +291,32 @@ public class XmlDocxSorter {
         return defaultValue;
     }
 
-    static void forAllAttributes(final Node node, final Consumer<Node> consumer) {
+    static void forAllAttributes(Node node, Consumer<Node> consumer) {
         forAllAttributes(node, null, null, consumer);
     }
 
-    static void forAllAttributes(final Node node, final String xmlns, final String[] attributeNames, final Consumer<Node> consumer) {
+    static void forAllAttributes(Node node, String xmlns, String[] attributeNames, Consumer<Node> consumer) {
         forAllAttributesUntil(node, null, null, attributeNames, new Function<Node, Object>() {
             @Override
-            public Object apply(final Node n) {
+            public Object apply(Node n) {
                 consumer.accept(n);
                 return null;
             }
         });
     }
 
-    static <T> T forAllAttributesUntil(final Node node, final Function<Node, T> function) {
+    static <T> T forAllAttributesUntil(Node node, Function<Node, T> function) {
         return forAllChildrenUntil(node, null, null, null, function);
     }
 
-    static <T> T forAllAttributesUntil(final Node node, final T defaultValue, final Function<Node, T> function) {
+    static <T> T forAllAttributesUntil(Node node, T defaultValue, Function<Node, T> function) {
         return forAllChildrenUntil(node, defaultValue, null, null, function);
     }
 
-    static <T> T forAllAttributesUntil(final Node node, final T defaultValue, final String xmlns, final String[] attributeNames, final Function<Node, T> function) {
+    static <T> T forAllAttributesUntil(Node node, T defaultValue, String xmlns, String[] attributeNames, Function<Node, T> function) {
         if (node.hasAttributes()) {
-            final String xmlnsPrefix = xmlnsPrefix(node, xmlns);
-            final NamedNodeMap attributes = node.getAttributes();
+            String xmlnsPrefix = xmlnsPrefix(node, xmlns);
+            NamedNodeMap attributes = node.getAttributes();
             int iMax = attributes.getLength();
             for (int i = 0; i < iMax; i++) {
                 Node item = attributes.item(i);
@@ -354,7 +354,7 @@ public class XmlDocxSorter {
             return second;
         }
 
-        public Pair(final F first, final S second) {
+        public Pair(F first, S second) {
             this.first = first;
             this.second = second;
         }
@@ -369,7 +369,7 @@ public class XmlDocxSorter {
     }
 */
 
-    static Pair<String, String> getXmlnsName(final String xmlnsName) {
+    static Pair<String, String> getXmlnsName(String xmlnsName) {
         int pos = xmlnsName.indexOf(":");
         if (pos >= 0) {
             return new Pair<>(xmlnsName.substring(0, pos + 1), xmlnsName.substring(pos + 1));
@@ -378,24 +378,24 @@ public class XmlDocxSorter {
         }
     }
 
-    static void sortNodeAttributes(final Node node) {
+    static void sortNodeAttributes(Node node) {
         forAllChildrenUntil(node, XMLNS_PKG, arrayOf("xmlData"), new Function<Node, Boolean>() {
             @Override
-            public Boolean apply(final Node n) {
+            public Boolean apply(Node n) {
                 forAllChildrenUntil(n, new Function<Node, Boolean>() {
                     @Override
-                    public Boolean apply(final Node c) {
-                        final Pair<String, String> xmlnsName = getXmlnsName(c.getNodeName());
+                    public Boolean apply(Node c) {
+                        Pair<String, String> xmlnsName = getXmlnsName(c.getNodeName());
                         if (sortXmlDataAttributes.containsKey(xmlnsName.getFirst())) {
                             String xmlnsPrefix = xmlnsPrefix(node, sortXmlDataAttributes.get(xmlnsName.getFirst()));
 
                             if (xmlnsPrefix.equals(xmlnsName.getSecond())) {
                                 // our node, we sort attributes of these by name, without the xmlns
-                                final ArrayList<Node> toSort = new ArrayList<>();
+                                ArrayList<Node> toSort = new ArrayList<>();
 
                                 forAllAttributes(c, new Consumer<Node>() {
                                     @Override
-                                    public void accept(final Node e) {
+                                    public void accept(Node e) {
                                         toSort.add(e);
                                     }
                                 });
@@ -405,7 +405,7 @@ public class XmlDocxSorter {
                                 }
                                 Collections.sort(toSort, new Comparator<Node>() {
                                     @Override
-                                    public int compare(final Node o1, final Node o2) {
+                                    public int compare(Node o1, Node o2) {
                                         return getXmlnsName(o1.getNodeName()).getSecond().compareTo(getXmlnsName(o2.getNodeName()).getSecond());
                                     }
                                 });
@@ -429,16 +429,16 @@ public class XmlDocxSorter {
     static void sortRelationships(Node node) {
         forAllChildrenUntil(node, XMLNS_PKG, arrayOf("xmlData"), new Function<Node, Boolean>() {
             @Override
-            public Boolean apply(final Node n) {
+            public Boolean apply(Node n) {
                 forAllChildrenUntil(n, XMLNS_RELATIONSHIPS, arrayOf("Relationships"), new Function<Node, Boolean>() {
                     @Override
-                    public Boolean apply(final Node c) {
+                    public Boolean apply(Node c) {
                         if (c.hasAttributes()) {
                             // we sort Relationship children by Target attribute
-                            final ArrayList<Node> toSort = new ArrayList<>();
+                            ArrayList<Node> toSort = new ArrayList<>();
                             forAllChildren(c, XMLNS_RELATIONSHIPS, arrayOf("Relationship"), new Consumer<Node>() {
                                 @Override
-                                public void accept(final Node r) {
+                                public void accept(Node r) {
                                     if (r.hasAttributes() && r.getAttributes().getNamedItem("Target") != null) {
                                         toSort.add(r);
                                     }
@@ -451,7 +451,7 @@ public class XmlDocxSorter {
 
                             Collections.sort(toSort, new Comparator<Node>() {
                                 @Override
-                                public int compare(final Node o1, final Node o2) {
+                                public int compare(Node o1, Node o2) {
                                     return o1.getAttributes().getNamedItem("Target").getNodeValue().compareTo(o2.getAttributes().getNamedItem("Target").getNodeValue());
                                 }
                             });
@@ -473,15 +473,15 @@ public class XmlDocxSorter {
     static void sortProperties(Node node) {
         forAllChildrenUntil(node, XMLNS_PKG, arrayOf("xmlData"), new Function<Node, Boolean>() {
             @Override
-            public Boolean apply(final Node n) {
+            public Boolean apply(Node n) {
                 forAllChildrenUntil(n, XMLNS_EXTENDED_PROPERTIES, arrayOf("Properties"), new Function<Node, Boolean>() {
                     @Override
-                    public Boolean apply(final Node p) {
+                    public Boolean apply(Node p) {
                         // we sort properties
-                        final ArrayList<Node> toSort = new ArrayList<>();
+                        ArrayList<Node> toSort = new ArrayList<>();
                         forAllChildren(p, new Consumer<Node>() {
                             @Override
-                            public void accept(final Node e) {
+                            public void accept(Node e) {
                                 toSort.add(e);
                             }
                         });
@@ -491,7 +491,7 @@ public class XmlDocxSorter {
                             }
                             Collections.sort(toSort, new Comparator<Node>() {
                                 @Override
-                                public int compare(final Node o1, final Node o2) {
+                                public int compare(Node o1, Node o2) {
                                     return getXmlnsName(o1.getNodeName()).getSecond().compareTo(getXmlnsName(o2.getNodeName()).getSecond());
                                 }
                             });
@@ -513,20 +513,20 @@ public class XmlDocxSorter {
 
     public static String sortDocumentParts(String xml) {
         try {
-            final InputSource src = new InputSource(new StringReader(xml));
-            final DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();
+            InputSource src = new InputSource(new StringReader(xml));
+            DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();
             builderFactory.setNamespaceAware(false);
 
-            final Document document = builderFactory.newDocumentBuilder().parse(src);
+            Document document = builderFactory.newDocumentBuilder().parse(src);
 
-            final DOMImplementationRegistry registry = DOMImplementationRegistry.newInstance();
-            final DOMImplementationLS impl = (DOMImplementationLS) registry.getDOMImplementation("LS");
-            final LSSerializer writer = impl.createLSSerializer();
+            DOMImplementationRegistry registry = DOMImplementationRegistry.newInstance();
+            DOMImplementationLS impl = (DOMImplementationLS) registry.getDOMImplementation("LS");
+            LSSerializer writer = impl.createLSSerializer();
 
             writer.getDomConfig().setParameter("format-pretty-print", Boolean.TRUE); // Set this to true if the output needs to be beautified.
             writer.getDomConfig().setParameter("xml-declaration", false);
 
-            final HashMap<String, HashMap<Pattern, DocxPartEntry>> contentTypeNameEntry = new HashMap<String, HashMap<Pattern, DocxPartEntry>>();
+            HashMap<String, HashMap<Pattern, DocxPartEntry>> contentTypeNameEntry = new HashMap<String, HashMap<Pattern, DocxPartEntry>>();
             for (DocxPartEntry entry : entries) {
                 HashMap<Pattern, DocxPartEntry> entryHashMap = contentTypeNameEntry.get(entry.contentType);
                 if (entryHashMap == null) {
@@ -536,35 +536,35 @@ public class XmlDocxSorter {
                 entryHashMap.put(entry.regex, entry);
             }
 
-            final DocxPartEntry unknownPartEntry = new DocxPartEntry(99, "", "");
+            DocxPartEntry unknownPartEntry = new DocxPartEntry(99, "", "");
 
-            final ArrayList<DocxPartEntry> partEntries = new ArrayList<>();
-            final int[] unknownIndex = new int[] { 0 };
+            ArrayList<DocxPartEntry> partEntries = new ArrayList<>();
+            int[] unknownIndex = new int[] { 0 };
             //final NodeList parts = document.getElementsByTagName("pkg:part");
 
-            final StringBuilder sb = new StringBuilder();
+            StringBuilder sb = new StringBuilder();
             sb.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
 
             forAllChildren(document, XMLNS_PKG, arrayOf("package"), new Consumer<Node>() {
                 @Override
-                public void accept(final Node pkg) {
+                public void accept(Node pkg) {
                     forAllChildren(pkg, XMLNS_PKG, arrayOf("part"), new Consumer<Node>() {
                         @Override
-                        public void accept(final Node part) {
+                        public void accept(Node part) {
                             sortNodeAttributes(part);
                             sortRelationships(part);
                             sortProperties(part);
 
-                            final NamedNodeMap attributes = part.getAttributes();
-                            final Node contentTypeNode = attributes.getNamedItem("pkg:contentType");
+                            NamedNodeMap attributes = part.getAttributes();
+                            Node contentTypeNode = attributes.getNamedItem("pkg:contentType");
 
                             boolean handled = false;
                             if (contentTypeNode != null) {
                                 String contentType = contentTypeNode.getNodeValue();
 
-                                final HashMap<Pattern, DocxPartEntry> entryHashMap = contentTypeNameEntry.get(contentType);
+                                HashMap<Pattern, DocxPartEntry> entryHashMap = contentTypeNameEntry.get(contentType);
                                 if (entryHashMap != null) {
-                                    final Node nameNode = attributes.getNamedItem("pkg:name");
+                                    Node nameNode = attributes.getNamedItem("pkg:name");
                                     // now we find the entry for these
                                     if (nameNode != null) {
                                         String name = nameNode.getNodeValue();
@@ -593,8 +593,8 @@ public class XmlDocxSorter {
                     }
                     Collections.sort(partEntries, new Comparator<DocxPartEntry>() {
                         @Override
-                        public int compare(final DocxPartEntry o1, final DocxPartEntry o2) {
-                            final int ordinals = Integer.compare(o1.ordinal, o2.ordinal);
+                        public int compare(DocxPartEntry o1, DocxPartEntry o2) {
+                            int ordinals = Integer.compare(o1.ordinal, o2.ordinal);
                             return ordinals != 0 ? ordinals : Integer.compare(o1.index, o2.index);
                         }
                     });

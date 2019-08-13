@@ -44,7 +44,7 @@ public abstract class ListItem extends Block implements ParagraphItemContainer, 
         return markerSuffix;
     }
 
-    public void setMarkerSuffix(final BasedSequence markerSuffix) {
+    public void setMarkerSuffix(BasedSequence markerSuffix) {
         assert markerSuffix.isNull() || openingMarker.getBase() == markerSuffix.getBase();
 
         this.markerSuffix = markerSuffix;
@@ -102,7 +102,7 @@ public abstract class ListItem extends Block implements ParagraphItemContainer, 
         return containsBlankLine;
     }
 
-    public void setContainsBlankLine(final boolean containsBlankLine) {
+    public void setContainsBlankLine(boolean containsBlankLine) {
         this.containsBlankLine = containsBlankLine;
     }
 

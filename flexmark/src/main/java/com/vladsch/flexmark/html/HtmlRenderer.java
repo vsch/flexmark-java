@@ -3,9 +3,9 @@ package com.vladsch.flexmark.html;
 import com.vladsch.flexmark.ast.HtmlBlock;
 import com.vladsch.flexmark.ast.HtmlInline;
 import com.vladsch.flexmark.html.renderer.*;
-import com.vladsch.flexmark.util.ast.IRender;
 import com.vladsch.flexmark.util.Pair;
 import com.vladsch.flexmark.util.ast.Document;
+import com.vladsch.flexmark.util.ast.IRender;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.builder.BuilderBase;
 import com.vladsch.flexmark.util.builder.Extension;
@@ -129,17 +129,17 @@ public class HtmlRenderer implements IRender {
         this.htmlIdGeneratorFactory = builder.htmlIdGeneratorFactory;
 
         // resolve renderer dependencies
-        final List<DelegatingNodeRendererFactoryWrapper> nodeRenderers = new ArrayList<DelegatingNodeRendererFactoryWrapper>(builder.nodeRendererFactories.size());
+        List<DelegatingNodeRendererFactoryWrapper> nodeRenderers = new ArrayList<DelegatingNodeRendererFactoryWrapper>(builder.nodeRendererFactories.size());
 
         for (int i = builder.nodeRendererFactories.size() - 1; i >= 0; i--) {
-            final NodeRendererFactory nodeRendererFactory = builder.nodeRendererFactories.get(i);
-            final Set<Class<? extends DelegatingNodeRendererFactoryWrapper>>[] myDelegates = new Set[] { null };
+            NodeRendererFactory nodeRendererFactory = builder.nodeRendererFactories.get(i);
+            Set<Class<? extends DelegatingNodeRendererFactoryWrapper>>[] myDelegates = new Set[] { null };
 
             nodeRenderers.add(new DelegatingNodeRendererFactoryWrapper(nodeRenderers, nodeRendererFactory));
         }
 
         // Add as last. This means clients can override the rendering of core nodes if they want by default
-        final CoreNodeRenderer.Factory nodeRendererFactory = new CoreNodeRenderer.Factory();
+        CoreNodeRenderer.Factory nodeRendererFactory = new CoreNodeRenderer.Factory();
         nodeRenderers.add(new DelegatingNodeRendererFactoryWrapper(nodeRenderers, nodeRendererFactory));
 
         RendererDependencyHandler resolver = new RendererDependencyHandler();
@@ -223,17 +223,17 @@ public class HtmlRenderer implements IRender {
         return options == null ? this : new HtmlRenderer(new Builder(builder, options));
     }
 
-    static public boolean isCompatibleRendererType(final MutableDataHolder options, final String supportedRendererType) {
-        final String rendererType = HtmlRenderer.TYPE.getFrom(options);
+    static public boolean isCompatibleRendererType(MutableDataHolder options, String supportedRendererType) {
+        String rendererType = HtmlRenderer.TYPE.getFrom(options);
         return isCompatibleRendererType(options, rendererType, supportedRendererType);
     }
 
-    static public boolean isCompatibleRendererType(final MutableDataHolder options, final String rendererType, final String supportedRendererType) {
+    static public boolean isCompatibleRendererType(MutableDataHolder options, String rendererType, String supportedRendererType) {
         if (rendererType.equals(supportedRendererType)) {
             return true;
         }
 
-        final List<Pair<String, String>> equivalence = RENDERER_TYPE_EQUIVALENCE.getFrom(options);
+        List<Pair<String, String>> equivalence = RENDERER_TYPE_EQUIVALENCE.getFrom(options);
 
         for (Pair<String, String> pair : equivalence) {
             if (rendererType.equals(pair.getFirst())) {
@@ -245,11 +245,11 @@ public class HtmlRenderer implements IRender {
         return false;
     }
 
-    static public MutableDataHolder addRenderTypeEquivalence(final MutableDataHolder options, final String rendererType, final String supportedRendererType) {
+    static public MutableDataHolder addRenderTypeEquivalence(MutableDataHolder options, String rendererType, String supportedRendererType) {
         if (!isCompatibleRendererType(options, rendererType, supportedRendererType)) {
             // need to add
-            final List<Pair<String, String>> equivalence = RENDERER_TYPE_EQUIVALENCE.getFrom(options);
-            final ArrayList<Pair<String, String>> newEquivalence = new ArrayList<>(equivalence);
+            List<Pair<String, String>> equivalence = RENDERER_TYPE_EQUIVALENCE.getFrom(options);
+            ArrayList<Pair<String, String>> newEquivalence = new ArrayList<>(equivalence);
             newEquivalence.add(new Pair<String, String>(rendererType, supportedRendererType));
             options.set(RENDERER_TYPE_EQUIVALENCE, newEquivalence);
         }
@@ -289,7 +289,7 @@ public class HtmlRenderer implements IRender {
         }
 
         @Override
-        protected void removeApiPoint(final Object apiPoint) {
+        protected void removeApiPoint(Object apiPoint) {
             if (apiPoint instanceof AttributeProviderFactory) this.attributeProviderFactories.remove(apiPoint.getClass());
             else if (apiPoint instanceof NodeRendererFactory) this.nodeRendererFactories.remove(apiPoint);
             else if (apiPoint instanceof LinkResolverFactory) this.linkResolverFactories.remove(apiPoint);
@@ -300,7 +300,7 @@ public class HtmlRenderer implements IRender {
         }
 
         @Override
-        protected void preloadExtension(final Extension extension) {
+        protected void preloadExtension(Extension extension) {
             if (extension instanceof HtmlRendererExtension) {
                 HtmlRendererExtension htmlRendererExtension = (HtmlRendererExtension) extension;
                 htmlRendererExtension.rendererOptions(this);
@@ -311,7 +311,7 @@ public class HtmlRenderer implements IRender {
         }
 
         @Override
-        protected boolean loadExtension(final Extension extension) {
+        protected boolean loadExtension(Extension extension) {
             if (extension instanceof HtmlRendererExtension) {
                 HtmlRendererExtension htmlRendererExtension = (HtmlRendererExtension) extension;
                 htmlRendererExtension.extend(this, this.get(HtmlRenderer.TYPE));
@@ -372,8 +372,8 @@ public class HtmlRenderer implements IRender {
             return this;
         }
 
-        public boolean isRendererType(final String supportedRendererType) {
-            final String rendererType = HtmlRenderer.TYPE.getFrom(this);
+        public boolean isRendererType(String supportedRendererType) {
+            String rendererType = HtmlRenderer.TYPE.getFrom(this);
             return HtmlRenderer.isCompatibleRendererType(this, rendererType, supportedRendererType);
         }
 
@@ -751,7 +751,7 @@ public class HtmlRenderer implements IRender {
         }
 
         @Override
-        public NodeRendererContext getDelegatedSubContext(final boolean inheritIndent) {
+        public NodeRendererContext getDelegatedSubContext(boolean inheritIndent) {
             HtmlWriter htmlWriter = new HtmlWriter(getHtmlWriter(), inheritIndent);
             htmlWriter.setContext(this);
             //noinspection ReturnOfInnerClass
@@ -835,7 +835,7 @@ public class HtmlRenderer implements IRender {
         private class SubNodeRenderer extends NodeRendererSubContext implements NodeRendererContext {
             private final MainNodeRenderer myMainNodeRenderer;
 
-            public SubNodeRenderer(MainNodeRenderer mainNodeRenderer, HtmlWriter htmlWriter, final boolean inheritCurrentHandler) {
+            public SubNodeRenderer(MainNodeRenderer mainNodeRenderer, HtmlWriter htmlWriter, boolean inheritCurrentHandler) {
                 super(htmlWriter);
                 myMainNodeRenderer = mainNodeRenderer;
                 doNotRenderLinksNesting = mainNodeRenderer.getHtmlOptions().doNotRenderLinksInDocument ? 1 : 0;
@@ -914,7 +914,7 @@ public class HtmlRenderer implements IRender {
             }
 
             @Override
-            public NodeRendererContext getDelegatedSubContext(final boolean inheritIndent) {
+            public NodeRendererContext getDelegatedSubContext(boolean inheritIndent) {
                 HtmlWriter htmlWriter = new HtmlWriter(this.htmlWriter, inheritIndent);
                 htmlWriter.setContext(this);
                 //noinspection ReturnOfInnerClass

@@ -10,12 +10,12 @@ import com.vladsch.flexmark.html.renderer.HeaderIdGeneratorFactory;
 import com.vladsch.flexmark.html.renderer.HtmlIdGeneratorFactory;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.ParserEmulationProfile;
-import com.vladsch.flexmark.util.ast.IRender;
 import com.vladsch.flexmark.util.ast.Document;
+import com.vladsch.flexmark.util.ast.IRender;
 import com.vladsch.flexmark.util.ast.Node;
+import com.vladsch.flexmark.util.ast.NodeCollectingVisitor;
 import com.vladsch.flexmark.util.builder.BuilderBase;
 import com.vladsch.flexmark.util.builder.Extension;
-import com.vladsch.flexmark.util.ast.NodeCollectingVisitor;
 import com.vladsch.flexmark.util.collection.SubClassingBag;
 import com.vladsch.flexmark.util.data.*;
 import com.vladsch.flexmark.util.format.TableFormatOptions;
@@ -276,7 +276,7 @@ public class Formatter implements IRender {
         }
 
         @Override
-        protected void removeApiPoint(final Object apiPoint) {
+        protected void removeApiPoint(Object apiPoint) {
             if (apiPoint instanceof AttributeProviderFactory) this.attributeProviderFactories.remove(apiPoint.getClass());
             else if (apiPoint instanceof NodeFormatterFactory) this.nodeFormatterFactories.remove(apiPoint);
             else if (apiPoint instanceof LinkResolverFactory) this.linkResolverFactories.remove(apiPoint);
@@ -287,7 +287,7 @@ public class Formatter implements IRender {
         }
 
         @Override
-        protected void preloadExtension(final Extension extension) {
+        protected void preloadExtension(Extension extension) {
             if (extension instanceof FormatterExtension) {
                 FormatterExtension formatterExtension = (FormatterExtension) extension;
                 formatterExtension.rendererOptions(this);
@@ -295,7 +295,7 @@ public class Formatter implements IRender {
         }
 
         @Override
-        protected boolean loadExtension(final Extension extension) {
+        protected boolean loadExtension(Extension extension) {
             if (extension instanceof FormatterExtension) {
                 FormatterExtension formatterExtension = (FormatterExtension) extension;
                 formatterExtension.extend(this);
@@ -376,7 +376,7 @@ public class Formatter implements IRender {
             this.document = document;
             this.renderers = new HashMap<Class<?>, NodeFormattingHandler>(32);
             this.renderingPhases = new HashSet<FormattingPhase>(FormattingPhase.values().length);
-            final Set<Class> collectNodeTypes = new HashSet<Class>(100);
+            Set<Class> collectNodeTypes = new HashSet<Class>(100);
             this.phasedFormatters = new ArrayList<PhasedNodeFormatter>(nodeFormatterFactories.size());
 
             out.setContext(this);
@@ -385,7 +385,7 @@ public class Formatter implements IRender {
             for (int i = nodeFormatterFactories.size() - 1; i >= 0; i--) {
                 NodeFormatterFactory nodeFormatterFactory = nodeFormatterFactories.get(i);
                 NodeFormatter nodeFormatter = nodeFormatterFactory.create(this.options);
-                final Set<NodeFormattingHandler<?>> formattingHandlers = nodeFormatter.getNodeFormattingHandlers();
+                Set<NodeFormattingHandler<?>> formattingHandlers = nodeFormatter.getNodeFormattingHandlers();
                 if (formattingHandlers == null) continue;
 
                 for (NodeFormattingHandler nodeType : formattingHandlers) {
@@ -432,22 +432,22 @@ public class Formatter implements IRender {
         }
 
         @Override
-        public CharSequence transformNonTranslating(final CharSequence prefix, final CharSequence nonTranslatingText, final CharSequence suffix, final CharSequence suffix2) {
+        public CharSequence transformNonTranslating(CharSequence prefix, CharSequence nonTranslatingText, CharSequence suffix, CharSequence suffix2) {
             return myTranslationHandler == null ? nonTranslatingText : myTranslationHandler.transformNonTranslating(prefix, nonTranslatingText, suffix, suffix2);
         }
 
         @Override
-        public CharSequence transformTranslating(final CharSequence prefix, final CharSequence translatingText, final CharSequence suffix, final CharSequence suffix2) {
+        public CharSequence transformTranslating(CharSequence prefix, CharSequence translatingText, CharSequence suffix, CharSequence suffix2) {
             return myTranslationHandler == null ? translatingText : myTranslationHandler.transformTranslating(prefix, translatingText, suffix, suffix2);
         }
 
         @Override
-        public CharSequence transformAnchorRef(final CharSequence pageRef, final CharSequence anchorRef) {
+        public CharSequence transformAnchorRef(CharSequence pageRef, CharSequence anchorRef) {
             return myTranslationHandler == null ? anchorRef : myTranslationHandler.transformAnchorRef(pageRef, anchorRef);
         }
 
         @Override
-        public void translatingSpan(final TranslatingSpanRender render) {
+        public void translatingSpan(TranslatingSpanRender render) {
             if (myTranslationHandler != null) {
                 myTranslationHandler.translatingSpan(render);
             } else {
@@ -456,7 +456,7 @@ public class Formatter implements IRender {
         }
 
         @Override
-        public void nonTranslatingSpan(final TranslatingSpanRender render) {
+        public void nonTranslatingSpan(TranslatingSpanRender render) {
             if (myTranslationHandler != null) {
                 myTranslationHandler.nonTranslatingSpan(render);
             } else {
@@ -483,7 +483,7 @@ public class Formatter implements IRender {
         }
 
         @Override
-        public void customPlaceholderFormat(final TranslationPlaceholderGenerator generator, final TranslatingSpanRender render) {
+        public void customPlaceholderFormat(TranslationPlaceholderGenerator generator, TranslatingSpanRender render) {
             if (myTranslationHandler != null) {
                 myTranslationHandler.customPlaceholderFormat(generator, render);
             } else {
@@ -522,23 +522,23 @@ public class Formatter implements IRender {
         }
 
         @Override
-        public final Iterable<? extends Node> nodesOfType(final Class<?>[] classes) {
+        public final Iterable<? extends Node> nodesOfType(Class<?>[] classes) {
             return collectedNodes == null ? NULL_ITERABLE : collectedNodes.itemsOfType(Node.class, classes);
         }
 
         @Override
-        public final Iterable<? extends Node> nodesOfType(final Collection<Class<?>> classes) {
+        public final Iterable<? extends Node> nodesOfType(Collection<Class<?>> classes) {
             //noinspection unchecked
             return collectedNodes == null ? NULL_ITERABLE : collectedNodes.itemsOfType(Node.class, classes);
         }
 
         @Override
-        public final Iterable<? extends Node> reversedNodesOfType(final Class<?>[] classes) {
+        public final Iterable<? extends Node> reversedNodesOfType(Class<?>[] classes) {
             return collectedNodes == null ? NULL_ITERABLE : collectedNodes.reversedItemsOfType(Node.class, classes);
         }
 
         @Override
-        public final Iterable<? extends Node> reversedNodesOfType(final Collection<Class<?>> classes) {
+        public final Iterable<? extends Node> reversedNodesOfType(Collection<Class<?>> classes) {
             //noinspection unchecked
             return collectedNodes == null ? NULL_ITERABLE : collectedNodes.reversedItemsOfType(Node.class, classes);
         }
@@ -628,22 +628,22 @@ public class Formatter implements IRender {
             }
 
             @Override
-            public final Iterable<? extends Node> nodesOfType(final Class<?>[] classes) {
+            public final Iterable<? extends Node> nodesOfType(Class<?>[] classes) {
                 return myMainNodeRenderer.nodesOfType(classes);
             }
 
             @Override
-            public final Iterable<? extends Node> nodesOfType(final Collection<Class<?>> classes) {
+            public final Iterable<? extends Node> nodesOfType(Collection<Class<?>> classes) {
                 return myMainNodeRenderer.nodesOfType(classes);
             }
 
             @Override
-            public final Iterable<? extends Node> reversedNodesOfType(final Class<?>[] classes) {
+            public final Iterable<? extends Node> reversedNodesOfType(Class<?>[] classes) {
                 return myMainNodeRenderer.reversedNodesOfType(classes);
             }
 
             @Override
-            public final Iterable<? extends Node> reversedNodesOfType(final Collection<Class<?>> classes) {
+            public final Iterable<? extends Node> reversedNodesOfType(Collection<Class<?>> classes) {
                 //noinspection unchecked
                 return myMainNodeRenderer.reversedNodesOfType(classes);
             }
@@ -697,37 +697,37 @@ public class Formatter implements IRender {
             }
 
             @Override
-            public CharSequence transformNonTranslating(final CharSequence prefix, final CharSequence nonTranslatingText, final CharSequence suffix, final CharSequence suffix2) {
+            public CharSequence transformNonTranslating(CharSequence prefix, CharSequence nonTranslatingText, CharSequence suffix, CharSequence suffix2) {
                 return myMainNodeRenderer.transformNonTranslating(prefix, nonTranslatingText, suffix, suffix2);
             }
 
             @Override
-            public CharSequence transformTranslating(final CharSequence prefix, final CharSequence translatingText, final CharSequence suffix, final CharSequence suffix2) {
+            public CharSequence transformTranslating(CharSequence prefix, CharSequence translatingText, CharSequence suffix, CharSequence suffix2) {
                 return myMainNodeRenderer.transformTranslating(prefix, translatingText, suffix, suffix2);
             }
 
             @Override
-            public CharSequence transformAnchorRef(final CharSequence pageRef, final CharSequence anchorRef) {
+            public CharSequence transformAnchorRef(CharSequence pageRef, CharSequence anchorRef) {
                 return myMainNodeRenderer.transformAnchorRef(pageRef, anchorRef);
             }
 
             @Override
-            public void translatingSpan(final TranslatingSpanRender render) {
+            public void translatingSpan(TranslatingSpanRender render) {
                 myMainNodeRenderer.translatingSpan(render);
             }
 
             @Override
-            public void nonTranslatingSpan(final TranslatingSpanRender render) {
+            public void nonTranslatingSpan(TranslatingSpanRender render) {
                 myMainNodeRenderer.nonTranslatingSpan(render);
             }
 
             @Override
-            public void translatingRefTargetSpan(Node target, final TranslatingSpanRender render) {
+            public void translatingRefTargetSpan(Node target, TranslatingSpanRender render) {
                 myMainNodeRenderer.translatingRefTargetSpan(target, render);
             }
 
             @Override
-            public void customPlaceholderFormat(final TranslationPlaceholderGenerator generator, final TranslatingSpanRender render) {
+            public void customPlaceholderFormat(TranslationPlaceholderGenerator generator, TranslatingSpanRender render) {
                 myMainNodeRenderer.customPlaceholderFormat(generator, render);
             }
         }

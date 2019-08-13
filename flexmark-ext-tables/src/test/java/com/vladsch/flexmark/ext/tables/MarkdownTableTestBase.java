@@ -3,13 +3,13 @@ package com.vladsch.flexmark.ext.tables;
 import com.vladsch.flexmark.formatter.MarkdownWriter;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.ast.Node;
+import com.vladsch.flexmark.util.data.DataHolder;
+import com.vladsch.flexmark.util.data.MutableDataSet;
 import com.vladsch.flexmark.util.format.MarkdownTable;
 import com.vladsch.flexmark.util.format.TableCellOffsetInfo;
 import com.vladsch.flexmark.util.format.options.DiscretionaryText;
 import com.vladsch.flexmark.util.format.options.TableCaptionHandling;
 import com.vladsch.flexmark.util.mappers.CharWidthProvider;
-import com.vladsch.flexmark.util.data.DataHolder;
-import com.vladsch.flexmark.util.data.MutableDataSet;
 import com.vladsch.flexmark.util.sequence.BasedSequenceImpl;
 
 import java.util.ArrayList;
@@ -96,12 +96,12 @@ public class MarkdownTableTestBase {
                     }
 
                     @Override
-                    public int charWidth(final char c) {
+                    public int charWidth(char c) {
                         return c == INTELLIJ_DUMMY_IDENTIFIER_CHAR ? 0 : 1;
                     }
 
                     @Override
-                    public int charWidth(final CharSequence s) {
+                    public int charWidth(CharSequence s) {
                         return BasedSequenceImpl.of(s).countLeadingNot(INTELLIJ_DUMMY_IDENTIFIER_CHAR);
                     }
                 });

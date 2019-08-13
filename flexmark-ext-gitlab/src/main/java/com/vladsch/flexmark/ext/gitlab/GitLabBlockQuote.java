@@ -31,12 +31,12 @@ public class GitLabBlockQuote extends Block implements ParagraphContainer {
     }
 
     @Override
-    public boolean isParagraphEndWrappingDisabled(final Paragraph node) {
+    public boolean isParagraphEndWrappingDisabled(Paragraph node) {
         return node == getLastChild() || node.getNext() instanceof GitLabBlockQuote;
     }
 
     @Override
-    public boolean isParagraphStartWrappingDisabled(final Paragraph node) {
+    public boolean isParagraphStartWrappingDisabled(Paragraph node) {
         return node == getFirstChild() || node.getPrevious() instanceof GitLabBlockQuote;
     }
 
@@ -67,7 +67,7 @@ public class GitLabBlockQuote extends Block implements ParagraphContainer {
         return closingMarker;
     }
 
-    public void setClosingMarker(final BasedSequence closingMarker) {
+    public void setClosingMarker(BasedSequence closingMarker) {
         this.closingMarker = closingMarker;
     }
 
@@ -75,7 +75,7 @@ public class GitLabBlockQuote extends Block implements ParagraphContainer {
         return openingTrailing;
     }
 
-    public void setOpeningTrailing(final BasedSequence openingTrailing) {
+    public void setOpeningTrailing(BasedSequence openingTrailing) {
         this.openingTrailing = openingTrailing;
     }
 
@@ -83,7 +83,7 @@ public class GitLabBlockQuote extends Block implements ParagraphContainer {
         return closingTrailing;
     }
 
-    public void setClosingTrailing(final BasedSequence closingTrailing) {
+    public void setClosingTrailing(BasedSequence closingTrailing) {
         this.closingTrailing = closingTrailing;
     }
 }

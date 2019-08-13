@@ -4,7 +4,7 @@ import com.vladsch.flexmark.util.ast.VisitHandler;
 import com.vladsch.flexmark.util.ast.Visitor;
 
 public class MacroVisitorExt {
-    public static <V extends MacroVisitor> VisitHandler<?>[] VISIT_HANDLERS(final V visitor) {
+    public static <V extends MacroVisitor> VisitHandler<?>[] VISIT_HANDLERS(V visitor) {
         return new VisitHandler<?>[] {
                 // @formatter:off
                 new VisitHandler<Macro>(Macro.class, new Visitor<Macro>() { @Override public void visit(Macro node) { visitor.visit(node); } }),

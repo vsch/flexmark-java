@@ -44,11 +44,11 @@ public class MacrosNodeRenderer implements PhasedNodeRenderer {
     }
 
     @Override
-    public void renderDocument(final NodeRendererContext context, final HtmlWriter html, Document document, RenderingPhase phase) {
+    public void renderDocument(NodeRendererContext context, HtmlWriter html, Document document, RenderingPhase phase) {
         if (phase == RenderingPhase.BODY_TOP) {
             if (recheckUndefinedReferences) {
                 // need to see if have undefined footnotes that were defined after parsing
-                final boolean[] hadNewFootnotes = { false };
+                boolean[] hadNewFootnotes = { false };
                 NodeVisitor visitor = new NodeVisitor(
                         new VisitHandler<MacroReference>(MacroReference.class, new Visitor<MacroReference>() {
                             @Override
@@ -76,7 +76,7 @@ public class MacrosNodeRenderer implements PhasedNodeRenderer {
 
     private void render(MacroReference node, NodeRendererContext context, HtmlWriter html) {
         // render contents of macro definition
-        final MacroDefinitionBlock macroDefinitionBlock = repository.get(repository.normalizeKey(node.getText()));
+        MacroDefinitionBlock macroDefinitionBlock = repository.get(repository.normalizeKey(node.getText()));
         if (macroDefinitionBlock != null) {
             if (macroDefinitionBlock.hasChildren() && !macroDefinitionBlock.isInExpansion()) {
                 try {
@@ -115,7 +115,7 @@ public class MacrosNodeRenderer implements PhasedNodeRenderer {
 
     public static class Factory implements NodeRendererFactory {
         @Override
-        public NodeRenderer apply(final DataHolder options) {
+        public NodeRenderer apply(DataHolder options) {
             return new MacrosNodeRenderer(options);
         }
     }

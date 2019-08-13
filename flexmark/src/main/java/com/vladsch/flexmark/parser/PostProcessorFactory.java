@@ -1,11 +1,11 @@
 package com.vladsch.flexmark.parser;
 
-import java.util.function.Function;
 import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.dependency.Dependent;
 
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Function;
 
 public interface PostProcessorFactory extends Function<Document, PostProcessor>, Dependent<PostProcessorFactory> {
     /**

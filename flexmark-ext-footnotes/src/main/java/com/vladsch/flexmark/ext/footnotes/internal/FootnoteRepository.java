@@ -61,8 +61,8 @@ public class FootnoteRepository extends NodeRepository<FootnoteBlock> {
     }
 
     @Override
-    public Set<FootnoteBlock> getReferencedElements(final Node parent) {
-        final HashSet<FootnoteBlock> references = new HashSet<>();
+    public Set<FootnoteBlock> getReferencedElements(Node parent) {
+        HashSet<FootnoteBlock> references = new HashSet<>();
         visitNodes(parent, value -> {
             if (value instanceof Footnote) {
                 FootnoteBlock reference = ((Footnote) value).getReferenceNode(FootnoteRepository.this);

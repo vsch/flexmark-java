@@ -27,7 +27,7 @@ public interface RunFormatProvider<T> extends FormatProvider<T> {
     // using the docx context for helping with the mash-up of formatting
 
     // set the final PPr for the next P of this provider, that is different from what the style provides
-    void getRPr(final RPr rPr);
+    void getRPr(RPr rPr);
 
     RunFormatProvider<T> getRunParent();
 }

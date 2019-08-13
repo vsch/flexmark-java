@@ -100,11 +100,11 @@ public class ListOptions implements MutableDataSetter {
         itemMarkerSuffixes = other.getItemMarkerSuffixes();
     }
 
-    public static ListOptions getFrom(final DataHolder options) {
+    public static ListOptions getFrom(DataHolder options) {
         return new ListOptions(options);
     }
 
-    public static ListOptions getNew(final DataHolder options) {
+    public static ListOptions getNew(DataHolder options) {
         return new ListOptions(options);
     }
 
@@ -484,7 +484,7 @@ public class ListOptions implements MutableDataSetter {
         }
 
         @Override
-        public boolean equals(final Object o) {
+        public boolean equals(Object o) {
             if (this == o) return true;
             if (!(o instanceof ItemInterrupt)) return false;
 
@@ -585,7 +585,7 @@ public class ListOptions implements MutableDataSetter {
     }
 
     @Override
-    public boolean equals(final Object o) {
+    public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof ListOptions)) return false;
 

@@ -40,7 +40,7 @@ public enum ParserEmulationProfile implements MutableDataSetter {
      */
     public static final DataKey<Integer> PEGDOWN_EXTENSIONS = new DataKey<>("PEGDOWN_EXTENSIONS", PegdownExtensions.ALL);
 
-    public MutableListOptions getOptions(final DataHolder dataHolder) {
+    public MutableListOptions getOptions(DataHolder dataHolder) {
         if (family == FIXED_INDENT) {
             if (this == MULTI_MARKDOWN) {
                 return new MutableListOptions().setParserEmulationFamily(this)
@@ -299,7 +299,7 @@ public enum ParserEmulationProfile implements MutableDataSetter {
     }
 
     @Override
-    public MutableDataHolder setIn(final MutableDataHolder dataHolder) {
+    public MutableDataHolder setIn(MutableDataHolder dataHolder) {
         if (this == FIXED_INDENT) {
             getOptions(dataHolder).setIn(dataHolder)
                     .set(Parser.STRONG_WRAPS_EMPHASIS, true)

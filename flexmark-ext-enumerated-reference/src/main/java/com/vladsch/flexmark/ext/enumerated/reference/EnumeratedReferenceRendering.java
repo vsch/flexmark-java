@@ -5,7 +5,7 @@ public class EnumeratedReferenceRendering {
     public final String referenceType;
     public final int referenceOrdinal;
 
-    public EnumeratedReferenceRendering(final EnumeratedReferenceBlock referenceFormat, final String referenceType, final int referenceOrdinal) {
+    public EnumeratedReferenceRendering(EnumeratedReferenceBlock referenceFormat, String referenceType, int referenceOrdinal) {
         this.referenceFormat = referenceFormat;
         this.referenceType = referenceType;
         this.referenceOrdinal = referenceOrdinal;

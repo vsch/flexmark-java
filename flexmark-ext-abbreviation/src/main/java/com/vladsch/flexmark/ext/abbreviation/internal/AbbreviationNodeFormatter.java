@@ -6,15 +6,15 @@ import com.vladsch.flexmark.ext.abbreviation.AbbreviationExtension;
 import com.vladsch.flexmark.formatter.Formatter;
 import com.vladsch.flexmark.formatter.*;
 import com.vladsch.flexmark.util.ast.Node;
-import com.vladsch.flexmark.util.format.options.ElementPlacement;
-import com.vladsch.flexmark.util.format.options.ElementPlacementSort;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKey;
+import com.vladsch.flexmark.util.format.options.ElementPlacement;
+import com.vladsch.flexmark.util.format.options.ElementPlacementSort;
 
 import java.util.*;
 
 public class AbbreviationNodeFormatter extends NodeRepositoryFormatter<AbbreviationRepository, AbbreviationBlock, Abbreviation> {
-    public static final DataKey<Map<String, String>> ABBREVIATION_TRANSLATION_MAP = new DataKey<Map<String, String>>("ABBREVIATION_TRANSLATION_MAP", new HashMap<String, String>()); // assign attributes to text if previous is not a space
+    public static final DataKey<Map<String, String>> ABBREVIATION_TRANSLATION_MAP = new DataKey<Map<String, String>>("ABBREVIATION_TRANSLATION_MAP", new HashMap<String, String>()); //
     private final FormatOptions options;
     private final boolean transformUnderscores;
 
@@ -27,7 +27,7 @@ public class AbbreviationNodeFormatter extends NodeRepositoryFormatter<Abbreviat
     }
 
     @Override
-    public AbbreviationRepository getRepository(final DataHolder options) {
+    public AbbreviationRepository getRepository(DataHolder options) {
         return AbbreviationExtension.ABBREVIATIONS.getFrom(options);
     }
 
@@ -55,7 +55,7 @@ public class AbbreviationNodeFormatter extends NodeRepositoryFormatter<Abbreviat
     }
 
     @Override
-    public void renderReferenceBlock(final AbbreviationBlock node, final NodeFormatterContext context, final MarkdownWriter markdown) {
+    public void renderReferenceBlock(AbbreviationBlock node, NodeFormatterContext context, MarkdownWriter markdown) {
         markdown.append(node.getOpeningMarker()).append(transformReferenceId(node.getText().toString(), context)).append(node.getClosingMarker()).append(' ');
         markdown.appendTranslating(node.getAbbreviation()).line();
     }
@@ -93,7 +93,7 @@ public class AbbreviationNodeFormatter extends NodeRepositoryFormatter<Abbreviat
 
     private void render(Abbreviation node, NodeFormatterContext context, MarkdownWriter markdown) {
         if (context.isTransformingText()) {
-            final String referenceId = transformReferenceId(node.getChars().toString(), context);
+            String referenceId = transformReferenceId(node.getChars().toString(), context);
             markdown.append(referenceId);
         } else {
             markdown.append(node.getChars());
@@ -102,7 +102,7 @@ public class AbbreviationNodeFormatter extends NodeRepositoryFormatter<Abbreviat
 
     public static class Factory implements NodeFormatterFactory {
         @Override
-        public NodeFormatter create(final DataHolder options) {
+        public NodeFormatter create(DataHolder options) {
             return new AbbreviationNodeFormatter(options);
         }
     }

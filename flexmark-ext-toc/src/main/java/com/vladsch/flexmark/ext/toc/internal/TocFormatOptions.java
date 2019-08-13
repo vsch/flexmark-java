@@ -20,7 +20,7 @@ public class TocFormatOptions implements MutableDataSetter {
     }
 
     @Override
-    public MutableDataHolder setIn(final MutableDataHolder dataHolder) {
+    public MutableDataHolder setIn(MutableDataHolder dataHolder) {
         dataHolder.set(TocExtension.FORMAT_UPDATE_ON_FORMAT, updateOnFormat);
         dataHolder.set(TocExtension.FORMAT_OPTIONS, options);
         return dataHolder;

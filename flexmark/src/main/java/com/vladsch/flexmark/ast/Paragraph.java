@@ -18,7 +18,7 @@ public class Paragraph extends Block {
     }
 
     @Override
-    public void getAstExtra(final StringBuilder out) {
+    public void getAstExtra(StringBuilder out) {
         super.getAstExtra(out);
         if (trailingBlankLine) out.append(" isTrailingBlankLine");
     }
@@ -114,11 +114,11 @@ public class Paragraph extends Block {
         return trailingBlankLine;
     }
 
-    public void setTrailingBlankLine(final boolean trailingBlankLine) {
+    public void setTrailingBlankLine(boolean trailingBlankLine) {
         this.trailingBlankLine = trailingBlankLine;
     }
 
-    public void setHasTableSeparator(final boolean hasTableSeparator) {
+    public void setHasTableSeparator(boolean hasTableSeparator) {
         this.hasTableSeparator = hasTableSeparator;
     }
 

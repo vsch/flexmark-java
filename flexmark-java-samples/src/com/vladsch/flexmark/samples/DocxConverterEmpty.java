@@ -28,7 +28,7 @@ import java.io.StringWriter;
 import java.util.Arrays;
 
 /**
- * Creates a docx document from DocxRenderer provided empty.md and empty.xml 
+ * Creates a docx document from DocxRenderer provided empty.md and empty.xml
  */
 public class DocxConverterEmpty {
     // don't need to use pegdown options adapter. You can setup the options as you like. I find this is a quick way to add all the fixings

@@ -19,7 +19,7 @@ class AttributesOptions implements MutableDataSetter {
     }
 
     @Override
-    public MutableDataHolder setIn(final MutableDataHolder dataHolder) {
+    public MutableDataHolder setIn(MutableDataHolder dataHolder) {
         dataHolder.set(AttributesExtension.ASSIGN_TEXT_ATTRIBUTES, assignTextAttributes);
         dataHolder.set(AttributesExtension.WRAP_NON_ATTRIBUTE_TEXT, wrapNonAttributeText);
         dataHolder.set(AttributesExtension.USE_EMPTY_IMPLICIT_AS_SPAN_DELIMITER, useEmptyImplicitAsSpanDelimiter);

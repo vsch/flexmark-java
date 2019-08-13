@@ -31,12 +31,12 @@ import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.spec.SpecReader;
 import com.vladsch.flexmark.superscript.SuperscriptExtension;
 import com.vladsch.flexmark.test.ComboSpecTestCase;
-import com.vladsch.flexmark.util.ast.IParse;
 import com.vladsch.flexmark.util.ast.Document;
-import com.vladsch.flexmark.util.format.options.ElementPlacement;
-import com.vladsch.flexmark.util.format.options.ElementPlacementSort;
+import com.vladsch.flexmark.util.ast.IParse;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
+import com.vladsch.flexmark.util.format.options.ElementPlacement;
+import com.vladsch.flexmark.util.format.options.ElementPlacementSort;
 import org.junit.runners.Parameterized;
 
 import java.util.*;
@@ -135,7 +135,7 @@ public class ComboFormatterIssueSpecTest extends ComboSpecTestCase {
     }
 
     @Override
-    protected IParse adjustParserForInclusion(final IParse parserWithOptions, final Document includedDocument) {
+    protected IParse adjustParserForInclusion(IParse parserWithOptions, Document includedDocument) {
         AbbreviationRepository abbreviationRepository = includedDocument.get(AbbreviationExtension.ABBREVIATIONS);
         if (!abbreviationRepository.isEmpty()) {
             // need to transfer it to parser

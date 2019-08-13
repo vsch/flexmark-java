@@ -6,7 +6,7 @@ import com.vladsch.flexmark.util.ast.VisitHandler;
 import com.vladsch.flexmark.util.ast.Visitor;
 
 public class HtmlInnerVisitorExt {
-    public static <V extends HtmlInnerVisitor> VisitHandler<?>[] VISIT_HANDLERS(final V visitor) {
+    public static <V extends HtmlInnerVisitor> VisitHandler<?>[] VISIT_HANDLERS(V visitor) {
         return new VisitHandler<?>[] {
                 new VisitHandler<HtmlInnerBlock>(HtmlInnerBlock.class, new Visitor<HtmlInnerBlock>() {
                     @Override

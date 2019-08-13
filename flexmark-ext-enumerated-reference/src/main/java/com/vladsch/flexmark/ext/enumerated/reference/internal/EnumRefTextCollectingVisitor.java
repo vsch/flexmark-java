@@ -16,7 +16,7 @@ public class EnumRefTextCollectingVisitor {
         this(-1);
     }
 
-    public EnumRefTextCollectingVisitor(final int ordinal) {
+    public EnumRefTextCollectingVisitor(int ordinal) {
         ordinalRunnable = ordinal < 0 ? null : new Runnable() {
             @Override
             public void run() {
@@ -114,7 +114,7 @@ public class EnumRefTextCollectingVisitor {
         return out.toBasedSequence();
     }
 
-    public void collect(BasedSequence basedSequence, final EnumeratedReferenceRendering[] renderings, final String defaultFormat) {
+    public void collect(BasedSequence basedSequence, EnumeratedReferenceRendering[] renderings, String defaultFormat) {
         out = new SegmentedSequenceBuilder(basedSequence);
         EnumeratedReferences.renderReferenceOrdinals(renderings, new OrdinalRenderer(this));
     }
@@ -122,17 +122,17 @@ public class EnumRefTextCollectingVisitor {
     private static class OrdinalRenderer implements EnumeratedOrdinalRenderer {
         final EnumRefTextCollectingVisitor renderer;
 
-        public OrdinalRenderer(final EnumRefTextCollectingVisitor renderer) {
+        public OrdinalRenderer(EnumRefTextCollectingVisitor renderer) {
             this.renderer = renderer;
         }
 
         @Override
-        public void startRendering(final EnumeratedReferenceRendering[] renderings) {
+        public void startRendering(EnumeratedReferenceRendering[] renderings) {
 
         }
 
         @Override
-        public void setEnumOrdinalRunnable(final Runnable runnable) {
+        public void setEnumOrdinalRunnable(Runnable runnable) {
             renderer.ordinalRunnable = runnable;
         }
 
@@ -142,8 +142,8 @@ public class EnumRefTextCollectingVisitor {
         }
 
         @Override
-        public void render(final int referenceOrdinal, final EnumeratedReferenceBlock referenceFormat, final String defaultText, final boolean needSeparator) {
-            final Runnable compoundRunnable = renderer.ordinalRunnable;
+        public void render(int referenceOrdinal, EnumeratedReferenceBlock referenceFormat, String defaultText, boolean needSeparator) {
+            Runnable compoundRunnable = renderer.ordinalRunnable;
 
             if (referenceFormat != null) {
                 renderer.ordinalRunnable = new Runnable() {
@@ -170,23 +170,23 @@ public class EnumRefTextCollectingVisitor {
         }
     }
 
-    public String collectAndGetText(BasedSequence basedSequence, EnumeratedReferenceRendering[] renderings, final String defaultFormat) {
+    public String collectAndGetText(BasedSequence basedSequence, EnumeratedReferenceRendering[] renderings, String defaultFormat) {
         collect(basedSequence, renderings, defaultFormat);
         return out.toString();
     }
 
-    public BasedSequence[] collectAndGetSegments(BasedSequence basedSequence, EnumeratedReferenceRendering[] renderings, final String defaultFormat) {
+    public BasedSequence[] collectAndGetSegments(BasedSequence basedSequence, EnumeratedReferenceRendering[] renderings, String defaultFormat) {
         collect(basedSequence, renderings, defaultFormat);
         return out.toSegments();
     }
 
-    public BasedSequence collectAndGetSequence(BasedSequence basedSequence, EnumeratedReferenceRendering[] renderings, final String defaultFormat) {
+    public BasedSequence collectAndGetSequence(BasedSequence basedSequence, EnumeratedReferenceRendering[] renderings, String defaultFormat) {
         collect(basedSequence, renderings, defaultFormat);
         return out.toBasedSequence();
     }
 
     private void visit(EnumeratedReferenceText node) {
-        final String text = node.getText().toString();
+        String text = node.getText().toString();
 
         if (text.isEmpty()) {
             // placeholder for ordinal
@@ -195,7 +195,7 @@ public class EnumRefTextCollectingVisitor {
     }
 
     private void visit(EnumeratedReferenceLink node) {
-        final String text = node.getText().toString();
+        String text = node.getText().toString();
 
         if (text.isEmpty()) {
             // placeholder for ordinal
@@ -208,7 +208,7 @@ public class EnumRefTextCollectingVisitor {
     }
 
     private void visit(HardLineBreak node) {
-        final BasedSequence chars = node.getChars();
+        BasedSequence chars = node.getChars();
         out.append(chars.subSequence(chars.length() - 1, chars.length()));
     }
 

@@ -21,7 +21,7 @@ class GfmUsersOptions implements MutableDataSetter {
     }
 
     @Override
-    public MutableDataHolder setIn(final MutableDataHolder dataHolder) {
+    public MutableDataHolder setIn(MutableDataHolder dataHolder) {
         dataHolder.set(GfmUsersExtension.GIT_HUB_USERS_URL_ROOT, gitHubIssuesUrlRoot);
         dataHolder.set(GfmUsersExtension.GIT_HUB_USER_URL_PREFIX, gitHubIssueUrlPrefix);
         dataHolder.set(GfmUsersExtension.GIT_HUB_USER_URL_SUFFIX, gitHubIssueUrlSuffix);

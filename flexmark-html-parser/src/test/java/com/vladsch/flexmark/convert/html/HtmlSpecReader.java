@@ -12,7 +12,7 @@ import org.junit.AssumptionViolatedException;
 import java.io.InputStream;
 
 public class HtmlSpecReader extends DumpSpecReader {
-    public HtmlSpecReader(final InputStream stream, final FullSpecTestCase testCase, final String fileUrl, ActualExampleModifier exampleModifier) {
+    public HtmlSpecReader(InputStream stream, FullSpecTestCase testCase, String fileUrl, ActualExampleModifier exampleModifier) {
         super(stream, testCase, fileUrl, exampleModifier);
     }
 

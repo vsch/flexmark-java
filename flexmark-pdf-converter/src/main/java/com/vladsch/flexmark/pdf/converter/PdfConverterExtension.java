@@ -83,11 +83,11 @@ public class PdfConverterExtension {
         exportToPdf(out, html, url, options.get(DEFAULT_TEXT_DIRECTION), options.get(PROTECTION_POLICY));
     }
 
-    public static void exportToPdf(String out, String html, String url, final PdfRendererBuilder.TextDirection defaultTextDirection) {
+    public static void exportToPdf(String out, String html, String url, PdfRendererBuilder.TextDirection defaultTextDirection) {
         exportToPdf(out, html, url, defaultTextDirection, null);
     }
 
-    public static void exportToPdf(String out, String html, String url, final PdfRendererBuilder.TextDirection defaultTextDirection, ProtectionPolicy protectionPolicy) {
+    public static void exportToPdf(String out, String html, String url, PdfRendererBuilder.TextDirection defaultTextDirection, ProtectionPolicy protectionPolicy) {
         try {
             OutputStream os = new FileOutputStream(out);
             exportToPdf(os, html, url, defaultTextDirection, protectionPolicy);
@@ -96,15 +96,15 @@ public class PdfConverterExtension {
         }
     }
 
-    public static void exportToPdf(final OutputStream os, final String html, final String url, final DataHolder options) {
+    public static void exportToPdf(OutputStream os, String html, String url, DataHolder options) {
         exportToPdf(os, html, url, options.get(DEFAULT_TEXT_DIRECTION), options.get(PROTECTION_POLICY));
     }
 
-    public static void exportToPdf(final OutputStream os, final String html, final String url, final PdfRendererBuilder.TextDirection defaultTextDirection) {
+    public static void exportToPdf(OutputStream os, String html, String url, PdfRendererBuilder.TextDirection defaultTextDirection) {
         exportToPdf(os, html, url, defaultTextDirection, null);
     }
 
-    public static void exportToPdf(final OutputStream os, final String html, final String url, final PdfRendererBuilder.TextDirection defaultTextDirection, final ProtectionPolicy protectionPolicy) {
+    public static void exportToPdf(OutputStream os, String html, String url, PdfRendererBuilder.TextDirection defaultTextDirection, ProtectionPolicy protectionPolicy) {
         PdfBoxRenderer renderer = null;
         try {
             // There are more options on the builder than shown below.
@@ -137,7 +137,7 @@ public class PdfConverterExtension {
         }
     }
 
-    private static void handleW3cDocument(final String html, final String url, final PdfRendererBuilder builder) {
+    private static void handleW3cDocument(String html, String url, PdfRendererBuilder builder) {
         org.jsoup.nodes.Document doc;
         doc = Jsoup.parse(html);
 
@@ -145,7 +145,7 @@ public class PdfConverterExtension {
         builder.withW3cDocument(dom, url);
     }
 
-    private static void handleTextDirection(final BaseRendererBuilder.TextDirection defaultTextDirection, final PdfRendererBuilder builder) {
+    private static void handleTextDirection(BaseRendererBuilder.TextDirection defaultTextDirection, PdfRendererBuilder builder) {
         if (defaultTextDirection != null) {
             builder.useUnicodeBidiSplitter(new ICUBidiSplitter.ICUBidiSplitterFactory());
             builder.useUnicodeBidiReorderer(new ICUBidiReorderer());

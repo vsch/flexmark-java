@@ -29,8 +29,8 @@ public class JiraConverterExtension implements Parser.ParserExtension, HtmlRende
     }
 
     @Override
-    public void rendererOptions(final MutableDataHolder options) {
-        final String rendererType = HtmlRenderer.TYPE.getFrom(options);
+    public void rendererOptions(MutableDataHolder options) {
+        String rendererType = HtmlRenderer.TYPE.getFrom(options);
         if (rendererType.equals("HTML")) {
             options.set(HtmlRenderer.TYPE, "JIRA");
         } else if (!rendererType.equals("JIRA")) {
@@ -39,7 +39,7 @@ public class JiraConverterExtension implements Parser.ParserExtension, HtmlRende
     }
 
     @Override
-    public void parserOptions(final MutableDataHolder options) {
+    public void parserOptions(MutableDataHolder options) {
 
     }
 

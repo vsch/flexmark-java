@@ -4,7 +4,7 @@ import com.vladsch.flexmark.util.ast.VisitHandler;
 import com.vladsch.flexmark.util.ast.Visitor;
 
 public class SimTocVisitorExt {
-    public static <V extends SimTocVisitor> VisitHandler<?>[] VISIT_HANDLERS(final V visitor) {
+    public static <V extends SimTocVisitor> VisitHandler<?>[] VISIT_HANDLERS(V visitor) {
         return new VisitHandler<?>[] {
                 new VisitHandler<SimTocBlock>(SimTocBlock.class, new Visitor<SimTocBlock>() {
                     @Override

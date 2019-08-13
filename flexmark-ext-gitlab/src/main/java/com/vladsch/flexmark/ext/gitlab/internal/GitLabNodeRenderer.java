@@ -16,9 +16,9 @@ import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.*;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.ast.Node;
+import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.html.Attribute;
 import com.vladsch.flexmark.util.html.Attributes;
-import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 import java.util.HashSet;
@@ -61,7 +61,7 @@ public class GitLabNodeRenderer implements NodeRenderer
         return set;
     }
 
-    private void render(final GitLabIns node, final NodeRendererContext context, final HtmlWriter html) {
+    private void render(GitLabIns node, NodeRendererContext context, HtmlWriter html) {
         html.withAttr().tag("ins", false, false, new Runnable() {
             @Override
             public void run() {
@@ -70,7 +70,7 @@ public class GitLabNodeRenderer implements NodeRenderer
         });
     }
 
-    private void render(final GitLabDel node, final NodeRendererContext context, final HtmlWriter html) {
+    private void render(GitLabDel node, NodeRendererContext context, HtmlWriter html) {
         html.withAttr().tag("del", false, false, new Runnable() {
             @Override
             public void run() {
@@ -79,13 +79,13 @@ public class GitLabNodeRenderer implements NodeRenderer
         });
     }
 
-    private void render(final GitLabInlineMath node, final NodeRendererContext context, final HtmlWriter html) {
+    private void render(GitLabInlineMath node, NodeRendererContext context, HtmlWriter html) {
         html.withAttr().attr(Attribute.CLASS_ATTR, options.inlineMathClass).withAttr().tag("span");
         html.text(node.getText());
         html.tag("/span");
     }
 
-    private void render(final GitLabBlockQuote node, final NodeRendererContext context, HtmlWriter html) {
+    private void render(GitLabBlockQuote node, NodeRendererContext context, HtmlWriter html) {
         html.withAttr().tagLineIndent("blockquote", new Runnable() {
             @Override
             public void run() {
@@ -94,8 +94,8 @@ public class GitLabNodeRenderer implements NodeRenderer
         });
     }
 
-    private void render(final FencedCodeBlock node, final NodeRendererContext context, HtmlWriter html) {
-        final BasedSequence info = node.getInfoDelimitedByAny(options.blockInfoDelimiters);
+    private void render(FencedCodeBlock node, NodeRendererContext context, HtmlWriter html) {
+        BasedSequence info = node.getInfoDelimitedByAny(options.blockInfoDelimiters);
 
         if (options.renderBlockMath && info.equals("math")) {
             html.line();
@@ -124,7 +124,7 @@ public class GitLabNodeRenderer implements NodeRenderer
         }
     }
 
-    private boolean renderVideoImage(final Node srcNode, final String url, final String altText, final Attributes attributes, final HtmlWriter html) {
+    private boolean renderVideoImage(Node srcNode, String url, String altText, Attributes attributes, HtmlWriter html) {
         String bareUrl = url;
         int pos = url.indexOf('?');
         if (pos != -1) {
@@ -174,11 +174,11 @@ public class GitLabNodeRenderer implements NodeRenderer
         return false;
     }
 
-    private void render(Image node, NodeRendererContext context, final HtmlWriter html) {
+    private void render(Image node, NodeRendererContext context, HtmlWriter html) {
         if (!(context.isDoNotRenderLinks() || CoreNodeRenderer.isSuppressedLinkPrefix(node.getUrl(), context))) {
-            final String altText = new TextCollectingVisitor().collectAndGetText(node);
+            String altText = new TextCollectingVisitor().collectAndGetText(node);
             ResolvedLink resolvedLink = context.resolveLink(LinkType.IMAGE, node.getUrl().unescape(), null, null);
-            final String url = resolvedLink.getUrl();
+            String url = resolvedLink.getUrl();
 
             if (node.getUrlContent().isEmpty()) {
                 Attributes attributes = resolvedLink.getNonNullAttributes();
@@ -230,7 +230,7 @@ public class GitLabNodeRenderer implements NodeRenderer
         if (resolvedLink != null) {
             if (!(context.isDoNotRenderLinks() || isSuppressed)) {
                 String altText = new TextCollectingVisitor().collectAndGetText(node);
-                final String url = resolvedLink.getUrl();
+                String url = resolvedLink.getUrl();
                 Attributes attributes = resolvedLink.getNonNullAttributes();
                 if (renderVideoImage(node, url, altText, attributes, html)) {
                     return;
@@ -243,7 +243,7 @@ public class GitLabNodeRenderer implements NodeRenderer
 
     public static class Factory implements NodeRendererFactory {
         @Override
-        public NodeRenderer apply(final DataHolder options) {
+        public NodeRenderer apply(DataHolder options) {
             return new GitLabNodeRenderer(options);
         }
     }

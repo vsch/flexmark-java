@@ -2,18 +2,18 @@ package com.vladsch.flexmark.parser.internal;
 
 import com.vladsch.flexmark.parser.PostProcessor;
 import com.vladsch.flexmark.parser.PostProcessorFactory;
+import com.vladsch.flexmark.util.ast.ClassifyingNodeTracker;
 import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.Node;
-import com.vladsch.flexmark.util.ast.ClassifyingNodeTracker;
 import com.vladsch.flexmark.util.ast.NodeClassifierVisitor;
 import com.vladsch.flexmark.util.collection.OrderedSet;
 import com.vladsch.flexmark.util.collection.iteration.ReversibleIterable;
+import com.vladsch.flexmark.util.data.DataHolder;
+import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.dependency.DependencyHandler;
 import com.vladsch.flexmark.util.dependency.DependentItem;
 import com.vladsch.flexmark.util.dependency.DependentItemMap;
 import com.vladsch.flexmark.util.dependency.ResolvedDependencies;
-import com.vladsch.flexmark.util.data.DataHolder;
-import com.vladsch.flexmark.util.data.DataKey;
 
 import java.util.*;
 

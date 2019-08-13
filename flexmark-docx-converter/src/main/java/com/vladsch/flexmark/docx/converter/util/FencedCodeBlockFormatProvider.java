@@ -11,12 +11,12 @@ public class FencedCodeBlockFormatProvider<T> extends BlockFormatProviderBase<T>
     private final BigInteger myBefore;
     private final BigInteger myAfter;
 
-    public FencedCodeBlockFormatProvider(final DocxContext<T> docx) {
+    public FencedCodeBlockFormatProvider(DocxContext<T> docx) {
         super(docx, docx.getRenderingOptions().PREFORMATTED_TEXT_STYLE);
-        final BigInteger before;
-        final BigInteger after;
+        BigInteger before;
+        BigInteger after;
 
-        final Style paragraphStyle = docx.getStyle(docx.getRenderingOptions().PREFORMATTED_TEXT_STYLE);
+        Style paragraphStyle = docx.getStyle(docx.getRenderingOptions().PREFORMATTED_TEXT_STYLE);
         if (paragraphStyle != null) {
             // Should always be true
             before = docx.getHelper().safeSpacingBefore(paragraphStyle.getPPr());
@@ -44,9 +44,9 @@ public class FencedCodeBlockFormatProvider<T> extends BlockFormatProviderBase<T>
     }
 
     @Override
-    public void getPPr(final PPr pPr) {
+    public void getPPr(PPr pPr) {
         myDocx.getHelper().ensureSpacing(pPr);
-        final PPrBase.Spacing spacing = pPr.getSpacing();
+        PPrBase.Spacing spacing = pPr.getSpacing();
         spacing.setBefore(BigInteger.ZERO);
         spacing.setAfter(BigInteger.ZERO);
         super.getPPr(pPr);

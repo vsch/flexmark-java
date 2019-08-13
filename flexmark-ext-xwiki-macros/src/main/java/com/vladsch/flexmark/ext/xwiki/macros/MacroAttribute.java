@@ -47,7 +47,7 @@ public class MacroAttribute extends Node implements DoNotDecorate {
         return attribute;
     }
 
-    public void setAttribute(final BasedSequence attribute) {
+    public void setAttribute(BasedSequence attribute) {
         this.attribute = attribute;
     }
 
@@ -55,7 +55,7 @@ public class MacroAttribute extends Node implements DoNotDecorate {
         return separator;
     }
 
-    public void setSeparator(final BasedSequence separator) {
+    public void setSeparator(BasedSequence separator) {
         this.separator = separator;
     }
 

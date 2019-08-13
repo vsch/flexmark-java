@@ -27,12 +27,12 @@ public class MacroExtension implements Parser.ParserExtension, HtmlRenderer.Html
     }
 
     @Override
-    public void rendererOptions(final MutableDataHolder options) {
+    public void rendererOptions(MutableDataHolder options) {
 
     }
 
     @Override
-    public void extend(final HtmlRenderer.Builder rendererBuilder, final String rendererType) {
+    public void extend(HtmlRenderer.Builder rendererBuilder, String rendererType) {
         rendererBuilder.nodeRendererFactory(new MacroNodeRenderer.Factory());
     }
 
@@ -41,7 +41,7 @@ public class MacroExtension implements Parser.ParserExtension, HtmlRenderer.Html
     }
 
     @Override
-    public void parserOptions(final MutableDataHolder options) {
+    public void parserOptions(MutableDataHolder options) {
 
     }
 

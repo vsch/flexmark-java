@@ -5,7 +5,7 @@ import com.vladsch.flexmark.util.ast.VisitHandler;
 import com.vladsch.flexmark.util.ast.Visitor;
 
 public class InlineVisitorExt {
-    public static <V extends InlineVisitor> VisitHandler<?>[] VISIT_HANDLERS(final V visitor) {
+    public static <V extends InlineVisitor> VisitHandler<?>[] VISIT_HANDLERS(V visitor) {
         return new VisitHandler<?>[] {
                 new VisitHandler<AutoLink>(AutoLink.class, new Visitor<AutoLink>() {
                     @Override

@@ -4,9 +4,9 @@ import com.vladsch.flexmark.ext.xwiki.macros.Macro;
 import com.vladsch.flexmark.ext.xwiki.macros.MacroAttribute;
 import com.vladsch.flexmark.ext.xwiki.macros.MacroClose;
 import com.vladsch.flexmark.parser.InlineParser;
-import com.vladsch.flexmark.parser.LightInlineParser;
 import com.vladsch.flexmark.parser.InlineParserExtension;
 import com.vladsch.flexmark.parser.InlineParserExtensionFactory;
+import com.vladsch.flexmark.parser.LightInlineParser;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 import java.util.ArrayList;
@@ -18,18 +18,18 @@ public class MacroInlineParser implements InlineParserExtension {
     private final MacroParsing parsing;
     private List<Macro> openMacros;
 
-    public MacroInlineParser(final LightInlineParser inlineParser) {
+    public MacroInlineParser(LightInlineParser inlineParser) {
         this.parsing = new MacroParsing(inlineParser.getParsing());
         this.openMacros = new ArrayList<Macro>();
     }
 
     @Override
-    public void finalizeDocument(final InlineParser inlineParser) {
+    public void finalizeDocument(InlineParser inlineParser) {
 
     }
 
     @Override
-    public void finalizeBlock(final InlineParser inlineParser) {
+    public void finalizeBlock(InlineParser inlineParser) {
         for (int j = openMacros.size(); j-- > 0; ) {
             inlineParser.moveNodes(openMacros.get(j), inlineParser.getBlock().getLastChild());
         }
@@ -38,7 +38,7 @@ public class MacroInlineParser implements InlineParserExtension {
     }
 
     @Override
-    public boolean parse(final LightInlineParser inlineParser) {
+    public boolean parse(LightInlineParser inlineParser) {
         if (inlineParser.peek(1) == '{') {
             BasedSequence input = inlineParser.getInput();
             int index = inlineParser.getIndex();
@@ -137,7 +137,7 @@ public class MacroInlineParser implements InlineParserExtension {
         }
 
         @Override
-        public InlineParserExtension apply(final LightInlineParser lightInlineParser) {
+        public InlineParserExtension apply(LightInlineParser lightInlineParser) {
             return new MacroInlineParser(lightInlineParser);
         }
 

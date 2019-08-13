@@ -44,7 +44,7 @@ public class GitLabOptions implements MutableDataSetter {
         videoImageLinkTextFormat = GitLabExtension.VIDEO_IMAGE_LINK_TEXT_FORMAT.getFrom(options);
         videoImageExtensions = GitLabExtension.VIDEO_IMAGE_EXTENSIONS.getFrom(options);
         videoImageExtensionSet = new HashSet<>();
-        final String[] extensions = videoImageExtensions.split(",");
+        String[] extensions = videoImageExtensions.split(",");
         for (String ext : extensions) {
             String trimmed = ext.trim();
             if (!trimmed.isEmpty()) {
@@ -54,7 +54,7 @@ public class GitLabOptions implements MutableDataSetter {
     }
 
     @Override
-    public MutableDataHolder setIn(final MutableDataHolder dataHolder) {
+    public MutableDataHolder setIn(MutableDataHolder dataHolder) {
         dataHolder.set(GitLabExtension.INS_PARSER, insParser);
         dataHolder.set(GitLabExtension.DEL_PARSER, delParser);
         dataHolder.set(GitLabExtension.INLINE_MATH_PARSER, inlineMathParser);

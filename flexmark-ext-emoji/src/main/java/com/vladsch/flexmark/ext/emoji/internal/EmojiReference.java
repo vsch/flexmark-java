@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +19,7 @@ public class EmojiReference {
         public final String unicodeSampleFile; // name part of the file no extension
         public final String unicodeCldr;
 
-        public Emoji(final String shortcut, final String category, final String emojiCheatSheetFile, final String githubFile, final String unicodeChars, final String unicodeSampleFile, final String unicodeCldr) {
+        public Emoji(String shortcut, String category, String emojiCheatSheetFile, String githubFile, String unicodeChars, String unicodeSampleFile, String unicodeCldr) {
             this.shortcut = shortcut;
             this.category = category;
             this.emojiCheatSheetFile = emojiCheatSheetFile;
@@ -45,7 +46,7 @@ public class EmojiReference {
                 throw new IllegalStateException("Could not load " + emojiReference + " classpath resource");
             }
 
-            BufferedReader reader = new BufferedReader(new InputStreamReader(stream, Charset.forName("UTF-8")));
+            BufferedReader reader = new BufferedReader(new InputStreamReader(stream, StandardCharsets.UTF_8));
             String line;
             try {
                 // skip first line, it is column names
@@ -54,7 +55,7 @@ public class EmojiReference {
                     String[] fields = line.split("\t");
                     try {
 
-                        final Emoji emoji = new Emoji(
+                        Emoji emoji = new Emoji(
                                 fields[0].charAt(0) == ' ' ? null : fields[0], // shortcut
                                 fields[1].charAt(0) == ' ' ? null : fields[1], // category
                                 fields[2].charAt(0) == ' ' ? null : fields[2], // emojiCheatSheetFile

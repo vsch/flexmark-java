@@ -12,7 +12,7 @@ public class AudioLink extends AbstractMediaLink {
         super(PREFIX, TYPE);
     }
 
-    public AudioLink(final Link other) {
+    public AudioLink(Link other) {
         super(PREFIX, TYPE, other);
     }
 

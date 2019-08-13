@@ -34,7 +34,7 @@ public class AdmonitionNodeFormatter implements NodeFormatter {
         ));
     }
 
-    private void render(final AdmonitionBlock node, final NodeFormatterContext context, MarkdownWriter markdown) {
+    private void render(AdmonitionBlock node, NodeFormatterContext context, MarkdownWriter markdown) {
         markdown.blankLine();
         markdown.append(node.getOpeningMarker()).append(' ');
         markdown.appendNonTranslating(node.getInfo());
@@ -50,7 +50,7 @@ public class AdmonitionNodeFormatter implements NodeFormatter {
 
     public static class Factory implements NodeFormatterFactory {
         @Override
-        public NodeFormatter create(final DataHolder options) {
+        public NodeFormatter create(DataHolder options) {
             return new AdmonitionNodeFormatter(options);
         }
     }

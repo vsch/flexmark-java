@@ -41,7 +41,7 @@ public class GitLabNodeFormatter implements NodeFormatter {
 
     public static class Factory implements NodeFormatterFactory {
         @Override
-        public NodeFormatter create(final DataHolder options) {
+        public NodeFormatter create(DataHolder options) {
             return new GitLabNodeFormatter(options);
         }
     }

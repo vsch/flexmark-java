@@ -6,11 +6,11 @@ import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.ast.KeepType;
 import com.vladsch.flexmark.util.builder.Extension;
-import com.vladsch.flexmark.util.format.options.ElementPlacement;
-import com.vladsch.flexmark.util.format.options.ElementPlacementSort;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
+import com.vladsch.flexmark.util.format.options.ElementPlacement;
+import com.vladsch.flexmark.util.format.options.ElementPlacementSort;
 
 /**
  * Extension for adding abbreviations to markdown
@@ -46,22 +46,22 @@ public class AbbreviationExtension implements Parser.ParserExtension, HtmlRender
     }
 
     @Override
-    public void extend(final Formatter.Builder builder) {
+    public void extend(Formatter.Builder builder) {
         builder.nodeFormatterFactory(new AbbreviationNodeFormatter.Factory());
     }
 
     @Override
-    public void rendererOptions(final MutableDataHolder options) {
+    public void rendererOptions(MutableDataHolder options) {
 
     }
 
     @Override
-    public void parserOptions(final MutableDataHolder options) {
+    public void parserOptions(MutableDataHolder options) {
 
     }
 
     @Override
-    public boolean transferReferences(final MutableDataHolder document, final DataHolder included) {
+    public boolean transferReferences(MutableDataHolder document, DataHolder included) {
         // abbreviations cannot be transferred except before parsing the document
         //if (document.contains(ABBREVIATIONS) && included.contains(ABBREVIATIONS)) {
         //    if (Parser.transferReferences(ABBREVIATIONS.getFrom(document), ABBREVIATIONS.getFrom(included), ABBREVIATIONS_KEEP.getFrom(document) == KeepType.FIRST)) {

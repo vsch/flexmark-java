@@ -60,7 +60,7 @@ public class TaskListNodeFormatter implements NodeFormatter {
         return null;
     }
 
-    private void render(final TaskListItem node, final NodeFormatterContext context, final MarkdownWriter markdown) {
+    private void render(TaskListItem node, NodeFormatterContext context, MarkdownWriter markdown) {
         BasedSequence markerSuffix = node.getMarkerSuffix();
         switch (myOptions.taskListItemCase) {
             case AS_IS:
@@ -91,15 +91,15 @@ public class TaskListNodeFormatter implements NodeFormatter {
         }
 
         // task list item node overrides isParagraphWrappingDisabled which affects empty list item blank line rendering
-        final boolean forceLooseItem = node.isLoose() && (node.hasChildren() && node.getFirstChildAnyNot(BlankLine.class) != null);
+        boolean forceLooseItem = node.isLoose() && (node.hasChildren() && node.getFirstChildAnyNot(BlankLine.class) != null);
         CoreNodeFormatter.renderListItem(node, context, markdown, listOptions, markerSuffix.isEmpty() ? markerSuffix : markerSuffix.append(" "), forceLooseItem);
     }
 
-    private void render(final BulletList node, final NodeFormatterContext context, MarkdownWriter markdown) {
+    private void render(BulletList node, NodeFormatterContext context, MarkdownWriter markdown) {
         renderList(node, context, markdown, myOptions);
     }
 
-    private void render(final OrderedList node, final NodeFormatterContext context, MarkdownWriter markdown) {
+    private void render(OrderedList node, NodeFormatterContext context, MarkdownWriter markdown) {
         renderList(node, context, markdown, myOptions);
     }
 
@@ -121,8 +121,8 @@ public class TaskListNodeFormatter implements NodeFormatter {
     }
 
     public static void renderList(
-            final ListBlock node,
-            final NodeFormatterContext context,
+            ListBlock node,
+            NodeFormatterContext context,
             MarkdownWriter markdown,
             FormatOptions formatOptions
     ) {
@@ -168,7 +168,7 @@ public class TaskListNodeFormatter implements NodeFormatter {
 
     public static class Factory implements NodeFormatterFactory {
         @Override
-        public NodeFormatter create(final DataHolder options) {
+        public NodeFormatter create(DataHolder options) {
             return new TaskListNodeFormatter(options);
         }
     }

@@ -10,18 +10,16 @@ import com.vladsch.flexmark.spec.IRenderBase;
 import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.spec.SpecReader;
 import com.vladsch.flexmark.test.ComboSpecTestCase;
-import com.vladsch.flexmark.util.ast.IParse;
-import com.vladsch.flexmark.util.ast.IRender;
 import com.vladsch.flexmark.util.Pair;
-import com.vladsch.flexmark.util.ast.Node;
-import com.vladsch.flexmark.util.ast.NodeVisitor;
-import com.vladsch.flexmark.util.ast.VisitHandler;
-import com.vladsch.flexmark.util.ast.Visitor;
+import com.vladsch.flexmark.util.ast.*;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
-import com.vladsch.flexmark.util.options.*;
+import com.vladsch.flexmark.util.options.OptionsParser;
+import com.vladsch.flexmark.util.options.ParsedOption;
+import com.vladsch.flexmark.util.options.ParsedOptionStatus;
+import com.vladsch.flexmark.util.options.ParserMessage;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import org.junit.runners.Parameterized;
 
@@ -61,7 +59,7 @@ public class TocOptionsParserTest extends ComboSpecTestCase {
     }
 
     static class ParserVisitorExt {
-        static <V extends ParserVisitor> VisitHandler<?>[] VISIT_HANDLERS(final V visitor) {
+        static <V extends ParserVisitor> VisitHandler<?>[] VISIT_HANDLERS(V visitor) {
             return new VisitHandler<?>[] {
                     new VisitHandler<ParserNode>(ParserNode.class, new Visitor<ParserNode>() {
                         @Override
@@ -238,7 +236,7 @@ public class TocOptionsParserTest extends ComboSpecTestCase {
         public void render(Node node, Appendable output) {
             assert node instanceof ParserNode;
             TocOptions tocOptions = getOptions().get(TOC_OPTIONS);
-            final HtmlWriter html = new HtmlWriter(2, 0);
+            HtmlWriter html = new HtmlWriter(2, 0);
             RenderingVisitor visitor = new RenderingVisitor(html, tocOptions);
             visitor.render(node);
             try {

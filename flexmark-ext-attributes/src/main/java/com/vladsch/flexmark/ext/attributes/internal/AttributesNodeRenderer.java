@@ -5,8 +5,8 @@ import com.vladsch.flexmark.ext.attributes.AttributesNode;
 import com.vladsch.flexmark.html.CustomNodeRenderer;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.*;
-import com.vladsch.flexmark.util.html.Attributes;
 import com.vladsch.flexmark.util.data.DataHolder;
+import com.vladsch.flexmark.util.html.Attributes;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -33,7 +33,7 @@ public class AttributesNodeRenderer implements NodeRenderer {
             @Override
             public void render(TextBase node, NodeRendererContext context, HtmlWriter html) {
                 if (myOptions.assignTextAttributes) {
-                    final Attributes nodeAttributes = context.extendRenderingNodeAttributes(AttributablePart.NODE, null);
+                    Attributes nodeAttributes = context.extendRenderingNodeAttributes(AttributablePart.NODE, null);
                     if (!nodeAttributes.isEmpty()) {
                         // has attributes then we wrap it in a span
                         html.setAttributes(nodeAttributes).withAttr().tag("span");
@@ -50,7 +50,7 @@ public class AttributesNodeRenderer implements NodeRenderer {
 
     public static class Factory implements NodeRendererFactory {
         @Override
-        public NodeRenderer apply(final DataHolder options) {
+        public NodeRenderer apply(DataHolder options) {
             return new AttributesNodeRenderer(options);
         }
     }

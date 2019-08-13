@@ -116,10 +116,10 @@ public class ComboDocxUserSpecDisabled extends ComboSpecTestCase {
     }
 
     @Override
-    protected void testCase(final Node node, final DataHolder options) {
+    protected void testCase(Node node, DataHolder options) {
         if (!DUMP_TEST_CASE_FILES) return;
 
-        final SpecExample specExample = example();
+        SpecExample specExample = example();
         if (!specExample.isFullSpecExample() && !specExample.getSection().isEmpty()) {
             // write it out to file, hard-coded for now                    IGNORE
             File file = new File(String.format("%s/%s%s_%d.docx", PROJECT_ROOT_DIRECTORY, FILE_TEST_CASE_DUMP_LOCATION, specExample.getSection(), specExample.getExampleNumber()));
@@ -138,8 +138,8 @@ public class ComboDocxUserSpecDisabled extends ComboSpecTestCase {
                     ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
                     try {
                         mlPackage.save(outputStream, Docx4J.FLAG_SAVE_FLAT_XML);
-                        final String xml = outputStream.toString("UTF-8");
-                        final String s = XmlDocxSorter.sortDocumentParts(xml);
+                        String xml = outputStream.toString("UTF-8");
+                        String s = XmlDocxSorter.sortDocumentParts(xml);
                         FileWriter fileWriter = new FileWriter(file2);
                         fileWriter.append(s);
                         fileWriter.append('\n');

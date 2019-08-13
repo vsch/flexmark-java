@@ -12,7 +12,7 @@ public class YamlFrontMatterValue extends Node {
     public YamlFrontMatterValue() {
     }
 
-    public YamlFrontMatterValue(final BasedSequence chars) {
+    public YamlFrontMatterValue(BasedSequence chars) {
         super(chars);
     }
 }

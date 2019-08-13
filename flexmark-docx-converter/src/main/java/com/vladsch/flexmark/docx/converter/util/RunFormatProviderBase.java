@@ -14,7 +14,7 @@ public class RunFormatProviderBase<T> implements RunFormatProvider<T> {
     protected final boolean myNoCharacterStyles;
     protected final String myHighlightShadingColor;
 
-    public RunFormatProviderBase(final DocxContext<T> docx, final String baseStyleId, final boolean noCharacterStyles, final String highlightShadingColor) {
+    public RunFormatProviderBase(DocxContext<T> docx, String baseStyleId, boolean noCharacterStyles, String highlightShadingColor) {
         myDocx = docx;
         myFrame = docx.getContextFrame();
         myParent = docx.getRunFormatProvider();
@@ -76,7 +76,7 @@ public class RunFormatProviderBase<T> implements RunFormatProvider<T> {
     }
 
     @Override
-    public void getRPr(final RPr rPr) {
+    public void getRPr(RPr rPr) {
         // Create object for rStyle
         if (!myNoCharacterStyles && myHighlightShadingColor.isEmpty() && myBaseStyleId != null) {
             RStyle rstyle = myDocx.getFactory().createRStyle();
@@ -96,13 +96,13 @@ public class RunFormatProviderBase<T> implements RunFormatProvider<T> {
         if (myNoCharacterStyles || !myHighlightShadingColor.isEmpty()) {
             Style thisStyle = myBaseStyleId == null ? null : myDocx.getStyle(myBaseStyleId);
             if (thisStyle != null) {
-                final ParaRPr paraRPr = myDocx.getP().getPPr().getRPr();
+                ParaRPr paraRPr = myDocx.getP().getPPr().getRPr();
                 if (!myHighlightShadingColor.isEmpty()) {
                     String color = myHighlightShadingColor;
 
-                    final CTShd shd = rPr.getShd();
+                    CTShd shd = rPr.getShd();
                     if (shd != null) {
-                        final String shdFill = shd.getFill();
+                        String shdFill = shd.getFill();
                         if (shdFill != null && !shdFill.isEmpty() && !shdFill.equals("auto") && color.equals("shade")) {
                             if (ColorNameMapper.isNamedColor(shdFill) || ColorNameMapper.isHexColor(shdFill)) {
                                 color = shdFill;
@@ -112,11 +112,11 @@ public class RunFormatProviderBase<T> implements RunFormatProvider<T> {
                     }
 
                     if (ColorNameMapper.isNamedColor(color)) {
-                        final Highlight highlight = myDocx.getFactory().createHighlight();
+                        Highlight highlight = myDocx.getFactory().createHighlight();
                         highlight.setVal(color);
                         rPr.setHighlight(highlight);
                     } else if (ColorNameMapper.isHexColor(color)) {
-                        final Highlight highlight = myDocx.getFactory().createHighlight();
+                        Highlight highlight = myDocx.getFactory().createHighlight();
                         highlight.setVal(ColorNameMapper.findClosestNamedColor(color));
                         rPr.setHighlight(highlight);
                     } else {

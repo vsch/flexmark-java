@@ -80,7 +80,7 @@ public class ListBlockParser extends AbstractBlockParser {
         return myLastChild;
     }
 
-    public void setLastChild(final ListItemParser lastChild) {
+    public void setLastChild(ListItemParser lastChild) {
         myLastChild = lastChild;
     }
 
@@ -345,7 +345,7 @@ public class ListBlockParser extends AbstractBlockParser {
                 int suffixLength = suffix.length();
                 if (suffixLength > 0 && line.matchChars(suffix, contentIndex)) {
                     if (options.isItemMarkerSpace()) {
-                        final char c = line.midCharAt(contentIndex + suffixLength);
+                        char c = line.midCharAt(contentIndex + suffixLength);
                         if (c != ' ' && c != '\t') {
                             // no space after, no match
                             continue;

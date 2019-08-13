@@ -20,7 +20,7 @@ public class EnumeratedReferences {
         enumeratedReferenceOrdinals = new HashMap<>();
     }
 
-    public void add(final String text) {
+    public void add(String text) {
         String type = EnumeratedReferenceRepository.getType(text);
 
         String[] types = type.split(":");
@@ -69,8 +69,8 @@ public class EnumeratedReferences {
      * use {@link #getEnumeratedReferenceOrdinals(String)} to get compound ordinals
      */
     @Deprecated
-    public int getOrdinal(final String text) {
-        final int[] ordinals = enumeratedReferenceOrdinals.get(text);
+    public int getOrdinal(String text) {
+        int[] ordinals = enumeratedReferenceOrdinals.get(text);
         return ordinals == null ? 0 : ordinals[ordinals.length - 1];
     }
 
@@ -82,12 +82,12 @@ public class EnumeratedReferences {
      * @deprecated use {@link #getEnumeratedReferenceOrdinals(String)} instead which supports compound enumerated ordinals
      */
     @Deprecated
-    public Node getFormatNode(final String text) {
+    public Node getFormatNode(String text) {
         String type = EnumeratedReferenceRepository.getType(text);
         return referenceRepository.get(type);
     }
 
-    public EnumeratedReferenceRendering[] getEnumeratedReferenceOrdinals(final String text) {
+    public EnumeratedReferenceRendering[] getEnumeratedReferenceOrdinals(String text) {
         String type = EnumeratedReferenceRepository.getType(text);
 
         String[] types = type.split(":");
@@ -110,18 +110,18 @@ public class EnumeratedReferences {
         return renderings;
     }
 
-    public void renderReferenceOrdinals(final String text, EnumeratedOrdinalRenderer renderer) {
+    public void renderReferenceOrdinals(String text, EnumeratedOrdinalRenderer renderer) {
         EnumeratedReferenceRendering[] renderings = getEnumeratedReferenceOrdinals(text);
         renderReferenceOrdinals(renderings, renderer);
     }
 
-    public static void renderReferenceOrdinals(EnumeratedReferenceRendering[] renderings, final EnumeratedOrdinalRenderer renderer) {
+    public static void renderReferenceOrdinals(EnumeratedReferenceRendering[] renderings, EnumeratedOrdinalRenderer renderer) {
         renderer.startRendering(renderings);
 
         // need to accumulate all compound formats and output on final format's [#]
-        final ArrayList<CompoundEnumeratedReferenceRendering> compoundReferences = new ArrayList<>();
+        ArrayList<CompoundEnumeratedReferenceRendering> compoundReferences = new ArrayList<>();
 
-        final EnumeratedReferenceRendering lastRendering = renderings[renderings.length - 1];
+        EnumeratedReferenceRendering lastRendering = renderings[renderings.length - 1];
 
         for (EnumeratedReferenceRendering rendering : renderings) {
             int ordinal = rendering.referenceOrdinal;
@@ -145,7 +145,7 @@ public class EnumeratedReferences {
             compoundReferences.add(new CompoundEnumeratedReferenceRendering(ordinal, rendering.referenceFormat, defaultText, needSeparator));
         }
 
-        final int iMax = compoundReferences.size() - 1;
+        int iMax = compoundReferences.size() - 1;
         Runnable wasRunnable = renderer.getEnumOrdinalRunnable();
 
         renderer.setEnumOrdinalRunnable(new Runnable() {

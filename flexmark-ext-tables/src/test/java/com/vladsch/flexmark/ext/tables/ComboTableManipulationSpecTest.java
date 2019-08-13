@@ -6,14 +6,14 @@ import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.spec.SpecReader;
 import com.vladsch.flexmark.test.ComboSpecTestCase;
 import com.vladsch.flexmark.util.ast.Node;
+import com.vladsch.flexmark.util.data.DataHolder;
+import com.vladsch.flexmark.util.data.MutableDataSet;
 import com.vladsch.flexmark.util.format.MarkdownTable;
 import com.vladsch.flexmark.util.format.TableFormatOptions;
 import com.vladsch.flexmark.util.format.TableManipulator;
 import com.vladsch.flexmark.util.format.options.DiscretionaryText;
 import com.vladsch.flexmark.util.format.options.TableCaptionHandling;
 import com.vladsch.flexmark.util.mappers.CharWidthProvider;
-import com.vladsch.flexmark.util.data.DataHolder;
-import com.vladsch.flexmark.util.data.MutableDataSet;
 import com.vladsch.flexmark.util.sequence.BasedSequenceImpl;
 import org.junit.runners.Parameterized;
 
@@ -69,150 +69,150 @@ public class ComboTableManipulationSpecTest extends ComboSpecTestCase {
                     }
 
                     @Override
-                    public int charWidth(final char c) {
+                    public int charWidth(char c) {
                         return c == TableFormatOptions.INTELLIJ_DUMMY_IDENTIFIER_CHAR ? 0 : 1;
                     }
 
                     @Override
-                    public int charWidth(final CharSequence s) {
+                    public int charWidth(CharSequence s) {
                         return BasedSequenceImpl.of(s).countLeadingNot(TableFormatOptions.INTELLIJ_DUMMY_IDENTIFIER_CHAR);
                     }
                 })
         );
 
         // @formatter:off
-        optionsMap.put("delete-row-1-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.deleteRows(0, 1);}}));
-        optionsMap.put("delete-row-2-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.deleteRows(1, 1);}}));
-        optionsMap.put("delete-row-3-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.deleteRows(2, 1);}}));
-        optionsMap.put("delete-row-4-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.deleteRows(3, 1);}}));
-        optionsMap.put("delete-row-5-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.deleteRows(4, 1);}}));
-        optionsMap.put("delete-row-6-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.deleteRows(5, 1);}}));
-        optionsMap.put("delete-row-7-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.deleteRows(6, 1);}}));
-        optionsMap.put("delete-row-8-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.deleteRows(7, 1);}}));
-        optionsMap.put("delete-row-9-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.deleteRows(8, 1);}}));
+        optionsMap.put("delete-row-1-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.deleteRows(0, 1);}}));
+        optionsMap.put("delete-row-2-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.deleteRows(1, 1);}}));
+        optionsMap.put("delete-row-3-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.deleteRows(2, 1);}}));
+        optionsMap.put("delete-row-4-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.deleteRows(3, 1);}}));
+        optionsMap.put("delete-row-5-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.deleteRows(4, 1);}}));
+        optionsMap.put("delete-row-6-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.deleteRows(5, 1);}}));
+        optionsMap.put("delete-row-7-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.deleteRows(6, 1);}}));
+        optionsMap.put("delete-row-8-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.deleteRows(7, 1);}}));
+        optionsMap.put("delete-row-9-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.deleteRows(8, 1);}}));
 
-        optionsMap.put("delete-row-1-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.deleteRows(0, 2);}}));
-        optionsMap.put("delete-row-2-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.deleteRows(1, 2);}}));
-        optionsMap.put("delete-row-3-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.deleteRows(2, 2);}}));
-        optionsMap.put("delete-row-4-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.deleteRows(3, 2);}}));
-        optionsMap.put("delete-row-5-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.deleteRows(4, 2);}}));
-        optionsMap.put("delete-row-6-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.deleteRows(5, 2);}}));
-        optionsMap.put("delete-row-7-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.deleteRows(6, 2);}}));
-        optionsMap.put("delete-row-8-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.deleteRows(7, 2);}}));
-        optionsMap.put("delete-row-9-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.deleteRows(8, 2);}}));
+        optionsMap.put("delete-row-1-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.deleteRows(0, 2);}}));
+        optionsMap.put("delete-row-2-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.deleteRows(1, 2);}}));
+        optionsMap.put("delete-row-3-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.deleteRows(2, 2);}}));
+        optionsMap.put("delete-row-4-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.deleteRows(3, 2);}}));
+        optionsMap.put("delete-row-5-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.deleteRows(4, 2);}}));
+        optionsMap.put("delete-row-6-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.deleteRows(5, 2);}}));
+        optionsMap.put("delete-row-7-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.deleteRows(6, 2);}}));
+        optionsMap.put("delete-row-8-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.deleteRows(7, 2);}}));
+        optionsMap.put("delete-row-9-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.deleteRows(8, 2);}}));
 
-        optionsMap.put("insert-row-1-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.insertRows(0, 1);}}));
-        optionsMap.put("insert-row-2-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.insertRows(1, 1);}}));
-        optionsMap.put("insert-row-3-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.insertRows(2, 1);}}));
-        optionsMap.put("insert-row-4-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.insertRows(3, 1);}}));
-        optionsMap.put("insert-row-5-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.insertRows(4, 1);}}));
-        optionsMap.put("insert-row-6-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.insertRows(5, 1);}}));
-        optionsMap.put("insert-row-7-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.insertRows(6, 1);}}));
-        optionsMap.put("insert-row-8-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.insertRows(7, 1);}}));
-        optionsMap.put("insert-row-9-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.insertRows(8, 1);}}));
+        optionsMap.put("insert-row-1-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.insertRows(0, 1);}}));
+        optionsMap.put("insert-row-2-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.insertRows(1, 1);}}));
+        optionsMap.put("insert-row-3-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.insertRows(2, 1);}}));
+        optionsMap.put("insert-row-4-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.insertRows(3, 1);}}));
+        optionsMap.put("insert-row-5-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.insertRows(4, 1);}}));
+        optionsMap.put("insert-row-6-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.insertRows(5, 1);}}));
+        optionsMap.put("insert-row-7-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.insertRows(6, 1);}}));
+        optionsMap.put("insert-row-8-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.insertRows(7, 1);}}));
+        optionsMap.put("insert-row-9-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.insertRows(8, 1);}}));
 
-        optionsMap.put("insert-row-1-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.insertRows(0, 2);}}));
-        optionsMap.put("insert-row-2-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.insertRows(1, 2);}}));
-        optionsMap.put("insert-row-3-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.insertRows(2, 2);}}));
-        optionsMap.put("insert-row-4-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.insertRows(3, 2);}}));
-        optionsMap.put("insert-row-5-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.insertRows(4, 2);}}));
-        optionsMap.put("insert-row-6-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.insertRows(5, 2);}}));
-        optionsMap.put("insert-row-7-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.insertRows(6, 2);}}));
-        optionsMap.put("insert-row-8-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.insertRows(7, 2);}}));
-        optionsMap.put("insert-row-9-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.insertRows(8, 2);}}));
+        optionsMap.put("insert-row-1-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.insertRows(0, 2);}}));
+        optionsMap.put("insert-row-2-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.insertRows(1, 2);}}));
+        optionsMap.put("insert-row-3-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.insertRows(2, 2);}}));
+        optionsMap.put("insert-row-4-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.insertRows(3, 2);}}));
+        optionsMap.put("insert-row-5-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.insertRows(4, 2);}}));
+        optionsMap.put("insert-row-6-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.insertRows(5, 2);}}));
+        optionsMap.put("insert-row-7-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.insertRows(6, 2);}}));
+        optionsMap.put("insert-row-8-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.insertRows(7, 2);}}));
+        optionsMap.put("insert-row-9-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.insertRows(8, 2);}}));
 
-        optionsMap.put("delete-col-0-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.deleteColumns(-1, 1);}}));
-        optionsMap.put("delete-col-1-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.deleteColumns(0, 1);}}));
-        optionsMap.put("delete-col-2-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.deleteColumns(1, 1);}}));
-        optionsMap.put("delete-col-3-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.deleteColumns(2, 1);}}));
-        optionsMap.put("delete-col-4-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.deleteColumns(3, 1);}}));
-        optionsMap.put("delete-col-5-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.deleteColumns(4, 1);}}));
-        optionsMap.put("delete-col-6-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.deleteColumns(5, 1);}}));
-        optionsMap.put("delete-col-7-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.deleteColumns(6, 1);}}));
-        optionsMap.put("delete-col-8-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.deleteColumns(7, 1);}}));
-        optionsMap.put("delete-col-9-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.deleteColumns(8, 1);}}));
+        optionsMap.put("delete-col-0-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.deleteColumns(-1, 1);}}));
+        optionsMap.put("delete-col-1-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.deleteColumns(0, 1);}}));
+        optionsMap.put("delete-col-2-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.deleteColumns(1, 1);}}));
+        optionsMap.put("delete-col-3-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.deleteColumns(2, 1);}}));
+        optionsMap.put("delete-col-4-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.deleteColumns(3, 1);}}));
+        optionsMap.put("delete-col-5-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.deleteColumns(4, 1);}}));
+        optionsMap.put("delete-col-6-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.deleteColumns(5, 1);}}));
+        optionsMap.put("delete-col-7-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.deleteColumns(6, 1);}}));
+        optionsMap.put("delete-col-8-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.deleteColumns(7, 1);}}));
+        optionsMap.put("delete-col-9-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.deleteColumns(8, 1);}}));
 
-        optionsMap.put("delete-col-1-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.deleteColumns(0, 2);}}));
-        optionsMap.put("delete-col-2-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.deleteColumns(1, 2);}}));
-        optionsMap.put("delete-col-3-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.deleteColumns(2, 2);}}));
-        optionsMap.put("delete-col-4-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.deleteColumns(3, 2);}}));
-        optionsMap.put("delete-col-5-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.deleteColumns(4, 2);}}));
-        optionsMap.put("delete-col-6-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.deleteColumns(5, 2);}}));
-        optionsMap.put("delete-col-7-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.deleteColumns(6, 2);}}));
-        optionsMap.put("delete-col-8-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.deleteColumns(7, 2);}}));
-        optionsMap.put("delete-col-9-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.deleteColumns(8, 2);}}));
+        optionsMap.put("delete-col-1-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.deleteColumns(0, 2);}}));
+        optionsMap.put("delete-col-2-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.deleteColumns(1, 2);}}));
+        optionsMap.put("delete-col-3-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.deleteColumns(2, 2);}}));
+        optionsMap.put("delete-col-4-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.deleteColumns(3, 2);}}));
+        optionsMap.put("delete-col-5-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.deleteColumns(4, 2);}}));
+        optionsMap.put("delete-col-6-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.deleteColumns(5, 2);}}));
+        optionsMap.put("delete-col-7-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.deleteColumns(6, 2);}}));
+        optionsMap.put("delete-col-8-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.deleteColumns(7, 2);}}));
+        optionsMap.put("delete-col-9-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.deleteColumns(8, 2);}}));
 
-        optionsMap.put("insert-col-0-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.insertColumns(-1, 1);}}));
-        optionsMap.put("insert-col-1-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.insertColumns(0, 1);}}));
-        optionsMap.put("insert-col-2-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.insertColumns(1, 1);}}));
-        optionsMap.put("insert-col-3-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.insertColumns(2, 1);}}));
-        optionsMap.put("insert-col-4-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.insertColumns(3, 1);}}));
-        optionsMap.put("insert-col-5-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.insertColumns(4, 1);}}));
-        optionsMap.put("insert-col-6-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.insertColumns(5, 1);}}));
-        optionsMap.put("insert-col-7-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.insertColumns(6, 1);}}));
-        optionsMap.put("insert-col-8-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.insertColumns(7, 1);}}));
-        optionsMap.put("insert-col-9-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.insertColumns(8, 1);}}));
+        optionsMap.put("insert-col-0-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.insertColumns(-1, 1);}}));
+        optionsMap.put("insert-col-1-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.insertColumns(0, 1);}}));
+        optionsMap.put("insert-col-2-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.insertColumns(1, 1);}}));
+        optionsMap.put("insert-col-3-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.insertColumns(2, 1);}}));
+        optionsMap.put("insert-col-4-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.insertColumns(3, 1);}}));
+        optionsMap.put("insert-col-5-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.insertColumns(4, 1);}}));
+        optionsMap.put("insert-col-6-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.insertColumns(5, 1);}}));
+        optionsMap.put("insert-col-7-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.insertColumns(6, 1);}}));
+        optionsMap.put("insert-col-8-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.insertColumns(7, 1);}}));
+        optionsMap.put("insert-col-9-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.insertColumns(8, 1);}}));
 
-        optionsMap.put("insert-col-1-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.insertColumns(0, 2);}}));
-        optionsMap.put("insert-col-2-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.insertColumns(1, 2);}}));
-        optionsMap.put("insert-col-3-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.insertColumns(2, 2);}}));
-        optionsMap.put("insert-col-4-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.insertColumns(3, 2);}}));
-        optionsMap.put("insert-col-5-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.insertColumns(4, 2);}}));
-        optionsMap.put("insert-col-6-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.insertColumns(5, 2);}}));
-        optionsMap.put("insert-col-7-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.insertColumns(6, 2);}}));
-        optionsMap.put("insert-col-8-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.insertColumns(7, 2);}}));
-        optionsMap.put("insert-col-9-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.insertColumns(8, 2);}}));
+        optionsMap.put("insert-col-1-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.insertColumns(0, 2);}}));
+        optionsMap.put("insert-col-2-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.insertColumns(1, 2);}}));
+        optionsMap.put("insert-col-3-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.insertColumns(2, 2);}}));
+        optionsMap.put("insert-col-4-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.insertColumns(3, 2);}}));
+        optionsMap.put("insert-col-5-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.insertColumns(4, 2);}}));
+        optionsMap.put("insert-col-6-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.insertColumns(5, 2);}}));
+        optionsMap.put("insert-col-7-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.insertColumns(6, 2);}}));
+        optionsMap.put("insert-col-8-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.insertColumns(7, 2);}}));
+        optionsMap.put("insert-col-9-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.insertColumns(8, 2);}}));
 
-        optionsMap.put("move-col-0-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.moveColumn(-1, 1);}}));
-        optionsMap.put("move-col-2-0", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.moveColumn(1, -1);}}));
+        optionsMap.put("move-col-0-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.moveColumn(-1, 1);}}));
+        optionsMap.put("move-col-2-0", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.moveColumn(1, -1);}}));
 
-        optionsMap.put("move-col-1-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.moveColumn(0, 0);}}));
-        optionsMap.put("move-col-1-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.moveColumn(0, 1);}}));
-        optionsMap.put("move-col-1-3", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.moveColumn(0, 2);}}));
-        optionsMap.put("move-col-1-4", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.moveColumn(0, 3);}}));
-        optionsMap.put("move-col-1-5", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.moveColumn(0, 4);}}));
-        optionsMap.put("move-col-1-6", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.moveColumn(0, 5);}}));
-        optionsMap.put("move-col-1-7", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.moveColumn(0, 6);}}));
+        optionsMap.put("move-col-1-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.moveColumn(0, 0);}}));
+        optionsMap.put("move-col-1-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.moveColumn(0, 1);}}));
+        optionsMap.put("move-col-1-3", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.moveColumn(0, 2);}}));
+        optionsMap.put("move-col-1-4", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.moveColumn(0, 3);}}));
+        optionsMap.put("move-col-1-5", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.moveColumn(0, 4);}}));
+        optionsMap.put("move-col-1-6", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.moveColumn(0, 5);}}));
+        optionsMap.put("move-col-1-7", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.moveColumn(0, 6);}}));
 
-        optionsMap.put("move-col-2-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.moveColumn(1, 0);}}));
-        optionsMap.put("move-col-2-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.moveColumn(1, 1);}}));
-        optionsMap.put("move-col-2-3", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.moveColumn(1, 2);}}));
-        optionsMap.put("move-col-2-4", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.moveColumn(1, 3);}}));
-        optionsMap.put("move-col-2-5", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.moveColumn(1, 4);}}));
-        optionsMap.put("move-col-2-6", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.moveColumn(1, 5);}}));
-        optionsMap.put("move-col-2-7", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.moveColumn(1, 6);}}));
+        optionsMap.put("move-col-2-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.moveColumn(1, 0);}}));
+        optionsMap.put("move-col-2-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.moveColumn(1, 1);}}));
+        optionsMap.put("move-col-2-3", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.moveColumn(1, 2);}}));
+        optionsMap.put("move-col-2-4", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.moveColumn(1, 3);}}));
+        optionsMap.put("move-col-2-5", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.moveColumn(1, 4);}}));
+        optionsMap.put("move-col-2-6", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.moveColumn(1, 5);}}));
+        optionsMap.put("move-col-2-7", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.moveColumn(1, 6);}}));
 
-        optionsMap.put("move-col-3-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.moveColumn(2, 0);}}));
-        optionsMap.put("move-col-3-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.moveColumn(2, 1);}}));
-        optionsMap.put("move-col-3-3", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.moveColumn(2, 2);}}));
-        optionsMap.put("move-col-3-4", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.moveColumn(2, 3);}}));
-        optionsMap.put("move-col-3-5", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.moveColumn(2, 4);}}));
-        optionsMap.put("move-col-3-6", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.moveColumn(2, 5);}}));
-        optionsMap.put("move-col-3-7", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.moveColumn(2, 6);}}));
+        optionsMap.put("move-col-3-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.moveColumn(2, 0);}}));
+        optionsMap.put("move-col-3-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.moveColumn(2, 1);}}));
+        optionsMap.put("move-col-3-3", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.moveColumn(2, 2);}}));
+        optionsMap.put("move-col-3-4", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.moveColumn(2, 3);}}));
+        optionsMap.put("move-col-3-5", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.moveColumn(2, 4);}}));
+        optionsMap.put("move-col-3-6", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.moveColumn(2, 5);}}));
+        optionsMap.put("move-col-3-7", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.moveColumn(2, 6);}}));
 
-        optionsMap.put("move-col-4-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.moveColumn(3, 0);}}));
-        optionsMap.put("move-col-4-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.moveColumn(3, 1);}}));
-        optionsMap.put("move-col-4-3", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.moveColumn(3, 2);}}));
-        optionsMap.put("move-col-4-4", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.moveColumn(3, 3);}}));
-        optionsMap.put("move-col-4-5", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.moveColumn(3, 4);}}));
-        optionsMap.put("move-col-4-6", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.moveColumn(3, 5);}}));
-        optionsMap.put("move-col-4-7", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.moveColumn(3, 6);}}));
+        optionsMap.put("move-col-4-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.moveColumn(3, 0);}}));
+        optionsMap.put("move-col-4-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.moveColumn(3, 1);}}));
+        optionsMap.put("move-col-4-3", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.moveColumn(3, 2);}}));
+        optionsMap.put("move-col-4-4", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.moveColumn(3, 3);}}));
+        optionsMap.put("move-col-4-5", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.moveColumn(3, 4);}}));
+        optionsMap.put("move-col-4-6", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.moveColumn(3, 5);}}));
+        optionsMap.put("move-col-4-7", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.moveColumn(3, 6);}}));
 
-        optionsMap.put("move-col-5-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.moveColumn(4, 0);}}));
-        optionsMap.put("move-col-5-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.moveColumn(4, 1);}}));
-        optionsMap.put("move-col-5-3", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.moveColumn(4, 2);}}));
-        optionsMap.put("move-col-5-4", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.moveColumn(4, 3);}}));
-        optionsMap.put("move-col-5-5", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.moveColumn(4, 4);}}));
-        optionsMap.put("move-col-5-6", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.moveColumn(4, 5);}}));
-        optionsMap.put("move-col-5-7", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.moveColumn(4, 6);}}));
+        optionsMap.put("move-col-5-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.moveColumn(4, 0);}}));
+        optionsMap.put("move-col-5-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.moveColumn(4, 1);}}));
+        optionsMap.put("move-col-5-3", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.moveColumn(4, 2);}}));
+        optionsMap.put("move-col-5-4", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.moveColumn(4, 3);}}));
+        optionsMap.put("move-col-5-5", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.moveColumn(4, 4);}}));
+        optionsMap.put("move-col-5-6", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.moveColumn(4, 5);}}));
+        optionsMap.put("move-col-5-7", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.moveColumn(4, 6);}}));
 
-        optionsMap.put("move-col-6-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.moveColumn(5, 0);}}));
-        optionsMap.put("move-col-6-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.moveColumn(5, 1);}}));
-        optionsMap.put("move-col-6-3", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.moveColumn(5, 2);}}));
-        optionsMap.put("move-col-6-4", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.moveColumn(5, 3);}}));
-        optionsMap.put("move-col-6-5", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.moveColumn(5, 4);}}));
-        optionsMap.put("move-col-6-6", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.moveColumn(5, 5);}}));
-        optionsMap.put("move-col-6-7", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply(final MarkdownTable table, final Node tableNoe) { table.moveColumn(5, 6);}}));
+        optionsMap.put("move-col-6-1", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.moveColumn(5, 0);}}));
+        optionsMap.put("move-col-6-2", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.moveColumn(5, 1);}}));
+        optionsMap.put("move-col-6-3", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.moveColumn(5, 2);}}));
+        optionsMap.put("move-col-6-4", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.moveColumn(5, 3);}}));
+        optionsMap.put("move-col-6-5", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.moveColumn(5, 4);}}));
+        optionsMap.put("move-col-6-6", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.moveColumn(5, 5);}}));
+        optionsMap.put("move-col-6-7", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_MANIPULATOR, new TableManipulator() {@Override public void apply( MarkdownTable table, Node tableNoe) { table.moveColumn(5, 6);}}));
 
         // @formatter:on
     }

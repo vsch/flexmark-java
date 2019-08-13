@@ -40,17 +40,17 @@ public class GitLabBlockQuoteParser extends AbstractBlockParser {
             return BlockContinue.none();
         }
 
-        final int index = state.getIndex();
+        int index = state.getIndex();
 
         BasedSequence line = state.getLineWithEOL();
-        final Matcher matcher = GIT_LAB_BLOCK_END.matcher(line.subSequence(index));
+        Matcher matcher = GIT_LAB_BLOCK_END.matcher(line.subSequence(index));
         if (!matcher.matches()) {
             return BlockContinue.atIndex(index);
         } else {
             // if have open gitlab block quote last child then let them handle it
             Node lastChild = block.getLastChild();
             if (lastChild instanceof GitLabBlockQuote) {
-                final BlockParser parser = state.getActiveBlockParser((Block) lastChild);
+                BlockParser parser = state.getActiveBlockParser((Block) lastChild);
                 if (parser instanceof GitLabBlockQuoteParser && !((GitLabBlockQuoteParser) parser).hadClose) {
                     // let the child handle it
                     return BlockContinue.atIndex(index);
@@ -81,7 +81,7 @@ public class GitLabBlockQuoteParser extends AbstractBlockParser {
     }
 
     @Override
-    public boolean canContain(final ParserState state, final BlockParser blockParser, final Block block) {
+    public boolean canContain(ParserState state, BlockParser blockParser, Block block) {
         return true; //options.nestedBlockQuotes || !(blockParser instanceof GitLabBlockQuoteParser);
     }
 
@@ -138,7 +138,7 @@ public class GitLabBlockQuoteParser extends AbstractBlockParser {
         }
 
         boolean haveBlockQuoteParser(ParserState state) {
-            final List<BlockParser> parsers = state.getActiveBlockParsers();
+            List<BlockParser> parsers = state.getActiveBlockParsers();
             int i = parsers.size();
             while (i-- > 0) {
                 if (parsers.get(i) instanceof GitLabBlockQuoteParser) return true;
@@ -150,7 +150,7 @@ public class GitLabBlockQuoteParser extends AbstractBlockParser {
         public BlockStart tryStart(ParserState state, MatchedBlockParser matchedBlockParser) {
             if (options.nestedBlockQuotes || !haveBlockQuoteParser(state)) {
                 BasedSequence line = state.getLineWithEOL();
-                final Matcher matcher = GIT_LAB_BLOCK_START.matcher(line);
+                Matcher matcher = GIT_LAB_BLOCK_START.matcher(line);
                 if (matcher.matches()) {
                     return BlockStart.of(new GitLabBlockQuoteParser(state.getProperties(), line.subSequence(0, 3), line.subSequence(matcher.start(1), matcher.end(1))))
                             .atIndex(state.getLineEndIndex())

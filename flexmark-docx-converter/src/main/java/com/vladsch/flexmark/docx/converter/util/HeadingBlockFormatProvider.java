@@ -9,14 +9,14 @@ public class HeadingBlockFormatProvider<T> extends BlockFormatProviderBase<T> {
     private final DocxContext<T> myDocx;
     private final int myHeadingLevel;
 
-    public HeadingBlockFormatProvider(final DocxContext<T> docx, final int headingLevel) {
+    public HeadingBlockFormatProvider(DocxContext<T> docx, int headingLevel) {
         super(docx, docx.getRenderingOptions().HEADINGS[headingLevel]);
         myDocx = docx;
         myHeadingLevel = headingLevel;
     }
 
     @Override
-    public void getPPr(final PPr pPr) {
+    public void getPPr(PPr pPr) {
         // Create object for numPr
         PPrBase.NumPr baseNumPr = myDocx.getFactory().createPPrBaseNumPr();
         pPr.setNumPr(baseNumPr);

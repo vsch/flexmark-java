@@ -68,7 +68,7 @@ public abstract class DocxContextImpl<T> implements DocxContext<T>, BlockFormatP
     }
 
     // must be the first thing called after creation
-    public void setParent(final DocxContext parent) {
+    public void setParent(DocxContext parent) {
     }
 
     @Override
@@ -89,7 +89,7 @@ public abstract class DocxContextImpl<T> implements DocxContext<T>, BlockFormatP
     @Override
     public Object getLastContentElement() {
         if (myContentContainer == this) {
-            final List<Object> content = getContent();
+            List<Object> content = getContent();
             return content != null && content.size() > 0 ? content.get(content.size() - 1) : null;
         } else {
             return myContentContainer.getLastContentElement();
@@ -97,7 +97,7 @@ public abstract class DocxContextImpl<T> implements DocxContext<T>, BlockFormatP
     }
 
     @Override
-    public void addContentElement(final Object element) {
+    public void addContentElement(Object element) {
         if (myContentContainer == this) {
             getContent().add(element);
         } else {
@@ -106,17 +106,17 @@ public abstract class DocxContextImpl<T> implements DocxContext<T>, BlockFormatP
     }
 
     @Override
-    public void setContentContainer(final ContentContainer container) {
+    public void setContentContainer(ContentContainer container) {
         myContentContainer = container;
     }
 
     @Override
-    public void setParaContainer(final ParaContainer container) {
+    public void setParaContainer(ParaContainer container) {
         myParaContainer = container;
     }
 
     @Override
-    public void setBlockFormatProvider(final BlockFormatProvider<T> formatProvider) {
+    public void setBlockFormatProvider(BlockFormatProvider<T> formatProvider) {
         myBlockFormatProviders.put(getContextFrame(), formatProvider);
         myBlockFormatProvider = formatProvider;
 
@@ -125,7 +125,7 @@ public abstract class DocxContextImpl<T> implements DocxContext<T>, BlockFormatP
     }
 
     @Override
-    public BlockFormatProvider<T> getBlockFormatProvider(final T node) {
+    public BlockFormatProvider<T> getBlockFormatProvider(T node) {
         return myBlockFormatProviders.get(node);
     }
 
@@ -135,12 +135,12 @@ public abstract class DocxContextImpl<T> implements DocxContext<T>, BlockFormatP
     }
 
     @Override
-    public void setRunContainer(final RunContainer container) {
+    public void setRunContainer(RunContainer container) {
         myRunContainer = container;
     }
 
     @Override
-    public void setRunFormatProvider(final RunFormatProvider<T> formatProvider) {
+    public void setRunFormatProvider(RunFormatProvider<T> formatProvider) {
         myRunFormatProviders.put(getContextFrame(), formatProvider);
         myRunFormatProvider = formatProvider;
 
@@ -149,7 +149,7 @@ public abstract class DocxContextImpl<T> implements DocxContext<T>, BlockFormatP
     }
 
     @Override
-    public RunFormatProvider<T> getRunFormatProvider(final T node) {
+    public RunFormatProvider<T> getRunFormatProvider(T node) {
         return myRunFormatProviders.get(node);
     }
 
@@ -195,48 +195,48 @@ public abstract class DocxContextImpl<T> implements DocxContext<T>, BlockFormatP
     }
 
     @Override
-    public void adjustPPrForFormatting(final PPr pP) {
+    public void adjustPPrForFormatting(PPr pP) {
 
     }
 
     @Override
-    public void getPPr(final PPr pPr) {
+    public void getPPr(PPr pPr) {
 
     }
 
     @Override
-    public void getParaRPr(final RPr rPr) {
+    public void getParaRPr(RPr rPr) {
 
     }
 
     @Override
-    public void addP(final P p) {
+    public void addP(P p) {
         myContentContainer.addContentElement(p);
     }
 
     @Override
-    public void addR(final R r) {
+    public void addR(R r) {
         getP().getContent().add(r);
     }
 
     @Override
-    public void getRPr(final RPr rPr) {
+    public void getRPr(RPr rPr) {
 
     }
 
     @Override
     public P getLastP() {
-        final Object o = getLastContentElement();
+        Object o = getLastContentElement();
         return o instanceof P ? (P) o : null;
     }
 
     @Override
     public R getLastR() {
-        final P p = myParaContainer.getLastP();
+        P p = myParaContainer.getLastP();
         if (p == null) return null;
-        final List<Object> content = p.getContent();
+        List<Object> content = p.getContent();
         if (content == null || content.size() == 0) return null;
-        final Object o = content.get(content.size() - 1);
+        Object o = content.get(content.size() - 1);
         return o instanceof R ? (R) o : null;
     }
 
@@ -308,7 +308,7 @@ public abstract class DocxContextImpl<T> implements DocxContext<T>, BlockFormatP
             StyleUtil.apply(blockRPr, rPr);
 
             // minimize the rPr
-            final RStyle rStyle = rPr.getRStyle();
+            RStyle rStyle = rPr.getRStyle();
             if (rStyle != null && rStyle.getVal() != null) {
                 Style style = getStyle(rStyle.getVal());
                 if (style != null) {
@@ -317,7 +317,7 @@ public abstract class DocxContextImpl<T> implements DocxContext<T>, BlockFormatP
                 }
             }
 
-            final PStyle pStyle = p.getPPr().getPStyle();
+            PStyle pStyle = p.getPPr().getPStyle();
             if (pStyle != null && pStyle.getVal() != null) {
                 Style style = getStyle(pStyle.getVal());
                 if (style != null) {
@@ -389,9 +389,9 @@ public abstract class DocxContextImpl<T> implements DocxContext<T>, BlockFormatP
      * @return CTBookmark
      */
     @Override
-    public CTBookmark createBookmarkStart(String bookmarkName, final boolean isBlockBookmark) {
+    public CTBookmark createBookmarkStart(String bookmarkName, boolean isBlockBookmark) {
         CTBookmark bm = myFactory.createCTBookmark();
-        final int id = getNextBookmarkId();
+        int id = getNextBookmarkId();
         bm.setId(BigInteger.valueOf(id));
 
         if (bookmarkName != null && !bookmarkName.isEmpty()) {
@@ -410,7 +410,7 @@ public abstract class DocxContextImpl<T> implements DocxContext<T>, BlockFormatP
     }
 
     @Override
-    public CTMarkupRange createBookmarkEnd(final CTBookmark bookmarkStart, final boolean isBlockBookmark) {
+    public CTMarkupRange createBookmarkEnd(CTBookmark bookmarkStart, boolean isBlockBookmark) {
         CTMarkupRange mr = myFactory.createCTMarkupRange();
         mr.setId(bookmarkStart.getId());
         JAXBElement<CTMarkupRange> bmEnd = myFactory.createBodyBookmarkEnd(mr);
@@ -424,7 +424,7 @@ public abstract class DocxContextImpl<T> implements DocxContext<T>, BlockFormatP
     }
 
     @Override
-    public P.Hyperlink createBookmarkHyperlink(final String bookmarkName, final String linkText) {
+    public P.Hyperlink createBookmarkHyperlink(String bookmarkName, String linkText) {
         P.Hyperlink h = MainDocumentPart.hyperlinkToBookmark(bookmarkName, linkText);
         getP().getContent().add(h);
         return null;
@@ -441,17 +441,17 @@ public abstract class DocxContextImpl<T> implements DocxContext<T>, BlockFormatP
     }
 
     @Override
-    public void addBlankLine(final int size, final String styleId) {
+    public void addBlankLine(int size, String styleId) {
         addBlankLine(BigInteger.valueOf(size), styleId);
     }
 
     @Override
-    public void addBlankLine(final long size, final String styleId) {
+    public void addBlankLine(long size, String styleId) {
         addBlankLine(BigInteger.valueOf(size), styleId);
     }
 
     @Override
-    public void addBlankLine(final BigInteger size, final String styleId) {
+    public void addBlankLine(BigInteger size, String styleId) {
         if (size.compareTo(BigInteger.ZERO) > 0) {
             // now add empty for spacing
             P p = myFactory.createP();
@@ -480,14 +480,14 @@ public abstract class DocxContextImpl<T> implements DocxContext<T>, BlockFormatP
     }
 
     @Override
-    public void addBlankLines(final int count) {
+    public void addBlankLines(int count) {
         if (count > 0) {
             // now add empty for spacing
             PPr pPr = myFactory.createPPr();
             myBlockFormatProvider.getPPr(pPr);
 
             PPr explicitPPr = myDocxHelper.getExplicitPPr(pPr);
-            final ParaRPr rPr = explicitPPr.getRPr();
+            ParaRPr rPr = explicitPPr.getRPr();
             BigInteger size = rPr.getSz().getVal().max(rPr.getSzCs().getVal());
 
             addBlankLine(size.multiply(BigInteger.valueOf(count)), null);
@@ -591,7 +591,7 @@ public abstract class DocxContextImpl<T> implements DocxContext<T>, BlockFormatP
     }
 
     @Override
-    public Text text(final String text) {
+    public Text text(String text) {
         R r = createR();
         Text textElem = addWrappedText();
         textElem.setValue(text);
@@ -610,7 +610,7 @@ public abstract class DocxContextImpl<T> implements DocxContext<T>, BlockFormatP
     }
 
     @Override
-    public Style getStyle(final String styleName) {
+    public Style getStyle(String styleName) {
         return myDocumentPart.getStyleDefinitionsPart().getStyleById(styleName);
     }
 
@@ -656,12 +656,12 @@ public abstract class DocxContextImpl<T> implements DocxContext<T>, BlockFormatP
     }
 
     @Override
-    public void renderFencedCodeLines(final CharSequence... lines) {
+    public void renderFencedCodeLines(CharSequence... lines) {
         renderFencedCodeLines(Arrays.asList(lines));
     }
 
     @Override
-    public void renderFencedCodeLines(final List<? extends CharSequence> lines) {
+    public void renderFencedCodeLines(List<? extends CharSequence> lines) {
         contextFramed(new Runnable() {
             @Override
             public void run() {
@@ -812,7 +812,7 @@ public abstract class DocxContextImpl<T> implements DocxContext<T>, BlockFormatP
     }
 
     @Override
-    public CTFtnEdn addFootnote(final BigInteger footnoteID) throws Docx4JException {
+    public CTFtnEdn addFootnote(BigInteger footnoteID) throws Docx4JException {
         // Add the note number in the run
         CTFtnEdnRef ftnednref = myFactory.createCTFtnEdnRef();
         JAXBElement<CTFtnEdnRef> ftnednrefWrapped = myFactory.createRFootnoteReference(ftnednref);
@@ -830,7 +830,7 @@ public abstract class DocxContextImpl<T> implements DocxContext<T>, BlockFormatP
         ftnRStyle.setVal(myRendererOptions.FOOTNOTE_ANCHOR_STYLE);
 
         // see if we need to create a new footnote id or can re-use existing one
-        final boolean haveID = footnoteID.compareTo(BigInteger.ZERO) > 0;
+        boolean haveID = footnoteID.compareTo(BigInteger.ZERO) > 0;
         BigInteger i = haveID ? footnoteID : BigInteger.valueOf(myFootnoteRef++);
         ftnednref.setId(i);
 
@@ -894,7 +894,7 @@ public abstract class DocxContextImpl<T> implements DocxContext<T>, BlockFormatP
         rPr.setRStyle(rStyle);
         rStyle.setVal(myRendererOptions.FOOTNOTE_ANCHOR_STYLE);
 
-        final FootnoteRef footnoteRef = myFactory.createRFootnoteRef();
+        FootnoteRef footnoteRef = myFactory.createRFootnoteRef();
         r1.getContent().add(footnoteRef);
 
         R r2 = myFactory.createR();

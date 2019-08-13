@@ -7,10 +7,10 @@ import com.vladsch.flexmark.ext.tables.*;
 import com.vladsch.flexmark.formatter.*;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.ast.Node;
+import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.format.MarkdownTable;
 import com.vladsch.flexmark.util.format.TableFormatOptions;
 import com.vladsch.flexmark.util.html.CellAlignment;
-import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.BasedSequenceImpl;
 
@@ -93,7 +93,7 @@ public class TableNodeFormatter implements NodeFormatter {
         ));
     }
 
-    private void render(final TableBlock node, final NodeFormatterContext context, MarkdownWriter markdown) {
+    private void render(TableBlock node, NodeFormatterContext context, MarkdownWriter markdown) {
         myTable = new MarkdownTable(options);
 
         switch (context.getRenderPurpose()) {
@@ -140,7 +140,7 @@ public class TableNodeFormatter implements NodeFormatter {
         myTable = null;
     }
 
-    private void render(final TableHead node, final NodeFormatterContext context, MarkdownWriter markdown) {
+    private void render(TableHead node, NodeFormatterContext context, MarkdownWriter markdown) {
         myTable.setSeparator(false);
         myTable.setHeader(true);
         context.renderChildren(node);
@@ -151,13 +151,13 @@ public class TableNodeFormatter implements NodeFormatter {
         context.renderChildren(node);
     }
 
-    private void render(final TableBody node, final NodeFormatterContext context, MarkdownWriter markdown) {
+    private void render(TableBody node, NodeFormatterContext context, MarkdownWriter markdown) {
         myTable.setSeparator(false);
         myTable.setHeader(false);
         context.renderChildren(node);
     }
 
-    private void render(final TableRow node, final NodeFormatterContext context, MarkdownWriter markdown) {
+    private void render(TableRow node, NodeFormatterContext context, MarkdownWriter markdown) {
         context.renderChildren(node);
         if (context.getRenderPurpose() == FORMAT) {
             if (!myTable.isSeparator()) myTable.nextRow();
@@ -166,7 +166,7 @@ public class TableNodeFormatter implements NodeFormatter {
         }
     }
 
-    private void render(final TableCaption node, final NodeFormatterContext context, MarkdownWriter markdown) {
+    private void render(TableCaption node, NodeFormatterContext context, MarkdownWriter markdown) {
         if (context.getRenderPurpose() == FORMAT) {
             myTable.setCaptionWithMarkers(node.getOpeningMarker(), node.getText(), node.getClosingMarker());
         } else {
@@ -182,7 +182,7 @@ public class TableNodeFormatter implements NodeFormatter {
         }
     }
 
-    private void render(final TableCell node, final NodeFormatterContext context, MarkdownWriter markdown) {
+    private void render(TableCell node, NodeFormatterContext context, MarkdownWriter markdown) {
         if (context.getRenderPurpose() == FORMAT) {
             BasedSequence text = node.getText();
             if (options.trimCellWhitespace) {
@@ -203,11 +203,11 @@ public class TableNodeFormatter implements NodeFormatter {
 
             if (!myTable.isSeparator() && options.spaceAroundPipes && (!node.getText().startsWith(" ") || parserTrimCellWhiteSpace)) markdown.append(' ');
 
-            final String[] childText = new String[] { "" };
+            String[] childText = new String[] { "" };
 
             context.translatingSpan(new TranslatingSpanRender() {
                 @Override
-                public void render(final NodeFormatterContext context, final MarkdownWriter writer) {
+                public void render(NodeFormatterContext context, MarkdownWriter writer) {
                     context.renderChildren(node);
                     childText[0] = writer.toString(-1);
                 }
@@ -239,7 +239,7 @@ public class TableNodeFormatter implements NodeFormatter {
 
     public static class Factory implements NodeFormatterFactory {
         @Override
-        public NodeFormatter create(final DataHolder options) {
+        public NodeFormatter create(DataHolder options) {
             return new TableNodeFormatter(options);
         }
     }

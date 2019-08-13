@@ -4,10 +4,10 @@ import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.ast.NodeVisitor;
 import com.vladsch.flexmark.util.ast.VisitHandler;
 import com.vladsch.flexmark.util.ast.Visitor;
+import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.format.MarkdownTable;
 import com.vladsch.flexmark.util.format.TableFormatOptions;
 import com.vladsch.flexmark.util.html.CellAlignment;
-import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 import java.util.ArrayList;
@@ -75,7 +75,7 @@ public class TableExtractingVisitor {
         return myTables.toArray(new MarkdownTable[0]);
     }
 
-    private void visit(final TableBlock node) {
+    private void visit(TableBlock node) {
         myTable = new MarkdownTable(options);
         myVisitor.visitChildren(node);
         myTables.add(myTable);
@@ -83,7 +83,7 @@ public class TableExtractingVisitor {
         myTable = null;
     }
 
-    private void visit(final TableHead node) {
+    private void visit(TableHead node) {
         myTable.setSeparator(false);
         myTable.setHeader(true);
         myVisitor.visitChildren(node);
@@ -94,22 +94,22 @@ public class TableExtractingVisitor {
         myVisitor.visitChildren(node);
     }
 
-    private void visit(final TableBody node) {
+    private void visit(TableBody node) {
         myTable.setSeparator(false);
         myTable.setHeader(false);
         myVisitor.visitChildren(node);
     }
 
-    private void visit(final TableRow node) {
+    private void visit(TableRow node) {
         myVisitor.visitChildren(node);
         if (!myTable.isSeparator()) myTable.nextRow();
     }
 
-    private void visit(final TableCaption node) {
+    private void visit(TableCaption node) {
         myTable.setCaptionWithMarkers(node.getOpeningMarker(), node.getText(), node.getClosingMarker());
     }
 
-    private void visit(final TableCell node) {
+    private void visit(TableCell node) {
         BasedSequence text = node.getText();
         if (options.trimCellWhitespace) {
             if (text.isBlank() && !text.isEmpty()) {

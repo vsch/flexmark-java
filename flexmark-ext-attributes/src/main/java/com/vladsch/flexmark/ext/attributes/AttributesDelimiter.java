@@ -9,15 +9,15 @@ public class AttributesDelimiter extends AttributesNode {
     public AttributesDelimiter() {
     }
 
-    public AttributesDelimiter(final BasedSequence chars) {
+    public AttributesDelimiter(BasedSequence chars) {
         super(chars);
     }
 
-    public AttributesDelimiter(final BasedSequence openingMarker, final BasedSequence text, final BasedSequence closingMarker) {
+    public AttributesDelimiter(BasedSequence openingMarker, BasedSequence text, BasedSequence closingMarker) {
         super(openingMarker, text, closingMarker);
     }
 
-    public AttributesDelimiter(final BasedSequence chars, final String attributesBlockText) {
+    public AttributesDelimiter(BasedSequence chars, String attributesBlockText) {
         super(chars, attributesBlockText);
     }
 }

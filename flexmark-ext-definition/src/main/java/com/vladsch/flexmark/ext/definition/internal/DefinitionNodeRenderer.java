@@ -47,14 +47,14 @@ public class DefinitionNodeRenderer implements NodeRenderer {
         return set;
     }
 
-    private void render(DefinitionList node, NodeRendererContext context, final HtmlWriter html) {
+    private void render(DefinitionList node, NodeRendererContext context, HtmlWriter html) {
         html.withAttr().tag("dl").indent();
         context.renderChildren(node);
         html.unIndent().tag("/dl");
     }
 
-    private void render(final DefinitionTerm node, final NodeRendererContext context, final HtmlWriter html) {
-        final Node childText = node.getFirstChild();
+    private void render(DefinitionTerm node, NodeRendererContext context, HtmlWriter html) {
+        Node childText = node.getFirstChild();
         if (childText != null) {
             html.srcPosWithEOL(node.getChars()).withAttr(CoreNodeRenderer.TIGHT_LIST_ITEM).withCondIndent().tagLine("dt", new Runnable() {
                 @Override
@@ -72,7 +72,7 @@ public class DefinitionNodeRenderer implements NodeRenderer {
         }
     }
 
-    private void render(final DefinitionItem node, final NodeRendererContext context, final HtmlWriter html) {
+    private void render(DefinitionItem node, NodeRendererContext context, HtmlWriter html) {
         if (listOptions.isTightListItem(node)) {
             html.srcPosWithEOL(node.getChars()).withAttr(CoreNodeRenderer.TIGHT_LIST_ITEM).withCondIndent().tagLine("dd", new Runnable() {
                 @Override
@@ -100,7 +100,7 @@ public class DefinitionNodeRenderer implements NodeRenderer {
 
     public static class Factory implements NodeRendererFactory {
         @Override
-        public NodeRenderer apply(final DataHolder options) {
+        public NodeRenderer apply(DataHolder options) {
             return new DefinitionNodeRenderer(options);
         }
     }

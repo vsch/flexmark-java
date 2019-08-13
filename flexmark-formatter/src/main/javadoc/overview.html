@@ -1,38 +1,45 @@
 <html>
 <head>
-<meta charset="UTF-8">
+  <meta charset="UTF-8">
 </head>
 <body>
 <p><strong>flexmark-java markdown formatter module</strong></p>
 <p>Outputs AST as formatted Markdown with user configurable options.</p>
 <p>Options for output control, pass via <code>DataHolder</code> taking method <code>parse()</code> method. The following
-options are available:</p>
+  options are available:</p>
 <p>Defined in <code>TaskListExtension</code> class:</p>
 <ul>
   <li><code>FlexmarkHtmlParser.LIST_CONTENT_INDENT</code>, default <code>true</code>, continuation lines of list items and
-    definitions indent to content column otherwise 4 spaces</li>
+    definitions indent to content column otherwise 4 spaces
+  </li>
   <li><code>FlexmarkHtmlParser.SETEXT_HEADINGS</code>, default <code>true</code>, if true then use Setext headings for h1
-    and h2</li>
+    and h2
+  </li>
   <li><code>FlexmarkHtmlParser.OUTPUT_UNKNOWN_TAGS</code>, default <code>false</code>, when true unprocessed tags will be
-    output, otherwise they are ignored</li>
+    output, otherwise they are ignored
+  </li>
   <li><code>FlexmarkHtmlParser.ORDERED_LIST_DELIMITER</code>, default <code>'.'</code>, delimiter for ordered items</li>
   <li><code>FlexmarkHtmlParser.UNORDERED_LIST_DELIMITER</code>, default <code>'*'</code>, delimiter for unordered list
-    items</li>
+    items
+  </li>
   <li><code>FlexmarkHtmlParser.DEFINITION_MARKER_SPACES</code>, default <code>3</code>, min spaces after <code>:</code> for
-    definitions</li>
+    definitions
+  </li>
   <li><code>FlexmarkHtmlParser.MIN_TABLE_SEPARATOR_COLUMN_WIDTH</code>, default <code>1</code>, min 1, minimum number of
     <code>-</code> in separator column, excluding alignment colons <code>:</code></li>
   <li><code>FlexmarkHtmlParser.MIN_TABLE_SEPARATOR_DASHES</code>, default <code>3</code>, min 3, minimum separator column
     width, including alignment colons <code>:</code></li>
   <li><code>FlexmarkHtmlParser.MIN_SETEXT_HEADING_MARKER_LENGTH</code>, default <code>3</code>, min 3, minimum setext
-    heading marker length</li>
+    heading marker length
+  </li>
   <li><code>FlexmarkHtmlParser.CODE_INDENT</code>, default 4 spaces, indent to use for indented code</li>
   <li><code>FlexmarkHtmlParser.EOL_IN_TITLE_ATTRIBUTE</code>, default <code>&quot; &quot;</code>, string to use in place of EOL in
-    image and link title attribute.</li>
+    image and link title attribute.
+  </li>
   <li><code>FlexmarkHtmlParser.NBSP_TEXT</code>, default <code>&quot; &quot;</code>, string to use in place of non-break-space</li>
   <li><code>FlexmarkHtmlParser.THEMATIC_BREAK</code>, default <code>&quot;*** ** * ** ***&quot;</code>, <code>&lt;hr&gt;</code> replacement</li>
 </ul>
 <p>Uses the excellent <a href="https://jsoup.org/">jsoup</a> HTML parsing library and emoji shortcuts using
-<a href="https://www.webfx.com/tools/emoji-cheat-sheet">Emoji-Cheat-Sheet.com</a></p>
+  <a href="https://www.webfx.com/tools/emoji-cheat-sheet">Emoji-Cheat-Sheet.com</a></p>
 </body>
 </html>

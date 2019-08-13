@@ -28,15 +28,15 @@ public class JekyllTagBlock extends Block {
         super(chars);
     }
 
-    public JekyllTagBlock(final BasedSequence chars, final List<BasedSequence> lineSegments) {
+    public JekyllTagBlock(BasedSequence chars, List<BasedSequence> lineSegments) {
         super(chars, lineSegments);
     }
 
-    public JekyllTagBlock(final List<BasedSequence> lineSegments) {
+    public JekyllTagBlock(List<BasedSequence> lineSegments) {
         super(lineSegments);
     }
 
-    public JekyllTagBlock(final BlockContent blockContent) {
+    public JekyllTagBlock(BlockContent blockContent) {
         super(blockContent);
     }
 

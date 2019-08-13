@@ -12,18 +12,18 @@ import java.util.HashSet;
 public class TextCollectingVisitor {
     private SegmentedSequenceBuilder out;
     private final NodeVisitor myVisitor;
-    private final HashSet<Class> myLineBreakNodes;
+    private final HashSet<Class<?>> myLineBreakNodes;
 
-    protected static Class[] concatArrays(Class[]... classes) {
+    protected static Class<?>[] concatArrays(Class<?>[]... classes) {
         int total = 0;
-        for (Class[] classList : classes) {
+        for (Class<?>[] classList : classes) {
             total += classList.length;
         }
 
-        Class[] result = new Class[total];
+        Class<?>[] result = new Class<?>[total];
 
         int index = 0;
-        for (Class[] classList : classes) {
+        for (Class<?>[] classList : classes) {
             System.arraycopy(classList, 0, result, index, classList.length);
             index += classList.length;
         }
@@ -31,7 +31,7 @@ public class TextCollectingVisitor {
         return result;
     }
 
-    public TextCollectingVisitor(Class... lineBreakNodes) {
+    public TextCollectingVisitor(Class<?>... lineBreakNodes) {
         myLineBreakNodes = lineBreakNodes.length == 0 ? null : new HashSet<>(Arrays.asList(lineBreakNodes));
 
         myVisitor = new NodeVisitor(
@@ -74,8 +74,8 @@ public class TextCollectingVisitor {
         )
         {
             @Override
-            public void visit(final Node node) {
-                VisitHandler handler = myCustomHandlersMap.get(node.getClass());
+            public void visit(Node node) {
+                VisitHandler<?> handler = myCustomHandlersMap.get(node.getClass());
                 if (handler != null) {
                     handler.visit(node);
                 } else {
@@ -126,7 +126,7 @@ public class TextCollectingVisitor {
     }
 
     private void visit(HardLineBreak node) {
-        final BasedSequence chars = node.getChars();
+        BasedSequence chars = node.getChars();
         out.append(chars.subSequence(chars.length() - 1, chars.length()));
     }
 

@@ -35,26 +35,26 @@ public class NodeAttributeRepository implements Map<Node, ArrayList<AttributesNo
     }
 
     @Override
-    public boolean containsKey(final Object key) {
+    public boolean containsKey(Object key) {
         return nodeAttributesHashMap.containsKey(key);
     }
 
     @Override
-    public boolean containsValue(final Object value) {
+    public boolean containsValue(Object value) {
         return nodeAttributesHashMap.containsValue(value);
     }
 
     @Override
-    public ArrayList<AttributesNode> get(final Object key) {
+    public ArrayList<AttributesNode> get(Object key) {
         return nodeAttributesHashMap.get(key);
     }
 
     @Override
-    public ArrayList<AttributesNode> put(final Node key, final ArrayList<AttributesNode> value) {
+    public ArrayList<AttributesNode> put(Node key, ArrayList<AttributesNode> value) {
         return nodeAttributesHashMap.put(key, value);
     }
 
-    public ArrayList<AttributesNode> put(final Node key, final AttributesNode value) {
+    public ArrayList<AttributesNode> put(Node key, AttributesNode value) {
         ArrayList<AttributesNode> another = nodeAttributesHashMap.get(key);
         if (another == null) {
             another = new ArrayList<AttributesNode>();
@@ -65,12 +65,12 @@ public class NodeAttributeRepository implements Map<Node, ArrayList<AttributesNo
     }
 
     @Override
-    public ArrayList<AttributesNode> remove(final Object key) {
+    public ArrayList<AttributesNode> remove(Object key) {
         return nodeAttributesHashMap.remove(key);
     }
 
     @Override
-    public void putAll(final Map<? extends Node, ? extends ArrayList<AttributesNode>> m) {
+    public void putAll(Map<? extends Node, ? extends ArrayList<AttributesNode>> m) {
         nodeAttributesHashMap.putAll(m);
     }
 

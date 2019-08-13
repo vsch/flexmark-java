@@ -1,6 +1,7 @@
 package com.vladsch.flexmark.docx.converter.util;
 
-import org.docx4j.wml.*;
+import org.docx4j.wml.ParaRPr;
+import org.docx4j.wml.RPr;
 
 public class AttributeRunFormatProvider<T> extends RunFormatProviderBase<T> {
     final public AttributeFormat myAttributeFormat;

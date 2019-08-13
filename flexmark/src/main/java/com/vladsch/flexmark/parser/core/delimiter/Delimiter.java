@@ -42,19 +42,19 @@ public class Delimiter implements DelimiterRun {
         return next;
     }
 
-    public void setMatched(final boolean matched) {
+    public void setMatched(boolean matched) {
         this.matched = matched;
     }
 
-    public void setPrevious(final Delimiter previous) {
+    public void setPrevious(Delimiter previous) {
         this.previous = previous;
     }
 
-    public void setNext(final Delimiter next) {
+    public void setNext(Delimiter next) {
         this.next = next;
     }
 
-    public void setNumDelims(final int numDelims) {
+    public void setNumDelims(int numDelims) {
         this.numDelims = numDelims;
     }
 

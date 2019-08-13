@@ -7,7 +7,7 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 import java.io.IOException;
 import java.util.List;
 
-public abstract class MarkdownWriterBase<M extends MarkdownWriterBase<M, N, C>, N, C extends NodeContext<N,C>> implements LineFormattingAppendable {
+public abstract class MarkdownWriterBase<M extends MarkdownWriterBase<M, N, C>, N, C extends NodeContext<N, C>> implements LineFormattingAppendable {
     protected final LineFormattingAppendable myAppendable;
     protected C context;
 

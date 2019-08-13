@@ -18,7 +18,7 @@ public class HtmlMarkdownWriter extends MarkdownWriterBase<HtmlMarkdownWriter, N
         Node node = context.getCurrentNode();
 
         if (node instanceof Element) {
-            Element element = (Element)node;
+            Element element = (Element) node;
 
             while (element.nextElementSibling() == null) {
                 Element parent = element.parent();

@@ -30,8 +30,8 @@ public class AbbreviationRepository extends NodeRepository<AbbreviationBlock> {
     }
 
     @Override
-    public Set<AbbreviationBlock> getReferencedElements(final Node parent) {
-        final HashSet<AbbreviationBlock> references = new HashSet<>();
+    public Set<AbbreviationBlock> getReferencedElements(Node parent) {
+        HashSet<AbbreviationBlock> references = new HashSet<>();
         visitNodes(parent, value -> {
             if (value instanceof Abbreviation) {
                 AbbreviationBlock reference = ((Abbreviation) value).getReferenceNode(AbbreviationRepository.this);

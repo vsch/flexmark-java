@@ -29,7 +29,7 @@ public class EmojiNodeRenderer implements NodeRenderer {
     }
 
     private void render(Emoji node, NodeRendererContext context, HtmlWriter html) {
-        final EmojiResolvedShortcut shortcut = EmojiResolvedShortcut.getEmojiText(node, myOptions.useShortcutType, myOptions.useImageType, myOptions.rootImagePath);
+        EmojiResolvedShortcut shortcut = EmojiResolvedShortcut.getEmojiText(node, myOptions.useShortcutType, myOptions.useImageType, myOptions.rootImagePath);
 
         if (shortcut.emoji == null || shortcut.emojiText == null) {
             // output as text
@@ -55,7 +55,7 @@ public class EmojiNodeRenderer implements NodeRenderer {
 
     public static class Factory implements NodeRendererFactory {
         @Override
-        public NodeRenderer apply(final DataHolder options) {
+        public NodeRenderer apply(DataHolder options) {
             return new EmojiNodeRenderer(options);
         }
     }

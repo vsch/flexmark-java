@@ -3,7 +3,9 @@ package com.vladsch.flexmark.samples;
 import com.vladsch.flexmark.html.renderer.ResolvedLink;
 import com.vladsch.flexmark.html2md.converter.*;
 import com.vladsch.flexmark.parser.Parser;
-import com.vladsch.flexmark.util.data.*;
+import com.vladsch.flexmark.util.data.DataHolder;
+import com.vladsch.flexmark.util.data.MutableDataHolder;
+import com.vladsch.flexmark.util.data.MutableDataSet;
 import org.jsoup.nodes.Element;
 import org.jsoup.nodes.Node;
 
@@ -85,12 +87,11 @@ public class HtmlToMarkdownCustomizedSample {
 
         static class Factory implements HtmlNodeRendererFactory {
             @Override
-            public HtmlNodeRenderer apply(final DataHolder options) {
+            public HtmlNodeRenderer apply(DataHolder options) {
                 return new CustomHtmlNodeConverter(options);
             }
         }
     }
-
 
     public static void main(String[] args) {
         MutableDataSet options = new MutableDataSet()

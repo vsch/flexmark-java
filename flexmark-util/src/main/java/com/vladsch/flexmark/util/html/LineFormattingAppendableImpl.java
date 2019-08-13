@@ -678,8 +678,7 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
             //    appendImpl(EOL);
             //}
             appendImpl(EOL);
-        }
-        else {
+        } else {
             rawIndentsOnFirstEol();
         }
         return this;

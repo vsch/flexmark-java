@@ -1,11 +1,11 @@
 package com.vladsch.flexmark.html2md.converter;
 
 import com.vladsch.flexmark.util.Utils;
-import com.vladsch.flexmark.util.format.TableFormatOptions;
-import com.vladsch.flexmark.util.html.CellAlignment;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSetter;
+import com.vladsch.flexmark.util.format.TableFormatOptions;
+import com.vladsch.flexmark.util.html.CellAlignment;
 
 import java.util.Map;
 import java.util.regex.Pattern;

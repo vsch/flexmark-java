@@ -15,7 +15,7 @@ import java.util.Set;
 public class EnumeratedReferenceRepository extends NodeRepository<EnumeratedReferenceBlock> {
     private ArrayList<EnumeratedReferenceBlock> referencedEnumeratedReferenceBlocks = new ArrayList<EnumeratedReferenceBlock>();
 
-    public static String getType(final String text) {
+    public static String getType(String text) {
         int pos = text.lastIndexOf(':');
         if (pos > 0) {
             return text.subSequence(0, pos).toString();
@@ -45,8 +45,8 @@ public class EnumeratedReferenceRepository extends NodeRepository<EnumeratedRefe
     }
 
     @Override
-    public Set<EnumeratedReferenceBlock> getReferencedElements(final Node parent) {
-        final HashSet<EnumeratedReferenceBlock> references = new HashSet<>();
+    public Set<EnumeratedReferenceBlock> getReferencedElements(Node parent) {
+        HashSet<EnumeratedReferenceBlock> references = new HashSet<>();
         visitNodes(parent, value -> {
             if (value instanceof EnumeratedReferenceBase) {
                 EnumeratedReferenceBlock reference = ((EnumeratedReferenceBase) value).getReferenceNode(EnumeratedReferenceRepository.this);

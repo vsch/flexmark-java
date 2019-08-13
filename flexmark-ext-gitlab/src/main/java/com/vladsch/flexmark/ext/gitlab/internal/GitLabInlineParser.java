@@ -5,9 +5,9 @@ import com.vladsch.flexmark.ext.gitlab.GitLabDel;
 import com.vladsch.flexmark.ext.gitlab.GitLabInline;
 import com.vladsch.flexmark.ext.gitlab.GitLabIns;
 import com.vladsch.flexmark.parser.InlineParser;
-import com.vladsch.flexmark.parser.LightInlineParser;
 import com.vladsch.flexmark.parser.InlineParserExtension;
 import com.vladsch.flexmark.parser.InlineParserExtensionFactory;
+import com.vladsch.flexmark.parser.LightInlineParser;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.BasedSequenceImpl;
@@ -20,21 +20,21 @@ public class GitLabInlineParser implements InlineParserExtension {
     private final List<GitLabInline> openInlines;
     private final GitLabOptions options;
 
-    public GitLabInlineParser(final LightInlineParser inlineParser) {
+    public GitLabInlineParser(LightInlineParser inlineParser) {
         openInlines = new ArrayList<GitLabInline>();
         options = new GitLabOptions(inlineParser.getDocument());
     }
 
     @Override
-    public void finalizeDocument(final InlineParser inlineParser) {
+    public void finalizeDocument(InlineParser inlineParser) {
 
     }
 
     @Override
-    public void finalizeBlock(final InlineParser inlineParser) {
+    public void finalizeBlock(InlineParser inlineParser) {
         // convert any unclosed ones to text
         for (int j = openInlines.size(); j-- > 0; ) {
-            final GitLabInline gitLabInline = openInlines.get(j);
+            GitLabInline gitLabInline = openInlines.get(j);
             Text textNode = new Text(gitLabInline.getChars());
             gitLabInline.insertBefore(textNode);
             gitLabInline.unlink();
@@ -44,9 +44,9 @@ public class GitLabInlineParser implements InlineParserExtension {
     }
 
     @Override
-    public boolean parse(final LightInlineParser inlineParser) {
-        final char firstChar = inlineParser.peek();
-        final char secondChar = inlineParser.peek(1);
+    public boolean parse(LightInlineParser inlineParser) {
+        char firstChar = inlineParser.peek();
+        char secondChar = inlineParser.peek(1);
         if ((firstChar == '{' || firstChar == '[') && (options.insParser && secondChar == '+' || options.delParser && secondChar == '-')) {
             // possible open, if matched close
             BasedSequence input = inlineParser.getInput().subSequence(inlineParser.getIndex());
@@ -65,18 +65,18 @@ public class GitLabInlineParser implements InlineParserExtension {
             BasedSequence matchOpen = BasedSequenceImpl.of(secondChar == ']' ? (firstChar == '+' ? "[+" : "[-") : (firstChar == '+' ? "{+" : "{-"));
 
             for (int i = openInlines.size(); i-- > 0; ) {
-                final GitLabInline open = openInlines.get(i);
-                final BasedSequence openMarker = open.getChars();
+                GitLabInline open = openInlines.get(i);
+                BasedSequence openMarker = open.getChars();
                 if (openMarker.equals(matchOpen)) {
                     // this one is now closed, we remove all intervening ones since they did not match
                     inlineParser.setIndex(inlineParser.getIndex() + 2);
-                    final BasedSequence closingMarker = input.subSequence(0, 2);
+                    BasedSequence closingMarker = input.subSequence(0, 2);
                     open.setOpeningMarker(openMarker);
                     open.setClosingMarker(closingMarker);
                     open.setText(openMarker.baseSubSequence(openMarker.getEndOffset(), closingMarker.getStartOffset()));
 
                     inlineParser.flushTextNode();
-                    final Node last = inlineParser.getBlock().getLastChild();
+                    Node last = inlineParser.getBlock().getLastChild();
                     inlineParser.moveNodes(open, last);
                     //open.appendChild(textNode);
                     //inlineParser.getBlock().appendChild(open);
@@ -111,7 +111,7 @@ public class GitLabInlineParser implements InlineParserExtension {
         }
 
         @Override
-        public InlineParserExtension apply(final LightInlineParser lightInlineParser) {
+        public InlineParserExtension apply(LightInlineParser lightInlineParser) {
             return new GitLabInlineParser(lightInlineParser);
         }
 

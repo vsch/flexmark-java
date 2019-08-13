@@ -9,9 +9,9 @@ import com.vladsch.flexmark.test.DumpSpecReader;
 import com.vladsch.flexmark.util.ast.IParse;
 import com.vladsch.flexmark.util.ast.IRender;
 import com.vladsch.flexmark.util.ast.Node;
-import com.vladsch.flexmark.util.format.TableFormatOptions;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
+import com.vladsch.flexmark.util.format.TableFormatOptions;
 import org.junit.ComparisonFailure;
 import org.junit.runners.Parameterized;
 
@@ -109,14 +109,14 @@ public class ComboAppHtmlConverterTest extends ComboSpecTestCase {
     }
 
     @Override
-    public SpecReader create(InputStream inputStream, final String fileUrl) {
+    public SpecReader create(InputStream inputStream, String fileUrl) {
         dumpSpecReader = new HtmlSpecReader(inputStream, this, fileUrl, this);
         return dumpSpecReader;
     }
 
     // reverse source and html
     @Override
-    protected void assertRendering(final UrlString fileUrl, String source, String expectedHtml, String optionsSet) {
+    protected void assertRendering(UrlString fileUrl, String source, String expectedHtml, String optionsSet) {
         DataHolder options = optionsSet == null ? null : getOptions(example(), optionsSet);
         String parseSource = expectedHtml;
 

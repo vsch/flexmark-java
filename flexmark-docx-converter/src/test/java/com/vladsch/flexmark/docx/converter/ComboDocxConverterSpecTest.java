@@ -26,9 +26,9 @@ import com.vladsch.flexmark.superscript.SuperscriptExtension;
 import com.vladsch.flexmark.test.ComboSpecTestCase;
 import com.vladsch.flexmark.util.ast.IRender;
 import com.vladsch.flexmark.util.ast.Node;
-import com.vladsch.flexmark.util.html.Attributes;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
+import com.vladsch.flexmark.util.html.Attributes;
 import org.apache.log4j.Logger;
 import org.apache.log4j.varia.NullAppender;
 import org.docx4j.Docx4J;
@@ -145,10 +145,10 @@ public class ComboDocxConverterSpecTest extends ComboSpecTestCase {
     }
 
     @Override
-    protected void testCase(final Node node, final DataHolder options) {
+    protected void testCase(Node node, DataHolder options) {
         if (!DUMP_TEST_CASE_FILES) return;
 
-        final SpecExample specExample = example();
+        SpecExample specExample = example();
         if (!specExample.isFullSpecExample() && !specExample.getSection().isEmpty()) {
             // write it out to file, hard-coded for now                    IGNORE
             File file = new File(String.format("%s%s%s_%d.docx", PROJECT_ROOT_DIRECTORY, FILE_TEST_CASE_DUMP_LOCATION, specExample.getSection(), specExample.getExampleNumber()));
@@ -166,8 +166,8 @@ public class ComboDocxConverterSpecTest extends ComboSpecTestCase {
                 ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
                 try {
                     mlPackage.save(outputStream, Docx4J.FLAG_SAVE_FLAT_XML);
-                    final String xml = outputStream.toString("UTF-8");
-                    final String s = XmlDocxSorter.sortDocumentParts(xml);
+                    String xml = outputStream.toString("UTF-8");
+                    String s = XmlDocxSorter.sortDocumentParts(xml);
                     FileWriter fileWriter = new FileWriter(file2);
                     fileWriter.append(s);
                     fileWriter.append('\n');
@@ -189,7 +189,7 @@ public class ComboDocxConverterSpecTest extends ComboSpecTestCase {
     public void addSpecExample(SpecExample example, Node node, DataHolder options, boolean ignoredCase, String actualHTML, String actualAST) {
         if (!DUMP_ALL_TESTS_FILES) return;
 
-        final boolean failed = !ignoredCase && !actualHTML.equals(example.getHtml());
+        boolean failed = !ignoredCase && !actualHTML.equals(example.getHtml());
 
         // add source information
         myDocxContext.createP(myDocxContext.getRenderingOptions().HEADING_3);
@@ -219,10 +219,10 @@ public class ComboDocxConverterSpecTest extends ComboSpecTestCase {
         }
 
         StringBuilder header = new StringBuilder();
-        final String section = example.getSection();
+        String section = example.getSection();
 
         header.append(section == null ? "" : section.trim()).append(": ").append(example.getExampleNumber());
-        final String optionsSet = example.getOptionsSet();
+        String optionsSet = example.getOptionsSet();
         myDocxContext.text(header.toString());
 
         if (optionsSet != null) {
@@ -238,7 +238,7 @@ public class ComboDocxConverterSpecTest extends ComboSpecTestCase {
         myDocxContext.createHorizontalLine();
 
         if (example.hasComment()) {
-            final String comment = example.getComment();
+            String comment = example.getComment();
             String[] lines = comment.split("\n\\s*\n");
             for (String line : lines) {
                 String trimmed = line.trim();
@@ -272,27 +272,27 @@ public class ComboDocxConverterSpecTest extends ComboSpecTestCase {
 
         myDocxContext = new DocxContextImpl<Node>(myPackage, null) {
             @Override
-            public Attributes extendRenderingNodeAttributes(final AttributablePart part, final Attributes attributes) {
+            public Attributes extendRenderingNodeAttributes(AttributablePart part, Attributes attributes) {
                 return null;
             }
 
             @Override
-            public Attributes extendRenderingNodeAttributes(final Node node, final AttributablePart part, final Attributes attributes) {
+            public Attributes extendRenderingNodeAttributes(Node node, AttributablePart part, Attributes attributes) {
                 return null;
             }
 
             @Override
-            public String getNodeId(final Node node) {
+            public String getNodeId(Node node) {
                 return null;
             }
 
             @Override
-            public String getValidBookmarkName(final String id) {
+            public String getValidBookmarkName(String id) {
                 return null;
             }
 
             @Override
-            public Node getNodeFromId(final String nodeId) {
+            public Node getNodeFromId(String nodeId) {
                 return null;
             }
         };
@@ -318,8 +318,8 @@ public class ComboDocxConverterSpecTest extends ComboSpecTestCase {
             mlPackage.save(file, Docx4J.FLAG_SAVE_ZIP_FILE);
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
             mlPackage.save(outputStream, Docx4J.FLAG_SAVE_FLAT_XML);
-            final String xml = outputStream.toString("UTF-8");
-            final String s = XmlDocxSorter.sortDocumentParts(xml);
+            String xml = outputStream.toString("UTF-8");
+            String s = XmlDocxSorter.sortDocumentParts(xml);
             FileWriter fileWriter = new FileWriter(file2);
             fileWriter.append(s);
             fileWriter.append('\n');

@@ -1,11 +1,11 @@
 package com.vladsch.flexmark.html2md.converter;
 
 import com.vladsch.flexmark.ast.Reference;
-import com.vladsch.flexmark.html2md.converter.internal.HtmlConverterCoreNodeRenderer;
 import com.vladsch.flexmark.html.renderer.HeaderIdGeneratorFactory;
 import com.vladsch.flexmark.html.renderer.LinkStatus;
 import com.vladsch.flexmark.html.renderer.LinkType;
 import com.vladsch.flexmark.html.renderer.ResolvedLink;
+import com.vladsch.flexmark.html2md.converter.internal.HtmlConverterCoreNodeRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.Ref;
 import com.vladsch.flexmark.util.Utils;
@@ -770,19 +770,19 @@ public class FlexmarkHtmlConverter {
             //ResolvedLink resolvedLink = resolvedLinks.get(urlSeq);
             ResolvedLink resolvedLink;
             //if (resolvedLink == null) {
-                resolvedLink = new ResolvedLink(linkType, urlSeq, attributes);
+            resolvedLink = new ResolvedLink(linkType, urlSeq, attributes);
 
-                if (!urlSeq.isEmpty()) {
-                    Node currentNode = getCurrentNode();
+            if (!urlSeq.isEmpty()) {
+                Node currentNode = getCurrentNode();
 
-                    for (HtmlLinkResolver htmlLinkResolver : myHtmlLinkResolvers) {
-                        resolvedLink = htmlLinkResolver.resolveLink(currentNode, this, resolvedLink);
-                        if (resolvedLink.getStatus() != LinkStatus.UNKNOWN) break;
-                    }
+                for (HtmlLinkResolver htmlLinkResolver : myHtmlLinkResolvers) {
+                    resolvedLink = htmlLinkResolver.resolveLink(currentNode, this, resolvedLink);
+                    if (resolvedLink.getStatus() != LinkStatus.UNKNOWN) break;
                 }
+            }
 
-                // put it in the map
-                //resolvedLinks.put(urlSeq, resolvedLink);
+            // put it in the map
+            //resolvedLinks.put(urlSeq, resolvedLink);
             //}
 
             return resolvedLink;

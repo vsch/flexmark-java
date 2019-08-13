@@ -9,19 +9,19 @@ public class UrlString {
     public static final String TEST_RESOURCES = "/test/resources/";
     private final String fileUrl;
 
-    public UrlString(final String fileUrl) {
+    public UrlString(String fileUrl) {
         this(fileUrl, 0);
     }
 
-    public UrlString(final String fileUrl, int lineNumber) {
+    public UrlString(String fileUrl, int lineNumber) {
         this.fileUrl = (lineNumber > 0) ? fileUrl + ":" + (lineNumber + 1) : fileUrl;
     }
 
-    public UrlString(final URL fileUrl) {
+    public UrlString(URL fileUrl) {
         this(adjustedFileUrl(fileUrl));
     }
 
-    public UrlString(final URL fileUrl, int lineNumber) {
+    public UrlString(URL fileUrl, int lineNumber) {
         this(adjustedFileUrl(fileUrl), lineNumber);
     }
 
@@ -30,7 +30,7 @@ public class UrlString {
         return fileUrl;
     }
 
-    public static String adjustedFileUrl(final URL url) {
+    public static String adjustedFileUrl(URL url) {
         String externalForm = url.toExternalForm();
         if (externalForm.startsWith("file:/")) {
             String noFileProtocol = externalForm.substring("file:".length());

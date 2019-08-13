@@ -6,7 +6,7 @@ import com.vladsch.flexmark.util.ast.Node;
 public interface HtmlIdGenerator {
     HtmlIdGenerator NULL = new HtmlIdGenerator() {
         @Override
-        public void generateIds(final Document document) {
+        public void generateIds(Document document) {
 
         }
 
@@ -21,7 +21,7 @@ public interface HtmlIdGenerator {
         }
     };
 
-    void generateIds(final Document document);
+    void generateIds(Document document);
     String getId(Node node);
     String getId(CharSequence text);
 }

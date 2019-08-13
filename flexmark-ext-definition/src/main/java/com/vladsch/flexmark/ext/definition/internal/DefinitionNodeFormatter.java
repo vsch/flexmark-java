@@ -60,11 +60,11 @@ public class DefinitionNodeFormatter implements NodeFormatter {
         context.renderChildren(node);
     }
 
-    private void render(final DefinitionTerm node, final NodeFormatterContext context, MarkdownWriter markdown) {
+    private void render(DefinitionTerm node, NodeFormatterContext context, MarkdownWriter markdown) {
         context.renderChildren(node);
     }
 
-    private void render(final DefinitionItem node, final NodeFormatterContext context, final MarkdownWriter markdown) {
+    private void render(DefinitionItem node, NodeFormatterContext context, MarkdownWriter markdown) {
         BasedSequence openMarkerChars = node.getChars().prefixOf(node.getFirstChild().getChars());
         BasedSequence openMarker = openMarkerChars.subSequence(0, 1);
         BasedSequence openMarkerSpaces = openMarkerChars.subSequence(1);
@@ -101,7 +101,7 @@ public class DefinitionNodeFormatter implements NodeFormatter {
 
     public static class Factory implements NodeFormatterFactory {
         @Override
-        public NodeFormatter create(final DataHolder options) {
+        public NodeFormatter create(DataHolder options) {
             return new DefinitionNodeFormatter(options);
         }
     }

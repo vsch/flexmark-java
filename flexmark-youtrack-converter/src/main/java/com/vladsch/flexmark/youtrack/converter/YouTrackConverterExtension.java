@@ -27,8 +27,8 @@ public class YouTrackConverterExtension implements Parser.ParserExtension, HtmlR
     }
 
     @Override
-    public void rendererOptions(final MutableDataHolder options) {
-        final String rendererType = HtmlRenderer.TYPE.getFrom(options);
+    public void rendererOptions(MutableDataHolder options) {
+        String rendererType = HtmlRenderer.TYPE.getFrom(options);
         if (rendererType.equals("HTML")) {
             // add youtrack equivalence
             HtmlRenderer.addRenderTypeEquivalence(options, "YOUTRACK", "JIRA");
@@ -39,7 +39,7 @@ public class YouTrackConverterExtension implements Parser.ParserExtension, HtmlR
     }
 
     @Override
-    public void parserOptions(final MutableDataHolder options) {
+    public void parserOptions(MutableDataHolder options) {
 
     }
 

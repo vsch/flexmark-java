@@ -1,8 +1,9 @@
 package com.vladsch.flexmark.parser;
 
-import java.util.function.Function;
 import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.data.DataHolder;
+
+import java.util.function.Function;
 
 /**
  * Processing of elements which are based on a link ref: [] or ![]

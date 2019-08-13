@@ -70,7 +70,7 @@ public class TableNodeRenderer implements NodeRenderer {
         ));
     }
 
-    private void render(final TableBlock node, final NodeRendererContext context, HtmlWriter html) {
+    private void render(TableBlock node, NodeRendererContext context, HtmlWriter html) {
         if (!options.className.isEmpty()) {
             html.attr("class", options.className);
         }
@@ -83,7 +83,7 @@ public class TableNodeRenderer implements NodeRenderer {
         }).line();
     }
 
-    private void render(final TableHead node, final NodeRendererContext context, HtmlWriter html) {
+    private void render(TableHead node, NodeRendererContext context, HtmlWriter html) {
         html.withAttr().withCondIndent().tagLine("thead", new Runnable() {
             @Override
             public void run() {
@@ -96,7 +96,7 @@ public class TableNodeRenderer implements NodeRenderer {
 
     }
 
-    private void render(final TableBody node, final NodeRendererContext context, HtmlWriter html) {
+    private void render(TableBody node, NodeRendererContext context, HtmlWriter html) {
         html.withAttr().withCondIndent().tagLine("tbody", new Runnable() {
             @Override
             public void run() {
@@ -105,7 +105,7 @@ public class TableNodeRenderer implements NodeRenderer {
         });
     }
 
-    private void render(final TableRow node, final NodeRendererContext context, HtmlWriter html) {
+    private void render(TableRow node, NodeRendererContext context, HtmlWriter html) {
         html.srcPos(node.getChars()).withAttr().tagLine("tr", new Runnable() {
             @Override
             public void run() {
@@ -114,7 +114,7 @@ public class TableNodeRenderer implements NodeRenderer {
         });
     }
 
-    private void render(final TableCaption node, final NodeRendererContext context, HtmlWriter html) {
+    private void render(TableCaption node, NodeRendererContext context, HtmlWriter html) {
         html.srcPos(node.getChars()).withAttr().tagLine("caption", new Runnable() {
             @Override
             public void run() {
@@ -152,7 +152,7 @@ public class TableNodeRenderer implements NodeRenderer {
 
     public static class Factory implements NodeRendererFactory {
         @Override
-        public NodeRenderer apply(final DataHolder options) {
+        public NodeRenderer apply(DataHolder options) {
             return new TableNodeRenderer(options);
         }
     }

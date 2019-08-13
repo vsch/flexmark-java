@@ -58,8 +58,8 @@ public class MacroDefinitionRepository extends NodeRepository<MacroDefinitionBlo
     }
 
     @Override
-    public Set<MacroDefinitionBlock> getReferencedElements(final Node parent) {
-        final HashSet<MacroDefinitionBlock> references = new HashSet<>();
+    public Set<MacroDefinitionBlock> getReferencedElements(Node parent) {
+        HashSet<MacroDefinitionBlock> references = new HashSet<>();
         visitNodes(parent, value -> {
             if (value instanceof MacroReference) {
                 MacroDefinitionBlock reference = ((MacroReference) value).getReferenceNode(MacroDefinitionRepository.this);

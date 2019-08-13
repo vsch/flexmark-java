@@ -28,20 +28,20 @@ public class MacroReference extends Node implements DelimitedNode, DoNotDecorate
     }
 
     @Override
-    public MacroDefinitionBlock getReferenceNode(final Document document) {
+    public MacroDefinitionBlock getReferenceNode(Document document) {
         if (myMacroDefinitionBlock != null || text.isEmpty()) return myMacroDefinitionBlock;
         myMacroDefinitionBlock = getMacroDefinitionBlock(document.get(MacrosExtension.MACRO_DEFINITIONS));
         return myMacroDefinitionBlock;
     }
 
     @Override
-    public MacroDefinitionBlock getReferenceNode(final MacroDefinitionRepository repository) {
+    public MacroDefinitionBlock getReferenceNode(MacroDefinitionRepository repository) {
         if (myMacroDefinitionBlock != null || text.isEmpty()) return myMacroDefinitionBlock;
         myMacroDefinitionBlock = getMacroDefinitionBlock(repository);
         return myMacroDefinitionBlock;
     }
 
-    public MacroDefinitionBlock getMacroDefinitionBlock(final MacroDefinitionRepository repository) {
+    public MacroDefinitionBlock getMacroDefinitionBlock(MacroDefinitionRepository repository) {
         return text.isEmpty() ? null : repository.get(text.toString());
     }
 

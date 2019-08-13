@@ -61,7 +61,7 @@ public class JekyllTag extends Node {
         return parameters;
     }
 
-    public void setParameters(final BasedSequence parameters) {
+    public void setParameters(BasedSequence parameters) {
         this.parameters = parameters;
     }
 

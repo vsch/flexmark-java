@@ -8,9 +8,9 @@ import com.vladsch.flexmark.ext.media.tags.PictureLink;
 import com.vladsch.flexmark.ext.media.tags.VideoLink;
 import com.vladsch.flexmark.parser.block.NodePostProcessor;
 import com.vladsch.flexmark.parser.block.NodePostProcessorFactory;
-import com.vladsch.flexmark.util.ast.NodeTracker;
 import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.Node;
+import com.vladsch.flexmark.util.ast.NodeTracker;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
@@ -24,7 +24,7 @@ public class MediaTagsNodePostProcessor extends NodePostProcessor {
             Node previous = node.getPrevious();
 
             if (previous instanceof Text) {
-                final BasedSequence chars = previous.getChars();
+                BasedSequence chars = previous.getChars();
                 if (chars.isContinuedBy(node.getChars())) {
                     AbstractMediaLink mediaLink;
                     if (chars.endsWith(AudioLink.PREFIX) && !isEscaped(chars, AudioLink.PREFIX)) { // AudioLink
@@ -54,7 +54,7 @@ public class MediaTagsNodePostProcessor extends NodePostProcessor {
         }
     }
 
-    private boolean isEscaped(final BasedSequence chars, String prefix) {
+    private boolean isEscaped(BasedSequence chars, String prefix) {
         int backslashCount = chars.subSequence(0, chars.length() - prefix.length()).countTrailing('\\');
         return (backslashCount & 1) != 0;
     }

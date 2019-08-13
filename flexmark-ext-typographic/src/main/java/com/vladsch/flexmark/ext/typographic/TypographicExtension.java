@@ -20,11 +20,11 @@ public class TypographicExtension implements Parser.ParserExtension, HtmlRendere
     /**
      * @deprecated use {@link #ENABLE_QUOTES}
      */
-    public static final DataKey<Boolean> TYPOGRAPHIC_QUOTES = ENABLE_QUOTES;
+    @Deprecated public static final DataKey<Boolean> TYPOGRAPHIC_QUOTES = ENABLE_QUOTES;
     /**
      * @deprecated use {@link #ENABLE_SMARTS}
      */
-    public static final DataKey<Boolean> TYPOGRAPHIC_SMARTS = ENABLE_SMARTS;
+    @Deprecated public static final DataKey<Boolean> TYPOGRAPHIC_SMARTS = ENABLE_SMARTS;
 
     public static final DataKey<String> ANGLE_QUOTE_CLOSE = new DataKey<>("ANGLE_QUOTE_CLOSE", "&raquo;");
     public static final DataKey<String> ANGLE_QUOTE_OPEN = new DataKey<>("ANGLE_QUOTE_OPEN", "&laquo;");
@@ -48,12 +48,12 @@ public class TypographicExtension implements Parser.ParserExtension, HtmlRendere
     }
 
     @Override
-    public void rendererOptions(final MutableDataHolder options) {
+    public void rendererOptions(MutableDataHolder options) {
 
     }
 
     @Override
-    public void parserOptions(final MutableDataHolder options) {
+    public void parserOptions(MutableDataHolder options) {
 
     }
 

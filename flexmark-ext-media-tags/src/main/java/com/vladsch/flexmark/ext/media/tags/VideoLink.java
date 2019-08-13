@@ -12,7 +12,7 @@ public class VideoLink extends AbstractMediaLink {
         super(PREFIX, TYPE);
     }
 
-    public VideoLink(final Link other) {
+    public VideoLink(Link other) {
         super(PREFIX, TYPE, other);
     }
 

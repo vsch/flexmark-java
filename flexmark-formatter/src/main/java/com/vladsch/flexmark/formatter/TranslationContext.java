@@ -52,7 +52,7 @@ public interface TranslationContext {
      * @param suffix2            suffix to use on non-translating placeholder so it is interpreted as a proper element during parsing
      * @return text to be used in rendering for this phase
      */
-    CharSequence transformNonTranslating(final CharSequence prefix, final CharSequence nonTranslatingText, final CharSequence suffix, final CharSequence suffix2);
+    CharSequence transformNonTranslating(CharSequence prefix, CharSequence nonTranslatingText, CharSequence suffix, CharSequence suffix2);
 
     /**
      * Transform translating text but which is contextually isolated from the text block in which it is located ie. link reference or image reference
@@ -67,7 +67,7 @@ public interface TranslationContext {
      * @param suffix2         suffix to use on non-translating placeholder so it is interpreted as a proper element during parsing
      * @return text to be used in rendering for this phase
      */
-    CharSequence transformTranslating(final CharSequence prefix, final CharSequence translatingText, final CharSequence suffix, final CharSequence suffix2);
+    CharSequence transformTranslating(CharSequence prefix, CharSequence translatingText, CharSequence suffix, CharSequence suffix2);
 
     /**
      * During {@link RenderPurpose#TRANSLATION_SPANS} this converts anchorRef to ordinal placeholder id

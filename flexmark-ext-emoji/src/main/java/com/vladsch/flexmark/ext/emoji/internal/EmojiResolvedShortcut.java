@@ -10,7 +10,7 @@ public class EmojiResolvedShortcut {
     public final boolean isUnicode;
     public final String alt;
 
-    public EmojiResolvedShortcut(final EmojiReference.Emoji emoji, final String emojiText, final boolean isUnicode, final String alt) {
+    public EmojiResolvedShortcut(EmojiReference.Emoji emoji, String emojiText, boolean isUnicode, String alt) {
         this.emoji = emoji;
         this.emojiText = emojiText;
         this.isUnicode = isUnicode;

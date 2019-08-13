@@ -121,14 +121,14 @@ public class ComboFlexmarkHtmlAttributesParserTest extends ComboSpecTestCase {
     }
 
     @Override
-    public SpecReader create(InputStream inputStream, final String fileUrl) {
+    public SpecReader create(InputStream inputStream, String fileUrl) {
         dumpSpecReader = new HtmlSpecReader(inputStream, this, fileUrl, this);
         return dumpSpecReader;
     }
 
     // reverse source and html
     @Override
-    protected void assertRendering(final UrlString fileUrl, String source, String expectedHtml, String optionsSet) {
+    protected void assertRendering(UrlString fileUrl, String source, String expectedHtml, String optionsSet) {
         DataHolder options = optionsSet == null ? null : getOptions(example(), optionsSet);
         String parseSource = expectedHtml;
 

@@ -113,7 +113,7 @@ public interface DocxContext<T> extends DocxContextFrameProvider<T> {
      * @param isBlockBookmark
      * @return CTBookmark
      */
-    CTBookmark createBookmarkStart(String bookmarkName, final boolean isBlockBookmark);
+    CTBookmark createBookmarkStart(String bookmarkName, boolean isBlockBookmark);
 
     /**
      * Insert bookmark end into current P for given bookmark
@@ -122,7 +122,7 @@ public interface DocxContext<T> extends DocxContextFrameProvider<T> {
      * @param isBlockBookmark
      * @return CTMarkupRange
      */
-    CTMarkupRange createBookmarkEnd(CTBookmark bookmarkStart, final boolean isBlockBookmark);
+    CTMarkupRange createBookmarkEnd(CTBookmark bookmarkStart, boolean isBlockBookmark);
 
     /**
      * Get a hyperlink to a bookmark in the document
@@ -166,6 +166,7 @@ public interface DocxContext<T> extends DocxContextFrameProvider<T> {
 
     /**
      * Get CTShd from current R or create rPr if none and CTShd if none
+     *
      * @return CTShd
      */
     CTShd getCTShd();
@@ -235,7 +236,7 @@ public interface DocxContext<T> extends DocxContextFrameProvider<T> {
      * @return footnote element
      * @throws Docx4JException thrown if cannot get or create footnotes part of the document
      */
-    CTFtnEdn addFootnote(final BigInteger footnoteID) throws Docx4JException;
+    CTFtnEdn addFootnote(BigInteger footnoteID) throws Docx4JException;
 
     /**
      * Get id for a node

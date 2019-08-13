@@ -4,10 +4,10 @@ import com.vladsch.flexmark.ext.footnotes.Footnote;
 import com.vladsch.flexmark.ext.footnotes.FootnoteBlock;
 import com.vladsch.flexmark.ext.footnotes.FootnoteExtension;
 import com.vladsch.flexmark.formatter.*;
-import com.vladsch.flexmark.util.format.options.ElementPlacement;
-import com.vladsch.flexmark.util.format.options.ElementPlacementSort;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKey;
+import com.vladsch.flexmark.util.format.options.ElementPlacement;
+import com.vladsch.flexmark.util.format.options.ElementPlacementSort;
 
 import java.util.*;
 
@@ -21,7 +21,7 @@ public class FootnoteNodeFormatter extends NodeRepositoryFormatter<FootnoteRepos
     }
 
     @Override
-    public FootnoteRepository getRepository(final DataHolder options) {
+    public FootnoteRepository getRepository(DataHolder options) {
         return FootnoteExtension.FOOTNOTES.getFrom(options);
     }
 
@@ -36,7 +36,7 @@ public class FootnoteNodeFormatter extends NodeRepositoryFormatter<FootnoteRepos
     }
 
     @Override
-    public void renderReferenceBlock(final FootnoteBlock node, final NodeFormatterContext context, final MarkdownWriter markdown) {
+    public void renderReferenceBlock(FootnoteBlock node, NodeFormatterContext context, MarkdownWriter markdown) {
         markdown.blankLine().append("[^");
         markdown.append(transformReferenceId(node.getText().toString(), context));
         markdown.append("]: ");
@@ -77,13 +77,13 @@ public class FootnoteNodeFormatter extends NodeRepositoryFormatter<FootnoteRepos
         renderReference(node, context, markdown);
     }
 
-    private void render(final Footnote node, final NodeFormatterContext context, final MarkdownWriter markdown) {
+    private void render(Footnote node, NodeFormatterContext context, MarkdownWriter markdown) {
         markdown.append("[^");
         if (context.isTransformingText()) {
-            final String referenceId = transformReferenceId(node.getText().toString(), context);
+            String referenceId = transformReferenceId(node.getText().toString(), context);
             context.nonTranslatingSpan(new TranslatingSpanRender() {
                 @Override
-                public void render(final NodeFormatterContext context, final MarkdownWriter markdown) {
+                public void render(NodeFormatterContext context, MarkdownWriter markdown) {
                     markdown.append(referenceId);
                 }
             });
@@ -95,7 +95,7 @@ public class FootnoteNodeFormatter extends NodeRepositoryFormatter<FootnoteRepos
 
     public static class Factory implements NodeFormatterFactory {
         @Override
-        public NodeFormatter create(final DataHolder options) {
+        public NodeFormatter create(DataHolder options) {
             return new FootnoteNodeFormatter(options);
         }
     }

@@ -17,7 +17,7 @@ public class QuoteDelimiterProcessorBase implements DelimiterProcessor {
     protected final String myCloser;
     protected final String myUnmatched;
 
-    public QuoteDelimiterProcessorBase(final TypographicOptions options, char openDelimiter, char closeDelimiter, String opener, String closer, String unmatched) {
+    public QuoteDelimiterProcessorBase(TypographicOptions options, char openDelimiter, char closeDelimiter, String opener, String closer, String unmatched) {
         myOptions = options;
         myOpenDelimiter = openDelimiter;
         myCloseDelimiter = closeDelimiter;
@@ -42,12 +42,12 @@ public class QuoteDelimiterProcessorBase implements DelimiterProcessor {
     }
 
     @Override
-    public boolean canBeOpener(final String before, final String after, boolean leftFlanking, boolean rightFlanking, boolean beforeIsPunctuation, boolean afterIsPunctuation, boolean beforeIsWhitespace, boolean afterIsWhiteSpace) {
+    public boolean canBeOpener(String before, String after, boolean leftFlanking, boolean rightFlanking, boolean beforeIsPunctuation, boolean afterIsPunctuation, boolean beforeIsWhitespace, boolean afterIsWhiteSpace) {
         return leftFlanking;
     }
 
     @Override
-    public boolean canBeCloser(final String before, final String after, boolean leftFlanking, boolean rightFlanking, boolean beforeIsPunctuation, boolean afterIsPunctuation, boolean beforeIsWhitespace, boolean afterIsWhiteSpace) {
+    public boolean canBeCloser(String before, String after, boolean leftFlanking, boolean rightFlanking, boolean beforeIsPunctuation, boolean afterIsPunctuation, boolean beforeIsWhitespace, boolean afterIsWhiteSpace) {
         return rightFlanking;
     }
 
@@ -81,7 +81,7 @@ public class QuoteDelimiterProcessorBase implements DelimiterProcessor {
         return false;
     }
 
-    protected boolean canClose(final DelimiterRun closer, final int minLength) {
+    protected boolean canClose(DelimiterRun closer, int minLength) {
         if (closer.canClose()) {
             BasedSequence closerChars = closer.getNode().getChars();
             if (closer.getNext() != null && closerChars.isContinuationOf(closer.getNext().getNode().getChars()) || closerChars.getEndOffset() >= closerChars.getBaseSequence().length() || isAllowed(closerChars.getBaseSequence(), closerChars.getEndOffset() + minLength - 1)) {
@@ -91,7 +91,7 @@ public class QuoteDelimiterProcessorBase implements DelimiterProcessor {
         return false;
     }
 
-    protected boolean canOpen(final DelimiterRun opener, final int minLength) {
+    protected boolean canOpen(DelimiterRun opener, int minLength) {
         if (opener.canOpen()) {
             BasedSequence openerChars = opener.getNode().getChars();
             if (opener.getPrevious() != null && opener.getPrevious().getNode().getChars().isContinuationOf(openerChars) || openerChars.getStartOffset() == 0 || isAllowed(openerChars.getBaseSequence(), openerChars.getStartOffset() - minLength)) {
@@ -130,7 +130,7 @@ public class QuoteDelimiterProcessorBase implements DelimiterProcessor {
     }
 
     @Override
-    public Node unmatchedDelimiterNode(InlineParser inlineParser, final DelimiterRun delimiter) {
+    public Node unmatchedDelimiterNode(InlineParser inlineParser, DelimiterRun delimiter) {
         if (myUnmatched != null && myOptions.typographicSmarts) {
             BasedSequence chars = delimiter.getNode().getChars();
             if (chars.length() == 1) {

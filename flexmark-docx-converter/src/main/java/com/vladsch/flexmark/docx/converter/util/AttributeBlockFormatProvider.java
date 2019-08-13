@@ -2,7 +2,6 @@ package com.vladsch.flexmark.docx.converter.util;
 
 import org.docx4j.wml.CTShd;
 import org.docx4j.wml.PPr;
-import org.docx4j.wml.ParaRPr;
 
 public class AttributeBlockFormatProvider<T> extends BlockFormatProviderBase<T> {
     public final AttributeFormat myAttributeFormat;

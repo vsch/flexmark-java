@@ -2,7 +2,6 @@ package com.vladsch.flexmark.docx.converter.util;
 
 import com.vladsch.flexmark.docx.converter.DocxRendererOptions;
 import org.docx4j.model.PropertyResolver;
-import org.docx4j.model.listnumbering.AbstractListNumberingDefinition;
 import org.docx4j.model.styles.StyleUtil;
 import org.docx4j.openpackaging.exceptions.Docx4JException;
 import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
@@ -26,7 +25,7 @@ public class DocxHelper {
     protected final HashMap<String, BigInteger> myNumPrColorMap;
     protected final DocxRendererOptions myOptions;
 
-    public DocxHelper(final WordprocessingMLPackage mlPackage, final ObjectFactory factory, final DocxRendererOptions options) {
+    public DocxHelper(WordprocessingMLPackage mlPackage, ObjectFactory factory, DocxRendererOptions options) {
         myPackage = mlPackage;
         myFactory = factory;
         myOptions = options.isResolved ? options : new DocxRendererOptions(options, mlPackage);
@@ -250,12 +249,12 @@ public class DocxHelper {
             PPrBase.Ind pInd = getCopy(parent.getInd(), false);
             CTBorder leftBorder = getCopy(parent.getPBdr().getLeft(), true);
 
-            final PPrBase.NumPr numPr = styledChild.getNumPr();
+            PPrBase.NumPr numPr = styledChild.getNumPr();
             if (numPr != null) {
                 // need to check that too, it may have settings we don't have
                 NumberingDefinitionsPart ndp = myDocumentPart.getNumberingDefinitionsPart();
                 if (ndp != null) {
-                    final PPrBase.Ind ndpInd = ndp.getInd(numPr);
+                    PPrBase.Ind ndpInd = ndp.getInd(numPr);
                     if (ndpInd != null) {
                         if (cInd.getLeft() == null && ndpInd.getLeft() != null) {
                             cInd.setLeft(ndpInd.getLeft());
@@ -271,9 +270,9 @@ public class DocxHelper {
             }
 
             // now add difference between the left indents
-            final BigInteger indentDiff = safeIndLeft(cInd).subtract(safeIndHanging(cInd)).subtract(safeIndLeft(pInd));
+            BigInteger indentDiff = safeIndLeft(cInd).subtract(safeIndHanging(cInd)).subtract(safeIndLeft(pInd));
             if (indentDiff.compareTo(ZERO) > 0) {
-                final BigInteger[] divideAndRemainder = indentDiff.divideAndRemainder(BigInteger.valueOf(20));
+                BigInteger[] divideAndRemainder = indentDiff.divideAndRemainder(BigInteger.valueOf(20));
                 // convert to points and add to space
                 BigInteger space = safeBigInt(leftBorder.getSpace()).add(divideAndRemainder[0]).min(BigInteger.valueOf(31));
                 leftBorder.setSpace(space);
@@ -301,12 +300,12 @@ public class DocxHelper {
             PPrBase.Ind cInd = getCopy(styledChild == null ? null : styledChild.getInd(), true);
             PPrBase.Ind pInd = parent.getInd();
 
-            final PPrBase.NumPr numPr = styledChild == null ? null : styledChild.getNumPr();
+            PPrBase.NumPr numPr = styledChild == null ? null : styledChild.getNumPr();
             if (numPr != null) {
                 // need to check that too, it may have settings we don't have
                 NumberingDefinitionsPart ndp = myDocumentPart.getNumberingDefinitionsPart();
                 if (ndp != null) {
-                    final PPrBase.Ind ndpInd = ndp.getInd(numPr);
+                    PPrBase.Ind ndpInd = ndp.getInd(numPr);
                     if (ndpInd != null) {
                         if (cInd.getLeft() == null && ndpInd.getLeft() != null) {
                             cInd.setLeft(ndpInd.getLeft());
@@ -338,17 +337,17 @@ public class DocxHelper {
         }
 
         String colorID = String.format("%s:%s", baseNumID.toString(), color.getVal());
-        final BigInteger numID = myNumPrColorMap.get(colorID);
+        BigInteger numID = myNumPrColorMap.get(colorID);
         if (numID != null) {
             return numID;
         }
 
         // we create a copy of the baseNubPr and add the changed color property
-        final NumberingDefinitionsPart ndp = myDocumentPart.getNumberingDefinitionsPart();
+        NumberingDefinitionsPart ndp = myDocumentPart.getNumberingDefinitionsPart();
         try {
-            final Numbering numbering = ndp.getContents();
-            final List<Numbering.Num> num = numbering.getNum();
-            final List<Numbering.AbstractNum> abstractNumList = numbering.getAbstractNum();
+            Numbering numbering = ndp.getContents();
+            List<Numbering.Num> num = numbering.getNum();
+            List<Numbering.AbstractNum> abstractNumList = numbering.getAbstractNum();
             for (Numbering.AbstractNum abstractNum : abstractNumList) {
                 if (abstractNum.getAbstractNumId().compareTo(baseNumID) == 0) {
                     // we have our list to copy
@@ -362,11 +361,11 @@ public class DocxHelper {
         return null;
     }
 
-    public PPr getExplicitPPr(final PPr pPr) {
+    public PPr getExplicitPPr(PPr pPr) {
         return getResolver().getEffectivePPr(pPr);
     }
 
-    public RPr getExplicitRPr(final RPrAbstract rPr, final PPr pPr) {
+    public RPr getExplicitRPr(RPrAbstract rPr, PPr pPr) {
         RPr copyRPr = myFactory.createRPr();
         setRPr(copyRPr, rPr, false);
         return getResolver().getEffectiveRPr(copyRPr, pPr);
@@ -382,10 +381,10 @@ public class DocxHelper {
      * @param rPr rpr to resolve fully
      * @return fully resolved rpr properties
      */
-    public RPr getExplicitRPr(final RPr rPr) {
+    public RPr getExplicitRPr(RPr rPr) {
         RPr styledRPr = myFactory.createRPr();
         ArrayList<Style> styles = new ArrayList<Style>();
-        final RStyle pStyle = rPr.getRStyle();
+        RStyle pStyle = rPr.getRStyle();
         if (pStyle != null) {
             String styleId = pStyle.getVal();
             Style style = getStyle(styleId);
@@ -984,7 +983,7 @@ public class DocxHelper {
         return null;
     }
 
-    public void setRPr(final RPrAbstract result, final RPrAbstract from, final boolean whenNull) {
+    public void setRPr(RPrAbstract result, RPrAbstract from, boolean whenNull) {
         result.setRStyle(getCopy(from == null ? null : from.getRStyle(), whenNull));
         result.setRFonts(getCopy(from == null ? null : from.getRFonts(), whenNull));
         result.setColor(getCopy(from == null ? null : from.getColor(), whenNull));
@@ -1030,7 +1029,7 @@ public class DocxHelper {
         }
     }
 
-    public void setPPrBase(final PPrBase result, final PPrBase from, final boolean whenNull) {
+    public void setPPrBase(PPrBase result, PPrBase from, boolean whenNull) {
         result.setPStyle(from == null ? null : getCopy(from.getPStyle(), whenNull));
         result.setFramePr(from == null ? null : getCopy(from.getFramePr(), whenNull));
         result.setNumPr(from == null ? null : getCopy(from.getNumPr(), whenNull));
@@ -1384,7 +1383,7 @@ public class DocxHelper {
         return orig == null || orig.getId() == null && orig.getCombineBrackets() == null && !orig.isCombine() && !orig.isVert() && !orig.isVertCompress() ? null : orig;
     }
 
-    public RPr keepDiff(final RPr orig, final RPrAbstract from) {
+    public RPr keepDiff(RPr orig, RPrAbstract from) {
         if (from != null && orig != null) {
             // keep diffs on these
             //RFonts rFonts;
@@ -1474,7 +1473,7 @@ public class DocxHelper {
         return StyleUtil.isEmpty(orig) ? null : orig;
     }
 
-    public PPrBase keepDiff(final PPrBase orig, final PPrBase from) {
+    public PPrBase keepDiff(PPrBase orig, PPrBase from) {
         if (from != null && orig != null) {
             // keep diff
             //PPrBase.PStyle pStyle;

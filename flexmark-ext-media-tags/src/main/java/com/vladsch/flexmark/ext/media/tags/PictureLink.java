@@ -12,7 +12,7 @@ public class PictureLink extends AbstractMediaLink {
         super(PREFIX, TYPE);
     }
 
-    public PictureLink(final Link other) {
+    public PictureLink(Link other) {
         super(PREFIX, TYPE, other);
     }
 

@@ -82,7 +82,7 @@ public class ComboPdfConverterSpecTest extends ComboSpecTestCase {
     }
 
     @Override
-    public String actualHtml(final String html, final String optionSet) {
+    public String actualHtml(String html, String optionSet) {
         return PdfConverterExtension.embedCss(html, PdfConverterExtension.DEFAULT_CSS.getFrom(options(null)));
     }
 }

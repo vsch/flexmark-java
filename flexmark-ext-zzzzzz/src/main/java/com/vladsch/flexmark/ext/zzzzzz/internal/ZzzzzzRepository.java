@@ -56,11 +56,11 @@ public class ZzzzzzRepository extends NodeRepository<ZzzzzzBlock> {
     }
 
     @Override
-    public Set<ZzzzzzBlock> getReferencedElements(final Node parent) {
-        final HashSet<ZzzzzzBlock> references = new HashSet<ZzzzzzBlock>();
+    public Set<ZzzzzzBlock> getReferencedElements(Node parent) {
+        HashSet<ZzzzzzBlock> references = new HashSet<ZzzzzzBlock>();
         //visitNodes(parent, new ValueRunnable<Node>() {
         //    @Override
-        //    public void run(final Node value) {
+        //    public void run(Node value) {
         //        if (value instanceof Zzzzzz) {
         //            //Reference reference = ((RefNode) value).getReferenceNode(ZzzzzzRepository.this);
         //            //if (reference != null) {

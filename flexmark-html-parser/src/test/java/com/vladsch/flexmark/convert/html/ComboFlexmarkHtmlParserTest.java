@@ -7,10 +7,10 @@ import com.vladsch.flexmark.spec.SpecReader;
 import com.vladsch.flexmark.spec.UrlString;
 import com.vladsch.flexmark.test.ComboSpecTestCase;
 import com.vladsch.flexmark.test.DumpSpecReader;
-import com.vladsch.flexmark.util.ast.IParse;
-import com.vladsch.flexmark.util.ast.IRender;
 import com.vladsch.flexmark.util.Ref;
 import com.vladsch.flexmark.util.ast.Document;
+import com.vladsch.flexmark.util.ast.IParse;
+import com.vladsch.flexmark.util.ast.IRender;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
@@ -174,14 +174,14 @@ public class ComboFlexmarkHtmlParserTest extends ComboSpecTestCase {
     }
 
     @Override
-    public SpecReader create(InputStream inputStream, final String fileUrl) {
+    public SpecReader create(InputStream inputStream, String fileUrl) {
         dumpSpecReader = new HtmlSpecReader(inputStream, this, fileUrl, this);
         return dumpSpecReader;
     }
 
     // reverse source and html
     @Override
-    protected void assertRendering(final UrlString fileUrl, String source, String expectedHtml, String optionsSet) {
+    protected void assertRendering(UrlString fileUrl, String source, String expectedHtml, String optionsSet) {
         DataHolder options = optionsSet == null ? null : getOptions(example(), optionsSet);
         String parseSource = expectedHtml;
 

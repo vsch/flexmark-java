@@ -2,10 +2,10 @@ package com.vladsch.flexmark.test;
 
 import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.spec.UrlString;
-import com.vladsch.flexmark.util.ast.IParse;
-import com.vladsch.flexmark.util.ast.IRender;
 import com.vladsch.flexmark.util.Utils;
 import com.vladsch.flexmark.util.ast.Document;
+import com.vladsch.flexmark.util.ast.IParse;
+import com.vladsch.flexmark.util.ast.IRender;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKey;
@@ -165,7 +165,7 @@ public abstract class RenderingTestCase implements ActualExampleModifier {
         return parserWithOptions;
     }
 
-    protected void assertRendering(final UrlString fileUrl, String source, String expectedHtml) {
+    protected void assertRendering(UrlString fileUrl, String source, String expectedHtml) {
         assertRendering(fileUrl, source, expectedHtml, null);
     }
 
@@ -203,7 +203,7 @@ public abstract class RenderingTestCase implements ActualExampleModifier {
         return result;
     }
 
-    protected void assertRendering(final UrlString fileUrl, String source, String expectedHtml, String optionsSet) {
+    protected void assertRendering(UrlString fileUrl, String source, String expectedHtml, String optionsSet) {
         DataHolder options = optionsSet == null ? null : getOptions(example(), optionsSet);
         String parseSource = source;
         IParse parserWithOptions = parser().withOptions(options);
@@ -312,7 +312,7 @@ public abstract class RenderingTestCase implements ActualExampleModifier {
     //    assertRenderingAst(source, expectedHtml, expectedAst, null);
     //}
 
-    protected void assertRenderingAst(final UrlString fileUrl, String source, String expectedHtml, String expectedAst, String optionsSet) {
+    protected void assertRenderingAst(UrlString fileUrl, String source, String expectedHtml, String expectedAst, String optionsSet) {
         //assert options != null || optionsSet == null || optionsSet.isEmpty() : "Non empty optionsSet without any option customizations";
         DataHolder options = optionsSet == null ? null : getOptions(example(), optionsSet);
         String parseSource = source;
@@ -425,7 +425,7 @@ public abstract class RenderingTestCase implements ActualExampleModifier {
     //    assertAst(source, expectedAst, null);
     //}
 
-    protected void assertAst(final UrlString fileUrl, String source, String expectedAst, String optionsSet) {
+    protected void assertAst(UrlString fileUrl, String source, String expectedAst, String optionsSet) {
         DataHolder options = optionsSet == null ? null : getOptions(example(), optionsSet);
         String parseSource = actualSource(source, optionsSet);
 

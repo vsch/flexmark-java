@@ -178,7 +178,7 @@ public class CollectionHostValidator<T> {
         return getHost("");
     }
 
-    public CollectionHost<T> getHost(final String host) {
+    public CollectionHost<T> getHost(String host) {
         return new CollectionHost<T>() {
             @Override
             public void adding(int index, T s, Object v) {
