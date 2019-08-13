@@ -609,17 +609,18 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
             // we need to unwrap the paragraphs
             //final String text = new TextCollectingVisitor().collectAndGetText(node);
             //if (!text.isEmpty()) {
+            addBlockAttributeFormatting(node, AttributablePart.NODE, docx, false);
             docx.renderChildren(node);
             //}
         } else if (!(node.getParent() instanceof ParagraphItemContainer) || !((ParagraphItemContainer) node.getParent()).isItemParagraph(node)) {
             if (node.getParent() instanceof BlockQuote || node.getParent() instanceof AsideBlock) {
                 // the parent handles our formatting
-                docx.createP();
+                addBlockAttributeFormatting(node, AttributablePart.NODE, docx, true);
                 docx.renderChildren(node);
             } else {
                 if (node.getFirstChildAnyNot(NonRenderingInline.class) != null) {
                     docx.setBlockFormatProvider(new BlockFormatProviderBase<>(docx, docx.getDocxRendererOptions().LOOSE_PARAGRAPH_STYLE));
-                    docx.createP();
+                    addBlockAttributeFormatting(node, AttributablePart.NODE, docx, true);
                     docx.renderChildren(node);
                 }
             }
@@ -627,15 +628,17 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
             // the parent handles our formatting
             if (node.getParent() instanceof FootnoteBlock) {
                 // there is already an open paragraph, re-use it
+                addBlockAttributeFormatting(node, AttributablePart.NODE, docx, false);
                 docx.renderChildren(node);
             } else {
-                docx.createP();
+                addBlockAttributeFormatting(node, AttributablePart.NODE, docx, true);
                 docx.renderChildren(node);
             }
         }
     }
 
     private void render(Text node, DocxRendererContext docx) {
+        addRunAttributeFormatting(node, docx);
         docx.text(node.getChars().unescape());
 
 /*
@@ -648,75 +651,198 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
     }
 
     private void render(TextBase node, DocxRendererContext docx) {
+        addRunAttributeFormatting(node, docx);
         docx.renderChildren(node);
+    }
+
+    private void addRunAttributeFormatting(Node node, DocxRendererContext docx) {
+        Pair<String, AttributeFormat> format = getAttributeFormat(node, AttributablePart.NODE, docx);
+        addRunAttributeFormatting(format.getSecond(), docx);
+    }
+
+    private void addRunAttributeFormatting(AttributeFormat attributeFormat, DocxRendererContext docx) {
+        if (attributeFormat != null) {
+            docx.setRunFormatProvider(new AttributeRunFormatProvider<>(docx, attributeFormat));
+        }
+    }
+
+    void addBlockAttributeFormatting(Node node, AttributablePart part, DocxRendererContext docx, boolean createP) {
+        Pair<String, AttributeFormat> format = getAttributeFormat(node, AttributablePart.NODE, docx);
+        if (format.getSecond() != null) {
+            docx.setBlockFormatProvider(new AttributeBlockFormatProvider<>(docx, format.getSecond()));
+            docx.setRunFormatProvider(new AttributeRunFormatProvider<>(docx, format.getSecond()));
+        }
+
+        if (createP) docx.createP(format.getFirst());
+    }
+
+    Pair<String, AttributeFormat> getAttributeFormat(Node node, AttributablePart part, DocxRendererContext docx) {
+        Attributes attributes = docx.extendRenderingNodeAttributes(node, AttributablePart.NODE, null);
+        // see if has class which we interpret as style id
+        Attribute classAttribute = attributes.get(Attribute.CLASS_ATTR);
+        String className = null;
+        if (classAttribute != null && !classAttribute.getValue().trim().isEmpty()) {
+            String[] classNames = classAttribute.getValue().trim().split(" ");
+
+            // first class is main style name
+            className = classNames[0];
+        }
+
+        AttributeFormat attributeFormat = getAttributeFormat(attributes, docx);
+        return Pair.of(className, attributeFormat);
+    }
+
+    AttributeFormat getAttributeFormat(Attributes attributes, DocxRendererContext docx) {
+        // need to convert style= attributes to formatting:
+        // color: to text color
+        // background-color: to text background
+        // font-size: to font size
+        // font-weight: to font weight bold/normal/light
+        // font-style: to font style normal/italic
+        String fontFamily = null;
+        String fontSize = null;
+        String fontWeight = null;
+        String fontStyle = null;
+        String textColor = null;
+        String fillColor = null;
+        AttributeFormat attributeFormat = null;
+
+        Attribute style = attributes.get(Attribute.STYLE_ATTR);
+        if (style != null && !style.getValue().trim().isEmpty()) {
+            String value = style.getValue().trim();
+            String[] styleValues = value.split(";");
+            for (String styleValue : styleValues) {
+                String[] attrParts = styleValue.trim().split(":", 2);
+                String attrKey = attrParts[0].trim();
+                String attrValue = attrParts.length > 1 ? attrParts[1].trim() : null;
+
+                if (!attrKey.isEmpty() && attrValue != null && !attrValue.isEmpty()) {
+                    switch (attrKey) {
+                        case "color":
+                            textColor = attrValue;
+                            break;
+
+                        case "background-color":
+                            fillColor = attrValue;
+                            break;
+
+                        case "font-family":
+                            fontFamily = attrValue;
+                            break;
+
+                        case "font-size":
+                            fontSize = attrValue;
+                            break;
+
+                        case "font-weight":
+                            fontWeight = attrValue;
+                            break;
+
+                        case "font-style":
+                            fontStyle = attrValue;
+                            break;
+
+                        default:
+                            break;
+                    }
+                }
+            }
+
+            attributeFormat = new AttributeFormat(
+                    fontFamily,
+                    fontSize,
+                    fontWeight,
+                    fontStyle,
+                    textColor,
+                    fillColor
+            );
+
+            if (attributeFormat.isEmpty()) {
+                attributeFormat = null;
+            }
+        }
+
+        return attributeFormat;
     }
 
     private void render(Emphasis node, DocxRendererContext docx) {
         docx.setRunFormatProvider(new ItalicRunFormatProvider<>(docx, options.noCharacterStyles));
+        addRunAttributeFormatting(node, docx);
         docx.renderChildren(node);
     }
 
     private void render(StrongEmphasis node, DocxRendererContext docx) {
         docx.setRunFormatProvider(new BoldRunFormatProvider<>(docx, options.noCharacterStyles));
+        addRunAttributeFormatting(node, docx);
         docx.renderChildren(node);
     }
 
     private void render(Subscript node, DocxRendererContext docx) {
         docx.setRunFormatProvider(new SubscriptRunFormatProvider<>(docx, options.noCharacterStyles));
+        addRunAttributeFormatting(node, docx);
         docx.renderChildren(node);
     }
 
     private void render(Superscript node, DocxRendererContext docx) {
         docx.setRunFormatProvider(new SuperscriptRunFormatProvider<>(docx, options.noCharacterStyles));
+        addRunAttributeFormatting(node, docx);
         docx.renderChildren(node);
     }
 
     private void render(Strikethrough node, DocxRendererContext docx) {
         docx.setRunFormatProvider(new StrikethroughRunFormatProvider<>(docx, options.noCharacterStyles));
+        addRunAttributeFormatting(node, docx);
         docx.renderChildren(node);
     }
 
     private void render(GitLabDel node, DocxRendererContext docx) {
         docx.setRunFormatProvider(new StrikethroughRunFormatProvider<>(docx, options.noCharacterStyles));
+        addRunAttributeFormatting(node, docx);
         docx.renderChildren(node);
     }
 
     private void render(Ins node, DocxRendererContext docx) {
         docx.setRunFormatProvider(new UnderlineRunFormatProvider<>(docx, options.noCharacterStyles));
+        addRunAttributeFormatting(node, docx);
         docx.renderChildren(node);
     }
 
     private void render(GitLabIns node, DocxRendererContext docx) {
         docx.setRunFormatProvider(new UnderlineRunFormatProvider<>(docx, options.noCharacterStyles));
+        addRunAttributeFormatting(node, docx);
         docx.renderChildren(node);
     }
 
     private void render(Code node, DocxRendererContext docx) {
         docx.setRunFormatProvider(new SourceCodeRunFormatProvider<>(docx, options.noCharacterStyles, options.codeHighlightShading));
+        addRunAttributeFormatting(node, docx);
         docx.renderChildren(node);
     }
 
     private void render(Heading node, DocxRendererContext docx) {
         docx.setBlockFormatProvider(new HeadingBlockFormatProvider<>(docx, node.getLevel() - 1));
-        docx.createP();
+        addBlockAttributeFormatting(node, AttributablePart.NODE, docx, true);
         docx.renderChildren(node);
     }
 
     private void render(BlockQuote node, DocxRendererContext docx) {
         int level = node.countDirectAncestorsOfType(null, BlockQuote.class) + 1;
         docx.setBlockFormatProvider(new QuotedFormatProvider<>(docx, level, docx.getRenderingOptions().BLOCK_QUOTE_STYLE));
+        addBlockAttributeFormatting(node, AttributablePart.NODE, docx, false);
         docx.renderChildren(node);
     }
 
     private void render(GitLabBlockQuote node, DocxRendererContext docx) {
         int level = node.countDirectAncestorsOfType(null, BlockQuote.class) + 1;
         docx.setBlockFormatProvider(new QuotedFormatProvider<>(docx, level, docx.getRenderingOptions().BLOCK_QUOTE_STYLE));
+        addBlockAttributeFormatting(node, AttributablePart.NODE, docx, false);
         docx.renderChildren(node);
     }
 
     private void render(AsideBlock node, DocxRendererContext docx) {
         int level = node.countDirectAncestorsOfType(null, BlockQuote.class) + 1;
         docx.setBlockFormatProvider(new QuotedFormatProvider<>(docx, level, docx.getRenderingOptions().ASIDE_BLOCK_STYLE));
+        addBlockAttributeFormatting(node, AttributablePart.NODE, docx, false);
         docx.renderChildren(node);
     }
 
@@ -757,15 +883,18 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
 
     private void render(FencedCodeBlock node, DocxRendererContext docx) {
         List<BasedSequence> lines = node.getContentLines();
+        addBlockAttributeFormatting(node, AttributablePart.NODE, docx, false);
         docx.renderFencedCodeLines(lines);
     }
 
     private void render(IndentedCodeBlock node, DocxRendererContext docx) {
         List<BasedSequence> lines = node.getContentLines();
+        addBlockAttributeFormatting(node, AttributablePart.NODE, docx, false);
         docx.renderFencedCodeLines(lines);
     }
 
     public void renderList(ListBlock node, DocxRendererContext docx) {
+        addBlockAttributeFormatting(node, AttributablePart.NODE, docx, false);
         docx.renderChildren(node);
     }
 
@@ -830,6 +959,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
         }
 
         docx.setBlockFormatProvider(new ListItemBlockFormatProvider<>(docx, listTextStyle, idNum, listLevel, ListItem.class, ListBlock.class));
+        addBlockAttributeFormatting(node, AttributablePart.NODE, docx, false);
         docx.renderChildren(node);
     }
 
@@ -1045,10 +1175,12 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
 
     private void render(AutoLink node, DocxRendererContext docx) {
         String url = node.getChars().unescape();
+        addRunAttributeFormatting(node, docx);
         renderURL(node.getChars(), docx, url);
     }
 
     private void render(MailLink node, DocxRendererContext docx) {
+        addRunAttributeFormatting(node, docx);
         renderURL(node.getChars(), docx, "mailto:" + node.getChars().unescape());
     }
 
@@ -1066,6 +1198,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
 
         attributes = docx.extendRenderingNodeAttributes(AttributablePart.NODE, attributes);
 
+        addRunAttributeFormatting(node, docx);
         renderURL(node.getUrl(), docx, resolvedLink.getUrl(), attributes, new ChildRenderer(docx, node));
     }
 
@@ -1101,6 +1234,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
             }
         }
 
+        addRunAttributeFormatting(node, docx);
         if (resolvedLink == null) {
             // empty ref, we treat it as text
             assert !node.isDefined();
@@ -1358,6 +1492,9 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
             }
 
             attributes = docx.extendRenderingNodeAttributes(AttributablePart.NODE, attributes);
+
+            addRunAttributeFormatting(getAttributeFormat(attributes, docx), docx);
+
             renderImage(docx, url, attributes);
         }
     }
@@ -1477,6 +1614,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
         tblInd.setW(tableInd);
 
         docx.setBlockFormatProvider(new IsolatingBlockFormatProvider<>(docx));
+        addBlockAttributeFormatting(node, AttributablePart.NODE, docx, false);
 
         if (tableStyle.isEmpty()) {
             // Create object for tblBorders

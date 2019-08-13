@@ -108,6 +108,18 @@ Next 0.50.28
   bullet list item paragraph.
 * Add: `DocxRenderer.NUMBERED_LIST_STYLE` default `"NumberedList"`, numbering style to use for
   numbered list item paragraph.
+* Add: Simple `Attributes` processing to docx conversion:
+  * `.className` on paragraph elements will set the docx styleId to `className` if the style id
+    is found.
+  * Use `{style=""}` to set attributes on text or block elements. Only the following are
+    processed:
+    * `color` - text color
+    * `background-color` - shade fill color, pattern always solid.
+    * `font-family` - not implemented
+    * `font-size` - not implemented
+    * `font-weight` - set/clear bold (if using numeric weights then >= 550 sets bold, less
+      clears it)
+    * `font-style` - set/clear italic
 
 0.50.26
 -------

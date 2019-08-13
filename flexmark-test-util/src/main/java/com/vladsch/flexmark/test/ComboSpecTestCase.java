@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -80,7 +81,7 @@ public abstract class ComboSpecTestCase extends FullSpecTestCase {
         try {
             String line;
             StringBuilder out = new StringBuilder();
-            BufferedReader reader = new BufferedReader(new InputStreamReader(stream, Charset.forName("UTF-8")));
+            BufferedReader reader = new BufferedReader(new InputStreamReader(stream, StandardCharsets.UTF_8));
             while ((line = reader.readLine()) != null) {
                 out.append(line).append('\n');
             }

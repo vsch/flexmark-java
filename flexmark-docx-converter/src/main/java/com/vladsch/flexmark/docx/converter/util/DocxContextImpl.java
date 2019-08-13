@@ -361,6 +361,17 @@ public abstract class DocxContextImpl<T> implements DocxContext<T>, BlockFormatP
     }
 
     @Override
+    public CTShd getCTShd() {
+        RPr rPr = getRPr();
+        CTShd ctShd = rPr.getShd();
+        if (ctShd == null) {
+            ctShd = myFactory.createCTShd();
+            rPr.setShd(ctShd);
+        }
+        return ctShd;
+    }
+
+    @Override
     public int getNextBookmarkId() {
         return myBookmarkID.getAndIncrement();
     }

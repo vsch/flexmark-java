@@ -8,7 +8,6 @@ import org.docx4j.wml.Style;
 import java.math.BigInteger;
 
 public class QuotedFormatProvider<T> extends BlockFormatProviderBase<T> {
-    private final DocxContext<T> myDocx;
     private final BigInteger myBefore;
     private final BigInteger myAfter;
     private final BigInteger myLeftInd;
@@ -36,7 +35,6 @@ public class QuotedFormatProvider<T> extends BlockFormatProviderBase<T> {
         final BigInteger quoteLevel = BigInteger.valueOf(level);
         final BigInteger leftInd = left.multiply(quoteLevel);
 
-        myDocx = docx;
         myBefore = before;
         myAfter = after;
         myLeftInd = leftInd;
@@ -60,7 +58,7 @@ public class QuotedFormatProvider<T> extends BlockFormatProviderBase<T> {
         final BigInteger newLeftInd = myDocx.getHelper().safeIndLeft(pPr);
         final PPr styledPPr = myDocx.getHelper().getExplicitPPr(pPr);
         if (styledPPr != null && styledPPr.getPBdr() != null && newLeftInd != null && newLeftInd.compareTo(myLeftInd) > 0) {
-            // it grew, word has the border hanging and we want the we shift it by our left border spacing
+            // it grew, word has the border hanging and we want to shift it by our left border spacing
             CTBorder leftBorder = styledPPr.getPBdr().getLeft();
             if (leftBorder != null && leftBorder.getSpace() != null && leftBorder.getSpace().compareTo(BigInteger.ZERO) > 0) {
                 //pPr.getInd().setLeft(newLeftInd.add(leftBorder.getSpace().multiply(BigInteger.valueOf(20))));

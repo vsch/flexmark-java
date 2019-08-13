@@ -78,7 +78,7 @@ public class RunFormatProviderBase<T> implements RunFormatProvider<T> {
     @Override
     public void getRPr(final RPr rPr) {
         // Create object for rStyle
-        if (!(myNoCharacterStyles || !myHighlightShadingColor.isEmpty())) {
+        if (!myNoCharacterStyles && myHighlightShadingColor.isEmpty() && myBaseStyleId != null) {
             RStyle rstyle = myDocx.getFactory().createRStyle();
             rPr.setRStyle(rstyle);
             rstyle.setVal(myBaseStyleId);
@@ -94,10 +94,9 @@ public class RunFormatProviderBase<T> implements RunFormatProvider<T> {
         }
 
         if (myNoCharacterStyles || !myHighlightShadingColor.isEmpty()) {
-            Style thisStyle = myDocx.getStyle(myBaseStyleId);
+            Style thisStyle = myBaseStyleId == null ? null : myDocx.getStyle(myBaseStyleId);
             if (thisStyle != null) {
                 final ParaRPr paraRPr = myDocx.getP().getPPr().getRPr();
-                final RPr pr = myDocx.getHelper().getExplicitRPr(thisStyle.getRPr());
                 if (!myHighlightShadingColor.isEmpty()) {
                     String color = myHighlightShadingColor;
 

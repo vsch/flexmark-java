@@ -46,7 +46,7 @@ public class ColorNameMapper {
         int g = color.getGreen();
         int b = color.getBlue();
 
-        return String.format("#%02x%02x%02x", r, g, b);
+        return String.format("%02x%02x%02x", r, g, b);
     }
 
     public static Color colorFromString(String color) {
@@ -62,6 +62,22 @@ public class ColorNameMapper {
 
     public static boolean isNamedColor(String color) {
         return colors.containsKey(color);
+    }
+
+    public static String getValidNamedOrHexColor(String s) {
+        if (ColorNameMapper.isNamedColor(s) || ColorNameMapper.isHexColor(s)) {
+            return s;
+        }
+        return null;
+    }
+
+    public static String getValidHexColor(String s) {
+        if (ColorNameMapper.isNamedColor(s)) {
+            return colorToString(colors.get(s));
+        } else if (ColorNameMapper.isHexColor(s)) {
+            return s;
+        }
+        return null;
     }
 
     public static String findClosestNamedColor(Color color) {

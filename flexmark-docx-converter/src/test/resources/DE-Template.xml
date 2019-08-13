@@ -40,10 +40,10 @@
                 <dc:title>Sehr geehrter Herr Wagner</dc:title>
                 <dc:creator>Stefan Schroff</dc:creator>
                 <cp:lastModifiedBy>Vladimir Schneider</cp:lastModifiedBy>
-                <cp:revision>34</cp:revision>
+                <cp:revision>36</cp:revision>
                 <cp:lastPrinted>2014-07-10T13:36:00Z</cp:lastPrinted>
                 <dcterms:created xsi:type="dcterms:W3CDTF">2019-08-01T16:52:00Z</dcterms:created>
-                <dcterms:modified xsi:type="dcterms:W3CDTF">2019-08-03T14:03:00Z</dcterms:modified>
+                <dcterms:modified xsi:type="dcterms:W3CDTF">2019-08-12T23:25:00Z</dcterms:modified>
             </cp:coreProperties>
         </pkg:xmlData>
     </pkg:part>
@@ -89,7 +89,7 @@
                         <vt:lpstr>Sehr geehrter Herr Wagner</vt:lpstr>
                     </vt:vector>
                 </TitlesOfParts>
-                <TotalTime>134</TotalTime>
+                <TotalTime>136</TotalTime>
                 <Words>0</Words>
             </Properties>
         </pkg:xmlData>
@@ -973,8 +973,8 @@
                          xmlns:wpg="http://schemas.microsoft.com/office/word/2010/wordprocessingGroup"
                          xmlns:wpi="http://schemas.microsoft.com/office/word/2010/wordprocessingInk" xmlns:wps="http://schemas.microsoft.com/office/word/2010/wordprocessingShape">
                 <w:footnote w:id="-1" w:type="separator">
-                    <w:p w14:paraId="2975246B" w14:textId="77777777"
-                         w:rsidP="005C2DA3" w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+                    <w:p w14:paraId="3B24EFC6" w14:textId="77777777"
+                         w:rsidP="005C2DA3" w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
                         <w:pPr>
                             <w:spacing w:after="0"/>
                         </w:pPr>
@@ -984,8 +984,8 @@
                     </w:p>
                 </w:footnote>
                 <w:footnote w:id="0" w:type="continuationSeparator">
-                    <w:p w14:paraId="1E5B885C" w14:textId="77777777"
-                         w:rsidP="005C2DA3" w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+                    <w:p w14:paraId="4FD2E378" w14:textId="77777777"
+                         w:rsidP="005C2DA3" w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
                         <w:pPr>
                             <w:spacing w:after="0"/>
                         </w:pPr>
@@ -1030,8 +1030,8 @@
                         xmlns:wpg="http://schemas.microsoft.com/office/word/2010/wordprocessingGroup"
                         xmlns:wpi="http://schemas.microsoft.com/office/word/2010/wordprocessingInk" xmlns:wps="http://schemas.microsoft.com/office/word/2010/wordprocessingShape">
                 <w:endnote w:id="-1" w:type="separator">
-                    <w:p w14:paraId="436DBDE0" w14:textId="77777777"
-                         w:rsidP="005C2DA3" w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+                    <w:p w14:paraId="455361E6" w14:textId="77777777"
+                         w:rsidP="005C2DA3" w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
                         <w:pPr>
                             <w:spacing w:after="0"/>
                         </w:pPr>
@@ -1041,8 +1041,8 @@
                     </w:p>
                 </w:endnote>
                 <w:endnote w:id="0" w:type="continuationSeparator">
-                    <w:p w14:paraId="54CBD314" w14:textId="77777777"
-                         w:rsidP="005C2DA3" w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+                    <w:p w14:paraId="5F0197DE" w14:textId="77777777"
+                         w:rsidP="005C2DA3" w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
                         <w:pPr>
                             <w:spacing w:after="0"/>
                         </w:pPr>
@@ -1122,7 +1122,7 @@
                         xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml"
                         xmlns:w15="http://schemas.microsoft.com/office/word/2012/wordml"
                         xmlns:w16cid="http://schemas.microsoft.com/office/word/2016/wordml/cid" xmlns:w16se="http://schemas.microsoft.com/office/word/2015/wordml/symex">
-                <w:zoom w:percent="80"/>
+                <w:zoom w:percent="220" w:val="bestFit"/>
                 <w:proofState w:grammar="clean" w:spelling="clean"/>
                 <w:stylePaneFormatFilter w:allStyles="0"
                                          w:alternateStyleNames="0" w:clearFormatting="1"
@@ -1215,6 +1215,7 @@
                     <w:rsid w:val="002122B1"/>
                     <w:rsid w:val="002208D4"/>
                     <w:rsid w:val="00221884"/>
+                    <w:rsid w:val="002268E4"/>
                     <w:rsid w:val="002458F9"/>
                     <w:rsid w:val="002524E9"/>
                     <w:rsid w:val="00257988"/>
@@ -1234,6 +1235,7 @@
                     <w:rsid w:val="002E5944"/>
                     <w:rsid w:val="002E7601"/>
                     <w:rsid w:val="00300FBF"/>
+                    <w:rsid w:val="00303ECF"/>
                     <w:rsid w:val="003041F5"/>
                     <w:rsid w:val="00315E7F"/>
                     <w:rsid w:val="00325E9E"/>
@@ -1304,6 +1306,7 @@
                     <w:rsid w:val="006D65E5"/>
                     <w:rsid w:val="006F1E8A"/>
                     <w:rsid w:val="007072DA"/>
+                    <w:rsid w:val="00707878"/>
                     <w:rsid w:val="0071055D"/>
                     <w:rsid w:val="00717BF6"/>
                     <w:rsid w:val="00722BE8"/>
@@ -1459,6 +1462,7 @@
                     <w:rsid w:val="00F317D4"/>
                     <w:rsid w:val="00F31E11"/>
                     <w:rsid w:val="00F33748"/>
+                    <w:rsid w:val="00F47E0E"/>
                     <w:rsid w:val="00F5375E"/>
                     <w:rsid w:val="00F54898"/>
                     <w:rsid w:val="00F54BD9"/>
@@ -2594,14 +2598,13 @@
                     <w:name w:val="Body Text"/>
                     <w:basedOn w:val="Normal"/>
                     <w:link w:val="BodyTextChar"/>
-                    <w:rsid w:val="00403E1E"/>
+                    <w:rsid w:val="00707878"/>
                     <w:pPr>
                         <w:spacing w:after="0" w:line="288" w:lineRule="auto"/>
                     </w:pPr>
                     <w:rPr>
                         <w:rFonts w:cs="Times New Roman" w:eastAsia="Calibri"/>
                         <w:color w:val="00000A"/>
-                        <w:sz w:val="18"/>
                         <w:szCs w:val="18"/>
                         <w:lang w:bidi="hi-IN" w:eastAsia="zh-CN" w:val="en-CA"/>
                     </w:rPr>
@@ -2610,10 +2613,10 @@
                     <w:name w:val="Body Text Char"/>
                     <w:basedOn w:val="DefaultParagraphFont"/>
                     <w:link w:val="BodyText"/>
-                    <w:rsid w:val="0013661A"/>
+                    <w:rsid w:val="00707878"/>
                     <w:rPr>
                         <w:color w:val="00000A"/>
-                        <w:sz w:val="18"/>
+                        <w:sz w:val="21"/>
                         <w:szCs w:val="18"/>
                         <w:lang w:bidi="hi-IN" w:eastAsia="zh-CN" w:val="en-CA"/>
                     </w:rPr>
@@ -2717,12 +2720,14 @@
                     <w:basedOn w:val="Normal"/>
                     <w:link w:val="AdresseZchn"/>
                     <w:qFormat/>
-                    <w:rsid w:val="0013661A"/>
+                    <w:rsid w:val="00707878"/>
                     <w:pPr>
+                        <w:ind w:left="4536"/>
                         <w:contextualSpacing/>
                     </w:pPr>
                     <w:rPr>
                         <w:rFonts w:cs="Times New Roman"/>
+                        <w:sz w:val="18"/>
                         <w:lang w:eastAsia="de-DE"/>
                     </w:rPr>
                 </w:style>
@@ -2730,10 +2735,10 @@
                     <w:name w:val="Adresse Zchn"/>
                     <w:basedOn w:val="DefaultParagraphFont"/>
                     <w:link w:val="Adresse"/>
-                    <w:rsid w:val="0013661A"/>
+                    <w:rsid w:val="00707878"/>
                     <w:rPr>
                         <w:rFonts w:eastAsia="Times New Roman"/>
-                        <w:sz w:val="21"/>
+                        <w:sz w:val="18"/>
                     </w:rPr>
                 </w:style>
                 <w:style w:styleId="ListBullet2" w:type="paragraph">

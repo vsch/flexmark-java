@@ -22,4 +22,5 @@ target/
 /.idea/serialmonitor_settings.xml
 /flexmark-pdf-converter/src/test/resources/html_sample.html
 /flexmark-docx-converter/src/test/resources/docx_converter_ast_spec2/
+/flexmark-docx-converter/src/test/resources/docx_converter_attribute_ast_spec/
 /flexmark-empty-template.docx

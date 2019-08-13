@@ -153,15 +153,27 @@ public interface DocxContext<T> extends DocxContextFrameProvider<T> {
      * @return Text element
      */
     Text addWrappedText();
+
     void addPageBreak();
+
     void addBreak(STBrType breakType);
 
     List<Object> getContent();
 
     RPr addBold();
+
     RPr getRPr();
+
+    /**
+     * Get CTShd from current R or create rPr if none and CTShd if none
+     * @return CTShd
+     */
+    CTShd getCTShd();
+
     Color createColor();
+
     HpsMeasure createHpsMeasure(long val);
+
     /**
      * Add text to current P, create R and add wrapped text
      *

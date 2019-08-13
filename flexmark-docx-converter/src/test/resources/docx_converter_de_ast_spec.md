@@ -35,8 +35,8 @@ plain text
     </w:p>
 </w:body>
 <w:footnote w:id="-1" w:type="separator">
-    <w:p w14:paraId="2975246B" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="3B24EFC6" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -46,8 +46,8 @@ plain text
     </w:p>
 </w:footnote>
 <w:footnote w:id="0" w:type="continuationSeparator">
-    <w:p w14:paraId="1E5B885C" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="4FD2E378" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -89,8 +89,8 @@ plain **Bold** text
     </w:p>
 </w:body>
 <w:footnote w:id="-1" w:type="separator">
-    <w:p w14:paraId="2975246B" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="3B24EFC6" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -100,8 +100,8 @@ plain **Bold** text
     </w:p>
 </w:footnote>
 <w:footnote w:id="0" w:type="continuationSeparator">
-    <w:p w14:paraId="1E5B885C" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="4FD2E378" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -143,8 +143,8 @@ plain *Italic* text
     </w:p>
 </w:body>
 <w:footnote w:id="-1" w:type="separator">
-    <w:p w14:paraId="2975246B" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="3B24EFC6" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -154,8 +154,8 @@ plain *Italic* text
     </w:p>
 </w:footnote>
 <w:footnote w:id="0" w:type="continuationSeparator">
-    <w:p w14:paraId="1E5B885C" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="4FD2E378" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -197,8 +197,8 @@ plain ~~strike-through~~ text
     </w:p>
 </w:body>
 <w:footnote w:id="-1" w:type="separator">
-    <w:p w14:paraId="2975246B" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="3B24EFC6" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -208,8 +208,8 @@ plain ~~strike-through~~ text
     </w:p>
 </w:footnote>
 <w:footnote w:id="0" w:type="continuationSeparator">
-    <w:p w14:paraId="1E5B885C" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="4FD2E378" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -260,8 +260,8 @@ plain ~subscript~ text H~2~O
     </w:p>
 </w:body>
 <w:footnote w:id="-1" w:type="separator">
-    <w:p w14:paraId="2975246B" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="3B24EFC6" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -271,8 +271,8 @@ plain ~subscript~ text H~2~O
     </w:p>
 </w:footnote>
 <w:footnote w:id="0" w:type="continuationSeparator">
-    <w:p w14:paraId="1E5B885C" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="4FD2E378" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -331,8 +331,8 @@ plain ^superscript^ text e^*i*pi^ = -1
     </w:p>
 </w:body>
 <w:footnote w:id="-1" w:type="separator">
-    <w:p w14:paraId="2975246B" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="3B24EFC6" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -342,8 +342,8 @@ plain ^superscript^ text e^*i*pi^ = -1
     </w:p>
 </w:footnote>
 <w:footnote w:id="0" w:type="continuationSeparator">
-    <w:p w14:paraId="1E5B885C" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="4FD2E378" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -406,8 +406,8 @@ plain ^superscript^ text e^ipi^ = -1
     </w:p>
 </w:body>
 <w:footnote w:id="-1" w:type="separator">
-    <w:p w14:paraId="2975246B" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="3B24EFC6" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -417,8 +417,8 @@ plain ^superscript^ text e^ipi^ = -1
     </w:p>
 </w:footnote>
 <w:footnote w:id="0" w:type="continuationSeparator">
-    <w:p w14:paraId="1E5B885C" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="4FD2E378" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -460,8 +460,8 @@ plain ++underline++ text
     </w:p>
 </w:body>
 <w:footnote w:id="-1" w:type="separator">
-    <w:p w14:paraId="2975246B" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="3B24EFC6" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -471,8 +471,8 @@ plain ++underline++ text
     </w:p>
 </w:footnote>
 <w:footnote w:id="0" w:type="continuationSeparator">
-    <w:p w14:paraId="1E5B885C" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="4FD2E378" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -514,8 +514,8 @@ plain `inline code` text
     </w:p>
 </w:body>
 <w:footnote w:id="-1" w:type="separator">
-    <w:p w14:paraId="2975246B" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="3B24EFC6" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -525,8 +525,8 @@ plain `inline code` text
     </w:p>
 </w:footnote>
 <w:footnote w:id="0" w:type="continuationSeparator">
-    <w:p w14:paraId="1E5B885C" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="4FD2E378" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -570,8 +570,8 @@ plain `inline code` highlight text
     </w:p>
 </w:body>
 <w:footnote w:id="-1" w:type="separator">
-    <w:p w14:paraId="2975246B" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="3B24EFC6" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -581,8 +581,8 @@ plain `inline code` highlight text
     </w:p>
 </w:footnote>
 <w:footnote w:id="0" w:type="continuationSeparator">
-    <w:p w14:paraId="1E5B885C" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="4FD2E378" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -626,8 +626,8 @@ plain `inline code` highlight text
     </w:p>
 </w:body>
 <w:footnote w:id="-1" w:type="separator">
-    <w:p w14:paraId="2975246B" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="3B24EFC6" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -637,8 +637,8 @@ plain `inline code` highlight text
     </w:p>
 </w:footnote>
 <w:footnote w:id="0" w:type="continuationSeparator">
-    <w:p w14:paraId="1E5B885C" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="4FD2E378" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -836,8 +836,8 @@ plain **Bold ~~Bold-strike-through~~** text
     </w:p>
 </w:body>
 <w:footnote w:id="-1" w:type="separator">
-    <w:p w14:paraId="2975246B" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="3B24EFC6" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -847,8 +847,8 @@ plain **Bold ~~Bold-strike-through~~** text
     </w:p>
 </w:footnote>
 <w:footnote w:id="0" w:type="continuationSeparator">
-    <w:p w14:paraId="1E5B885C" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="4FD2E378" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -924,8 +924,8 @@ plain **Bold ~~Bold-strike-through~~** text
     </w:p>
 </w:body>
 <w:footnote w:id="-1" w:type="separator">
-    <w:p w14:paraId="2975246B" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="3B24EFC6" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -935,8 +935,8 @@ plain **Bold ~~Bold-strike-through~~** text
     </w:p>
 </w:footnote>
 <w:footnote w:id="0" w:type="continuationSeparator">
-    <w:p w14:paraId="1E5B885C" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="4FD2E378" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -1012,8 +1012,8 @@ Numbering start
     </w:p>
 </w:body>
 <w:footnote w:id="-1" w:type="separator">
-    <w:p w14:paraId="2975246B" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="3B24EFC6" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -1023,8 +1023,8 @@ Numbering start
     </w:p>
 </w:footnote>
 <w:footnote w:id="0" w:type="continuationSeparator">
-    <w:p w14:paraId="1E5B885C" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="4FD2E378" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -1128,8 +1128,8 @@ tight lists
     </w:p>
 </w:body>
 <w:footnote w:id="-1" w:type="separator">
-    <w:p w14:paraId="2975246B" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="3B24EFC6" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -1139,8 +1139,8 @@ tight lists
     </w:p>
 </w:footnote>
 <w:footnote w:id="0" w:type="continuationSeparator">
-    <w:p w14:paraId="1E5B885C" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="4FD2E378" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -1246,8 +1246,8 @@ loose lists
     </w:p>
 </w:body>
 <w:footnote w:id="-1" w:type="separator">
-    <w:p w14:paraId="2975246B" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="3B24EFC6" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -1257,8 +1257,8 @@ loose lists
     </w:p>
 </w:footnote>
 <w:footnote w:id="0" w:type="continuationSeparator">
-    <w:p w14:paraId="1E5B885C" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="4FD2E378" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -1366,8 +1366,8 @@ loose lists
     </w:p>
 </w:body>
 <w:footnote w:id="-1" w:type="separator">
-    <w:p w14:paraId="2975246B" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="3B24EFC6" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -1377,8 +1377,8 @@ loose lists
     </w:p>
 </w:footnote>
 <w:footnote w:id="0" w:type="continuationSeparator">
-    <w:p w14:paraId="1E5B885C" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="4FD2E378" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -1469,8 +1469,8 @@ full list items
     </w:p>
 </w:body>
 <w:footnote w:id="-1" w:type="separator">
-    <w:p w14:paraId="2975246B" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="3B24EFC6" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -1480,8 +1480,8 @@ full list items
     </w:p>
 </w:footnote>
 <w:footnote w:id="0" w:type="continuationSeparator">
-    <w:p w14:paraId="1E5B885C" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="4FD2E378" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -1572,8 +1572,8 @@ full list items
     </w:p>
 </w:body>
 <w:footnote w:id="-1" w:type="separator">
-    <w:p w14:paraId="2975246B" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="3B24EFC6" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -1583,8 +1583,8 @@ full list items
     </w:p>
 </w:footnote>
 <w:footnote w:id="0" w:type="continuationSeparator">
-    <w:p w14:paraId="1E5B885C" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="4FD2E378" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -1648,8 +1648,8 @@ with some text
     </w:p>
 </w:body>
 <w:footnote w:id="-1" w:type="separator">
-    <w:p w14:paraId="2975246B" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="3B24EFC6" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -1659,8 +1659,8 @@ with some text
     </w:p>
 </w:footnote>
 <w:footnote w:id="0" w:type="continuationSeparator">
-    <w:p w14:paraId="1E5B885C" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="4FD2E378" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -1741,8 +1741,8 @@ with some text
     </w:p>
 </w:body>
 <w:footnote w:id="-1" w:type="separator">
-    <w:p w14:paraId="2975246B" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="3B24EFC6" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -1752,8 +1752,8 @@ with some text
     </w:p>
 </w:footnote>
 <w:footnote w:id="0" w:type="continuationSeparator">
-    <w:p w14:paraId="1E5B885C" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="4FD2E378" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -1832,8 +1832,8 @@ with some text
     </w:p>
 </w:body>
 <w:footnote w:id="-1" w:type="separator">
-    <w:p w14:paraId="2975246B" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="3B24EFC6" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -1843,8 +1843,8 @@ with some text
     </w:p>
 </w:footnote>
 <w:footnote w:id="0" w:type="continuationSeparator">
-    <w:p w14:paraId="1E5B885C" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="4FD2E378" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -1923,8 +1923,8 @@ with some text
     </w:p>
 </w:body>
 <w:footnote w:id="-1" w:type="separator">
-    <w:p w14:paraId="2975246B" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="3B24EFC6" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -1934,8 +1934,8 @@ with some text
     </w:p>
 </w:footnote>
 <w:footnote w:id="0" w:type="continuationSeparator">
-    <w:p w14:paraId="1E5B885C" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="4FD2E378" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -2014,8 +2014,8 @@ with some text
     </w:p>
 </w:body>
 <w:footnote w:id="-1" w:type="separator">
-    <w:p w14:paraId="2975246B" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="3B24EFC6" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -2025,8 +2025,8 @@ with some text
     </w:p>
 </w:footnote>
 <w:footnote w:id="0" w:type="continuationSeparator">
-    <w:p w14:paraId="1E5B885C" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="4FD2E378" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -2096,8 +2096,8 @@ lazy continuation
     </w:p>
 </w:body>
 <w:footnote w:id="-1" w:type="separator">
-    <w:p w14:paraId="2975246B" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="3B24EFC6" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -2107,8 +2107,8 @@ lazy continuation
     </w:p>
 </w:footnote>
 <w:footnote w:id="0" w:type="continuationSeparator">
-    <w:p w14:paraId="1E5B885C" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="4FD2E378" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -2172,8 +2172,8 @@ with hyperlink
     </w:p>
 </w:body>
 <w:footnote w:id="-1" w:type="separator">
-    <w:p w14:paraId="2975246B" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="3B24EFC6" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -2183,8 +2183,8 @@ with hyperlink
     </w:p>
 </w:footnote>
 <w:footnote w:id="0" w:type="continuationSeparator">
-    <w:p w14:paraId="1E5B885C" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="4FD2E378" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -2258,8 +2258,8 @@ with hard break
     </w:p>
 </w:body>
 <w:footnote w:id="-1" w:type="separator">
-    <w:p w14:paraId="2975246B" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="3B24EFC6" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -2269,8 +2269,8 @@ with hard break
     </w:p>
 </w:footnote>
 <w:footnote w:id="0" w:type="continuationSeparator">
-    <w:p w14:paraId="1E5B885C" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="4FD2E378" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -2347,8 +2347,8 @@ with child paragraphs
     </w:p>
 </w:body>
 <w:footnote w:id="-1" w:type="separator">
-    <w:p w14:paraId="2975246B" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="3B24EFC6" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -2358,8 +2358,8 @@ with child paragraphs
     </w:p>
 </w:footnote>
 <w:footnote w:id="0" w:type="continuationSeparator">
-    <w:p w14:paraId="1E5B885C" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="4FD2E378" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -2429,8 +2429,8 @@ with child block quote
     </w:p>
 </w:body>
 <w:footnote w:id="-1" w:type="separator">
-    <w:p w14:paraId="2975246B" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="3B24EFC6" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -2440,8 +2440,8 @@ with child block quote
     </w:p>
 </w:footnote>
 <w:footnote w:id="0" w:type="continuationSeparator">
-    <w:p w14:paraId="1E5B885C" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="4FD2E378" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -2540,8 +2540,8 @@ with child paragraphs
     </w:p>
 </w:body>
 <w:footnote w:id="-1" w:type="separator">
-    <w:p w14:paraId="2975246B" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="3B24EFC6" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -2551,8 +2551,8 @@ with child paragraphs
     </w:p>
 </w:footnote>
 <w:footnote w:id="0" w:type="continuationSeparator">
-    <w:p w14:paraId="1E5B885C" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="4FD2E378" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -2610,8 +2610,8 @@ code
     </w:p>
 </w:body>
 <w:footnote w:id="-1" w:type="separator">
-    <w:p w14:paraId="2975246B" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="3B24EFC6" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -2621,8 +2621,8 @@ code
     </w:p>
 </w:footnote>
 <w:footnote w:id="0" w:type="continuationSeparator">
-    <w:p w14:paraId="1E5B885C" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="4FD2E378" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -2697,8 +2697,8 @@ text after
     </w:p>
 </w:body>
 <w:footnote w:id="-1" w:type="separator">
-    <w:p w14:paraId="2975246B" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="3B24EFC6" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -2708,8 +2708,8 @@ text after
     </w:p>
 </w:footnote>
 <w:footnote w:id="0" w:type="continuationSeparator">
-    <w:p w14:paraId="1E5B885C" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="4FD2E378" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -2738,8 +2738,8 @@ text after
     </w:p>
 </w:body>
 <w:footnote w:id="-1" w:type="separator">
-    <w:p w14:paraId="2975246B" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="3B24EFC6" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -2749,8 +2749,8 @@ text after
     </w:p>
 </w:footnote>
 <w:footnote w:id="0" w:type="continuationSeparator">
-    <w:p w14:paraId="1E5B885C" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="4FD2E378" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -3428,6 +3428,9 @@ code
             <w:ind w:hanging="360" w:left="1560"/>
         </w:pPr>
         <w:r>
+            <w:rPr>
+                <w:sz w:val="18"/>
+            </w:rPr>
             <w:t xml:space="preserve">list</w:t>
         </w:r>
     </w:p>
@@ -3445,6 +3448,9 @@ code
             <w:ind w:hanging="360" w:left="1920"/>
         </w:pPr>
         <w:r>
+            <w:rPr>
+                <w:sz w:val="18"/>
+            </w:rPr>
             <w:t xml:space="preserve">nested list</w:t>
         </w:r>
     </w:p>
@@ -3954,8 +3960,8 @@ code
     </w:tbl>
 </w:body>
 <w:footnote w:id="-1" w:type="separator">
-    <w:p w14:paraId="2975246B" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="3B24EFC6" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -3965,8 +3971,8 @@ code
     </w:p>
 </w:footnote>
 <w:footnote w:id="0" w:type="continuationSeparator">
-    <w:p w14:paraId="1E5B885C" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="4FD2E378" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -4597,6 +4603,9 @@ code
             <w:ind w:hanging="360" w:left="1560"/>
         </w:pPr>
         <w:r>
+            <w:rPr>
+                <w:sz w:val="18"/>
+            </w:rPr>
             <w:t xml:space="preserve">list</w:t>
         </w:r>
     </w:p>
@@ -4614,6 +4623,9 @@ code
             <w:ind w:hanging="360" w:left="1920"/>
         </w:pPr>
         <w:r>
+            <w:rPr>
+                <w:sz w:val="18"/>
+            </w:rPr>
             <w:t xml:space="preserve">nested list</w:t>
         </w:r>
     </w:p>
@@ -5123,8 +5135,8 @@ code
     </w:tbl>
 </w:body>
 <w:footnote w:id="-1" w:type="separator">
-    <w:p w14:paraId="2975246B" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="3B24EFC6" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -5134,8 +5146,8 @@ code
     </w:p>
 </w:footnote>
 <w:footnote w:id="0" w:type="continuationSeparator">
-    <w:p w14:paraId="1E5B885C" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="4FD2E378" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -5636,6 +5648,9 @@ code
             <w:ind w:hanging="360" w:left="1080"/>
         </w:pPr>
         <w:r>
+            <w:rPr>
+                <w:sz w:val="18"/>
+            </w:rPr>
             <w:t xml:space="preserve">list</w:t>
         </w:r>
     </w:p>
@@ -5653,6 +5668,9 @@ code
             <w:ind w:hanging="360" w:left="1440"/>
         </w:pPr>
         <w:r>
+            <w:rPr>
+                <w:sz w:val="18"/>
+            </w:rPr>
             <w:t xml:space="preserve">nested list</w:t>
         </w:r>
     </w:p>
@@ -6150,8 +6168,8 @@ code
     </w:tbl>
 </w:body>
 <w:footnote w:id="-1" w:type="separator">
-    <w:p w14:paraId="2975246B" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="3B24EFC6" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -6161,8 +6179,8 @@ code
     </w:p>
 </w:footnote>
 <w:footnote w:id="0" w:type="continuationSeparator">
-    <w:p w14:paraId="1E5B885C" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="4FD2E378" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -6236,8 +6254,8 @@ plain {-del-} {+ins+}
     </w:p>
 </w:body>
 <w:footnote w:id="-1" w:type="separator">
-    <w:p w14:paraId="2975246B" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="3B24EFC6" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -6247,8 +6265,8 @@ plain {-del-} {+ins+}
     </w:p>
 </w:footnote>
 <w:footnote w:id="0" w:type="continuationSeparator">
-    <w:p w14:paraId="1E5B885C" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="4FD2E378" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -6293,6 +6311,7 @@ Block Quote
         <w:r>
             <w:rPr>
                 <w:color w:val="666666"/>
+                <w:sz w:val="18"/>
             </w:rPr>
             <w:t xml:space="preserve">Block Quote</w:t>
         </w:r>
@@ -6305,8 +6324,8 @@ Block Quote
     </w:p>
 </w:body>
 <w:footnote w:id="-1" w:type="separator">
-    <w:p w14:paraId="2975246B" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="3B24EFC6" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -6316,8 +6335,8 @@ Block Quote
     </w:p>
 </w:footnote>
 <w:footnote w:id="0" w:type="continuationSeparator">
-    <w:p w14:paraId="1E5B885C" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="4FD2E378" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -6365,6 +6384,7 @@ Nested Block Quote
         <w:r>
             <w:rPr>
                 <w:color w:val="666666"/>
+                <w:sz w:val="18"/>
             </w:rPr>
             <w:t xml:space="preserve">Block Quote</w:t>
         </w:r>
@@ -6397,8 +6417,8 @@ Nested Block Quote
     </w:p>
 </w:body>
 <w:footnote w:id="-1" w:type="separator">
-    <w:p w14:paraId="2975246B" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="3B24EFC6" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -6408,8 +6428,8 @@ Nested Block Quote
     </w:p>
 </w:footnote>
 <w:footnote w:id="0" w:type="continuationSeparator">
-    <w:p w14:paraId="1E5B885C" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="4FD2E378" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -6902,8 +6922,8 @@ All the fixings
     </w:p>
 </w:body>
 <w:footnote w:id="-1" w:type="separator">
-    <w:p w14:paraId="2975246B" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="3B24EFC6" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -6913,8 +6933,8 @@ All the fixings
     </w:p>
 </w:footnote>
 <w:footnote w:id="0" w:type="continuationSeparator">
-    <w:p w14:paraId="1E5B885C" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="4FD2E378" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -7173,8 +7193,8 @@ With breaks
     </w:p>
 </w:body>
 <w:footnote w:id="-1" w:type="separator">
-    <w:p w14:paraId="2975246B" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="3B24EFC6" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -7184,8 +7204,8 @@ With breaks
     </w:p>
 </w:footnote>
 <w:footnote w:id="0" w:type="continuationSeparator">
-    <w:p w14:paraId="1E5B885C" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="4FD2E378" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -7444,8 +7464,8 @@ With breaks and caption before
     </w:tbl>
 </w:body>
 <w:footnote w:id="-1" w:type="separator">
-    <w:p w14:paraId="2975246B" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="3B24EFC6" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -7455,8 +7475,8 @@ With breaks and caption before
     </w:p>
 </w:footnote>
 <w:footnote w:id="0" w:type="continuationSeparator">
-    <w:p w14:paraId="1E5B885C" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="4FD2E378" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -7596,8 +7616,8 @@ With spanning columns
     </w:tbl>
 </w:body>
 <w:footnote w:id="-1" w:type="separator">
-    <w:p w14:paraId="2975246B" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="3B24EFC6" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -7607,8 +7627,8 @@ With spanning columns
     </w:p>
 </w:footnote>
 <w:footnote w:id="0" w:type="continuationSeparator">
-    <w:p w14:paraId="1E5B885C" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="4FD2E378" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -7754,8 +7774,8 @@ With spanning columns turned off
     </w:tbl>
 </w:body>
 <w:footnote w:id="-1" w:type="separator">
-    <w:p w14:paraId="2975246B" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="3B24EFC6" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -7765,8 +7785,8 @@ With spanning columns turned off
     </w:p>
 </w:footnote>
 <w:footnote w:id="0" w:type="continuationSeparator">
-    <w:p w14:paraId="1E5B885C" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="4FD2E378" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -7899,8 +7919,8 @@ With embedded links
     </w:tbl>
 </w:body>
 <w:footnote w:id="-1" w:type="separator">
-    <w:p w14:paraId="2975246B" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="3B24EFC6" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -7910,8 +7930,8 @@ With embedded links
     </w:p>
 </w:footnote>
 <w:footnote w:id="0" w:type="continuationSeparator">
-    <w:p w14:paraId="1E5B885C" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="4FD2E378" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -7972,6 +7992,9 @@ block quote with bullet list
             <w:ind w:hanging="360" w:left="600"/>
         </w:pPr>
         <w:r>
+            <w:rPr>
+                <w:sz w:val="18"/>
+            </w:rPr>
             <w:t xml:space="preserve">a list item</w:t>
         </w:r>
     </w:p>
@@ -7989,6 +8012,9 @@ block quote with bullet list
             <w:ind w:hanging="360" w:left="600"/>
         </w:pPr>
         <w:r>
+            <w:rPr>
+                <w:sz w:val="18"/>
+            </w:rPr>
             <w:t xml:space="preserve">another list item</w:t>
         </w:r>
     </w:p>
@@ -8000,8 +8026,8 @@ block quote with bullet list
     </w:p>
 </w:body>
 <w:footnote w:id="-1" w:type="separator">
-    <w:p w14:paraId="2975246B" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="3B24EFC6" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -8011,8 +8037,8 @@ block quote with bullet list
     </w:p>
 </w:footnote>
 <w:footnote w:id="0" w:type="continuationSeparator">
-    <w:p w14:paraId="1E5B885C" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="4FD2E378" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -8069,6 +8095,9 @@ block quote with bullet nested list
             <w:ind w:hanging="360" w:left="600"/>
         </w:pPr>
         <w:r>
+            <w:rPr>
+                <w:sz w:val="18"/>
+            </w:rPr>
             <w:t xml:space="preserve">a list item</w:t>
         </w:r>
     </w:p>
@@ -8086,6 +8115,9 @@ block quote with bullet nested list
             <w:ind w:hanging="360" w:left="960"/>
         </w:pPr>
         <w:r>
+            <w:rPr>
+                <w:sz w:val="18"/>
+            </w:rPr>
             <w:t xml:space="preserve">another list item</w:t>
         </w:r>
     </w:p>
@@ -8097,8 +8129,8 @@ block quote with bullet nested list
     </w:p>
 </w:body>
 <w:footnote w:id="-1" w:type="separator">
-    <w:p w14:paraId="2975246B" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="3B24EFC6" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -8108,8 +8140,8 @@ block quote with bullet nested list
     </w:p>
 </w:footnote>
 <w:footnote w:id="0" w:type="continuationSeparator">
-    <w:p w14:paraId="1E5B885C" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="4FD2E378" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -8169,6 +8201,9 @@ block quote with bullet list nested beyond border space limit
             <w:ind w:hanging="360" w:left="600"/>
         </w:pPr>
         <w:r>
+            <w:rPr>
+                <w:sz w:val="18"/>
+            </w:rPr>
             <w:t xml:space="preserve">a list item</w:t>
         </w:r>
     </w:p>
@@ -8186,6 +8221,9 @@ block quote with bullet list nested beyond border space limit
             <w:ind w:hanging="360" w:left="960"/>
         </w:pPr>
         <w:r>
+            <w:rPr>
+                <w:sz w:val="18"/>
+            </w:rPr>
             <w:t xml:space="preserve">another list item</w:t>
         </w:r>
     </w:p>
@@ -8203,6 +8241,9 @@ block quote with bullet list nested beyond border space limit
             <w:ind w:hanging="360" w:left="1320"/>
         </w:pPr>
         <w:r>
+            <w:rPr>
+                <w:sz w:val="18"/>
+            </w:rPr>
             <w:t xml:space="preserve">another list item</w:t>
         </w:r>
     </w:p>
@@ -8220,6 +8261,9 @@ block quote with bullet list nested beyond border space limit
             <w:ind w:hanging="360" w:left="1680"/>
         </w:pPr>
         <w:r>
+            <w:rPr>
+                <w:sz w:val="18"/>
+            </w:rPr>
             <w:t xml:space="preserve">another list item</w:t>
         </w:r>
     </w:p>
@@ -8237,6 +8281,9 @@ block quote with bullet list nested beyond border space limit
             <w:ind w:hanging="360" w:left="2040"/>
         </w:pPr>
         <w:r>
+            <w:rPr>
+                <w:sz w:val="18"/>
+            </w:rPr>
             <w:t xml:space="preserve">another list item</w:t>
         </w:r>
     </w:p>
@@ -8248,8 +8295,8 @@ block quote with bullet list nested beyond border space limit
     </w:p>
 </w:body>
 <w:footnote w:id="-1" w:type="separator">
-    <w:p w14:paraId="2975246B" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="3B24EFC6" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -8259,8 +8306,8 @@ block quote with bullet list nested beyond border space limit
     </w:p>
 </w:footnote>
 <w:footnote w:id="0" w:type="continuationSeparator">
-    <w:p w14:paraId="1E5B885C" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="4FD2E378" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -8317,6 +8364,9 @@ block quote with ordered list
             <w:ind w:hanging="360" w:left="600"/>
         </w:pPr>
         <w:r>
+            <w:rPr>
+                <w:sz w:val="18"/>
+            </w:rPr>
             <w:t xml:space="preserve">a list item</w:t>
         </w:r>
     </w:p>
@@ -8334,6 +8384,9 @@ block quote with ordered list
             <w:ind w:hanging="360" w:left="600"/>
         </w:pPr>
         <w:r>
+            <w:rPr>
+                <w:sz w:val="18"/>
+            </w:rPr>
             <w:t xml:space="preserve">another list item</w:t>
         </w:r>
     </w:p>
@@ -8345,8 +8398,8 @@ block quote with ordered list
     </w:p>
 </w:body>
 <w:footnote w:id="-1" w:type="separator">
-    <w:p w14:paraId="2975246B" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="3B24EFC6" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -8356,8 +8409,8 @@ block quote with ordered list
     </w:p>
 </w:footnote>
 <w:footnote w:id="0" w:type="continuationSeparator">
-    <w:p w14:paraId="1E5B885C" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="4FD2E378" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -8457,8 +8510,8 @@ block quote with ordered list
     </w:tbl>
 </w:body>
 <w:footnote w:id="-1" w:type="separator">
-    <w:p w14:paraId="2975246B" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="3B24EFC6" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -8468,8 +8521,8 @@ block quote with ordered list
     </w:p>
 </w:footnote>
 <w:footnote w:id="0" w:type="continuationSeparator">
-    <w:p w14:paraId="1E5B885C" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="4FD2E378" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -8578,8 +8631,8 @@ block quote with ordered list
     </w:p>
 </w:body>
 <w:footnote w:id="-1" w:type="separator">
-    <w:p w14:paraId="2975246B" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="3B24EFC6" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -8589,8 +8642,8 @@ block quote with ordered list
     </w:p>
 </w:footnote>
 <w:footnote w:id="0" w:type="continuationSeparator">
-    <w:p w14:paraId="1E5B885C" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="4FD2E378" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -8652,8 +8705,8 @@ list with block quote
     </w:p>
 </w:body>
 <w:footnote w:id="-1" w:type="separator">
-    <w:p w14:paraId="2975246B" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="3B24EFC6" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -8663,8 +8716,8 @@ list with block quote
     </w:p>
 </w:footnote>
 <w:footnote w:id="0" w:type="continuationSeparator">
-    <w:p w14:paraId="1E5B885C" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="4FD2E378" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -8739,8 +8792,8 @@ list with block quote
     </w:p>
 </w:body>
 <w:footnote w:id="-1" w:type="separator">
-    <w:p w14:paraId="2975246B" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="3B24EFC6" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -8750,8 +8803,8 @@ list with block quote
     </w:p>
 </w:footnote>
 <w:footnote w:id="0" w:type="continuationSeparator">
-    <w:p w14:paraId="1E5B885C" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="4FD2E378" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -8847,6 +8900,7 @@ list with block quote
         <w:r>
             <w:rPr>
                 <w:color w:val="666666"/>
+                <w:sz w:val="18"/>
             </w:rPr>
             <w:t xml:space="preserve">with list</w:t>
         </w:r>
@@ -8863,6 +8917,7 @@ list with block quote
         <w:r>
             <w:rPr>
                 <w:color w:val="666666"/>
+                <w:sz w:val="18"/>
             </w:rPr>
             <w:t xml:space="preserve">text</w:t>
         </w:r>
@@ -8891,6 +8946,7 @@ list with block quote
         <w:r>
             <w:rPr>
                 <w:color w:val="666666"/>
+                <w:sz w:val="18"/>
             </w:rPr>
             <w:t xml:space="preserve">with list</w:t>
         </w:r>
@@ -8907,6 +8963,7 @@ list with block quote
         <w:r>
             <w:rPr>
                 <w:color w:val="666666"/>
+                <w:sz w:val="18"/>
             </w:rPr>
             <w:t xml:space="preserve">text</w:t>
         </w:r>
@@ -9002,6 +9059,7 @@ list with block quote
         <w:r>
             <w:rPr>
                 <w:color w:val="666666"/>
+                <w:sz w:val="18"/>
             </w:rPr>
             <w:t xml:space="preserve">with list</w:t>
         </w:r>
@@ -9018,6 +9076,7 @@ list with block quote
         <w:r>
             <w:rPr>
                 <w:color w:val="666666"/>
+                <w:sz w:val="18"/>
             </w:rPr>
             <w:t xml:space="preserve">list child text</w:t>
         </w:r>
@@ -9047,6 +9106,7 @@ list with block quote
         <w:r>
             <w:rPr>
                 <w:color w:val="666666"/>
+                <w:sz w:val="18"/>
             </w:rPr>
             <w:t xml:space="preserve">with list</w:t>
         </w:r>
@@ -9063,6 +9123,7 @@ list with block quote
         <w:r>
             <w:rPr>
                 <w:color w:val="666666"/>
+                <w:sz w:val="18"/>
             </w:rPr>
             <w:t xml:space="preserve">list child text</w:t>
         </w:r>
@@ -9096,8 +9157,8 @@ list with block quote
     </w:p>
 </w:body>
 <w:footnote w:id="-1" w:type="separator">
-    <w:p w14:paraId="2975246B" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="3B24EFC6" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -9107,8 +9168,8 @@ list with block quote
     </w:p>
 </w:footnote>
 <w:footnote w:id="0" w:type="continuationSeparator">
-    <w:p w14:paraId="1E5B885C" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="4FD2E378" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -9193,6 +9254,9 @@ list with block quote
             <w:ind w:hanging="360" w:left="1320"/>
         </w:pPr>
         <w:r>
+            <w:rPr>
+                <w:sz w:val="18"/>
+            </w:rPr>
             <w:t xml:space="preserve">with list</w:t>
         </w:r>
     </w:p>
@@ -9264,8 +9328,8 @@ list with block quote
     </w:p>
 </w:body>
 <w:footnote w:id="-1" w:type="separator">
-    <w:p w14:paraId="2975246B" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="3B24EFC6" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -9275,8 +9339,8 @@ list with block quote
     </w:p>
 </w:footnote>
 <w:footnote w:id="0" w:type="continuationSeparator">
-    <w:p w14:paraId="1E5B885C" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="4FD2E378" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -9333,6 +9397,9 @@ aside block with bullet list
             <w:ind w:hanging="360" w:left="600"/>
         </w:pPr>
         <w:r>
+            <w:rPr>
+                <w:sz w:val="18"/>
+            </w:rPr>
             <w:t xml:space="preserve">a list item</w:t>
         </w:r>
     </w:p>
@@ -9350,6 +9417,9 @@ aside block with bullet list
             <w:ind w:hanging="360" w:left="600"/>
         </w:pPr>
         <w:r>
+            <w:rPr>
+                <w:sz w:val="18"/>
+            </w:rPr>
             <w:t xml:space="preserve">another list item</w:t>
         </w:r>
     </w:p>
@@ -9361,8 +9431,8 @@ aside block with bullet list
     </w:p>
 </w:body>
 <w:footnote w:id="-1" w:type="separator">
-    <w:p w14:paraId="2975246B" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="3B24EFC6" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -9372,8 +9442,8 @@ aside block with bullet list
     </w:p>
 </w:footnote>
 <w:footnote w:id="0" w:type="continuationSeparator">
-    <w:p w14:paraId="1E5B885C" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="4FD2E378" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -9430,6 +9500,9 @@ aside block with bullet nested list
             <w:ind w:hanging="360" w:left="600"/>
         </w:pPr>
         <w:r>
+            <w:rPr>
+                <w:sz w:val="18"/>
+            </w:rPr>
             <w:t xml:space="preserve">a list item</w:t>
         </w:r>
     </w:p>
@@ -9447,6 +9520,9 @@ aside block with bullet nested list
             <w:ind w:hanging="360" w:left="960"/>
         </w:pPr>
         <w:r>
+            <w:rPr>
+                <w:sz w:val="18"/>
+            </w:rPr>
             <w:t xml:space="preserve">another list item</w:t>
         </w:r>
     </w:p>
@@ -9458,8 +9534,8 @@ aside block with bullet nested list
     </w:p>
 </w:body>
 <w:footnote w:id="-1" w:type="separator">
-    <w:p w14:paraId="2975246B" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="3B24EFC6" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -9469,8 +9545,8 @@ aside block with bullet nested list
     </w:p>
 </w:footnote>
 <w:footnote w:id="0" w:type="continuationSeparator">
-    <w:p w14:paraId="1E5B885C" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="4FD2E378" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -9530,6 +9606,9 @@ aside block with bullet list nested beyond border space limit
             <w:ind w:hanging="360" w:left="600"/>
         </w:pPr>
         <w:r>
+            <w:rPr>
+                <w:sz w:val="18"/>
+            </w:rPr>
             <w:t xml:space="preserve">a list item</w:t>
         </w:r>
     </w:p>
@@ -9547,6 +9626,9 @@ aside block with bullet list nested beyond border space limit
             <w:ind w:hanging="360" w:left="960"/>
         </w:pPr>
         <w:r>
+            <w:rPr>
+                <w:sz w:val="18"/>
+            </w:rPr>
             <w:t xml:space="preserve">another list item</w:t>
         </w:r>
     </w:p>
@@ -9564,6 +9646,9 @@ aside block with bullet list nested beyond border space limit
             <w:ind w:hanging="360" w:left="1320"/>
         </w:pPr>
         <w:r>
+            <w:rPr>
+                <w:sz w:val="18"/>
+            </w:rPr>
             <w:t xml:space="preserve">another list item</w:t>
         </w:r>
     </w:p>
@@ -9581,6 +9666,9 @@ aside block with bullet list nested beyond border space limit
             <w:ind w:hanging="360" w:left="1680"/>
         </w:pPr>
         <w:r>
+            <w:rPr>
+                <w:sz w:val="18"/>
+            </w:rPr>
             <w:t xml:space="preserve">another list item</w:t>
         </w:r>
     </w:p>
@@ -9598,6 +9686,9 @@ aside block with bullet list nested beyond border space limit
             <w:ind w:hanging="360" w:left="2040"/>
         </w:pPr>
         <w:r>
+            <w:rPr>
+                <w:sz w:val="18"/>
+            </w:rPr>
             <w:t xml:space="preserve">another list item</w:t>
         </w:r>
     </w:p>
@@ -9609,8 +9700,8 @@ aside block with bullet list nested beyond border space limit
     </w:p>
 </w:body>
 <w:footnote w:id="-1" w:type="separator">
-    <w:p w14:paraId="2975246B" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="3B24EFC6" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -9620,8 +9711,8 @@ aside block with bullet list nested beyond border space limit
     </w:p>
 </w:footnote>
 <w:footnote w:id="0" w:type="continuationSeparator">
-    <w:p w14:paraId="1E5B885C" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="4FD2E378" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -9678,6 +9769,9 @@ aside block with ordered list
             <w:ind w:hanging="360" w:left="600"/>
         </w:pPr>
         <w:r>
+            <w:rPr>
+                <w:sz w:val="18"/>
+            </w:rPr>
             <w:t xml:space="preserve">a list item</w:t>
         </w:r>
     </w:p>
@@ -9695,6 +9789,9 @@ aside block with ordered list
             <w:ind w:hanging="360" w:left="600"/>
         </w:pPr>
         <w:r>
+            <w:rPr>
+                <w:sz w:val="18"/>
+            </w:rPr>
             <w:t xml:space="preserve">another list item</w:t>
         </w:r>
     </w:p>
@@ -9706,8 +9803,8 @@ aside block with ordered list
     </w:p>
 </w:body>
 <w:footnote w:id="-1" w:type="separator">
-    <w:p w14:paraId="2975246B" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="3B24EFC6" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -9717,8 +9814,8 @@ aside block with ordered list
     </w:p>
 </w:footnote>
 <w:footnote w:id="0" w:type="continuationSeparator">
-    <w:p w14:paraId="1E5B885C" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="4FD2E378" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -9818,8 +9915,8 @@ aside block with ordered list
     </w:tbl>
 </w:body>
 <w:footnote w:id="-1" w:type="separator">
-    <w:p w14:paraId="2975246B" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="3B24EFC6" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -9829,8 +9926,8 @@ aside block with ordered list
     </w:p>
 </w:footnote>
 <w:footnote w:id="0" w:type="continuationSeparator">
-    <w:p w14:paraId="1E5B885C" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="4FD2E378" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -9938,8 +10035,8 @@ aside block with ordered list
     </w:p>
 </w:body>
 <w:footnote w:id="-1" w:type="separator">
-    <w:p w14:paraId="2975246B" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="3B24EFC6" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -9949,8 +10046,8 @@ aside block with ordered list
     </w:p>
 </w:footnote>
 <w:footnote w:id="0" w:type="continuationSeparator">
-    <w:p w14:paraId="1E5B885C" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="4FD2E378" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -10012,8 +10109,8 @@ list with aside block
     </w:p>
 </w:body>
 <w:footnote w:id="-1" w:type="separator">
-    <w:p w14:paraId="2975246B" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="3B24EFC6" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -10023,8 +10120,8 @@ list with aside block
     </w:p>
 </w:footnote>
 <w:footnote w:id="0" w:type="continuationSeparator">
-    <w:p w14:paraId="1E5B885C" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="4FD2E378" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -10099,8 +10196,8 @@ list with aside block
     </w:p>
 </w:body>
 <w:footnote w:id="-1" w:type="separator">
-    <w:p w14:paraId="2975246B" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="3B24EFC6" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -10110,8 +10207,8 @@ list with aside block
     </w:p>
 </w:footnote>
 <w:footnote w:id="0" w:type="continuationSeparator">
-    <w:p w14:paraId="1E5B885C" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="4FD2E378" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -10205,6 +10302,9 @@ list with aside block
             <w:ind w:hanging="360" w:left="600"/>
         </w:pPr>
         <w:r>
+            <w:rPr>
+                <w:sz w:val="18"/>
+            </w:rPr>
             <w:t xml:space="preserve">with list</w:t>
         </w:r>
     </w:p>
@@ -10218,6 +10318,9 @@ list with aside block
             <w:ind w:left="600"/>
         </w:pPr>
         <w:r>
+            <w:rPr>
+                <w:sz w:val="18"/>
+            </w:rPr>
             <w:t xml:space="preserve">text</w:t>
         </w:r>
     </w:p>
@@ -10243,6 +10346,9 @@ list with aside block
             <w:ind w:hanging="360" w:left="600"/>
         </w:pPr>
         <w:r>
+            <w:rPr>
+                <w:sz w:val="18"/>
+            </w:rPr>
             <w:t xml:space="preserve">with list</w:t>
         </w:r>
     </w:p>
@@ -10256,6 +10362,9 @@ list with aside block
             <w:ind w:left="600"/>
         </w:pPr>
         <w:r>
+            <w:rPr>
+                <w:sz w:val="18"/>
+            </w:rPr>
             <w:t xml:space="preserve">text</w:t>
         </w:r>
     </w:p>
@@ -10348,6 +10457,9 @@ list with aside block
             <w:ind w:hanging="360" w:left="1320"/>
         </w:pPr>
         <w:r>
+            <w:rPr>
+                <w:sz w:val="18"/>
+            </w:rPr>
             <w:t xml:space="preserve">with list</w:t>
         </w:r>
     </w:p>
@@ -10361,6 +10473,9 @@ list with aside block
             <w:ind w:left="1320"/>
         </w:pPr>
         <w:r>
+            <w:rPr>
+                <w:sz w:val="18"/>
+            </w:rPr>
             <w:t xml:space="preserve">list child text</w:t>
         </w:r>
     </w:p>
@@ -10387,6 +10502,9 @@ list with aside block
             <w:ind w:hanging="360" w:left="1320"/>
         </w:pPr>
         <w:r>
+            <w:rPr>
+                <w:sz w:val="18"/>
+            </w:rPr>
             <w:t xml:space="preserve">with list</w:t>
         </w:r>
     </w:p>
@@ -10400,6 +10518,9 @@ list with aside block
             <w:ind w:left="1320"/>
         </w:pPr>
         <w:r>
+            <w:rPr>
+                <w:sz w:val="18"/>
+            </w:rPr>
             <w:t xml:space="preserve">list child text</w:t>
         </w:r>
     </w:p>
@@ -10432,8 +10553,8 @@ list with aside block
     </w:p>
 </w:body>
 <w:footnote w:id="-1" w:type="separator">
-    <w:p w14:paraId="2975246B" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="3B24EFC6" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -10443,8 +10564,8 @@ list with aside block
     </w:p>
 </w:footnote>
 <w:footnote w:id="0" w:type="continuationSeparator">
-    <w:p w14:paraId="1E5B885C" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="4FD2E378" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -10529,6 +10650,9 @@ list with aside block
             <w:ind w:hanging="360" w:left="1320"/>
         </w:pPr>
         <w:r>
+            <w:rPr>
+                <w:sz w:val="18"/>
+            </w:rPr>
             <w:t xml:space="preserve">with list</w:t>
         </w:r>
     </w:p>
@@ -10599,8 +10723,8 @@ list with aside block
     </w:p>
 </w:body>
 <w:footnote w:id="-1" w:type="separator">
-    <w:p w14:paraId="2975246B" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="3B24EFC6" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>
@@ -10610,8 +10734,8 @@ list with aside block
     </w:p>
 </w:footnote>
 <w:footnote w:id="0" w:type="continuationSeparator">
-    <w:p w14:paraId="1E5B885C" w14:textId="77777777" w:rsidP="005C2DA3"
-        w:rsidR="00F31E11" w:rsidRDefault="00F31E11">
+    <w:p w14:paraId="4FD2E378" w14:textId="77777777" w:rsidP="005C2DA3"
+        w:rsidR="00303ECF" w:rsidRDefault="00303ECF">
         <w:pPr>
             <w:spacing w:after="0"/>
         </w:pPr>

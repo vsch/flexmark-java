@@ -105,9 +105,11 @@ public class BlockFormatProviderBase<T> implements BlockFormatProvider<T> {
     @Override
     public void getPPr(final PPr pPr) {
         // Create object for pStyle if one does not already exist
-        PPrBase.PStyle basePStyle = myDocx.getFactory().createPPrBasePStyle();
-        pPr.setPStyle(basePStyle);
-        basePStyle.setVal(myBaseStyleId);
+        if (myBaseStyleId != null) {
+            PPrBase.PStyle basePStyle = myDocx.getFactory().createPPrBasePStyle();
+            pPr.setPStyle(basePStyle);
+            basePStyle.setVal(myBaseStyleId);
+        }
 
         // Create object for rPr
         ParaRPr pararpr = pPr.getRPr();
