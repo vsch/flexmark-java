@@ -59,6 +59,26 @@ public class ResolvedLink {
         return myUrl;
     }
 
+    public String getPageRef() {
+        // parse out the anchor marker and ref
+        int pos = myUrl.indexOf('#');
+        if (pos < 0) {
+            return myUrl;
+        } else {
+            return myUrl.substring(0, pos);
+        }
+    }
+
+    public String getAnchorRef() {
+        // parse out the anchor marker and ref
+        int pos = myUrl.indexOf('#');
+        if (pos < 0) {
+            return null;
+        } else {
+            return myUrl.substring(pos + 1);
+        }
+    }
+
     public ResolvedLink withTitle(CharSequence title) {
         String haveTitle = myAttributes == null ? null : myAttributes.getValue(Attribute.TITLE_ATTR);
         if (title == haveTitle || haveTitle != null && haveTitle.equals(title)) return this;

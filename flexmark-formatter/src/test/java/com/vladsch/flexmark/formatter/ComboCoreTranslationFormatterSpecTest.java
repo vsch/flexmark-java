@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.Map;
 
 public class ComboCoreTranslationFormatterSpecTest extends ComboSpecTestCase {
+    static final boolean SKIP_IGNORED_TESTS = true;
     private static final String SPEC_RESOURCE = "/core_translation_formatter_spec.md";
     private static final boolean SHOW_INTERMEDIATE = false;
     private static final DataHolder OPTIONS = new MutableDataSet()
@@ -104,6 +105,7 @@ public class ComboCoreTranslationFormatterSpecTest extends ComboSpecTestCase {
         //optionsMap.put("code-trailing-spaces-keep-all", new MutableDataSet().set(Formatter.CODE_KEEP_TRAILING_SPACES, TrailingSpaces.KEEP_ALL));
         //optionsMap.put("code-trailing-spaces-keep-line-break", new MutableDataSet().set(Formatter.CODE_KEEP_TRAILING_SPACES, TrailingSpaces.KEEP_LINE_BREAK));
         //optionsMap.put("code-trailing-spaces-keep-none", new MutableDataSet().set(Formatter.CODE_KEEP_TRAILING_SPACES, TrailingSpaces.KEEP_NONE));
+        optionsMap.put("IGNORED", new MutableDataSet().set(IGNORE, SKIP_IGNORED_TESTS));
     }
 
     static final Parser PARSER = Parser.builder(OPTIONS).build();

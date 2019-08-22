@@ -1,5 +1,6 @@
 package com.vladsch.flexmark.ast;
 
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 public interface AnchorRefTarget {
@@ -7,4 +8,7 @@ public interface AnchorRefTarget {
     BasedSequence[] getAnchorRefSegments();
     String getAnchorRefId();
     void setAnchorRefId(String anchorRefId);
+
+    boolean isExplicitAnchorRefId();
+    void setExplicitAnchorRefId(boolean value);
 }

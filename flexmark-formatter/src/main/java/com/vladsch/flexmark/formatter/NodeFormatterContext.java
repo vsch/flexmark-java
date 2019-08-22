@@ -2,6 +2,7 @@ package com.vladsch.flexmark.formatter;
 
 import com.vladsch.flexmark.formatter.internal.CoreNodeFormatter;
 import com.vladsch.flexmark.formatter.internal.FormatterOptions;
+import com.vladsch.flexmark.html.renderer.LinkResolverContext;
 import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
@@ -13,7 +14,7 @@ import java.util.Collection;
 /**
  * The context for node rendering, including configuration and functionality for the node renderer to use.
  */
-public interface NodeFormatterContext extends NodeContext<Node, NodeFormatterContext>, TranslationContext {
+public interface NodeFormatterContext extends NodeContext<Node, NodeFormatterContext>, TranslationContext, LinkResolverContext, ExplicitAttributeIdProvider {
     /**
      * @return the HTML writer to use
      */

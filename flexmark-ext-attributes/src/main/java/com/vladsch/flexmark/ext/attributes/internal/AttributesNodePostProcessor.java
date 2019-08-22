@@ -276,6 +276,7 @@ public class AttributesNodePostProcessor extends NodePostProcessor {
                         if (attributeNode instanceof AttributeNode) {
                             if (((AttributeNode) attributeNode).isId()) {
                                 ((AnchorRefTarget) attributeOwner).setAnchorRefId(((AttributeNode) attributeNode).getValue().toString());
+                                ((AnchorRefTarget) attributeOwner).setExplicitAnchorRefId(true);
                                 break;
                             }
                         }

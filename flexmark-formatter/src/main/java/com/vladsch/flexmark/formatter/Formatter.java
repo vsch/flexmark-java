@@ -1,13 +1,10 @@
 package com.vladsch.flexmark.formatter;
 
-import com.vladsch.flexmark.formatter.internal.CoreNodeFormatter;
-import com.vladsch.flexmark.formatter.internal.FormatterOptions;
-import com.vladsch.flexmark.formatter.internal.TranslationHandlerImpl;
+import com.vladsch.flexmark.formatter.internal.*;
 import com.vladsch.flexmark.html.AttributeProviderFactory;
+import com.vladsch.flexmark.html.LinkResolver;
 import com.vladsch.flexmark.html.LinkResolverFactory;
-import com.vladsch.flexmark.html.renderer.HeaderIdGenerator;
-import com.vladsch.flexmark.html.renderer.HeaderIdGeneratorFactory;
-import com.vladsch.flexmark.html.renderer.HtmlIdGeneratorFactory;
+import com.vladsch.flexmark.html.renderer.*;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.ParserEmulationProfile;
 import com.vladsch.flexmark.util.ast.Document;
@@ -18,12 +15,18 @@ import com.vladsch.flexmark.util.builder.BuilderBase;
 import com.vladsch.flexmark.util.builder.Extension;
 import com.vladsch.flexmark.util.collection.SubClassingBag;
 import com.vladsch.flexmark.util.data.*;
+import com.vladsch.flexmark.util.dependency.DependencyHandler;
+import com.vladsch.flexmark.util.dependency.FlatDependencyHandler;
+import com.vladsch.flexmark.util.dependency.ResolvedDependencies;
 import com.vladsch.flexmark.util.format.TableFormatOptions;
 import com.vladsch.flexmark.util.format.options.*;
+import com.vladsch.flexmark.util.html.Attributes;
 import com.vladsch.flexmark.util.html.LineFormattingAppendable;
 import com.vladsch.flexmark.util.mappers.CharWidthProvider;
 
 import java.util.*;
+import java.util.function.Function;
+import java.util.function.Supplier;
 
 /**
  * Renders a tree of nodes to HTML.
@@ -101,25 +104,85 @@ public class Formatter implements IRender {
     public static final DataKey<Boolean> KEEP_SOFT_LINE_BREAKS = new DataKey<>("KEEP_SOFT_LINE_BREAKS", true);
     public static final DataKey<Boolean> APPEND_TRANSFERRED_REFERENCES = new DataKey<>("APPEND_TRANSFERRED_REFERENCES", false);
 
-    final List<NodeFormatterFactory> nodeFormatterFactories;
+    private static final Document[] EMPTY_DOCUMENTS = new Document[0];
+
+    // list of documents across which to uniquify the reference ids if translating
+    public static final DataKey<String> DOC_RELATIVE_URL = new DataKey<>("DOC_RELATIVE_URL", "");
+    public static final DataKey<String> DOC_ROOT_URL = new DataKey<>("DOC_ROOT_URL", "");
+    public static final DataKey<Boolean> DEFAULT_LINK_RESOLVER = new DataKey<>("DEFAULT_LINK_RESOLVER", false);
+
     final FormatterOptions formatterOptions;
     private final DataHolder options;
     private final Builder builder;
+    final List<LinkResolverFactory> linkResolverFactories;
+    private final NodeFormatterDependencies nodeFormatterFactories;
 
     private Formatter(Builder builder) {
         this.builder = new Builder(builder); // take a copy to avoid after creation side effects
         this.options = new DataSet(builder);
         this.formatterOptions = new FormatterOptions(this.options);
-        this.nodeFormatterFactories = new ArrayList<NodeFormatterFactory>(builder.nodeFormatterFactories.size() + 1);
-        this.nodeFormatterFactories.addAll(builder.nodeFormatterFactories);
+        //this.nodeFormatterFactories = new ArrayList<NodeFormatterFactory>(builder.nodeFormatterFactories.size() + 1);
+        //this.nodeFormatterFactories.addAll(builder.nodeFormatterFactories);
 
-        // Add as last. This means clients can override the rendering of core nodes if they want.
-        this.nodeFormatterFactories.add(new NodeFormatterFactory() {
-            @Override
-            public NodeFormatter create(DataHolder options) {
-                return new CoreNodeFormatter(options);
+        this.linkResolverFactories = FlatDependencyHandler.computeDependencies(builder.linkResolverFactories);
+        this.nodeFormatterFactories = calculateBlockPreProcessors(this.options, builder.nodeFormatterFactories);
+    }
+
+    public static class NodeFormatterDependencyStage {
+        private final List<NodeFormatterFactory> dependents;
+
+        public NodeFormatterDependencyStage(List<NodeFormatterFactory> dependents) {
+            // compute mappings
+            this.dependents = dependents;
+        }
+    }
+
+    private static class NodeFormatterDependencyHandler extends DependencyHandler<NodeFormatterFactory, NodeFormatterDependencyStage, NodeFormatterDependencies> {
+        @Override
+        protected Class<? extends NodeFormatterFactory> getDependentClass(NodeFormatterFactory dependent) {
+            return dependent.getClass();
+        }
+
+        @Override
+        protected NodeFormatterDependencies createResolvedDependencies(List<NodeFormatterDependencyStage> stages) {
+            return new NodeFormatterDependencies(stages);
+        }
+
+        @Override
+        protected NodeFormatterDependencyStage createStage(List<NodeFormatterFactory> dependents) {
+            return new NodeFormatterDependencyStage(dependents);
+        }
+    }
+
+    public static class NodeFormatterDependencies extends ResolvedDependencies<NodeFormatterDependencyStage> {
+        private final List<NodeFormatterFactory> nodeFactories;
+
+        public NodeFormatterDependencies(List<NodeFormatterDependencyStage> dependentStages) {
+            super(dependentStages);
+            ArrayList<NodeFormatterFactory> nodeFormatterFactories = new ArrayList<>();
+
+            for (NodeFormatterDependencyStage stage : dependentStages) {
+                nodeFormatterFactories.addAll(stage.dependents);
             }
-        });
+
+            this.nodeFactories = nodeFormatterFactories;
+        }
+
+        public List<NodeFormatterFactory> getNodeFactories() {
+            return nodeFactories;
+        }
+    }
+
+    public static NodeFormatterDependencies calculateBlockPreProcessors(
+            DataHolder options,
+            List<NodeFormatterFactory> formatterFactories
+    ) {
+        // By having the custom factories come first, extensions are able to change behavior of core syntax.
+        List<NodeFormatterFactory> list = new ArrayList<NodeFormatterFactory>(formatterFactories);
+        list.add(new CoreNodeFormatter.Factory());
+
+        NodeFormatterDependencyHandler resolver = new NodeFormatterDependencyHandler();
+        return resolver.resolveDependencies(list);
     }
 
     public TranslationHandler getTranslationHandler(TranslationHandlerFactory translationHandlerFactory, HtmlIdGeneratorFactory idGeneratorFactory) {
@@ -201,10 +264,19 @@ public class Formatter implements IRender {
      * @param output appendable to use for the output
      */
     public void translationRender(Node node, Appendable output, TranslationHandler translationHandler, RenderPurpose renderPurpose) {
-        translationHandler.setRenderPurpose(renderPurpose);
-        MainNodeFormatter renderer = new MainNodeFormatter(options, new MarkdownWriter(formatterOptions.formatFlags /*| FormattingAppendable.PASS_THROUGH*/), node.getDocument(), translationHandler);
-        renderer.render(node);
-        renderer.flushTo(output, formatterOptions.maxTrailingBlankLines);
+        translationRender(node, output, formatterOptions.maxTrailingBlankLines, translationHandler, renderPurpose);
+    }
+
+    /**
+     * Render the tree of nodes to markdown
+     *
+     * @param node the root node
+     * @return the formatted markdown
+     */
+    public String translationRender(Node node, TranslationHandler translationHandler, RenderPurpose renderPurpose) {
+        StringBuilder sb = new StringBuilder();
+        translationRender(node, sb, translationHandler, renderPurpose);
+        return sb.toString();
     }
 
     /**
@@ -221,15 +293,82 @@ public class Formatter implements IRender {
     }
 
     /**
+     * Render a node to the appendable
+     *
+     * @param documents node to render
+     * @param output    appendable to use for the output
+     */
+    public void mergeRender(Document[] documents, Appendable output, HtmlIdGeneratorFactory idGeneratorFactory) {
+        mergeRender(documents, output, formatterOptions.maxTrailingBlankLines, idGeneratorFactory);
+    }
+
+    /**
      * Render the tree of nodes to markdown
      *
-     * @param node the root node
+     * @param documents the root node
      * @return the formatted markdown
      */
-    public String translationRender(Node node, TranslationHandler translationHandler, RenderPurpose renderPurpose) {
+    public String mergeRender(Document[] documents, int maxTrailingBlankLines, HtmlIdGeneratorFactory idGeneratorFactory) {
         StringBuilder sb = new StringBuilder();
-        translationRender(node, sb, translationHandler, renderPurpose);
+        mergeRender(documents, sb, maxTrailingBlankLines, idGeneratorFactory);
         return sb.toString();
+    }
+
+    /**
+     * Render a node to the appendable
+     *
+     * @param documents nodes to merge render
+     * @param output    appendable to use for the output
+     */
+    public void mergeRender(Document[] documents, Appendable output, int maxTrailingBlankLines, HtmlIdGeneratorFactory idGeneratorFactory) {
+        MutableDataSet mergeOptions = new MutableDataSet(options);
+
+        TranslationHandler[] translationHandlers = new TranslationHandler[documents.length];
+        List<String>[] translationHandlersTexts = new List[documents.length];
+
+        int iMax = documents.length;
+        for (int i = 0; i < iMax; i++) {
+            translationHandlers[i] = getTranslationHandler(idGeneratorFactory == null ? new HeaderIdGenerator.Factory() : idGeneratorFactory);
+        }
+
+        MergeContextImpl mergeContext = new MergeContextImpl(documents, translationHandlers);
+
+        mergeContext.forEachPrecedingDocument(null, (context, document, index) -> {
+            TranslationHandler translationHandler = (TranslationHandler) context;
+
+            translationHandler.setRenderPurpose(RenderPurpose.TRANSLATION_SPANS);
+            MainNodeFormatter renderer = new MainNodeFormatter(mergeOptions, new MarkdownWriter(formatterOptions.formatFlags), document, translationHandler);
+            renderer.render(document);
+            translationHandlersTexts[index] = translationHandler.getTranslatingTexts();
+        });
+
+        Document[] translatedDocuments = new Document[documents.length];
+
+        mergeContext.forEachPrecedingDocument(null, (context, document, index) -> {
+            TranslationHandler translationHandler = (TranslationHandler) context;
+
+            translationHandler.setRenderPurpose(RenderPurpose.TRANSLATED_SPANS);
+            translationHandler.setTranslatedTexts(translationHandlersTexts[index]);
+
+            MainNodeFormatter renderer = new MainNodeFormatter(mergeOptions, new MarkdownWriter(formatterOptions.formatFlags), document, translationHandler);
+            renderer.render(document);
+            StringBuilder sb = new StringBuilder();
+            renderer.flushTo(sb, maxTrailingBlankLines);
+
+            translatedDocuments[index] = Parser.builder(options).build().parse(sb.toString());
+        });
+
+        mergeContext.setDocuments(translatedDocuments);
+
+        mergeContext.forEachPrecedingDocument(null, (context, document, index) -> {
+            TranslationHandler translationHandler = (TranslationHandler) context;
+
+            translationHandler.setRenderPurpose(RenderPurpose.TRANSLATED);
+
+            MainNodeFormatter renderer = new MainNodeFormatter(mergeOptions, new MarkdownWriter(formatterOptions.formatFlags), document, translationHandler);
+            renderer.render(document);
+            renderer.flushTo(output, maxTrailingBlankLines);
+        });
     }
 
     public Formatter withOptions(DataHolder options) {
@@ -360,7 +499,7 @@ public class Formatter implements IRender {
 
     private class MainNodeFormatter extends NodeFormatterSubContext {
         private final Document document;
-        private final Map<Class<?>, NodeFormattingHandler> renderers;
+        private final Map<Class, NodeFormattingHandler<?>> renderers;
         private final SubClassingBag<Node> collectedNodes;
 
         private final List<PhasedNodeFormatter> phasedFormatters;
@@ -368,27 +507,50 @@ public class Formatter implements IRender {
         private final DataHolder options;
         private FormattingPhase phase;
         final TranslationHandler myTranslationHandler;
+        private final LinkResolver[] myLinkResolvers;
+        private final HashMap<LinkType, HashMap<String, ResolvedLink>> resolvedLinkMap = new HashMap<LinkType, HashMap<String, ResolvedLink>>();
+        private final ExplicitAttributeIdProvider myExplicitAttributeIdProvider;
 
         MainNodeFormatter(DataHolder options, MarkdownWriter out, Document document, TranslationHandler translationHandler) {
             super(out);
             this.myTranslationHandler = translationHandler;
             this.options = new ScopedDataSet(document, options);
             this.document = document;
-            this.renderers = new HashMap<Class<?>, NodeFormattingHandler>(32);
+            this.renderers = new HashMap<Class, NodeFormattingHandler<?>>(32);
             this.renderingPhases = new HashSet<FormattingPhase>(FormattingPhase.values().length);
             Set<Class> collectNodeTypes = new HashSet<Class>(100);
-            this.phasedFormatters = new ArrayList<PhasedNodeFormatter>(nodeFormatterFactories.size());
+
+            Boolean defaultLinkResolver = DEFAULT_LINK_RESOLVER.getFrom(options);
+            this.myLinkResolvers = new LinkResolver[linkResolverFactories.size() + (defaultLinkResolver ? 1 : 0)];
+
+            for (int i = 0; i < linkResolverFactories.size(); i++) {
+                myLinkResolvers[i] = linkResolverFactories.get(i).apply(this);
+            }
+
+            if (defaultLinkResolver) {
+                // add the default link resolver
+                myLinkResolvers[linkResolverFactories.size()] = new MergeLinkResolver.Factory().apply(this);
+            }
 
             out.setContext(this);
 
-            // The first node renderer for a node type "wins".
-            for (int i = nodeFormatterFactories.size() - 1; i >= 0; i--) {
-                NodeFormatterFactory nodeFormatterFactory = nodeFormatterFactories.get(i);
+            List<NodeFormatterFactory> formatterFactories = nodeFormatterFactories.getNodeFactories();
+            this.phasedFormatters = new ArrayList<PhasedNodeFormatter>(formatterFactories.size());
+            ExplicitAttributeIdProvider explicitAttributeIdProvider = null;
+
+            for (int i = formatterFactories.size() - 1; i >= 0; i--) {
+                NodeFormatterFactory nodeFormatterFactory = formatterFactories.get(i);
                 NodeFormatter nodeFormatter = nodeFormatterFactory.create(this.options);
+
+                // see if implements
+                if (nodeFormatter instanceof ExplicitAttributeIdProvider) {
+                    explicitAttributeIdProvider = (ExplicitAttributeIdProvider) nodeFormatter;
+                }
+
                 Set<NodeFormattingHandler<?>> formattingHandlers = nodeFormatter.getNodeFormattingHandlers();
                 if (formattingHandlers == null) continue;
 
-                for (NodeFormattingHandler nodeType : formattingHandlers) {
+                for (NodeFormattingHandler<?> nodeType : formattingHandlers) {
                     // Overwrite existing renderer
                     renderers.put(nodeType.getNodeType(), nodeType);
                 }
@@ -411,6 +573,8 @@ public class Formatter implements IRender {
                 }
             }
 
+            myExplicitAttributeIdProvider = explicitAttributeIdProvider;
+
             // collect nodes of interest from document
             if (!collectNodeTypes.isEmpty()) {
                 NodeCollectingVisitor collectingVisitor = new NodeCollectingVisitor(collectNodeTypes);
@@ -418,6 +582,52 @@ public class Formatter implements IRender {
                 collectedNodes = collectingVisitor.getSubClassingBag();
             } else {
                 collectedNodes = null;
+            }
+        }
+
+        @Override
+        public String encodeUrl(CharSequence url) {
+            return String.valueOf(url);
+        }
+
+        @Override
+        public ResolvedLink resolveLink(LinkType linkType, CharSequence url, Boolean urlEncode) {
+            return resolveLink(this, linkType, url, (Attributes) null, urlEncode);
+        }
+
+        @Override
+        public ResolvedLink resolveLink(LinkType linkType, CharSequence url, Attributes attributes, Boolean urlEncode) {
+            return resolveLink(this, linkType, url, attributes, urlEncode);
+        }
+
+        private ResolvedLink resolveLink(NodeFormatterSubContext context, LinkType linkType, CharSequence url, Attributes attributes, Boolean urlEncode) {
+            HashMap<String, ResolvedLink> resolvedLinks = resolvedLinkMap.computeIfAbsent(linkType, k -> new HashMap<String, ResolvedLink>());
+
+            String urlSeq = String.valueOf(url);
+            ResolvedLink resolvedLink = resolvedLinks.get(urlSeq);
+            if (resolvedLink == null) {
+                resolvedLink = new ResolvedLink(linkType, urlSeq, attributes);
+
+                if (!urlSeq.isEmpty()) {
+                    Node currentNode = context.renderingNode;
+
+                    for (LinkResolver linkResolver : myLinkResolvers) {
+                        resolvedLink = linkResolver.resolveLink(currentNode, this, resolvedLink);
+                        if (resolvedLink.getStatus() != LinkStatus.UNKNOWN) break;
+                    }
+                }
+
+                // put it in the map
+                resolvedLinks.put(urlSeq, resolvedLink);
+            }
+
+            return resolvedLink;
+        }
+
+        @Override
+        public void addExplicitId(Node node, String id, NodeFormatterContext context, MarkdownWriter markdown) {
+            if (myExplicitAttributeIdProvider != null) {
+                myExplicitAttributeIdProvider.addExplicitId(node, id, context, markdown);
             }
         }
 
@@ -444,6 +654,33 @@ public class Formatter implements IRender {
         @Override
         public CharSequence transformAnchorRef(CharSequence pageRef, CharSequence anchorRef) {
             return myTranslationHandler == null ? anchorRef : myTranslationHandler.transformAnchorRef(pageRef, anchorRef);
+        }
+
+        @Override
+        public void postProcessNonTranslating(Function<String, CharSequence> postProcessor, Runnable scope) {
+            if (myTranslationHandler != null) myTranslationHandler.postProcessNonTranslating(postProcessor, scope);
+            else scope.run();
+        }
+
+        @Override
+        public <T> T postProcessNonTranslating(Function<String, CharSequence> postProcessor, Supplier<T> scope) {
+            if (myTranslationHandler != null) return myTranslationHandler.postProcessNonTranslating(postProcessor, scope);
+            else return scope.get();
+        }
+
+        @Override
+        public boolean isPostProcessingNonTranslating() {
+            return myTranslationHandler != null && myTranslationHandler.isPostProcessingNonTranslating();
+        }
+
+        @Override
+        public MergeContext getMergeContext() {
+            return myTranslationHandler == null ? null : myTranslationHandler.getMergeContext();
+        }
+
+        @Override
+        public HtmlIdGenerator getIdGenerator() {
+            return myTranslationHandler == null ? null : myTranslationHandler.getIdGenerator();
         }
 
         @Override
@@ -729,6 +966,51 @@ public class Formatter implements IRender {
             @Override
             public void customPlaceholderFormat(TranslationPlaceholderGenerator generator, TranslatingSpanRender render) {
                 myMainNodeRenderer.customPlaceholderFormat(generator, render);
+            }
+
+            @Override
+            public String encodeUrl(CharSequence url) {
+                return myMainNodeRenderer.encodeUrl(url);
+            }
+
+            @Override
+            public ResolvedLink resolveLink(LinkType linkType, CharSequence url, Boolean urlEncode) {
+                return myMainNodeRenderer.resolveLink(this, linkType, url, (Attributes) null, urlEncode);
+            }
+
+            @Override
+            public ResolvedLink resolveLink(LinkType linkType, CharSequence url, Attributes attributes, Boolean urlEncode) {
+                return myMainNodeRenderer.resolveLink(this, linkType, url, attributes, urlEncode);
+            }
+
+            @Override
+            public void postProcessNonTranslating(Function<String, CharSequence> postProcessor, Runnable scope) {
+                myMainNodeRenderer.postProcessNonTranslating(postProcessor, scope);
+            }
+
+            @Override
+            public <T> T postProcessNonTranslating(Function<String, CharSequence> postProcessor, Supplier<T> scope) {
+                return myMainNodeRenderer.postProcessNonTranslating(postProcessor, scope);
+            }
+
+            @Override
+            public boolean isPostProcessingNonTranslating() {
+                return myMainNodeRenderer.isPostProcessingNonTranslating();
+            }
+
+            @Override
+            public MergeContext getMergeContext() {
+                return myMainNodeRenderer.getMergeContext();
+            }
+
+            @Override
+            public void addExplicitId(Node node, String id, NodeFormatterContext context, MarkdownWriter markdown) {
+                myMainNodeRenderer.addExplicitId(node, id, context, markdown);
+            }
+
+            @Override
+            public HtmlIdGenerator getIdGenerator() {
+                return myMainNodeRenderer.getIdGenerator();
             }
         }
     }

@@ -2035,7 +2035,7 @@ Not aA LiISt iIteEm
 ````````````````````````````````
 
 
-```````````````````````````````` example(Empty List Items: 7) options(IGNORE)
+```````````````````````````````` example(Empty List Items: 7) options(IGNORED)
 1. 
     ##### Overriding the Web Interface Translations
 
@@ -2066,7 +2066,7 @@ Not aA LiISt iIteEm
 
 should discard all non-alpha
 
-```````````````````````````````` example(Empty List Items: 8) options(details, IGNORE)
+```````````````````````````````` example(Empty List Items: 8) options(details, IGNORED)
 ![Alt](/url)
 
 this is an image 

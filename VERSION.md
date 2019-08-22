@@ -6,14 +6,14 @@ flexmark-java
 [TOC]: # " "
 
 - [To Do](#to-do)
-- [Next 0.50.28](#next-05028)
+- [0.50.28](#05028)
 - [0.50.26](#05026)
 - [0.50.24](#05024)
 - [0.50.22](#05022)
 - [0.50.20](#05020)
 - [0.50.18](#05018)
 - [0.50.16](#05016)
-- [Next 0.42.14](#next-04214)
+- [0.42.14](#04214)
 - [0.42.12](#04212)
 - [0.42.10](#04210)
 - [0.42.8](#0428)
@@ -100,10 +100,13 @@ flexmark-java
 * [ ] Add: `<!-- @formatter:on -->` and `<!-- @formatter:on -->` tags to `Formatter` for
       controlling non-formatting regions.
 * [ ] Convert anonymous classes to lambda where possible.
+* [ ] Add: `flexmark-ext-attributes` formatting of individual attributes instead of dumping the
+      attributes node text.
 
-Next 0.50.28
-------------
+0.50.28
+-------
 
+* Fix: [#362, ArrayIndexOutOfBoundsException in BasedSequence.indexOfAll]
 * Add: `DocxRenderer.BULLET_LIST_STYLE` default `"BulletList"`, numbering style to use for
   bullet list item paragraph.
 * Add: `DocxRenderer.NUMBERED_LIST_STYLE` default `"NumberedList"`, numbering style to use for
@@ -120,6 +123,25 @@ Next 0.50.28
     * `font-weight` - set/clear bold (if using numeric weights then >= 550 sets bold, less
       clears it)
     * `font-style` - set/clear italic
+* Add: merge multiple markdown documents into single document functionality. Includes making
+  conflicting references between documents unique by adding an integer numeric suffix.
+  * Conflicting headings will get a unique explicit id attribute by the
+    `flexmark-ext-attributes` extension.
+  * Added to `Formatter` module using modified translation API functionality.
+    * `Formatter.mergeRender(Document[], Appendable, HtmlIdGeneratorFactory)`
+    * `Formatter.mergeRender(Document[], Appendable, int, HtmlIdGeneratorFactory)`
+    * `Formatter.mergeRender(Document[], int, HtmlIdGeneratorFactory)`
+  * Add: merge tests and functionality to:
+    * `flexmark-formatter` core rendering of anchors and headings.
+    * `flexmark-ext-abbreviation`
+    * `flexmark-ext-attributes`
+    * `flexmark-ext-enumerated-reference`
+    * `flexmark-ext-footnotes`
+    * `flexmark-ext-macros`
+  * Add: link mapping based on document's `Formatter.DOC_RELATIVE_URL` and
+    `Formatter.DOC_ROOT_URL` properties.
+* Fix: `Formatter` attributes would eliminate separator space before or after following text
+  possibly changing the applicable node for the attribute.
 
 0.50.26
 -------
@@ -256,8 +278,8 @@ Next 0.50.28
   abstract implementation in `RichCharSequenceBase` and implementation in
   `RichCharSequenceImpl`.
 
-Next 0.42.14
-------------
+0.42.14
+-------
 
 * Fix: [#351, Is there any special format requirement for processing html data to markdown]
 * Fix: HTML parser converts `a` tags in preformatted text to links, should convert to URL only
@@ -1569,4 +1591,6 @@ setting either will affect both keys. For information on these keys see
 [NodeInsertingPostProcessorSample.java]: https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/samples/NodeInsertingPostProcessorSample.java
 [PdfLandscapeConverter.java]: https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/samples/PdfLandscapeConverter.java
 [YouTrack: IDEA-207453]: https://youtrack.jetbrains.com/issue/IDEA-207453 "Add Conversion of ref anchor to UrlFilter for file line navigation"
+[#362, ArrayIndexOutOfBoundsException in BasedSequence.indexOfAll]: https://github.com/vsch/flexmark-java/issues/362
+
 

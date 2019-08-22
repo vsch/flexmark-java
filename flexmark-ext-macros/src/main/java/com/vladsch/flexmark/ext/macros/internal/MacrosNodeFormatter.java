@@ -14,11 +14,12 @@ import com.vladsch.flexmark.util.format.options.ElementPlacementSort;
 import java.util.*;
 
 public class MacrosNodeFormatter extends NodeRepositoryFormatter<MacroDefinitionRepository, MacroDefinitionBlock, MacroReference> {
-    public static final DataKey<Map<String, String>> FOOTNOTE_TRANSLATION_MAP = new DataKey<Map<String, String>>("FOOTNOTE_TRANSLATION_MAP", new HashMap<String, String>()); // assign attributes to text if previous is not a space
+    public static final DataKey<Map<String, String>> MACROS_TRANSLATION_MAP = new DataKey<Map<String, String>>("MACROS_TRANSLATION_MAP", new HashMap<String, String>());
+    public static final DataKey<Map<String, String>> MACROS_UNIQUIFICATION_MAP = new DataKey<Map<String, String>>("MACROS_UNIQUIFICATION_MAP", new HashMap<String, String>()); // uniquified references
     private final MacroFormatOptions options;
 
     public MacrosNodeFormatter(DataHolder options) {
-        super(options, FOOTNOTE_TRANSLATION_MAP);
+        super(options, MACROS_TRANSLATION_MAP, MACROS_UNIQUIFICATION_MAP);
         this.options = new MacroFormatOptions(options);
     }
 

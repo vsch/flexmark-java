@@ -1454,8 +1454,8 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
     public static int[] expandTo(int[] indices, int length, int step) {
         int remainder = length & step;
         int next = length + (remainder != 0 ? step : 0);
-        if (indices.length < length) {
-            int[] replace = new int[length];
+        if (indices.length < next) {
+            int[] replace = new int[next];
             System.arraycopy(indices, 0, replace, 0, indices.length);
             return replace;
         }
@@ -1485,7 +1485,7 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
         while (true) {
             pos = indexOf(s, pos + length);
             if (pos == -1) break;
-            if (indices.length < iMax) indices = expandTo(indices, iMax, 32);
+            if (indices.length <= iMax) indices = expandTo(indices, iMax + 1, 32);
             indices[iMax++] = pos;
         }
         return truncateTo(indices, iMax);

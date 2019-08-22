@@ -13,6 +13,7 @@ public class Heading extends Block implements AnchorRefTarget {
     protected BasedSequence text = BasedSequence.NULL;
     protected BasedSequence closingMarker = BasedSequence.NULL;
     protected String anchorRefId = "";
+    protected boolean explicitAnchorRefId = false;
 
     @Override
     public void getAstExtra(StringBuilder out) {
@@ -42,6 +43,16 @@ public class Heading extends Block implements AnchorRefTarget {
     @Override
     public void setAnchorRefId(String anchorRefId) {
         this.anchorRefId = anchorRefId;
+    }
+
+    @Override
+    public boolean isExplicitAnchorRefId() {
+        return explicitAnchorRefId;
+    }
+
+    @Override
+    public void setExplicitAnchorRefId(boolean explicitAnchorRefId) {
+        this.explicitAnchorRefId = explicitAnchorRefId;
     }
 
     public Heading() {

@@ -15,11 +15,12 @@ import java.util.*;
 
 public class AbbreviationNodeFormatter extends NodeRepositoryFormatter<AbbreviationRepository, AbbreviationBlock, Abbreviation> {
     public static final DataKey<Map<String, String>> ABBREVIATION_TRANSLATION_MAP = new DataKey<Map<String, String>>("ABBREVIATION_TRANSLATION_MAP", new HashMap<String, String>()); //
+    public static final DataKey<Map<String, String>> ABBREVIATION_UNIQUIFICATION_MAP = new DataKey<Map<String, String>>("ABBREVIATION_UNIQUIFICATION_MAP", new HashMap<String, String>()); // uniquified references
     private final FormatOptions options;
     private final boolean transformUnderscores;
 
     public AbbreviationNodeFormatter(DataHolder options) {
-        super(options, ABBREVIATION_TRANSLATION_MAP);
+        super(options, ABBREVIATION_TRANSLATION_MAP, ABBREVIATION_UNIQUIFICATION_MAP);
         this.options = new FormatOptions(options);
 
         String transformedId = String.format(Formatter.TRANSLATION_ID_FORMAT.getFrom(options), 1);
@@ -56,7 +57,9 @@ public class AbbreviationNodeFormatter extends NodeRepositoryFormatter<Abbreviat
 
     @Override
     public void renderReferenceBlock(AbbreviationBlock node, NodeFormatterContext context, MarkdownWriter markdown) {
-        markdown.append(node.getOpeningMarker()).append(transformReferenceId(node.getText().toString(), context)).append(node.getClosingMarker()).append(' ');
+        markdown.append(node.getOpeningMarker());
+        markdown.append(transformReferenceId(node.getText().toString(), context));
+        markdown.append(node.getClosingMarker()).append(' ');
         markdown.appendTranslating(node.getAbbreviation()).line();
     }
 

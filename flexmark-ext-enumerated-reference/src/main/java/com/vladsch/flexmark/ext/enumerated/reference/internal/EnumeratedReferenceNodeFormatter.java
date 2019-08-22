@@ -12,11 +12,14 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
+import static com.vladsch.flexmark.formatter.RenderPurpose.TRANSLATED;
+
 public class EnumeratedReferenceNodeFormatter extends NodeRepositoryFormatter<EnumeratedReferenceRepository, EnumeratedReferenceBlock, EnumeratedReferenceText> {
+
     private final EnumeratedReferenceFormatOptions options;
 
     public EnumeratedReferenceNodeFormatter(DataHolder options) {
-        super(options, null);
+        super(options, null, AttributesNodeFormatter.ATTRIBUTE_UNIQUIFICATION_CATEGORY_MAP);
         this.options = new EnumeratedReferenceFormatOptions(options);
     }
 
@@ -36,7 +39,7 @@ public class EnumeratedReferenceNodeFormatter extends NodeRepositoryFormatter<En
     }
 
     @Override
-    public void renderReferenceBlock(EnumeratedReferenceBlock node, NodeFormatterContext context, MarkdownWriter markdown) {
+    protected void renderReferenceBlock(EnumeratedReferenceBlock node, NodeFormatterContext context, MarkdownWriter markdown) {
         markdown.blankLine().append("[@").appendNonTranslating(node.getText()).append("]: ");
         markdown.pushPrefix().addPrefix("    ", true);
         context.renderChildren(node);
@@ -127,6 +130,20 @@ public class EnumeratedReferenceNodeFormatter extends NodeRepositoryFormatter<En
         @Override
         public NodeFormatter create(DataHolder options) {
             return new EnumeratedReferenceNodeFormatter(options);
+        }
+
+        @Override
+        public Set<? extends Class> getAfterDependents() {
+            // run before attributes formatter so categories are uniquified first
+            // renderers are sorted in reverse order for backward compatibility
+            Set<Class<?>> aSet = new HashSet<>();
+            aSet.add(AttributesNodeFormatter.Factory.class);
+            return aSet;
+        }
+
+        @Override
+        public Set<? extends Class> getBeforeDependents() {
+            return null;
         }
     }
 }

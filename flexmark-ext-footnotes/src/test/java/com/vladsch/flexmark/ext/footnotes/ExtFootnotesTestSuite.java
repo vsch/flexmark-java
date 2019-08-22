@@ -6,6 +6,7 @@ import org.junit.runners.Suite;
 @Suite.SuiteClasses({
         ComboFootnotesSpecTest.class,
         ComboFootnotesFormatterSpecTest.class,
+        MergeFootnotesTest.class,
 })
 public class ExtFootnotesTestSuite {
 }

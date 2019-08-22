@@ -55,8 +55,8 @@
         <option name="MACROS_EXT" value="false" />
         <option name="NO_TEXT_ATTRIBUTES" value="false" />
         <option name="PARSE_HTML_ANCHOR_ID" value="false" />
-        <option name="PLANTUML_FENCED_CODE" value="false" />
-        <option name="PUML_FENCED_CODE" value="false" />
+        <option name="PLANTUML_FENCED_CODE" value="true" />
+        <option name="PUML_FENCED_CODE" value="true" />
         <option name="SIM_TOC_BLANK_LINE_SPACER" value="true" />
       </ParserOptions>
     </ParserSettings>

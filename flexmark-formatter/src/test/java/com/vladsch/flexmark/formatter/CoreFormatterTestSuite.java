@@ -8,6 +8,7 @@ import org.junit.runners.Suite;
         ComboCoreTranslationFormatterSpecTest.class,
         ComboCoreFormatterNoBlankLinesSpecTest.class,
         FormatterModifiedAST.class,
+        MergeFormatterCoreTest.class,
 })
 public class CoreFormatterTestSuite {
 }

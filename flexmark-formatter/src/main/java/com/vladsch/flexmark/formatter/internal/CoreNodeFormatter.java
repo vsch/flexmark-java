@@ -3,6 +3,9 @@ package com.vladsch.flexmark.formatter.internal;
 import com.vladsch.flexmark.ast.*;
 import com.vladsch.flexmark.ast.util.ReferenceRepository;
 import com.vladsch.flexmark.formatter.*;
+import com.vladsch.flexmark.html.renderer.HtmlIdGenerator;
+import com.vladsch.flexmark.html.renderer.LinkType;
+import com.vladsch.flexmark.html.renderer.ResolvedLink;
 import com.vladsch.flexmark.parser.ListOptions;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.ParserEmulationProfile;
@@ -24,7 +27,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static com.vladsch.flexmark.formatter.FormattingPhase.DOCUMENT_BOTTOM;
-import static com.vladsch.flexmark.formatter.RenderPurpose.FORMAT;
+import static com.vladsch.flexmark.formatter.RenderPurpose.*;
 import static com.vladsch.flexmark.util.format.options.DiscretionaryText.ADD;
 import static com.vladsch.flexmark.util.format.options.DiscretionaryText.AS_IS;
 import static com.vladsch.flexmark.util.sequence.BasedSequence.NULL;
@@ -33,15 +36,26 @@ import static com.vladsch.flexmark.util.sequence.BasedSequence.NULL;
 public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceRepository, Reference, RefNode> {
     public static final DataKey<Integer> LIST_ITEM_NUMBER = new DataKey<>("LIST_ITEM_NUMBER", 0);
     public static final DataKey<ListSpacing> LIST_ITEM_SPACING = new DataKey<>("LIST_ITEM_SPACING", (ListSpacing) null);
+    public static final DataKey<Map<String, String>> UNIQUIFICATION_MAP = new DataKey<Map<String, String>>("REFERENCES_UNIQUIFICATION_MAP", new HashMap<>());
+    public static final DataKey<Map<String, String>> ATTRIBUTE_UNIQUIFICATION_ID_MAP = new DataKey<Map<String, String>>("ATTRIBUTE_UNIQUIFICATION_ID_MAP", new HashMap<String, String>());
+
+    public static class Factory implements NodeFormatterFactory {
+        @Override
+        public NodeFormatter create(DataHolder options) {
+            return new CoreNodeFormatter(options);
+        }
+    }
 
     private final FormatterOptions formatterOptions;
     private final ListOptions listOptions;
     private final String myHtmlBlockPrefix;
     private int blankLines;
     MutableDataHolder myTranslationStore;
+    private Map<String, String> attributeUniquificationIdMap;
+    private Map<String, String> headingOriginalTextMap;
 
     public CoreNodeFormatter(DataHolder options) {
-        super(options, null);
+        super(options, null, UNIQUIFICATION_MAP);
         this.formatterOptions = new FormatterOptions(options);
         this.listOptions = ListOptions.getFrom(options);
         blankLines = 0;
@@ -59,7 +73,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
 
     @Override
     public ReferenceRepository getRepository(DataHolder options) {
-        return options.get(Parser.REFERENCES);
+        return Parser.REFERENCES.getFrom(options);
     }
 
     @Override
@@ -72,23 +86,52 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
         return formatterOptions.referenceSort;
     }
 
+    void appendReference(CharSequence id, NodeFormatterContext context, MarkdownWriter markdown) {
+        if (context.isTransformingText() && context.getRenderPurpose() == TRANSLATED && context.getMergeContext() != null) {
+            // may need to map references
+            String reference = String.valueOf(context.transformTranslating(null, id, null, null));
+            String uniquifiedReference = referenceUniqificationMap.getOrDefault(reference, reference);
+            markdown.append(uniquifiedReference);
+        } else {
+            markdown.appendTranslating(id);
+        }
+    }
+
     @Override
     public void renderReferenceBlock(Reference node, NodeFormatterContext context, MarkdownWriter markdown) {
         if (context.isTransformingText()) {
             markdown.append(node.getOpeningMarker());
-            markdown.appendTranslating(node.getReference());
+            appendReference(node.getReference(), context, markdown);
             markdown.append(node.getClosingMarker());
 
             markdown.append(' ');
 
-            markdown.append(node.getUrlOpeningMarker());
-            markdown.appendNonTranslating(node.getPageRef());
+            if (context.getRenderPurpose() == TRANSLATION_SPANS) {
+                ResolvedLink resolvedLink = context.resolveLink(LinkType.LINK, node.getUrl(), false);
+                markdown.appendNonTranslating(resolvedLink.getPageRef());
 
-            markdown.append(node.getAnchorMarker());
-            if (node.getAnchorRef().isNotNull()) {
-                CharSequence anchorRef = context.transformAnchorRef(node.getPageRef(), node.getAnchorRef());
-                markdown.append(anchorRef);
+                if (resolvedLink.getAnchorRef() != null) {
+                    markdown.append("#");
+                    CharSequence anchorRef = context.transformAnchorRef(resolvedLink.getPageRef(), resolvedLink.getAnchorRef());
+                    if (attributeUniquificationIdMap != null && resolvedLink.getPageRef().isEmpty() && context.isTransformingText() && context.getMergeContext() != null) {
+                        String uniquifiedAnchorRef = attributeUniquificationIdMap.getOrDefault(anchorRef, String.valueOf(anchorRef));
+                        markdown.append(uniquifiedAnchorRef);
+                    } else {
+                        markdown.append(anchorRef);
+                    }
+                    markdown.append(anchorRef);
+                }
+            } else {
+                markdown.append(node.getUrlOpeningMarker());
+                markdown.appendNonTranslating(node.getPageRef());
+
+                markdown.append(node.getAnchorMarker());
+                if (node.getAnchorRef().isNotNull()) {
+                    CharSequence anchorRef = context.transformAnchorRef(node.getPageRef(), node.getAnchorRef());
+                    markdown.append(anchorRef);
+                }
             }
+
             markdown.append(node.getUrlClosingMarker());
 
             if (node.getTitleOpeningMarker().isNotNull()) {
@@ -107,6 +150,8 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
     @Override
     public void renderDocument(NodeFormatterContext context, MarkdownWriter markdown, Document document, FormattingPhase phase) {
         super.renderDocument(context, markdown, document, phase);
+
+        attributeUniquificationIdMap = context.getTranslationStore().get(ATTRIBUTE_UNIQUIFICATION_ID_MAP);
 
         if (phase == DOCUMENT_BOTTOM) {
             if (context.getFormatterOptions().appendTransferredReferences) {
@@ -130,8 +175,8 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
 
                 for (DataKey<?> key : keys) {
                     if (document.get(key) instanceof NodeRepository) {
-                        NodeRepository repository = (NodeRepository) key.getFrom(document);
-                        Set nodes = repository.getReferencedElements(document);
+                        NodeRepository<?> repository = (NodeRepository<?>) key.getFrom(document);
+                        Set<?> nodes = repository.getReferencedElements(document);
 
                         for (Object value : nodes) {
                             if (value instanceof Node) {
@@ -456,6 +501,12 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
                     }
                     break;
             }
+
+            // add uniquification id attribute if needed
+            HtmlIdGenerator generator = context.getIdGenerator();
+            if (generator != null) {
+                context.addExplicitId(node, generator.getId(node), context, markdown);
+            }
         } else {
             int lastOffset = markdown.offsetWithPending() + 1;
             context.translatingRefTargetSpan(node, new TranslatingSpanRender() {
@@ -464,6 +515,15 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
                     context.renderChildren(node);
                 }
             });
+
+            // add uniquification id attribute if needed
+            HtmlIdGenerator generator = context.getIdGenerator();
+            int extraText = 0;
+
+            if (generator != null) {
+                context.addExplicitId(node, generator.getId(node), context, markdown);
+            }
+
             markdown.line();
 
             if (formatterOptions.setextHeaderEqualizeMarker) {
@@ -1163,17 +1223,25 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
         markdown.lineIf(formatterOptions.keepImageLinksAtStart);
         if (!formatterOptions.optimizedInlineRendering || context.isTransformingText()) {
             markdown.append(node.getTextOpeningMarker());
-            if (context.isTransformingText()) {
-                markdown.appendTranslating(node.getText());
-            } else {
+            if (!context.isTransformingText() || node.getFirstChildAny(HtmlInline.class) != null) {
                 context.renderChildren(node);
+            } else {
+                markdown.appendTranslating(node.getText());
             }
             markdown.append(node.getTextClosingMarker());
 
             markdown.append(node.getLinkOpeningMarker());
 
             markdown.append(node.getUrlOpeningMarker());
-            markdown.appendNonTranslating(node.getPageRef());
+
+            if (context.getRenderPurpose() == TRANSLATION_SPANS) {
+                ResolvedLink resolvedLink = context.resolveLink(LinkType.LINK, node.getUrl(), false);
+                markdown.appendNonTranslating(resolvedLink.getPageRef());
+            } else {
+                markdown.append(node.getUrlOpeningMarker());
+                markdown.appendNonTranslating(node.getPageRef());
+            }
+
             markdown.append(node.getUrlClosingMarker());
 
             if (node.getTitleOpeningMarker().isNotNull()) {
@@ -1202,13 +1270,34 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
 
             markdown.append(node.getLinkOpeningMarker());
             markdown.append(node.getUrlOpeningMarker());
-            markdown.appendNonTranslating(node.getPageRef());
 
-            markdown.append(node.getAnchorMarker());
+            if (context.getRenderPurpose() == TRANSLATION_SPANS) {
+                ResolvedLink resolvedLink = context.resolveLink(LinkType.LINK, node.getUrl(), false);
+                markdown.appendNonTranslating(resolvedLink.getPageRef());
 
-            if (node.getAnchorRef().isNotNull()) {
-                CharSequence anchorRef = context.transformAnchorRef(node.getPageRef(), node.getAnchorRef());
-                markdown.append(anchorRef);
+                if (resolvedLink.getAnchorRef() != null) {
+                    markdown.append("#");
+                    CharSequence anchorRef = context.transformAnchorRef(resolvedLink.getPageRef(), resolvedLink.getAnchorRef());
+                    markdown.append(anchorRef);
+                }
+            } else {
+                CharSequence pageRef = context.transformNonTranslating(null, node.getPageRef(), null, null);
+                markdown.append(pageRef);
+
+                markdown.append(node.getAnchorMarker());
+
+                if (node.getAnchorRef().isNotNull()) {
+                    CharSequence anchorRef = context.transformAnchorRef(node.getPageRef(), node.getAnchorRef());
+                    if (attributeUniquificationIdMap != null && context.getRenderPurpose() == TRANSLATED && context.getMergeContext() != null) {
+                        String uniquifiedAnchorRef = String.valueOf(anchorRef);
+                        if (pageRef.length() == 0) {
+                            uniquifiedAnchorRef = attributeUniquificationIdMap.getOrDefault(uniquifiedAnchorRef, uniquifiedAnchorRef);
+                        }
+                        markdown.append(uniquifiedAnchorRef);
+                    } else {
+                        markdown.append(anchorRef);
+                    }
+                }
             }
 
             markdown.append(node.getUrlClosingMarker());
@@ -1237,10 +1326,10 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
                 markdown.append(node.getTextClosingMarker());
             } else {
                 markdown.append(node.getTextOpeningMarker());
-                if (context.isTransformingText()) {
-                    markdown.appendTranslating(node.getText());
-                } else {
+                if (!context.isTransformingText()) {
                     context.renderChildren(node);
+                } else {
+                    appendReference(node.getText(), context, markdown);
                 }
                 markdown.append(node.getTextClosingMarker());
 
@@ -1258,7 +1347,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
             if (node.isReferenceTextCombined()) {
                 markdown.append(node.getReferenceOpeningMarker());
                 appendWhiteSpaceBetween(markdown, node.getReferenceOpeningMarker(), node.getReference(), true, false, false);
-                markdown.appendTranslating(node.getReference());
+                appendReference(node.getReference(), context, markdown);
                 markdown.append(node.getReferenceClosingMarker());
 
                 markdown.append(node.getTextOpeningMarker());
@@ -1268,7 +1357,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
                 if (!context.isTransformingText() || node.getFirstChildAny(HtmlInline.class) != null) {
                     context.renderChildren(node);
                 } else {
-                    markdown.appendTranslating(node.getText());
+                    appendReference(node.getText(), context, markdown);
                 }
                 markdown.append(node.getTextClosingMarker());
 

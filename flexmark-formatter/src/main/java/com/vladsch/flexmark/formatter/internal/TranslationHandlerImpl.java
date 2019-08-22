@@ -1,5 +1,6 @@
 package com.vladsch.flexmark.formatter.internal;
 
+import com.vladsch.flexmark.ast.AnchorRefTarget;
 import com.vladsch.flexmark.formatter.*;
 import com.vladsch.flexmark.html.renderer.HtmlIdGenerator;
 import com.vladsch.flexmark.html.renderer.HtmlIdGeneratorFactory;
@@ -14,6 +15,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
+import java.util.function.Supplier;
 import java.util.regex.Pattern;
 
 import static com.vladsch.flexmark.formatter.RenderPurpose.TRANSLATED_SPANS;
@@ -47,6 +50,8 @@ public class TranslationHandlerImpl implements TranslationHandler {
     private MarkdownWriter myWriter;
     private HtmlIdGenerator myIdGenerator;
     private TranslationPlaceholderGenerator myPlaceholderGenerator;
+    private Function<String, CharSequence> myNonTranslatingPostProcessor = null;
+    private MergeContext myMergeContext = null;
 
     public TranslationHandlerImpl(DataHolder options, FormatterOptions formatterOptions, HtmlIdGeneratorFactory idGeneratorFactory) {
         myFormatterOptions = formatterOptions;
@@ -68,8 +73,23 @@ public class TranslationHandlerImpl implements TranslationHandler {
     }
 
     @Override
+    public MergeContext getMergeContext() {
+        return myMergeContext;
+    }
+
+    @Override
+    public void setMergeContext(MergeContext context) {
+        myMergeContext = context;
+    }
+
+    @Override
     public MutableDataSet getTranslationStore() {
         return myTranslationStore;
+    }
+
+    @Override
+    public HtmlIdGenerator getIdGenerator() {
+        return myIdGenerator;
     }
 
     @Override
@@ -118,7 +138,7 @@ public class TranslationHandlerImpl implements TranslationHandler {
     }
 
     @Override
-    public void setTranslatedTexts(List<CharSequence> translatedTexts) {
+    public void setTranslatedTexts(List<? extends CharSequence> translatedTexts) {
         myTranslatedTexts.clear();
         myTranslatedTexts.putAll(myTranslatingTexts);
         myTranslatedSpans.clear();
@@ -266,8 +286,10 @@ public class TranslationHandlerImpl implements TranslationHandler {
             case TRANSLATION_SPANS: {
                 String spanText = renderInSubContext(render, true);
                 if (target != null) {
-                    String id = myIdGenerator.getId(target);
-                    myOriginalRefTargets.put(id, myTranslatingSpans.size());
+                    if (!(target instanceof AnchorRefTarget) || !((AnchorRefTarget) target).isExplicitAnchorRefId()) {
+                        String id = myIdGenerator.getId(target);
+                        myOriginalRefTargets.put(id, myTranslatingSpans.size());
+                    }
                 }
 
                 myTranslatingSpans.add(spanText);
@@ -281,8 +303,13 @@ public class TranslationHandlerImpl implements TranslationHandler {
                 String translated = myTranslatedSpans.get(myTranslatingSpanId);
 
                 if (target != null) {
-                    String id = myIdGenerator.getId(translated);
-                    myTranslatedRefTargets.put(myTranslatingSpanId, id);
+                    if (!(target instanceof AnchorRefTarget) || !((AnchorRefTarget) target).isExplicitAnchorRefId()) {
+                        // only if does not have an explicit id then map to translated text id
+                        String id = myIdGenerator.getId(translated);
+                        myTranslatedRefTargets.put(myTranslatingSpanId, id);
+                    //} else {
+                    //    myTranslatedRefTargets.remove(myTranslatingSpanId);
+                    }
                 }
 
                 myTranslatingSpanId++;
@@ -293,9 +320,15 @@ public class TranslationHandlerImpl implements TranslationHandler {
 
             case TRANSLATED:
                 if (target != null) {
-                    String id = myIdGenerator.getId(target);
-                    myTranslatedRefTargets.put(myTranslatingSpanId, id);
+                    if (!(target instanceof AnchorRefTarget) || !((AnchorRefTarget) target).isExplicitAnchorRefId()) {
+                        // only if does not have an explicit id then map to translated text id
+                        String id = myIdGenerator.getId(target);
+                        myTranslatedRefTargets.put(myTranslatingSpanId, id);
+                    //} else {
+                    //    myTranslatedRefTargets.remove(myTranslatingSpanId);
+                    }
                 }
+
                 myTranslatingSpanId++;
                 String spanText = renderInSubContext(render, true);
                 return;
@@ -360,6 +393,34 @@ public class TranslationHandlerImpl implements TranslationHandler {
     }
 
     @Override
+    public void postProcessNonTranslating(Function<String, CharSequence> postProcessor, Runnable scope) {
+        Function<String, CharSequence> savedValue = myNonTranslatingPostProcessor;
+        try {
+            myNonTranslatingPostProcessor = postProcessor;
+            scope.run();
+        } finally {
+            myNonTranslatingPostProcessor = savedValue;
+        }
+    }
+
+    @Override
+    public <T> T postProcessNonTranslating(Function<String, CharSequence> postProcessor, Supplier<T> scope) {
+        Function<String, CharSequence> savedValue = myNonTranslatingPostProcessor;
+        try {
+            myNonTranslatingPostProcessor = postProcessor;
+            T retVal = scope.get();
+            return retVal;
+        } finally {
+            myNonTranslatingPostProcessor = savedValue;
+        }
+    }
+
+    @Override
+    public boolean isPostProcessingNonTranslating() {
+        return myNonTranslatingPostProcessor != null;
+    }
+
+    @Override
     public CharSequence transformNonTranslating(CharSequence prefix, CharSequence nonTranslatingText, CharSequence suffix, CharSequence suffix2) {
         switch (myRenderPurpose) {
             case TRANSLATION_SPANS:
@@ -384,6 +445,10 @@ public class TranslationHandlerImpl implements TranslationHandler {
                     if (text == null) {
                         int tmp = 0;
                         text = "";
+                    }
+
+                    if (myNonTranslatingPostProcessor != null) {
+                        return myNonTranslatingPostProcessor.apply(text);
                     }
                     return text;
                 }

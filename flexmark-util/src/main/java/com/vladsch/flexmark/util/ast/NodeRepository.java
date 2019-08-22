@@ -52,12 +52,17 @@ public abstract class NodeRepository<T> implements Map<String, T> {
         return nodeMap.values();
     }
 
-    public static <T> boolean transferReferences(NodeRepository<T> destination, NodeRepository<T> included, boolean onlyIfUndefined) {
+    public static <T> boolean transferReferences(NodeRepository<T> destination, NodeRepository<T> included, boolean onlyIfUndefined, Map<String, String> referenceIdMap) {
         // copy references but only if they are not defined in the original document
         boolean transferred = false;
         for (Map.Entry<String, T> entry : included.entrySet()) {
-            if (!onlyIfUndefined || !destination.containsKey(entry.getKey())) {
-                destination.put(entry.getKey(), entry.getValue());
+            String key = entry.getKey();
+
+            // map as requested
+            if (referenceIdMap != null) referenceIdMap.getOrDefault(key, key);
+
+            if (!onlyIfUndefined || !destination.containsKey(key)) {
+                destination.put(key, entry.getValue());
                 transferred = true;
             }
         }

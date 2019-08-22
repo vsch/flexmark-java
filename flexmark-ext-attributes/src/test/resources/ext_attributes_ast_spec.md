@@ -1760,6 +1760,62 @@ Document[0, 47]
 ````````````````````````````````
 
 
+```````````````````````````````` example Headings Tests: 11
+### Heading {#explicit-id}
+.
+<h3 id="explicit-id">Heading</h3>
+.
+Document[0, 27]
+  Heading[0, 26] textOpen:[0, 3, "###"] text:[4, 26, "Heading {#explicit-id}"]
+    Text[4, 11] chars:[4, 11, "Heading"]
+    AttributesNode[12, 26] textOpen:[12, 13, "{"] text:[13, 25, "#explicit-id"] textClose:[25, 26, "}"]
+      AttributeNode[13, 25] name:[13, 14, "#"] value:[14, 25, "explicit-id"] isImplicit isId
+````````````````````````````````
+
+
+```````````````````````````````` example Headings Tests: 12
+### Heading{#explicit-id}
+.
+<h3 id="heading"><span id="explicit-id">Heading</span></h3>
+.
+Document[0, 26]
+  Heading[0, 25] textOpen:[0, 3, "###"] text:[4, 25, "Heading{#explicit-id}"]
+    TextBase[4, 11] chars:[4, 11, "Heading"]
+      Text[4, 11] chars:[4, 11, "Heading"]
+    AttributesNode[11, 25] textOpen:[11, 12, "{"] text:[12, 24, "#explicit-id"] textClose:[24, 25, "}"]
+      AttributeNode[12, 24] name:[12, 13, "#"] value:[13, 24, "explicit-id"] isImplicit isId
+````````````````````````````````
+
+
+```````````````````````````````` example Headings Tests: 13
+Heading {#explicit-id}
+==============
+.
+<h1 id="explicit-id">Heading</h1>
+.
+Document[0, 38]
+  Heading[0, 37] text:[0, 22, "Heading {#explicit-id}"] textClose:[23, 37, "=============="]
+    Text[0, 7] chars:[0, 7, "Heading"]
+    AttributesNode[8, 22] textOpen:[8, 9, "{"] text:[9, 21, "#explicit-id"] textClose:[21, 22, "}"]
+      AttributeNode[9, 21] name:[9, 10, "#"] value:[10, 21, "explicit-id"] isImplicit isId
+````````````````````````````````
+
+
+```````````````````````````````` example Headings Tests: 14
+Heading{#explicit-id}
+==============
+.
+<h1 id="heading"><span id="explicit-id">Heading</span></h1>
+.
+Document[0, 37]
+  Heading[0, 36] text:[0, 21, "Heading{#explicit-id}"] textClose:[22, 36, "=============="]
+    TextBase[0, 7] chars:[0, 7, "Heading"]
+      Text[0, 7] chars:[0, 7, "Heading"]
+    AttributesNode[7, 21] textOpen:[7, 8, "{"] text:[8, 20, "#explicit-id"] textClose:[20, 21, "}"]
+      AttributeNode[8, 20] name:[8, 9, "#"] value:[9, 20, "explicit-id"] isImplicit isId
+````````````````````````````````
+
+
 ## TOC
 
 Default rendering with emphasis

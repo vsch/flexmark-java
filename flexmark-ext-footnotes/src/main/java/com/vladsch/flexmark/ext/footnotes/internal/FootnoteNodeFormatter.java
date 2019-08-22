@@ -12,11 +12,12 @@ import com.vladsch.flexmark.util.format.options.ElementPlacementSort;
 import java.util.*;
 
 public class FootnoteNodeFormatter extends NodeRepositoryFormatter<FootnoteRepository, FootnoteBlock, Footnote> {
-    public static final DataKey<Map<String, String>> FOOTNOTE_TRANSLATION_MAP = new DataKey<Map<String, String>>("FOOTNOTE_TRANSLATION_MAP", new HashMap<String, String>()); // assign attributes to text if previous is not a space
+    public static final DataKey<Map<String, String>> FOOTNOTE_TRANSLATION_MAP = new DataKey<Map<String, String>>("FOOTNOTE_TRANSLATION_MAP", new HashMap<String, String>()); // translated references
+    public static final DataKey<Map<String, String>> FOOTNOTE_UNIQUIFICATION_MAP = new DataKey<Map<String, String>>("FOOTNOTE_UNIQUIFICATION_MAP", new HashMap<String, String>()); // uniquified references
     private final FootnoteFormatOptions options;
 
     public FootnoteNodeFormatter(DataHolder options) {
-        super(options, FOOTNOTE_TRANSLATION_MAP);
+        super(options, FOOTNOTE_TRANSLATION_MAP, FOOTNOTE_UNIQUIFICATION_MAP);
         this.options = new FootnoteFormatOptions(options);
     }
 

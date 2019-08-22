@@ -4,11 +4,13 @@ import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.util.ast.*;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKey;
+import com.vladsch.flexmark.util.data.DataSet;
 import com.vladsch.flexmark.util.format.options.ElementPlacement;
 import com.vladsch.flexmark.util.format.options.ElementPlacementSort;
 
 import java.util.*;
 
+import static com.vladsch.flexmark.formatter.RenderPurpose.TRANSLATED;
 import static com.vladsch.flexmark.formatter.RenderPurpose.TRANSLATION_SPANS;
 
 public abstract class NodeRepositoryFormatter<R extends NodeRepository<B>, B extends Node & ReferenceNode<R, B, N>, N extends Node & ReferencingNode<R, B>> implements PhasedNodeFormatter {
@@ -25,7 +27,7 @@ public abstract class NodeRepositoryFormatter<R extends NodeRepository<B>, B ext
     public abstract R getRepository(DataHolder options);
     public abstract ElementPlacement getReferencePlacement();
     public abstract ElementPlacementSort getReferenceSort();
-    public abstract void renderReferenceBlock(B node, NodeFormatterContext context, MarkdownWriter markdown);
+    protected abstract void renderReferenceBlock(B node, NodeFormatterContext context, MarkdownWriter markdown);
 
     protected final R referenceRepository;
     protected final List<B> referenceList;
@@ -35,12 +37,13 @@ public abstract class NodeRepositoryFormatter<R extends NodeRepository<B>, B ext
     protected boolean repositoryNodesDone;
     protected final Comparator<B> myComparator;
 
-    private NodeFormatterContext myContext;
     private Map<String, String> referenceTranslationMap;
+    protected Map<String, String> referenceUniqificationMap;
     private final DataKey<Map<String, String>> myReferenceMapKey;
+    private final DataKey<Map<String, String>> myReferenceUniqificationMapKey;
 
-    protected ElementPlacement getTranslationReferencePlacement() {
-        if (myContext.isTransformingText()) {
+    protected ElementPlacement getTranslationReferencePlacement(NodeFormatterContext context) {
+        if (context.isTransformingText()) {
             return ElementPlacement.AS_IS;
         } else {
             return getReferencePlacement();
@@ -49,6 +52,22 @@ public abstract class NodeRepositoryFormatter<R extends NodeRepository<B>, B ext
 
     public String modifyTransformedReference(String transformedReferenceId, NodeFormatterContext context) {
         return transformedReferenceId;
+    }
+
+    private void renderReferenceBlockUnique(B node, NodeFormatterContext context, MarkdownWriter markdown) {
+        if (context.getRenderPurpose() == TRANSLATED) {
+            context.postProcessNonTranslating(id -> {
+                if (referenceUniqificationMap != null) {
+                    String uniqueS = referenceUniqificationMap.getOrDefault(id, id);
+                    return uniqueS;
+                }
+                return id;
+            }, () -> {
+                renderReferenceBlock(node, context, markdown);
+            });
+        } else {
+            renderReferenceBlock(node, context, markdown);
+        }
     }
 
     protected String transformReferenceId(String nodeText, NodeFormatterContext context) {
@@ -73,6 +92,13 @@ public abstract class NodeRepositoryFormatter<R extends NodeRepository<B>, B ext
                 case TRANSLATED:
                     String untransformed = modifyTransformedReference(nodeText, context);
                     String s = context.transformNonTranslating(null, untransformed, null, null).toString();
+
+                    // apply uniquification
+                    // disable otherwise may get double mapping
+                    if (!context.isPostProcessingNonTranslating() && referenceUniqificationMap != null && referenceUniqificationMap.containsKey(s)) {
+                        String uniqueS = referenceUniqificationMap.get(s);
+                        return uniqueS;
+                    }
                     return s;
 
                 case FORMAT:
@@ -83,8 +109,9 @@ public abstract class NodeRepositoryFormatter<R extends NodeRepository<B>, B ext
         return nodeText;
     }
 
-    public NodeRepositoryFormatter(DataHolder options, DataKey<Map<String, String>> referenceMapKey) {
+    public NodeRepositoryFormatter(DataHolder options, DataKey<Map<String, String>> referenceMapKey, DataKey<Map<String, String>> uniquificationMapKey) {
         myReferenceMapKey = referenceMapKey;
+        myReferenceUniqificationMapKey = uniquificationMapKey;
         referenceRepository = getRepository(options);
         referenceList = referenceRepository.values();
         lastReference = referenceList.isEmpty() ? null : referenceList.get(referenceList.size() - 1);
@@ -108,8 +135,6 @@ public abstract class NodeRepositoryFormatter<R extends NodeRepository<B>, B ext
     @Override
     public void renderDocument(NodeFormatterContext context, MarkdownWriter markdown, Document document, FormattingPhase phase) {
         // here non-rendered elements can be collected so that they are rendered in another part of the document
-        myContext = context;
-
         if (context.isTransformingText() && myReferenceMapKey != null) {
             if (context.getRenderPurpose() == TRANSLATION_SPANS) {
                 context.getTranslationStore().set(myReferenceMapKey, new HashMap<String, String>());
@@ -119,7 +144,22 @@ public abstract class NodeRepositoryFormatter<R extends NodeRepository<B>, B ext
 
         switch (phase) {
             case COLLECT:
-                if (getTranslationReferencePlacement() != ElementPlacement.AS_IS && getReferenceSort() == ElementPlacementSort.SORT_UNUSED_LAST) {
+                referenceUniqificationMap = null;
+
+                if (context.isTransformingText() && myReferenceUniqificationMapKey != null) {
+                    if (context.getRenderPurpose() == TRANSLATION_SPANS) {
+                        // need to uniquify the ids across documents
+                        MergeContext mergeContext = context.getMergeContext();
+
+                        if (mergeContext != null) {
+                            uniquifyIds(context, markdown, document);
+                        }
+                    }
+
+                    referenceUniqificationMap = context.getTranslationStore().get(myReferenceUniqificationMapKey);
+                }
+
+                if (getTranslationReferencePlacement(context) != ElementPlacement.AS_IS && getReferenceSort() == ElementPlacementSort.SORT_UNUSED_LAST) {
                     // get all ref nodes and figure out which ones are unused
                     unusedReferences.addAll(referenceList);
                     Iterable<? extends Node> nodes = context.nodesOfType(getNodeClasses());
@@ -136,14 +176,14 @@ public abstract class NodeRepositoryFormatter<R extends NodeRepository<B>, B ext
                 break;
 
             case DOCUMENT_TOP:
-                if (getTranslationReferencePlacement() == ElementPlacement.DOCUMENT_TOP) {
+                if (getTranslationReferencePlacement(context) == ElementPlacement.DOCUMENT_TOP) {
                     // put all footnotes here
                     formatReferences(context, markdown);
                 }
                 break;
 
             case DOCUMENT_BOTTOM:
-                if (getTranslationReferencePlacement() == ElementPlacement.DOCUMENT_BOTTOM) {
+                if (getTranslationReferencePlacement(context) == ElementPlacement.DOCUMENT_BOTTOM) {
                     // put all footnotes here
                     formatReferences(context, markdown);
                 }
@@ -185,7 +225,7 @@ public abstract class NodeRepositoryFormatter<R extends NodeRepository<B>, B ext
 
         markdown.blankLine();
         for (B reference : references) {
-            renderReferenceBlock(reference, context, markdown);
+            renderReferenceBlockUnique(reference, context, markdown);
         }
         markdown.blankLine();
         repositoryNodesDone = true;
@@ -193,9 +233,9 @@ public abstract class NodeRepositoryFormatter<R extends NodeRepository<B>, B ext
 
     protected void renderReference(B node, NodeFormatterContext context, MarkdownWriter markdown) {
         if (!repositoryNodesDone) {
-            switch (getTranslationReferencePlacement()) {
+            switch (getTranslationReferencePlacement(context)) {
                 case AS_IS:
-                    renderReferenceBlock(node, context, markdown);
+                    renderReferenceBlockUnique(node, context, markdown);
                     if (node.getNext() == null || node.getNext().getClass() != node.getClass()) {
                         markdown.blankLine();
                     }
@@ -212,6 +252,51 @@ public abstract class NodeRepositoryFormatter<R extends NodeRepository<B>, B ext
                     }
                     break;
             }
+        }
+    }
+
+    /**
+     * Compute needed id map to make reference ids unique across documents[] up to entry equal to document
+     * and store this map in document property so that it can be retrieved from the document later when computing
+     * the map by documents after this document in the list.
+     *
+     * @param context
+     * @param markdown
+     * @param document
+     */
+    protected void uniquifyIds(NodeFormatterContext context, MarkdownWriter markdown, Document document) {
+        // collect ids and values to uniquify references up to our document
+        R combinedRefs = getRepository(new DataSet()); // create an empty repository
+        Map<String, String> idMap = new HashMap<>();
+
+        MergeContext mergeContext = context.getMergeContext();
+        mergeContext.forEachPrecedingDocument(document, (docContext, doc, index) -> {
+            NodeRepository<B> docRefs = getRepository(doc);
+            Map<String, String> uniquificationMap = docContext.getTranslationStore().get(myReferenceUniqificationMapKey);
+            NodeRepository.transferReferences(combinedRefs, docRefs, true, uniquificationMap);
+        });
+
+        // now map our ids that clash to unique ids by appending increasing integers to id
+        R repository = getRepository(document);
+        for (Map.Entry<String, B> entry : repository.entrySet()) {
+            String key = entry.getKey();
+            String newKey = key;
+            int i = 0;
+
+            while (combinedRefs.containsKey(newKey)) {
+                // need to uniquify
+                newKey = String.format("%s%d", key, ++i);
+            }
+
+            if (i > 0) {
+                // have conflict, remap
+                idMap.put(key, newKey);
+            }
+        }
+
+        if (!idMap.isEmpty()) {
+            // save for later use
+            context.getTranslationStore().set(myReferenceUniqificationMapKey, idMap);
         }
     }
 }

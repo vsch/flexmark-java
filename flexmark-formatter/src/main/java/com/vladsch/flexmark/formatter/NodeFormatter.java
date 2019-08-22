@@ -1,5 +1,8 @@
 package com.vladsch.flexmark.formatter;
 
+import com.vladsch.flexmark.util.data.DataHolder;
+import com.vladsch.flexmark.util.data.MutableDataHolder;
+
 import java.util.Set;
 
 /**

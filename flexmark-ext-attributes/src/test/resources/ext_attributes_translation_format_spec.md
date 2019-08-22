@@ -21,7 +21,7 @@ The attributes is a space separated list of attribute syntax of one of the follo
 * `#anchor` : equivalent to `id="anchor"`
 * `.class-name` : equivalent to `class="class-name"`
 
-<!-- 
+<!--
 * `:attr=value` : equivalent to `style="attr: value"`
  -->
 
@@ -104,7 +104,7 @@ Cond 1.1 text node {.red}
 .
 coND 1.1 teEXt NoDeE{.red}
 
-coND 1.1 teEXt NoDeE{.red}
+coND 1.1 teEXt NoDeE {.red}
 ````````````````````````````````
 
 
@@ -115,7 +115,7 @@ Cond 1.3 text node {.red}
 .
 coND 1.2 teEXt NoDeE{.red}
 
-coND 1.3 teEXt NoDeE{.red}
+coND 1.3 teEXt NoDeE {.red}
 ````````````````````````````````
 
 
@@ -128,7 +128,7 @@ Cond 1.3 text <!---->node {.red}
 .
 coND 1.2 teEXt <!---->NoDeE{.red}
 
-coND 1.3 teEXt <!---->NoDeE{.red}
+coND 1.3 teEXt <!---->NoDeE {.red}
 ````````````````````````````````
 
 
@@ -139,7 +139,7 @@ Cond 1.3 **text node {.red}**
 .
 coND 1.2 **teEXt NoDeE{.red}**
 
-coND 1.3 **teEXt NoDeE{.red}**
+coND 1.3 **teEXt NoDeE {.red}**
 ````````````````````````````````
 
 
@@ -150,7 +150,7 @@ Cond 1.3 **text node {.red}**
 .
 coND 1.2 **teEXt NoDeE{.red}**
 
-coND 1.3 **teEXt NoDeE{.red}**
+coND 1.3 **teEXt NoDeE {.red}**
 ````````````````````````````````
 
 
@@ -163,7 +163,7 @@ Cond 1.3 **text <!---->node {.red}**
 .
 coND 1.2 **teEXt <!---->NoDeE{.red}**
 
-coND 1.3 **teEXt <!---->NoDeE{.red}**
+coND 1.3 **teEXt <!---->NoDeE {.red}**
 ````````````````````````````````
 
 
@@ -174,7 +174,7 @@ coND 1.3 **teEXt <!---->NoDeE{.red}**
 .
 > coND 1.1 teEXt NoDeE{.red}
 
-> coND 1.1 teEXt NoDeE{.red}
+> coND 1.1 teEXt NoDeE {.red}
 ````````````````````````````````
 
 
@@ -187,7 +187,7 @@ attributes assigned to paragraph
 .
 > coND 1.2 teEXt NoDeE{.red}
 
-> coND 1.3 teEXt NoDeE{.red}
+> coND 1.3 teEXt NoDeE {.red}
 ````````````````````````````````
 
 
@@ -200,7 +200,7 @@ attributes assigned to list item
 .
 * coND 1.1 teEXt NoDeE{.red}
 
-* coND 1.1 teEXt NoDeE{.red}
+* coND 1.1 teEXt NoDeE {.red}
 ````````````````````````````````
 
 
@@ -213,7 +213,7 @@ attributes assigned to list item
 .
 * coND 1.2 teEXt NoDeE{.red}
 
-* coND 1.3 teEXt NoDeE{.red}
+* coND 1.3 teEXt NoDeE {.red}
 ````````````````````````````````
 
 
@@ -234,7 +234,7 @@ Cond 2.2 Some text **bold text**{.red}{.blue}
 
 Cond 2.3 Some text **bold text**{.red}
 .
-coND 2.1 someE teEXt **BoLD teEXt**{.red}
+coND 2.1 someE teEXt **BoLD teEXt** {.red}
 
 coND 2.2 someE teEXt **BoLD teEXt**{.red}{.blue}
 
@@ -249,7 +249,7 @@ Cond 2.2 Some text **bold text**{.red}{.blue}
 
 Cond 2.3 Some text **bold text**{.red}
 .
-coND 2.1 someE teEXt **BoLD teEXt**{.red}
+coND 2.1 someE teEXt **BoLD teEXt** {.red}
 
 coND 2.2 someE teEXt **BoLD teEXt**{.red}{.blue}
 
@@ -292,13 +292,13 @@ attributes are assigned to the list element
 * list item 1
 * {.red} list item 2
 .
-* {.red}LiISt iIteEm 1
+* {.red} LiISt iIteEm 1
 
 * LiISt iIteEm 2
 
 * LiISt iIteEm 1
 
-* {.red}LiISt iIteEm 2
+* {.red} LiISt iIteEm 2
 ````````````````````````````````
 
 
@@ -323,7 +323,7 @@ deEFiINiItiIoN teERm
 ````````````````````````````````
 
 
-### Cond 3.2 
+### Cond 3.2
 
 Cond 3.2 attributes go to paragraph's previous sibling,
 
@@ -415,7 +415,7 @@ Assigned to paragraph
 
 * LiISt iIteEm 2
 
-  {.red}someE teEXt
+  {.red} someE teEXt
 ````````````````````````````````
 
 
@@ -433,7 +433,7 @@ DeEFiINiItiIoN teERm
 : DeEFiINiItiIoN iIteEm 1
 : DeEFiINiItiIoN iIteEm 2
 
-{.red}SomeE teEXt
+{.red} SomeE teEXt
 ````````````````````````````````
 
 
@@ -457,7 +457,7 @@ Assigned to block quote
 ````````````````````````````````
 
 
-### Cond 3.5 
+### Cond 3.5
 
 Cond 3.5 attributes go to paragraph's previous sibling,
 
@@ -567,7 +567,7 @@ Some paragraph
 .
 someE paARaAGRaAph
 
-{.red}someE teEXt
+{.red} someE teEXt
 ````````````````````````````````
 
 
@@ -603,21 +603,21 @@ assigned to the element and has an `id` attribute.
 ```````````````````````````````` example Cond 4.1: 2
 # Heading {#custom-id}
 .
-# heEaADiING{#custom-id}
+# heEaADiING {#custom-id}
 ````````````````````````````````
 
 
 ```````````````````````````````` example(Cond 4.1: 3) options(anchors)
 # Heading {#custom-id}
 .
-# heEaADiING{#custom-id}
+# heEaADiING {#custom-id}
 ````````````````````````````````
 
 
 ```````````````````````````````` example Cond 4.1: 4
 # Heading # {#custom-id}
 .
-# heEaADiING #{#custom-id}
+# heEaADiING # {#custom-id}
 ````````````````````````````````
 
 
@@ -625,8 +625,8 @@ assigned to the element and has an `id` attribute.
 Heading {#custom-id}
 ======================
 .
-heEaADiING{#custom-id}
-======================
+heEaADiING {#custom-id}
+=======================
 ````````````````````````````````
 
 
@@ -634,8 +634,8 @@ heEaADiING{#custom-id}
 Heading {#123-heading}
 ======================
 .
-heEaADiING{#123-heading}
-========================
+heEaADiING {#123-heading}
+=========================
 ````````````````````````````````
 
 
@@ -754,7 +754,7 @@ paARaAGRaAph{style="color:red"}
 ```````````````````````````````` example(Random Tests: 5) options(no-text-attributes)
 Paragraph {style="color:red"}
 .
-paARaAGRaAph{style="color:red"}
+paARaAGRaAph {style="color:red"}
 ````````````````````````````````
 
 
@@ -768,7 +768,7 @@ saAmpLeE teEXt **BoLD**{.class-name}
 ```````````````````````````````` example(Random Tests: 7) options(no-text-attributes)
 Sample text **bold** {.class-name}
 .
-saAmpLeE teEXt **BoLD**{.class-name}
+saAmpLeE teEXt **BoLD** {.class-name}
 ````````````````````````````````
 
 
@@ -803,7 +803,7 @@ saAmpLeE teEXt **BoLD{.class-name}**
 ```````````````````````````````` example(Random Tests: 12) options(no-text-attributes)
 Sample text **bold {.class-name}**
 .
-saAmpLeE teEXt **BoLD{.class-name}**
+saAmpLeE teEXt **BoLD {.class-name}**
 ````````````````````````````````
 
 
@@ -819,7 +819,7 @@ saAmpLeE teEXt ![saAmpLeE imaAGeE](http://example.com){width=64 height=32}
 * list item {style="color:blue"}
 .
 * LiISt iIteEm{style="color:red"}
-* LiISt iIteEm{style="color:blue"}
+* LiISt iIteEm {style="color:blue"}
 ````````````````````````````````
 
 
@@ -828,7 +828,7 @@ saAmpLeE teEXt ![saAmpLeE imaAGeE](http://example.com){width=64 height=32}
 * list item {style="color:blue"}
 .
 * LiISt iIteEm{style="color:red"}
-* LiISt iIteEm{style="color:blue"}
+* LiISt iIteEm {style="color:blue"}
 ````````````````````````````````
 
 
@@ -887,7 +887,7 @@ paragraph 1
 .
 paARaAGRaAph 1
 
-* {style="color:red"}LiISt iIteEm 1
+* {style="color:red"} LiISt iIteEm 1
 * LiISt iIteEm 2
 ````````````````````````````````
 
@@ -903,7 +903,7 @@ paragraph 1
 paARaAGRaAph 1
 
 * LiISt iIteEm 2
-* {style="color:red"}LiISt iIteEm 1
+* {style="color:red"} LiISt iIteEm 1
 ````````````````````````````````
 
 
@@ -967,8 +967,8 @@ heEaADiING{#id1} WiIth muULtiIpLeE{#id2 style="color:red"} aANchoRS{#id3}
 Heading{#id1} with multiple{#id2 style="color:red"} anchors{#id3} {#id4}
 ========================================================================
 .
-heEaADiING{#id1} WiIth muULtiIpLeE{#id2 style="color:red"} aANchoRS{#id3}{#id4}
-===============================================================================
+heEaADiING{#id1} WiIth muULtiIpLeE{#id2 style="color:red"} aANchoRS{#id3} {#id4}
+================================================================================
 ````````````````````````````````
 
 
@@ -986,13 +986,13 @@ Default rendering with emphasis
 .
 [toc]
 
-# heEaADiING **SomeE BoLD** 1{#heading-1}
+# heEaADiING **SomeE BoLD** 1 {#heading-1}
 
-## heEaADiING 1.1 _SomeE iItaALiIc_{#heading-2}
+## heEaADiING 1.1 _SomeE iItaALiIc_ {#heading-2}
 
 ### heEaADiING 1.1.1
 
-### heEaADiING 1.1.2  **_SomeE BoLD iItaALiIc_**{#heading-3}
+### heEaADiING 1.1.2  **_SomeE BoLD iItaALiIc_** {#heading-3}
 ````````````````````````````````
 
 
@@ -1001,7 +1001,7 @@ Default rendering with emphasis
 ```````````````````````````````` example Trailing Spaces: 1
 text {attribute=value   }
 .
-teEXt{attribute=value}
+teEXt {attribute=value}
 ````````````````````````````````
 
 
@@ -1010,21 +1010,21 @@ teEXt{attribute=value}
 ```````````````````````````````` example Original preserved: 1
 text {id=value   }
 .
-teEXt{id=value}
+teEXt {id=value}
 ````````````````````````````````
 
 
 ```````````````````````````````` example Original preserved: 2
 text {id="value"   }
 .
-teEXt{id="value"}
+teEXt {id="value"}
 ````````````````````````````````
 
 
 ```````````````````````````````` example Original preserved: 3
 text {#value }
 .
-teEXt{#value}
+teEXt {#value}
 ````````````````````````````````
 
 

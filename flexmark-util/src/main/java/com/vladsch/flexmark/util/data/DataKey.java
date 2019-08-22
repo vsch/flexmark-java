@@ -64,18 +64,18 @@ public class DataKey<T> {
         }
     }
 
+    /**
+     * Compare only by address. Every key instance is unique
+     * @param o other
+     * @return true if equal
+     */
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        return false;
+    final public boolean equals(Object o) {
+        return this == o;
     }
 
     @Override
-    public int hashCode() {
-        int result = super.hashCode();
-        result = 31 * result + name.hashCode();
-        result = 31 * result + factory.hashCode();
-        result = 31 * result + (defaultValue == null ? 0 : defaultValue.hashCode());
-        return result;
+    final public int hashCode() {
+        return super.hashCode();
     }
 }

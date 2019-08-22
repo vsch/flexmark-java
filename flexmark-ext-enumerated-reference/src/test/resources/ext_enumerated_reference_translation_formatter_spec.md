@@ -53,7 +53,7 @@ See [@tbl:test]
 | taABLeE |
 |-------|
 | DaAtaA  |
-[[#tbl:test] caAptiIoN]{#tbl:test}
+[[#tbl:test] caAptiIoN] {#tbl:test}
 
 seEeE [@fig:test2]
 

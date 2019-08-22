@@ -7,6 +7,7 @@ import org.junit.runners.Suite;
         ComboMacrosSpecTest.class,
         ComboMacrosFormatterSpecTest.class,
         ComboMacrosTranslationFormatterSpecTest.class,
+        MergeMacrosTest.class,
 })
 public class ExtMacrosTestSuite {
 }

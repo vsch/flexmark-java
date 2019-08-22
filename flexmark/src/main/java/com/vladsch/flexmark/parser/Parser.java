@@ -432,7 +432,7 @@ public class Parser implements IParse {
     }
 
     public static <T extends Node> boolean transferReferences(NodeRepository<T> destination, NodeRepository<T> included, boolean onlyIfUndefined) {
-        return NodeRepository.transferReferences(destination, included, onlyIfUndefined);
+        return NodeRepository.transferReferences(destination, included, onlyIfUndefined, null);
     }
 
     /**

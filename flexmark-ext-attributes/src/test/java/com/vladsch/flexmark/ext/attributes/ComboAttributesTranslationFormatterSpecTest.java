@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.util.*;
 
 public class ComboAttributesTranslationFormatterSpecTest extends ComboSpecTestCase {
+    static final boolean SKIP_IGNORED_TESTS = ComboAttributesFormatterSpecTest.SKIP_IGNORED_TESTS;
     private static final String SPEC_RESOURCE = "/ext_attributes_translation_format_spec.md";
     private static final boolean SHOW_INTERMEDIATE = false;
     private static final DataHolder OPTIONS = new MutableDataSet()
@@ -51,6 +52,7 @@ public class ComboAttributesTranslationFormatterSpecTest extends ComboSpecTestCa
         optionsMap.put("text-attributes", new MutableDataSet().set(AttributesExtension.ASSIGN_TEXT_ATTRIBUTES, true));
         optionsMap.put("no-text-attributes", new MutableDataSet().set(AttributesExtension.ASSIGN_TEXT_ATTRIBUTES, false));
         optionsMap.put("src-pos", new MutableDataSet().set(HtmlRenderer.SOURCE_POSITION_ATTRIBUTE, "md-pos"));
+        optionsMap.put("IGNORED", new MutableDataSet().set(IGNORE, SKIP_IGNORED_TESTS));
     }
 
     static final Parser PARSER = Parser.builder(OPTIONS).build();

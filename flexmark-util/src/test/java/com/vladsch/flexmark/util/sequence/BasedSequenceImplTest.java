@@ -348,4 +348,32 @@ public class BasedSequenceImplTest {
         assertEquals("..abc..", BasedSequenceImpl.of("...abc..").trimStart(7, ".\t").toString());
         assertEquals("...abc..", BasedSequenceImpl.of("...abc..").trimStart(8, ".\t").toString());
     }
+
+    @Test
+    public void test_indexOfAll() throws Exception {
+        final String s1 = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+        BasedSequence s = BasedSequenceImpl.of(s1);
+
+        int[] indices = s.indexOfAll("a");
+
+        assertEquals(33, indices.length);
+
+        for (int i = 0; i < indices.length; i++) {
+            assertEquals(i, indices[i]);
+        }
+    }
+
+    @Test
+    public void test_indexOfAll2() throws Exception {
+        final String s1 = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+        BasedSequence s = BasedSequenceImpl.of(s1);
+
+        int[] indices = s.indexOfAll("a");
+
+        assertEquals(66, indices.length);
+
+        for (int i = 0; i < indices.length; i++) {
+            assertEquals(i, indices[i]);
+        }
+    }
 }

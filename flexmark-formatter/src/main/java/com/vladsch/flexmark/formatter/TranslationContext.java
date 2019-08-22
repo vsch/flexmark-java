@@ -1,9 +1,15 @@
 package com.vladsch.flexmark.formatter;
 
+import com.vladsch.flexmark.ast.Heading;
+import com.vladsch.flexmark.html.renderer.HtmlIdGenerator;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 
+import java.util.function.Function;
+import java.util.function.Supplier;
+
 public interface TranslationContext {
+    HtmlIdGenerator getIdGenerator();
     /**
      * Get the reason this format rendering is being performed
      *
@@ -53,6 +59,23 @@ public interface TranslationContext {
      * @return text to be used in rendering for this phase
      */
     CharSequence transformNonTranslating(CharSequence prefix, CharSequence nonTranslatingText, CharSequence suffix, CharSequence suffix2);
+
+    /**
+     * @param postProcessor id post processor for TRANSLATED purpose
+     * @param scope         code to which the post processor applies
+     */
+    void postProcessNonTranslating(Function<String, CharSequence> postProcessor, Runnable scope);
+
+    /**
+     * @param postProcessor id post processor for TRANSLATED purpose
+     * @param scope         code to which the post processor applies
+     */
+    <T> T postProcessNonTranslating(Function<String, CharSequence> postProcessor, Supplier<T> scope);
+
+    /**
+     * @return true if non-translating post processor is set
+     */
+    boolean isPostProcessingNonTranslating();
 
     /**
      * Transform translating text but which is contextually isolated from the text block in which it is located ie. link reference or image reference
@@ -113,4 +136,5 @@ public interface TranslationContext {
      * @param render    render which will be used with the custom generator
      */
     void customPlaceholderFormat(TranslationPlaceholderGenerator generator, TranslatingSpanRender render);
+    MergeContext getMergeContext();
 }
