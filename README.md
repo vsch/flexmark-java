@@ -172,6 +172,8 @@ custom node renderer if you need to override the generated link HTML.
 
 ### Latest Additions
 
+* [Merge API](../../wiki/Merge-API) to merge multiple markdown documents into a single document.
+* [Docx Renderer Extension: Limited Attributes Node Handling](../../wiki/Docx-Renderer-Extension#limited-attributes-node-handling)
 * Extensible HTML to Markdown Converter module:
   [flexmark-html2md-converter](https://github.com/vsch/flexmark-java/blob/master/flexmark-html2md-converter).
   Sample: [HtmlToMarkdownCustomizedSample.java]
