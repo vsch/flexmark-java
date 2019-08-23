@@ -29,6 +29,14 @@ public abstract class NodeRepositoryFormatter<R extends NodeRepository<B>, B ext
     public abstract ElementPlacementSort getReferenceSort();
     protected abstract void renderReferenceBlock(B node, NodeFormatterContext context, MarkdownWriter markdown);
 
+    /**
+     * Whether references should be made unique
+     * @return true if yes, false if leave all references as is
+     */
+    protected boolean makeReferencesUnique() {
+        return true;
+    }
+
     protected final R referenceRepository;
     protected final List<B> referenceList;
     protected final HashSet<Node> unusedReferences;
@@ -146,7 +154,7 @@ public abstract class NodeRepositoryFormatter<R extends NodeRepository<B>, B ext
             case COLLECT:
                 referenceUniqificationMap = null;
 
-                if (context.isTransformingText() && myReferenceUniqificationMapKey != null) {
+                if (context.isTransformingText() && myReferenceUniqificationMapKey != null && makeReferencesUnique()) {
                     if (context.getRenderPurpose() == TRANSLATION_SPANS) {
                         // need to uniquify the ids across documents
                         MergeContext mergeContext = context.getMergeContext();

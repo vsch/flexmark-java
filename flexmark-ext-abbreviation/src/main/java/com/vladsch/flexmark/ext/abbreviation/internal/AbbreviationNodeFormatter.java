@@ -18,6 +18,7 @@ public class AbbreviationNodeFormatter extends NodeRepositoryFormatter<Abbreviat
     public static final DataKey<Map<String, String>> ABBREVIATION_UNIQUIFICATION_MAP = new DataKey<Map<String, String>>("ABBREVIATION_UNIQUIFICATION_MAP", new HashMap<String, String>()); // uniquified references
     private final FormatOptions options;
     private final boolean transformUnderscores;
+    private final boolean makeMergedAbbreviationsUnique;
 
     public AbbreviationNodeFormatter(DataHolder options) {
         super(options, ABBREVIATION_TRANSLATION_MAP, ABBREVIATION_UNIQUIFICATION_MAP);
@@ -25,6 +26,12 @@ public class AbbreviationNodeFormatter extends NodeRepositoryFormatter<Abbreviat
 
         String transformedId = String.format(Formatter.TRANSLATION_ID_FORMAT.getFrom(options), 1);
         transformUnderscores = transformedId.startsWith("_") && transformedId.endsWith("_");
+        makeMergedAbbreviationsUnique = AbbreviationExtension.MAKE_MERGED_ABBREVIATIONS_UNIQUE.getFrom(options);
+    }
+
+    @Override
+    protected boolean makeReferencesUnique() {
+        return makeMergedAbbreviationsUnique;
     }
 
     @Override

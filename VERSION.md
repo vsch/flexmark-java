@@ -133,7 +133,9 @@ flexmark-java
     * `Formatter.mergeRender(Document[], int, HtmlIdGeneratorFactory)`
   * Add: merge tests and functionality to:
     * `flexmark-formatter` core rendering of anchors and headings.
-    * `flexmark-ext-abbreviation`
+    * `flexmark-ext-abbreviation`, by default making references unique is disabled. Enable by
+      setting `AbbreviationExtension.MAKE_MERGED_ABBREVIATIONS_UNIQUE` to `true` for the
+      formatter options used to merge documents.
     * `flexmark-ext-attributes`
     * `flexmark-ext-enumerated-reference`
     * `flexmark-ext-footnotes`

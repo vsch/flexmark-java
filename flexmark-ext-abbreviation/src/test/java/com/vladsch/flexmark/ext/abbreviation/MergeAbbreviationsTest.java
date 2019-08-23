@@ -21,10 +21,27 @@ public class MergeAbbreviationsTest {
             .set(Parser.HTML_FOR_TRANSLATOR, true)
             .set(Parser.PARSE_INNER_HTML_COMMENTS, true)
             .set(Parser.HEADING_NO_ATX_SPACE, true)
+            .set(AbbreviationExtension.MAKE_MERGED_ABBREVIATIONS_UNIQUE, true)
             .set(Formatter.MAX_TRAILING_BLANK_LINES, 0);
 
+    private static DataHolder OPTIONS_AS_IS = new MutableDataSet(OPTIONS)
+            .set(AbbreviationExtension.MAKE_MERGED_ABBREVIATIONS_UNIQUE, false);
+
     private static Formatter FORMATTER = Formatter.builder(OPTIONS).build();
+    private static Formatter FORMATTER_AS_IS = Formatter.builder(OPTIONS_AS_IS).build();
     private static Parser PARSER = Parser.builder(OPTIONS).build();
+
+    private static void assertMergedAsIs(String expected, String... markdownSources) {
+        int iMax = markdownSources.length;
+        Document[] documents = new Document[iMax];
+
+        for (int i = 0; i < iMax; i++) {
+            documents[i] = PARSER.parse(markdownSources[i]);
+        }
+
+        String mergedOutput = FORMATTER_AS_IS.mergeRender(documents, 1, null);
+        assertEquals("Merged results differ", expected, mergedOutput);
+    }
 
     private static void assertMerged(String expected, String... markdownSources) {
         int iMax = markdownSources.length;
@@ -38,9 +55,35 @@ public class MergeAbbreviationsTest {
         assertEquals("Merged results differ", expected, mergedOutput);
     }
 
+    private void testIdAttributeAsIs() {
+        assertMergedAsIs(
+                "*[Abbr]: Abbreviation\n" +
+                        "\n" +
+                        "This has an Abbr embedded in it.\n" +
+                        "\n" +
+                        "*[Abbr]: Abbreviation\n" +
+                        "\n" +
+                        "This has an Abbr embedded in it.\n" +
+                        "\n",
+                "*[Abbr]: Abbreviation\n" +
+                        "\n" +
+                        "This has an Abbr embedded in it.\n" +
+                        "\n",
+                "*[Abbr]:Abbreviation\n" +
+                        "\n" +
+                        "This has an Abbr embedded in it.\n" +
+                        "\n");
+    }
+
     @Test
-    public void test_IdAttributeConflict1() {
-        testIdAttributeConflict();
+    public void test_IdAttributeAsIs1() {
+        testIdAttributeAsIs();
+    }
+
+    @Test
+    public void test_IdAttributeAsIs2() {
+        testIdAttributeAsIs();
+        testIdAttributeAsIs();
     }
 
     private void testIdAttributeConflict() {
@@ -61,6 +104,11 @@ public class MergeAbbreviationsTest {
                         "\n" +
                         "This has an Abbr embedded in it.\n" +
                         "\n");
+    }
+
+    @Test
+    public void test_IdAttributeConflict1() {
+        testIdAttributeConflict();
     }
 
     @Test
