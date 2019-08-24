@@ -54,6 +54,7 @@
     <otherFiles>
       <exportedFile path="$PROJECT_DIR$/flexmark-ext-enumerated-reference/src/main/javadoc/information_source.png" settingsVersion="AD6B5AAF-662A2F0F" />
       <exportedFile path="$PROJECT_DIR$/flexmark-ext-xwiki-macros/src/main/javadoc/information_source.png" settingsVersion="AD6B5AAF-662A2F0F" />
+      <exportedFile path="$PROJECT_DIR$/flexmark-ext-tables/src/main/javadoc/warning.png" settingsVersion="AD6B5AAF-662A2F0F" />
     </otherFiles>
   </component>
 </project>

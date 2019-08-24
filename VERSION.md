@@ -6,6 +6,7 @@ flexmark-java
 [TOC]: # " "
 
 - [To Do](#to-do)
+- [0.50.30](#05030)
 - [0.50.28](#05028)
 - [0.50.26](#05026)
 - [0.50.24](#05024)
@@ -102,6 +103,20 @@ flexmark-java
 * [ ] Convert anonymous classes to lambda where possible.
 * [ ] Add: `flexmark-ext-attributes` formatting of individual attributes instead of dumping the
       attributes node text.
+
+0.50.30
+-------
+
+* Add: `DocxRenderer`
+  * page break via empty paragraph with only `{.pagebreak}` attributes
+  * tab via `{.tab}` attributes
+  * inline image alignment with `{align=}`:
+    * `left` - left align, wrap text to right
+    * `right` - right align, wrap text to left
+    * `center` - center align, wrap text to left and right
+    * else no wrapping around image
+  * add handling of `font-size` attribute, expects float of font size in pt, rounds to nearest
+    1/2 pt
 
 0.50.28
 -------

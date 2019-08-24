@@ -7,6 +7,7 @@ import com.vladsch.flexmark.ast.util.TextCollectingVisitor;
 import com.vladsch.flexmark.docx.converter.*;
 import com.vladsch.flexmark.docx.converter.util.*;
 import com.vladsch.flexmark.ext.aside.AsideBlock;
+import com.vladsch.flexmark.ext.attributes.AttributeNode;
 import com.vladsch.flexmark.ext.attributes.AttributesNode;
 import com.vladsch.flexmark.ext.emoji.Emoji;
 import com.vladsch.flexmark.ext.emoji.EmojiExtension;
@@ -45,6 +46,7 @@ import com.vladsch.flexmark.util.html.Attributes;
 import com.vladsch.flexmark.util.html.Escaping;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import org.docx4j.UnitsOfMeasurement;
+import org.docx4j.dml.wordprocessingDrawing.Anchor;
 import org.docx4j.dml.wordprocessingDrawing.Inline;
 import org.docx4j.model.structure.PageDimensions;
 import org.docx4j.model.structure.SectionWrapper;
@@ -52,7 +54,6 @@ import org.docx4j.model.styles.StyleUtil;
 import org.docx4j.openpackaging.exceptions.Docx4JException;
 import org.docx4j.openpackaging.parts.Part;
 import org.docx4j.openpackaging.parts.WordprocessingML.AltChunkType;
-import org.docx4j.openpackaging.parts.WordprocessingML.BinaryPartAbstractImage;
 import org.docx4j.openpackaging.parts.WordprocessingML.MainDocumentPart;
 import org.docx4j.openpackaging.parts.WordprocessingML.NumberingDefinitionsPart;
 import org.docx4j.openpackaging.parts.relationships.RelationshipsPart;
@@ -574,6 +575,12 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
                         CoreNodeDocxRenderer.this.render(node, docx);
                     }
                 }),
+                new NodeDocxRendererHandler<AttributeNode>(AttributeNode.class, new CustomNodeDocxRenderer<AttributeNode>() {
+                    @Override
+                    public void render(AttributeNode node, DocxRendererContext docx) {
+                        CoreNodeDocxRenderer.this.render(node, docx);
+                    }
+                }),
                 new NodeDocxRendererHandler<Emoji>(Emoji.class, new CustomNodeDocxRenderer<Emoji>() {
                     @Override
                     public void render(Emoji node, DocxRendererContext docx) {
@@ -604,6 +611,31 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
         docx.renderChildren(node);
     }
 
+    private boolean hasRenderingAttribute(Node node) {
+        boolean pageBreak = false;
+
+        for (Node child : node.getChildren()) {
+            if (child instanceof AttributesNode) {
+                AttributesNode attributesNode = (AttributesNode) child;
+                for (Node attribute : attributesNode.getChildren()) {
+                    if (attribute instanceof AttributeNode) {
+                        AttributeNode attributeNode = (AttributeNode) attribute;
+                        if (attributeNode.isClass())
+                            switch (attributeNode.getValue().toString()) {
+                                case "pagebreak":
+                                case "tab":
+                                    return true;
+
+                                default:
+                                    break;
+                            }
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
     private void render(Paragraph node, DocxRendererContext docx) {
         if (node.getParent() instanceof EnumeratedReferenceBlock) {
             // we need to unwrap the paragraphs
@@ -618,7 +650,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
                 addBlockAttributeFormatting(node, AttributablePart.NODE, docx, true);
                 docx.renderChildren(node);
             } else {
-                if (node.getFirstChildAnyNot(NonRenderingInline.class) != null) {
+                if (node.getFirstChildAnyNot(NonRenderingInline.class) != null || hasRenderingAttribute(node)) {
                     docx.setBlockFormatProvider(new BlockFormatProviderBase<>(docx, docx.getDocxRendererOptions().LOOSE_PARAGRAPH_STYLE));
                     addBlockAttributeFormatting(node, AttributablePart.NODE, docx, true);
                     docx.renderChildren(node);
@@ -684,8 +716,10 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
         if (classAttribute != null && !classAttribute.getValue().trim().isEmpty()) {
             String[] classNames = classAttribute.getValue().trim().split(" ");
 
-            // first class is main style name
-            className = classNames[0];
+            // first class is main style name unless it is pagebreak or tab
+            if (!classNames[0].equals("pagebreak") && !classNames[0].equals("tab")) {
+                className = classNames[0];
+            }
         }
 
         AttributeFormat attributeFormat = getAttributeFormat(attributes, docx);
@@ -1042,12 +1076,9 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
 
             if (escape) {
                 // render as inline code
-                docx.contextFramed(new Runnable() {
-                    @Override
-                    public void run() {
-                        docx.setRunFormatProvider(new SourceCodeRunFormatProvider<>(docx, options.noCharacterStyles, options.codeHighlightShading));
-                        docx.text(node.getChars().normalizeEOL());
-                    }
+                docx.contextFramed(() -> {
+                    docx.setRunFormatProvider(new SourceCodeRunFormatProvider<>(docx, options.noCharacterStyles, options.codeHighlightShading));
+                    docx.text(node.getChars().normalizeEOL());
                 });
             } else {
                 try {
@@ -1299,6 +1330,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
             BinaryPartAbstractImage imagePart = null;
             imagePart = BinaryPartAbstractImage.createImagePart(docx.getPackage(), docx.getContainerPart(), bytes);
             Inline inline = null;
+            Anchor anchor = null;
             String altText = attributes.contains("alt") ? attributes.getValue("alt") : "";
             List<SectionWrapper> sections = docx.getPackage().getDocumentModel().getSections();
             PageDimensions page = sections.get(sections.size() - 1).getPageDimensions();
@@ -1311,19 +1343,54 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
             long longMaxWidth = getSizeInfo(attributes, "max-width", page.getWritableWidthTwips());
             int maxWidth = longMaxWidth > 0 && longMaxWidth <= Integer.MAX_VALUE ? (int) longMaxWidth : -1;
 
+            long hOffset = 0;
+            long vOffset = 0;
+
+            if (attributes.contains("align")) {
+                switch (attributes.get("align").getValue()) {
+                    case "left":
+                        hOffset = Long.MIN_VALUE;
+                        break;
+                    case "right":
+                        hOffset = Long.MAX_VALUE;
+                        break;
+                    case "center":
+                        hOffset = Long.MAX_VALUE / 2;
+                        break;
+                    default:
+                        break;
+                }
+            }
+
             if (cx > 0 && cy > 0) {
                 // here we need cx & cy in emu which needs conversion from twips
                 cx = UnitsOfMeasurement.twipToEMU(cx);
                 cy = UnitsOfMeasurement.twipToEMU(cy);
-                inline = imagePart.createImageInline(filenameHint, altText, id1, id2, cx, cy, false);
+                if (hOffset != 0) {
+                    anchor = imagePart.createImageAnchor(filenameHint, altText, id1, id2, cx, cy, false, hOffset, vOffset);
+                } else {
+                    inline = imagePart.createImageInline(filenameHint, altText, id1, id2, cx, cy, false);
+                }
             } else {
                 if (cx > 0) {
-                    inline = imagePart.createImageInline(filenameHint, altText, id1, id2, cx, false);
+                    if (hOffset != 0) {
+                        anchor = imagePart.createImageAnchor(filenameHint, altText, id1, id2, cx, false, hOffset, vOffset);
+                    } else {
+                        inline = imagePart.createImageInline(filenameHint, altText, id1, id2, cx, false);
+                    }
                 } else {
                     if (maxWidth > 0) {
-                        inline = imagePart.createImageInline(filenameHint, altText, id1, id2, false, maxWidth);
+                        if (hOffset != 0) {
+                            anchor = imagePart.createImageAnchor(filenameHint, altText, id1, id2, false, maxWidth, hOffset, vOffset);
+                        } else {
+                            inline = imagePart.createImageInline(filenameHint, altText, id1, id2, false, maxWidth);
+                        }
                     } else {
-                        inline = imagePart.createImageInline(filenameHint, altText, id1, id2, false);
+                        if (hOffset != 0) {
+                            anchor = imagePart.createImageAnchor(filenameHint, altText, id1, id2, false, hOffset, vOffset);
+                        } else {
+                            inline = imagePart.createImageInline(filenameHint, altText, id1, id2, false);
+                        }
                     }
                 }
             }
@@ -1332,7 +1399,9 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
             org.docx4j.wml.R run = docx.createR();
             org.docx4j.wml.Drawing drawing = docx.getFactory().createDrawing();
             run.getContent().add(drawing);
-            drawing.getAnchorOrInline().add(inline);
+
+            drawing.getAnchorOrInline().add(inline != null ? inline : anchor);
+
             return run;
         } catch (Exception e) {
             e.printStackTrace();
@@ -1948,7 +2017,31 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
     }
 
     private void render(AttributesNode node, DocxRendererContext docx) {
+        docx.renderChildren(node);
+    }
 
+    private void render(AttributeNode node, DocxRendererContext docx) {
+        if (node.isClass()) {
+            switch (node.getValue().toString()) {
+                case "pagebreak": {
+                    R r = docx.getR();
+                    Br br = docx.getFactory().createBr();
+                    br.setType(STBrType.PAGE);
+                    r.getContent().add(br);
+                }
+                break;
+
+                case "tab": {
+                    R r = docx.getR();
+                    R.Tab tab = docx.getFactory().createRTab();
+                    r.getContent().add(tab);
+                }
+                break;
+
+                default:
+                    break;
+            }
+        }
     }
 
     private static class UrlRenderer implements Runnable {

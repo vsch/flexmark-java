@@ -423,9 +423,117 @@ Document[0, 58]
 ````````````````````````````````
 
 
+```````````````````````````````` example Paragraphs: 12
+# Change Font Size {style="font-size: 20pt"}
+.
+<w:body>
+    <w:bookmarkStart w:id="1" w:name="change-font-size"/>
+    <w:bookmarkEnd w:id="1"/>
+    <w:p>
+        <w:pPr>
+            <w:pBdr>
+                <w:left/>
+            </w:pBdr>
+            <w:shd w:color="auto" w:val="clear"/>
+        </w:pPr>
+        <w:r>
+            <w:rPr>
+                <w:b/>
+                <w:bCs/>
+                <w:sz w:val="40"/>
+                <w:szCs w:val="40"/>
+            </w:rPr>
+            <w:t xml:space="preserve">Change Font Size</w:t>
+        </w:r>
+    </w:p>
+</w:body>
+````````````````````````````````
+
+
+```````````````````````````````` example Paragraphs: 13
+# Change Font Size {style="font-size: 20.5 pt"}
+.
+<w:body>
+    <w:bookmarkStart w:id="1" w:name="change-font-size"/>
+    <w:bookmarkEnd w:id="1"/>
+    <w:p>
+        <w:pPr>
+            <w:pBdr>
+                <w:left/>
+            </w:pBdr>
+            <w:shd w:color="auto" w:val="clear"/>
+        </w:pPr>
+        <w:r>
+            <w:rPr>
+                <w:b/>
+                <w:bCs/>
+                <w:sz w:val="41"/>
+                <w:szCs w:val="41"/>
+            </w:rPr>
+            <w:t xml:space="preserve">Change Font Size</w:t>
+        </w:r>
+    </w:p>
+</w:body>
+````````````````````````````````
+
+
+```````````````````````````````` example Paragraphs: 14
+# Change Font Size {style="font-size: 20"}
+.
+<w:body>
+    <w:bookmarkStart w:id="1" w:name="change-font-size"/>
+    <w:bookmarkEnd w:id="1"/>
+    <w:p>
+        <w:pPr>
+            <w:pBdr>
+                <w:left/>
+            </w:pBdr>
+            <w:shd w:color="auto" w:val="clear"/>
+        </w:pPr>
+        <w:r>
+            <w:rPr>
+                <w:b/>
+                <w:bCs/>
+                <w:sz w:val="40"/>
+                <w:szCs w:val="40"/>
+            </w:rPr>
+            <w:t xml:space="preserve">Change Font Size</w:t>
+        </w:r>
+    </w:p>
+</w:body>
+````````````````````````````````
+
+
+```````````````````````````````` example Paragraphs: 15
+# Change Font Size {style="font-size: 20.5"}
+.
+<w:body>
+    <w:bookmarkStart w:id="1" w:name="change-font-size"/>
+    <w:bookmarkEnd w:id="1"/>
+    <w:p>
+        <w:pPr>
+            <w:pBdr>
+                <w:left/>
+            </w:pBdr>
+            <w:shd w:color="auto" w:val="clear"/>
+        </w:pPr>
+        <w:r>
+            <w:rPr>
+                <w:b/>
+                <w:bCs/>
+                <w:sz w:val="41"/>
+                <w:szCs w:val="41"/>
+            </w:rPr>
+            <w:t xml:space="preserve">Change Font Size</w:t>
+        </w:r>
+    </w:p>
+</w:body>
+````````````````````````````````
+
+
 permutations of formatting
 
-```````````````````````````````` example Paragraphs: 12
+```````````````````````````````` example Paragraphs: 16
 {style="color:red"}plain **Bold *Bold-Italic*** text
 {style="color:red"}plain *Italic **Bold-Italic*** text
 {style="color:red"}plain **Bold ++Bold-Underline++** text
@@ -678,7 +786,7 @@ permutations of formatting
 
 Partial text attributes
 
-```````````````````````````````` example Paragraphs: 13
+```````````````````````````````` example Paragraphs: 17
 plain text{style="color:blue"}
 .
 <w:body>
@@ -704,7 +812,7 @@ Document[0, 31]
 ````````````````````````````````
 
 
-```````````````````````````````` example Paragraphs: 14
+```````````````````````````````` example Paragraphs: 18
 plain **Bold**{style="color:blue"} text
 .
 <w:body>
@@ -730,7 +838,7 @@ plain **Bold**{style="color:blue"} text
 ````````````````````````````````
 
 
-```````````````````````````````` example Paragraphs: 15
+```````````````````````````````` example Paragraphs: 19
 plain *Italic*{style="color:blue"} text
 .
 <w:body>
@@ -756,7 +864,7 @@ plain *Italic*{style="color:blue"} text
 ````````````````````````````````
 
 
-```````````````````````````````` example Paragraphs: 16
+```````````````````````````````` example Paragraphs: 20
 plain ~~strike-through~~{style="color:blue"} text
 .
 <w:body>
@@ -782,7 +890,7 @@ plain ~~strike-through~~{style="color:blue"} text
 ````````````````````````````````
 
 
-```````````````````````````````` example Paragraphs: 17
+```````````````````````````````` example Paragraphs: 21
 plain ~subscript~{style="color:blue"} text H~2~O{
 .
 <w:body>
@@ -817,7 +925,7 @@ plain ~subscript~{style="color:blue"} text H~2~O{
 ````````````````````````````````
 
 
-```````````````````````````````` example Paragraphs: 18
+```````````````````````````````` example Paragraphs: 22
 plain ^superscript^{style="color:blue"} text e^*i*pi^ = -1
 .
 <w:body>
@@ -860,7 +968,7 @@ plain ^superscript^{style="color:blue"} text e^*i*pi^ = -1
 ````````````````````````````````
 
 
-```````````````````````````````` example Paragraphs: 19
+```````````````````````````````` example Paragraphs: 23
 plain ^superscript^{style="color:blue"} text e^ipi^ = -1
 .
 <w:body>
@@ -895,7 +1003,7 @@ plain ^superscript^{style="color:blue"} text e^ipi^ = -1
 ````````````````````````````````
 
 
-```````````````````````````````` example Paragraphs: 20
+```````````````````````````````` example Paragraphs: 24
 plain ++underline++{style="color:blue"} text
 .
 <w:body>
@@ -921,7 +1029,7 @@ plain ++underline++{style="color:blue"} text
 ````````````````````````````````
 
 
-```````````````````````````````` example Paragraphs: 21
+```````````````````````````````` example Paragraphs: 25
 plain `inline code`{style="color:blue"} text
 .
 <w:body>
@@ -947,7 +1055,7 @@ plain `inline code`{style="color:blue"} text
 ````````````````````````````````
 
 
-```````````````````````````````` example(Paragraphs: 22) options(highlight-code)
+```````````````````````````````` example(Paragraphs: 26) options(highlight-code)
 plain `inline code`{style="color:blue"} highlight text
 .
 <w:body>
@@ -976,7 +1084,7 @@ plain `inline code`{style="color:blue"} highlight text
 ````````````````````````````````
 
 
-```````````````````````````````` example(Paragraphs: 23) options(highlight-shade)
+```````````````````````````````` example(Paragraphs: 27) options(highlight-shade)
 {style="color:red"}plain `inline code`{style="color:blue"} highlight text
 .
 <w:body>
@@ -1013,7 +1121,7 @@ plain `inline code`{style="color:blue"} highlight text
 
 permutations of formatting
 
-```````````````````````````````` example Paragraphs: 24
+```````````````````````````````` example Paragraphs: 28
 plain **Bold *Bold-Italic***{style="color:blue"} text
 plain *Italic **Bold-Italic***{style="color:blue"} text
 plain **Bold ++Bold-Underline++**{style="color:blue"} text
@@ -1206,7 +1314,7 @@ plain **Bold ~~Bold-strike-through~~**{style="color:blue"} text
 
 basic text
 
-```````````````````````````````` example Paragraphs: 25
+```````````````````````````````` example Paragraphs: 29
 {style="color:red"}plain text{style="color:blue"}
 .
 <w:body>
@@ -1225,7 +1333,7 @@ basic text
 ````````````````````````````````
 
 
-```````````````````````````````` example Paragraphs: 26
+```````````````````````````````` example Paragraphs: 30
 {style="color:red"}plain **Bold**{style="color:blue"} text
 .
 <w:body>
@@ -1257,7 +1365,7 @@ basic text
 ````````````````````````````````
 
 
-```````````````````````````````` example Paragraphs: 27
+```````````````````````````````` example Paragraphs: 31
 {style="color:red"}plain *Italic*{style="color:blue"} text
 .
 <w:body>
@@ -1289,7 +1397,7 @@ basic text
 ````````````````````````````````
 
 
-```````````````````````````````` example Paragraphs: 28
+```````````````````````````````` example Paragraphs: 32
 {style="color:red"}plain ~~strike-through~~{style="color:blue"} text
 .
 <w:body>
@@ -1321,7 +1429,7 @@ basic text
 ````````````````````````````````
 
 
-```````````````````````````````` example Paragraphs: 29
+```````````````````````````````` example Paragraphs: 33
 {style="color:red"}plain ~subscript~{style="color:blue"} text H~2~O
 .
 <w:body>
@@ -1366,7 +1474,7 @@ basic text
 ````````````````````````````````
 
 
-```````````````````````````````` example Paragraphs: 30
+```````````````````````````````` example Paragraphs: 34
 {style="color:red"}plain ^superscript^{style="color:blue"} text e^*i*pi^ = -1
 .
 <w:body>
@@ -1436,7 +1544,7 @@ Document[0, 78]
 ````````````````````````````````
 
 
-```````````````````````````````` example Paragraphs: 31
+```````````````````````````````` example Paragraphs: 35
 {style="color:red"}plain ^superscript^{style="color:blue"} text e^ipi^ = -1
 .
 <w:body>
@@ -1481,7 +1589,7 @@ Document[0, 78]
 ````````````````````````````````
 
 
-```````````````````````````````` example Paragraphs: 32
+```````````````````````````````` example Paragraphs: 36
 {style="color:red"}plain ++underline++{style="color:blue"} text
 .
 <w:body>
@@ -1513,7 +1621,7 @@ Document[0, 78]
 ````````````````````````````````
 
 
-```````````````````````````````` example Paragraphs: 33
+```````````````````````````````` example Paragraphs: 37
 {style="color:red"}plain `inline code`{style="color:blue"} text
 .
 <w:body>
@@ -1545,7 +1653,7 @@ Document[0, 78]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Paragraphs: 34) options(highlight-code)
+```````````````````````````````` example(Paragraphs: 38) options(highlight-code)
 {style="color:red"}plain `inline code`{style="color:blue"} highlight text
 .
 <w:body>
@@ -1580,7 +1688,7 @@ Document[0, 78]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Paragraphs: 35) options(highlight-shade)
+```````````````````````````````` example(Paragraphs: 39) options(highlight-shade)
 {style="color:red"}plain `inline code`{style="color:blue"} highlight text
 .
 <w:body>
@@ -1617,7 +1725,7 @@ Document[0, 78]
 
 permutations of formatting
 
-```````````````````````````````` example Paragraphs: 36
+```````````````````````````````` example Paragraphs: 40
 {style="color:red"}plain **Bold *Bold-Italic***{style="color:blue"} text
 {style="color:red"}plain *Italic **Bold-Italic***{style="color:blue"} text
 {style="color:red"}plain **Bold ++Bold-Underline++**{style="color:blue"} text
@@ -1870,7 +1978,7 @@ permutations of formatting
 
 background color for paragraphs
 
-```````````````````````````````` example Paragraphs: 37
+```````````````````````````````` example Paragraphs: 41
 {style="color:red;background-color:yellow"}plain text
 .
 <w:body>
@@ -1892,7 +2000,7 @@ background color for paragraphs
 
 background color for paragraphs
 
-```````````````````````````````` example Paragraphs: 38
+```````````````````````````````` example Paragraphs: 42
 {style="color:red;background-color:yellow"}plain text{style="color:blue"}
 .
 <w:body>
@@ -1912,7 +2020,7 @@ background color for paragraphs
 ````````````````````````````````
 
 
-```````````````````````````````` example Paragraphs: 39
+```````````````````````````````` example Paragraphs: 43
 {style="color:red;background-color:yellow"}plain **Bold**{style="color:blue"} text
 .
 <w:body>

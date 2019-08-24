@@ -1,10 +1,9 @@
 package com.vladsch.flexmark.docx.converter.util;
 
 import com.vladsch.flexmark.util.Utils;
-import org.docx4j.wml.CTShd;
-import org.docx4j.wml.Color;
-import org.docx4j.wml.RPrAbstract;
-import org.docx4j.wml.STShd;
+import org.docx4j.wml.*;
+
+import java.math.BigInteger;
 
 public class AttributeFormat {
     final public String fontFamily;
@@ -141,6 +140,29 @@ public class AttributeFormat {
         if (fontItalic != null) {
             rPr.setICs(fontItalic ? docx.getFactory().createBooleanDefaultTrue() : null);
             rPr.setI(fontItalic ? docx.getFactory().createBooleanDefaultTrue() : null);
+        }
+
+        if (fontSize != null) {
+            long sz = 0;
+
+            if (fontSize.endsWith("pt")) {
+                float ptSz = Float.parseFloat(fontSize.substring(0, fontSize.length() - 2).trim());
+                sz = Math.round(ptSz * 2.0);
+            } else {
+                // treat as
+                float ptSz = Float.parseFloat(fontSize);
+                sz = Math.round(ptSz * 2.0);
+            }
+
+            if (sz != 0) {
+                HpsMeasure hpsMeasure = docx.getFactory().createHpsMeasure();
+                hpsMeasure.setVal(BigInteger.valueOf(sz));
+                rPr.setSzCs(hpsMeasure);
+                rPr.setSz(hpsMeasure);
+            } else {
+                rPr.setSzCs(null);
+                rPr.setSz(null);
+            }
         }
     }
 }

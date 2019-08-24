@@ -518,6 +518,155 @@ plain **Bold ~~Bold-strike-through~~** text
 ````````````````````````````````
 
 
+## Page Break
+
+```````````````````````````````` example Page Break: 1
+{.pagebreak}
+.
+<w:body>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="ParagraphTextBody"/>
+        </w:pPr>
+        <w:r>
+            <w:br w:type="page"/>
+        </w:r>
+    </w:p>
+</w:body>
+````````````````````````````````
+
+
+```````````````````````````````` example Page Break: 2
+Some text
+{.pagebreak}
+
+Following Text
+.
+<w:body>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="ParagraphTextBody"/>
+        </w:pPr>
+        <w:r>
+            <w:t xml:space="preserve">Some text</w:t>
+            <w:br w:type="page"/>
+        </w:r>
+    </w:p>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="ParagraphTextBody"/>
+        </w:pPr>
+        <w:r>
+            <w:t xml:space="preserve">Following Text</w:t>
+        </w:r>
+    </w:p>
+</w:body>
+````````````````````````````````
+
+
+```````````````````````````````` example Page Break: 3
+Some text  
+
+{.pagebreak} Following text
+.
+<w:body>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="ParagraphTextBody"/>
+        </w:pPr>
+        <w:r>
+            <w:t xml:space="preserve">Some text</w:t>
+        </w:r>
+    </w:p>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="ParagraphTextBody"/>
+        </w:pPr>
+        <w:r>
+            <w:br w:type="page"/>
+        </w:r>
+        <w:r>
+            <w:t xml:space="preserve">Following text</w:t>
+        </w:r>
+    </w:p>
+</w:body>
+````````````````````````````````
+
+
+```````````````````````````````` example Page Break: 4
+Some text
+
+{.pagebreak}
+
+Following Text
+.
+<w:body>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="ParagraphTextBody"/>
+        </w:pPr>
+        <w:r>
+            <w:t xml:space="preserve">Some text</w:t>
+        </w:r>
+    </w:p>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="ParagraphTextBody"/>
+        </w:pPr>
+        <w:r>
+            <w:br w:type="page"/>
+        </w:r>
+    </w:p>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="ParagraphTextBody"/>
+        </w:pPr>
+        <w:r>
+            <w:t xml:space="preserve">Following Text</w:t>
+        </w:r>
+    </w:p>
+</w:body>
+````````````````````````````````
+
+
+## Tab
+
+```````````````````````````````` example Tab: 1
+{.tab}
+.
+<w:body>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="ParagraphTextBody"/>
+        </w:pPr>
+        <w:r>
+            <w:tab/>
+        </w:r>
+    </w:p>
+</w:body>
+````````````````````````````````
+
+
+```````````````````````````````` example Tab: 2
+Some text {.tab} Following Text
+.
+<w:body>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="ParagraphTextBody"/>
+        </w:pPr>
+        <w:r>
+            <w:t xml:space="preserve">Some text </w:t>
+            <w:tab/>
+        </w:r>
+        <w:r>
+            <w:t xml:space="preserve"> Following Text</w:t>
+        </w:r>
+    </w:p>
+</w:body>
+````````````````````````````````
+
+
 ## Lists
 
 ```````````````````````````````` example Lists: 1
@@ -1342,6 +1491,246 @@ with some text
         </w:pPr>
         <w:r>
             <w:t xml:space="preserve">with some text</w:t>
+        </w:r>
+    </w:p>
+</w:body>
+````````````````````````````````
+
+
+Align left
+
+```````````````````````````````` example(Images: 5) options(url, IGNORED)
+![flexmark-icon-logo](/images/flexmark-icon-logo@2x.png){align="left"}with some text wrapped
+around the image if possible. So we add more text otherwise there is not enough to wrap in Word
+and validate how the text is wrapped.
+.
+<w:body>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="ParagraphTextBody"/>
+        </w:pPr>
+        <w:r>
+            <w:drawing>
+                <wp:anchor allowOverlap="true" behindDoc="false"
+                    distB="0" distL="114300" distR="114300" distT="0"
+                    layoutInCell="true" locked="false"
+                    relativeHeight="251658240" simplePos="false" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
+                    <wp:simplePos x="0" y="0"/>
+                    <wp:positionH relativeFrom="column">
+                        <wp:align>left</wp:align>
+                    </wp:positionH>
+                    <wp:positionV relativeFrom="paragraph">
+                        <wp:posOffset>0</wp:posOffset>
+                    </wp:positionV>
+                    <wp:extent cx="609600" cy="609600"/>
+                    <wp:effectExtent b="0" l="0" r="0" t="0"/>
+                    <wp:wrapSquare wrapText="right"/>
+                    <wp:docPr descr="flexmark-icon-logo" id="0" name="Image1"/>
+                    <wp:cNvGraphicFramePr>
+                        <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
+                    </wp:cNvGraphicFramePr>
+                    <a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
+                        <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                            <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                                <pic:nvPicPr>
+                                    <pic:cNvPr id="1" name="Image1"/>
+                                    <pic:cNvPicPr/>
+                                </pic:nvPicPr>
+                                <pic:blipFill>
+                                    <a:blip r:embed="rId3" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"/>
+                                    <a:stretch>
+                                    <a:fillRect/>
+                                    </a:stretch>
+                                </pic:blipFill>
+                                <pic:spPr>
+                                    <a:xfrm>
+                                    <a:off x="0" y="0"/>
+                                    <a:ext cx="609600" cy="609600"/>
+                                    </a:xfrm>
+                                    <a:prstGeom prst="rect">
+                                    <a:avLst/>
+                                    </a:prstGeom>
+                                </pic:spPr>
+                            </pic:pic>
+                        </a:graphicData>
+                    </a:graphic>
+                </wp:anchor>
+            </w:drawing>
+        </w:r>
+        <w:r>
+            <w:t xml:space="preserve">with some text wrapped</w:t>
+        </w:r>
+        <w:r>
+            <w:t xml:space="preserve"> </w:t>
+        </w:r>
+        <w:r>
+            <w:t xml:space="preserve">around the image if possible. So we add more text otherwise there is not enough to wrap in Word</w:t>
+        </w:r>
+        <w:r>
+            <w:t xml:space="preserve"> </w:t>
+        </w:r>
+        <w:r>
+            <w:t xml:space="preserve">and validate how the text is wrapped.</w:t>
+        </w:r>
+    </w:p>
+</w:body>
+````````````````````````````````
+
+
+Align right
+
+```````````````````````````````` example(Images: 6) options(url, IGNORED)
+![flexmark-icon-logo](/images/flexmark-icon-logo@2x.png){align="right"}with some text wrapped
+around the image if possible. So we add more text otherwise there is not enough to wrap in Word
+and validate how the text is wrapped.
+.
+<w:body>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="ParagraphTextBody"/>
+        </w:pPr>
+        <w:r>
+            <w:drawing>
+                <wp:anchor allowOverlap="true" behindDoc="false"
+                    distB="0" distL="114300" distR="114300" distT="0"
+                    layoutInCell="true" locked="false"
+                    relativeHeight="251658240" simplePos="false" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
+                    <wp:simplePos x="0" y="0"/>
+                    <wp:positionH relativeFrom="column">
+                        <wp:align>right</wp:align>
+                    </wp:positionH>
+                    <wp:positionV relativeFrom="paragraph">
+                        <wp:posOffset>0</wp:posOffset>
+                    </wp:positionV>
+                    <wp:extent cx="609600" cy="609600"/>
+                    <wp:effectExtent b="0" l="0" r="0" t="0"/>
+                    <wp:wrapSquare wrapText="left"/>
+                    <wp:docPr descr="flexmark-icon-logo" id="0" name="Image1"/>
+                    <wp:cNvGraphicFramePr>
+                        <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
+                    </wp:cNvGraphicFramePr>
+                    <a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
+                        <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                            <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                                <pic:nvPicPr>
+                                    <pic:cNvPr id="1" name="Image1"/>
+                                    <pic:cNvPicPr/>
+                                </pic:nvPicPr>
+                                <pic:blipFill>
+                                    <a:blip r:embed="rId3" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"/>
+                                    <a:stretch>
+                                    <a:fillRect/>
+                                    </a:stretch>
+                                </pic:blipFill>
+                                <pic:spPr>
+                                    <a:xfrm>
+                                    <a:off x="0" y="0"/>
+                                    <a:ext cx="609600" cy="609600"/>
+                                    </a:xfrm>
+                                    <a:prstGeom prst="rect">
+                                    <a:avLst/>
+                                    </a:prstGeom>
+                                </pic:spPr>
+                            </pic:pic>
+                        </a:graphicData>
+                    </a:graphic>
+                </wp:anchor>
+            </w:drawing>
+        </w:r>
+        <w:r>
+            <w:t xml:space="preserve">with some text wrapped</w:t>
+        </w:r>
+        <w:r>
+            <w:t xml:space="preserve"> </w:t>
+        </w:r>
+        <w:r>
+            <w:t xml:space="preserve">around the image if possible. So we add more text otherwise there is not enough to wrap in Word</w:t>
+        </w:r>
+        <w:r>
+            <w:t xml:space="preserve"> </w:t>
+        </w:r>
+        <w:r>
+            <w:t xml:space="preserve">and validate how the text is wrapped.</w:t>
+        </w:r>
+    </w:p>
+</w:body>
+````````````````````````````````
+
+
+Align center
+
+```````````````````````````````` example(Images: 7) options(url, IGNORED)
+![flexmark-icon-logo](/images/flexmark-icon-logo@2x.png){align="center"}with some text wrapped
+around the image if possible. So we add more text otherwise there is not enough to wrap in Word
+and validate how the text is wrapped.
+.
+<w:body>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="ParagraphTextBody"/>
+        </w:pPr>
+        <w:r>
+            <w:drawing>
+                <wp:anchor allowOverlap="true" behindDoc="false"
+                    distB="0" distL="114300" distR="114300" distT="0"
+                    layoutInCell="true" locked="false"
+                    relativeHeight="251658240" simplePos="false" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
+                    <wp:simplePos x="0" y="0"/>
+                    <wp:positionH relativeFrom="column">
+                        <wp:align>center</wp:align>
+                    </wp:positionH>
+                    <wp:positionV relativeFrom="paragraph">
+                        <wp:posOffset>0</wp:posOffset>
+                    </wp:positionV>
+                    <wp:extent cx="609600" cy="609600"/>
+                    <wp:effectExtent b="0" l="0" r="0" t="0"/>
+                    <wp:wrapSquare wrapText="bothSides"/>
+                    <wp:docPr descr="flexmark-icon-logo" id="0" name="Image1"/>
+                    <wp:cNvGraphicFramePr>
+                        <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
+                    </wp:cNvGraphicFramePr>
+                    <a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
+                        <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                            <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                                <pic:nvPicPr>
+                                    <pic:cNvPr id="1" name="Image1"/>
+                                    <pic:cNvPicPr/>
+                                </pic:nvPicPr>
+                                <pic:blipFill>
+                                    <a:blip r:embed="rId3" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"/>
+                                    <a:stretch>
+                                    <a:fillRect/>
+                                    </a:stretch>
+                                </pic:blipFill>
+                                <pic:spPr>
+                                    <a:xfrm>
+                                    <a:off x="0" y="0"/>
+                                    <a:ext cx="609600" cy="609600"/>
+                                    </a:xfrm>
+                                    <a:prstGeom prst="rect">
+                                    <a:avLst/>
+                                    </a:prstGeom>
+                                </pic:spPr>
+                            </pic:pic>
+                        </a:graphicData>
+                    </a:graphic>
+                </wp:anchor>
+            </w:drawing>
+        </w:r>
+        <w:r>
+            <w:t xml:space="preserve">with some text wrapped</w:t>
+        </w:r>
+        <w:r>
+            <w:t xml:space="preserve"> </w:t>
+        </w:r>
+        <w:r>
+            <w:t xml:space="preserve">around the image if possible. So we add more text otherwise there is not enough to wrap in Word</w:t>
+        </w:r>
+        <w:r>
+            <w:t xml:space="preserve"> </w:t>
+        </w:r>
+        <w:r>
+            <w:t xml:space="preserve">and validate how the text is wrapped.</w:t>
         </w:r>
     </w:p>
 </w:body>
@@ -8574,6 +8963,121 @@ list with aside block
             <w:pStyle w:val="Normal"/>
             <w:spacing w:after="0" w:before="0" w:line="140" w:lineRule="exact"/>
         </w:pPr>
+    </w:p>
+</w:body>
+````````````````````````````````
+
+
+## Emoji
+
+```````````````````````````````` example(Emoji: 1) options(IGNORED)
+:information_source: Emoji
+.
+<w:body>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="ParagraphTextBody"/>
+        </w:pPr>
+        <w:r>
+            <w:rPr>
+                <w:position w:val="-2"/>
+            </w:rPr>
+            <w:drawing>
+                <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
+                    <wp:extent cx="146685" cy="146685"/>
+                    <wp:effectExtent b="0" l="0" r="0" t="0"/>
+                    <wp:docPr descr="emoji symbols:information_source"
+                        id="0" name="Image1"/>
+                    <wp:cNvGraphicFramePr>
+                        <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
+                    </wp:cNvGraphicFramePr>
+                    <a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
+                        <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                            <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                                <pic:nvPicPr>
+                                    <pic:cNvPr id="1" name="Image1"/>
+                                    <pic:cNvPicPr/>
+                                </pic:nvPicPr>
+                                <pic:blipFill>
+                                    <a:blip r:embed="rId3" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"/>
+                                    <a:stretch>
+                                    <a:fillRect/>
+                                    </a:stretch>
+                                </pic:blipFill>
+                                <pic:spPr>
+                                    <a:xfrm>
+                                    <a:off x="0" y="0"/>
+                                    <a:ext cx="146685" cy="146685"/>
+                                    </a:xfrm>
+                                    <a:prstGeom prst="rect">
+                                    <a:avLst/>
+                                    </a:prstGeom>
+                                </pic:spPr>
+                            </pic:pic>
+                        </a:graphicData>
+                    </a:graphic>
+                </wp:inline>
+            </w:drawing>
+        </w:r>
+        <w:r>
+            <w:t xml:space="preserve"> Emoji</w:t>
+        </w:r>
+    </w:p>
+</w:body>
+````````````````````````````````
+
+
+```````````````````````````````` example(Emoji: 2) options(IGNORED)
+:warning: Emoji
+.
+<w:body>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="ParagraphTextBody"/>
+        </w:pPr>
+        <w:r>
+            <w:rPr>
+                <w:position w:val="-2"/>
+            </w:rPr>
+            <w:drawing>
+                <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
+                    <wp:extent cx="146685" cy="146685"/>
+                    <wp:effectExtent b="0" l="0" r="0" t="0"/>
+                    <wp:docPr descr="emoji places:warning" id="0" name="Image1"/>
+                    <wp:cNvGraphicFramePr>
+                        <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
+                    </wp:cNvGraphicFramePr>
+                    <a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
+                        <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                            <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                                <pic:nvPicPr>
+                                    <pic:cNvPr id="1" name="Image1"/>
+                                    <pic:cNvPicPr/>
+                                </pic:nvPicPr>
+                                <pic:blipFill>
+                                    <a:blip r:embed="rId3" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"/>
+                                    <a:stretch>
+                                    <a:fillRect/>
+                                    </a:stretch>
+                                </pic:blipFill>
+                                <pic:spPr>
+                                    <a:xfrm>
+                                    <a:off x="0" y="0"/>
+                                    <a:ext cx="146685" cy="146685"/>
+                                    </a:xfrm>
+                                    <a:prstGeom prst="rect">
+                                    <a:avLst/>
+                                    </a:prstGeom>
+                                </pic:spPr>
+                            </pic:pic>
+                        </a:graphicData>
+                    </a:graphic>
+                </wp:inline>
+            </w:drawing>
+        </w:r>
+        <w:r>
+            <w:t xml:space="preserve"> Emoji</w:t>
+        </w:r>
     </w:p>
 </w:body>
 ````````````````````````````````
