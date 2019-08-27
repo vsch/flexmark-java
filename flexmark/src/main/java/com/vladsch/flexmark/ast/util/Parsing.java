@@ -85,6 +85,7 @@ public class Parsing {
     public final boolean intellijDummyIdentifier;
     public final boolean htmlForTranslator;
     public final String translationHtmlInlineTagPattern;
+    public final String translationAutolinkTagPattern;
     public final String INVALID_LINK_CHARS;
     public final String IN_MATCHED_PARENS_NOSP;
     public final String IN_MATCHED_PARENS_W_SP;
@@ -96,6 +97,7 @@ public class Parsing {
         this.intellijDummyIdentifier = Parser.INTELLIJ_DUMMY_IDENTIFIER.getFrom(options);
         this.htmlForTranslator = Parser.HTML_FOR_TRANSLATOR.getFrom(options);
         this.translationHtmlInlineTagPattern = Parser.TRANSLATION_HTML_INLINE_TAG_PATTERN.getFrom(options);
+        this.translationAutolinkTagPattern = Parser.TRANSLATION_AUTOLINK_TAG_PATTERN.getFrom(options);
 
         this.EOL = "(?:\r\n|\r|\n)";
         this.ADDITIONAL_CHARS = ADDITIONAL_CHARS();
@@ -104,9 +106,21 @@ public class Parsing {
         this.ESCAPED_CHAR = "\\\\" + Escaping.ESCAPABLE;
         this.LINK_LABEL = Pattern
                 .compile("^\\[(?:[^\\\\\\[\\]]|" + ESCAPED_CHAR + "|\\\\){0,999}\\]");
+
         this.LINK_DESTINATION_ANGLES = Parser.SPACE_IN_LINK_URLS.getFrom(options)
                 ? Pattern.compile("^(?:[<](?:[^<> \\t\\n\\\\\\x00]" + '|' + ESCAPED_CHAR + '|' + "\\\\| (?![\"]))*[>])")
                 : Pattern.compile("^(?:[<](?:[^<> \\t\\n\\\\\\x00]" + '|' + ESCAPED_CHAR + '|' + "\\\\)*[>])");
+
+        //this.LINK_DESTINATION_ANGLES = Parser.SPACE_IN_LINK_URLS.getFrom(options)
+        //        ? Pattern.compile("^(?:[<](?:" +
+        //        "(?:[^<> \\t\\n\\\\\\x00]" + '|' + ESCAPED_CHAR + '|' + "\\\\| (?![\"]))" +
+        //        (htmlForTranslator ? "|(?:_\\d+_)" : "") +
+        //        ")*[>])")
+        //        : Pattern.compile("^(?:[<](?:" +
+        //        "(?:[^<> \\t\\n\\\\\\x00]" + '|' + ESCAPED_CHAR + '|' + "\\\\)" +
+        //        (htmlForTranslator ? "|(?:_\\d+_)" : "") +
+        //        ")*[>])");
+
         this.LINK_TITLE_STRING = "(?:\"(" + ESCAPED_CHAR + "|[^\"\\x00])*\"" +
                 '|' +
                 "'(" + ESCAPED_CHAR + "|[^'\\x00])*'" +
@@ -158,12 +172,22 @@ public class Parsing {
         this.TICKS = Pattern.compile("`+");
         this.TICKS_HERE = Pattern.compile("^`+");
         this.EMAIL_AUTOLINK = Pattern.compile(
-                "^<([a-zA-Z0-9" + ADDITIONAL_CHARS + ".!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9" + ADDITIONAL_CHARS + "](?:[a-zA-Z0-9" + ADDITIONAL_CHARS + "-]{0,61}[a-zA-Z0-9" + ADDITIONAL_CHARS + "])?(?:\\.[a-zA-Z0-9" + ADDITIONAL_CHARS + "](?:[a-zA-Z0-9" + ADDITIONAL_CHARS + "-]{0,61}[a-zA-Z0-9" + ADDITIONAL_CHARS + "])?)*)>");
+                "^<(" +
+                        "(?:[a-zA-Z0-9" + ADDITIONAL_CHARS + ".!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9" + ADDITIONAL_CHARS + "](?:[a-zA-Z0-9" + ADDITIONAL_CHARS + "-]{0,61}[a-zA-Z0-9" + ADDITIONAL_CHARS + "])?(?:\\.[a-zA-Z0-9" + ADDITIONAL_CHARS + "](?:[a-zA-Z0-9" + ADDITIONAL_CHARS + "-]{0,61}[a-zA-Z0-9" + ADDITIONAL_CHARS + "])?)*)" +
+                        (htmlForTranslator ? "|(?:" + translationAutolinkTagPattern + ")" : "") +
+                        ")>");
+
         this.AUTOLINK = Pattern.compile(
-                "^<[a-zA-Z][a-zA-Z0-9" + ADDITIONAL_CHARS + ".+-]{1,31}:[^<>" + EXCLUDED_0_TO_SPACE + "]*>");
+                "^<(" +
+                        "(?:[a-zA-Z][a-zA-Z0-9" + ADDITIONAL_CHARS + ".+-]{1,31}:[^<>" + EXCLUDED_0_TO_SPACE + "]*)" +
+                        (htmlForTranslator ? "|(?:" + translationAutolinkTagPattern + ")" : "") +
+                        ")>");
 
         this.WWW_AUTOLINK = Pattern.compile(
-                "^<(?:w" + ADDITIONAL_CHARS + "?){3,3}\\.[^<>" + EXCLUDED_0_TO_SPACE + "]*>");
+                "^<(" +
+                        "(?:w" + ADDITIONAL_CHARS + "?){3,3}\\.[^<>" + EXCLUDED_0_TO_SPACE + "]*" +
+                        (htmlForTranslator ? "|(?:" + translationAutolinkTagPattern + ")" : "") +
+                        ")>");
 
         this.SPNL = Pattern.compile("^(?:[ \t])*(?:" + EOL + "(?:[ \t])*)?");
         this.SPNL_URL = Pattern.compile("^(?:[ \t])*" + EOL);

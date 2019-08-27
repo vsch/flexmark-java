@@ -463,6 +463,7 @@ public class InlineParserImpl extends LightInlineParserImpl implements InlinePar
         spnl();
 
         dest = parseLinkDestination();
+
         if (dest == null || dest.length() == 0) {
             return 0;
         }

@@ -530,6 +530,36 @@
                         <w:u w:val="single"/>
                     </w:rPr>
                 </w:style>
+                <w:style w:styleId="ListNumber" w:type="paragraph">
+                    <w:name w:val="List Number"/>
+                    <w:basedOn w:val="Normal"/>
+                    <w:uiPriority w:val="99"/>
+                    <w:semiHidden/>
+                    <w:unhideWhenUsed/>
+                    <w:qFormat/>
+                    <w:rsid w:val="00400E20"/>
+                    <w:pPr>
+                        <w:numPr>
+                            <w:numId w:val="3"/>
+                        </w:numPr>
+                        <w:contextualSpacing/>
+                    </w:pPr>
+                </w:style>
+                <w:style w:styleId="ListBullet" w:type="paragraph">
+                    <w:name w:val="List Bullet"/>
+                    <w:basedOn w:val="Normal"/>
+                    <w:uiPriority w:val="99"/>
+                    <w:semiHidden/>
+                    <w:unhideWhenUsed/>
+                    <w:qFormat/>
+                    <w:rsid w:val="00C31C4B"/>
+                    <w:pPr>
+                        <w:numPr>
+                            <w:numId w:val="2"/>
+                        </w:numPr>
+                        <w:contextualSpacing/>
+                    </w:pPr>
+                </w:style>
             </w:styles>
         </pkg:xmlData>
     </pkg:part>

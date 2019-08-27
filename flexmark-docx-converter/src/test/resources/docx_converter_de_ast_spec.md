@@ -30,7 +30,7 @@ plain text
             <w:pStyle w:val="ParagraphTextBody"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">plain text</w:t>
+            <w:t>plain text</w:t>
         </w:r>
     </w:p>
 </w:body>
@@ -81,7 +81,7 @@ plain **Bold** text
             <w:rPr>
                 <w:rStyle w:val="StrongEmphasis"/>
             </w:rPr>
-            <w:t xml:space="preserve">Bold</w:t>
+            <w:t>Bold</w:t>
         </w:r>
         <w:r>
             <w:t xml:space="preserve"> text</w:t>
@@ -135,7 +135,7 @@ plain *Italic* text
             <w:rPr>
                 <w:rStyle w:val="Emphasis"/>
             </w:rPr>
-            <w:t xml:space="preserve">Italic</w:t>
+            <w:t>Italic</w:t>
         </w:r>
         <w:r>
             <w:t xml:space="preserve"> text</w:t>
@@ -189,7 +189,7 @@ plain ~~strike-through~~ text
             <w:rPr>
                 <w:rStyle w:val="Strikethrough"/>
             </w:rPr>
-            <w:t xml:space="preserve">strike-through</w:t>
+            <w:t>strike-through</w:t>
         </w:r>
         <w:r>
             <w:t xml:space="preserve"> text</w:t>
@@ -243,7 +243,7 @@ plain ~subscript~ text H~2~O
             <w:rPr>
                 <w:rStyle w:val="Subscript"/>
             </w:rPr>
-            <w:t xml:space="preserve">subscript</w:t>
+            <w:t>subscript</w:t>
         </w:r>
         <w:r>
             <w:t xml:space="preserve"> text H</w:t>
@@ -252,10 +252,10 @@ plain ~subscript~ text H~2~O
             <w:rPr>
                 <w:rStyle w:val="Subscript"/>
             </w:rPr>
-            <w:t xml:space="preserve">2</w:t>
+            <w:t>2</w:t>
         </w:r>
         <w:r>
-            <w:t xml:space="preserve">O</w:t>
+            <w:t>O</w:t>
         </w:r>
     </w:p>
 </w:body>
@@ -306,7 +306,7 @@ plain ^superscript^ text e^*i*pi^ = -1
             <w:rPr>
                 <w:rStyle w:val="Superscript"/>
             </w:rPr>
-            <w:t xml:space="preserve">superscript</w:t>
+            <w:t>superscript</w:t>
         </w:r>
         <w:r>
             <w:t xml:space="preserve"> text e</w:t>
@@ -317,13 +317,13 @@ plain ^superscript^ text e^*i*pi^ = -1
                 <w:position w:val="8"/>
                 <w:sz w:val="19"/>
             </w:rPr>
-            <w:t xml:space="preserve">i</w:t>
+            <w:t>i</w:t>
         </w:r>
         <w:r>
             <w:rPr>
                 <w:rStyle w:val="Superscript"/>
             </w:rPr>
-            <w:t xml:space="preserve">pi</w:t>
+            <w:t>pi</w:t>
         </w:r>
         <w:r>
             <w:t xml:space="preserve"> = -1</w:t>
@@ -389,7 +389,7 @@ plain ^superscript^ text e^ipi^ = -1
             <w:rPr>
                 <w:rStyle w:val="Superscript"/>
             </w:rPr>
-            <w:t xml:space="preserve">superscript</w:t>
+            <w:t>superscript</w:t>
         </w:r>
         <w:r>
             <w:t xml:space="preserve"> text e</w:t>
@@ -398,7 +398,7 @@ plain ^superscript^ text e^ipi^ = -1
             <w:rPr>
                 <w:rStyle w:val="Superscript"/>
             </w:rPr>
-            <w:t xml:space="preserve">ipi</w:t>
+            <w:t>ipi</w:t>
         </w:r>
         <w:r>
             <w:t xml:space="preserve"> = -1</w:t>
@@ -452,7 +452,7 @@ plain ++underline++ text
             <w:rPr>
                 <w:rStyle w:val="Underlined"/>
             </w:rPr>
-            <w:t xml:space="preserve">underline</w:t>
+            <w:t>underline</w:t>
         </w:r>
         <w:r>
             <w:t xml:space="preserve"> text</w:t>
@@ -506,7 +506,7 @@ plain `inline code` text
             <w:rPr>
                 <w:rStyle w:val="SourceText"/>
             </w:rPr>
-            <w:t xml:space="preserve">inline code</w:t>
+            <w:t>inline code</w:t>
         </w:r>
         <w:r>
             <w:t xml:space="preserve"> text</w:t>
@@ -562,7 +562,7 @@ plain `inline code` highlight text
                 <w:highlight w:val="yellow"/>
                 <w:bdr w:color="auto" w:space="0" w:sz="0" w:val="none"/>
             </w:rPr>
-            <w:t xml:space="preserve">inline code</w:t>
+            <w:t>inline code</w:t>
         </w:r>
         <w:r>
             <w:t xml:space="preserve"> highlight text</w:t>
@@ -618,7 +618,7 @@ plain `inline code` highlight text
                 <w:highlight w:val="yellow"/>
                 <w:bdr w:color="auto" w:space="0" w:sz="0" w:val="none"/>
             </w:rPr>
-            <w:t xml:space="preserve">inline code</w:t>
+            <w:t>inline code</w:t>
         </w:r>
         <w:r>
             <w:t xml:space="preserve"> highlight text</w:t>
@@ -687,7 +687,7 @@ plain **Bold ~~Bold-strike-through~~** text
                 <w:b/>
                 <w:bCs/>
             </w:rPr>
-            <w:t xml:space="preserve">Bold-Italic</w:t>
+            <w:t>Bold-Italic</w:t>
         </w:r>
         <w:r>
             <w:t xml:space="preserve"> text</w:t>
@@ -710,7 +710,7 @@ plain **Bold ~~Bold-strike-through~~** text
                 <w:i/>
                 <w:iCs/>
             </w:rPr>
-            <w:t xml:space="preserve">Bold-Italic</w:t>
+            <w:t>Bold-Italic</w:t>
         </w:r>
         <w:r>
             <w:t xml:space="preserve"> text</w:t>
@@ -733,7 +733,7 @@ plain **Bold ~~Bold-strike-through~~** text
                 <w:b/>
                 <w:bCs/>
             </w:rPr>
-            <w:t xml:space="preserve">Bold-Underline</w:t>
+            <w:t>Bold-Underline</w:t>
         </w:r>
         <w:r>
             <w:t xml:space="preserve"> text</w:t>
@@ -756,7 +756,7 @@ plain **Bold ~~Bold-strike-through~~** text
                 <w:b/>
                 <w:bCs/>
             </w:rPr>
-            <w:t xml:space="preserve">Bold-Superscript</w:t>
+            <w:t>Bold-Superscript</w:t>
         </w:r>
         <w:r>
             <w:t xml:space="preserve"> text e</w:t>
@@ -767,13 +767,13 @@ plain **Bold ~~Bold-strike-through~~** text
                 <w:position w:val="8"/>
                 <w:sz w:val="19"/>
             </w:rPr>
-            <w:t xml:space="preserve">i</w:t>
+            <w:t>i</w:t>
         </w:r>
         <w:r>
             <w:rPr>
                 <w:rStyle w:val="Superscript"/>
             </w:rPr>
-            <w:t xml:space="preserve">&#x1d6d1;</w:t>
+            <w:t>&#x1d6d1;</w:t>
         </w:r>
         <w:r>
             <w:t xml:space="preserve"> = -1</w:t>
@@ -796,7 +796,7 @@ plain **Bold ~~Bold-strike-through~~** text
                 <w:b/>
                 <w:bCs/>
             </w:rPr>
-            <w:t xml:space="preserve">Bold-Subscript</w:t>
+            <w:t>Bold-Subscript</w:t>
         </w:r>
         <w:r>
             <w:t xml:space="preserve"> text H</w:t>
@@ -805,10 +805,10 @@ plain **Bold ~~Bold-strike-through~~** text
             <w:rPr>
                 <w:rStyle w:val="Subscript"/>
             </w:rPr>
-            <w:t xml:space="preserve">2</w:t>
+            <w:t>2</w:t>
         </w:r>
         <w:r>
-            <w:t xml:space="preserve">O</w:t>
+            <w:t>O</w:t>
         </w:r>
         <w:r>
             <w:t xml:space="preserve"> </w:t>
@@ -828,7 +828,7 @@ plain **Bold ~~Bold-strike-through~~** text
                 <w:b/>
                 <w:bCs/>
             </w:rPr>
-            <w:t xml:space="preserve">Bold-strike-through</w:t>
+            <w:t>Bold-strike-through</w:t>
         </w:r>
         <w:r>
             <w:t xml:space="preserve"> text</w:t>
@@ -882,14 +882,15 @@ plain **Bold ~~Bold-strike-through~~** text
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="ParagraphTextBody"/>
+            <w:pStyle w:val="ListBullet"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
                 <w:numId w:val="1"/>
             </w:numPr>
+            <w:spacing w:after="120" w:before="240" w:line="300" w:lineRule="auto"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">list 1</w:t>
+            <w:t>list 1</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -898,19 +899,20 @@ plain **Bold ~~Bold-strike-through~~** text
             <w:ind w:left="360"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">with some text</w:t>
+            <w:t>with some text</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="ParagraphTextBody"/>
+            <w:pStyle w:val="ListBullet"/>
             <w:numPr>
                 <w:ilvl w:val="1"/>
                 <w:numId w:val="1"/>
             </w:numPr>
+            <w:spacing w:after="120" w:before="240" w:line="300" w:lineRule="auto"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">list 2</w:t>
+            <w:t>list 2</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -919,7 +921,7 @@ plain **Bold ~~Bold-strike-through~~** text
             <w:ind w:left="720"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">with some text</w:t>
+            <w:t>with some text</w:t>
         </w:r>
     </w:p>
 </w:body>
@@ -970,14 +972,15 @@ Numbering start
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="ParagraphTextBody"/>
+            <w:pStyle w:val="ListNumber"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
                 <w:numId w:val="41"/>
             </w:numPr>
+            <w:spacing w:before="240" w:lineRule="auto"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">list 1</w:t>
+            <w:t>list 1</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -986,19 +989,20 @@ Numbering start
             <w:ind w:left="360"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">with some text</w:t>
+            <w:t>with some text</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="ParagraphTextBody"/>
+            <w:pStyle w:val="ListNumber"/>
             <w:numPr>
                 <w:ilvl w:val="1"/>
                 <w:numId w:val="42"/>
             </w:numPr>
+            <w:spacing w:before="240" w:lineRule="auto"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">list 2</w:t>
+            <w:t>list 2</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -1007,7 +1011,7 @@ Numbering start
             <w:ind w:left="720"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">with some text</w:t>
+            <w:t>with some text</w:t>
         </w:r>
     </w:p>
 </w:body>
@@ -1056,74 +1060,80 @@ tight lists
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListBullet"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
                 <w:numId w:val="1"/>
             </w:numPr>
+            <w:spacing w:after="0" w:line="288" w:lineRule="auto"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">list 1</w:t>
+            <w:t>list 1</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListBullet"/>
             <w:numPr>
                 <w:ilvl w:val="1"/>
                 <w:numId w:val="1"/>
             </w:numPr>
+            <w:spacing w:after="0" w:line="288" w:lineRule="auto"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">list 1.1</w:t>
+            <w:t>list 1.1</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListBullet"/>
             <w:numPr>
                 <w:ilvl w:val="1"/>
                 <w:numId w:val="1"/>
             </w:numPr>
+            <w:spacing w:after="0" w:line="288" w:lineRule="auto"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">list 1.2</w:t>
+            <w:t>list 1.2</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListBullet"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
                 <w:numId w:val="1"/>
             </w:numPr>
+            <w:spacing w:after="0" w:line="288" w:lineRule="auto"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">list 2</w:t>
+            <w:t>list 2</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListBullet"/>
             <w:numPr>
                 <w:ilvl w:val="1"/>
                 <w:numId w:val="1"/>
             </w:numPr>
+            <w:spacing w:after="0" w:line="288" w:lineRule="auto"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">list 2.1</w:t>
+            <w:t>list 2.1</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListBullet"/>
             <w:numPr>
                 <w:ilvl w:val="1"/>
                 <w:numId w:val="1"/>
             </w:numPr>
+            <w:spacing w:after="0" w:line="288" w:lineRule="auto"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">list 2.2</w:t>
+            <w:t>list 2.2</w:t>
         </w:r>
     </w:p>
 </w:body>
@@ -1174,74 +1184,80 @@ loose lists
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="ParagraphTextBody"/>
+            <w:pStyle w:val="ListBullet"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
                 <w:numId w:val="1"/>
             </w:numPr>
+            <w:spacing w:after="120" w:before="240" w:line="300" w:lineRule="auto"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">list 1</w:t>
+            <w:t>list 1</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListBullet"/>
             <w:numPr>
                 <w:ilvl w:val="1"/>
                 <w:numId w:val="1"/>
             </w:numPr>
+            <w:spacing w:after="0" w:line="288" w:lineRule="auto"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">list 1.1</w:t>
+            <w:t>list 1.1</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListBullet"/>
             <w:numPr>
                 <w:ilvl w:val="1"/>
                 <w:numId w:val="1"/>
             </w:numPr>
+            <w:spacing w:after="0" w:line="288" w:lineRule="auto"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">list 1.2</w:t>
+            <w:t>list 1.2</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="ParagraphTextBody"/>
+            <w:pStyle w:val="ListBullet"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
                 <w:numId w:val="1"/>
             </w:numPr>
+            <w:spacing w:after="120" w:before="240" w:line="300" w:lineRule="auto"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">list 2</w:t>
+            <w:t>list 2</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListBullet"/>
             <w:numPr>
                 <w:ilvl w:val="1"/>
                 <w:numId w:val="1"/>
             </w:numPr>
+            <w:spacing w:after="0" w:line="288" w:lineRule="auto"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">list 2.1</w:t>
+            <w:t>list 2.1</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListBullet"/>
             <w:numPr>
                 <w:ilvl w:val="1"/>
                 <w:numId w:val="1"/>
             </w:numPr>
+            <w:spacing w:after="0" w:line="288" w:lineRule="auto"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">list 2.2</w:t>
+            <w:t>list 2.2</w:t>
         </w:r>
     </w:p>
 </w:body>
@@ -1294,74 +1310,80 @@ loose lists
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="ParagraphTextBody"/>
+            <w:pStyle w:val="ListBullet"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
                 <w:numId w:val="1"/>
             </w:numPr>
+            <w:spacing w:after="120" w:before="240" w:line="300" w:lineRule="auto"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">list 1</w:t>
+            <w:t>list 1</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="ParagraphTextBody"/>
+            <w:pStyle w:val="ListBullet"/>
             <w:numPr>
                 <w:ilvl w:val="1"/>
                 <w:numId w:val="1"/>
             </w:numPr>
+            <w:spacing w:after="120" w:before="240" w:line="300" w:lineRule="auto"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">list 1.1</w:t>
+            <w:t>list 1.1</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="ParagraphTextBody"/>
+            <w:pStyle w:val="ListBullet"/>
             <w:numPr>
                 <w:ilvl w:val="1"/>
                 <w:numId w:val="1"/>
             </w:numPr>
+            <w:spacing w:after="120" w:before="240" w:line="300" w:lineRule="auto"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">list 1.2</w:t>
+            <w:t>list 1.2</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="ParagraphTextBody"/>
+            <w:pStyle w:val="ListBullet"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
                 <w:numId w:val="1"/>
             </w:numPr>
+            <w:spacing w:after="120" w:before="240" w:line="300" w:lineRule="auto"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">list 2</w:t>
+            <w:t>list 2</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="ParagraphTextBody"/>
+            <w:pStyle w:val="ListBullet"/>
             <w:numPr>
                 <w:ilvl w:val="1"/>
                 <w:numId w:val="1"/>
             </w:numPr>
+            <w:spacing w:after="120" w:before="240" w:line="300" w:lineRule="auto"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">list 2.1</w:t>
+            <w:t>list 2.1</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="ParagraphTextBody"/>
+            <w:pStyle w:val="ListBullet"/>
             <w:numPr>
                 <w:ilvl w:val="1"/>
                 <w:numId w:val="1"/>
             </w:numPr>
+            <w:spacing w:after="120" w:before="240" w:line="300" w:lineRule="auto"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">list 2.2</w:t>
+            <w:t>list 2.2</w:t>
         </w:r>
     </w:p>
 </w:body>
@@ -1409,62 +1431,67 @@ full list items
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListBullet"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
                 <w:numId w:val="1"/>
             </w:numPr>
+            <w:spacing w:after="0" w:line="288" w:lineRule="auto"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">list 1</w:t>
+            <w:t>list 1</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListBullet"/>
             <w:numPr>
                 <w:ilvl w:val="1"/>
                 <w:numId w:val="1"/>
             </w:numPr>
+            <w:spacing w:after="0" w:line="288" w:lineRule="auto"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">list 2</w:t>
+            <w:t>list 2</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListBullet"/>
             <w:numPr>
                 <w:ilvl w:val="2"/>
                 <w:numId w:val="1"/>
             </w:numPr>
+            <w:spacing w:after="0" w:line="288" w:lineRule="auto"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">list 3</w:t>
+            <w:t>list 3</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListBullet"/>
             <w:numPr>
                 <w:ilvl w:val="3"/>
                 <w:numId w:val="1"/>
             </w:numPr>
+            <w:spacing w:after="0" w:line="288" w:lineRule="auto"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">list 4</w:t>
+            <w:t>list 4</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListBullet"/>
             <w:numPr>
                 <w:ilvl w:val="4"/>
                 <w:numId w:val="1"/>
             </w:numPr>
+            <w:spacing w:after="0" w:line="288" w:lineRule="auto"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">list 5</w:t>
+            <w:t>list 5</w:t>
         </w:r>
     </w:p>
 </w:body>
@@ -1512,62 +1539,67 @@ full list items
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListNumber"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
                 <w:numId w:val="41"/>
             </w:numPr>
+            <w:spacing w:after="0" w:line="288" w:lineRule="auto"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">list 1</w:t>
+            <w:t>list 1</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListNumber"/>
             <w:numPr>
                 <w:ilvl w:val="1"/>
                 <w:numId w:val="42"/>
             </w:numPr>
+            <w:spacing w:after="0" w:line="288" w:lineRule="auto"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">list 2</w:t>
+            <w:t>list 2</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListNumber"/>
             <w:numPr>
                 <w:ilvl w:val="2"/>
                 <w:numId w:val="43"/>
             </w:numPr>
+            <w:spacing w:after="0" w:line="288" w:lineRule="auto"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">list 3</w:t>
+            <w:t>list 3</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListNumber"/>
             <w:numPr>
                 <w:ilvl w:val="3"/>
                 <w:numId w:val="44"/>
             </w:numPr>
+            <w:spacing w:after="0" w:line="288" w:lineRule="auto"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">list 4</w:t>
+            <w:t>list 4</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListNumber"/>
             <w:numPr>
                 <w:ilvl w:val="4"/>
                 <w:numId w:val="45"/>
             </w:numPr>
+            <w:spacing w:after="0" w:line="288" w:lineRule="auto"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">list 5</w:t>
+            <w:t>list 5</w:t>
         </w:r>
     </w:p>
 </w:body>
@@ -1631,7 +1663,7 @@ with some text
                 <w:rPr>
                     <w:rStyle w:val="Hyperlink"/>
                 </w:rPr>
-                <w:t xml:space="preserve">flexmark-icon-logo</w:t>
+                <w:t>flexmark-icon-logo</w:t>
             </w:r>
             <w:r>
                 <w:fldChar w:fldCharType="end"/>
@@ -1643,7 +1675,7 @@ with some text
             <w:pStyle w:val="ParagraphTextBody"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">with some text</w:t>
+            <w:t>with some text</w:t>
         </w:r>
     </w:p>
 </w:body>
@@ -1698,7 +1730,7 @@ with some text
                 <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
                     <wp:extent cx="609600" cy="609600"/>
                     <wp:effectExtent b="0" l="0" r="0" t="0"/>
-                    <wp:docPr descr="flexmark-icon-logo" id="0" name="Image1"/>
+                    <wp:docPr descr="flexmark-icon-logo" id="100000" name="Image100000"/>
                     <wp:cNvGraphicFramePr>
                         <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
                     </wp:cNvGraphicFramePr>
@@ -1706,7 +1738,7 @@ with some text
                         <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
                             <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
                                 <pic:nvPicPr>
-                                    <pic:cNvPr id="1" name="Image1"/>
+                                    <pic:cNvPr id="100001" name="Image100000"/>
                                     <pic:cNvPicPr/>
                                 </pic:nvPicPr>
                                 <pic:blipFill>
@@ -1736,7 +1768,7 @@ with some text
             <w:pStyle w:val="ParagraphTextBody"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">with some text</w:t>
+            <w:t>with some text</w:t>
         </w:r>
     </w:p>
 </w:body>
@@ -1789,7 +1821,7 @@ with some text
                 <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
                     <wp:extent cx="609600" cy="609600"/>
                     <wp:effectExtent b="0" l="0" r="0" t="0"/>
-                    <wp:docPr descr="flexmark-icon-logo" id="0" name="Image1"/>
+                    <wp:docPr descr="flexmark-icon-logo" id="100000" name="Image100000"/>
                     <wp:cNvGraphicFramePr>
                         <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
                     </wp:cNvGraphicFramePr>
@@ -1797,7 +1829,7 @@ with some text
                         <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
                             <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
                                 <pic:nvPicPr>
-                                    <pic:cNvPr id="1" name="Image1"/>
+                                    <pic:cNvPr id="100001" name="Image100000"/>
                                     <pic:cNvPicPr/>
                                 </pic:nvPicPr>
                                 <pic:blipFill>
@@ -1827,7 +1859,7 @@ with some text
             <w:pStyle w:val="ParagraphTextBody"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">with some text</w:t>
+            <w:t>with some text</w:t>
         </w:r>
     </w:p>
 </w:body>
@@ -1880,7 +1912,7 @@ with some text
                 <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
                     <wp:extent cx="609600" cy="609600"/>
                     <wp:effectExtent b="0" l="0" r="0" t="0"/>
-                    <wp:docPr descr="flexmark-icon-logo" id="0" name="Image1"/>
+                    <wp:docPr descr="flexmark-icon-logo" id="100000" name="Image100000"/>
                     <wp:cNvGraphicFramePr>
                         <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
                     </wp:cNvGraphicFramePr>
@@ -1888,7 +1920,7 @@ with some text
                         <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
                             <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
                                 <pic:nvPicPr>
-                                    <pic:cNvPr id="1" name="Image1"/>
+                                    <pic:cNvPr id="100001" name="Image100000"/>
                                     <pic:cNvPicPr/>
                                 </pic:nvPicPr>
                                 <pic:blipFill>
@@ -1918,7 +1950,7 @@ with some text
             <w:pStyle w:val="ParagraphTextBody"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">with some text</w:t>
+            <w:t>with some text</w:t>
         </w:r>
     </w:p>
 </w:body>
@@ -1971,7 +2003,7 @@ with some text
                 <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
                     <wp:extent cx="609600" cy="609600"/>
                     <wp:effectExtent b="0" l="0" r="0" t="0"/>
-                    <wp:docPr descr="flexmark-icon-logo" id="0" name="Image1"/>
+                    <wp:docPr descr="flexmark-icon-logo" id="100000" name="Image100000"/>
                     <wp:cNvGraphicFramePr>
                         <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
                     </wp:cNvGraphicFramePr>
@@ -1979,7 +2011,7 @@ with some text
                         <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
                             <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
                                 <pic:nvPicPr>
-                                    <pic:cNvPr id="1" name="Image1"/>
+                                    <pic:cNvPr id="100001" name="Image100000"/>
                                     <pic:cNvPicPr/>
                                 </pic:nvPicPr>
                                 <pic:blipFill>
@@ -2009,7 +2041,7 @@ with some text
             <w:pStyle w:val="ParagraphTextBody"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">with some text</w:t>
+            <w:t>with some text</w:t>
         </w:r>
     </w:p>
 </w:body>
@@ -2057,14 +2089,15 @@ lazy continuation
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListBullet"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
                 <w:numId w:val="1"/>
             </w:numPr>
+            <w:spacing w:after="0" w:line="288" w:lineRule="auto"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">list item</w:t>
+            <w:t>list item</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -2079,13 +2112,13 @@ lazy continuation
             <w:ind w:left="600"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">block quote</w:t>
+            <w:t>block quote</w:t>
         </w:r>
         <w:r>
             <w:t xml:space="preserve"> </w:t>
         </w:r>
         <w:r>
-            <w:t xml:space="preserve">lazy continuation</w:t>
+            <w:t>lazy continuation</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -2157,7 +2190,7 @@ with hyperlink
                 <w:rPr>
                     <w:rStyle w:val="Hyperlink"/>
                 </w:rPr>
-                <w:t xml:space="preserve">flexmark-icon-logo</w:t>
+                <w:t>flexmark-icon-logo</w:t>
             </w:r>
             <w:r>
                 <w:fldChar w:fldCharType="end"/>
@@ -2221,7 +2254,7 @@ with hard break
             <w:pStyle w:val="Quotations"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">block quote 1</w:t>
+            <w:t>block quote 1</w:t>
         </w:r>
         <w:r>
             <w:br/>
@@ -2243,7 +2276,7 @@ with hard break
                 <w:rPr>
                     <w:rStyle w:val="Hyperlink"/>
                 </w:rPr>
-                <w:t xml:space="preserve">flexmark-icon-logo</w:t>
+                <w:t>flexmark-icon-logo</w:t>
             </w:r>
             <w:r>
                 <w:fldChar w:fldCharType="end"/>
@@ -2308,7 +2341,7 @@ with child paragraphs
             <w:pStyle w:val="Quotations"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">block quote 1</w:t>
+            <w:t>block quote 1</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -2332,7 +2365,7 @@ with child paragraphs
                 <w:rPr>
                     <w:rStyle w:val="Hyperlink"/>
                 </w:rPr>
-                <w:t xml:space="preserve">flexmark-icon-logo</w:t>
+                <w:t>flexmark-icon-logo</w:t>
             </w:r>
             <w:r>
                 <w:fldChar w:fldCharType="end"/>
@@ -2397,7 +2430,7 @@ with child block quote
             <w:pStyle w:val="Quotations"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">block quote 1</w:t>
+            <w:t>block quote 1</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -2412,7 +2445,7 @@ with child block quote
             <w:ind w:left="480"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">another block quote</w:t>
+            <w:t>another block quote</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -2480,7 +2513,7 @@ with child paragraphs
             <w:pStyle w:val="Quotations"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">block quote 1</w:t>
+            <w:t>block quote 1</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -2504,7 +2537,7 @@ with child paragraphs
                 <w:rPr>
                     <w:rStyle w:val="Hyperlink"/>
                 </w:rPr>
-                <w:t xml:space="preserve">flexmark-icon-logo</w:t>
+                <w:t>flexmark-icon-logo</w:t>
             </w:r>
             <w:r>
                 <w:fldChar w:fldCharType="end"/>
@@ -2523,7 +2556,7 @@ with child paragraphs
             <w:ind w:left="480"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">another block quote</w:t>
+            <w:t>another block quote</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -2593,13 +2626,13 @@ code
             <w:spacing w:after="0" w:before="0"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">pre-formatted code</w:t>
+            <w:t>pre-formatted code</w:t>
         </w:r>
         <w:r>
             <w:br/>
         </w:r>
         <w:r>
-            <w:t xml:space="preserve">code</w:t>
+            <w:t>code</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -2657,7 +2690,7 @@ text after
             <w:pStyle w:val="ParagraphTextBody"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">text before</w:t>
+            <w:t>text before</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -2672,13 +2705,13 @@ text after
             <w:spacing w:after="0" w:before="0"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">pre-formatted code</w:t>
+            <w:t>pre-formatted code</w:t>
         </w:r>
         <w:r>
             <w:br/>
         </w:r>
         <w:r>
-            <w:t xml:space="preserve">code</w:t>
+            <w:t>code</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -2692,7 +2725,7 @@ text after
             <w:pStyle w:val="ParagraphTextBody"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">text after</w:t>
+            <w:t>text after</w:t>
         </w:r>
     </w:p>
 </w:body>
@@ -2875,7 +2908,7 @@ code
             <w:rPr>
                 <w:rStyle w:val="Emphasis"/>
             </w:rPr>
-            <w:t xml:space="preserve">italic</w:t>
+            <w:t>italic</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -2883,7 +2916,7 @@ code
             <w:pStyle w:val="ParagraphTextBody"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">Some Text</w:t>
+            <w:t>Some Text</w:t>
         </w:r>
     </w:p>
     <w:bookmarkStart w:id="2" w:name="heading-2-bold"/>
@@ -2903,7 +2936,7 @@ code
             <w:rPr>
                 <w:rStyle w:val="StrongEmphasis"/>
             </w:rPr>
-            <w:t xml:space="preserve">bold</w:t>
+            <w:t>bold</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -2911,7 +2944,7 @@ code
             <w:pStyle w:val="ParagraphTextBody"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">Some Text</w:t>
+            <w:t>Some Text</w:t>
         </w:r>
     </w:p>
     <w:bookmarkStart w:id="3" w:name="heading-3-strike-through"/>
@@ -2931,7 +2964,7 @@ code
             <w:rPr>
                 <w:rStyle w:val="Strikethrough"/>
             </w:rPr>
-            <w:t xml:space="preserve">strike-through</w:t>
+            <w:t>strike-through</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -2939,7 +2972,7 @@ code
             <w:pStyle w:val="ParagraphTextBody"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">Some Text</w:t>
+            <w:t>Some Text</w:t>
         </w:r>
     </w:p>
     <w:bookmarkStart w:id="4" w:name="heading-4-inline-code"/>
@@ -2959,7 +2992,7 @@ code
             <w:rPr>
                 <w:rStyle w:val="SourceText"/>
             </w:rPr>
-            <w:t xml:space="preserve">inline-code</w:t>
+            <w:t>inline-code</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -2967,7 +3000,7 @@ code
             <w:pStyle w:val="ParagraphTextBody"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">Some Text</w:t>
+            <w:t>Some Text</w:t>
         </w:r>
     </w:p>
     <w:bookmarkStart w:id="5" w:name="heading-5"/>
@@ -2981,7 +3014,7 @@ code
             </w:numPr>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">Heading 5</w:t>
+            <w:t>Heading 5</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -2989,7 +3022,7 @@ code
             <w:pStyle w:val="ParagraphTextBody"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">Some Text</w:t>
+            <w:t>Some Text</w:t>
         </w:r>
     </w:p>
     <w:bookmarkStart w:id="6" w:name="heading-6"/>
@@ -3003,7 +3036,7 @@ code
             </w:numPr>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">Heading 6</w:t>
+            <w:t>Heading 6</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -3011,7 +3044,7 @@ code
             <w:pStyle w:val="ParagraphTextBody"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">Some Text</w:t>
+            <w:t>Some Text</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -3031,7 +3064,7 @@ code
             <w:rPr>
                 <w:rStyle w:val="StrongEmphasis"/>
             </w:rPr>
-            <w:t xml:space="preserve">bold</w:t>
+            <w:t>bold</w:t>
         </w:r>
         <w:r>
             <w:t xml:space="preserve"> </w:t>
@@ -3040,7 +3073,7 @@ code
             <w:rPr>
                 <w:rStyle w:val="Emphasis"/>
             </w:rPr>
-            <w:t xml:space="preserve">italic</w:t>
+            <w:t>italic</w:t>
         </w:r>
         <w:r>
             <w:t xml:space="preserve"> </w:t>
@@ -3051,7 +3084,7 @@ code
                 <w:i/>
                 <w:iCs/>
             </w:rPr>
-            <w:t xml:space="preserve">bold-italic</w:t>
+            <w:t>bold-italic</w:t>
         </w:r>
         <w:r>
             <w:t xml:space="preserve"> </w:t>
@@ -3060,7 +3093,7 @@ code
             <w:rPr>
                 <w:rStyle w:val="Underlined"/>
             </w:rPr>
-            <w:t xml:space="preserve">underline</w:t>
+            <w:t>underline</w:t>
         </w:r>
         <w:r>
             <w:t xml:space="preserve"> </w:t>
@@ -3069,7 +3102,7 @@ code
             <w:rPr>
                 <w:rStyle w:val="Strikethrough"/>
             </w:rPr>
-            <w:t xml:space="preserve">strike-through</w:t>
+            <w:t>strike-through</w:t>
         </w:r>
         <w:r>
             <w:t xml:space="preserve"> </w:t>
@@ -3078,7 +3111,7 @@ code
             <w:rPr>
                 <w:rStyle w:val="Superscript"/>
             </w:rPr>
-            <w:t xml:space="preserve">superscript</w:t>
+            <w:t>superscript</w:t>
         </w:r>
         <w:r>
             <w:t xml:space="preserve"> normal </w:t>
@@ -3087,7 +3120,7 @@ code
             <w:rPr>
                 <w:rStyle w:val="Subscript"/>
             </w:rPr>
-            <w:t xml:space="preserve">subscript</w:t>
+            <w:t>subscript</w:t>
         </w:r>
         <w:r>
             <w:t xml:space="preserve"> </w:t>
@@ -3096,19 +3129,20 @@ code
             <w:rPr>
                 <w:rStyle w:val="SourceText"/>
             </w:rPr>
-            <w:t xml:space="preserve">inline-code</w:t>
+            <w:t>inline-code</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="ParagraphTextBody"/>
+            <w:pStyle w:val="ListBullet"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
                 <w:numId w:val="1"/>
             </w:numPr>
+            <w:spacing w:after="120" w:before="240" w:line="300" w:lineRule="auto"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">list 1</w:t>
+            <w:t>list 1</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -3121,7 +3155,7 @@ code
                 <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
                     <wp:extent cx="609600" cy="609600"/>
                     <wp:effectExtent b="0" l="0" r="0" t="0"/>
-                    <wp:docPr descr="flexmark-icon-logo" id="0" name="Image1"/>
+                    <wp:docPr descr="flexmark-icon-logo" id="100000" name="Image100000"/>
                     <wp:cNvGraphicFramePr>
                         <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
                     </wp:cNvGraphicFramePr>
@@ -3129,7 +3163,7 @@ code
                         <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
                             <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
                                 <pic:nvPicPr>
-                                    <pic:cNvPr id="1" name="Image1"/>
+                                    <pic:cNvPr id="100001" name="Image100000"/>
                                     <pic:cNvPicPr/>
                                 </pic:nvPicPr>
                                 <pic:blipFill>
@@ -3160,19 +3194,20 @@ code
             <w:ind w:left="360"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">with some text</w:t>
+            <w:t>with some text</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="ParagraphTextBody"/>
+            <w:pStyle w:val="ListBullet"/>
             <w:numPr>
                 <w:ilvl w:val="1"/>
                 <w:numId w:val="1"/>
             </w:numPr>
+            <w:spacing w:after="120" w:before="240" w:line="300" w:lineRule="auto"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">list 2</w:t>
+            <w:t>list 2</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -3181,127 +3216,137 @@ code
             <w:ind w:left="720"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">with some text</w:t>
+            <w:t>with some text</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListBullet"/>
             <w:numPr>
                 <w:ilvl w:val="2"/>
                 <w:numId w:val="1"/>
             </w:numPr>
+            <w:spacing w:after="0" w:line="288" w:lineRule="auto"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">list 3</w:t>
+            <w:t>list 3</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListBullet"/>
             <w:numPr>
                 <w:ilvl w:val="3"/>
                 <w:numId w:val="1"/>
             </w:numPr>
+            <w:spacing w:after="0" w:line="288" w:lineRule="auto"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">list 4</w:t>
+            <w:t>list 4</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListBullet"/>
             <w:numPr>
                 <w:ilvl w:val="4"/>
                 <w:numId w:val="1"/>
             </w:numPr>
+            <w:spacing w:after="0" w:line="288" w:lineRule="auto"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">list 5</w:t>
+            <w:t>list 5</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="ParagraphTextBody"/>
+            <w:pStyle w:val="ListNumber"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
                 <w:numId w:val="41"/>
             </w:numPr>
+            <w:spacing w:before="240" w:lineRule="auto"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">list 1</w:t>
+            <w:t>list 1</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListNumber"/>
             <w:numPr>
                 <w:ilvl w:val="1"/>
                 <w:numId w:val="42"/>
             </w:numPr>
+            <w:spacing w:after="0" w:line="288" w:lineRule="auto"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">list 2</w:t>
+            <w:t>list 2</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListNumber"/>
             <w:numPr>
                 <w:ilvl w:val="2"/>
                 <w:numId w:val="43"/>
             </w:numPr>
+            <w:spacing w:after="0" w:line="288" w:lineRule="auto"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">list 3</w:t>
+            <w:t>list 3</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListNumber"/>
             <w:numPr>
                 <w:ilvl w:val="3"/>
                 <w:numId w:val="44"/>
             </w:numPr>
+            <w:spacing w:after="0" w:line="288" w:lineRule="auto"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">list 4</w:t>
+            <w:t>list 4</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListNumber"/>
             <w:numPr>
                 <w:ilvl w:val="4"/>
                 <w:numId w:val="45"/>
             </w:numPr>
+            <w:spacing w:after="0" w:line="288" w:lineRule="auto"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">list 5</w:t>
+            <w:t>list 5</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="ParagraphTextBody"/>
+            <w:pStyle w:val="ListNumber"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
                 <w:numId w:val="41"/>
             </w:numPr>
+            <w:spacing w:before="240" w:lineRule="auto"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">list item 2</w:t>
+            <w:t>list item 2</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListNumber"/>
             <w:numPr>
                 <w:ilvl w:val="1"/>
                 <w:numId w:val="46"/>
             </w:numPr>
+            <w:spacing w:after="0" w:line="288" w:lineRule="auto"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">list item 2</w:t>
+            <w:t>list item 2</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -3309,7 +3354,7 @@ code
             <w:pStyle w:val="ParagraphTextBody"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">Some plain text</w:t>
+            <w:t>Some plain text</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -3323,7 +3368,7 @@ code
             <w:pStyle w:val="Quotations"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">block quote 1</w:t>
+            <w:t>block quote 1</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -3347,7 +3392,7 @@ code
                 <w:rPr>
                     <w:rStyle w:val="Hyperlink"/>
                 </w:rPr>
-                <w:t xml:space="preserve">flexmark-icon-logo</w:t>
+                <w:t>flexmark-icon-logo</w:t>
             </w:r>
             <w:r>
                 <w:fldChar w:fldCharType="end"/>
@@ -3366,7 +3411,7 @@ code
             <w:ind w:left="480"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">block quote 2</w:t>
+            <w:t>block quote 2</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -3381,7 +3426,7 @@ code
             <w:ind w:left="720"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">block quote 3</w:t>
+            <w:t>block quote 3</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -3396,7 +3441,7 @@ code
             <w:ind w:left="960"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">block quote 4</w:t>
+            <w:t>block quote 4</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -3411,12 +3456,12 @@ code
             <w:ind w:left="1200"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">block quote 5</w:t>
+            <w:t>block quote 5</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListNumber"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
                 <w:numId w:val="47"/>
@@ -3425,18 +3470,22 @@ code
                 <w:left w:color="CCCCCC" w:frame="true" w:shadow="true"
                     w:space="9" w:sz="16" w:val="single"/>
             </w:pBdr>
+            <w:spacing w:after="0" w:line="288" w:lineRule="auto"/>
             <w:ind w:hanging="360" w:left="1560"/>
         </w:pPr>
         <w:r>
             <w:rPr>
+                <w:rFonts w:cs="Times New Roman" w:eastAsia="Calibri"/>
+                <w:color w:val="666666"/>
                 <w:sz w:val="18"/>
+                <w:szCs w:val="18"/>
             </w:rPr>
-            <w:t xml:space="preserve">list</w:t>
+            <w:t>list</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListBullet"/>
             <w:numPr>
                 <w:ilvl w:val="1"/>
                 <w:numId w:val="1"/>
@@ -3445,13 +3494,17 @@ code
                 <w:left w:color="CCCCCC" w:frame="true" w:shadow="true"
                     w:space="27" w:sz="16" w:val="single"/>
             </w:pBdr>
+            <w:spacing w:after="0" w:line="288" w:lineRule="auto"/>
             <w:ind w:hanging="360" w:left="1920"/>
         </w:pPr>
         <w:r>
             <w:rPr>
+                <w:rFonts w:cs="Times New Roman" w:eastAsia="Calibri"/>
+                <w:color w:val="666666"/>
                 <w:sz w:val="18"/>
+                <w:szCs w:val="18"/>
             </w:rPr>
-            <w:t xml:space="preserve">nested list</w:t>
+            <w:t>nested list</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -3496,13 +3549,13 @@ code
             <w:spacing w:after="0" w:before="0"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">pre-formatted code</w:t>
+            <w:t>pre-formatted code</w:t>
         </w:r>
         <w:r>
             <w:br/>
         </w:r>
         <w:r>
-            <w:t xml:space="preserve">code</w:t>
+            <w:t>code</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -3559,14 +3612,14 @@ code
                             <w:rFonts w:cs="Tms Rmn" w:eastAsia="Times New Roman"/>
                             <w:sz w:val="21"/>
                         </w:rPr>
-                        <w:t xml:space="preserve">header</w:t>
+                        <w:t>header</w:t>
                     </w:r>
                     <w:r>
                         <w:rPr>
                             <w:rFonts w:cs="Tms Rmn" w:eastAsia="Times New Roman"/>
                             <w:sz w:val="21"/>
                         </w:rPr>
-                        <w:t xml:space="preserve"/>
+                        <w:t/>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -3588,7 +3641,7 @@ code
                             <w:rFonts w:cs="Tms Rmn" w:eastAsia="Times New Roman"/>
                             <w:sz w:val="21"/>
                         </w:rPr>
-                        <w:t xml:space="preserve">Default</w:t>
+                        <w:t>Default</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -3614,14 +3667,14 @@ code
                             <w:rFonts w:cs="Tms Rmn" w:eastAsia="Times New Roman"/>
                             <w:sz w:val="21"/>
                         </w:rPr>
-                        <w:t xml:space="preserve">Align</w:t>
+                        <w:t>Align</w:t>
                     </w:r>
                     <w:r>
                         <w:rPr>
                             <w:rFonts w:cs="Tms Rmn" w:eastAsia="Times New Roman"/>
                             <w:sz w:val="21"/>
                         </w:rPr>
-                        <w:t xml:space="preserve"/>
+                        <w:t/>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -3639,7 +3692,7 @@ code
                             <w:rFonts w:cs="Tms Rmn" w:eastAsia="Times New Roman"/>
                             <w:sz w:val="21"/>
                         </w:rPr>
-                        <w:t xml:space="preserve">Center</w:t>
+                        <w:t>Center</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -3665,14 +3718,14 @@ code
                             <w:rFonts w:cs="Tms Rmn" w:eastAsia="Times New Roman"/>
                             <w:sz w:val="21"/>
                         </w:rPr>
-                        <w:t xml:space="preserve">Align</w:t>
+                        <w:t>Align</w:t>
                     </w:r>
                     <w:r>
                         <w:rPr>
                             <w:rFonts w:cs="Tms Rmn" w:eastAsia="Times New Roman"/>
                             <w:sz w:val="21"/>
                         </w:rPr>
-                        <w:t xml:space="preserve"/>
+                        <w:t/>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -3692,10 +3745,10 @@ code
                         <w:rPr>
                             <w:rStyle w:val="SourceText"/>
                         </w:rPr>
-                        <w:t xml:space="preserve">Longer</w:t>
+                        <w:t>Longer</w:t>
                     </w:r>
                     <w:r>
-                        <w:t xml:space="preserve"/>
+                        <w:t/>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -3707,7 +3760,7 @@ code
                         <w:jc w:val="left"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">Data 2</w:t>
+                        <w:t>Data 2</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -3719,7 +3772,7 @@ code
                         <w:jc w:val="center"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">Data 3</w:t>
+                        <w:t>Data 3</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -3731,7 +3784,7 @@ code
                         <w:jc w:val="right"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">Data 4</w:t>
+                        <w:t>Data 4</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -3753,10 +3806,10 @@ code
                         <w:rPr>
                             <w:rStyle w:val="StrongEmphasis"/>
                         </w:rPr>
-                        <w:t xml:space="preserve">data</w:t>
+                        <w:t>data</w:t>
                     </w:r>
                     <w:r>
-                        <w:t xml:space="preserve"/>
+                        <w:t/>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -3768,7 +3821,7 @@ code
                         <w:jc w:val="center"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">Data 5</w:t>
+                        <w:t>Data 5</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -3780,7 +3833,7 @@ code
                         <w:jc w:val="right"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">Data 6</w:t>
+                        <w:t>Data 6</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -3794,7 +3847,7 @@ code
                         <w:pStyle w:val="TableContents"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">Data 7</w:t>
+                        <w:t>Data 7</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -3814,10 +3867,10 @@ code
                         <w:rPr>
                             <w:rStyle w:val="Emphasis"/>
                         </w:rPr>
-                        <w:t xml:space="preserve">Data</w:t>
+                        <w:t>Data</w:t>
                     </w:r>
                     <w:r>
-                        <w:t xml:space="preserve"/>
+                        <w:t/>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -3829,7 +3882,7 @@ code
                         <w:jc w:val="right"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">Data 8</w:t>
+                        <w:t>Data 8</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -3843,7 +3896,7 @@ code
                         <w:pStyle w:val="TableContents"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">Data 9</w:t>
+                        <w:t>Data 9</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -3855,7 +3908,7 @@ code
                         <w:jc w:val="left"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">Data 10</w:t>
+                        <w:t>Data 10</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -3875,10 +3928,10 @@ code
                         <w:rPr>
                             <w:rStyle w:val="Superscript"/>
                         </w:rPr>
-                        <w:t xml:space="preserve">Data</w:t>
+                        <w:t>Data</w:t>
                     </w:r>
                     <w:r>
-                        <w:t xml:space="preserve"/>
+                        <w:t/>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -3900,10 +3953,10 @@ code
                         <w:rPr>
                             <w:rStyle w:val="Strikethrough"/>
                         </w:rPr>
-                        <w:t xml:space="preserve">Data</w:t>
+                        <w:t>Data</w:t>
                     </w:r>
                     <w:r>
-                        <w:t xml:space="preserve"/>
+                        <w:t/>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -3915,7 +3968,7 @@ code
                         <w:jc w:val="right"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">Data 7</w:t>
+                        <w:t>Data 7</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -3929,7 +3982,7 @@ code
                         <w:pStyle w:val="TableContents"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">Data 8</w:t>
+                        <w:t>Data 8</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -3949,10 +4002,10 @@ code
                         <w:rPr>
                             <w:rStyle w:val="Subscript"/>
                         </w:rPr>
-                        <w:t xml:space="preserve">Data</w:t>
+                        <w:t>Data</w:t>
                     </w:r>
                     <w:r>
-                        <w:t xml:space="preserve"/>
+                        <w:t/>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -4093,7 +4146,7 @@ code
             <w:rPr>
                 <w:rStyle w:val="Emphasis"/>
             </w:rPr>
-            <w:t xml:space="preserve">italic</w:t>
+            <w:t>italic</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -4101,7 +4154,7 @@ code
             <w:pStyle w:val="ParagraphTextBody"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">Some Text</w:t>
+            <w:t>Some Text</w:t>
         </w:r>
     </w:p>
     <w:bookmarkStart w:id="2" w:name="heading-2-bold"/>
@@ -4121,7 +4174,7 @@ code
             <w:rPr>
                 <w:rStyle w:val="StrongEmphasis"/>
             </w:rPr>
-            <w:t xml:space="preserve">bold</w:t>
+            <w:t>bold</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -4129,7 +4182,7 @@ code
             <w:pStyle w:val="ParagraphTextBody"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">Some Text</w:t>
+            <w:t>Some Text</w:t>
         </w:r>
     </w:p>
     <w:bookmarkStart w:id="3" w:name="heading-3-strike-through"/>
@@ -4149,7 +4202,7 @@ code
             <w:rPr>
                 <w:rStyle w:val="Strikethrough"/>
             </w:rPr>
-            <w:t xml:space="preserve">strike-through</w:t>
+            <w:t>strike-through</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -4157,7 +4210,7 @@ code
             <w:pStyle w:val="ParagraphTextBody"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">Some Text</w:t>
+            <w:t>Some Text</w:t>
         </w:r>
     </w:p>
     <w:bookmarkStart w:id="4" w:name="heading-4-inline-code"/>
@@ -4177,7 +4230,7 @@ code
             <w:rPr>
                 <w:rStyle w:val="SourceText"/>
             </w:rPr>
-            <w:t xml:space="preserve">inline-code</w:t>
+            <w:t>inline-code</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -4185,7 +4238,7 @@ code
             <w:pStyle w:val="ParagraphTextBody"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">Some Text</w:t>
+            <w:t>Some Text</w:t>
         </w:r>
     </w:p>
     <w:bookmarkStart w:id="5" w:name="heading-5"/>
@@ -4199,7 +4252,7 @@ code
             </w:numPr>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">Heading 5</w:t>
+            <w:t>Heading 5</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -4207,7 +4260,7 @@ code
             <w:pStyle w:val="ParagraphTextBody"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">Some Text</w:t>
+            <w:t>Some Text</w:t>
         </w:r>
     </w:p>
     <w:bookmarkStart w:id="6" w:name="heading-6"/>
@@ -4221,7 +4274,7 @@ code
             </w:numPr>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">Heading 6</w:t>
+            <w:t>Heading 6</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -4229,7 +4282,7 @@ code
             <w:pStyle w:val="ParagraphTextBody"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">Some Text</w:t>
+            <w:t>Some Text</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -4249,7 +4302,7 @@ code
             <w:rPr>
                 <w:rStyle w:val="StrongEmphasis"/>
             </w:rPr>
-            <w:t xml:space="preserve">bold</w:t>
+            <w:t>bold</w:t>
         </w:r>
         <w:r>
             <w:t xml:space="preserve"> </w:t>
@@ -4258,7 +4311,7 @@ code
             <w:rPr>
                 <w:rStyle w:val="Emphasis"/>
             </w:rPr>
-            <w:t xml:space="preserve">italic</w:t>
+            <w:t>italic</w:t>
         </w:r>
         <w:r>
             <w:t xml:space="preserve"> </w:t>
@@ -4269,7 +4322,7 @@ code
                 <w:i/>
                 <w:iCs/>
             </w:rPr>
-            <w:t xml:space="preserve">bold-italic</w:t>
+            <w:t>bold-italic</w:t>
         </w:r>
         <w:r>
             <w:t xml:space="preserve"> </w:t>
@@ -4278,7 +4331,7 @@ code
             <w:rPr>
                 <w:rStyle w:val="Underlined"/>
             </w:rPr>
-            <w:t xml:space="preserve">underline</w:t>
+            <w:t>underline</w:t>
         </w:r>
         <w:r>
             <w:t xml:space="preserve"> </w:t>
@@ -4287,7 +4340,7 @@ code
             <w:rPr>
                 <w:rStyle w:val="Strikethrough"/>
             </w:rPr>
-            <w:t xml:space="preserve">strike-through</w:t>
+            <w:t>strike-through</w:t>
         </w:r>
         <w:r>
             <w:t xml:space="preserve"> </w:t>
@@ -4296,7 +4349,7 @@ code
             <w:rPr>
                 <w:rStyle w:val="Superscript"/>
             </w:rPr>
-            <w:t xml:space="preserve">superscript</w:t>
+            <w:t>superscript</w:t>
         </w:r>
         <w:r>
             <w:t xml:space="preserve"> normal </w:t>
@@ -4305,7 +4358,7 @@ code
             <w:rPr>
                 <w:rStyle w:val="Subscript"/>
             </w:rPr>
-            <w:t xml:space="preserve">subscript</w:t>
+            <w:t>subscript</w:t>
         </w:r>
         <w:r>
             <w:t xml:space="preserve"> </w:t>
@@ -4314,19 +4367,20 @@ code
             <w:rPr>
                 <w:rStyle w:val="SourceText"/>
             </w:rPr>
-            <w:t xml:space="preserve">inline-code</w:t>
+            <w:t>inline-code</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="ParagraphTextBody"/>
+            <w:pStyle w:val="ListBullet"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
                 <w:numId w:val="1"/>
             </w:numPr>
+            <w:spacing w:after="120" w:before="240" w:line="300" w:lineRule="auto"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">list 1</w:t>
+            <w:t>list 1</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -4335,19 +4389,20 @@ code
             <w:ind w:left="360"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">with some text</w:t>
+            <w:t>with some text</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="ParagraphTextBody"/>
+            <w:pStyle w:val="ListBullet"/>
             <w:numPr>
                 <w:ilvl w:val="1"/>
                 <w:numId w:val="1"/>
             </w:numPr>
+            <w:spacing w:after="120" w:before="240" w:line="300" w:lineRule="auto"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">list 2</w:t>
+            <w:t>list 2</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -4356,127 +4411,137 @@ code
             <w:ind w:left="720"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">with some text</w:t>
+            <w:t>with some text</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListBullet"/>
             <w:numPr>
                 <w:ilvl w:val="2"/>
                 <w:numId w:val="1"/>
             </w:numPr>
+            <w:spacing w:after="0" w:line="288" w:lineRule="auto"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">list 3</w:t>
+            <w:t>list 3</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListBullet"/>
             <w:numPr>
                 <w:ilvl w:val="3"/>
                 <w:numId w:val="1"/>
             </w:numPr>
+            <w:spacing w:after="0" w:line="288" w:lineRule="auto"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">list 4</w:t>
+            <w:t>list 4</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListBullet"/>
             <w:numPr>
                 <w:ilvl w:val="4"/>
                 <w:numId w:val="1"/>
             </w:numPr>
+            <w:spacing w:after="0" w:line="288" w:lineRule="auto"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">list 5</w:t>
+            <w:t>list 5</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="ParagraphTextBody"/>
+            <w:pStyle w:val="ListNumber"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
                 <w:numId w:val="41"/>
             </w:numPr>
+            <w:spacing w:before="240" w:lineRule="auto"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">list 1</w:t>
+            <w:t>list 1</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListNumber"/>
             <w:numPr>
                 <w:ilvl w:val="1"/>
                 <w:numId w:val="42"/>
             </w:numPr>
+            <w:spacing w:after="0" w:line="288" w:lineRule="auto"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">list 2</w:t>
+            <w:t>list 2</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListNumber"/>
             <w:numPr>
                 <w:ilvl w:val="2"/>
                 <w:numId w:val="43"/>
             </w:numPr>
+            <w:spacing w:after="0" w:line="288" w:lineRule="auto"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">list 3</w:t>
+            <w:t>list 3</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListNumber"/>
             <w:numPr>
                 <w:ilvl w:val="3"/>
                 <w:numId w:val="44"/>
             </w:numPr>
+            <w:spacing w:after="0" w:line="288" w:lineRule="auto"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">list 4</w:t>
+            <w:t>list 4</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListNumber"/>
             <w:numPr>
                 <w:ilvl w:val="4"/>
                 <w:numId w:val="45"/>
             </w:numPr>
+            <w:spacing w:after="0" w:line="288" w:lineRule="auto"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">list 5</w:t>
+            <w:t>list 5</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="ParagraphTextBody"/>
+            <w:pStyle w:val="ListNumber"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
                 <w:numId w:val="41"/>
             </w:numPr>
+            <w:spacing w:before="240" w:lineRule="auto"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">list item 2</w:t>
+            <w:t>list item 2</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListNumber"/>
             <w:numPr>
                 <w:ilvl w:val="1"/>
                 <w:numId w:val="46"/>
             </w:numPr>
+            <w:spacing w:after="0" w:line="288" w:lineRule="auto"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">list item 2</w:t>
+            <w:t>list item 2</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -4484,7 +4549,7 @@ code
             <w:pStyle w:val="ParagraphTextBody"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">Some plain text</w:t>
+            <w:t>Some plain text</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -4498,7 +4563,7 @@ code
             <w:pStyle w:val="Quotations"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">block quote 1</w:t>
+            <w:t>block quote 1</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -4522,7 +4587,7 @@ code
                 <w:rPr>
                     <w:rStyle w:val="Hyperlink"/>
                 </w:rPr>
-                <w:t xml:space="preserve">flexmark-icon-logo</w:t>
+                <w:t>flexmark-icon-logo</w:t>
             </w:r>
             <w:r>
                 <w:fldChar w:fldCharType="end"/>
@@ -4541,7 +4606,7 @@ code
             <w:ind w:left="480"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">block quote 2</w:t>
+            <w:t>block quote 2</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -4556,7 +4621,7 @@ code
             <w:ind w:left="720"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">block quote 3</w:t>
+            <w:t>block quote 3</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -4571,7 +4636,7 @@ code
             <w:ind w:left="960"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">block quote 4</w:t>
+            <w:t>block quote 4</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -4586,12 +4651,12 @@ code
             <w:ind w:left="1200"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">block quote 5</w:t>
+            <w:t>block quote 5</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListNumber"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
                 <w:numId w:val="47"/>
@@ -4600,18 +4665,22 @@ code
                 <w:left w:color="CCCCCC" w:frame="true" w:shadow="true"
                     w:space="9" w:sz="16" w:val="single"/>
             </w:pBdr>
+            <w:spacing w:after="0" w:line="288" w:lineRule="auto"/>
             <w:ind w:hanging="360" w:left="1560"/>
         </w:pPr>
         <w:r>
             <w:rPr>
+                <w:rFonts w:cs="Times New Roman" w:eastAsia="Calibri"/>
+                <w:color w:val="666666"/>
                 <w:sz w:val="18"/>
+                <w:szCs w:val="18"/>
             </w:rPr>
-            <w:t xml:space="preserve">list</w:t>
+            <w:t>list</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListBullet"/>
             <w:numPr>
                 <w:ilvl w:val="1"/>
                 <w:numId w:val="1"/>
@@ -4620,13 +4689,17 @@ code
                 <w:left w:color="CCCCCC" w:frame="true" w:shadow="true"
                     w:space="27" w:sz="16" w:val="single"/>
             </w:pBdr>
+            <w:spacing w:after="0" w:line="288" w:lineRule="auto"/>
             <w:ind w:hanging="360" w:left="1920"/>
         </w:pPr>
         <w:r>
             <w:rPr>
+                <w:rFonts w:cs="Times New Roman" w:eastAsia="Calibri"/>
+                <w:color w:val="666666"/>
                 <w:sz w:val="18"/>
+                <w:szCs w:val="18"/>
             </w:rPr>
-            <w:t xml:space="preserve">nested list</w:t>
+            <w:t>nested list</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -4671,13 +4744,13 @@ code
             <w:spacing w:after="0" w:before="0"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">pre-formatted code</w:t>
+            <w:t>pre-formatted code</w:t>
         </w:r>
         <w:r>
             <w:br/>
         </w:r>
         <w:r>
-            <w:t xml:space="preserve">code</w:t>
+            <w:t>code</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -4734,14 +4807,14 @@ code
                             <w:rFonts w:cs="Tms Rmn" w:eastAsia="Times New Roman"/>
                             <w:sz w:val="21"/>
                         </w:rPr>
-                        <w:t xml:space="preserve">header</w:t>
+                        <w:t>header</w:t>
                     </w:r>
                     <w:r>
                         <w:rPr>
                             <w:rFonts w:cs="Tms Rmn" w:eastAsia="Times New Roman"/>
                             <w:sz w:val="21"/>
                         </w:rPr>
-                        <w:t xml:space="preserve"/>
+                        <w:t/>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -4763,7 +4836,7 @@ code
                             <w:rFonts w:cs="Tms Rmn" w:eastAsia="Times New Roman"/>
                             <w:sz w:val="21"/>
                         </w:rPr>
-                        <w:t xml:space="preserve">Default</w:t>
+                        <w:t>Default</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -4789,14 +4862,14 @@ code
                             <w:rFonts w:cs="Tms Rmn" w:eastAsia="Times New Roman"/>
                             <w:sz w:val="21"/>
                         </w:rPr>
-                        <w:t xml:space="preserve">Align</w:t>
+                        <w:t>Align</w:t>
                     </w:r>
                     <w:r>
                         <w:rPr>
                             <w:rFonts w:cs="Tms Rmn" w:eastAsia="Times New Roman"/>
                             <w:sz w:val="21"/>
                         </w:rPr>
-                        <w:t xml:space="preserve"/>
+                        <w:t/>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -4814,7 +4887,7 @@ code
                             <w:rFonts w:cs="Tms Rmn" w:eastAsia="Times New Roman"/>
                             <w:sz w:val="21"/>
                         </w:rPr>
-                        <w:t xml:space="preserve">Center</w:t>
+                        <w:t>Center</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -4840,14 +4913,14 @@ code
                             <w:rFonts w:cs="Tms Rmn" w:eastAsia="Times New Roman"/>
                             <w:sz w:val="21"/>
                         </w:rPr>
-                        <w:t xml:space="preserve">Align</w:t>
+                        <w:t>Align</w:t>
                     </w:r>
                     <w:r>
                         <w:rPr>
                             <w:rFonts w:cs="Tms Rmn" w:eastAsia="Times New Roman"/>
                             <w:sz w:val="21"/>
                         </w:rPr>
-                        <w:t xml:space="preserve"/>
+                        <w:t/>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -4867,10 +4940,10 @@ code
                         <w:rPr>
                             <w:rStyle w:val="SourceText"/>
                         </w:rPr>
-                        <w:t xml:space="preserve">Longer</w:t>
+                        <w:t>Longer</w:t>
                     </w:r>
                     <w:r>
-                        <w:t xml:space="preserve"/>
+                        <w:t/>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -4882,7 +4955,7 @@ code
                         <w:jc w:val="left"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">Data 2</w:t>
+                        <w:t>Data 2</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -4894,7 +4967,7 @@ code
                         <w:jc w:val="center"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">Data 3</w:t>
+                        <w:t>Data 3</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -4906,7 +4979,7 @@ code
                         <w:jc w:val="right"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">Data 4</w:t>
+                        <w:t>Data 4</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -4928,10 +5001,10 @@ code
                         <w:rPr>
                             <w:rStyle w:val="StrongEmphasis"/>
                         </w:rPr>
-                        <w:t xml:space="preserve">data</w:t>
+                        <w:t>data</w:t>
                     </w:r>
                     <w:r>
-                        <w:t xml:space="preserve"/>
+                        <w:t/>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -4943,7 +5016,7 @@ code
                         <w:jc w:val="center"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">Data 5</w:t>
+                        <w:t>Data 5</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -4955,7 +5028,7 @@ code
                         <w:jc w:val="right"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">Data 6</w:t>
+                        <w:t>Data 6</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -4969,7 +5042,7 @@ code
                         <w:pStyle w:val="TableContents"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">Data 7</w:t>
+                        <w:t>Data 7</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -4989,10 +5062,10 @@ code
                         <w:rPr>
                             <w:rStyle w:val="Emphasis"/>
                         </w:rPr>
-                        <w:t xml:space="preserve">Data</w:t>
+                        <w:t>Data</w:t>
                     </w:r>
                     <w:r>
-                        <w:t xml:space="preserve"/>
+                        <w:t/>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -5004,7 +5077,7 @@ code
                         <w:jc w:val="right"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">Data 8</w:t>
+                        <w:t>Data 8</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -5018,7 +5091,7 @@ code
                         <w:pStyle w:val="TableContents"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">Data 9</w:t>
+                        <w:t>Data 9</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -5030,7 +5103,7 @@ code
                         <w:jc w:val="left"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">Data 10</w:t>
+                        <w:t>Data 10</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -5050,10 +5123,10 @@ code
                         <w:rPr>
                             <w:rStyle w:val="Superscript"/>
                         </w:rPr>
-                        <w:t xml:space="preserve">Data</w:t>
+                        <w:t>Data</w:t>
                     </w:r>
                     <w:r>
-                        <w:t xml:space="preserve"/>
+                        <w:t/>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -5075,10 +5148,10 @@ code
                         <w:rPr>
                             <w:rStyle w:val="Strikethrough"/>
                         </w:rPr>
-                        <w:t xml:space="preserve">Data</w:t>
+                        <w:t>Data</w:t>
                     </w:r>
                     <w:r>
-                        <w:t xml:space="preserve"/>
+                        <w:t/>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -5090,7 +5163,7 @@ code
                         <w:jc w:val="right"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">Data 7</w:t>
+                        <w:t>Data 7</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -5104,7 +5177,7 @@ code
                         <w:pStyle w:val="TableContents"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">Data 8</w:t>
+                        <w:t>Data 8</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -5124,10 +5197,10 @@ code
                         <w:rPr>
                             <w:rStyle w:val="Subscript"/>
                         </w:rPr>
-                        <w:t xml:space="preserve">Data</w:t>
+                        <w:t>Data</w:t>
                     </w:r>
                     <w:r>
-                        <w:t xml:space="preserve"/>
+                        <w:t/>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -5247,7 +5320,7 @@ code
             <w:rPr>
                 <w:rStyle w:val="Emphasis"/>
             </w:rPr>
-            <w:t xml:space="preserve">italic</w:t>
+            <w:t>italic</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -5255,7 +5328,7 @@ code
             <w:pStyle w:val="ParagraphTextBody"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve"> </w:t>
+            <w:t> </w:t>
         </w:r>
     </w:p>
     <w:bookmarkStart w:id="2" w:name="heading-2-bold"/>
@@ -5275,7 +5348,7 @@ code
             <w:rPr>
                 <w:rStyle w:val="StrongEmphasis"/>
             </w:rPr>
-            <w:t xml:space="preserve">bold</w:t>
+            <w:t>bold</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -5283,7 +5356,7 @@ code
             <w:pStyle w:val="ParagraphTextBody"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve"> </w:t>
+            <w:t> </w:t>
         </w:r>
     </w:p>
     <w:bookmarkStart w:id="3" w:name="heading-3-strike-through"/>
@@ -5303,7 +5376,7 @@ code
             <w:rPr>
                 <w:rStyle w:val="Strikethrough"/>
             </w:rPr>
-            <w:t xml:space="preserve">strike-through</w:t>
+            <w:t>strike-through</w:t>
         </w:r>
     </w:p>
     <w:bookmarkStart w:id="4" w:name="heading-4-inline-code"/>
@@ -5323,7 +5396,7 @@ code
             <w:rPr>
                 <w:rStyle w:val="SourceText"/>
             </w:rPr>
-            <w:t xml:space="preserve">inline-code</w:t>
+            <w:t>inline-code</w:t>
         </w:r>
     </w:p>
     <w:bookmarkStart w:id="5" w:name="heading-5"/>
@@ -5337,7 +5410,7 @@ code
             </w:numPr>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">Heading 5</w:t>
+            <w:t>Heading 5</w:t>
         </w:r>
     </w:p>
     <w:bookmarkStart w:id="6" w:name="heading-6"/>
@@ -5351,7 +5424,7 @@ code
             </w:numPr>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">Heading 6</w:t>
+            <w:t>Heading 6</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -5371,7 +5444,7 @@ code
             <w:rPr>
                 <w:rStyle w:val="StrongEmphasis"/>
             </w:rPr>
-            <w:t xml:space="preserve">bold</w:t>
+            <w:t>bold</w:t>
         </w:r>
         <w:r>
             <w:t xml:space="preserve"> </w:t>
@@ -5380,7 +5453,7 @@ code
             <w:rPr>
                 <w:rStyle w:val="Emphasis"/>
             </w:rPr>
-            <w:t xml:space="preserve">italic</w:t>
+            <w:t>italic</w:t>
         </w:r>
         <w:r>
             <w:t xml:space="preserve"> </w:t>
@@ -5391,7 +5464,7 @@ code
                 <w:i/>
                 <w:iCs/>
             </w:rPr>
-            <w:t xml:space="preserve">bold-italic</w:t>
+            <w:t>bold-italic</w:t>
         </w:r>
         <w:r>
             <w:t xml:space="preserve"> </w:t>
@@ -5400,7 +5473,7 @@ code
             <w:rPr>
                 <w:rStyle w:val="Underlined"/>
             </w:rPr>
-            <w:t xml:space="preserve">underline</w:t>
+            <w:t>underline</w:t>
         </w:r>
         <w:r>
             <w:t xml:space="preserve"> </w:t>
@@ -5409,7 +5482,7 @@ code
             <w:rPr>
                 <w:rStyle w:val="Strikethrough"/>
             </w:rPr>
-            <w:t xml:space="preserve">strike-through</w:t>
+            <w:t>strike-through</w:t>
         </w:r>
         <w:r>
             <w:t xml:space="preserve"> </w:t>
@@ -5418,7 +5491,7 @@ code
             <w:rPr>
                 <w:rStyle w:val="Superscript"/>
             </w:rPr>
-            <w:t xml:space="preserve">superscript</w:t>
+            <w:t>superscript</w:t>
         </w:r>
         <w:r>
             <w:t xml:space="preserve"> normal </w:t>
@@ -5427,7 +5500,7 @@ code
             <w:rPr>
                 <w:rStyle w:val="Subscript"/>
             </w:rPr>
-            <w:t xml:space="preserve">subscript</w:t>
+            <w:t>subscript</w:t>
         </w:r>
         <w:r>
             <w:t xml:space="preserve"> </w:t>
@@ -5436,19 +5509,20 @@ code
             <w:rPr>
                 <w:rStyle w:val="SourceText"/>
             </w:rPr>
-            <w:t xml:space="preserve">inline-code</w:t>
+            <w:t>inline-code</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="ParagraphTextBody"/>
+            <w:pStyle w:val="ListBullet"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
                 <w:numId w:val="1"/>
             </w:numPr>
+            <w:spacing w:after="120" w:before="240" w:line="300" w:lineRule="auto"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">list 1</w:t>
+            <w:t>list 1</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -5461,7 +5535,7 @@ code
                 <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
                     <wp:extent cx="609600" cy="609600"/>
                     <wp:effectExtent b="0" l="0" r="0" t="0"/>
-                    <wp:docPr descr="flexmark-icon-logo" id="0" name="Image1"/>
+                    <wp:docPr descr="flexmark-icon-logo" id="100000" name="Image100000"/>
                     <wp:cNvGraphicFramePr>
                         <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
                     </wp:cNvGraphicFramePr>
@@ -5469,7 +5543,7 @@ code
                         <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
                             <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
                                 <pic:nvPicPr>
-                                    <pic:cNvPr id="1" name="Image1"/>
+                                    <pic:cNvPr id="100001" name="Image100000"/>
                                     <pic:cNvPicPr/>
                                 </pic:nvPicPr>
                                 <pic:blipFill>
@@ -5496,62 +5570,67 @@ code
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListBullet"/>
             <w:numPr>
                 <w:ilvl w:val="1"/>
                 <w:numId w:val="1"/>
             </w:numPr>
+            <w:spacing w:after="0" w:line="288" w:lineRule="auto"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">list 2</w:t>
+            <w:t>list 2</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="ParagraphTextBody"/>
+            <w:pStyle w:val="ListNumber"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
                 <w:numId w:val="41"/>
             </w:numPr>
+            <w:spacing w:before="240" w:lineRule="auto"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">list 1</w:t>
+            <w:t>list 1</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListNumber"/>
             <w:numPr>
                 <w:ilvl w:val="1"/>
                 <w:numId w:val="42"/>
             </w:numPr>
+            <w:spacing w:after="0" w:line="288" w:lineRule="auto"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">list 2</w:t>
+            <w:t>list 2</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="ParagraphTextBody"/>
+            <w:pStyle w:val="ListNumber"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
                 <w:numId w:val="41"/>
             </w:numPr>
+            <w:spacing w:before="240" w:lineRule="auto"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">list item 2</w:t>
+            <w:t>list item 2</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListNumber"/>
             <w:numPr>
                 <w:ilvl w:val="1"/>
                 <w:numId w:val="43"/>
             </w:numPr>
+            <w:spacing w:after="0" w:line="288" w:lineRule="auto"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">list item 2</w:t>
+            <w:t>list item 2</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -5559,7 +5638,7 @@ code
             <w:pStyle w:val="ParagraphTextBody"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">Some plain text</w:t>
+            <w:t>Some plain text</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -5573,7 +5652,7 @@ code
             <w:pStyle w:val="Quotations"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">block quote 1</w:t>
+            <w:t>block quote 1</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -5597,7 +5676,7 @@ code
                 <w:rPr>
                     <w:rStyle w:val="Hyperlink"/>
                 </w:rPr>
-                <w:t xml:space="preserve">flexmark-icon-logo</w:t>
+                <w:t>flexmark-icon-logo</w:t>
             </w:r>
             <w:r>
                 <w:fldChar w:fldCharType="end"/>
@@ -5616,7 +5695,7 @@ code
             <w:ind w:left="480"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">block quote 2</w:t>
+            <w:t>block quote 2</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -5631,12 +5710,12 @@ code
             <w:ind w:left="720"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">block quote 5</w:t>
+            <w:t>block quote 5</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListNumber"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
                 <w:numId w:val="44"/>
@@ -5645,18 +5724,22 @@ code
                 <w:left w:color="CCCCCC" w:frame="true" w:shadow="true"
                     w:space="9" w:sz="16" w:val="single"/>
             </w:pBdr>
+            <w:spacing w:after="0" w:line="288" w:lineRule="auto"/>
             <w:ind w:hanging="360" w:left="1080"/>
         </w:pPr>
         <w:r>
             <w:rPr>
+                <w:rFonts w:cs="Times New Roman" w:eastAsia="Calibri"/>
+                <w:color w:val="666666"/>
                 <w:sz w:val="18"/>
+                <w:szCs w:val="18"/>
             </w:rPr>
-            <w:t xml:space="preserve">list</w:t>
+            <w:t>list</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListBullet"/>
             <w:numPr>
                 <w:ilvl w:val="1"/>
                 <w:numId w:val="1"/>
@@ -5665,13 +5748,17 @@ code
                 <w:left w:color="CCCCCC" w:frame="true" w:shadow="true"
                     w:space="27" w:sz="16" w:val="single"/>
             </w:pBdr>
+            <w:spacing w:after="0" w:line="288" w:lineRule="auto"/>
             <w:ind w:hanging="360" w:left="1440"/>
         </w:pPr>
         <w:r>
             <w:rPr>
+                <w:rFonts w:cs="Times New Roman" w:eastAsia="Calibri"/>
+                <w:color w:val="666666"/>
                 <w:sz w:val="18"/>
+                <w:szCs w:val="18"/>
             </w:rPr>
-            <w:t xml:space="preserve">nested list</w:t>
+            <w:t>nested list</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -5704,13 +5791,13 @@ code
             <w:spacing w:after="0" w:before="0"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">pre-formatted code</w:t>
+            <w:t>pre-formatted code</w:t>
         </w:r>
         <w:r>
             <w:br/>
         </w:r>
         <w:r>
-            <w:t xml:space="preserve">code</w:t>
+            <w:t>code</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -5767,14 +5854,14 @@ code
                             <w:rFonts w:cs="Tms Rmn" w:eastAsia="Times New Roman"/>
                             <w:sz w:val="21"/>
                         </w:rPr>
-                        <w:t xml:space="preserve">header</w:t>
+                        <w:t>header</w:t>
                     </w:r>
                     <w:r>
                         <w:rPr>
                             <w:rFonts w:cs="Tms Rmn" w:eastAsia="Times New Roman"/>
                             <w:sz w:val="21"/>
                         </w:rPr>
-                        <w:t xml:space="preserve"/>
+                        <w:t/>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -5796,7 +5883,7 @@ code
                             <w:rFonts w:cs="Tms Rmn" w:eastAsia="Times New Roman"/>
                             <w:sz w:val="21"/>
                         </w:rPr>
-                        <w:t xml:space="preserve">Default</w:t>
+                        <w:t>Default</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -5822,14 +5909,14 @@ code
                             <w:rFonts w:cs="Tms Rmn" w:eastAsia="Times New Roman"/>
                             <w:sz w:val="21"/>
                         </w:rPr>
-                        <w:t xml:space="preserve">Align</w:t>
+                        <w:t>Align</w:t>
                     </w:r>
                     <w:r>
                         <w:rPr>
                             <w:rFonts w:cs="Tms Rmn" w:eastAsia="Times New Roman"/>
                             <w:sz w:val="21"/>
                         </w:rPr>
-                        <w:t xml:space="preserve"/>
+                        <w:t/>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -5847,7 +5934,7 @@ code
                             <w:rFonts w:cs="Tms Rmn" w:eastAsia="Times New Roman"/>
                             <w:sz w:val="21"/>
                         </w:rPr>
-                        <w:t xml:space="preserve">Center</w:t>
+                        <w:t>Center</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -5873,14 +5960,14 @@ code
                             <w:rFonts w:cs="Tms Rmn" w:eastAsia="Times New Roman"/>
                             <w:sz w:val="21"/>
                         </w:rPr>
-                        <w:t xml:space="preserve">Align</w:t>
+                        <w:t>Align</w:t>
                     </w:r>
                     <w:r>
                         <w:rPr>
                             <w:rFonts w:cs="Tms Rmn" w:eastAsia="Times New Roman"/>
                             <w:sz w:val="21"/>
                         </w:rPr>
-                        <w:t xml:space="preserve"/>
+                        <w:t/>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -5900,10 +5987,10 @@ code
                         <w:rPr>
                             <w:rStyle w:val="SourceText"/>
                         </w:rPr>
-                        <w:t xml:space="preserve">Longer</w:t>
+                        <w:t>Longer</w:t>
                     </w:r>
                     <w:r>
-                        <w:t xml:space="preserve"/>
+                        <w:t/>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -5915,7 +6002,7 @@ code
                         <w:jc w:val="left"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">Data 2</w:t>
+                        <w:t>Data 2</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -5927,7 +6014,7 @@ code
                         <w:jc w:val="center"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">Data 3</w:t>
+                        <w:t>Data 3</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -5939,7 +6026,7 @@ code
                         <w:jc w:val="right"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">Data 4</w:t>
+                        <w:t>Data 4</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -5961,10 +6048,10 @@ code
                         <w:rPr>
                             <w:rStyle w:val="StrongEmphasis"/>
                         </w:rPr>
-                        <w:t xml:space="preserve">data</w:t>
+                        <w:t>data</w:t>
                     </w:r>
                     <w:r>
-                        <w:t xml:space="preserve"/>
+                        <w:t/>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -5976,7 +6063,7 @@ code
                         <w:jc w:val="center"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">Data 5</w:t>
+                        <w:t>Data 5</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -5988,7 +6075,7 @@ code
                         <w:jc w:val="right"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">Data 6</w:t>
+                        <w:t>Data 6</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -6002,7 +6089,7 @@ code
                         <w:pStyle w:val="TableContents"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">Data 7</w:t>
+                        <w:t>Data 7</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -6022,10 +6109,10 @@ code
                         <w:rPr>
                             <w:rStyle w:val="Emphasis"/>
                         </w:rPr>
-                        <w:t xml:space="preserve">Data</w:t>
+                        <w:t>Data</w:t>
                     </w:r>
                     <w:r>
-                        <w:t xml:space="preserve"/>
+                        <w:t/>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -6037,7 +6124,7 @@ code
                         <w:jc w:val="right"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">Data 8</w:t>
+                        <w:t>Data 8</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -6051,7 +6138,7 @@ code
                         <w:pStyle w:val="TableContents"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">Data 9</w:t>
+                        <w:t>Data 9</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -6063,7 +6150,7 @@ code
                         <w:jc w:val="left"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">Data 10</w:t>
+                        <w:t>Data 10</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -6083,10 +6170,10 @@ code
                         <w:rPr>
                             <w:rStyle w:val="Superscript"/>
                         </w:rPr>
-                        <w:t xml:space="preserve">Data</w:t>
+                        <w:t>Data</w:t>
                     </w:r>
                     <w:r>
-                        <w:t xml:space="preserve"/>
+                        <w:t/>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -6108,10 +6195,10 @@ code
                         <w:rPr>
                             <w:rStyle w:val="Strikethrough"/>
                         </w:rPr>
-                        <w:t xml:space="preserve">Data</w:t>
+                        <w:t>Data</w:t>
                     </w:r>
                     <w:r>
-                        <w:t xml:space="preserve"/>
+                        <w:t/>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -6123,7 +6210,7 @@ code
                         <w:jc w:val="right"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">Data 7</w:t>
+                        <w:t>Data 7</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -6137,7 +6224,7 @@ code
                         <w:pStyle w:val="TableContents"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">Data 8</w:t>
+                        <w:t>Data 8</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -6157,10 +6244,10 @@ code
                         <w:rPr>
                             <w:rStyle w:val="Subscript"/>
                         </w:rPr>
-                        <w:t xml:space="preserve">Data</w:t>
+                        <w:t>Data</w:t>
                     </w:r>
                     <w:r>
-                        <w:t xml:space="preserve"/>
+                        <w:t/>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -6219,7 +6306,7 @@ plain {-del-} {+ins+}
             <w:rPr>
                 <w:rStyle w:val="Strikethrough"/>
             </w:rPr>
-            <w:t xml:space="preserve">del</w:t>
+            <w:t>del</w:t>
         </w:r>
         <w:r>
             <w:t xml:space="preserve"> </w:t>
@@ -6228,7 +6315,7 @@ plain {-del-} {+ins+}
             <w:rPr>
                 <w:rStyle w:val="Underlined"/>
             </w:rPr>
-            <w:t xml:space="preserve">ins</w:t>
+            <w:t>ins</w:t>
         </w:r>
         <w:r>
             <w:t xml:space="preserve"> </w:t>
@@ -6240,7 +6327,7 @@ plain {-del-} {+ins+}
             <w:rPr>
                 <w:rStyle w:val="Strikethrough"/>
             </w:rPr>
-            <w:t xml:space="preserve">del</w:t>
+            <w:t>del</w:t>
         </w:r>
         <w:r>
             <w:t xml:space="preserve"> </w:t>
@@ -6249,7 +6336,7 @@ plain {-del-} {+ins+}
             <w:rPr>
                 <w:rStyle w:val="Underlined"/>
             </w:rPr>
-            <w:t xml:space="preserve">ins</w:t>
+            <w:t>ins</w:t>
         </w:r>
     </w:p>
 </w:body>
@@ -6313,7 +6400,7 @@ Block Quote
                 <w:color w:val="666666"/>
                 <w:sz w:val="18"/>
             </w:rPr>
-            <w:t xml:space="preserve">Block Quote</w:t>
+            <w:t>Block Quote</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -6386,7 +6473,7 @@ Nested Block Quote
                 <w:color w:val="666666"/>
                 <w:sz w:val="18"/>
             </w:rPr>
-            <w:t xml:space="preserve">Block Quote</w:t>
+            <w:t>Block Quote</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -6400,7 +6487,7 @@ Nested Block Quote
             <w:pStyle w:val="ParagraphTextBody"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">Nested Block Quote</w:t>
+            <w:t>Nested Block Quote</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -6513,14 +6600,14 @@ All the fixings
                             <w:rFonts w:cs="Tms Rmn" w:eastAsia="Times New Roman"/>
                             <w:sz w:val="21"/>
                         </w:rPr>
-                        <w:t xml:space="preserve">header</w:t>
+                        <w:t>header</w:t>
                     </w:r>
                     <w:r>
                         <w:rPr>
                             <w:rFonts w:cs="Tms Rmn" w:eastAsia="Times New Roman"/>
                             <w:sz w:val="21"/>
                         </w:rPr>
-                        <w:t xml:space="preserve"/>
+                        <w:t/>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -6542,7 +6629,7 @@ All the fixings
                             <w:rFonts w:cs="Tms Rmn" w:eastAsia="Times New Roman"/>
                             <w:sz w:val="21"/>
                         </w:rPr>
-                        <w:t xml:space="preserve">Default</w:t>
+                        <w:t>Default</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -6568,14 +6655,14 @@ All the fixings
                             <w:rFonts w:cs="Tms Rmn" w:eastAsia="Times New Roman"/>
                             <w:sz w:val="21"/>
                         </w:rPr>
-                        <w:t xml:space="preserve">Align</w:t>
+                        <w:t>Align</w:t>
                     </w:r>
                     <w:r>
                         <w:rPr>
                             <w:rFonts w:cs="Tms Rmn" w:eastAsia="Times New Roman"/>
                             <w:sz w:val="21"/>
                         </w:rPr>
-                        <w:t xml:space="preserve"/>
+                        <w:t/>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -6593,7 +6680,7 @@ All the fixings
                             <w:rFonts w:cs="Tms Rmn" w:eastAsia="Times New Roman"/>
                             <w:sz w:val="21"/>
                         </w:rPr>
-                        <w:t xml:space="preserve">Center</w:t>
+                        <w:t>Center</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -6619,14 +6706,14 @@ All the fixings
                             <w:rFonts w:cs="Tms Rmn" w:eastAsia="Times New Roman"/>
                             <w:sz w:val="21"/>
                         </w:rPr>
-                        <w:t xml:space="preserve">Align</w:t>
+                        <w:t>Align</w:t>
                     </w:r>
                     <w:r>
                         <w:rPr>
                             <w:rFonts w:cs="Tms Rmn" w:eastAsia="Times New Roman"/>
                             <w:sz w:val="21"/>
                         </w:rPr>
-                        <w:t xml:space="preserve"/>
+                        <w:t/>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -6646,10 +6733,10 @@ All the fixings
                         <w:rPr>
                             <w:rStyle w:val="SourceText"/>
                         </w:rPr>
-                        <w:t xml:space="preserve">Longer</w:t>
+                        <w:t>Longer</w:t>
                     </w:r>
                     <w:r>
-                        <w:t xml:space="preserve"/>
+                        <w:t/>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -6661,7 +6748,7 @@ All the fixings
                         <w:jc w:val="left"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">Data 2</w:t>
+                        <w:t>Data 2</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -6673,7 +6760,7 @@ All the fixings
                         <w:jc w:val="center"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">Data 3</w:t>
+                        <w:t>Data 3</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -6685,7 +6772,7 @@ All the fixings
                         <w:jc w:val="right"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">Data 4</w:t>
+                        <w:t>Data 4</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -6707,10 +6794,10 @@ All the fixings
                         <w:rPr>
                             <w:rStyle w:val="StrongEmphasis"/>
                         </w:rPr>
-                        <w:t xml:space="preserve">data</w:t>
+                        <w:t>data</w:t>
                     </w:r>
                     <w:r>
-                        <w:t xml:space="preserve"/>
+                        <w:t/>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -6722,7 +6809,7 @@ All the fixings
                         <w:jc w:val="center"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">Data 5</w:t>
+                        <w:t>Data 5</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -6734,7 +6821,7 @@ All the fixings
                         <w:jc w:val="right"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">Data 6</w:t>
+                        <w:t>Data 6</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -6748,7 +6835,7 @@ All the fixings
                         <w:pStyle w:val="TableContents"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">Data 7</w:t>
+                        <w:t>Data 7</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -6768,10 +6855,10 @@ All the fixings
                         <w:rPr>
                             <w:rStyle w:val="Emphasis"/>
                         </w:rPr>
-                        <w:t xml:space="preserve">Data</w:t>
+                        <w:t>Data</w:t>
                     </w:r>
                     <w:r>
-                        <w:t xml:space="preserve"/>
+                        <w:t/>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -6783,7 +6870,7 @@ All the fixings
                         <w:jc w:val="right"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">Data 8</w:t>
+                        <w:t>Data 8</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -6797,7 +6884,7 @@ All the fixings
                         <w:pStyle w:val="TableContents"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">Data 9</w:t>
+                        <w:t>Data 9</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -6809,7 +6896,7 @@ All the fixings
                         <w:jc w:val="left"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">Data 10</w:t>
+                        <w:t>Data 10</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -6829,10 +6916,10 @@ All the fixings
                         <w:rPr>
                             <w:rStyle w:val="Superscript"/>
                         </w:rPr>
-                        <w:t xml:space="preserve">Data</w:t>
+                        <w:t>Data</w:t>
                     </w:r>
                     <w:r>
-                        <w:t xml:space="preserve"/>
+                        <w:t/>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -6854,10 +6941,10 @@ All the fixings
                         <w:rPr>
                             <w:rStyle w:val="Strikethrough"/>
                         </w:rPr>
-                        <w:t xml:space="preserve">Data</w:t>
+                        <w:t>Data</w:t>
                     </w:r>
                     <w:r>
-                        <w:t xml:space="preserve"/>
+                        <w:t/>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -6869,7 +6956,7 @@ All the fixings
                         <w:jc w:val="right"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">Data 7</w:t>
+                        <w:t>Data 7</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -6883,7 +6970,7 @@ All the fixings
                         <w:pStyle w:val="TableContents"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">Data 8</w:t>
+                        <w:t>Data 8</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -6903,10 +6990,10 @@ All the fixings
                         <w:rPr>
                             <w:rStyle w:val="Subscript"/>
                         </w:rPr>
-                        <w:t xml:space="preserve">Data</w:t>
+                        <w:t>Data</w:t>
                     </w:r>
                     <w:r>
-                        <w:t xml:space="preserve"/>
+                        <w:t/>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -6917,7 +7004,7 @@ All the fixings
             <w:pStyle w:val="TableCaption"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">Table Caption</w:t>
+            <w:t>Table Caption</w:t>
         </w:r>
     </w:p>
 </w:body>
@@ -7006,7 +7093,7 @@ With breaks
                             <w:rFonts w:cs="Tms Rmn" w:eastAsia="Times New Roman"/>
                             <w:sz w:val="21"/>
                         </w:rPr>
-                        <w:t xml:space="preserve">Document / Item</w:t>
+                        <w:t>Document / Item</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -7024,7 +7111,7 @@ With breaks
                             <w:rFonts w:cs="Tms Rmn" w:eastAsia="Times New Roman"/>
                             <w:sz w:val="21"/>
                         </w:rPr>
-                        <w:t xml:space="preserve">versioning</w:t>
+                        <w:t>versioning</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -7039,7 +7126,7 @@ With breaks
                         <w:jc w:val="left"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">Technical Documentation, e.g.</w:t>
+                        <w:t>Technical Documentation, e.g.</w:t>
                     </w:r>
                     <w:r>
                         <w:br/>
@@ -7069,7 +7156,7 @@ With breaks
                         <w:jc w:val="left"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">We use our versioning system to control changes to these (markdown) documents</w:t>
+                        <w:t>We use our versioning system to control changes to these (markdown) documents</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -7084,7 +7171,7 @@ With breaks
                         <w:jc w:val="left"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">Records such as completed checklist</w:t>
+                        <w:t>Records such as completed checklist</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -7096,16 +7183,16 @@ With breaks
                         <w:jc w:val="left"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">See 'SOP' "Control of documents and records" (</w:t>
+                        <w:t>See 'SOP' "Control of documents and records" (</w:t>
                     </w:r>
                     <w:r>
                         <w:rPr>
                             <w:rStyle w:val="SourceText"/>
                         </w:rPr>
-                        <w:t xml:space="preserve">DC-SOP01</w:t>
+                        <w:t>DC-SOP01</w:t>
                     </w:r>
                     <w:r>
-                        <w:t xml:space="preserve">)</w:t>
+                        <w:t>)</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -7120,7 +7207,7 @@ With breaks
                         <w:jc w:val="left"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">Development artifacts such as</w:t>
+                        <w:t>Development artifacts such as</w:t>
                     </w:r>
                     <w:r>
                         <w:br/>
@@ -7150,7 +7237,7 @@ With breaks
                         <w:jc w:val="left"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">We use our versioning system to control changes to these artifacts</w:t>
+                        <w:t>We use our versioning system to control changes to these artifacts</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -7165,7 +7252,7 @@ With breaks
                         <w:jc w:val="left"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">SOUP</w:t>
+                        <w:t>SOUP</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -7177,7 +7264,7 @@ With breaks
                         <w:jc w:val="left"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">We use our versioning system to control changes to these artifacts</w:t>
+                        <w:t>We use our versioning system to control changes to these artifacts</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -7188,7 +7275,7 @@ With breaks
             <w:pStyle w:val="TableCaption"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">Table 4: Version control</w:t>
+            <w:t>Table 4: Version control</w:t>
         </w:r>
     </w:p>
 </w:body>
@@ -7242,7 +7329,7 @@ With breaks and caption before
             <w:pStyle w:val="TableCaption"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">Table 4: Version control</w:t>
+            <w:t>Table 4: Version control</w:t>
         </w:r>
     </w:p>
     <w:tbl>
@@ -7285,7 +7372,7 @@ With breaks and caption before
                             <w:rFonts w:cs="Tms Rmn" w:eastAsia="Times New Roman"/>
                             <w:sz w:val="21"/>
                         </w:rPr>
-                        <w:t xml:space="preserve">Document / Item</w:t>
+                        <w:t>Document / Item</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -7303,7 +7390,7 @@ With breaks and caption before
                             <w:rFonts w:cs="Tms Rmn" w:eastAsia="Times New Roman"/>
                             <w:sz w:val="21"/>
                         </w:rPr>
-                        <w:t xml:space="preserve">versioning</w:t>
+                        <w:t>versioning</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -7318,7 +7405,7 @@ With breaks and caption before
                         <w:jc w:val="left"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">Technical Documentation, e.g.</w:t>
+                        <w:t>Technical Documentation, e.g.</w:t>
                     </w:r>
                     <w:r>
                         <w:br/>
@@ -7348,7 +7435,7 @@ With breaks and caption before
                         <w:jc w:val="left"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">We use our versioning system to control changes to these (markdown) documents</w:t>
+                        <w:t>We use our versioning system to control changes to these (markdown) documents</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -7363,7 +7450,7 @@ With breaks and caption before
                         <w:jc w:val="left"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">Records such as completed checklist</w:t>
+                        <w:t>Records such as completed checklist</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -7375,16 +7462,16 @@ With breaks and caption before
                         <w:jc w:val="left"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">See 'SOP' "Control of documents and records" (</w:t>
+                        <w:t>See 'SOP' "Control of documents and records" (</w:t>
                     </w:r>
                     <w:r>
                         <w:rPr>
                             <w:rStyle w:val="SourceText"/>
                         </w:rPr>
-                        <w:t xml:space="preserve">DC-SOP01</w:t>
+                        <w:t>DC-SOP01</w:t>
                     </w:r>
                     <w:r>
-                        <w:t xml:space="preserve">)</w:t>
+                        <w:t>)</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -7399,7 +7486,7 @@ With breaks and caption before
                         <w:jc w:val="left"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">Development artifacts such as</w:t>
+                        <w:t>Development artifacts such as</w:t>
                     </w:r>
                     <w:r>
                         <w:br/>
@@ -7429,7 +7516,7 @@ With breaks and caption before
                         <w:jc w:val="left"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">We use our versioning system to control changes to these artifacts</w:t>
+                        <w:t>We use our versioning system to control changes to these artifacts</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -7444,7 +7531,7 @@ With breaks and caption before
                         <w:jc w:val="left"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">SOUP</w:t>
+                        <w:t>SOUP</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -7456,7 +7543,7 @@ With breaks and caption before
                         <w:jc w:val="left"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">We use our versioning system to control changes to these artifacts</w:t>
+                        <w:t>We use our versioning system to control changes to these artifacts</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -7546,7 +7633,7 @@ With spanning columns
                             <w:rFonts w:cs="Tms Rmn" w:eastAsia="Times New Roman"/>
                             <w:sz w:val="21"/>
                         </w:rPr>
-                        <w:t xml:space="preserve">data</w:t>
+                        <w:t>data</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -7564,7 +7651,7 @@ With spanning columns
                             <w:rFonts w:cs="Tms Rmn" w:eastAsia="Times New Roman"/>
                             <w:sz w:val="21"/>
                         </w:rPr>
-                        <w:t xml:space="preserve">label</w:t>
+                        <w:t>label</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -7581,7 +7668,7 @@ With spanning columns
                         <w:jc w:val="left"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">spanning</w:t>
+                        <w:t>spanning</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -7596,7 +7683,7 @@ With spanning columns
                         <w:jc w:val="left"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">normal</w:t>
+                        <w:t>normal</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -7608,7 +7695,7 @@ With spanning columns
                         <w:jc w:val="left"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">column</w:t>
+                        <w:t>column</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -7698,7 +7785,7 @@ With spanning columns turned off
                             <w:rFonts w:cs="Tms Rmn" w:eastAsia="Times New Roman"/>
                             <w:sz w:val="21"/>
                         </w:rPr>
-                        <w:t xml:space="preserve">data</w:t>
+                        <w:t>data</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -7716,7 +7803,7 @@ With spanning columns turned off
                             <w:rFonts w:cs="Tms Rmn" w:eastAsia="Times New Roman"/>
                             <w:sz w:val="21"/>
                         </w:rPr>
-                        <w:t xml:space="preserve">label</w:t>
+                        <w:t>label</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -7731,7 +7818,7 @@ With spanning columns turned off
                         <w:jc w:val="left"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">spanning</w:t>
+                        <w:t>spanning</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -7754,7 +7841,7 @@ With spanning columns turned off
                         <w:jc w:val="left"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">normal</w:t>
+                        <w:t>normal</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -7766,7 +7853,7 @@ With spanning columns turned off
                         <w:jc w:val="left"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">column</w:t>
+                        <w:t>column</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -7855,7 +7942,7 @@ With embedded links
                             <w:rFonts w:cs="Tms Rmn" w:eastAsia="Times New Roman"/>
                             <w:sz w:val="21"/>
                         </w:rPr>
-                        <w:t xml:space="preserve">data</w:t>
+                        <w:t>data</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -7873,7 +7960,7 @@ With embedded links
                             <w:rFonts w:cs="Tms Rmn" w:eastAsia="Times New Roman"/>
                             <w:sz w:val="21"/>
                         </w:rPr>
-                        <w:t xml:space="preserve">label</w:t>
+                        <w:t>label</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -7895,7 +7982,7 @@ With embedded links
                             <w:rPr>
                                 <w:rStyle w:val="Hyperlink"/>
                             </w:rPr>
-                            <w:t xml:space="preserve">link</w:t>
+                            <w:t>link</w:t>
                         </w:r>
                     </w:hyperlink>
                     <w:r>
@@ -7911,7 +7998,7 @@ With embedded links
                         <w:jc w:val="left"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">column</w:t>
+                        <w:t>column</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -7975,47 +8062,55 @@ block quote with bullet list
             <w:pStyle w:val="Quotations"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">some quote</w:t>
+            <w:t>some quote</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListBullet"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
                 <w:numId w:val="1"/>
             </w:numPr>
             <w:pBdr>
                 <w:left w:color="CCCCCC" w:frame="true" w:shadow="true"
-                    w:space="9" w:sz="16" w:val="single"/>
+                    w:space="27" w:sz="16" w:val="single"/>
             </w:pBdr>
-            <w:ind w:hanging="360" w:left="600"/>
+            <w:spacing w:after="0" w:line="288" w:lineRule="auto"/>
+            <w:ind w:hanging="360" w:left="960"/>
         </w:pPr>
         <w:r>
             <w:rPr>
+                <w:rFonts w:cs="Times New Roman" w:eastAsia="Calibri"/>
+                <w:color w:val="666666"/>
                 <w:sz w:val="18"/>
+                <w:szCs w:val="18"/>
             </w:rPr>
-            <w:t xml:space="preserve">a list item</w:t>
+            <w:t>a list item</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListBullet"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
                 <w:numId w:val="1"/>
             </w:numPr>
             <w:pBdr>
                 <w:left w:color="CCCCCC" w:frame="true" w:shadow="true"
-                    w:space="9" w:sz="16" w:val="single"/>
+                    w:space="27" w:sz="16" w:val="single"/>
             </w:pBdr>
-            <w:ind w:hanging="360" w:left="600"/>
+            <w:spacing w:after="0" w:line="288" w:lineRule="auto"/>
+            <w:ind w:hanging="360" w:left="960"/>
         </w:pPr>
         <w:r>
             <w:rPr>
+                <w:rFonts w:cs="Times New Roman" w:eastAsia="Calibri"/>
+                <w:color w:val="666666"/>
                 <w:sz w:val="18"/>
+                <w:szCs w:val="18"/>
             </w:rPr>
-            <w:t xml:space="preserve">another list item</w:t>
+            <w:t>another list item</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -8078,32 +8173,36 @@ block quote with bullet nested list
             <w:pStyle w:val="Quotations"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">some quote</w:t>
+            <w:t>some quote</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListBullet"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
                 <w:numId w:val="1"/>
             </w:numPr>
             <w:pBdr>
                 <w:left w:color="CCCCCC" w:frame="true" w:shadow="true"
-                    w:space="9" w:sz="16" w:val="single"/>
+                    w:space="27" w:sz="16" w:val="single"/>
             </w:pBdr>
-            <w:ind w:hanging="360" w:left="600"/>
+            <w:spacing w:after="0" w:line="288" w:lineRule="auto"/>
+            <w:ind w:hanging="360" w:left="960"/>
         </w:pPr>
         <w:r>
             <w:rPr>
+                <w:rFonts w:cs="Times New Roman" w:eastAsia="Calibri"/>
+                <w:color w:val="666666"/>
                 <w:sz w:val="18"/>
+                <w:szCs w:val="18"/>
             </w:rPr>
-            <w:t xml:space="preserve">a list item</w:t>
+            <w:t>a list item</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListBullet"/>
             <w:numPr>
                 <w:ilvl w:val="1"/>
                 <w:numId w:val="1"/>
@@ -8112,13 +8211,17 @@ block quote with bullet nested list
                 <w:left w:color="CCCCCC" w:frame="true" w:shadow="true"
                     w:space="27" w:sz="16" w:val="single"/>
             </w:pBdr>
+            <w:spacing w:after="0" w:line="288" w:lineRule="auto"/>
             <w:ind w:hanging="360" w:left="960"/>
         </w:pPr>
         <w:r>
             <w:rPr>
+                <w:rFonts w:cs="Times New Roman" w:eastAsia="Calibri"/>
+                <w:color w:val="666666"/>
                 <w:sz w:val="18"/>
+                <w:szCs w:val="18"/>
             </w:rPr>
-            <w:t xml:space="preserve">another list item</w:t>
+            <w:t>another list item</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -8184,32 +8287,36 @@ block quote with bullet list nested beyond border space limit
             <w:pStyle w:val="Quotations"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">some quote</w:t>
+            <w:t>some quote</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListBullet"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
                 <w:numId w:val="1"/>
             </w:numPr>
             <w:pBdr>
                 <w:left w:color="CCCCCC" w:frame="true" w:shadow="true"
-                    w:space="9" w:sz="16" w:val="single"/>
+                    w:space="27" w:sz="16" w:val="single"/>
             </w:pBdr>
-            <w:ind w:hanging="360" w:left="600"/>
+            <w:spacing w:after="0" w:line="288" w:lineRule="auto"/>
+            <w:ind w:hanging="360" w:left="960"/>
         </w:pPr>
         <w:r>
             <w:rPr>
+                <w:rFonts w:cs="Times New Roman" w:eastAsia="Calibri"/>
+                <w:color w:val="666666"/>
                 <w:sz w:val="18"/>
+                <w:szCs w:val="18"/>
             </w:rPr>
-            <w:t xml:space="preserve">a list item</w:t>
+            <w:t>a list item</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListBullet"/>
             <w:numPr>
                 <w:ilvl w:val="1"/>
                 <w:numId w:val="1"/>
@@ -8218,73 +8325,89 @@ block quote with bullet list nested beyond border space limit
                 <w:left w:color="CCCCCC" w:frame="true" w:shadow="true"
                     w:space="27" w:sz="16" w:val="single"/>
             </w:pBdr>
+            <w:spacing w:after="0" w:line="288" w:lineRule="auto"/>
             <w:ind w:hanging="360" w:left="960"/>
         </w:pPr>
         <w:r>
             <w:rPr>
+                <w:rFonts w:cs="Times New Roman" w:eastAsia="Calibri"/>
+                <w:color w:val="666666"/>
                 <w:sz w:val="18"/>
+                <w:szCs w:val="18"/>
             </w:rPr>
-            <w:t xml:space="preserve">another list item</w:t>
+            <w:t>another list item</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListBullet"/>
             <w:numPr>
                 <w:ilvl w:val="2"/>
                 <w:numId w:val="1"/>
             </w:numPr>
             <w:pBdr>
                 <w:left w:color="CCCCCC" w:frame="true" w:shadow="true"
-                    w:space="31" w:sz="16" w:val="single"/>
+                    w:space="27" w:sz="16" w:val="single"/>
             </w:pBdr>
-            <w:ind w:hanging="360" w:left="1320"/>
+            <w:spacing w:after="0" w:line="288" w:lineRule="auto"/>
+            <w:ind w:hanging="360" w:left="960"/>
         </w:pPr>
         <w:r>
             <w:rPr>
+                <w:rFonts w:cs="Times New Roman" w:eastAsia="Calibri"/>
+                <w:color w:val="666666"/>
                 <w:sz w:val="18"/>
+                <w:szCs w:val="18"/>
             </w:rPr>
-            <w:t xml:space="preserve">another list item</w:t>
+            <w:t>another list item</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListBullet"/>
             <w:numPr>
                 <w:ilvl w:val="3"/>
                 <w:numId w:val="1"/>
             </w:numPr>
             <w:pBdr>
                 <w:left w:color="CCCCCC" w:frame="true" w:shadow="true"
-                    w:space="31" w:sz="16" w:val="single"/>
+                    w:space="27" w:sz="16" w:val="single"/>
             </w:pBdr>
-            <w:ind w:hanging="360" w:left="1680"/>
+            <w:spacing w:after="0" w:line="288" w:lineRule="auto"/>
+            <w:ind w:hanging="360" w:left="960"/>
         </w:pPr>
         <w:r>
             <w:rPr>
+                <w:rFonts w:cs="Times New Roman" w:eastAsia="Calibri"/>
+                <w:color w:val="666666"/>
                 <w:sz w:val="18"/>
+                <w:szCs w:val="18"/>
             </w:rPr>
-            <w:t xml:space="preserve">another list item</w:t>
+            <w:t>another list item</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListBullet"/>
             <w:numPr>
                 <w:ilvl w:val="4"/>
                 <w:numId w:val="1"/>
             </w:numPr>
             <w:pBdr>
                 <w:left w:color="CCCCCC" w:frame="true" w:shadow="true"
-                    w:space="31" w:sz="16" w:val="single"/>
+                    w:space="27" w:sz="16" w:val="single"/>
             </w:pBdr>
-            <w:ind w:hanging="360" w:left="2040"/>
+            <w:spacing w:after="0" w:line="288" w:lineRule="auto"/>
+            <w:ind w:hanging="360" w:left="960"/>
         </w:pPr>
         <w:r>
             <w:rPr>
+                <w:rFonts w:cs="Times New Roman" w:eastAsia="Calibri"/>
+                <w:color w:val="666666"/>
                 <w:sz w:val="18"/>
+                <w:szCs w:val="18"/>
             </w:rPr>
-            <w:t xml:space="preserve">another list item</w:t>
+            <w:t>another list item</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -8347,12 +8470,12 @@ block quote with ordered list
             <w:pStyle w:val="Quotations"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">some quote</w:t>
+            <w:t>some quote</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListNumber"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
                 <w:numId w:val="41"/>
@@ -8361,18 +8484,22 @@ block quote with ordered list
                 <w:left w:color="CCCCCC" w:frame="true" w:shadow="true"
                     w:space="9" w:sz="16" w:val="single"/>
             </w:pBdr>
+            <w:spacing w:after="0" w:line="288" w:lineRule="auto"/>
             <w:ind w:hanging="360" w:left="600"/>
         </w:pPr>
         <w:r>
             <w:rPr>
+                <w:rFonts w:cs="Times New Roman" w:eastAsia="Calibri"/>
+                <w:color w:val="666666"/>
                 <w:sz w:val="18"/>
+                <w:szCs w:val="18"/>
             </w:rPr>
-            <w:t xml:space="preserve">a list item</w:t>
+            <w:t>a list item</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListNumber"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
                 <w:numId w:val="41"/>
@@ -8381,13 +8508,17 @@ block quote with ordered list
                 <w:left w:color="CCCCCC" w:frame="true" w:shadow="true"
                     w:space="9" w:sz="16" w:val="single"/>
             </w:pBdr>
+            <w:spacing w:after="0" w:line="288" w:lineRule="auto"/>
             <w:ind w:hanging="360" w:left="600"/>
         </w:pPr>
         <w:r>
             <w:rPr>
+                <w:rFonts w:cs="Times New Roman" w:eastAsia="Calibri"/>
+                <w:color w:val="666666"/>
                 <w:sz w:val="18"/>
+                <w:szCs w:val="18"/>
             </w:rPr>
-            <w:t xml:space="preserve">another list item</w:t>
+            <w:t>another list item</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -8439,14 +8570,15 @@ block quote with ordered list
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="ParagraphTextBody"/>
+            <w:pStyle w:val="ListNumber"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
                 <w:numId w:val="41"/>
             </w:numPr>
+            <w:spacing w:before="240" w:lineRule="auto"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">Table in a list</w:t>
+            <w:t>Table in a list</w:t>
         </w:r>
     </w:p>
     <w:tbl>
@@ -8488,7 +8620,7 @@ block quote with ordered list
                             <w:rFonts w:cs="Tms Rmn" w:eastAsia="Times New Roman"/>
                             <w:sz w:val="21"/>
                         </w:rPr>
-                        <w:t xml:space="preserve">Simple Table</w:t>
+                        <w:t>Simple Table</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -8502,7 +8634,7 @@ block quote with ordered list
                         <w:pStyle w:val="TableContents"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">Data</w:t>
+                        <w:t>Data</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -8560,7 +8692,7 @@ block quote with ordered list
             <w:pStyle w:val="Quotations"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">Table in quote</w:t>
+            <w:t>Table in quote</w:t>
         </w:r>
     </w:p>
     <w:tbl>
@@ -8603,7 +8735,7 @@ block quote with ordered list
                             <w:color w:val="666666"/>
                             <w:sz w:val="21"/>
                         </w:rPr>
-                        <w:t xml:space="preserve">Simple Table</w:t>
+                        <w:t>Simple Table</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -8617,7 +8749,7 @@ block quote with ordered list
                         <w:pStyle w:val="TableContents"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">Data</w:t>
+                        <w:t>Data</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -8672,14 +8804,15 @@ list with block quote
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="ParagraphTextBody"/>
+            <w:pStyle w:val="ListNumber"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
                 <w:numId w:val="41"/>
             </w:numPr>
+            <w:spacing w:before="240" w:lineRule="auto"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">ordered list</w:t>
+            <w:t>ordered list</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -8694,7 +8827,7 @@ list with block quote
             <w:ind w:left="600"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">with block quote</w:t>
+            <w:t>with block quote</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -8747,26 +8880,28 @@ list with block quote
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListNumber"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
                 <w:numId w:val="41"/>
             </w:numPr>
+            <w:spacing w:after="0" w:line="288" w:lineRule="auto"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">ordered list</w:t>
+            <w:t>ordered list</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="ParagraphTextBody"/>
+            <w:pStyle w:val="ListBullet"/>
             <w:numPr>
                 <w:ilvl w:val="1"/>
                 <w:numId w:val="1"/>
             </w:numPr>
+            <w:spacing w:after="120" w:before="240" w:line="300" w:lineRule="auto"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">bullet list</w:t>
+            <w:t>bullet list</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -8781,7 +8916,7 @@ list with block quote
             <w:ind w:left="960"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">with block quote</w:t>
+            <w:t>with block quote</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -8873,7 +9008,7 @@ list with block quote
             <w:pStyle w:val="Quotations"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">with block quote</w:t>
+            <w:t>with block quote</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -8881,12 +9016,12 @@ list with block quote
             <w:pStyle w:val="Quotations"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">text</w:t>
+            <w:t>text</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="ParagraphTextBody"/>
+            <w:pStyle w:val="ListNumber"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
                 <w:numId w:val="41"/>
@@ -8895,14 +9030,17 @@ list with block quote
                 <w:left w:color="CCCCCC" w:frame="true" w:shadow="true"
                     w:space="9" w:sz="16" w:val="single"/>
             </w:pBdr>
+            <w:spacing w:before="240" w:lineRule="auto"/>
             <w:ind w:hanging="360" w:left="600"/>
         </w:pPr>
         <w:r>
             <w:rPr>
+                <w:rFonts w:cs="Times New Roman" w:eastAsia="Calibri"/>
                 <w:color w:val="666666"/>
                 <w:sz w:val="18"/>
+                <w:szCs w:val="18"/>
             </w:rPr>
-            <w:t xml:space="preserve">with list</w:t>
+            <w:t>with list</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -8919,7 +9057,7 @@ list with block quote
                 <w:color w:val="666666"/>
                 <w:sz w:val="18"/>
             </w:rPr>
-            <w:t xml:space="preserve">text</w:t>
+            <w:t>text</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -8927,28 +9065,31 @@ list with block quote
             <w:pStyle w:val="Quotations"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">text</w:t>
+            <w:t>text</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="ParagraphTextBody"/>
+            <w:pStyle w:val="ListBullet"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
                 <w:numId w:val="1"/>
             </w:numPr>
             <w:pBdr>
                 <w:left w:color="CCCCCC" w:frame="true" w:shadow="true"
-                    w:space="9" w:sz="16" w:val="single"/>
+                    w:space="27" w:sz="16" w:val="single"/>
             </w:pBdr>
-            <w:ind w:hanging="360" w:left="600"/>
+            <w:spacing w:after="120" w:before="240" w:line="300" w:lineRule="auto"/>
+            <w:ind w:hanging="360" w:left="960"/>
         </w:pPr>
         <w:r>
             <w:rPr>
+                <w:rFonts w:cs="Times New Roman" w:eastAsia="Calibri"/>
                 <w:color w:val="666666"/>
                 <w:sz w:val="18"/>
+                <w:szCs w:val="18"/>
             </w:rPr>
-            <w:t xml:space="preserve">with list</w:t>
+            <w:t>with list</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -8956,7 +9097,7 @@ list with block quote
             <w:pStyle w:val="ParagraphTextBody"/>
             <w:pBdr>
                 <w:left w:color="CCCCCC" w:frame="true" w:shadow="true"
-                    w:space="27" w:sz="16" w:val="single"/>
+                    w:space="9" w:sz="16" w:val="single"/>
             </w:pBdr>
             <w:ind w:left="600"/>
         </w:pPr>
@@ -8965,7 +9106,7 @@ list with block quote
                 <w:color w:val="666666"/>
                 <w:sz w:val="18"/>
             </w:rPr>
-            <w:t xml:space="preserve">text</w:t>
+            <w:t>text</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -8980,7 +9121,7 @@ list with block quote
             <w:ind w:left="840"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">block quote</w:t>
+            <w:t>block quote</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -8997,26 +9138,28 @@ list with block quote
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListNumber"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
                 <w:numId w:val="42"/>
             </w:numPr>
+            <w:spacing w:after="0" w:line="288" w:lineRule="auto"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">ordered list</w:t>
+            <w:t>ordered list</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="ParagraphTextBody"/>
+            <w:pStyle w:val="ListBullet"/>
             <w:numPr>
                 <w:ilvl w:val="1"/>
                 <w:numId w:val="1"/>
             </w:numPr>
+            <w:spacing w:after="120" w:before="240" w:line="300" w:lineRule="auto"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">bullet list</w:t>
+            <w:t>bullet list</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -9031,7 +9174,7 @@ list with block quote
             <w:ind w:left="960"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">with block quote</w:t>
+            <w:t>with block quote</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -9040,12 +9183,12 @@ list with block quote
             <w:ind w:left="960"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">text</w:t>
+            <w:t>text</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="ParagraphTextBody"/>
+            <w:pStyle w:val="ListNumber"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
                 <w:numId w:val="43"/>
@@ -9054,14 +9197,17 @@ list with block quote
                 <w:left w:color="CCCCCC" w:frame="true" w:shadow="true"
                     w:space="9" w:sz="16" w:val="single"/>
             </w:pBdr>
+            <w:spacing w:before="240" w:lineRule="auto"/>
             <w:ind w:hanging="360" w:left="1320"/>
         </w:pPr>
         <w:r>
             <w:rPr>
+                <w:rFonts w:cs="Times New Roman" w:eastAsia="Calibri"/>
                 <w:color w:val="666666"/>
                 <w:sz w:val="18"/>
+                <w:szCs w:val="18"/>
             </w:rPr>
-            <w:t xml:space="preserve">with list</w:t>
+            <w:t>with list</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -9078,7 +9224,7 @@ list with block quote
                 <w:color w:val="666666"/>
                 <w:sz w:val="18"/>
             </w:rPr>
-            <w:t xml:space="preserve">list child text</w:t>
+            <w:t>list child text</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -9087,28 +9233,31 @@ list with block quote
             <w:ind w:left="960"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">text</w:t>
+            <w:t>text</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="ParagraphTextBody"/>
+            <w:pStyle w:val="ListBullet"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
                 <w:numId w:val="1"/>
             </w:numPr>
             <w:pBdr>
                 <w:left w:color="CCCCCC" w:frame="true" w:shadow="true"
-                    w:space="9" w:sz="16" w:val="single"/>
+                    w:space="27" w:sz="16" w:val="single"/>
             </w:pBdr>
-            <w:ind w:hanging="360" w:left="1320"/>
+            <w:spacing w:after="120" w:before="240" w:line="300" w:lineRule="auto"/>
+            <w:ind w:hanging="360" w:left="1680"/>
         </w:pPr>
         <w:r>
             <w:rPr>
+                <w:rFonts w:cs="Times New Roman" w:eastAsia="Calibri"/>
                 <w:color w:val="666666"/>
                 <w:sz w:val="18"/>
+                <w:szCs w:val="18"/>
             </w:rPr>
-            <w:t xml:space="preserve">with list</w:t>
+            <w:t>with list</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -9116,7 +9265,7 @@ list with block quote
             <w:pStyle w:val="ParagraphTextBody"/>
             <w:pBdr>
                 <w:left w:color="CCCCCC" w:frame="true" w:shadow="true"
-                    w:space="27" w:sz="16" w:val="single"/>
+                    w:space="9" w:sz="16" w:val="single"/>
             </w:pBdr>
             <w:ind w:left="1320"/>
         </w:pPr>
@@ -9125,7 +9274,7 @@ list with block quote
                 <w:color w:val="666666"/>
                 <w:sz w:val="18"/>
             </w:rPr>
-            <w:t xml:space="preserve">list child text</w:t>
+            <w:t>list child text</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -9140,7 +9289,7 @@ list with block quote
             <w:ind w:left="1560"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">last block quote</w:t>
+            <w:t>last block quote</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -9203,26 +9352,28 @@ list with block quote
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListNumber"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
                 <w:numId w:val="41"/>
             </w:numPr>
+            <w:spacing w:after="0" w:line="288" w:lineRule="auto"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">ordered list</w:t>
+            <w:t>ordered list</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListBullet"/>
             <w:numPr>
                 <w:ilvl w:val="1"/>
                 <w:numId w:val="1"/>
             </w:numPr>
+            <w:spacing w:after="0" w:line="288" w:lineRule="auto"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">bullet list</w:t>
+            <w:t>bullet list</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -9237,12 +9388,12 @@ list with block quote
             <w:ind w:left="960"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">with block quote</w:t>
+            <w:t>with block quote</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListNumber"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
                 <w:numId w:val="42"/>
@@ -9251,13 +9402,17 @@ list with block quote
                 <w:left w:color="CCCCCC" w:frame="true" w:shadow="true"
                     w:space="9" w:sz="16" w:val="single"/>
             </w:pBdr>
+            <w:spacing w:after="0" w:line="288" w:lineRule="auto"/>
             <w:ind w:hanging="360" w:left="1320"/>
         </w:pPr>
         <w:r>
             <w:rPr>
+                <w:rFonts w:cs="Times New Roman" w:eastAsia="Calibri"/>
+                <w:color w:val="666666"/>
                 <w:sz w:val="18"/>
+                <w:szCs w:val="18"/>
             </w:rPr>
-            <w:t xml:space="preserve">with list</w:t>
+            <w:t>with list</w:t>
         </w:r>
     </w:p>
     <w:tbl>
@@ -9300,7 +9455,7 @@ list with block quote
                             <w:color w:val="666666"/>
                             <w:sz w:val="21"/>
                         </w:rPr>
-                        <w:t xml:space="preserve">Simple Table</w:t>
+                        <w:t>Simple Table</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -9314,7 +9469,7 @@ list with block quote
                         <w:pStyle w:val="TableContents"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">Data</w:t>
+                        <w:t>Data</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -9380,47 +9535,55 @@ aside block with bullet list
             <w:pStyle w:val="AsideBlock"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">some quote</w:t>
+            <w:t>some quote</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListBullet"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
                 <w:numId w:val="1"/>
             </w:numPr>
             <w:pBdr>
                 <w:left w:color="3366FF" w:frame="true" w:shadow="true"
-                    w:space="9" w:sz="16" w:val="single"/>
+                    w:space="27" w:sz="16" w:val="single"/>
             </w:pBdr>
-            <w:ind w:hanging="360" w:left="600"/>
+            <w:spacing w:after="0" w:line="288" w:lineRule="auto"/>
+            <w:ind w:hanging="360" w:left="960"/>
         </w:pPr>
         <w:r>
             <w:rPr>
+                <w:rFonts w:cs="Times New Roman" w:eastAsia="Calibri"/>
+                <w:color w:val="00000A"/>
                 <w:sz w:val="18"/>
+                <w:szCs w:val="18"/>
             </w:rPr>
-            <w:t xml:space="preserve">a list item</w:t>
+            <w:t>a list item</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListBullet"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
                 <w:numId w:val="1"/>
             </w:numPr>
             <w:pBdr>
                 <w:left w:color="3366FF" w:frame="true" w:shadow="true"
-                    w:space="9" w:sz="16" w:val="single"/>
+                    w:space="27" w:sz="16" w:val="single"/>
             </w:pBdr>
-            <w:ind w:hanging="360" w:left="600"/>
+            <w:spacing w:after="0" w:line="288" w:lineRule="auto"/>
+            <w:ind w:hanging="360" w:left="960"/>
         </w:pPr>
         <w:r>
             <w:rPr>
+                <w:rFonts w:cs="Times New Roman" w:eastAsia="Calibri"/>
+                <w:color w:val="00000A"/>
                 <w:sz w:val="18"/>
+                <w:szCs w:val="18"/>
             </w:rPr>
-            <w:t xml:space="preserve">another list item</w:t>
+            <w:t>another list item</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -9483,32 +9646,36 @@ aside block with bullet nested list
             <w:pStyle w:val="AsideBlock"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">some quote</w:t>
+            <w:t>some quote</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListBullet"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
                 <w:numId w:val="1"/>
             </w:numPr>
             <w:pBdr>
                 <w:left w:color="3366FF" w:frame="true" w:shadow="true"
-                    w:space="9" w:sz="16" w:val="single"/>
+                    w:space="27" w:sz="16" w:val="single"/>
             </w:pBdr>
-            <w:ind w:hanging="360" w:left="600"/>
+            <w:spacing w:after="0" w:line="288" w:lineRule="auto"/>
+            <w:ind w:hanging="360" w:left="960"/>
         </w:pPr>
         <w:r>
             <w:rPr>
+                <w:rFonts w:cs="Times New Roman" w:eastAsia="Calibri"/>
+                <w:color w:val="00000A"/>
                 <w:sz w:val="18"/>
+                <w:szCs w:val="18"/>
             </w:rPr>
-            <w:t xml:space="preserve">a list item</w:t>
+            <w:t>a list item</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListBullet"/>
             <w:numPr>
                 <w:ilvl w:val="1"/>
                 <w:numId w:val="1"/>
@@ -9517,13 +9684,17 @@ aside block with bullet nested list
                 <w:left w:color="3366FF" w:frame="true" w:shadow="true"
                     w:space="27" w:sz="16" w:val="single"/>
             </w:pBdr>
+            <w:spacing w:after="0" w:line="288" w:lineRule="auto"/>
             <w:ind w:hanging="360" w:left="960"/>
         </w:pPr>
         <w:r>
             <w:rPr>
+                <w:rFonts w:cs="Times New Roman" w:eastAsia="Calibri"/>
+                <w:color w:val="00000A"/>
                 <w:sz w:val="18"/>
+                <w:szCs w:val="18"/>
             </w:rPr>
-            <w:t xml:space="preserve">another list item</w:t>
+            <w:t>another list item</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -9589,32 +9760,36 @@ aside block with bullet list nested beyond border space limit
             <w:pStyle w:val="AsideBlock"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">some quote</w:t>
+            <w:t>some quote</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListBullet"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
                 <w:numId w:val="1"/>
             </w:numPr>
             <w:pBdr>
                 <w:left w:color="3366FF" w:frame="true" w:shadow="true"
-                    w:space="9" w:sz="16" w:val="single"/>
+                    w:space="27" w:sz="16" w:val="single"/>
             </w:pBdr>
-            <w:ind w:hanging="360" w:left="600"/>
+            <w:spacing w:after="0" w:line="288" w:lineRule="auto"/>
+            <w:ind w:hanging="360" w:left="960"/>
         </w:pPr>
         <w:r>
             <w:rPr>
+                <w:rFonts w:cs="Times New Roman" w:eastAsia="Calibri"/>
+                <w:color w:val="00000A"/>
                 <w:sz w:val="18"/>
+                <w:szCs w:val="18"/>
             </w:rPr>
-            <w:t xml:space="preserve">a list item</w:t>
+            <w:t>a list item</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListBullet"/>
             <w:numPr>
                 <w:ilvl w:val="1"/>
                 <w:numId w:val="1"/>
@@ -9623,73 +9798,89 @@ aside block with bullet list nested beyond border space limit
                 <w:left w:color="3366FF" w:frame="true" w:shadow="true"
                     w:space="27" w:sz="16" w:val="single"/>
             </w:pBdr>
+            <w:spacing w:after="0" w:line="288" w:lineRule="auto"/>
             <w:ind w:hanging="360" w:left="960"/>
         </w:pPr>
         <w:r>
             <w:rPr>
+                <w:rFonts w:cs="Times New Roman" w:eastAsia="Calibri"/>
+                <w:color w:val="00000A"/>
                 <w:sz w:val="18"/>
+                <w:szCs w:val="18"/>
             </w:rPr>
-            <w:t xml:space="preserve">another list item</w:t>
+            <w:t>another list item</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListBullet"/>
             <w:numPr>
                 <w:ilvl w:val="2"/>
                 <w:numId w:val="1"/>
             </w:numPr>
             <w:pBdr>
                 <w:left w:color="3366FF" w:frame="true" w:shadow="true"
-                    w:space="31" w:sz="16" w:val="single"/>
+                    w:space="27" w:sz="16" w:val="single"/>
             </w:pBdr>
-            <w:ind w:hanging="360" w:left="1320"/>
+            <w:spacing w:after="0" w:line="288" w:lineRule="auto"/>
+            <w:ind w:hanging="360" w:left="960"/>
         </w:pPr>
         <w:r>
             <w:rPr>
+                <w:rFonts w:cs="Times New Roman" w:eastAsia="Calibri"/>
+                <w:color w:val="00000A"/>
                 <w:sz w:val="18"/>
+                <w:szCs w:val="18"/>
             </w:rPr>
-            <w:t xml:space="preserve">another list item</w:t>
+            <w:t>another list item</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListBullet"/>
             <w:numPr>
                 <w:ilvl w:val="3"/>
                 <w:numId w:val="1"/>
             </w:numPr>
             <w:pBdr>
                 <w:left w:color="3366FF" w:frame="true" w:shadow="true"
-                    w:space="31" w:sz="16" w:val="single"/>
+                    w:space="27" w:sz="16" w:val="single"/>
             </w:pBdr>
-            <w:ind w:hanging="360" w:left="1680"/>
+            <w:spacing w:after="0" w:line="288" w:lineRule="auto"/>
+            <w:ind w:hanging="360" w:left="960"/>
         </w:pPr>
         <w:r>
             <w:rPr>
+                <w:rFonts w:cs="Times New Roman" w:eastAsia="Calibri"/>
+                <w:color w:val="00000A"/>
                 <w:sz w:val="18"/>
+                <w:szCs w:val="18"/>
             </w:rPr>
-            <w:t xml:space="preserve">another list item</w:t>
+            <w:t>another list item</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListBullet"/>
             <w:numPr>
                 <w:ilvl w:val="4"/>
                 <w:numId w:val="1"/>
             </w:numPr>
             <w:pBdr>
                 <w:left w:color="3366FF" w:frame="true" w:shadow="true"
-                    w:space="31" w:sz="16" w:val="single"/>
+                    w:space="27" w:sz="16" w:val="single"/>
             </w:pBdr>
-            <w:ind w:hanging="360" w:left="2040"/>
+            <w:spacing w:after="0" w:line="288" w:lineRule="auto"/>
+            <w:ind w:hanging="360" w:left="960"/>
         </w:pPr>
         <w:r>
             <w:rPr>
+                <w:rFonts w:cs="Times New Roman" w:eastAsia="Calibri"/>
+                <w:color w:val="00000A"/>
                 <w:sz w:val="18"/>
+                <w:szCs w:val="18"/>
             </w:rPr>
-            <w:t xml:space="preserve">another list item</w:t>
+            <w:t>another list item</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -9752,12 +9943,12 @@ aside block with ordered list
             <w:pStyle w:val="AsideBlock"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">some quote</w:t>
+            <w:t>some quote</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListNumber"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
                 <w:numId w:val="41"/>
@@ -9766,18 +9957,22 @@ aside block with ordered list
                 <w:left w:color="3366FF" w:frame="true" w:shadow="true"
                     w:space="9" w:sz="16" w:val="single"/>
             </w:pBdr>
+            <w:spacing w:after="0" w:line="288" w:lineRule="auto"/>
             <w:ind w:hanging="360" w:left="600"/>
         </w:pPr>
         <w:r>
             <w:rPr>
+                <w:rFonts w:cs="Times New Roman" w:eastAsia="Calibri"/>
+                <w:color w:val="00000A"/>
                 <w:sz w:val="18"/>
+                <w:szCs w:val="18"/>
             </w:rPr>
-            <w:t xml:space="preserve">a list item</w:t>
+            <w:t>a list item</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListNumber"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
                 <w:numId w:val="41"/>
@@ -9786,13 +9981,17 @@ aside block with ordered list
                 <w:left w:color="3366FF" w:frame="true" w:shadow="true"
                     w:space="9" w:sz="16" w:val="single"/>
             </w:pBdr>
+            <w:spacing w:after="0" w:line="288" w:lineRule="auto"/>
             <w:ind w:hanging="360" w:left="600"/>
         </w:pPr>
         <w:r>
             <w:rPr>
+                <w:rFonts w:cs="Times New Roman" w:eastAsia="Calibri"/>
+                <w:color w:val="00000A"/>
                 <w:sz w:val="18"/>
+                <w:szCs w:val="18"/>
             </w:rPr>
-            <w:t xml:space="preserve">another list item</w:t>
+            <w:t>another list item</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -9844,14 +10043,15 @@ aside block with ordered list
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="ParagraphTextBody"/>
+            <w:pStyle w:val="ListNumber"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
                 <w:numId w:val="41"/>
             </w:numPr>
+            <w:spacing w:before="240" w:lineRule="auto"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">Table in a list</w:t>
+            <w:t>Table in a list</w:t>
         </w:r>
     </w:p>
     <w:tbl>
@@ -9893,7 +10093,7 @@ aside block with ordered list
                             <w:rFonts w:cs="Tms Rmn" w:eastAsia="Times New Roman"/>
                             <w:sz w:val="21"/>
                         </w:rPr>
-                        <w:t xml:space="preserve">Simple Table</w:t>
+                        <w:t>Simple Table</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -9907,7 +10107,7 @@ aside block with ordered list
                         <w:pStyle w:val="TableContents"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">Data</w:t>
+                        <w:t>Data</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -9965,7 +10165,7 @@ aside block with ordered list
             <w:pStyle w:val="AsideBlock"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">Table in quote</w:t>
+            <w:t>Table in quote</w:t>
         </w:r>
     </w:p>
     <w:tbl>
@@ -10007,7 +10207,7 @@ aside block with ordered list
                             <w:rFonts w:cs="Tms Rmn" w:eastAsia="Times New Roman"/>
                             <w:sz w:val="21"/>
                         </w:rPr>
-                        <w:t xml:space="preserve">Simple Table</w:t>
+                        <w:t>Simple Table</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -10021,7 +10221,7 @@ aside block with ordered list
                         <w:pStyle w:val="TableContents"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">Data</w:t>
+                        <w:t>Data</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -10076,14 +10276,15 @@ list with aside block
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="ParagraphTextBody"/>
+            <w:pStyle w:val="ListNumber"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
                 <w:numId w:val="41"/>
             </w:numPr>
+            <w:spacing w:before="240" w:lineRule="auto"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">ordered list</w:t>
+            <w:t>ordered list</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -10098,7 +10299,7 @@ list with aside block
             <w:ind w:left="600"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">with aside block</w:t>
+            <w:t>with aside block</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -10151,26 +10352,28 @@ list with aside block
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListNumber"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
                 <w:numId w:val="41"/>
             </w:numPr>
+            <w:spacing w:after="0" w:line="288" w:lineRule="auto"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">ordered list</w:t>
+            <w:t>ordered list</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="ParagraphTextBody"/>
+            <w:pStyle w:val="ListBullet"/>
             <w:numPr>
                 <w:ilvl w:val="1"/>
                 <w:numId w:val="1"/>
             </w:numPr>
+            <w:spacing w:after="120" w:before="240" w:line="300" w:lineRule="auto"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">bullet list</w:t>
+            <w:t>bullet list</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -10185,7 +10388,7 @@ list with aside block
             <w:ind w:left="960"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">with aside block</w:t>
+            <w:t>with aside block</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -10277,7 +10480,7 @@ list with aside block
             <w:pStyle w:val="AsideBlock"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">with aside block</w:t>
+            <w:t>with aside block</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -10285,12 +10488,12 @@ list with aside block
             <w:pStyle w:val="AsideBlock"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">text</w:t>
+            <w:t>text</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="ParagraphTextBody"/>
+            <w:pStyle w:val="ListNumber"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
                 <w:numId w:val="41"/>
@@ -10299,13 +10502,17 @@ list with aside block
                 <w:left w:color="3366FF" w:frame="true" w:shadow="true"
                     w:space="9" w:sz="16" w:val="single"/>
             </w:pBdr>
+            <w:spacing w:before="240" w:lineRule="auto"/>
             <w:ind w:hanging="360" w:left="600"/>
         </w:pPr>
         <w:r>
             <w:rPr>
+                <w:rFonts w:cs="Times New Roman" w:eastAsia="Calibri"/>
+                <w:color w:val="00000A"/>
                 <w:sz w:val="18"/>
+                <w:szCs w:val="18"/>
             </w:rPr>
-            <w:t xml:space="preserve">with list</w:t>
+            <w:t>with list</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -10321,7 +10528,7 @@ list with aside block
             <w:rPr>
                 <w:sz w:val="18"/>
             </w:rPr>
-            <w:t xml:space="preserve">text</w:t>
+            <w:t>text</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -10329,27 +10536,31 @@ list with aside block
             <w:pStyle w:val="AsideBlock"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">text</w:t>
+            <w:t>text</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="ParagraphTextBody"/>
+            <w:pStyle w:val="ListBullet"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
                 <w:numId w:val="1"/>
             </w:numPr>
             <w:pBdr>
                 <w:left w:color="3366FF" w:frame="true" w:shadow="true"
-                    w:space="9" w:sz="16" w:val="single"/>
+                    w:space="27" w:sz="16" w:val="single"/>
             </w:pBdr>
-            <w:ind w:hanging="360" w:left="600"/>
+            <w:spacing w:after="120" w:before="240" w:line="300" w:lineRule="auto"/>
+            <w:ind w:hanging="360" w:left="960"/>
         </w:pPr>
         <w:r>
             <w:rPr>
+                <w:rFonts w:cs="Times New Roman" w:eastAsia="Calibri"/>
+                <w:color w:val="00000A"/>
                 <w:sz w:val="18"/>
+                <w:szCs w:val="18"/>
             </w:rPr>
-            <w:t xml:space="preserve">with list</w:t>
+            <w:t>with list</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -10357,7 +10568,7 @@ list with aside block
             <w:pStyle w:val="ParagraphTextBody"/>
             <w:pBdr>
                 <w:left w:color="3366FF" w:frame="true" w:shadow="true"
-                    w:space="27" w:sz="16" w:val="single"/>
+                    w:space="9" w:sz="16" w:val="single"/>
             </w:pBdr>
             <w:ind w:left="600"/>
         </w:pPr>
@@ -10365,7 +10576,7 @@ list with aside block
             <w:rPr>
                 <w:sz w:val="18"/>
             </w:rPr>
-            <w:t xml:space="preserve">text</w:t>
+            <w:t>text</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -10380,7 +10591,7 @@ list with aside block
             <w:ind w:left="840"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">aside block</w:t>
+            <w:t>aside block</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -10397,26 +10608,28 @@ list with aside block
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListNumber"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
                 <w:numId w:val="42"/>
             </w:numPr>
+            <w:spacing w:after="0" w:line="288" w:lineRule="auto"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">ordered list</w:t>
+            <w:t>ordered list</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="ParagraphTextBody"/>
+            <w:pStyle w:val="ListBullet"/>
             <w:numPr>
                 <w:ilvl w:val="1"/>
                 <w:numId w:val="1"/>
             </w:numPr>
+            <w:spacing w:after="120" w:before="240" w:line="300" w:lineRule="auto"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">bullet list</w:t>
+            <w:t>bullet list</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -10431,7 +10644,7 @@ list with aside block
             <w:ind w:left="960"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">with aside block</w:t>
+            <w:t>with aside block</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -10440,12 +10653,12 @@ list with aside block
             <w:ind w:left="960"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">text</w:t>
+            <w:t>text</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="ParagraphTextBody"/>
+            <w:pStyle w:val="ListNumber"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
                 <w:numId w:val="43"/>
@@ -10454,13 +10667,17 @@ list with aside block
                 <w:left w:color="3366FF" w:frame="true" w:shadow="true"
                     w:space="9" w:sz="16" w:val="single"/>
             </w:pBdr>
+            <w:spacing w:before="240" w:lineRule="auto"/>
             <w:ind w:hanging="360" w:left="1320"/>
         </w:pPr>
         <w:r>
             <w:rPr>
+                <w:rFonts w:cs="Times New Roman" w:eastAsia="Calibri"/>
+                <w:color w:val="00000A"/>
                 <w:sz w:val="18"/>
+                <w:szCs w:val="18"/>
             </w:rPr>
-            <w:t xml:space="preserve">with list</w:t>
+            <w:t>with list</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -10476,7 +10693,7 @@ list with aside block
             <w:rPr>
                 <w:sz w:val="18"/>
             </w:rPr>
-            <w:t xml:space="preserve">list child text</w:t>
+            <w:t>list child text</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -10485,27 +10702,31 @@ list with aside block
             <w:ind w:left="960"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">text</w:t>
+            <w:t>text</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="ParagraphTextBody"/>
+            <w:pStyle w:val="ListBullet"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
                 <w:numId w:val="1"/>
             </w:numPr>
             <w:pBdr>
                 <w:left w:color="3366FF" w:frame="true" w:shadow="true"
-                    w:space="9" w:sz="16" w:val="single"/>
+                    w:space="27" w:sz="16" w:val="single"/>
             </w:pBdr>
-            <w:ind w:hanging="360" w:left="1320"/>
+            <w:spacing w:after="120" w:before="240" w:line="300" w:lineRule="auto"/>
+            <w:ind w:hanging="360" w:left="1680"/>
         </w:pPr>
         <w:r>
             <w:rPr>
+                <w:rFonts w:cs="Times New Roman" w:eastAsia="Calibri"/>
+                <w:color w:val="00000A"/>
                 <w:sz w:val="18"/>
+                <w:szCs w:val="18"/>
             </w:rPr>
-            <w:t xml:space="preserve">with list</w:t>
+            <w:t>with list</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -10513,7 +10734,7 @@ list with aside block
             <w:pStyle w:val="ParagraphTextBody"/>
             <w:pBdr>
                 <w:left w:color="3366FF" w:frame="true" w:shadow="true"
-                    w:space="27" w:sz="16" w:val="single"/>
+                    w:space="9" w:sz="16" w:val="single"/>
             </w:pBdr>
             <w:ind w:left="1320"/>
         </w:pPr>
@@ -10521,7 +10742,7 @@ list with aside block
             <w:rPr>
                 <w:sz w:val="18"/>
             </w:rPr>
-            <w:t xml:space="preserve">list child text</w:t>
+            <w:t>list child text</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -10536,7 +10757,7 @@ list with aside block
             <w:ind w:left="1560"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">last aside block</w:t>
+            <w:t>last aside block</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -10599,26 +10820,28 @@ list with aside block
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListNumber"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
                 <w:numId w:val="41"/>
             </w:numPr>
+            <w:spacing w:after="0" w:line="288" w:lineRule="auto"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">ordered list</w:t>
+            <w:t>ordered list</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListBullet"/>
             <w:numPr>
                 <w:ilvl w:val="1"/>
                 <w:numId w:val="1"/>
             </w:numPr>
+            <w:spacing w:after="0" w:line="288" w:lineRule="auto"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">bullet list</w:t>
+            <w:t>bullet list</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -10633,12 +10856,12 @@ list with aside block
             <w:ind w:left="960"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">with aside block</w:t>
+            <w:t>with aside block</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListNumber"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
                 <w:numId w:val="42"/>
@@ -10647,13 +10870,17 @@ list with aside block
                 <w:left w:color="3366FF" w:frame="true" w:shadow="true"
                     w:space="9" w:sz="16" w:val="single"/>
             </w:pBdr>
+            <w:spacing w:after="0" w:line="288" w:lineRule="auto"/>
             <w:ind w:hanging="360" w:left="1320"/>
         </w:pPr>
         <w:r>
             <w:rPr>
+                <w:rFonts w:cs="Times New Roman" w:eastAsia="Calibri"/>
+                <w:color w:val="00000A"/>
                 <w:sz w:val="18"/>
+                <w:szCs w:val="18"/>
             </w:rPr>
-            <w:t xml:space="preserve">with list</w:t>
+            <w:t>with list</w:t>
         </w:r>
     </w:p>
     <w:tbl>
@@ -10695,7 +10922,7 @@ list with aside block
                             <w:rFonts w:cs="Tms Rmn" w:eastAsia="Times New Roman"/>
                             <w:sz w:val="21"/>
                         </w:rPr>
-                        <w:t xml:space="preserve">Simple Table</w:t>
+                        <w:t>Simple Table</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -10709,7 +10936,7 @@ list with aside block
                         <w:pStyle w:val="TableContents"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">Data</w:t>
+                        <w:t>Data</w:t>
                     </w:r>
                 </w:p>
             </w:tc>

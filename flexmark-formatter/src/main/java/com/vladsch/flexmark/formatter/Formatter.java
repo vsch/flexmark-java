@@ -24,6 +24,7 @@ import com.vladsch.flexmark.util.html.Attributes;
 import com.vladsch.flexmark.util.html.LineFormattingAppendable;
 import com.vladsch.flexmark.util.mappers.CharWidthProvider;
 
+import javax.print.Doc;
 import java.util.*;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -95,7 +96,9 @@ public class Formatter implements IRender {
 
     // used for translation phases of rendering
     public static final DataKey<String> TRANSLATION_ID_FORMAT = new DataKey<>("TRANSLATION_ID_FORMAT", "_%d_");
-    public static final DataKey<String> TRANSLATION_HTML_BLOCK_PREFIX = new DataKey<>("TRANSLATION_HTML_BLOCK_PREFIX", "_");
+    public static final DataKey<String> TRANSLATION_HTML_BLOCK_PREFIX = new DataKey<>("TRANSLATION_HTML_BLOCK_PREFIX", "__");
+    public static final DataKey<String> TRANSLATION_HTML_INLINE_PREFIX = new DataKey<>("TRANSLATION_HTML_INLINE_PREFIX", "_");
+    public static final DataKey<String> TRANSLATION_AUTOLINK_PREFIX = new DataKey<>("TRANSLATION_AUTOLINK_PREFIX", "___");
     public static final DataKey<String> TRANSLATION_EXCLUDE_PATTERN = new DataKey<>("TRANSLATION_EXCLUDE_PATTERN", "^[^\\p{IsAlphabetic}]*$");
     public static final DataKey<String> TRANSLATION_HTML_BLOCK_TAG_PATTERN = Parser.TRANSLATION_HTML_BLOCK_TAG_PATTERN;
     public static final DataKey<String> TRANSLATION_HTML_INLINE_TAG_PATTERN = Parser.TRANSLATION_HTML_INLINE_TAG_PATTERN;
@@ -104,12 +107,11 @@ public class Formatter implements IRender {
     public static final DataKey<Boolean> KEEP_SOFT_LINE_BREAKS = new DataKey<>("KEEP_SOFT_LINE_BREAKS", true);
     public static final DataKey<Boolean> APPEND_TRANSFERRED_REFERENCES = new DataKey<>("APPEND_TRANSFERRED_REFERENCES", false);
 
-    private static final Document[] EMPTY_DOCUMENTS = new Document[0];
-
     // list of documents across which to uniquify the reference ids if translating
     public static final DataKey<String> DOC_RELATIVE_URL = new DataKey<>("DOC_RELATIVE_URL", "");
     public static final DataKey<String> DOC_ROOT_URL = new DataKey<>("DOC_ROOT_URL", "");
     public static final DataKey<Boolean> DEFAULT_LINK_RESOLVER = new DataKey<>("DEFAULT_LINK_RESOLVER", false);
+    public static final Document[] EMPTY_DOCUMENTS = new Document[0];
 
     final FormatterOptions formatterOptions;
     private final DataHolder options;
@@ -302,6 +304,10 @@ public class Formatter implements IRender {
         mergeRender(documents, output, formatterOptions.maxTrailingBlankLines, idGeneratorFactory);
     }
 
+    public void mergeRender(List<Document> documents, Appendable output, HtmlIdGeneratorFactory idGeneratorFactory) {
+        mergeRender(documents.toArray(Formatter.EMPTY_DOCUMENTS), output, idGeneratorFactory);
+    }
+
     /**
      * Render the tree of nodes to markdown
      *
@@ -314,14 +320,23 @@ public class Formatter implements IRender {
         return sb.toString();
     }
 
+    public String mergeRender(List<Document> documents, int maxTrailingBlankLines, HtmlIdGeneratorFactory idGeneratorFactory) {
+        return mergeRender(documents.toArray(Formatter.EMPTY_DOCUMENTS), maxTrailingBlankLines, idGeneratorFactory);
+    }
+
     /**
      * Render a node to the appendable
      *
      * @param documents nodes to merge render
      * @param output    appendable to use for the output
      */
+    public void mergeRender(List<Document> documents, Appendable output, int maxTrailingBlankLines, HtmlIdGeneratorFactory idGeneratorFactory) {
+        mergeRender(documents.toArray(Formatter.EMPTY_DOCUMENTS), output, maxTrailingBlankLines, idGeneratorFactory);
+    }
+
     public void mergeRender(Document[] documents, Appendable output, int maxTrailingBlankLines, HtmlIdGeneratorFactory idGeneratorFactory) {
         MutableDataSet mergeOptions = new MutableDataSet(options);
+        mergeOptions.set(Parser.HTML_FOR_TRANSLATOR, true);
 
         TranslationHandler[] translationHandlers = new TranslationHandler[documents.length];
         List<String>[] translationHandlersTexts = new List[documents.length];
@@ -355,7 +370,7 @@ public class Formatter implements IRender {
             StringBuilder sb = new StringBuilder();
             renderer.flushTo(sb, maxTrailingBlankLines);
 
-            translatedDocuments[index] = Parser.builder(options).build().parse(sb.toString());
+            translatedDocuments[index] = Parser.builder(mergeOptions).build().parse(sb.toString());
         });
 
         mergeContext.setDocuments(translatedDocuments);
@@ -365,8 +380,10 @@ public class Formatter implements IRender {
 
             translationHandler.setRenderPurpose(RenderPurpose.TRANSLATED);
 
-            MainNodeFormatter renderer = new MainNodeFormatter(mergeOptions, new MarkdownWriter(formatterOptions.formatFlags), document, translationHandler);
+            MarkdownWriter markdownWriter = new MarkdownWriter(formatterOptions.formatFlags);
+            MainNodeFormatter renderer = new MainNodeFormatter(mergeOptions, markdownWriter, document, translationHandler);
             renderer.render(document);
+            markdownWriter.blankLine();
             renderer.flushTo(output, maxTrailingBlankLines);
         });
     }
@@ -490,12 +507,7 @@ public class Formatter implements IRender {
         }
     };
 
-    final public static Iterable<? extends Node> NULL_ITERABLE = new Iterable<Node>() {
-        @Override
-        public Iterator<Node> iterator() {
-            return null;
-        }
-    };
+    final public static Iterable<? extends Node> NULL_ITERABLE = (Iterable<Node>) () -> null;
 
     private class MainNodeFormatter extends NodeFormatterSubContext {
         private final Document document;

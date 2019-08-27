@@ -18,7 +18,6 @@ public class MergeFootnotesTest {
             //.set(Parser.EXTENSIONS, Collections.singleton(FormatterExtension.create()))
             .set(Parser.EXTENSIONS, Arrays.asList(FootnoteExtension.create()))
             .set(Parser.BLANK_LINES_IN_AST, true)
-            .set(Parser.HTML_FOR_TRANSLATOR, true)
             .set(Parser.PARSE_INNER_HTML_COMMENTS, true)
             .set(Parser.HEADING_NO_ATX_SPACE, true)
             .set(Formatter.MAX_TRAILING_BLANK_LINES, 0);

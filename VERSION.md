@@ -107,16 +107,30 @@ flexmark-java
 0.50.30
 -------
 
-* Add: `DocxRenderer`
-  * page break via empty paragraph with only `{.pagebreak}` attributes
-  * tab via `{.tab}` attributes
-  * inline image alignment with `{align=}`:
+* Fix: `DocxRenderer`
+  * Add: page break via empty paragraph with only `{.pagebreak}` attributes
+  * Add: tab via `{.tab}` attributes
+  * Add: inline image alignment with `{align=}`:
     * `left` - left align, wrap text to right
     * `right` - right align, wrap text to left
     * `center` - center align, wrap text to left and right
     * else no wrapping around image
-  * add handling of `font-size` attribute, expects float of font size in pt, rounds to nearest
+  * Add: handling of `font-size` attribute, expects float of font size in pt, rounds to nearest
     1/2 pt
+  * Add: image size attribute handling for `in` and `cm` for inch and cm dimensions.
+  * Fix: if image size only given for one dimension, compute the other preserving aspect ratio
+  * Fix: change default emoji size to 0.9 of line height
+  * Fix: remove `<>` wrapper from URL target
+  * Fix: lists to set style id to `DocxRenderer.PARAGRAPH_BULLET_LIST_STYLE` for unordered lists
+    and `DocxRenderer.PARAGRAPH_NUMBERED_LIST_STYLE` for ordered lists, while still using
+    `DocxRenderer.BULLET_LIST_STYLE` and `DocxRenderer.NUMBERED_LIST_STYLE` for the numbering
+    style. Tight/loose is now uses paragraph settings from `DocxRenderer.TIGHT_PARAGRAPH_STYLE`
+    and `DocxRenderer.LOOSE_PARAGRAPH_STYLE` respectively as mods on list style.
+  * Fix: start image ids at 100000 to avoid id conflicts with images already in the document
+    being added. For example in footers/headers.
+  * Fix: for R tags, only add space="preserve" if contained text starts or ends with a space.
+    Does not affect result but reduces xml noise.
+* Fix: `Formatter` translation and merge rendering
 
 0.50.28
 -------

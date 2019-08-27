@@ -37,19 +37,19 @@ Issue #176, docx-converter pandoc emulation mode
             </w:numPr>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">header</w:t>
+            <w:t>header</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListNumber"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
                 <w:numId w:val="4"/>
             </w:numPr>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">List item started from 1</w:t>
+            <w:t>List item started from 1</w:t>
         </w:r>
     </w:p>
     <w:bookmarkStart w:id="2" w:name="header-1"/>
@@ -63,31 +63,31 @@ Issue #176, docx-converter pandoc emulation mode
             </w:numPr>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">header</w:t>
+            <w:t>header</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListNumber"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
                 <w:numId w:val="5"/>
             </w:numPr>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">List item started from 1</w:t>
+            <w:t>List item started from 1</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListNumber"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
                 <w:numId w:val="5"/>
             </w:numPr>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">List item continued 2</w:t>
+            <w:t>List item continued 2</w:t>
         </w:r>
     </w:p>
     <w:bookmarkStart w:id="3" w:name="test"/>
@@ -101,19 +101,19 @@ Issue #176, docx-converter pandoc emulation mode
             </w:numPr>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">test</w:t>
+            <w:t>test</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListNumber"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
                 <w:numId w:val="6"/>
             </w:numPr>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">List item started from 1</w:t>
+            <w:t>List item started from 1</w:t>
         </w:r>
     </w:p>
 </w:body>
@@ -181,7 +181,7 @@ Footnote [^1]
                 <w:rPr>
                     <w:rStyle w:val="Hyperlink"/>
                 </w:rPr>
-                <w:t xml:space="preserve">www.example</w:t>
+                <w:t>www.example</w:t>
             </w:r>
         </w:hyperlink>
     </w:p>
@@ -250,7 +250,7 @@ Footnote [^1]
                 <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
                     <wp:extent cx="609600" cy="609600"/>
                     <wp:effectExtent b="0" l="0" r="0" t="0"/>
-                    <wp:docPr descr="flexmark-icon-logo" id="0" name="Image1"/>
+                    <wp:docPr descr="flexmark-icon-logo" id="100000" name="Image100000"/>
                     <wp:cNvGraphicFramePr>
                         <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
                     </wp:cNvGraphicFramePr>
@@ -258,7 +258,7 @@ Footnote [^1]
                         <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
                             <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
                                 <pic:nvPicPr>
-                                    <pic:cNvPr id="1" name="Image1"/>
+                                    <pic:cNvPr id="100001" name="Image100000"/>
                                     <pic:cNvPicPr/>
                                 </pic:nvPicPr>
                                 <pic:blipFill>
@@ -344,7 +344,7 @@ Footnote **[^1]**
             <w:t xml:space="preserve">→</w:t>
         </w:r>
         <w:r>
-            <w:t xml:space="preserve">Should be plain text</w:t>
+            <w:t>Should be plain text</w:t>
         </w:r>
     </w:p>
 </w:footnote>
@@ -533,7 +533,7 @@ Aside Block Numbered List
             </w:numPr>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">Markdown to DOCX Empty Document  Template</w:t>
+            <w:t>Markdown to DOCX Empty Document  Template</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -541,7 +541,7 @@ Aside Block Numbered List
             <w:pStyle w:val="ParagraphTextBody"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">This document is used to generate an empty document template for the docx conversion.</w:t>
+            <w:t>This document is used to generate an empty document template for the docx conversion.</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -549,13 +549,13 @@ Aside Block Numbered List
             <w:pStyle w:val="ParagraphTextBody"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">The page content is ignored and only used to show/modify all the styles used by the markdown</w:t>
+            <w:t>The page content is ignored and only used to show/modify all the styles used by the markdown</w:t>
         </w:r>
         <w:r>
             <w:t xml:space="preserve"> </w:t>
         </w:r>
         <w:r>
-            <w:t xml:space="preserve">conversion process.</w:t>
+            <w:t>conversion process.</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -566,7 +566,7 @@ Aside Block Numbered List
             <w:rPr>
                 <w:rStyle w:val="StrongEmphasis"/>
             </w:rPr>
-            <w:t xml:space="preserve">DO NOT CHANGE PAGE CONTENT IN THIS DOCUMENT</w:t>
+            <w:t>DO NOT CHANGE PAGE CONTENT IN THIS DOCUMENT</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -577,37 +577,37 @@ Aside Block Numbered List
             <w:rPr>
                 <w:rStyle w:val="StrongEmphasis"/>
             </w:rPr>
-            <w:t xml:space="preserve">Changes you can make that will be used to generate DOCX from markdown:</w:t>
+            <w:t>Changes you can make that will be used to generate DOCX from markdown:</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListNumber"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
                 <w:numId w:val="4"/>
             </w:numPr>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">All styles inherit from docx style "Normal" you should first adjust the font family and font</w:t>
+            <w:t>All styles inherit from docx style "Normal" you should first adjust the font family and font</w:t>
         </w:r>
         <w:r>
             <w:t xml:space="preserve"> </w:t>
         </w:r>
         <w:r>
-            <w:t xml:space="preserve">size of this style, if desired.</w:t>
+            <w:t>size of this style, if desired.</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListNumber"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
                 <w:numId w:val="4"/>
             </w:numPr>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">You may have two "Heading" styles. Open Format/Styles and delete one of the duplicates. Keep</w:t>
+            <w:t>You may have two "Heading" styles. Open Format/Styles and delete one of the duplicates. Keep</w:t>
         </w:r>
         <w:r>
             <w:t xml:space="preserve"> </w:t>
@@ -619,7 +619,7 @@ Aside Block Numbered List
             <w:rPr>
                 <w:rStyle w:val="StrongEmphasis"/>
             </w:rPr>
-            <w:t xml:space="preserve">NOTE:</w:t>
+            <w:t>NOTE:</w:t>
         </w:r>
         <w:r>
             <w:t xml:space="preserve"> even if the headings in this</w:t>
@@ -628,36 +628,36 @@ Aside Block Numbered List
             <w:t xml:space="preserve"> </w:t>
         </w:r>
         <w:r>
-            <w:t xml:space="preserve">document look good, with a duplicate "Heading" style there is guarantee which one will be</w:t>
+            <w:t>document look good, with a duplicate "Heading" style there is guarantee which one will be</w:t>
         </w:r>
         <w:r>
             <w:t xml:space="preserve"> </w:t>
         </w:r>
         <w:r>
-            <w:t xml:space="preserve">used when documents are generated from this template.</w:t>
+            <w:t>used when documents are generated from this template.</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListNumber"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
                 <w:numId w:val="4"/>
             </w:numPr>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">All Heading... styles inherit from docx style "Heading", to change the heading font you</w:t>
+            <w:t>All Heading... styles inherit from docx style "Heading", to change the heading font you</w:t>
         </w:r>
         <w:r>
             <w:t xml:space="preserve"> </w:t>
         </w:r>
         <w:r>
-            <w:t xml:space="preserve">should change this style.</w:t>
+            <w:t>should change this style.</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListNumber"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
                 <w:numId w:val="4"/>
@@ -670,7 +670,7 @@ Aside Block Numbered List
             <w:rPr>
                 <w:rStyle w:val="SourceText"/>
             </w:rPr>
-            <w:t xml:space="preserve">docx style "..."</w:t>
+            <w:t>docx style "..."</w:t>
         </w:r>
         <w:r>
             <w:t xml:space="preserve"> do not yet change</w:t>
@@ -679,85 +679,85 @@ Aside Block Numbered List
             <w:t xml:space="preserve"> </w:t>
         </w:r>
         <w:r>
-            <w:t xml:space="preserve">the text.</w:t>
+            <w:t>the text.</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListNumber"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
                 <w:numId w:val="4"/>
             </w:numPr>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">Change page footer/header text and formatting, as you like. They are used as is in the</w:t>
+            <w:t>Change page footer/header text and formatting, as you like. They are used as is in the</w:t>
         </w:r>
         <w:r>
             <w:t xml:space="preserve"> </w:t>
         </w:r>
         <w:r>
-            <w:t xml:space="preserve">conversion process. Make sure you have at least 3 pages so you can see styles for first page,</w:t>
+            <w:t>conversion process. Make sure you have at least 3 pages so you can see styles for first page,</w:t>
         </w:r>
         <w:r>
             <w:t xml:space="preserve"> </w:t>
         </w:r>
         <w:r>
-            <w:t xml:space="preserve">even page and odd page.</w:t>
+            <w:t>even page and odd page.</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListNumber"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
                 <w:numId w:val="4"/>
             </w:numPr>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">When done changing styles and headers/footers, delete any document page content you don't</w:t>
+            <w:t>When done changing styles and headers/footers, delete any document page content you don't</w:t>
         </w:r>
         <w:r>
             <w:t xml:space="preserve"> </w:t>
         </w:r>
         <w:r>
-            <w:t xml:space="preserve">want to be included in every conversion. You can do select all and delete if all the content</w:t>
+            <w:t>want to be included in every conversion. You can do select all and delete if all the content</w:t>
         </w:r>
         <w:r>
             <w:t xml:space="preserve"> </w:t>
         </w:r>
         <w:r>
-            <w:t xml:space="preserve">will come from markdown.</w:t>
+            <w:t>will come from markdown.</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListNumber"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
                 <w:numId w:val="4"/>
             </w:numPr>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">Save it under the name you wish to use as the empty document template for conversion.</w:t>
+            <w:t>Save it under the name you wish to use as the empty document template for conversion.</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListNumber"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
                 <w:numId w:val="4"/>
             </w:numPr>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">You can make changes to styles directly in the saved document but if you deleted the text</w:t>
+            <w:t>You can make changes to styles directly in the saved document but if you deleted the text</w:t>
         </w:r>
         <w:r>
             <w:t xml:space="preserve"> </w:t>
         </w:r>
         <w:r>
-            <w:t xml:space="preserve">with these styles, you will not be able to preview the results.</w:t>
+            <w:t>with these styles, you will not be able to preview the results.</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -765,13 +765,13 @@ Aside Block Numbered List
             <w:pStyle w:val="ParagraphTextBody"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">The following document content can be used to preview changes to formatting styles and make</w:t>
+            <w:t>The following document content can be used to preview changes to formatting styles and make</w:t>
         </w:r>
         <w:r>
             <w:t xml:space="preserve"> </w:t>
         </w:r>
         <w:r>
-            <w:t xml:space="preserve">changes to them.</w:t>
+            <w:t>changes to them.</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -788,7 +788,7 @@ Aside Block Numbered List
             <w:rPr>
                 <w:rStyle w:val="StrongEmphasis"/>
             </w:rPr>
-            <w:t xml:space="preserve">Heading Styles</w:t>
+            <w:t>Heading Styles</w:t>
         </w:r>
     </w:p>
     <w:bookmarkStart w:id="2" w:name="heading-1-docx-style-heading-1"/>
@@ -802,7 +802,7 @@ Aside Block Numbered List
             </w:numPr>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">Heading 1 docx style "Heading 1"</w:t>
+            <w:t>Heading 1 docx style "Heading 1"</w:t>
         </w:r>
     </w:p>
     <w:bookmarkStart w:id="3" w:name="heading-2-docx-style-heading-2"/>
@@ -816,7 +816,7 @@ Aside Block Numbered List
             </w:numPr>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">Heading 2 docx style "Heading 2"</w:t>
+            <w:t>Heading 2 docx style "Heading 2"</w:t>
         </w:r>
     </w:p>
     <w:bookmarkStart w:id="4" w:name="heading-3-docx-style-heading-3"/>
@@ -830,7 +830,7 @@ Aside Block Numbered List
             </w:numPr>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">Heading 3 docx style "Heading 3"</w:t>
+            <w:t>Heading 3 docx style "Heading 3"</w:t>
         </w:r>
     </w:p>
     <w:bookmarkStart w:id="5" w:name="heading-4-docx-style-heading-4"/>
@@ -844,7 +844,7 @@ Aside Block Numbered List
             </w:numPr>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">Heading 4 docx style "Heading 4"</w:t>
+            <w:t>Heading 4 docx style "Heading 4"</w:t>
         </w:r>
     </w:p>
     <w:bookmarkStart w:id="6" w:name="heading-5-docx-style-heading-5"/>
@@ -858,7 +858,7 @@ Aside Block Numbered List
             </w:numPr>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">Heading 5 docx style "Heading 5"</w:t>
+            <w:t>Heading 5 docx style "Heading 5"</w:t>
         </w:r>
     </w:p>
     <w:bookmarkStart w:id="7" w:name="heading-6-docx-style-heading-6"/>
@@ -872,7 +872,7 @@ Aside Block Numbered List
             </w:numPr>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">Heading 6 docx style "Heading 6"</w:t>
+            <w:t>Heading 6 docx style "Heading 6"</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -889,7 +889,7 @@ Aside Block Numbered List
             <w:rPr>
                 <w:rStyle w:val="StrongEmphasis"/>
             </w:rPr>
-            <w:t xml:space="preserve">Horizontal Line Style</w:t>
+            <w:t>Horizontal Line Style</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -897,7 +897,7 @@ Aside Block Numbered List
             <w:pStyle w:val="ParagraphTextBody"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">HORIZONTAL_LINE_STYLE docx style named "Horizontal Line" generates the following horizontal rule</w:t>
+            <w:t>HORIZONTAL_LINE_STYLE docx style named "Horizontal Line" generates the following horizontal rule</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -914,7 +914,7 @@ Aside Block Numbered List
             <w:rPr>
                 <w:rStyle w:val="StrongEmphasis"/>
             </w:rPr>
-            <w:t xml:space="preserve">Paragraph Styles</w:t>
+            <w:t>Paragraph Styles</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -922,69 +922,71 @@ Aside Block Numbered List
             <w:pStyle w:val="ParagraphTextBody"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">LOOSE_PARAGRAPH_STYLE docx style named "Paragraph Text Body" is used for text and loosely spaced</w:t>
+            <w:t>LOOSE_PARAGRAPH_STYLE docx style named "Paragraph Text Body" is used for text and loosely spaced</w:t>
         </w:r>
         <w:r>
             <w:t xml:space="preserve"> </w:t>
         </w:r>
         <w:r>
-            <w:t xml:space="preserve">list item content</w:t>
+            <w:t>list item content</w:t>
+        </w:r>
+    </w:p>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="ListBullet"/>
+            <w:numPr>
+                <w:ilvl w:val="0"/>
+                <w:numId w:val="2"/>
+            </w:numPr>
+            <w:spacing w:after="120" w:before="240" w:lineRule="auto"/>
+        </w:pPr>
+        <w:r>
+            <w:t>loose list item</w:t>
+        </w:r>
+    </w:p>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="ListBullet"/>
+            <w:numPr>
+                <w:ilvl w:val="0"/>
+                <w:numId w:val="2"/>
+            </w:numPr>
+            <w:spacing w:after="120" w:before="240" w:lineRule="auto"/>
+        </w:pPr>
+        <w:r>
+            <w:t>loose list item</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
             <w:pStyle w:val="ParagraphTextBody"/>
+        </w:pPr>
+        <w:r>
+            <w:t>TIGHT_PARAGRAPH_STYLE docx style named "Body Text" is used for tightly spaced list item content</w:t>
+        </w:r>
+    </w:p>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="ListBullet"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
                 <w:numId w:val="2"/>
             </w:numPr>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">loose list item</w:t>
+            <w:t>tight list item</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="ParagraphTextBody"/>
+            <w:pStyle w:val="ListBullet"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
                 <w:numId w:val="2"/>
             </w:numPr>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">loose list item</w:t>
-        </w:r>
-    </w:p>
-    <w:p>
-        <w:pPr>
-            <w:pStyle w:val="ParagraphTextBody"/>
-        </w:pPr>
-        <w:r>
-            <w:t xml:space="preserve">TIGHT_PARAGRAPH_STYLE docx style named "Body Text" is used for tightly spaced list item content</w:t>
-        </w:r>
-    </w:p>
-    <w:p>
-        <w:pPr>
-            <w:pStyle w:val="BodyText"/>
-            <w:numPr>
-                <w:ilvl w:val="0"/>
-                <w:numId w:val="2"/>
-            </w:numPr>
-        </w:pPr>
-        <w:r>
-            <w:t xml:space="preserve">tight list item</w:t>
-        </w:r>
-    </w:p>
-    <w:p>
-        <w:pPr>
-            <w:pStyle w:val="BodyText"/>
-            <w:numPr>
-                <w:ilvl w:val="0"/>
-                <w:numId w:val="2"/>
-            </w:numPr>
-        </w:pPr>
-        <w:r>
-            <w:t xml:space="preserve">tight list item</w:t>
+            <w:t>tight list item</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -998,7 +1000,7 @@ Aside Block Numbered List
             <w:pStyle w:val="Quotations"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">BLOCK_QUOTE_STYLE docx style named "Quotations" is used for block quotes</w:t>
+            <w:t>BLOCK_QUOTE_STYLE docx style named "Quotations" is used for block quotes</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -1018,7 +1020,7 @@ Aside Block Numbered List
             <w:pStyle w:val="AsideBlock"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">ASIDE_BLOCK_STYLE docx style named "AsideBlock" is used for aside blocks</w:t>
+            <w:t>ASIDE_BLOCK_STYLE docx style named "AsideBlock" is used for aside blocks</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -1039,7 +1041,7 @@ Aside Block Numbered List
             <w:spacing w:after="0" w:before="0"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">PREFORMATTED_TEXT_STYLE docx style named "Preformatted Text" used for code fence and indented code</w:t>
+            <w:t>PREFORMATTED_TEXT_STYLE docx style named "Preformatted Text" used for code fence and indented code</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -1062,12 +1064,12 @@ Aside Block Numbered List
             <w:rPr>
                 <w:rStyle w:val="StrongEmphasis"/>
             </w:rPr>
-            <w:t xml:space="preserve">Character styles used in text formatting:</w:t>
+            <w:t>Character styles used in text formatting:</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListBullet"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
                 <w:numId w:val="2"/>
@@ -1080,7 +1082,7 @@ Aside Block Numbered List
             <w:rPr>
                 <w:rStyle w:val="StrongEmphasis"/>
             </w:rPr>
-            <w:t xml:space="preserve">sample</w:t>
+            <w:t>sample</w:t>
         </w:r>
         <w:r>
             <w:t xml:space="preserve"> plain</w:t>
@@ -1088,7 +1090,7 @@ Aside Block Numbered List
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListBullet"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
                 <w:numId w:val="2"/>
@@ -1101,7 +1103,7 @@ Aside Block Numbered List
             <w:rPr>
                 <w:rStyle w:val="Emphasis"/>
             </w:rPr>
-            <w:t xml:space="preserve">sample</w:t>
+            <w:t>sample</w:t>
         </w:r>
         <w:r>
             <w:t xml:space="preserve"> plain</w:t>
@@ -1109,7 +1111,7 @@ Aside Block Numbered List
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListBullet"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
                 <w:numId w:val="2"/>
@@ -1122,7 +1124,7 @@ Aside Block Numbered List
             <w:rPr>
                 <w:rStyle w:val="Strikethrough"/>
             </w:rPr>
-            <w:t xml:space="preserve">sample</w:t>
+            <w:t>sample</w:t>
         </w:r>
         <w:r>
             <w:t xml:space="preserve"> plain</w:t>
@@ -1130,7 +1132,7 @@ Aside Block Numbered List
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListBullet"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
                 <w:numId w:val="2"/>
@@ -1143,7 +1145,7 @@ Aside Block Numbered List
             <w:rPr>
                 <w:rStyle w:val="Subscript"/>
             </w:rPr>
-            <w:t xml:space="preserve">sample</w:t>
+            <w:t>sample</w:t>
         </w:r>
         <w:r>
             <w:t xml:space="preserve"> plain</w:t>
@@ -1151,7 +1153,7 @@ Aside Block Numbered List
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListBullet"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
                 <w:numId w:val="2"/>
@@ -1164,7 +1166,7 @@ Aside Block Numbered List
             <w:rPr>
                 <w:rStyle w:val="Superscript"/>
             </w:rPr>
-            <w:t xml:space="preserve">sample</w:t>
+            <w:t>sample</w:t>
         </w:r>
         <w:r>
             <w:t xml:space="preserve"> plain</w:t>
@@ -1172,7 +1174,7 @@ Aside Block Numbered List
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListBullet"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
                 <w:numId w:val="2"/>
@@ -1185,7 +1187,7 @@ Aside Block Numbered List
             <w:rPr>
                 <w:rStyle w:val="Underlined"/>
             </w:rPr>
-            <w:t xml:space="preserve">sample</w:t>
+            <w:t>sample</w:t>
         </w:r>
         <w:r>
             <w:t xml:space="preserve"> plain</w:t>
@@ -1193,7 +1195,7 @@ Aside Block Numbered List
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListBullet"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
                 <w:numId w:val="2"/>
@@ -1206,7 +1208,7 @@ Aside Block Numbered List
             <w:rPr>
                 <w:rStyle w:val="SourceText"/>
             </w:rPr>
-            <w:t xml:space="preserve">sample</w:t>
+            <w:t>sample</w:t>
         </w:r>
         <w:r>
             <w:t xml:space="preserve"> plain</w:t>
@@ -1214,7 +1216,7 @@ Aside Block Numbered List
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListBullet"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
                 <w:numId w:val="2"/>
@@ -1228,7 +1230,7 @@ Aside Block Numbered List
                 <w:rPr>
                     <w:rStyle w:val="Hyperlink"/>
                 </w:rPr>
-                <w:t xml:space="preserve">sample</w:t>
+                <w:t>sample</w:t>
             </w:r>
         </w:hyperlink>
         <w:r>
@@ -1237,7 +1239,7 @@ Aside Block Numbered List
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListBullet"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
                 <w:numId w:val="2"/>
@@ -1270,7 +1272,7 @@ Aside Block Numbered List
             <w:rPr>
                 <w:rStyle w:val="StrongEmphasis"/>
             </w:rPr>
-            <w:t xml:space="preserve">Table Styles</w:t>
+            <w:t>Table Styles</w:t>
         </w:r>
     </w:p>
     <w:tbl>
@@ -1308,7 +1310,7 @@ Aside Block Numbered List
                         <w:pStyle w:val="TableHeading"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">TABLE_HEADING docx style named "Table Heading"</w:t>
+                        <w:t>TABLE_HEADING docx style named "Table Heading"</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -1321,7 +1323,7 @@ Aside Block Numbered List
                         <w:pStyle w:val="TableHeading"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">TABLE_HEADING</w:t>
+                        <w:t>TABLE_HEADING</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -1335,7 +1337,7 @@ Aside Block Numbered List
                         <w:pStyle w:val="TableContents"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">TABLE_CONTENTS docx style named "Table Contents"</w:t>
+                        <w:t>TABLE_CONTENTS docx style named "Table Contents"</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -1346,7 +1348,7 @@ Aside Block Numbered List
                         <w:pStyle w:val="TableContents"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">TABLE_CONTENTS</w:t>
+                        <w:t>TABLE_CONTENTS</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -1360,7 +1362,7 @@ Aside Block Numbered List
                         <w:pStyle w:val="TableContents"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">TABLE_CONTENTS</w:t>
+                        <w:t>TABLE_CONTENTS</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -1371,7 +1373,7 @@ Aside Block Numbered List
                         <w:pStyle w:val="TableContents"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">TABLE_CONTENTS</w:t>
+                        <w:t>TABLE_CONTENTS</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -1382,7 +1384,7 @@ Aside Block Numbered List
             <w:pStyle w:val="TableCaption"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">TABLE_CAPTION docx style named "Table Caption"</w:t>
+            <w:t>TABLE_CAPTION docx style named "Table Caption"</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -1399,7 +1401,7 @@ Aside Block Numbered List
             <w:rPr>
                 <w:rStyle w:val="StrongEmphasis"/>
             </w:rPr>
-            <w:t xml:space="preserve">The following can only be used for previewing</w:t>
+            <w:t>The following can only be used for previewing</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -1413,7 +1415,7 @@ Aside Block Numbered List
             <w:rPr>
                 <w:rStyle w:val="SourceText"/>
             </w:rPr>
-            <w:t xml:space="preserve">empty.xml</w:t>
+            <w:t>empty.xml</w:t>
         </w:r>
         <w:r>
             <w:t xml:space="preserve"> </w:t>
@@ -1425,7 +1427,7 @@ Aside Block Numbered List
             <w:rPr>
                 <w:rStyle w:val="SourceText"/>
             </w:rPr>
-            <w:t xml:space="preserve">empty.md</w:t>
+            <w:t>empty.md</w:t>
         </w:r>
         <w:r>
             <w:t xml:space="preserve"> file to</w:t>
@@ -1434,7 +1436,7 @@ Aside Block Numbered List
             <w:t xml:space="preserve"> </w:t>
         </w:r>
         <w:r>
-            <w:t xml:space="preserve">generate this docx starter template.</w:t>
+            <w:t>generate this docx starter template.</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -1442,115 +1444,115 @@ Aside Block Numbered List
             <w:pStyle w:val="ParagraphTextBody"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">Bullet list (default bullet list style)</w:t>
+            <w:t>Bullet list (default bullet list style)</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListBullet"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
                 <w:numId w:val="2"/>
             </w:numPr>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">Bullet Level 1</w:t>
+            <w:t>Bullet Level 1</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListBullet"/>
             <w:numPr>
                 <w:ilvl w:val="1"/>
                 <w:numId w:val="2"/>
             </w:numPr>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">Bullet Level 2</w:t>
+            <w:t>Bullet Level 2</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListBullet"/>
             <w:numPr>
                 <w:ilvl w:val="2"/>
                 <w:numId w:val="2"/>
             </w:numPr>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">Bullet Level 3</w:t>
+            <w:t>Bullet Level 3</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListBullet"/>
             <w:numPr>
                 <w:ilvl w:val="3"/>
                 <w:numId w:val="2"/>
             </w:numPr>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">Bullet Level 4</w:t>
+            <w:t>Bullet Level 4</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListBullet"/>
             <w:numPr>
                 <w:ilvl w:val="4"/>
                 <w:numId w:val="2"/>
             </w:numPr>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">Bullet Level 5</w:t>
+            <w:t>Bullet Level 5</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListBullet"/>
             <w:numPr>
                 <w:ilvl w:val="5"/>
                 <w:numId w:val="2"/>
             </w:numPr>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">Bullet Level 6</w:t>
+            <w:t>Bullet Level 6</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListBullet"/>
             <w:numPr>
                 <w:ilvl w:val="6"/>
                 <w:numId w:val="2"/>
             </w:numPr>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">Bullet Level 7</w:t>
+            <w:t>Bullet Level 7</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListBullet"/>
             <w:numPr>
                 <w:ilvl w:val="7"/>
                 <w:numId w:val="2"/>
             </w:numPr>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">Bullet Level 8</w:t>
+            <w:t>Bullet Level 8</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListBullet"/>
             <w:numPr>
                 <w:ilvl w:val="8"/>
                 <w:numId w:val="2"/>
             </w:numPr>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">Bullet Level 9</w:t>
+            <w:t>Bullet Level 9</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -1558,115 +1560,115 @@ Aside Block Numbered List
             <w:pStyle w:val="ParagraphTextBody"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">Numbered List (default numbered list style)</w:t>
+            <w:t>Numbered List (default numbered list style)</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListNumber"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
                 <w:numId w:val="5"/>
             </w:numPr>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">Numbered Level 1</w:t>
+            <w:t>Numbered Level 1</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListNumber"/>
             <w:numPr>
                 <w:ilvl w:val="1"/>
                 <w:numId w:val="6"/>
             </w:numPr>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">Numbered Level 2</w:t>
+            <w:t>Numbered Level 2</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListNumber"/>
             <w:numPr>
                 <w:ilvl w:val="2"/>
                 <w:numId w:val="7"/>
             </w:numPr>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">Numbered Level 3</w:t>
+            <w:t>Numbered Level 3</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListNumber"/>
             <w:numPr>
                 <w:ilvl w:val="3"/>
                 <w:numId w:val="8"/>
             </w:numPr>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">Numbered Level 4</w:t>
+            <w:t>Numbered Level 4</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListNumber"/>
             <w:numPr>
                 <w:ilvl w:val="4"/>
                 <w:numId w:val="9"/>
             </w:numPr>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">Numbered Level 5</w:t>
+            <w:t>Numbered Level 5</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListNumber"/>
             <w:numPr>
                 <w:ilvl w:val="5"/>
                 <w:numId w:val="10"/>
             </w:numPr>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">Numbered Level 6</w:t>
+            <w:t>Numbered Level 6</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListNumber"/>
             <w:numPr>
                 <w:ilvl w:val="6"/>
                 <w:numId w:val="11"/>
             </w:numPr>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">Numbered Level 7</w:t>
+            <w:t>Numbered Level 7</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListNumber"/>
             <w:numPr>
                 <w:ilvl w:val="7"/>
                 <w:numId w:val="12"/>
             </w:numPr>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">Numbered Level 8</w:t>
+            <w:t>Numbered Level 8</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListNumber"/>
             <w:numPr>
                 <w:ilvl w:val="8"/>
                 <w:numId w:val="13"/>
             </w:numPr>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">Numbered Level 9</w:t>
+            <w:t>Numbered Level 9</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -1674,7 +1676,7 @@ Aside Block Numbered List
             <w:pStyle w:val="ParagraphTextBody"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">Block Quoted Bullet list</w:t>
+            <w:t>Block Quoted Bullet list</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -1685,7 +1687,7 @@ Aside Block Numbered List
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListBullet"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
                 <w:numId w:val="2"/>
@@ -1700,12 +1702,12 @@ Aside Block Numbered List
             <w:rPr>
                 <w:color w:val="666666"/>
             </w:rPr>
-            <w:t xml:space="preserve">Bullet Level 1</w:t>
+            <w:t>Bullet Level 1</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListBullet"/>
             <w:numPr>
                 <w:ilvl w:val="1"/>
                 <w:numId w:val="2"/>
@@ -1720,12 +1722,12 @@ Aside Block Numbered List
             <w:rPr>
                 <w:color w:val="666666"/>
             </w:rPr>
-            <w:t xml:space="preserve">Bullet Level 2</w:t>
+            <w:t>Bullet Level 2</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListBullet"/>
             <w:numPr>
                 <w:ilvl w:val="2"/>
                 <w:numId w:val="2"/>
@@ -1740,12 +1742,12 @@ Aside Block Numbered List
             <w:rPr>
                 <w:color w:val="666666"/>
             </w:rPr>
-            <w:t xml:space="preserve">Bullet Level 3</w:t>
+            <w:t>Bullet Level 3</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListBullet"/>
             <w:numPr>
                 <w:ilvl w:val="3"/>
                 <w:numId w:val="2"/>
@@ -1760,7 +1762,7 @@ Aside Block Numbered List
             <w:rPr>
                 <w:color w:val="666666"/>
             </w:rPr>
-            <w:t xml:space="preserve">Bullet Level 4</w:t>
+            <w:t>Bullet Level 4</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -1774,7 +1776,7 @@ Aside Block Numbered List
             <w:pStyle w:val="ParagraphTextBody"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">Block Quoted Numbered List</w:t>
+            <w:t>Block Quoted Numbered List</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -1785,7 +1787,7 @@ Aside Block Numbered List
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListNumber"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
                 <w:numId w:val="14"/>
@@ -1800,12 +1802,12 @@ Aside Block Numbered List
             <w:rPr>
                 <w:color w:val="666666"/>
             </w:rPr>
-            <w:t xml:space="preserve">Numbered Level 1</w:t>
+            <w:t>Numbered Level 1</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListNumber"/>
             <w:numPr>
                 <w:ilvl w:val="1"/>
                 <w:numId w:val="15"/>
@@ -1820,12 +1822,12 @@ Aside Block Numbered List
             <w:rPr>
                 <w:color w:val="666666"/>
             </w:rPr>
-            <w:t xml:space="preserve">Numbered Level 2</w:t>
+            <w:t>Numbered Level 2</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListNumber"/>
             <w:numPr>
                 <w:ilvl w:val="2"/>
                 <w:numId w:val="16"/>
@@ -1840,12 +1842,12 @@ Aside Block Numbered List
             <w:rPr>
                 <w:color w:val="666666"/>
             </w:rPr>
-            <w:t xml:space="preserve">Numbered Level 3</w:t>
+            <w:t>Numbered Level 3</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListNumber"/>
             <w:numPr>
                 <w:ilvl w:val="3"/>
                 <w:numId w:val="17"/>
@@ -1860,7 +1862,7 @@ Aside Block Numbered List
             <w:rPr>
                 <w:color w:val="666666"/>
             </w:rPr>
-            <w:t xml:space="preserve">Numbered Level 4</w:t>
+            <w:t>Numbered Level 4</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -1874,7 +1876,7 @@ Aside Block Numbered List
             <w:pStyle w:val="ParagraphTextBody"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">Aside Block Bullet list</w:t>
+            <w:t>Aside Block Bullet list</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -1885,7 +1887,7 @@ Aside Block Numbered List
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListBullet"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
                 <w:numId w:val="2"/>
@@ -1897,12 +1899,12 @@ Aside Block Numbered List
             <w:ind w:hanging="227" w:left="467" w:right="0"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">Bullet Level 1</w:t>
+            <w:t>Bullet Level 1</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListBullet"/>
             <w:numPr>
                 <w:ilvl w:val="1"/>
                 <w:numId w:val="2"/>
@@ -1914,12 +1916,12 @@ Aside Block Numbered List
             <w:ind w:hanging="227" w:left="687" w:right="0"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">Bullet Level 2</w:t>
+            <w:t>Bullet Level 2</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListBullet"/>
             <w:numPr>
                 <w:ilvl w:val="2"/>
                 <w:numId w:val="2"/>
@@ -1931,12 +1933,12 @@ Aside Block Numbered List
             <w:ind w:hanging="227" w:left="907" w:right="0"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">Bullet Level 3</w:t>
+            <w:t>Bullet Level 3</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListBullet"/>
             <w:numPr>
                 <w:ilvl w:val="3"/>
                 <w:numId w:val="2"/>
@@ -1948,7 +1950,7 @@ Aside Block Numbered List
             <w:ind w:hanging="227" w:left="1147" w:right="0"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">Bullet Level 4</w:t>
+            <w:t>Bullet Level 4</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -1962,7 +1964,7 @@ Aside Block Numbered List
             <w:pStyle w:val="ParagraphTextBody"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">Aside Block Numbered List</w:t>
+            <w:t>Aside Block Numbered List</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -1973,7 +1975,7 @@ Aside Block Numbered List
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListNumber"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
                 <w:numId w:val="18"/>
@@ -1985,12 +1987,12 @@ Aside Block Numbered List
             <w:ind w:hanging="283" w:left="523" w:right="0"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">Numbered Level 1</w:t>
+            <w:t>Numbered Level 1</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListNumber"/>
             <w:numPr>
                 <w:ilvl w:val="1"/>
                 <w:numId w:val="19"/>
@@ -2002,12 +2004,12 @@ Aside Block Numbered List
             <w:ind w:hanging="283" w:left="803" w:right="0"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">Numbered Level 2</w:t>
+            <w:t>Numbered Level 2</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListNumber"/>
             <w:numPr>
                 <w:ilvl w:val="2"/>
                 <w:numId w:val="20"/>
@@ -2019,12 +2021,12 @@ Aside Block Numbered List
             <w:ind w:hanging="283" w:left="1083" w:right="0"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">Numbered Level 3</w:t>
+            <w:t>Numbered Level 3</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="BodyText"/>
+            <w:pStyle w:val="ListNumber"/>
             <w:numPr>
                 <w:ilvl w:val="3"/>
                 <w:numId w:val="21"/>
@@ -2036,7 +2038,7 @@ Aside Block Numbered List
             <w:ind w:hanging="283" w:left="1363" w:right="0"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">Numbered Level 4</w:t>
+            <w:t>Numbered Level 4</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -2075,7 +2077,7 @@ Aside Block Numbered List
             <w:t xml:space="preserve">→</w:t>
         </w:r>
         <w:r>
-            <w:t xml:space="preserve">FOOTNOTE_STYLE named "Footnote" Text Sample</w:t>
+            <w:t>FOOTNOTE_STYLE named "Footnote" Text Sample</w:t>
         </w:r>
     </w:p>
 </w:footnote>
@@ -2109,7 +2111,7 @@ Some text
             </w:numPr>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">Heading 1</w:t>
+            <w:t>Heading 1</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -2117,7 +2119,7 @@ Some text
             <w:pStyle w:val="ParagraphTextBody"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">Some text</w:t>
+            <w:t>Some text</w:t>
         </w:r>
     </w:p>
     <w:bookmarkStart w:id="2" w:name="heading-2"/>
@@ -2131,7 +2133,7 @@ Some text
             </w:numPr>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">Heading 2</w:t>
+            <w:t>Heading 2</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -2151,7 +2153,7 @@ Some text
                     <w:color w:themeColor="hyperlink" w:val="0366D6"/>
                     <w:u w:val="single"/>
                 </w:rPr>
-                <w:t xml:space="preserve">formatting</w:t>
+                <w:t>formatting</w:t>
             </w:r>
         </w:hyperlink>
         <w:r>
@@ -2170,7 +2172,7 @@ Some text
                     <w:color w:themeColor="hyperlink" w:val="0366D6"/>
                     <w:u w:val="single"/>
                 </w:rPr>
-                <w:t xml:space="preserve">formatting</w:t>
+                <w:t>formatting</w:t>
             </w:r>
         </w:hyperlink>
     </w:p>
@@ -2196,7 +2198,7 @@ Some text
                     <w:highlight w:val="red"/>
                     <w:u w:val="single"/>
                 </w:rPr>
-                <w:t xml:space="preserve">text</w:t>
+                <w:t>text</w:t>
             </w:r>
         </w:hyperlink>
     </w:p>
@@ -2222,7 +2224,7 @@ custom color
                     <w:highlight w:val="yellow"/>
                     <w:u w:val="single"/>
                 </w:rPr>
-                <w:t xml:space="preserve">text</w:t>
+                <w:t>text</w:t>
             </w:r>
         </w:hyperlink>
     </w:p>
@@ -2246,7 +2248,7 @@ suppress
                 <w:rPr>
                     <w:rStyle w:val="Hyperlink"/>
                 </w:rPr>
-                <w:t xml:space="preserve">text</w:t>
+                <w:t>text</w:t>
             </w:r>
         </w:hyperlink>
     </w:p>
@@ -2274,7 +2276,7 @@ See [@tmp:test]
         </w:pPr>
         <w:bookmarkStart w:id="1" w:name="tmp:test"/>
         <w:r>
-            <w:t xml:space="preserve">text</w:t>
+            <w:t>text</w:t>
         </w:r>
         <w:bookmarkEnd w:id="1"/>
     </w:p>
@@ -2305,7 +2307,7 @@ See [@tmp:test]
                 <w:rPr>
                     <w:rStyle w:val="Hyperlink"/>
                 </w:rPr>
-                <w:t xml:space="preserve">1</w:t>
+                <w:t>1</w:t>
             </w:r>
             <w:r>
                 <w:fldChar w:fldCharType="end"/>
@@ -2324,19 +2326,19 @@ See [@tmp:test]
             <w:spacing w:after="0" w:before="0"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">text{#tmp:test}</w:t>
+            <w:t>text{#tmp:test}</w:t>
         </w:r>
         <w:r>
             <w:br/>
         </w:r>
         <w:r>
-            <w:t xml:space="preserve"/>
+            <w:t/>
         </w:r>
         <w:r>
             <w:br/>
         </w:r>
         <w:r>
-            <w:t xml:space="preserve">See [@tmp:test]</w:t>
+            <w:t>See [@tmp:test]</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -2379,7 +2381,7 @@ www.example.com
                 <w:rPr>
                     <w:rStyle w:val="Hyperlink"/>
                 </w:rPr>
-                <w:t xml:space="preserve">www.example.com</w:t>
+                <w:t>www.example.com</w:t>
             </w:r>
         </w:hyperlink>
     </w:p>
@@ -2407,9 +2409,9 @@ TEXT :+1: TEXT
             </w:rPr>
             <w:drawing>
                 <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
-                    <wp:extent cx="146685" cy="146685"/>
+                    <wp:extent cx="139700" cy="139700"/>
                     <wp:effectExtent b="0" l="0" r="0" t="0"/>
-                    <wp:docPr descr="emoji people:+1" id="0" name="Image1"/>
+                    <wp:docPr descr="emoji people:+1" id="100000" name="Image100000"/>
                     <wp:cNvGraphicFramePr>
                         <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
                     </wp:cNvGraphicFramePr>
@@ -2417,7 +2419,7 @@ TEXT :+1: TEXT
                         <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
                             <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
                                 <pic:nvPicPr>
-                                    <pic:cNvPr id="1" name="Image1"/>
+                                    <pic:cNvPr id="100001" name="Image100000"/>
                                     <pic:cNvPicPr/>
                                 </pic:nvPicPr>
                                 <pic:blipFill>
@@ -2429,7 +2431,7 @@ TEXT :+1: TEXT
                                 <pic:spPr>
                                     <a:xfrm>
                                     <a:off x="0" y="0"/>
-                                    <a:ext cx="146685" cy="146685"/>
+                                    <a:ext cx="139700" cy="139700"/>
                                     </a:xfrm>
                                     <a:prstGeom prst="rect">
                                     <a:avLst/>
@@ -2485,9 +2487,9 @@ TEXT :+1: TEXT
             </w:rPr>
             <w:drawing>
                 <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
-                    <wp:extent cx="306705" cy="306705"/>
+                    <wp:extent cx="279400" cy="279400"/>
                     <wp:effectExtent b="0" l="0" r="0" t="0"/>
-                    <wp:docPr descr="emoji people:+1" id="0" name="Image1"/>
+                    <wp:docPr descr="emoji people:+1" id="100000" name="Image100000"/>
                     <wp:cNvGraphicFramePr>
                         <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
                     </wp:cNvGraphicFramePr>
@@ -2495,7 +2497,7 @@ TEXT :+1: TEXT
                         <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
                             <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
                                 <pic:nvPicPr>
-                                    <pic:cNvPr id="1" name="Image1"/>
+                                    <pic:cNvPr id="100001" name="Image100000"/>
                                     <pic:cNvPicPr/>
                                 </pic:nvPicPr>
                                 <pic:blipFill>
@@ -2507,7 +2509,7 @@ TEXT :+1: TEXT
                                 <pic:spPr>
                                     <a:xfrm>
                                     <a:off x="0" y="0"/>
-                                    <a:ext cx="306705" cy="306705"/>
+                                    <a:ext cx="279400" cy="279400"/>
                                     </a:xfrm>
                                     <a:prstGeom prst="rect">
                                     <a:avLst/>
@@ -2539,9 +2541,9 @@ TEXT :+1: TEXT
             </w:rPr>
             <w:drawing>
                 <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
-                    <wp:extent cx="266700" cy="266700"/>
+                    <wp:extent cx="241300" cy="241300"/>
                     <wp:effectExtent b="0" l="0" r="0" t="0"/>
-                    <wp:docPr descr="emoji people:+1" id="2" name="Image2"/>
+                    <wp:docPr descr="emoji people:+1" id="100002" name="Image100002"/>
                     <wp:cNvGraphicFramePr>
                         <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
                     </wp:cNvGraphicFramePr>
@@ -2549,7 +2551,7 @@ TEXT :+1: TEXT
                         <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
                             <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
                                 <pic:nvPicPr>
-                                    <pic:cNvPr id="3" name="Image2"/>
+                                    <pic:cNvPr id="100003" name="Image100002"/>
                                     <pic:cNvPicPr/>
                                 </pic:nvPicPr>
                                 <pic:blipFill>
@@ -2561,7 +2563,7 @@ TEXT :+1: TEXT
                                 <pic:spPr>
                                     <a:xfrm>
                                     <a:off x="0" y="0"/>
-                                    <a:ext cx="266700" cy="266700"/>
+                                    <a:ext cx="241300" cy="241300"/>
                                     </a:xfrm>
                                     <a:prstGeom prst="rect">
                                     <a:avLst/>
@@ -2593,9 +2595,9 @@ TEXT :+1: TEXT
             </w:rPr>
             <w:drawing>
                 <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
-                    <wp:extent cx="226695" cy="226695"/>
+                    <wp:extent cx="203200" cy="203200"/>
                     <wp:effectExtent b="0" l="0" r="0" t="0"/>
-                    <wp:docPr descr="emoji people:+1" id="4" name="Image3"/>
+                    <wp:docPr descr="emoji people:+1" id="100004" name="Image100004"/>
                     <wp:cNvGraphicFramePr>
                         <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
                     </wp:cNvGraphicFramePr>
@@ -2603,7 +2605,7 @@ TEXT :+1: TEXT
                         <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
                             <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
                                 <pic:nvPicPr>
-                                    <pic:cNvPr id="5" name="Image3"/>
+                                    <pic:cNvPr id="100005" name="Image100004"/>
                                     <pic:cNvPicPr/>
                                 </pic:nvPicPr>
                                 <pic:blipFill>
@@ -2615,7 +2617,7 @@ TEXT :+1: TEXT
                                 <pic:spPr>
                                     <a:xfrm>
                                     <a:off x="0" y="0"/>
-                                    <a:ext cx="226695" cy="226695"/>
+                                    <a:ext cx="203200" cy="203200"/>
                                     </a:xfrm>
                                     <a:prstGeom prst="rect">
                                     <a:avLst/>
@@ -2647,9 +2649,9 @@ TEXT :+1: TEXT
             </w:rPr>
             <w:drawing>
                 <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
-                    <wp:extent cx="186690" cy="186690"/>
+                    <wp:extent cx="177800" cy="177800"/>
                     <wp:effectExtent b="0" l="0" r="0" t="0"/>
-                    <wp:docPr descr="emoji people:+1" id="6" name="Image4"/>
+                    <wp:docPr descr="emoji people:+1" id="100006" name="Image100006"/>
                     <wp:cNvGraphicFramePr>
                         <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
                     </wp:cNvGraphicFramePr>
@@ -2657,7 +2659,7 @@ TEXT :+1: TEXT
                         <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
                             <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
                                 <pic:nvPicPr>
-                                    <pic:cNvPr id="7" name="Image4"/>
+                                    <pic:cNvPr id="100007" name="Image100006"/>
                                     <pic:cNvPicPr/>
                                 </pic:nvPicPr>
                                 <pic:blipFill>
@@ -2669,7 +2671,7 @@ TEXT :+1: TEXT
                                 <pic:spPr>
                                     <a:xfrm>
                                     <a:off x="0" y="0"/>
-                                    <a:ext cx="186690" cy="186690"/>
+                                    <a:ext cx="177800" cy="177800"/>
                                     </a:xfrm>
                                     <a:prstGeom prst="rect">
                                     <a:avLst/>
@@ -2701,9 +2703,9 @@ TEXT :+1: TEXT
             </w:rPr>
             <w:drawing>
                 <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
-                    <wp:extent cx="146685" cy="146685"/>
+                    <wp:extent cx="139700" cy="139700"/>
                     <wp:effectExtent b="0" l="0" r="0" t="0"/>
-                    <wp:docPr descr="emoji people:+1" id="8" name="Image5"/>
+                    <wp:docPr descr="emoji people:+1" id="100008" name="Image100008"/>
                     <wp:cNvGraphicFramePr>
                         <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
                     </wp:cNvGraphicFramePr>
@@ -2711,7 +2713,7 @@ TEXT :+1: TEXT
                         <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
                             <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
                                 <pic:nvPicPr>
-                                    <pic:cNvPr id="9" name="Image5"/>
+                                    <pic:cNvPr id="100009" name="Image100008"/>
                                     <pic:cNvPicPr/>
                                 </pic:nvPicPr>
                                 <pic:blipFill>
@@ -2723,7 +2725,7 @@ TEXT :+1: TEXT
                                 <pic:spPr>
                                     <a:xfrm>
                                     <a:off x="0" y="0"/>
-                                    <a:ext cx="146685" cy="146685"/>
+                                    <a:ext cx="139700" cy="139700"/>
                                     </a:xfrm>
                                     <a:prstGeom prst="rect">
                                     <a:avLst/>
@@ -2755,9 +2757,9 @@ TEXT :+1: TEXT
             </w:rPr>
             <w:drawing>
                 <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
-                    <wp:extent cx="146685" cy="146685"/>
+                    <wp:extent cx="139700" cy="139700"/>
                     <wp:effectExtent b="0" l="0" r="0" t="0"/>
-                    <wp:docPr descr="emoji people:+1" id="10" name="Image6"/>
+                    <wp:docPr descr="emoji people:+1" id="100010" name="Image100010"/>
                     <wp:cNvGraphicFramePr>
                         <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
                     </wp:cNvGraphicFramePr>
@@ -2765,7 +2767,7 @@ TEXT :+1: TEXT
                         <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
                             <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
                                 <pic:nvPicPr>
-                                    <pic:cNvPr id="11" name="Image6"/>
+                                    <pic:cNvPr id="100011" name="Image100010"/>
                                     <pic:cNvPicPr/>
                                 </pic:nvPicPr>
                                 <pic:blipFill>
@@ -2777,7 +2779,7 @@ TEXT :+1: TEXT
                                 <pic:spPr>
                                     <a:xfrm>
                                     <a:off x="0" y="0"/>
-                                    <a:ext cx="146685" cy="146685"/>
+                                    <a:ext cx="139700" cy="139700"/>
                                     </a:xfrm>
                                     <a:prstGeom prst="rect">
                                     <a:avLst/>
@@ -2803,9 +2805,9 @@ TEXT :+1: TEXT
             </w:rPr>
             <w:drawing>
                 <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
-                    <wp:extent cx="146685" cy="146685"/>
+                    <wp:extent cx="139700" cy="139700"/>
                     <wp:effectExtent b="0" l="0" r="0" t="0"/>
-                    <wp:docPr descr="emoji people:+1" id="12" name="Image7"/>
+                    <wp:docPr descr="emoji people:+1" id="100012" name="Image100012"/>
                     <wp:cNvGraphicFramePr>
                         <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
                     </wp:cNvGraphicFramePr>
@@ -2813,7 +2815,7 @@ TEXT :+1: TEXT
                         <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
                             <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
                                 <pic:nvPicPr>
-                                    <pic:cNvPr id="13" name="Image7"/>
+                                    <pic:cNvPr id="100013" name="Image100012"/>
                                     <pic:cNvPicPr/>
                                 </pic:nvPicPr>
                                 <pic:blipFill>
@@ -2825,7 +2827,7 @@ TEXT :+1: TEXT
                                 <pic:spPr>
                                     <a:xfrm>
                                     <a:off x="0" y="0"/>
-                                    <a:ext cx="146685" cy="146685"/>
+                                    <a:ext cx="139700" cy="139700"/>
                                     </a:xfrm>
                                     <a:prstGeom prst="rect">
                                     <a:avLst/>
@@ -2861,7 +2863,7 @@ TEXT ![](https://s3.amazonaws.com/vladsch-env/images/MNLogo.png) TEXT
                 <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
                     <wp:extent cx="2095500" cy="2095500"/>
                     <wp:effectExtent b="0" l="0" r="0" t="0"/>
-                    <wp:docPr descr="" id="0" name="Image1"/>
+                    <wp:docPr descr="" id="100000" name="Image100000"/>
                     <wp:cNvGraphicFramePr>
                         <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
                     </wp:cNvGraphicFramePr>
@@ -2869,7 +2871,7 @@ TEXT ![](https://s3.amazonaws.com/vladsch-env/images/MNLogo.png) TEXT
                         <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
                             <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
                                 <pic:nvPicPr>
-                                    <pic:cNvPr id="1" name="Image1"/>
+                                    <pic:cNvPr id="100001" name="Image100000"/>
                                     <pic:cNvPicPr/>
                                 </pic:nvPicPr>
                                 <pic:blipFill>
@@ -2917,7 +2919,7 @@ TEXT ![](https://vladsch.com/images/MNLogo.png) TEXT
                 <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
                     <wp:extent cx="2095500" cy="2095500"/>
                     <wp:effectExtent b="0" l="0" r="0" t="0"/>
-                    <wp:docPr descr="" id="0" name="Image1"/>
+                    <wp:docPr descr="" id="100000" name="Image100000"/>
                     <wp:cNvGraphicFramePr>
                         <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
                     </wp:cNvGraphicFramePr>
@@ -2925,7 +2927,7 @@ TEXT ![](https://vladsch.com/images/MNLogo.png) TEXT
                         <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
                             <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
                                 <pic:nvPicPr>
-                                    <pic:cNvPr id="1" name="Image1"/>
+                                    <pic:cNvPr id="100001" name="Image100000"/>
                                     <pic:cNvPicPr/>
                                 </pic:nvPicPr>
                                 <pic:blipFill>
@@ -2974,9 +2976,9 @@ TEXT :+1: TEXT
             </w:rPr>
             <w:drawing>
                 <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
-                    <wp:extent cx="146685" cy="146685"/>
+                    <wp:extent cx="139700" cy="139700"/>
                     <wp:effectExtent b="0" l="0" r="0" t="0"/>
-                    <wp:docPr descr="emoji people:+1" id="0" name="Image1"/>
+                    <wp:docPr descr="emoji people:+1" id="100000" name="Image100000"/>
                     <wp:cNvGraphicFramePr>
                         <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
                     </wp:cNvGraphicFramePr>
@@ -2984,7 +2986,7 @@ TEXT :+1: TEXT
                         <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
                             <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
                                 <pic:nvPicPr>
-                                    <pic:cNvPr id="1" name="Image1"/>
+                                    <pic:cNvPr id="100001" name="Image100000"/>
                                     <pic:cNvPicPr/>
                                 </pic:nvPicPr>
                                 <pic:blipFill>
@@ -2996,7 +2998,7 @@ TEXT :+1: TEXT
                                 <pic:spPr>
                                     <a:xfrm>
                                     <a:off x="0" y="0"/>
-                                    <a:ext cx="146685" cy="146685"/>
+                                    <a:ext cx="139700" cy="139700"/>
                                     </a:xfrm>
                                     <a:prstGeom prst="rect">
                                     <a:avLst/>
@@ -3038,9 +3040,9 @@ TEXT :basecamp: TEXT
             </w:rPr>
             <w:drawing>
                 <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
-                    <wp:extent cx="146685" cy="146685"/>
+                    <wp:extent cx="139700" cy="139700"/>
                     <wp:effectExtent b="0" l="0" r="0" t="0"/>
-                    <wp:docPr descr="emoji symbols:basecamp" id="0" name="Image1"/>
+                    <wp:docPr descr="emoji symbols:basecamp" id="100000" name="Image100000"/>
                     <wp:cNvGraphicFramePr>
                         <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
                     </wp:cNvGraphicFramePr>
@@ -3048,7 +3050,7 @@ TEXT :basecamp: TEXT
                         <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
                             <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
                                 <pic:nvPicPr>
-                                    <pic:cNvPr id="1" name="Image1"/>
+                                    <pic:cNvPr id="100001" name="Image100000"/>
                                     <pic:cNvPicPr/>
                                 </pic:nvPicPr>
                                 <pic:blipFill>
@@ -3060,7 +3062,7 @@ TEXT :basecamp: TEXT
                                 <pic:spPr>
                                     <a:xfrm>
                                     <a:off x="0" y="0"/>
-                                    <a:ext cx="146685" cy="146685"/>
+                                    <a:ext cx="139700" cy="139700"/>
                                     </a:xfrm>
                                     <a:prstGeom prst="rect">
                                     <a:avLst/>
@@ -3116,9 +3118,9 @@ TEXT :basecamp: TEXT
             </w:rPr>
             <w:drawing>
                 <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
-                    <wp:extent cx="306705" cy="306705"/>
+                    <wp:extent cx="279400" cy="279400"/>
                     <wp:effectExtent b="0" l="0" r="0" t="0"/>
-                    <wp:docPr descr="emoji symbols:basecamp" id="0" name="Image1"/>
+                    <wp:docPr descr="emoji symbols:basecamp" id="100000" name="Image100000"/>
                     <wp:cNvGraphicFramePr>
                         <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
                     </wp:cNvGraphicFramePr>
@@ -3126,7 +3128,7 @@ TEXT :basecamp: TEXT
                         <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
                             <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
                                 <pic:nvPicPr>
-                                    <pic:cNvPr id="1" name="Image1"/>
+                                    <pic:cNvPr id="100001" name="Image100000"/>
                                     <pic:cNvPicPr/>
                                 </pic:nvPicPr>
                                 <pic:blipFill>
@@ -3138,7 +3140,7 @@ TEXT :basecamp: TEXT
                                 <pic:spPr>
                                     <a:xfrm>
                                     <a:off x="0" y="0"/>
-                                    <a:ext cx="306705" cy="306705"/>
+                                    <a:ext cx="279400" cy="279400"/>
                                     </a:xfrm>
                                     <a:prstGeom prst="rect">
                                     <a:avLst/>
@@ -3170,9 +3172,9 @@ TEXT :basecamp: TEXT
             </w:rPr>
             <w:drawing>
                 <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
-                    <wp:extent cx="266700" cy="266700"/>
+                    <wp:extent cx="241300" cy="241300"/>
                     <wp:effectExtent b="0" l="0" r="0" t="0"/>
-                    <wp:docPr descr="emoji symbols:basecamp" id="2" name="Image2"/>
+                    <wp:docPr descr="emoji symbols:basecamp" id="100002" name="Image100002"/>
                     <wp:cNvGraphicFramePr>
                         <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
                     </wp:cNvGraphicFramePr>
@@ -3180,7 +3182,7 @@ TEXT :basecamp: TEXT
                         <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
                             <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
                                 <pic:nvPicPr>
-                                    <pic:cNvPr id="3" name="Image2"/>
+                                    <pic:cNvPr id="100003" name="Image100002"/>
                                     <pic:cNvPicPr/>
                                 </pic:nvPicPr>
                                 <pic:blipFill>
@@ -3192,7 +3194,7 @@ TEXT :basecamp: TEXT
                                 <pic:spPr>
                                     <a:xfrm>
                                     <a:off x="0" y="0"/>
-                                    <a:ext cx="266700" cy="266700"/>
+                                    <a:ext cx="241300" cy="241300"/>
                                     </a:xfrm>
                                     <a:prstGeom prst="rect">
                                     <a:avLst/>
@@ -3224,9 +3226,9 @@ TEXT :basecamp: TEXT
             </w:rPr>
             <w:drawing>
                 <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
-                    <wp:extent cx="226695" cy="226695"/>
+                    <wp:extent cx="203200" cy="203200"/>
                     <wp:effectExtent b="0" l="0" r="0" t="0"/>
-                    <wp:docPr descr="emoji symbols:basecamp" id="4" name="Image3"/>
+                    <wp:docPr descr="emoji symbols:basecamp" id="100004" name="Image100004"/>
                     <wp:cNvGraphicFramePr>
                         <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
                     </wp:cNvGraphicFramePr>
@@ -3234,7 +3236,7 @@ TEXT :basecamp: TEXT
                         <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
                             <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
                                 <pic:nvPicPr>
-                                    <pic:cNvPr id="5" name="Image3"/>
+                                    <pic:cNvPr id="100005" name="Image100004"/>
                                     <pic:cNvPicPr/>
                                 </pic:nvPicPr>
                                 <pic:blipFill>
@@ -3246,7 +3248,7 @@ TEXT :basecamp: TEXT
                                 <pic:spPr>
                                     <a:xfrm>
                                     <a:off x="0" y="0"/>
-                                    <a:ext cx="226695" cy="226695"/>
+                                    <a:ext cx="203200" cy="203200"/>
                                     </a:xfrm>
                                     <a:prstGeom prst="rect">
                                     <a:avLst/>
@@ -3278,9 +3280,9 @@ TEXT :basecamp: TEXT
             </w:rPr>
             <w:drawing>
                 <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
-                    <wp:extent cx="186690" cy="186690"/>
+                    <wp:extent cx="177800" cy="177800"/>
                     <wp:effectExtent b="0" l="0" r="0" t="0"/>
-                    <wp:docPr descr="emoji symbols:basecamp" id="6" name="Image4"/>
+                    <wp:docPr descr="emoji symbols:basecamp" id="100006" name="Image100006"/>
                     <wp:cNvGraphicFramePr>
                         <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
                     </wp:cNvGraphicFramePr>
@@ -3288,7 +3290,7 @@ TEXT :basecamp: TEXT
                         <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
                             <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
                                 <pic:nvPicPr>
-                                    <pic:cNvPr id="7" name="Image4"/>
+                                    <pic:cNvPr id="100007" name="Image100006"/>
                                     <pic:cNvPicPr/>
                                 </pic:nvPicPr>
                                 <pic:blipFill>
@@ -3300,7 +3302,7 @@ TEXT :basecamp: TEXT
                                 <pic:spPr>
                                     <a:xfrm>
                                     <a:off x="0" y="0"/>
-                                    <a:ext cx="186690" cy="186690"/>
+                                    <a:ext cx="177800" cy="177800"/>
                                     </a:xfrm>
                                     <a:prstGeom prst="rect">
                                     <a:avLst/>
@@ -3332,9 +3334,9 @@ TEXT :basecamp: TEXT
             </w:rPr>
             <w:drawing>
                 <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
-                    <wp:extent cx="146685" cy="146685"/>
+                    <wp:extent cx="139700" cy="139700"/>
                     <wp:effectExtent b="0" l="0" r="0" t="0"/>
-                    <wp:docPr descr="emoji symbols:basecamp" id="8" name="Image5"/>
+                    <wp:docPr descr="emoji symbols:basecamp" id="100008" name="Image100008"/>
                     <wp:cNvGraphicFramePr>
                         <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
                     </wp:cNvGraphicFramePr>
@@ -3342,7 +3344,7 @@ TEXT :basecamp: TEXT
                         <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
                             <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
                                 <pic:nvPicPr>
-                                    <pic:cNvPr id="9" name="Image5"/>
+                                    <pic:cNvPr id="100009" name="Image100008"/>
                                     <pic:cNvPicPr/>
                                 </pic:nvPicPr>
                                 <pic:blipFill>
@@ -3354,7 +3356,7 @@ TEXT :basecamp: TEXT
                                 <pic:spPr>
                                     <a:xfrm>
                                     <a:off x="0" y="0"/>
-                                    <a:ext cx="146685" cy="146685"/>
+                                    <a:ext cx="139700" cy="139700"/>
                                     </a:xfrm>
                                     <a:prstGeom prst="rect">
                                     <a:avLst/>
@@ -3386,9 +3388,9 @@ TEXT :basecamp: TEXT
             </w:rPr>
             <w:drawing>
                 <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
-                    <wp:extent cx="146685" cy="146685"/>
+                    <wp:extent cx="139700" cy="139700"/>
                     <wp:effectExtent b="0" l="0" r="0" t="0"/>
-                    <wp:docPr descr="emoji symbols:basecamp" id="10" name="Image6"/>
+                    <wp:docPr descr="emoji symbols:basecamp" id="100010" name="Image100010"/>
                     <wp:cNvGraphicFramePr>
                         <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
                     </wp:cNvGraphicFramePr>
@@ -3396,7 +3398,7 @@ TEXT :basecamp: TEXT
                         <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
                             <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
                                 <pic:nvPicPr>
-                                    <pic:cNvPr id="11" name="Image6"/>
+                                    <pic:cNvPr id="100011" name="Image100010"/>
                                     <pic:cNvPicPr/>
                                 </pic:nvPicPr>
                                 <pic:blipFill>
@@ -3408,7 +3410,7 @@ TEXT :basecamp: TEXT
                                 <pic:spPr>
                                     <a:xfrm>
                                     <a:off x="0" y="0"/>
-                                    <a:ext cx="146685" cy="146685"/>
+                                    <a:ext cx="139700" cy="139700"/>
                                     </a:xfrm>
                                     <a:prstGeom prst="rect">
                                     <a:avLst/>
@@ -3434,9 +3436,9 @@ TEXT :basecamp: TEXT
             </w:rPr>
             <w:drawing>
                 <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
-                    <wp:extent cx="146685" cy="146685"/>
+                    <wp:extent cx="139700" cy="139700"/>
                     <wp:effectExtent b="0" l="0" r="0" t="0"/>
-                    <wp:docPr descr="emoji symbols:basecamp" id="12" name="Image7"/>
+                    <wp:docPr descr="emoji symbols:basecamp" id="100012" name="Image100012"/>
                     <wp:cNvGraphicFramePr>
                         <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
                     </wp:cNvGraphicFramePr>
@@ -3444,7 +3446,7 @@ TEXT :basecamp: TEXT
                         <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
                             <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
                                 <pic:nvPicPr>
-                                    <pic:cNvPr id="13" name="Image7"/>
+                                    <pic:cNvPr id="100013" name="Image100012"/>
                                     <pic:cNvPicPr/>
                                 </pic:nvPicPr>
                                 <pic:blipFill>
@@ -3456,7 +3458,7 @@ TEXT :basecamp: TEXT
                                 <pic:spPr>
                                     <a:xfrm>
                                     <a:off x="0" y="0"/>
-                                    <a:ext cx="146685" cy="146685"/>
+                                    <a:ext cx="139700" cy="139700"/>
                                     </a:xfrm>
                                     <a:prstGeom prst="rect">
                                     <a:avLst/>
@@ -3492,7 +3494,7 @@ TEXT ![](https://github.githubassets.com/images/icons/emoji/unicode/1f44d.png) T
                 <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
                     <wp:extent cx="609600" cy="609600"/>
                     <wp:effectExtent b="0" l="0" r="0" t="0"/>
-                    <wp:docPr descr="" id="0" name="Image1"/>
+                    <wp:docPr descr="" id="100000" name="Image100000"/>
                     <wp:cNvGraphicFramePr>
                         <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
                     </wp:cNvGraphicFramePr>
@@ -3500,7 +3502,7 @@ TEXT ![](https://github.githubassets.com/images/icons/emoji/unicode/1f44d.png) T
                         <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
                             <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
                                 <pic:nvPicPr>
-                                    <pic:cNvPr id="1" name="Image1"/>
+                                    <pic:cNvPr id="100001" name="Image100000"/>
                                     <pic:cNvPicPr/>
                                 </pic:nvPicPr>
                                 <pic:blipFill>
@@ -3549,9 +3551,9 @@ TEXT :+1: TEXT
             </w:rPr>
             <w:drawing>
                 <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
-                    <wp:extent cx="146685" cy="146685"/>
+                    <wp:extent cx="139700" cy="139700"/>
                     <wp:effectExtent b="0" l="0" r="0" t="0"/>
-                    <wp:docPr descr="emoji people:+1" id="0" name="Image1"/>
+                    <wp:docPr descr="emoji people:+1" id="100000" name="Image100000"/>
                     <wp:cNvGraphicFramePr>
                         <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
                     </wp:cNvGraphicFramePr>
@@ -3559,7 +3561,7 @@ TEXT :+1: TEXT
                         <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
                             <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
                                 <pic:nvPicPr>
-                                    <pic:cNvPr id="1" name="Image1"/>
+                                    <pic:cNvPr id="100001" name="Image100000"/>
                                     <pic:cNvPicPr/>
                                 </pic:nvPicPr>
                                 <pic:blipFill>
@@ -3571,7 +3573,7 @@ TEXT :+1: TEXT
                                 <pic:spPr>
                                     <a:xfrm>
                                     <a:off x="0" y="0"/>
-                                    <a:ext cx="146685" cy="146685"/>
+                                    <a:ext cx="139700" cy="139700"/>
                                     </a:xfrm>
                                     <a:prstGeom prst="rect">
                                     <a:avLst/>
@@ -3627,9 +3629,9 @@ TEXT :basecamp: TEXT
             </w:rPr>
             <w:drawing>
                 <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
-                    <wp:extent cx="306705" cy="306705"/>
+                    <wp:extent cx="279400" cy="279400"/>
                     <wp:effectExtent b="0" l="0" r="0" t="0"/>
-                    <wp:docPr descr="emoji symbols:basecamp" id="0" name="Image1"/>
+                    <wp:docPr descr="emoji symbols:basecamp" id="100000" name="Image100000"/>
                     <wp:cNvGraphicFramePr>
                         <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
                     </wp:cNvGraphicFramePr>
@@ -3637,7 +3639,7 @@ TEXT :basecamp: TEXT
                         <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
                             <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
                                 <pic:nvPicPr>
-                                    <pic:cNvPr id="1" name="Image1"/>
+                                    <pic:cNvPr id="100001" name="Image100000"/>
                                     <pic:cNvPicPr/>
                                 </pic:nvPicPr>
                                 <pic:blipFill>
@@ -3649,7 +3651,7 @@ TEXT :basecamp: TEXT
                                 <pic:spPr>
                                     <a:xfrm>
                                     <a:off x="0" y="0"/>
-                                    <a:ext cx="306705" cy="306705"/>
+                                    <a:ext cx="279400" cy="279400"/>
                                     </a:xfrm>
                                     <a:prstGeom prst="rect">
                                     <a:avLst/>
@@ -3681,9 +3683,9 @@ TEXT :basecamp: TEXT
             </w:rPr>
             <w:drawing>
                 <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
-                    <wp:extent cx="266700" cy="266700"/>
+                    <wp:extent cx="241300" cy="241300"/>
                     <wp:effectExtent b="0" l="0" r="0" t="0"/>
-                    <wp:docPr descr="emoji symbols:basecamp" id="2" name="Image2"/>
+                    <wp:docPr descr="emoji symbols:basecamp" id="100002" name="Image100002"/>
                     <wp:cNvGraphicFramePr>
                         <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
                     </wp:cNvGraphicFramePr>
@@ -3691,7 +3693,7 @@ TEXT :basecamp: TEXT
                         <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
                             <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
                                 <pic:nvPicPr>
-                                    <pic:cNvPr id="3" name="Image2"/>
+                                    <pic:cNvPr id="100003" name="Image100002"/>
                                     <pic:cNvPicPr/>
                                 </pic:nvPicPr>
                                 <pic:blipFill>
@@ -3703,7 +3705,7 @@ TEXT :basecamp: TEXT
                                 <pic:spPr>
                                     <a:xfrm>
                                     <a:off x="0" y="0"/>
-                                    <a:ext cx="266700" cy="266700"/>
+                                    <a:ext cx="241300" cy="241300"/>
                                     </a:xfrm>
                                     <a:prstGeom prst="rect">
                                     <a:avLst/>
@@ -3735,9 +3737,9 @@ TEXT :basecamp: TEXT
             </w:rPr>
             <w:drawing>
                 <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
-                    <wp:extent cx="226695" cy="226695"/>
+                    <wp:extent cx="203200" cy="203200"/>
                     <wp:effectExtent b="0" l="0" r="0" t="0"/>
-                    <wp:docPr descr="emoji symbols:basecamp" id="4" name="Image3"/>
+                    <wp:docPr descr="emoji symbols:basecamp" id="100004" name="Image100004"/>
                     <wp:cNvGraphicFramePr>
                         <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
                     </wp:cNvGraphicFramePr>
@@ -3745,7 +3747,7 @@ TEXT :basecamp: TEXT
                         <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
                             <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
                                 <pic:nvPicPr>
-                                    <pic:cNvPr id="5" name="Image3"/>
+                                    <pic:cNvPr id="100005" name="Image100004"/>
                                     <pic:cNvPicPr/>
                                 </pic:nvPicPr>
                                 <pic:blipFill>
@@ -3757,7 +3759,7 @@ TEXT :basecamp: TEXT
                                 <pic:spPr>
                                     <a:xfrm>
                                     <a:off x="0" y="0"/>
-                                    <a:ext cx="226695" cy="226695"/>
+                                    <a:ext cx="203200" cy="203200"/>
                                     </a:xfrm>
                                     <a:prstGeom prst="rect">
                                     <a:avLst/>
@@ -3789,9 +3791,9 @@ TEXT :basecamp: TEXT
             </w:rPr>
             <w:drawing>
                 <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
-                    <wp:extent cx="186690" cy="186690"/>
+                    <wp:extent cx="177800" cy="177800"/>
                     <wp:effectExtent b="0" l="0" r="0" t="0"/>
-                    <wp:docPr descr="emoji symbols:basecamp" id="6" name="Image4"/>
+                    <wp:docPr descr="emoji symbols:basecamp" id="100006" name="Image100006"/>
                     <wp:cNvGraphicFramePr>
                         <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
                     </wp:cNvGraphicFramePr>
@@ -3799,7 +3801,7 @@ TEXT :basecamp: TEXT
                         <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
                             <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
                                 <pic:nvPicPr>
-                                    <pic:cNvPr id="7" name="Image4"/>
+                                    <pic:cNvPr id="100007" name="Image100006"/>
                                     <pic:cNvPicPr/>
                                 </pic:nvPicPr>
                                 <pic:blipFill>
@@ -3811,7 +3813,7 @@ TEXT :basecamp: TEXT
                                 <pic:spPr>
                                     <a:xfrm>
                                     <a:off x="0" y="0"/>
-                                    <a:ext cx="186690" cy="186690"/>
+                                    <a:ext cx="177800" cy="177800"/>
                                     </a:xfrm>
                                     <a:prstGeom prst="rect">
                                     <a:avLst/>
@@ -3843,9 +3845,9 @@ TEXT :basecamp: TEXT
             </w:rPr>
             <w:drawing>
                 <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
-                    <wp:extent cx="146685" cy="146685"/>
+                    <wp:extent cx="139700" cy="139700"/>
                     <wp:effectExtent b="0" l="0" r="0" t="0"/>
-                    <wp:docPr descr="emoji symbols:basecamp" id="8" name="Image5"/>
+                    <wp:docPr descr="emoji symbols:basecamp" id="100008" name="Image100008"/>
                     <wp:cNvGraphicFramePr>
                         <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
                     </wp:cNvGraphicFramePr>
@@ -3853,7 +3855,7 @@ TEXT :basecamp: TEXT
                         <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
                             <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
                                 <pic:nvPicPr>
-                                    <pic:cNvPr id="9" name="Image5"/>
+                                    <pic:cNvPr id="100009" name="Image100008"/>
                                     <pic:cNvPicPr/>
                                 </pic:nvPicPr>
                                 <pic:blipFill>
@@ -3865,7 +3867,7 @@ TEXT :basecamp: TEXT
                                 <pic:spPr>
                                     <a:xfrm>
                                     <a:off x="0" y="0"/>
-                                    <a:ext cx="146685" cy="146685"/>
+                                    <a:ext cx="139700" cy="139700"/>
                                     </a:xfrm>
                                     <a:prstGeom prst="rect">
                                     <a:avLst/>
@@ -3897,9 +3899,9 @@ TEXT :basecamp: TEXT
             </w:rPr>
             <w:drawing>
                 <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
-                    <wp:extent cx="146685" cy="146685"/>
+                    <wp:extent cx="139700" cy="139700"/>
                     <wp:effectExtent b="0" l="0" r="0" t="0"/>
-                    <wp:docPr descr="emoji symbols:basecamp" id="10" name="Image6"/>
+                    <wp:docPr descr="emoji symbols:basecamp" id="100010" name="Image100010"/>
                     <wp:cNvGraphicFramePr>
                         <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
                     </wp:cNvGraphicFramePr>
@@ -3907,7 +3909,7 @@ TEXT :basecamp: TEXT
                         <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
                             <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
                                 <pic:nvPicPr>
-                                    <pic:cNvPr id="11" name="Image6"/>
+                                    <pic:cNvPr id="100011" name="Image100010"/>
                                     <pic:cNvPicPr/>
                                 </pic:nvPicPr>
                                 <pic:blipFill>
@@ -3919,7 +3921,7 @@ TEXT :basecamp: TEXT
                                 <pic:spPr>
                                     <a:xfrm>
                                     <a:off x="0" y="0"/>
-                                    <a:ext cx="146685" cy="146685"/>
+                                    <a:ext cx="139700" cy="139700"/>
                                     </a:xfrm>
                                     <a:prstGeom prst="rect">
                                     <a:avLst/>
@@ -3945,9 +3947,9 @@ TEXT :basecamp: TEXT
             </w:rPr>
             <w:drawing>
                 <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
-                    <wp:extent cx="146685" cy="146685"/>
+                    <wp:extent cx="139700" cy="139700"/>
                     <wp:effectExtent b="0" l="0" r="0" t="0"/>
-                    <wp:docPr descr="emoji symbols:basecamp" id="12" name="Image7"/>
+                    <wp:docPr descr="emoji symbols:basecamp" id="100012" name="Image100012"/>
                     <wp:cNvGraphicFramePr>
                         <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
                     </wp:cNvGraphicFramePr>
@@ -3955,7 +3957,7 @@ TEXT :basecamp: TEXT
                         <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
                             <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
                                 <pic:nvPicPr>
-                                    <pic:cNvPr id="13" name="Image7"/>
+                                    <pic:cNvPr id="100013" name="Image100012"/>
                                     <pic:cNvPicPr/>
                                 </pic:nvPicPr>
                                 <pic:blipFill>
@@ -3967,7 +3969,7 @@ TEXT :basecamp: TEXT
                                 <pic:spPr>
                                     <a:xfrm>
                                     <a:off x="0" y="0"/>
-                                    <a:ext cx="146685" cy="146685"/>
+                                    <a:ext cx="139700" cy="139700"/>
                                     </a:xfrm>
                                     <a:prstGeom prst="rect">
                                     <a:avLst/>
@@ -4018,7 +4020,7 @@ TEXT :+1: TEXT
             <w:t xml:space="preserve">Heading 1 </w:t>
         </w:r>
         <w:r>
-            <w:t xml:space="preserve">&#x1f44d;</w:t>
+            <w:t>&#x1f44d;</w:t>
         </w:r>
     </w:p>
     <w:bookmarkStart w:id="2" w:name="heading-2"/>
@@ -4035,7 +4037,7 @@ TEXT :+1: TEXT
             <w:t xml:space="preserve">Heading 2 </w:t>
         </w:r>
         <w:r>
-            <w:t xml:space="preserve">&#x1f44d;</w:t>
+            <w:t>&#x1f44d;</w:t>
         </w:r>
     </w:p>
     <w:bookmarkStart w:id="3" w:name="heading-3"/>
@@ -4052,7 +4054,7 @@ TEXT :+1: TEXT
             <w:t xml:space="preserve">Heading 3 </w:t>
         </w:r>
         <w:r>
-            <w:t xml:space="preserve">&#x1f44d;</w:t>
+            <w:t>&#x1f44d;</w:t>
         </w:r>
     </w:p>
     <w:bookmarkStart w:id="4" w:name="heading-4"/>
@@ -4069,7 +4071,7 @@ TEXT :+1: TEXT
             <w:t xml:space="preserve">Heading 4 </w:t>
         </w:r>
         <w:r>
-            <w:t xml:space="preserve">&#x1f44d;</w:t>
+            <w:t>&#x1f44d;</w:t>
         </w:r>
     </w:p>
     <w:bookmarkStart w:id="5" w:name="heading-5"/>
@@ -4086,7 +4088,7 @@ TEXT :+1: TEXT
             <w:t xml:space="preserve">Heading 5 </w:t>
         </w:r>
         <w:r>
-            <w:t xml:space="preserve">&#x1f44d;</w:t>
+            <w:t>&#x1f44d;</w:t>
         </w:r>
     </w:p>
     <w:bookmarkStart w:id="6" w:name="heading-6"/>
@@ -4103,7 +4105,7 @@ TEXT :+1: TEXT
             <w:t xml:space="preserve">Heading 6 </w:t>
         </w:r>
         <w:r>
-            <w:t xml:space="preserve">&#x1f44d;</w:t>
+            <w:t>&#x1f44d;</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -4114,7 +4116,7 @@ TEXT :+1: TEXT
             <w:t xml:space="preserve">TEXT </w:t>
         </w:r>
         <w:r>
-            <w:t xml:space="preserve">&#x1f44d;</w:t>
+            <w:t>&#x1f44d;</w:t>
         </w:r>
         <w:r>
             <w:t xml:space="preserve"> TEXT</w:t>
@@ -4139,7 +4141,7 @@ TEXT :+1: TEXT
                 <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
                     <wp:extent cx="6332220" cy="6020567"/>
                     <wp:effectExtent b="0" l="0" r="0" t="0"/>
-                    <wp:docPr descr="crc-error" id="0" name="Image1"/>
+                    <wp:docPr descr="crc-error" id="100000" name="Image100000"/>
                     <wp:cNvGraphicFramePr>
                         <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
                     </wp:cNvGraphicFramePr>
@@ -4147,7 +4149,7 @@ TEXT :+1: TEXT
                         <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
                             <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
                                 <pic:nvPicPr>
-                                    <pic:cNvPr id="1" name="Image1"/>
+                                    <pic:cNvPr id="100001" name="Image100000"/>
                                     <pic:cNvPicPr/>
                                 </pic:nvPicPr>
                                 <pic:blipFill>
@@ -4193,7 +4195,7 @@ unprefixed
                 <w:rPr>
                     <w:rStyle w:val="Hyperlink"/>
                 </w:rPr>
-                <w:t xml:space="preserve">www.example</w:t>
+                <w:t>www.example</w:t>
             </w:r>
         </w:hyperlink>
     </w:p>
@@ -4216,7 +4218,7 @@ prefixed
                 <w:rPr>
                     <w:rStyle w:val="Hyperlink"/>
                 </w:rPr>
-                <w:t xml:space="preserve">www.example</w:t>
+                <w:t>www.example</w:t>
             </w:r>
         </w:hyperlink>
     </w:p>
@@ -4272,7 +4274,7 @@ invalid docx
                         <w:jc w:val="center"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">ID</w:t>
+                        <w:t>ID</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -4286,7 +4288,7 @@ invalid docx
                         <w:jc w:val="left"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">Anforderung</w:t>
+                        <w:t>Anforderung</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -4300,7 +4302,7 @@ invalid docx
                         <w:jc w:val="center"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">Stufe</w:t>
+                        <w:t>Stufe</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -4314,7 +4316,7 @@ invalid docx
                         <w:jc w:val="left"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">Kommentare</w:t>
+                        <w:t>Kommentare</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -4358,7 +4360,7 @@ invalid docx
                         <w:jc w:val="center"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">2</w:t>
+                        <w:t>2</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -4377,7 +4379,7 @@ invalid docx
                             <w:rPr>
                                 <w:rStyle w:val="Hyperlink"/>
                             </w:rPr>
-                            <w:t xml:space="preserve">NIST</w:t>
+                            <w:t>NIST</w:t>
                         </w:r>
                     </w:hyperlink>
                     <w:r>
@@ -4424,7 +4426,7 @@ invalid docx
                 <w:rPr>
                     <w:rStyle w:val="Hyperlink"/>
                 </w:rPr>
-                <w:t xml:space="preserve">NIST</w:t>
+                <w:t>NIST</w:t>
             </w:r>
         </w:hyperlink>
         <w:r>
@@ -4481,7 +4483,7 @@ invalid docx
                         <w:jc w:val="center"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">ID</w:t>
+                        <w:t>ID</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -4495,7 +4497,7 @@ invalid docx
                         <w:jc w:val="left"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">Anforderung</w:t>
+                        <w:t>Anforderung</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -4509,7 +4511,7 @@ invalid docx
                         <w:jc w:val="center"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">Stufe</w:t>
+                        <w:t>Stufe</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -4523,7 +4525,7 @@ invalid docx
                         <w:jc w:val="left"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">Kommentare</w:t>
+                        <w:t>Kommentare</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -4567,7 +4569,7 @@ invalid docx
                         <w:jc w:val="center"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">2</w:t>
+                        <w:t>2</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -4586,7 +4588,7 @@ invalid docx
                             <w:rPr>
                                 <w:rStyle w:val="Hyperlink"/>
                             </w:rPr>
-                            <w:t xml:space="preserve">NIST</w:t>
+                            <w:t>NIST</w:t>
                         </w:r>
                     </w:hyperlink>
                     <w:r>
@@ -4626,7 +4628,7 @@ invalid docx
             <w:t xml:space="preserve">→</w:t>
         </w:r>
         <w:r>
-            <w:t xml:space="preserve">Die NIST hinterlegt.</w:t>
+            <w:t>Die NIST hinterlegt.</w:t>
         </w:r>
     </w:p>
 </w:footnote>
@@ -4679,7 +4681,7 @@ invalid docx
                         <w:jc w:val="center"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">ID</w:t>
+                        <w:t>ID</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -4693,7 +4695,7 @@ invalid docx
                         <w:jc w:val="left"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">Anforderung</w:t>
+                        <w:t>Anforderung</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -4707,7 +4709,7 @@ invalid docx
                         <w:jc w:val="center"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">Stufe</w:t>
+                        <w:t>Stufe</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -4721,7 +4723,7 @@ invalid docx
                         <w:jc w:val="left"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">Kommentare</w:t>
+                        <w:t>Kommentare</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -4765,7 +4767,7 @@ invalid docx
                         <w:jc w:val="center"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">2</w:t>
+                        <w:t>2</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -4777,7 +4779,7 @@ invalid docx
                         <w:jc w:val="left"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">für NIST eine</w:t>
+                        <w:t>für NIST eine</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -4820,7 +4822,7 @@ invalid docx
                 <w:rPr>
                     <w:rStyle w:val="Hyperlink"/>
                 </w:rPr>
-                <w:t xml:space="preserve">NIST</w:t>
+                <w:t>NIST</w:t>
             </w:r>
         </w:hyperlink>
         <w:r>
@@ -4876,7 +4878,7 @@ invalid docx
                         <w:jc w:val="center"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">ID</w:t>
+                        <w:t>ID</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -4890,7 +4892,7 @@ invalid docx
                         <w:jc w:val="left"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">Anforderung</w:t>
+                        <w:t>Anforderung</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -4904,7 +4906,7 @@ invalid docx
                         <w:jc w:val="center"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">Stufe</w:t>
+                        <w:t>Stufe</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -4918,7 +4920,7 @@ invalid docx
                         <w:jc w:val="left"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">Kommentare</w:t>
+                        <w:t>Kommentare</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -4941,7 +4943,7 @@ invalid docx
                         <w:jc w:val="left"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">Der vor.</w:t>
+                        <w:t>Der vor.</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -4953,7 +4955,7 @@ invalid docx
                         <w:jc w:val="center"/>
                     </w:pPr>
                     <w:r>
-                        <w:t xml:space="preserve">2</w:t>
+                        <w:t>2</w:t>
                     </w:r>
                 </w:p>
             </w:tc>
@@ -4972,7 +4974,7 @@ invalid docx
                             <w:rPr>
                                 <w:rStyle w:val="Hyperlink"/>
                             </w:rPr>
-                            <w:t xml:space="preserve">NIST</w:t>
+                            <w:t>NIST</w:t>
                         </w:r>
                     </w:hyperlink>
                     <w:r>

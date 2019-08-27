@@ -103,6 +103,8 @@ public class DocxRendererOptions {
     public final String TIGHT_PARAGRAPH_STYLE;
     public final String BULLET_LIST_STYLE;
     public final String NUMBERED_LIST_STYLE;
+    public final String PARAGRAPH_BULLET_LIST_STYLE;
+    public final String PARAGRAPH_NUMBERED_LIST_STYLE;
     public final String[] HEADINGS;
 
     final HashMap<String, String> styleIdToStyleName;
@@ -182,6 +184,8 @@ public class DocxRendererOptions {
         TIGHT_PARAGRAPH_STYLE = resolveStyleId(DocxRenderer.TIGHT_PARAGRAPH_STYLE.getFrom(options), !isResolved);
         BULLET_LIST_STYLE = resolveStyleId(DocxRenderer.BULLET_LIST_STYLE.getFrom(options), !isResolved);
         NUMBERED_LIST_STYLE = resolveStyleId(DocxRenderer.NUMBERED_LIST_STYLE.getFrom(options), !isResolved);
+        PARAGRAPH_BULLET_LIST_STYLE = resolveStyleId(DocxRenderer.PARAGRAPH_BULLET_LIST_STYLE.getFrom(options), !isResolved);
+        PARAGRAPH_NUMBERED_LIST_STYLE = resolveStyleId(DocxRenderer.PARAGRAPH_NUMBERED_LIST_STYLE.getFrom(options), !isResolved);
 
         HEADINGS = new String[] {
                 HEADING_1,
@@ -256,6 +260,8 @@ public class DocxRendererOptions {
         TIGHT_PARAGRAPH_STYLE = resolveStyleId(other.TIGHT_PARAGRAPH_STYLE, other.isResolved);
         BULLET_LIST_STYLE = resolveStyleId(other.BULLET_LIST_STYLE, other.isResolved);
         NUMBERED_LIST_STYLE = resolveStyleId(other.NUMBERED_LIST_STYLE, other.isResolved);
+        PARAGRAPH_BULLET_LIST_STYLE = resolveStyleId(other.PARAGRAPH_BULLET_LIST_STYLE, other.isResolved);
+        PARAGRAPH_NUMBERED_LIST_STYLE = resolveStyleId(other.PARAGRAPH_NUMBERED_LIST_STYLE, other.isResolved);
 
         HEADINGS = other.isResolved ? other.HEADINGS :
                 new String[] {

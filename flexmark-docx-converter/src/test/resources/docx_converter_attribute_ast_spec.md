@@ -28,7 +28,7 @@ basic text
             <w:rPr>
                 <w:color w:val="FF0000"/>
             </w:rPr>
-            <w:t xml:space="preserve">plain text</w:t>
+            <w:t>plain text</w:t>
         </w:r>
     </w:p>
 </w:body>
@@ -54,7 +54,7 @@ basic text
                 <w:rStyle w:val="StrongEmphasis"/>
                 <w:color w:val="FF0000"/>
             </w:rPr>
-            <w:t xml:space="preserve">Bold</w:t>
+            <w:t>Bold</w:t>
         </w:r>
         <w:r>
             <w:rPr>
@@ -86,7 +86,7 @@ basic text
                 <w:rStyle w:val="Emphasis"/>
                 <w:color w:val="FF0000"/>
             </w:rPr>
-            <w:t xml:space="preserve">Italic</w:t>
+            <w:t>Italic</w:t>
         </w:r>
         <w:r>
             <w:rPr>
@@ -118,7 +118,7 @@ basic text
                 <w:rStyle w:val="Strikethrough"/>
                 <w:color w:val="FF0000"/>
             </w:rPr>
-            <w:t xml:space="preserve">strike-through</w:t>
+            <w:t>strike-through</w:t>
         </w:r>
         <w:r>
             <w:rPr>
@@ -150,7 +150,7 @@ basic text
                 <w:rStyle w:val="Subscript"/>
                 <w:color w:val="FF0000"/>
             </w:rPr>
-            <w:t xml:space="preserve">subscript</w:t>
+            <w:t>subscript</w:t>
         </w:r>
         <w:r>
             <w:rPr>
@@ -163,13 +163,13 @@ basic text
                 <w:rStyle w:val="Subscript"/>
                 <w:color w:val="FF0000"/>
             </w:rPr>
-            <w:t xml:space="preserve">2</w:t>
+            <w:t>2</w:t>
         </w:r>
         <w:r>
             <w:rPr>
                 <w:color w:val="FF0000"/>
             </w:rPr>
-            <w:t xml:space="preserve">O</w:t>
+            <w:t>O</w:t>
         </w:r>
     </w:p>
 </w:body>
@@ -195,7 +195,7 @@ basic text
                 <w:rStyle w:val="Superscript"/>
                 <w:color w:val="FF0000"/>
             </w:rPr>
-            <w:t xml:space="preserve">superscript</w:t>
+            <w:t>superscript</w:t>
         </w:r>
         <w:r>
             <w:rPr>
@@ -210,14 +210,14 @@ basic text
                 <w:position w:val="8"/>
                 <w:sz w:val="19"/>
             </w:rPr>
-            <w:t xml:space="preserve">i</w:t>
+            <w:t>i</w:t>
         </w:r>
         <w:r>
             <w:rPr>
                 <w:rStyle w:val="Superscript"/>
                 <w:color w:val="FF0000"/>
             </w:rPr>
-            <w:t xml:space="preserve">pi</w:t>
+            <w:t>pi</w:t>
         </w:r>
         <w:r>
             <w:rPr>
@@ -263,7 +263,7 @@ Document[0, 58]
                 <w:rStyle w:val="Superscript"/>
                 <w:color w:val="FF0000"/>
             </w:rPr>
-            <w:t xml:space="preserve">superscript</w:t>
+            <w:t>superscript</w:t>
         </w:r>
         <w:r>
             <w:rPr>
@@ -276,7 +276,7 @@ Document[0, 58]
                 <w:rStyle w:val="Superscript"/>
                 <w:color w:val="FF0000"/>
             </w:rPr>
-            <w:t xml:space="preserve">ipi</w:t>
+            <w:t>ipi</w:t>
         </w:r>
         <w:r>
             <w:rPr>
@@ -308,7 +308,7 @@ Document[0, 58]
                 <w:rStyle w:val="Underlined"/>
                 <w:color w:val="FF0000"/>
             </w:rPr>
-            <w:t xml:space="preserve">underline</w:t>
+            <w:t>underline</w:t>
         </w:r>
         <w:r>
             <w:rPr>
@@ -340,7 +340,7 @@ Document[0, 58]
                 <w:rStyle w:val="SourceText"/>
                 <w:color w:val="FF0000"/>
             </w:rPr>
-            <w:t xml:space="preserve">inline code</w:t>
+            <w:t>inline code</w:t>
         </w:r>
         <w:r>
             <w:rPr>
@@ -375,7 +375,7 @@ Document[0, 58]
                 <w:highlight w:val="yellow"/>
                 <w:bdr w:color="EEC5E1" w:space="1" w:sz="2" w:val="single"/>
             </w:rPr>
-            <w:t xml:space="preserve">inline code</w:t>
+            <w:t>inline code</w:t>
         </w:r>
         <w:r>
             <w:rPr>
@@ -410,7 +410,7 @@ Document[0, 58]
                 <w:highlight w:val="white"/>
                 <w:bdr w:color="EEC5E1" w:space="1" w:sz="2" w:val="single"/>
             </w:rPr>
-            <w:t xml:space="preserve">inline code</w:t>
+            <w:t>inline code</w:t>
         </w:r>
         <w:r>
             <w:rPr>
@@ -431,19 +431,18 @@ Document[0, 58]
     <w:bookmarkEnd w:id="1"/>
     <w:p>
         <w:pPr>
-            <w:pBdr>
-                <w:left/>
-            </w:pBdr>
-            <w:shd w:color="auto" w:val="clear"/>
+            <w:pStyle w:val="Heading1"/>
+            <w:numPr>
+                <w:ilvl w:val="0"/>
+                <w:numId w:val="0"/>
+            </w:numPr>
         </w:pPr>
         <w:r>
             <w:rPr>
-                <w:b/>
-                <w:bCs/>
                 <w:sz w:val="40"/>
                 <w:szCs w:val="40"/>
             </w:rPr>
-            <w:t xml:space="preserve">Change Font Size</w:t>
+            <w:t>Change Font Size</w:t>
         </w:r>
     </w:p>
 </w:body>
@@ -458,19 +457,18 @@ Document[0, 58]
     <w:bookmarkEnd w:id="1"/>
     <w:p>
         <w:pPr>
-            <w:pBdr>
-                <w:left/>
-            </w:pBdr>
-            <w:shd w:color="auto" w:val="clear"/>
+            <w:pStyle w:val="Heading1"/>
+            <w:numPr>
+                <w:ilvl w:val="0"/>
+                <w:numId w:val="0"/>
+            </w:numPr>
         </w:pPr>
         <w:r>
             <w:rPr>
-                <w:b/>
-                <w:bCs/>
                 <w:sz w:val="41"/>
                 <w:szCs w:val="41"/>
             </w:rPr>
-            <w:t xml:space="preserve">Change Font Size</w:t>
+            <w:t>Change Font Size</w:t>
         </w:r>
     </w:p>
 </w:body>
@@ -485,19 +483,18 @@ Document[0, 58]
     <w:bookmarkEnd w:id="1"/>
     <w:p>
         <w:pPr>
-            <w:pBdr>
-                <w:left/>
-            </w:pBdr>
-            <w:shd w:color="auto" w:val="clear"/>
+            <w:pStyle w:val="Heading1"/>
+            <w:numPr>
+                <w:ilvl w:val="0"/>
+                <w:numId w:val="0"/>
+            </w:numPr>
         </w:pPr>
         <w:r>
             <w:rPr>
-                <w:b/>
-                <w:bCs/>
                 <w:sz w:val="40"/>
                 <w:szCs w:val="40"/>
             </w:rPr>
-            <w:t xml:space="preserve">Change Font Size</w:t>
+            <w:t>Change Font Size</w:t>
         </w:r>
     </w:p>
 </w:body>
@@ -512,19 +509,18 @@ Document[0, 58]
     <w:bookmarkEnd w:id="1"/>
     <w:p>
         <w:pPr>
-            <w:pBdr>
-                <w:left/>
-            </w:pBdr>
-            <w:shd w:color="auto" w:val="clear"/>
+            <w:pStyle w:val="Heading1"/>
+            <w:numPr>
+                <w:ilvl w:val="0"/>
+                <w:numId w:val="0"/>
+            </w:numPr>
         </w:pPr>
         <w:r>
             <w:rPr>
-                <w:b/>
-                <w:bCs/>
                 <w:sz w:val="41"/>
                 <w:szCs w:val="41"/>
             </w:rPr>
-            <w:t xml:space="preserve">Change Font Size</w:t>
+            <w:t>Change Font Size</w:t>
         </w:r>
     </w:p>
 </w:body>
@@ -566,7 +562,7 @@ permutations of formatting
                 <w:bCs/>
                 <w:color w:val="FF0000"/>
             </w:rPr>
-            <w:t xml:space="preserve">Bold-Italic</w:t>
+            <w:t>Bold-Italic</w:t>
         </w:r>
         <w:r>
             <w:rPr>
@@ -600,7 +596,7 @@ permutations of formatting
                 <w:iCs/>
                 <w:color w:val="FF0000"/>
             </w:rPr>
-            <w:t xml:space="preserve">Bold-Italic</w:t>
+            <w:t>Bold-Italic</w:t>
         </w:r>
         <w:r>
             <w:rPr>
@@ -634,7 +630,7 @@ permutations of formatting
                 <w:bCs/>
                 <w:color w:val="FF0000"/>
             </w:rPr>
-            <w:t xml:space="preserve">Bold-Underline</w:t>
+            <w:t>Bold-Underline</w:t>
         </w:r>
         <w:r>
             <w:rPr>
@@ -668,7 +664,7 @@ permutations of formatting
                 <w:bCs/>
                 <w:color w:val="FF0000"/>
             </w:rPr>
-            <w:t xml:space="preserve">Bold-Superscript</w:t>
+            <w:t>Bold-Superscript</w:t>
         </w:r>
         <w:r>
             <w:rPr>
@@ -683,14 +679,14 @@ permutations of formatting
                 <w:position w:val="8"/>
                 <w:sz w:val="19"/>
             </w:rPr>
-            <w:t xml:space="preserve">i</w:t>
+            <w:t>i</w:t>
         </w:r>
         <w:r>
             <w:rPr>
                 <w:rStyle w:val="Superscript"/>
                 <w:color w:val="FF0000"/>
             </w:rPr>
-            <w:t xml:space="preserve">&#x1d6d1;</w:t>
+            <w:t>&#x1d6d1;</w:t>
         </w:r>
         <w:r>
             <w:rPr>
@@ -724,7 +720,7 @@ permutations of formatting
                 <w:bCs/>
                 <w:color w:val="FF0000"/>
             </w:rPr>
-            <w:t xml:space="preserve">Bold-Subscript</w:t>
+            <w:t>Bold-Subscript</w:t>
         </w:r>
         <w:r>
             <w:rPr>
@@ -737,13 +733,13 @@ permutations of formatting
                 <w:rStyle w:val="Subscript"/>
                 <w:color w:val="FF0000"/>
             </w:rPr>
-            <w:t xml:space="preserve">2</w:t>
+            <w:t>2</w:t>
         </w:r>
         <w:r>
             <w:rPr>
                 <w:color w:val="FF0000"/>
             </w:rPr>
-            <w:t xml:space="preserve">O</w:t>
+            <w:t>O</w:t>
         </w:r>
         <w:r>
             <w:rPr>
@@ -771,7 +767,7 @@ permutations of formatting
                 <w:bCs/>
                 <w:color w:val="FF0000"/>
             </w:rPr>
-            <w:t xml:space="preserve">Bold-strike-through</w:t>
+            <w:t>Bold-strike-through</w:t>
         </w:r>
         <w:r>
             <w:rPr>
@@ -798,7 +794,7 @@ plain text{style="color:blue"}
             <w:rPr>
                 <w:color w:val="0000FF"/>
             </w:rPr>
-            <w:t xml:space="preserve">plain text</w:t>
+            <w:t>plain text</w:t>
         </w:r>
     </w:p>
 </w:body>
@@ -828,7 +824,7 @@ plain **Bold**{style="color:blue"} text
                 <w:rStyle w:val="StrongEmphasis"/>
                 <w:color w:val="0000FF"/>
             </w:rPr>
-            <w:t xml:space="preserve">Bold</w:t>
+            <w:t>Bold</w:t>
         </w:r>
         <w:r>
             <w:t xml:space="preserve"> text</w:t>
@@ -854,7 +850,7 @@ plain *Italic*{style="color:blue"} text
                 <w:rStyle w:val="Emphasis"/>
                 <w:color w:val="0000FF"/>
             </w:rPr>
-            <w:t xml:space="preserve">Italic</w:t>
+            <w:t>Italic</w:t>
         </w:r>
         <w:r>
             <w:t xml:space="preserve"> text</w:t>
@@ -880,7 +876,7 @@ plain ~~strike-through~~{style="color:blue"} text
                 <w:rStyle w:val="Strikethrough"/>
                 <w:color w:val="0000FF"/>
             </w:rPr>
-            <w:t xml:space="preserve">strike-through</w:t>
+            <w:t>strike-through</w:t>
         </w:r>
         <w:r>
             <w:t xml:space="preserve"> text</w:t>
@@ -906,7 +902,7 @@ plain ~subscript~{style="color:blue"} text H~2~O{
                 <w:rStyle w:val="Subscript"/>
                 <w:color w:val="0000FF"/>
             </w:rPr>
-            <w:t xml:space="preserve">subscript</w:t>
+            <w:t>subscript</w:t>
         </w:r>
         <w:r>
             <w:t xml:space="preserve"> text H</w:t>
@@ -915,10 +911,10 @@ plain ~subscript~{style="color:blue"} text H~2~O{
             <w:rPr>
                 <w:rStyle w:val="Subscript"/>
             </w:rPr>
-            <w:t xml:space="preserve">2</w:t>
+            <w:t>2</w:t>
         </w:r>
         <w:r>
-            <w:t xml:space="preserve">O{</w:t>
+            <w:t>O{</w:t>
         </w:r>
     </w:p>
 </w:body>
@@ -941,7 +937,7 @@ plain ^superscript^{style="color:blue"} text e^*i*pi^ = -1
                 <w:rStyle w:val="Superscript"/>
                 <w:color w:val="0000FF"/>
             </w:rPr>
-            <w:t xml:space="preserve">superscript</w:t>
+            <w:t>superscript</w:t>
         </w:r>
         <w:r>
             <w:t xml:space="preserve"> text e</w:t>
@@ -952,13 +948,13 @@ plain ^superscript^{style="color:blue"} text e^*i*pi^ = -1
                 <w:position w:val="8"/>
                 <w:sz w:val="19"/>
             </w:rPr>
-            <w:t xml:space="preserve">i</w:t>
+            <w:t>i</w:t>
         </w:r>
         <w:r>
             <w:rPr>
                 <w:rStyle w:val="Superscript"/>
             </w:rPr>
-            <w:t xml:space="preserve">pi</w:t>
+            <w:t>pi</w:t>
         </w:r>
         <w:r>
             <w:t xml:space="preserve"> = -1</w:t>
@@ -984,7 +980,7 @@ plain ^superscript^{style="color:blue"} text e^ipi^ = -1
                 <w:rStyle w:val="Superscript"/>
                 <w:color w:val="0000FF"/>
             </w:rPr>
-            <w:t xml:space="preserve">superscript</w:t>
+            <w:t>superscript</w:t>
         </w:r>
         <w:r>
             <w:t xml:space="preserve"> text e</w:t>
@@ -993,7 +989,7 @@ plain ^superscript^{style="color:blue"} text e^ipi^ = -1
             <w:rPr>
                 <w:rStyle w:val="Superscript"/>
             </w:rPr>
-            <w:t xml:space="preserve">ipi</w:t>
+            <w:t>ipi</w:t>
         </w:r>
         <w:r>
             <w:t xml:space="preserve"> = -1</w:t>
@@ -1019,7 +1015,7 @@ plain ++underline++{style="color:blue"} text
                 <w:rStyle w:val="Underlined"/>
                 <w:color w:val="0000FF"/>
             </w:rPr>
-            <w:t xml:space="preserve">underline</w:t>
+            <w:t>underline</w:t>
         </w:r>
         <w:r>
             <w:t xml:space="preserve"> text</w:t>
@@ -1045,7 +1041,7 @@ plain `inline code`{style="color:blue"} text
                 <w:rStyle w:val="SourceText"/>
                 <w:color w:val="0000FF"/>
             </w:rPr>
-            <w:t xml:space="preserve">inline code</w:t>
+            <w:t>inline code</w:t>
         </w:r>
         <w:r>
             <w:t xml:space="preserve"> text</w:t>
@@ -1074,7 +1070,7 @@ plain `inline code`{style="color:blue"} highlight text
                 <w:highlight w:val="yellow"/>
                 <w:bdr w:color="EEC5E1" w:space="1" w:sz="2" w:val="single"/>
             </w:rPr>
-            <w:t xml:space="preserve">inline code</w:t>
+            <w:t>inline code</w:t>
         </w:r>
         <w:r>
             <w:t xml:space="preserve"> highlight text</w:t>
@@ -1106,7 +1102,7 @@ plain `inline code`{style="color:blue"} highlight text
                 <w:highlight w:val="white"/>
                 <w:bdr w:color="EEC5E1" w:space="1" w:sz="2" w:val="single"/>
             </w:rPr>
-            <w:t xml:space="preserve">inline code</w:t>
+            <w:t>inline code</w:t>
         </w:r>
         <w:r>
             <w:rPr>
@@ -1151,7 +1147,7 @@ plain **Bold ~~Bold-strike-through~~**{style="color:blue"} text
                 <w:bCs/>
                 <w:color w:val="0000FF"/>
             </w:rPr>
-            <w:t xml:space="preserve">Bold-Italic</w:t>
+            <w:t>Bold-Italic</w:t>
         </w:r>
         <w:r>
             <w:t xml:space="preserve"> text</w:t>
@@ -1176,7 +1172,7 @@ plain **Bold ~~Bold-strike-through~~**{style="color:blue"} text
                 <w:iCs/>
                 <w:color w:val="0000FF"/>
             </w:rPr>
-            <w:t xml:space="preserve">Bold-Italic</w:t>
+            <w:t>Bold-Italic</w:t>
         </w:r>
         <w:r>
             <w:t xml:space="preserve"> text</w:t>
@@ -1201,7 +1197,7 @@ plain **Bold ~~Bold-strike-through~~**{style="color:blue"} text
                 <w:bCs/>
                 <w:color w:val="0000FF"/>
             </w:rPr>
-            <w:t xml:space="preserve">Bold-Underline</w:t>
+            <w:t>Bold-Underline</w:t>
         </w:r>
         <w:r>
             <w:t xml:space="preserve"> text</w:t>
@@ -1226,7 +1222,7 @@ plain **Bold ~~Bold-strike-through~~**{style="color:blue"} text
                 <w:bCs/>
                 <w:color w:val="0000FF"/>
             </w:rPr>
-            <w:t xml:space="preserve">Bold-Superscript</w:t>
+            <w:t>Bold-Superscript</w:t>
         </w:r>
         <w:r>
             <w:t xml:space="preserve"> text e</w:t>
@@ -1237,13 +1233,13 @@ plain **Bold ~~Bold-strike-through~~**{style="color:blue"} text
                 <w:position w:val="8"/>
                 <w:sz w:val="19"/>
             </w:rPr>
-            <w:t xml:space="preserve">i</w:t>
+            <w:t>i</w:t>
         </w:r>
         <w:r>
             <w:rPr>
                 <w:rStyle w:val="Superscript"/>
             </w:rPr>
-            <w:t xml:space="preserve">&#x1d6d1;</w:t>
+            <w:t>&#x1d6d1;</w:t>
         </w:r>
         <w:r>
             <w:t xml:space="preserve"> = -1</w:t>
@@ -1268,7 +1264,7 @@ plain **Bold ~~Bold-strike-through~~**{style="color:blue"} text
                 <w:bCs/>
                 <w:color w:val="0000FF"/>
             </w:rPr>
-            <w:t xml:space="preserve">Bold-Subscript</w:t>
+            <w:t>Bold-Subscript</w:t>
         </w:r>
         <w:r>
             <w:t xml:space="preserve"> text H</w:t>
@@ -1277,10 +1273,10 @@ plain **Bold ~~Bold-strike-through~~**{style="color:blue"} text
             <w:rPr>
                 <w:rStyle w:val="Subscript"/>
             </w:rPr>
-            <w:t xml:space="preserve">2</w:t>
+            <w:t>2</w:t>
         </w:r>
         <w:r>
-            <w:t xml:space="preserve">O</w:t>
+            <w:t>O</w:t>
         </w:r>
         <w:r>
             <w:t xml:space="preserve"> </w:t>
@@ -1302,7 +1298,7 @@ plain **Bold ~~Bold-strike-through~~**{style="color:blue"} text
                 <w:bCs/>
                 <w:color w:val="0000FF"/>
             </w:rPr>
-            <w:t xml:space="preserve">Bold-strike-through</w:t>
+            <w:t>Bold-strike-through</w:t>
         </w:r>
         <w:r>
             <w:t xml:space="preserve"> text</w:t>
@@ -1326,7 +1322,7 @@ basic text
             <w:rPr>
                 <w:color w:val="0000FF"/>
             </w:rPr>
-            <w:t xml:space="preserve">plain text</w:t>
+            <w:t>plain text</w:t>
         </w:r>
     </w:p>
 </w:body>
@@ -1352,7 +1348,7 @@ basic text
                 <w:rStyle w:val="StrongEmphasis"/>
                 <w:color w:val="0000FF"/>
             </w:rPr>
-            <w:t xml:space="preserve">Bold</w:t>
+            <w:t>Bold</w:t>
         </w:r>
         <w:r>
             <w:rPr>
@@ -1384,7 +1380,7 @@ basic text
                 <w:rStyle w:val="Emphasis"/>
                 <w:color w:val="0000FF"/>
             </w:rPr>
-            <w:t xml:space="preserve">Italic</w:t>
+            <w:t>Italic</w:t>
         </w:r>
         <w:r>
             <w:rPr>
@@ -1416,7 +1412,7 @@ basic text
                 <w:rStyle w:val="Strikethrough"/>
                 <w:color w:val="0000FF"/>
             </w:rPr>
-            <w:t xml:space="preserve">strike-through</w:t>
+            <w:t>strike-through</w:t>
         </w:r>
         <w:r>
             <w:rPr>
@@ -1448,7 +1444,7 @@ basic text
                 <w:rStyle w:val="Subscript"/>
                 <w:color w:val="0000FF"/>
             </w:rPr>
-            <w:t xml:space="preserve">subscript</w:t>
+            <w:t>subscript</w:t>
         </w:r>
         <w:r>
             <w:rPr>
@@ -1461,13 +1457,13 @@ basic text
                 <w:rStyle w:val="Subscript"/>
                 <w:color w:val="FF0000"/>
             </w:rPr>
-            <w:t xml:space="preserve">2</w:t>
+            <w:t>2</w:t>
         </w:r>
         <w:r>
             <w:rPr>
                 <w:color w:val="FF0000"/>
             </w:rPr>
-            <w:t xml:space="preserve">O</w:t>
+            <w:t>O</w:t>
         </w:r>
     </w:p>
 </w:body>
@@ -1493,7 +1489,7 @@ basic text
                 <w:rStyle w:val="Superscript"/>
                 <w:color w:val="0000FF"/>
             </w:rPr>
-            <w:t xml:space="preserve">superscript</w:t>
+            <w:t>superscript</w:t>
         </w:r>
         <w:r>
             <w:rPr>
@@ -1508,14 +1504,14 @@ basic text
                 <w:position w:val="8"/>
                 <w:sz w:val="19"/>
             </w:rPr>
-            <w:t xml:space="preserve">i</w:t>
+            <w:t>i</w:t>
         </w:r>
         <w:r>
             <w:rPr>
                 <w:rStyle w:val="Superscript"/>
                 <w:color w:val="FF0000"/>
             </w:rPr>
-            <w:t xml:space="preserve">pi</w:t>
+            <w:t>pi</w:t>
         </w:r>
         <w:r>
             <w:rPr>
@@ -1563,7 +1559,7 @@ Document[0, 78]
                 <w:rStyle w:val="Superscript"/>
                 <w:color w:val="0000FF"/>
             </w:rPr>
-            <w:t xml:space="preserve">superscript</w:t>
+            <w:t>superscript</w:t>
         </w:r>
         <w:r>
             <w:rPr>
@@ -1576,7 +1572,7 @@ Document[0, 78]
                 <w:rStyle w:val="Superscript"/>
                 <w:color w:val="FF0000"/>
             </w:rPr>
-            <w:t xml:space="preserve">ipi</w:t>
+            <w:t>ipi</w:t>
         </w:r>
         <w:r>
             <w:rPr>
@@ -1608,7 +1604,7 @@ Document[0, 78]
                 <w:rStyle w:val="Underlined"/>
                 <w:color w:val="0000FF"/>
             </w:rPr>
-            <w:t xml:space="preserve">underline</w:t>
+            <w:t>underline</w:t>
         </w:r>
         <w:r>
             <w:rPr>
@@ -1640,7 +1636,7 @@ Document[0, 78]
                 <w:rStyle w:val="SourceText"/>
                 <w:color w:val="0000FF"/>
             </w:rPr>
-            <w:t xml:space="preserve">inline code</w:t>
+            <w:t>inline code</w:t>
         </w:r>
         <w:r>
             <w:rPr>
@@ -1675,7 +1671,7 @@ Document[0, 78]
                 <w:highlight w:val="yellow"/>
                 <w:bdr w:color="EEC5E1" w:space="1" w:sz="2" w:val="single"/>
             </w:rPr>
-            <w:t xml:space="preserve">inline code</w:t>
+            <w:t>inline code</w:t>
         </w:r>
         <w:r>
             <w:rPr>
@@ -1710,7 +1706,7 @@ Document[0, 78]
                 <w:highlight w:val="white"/>
                 <w:bdr w:color="EEC5E1" w:space="1" w:sz="2" w:val="single"/>
             </w:rPr>
-            <w:t xml:space="preserve">inline code</w:t>
+            <w:t>inline code</w:t>
         </w:r>
         <w:r>
             <w:rPr>
@@ -1758,7 +1754,7 @@ permutations of formatting
                 <w:bCs/>
                 <w:color w:val="0000FF"/>
             </w:rPr>
-            <w:t xml:space="preserve">Bold-Italic</w:t>
+            <w:t>Bold-Italic</w:t>
         </w:r>
         <w:r>
             <w:rPr>
@@ -1792,7 +1788,7 @@ permutations of formatting
                 <w:iCs/>
                 <w:color w:val="0000FF"/>
             </w:rPr>
-            <w:t xml:space="preserve">Bold-Italic</w:t>
+            <w:t>Bold-Italic</w:t>
         </w:r>
         <w:r>
             <w:rPr>
@@ -1826,7 +1822,7 @@ permutations of formatting
                 <w:bCs/>
                 <w:color w:val="0000FF"/>
             </w:rPr>
-            <w:t xml:space="preserve">Bold-Underline</w:t>
+            <w:t>Bold-Underline</w:t>
         </w:r>
         <w:r>
             <w:rPr>
@@ -1860,7 +1856,7 @@ permutations of formatting
                 <w:bCs/>
                 <w:color w:val="0000FF"/>
             </w:rPr>
-            <w:t xml:space="preserve">Bold-Superscript</w:t>
+            <w:t>Bold-Superscript</w:t>
         </w:r>
         <w:r>
             <w:rPr>
@@ -1875,14 +1871,14 @@ permutations of formatting
                 <w:position w:val="8"/>
                 <w:sz w:val="19"/>
             </w:rPr>
-            <w:t xml:space="preserve">i</w:t>
+            <w:t>i</w:t>
         </w:r>
         <w:r>
             <w:rPr>
                 <w:rStyle w:val="Superscript"/>
                 <w:color w:val="FF0000"/>
             </w:rPr>
-            <w:t xml:space="preserve">&#x1d6d1;</w:t>
+            <w:t>&#x1d6d1;</w:t>
         </w:r>
         <w:r>
             <w:rPr>
@@ -1916,7 +1912,7 @@ permutations of formatting
                 <w:bCs/>
                 <w:color w:val="0000FF"/>
             </w:rPr>
-            <w:t xml:space="preserve">Bold-Subscript</w:t>
+            <w:t>Bold-Subscript</w:t>
         </w:r>
         <w:r>
             <w:rPr>
@@ -1929,13 +1925,13 @@ permutations of formatting
                 <w:rStyle w:val="Subscript"/>
                 <w:color w:val="FF0000"/>
             </w:rPr>
-            <w:t xml:space="preserve">2</w:t>
+            <w:t>2</w:t>
         </w:r>
         <w:r>
             <w:rPr>
                 <w:color w:val="FF0000"/>
             </w:rPr>
-            <w:t xml:space="preserve">O</w:t>
+            <w:t>O</w:t>
         </w:r>
         <w:r>
             <w:rPr>
@@ -1963,7 +1959,7 @@ permutations of formatting
                 <w:bCs/>
                 <w:color w:val="0000FF"/>
             </w:rPr>
-            <w:t xml:space="preserve">Bold-strike-through</w:t>
+            <w:t>Bold-strike-through</w:t>
         </w:r>
         <w:r>
             <w:rPr>
@@ -1991,7 +1987,7 @@ background color for paragraphs
                 <w:color w:val="FF0000"/>
                 <w:shd w:color="auto" w:fill="yellow" w:val="clear"/>
             </w:rPr>
-            <w:t xml:space="preserve">plain text</w:t>
+            <w:t>plain text</w:t>
         </w:r>
     </w:p>
 </w:body>
@@ -2013,7 +2009,7 @@ background color for paragraphs
                 <w:color w:val="0000FF"/>
                 <w:shd w:color="auto" w:fill="yellow" w:val="clear"/>
             </w:rPr>
-            <w:t xml:space="preserve">plain text</w:t>
+            <w:t>plain text</w:t>
         </w:r>
     </w:p>
 </w:body>
@@ -2041,7 +2037,7 @@ background color for paragraphs
                 <w:color w:val="0000FF"/>
                 <w:shd w:color="auto" w:fill="yellow" w:val="clear"/>
             </w:rPr>
-            <w:t xml:space="preserve">Bold</w:t>
+            <w:t>Bold</w:t>
         </w:r>
         <w:r>
             <w:rPr>
@@ -2070,17 +2066,18 @@ background color for paragraphs
 <w:body>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="ParagraphTextBody"/>
+            <w:pStyle w:val="ListBullet"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
                 <w:numId w:val="2"/>
             </w:numPr>
+            <w:spacing w:after="120" w:before="240" w:lineRule="auto"/>
         </w:pPr>
         <w:r>
             <w:rPr>
                 <w:color w:val="FF0000"/>
             </w:rPr>
-            <w:t xml:space="preserve">list 1</w:t>
+            <w:t>list 1</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -2092,22 +2089,23 @@ background color for paragraphs
             <w:rPr>
                 <w:color w:val="FF0000"/>
             </w:rPr>
-            <w:t xml:space="preserve">with some text</w:t>
+            <w:t>with some text</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="ParagraphTextBody"/>
+            <w:pStyle w:val="ListBullet"/>
             <w:numPr>
                 <w:ilvl w:val="1"/>
                 <w:numId w:val="2"/>
             </w:numPr>
+            <w:spacing w:after="120" w:before="240" w:lineRule="auto"/>
         </w:pPr>
         <w:r>
             <w:rPr>
                 <w:color w:val="FF0000"/>
             </w:rPr>
-            <w:t xml:space="preserve">list 2</w:t>
+            <w:t>list 2</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -2119,7 +2117,7 @@ background color for paragraphs
             <w:rPr>
                 <w:color w:val="FF0000"/>
             </w:rPr>
-            <w:t xml:space="preserve">with some text</w:t>
+            <w:t>with some text</w:t>
         </w:r>
     </w:p>
 </w:body>
@@ -2141,17 +2139,18 @@ Numbering start
 <w:body>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="ParagraphTextBody"/>
+            <w:pStyle w:val="ListNumber"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
                 <w:numId w:val="4"/>
             </w:numPr>
+            <w:spacing w:after="120" w:before="240" w:lineRule="auto"/>
         </w:pPr>
         <w:r>
             <w:rPr>
                 <w:color w:val="FF0000"/>
             </w:rPr>
-            <w:t xml:space="preserve">list 1</w:t>
+            <w:t>list 1</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -2163,22 +2162,23 @@ Numbering start
             <w:rPr>
                 <w:color w:val="FF0000"/>
             </w:rPr>
-            <w:t xml:space="preserve">with some text</w:t>
+            <w:t>with some text</w:t>
         </w:r>
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="ParagraphTextBody"/>
+            <w:pStyle w:val="ListNumber"/>
             <w:numPr>
                 <w:ilvl w:val="1"/>
                 <w:numId w:val="5"/>
             </w:numPr>
+            <w:spacing w:after="120" w:before="240" w:lineRule="auto"/>
         </w:pPr>
         <w:r>
             <w:rPr>
                 <w:color w:val="FF0000"/>
             </w:rPr>
-            <w:t xml:space="preserve">list 2</w:t>
+            <w:t>list 2</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -2190,7 +2190,7 @@ Numbering start
             <w:rPr>
                 <w:color w:val="FF0000"/>
             </w:rPr>
-            <w:t xml:space="preserve">with some text</w:t>
+            <w:t>with some text</w:t>
         </w:r>
     </w:p>
 </w:body>
@@ -2207,32 +2207,757 @@ Numbering start
     <w:bookmarkEnd w:id="1"/>
     <w:p>
         <w:pPr>
-            <w:pBdr>
-                <w:left/>
-            </w:pBdr>
-            <w:shd w:color="auto" w:fill="yellow" w:val="clear"/>
+            <w:pStyle w:val="Heading1"/>
+            <w:numPr>
+                <w:ilvl w:val="0"/>
+                <w:numId w:val="0"/>
+            </w:numPr>
         </w:pPr>
         <w:r>
             <w:rPr>
-                <w:b/>
-                <w:bCs/>
                 <w:color w:val="FF0000"/>
-                <w:sz w:val="48"/>
-                <w:szCs w:val="48"/>
                 <w:shd w:color="auto" w:fill="yellow" w:val="clear"/>
             </w:rPr>
             <w:t xml:space="preserve">Heading </w:t>
         </w:r>
         <w:r>
             <w:rPr>
-                <w:b/>
-                <w:bCs/>
                 <w:color w:val="0000FF"/>
-                <w:sz w:val="48"/>
-                <w:szCs w:val="48"/>
                 <w:shd w:color="auto" w:fill="yellow" w:val="clear"/>
             </w:rPr>
-            <w:t xml:space="preserve">Text</w:t>
+            <w:t>Text</w:t>
+        </w:r>
+    </w:p>
+</w:body>
+````````````````````````````````
+
+
+```````````````````````````````` example Headings: 2
+Heading {style="font-size: 26pt"}
+-------
+.
+<w:body>
+    <w:bookmarkStart w:id="1" w:name="heading"/>
+    <w:bookmarkEnd w:id="1"/>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="Heading2"/>
+            <w:numPr>
+                <w:ilvl w:val="1"/>
+                <w:numId w:val="0"/>
+            </w:numPr>
+        </w:pPr>
+        <w:r>
+            <w:rPr>
+                <w:sz w:val="52"/>
+                <w:szCs w:val="52"/>
+            </w:rPr>
+            <w:t>Heading</w:t>
+        </w:r>
+    </w:p>
+</w:body>
+````````````````````````````````
+
+
+```````````````````````````````` example Headings: 3
+# Heading {style="font-size: 26pt"}
+.
+<w:body>
+    <w:bookmarkStart w:id="1" w:name="heading"/>
+    <w:bookmarkEnd w:id="1"/>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="Heading1"/>
+            <w:numPr>
+                <w:ilvl w:val="0"/>
+                <w:numId w:val="0"/>
+            </w:numPr>
+        </w:pPr>
+        <w:r>
+            <w:rPr>
+                <w:sz w:val="52"/>
+                <w:szCs w:val="52"/>
+            </w:rPr>
+            <w:t>Heading</w:t>
+        </w:r>
+    </w:p>
+</w:body>
+````````````````````````````````
+
+
+## Style
+
+```````````````````````````````` example Style: 1
+Paragraph Style 
+
+{.Heading1}
+.
+<w:body>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="Heading1"/>
+        </w:pPr>
+        <w:r>
+            <w:t>Paragraph Style</w:t>
+        </w:r>
+    </w:p>
+</w:body>
+````````````````````````````````
+
+
+## Page Break
+
+```````````````````````````````` example Page Break: 1
+{.pagebreak}
+.
+<w:body>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="ParagraphTextBody"/>
+        </w:pPr>
+        <w:r>
+            <w:br w:type="page"/>
+        </w:r>
+    </w:p>
+</w:body>
+````````````````````````````````
+
+
+```````````````````````````````` example Page Break: 2
+Some text
+{.pagebreak}
+
+Following Text
+.
+<w:body>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="ParagraphTextBody"/>
+        </w:pPr>
+        <w:r>
+            <w:t>Some text</w:t>
+            <w:br w:type="page"/>
+        </w:r>
+    </w:p>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="ParagraphTextBody"/>
+        </w:pPr>
+        <w:r>
+            <w:t>Following Text</w:t>
+        </w:r>
+    </w:p>
+</w:body>
+````````````````````````````````
+
+
+```````````````````````````````` example Page Break: 3
+Some text  
+
+{.pagebreak} Following text
+.
+<w:body>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="ParagraphTextBody"/>
+        </w:pPr>
+        <w:r>
+            <w:t>Some text</w:t>
+        </w:r>
+    </w:p>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="ParagraphTextBody"/>
+        </w:pPr>
+        <w:r>
+            <w:br w:type="page"/>
+        </w:r>
+        <w:r>
+            <w:t>Following text</w:t>
+        </w:r>
+    </w:p>
+</w:body>
+````````````````````````````````
+
+
+```````````````````````````````` example Page Break: 4
+Some text
+
+{.pagebreak}
+
+Following Text
+.
+<w:body>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="ParagraphTextBody"/>
+        </w:pPr>
+        <w:r>
+            <w:t>Some text</w:t>
+        </w:r>
+    </w:p>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="ParagraphTextBody"/>
+        </w:pPr>
+        <w:r>
+            <w:br w:type="page"/>
+        </w:r>
+    </w:p>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="ParagraphTextBody"/>
+        </w:pPr>
+        <w:r>
+            <w:t>Following Text</w:t>
+        </w:r>
+    </w:p>
+</w:body>
+````````````````````````````````
+
+
+## Tab
+
+```````````````````````````````` example Tab: 1
+{.tab}
+.
+<w:body>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="ParagraphTextBody"/>
+        </w:pPr>
+        <w:r>
+            <w:tab/>
+        </w:r>
+    </w:p>
+</w:body>
+````````````````````````````````
+
+
+```````````````````````````````` example Tab: 2
+Some text {.tab} Following Text
+.
+<w:body>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="ParagraphTextBody"/>
+        </w:pPr>
+        <w:r>
+            <w:t xml:space="preserve">Some text </w:t>
+            <w:tab/>
+        </w:r>
+        <w:r>
+            <w:t xml:space="preserve"> Following Text</w:t>
+        </w:r>
+    </w:p>
+</w:body>
+````````````````````````````````
+
+
+## Images
+
+Align left
+
+```````````````````````````````` example(Images: 1) options(url, IGNORED)
+![flexmark-icon-logo](/images/flexmark-icon-logo@2x.png){align="left"}with some text wrapped
+around the image if possible. So we add more text otherwise there is not enough to wrap in Word
+and validate how the text is wrapped.
+.
+<w:body>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="ParagraphTextBody"/>
+        </w:pPr>
+        <w:r>
+            <w:drawing>
+                <wp:anchor allowOverlap="true" behindDoc="false"
+                    distB="0" distL="114300" distR="114300" distT="0"
+                    layoutInCell="true" locked="false"
+                    relativeHeight="251658240" simplePos="false" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
+                    <wp:simplePos x="0" y="0"/>
+                    <wp:positionH relativeFrom="column">
+                        <wp:align>left</wp:align>
+                    </wp:positionH>
+                    <wp:positionV relativeFrom="paragraph">
+                        <wp:posOffset>0</wp:posOffset>
+                    </wp:positionV>
+                    <wp:extent cx="609600" cy="609600"/>
+                    <wp:effectExtent b="0" l="0" r="0" t="0"/>
+                    <wp:wrapSquare wrapText="right"/>
+                    <wp:docPr descr="flexmark-icon-logo" id="100000" name="Image100000"/>
+                    <wp:cNvGraphicFramePr>
+                        <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
+                    </wp:cNvGraphicFramePr>
+                    <a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
+                        <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                            <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                                <pic:nvPicPr>
+                                    <pic:cNvPr id="100001" name="Image100000"/>
+                                    <pic:cNvPicPr/>
+                                </pic:nvPicPr>
+                                <pic:blipFill>
+                                    <a:blip r:embed="rId3" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"/>
+                                    <a:stretch>
+                                    <a:fillRect/>
+                                    </a:stretch>
+                                </pic:blipFill>
+                                <pic:spPr>
+                                    <a:xfrm>
+                                    <a:off x="0" y="0"/>
+                                    <a:ext cx="609600" cy="609600"/>
+                                    </a:xfrm>
+                                    <a:prstGeom prst="rect">
+                                    <a:avLst/>
+                                    </a:prstGeom>
+                                </pic:spPr>
+                            </pic:pic>
+                        </a:graphicData>
+                    </a:graphic>
+                </wp:anchor>
+            </w:drawing>
+        </w:r>
+        <w:r>
+            <w:t>with some text wrapped</w:t>
+        </w:r>
+        <w:r>
+            <w:t xml:space="preserve"> </w:t>
+        </w:r>
+        <w:r>
+            <w:t>around the image if possible. So we add more text otherwise there is not enough to wrap in Word</w:t>
+        </w:r>
+        <w:r>
+            <w:t xml:space="preserve"> </w:t>
+        </w:r>
+        <w:r>
+            <w:t>and validate how the text is wrapped.</w:t>
+        </w:r>
+    </w:p>
+</w:body>
+````````````````````````````````
+
+
+Align right
+
+```````````````````````````````` example(Images: 2) options(url, IGNORED)
+![flexmark-icon-logo](/images/flexmark-icon-logo@2x.png){align="right"}with some text wrapped
+around the image if possible. So we add more text otherwise there is not enough to wrap in Word
+and validate how the text is wrapped.
+.
+<w:body>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="ParagraphTextBody"/>
+        </w:pPr>
+        <w:r>
+            <w:drawing>
+                <wp:anchor allowOverlap="true" behindDoc="false"
+                    distB="0" distL="114300" distR="114300" distT="0"
+                    layoutInCell="true" locked="false"
+                    relativeHeight="251658240" simplePos="false" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
+                    <wp:simplePos x="0" y="0"/>
+                    <wp:positionH relativeFrom="column">
+                        <wp:align>right</wp:align>
+                    </wp:positionH>
+                    <wp:positionV relativeFrom="paragraph">
+                        <wp:posOffset>0</wp:posOffset>
+                    </wp:positionV>
+                    <wp:extent cx="609600" cy="609600"/>
+                    <wp:effectExtent b="0" l="0" r="0" t="0"/>
+                    <wp:wrapSquare wrapText="left"/>
+                    <wp:docPr descr="flexmark-icon-logo" id="100000" name="Image100000"/>
+                    <wp:cNvGraphicFramePr>
+                        <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
+                    </wp:cNvGraphicFramePr>
+                    <a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
+                        <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                            <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                                <pic:nvPicPr>
+                                    <pic:cNvPr id="100001" name="Image100000"/>
+                                    <pic:cNvPicPr/>
+                                </pic:nvPicPr>
+                                <pic:blipFill>
+                                    <a:blip r:embed="rId3" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"/>
+                                    <a:stretch>
+                                    <a:fillRect/>
+                                    </a:stretch>
+                                </pic:blipFill>
+                                <pic:spPr>
+                                    <a:xfrm>
+                                    <a:off x="0" y="0"/>
+                                    <a:ext cx="609600" cy="609600"/>
+                                    </a:xfrm>
+                                    <a:prstGeom prst="rect">
+                                    <a:avLst/>
+                                    </a:prstGeom>
+                                </pic:spPr>
+                            </pic:pic>
+                        </a:graphicData>
+                    </a:graphic>
+                </wp:anchor>
+            </w:drawing>
+        </w:r>
+        <w:r>
+            <w:t>with some text wrapped</w:t>
+        </w:r>
+        <w:r>
+            <w:t xml:space="preserve"> </w:t>
+        </w:r>
+        <w:r>
+            <w:t>around the image if possible. So we add more text otherwise there is not enough to wrap in Word</w:t>
+        </w:r>
+        <w:r>
+            <w:t xml:space="preserve"> </w:t>
+        </w:r>
+        <w:r>
+            <w:t>and validate how the text is wrapped.</w:t>
+        </w:r>
+    </w:p>
+</w:body>
+````````````````````````````````
+
+
+Align center
+
+```````````````````````````````` example(Images: 3) options(url, IGNORED)
+![flexmark-icon-logo](/images/flexmark-icon-logo@2x.png){align="center"}with some text wrapped
+around the image if possible. So we add more text otherwise there is not enough to wrap in Word
+and validate how the text is wrapped.
+.
+<w:body>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="ParagraphTextBody"/>
+        </w:pPr>
+        <w:r>
+            <w:drawing>
+                <wp:anchor allowOverlap="true" behindDoc="false"
+                    distB="0" distL="114300" distR="114300" distT="0"
+                    layoutInCell="true" locked="false"
+                    relativeHeight="251658240" simplePos="false" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
+                    <wp:simplePos x="0" y="0"/>
+                    <wp:positionH relativeFrom="column">
+                        <wp:align>center</wp:align>
+                    </wp:positionH>
+                    <wp:positionV relativeFrom="paragraph">
+                        <wp:posOffset>0</wp:posOffset>
+                    </wp:positionV>
+                    <wp:extent cx="609600" cy="609600"/>
+                    <wp:effectExtent b="0" l="0" r="0" t="0"/>
+                    <wp:wrapSquare wrapText="bothSides"/>
+                    <wp:docPr descr="flexmark-icon-logo" id="100000" name="Image100000"/>
+                    <wp:cNvGraphicFramePr>
+                        <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
+                    </wp:cNvGraphicFramePr>
+                    <a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
+                        <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                            <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                                <pic:nvPicPr>
+                                    <pic:cNvPr id="100001" name="Image100000"/>
+                                    <pic:cNvPicPr/>
+                                </pic:nvPicPr>
+                                <pic:blipFill>
+                                    <a:blip r:embed="rId3" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"/>
+                                    <a:stretch>
+                                    <a:fillRect/>
+                                    </a:stretch>
+                                </pic:blipFill>
+                                <pic:spPr>
+                                    <a:xfrm>
+                                    <a:off x="0" y="0"/>
+                                    <a:ext cx="609600" cy="609600"/>
+                                    </a:xfrm>
+                                    <a:prstGeom prst="rect">
+                                    <a:avLst/>
+                                    </a:prstGeom>
+                                </pic:spPr>
+                            </pic:pic>
+                        </a:graphicData>
+                    </a:graphic>
+                </wp:anchor>
+            </w:drawing>
+        </w:r>
+        <w:r>
+            <w:t>with some text wrapped</w:t>
+        </w:r>
+        <w:r>
+            <w:t xml:space="preserve"> </w:t>
+        </w:r>
+        <w:r>
+            <w:t>around the image if possible. So we add more text otherwise there is not enough to wrap in Word</w:t>
+        </w:r>
+        <w:r>
+            <w:t xml:space="preserve"> </w:t>
+        </w:r>
+        <w:r>
+            <w:t>and validate how the text is wrapped.</w:t>
+        </w:r>
+    </w:p>
+</w:body>
+````````````````````````````````
+
+
+Size in cm
+
+```````````````````````````````` example(Images: 4) options(url, IGNORED)
+![flexmark-icon-logo](assets/images/flexmark-icon-logo@2x.png){align=right width=2cm} 
+with some text
+.
+<w:body>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="ParagraphTextBody"/>
+        </w:pPr>
+        <w:r>
+            <w:drawing>
+                <wp:anchor allowOverlap="true" behindDoc="false"
+                    distB="0" distL="114300" distR="114300" distT="0"
+                    layoutInCell="true" locked="false"
+                    relativeHeight="251658240" simplePos="false" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
+                    <wp:simplePos x="0" y="0"/>
+                    <wp:positionH relativeFrom="column">
+                        <wp:align>right</wp:align>
+                    </wp:positionH>
+                    <wp:positionV relativeFrom="paragraph">
+                        <wp:posOffset>0</wp:posOffset>
+                    </wp:positionV>
+                    <wp:extent cx="719455" cy="719455"/>
+                    <wp:effectExtent b="0" l="0" r="0" t="0"/>
+                    <wp:wrapSquare wrapText="left"/>
+                    <wp:docPr descr="flexmark-icon-logo" id="100000" name="Image100000"/>
+                    <wp:cNvGraphicFramePr>
+                        <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
+                    </wp:cNvGraphicFramePr>
+                    <a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
+                        <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                            <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                                <pic:nvPicPr>
+                                    <pic:cNvPr id="100001" name="Image100000"/>
+                                    <pic:cNvPicPr/>
+                                </pic:nvPicPr>
+                                <pic:blipFill>
+                                    <a:blip r:embed="rId3" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"/>
+                                    <a:stretch>
+                                    <a:fillRect/>
+                                    </a:stretch>
+                                </pic:blipFill>
+                                <pic:spPr>
+                                    <a:xfrm>
+                                    <a:off x="0" y="0"/>
+                                    <a:ext cx="719455" cy="719455"/>
+                                    </a:xfrm>
+                                    <a:prstGeom prst="rect">
+                                    <a:avLst/>
+                                    </a:prstGeom>
+                                </pic:spPr>
+                            </pic:pic>
+                        </a:graphicData>
+                    </a:graphic>
+                </wp:anchor>
+            </w:drawing>
+        </w:r>
+        <w:r>
+            <w:t xml:space="preserve"> </w:t>
+        </w:r>
+        <w:r>
+            <w:t>with some text</w:t>
+        </w:r>
+    </w:p>
+</w:body>
+````````````````````````````````
+
+
+Size in cm
+
+```````````````````````````````` example(Images: 5) options(url, IGNORED)
+![flexmark-icon-logo](assets/images/flexmark-icon-logo@2x.png){align=right height=6cm} with some text
+.
+<w:body>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="ParagraphTextBody"/>
+        </w:pPr>
+        <w:r>
+            <w:drawing>
+                <wp:anchor allowOverlap="true" behindDoc="false"
+                    distB="0" distL="114300" distR="114300" distT="0"
+                    layoutInCell="true" locked="false"
+                    relativeHeight="251658240" simplePos="false" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
+                    <wp:simplePos x="0" y="0"/>
+                    <wp:positionH relativeFrom="column">
+                        <wp:align>right</wp:align>
+                    </wp:positionH>
+                    <wp:positionV relativeFrom="paragraph">
+                        <wp:posOffset>0</wp:posOffset>
+                    </wp:positionV>
+                    <wp:extent cx="2159635" cy="2159635"/>
+                    <wp:effectExtent b="0" l="0" r="0" t="0"/>
+                    <wp:wrapSquare wrapText="left"/>
+                    <wp:docPr descr="flexmark-icon-logo" id="100000" name="Image100000"/>
+                    <wp:cNvGraphicFramePr>
+                        <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
+                    </wp:cNvGraphicFramePr>
+                    <a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
+                        <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                            <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                                <pic:nvPicPr>
+                                    <pic:cNvPr id="100001" name="Image100000"/>
+                                    <pic:cNvPicPr/>
+                                </pic:nvPicPr>
+                                <pic:blipFill>
+                                    <a:blip r:embed="rId3" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"/>
+                                    <a:stretch>
+                                    <a:fillRect/>
+                                    </a:stretch>
+                                </pic:blipFill>
+                                <pic:spPr>
+                                    <a:xfrm>
+                                    <a:off x="0" y="0"/>
+                                    <a:ext cx="2159635" cy="2159635"/>
+                                    </a:xfrm>
+                                    <a:prstGeom prst="rect">
+                                    <a:avLst/>
+                                    </a:prstGeom>
+                                </pic:spPr>
+                            </pic:pic>
+                        </a:graphicData>
+                    </a:graphic>
+                </wp:anchor>
+            </w:drawing>
+        </w:r>
+        <w:r>
+            <w:t xml:space="preserve"> with some text</w:t>
+        </w:r>
+    </w:p>
+</w:body>
+````````````````````````````````
+
+
+Size in cm
+
+```````````````````````````````` example(Images: 6) options(url, IGNORED)
+![flexmark-icon-logo](assets/images/flexmark-icon-logo@2x.png){align=right height=6cm width=4cm}
+with some text
+.
+<w:body>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="ParagraphTextBody"/>
+        </w:pPr>
+        <w:r>
+            <w:drawing>
+                <wp:anchor allowOverlap="true" behindDoc="false"
+                    distB="0" distL="114300" distR="114300" distT="0"
+                    layoutInCell="true" locked="false"
+                    relativeHeight="251658240" simplePos="false" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
+                    <wp:simplePos x="0" y="0"/>
+                    <wp:positionH relativeFrom="column">
+                        <wp:align>right</wp:align>
+                    </wp:positionH>
+                    <wp:positionV relativeFrom="paragraph">
+                        <wp:posOffset>0</wp:posOffset>
+                    </wp:positionV>
+                    <wp:extent cx="1439545" cy="2159635"/>
+                    <wp:effectExtent b="0" l="0" r="0" t="0"/>
+                    <wp:wrapSquare wrapText="left"/>
+                    <wp:docPr descr="flexmark-icon-logo" id="100000" name="Image100000"/>
+                    <wp:cNvGraphicFramePr>
+                        <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
+                    </wp:cNvGraphicFramePr>
+                    <a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
+                        <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                            <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                                <pic:nvPicPr>
+                                    <pic:cNvPr id="100001" name="Image100000"/>
+                                    <pic:cNvPicPr/>
+                                </pic:nvPicPr>
+                                <pic:blipFill>
+                                    <a:blip r:embed="rId3" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"/>
+                                    <a:stretch>
+                                    <a:fillRect/>
+                                    </a:stretch>
+                                </pic:blipFill>
+                                <pic:spPr>
+                                    <a:xfrm>
+                                    <a:off x="0" y="0"/>
+                                    <a:ext cx="1439545" cy="2159635"/>
+                                    </a:xfrm>
+                                    <a:prstGeom prst="rect">
+                                    <a:avLst/>
+                                    </a:prstGeom>
+                                </pic:spPr>
+                            </pic:pic>
+                        </a:graphicData>
+                    </a:graphic>
+                </wp:anchor>
+            </w:drawing>
+        </w:r>
+        <w:r>
+            <w:t xml:space="preserve"> </w:t>
+        </w:r>
+        <w:r>
+            <w:t>with some text</w:t>
+        </w:r>
+    </w:p>
+</w:body>
+````````````````````````````````
+
+
+Size in inches
+
+```````````````````````````````` example(Images: 7) options(url, IGNORED)
+![flexmark-icon-logo](assets/images/flexmark-icon-logo@2x.png){width=1in} 
+
+with some text
+.
+<w:body>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="ParagraphTextBody"/>
+        </w:pPr>
+        <w:r>
+            <w:drawing>
+                <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
+                    <wp:extent cx="914400" cy="914400"/>
+                    <wp:effectExtent b="0" l="0" r="0" t="0"/>
+                    <wp:docPr descr="flexmark-icon-logo" id="100000" name="Image100000"/>
+                    <wp:cNvGraphicFramePr>
+                        <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
+                    </wp:cNvGraphicFramePr>
+                    <a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
+                        <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                            <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                                <pic:nvPicPr>
+                                    <pic:cNvPr id="100001" name="Image100000"/>
+                                    <pic:cNvPicPr/>
+                                </pic:nvPicPr>
+                                <pic:blipFill>
+                                    <a:blip r:embed="rId3" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"/>
+                                    <a:stretch>
+                                    <a:fillRect/>
+                                    </a:stretch>
+                                </pic:blipFill>
+                                <pic:spPr>
+                                    <a:xfrm>
+                                    <a:off x="0" y="0"/>
+                                    <a:ext cx="914400" cy="914400"/>
+                                    </a:xfrm>
+                                    <a:prstGeom prst="rect">
+                                    <a:avLst/>
+                                    </a:prstGeom>
+                                </pic:spPr>
+                            </pic:pic>
+                        </a:graphicData>
+                    </a:graphic>
+                </wp:inline>
+            </w:drawing>
+        </w:r>
+    </w:p>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="ParagraphTextBody"/>
+        </w:pPr>
+        <w:r>
+            <w:t>with some text</w:t>
         </w:r>
     </w:p>
 </w:body>

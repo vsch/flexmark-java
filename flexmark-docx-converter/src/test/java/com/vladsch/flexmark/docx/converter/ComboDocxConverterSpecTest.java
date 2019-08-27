@@ -94,6 +94,7 @@ public class ComboDocxConverterSpecTest extends ComboSpecTestCase {
         optionsMap.put("hyperlink-suffix", new MutableDataSet().set(DocxRenderer.LOCAL_HYPERLINK_SUFFIX, "_1"));
         optionsMap.put("yellow-missing-hyperlink", new MutableDataSet().set(DocxRenderer.LOCAL_HYPERLINK_MISSING_HIGHLIGHT, ""));
         optionsMap.put("table-no-span", new MutableDataSet().set(TablesExtension.COLUMN_SPANS, false));
+        optionsMap.put("full-render", new MutableDataSet().set(DocxRenderer.RENDER_BODY_ONLY, false));
         //optionsMap.put("heading-id-suffix", new MutableDataSet().set(DocxRenderer.FIRST_HEADING_ID_SUFFIX, "_1"));
 
         // Set up a simple configuration that logs on the console.

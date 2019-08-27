@@ -64,6 +64,7 @@ import org.junit.runners.Suite;
         ComboCoreTranslationFormatterSpecTest.class,
         ComboFormatterTestSuiteSpecTest.class,
         ComboFormatterIssueSpecTest.class,
+        FlexmarkMergeFormatterTestSuite.class,
 })
 public class FlexmarkFormatterTestSuite {
 }

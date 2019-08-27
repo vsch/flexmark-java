@@ -23,9 +23,11 @@ public class FormatterOptions {
     public final String thematicBreak;
     public final String translationIdFormat;
     public final String translationHtmlBlockPrefix;
+    public final String translationHtmlInlinePrefix;
     public final String translationExcludePattern;
     public final String translationHtmlBlockTagPattern;
     public final String translationHtmlInlineTagPattern;
+    public final String translationAutolinkPrefix;
     public final boolean indentedCodeMinimizeIndent;
     public final boolean fencedCodeMinimizeIndent;
     public final boolean fencedCodeMatchClosingMarker;
@@ -66,6 +68,8 @@ public class FormatterOptions {
         thematicBreak = Formatter.THEMATIC_BREAK.getFrom(options);
         translationIdFormat = Formatter.TRANSLATION_ID_FORMAT.getFrom(options);
         translationHtmlBlockPrefix = Formatter.TRANSLATION_HTML_BLOCK_PREFIX.getFrom(options);
+        translationHtmlInlinePrefix = Formatter.TRANSLATION_HTML_INLINE_PREFIX.getFrom(options);
+        translationAutolinkPrefix = Formatter.TRANSLATION_AUTOLINK_PREFIX.getFrom(options);
         translationExcludePattern = Formatter.TRANSLATION_EXCLUDE_PATTERN.getFrom(options);
         translationHtmlBlockTagPattern = Formatter.TRANSLATION_HTML_BLOCK_TAG_PATTERN.getFrom(options);
         translationHtmlInlineTagPattern = Formatter.TRANSLATION_HTML_INLINE_TAG_PATTERN.getFrom(options);

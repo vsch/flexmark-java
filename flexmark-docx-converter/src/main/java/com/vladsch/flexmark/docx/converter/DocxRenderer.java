@@ -77,7 +77,7 @@ public class DocxRenderer implements IRender {
     public static final DataKey<Boolean> ERRORS_TO_STDERR = new DataKey<>("ERRORS_TO_STDERR", false);
     public static final DataKey<String> ERROR_SOURCE_FILE = new DataKey<>("ERROR_SOURCE_FILE", "");
     public static final DataKey<Double> DOC_EMOJI_IMAGE_VERT_OFFSET = new DataKey<>("DOC_EMOJI_IMAGE_VERT_OFFSET", -0.10);  // offset emoji images down by 10% of the line height, final value rounded to nearest pt so can create jumps in position
-    public static final DataKey<Double> DOC_EMOJI_IMAGE_VERT_SIZE = new DataKey<>("DOC_EMOJI_IMAGE_VERT_SIZE", 1.05);  // size of image as factor of line height range >0
+    public static final DataKey<Double> DOC_EMOJI_IMAGE_VERT_SIZE = new DataKey<>("DOC_EMOJI_IMAGE_VERT_SIZE", 0.9);  // size of image as factor of line height range >0
 
     // for compatibility with HtmlIdGenerator these are placed here
     public static final DataKey<Boolean> HEADER_ID_GENERATOR_RESOLVE_DUPES = HtmlRenderer.HEADER_ID_GENERATOR_RESOLVE_DUPES;
@@ -123,9 +123,12 @@ public class DocxRenderer implements IRender {
 
     public static final DataKey<String> DEFAULT_TEMPLATE_RESOURCE = new DataKey<>("TIGHT_PARAGRAPH_STYLE", "/empty.xml");
 
-    // Now Used.
+    // Now Used. These are numbering styles
     public static final DataKey<String> BULLET_LIST_STYLE = new DataKey<>("BULLET_LIST_STYLE", "BulletList");
     public static final DataKey<String> NUMBERED_LIST_STYLE = new DataKey<>("NUMBERED_LIST_STYLE", "NumberedList");
+
+    public static final DataKey<String> PARAGRAPH_BULLET_LIST_STYLE = new DataKey<>("PARAGRAPH_BULLET_LIST_STYLE", "ListBullet");
+    public static final DataKey<String> PARAGRAPH_NUMBERED_LIST_STYLE = new DataKey<>("PARAGRAPH_NUMBERED_LIST_STYLE", "ListNumber");
 
     // internal stuff
     public static final String EMOJI_RESOURCE_PREFIX = "emoji:";

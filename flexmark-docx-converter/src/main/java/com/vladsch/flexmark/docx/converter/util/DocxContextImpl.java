@@ -595,7 +595,7 @@ public abstract class DocxContextImpl<T> implements DocxContext<T>, BlockFormatP
         R r = createR();
         Text textElem = addWrappedText();
         textElem.setValue(text);
-        textElem.setSpace(RunFormatProvider.SPACE_PRESERVE);
+        if (text.startsWith(" ") || text.endsWith(" ")) textElem.setSpace(RunFormatProvider.SPACE_PRESERVE);
         return textElem;
     }
 

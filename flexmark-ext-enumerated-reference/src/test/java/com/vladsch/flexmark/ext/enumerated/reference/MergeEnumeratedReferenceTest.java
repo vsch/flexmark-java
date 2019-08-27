@@ -19,7 +19,6 @@ public class MergeEnumeratedReferenceTest {
             //.set(Parser.EXTENSIONS, Collections.singleton(FormatterExtension.create()))
             .set(Parser.EXTENSIONS, Arrays.asList(EnumeratedReferenceExtension.create(), AttributesExtension.create()))
             .set(Parser.BLANK_LINES_IN_AST, true)
-            .set(Parser.HTML_FOR_TRANSLATOR, true)
             .set(Parser.PARSE_INNER_HTML_COMMENTS, true)
             .set(Parser.HEADING_NO_ATX_SPACE, true)
             .set(Formatter.MAX_TRAILING_BLANK_LINES, 0);
@@ -197,5 +196,78 @@ public class MergeEnumeratedReferenceTest {
                         "\n" +
                         "[@fig]: Figure [#].\n" +
                         "\n");
+    }
+
+    private void testHtmlPreservation() {
+        assertMerged(
+                "# [#hd1] Heading {style=\"font-size: 26pt\"}\n" +
+                        "\n" +
+                        "\\<CUSTOMER_ADDRESS\\> {.addresse}\n" +
+                        "\n" +
+                        "<br />\n" +
+                        "\n" +
+                        "[@hd1]: [#].\n" +
+                        "\n" +
+                        "<br />\n" +
+                        "\n" +
+                        "[](http://example.com)\n" +
+                        "\n",
+                "# [#hd1] Heading {style=\"font-size: 26pt\"}\n" +
+                        "\n" +
+                        "\\<CUSTOMER_ADDRESS\\>\n" +
+                        "{.addresse}\n" +
+                        "\n" +
+                        "<br />\n" +
+                        "\n" +
+                        "[@hd1]: [#]. \n" +
+                        "\n",
+                "<br />\n" +
+                        "\n" +
+                        "[](http://example.com)\n" +
+                        "\n"
+        );
+    }
+
+    @Test
+    public void testHtmlPreservation1() {
+        testHtmlPreservation();
+    }
+
+    @Test
+    public void testHtmlPreservation2() {
+        testHtmlPreservation();
+        testHtmlPreservation();
+    }
+
+    private void testHtmlPreservationLink() {
+        assertMerged(
+                "[](http://example.com)\n" +
+                        "\n" +
+                        "<br />\n" +
+                        "\n" +
+                        "<br />\n" +
+                        "\n" +
+                        "[](http://example.com)\n" +
+                        "\n",
+                "[](http://example.com)\n" +
+                        "\n" +
+                        "<br />\n" +
+                        "\n",
+                "<br />\n" +
+                        "\n" +
+                        "[](http://example.com)\n" +
+                        "\n"
+        );
+    }
+
+    @Test
+    public void testHtmlPreservationLink1() {
+        testHtmlPreservationLink();
+    }
+
+    @Test
+    public void testHtmlPreservationLink2() {
+        testHtmlPreservationLink();
+        testHtmlPreservationLink();
     }
 }

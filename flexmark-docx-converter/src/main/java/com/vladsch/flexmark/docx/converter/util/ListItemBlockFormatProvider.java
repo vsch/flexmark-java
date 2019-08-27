@@ -1,19 +1,23 @@
 package com.vladsch.flexmark.docx.converter.util;
 
+import org.docx4j.model.styles.StyleUtil;
 import org.docx4j.openpackaging.parts.WordprocessingML.NumberingDefinitionsPart;
 import org.docx4j.wml.PPr;
 import org.docx4j.wml.PPrBase;
+import org.docx4j.wml.Style;
 
 import java.math.BigInteger;
 
 public class ListItemBlockFormatProvider<T> extends BlockFormatProviderBase<T> {
     private final DocxContext<T> myDocx;
+    private final String mySpacingStyleId;
     private final long myIdNum;
     private final int myListLevel;
     private final Class[] mySkipContextFrameClasses;
 
-    public ListItemBlockFormatProvider(DocxContext<T> docx, String listStyle, long idNum, int listLevel, Class... skipContextFrameClasses) {
+    public ListItemBlockFormatProvider(DocxContext<T> docx, String listStyle, String listSpacingStyle, long idNum, int listLevel, Class... skipContextFrameClasses) {
         super(docx, listStyle);
+        mySpacingStyleId = listSpacingStyle;
         myDocx = docx;
         myIdNum = idNum;
         myListLevel = listLevel;
@@ -49,6 +53,22 @@ public class ListItemBlockFormatProvider<T> extends BlockFormatProviderBase<T> {
         }
 
         super.getPPr(pPr);
+    }
+
+    @Override
+    protected void adjustPPr(PPr pPrBase) {
+        if (mySpacingStyleId != null && !mySpacingStyleId.equals(myBaseStyleId)) {
+            // get the spacing from spacing style
+            Style style = myDocx.getStyle(mySpacingStyleId);
+
+            if (style != null && style.getPPr() != null) {
+                PPr pPr = myDocx.getHelper().getExplicitPPr(style.getPPr());
+                PPr pPrExplicitBase = myDocx.getHelper().getExplicitPPr(pPrBase);
+                PPrBase pPrDiff = myDocx.getHelper().keepDiff(pPr, pPrExplicitBase);
+
+                StyleUtil.apply(pPrDiff, pPrBase);
+            }
+        }
     }
 
     private boolean containsClass(Class[] list, Object item) {

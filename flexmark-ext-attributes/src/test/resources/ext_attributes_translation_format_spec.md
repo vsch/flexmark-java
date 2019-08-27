@@ -24,7 +24,6 @@ The attributes is a space separated list of attribute syntax of one of the follo
 <!--
 * `:attr=value` : equivalent to `style="attr: value"`
  -->
-
 **NOTE**: Handling of multiple value assignment for attributes depends on its name:
 
 * `class` values are accumulated as a space (` `) separated list.
@@ -40,42 +39,31 @@ element in the document.
 
 The following terms are used in the specification of rules for determining the attribute owner:
 
-previous sibling
-:   a markdown element preceding the element within its parent element's child list
+previous sibling : a markdown element preceding the element within its parent element's child
+list
 
-no previous sibling
-:   a markdown element which is first within its parent element's child list
+no previous sibling : a markdown element which is first within its parent element's child list
 
-next sibling
-:   a markdown element following the element within its parent element's child list
+next sibling : a markdown element following the element within its parent element's child list
 
-no next sibling
-:   a markdown element which is last within its parent element's child list
+no next sibling : a markdown element which is last within its parent element's child list
 
-paragraph item container
-:   a markdown element which is an item in a parent list element. In which case the first child
-    paragraph is considered the item's text container and not a regular paragraph. eg.
-    `ListItem`, `DefinitionItem`, `Footnote`
+paragraph item container : a markdown element which is an item in a parent list element. In
+which case the first child paragraph is considered the item's text container and not a regular
+paragraph. eg. `ListItem`, `DefinitionItem`, `Footnote`
 
-text element
-:   markdown element representing a contiguous span of undecorated plain text uninterrupted by
-    any other markdown element.
+text element : markdown element representing a contiguous span of undecorated plain text
+uninterrupted by any other markdown element.
 
-anchor target node
-:   any node which can contain an `id` or `name` attribute and be a target of an anchor
-    reference in a link and naturally will compute its own `id` absent one being explicitly
-    assigned. eg. `Heading`
+anchor target node : any node which can contain an `id` or `name` attribute and be a target of
+an anchor reference in a link and naturally will compute its own `id` absent one being
+explicitly assigned. eg. `Heading`
 
-attached attributes
-attributes are attached
-:   attributes element without intervening white space between it and its previous sibling is
-    said to be attached to its previous sibling.
+attached attributes attributes are attached : attributes element without intervening white space
+between it and its previous sibling is said to be attached to its previous sibling.
 
-unattached attributes
-attributes are not attached
-attributes are unattached
-:   attributes element with intervening white space between it and its previous sibling is said
-    to be unattached.
+unattached attributes attributes are not attached attributes are unattached : attributes element
+with intervening white space between it and its previous sibling is said to be unattached.
 
 There are two modes of attribute assignment determination for text nodes:
 
@@ -685,16 +673,32 @@ paragraph text.
 
 Ref image
 
-```````````````````````````````` example Cond 5.1: 3
+```````````````````````````````` example(Cond 5.1: 3) options(details)
 ![test]
 
 [test]: <http://example.com/test.png> 
 
 {style="border-color:red"}
 .
+--------------------------
+![_1_]
+
+[_2_]: <_3_>
+
+{._4_}
+--------------------------
+<<<test
+>>>teESt
+--------------------------
+![_1_]
+
+[_2_]: <_3_>
+
+{._4_}
+--------------------------
 ![teESt]
 
-[teESt]: >
+[teESt]: <http://example.com/test.png>
 
 {style="border-color:red"}
 ````````````````````````````````
@@ -713,7 +717,7 @@ Ref image
 
 ![ReEFeEReENceE 2][teESt]
 
-[teESt]: >
+[teESt]: <http://example.com/test.png>
 
 {style="border-color:red"}
 ````````````````````````````````

@@ -42,12 +42,12 @@ HTML Blocks not translated
 <span>this is a test</span>
 .
 --------------------------
-<_1_>this is a test</_2_>
+<__1_>this is a test</__2_>
 --------------------------
-<<<<_1_>this is a test</_2_>
->>><_1_>thiIS iIS aA teESt</_2_>
+<<<<__1_>this is a test</__2_>
+>>><__1_>thiIS iIS aA teESt</__2_>
 --------------------------
-<_1_>thiIS iIS aA teESt</_2_>
+<__1_>thiIS iIS aA teESt</__2_>
 --------------------------
 <span>thiIS iIS aA teESt</span>
 ````````````````````````````````
@@ -1630,6 +1630,38 @@ paARaAGRaAph 2
 [ReEF2]: /ref2/2
 
 [ReEF1]: /ref1
+
+paARaAGRaAph 3
+````````````````````````````````
+
+
+```````````````````````````````` example(Reference Placement: 9) options(references-document-bottom, references-sort-unused-last, references-keep-last)
+paragraph 1 [ref2]
+
+[ref3]: </ref3>
+
+[ref2]: </ref2/1>
+
+paragraph 2
+
+[ref2]: </ref2/2>
+
+[ref1]: </ref1>
+
+paragraph 3
+
+.
+paARaAGRaAph 1 [ReEF2]
+
+[ReEF3]: </ref3>
+
+[ReEF2]: </ref2/1>
+
+paARaAGRaAph 2
+
+[ReEF2]: </ref2/2>
+
+[ReEF1]: </ref1>
 
 paARaAGRaAph 3
 ````````````````````````````````
