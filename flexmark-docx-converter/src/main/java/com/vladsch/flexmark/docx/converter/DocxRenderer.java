@@ -261,6 +261,7 @@ public class DocxRenderer implements IRender {
      *
      * @param node   node to render
      * @param output appendable to use for the output
+     * @param contentContainer contaner for content to use
      */
     public void render(Node node, WordprocessingMLPackage output, DocumentContentHandler contentContainer) {
         DocxRenderer.MainDocxRenderer renderer = new DocxRenderer.MainDocxRenderer(options, output, node.getDocument(), contentContainer);

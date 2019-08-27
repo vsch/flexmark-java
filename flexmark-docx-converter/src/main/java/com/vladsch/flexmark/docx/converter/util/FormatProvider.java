@@ -28,6 +28,8 @@ public interface FormatProvider<T> {
     /**
      * these are the hard-coded styles on which this block is based
      * used for reference purposes by children to figure out what they need to combine
+     *
+     * @return style id
      */
     String getStyleId();
 

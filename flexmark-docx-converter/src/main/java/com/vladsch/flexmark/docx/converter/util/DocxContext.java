@@ -110,7 +110,7 @@ public interface DocxContext<T> extends DocxContextFrameProvider<T> {
      * Insert bookmark start into current P
      *
      * @param bookmarkName    name of the bookmark (optional), if not given the it will be BM_{id}
-     * @param isBlockBookmark
+     * @param isBlockBookmark true if block bookmark
      * @return CTBookmark
      */
     CTBookmark createBookmarkStart(String bookmarkName, boolean isBlockBookmark);
@@ -119,7 +119,7 @@ public interface DocxContext<T> extends DocxContextFrameProvider<T> {
      * Insert bookmark end into current P for given bookmark
      *
      * @param bookmarkStart   starting bookmark to close
-     * @param isBlockBookmark
+     * @param isBlockBookmark true if block bookmark
      * @return CTMarkupRange
      */
     CTMarkupRange createBookmarkEnd(CTBookmark bookmarkStart, boolean isBlockBookmark);

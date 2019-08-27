@@ -239,6 +239,9 @@ public class DocxHelper {
      * other borders are not affected
      * <p>
      * Must be called after the child indent is set
+     *
+     * @param child  child ppr
+     * @param parent  parent ppr
      */
     public void inheritPBdr(PPr child, PPr parent) {
         parent = getResolver().getEffectivePPr(parent);
@@ -1069,11 +1072,12 @@ public class DocxHelper {
         }
     }
 
-    /*******************************************************************************
+    /* ******************************************************************************
      *
      * diff helpers
      *
-     *******************************************************************************/
+     * ******************************************************************************/
+
     public PPrBase.Ind keepDiff(PPrBase.Ind orig, PPrBase.Ind from) {
         if (from != null && orig != null) {
             if (orig.getLeft() != null && from.getLeft() != null && orig.getLeft().compareTo(from.getLeft()) == 0) orig.setLeft(null);

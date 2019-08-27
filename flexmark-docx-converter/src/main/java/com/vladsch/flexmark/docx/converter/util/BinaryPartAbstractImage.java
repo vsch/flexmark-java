@@ -42,7 +42,7 @@ public class BinaryPartAbstractImage {
     }
 
     /**
-     * Create a <wp:inline> element suitable for this image,
+     * Create a &lt;wp:inline&gt; element suitable for this image,
      * which can be linked or embedded in w:p/w:r/w:drawing.
      * If the image is wider than the page, it will be scaled
      * automatically.
@@ -55,7 +55,10 @@ public class BinaryPartAbstractImage {
      *                     None of these things seem to be exposed in Word 2007's
      *                     user interface, but Word won't open the document if
      *                     any of the attributes these go in (except @ desc) aren't present!
-     * @throws Exception
+     * @param posHOffset   offset from column, {@link Long#MAX_VALUE} for right aligned, {@link Long#MIN_VALUE} for left aligned, {@link Long#MAX_VALUE}/2 for centered
+     * @param posVOffset   offset from paragraph
+     * @return             anchor element
+     * @throws Exception   throws exceptions on failure
      */
     public Anchor createImageAnchor(
             String filenameHint, String altText,
@@ -74,15 +77,16 @@ public class BinaryPartAbstractImage {
     }
 
     /**
-     * @param filenameHint
-     * @param altText
-     * @param id1
-     * @param id2
-     * @param link
-     * @param maxWidth
-     * @return
-     * @throws Exception
-     * @since 3.3.0
+     * @param filenameHint   file name hint
+     * @param altText        description
+     * @param id1          &lt;wp:docPr id
+     * @param id2          &lt;pic:cNvPr id
+     * @param link         true if to link, else embed
+     * @param maxWidth     max width of image
+     * @param posHOffset   offset from column, {@link Long#MAX_VALUE} for right aligned, {@link Long#MIN_VALUE} for left aligned, {@link Long#MAX_VALUE}/2 for centered
+     * @param posVOffset   offset from paragraph
+     * @return             anchor element
+     * @throws Exception   throws exceptions on failure
      */
     public Anchor createImageAnchor(
             String filenameHint, String altText,
@@ -102,19 +106,22 @@ public class BinaryPartAbstractImage {
     }
 
     /**
-     * Create a <wp:inline> element suitable for this image,
+     * Create a &lt;wp:inline&gt; element suitable for this image,
      * which can be _embedded_ in w:p/w:r/w:drawing.
      *
      * @param filenameHint Any text, for example the original filename
      * @param altText      Like HTML's alt text
-     * @param id1          An id unique in the document
-     * @param id2          Another id unique in the document
+     * @param id1          &lt;wp:docPr id
+     * @param id2          &lt;pic:cNvPr id
      * @param cx           Image width in twip
      * @param link         true if this is to be linked not embedded
      *                     None of these things seem to be exposed in Word 2007's
      *                     user interface, but Word won't open the document if
      *                     any of the attributes these go in (except @ desc) aren't present!
-     * @throws Exception
+     * @param posHOffset   offset from column, {@link Long#MAX_VALUE} for right aligned, {@link Long#MIN_VALUE} for left aligned, {@link Long#MAX_VALUE}/2 for centered
+     * @param posVOffset   offset from paragraph
+     * @return             anchor element
+     * @throws Exception   throws exceptions on failure
      */
     public Anchor createImageAnchor(
             String filenameHint, String altText,
@@ -141,24 +148,22 @@ public class BinaryPartAbstractImage {
     }
 
     /**
-     * Create a <wp:anchor> element suitable for this image, which can be
+     * Create a &lt;wp:anchor&gt; element suitable for this image, which can be
      * linked or embedded in w:p/w:r/w:drawing, specifying height and width.  Note
      * that you'd ordinarily use one of the methods which don't require
      * you to specify height (cy).
      *
      * @param filenameHint Any text, for example the original filename
      * @param altText      Like HTML's alt text
-     * @param id1          An id unique in the document
-     * @param id2          Another id unique in the document None of these things seem to
-     *                     be exposed in Word 2007's user interface, but Word won't open
-     *                     the document if any of the attributes these go in (except @ desc) aren't
-     *                     present!
+     * @param id1          &lt;wp:docPr id
+     * @param id2          &lt;pic:cNvPr id
      * @param cx           Image width in EMU
      * @param cy           Image height in EMU
      * @param link         true if this is to be linked not embedded
      * @param posHOffset   offset from column, {@link Long#MAX_VALUE} for right aligned, {@link Long#MIN_VALUE} for left aligned, {@link Long#MAX_VALUE}/2 for centered
      * @param posVOffset   offset from paragraph
-     * @throws Exception
+     * @return             anchor element
+     * @throws Exception   throws exceptions on failure
      */
     public Anchor createImageAnchor(
             String filenameHint, String altText,
@@ -282,11 +287,11 @@ public class BinaryPartAbstractImage {
      * Note: this method creates a temp file (and attempts to delete it).
      * That's because it uses org.apache.xmlgraphics
      *
-     * @param opcPackage
-     * @param sourcePart
-     * @param bytes
-     * @return
-     * @throws Exception
+     * @param opcPackage   package
+     * @param sourcePart   part
+     * @param bytes        image bytes
+     * @return             binary image
+     * @throws Exception   throws exceptions on failure
      */
     public static BinaryPartAbstractImage createImagePart(
             OpcPackage opcPackage,

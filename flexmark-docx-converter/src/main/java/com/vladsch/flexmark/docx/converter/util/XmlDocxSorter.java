@@ -45,7 +45,6 @@ import java.util.regex.Pattern;
  * pkg:contentType="application/vnd.openxmlformats-officedocument.theme+xml" pkg:name="/word/theme/theme%d.xml" where %d is 1,2,3...
  * pkg:contentType="application/vnd.ms-word.stylesWithEffects+xml" pkg:name="/word/stylesWithEffects.xml"
  * <p>
- * <p>
  * eg.
  * {@code
  * String formattedXml = mlDocxSorter.sortDocumentParts(docxText);

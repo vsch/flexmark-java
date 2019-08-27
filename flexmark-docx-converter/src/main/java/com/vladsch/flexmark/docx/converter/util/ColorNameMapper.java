@@ -30,6 +30,9 @@ public class ColorNameMapper {
 
     /**
      * from: https://stackoverflow.com/questions/6334311/whats-the-best-way-to-round-a-color-object-to-the-nearest-color-constant
+     * @param c1   color 1
+     * @param c2   color 2
+     * @return      distance between two colors
      */
     public static double colorDistance(Color c1, Color c2) {
         int red1 = c1.getRed();

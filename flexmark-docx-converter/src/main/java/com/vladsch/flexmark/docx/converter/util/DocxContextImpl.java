@@ -385,7 +385,7 @@ public abstract class DocxContextImpl<T> implements DocxContext<T>, BlockFormatP
      * Insert bookmark start into current P
      *
      * @param bookmarkName    name of the bookmark (optional), if not given the it will be BM_{id}
-     * @param isBlockBookmark
+     * @param isBlockBookmark true if block bookmark
      * @return CTBookmark
      */
     @Override

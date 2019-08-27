@@ -1039,16 +1039,6 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
         return longValue;
     }
 
-    /**
-     * @param docx
-     * @param image
-     * @param filenameHint
-     * @param attributes
-     * @param id1          &lt;wp:docPr id
-     * @param id2          &lt;pic:cNvPr id
-     * @param scale
-     * @return
-     */
     public R newImage(DocxRendererContext docx, BufferedImage image, String filenameHint, Attributes attributes, int id1, int id2, double scale) {
         try {
             BinaryPartAbstractImage imagePart = null;

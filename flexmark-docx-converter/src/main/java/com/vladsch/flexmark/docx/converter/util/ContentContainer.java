@@ -39,6 +39,8 @@ public interface ContentContainer {
      * Add element to content
      * <p>
      * May not be added at the end of content but inserted into the content list
+     *
+     * @param element  element to add
      */
     void addContentElement(Object element);
 }
