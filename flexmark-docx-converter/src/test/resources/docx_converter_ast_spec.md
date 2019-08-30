@@ -2926,10 +2926,6 @@ code
     <w:p>
         <w:pPr>
             <w:pStyle w:val="Heading1"/>
-            <w:numPr>
-                <w:ilvl w:val="0"/>
-                <w:numId w:val="0"/>
-            </w:numPr>
         </w:pPr>
         <w:r>
             <w:t xml:space="preserve">Heading 1 </w:t>
@@ -2954,10 +2950,6 @@ code
     <w:p>
         <w:pPr>
             <w:pStyle w:val="Heading2"/>
-            <w:numPr>
-                <w:ilvl w:val="1"/>
-                <w:numId w:val="0"/>
-            </w:numPr>
         </w:pPr>
         <w:r>
             <w:t xml:space="preserve">Heading 2 </w:t>
@@ -2982,10 +2974,6 @@ code
     <w:p>
         <w:pPr>
             <w:pStyle w:val="Heading3"/>
-            <w:numPr>
-                <w:ilvl w:val="2"/>
-                <w:numId w:val="0"/>
-            </w:numPr>
         </w:pPr>
         <w:r>
             <w:t xml:space="preserve">Heading 3 </w:t>
@@ -3010,10 +2998,6 @@ code
     <w:p>
         <w:pPr>
             <w:pStyle w:val="Heading4"/>
-            <w:numPr>
-                <w:ilvl w:val="3"/>
-                <w:numId w:val="0"/>
-            </w:numPr>
         </w:pPr>
         <w:r>
             <w:t xml:space="preserve">Heading 4 </w:t>
@@ -3038,10 +3022,6 @@ code
     <w:p>
         <w:pPr>
             <w:pStyle w:val="Heading5"/>
-            <w:numPr>
-                <w:ilvl w:val="4"/>
-                <w:numId w:val="0"/>
-            </w:numPr>
         </w:pPr>
         <w:r>
             <w:t>Heading 5</w:t>
@@ -3060,10 +3040,6 @@ code
     <w:p>
         <w:pPr>
             <w:pStyle w:val="Heading6"/>
-            <w:numPr>
-                <w:ilvl w:val="5"/>
-                <w:numId w:val="0"/>
-            </w:numPr>
         </w:pPr>
         <w:r>
             <w:t>Heading 6</w:t>
@@ -4081,10 +4057,6 @@ code
     <w:p>
         <w:pPr>
             <w:pStyle w:val="Heading1"/>
-            <w:numPr>
-                <w:ilvl w:val="0"/>
-                <w:numId w:val="0"/>
-            </w:numPr>
         </w:pPr>
         <w:r>
             <w:t xml:space="preserve">Heading 1 </w:t>
@@ -4109,10 +4081,6 @@ code
     <w:p>
         <w:pPr>
             <w:pStyle w:val="Heading2"/>
-            <w:numPr>
-                <w:ilvl w:val="1"/>
-                <w:numId w:val="0"/>
-            </w:numPr>
         </w:pPr>
         <w:r>
             <w:t xml:space="preserve">Heading 2 </w:t>
@@ -4137,10 +4105,6 @@ code
     <w:p>
         <w:pPr>
             <w:pStyle w:val="Heading3"/>
-            <w:numPr>
-                <w:ilvl w:val="2"/>
-                <w:numId w:val="0"/>
-            </w:numPr>
         </w:pPr>
         <w:r>
             <w:t xml:space="preserve">Heading 3 </w:t>
@@ -4165,10 +4129,6 @@ code
     <w:p>
         <w:pPr>
             <w:pStyle w:val="Heading4"/>
-            <w:numPr>
-                <w:ilvl w:val="3"/>
-                <w:numId w:val="0"/>
-            </w:numPr>
         </w:pPr>
         <w:r>
             <w:t xml:space="preserve">Heading 4 </w:t>
@@ -4193,10 +4153,6 @@ code
     <w:p>
         <w:pPr>
             <w:pStyle w:val="Heading5"/>
-            <w:numPr>
-                <w:ilvl w:val="4"/>
-                <w:numId w:val="0"/>
-            </w:numPr>
         </w:pPr>
         <w:r>
             <w:t>Heading 5</w:t>
@@ -4215,10 +4171,6 @@ code
     <w:p>
         <w:pPr>
             <w:pStyle w:val="Heading6"/>
-            <w:numPr>
-                <w:ilvl w:val="5"/>
-                <w:numId w:val="0"/>
-            </w:numPr>
         </w:pPr>
         <w:r>
             <w:t>Heading 6</w:t>
@@ -5172,10 +5124,6 @@ code
     <w:p>
         <w:pPr>
             <w:pStyle w:val="Heading1"/>
-            <w:numPr>
-                <w:ilvl w:val="0"/>
-                <w:numId w:val="0"/>
-            </w:numPr>
         </w:pPr>
         <w:r>
             <w:t xml:space="preserve">Heading 1 </w:t>
@@ -5200,10 +5148,6 @@ code
     <w:p>
         <w:pPr>
             <w:pStyle w:val="Heading2"/>
-            <w:numPr>
-                <w:ilvl w:val="1"/>
-                <w:numId w:val="0"/>
-            </w:numPr>
         </w:pPr>
         <w:r>
             <w:t xml:space="preserve">Heading 2 </w:t>
@@ -5228,10 +5172,6 @@ code
     <w:p>
         <w:pPr>
             <w:pStyle w:val="Heading3"/>
-            <w:numPr>
-                <w:ilvl w:val="2"/>
-                <w:numId w:val="0"/>
-            </w:numPr>
         </w:pPr>
         <w:r>
             <w:t xml:space="preserve">Heading 3 </w:t>
@@ -5248,10 +5188,6 @@ code
     <w:p>
         <w:pPr>
             <w:pStyle w:val="Heading4"/>
-            <w:numPr>
-                <w:ilvl w:val="3"/>
-                <w:numId w:val="0"/>
-            </w:numPr>
         </w:pPr>
         <w:r>
             <w:t xml:space="preserve">Heading 4 </w:t>
@@ -5268,10 +5204,6 @@ code
     <w:p>
         <w:pPr>
             <w:pStyle w:val="Heading5"/>
-            <w:numPr>
-                <w:ilvl w:val="4"/>
-                <w:numId w:val="0"/>
-            </w:numPr>
         </w:pPr>
         <w:r>
             <w:t>Heading 5</w:t>
@@ -5282,10 +5214,6 @@ code
     <w:p>
         <w:pPr>
             <w:pStyle w:val="Heading6"/>
-            <w:numPr>
-                <w:ilvl w:val="5"/>
-                <w:numId w:val="0"/>
-            </w:numPr>
         </w:pPr>
         <w:r>
             <w:t>Heading 6</w:t>
@@ -9746,8 +9674,7 @@ list with aside block
 # Headings
 
 ```````````````````````````````` example Headings: 1
-Heading
-=======
+# Heading
 .
 <w:body>
     <w:bookmarkStart w:id="1" w:name="heading"/>
@@ -9755,10 +9682,6 @@ Heading
     <w:p>
         <w:pPr>
             <w:pStyle w:val="Heading1"/>
-            <w:numPr>
-                <w:ilvl w:val="0"/>
-                <w:numId w:val="0"/>
-            </w:numPr>
         </w:pPr>
         <w:r>
             <w:t>Heading</w:t>
@@ -9769,8 +9692,7 @@ Heading
 
 
 ```````````````````````````````` example Headings: 2
-Heading
--------
+## Heading
 .
 <w:body>
     <w:bookmarkStart w:id="1" w:name="heading"/>
@@ -9778,10 +9700,6 @@ Heading
     <w:p>
         <w:pPr>
             <w:pStyle w:val="Heading2"/>
-            <w:numPr>
-                <w:ilvl w:val="1"/>
-                <w:numId w:val="0"/>
-            </w:numPr>
         </w:pPr>
         <w:r>
             <w:t>Heading</w:t>
@@ -9792,18 +9710,14 @@ Heading
 
 
 ```````````````````````````````` example Headings: 3
-# Heading
+### Heading
 .
 <w:body>
     <w:bookmarkStart w:id="1" w:name="heading"/>
     <w:bookmarkEnd w:id="1"/>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="Heading1"/>
-            <w:numPr>
-                <w:ilvl w:val="0"/>
-                <w:numId w:val="0"/>
-            </w:numPr>
+            <w:pStyle w:val="Heading3"/>
         </w:pPr>
         <w:r>
             <w:t>Heading</w:t>
@@ -9814,18 +9728,14 @@ Heading
 
 
 ```````````````````````````````` example Headings: 4
-## Heading
+#### Heading
 .
 <w:body>
     <w:bookmarkStart w:id="1" w:name="heading"/>
     <w:bookmarkEnd w:id="1"/>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="Heading2"/>
-            <w:numPr>
-                <w:ilvl w:val="1"/>
-                <w:numId w:val="0"/>
-            </w:numPr>
+            <w:pStyle w:val="Heading4"/>
         </w:pPr>
         <w:r>
             <w:t>Heading</w:t>
@@ -9836,18 +9746,14 @@ Heading
 
 
 ```````````````````````````````` example Headings: 5
-### Heading
+##### Heading
 .
 <w:body>
     <w:bookmarkStart w:id="1" w:name="heading"/>
     <w:bookmarkEnd w:id="1"/>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="Heading3"/>
-            <w:numPr>
-                <w:ilvl w:val="2"/>
-                <w:numId w:val="0"/>
-            </w:numPr>
+            <w:pStyle w:val="Heading5"/>
         </w:pPr>
         <w:r>
             <w:t>Heading</w:t>
@@ -9858,18 +9764,14 @@ Heading
 
 
 ```````````````````````````````` example Headings: 6
-#### Heading
+###### Heading
 .
 <w:body>
     <w:bookmarkStart w:id="1" w:name="heading"/>
     <w:bookmarkEnd w:id="1"/>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="Heading4"/>
-            <w:numPr>
-                <w:ilvl w:val="3"/>
-                <w:numId w:val="0"/>
-            </w:numPr>
+            <w:pStyle w:val="Heading6"/>
         </w:pPr>
         <w:r>
             <w:t>Heading</w:t>
@@ -9880,18 +9782,15 @@ Heading
 
 
 ```````````````````````````````` example Headings: 7
-##### Heading
+Heading
+=======
 .
 <w:body>
     <w:bookmarkStart w:id="1" w:name="heading"/>
     <w:bookmarkEnd w:id="1"/>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="Heading5"/>
-            <w:numPr>
-                <w:ilvl w:val="4"/>
-                <w:numId w:val="0"/>
-            </w:numPr>
+            <w:pStyle w:val="Heading1"/>
         </w:pPr>
         <w:r>
             <w:t>Heading</w:t>
@@ -9902,18 +9801,15 @@ Heading
 
 
 ```````````````````````````````` example Headings: 8
-###### Heading
+Heading
+-------
 .
 <w:body>
     <w:bookmarkStart w:id="1" w:name="heading"/>
     <w:bookmarkEnd w:id="1"/>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="Heading6"/>
-            <w:numPr>
-                <w:ilvl w:val="5"/>
-                <w:numId w:val="0"/>
-            </w:numPr>
+            <w:pStyle w:val="Heading2"/>
         </w:pPr>
         <w:r>
             <w:t>Heading</w:t>

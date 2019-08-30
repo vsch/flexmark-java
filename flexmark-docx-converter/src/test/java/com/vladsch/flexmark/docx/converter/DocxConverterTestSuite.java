@@ -5,6 +5,7 @@ import org.junit.runners.Suite;
 @org.junit.runner.RunWith(Suite.class)
 @Suite.SuiteClasses({
         ComboDocxConverterSpecTest.class,
+        ComboDocxConverterAltStylesSpecTest.class,
         ComboEnDocxConverterSpecTest.class,
         ComboDeDocxConverterSpecTest.class,
         ComboDocxConverterSpec2Test.class,

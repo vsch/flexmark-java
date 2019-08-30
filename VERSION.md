@@ -6,6 +6,7 @@ flexmark-java
 [TOC]: # " "
 
 - [To Do](#to-do)
+- [0.50.32](#05032)
 - [0.50.30](#05030)
 - [0.50.28](#05028)
 - [0.50.26](#05026)
@@ -104,6 +105,14 @@ flexmark-java
 * [ ] Add: `flexmark-ext-attributes` formatting of individual attributes instead of dumping the
       attributes node text.
 
+0.50.32
+-------
+
+* Add: `DocxRenderer` image max-width tests
+* Add: `DocxRenderer` image max-height attribute processing and tests
+* Fix: refactor `DocxRenderer` tests to extract common code to base class
+* Fix: heading rendering to work with styles using numbering
+
 0.50.30
 -------
 
@@ -117,7 +126,13 @@ flexmark-java
     * else no wrapping around image
   * Add: handling of `font-size` attribute, expects float of font size in pt, rounds to nearest
     1/2 pt
-  * Add: image size attribute handling for `in` and `cm` for inch and cm dimensions.
+  * Add: image size attribute handling for `in` and `cm` for inch and cm dimensions. Can be
+    given in:
+    * `%` for percent of page width
+    * `pt` points
+    * `cm` cm
+    * `in` inches
+    * if no units given then pixels are assumed.
   * Fix: if image size only given for one dimension, compute the other preserving aspect ratio
   * Fix: change default emoji size to 0.9 of line height
   * Fix: remove `<>` wrapper from URL target

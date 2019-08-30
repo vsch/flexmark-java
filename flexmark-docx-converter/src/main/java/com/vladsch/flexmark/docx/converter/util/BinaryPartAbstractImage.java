@@ -57,8 +57,8 @@ public class BinaryPartAbstractImage {
      *                     any of the attributes these go in (except @ desc) aren't present!
      * @param posHOffset   offset from column, {@link Long#MAX_VALUE} for right aligned, {@link Long#MIN_VALUE} for left aligned, {@link Long#MAX_VALUE}/2 for centered
      * @param posVOffset   offset from paragraph
-     * @return             anchor element
-     * @throws Exception   throws exceptions on failure
+     * @return anchor element
+     * @throws Exception throws exceptions on failure
      */
     public Anchor createImageAnchor(
             String filenameHint, String altText,
@@ -77,20 +77,21 @@ public class BinaryPartAbstractImage {
     }
 
     /**
-     * @param filenameHint   file name hint
-     * @param altText        description
+     * @param filenameHint file name hint
+     * @param altText      description
      * @param id1          &lt;wp:docPr id
      * @param id2          &lt;pic:cNvPr id
      * @param link         true if to link, else embed
      * @param maxWidth     max width of image
+     * @param maxHeight    max height of image
      * @param posHOffset   offset from column, {@link Long#MAX_VALUE} for right aligned, {@link Long#MIN_VALUE} for left aligned, {@link Long#MAX_VALUE}/2 for centered
      * @param posVOffset   offset from paragraph
-     * @return             anchor element
-     * @throws Exception   throws exceptions on failure
+     * @return anchor element
+     * @throws Exception throws exceptions on failure
      */
     public Anchor createImageAnchor(
             String filenameHint, String altText,
-            int id1, int id2, boolean link, int maxWidth, long posHOffset, long posVOffset
+            int id1, int id2, boolean link, int maxWidth, int maxHeight, long posHOffset, long posVOffset
     ) throws Exception {
 
         // This signature can scale the image to specified maxWidth
@@ -100,9 +101,86 @@ public class BinaryPartAbstractImage {
         List<SectionWrapper> sections = wmlPackage.getDocumentModel().getSections();
         PageDimensions page = sections.get(sections.size() - 1).getPageDimensions();
 
-        CxCy cxcy = CxCy.scale(myAbstractImage.getImageInfo(), page, maxWidth);
+        CxCy cxcy = scale(myAbstractImage.getImageInfo(), page, maxWidth, maxHeight);
 
         return createImageAnchor(filenameHint, altText, id1, id2, cxcy.getCx(), cxcy.getCy(), link, posHOffset, posVOffset);
+    }
+
+    /**
+     * Return scaling values constrained by specified maxWidth/maxHeight.
+     * Useful if the image is to be inserted into a table cell of known width.
+     *
+     * @param imageInfo image info
+     * @param page      page dimensions
+     * @param maxWidth  max width
+     * @param maxHeight max height
+     * @return cx cy sizes
+     * @since 3.3.0
+     */
+    public static CxCy scale(ImageInfo imageInfo, PageDimensions page, int maxWidth, int maxHeight) {
+
+        double writableWidthTwips = page.getWritableWidthTwips();
+        log.debug("writableWidthTwips: " + writableWidthTwips);
+
+        if (maxWidth > 0 && maxWidth < writableWidthTwips) {
+            writableWidthTwips = maxWidth;
+            log.debug("reduced to: " + writableWidthTwips);
+        }
+
+        double writableHeightTwips = page.getWritableHeightTwips();
+        log.debug("writableHeightTwips: " + writableHeightTwips);
+
+        if (maxHeight > 0 && maxHeight < writableHeightTwips) {
+            writableHeightTwips = maxHeight;
+            log.debug("reduced to: " + writableHeightTwips);
+        }
+
+        ImageSize size = imageInfo.getSize();
+
+        // get image size in pixels
+        Dimension2D dpx = size.getDimensionPx();
+
+        // convert pixels to twips (uses configured DPI setting - NOT the
+        // image DPI)
+        double imageWidthTwips = UnitsOfMeasurement.pxToTwipDouble(dpx.getWidth());
+        double imageHeightTwips = UnitsOfMeasurement.pxToTwipDouble(dpx.getHeight());
+
+        log.debug("imageWidthTwips: " + imageWidthTwips);
+        log.debug("imageHeightTwips: " + imageHeightTwips);
+
+        long cx;
+        long cy;
+        boolean scaled = false;
+        if (imageWidthTwips > writableWidthTwips && imageHeightTwips > writableHeightTwips) {
+            log.debug("Scaling image to fit page width/height");
+            scaled = true;
+
+            double scale = Math.min(writableWidthTwips / imageWidthTwips, writableHeightTwips / imageHeightTwips);
+
+            cx = UnitsOfMeasurement.twipToEMU(imageWidthTwips * scale);
+            cy = UnitsOfMeasurement.twipToEMU(imageHeightTwips * scale);
+        } else if (imageWidthTwips > writableWidthTwips) {
+            log.debug("Scaling image to fit page width");
+            scaled = true;
+
+            cx = UnitsOfMeasurement.twipToEMU(writableWidthTwips);
+            cy = UnitsOfMeasurement.twipToEMU(imageHeightTwips * writableWidthTwips / imageWidthTwips);
+        } else if (imageHeightTwips > writableHeightTwips) {
+            log.debug("Scaling image to fit page height");
+            scaled = true;
+
+            cx = UnitsOfMeasurement.twipToEMU(imageWidthTwips * writableHeightTwips / imageHeightTwips);
+            cy = UnitsOfMeasurement.twipToEMU(writableHeightTwips);
+        } else {
+            log.debug("Scaling image - not necessary");
+
+            cx = UnitsOfMeasurement.twipToEMU(imageWidthTwips);
+            cy = UnitsOfMeasurement.twipToEMU(imageHeightTwips);
+        }
+
+        log.debug("cx=" + cx + "; cy=" + cy);
+
+        return CxCy.scaleToFit(UnitsOfMeasurement.twipToEMU(imageWidthTwips), UnitsOfMeasurement.twipToEMU(imageHeightTwips), cx, cy);
     }
 
     /**
@@ -120,8 +198,8 @@ public class BinaryPartAbstractImage {
      *                     any of the attributes these go in (except @ desc) aren't present!
      * @param posHOffset   offset from column, {@link Long#MAX_VALUE} for right aligned, {@link Long#MIN_VALUE} for left aligned, {@link Long#MAX_VALUE}/2 for centered
      * @param posVOffset   offset from paragraph
-     * @return             anchor element
-     * @throws Exception   throws exceptions on failure
+     * @return anchor element
+     * @throws Exception throws exceptions on failure
      */
     public Anchor createImageAnchor(
             String filenameHint, String altText,
@@ -162,8 +240,8 @@ public class BinaryPartAbstractImage {
      * @param link         true if this is to be linked not embedded
      * @param posHOffset   offset from column, {@link Long#MAX_VALUE} for right aligned, {@link Long#MIN_VALUE} for left aligned, {@link Long#MAX_VALUE}/2 for centered
      * @param posVOffset   offset from paragraph
-     * @return             anchor element
-     * @throws Exception   throws exceptions on failure
+     * @return anchor element
+     * @throws Exception throws exceptions on failure
      */
     public Anchor createImageAnchor(
             String filenameHint, String altText,
@@ -250,7 +328,7 @@ public class BinaryPartAbstractImage {
 
         if (posHOffset == Long.MAX_VALUE) {
             ml = mlTop + alignmentRight + mlBottom;
-        } else if (posHOffset == Long.MAX_VALUE/2) {
+        } else if (posHOffset == Long.MAX_VALUE / 2) {
             ml = mlTop + alignmentCenter + mlBottom;
         } else if (posHOffset == Long.MIN_VALUE) {
             ml = mlTop + alignmentLeft + mlBottom;
@@ -279,6 +357,37 @@ public class BinaryPartAbstractImage {
             + "xmlns:wp=\"http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing\"";
 
     /**
+     * @param filenameHint Any text, for example the original filename
+     * @param altText      Like HTML's alt text
+     * @param id1          &lt;wp:docPr id
+     * @param id2          &lt;pic:cNvPr id
+     * @param link         true if this is to be linked not embedded
+     * @param maxWidth     max width
+     * @param maxHeight    max height
+     * @return inline element
+     * @throws Exception throws exceptions on failure
+     * @since 3.3.0
+     */
+    public Inline createImageInline(
+            String filenameHint, String altText,
+            int id1, int id2, boolean link, int maxWidth, int maxHeight
+    ) throws Exception {
+
+        // This signature can scale the image to specified maxWidth and maxHeight
+
+        WordprocessingMLPackage wmlPackage = ((WordprocessingMLPackage) this.getPackage());
+
+        List<SectionWrapper> sections = wmlPackage.getDocumentModel().getSections();
+        PageDimensions page = sections.get(sections.size() - 1).getPageDimensions();
+        ImageSize size = myAbstractImage.getImageInfo().getSize();
+
+        CxCy cxcy = scale(myAbstractImage.getImageInfo(), page, maxWidth, maxHeight);
+
+        return createImageInline(filenameHint, altText,
+                id1, id2, cxcy.getCx(), cxcy.getCy(), link);
+    }
+
+    /**
      * Create an image part from the provided byte array, attach it to the source part
      * (eg the main document part, a header part etc), and return it.
      * <p>
@@ -287,11 +396,11 @@ public class BinaryPartAbstractImage {
      * Note: this method creates a temp file (and attempts to delete it).
      * That's because it uses org.apache.xmlgraphics
      *
-     * @param opcPackage   package
-     * @param sourcePart   part
-     * @param bytes        image bytes
-     * @return             binary image
-     * @throws Exception   throws exceptions on failure
+     * @param opcPackage package
+     * @param sourcePart part
+     * @param bytes      image bytes
+     * @return binary image
+     * @throws Exception throws exceptions on failure
      */
     public static BinaryPartAbstractImage createImagePart(
             OpcPackage opcPackage,

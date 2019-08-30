@@ -432,10 +432,6 @@ Document[0, 58]
     <w:p>
         <w:pPr>
             <w:pStyle w:val="Heading1"/>
-            <w:numPr>
-                <w:ilvl w:val="0"/>
-                <w:numId w:val="0"/>
-            </w:numPr>
         </w:pPr>
         <w:r>
             <w:rPr>
@@ -458,10 +454,6 @@ Document[0, 58]
     <w:p>
         <w:pPr>
             <w:pStyle w:val="Heading1"/>
-            <w:numPr>
-                <w:ilvl w:val="0"/>
-                <w:numId w:val="0"/>
-            </w:numPr>
         </w:pPr>
         <w:r>
             <w:rPr>
@@ -484,10 +476,6 @@ Document[0, 58]
     <w:p>
         <w:pPr>
             <w:pStyle w:val="Heading1"/>
-            <w:numPr>
-                <w:ilvl w:val="0"/>
-                <w:numId w:val="0"/>
-            </w:numPr>
         </w:pPr>
         <w:r>
             <w:rPr>
@@ -510,10 +498,6 @@ Document[0, 58]
     <w:p>
         <w:pPr>
             <w:pStyle w:val="Heading1"/>
-            <w:numPr>
-                <w:ilvl w:val="0"/>
-                <w:numId w:val="0"/>
-            </w:numPr>
         </w:pPr>
         <w:r>
             <w:rPr>
@@ -2208,10 +2192,6 @@ Numbering start
     <w:p>
         <w:pPr>
             <w:pStyle w:val="Heading1"/>
-            <w:numPr>
-                <w:ilvl w:val="0"/>
-                <w:numId w:val="0"/>
-            </w:numPr>
         </w:pPr>
         <w:r>
             <w:rPr>
@@ -2242,10 +2222,6 @@ Heading {style="font-size: 26pt"}
     <w:p>
         <w:pPr>
             <w:pStyle w:val="Heading2"/>
-            <w:numPr>
-                <w:ilvl w:val="1"/>
-                <w:numId w:val="0"/>
-            </w:numPr>
         </w:pPr>
         <w:r>
             <w:rPr>
@@ -2268,10 +2244,6 @@ Heading {style="font-size: 26pt"}
     <w:p>
         <w:pPr>
             <w:pStyle w:val="Heading1"/>
-            <w:numPr>
-                <w:ilvl w:val="0"/>
-                <w:numId w:val="0"/>
-            </w:numPr>
         </w:pPr>
         <w:r>
             <w:rPr>
@@ -2456,9 +2428,78 @@ Some text {.tab} Following Text
 
 ## Images
 
-Align left
+Bare
 
 ```````````````````````````````` example(Images: 1) options(url, IGNORED)
+![flexmark-icon-logo](/images/flexmark-icon-logo@2x.png) with some text wrapped around the image
+if possible. So we add more text otherwise there is not enough to wrap in Word and validate how
+the text is wrapped.
+.
+<w:body>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="ParagraphTextBody"/>
+        </w:pPr>
+        <w:r>
+            <w:drawing>
+                <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
+                    <wp:extent cx="609600" cy="609600"/>
+                    <wp:effectExtent b="0" l="0" r="0" t="0"/>
+                    <wp:docPr descr="flexmark-icon-logo" id="100000" name="Image100000"/>
+                    <wp:cNvGraphicFramePr>
+                        <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
+                    </wp:cNvGraphicFramePr>
+                    <a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
+                        <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                            <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                                <pic:nvPicPr>
+                                    <pic:cNvPr id="100001" name="Image100000"/>
+                                    <pic:cNvPicPr/>
+                                </pic:nvPicPr>
+                                <pic:blipFill>
+                                    <a:blip r:embed="rId3" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"/>
+                                    <a:stretch>
+                                    <a:fillRect/>
+                                    </a:stretch>
+                                </pic:blipFill>
+                                <pic:spPr>
+                                    <a:xfrm>
+                                    <a:off x="0" y="0"/>
+                                    <a:ext cx="609600" cy="609600"/>
+                                    </a:xfrm>
+                                    <a:prstGeom prst="rect">
+                                    <a:avLst/>
+                                    </a:prstGeom>
+                                </pic:spPr>
+                            </pic:pic>
+                        </a:graphicData>
+                    </a:graphic>
+                </wp:inline>
+            </w:drawing>
+        </w:r>
+        <w:r>
+            <w:t xml:space="preserve"> with some text wrapped around the image</w:t>
+        </w:r>
+        <w:r>
+            <w:t xml:space="preserve"> </w:t>
+        </w:r>
+        <w:r>
+            <w:t>if possible. So we add more text otherwise there is not enough to wrap in Word and validate how</w:t>
+        </w:r>
+        <w:r>
+            <w:t xml:space="preserve"> </w:t>
+        </w:r>
+        <w:r>
+            <w:t>the text is wrapped.</w:t>
+        </w:r>
+    </w:p>
+</w:body>
+````````````````````````````````
+
+
+Align left
+
+```````````````````````````````` example(Images: 2) options(url, IGNORED)
 ![flexmark-icon-logo](/images/flexmark-icon-logo@2x.png){align="left"}with some text wrapped
 around the image if possible. So we add more text otherwise there is not enough to wrap in Word
 and validate how the text is wrapped.
@@ -2538,7 +2579,7 @@ and validate how the text is wrapped.
 
 Align right
 
-```````````````````````````````` example(Images: 2) options(url, IGNORED)
+```````````````````````````````` example(Images: 3) options(url, IGNORED)
 ![flexmark-icon-logo](/images/flexmark-icon-logo@2x.png){align="right"}with some text wrapped
 around the image if possible. So we add more text otherwise there is not enough to wrap in Word
 and validate how the text is wrapped.
@@ -2618,7 +2659,7 @@ and validate how the text is wrapped.
 
 Align center
 
-```````````````````````````````` example(Images: 3) options(url, IGNORED)
+```````````````````````````````` example(Images: 4) options(url, IGNORED)
 ![flexmark-icon-logo](/images/flexmark-icon-logo@2x.png){align="center"}with some text wrapped
 around the image if possible. So we add more text otherwise there is not enough to wrap in Word
 and validate how the text is wrapped.
@@ -2698,7 +2739,7 @@ and validate how the text is wrapped.
 
 Size in cm
 
-```````````````````````````````` example(Images: 4) options(url, IGNORED)
+```````````````````````````````` example(Images: 5) options(url, IGNORED)
 ![flexmark-icon-logo](assets/images/flexmark-icon-logo@2x.png){align=right width=2cm} 
 with some text
 .
@@ -2768,7 +2809,7 @@ with some text
 
 Size in cm
 
-```````````````````````````````` example(Images: 5) options(url, IGNORED)
+```````````````````````````````` example(Images: 6) options(url, IGNORED)
 ![flexmark-icon-logo](assets/images/flexmark-icon-logo@2x.png){align=right height=6cm} with some text
 .
 <w:body>
@@ -2834,7 +2875,7 @@ Size in cm
 
 Size in cm
 
-```````````````````````````````` example(Images: 6) options(url, IGNORED)
+```````````````````````````````` example(Images: 7) options(url, IGNORED)
 ![flexmark-icon-logo](assets/images/flexmark-icon-logo@2x.png){align=right height=6cm width=4cm}
 with some text
 .
@@ -2904,7 +2945,7 @@ with some text
 
 Size in inches
 
-```````````````````````````````` example(Images: 7) options(url, IGNORED)
+```````````````````````````````` example(Images: 8) options(url, IGNORED)
 ![flexmark-icon-logo](assets/images/flexmark-icon-logo@2x.png){width=1in} 
 
 with some text
@@ -2940,6 +2981,440 @@ with some text
                                     <a:xfrm>
                                     <a:off x="0" y="0"/>
                                     <a:ext cx="914400" cy="914400"/>
+                                    </a:xfrm>
+                                    <a:prstGeom prst="rect">
+                                    <a:avLst/>
+                                    </a:prstGeom>
+                                </pic:spPr>
+                            </pic:pic>
+                        </a:graphicData>
+                    </a:graphic>
+                </wp:inline>
+            </w:drawing>
+        </w:r>
+    </w:p>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="ParagraphTextBody"/>
+        </w:pPr>
+        <w:r>
+            <w:t>with some text</w:t>
+        </w:r>
+    </w:p>
+</w:body>
+````````````````````````````````
+
+
+Max width in cm
+
+```````````````````````````````` example(Images: 9) options(url, IGNORED)
+![flexmark-icon-logo](assets/images/flexmark-icon-logo@2x.png){max-width=1cm} 
+
+with some text
+.
+<w:body>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="ParagraphTextBody"/>
+        </w:pPr>
+        <w:r>
+            <w:drawing>
+                <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
+                    <wp:extent cx="359410" cy="359410"/>
+                    <wp:effectExtent b="0" l="0" r="0" t="0"/>
+                    <wp:docPr descr="flexmark-icon-logo" id="100000" name="Image100000"/>
+                    <wp:cNvGraphicFramePr>
+                        <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
+                    </wp:cNvGraphicFramePr>
+                    <a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
+                        <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                            <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                                <pic:nvPicPr>
+                                    <pic:cNvPr id="100001" name="Image100000"/>
+                                    <pic:cNvPicPr/>
+                                </pic:nvPicPr>
+                                <pic:blipFill>
+                                    <a:blip r:embed="rId3" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"/>
+                                    <a:stretch>
+                                    <a:fillRect/>
+                                    </a:stretch>
+                                </pic:blipFill>
+                                <pic:spPr>
+                                    <a:xfrm>
+                                    <a:off x="0" y="0"/>
+                                    <a:ext cx="359410" cy="359410"/>
+                                    </a:xfrm>
+                                    <a:prstGeom prst="rect">
+                                    <a:avLst/>
+                                    </a:prstGeom>
+                                </pic:spPr>
+                            </pic:pic>
+                        </a:graphicData>
+                    </a:graphic>
+                </wp:inline>
+            </w:drawing>
+        </w:r>
+    </w:p>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="ParagraphTextBody"/>
+        </w:pPr>
+        <w:r>
+            <w:t>with some text</w:t>
+        </w:r>
+    </w:p>
+</w:body>
+````````````````````````````````
+
+
+Max width in cm, smaller image
+
+```````````````````````````````` example(Images: 10) options(url, IGNORED)
+![flexmark-icon-logo](assets/images/flexmark-icon-logo@2x.png){max-width=10cm} 
+
+with some text
+.
+<w:body>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="ParagraphTextBody"/>
+        </w:pPr>
+        <w:r>
+            <w:drawing>
+                <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
+                    <wp:extent cx="609600" cy="609600"/>
+                    <wp:effectExtent b="0" l="0" r="0" t="0"/>
+                    <wp:docPr descr="flexmark-icon-logo" id="100000" name="Image100000"/>
+                    <wp:cNvGraphicFramePr>
+                        <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
+                    </wp:cNvGraphicFramePr>
+                    <a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
+                        <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                            <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                                <pic:nvPicPr>
+                                    <pic:cNvPr id="100001" name="Image100000"/>
+                                    <pic:cNvPicPr/>
+                                </pic:nvPicPr>
+                                <pic:blipFill>
+                                    <a:blip r:embed="rId3" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"/>
+                                    <a:stretch>
+                                    <a:fillRect/>
+                                    </a:stretch>
+                                </pic:blipFill>
+                                <pic:spPr>
+                                    <a:xfrm>
+                                    <a:off x="0" y="0"/>
+                                    <a:ext cx="609600" cy="609600"/>
+                                    </a:xfrm>
+                                    <a:prstGeom prst="rect">
+                                    <a:avLst/>
+                                    </a:prstGeom>
+                                </pic:spPr>
+                            </pic:pic>
+                        </a:graphicData>
+                    </a:graphic>
+                </wp:inline>
+            </w:drawing>
+        </w:r>
+    </w:p>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="ParagraphTextBody"/>
+        </w:pPr>
+        <w:r>
+            <w:t>with some text</w:t>
+        </w:r>
+    </w:p>
+</w:body>
+````````````````````````````````
+
+
+Max height in cm
+
+```````````````````````````````` example(Images: 11) options(url, IGNORED)
+![flexmark-icon-logo](assets/images/flexmark-icon-logo@2x.png){max-height=1cm} 
+
+with some text
+.
+<w:body>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="ParagraphTextBody"/>
+        </w:pPr>
+        <w:r>
+            <w:drawing>
+                <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
+                    <wp:extent cx="359410" cy="359410"/>
+                    <wp:effectExtent b="0" l="0" r="0" t="0"/>
+                    <wp:docPr descr="flexmark-icon-logo" id="100000" name="Image100000"/>
+                    <wp:cNvGraphicFramePr>
+                        <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
+                    </wp:cNvGraphicFramePr>
+                    <a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
+                        <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                            <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                                <pic:nvPicPr>
+                                    <pic:cNvPr id="100001" name="Image100000"/>
+                                    <pic:cNvPicPr/>
+                                </pic:nvPicPr>
+                                <pic:blipFill>
+                                    <a:blip r:embed="rId3" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"/>
+                                    <a:stretch>
+                                    <a:fillRect/>
+                                    </a:stretch>
+                                </pic:blipFill>
+                                <pic:spPr>
+                                    <a:xfrm>
+                                    <a:off x="0" y="0"/>
+                                    <a:ext cx="359410" cy="359410"/>
+                                    </a:xfrm>
+                                    <a:prstGeom prst="rect">
+                                    <a:avLst/>
+                                    </a:prstGeom>
+                                </pic:spPr>
+                            </pic:pic>
+                        </a:graphicData>
+                    </a:graphic>
+                </wp:inline>
+            </w:drawing>
+        </w:r>
+    </w:p>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="ParagraphTextBody"/>
+        </w:pPr>
+        <w:r>
+            <w:t>with some text</w:t>
+        </w:r>
+    </w:p>
+</w:body>
+````````````````````````````````
+
+
+Max width/height in cm, use max width
+
+```````````````````````````````` example(Images: 12) options(url, IGNORED)
+![flexmark-icon-logo](assets/images/flexmark-icon-logo@2x.png){max-width=1cm max-height=2cm} 
+
+with some text
+.
+<w:body>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="ParagraphTextBody"/>
+        </w:pPr>
+        <w:r>
+            <w:drawing>
+                <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
+                    <wp:extent cx="359410" cy="359410"/>
+                    <wp:effectExtent b="0" l="0" r="0" t="0"/>
+                    <wp:docPr descr="flexmark-icon-logo" id="100000" name="Image100000"/>
+                    <wp:cNvGraphicFramePr>
+                        <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
+                    </wp:cNvGraphicFramePr>
+                    <a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
+                        <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                            <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                                <pic:nvPicPr>
+                                    <pic:cNvPr id="100001" name="Image100000"/>
+                                    <pic:cNvPicPr/>
+                                </pic:nvPicPr>
+                                <pic:blipFill>
+                                    <a:blip r:embed="rId3" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"/>
+                                    <a:stretch>
+                                    <a:fillRect/>
+                                    </a:stretch>
+                                </pic:blipFill>
+                                <pic:spPr>
+                                    <a:xfrm>
+                                    <a:off x="0" y="0"/>
+                                    <a:ext cx="359410" cy="359410"/>
+                                    </a:xfrm>
+                                    <a:prstGeom prst="rect">
+                                    <a:avLst/>
+                                    </a:prstGeom>
+                                </pic:spPr>
+                            </pic:pic>
+                        </a:graphicData>
+                    </a:graphic>
+                </wp:inline>
+            </w:drawing>
+        </w:r>
+    </w:p>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="ParagraphTextBody"/>
+        </w:pPr>
+        <w:r>
+            <w:t>with some text</w:t>
+        </w:r>
+    </w:p>
+</w:body>
+````````````````````````````````
+
+
+Max width/height in cm, use max height
+
+```````````````````````````````` example(Images: 13) options(url, IGNORED)
+![flexmark-icon-logo](assets/images/flexmark-icon-logo@2x.png){max-width=2cm max-height=1cm} 
+
+with some text
+.
+<w:body>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="ParagraphTextBody"/>
+        </w:pPr>
+        <w:r>
+            <w:drawing>
+                <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
+                    <wp:extent cx="359410" cy="359410"/>
+                    <wp:effectExtent b="0" l="0" r="0" t="0"/>
+                    <wp:docPr descr="flexmark-icon-logo" id="100000" name="Image100000"/>
+                    <wp:cNvGraphicFramePr>
+                        <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
+                    </wp:cNvGraphicFramePr>
+                    <a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
+                        <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                            <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                                <pic:nvPicPr>
+                                    <pic:cNvPr id="100001" name="Image100000"/>
+                                    <pic:cNvPicPr/>
+                                </pic:nvPicPr>
+                                <pic:blipFill>
+                                    <a:blip r:embed="rId3" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"/>
+                                    <a:stretch>
+                                    <a:fillRect/>
+                                    </a:stretch>
+                                </pic:blipFill>
+                                <pic:spPr>
+                                    <a:xfrm>
+                                    <a:off x="0" y="0"/>
+                                    <a:ext cx="359410" cy="359410"/>
+                                    </a:xfrm>
+                                    <a:prstGeom prst="rect">
+                                    <a:avLst/>
+                                    </a:prstGeom>
+                                </pic:spPr>
+                            </pic:pic>
+                        </a:graphicData>
+                    </a:graphic>
+                </wp:inline>
+            </w:drawing>
+        </w:r>
+    </w:p>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="ParagraphTextBody"/>
+        </w:pPr>
+        <w:r>
+            <w:t>with some text</w:t>
+        </w:r>
+    </w:p>
+</w:body>
+````````````````````````````````
+
+
+Max height in cm, smaller image
+
+```````````````````````````````` example(Images: 14) options(url, IGNORED)
+![flexmark-icon-logo](assets/images/flexmark-icon-logo@2x.png){max-height=10cm} 
+
+with some text
+.
+<w:body>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="ParagraphTextBody"/>
+        </w:pPr>
+        <w:r>
+            <w:drawing>
+                <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
+                    <wp:extent cx="609600" cy="609600"/>
+                    <wp:effectExtent b="0" l="0" r="0" t="0"/>
+                    <wp:docPr descr="flexmark-icon-logo" id="100000" name="Image100000"/>
+                    <wp:cNvGraphicFramePr>
+                        <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
+                    </wp:cNvGraphicFramePr>
+                    <a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
+                        <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                            <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                                <pic:nvPicPr>
+                                    <pic:cNvPr id="100001" name="Image100000"/>
+                                    <pic:cNvPicPr/>
+                                </pic:nvPicPr>
+                                <pic:blipFill>
+                                    <a:blip r:embed="rId3" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"/>
+                                    <a:stretch>
+                                    <a:fillRect/>
+                                    </a:stretch>
+                                </pic:blipFill>
+                                <pic:spPr>
+                                    <a:xfrm>
+                                    <a:off x="0" y="0"/>
+                                    <a:ext cx="609600" cy="609600"/>
+                                    </a:xfrm>
+                                    <a:prstGeom prst="rect">
+                                    <a:avLst/>
+                                    </a:prstGeom>
+                                </pic:spPr>
+                            </pic:pic>
+                        </a:graphicData>
+                    </a:graphic>
+                </wp:inline>
+            </w:drawing>
+        </w:r>
+    </w:p>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="ParagraphTextBody"/>
+        </w:pPr>
+        <w:r>
+            <w:t>with some text</w:t>
+        </w:r>
+    </w:p>
+</w:body>
+````````````````````````````````
+
+
+Max height in cm, smaller image
+
+```````````````````````````````` example(Images: 15) options(url, IGNORED)
+![flexmark-icon-logo](assets/images/testImage.png){max-width=6cm max-height=2.4cm} 
+
+with some text
+.
+<w:body>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="ParagraphTextBody"/>
+        </w:pPr>
+        <w:r>
+            <w:drawing>
+                <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
+                    <wp:extent cx="2159635" cy="777469"/>
+                    <wp:effectExtent b="0" l="0" r="0" t="0"/>
+                    <wp:docPr descr="flexmark-icon-logo" id="100000" name="Image100000"/>
+                    <wp:cNvGraphicFramePr>
+                        <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
+                    </wp:cNvGraphicFramePr>
+                    <a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
+                        <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                            <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                                <pic:nvPicPr>
+                                    <pic:cNvPr id="100001" name="Image100000"/>
+                                    <pic:cNvPicPr/>
+                                </pic:nvPicPr>
+                                <pic:blipFill>
+                                    <a:blip r:embed="rId3" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"/>
+                                    <a:stretch>
+                                    <a:fillRect/>
+                                    </a:stretch>
+                                </pic:blipFill>
+                                <pic:spPr>
+                                    <a:xfrm>
+                                    <a:off x="0" y="0"/>
+                                    <a:ext cx="2159635" cy="777469"/>
                                     </a:xfrm>
                                     <a:prstGeom prst="rect">
                                     <a:avLst/>

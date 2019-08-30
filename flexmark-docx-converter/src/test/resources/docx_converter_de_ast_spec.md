@@ -2896,10 +2896,6 @@ code
     <w:p>
         <w:pPr>
             <w:pStyle w:val="Heading1"/>
-            <w:numPr>
-                <w:ilvl w:val="0"/>
-                <w:numId w:val="0"/>
-            </w:numPr>
         </w:pPr>
         <w:r>
             <w:t xml:space="preserve">Heading 1 </w:t>
@@ -2924,10 +2920,6 @@ code
     <w:p>
         <w:pPr>
             <w:pStyle w:val="Heading2"/>
-            <w:numPr>
-                <w:ilvl w:val="1"/>
-                <w:numId w:val="0"/>
-            </w:numPr>
         </w:pPr>
         <w:r>
             <w:t xml:space="preserve">Heading 2 </w:t>
@@ -2952,10 +2944,6 @@ code
     <w:p>
         <w:pPr>
             <w:pStyle w:val="Heading3"/>
-            <w:numPr>
-                <w:ilvl w:val="2"/>
-                <w:numId w:val="0"/>
-            </w:numPr>
         </w:pPr>
         <w:r>
             <w:t xml:space="preserve">Heading 3 </w:t>
@@ -2980,10 +2968,6 @@ code
     <w:p>
         <w:pPr>
             <w:pStyle w:val="Heading4"/>
-            <w:numPr>
-                <w:ilvl w:val="3"/>
-                <w:numId w:val="0"/>
-            </w:numPr>
         </w:pPr>
         <w:r>
             <w:t xml:space="preserve">Heading 4 </w:t>
@@ -3008,10 +2992,6 @@ code
     <w:p>
         <w:pPr>
             <w:pStyle w:val="Heading5"/>
-            <w:numPr>
-                <w:ilvl w:val="4"/>
-                <w:numId w:val="0"/>
-            </w:numPr>
         </w:pPr>
         <w:r>
             <w:t>Heading 5</w:t>
@@ -3030,10 +3010,6 @@ code
     <w:p>
         <w:pPr>
             <w:pStyle w:val="Heading6"/>
-            <w:numPr>
-                <w:ilvl w:val="5"/>
-                <w:numId w:val="0"/>
-            </w:numPr>
         </w:pPr>
         <w:r>
             <w:t>Heading 6</w:t>
@@ -4134,10 +4110,6 @@ code
     <w:p>
         <w:pPr>
             <w:pStyle w:val="Heading1"/>
-            <w:numPr>
-                <w:ilvl w:val="0"/>
-                <w:numId w:val="0"/>
-            </w:numPr>
         </w:pPr>
         <w:r>
             <w:t xml:space="preserve">Heading 1 </w:t>
@@ -4162,10 +4134,6 @@ code
     <w:p>
         <w:pPr>
             <w:pStyle w:val="Heading2"/>
-            <w:numPr>
-                <w:ilvl w:val="1"/>
-                <w:numId w:val="0"/>
-            </w:numPr>
         </w:pPr>
         <w:r>
             <w:t xml:space="preserve">Heading 2 </w:t>
@@ -4190,10 +4158,6 @@ code
     <w:p>
         <w:pPr>
             <w:pStyle w:val="Heading3"/>
-            <w:numPr>
-                <w:ilvl w:val="2"/>
-                <w:numId w:val="0"/>
-            </w:numPr>
         </w:pPr>
         <w:r>
             <w:t xml:space="preserve">Heading 3 </w:t>
@@ -4218,10 +4182,6 @@ code
     <w:p>
         <w:pPr>
             <w:pStyle w:val="Heading4"/>
-            <w:numPr>
-                <w:ilvl w:val="3"/>
-                <w:numId w:val="0"/>
-            </w:numPr>
         </w:pPr>
         <w:r>
             <w:t xml:space="preserve">Heading 4 </w:t>
@@ -4246,10 +4206,6 @@ code
     <w:p>
         <w:pPr>
             <w:pStyle w:val="Heading5"/>
-            <w:numPr>
-                <w:ilvl w:val="4"/>
-                <w:numId w:val="0"/>
-            </w:numPr>
         </w:pPr>
         <w:r>
             <w:t>Heading 5</w:t>
@@ -4268,10 +4224,6 @@ code
     <w:p>
         <w:pPr>
             <w:pStyle w:val="Heading6"/>
-            <w:numPr>
-                <w:ilvl w:val="5"/>
-                <w:numId w:val="0"/>
-            </w:numPr>
         </w:pPr>
         <w:r>
             <w:t>Heading 6</w:t>
@@ -5308,10 +5260,6 @@ code
     <w:p>
         <w:pPr>
             <w:pStyle w:val="Heading1"/>
-            <w:numPr>
-                <w:ilvl w:val="0"/>
-                <w:numId w:val="0"/>
-            </w:numPr>
         </w:pPr>
         <w:r>
             <w:t xml:space="preserve">Heading 1 </w:t>
@@ -5336,10 +5284,6 @@ code
     <w:p>
         <w:pPr>
             <w:pStyle w:val="Heading2"/>
-            <w:numPr>
-                <w:ilvl w:val="1"/>
-                <w:numId w:val="0"/>
-            </w:numPr>
         </w:pPr>
         <w:r>
             <w:t xml:space="preserve">Heading 2 </w:t>
@@ -5364,10 +5308,6 @@ code
     <w:p>
         <w:pPr>
             <w:pStyle w:val="Heading3"/>
-            <w:numPr>
-                <w:ilvl w:val="2"/>
-                <w:numId w:val="0"/>
-            </w:numPr>
         </w:pPr>
         <w:r>
             <w:t xml:space="preserve">Heading 3 </w:t>
@@ -5384,10 +5324,6 @@ code
     <w:p>
         <w:pPr>
             <w:pStyle w:val="Heading4"/>
-            <w:numPr>
-                <w:ilvl w:val="3"/>
-                <w:numId w:val="0"/>
-            </w:numPr>
         </w:pPr>
         <w:r>
             <w:t xml:space="preserve">Heading 4 </w:t>
@@ -5404,10 +5340,6 @@ code
     <w:p>
         <w:pPr>
             <w:pStyle w:val="Heading5"/>
-            <w:numPr>
-                <w:ilvl w:val="4"/>
-                <w:numId w:val="0"/>
-            </w:numPr>
         </w:pPr>
         <w:r>
             <w:t>Heading 5</w:t>
@@ -5418,10 +5350,6 @@ code
     <w:p>
         <w:pPr>
             <w:pStyle w:val="Heading6"/>
-            <w:numPr>
-                <w:ilvl w:val="5"/>
-                <w:numId w:val="0"/>
-            </w:numPr>
         </w:pPr>
         <w:r>
             <w:t>Heading 6</w:t>

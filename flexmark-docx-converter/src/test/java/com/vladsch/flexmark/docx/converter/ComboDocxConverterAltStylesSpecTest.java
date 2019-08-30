@@ -10,16 +10,18 @@ import org.junit.runners.Parameterized;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ComboEnDocxConverterSpecTest extends ComboDocxConverterSpecTestBase {
-    private static final String SPEC_RESOURCE = "/docx_converter_ast_spec.md";
-    private static final String FILE_TEST_CASE_DUMP_LOCATION = "/flexmark-docx-converter/src/test/resources/docx_converter_en_ast_spec/";
+public class ComboDocxConverterAltStylesSpecTest extends ComboDocxConverterSpecTestBase {
+    private static final String SPEC_RESOURCE = "/docx_converter_ast_alt_styles_spec.md";
+    static final String FILE_TEST_CASE_DUMP_LOCATION = "/flexmark-docx-converter/src/test/resources/docx_converter_ast_alt_styles_spec/";
+    public static final String TEMPLATE_XML = "/empty-numbered-headings.xml";
 
-    private static final DataHolder OPTIONS = new MutableDataSet(ComboDocxConverterSpecTestBase.OPTIONS);
+    private static final DataHolder OPTIONS = new MutableDataSet(ComboDocxConverterSpecTestBase.OPTIONS)
+            .set(DocxRenderer.DEFAULT_TEMPLATE_RESOURCE, TEMPLATE_XML);
 
     private static final Parser PARSER = Parser.builder(OPTIONS).build();
     private static final DocxRenderer RENDERER = DocxRenderer.builder(OPTIONS).build();
 
-    public ComboEnDocxConverterSpecTest(SpecExample example) {
+    public ComboDocxConverterAltStylesSpecTest(SpecExample example) {
         super(example);
     }
 

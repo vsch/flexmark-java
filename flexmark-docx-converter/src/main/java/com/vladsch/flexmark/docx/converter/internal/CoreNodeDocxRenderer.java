@@ -996,6 +996,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
                 attributeValue = attributeValue.substring(0, attributeValue.length() - 1);
                 relative = true;
             }
+
             try {
                 if (attributeValue.endsWith("cm")) {
                     value = Double.parseDouble(attributeValue.substring(0, attributeValue.length() - 2).trim());
@@ -1064,6 +1065,8 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
             // kludge: normally there is no max-width attribute but we can fake it
             long longMaxWidth = getSizeInfo(attributes, "max-width", page.getWritableWidthTwips(), 0);
             int maxWidth = longMaxWidth > 0 && longMaxWidth <= Integer.MAX_VALUE ? (int) longMaxWidth : -1;
+            long longMaxheight = getSizeInfo(attributes, "max-height", page.getWritableHeightTwips(), 0);
+            int maxheight = longMaxheight > 0 && longMaxheight <= Integer.MAX_VALUE ? (int) longMaxheight : -1;
 
             long hOffset = 0;
             long vOffset = 0;
@@ -1101,11 +1104,11 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
                         inline = imagePart.createImageInline(filenameHint, altText, id1, id2, cx, false);
                     }
                 } else {
-                    if (maxWidth > 0) {
+                    if (maxWidth > 0 || maxheight > 0) {
                         if (hOffset != 0) {
-                            anchor = imagePart.createImageAnchor(filenameHint, altText, id1, id2, false, maxWidth, hOffset, vOffset);
+                            anchor = imagePart.createImageAnchor(filenameHint, altText, id1, id2, false, maxWidth, maxheight, hOffset, vOffset);
                         } else {
-                            inline = imagePart.createImageInline(filenameHint, altText, id1, id2, false, maxWidth);
+                            inline = imagePart.createImageInline(filenameHint, altText, id1, id2, false, maxWidth, maxheight);
                         }
                     } else {
                         if (hOffset != 0) {

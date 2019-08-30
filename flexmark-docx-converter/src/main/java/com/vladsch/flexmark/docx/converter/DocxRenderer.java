@@ -189,8 +189,12 @@ public class DocxRenderer implements IRender {
         return new Builder(options);
     }
 
+    public static WordprocessingMLPackage getDefaultTemplate(DataHolder options) {
+        return getDefaultTemplate(DEFAULT_TEMPLATE_RESOURCE.getFrom(options));
+    }
+
     public static WordprocessingMLPackage getDefaultTemplate() {
-        return getDefaultTemplate(DEFAULT_TEMPLATE_RESOURCE.getFrom(null));
+        return getDefaultTemplate((DataHolder) null);
     }
 
     public static WordprocessingMLPackage getDefaultTemplate(String emptyXMLResourcePath) {
