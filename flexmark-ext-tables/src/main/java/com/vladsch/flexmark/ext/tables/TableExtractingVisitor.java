@@ -106,7 +106,7 @@ public class TableExtractingVisitor {
     }
 
     private void visit(TableCaption node) {
-        myTable.setCaptionWithMarkers(node.getOpeningMarker(), node.getText(), node.getClosingMarker());
+        myTable.setCaptionWithMarkers(node, node.getOpeningMarker(), node.getText(), node.getClosingMarker());
     }
 
     private void visit(TableCell node) {
@@ -118,6 +118,6 @@ public class TableExtractingVisitor {
                 text = text.trim();
             }
         }
-        myTable.addCell(new com.vladsch.flexmark.util.format.TableCell(node.getOpeningMarker(), text, node.getClosingMarker(), 1, node.getSpan(), node.getAlignment() == null ? CellAlignment.NONE : node.getAlignment().cellAlignment()));
+        myTable.addCell(new com.vladsch.flexmark.util.format.TableCell(node, node.getOpeningMarker(), text, node.getClosingMarker(), 1, node.getSpan(), node.getAlignment() == null ? CellAlignment.NONE : node.getAlignment().cellAlignment()));
     }
 }

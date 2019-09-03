@@ -32,6 +32,7 @@ public class Parsing {
     public final String IN_BRACES_W_SP;
     public final Pattern LINK_DESTINATION;
     public final Pattern LINK_DESTINATION_MATCHED_PARENS;
+    public final Pattern LINK_DESTINATION_MATCHED_PARENS_NOSP;
     public final String HTMLCOMMENT;
     public final String PROCESSINGINSTRUCTION;
     public final String DECLARATION;
@@ -143,6 +144,10 @@ public class Parsing {
         this.LINK_DESTINATION_MATCHED_PARENS = Pattern.compile(
                 "^(?:" + (Parser.PARSE_JEKYLL_MACROS_IN_URLS.getFrom(options) ? IN_BRACES_W_SP + "|" : "")
                         + (Parser.SPACE_IN_LINK_URLS.getFrom(options) ? "(?:" + REG_CHAR_SP + ")+|" : REG_CHAR + "+|") +
+                        ESCAPED_CHAR + "|\\\\|\\(|\\))*");
+        this.LINK_DESTINATION_MATCHED_PARENS_NOSP = Pattern.compile(
+                "^(?:" + (Parser.PARSE_JEKYLL_MACROS_IN_URLS.getFrom(options) ? IN_BRACES_W_SP + "|" : "")
+                        + (false ? "(?:" + REG_CHAR_SP + ")+|" : REG_CHAR + "+|") +
                         ESCAPED_CHAR + "|\\\\|\\(|\\))*");
         this.HTMLCOMMENT = "<!---->|<!--(?:-?[^>-])(?:-?[^-])*-->";
         this.PROCESSINGINSTRUCTION = "[<][?].*?[?][>]";

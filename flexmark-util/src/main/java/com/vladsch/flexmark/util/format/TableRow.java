@@ -7,6 +7,7 @@ import java.util.List;
 
 import static com.vladsch.flexmark.util.Utils.maxLimit;
 import static com.vladsch.flexmark.util.Utils.minLimit;
+import static com.vladsch.flexmark.util.format.TableCellManipulator.BREAK;
 
 @SuppressWarnings("WeakerAccess")
 public class TableRow {
@@ -21,6 +22,67 @@ public class TableRow {
 
     public List<TableCell> getCells() {
         return cells;
+    }
+
+    public void forAllCells(TableCellConsumer consumer) {
+        forAllCells(0, Integer.MAX_VALUE, consumer);
+    }
+
+    public void forAllCells(int startIndex, TableCellConsumer consumer) {
+        forAllCells(startIndex, Integer.MAX_VALUE, consumer);
+    }
+
+    public void forAllCells(int startIndex, int count, TableCellConsumer consumer) {
+        forAllCells(startIndex, count, (cell, cellIndex, cellColumn, allCellIndex) -> {
+             consumer.accept(cell, cellIndex, cellColumn);
+             return 0;
+        });
+    }
+
+    public void forAllCells(TableCellManipulator manipulator) {
+        forAllCells(0, Integer.MAX_VALUE, manipulator);
+    }
+
+    public void forAllCells(int startIndex, TableCellManipulator manipulator) {
+        forAllCells(startIndex, Integer.MAX_VALUE, manipulator);
+    }
+
+    public void forAllCells(int startIndex, int count, TableCellManipulator manipulator) {
+        int iMax = cells.size();
+        if (startIndex < iMax && count > 0) {
+            int column = 0;
+            int remaining = count;
+            int allCellsIndex = 0;
+
+            for (int i = 0; i < iMax; ) {
+                TableCell cell = cells.get(i);
+
+                if (i >= startIndex) {
+                    int result = manipulator.apply(cell, i, column, allCellsIndex);
+
+                    if (result == BREAK) return;
+
+                    if (result < 0) {
+                        allCellsIndex -= result; // adjust for deleted cells
+                        remaining += result;
+                        iMax += result;
+                    } else {
+                        i += result + 1;
+                        column += cell.columnSpan;
+                        remaining--;
+                        iMax += result;
+                    }
+
+                    allCellsIndex++;
+
+                    if (remaining <= 0) break;
+                } else {
+                    i++;
+                    allCellsIndex++;
+                    column += cell.columnSpan;
+                }
+            }
+        }
     }
 
     public int getColumns() {

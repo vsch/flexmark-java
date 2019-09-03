@@ -1334,7 +1334,9 @@ public class InlineParserImpl extends LightInlineParserImpl implements InlinePar
         } else {
             if (options.linksAllowMatchedParentheses) {
                 // allow matched parenthesis
-                BasedSequence matched = match(myParsing.LINK_DESTINATION_MATCHED_PARENS);
+                // KLUDGE: to fix issue of stack overflow when parsing large embedded images with spaces in URLs enabled. No spaces allowed for embedded images
+                boolean noSpaces = input.subSequence(index).startsWith("data:image/png;base64,");
+                BasedSequence matched = match(noSpaces ? myParsing.LINK_DESTINATION_MATCHED_PARENS_NOSP : myParsing.LINK_DESTINATION_MATCHED_PARENS);
                 if (matched != null) {
                     int openCount = 0;
                     int iMax = matched.length();

@@ -168,7 +168,7 @@ public class TableNodeFormatter implements NodeFormatter {
 
     private void render(TableCaption node, NodeFormatterContext context, MarkdownWriter markdown) {
         if (context.getRenderPurpose() == FORMAT) {
-            myTable.setCaptionWithMarkers(node.getOpeningMarker(), node.getText(), node.getClosingMarker());
+            myTable.setCaptionWithMarkers(node, node.getOpeningMarker(), node.getText(), node.getClosingMarker());
         } else {
             // KLUDGE: to reuse the table formatting logic of MarkdownTable
             String dummyCaption = node.hasChildren() ? "dummy" : "";
@@ -192,7 +192,7 @@ public class TableNodeFormatter implements NodeFormatter {
                     text = text.trim();
                 }
             }
-            myTable.addCell(new com.vladsch.flexmark.util.format.TableCell(node.getOpeningMarker(), text, node.getClosingMarker(), 1, node.getSpan(), node.getAlignment() == null ? CellAlignment.NONE : node.getAlignment().cellAlignment()));
+            myTable.addCell(new com.vladsch.flexmark.util.format.TableCell(node, node.getOpeningMarker(), text, node.getClosingMarker(), 1, node.getSpan(), node.getAlignment() == null ? CellAlignment.NONE : node.getAlignment().cellAlignment()));
         } else {
             if (node.getPrevious() == null) {
                 if (options.leadTrailPipes && node.getOpeningMarker().isEmpty()) markdown.append('|');

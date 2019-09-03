@@ -1,19 +1,19 @@
 <component name="MarkdownNavigator.ProfileManager">
   <profile>
-    <option name="myName" value="OVERVIEW" havePreviewSettings="true" haveParserSettings="true" haveHtmlSettings="true" haveCssSettings="true" haveAnnotatorSettings="true" haveHtmlExportSettings="true" haveLinkMapSettings="true" profileName="OVERVIEW">
-      <PreviewSettings splitEditorLayout="FIRST" splitEditorPreview="PREVIEW" useGrayscaleRendering="false" zoomFactor="1.0" maxImageWidth="0" showGitHubPageIfSynced="false" allowBrowsingInPreview="false" synchronizePreviewPosition="true" highlightPreviewType="LINE" highlightFadeOut="10" highlightOnTyping="true" synchronizeSourcePosition="true" verticallyAlignSourceAndPreviewSyncPosition="true" showSearchHighlightsInPreview="true" showSelectionInPreview="true" openRemoteLinks="true" replaceUnicodeEmoji="true" lastLayoutSetsDefault="false">
+    <option name="myName" value="Comms" havePreviewSettings="true" haveParserSettings="true" haveHtmlSettings="true" haveCssSettings="true" haveAnnotatorSettings="true" haveHtmlExportSettings="true" haveLinkMapSettings="true" profileName="Comms">
+      <PreviewSettings splitEditorLayout="FIRST" splitEditorPreview="PREVIEW" useGrayscaleRendering="false" zoomFactor="1.0" maxImageWidth="0" showGitHubPageIfSynced="false" allowBrowsingInPreview="false" synchronizePreviewPosition="true" highlightPreviewType="LINE" highlightFadeOut="2" highlightOnTyping="false" synchronizeSourcePosition="true" verticallyAlignSourceAndPreviewSyncPosition="true" showSearchHighlightsInPreview="true" showSelectionInPreview="true" openRemoteLinks="true" replaceUnicodeEmoji="false" lastLayoutSetsDefault="false">
         <PanelProvider>
           <provider providerId="com.vladsch.idea.multimarkdown.editor.javafx.html.panel" providerName="JavaFX WebView" />
         </PanelProvider>
       </PreviewSettings>
-      <ParserSettings gitHubSyntaxChange="false" emojiShortcuts="3" emojiImages="0">
+      <ParserSettings gitHubSyntaxChange="false" emojiShortcuts="1" emojiImages="0">
         <PegdownExtensions>
-          <option name="ABBREVIATIONS" value="true" />
+          <option name="ABBREVIATIONS" value="false" />
           <option name="ANCHORLINKS" value="false" />
           <option name="ASIDE" value="true" />
           <option name="ATXHEADERSPACE" value="true" />
           <option name="AUTOLINKS" value="false" />
-          <option name="DEFINITIONS" value="true" />
+          <option name="DEFINITIONS" value="false" />
           <option name="DEFINITION_BREAK_DOUBLE_BLANK_LINE" value="false" />
           <option name="FENCED_CODE_BLOCKS" value="true" />
           <option name="FOOTNOTES" value="true" />
@@ -41,27 +41,27 @@
           <option name="EMOJI_SHORTCUTS" value="true" />
           <option name="ENUMERATED_REFERENCES_EXT" value="true" />
           <option name="FLEXMARK_FRONT_MATTER" value="true" />
-          <option name="GFM_LOOSE_BLANK_LINE_AFTER_ITEM_PARA" value="true" />
-          <option name="GFM_TABLE_RENDERING" value="false" />
-          <option name="GITBOOK_URL_ENCODING" value="true" />
+          <option name="GFM_LOOSE_BLANK_LINE_AFTER_ITEM_PARA" value="false" />
+          <option name="GFM_TABLE_RENDERING" value="true" />
+          <option name="GITBOOK_URL_ENCODING" value="false" />
           <option name="GITHUB_LISTS" value="false" />
           <option name="GITHUB_WIKI_LINKS" value="true" />
           <option name="GITLAB_EXT" value="false" />
-          <option name="GITLAB_MATH_EXT" value="false" />
-          <option name="GITLAB_MERMAID_EXT" value="false" />
+          <option name="GITLAB_MATH_EXT" value="true" />
+          <option name="GITLAB_MERMAID_EXT" value="true" />
           <option name="HEADER_ID_NON_ASCII_TO_LOWERCASE" value="false" />
           <option name="HEADER_ID_NO_DUPED_DASHES" value="false" />
           <option name="JEKYLL_FRONT_MATTER" value="false" />
-          <option name="MACROS_EXT" value="false" />
+          <option name="MACROS_EXT" value="true" />
           <option name="NO_TEXT_ATTRIBUTES" value="false" />
-          <option name="PARSE_HTML_ANCHOR_ID" value="true" />
-          <option name="PLANTUML_FENCED_CODE" value="false" />
-          <option name="PUML_FENCED_CODE" value="false" />
+          <option name="PARSE_HTML_ANCHOR_ID" value="false" />
+          <option name="PLANTUML_FENCED_CODE" value="true" />
+          <option name="PUML_FENCED_CODE" value="true" />
           <option name="SIM_TOC_BLANK_LINE_SPACER" value="true" />
           <option name="SPACE_IN_LINK_URLS" value="false" />
         </ParserOptions>
       </ParserSettings>
-      <HtmlSettings headerTopEnabled="false" headerBottomEnabled="false" bodyTopEnabled="false" bodyBottomEnabled="false" embedUrlContent="false" addPageHeader="false" embedImages="false" embedHttpImages="false" imageUriSerials="false" addDocTypeHtml="false" noParaTags="false" plantUmlConversion="0" mathConversion="-1">
+      <HtmlSettings headerTopEnabled="false" headerBottomEnabled="false" bodyTopEnabled="false" bodyBottomEnabled="false" embedUrlContent="false" addPageHeader="true" embedImages="false" embedHttpImages="false" imageUriSerials="false" addDocTypeHtml="true" noParaTags="false" plantUmlConversion="0" mathConversion="-1">
         <GeneratorProvider>
           <provider providerId="com.vladsch.idea.multimarkdown.editor.javafx.html.generator" providerName="JavaFx HTML Generator" />
         </GeneratorProvider>
@@ -74,7 +74,12 @@
         <StylesheetProvider>
           <provider providerId="com.vladsch.idea.multimarkdown.editor.javafx.html.css" providerName="Default JavaFx Stylesheet" />
         </StylesheetProvider>
-        <ScriptProviders />
+        <ScriptProviders>
+          <provider providerId="com.vladsch.idea.multimarkdown.editor.github-collapse-in-comment.html.script" providerName="Details tag opener" />
+          <provider providerId="com.vladsch.idea.multimarkdown.editor.katex.html.script" providerName="Katex Script" />
+          <provider providerId="com.vladsch.idea.multimarkdown.editor.mermaid.html.script" providerName="Mermaid Script" />
+          <provider providerId="com.vladsch.idea.multimarkdown.editor.github-collapse-markdown.html.script" providerName="GitHub Collapse Markdown" />
+        </ScriptProviders>
         <cssText>.markdown-body,
 .wiki-body {
     font-family: Arial, &quot;Helvetica Neue&quot;, &quot;Segoe UI&quot;, freesans, sans-serif;
@@ -107,7 +112,7 @@ code {
         <cssUriHistory />
       </CssSettings>
       <AnnotatorSettings targetHasSpaces="true" linkCaseMismatch="true" wikiCaseMismatch="true" wikiLinkHasDashes="true" notUnderWikiHome="true" targetNotWikiPageExt="true" notUnderSourceWikiHome="true" targetNameHasAnchor="true" targetPathHasAnchor="true" wikiLinkHasSlash="true" wikiLinkHasSubdir="true" wikiLinkHasOnlyAnchor="true" linkTargetsWikiHasExt="true" linkTargetsWikiHasBadExt="true" notUnderSameRepo="true" targetNotUnderVcs="false" linkNeedsExt="true" linkHasBadExt="true" linkTargetNeedsExt="true" linkTargetHasBadExt="true" wikiLinkNotInWiki="true" imageTargetNotInRaw="true" repoRelativeAcrossVcsRoots="true" multipleWikiTargetsMatch="true" unresolvedLinkReference="true" linkIsIgnored="true" anchorIsIgnored="true" anchorIsUnresolved="true" anchorLineReferenceIsUnresolved="true" anchorLineReferenceFormat="true" anchorHasDuplicates="true" abbreviationDuplicates="true" abbreviationNotUsed="true" attributeIdDuplicateDefinition="true" attributeIdNotUsed="true" footnoteDuplicateDefinition="true" footnoteUnresolved="true" footnoteDuplicates="true" footnoteNotUsed="true" macroDuplicateDefinition="true" macroUnresolved="true" macroDuplicates="true" macroNotUsed="true" referenceDuplicateDefinition="true" referenceUnresolved="true" referenceDuplicates="true" referenceNotUsed="true" referenceUnresolvedNumericId="true" enumRefDuplicateDefinition="true" enumRefUnresolved="true" enumRefDuplicates="true" enumRefNotUsed="true" enumRefLinkUnresolved="true" enumRefLinkDuplicates="true" simTocUpdateNeeded="true" simTocTitleSpaceNeeded="true" />
-      <HtmlExportSettings updateOnSave="true" parentDir="$ModuleFileDir$/src/main/javadoc" targetDir="$ModuleFileDir$/src/main/javadoc" cssDir="$ModuleFileDir$/src/main/javadoc/css" scriptDir="$ModuleFileDir$/src/main/javadoc/js" plainHtml="false" imageDir="$ModuleFileDir$/src/main/javadoc" copyLinkedImages="true" imagePathType="1" targetPathType="2" targetExt="" useTargetExt="false" noCssNoScripts="true" useElementStyleAttribute="false" linkToExportedHtml="false" exportOnSettingsChange="true" regenerateOnProjectOpen="false" linkFormatType="PAGE_RELATIVE" />
+      <HtmlExportSettings updateOnSave="false" parentDir="$ProjectFileDir$" targetDir="$ProjectFileDir$/out" cssDir="$ProjectFileDir$/out/export/css" scriptDir="$ProjectFileDir$/out/export/js" plainHtml="false" imageDir="$ProjectFileDir$/out/img" copyLinkedImages="false" imagePathType="0" targetPathType="2" targetExt="" useTargetExt="false" noCssNoScripts="false" useElementStyleAttribute="false" linkToExportedHtml="true" exportOnSettingsChange="true" regenerateOnProjectOpen="false" linkFormatType="HTTP_ABSOLUTE" />
       <LinkMapSettings>
         <textMaps />
       </LinkMapSettings>

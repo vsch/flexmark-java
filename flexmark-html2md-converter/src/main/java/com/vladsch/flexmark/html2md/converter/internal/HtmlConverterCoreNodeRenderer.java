@@ -1168,7 +1168,7 @@ public class HtmlConverterCoreNodeRenderer implements PhasedHtmlNodeRenderer {
 
         // skip cells defined by row spans in previous rows
         if (!myTableSuppressColumns) {
-            myTable.addCell(new TableCell(SubSequence.NULL, cellText.replace("\n", " "), BasedSequence.NULL, rowSpan, colSpan, alignment));
+            myTable.addCell(new TableCell(null, SubSequence.NULL, cellText.replace("\n", " "), BasedSequence.NULL, rowSpan, colSpan, alignment));
         }
     }
 

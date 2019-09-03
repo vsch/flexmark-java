@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/FlexmarkJavaAssets/FlexmarkJavaAssets.iml" filepath="$PROJECT_DIR$/FlexmarkJavaAssets/FlexmarkJavaAssets.iml" />
       <module fileurl="file://$PROJECT_DIR$/FlexmarkJavaAssets/Samples/Samples.iml" filepath="$PROJECT_DIR$/FlexmarkJavaAssets/Samples/Samples.iml" />
       <module fileurl="file://$PROJECT_DIR$/FlexmarkJavaAssets/ScalaSamples/ScalaSamples.iml" filepath="$PROJECT_DIR$/FlexmarkJavaAssets/ScalaSamples/ScalaSamples.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark/flexmark.iml" filepath="$PROJECT_DIR$/flexmark/flexmark.iml" />

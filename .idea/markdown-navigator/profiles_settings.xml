@@ -3,6 +3,7 @@
     <scope-profiles>
       <element scope="Flexmark Ext Overview" profile="OVERVIEW" />
       <element scope="GitHub Templates" profile="GitHub Templates" />
+      <element scope="Comms" profile="Comms" />
     </scope-profiles>
   </settings>
 </component>

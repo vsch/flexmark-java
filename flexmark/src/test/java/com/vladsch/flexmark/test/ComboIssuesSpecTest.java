@@ -83,6 +83,7 @@ public class ComboIssuesSpecTest extends ComboSpecTestCase {
         optionsMap.put("pass-through", new MutableDataSet().set(HtmlRenderer.FORMAT_FLAGS, HtmlRenderer.PASS_THROUGH));
         optionsMap.put("strip-indent", new MutableDataSet().set(SOURCE_INDENT, "> > "));
         optionsMap.put("no-html-blocks", new MutableDataSet().set(Parser.HTML_BLOCK_PARSER, false));
+        optionsMap.put("url-spaces", new MutableDataSet().set(Parser.SPACE_IN_LINK_URLS, true));
         optionsMap.put("sub-parse", new MutableDataSet()
                 .set(SOURCE_PREFIX, "" +
                         "Source Prefix\n" +

@@ -6,6 +6,7 @@ flexmark-java
 [TOC]: # " "
 
 - [To Do](#to-do)
+- [0.50.34](#05034)
 - [0.50.32](#05032)
 - [0.50.30](#05030)
 - [0.50.28](#05028)
@@ -104,6 +105,13 @@ flexmark-java
 * [ ] Convert anonymous classes to lambda where possible.
 * [ ] Add: `flexmark-ext-attributes` formatting of individual attributes instead of dumping the
       attributes node text.
+
+0.50.34
+-------
+
+* Add: source `Node` to `com.vladsch.flexmark.util.format.TableCell`
+* Fix: Stack overflow when parsing large embedded images with space in URL enabled. Now link
+  urls starting with `data:image/png;base64,` do not allow spaces in the link.
 
 0.50.32
 -------

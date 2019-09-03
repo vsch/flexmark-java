@@ -143,9 +143,9 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         MarkdownTable table2 = getTable(markdown2);
         MarkdownTable table3 = getTable(markdown3);
 
-        table1.setCaptionWithMarkers("[", "Table 1", "]");
-        table2.setCaptionWithMarkers("[", "Table 2", "]");
-        table3.setCaptionWithMarkers("[", "Table 3", "]");
+        table1.setCaptionWithMarkers(null, "[", "Table 1", "]");
+        table2.setCaptionWithMarkers(null, "[", "Table 2", "]");
+        table3.setCaptionWithMarkers(null, "[", "Table 3", "]");
 
         assertEquals("Table 1", table1.getCaption().toString());
         assertEquals("Table 2", table2.getCaption().toString());

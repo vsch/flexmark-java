@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="Comms" pattern="file[FlexmarkJavaAssets]:doc//*" />
+</component>

@@ -1,5 +1,6 @@
 package com.vladsch.flexmark.util.format;
 
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.html.CellAlignment;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.BasedSequenceImpl;
@@ -10,10 +11,11 @@ import static com.vladsch.flexmark.util.Utils.*;
 
 @SuppressWarnings("WeakerAccess")
 public class TableCell {
-    public final static TableCell NULL = new TableCell(SubSequence.NULL, " ", BasedSequence.NULL, 1, 0, CellAlignment.NONE);
-    public final static TableCell DEFAULT_CELL = new TableCell(SubSequence.NULL, " ", BasedSequence.NULL, 1, 1, CellAlignment.NONE);
+    public final static TableCell NULL = new TableCell(null, SubSequence.NULL, " ", BasedSequence.NULL, 1, 0, CellAlignment.NONE);
+    public final static TableCell DEFAULT_CELL = new TableCell(null, SubSequence.NULL, " ", BasedSequence.NULL, 1, 1, CellAlignment.NONE);
     public static final int NOT_TRACKED = Integer.MAX_VALUE;
 
+    public final Node tableCellNode;   // node if needed for finer text manipulation
     public final BasedSequence openMarker;
     public final BasedSequence text;
     public final BasedSequence closeMarker;
@@ -27,29 +29,32 @@ public class TableCell {
     public final boolean afterDelete; // if adjustment should be done as if after delete
 
     public TableCell(CharSequence text, int rowSpan, int columnSpan) {
-        this(BasedSequence.NULL, text, BasedSequence.NULL, rowSpan, columnSpan, CellAlignment.NONE);
+        this(null, BasedSequence.NULL, text, BasedSequence.NULL, rowSpan, columnSpan, CellAlignment.NONE);
     }
 
     public TableCell(
+            Node tableCellNode,
             CharSequence text,
             int rowSpan,
             int columnSpan,
             CellAlignment alignment
     ) {
-        this(BasedSequence.NULL, text, BasedSequence.NULL, rowSpan, columnSpan, alignment);
+        this(tableCellNode, BasedSequence.NULL, text, BasedSequence.NULL, rowSpan, columnSpan, alignment);
     }
 
     public TableCell(
+            Node tableCellNode,
             CharSequence openMarker,
             CharSequence text,
             CharSequence closeMarker,
             int rowSpan,
             int columnSpan
     ) {
-        this(openMarker, text, closeMarker, rowSpan, columnSpan, CellAlignment.NONE);
+        this(tableCellNode, openMarker, text, closeMarker, rowSpan, columnSpan, CellAlignment.NONE);
     }
 
     public TableCell(
+            Node tableCellNode,
             CharSequence openMarker,
             CharSequence text,
             CharSequence closeMarker,
@@ -57,10 +62,11 @@ public class TableCell {
             int columnSpan,
             CellAlignment alignment
     ) {
-        this(openMarker, text, closeMarker, rowSpan, columnSpan, alignment, NOT_TRACKED, NOT_TRACKED, 0, false, false);
+        this(tableCellNode, openMarker, text, closeMarker, rowSpan, columnSpan, alignment, NOT_TRACKED, NOT_TRACKED, 0, false, false);
     }
 
     public TableCell(
+            Node tableCellNode,
             CharSequence openMarker,
             CharSequence text,
             CharSequence closeMarker,
@@ -75,6 +81,7 @@ public class TableCell {
 
     ) {
         BasedSequence chars = BasedSequenceImpl.of(text);
+        this.tableCellNode = tableCellNode;
         this.openMarker = BasedSequenceImpl.of(openMarker);
         this.closeMarker = BasedSequenceImpl.of(closeMarker);
         BasedSequence useMarker = this.openMarker.isEmpty() ? this.closeMarker.subSequence(0, 0) : this.openMarker.subSequence(this.openMarker.length());
@@ -89,33 +96,33 @@ public class TableCell {
         this.afterDelete = afterDelete;
     }
 
-    public TableCell withColumnSpan(int columnSpan) { return new TableCell(openMarker, text, closeMarker, rowSpan, columnSpan, alignment, trackedTextOffset, spanTrackedOffset == NOT_TRACKED ? NOT_TRACKED : min(spanTrackedOffset, columnSpan), trackedTextAdjust, afterSpace, afterDelete); }
+    public TableCell withColumnSpan(int columnSpan) { return new TableCell(tableCellNode, openMarker, text, closeMarker, rowSpan, columnSpan, alignment, trackedTextOffset, spanTrackedOffset == NOT_TRACKED ? NOT_TRACKED : min(spanTrackedOffset, columnSpan), trackedTextAdjust, afterSpace, afterDelete); }
 
-    public TableCell withText(CharSequence text) { return new TableCell(openMarker, text, closeMarker, rowSpan, columnSpan, alignment, NOT_TRACKED, spanTrackedOffset, trackedTextAdjust, afterSpace, afterDelete); }
+    public TableCell withText(CharSequence text) { return new TableCell(tableCellNode, openMarker, text, closeMarker, rowSpan, columnSpan, alignment, NOT_TRACKED, spanTrackedOffset, trackedTextAdjust, afterSpace, afterDelete); }
 
     public TableCell withText(
             CharSequence openMarker,
             CharSequence text,
             CharSequence closeMarker
-    ) { return new TableCell(openMarker, text, closeMarker, rowSpan, columnSpan, alignment, NOT_TRACKED, spanTrackedOffset, trackedTextAdjust, afterSpace, afterDelete); }
+    ) { return new TableCell(tableCellNode, openMarker, text, closeMarker, rowSpan, columnSpan, alignment, NOT_TRACKED, spanTrackedOffset, trackedTextAdjust, afterSpace, afterDelete); }
 
-    public TableCell withRowSpan(int rowSpan) { return new TableCell(openMarker, text, closeMarker, rowSpan, columnSpan, alignment, trackedTextOffset, spanTrackedOffset, trackedTextAdjust, afterSpace, afterDelete); }
+    public TableCell withRowSpan(int rowSpan) { return new TableCell(tableCellNode, openMarker, text, closeMarker, rowSpan, columnSpan, alignment, trackedTextOffset, spanTrackedOffset, trackedTextAdjust, afterSpace, afterDelete); }
 
-    public TableCell withAlignment(CellAlignment alignment) { return new TableCell(openMarker, text, closeMarker, rowSpan, columnSpan, alignment, trackedTextOffset, spanTrackedOffset, trackedTextAdjust, afterSpace, afterDelete); }
+    public TableCell withAlignment(CellAlignment alignment) { return new TableCell(tableCellNode, openMarker, text, closeMarker, rowSpan, columnSpan, alignment, trackedTextOffset, spanTrackedOffset, trackedTextAdjust, afterSpace, afterDelete); }
 
-    public TableCell withTrackedOffset(int trackedTextOffset) { return new TableCell(openMarker, text, closeMarker, rowSpan, columnSpan, alignment, trackedTextOffset, spanTrackedOffset, trackedTextAdjust, afterSpace, afterDelete); }
+    public TableCell withTrackedOffset(int trackedTextOffset) { return new TableCell(tableCellNode, openMarker, text, closeMarker, rowSpan, columnSpan, alignment, trackedTextOffset, spanTrackedOffset, trackedTextAdjust, afterSpace, afterDelete); }
 
     public TableCell withTrackedOffset(
             int trackedTextOffset,
             boolean afterSpace,
             boolean afterSpaceDelete
-    ) { return new TableCell(openMarker, text, closeMarker, rowSpan, columnSpan, alignment, trackedTextOffset, spanTrackedOffset, trackedTextAdjust, afterSpace, afterSpaceDelete); }
+    ) { return new TableCell(tableCellNode, openMarker, text, closeMarker, rowSpan, columnSpan, alignment, trackedTextOffset, spanTrackedOffset, trackedTextAdjust, afterSpace, afterSpaceDelete); }
 
-    public TableCell withSpanTrackedOffset(int spanTrackedOffset) { return new TableCell(openMarker, text, closeMarker, rowSpan, columnSpan, alignment, trackedTextOffset, spanTrackedOffset, trackedTextAdjust, afterSpace, afterDelete); }
+    public TableCell withSpanTrackedOffset(int spanTrackedOffset) { return new TableCell(tableCellNode, openMarker, text, closeMarker, rowSpan, columnSpan, alignment, trackedTextOffset, spanTrackedOffset, trackedTextAdjust, afterSpace, afterDelete); }
 
-    public TableCell withTrackedTextAdjust(int trackedTextAdjust) { return new TableCell(openMarker, text, closeMarker, rowSpan, columnSpan, alignment, trackedTextOffset, spanTrackedOffset, trackedTextAdjust, afterSpace, afterDelete); }
+    public TableCell withTrackedTextAdjust(int trackedTextAdjust) { return new TableCell(tableCellNode, openMarker, text, closeMarker, rowSpan, columnSpan, alignment, trackedTextOffset, spanTrackedOffset, trackedTextAdjust, afterSpace, afterDelete); }
 
-    public TableCell withAfterSpace(boolean afterSpace) { return new TableCell(openMarker, text, closeMarker, rowSpan, columnSpan, alignment, trackedTextOffset, spanTrackedOffset, trackedTextAdjust, afterSpace, afterDelete); }
+    public TableCell withAfterSpace(boolean afterSpace) { return new TableCell(tableCellNode, openMarker, text, closeMarker, rowSpan, columnSpan, alignment, trackedTextOffset, spanTrackedOffset, trackedTextAdjust, afterSpace, afterDelete); }
 
     BasedSequence getLastSegment() {
         return !closeMarker.isEmpty() ? closeMarker : text;

@@ -12,11 +12,11 @@ public interface TableRowManipulator {
      * @param allRowsIndex row's index in all rows of the request reflects indices at time of
      *                     request, when rows are deleted those rows will not be processed and
      *                     their indices will skipped
-     * @param rows         rows for the section of the row
-     * @param index        index for the row in the section's rows
+     * @param sectionRows  rows for the section of the row
+     * @param sectionRowIndex    index for the row in the section's rows
      * @return action performed: &lt;0 number of rows deleted, 0 - no change to rows, &gt;0 -
      * number of rows added, or BREAK to stop processing rows
      */
 
-    int apply(TableRow row, int allRowsIndex, ArrayList<TableRow> rows, int index);
+    int apply(TableRow row, int allRowsIndex, ArrayList<TableRow> sectionRows, int sectionRowIndex);
 }

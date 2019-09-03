@@ -319,8 +319,8 @@ public class TableCellOffsetInfo {
             public int apply(
                     TableRow row,
                     int allRowsIndex,
-                    ArrayList<TableRow> rows,
-                    int index
+                    ArrayList<TableRow> sectionRows,
+                    int sectionRowIndex
             ) {
                 TableSection section = table.getAllRowsSection(allRowsIndex);
                 if (!row.cells.isEmpty() && useStopPointsMap.containsKey(section.sectionType)) {
