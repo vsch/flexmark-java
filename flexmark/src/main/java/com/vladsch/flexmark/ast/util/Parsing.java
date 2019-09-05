@@ -109,7 +109,7 @@ public class Parsing {
                 .compile("^\\[(?:[^\\\\\\[\\]]|" + ESCAPED_CHAR + "|\\\\){0,999}\\]");
 
         this.LINK_DESTINATION_ANGLES = Parser.SPACE_IN_LINK_URLS.getFrom(options)
-                ? Pattern.compile("^(?:[<](?:[^<> \\t\\n\\\\\\x00]" + '|' + ESCAPED_CHAR + '|' + "\\\\| (?![\"]))*[>])")
+                ? Pattern.compile("^(?:[<](?:[^<> \\t\\n\\\\\\x00]" + '|' + ESCAPED_CHAR + '|' + "\\\\| (?![\"']))*[>])")
                 : Pattern.compile("^(?:[<](?:[^<> \\t\\n\\\\\\x00]" + '|' + ESCAPED_CHAR + '|' + "\\\\)*[>])");
 
         //this.LINK_DESTINATION_ANGLES = Parser.SPACE_IN_LINK_URLS.getFrom(options)
@@ -130,8 +130,8 @@ public class Parsing {
         this.LINK_TITLE = Pattern.compile("^" + LINK_TITLE_STRING);
         this.REG_CHAR = "[^\\\\()" + EXCLUDED_0_TO_SPACE + "]";
         this.REG_CHAR_PARENS = "[^\\\\" + EXCLUDED_0_TO_SPACE + "]";
-        this.REG_CHAR_SP = "[^\\\\()" + EXCLUDED_0_TO_SPACE + "]| (?!\")";
-        this.REG_CHAR_SP_PARENS = "[^\\\\" + EXCLUDED_0_TO_SPACE + "]| (?!\")";
+        this.REG_CHAR_SP = "[^\\\\()" + EXCLUDED_0_TO_SPACE + "]| (?![\"'])";
+        this.REG_CHAR_SP_PARENS = "[^\\\\" + EXCLUDED_0_TO_SPACE + "]| (?![\"'])";
         this.IN_PARENS_NOSP = "\\((" + REG_CHAR + '|' + ESCAPED_CHAR + ")*\\)";
         this.IN_PARENS_W_SP = "\\((" + REG_CHAR_SP + '|' + ESCAPED_CHAR + ")*\\)";
         this.IN_MATCHED_PARENS_NOSP = "\\((" + REG_CHAR + '|' + ESCAPED_CHAR + ")*\\)";
@@ -139,15 +139,15 @@ public class Parsing {
         this.IN_BRACES_W_SP = "\\{\\{(?:[^{}\\\\" + EXCLUDED_0_TO_SPACE + "]| |\t)*\\}\\}";
         this.LINK_DESTINATION = Pattern.compile(
                 "^(?:" + (Parser.PARSE_JEKYLL_MACROS_IN_URLS.getFrom(options) ? IN_BRACES_W_SP + "|" : "") +
-                        (Parser.SPACE_IN_LINK_URLS.getFrom(options) ? "(?:" + REG_CHAR_SP + ")+|" : REG_CHAR + "+|") +
+                        (Parser.SPACE_IN_LINK_URLS.getFrom(options) ? "(?:" + REG_CHAR_SP + ")|" : REG_CHAR + "|") +
                         ESCAPED_CHAR + "|\\\\|" + (Parser.SPACE_IN_LINK_URLS.getFrom(options) ? IN_PARENS_W_SP : IN_PARENS_NOSP) + ")*");
         this.LINK_DESTINATION_MATCHED_PARENS = Pattern.compile(
                 "^(?:" + (Parser.PARSE_JEKYLL_MACROS_IN_URLS.getFrom(options) ? IN_BRACES_W_SP + "|" : "")
-                        + (Parser.SPACE_IN_LINK_URLS.getFrom(options) ? "(?:" + REG_CHAR_SP + ")+|" : REG_CHAR + "+|") +
+                        + (Parser.SPACE_IN_LINK_URLS.getFrom(options) ? "(?:" + REG_CHAR_SP + ")|" : REG_CHAR + "|") +
                         ESCAPED_CHAR + "|\\\\|\\(|\\))*");
         this.LINK_DESTINATION_MATCHED_PARENS_NOSP = Pattern.compile(
                 "^(?:" + (Parser.PARSE_JEKYLL_MACROS_IN_URLS.getFrom(options) ? IN_BRACES_W_SP + "|" : "")
-                        + (false ? "(?:" + REG_CHAR_SP + ")+|" : REG_CHAR + "+|") +
+                        + (false ? "(?:" + REG_CHAR_SP + ")|" : REG_CHAR + "|") +
                         ESCAPED_CHAR + "|\\\\|\\(|\\))*");
         this.HTMLCOMMENT = "<!---->|<!--(?:-?[^>-])(?:-?[^-])*-->";
         this.PROCESSINGINSTRUCTION = "[<][?].*?[?][>]";

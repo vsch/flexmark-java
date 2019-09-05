@@ -98,6 +98,7 @@ public class Parser implements IParse {
 
     public static final DataKey<Boolean> UNDERSCORE_DELIMITER_PROCESSOR = new DataKey<>("UNDERSCORE_DELIMITER_PROCESSOR", true);
     public static final DataKey<Boolean> BLANK_LINES_IN_AST = new DataKey<>("BLANK_LINES_IN_AST", false);
+    public static final DataKey<Boolean> USE_HARDCODED_LINK_ADDRESS_PARSER = new DataKey<>("USE_HARDCODED_LINK_ADDRESS_PARSER", true);
 
     /**
      * STRONG_WRAPS_EMPHASIS default false, when true makes parsing CommonMark Spec 0.27 compliant

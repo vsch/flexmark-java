@@ -4082,7 +4082,7 @@ Caused segments out of order exception in Markdown Navigator, but cannot duplica
 # Next Minor Release
 
  - **Bugs**
-    #240 & #1⎮ 
+    #240 & #1⎮
     - Escape Key on https://thirteenag.github.io/wfp is not being stopped
 
  - **Features**

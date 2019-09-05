@@ -53,6 +53,20 @@ public abstract class BasedSequenceImpl extends RichCharSequenceBase<BasedSequen
     }
 
     @Override
+    public char safeCharAt(int index) {
+        return index < 0 || index >= length() ? '\0':charAt(index);
+    }
+
+    @Override
+    public char safeBaseCharAt(int index) {
+        if (index >= 0 && index < length()) return charAt(index);
+        else {
+            int baseIndex = getStartOffset() + index;
+            return getBaseSequence().safeCharAt(baseIndex);
+        }
+    }
+
+    @Override
     public String unescape() {
         return Escaping.unescapeString(this);
     }

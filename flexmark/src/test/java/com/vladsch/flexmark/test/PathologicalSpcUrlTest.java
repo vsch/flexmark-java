@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
  * Pathological input cases (from commonmark.js).
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class PathologicalTest extends CoreRenderingTestCase {
+public class PathologicalSpcUrlTest extends CoreSpcUrlRenderingTestCase {
 
     private int x = 100000;
 

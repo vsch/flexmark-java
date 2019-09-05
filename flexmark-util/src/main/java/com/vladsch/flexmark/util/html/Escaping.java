@@ -11,7 +11,15 @@ import java.util.regex.Pattern;
 
 public class Escaping {
 
-    public static final String ESCAPABLE = "[!\"#$%&\'()*+,./:;<=>?@\\[\\\\\\]^_`{|}~-]";
+    // pure chars not for pattern
+    public static final String ESCAPABLE_CHARS = "\"#$%&\'()*+,./:;<=>?@[]\\^_`{|}~-";
+
+    public static final String ESCAPABLE = "[!" +
+            ESCAPABLE_CHARS
+                    .replace("\\", "\\\\")
+                    .replace("[", "\\[")
+                    .replace("]", "\\]") +
+            "]";
 
     private static final String ENTITY = "&(?:#x[a-f0-9]{1,8}|#[0-9]{1,8}|[a-z][a-z0-9]{1,31});";
 

@@ -11,7 +11,7 @@ import org.junit.runners.Suite;
         DelimiterProcessorTest.class,
         HtmlRendererTest.class,
         ParserTest.class,
-        PathologicalTest.class,
+        PathologicalTestSuite.class,
         PrefixedSubSequenceTest.class,
         FullOrigSpecCoreTest.class,
         FullOrigSpec027CoreTest.class,

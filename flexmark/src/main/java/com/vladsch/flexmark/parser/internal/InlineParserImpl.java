@@ -19,6 +19,7 @@ import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.dependency.DependencyHandler;
 import com.vladsch.flexmark.util.dependency.ResolvedDependencies;
+import com.vladsch.flexmark.util.format.TableFormatOptions;
 import com.vladsch.flexmark.util.html.Escaping;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.SegmentedSequence;
@@ -294,7 +295,12 @@ public class InlineParserImpl extends LightInlineParserImpl implements InlinePar
     private static void addDelimiterProcessorForChar(char delimiterChar, DelimiterProcessor toAdd, Map<Character, DelimiterProcessor> delimiterProcessors) {
         DelimiterProcessor existing = delimiterProcessors.put(delimiterChar, toAdd);
         if (existing != null) {
-            throw new IllegalArgumentException("Delimiter processor conflict with delimiter char '" + delimiterChar + "'");
+            if (existing.getClass() != toAdd.getClass()) {
+                throw new IllegalArgumentException("Delimiter processor conflict with delimiter char '" + delimiterChar + "', existing " + existing.getClass().getCanonicalName() + ", added " + toAdd.getClass().getCanonicalName());
+            } else {
+                // warning???
+                System.out.println("Delimiter processor for char '" + delimiterChar + "', added more than once " + existing.getClass().getCanonicalName());
+            }
         }
     }
 
@@ -1332,42 +1338,159 @@ public class InlineParserImpl extends LightInlineParserImpl implements InlinePar
         if (res != null) {
             return res;
         } else {
+            boolean spaceInUrls = options.spaceInLinkUrls;
             if (options.linksAllowMatchedParentheses) {
                 // allow matched parenthesis
-                // KLUDGE: to fix issue of stack overflow when parsing large embedded images with spaces in URLs enabled. No spaces allowed for embedded images
-                boolean noSpaces = input.subSequence(index).startsWith("data:image/png;base64,");
-                BasedSequence matched = match(noSpaces ? myParsing.LINK_DESTINATION_MATCHED_PARENS_NOSP : myParsing.LINK_DESTINATION_MATCHED_PARENS);
-                if (matched != null) {
-                    int openCount = 0;
-                    int iMax = matched.length();
-                    for (int i = 0; i < iMax; i++) {
-                        char c = matched.charAt(i);
-                        if (c == '\\') {
-                            if (i + 1 < iMax && myParsing.ESCAPABLE.matcher(matched.subSequence(i + 1, i + 2)).matches()) {
-                                // escape
-                                i++;
+                // fix for issue of stack overflow when parsing long input lines, by implementing non-recursive scan
+                boolean useFix = options.useHardcodedLinkAddressParser;
+                if (useFix) {
+                    int iMax = input.length();
+                    int startIndex = index;
+                    int lastMatch = startIndex;
+
+                    int openParenCount = 0;
+                    int openParenState = 0;
+
+                    int openJekyllState = options.parseJekyllMacrosInUrls ? 0 : -1;
+
+                    for (int i = index; i < iMax; i++) {
+                        char c = input.charAt(i);
+
+                        int nextIndex = i + 1;
+
+                        if (openJekyllState >= 0) {
+                            switch (openJekyllState) {
+                                case 0:
+                                    // looking for {{
+                                    if (c == '{' && input.safeCharAt(nextIndex) == '{') {
+                                        openJekyllState = 1;
+                                        break;
+                                    }
+                                    break;
+                                case 1:
+                                    // looking for second {
+                                    if (c == '{') {
+                                        openJekyllState = 2;
+                                        break;
+                                    }
+                                    openJekyllState = 0; // start over
+                                    break;
+                                case 2:
+                                    // accumulating or waiting for }}
+                                    if (c == '}') {
+                                        openJekyllState = 3;
+                                    } else if (JEKYLL_EXCLUDED_CHARS.get(c)) {
+                                        openJekyllState = 0; // start over
+                                    }
+                                    break;
+                                case 3:
+                                    // accumulating or waiting for second }
+                                    if (c == '}') {
+                                        lastMatch = nextIndex; // found it
+                                        openParenState = 0;   // reset in case it was -1
+                                        openJekyllState = 0; // start over
+                                    } else if (JEKYLL_EXCLUDED_CHARS.get(c)) {
+                                        openJekyllState = 0; // start over
+                                    } else {
+                                        openJekyllState = 2; // continue accumulating
+                                    }
+                                    break;
+                                default:
+                                    throw new IllegalStateException("Illegal Jekyll Macro Parsing State");
                             }
-                        } else if (c == '(') {
-                            openCount++;
-                        } else if (c == ')') {
-                            if (openCount == 0) {
-                                // truncate to this and leave ')' to be parsed
-                                index -= iMax - i;
-                                matched = matched.subSequence(0, i);
-                                break;
+                        }
+
+                        // parens matching
+                        if (openParenState >= 0) {
+                            switch (openParenState) {
+                                case 0: // starting
+                                    if (c == '\\') {
+                                        if (PAREN_ESCAPABLE_CHARS.get(input.safeCharAt(nextIndex))) {
+                                            // escaped, take the next one if available
+                                            openParenState = 1;
+                                        }
+
+                                        lastMatch = nextIndex;
+                                        break;
+                                    } else if (c == '(') {
+                                        openParenCount++;
+                                        lastMatch = nextIndex;
+                                        break;
+                                    } else if (c == ')') {
+                                        if (openParenCount > 0) {
+                                            openParenCount--;
+                                            lastMatch = nextIndex;
+                                            break;
+                                        }
+                                    } else {
+                                        if (c == ' ') {
+                                            if (spaceInUrls && !PAREN_QUOTE_CHARS.get(input.safeCharAt(nextIndex))) {
+                                                lastMatch = nextIndex;
+                                                break;
+                                            }
+                                        } else if (!PAREN_EXCLUDED_CHARS.get(c)) {
+                                            lastMatch = nextIndex;
+                                            break;
+                                        }
+                                    }
+
+                                    // we are done, no more matches here
+                                    openParenState = -1;
+                                    break;
+
+                                case 1:
+                                    // escaped
+                                    lastMatch = nextIndex;
+                                    openParenState = 0;
+                                    break;
+
+                                default:
+                                    throw new IllegalStateException("Illegal Jekyll Macro Parsing State");
                             }
-                            openCount--;
+                        }
+
+                        if (openJekyllState <= 0 && openParenState == -1) {
+                            break;
                         }
                     }
 
-                    return options.spaceInLinkUrls ? matched.trimEnd(BasedSequence.SPACE) : matched;
+                    // always have something even if it is empty
+                    index = lastMatch;
+                    return spaceInUrls ? input.subSequence(startIndex, lastMatch).trimEnd(BasedSequence.SPACE) : input.subSequence(startIndex, lastMatch);
+                } else {
+                    BasedSequence matched = match(myParsing.LINK_DESTINATION_MATCHED_PARENS);
+                    if (matched != null) {
+                        int openCount = 0;
+                        int iMax = matched.length();
+                        for (int i = 0; i < iMax; i++) {
+                            char c = matched.charAt(i);
+                            if (c == '\\') {
+                                if (i + 1 < iMax && myParsing.ESCAPABLE.matcher(matched.subSequence(i + 1, i + 2)).matches()) {
+                                    // escape
+                                    i++;
+                                }
+                            } else if (c == '(') {
+                                openCount++;
+                            } else if (c == ')') {
+                                if (openCount == 0) {
+                                    // truncate to this and leave ')' to be parsed
+                                    index -= iMax - i;
+                                    matched = matched.subSequence(0, i);
+                                    break;
+                                }
+                                openCount--;
+                            }
+                        }
+
+                        return spaceInUrls ? matched.trimEnd(BasedSequence.SPACE) : matched;
+                    }
                 }
 
                 return null;
             } else {
                 // spec 0.27 compatibility
                 BasedSequence matched = match(myParsing.LINK_DESTINATION);
-                return matched != null && options.spaceInLinkUrls ? matched.trimEnd(BasedSequence.SPACE) : matched;
+                return matched != null && spaceInUrls ? matched.trimEnd(BasedSequence.SPACE) : matched;
             }
         }
     }

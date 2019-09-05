@@ -6,6 +6,7 @@ flexmark-java
 [TOC]: # " "
 
 - [To Do](#to-do)
+- [0.50.38](#05038)
 - [0.50.36](#05036)
 - [0.50.34](#05034)
 - [0.50.32](#05032)
@@ -106,6 +107,18 @@ flexmark-java
 * [ ] Convert anonymous classes to lambda where possible.
 * [ ] Add: `flexmark-ext-attributes` formatting of individual attributes instead of dumping the
       attributes node text.
+
+0.50.38
+-------
+
+* Fix: real fix for Stack Overflow when parsing long URLs, by hand rolling parsing of link
+  destination.
+  * Add: `Parser.USE_HARDCODED_LINK_ADDRESS_PARSER`, default `true`, setting to `false` will use
+    regex parsing for link destination address. May cause `StackOverflowError` exception on long
+    input but does allow customizing the regex if needed.
+* Add: `BasedSequence.safeCharAt(int)` will return `\0` if index out of range for the sequence.
+* Add: `BasedSequence.safeBaseCharAt(int)` will return character from the base sequence if index
+  out of range for sequence or `\0` if out of base sequence range.
 
 0.50.36
 -------

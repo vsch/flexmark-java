@@ -4125,3 +4125,73 @@ Document[0, 76]
           Text[74, 74]
 ````````````````````````````````
 
+
+## Issue 365
+
+```````````````````````````````` example Issue 365: 1
+name|age
+-|-
+Tom|23
+Jack|25
+.
+<p>name|age
+-|-
+Tom|23
+Jack|25</p>
+.
+Document[0, 28]
+  Paragraph[0, 28]
+    Text[0, 8] chars:[0, 8, "name|age"]
+    SoftLineBreak[8, 9]
+    Text[9, 12] chars:[9, 12, "-|-"]
+    SoftLineBreak[12, 13]
+    Text[13, 19] chars:[13, 19, "Tom|23"]
+    SoftLineBreak[19, 20]
+    Text[20, 27] chars:[20, 27, "Jack|25"]
+````````````````````````````````
+
+
+```````````````````````````````` example(Issue 365: 2) options(min-dashes-1)
+name|age
+-|-
+Tom|23
+Jack|25
+.
+<table>
+  <thead>
+    <tr><th>name</th><th>age</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Tom</td><td>23</td></tr>
+    <tr><td>Jack</td><td>25</td></tr>
+  </tbody>
+</table>
+.
+Document[0, 27]
+  TableBlock[0, 27]
+    TableHead[0, 8]
+      TableRow[0, 8] rowNumber=1
+        TableCell[0, 5] header text:[0, 4, "name"] textClose:[4, 5, "|"]
+          Text[0, 4] chars:[0, 4, "name"]
+        TableCell[5, 8] header text:[5, 8, "age"]
+          Text[5, 8] chars:[5, 8, "age"]
+    TableSeparator[9, 12]
+      TableRow[9, 12]
+        TableCell[9, 11] text:[9, 10, "-"] textClose:[10, 11, "|"]
+          Text[9, 10] chars:[9, 10, "-"]
+        TableCell[11, 12] text:[11, 12, "-"]
+          Text[11, 12] chars:[11, 12, "-"]
+    TableBody[13, 27]
+      TableRow[13, 19] rowNumber=1
+        TableCell[13, 17] text:[13, 16, "Tom"] textClose:[16, 17, "|"]
+          Text[13, 16] chars:[13, 16, "Tom"]
+        TableCell[17, 19] text:[17, 19, "23"]
+          Text[17, 19] chars:[17, 19, "23"]
+      TableRow[20, 27] rowNumber=2
+        TableCell[20, 25] text:[20, 24, "Jack"] textClose:[24, 25, "|"]
+          Text[20, 24] chars:[20, 24, "Jack"]
+        TableCell[25, 27] text:[25, 27, "25"]
+          Text[25, 27] chars:[25, 27, "25"]
+````````````````````````````````
+
+
