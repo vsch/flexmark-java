@@ -382,6 +382,7 @@ public class FlexmarkHtmlConverter {
      *
      * @param node   node to render
      * @param output appendable to use for the output
+     * @param maxTrailingBlankLines max blank lines allowed at end of output
      */
     public void convert(Node node, Appendable output, int maxTrailingBlankLines) {
         MainHtmlConverter renderer = new MainHtmlConverter(options, new HtmlMarkdownWriter(htmlConverterOptions.formatFlags), node.ownerDocument(), null);
