@@ -883,8 +883,6 @@ public class DocumentParser implements ParserState {
                     lastChild = lastChild.getFirstInChain();
                     block.insertChainAfter(lastChild);
                     block.setCharsFromContentOnly();
-                } else {
-                    int tmp = 0;
                 }
             }
         }

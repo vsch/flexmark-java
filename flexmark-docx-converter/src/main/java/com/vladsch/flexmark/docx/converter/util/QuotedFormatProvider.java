@@ -62,11 +62,11 @@ public class QuotedFormatProvider<T> extends BlockFormatProviderBase<T> {
             CTBorder leftBorder = styledPPr.getPBdr().getLeft();
             if (leftBorder != null && leftBorder.getSpace() != null && leftBorder.getSpace().compareTo(BigInteger.ZERO) > 0) {
                 //pPr.getInd().setLeft(newLeftInd.add(leftBorder.getSpace().multiply(BigInteger.valueOf(20))));
-
-                T currentNode = myDocx.getContextFrame();
-                if (currentNode instanceof Paragraph) {
-                    int tmp = 0;
-                }
+                //
+                //T currentNode = myDocx.getContextFrame();
+                //if (currentNode instanceof Paragraph) {
+                //    int tmp = 0;
+                //}
             }
         }
     }

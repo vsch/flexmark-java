@@ -278,7 +278,6 @@ public class TableRow {
 
             if (toIndex == fromIndex) {
                 // moving within a span, do nothing
-                int tmp = 0;
             } else {
                 if (fromSpanOffset > 0) {
                     // from inside the span is same as a blank column

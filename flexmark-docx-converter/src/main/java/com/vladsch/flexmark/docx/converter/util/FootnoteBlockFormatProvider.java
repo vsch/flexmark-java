@@ -11,7 +11,6 @@ public class FootnoteBlockFormatProvider<T> extends BlockFormatProviderBase<T> {
     protected void inheritParentFormat(PPr pPr, PPr parentPPr) {
         // do not inherit otherwise the formatting for the footnote reference is
         // applied to footnote block children
-        int tmp = 0;
     }
 
     @Override

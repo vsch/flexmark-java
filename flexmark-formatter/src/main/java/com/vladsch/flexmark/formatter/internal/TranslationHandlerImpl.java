@@ -443,7 +443,6 @@ public class TranslationHandlerImpl implements TranslationHandler {
                 if (nonTranslatingText.length() > 0) {
                     String text = myNonTranslatingTexts.get(nonTranslatingText.toString());
                     if (text == null) {
-                        int tmp = 0;
                         text = "";
                     }
 

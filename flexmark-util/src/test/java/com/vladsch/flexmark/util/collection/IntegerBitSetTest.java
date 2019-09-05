@@ -9,7 +9,6 @@ public class IntegerBitSetTest {
         int i;
 
         i = -1 >>> -2;
-        int tmp = 0;
     }
 
     @Test
@@ -22,9 +21,6 @@ public class IntegerBitSetTest {
                 BitIntegerSet bits = new BitIntegerSet();
                 bits.set(i, i + j);
 
-                if (i == 0 && j == 8) {
-                    int tmp = 0;
-                }
                 int count = bits.cardinality();
                 Assert.assertEquals("i:" + i + " j:" + j, j, count);
 

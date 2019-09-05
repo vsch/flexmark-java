@@ -72,9 +72,6 @@ public class PostProcessorManager {
                     // assume it no longer reflects reality;
                     classifyingNodeTracker = null;
                 } else {
-                    if (hadGlobal) {
-                        int tmp = 0;
-                    }
                     assert !hadGlobal;
 
                     if (classifyingNodeTracker == null) {

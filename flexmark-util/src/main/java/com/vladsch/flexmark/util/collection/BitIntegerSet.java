@@ -14,6 +14,8 @@ import java.util.function.Consumer;
 import java.util.function.IntConsumer;
 
 public class BitIntegerSet implements Set<Integer>, ReversibleIterable<Integer> {
+    public static final int[] EMPTY_INT = new int[0];
+
     private final BitSet myBits;
     private final boolean myReversed;
 
@@ -127,6 +129,32 @@ public class BitIntegerSet implements Set<Integer>, ReversibleIterable<Integer> 
         return old;
     }
 
+    public int[] toArray(int[] array) {
+        return toArray(array, 0);
+    }
+
+    public int[] toArray(int[] array, int destinationIndex) {
+        int arrayLength = array == null ? 0 : array.length;
+        assert destinationIndex <= arrayLength;
+
+        int[] useArray = array;
+        int size = cardinality();
+
+        if (size == 0) return useArray == null ? EMPTY_INT : useArray;
+
+        if (arrayLength < destinationIndex + size) {
+            // allocate a new array
+
+            useArray = new int[destinationIndex + size];
+            if (array != null) System.arraycopy(array, 0, useArray, 0, destinationIndex);
+        }
+
+        int[] i = new int[] { destinationIndex };
+        int[] finalUseArray = useArray;
+        forEach((IntConsumer) value -> finalUseArray[i[0]++] = value);
+        return finalUseArray;
+    }
+
     @Override
     public boolean remove(Object o) {
         if (!(o instanceof Integer) || !myBits.get((Integer) o)) return false;
@@ -148,6 +176,26 @@ public class BitIntegerSet implements Set<Integer>, ReversibleIterable<Integer> 
             if (!contains(o)) return false;
         }
         return true;
+    }
+
+    public boolean addAll(int... collection) {
+        return addAll(collection, 0, Integer.MAX_VALUE);
+    }
+
+    public boolean addAll(int[] collection, int startIndex) {
+        return addAll(collection, startIndex, Integer.MAX_VALUE);
+    }
+
+    public boolean addAll(int[] collection, int startIndex, int endIndex) {
+        assert startIndex <= endIndex;
+
+        boolean changed = false;
+
+        int iMax = Math.min(collection.length, endIndex);
+        for (int i = startIndex; i < iMax; i++) {
+            if (add(collection[i])) changed = true;
+        }
+        return changed;
     }
 
     @Override

@@ -127,7 +127,6 @@ public class AttributesNodeFormatter implements PhasedNodeFormatter, ExplicitAtt
 
                                                 if (mergedUniquified.contains(newKey)) {
                                                     // will occur if an undefined attribute id is used by enum ref and defined in a later file
-                                                    int tmp = 0;
                                                 } else {
                                                     mergedUniquified.add(newKey);
                                                 }
@@ -158,7 +157,6 @@ public class AttributesNodeFormatter implements PhasedNodeFormatter, ExplicitAtt
 
                                                 if (mergedUniquified.contains(newKey)) {
                                                     // will occur if an undefined attribute id is used by enum ref and defined in a later file
-                                                    int tmp = 0;
                                                 } else {
                                                     mergedUniquified.add(newKey);
                                                 }

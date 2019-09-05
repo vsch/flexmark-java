@@ -46,7 +46,6 @@ public class MacroNodeRenderer implements NodeRenderer {
     }
 
     private void render(Macro node, NodeRendererContext context, HtmlWriter html) {
-        int tmp = 0;
         if (options.enableRendering) {
             html.text(Node.spanningChars(node.getOpeningMarker(), node.getClosingMarker()));
             context.renderChildren(node);

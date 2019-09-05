@@ -22,9 +22,9 @@ public class AnchorLinkNodePostProcessor extends NodePostProcessor {
     @Override
     public void process(NodeTracker state, Node node) {
         if (node instanceof Heading) {
-            if (node.isOrDescendantOfType(BlockQuote.class)) {
-                int tmp = 0;
-            }
+            //if (node.isOrDescendantOfType(BlockQuote.class)) {
+            //    int tmp = 0;
+            //}
             Heading heading = (Heading) node;
             if (heading.getText().isNotNull()) {
                 Node anchor = new AnchorLink();
@@ -45,8 +45,6 @@ public class AnchorLinkNodePostProcessor extends NodePostProcessor {
                 anchor.setCharsFromContent();
                 state.nodeAdded(anchor);
             }
-        } else {
-            int tmp = 0;
         }
     }
 

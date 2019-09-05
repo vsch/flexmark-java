@@ -26,7 +26,7 @@ public class AttributesNodeRenderer implements NodeRenderer {
         set.add(new NodeRenderingHandler<AttributesNode>(AttributesNode.class, new CustomNodeRenderer<AttributesNode>() {
             @Override
             public void render(AttributesNode node, NodeRendererContext context, HtmlWriter html) {
-                int tmp = 0;
+                
             }
         }));
         set.add(new NodeRenderingHandler<TextBase>(TextBase.class, new CustomNodeRenderer<TextBase>() {

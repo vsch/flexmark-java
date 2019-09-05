@@ -204,8 +204,6 @@ public class DumpSpecReader extends SpecReader implements ActualExampleModifier 
             int pos = parseSource.lastIndexOf('\n', parseSource.length() - 2);
             if (pos == -1 || !parseSource.substring(pos + 1).trim().isEmpty()) {
                 parseSource = parseSource.substring(0, parseSource.length() - 1);
-            } else {
-                int tmp = 0;
             }
         }
         return parseSource;

@@ -1304,7 +1304,6 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
         if (url.startsWith(DocxRenderer.EMOJI_RESOURCE_PREFIX)) {
             // we take it from resources
             url = this.getClass().getResource("/emoji/" + url.substring(DocxRenderer.EMOJI_RESOURCE_PREFIX.length())).toString();
-            int tmp = 0;
         }
 
         if (url.startsWith("http:") || url.startsWith("https:") || url.startsWith("file:")) {

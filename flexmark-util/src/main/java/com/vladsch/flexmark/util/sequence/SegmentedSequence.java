@@ -211,52 +211,71 @@ public final class SegmentedSequence extends BasedSequenceImpl {
         }
     }
 
-    private SegmentedSequence(BasedSequence baseSeq, int[] baseOffsets, int baseStartOffset, char[] nonBaseChars, int length) {
+    private SegmentedSequence(final BasedSequence baseSeq, final int[] baseOffsets, final int baseStartOffset, final char[] nonBaseChars, final int length) {
+        int iMax = baseOffsets.length;
+        assert baseStartOffset + length <= iMax : "Sub-sequence offsets list length < baseStartOffset + sub-sequence length";
+
+        int startOffset = 0;
+        int endOffset = 0;
+
+        if (nonBaseChars == null) {
+            if (baseStartOffset < iMax) {
+                // start is the offset at our start, even when length = 0
+                startOffset = baseOffsets[baseStartOffset];
+            } else {
+                startOffset = baseSeq.getEndOffset();
+            }
+            
+            if (length == 0) {
+                endOffset = startOffset;
+            } else {
+                endOffset = baseOffsets[baseStartOffset + length - 1] + 1;
+                assert startOffset <= endOffset;
+            }
+            
+        } else {
+            // start is the first real start in this sequence or after it in the parent
+            boolean finished = false;
+            
+            for (int iS = baseStartOffset; iS < iMax; iS++) {
+                if (baseOffsets[iS] < 0) continue;
+                startOffset = baseOffsets[iS];
+
+                if (length != 0) {
+                    // end is the last real offset + 1 in this sequence up to the start index where startOffset was found
+                    for (int iE = baseStartOffset + length; iE-- > iS; ) {
+                        if (baseOffsets[iE] < 0) continue;
+
+                        endOffset = baseOffsets[iE] + 1;
+                        assert startOffset <= endOffset;
+
+                        finished = true;
+                        break;
+                    }
+                }
+
+                if (!finished) {
+                    endOffset = startOffset;
+                }
+
+                finished = true;
+                break;
+            }
+
+            if (!finished) {
+                // if no real start after then it is the base's end since we had no real start after, these chars and after are all out of base chars
+                startOffset = baseSeq.getEndOffset();
+                endOffset = startOffset;
+            }
+        }
+
         this.baseSeq = baseSeq;
         this.baseOffsets = baseOffsets;
         this.baseStartOffset = baseStartOffset;
         this.nonBaseChars = nonBaseChars;
         this.length = length;
-        this.startOffset = computeStartOffset();
-        this.endOffset = computeEndOffset();
-    }
-
-    private int computeStartOffset() {
-        int iMax = baseOffsets.length;
-        assert baseStartOffset + length <= iMax : "Sub-sequence offsets list length < baseStartOffset + sub-sequence length";
-
-        if (nonBaseChars != null) {
-            // start is the first real start in this sequence or after it, in the parent
-            for (int i = baseStartOffset; i < iMax; i++) {
-                if (baseOffsets[i] >= 0) return baseOffsets[i];
-            }
-
-            // if no real start after then it is the base's end since we had no real start after, these chars and after are all out of base chars
-            return baseSeq.getEndOffset();
-        }
-
-        // here there are no nonBaseChars, all sequences are based sequences or we are at end of parent base sequence
-        return baseStartOffset < iMax ? baseOffsets[baseStartOffset] : baseSeq.getEndOffset();
-    }
-
-    private int computeEndOffset() {
-        // ensure that 0 length end returns start
-        if (length == 0) return getStartOffset();
-
-        int iMax = baseOffsets.length;
-
-        if (nonBaseChars != null) {
-            // end is the last real end in this sequence
-            for (int i = baseStartOffset + length; i-- > 0; ) {
-                if (baseOffsets[i] >= 0) return baseOffsets[i] + 1;
-            }
-
-            // failing that it is the same as startOffset
-            return getStartOffset();
-        }
-
-        // here there are no nonBaseChars, all sequences are based sequences
-        return baseOffsets[baseStartOffset + length - 1] + 1;
+        this.startOffset = startOffset;
+        this.endOffset = endOffset;
     }
 
     @Override

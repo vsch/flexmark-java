@@ -41,15 +41,8 @@ public final class CharSubSequence extends BasedSequenceImpl {
     }
 
     private CharSubSequence(CharSubSequence baseSeq, int start, int end) {
-        //if (start < 0 || end < 0 || end < start) {
-        //    int tmp = 0;
-        //}
         assert start >= 0 && end >= 0 && end >= start;
-
-        //if (start <= 0 && end >= baseSeq.length()) {
-        //    int tmp = 0;
-        //}
-        assert start > 0 || end < baseSeq.length();
+        //assert start > 0 || end < baseSeq.length();
 
         base = baseSeq;
         baseChars = baseSeq.baseChars;
@@ -125,16 +118,22 @@ public final class CharSubSequence extends BasedSequenceImpl {
     }
 
     public static CharSubSequence of(CharSequence charSequence, int start) {
+        assert start <= charSequence.length();
+        
         return of(charSequence, start, charSequence.length());
     }
 
     public static CharSubSequence of(char[] chars, int start, int end) {
+        assert start >= 0 && start >= end && end <= chars.length;
+        
         char[] useChars = new char[chars.length];
         System.arraycopy(chars, 0, useChars, 0, chars.length);
         return start == 0 && end == chars.length ? new CharSubSequence(useChars) : new CharSubSequence(useChars).subSequence(start, end);
     }
 
     public static CharSubSequence of(CharSequence charSequence, int start, int end) {
+        assert start >= 0 && start <= end && end <= charSequence.length();
+        
         if (start == 0 && end == charSequence.length()) {
             if (charSequence instanceof CharSubSequence) return ((CharSubSequence) charSequence);
             else if (charSequence instanceof String) return new CharSubSequence(((String) charSequence).toCharArray());

@@ -47,9 +47,9 @@ public class EscapedCharacterNodePostProcessor extends NodePostProcessor {
                 }
 
                 if (startOffset != lastEscaped) {
-                    if (startOffset > original.length() || lastEscaped > original.length()) {
-                        int tmp = 0;
-                    }
+                    //if (startOffset > original.length() || lastEscaped > original.length()) {
+                    //    int tmp = 0;
+                    //}
                     BasedSequence escapedChars = original.subSequence(lastEscaped, startOffset);
                     Node node1 = new Text(escapedChars);
                     textBase.appendChild(node1);

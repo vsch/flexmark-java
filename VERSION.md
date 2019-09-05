@@ -6,6 +6,7 @@ flexmark-java
 [TOC]: # " "
 
 - [To Do](#to-do)
+- [0.50.36](#05036)
 - [0.50.34](#05034)
 - [0.50.32](#05032)
 - [0.50.30](#05030)
@@ -105,6 +106,14 @@ flexmark-java
 * [ ] Convert anonymous classes to lambda where possible.
 * [ ] Add: `flexmark-ext-attributes` formatting of individual attributes instead of dumping the
       attributes node text.
+
+0.50.36
+-------
+
+* Fix: `SegmentedSequence` would return sequence with start > end if ending with
+  `PrefixedSubSequence` whose position was > end of real sequences before.
+* Add: `BitIntegerSet.toArray(int[], int)` for easy `int[]` creation from bit set.
+* Add: `BitIntegerSet.addAll(int[], int, int)` for setting from `int[]`
 
 0.50.34
 -------

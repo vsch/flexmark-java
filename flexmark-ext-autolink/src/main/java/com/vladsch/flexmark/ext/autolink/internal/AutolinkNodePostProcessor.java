@@ -180,8 +180,6 @@ public class AutolinkNodePostProcessor extends NodePostProcessor {
                     node.insertBefore(node1);
                 }
                 state.nodeAdded(node1);
-                //} else if (startOffset < lastEscaped) {
-                //    int tmp = 0;
             }
 
             BasedSequence linkChars = linkText.baseSubSequence(linkText.getStartOffset(), linkText.getEndOffset());

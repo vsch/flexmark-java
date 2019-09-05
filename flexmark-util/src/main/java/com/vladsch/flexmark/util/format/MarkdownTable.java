@@ -1185,10 +1185,7 @@ public class MarkdownTable {
                 suffixed = cell.trackedTextOffset - cell.text.length() - 1;
                 text = text.append(RepeatedCharSequence.of(' ', suffixed));
             } else if (cell.trackedTextOffset < 0) {
-                int tmp = 0;
                 neededPrefix = true;
-                //prefixed = cell.trackedTextOffset - cell.text.length() - 1;
-                //text = PrefixedSubSequence.of(RepeatedCharSequence.of(' ', prefixed).toString(), text);
             }
         }
 
