@@ -67,6 +67,16 @@ public abstract class BasedSequenceImpl extends RichCharSequenceBase<BasedSequen
     }
 
     @Override
+    public BasedSequence getEmptyPrefix() {
+        return subSequence(0,0);
+    }
+
+    @Override
+    public BasedSequence getEmptySuffix() {
+        return subSequence(length());
+    }
+
+    @Override
     public String unescape() {
         return Escaping.unescapeString(this);
     }

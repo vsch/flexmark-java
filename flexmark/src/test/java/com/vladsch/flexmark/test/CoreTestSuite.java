@@ -2,6 +2,7 @@ package com.vladsch.flexmark.test;
 
 import com.vladsch.flexmark.ast.util.TextCollectingVisitorTest;
 import com.vladsch.flexmark.parser.internal.HtmlDeepParserTest;
+import com.vladsch.flexmark.parser.internal.LinkDestinationParserTest;
 import org.junit.runners.Suite;
 
 @org.junit.runner.RunWith(Suite.class)
@@ -11,6 +12,7 @@ import org.junit.runners.Suite;
         DelimiterProcessorTest.class,
         HtmlRendererTest.class,
         ParserTest.class,
+        LinkDestinationParserTest.class,
         PathologicalTestSuite.class,
         PrefixedSubSequenceTest.class,
         FullOrigSpecCoreTest.class,
@@ -18,7 +20,6 @@ import org.junit.runners.Suite;
         FullOrigSpec028CoreTest.class,
         ComboCoreSpecTest.class,
         ComboCoreDirectionalSpecTest.class,
-        ComboExtraSpecTest.class,
         SpecialInputTest.class,
         UsageExampleTest.class,
         CoreCompatibilityTestSuite.class,

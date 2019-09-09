@@ -96,13 +96,27 @@ public interface BasedSequence extends RichCharSequence<BasedSequence> {
 
     /**
      * Safe, if index out of range but based sequence has characters will return those, else returns '\0'
-     *
+     * <p>
      * Allows peeking into preceding/following characters to the ones contained in this sequence
      *
      * @param index index in string
      * @return character or '\0' if index out of base sequence
      */
     char safeBaseCharAt(int index);
+
+    /**
+     * Get empty prefix to this sequence
+     *
+     * @return same as subSequence(0,0)
+     */
+    BasedSequence getEmptyPrefix();
+
+    /**
+     * Get empty suffix to this sequence
+     *
+     * @return same as subSequence(length())
+     */
+    BasedSequence getEmptySuffix();
 
     /**
      * Get the unescaped string of this sequence content

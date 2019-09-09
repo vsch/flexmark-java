@@ -25,83 +25,11 @@ public class LightInlineParserImpl implements LightInlineParser {
     protected int index;
     protected ArrayList<BasedSequence> currentText;
     protected Document document;
-    protected final BitSet EXCLUDED_0_TO_SPACE_CHARS;
-    protected final BitSet JEKYLL_EXCLUDED_CHARS;
-    protected final BitSet PAREN_EXCLUDED_CHARS;
-    protected final BitSet PAREN_ESCAPABLE_CHARS;
-    protected final BitSet PAREN_QUOTE_CHARS;
 
     public LightInlineParserImpl(DataHolder dataOptions) {
         this.options = new InlineParserOptions(dataOptions);
         this.myParsing = new Parsing(dataOptions);
 
-        //String EXCLUDED_0_TO_SPACE = options.intellijDummyIdentifier ? "\u0000-\u001e\u0020" : "\u0000-\u0020";
-        //String LINK_DESTINATION_MATCHED_PARENS_EXPANDED =
-        //        "^(?:" + (options.parseJekyllMacrosInUrls ? ("\\{\\{(?:[^{}\\\\" + EXCLUDED_0_TO_SPACE + "]| |\t)*\\}\\}") + "|" : "")
-        //                + (options.spaceInLinkUrls ? "(?:" + ("[^\\\\()" + EXCLUDED_0_TO_SPACE + "]| (?![\"'])") + ")|" : ("[^\\\\()" + EXCLUDED_0_TO_SPACE + "]") + "|") +
-        //                ("\\\\" + Escaping.ESCAPABLE) + "|\\\\|\\(|\\))*";
-
-        /*
-        hand rolled code is on par or better and no stack overflow:
-emphasisClosersWithNoOpeners(com.vladsch.flexmark.test.PathologicalTest) took 333 ms
-emphasisOpenersWithNoClosers(com.vladsch.flexmark.test.PathologicalTest) took 239 ms
-linkClosersWithNoOpeners(com.vladsch.flexmark.test.PathologicalTest) took 79 ms
-linkOpenersAndEmphasisClosers(com.vladsch.flexmark.test.PathologicalTest) took 302 ms
-linkOpenersWithNoClosers(com.vladsch.flexmark.test.PathologicalTest) took 86 ms
-longImageLinkTest(com.vladsch.flexmark.test.PathologicalTest) took 634 ms
-longLinkTest(com.vladsch.flexmark.test.PathologicalTest) took 70 ms
-mismatchedOpenersAndClosers(com.vladsch.flexmark.test.PathologicalTest) took 389 ms
-nestedBrackets(com.vladsch.flexmark.test.PathologicalTest) took 58 ms
-nestedStrongEmphasis(com.vladsch.flexmark.test.PathologicalTest) took 7 ms
-emphasisClosersWithNoOpeners(com.vladsch.flexmark.test.PathologicalSpcUrlTest) took 106 ms
-emphasisOpenersWithNoClosers(com.vladsch.flexmark.test.PathologicalSpcUrlTest) took 112 ms
-linkClosersWithNoOpeners(com.vladsch.flexmark.test.PathologicalSpcUrlTest) took 63 ms
-linkOpenersAndEmphasisClosers(com.vladsch.flexmark.test.PathologicalSpcUrlTest) took 194 ms
-linkOpenersWithNoClosers(com.vladsch.flexmark.test.PathologicalSpcUrlTest) took 75 ms
-longImageLinkTest(com.vladsch.flexmark.test.PathologicalSpcUrlTest) took 598 ms
-longLinkTest(com.vladsch.flexmark.test.PathologicalSpcUrlTest) took 64 ms
-mismatchedOpenersAndClosers(com.vladsch.flexmark.test.PathologicalSpcUrlTest) took 336 ms
-nestedBrackets(com.vladsch.flexmark.test.PathologicalSpcUrlTest) took 60 ms
-nestedStrongEmphasis(com.vladsch.flexmark.test.PathologicalSpcUrlTest) took 4 ms
-
-       regex:
-emphasisClosersWithNoOpeners(com.vladsch.flexmark.test.PathologicalTest) took 349 ms
-emphasisOpenersWithNoClosers(com.vladsch.flexmark.test.PathologicalTest) took 217 ms
-linkClosersWithNoOpeners(com.vladsch.flexmark.test.PathologicalTest) took 79 ms
-linkOpenersAndEmphasisClosers(com.vladsch.flexmark.test.PathologicalTest) took 299 ms
-linkOpenersWithNoClosers(com.vladsch.flexmark.test.PathologicalTest) took 83 ms
-StackOverflow longImageLinkTest(com.vladsch.flexmark.test.PathologicalTest) took 101 ms
-longLinkTest(com.vladsch.flexmark.test.PathologicalTest) took 114 ms
-mismatchedOpenersAndClosers(com.vladsch.flexmark.test.PathologicalTest) took 247 ms
-nestedBrackets(com.vladsch.flexmark.test.PathologicalTest) took 86 ms
-nestedStrongEmphasis(com.vladsch.flexmark.test.PathologicalTest) took 9 ms
-emphasisClosersWithNoOpeners(com.vladsch.flexmark.test.PathologicalSpcUrlTest) took 189 ms
-emphasisOpenersWithNoClosers(com.vladsch.flexmark.test.PathologicalSpcUrlTest) took 107 ms
-linkClosersWithNoOpeners(com.vladsch.flexmark.test.PathologicalSpcUrlTest) took 44 ms
-linkOpenersAndEmphasisClosers(com.vladsch.flexmark.test.PathologicalSpcUrlTest) took 195 ms
-linkOpenersWithNoClosers(com.vladsch.flexmark.test.PathologicalSpcUrlTest) took 111 ms
-StackOverflow longImageLinkTest(com.vladsch.flexmark.test.PathologicalSpcUrlTest) took 114 ms
-StackOverflow longLinkTest(com.vladsch.flexmark.test.PathologicalSpcUrlTest) took 54 ms
-mismatchedOpenersAndClosers(com.vladsch.flexmark.test.PathologicalSpcUrlTest) took 194 ms
-nestedBrackets(com.vladsch.flexmark.test.PathologicalSpcUrlTest) took 48 ms
-nestedStrongEmphasis(com.vladsch.flexmark.test.PathologicalSpcUrlTest) took 5 ms
-`
-         */
-
-        // needed for hand rolled link parser
-        EXCLUDED_0_TO_SPACE_CHARS = getCharSet('\u0000','\u0020');
-        if (options.intellijDummyIdentifier) EXCLUDED_0_TO_SPACE_CHARS.clear(TableFormatOptions.INTELLIJ_DUMMY_IDENTIFIER_CHAR);
-
-        JEKYLL_EXCLUDED_CHARS = getCharSet("{}\\");
-        JEKYLL_EXCLUDED_CHARS.or(EXCLUDED_0_TO_SPACE_CHARS);
-        JEKYLL_EXCLUDED_CHARS.clear(' ');
-        JEKYLL_EXCLUDED_CHARS.clear('\t');
-
-        PAREN_EXCLUDED_CHARS = getCharSet("()\\");
-        PAREN_EXCLUDED_CHARS.or(EXCLUDED_0_TO_SPACE_CHARS);
-
-        PAREN_ESCAPABLE_CHARS = getCharSet(Escaping.ESCAPABLE_CHARS);
-        PAREN_QUOTE_CHARS = getCharSet("\"'");
     }
 
     @Override
@@ -363,22 +291,5 @@ nestedStrongEmphasis(com.vladsch.flexmark.test.PathologicalSpcUrlTest) took 5 ms
     @Override
     public BasedSequence toEOL() {
         return match(myParsing.REST_OF_LINE);
-    }
-
-    private BitSet getCharSet(CharSequence chars) {
-        BitSet charSet = new BitSet(chars.length());
-        int iMax = chars.length();
-        for (int i = 0; i < iMax; i++) {
-            charSet.set(chars.charAt(i));
-        }
-        return charSet;
-    }
-
-    private BitSet getCharSet(char charFrom, char charTo) {
-        BitSet charSet = new BitSet();
-        for (int i = charFrom; i <= charTo; i++) {
-            charSet.set(i);
-        }
-        return charSet;
     }
 }

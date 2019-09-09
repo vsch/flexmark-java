@@ -4279,7 +4279,7 @@ Document[0, 26]
 
 spaces in links allowed
 
-```````````````````````````````` example(Links: 6) options(link-spaces)
+```````````````````````````````` example(Links: 6) options(url-spaces)
 [Sample Link Spaces](link with spaces.html)
 .
 <p><a href="link%20with%20spaces.html">Sample Link Spaces</a></p>
@@ -4293,7 +4293,7 @@ Document[0, 43]
 
 spaces in links allowed with title
 
-```````````````````````````````` example(Links: 7) options(link-spaces)
+```````````````````````````````` example(Links: 7) options(url-spaces)
 [Sample Link Spaces](link with spaces.html "title")
 .
 <p><a href="link%20with%20spaces.html" title="title">Sample Link Spaces</a></p>
@@ -4305,7 +4305,7 @@ Document[0, 51]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Links: 8) options(link-spaces)
+```````````````````````````````` example(Links: 8) options(url-spaces)
 [Sample Link Spaces](link with spaces.html 'title')
 .
 <p><a href="link%20with%20spaces.html" title="title">Sample Link Spaces</a></p>
@@ -4317,7 +4317,7 @@ Document[0, 51]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Links: 9) options(link-spaces)
+```````````````````````````````` example(Links: 9) options(url-spaces)
 [Sample Link Spaces](link with spaces.html 
 "title")
 .
@@ -4330,7 +4330,7 @@ Document[0, 52]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Links: 10) options(link-spaces)
+```````````````````````````````` example(Links: 10) options(url-spaces)
 [Sample Link Spaces](link with spaces.html 
 'title')
 .
@@ -4345,7 +4345,7 @@ Document[0, 52]
 
 embed double quotes
 
-```````````````````````````````` example(Links: 11) options(link-spaces)
+```````````````````````````````` example(Links: 11) options(url-spaces)
 [Sample Link Spaces](link" with spaces.html 
 "title")
 .
@@ -4358,7 +4358,7 @@ Document[0, 53]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Links: 12) options(link-spaces)
+```````````````````````````````` example(Links: 12) options(url-spaces)
 [Sample Link Spaces](link" with spaces.html 
 'title')
 .
@@ -4373,7 +4373,7 @@ Document[0, 53]
 
 embed single quotes
 
-```````````````````````````````` example(Links: 13) options(link-spaces)
+```````````````````````````````` example(Links: 13) options(url-spaces)
 [Sample Link Spaces](link' with spaces.html 
 "title")
 .
@@ -4386,7 +4386,7 @@ Document[0, 53]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Links: 14) options(link-spaces)
+```````````````````````````````` example(Links: 14) options(url-spaces)
 [Sample Link Spaces](link' with spaces.html 
 'title')
 .
@@ -4399,7 +4399,7 @@ Document[0, 53]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Links: 15) options(link-spaces)
+```````````````````````````````` example(Links: 15) options(url-spaces)
 [Sample Link Spaces](<link with spaces.html> "title")
 .
 <p><a href="link%20with%20spaces.html" title="title">Sample Link Spaces</a></p>
@@ -4411,7 +4411,7 @@ Document[0, 53]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Links: 16) options(link-spaces)
+```````````````````````````````` example(Links: 16) options(url-spaces)
 [Sample Link Spaces](<link with spaces.html>  
 "title")
 .
@@ -4426,7 +4426,7 @@ Document[0, 55]
 
 embed double quotes
 
-```````````````````````````````` example(Links: 17) options(link-spaces)
+```````````````````````````````` example(Links: 17) options(url-spaces)
 [Sample Link Spaces](<link" with spaces.html> 
 "title")
 .
@@ -4441,7 +4441,7 @@ Document[0, 55]
 
 no trailing space before >
 
-```````````````````````````````` example(Links: 18) options(link-spaces)
+```````````````````````````````` example(Links: 18) options(url-spaces)
 [Sample Link Spaces](<link with spaces.html >  
 "title")
 .
@@ -4456,7 +4456,7 @@ Document[0, 56]
 
 embed double quotes
 
-```````````````````````````````` example(Links: 19) options(link-spaces)
+```````````````````````````````` example(Links: 19) options(url-spaces)
 [Sample Link Spaces](<link" with spaces.html > 
 "title")
 .
@@ -4469,7 +4469,64 @@ Document[0, 56]
 ````````````````````````````````
 
 
+Jekyll macros in URL
+
 ```````````````````````````````` example Links: 20
+[Sample Link Spaces]({{ macro }} "title")
+.
+<p>[Sample Link Spaces]({{ macro }} &quot;title&quot;)</p>
+.
+Document[0, 42]
+  Paragraph[0, 42]
+    LinkRef[0, 20] referenceOpen:[0, 1, "["] reference:[1, 19, "Sample Link Spaces"] referenceClose:[19, 20, "]"]
+      Text[1, 19] chars:[1, 19, "Sampl … paces"]
+    Text[20, 41] chars:[20, 41, "({{ m … tle\")"]
+````````````````````````````````
+
+
+```````````````````````````````` example(Links: 21) options(jekyll-macros-in-urls)
+[Sample Link Spaces]({{ macro }} "title")
+.
+<p><a href="%7B%7B%20macro%20%7D%7D" title="title">Sample Link Spaces</a></p>
+.
+Document[0, 41]
+  Paragraph[0, 41]
+    Link[0, 41] textOpen:[0, 1, "["] text:[1, 19, "Sample Link Spaces"] textClose:[19, 20, "]"] linkOpen:[20, 21, "("] url:[21, 32, "{{ macro }}"] pageRef:[21, 32, "{{ macro }}"] titleOpen:[33, 34, "\""] title:[34, 39, "title"] titleClose:[39, 40, "\""] linkClose:[40, 41, ")"]
+      Text[1, 19] chars:[1, 19, "Sampl … paces"]
+````````````````````````````````
+
+
+handle escape
+
+```````````````````````````````` example(Links: 22) options(jekyll-macros-in-urls)
+[Sample Link Spaces](\{{ macro }} "title")
+.
+<p>[Sample Link Spaces]({{ macro }} &quot;title&quot;)</p>
+.
+Document[0, 42]
+  Paragraph[0, 42]
+    LinkRef[0, 20] referenceOpen:[0, 1, "["] reference:[1, 19, "Sample Link Spaces"] referenceClose:[19, 20, "]"]
+      Text[1, 19] chars:[1, 19, "Sampl … paces"]
+    Text[20, 42] chars:[20, 42, "(\{{  … tle\")"]
+````````````````````````````````
+
+
+handle escape
+
+```````````````````````````````` example(Links: 23) options(jekyll-macros-in-urls)
+[Sample Link Spaces]({{ macro \}} "title")
+.
+<p>[Sample Link Spaces]({{ macro }} &quot;title&quot;)</p>
+.
+Document[0, 42]
+  Paragraph[0, 42]
+    LinkRef[0, 20] referenceOpen:[0, 1, "["] reference:[1, 19, "Sample Link Spaces"] referenceClose:[19, 20, "]"]
+      Text[1, 19] chars:[1, 19, "Sampl … paces"]
+    Text[20, 42] chars:[20, 42, "({{ m … tle\")"]
+````````````````````````````````
+
+
+```````````````````````````````` example Links: 24
 <http://example.com/linkWithoutSpaces.html> 
 .
 <p><a href="http://example.com/linkWithoutSpaces.html">http://example.com/linkWithoutSpaces.html</a></p>
@@ -4480,7 +4537,7 @@ Document[0, 45]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Links: 21) options(link-spaces)
+```````````````````````````````` example(Links: 25) options(url-spaces)
 <http://example.com/link with spaces.html> 
 .
 <p>&lt;http://example.com/link with spaces.html&gt;</p>
@@ -4491,7 +4548,7 @@ Document[0, 43]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Links: 22) options(link-spaces)
+```````````````````````````````` example(Links: 26) options(url-spaces)
 <http://example.com/link with spaces.html > 
 .
 <p>&lt;http://example.com/link with spaces.html &gt;</p>
@@ -4504,7 +4561,7 @@ Document[0, 44]
 
 embed double quotes
 
-```````````````````````````````` example(Links: 23) options(link-spaces)
+```````````````````````````````` example(Links: 27) options(url-spaces)
 <http://example.com/link" with spaces.html>
 .
 <p>&lt;http://example.com/link&quot; with spaces.html&gt;</p>
@@ -4515,7 +4572,7 @@ Document[0, 43]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Links: 24) options(link-spaces)
+```````````````````````````````` example(Links: 28) options(url-spaces)
 <http://example.com/link" with spaces.html >
 .
 <p>&lt;http://example.com/link&quot; with spaces.html &gt;</p>
@@ -4528,7 +4585,7 @@ Document[0, 44]
 
 Spaces in link elements
 
-```````````````````````````````` example(Links: 25) options(space-in-link-elements)
+```````````````````````````````` example(Links: 29) options(space-in-link-elements)
 [Test Text]       (/url)
 .
 <p><a href="/url">Test Text</a></p>
@@ -4542,7 +4599,7 @@ Document[0, 24]
 
 Spaces in image elements
 
-```````````````````````````````` example(Links: 26) options(space-in-link-elements)
+```````````````````````````````` example(Links: 30) options(space-in-link-elements)
 ![Test Text]        (/url)
 .
 <p><img src="/url" alt="Test Text" /></p>
@@ -4556,7 +4613,7 @@ Document[0, 26]
 
 www. in auto-link elements
 
-```````````````````````````````` example(Links: 27) options(www-auto-link-element)
+```````````````````````````````` example(Links: 31) options(www-auto-link-element)
 <www.example.com>
 .
 <p><a href="http://www.example.com">www.example.com</a></p>
@@ -6788,7 +6845,7 @@ Document[0, 53]
 
 ## Space in URL
 
-```````````````````````````````` example(Space in URL: 1) options(url-space)
+```````````````````````````````` example(Space in URL: 1) options(url-spaces)
 [some file](some file.md)
 .
 <p><a href="some%20file.md">some file</a></p>

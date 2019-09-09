@@ -88,7 +88,7 @@ public class SyntheticLinkFormatterSample {
                 }
 
                 BasedSequence linkText = original.subSequence(startOffset, endOffset);
-                BasedSequence linkAddress = PrefixedSubSequence.of("http://commonmark.org", linkText.subSequence(linkText.length()));
+                BasedSequence linkAddress = PrefixedSubSequence.of("http://commonmark.org", linkText.getEmptySuffix());
 
                 markdown.append('[').append(linkText).append(']');
                 markdown.append('(').append(linkAddress).append(')');

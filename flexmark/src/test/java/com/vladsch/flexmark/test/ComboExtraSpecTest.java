@@ -86,7 +86,8 @@ public class ComboExtraSpecTest extends ComboSpecTestCase {
         optionsMap.put("style-strong-emphasis", new MutableDataSet().set(HtmlRenderer.STRONG_EMPHASIS_STYLE_HTML_OPEN, "<span class=\"text-bold\">").set(HtmlRenderer.STRONG_EMPHASIS_STYLE_HTML_CLOSE, "</span>"));
         optionsMap.put("style-emphasis", new MutableDataSet().set(HtmlRenderer.EMPHASIS_STYLE_HTML_OPEN, "<span class=\"text-italic\">").set(HtmlRenderer.EMPHASIS_STYLE_HTML_CLOSE, "</span>"));
         optionsMap.put("style-code", new MutableDataSet().set(HtmlRenderer.CODE_STYLE_HTML_OPEN, "<span class=\"text-code\">").set(HtmlRenderer.CODE_STYLE_HTML_CLOSE, "</span>"));
-        optionsMap.put("link-spaces", new MutableDataSet().set(Parser.SPACE_IN_LINK_URLS, true));
+        optionsMap.put("url-spaces", new MutableDataSet().set(Parser.SPACE_IN_LINK_URLS, true));
+        optionsMap.put("url-jekyll-macros", new MutableDataSet().set(Parser.PARSE_JEKYLL_MACROS_IN_URLS, true));
         optionsMap.put("suppress-format-eol", new MutableDataSet().set(HtmlRenderer.HTML_BLOCK_OPEN_TAG_EOL, false).set(HtmlRenderer.HTML_BLOCK_CLOSE_TAG_EOL, false).set(HtmlRenderer.INDENT_SIZE, 0));
         optionsMap.put("no-unescape-entities", new MutableDataSet().set(HtmlRenderer.UNESCAPE_HTML_ENTITIES, false));
         optionsMap.put("space-in-link-elements", new MutableDataSet().set(Parser.SPACE_IN_LINK_ELEMENTS, true));
@@ -97,7 +98,6 @@ public class ComboExtraSpecTest extends ComboSpecTestCase {
         optionsMap.put("code-soft-break-spaces", new MutableDataSet().set(Parser.CODE_SOFT_LINE_BREAKS, true).set(HtmlRenderer.SOFT_BREAK, " \t"));
         optionsMap.put("spec-027", new MutableDataSet().set(Parser.STRONG_WRAPS_EMPHASIS, true));
         optionsMap.put("custom-list-marker", new MutableDataSet().set(Parser.LISTS_ITEM_PREFIX_CHARS, "*/"));
-        optionsMap.put("url-space", new MutableDataSet().set(Parser.SPACE_IN_LINK_URLS, true));
         optionsMap.put("no-p-tags", new MutableDataSet().set(HtmlRenderer.NO_P_TAGS_USE_BR, true));
         //optionsMap.put("src-wrap-inline", new MutableDataSet().set(HtmlRenderer.SOURCE_WRAP_INLINE_HTML, true));
         optionsMap.put("list-markdown-navigator", new MutableDataSet()

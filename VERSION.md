@@ -6,6 +6,7 @@ flexmark-java
 [TOC]: # " "
 
 - [To Do](#to-do)
+- [0.50.40](#05040)
 - [0.50.38](#05038)
 - [0.50.36](#05036)
 - [0.50.34](#05034)
@@ -107,6 +108,16 @@ flexmark-java
 * [ ] Convert anonymous classes to lambda where possible.
 * [ ] Add: `flexmark-ext-attributes` formatting of individual attributes instead of dumping the
       attributes node text.
+
+0.50.40
+-------
+
+* Add: `BasedSequence.emptyPrefix()` and `BasedSequence.emptySuffix()` to return empty sequence
+  at start or end of the current sequence. Useful for `PrefixedSubSequence.of(String,
+  BasedSequence, int, int)` variants without needing to extract the subsequence manually.
+* Fix: factor out link URL parser to separate class with own tests
+* Fix: link URL parser not handling char escaping, nested parenthesis tracking and other edge
+  cases in jekyll URL macro parsing.
 
 0.50.38
 -------

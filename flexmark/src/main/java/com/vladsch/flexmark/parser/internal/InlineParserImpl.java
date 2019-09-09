@@ -19,7 +19,6 @@ import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.dependency.DependencyHandler;
 import com.vladsch.flexmark.util.dependency.ResolvedDependencies;
-import com.vladsch.flexmark.util.format.TableFormatOptions;
 import com.vladsch.flexmark.util.html.Escaping;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.SegmentedSequence;
@@ -28,75 +27,6 @@ import java.util.*;
 import java.util.regex.Matcher;
 
 public class InlineParserImpl extends LightInlineParserImpl implements InlineParser, ParagraphPreProcessor {
-    static class InlineParserDependencyStage {
-        final List<InlineParserExtensionFactory> dependents;
-
-        public InlineParserDependencyStage(List<InlineParserExtensionFactory> dependents) {
-            // compute mappings
-            this.dependents = dependents;
-        }
-    }
-
-    static class InlineParserExtensionDependencies extends ResolvedDependencies<InlineParserDependencyStage> {
-        public InlineParserExtensionDependencies(List<InlineParserDependencyStage> dependentStages) {
-            super(dependentStages);
-        }
-    }
-
-    static class InlineParserExtensionDependencyHandler extends DependencyHandler<InlineParserExtensionFactory, InlineParserDependencyStage, InlineParserExtensionDependencies> {
-        @Override
-        protected Class<? extends InlineParserExtensionFactory> getDependentClass(InlineParserExtensionFactory dependent) {
-            return dependent.getClass();
-        }
-
-        @Override
-        protected InlineParserExtensionDependencies createResolvedDependencies(List<InlineParserDependencyStage> stages) {
-            return new InlineParserExtensionDependencies(stages);
-        }
-
-        @Override
-        protected InlineParserDependencyStage createStage(List<InlineParserExtensionFactory> dependents) {
-            return new InlineParserDependencyStage(dependents);
-        }
-    }
-
-    static Map<Character, List<InlineParserExtensionFactory>> calculateInlineParserExtensions(DataHolder options, List<InlineParserExtensionFactory> extensionFactories) {
-        Map<Character, List<InlineParserExtensionFactory>> extensionMap = new HashMap<Character, List<InlineParserExtensionFactory>>();
-
-        for (InlineParserExtensionFactory factory : extensionFactories) {
-            CharSequence chars = factory.getCharacters();
-            for (int i = 0; i < chars.length(); i++) {
-                char c = chars.charAt(i);
-                List<InlineParserExtensionFactory> list = extensionMap.get(c);
-                if (list == null) {
-                    list = new ArrayList<InlineParserExtensionFactory>();
-                    extensionMap.put(c, list);
-                }
-
-                list.add(factory);
-            }
-        }
-
-        InlineParserExtensionDependencyHandler resolver = new InlineParserExtensionDependencyHandler();
-        Map<Character, List<InlineParserExtensionFactory>> extensions = new HashMap<Character, List<InlineParserExtensionFactory>>();
-        for (Character c : extensionMap.keySet()) {
-            List<InlineParserExtensionFactory> list = extensionMap.get(c);
-            List<InlineParserExtensionFactory> resolvedList = list;
-
-            if (list.size() > 1) {
-                InlineParserExtensionDependencies dependencies = resolver.resolveDependencies(list);
-                resolvedList = new ArrayList<InlineParserExtensionFactory>(list.size());
-                for (InlineParserDependencyStage stage : dependencies.getDependentStages()) {
-                    resolvedList.addAll(stage.dependents);
-                }
-            }
-
-            extensions.put(c, resolvedList);
-        }
-
-        return extensions;
-    }
-
     protected final BitSet originalSpecialCharacters;
     protected final BitSet delimiterCharacters;
     protected final Map<Character, DelimiterProcessor> delimiterProcessors;
@@ -104,6 +34,7 @@ public class InlineParserImpl extends LightInlineParserImpl implements InlinePar
     protected List<LinkRefProcessor> linkRefProcessors = null;
     protected Map<Character, List<InlineParserExtension>> inlineParserExtensions = null;
     protected List<InlineParserExtensionFactory> inlineParserExtensionFactories = null;
+    protected LinkDestinationParser linkDestinationParser = null;
 
     // used to temporarily override handling of special characters by custom ParagraphPreProcessors
     protected BitSet specialCharacters;
@@ -126,6 +57,27 @@ public class InlineParserImpl extends LightInlineParserImpl implements InlinePar
      * Top opening bracket (<code>[</code> or <code>![)</code>).
      */
     private Bracket lastBracket;
+
+    public InlineParserImpl(
+            DataHolder options,
+            BitSet specialCharacters,
+            BitSet delimiterCharacters,
+            Map<Character, DelimiterProcessor> delimiterProcessors,
+            LinkRefProcessorData linkRefProcessorsData,
+            List<InlineParserExtensionFactory> inlineParserExtensionFactories
+    ) {
+        super(options);
+        this.delimiterProcessors = delimiterProcessors;
+        this.linkRefProcessorsData = linkRefProcessorsData;
+        this.delimiterCharacters = delimiterCharacters;
+        this.originalSpecialCharacters = specialCharacters;
+        this.specialCharacters = specialCharacters;
+        this.inlineParserExtensionFactories = !inlineParserExtensionFactories.isEmpty() ? inlineParserExtensionFactories : null;
+
+        if (this.options.useHardcodedLinkAddressParser && true) {
+            this.linkDestinationParser = new LinkDestinationParser(this.options.spaceInLinkUrls, this.options.parseJekyllMacrosInUrls, this.options.intellijDummyIdentifier);
+        }
+    }
 
     @Override
     public void initializeDocument(Document document) {
@@ -170,136 +122,6 @@ public class InlineParserImpl extends LightInlineParserImpl implements InlinePar
                 for (InlineParserExtension extension : extensionList) {
                     extension.finalizeDocument(this);
                 }
-            }
-        }
-    }
-
-    public InlineParserImpl(
-            DataHolder options,
-            BitSet specialCharacters,
-            BitSet delimiterCharacters,
-            Map<Character, DelimiterProcessor> delimiterProcessors,
-            LinkRefProcessorData linkRefProcessorsData,
-            List<InlineParserExtensionFactory> inlineParserExtensionFactories
-    ) {
-        super(options);
-        this.delimiterProcessors = delimiterProcessors;
-        this.linkRefProcessorsData = linkRefProcessorsData;
-        this.delimiterCharacters = delimiterCharacters;
-        this.originalSpecialCharacters = specialCharacters;
-        this.specialCharacters = specialCharacters;
-        this.inlineParserExtensionFactories = !inlineParserExtensionFactories.isEmpty() ? inlineParserExtensionFactories : null;
-    }
-
-    public static BitSet calculateDelimiterCharacters(DataHolder options, Set<Character> characters) {
-        BitSet bitSet = new BitSet();
-        for (Character character : characters) {
-            bitSet.set(character);
-        }
-        return bitSet;
-    }
-
-    public static BitSet calculateSpecialCharacters(DataHolder options, BitSet delimiterCharacters) {
-        BitSet bitSet = new BitSet();
-        bitSet.or(delimiterCharacters);
-        bitSet.set('\r');
-        bitSet.set('\n');
-        bitSet.set('`');
-        bitSet.set('[');
-        bitSet.set(']');
-        bitSet.set('\\');
-        bitSet.set('!');
-        bitSet.set('<');
-        bitSet.set('&');
-        return bitSet;
-    }
-
-    public static Map<Character, DelimiterProcessor> calculateDelimiterProcessors(DataHolder options, List<DelimiterProcessor> delimiterProcessors) {
-        Map<Character, DelimiterProcessor> map = new HashMap<Character, DelimiterProcessor>();
-        //addDelimiterProcessors(Arrays.asList(new AsteriskDelimiterProcessor(), new UnderscoreDelimiterProcessor()), map);
-        if (options.get(Parser.ASTERISK_DELIMITER_PROCESSOR)) {
-            addDelimiterProcessors(Collections.singletonList(new AsteriskDelimiterProcessor(Parser.STRONG_WRAPS_EMPHASIS.getFrom(options))), map);
-        }
-        if (options.get(Parser.UNDERSCORE_DELIMITER_PROCESSOR)) {
-            addDelimiterProcessors(Collections.singletonList(new UnderscoreDelimiterProcessor(Parser.STRONG_WRAPS_EMPHASIS.getFrom(options))), map);
-        }
-
-        addDelimiterProcessors(delimiterProcessors, map);
-        return map;
-    }
-
-    // nothing to add, this is for extensions.
-    public static LinkRefProcessorData calculateLinkRefProcessors(DataHolder options, List<LinkRefProcessorFactory> linkRefProcessors) {
-        if (linkRefProcessors.size() > 1) {
-            List<LinkRefProcessorFactory> sortedLinkProcessors = new ArrayList<LinkRefProcessorFactory>(linkRefProcessors.size());
-            sortedLinkProcessors.addAll(linkRefProcessors);
-
-            int[] maxNestingLevelRef = new int[] { 0 };
-
-            Collections.sort(sortedLinkProcessors, new Comparator<LinkRefProcessorFactory>() {
-                @Override
-                public int compare(LinkRefProcessorFactory p1, LinkRefProcessorFactory p2) {
-                    int lv1 = p1.getBracketNestingLevel(options);
-                    int lv2 = p2.getBracketNestingLevel(options);
-                    int maxLevel = maxNestingLevelRef[0];
-                    if (maxLevel < lv1) maxLevel = lv1;
-                    if (maxLevel < lv2) maxLevel = lv2;
-                    maxNestingLevelRef[0] = maxLevel;
-
-                    if (lv1 == lv2) {
-                        // processors that want exclamation before the [ have higher priority
-                        if (!p1.getWantExclamationPrefix(options)) lv1++;
-                        if (!p2.getWantExclamationPrefix(options)) lv2++;
-                    }
-                    return Integer.compare(lv1, lv2);
-                }
-            });
-
-            int maxNestingLevel = maxNestingLevelRef[0];
-
-            int maxReferenceLinkNesting = maxNestingLevel;
-            int[] nestingLookup = new int[maxNestingLevel + 1];
-
-            maxNestingLevel = -1;
-            int index = 0;
-            for (LinkRefProcessorFactory linkProcessor : sortedLinkProcessors) {
-                if (maxNestingLevel < linkProcessor.getBracketNestingLevel(options)) {
-                    maxNestingLevel = linkProcessor.getBracketNestingLevel(options);
-                    nestingLookup[maxNestingLevel] = index;
-                    if (maxNestingLevel == maxReferenceLinkNesting) break;
-                }
-                index++;
-            }
-
-            return new LinkRefProcessorData(sortedLinkProcessors, maxReferenceLinkNesting, nestingLookup);
-        } else if (linkRefProcessors.size() > 0) {
-            int maxNesting = linkRefProcessors.get(0).getBracketNestingLevel(options);
-            int[] nestingLookup = new int[maxNesting + 1];
-            return new LinkRefProcessorData(linkRefProcessors, maxNesting, nestingLookup);
-        } else {
-            return new LinkRefProcessorData(linkRefProcessors, 0, new int[0]);
-        }
-    }
-
-    private static void addDelimiterProcessors(List<? extends DelimiterProcessor> delimiterProcessors, Map<Character, DelimiterProcessor> map) {
-        for (DelimiterProcessor delimiterProcessor : delimiterProcessors) {
-            char opening = delimiterProcessor.getOpeningCharacter();
-            addDelimiterProcessorForChar(opening, delimiterProcessor, map);
-            char closing = delimiterProcessor.getClosingCharacter();
-            if (opening != closing) {
-                addDelimiterProcessorForChar(closing, delimiterProcessor, map);
-            }
-        }
-    }
-
-    private static void addDelimiterProcessorForChar(char delimiterChar, DelimiterProcessor toAdd, Map<Character, DelimiterProcessor> delimiterProcessors) {
-        DelimiterProcessor existing = delimiterProcessors.put(delimiterChar, toAdd);
-        if (existing != null) {
-            if (existing.getClass() != toAdd.getClass()) {
-                throw new IllegalArgumentException("Delimiter processor conflict with delimiter char '" + delimiterChar + "', existing " + existing.getClass().getCanonicalName() + ", added " + toAdd.getClass().getCanonicalName());
-            } else {
-                // warning???
-                System.out.println("Delimiter processor for char '" + delimiterChar + "', added more than once " + existing.getClass().getCanonicalName());
             }
         }
     }
@@ -1342,121 +1164,10 @@ public class InlineParserImpl extends LightInlineParserImpl implements InlinePar
             if (options.linksAllowMatchedParentheses) {
                 // allow matched parenthesis
                 // fix for issue of stack overflow when parsing long input lines, by implementing non-recursive scan
-                boolean useFix = options.useHardcodedLinkAddressParser;
-                if (useFix) {
-                    int iMax = input.length();
-                    int startIndex = index;
-                    int lastMatch = startIndex;
-
-                    int openParenCount = 0;
-                    int openParenState = 0;
-
-                    int openJekyllState = options.parseJekyllMacrosInUrls ? 0 : -1;
-
-                    for (int i = index; i < iMax; i++) {
-                        char c = input.charAt(i);
-
-                        int nextIndex = i + 1;
-
-                        if (openJekyllState >= 0) {
-                            switch (openJekyllState) {
-                                case 0:
-                                    // looking for {{
-                                    if (c == '{' && input.safeCharAt(nextIndex) == '{') {
-                                        openJekyllState = 1;
-                                        break;
-                                    }
-                                    break;
-                                case 1:
-                                    // looking for second {
-                                    if (c == '{') {
-                                        openJekyllState = 2;
-                                        break;
-                                    }
-                                    openJekyllState = 0; // start over
-                                    break;
-                                case 2:
-                                    // accumulating or waiting for }}
-                                    if (c == '}') {
-                                        openJekyllState = 3;
-                                    } else if (JEKYLL_EXCLUDED_CHARS.get(c)) {
-                                        openJekyllState = 0; // start over
-                                    }
-                                    break;
-                                case 3:
-                                    // accumulating or waiting for second }
-                                    if (c == '}') {
-                                        lastMatch = nextIndex; // found it
-                                        openParenState = 0;   // reset in case it was -1
-                                        openJekyllState = 0; // start over
-                                    } else if (JEKYLL_EXCLUDED_CHARS.get(c)) {
-                                        openJekyllState = 0; // start over
-                                    } else {
-                                        openJekyllState = 2; // continue accumulating
-                                    }
-                                    break;
-                                default:
-                                    throw new IllegalStateException("Illegal Jekyll Macro Parsing State");
-                            }
-                        }
-
-                        // parens matching
-                        if (openParenState >= 0) {
-                            switch (openParenState) {
-                                case 0: // starting
-                                    if (c == '\\') {
-                                        if (PAREN_ESCAPABLE_CHARS.get(input.safeCharAt(nextIndex))) {
-                                            // escaped, take the next one if available
-                                            openParenState = 1;
-                                        }
-
-                                        lastMatch = nextIndex;
-                                        break;
-                                    } else if (c == '(') {
-                                        openParenCount++;
-                                        lastMatch = nextIndex;
-                                        break;
-                                    } else if (c == ')') {
-                                        if (openParenCount > 0) {
-                                            openParenCount--;
-                                            lastMatch = nextIndex;
-                                            break;
-                                        }
-                                    } else {
-                                        if (c == ' ') {
-                                            if (spaceInUrls && !PAREN_QUOTE_CHARS.get(input.safeCharAt(nextIndex))) {
-                                                lastMatch = nextIndex;
-                                                break;
-                                            }
-                                        } else if (!PAREN_EXCLUDED_CHARS.get(c)) {
-                                            lastMatch = nextIndex;
-                                            break;
-                                        }
-                                    }
-
-                                    // we are done, no more matches here
-                                    openParenState = -1;
-                                    break;
-
-                                case 1:
-                                    // escaped
-                                    lastMatch = nextIndex;
-                                    openParenState = 0;
-                                    break;
-
-                                default:
-                                    throw new IllegalStateException("Illegal Jekyll Macro Parsing State");
-                            }
-                        }
-
-                        if (openJekyllState <= 0 && openParenState == -1) {
-                            break;
-                        }
-                    }
-
-                    // always have something even if it is empty
-                    index = lastMatch;
-                    return spaceInUrls ? input.subSequence(startIndex, lastMatch).trimEnd(BasedSequence.SPACE) : input.subSequence(startIndex, lastMatch);
+                if (linkDestinationParser != null) {
+                    BasedSequence match = linkDestinationParser.parseLinkDestination(input, index);
+                    index += match.length();
+                    return match;
                 } else {
                     BasedSequence matched = match(myParsing.LINK_DESTINATION_MATCHED_PARENS);
                     if (matched != null) {
@@ -1866,6 +1577,188 @@ public class InlineParserImpl extends LightInlineParserImpl implements InlinePar
             this.lastDelimiter = delim.getPrevious();
         } else {
             delim.getNext().setPrevious(delim.getPrevious());
+        }
+    }
+
+    static class InlineParserDependencyStage {
+        final List<InlineParserExtensionFactory> dependents;
+
+        public InlineParserDependencyStage(List<InlineParserExtensionFactory> dependents) {
+            // compute mappings
+            this.dependents = dependents;
+        }
+    }
+
+    static class InlineParserExtensionDependencies extends ResolvedDependencies<InlineParserDependencyStage> {
+        public InlineParserExtensionDependencies(List<InlineParserDependencyStage> dependentStages) {
+            super(dependentStages);
+        }
+    }
+
+    static class InlineParserExtensionDependencyHandler extends DependencyHandler<InlineParserExtensionFactory, InlineParserDependencyStage, InlineParserExtensionDependencies> {
+        @Override
+        protected Class<? extends InlineParserExtensionFactory> getDependentClass(InlineParserExtensionFactory dependent) {
+            return dependent.getClass();
+        }
+
+        @Override
+        protected InlineParserExtensionDependencies createResolvedDependencies(List<InlineParserDependencyStage> stages) {
+            return new InlineParserExtensionDependencies(stages);
+        }
+
+        @Override
+        protected InlineParserDependencyStage createStage(List<InlineParserExtensionFactory> dependents) {
+            return new InlineParserDependencyStage(dependents);
+        }
+    }
+
+    static Map<Character, List<InlineParserExtensionFactory>> calculateInlineParserExtensions(DataHolder options, List<InlineParserExtensionFactory> extensionFactories) {
+        Map<Character, List<InlineParserExtensionFactory>> extensionMap = new HashMap<Character, List<InlineParserExtensionFactory>>();
+
+        for (InlineParserExtensionFactory factory : extensionFactories) {
+            CharSequence chars = factory.getCharacters();
+            for (int i = 0; i < chars.length(); i++) {
+                char c = chars.charAt(i);
+                List<InlineParserExtensionFactory> list = extensionMap.get(c);
+                if (list == null) {
+                    list = new ArrayList<InlineParserExtensionFactory>();
+                    extensionMap.put(c, list);
+                }
+
+                list.add(factory);
+            }
+        }
+
+        InlineParserExtensionDependencyHandler resolver = new InlineParserExtensionDependencyHandler();
+        Map<Character, List<InlineParserExtensionFactory>> extensions = new HashMap<Character, List<InlineParserExtensionFactory>>();
+        for (Character c : extensionMap.keySet()) {
+            List<InlineParserExtensionFactory> list = extensionMap.get(c);
+            List<InlineParserExtensionFactory> resolvedList = list;
+
+            if (list.size() > 1) {
+                InlineParserExtensionDependencies dependencies = resolver.resolveDependencies(list);
+                resolvedList = new ArrayList<InlineParserExtensionFactory>(list.size());
+                for (InlineParserDependencyStage stage : dependencies.getDependentStages()) {
+                    resolvedList.addAll(stage.dependents);
+                }
+            }
+
+            extensions.put(c, resolvedList);
+        }
+
+        return extensions;
+    }
+
+    public static BitSet calculateDelimiterCharacters(DataHolder options, Set<Character> characters) {
+        BitSet bitSet = new BitSet();
+        for (Character character : characters) {
+            bitSet.set(character);
+        }
+        return bitSet;
+    }
+
+    public static BitSet calculateSpecialCharacters(DataHolder options, BitSet delimiterCharacters) {
+        BitSet bitSet = new BitSet();
+        bitSet.or(delimiterCharacters);
+        bitSet.set('\r');
+        bitSet.set('\n');
+        bitSet.set('`');
+        bitSet.set('[');
+        bitSet.set(']');
+        bitSet.set('\\');
+        bitSet.set('!');
+        bitSet.set('<');
+        bitSet.set('&');
+        return bitSet;
+    }
+
+    public static Map<Character, DelimiterProcessor> calculateDelimiterProcessors(DataHolder options, List<DelimiterProcessor> delimiterProcessors) {
+        Map<Character, DelimiterProcessor> map = new HashMap<Character, DelimiterProcessor>();
+        //addDelimiterProcessors(Arrays.asList(new AsteriskDelimiterProcessor(), new UnderscoreDelimiterProcessor()), map);
+        if (options.get(Parser.ASTERISK_DELIMITER_PROCESSOR)) {
+            addDelimiterProcessors(Collections.singletonList(new AsteriskDelimiterProcessor(Parser.STRONG_WRAPS_EMPHASIS.getFrom(options))), map);
+        }
+        if (options.get(Parser.UNDERSCORE_DELIMITER_PROCESSOR)) {
+            addDelimiterProcessors(Collections.singletonList(new UnderscoreDelimiterProcessor(Parser.STRONG_WRAPS_EMPHASIS.getFrom(options))), map);
+        }
+
+        addDelimiterProcessors(delimiterProcessors, map);
+        return map;
+    }
+
+    // nothing to add, this is for extensions.
+    public static LinkRefProcessorData calculateLinkRefProcessors(DataHolder options, List<LinkRefProcessorFactory> linkRefProcessors) {
+        if (linkRefProcessors.size() > 1) {
+            List<LinkRefProcessorFactory> sortedLinkProcessors = new ArrayList<LinkRefProcessorFactory>(linkRefProcessors.size());
+            sortedLinkProcessors.addAll(linkRefProcessors);
+
+            int[] maxNestingLevelRef = new int[] { 0 };
+
+            Collections.sort(sortedLinkProcessors, new Comparator<LinkRefProcessorFactory>() {
+                @Override
+                public int compare(LinkRefProcessorFactory p1, LinkRefProcessorFactory p2) {
+                    int lv1 = p1.getBracketNestingLevel(options);
+                    int lv2 = p2.getBracketNestingLevel(options);
+                    int maxLevel = maxNestingLevelRef[0];
+                    if (maxLevel < lv1) maxLevel = lv1;
+                    if (maxLevel < lv2) maxLevel = lv2;
+                    maxNestingLevelRef[0] = maxLevel;
+
+                    if (lv1 == lv2) {
+                        // processors that want exclamation before the [ have higher priority
+                        if (!p1.getWantExclamationPrefix(options)) lv1++;
+                        if (!p2.getWantExclamationPrefix(options)) lv2++;
+                    }
+                    return Integer.compare(lv1, lv2);
+                }
+            });
+
+            int maxNestingLevel = maxNestingLevelRef[0];
+
+            int maxReferenceLinkNesting = maxNestingLevel;
+            int[] nestingLookup = new int[maxNestingLevel + 1];
+
+            maxNestingLevel = -1;
+            int index = 0;
+            for (LinkRefProcessorFactory linkProcessor : sortedLinkProcessors) {
+                if (maxNestingLevel < linkProcessor.getBracketNestingLevel(options)) {
+                    maxNestingLevel = linkProcessor.getBracketNestingLevel(options);
+                    nestingLookup[maxNestingLevel] = index;
+                    if (maxNestingLevel == maxReferenceLinkNesting) break;
+                }
+                index++;
+            }
+
+            return new LinkRefProcessorData(sortedLinkProcessors, maxReferenceLinkNesting, nestingLookup);
+        } else if (linkRefProcessors.size() > 0) {
+            int maxNesting = linkRefProcessors.get(0).getBracketNestingLevel(options);
+            int[] nestingLookup = new int[maxNesting + 1];
+            return new LinkRefProcessorData(linkRefProcessors, maxNesting, nestingLookup);
+        } else {
+            return new LinkRefProcessorData(linkRefProcessors, 0, new int[0]);
+        }
+    }
+
+    private static void addDelimiterProcessors(List<? extends DelimiterProcessor> delimiterProcessors, Map<Character, DelimiterProcessor> map) {
+        for (DelimiterProcessor delimiterProcessor : delimiterProcessors) {
+            char opening = delimiterProcessor.getOpeningCharacter();
+            addDelimiterProcessorForChar(opening, delimiterProcessor, map);
+            char closing = delimiterProcessor.getClosingCharacter();
+            if (opening != closing) {
+                addDelimiterProcessorForChar(closing, delimiterProcessor, map);
+            }
+        }
+    }
+
+    private static void addDelimiterProcessorForChar(char delimiterChar, DelimiterProcessor toAdd, Map<Character, DelimiterProcessor> delimiterProcessors) {
+        DelimiterProcessor existing = delimiterProcessors.put(delimiterChar, toAdd);
+        if (existing != null) {
+            if (existing.getClass() != toAdd.getClass()) {
+                throw new IllegalArgumentException("Delimiter processor conflict with delimiter char '" + delimiterChar + "', existing " + existing.getClass().getCanonicalName() + ", added " + toAdd.getClass().getCanonicalName());
+            } else {
+                // warning???
+                System.out.println("Delimiter processor for char '" + delimiterChar + "', added more than once " + existing.getClass().getCanonicalName());
+            }
         }
     }
 }

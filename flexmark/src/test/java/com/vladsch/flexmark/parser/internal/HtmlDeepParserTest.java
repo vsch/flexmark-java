@@ -6,11 +6,11 @@ import static org.junit.Assert.assertEquals;
 
 public class HtmlDeepParserTest {
 
-    private HtmlDeepParser parseHtml(String html, boolean blockTagsOnly, final boolean paseNonBlock, final boolean openOnOneLine) {
+    private HtmlDeepParser parseHtml(String html, boolean blockTagsOnly, boolean parseNonBlock, boolean openOnOneLine) {
         HtmlDeepParser deepParser = new HtmlDeepParser();
         String[] htmlLines = html.split("\n");
         for (String htmlLine : htmlLines) {
-            deepParser.parseHtmlChunk(htmlLine, blockTagsOnly, paseNonBlock, openOnOneLine);
+            deepParser.parseHtmlChunk(htmlLine, blockTagsOnly, parseNonBlock, openOnOneLine);
         }
         return deepParser;
     }
