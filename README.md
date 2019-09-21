@@ -25,6 +25,11 @@ than ideal and for pathological input either hangs or practically hangs during p
 <!-- [![codecov](https://codecov.io/gh/vsch/flexmark-java/branch/master/graph/badge.svg)](https://codecov.io/gh/vsch/flexmark-java) -->
 [![GitQ](https://gitq.com/badge.svg)](https://gitq.com/vsch/flexmark-java)
 
+:information_source: Thanks to [Alex Karezin](mailto:javadiagrams@gmail.com) for setting up
+[Flexmark Architecture and Dependencies Diagrams](https://sourcespy.com/github/flexmark/) and
+<https://sourcespy.com>. You can now get an overview of module dependencies with ability to
+drill down to packages and classes, updated from the repository sources. :thumbsup:
+
 ### Requirements
 
 * Java 8 or above, Java 9+ compatible
@@ -172,6 +177,9 @@ custom node renderer if you need to override the generated link HTML.
 
 ### Latest Additions
 
+* [Flexmark Architecture and Dependencies Diagrams](https://sourcespy.com/github/flexmark/)
+  thanks to great work by [Alex Karezin](mailto:javadiagrams@gmail.com) you can get an overview
+  of module dependencies with ability to drill down to packages and classes.
 * [Merge API](../../wiki/Merge-API) to merge multiple markdown documents into a single document.
 * [Docx Renderer Extension: Limited Attributes Node Handling](../../wiki/Docx-Renderer-Extension#limited-attributes-node-handling)
 * Extensible HTML to Markdown Converter module:
