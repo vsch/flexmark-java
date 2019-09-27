@@ -224,6 +224,49 @@ public interface BasedSequence extends RichCharSequence<BasedSequence> {
      */
     BasedSequence intersect(BasedSequence other);
 
+    /**
+     * Extend this based sequence to include characters from underlying based sequence
+     *
+     * @param charSet   set of characters to include
+     * @param maxCount maximum extra characters to include
+     * @return sequence which
+     */
+    BasedSequence extendByAny(CharSequence charSet, int maxCount);
+
+    default BasedSequence extendByAny(CharSequence charSet) {
+        return extendByAny(charSet, Integer.MAX_VALUE - getEndOffset());
+    }
+
+    default BasedSequence extendByOneOfAny(CharSequence charSet) {
+        return extendByAny(charSet, 1);
+    }
+
+    /**
+     * Extend this based sequence to include up to the next character from underlying based sequence
+     *
+     * @param charSet   set of characters to include
+     * @param maxCount maximum extra characters to include
+     * @return sequence which
+     */
+    BasedSequence extendToAny(CharSequence charSet, int maxCount);
+
+    default BasedSequence extendToAny(CharSequence charSet) {
+        return extendToAny(charSet, Integer.MAX_VALUE - getEndOffset());
+    }
+
+    /**
+     * Extend this based sequence to include characters from underlying based sequence
+     * taking tab expansion to 4th spaces into account
+     *
+     * @param maxColumns maximum columns to include
+     * @return sequence which
+     */
+    BasedSequence prefixWithIndent(int maxColumns);
+
+    default BasedSequence prefixWithIndent() {
+        return prefixWithIndent(Integer.MAX_VALUE);
+    }
+
     class EmptyBasedSequence extends BasedSequenceImpl {
         @Override
         public int length() {

@@ -26,7 +26,7 @@ public class AsideExtension implements Parser.ParserExtension, HtmlRenderer.Html
     private AsideExtension() {
     }
 
-    public static Extension create() {
+    public static AsideExtension create() {
         return new AsideExtension();
     }
 

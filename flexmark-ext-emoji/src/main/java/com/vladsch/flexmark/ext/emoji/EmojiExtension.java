@@ -29,7 +29,7 @@ public class EmojiExtension implements Parser.ParserExtension, HtmlRenderer.Html
     private EmojiExtension() {
     }
 
-    public static Extension create() {
+    public static EmojiExtension create() {
         return new EmojiExtension();
     }
 

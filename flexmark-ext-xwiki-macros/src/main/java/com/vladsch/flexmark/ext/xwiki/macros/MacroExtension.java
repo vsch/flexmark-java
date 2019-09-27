@@ -36,7 +36,7 @@ public class MacroExtension implements Parser.ParserExtension, HtmlRenderer.Html
         rendererBuilder.nodeRendererFactory(new MacroNodeRenderer.Factory());
     }
 
-    public static Extension create() {
+    public static MacroExtension create() {
         return new MacroExtension();
     }
 

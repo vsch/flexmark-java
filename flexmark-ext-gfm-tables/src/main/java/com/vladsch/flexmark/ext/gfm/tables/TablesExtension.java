@@ -23,7 +23,7 @@ public class TablesExtension implements Parser.ParserExtension, HtmlRenderer.Htm
     private TablesExtension() {
     }
 
-    public static Extension create() {
+    public static TablesExtension create() {
         return new TablesExtension();
     }
 

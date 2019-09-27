@@ -3,6 +3,7 @@ HOME_DIR="/Users/vlad/src/projects/flexmark-java"
 
 cd ${HOME_DIR} || exit
 
+# Updated by plugin-util
 #cp out/artifacts/flexmark-util.jar ../MissingInActions/lib
 #echo updated out/artifacts/flexmark-util.jar in ../MissingInActions/lib
 

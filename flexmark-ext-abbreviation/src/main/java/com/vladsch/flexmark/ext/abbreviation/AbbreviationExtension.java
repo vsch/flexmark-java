@@ -42,7 +42,7 @@ public class AbbreviationExtension implements Parser.ParserExtension, HtmlRender
     public static final DataKey<Boolean> RECOMPUTE_ABBREVIATIONS_MAP = new DataKey<>("RECOMPUTE_ABBREVIATIONS_MAP", false);
     public static final DataKey<Boolean> MAKE_MERGED_ABBREVIATIONS_UNIQUE = new DataKey<>("MERGE_MAKE_ABBREVIATIONS_UNIQUE", false);
 
-    public static Extension create() {
+    public static AbbreviationExtension create() {
         return new AbbreviationExtension();
     }
 

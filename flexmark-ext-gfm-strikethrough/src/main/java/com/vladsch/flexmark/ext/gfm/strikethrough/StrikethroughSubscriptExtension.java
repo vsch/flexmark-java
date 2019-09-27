@@ -26,7 +26,7 @@ public class StrikethroughSubscriptExtension implements Parser.ParserExtension, 
     private StrikethroughSubscriptExtension() {
     }
 
-    public static Extension create() {
+    public static StrikethroughSubscriptExtension create() {
         return new StrikethroughSubscriptExtension();
     }
 

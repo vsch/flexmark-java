@@ -200,7 +200,7 @@ public class UnderlineExtensionSample {
             rendererBuilder.nodeRendererFactory(new UnderlineNodeRenderer.Factory());
         }
 
-        public static Extension create() {
+        public static UnderlineExtension create() {
             return new UnderlineExtension();
         }
     }

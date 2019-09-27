@@ -23,13 +23,13 @@ public class Document extends Block implements MutableDataHolder {
     }
 
     @Override
-    public Map<DataKey, Object> getAll() { return dataSet.getAll(); }
+    public Map<DataKey<?>, Object> getAll() { return dataSet.getAll(); }
 
     @Override
-    public Collection<DataKey> keySet() { return dataSet.keySet(); }
+    public Collection<DataKey<?>> getKeys() { return dataSet.getKeys(); }
 
     @Override
-    public boolean contains(DataKey key) { return dataSet.contains(key); }
+    public boolean contains(DataKey<?> key) { return dataSet.contains(key); }
 
     @Override
     public <T> T get(DataKey<T> key) {

@@ -5,28 +5,28 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class DataSet implements DataHolder {
-    protected final HashMap<DataKey, Object> dataSet;
+    protected final HashMap<DataKey<?>, Object> dataSet;
 
     public DataSet() {
-        dataSet = new HashMap<DataKey, Object>();
+        this(null);
     }
 
     public DataSet(DataHolder other) {
-        dataSet = new HashMap<DataKey, Object>(other.getAll());
+        dataSet = other == null ? new HashMap<DataKey<?>, Object>() : new HashMap<DataKey<?>, Object>(other.getAll());
     }
 
     @Override
-    public Map<DataKey, Object> getAll() {
+    public Map<DataKey<?>, Object> getAll() {
         return dataSet;
     }
 
     @Override
-    public Collection<DataKey> keySet() {
+    public Collection<DataKey<?>> getKeys() {
         return dataSet.keySet();
     }
 
     @Override
-    public boolean contains(DataKey key) {
+    public boolean contains(DataKey<?> key) {
         return dataSet.containsKey(key);
     }
 

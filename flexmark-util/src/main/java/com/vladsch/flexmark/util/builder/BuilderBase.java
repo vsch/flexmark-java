@@ -167,7 +167,7 @@ public abstract class BuilderBase<T extends BuilderBase> extends MutableDataSet 
         }
 
         if (options != null) {
-            for (DataKey key : options.keySet()) {
+            for (DataKey key : options.getKeys()) {
                 if (key == EXTENSIONS) {
                     for (Extension extension : options.get(EXTENSIONS)) {
                         if (unloadExtensionSet == null || !unloadExtensionSet.contains(extension.getClass())) {

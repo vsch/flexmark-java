@@ -24,7 +24,7 @@ public class StrikethroughExtension implements Parser.ParserExtension, HtmlRende
     private StrikethroughExtension() {
     }
 
-    public static Extension create() {
+    public static StrikethroughExtension create() {
         return new StrikethroughExtension();
     }
 

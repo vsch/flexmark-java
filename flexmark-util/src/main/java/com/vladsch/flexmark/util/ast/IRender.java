@@ -12,9 +12,14 @@ public interface IRender {
      * Render the tree of nodes to HTML.
      *
      * @param node the root node
+     *
      * @return the rendered HTML
      */
-    String render(Node node);
+    default String render(Node node) {
+        StringBuilder sb = new StringBuilder();
+        render(node, sb);
+        return sb.toString();
+    }
 
     IRender withOptions(DataHolder options);
 

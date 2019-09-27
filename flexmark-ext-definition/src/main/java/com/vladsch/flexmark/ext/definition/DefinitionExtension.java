@@ -29,7 +29,7 @@ public class DefinitionExtension implements Parser.ParserExtension, HtmlRenderer
     private DefinitionExtension() {
     }
 
-    public static Extension create() {
+    public static DefinitionExtension create() {
         return new DefinitionExtension();
     }
 

@@ -22,7 +22,7 @@ public class MutableDataSet extends DataSet implements MutableDataHolder {
 
     @Override
     public MutableDataSet setAll(DataHolder other) {
-        for (DataKey key : other.keySet()) {
+        for (DataKey<?> key : other.getKeys()) {
             set(key, other.get(key));
         }
         return this;

@@ -27,7 +27,7 @@ public class AnchorLinkExtension implements Parser.ParserExtension, HtmlRenderer
     private AnchorLinkExtension() {
     }
 
-    public static Extension create() {
+    public static AnchorLinkExtension create() {
         return new AnchorLinkExtension();
     }
 

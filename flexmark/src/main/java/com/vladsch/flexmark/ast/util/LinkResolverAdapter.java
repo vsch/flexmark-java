@@ -22,7 +22,7 @@ public class LinkResolverAdapter extends NodeAdaptedVisitor<LinkResolvingHandler
 
     @Override
     public ResolvedLink resolveLink(Node node, NodeRendererContext context, ResolvedLink link) {
-        LinkResolvingHandler<?> handler = myCustomHandlersMap.get(node.getClass());
+        LinkResolvingHandler<?> handler = getHandler(node);
         if (handler != null) {
             return handler.resolveLink(node, context, link);
         }

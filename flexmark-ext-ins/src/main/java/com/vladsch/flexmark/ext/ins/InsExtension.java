@@ -23,7 +23,7 @@ public class InsExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRe
     private InsExtension() {
     }
 
-    public static Extension create() {
+    public static InsExtension create() {
         return new InsExtension();
     }
 

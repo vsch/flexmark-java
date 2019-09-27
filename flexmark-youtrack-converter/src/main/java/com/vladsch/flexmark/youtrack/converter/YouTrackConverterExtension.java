@@ -18,7 +18,7 @@ public class YouTrackConverterExtension implements Parser.ParserExtension, HtmlR
     private YouTrackConverterExtension() {
     }
 
-    public static Extension create() {
+    public static YouTrackConverterExtension create() {
         return new YouTrackConverterExtension();
     }
 

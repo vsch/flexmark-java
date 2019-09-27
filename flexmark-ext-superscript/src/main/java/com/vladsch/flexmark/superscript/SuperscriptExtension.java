@@ -23,7 +23,7 @@ public class SuperscriptExtension implements Parser.ParserExtension, HtmlRendere
     private SuperscriptExtension() {
     }
 
-    public static Extension create() {
+    public static SuperscriptExtension create() {
         return new SuperscriptExtension();
     }
 

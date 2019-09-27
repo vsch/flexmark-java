@@ -109,7 +109,7 @@ public class HtmlEmbeddedAttributeTest {
             parserBuilder.postProcessorFactory(TestNodePostProcessor.Factory(parserBuilder));
         }
 
-        public static Extension create() {
+        public static TestNodePostProcessorExtension create() {
             return new TestNodePostProcessorExtension();
         }
     }

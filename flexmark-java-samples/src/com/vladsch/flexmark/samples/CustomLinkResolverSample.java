@@ -166,7 +166,7 @@ public class CustomLinkResolverSample {
             rendererBuilder.nodeRendererFactory(new CustomLinkRenderer.Factory());
         }
 
-        static Extension create() {
+        static CustomExtension create() {
             return new CustomExtension();
         }
     }

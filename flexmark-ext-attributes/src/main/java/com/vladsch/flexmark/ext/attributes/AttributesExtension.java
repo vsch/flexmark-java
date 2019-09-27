@@ -34,7 +34,7 @@ public class AttributesExtension implements Parser.ParserExtension
     private AttributesExtension() {
     }
 
-    public static Extension create() {
+    public static AttributesExtension create() {
         return new AttributesExtension();
     }
 

@@ -149,7 +149,7 @@ public class SyntheticLinkSample {
         private SyntheticLinkExtension() {
         }
 
-        public static Extension create() {
+        public static SyntheticLinkExtension create() {
             return new SyntheticLinkExtension();
         }
 

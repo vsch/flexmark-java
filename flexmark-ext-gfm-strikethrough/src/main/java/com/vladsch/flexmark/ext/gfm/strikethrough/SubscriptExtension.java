@@ -26,7 +26,7 @@ public class SubscriptExtension implements Parser.ParserExtension, HtmlRenderer.
     private SubscriptExtension() {
     }
 
-    public static Extension create() {
+    public static SubscriptExtension create() {
         return new SubscriptExtension();
     }
 

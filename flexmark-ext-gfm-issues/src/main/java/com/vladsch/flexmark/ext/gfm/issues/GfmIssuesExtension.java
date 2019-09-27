@@ -28,7 +28,7 @@ public class GfmIssuesExtension implements Parser.ParserExtension
     private GfmIssuesExtension() {
     }
 
-    public static Extension create() {
+    public static GfmIssuesExtension create() {
         return new GfmIssuesExtension();
     }
 

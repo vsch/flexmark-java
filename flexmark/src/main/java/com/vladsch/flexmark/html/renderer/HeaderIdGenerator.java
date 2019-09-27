@@ -131,12 +131,12 @@ public class HeaderIdGenerator implements HtmlIdGenerator, Disposable {
 
     public static class Factory implements HeaderIdGeneratorFactory, HtmlIdGeneratorFactory {
         @Override
-        public HtmlIdGenerator create(LinkResolverContext context) {
+        public HeaderIdGenerator create(LinkResolverContext context) {
             return new HeaderIdGenerator();
         }
 
         @Override
-        public HtmlIdGenerator create() {
+        public HeaderIdGenerator create() {
             return new HeaderIdGenerator();
         }
     }

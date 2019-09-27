@@ -23,10 +23,10 @@ public class MutableScopedDataSet extends MutableDataSet {
     }
 
     @Override
-    public Map<DataKey, Object> getAll() {
+    public Map<DataKey<?>, Object> getAll() {
         if (parent != null) {
-            HashMap<DataKey, Object> all = new HashMap<DataKey, Object>(super.getAll());
-            for (DataKey key : parent.keySet()) {
+            HashMap<DataKey<?>, Object> all = new HashMap<DataKey<?>, Object>(super.getAll());
+            for (DataKey<?> key : parent.getKeys()) {
                 if (!contains(key)) {
                     all.put(key, parent.get(key));
                 }
@@ -39,10 +39,10 @@ public class MutableScopedDataSet extends MutableDataSet {
     }
 
     @Override
-    public Collection<DataKey> keySet() {
+    public Collection<DataKey<?>> getKeys() {
         if (parent != null) {
-            ArrayList<DataKey> all = new ArrayList<DataKey>(super.keySet());
-            for (DataKey key : parent.keySet()) {
+            ArrayList<DataKey<?>> all = new ArrayList<DataKey<?>>(super.getKeys());
+            for (DataKey<?> key : parent.getKeys()) {
                 if (!contains(key)) {
                     all.add(key);
                 }
@@ -50,12 +50,12 @@ public class MutableScopedDataSet extends MutableDataSet {
 
             return all;
         } else {
-            return super.keySet();
+            return super.getKeys();
         }
     }
 
     @Override
-    public boolean contains(DataKey key) {
+    public boolean contains(DataKey<?> key) {
         return super.contains(key) || (parent != null && parent.contains(key));
     }
 

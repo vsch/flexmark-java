@@ -38,7 +38,7 @@ public class YamlFrontMatterExtension implements Parser.ParserExtension, Formatt
 
     }
 
-    public static Extension create() {
+    public static YamlFrontMatterExtension create() {
         return new YamlFrontMatterExtension();
     }
 }

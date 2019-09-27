@@ -22,25 +22,9 @@ public class AttributeProviderAdapter extends NodeAdaptedVisitor<AttributeProvid
 
     @Override
     public void setAttributes(Node node, AttributablePart part, Attributes attributes) {
-        AttributeProvidingHandler<?> handler = myCustomHandlersMap.get(node.getClass());
+        AttributeProvidingHandler<?> handler = getHandler(node);
         if (handler != null) {
             handler.setAttributes(node, part, attributes);
         }
     }
-
-    //public void visit(Node node) {
-    //    A visitor = myCustomVisitorsMap.get(node.getClass());
-    //    if (visitor != null) {
-    //        callFunctionHere();
-    //    } else {
-    //        visitChildren(node);
-    //    }
-    //}
-    //
-    //public void visitNodeOnly(Node node) {
-    //    A visitor = myCustomVisitorsMap.get(node.getClass());
-    //    if (visitor != null) {
-    //        callFunctionHere();
-    //    }
-    //}
 }

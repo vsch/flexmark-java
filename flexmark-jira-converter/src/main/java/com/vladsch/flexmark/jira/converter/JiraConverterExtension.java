@@ -19,7 +19,7 @@ public class JiraConverterExtension implements Parser.ParserExtension, HtmlRende
     private JiraConverterExtension() {
     }
 
-    public static Extension create() {
+    public static JiraConverterExtension create() {
         return new JiraConverterExtension();
     }
 

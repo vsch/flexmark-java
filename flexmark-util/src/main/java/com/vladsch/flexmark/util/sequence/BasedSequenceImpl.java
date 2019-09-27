@@ -54,7 +54,7 @@ public abstract class BasedSequenceImpl extends RichCharSequenceBase<BasedSequen
 
     @Override
     public char safeCharAt(int index) {
-        return index < 0 || index >= length() ? '\0':charAt(index);
+        return index < 0 || index >= length() ? '\0' : charAt(index);
     }
 
     @Override
@@ -68,7 +68,7 @@ public abstract class BasedSequenceImpl extends RichCharSequenceBase<BasedSequen
 
     @Override
     public BasedSequence getEmptyPrefix() {
-        return subSequence(0,0);
+        return subSequence(0, 0);
     }
 
     @Override
@@ -138,6 +138,70 @@ public abstract class BasedSequenceImpl extends RichCharSequenceBase<BasedSequen
         else if (other.getEndOffset() <= getStartOffset()) return subSequence(0, 0);
         else if (other.getStartOffset() >= getEndOffset()) return subSequence(length(), length());
         else return this.baseSubSequence(Utils.max(getStartOffset(), other.getStartOffset()), Utils.min(getEndOffset(), other.getEndOffset()));
+    }
+
+    @Override
+    public BasedSequence extendByAny(CharSequence charSet, int maxCount) {
+        int count = getBaseSequence().countLeading(charSet, getEndOffset(), getEndOffset() + maxCount);
+        return count == 0 ? this : baseSubSequence(getStartOffset(), getEndOffset() + count);
+    }
+
+    @Override
+    public BasedSequence extendToAny(CharSequence charSet, int maxCount) {
+        if (charSet.length() == 0) return this;
+        int count = getBaseSequence().countLeadingNot(charSet, getEndOffset(), getEndOffset() + maxCount);
+        return count == getBaseSequence().length() - getEndOffset() ? this : baseSubSequence(getStartOffset(), getEndOffset() + count + 1);
+    }
+
+    @Override
+    public BasedSequence prefixWithIndent(int maxColumns) {
+        int offset = getStartOffset();
+        int startOffset = getStartOffset();
+        int columns = 0;
+        int columnOffset = 0;
+        boolean hadTab = false;
+
+        // find '\n'
+        while (startOffset >= 0) {
+            char c = getBaseSequence().charAt(startOffset);
+            if (c == '\t') hadTab = true;
+            else if (c == '\n') {
+                startOffset++;
+                break;
+            }
+            startOffset--;
+        }
+
+        if (startOffset < 0) startOffset = 0;
+
+        if (startOffset < offset) {
+            if (hadTab) {
+                // see what is the column at offset
+                int[] offsetColumns = new int[offset - startOffset];
+                int currOffset = startOffset;
+                while (currOffset < offset) {
+                    if (getBaseSequence().charAt(currOffset) == '\t') {
+                        columnOffset += offsetColumns[currOffset - startOffset] = 4 - (columnOffset % 4);
+                    } else {
+                        columnOffset += offsetColumns[currOffset - startOffset] = 1;
+                    }
+                    currOffset++;
+                }
+
+                while (columns < maxColumns && offset > 0 && (getBaseSequence().charAt(offset - 1) == ' ' || getBaseSequence().charAt(offset - 1) == '\t')) {
+                    columns += offsetColumns[offset - 1 - startOffset];
+                    if (columns > maxColumns) break;
+                    offset--;
+                }
+            } else {
+                while (columns < maxColumns && offset > 0 && (getBaseSequence().charAt(offset - 1) == ' ' || getBaseSequence().charAt(offset - 1) == '\t')) {
+                    columns++;
+                    offset--;
+                }
+            }
+        }
+
+        return offset == getStartOffset() ? this : baseSubSequence(offset, getEndOffset());
     }
 
     @Override

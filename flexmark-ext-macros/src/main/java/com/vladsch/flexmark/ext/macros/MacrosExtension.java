@@ -39,7 +39,7 @@ public class MacrosExtension implements Parser.ParserExtension
     private MacrosExtension() {
     }
 
-    public static Extension create() {
+    public static MacrosExtension create() {
         return new MacrosExtension();
     }
 

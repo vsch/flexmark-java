@@ -42,7 +42,7 @@ public class SimTocExtension implements Parser.ParserExtension, HtmlRenderer.Htm
     private SimTocExtension() {
     }
 
-    public static Extension create() {
+    public static SimTocExtension create() {
         return new SimTocExtension();
     }
 

@@ -135,7 +135,7 @@ public class YouTubeLinkSample {
         private YouTubeLinkExtension() {
         }
 
-        public static Extension create() {
+        public static YouTubeLinkExtension create() {
             return new YouTubeLinkExtension();
         }
 

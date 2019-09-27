@@ -694,6 +694,8 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
 
     @Override
     final public int countLeading(CharSequence chars, int fromIndex, int endIndex) {
+        if (chars.length() == 0) return 0;
+
         if (fromIndex < 0) fromIndex = 0;
         if (endIndex > length()) endIndex = length();
         if (fromIndex > endIndex) fromIndex = endIndex;
@@ -708,6 +710,8 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
 
     @Override
     final public int countLeadingColumns(int startColumn, CharSequence chars) {
+        if (chars.length() == 0) return 0;
+
         int fromIndex = 0;
         int endIndex = length();
         int index = indexOfAnyNot(chars, fromIndex, endIndex);
@@ -729,9 +733,12 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
 
     @Override
     final public int countTrailing(CharSequence chars, int startIndex, int fromIndex) {
+        if (chars.length() == 0) return 0;
+
         if (startIndex < 0) startIndex = 0;
         if (fromIndex > length()) fromIndex = length();
         if (startIndex > fromIndex) startIndex = fromIndex;
+
         int index = lastIndexOfAnyNot(chars, startIndex, fromIndex);
         return index == -1 ? fromIndex - startIndex : fromIndex <= index ? 0 : fromIndex - index - 1;
     }

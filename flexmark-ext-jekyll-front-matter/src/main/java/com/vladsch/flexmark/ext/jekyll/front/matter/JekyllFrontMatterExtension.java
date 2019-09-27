@@ -20,7 +20,7 @@ public class JekyllFrontMatterExtension implements Parser.ParserExtension, HtmlR
     private JekyllFrontMatterExtension() {
     }
 
-    public static Extension create() {
+    public static JekyllFrontMatterExtension create() {
         return new JekyllFrontMatterExtension();
     }
 

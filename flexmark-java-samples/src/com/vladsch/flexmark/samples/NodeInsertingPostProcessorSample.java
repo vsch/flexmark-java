@@ -110,7 +110,7 @@ public class NodeInsertingPostProcessorSample {
             parserBuilder.postProcessorFactory(NodeInsertingPostProcessor.Factory(parserBuilder));
         }
 
-        public static Extension create() {
+        public static NodeInsertingPostProcessorExtension create() {
             return new NodeInsertingPostProcessorExtension();
         }
     }

@@ -86,7 +86,7 @@ public class TokenReplacingPostProcessorSample {
             parserBuilder.postProcessorFactory(new LinkReplacingPostProcessor.Factory(parserBuilder));
         }
 
-        public static Extension create() {
+        public static LinkReplacingExtension create() {
             return new LinkReplacingExtension();
         }
     }

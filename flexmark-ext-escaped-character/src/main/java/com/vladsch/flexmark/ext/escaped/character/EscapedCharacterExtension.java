@@ -18,7 +18,7 @@ public class EscapedCharacterExtension implements Parser.ParserExtension, HtmlRe
     private EscapedCharacterExtension() {
     }
 
-    public static Extension create() {
+    public static EscapedCharacterExtension create() {
         return new EscapedCharacterExtension();
     }
 

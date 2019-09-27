@@ -33,7 +33,7 @@ public class NodeVisitor extends NodeAdaptedVisitor<VisitHandler<?>> {
     }
 
     public void visit(Node node) {
-        VisitHandler handler = myCustomHandlersMap.get(node.getClass());
+        VisitHandler<?> handler = getHandler(node);
         if (handler != null) {
             handler.visit(node);
         } else {
@@ -42,7 +42,7 @@ public class NodeVisitor extends NodeAdaptedVisitor<VisitHandler<?>> {
     }
 
     public void visitNodeOnly(Node node) {
-        VisitHandler handler = myCustomHandlersMap.get(node.getClass());
+        VisitHandler<?> handler = getHandler(node);
         if (handler != null) {
             handler.visit(node);
         }

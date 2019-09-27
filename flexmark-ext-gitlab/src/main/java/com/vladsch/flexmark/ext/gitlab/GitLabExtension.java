@@ -47,7 +47,7 @@ public class GitLabExtension implements Parser.ParserExtension
     private GitLabExtension() {
     }
 
-    public static Extension create() {
+    public static GitLabExtension create() {
         return new GitLabExtension();
     }
 

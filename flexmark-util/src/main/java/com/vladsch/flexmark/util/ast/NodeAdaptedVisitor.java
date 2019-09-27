@@ -3,6 +3,7 @@ package com.vladsch.flexmark.util.ast;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Intended to be extended by specific type of node visitor
@@ -10,7 +11,7 @@ import java.util.Map;
  * @param <H> subclass of {@link NodeAdaptingVisitHandler}
  */
 public abstract class NodeAdaptedVisitor<H extends NodeAdaptingVisitHandler<?, ?>> {
-    protected final Map<Class<?>, H> myCustomHandlersMap = new HashMap<Class<?>, H>();
+    private final Map<Class<?>, H> myCustomHandlersMap = new HashMap<Class<?>, H>();
 
     // Usage:
     //myVisitor = new NodeVisitor(
@@ -52,5 +53,17 @@ public abstract class NodeAdaptedVisitor<H extends NodeAdaptingVisitHandler<?, ?
             myCustomHandlersMap.put(handler.getNodeType(), handler);
         }
         return this;
+    }
+
+    public H getHandler(Node node) {
+        return myCustomHandlersMap.get(node.getClass());
+    }
+
+    public H getHandler(Class<?> nodeClass) {
+        return myCustomHandlersMap.get(nodeClass);
+    }
+
+    public Set<Class<?>> getNodeClasses() {
+        return myCustomHandlersMap.keySet();
     }
 }

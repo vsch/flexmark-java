@@ -43,7 +43,7 @@ public class TypographicExtension implements Parser.ParserExtension, HtmlRendere
     private TypographicExtension() {
     }
 
-    public static Extension create() {
+    public static TypographicExtension create() {
         return new TypographicExtension();
     }
 

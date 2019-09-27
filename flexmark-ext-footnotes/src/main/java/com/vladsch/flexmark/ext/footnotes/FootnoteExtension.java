@@ -37,7 +37,7 @@ public class FootnoteExtension implements Parser.ParserExtension, HtmlRenderer.H
     private FootnoteExtension() {
     }
 
-    public static Extension create() {
+    public static FootnoteExtension create() {
         return new FootnoteExtension();
     }
 

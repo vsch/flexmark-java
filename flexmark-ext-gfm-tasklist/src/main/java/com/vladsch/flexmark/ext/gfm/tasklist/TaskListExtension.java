@@ -45,7 +45,7 @@ public class TaskListExtension implements Parser.ParserExtension, HtmlRenderer.H
     private TaskListExtension() {
     }
 
-    public static Extension create() {
+    public static TaskListExtension create() {
         return new TaskListExtension();
     }
 

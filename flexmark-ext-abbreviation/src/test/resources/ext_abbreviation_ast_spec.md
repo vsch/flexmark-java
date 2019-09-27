@@ -246,7 +246,7 @@ Document[0, 48]
 ````````````````````````````````
 
 
-## Typographic quotes interaction 
+## Typographic quotes interaction
 
 Typographic quotes and smarts will break up text and make it not match abbreviations
 

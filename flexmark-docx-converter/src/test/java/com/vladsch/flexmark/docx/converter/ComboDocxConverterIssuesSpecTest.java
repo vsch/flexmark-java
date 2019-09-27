@@ -29,7 +29,7 @@ public class ComboDocxConverterIssuesSpecTest extends ComboDocxConverterSpecTest
         List<Object[]> data = new ArrayList<Object[]>();
 
         // NULL example runs full spec test
-        data.add(new Object[] { SpecExample.NULL });
+        data.add(new Object[] { SpecExample.getNull() });
 
         for (SpecExample example : examples) {
             data.add(new Object[] { example });

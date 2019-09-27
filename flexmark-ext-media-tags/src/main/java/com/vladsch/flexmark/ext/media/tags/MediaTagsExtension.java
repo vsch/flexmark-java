@@ -11,7 +11,7 @@ public class MediaTagsExtension implements Parser.ParserExtension, HtmlRenderer.
     private MediaTagsExtension() {
     }
 
-    public static Extension create() {
+    public static MediaTagsExtension create() {
         return new MediaTagsExtension();
     }
 

@@ -29,7 +29,7 @@ public class SpecExampleExtension implements Parser.ParserExtension, HtmlRendere
     private SpecExampleExtension() {
     }
 
-    public static Extension create() {
+    public static SpecExampleExtension create() {
         return new SpecExampleExtension();
     }
 

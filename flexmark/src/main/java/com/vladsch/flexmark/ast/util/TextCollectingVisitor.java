@@ -45,7 +45,7 @@ public class TextCollectingVisitor {
         {
             @Override
             public void visit(Node node) {
-                VisitHandler<?> handler = myCustomHandlersMap.get(node.getClass());
+                VisitHandler<?> handler = getHandler(node);
                 if (handler != null) {
                     handler.visit(node);
                 } else {

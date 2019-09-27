@@ -74,7 +74,7 @@ public class WikiLinkExtension implements Parser.ParserExtension, HtmlRenderer.H
     private WikiLinkExtension() {
     }
 
-    public static Extension create() {
+    public static WikiLinkExtension create() {
         return new WikiLinkExtension();
     }
 

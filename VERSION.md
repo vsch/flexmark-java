@@ -6,6 +6,7 @@ flexmark-java
 [TOC]: # " "
 
 - [To Do](#to-do)
+- [0.50.42](#05042)
 - [0.50.40](#05040)
 - [0.50.38](#05038)
 - [0.50.36](#05036)
@@ -108,6 +109,28 @@ flexmark-java
 * [ ] Convert anonymous classes to lambda where possible.
 * [ ] Add: `flexmark-ext-attributes` formatting of individual attributes instead of dumping the
       attributes node text.
+
+0.50.42
+-------
+
+* Fix: data set copy constructors to accept `null`
+* Fix: change `DataSet.keySet()` to `DataSet.getKeys()`
+  * Deprecate: `DataSet.keySet()`
+* Add: `BasedSequence.extendByAny(CharSequence charSet, int maxCount)` to extend the based
+  sequence to include any following contiguous characters from the underlying based sequence
+  that are in `charSet`. Variations include `BasedSequence.extendByAny(CharSequence)` for
+  unlimited count and `BasedSequence.extendByOneOfAny(CharSequence)` for max count of 1.
+* Add: `BasedSequence.extendToAny(CharSequence charSet, int maxCount)` to extend the based
+  sequence to include first of any following characters from the underlying based sequence that
+  are in `charSet`. Variations include `BasedSequence.extendToAny(CharSequence)` for unlimited
+  count.
+* Add: `BasedSequence.prefixWithIndent(int maxColumns)` to extend the based sequence to include
+  leading indent from the underlying based sequence up to a maximum of given columns. Tabs are
+  taken into account as set to 4 space columns. Variations include
+  `BasedSequence.prefixWithIndent()` for unlimited indent.
+* Break: make `NodeAdaptedVisitor.myCustomHandlersMap` private. Use
+  `NodeAdaptedVisitor.getHandler(Node)`, `NodeAdaptedVisitor.getHandler(Class<?>)`, and
+  `NodeAdaptedVisitor.getNodeClasses()` to get access to contained data.
 
 0.50.40
 -------
@@ -1668,6 +1691,7 @@ setting either will affect both keys. For information on these keys see
 [#349, Translation Helper bugs]: https://github.com/vsch/flexmark-java/issues/349
 [#351, Is there any special format requirement for processing html data to markdown]: https://github.com/vsch/flexmark-java/issues/351
 [#357, HTML to markdown and removed nested list]: https://github.com/vsch/flexmark-java/issues/357
+[#362, ArrayIndexOutOfBoundsException in BasedSequence.indexOfAll]: https://github.com/vsch/flexmark-java/issues/362
 [Admonition Extension, Material for MkDocs]: https://squidfunk.github.io/mkdocs-material/extensions/admonition/
 [Awesome Console]: https://plugins.jetbrains.com/plugin/7677-awesome-console "Awesome Console"
 [HtmlToMarkdownCustomizedSample.java]: https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/samples/HtmlToMarkdownCustomizedSample.java
@@ -1678,6 +1702,4 @@ setting either will affect both keys. For information on these keys see
 [NodeInsertingPostProcessorSample.java]: https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/samples/NodeInsertingPostProcessorSample.java
 [PdfLandscapeConverter.java]: https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/samples/PdfLandscapeConverter.java
 [YouTrack: IDEA-207453]: https://youtrack.jetbrains.com/issue/IDEA-207453 "Add Conversion of ref anchor to UrlFilter for file line navigation"
-[#362, ArrayIndexOutOfBoundsException in BasedSequence.indexOfAll]: https://github.com/vsch/flexmark-java/issues/362
-
 

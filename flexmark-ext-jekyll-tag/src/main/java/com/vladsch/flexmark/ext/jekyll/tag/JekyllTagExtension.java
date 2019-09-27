@@ -38,7 +38,7 @@ public class JekyllTagExtension implements Parser.ParserExtension, HtmlRenderer.
     private JekyllTagExtension() {
     }
 
-    public static Extension create() {
+    public static JekyllTagExtension create() {
         return new JekyllTagExtension();
     }
 

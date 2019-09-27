@@ -3,7 +3,19 @@ package com.vladsch.flexmark.spec;
 import java.util.Objects;
 
 public class SpecExample {
-    public static final SpecExample NULL = new SpecExample(null, "", 0, "", "", "", "", null);
+    private static final SpecExample NULL = new SpecExample(null, "", 0, "", "", "", "", null, true);
+
+    public static SpecExample getNull() {
+        return NULL;
+    }
+
+    public static SpecExample getNull(UrlString fileUrl) {
+        return NULL.withFileUrl(fileUrl);
+    }
+
+    public static SpecExample getNull(String fileUrl) {
+        return NULL.withFileUrl(fileUrl);
+    }
 
     private final String optionsSet;
     private final String section;
@@ -13,6 +25,7 @@ public class SpecExample {
     private final String ast;
     private final String comment;
     private final UrlString fileUrl;
+    private final boolean isNull;
 
     public SpecExample(String optionsSet, String section, int exampleNumber, String source, String html) {
         this(optionsSet, section, exampleNumber, source, html, null);
@@ -23,6 +36,10 @@ public class SpecExample {
     }
 
     public SpecExample(String optionsSet, String section, int exampleNumber, String source, String html, String ast, String comment, final UrlString fileUrl) {
+        this(optionsSet, section, exampleNumber, source, html,ast, comment, fileUrl, false);
+    }
+    
+    private SpecExample(String optionsSet, String section, int exampleNumber, String source, String html, String ast, String comment, final UrlString fileUrl, boolean isNull) {
         this.section = section;
         this.exampleNumber = exampleNumber;
         this.source = source;
@@ -30,6 +47,7 @@ public class SpecExample {
         this.ast = ast;
         this.comment = comment == null ? null : comment.trim();
         this.fileUrl = fileUrl;
+        this.isNull = isNull;
 
         if (optionsSet == null) {
             this.optionsSet = null;
@@ -40,14 +58,14 @@ public class SpecExample {
     }
 
     // @formatter:off
-    public SpecExample withOptionsSet(String optionsSet) { return new SpecExample(optionsSet, section, exampleNumber, source, html, ast, comment, fileUrl ); }
-    public SpecExample withSection(String section) { return new SpecExample(optionsSet, section, exampleNumber, source, html, ast, comment, fileUrl ); }
-    public SpecExample withExampleNumber(int exampleNumber) { return new SpecExample(optionsSet, section, exampleNumber, source, html, ast, comment, fileUrl ); }
-    public SpecExample withSource(String source) { return new SpecExample(optionsSet, section, exampleNumber, source, html, ast, comment, fileUrl ); }
-    public SpecExample withHtml(String html) { return new SpecExample(optionsSet, section, exampleNumber, source, html, ast, comment, fileUrl ); }
-    public SpecExample withAst(String ast) { return new SpecExample(optionsSet, section, exampleNumber, source, html, ast, comment, fileUrl ); }
-    public SpecExample withFileUrl(UrlString fileUrl) { return new SpecExample(optionsSet, section, exampleNumber, source, html, ast, comment, fileUrl); }
-    public SpecExample withFileUrl(String fileUrl) { return new SpecExample(optionsSet, section, exampleNumber, source, html, ast, comment, new UrlString(fileUrl)); }
+    public SpecExample withOptionsSet(String optionsSet) { return new SpecExample(optionsSet, section, exampleNumber, source, html, ast, comment, fileUrl , isNull); }
+    public SpecExample withSection(String section) { return new SpecExample(optionsSet, section, exampleNumber, source, html, ast, comment, fileUrl , isNull); }
+    public SpecExample withExampleNumber(int exampleNumber) { return new SpecExample(optionsSet, section, exampleNumber, source, html, ast, comment, fileUrl , isNull); }
+    public SpecExample withSource(String source) { return new SpecExample(optionsSet, section, exampleNumber, source, html, ast, comment, fileUrl , isNull); }
+    public SpecExample withHtml(String html) { return new SpecExample(optionsSet, section, exampleNumber, source, html, ast, comment, fileUrl , isNull); }
+    public SpecExample withAst(String ast) { return new SpecExample(optionsSet, section, exampleNumber, source, html, ast, comment, fileUrl , isNull); }
+    public SpecExample withFileUrl(UrlString fileUrl) { return new SpecExample(optionsSet, section, exampleNumber, source, html, ast, comment, fileUrl, isNull); }
+    public SpecExample withFileUrl(String fileUrl) { return new SpecExample(optionsSet, section, exampleNumber, source, html, ast, comment, new UrlString(fileUrl), isNull); }
     // @formatter:on
 
     public boolean isFullSpecExample() {
@@ -64,15 +82,15 @@ public class SpecExample {
     }
 
     public boolean isNull() {
-        return this == NULL;
+        return isNull;
     }
 
     public boolean isSpecExample() {
-        return this != NULL && !isFullSpecExample();
+        return isNotNull() && !isFullSpecExample();
     }
 
     public boolean isNotNull() {
-        return this != NULL;
+        return !isNull;
     }
 
     public String getOptionsSet() {
@@ -113,7 +131,7 @@ public class SpecExample {
 
     @Override
     public String toString() {
-        if (this == NULL) {
+        if (this.isNull()) {
             return "Full Spec Test";
         } else {
             return "Section \"" + section + "\" example " + exampleNumber;

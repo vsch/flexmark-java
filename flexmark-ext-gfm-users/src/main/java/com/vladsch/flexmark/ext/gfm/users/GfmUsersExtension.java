@@ -28,7 +28,7 @@ public class GfmUsersExtension implements Parser.ParserExtension
     private GfmUsersExtension() {
     }
 
-    public static Extension create() {
+    public static GfmUsersExtension create() {
         return new GfmUsersExtension();
     }
 

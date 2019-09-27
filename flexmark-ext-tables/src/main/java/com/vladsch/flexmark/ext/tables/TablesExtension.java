@@ -135,7 +135,7 @@ public class TablesExtension implements Parser.ParserExtension, HtmlRenderer.Htm
      */
     @Deprecated public static final DataKey<CharWidthProvider> CHAR_WIDTH_PROVIDER = TableFormatOptions.CHAR_WIDTH_PROVIDER;
 
-    public static Extension create() {
+    public static TablesExtension create() {
         return new TablesExtension();
     }
 

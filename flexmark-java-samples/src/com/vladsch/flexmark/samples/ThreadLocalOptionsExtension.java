@@ -37,7 +37,7 @@ public class ThreadLocalOptionsExtension implements
         threadOptions.get().setAll(perThreadOptions);
     }
 
-    public static Extension create() {
+    public static ThreadLocalOptionsExtension create() {
         return new ThreadLocalOptionsExtension();
     }
 

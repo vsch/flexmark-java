@@ -47,7 +47,7 @@ public interface MutableDataHolder extends DataHolder, MutableDataSetter {
     MutableDataHolder setAll(DataHolder other);
 
     /**
-     * Set options in gven mutable data hoer
+     * Set options in given mutable data hoer
      *
      * @param dataHolder data holder where to copy options from this data holder
      * @return dataHolder

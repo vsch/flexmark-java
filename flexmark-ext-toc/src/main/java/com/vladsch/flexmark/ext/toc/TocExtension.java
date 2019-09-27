@@ -44,7 +44,7 @@ public class TocExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRe
     private TocExtension() {
     }
 
-    public static Extension create() {
+    public static TocExtension create() {
         return new TocExtension();
     }
 

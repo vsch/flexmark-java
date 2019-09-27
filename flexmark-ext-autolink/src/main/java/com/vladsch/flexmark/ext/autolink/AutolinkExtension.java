@@ -22,7 +22,7 @@ public class AutolinkExtension implements Parser.ParserExtension {
     private AutolinkExtension() {
     }
 
-    public static Extension create() {
+    public static AutolinkExtension create() {
         return new AutolinkExtension();
     }
 

@@ -33,7 +33,7 @@ public class ZzzzzzExtension implements Parser.ParserExtension
     private ZzzzzzExtension() {
     }
 
-    public static Extension create() {
+    public static ZzzzzzExtension create() {
         return new ZzzzzzExtension();
     }
 

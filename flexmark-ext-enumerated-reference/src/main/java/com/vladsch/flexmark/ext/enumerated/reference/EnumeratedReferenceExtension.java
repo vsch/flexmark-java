@@ -39,7 +39,7 @@ public class EnumeratedReferenceExtension implements Parser.ParserExtension
     private EnumeratedReferenceExtension() {
     }
 
-    public static Extension create() {
+    public static EnumeratedReferenceExtension create() {
         return new EnumeratedReferenceExtension();
     }
 

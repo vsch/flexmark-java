@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="MarkdownEnhProjectSettings">
+    <AnnotatorSettings targetHasSpaces="false" linkCaseMismatch="false" wikiCaseMismatch="false" wikiLinkHasDashes="false" notUnderWikiHome="false" targetNotWikiPageExt="false" notUnderSourceWikiHome="false" targetNameHasAnchor="false" targetPathHasAnchor="false" wikiLinkHasSlash="false" wikiLinkHasSubdir="false" wikiLinkHasOnlyAnchor="false" linkTargetsWikiHasExt="false" linkTargetsWikiHasBadExt="false" notUnderSameRepo="false" targetNotUnderVcs="false" linkNeedsExt="false" linkHasBadExt="false" linkTargetNeedsExt="false" linkTargetHasBadExt="false" wikiLinkNotInWiki="false" imageTargetNotInRaw="false" repoRelativeAcrossVcsRoots="false" multipleWikiTargetsMatch="false" unresolvedLinkReference="false" linkIsIgnored="false" anchorIsIgnored="false" anchorIsUnresolved="false" anchorLineReferenceIsUnresolved="false" anchorLineReferenceFormat="false" anchorHasDuplicates="false" abbreviationDuplicates="false" abbreviationNotUsed="false" attributeIdDuplicateDefinition="false" attributeIdNotUsed="false" footnoteDuplicateDefinition="false" footnoteUnresolved="false" footnoteDuplicates="false" footnoteNotUsed="false" macroDuplicateDefinition="false" macroUnresolved="false" macroDuplicates="false" macroNotUsed="false" referenceDuplicateDefinition="false" referenceUnresolved="false" referenceDuplicates="false" referenceNotUsed="false" referenceUnresolvedNumericId="false" enumRefDuplicateDefinition="false" enumRefUnresolved="false" enumRefDuplicates="false" enumRefNotUsed="false" enumRefLinkUnresolved="false" enumRefLinkDuplicates="false" simTocUpdateNeeded="false" simTocTitleSpaceNeeded="false" />
+    <HtmlExportSettings updateOnSave="false" parentDir="$ProjectFileDir$" targetDir="$ProjectFileDir$/out" cssDir="$ProjectFileDir$/out/export/css" scriptDir="$ProjectFileDir$/out/export/js" plainHtml="false" imageDir="$ProjectFileDir$/out/img" copyLinkedImages="false" imagePathType="0" targetPathType="2" targetExt="" useTargetExt="false" noCssNoScripts="false" useElementStyleAttribute="false" linkToExportedHtml="true" exportOnSettingsChange="true" regenerateOnProjectOpen="false" linkFormatType="HTTP_ABSOLUTE" />
+  </component>
+  <component name="MarkdownExportedFiles">
+    <htmlFiles>
+      <exportedFile path="$PROJECT_DIR$/flexmark-ext-gfm-users/src/main/javadoc/overview.html" settingsVersion="D96B5AAF-FCB94777" />
+      <exportedFile path="$PROJECT_DIR$/flexmark-ext-toc/src/main/javadoc/overview.html" settingsVersion="D96B5AAF-FCB94777" />
+      <exportedFile path="$PROJECT_DIR$/flexmark-formatter/src/main/javadoc/overview.html" settingsVersion="D96B5AAF-FCB94777" />
+      <exportedFile path="$PROJECT_DIR$/flexmark-ext-attributes/src/main/javadoc/overview.html" settingsVersion="D96B5AAF-FCB94777" />
+      <exportedFile path="$PROJECT_DIR$/flexmark-html2md-converter/src/main/javadoc/overview.html" settingsVersion="D96B5AAF-FCB94777" />
+      <exportedFile path="$PROJECT_DIR$/flexmark-ext-autolink/src/main/javadoc/overview.html" settingsVersion="D96B5AAF-FCB94777" />
+      <exportedFile path="$PROJECT_DIR$/flexmark-ext-xwiki-macros/src/main/javadoc/overview.html" settingsVersion="D96B5AAF-FCB94777" />
+      <exportedFile path="$PROJECT_DIR$/flexmark-jira-converter/src/main/javadoc/overview.html" settingsVersion="D96B5AAF-FCB94777" />
+      <exportedFile path="$PROJECT_DIR$/flexmark-youtrack-converter/src/main/javadoc/overview.html" settingsVersion="D96B5AAF-FCB94777" />
+      <exportedFile path="$PROJECT_DIR$/flexmark-pdf-converter/src/main/javadoc/overview.html" settingsVersion="D96B5AAF-FCB94777" />
+      <exportedFile path="$PROJECT_DIR$/flexmark-ext-macros/src/main/javadoc/overview.html" settingsVersion="D96B5AAF-FCB94777" />
+      <exportedFile path="$PROJECT_DIR$/flexmark-ext-youtube-embedded/src/main/javadoc/overview.html" settingsVersion="D96B5AAF-FCB94777" />
+      <exportedFile path="$PROJECT_DIR$/flexmark-ext-wikilink/src/main/javadoc/overview.html" settingsVersion="D96B5AAF-FCB94777" />
+      <exportedFile path="$PROJECT_DIR$/flexmark-ext-escaped-character/src/main/javadoc/overview.html" settingsVersion="D96B5AAF-FCB94777" />
+      <exportedFile path="$PROJECT_DIR$/flexmark-profile-pegdown/src/main/javadoc/overview.html" settingsVersion="D96B5AAF-FCB94777" />
+      <exportedFile path="$PROJECT_DIR$/flexmark-ext-jekyll-tag/src/main/javadoc/overview.html" settingsVersion="D96B5AAF-FCB94777" />
+      <exportedFile path="$PROJECT_DIR$/flexmark-ext-zzzzzz/src/main/javadoc/overview.html" settingsVersion="D96B5AAF-FCB94777" />
+      <exportedFile path="$PROJECT_DIR$/flexmark-ext-definition/src/main/javadoc/overview.html" settingsVersion="D96B5AAF-FCB94777" />
+      <exportedFile path="$PROJECT_DIR$/flexmark-ext-spec-example/src/main/javadoc/overview.html" settingsVersion="D96B5AAF-FCB94777" />
+      <exportedFile path="$PROJECT_DIR$/flexmark-ext-media-tags/src/main/javadoc/overview.html" settingsVersion="D96B5AAF-FCB94777" />
+      <exportedFile path="$PROJECT_DIR$/flexmark-ext-gfm-issues/src/main/javadoc/overview.html" settingsVersion="D96B5AAF-FCB94777" />
+      <exportedFile path="$PROJECT_DIR$/flexmark-ext-emoji/src/main/javadoc/overview.html" settingsVersion="D96B5AAF-FCB94777" />
+      <exportedFile path="$PROJECT_DIR$/flexmark-ext-typographic/src/main/javadoc/overview.html" settingsVersion="D96B5AAF-FCB94777" />
+      <exportedFile path="$PROJECT_DIR$/flexmark-ext-tables/src/main/javadoc/overview.html" settingsVersion="D96B5AAF-FCB94777" />
+      <exportedFile path="$PROJECT_DIR$/flexmark-ext-yaml-front-matter/src/main/javadoc/overview.html" settingsVersion="D96B5AAF-FCB94777" />
+      <exportedFile path="$PROJECT_DIR$/flexmark-ext-gfm-strikethrough/src/main/javadoc/overview.html" settingsVersion="D96B5AAF-FCB94777" />
+      <exportedFile path="$PROJECT_DIR$/flexmark-docx-converter/src/main/javadoc/overview.html" settingsVersion="D96B5AAF-FCB94777" />
+      <exportedFile path="$PROJECT_DIR$/flexmark-ext-abbreviation/src/main/javadoc/overview.html" settingsVersion="D96B5AAF-FCB94777" />
+      <exportedFile path="$PROJECT_DIR$/flexmark-ext-anchorlink/src/main/javadoc/overview.html" settingsVersion="D96B5AAF-FCB94777" />
+      <exportedFile path="$PROJECT_DIR$/flexmark/src/main/javadoc/overview.html" settingsVersion="D96B5AAF-FCB94777" />
+      <exportedFile path="$PROJECT_DIR$/flexmark-ext-aside/src/main/javadoc/overview.html" settingsVersion="D96B5AAF-FCB94777" />
+      <exportedFile path="$PROJECT_DIR$/flexmark-ext-gfm-tables/src/main/javadoc/overview.html" settingsVersion="D96B5AAF-FCB94777" />
+      <exportedFile path="$PROJECT_DIR$/flexmark-ext-gfm-tasklist/src/main/javadoc/overview.html" settingsVersion="D96B5AAF-FCB94777" />
+      <exportedFile path="$PROJECT_DIR$/flexmark-ext-gitlab/src/main/javadoc/overview.html" settingsVersion="D96B5AAF-FCB94777" />
+      <exportedFile path="$PROJECT_DIR$/flexmark-html-parser/src/main/javadoc/overview.html" settingsVersion="D96B5AAF-FCB94777" />
+      <exportedFile path="$PROJECT_DIR$/flexmark-ext-ins/src/main/javadoc/overview.html" settingsVersion="D96B5AAF-FCB94777" />
+      <exportedFile path="$PROJECT_DIR$/flexmark-ext-superscript/src/main/javadoc/overview.html" settingsVersion="D96B5AAF-FCB94777" />
+      <exportedFile path="$PROJECT_DIR$/flexmark-ext-admonition/src/main/javadoc/overview.html" settingsVersion="D96B5AAF-FCB94777" />
+      <exportedFile path="$PROJECT_DIR$/flexmark-util/src/main/javadoc/overview.html" settingsVersion="D96B5AAF-FCB94777" />
+      <exportedFile path="$PROJECT_DIR$/flexmark-ext-enumerated-reference/src/main/javadoc/overview.html" settingsVersion="D96B5AAF-FCB94777" />
+      <exportedFile path="$PROJECT_DIR$/flexmark-all/src/main/javadoc/overview.html" settingsVersion="D96B5AAF-FCB94777" />
+      <exportedFile path="$PROJECT_DIR$/flexmark-ext-footnotes/src/main/javadoc/overview.html" settingsVersion="D96B5AAF-FCB94777" />
+      <exportedFile path="$PROJECT_DIR$/flexmark-ext-jekyll-front-matter/src/main/javadoc/overview.html" settingsVersion="D96B5AAF-FCB94777" />
+    </htmlFiles>
+    <imageFiles>
+      <exportedFile path="$PROJECT_DIR$/flexmark-ext-enumerated-reference/src/main/javadoc/information_source.png" settingsVersion="D96B5AAF-FCB94777" />
+      <exportedFile path="$PROJECT_DIR$/flexmark-ext-xwiki-macros/src/main/javadoc/information_source.png" settingsVersion="D96B5AAF-FCB94777" />
+      <exportedFile path="$PROJECT_DIR$/flexmark-ext-tables/src/main/javadoc/warning.png" settingsVersion="D96B5AAF-FCB94777" />
+    </imageFiles>
+    <otherFiles>
+      <exportedFile path="$PROJECT_DIR$/flexmark-ext-enumerated-reference/src/main/javadoc/information_source.png" settingsVersion="D96B5AAF-FCB94777" />
+      <exportedFile path="$PROJECT_DIR$/flexmark-ext-xwiki-macros/src/main/javadoc/information_source.png" settingsVersion="D96B5AAF-FCB94777" />
+      <exportedFile path="$PROJECT_DIR$/flexmark-ext-tables/src/main/javadoc/warning.png" settingsVersion="D96B5AAF-FCB94777" />
+    </otherFiles>
+  </component>
+  <component name="MarkdownNavigatorHistory">
+    <PasteImageHistory filename="Issue315_AsideExtension.png" directory="$PROJECT_DIR$/FlexmarkJavaAssets/doc/images" onPasteImageTargetRef="2" onPasteLinkText="0" onPasteImageElement="1" onPasteLinkElement="2" onPasteReferenceElement="2" cornerRadius="17" borderColor="-16777216" transparentColor="-1" borderWidth="1" trimTop="0" trimBottom="0" trimLeft="0" trimRight="0" transparent="false" roundCorners="false" showPreview="true" bordered="false" scaled="true" cropped="false" hideInapplicableOperations="true" preserveLinkFormat="false" scale="30" scalingInterpolation="1" transparentTolerance="0" saveAsDefaultOnOK="true" linkFormat="0" addHighlights="false" showHighlightCoordinates="false" showHighlights="false" mouseSelectionAddsHighlight="true" outerFilled="true" outerFillColor="-16777216" outerFillTransparent="true" outerFillAlpha="30">
+      <highlightList>
+        <ImageHighlight top="81" left="26" right="258" bottom="109" roundCorners="true" cornerRadius="10" bordered="true" borderColor="-3341249" borderWidth="2" innerFilled="false" innerFillColor="-256" innerFillTransparent="true" innerFillAlpha="30" shape="1" />
+        <ImageHighlight top="183" left="258" right="714" bottom="232" roundCorners="true" cornerRadius="10" bordered="true" borderColor="-3341249" borderWidth="2" innerFilled="false" innerFillColor="-256" innerFillTransparent="true" innerFillAlpha="30" shape="1" />
+      </highlightList>
+      <directories>
+        <option name="$PROJECT_DIR$/FlexmarkJavaAssets/doc/comms/youtrack/images" />
+        <option name="$PROJECT_DIR$/FlexmarkJavaAssets/doc/comms/issues/images" />
+        <option name="$PROJECT_DIR$/flexmark-docx-converter/src/main/resources/emoji" />
+        <option name="$PROJECT_DIR$/flexmark-ext-tables/src/main/javadoc" />
+        <option name="$PROJECT_DIR$/flexmark-ext-admonition/src/main/resources/images" />
+        <option name="$PROJECT_DIR$/flexmark-docx-converter/src/test/resources/05-SW-Software-Development/media" />
+        <option name="$PROJECT_DIR$/FlexmarkJavaAssets/doc/comms/issues" />
+        <option name="$PROJECT_DIR$/assets/images" />
+        <option name="$PROJECT_DIR$/flexmark-ext-xwiki-macros/src/main/javadoc" />
+        <option name="$PROJECT_DIR$/flexmark-java.wiki/resources" />
+        <option name="$PROJECT_DIR$/flexmark-ext-admonition/src/main/javadoc" />
+        <option name="$PROJECT_DIR$/flexmark-ext-enumerated-reference/src/main/javadoc" />
+        <option name="$PROJECT_DIR$/FlexmarkJavaAssets/doc/images" />
+      </directories>
+      <filenames />
+    </PasteImageHistory>
+    <CopyImageHistory filename="" directory="$PROJECT_DIR$/assets/images" onPasteImageTargetRef="0" onPasteLinkText="0" onPasteImageElement="1" onPasteLinkElement="2" onPasteReferenceElement="2" cornerRadius="20" borderColor="-16777216" transparentColor="-1" borderWidth="1" trimTop="0" trimBottom="0" trimLeft="0" trimRight="0" transparent="false" roundCorners="false" showPreview="true" bordered="false" scaled="false" cropped="false" hideInapplicableOperations="false" preserveLinkFormat="false" scale="50" scalingInterpolation="1" transparentTolerance="0" saveAsDefaultOnOK="false" linkFormat="2" addHighlights="false" showHighlightCoordinates="true" showHighlights="false" mouseSelectionAddsHighlight="false" outerFilled="false" outerFillColor="-16777216" outerFillTransparent="true" outerFillAlpha="30">
+      <highlightList />
+      <directories>
+        <option name="$PROJECT_DIR$/assets/images" />
+      </directories>
+      <filenames />
+    </CopyImageHistory>
+    <PasteLinkHistory onPasteImageTargetRef="2" onPasteTargetRef="2" onPasteLinkText="0" onPasteImageElement="1" onPasteLinkElement="1" onPasteWikiElement="1" onPasteReferenceElement="1" hideInapplicableOperations="false" preserveLinkFormat="false" useHeadingForLinkText="false" saveAsDefaultOnOK="false" linkFormat="2" />
+    <TableToJsonHistory>
+      <entries />
+    </TableToJsonHistory>
+  </component>
+</project>

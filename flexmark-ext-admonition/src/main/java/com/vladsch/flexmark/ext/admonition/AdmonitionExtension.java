@@ -194,7 +194,7 @@ public class AdmonitionExtension implements Parser.ParserExtension, HtmlRenderer
     private AdmonitionExtension() {
     }
 
-    public static Extension create() {
+    public static AdmonitionExtension create() {
         return new AdmonitionExtension();
     }
 

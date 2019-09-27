@@ -83,7 +83,7 @@ public class TocSubContextSample {
             rendererBuilder.nodeRendererFactory(new CustomNodeRenderer.Factory());
         }
 
-        static Extension create() {
+        static CustomExtension create() {
             return new CustomExtension();
         }
     }
