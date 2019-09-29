@@ -23,12 +23,23 @@ public abstract class NodeAdaptingVisitHandler<N extends Node, A extends NodeAda
         return myAdapter;
     }
 
-    // implement whatever function interface is desired for the adapter
-    //@Override
-    //public void render(Node node, NodeRendererContext context, HtmlWriter html) {
-    //    //noinspection unchecked
-    //    myAdapter.render((N)node, context, html);
-    //}
+//    // implement whatever function interface is desired for the adapter
+//    @Override
+//    public void render(Node node, NodeRendererContext context, HtmlWriter html) {
+//        //noinspection unchecked
+//        myAdapter.render((N) node, context, html);
+//    }
+//
+//    @Override
+//    public void render(Node node, NodeFormatterContext context, MarkdownWriter markdown) {
+//        //noinspection unchecked
+//        myAdapter.render((N) node, context, markdown);
+//    }
+//    @Override
+//    public void render(Node node, DocxRendererContext context) {
+//        //noinspection unchecked
+//        myAdapter.render((N) node, context);
+//    }
 
     @Override
     public boolean equals(Object o) {
