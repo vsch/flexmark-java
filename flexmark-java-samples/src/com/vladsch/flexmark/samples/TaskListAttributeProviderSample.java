@@ -50,7 +50,6 @@ public class TaskListAttributeProviderSample {
             return new IndependentAttributeProviderFactory() {
                 @Override
                 public AttributeProvider apply(LinkResolverContext context) {
-                    //noinspection ReturnOfInnerClass
                     return new TaskListAttributeProvider();
                 }
             };

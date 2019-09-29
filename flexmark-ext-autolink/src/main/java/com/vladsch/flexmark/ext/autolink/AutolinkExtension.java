@@ -3,7 +3,6 @@ package com.vladsch.flexmark.ext.autolink;
 import com.vladsch.flexmark.ast.Link;
 import com.vladsch.flexmark.ext.autolink.internal.AutolinkNodePostProcessor;
 import com.vladsch.flexmark.parser.Parser;
-import com.vladsch.flexmark.util.builder.Extension;
 import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 

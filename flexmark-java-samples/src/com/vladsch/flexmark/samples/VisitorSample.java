@@ -7,19 +7,14 @@ import com.vladsch.flexmark.util.ast.NodeVisitor;
 import com.vladsch.flexmark.util.ast.VisitHandler;
 import com.vladsch.flexmark.util.ast.Visitor;
 
-@SuppressWarnings({ "unchecked", "WeakerAccess" })
+@SuppressWarnings({ "WeakerAccess" })
 public class VisitorSample {
     int wordCount;
 
     // example of visitor for a node or nodes, just add VisitHandlers<> to the list
     // any node type not handled by the visitor will default to visiting its children
     NodeVisitor visitor = new NodeVisitor(
-            new VisitHandler<Text>(Text.class, new Visitor<Text>() {
-                @Override
-                public void visit(Text text) {
-                    VisitorSample.this.visit(text);
-                }
-            })
+            new VisitHandler<Text>(Text.class, this::visit)
     );
 
     public void visit(Text text) {

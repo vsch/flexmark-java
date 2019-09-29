@@ -22,7 +22,6 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.RepeatedCharSequence;
 
 import java.util.*;
-import java.util.function.Consumer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -69,7 +68,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
     @Override
     public Set<Class<?>> getNodeClasses() {
         if (formatterOptions.referencePlacement != ElementPlacement.AS_IS && formatterOptions.referenceSort != ElementPlacementSort.SORT_UNUSED_LAST) return null;
-        //noinspection unchecked,ArraysAsListWithZeroOrOneArgument
+        // noinspection ArraysAsListWithZeroOrOneArgument
         return new HashSet<Class<?>>(Arrays.asList(
                 RefNode.class
         ));
@@ -120,7 +119,8 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
                     markdown.append("#");
                     CharSequence anchorRef = context.transformAnchorRef(resolvedLink.getPageRef(), resolvedLink.getAnchorRef());
                     if (attributeUniquificationIdMap != null && resolvedLink.getPageRef().isEmpty() && context.isTransformingText() && context.getMergeContext() != null) {
-                        String uniquifiedAnchorRef = attributeUniquificationIdMap.getOrDefault(anchorRef, String.valueOf(anchorRef));
+                        String stringAnchorRef = String.valueOf(anchorRef);
+                        String uniquifiedAnchorRef = attributeUniquificationIdMap.getOrDefault(stringAnchorRef, stringAnchorRef);
                         markdown.append(uniquifiedAnchorRef);
                     } else {
                         markdown.append(anchorRef);
@@ -167,12 +167,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
                     }
                 }
 
-                Collections.sort(keys, new Comparator<DataKey<?>>() {
-                    @Override
-                    public int compare(DataKey<?> o1, DataKey<?> o2) {
-                        return o1.getName().compareTo(o2.getName());
-                    }
-                });
+                Collections.sort(keys, (o1, o2) -> o1.getName().compareTo(o2.getName()));
 
                 boolean firstAppend = true;
 
@@ -308,12 +303,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
 
             if (spaceAfterAtx) markdown.append(' ');
 
-            context.translatingRefTargetSpan(node, new TranslatingSpanRender() {
-                @Override
-                public void render(NodeFormatterContext context, MarkdownWriter writer) {
-                    context.renderChildren(node);
-                }
-            });
+            context.translatingRefTargetSpan(node, (context12, writer) -> context12.renderChildren(node));
 
             switch (formatterOptions.atxHeaderTrailingMarker) {
                 case EQUALIZE:
@@ -343,12 +333,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
             }
         } else {
             int lastOffset = markdown.offsetWithPending() + 1;
-            context.translatingRefTargetSpan(node, new TranslatingSpanRender() {
-                @Override
-                public void render(NodeFormatterContext context, MarkdownWriter writer) {
-                    context.renderChildren(node);
-                }
-            });
+            context.translatingRefTargetSpan(node, (context1, writer) -> context1.renderChildren(node));
 
             // add uniquification id attribute if needed
             HtmlIdGenerator generator = context.getIdGenerator();
@@ -718,12 +703,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
 
     @SuppressWarnings("WeakerAccess")
     public static void renderTextBlockParagraphLines(Node node, NodeFormatterContext context, MarkdownWriter markdown) {
-        context.translatingSpan(new TranslatingSpanRender() {
-            @Override
-            public void render(NodeFormatterContext context, MarkdownWriter writer) {
-                context.renderChildren(node);
-            }
-        });
+        context.translatingSpan((context1, writer) -> context1.renderChildren(node));
         markdown.line();
     }
 
@@ -820,23 +800,13 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
         }
     }
 
-    static final TranslationPlaceholderGenerator htmlEntityPlaceholderGenerator = new TranslationPlaceholderGenerator() {
-        @Override
-        public String getPlaceholder(int index) {
-            return String.format(Locale.US, "&#%d;", index);
-        }
-    };
+    static final TranslationPlaceholderGenerator htmlEntityPlaceholderGenerator = index -> String.format(Locale.US, "&#%d;", index);
 
     private void render(HtmlEntity node, NodeFormatterContext context, MarkdownWriter markdown) {
         if (context.getRenderPurpose() == FORMAT) {
             markdown.append(node.getChars());
         } else {
-            context.customPlaceholderFormat(htmlEntityPlaceholderGenerator, new TranslatingSpanRender() {
-                @Override
-                public void render(NodeFormatterContext context, MarkdownWriter markdown) {
-                    markdown.appendNonTranslating(node.getChars());
-                }
-            });
+            context.customPlaceholderFormat(htmlEntityPlaceholderGenerator, (context1, markdown1) -> markdown1.appendNonTranslating(node.getChars()));
         }
     }
 

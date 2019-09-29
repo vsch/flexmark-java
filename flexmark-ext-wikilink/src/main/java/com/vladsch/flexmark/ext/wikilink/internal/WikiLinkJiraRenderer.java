@@ -2,7 +2,6 @@ package com.vladsch.flexmark.ext.wikilink.internal;
 
 import com.vladsch.flexmark.ext.wikilink.WikiLink;
 import com.vladsch.flexmark.ext.wikilink.WikiLinkExtension;
-import com.vladsch.flexmark.html.CustomNodeRenderer;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.*;
 import com.vladsch.flexmark.util.data.DataHolder;
@@ -20,12 +19,7 @@ public class WikiLinkJiraRenderer implements NodeRenderer {
     @Override
     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
         HashSet<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
-        set.add(new NodeRenderingHandler<WikiLink>(WikiLink.class, new CustomNodeRenderer<WikiLink>() {
-            @Override
-            public void render(WikiLink node, NodeRendererContext context, HtmlWriter html) {
-                WikiLinkJiraRenderer.this.render(node, context, html);
-            }
-        }));
+        set.add(new NodeRenderingHandler<WikiLink>(WikiLink.class, this::render));
         return set;
     }
 

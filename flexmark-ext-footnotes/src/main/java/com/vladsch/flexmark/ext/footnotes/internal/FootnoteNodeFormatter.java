@@ -50,25 +50,15 @@ public class FootnoteNodeFormatter extends NodeRepositoryFormatter<FootnoteRepos
     @Override
     public Set<NodeFormattingHandler<?>> getNodeFormattingHandlers() {
         return new HashSet<NodeFormattingHandler<?>>(Arrays.asList(
-                new NodeFormattingHandler<Footnote>(Footnote.class, new CustomNodeFormatter<Footnote>() {
-                    @Override
-                    public void render(Footnote node, NodeFormatterContext context, MarkdownWriter markdown) {
-                        FootnoteNodeFormatter.this.render(node, context, markdown);
-                    }
-                }),
-                new NodeFormattingHandler<FootnoteBlock>(FootnoteBlock.class, new CustomNodeFormatter<FootnoteBlock>() {
-                    @Override
-                    public void render(FootnoteBlock node, NodeFormatterContext context, MarkdownWriter markdown) {
-                        FootnoteNodeFormatter.this.render(node, context, markdown);
-                    }
-                })
+                new NodeFormattingHandler<Footnote>(Footnote.class, FootnoteNodeFormatter.this::render),
+                new NodeFormattingHandler<FootnoteBlock>(FootnoteBlock.class, FootnoteNodeFormatter.this::render)
         ));
     }
 
     @Override
     public Set<Class<?>> getNodeClasses() {
         if (options.footnotePlacement != ElementPlacement.AS_IS && options.footnoteSort != ElementPlacementSort.SORT_UNUSED_LAST) return null;
-        //noinspection unchecked,ArraysAsListWithZeroOrOneArgument
+        // noinspection ArraysAsListWithZeroOrOneArgument
         return new HashSet<Class<?>>(Arrays.asList(
                 Footnote.class
         ));
@@ -82,12 +72,7 @@ public class FootnoteNodeFormatter extends NodeRepositoryFormatter<FootnoteRepos
         markdown.append("[^");
         if (context.isTransformingText()) {
             String referenceId = transformReferenceId(node.getText().toString(), context);
-            context.nonTranslatingSpan(new TranslatingSpanRender() {
-                @Override
-                public void render(NodeFormatterContext context, MarkdownWriter markdown) {
-                    markdown.append(referenceId);
-                }
-            });
+            context.nonTranslatingSpan((context1, markdown1) -> markdown1.append(referenceId));
         } else {
             markdown.append(node.getText());
         }

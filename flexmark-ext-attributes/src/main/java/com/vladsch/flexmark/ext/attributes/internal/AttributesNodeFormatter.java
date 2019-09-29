@@ -272,18 +272,8 @@ public class AttributesNodeFormatter implements PhasedNodeFormatter, ExplicitAtt
     @Override
     public Set<NodeFormattingHandler<?>> getNodeFormattingHandlers() {
         HashSet<NodeFormattingHandler<?>> set = new HashSet<NodeFormattingHandler<?>>();
-        set.add(new NodeFormattingHandler<AttributesNode>(AttributesNode.class, new CustomNodeFormatter<AttributesNode>() {
-            @Override
-            public void render(AttributesNode node, NodeFormatterContext context, MarkdownWriter markdown) {
-                AttributesNodeFormatter.this.render(node, context, markdown);
-            }
-        }));
-        set.add(new NodeFormattingHandler<AttributesDelimiter>(AttributesDelimiter.class, new CustomNodeFormatter<AttributesDelimiter>() {
-            @Override
-            public void render(AttributesDelimiter node, NodeFormatterContext context, MarkdownWriter markdown) {
-                AttributesNodeFormatter.this.render(node, context, markdown);
-            }
-        }));
+        set.add(new NodeFormattingHandler<AttributesNode>(AttributesNode.class, AttributesNodeFormatter.this::render));
+        set.add(new NodeFormattingHandler<AttributesDelimiter>(AttributesDelimiter.class, AttributesNodeFormatter.this::render));
         return set;
     }
 

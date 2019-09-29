@@ -6,7 +6,6 @@ import com.vladsch.flexmark.formatter.TranslationHandler;
 import com.vladsch.flexmark.html.renderer.HeaderIdGenerator;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.spec.SpecExample;
-import com.vladsch.flexmark.spec.SpecReader;
 import com.vladsch.flexmark.test.ComboSpecTestCase;
 import com.vladsch.flexmark.util.ast.IRender;
 import com.vladsch.flexmark.util.ast.Node;
@@ -183,16 +182,7 @@ public class ComboAbbreviationTranslationFormatterSpecTest extends ComboSpecTest
 
     @Parameterized.Parameters(name = "{0}")
     public static List<Object[]> data() {
-        List<SpecExample> examples = SpecReader.readExamples(SPEC_RESOURCE);
-        List<Object[]> data = new ArrayList<Object[]>();
-
-        // NULL example runs full spec test
-        data.add(new Object[] { SpecExample.getNull() });
-
-        for (SpecExample example : examples) {
-            data.add(new Object[] { example });
-        }
-        return data;
+        return getTestData(SPEC_RESOURCE);
     }
 
     @Override

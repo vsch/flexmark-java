@@ -77,7 +77,7 @@ public abstract class RenderingTestCase implements ActualExampleModifier {
             String option = optionName.trim();
             if (option.isEmpty() || option.startsWith("-")) continue;
 
-            if (option.equals(IGNORE_OPTION_NAME)) {//noinspection ConstantConditions
+            if (option.equals(IGNORE_OPTION_NAME)) {
                 throwIgnoredOption(example, optionSets, option);
             } else if (option.equals(FAIL_OPTION_NAME)) {
                 options = addOption(options, FAIL, true);
@@ -111,7 +111,6 @@ public abstract class RenderingTestCase implements ActualExampleModifier {
                 }
 
                 if (IGNORE.getFrom(options)) {
-                    //noinspection ConstantConditions
                     throwIgnoredOption(example, optionSets, option);
                 }
             }
@@ -262,7 +261,7 @@ public abstract class RenderingTestCase implements ActualExampleModifier {
         boolean embedTimed = EMBED_TIMED.getFrom(node.getDocument());
 
         if (timed || embedTimed) {
-            System.out.print(String.format(TIMED_FORMAT_STRING, "", (parse - start) / 1000000.0 / iterations, (render - parse) / 1000000.0 / iterations, (render - start) / 1000000.0 / iterations));
+            System.out.print(getTimingString(iterations, start, parse, render));
         }
 
         testCase(node, options);
@@ -275,7 +274,7 @@ public abstract class RenderingTestCase implements ActualExampleModifier {
         if (example() != null && example().getSection() != null) {
             StringBuilder outExpected = new StringBuilder();
             if (embedTimed) {
-                outExpected.append(String.format(TIMED_FORMAT_STRING, "", (parse - start) / 1000000.0 / iterations, (render - parse) / 1000000.0 / iterations, (render - start) / 1000000.0 / iterations));
+                outExpected.append(getTimingString(iterations, start, parse, render));
             }
 
             DumpSpecReader.addSpecExample(outExpected, source, expectedHtml, "", optionsSet, true, example().getSection(), example().getExampleNumber());
@@ -287,7 +286,7 @@ public abstract class RenderingTestCase implements ActualExampleModifier {
         } else {
             if (embedTimed) {
                 StringBuilder outExpected = new StringBuilder();
-                outExpected.append(String.format(TIMED_FORMAT_STRING, "", (parse - start) / 1000000.0 / iterations, (render - parse) / 1000000.0 / iterations, (render - start) / 1000000.0 / iterations));
+                outExpected.append(getTimingString(iterations, start, parse, render));
                 outExpected.append(DumpSpecReader.addSpecExample(source, expectedHtml, "", optionsSet));
                 expected = outExpected.toString();
             } else {
@@ -306,6 +305,10 @@ public abstract class RenderingTestCase implements ActualExampleModifier {
         } else {
             assertEquals(expected, actual);
         }
+    }
+
+    private static String getTimingString(int iterations, long start, long parse, long render) {
+        return String.format(TIMED_FORMAT_STRING, "", (parse - start) / 1000000.0 / iterations, (render - parse) / 1000000.0 / iterations, (render - start) / 1000000.0 / iterations);
     }
 
     //protected void assertRenderingAst(String source, String expectedHtml, String expectedAst) {
@@ -372,7 +375,7 @@ public abstract class RenderingTestCase implements ActualExampleModifier {
         boolean embedTimed = EMBED_TIMED.getFrom(node.getDocument());
 
         if (timed || embedTimed) {
-            System.out.print(String.format(TIMED_FORMAT_STRING, "", (parse - start) / 1000000.0 / iterations, (render - parse) / 1000000.0 / iterations, (render - start) / 1000000.0 / iterations));
+            System.out.print(getTimingString(iterations, start, parse, render));
         }
 
         testCase(node, options);
@@ -399,7 +402,7 @@ public abstract class RenderingTestCase implements ActualExampleModifier {
         } else {
             if (embedTimed) {
                 StringBuilder outExpected = new StringBuilder();
-                outExpected.append(String.format(TIMED_FORMAT_STRING, (parse - start) / 1000000.0 / iterations, (render - parse) / 1000000.0 / iterations, (render - start) / 1000000.0 / iterations));
+                outExpected.append(getTimingString(iterations, start, parse, render));
                 outExpected.append(DumpSpecReader.addSpecExample(source, expectedHtml, "", optionsSet));
                 expected = outExpected.toString();
             } else {

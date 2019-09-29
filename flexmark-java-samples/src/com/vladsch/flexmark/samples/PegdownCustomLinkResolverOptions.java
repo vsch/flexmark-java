@@ -3,7 +3,9 @@ package com.vladsch.flexmark.samples;
 import com.vladsch.flexmark.ast.Link;
 import com.vladsch.flexmark.ext.wikilink.WikiImage;
 import com.vladsch.flexmark.ext.wikilink.WikiLink;
-import com.vladsch.flexmark.html.*;
+import com.vladsch.flexmark.html.HtmlRenderer;
+import com.vladsch.flexmark.html.LinkResolver;
+import com.vladsch.flexmark.html.LinkResolverFactory;
 import com.vladsch.flexmark.html.renderer.*;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.profiles.pegdown.Extensions;
@@ -115,16 +117,13 @@ public class PegdownCustomLinkResolverOptions {
         @Override
         public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
             HashSet<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
-            set.add(new NodeRenderingHandler<Link>(Link.class, new CustomNodeRenderer<Link>() {
-                @Override
-                public void render(Link node, NodeRendererContext context, HtmlWriter html) {
-                    // test the node to see if it needs overriding
-                    if (node.getText().equals("bar")) {
-                        html.text("(eliminated)");
-                    } else {
-                        // otherwise pass it for default rendering
-                        context.delegateRender();
-                    }
+            set.add(new NodeRenderingHandler<Link>(Link.class, (node, context, html) -> {
+                // test the node to see if it needs overriding
+                if (node.getText().equals("bar")) {
+                    html.text("(eliminated)");
+                } else {
+                    // otherwise pass it for default rendering
+                    context.delegateRender();
                 }
             }));
             //set.add(new NodeRenderingHandler<WikiLink>(WikiLink.class, new CustomNodeRenderer<WikiLink>() {

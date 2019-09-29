@@ -73,7 +73,6 @@ public class AttributeProviderSample {
             return new IndependentAttributeProviderFactory() {
                 @Override
                 public AttributeProvider apply(LinkResolverContext context) {
-                    //noinspection ReturnOfInnerClass
                     return new SampleAttributeProvider();
                 }
             };

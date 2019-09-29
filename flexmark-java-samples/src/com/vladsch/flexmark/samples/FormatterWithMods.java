@@ -31,24 +31,9 @@ public class FormatterWithMods {
 
     static class LinkNodeVisitor {
         NodeVisitor visitor = new NodeVisitor(
-                new VisitHandler<Link>(Link.class, new Visitor<Link>() {
-                    @Override
-                    public void visit(Link node) {
-                        LinkNodeVisitor.this.visit(node);
-                    }
-                }),
-                new VisitHandler<Reference>(Reference.class, new Visitor<Reference>() {
-                    @Override
-                    public void visit(Reference node) {
-                        LinkNodeVisitor.this.visit(node);
-                    }
-                }),
-                new VisitHandler<Image>(Image.class, new Visitor<Image>() {
-                    @Override
-                    public void visit(Image node) {
-                        LinkNodeVisitor.this.visit(node);
-                    }
-                })
+                new VisitHandler<Link>(Link.class, this::visit),
+                new VisitHandler<Reference>(Reference.class, this::visit),
+                new VisitHandler<Image>(Image.class, this::visit)
         );
 
         public void replaceUrl(Node node) {

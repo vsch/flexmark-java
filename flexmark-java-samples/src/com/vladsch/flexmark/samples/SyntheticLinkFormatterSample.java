@@ -7,7 +7,6 @@ import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.Node;
-import com.vladsch.flexmark.util.builder.Extension;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
@@ -17,6 +16,7 @@ import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
 import com.vladsch.flexmark.util.sequence.ReplacedTextMapper;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.regex.Matcher;
@@ -29,7 +29,7 @@ public class SyntheticLinkFormatterSample {
 
         @Override
         public Set<Class<?>> getNodeClasses() {
-            return new HashSet<Class<?>>(Arrays.asList(
+            return new HashSet<Class<?>>(Collections.singletonList(
                     Text.class
             ));
         }
@@ -57,14 +57,9 @@ public class SyntheticLinkFormatterSample {
 
         @Override
         public Set<NodeFormattingHandler<?>> getNodeFormattingHandlers() {
-            return new HashSet<NodeFormattingHandler<? extends Node>>(Arrays.asList(
+            return new HashSet<NodeFormattingHandler<? extends Node>>(Collections.singletonList(
                     // Generic unknown node formatter
-                    new NodeFormattingHandler<Text>(Text.class, new CustomNodeFormatter<Text>() {
-                        @Override
-                        public void render(Text node, NodeFormatterContext context, MarkdownWriter markdown) {
-                            SyntheticLinkNodeFormatter.this.render(node, context, markdown);
-                        }
-                    })
+                    new NodeFormattingHandler<Text>(Text.class, SyntheticLinkNodeFormatter.this::render)
             ));
         }
 
@@ -134,7 +129,7 @@ public class SyntheticLinkFormatterSample {
         MutableDataSet options = new MutableDataSet();
 
         // set optional extensions
-        options.set(Parser.EXTENSIONS, Arrays.asList(SyntheticLinkExtension.create()));
+        options.set(Parser.EXTENSIONS, Collections.singletonList(SyntheticLinkExtension.create()));
 
         // uncomment to convert soft-breaks to hard breaks
         //options.set(HtmlRenderer.SOFT_BREAK, "<br />\n");

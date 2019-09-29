@@ -16,12 +16,7 @@ public class AdmonitionCollectingVisitor {
 
     public AdmonitionCollectingVisitor() {
         myVisitor = new NodeVisitor(
-                new VisitHandler<AdmonitionBlock>(AdmonitionBlock.class, new Visitor<AdmonitionBlock>() {
-                    @Override
-                    public void visit(AdmonitionBlock node) {
-                        AdmonitionCollectingVisitor.this.visit(node);
-                    }
-                })
+                new VisitHandler<AdmonitionBlock>(AdmonitionBlock.class, this::visit)
         );
     }
 

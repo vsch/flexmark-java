@@ -93,7 +93,7 @@ public class Utils {
     }
 
     public static String wrapWith(String receiver, String prefixSuffix) {
-        return wrapWith(prefixSuffix, prefixSuffix);
+        return wrapWith(receiver, prefixSuffix, prefixSuffix);
     }
 
     public static String wrapWith(String receiver, String prefix, String suffix) {

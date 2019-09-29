@@ -28,30 +28,10 @@ public class ZzzzzzAttributeProvider implements AttributeProvider {
         this.missingTargetClass = options.get(ZzzzzzExtension.MISSING_TARGET_CLASS);
 
         this.nodeAdapter = new AttributeProviderAdapter(
-                new AttributeProvidingHandler<Image>(Image.class, new AttributeProvidingVisitor<Image>() {
-                    @Override
-                    public void setAttributes(Image node, AttributablePart part, Attributes attributes) {
-                        ZzzzzzAttributeProvider.this.setLinkAttributes(node, part, attributes);
-                    }
-                }),
-                new AttributeProvidingHandler<ImageRef>(ImageRef.class, new AttributeProvidingVisitor<ImageRef>() {
-                    @Override
-                    public void setAttributes(ImageRef node, AttributablePart part, Attributes attributes) {
-                        ZzzzzzAttributeProvider.this.setLinkAttributes(node, part, attributes);
-                    }
-                }),
-                new AttributeProvidingHandler<LinkRef>(LinkRef.class, new AttributeProvidingVisitor<LinkRef>() {
-                    @Override
-                    public void setAttributes(LinkRef node, AttributablePart part, Attributes attributes) {
-                        ZzzzzzAttributeProvider.this.setLinkAttributes(node, part, attributes);
-                    }
-                }),
-                new AttributeProvidingHandler<Link>(Link.class, new AttributeProvidingVisitor<Link>() {
-                    @Override
-                    public void setAttributes(Link node, AttributablePart part, Attributes attributes) {
-                        ZzzzzzAttributeProvider.this.setLinkAttributes(node, part, attributes);
-                    }
-                })
+                new AttributeProvidingHandler<Image>(Image.class, ZzzzzzAttributeProvider.this::setLinkAttributes),
+                new AttributeProvidingHandler<ImageRef>(ImageRef.class, ZzzzzzAttributeProvider.this::setLinkAttributes),
+                new AttributeProvidingHandler<LinkRef>(LinkRef.class, ZzzzzzAttributeProvider.this::setLinkAttributes),
+                new AttributeProvidingHandler<Link>(Link.class, ZzzzzzAttributeProvider.this::setLinkAttributes)
         );
     }
 

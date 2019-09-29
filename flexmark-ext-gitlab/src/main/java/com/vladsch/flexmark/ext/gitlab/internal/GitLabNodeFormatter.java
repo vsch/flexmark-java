@@ -5,6 +5,7 @@ import com.vladsch.flexmark.formatter.*;
 import com.vladsch.flexmark.util.data.DataHolder;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -16,19 +17,14 @@ public class GitLabNodeFormatter implements NodeFormatter {
 
     @Override
     public Set<NodeFormattingHandler<?>> getNodeFormattingHandlers() {
-        return new HashSet<NodeFormattingHandler<?>>(Arrays.asList(
-                new NodeFormattingHandler<GitLabBlockQuote>(GitLabBlockQuote.class, new CustomNodeFormatter<GitLabBlockQuote>() {
-                    @Override
-                    public void render(GitLabBlockQuote node, NodeFormatterContext context, MarkdownWriter markdown) {
-                        GitLabNodeFormatter.this.render(node, context, markdown);
-                    }
-                })
+        return new HashSet<NodeFormattingHandler<?>>(Collections.singletonList(
+                new NodeFormattingHandler<GitLabBlockQuote>(GitLabBlockQuote.class, GitLabNodeFormatter.this::render)
         ));
     }
 
     @Override
     public Set<Class<?>> getNodeClasses() {
-        return new HashSet<Class<?>>(Arrays.asList(
+        return new HashSet<Class<?>>(Collections.singletonList(
                 GitLabBlockQuote.class
         ));
     }

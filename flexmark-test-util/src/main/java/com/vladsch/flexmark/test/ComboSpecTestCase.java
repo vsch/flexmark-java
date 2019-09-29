@@ -46,9 +46,26 @@ public abstract class ComboSpecTestCase extends FullSpecTestCase {
         return example;
     }
 
-    @Parameterized.Parameters(name = "{0}")
-    public static List<Object[]> data() {
-        List<SpecExample> examples = SpecReader.readExamples();
+    //@Parameterized.Parameters(name = "{0}")
+    //public static List<Object[]> data() {
+    //    List<SpecExample> examples = SpecReader.readExamples();
+    //    List<Object[]> data = new ArrayList<Object[]>();
+    //
+    //    // NULL example runs full spec test
+    //    data.add(new Object[] { SpecExample.getNull() });
+    //
+    //    for (SpecExample example : examples) {
+    //        data.add(new Object[] { example });
+    //    }
+    //    return data;
+    //}
+
+    public static List<Object[]> getTestData(String specResource) {
+        return getTestData(specResource, null);
+    }
+
+    public static List<Object[]> getTestData(String specResource, String specUrlString) {
+        List<SpecExample> examples = SpecReader.readExamples(specResource, specUrlString);
         List<Object[]> data = new ArrayList<Object[]>();
 
         // NULL example runs full spec test

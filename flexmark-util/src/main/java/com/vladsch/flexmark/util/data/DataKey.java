@@ -55,7 +55,12 @@ public class DataKey<T> {
         if (defaultValue != null) {
             return "DataKey<" + defaultValue.getClass().getName().substring(defaultValue.getClass().getPackage().getName().length() + 1) + "> " + name;
         } else {
-            T defaultValue = factory.apply(null);
+            try {
+                T defaultValue = factory.apply(null);
+            } catch (Throwable e) {
+                return "DataKey(" + super.toString() + " " + name + ") factory " + factory + " generated an exception on apply(null)";
+            }
+
             if (defaultValue != null) {
                 return "DataKey<" + defaultValue.getClass().getName().substring(defaultValue.getClass().getPackage().getName().length() + 1) + "> " + name;
             } else {
@@ -66,6 +71,7 @@ public class DataKey<T> {
 
     /**
      * Compare only by address. Every key instance is unique
+     *
      * @param o other
      * @return true if equal
      */

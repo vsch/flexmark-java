@@ -12,10 +12,7 @@ import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -120,7 +117,7 @@ public class MacroDefinitionBlockParser extends AbstractBlockParser {
 
         @Override
         public Set<Class<? extends CustomBlockParserFactory>> getBeforeDependents() {
-            return new HashSet<Class<? extends CustomBlockParserFactory>>(Arrays.asList(
+            return new HashSet<Class<? extends CustomBlockParserFactory>>(Collections.singletonList(
                     GitLabBlockQuoteParser.Factory.class
             ));
         }

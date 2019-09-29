@@ -4,7 +4,6 @@ import com.vladsch.flexmark.ext.youtube.embedded.internal.YouTubeLinkNodePostPro
 import com.vladsch.flexmark.ext.youtube.embedded.internal.YouTubeLinkNodeRenderer;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
-import com.vladsch.flexmark.util.builder.Extension;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 
 public class YouTubeLinkExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension {

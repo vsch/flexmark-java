@@ -12,7 +12,6 @@ public interface IRender {
      * Render the tree of nodes to HTML.
      *
      * @param node the root node
-     *
      * @return the rendered HTML
      */
     default String render(Node node) {

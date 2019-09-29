@@ -2,7 +2,6 @@ package com.vladsch.flexmark.ext.tables.internal;
 
 import com.vladsch.flexmark.ast.BlockQuote;
 import com.vladsch.flexmark.ext.tables.*;
-import com.vladsch.flexmark.html.CustomNodeRenderer;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.NodeRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
@@ -26,42 +25,12 @@ public class TableJiraRenderer implements NodeRenderer {
     @Override
     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
         return new HashSet<NodeRenderingHandler<? extends Node>>(Arrays.asList(
-                new NodeRenderingHandler<TableBlock>(TableBlock.class, new CustomNodeRenderer<TableBlock>() {
-                    @Override
-                    public void render(TableBlock node, NodeRendererContext context, HtmlWriter html) {
-                        TableJiraRenderer.this.render(node, context, html);
-                    }
-                }),
-                new NodeRenderingHandler<TableHead>(TableHead.class, new CustomNodeRenderer<TableHead>() {
-                    @Override
-                    public void render(TableHead node, NodeRendererContext context, HtmlWriter html) {
-                        TableJiraRenderer.this.render(node, context, html);
-                    }
-                }),
-                new NodeRenderingHandler<TableSeparator>(TableSeparator.class, new CustomNodeRenderer<TableSeparator>() {
-                    @Override
-                    public void render(TableSeparator node, NodeRendererContext context, HtmlWriter html) {
-                        TableJiraRenderer.this.render(node, context, html);
-                    }
-                }),
-                new NodeRenderingHandler<TableBody>(TableBody.class, new CustomNodeRenderer<TableBody>() {
-                    @Override
-                    public void render(TableBody node, NodeRendererContext context, HtmlWriter html) {
-                        TableJiraRenderer.this.render(node, context, html);
-                    }
-                }),
-                new NodeRenderingHandler<TableRow>(TableRow.class, new CustomNodeRenderer<TableRow>() {
-                    @Override
-                    public void render(TableRow node, NodeRendererContext context, HtmlWriter html) {
-                        TableJiraRenderer.this.render(node, context, html);
-                    }
-                }),
-                new NodeRenderingHandler<TableCell>(TableCell.class, new CustomNodeRenderer<TableCell>() {
-                    @Override
-                    public void render(TableCell node, NodeRendererContext context, HtmlWriter html) {
-                        TableJiraRenderer.this.render(node, context, html);
-                    }
-                })
+                new NodeRenderingHandler<TableBlock>(TableBlock.class, this::render),
+                new NodeRenderingHandler<TableHead>(TableHead.class, this::render),
+                new NodeRenderingHandler<TableSeparator>(TableSeparator.class, this::render),
+                new NodeRenderingHandler<TableBody>(TableBody.class, this::render),
+                new NodeRenderingHandler<TableRow>(TableRow.class, this::render),
+                new NodeRenderingHandler<TableCell>(TableCell.class, this::render)
         ));
     }
 

@@ -14,13 +14,13 @@ import com.vladsch.flexmark.parser.core.delimiter.Delimiter;
 import com.vladsch.flexmark.parser.delimiter.DelimiterProcessor;
 import com.vladsch.flexmark.parser.delimiter.DelimiterRun;
 import com.vladsch.flexmark.util.ast.Node;
-import com.vladsch.flexmark.util.builder.Extension;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -32,7 +32,7 @@ public class UnderlineExtensionSample {
 
     static final MutableDataSet OPTIONS = new MutableDataSet();
     static {
-        OPTIONS.set(Parser.EXTENSIONS, Arrays.asList(UnderlineExtension.create()));
+        OPTIONS.set(Parser.EXTENSIONS, Collections.singletonList(UnderlineExtension.create()));
     }
 
     static final Parser PARSER = Parser.builder(OPTIONS).build();
@@ -159,17 +159,14 @@ public class UnderlineExtensionSample {
         @Override
         public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
             Set<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
-            set.add(new NodeRenderingHandler<>(Underline.class, new CustomNodeRenderer<Underline>() {
-                @Override
-                public void render(Underline node, NodeRendererContext context, HtmlWriter html) {
-                    if (context.getHtmlOptions().sourcePositionParagraphLines) {
-                        html.withAttr().tag("ins");
-                    } else {
-                        html.srcPos(node.getText()).withAttr().tag("ins");
-                    }
-                    context.renderChildren(node);
-                    html.tag("/ins");
+            set.add(new NodeRenderingHandler<>(Underline.class, (node, context, html) -> {
+                if (context.getHtmlOptions().sourcePositionParagraphLines) {
+                    html.withAttr().tag("ins");
+                } else {
+                    html.srcPos(node.getText()).withAttr().tag("ins");
                 }
+                context.renderChildren(node);
+                html.tag("/ins");
             }));
 
             return set;

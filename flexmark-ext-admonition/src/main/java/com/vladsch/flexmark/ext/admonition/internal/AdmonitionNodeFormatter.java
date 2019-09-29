@@ -7,6 +7,7 @@ import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.sequence.RepeatedCharSequence;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -24,13 +25,8 @@ public class AdmonitionNodeFormatter implements NodeFormatter {
 
     @Override
     public Set<NodeFormattingHandler<?>> getNodeFormattingHandlers() {
-        return new HashSet<NodeFormattingHandler<? extends Node>>(Arrays.asList(
-                new NodeFormattingHandler<AdmonitionBlock>(AdmonitionBlock.class, new CustomNodeFormatter<AdmonitionBlock>() {
-                    @Override
-                    public void render(AdmonitionBlock node, NodeFormatterContext context, MarkdownWriter markdown) {
-                        AdmonitionNodeFormatter.this.render(node, context, markdown);
-                    }
-                })
+        return new HashSet<NodeFormattingHandler<? extends Node>>(Collections.singletonList(
+                new NodeFormattingHandler<AdmonitionBlock>(AdmonitionBlock.class, AdmonitionNodeFormatter.this::render)
         ));
     }
 

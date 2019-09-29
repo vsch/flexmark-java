@@ -24,7 +24,6 @@ import com.vladsch.flexmark.util.html.Attributes;
 import com.vladsch.flexmark.util.html.LineFormattingAppendable;
 import com.vladsch.flexmark.util.mappers.CharWidthProvider;
 
-import javax.print.Doc;
 import java.util.*;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -433,7 +432,7 @@ public class Formatter implements IRender {
 
         @Override
         protected void removeApiPoint(Object apiPoint) {
-            if (apiPoint instanceof AttributeProviderFactory) this.attributeProviderFactories.remove(apiPoint.getClass());
+            if (apiPoint instanceof AttributeProviderFactory) this.attributeProviderFactories.remove(apiPoint);
             else if (apiPoint instanceof NodeFormatterFactory) this.nodeFormatterFactories.remove(apiPoint);
             else if (apiPoint instanceof LinkResolverFactory) this.linkResolverFactories.remove(apiPoint);
             else if (apiPoint instanceof HeaderIdGeneratorFactory) this.htmlIdGeneratorFactory = null;
@@ -777,7 +776,6 @@ public class Formatter implements IRender {
 
         @Override
         public final Iterable<? extends Node> nodesOfType(Collection<Class<?>> classes) {
-            //noinspection unchecked
             return collectedNodes == null ? NULL_ITERABLE : collectedNodes.itemsOfType(Node.class, classes);
         }
 
@@ -788,7 +786,6 @@ public class Formatter implements IRender {
 
         @Override
         public final Iterable<? extends Node> reversedNodesOfType(Collection<Class<?>> classes) {
-            //noinspection unchecked
             return collectedNodes == null ? NULL_ITERABLE : collectedNodes.reversedItemsOfType(Node.class, classes);
         }
 
@@ -893,7 +890,6 @@ public class Formatter implements IRender {
 
             @Override
             public final Iterable<? extends Node> reversedNodesOfType(Collection<Class<?>> classes) {
-                //noinspection unchecked
                 return myMainNodeRenderer.reversedNodesOfType(classes);
             }
 

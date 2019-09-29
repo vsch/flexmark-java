@@ -29,12 +29,7 @@ public class FootnoteRepository extends NodeRepository<FootnoteBlock> {
 
     public void resolveFootnoteOrdinals() {
         // need to sort by first referenced offset then set each to its ordinal position in the array+1
-        Collections.sort(referencedFootnoteBlocks, new Comparator<FootnoteBlock>() {
-            @Override
-            public int compare(FootnoteBlock f1, FootnoteBlock f2) {
-                return f1.getFirstReferenceOffset() - f2.getFirstReferenceOffset();
-            }
-        });
+        Collections.sort(referencedFootnoteBlocks, (f1, f2) -> f1.getFirstReferenceOffset() - f2.getFirstReferenceOffset());
 
         int ordinal = 0;
         for (FootnoteBlock footnoteBlock : referencedFootnoteBlocks) {

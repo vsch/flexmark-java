@@ -3,7 +3,6 @@ package com.vladsch.flexmark.samples;
 import com.vladsch.flexmark.ast.InlineLinkNode;
 import com.vladsch.flexmark.ast.Link;
 import com.vladsch.flexmark.ast.Text;
-import com.vladsch.flexmark.html.CustomNodeRenderer;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.*;
@@ -13,7 +12,6 @@ import com.vladsch.flexmark.parser.block.NodePostProcessorFactory;
 import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.ast.NodeTracker;
-import com.vladsch.flexmark.util.builder.Extension;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
@@ -97,12 +95,7 @@ public class YouTubeLinkSample {
         @Override
         public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
             HashSet<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
-            set.add(new NodeRenderingHandler<YouTubeLink>(YouTubeLink.class, new CustomNodeRenderer<YouTubeLink>() {
-                @Override
-                public void render(YouTubeLink node, NodeRendererContext context, HtmlWriter html) {
-                    YouTubeLinkNodeRenderer.this.render(node, context, html);
-                }
-            }));
+            set.add(new NodeRenderingHandler<YouTubeLink>(YouTubeLink.class, this::render));
             return set;
         }
 

@@ -1,6 +1,5 @@
 package com.vladsch.flexmark.test;
 
-import junit.framework.TestCase;
 import org.junit.FixMethodOrder;
 import org.junit.Rule;
 import org.junit.Test;

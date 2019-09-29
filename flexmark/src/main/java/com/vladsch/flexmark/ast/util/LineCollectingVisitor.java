@@ -21,42 +21,12 @@ public class LineCollectingVisitor {
 
     public LineCollectingVisitor() {
         myVisitor = new NodeVisitor(
-                new VisitHandler<Text>(Text.class, new Visitor<Text>() {
-                    @Override
-                    public void visit(Text node) {
-                        LineCollectingVisitor.this.visit(node);
-                    }
-                }),
-                new VisitHandler<TextBase>(TextBase.class, new Visitor<TextBase>() {
-                    @Override
-                    public void visit(TextBase node) {
-                        LineCollectingVisitor.this.visit(node);
-                    }
-                }),
-                new VisitHandler<HtmlEntity>(HtmlEntity.class, new Visitor<HtmlEntity>() {
-                    @Override
-                    public void visit(HtmlEntity node) {
-                        LineCollectingVisitor.this.visit(node);
-                    }
-                }),
-                new VisitHandler<HtmlInline>(HtmlInline.class, new Visitor<HtmlInline>() {
-                    @Override
-                    public void visit(HtmlInline node) {
-                        LineCollectingVisitor.this.visit(node);
-                    }
-                }),
-                new VisitHandler<SoftLineBreak>(SoftLineBreak.class, new Visitor<SoftLineBreak>() {
-                    @Override
-                    public void visit(SoftLineBreak node) {
-                        LineCollectingVisitor.this.visit(node);
-                    }
-                }),
-                new VisitHandler<HardLineBreak>(HardLineBreak.class, new Visitor<HardLineBreak>() {
-                    @Override
-                    public void visit(HardLineBreak node) {
-                        LineCollectingVisitor.this.visit(node);
-                    }
-                })
+                new VisitHandler<Text>(Text.class, this::visit),
+                new VisitHandler<TextBase>(TextBase.class, this::visit),
+                new VisitHandler<HtmlEntity>(HtmlEntity.class, this::visit),
+                new VisitHandler<HtmlInline>(HtmlInline.class, this::visit),
+                new VisitHandler<SoftLineBreak>(SoftLineBreak.class, this::visit),
+                new VisitHandler<HardLineBreak>(HardLineBreak.class, this::visit)
         );
 
         myLines = Collections.EMPTY_LIST;

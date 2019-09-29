@@ -3,7 +3,6 @@ package com.vladsch.flexmark.ext.footnotes.internal;
 import com.vladsch.flexmark.ext.footnotes.Footnote;
 import com.vladsch.flexmark.ext.footnotes.FootnoteBlock;
 import com.vladsch.flexmark.ext.footnotes.FootnoteExtension;
-import com.vladsch.flexmark.html.CustomNodeRenderer;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.*;
@@ -31,18 +30,8 @@ public class FootnoteNodeRenderer implements PhasedNodeRenderer {
     @Override
     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
         return new HashSet<NodeRenderingHandler<? extends Node>>(Arrays.asList(
-                new NodeRenderingHandler<Footnote>(Footnote.class, new CustomNodeRenderer<Footnote>() {
-                    @Override
-                    public void render(Footnote node, NodeRendererContext context, HtmlWriter html) {
-                        FootnoteNodeRenderer.this.render(node, context, html);
-                    }
-                }),
-                new NodeRenderingHandler<FootnoteBlock>(FootnoteBlock.class, new CustomNodeRenderer<FootnoteBlock>() {
-                    @Override
-                    public void render(FootnoteBlock node, NodeRendererContext context, HtmlWriter html) {
-                        FootnoteNodeRenderer.this.render(node, context, html);
-                    }
-                })
+                new NodeRenderingHandler<Footnote>(Footnote.class, this::render),
+                new NodeRenderingHandler<FootnoteBlock>(FootnoteBlock.class, this::render)
         ));
     }
 
@@ -61,17 +50,14 @@ public class FootnoteNodeRenderer implements PhasedNodeRenderer {
                 // need to see if have undefined footnotes that were defined after parsing
                 boolean[] hadNewFootnotes = { false };
                 NodeVisitor visitor = new NodeVisitor(
-                        new VisitHandler<Footnote>(Footnote.class, new Visitor<Footnote>() {
-                            @Override
-                            public void visit(Footnote node) {
-                                if (!node.isDefined()) {
-                                    FootnoteBlock footonoteBlock = node.getFootnoteBlock(footnoteRepository);
+                        new VisitHandler<Footnote>(Footnote.class, node -> {
+                            if (!node.isDefined()) {
+                                FootnoteBlock footonoteBlock = node.getFootnoteBlock(footnoteRepository);
 
-                                    if (footonoteBlock != null) {
-                                        footnoteRepository.addFootnoteReference(footonoteBlock, node);
-                                        node.setFootnoteBlock(footonoteBlock);
-                                        hadNewFootnotes[0] = true;
-                                    }
+                                if (footonoteBlock != null) {
+                                    footnoteRepository.addFootnoteReference(footonoteBlock, node);
+                                    node.setFootnoteBlock(footonoteBlock);
+                                    hadNewFootnotes[0] = true;
                                 }
                             }
                         })
@@ -87,35 +73,26 @@ public class FootnoteNodeRenderer implements PhasedNodeRenderer {
         if (phase == RenderingPhase.BODY_BOTTOM) {
             // here we dump the footnote blocks that were referenced in the document body, ie. ones with footnoteOrdinal > 0
             if (footnoteRepository.getReferencedFootnoteBlocks().size() > 0) {
-                html.attr("class", "footnotes").withAttr().tagIndent("div", new Runnable() {
-                    @Override
-                    public void run() {
-                        html.tagVoidLine("hr");
-                        html.tagIndent("ol", new Runnable() {
-                            @Override
-                            public void run() {
-                                for (FootnoteBlock footnoteBlock : footnoteRepository.getReferencedFootnoteBlocks()) {
-                                    int footnoteOrdinal = footnoteBlock.getFootnoteOrdinal();
-                                    html.attr("id", "fn-" + footnoteOrdinal);
-                                    html.withAttr().tagIndent("li", new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            context.renderChildren(footnoteBlock);
+                html.attr("class", "footnotes").withAttr().tagIndent("div", () -> {
+                    html.tagVoidLine("hr");
+                    html.tagIndent("ol", () -> {
+                        for (FootnoteBlock footnoteBlock : footnoteRepository.getReferencedFootnoteBlocks()) {
+                            int footnoteOrdinal = footnoteBlock.getFootnoteOrdinal();
+                            html.attr("id", "fn-" + footnoteOrdinal);
+                            html.withAttr().tagIndent("li", () -> {
+                                context.renderChildren(footnoteBlock);
 
-                                            int iMax = footnoteBlock.getFootnoteReferences();
-                                            for (int i = 0; i < iMax; i++) {
-                                                html.attr("href", "#fnref-" + footnoteOrdinal + (i == 0 ? "" : String.format(Locale.US, "-%d", i)));
-                                                if (!options.footnoteBackLinkRefClass.isEmpty()) html.attr("class", options.footnoteBackLinkRefClass);
-                                                html.line().withAttr().tag("a");
-                                                html.raw(options.footnoteBackRefString);
-                                                html.tag("/a");
-                                            }
-                                        }
-                                    });
+                                int iMax = footnoteBlock.getFootnoteReferences();
+                                for (int i = 0; i < iMax; i++) {
+                                    html.attr("href", "#fnref-" + footnoteOrdinal + (i == 0 ? "" : String.format(Locale.US, "-%d", i)));
+                                    if (!options.footnoteBackLinkRefClass.isEmpty()) html.attr("class", options.footnoteBackLinkRefClass);
+                                    html.line().withAttr().tag("a");
+                                    html.raw(options.footnoteBackRefString);
+                                    html.tag("/a");
                                 }
-                            }
-                        });
-                    }
+                            });
+                        }
+                    });
                 });
             }
         }
@@ -136,15 +113,12 @@ public class FootnoteNodeRenderer implements PhasedNodeRenderer {
             int footnoteOrdinal = footnoteBlock.getFootnoteOrdinal();
             int i = node.getReferenceOrdinal();
             html.attr("id", "fnref-" + footnoteOrdinal + (i == 0 ? "" : String.format(Locale.US, "-%d", i)));
-            html.srcPos(node.getChars()).withAttr().tag("sup", false, false, new Runnable() {
-                @Override
-                public void run() {
-                    if (!options.footnoteLinkRefClass.isEmpty()) html.attr("class", options.footnoteLinkRefClass);
-                    html.attr("href", "#fn-" + footnoteOrdinal);
-                    html.withAttr().tag("a");
-                    html.raw(options.footnoteRefPrefix + footnoteOrdinal + options.footnoteRefSuffix);
-                    html.tag("/a");
-                }
+            html.srcPos(node.getChars()).withAttr().tag("sup", false, false, () -> {
+                if (!options.footnoteLinkRefClass.isEmpty()) html.attr("class", options.footnoteLinkRefClass);
+                html.attr("href", "#fn-" + footnoteOrdinal);
+                html.withAttr().tag("a");
+                html.raw(options.footnoteRefPrefix + footnoteOrdinal + options.footnoteRefSuffix);
+                html.tag("/a");
             });
         }
     }

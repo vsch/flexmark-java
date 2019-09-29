@@ -1,6 +1,5 @@
 package com.vladsch.flexmark.formatter;
 
-import com.vladsch.flexmark.ast.Heading;
 import com.vladsch.flexmark.html.renderer.HtmlIdGenerator;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.MutableDataHolder;

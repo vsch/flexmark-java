@@ -2,7 +2,6 @@ package com.vladsch.flexmark.ext.zzzzzz.internal;
 
 import com.vladsch.flexmark.ext.zzzzzz.Zzzzzz;
 import com.vladsch.flexmark.ext.zzzzzz.ZzzzzzBlock;
-import com.vladsch.flexmark.html.CustomNodeRenderer;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.NodeRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
@@ -23,10 +22,8 @@ public class ZzzzzzJiraRenderer implements NodeRenderer {
     @Override
     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
         return new HashSet<NodeRenderingHandler<? extends Node>>(Arrays.asList(
-                // @formatter:off
-                new NodeRenderingHandler<Zzzzzz>(Zzzzzz.class, new CustomNodeRenderer<Zzzzzz>() { @Override public void render(Zzzzzz node, NodeRendererContext context, HtmlWriter html) { ZzzzzzJiraRenderer.this.render(node, context, html); } }),// zzzoptionszzz(CUSTOM_NODE)
-                new NodeRenderingHandler<ZzzzzzBlock>(ZzzzzzBlock.class, new CustomNodeRenderer<ZzzzzzBlock>() { @Override public void render(ZzzzzzBlock node, NodeRendererContext context, HtmlWriter html) { ZzzzzzJiraRenderer.this.render(node, context, html); } })// zzzoptionszzz(CUSTOM_BLOCK_NODE)
-                // @formatter:on
+                new NodeRenderingHandler<Zzzzzz>(Zzzzzz.class, this::render),// zzzoptionszzz(CUSTOM_NODE)
+                new NodeRenderingHandler<ZzzzzzBlock>(ZzzzzzBlock.class, this::render)// zzzoptionszzz(CUSTOM_BLOCK_NODE)
         ));
     }
 

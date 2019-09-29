@@ -4,21 +4,23 @@ import com.vladsch.flexmark.ast.Paragraph;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.html.HtmlRenderer.Builder;
 import com.vladsch.flexmark.html.HtmlRenderer.HtmlRendererExtension;
-import com.vladsch.flexmark.html.HtmlWriter;
-import com.vladsch.flexmark.html.renderer.*;
+import com.vladsch.flexmark.html.renderer.DelegatingNodeRendererFactory;
+import com.vladsch.flexmark.html.renderer.NodeRenderer;
+import com.vladsch.flexmark.html.renderer.NodeRendererFactory;
+import com.vladsch.flexmark.html.renderer.NodeRenderingHandler;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.ast.Node;
-import com.vladsch.flexmark.util.builder.Extension;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
 public class ParagraphCustomRenderingSample {
-    static final DataHolder OPTIONS = new MutableDataSet().set(Parser.EXTENSIONS, Arrays.asList(
+    static final DataHolder OPTIONS = new MutableDataSet().set(Parser.EXTENSIONS, Collections.singletonList(
             CustomExtension.create()
     ));
 
@@ -54,13 +56,10 @@ public class ParagraphCustomRenderingSample {
         @Override
         public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
             HashSet<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
-            set.add(new NodeRenderingHandler<Paragraph>(Paragraph.class, new com.vladsch.flexmark.html.CustomNodeRenderer<Paragraph>() {
-                @Override
-                public void render(Paragraph node, NodeRendererContext context, HtmlWriter html) {
-                    html.withAttr().tag("div");
-                    context.delegateRender();
-                    html.tag("/div");
-                }
+            set.add(new NodeRenderingHandler<Paragraph>(Paragraph.class, (node, context, html) -> {
+                html.withAttr().tag("div");
+                context.delegateRender();
+                html.tag("/div");
             }));
 
             return set;

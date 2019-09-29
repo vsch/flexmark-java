@@ -39,12 +39,7 @@ public class AbbreviationNodePostProcessor extends NodePostProcessor {
 
             // sort reverse alphabetical order so longer ones match first. for sdk7
             ArrayList<String> abbreviations = new ArrayList<String>(abbrRepository.keySet());
-            Collections.sort(abbreviations, new Comparator<String>() {
-                @Override
-                public int compare(String o1, String o2) {
-                    return o2.compareTo(o1);
-                }
-            });
+            Collections.sort(abbreviations, Comparator.reverseOrder());
 
             for (String abbr : abbreviations) {
                 AbbreviationBlock abbreviationBlock = abbrRepository.get(abbr);

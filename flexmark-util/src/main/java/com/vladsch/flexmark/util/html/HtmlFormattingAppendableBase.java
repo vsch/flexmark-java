@@ -311,12 +311,7 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
             runnable.run();
         } else {
             boolean[] hadConditionalIndent = new boolean[] { false };
-            Runnable indentOnFirstEol = new Runnable() {
-                @Override
-                public void run() {
-                    hadConditionalIndent[0] = true;
-                }
-            };
+            Runnable indentOnFirstEol = () -> hadConditionalIndent[0] = true;
 
             if (isLineOnChildText) out.setLineOnFirstText();
 

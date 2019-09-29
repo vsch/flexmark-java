@@ -4,7 +4,6 @@ import com.vladsch.flexmark.ast.*;
 import com.vladsch.flexmark.ast.util.LineCollectingVisitor;
 import com.vladsch.flexmark.ast.util.ReferenceRepository;
 import com.vladsch.flexmark.ast.util.TextCollectingVisitor;
-import com.vladsch.flexmark.html.CustomNodeRenderer;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.html.HtmlRendererOptions;
 import com.vladsch.flexmark.html.HtmlWriter;
@@ -71,39 +70,39 @@ public class CoreNodeRenderer implements NodeRenderer {
     @Override
     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
         return new HashSet<NodeRenderingHandler<? extends Node>>(Arrays.asList(
-                new NodeRenderingHandler<AutoLink>(AutoLink.class, CoreNodeRenderer.this::render),
-                new NodeRenderingHandler<BlockQuote>(BlockQuote.class, CoreNodeRenderer.this::render),
-                new NodeRenderingHandler<BulletList>(BulletList.class, CoreNodeRenderer.this::render),
-                new NodeRenderingHandler<Code>(Code.class, CoreNodeRenderer.this::render),
-                new NodeRenderingHandler<CodeBlock>(CodeBlock.class, CoreNodeRenderer.this::render),
-                new NodeRenderingHandler<Document>(Document.class, CoreNodeRenderer.this::render),
-                new NodeRenderingHandler<Emphasis>(Emphasis.class, CoreNodeRenderer.this::render),
-                new NodeRenderingHandler<FencedCodeBlock>(FencedCodeBlock.class, CoreNodeRenderer.this::render),
-                new NodeRenderingHandler<HardLineBreak>(HardLineBreak.class, CoreNodeRenderer.this::render),
-                new NodeRenderingHandler<Heading>(Heading.class, CoreNodeRenderer.this::render),
-                new NodeRenderingHandler<HtmlBlock>(HtmlBlock.class, CoreNodeRenderer.this::render),
-                new NodeRenderingHandler<HtmlCommentBlock>(HtmlCommentBlock.class, CoreNodeRenderer.this::render),
-                new NodeRenderingHandler<HtmlInnerBlock>(HtmlInnerBlock.class, CoreNodeRenderer.this::render),
-                new NodeRenderingHandler<HtmlInnerBlockComment>(HtmlInnerBlockComment.class, CoreNodeRenderer.this::render),
-                new NodeRenderingHandler<HtmlEntity>(HtmlEntity.class, CoreNodeRenderer.this::render),
-                new NodeRenderingHandler<HtmlInline>(HtmlInline.class, CoreNodeRenderer.this::render),
-                new NodeRenderingHandler<HtmlInlineComment>(HtmlInlineComment.class, CoreNodeRenderer.this::render),
-                new NodeRenderingHandler<Image>(Image.class, CoreNodeRenderer.this::render),
-                new NodeRenderingHandler<ImageRef>(ImageRef.class, CoreNodeRenderer.this::render),
-                new NodeRenderingHandler<IndentedCodeBlock>(IndentedCodeBlock.class, CoreNodeRenderer.this::render),
-                new NodeRenderingHandler<Link>(Link.class, CoreNodeRenderer.this::render),
-                new NodeRenderingHandler<LinkRef>(LinkRef.class, CoreNodeRenderer.this::render),
-                new NodeRenderingHandler<BulletListItem>(BulletListItem.class, CoreNodeRenderer.this::render),
-                new NodeRenderingHandler<OrderedListItem>(OrderedListItem.class, CoreNodeRenderer.this::render),
-                new NodeRenderingHandler<MailLink>(MailLink.class, CoreNodeRenderer.this::render),
-                new NodeRenderingHandler<OrderedList>(OrderedList.class, CoreNodeRenderer.this::render),
-                new NodeRenderingHandler<Paragraph>(Paragraph.class, CoreNodeRenderer.this::render),
-                new NodeRenderingHandler<Reference>(Reference.class, CoreNodeRenderer.this::render),
-                new NodeRenderingHandler<SoftLineBreak>(SoftLineBreak.class, CoreNodeRenderer.this::render),
-                new NodeRenderingHandler<StrongEmphasis>(StrongEmphasis.class, CoreNodeRenderer.this::render),
-                new NodeRenderingHandler<Text>(Text.class, CoreNodeRenderer.this::render),
-                new NodeRenderingHandler<TextBase>(TextBase.class, CoreNodeRenderer.this::render),
-                new NodeRenderingHandler<ThematicBreak>(ThematicBreak.class, CoreNodeRenderer.this::render)
+                new NodeRenderingHandler<AutoLink>(AutoLink.class, this::render),
+                new NodeRenderingHandler<BlockQuote>(BlockQuote.class, this::render),
+                new NodeRenderingHandler<BulletList>(BulletList.class, this::render),
+                new NodeRenderingHandler<Code>(Code.class, this::render),
+                new NodeRenderingHandler<CodeBlock>(CodeBlock.class, this::render),
+                new NodeRenderingHandler<Document>(Document.class, this::render),
+                new NodeRenderingHandler<Emphasis>(Emphasis.class, this::render),
+                new NodeRenderingHandler<FencedCodeBlock>(FencedCodeBlock.class, this::render),
+                new NodeRenderingHandler<HardLineBreak>(HardLineBreak.class, this::render),
+                new NodeRenderingHandler<Heading>(Heading.class, this::render),
+                new NodeRenderingHandler<HtmlBlock>(HtmlBlock.class, this::render),
+                new NodeRenderingHandler<HtmlCommentBlock>(HtmlCommentBlock.class, this::render),
+                new NodeRenderingHandler<HtmlInnerBlock>(HtmlInnerBlock.class, this::render),
+                new NodeRenderingHandler<HtmlInnerBlockComment>(HtmlInnerBlockComment.class, this::render),
+                new NodeRenderingHandler<HtmlEntity>(HtmlEntity.class, this::render),
+                new NodeRenderingHandler<HtmlInline>(HtmlInline.class, this::render),
+                new NodeRenderingHandler<HtmlInlineComment>(HtmlInlineComment.class, this::render),
+                new NodeRenderingHandler<Image>(Image.class, this::render),
+                new NodeRenderingHandler<ImageRef>(ImageRef.class, this::render),
+                new NodeRenderingHandler<IndentedCodeBlock>(IndentedCodeBlock.class, this::render),
+                new NodeRenderingHandler<Link>(Link.class, this::render),
+                new NodeRenderingHandler<LinkRef>(LinkRef.class, this::render),
+                new NodeRenderingHandler<BulletListItem>(BulletListItem.class, this::render),
+                new NodeRenderingHandler<OrderedListItem>(OrderedListItem.class, this::render),
+                new NodeRenderingHandler<MailLink>(MailLink.class, this::render),
+                new NodeRenderingHandler<OrderedList>(OrderedList.class, this::render),
+                new NodeRenderingHandler<Paragraph>(Paragraph.class, this::render),
+                new NodeRenderingHandler<Reference>(Reference.class, this::render),
+                new NodeRenderingHandler<SoftLineBreak>(SoftLineBreak.class, this::render),
+                new NodeRenderingHandler<StrongEmphasis>(StrongEmphasis.class, this::render),
+                new NodeRenderingHandler<Text>(Text.class, this::render),
+                new NodeRenderingHandler<TextBase>(TextBase.class, this::render),
+                new NodeRenderingHandler<ThematicBreak>(ThematicBreak.class, this::render)
         ));
     }
 
@@ -123,32 +122,19 @@ public class CoreNodeRenderer implements NodeRenderer {
         }
 
         if (context.getHtmlOptions().sourcePositionParagraphLines) {
-            html.srcPos(node.getChars()).withAttr().tagLine("h" + node.getLevel(), new Runnable() {
-                @Override
-                public void run() {
-                    html.srcPos(node.getText()).withAttr().tag("span");
-                    context.renderChildren(node);
-                    html.tag("/span");
-                }
+            html.srcPos(node.getChars()).withAttr().tagLine("h" + node.getLevel(), () -> {
+                html.srcPos(node.getText()).withAttr().tag("span");
+                context.renderChildren(node);
+                html.tag("/span");
             });
         } else {
-            html.srcPos(node.getText()).withAttr().tagLine("h" + node.getLevel(), new Runnable() {
-                @Override
-                public void run() {
-                    context.renderChildren(node);
-                }
-            });
+            html.srcPos(node.getText()).withAttr().tagLine("h" + node.getLevel(), () -> context.renderChildren(node));
         }
     }
 
     @SuppressWarnings("MethodMayBeStatic")
     void render(BlockQuote node, NodeRendererContext context, HtmlWriter html) {
-        html.withAttr().tagLineIndent("blockquote", new Runnable() {
-            @Override
-            public void run() {
-                context.renderChildren(node);
-            }
-        });
+        html.withAttr().tagLineIndent("blockquote", () -> context.renderChildren(node));
     }
 
     void render(FencedCodeBlock node, NodeRendererContext context, HtmlWriter html) {
@@ -213,23 +199,13 @@ public class CoreNodeRenderer implements NodeRenderer {
 
     @SuppressWarnings("MethodMayBeStatic")
     void render(BulletList node, NodeRendererContext context, HtmlWriter html) {
-        html.withAttr().tagIndent("ul", new Runnable() {
-            @Override
-            public void run() {
-                context.renderChildren(node);
-            }
-        });
+        html.withAttr().tagIndent("ul", () -> context.renderChildren(node));
     }
 
     void render(OrderedList node, NodeRendererContext context, HtmlWriter html) {
         int start = node.getStartNumber();
         if (listOptions.isOrderedListManualStart() && start != 1) html.attr("start", String.valueOf(start));
-        html.withAttr().tagIndent("ol", new Runnable() {
-            @Override
-            public void run() {
-                context.renderChildren(node);
-            }
-        });
+        html.withAttr().tagIndent("ol", () -> context.renderChildren(node));
     }
 
     void render(BulletListItem node, NodeRendererContext context, HtmlWriter html) {
@@ -242,20 +218,14 @@ public class CoreNodeRenderer implements NodeRenderer {
 
     private void renderListItem(ListItem node, NodeRendererContext context, HtmlWriter html) {
         if (listOptions.isTightListItem(node)) {
-            html.srcPosWithEOL(node.getChars()).withAttr(TIGHT_LIST_ITEM).withCondIndent().tagLine("li", new Runnable() {
-                @Override
-                public void run() {
-                    html.text(node.getMarkerSuffix().unescape());
-                    context.renderChildren(node);
-                }
+            html.srcPosWithEOL(node.getChars()).withAttr(TIGHT_LIST_ITEM).withCondIndent().tagLine("li", () -> {
+                html.text(node.getMarkerSuffix().unescape());
+                context.renderChildren(node);
             });
         } else {
-            html.srcPosWithEOL(node.getChars()).withAttr(LOOSE_LIST_ITEM).withCondIndent().tagLine("li", new Runnable() {
-                @Override
-                public void run() {
-                    html.text(node.getMarkerSuffix().unescape());
-                    context.renderChildren(node);
-                }
+            html.srcPosWithEOL(node.getChars()).withAttr(LOOSE_LIST_ITEM).withCondIndent().tagLine("li", () -> {
+                html.text(node.getMarkerSuffix().unescape());
+                context.renderChildren(node);
             });
         }
     }
@@ -276,12 +246,7 @@ public class CoreNodeRenderer implements NodeRenderer {
         }
 
         if (wrapTextInSpan) {
-            html.withAttr().tag("span", false, false, new Runnable() {
-                @Override
-                public void run() {
-                    context.renderChildren(node);
-                }
-            });
+            html.withAttr().tag("span", false, false, () -> context.renderChildren(node));
         } else {
             context.renderChildren(node);
         }
@@ -334,12 +299,7 @@ public class CoreNodeRenderer implements NodeRenderer {
             renderTextBlockParagraphLines(node, context, html, false);
             html.tagVoid("br").tagVoid("br").line();
         } else {
-            html.srcPosWithEOL(node.getChars()).withAttr().tagLine("p", new Runnable() {
-                @Override
-                public void run() {
-                    renderTextBlockParagraphLines(node, context, html, false);
-                }
-            });
+            html.srcPosWithEOL(node.getChars()).withAttr().tagLine("p", () -> renderTextBlockParagraphLines(node, context, html, false));
         }
     }
 
@@ -618,12 +578,7 @@ public class CoreNodeRenderer implements NodeRenderer {
             ResolvedLink resolvedLink = context.resolveLink(LinkType.LINK, text, null);
             html.srcPos(node.getText()).attr("href", resolvedLink.getUrl().startsWith("www.") ? context.getHtmlOptions().autolinkWwwPrefix + resolvedLink.getUrl() : resolvedLink.getUrl())
                     .withAttr(resolvedLink)
-                    .tag("a", false, false, new Runnable() {
-                        @Override
-                        public void run() {
-                            html.text(text);
-                        }
-                    });
+                    .tag("a", false, false, () -> html.text(text));
         }
     }
 

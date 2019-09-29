@@ -662,38 +662,35 @@ public abstract class DocxContextImpl<T> implements DocxContext<T>, BlockFormatP
 
     @Override
     public void renderFencedCodeLines(List<? extends CharSequence> lines) {
-        contextFramed(new Runnable() {
-            @Override
-            public void run() {
-                setBlockFormatProvider(new FencedCodeBlockFormatProvider<T>(DocxContextImpl.this));
-                createP();
+        contextFramed(() -> {
+            setBlockFormatProvider(new FencedCodeBlockFormatProvider<T>(DocxContextImpl.this));
+            createP();
 
-                int[] leadColumns = new int[lines.size()];
-                int minSpaces = Integer.MAX_VALUE;
-                int i = 0;
-                for (CharSequence line : lines) {
-                    leadColumns[i] = BasedSequenceImpl.of(line).countLeadingColumns(0, " \t");
-                    minSpaces = Utils.min(minSpaces, leadColumns[i]);
-                    i++;
-                }
+            int[] leadColumns = new int[lines.size()];
+            int minSpaces = Integer.MAX_VALUE;
+            int i = 0;
+            for (CharSequence line : lines) {
+                leadColumns[i] = BasedSequenceImpl.of(line).countLeadingColumns(0, " \t");
+                minSpaces = Utils.min(minSpaces, leadColumns[i]);
+                i++;
+            }
 
-                ArrayList<BasedSequence> trimmedLines = new ArrayList<BasedSequence>();
-                i = 0;
-                for (CharSequence line : lines) {
-                    StringBuilder sb = new StringBuilder();
+            ArrayList<BasedSequence> trimmedLines = new ArrayList<BasedSequence>();
+            i = 0;
+            for (CharSequence line : lines) {
+                StringBuilder sb = new StringBuilder();
 
-                    int spaces = leadColumns[i] - minSpaces;
-                    while (spaces-- > 0) sb.append(' ');
-                    sb.append(BasedSequenceImpl.of(line).trim());
+                int spaces = leadColumns[i] - minSpaces;
+                while (spaces-- > 0) sb.append(' ');
+                sb.append(BasedSequenceImpl.of(line).trim());
 
-                    // Create object for p
-                    text(sb.toString());
+                // Create object for p
+                text(sb.toString());
 
-                    i++;
+                i++;
 
-                    if (i < lines.size()) {
-                        addLineBreak();
-                    }
+                if (i < lines.size()) {
+                    addLineBreak();
                 }
             }
         });

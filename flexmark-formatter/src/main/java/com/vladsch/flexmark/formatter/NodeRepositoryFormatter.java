@@ -31,6 +31,7 @@ public abstract class NodeRepositoryFormatter<R extends NodeRepository<B>, B ext
 
     /**
      * Whether references should be made unique
+     *
      * @return true if yes, false if leave all references as is
      */
     protected boolean makeReferencesUnique() {
@@ -127,12 +128,7 @@ public abstract class NodeRepositoryFormatter<R extends NodeRepository<B>, B ext
         this.recheckUndefinedReferences = HtmlRenderer.RECHECK_UNDEFINED_REFERENCES.getFrom(options);
         repositoryNodesDone = false;
 
-        myComparator = new Comparator<B>() {
-            @Override
-            public int compare(B o1, B o2) {
-                return o1.compareTo(o2);
-            }
-        };
+        myComparator = Comparable::compareTo;
     }
 
     @Override

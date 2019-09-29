@@ -2,7 +2,6 @@ package com.vladsch.flexmark.test;
 
 import com.vladsch.flexmark.ast.DelimitedNode;
 import com.vladsch.flexmark.ast.Text;
-import com.vladsch.flexmark.html.CustomNodeRenderer;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.NodeRenderer;
@@ -246,12 +245,7 @@ public class DelimiterProcessorTest extends RenderingTestCase {
         @Override
         public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
             HashSet<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
-            set.add(new NodeRenderingHandler<UpperCaseNode>(UpperCaseNode.class, new CustomNodeRenderer<UpperCaseNode>() {
-                @Override
-                public void render(UpperCaseNode node, NodeRendererContext context, HtmlWriter html) {
-                    UpperCaseNodeRenderer.this.render(node, context, html);
-                }
-            }));
+            set.add(new NodeRenderingHandler<UpperCaseNode>(UpperCaseNode.class, UpperCaseNodeRenderer.this::render));
             return set;
         }
 

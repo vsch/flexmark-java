@@ -3,26 +3,28 @@ package com.vladsch.flexmark.samples;
 import com.vladsch.flexmark.ast.Image;
 import com.vladsch.flexmark.ast.Link;
 import com.vladsch.flexmark.ast.Reference;
-import com.vladsch.flexmark.html.*;
+import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.html.HtmlRenderer.Builder;
 import com.vladsch.flexmark.html.HtmlRenderer.HtmlRendererExtension;
+import com.vladsch.flexmark.html.LinkResolver;
+import com.vladsch.flexmark.html.LinkResolverFactory;
 import com.vladsch.flexmark.html.renderer.*;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.Utils;
 import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.Node;
-import com.vladsch.flexmark.util.builder.Extension;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
 public class CustomLinkResolverSample {
-    static final DataHolder OPTIONS = new MutableDataSet().set(Parser.EXTENSIONS, Arrays.asList(CustomExtension.create()));
+    static final DataHolder OPTIONS = new MutableDataSet().set(Parser.EXTENSIONS, Collections.singletonList(CustomExtension.create()));
 
     public static final DataKey<String> DOC_RELATIVE_URL = new DataKey<>("DOC_RELATIVE_URL", "");
     public static final DataKey<String> DOC_ROOT_URL = new DataKey<>("DOC_ROOT_URL", "");
@@ -31,6 +33,7 @@ public class CustomLinkResolverSample {
     static final HtmlRenderer RENDERER = HtmlRenderer.builder(OPTIONS).build();
 
     public static class DocxLinkResolver implements LinkResolver {
+        protected static final String[] EMPTY_STRINGS = new String[0];
         private final String docRelativeURL;
         private final String docRootURL;
         private final String[] relativeParts;
@@ -50,7 +53,7 @@ public class CustomLinkResolverSample {
             }
             this.docRelativeURL = docRelativeURL;
             this.docRootURL = docRootURL;
-            relativeParts = docRelativeURL.split("/");
+            relativeParts = docRelativeURL == null ? EMPTY_STRINGS : docRelativeURL.split("/");
         }
 
         @Override
@@ -194,16 +197,13 @@ public class CustomLinkResolverSample {
         @Override
         public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
             HashSet<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
-            set.add(new NodeRenderingHandler<Link>(Link.class, new CustomNodeRenderer<Link>() {
-                @Override
-                public void render(Link node, NodeRendererContext context, HtmlWriter html) {
-                    // test the node to see if it needs overriding
-                    if (node.getText().equals("bar")) {
-                        html.text("(eliminated)");
-                    } else {
-                        // otherwise pass it for default rendering
-                        context.delegateRender();
-                    }
+            set.add(new NodeRenderingHandler<Link>(Link.class, (node, context, html) -> {
+                // test the node to see if it needs overriding
+                if (node.getText().equals("bar")) {
+                    html.text("(eliminated)");
+                } else {
+                    // otherwise pass it for default rendering
+                    context.delegateRender();
                 }
             }));
             //set.add(new NodeRenderingHandler<WikiLink>(WikiLink.class, new CustomNodeRenderer<WikiLink>() {

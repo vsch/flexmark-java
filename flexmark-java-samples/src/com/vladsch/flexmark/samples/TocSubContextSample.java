@@ -6,11 +6,9 @@ import com.vladsch.flexmark.ext.toc.internal.TocNodeRenderer;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.html.HtmlRenderer.Builder;
 import com.vladsch.flexmark.html.HtmlRenderer.HtmlRendererExtension;
-import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.*;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.ast.Node;
-import com.vladsch.flexmark.util.builder.Extension;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
@@ -51,21 +49,18 @@ public class TocSubContextSample {
         @Override
         public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
             HashSet<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
-            set.add(new NodeRenderingHandler<TocBlock>(TocBlock.class, new com.vladsch.flexmark.html.CustomNodeRenderer<TocBlock>() {
-                @Override
-                public void render(TocBlock node, NodeRendererContext context, HtmlWriter html) {
-                    // test the node to see if it needs overriding
-                    NodeRendererContext subContext = context.getDelegatedSubContext(true);
-                    subContext.delegateRender();
-                    String tocText = subContext.getHtmlWriter().toString(0);
+            set.add(new NodeRenderingHandler<TocBlock>(TocBlock.class, (node, context, html) -> {
+                // test the node to see if it needs overriding
+                NodeRendererContext subContext = context.getDelegatedSubContext(true);
+                subContext.delegateRender();
+                String tocText = subContext.getHtmlWriter().toString(0);
 
-                    // output to separate stream
-                    System.out.println("---- TOC HTML --------------------");
-                    System.out.print(tocText);
-                    System.out.println("----------------------------------\n");
+                // output to separate stream
+                System.out.println("---- TOC HTML --------------------");
+                System.out.print(tocText);
+                System.out.println("----------------------------------\n");
 
-                    html.tagLineIndent("div", () -> html.append(subContext.getHtmlWriter()));
-                }
+                html.tagLineIndent("div", () -> html.append(subContext.getHtmlWriter()));
             }));
 
             return set;

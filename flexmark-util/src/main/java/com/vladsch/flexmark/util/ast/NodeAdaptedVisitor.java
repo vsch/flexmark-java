@@ -15,10 +15,10 @@ public abstract class NodeAdaptedVisitor<H extends NodeAdaptingVisitHandler<?, ?
 
     // Usage:
     //myVisitor = new NodeVisitor(
-    //        new NodeAdaptedVisitHandler<>(Text.class, TextCollectingVisitor.this::visit),
-    //        new NodeAdaptedVisitHandler<>(HtmlEntity.class, TextCollectingVisitor.this::visit),
-    //        new NodeAdaptedVisitHandler<>(SoftLineBreak.class, TextCollectingVisitor.this::visit),
-    //        new NodeAdaptedVisitHandler<>(HardLineBreak.class, TextCollectingVisitor.this::visit)
+    //        new NodeAdaptedVisitHandler<>(Text.class, this::visit),
+    //        new NodeAdaptedVisitHandler<>(HtmlEntity.class, this::visit),
+    //        new NodeAdaptedVisitHandler<>(SoftLineBreak.class, this::visit),
+    //        new NodeAdaptedVisitHandler<>(HardLineBreak.class, this::visit)
     //);
     public NodeAdaptedVisitor(H... handlers) {
         addHandlers(handlers);

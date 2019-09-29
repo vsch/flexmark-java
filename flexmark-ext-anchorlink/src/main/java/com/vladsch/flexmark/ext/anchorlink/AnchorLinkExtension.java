@@ -4,7 +4,6 @@ import com.vladsch.flexmark.ext.anchorlink.internal.AnchorLinkNodePostProcessor;
 import com.vladsch.flexmark.ext.anchorlink.internal.AnchorLinkNodeRenderer;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
-import com.vladsch.flexmark.util.builder.Extension;
 import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 

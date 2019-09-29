@@ -3,7 +3,6 @@ package com.vladsch.flexmark.ext.tables;
 import com.vladsch.flexmark.formatter.Formatter;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.spec.SpecExample;
-import com.vladsch.flexmark.spec.SpecReader;
 import com.vladsch.flexmark.test.ComboSpecTestCase;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
@@ -17,7 +16,10 @@ import com.vladsch.flexmark.util.mappers.CharWidthProvider;
 import com.vladsch.flexmark.util.sequence.BasedSequenceImpl;
 import org.junit.runners.Parameterized;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class ComboTableManipulationSpecTest extends ComboSpecTestCase {
     private static final String SPEC_RESOURCE = "/ext_tables_manipulation_spec.md";
@@ -232,16 +234,7 @@ public class ComboTableManipulationSpecTest extends ComboSpecTestCase {
 
     @Parameterized.Parameters(name = "{0}")
     public static List<Object[]> data() {
-        List<SpecExample> examples = SpecReader.readExamples(SPEC_RESOURCE);
-        List<Object[]> data = new ArrayList<Object[]>();
-
-        // NULL example runs full spec test
-        data.add(new Object[] { SpecExample.getNull() });
-
-        for (SpecExample example : examples) {
-            data.add(new Object[] { example });
-        }
-        return data;
+        return getTestData(SPEC_RESOURCE);
     }
 
     @Override

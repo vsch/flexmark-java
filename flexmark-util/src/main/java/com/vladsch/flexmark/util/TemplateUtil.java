@@ -6,12 +6,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class TemplateUtil {
-    final public static Resolver NULL_RESOLVER = new Resolver() {
-        @Override
-        public String resolve(String[] groups) {
-            return null;
-        }
-    };
+    final public static Resolver NULL_RESOLVER = groups -> null;
 
     public static class MappedResolver implements Resolver {
         final protected Map<String, String> myMap;

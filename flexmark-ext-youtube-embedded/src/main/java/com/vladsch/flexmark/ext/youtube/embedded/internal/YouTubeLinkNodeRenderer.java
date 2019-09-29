@@ -1,7 +1,6 @@
 package com.vladsch.flexmark.ext.youtube.embedded.internal;
 
 import com.vladsch.flexmark.ext.youtube.embedded.YouTubeLink;
-import com.vladsch.flexmark.html.CustomNodeRenderer;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.*;
 import com.vladsch.flexmark.util.data.DataHolder;
@@ -18,15 +17,8 @@ public class YouTubeLinkNodeRenderer implements NodeRenderer {
 
     @Override
     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
-        YouTubeLinkNodeRenderer self = this;
-
         HashSet<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
-        set.add(new NodeRenderingHandler<YouTubeLink>(YouTubeLink.class, new CustomNodeRenderer<YouTubeLink>() {
-            @Override
-            public void render(YouTubeLink node, NodeRendererContext context, HtmlWriter html) {
-                self.render(node, context, html);
-            }
-        }));
+        set.add(new NodeRenderingHandler<YouTubeLink>(YouTubeLink.class, this::render));
         return set;
     }
 

@@ -1,6 +1,5 @@
 package com.vladsch.flexmark.formatter;
 
-import com.vladsch.flexmark.parser.PostProcessorFactory;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.dependency.Dependent;
 

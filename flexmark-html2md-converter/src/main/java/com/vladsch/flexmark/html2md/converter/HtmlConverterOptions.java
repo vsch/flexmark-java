@@ -10,7 +10,7 @@ import com.vladsch.flexmark.util.html.CellAlignment;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-@SuppressWarnings({ "WeakerAccess", "deprecation" })
+@SuppressWarnings({ "WeakerAccess" })
 public class HtmlConverterOptions implements MutableDataSetter {
     public boolean listContentIndent;
     public boolean setextHeadings;

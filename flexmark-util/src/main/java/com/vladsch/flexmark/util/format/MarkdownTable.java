@@ -18,7 +18,6 @@ import java.util.*;
 import java.util.function.BiFunction;
 
 import static com.vladsch.flexmark.util.Utils.*;
-import static com.vladsch.flexmark.util.Utils.contained;
 import static com.vladsch.flexmark.util.format.TableCell.NOT_TRACKED;
 import static com.vladsch.flexmark.util.format.options.DiscretionaryText.ADD;
 

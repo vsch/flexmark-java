@@ -1,7 +1,10 @@
 package com.vladsch.flexmark.ast.util;
 
 import com.vladsch.flexmark.ast.*;
-import com.vladsch.flexmark.util.ast.*;
+import com.vladsch.flexmark.util.ast.DoNotCollectText;
+import com.vladsch.flexmark.util.ast.Node;
+import com.vladsch.flexmark.util.ast.NodeVisitor;
+import com.vladsch.flexmark.util.ast.VisitHandler;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.SegmentedSequenceBuilder;
 
@@ -35,12 +38,12 @@ public class TextCollectingVisitor {
         myLineBreakNodes = lineBreakNodes.length == 0 ? null : new HashSet<>(Arrays.asList(lineBreakNodes));
 
         myVisitor = new NodeVisitor(
-                new VisitHandler<>(Text.class, TextCollectingVisitor.this::visit),
-                new VisitHandler<>(TextBase.class, TextCollectingVisitor.this::visit),
-                new VisitHandler<>(HtmlEntity.class, TextCollectingVisitor.this::visit),
-                new VisitHandler<>(SoftLineBreak.class, TextCollectingVisitor.this::visit),
-                new VisitHandler<>(Paragraph.class, TextCollectingVisitor.this::visit),
-                new VisitHandler<>(HardLineBreak.class, TextCollectingVisitor.this::visit)
+                new VisitHandler<>(Text.class, this::visit),
+                new VisitHandler<>(TextBase.class, this::visit),
+                new VisitHandler<>(HtmlEntity.class, this::visit),
+                new VisitHandler<>(SoftLineBreak.class, this::visit),
+                new VisitHandler<>(Paragraph.class, this::visit),
+                new VisitHandler<>(HardLineBreak.class, this::visit)
         )
         {
             @Override

@@ -7,7 +7,6 @@ import com.vladsch.flexmark.ext.tables.internal.TableParagraphPreProcessor;
 import com.vladsch.flexmark.formatter.Formatter;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
-import com.vladsch.flexmark.util.builder.Extension;
 import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.format.TableFormatOptions;
@@ -37,7 +36,7 @@ public class TablesExtension implements Parser.ParserExtension, HtmlRenderer.Htm
     public static final DataKey<Boolean> WITH_CAPTION = new DataKey<>("WITH_CAPTION", true);
 
     /**
-     * @deprecated  was never implemented
+     * @deprecated was never implemented
      */
     @Deprecated
     public static final DataKey<Boolean> MULTI_LINE_ROWS = new DataKey<>("MULTI_LINE_ROWS", false);

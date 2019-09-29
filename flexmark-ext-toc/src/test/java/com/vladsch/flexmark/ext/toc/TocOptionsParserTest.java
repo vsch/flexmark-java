@@ -8,7 +8,6 @@ import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.spec.IParseBase;
 import com.vladsch.flexmark.spec.IRenderBase;
 import com.vladsch.flexmark.spec.SpecExample;
-import com.vladsch.flexmark.spec.SpecReader;
 import com.vladsch.flexmark.test.ComboSpecTestCase;
 import com.vladsch.flexmark.util.Pair;
 import com.vladsch.flexmark.util.ast.*;
@@ -24,7 +23,6 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 import org.junit.runners.Parameterized;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -61,12 +59,7 @@ public class TocOptionsParserTest extends ComboSpecTestCase {
     static class ParserVisitorExt {
         static <V extends ParserVisitor> VisitHandler<?>[] VISIT_HANDLERS(V visitor) {
             return new VisitHandler<?>[] {
-                    new VisitHandler<ParserNode>(ParserNode.class, new Visitor<ParserNode>() {
-                        @Override
-                        public void visit(ParserNode node) {
-                            visitor.visit(node);
-                        }
-                    }),
+                    new VisitHandler<ParserNode>(ParserNode.class, visitor::visit),
             };
         }
     }
@@ -258,16 +251,7 @@ public class TocOptionsParserTest extends ComboSpecTestCase {
 
     @Parameterized.Parameters(name = "{0}")
     public static List<Object[]> data() {
-        List<SpecExample> examples = SpecReader.readExamples(SPEC_RESOURCE);
-        List<Object[]> data = new ArrayList<Object[]>();
-
-        // NULL example runs full spec test
-        data.add(new Object[] { SpecExample.getNull() });
-
-        for (SpecExample example : examples) {
-            data.add(new Object[] { example });
-        }
-        return data;
+        return getTestData(SPEC_RESOURCE);
     }
 
     @Override

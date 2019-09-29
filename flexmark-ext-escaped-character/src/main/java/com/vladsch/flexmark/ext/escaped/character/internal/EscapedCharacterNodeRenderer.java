@@ -1,7 +1,6 @@
 package com.vladsch.flexmark.ext.escaped.character.internal;
 
 import com.vladsch.flexmark.ext.escaped.character.EscapedCharacter;
-import com.vladsch.flexmark.html.CustomNodeRenderer;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.NodeRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
@@ -22,12 +21,7 @@ public class EscapedCharacterNodeRenderer implements NodeRenderer {
     @Override
     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
         HashSet<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
-        set.add(new NodeRenderingHandler<EscapedCharacter>(EscapedCharacter.class, new CustomNodeRenderer<EscapedCharacter>() {
-            @Override
-            public void render(EscapedCharacter node, NodeRendererContext context, HtmlWriter html) {
-                EscapedCharacterNodeRenderer.this.render(node, context, html);
-            }
-        }));
+        set.add(new NodeRenderingHandler<EscapedCharacter>(EscapedCharacter.class, this::render));
 
         return set;
     }

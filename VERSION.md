@@ -111,7 +111,7 @@ flexmark-java
       attributes node text.
 
 0.50.42
--------
+--------
 
 * Fix: data set copy constructors to accept `null`
 * Fix: change `DataSet.keySet()` to `DataSet.getKeys()`

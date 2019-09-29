@@ -3,7 +3,6 @@ package com.vladsch.flexmark.formatter;
 import com.vladsch.flexmark.util.ast.Document;
 
 import java.util.List;
-import java.util.function.Function;
 
 public interface TranslationHandler extends TranslationContext {
     void beginRendering(Document node, NodeFormatterContext context, MarkdownWriter out);

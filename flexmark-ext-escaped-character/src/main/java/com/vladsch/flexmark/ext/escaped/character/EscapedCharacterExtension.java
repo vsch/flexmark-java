@@ -4,7 +4,6 @@ import com.vladsch.flexmark.ext.escaped.character.internal.EscapedCharacterNodeP
 import com.vladsch.flexmark.ext.escaped.character.internal.EscapedCharacterNodeRenderer;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
-import com.vladsch.flexmark.util.builder.Extension;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 
 /**

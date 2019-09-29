@@ -1,7 +1,6 @@
 package com.vladsch.flexmark.ext.aside.internal;
 
 import com.vladsch.flexmark.ext.aside.AsideBlock;
-import com.vladsch.flexmark.html.CustomNodeRenderer;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.NodeRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
@@ -22,22 +21,12 @@ public class AsideNodeRenderer implements NodeRenderer {
     @Override
     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
         HashSet<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
-        set.add(new NodeRenderingHandler<AsideBlock>(AsideBlock.class, new CustomNodeRenderer<AsideBlock>() {
-            @Override
-            public void render(AsideBlock node, NodeRendererContext context, HtmlWriter html) {
-                AsideNodeRenderer.this.render(node, context, html);
-            }
-        }));
+        set.add(new NodeRenderingHandler<AsideBlock>(AsideBlock.class, this::render));
         return set;
     }
 
     private void render(AsideBlock node, NodeRendererContext context, HtmlWriter html) {
-        html.withAttr().withCondIndent().tagLine("aside", new Runnable() {
-            @Override
-            public void run() {
-                context.renderChildren(node);
-            }
-        });
+        html.withAttr().withCondIndent().tagLine("aside", () -> context.renderChildren(node));
     }
 
     public static class Factory implements NodeRendererFactory {

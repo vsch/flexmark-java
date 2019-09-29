@@ -39,13 +39,8 @@ public class JekyllFrontMatterNodeFormatter implements PhasedNodeFormatter {
 
     @Override
     public Set<NodeFormattingHandler<?>> getNodeFormattingHandlers() {
-        return new HashSet<NodeFormattingHandler<?>>(Arrays.asList(
-                new NodeFormattingHandler<JekyllFrontMatterBlock>(JekyllFrontMatterBlock.class, new CustomNodeFormatter<JekyllFrontMatterBlock>() {
-                    @Override
-                    public void render(JekyllFrontMatterBlock node, NodeFormatterContext context, MarkdownWriter markdown) {
-                        JekyllFrontMatterNodeFormatter.this.render(node, context, markdown);
-                    }
-                })
+        return new HashSet<NodeFormattingHandler<?>>(Collections.singletonList(
+                new NodeFormattingHandler<JekyllFrontMatterBlock>(JekyllFrontMatterBlock.class, JekyllFrontMatterNodeFormatter.this::render)
         ));
     }
 

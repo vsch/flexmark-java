@@ -4,7 +4,6 @@ import com.vladsch.flexmark.ast.Heading;
 import com.vladsch.flexmark.ast.util.HeadingCollectingVisitor;
 import com.vladsch.flexmark.ext.toc.TocBlock;
 import com.vladsch.flexmark.ext.toc.TocExtension;
-import com.vladsch.flexmark.html.CustomNodeRenderer;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.NodeRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
@@ -31,14 +30,7 @@ public class TocNodeRenderer implements NodeRenderer {
     @Override
     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
         HashSet<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
-        set.add(
-                new NodeRenderingHandler<TocBlock>(TocBlock.class, new CustomNodeRenderer<TocBlock>() {
-                    @Override
-                    public void render(TocBlock node, NodeRendererContext context, HtmlWriter html) {
-                        TocNodeRenderer.this.render(node, context, html);
-                    }
-                })
-        );
+        set.add(new NodeRenderingHandler<TocBlock>(TocBlock.class, this::render));
         return set;
     }
 

@@ -6,7 +6,6 @@ import com.vladsch.flexmark.ext.toc.SimTocBlock;
 import com.vladsch.flexmark.ext.toc.SimTocContent;
 import com.vladsch.flexmark.ext.toc.SimTocOption;
 import com.vladsch.flexmark.ext.toc.SimTocOptionList;
-import com.vladsch.flexmark.html.CustomNodeRenderer;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.NodeRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
@@ -32,30 +31,10 @@ public class SimTocNodeRenderer implements NodeRenderer {
     @Override
     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
         return new HashSet<NodeRenderingHandler<? extends Node>>(Arrays.asList(
-                new NodeRenderingHandler<SimTocBlock>(SimTocBlock.class, new CustomNodeRenderer<SimTocBlock>() {
-                    @Override
-                    public void render(SimTocBlock node, NodeRendererContext context, HtmlWriter html) {
-                        SimTocNodeRenderer.this.render(node, context, html);
-                    }
-                }),
-                new NodeRenderingHandler<SimTocContent>(SimTocContent.class, new CustomNodeRenderer<SimTocContent>() {
-                    @Override
-                    public void render(SimTocContent node, NodeRendererContext context, HtmlWriter html) {
-                        SimTocNodeRenderer.this.render(node, context, html);
-                    }
-                }),
-                new NodeRenderingHandler<SimTocOptionList>(SimTocOptionList.class, new CustomNodeRenderer<SimTocOptionList>() {
-                    @Override
-                    public void render(SimTocOptionList node, NodeRendererContext context, HtmlWriter html) {
-                        SimTocNodeRenderer.this.render(node, context, html);
-                    }
-                }),
-                new NodeRenderingHandler<SimTocOption>(SimTocOption.class, new CustomNodeRenderer<SimTocOption>() {
-                    @Override
-                    public void render(SimTocOption node, NodeRendererContext context, HtmlWriter html) {
-                        SimTocNodeRenderer.this.render(node, context, html);
-                    }
-                })
+                new NodeRenderingHandler<SimTocBlock>(SimTocBlock.class, this::render),
+                new NodeRenderingHandler<SimTocContent>(SimTocContent.class, this::render),
+                new NodeRenderingHandler<SimTocOptionList>(SimTocOptionList.class, this::render),
+                new NodeRenderingHandler<SimTocOption>(SimTocOption.class, this::render)
         ));
     }
 

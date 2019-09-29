@@ -2,9 +2,10 @@ package com.vladsch.flexmark.ext.attributes.internal;
 
 import com.vladsch.flexmark.ast.TextBase;
 import com.vladsch.flexmark.ext.attributes.AttributesNode;
-import com.vladsch.flexmark.html.CustomNodeRenderer;
-import com.vladsch.flexmark.html.HtmlWriter;
-import com.vladsch.flexmark.html.renderer.*;
+import com.vladsch.flexmark.html.renderer.AttributablePart;
+import com.vladsch.flexmark.html.renderer.NodeRenderer;
+import com.vladsch.flexmark.html.renderer.NodeRendererFactory;
+import com.vladsch.flexmark.html.renderer.NodeRenderingHandler;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.html.Attributes;
 
@@ -23,27 +24,21 @@ public class AttributesNodeRenderer implements NodeRenderer {
     @Override
     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
         HashSet<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
-        set.add(new NodeRenderingHandler<AttributesNode>(AttributesNode.class, new CustomNodeRenderer<AttributesNode>() {
-            @Override
-            public void render(AttributesNode node, NodeRendererContext context, HtmlWriter html) {
-                
-            }
+        set.add(new NodeRenderingHandler<AttributesNode>(AttributesNode.class, (node, context, html) -> {
+
         }));
-        set.add(new NodeRenderingHandler<TextBase>(TextBase.class, new CustomNodeRenderer<TextBase>() {
-            @Override
-            public void render(TextBase node, NodeRendererContext context, HtmlWriter html) {
-                if (myOptions.assignTextAttributes) {
-                    Attributes nodeAttributes = context.extendRenderingNodeAttributes(AttributablePart.NODE, null);
-                    if (!nodeAttributes.isEmpty()) {
-                        // has attributes then we wrap it in a span
-                        html.setAttributes(nodeAttributes).withAttr().tag("span");
-                        context.delegateRender();
-                        html.closeTag("span");
-                        return;
-                    }
+        set.add(new NodeRenderingHandler<TextBase>(TextBase.class, (node, context, html) -> {
+            if (myOptions.assignTextAttributes) {
+                Attributes nodeAttributes = context.extendRenderingNodeAttributes(AttributablePart.NODE, null);
+                if (!nodeAttributes.isEmpty()) {
+                    // has attributes then we wrap it in a span
+                    html.setAttributes(nodeAttributes).withAttr().tag("span");
+                    context.delegateRender();
+                    html.closeTag("span");
+                    return;
                 }
-                context.delegateRender();
             }
+            context.delegateRender();
         }));
         return set;
     }

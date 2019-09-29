@@ -11,10 +11,7 @@ public class HeadingCollectingVisitor {
 
     public HeadingCollectingVisitor() {
         myVisitor = new BlockNodeVisitor(
-                new VisitHandler<Heading>(Heading.class, new Visitor<Heading>() {
-                    @Override
-                    public void visit(Heading e) {headings.add(e);}
-                })
+                new VisitHandler<Heading>(Heading.class, headings::add)
         );
     }
 

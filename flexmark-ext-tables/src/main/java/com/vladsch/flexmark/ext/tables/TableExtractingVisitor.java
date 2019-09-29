@@ -17,48 +17,13 @@ public class TableExtractingVisitor {
     private final TableFormatOptions options;
 
     private NodeVisitor myVisitor = new NodeVisitor(
-            new VisitHandler<>(TableBlock.class, new Visitor<TableBlock>() {
-                @Override
-                public void visit(TableBlock node) {
-                    TableExtractingVisitor.this.visit(node);
-                }
-            }),
-            new VisitHandler<>(TableHead.class, new Visitor<TableHead>() {
-                @Override
-                public void visit(TableHead node) {
-                    TableExtractingVisitor.this.visit(node);
-                }
-            }),
-            new VisitHandler<>(TableSeparator.class, new Visitor<TableSeparator>() {
-                @Override
-                public void visit(TableSeparator node) {
-                    TableExtractingVisitor.this.visit(node);
-                }
-            }),
-            new VisitHandler<>(TableBody.class, new Visitor<TableBody>() {
-                @Override
-                public void visit(TableBody node) {
-                    TableExtractingVisitor.this.visit(node);
-                }
-            }),
-            new VisitHandler<>(TableRow.class, new Visitor<TableRow>() {
-                @Override
-                public void visit(TableRow node) {
-                    TableExtractingVisitor.this.visit(node);
-                }
-            }),
-            new VisitHandler<>(TableCell.class, new Visitor<TableCell>() {
-                @Override
-                public void visit(TableCell node) {
-                    TableExtractingVisitor.this.visit(node);
-                }
-            }),
-            new VisitHandler<>(TableCaption.class, new Visitor<TableCaption>() {
-                @Override
-                public void visit(TableCaption node) {
-                    TableExtractingVisitor.this.visit(node);
-                }
-            })
+            new VisitHandler<>(TableBlock.class, this::visit),
+            new VisitHandler<>(TableHead.class, this::visit),
+            new VisitHandler<>(TableSeparator.class, this::visit),
+            new VisitHandler<>(TableBody.class, this::visit),
+            new VisitHandler<>(TableRow.class, this::visit),
+            new VisitHandler<>(TableCell.class, this::visit),
+            new VisitHandler<>(TableCaption.class, this::visit)
     );
 
     private MarkdownTable myTable;

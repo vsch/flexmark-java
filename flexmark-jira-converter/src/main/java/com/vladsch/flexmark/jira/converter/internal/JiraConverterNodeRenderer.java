@@ -3,7 +3,6 @@ package com.vladsch.flexmark.jira.converter.internal;
 import com.vladsch.flexmark.ast.*;
 import com.vladsch.flexmark.ast.util.ReferenceRepository;
 import com.vladsch.flexmark.ast.util.TextCollectingVisitor;
-import com.vladsch.flexmark.html.CustomNodeRenderer;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.*;
@@ -36,134 +35,38 @@ public class JiraConverterNodeRenderer implements NodeRenderer {
     @Override
     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
         return new HashSet<NodeRenderingHandler<? extends Node>>(Arrays.asList(
-                new NodeRenderingHandler<AutoLink>(AutoLink.class, new CustomNodeRenderer<AutoLink>() {
-                    @Override
-                    public void render(AutoLink node, NodeRendererContext context, HtmlWriter html) { JiraConverterNodeRenderer.this.render(node, context, html); }
-                }),
-                new NodeRenderingHandler<BlockQuote>(BlockQuote.class, new CustomNodeRenderer<BlockQuote>() {
-                    @Override
-                    public void render(BlockQuote node, NodeRendererContext context, HtmlWriter html) { JiraConverterNodeRenderer.this.render(node, context, html); }
-                }),
-                new NodeRenderingHandler<BulletList>(BulletList.class, new CustomNodeRenderer<BulletList>() {
-                    @Override
-                    public void render(BulletList node, NodeRendererContext context, HtmlWriter html) { JiraConverterNodeRenderer.this.render(node, context, html); }
-                }),
-                new NodeRenderingHandler<BulletListItem>(BulletListItem.class, new CustomNodeRenderer<BulletListItem>() {
-                    @Override
-                    public void render(BulletListItem node, NodeRendererContext context, HtmlWriter html) { JiraConverterNodeRenderer.this.render(node, context, html); }
-                }),
-                new NodeRenderingHandler<Code>(Code.class, new CustomNodeRenderer<Code>() {
-                    @Override
-                    public void render(Code node, NodeRendererContext context, HtmlWriter html) { JiraConverterNodeRenderer.this.render(node, context, html); }
-                }),
-                new NodeRenderingHandler<Document>(Document.class, new CustomNodeRenderer<Document>() {
-                    @Override
-                    public void render(Document node, NodeRendererContext context, HtmlWriter html) { JiraConverterNodeRenderer.this.render(node, context, html); }
-                }),
-                new NodeRenderingHandler<Emphasis>(Emphasis.class, new CustomNodeRenderer<Emphasis>() {
-                    @Override
-                    public void render(Emphasis node, NodeRendererContext context, HtmlWriter html) { JiraConverterNodeRenderer.this.render(node, context, html); }
-                }),
-                new NodeRenderingHandler<FencedCodeBlock>(FencedCodeBlock.class, new CustomNodeRenderer<FencedCodeBlock>() {
-                    @Override
-                    public void render(FencedCodeBlock node, NodeRendererContext context, HtmlWriter html) { JiraConverterNodeRenderer.this.render(node, context, html); }
-                }),
-                new NodeRenderingHandler<HardLineBreak>(HardLineBreak.class, new CustomNodeRenderer<HardLineBreak>() {
-                    @Override
-                    public void render(HardLineBreak node, NodeRendererContext context, HtmlWriter html) { JiraConverterNodeRenderer.this.render(node, context, html); }
-                }),
-                new NodeRenderingHandler<Heading>(Heading.class, new CustomNodeRenderer<Heading>() {
-                    @Override
-                    public void render(Heading node, NodeRendererContext context, HtmlWriter html) { JiraConverterNodeRenderer.this.render(node, context, html); }
-                }),
-                new NodeRenderingHandler<HtmlBlock>(HtmlBlock.class, new CustomNodeRenderer<HtmlBlock>() {
-                    @Override
-                    public void render(HtmlBlock node, NodeRendererContext context, HtmlWriter html) { JiraConverterNodeRenderer.this.render(node, context, html); }
-                }),
-                new NodeRenderingHandler<HtmlCommentBlock>(HtmlCommentBlock.class, new CustomNodeRenderer<HtmlCommentBlock>() {
-                    @Override
-                    public void render(HtmlCommentBlock node, NodeRendererContext context, HtmlWriter html) { JiraConverterNodeRenderer.this.render(node, context, html); }
-                }),
-                new NodeRenderingHandler<HtmlEntity>(HtmlEntity.class, new CustomNodeRenderer<HtmlEntity>() {
-                    @Override
-                    public void render(HtmlEntity node, NodeRendererContext context, HtmlWriter html) { JiraConverterNodeRenderer.this.render(node, context, html); }
-                }),
-                new NodeRenderingHandler<HtmlInline>(HtmlInline.class, new CustomNodeRenderer<HtmlInline>() {
-                    @Override
-                    public void render(HtmlInline node, NodeRendererContext context, HtmlWriter html) { JiraConverterNodeRenderer.this.render(node, context, html); }
-                }),
-                new NodeRenderingHandler<HtmlInlineComment>(HtmlInlineComment.class, new CustomNodeRenderer<HtmlInlineComment>() {
-                    @Override
-                    public void render(HtmlInlineComment node, NodeRendererContext context, HtmlWriter html) { JiraConverterNodeRenderer.this.render(node, context, html); }
-                }),
-                new NodeRenderingHandler<HtmlInnerBlock>(HtmlInnerBlock.class, new CustomNodeRenderer<HtmlInnerBlock>() {
-                    @Override
-                    public void render(HtmlInnerBlock node, NodeRendererContext context, HtmlWriter html) { JiraConverterNodeRenderer.this.render(node, context, html); }
-                }),
-                new NodeRenderingHandler<HtmlInnerBlockComment>(HtmlInnerBlockComment.class, new CustomNodeRenderer<HtmlInnerBlockComment>() {
-                    @Override
-                    public void render(HtmlInnerBlockComment node, NodeRendererContext context, HtmlWriter html) { JiraConverterNodeRenderer.this.render(node, context, html); }
-                }),
-                new NodeRenderingHandler<Image>(Image.class, new CustomNodeRenderer<Image>() {
-                    @Override
-                    public void render(Image node, NodeRendererContext context, HtmlWriter html) { JiraConverterNodeRenderer.this.render(node, context, html); }
-                }),
-                new NodeRenderingHandler<ImageRef>(ImageRef.class, new CustomNodeRenderer<ImageRef>() {
-                    @Override
-                    public void render(ImageRef node, NodeRendererContext context, HtmlWriter html) { JiraConverterNodeRenderer.this.render(node, context, html); }
-                }),
-                new NodeRenderingHandler<IndentedCodeBlock>(IndentedCodeBlock.class, new CustomNodeRenderer<IndentedCodeBlock>() {
-                    @Override
-                    public void render(IndentedCodeBlock node, NodeRendererContext context, HtmlWriter html) { JiraConverterNodeRenderer.this.render(node, context, html); }
-                }),
-                new NodeRenderingHandler<Link>(Link.class, new CustomNodeRenderer<Link>() {
-                    @Override
-                    public void render(Link node, NodeRendererContext context, HtmlWriter html) { JiraConverterNodeRenderer.this.render(node, context, html); }
-                }),
-                new NodeRenderingHandler<LinkRef>(LinkRef.class, new CustomNodeRenderer<LinkRef>() {
-                    @Override
-                    public void render(LinkRef node, NodeRendererContext context, HtmlWriter html) { JiraConverterNodeRenderer.this.render(node, context, html); }
-                }),
-                new NodeRenderingHandler<MailLink>(MailLink.class, new CustomNodeRenderer<MailLink>() {
-                    @Override
-                    public void render(MailLink node, NodeRendererContext context, HtmlWriter html) { JiraConverterNodeRenderer.this.render(node, context, html); }
-                }),
-                new NodeRenderingHandler<OrderedList>(OrderedList.class, new CustomNodeRenderer<OrderedList>() {
-                    @Override
-                    public void render(OrderedList node, NodeRendererContext context, HtmlWriter html) { JiraConverterNodeRenderer.this.render(node, context, html); }
-                }),
-                new NodeRenderingHandler<OrderedListItem>(OrderedListItem.class, new CustomNodeRenderer<OrderedListItem>() {
-                    @Override
-                    public void render(OrderedListItem node, NodeRendererContext context, HtmlWriter html) { JiraConverterNodeRenderer.this.render(node, context, html); }
-                }),
-                new NodeRenderingHandler<Paragraph>(Paragraph.class, new CustomNodeRenderer<Paragraph>() {
-                    @Override
-                    public void render(Paragraph node, NodeRendererContext context, HtmlWriter html) { JiraConverterNodeRenderer.this.render(node, context, html); }
-                }),
-                new NodeRenderingHandler<Reference>(Reference.class, new CustomNodeRenderer<Reference>() {
-                    @Override
-                    public void render(Reference node, NodeRendererContext context, HtmlWriter html) { JiraConverterNodeRenderer.this.render(node, context, html); }
-                }),
-                new NodeRenderingHandler<SoftLineBreak>(SoftLineBreak.class, new CustomNodeRenderer<SoftLineBreak>() {
-                    @Override
-                    public void render(SoftLineBreak node, NodeRendererContext context, HtmlWriter html) { JiraConverterNodeRenderer.this.render(node, context, html); }
-                }),
-                new NodeRenderingHandler<StrongEmphasis>(StrongEmphasis.class, new CustomNodeRenderer<StrongEmphasis>() {
-                    @Override
-                    public void render(StrongEmphasis node, NodeRendererContext context, HtmlWriter html) { JiraConverterNodeRenderer.this.render(node, context, html); }
-                }),
-                new NodeRenderingHandler<Text>(Text.class, new CustomNodeRenderer<Text>() {
-                    @Override
-                    public void render(Text node, NodeRendererContext context, HtmlWriter html) { JiraConverterNodeRenderer.this.render(node, context, html); }
-                }),
-                new NodeRenderingHandler<TextBase>(TextBase.class, new CustomNodeRenderer<TextBase>() {
-                    @Override
-                    public void render(TextBase node, NodeRendererContext context, HtmlWriter html) { JiraConverterNodeRenderer.this.render(node, context, html); }
-                }),
-                new NodeRenderingHandler<ThematicBreak>(ThematicBreak.class, new CustomNodeRenderer<ThematicBreak>() {
-                    @Override
-                    public void render(ThematicBreak node, NodeRendererContext context, HtmlWriter html) { JiraConverterNodeRenderer.this.render(node, context, html); }
-                })
+                new NodeRenderingHandler<AutoLink>(AutoLink.class, this::render),
+                new NodeRenderingHandler<BlockQuote>(BlockQuote.class, this::render),
+                new NodeRenderingHandler<BulletList>(BulletList.class, this::render),
+                new NodeRenderingHandler<BulletListItem>(BulletListItem.class, this::render),
+                new NodeRenderingHandler<Code>(Code.class, this::render),
+                new NodeRenderingHandler<Document>(Document.class, this::render),
+                new NodeRenderingHandler<Emphasis>(Emphasis.class, this::render),
+                new NodeRenderingHandler<FencedCodeBlock>(FencedCodeBlock.class, this::render),
+                new NodeRenderingHandler<HardLineBreak>(HardLineBreak.class, this::render),
+                new NodeRenderingHandler<Heading>(Heading.class, this::render),
+                new NodeRenderingHandler<HtmlBlock>(HtmlBlock.class, this::render),
+                new NodeRenderingHandler<HtmlCommentBlock>(HtmlCommentBlock.class, this::render),
+                new NodeRenderingHandler<HtmlEntity>(HtmlEntity.class, this::render),
+                new NodeRenderingHandler<HtmlInline>(HtmlInline.class, this::render),
+                new NodeRenderingHandler<HtmlInlineComment>(HtmlInlineComment.class, this::render),
+                new NodeRenderingHandler<HtmlInnerBlock>(HtmlInnerBlock.class, this::render),
+                new NodeRenderingHandler<HtmlInnerBlockComment>(HtmlInnerBlockComment.class, this::render),
+                new NodeRenderingHandler<Image>(Image.class, this::render),
+                new NodeRenderingHandler<ImageRef>(ImageRef.class, this::render),
+                new NodeRenderingHandler<IndentedCodeBlock>(IndentedCodeBlock.class, this::render),
+                new NodeRenderingHandler<Link>(Link.class, this::render),
+                new NodeRenderingHandler<LinkRef>(LinkRef.class, this::render),
+                new NodeRenderingHandler<MailLink>(MailLink.class, this::render),
+                new NodeRenderingHandler<OrderedList>(OrderedList.class, this::render),
+                new NodeRenderingHandler<OrderedListItem>(OrderedListItem.class, this::render),
+                new NodeRenderingHandler<Paragraph>(Paragraph.class, this::render),
+                new NodeRenderingHandler<Reference>(Reference.class, this::render),
+                new NodeRenderingHandler<SoftLineBreak>(SoftLineBreak.class, this::render),
+                new NodeRenderingHandler<StrongEmphasis>(StrongEmphasis.class, this::render),
+                new NodeRenderingHandler<Text>(Text.class, this::render),
+                new NodeRenderingHandler<TextBase>(TextBase.class, this::render),
+                new NodeRenderingHandler<ThematicBreak>(ThematicBreak.class, this::render)
         ));
     }
 

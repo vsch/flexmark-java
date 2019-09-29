@@ -4,7 +4,6 @@ import com.vladsch.flexmark.ext.media.tags.AudioLink;
 import com.vladsch.flexmark.ext.media.tags.EmbedLink;
 import com.vladsch.flexmark.ext.media.tags.PictureLink;
 import com.vladsch.flexmark.ext.media.tags.VideoLink;
-import com.vladsch.flexmark.html.CustomNodeRenderer;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.*;
 import com.vladsch.flexmark.util.data.DataHolder;
@@ -18,41 +17,12 @@ public class MediaTagsNodeRenderer implements NodeRenderer {
 
     @Override
     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
-        MediaTagsNodeRenderer self = this;
 
         HashSet<NodeRenderingHandler<?>> set = new HashSet<>();
-
-        // AudioLink Rendering
-        set.add(new NodeRenderingHandler<>(AudioLink.class, new CustomNodeRenderer<AudioLink>() {
-            @Override
-            public void render(AudioLink node, NodeRendererContext context, HtmlWriter html) {
-                self.renderAudioLink(node, context, html);
-            }
-        }));
-
-        // EmbedLink Rendering
-        set.add(new NodeRenderingHandler<>(EmbedLink.class, new CustomNodeRenderer<EmbedLink>() {
-            @Override
-            public void render(EmbedLink node, NodeRendererContext context, HtmlWriter html) {
-                self.renderEmbedLink(node, context, html);
-            }
-        }));
-
-        // PictureLink Rendering
-        set.add(new NodeRenderingHandler<>(PictureLink.class, new CustomNodeRenderer<PictureLink>() {
-            @Override
-            public void render(PictureLink node, NodeRendererContext context, HtmlWriter html) {
-                self.renderPictureLink(node, context, html);
-            }
-        }));
-
-        // VideoLink Rendering
-        set.add(new NodeRenderingHandler<>(VideoLink.class, new CustomNodeRenderer<VideoLink>() {
-            @Override
-            public void render(VideoLink node, NodeRendererContext context, HtmlWriter html) {
-                self.renderVideoLink(node, context, html);
-            }
-        }));
+        set.add(new NodeRenderingHandler<>(AudioLink.class, this::renderAudioLink));
+        set.add(new NodeRenderingHandler<>(EmbedLink.class, this::renderEmbedLink));
+        set.add(new NodeRenderingHandler<>(PictureLink.class, this::renderPictureLink));
+        set.add(new NodeRenderingHandler<>(VideoLink.class, this::renderVideoLink));
         return set;
     }
 

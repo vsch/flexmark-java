@@ -49,7 +49,7 @@ public class AttributesInlineParserExtension implements InlineParserExtension {
                 inlineParser.getBlock().appendChild(attributes);
 
                 BasedSequence attributeText = attributesText.trim();
-                if (!attributeText.isEmpty() && attributes instanceof AttributesNode) {
+                if (!attributeText.isEmpty()) {
                     // have some attribute text
                     // parse attributes
                     Matcher attributeMatcher = parsing.ATTRIBUTE.matcher(attributeText);
@@ -66,7 +66,7 @@ public class AttributesInlineParserExtension implements InlineParserExtension {
                         }
 
                         AttributeNode attribute;
-                        if (attributeSeparator.isNull() && attributeSeparator.isNull() && attributeValue.isNull() && AttributeNode.isImplicitName(attributeName)) {
+                        if (attributeSeparator.isNull() && attributeValue.isNull() && AttributeNode.isImplicitName(attributeName)) {
                             attribute = new AttributeNode(attributeName.subSequence(0, 1), attributeSeparator, attributeOpen, attributeName.subSequence(1), attributeClose);
                         } else {
                             attribute = new AttributeNode(attributeName, attributeSeparator, attributeOpen, attributeValue, attributeClose);

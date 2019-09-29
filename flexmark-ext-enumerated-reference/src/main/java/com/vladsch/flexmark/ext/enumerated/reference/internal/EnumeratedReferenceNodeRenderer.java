@@ -48,9 +48,9 @@ public class EnumeratedReferenceNodeRenderer implements PhasedNodeRenderer
     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
         Set<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
         // @formatter:off
-        set.add(new NodeRenderingHandler<EnumeratedReferenceText>(EnumeratedReferenceText.class, new CustomNodeRenderer<EnumeratedReferenceText>() { @Override public void render(EnumeratedReferenceText node, NodeRendererContext context, HtmlWriter html) { EnumeratedReferenceNodeRenderer.this.render(node, context, html); } }));
-        set.add(new NodeRenderingHandler<EnumeratedReferenceLink>(EnumeratedReferenceLink.class, new CustomNodeRenderer<EnumeratedReferenceLink>() { @Override public void render(EnumeratedReferenceLink node, NodeRendererContext context, HtmlWriter html) { EnumeratedReferenceNodeRenderer.this.render(node, context, html); } }));
-        set.add(new NodeRenderingHandler<EnumeratedReferenceBlock>(EnumeratedReferenceBlock.class, new CustomNodeRenderer<EnumeratedReferenceBlock>() { @Override public void render(EnumeratedReferenceBlock node, NodeRendererContext context, HtmlWriter html) { EnumeratedReferenceNodeRenderer.this.render(node, context, html); } }));// ,// zzzoptionszzz(CUSTOM_NODE)
+        set.add(new NodeRenderingHandler<EnumeratedReferenceText>(EnumeratedReferenceText.class, EnumeratedReferenceNodeRenderer.this::render));
+        set.add(new NodeRenderingHandler<EnumeratedReferenceLink>(EnumeratedReferenceLink.class, EnumeratedReferenceNodeRenderer.this::render));
+        set.add(new NodeRenderingHandler<EnumeratedReferenceBlock>(EnumeratedReferenceBlock.class, EnumeratedReferenceNodeRenderer.this::render));// ,// zzzoptionszzz(CUSTOM_NODE)
         // @formatter:on
         return set;
     }
@@ -129,13 +129,10 @@ public class EnumeratedReferenceNodeRenderer implements PhasedNodeRenderer
             Runnable compoundRunnable = renderer.ordinalRunnable;
 
             if (referenceFormat != null) {
-                renderer.ordinalRunnable = new Runnable() {
-                    @Override
-                    public void run() {
-                        if (compoundRunnable != null) compoundRunnable.run();
-                        html.text(String.valueOf(referenceOrdinal));
-                        if (needSeparator) html.text(".");
-                    }
+                renderer.ordinalRunnable = () -> {
+                    if (compoundRunnable != null) compoundRunnable.run();
+                    html.text(String.valueOf(referenceOrdinal));
+                    if (needSeparator) html.text(".");
                 };
 
                 context.renderChildren(referenceFormat);

@@ -36,9 +36,9 @@ public class SpecExample {
     }
 
     public SpecExample(String optionsSet, String section, int exampleNumber, String source, String html, String ast, String comment, final UrlString fileUrl) {
-        this(optionsSet, section, exampleNumber, source, html,ast, comment, fileUrl, false);
+        this(optionsSet, section, exampleNumber, source, html, ast, comment, fileUrl, false);
     }
-    
+
     private SpecExample(String optionsSet, String section, int exampleNumber, String source, String html, String ast, String comment, final UrlString fileUrl, boolean isNull) {
         this.section = section;
         this.exampleNumber = exampleNumber;

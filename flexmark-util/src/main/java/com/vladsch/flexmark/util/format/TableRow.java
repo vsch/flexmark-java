@@ -34,8 +34,8 @@ public class TableRow {
 
     public void forAllCells(int startIndex, int count, TableCellConsumer consumer) {
         forAllCells(startIndex, count, (cell, cellIndex, cellColumn, allCellIndex) -> {
-             consumer.accept(cell, cellIndex, cellColumn);
-             return 0;
+            consumer.accept(cell, cellIndex, cellColumn);
+            return 0;
         });
     }
 

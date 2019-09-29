@@ -1,17 +1,11 @@
 package com.vladsch.flexmark.ext.youtube.embedded;
 
 import com.vladsch.flexmark.util.ast.VisitHandler;
-import com.vladsch.flexmark.util.ast.Visitor;
 
 public class YouTubeLinkVisitorExt {
     public static <V extends YouTubeLinkVisitor> VisitHandler<?>[] VISIT_HANDLERS(V visitor) {
         return new VisitHandler<?>[] {
-                new VisitHandler<YouTubeLink>(YouTubeLink.class, new Visitor<YouTubeLink>() {
-                    @Override
-                    public void visit(YouTubeLink node) {
-                        visitor.visit(node);
-                    }
-                })
+                new VisitHandler<YouTubeLink>(YouTubeLink.class, visitor::visit)
         };
     }
 }

@@ -25,7 +25,7 @@ public class GfmUsersNodeRenderer implements NodeRenderer
     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
         Set<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
         // @formatter:off
-        set.add(new NodeRenderingHandler<GfmUser>(GfmUser.class, new CustomNodeRenderer<GfmUser>() { @Override public void render(GfmUser node, NodeRendererContext context, HtmlWriter html) { GfmUsersNodeRenderer.this.render(node, context, html); } }));
+        set.add(new NodeRenderingHandler<GfmUser>(GfmUser.class, GfmUsersNodeRenderer.this::render));
         // @formatter:on
         return set;
     }

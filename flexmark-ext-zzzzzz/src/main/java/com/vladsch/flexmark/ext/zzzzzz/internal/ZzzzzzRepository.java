@@ -25,12 +25,7 @@ public class ZzzzzzRepository extends NodeRepository<ZzzzzzBlock> {
 
     public void resolveZzzzzzOrdinals() {
         // need to sort by first referenced offset then set each to its ordinal position in the array+1
-        Collections.sort(referencedZzzzzzBlocks, new Comparator<ZzzzzzBlock>() {
-            @Override
-            public int compare(ZzzzzzBlock f1, ZzzzzzBlock f2) {
-                return f1.getFirstReferenceOffset() - f2.getFirstReferenceOffset();
-            }
-        });
+        Collections.sort(referencedZzzzzzBlocks, (f1, f2) -> f1.getFirstReferenceOffset() - f2.getFirstReferenceOffset());
         int ordinal = 0;
         for (ZzzzzzBlock zzzzzzBlock : referencedZzzzzzBlocks) {
             zzzzzzBlock.setZzzzzzOrdinal(++ordinal);

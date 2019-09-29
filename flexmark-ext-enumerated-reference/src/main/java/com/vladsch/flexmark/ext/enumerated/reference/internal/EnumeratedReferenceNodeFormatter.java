@@ -12,8 +12,6 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-import static com.vladsch.flexmark.formatter.RenderPurpose.TRANSLATED;
-
 public class EnumeratedReferenceNodeFormatter extends NodeRepositoryFormatter<EnumeratedReferenceRepository, EnumeratedReferenceBlock, EnumeratedReferenceText> {
 
     private final EnumeratedReferenceFormatOptions options;
@@ -50,31 +48,16 @@ public class EnumeratedReferenceNodeFormatter extends NodeRepositoryFormatter<En
     @Override
     public Set<NodeFormattingHandler<?>> getNodeFormattingHandlers() {
         return new HashSet<NodeFormattingHandler<?>>(Arrays.asList(
-                new NodeFormattingHandler<EnumeratedReferenceText>(EnumeratedReferenceText.class, new CustomNodeFormatter<EnumeratedReferenceText>() {
-                    @Override
-                    public void render(EnumeratedReferenceText node, NodeFormatterContext context, MarkdownWriter markdown) {
-                        EnumeratedReferenceNodeFormatter.this.render(node, context, markdown);
-                    }
-                }),
-                new NodeFormattingHandler<EnumeratedReferenceLink>(EnumeratedReferenceLink.class, new CustomNodeFormatter<EnumeratedReferenceLink>() {
-                    @Override
-                    public void render(EnumeratedReferenceLink node, NodeFormatterContext context, MarkdownWriter markdown) {
-                        EnumeratedReferenceNodeFormatter.this.render(node, context, markdown);
-                    }
-                }),
-                new NodeFormattingHandler<EnumeratedReferenceBlock>(EnumeratedReferenceBlock.class, new CustomNodeFormatter<EnumeratedReferenceBlock>() {
-                    @Override
-                    public void render(EnumeratedReferenceBlock node, NodeFormatterContext context, MarkdownWriter markdown) {
-                        EnumeratedReferenceNodeFormatter.this.render(node, context, markdown);
-                    }
-                })
+                new NodeFormattingHandler<EnumeratedReferenceText>(EnumeratedReferenceText.class, EnumeratedReferenceNodeFormatter.this::render),
+                new NodeFormattingHandler<EnumeratedReferenceLink>(EnumeratedReferenceLink.class, EnumeratedReferenceNodeFormatter.this::render),
+                new NodeFormattingHandler<EnumeratedReferenceBlock>(EnumeratedReferenceBlock.class, EnumeratedReferenceNodeFormatter.this::render)
         ));
     }
 
     @Override
     public Set<Class<?>> getNodeClasses() {
         if (options.enumeratedReferencePlacement != ElementPlacement.AS_IS && options.enumeratedReferenceSort != ElementPlacementSort.SORT_UNUSED_LAST) return null;
-        //noinspection unchecked,ArraysAsListWithZeroOrOneArgument
+        // noinspection ArraysAsListWithZeroOrOneArgument
         return new HashSet<Class<?>>(Arrays.asList(
                 EnumeratedReferenceBlock.class
         ));

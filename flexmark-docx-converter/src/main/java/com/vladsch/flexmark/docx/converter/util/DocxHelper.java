@@ -241,7 +241,7 @@ public class DocxHelper {
      * Must be called after the child indent is set
      *
      * @param child  child ppr
-     * @param parent  parent ppr
+     * @param parent parent ppr
      */
     public void inheritPBdr(PPr child, PPr parent) {
         parent = getResolver().getEffectivePPr(parent);

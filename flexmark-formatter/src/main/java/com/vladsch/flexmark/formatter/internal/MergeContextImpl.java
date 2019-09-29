@@ -1,8 +1,8 @@
 package com.vladsch.flexmark.formatter.internal;
 
 import com.vladsch.flexmark.formatter.MergeContext;
-import com.vladsch.flexmark.formatter.TranslationContext;
 import com.vladsch.flexmark.formatter.MergeContextConsumer;
+import com.vladsch.flexmark.formatter.TranslationContext;
 import com.vladsch.flexmark.formatter.TranslationHandler;
 import com.vladsch.flexmark.util.ast.Document;
 
@@ -11,7 +11,7 @@ import java.util.HashMap;
 public class MergeContextImpl implements MergeContext {
     private Document[] myDocuments;
     private TranslationHandler[] myTranslationHandlers;
-    final private HashMap<TranslationHandler, Document> myTranslationHandlerDocumentMap;
+    final private HashMap<TranslationContext, Document> myTranslationHandlerDocumentMap;
 
     public MergeContextImpl(Document[] documents, TranslationHandler[] translationHandlers) {
         assert documents.length == translationHandlers.length;

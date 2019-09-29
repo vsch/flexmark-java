@@ -5,7 +5,6 @@ import com.vladsch.flexmark.ext.tables.TablesExtension;
 import com.vladsch.flexmark.formatter.Formatter;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.spec.SpecExample;
-import com.vladsch.flexmark.spec.SpecReader;
 import com.vladsch.flexmark.test.ComboSpecTestCase;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
@@ -13,7 +12,10 @@ import com.vladsch.flexmark.util.format.options.ElementPlacement;
 import com.vladsch.flexmark.util.format.options.ElementPlacementSort;
 import org.junit.runners.Parameterized;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class ComboMacrosFormatterSpecTest extends ComboSpecTestCase {
     private static final String SPEC_RESOURCE = "/ext_macros_formatter_spec.md";
@@ -58,16 +60,7 @@ public class ComboMacrosFormatterSpecTest extends ComboSpecTestCase {
 
     @Parameterized.Parameters(name = "{0}")
     public static List<Object[]> data() {
-        List<SpecExample> examples = SpecReader.readExamples(SPEC_RESOURCE);
-        List<Object[]> data = new ArrayList<Object[]>();
-
-        // NULL example runs full spec test
-        data.add(new Object[] { SpecExample.getNull() });
-
-        for (SpecExample example : examples) {
-            data.add(new Object[] { example });
-        }
-        return data;
+        return getTestData(SPEC_RESOURCE);
     }
 
     @Override

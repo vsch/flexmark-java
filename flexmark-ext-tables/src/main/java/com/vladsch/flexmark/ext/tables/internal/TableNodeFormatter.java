@@ -42,54 +42,14 @@ public class TableNodeFormatter implements NodeFormatter {
     @Override
     public Set<NodeFormattingHandler<?>> getNodeFormattingHandlers() {
         return new HashSet<NodeFormattingHandler<? extends Node>>(Arrays.asList(
-                new NodeFormattingHandler<TableBlock>(TableBlock.class, new CustomNodeFormatter<TableBlock>() {
-                    @Override
-                    public void render(TableBlock node, NodeFormatterContext context, MarkdownWriter markdown) {
-                        TableNodeFormatter.this.render(node, context, markdown);
-                    }
-                }),
-                new NodeFormattingHandler<TableHead>(TableHead.class, new CustomNodeFormatter<TableHead>() {
-                    @Override
-                    public void render(TableHead node, NodeFormatterContext context, MarkdownWriter markdown) {
-                        TableNodeFormatter.this.render(node, context, markdown);
-                    }
-                }),
-                new NodeFormattingHandler<TableSeparator>(TableSeparator.class, new CustomNodeFormatter<TableSeparator>() {
-                    @Override
-                    public void render(TableSeparator node, NodeFormatterContext context, MarkdownWriter markdown) {
-                        TableNodeFormatter.this.render(node, context, markdown);
-                    }
-                }),
-                new NodeFormattingHandler<TableBody>(TableBody.class, new CustomNodeFormatter<TableBody>() {
-                    @Override
-                    public void render(TableBody node, NodeFormatterContext context, MarkdownWriter markdown) {
-                        TableNodeFormatter.this.render(node, context, markdown);
-                    }
-                }),
-                new NodeFormattingHandler<TableRow>(TableRow.class, new CustomNodeFormatter<TableRow>() {
-                    @Override
-                    public void render(TableRow node, NodeFormatterContext context, MarkdownWriter markdown) {
-                        TableNodeFormatter.this.render(node, context, markdown);
-                    }
-                }),
-                new NodeFormattingHandler<TableCell>(TableCell.class, new CustomNodeFormatter<TableCell>() {
-                    @Override
-                    public void render(TableCell node, NodeFormatterContext context, MarkdownWriter markdown) {
-                        TableNodeFormatter.this.render(node, context, markdown);
-                    }
-                }),
-                new NodeFormattingHandler<TableCaption>(TableCaption.class, new CustomNodeFormatter<TableCaption>() {
-                    @Override
-                    public void render(TableCaption node, NodeFormatterContext context, MarkdownWriter markdown) {
-                        TableNodeFormatter.this.render(node, context, markdown);
-                    }
-                }),
-                new NodeFormattingHandler<Text>(Text.class, new CustomNodeFormatter<Text>() {
-                    @Override
-                    public void render(Text node, NodeFormatterContext context, MarkdownWriter markdown) {
-                        TableNodeFormatter.this.render(node, context, markdown);
-                    }
-                })
+                new NodeFormattingHandler<TableBlock>(TableBlock.class, TableNodeFormatter.this::render),
+                new NodeFormattingHandler<TableHead>(TableHead.class, TableNodeFormatter.this::render),
+                new NodeFormattingHandler<TableSeparator>(TableSeparator.class, TableNodeFormatter.this::render),
+                new NodeFormattingHandler<TableBody>(TableBody.class, TableNodeFormatter.this::render),
+                new NodeFormattingHandler<TableRow>(TableRow.class, TableNodeFormatter.this::render),
+                new NodeFormattingHandler<TableCell>(TableCell.class, TableNodeFormatter.this::render),
+                new NodeFormattingHandler<TableCaption>(TableCaption.class, TableNodeFormatter.this::render),
+                new NodeFormattingHandler<Text>(Text.class, TableNodeFormatter.this::render)
         ));
     }
 
@@ -205,12 +165,9 @@ public class TableNodeFormatter implements NodeFormatter {
 
             String[] childText = new String[] { "" };
 
-            context.translatingSpan(new TranslatingSpanRender() {
-                @Override
-                public void render(NodeFormatterContext context, MarkdownWriter writer) {
-                    context.renderChildren(node);
-                    childText[0] = writer.toString(-1);
-                }
+            context.translatingSpan((context1, writer) -> {
+                context1.renderChildren(node);
+                childText[0] = writer.toString(-1);
             });
 
             if (!myTable.isSeparator() && options.spaceAroundPipes && (!childText[0].endsWith(" ") || parserTrimCellWhiteSpace)) markdown.append(' ');

@@ -273,12 +273,7 @@ public class FlexmarkHtmlConverter {
         nodeRendererFactories = resolver.resolveDependencies(nodeRenderers).getNodeRendererFactories();
 
         // Add as last. This means clients can override the rendering of core nodes if they want.
-        this.nodeConverterFactories.add(new HtmlNodeRendererFactory() {
-            @Override
-            public HtmlNodeRenderer apply(DataHolder options) {
-                return new HtmlConverterCoreNodeRenderer(options);
-            }
-        });
+        this.nodeConverterFactories.add(HtmlConverterCoreNodeRenderer::new);
 
         this.linkResolverFactories = FlatDependencyHandler.computeDependencies(builder.linkResolverFactories);
     }
@@ -380,8 +375,8 @@ public class FlexmarkHtmlConverter {
     /**
      * Render a node to the appendable
      *
-     * @param node   node to render
-     * @param output appendable to use for the output
+     * @param node                  node to render
+     * @param output                appendable to use for the output
      * @param maxTrailingBlankLines max blank lines allowed at end of output
      */
     public void convert(Node node, Appendable output, int maxTrailingBlankLines) {
@@ -534,12 +529,7 @@ public class FlexmarkHtmlConverter {
         }
     };
 
-    final public static Iterable<? extends Node> NULL_ITERABLE = new Iterable<Node>() {
-        @Override
-        public Iterator<Node> iterator() {
-            return null;
-        }
-    };
+    final public static Iterable<? extends Node> NULL_ITERABLE = (Iterable<Node>) () -> null;
 
     public static class RendererDependencyStage {
         private final List<DelegatingNodeRendererFactoryWrapper> dependents;

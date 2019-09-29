@@ -1,41 +1,34 @@
 #!/usr/bin/env bash
-HOME_DIR="/Users/vlad/src/projects/flexmark-java"
+HOME_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 
-cd ${HOME_DIR} || exit
+cd "${HOME_DIR}" || exit
 
-# Updated by plugin-util
-#cp out/artifacts/flexmark-util.jar ../MissingInActions/lib
-#echo updated out/artifacts/flexmark-util.jar in ../MissingInActions/lib
+function UpdProjects() {
+  JAR="$1"
 
-#cp out/artifacts/flexmark-util.jar ../touch-typists-completion-caddy/lib
-#echo updated out/artifacts/flexmark-util.jar in ../touch-typists-completion-caddy/lib
+  echo updating "${JAR}" in
+  for PROJECT in "${@:2}"; do
+    echo "   " "${PROJECT}"
+    cp "out/artifacts/${JAR}" "${PROJECT}"
+  done
+}
 
-#cp out/artifacts/flexmark-util.jar ../CLionArduinoPlugin/lib
-#echo updated out/artifacts/flexmark-util.jar in ../CLionArduinoPlugin/lib
-cp out/artifacts/flexmark-test-util.jar ../CLionArduinoPlugin/lib
-echo updated out/artifacts/flexmark-test-util.jar in ../CLionArduinoPlugin/lib
-cp out/artifacts/flexmark-formatter.jar ../CLionArduinoPlugin/lib
-echo updated out/artifacts/flexmark-formatter.jar in ../CLionArduinoPlugin/lib
+function UpdJars() {
+  PROJECT="$1"
 
-cp out/artifacts/flexmark-parent.jar ../idea-multimarkdown3/lib
-echo updated out/artifacts/flexmark-parent.jar in ../idea-multimarkdown3/lib
+  echo updating "${PROJECT}" with
+  for JAR in "${@:2}"; do
+    echo "   " "${JAR}"
+    cp "out/artifacts/${JAR}" "${PROJECT}"
+  done
+}
 
-cp out/artifacts/flexmark-parent.jar ../idea-multimarkdown2/lib
-echo updated out/artifacts/flexmark-parent.jar in ../idea-multimarkdown2/lib
+# Update flexmark-util.jar flexmark-tree-iteration.jar
+UpdJars ../plugin-util/lib flexmark-util.jar flexmark-tree-iteration.jar
+UpdJars ../MissingInActions/lib flexmark-util.jar flexmark-tree-iteration.jar
+UpdJars ../touch-typists-completion-caddy/lib flexmark-util.jar flexmark-tree-iteration.jar
 
-cp out/artifacts/flexmark-parent.jar ../idea-multimarkdown1/lib
-echo updated out/artifacts/flexmark-parent.jar in ../idea-multimarkdown1/lib
+# Update flexmark-test-util.jar
+UpdJars ../CLionArduinoPlugin/lib flexmark-test-util.jar flexmark-formatter.jar flexmark-util.jar
 
-cp out/artifacts/flexmark-parent.jar ../tree-iteration/lib
-echo updated out/artifacts/flexmark-parent.jar in ../tree-iteration/lib
-
-cp out/artifacts/flexmark-util.jar ../plugin-util/lib
-echo updated out/artifacts/flexmark-util.jar in ../plugin-util/lib
-
-cp out/artifacts/flexmark-parent.jar ../markdown-profiling/lib
-echo updated out/artifacts/flexmark-parent.jar in ../markdown-profiling/lib
-#cp out/artifacts/flexmark-parent.jar ../netbeans-markdown-navigator/release/modules/ext/flexmark-all.jar
-#echo updated out/artifacts/flexmark-parent.jar in ../netbeans-markdown-navigator/release/modules/ext/flexmark-all.jar
-
-cp out/artifacts/flexmark-parent.jar ../MarkdownTest/lib
-echo updated out/artifacts/flexmark-parent.jar in ../MarkdownTest/lib
+UpdProjects flexmark-parent.jar ../idea-multimarkdown1/lib ../idea-multimarkdown2/lib ../idea-multimarkdown3/lib ../markdown-profiling/lib ../MarkdownTest/lib

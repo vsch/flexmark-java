@@ -203,24 +203,16 @@ public class TocUtils {
         if (isSorted || isReversed) {
             if (tocOptions.isTextOnly) {
                 if (isSorted) {
-                    Collections.sort(headingContents, new Comparator<String>() {
-                        @Override
-                        public int compare(String heading1, String heading2) {
-                            return isReversed ? heading2.compareTo(heading1) : heading1.compareTo(heading2);
-                        }
-                    });
+                    Collections.sort(headingContents, (heading1, heading2) -> isReversed ? heading2.compareTo(heading1) : heading1.compareTo(heading2));
                 } else {
                     Collections.reverse(headingContents);
                 }
             } else {
                 if (isSorted) {
-                    Collections.sort(headingContents, new Comparator<String>() {
-                        @Override
-                        public int compare(String heading1, String heading2) {
-                            final String headingText1 = headingTexts.get(heading1);
-                            final String headingText2 = headingTexts.get(heading2);
-                            return isReversed ? headingText2.compareTo(headingText1) : headingText1.compareTo(headingText2);
-                        }
+                    Collections.sort(headingContents, (heading1, heading2) -> {
+                        final String headingText1 = headingTexts.get(heading1);
+                        final String headingText2 = headingTexts.get(heading2);
+                        return isReversed ? headingText2.compareTo(headingText1) : headingText1.compareTo(headingText2);
                     });
                 } else {
                     Collections.reverse(headingContents);

@@ -4,7 +4,6 @@ import com.vladsch.flexmark.ext.aside.internal.AsideBlockParser;
 import com.vladsch.flexmark.ext.aside.internal.AsideNodeRenderer;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
-import com.vladsch.flexmark.util.builder.Extension;
 import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 

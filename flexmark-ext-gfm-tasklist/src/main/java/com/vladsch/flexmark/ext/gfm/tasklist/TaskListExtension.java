@@ -9,7 +9,6 @@ import com.vladsch.flexmark.formatter.NodeFormatterFactory;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.ListOptions;
 import com.vladsch.flexmark.parser.Parser;
-import com.vladsch.flexmark.util.builder.Extension;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
@@ -51,12 +50,7 @@ public class TaskListExtension implements Parser.ParserExtension, HtmlRenderer.H
 
     @Override
     public void extend(Formatter.Builder builder) {
-        builder.nodeFormatterFactory(new NodeFormatterFactory() {
-            @Override
-            public NodeFormatter create(DataHolder options) {
-                return new TaskListNodeFormatter(options);
-            }
-        });
+        builder.nodeFormatterFactory(TaskListNodeFormatter::new);
     }
 
     @Override

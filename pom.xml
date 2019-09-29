@@ -66,6 +66,7 @@
         <module>flexmark-pdf-converter</module>
         <module>flexmark-profile-pegdown</module>
         <module>flexmark-test-util</module>
+        <module>flexmark-tree-iteration</module>
         <module>flexmark-util</module>
         <module>flexmark-youtrack-converter</module>
     </modules>
@@ -418,6 +419,11 @@
             <dependency>
                 <groupId>com.vladsch.flexmark</groupId>
                 <artifactId>flexmark-test-util</artifactId>
+                <version>0.50.42</version>
+            </dependency>
+            <dependency>
+                <groupId>com.vladsch.flexmark</groupId>
+                <artifactId>flexmark-tree-iteration</artifactId>
                 <version>0.50.42</version>
             </dependency>
             <dependency>

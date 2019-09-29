@@ -148,16 +148,13 @@ public class EnumeratedReferences {
         int iMax = compoundReferences.size() - 1;
         Runnable wasRunnable = renderer.getEnumOrdinalRunnable();
 
-        renderer.setEnumOrdinalRunnable(new Runnable() {
-            @Override
-            public void run() {
-                for (int i = 0; i < iMax; i++) {
-                    CompoundEnumeratedReferenceRendering rendering = compoundReferences.get(i);
-                    Runnable wasRunnable = renderer.getEnumOrdinalRunnable();
-                    renderer.setEnumOrdinalRunnable(null);
-                    renderer.render(rendering.ordinal, rendering.referenceFormat, rendering.defaultText, rendering.needSeparator);
-                    renderer.setEnumOrdinalRunnable(wasRunnable);
-                }
+        renderer.setEnumOrdinalRunnable(() -> {
+            for (int i = 0; i < iMax; i++) {
+                CompoundEnumeratedReferenceRendering rendering = compoundReferences.get(i);
+                Runnable wasRunnable1 = renderer.getEnumOrdinalRunnable();
+                renderer.setEnumOrdinalRunnable(null);
+                renderer.render(rendering.ordinal, rendering.referenceFormat, rendering.defaultText, rendering.needSeparator);
+                renderer.setEnumOrdinalRunnable(wasRunnable1);
             }
         });
 

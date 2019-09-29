@@ -32,54 +32,14 @@ public class SpecExampleNodeRenderer implements NodeRenderer
     @Override
     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
         return new HashSet<NodeRenderingHandler<? extends Node>>(Arrays.asList(
-                new NodeRenderingHandler<SpecExampleBlock>(SpecExampleBlock.class, new CustomNodeRenderer<SpecExampleBlock>() {
-                    @Override
-                    public void render(SpecExampleBlock node, NodeRendererContext context, HtmlWriter html) {
-                        SpecExampleNodeRenderer.this.render(node, context, html);
-                    }
-                }),
-                new NodeRenderingHandler<SpecExampleOptionsList>(SpecExampleOptionsList.class, new CustomNodeRenderer<SpecExampleOptionsList>() {
-                    @Override
-                    public void render(SpecExampleOptionsList node, NodeRendererContext context, HtmlWriter html) {
-                        SpecExampleNodeRenderer.this.render(node, context, html);
-                    }
-                }),
-                new NodeRenderingHandler<SpecExampleOption>(SpecExampleOption.class, new CustomNodeRenderer<SpecExampleOption>() {
-                    @Override
-                    public void render(SpecExampleOption node, NodeRendererContext context, HtmlWriter html) {
-                        SpecExampleNodeRenderer.this.render(node, context, html);
-                    }
-                }),
-                new NodeRenderingHandler<SpecExampleOptionSeparator>(SpecExampleOptionSeparator.class, new CustomNodeRenderer<SpecExampleOptionSeparator>() {
-                    @Override
-                    public void render(SpecExampleOptionSeparator node, NodeRendererContext context, HtmlWriter html) {
-                        SpecExampleNodeRenderer.this.render(node, context, html);
-                    }
-                }),
-                new NodeRenderingHandler<SpecExampleSeparator>(SpecExampleSeparator.class, new CustomNodeRenderer<SpecExampleSeparator>() {
-                    @Override
-                    public void render(SpecExampleSeparator node, NodeRendererContext context, HtmlWriter html) {
-                        SpecExampleNodeRenderer.this.render(node, context, html);
-                    }
-                }),
-                new NodeRenderingHandler<SpecExampleSource>(SpecExampleSource.class, new CustomNodeRenderer<SpecExampleSource>() {
-                    @Override
-                    public void render(SpecExampleSource node, NodeRendererContext context, HtmlWriter html) {
-                        SpecExampleNodeRenderer.this.render(node, context, html);
-                    }
-                }),
-                new NodeRenderingHandler<SpecExampleHtml>(SpecExampleHtml.class, new CustomNodeRenderer<SpecExampleHtml>() {
-                    @Override
-                    public void render(SpecExampleHtml node, NodeRendererContext context, HtmlWriter html) {
-                        SpecExampleNodeRenderer.this.render(node, context, html);
-                    }
-                }),
-                new NodeRenderingHandler<SpecExampleAst>(SpecExampleAst.class, new CustomNodeRenderer<SpecExampleAst>() {
-                    @Override
-                    public void render(SpecExampleAst node, NodeRendererContext context, HtmlWriter html) {
-                        SpecExampleNodeRenderer.this.render(node, context, html);
-                    }
-                })
+                new NodeRenderingHandler<SpecExampleBlock>(SpecExampleBlock.class, SpecExampleNodeRenderer.this::render),
+                new NodeRenderingHandler<SpecExampleOptionsList>(SpecExampleOptionsList.class, SpecExampleNodeRenderer.this::render),
+                new NodeRenderingHandler<SpecExampleOption>(SpecExampleOption.class, SpecExampleNodeRenderer.this::render),
+                new NodeRenderingHandler<SpecExampleOptionSeparator>(SpecExampleOptionSeparator.class, SpecExampleNodeRenderer.this::render),
+                new NodeRenderingHandler<SpecExampleSeparator>(SpecExampleSeparator.class, SpecExampleNodeRenderer.this::render),
+                new NodeRenderingHandler<SpecExampleSource>(SpecExampleSource.class, SpecExampleNodeRenderer.this::render),
+                new NodeRenderingHandler<SpecExampleHtml>(SpecExampleHtml.class, SpecExampleNodeRenderer.this::render),
+                new NodeRenderingHandler<SpecExampleAst>(SpecExampleAst.class, SpecExampleNodeRenderer.this::render)
         ));
     }
 

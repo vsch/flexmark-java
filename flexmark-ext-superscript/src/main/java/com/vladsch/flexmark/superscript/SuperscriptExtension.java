@@ -5,7 +5,6 @@ import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.superscript.internal.SuperscriptDelimiterProcessor;
 import com.vladsch.flexmark.superscript.internal.SuperscriptJiraRenderer;
 import com.vladsch.flexmark.superscript.internal.SuperscriptNodeRenderer;
-import com.vladsch.flexmark.util.builder.Extension;
 import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 

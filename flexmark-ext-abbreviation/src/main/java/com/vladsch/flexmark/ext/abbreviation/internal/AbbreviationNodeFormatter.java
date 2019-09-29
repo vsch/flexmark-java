@@ -73,25 +73,15 @@ public class AbbreviationNodeFormatter extends NodeRepositoryFormatter<Abbreviat
     @Override
     public Set<NodeFormattingHandler<?>> getNodeFormattingHandlers() {
         return new HashSet<NodeFormattingHandler<? extends Node>>(Arrays.asList(
-                new NodeFormattingHandler<Abbreviation>(Abbreviation.class, new CustomNodeFormatter<Abbreviation>() {
-                    @Override
-                    public void render(Abbreviation node, NodeFormatterContext context, MarkdownWriter markdown) {
-                        AbbreviationNodeFormatter.this.render(node, context, markdown);
-                    }
-                }),
-                new NodeFormattingHandler<AbbreviationBlock>(AbbreviationBlock.class, new CustomNodeFormatter<AbbreviationBlock>() {
-                    @Override
-                    public void render(AbbreviationBlock node, NodeFormatterContext context, MarkdownWriter markdown) {
-                        AbbreviationNodeFormatter.this.render(node, context, markdown);
-                    }
-                })
+                new NodeFormattingHandler<Abbreviation>(Abbreviation.class, AbbreviationNodeFormatter.this::render),
+                new NodeFormattingHandler<AbbreviationBlock>(AbbreviationBlock.class, AbbreviationNodeFormatter.this::render)
         ));
     }
 
     @Override
     public Set<Class<?>> getNodeClasses() {
         if (options.abbreviationsPlacement != ElementPlacement.AS_IS && options.abbreviationsSort != ElementPlacementSort.SORT_UNUSED_LAST) return null;
-        //noinspection unchecked,ArraysAsListWithZeroOrOneArgument
+        // noinspection ArraysAsListWithZeroOrOneArgument
         return new HashSet<Class<?>>(Arrays.asList(
                 Abbreviation.class
         ));

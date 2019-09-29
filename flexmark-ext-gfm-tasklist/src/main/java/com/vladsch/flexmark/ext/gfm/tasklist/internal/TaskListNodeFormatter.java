@@ -32,26 +32,10 @@ public class TaskListNodeFormatter implements NodeFormatter {
 
     @Override
     public Set<NodeFormattingHandler<?>> getNodeFormattingHandlers() {
-        //noinspection unchecked
         return new HashSet<NodeFormattingHandler<?>>(Arrays.asList(
-                new NodeFormattingHandler<TaskListItem>(TaskListItem.class, new CustomNodeFormatter<TaskListItem>() {
-                    @Override
-                    public void render(TaskListItem node, NodeFormatterContext context, MarkdownWriter markdown) {
-                        TaskListNodeFormatter.this.render(node, context, markdown);
-                    }
-                }),
-                new NodeFormattingHandler<BulletList>(BulletList.class, new CustomNodeFormatter<BulletList>() {
-                    @Override
-                    public void render(BulletList node, NodeFormatterContext context, MarkdownWriter markdown) {
-                        TaskListNodeFormatter.this.render(node, context, markdown);
-                    }
-                }),
-                new NodeFormattingHandler<OrderedList>(OrderedList.class, new CustomNodeFormatter<OrderedList>() {
-                    @Override
-                    public void render(OrderedList node, NodeFormatterContext context, MarkdownWriter markdown) {
-                        TaskListNodeFormatter.this.render(node, context, markdown);
-                    }
-                })
+                new NodeFormattingHandler<TaskListItem>(TaskListItem.class, TaskListNodeFormatter.this::render),
+                new NodeFormattingHandler<BulletList>(BulletList.class, TaskListNodeFormatter.this::render),
+                new NodeFormattingHandler<OrderedList>(OrderedList.class, TaskListNodeFormatter.this::render)
         ));
     }
 

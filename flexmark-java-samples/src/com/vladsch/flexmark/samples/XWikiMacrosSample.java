@@ -9,9 +9,10 @@ import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Map;
 
-@SuppressWarnings({ "unchecked", "WeakerAccess" })
+@SuppressWarnings({ "WeakerAccess" })
 public class XWikiMacrosSample implements MacroVisitor {
     // Sample XWiki processing
     // NOTE: using raw text content of the node means that any nested macros will be taken as is
@@ -51,7 +52,7 @@ public class XWikiMacrosSample implements MacroVisitor {
 
     public static void main(String[] args) {
         MutableDataHolder options = new MutableDataSet();
-        options.set(Parser.EXTENSIONS, Arrays.asList(MacroExtension.create()));
+        options.set(Parser.EXTENSIONS, Collections.singletonList(MacroExtension.create()));
 
         Parser parser = Parser.builder(options).build();
         HtmlRenderer renderer = HtmlRenderer.builder(options).build();

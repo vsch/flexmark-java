@@ -10,6 +10,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.nodes.Node;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -74,7 +75,7 @@ public class HtmlToMarkdownCustomizedSample {
 
         @Override
         public Set<HtmlNodeRendererHandler<?>> getHtmlNodeRendererHandlers() {
-            return new HashSet<>(Arrays.asList(
+            return new HashSet<>(Collections.singletonList(
                     new HtmlNodeRendererHandler<Element>("kbd", Element.class, this::processKbd)
             ));
         }
@@ -95,7 +96,7 @@ public class HtmlToMarkdownCustomizedSample {
 
     public static void main(String[] args) {
         MutableDataSet options = new MutableDataSet()
-                .set(Parser.EXTENSIONS, Arrays.asList(HtmlConverterTextExtension.create()));
+                .set(Parser.EXTENSIONS, Collections.singletonList(HtmlConverterTextExtension.create()));
 
         String html = "<ul>\n" +
                 "  <li>\n" +

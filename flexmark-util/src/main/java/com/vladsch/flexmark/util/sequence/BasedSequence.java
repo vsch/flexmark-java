@@ -227,7 +227,7 @@ public interface BasedSequence extends RichCharSequence<BasedSequence> {
     /**
      * Extend this based sequence to include characters from underlying based sequence
      *
-     * @param charSet   set of characters to include
+     * @param charSet  set of characters to include
      * @param maxCount maximum extra characters to include
      * @return sequence which
      */
@@ -244,7 +244,7 @@ public interface BasedSequence extends RichCharSequence<BasedSequence> {
     /**
      * Extend this based sequence to include up to the next character from underlying based sequence
      *
-     * @param charSet   set of characters to include
+     * @param charSet  set of characters to include
      * @param maxCount maximum extra characters to include
      * @return sequence which
      */

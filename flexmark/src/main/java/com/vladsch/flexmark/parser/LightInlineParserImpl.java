@@ -5,13 +5,10 @@ import com.vladsch.flexmark.ast.util.Parsing;
 import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
-import com.vladsch.flexmark.util.format.TableFormatOptions;
-import com.vladsch.flexmark.util.html.Escaping;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.SegmentedSequence;
 
 import java.util.ArrayList;
-import java.util.BitSet;
 import java.util.regex.MatchResult;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -29,7 +26,6 @@ public class LightInlineParserImpl implements LightInlineParser {
     public LightInlineParserImpl(DataHolder dataOptions) {
         this.options = new InlineParserOptions(dataOptions);
         this.myParsing = new Parsing(dataOptions);
-
     }
 
     @Override

@@ -6,7 +6,7 @@
           <provider providerId="com.vladsch.idea.multimarkdown.editor.javafx.html.panel" providerName="JavaFX WebView" />
         </PanelProvider>
       </PreviewSettings>
-      <ParserSettings gitHubSyntaxChange="false" emojiShortcuts="0" emojiImages="0">
+      <ParserSettings gitHubSyntaxChange="false" emojiShortcuts="3" emojiImages="0">
         <PegdownExtensions>
           <option name="ABBREVIATIONS" value="true" />
           <option name="ANCHORLINKS" value="false" />
@@ -15,11 +15,15 @@
           <option name="AUTOLINKS" value="true" />
           <option name="DEFINITIONS" value="true" />
           <option name="DEFINITION_BREAK_DOUBLE_BLANK_LINE" value="false" />
+          <option name="EXTANCHORLINKS" value="false" />
+          <option name="EXTANCHORLINKS_WRAP" value="false" />
           <option name="FENCED_CODE_BLOCKS" value="true" />
           <option name="FOOTNOTES" value="true" />
           <option name="HARDWRAPS" value="false" />
           <option name="HTML_DEEP_PARSER" value="true" />
           <option name="INSERTED" value="true" />
+          <option name="INTELLIJ_DUMMY_IDENTIFIER" value="false" />
+          <option name="MULTI_LINE_IMAGE_URLS" value="false" />
           <option name="QUOTES" value="true" />
           <option name="RELAXEDHRULES" value="true" />
           <option name="SMARTS" value="true" />

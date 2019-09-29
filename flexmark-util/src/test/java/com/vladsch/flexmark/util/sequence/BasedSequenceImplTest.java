@@ -447,6 +447,7 @@ public class BasedSequenceImplTest {
         assertEquals("     test\n", BasedSequenceImpl.of("\n     test\n").trimStart(BasedSequence.WHITESPACE_CHARS).prefixWithIndent().toString());
         assertEquals("      test\n", BasedSequenceImpl.of("\n      test\n").trimStart(BasedSequence.WHITESPACE_CHARS).prefixWithIndent().toString());
     }
+
     @Test
     public void test_prefixWithIndent0() {
         assertEquals("test\n", BasedSequenceImpl.of("\ntest\n").trimStart(BasedSequence.WHITESPACE_CHARS).prefixWithIndent(0).toString());
@@ -457,6 +458,7 @@ public class BasedSequenceImplTest {
         assertEquals("test\n", BasedSequenceImpl.of("\n     test\n").trimStart(BasedSequence.WHITESPACE_CHARS).prefixWithIndent(0).toString());
         assertEquals("test\n", BasedSequenceImpl.of("\n      test\n").trimStart(BasedSequence.WHITESPACE_CHARS).prefixWithIndent(0).toString());
     }
+
     @Test
     public void test_prefixWithIndent4() {
         assertEquals("test\n", BasedSequenceImpl.of("\ntest\n").trimStart(BasedSequence.WHITESPACE_CHARS).prefixWithIndent(4).toString());
@@ -467,6 +469,7 @@ public class BasedSequenceImplTest {
         assertEquals("    test\n", BasedSequenceImpl.of("\n     test\n").trimStart(BasedSequence.WHITESPACE_CHARS).prefixWithIndent(4).toString());
         assertEquals("    test\n", BasedSequenceImpl.of("\n      test\n").trimStart(BasedSequence.WHITESPACE_CHARS).prefixWithIndent(4).toString());
     }
+
     @Test
     public void test_prefixWithIndentTabs() {
         assertEquals("\ttest\n", BasedSequenceImpl.of("\n\ttest\n").trimStart(BasedSequence.WHITESPACE_CHARS).prefixWithIndent().toString());
@@ -502,6 +505,7 @@ public class BasedSequenceImplTest {
         assertEquals("test\n", BasedSequenceImpl.of("\n\t     test\n").trimStart(BasedSequence.WHITESPACE_CHARS).prefixWithIndent(0).toString());
         assertEquals("test\n", BasedSequenceImpl.of("\n\t      test\n").trimStart(BasedSequence.WHITESPACE_CHARS).prefixWithIndent(0).toString());
     }
+
     @Test
     public void test_prefixWithIndentTabs1to8() {
         assertEquals("test\n", BasedSequenceImpl.of("\n\ttest\n").trimStart(BasedSequence.WHITESPACE_CHARS).prefixWithIndent(1).toString());

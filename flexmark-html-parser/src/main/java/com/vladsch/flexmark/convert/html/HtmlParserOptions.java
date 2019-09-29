@@ -17,7 +17,7 @@ import java.util.regex.Pattern;
  * This class is here for backward compatibility and is no longer maintained.
  */
 @Deprecated
-@SuppressWarnings({ "WeakerAccess", "deprecation" })
+@SuppressWarnings({ "WeakerAccess" })
 public class HtmlParserOptions implements MutableDataSetter {
     public boolean listContentIndent;
     public boolean setextHeadings;

@@ -16,7 +16,6 @@ import com.vladsch.flexmark.util.ast.DoNotLinkDecorate;
 import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.ast.NodeTracker;
-import com.vladsch.flexmark.util.builder.Extension;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
@@ -27,6 +26,7 @@ import com.vladsch.flexmark.util.sequence.ReplacedTextMapper;
 import com.vladsch.flexmark.util.sequence.SubSequence;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.regex.Matcher;
@@ -169,7 +169,7 @@ public class SyntheticLinkSample {
         MutableDataSet options = new MutableDataSet();
 
         // set optional extensions
-        options.set(Parser.EXTENSIONS, Arrays.asList(SyntheticLinkExtension.create()));
+        options.set(Parser.EXTENSIONS, Collections.singletonList(SyntheticLinkExtension.create()));
 
         // uncomment to convert soft-breaks to hard breaks
         //options.set(HtmlRenderer.SOFT_BREAK, "<br />\n");

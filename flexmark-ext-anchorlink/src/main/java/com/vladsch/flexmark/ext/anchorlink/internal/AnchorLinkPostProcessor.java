@@ -13,12 +13,7 @@ public class AnchorLinkPostProcessor extends DocumentPostProcessor {
     public AnchorLinkPostProcessor(Document document) {
         this.options = new AnchorLinkOptions(document);
         myVisitor = new NodeVisitor(
-                new VisitHandler<Heading>(Heading.class, new Visitor<Heading>() {
-                    @Override
-                    public void visit(Heading node) {
-                        AnchorLinkPostProcessor.this.visit(node);
-                    }
-                })
+                new VisitHandler<Heading>(Heading.class, this::visit)
         );
     }
 

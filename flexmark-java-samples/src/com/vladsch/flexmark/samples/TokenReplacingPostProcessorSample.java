@@ -10,12 +10,12 @@ import com.vladsch.flexmark.parser.block.NodePostProcessorFactory;
 import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.ast.NodeTracker;
-import com.vladsch.flexmark.util.builder.Extension;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 
 import java.util.Arrays;
+import java.util.Collections;
 
 /**
  * A sample that demonstrates how to strip (replace) specific tokens from a parsed
@@ -25,7 +25,7 @@ public class TokenReplacingPostProcessorSample {
 
     static final MutableDataSet OPTIONS = new MutableDataSet();
     static {
-        OPTIONS.set(Parser.EXTENSIONS, Arrays.asList(LinkReplacingExtension.create()));
+        OPTIONS.set(Parser.EXTENSIONS, Collections.singletonList(LinkReplacingExtension.create()));
     }
 
     static final Parser PARSER = Parser.builder(OPTIONS).build();

@@ -263,8 +263,8 @@ public class DocxRenderer implements IRender {
     /**
      * Render a node to the given word processing package
      *
-     * @param node   node to render
-     * @param output appendable to use for the output
+     * @param node             node to render
+     * @param output           appendable to use for the output
      * @param contentContainer contaner for content to use
      */
     public void render(Node node, WordprocessingMLPackage output, DocumentContentHandler contentContainer) {
@@ -720,7 +720,6 @@ public class DocxRenderer implements IRender {
 
         @Override
         public final Iterable<? extends Node> nodesOfType(Collection<Class<?>> classes) {
-            //noinspection unchecked
             return collectedNodes == null ? NULL_ITERABLE : collectedNodes.itemsOfType(Node.class, classes);
         }
 
@@ -731,7 +730,6 @@ public class DocxRenderer implements IRender {
 
         @Override
         public final Iterable<? extends Node> reversedNodesOfType(Collection<Class<?>> classes) {
-            //noinspection unchecked
             return collectedNodes == null ? NULL_ITERABLE : collectedNodes.reversedItemsOfType(Node.class, classes);
         }
 

@@ -4,7 +4,6 @@ import com.vladsch.flexmark.ext.gfm.tables.internal.TableBlockParser;
 import com.vladsch.flexmark.ext.gfm.tables.internal.TableNodeRenderer;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
-import com.vladsch.flexmark.util.builder.Extension;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 
 /**

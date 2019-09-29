@@ -614,7 +614,7 @@ public class ListOptions implements MutableDataSetter {
         if (newItemCodeIndent != that.newItemCodeIndent) return false;
         if (itemMarkerSuffixes != that.itemMarkerSuffixes) return false;
         if (itemContentAfterSuffix != that.itemContentAfterSuffix) return false;
-        if (itemPrefixChars != that.itemPrefixChars) return false;
+        if (!itemPrefixChars.equals(that.itemPrefixChars)) return false;
         return itemInterrupt.equals(that.itemInterrupt);
     }
 

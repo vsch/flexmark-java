@@ -6,11 +6,12 @@ import com.vladsch.flexmark.ext.toc.TocExtension;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.html.HtmlRenderer.Builder;
 import com.vladsch.flexmark.html.HtmlRenderer.HtmlRendererExtension;
-import com.vladsch.flexmark.html.HtmlWriter;
-import com.vladsch.flexmark.html.renderer.*;
+import com.vladsch.flexmark.html.renderer.DelegatingNodeRendererFactory;
+import com.vladsch.flexmark.html.renderer.NodeRenderer;
+import com.vladsch.flexmark.html.renderer.NodeRendererFactory;
+import com.vladsch.flexmark.html.renderer.NodeRenderingHandler;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.ast.Node;
-import com.vladsch.flexmark.util.builder.Extension;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
@@ -58,31 +59,28 @@ public class InlineCodeCustomRenderingSample {
         @Override
         public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
             HashSet<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
-            set.add(new NodeRenderingHandler<Code>(Code.class, new com.vladsch.flexmark.html.CustomNodeRenderer<Code>() {
-                @Override
-                public void render(Code node, NodeRendererContext context, HtmlWriter html) {
-                    // test the node to see if it needs overriding
-                    if (node.getOpeningMarker().length() == 3) {
-                        if (context.getHtmlOptions().sourcePositionParagraphLines) {
-                            html.withAttr().tag("pre");
-                        } else {
-                            html.srcPos(node.getText()).withAttr().tag("pre");
-                        }
-                        if (codeSoftLineBreaks && !context.getHtmlOptions().isSoftBreakAllSpaces) {
-                            for (Node child : node.getChildren()) {
-                                if (child instanceof Text) {
-                                    html.text(Escaping.collapseWhitespace(child.getChars(), true));
-                                } else {
-                                    context.render(child);
-                                }
-                            }
-                        } else {
-                            html.text(Escaping.collapseWhitespace(node.getText(), true));
-                        }
-                        html.tag("/pre");
+            set.add(new NodeRenderingHandler<Code>(Code.class, (node, context, html) -> {
+                // test the node to see if it needs overriding
+                if (node.getOpeningMarker().length() == 3) {
+                    if (context.getHtmlOptions().sourcePositionParagraphLines) {
+                        html.withAttr().tag("pre");
                     } else {
-                        context.delegateRender();
+                        html.srcPos(node.getText()).withAttr().tag("pre");
                     }
+                    if (codeSoftLineBreaks && !context.getHtmlOptions().isSoftBreakAllSpaces) {
+                        for (Node child : node.getChildren()) {
+                            if (child instanceof Text) {
+                                html.text(Escaping.collapseWhitespace(child.getChars(), true));
+                            } else {
+                                context.render(child);
+                            }
+                        }
+                    } else {
+                        html.text(Escaping.collapseWhitespace(node.getText(), true));
+                    }
+                    html.tag("/pre");
+                } else {
+                    context.delegateRender();
                 }
             }));
 

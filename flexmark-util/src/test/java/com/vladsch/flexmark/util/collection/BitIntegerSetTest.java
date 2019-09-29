@@ -75,7 +75,7 @@ public class BitIntegerSetTest {
         int[] result = intSet.toArray(existing);
         assertArrayEquals(expected, result);
 
-        int[] result1 = intSet.toArray(existing,0);
+        int[] result1 = intSet.toArray(existing, 0);
         assertArrayEquals(expected, result1);
     }
 
@@ -87,7 +87,7 @@ public class BitIntegerSetTest {
         intSet.addAll(values);
 
         int[] expected = { 3, 2, 20 };
-        int[] result = intSet.toArray(existing,1);
+        int[] result = intSet.toArray(existing, 1);
         assertArrayEquals(expected, result);
     }
 

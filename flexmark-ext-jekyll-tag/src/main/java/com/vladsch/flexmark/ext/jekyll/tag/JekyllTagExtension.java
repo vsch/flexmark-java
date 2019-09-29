@@ -5,7 +5,6 @@ import com.vladsch.flexmark.ext.jekyll.tag.internal.JekyllTagInlineParserExtensi
 import com.vladsch.flexmark.ext.jekyll.tag.internal.JekyllTagNodeRenderer;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
-import com.vladsch.flexmark.util.builder.Extension;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.data.DataValueFactory;
@@ -29,11 +28,7 @@ public class JekyllTagExtension implements Parser.ParserExtension, HtmlRenderer.
     public static final DataKey<Boolean> LIST_INCLUDES_ONLY = new DataKey<>("LIST_INCLUDES_ONLY", true);
     public static final DataKey<Map<String, String>> INCLUDED_HTML = new DataKey<Map<String, String>>("INCLUDED_HTML", (Map<String, String>) null);
     //public static final DataKey<Map<String, Document>> INCLUDED_DOCUMENTS = new DataKey<Map<String, Document>>("INCLUDED_DOCUMENTS", (Map<String, Document>) null);
-    public static final DataKey<List<JekyllTag>> TAG_LIST = new DataKey<List<JekyllTag>>("TAG_LIST", new DataValueFactory<List<JekyllTag>>() {
-        public List<JekyllTag> apply(DataHolder options) {
-            return new ArrayList<JekyllTag>();
-        }
-    });
+    public static final DataKey<List<JekyllTag>> TAG_LIST = new DataKey<List<JekyllTag>>("TAG_LIST", options -> new ArrayList<JekyllTag>());
 
     private JekyllTagExtension() {
     }

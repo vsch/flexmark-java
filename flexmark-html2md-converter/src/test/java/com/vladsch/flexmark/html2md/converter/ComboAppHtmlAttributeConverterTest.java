@@ -15,7 +15,6 @@ import org.junit.ComparisonFailure;
 import org.junit.runners.Parameterized;
 
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -51,7 +50,6 @@ public class ComboAppHtmlAttributeConverterTest extends ComboSpecTestCase {
         optionsMap.put("skip-heading-5", new MutableDataSet().set(FlexmarkHtmlConverter.SKIP_HEADING_5, true));
         optionsMap.put("skip-heading-6", new MutableDataSet().set(FlexmarkHtmlConverter.SKIP_HEADING_6, true));
         optionsMap.put("skip-attributes", new MutableDataSet().set(FlexmarkHtmlConverter.SKIP_ATTRIBUTES, true));
-        // optionsMap.put("option1", new MutableDataSet().set(FlexmarkHtmlConverterExtension.FLEXMARK_HTML_PARSER_OPTION1, true));
     }
 
     private static final IParse PARSER = new HtmlConverter(OPTIONS);
@@ -68,17 +66,7 @@ public class ComboAppHtmlAttributeConverterTest extends ComboSpecTestCase {
 
     @Parameterized.Parameters(name = "{0}")
     public static List<Object[]> data() {
-        List<SpecExample> examples = SpecReader.readExamples(SPEC_RESOURCE);
-        List<Object[]> data = new ArrayList<Object[]>();
-
-        // NULL example runs full spec test
-        data.add(new Object[] { SpecExample.getNull() });
-
-        for (SpecExample example : examples) {
-            // flip source and html
-            data.add(new Object[] { example });
-        }
-        return data;
+        return getTestData(SPEC_RESOURCE);
     }
 
     @Override

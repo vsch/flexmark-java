@@ -242,21 +242,18 @@ public class PegdownOptionsAdapter {
     }
 
     public PegdownOptionsAdapter setPegdownExtensions(int pegdownExtensions) {
-        //noinspection PointlessBitwiseExpression
         myPegdownExtensions = pegdownExtensions;
         myIsUpdateNeeded = true;
         return this;
     }
 
     public PegdownOptionsAdapter addPegdownExtensions(int pegdownExtensions) {
-        //noinspection PointlessBitwiseExpression
         myPegdownExtensions |= pegdownExtensions;
         myIsUpdateNeeded = true;
         return this;
     }
 
     public PegdownOptionsAdapter removePegdownExtensions(int pegdownExtensions) {
-        //noinspection PointlessBitwiseExpression
         myPegdownExtensions &= ~pegdownExtensions;
         myIsUpdateNeeded = true;
         return this;

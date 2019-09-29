@@ -1,7 +1,6 @@
 package com.vladsch.flexmark.ext.emoji.internal;
 
 import com.vladsch.flexmark.ext.emoji.Emoji;
-import com.vladsch.flexmark.html.CustomNodeRenderer;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.*;
 import com.vladsch.flexmark.util.data.DataHolder;
@@ -19,12 +18,7 @@ public class EmojiNodeRenderer implements NodeRenderer {
     @Override
     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
         HashSet<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
-        set.add(new NodeRenderingHandler<Emoji>(Emoji.class, new CustomNodeRenderer<Emoji>() {
-            @Override
-            public void render(Emoji node, NodeRendererContext context, HtmlWriter html) {
-                EmojiNodeRenderer.this.render(node, context, html);
-            }
-        }));
+        set.add(new NodeRenderingHandler<Emoji>(Emoji.class, this::render));
         return set;
     }
 

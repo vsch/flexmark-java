@@ -39,13 +39,8 @@ public class YamlFrontMatterNodeFormatter implements PhasedNodeFormatter {
 
     @Override
     public Set<NodeFormattingHandler<?>> getNodeFormattingHandlers() {
-        return new HashSet<NodeFormattingHandler<?>>(Arrays.asList(
-                new NodeFormattingHandler<YamlFrontMatterBlock>(YamlFrontMatterBlock.class, new CustomNodeFormatter<YamlFrontMatterBlock>() {
-                    @Override
-                    public void render(YamlFrontMatterBlock node, NodeFormatterContext context, MarkdownWriter markdown) {
-                        YamlFrontMatterNodeFormatter.this.render(node, context, markdown);
-                    }
-                })
+        return new HashSet<NodeFormattingHandler<?>>(Collections.singletonList(
+                new NodeFormattingHandler<YamlFrontMatterBlock>(YamlFrontMatterBlock.class, YamlFrontMatterNodeFormatter.this::render)
         ));
     }
 

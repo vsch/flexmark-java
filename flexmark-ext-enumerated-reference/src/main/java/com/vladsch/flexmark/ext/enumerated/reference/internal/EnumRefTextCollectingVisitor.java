@@ -17,56 +17,16 @@ public class EnumRefTextCollectingVisitor {
     }
 
     public EnumRefTextCollectingVisitor(int ordinal) {
-        ordinalRunnable = ordinal < 0 ? null : new Runnable() {
-            @Override
-            public void run() {
-                out.append(String.valueOf(ordinal));
-            }
-        };
+        ordinalRunnable = ordinal < 0 ? null : () -> out.append(String.valueOf(ordinal));
 
         visitor = new NodeVisitor(
-                new VisitHandler<Text>(Text.class, new Visitor<Text>() {
-                    @Override
-                    public void visit(Text node) {
-                        EnumRefTextCollectingVisitor.this.visit(node);
-                    }
-                }),
-                new VisitHandler<TextBase>(TextBase.class, new Visitor<TextBase>() {
-                    @Override
-                    public void visit(TextBase node) {
-                        EnumRefTextCollectingVisitor.this.visit(node);
-                    }
-                }),
-                new VisitHandler<HtmlEntity>(HtmlEntity.class, new Visitor<HtmlEntity>() {
-                    @Override
-                    public void visit(HtmlEntity node) {
-                        EnumRefTextCollectingVisitor.this.visit(node);
-                    }
-                }),
-                new VisitHandler<SoftLineBreak>(SoftLineBreak.class, new Visitor<SoftLineBreak>() {
-                    @Override
-                    public void visit(SoftLineBreak node) {
-                        EnumRefTextCollectingVisitor.this.visit(node);
-                    }
-                }),
-                new VisitHandler<HardLineBreak>(HardLineBreak.class, new Visitor<HardLineBreak>() {
-                    @Override
-                    public void visit(HardLineBreak node) {
-                        EnumRefTextCollectingVisitor.this.visit(node);
-                    }
-                }),
-                new VisitHandler<EnumeratedReferenceText>(EnumeratedReferenceText.class, new Visitor<EnumeratedReferenceText>() {
-                    @Override
-                    public void visit(EnumeratedReferenceText node) {
-                        EnumRefTextCollectingVisitor.this.visit(node);
-                    }
-                }),
-                new VisitHandler<EnumeratedReferenceLink>(EnumeratedReferenceLink.class, new Visitor<EnumeratedReferenceLink>() {
-                    @Override
-                    public void visit(EnumeratedReferenceLink node) {
-                        EnumRefTextCollectingVisitor.this.visit(node);
-                    }
-                })
+                new VisitHandler<Text>(Text.class, this::visit),
+                new VisitHandler<TextBase>(TextBase.class, this::visit),
+                new VisitHandler<HtmlEntity>(HtmlEntity.class, this::visit),
+                new VisitHandler<SoftLineBreak>(SoftLineBreak.class, this::visit),
+                new VisitHandler<HardLineBreak>(HardLineBreak.class, this::visit),
+                new VisitHandler<EnumeratedReferenceText>(EnumeratedReferenceText.class, this::visit),
+                new VisitHandler<EnumeratedReferenceLink>(EnumeratedReferenceLink.class, this::visit)
         );
     }
 
@@ -146,13 +106,10 @@ public class EnumRefTextCollectingVisitor {
             Runnable compoundRunnable = renderer.ordinalRunnable;
 
             if (referenceFormat != null) {
-                renderer.ordinalRunnable = new Runnable() {
-                    @Override
-                    public void run() {
-                        if (compoundRunnable != null) compoundRunnable.run();
-                        renderer.out.append(String.valueOf(referenceOrdinal));
-                        if (needSeparator) renderer.out.append(".");
-                    }
+                renderer.ordinalRunnable = () -> {
+                    if (compoundRunnable != null) compoundRunnable.run();
+                    renderer.out.append(String.valueOf(referenceOrdinal));
+                    if (needSeparator) renderer.out.append(".");
                 };
 
                 renderer.visitor.visitChildren(referenceFormat);

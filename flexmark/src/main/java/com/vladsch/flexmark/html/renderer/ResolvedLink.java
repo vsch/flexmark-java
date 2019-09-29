@@ -81,7 +81,7 @@ public class ResolvedLink {
 
     public ResolvedLink withTitle(CharSequence title) {
         String haveTitle = myAttributes == null ? null : myAttributes.getValue(Attribute.TITLE_ATTR);
-        if (title == haveTitle || haveTitle != null && haveTitle.equals(title)) return this;
+        if (title == haveTitle || haveTitle != null && haveTitle.contentEquals(title)) return this;
 
         Attributes attributes = new Attributes(myAttributes);
         if (title == null) {
@@ -99,7 +99,7 @@ public class ResolvedLink {
 
     public ResolvedLink withTarget(CharSequence target) {
         String haveTarget = myAttributes == null ? null : myAttributes.getValue(Attribute.TARGET_ATTR);
-        if (target == haveTarget || haveTarget != null && haveTarget.equals(target)) return this;
+        if (target == haveTarget || haveTarget != null && haveTarget.contentEquals(target)) return this;
 
         Attributes attributes = new Attributes(myAttributes);
         if (target == null) {

@@ -2,12 +2,10 @@ package com.vladsch.flexmark.docx.converter;
 
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.spec.SpecExample;
-import com.vladsch.flexmark.spec.SpecReader;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import org.junit.runners.Parameterized;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ComboDocxConverterAltStylesSpecTest extends ComboDocxConverterSpecTestBase {
@@ -27,16 +25,7 @@ public class ComboDocxConverterAltStylesSpecTest extends ComboDocxConverterSpecT
 
     @Parameterized.Parameters(name = "{0}")
     public static List<Object[]> data() {
-        List<SpecExample> examples = SpecReader.readExamples(SPEC_RESOURCE);
-        List<Object[]> data = new ArrayList<Object[]>();
-
-        // NULL example runs full spec test
-        data.add(new Object[] { SpecExample.getNull() });
-
-        for (SpecExample example : examples) {
-            data.add(new Object[] { example });
-        }
-        return data;
+        return getTestData(SPEC_RESOURCE);
     }
 
     @Override

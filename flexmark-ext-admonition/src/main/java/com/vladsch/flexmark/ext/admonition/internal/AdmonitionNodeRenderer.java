@@ -1,7 +1,6 @@
 package com.vladsch.flexmark.ext.admonition.internal;
 
 import com.vladsch.flexmark.ext.admonition.AdmonitionBlock;
-import com.vladsch.flexmark.html.CustomNodeRenderer;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.*;
 import com.vladsch.flexmark.util.ast.Document;
@@ -25,6 +24,13 @@ public class AdmonitionNodeRenderer implements PhasedNodeRenderer {
 
     public AdmonitionNodeRenderer(DataHolder options) {
         this.options = new AdmonitionOptions(options);
+    }
+
+    @Override
+    public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
+        Set<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
+        set.add(new NodeRenderingHandler<AdmonitionBlock>(AdmonitionBlock.class, this::render));
+        return set;
     }
 
     @Override
@@ -62,16 +68,6 @@ public class AdmonitionNodeRenderer implements PhasedNodeRenderer {
                 html.unIndent().closeTag("svg").line();
             }
         }
-    }
-
-    @Override
-    public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
-        Set<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
-        // @formatter:off
-        // set.add(new NodeRenderingHandler<Admonition>(Admonition.class, new CustomNodeRenderer<Admonition>() { @Override public void render(Admonition node, NodeRendererContext context, HtmlWriter html) { AdmonitionNodeRenderer.this.render(node, context, html); } }));
-        set.add(new NodeRenderingHandler<AdmonitionBlock>(AdmonitionBlock.class, new CustomNodeRenderer<AdmonitionBlock>() { @Override public void render(AdmonitionBlock node, NodeRendererContext context, HtmlWriter html) { AdmonitionNodeRenderer.this.render(node, context, html); } }));// ,// zzzoptionszzz(CUSTOM_NODE)
-        // @formatter:on
-        return set;
     }
 
     private void render(AdmonitionBlock node, NodeRendererContext context, HtmlWriter html) {

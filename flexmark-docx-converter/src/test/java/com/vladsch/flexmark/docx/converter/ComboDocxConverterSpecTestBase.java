@@ -80,7 +80,6 @@ public abstract class ComboDocxConverterSpecTestBase extends ComboSpecTestCase {
         Logger root = Logger.getRootLogger();
         root.addAppender(new NullAppender());
     }
-
     protected static void deleteTestCaseDumpFiles(String path) {
         File dir = new File(path);
         for (File file : dir.listFiles()) {

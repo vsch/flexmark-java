@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +43,7 @@ public class SpecReader {
 
     protected List<SpecExample> examples = new ArrayList<SpecExample>();
 
-    protected SpecReader(InputStream stream, final String fileUrl) {
+    protected SpecReader(InputStream stream, String fileUrl) {
         this.inputStream = stream;
         this.fileUrl = fileUrl;
     }
@@ -54,16 +53,15 @@ public class SpecReader {
     }
 
     public static List<SpecExample> readExamples(String specResource) {
-        URL fileUrl = getSpecInputFileUrl(specResource);
-        UrlString urlString = new UrlString(fileUrl);
-        List<SpecExample> examples = readExamples(specResource, null, urlString.toString());
-        if (examples.size() == 0) {
-            throw new IllegalStateException("No examples were found in " + specResource);
-        }
-        return examples;
+        return readExamples(specResource, (String) null);
     }
 
     public static List<SpecExample> readExamples(String specResource, String urlString) {
+        if (urlString == null) {
+            URL fileUrl = getSpecInputFileUrl(specResource);
+            urlString = new UrlString(fileUrl).toString();
+        }
+
         List<SpecExample> examples = readExamples(specResource, null, urlString);
         if (examples.size() == 0) {
             throw new IllegalStateException("No examples were found in " + specResource);
@@ -174,7 +172,7 @@ public class SpecReader {
 
         String line;
         lineNumber = 0;
-        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, Charset.forName("UTF-8")));
+        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
         while ((line = reader.readLine()) != null) {
             lineNumber++;
             processLine(line);

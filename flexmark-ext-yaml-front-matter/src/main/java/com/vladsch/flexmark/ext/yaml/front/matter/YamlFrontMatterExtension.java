@@ -4,7 +4,6 @@ import com.vladsch.flexmark.ext.yaml.front.matter.internal.YamlFrontMatterBlockP
 import com.vladsch.flexmark.ext.yaml.front.matter.internal.YamlFrontMatterNodeFormatter;
 import com.vladsch.flexmark.formatter.Formatter;
 import com.vladsch.flexmark.parser.Parser;
-import com.vladsch.flexmark.util.builder.Extension;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 
 /**

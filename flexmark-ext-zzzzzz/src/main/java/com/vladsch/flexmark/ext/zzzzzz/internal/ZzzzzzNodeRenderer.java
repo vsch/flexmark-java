@@ -28,8 +28,8 @@ public class ZzzzzzNodeRenderer implements NodeRenderer
     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
         Set<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
         // @formatter:off
-        set.add(new NodeRenderingHandler<Zzzzzz>(Zzzzzz.class, new CustomNodeRenderer<Zzzzzz>() { @Override public void render(Zzzzzz node, NodeRendererContext context, HtmlWriter html) { ZzzzzzNodeRenderer.this.render(node, context, html); } }));// zzzoptionszzz(CUSTOM_NODE)
-        set.add(new NodeRenderingHandler<ZzzzzzBlock>(ZzzzzzBlock.class, new CustomNodeRenderer<ZzzzzzBlock>() { @Override public void render(ZzzzzzBlock node, NodeRendererContext context, HtmlWriter html) { ZzzzzzNodeRenderer.this.render(node, context, html); } }));// zzzoptionszzz(CUSTOM_BLOCK_NODE),// zzzoptionszzz(CUSTOM_NODE)
+        set.add(new NodeRenderingHandler<Zzzzzz>(Zzzzzz.class, ZzzzzzNodeRenderer.this::render));// zzzoptionszzz(CUSTOM_NODE)
+        set.add(new NodeRenderingHandler<ZzzzzzBlock>(ZzzzzzBlock.class, ZzzzzzNodeRenderer.this::render));// zzzoptionszzz(CUSTOM_BLOCK_NODE),// zzzoptionszzz(CUSTOM_NODE)
         // @formatter:on
         return set;
     }

@@ -2,7 +2,6 @@ package com.vladsch.flexmark.samples;
 
 import com.vladsch.flexmark.ext.abbreviation.AbbreviationExtension;
 import com.vladsch.flexmark.ext.attributes.AttributesExtension;
-import com.vladsch.flexmark.ext.enumerated.reference.EnumeratedReferenceExtension;
 import com.vladsch.flexmark.ext.footnotes.FootnoteExtension;
 import com.vladsch.flexmark.formatter.Formatter;
 import com.vladsch.flexmark.parser.Parser;

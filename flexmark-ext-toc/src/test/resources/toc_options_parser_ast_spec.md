@@ -76,8 +76,8 @@ levels=9
   diff: [TOC levels=1]
   full: [TOC levels=1 bullet formatted hierarchy]
 'levels=2' => TocOptions { levels=4, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', rawTitleLevel=1, listType=HIERARCHY, rawTitle='Table of Contents', divClass='', listClass='' }
-  diff: [TOC levels=2,2]
-  full: [TOC levels=2,2 bullet formatted hierarchy]
+  diff: [TOC levels=2]
+  full: [TOC levels=2 bullet formatted hierarchy]
 'levels=3' => TocOptions { levels=8, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', rawTitleLevel=1, listType=HIERARCHY, rawTitle='Table of Contents', divClass='', listClass='' }
   diff: [TOC levels=3,3]
   full: [TOC levels=3,3 bullet formatted hierarchy]

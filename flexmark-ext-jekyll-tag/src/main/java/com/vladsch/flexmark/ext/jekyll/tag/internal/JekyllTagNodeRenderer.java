@@ -3,7 +3,6 @@ package com.vladsch.flexmark.ext.jekyll.tag.internal;
 import com.vladsch.flexmark.ext.jekyll.tag.JekyllTag;
 import com.vladsch.flexmark.ext.jekyll.tag.JekyllTagBlock;
 import com.vladsch.flexmark.ext.jekyll.tag.JekyllTagExtension;
-import com.vladsch.flexmark.html.CustomNodeRenderer;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.NodeRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
@@ -28,8 +27,8 @@ public class JekyllTagNodeRenderer implements NodeRenderer {
     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
         Set<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
         // @formatter:off
-        set.add(new NodeRenderingHandler<JekyllTag>(JekyllTag.class, new CustomNodeRenderer<JekyllTag>() { @Override public void render(JekyllTag node, NodeRendererContext context, HtmlWriter html) { JekyllTagNodeRenderer.this.render(node, context, html); } }));
-        set.add(new NodeRenderingHandler<JekyllTagBlock>(JekyllTagBlock.class, new CustomNodeRenderer<JekyllTagBlock>() { @Override public void render(JekyllTagBlock node, NodeRendererContext context, HtmlWriter html) { JekyllTagNodeRenderer.this.render(node, context, html); } }));
+        set.add(new NodeRenderingHandler<JekyllTag>(JekyllTag.class, this::render));
+        set.add(new NodeRenderingHandler<JekyllTagBlock>(JekyllTagBlock.class, this::render));
         // @formatter:on
         return set;
     }
@@ -37,7 +36,7 @@ public class JekyllTagNodeRenderer implements NodeRenderer {
     private void render(JekyllTag node, NodeRendererContext context, HtmlWriter html) {
         if (enabledRendering) html.text(node.getChars());
         else if (node.getTag().equals("include") && includeContent != null && !node.getParameters().isEmpty()) {
-            String content = includeContent.get(node.getParameters());
+            String content = includeContent.get(node.getParameters().toString());
             if (content != null && !content.isEmpty()) {
                 html.rawPre(content);
             }

@@ -1930,12 +1930,7 @@ public class FlexmarkHtmlParser {
 
         skip();
 
-        processHtmlTree(out, element, true, new Runnable() {
-            @Override
-            public void run() {
-                transferIdToParent();
-            }
-        });
+        processHtmlTree(out, element, true, this::transferIdToParent);
         return true;
     }
 

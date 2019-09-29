@@ -2,7 +2,6 @@ package com.vladsch.flexmark.ext.gfm.tasklist.internal;
 
 import com.vladsch.flexmark.ext.gfm.tasklist.TaskListExtension;
 import com.vladsch.flexmark.ext.gfm.tasklist.TaskListItem;
-import com.vladsch.flexmark.html.CustomNodeRenderer;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.*;
 import com.vladsch.flexmark.parser.ListOptions;
@@ -37,17 +36,8 @@ public class TaskListNodeRenderer implements NodeRenderer {
 
     @Override
     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
-        //noinspection unchecked
         HashSet<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
-        set.add(
-                new NodeRenderingHandler<TaskListItem>(TaskListItem.class, new CustomNodeRenderer<TaskListItem>() {
-                    @Override
-                    public void render(TaskListItem node, NodeRendererContext context, HtmlWriter html) {
-                        TaskListNodeRenderer.this.render(node, context, html);
-                    }
-                })
-        );
-
+        set.add(new NodeRenderingHandler<TaskListItem>(TaskListItem.class, TaskListNodeRenderer.this::render));
         return set;
     }
 
@@ -57,28 +47,19 @@ public class TaskListNodeRenderer implements NodeRenderer {
         if (listOptions.isTightListItem(node)) {
             if (!tightItemClass.isEmpty()) html.attr("class", tightItemClass);
             if (!itemDoneStatusClass.isEmpty() && !itemDoneStatusClass.equals(tightItemClass)) html.attr("class", itemDoneStatusClass);
-            html.srcPos(sourceText.getStartOffset(), sourceText.getEndOffset()).withAttr(CoreNodeRenderer.TIGHT_LIST_ITEM).withCondIndent().tagLine("li", new Runnable() {
-                @Override
-                public void run() {
-                    html.raw(node.isItemDoneMarker() ? doneMarker : notDoneMarker);
-                    context.renderChildren(node);
-                }
+            html.srcPos(sourceText.getStartOffset(), sourceText.getEndOffset()).withAttr(CoreNodeRenderer.TIGHT_LIST_ITEM).withCondIndent().tagLine("li", () -> {
+                html.raw(node.isItemDoneMarker() ? doneMarker : notDoneMarker);
+                context.renderChildren(node);
             });
         } else {
             if (!looseItemClass.isEmpty()) html.attr("class", looseItemClass);
             if (!itemDoneStatusClass.isEmpty() && !itemDoneStatusClass.equals(looseItemClass)) html.attr("class", itemDoneStatusClass);
-            html.withAttr(CoreNodeRenderer.LOOSE_LIST_ITEM).tagIndent("li", new Runnable() {
-                @Override
-                public void run() {
-                    if (!paragraphClass.isEmpty()) html.attr("class", paragraphClass);
-                    html.srcPos(sourceText.getStartOffset(), sourceText.getEndOffset()).withAttr(TASK_ITEM_PARAGRAPH).tagLine("p", new Runnable() {
-                        @Override
-                        public void run() {
-                            html.raw(node.isItemDoneMarker() ? doneMarker : notDoneMarker);
-                            context.renderChildren(node);
-                        }
-                    });
-                }
+            html.withAttr(CoreNodeRenderer.LOOSE_LIST_ITEM).tagIndent("li", () -> {
+                if (!paragraphClass.isEmpty()) html.attr("class", paragraphClass);
+                html.srcPos(sourceText.getStartOffset(), sourceText.getEndOffset()).withAttr(TASK_ITEM_PARAGRAPH).tagLine("p", () -> {
+                    html.raw(node.isItemDoneMarker() ? doneMarker : notDoneMarker);
+                    context.renderChildren(node);
+                });
             });
         }
     }

@@ -20,12 +20,7 @@ public abstract class NodeRepository<T> implements Map<String, T> {
         ArrayList<VisitHandler<?>> handlers = new ArrayList<>();
         for (Class<? extends Node> clazz : classes) {
             handlers.add(
-                    new VisitHandler<Node>(clazz, new Visitor<Node>() {
-                        @Override
-                        public void visit(Node node) {
-                            runnable.accept(node);
-                        }
-                    })
+                    new VisitHandler<Node>(clazz, runnable::accept)
             );
         }
         NodeVisitor visitor = new NodeVisitor(handlers);

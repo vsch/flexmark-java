@@ -153,21 +153,18 @@ public class MutableAttributeImpl implements MutableAttribute {
             if (value != null && value.length() != 0) {
                 Map<String, String> valueMap = getValueMap();
 
-                forEachValue(value, new BiConsumer<String, String>() {
-                    @Override
-                    public void accept(String itemName, String itemValue) {
-                        if (myValueNameDelimiter != NUL && itemValue.isEmpty()) {
-                            valueMap.remove(itemName);
-                        } else {
-                            valueMap.put(itemName, itemValue);
-                        }
+                forEachValue(value, (itemName, itemValue) -> {
+                    if (myValueNameDelimiter != NUL && itemValue.isEmpty()) {
+                        valueMap.remove(itemName);
+                    } else {
+                        valueMap.put(itemName, itemValue);
                     }
                 });
 
                 myValue = null;
             }
         } else {
-            if (myValue == null || value == null || !myValue.equals(value)) {
+            if (myValue == null || !myValue.contentEquals(value)) {
                 myValue = value == null ? "" : String.valueOf(value);
                 myValues = null;
             }
@@ -205,19 +202,16 @@ public class MutableAttributeImpl implements MutableAttribute {
                 Map<String, String> valueMap = getValueMap();
                 boolean[] removed = { false };
 
-                forEachValue(value, new BiConsumer<String, String>() {
-                    @Override
-                    public void accept(String itemName, String itemValue) {
-                        if (valueMap.remove(itemName) != null) {
-                            removed[0] = true;
-                        }
+                forEachValue(value, (itemName, itemValue) -> {
+                    if (valueMap.remove(itemName) != null) {
+                        removed[0] = true;
                     }
                 });
 
                 if (removed[0]) myValue = null;
             }
         } else {
-            if (myValue == null || !myValue.equals(value)) {
+            if (myValue == null || !myValue.contentEquals(value)) {
                 myValue = "";
                 myValues = null;
             }
@@ -273,9 +267,9 @@ public class MutableAttributeImpl implements MutableAttribute {
     }
 
     public static MutableAttributeImpl of(CharSequence attrName, CharSequence value, char valueListDelimiter, char valueNameDelimiter) {
-        if (CLASS_ATTR.equals(attrName)) {
+        if (CLASS_ATTR.contentEquals(attrName)) {
             return new MutableAttributeImpl(attrName, value, ' ', NUL);
-        } else if (STYLE_ATTR.equals(attrName)) {
+        } else if (STYLE_ATTR.contentEquals(attrName)) {
             return new MutableAttributeImpl(attrName, value, ';', ':');
         }
         return new MutableAttributeImpl(attrName, value, valueListDelimiter, valueNameDelimiter);

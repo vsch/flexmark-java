@@ -32,7 +32,6 @@ public abstract class NodePostProcessorFactory implements PostProcessorFactory {
         if (excludeDescendantsOf.length > 0) {
             NODE_MAP.put(nodeType, new HashSet<Class<?>>(Arrays.asList(excludeDescendantsOf)));
         } else {
-            //noinspection unchecked
             addNodes(nodeType);
         }
     }

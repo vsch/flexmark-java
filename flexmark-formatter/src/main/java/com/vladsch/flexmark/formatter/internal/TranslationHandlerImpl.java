@@ -307,8 +307,8 @@ public class TranslationHandlerImpl implements TranslationHandler {
                         // only if does not have an explicit id then map to translated text id
                         String id = myIdGenerator.getId(translated);
                         myTranslatedRefTargets.put(myTranslatingSpanId, id);
-                    //} else {
-                    //    myTranslatedRefTargets.remove(myTranslatingSpanId);
+                        //} else {
+                        //    myTranslatedRefTargets.remove(myTranslatingSpanId);
                     }
                 }
 
@@ -324,8 +324,8 @@ public class TranslationHandlerImpl implements TranslationHandler {
                         // only if does not have an explicit id then map to translated text id
                         String id = myIdGenerator.getId(target);
                         myTranslatedRefTargets.put(myTranslatingSpanId, id);
-                    //} else {
-                    //    myTranslatedRefTargets.remove(myTranslatingSpanId);
+                        //} else {
+                        //    myTranslatedRefTargets.remove(myTranslatingSpanId);
                     }
                 }
 

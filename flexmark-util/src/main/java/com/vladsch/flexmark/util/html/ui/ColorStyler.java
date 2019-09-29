@@ -31,7 +31,6 @@ public class ColorStyler extends HtmlStylerBase<Color> {
         else return item == null ? "" : String.format("color:#%s", getColorValue(item));
     }
 
-    @SuppressWarnings("UseJBColor")
     public static Color getNamedColor(String colorName) {
         if (colorName.startsWith("#")) {
             // extract rgb from it

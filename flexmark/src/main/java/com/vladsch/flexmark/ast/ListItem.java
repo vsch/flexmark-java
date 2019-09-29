@@ -17,6 +17,32 @@ public abstract class ListItem extends Block implements ParagraphItemContainer, 
     private boolean hadBlankAfterItemParagraph = false;
     private boolean containsBlankLine = false;
 
+    public ListItem() {
+    }
+
+    public ListItem(ListItem other) {
+        this.openingMarker = other.openingMarker;
+        this.markerSuffix = other.markerSuffix;
+        this.tight = other.tight;
+        this.hadBlankAfterItemParagraph = other.hadBlankAfterItemParagraph;
+        this.containsBlankLine = other.containsBlankLine;
+
+        takeChildren(other);
+        setCharsFromContent();
+    }
+
+    public ListItem(BasedSequence chars) {
+        super(chars);
+    }
+
+    public ListItem(BasedSequence chars, List<BasedSequence> segments) {
+        super(chars, segments);
+    }
+
+    public ListItem(BlockContent blockContent) {
+        super(blockContent);
+    }
+
     @Override
     public void getAstExtra(StringBuilder out) {
         segmentSpanChars(out, openingMarker, "open");
@@ -114,30 +140,5 @@ public abstract class ListItem extends Block implements ParagraphItemContainer, 
     @Override
     public Node getLastBlankLineChild() {
         return getLastChild();
-    }
-
-    public ListItem() {
-    }
-
-    public ListItem(ListItem other) {
-        this.openingMarker = other.openingMarker;
-        this.markerSuffix = other.markerSuffix;
-        this.tight = other.tight;
-        this.hadBlankAfterItemParagraph = other.hadBlankAfterItemParagraph;
-
-        takeChildren(other);
-        setCharsFromContent();
-    }
-
-    public ListItem(BasedSequence chars) {
-        super(chars);
-    }
-
-    public ListItem(BasedSequence chars, List<BasedSequence> segments) {
-        super(chars, segments);
-    }
-
-    public ListItem(BlockContent blockContent) {
-        super(blockContent);
     }
 }

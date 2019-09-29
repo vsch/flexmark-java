@@ -441,7 +441,6 @@ public class ImageUtils {
             Color innerFillColor
     ) {
         //BufferedImage output = UIUtil.createImage(w, h, BufferedImage.TYPE_INT_ARGB);
-        //noinspection UndesirableClassUsage
         BufferedImage output = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_INT_ARGB);
         int imgW = image.getWidth();
         int imgH = image.getHeight();
@@ -492,7 +491,6 @@ public class ImageUtils {
             Color innerFillColor
     ) {
         //BufferedImage output = UIUtil.createImage(w, h, BufferedImage.TYPE_INT_ARGB);
-        //noinspection UndesirableClassUsage
         BufferedImage output = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_INT_ARGB);
         int imgW = image.getWidth();
         int imgH = image.getHeight();
@@ -539,7 +537,6 @@ public class ImageUtils {
             return outerImage;
         }
 
-        //noinspection UndesirableClassUsage
         BufferedImage output = outerImage != null ? outerImage : new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_INT_ARGB);
         int imgW = image.getWidth();
         int imgH = image.getHeight();
@@ -597,7 +594,6 @@ public class ImageUtils {
             return outerImage;
         }
 
-        //noinspection UndesirableClassUsage
         BufferedImage output = outerImage != null ? outerImage : new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_INT_ARGB);
         int imgW = image.getWidth();
         int imgH = image.getHeight();

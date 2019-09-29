@@ -6,7 +6,6 @@ import com.vladsch.flexmark.ext.jekyll.front.matter.internal.JekyllFrontMatterNo
 import com.vladsch.flexmark.formatter.Formatter;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
-import com.vladsch.flexmark.util.builder.Extension;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 
 /**

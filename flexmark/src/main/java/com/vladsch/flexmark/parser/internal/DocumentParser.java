@@ -34,19 +34,7 @@ import static com.vladsch.flexmark.parser.Parser.TRACK_DOCUMENT_LINES;
 
 public class DocumentParser implements ParserState {
 
-    public static final InlineParserFactory INLINE_PARSER_FACTORY = new InlineParserFactory() {
-        @Override
-        public InlineParser inlineParser(
-                DataHolder options,
-                BitSet specialCharacters,
-                BitSet delimiterCharacters,
-                Map<Character, DelimiterProcessor> delimiterProcessors,
-                LinkRefProcessorData linkRefProcessors,
-                List<InlineParserExtensionFactory> inlineParserExtensions
-        ) {
-            return new CommonmarkInlineParser(options, specialCharacters, delimiterCharacters, delimiterProcessors, linkRefProcessors, inlineParserExtensions);
-        }
-    };
+    public static final InlineParserFactory INLINE_PARSER_FACTORY = CommonmarkInlineParser::new;
 
     private static final HashMap<CustomBlockParserFactory, DataKey<Boolean>> CORE_FACTORIES_DATA_KEYS = new HashMap<CustomBlockParserFactory, DataKey<Boolean>>();
     static {
@@ -358,9 +346,8 @@ public class DocumentParser implements ParserState {
     }
 
     public static List<CustomBlockParserFactory> calculateBlockParserFactories(DataHolder options, List<CustomBlockParserFactory> customBlockParserFactories) {
-        List<CustomBlockParserFactory> list = new ArrayList<CustomBlockParserFactory>();
         // By having the custom factories come first, extensions are able to change behavior of core syntax.
-        list.addAll(customBlockParserFactories);
+        List<CustomBlockParserFactory> list = new ArrayList<CustomBlockParserFactory>(customBlockParserFactories);
 
         // need to keep core parsers in the right order, this is done through their dependencies
         for (Map.Entry<CustomBlockParserFactory, DataKey<Boolean>> entry : CORE_FACTORIES_DATA_KEYS.entrySet()) {
@@ -384,9 +371,8 @@ public class DocumentParser implements ParserState {
             List<ParagraphPreProcessorFactory> blockPreProcessors,
             InlineParserFactory inlineParserFactory
     ) {
-        List<ParagraphPreProcessorFactory> list = new ArrayList<ParagraphPreProcessorFactory>();
         // By having the custom factories come first, extensions are able to change behavior of core syntax.
-        list.addAll(blockPreProcessors);
+        List<ParagraphPreProcessorFactory> list = new ArrayList<ParagraphPreProcessorFactory>(blockPreProcessors);
 
         if (inlineParserFactory == INLINE_PARSER_FACTORY) {
             //list.addAll(CORE_PARAGRAPH_PRE_PROCESSORS.keySet().stream().filter(options::get).map(key -> CORE_PARAGRAPH_PRE_PROCESSORS.get(key)).collect(Collectors.toList()));
@@ -407,9 +393,8 @@ public class DocumentParser implements ParserState {
             List<BlockPreProcessorFactory> blockPreProcessors,
             InlineParserFactory inlineParserFactory
     ) {
-        List<BlockPreProcessorFactory> list = new ArrayList<BlockPreProcessorFactory>();
         // By having the custom factories come first, extensions are able to change behavior of core syntax.
-        list.addAll(blockPreProcessors);
+        List<BlockPreProcessorFactory> list = new ArrayList<BlockPreProcessorFactory>(blockPreProcessors);
 
         // add core block preprocessors
         //list.addAll(CORE_BLOCK_PRE_PROCESSORS.keySet().stream().filter(options::get).map(key -> CORE_BLOCK_PRE_PROCESSORS.get(key)).collect(Collectors.toList()));
@@ -650,7 +635,7 @@ public class DocumentParser implements ParserState {
                     }
                     matches++;
 
-                    if (blankLine != null && (blankLinesInAst || blankLine.getClaimedBlankLine() == blockParser)) {
+                    if (blankLine != null && (blankLinesInAst || blankLine.getClaimedBlankLine() == blockParser.getBlock())) {
                         if (blockParser.getBlock() instanceof BlankLineContainer) {
                             blockParser.getBlock().appendChild(blankLine);
                         }

@@ -3,7 +3,6 @@ package com.vladsch.flexmark.jira.converter;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.jira.converter.internal.JiraConverterNodeRenderer;
 import com.vladsch.flexmark.parser.Parser;
-import com.vladsch.flexmark.util.builder.Extension;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 
 /**

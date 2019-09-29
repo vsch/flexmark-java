@@ -54,25 +54,15 @@ public class MacrosNodeFormatter extends NodeRepositoryFormatter<MacroDefinition
     @Override
     public Set<NodeFormattingHandler<?>> getNodeFormattingHandlers() {
         return new HashSet<NodeFormattingHandler<?>>(Arrays.asList(
-                new NodeFormattingHandler<MacroReference>(MacroReference.class, new CustomNodeFormatter<MacroReference>() {
-                    @Override
-                    public void render(MacroReference node, NodeFormatterContext context, MarkdownWriter markdown) {
-                        MacrosNodeFormatter.this.render(node, context, markdown);
-                    }
-                }),
-                new NodeFormattingHandler<MacroDefinitionBlock>(MacroDefinitionBlock.class, new CustomNodeFormatter<MacroDefinitionBlock>() {
-                    @Override
-                    public void render(MacroDefinitionBlock node, NodeFormatterContext context, MarkdownWriter markdown) {
-                        MacrosNodeFormatter.this.render(node, context, markdown);
-                    }
-                })
+                new NodeFormattingHandler<MacroReference>(MacroReference.class, MacrosNodeFormatter.this::render),
+                new NodeFormattingHandler<MacroDefinitionBlock>(MacroDefinitionBlock.class, MacrosNodeFormatter.this::render)
         ));
     }
 
     @Override
     public Set<Class<?>> getNodeClasses() {
         if (options.macrosPlacement != ElementPlacement.AS_IS && options.macrosSort != ElementPlacementSort.SORT_UNUSED_LAST) return null;
-        //noinspection unchecked,ArraysAsListWithZeroOrOneArgument
+        // noinspection ArraysAsListWithZeroOrOneArgument
         return new HashSet<Class<?>>(Arrays.asList(
                 MacroReference.class
         ));
@@ -86,12 +76,7 @@ public class MacrosNodeFormatter extends NodeRepositoryFormatter<MacroDefinition
         markdown.append("<<<");
         if (context.isTransformingText()) {
             String referenceId = transformReferenceId(node.getText().toString(), context);
-            context.nonTranslatingSpan(new TranslatingSpanRender() {
-                @Override
-                public void render(NodeFormatterContext context, MarkdownWriter markdown) {
-                    markdown.append(referenceId);
-                }
-            });
+            context.nonTranslatingSpan((context1, markdown1) -> markdown1.append(referenceId));
         } else {
             markdown.append(node.getText());
         }

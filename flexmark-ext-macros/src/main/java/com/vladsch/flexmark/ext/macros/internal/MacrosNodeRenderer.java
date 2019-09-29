@@ -4,7 +4,6 @@ import com.vladsch.flexmark.ast.Paragraph;
 import com.vladsch.flexmark.ext.macros.MacroDefinitionBlock;
 import com.vladsch.flexmark.ext.macros.MacroReference;
 import com.vladsch.flexmark.ext.macros.MacrosExtension;
-import com.vladsch.flexmark.html.CustomNodeRenderer;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.*;
@@ -29,8 +28,8 @@ public class MacrosNodeRenderer implements PhasedNodeRenderer {
     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
         Set<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
         // @formatter:off
-        set.add(new NodeRenderingHandler<MacroReference>(MacroReference.class, new CustomNodeRenderer<MacroReference>() { @Override public void render(MacroReference node, NodeRendererContext context, HtmlWriter html) { MacrosNodeRenderer.this.render(node, context, html); } }));
-        set.add(new NodeRenderingHandler<MacroDefinitionBlock>(MacroDefinitionBlock.class, new CustomNodeRenderer<MacroDefinitionBlock>() { @Override public void render(MacroDefinitionBlock node, NodeRendererContext context, HtmlWriter html) { MacrosNodeRenderer.this.render(node, context, html); } }));// ,// zzzoptionszzz(CUSTOM_NODE)
+        set.add(new NodeRenderingHandler<MacroReference>(MacroReference.class, this::render));
+        set.add(new NodeRenderingHandler<MacroDefinitionBlock>(MacroDefinitionBlock.class, this::render));
         // @formatter:on
         return set;
     }
@@ -50,17 +49,14 @@ public class MacrosNodeRenderer implements PhasedNodeRenderer {
                 // need to see if have undefined footnotes that were defined after parsing
                 boolean[] hadNewFootnotes = { false };
                 NodeVisitor visitor = new NodeVisitor(
-                        new VisitHandler<MacroReference>(MacroReference.class, new Visitor<MacroReference>() {
-                            @Override
-                            public void visit(MacroReference node) {
-                                if (!node.isDefined()) {
-                                    MacroDefinitionBlock macroDefinitionBlock = node.getMacroDefinitionBlock(repository);
+                        new VisitHandler<MacroReference>(MacroReference.class, node -> {
+                            if (!node.isDefined()) {
+                                MacroDefinitionBlock macroDefinitionBlock = node.getMacroDefinitionBlock(repository);
 
-                                    if (macroDefinitionBlock != null) {
-                                        repository.addMacrosReference(macroDefinitionBlock, node);
-                                        node.setMacroDefinitionBlock(macroDefinitionBlock);
-                                        hadNewFootnotes[0] = true;
-                                    }
+                                if (macroDefinitionBlock != null) {
+                                    repository.addMacrosReference(macroDefinitionBlock, node);
+                                    node.setMacroDefinitionBlock(macroDefinitionBlock);
+                                    hadNewFootnotes[0] = true;
                                 }
                             }
                         })

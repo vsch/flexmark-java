@@ -46,37 +46,27 @@ public class GitLabNodeRenderer implements NodeRenderer
     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
         Set<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
         // @formatter:off
-        set.add(new NodeRenderingHandler<GitLabIns>(GitLabIns.class, new CustomNodeRenderer<GitLabIns>() { @Override public void render(GitLabIns node, NodeRendererContext context, HtmlWriter html) { GitLabNodeRenderer.this.render(node, context, html); } }));
-        set.add(new NodeRenderingHandler<GitLabDel>(GitLabDel.class, new CustomNodeRenderer<GitLabDel>() { @Override public void render(GitLabDel node, NodeRendererContext context, HtmlWriter html) { GitLabNodeRenderer.this.render(node, context, html); } }));
-        set.add(new NodeRenderingHandler<GitLabInlineMath>(GitLabInlineMath.class, new CustomNodeRenderer<GitLabInlineMath>() { @Override public void render(GitLabInlineMath node, NodeRendererContext context, HtmlWriter html) { GitLabNodeRenderer.this.render(node, context, html); } }));
-        set.add(new NodeRenderingHandler<GitLabBlockQuote>(GitLabBlockQuote.class, new CustomNodeRenderer<GitLabBlockQuote>() { @Override public void render(GitLabBlockQuote node, NodeRendererContext context, HtmlWriter html) { GitLabNodeRenderer.this.render(node, context, html); } }));// ,// zzzoptionszzz(CUSTOM_NODE)
+        set.add(new NodeRenderingHandler<GitLabIns>(GitLabIns.class, GitLabNodeRenderer.this::render));
+        set.add(new NodeRenderingHandler<GitLabDel>(GitLabDel.class, GitLabNodeRenderer.this::render));
+        set.add(new NodeRenderingHandler<GitLabInlineMath>(GitLabInlineMath.class, GitLabNodeRenderer.this::render));
+        set.add(new NodeRenderingHandler<GitLabBlockQuote>(GitLabBlockQuote.class, GitLabNodeRenderer.this::render));// ,// zzzoptionszzz(CUSTOM_NODE)
         if (options.renderBlockMath || options.renderBlockMermaid) {
-            set.add(new NodeRenderingHandler<FencedCodeBlock>(FencedCodeBlock.class, new CustomNodeRenderer<FencedCodeBlock>() { @Override public void render(FencedCodeBlock node, NodeRendererContext context, HtmlWriter html) { GitLabNodeRenderer.this.render(node, context, html); } }));// ,// zzzoptionszzz(CUSTOM_NODE)
+            set.add(new NodeRenderingHandler<FencedCodeBlock>(FencedCodeBlock.class, GitLabNodeRenderer.this::render));// ,// zzzoptionszzz(CUSTOM_NODE)
         }
         if (options.renderVideoImages) {
-            set.add(new NodeRenderingHandler<Image>(Image.class, new CustomNodeRenderer<Image>() { @Override public void render(Image node, NodeRendererContext context, HtmlWriter html) { GitLabNodeRenderer.this.render(node, context, html); } }));// ,// zzzoptionszzz(CUSTOM_NODE)
-            set.add(new NodeRenderingHandler<ImageRef>(ImageRef.class, new CustomNodeRenderer<ImageRef>() { @Override public void render(ImageRef node, NodeRendererContext context, HtmlWriter html) { GitLabNodeRenderer.this.render(node, context, html); } }));// ,// zzzoptionszzz(CUSTOM_NODE)
+            set.add(new NodeRenderingHandler<Image>(Image.class, GitLabNodeRenderer.this::render));// ,// zzzoptionszzz(CUSTOM_NODE)
+            set.add(new NodeRenderingHandler<ImageRef>(ImageRef.class, GitLabNodeRenderer.this::render));// ,// zzzoptionszzz(CUSTOM_NODE)
         }
         // @formatter:on
         return set;
     }
 
     private void render(GitLabIns node, NodeRendererContext context, HtmlWriter html) {
-        html.withAttr().tag("ins", false, false, new Runnable() {
-            @Override
-            public void run() {
-                context.renderChildren(node);
-            }
-        });
+        html.withAttr().tag("ins", false, false, () -> context.renderChildren(node));
     }
 
     private void render(GitLabDel node, NodeRendererContext context, HtmlWriter html) {
-        html.withAttr().tag("del", false, false, new Runnable() {
-            @Override
-            public void run() {
-                context.renderChildren(node);
-            }
-        });
+        html.withAttr().tag("del", false, false, () -> context.renderChildren(node));
     }
 
     private void render(GitLabInlineMath node, NodeRendererContext context, HtmlWriter html) {
@@ -86,12 +76,7 @@ public class GitLabNodeRenderer implements NodeRenderer
     }
 
     private void render(GitLabBlockQuote node, NodeRendererContext context, HtmlWriter html) {
-        html.withAttr().tagLineIndent("blockquote", new Runnable() {
-            @Override
-            public void run() {
-                context.renderChildren(node);
-            }
-        });
+        html.withAttr().tagLineIndent("blockquote", () -> context.renderChildren(node));
     }
 
     private void render(FencedCodeBlock node, NodeRendererContext context, HtmlWriter html) {
@@ -139,32 +124,29 @@ public class GitLabNodeRenderer implements NodeRenderer
                 //<video src="video.mp4" width="400" controls="true"></video>
                 //<p><a href="video.mp4" target="_blank" rel="noopener noreferrer" title="Download 'Sample Video'">Sample Video</a></p>
                 //</div>
-                html.attr(Attribute.CLASS_ATTR, options.videoImageClass).attr(attributes).withAttr().tagLineIndent("div", new Runnable() {
-                    @Override
-                    public void run() {
-                        // need to take attributes for reference definition, then overlay them with ours
-                        html.srcPos(srcNode.getChars())
-                                .attr("src", url)
-                                .attr("width", "400")
-                                .attr("controls", "true")
-                                .withAttr(VIDEO)
-                                .tag("video")
-                                .tag("/video")
-                                .line();
+                html.attr(Attribute.CLASS_ATTR, options.videoImageClass).attr(attributes).withAttr().tagLineIndent("div", () -> {
+                    // need to take attributes for reference definition, then overlay them with ours
+                    html.srcPos(srcNode.getChars())
+                            .attr("src", url)
+                            .attr("width", "400")
+                            .attr("controls", "true")
+                            .withAttr(VIDEO)
+                            .tag("video")
+                            .tag("/video")
+                            .line();
 
-                        if (options.renderVideoLink) {
-                            html.tag("p")
-                                    .attr("href", url)
-                                    .attr("target", "_blank")
-                                    .attr("rel", "noopener noreferrer")
-                                    .attr("title", String.format(options.videoImageLinkTextFormat, altText))
-                                    .withAttr(VIDEO_LINK)
-                                    .tag("a")
-                                    .text(altText)
-                                    .tag("/a")
-                                    .tag("/p")
-                                    .line();
-                        }
+                    if (options.renderVideoLink) {
+                        html.tag("p")
+                                .attr("href", url)
+                                .attr("target", "_blank")
+                                .attr("rel", "noopener noreferrer")
+                                .attr("title", String.format(options.videoImageLinkTextFormat, altText))
+                                .withAttr(VIDEO_LINK)
+                                .tag("a")
+                                .text(altText)
+                                .tag("/a")
+                                .tag("/p")
+                                .line();
                     }
                 });
 

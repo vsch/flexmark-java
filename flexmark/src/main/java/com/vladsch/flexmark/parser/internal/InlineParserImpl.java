@@ -1694,23 +1694,20 @@ public class InlineParserImpl extends LightInlineParserImpl implements InlinePar
 
             int[] maxNestingLevelRef = new int[] { 0 };
 
-            Collections.sort(sortedLinkProcessors, new Comparator<LinkRefProcessorFactory>() {
-                @Override
-                public int compare(LinkRefProcessorFactory p1, LinkRefProcessorFactory p2) {
-                    int lv1 = p1.getBracketNestingLevel(options);
-                    int lv2 = p2.getBracketNestingLevel(options);
-                    int maxLevel = maxNestingLevelRef[0];
-                    if (maxLevel < lv1) maxLevel = lv1;
-                    if (maxLevel < lv2) maxLevel = lv2;
-                    maxNestingLevelRef[0] = maxLevel;
+            Collections.sort(sortedLinkProcessors, (p1, p2) -> {
+                int lv1 = p1.getBracketNestingLevel(options);
+                int lv2 = p2.getBracketNestingLevel(options);
+                int maxLevel = maxNestingLevelRef[0];
+                if (maxLevel < lv1) maxLevel = lv1;
+                if (maxLevel < lv2) maxLevel = lv2;
+                maxNestingLevelRef[0] = maxLevel;
 
-                    if (lv1 == lv2) {
-                        // processors that want exclamation before the [ have higher priority
-                        if (!p1.getWantExclamationPrefix(options)) lv1++;
-                        if (!p2.getWantExclamationPrefix(options)) lv2++;
-                    }
-                    return Integer.compare(lv1, lv2);
+                if (lv1 == lv2) {
+                    // processors that want exclamation before the [ have higher priority
+                    if (!p1.getWantExclamationPrefix(options)) lv1++;
+                    if (!p2.getWantExclamationPrefix(options)) lv2++;
                 }
+                return Integer.compare(lv1, lv2);
             });
 
             int maxNestingLevel = maxNestingLevelRef[0];

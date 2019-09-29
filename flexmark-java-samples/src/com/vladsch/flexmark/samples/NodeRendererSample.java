@@ -3,7 +3,6 @@ package com.vladsch.flexmark.samples;
 import com.vladsch.flexmark.ast.*;
 import com.vladsch.flexmark.ext.abbreviation.internal.AbbreviationOptions;
 import com.vladsch.flexmark.ext.autolink.AutolinkExtension;
-import com.vladsch.flexmark.html.CustomNodeRenderer;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.*;
@@ -44,18 +43,8 @@ public class NodeRendererSample {
         @Override
         public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
             return new HashSet<NodeRenderingHandler<? extends Node>>(Arrays.asList(
-                    new NodeRenderingHandler<HtmlBlock>(HtmlBlock.class, new CustomNodeRenderer<HtmlBlock>() {
-                        @Override
-                        public void render(HtmlBlock node, NodeRendererContext context, HtmlWriter html) {
-                            SampleNodeRenderer.this.render(node, context, html);
-                        }
-                    }),
-                    new NodeRenderingHandler<HtmlInline>(HtmlInline.class, new CustomNodeRenderer<HtmlInline>() {
-                        @Override
-                        public void render(HtmlInline node, NodeRendererContext context, HtmlWriter html) {
-                            SampleNodeRenderer.this.render(node, context, html);
-                        }
-                    })
+                    new NodeRenderingHandler<HtmlBlock>(HtmlBlock.class, this::render),
+                    new NodeRenderingHandler<HtmlInline>(HtmlInline.class, this::render)
             ));
         }
 

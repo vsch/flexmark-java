@@ -83,7 +83,6 @@ public class NodeClassifierVisitor extends NodeVisitorBase implements NodeTracke
         Node parent = node.getParent();
         if (!myExclusionMap.isEmpty() && !(node instanceof Document)) {
             // add flags if needed
-            node.getClass();
             BitSet bitSet = nodeAncestryBitSet.getPeek();
 
             int index = myClassifyingNodeTracker.getItems().indexOf(node);

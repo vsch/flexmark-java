@@ -137,7 +137,6 @@ public class PostProcessorManager {
                 if (types != null) {
                     for (Map.Entry<Class<?>, Set<Class<?>>> entry : types.entrySet()) {
                         if (Node.class.isAssignableFrom(entry.getKey())) {
-                            //noinspection SuspiciousMethodCalls
                             Set<Class<?>> classes = nodeMap.get(entry.getKey());
                             Set<Class<?>> value = entry.getValue();
                             if (classes == null) {
@@ -206,13 +205,10 @@ public class PostProcessorManager {
         protected DependentItemMap<PostProcessorFactory> prioritize(DependentItemMap<PostProcessorFactory> dependentMap) {
             // put globals last
             List<DependentItemMap.Entry<Class, DependentItem<PostProcessorFactory>>> prioritized = dependentMap.entries();
-            Collections.sort(prioritized, new Comparator<DependentItemMap.Entry<Class, DependentItem<PostProcessorFactory>>>() {
-                @Override
-                public int compare(DependentItemMap.Entry<Class, DependentItem<PostProcessorFactory>> e1, DependentItemMap.Entry<Class, DependentItem<PostProcessorFactory>> e2) {
-                    int g1 = e1.getValue().isGlobalScope ? 1 : 0;
-                    int g2 = e2.getValue().isGlobalScope ? 1 : 0;
-                    return g1 - g2;
-                }
+            Collections.sort(prioritized, (e1, e2) -> {
+                int g1 = e1.getValue().isGlobalScope ? 1 : 0;
+                int g2 = e2.getValue().isGlobalScope ? 1 : 0;
+                return g1 - g2;
             });
 
             BitSet dependentMapSet = dependentMap.keySet().keyDifferenceBitSet(prioritized);

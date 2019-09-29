@@ -225,18 +225,17 @@ public final class SegmentedSequence extends BasedSequenceImpl {
             } else {
                 startOffset = baseSeq.getEndOffset();
             }
-            
+
             if (length == 0) {
                 endOffset = startOffset;
             } else {
                 endOffset = baseOffsets[baseStartOffset + length - 1] + 1;
                 assert startOffset <= endOffset;
             }
-            
         } else {
             // start is the first real start in this sequence or after it in the parent
             boolean finished = false;
-            
+
             for (int iS = baseStartOffset; iS < iMax; iS++) {
                 if (baseOffsets[iS] < 0) continue;
                 startOffset = baseOffsets[iS];

@@ -22,12 +22,7 @@ public class EmojiNodeFormatter implements NodeFormatter {
     @Override
     public Set<NodeFormattingHandler<?>> getNodeFormattingHandlers() {
         HashSet<NodeFormattingHandler<?>> set = new HashSet<NodeFormattingHandler<?>>();
-        set.add(new NodeFormattingHandler<Emoji>(Emoji.class, new CustomNodeFormatter<Emoji>() {
-            @Override
-            public void render(Emoji node, NodeFormatterContext context, MarkdownWriter markdown) {
-                EmojiNodeFormatter.this.render(node, context, markdown);
-            }
-        }));
+        set.add(new NodeFormattingHandler<Emoji>(Emoji.class, EmojiNodeFormatter.this::render));
         return set;
     }
 

@@ -314,46 +314,38 @@ public class TableCellOffsetInfo {
         Map<TableSectionType, Integer> useStopPointsMap = stopPointsMap == null ? DEFAULT_STOP_POINTS_MAP : stopPointsMap;
         BiFunction<Integer, Integer, Integer> aggregator = nextOffset ? new BoundedMinAggregator(offset) : new BoundedMaxAggregator(offset);
 
-        table.forAllSectionRows(new TableRowManipulator() {
-            @Override
-            public int apply(
-                    TableRow row,
-                    int allRowsIndex,
-                    ArrayList<TableRow> sectionRows,
-                    int sectionRowIndex
-            ) {
-                TableSection section = table.getAllRowsSection(allRowsIndex);
-                if (!row.cells.isEmpty() && useStopPointsMap.containsKey(section.sectionType)) {
-                    int flags = useStopPointsMap.get(section.sectionType);
+        table.forAllSectionRows((row, allRowsIndex, sectionRows, sectionRowIndex) -> {
+            TableSection section = table.getAllRowsSection(allRowsIndex);
+            if (!row.cells.isEmpty() && useStopPointsMap.containsKey(section.sectionType)) {
+                int flags = useStopPointsMap.get(section.sectionType);
 
-                    if (flags != 0) {
-                        int rowStart = row.cells.get(0).getStartOffset(null);
-                        int rowEnd = row.cells.get(row.cells.size() - 1).getEndOffset();
+                if (flags != 0) {
+                    int rowStart = row.cells.get(0).getStartOffset(null);
+                    int rowEnd = row.cells.get(row.cells.size() - 1).getEndOffset();
 
-                        if (haveRowStart(flags))
-                            result[0] = aggregator.apply(result[0], rowStart);
+                    if (haveRowStart(flags))
+                        result[0] = aggregator.apply(result[0], rowStart);
 
-                        if (haveStopPoint(flags, TEXT_START | TEXT_END)) {
-                            TableCell previousCell = null;
-                            for (TableCell cell : row.cells) {
-                                if (haveTextStart(flags)) {
-                                    int textStart = cell.getTextStartOffset(previousCell);
-                                    result[0] = aggregator.apply(result[0], textStart);
-                                }
-
-                                if (haveTextEnd(flags)) {
-                                    int textEnd = cell.getTextEndOffset(previousCell);
-                                    result[0] = aggregator.apply(result[0], textEnd);
-                                }
-                                previousCell = cell;
+                    if (haveStopPoint(flags, TEXT_START | TEXT_END)) {
+                        TableCell previousCell = null;
+                        for (TableCell cell : row.cells) {
+                            if (haveTextStart(flags)) {
+                                int textStart = cell.getTextStartOffset(previousCell);
+                                result[0] = aggregator.apply(result[0], textStart);
                             }
-                        }
 
-                        if (haveRowEnd(flags)) result[0] = aggregator.apply(result[0], rowEnd);
+                            if (haveTextEnd(flags)) {
+                                int textEnd = cell.getTextEndOffset(previousCell);
+                                result[0] = aggregator.apply(result[0], textEnd);
+                            }
+                            previousCell = cell;
+                        }
                     }
+
+                    if (haveRowEnd(flags)) result[0] = aggregator.apply(result[0], rowEnd);
                 }
-                return 0;
             }
+            return 0;
         });
 
         return result[0] == null ? -1 : result[0];

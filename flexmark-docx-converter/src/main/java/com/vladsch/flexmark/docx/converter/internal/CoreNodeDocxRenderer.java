@@ -73,7 +73,7 @@ import java.util.*;
 
 import static com.vladsch.flexmark.html.renderer.LinkStatus.UNKNOWN;
 
-@SuppressWarnings({ "WeakerAccess", "MethodOnlyUsedFromInnerClass", "MethodMayBeStatic", "OverlyCoupledClass" })
+@SuppressWarnings({ "WeakerAccess", "MethodMayBeStatic", "OverlyCoupledClass" })
 public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
     public static final DataKey<Integer> LIST_ITEM_NUMBER = new DataKey<>("LIST_ITEM_NUMBER", 0);
     public static final DataKey<ListSpacing> LIST_ITEM_SPACING = new DataKey<>("LIST_ITEM_SPACING", (ListSpacing) null);

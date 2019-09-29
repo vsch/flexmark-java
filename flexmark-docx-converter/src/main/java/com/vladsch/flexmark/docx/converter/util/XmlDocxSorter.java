@@ -175,9 +175,19 @@ public class XmlDocxSorter {
     static String xmlnsPrefix(Node node, String xmlns) {
         String xmlnsPrefix = "";
         if (xmlns != null && !xmlns.isEmpty()) {
-            xmlnsPrefix = forAllAttributesUntil(node, null, null, null, new Function<Node, String>() {
-                @Override
-                public String apply(Node a) {
+            xmlnsPrefix = forAllAttributesUntil(node, null, null, null, a -> {
+                if (a.getNodeName().startsWith("xmlns:") || a.getNodeName().startsWith("xmlns:")) {
+                    if (a.getNodeValue().equals(xmlns)) {
+                        // we have it
+                        return a.getNodeName().startsWith("xmlns:") ? a.getNodeName().substring("xmlns:".length()) + ":" : "";
+                    }
+                }
+                return null;
+            });
+
+            if (xmlnsPrefix == null) {
+                // search in parent
+                xmlnsPrefix = forAllParentsUntil(node, "", p -> forAllAttributesUntil(p, null, null, null, a -> {
                     if (a.getNodeName().startsWith("xmlns:") || a.getNodeName().startsWith("xmlns:")) {
                         if (a.getNodeValue().equals(xmlns)) {
                             // we have it
@@ -185,40 +195,16 @@ public class XmlDocxSorter {
                         }
                     }
                     return null;
-                }
-            });
-
-            if (xmlnsPrefix == null) {
-                // search in parent
-                xmlnsPrefix = forAllParentsUntil(node, "", new Function<Node, String>() {
-                    @Override
-                    public String apply(Node p) {
-                        return forAllAttributesUntil(p, null, null, null, new Function<Node, String>() {
-                            @Override
-                            public String apply(Node a) {
-                                if (a.getNodeName().startsWith("xmlns:") || a.getNodeName().startsWith("xmlns:")) {
-                                    if (a.getNodeValue().equals(xmlns)) {
-                                        // we have it
-                                        return a.getNodeName().startsWith("xmlns:") ? a.getNodeName().substring("xmlns:".length()) + ":" : "";
-                                    }
-                                }
-                                return null;
-                            }
-                        });
-                    }
-                });
+                }));
             }
         }
         return xmlnsPrefix;
     }
 
     static void forAllParents(Node node, Consumer<Node> consumer) {
-        forAllParentsUntil(node, null, new Function<Node, Object>() {
-            @Override
-            public Object apply(Node n) {
-                consumer.accept(n);
-                return null;
-            }
+        forAllParentsUntil(node, null, n -> {
+            consumer.accept(n);
+            return null;
         });
     }
 
@@ -241,12 +227,9 @@ public class XmlDocxSorter {
     }
 
     static void forAllChildren(Node node, String xmlns, String[] tagNames, Consumer<Node> consumer) {
-        forAllChildrenUntil(node, null, xmlns, tagNames, new Function<Node, Object>() {
-            @Override
-            public Object apply(Node n) {
-                consumer.accept(n);
-                return null;
-            }
+        forAllChildrenUntil(node, null, xmlns, tagNames, n -> {
+            consumer.accept(n);
+            return null;
         });
     }
 
@@ -295,12 +278,9 @@ public class XmlDocxSorter {
     }
 
     static void forAllAttributes(Node node, String xmlns, String[] attributeNames, Consumer<Node> consumer) {
-        forAllAttributesUntil(node, null, null, attributeNames, new Function<Node, Object>() {
-            @Override
-            public Object apply(Node n) {
-                consumer.accept(n);
-                return null;
-            }
+        forAllAttributesUntil(node, null, null, attributeNames, n -> {
+            consumer.accept(n);
+            return null;
         });
     }
 
@@ -378,135 +358,89 @@ public class XmlDocxSorter {
     }
 
     static void sortNodeAttributes(Node node) {
-        forAllChildrenUntil(node, XMLNS_PKG, arrayOf("xmlData"), new Function<Node, Boolean>() {
-            @Override
-            public Boolean apply(Node n) {
-                forAllChildrenUntil(n, new Function<Node, Boolean>() {
-                    @Override
-                    public Boolean apply(Node c) {
-                        Pair<String, String> xmlnsName = getXmlnsName(c.getNodeName());
-                        if (sortXmlDataAttributes.containsKey(xmlnsName.getFirst())) {
-                            String xmlnsPrefix = xmlnsPrefix(node, sortXmlDataAttributes.get(xmlnsName.getFirst()));
+        forAllChildrenUntil(node, XMLNS_PKG, arrayOf("xmlData"), n -> {
+            forAllChildrenUntil(n, c -> {
+                Pair<String, String> xmlnsName = getXmlnsName(c.getNodeName());
+                if (sortXmlDataAttributes.containsKey(xmlnsName.getFirst())) {
+                    String xmlnsPrefix = xmlnsPrefix(node, sortXmlDataAttributes.get(xmlnsName.getFirst()));
 
-                            if (xmlnsPrefix.equals(xmlnsName.getSecond())) {
-                                // our node, we sort attributes of these by name, without the xmlns
-                                ArrayList<Node> toSort = new ArrayList<>();
+                    if (xmlnsPrefix.equals(xmlnsName.getSecond())) {
+                        // our node, we sort attributes of these by name, without the xmlns
+                        ArrayList<Node> toSort = new ArrayList<>();
 
-                                forAllAttributes(c, new Consumer<Node>() {
-                                    @Override
-                                    public void accept(Node e) {
-                                        toSort.add(e);
-                                    }
-                                });
+                        forAllAttributes(c, toSort::add);
 
-                                for (Node item : toSort) {
-                                    c.getAttributes().removeNamedItem(item.getNodeName());
-                                }
-                                Collections.sort(toSort, new Comparator<Node>() {
-                                    @Override
-                                    public int compare(Node o1, Node o2) {
-                                        return getXmlnsName(o1.getNodeName()).getSecond().compareTo(getXmlnsName(o2.getNodeName()).getSecond());
-                                    }
-                                });
-                                for (Node item : toSort) {
-                                    c.getAttributes().setNamedItem(item);
-                                }
-
-                                // only process the first node
-                                return true;
-                            }
+                        for (Node item : toSort) {
+                            c.getAttributes().removeNamedItem(item.getNodeName());
                         }
-                        return null;
+                        Collections.sort(toSort, (o1, o2) -> getXmlnsName(o1.getNodeName()).getSecond().compareTo(getXmlnsName(o2.getNodeName()).getSecond()));
+                        for (Node item : toSort) {
+                            c.getAttributes().setNamedItem(item);
+                        }
+
+                        // only process the first node
+                        return true;
                     }
-                });
-                // only process the first node
-                return true;
-            }
+                }
+                return null;
+            });
+            // only process the first node
+            return true;
         });
     }
 
     static void sortRelationships(Node node) {
-        forAllChildrenUntil(node, XMLNS_PKG, arrayOf("xmlData"), new Function<Node, Boolean>() {
-            @Override
-            public Boolean apply(Node n) {
-                forAllChildrenUntil(n, XMLNS_RELATIONSHIPS, arrayOf("Relationships"), new Function<Node, Boolean>() {
-                    @Override
-                    public Boolean apply(Node c) {
-                        if (c.hasAttributes()) {
-                            // we sort Relationship children by Target attribute
-                            ArrayList<Node> toSort = new ArrayList<>();
-                            forAllChildren(c, XMLNS_RELATIONSHIPS, arrayOf("Relationship"), new Consumer<Node>() {
-                                @Override
-                                public void accept(Node r) {
-                                    if (r.hasAttributes() && r.getAttributes().getNamedItem("Target") != null) {
-                                        toSort.add(r);
-                                    }
-                                }
-                            });
-
-                            for (Node item : toSort) {
-                                c.removeChild(item);
-                            }
-
-                            Collections.sort(toSort, new Comparator<Node>() {
-                                @Override
-                                public int compare(Node o1, Node o2) {
-                                    return o1.getAttributes().getNamedItem("Target").getNodeValue().compareTo(o2.getAttributes().getNamedItem("Target").getNodeValue());
-                                }
-                            });
-                            for (Node item : toSort) {
-                                c.appendChild(item);
-                            }
+        forAllChildrenUntil(node, XMLNS_PKG, arrayOf("xmlData"), n -> {
+            forAllChildrenUntil(n, XMLNS_RELATIONSHIPS, arrayOf("Relationships"), c -> {
+                if (c.hasAttributes()) {
+                    // we sort Relationship children by Target attribute
+                    ArrayList<Node> toSort = new ArrayList<>();
+                    forAllChildren(c, XMLNS_RELATIONSHIPS, arrayOf("Relationship"), r -> {
+                        if (r.hasAttributes() && r.getAttributes().getNamedItem("Target") != null) {
+                            toSort.add(r);
                         }
-                        // only process the first node
-                        return true;
-                    }
-                });
+                    });
 
+                    for (Node item : toSort) {
+                        c.removeChild(item);
+                    }
+
+                    Collections.sort(toSort, (o1, o2) -> o1.getAttributes().getNamedItem("Target").getNodeValue().compareTo(o2.getAttributes().getNamedItem("Target").getNodeValue()));
+                    for (Node item : toSort) {
+                        c.appendChild(item);
+                    }
+                }
                 // only process the first node
                 return true;
-            }
+            });
+
+            // only process the first node
+            return true;
         });
     }
 
     static void sortProperties(Node node) {
-        forAllChildrenUntil(node, XMLNS_PKG, arrayOf("xmlData"), new Function<Node, Boolean>() {
-            @Override
-            public Boolean apply(Node n) {
-                forAllChildrenUntil(n, XMLNS_EXTENDED_PROPERTIES, arrayOf("Properties"), new Function<Node, Boolean>() {
-                    @Override
-                    public Boolean apply(Node p) {
-                        // we sort properties
-                        ArrayList<Node> toSort = new ArrayList<>();
-                        forAllChildren(p, new Consumer<Node>() {
-                            @Override
-                            public void accept(Node e) {
-                                toSort.add(e);
-                            }
-                        });
-                        if (!toSort.isEmpty()) {
-                            for (Node item : toSort) {
-                                p.removeChild(item);
-                            }
-                            Collections.sort(toSort, new Comparator<Node>() {
-                                @Override
-                                public int compare(Node o1, Node o2) {
-                                    return getXmlnsName(o1.getNodeName()).getSecond().compareTo(getXmlnsName(o2.getNodeName()).getSecond());
-                                }
-                            });
-                            for (Node item : toSort) {
-                                p.appendChild(item);
-                            }
-                        }
-
-                        // only process the first node
-                        return true;
+        forAllChildrenUntil(node, XMLNS_PKG, arrayOf("xmlData"), n -> {
+            forAllChildrenUntil(n, XMLNS_EXTENDED_PROPERTIES, arrayOf("Properties"), p -> {
+                // we sort properties
+                ArrayList<Node> toSort = new ArrayList<>();
+                forAllChildren(p, toSort::add);
+                if (!toSort.isEmpty()) {
+                    for (Node item : toSort) {
+                        p.removeChild(item);
                     }
-                });
+                    Collections.sort(toSort, (o1, o2) -> getXmlnsName(o1.getNodeName()).getSecond().compareTo(getXmlnsName(o2.getNodeName()).getSecond()));
+                    for (Node item : toSort) {
+                        p.appendChild(item);
+                    }
+                }
 
                 // only process the first node
                 return true;
-            }
+            });
+
+            // only process the first node
+            return true;
         });
     }
 
@@ -544,64 +478,55 @@ public class XmlDocxSorter {
             StringBuilder sb = new StringBuilder();
             sb.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
 
-            forAllChildren(document, XMLNS_PKG, arrayOf("package"), new Consumer<Node>() {
-                @Override
-                public void accept(Node pkg) {
-                    forAllChildren(pkg, XMLNS_PKG, arrayOf("part"), new Consumer<Node>() {
-                        @Override
-                        public void accept(Node part) {
-                            sortNodeAttributes(part);
-                            sortRelationships(part);
-                            sortProperties(part);
+            forAllChildren(document, XMLNS_PKG, arrayOf("package"), pkg -> {
+                forAllChildren(pkg, XMLNS_PKG, arrayOf("part"), part -> {
+                    sortNodeAttributes(part);
+                    sortRelationships(part);
+                    sortProperties(part);
 
-                            NamedNodeMap attributes = part.getAttributes();
-                            Node contentTypeNode = attributes.getNamedItem("pkg:contentType");
+                    NamedNodeMap attributes = part.getAttributes();
+                    Node contentTypeNode = attributes.getNamedItem("pkg:contentType");
 
-                            boolean handled = false;
-                            if (contentTypeNode != null) {
-                                String contentType = contentTypeNode.getNodeValue();
+                    boolean handled = false;
+                    if (contentTypeNode != null) {
+                        String contentType = contentTypeNode.getNodeValue();
 
-                                HashMap<Pattern, DocxPartEntry> entryHashMap = contentTypeNameEntry.get(contentType);
-                                if (entryHashMap != null) {
-                                    Node nameNode = attributes.getNamedItem("pkg:name");
-                                    // now we find the entry for these
-                                    if (nameNode != null) {
-                                        String name = nameNode.getNodeValue();
-                                        for (Entry<Pattern, DocxPartEntry> entry : entryHashMap.entrySet()) {
-                                            Matcher matcher = entry.getKey().matcher(name);
-                                            if (matcher.matches()) {
-                                                int index = matcher.groupCount() > 0 ? Integer.parseInt(matcher.group(1)) : 0;
-                                                partEntries.add(new DocxPartEntry(entry.getValue(), part, index));
-                                                handled = true;
-                                                break;
-                                            }
-                                        }
+                        HashMap<Pattern, DocxPartEntry> entryHashMap = contentTypeNameEntry.get(contentType);
+                        if (entryHashMap != null) {
+                            Node nameNode = attributes.getNamedItem("pkg:name");
+                            // now we find the entry for these
+                            if (nameNode != null) {
+                                String name = nameNode.getNodeValue();
+                                for (Entry<Pattern, DocxPartEntry> entry : entryHashMap.entrySet()) {
+                                    Matcher matcher = entry.getKey().matcher(name);
+                                    if (matcher.matches()) {
+                                        int index = matcher.groupCount() > 0 ? Integer.parseInt(matcher.group(1)) : 0;
+                                        partEntries.add(new DocxPartEntry(entry.getValue(), part, index));
+                                        handled = true;
+                                        break;
                                     }
                                 }
                             }
-
-                            if (!handled) {
-                                // make it unknown
-                                partEntries.add(new DocxPartEntry(unknownPartEntry, part, ++unknownIndex[0]));
-                            }
                         }
-                    });
+                    }
 
-                    for (DocxPartEntry pe : partEntries) {
-                        pkg.removeChild(pe.node);
+                    if (!handled) {
+                        // make it unknown
+                        partEntries.add(new DocxPartEntry(unknownPartEntry, part, ++unknownIndex[0]));
                     }
-                    Collections.sort(partEntries, new Comparator<DocxPartEntry>() {
-                        @Override
-                        public int compare(DocxPartEntry o1, DocxPartEntry o2) {
-                            int ordinals = Integer.compare(o1.ordinal, o2.ordinal);
-                            return ordinals != 0 ? ordinals : Integer.compare(o1.index, o2.index);
-                        }
-                    });
-                    for (DocxPartEntry pe : partEntries) {
-                        pkg.appendChild(pe.node);
-                    }
-                    sb.append(writer.writeToString(pkg));
+                });
+
+                for (DocxPartEntry pe : partEntries) {
+                    pkg.removeChild(pe.node);
                 }
+                Collections.sort(partEntries, (o1, o2) -> {
+                    int ordinals = Integer.compare(o1.ordinal, o2.ordinal);
+                    return ordinals != 0 ? ordinals : Integer.compare(o1.index, o2.index);
+                });
+                for (DocxPartEntry pe : partEntries) {
+                    pkg.appendChild(pe.node);
+                }
+                sb.append(writer.writeToString(pkg));
             });
 
             return sb.toString();

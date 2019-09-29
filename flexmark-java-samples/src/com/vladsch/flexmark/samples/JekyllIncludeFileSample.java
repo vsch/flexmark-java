@@ -44,13 +44,13 @@ public class JekyllIncludeFileSample {
                             String text = included.get(includeFile);
 
                             if (includeFile.endsWith(".md")) {
-                                Node includeDoc = parser.parse(text);
+                                Document includeDoc = parser.parse(text);
                                 String includeHtml = renderer.render(includeDoc);
                                 includeHtmlMap.put(includeFile, includeHtml);
 
                                 if (includeDoc instanceof Document) {
                                     // copy any definition of reference elements from included file to our document
-                                    parser.transferReferences(doc, (Document) includeDoc);
+                                    parser.transferReferences(doc, includeDoc);
                                 }
                             } else {
                                 includeHtmlMap.put(includeFile, text);

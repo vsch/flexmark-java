@@ -4,7 +4,6 @@ import com.vladsch.flexmark.ext.xwiki.macros.Macro;
 import com.vladsch.flexmark.ext.xwiki.macros.MacroAttribute;
 import com.vladsch.flexmark.ext.xwiki.macros.MacroBlock;
 import com.vladsch.flexmark.ext.xwiki.macros.MacroClose;
-import com.vladsch.flexmark.html.CustomNodeRenderer;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.NodeRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
@@ -26,22 +25,10 @@ public class MacroNodeRenderer implements NodeRenderer {
     @Override
     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
         HashSet<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
-        set.add(new NodeRenderingHandler<Macro>(Macro.class, new CustomNodeRenderer<Macro>() {
-            @Override
-            public void render(Macro node, NodeRendererContext context, HtmlWriter html) { MacroNodeRenderer.this.render(node, context, html); }
-        }));
-        set.add(new NodeRenderingHandler<MacroAttribute>(MacroAttribute.class, new CustomNodeRenderer<MacroAttribute>() {
-            @Override
-            public void render(MacroAttribute node, NodeRendererContext context, HtmlWriter html) { MacroNodeRenderer.this.render(node, context, html); }
-        }));
-        set.add(new NodeRenderingHandler<MacroClose>(MacroClose.class, new CustomNodeRenderer<MacroClose>() {
-            @Override
-            public void render(MacroClose node, NodeRendererContext context, HtmlWriter html) { MacroNodeRenderer.this.render(node, context, html); }
-        }));
-        set.add(new NodeRenderingHandler<MacroBlock>(MacroBlock.class, new CustomNodeRenderer<MacroBlock>() {
-            @Override
-            public void render(MacroBlock node, NodeRendererContext context, HtmlWriter html) { MacroNodeRenderer.this.render(node, context, html); }
-        }));
+        set.add(new NodeRenderingHandler<Macro>(Macro.class, this::render));
+        set.add(new NodeRenderingHandler<MacroAttribute>(MacroAttribute.class, this::render));
+        set.add(new NodeRenderingHandler<MacroClose>(MacroClose.class, this::render));
+        set.add(new NodeRenderingHandler<MacroBlock>(MacroBlock.class, this::render));
         return set;
     }
 

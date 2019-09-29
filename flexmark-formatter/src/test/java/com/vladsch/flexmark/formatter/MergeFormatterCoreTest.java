@@ -495,6 +495,7 @@ public class MergeFormatterCoreTest {
         testHtmlPreservationLink();
         testHtmlPreservationLink();
     }
+
     private void testHtmlPreservationAutoLink() {
         assertMerged(
                 "<http://example.com>\n" +

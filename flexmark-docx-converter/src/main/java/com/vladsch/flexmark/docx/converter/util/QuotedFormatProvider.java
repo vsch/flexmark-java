@@ -1,6 +1,5 @@
 package com.vladsch.flexmark.docx.converter.util;
 
-import com.vladsch.flexmark.ast.Paragraph;
 import org.docx4j.wml.CTBorder;
 import org.docx4j.wml.PPr;
 import org.docx4j.wml.Style;
