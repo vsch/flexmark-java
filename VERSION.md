@@ -6,7 +6,7 @@ flexmark-java
 [TOC]: # " "
 
 - [To Do](#to-do)
-- [0.50.42](#05042)
+- [Next 0.60.2](#next-0602)
 - [0.50.40](#05040)
 - [0.50.38](#05038)
 - [0.50.36](#05036)
@@ -110,9 +110,21 @@ flexmark-java
 * [ ] Add: `flexmark-ext-attributes` formatting of individual attributes instead of dumping the
       attributes node text.
 
-0.50.42
---------
+Next 0.60.2
+-----------
 
+* Break: Possible breaking changes if relying on implementation:
+  * [ ] Fix: remove old visitor like adapters and implement based on generic classes not linked
+        to flexmark AST node. and deprecate the old base classes:
+    * `com.vladsch.flexmark.util.ast.NodeAdaptedVisitor` see javadoc for class
+    * `com.vladsch.flexmark.util.ast.NodeAdaptingVisitHandler`
+    * `com.vladsch.flexmark.util.ast.NodeAdaptingVisitor`
+    * Break: `com.vladsch.flexmark.util.ast.Visitor` is no longer available since it is only
+      used for implementation of `NodeVisitor` and `VisitHandler`. It is now package private and
+      nested in `VisitHandler`, like all other AST action handlers (visit, resolve links,
+      provide attributes, format, render, etc.) it makes it easier to maintain and create new
+      ones if all are in one file.
+  * [ ] Fix:
 * Fix: data set copy constructors to accept `null`
 * Fix: change `DataSet.keySet()` to `DataSet.getKeys()`
   * Deprecate: `DataSet.keySet()`

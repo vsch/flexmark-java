@@ -9,9 +9,10 @@ import java.util.function.BiFunction;
 /**
  * Intended to be completed by subclasses for specific node types and node actions
  *
- * @param <A> node action type: visit, format, render, etc.
- * @param <H> node handler type for converting from node super class to subclass, actual action
- *            performed by subclass of this class
+ * @param <C>  subclass of this class to have functions returning this to have the correct type
+ * @param <N>  base node type, this class does not care but in specific handlers it should be a common supertype for all nodes
+ * @param <A>  action type, subclasses of {@link AstAction} and {@link AstHandler} provide actual functionality
+ * @param <H>  handler to invoke the functionality during AST traversal for specific node
  */
 public class AstNodeHandler<C extends AstNodeHandler<C, N, A, H>, N, A extends AstAction<? extends N>, H extends AstHandler<? extends N, A>> {
     private final Map<Class<? extends N>, H> myCustomHandlersMap = new HashMap<>();

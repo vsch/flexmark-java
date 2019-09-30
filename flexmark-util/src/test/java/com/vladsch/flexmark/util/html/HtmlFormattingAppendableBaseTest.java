@@ -90,18 +90,13 @@ public class HtmlFormattingAppendableBaseTest {
 
         final HtmlFormattingAppendableBase fa1 = new HtmlFormattingAppendableBase(2, LineFormattingAppendable.FORMAT_ALL);
 
-        fa1.tagIndent("ul", new Runnable() {
-            @Override
-            public void run() {
-                fa1.withCondIndent().tagLine("li", () -> {
-                    final List<String> tagsAfterLast = fa.getOpenTagsAfterLast("span");
-                    String tags = Utils.splice(tagsAfterLast.toArray(new String[tagsAfterLast.size()]), ", ");
-                    assertEquals("", tags);
-                    fa1.text("item1");
-                    fa1.tagIndent("ul", () -> fa1.withCondIndent().tagLine("li", () -> fa1.text("item1")));
-                });
-            }
-        });
+        fa1.tagIndent("ul", () -> fa1.withCondIndent().tagLine("li", () -> {
+            final List<String> tagsAfterLast = fa.getOpenTagsAfterLast("span");
+            String tags = Utils.splice(tagsAfterLast.toArray(new String[tagsAfterLast.size()]), ", ");
+            assertEquals("", tags);
+            fa1.text("item1");
+            fa1.tagIndent("ul", () -> fa1.withCondIndent().tagLine("li", () -> fa1.text("item1")));
+        }));
 
         assertEquals("<ul>\n  <li>item1\n    <ul>\n      <li>item1</li>\n    </ul>\n  </li>\n</ul>\n", fa1.toString(0));
     }

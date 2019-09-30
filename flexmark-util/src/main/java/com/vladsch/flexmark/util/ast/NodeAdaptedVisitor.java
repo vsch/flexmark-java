@@ -9,7 +9,10 @@ import java.util.Set;
  * Intended to be extended by specific type of node visitor
  *
  * @param <H> subclass of {@link NodeAdaptingVisitHandler}
+ * @deprecated Use {@link com.vladsch.flexmark.util.visitor.AstNodeHandler} instead.
+ * see: {@link NodeVisitor}, {@link com.vladsch.flexmark.ast.util.LinkResolverAdapter}, {@link com.vladsch.flexmark.ast.util.AttributeProviderAdapter}
  */
+@Deprecated
 public abstract class NodeAdaptedVisitor<H extends NodeAdaptingVisitHandler<?, ?>> {
     private final Map<Class<?>, H> myCustomHandlersMap = new HashMap<Class<?>, H>();
 

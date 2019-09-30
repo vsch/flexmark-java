@@ -793,22 +793,12 @@ public class OrderedMultiMapTest {
 
         validator.reset()
                 .expectAdding(0, Pair.of("0", 0), null)
-                .test(new Runnable() {
-                    @Override
-                    public void run() {
-                        orderedMap.put("0", 0);
-                    }
-                });
+                .test(() -> orderedMap.put("0", 0));
 
         validator.reset()
                 .expectAdding(1, Pair.of("1", 1), null)
                 //.expectAdding(0, "1", 1)
-                .test(new Runnable() {
-                    @Override
-                    public void run() {
-                        orderedMap.put("1", 1);
-                    }
-                });
+                .test(() -> orderedMap.put("1", 1));
 
         for (int j = 0; j < 2; j++) {
             final int finalJ = j;
@@ -816,10 +806,7 @@ public class OrderedMultiMapTest {
                     .expectRemoving(j, Pair.of(String.valueOf(j), (Integer) null))
                     .expectRemoving(j, Pair.of((String) null, j))
                     .repeat(2).onCond(j == 1).expectClearing()
-                    .test(new Runnable() {
-                        @Override
-                        public void run() {orderedMap.keySet().remove(String.valueOf(finalJ));}
-                    });
+                    .test((Runnable) () -> orderedMap.keySet().remove(String.valueOf(finalJ)));
         }
     }
 }

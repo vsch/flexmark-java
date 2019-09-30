@@ -399,34 +399,19 @@ public class OrderedMapTest {
 
         validator.reset()
                 .expectAdding(0, "0", 0)
-                .test(new Runnable() {
-                    @Override
-                    public void run() {
-                        orderedMap.put("0", 0);
-                    }
-                });
+                .test(() -> orderedMap.put("0", 0));
 
         validator.reset()
                 .expectAdding(1, "1", 1)
                 //.expectAdding(0, "1", 1)
-                .test(new Runnable() {
-                    @Override
-                    public void run() {
-                        orderedMap.put("1", 1);
-                    }
-                });
+                .test(() -> orderedMap.put("1", 1));
 
         for (int j = 0; j < 2; j++) {
             final int finalJ = j;
             validator.reset().id(j)
                     .expectRemoving(j, String.valueOf(j))
                     .onCond(j == 1).expectClearing()
-                    .test(new Runnable() {
-                        @Override
-                        public void run() {
-                            orderedMap.keySet().remove(String.valueOf(finalJ));
-                        }
-                    });
+                    .test(() -> orderedMap.keySet().remove(String.valueOf(finalJ)));
         }
     }
 }

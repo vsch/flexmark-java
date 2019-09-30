@@ -105,22 +105,16 @@ public class FormatterModifiedAST {
                 "\n";
         Node document = PARSER.parse(input);
 
-        final NodeVisitor[] visitor = new NodeVisitor[1];
+        NodeVisitor[] visitor = new NodeVisitor[1];
 
         visitor[0] = new NodeVisitor(
-                new VisitHandler<>(Link.class, new Visitor<Link>() {
-                    @Override
-                    public void visit(Link node) {
-                        FormatterModifiedAST.this.visit(node, "replaced.txt");
-                        visitor[0].visitChildren(node);
-                    }
+                new VisitHandler<>(Link.class, node -> {
+                    FormatterModifiedAST.this.visit(node, "replaced.txt");
+                    visitor[0].visitChildren(node);
                 }),
-                new VisitHandler<>(Image.class, new Visitor<Image>() {
-                    @Override
-                    public void visit(Image node) {
-                        FormatterModifiedAST.this.visit(node, "replaced.png");
-                        visitor[0].visitChildren(node);
-                    }
+                new VisitHandler<>(Image.class, node -> {
+                    FormatterModifiedAST.this.visit(node, "replaced.png");
+                    visitor[0].visitChildren(node);
                 })
         );
 
@@ -153,19 +147,13 @@ public class FormatterModifiedAST {
         final NodeVisitor[] visitor = new NodeVisitor[1];
 
         visitor[0] = new NodeVisitor(
-                new VisitHandler<>(Link.class, new Visitor<Link>() {
-                    @Override
-                    public void visit(Link node) {
-                        FormatterModifiedAST.this.visit(node, "replaced.txt#anchor");
-                        visitor[0].visitChildren(node);
-                    }
+                new VisitHandler<>(Link.class, node -> {
+                    FormatterModifiedAST.this.visit(node, "replaced.txt#anchor");
+                    visitor[0].visitChildren(node);
                 }),
-                new VisitHandler<>(Image.class, new Visitor<Image>() {
-                    @Override
-                    public void visit(Image node) {
-                        FormatterModifiedAST.this.visit(node, "replaced.png");
-                        visitor[0].visitChildren(node);
-                    }
+                new VisitHandler<>(Image.class, node -> {
+                    FormatterModifiedAST.this.visit(node, "replaced.png");
+                    visitor[0].visitChildren(node);
                 })
         );
 
@@ -215,24 +203,21 @@ public class FormatterModifiedAST {
         final NodeVisitor[] visitor = new NodeVisitor[1];
 
         visitor[0] = new NodeVisitor(
-                new VisitHandler<>(Link.class, new Visitor<Link>() {
-                    @Override
-                    public void visit(Link node) {
-                        ReversiblePeekingIterator<Node> childIte = node.getChildren().iterator();
-                        while (childIte.hasNext()) {
-                            Node child = childIte.next();
-                            if (child instanceof Text) {
-                                Text text = new Text("LINK");
+                new VisitHandler<>(Link.class, node -> {
+                    ReversiblePeekingIterator<Node> childIte = node.getChildren().iterator();
+                    while (childIte.hasNext()) {
+                        Node child = childIte.next();
+                        if (child instanceof Text) {
+                            Text text = new Text("LINK");
 
-                                // have to update the parent link text to reflect changes to AST
-                                //node.setText(text.getChars());
+                            // have to update the parent link text to reflect changes to AST
+                            //node.setText(text.getChars());
 
-                                child.insertAfter(text);
-                                childIte.remove();
-                            }
+                            child.insertAfter(text);
+                            childIte.remove();
                         }
-                        visitor[0].visitChildren(node);
                     }
+                    visitor[0].visitChildren(node);
                 })
         );
 

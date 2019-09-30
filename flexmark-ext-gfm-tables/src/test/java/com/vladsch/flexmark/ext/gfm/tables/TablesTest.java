@@ -326,20 +326,17 @@ public class TablesTest extends RenderingTestCase {
         AttributeProviderFactory factory = new IndependentAttributeProviderFactory() {
             @Override
             public AttributeProvider apply(LinkResolverContext context) {
-                return new AttributeProvider() {
-                    @Override
-                    public void setAttributes(Node node, AttributablePart part, Attributes attributes) {
-                        if (node instanceof TableBlock) {
-                            attributes.replaceValue("test", "block");
-                        } else if (node instanceof TableHead) {
-                            attributes.replaceValue("test", "head");
-                        } else if (node instanceof TableBody) {
-                            attributes.replaceValue("test", "body");
-                        } else if (node instanceof TableRow) {
-                            attributes.replaceValue("test", "row");
-                        } else if (node instanceof TableCell) {
-                            attributes.replaceValue("test", "cell");
-                        }
+                return (node, part, attributes) -> {
+                    if (node instanceof TableBlock) {
+                        attributes.replaceValue("test", "block");
+                    } else if (node instanceof TableHead) {
+                        attributes.replaceValue("test", "head");
+                    } else if (node instanceof TableBody) {
+                        attributes.replaceValue("test", "body");
+                    } else if (node instanceof TableRow) {
+                        attributes.replaceValue("test", "row");
+                    } else if (node instanceof TableCell) {
+                        attributes.replaceValue("test", "cell");
                     }
                 };
             }

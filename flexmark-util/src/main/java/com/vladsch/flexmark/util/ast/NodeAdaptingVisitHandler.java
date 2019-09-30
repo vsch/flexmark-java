@@ -5,7 +5,10 @@ package com.vladsch.flexmark.util.ast;
  *
  * @param <N> subclass of {@link Node}
  * @param <A> subclass of {@link NodeAdaptingVisitor}
+ * @deprecated use {@link com.vladsch.flexmark.util.visitor.AstHandler} almost identical except
+ * class must have the same type as adapter type parameter. ie. Class&lt;N&gt; instead of Class&lt;? extends N&gt;
  */
+@Deprecated
 public abstract class NodeAdaptingVisitHandler<N extends Node, A extends NodeAdaptingVisitor<N>> {
     protected final Class<? extends N> myClass;
     protected final A myAdapter;

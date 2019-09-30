@@ -8,12 +8,7 @@ import java.util.function.Function;
 public class ClassificationBagTest {
     @Test
     public void testBasic() throws Exception {
-        ClassificationBag<Class<?>, Object> bag = new ClassificationBag<Class<?>, Object>(new Function<Object, Class<?>>() {
-            @Override
-            public Class<?> apply(Object value) {
-                return value.getClass();
-            }
-        });
+        ClassificationBag<Class<?>, Object> bag = new ClassificationBag<Class<?>, Object>(value -> value.getClass());
 
         Object item;
         for (int i = 0; i < 10; i++) {
@@ -86,12 +81,7 @@ public class ClassificationBagTest {
 
     @Test
     public void testInterleave() throws Exception {
-        ClassificationBag<Class<?>, Object> bag = new ClassificationBag<Class<?>, Object>(new Function<Object, Class<?>>() {
-            @Override
-            public Class<?> apply(Object value) {
-                return value.getClass();
-            }
-        });
+        ClassificationBag<Class<?>, Object> bag = new ClassificationBag<Class<?>, Object>(value -> value.getClass());
 
         Object item;
         for (int i = 0; i < 10; i++) {

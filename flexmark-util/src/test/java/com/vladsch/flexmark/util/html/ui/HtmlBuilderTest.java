@@ -29,28 +29,15 @@ public class HtmlBuilderTest {
     @Test
     public void test_Basic() throws Exception {
         final HtmlBuilder fa = new HtmlBuilder();
-        fa.tagIndent("ul", new Runnable() {
-            @Override
-            public void run() {
-                fa.withCondIndent().tagLine("li", new Runnable() {
-                    @Override
-                    public void run() {
-                        fa.text("item1");
-                    }
-                });
-            }
-        });
+        fa.tagIndent("ul", () -> fa.withCondIndent().tagLine("li", () -> fa.text("item1")));
         assertEquals("<ul>\n<li>item1</li>\n</ul>\n", fa.toFinalizedString());
     }
 
     @Test
     public void test_Basic2() throws Exception {
         final HtmlBuilder fa2 = new HtmlBuilder();
-        fa2.withCondIndent().tag("tbody", new Runnable() {
-            @Override
-            public void run() {
+        fa2.withCondIndent().tag("tbody", () -> {
 
-            }
         });
         assertEquals("<tbody></tbody>\n", fa2.toFinalizedString());
     }
@@ -58,28 +45,10 @@ public class HtmlBuilderTest {
     @Test
     public void test_Basic3() throws Exception {
         final HtmlBuilder fa1 = new HtmlBuilder();
-        fa1.tagIndent("ul", new Runnable() {
-            @Override
-            public void run() {
-                fa1.withCondIndent().tagLine("li", new Runnable() {
-                    @Override
-                    public void run() {
-                        fa1.text("item1");
-                        fa1.tagIndent("ul", new Runnable() {
-                            @Override
-                            public void run() {
-                                fa1.withCondIndent().tagLine("li", new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        fa1.text("item1");
-                                    }
-                                });
-                            }
-                        });
-                    }
-                });
-            }
-        });
+        fa1.tagIndent("ul", () -> fa1.withCondIndent().tagLine("li", () -> {
+            fa1.text("item1");
+            fa1.tagIndent("ul", () -> fa1.withCondIndent().tagLine("li", () -> fa1.text("item1")));
+        }));
         assertEquals("<ul>\n<li>item1\n<ul>\n<li>item1</li>\n</ul>\n</li>\n</ul>\n", fa1.toFinalizedString());
 
         HtmlBuilder fa3 = new HtmlBuilder();

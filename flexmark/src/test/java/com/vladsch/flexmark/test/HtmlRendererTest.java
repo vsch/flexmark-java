@@ -89,16 +89,13 @@ public class HtmlRendererTest {
             @Override
             public AttributeProvider apply(LinkResolverContext context) {
                 //noinspection ReturnOfInnerClass
-                return new AttributeProvider() {
-                    @Override
-                    public void setAttributes(Node node, AttributablePart part, Attributes attributes) {
-                        if (node instanceof FencedCodeBlock && part == CoreNodeRenderer.CODE_CONTENT) {
-                            FencedCodeBlock fencedCodeBlock = (FencedCodeBlock) node;
-                            // Remove the default attribute for info
-                            attributes.remove("class");
-                            // Put info in custom attribute instead
-                            attributes.replaceValue("data-custom", fencedCodeBlock.getInfo().toString());
-                        }
+                return (node, part, attributes) -> {
+                    if (node instanceof FencedCodeBlock && part == CoreNodeRenderer.CODE_CONTENT) {
+                        FencedCodeBlock fencedCodeBlock = (FencedCodeBlock) node;
+                        // Remove the default attribute for info
+                        attributes.remove("class");
+                        // Put info in custom attribute instead
+                        attributes.replaceValue("data-custom", fencedCodeBlock.getInfo().toString());
                     }
                 };
             }
@@ -117,13 +114,10 @@ public class HtmlRendererTest {
         AttributeProviderFactory factory = new IndependentAttributeProviderFactory() {
             @Override
             public AttributeProvider apply(LinkResolverContext context) {
-                return new AttributeProvider() {
-                    @Override
-                    public void setAttributes(Node node, AttributablePart part, Attributes attributes) {
-                        if (node instanceof Image) {
-                            attributes.remove("alt");
-                            attributes.replaceValue("test", "hey");
-                        }
+                return (node, part, attributes) -> {
+                    if (node instanceof Image) {
+                        attributes.remove("alt");
+                        attributes.replaceValue("test", "hey");
                     }
                 };
             }
@@ -136,24 +130,11 @@ public class HtmlRendererTest {
 
     @Test
     public void overrideNodeRender() {
-        NodeRendererFactory nodeRendererFactory = new NodeRendererFactory() {
-            @Override
-            public NodeRenderer apply(DataHolder options) {
-                return new NodeRenderer() {
-                    @Override
-                    public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
-                        HashSet<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
-                        set.add(new NodeRenderingHandler<Link>(Link.class, new NodeRenderingHandler.CustomNodeRenderer<Link>() {
-                            @Override
-                            public void render(Link node, NodeRendererContext context, HtmlWriter html) {
-                                context.getHtmlWriter().text("test");
-                            }
-                        }));
+        NodeRendererFactory nodeRendererFactory = options -> () -> {
+            HashSet<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
+            set.add(new NodeRenderingHandler<Link>(Link.class, (node, context, html) -> context.getHtmlWriter().text("test")));
 
-                        return set;
-                    }
-                };
-            }
+            return set;
         };
 
         HtmlRenderer renderer = HtmlRenderer.builder().nodeRendererFactory(nodeRendererFactory).build();
@@ -163,28 +144,17 @@ public class HtmlRendererTest {
 
     @Test
     public void overrideInheritNodeRender() {
-        NodeRendererFactory nodeRendererFactory = new NodeRendererFactory() {
-            @Override
-            public NodeRenderer apply(DataHolder options) {
-                return new NodeRenderer() {
-                    @Override
-                    public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
-                        HashSet<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
-                        set.add(new NodeRenderingHandler<Link>(Link.class, new NodeRenderingHandler.CustomNodeRenderer<Link>() {
-                            @Override
-                            public void render(Link node, NodeRendererContext context, HtmlWriter html) {
-                                if (node.getText().equals("bar")) {
-                                    context.getHtmlWriter().text("test");
-                                } else {
-                                    context.delegateRender();
-                                }
-                            }
-                        }));
+        NodeRendererFactory nodeRendererFactory = options -> () -> {
+            HashSet<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
+            set.add(new NodeRenderingHandler<Link>(Link.class, (node, context, html) -> {
+                if (node.getText().equals("bar")) {
+                    context.getHtmlWriter().text("test");
+                } else {
+                    context.delegateRender();
+                }
+            }));
 
-                        return set;
-                    }
-                };
-            }
+            return set;
         };
 
         HtmlRenderer renderer = HtmlRenderer.builder().nodeRendererFactory(nodeRendererFactory).build();
@@ -197,34 +167,23 @@ public class HtmlRendererTest {
 
     @Test
     public void overrideInheritNodeRenderSubContext() {
-        NodeRendererFactory nodeRendererFactory = new NodeRendererFactory() {
-            @Override
-            public NodeRenderer apply(DataHolder options) {
-                return new NodeRenderer() {
-                    @Override
-                    public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
-                        HashSet<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
-                        set.add(new NodeRenderingHandler<Link>(Link.class, new NodeRenderingHandler.CustomNodeRenderer<Link>() {
-                            @Override
-                            public void render(Link node, NodeRendererContext context, HtmlWriter html) {
-                                if (node.getText().equals("bar")) {
-                                    context.getHtmlWriter().text("test");
-                                } else {
-                                    NodeRendererContext subContext = context.getDelegatedSubContext(true);
-                                    if (node.getText().equals("raw")) {
-                                        subContext.doNotRenderLinks();
-                                    }
-                                    subContext.delegateRender();
-                                    String s = subContext.getHtmlWriter().toString(-1);
-                                    html.raw(s);
-                                }
-                            }
-                        }));
-
-                        return set;
+        NodeRendererFactory nodeRendererFactory = options -> () -> {
+            HashSet<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
+            set.add(new NodeRenderingHandler<Link>(Link.class, (node, context, html) -> {
+                if (node.getText().equals("bar")) {
+                    context.getHtmlWriter().text("test");
+                } else {
+                    NodeRendererContext subContext = context.getDelegatedSubContext(true);
+                    if (node.getText().equals("raw")) {
+                        subContext.doNotRenderLinks();
                     }
-                };
-            }
+                    subContext.delegateRender();
+                    String s = subContext.getHtmlWriter().toString(-1);
+                    html.raw(s);
+                }
+            }));
+
+            return set;
         };
 
         HtmlRenderer renderer = HtmlRenderer.builder().nodeRendererFactory(nodeRendererFactory).build();
@@ -243,52 +202,35 @@ public class HtmlRendererTest {
 
     @Test
     public void overrideInheritDependentNodeRender() {
-        NodeRendererFactory nodeRendererFactory = new NodeRendererFactory() {
-            @Override
-            public NodeRenderer apply(DataHolder options) {
-                return new NodeRenderer() {
-                    @Override
-                    public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
-                        HashSet<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
-                        set.add(new NodeRenderingHandler<Link>(Link.class, new NodeRenderingHandler.CustomNodeRenderer<Link>() {
-                            @Override
-                            public void render(Link node, NodeRendererContext context, HtmlWriter html) {
-                                if (node.getText().equals("bar")) {
-                                    context.getHtmlWriter().text("test");
-                                } else if (node.getText().equals("bars")) {
-                                    context.getHtmlWriter().text("tests");
-                                } else {
-                                    context.delegateRender();
-                                }
-                            }
-                        }));
+        NodeRendererFactory nodeRendererFactory = options -> () -> {
+            HashSet<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
+            set.add(new NodeRenderingHandler<Link>(Link.class, (node, context, html) -> {
+                if (node.getText().equals("bar")) {
+                    context.getHtmlWriter().text("test");
+                } else if (node.getText().equals("bars")) {
+                    context.getHtmlWriter().text("tests");
+                } else {
+                    context.delegateRender();
+                }
+            }));
 
-                        return set;
-                    }
-                };
-            }
+            return set;
         };
 
         NodeRendererFactory nodeRendererFactory2 = new DelegatingNodeRendererFactory() {
             @Override
             public NodeRenderer apply(DataHolder options) {
-                return new NodeRenderer() {
-                    @Override
-                    public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
-                        HashSet<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
-                        set.add(new NodeRenderingHandler<Link>(Link.class, new NodeRenderingHandler.CustomNodeRenderer<Link>() {
-                            @Override
-                            public void render(Link node, NodeRendererContext context, HtmlWriter html) {
-                                if (node.getText().equals("bar")) {
-                                    context.getHtmlWriter().text("testing");
-                                } else {
-                                    context.delegateRender();
-                                }
-                            }
-                        }));
+                return () -> {
+                    HashSet<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
+                    set.add(new NodeRenderingHandler<Link>(Link.class, (node, context, html) -> {
+                        if (node.getText().equals("bar")) {
+                            context.getHtmlWriter().text("testing");
+                        } else {
+                            context.delegateRender();
+                        }
+                    }));
 
-                        return set;
-                    }
+                    return set;
                 };
             }
 
@@ -310,52 +252,35 @@ public class HtmlRendererTest {
 
     @Test
     public void overrideInheritDependentNodeRenderReversed() {
-        NodeRendererFactory nodeRendererFactory = new NodeRendererFactory() {
-            @Override
-            public NodeRenderer apply(DataHolder options) {
-                return new NodeRenderer() {
-                    @Override
-                    public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
-                        HashSet<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
-                        set.add(new NodeRenderingHandler<Link>(Link.class, new NodeRenderingHandler.CustomNodeRenderer<Link>() {
-                            @Override
-                            public void render(Link node, NodeRendererContext context, HtmlWriter html) {
-                                if (node.getText().equals("bar")) {
-                                    context.getHtmlWriter().text("test");
-                                } else if (node.getText().equals("bars")) {
-                                    context.getHtmlWriter().text("tests");
-                                } else {
-                                    context.delegateRender();
-                                }
-                            }
-                        }));
+        NodeRendererFactory nodeRendererFactory = options -> () -> {
+            HashSet<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
+            set.add(new NodeRenderingHandler<Link>(Link.class, (node, context, html) -> {
+                if (node.getText().equals("bar")) {
+                    context.getHtmlWriter().text("test");
+                } else if (node.getText().equals("bars")) {
+                    context.getHtmlWriter().text("tests");
+                } else {
+                    context.delegateRender();
+                }
+            }));
 
-                        return set;
-                    }
-                };
-            }
+            return set;
         };
 
         NodeRendererFactory nodeRendererFactory2 = new DelegatingNodeRendererFactory() {
             @Override
             public NodeRenderer apply(DataHolder options) {
-                return new NodeRenderer() {
-                    @Override
-                    public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
-                        HashSet<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
-                        set.add(new NodeRenderingHandler<Link>(Link.class, new NodeRenderingHandler.CustomNodeRenderer<Link>() {
-                            @Override
-                            public void render(Link node, NodeRendererContext context, HtmlWriter html) {
-                                if (node.getText().equals("bar")) {
-                                    context.getHtmlWriter().text("testing");
-                                } else {
-                                    context.delegateRender();
-                                }
-                            }
-                        }));
+                return () -> {
+                    HashSet<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
+                    set.add(new NodeRenderingHandler<Link>(Link.class, (node, context, html) -> {
+                        if (node.getText().equals("bar")) {
+                            context.getHtmlWriter().text("testing");
+                        } else {
+                            context.delegateRender();
+                        }
+                    }));
 
-                        return set;
-                    }
+                    return set;
                 };
             }
 
