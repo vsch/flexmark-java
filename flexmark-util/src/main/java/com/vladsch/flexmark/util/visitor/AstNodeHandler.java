@@ -2,8 +2,14 @@ package com.vladsch.flexmark.util.visitor;
 
 import java.util.function.Function;
 
-abstract public class AstNodeHandler<B, N, A extends AstNodeAction<N>> implements Function<B, N> {
-    private final Class<? extends N> myClass;
+/**
+ * Base class for tracking generic node to specific node handler
+ *
+ * @param <N> node subclass
+ * @param <A> node action
+ */
+abstract public class AstNodeHandler<N, A extends AstNodeAction<N>> {
+    private final Class<?> myClass;
     private final A myAdapter;
 
     public AstNodeHandler(Class<? extends N> klass, A adapter) {
@@ -11,7 +17,7 @@ abstract public class AstNodeHandler<B, N, A extends AstNodeAction<N>> implement
         myAdapter = adapter;
     }
 
-    public Class<? extends N> getNodeType() {
+    public Class<?> getNodeType() {
         return myClass;
     }
 
@@ -24,7 +30,7 @@ abstract public class AstNodeHandler<B, N, A extends AstNodeAction<N>> implement
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        AstNodeHandler<?, ?, ?> other = (AstNodeHandler<?, ?, ?>) o;
+        AstNodeHandler<?, ?> other = (AstNodeHandler<?, ?>) o;
 
         if (myClass != other.myClass) return false;
         return myAdapter == other.myAdapter;

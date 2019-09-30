@@ -6,27 +6,20 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * Intended to be extended by specific type of node action handling
+ * Intended to be completed by subclasses for specific node types and node actions
+ *
+ * @param <A> node action type: visit, format, render, etc.
+ * @param <H> node handler type for converting from node super class to subclass, actual action
+ *            performed by subclass of this class
  */
-public abstract class AstNodeActionMap<N, A extends AstNodeAction<N>, H extends AstNodeHandler<N,?,A>> {
+public abstract class AstNodeActionMap<N, A extends AstNodeAction<N>, H extends AstNodeHandler<N, A>> {
     private final Map<Class<?>, H> myCustomHandlersMap = new HashMap<>();
 
-    // Usage:
-    //myVisitor = new NodeVisitor(
-    //        new NodeAdaptingVisitHandler<>(Text.class, this::visit),
-    //        new NodeAdaptingVisitHandler<>(HtmlEntity.class, this::visit),
-    //        new NodeAdaptingVisitHandler<>(SoftLineBreak.class, this::visit),
-    //        new NodeAdaptingVisitHandler<>(HardLineBreak.class, this::visit)
-    //);
     public AstNodeActionMap(H... handlers) {
         addHandlers(handlers);
     }
 
     public AstNodeActionMap(H[]... handlers) {
-        addHandlers(handlers);
-    }
-
-    public AstNodeActionMap(Collection<H>... handlers) {
         addHandlers(handlers);
     }
 
@@ -39,11 +32,9 @@ public abstract class AstNodeActionMap<N, A extends AstNodeAction<N>, H extends 
         return this;
     }
 
-    public AstNodeActionMap<N, A, H> addHandlers(Collection<H>... handlers) {
-        for (Collection<H> handlerList : handlers) {
-            for (H handler : handlerList) {
-                myCustomHandlersMap.put(handler.getNodeType(), handler);
-            }
+    public AstNodeActionMap<N, A, H> addHandlers(Collection<H> handlers) {
+        for (H handler : handlers) {
+            myCustomHandlersMap.put(handler.getNodeType(), handler);
         }
         return this;
     }
