@@ -7,6 +7,8 @@ flexmark-java
 
 - [To Do](#to-do)
 - [Next 0.60.0](#next-0600)
+    - [API Change](#api-change)
+    - [Fixes](#fixes)
 - [0.50.40](#05040)
 - [0.50.38](#05038)
 - [0.50.36](#05036)
@@ -110,22 +112,36 @@ flexmark-java
 * [ ] Add: `flexmark-ext-attributes` formatting of individual attributes instead of dumping the
       attributes node text.
 
-Next 0.60.0
------------
+## Next 0.60.0
+
+### API Change
 
 * [ ] Add: `org.jetbrains:annotations:15.0` dependency to have `@Nullable`/`@NotNull`
       annotations added for all parameters. I use IntelliJ IDEA for development and it helps to
       have these annotations for analysis of potential problems and use with Kotlin.
 
-* [ ] Break: split out generic AST utilities from `flexmark-util` module into separate module.
+* [ ] Break: split out generic AST utilities from `flexmark-util` module into separate smaller
+      module, with inheritance of new classes by old ones with deprecation notice, where
+      possible. InjelliJ IDEA migration to help with migration from 0.50.40 will be provided.
+  * [ ] `builder/` classes to `flexmark-builder-util`
+  * [ ] `collection/`, classes to `flexmark-collection-util`
+  * [ ] `data/`, classes to `flexmark-data-util`
+  * [ ] `dependency/` classes to `flexmark-dependency-util`
+  * [ ] `visitor/` classes to `flexmark-visitor-util`
+  * [ ] `sequence/` classes to `flexmark-sequence-util`
+  * [ ] `mappers/` classes not working with `Node` to `flexmark-mappers-util`
+  * [ ] `html/` classes except `Escaping` and `HtmlEntities` to `flexmark-html-util`
+  * [ ] `html/ui/` classes to `flexmark-html-ui-util`
+  * [ ] Generic helper classes:
+    * [ ] TBD
 
 * [ ] Break: delete deprecated properties, methods and classes which were deprecated before `V
-      0.50.0`
+      0.60.0`
 
-* [x] Break: `NodeVisitor` implementation details have changed and is now marked final to ensure
-      compile time error is generated. If you were overriding `NodeVisitor.visit(Node)` in the
-      previous version you will need to change your implementation. See comment in the class for
-      instructions.
+* [x] Break: `NodeVisitor` implementation details have changed. If you were overriding
+      `NodeVisitor.visit(Node)` in the previous version it is now `final` to ensure compile time
+      error is generated. You will need to change your implementation. See comment in the class
+      for instructions.
 
   :information_source: `com.vladsch.flexmark.util.ast.Visitor` is only needed for implementation
   of `NodeVisitor` and `VisitHandler`. If you convert all anonymous implementations of
@@ -138,26 +154,23 @@ Next 0.60.0
     * `com.vladsch.flexmark.util.ast.NodeAdaptingVisitHandler`
     * `com.vladsch.flexmark.util.ast.NodeAdaptingVisitor`
 
-* Fix: data set copy constructors to accept `null`
+### Fixes
 
+* Fix: `DataSet` copy constructors to accept `null`
 * Fix: change `DataSet.keySet()` to `DataSet.getKeys()`
   * Deprecate: `DataSet.keySet()`
-
 * Add: `BasedSequence.extendByAny(CharSequence charSet, int maxCount)` to extend the based
   sequence to include any following contiguous characters from the underlying based sequence
   that are in `charSet`. Variations include `BasedSequence.extendByAny(CharSequence)` for
   unlimited count and `BasedSequence.extendByOneOfAny(CharSequence)` for max count of 1.
-
 * Add: `BasedSequence.extendToAny(CharSequence charSet, int maxCount)` to extend the based
   sequence to include first of any following characters from the underlying based sequence that
   are in `charSet`. Variations include `BasedSequence.extendToAny(CharSequence)` for unlimited
   count.
-
 * Add: `BasedSequence.prefixWithIndent(int maxColumns)` to extend the based sequence to include
   leading indent from the underlying based sequence up to a maximum of given columns. Tabs are
   taken into account as set to 4 space columns. Variations include
   `BasedSequence.prefixWithIndent()` for unlimited indent.
-
 * Break: make `NodeAdaptedVisitor.myCustomHandlersMap` private. Use
   `NodeAdaptedVisitor.getHandler(Node)`, `NodeAdaptedVisitor.getHandler(Class<?>)`, and
   `NodeAdaptedVisitor.getNodeClasses()` to get access to contained data.

@@ -94,7 +94,7 @@ public class AstActionHandler<C extends AstActionHandler<C, N, A, H>, N, A exten
      * @param <R>     type of result returned by processor
      * @return result or defaultValue
      */
-    public  <R> R processNodeOnly(N node, R defaultValue, BiFunction<N, H, R> processor) {
+    public <R> R processNodeOnly(N node, R defaultValue, BiFunction<N, H, R> processor) {
         H handler = getHandler(node);
         Object[] value = { defaultValue };
         processNode(node, false, (n, h) -> value[0] = processor.apply(n, h));

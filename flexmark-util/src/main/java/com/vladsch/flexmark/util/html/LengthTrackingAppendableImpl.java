@@ -2,6 +2,10 @@ package com.vladsch.flexmark.util.html;
 
 import java.io.IOException;
 
+/**
+ * @deprecated Not used and will be removed
+ */
+@Deprecated
 public class LengthTrackingAppendableImpl implements LengthTrackingAppendable {
     private final Appendable myAppendable;
     private int myLength;
