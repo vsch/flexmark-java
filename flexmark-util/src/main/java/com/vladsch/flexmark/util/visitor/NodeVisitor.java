@@ -10,12 +10,12 @@ import java.util.Collection;
  * <p>
  * Usage:
  * myVisitor = new NodeVisitor(
- *     new VisitHandler<>(Document.class, this::visit),
- *     new VisitHandler<>(HtmlEntity.class, this::visit),
- *     new VisitHandler<>(SoftLineBreak.class, this::visit),
- *     new VisitHandler<>(HardLineBreak.class, this::visit)
+ * new VisitHandler<>(Document.class, this::visit),
+ * new VisitHandler<>(HtmlEntity.class, this::visit),
+ * new VisitHandler<>(SoftLineBreak.class, this::visit),
+ * new VisitHandler<>(HardLineBreak.class, this::visit)
  * );
- *
+ * <p>
  * Document doc;
  * myVisitor.visit(doc);
  */
@@ -42,6 +42,11 @@ public class NodeVisitor extends AstNodeHandler<NodeVisitor, Node, VisitorHandle
         return addHandlers(handlers.toArray(EMPTY_HANDLERS));
     }
 
+    // needed for backward compatibility with extension handler arrays typed as VisitHandler<?>[]
+    public NodeVisitor addHandlers(VisitHandler[] handlers) {
+        return super.addHandlers(handlers);
+    }
+
     @Override
     public void visit(Node node) {
         process(node);
@@ -60,6 +65,5 @@ public class NodeVisitor extends AstNodeHandler<NodeVisitor, Node, VisitorHandle
     @Override
     protected void process(Node node, VisitHandler handler) {
         handler.visit(node);
-
     }
 }
