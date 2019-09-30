@@ -7,7 +7,7 @@ import java.util.Collection;
 /**
  * Intended to be extended by specific type of node visitor
  */
-public class NodeVisitor extends AstNodeActionMap<Node, Visitor<Node>, VisitHandler<Node>> {
+public class NodeVisitor extends AstNodeActionMap<Node, Visitor<Node>, VisitHandler<Node>> implements VisitorHandler<Node> {
     public NodeVisitor(VisitHandler<Node>... handlers) {
         super(handlers);
     }
@@ -18,6 +18,22 @@ public class NodeVisitor extends AstNodeActionMap<Node, Visitor<Node>, VisitHand
 
     public NodeVisitor(Collection<VisitHandler<Node>>... handlers) {
         super(handlers);
+    }
+
+    @Override
+    public void visit(Node node) {
+        process(node);
+    }
+
+    @Override
+    public void visitNodeOnly(Node node) {
+        processNodeOnly(node);
+    }
+
+    @Override
+    public void visitChildren(Node parent) {
+        processChildren(parent);
+
     }
 
     @Override
