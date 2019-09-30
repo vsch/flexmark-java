@@ -3,8 +3,6 @@ package com.vladsch.flexmark.util.visitor;
 import com.vladsch.flexmark.util.ast.*;
 import org.junit.Test;
 
-import javax.print.Doc;
-
 public class NodeVisitorTest {
     @Test
     public void test_basic() {
@@ -35,25 +33,11 @@ public class NodeVisitorTest {
         }
 
         // generic node handler when specific one is not defined
-        public void visit(Node node) {
-
-        }
-
-        public void visit(Block node) {
-
-        }
-
-        public void visit(BlankLine node) {
-
-        }
-
-        public void visit(ContentNode node) {
-
-        }
-
-        public void visit(Document node) {
-
-        }
+        public void visit(Node node) {}
+        public void visit(Block node) {}
+        public void visit(BlankLine node) {}
+        public void visit(ContentNode node) {}
+        public void visit(Document node) {}
     }
 
     static class VisitTester2 implements BlockVisitor {
@@ -66,24 +50,9 @@ public class NodeVisitorTest {
         }
 
         // generic node handler when specific one is not defined
-        public void visit(Node node) {
-
-        }
-
-        public void visit(Block node) {
-
-        }
-
-        public void visit(BlankLine node) {
-
-        }
-
-        public void visit(ContentNode node) {
-
-        }
-
-        public void visit(Document node) {
-
-        }
-    }
+        public void visit(Node node) {}
+        public void visit(Block node) {}
+        public void visit(BlankLine node) {}
+        public void visit(ContentNode node) {}
+        public void visit(Document node) {}}
 }
