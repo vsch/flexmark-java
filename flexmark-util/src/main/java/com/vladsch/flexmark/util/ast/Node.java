@@ -7,6 +7,7 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
 import com.vladsch.flexmark.util.sequence.SegmentedSequence;
 import com.vladsch.flexmark.util.sequence.SubSequence;
+import com.vladsch.flexmark.util.visitor.AstNode;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -14,6 +15,17 @@ import java.util.Arrays;
 public abstract class Node {
     public static final BasedSequence[] EMPTY_SEGMENTS = BasedSequence.EMPTY_ARRAY;
     public static final String SPLICE = " … ";
+    public static final AstNode<Node> AST_ADAPTER = new AstNode<Node>() {
+        @Override
+        public Node getFirstChild(Node node) {
+            return node.firstChild;
+        }
+
+        @Override
+        public Node getNext(Node node) {
+            return node.next;
+        }
+    };
 
     private Node parent = null;
     private Node firstChild = null;
