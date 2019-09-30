@@ -20,7 +20,7 @@ import java.util.Collection;
  * myVisitor.visit(doc);
  */
 @SuppressWarnings("rawtypes")
-public class NodeVisitor extends AstNodeHandler<NodeVisitor, Node, VisitorAdapter<Node>, VisitHandler<Node>> implements VisitorHandler {
+public class NodeVisitor extends AstNodeHandler<NodeVisitor, Node, VisitorHandler<Node>, VisitHandler<Node>> implements NodeVisitHandler {
     protected static final VisitHandler<Node>[] EMPTY_HANDLERS = new VisitHandler[0];
 
     public NodeVisitor(VisitHandler... handlers) {

@@ -3,12 +3,14 @@ package com.vladsch.flexmark.util.visitor;
 import com.vladsch.flexmark.util.ast.Node;
 
 /**
- * Interface to visit variations on specific nodes:
- * visit() visiting node and if no handler defined then visit node's children
- * visitNodeOnly() visit node and if no handler then do not process children
- * visitChildren() visit node's children
+ * Node visitor handler interface
+ * <p>
+ * Must be package private so it cannot be inherited by specific implementations of Visitor&lt;N&gt;
+ *
+ * @param <N> specific node type
  */
-public interface VisitorHandler extends Visitor<Node> {
-    void visitNodeOnly(Node node);
-    void visitChildren(Node parent);
+interface VisitorHandler<N extends Node> extends Visitor<N> {
+    default void visitNode(Node node) {
+        visit((N) node);
+    }
 }
