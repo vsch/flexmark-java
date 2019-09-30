@@ -18,12 +18,10 @@ public abstract class NodeRepository<T> implements Map<String, T> {
 
     protected void visitNodes(Node parent, Consumer<Node> runnable, Class<? extends Node>... classes) {
         ArrayList<VisitHandler<?>> handlers = new ArrayList<>();
+        NodeVisitor visitor = new NodeVisitor();
         for (Class<? extends Node> clazz : classes) {
-            handlers.add(
-                    new VisitHandler<Node>(clazz, runnable::accept)
-            );
+            visitor.addHandler(new VisitHandler<>(clazz, runnable::accept));
         }
-        NodeVisitor visitor = new NodeVisitor(handlers);
         visitor.visit(parent);
     }
 

@@ -6,7 +6,7 @@ flexmark-java
 [TOC]: # " "
 
 - [To Do](#to-do)
-- [Next 0.60.2](#next-0602)
+- [Next 0.60.0](#next-0600)
 - [0.50.40](#05040)
 - [0.50.38](#05038)
 - [0.50.36](#05036)
@@ -110,21 +110,28 @@ flexmark-java
 * [ ] Add: `flexmark-ext-attributes` formatting of individual attributes instead of dumping the
       attributes node text.
 
-Next 0.60.2
+Next 0.60.0
 -----------
 
-* Break: Possible breaking changes if relying on implementation:
-  * [ ] Fix: remove old visitor like adapters and implement based on generic classes not linked
-        to flexmark AST node. and deprecate the old base classes:
-    * `com.vladsch.flexmark.util.ast.NodeAdaptedVisitor` see javadoc for class
-    * `com.vladsch.flexmark.util.ast.NodeAdaptingVisitHandler`
-    * `com.vladsch.flexmark.util.ast.NodeAdaptingVisitor`
-    * Break: `com.vladsch.flexmark.util.ast.Visitor` is no longer available since it is only
-      used for implementation of `NodeVisitor` and `VisitHandler`. It is now package private and
-      nested in `VisitHandler`, like all other AST action handlers (visit, resolve links,
-      provide attributes, format, render, etc.) it makes it easier to maintain and create new
-      ones if all are in one file.
-  * [ ] Fix:
+* Break: Possible breaking changes if relying on implementation details of visitor classes:
+  * [ ] Fix: remove old visitor like adapters and implement ones based on generic classes not
+        linked to flexmark AST node.
+    * deprecate the old base classes:
+      * `com.vladsch.flexmark.util.ast.NodeAdaptedVisitor` see javadoc for class
+      * `com.vladsch.flexmark.util.ast.NodeAdaptingVisitHandler`
+      * `com.vladsch.flexmark.util.ast.NodeAdaptingVisitor`
+
+    * `NodeVisitor` implementation details have changed and is now marked final to ensure
+      compile time error is generated. If you were overriding `NodeVisitor.visit(Node)` in the
+      previous version you will need to change your implementation. See comment in the class for
+      instructions.
+
+    * Node: `com.vladsch.flexmark.util.ast.Visitor` is only used for implementation of
+      `NodeVisitor` and `VisitHandler`.
+
+      :information_source: if you convert all anonymous implementations of `VisitHandler` to
+      lambdas you can remove all imports for `Visitor`.
+
 * Fix: data set copy constructors to accept `null`
 * Fix: change `DataSet.keySet()` to `DataSet.getKeys()`
   * Deprecate: `DataSet.keySet()`

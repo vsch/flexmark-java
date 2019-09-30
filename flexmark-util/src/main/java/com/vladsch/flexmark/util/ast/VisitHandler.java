@@ -1,12 +1,16 @@
 package com.vladsch.flexmark.util.ast;
 
-public class VisitHandler<N extends Node> extends NodeAdaptingVisitHandler<N, Visitor<N>> {
-    public VisitHandler(Class<? extends N> aClass, Visitor<N> adapter) {
-        super(aClass, adapter);
+import com.vladsch.flexmark.util.visitor.AstHandler;
+
+/**
+ * Node visit handler for specific node type
+ */
+public class VisitHandler<N extends Node> extends AstHandler<N, Visitor<N>> {
+    public VisitHandler(Class<N> klass, Visitor<N> adapter) {
+        super(klass, adapter);
     }
 
     public void visit(Node node) {
-        //noinspection unchecked
-        myAdapter.visit((N) node);
+        myAdapter.visit((N)node);
     }
 }

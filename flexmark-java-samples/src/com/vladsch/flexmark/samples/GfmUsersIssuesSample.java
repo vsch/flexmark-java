@@ -13,6 +13,7 @@ import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 
 import java.util.Arrays;
+import java.util.function.BiConsumer;
 
 public class GfmUsersIssuesSample {
     public static void main(String[] args) {
@@ -22,9 +23,9 @@ public class GfmUsersIssuesSample {
         Document document = parser.parse("Hello, @world, and #1!");
         new NodeVisitor(new VisitHandler<?>[] { }) {
             @Override
-            public void visit(Node node) {
+            public void processNode(Node node, boolean withChildren, BiConsumer<Node, VisitHandler<Node>> processor) {
                 System.out.println("Node: " + node);
-                super.visit(node);
+                super.processNode(node, withChildren, processor);
             }
         }.visit(document);
     }

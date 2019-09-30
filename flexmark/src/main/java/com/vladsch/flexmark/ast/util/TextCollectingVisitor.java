@@ -10,6 +10,7 @@ import com.vladsch.flexmark.util.sequence.SegmentedSequenceBuilder;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.function.BiConsumer;
 
 @SuppressWarnings("WeakerAccess")
 public class TextCollectingVisitor {
@@ -47,12 +48,12 @@ public class TextCollectingVisitor {
         )
         {
             @Override
-            public void visit(Node node) {
+            public void processNode(Node node, boolean withChildren, BiConsumer<Node, VisitHandler<Node>> processor) {
                 VisitHandler<?> handler = getHandler(node);
                 if (handler != null) {
                     handler.visit(node);
                 } else {
-                    visitChildren(node);
+                    processChildren(node, processor);
                     if (myLineBreakNodes != null && myLineBreakNodes.contains(node.getClass()) && !node.isOrDescendantOfType(DoNotCollectText.class)) {
                         out.append("\n");
                     }

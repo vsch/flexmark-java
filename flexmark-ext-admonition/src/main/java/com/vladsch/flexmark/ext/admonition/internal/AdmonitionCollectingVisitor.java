@@ -4,8 +4,6 @@ import com.vladsch.flexmark.ext.admonition.AdmonitionBlock;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.ast.NodeVisitor;
 import com.vladsch.flexmark.util.ast.VisitHandler;
-import com.vladsch.flexmark.util.ast.Visitor;
-
 import java.util.LinkedHashSet;
 import java.util.Set;
 
