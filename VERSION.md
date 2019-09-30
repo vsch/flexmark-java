@@ -121,19 +121,38 @@ flexmark-java
       have these annotations for analysis of potential problems and use with Kotlin.
 
 * [ ] Break: split out generic AST utilities from `flexmark-util` module into separate smaller
-      module, with inheritance of new classes by old ones with deprecation notice, where
-      possible. InjelliJ IDEA migration to help with migration from 0.50.40 will be provided.
-  * [ ] `builder/` classes to `flexmark-builder-util`
-  * [ ] `collection/`, classes to `flexmark-collection-util`
-  * [ ] `data/`, classes to `flexmark-data-util`
-  * [ ] `dependency/` classes to `flexmark-dependency-util`
-  * [ ] `visitor/` classes to `flexmark-visitor-util`
-  * [ ] `sequence/` classes to `flexmark-sequence-util`
-  * [ ] `mappers/` classes not working with `Node` to `flexmark-mappers-util`
-  * [ ] `html/` classes except `Escaping` and `HtmlEntities` to `flexmark-html-util`
-  * [ ] `html/ui/` classes to `flexmark-html-ui-util`
-  * [ ] Generic helper classes:
-    * [ ] TBD
+      modules. IntelliJ IDEA migration to help with migration from 0.50.40 will be provided
+      where needed if the package or class is changed. `com.vladsch.flexmark.util` will no
+      longer contain any files but will contain the separate utilities modules with
+      `flexmark-utils` module being an aggregation of all utilities modules, similar to
+      `flexmark-all`
+
+  * [ ] `ast/` classes to `flexmark-util-ast`, any other classes which depend on `Node` will
+        most likely be moved here.
+  * [ ] `builder/` classes to `flexmark-util-builder`
+  * [ ] `collection/` classes to `flexmark-util-collection`
+  * [ ] `data/` classes to `flexmark-util-data`
+  * [ ] `dependency/` classes to `flexmark-util-dependency`
+  * [ ] `format/` classes to `flexmark-util-format`, with dependency on `Node` changed to type
+        parameter.
+  * [ ] `html/` classes to `flexmark-util-html`
+  * [ ] `mappers/` classes to `flexmark-util-mappers`, classes with dependency on `Node` will
+        move to `flexmark-util-node`
+  * [ ] `mappers/` classes to `flexmark-util-mappers`
+  * [ ] `options/` classes to `flexmark-util-options`
+  * [ ] `sequence/` classes to `flexmark-util-sequence`
+  * [ ] `visitor/` classes to `flexmark-util-visitor`
+  * Generic helper classes from module root:
+    * [ ] `DelimitedBuilder.java` to `flexmark-util-misc`
+    * [ ] `FileUtil.java` to `flexmark-util-misc`
+    * [ ] `ImageUtils.java` to `flexmark-util-misc`
+    * [ ] `Immutable.java` to `flexmark-util-misc`
+    * [ ] `Mutable.java` to `flexmark-util-misc`
+    * [ ] `Pair.java` to `flexmark-util-misc`
+    * [ ] `Paired.java` to `flexmark-util-misc`
+    * [ ] `Ref.java` to `flexmark-util-misc`
+    * [ ] `TemplateUtil.java` to `flexmark-util-misc`
+    * [ ] `Utils.java` to `flexmark-util-misc`
 
 * [ ] Break: delete deprecated properties, methods and classes which were deprecated before `V
       0.60.0`
