@@ -5,8 +5,8 @@ import com.vladsch.flexmark.util.ast.VisitHandler;
 public class AttributesVisitorExt {
     public static <V extends AttributesVisitor> VisitHandler<?>[] VISIT_HANDLERS(V visitor) {
         return new VisitHandler<?>[] {
-                new VisitHandler<AttributesNode>(AttributesNode.class, visitor::visit),
-                new VisitHandler<AttributeNode>(AttributeNode.class, visitor::visit),
+                new VisitHandler<>(AttributesNode.class, visitor::visit),
+                new VisitHandler<>(AttributeNode.class, visitor::visit),
         };
     }
 }

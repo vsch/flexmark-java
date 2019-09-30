@@ -29,13 +29,13 @@ public class DelimitedNodeTest {
 
         final List<DelimitedNode> list = new ArrayList<DelimitedNode>();
         NodeVisitor visitor = new NodeVisitor(
-                new VisitHandler<Emphasis>(Emphasis.class, new Visitor<Emphasis>() {
+                new VisitHandler<>(Emphasis.class, new Visitor<Emphasis>() {
                     @Override
                     public void visit(Emphasis e) {
                         list.add(e);
                     }
                 }),
-                new VisitHandler<StrongEmphasis>(StrongEmphasis.class, new Visitor<StrongEmphasis>() {
+                new VisitHandler<>(StrongEmphasis.class, new Visitor<StrongEmphasis>() {
                     @Override
                     public void visit(StrongEmphasis e) {
                         list.add(e);

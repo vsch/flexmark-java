@@ -5,7 +5,7 @@ import com.vladsch.flexmark.util.ast.VisitHandler;
 public class WikiLinkVisitorExt {
     public static <V extends WikiLinkVisitor> VisitHandler<?>[] VISIT_HANDLERS(V visitor) {
         return new VisitHandler<?>[] {
-                new VisitHandler<WikiLink>(WikiLink.class, visitor::visit),
+                new VisitHandler<>(WikiLink.class, visitor::visit),
         };
     }
 }

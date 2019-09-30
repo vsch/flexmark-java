@@ -5,8 +5,8 @@ import com.vladsch.flexmark.util.ast.VisitHandler;
 public class YamlFrontMatterVisitorExt {
     public static <V extends YamlFrontMatterVisitor> VisitHandler<?>[] VISIT_HANDLERS(V visitor) {
         return new VisitHandler<?>[] {
-                new VisitHandler<YamlFrontMatterNode>(YamlFrontMatterNode.class, visitor::visit),
-                new VisitHandler<YamlFrontMatterBlock>(YamlFrontMatterBlock.class, visitor::visit),
+                new VisitHandler<>(YamlFrontMatterNode.class, visitor::visit),
+                new VisitHandler<>(YamlFrontMatterBlock.class, visitor::visit),
         };
     }
 }

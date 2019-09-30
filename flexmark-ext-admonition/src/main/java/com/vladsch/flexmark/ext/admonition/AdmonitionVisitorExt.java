@@ -6,7 +6,7 @@ import com.vladsch.flexmark.util.ast.Visitor;
 public class AdmonitionVisitorExt {
     public static <V extends AdmonitionVisitor> VisitHandler<?>[] VISIT_HANDLERS(V visitor) {
         return new VisitHandler<?>[] {
-                new VisitHandler<AdmonitionBlock>(AdmonitionBlock.class, visitor::visit),
+                new VisitHandler<>(AdmonitionBlock.class, visitor::visit),
         };
     }
 }

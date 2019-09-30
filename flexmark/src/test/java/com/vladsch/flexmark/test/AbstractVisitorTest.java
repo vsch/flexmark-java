@@ -17,7 +17,7 @@ public class AbstractVisitorTest {
     @Test
     public void replacingNodeInVisitorShouldNotDestroyVisitOrder() {
         NodeVisitor visitor = new NodeVisitor(
-                new VisitHandler<Text>(Text.class, new Visitor<Text>() {
+                new VisitHandler<>(Text.class, new Visitor<Text>() {
                     @Override
                     public void visit(Text node) {
                         node.insertAfter(new Code(node.getChars()));

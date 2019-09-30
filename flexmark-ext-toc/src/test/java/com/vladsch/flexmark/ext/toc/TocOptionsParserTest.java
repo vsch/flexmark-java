@@ -59,7 +59,7 @@ public class TocOptionsParserTest extends ComboSpecTestCase {
     static class ParserVisitorExt {
         static <V extends ParserVisitor> VisitHandler<?>[] VISIT_HANDLERS(V visitor) {
             return new VisitHandler<?>[] {
-                    new VisitHandler<ParserNode>(ParserNode.class, visitor::visit),
+                    new VisitHandler<>(ParserNode.class, visitor::visit),
             };
         }
     }

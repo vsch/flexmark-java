@@ -49,7 +49,7 @@ public class MacrosNodeRenderer implements PhasedNodeRenderer {
                 // need to see if have undefined footnotes that were defined after parsing
                 boolean[] hadNewFootnotes = { false };
                 NodeVisitor visitor = new NodeVisitor(
-                        new VisitHandler<MacroReference>(MacroReference.class, node -> {
+                        new VisitHandler<>(MacroReference.class, node -> {
                             if (!node.isDefined()) {
                                 MacroDefinitionBlock macroDefinitionBlock = node.getMacroDefinitionBlock(repository);
 

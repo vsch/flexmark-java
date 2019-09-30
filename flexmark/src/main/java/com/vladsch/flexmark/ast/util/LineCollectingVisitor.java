@@ -21,12 +21,12 @@ public class LineCollectingVisitor {
 
     public LineCollectingVisitor() {
         myVisitor = new NodeVisitor(
-                new VisitHandler<Text>(Text.class, this::visit),
-                new VisitHandler<TextBase>(TextBase.class, this::visit),
-                new VisitHandler<HtmlEntity>(HtmlEntity.class, this::visit),
-                new VisitHandler<HtmlInline>(HtmlInline.class, this::visit),
-                new VisitHandler<SoftLineBreak>(SoftLineBreak.class, this::visit),
-                new VisitHandler<HardLineBreak>(HardLineBreak.class, this::visit)
+                new VisitHandler<>(Text.class, this::visit),
+                new VisitHandler<>(TextBase.class, this::visit),
+                new VisitHandler<>(HtmlEntity.class, this::visit),
+                new VisitHandler<>(HtmlInline.class, this::visit),
+                new VisitHandler<>(SoftLineBreak.class, this::visit),
+                new VisitHandler<>(HardLineBreak.class, this::visit)
         );
 
         myLines = Collections.EMPTY_LIST;

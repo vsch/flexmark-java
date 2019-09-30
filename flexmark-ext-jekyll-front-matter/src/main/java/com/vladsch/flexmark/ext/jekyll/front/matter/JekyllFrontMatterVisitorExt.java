@@ -5,7 +5,7 @@ import com.vladsch.flexmark.util.ast.VisitHandler;
 public class JekyllFrontMatterVisitorExt {
     public static <V extends JekyllFrontMatterVisitor> VisitHandler<?>[] VISIT_HANDLERS(V visitor) {
         return new VisitHandler<?>[] {
-                new VisitHandler<JekyllFrontMatterBlock>(JekyllFrontMatterBlock.class, visitor::visit),
+                new VisitHandler<>(JekyllFrontMatterBlock.class, visitor::visit),
         };
     }
 }

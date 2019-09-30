@@ -31,9 +31,9 @@ public class FormatterWithMods {
 
     static class LinkNodeVisitor {
         NodeVisitor visitor = new NodeVisitor(
-                new VisitHandler<Link>(Link.class, this::visit),
-                new VisitHandler<Reference>(Reference.class, this::visit),
-                new VisitHandler<Image>(Image.class, this::visit)
+                new VisitHandler<>(Link.class, this::visit),
+                new VisitHandler<>(Reference.class, this::visit),
+                new VisitHandler<>(Image.class, this::visit)
         );
 
         public void replaceUrl(Node node) {

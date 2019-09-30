@@ -5,7 +5,7 @@ import com.vladsch.flexmark.util.ast.VisitHandler;
 public class StrikethroughVisitorExt {
     public static <V extends StrikethroughVisitor> VisitHandler<?>[] VISIT_HANDLERS(V visitor) {
         return new VisitHandler<?>[] {
-                new VisitHandler<Strikethrough>(Strikethrough.class, visitor::visit),
+                new VisitHandler<>(Strikethrough.class, visitor::visit),
         };
     }
 }

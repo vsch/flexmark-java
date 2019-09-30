@@ -7,8 +7,8 @@ import com.vladsch.flexmark.util.ast.VisitHandler;
 public class HtmlInnerVisitorExt {
     public static <V extends HtmlInnerVisitor> VisitHandler<?>[] VISIT_HANDLERS(V visitor) {
         return new VisitHandler<?>[] {
-                new VisitHandler<HtmlInnerBlock>(HtmlInnerBlock.class, visitor::visit),
-                new VisitHandler<HtmlInnerBlockComment>(HtmlInnerBlockComment.class, visitor::visit),
+                new VisitHandler<>(HtmlInnerBlock.class, visitor::visit),
+                new VisitHandler<>(HtmlInnerBlockComment.class, visitor::visit),
         };
     }
 }

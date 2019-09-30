@@ -20,13 +20,13 @@ public class EnumRefTextCollectingVisitor {
         ordinalRunnable = ordinal < 0 ? null : () -> out.append(String.valueOf(ordinal));
 
         visitor = new NodeVisitor(
-                new VisitHandler<Text>(Text.class, this::visit),
-                new VisitHandler<TextBase>(TextBase.class, this::visit),
-                new VisitHandler<HtmlEntity>(HtmlEntity.class, this::visit),
-                new VisitHandler<SoftLineBreak>(SoftLineBreak.class, this::visit),
-                new VisitHandler<HardLineBreak>(HardLineBreak.class, this::visit),
-                new VisitHandler<EnumeratedReferenceText>(EnumeratedReferenceText.class, this::visit),
-                new VisitHandler<EnumeratedReferenceLink>(EnumeratedReferenceLink.class, this::visit)
+                new VisitHandler<>(Text.class, this::visit),
+                new VisitHandler<>(TextBase.class, this::visit),
+                new VisitHandler<>(HtmlEntity.class, this::visit),
+                new VisitHandler<>(SoftLineBreak.class, this::visit),
+                new VisitHandler<>(HardLineBreak.class, this::visit),
+                new VisitHandler<>(EnumeratedReferenceText.class, this::visit),
+                new VisitHandler<>(EnumeratedReferenceLink.class, this::visit)
         );
     }
 

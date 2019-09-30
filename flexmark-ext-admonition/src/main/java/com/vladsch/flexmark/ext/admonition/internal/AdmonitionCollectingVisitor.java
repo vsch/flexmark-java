@@ -16,7 +16,7 @@ public class AdmonitionCollectingVisitor {
 
     public AdmonitionCollectingVisitor() {
         myVisitor = new NodeVisitor(
-                new VisitHandler<AdmonitionBlock>(AdmonitionBlock.class, this::visit)
+                new VisitHandler<>(AdmonitionBlock.class, this::visit)
         );
     }
 

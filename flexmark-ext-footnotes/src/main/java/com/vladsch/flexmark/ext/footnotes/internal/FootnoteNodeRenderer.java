@@ -50,7 +50,7 @@ public class FootnoteNodeRenderer implements PhasedNodeRenderer {
                 // need to see if have undefined footnotes that were defined after parsing
                 boolean[] hadNewFootnotes = { false };
                 NodeVisitor visitor = new NodeVisitor(
-                        new VisitHandler<Footnote>(Footnote.class, node -> {
+                        new VisitHandler<>(Footnote.class, node -> {
                             if (!node.isDefined()) {
                                 FootnoteBlock footonoteBlock = node.getFootnoteBlock(footnoteRepository);
 

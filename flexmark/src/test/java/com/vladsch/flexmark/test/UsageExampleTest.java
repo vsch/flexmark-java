@@ -38,7 +38,7 @@ public class UsageExampleTest {
 
         public WordCountVisitor() {
             myVisitor = new NodeVisitor(
-                    new VisitHandler<Text>(Text.class, new Visitor<Text>() {
+                    new VisitHandler<>(Text.class, new Visitor<Text>() {
                         @Override
                         public void visit(Text text) {
                             WordCountVisitor.this.visit(text);

@@ -5,7 +5,7 @@ import com.vladsch.flexmark.util.ast.VisitHandler;
 public class GfmUsersVisitorExt {
     public static <V extends GfmUsersVisitor> VisitHandler<?>[] VISIT_HANDLERS(V visitor) {
         return new VisitHandler<?>[] {
-                new VisitHandler<GfmUser>(GfmUser.class, visitor::visit),
+                new VisitHandler<>(GfmUser.class, visitor::visit),
         };
     }
 }

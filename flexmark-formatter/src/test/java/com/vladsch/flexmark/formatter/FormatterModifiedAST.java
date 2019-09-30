@@ -108,14 +108,14 @@ public class FormatterModifiedAST {
         final NodeVisitor[] visitor = new NodeVisitor[1];
 
         visitor[0] = new NodeVisitor(
-                new VisitHandler<Link>(Link.class, new Visitor<Link>() {
+                new VisitHandler<>(Link.class, new Visitor<Link>() {
                     @Override
                     public void visit(Link node) {
                         FormatterModifiedAST.this.visit(node, "replaced.txt");
                         visitor[0].visitChildren(node);
                     }
                 }),
-                new VisitHandler<Image>(Image.class, new Visitor<Image>() {
+                new VisitHandler<>(Image.class, new Visitor<Image>() {
                     @Override
                     public void visit(Image node) {
                         FormatterModifiedAST.this.visit(node, "replaced.png");
@@ -153,14 +153,14 @@ public class FormatterModifiedAST {
         final NodeVisitor[] visitor = new NodeVisitor[1];
 
         visitor[0] = new NodeVisitor(
-                new VisitHandler<Link>(Link.class, new Visitor<Link>() {
+                new VisitHandler<>(Link.class, new Visitor<Link>() {
                     @Override
                     public void visit(Link node) {
                         FormatterModifiedAST.this.visit(node, "replaced.txt#anchor");
                         visitor[0].visitChildren(node);
                     }
                 }),
-                new VisitHandler<Image>(Image.class, new Visitor<Image>() {
+                new VisitHandler<>(Image.class, new Visitor<Image>() {
                     @Override
                     public void visit(Image node) {
                         FormatterModifiedAST.this.visit(node, "replaced.png");
@@ -215,7 +215,7 @@ public class FormatterModifiedAST {
         final NodeVisitor[] visitor = new NodeVisitor[1];
 
         visitor[0] = new NodeVisitor(
-                new VisitHandler<Link>(Link.class, new Visitor<Link>() {
+                new VisitHandler<>(Link.class, new Visitor<Link>() {
                     @Override
                     public void visit(Link node) {
                         ReversiblePeekingIterator<Node> childIte = node.getChildren().iterator();

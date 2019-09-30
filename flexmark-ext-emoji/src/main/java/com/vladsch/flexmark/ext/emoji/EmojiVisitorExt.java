@@ -5,7 +5,7 @@ import com.vladsch.flexmark.util.ast.VisitHandler;
 public class EmojiVisitorExt {
     public static <V extends EmojiVisitor> VisitHandler<?>[] VISIT_HANDLERS(V visitor) {
         return new VisitHandler<?>[] {
-                new VisitHandler<Emoji>(Emoji.class, visitor::visit),
+                new VisitHandler<>(Emoji.class, visitor::visit),
         };
     }
 }
