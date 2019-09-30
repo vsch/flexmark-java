@@ -10,29 +10,36 @@ import java.util.Collection;
  * <p>
  * Usage:
  * myVisitor = new NodeVisitor(
- * new VisitHandler<>(Text.class, this::visit),
- * new VisitHandler<>(HtmlEntity.class, this::visit),
- * new VisitHandler<>(SoftLineBreak.class, this::visit),
- * new VisitHandler<>(HardLineBreak.class, this::visit)
+ *     new VisitHandler<>(Document.class, this::visit),
+ *     new VisitHandler<>(HtmlEntity.class, this::visit),
+ *     new VisitHandler<>(SoftLineBreak.class, this::visit),
+ *     new VisitHandler<>(HardLineBreak.class, this::visit)
  * );
+ *
+ * Document doc;
+ * myVisitor.visit(doc);
  */
-public class NodeVisitor extends AstNodeActionMap<Node, Visitor<Node>, VisitHandler<Node>> implements VisitorHandler {
-    @SuppressWarnings("rawtypes")
-    protected static final VisitHandler[] EMPTY_HANDLERS = new VisitHandler[0];
+@SuppressWarnings("rawtypes")
+public class NodeVisitor extends AstNodeHandler<NodeVisitor, Node, VisitorAdapter<Node>, VisitHandler<Node>> implements VisitorHandler {
+    protected static final VisitHandler<Node>[] EMPTY_HANDLERS = new VisitHandler[0];
 
-    @SuppressWarnings("rawtypes")
     public NodeVisitor(VisitHandler... handlers) {
-        super(handlers);
+        super(Node.AST_ADAPTER);
+        addHandlers(handlers);
     }
 
-    @SuppressWarnings("rawtypes")
     public NodeVisitor(VisitHandler[]... handlers) {
-        super(handlers);
+        super(Node.AST_ADAPTER);
+        addHandlers(handlers);
     }
 
-    @SuppressWarnings("rawtypes")
     public NodeVisitor(Collection<VisitHandler> handlers) {
-        super(handlers.toArray(EMPTY_HANDLERS));
+        super(Node.AST_ADAPTER);
+        addHandlers(handlers);
+    }
+
+    public NodeVisitor addHandlers(Collection<VisitHandler> handlers) {
+        return addHandlers(handlers.toArray(EMPTY_HANDLERS));
     }
 
     @Override
@@ -51,13 +58,7 @@ public class NodeVisitor extends AstNodeActionMap<Node, Visitor<Node>, VisitHand
     }
 
     @Override
-    protected AstNode<Node> getAdapter() {
-        return Node.AST_ADAPTER;
-    }
-
-    @SuppressWarnings("rawtypes")
-    @Override
-    protected void accept(Node node, VisitHandler handler) {
+    protected void process(Node node, VisitHandler handler) {
         handler.visit(node);
 
     }

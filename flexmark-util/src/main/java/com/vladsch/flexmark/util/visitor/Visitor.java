@@ -7,10 +7,6 @@ import com.vladsch.flexmark.util.ast.Node;
  *
  * @param <N> specific node type
  */
-public interface Visitor<N> extends AstNodeAction<N> {
-    default void visitAs(Node node) {
-        visit((N)node);
-    }
-
+public interface Visitor<N extends Node> extends AstAction<N> {
     void visit(N node);
 }
