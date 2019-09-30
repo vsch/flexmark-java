@@ -3,12 +3,12 @@ package com.vladsch.flexmark.ast.util;
 import com.vladsch.flexmark.html.renderer.LinkResolverContext;
 import com.vladsch.flexmark.html.renderer.ResolvedLink;
 import com.vladsch.flexmark.util.ast.Node;
-import com.vladsch.flexmark.util.visitor.AstNodeHandler;
+import com.vladsch.flexmark.util.visitor.AstActionHandler;
 
 import java.util.Collection;
 
 @SuppressWarnings("rawtypes")
-public class LinkResolverAdapter extends AstNodeHandler<LinkResolverAdapter, Node, LinkResolvingHandler.LinkResolvingVisitor<Node>, LinkResolvingHandler<Node>> implements LinkResolvingHandler.LinkResolvingVisitor<Node> {
+public class LinkResolverAdapter extends AstActionHandler<LinkResolverAdapter, Node, LinkResolvingHandler.LinkResolvingVisitor<Node>, LinkResolvingHandler<Node>> implements LinkResolvingHandler.LinkResolvingVisitor<Node> {
     protected static final LinkResolvingHandler<Node>[] EMPTY_HANDLERS = new LinkResolvingHandler[0];
 
     public LinkResolverAdapter(LinkResolvingHandler... handlers) {

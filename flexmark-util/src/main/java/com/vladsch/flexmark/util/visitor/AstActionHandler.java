@@ -14,11 +14,11 @@ import java.util.function.BiFunction;
  * @param <A> action type, subclasses of {@link AstAction} and {@link AstHandler} provide actual functionality
  * @param <H> handler to invoke the functionality during AST traversal for specific node
  */
-public class AstNodeHandler<C extends AstNodeHandler<C, N, A, H>, N, A extends AstAction<? extends N>, H extends AstHandler<? extends N, A>> {
+public class AstActionHandler<C extends AstActionHandler<C, N, A, H>, N, A extends AstAction<? extends N>, H extends AstHandler<? extends N, A>> {
     private final Map<Class<? extends N>, H> myCustomHandlersMap = new HashMap<>();
     private final AstNode<N> myAdapter;
 
-    public AstNodeHandler(AstNode<N> adapter) {
+    public AstActionHandler(AstNode<N> adapter) {
         myAdapter = adapter;
     }
 

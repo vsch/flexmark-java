@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.util.ast;
 
-import com.vladsch.flexmark.util.visitor.AstNodeHandler;
+import com.vladsch.flexmark.util.visitor.AstActionHandler;
 
 import java.util.Collection;
 import java.util.function.BiConsumer;
@@ -52,7 +52,7 @@ import java.util.function.BiConsumer;
  * The VisitHandler argument will simply invoke the visit() function on the node.
  */
 @SuppressWarnings("rawtypes")
-public class NodeVisitor extends AstNodeHandler<NodeVisitor, Node, Visitor<Node>, VisitHandler<Node>> implements NodeVisitHandler {
+public class NodeVisitor extends AstActionHandler<NodeVisitor, Node, Visitor<Node>, VisitHandler<Node>> implements NodeVisitHandler {
     protected static final VisitHandler<Node>[] EMPTY_HANDLERS = new VisitHandler[0];
 
     public NodeVisitor() {

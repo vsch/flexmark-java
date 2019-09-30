@@ -113,40 +113,51 @@ flexmark-java
 Next 0.60.0
 -----------
 
-* Break: Possible breaking changes if relying on implementation details of visitor classes:
-  * [ ] Fix: remove old visitor like adapters and implement ones based on generic classes not
-        linked to flexmark AST node.
-    * deprecate the old base classes:
-      * `com.vladsch.flexmark.util.ast.NodeAdaptedVisitor` see javadoc for class
-      * `com.vladsch.flexmark.util.ast.NodeAdaptingVisitHandler`
-      * `com.vladsch.flexmark.util.ast.NodeAdaptingVisitor`
+* [ ] Add: `org.jetbrains:annotations:15.0` dependency to have `@Nullable`/`@NotNull`
+      annotations added for all parameters. I use IntelliJ IDEA for development and it helps to
+      have these annotations for analysis of potential problems and use with Kotlin.
 
-    * `NodeVisitor` implementation details have changed and is now marked final to ensure
+* [ ] Break: split out generic AST utilities from `flexmark-util` module into separate module.
+
+* [ ] Break: delete deprecated properties, methods and classes which were deprecated before `V
+      0.50.0`
+
+* [x] Break: `NodeVisitor` implementation details have changed and is now marked final to ensure
       compile time error is generated. If you were overriding `NodeVisitor.visit(Node)` in the
       previous version you will need to change your implementation. See comment in the class for
       instructions.
 
-    * Node: `com.vladsch.flexmark.util.ast.Visitor` is only used for implementation of
-      `NodeVisitor` and `VisitHandler`.
+  :information_source: `com.vladsch.flexmark.util.ast.Visitor` is only needed for implementation
+  of `NodeVisitor` and `VisitHandler`. If you convert all anonymous implementations of
+  `VisitHandler` to lambdas you can remove all imports for `Visitor`.
 
-      :information_source: if you convert all anonymous implementations of `VisitHandler` to
-      lambdas you can remove all imports for `Visitor`.
+  * Fix: remove old visitor like adapters and implement ones based on generic classes not linked
+    to flexmark AST node.
+  * Deprecate old base classes:
+    * `com.vladsch.flexmark.util.ast.NodeAdaptedVisitor` see javadoc for class
+    * `com.vladsch.flexmark.util.ast.NodeAdaptingVisitHandler`
+    * `com.vladsch.flexmark.util.ast.NodeAdaptingVisitor`
 
 * Fix: data set copy constructors to accept `null`
+
 * Fix: change `DataSet.keySet()` to `DataSet.getKeys()`
   * Deprecate: `DataSet.keySet()`
+
 * Add: `BasedSequence.extendByAny(CharSequence charSet, int maxCount)` to extend the based
   sequence to include any following contiguous characters from the underlying based sequence
   that are in `charSet`. Variations include `BasedSequence.extendByAny(CharSequence)` for
   unlimited count and `BasedSequence.extendByOneOfAny(CharSequence)` for max count of 1.
+
 * Add: `BasedSequence.extendToAny(CharSequence charSet, int maxCount)` to extend the based
   sequence to include first of any following characters from the underlying based sequence that
   are in `charSet`. Variations include `BasedSequence.extendToAny(CharSequence)` for unlimited
   count.
+
 * Add: `BasedSequence.prefixWithIndent(int maxColumns)` to extend the based sequence to include
   leading indent from the underlying based sequence up to a maximum of given columns. Tabs are
   taken into account as set to 4 space columns. Variations include
   `BasedSequence.prefixWithIndent()` for unlimited indent.
+
 * Break: make `NodeAdaptedVisitor.myCustomHandlersMap` private. Use
   `NodeAdaptedVisitor.getHandler(Node)`, `NodeAdaptedVisitor.getHandler(Class<?>)`, and
   `NodeAdaptedVisitor.getNodeClasses()` to get access to contained data.

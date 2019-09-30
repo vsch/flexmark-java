@@ -1,5 +1,7 @@
 package com.vladsch.flexmark.util.ast;
 
+import com.vladsch.flexmark.util.visitor.AstActionHandler;
+
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -9,7 +11,7 @@ import java.util.Set;
  * Intended to be extended by specific type of node visitor
  *
  * @param <H> subclass of {@link NodeAdaptingVisitHandler}
- * @deprecated Use {@link com.vladsch.flexmark.util.visitor.AstNodeHandler} instead.
+ * @deprecated Use {@link AstActionHandler} instead.
  * see: {@link NodeVisitor}, {@link com.vladsch.flexmark.ast.util.LinkResolverAdapter}, {@link com.vladsch.flexmark.ast.util.AttributeProviderAdapter}
  */
 @Deprecated
