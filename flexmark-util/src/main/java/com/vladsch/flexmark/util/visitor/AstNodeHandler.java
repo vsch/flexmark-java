@@ -1,9 +1,10 @@
 package com.vladsch.flexmark.util.visitor;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.BiConsumer;
+import java.util.function.BiFunction;
 
 /**
  * Intended to be completed by subclasses for specific node types and node actions
@@ -12,7 +13,7 @@ import java.util.Set;
  * @param <H> node handler type for converting from node super class to subclass, actual action
  *            performed by subclass of this class
  */
-public abstract class AstNodeHandler<C extends AstNodeHandler<C, N, A, H>, N, A extends AstAction<? extends N>, H extends AstHandler<? extends N, A>> {
+public class AstNodeHandler<C extends AstNodeHandler<C, N, A, H>, N, A extends AstAction<? extends N>, H extends AstHandler<? extends N, A>> {
     private final Map<Class<? extends N>, H> myCustomHandlersMap = new HashMap<>();
     private final AstNode<N> myAdapter;
 
@@ -41,32 +42,38 @@ public abstract class AstNodeHandler<C extends AstNodeHandler<C, N, A, H>, N, A 
         return myCustomHandlersMap.keySet();
     }
 
-    protected void process(N node) {
+    public void processNodeOrChildren(N node, BiConsumer<N, H> processor) {
         H handler = getHandler(node);
         if (handler != null) {
-            process(node, handler);
+            processor.accept(node, handler);
         } else {
-            processChildren(node);
+            processChildren(node, processor);
         }
     }
 
-    protected void processNodeOnly(N node) {
+    public void processNodeOnly(N node, BiConsumer<N, H> processor) {
         H handler = getHandler(node);
         if (handler != null) {
-            process(node, handler);
+            processor.accept(node, handler);
         }
     }
 
-    protected void processChildren(N parent) {
+    public void processChildren(N parent, BiConsumer<N, H> processor) {
         N node = myAdapter.getFirstChild(parent);
         while (node != null) {
             // A subclass of this visitor might modify the node, resulting in getNext returning a different node or no
             // node after visiting it. So get the next node before visiting.
             N next = myAdapter.getNext(node);
-            process(node);
+            processNodeOrChildren(node, processor);
             node = next;
         }
     }
 
-    abstract protected void process(N node, H handler);
+    public <R> R processNodeOnly(N node, R defaultValue, BiFunction<N, H, R> processor) {
+        H handler = getHandler(node);
+        if (handler != null) {
+            return processor.apply(node, handler);
+        }
+        return defaultValue;
+    }
 }

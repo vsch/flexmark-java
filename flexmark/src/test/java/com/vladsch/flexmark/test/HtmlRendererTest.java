@@ -143,7 +143,7 @@ public class HtmlRendererTest {
                     @Override
                     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
                         HashSet<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
-                        set.add(new NodeRenderingHandler<Link>(Link.class, new CustomNodeRenderer<Link>() {
+                        set.add(new NodeRenderingHandler<Link>(Link.class, new NodeRenderingHandler.CustomNodeRenderer<Link>() {
                             @Override
                             public void render(Link node, NodeRendererContext context, HtmlWriter html) {
                                 context.getHtmlWriter().text("test");
@@ -170,7 +170,7 @@ public class HtmlRendererTest {
                     @Override
                     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
                         HashSet<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
-                        set.add(new NodeRenderingHandler<Link>(Link.class, new CustomNodeRenderer<Link>() {
+                        set.add(new NodeRenderingHandler<Link>(Link.class, new NodeRenderingHandler.CustomNodeRenderer<Link>() {
                             @Override
                             public void render(Link node, NodeRendererContext context, HtmlWriter html) {
                                 if (node.getText().equals("bar")) {
@@ -204,7 +204,7 @@ public class HtmlRendererTest {
                     @Override
                     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
                         HashSet<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
-                        set.add(new NodeRenderingHandler<Link>(Link.class, new CustomNodeRenderer<Link>() {
+                        set.add(new NodeRenderingHandler<Link>(Link.class, new NodeRenderingHandler.CustomNodeRenderer<Link>() {
                             @Override
                             public void render(Link node, NodeRendererContext context, HtmlWriter html) {
                                 if (node.getText().equals("bar")) {
@@ -250,7 +250,7 @@ public class HtmlRendererTest {
                     @Override
                     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
                         HashSet<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
-                        set.add(new NodeRenderingHandler<Link>(Link.class, new CustomNodeRenderer<Link>() {
+                        set.add(new NodeRenderingHandler<Link>(Link.class, new NodeRenderingHandler.CustomNodeRenderer<Link>() {
                             @Override
                             public void render(Link node, NodeRendererContext context, HtmlWriter html) {
                                 if (node.getText().equals("bar")) {
@@ -276,7 +276,7 @@ public class HtmlRendererTest {
                     @Override
                     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
                         HashSet<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
-                        set.add(new NodeRenderingHandler<Link>(Link.class, new CustomNodeRenderer<Link>() {
+                        set.add(new NodeRenderingHandler<Link>(Link.class, new NodeRenderingHandler.CustomNodeRenderer<Link>() {
                             @Override
                             public void render(Link node, NodeRendererContext context, HtmlWriter html) {
                                 if (node.getText().equals("bar")) {
@@ -317,7 +317,7 @@ public class HtmlRendererTest {
                     @Override
                     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
                         HashSet<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
-                        set.add(new NodeRenderingHandler<Link>(Link.class, new CustomNodeRenderer<Link>() {
+                        set.add(new NodeRenderingHandler<Link>(Link.class, new NodeRenderingHandler.CustomNodeRenderer<Link>() {
                             @Override
                             public void render(Link node, NodeRendererContext context, HtmlWriter html) {
                                 if (node.getText().equals("bar")) {
@@ -343,7 +343,7 @@ public class HtmlRendererTest {
                     @Override
                     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
                         HashSet<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
-                        set.add(new NodeRenderingHandler<Link>(Link.class, new CustomNodeRenderer<Link>() {
+                        set.add(new NodeRenderingHandler<Link>(Link.class, new NodeRenderingHandler.CustomNodeRenderer<Link>() {
                             @Override
                             public void render(Link node, NodeRendererContext context, HtmlWriter html) {
                                 if (node.getText().equals("bar")) {

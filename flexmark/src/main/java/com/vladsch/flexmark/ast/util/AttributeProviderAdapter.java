@@ -2,29 +2,41 @@ package com.vladsch.flexmark.ast.util;
 
 import com.vladsch.flexmark.html.renderer.AttributablePart;
 import com.vladsch.flexmark.util.ast.Node;
-import com.vladsch.flexmark.util.ast.NodeAdaptedVisitor;
 import com.vladsch.flexmark.util.html.Attributes;
+import com.vladsch.flexmark.util.visitor.AstNodeHandler;
 
 import java.util.Collection;
 
-public class AttributeProviderAdapter extends NodeAdaptedVisitor<AttributeProvidingHandler<?>> implements AttributeProvidingVisitor<Node> {
-    public AttributeProviderAdapter(AttributeProvidingHandler<?>... visitors) {
-        super(visitors);
+@SuppressWarnings("rawtypes")
+public class AttributeProviderAdapter extends AstNodeHandler<AttributeProviderAdapter, Node, AttributeProvidingHandler.AttributeProvidingVisitor<Node>, AttributeProvidingHandler<Node>> implements AttributeProvidingHandler.AttributeProvidingVisitor<Node> {
+    protected static final AttributeProvidingHandler<Node>[] EMPTY_HANDLERS = new AttributeProvidingHandler[0];
+
+    public AttributeProviderAdapter(AttributeProvidingHandler... handlers) {
+        super(Node.AST_ADAPTER);
+        addHandlers(handlers);
     }
 
-    public AttributeProviderAdapter(AttributeProvidingHandler<?>[]... visitors) {
-        super(visitors);
+    public AttributeProviderAdapter(AttributeProvidingHandler[]... handlers) {
+        super(Node.AST_ADAPTER);
+        addHandlers(handlers);
     }
 
-    public AttributeProviderAdapter(Collection<AttributeProvidingHandler<?>> visitors) {
-        super(visitors);
+    public AttributeProviderAdapter(Collection<AttributeProvidingHandler> handlers) {
+        super(Node.AST_ADAPTER);
+        addHandlers(handlers);
+    }
+
+    public AttributeProviderAdapter addHandlers(Collection<AttributeProvidingHandler> handlers) {
+        return addHandlers(handlers.toArray(EMPTY_HANDLERS));
+    }
+
+    // needed for backward compatibility with extension handler arrays typed as VisitHandler<?>[]
+    public AttributeProviderAdapter addHandlers(AttributeProvidingHandler[] handlers) {
+        return super.addHandlers(handlers);
     }
 
     @Override
     public void setAttributes(Node node, AttributablePart part, Attributes attributes) {
-        AttributeProvidingHandler<?> handler = getHandler(node);
-        if (handler != null) {
-            handler.setAttributes(node, part, attributes);
-        }
+        processNodeOnly(node, (n, handler) -> handler.setAttributes(n, part, attributes));
     }
 }

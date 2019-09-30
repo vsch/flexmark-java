@@ -8,7 +8,7 @@ import com.vladsch.flexmark.util.ast.Node;
  * visitNodeOnly() visit node and if no handler then do not process children
  * visitChildren() visit node's children
  */
-public interface NodeVisitHandler extends Visitor<Node> {
+public interface NodeVisitHandler extends VisitHandler.Visitor<Node> {
     void visitNodeOnly(Node node);
     void visitChildren(Node parent);
 }

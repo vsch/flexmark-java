@@ -1,7 +1,6 @@
 package com.vladsch.flexmark.ext.gfm.users.internal;
 
 import com.vladsch.flexmark.ext.gfm.users.GfmUser;
-import com.vladsch.flexmark.html.CustomNodeRenderer;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.NodeRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;

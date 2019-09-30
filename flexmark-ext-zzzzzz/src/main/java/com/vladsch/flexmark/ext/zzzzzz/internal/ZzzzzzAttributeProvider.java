@@ -3,7 +3,6 @@ package com.vladsch.flexmark.ext.zzzzzz.internal;
 import com.vladsch.flexmark.ast.*;
 import com.vladsch.flexmark.ast.util.AttributeProviderAdapter;
 import com.vladsch.flexmark.ast.util.AttributeProvidingHandler;
-import com.vladsch.flexmark.ast.util.AttributeProvidingVisitor;
 import com.vladsch.flexmark.ext.zzzzzz.ZzzzzzExtension;
 import com.vladsch.flexmark.html.AttributeProvider;
 import com.vladsch.flexmark.html.IndependentAttributeProviderFactory;
@@ -28,10 +27,10 @@ public class ZzzzzzAttributeProvider implements AttributeProvider {
         this.missingTargetClass = options.get(ZzzzzzExtension.MISSING_TARGET_CLASS);
 
         this.nodeAdapter = new AttributeProviderAdapter(
-                new AttributeProvidingHandler<Image>(Image.class, ZzzzzzAttributeProvider.this::setLinkAttributes),
-                new AttributeProvidingHandler<ImageRef>(ImageRef.class, ZzzzzzAttributeProvider.this::setLinkAttributes),
-                new AttributeProvidingHandler<LinkRef>(LinkRef.class, ZzzzzzAttributeProvider.this::setLinkAttributes),
-                new AttributeProvidingHandler<Link>(Link.class, ZzzzzzAttributeProvider.this::setLinkAttributes)
+                new AttributeProvidingHandler<>(Image.class, this::setLinkAttributes),
+                new AttributeProvidingHandler<>(ImageRef.class, this::setLinkAttributes),
+                new AttributeProvidingHandler<>(LinkRef.class, this::setLinkAttributes),
+                new AttributeProvidingHandler<>(Link.class, this::setLinkAttributes)
         );
     }
 

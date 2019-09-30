@@ -20,7 +20,7 @@ import java.util.Collection;
  * myVisitor.visit(doc);
  */
 @SuppressWarnings("rawtypes")
-public class NodeVisitor extends AstNodeHandler<NodeVisitor, Node, Visitor<Node>, VisitHandler<Node>> implements NodeVisitHandler {
+public class NodeVisitor extends AstNodeHandler<NodeVisitor, Node, VisitHandler.Visitor<Node>, VisitHandler<Node>> implements NodeVisitHandler {
     protected static final VisitHandler<Node>[] EMPTY_HANDLERS = new VisitHandler[0];
 
     public NodeVisitor(VisitHandler... handlers) {
@@ -49,21 +49,20 @@ public class NodeVisitor extends AstNodeHandler<NodeVisitor, Node, Visitor<Node>
 
     @Override
     public void visit(Node node) {
-        process(node);
+        processNodeOrChildren(node, this::process);
     }
 
     @Override
     public void visitNodeOnly(Node node) {
-        processNodeOnly(node);
+        processNodeOnly(node, this::process);
     }
 
     @Override
     public void visitChildren(Node parent) {
-        processChildren(parent);
+        processChildren(parent, this::process);
     }
 
-    @Override
-    protected void process(Node node, VisitHandler handler) {
+    private void process(Node node, VisitHandler handler) {
         handler.visit(node);
     }
 }
