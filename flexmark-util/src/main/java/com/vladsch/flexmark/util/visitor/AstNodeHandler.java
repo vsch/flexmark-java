@@ -21,8 +21,8 @@ public abstract class AstNodeHandler<C extends AstNodeHandler<C, N, A, H>, N, A 
     }
 
     public C addHandlers(H[]... handlers) {
-        for (H[] moreVisitors : handlers) {
-            for (H handler : moreVisitors) {
+        for (H[] moreHandlers : handlers) {
+            for (H handler : moreHandlers) {
                 myCustomHandlersMap.put(handler.getNodeType(), handler);
             }
         }

@@ -8,7 +8,7 @@ package com.vladsch.flexmark.util.visitor;
  */
 abstract public class AstHandler<N, A extends AstAction<N>> {
     final private Class<N> myClass;
-    final private A myAdapter;
+    final protected A myAdapter;
 
     public AstHandler(Class<N> klass, A adapter) {
         myClass = klass;
@@ -17,10 +17,6 @@ abstract public class AstHandler<N, A extends AstAction<N>> {
 
     public Class<N> getNodeType() {
         return myClass;
-    }
-
-    public A getNodeAdapter() {
-        return myAdapter;
     }
 
     @Override
