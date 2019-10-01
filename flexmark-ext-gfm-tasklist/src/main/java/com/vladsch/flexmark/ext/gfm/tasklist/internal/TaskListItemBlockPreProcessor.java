@@ -42,7 +42,7 @@ public class TaskListItemBlockPreProcessor implements BlockPreProcessor {
     public static class Factory implements BlockPreProcessorFactory {
         @Override
         public Set<Class<? extends Block>> getBlockTypes() {
-            HashSet<Class<? extends Block>> set = new HashSet<Class<? extends Block>>();
+            HashSet<Class<? extends Block>> set = new HashSet<>();
             set.add(BulletListItem.class);
             set.add(OrderedListItem.class);
             return set;

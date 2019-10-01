@@ -21,7 +21,7 @@ public class GitLabInlineParser implements InlineParserExtension {
     private final GitLabOptions options;
 
     public GitLabInlineParser(LightInlineParser inlineParser) {
-        openInlines = new ArrayList<GitLabInline>();
+        openInlines = new ArrayList<>();
         options = new GitLabOptions(inlineParser.getDocument());
     }
 

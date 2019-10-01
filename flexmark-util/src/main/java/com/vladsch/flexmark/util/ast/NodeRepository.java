@@ -6,8 +6,8 @@ import java.util.*;
 import java.util.function.Consumer;
 
 public abstract class NodeRepository<T> implements Map<String, T> {
-    protected final ArrayList<T> nodeList = new ArrayList<T>();
-    protected final Map<String, T> nodeMap = new HashMap<String, T>();
+    protected final ArrayList<T> nodeList = new ArrayList<>();
+    protected final Map<String, T> nodeMap = new HashMap<>();
     protected final KeepType keepType;
 
     public abstract DataKey<? extends NodeRepository<T>> getDataKey();

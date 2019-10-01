@@ -118,8 +118,8 @@ public class Parser implements IParse {
     public static final DataKey<Boolean> HTML_BLOCK_DEEP_PARSER = new DataKey<>("HTML_BLOCK_DEEP_PARSER", false);
     public static final DataKey<Boolean> HTML_BLOCK_DEEP_PARSE_NON_BLOCK = new DataKey<>("HTML_BLOCK_DEEP_PARSE_NON_BLOCK", true);
     public static final DataKey<Boolean> HTML_BLOCK_COMMENT_ONLY_FULL_LINE = new DataKey<>("HTML_BLOCK_COMMENT_ONLY_FULL_LINE", false);
-    public static final DataKey<Boolean> HTML_BLOCK_START_ONLY_ON_BLOCK_TAGS = new DataKey<Boolean>("HTML_BLOCK_START_ONLY_ON_BLOCK_TAGS", HTML_BLOCK_DEEP_PARSER);
-    public static final DataKey<List<String>> HTML_BLOCK_TAGS = new DataKey<List<String>>("HTML_BLOCK_TAGS", value -> Arrays.asList(
+    public static final DataKey<Boolean> HTML_BLOCK_START_ONLY_ON_BLOCK_TAGS = new DataKey<>("HTML_BLOCK_START_ONLY_ON_BLOCK_TAGS", HTML_BLOCK_DEEP_PARSER);
+    public static final DataKey<List<String>> HTML_BLOCK_TAGS = new DataKey<>("HTML_BLOCK_TAGS", value -> Arrays.asList(
             "address",
             "article",
             "aside",
@@ -236,7 +236,7 @@ public class Parser implements IParse {
 
     // strings for list marker suffixes which offset the content, to properly support gfm task lists with content offset matching the suffix end
     // LIST_ITEM_MARKER_SPACE is applied after the suffix if it is present, and before. Spaces around the suffix are implicitly allowed
-    public static final DataKey<String[]> LISTS_ITEM_MARKER_SUFFIXES = new DataKey<String[]>("LISTS_ITEM_MARKER_SUFFIXES", new String[] { });
+    public static final DataKey<String[]> LISTS_ITEM_MARKER_SUFFIXES = new DataKey<>("LISTS_ITEM_MARKER_SUFFIXES", new String[] { });
     public static final DataKey<Boolean> LISTS_NUMBERED_ITEM_MARKER_SUFFIXED = new DataKey<>("LISTS_NUMBERED_ITEM_MARKER_SUFFIXED", true);
 
     // List parsing options beyond major parser family
@@ -291,7 +291,7 @@ public class Parser implements IParse {
     public static final DataKey<String> LISTS_ITEM_PREFIX_CHARS = new DataKey<>("LISTS_ITEM_PREFIX_CHARS", "*-+");
 
     // separate setting for CODE_BLOCK_INDENT
-    public static final DataKey<Integer> CODE_BLOCK_INDENT = new DataKey<Integer>("CODE_BLOCK_INDENT", LISTS_ITEM_INDENT);
+    public static final DataKey<Integer> CODE_BLOCK_INDENT = new DataKey<>("CODE_BLOCK_INDENT", LISTS_ITEM_INDENT);
 
     private final List<CustomBlockParserFactory> blockParserFactories;
     private final Map<Character, DelimiterProcessor> delimiterProcessors;
@@ -436,13 +436,13 @@ public class Parser implements IParse {
      * Builder for configuring a {@link Parser}.
      */
     public static class Builder extends BuilderBase<Builder> {
-        private final List<CustomBlockParserFactory> blockParserFactories = new ArrayList<CustomBlockParserFactory>();
-        private final List<DelimiterProcessor> delimiterProcessors = new ArrayList<DelimiterProcessor>();
-        private final List<PostProcessorFactory> postProcessorFactories = new ArrayList<PostProcessorFactory>();
-        private final List<ParagraphPreProcessorFactory> paragraphPreProcessorFactories = new ArrayList<ParagraphPreProcessorFactory>();
-        private final List<BlockPreProcessorFactory> blockPreProcessorFactories = new ArrayList<BlockPreProcessorFactory>();
-        private final List<LinkRefProcessorFactory> linkRefProcessors = new ArrayList<LinkRefProcessorFactory>();
-        private final List<InlineParserExtensionFactory> inlineParserExtensionFactories = new ArrayList<InlineParserExtensionFactory>();
+        private final List<CustomBlockParserFactory> blockParserFactories = new ArrayList<>();
+        private final List<DelimiterProcessor> delimiterProcessors = new ArrayList<>();
+        private final List<PostProcessorFactory> postProcessorFactories = new ArrayList<>();
+        private final List<ParagraphPreProcessorFactory> paragraphPreProcessorFactories = new ArrayList<>();
+        private final List<BlockPreProcessorFactory> blockPreProcessorFactories = new ArrayList<>();
+        private final List<LinkRefProcessorFactory> linkRefProcessors = new ArrayList<>();
+        private final List<InlineParserExtensionFactory> inlineParserExtensionFactories = new ArrayList<>();
         private InlineParserFactory inlineParserFactory = null;
 
         public Builder(DataHolder options) {
@@ -634,7 +634,7 @@ public class Parser implements IParse {
      */
     public static MutableDataHolder addExtensions(MutableDataHolder options, Extension... extensions) {
         Iterable<Extension> extensionIterable = options.get(Parser.EXTENSIONS);
-        ArrayList<Extension> extensionList = new ArrayList<Extension>(Arrays.asList(extensions));
+        ArrayList<Extension> extensionList = new ArrayList<>(Arrays.asList(extensions));
 
         for (Extension extension : extensionIterable) {
             extensionList.add(extension);
@@ -653,7 +653,7 @@ public class Parser implements IParse {
      */
     public static MutableDataHolder removeExtensions(MutableDataHolder options, Class... extensions) {
         Iterable<Extension> extensionIterable = options.get(Parser.EXTENSIONS);
-        HashSet<Extension> extensionList = new HashSet<Extension>();
+        HashSet<Extension> extensionList = new HashSet<>();
 
         for (Extension extension : extensionIterable) {
             boolean keep = true;

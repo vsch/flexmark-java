@@ -20,8 +20,8 @@ public class AsideNodeRenderer implements NodeRenderer {
 
     @Override
     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
-        HashSet<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
-        set.add(new NodeRenderingHandler<AsideBlock>(AsideBlock.class, this::render));
+        HashSet<NodeRenderingHandler<?>> set = new HashSet<>();
+        set.add(new NodeRenderingHandler<>(AsideBlock.class, this::render));
         return set;
     }
 

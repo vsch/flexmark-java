@@ -36,7 +36,7 @@ public class EmojiReference {
     public static List<Emoji> getEmojiList() {
         if (emojiList == null) {
             // read it in
-            emojiList = new ArrayList<Emoji>(3000);
+            emojiList = new ArrayList<>(3000);
 
             final String emojiReference = "/EmojiReference.txt";
             InputStream stream = EmojiReference.class.getResourceAsStream(emojiReference);

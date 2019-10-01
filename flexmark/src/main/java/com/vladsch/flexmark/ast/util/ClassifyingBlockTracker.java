@@ -14,8 +14,8 @@ import com.vladsch.flexmark.util.collection.OrderedSet;
 import com.vladsch.flexmark.util.collection.iteration.ReversiblePeekingIterable;
 
 public class ClassifyingBlockTracker implements BlockTracker, BlockParserTracker {
-    protected final ClassificationBag<Class<?>, Node> nodeClassifier = new ClassificationBag<Class<?>, Node>(NodeClassifier.INSTANCE);
-    protected final OrderedMultiMap<BlockParser, Block> allBlockParsersMap = new OrderedMultiMap<BlockParser, Block>(new CollectionHost<Paired<BlockParser, Block>>() {
+    protected final ClassificationBag<Class<?>, Node> nodeClassifier = new ClassificationBag<>(NodeClassifier.INSTANCE);
+    protected final OrderedMultiMap<BlockParser, Block> allBlockParsersMap = new OrderedMultiMap<>(new CollectionHost<Paired<BlockParser, Block>>() {
         @Override
         public void adding(int index, Paired<BlockParser, Block> paired, Object v) {
             Block block = paired.getSecond();

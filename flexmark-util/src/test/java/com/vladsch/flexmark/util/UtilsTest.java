@@ -46,7 +46,7 @@ public class UtilsTest {
     @Test
     public void testJoin() {
         Assert.assertEquals("prefixsuffix", Utils.join(new String[] { }, "prefix", "suffix", "$", "#"));
-        Assert.assertEquals("prefixsuffix", Utils.join(new ArrayList<String>(), "prefix", "suffix", "        ", "!!!!"));
+        Assert.assertEquals("prefixsuffix", Utils.join(new ArrayList<>(), "prefix", "suffix", "        ", "!!!!"));
         Assert.assertEquals("itemPrefix1itemSuffixitemPrefix2itemSuffix", Utils.join(new String[] { "1", "2" }, "", "", "itemPrefix", "itemSuffix"));
         Assert.assertEquals("list#1-#2-end", Utils.join(new String[] { "1", "2" }, "list", "end", "#", "-"));
     }

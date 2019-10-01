@@ -19,9 +19,9 @@ public class WikiLinkNodeRenderer implements NodeRenderer {
 
     @Override
     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
-        HashSet<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
-        set.add(new NodeRenderingHandler<WikiLink>(WikiLink.class, this::render));
-        set.add(new NodeRenderingHandler<WikiImage>(WikiImage.class, this::render));
+        HashSet<NodeRenderingHandler<?>> set = new HashSet<>();
+        set.add(new NodeRenderingHandler<>(WikiLink.class, this::render));
+        set.add(new NodeRenderingHandler<>(WikiImage.class, this::render));
         return set;
     }
 

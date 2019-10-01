@@ -30,7 +30,7 @@ public class ComboAppHtmlAttributeConverterTest extends ComboSpecTestCase {
             //.set(Parser.EXTENSIONS, Collections.singleton(FlexmarkHtmlConverter.create())
             ;
 
-    private static final Map<String, DataHolder> optionsMap = new HashMap<String, DataHolder>();
+    private static final Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
         optionsMap.put("paren-lists", new MutableDataSet().set(FlexmarkHtmlConverter.DOT_ONLY_NUMERIC_LISTS, false));
         optionsMap.put("output-unknown", new MutableDataSet().set(FlexmarkHtmlConverter.OUTPUT_UNKNOWN_TAGS, true));

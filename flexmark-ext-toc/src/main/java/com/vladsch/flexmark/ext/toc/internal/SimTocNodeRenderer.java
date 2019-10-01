@@ -30,11 +30,11 @@ public class SimTocNodeRenderer implements NodeRenderer {
 
     @Override
     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
-        return new HashSet<NodeRenderingHandler<? extends Node>>(Arrays.asList(
-                new NodeRenderingHandler<SimTocBlock>(SimTocBlock.class, this::render),
-                new NodeRenderingHandler<SimTocContent>(SimTocContent.class, this::render),
-                new NodeRenderingHandler<SimTocOptionList>(SimTocOptionList.class, this::render),
-                new NodeRenderingHandler<SimTocOption>(SimTocOption.class, this::render)
+        return new HashSet<>(Arrays.asList(
+                new NodeRenderingHandler<>(SimTocBlock.class, this::render),
+                new NodeRenderingHandler<>(SimTocContent.class, this::render),
+                new NodeRenderingHandler<>(SimTocOptionList.class, this::render),
+                new NodeRenderingHandler<>(SimTocOption.class, this::render)
         ));
     }
 

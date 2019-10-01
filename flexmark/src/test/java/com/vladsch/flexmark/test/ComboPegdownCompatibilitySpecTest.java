@@ -18,7 +18,7 @@ public class ComboPegdownCompatibilitySpecTest extends ComboExtraSpecTest {
             .set(HtmlRenderer.INDENT_SIZE, 2)
             .set(HtmlRenderer.PERCENT_ENCODE_URLS, true);
 
-    private static final Map<String, DataHolder> optionsMap = new HashMap<String, DataHolder>();
+    private static final Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
         optionsMap.put("lists-item-indent", new MutableDataSet().set(Parser.LISTS_ITEM_INDENT, 2));
         optionsMap.put("blank-line-interrupts-html", new MutableDataSet().set(Parser.HTML_BLOCK_DEEP_PARSE_BLANK_LINE_INTERRUPTS, true));

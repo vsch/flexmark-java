@@ -13,12 +13,12 @@ public class Attributes {
     }
 
     public Attributes(Attributes attributes) {
-        myAttributes = attributes == null || attributes.myAttributes == null ? null : new LinkedHashMap<String, Attribute>(attributes.myAttributes);
+        myAttributes = attributes == null || attributes.myAttributes == null ? null : new LinkedHashMap<>(attributes.myAttributes);
     }
 
     protected LinkedHashMap<String, Attribute> getAttributes() {
         if (myAttributes == null) {
-            myAttributes = new LinkedHashMap<String, Attribute>();
+            myAttributes = new LinkedHashMap<>();
         }
         return myAttributes;
     }
@@ -169,7 +169,7 @@ public class Attributes {
 
     public void replaceValues(Attributes attributes) {
         if (myAttributes == null) {
-            myAttributes = new LinkedHashMap<String, Attribute>(attributes.myAttributes);
+            myAttributes = new LinkedHashMap<>(attributes.myAttributes);
         } else {
             myAttributes.putAll(attributes.myAttributes);
         }

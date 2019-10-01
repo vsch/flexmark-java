@@ -196,8 +196,8 @@ public class CustomLinkResolverSample {
 
         @Override
         public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
-            HashSet<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
-            set.add(new NodeRenderingHandler<Link>(Link.class, (node, context, html) -> {
+            HashSet<NodeRenderingHandler<?>> set = new HashSet<>();
+            set.add(new NodeRenderingHandler<>(Link.class, (node, context, html) -> {
                 // test the node to see if it needs overriding
                 if (node.getText().equals("bar")) {
                     html.text("(eliminated)");

@@ -85,7 +85,7 @@ public class Macro extends Node {
     }
 
     public Map<String, String> getAttributes() {
-        Map<String, String> attributes = new LinkedHashMap<String, String>();
+        Map<String, String> attributes = new LinkedHashMap<>();
         Node child = getFirstChild();
         while (child != null) {
             if (child instanceof MacroAttribute) {

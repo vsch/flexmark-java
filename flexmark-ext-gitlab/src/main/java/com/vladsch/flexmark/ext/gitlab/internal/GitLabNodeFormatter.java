@@ -17,14 +17,14 @@ public class GitLabNodeFormatter implements NodeFormatter {
 
     @Override
     public Set<NodeFormattingHandler<?>> getNodeFormattingHandlers() {
-        return new HashSet<NodeFormattingHandler<?>>(Collections.singletonList(
-                new NodeFormattingHandler<GitLabBlockQuote>(GitLabBlockQuote.class, GitLabNodeFormatter.this::render)
+        return new HashSet<>(Collections.singletonList(
+                new NodeFormattingHandler<>(GitLabBlockQuote.class, GitLabNodeFormatter.this::render)
         ));
     }
 
     @Override
     public Set<Class<?>> getNodeClasses() {
-        return new HashSet<Class<?>>(Collections.singletonList(
+        return new HashSet<>(Collections.singletonList(
                 GitLabBlockQuote.class
         ));
     }

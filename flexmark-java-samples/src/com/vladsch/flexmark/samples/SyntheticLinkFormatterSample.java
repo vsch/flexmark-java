@@ -29,14 +29,14 @@ public class SyntheticLinkFormatterSample {
 
         @Override
         public Set<Class<?>> getNodeClasses() {
-            return new HashSet<Class<?>>(Collections.singletonList(
+            return new HashSet<>(Collections.singletonList(
                     Text.class
             ));
         }
 
         @Override
         public Set<FormattingPhase> getFormattingPhases() {
-            Set<FormattingPhase> set = new HashSet<FormattingPhase>();
+            Set<FormattingPhase> set = new HashSet<>();
             set.add(FormattingPhase.DOCUMENT_BOTTOM);
             return set;
         }
@@ -57,9 +57,9 @@ public class SyntheticLinkFormatterSample {
 
         @Override
         public Set<NodeFormattingHandler<?>> getNodeFormattingHandlers() {
-            return new HashSet<NodeFormattingHandler<? extends Node>>(Collections.singletonList(
+            return new HashSet<>(Collections.singletonList(
                     // Generic unknown node formatter
-                    new NodeFormattingHandler<Text>(Text.class, SyntheticLinkNodeFormatter.this::render)
+                    new NodeFormattingHandler<>(Text.class, SyntheticLinkNodeFormatter.this::render)
             ));
         }
 

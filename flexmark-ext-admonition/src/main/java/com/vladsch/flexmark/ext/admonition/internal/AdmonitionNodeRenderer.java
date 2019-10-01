@@ -28,8 +28,8 @@ public class AdmonitionNodeRenderer implements PhasedNodeRenderer {
 
     @Override
     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
-        Set<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
-        set.add(new NodeRenderingHandler<AdmonitionBlock>(AdmonitionBlock.class, this::render));
+        Set<NodeRenderingHandler<?>> set = new HashSet<>();
+        set.add(new NodeRenderingHandler<>(AdmonitionBlock.class, this::render));
         return set;
     }
 

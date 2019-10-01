@@ -52,7 +52,7 @@ public class IndentedCodeBlockParser extends AbstractBlockParser {
         if (trimTrailingBlankLines) {
             int trailingBlankLines = 0;
             List<BasedSequence> lines = content.getLines();
-            for (BasedSequence line : new Reverse<BasedSequence>(lines)) {
+            for (BasedSequence line : new Reverse<>(lines)) {
                 if (!line.isBlank()) break;
                 trailingBlankLines++;
             }
@@ -73,7 +73,7 @@ public class IndentedCodeBlockParser extends AbstractBlockParser {
     public static class Factory implements CustomBlockParserFactory {
         @Override
         public Set<Class<? extends CustomBlockParserFactory>> getAfterDependents() {
-            return new HashSet<Class<? extends CustomBlockParserFactory>>(Arrays.asList(
+            return new HashSet<>(Arrays.asList(
                     BlockQuoteParser.Factory.class,
                     HeadingParser.Factory.class,
                     FencedCodeBlockParser.Factory.class,

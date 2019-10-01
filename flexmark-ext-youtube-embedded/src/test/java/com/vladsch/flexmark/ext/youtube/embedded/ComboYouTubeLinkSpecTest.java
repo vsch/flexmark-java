@@ -19,7 +19,7 @@ public class ComboYouTubeLinkSpecTest extends ComboSpecTestCase {
             .set(HtmlRenderer.INDENT_SIZE, 2)
             .set(Parser.EXTENSIONS, Collections.singleton(YouTubeLinkExtension.create()));
 
-    private static final Map<String, DataHolder> optionsMap = new HashMap<String, DataHolder>();
+    private static final Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
         //optionsMap.put("no-rendering", new MutableDataSet().set(MacroExtension.ENABLE_RENDERING, false));
         //optionsMap.put("no-inlines", new MutableDataSet().set(MacroExtension.ENABLE_INLINE_MACROS, false));

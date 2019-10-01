@@ -42,9 +42,9 @@ public class NodeRendererSample {
 
         @Override
         public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
-            return new HashSet<NodeRenderingHandler<? extends Node>>(Arrays.asList(
-                    new NodeRenderingHandler<HtmlBlock>(HtmlBlock.class, this::render),
-                    new NodeRenderingHandler<HtmlInline>(HtmlInline.class, this::render)
+            return new HashSet<>(Arrays.asList(
+                    new NodeRenderingHandler<>(HtmlBlock.class, this::render),
+                    new NodeRenderingHandler<>(HtmlInline.class, this::render)
             ));
         }
 

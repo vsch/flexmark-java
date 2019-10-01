@@ -29,15 +29,15 @@ public class FootnoteNodeRenderer implements PhasedNodeRenderer {
 
     @Override
     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
-        return new HashSet<NodeRenderingHandler<? extends Node>>(Arrays.asList(
-                new NodeRenderingHandler<Footnote>(Footnote.class, this::render),
-                new NodeRenderingHandler<FootnoteBlock>(FootnoteBlock.class, this::render)
+        return new HashSet<>(Arrays.asList(
+                new NodeRenderingHandler<>(Footnote.class, this::render),
+                new NodeRenderingHandler<>(FootnoteBlock.class, this::render)
         ));
     }
 
     @Override
     public Set<RenderingPhase> getRenderingPhases() {
-        Set<RenderingPhase> set = new HashSet<RenderingPhase>();
+        Set<RenderingPhase> set = new HashSet<>();
         set.add(RenderingPhase.BODY_TOP);
         set.add(RenderingPhase.BODY_BOTTOM);
         return set;

@@ -45,7 +45,7 @@ public class InlineCodeCustomRenderingSample {
 
             @Override
             public Set<Class<? extends NodeRendererFactory>> getDelegates() {
-                Set<Class<? extends NodeRendererFactory>> set = new HashSet<Class<? extends NodeRendererFactory>>();
+                Set<Class<? extends NodeRendererFactory>> set = new HashSet<>();
                 // add node renderer factory classes to which this renderer will delegate some of its rendering
                 // core node renderer is assumed to have all depend it so there is no need to add it
                 //set.add(TocNodeRenderer.Factory.class);
@@ -58,8 +58,8 @@ public class InlineCodeCustomRenderingSample {
 
         @Override
         public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
-            HashSet<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
-            set.add(new NodeRenderingHandler<Code>(Code.class, (node, context, html) -> {
+            HashSet<NodeRenderingHandler<?>> set = new HashSet<>();
+            set.add(new NodeRenderingHandler<>(Code.class, (node, context, html) -> {
                 // test the node to see if it needs overriding
                 if (node.getOpeningMarker().length() == 3) {
                     if (context.getHtmlOptions().sourcePositionParagraphLines) {

@@ -13,7 +13,7 @@ import java.util.*;
 
 @SuppressWarnings("WeakerAccess")
 public class ZzzzzzRepository extends NodeRepository<ZzzzzzBlock> {
-    private ArrayList<ZzzzzzBlock> referencedZzzzzzBlocks = new ArrayList<ZzzzzzBlock>();
+    private ArrayList<ZzzzzzBlock> referencedZzzzzzBlocks = new ArrayList<>();
 
     public void addZzzzzzReference(ZzzzzzBlock zzzzzzBlock, Zzzzzz zzzzzz) {
         if (!zzzzzzBlock.isReferenced()) {
@@ -52,7 +52,7 @@ public class ZzzzzzRepository extends NodeRepository<ZzzzzzBlock> {
 
     @Override
     public Set<ZzzzzzBlock> getReferencedElements(Node parent) {
-        HashSet<ZzzzzzBlock> references = new HashSet<ZzzzzzBlock>();
+        HashSet<ZzzzzzBlock> references = new HashSet<>();
         //visitNodes(parent, new ValueRunnable<Node>() {
         //    @Override
         //    public void run(Node value) {

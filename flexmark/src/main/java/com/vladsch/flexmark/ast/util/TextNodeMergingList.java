@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TextNodeMergingList {
-    private ArrayList<Node> list = new ArrayList<Node>();
+    private ArrayList<Node> list = new ArrayList<>();
     private boolean isMerged = true;
 
     public void add(Node node) {
@@ -79,13 +79,13 @@ public class TextNodeMergingList {
                             // merge their text
                             lastText.setChars(lastText.getChars().spliceAtEnd(child.getChars()));
                         } else {
-                            if (mergedList == null) mergedList = new ArrayList<Node>();
+                            if (mergedList == null) mergedList = new ArrayList<>();
                             mergedList.add(lastText);
                             lastText = child;
                         }
                     }
                 } else {
-                    if (mergedList == null) mergedList = new ArrayList<Node>();
+                    if (mergedList == null) mergedList = new ArrayList<>();
                     if (lastText != null) {
                         mergedList.add(lastText);
                         lastText = null;

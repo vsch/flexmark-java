@@ -41,7 +41,7 @@ public class SpecReader {
     protected int lineNumber = 0;
     protected int contentLineNumber = 0;
 
-    protected List<SpecExample> examples = new ArrayList<SpecExample>();
+    protected List<SpecExample> examples = new ArrayList<>();
 
     protected SpecReader(InputStream stream, String fileUrl) {
         this.inputStream = stream;
@@ -116,7 +116,7 @@ public class SpecReader {
 
     public static List<String> readExamplesAsString(String specResource, SpecReaderFactory readerFactory) {
         List<SpecExample> examples = SpecReader.readExamples(specResource, readerFactory);
-        List<String> result = new ArrayList<String>();
+        List<String> result = new ArrayList<>();
         for (SpecExample example : examples) {
             result.add(example.getSource());
         }

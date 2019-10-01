@@ -28,12 +28,12 @@ public class ParsedOption<T> {
         mySource = source;
 
         if (parsedOptions != null) {
-            ArrayList<ParserMessage> mergedMessages = messages != null ? new ArrayList<ParserMessage>(messages) : null;
+            ArrayList<ParserMessage> mergedMessages = messages != null ? new ArrayList<>(messages) : null;
 
             for (ParsedOption<T> parsedOption : parsedOptions) {
                 optionResult = optionResult.escalate(parsedOption.getOptionResult());
                 if (parsedOption.getMessages() != null) {
-                    if (mergedMessages == null) mergedMessages = new ArrayList<ParserMessage>();
+                    if (mergedMessages == null) mergedMessages = new ArrayList<>();
                     mergedMessages.addAll(parsedOption.getMessages());
                 }
             }

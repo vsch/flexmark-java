@@ -7,7 +7,7 @@ import com.vladsch.flexmark.util.ast.Node;
 import java.util.*;
 
 public abstract class NodePostProcessorFactory implements PostProcessorFactory {
-    private final HashMap<Class<?>, Set<Class<?>>> NODE_MAP = new HashMap<Class<?>, Set<Class<?>>>();
+    private final HashMap<Class<?>, Set<Class<?>>> NODE_MAP = new HashMap<>();
 
     // added to force constructor
     public NodePostProcessorFactory(boolean ignored) {
@@ -30,7 +30,7 @@ public abstract class NodePostProcessorFactory implements PostProcessorFactory {
 
     protected final void addNodeWithExclusions(Class<? extends Node> nodeType, Class<?>... excludeDescendantsOf) {
         if (excludeDescendantsOf.length > 0) {
-            NODE_MAP.put(nodeType, new HashSet<Class<?>>(Arrays.asList(excludeDescendantsOf)));
+            NODE_MAP.put(nodeType, new HashSet<>(Arrays.asList(excludeDescendantsOf)));
         } else {
             addNodes(nodeType);
         }

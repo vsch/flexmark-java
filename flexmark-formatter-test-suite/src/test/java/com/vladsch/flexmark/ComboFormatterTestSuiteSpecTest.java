@@ -72,7 +72,7 @@ public class ComboFormatterTestSuiteSpecTest extends ComboSpecTestCase {
             .set(SimTocExtension.BLANK_LINE_SPACER, true)
             .set(Parser.HEADING_NO_ATX_SPACE, true);
 
-    private static final Map<String, DataHolder> optionsMap = new HashMap<String, DataHolder>();
+    private static final Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
         //optionsMap.put("src-pos", new MutableDataSet().set(HtmlRenderer.SOURCE_POSITION_ATTRIBUTE, "md-pos"));
         //optionsMap.put("option1", new MutableDataSet().set(RendererExtension.FORMATTER_OPTION1, true));

@@ -1,6 +1,8 @@
 package com.vladsch.flexmark.samples;
 
-import com.vladsch.flexmark.ast.Paragraph;
+import com.vladsch.flexmark.ast.Code;
+import com.vladsch.flexmark.ast.Text;
+import com.vladsch.flexmark.ext.toc.TocExtension;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.html.HtmlRenderer.Builder;
 import com.vladsch.flexmark.html.HtmlRenderer.HtmlRendererExtension;
@@ -13,14 +15,15 @@ import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
+import com.vladsch.flexmark.util.html.Escaping;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-public class ParagraphCustomRenderingSample {
-    static final DataHolder OPTIONS = new MutableDataSet().set(Parser.EXTENSIONS, Collections.singletonList(
+public class FencedCodeCustomRenderingSample {
+    static final DataHolder OPTIONS = new MutableDataSet().set(Parser.EXTENSIONS, Arrays.asList(
+            TocExtension.create(),
             CustomExtension.create()
     ));
 
@@ -56,10 +59,29 @@ public class ParagraphCustomRenderingSample {
         @Override
         public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
             HashSet<NodeRenderingHandler<?>> set = new HashSet<>();
-            set.add(new NodeRenderingHandler<>(Paragraph.class, (node, context, html) -> {
-                html.withAttr().tag("div");
-                context.delegateRender();
-                html.tag("/div");
+            set.add(new NodeRenderingHandler<>(Code.class, (node, context, html) -> {
+                // test the node to see if it needs overriding
+                if (node.getOpeningMarker().length() == 3) {
+                    if (context.getHtmlOptions().sourcePositionParagraphLines) {
+                        html.withAttr().tag("pre");
+                    } else {
+                        html.srcPos(node.getText()).withAttr().tag("pre");
+                    }
+                    if (codeSoftLineBreaks && !context.getHtmlOptions().isSoftBreakAllSpaces) {
+                        for (Node child : node.getChildren()) {
+                            if (child instanceof Text) {
+                                html.text(Escaping.collapseWhitespace(child.getChars(), true));
+                            } else {
+                                context.render(child);
+                            }
+                        }
+                    } else {
+                        html.text(Escaping.collapseWhitespace(node.getText(), true));
+                    }
+                    html.tag("/pre");
+                } else {
+                    context.delegateRender();
+                }
             }));
 
             return set;
@@ -86,7 +108,13 @@ public class ParagraphCustomRenderingSample {
     public static void main(String[] args) {
         // You can re-use parser and renderer instances
         Node document = PARSER.parse("" +
-                "text\n" +
+                "`test`\n" +
+                "\n" +
+                "``test``\n" +
+                "\n" +
+                "```test```\n" +
+                "\n" +
+                "````test````\n" +
                 "");
         String html = RENDERER.render(document);
         System.out.println("``````markdown");

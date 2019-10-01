@@ -21,18 +21,18 @@ public class ClassifyingNodeTracker implements NodeTracker {
 
     public ClassifyingNodeTracker(NodeTracker host, Map<Class<? extends Node>, Set<Class<?>>> exclusionMap) {
         myHost = host;
-        myNodeClassifier = new ClassificationBag<Class<?>, Node>(NodeClassifier.INSTANCE);
-        myExclusionMap = new OrderedMap<Class<?>, Set<Class<?>>>(exclusionMap.size());
+        myNodeClassifier = new ClassificationBag<>(NodeClassifier.INSTANCE);
+        myExclusionMap = new OrderedMap<>(exclusionMap.size());
         myExclusionMap.putAll(exclusionMap);
 
         // this maps the exclusion class to bits in the bit set
-        myExclusionSet = new OrderedSet<Class<?>>();
+        myExclusionSet = new OrderedSet<>();
 
         ReversibleIterator<Set<Class<?>>> iterator = myExclusionMap.valueIterable().iterator();
         while (iterator.hasNext()) {
             myExclusionSet.addAll(iterator.next());
         }
-        myNodeAncestryMap = new HashMap<Integer, BitSet>();
+        myNodeAncestryMap = new HashMap<>();
     }
 
     public OrderedMap<Class<?>, Set<Class<?>>> getExclusionMap() {

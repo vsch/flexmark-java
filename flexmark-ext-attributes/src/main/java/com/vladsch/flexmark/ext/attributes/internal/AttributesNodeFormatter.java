@@ -22,14 +22,14 @@ import static com.vladsch.flexmark.formatter.RenderPurpose.TRANSLATED;
 import static com.vladsch.flexmark.formatter.RenderPurpose.TRANSLATION_SPANS;
 
 public class AttributesNodeFormatter implements PhasedNodeFormatter, ExplicitAttributeIdProvider {
-    public static final DataKey<Map<String, String>> ATTRIBUTE_TRANSLATION_MAP = new DataKey<Map<String, String>>("ATTRIBUTE_TRANSLATION_MAP", new HashMap<String, String>());
-    public static final DataKey<Map<String, String>> ATTRIBUTE_TRANSLATED_MAP = new DataKey<Map<String, String>>("ATTRIBUTE_TRANSLATED_MAP", new HashMap<String, String>());
-    public static final DataKey<Map<String, String>> ATTRIBUTE_ORIGINAL_ID_MAP = new DataKey<Map<String, String>>("ATTRIBUTE_ORIGINAL_ID_MAP", new HashMap<String, String>());
+    public static final DataKey<Map<String, String>> ATTRIBUTE_TRANSLATION_MAP = new DataKey<>("ATTRIBUTE_TRANSLATION_MAP", new HashMap<>());
+    public static final DataKey<Map<String, String>> ATTRIBUTE_TRANSLATED_MAP = new DataKey<>("ATTRIBUTE_TRANSLATED_MAP", new HashMap<>());
+    public static final DataKey<Map<String, String>> ATTRIBUTE_ORIGINAL_ID_MAP = new DataKey<>("ATTRIBUTE_ORIGINAL_ID_MAP", new HashMap<>());
 
     // need to have this one available in core formatter
     public static final DataKey<Map<String, String>> ATTRIBUTE_UNIQUIFICATION_ID_MAP = CoreNodeFormatter.ATTRIBUTE_UNIQUIFICATION_ID_MAP;
 
-    public static final DataKey<Map<String, String>> ATTRIBUTE_UNIQUIFICATION_CATEGORY_MAP = new DataKey<Map<String, String>>("ATTRIBUTE_UNIQUIFICATION_CATEGORY_MAP", new HashMap<String, String>());
+    public static final DataKey<Map<String, String>> ATTRIBUTE_UNIQUIFICATION_CATEGORY_MAP = new DataKey<>("ATTRIBUTE_UNIQUIFICATION_CATEGORY_MAP", new HashMap<>());
     public static final DataKey<Integer> ATTRIBUTE_TRANSLATION_ID = new DataKey<>("ATTRIBUTE_TRANSLATION_ID", 0); // next attribute index
 
     private Map<String, String> attributeTranslationMap;
@@ -271,9 +271,9 @@ public class AttributesNodeFormatter implements PhasedNodeFormatter, ExplicitAtt
     // only registered if assignTextAttributes is enabled
     @Override
     public Set<NodeFormattingHandler<?>> getNodeFormattingHandlers() {
-        HashSet<NodeFormattingHandler<?>> set = new HashSet<NodeFormattingHandler<?>>();
-        set.add(new NodeFormattingHandler<AttributesNode>(AttributesNode.class, AttributesNodeFormatter.this::render));
-        set.add(new NodeFormattingHandler<AttributesDelimiter>(AttributesDelimiter.class, AttributesNodeFormatter.this::render));
+        HashSet<NodeFormattingHandler<?>> set = new HashSet<>();
+        set.add(new NodeFormattingHandler<>(AttributesNode.class, AttributesNodeFormatter.this::render));
+        set.add(new NodeFormattingHandler<>(AttributesDelimiter.class, AttributesNodeFormatter.this::render));
         return set;
     }
 

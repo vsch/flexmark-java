@@ -106,7 +106,7 @@ public class PegdownOptionsAdapter {
         if (myIsUpdateNeeded) {
             myIsUpdateNeeded = false;
             MutableDataSet options = myOptions;
-            ArrayList<Extension> extensions = new ArrayList<Extension>(Arrays.asList(additionalExtensions));
+            ArrayList<Extension> extensions = new ArrayList<>(Arrays.asList(additionalExtensions));
 
             options.clear();
 

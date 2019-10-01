@@ -34,8 +34,8 @@ public class HtmlDeepParser {
     public static final Pattern START_PATTERN;
     private static final HtmlMatch[] PATTERN_MAP;
     static {
-        BLOCK_TAGS = new HashSet<String>();
-        VOID_TAGS = new HashSet<String>();
+        BLOCK_TAGS = new HashSet<>();
+        VOID_TAGS = new HashSet<>();
 
         String[] blockTags = ("address|article|aside|" +
                 "base|basefont|blockquote|body|" +
@@ -57,22 +57,22 @@ public class HtmlDeepParser {
         String[] voidTags = ("area|base|br|col|embed|hr|img|input|keygen|link|menuitem|meta|param|source|track|wbr").split("\\|");
         VOID_TAGS.addAll(Arrays.asList(voidTags));
 
-        OPTIONAL_TAGS = new HashMap<String, Set<String>>();
-        OPTIONAL_TAGS.put("li", new HashSet<String>(Arrays.asList(new String[] { "li" })));
-        OPTIONAL_TAGS.put("dt", new HashSet<String>(Arrays.asList(new String[] { "dt", "dd" })));
-        OPTIONAL_TAGS.put("dd", new HashSet<String>(Arrays.asList(new String[] { "dd", "dt" })));
-        OPTIONAL_TAGS.put("p", new HashSet<String>(Arrays.asList(new String[] { "address", "article", "aside", "blockquote", "details", "div", "dl", "fieldset", "figcaption", "figure", "footer", "form", "h1", "h2", "h3", "h4", "h5", "h6", "header", "hr", "main", "menu", "nav", "ol", "p", "pre", "section", "table", "ul" })));
-        OPTIONAL_TAGS.put("rt", new HashSet<String>(Arrays.asList(new String[] { "rt", "rp" })));
-        OPTIONAL_TAGS.put("rp", new HashSet<String>(Arrays.asList(new String[] { "rt", "rp" })));
-        OPTIONAL_TAGS.put("optgroup", new HashSet<String>(Arrays.asList(new String[] { "optgroup" })));
-        OPTIONAL_TAGS.put("option", new HashSet<String>(Arrays.asList(new String[] { "option", "optgroup" })));
-        OPTIONAL_TAGS.put("colgroup", new HashSet<String>(Arrays.asList(new String[] { "colgroup" })));
-        OPTIONAL_TAGS.put("thead", new HashSet<String>(Arrays.asList(new String[] { "tbody", "tfoot" })));
-        OPTIONAL_TAGS.put("tbody", new HashSet<String>(Arrays.asList(new String[] { "tbody", "tfoot" })));
-        OPTIONAL_TAGS.put("tfoot", new HashSet<String>(Arrays.asList(new String[] { "tbody" })));
-        OPTIONAL_TAGS.put("tr", new HashSet<String>(Arrays.asList(new String[] { "tr" })));
-        OPTIONAL_TAGS.put("td", new HashSet<String>(Arrays.asList(new String[] { "td", "th" })));
-        OPTIONAL_TAGS.put("th", new HashSet<String>(Arrays.asList(new String[] { "td", "th" })));
+        OPTIONAL_TAGS = new HashMap<>();
+        OPTIONAL_TAGS.put("li", new HashSet<>(Arrays.asList(new String[] { "li" })));
+        OPTIONAL_TAGS.put("dt", new HashSet<>(Arrays.asList(new String[] { "dt", "dd" })));
+        OPTIONAL_TAGS.put("dd", new HashSet<>(Arrays.asList(new String[] { "dd", "dt" })));
+        OPTIONAL_TAGS.put("p", new HashSet<>(Arrays.asList(new String[] { "address", "article", "aside", "blockquote", "details", "div", "dl", "fieldset", "figcaption", "figure", "footer", "form", "h1", "h2", "h3", "h4", "h5", "h6", "header", "hr", "main", "menu", "nav", "ol", "p", "pre", "section", "table", "ul" })));
+        OPTIONAL_TAGS.put("rt", new HashSet<>(Arrays.asList(new String[] { "rt", "rp" })));
+        OPTIONAL_TAGS.put("rp", new HashSet<>(Arrays.asList(new String[] { "rt", "rp" })));
+        OPTIONAL_TAGS.put("optgroup", new HashSet<>(Arrays.asList(new String[] { "optgroup" })));
+        OPTIONAL_TAGS.put("option", new HashSet<>(Arrays.asList(new String[] { "option", "optgroup" })));
+        OPTIONAL_TAGS.put("colgroup", new HashSet<>(Arrays.asList(new String[] { "colgroup" })));
+        OPTIONAL_TAGS.put("thead", new HashSet<>(Arrays.asList(new String[] { "tbody", "tfoot" })));
+        OPTIONAL_TAGS.put("tbody", new HashSet<>(Arrays.asList(new String[] { "tbody", "tfoot" })));
+        OPTIONAL_TAGS.put("tfoot", new HashSet<>(Arrays.asList(new String[] { "tbody" })));
+        OPTIONAL_TAGS.put("tr", new HashSet<>(Arrays.asList(new String[] { "tr" })));
+        OPTIONAL_TAGS.put("td", new HashSet<>(Arrays.asList(new String[] { "td", "th" })));
+        OPTIONAL_TAGS.put("th", new HashSet<>(Arrays.asList(new String[] { "td", "th" })));
 
         // combine all patterns and create map by pattern number
         PATTERN_MAP = new HtmlMatch[HtmlMatch.values().length];
@@ -107,7 +107,7 @@ public class HtmlDeepParser {
     }
 
     public HtmlDeepParser(List<String> customTags) {
-        myOpenTags = new ArrayList<String>();
+        myOpenTags = new ArrayList<>();
         myClosingPattern = null;
         myHtmlMatch = null;
         myHtmlCount = 0;

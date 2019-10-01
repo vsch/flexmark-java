@@ -23,8 +23,8 @@ public class GfmUsersJiraRenderer implements NodeRenderer {
 
     @Override
     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
-        return new HashSet<NodeRenderingHandler<? extends Node>>(Collections.singletonList(
-                new NodeRenderingHandler<GfmUser>(GfmUser.class, this::render)
+        return new HashSet<>(Collections.singletonList(
+                new NodeRenderingHandler<>(GfmUser.class, this::render)
         ));
     }
 

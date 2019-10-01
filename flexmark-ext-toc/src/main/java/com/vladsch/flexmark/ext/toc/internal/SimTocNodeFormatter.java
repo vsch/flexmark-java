@@ -28,9 +28,9 @@ public class SimTocNodeFormatter implements NodeFormatter {
 
     @Override
     public Set<NodeFormattingHandler<?>> getNodeFormattingHandlers() {
-        return new HashSet<NodeFormattingHandler<? extends Node>>(Arrays.asList(
-                new NodeFormattingHandler<SimTocBlock>(SimTocBlock.class, SimTocNodeFormatter.this::render),
-                new NodeFormattingHandler<SimTocContent>(SimTocContent.class, SimTocNodeFormatter.this::render)
+        return new HashSet<>(Arrays.asList(
+                new NodeFormattingHandler<>(SimTocBlock.class, SimTocNodeFormatter.this::render),
+                new NodeFormattingHandler<>(SimTocContent.class, SimTocNodeFormatter.this::render)
         ));
     }
 

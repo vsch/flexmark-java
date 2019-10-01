@@ -33,7 +33,7 @@ public class WikiLinkExtension implements Parser.ParserExtension, HtmlRenderer.H
      * Will get its value from option {@link #LINK_PREFIX} until its own value is set.
      * </p>
      */
-    public static final DataKey<String> LINK_PREFIX_ABSOLUTE = new DataKey<String>("LINK_PREFIX_ABSOLUTE", LINK_PREFIX);
+    public static final DataKey<String> LINK_PREFIX_ABSOLUTE = new DataKey<>("LINK_PREFIX_ABSOLUTE", LINK_PREFIX);
 
     public static final DataKey<String> IMAGE_PREFIX = new DataKey<>("IMAGE_PREFIX", "");
 
@@ -44,7 +44,7 @@ public class WikiLinkExtension implements Parser.ParserExtension, HtmlRenderer.H
      * Will get its value from option {@link #IMAGE_PREFIX} until its own value is set.
      * </p>
      */
-    public static final DataKey<String> IMAGE_PREFIX_ABSOLUTE = new DataKey<String>("IMAGE_PREFIX_ABSOLUTE", IMAGE_PREFIX);
+    public static final DataKey<String> IMAGE_PREFIX_ABSOLUTE = new DataKey<>("IMAGE_PREFIX_ABSOLUTE", IMAGE_PREFIX);
 
     public static final DataKey<Boolean> IMAGE_LINKS = new DataKey<>("IMAGE_LINKS", false);
     public static final DataKey<String> LINK_FILE_EXTENSION = new DataKey<>("LINK_FILE_EXTENSION", "");

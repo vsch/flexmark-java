@@ -21,8 +21,8 @@ public class EmojiNodeFormatter implements NodeFormatter {
     // only registered if assignTextAttributes is enabled
     @Override
     public Set<NodeFormattingHandler<?>> getNodeFormattingHandlers() {
-        HashSet<NodeFormattingHandler<?>> set = new HashSet<NodeFormattingHandler<?>>();
-        set.add(new NodeFormattingHandler<Emoji>(Emoji.class, EmojiNodeFormatter.this::render));
+        HashSet<NodeFormattingHandler<?>> set = new HashSet<>();
+        set.add(new NodeFormattingHandler<>(Emoji.class, EmojiNodeFormatter.this::render));
         return set;
     }
 

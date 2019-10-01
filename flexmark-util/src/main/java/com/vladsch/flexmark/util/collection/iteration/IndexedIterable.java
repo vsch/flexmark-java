@@ -16,16 +16,16 @@ public class IndexedIterable<R, S, I extends ReversibleIterable<Integer>> implem
 
     @Override
     public ReversibleIndexedIterator<R> iterator() {
-        return new IndexedIterator<R, S, ReversibleIterator<Integer>>(myItems, myIterable.iterator());
+        return new IndexedIterator<>(myItems, myIterable.iterator());
     }
 
     @Override
     public ReversibleIndexedIterable<R> reversed() {
-        return new IndexedIterable<R, S, ReversibleIterable<Integer>>(myItems, myIterable.reversed());
+        return new IndexedIterable<>(myItems, myIterable.reversed());
     }
 
     @Override
     public ReversibleIndexedIterator<R> reversedIterator() {
-        return new IndexedIterator<R, S, ReversibleIterator<Integer>>(myItems, myIterable.reversedIterator());
+        return new IndexedIterator<>(myItems, myIterable.reversedIterator());
     }
 }

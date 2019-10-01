@@ -33,7 +33,7 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
         separatorCharacters.set('-');
     }
 
-    private static HashMap<Character, CharacterNodeFactory> pipeNodeMap = new HashMap<Character, CharacterNodeFactory>();
+    private static HashMap<Character, CharacterNodeFactory> pipeNodeMap = new HashMap<>();
     static {
         pipeNodeMap.put('|', new CharacterNodeFactory() {
             @Override
@@ -59,7 +59,7 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
             }
         });
     }
-    private static HashMap<Character, CharacterNodeFactory> pipeIntelliJNodeMap = new HashMap<Character, CharacterNodeFactory>();
+    private static HashMap<Character, CharacterNodeFactory> pipeIntelliJNodeMap = new HashMap<>();
     static {
         pipeIntelliJNodeMap.put('|', new CharacterNodeFactory() {
             @Override
@@ -94,7 +94,7 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
 
             @Override
             public Set<Class<? extends ParagraphPreProcessorFactory>> getAfterDependents() {
-                HashSet<Class<? extends ParagraphPreProcessorFactory>> set = new HashSet<Class<? extends ParagraphPreProcessorFactory>>();
+                HashSet<Class<? extends ParagraphPreProcessorFactory>> set = new HashSet<>();
                 set.add(ReferencePreProcessorFactory.class);
                 return set;
             }
@@ -157,7 +157,7 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
     public int preProcessBlock(Paragraph block, ParserState state) {
         InlineParser inlineParser = state.getInlineParser();
 
-        ArrayList<BasedSequence> tableLines = new ArrayList<BasedSequence>();
+        ArrayList<BasedSequence> tableLines = new ArrayList<>();
         int separatorLineNumber = -1;
         BasedSequence separatorLine = null;
         int blockIndent = block.getLineIndent(0);
@@ -204,7 +204,7 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
 
         if (separatorLineNumber == -1) return 0;
 
-        ArrayList<TableRow> tableRows = new ArrayList<TableRow>();
+        ArrayList<TableRow> tableRows = new ArrayList<>();
         for (BasedSequence rowLine : tableLines) {
             int rowNumber = tableRows.size();
 
@@ -420,7 +420,7 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
 
     private List<TableCell.Alignment> parseAlignment(BasedSequence separatorLine) {
         List<BasedSequence> parts = split(separatorLine, false, false);
-        List<TableCell.Alignment> alignments = new ArrayList<TableCell.Alignment>();
+        List<TableCell.Alignment> alignments = new ArrayList<>();
         for (BasedSequence part : parts) {
             BasedSequence trimmed = part.trim();
             boolean left = trimmed.startsWith(":");
@@ -434,7 +434,7 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
     private static List<BasedSequence> split(BasedSequence input, boolean columnSpans, boolean wantPipes) {
         BasedSequence line = input.trim();
         int lineLength = line.length();
-        List<BasedSequence> segments = new ArrayList<BasedSequence>();
+        List<BasedSequence> segments = new ArrayList<>();
 
         if (line.startsWith("|")) {
             if (wantPipes) segments.add(line.subSequence(0, 1));

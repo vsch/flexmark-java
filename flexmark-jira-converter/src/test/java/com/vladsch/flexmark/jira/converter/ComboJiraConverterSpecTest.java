@@ -32,7 +32,7 @@ public class ComboJiraConverterSpecTest extends ComboSpecTestCase {
             )
             .set(WikiLinkExtension.ALLOW_ANCHORS, true);
 
-    private static final Map<String, DataHolder> optionsMap = new HashMap<String, DataHolder>();
+    private static final Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
         optionsMap.put("list-no-auto-loose", new MutableDataSet().set(Parser.LISTS_AUTO_LOOSE, false));
         optionsMap.put("links-first", new MutableDataSet().set(WikiLinkExtension.LINK_FIRST_SYNTAX, true));

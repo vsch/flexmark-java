@@ -14,7 +14,7 @@ public class ZzzzzzInlineParserExtension implements InlineParserExtension {
     private List<Zzzzzz> openZzzzzzs;
 
     public ZzzzzzInlineParserExtension(LightInlineParser inlineParser) {
-        this.openZzzzzzs = new ArrayList<Zzzzzz>();
+        this.openZzzzzzs = new ArrayList<>();
     }
 
     @Override

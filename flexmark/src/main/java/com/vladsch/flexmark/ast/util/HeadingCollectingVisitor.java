@@ -6,7 +6,7 @@ import com.vladsch.flexmark.util.ast.*;
 import java.util.ArrayList;
 
 public class HeadingCollectingVisitor {
-    private final ArrayList<Heading> headings = new ArrayList<Heading>();
+    private final ArrayList<Heading> headings = new ArrayList<>();
     private final NodeVisitor myVisitor;
 
     public HeadingCollectingVisitor() {

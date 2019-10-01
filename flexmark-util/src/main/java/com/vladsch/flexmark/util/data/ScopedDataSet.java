@@ -26,7 +26,7 @@ public class ScopedDataSet extends DataSet {
     public Map<DataKey<?>, Object> getAll() {
         if (parent != null) {
 
-            HashMap<DataKey<?>, Object> all = new HashMap<DataKey<?>, Object>(super.getAll());
+            HashMap<DataKey<?>, Object> all = new HashMap<>(super.getAll());
 
             for (DataKey<?> key : parent.getKeys()) {
                 if (!contains(key)) {
@@ -44,7 +44,7 @@ public class ScopedDataSet extends DataSet {
     public Collection<DataKey<?>> getKeys() {
         if (parent != null) {
 
-            ArrayList<DataKey<?>> all = new ArrayList<DataKey<?>>(super.getKeys());
+            ArrayList<DataKey<?>> all = new ArrayList<>(super.getKeys());
 
             for (DataKey<?> key : parent.getKeys()) {
                 if (!contains(key)) {

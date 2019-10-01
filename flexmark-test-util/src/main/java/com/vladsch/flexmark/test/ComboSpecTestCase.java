@@ -66,7 +66,7 @@ public abstract class ComboSpecTestCase extends FullSpecTestCase {
 
     public static List<Object[]> getTestData(String specResource, String specUrlString) {
         List<SpecExample> examples = SpecReader.readExamples(specResource, specUrlString);
-        List<Object[]> data = new ArrayList<Object[]>();
+        List<Object[]> data = new ArrayList<>();
 
         // NULL example runs full spec test
         data.add(new Object[] { SpecExample.getNull() });

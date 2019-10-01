@@ -14,8 +14,8 @@ import com.vladsch.flexmark.util.format.options.ElementPlacementSort;
 import java.util.*;
 
 public class MacrosNodeFormatter extends NodeRepositoryFormatter<MacroDefinitionRepository, MacroDefinitionBlock, MacroReference> {
-    public static final DataKey<Map<String, String>> MACROS_TRANSLATION_MAP = new DataKey<Map<String, String>>("MACROS_TRANSLATION_MAP", new HashMap<String, String>());
-    public static final DataKey<Map<String, String>> MACROS_UNIQUIFICATION_MAP = new DataKey<Map<String, String>>("MACROS_UNIQUIFICATION_MAP", new HashMap<String, String>()); // uniquified references
+    public static final DataKey<Map<String, String>> MACROS_TRANSLATION_MAP = new DataKey<>("MACROS_TRANSLATION_MAP", new HashMap<>());
+    public static final DataKey<Map<String, String>> MACROS_UNIQUIFICATION_MAP = new DataKey<>("MACROS_UNIQUIFICATION_MAP", new HashMap<>()); // uniquified references
     private final MacroFormatOptions options;
 
     public MacrosNodeFormatter(DataHolder options) {
@@ -53,9 +53,9 @@ public class MacrosNodeFormatter extends NodeRepositoryFormatter<MacroDefinition
 
     @Override
     public Set<NodeFormattingHandler<?>> getNodeFormattingHandlers() {
-        return new HashSet<NodeFormattingHandler<?>>(Arrays.asList(
-                new NodeFormattingHandler<MacroReference>(MacroReference.class, MacrosNodeFormatter.this::render),
-                new NodeFormattingHandler<MacroDefinitionBlock>(MacroDefinitionBlock.class, MacrosNodeFormatter.this::render)
+        return new HashSet<>(Arrays.asList(
+                new NodeFormattingHandler<>(MacroReference.class, MacrosNodeFormatter.this::render),
+                new NodeFormattingHandler<>(MacroDefinitionBlock.class, MacrosNodeFormatter.this::render)
         ));
     }
 
@@ -63,7 +63,7 @@ public class MacrosNodeFormatter extends NodeRepositoryFormatter<MacroDefinition
     public Set<Class<?>> getNodeClasses() {
         if (options.macrosPlacement != ElementPlacement.AS_IS && options.macrosSort != ElementPlacementSort.SORT_UNUSED_LAST) return null;
         // noinspection ArraysAsListWithZeroOrOneArgument
-        return new HashSet<Class<?>>(Arrays.asList(
+        return new HashSet<>(Arrays.asList(
                 MacroReference.class
         ));
     }

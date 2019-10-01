@@ -24,9 +24,9 @@ public class AbbreviationNodeRenderer implements NodeRenderer {
 
     @Override
     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
-        return new HashSet<NodeRenderingHandler<? extends Node>>(Arrays.asList(
-                new NodeRenderingHandler<Abbreviation>(Abbreviation.class, this::render),
-                new NodeRenderingHandler<AbbreviationBlock>(AbbreviationBlock.class, this::render)
+        return new HashSet<>(Arrays.asList(
+                new NodeRenderingHandler<>(Abbreviation.class, this::render),
+                new NodeRenderingHandler<>(AbbreviationBlock.class, this::render)
         ));
     }
 

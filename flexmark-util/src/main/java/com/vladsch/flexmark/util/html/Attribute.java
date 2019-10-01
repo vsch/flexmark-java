@@ -15,7 +15,7 @@ public interface Attribute extends Immutable<Attribute, MutableAttribute> {
     String TITLE_ATTR = "title";
     String TARGET_ATTR = "target";
     Attribute NO_FOLLOW = AttributeImpl.of("rel", "nofollow");
-    Set<String> NON_RENDERING_WHEN_EMPTY = new HashSet<String>(Arrays.asList(CLASS_ATTR, ID_ATTR, NAME_ATTR, STYLE_ATTR));
+    Set<String> NON_RENDERING_WHEN_EMPTY = new HashSet<>(Arrays.asList(CLASS_ATTR, ID_ATTR, NAME_ATTR, STYLE_ATTR));
     char NUL = '\0';
 
     String getName();

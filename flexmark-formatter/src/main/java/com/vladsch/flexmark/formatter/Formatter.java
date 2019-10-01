@@ -91,7 +91,7 @@ public class Formatter implements IRender {
     public static final DataKey<String> FORMAT_TABLE_INDENT_PREFIX = TableFormatOptions.FORMAT_TABLE_INDENT_PREFIX;
 
     // formatter family override
-    public static final DataKey<ParserEmulationProfile> FORMATTER_EMULATION_PROFILE = new DataKey<ParserEmulationProfile>("FORMATTER_EMULATION_PROFILE", Parser.PARSER_EMULATION_PROFILE);
+    public static final DataKey<ParserEmulationProfile> FORMATTER_EMULATION_PROFILE = new DataKey<>("FORMATTER_EMULATION_PROFILE", Parser.PARSER_EMULATION_PROFILE);
 
     // used for translation phases of rendering
     public static final DataKey<String> TRANSLATION_ID_FORMAT = new DataKey<>("TRANSLATION_ID_FORMAT", "_%d_");
@@ -179,7 +179,7 @@ public class Formatter implements IRender {
             List<NodeFormatterFactory> formatterFactories
     ) {
         // By having the custom factories come first, extensions are able to change behavior of core syntax.
-        List<NodeFormatterFactory> list = new ArrayList<NodeFormatterFactory>(formatterFactories);
+        List<NodeFormatterFactory> list = new ArrayList<>(formatterFactories);
         list.add(new CoreNodeFormatter.Factory());
 
         NodeFormatterDependencyHandler resolver = new NodeFormatterDependencyHandler();
@@ -395,9 +395,9 @@ public class Formatter implements IRender {
      * Builder for configuring an {@link Formatter}. See methods for default configuration.
      */
     public static class Builder extends BuilderBase<Builder> {
-        List<AttributeProviderFactory> attributeProviderFactories = new ArrayList<AttributeProviderFactory>();
-        List<NodeFormatterFactory> nodeFormatterFactories = new ArrayList<NodeFormatterFactory>();
-        List<LinkResolverFactory> linkResolverFactories = new ArrayList<LinkResolverFactory>();
+        List<AttributeProviderFactory> attributeProviderFactories = new ArrayList<>();
+        List<NodeFormatterFactory> nodeFormatterFactories = new ArrayList<>();
+        List<LinkResolverFactory> linkResolverFactories = new ArrayList<>();
         HeaderIdGeneratorFactory htmlIdGeneratorFactory = null;
 
         public Builder() {
@@ -519,7 +519,7 @@ public class Formatter implements IRender {
         private FormattingPhase phase;
         final TranslationHandler myTranslationHandler;
         private final LinkResolver[] myLinkResolvers;
-        private final HashMap<LinkType, HashMap<String, ResolvedLink>> resolvedLinkMap = new HashMap<LinkType, HashMap<String, ResolvedLink>>();
+        private final HashMap<LinkType, HashMap<String, ResolvedLink>> resolvedLinkMap = new HashMap<>();
         private final ExplicitAttributeIdProvider myExplicitAttributeIdProvider;
 
         MainNodeFormatter(DataHolder options, MarkdownWriter out, Document document, TranslationHandler translationHandler) {
@@ -527,9 +527,9 @@ public class Formatter implements IRender {
             this.myTranslationHandler = translationHandler;
             this.options = new ScopedDataSet(document, options);
             this.document = document;
-            this.renderers = new HashMap<Class, NodeFormattingHandler<?>>(32);
-            this.renderingPhases = new HashSet<FormattingPhase>(FormattingPhase.values().length);
-            Set<Class> collectNodeTypes = new HashSet<Class>(100);
+            this.renderers = new HashMap<>(32);
+            this.renderingPhases = new HashSet<>(FormattingPhase.values().length);
+            Set<Class> collectNodeTypes = new HashSet<>(100);
 
             Boolean defaultLinkResolver = DEFAULT_LINK_RESOLVER.getFrom(options);
             this.myLinkResolvers = new LinkResolver[linkResolverFactories.size() + (defaultLinkResolver ? 1 : 0)];
@@ -546,7 +546,7 @@ public class Formatter implements IRender {
             out.setContext(this);
 
             List<NodeFormatterFactory> formatterFactories = nodeFormatterFactories.getNodeFactories();
-            this.phasedFormatters = new ArrayList<PhasedNodeFormatter>(formatterFactories.size());
+            this.phasedFormatters = new ArrayList<>(formatterFactories.size());
             ExplicitAttributeIdProvider explicitAttributeIdProvider = null;
 
             for (int i = formatterFactories.size() - 1; i >= 0; i--) {
@@ -612,7 +612,7 @@ public class Formatter implements IRender {
         }
 
         private ResolvedLink resolveLink(NodeFormatterSubContext context, LinkType linkType, CharSequence url, Attributes attributes, Boolean urlEncode) {
-            HashMap<String, ResolvedLink> resolvedLinks = resolvedLinkMap.computeIfAbsent(linkType, k -> new HashMap<String, ResolvedLink>());
+            HashMap<String, ResolvedLink> resolvedLinks = resolvedLinkMap.computeIfAbsent(linkType, k -> new HashMap<>());
 
             String urlSeq = String.valueOf(url);
             ResolvedLink resolvedLink = resolvedLinks.get(urlSeq);

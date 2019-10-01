@@ -66,7 +66,7 @@ public class MutableAttributeImpl implements MutableAttribute {
     @SuppressWarnings("WeakerAccess")
     protected Map<String, String> getValueMap() {
         if (myValues == null) {
-            myValues = new LinkedHashMap<String, String>();
+            myValues = new LinkedHashMap<>();
             if (myValueListDelimiter != NUL) {
                 if (!myValue.isEmpty()) {
                     int lastPos = 0;

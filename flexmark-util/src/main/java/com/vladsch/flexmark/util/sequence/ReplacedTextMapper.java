@@ -16,8 +16,8 @@ import java.util.ArrayList;
 public class ReplacedTextMapper {
     private ReplacedTextMapper parent;
     private BasedSequence original;
-    private ArrayList<ReplacedTextRegion> regions = new ArrayList<ReplacedTextRegion>();
-    private ArrayList<BasedSequence> replacedSegments = new ArrayList<BasedSequence>();
+    private ArrayList<ReplacedTextRegion> regions = new ArrayList<>();
+    private ArrayList<BasedSequence> replacedSegments = new ArrayList<>();
     private int replacedLength = 0;
     private BasedSequence replacedSequence = null;
 

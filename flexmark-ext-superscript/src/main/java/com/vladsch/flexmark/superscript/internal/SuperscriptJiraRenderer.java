@@ -18,8 +18,8 @@ public class SuperscriptJiraRenderer implements NodeRenderer {
 
     @Override
     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
-        Set<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
-        set.add(new NodeRenderingHandler<Superscript>(Superscript.class, this::render));
+        Set<NodeRenderingHandler<?>> set = new HashSet<>();
+        set.add(new NodeRenderingHandler<>(Superscript.class, this::render));
         return set;
     }
 

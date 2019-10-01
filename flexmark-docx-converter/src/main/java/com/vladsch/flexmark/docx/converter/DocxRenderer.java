@@ -133,7 +133,7 @@ public class DocxRenderer implements IRender {
     // internal stuff
     public static final String EMOJI_RESOURCE_PREFIX = "emoji:";
 
-    public static final DataKey<String> DOC_EMOJI_ROOT_IMAGE_PATH = new DataKey<String>("DOC_EMOJI_ROOT_IMAGE_PATH", options -> {
+    public static final DataKey<String> DOC_EMOJI_ROOT_IMAGE_PATH = new DataKey<>("DOC_EMOJI_ROOT_IMAGE_PATH", options -> {
         if (options != null && options.contains(EmojiExtension.ROOT_IMAGE_PATH)) {
             return options.get(EmojiExtension.ROOT_IMAGE_PATH);
         }
@@ -155,7 +155,7 @@ public class DocxRenderer implements IRender {
         this.options = new DataSet(builder);
         this.htmlIdGeneratorFactory = builder.htmlIdGeneratorFactory;
         //this.rendererOptions = new DocxRendererOptions(this.options);
-        this.nodeFormatterFactories = new ArrayList<NodeDocxRendererFactory>(builder.nodeDocxRendererFactories.size() + 1);
+        this.nodeFormatterFactories = new ArrayList<>(builder.nodeDocxRendererFactories.size() + 1);
         this.nodeFormatterFactories.addAll(builder.nodeDocxRendererFactories);
 
         // Add as last. This means clients can override the rendering of core nodes if they want.
@@ -322,9 +322,9 @@ public class DocxRenderer implements IRender {
      * Builder for configuring an {@link DocxRenderer}. See methods for default configuration.
      */
     public static class Builder extends BuilderBase<Builder> implements RendererBuilder {
-        List<AttributeProviderFactory> attributeProviderFactories = new ArrayList<AttributeProviderFactory>();
-        List<NodeDocxRendererFactory> nodeDocxRendererFactories = new ArrayList<NodeDocxRendererFactory>();
-        List<LinkResolverFactory> linkResolverFactories = new ArrayList<LinkResolverFactory>();
+        List<AttributeProviderFactory> attributeProviderFactories = new ArrayList<>();
+        List<NodeDocxRendererFactory> nodeDocxRendererFactories = new ArrayList<>();
+        List<LinkResolverFactory> linkResolverFactories = new ArrayList<>();
         HeaderIdGeneratorFactory htmlIdGeneratorFactory = null;
 
         public Builder() {
@@ -501,7 +501,7 @@ public class DocxRenderer implements IRender {
         private DocxRendererPhase phase;
         Node renderingNode;
         private final LinkResolver[] myLinkResolvers;
-        private final HashMap<LinkType, HashMap<String, ResolvedLink>> resolvedLinkMap = new HashMap<LinkType, HashMap<String, ResolvedLink>>();
+        private final HashMap<LinkType, HashMap<String, ResolvedLink>> resolvedLinkMap = new HashMap<>();
         private final AttributeProvider[] myAttributeProviders;
         private final HtmlIdGenerator htmlIdGenerator;
         //private final Node firstHeadingNode;
@@ -514,10 +514,10 @@ public class DocxRenderer implements IRender {
             super(out, new ScopedDataSet(document, options));
             rendererOptions = this.myRendererOptions;
             this.document = document;
-            this.renderers = new HashMap<Class<?>, NodeDocxRendererHandler>(32);
-            this.renderingPhases = new HashSet<DocxRendererPhase>(DocxRendererPhase.values().length);
-            Set<Class> collectNodeTypes = new HashSet<Class>(100);
-            this.phasedFormatters = new ArrayList<PhasedNodeDocxRenderer>(nodeFormatterFactories.size());
+            this.renderers = new HashMap<>(32);
+            this.renderingPhases = new HashSet<>(DocxRendererPhase.values().length);
+            Set<Class> collectNodeTypes = new HashSet<>(100);
+            this.phasedFormatters = new ArrayList<>(nodeFormatterFactories.size());
             Boolean defaultLinkResolver = DEFAULT_LINK_RESOLVER.getFrom(options);
             this.myLinkResolvers = new LinkResolver[linkResolverFactories.size() + (defaultLinkResolver ? 1 : 0)];
             this.htmlIdGenerator = htmlIdGeneratorFactory != null ? htmlIdGeneratorFactory.create(this)
@@ -740,7 +740,7 @@ public class DocxRenderer implements IRender {
 
         @Override
         public ResolvedLink resolveLink(LinkType linkType, CharSequence url, Attributes attributes, Boolean urlEncode) {
-            HashMap<String, ResolvedLink> resolvedLinks = resolvedLinkMap.computeIfAbsent(linkType, k -> new HashMap<String, ResolvedLink>());
+            HashMap<String, ResolvedLink> resolvedLinks = resolvedLinkMap.computeIfAbsent(linkType, k -> new HashMap<>());
 
             String urlSeq = String.valueOf(url);
             ResolvedLink resolvedLink = resolvedLinks.get(urlSeq);

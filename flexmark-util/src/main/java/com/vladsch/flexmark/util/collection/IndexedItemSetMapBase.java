@@ -13,7 +13,7 @@ public abstract class IndexedItemSetMapBase<K, S, M> implements IndexedItemSetMa
     }
 
     public IndexedItemSetMapBase(int capacity) {
-        this.myBag = new HashMap<K, S>();
+        this.myBag = new HashMap<>();
     }
 
     @Override

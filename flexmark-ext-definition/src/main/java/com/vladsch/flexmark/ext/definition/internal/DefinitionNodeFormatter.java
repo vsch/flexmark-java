@@ -34,10 +34,10 @@ public class DefinitionNodeFormatter implements NodeFormatter {
 
     @Override
     public Set<NodeFormattingHandler<?>> getNodeFormattingHandlers() {
-        return new HashSet<NodeFormattingHandler<?>>(Arrays.asList(
-                new NodeFormattingHandler<DefinitionList>(DefinitionList.class, DefinitionNodeFormatter.this::render),
-                new NodeFormattingHandler<DefinitionTerm>(DefinitionTerm.class, DefinitionNodeFormatter.this::render),
-                new NodeFormattingHandler<DefinitionItem>(DefinitionItem.class, DefinitionNodeFormatter.this::render)
+        return new HashSet<>(Arrays.asList(
+                new NodeFormattingHandler<>(DefinitionList.class, DefinitionNodeFormatter.this::render),
+                new NodeFormattingHandler<>(DefinitionTerm.class, DefinitionNodeFormatter.this::render),
+                new NodeFormattingHandler<>(DefinitionItem.class, DefinitionNodeFormatter.this::render)
         ));
     }
 

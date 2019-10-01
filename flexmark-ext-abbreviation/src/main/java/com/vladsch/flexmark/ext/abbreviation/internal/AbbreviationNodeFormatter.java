@@ -14,8 +14,8 @@ import com.vladsch.flexmark.util.format.options.ElementPlacementSort;
 import java.util.*;
 
 public class AbbreviationNodeFormatter extends NodeRepositoryFormatter<AbbreviationRepository, AbbreviationBlock, Abbreviation> {
-    public static final DataKey<Map<String, String>> ABBREVIATION_TRANSLATION_MAP = new DataKey<Map<String, String>>("ABBREVIATION_TRANSLATION_MAP", new HashMap<String, String>()); //
-    public static final DataKey<Map<String, String>> ABBREVIATION_UNIQUIFICATION_MAP = new DataKey<Map<String, String>>("ABBREVIATION_UNIQUIFICATION_MAP", new HashMap<String, String>()); // uniquified references
+    public static final DataKey<Map<String, String>> ABBREVIATION_TRANSLATION_MAP = new DataKey<>("ABBREVIATION_TRANSLATION_MAP", new HashMap<>()); //
+    public static final DataKey<Map<String, String>> ABBREVIATION_UNIQUIFICATION_MAP = new DataKey<>("ABBREVIATION_UNIQUIFICATION_MAP", new HashMap<>()); // uniquified references
     private final FormatOptions options;
     private final boolean transformUnderscores;
     private final boolean makeMergedAbbreviationsUnique;
@@ -72,9 +72,9 @@ public class AbbreviationNodeFormatter extends NodeRepositoryFormatter<Abbreviat
 
     @Override
     public Set<NodeFormattingHandler<?>> getNodeFormattingHandlers() {
-        return new HashSet<NodeFormattingHandler<? extends Node>>(Arrays.asList(
-                new NodeFormattingHandler<Abbreviation>(Abbreviation.class, AbbreviationNodeFormatter.this::render),
-                new NodeFormattingHandler<AbbreviationBlock>(AbbreviationBlock.class, AbbreviationNodeFormatter.this::render)
+        return new HashSet<>(Arrays.asList(
+                new NodeFormattingHandler<>(Abbreviation.class, AbbreviationNodeFormatter.this::render),
+                new NodeFormattingHandler<>(AbbreviationBlock.class, AbbreviationNodeFormatter.this::render)
         ));
     }
 
@@ -82,7 +82,7 @@ public class AbbreviationNodeFormatter extends NodeRepositoryFormatter<Abbreviat
     public Set<Class<?>> getNodeClasses() {
         if (options.abbreviationsPlacement != ElementPlacement.AS_IS && options.abbreviationsSort != ElementPlacementSort.SORT_UNUSED_LAST) return null;
         // noinspection ArraysAsListWithZeroOrOneArgument
-        return new HashSet<Class<?>>(Arrays.asList(
+        return new HashSet<>(Arrays.asList(
                 Abbreviation.class
         ));
     }

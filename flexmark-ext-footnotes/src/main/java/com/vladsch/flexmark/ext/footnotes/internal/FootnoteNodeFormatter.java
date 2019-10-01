@@ -12,8 +12,8 @@ import com.vladsch.flexmark.util.format.options.ElementPlacementSort;
 import java.util.*;
 
 public class FootnoteNodeFormatter extends NodeRepositoryFormatter<FootnoteRepository, FootnoteBlock, Footnote> {
-    public static final DataKey<Map<String, String>> FOOTNOTE_TRANSLATION_MAP = new DataKey<Map<String, String>>("FOOTNOTE_TRANSLATION_MAP", new HashMap<String, String>()); // translated references
-    public static final DataKey<Map<String, String>> FOOTNOTE_UNIQUIFICATION_MAP = new DataKey<Map<String, String>>("FOOTNOTE_UNIQUIFICATION_MAP", new HashMap<String, String>()); // uniquified references
+    public static final DataKey<Map<String, String>> FOOTNOTE_TRANSLATION_MAP = new DataKey<>("FOOTNOTE_TRANSLATION_MAP", new HashMap<>()); // translated references
+    public static final DataKey<Map<String, String>> FOOTNOTE_UNIQUIFICATION_MAP = new DataKey<>("FOOTNOTE_UNIQUIFICATION_MAP", new HashMap<>()); // uniquified references
     private final FootnoteFormatOptions options;
 
     public FootnoteNodeFormatter(DataHolder options) {
@@ -49,9 +49,9 @@ public class FootnoteNodeFormatter extends NodeRepositoryFormatter<FootnoteRepos
 
     @Override
     public Set<NodeFormattingHandler<?>> getNodeFormattingHandlers() {
-        return new HashSet<NodeFormattingHandler<?>>(Arrays.asList(
-                new NodeFormattingHandler<Footnote>(Footnote.class, FootnoteNodeFormatter.this::render),
-                new NodeFormattingHandler<FootnoteBlock>(FootnoteBlock.class, FootnoteNodeFormatter.this::render)
+        return new HashSet<>(Arrays.asList(
+                new NodeFormattingHandler<>(Footnote.class, FootnoteNodeFormatter.this::render),
+                new NodeFormattingHandler<>(FootnoteBlock.class, FootnoteNodeFormatter.this::render)
         ));
     }
 
@@ -59,7 +59,7 @@ public class FootnoteNodeFormatter extends NodeRepositoryFormatter<FootnoteRepos
     public Set<Class<?>> getNodeClasses() {
         if (options.footnotePlacement != ElementPlacement.AS_IS && options.footnoteSort != ElementPlacementSort.SORT_UNUSED_LAST) return null;
         // noinspection ArraysAsListWithZeroOrOneArgument
-        return new HashSet<Class<?>>(Arrays.asList(
+        return new HashSet<>(Arrays.asList(
                 Footnote.class
         ));
     }

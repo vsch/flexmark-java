@@ -23,10 +23,10 @@ public class DefinitionNodeRenderer implements NodeRenderer {
 
     @Override
     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
-        HashSet<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
-        set.add(new NodeRenderingHandler<DefinitionList>(DefinitionList.class, this::render));
-        set.add(new NodeRenderingHandler<DefinitionTerm>(DefinitionTerm.class, this::render));
-        set.add(new NodeRenderingHandler<DefinitionItem>(DefinitionItem.class, this::render));
+        HashSet<NodeRenderingHandler<?>> set = new HashSet<>();
+        set.add(new NodeRenderingHandler<>(DefinitionList.class, this::render));
+        set.add(new NodeRenderingHandler<>(DefinitionTerm.class, this::render));
+        set.add(new NodeRenderingHandler<>(DefinitionItem.class, this::render));
 
         return set;
     }

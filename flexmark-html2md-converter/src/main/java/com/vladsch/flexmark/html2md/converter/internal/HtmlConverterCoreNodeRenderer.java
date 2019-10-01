@@ -49,8 +49,8 @@ public class HtmlConverterCoreNodeRenderer implements PhasedHtmlNodeRenderer {
     public HtmlConverterCoreNodeRenderer(DataHolder options) {
         myHtmlConverterOptions = new HtmlConverterOptions(options);
 
-        myAbbreviations = new HashMap<String, String>();
-        myMacrosMap = new HashMap<String, String>();
+        myAbbreviations = new HashMap<>();
+        myMacrosMap = new HashMap<>();
     }
 
     @Override
@@ -63,61 +63,61 @@ public class HtmlConverterCoreNodeRenderer implements PhasedHtmlNodeRenderer {
 
     @Override
     public Set<HtmlNodeRendererHandler<?>> getHtmlNodeRendererHandlers() {
-        HashSet<HtmlNodeRendererHandler<? extends Node>> result = new HashSet<HtmlNodeRendererHandler<? extends Node>>(Arrays.asList(
+        HashSet<HtmlNodeRendererHandler<? extends Node>> result = new HashSet<>(Arrays.asList(
                 // Generic unknown node formatter
-                new HtmlNodeRendererHandler<Comment>(FlexmarkHtmlConverter.COMMENT_NODE, Comment.class, this::processComment),
-                new HtmlNodeRendererHandler<Element>(FlexmarkHtmlConverter.A_NODE, Element.class, this::processA),
-                new HtmlNodeRendererHandler<Element>(FlexmarkHtmlConverter.ABBR_NODE, Element.class, this::processAbbr),
-                new HtmlNodeRendererHandler<Element>(FlexmarkHtmlConverter.ASIDE_NODE, Element.class, this::processAside),
-                new HtmlNodeRendererHandler<Element>(FlexmarkHtmlConverter.B_NODE, Element.class, this::processStrong),
-                new HtmlNodeRendererHandler<Element>(FlexmarkHtmlConverter.BLOCKQUOTE_NODE, Element.class, this::processBlockQuote),
-                new HtmlNodeRendererHandler<Element>(FlexmarkHtmlConverter.BR_NODE, Element.class, this::processBr),
-                new HtmlNodeRendererHandler<Element>(FlexmarkHtmlConverter.CODE_NODE, Element.class, this::processCode),
-                new HtmlNodeRendererHandler<Element>(FlexmarkHtmlConverter.DEL_NODE, Element.class, this::processDel),
-                new HtmlNodeRendererHandler<Element>(FlexmarkHtmlConverter.DIV_NODE, Element.class, this::processDiv),
-                new HtmlNodeRendererHandler<Element>(FlexmarkHtmlConverter.DL_NODE, Element.class, this::processDl),
-                new HtmlNodeRendererHandler<Element>(FlexmarkHtmlConverter.EM_NODE, Element.class, this::processEmphasis),
-                new HtmlNodeRendererHandler<Element>(FlexmarkHtmlConverter.EMOJI_NODE, Element.class, this::processEmoji),
-                new HtmlNodeRendererHandler<Element>(FlexmarkHtmlConverter.H1_NODE, Element.class, this::processHeading),
-                new HtmlNodeRendererHandler<Element>(FlexmarkHtmlConverter.H2_NODE, Element.class, this::processHeading),
-                new HtmlNodeRendererHandler<Element>(FlexmarkHtmlConverter.H3_NODE, Element.class, this::processHeading),
-                new HtmlNodeRendererHandler<Element>(FlexmarkHtmlConverter.H4_NODE, Element.class, this::processHeading),
-                new HtmlNodeRendererHandler<Element>(FlexmarkHtmlConverter.H5_NODE, Element.class, this::processHeading),
-                new HtmlNodeRendererHandler<Element>(FlexmarkHtmlConverter.H6_NODE, Element.class, this::processHeading),
-                new HtmlNodeRendererHandler<Element>(FlexmarkHtmlConverter.HR_NODE, Element.class, this::processHr),
-                new HtmlNodeRendererHandler<Element>(FlexmarkHtmlConverter.I_NODE, Element.class, this::processEmphasis),
-                new HtmlNodeRendererHandler<Element>(FlexmarkHtmlConverter.IMG_NODE, Element.class, this::processImg),
-                new HtmlNodeRendererHandler<Element>(FlexmarkHtmlConverter.INPUT_NODE, Element.class, this::processInput),
-                new HtmlNodeRendererHandler<Element>(FlexmarkHtmlConverter.INS_NODE, Element.class, this::processIns),
-                new HtmlNodeRendererHandler<Element>(FlexmarkHtmlConverter.LI_NODE, Element.class, this::processLi),
-                new HtmlNodeRendererHandler<Element>(FlexmarkHtmlConverter.MATH_NODE, Element.class, this::processMath),
-                new HtmlNodeRendererHandler<Element>(FlexmarkHtmlConverter.OL_NODE, Element.class, this::processOl),
-                new HtmlNodeRendererHandler<Element>(FlexmarkHtmlConverter.P_NODE, Element.class, this::processP),
-                new HtmlNodeRendererHandler<Element>(FlexmarkHtmlConverter.PRE_NODE, Element.class, this::processPre),
-                new HtmlNodeRendererHandler<Element>(FlexmarkHtmlConverter.SPAN_NODE, Element.class, this::processSpan),
-                new HtmlNodeRendererHandler<Element>(FlexmarkHtmlConverter.STRIKE_NODE, Element.class, this::processDel),
-                new HtmlNodeRendererHandler<Element>(FlexmarkHtmlConverter.STRONG_NODE, Element.class, this::processStrong),
-                new HtmlNodeRendererHandler<Element>(FlexmarkHtmlConverter.SUB_NODE, Element.class, this::processSub),
-                new HtmlNodeRendererHandler<Element>(FlexmarkHtmlConverter.SUP_NODE, Element.class, this::processSup),
-                new HtmlNodeRendererHandler<Element>(FlexmarkHtmlConverter.SVG_NODE, Element.class, this::processSvg),
-                new HtmlNodeRendererHandler<Element>(FlexmarkHtmlConverter.TABLE_NODE, Element.class, this::processTable),
-                new HtmlNodeRendererHandler<Element>(FlexmarkHtmlConverter.U_NODE, Element.class, this::processIns),
-                new HtmlNodeRendererHandler<Element>(FlexmarkHtmlConverter.UL_NODE, Element.class, this::processUl),
-                new HtmlNodeRendererHandler<TextNode>(FlexmarkHtmlConverter.TEXT_NODE, TextNode.class, this::processText),
+                new HtmlNodeRendererHandler<>(FlexmarkHtmlConverter.COMMENT_NODE, Comment.class, this::processComment),
+                new HtmlNodeRendererHandler<>(FlexmarkHtmlConverter.A_NODE, Element.class, this::processA),
+                new HtmlNodeRendererHandler<>(FlexmarkHtmlConverter.ABBR_NODE, Element.class, this::processAbbr),
+                new HtmlNodeRendererHandler<>(FlexmarkHtmlConverter.ASIDE_NODE, Element.class, this::processAside),
+                new HtmlNodeRendererHandler<>(FlexmarkHtmlConverter.B_NODE, Element.class, this::processStrong),
+                new HtmlNodeRendererHandler<>(FlexmarkHtmlConverter.BLOCKQUOTE_NODE, Element.class, this::processBlockQuote),
+                new HtmlNodeRendererHandler<>(FlexmarkHtmlConverter.BR_NODE, Element.class, this::processBr),
+                new HtmlNodeRendererHandler<>(FlexmarkHtmlConverter.CODE_NODE, Element.class, this::processCode),
+                new HtmlNodeRendererHandler<>(FlexmarkHtmlConverter.DEL_NODE, Element.class, this::processDel),
+                new HtmlNodeRendererHandler<>(FlexmarkHtmlConverter.DIV_NODE, Element.class, this::processDiv),
+                new HtmlNodeRendererHandler<>(FlexmarkHtmlConverter.DL_NODE, Element.class, this::processDl),
+                new HtmlNodeRendererHandler<>(FlexmarkHtmlConverter.EM_NODE, Element.class, this::processEmphasis),
+                new HtmlNodeRendererHandler<>(FlexmarkHtmlConverter.EMOJI_NODE, Element.class, this::processEmoji),
+                new HtmlNodeRendererHandler<>(FlexmarkHtmlConverter.H1_NODE, Element.class, this::processHeading),
+                new HtmlNodeRendererHandler<>(FlexmarkHtmlConverter.H2_NODE, Element.class, this::processHeading),
+                new HtmlNodeRendererHandler<>(FlexmarkHtmlConverter.H3_NODE, Element.class, this::processHeading),
+                new HtmlNodeRendererHandler<>(FlexmarkHtmlConverter.H4_NODE, Element.class, this::processHeading),
+                new HtmlNodeRendererHandler<>(FlexmarkHtmlConverter.H5_NODE, Element.class, this::processHeading),
+                new HtmlNodeRendererHandler<>(FlexmarkHtmlConverter.H6_NODE, Element.class, this::processHeading),
+                new HtmlNodeRendererHandler<>(FlexmarkHtmlConverter.HR_NODE, Element.class, this::processHr),
+                new HtmlNodeRendererHandler<>(FlexmarkHtmlConverter.I_NODE, Element.class, this::processEmphasis),
+                new HtmlNodeRendererHandler<>(FlexmarkHtmlConverter.IMG_NODE, Element.class, this::processImg),
+                new HtmlNodeRendererHandler<>(FlexmarkHtmlConverter.INPUT_NODE, Element.class, this::processInput),
+                new HtmlNodeRendererHandler<>(FlexmarkHtmlConverter.INS_NODE, Element.class, this::processIns),
+                new HtmlNodeRendererHandler<>(FlexmarkHtmlConverter.LI_NODE, Element.class, this::processLi),
+                new HtmlNodeRendererHandler<>(FlexmarkHtmlConverter.MATH_NODE, Element.class, this::processMath),
+                new HtmlNodeRendererHandler<>(FlexmarkHtmlConverter.OL_NODE, Element.class, this::processOl),
+                new HtmlNodeRendererHandler<>(FlexmarkHtmlConverter.P_NODE, Element.class, this::processP),
+                new HtmlNodeRendererHandler<>(FlexmarkHtmlConverter.PRE_NODE, Element.class, this::processPre),
+                new HtmlNodeRendererHandler<>(FlexmarkHtmlConverter.SPAN_NODE, Element.class, this::processSpan),
+                new HtmlNodeRendererHandler<>(FlexmarkHtmlConverter.STRIKE_NODE, Element.class, this::processDel),
+                new HtmlNodeRendererHandler<>(FlexmarkHtmlConverter.STRONG_NODE, Element.class, this::processStrong),
+                new HtmlNodeRendererHandler<>(FlexmarkHtmlConverter.SUB_NODE, Element.class, this::processSub),
+                new HtmlNodeRendererHandler<>(FlexmarkHtmlConverter.SUP_NODE, Element.class, this::processSup),
+                new HtmlNodeRendererHandler<>(FlexmarkHtmlConverter.SVG_NODE, Element.class, this::processSvg),
+                new HtmlNodeRendererHandler<>(FlexmarkHtmlConverter.TABLE_NODE, Element.class, this::processTable),
+                new HtmlNodeRendererHandler<>(FlexmarkHtmlConverter.U_NODE, Element.class, this::processIns),
+                new HtmlNodeRendererHandler<>(FlexmarkHtmlConverter.UL_NODE, Element.class, this::processUl),
+                new HtmlNodeRendererHandler<>(FlexmarkHtmlConverter.TEXT_NODE, TextNode.class, this::processText),
 
-                new HtmlNodeRendererHandler<Node>(FlexmarkHtmlConverter.DEFAULT_NODE, Node.class, this::processDefault)
+                new HtmlNodeRendererHandler<>(FlexmarkHtmlConverter.DEFAULT_NODE, Node.class, this::processDefault)
         ));
 
         // add wrapped and unwrapped handlers
         if (myHtmlConverterOptions.unwrappedTags.length > 0) {
             for (String tag : myHtmlConverterOptions.unwrappedTags) {
-                result.add(new HtmlNodeRendererHandler<Node>(tag, Node.class, this::processUnwrapped));
+                result.add(new HtmlNodeRendererHandler<>(tag, Node.class, this::processUnwrapped));
             }
         }
 
         if (myHtmlConverterOptions.wrappedTags.length > 0) {
             for (String tag : myHtmlConverterOptions.wrappedTags) {
-                result.add(new HtmlNodeRendererHandler<Node>(tag, Node.class, this::processWrapped));
+                result.add(new HtmlNodeRendererHandler<>(tag, Node.class, this::processWrapped));
             }
         }
 

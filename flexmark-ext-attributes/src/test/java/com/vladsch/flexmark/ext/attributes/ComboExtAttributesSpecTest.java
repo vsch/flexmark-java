@@ -37,7 +37,7 @@ public class ComboExtAttributesSpecTest extends ComboSpecTestCase {
                     TablesExtension.create()
             ));
 
-    private static final Map<String, DataHolder> optionsMap = new HashMap<String, DataHolder>();
+    private static final Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
         optionsMap.put("anchors", new MutableDataSet()
                 .set(Parser.EXTENSIONS, Arrays.asList(AnchorLinkExtension.create(), AttributesExtension.create(), TocExtension.create(), EmojiExtension.create()))

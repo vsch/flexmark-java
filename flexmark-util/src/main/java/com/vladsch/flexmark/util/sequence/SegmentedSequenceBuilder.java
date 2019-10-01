@@ -11,12 +11,12 @@ public final class SegmentedSequenceBuilder {
     private final BasedSequence base;
 
     public SegmentedSequenceBuilder(BasedSequence base) {
-        this.segments = new ArrayList<BasedSequence>();
+        this.segments = new ArrayList<>();
         this.base = base;
     }
 
     public SegmentedSequenceBuilder(BasedSequence base, int initialCapacity) {
-        this.segments = new ArrayList<BasedSequence>(initialCapacity);
+        this.segments = new ArrayList<>(initialCapacity);
         this.base = base;
     }
 

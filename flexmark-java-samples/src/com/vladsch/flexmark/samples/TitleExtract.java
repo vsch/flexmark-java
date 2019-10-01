@@ -49,9 +49,9 @@ public class TitleExtract {
 
         @Override
         public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
-            return new HashSet<NodeRenderingHandler<? extends Node>>(Arrays.asList(
-                    new NodeRenderingHandler<AnchorLink>(AnchorLink.class, this::render),
-                    new NodeRenderingHandler<Heading>(Heading.class, this::render)
+            return new HashSet<>(Arrays.asList(
+                    new NodeRenderingHandler<>(AnchorLink.class, this::render),
+                    new NodeRenderingHandler<>(Heading.class, this::render)
             ));
         }
 
@@ -107,7 +107,7 @@ public class TitleExtract {
 
             @Override
             public Set<Class<? extends NodeRendererFactory>> getDelegates() {
-                Set<Class<? extends NodeRendererFactory>> delegates = new HashSet<Class<? extends NodeRendererFactory>>();
+                Set<Class<? extends NodeRendererFactory>> delegates = new HashSet<>();
                 delegates.add(AnchorLinkNodeRenderer.Factory.class);
                 return delegates;
             }

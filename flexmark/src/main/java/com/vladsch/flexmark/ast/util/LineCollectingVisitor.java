@@ -51,8 +51,8 @@ public class LineCollectingVisitor {
     }
 
     public void collect(Node node) {
-        myLines = new ArrayList<Range>();
-        myEOLs = new ArrayList<Integer>();
+        myLines = new ArrayList<>();
+        myEOLs = new ArrayList<>();
         myStartOffset = node.getStartOffset();
         myEndOffset = node.getEndOffset();
         myVisitor.visit(node);

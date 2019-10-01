@@ -13,7 +13,7 @@ public interface BasedSequence extends RichCharSequence<BasedSequence> {
     BasedSequence EMPTY = new EmptyBasedSequence();
     BasedSequence EOL = CharSubSequence.of(RichCharSequence.EOL);
     BasedSequence SPACE = CharSubSequence.of(RichCharSequence.SPACE);
-    List<BasedSequence> EMPTY_LIST = new ArrayList<BasedSequence>();
+    List<BasedSequence> EMPTY_LIST = new ArrayList<>();
     BasedSequence[] EMPTY_ARRAY = new BasedSequence[0];
     BasedSequence[] EMPTY_SEGMENTS = new BasedSequence[0];
 

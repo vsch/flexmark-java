@@ -14,9 +14,9 @@ import java.util.HashMap;
 public class EmojiShortcuts {
     public static final String gitHubUrlPrefix = EmojiReference.githubUrl;
 
-    private static final HashMap<String, Emoji> emojiShortcuts = new HashMap<String, Emoji>();
-    private static final HashMap<String, Emoji> emojiURIs = new HashMap<String, Emoji>();
-    private static final HashMap<Emoji, String> emojiUnicodeChars = new HashMap<Emoji, String>();
+    private static final HashMap<String, Emoji> emojiShortcuts = new HashMap<>();
+    private static final HashMap<String, Emoji> emojiURIs = new HashMap<>();
+    private static final HashMap<Emoji, String> emojiUnicodeChars = new HashMap<>();
 
     synchronized public static String getUnicodeChars(Emoji emoji) {
         if (emoji == null || emoji.unicodeChars == null) {

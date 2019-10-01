@@ -20,7 +20,7 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
     private static int[] EMPTY_INDICES = { };
     private static final Map<Character, String> visibleSpacesMap;
     static {
-        HashMap<Character, String> charMap = new HashMap<Character, String>();
+        HashMap<Character, String> charMap = new HashMap<>();
         visibleSpacesMap = charMap;
         charMap.put('\n', "\\n");
         charMap.put('\r', "\\r");
@@ -1359,7 +1359,7 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
         int includeDelimiter = !includeDelimiterParts && (flags & SPLIT_INCLUDE_DELIMS) != 0 ? 1 : 0;
         boolean trimParts = (flags & SPLIT_TRIM_PARTS) != 0;
         boolean skipEmpty = (flags & SPLIT_SKIP_EMPTY) != 0;
-        ArrayList<T> items = new ArrayList<T>();
+        ArrayList<T> items = new ArrayList<>();
 
         int lastPos = 0;
         int length = length();
@@ -1405,7 +1405,7 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
         int includeDelimiter = !includeDelimiterParts && (flags & SPLIT_INCLUDE_DELIMS) != 0 ? delimiter.length() : 0;
         boolean trimParts = (flags & SPLIT_TRIM_PARTS) != 0;
         boolean skipEmpty = (flags & SPLIT_SKIP_EMPTY) != 0;
-        ArrayList<T> items = new ArrayList<T>();
+        ArrayList<T> items = new ArrayList<>();
 
         int lastPos = 0;
         int length = length();

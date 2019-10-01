@@ -20,8 +20,8 @@ public class JekyllFrontMatterNodeRenderer implements NodeRenderer {
 
     @Override
     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
-        HashSet<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
-        set.add(new NodeRenderingHandler<JekyllFrontMatterBlock>(JekyllFrontMatterBlock.class, this::render));
+        HashSet<NodeRenderingHandler<?>> set = new HashSet<>();
+        set.add(new NodeRenderingHandler<>(JekyllFrontMatterBlock.class, this::render));
 
         return set;
     }

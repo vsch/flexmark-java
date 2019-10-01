@@ -38,7 +38,7 @@ public class TocOptionsParserTest extends ComboSpecTestCase {
     private static DataKey<TocOptions> TOC_OPTIONS = new DataKey<>("TOC_OPTIONS", TocOptions.DEFAULT);
     private static DataKey<Boolean> SIM_TOC = new DataKey<>("SIM_TOC", false);
 
-    private static final Map<String, DataHolder> optionsMap = new HashMap<String, DataHolder>();
+    private static final Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
         optionsMap.put("sim-toc", new MutableDataSet().set(SIM_TOC, true));
         //optionsMap.put("text-only", new MutableDataSet().set(SimTocExtension.HEADER_TEXT_ONLY, true));

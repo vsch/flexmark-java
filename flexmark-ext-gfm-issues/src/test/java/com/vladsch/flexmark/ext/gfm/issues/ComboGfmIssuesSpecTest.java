@@ -20,7 +20,7 @@ public class ComboGfmIssuesSpecTest extends ComboSpecTestCase {
             //.set(HtmlRenderer.PERCENT_ENCODE_URLS, true)
             .set(Parser.EXTENSIONS, Collections.singleton(GfmIssuesExtension.create()));
 
-    private static final Map<String, DataHolder> optionsMap = new HashMap<String, DataHolder>();
+    private static final Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
         optionsMap.put("src-pos", new MutableDataSet().set(HtmlRenderer.SOURCE_POSITION_ATTRIBUTE, "md-pos"));
         optionsMap.put("root", new MutableDataSet().set(GfmIssuesExtension.GIT_HUB_ISSUES_URL_ROOT, "https://github.com/vsch/flexmark-java/issues"));

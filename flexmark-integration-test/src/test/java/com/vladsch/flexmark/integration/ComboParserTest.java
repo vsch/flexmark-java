@@ -42,7 +42,7 @@ public class ComboParserTest extends ComboSpecTestCase {
                     StrikethroughExtension.create()
             ));
 
-    private static final Map<String, DataHolder> optionsMap = new HashMap<String, DataHolder>();
+    private static final Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
         optionsMap.put("gfm", new MutableDataSet()
                 .set(TablesExtension.COLUMN_SPANS, false)

@@ -21,9 +21,9 @@ public class ZzzzzzJiraRenderer implements NodeRenderer {
 
     @Override
     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
-        return new HashSet<NodeRenderingHandler<? extends Node>>(Arrays.asList(
-                new NodeRenderingHandler<Zzzzzz>(Zzzzzz.class, this::render),// zzzoptionszzz(CUSTOM_NODE)
-                new NodeRenderingHandler<ZzzzzzBlock>(ZzzzzzBlock.class, this::render)// zzzoptionszzz(CUSTOM_BLOCK_NODE)
+        return new HashSet<>(Arrays.asList(
+                new NodeRenderingHandler<>(Zzzzzz.class, this::render),// zzzoptionszzz(CUSTOM_NODE)
+                new NodeRenderingHandler<>(ZzzzzzBlock.class, this::render)// zzzoptionszzz(CUSTOM_BLOCK_NODE)
         ));
     }
 

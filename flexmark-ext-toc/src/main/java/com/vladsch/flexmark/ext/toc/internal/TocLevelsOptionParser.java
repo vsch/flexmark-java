@@ -23,7 +23,7 @@ public class TocLevelsOptionParser implements OptionParser<TocOptions> {
     public static final String KEY_OPTION_0_VALUE_1_TRUNCATED_TO_EMPTY_RANGE = "options.parser.toc-levels-option.truncated-to-empty";
     private final String myOptionName;
 
-    private static final Map<Integer, String> TOC_LEVELS_MAP = new HashMap<Integer, String>();
+    private static final Map<Integer, String> TOC_LEVELS_MAP = new HashMap<>();
     static {
         TOC_LEVELS_MAP.put(0x04, "2");
         TOC_LEVELS_MAP.put(0x0C, "3");
@@ -120,7 +120,7 @@ public class TocLevelsOptionParser implements OptionParser<TocOptions> {
 
         if (newLevels != 0) result = result.withLevels(newLevels);
 
-        return new Pair<TocOptions, List<ParsedOption<TocOptions>>>(result, (List<ParsedOption<TocOptions>>) Collections.<ParsedOption<TocOptions>>singletonList(new ParsedOption(optionText, this, parserParams.status, parserParams.messages)));
+        return new Pair<>(result, (List<ParsedOption<TocOptions>>) Collections.<ParsedOption<TocOptions>>singletonList(new ParsedOption(optionText, this, parserParams.status, parserParams.messages)));
     }
 
     @Override

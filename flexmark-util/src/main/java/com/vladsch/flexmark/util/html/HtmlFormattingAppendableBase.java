@@ -20,7 +20,7 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
     private boolean withAttributes = false;
     private boolean suppressOpenTagLine = false;
     private boolean suppressCloseTagLine = false;
-    private final Stack<String> myOpenTags = new Stack<String>();
+    private final Stack<String> myOpenTags = new Stack<>();
 
     public HtmlFormattingAppendableBase(LineFormattingAppendable other, boolean inheritIndent) {
         this.out = new LineFormattingAppendableImpl(other.getOptions());
@@ -226,7 +226,7 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
     public List<String> getOpenTagsAfterLast(CharSequence latestTag) {
         if (myOpenTags.isEmpty()) return Collections.EMPTY_LIST;
 
-        List<String> tagList = new ArrayList<String>(myOpenTags);
+        List<String> tagList = new ArrayList<>(myOpenTags);
         int iMax = tagList.size();
         int lastPos = iMax;
         String lastTag = String.valueOf(latestTag);

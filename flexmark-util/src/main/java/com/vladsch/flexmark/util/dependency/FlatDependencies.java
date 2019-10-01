@@ -8,7 +8,7 @@ public class FlatDependencies<T> extends ResolvedDependencies<FlatDependencyStag
 
     public FlatDependencies(List<FlatDependencyStage<T>> dependentStages) {
         super(dependentStages);
-        ArrayList<T> list = new ArrayList<T>();
+        ArrayList<T> list = new ArrayList<>();
         for (FlatDependencyStage<T> stage : dependentStages) {
             list.addAll(stage.getDependents());
         }

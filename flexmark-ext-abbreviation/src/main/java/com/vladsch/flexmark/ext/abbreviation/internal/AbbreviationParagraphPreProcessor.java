@@ -75,7 +75,7 @@ public class AbbreviationParagraphPreProcessor implements ParagraphPreProcessor 
 
             @Override
             public Set<Class<? extends ParagraphPreProcessorFactory>> getBeforeDependents() {
-                HashSet<Class<? extends ParagraphPreProcessorFactory>> set = new HashSet<Class<? extends ParagraphPreProcessorFactory>>();
+                HashSet<Class<? extends ParagraphPreProcessorFactory>> set = new HashSet<>();
                 set.add(ReferencePreProcessorFactory.class);
                 return set;
             }

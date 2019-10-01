@@ -45,7 +45,7 @@ class DelegatingNodeRendererFactoryWrapper implements Function<DataHolder, HtmlN
         if (myDelegates == null && nodeRenderers != null) {
             Set<Class<? extends HtmlNodeRendererFactory>> delegates = getDelegates();
             if (delegates != null) {
-                myDelegates = new HashSet<Class>();
+                myDelegates = new HashSet<>();
                 for (DelegatingNodeRendererFactoryWrapper factory : nodeRenderers) {
                     if (delegates.contains(factory.getFactory().getClass())) {
                         myDelegates.add(factory.getFactory().getClass());

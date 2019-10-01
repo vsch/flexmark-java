@@ -29,7 +29,7 @@ public class ZzzzzzParagraphPreProcessor implements ParagraphPreProcessor {
         pipeCharacters.set('|');
     }
 
-    private static HashMap<Character, CharacterNodeFactory> pipeNodeMap = new HashMap<Character, CharacterNodeFactory>();
+    private static HashMap<Character, CharacterNodeFactory> pipeNodeMap = new HashMap<>();
     static {
         pipeNodeMap.put('|', new CharacterNodeFactory() {
             @Override
@@ -80,7 +80,7 @@ public class ZzzzzzParagraphPreProcessor implements ParagraphPreProcessor {
 
             @Override
             public Set<Class<? extends ParagraphPreProcessorFactory>> getAfterDependents() {
-                HashSet<Class<? extends ParagraphPreProcessorFactory>> set = new HashSet<Class<? extends ParagraphPreProcessorFactory>>();
+                HashSet<Class<? extends ParagraphPreProcessorFactory>> set = new HashSet<>();
                 set.add(ReferencePreProcessorFactory.class);
                 return set;
             }

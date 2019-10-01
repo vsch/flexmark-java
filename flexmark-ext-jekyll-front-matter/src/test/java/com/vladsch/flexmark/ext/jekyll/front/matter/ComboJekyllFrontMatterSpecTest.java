@@ -35,7 +35,7 @@ public class ComboJekyllFrontMatterSpecTest extends ComboSpecTestCase {
             //.set(HtmlRenderer.PERCENT_ENCODE_URLS, true)
             .set(Parser.EXTENSIONS, Collections.singleton(JekyllFrontMatterExtension.create()));
 
-    private static final Map<String, DataHolder> optionsMap = new HashMap<String, DataHolder>();
+    private static final Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
         optionsMap.put("src-pos", new MutableDataSet().set(HtmlRenderer.SOURCE_POSITION_ATTRIBUTE, "md-pos"));
         //optionsMap.put("option1", new MutableDataSet().set(JekyllFrontMatterExtension.JEKYLL_FRONT_MATTER_OPTION1, true));

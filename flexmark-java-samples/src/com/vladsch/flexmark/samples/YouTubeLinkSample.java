@@ -94,8 +94,8 @@ public class YouTubeLinkSample {
 
         @Override
         public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
-            HashSet<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
-            set.add(new NodeRenderingHandler<YouTubeLink>(YouTubeLink.class, this::render));
+            HashSet<NodeRenderingHandler<?>> set = new HashSet<>();
+            set.add(new NodeRenderingHandler<>(YouTubeLink.class, this::render));
             return set;
         }
 

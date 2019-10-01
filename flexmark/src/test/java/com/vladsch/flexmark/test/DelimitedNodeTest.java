@@ -26,7 +26,7 @@ public class DelimitedNodeTest {
         Parser parser = Parser.builder().build();
         Node document = parser.parse(input);
 
-        final List<DelimitedNode> list = new ArrayList<DelimitedNode>();
+        final List<DelimitedNode> list = new ArrayList<>();
         NodeVisitor visitor = new NodeVisitor(
                 new VisitHandler<>(Emphasis.class, e -> list.add(e)),
                 new VisitHandler<>(StrongEmphasis.class, e -> list.add(e))

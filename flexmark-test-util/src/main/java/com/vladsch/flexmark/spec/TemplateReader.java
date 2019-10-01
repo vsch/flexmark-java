@@ -18,7 +18,7 @@ public class TemplateReader {
     protected StringBuilder source;
     protected int entryNumber = 0;
 
-    protected List<TemplateEntry> examples = new ArrayList<TemplateEntry>();
+    protected List<TemplateEntry> examples = new ArrayList<>();
 
     protected TemplateReader(InputStream stream) {
         this.inputStream = stream;
@@ -54,7 +54,7 @@ public class TemplateReader {
 
     public static List<String> readExamplesAsString(String resource, TemplateReaderFactory readerFactory) {
         List<TemplateEntry> examples = TemplateReader.readEntries(resource, readerFactory);
-        List<String> result = new ArrayList<String>();
+        List<String> result = new ArrayList<>();
         for (TemplateEntry example : examples) {
             result.add(example.getSource());
         }

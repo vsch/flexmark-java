@@ -36,8 +36,8 @@ public class TaskListNodeRenderer implements NodeRenderer {
 
     @Override
     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
-        HashSet<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
-        set.add(new NodeRenderingHandler<TaskListItem>(TaskListItem.class, TaskListNodeRenderer.this::render));
+        HashSet<NodeRenderingHandler<?>> set = new HashSet<>();
+        set.add(new NodeRenderingHandler<>(TaskListItem.class, TaskListNodeRenderer.this::render));
         return set;
     }
 

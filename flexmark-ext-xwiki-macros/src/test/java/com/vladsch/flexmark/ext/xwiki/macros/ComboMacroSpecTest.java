@@ -20,7 +20,7 @@ public class ComboMacroSpecTest extends ComboSpecTestCase {
             .set(MacroExtension.ENABLE_RENDERING, true)
             .set(Parser.EXTENSIONS, Collections.singleton(MacroExtension.create()));
 
-    private static final Map<String, DataHolder> optionsMap = new HashMap<String, DataHolder>();
+    private static final Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
         optionsMap.put("no-rendering", new MutableDataSet().set(MacroExtension.ENABLE_RENDERING, false));
         optionsMap.put("no-inlines", new MutableDataSet().set(MacroExtension.ENABLE_INLINE_MACROS, false));

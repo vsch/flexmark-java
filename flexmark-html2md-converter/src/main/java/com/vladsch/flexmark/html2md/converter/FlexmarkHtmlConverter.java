@@ -129,7 +129,7 @@ public class FlexmarkHtmlConverter {
     public static final DataKey<LinkConversion> EXT_INLINE_LINK = new DataKey<>("EXT_INLINE_LINK", LinkConversion.MARKDOWN_EXPLICIT);
     public static final DataKey<LinkConversion> EXT_INLINE_IMAGE = new DataKey<>("EXT_INLINE_IMAGE", LinkConversion.MARKDOWN_EXPLICIT);
     public static final DataKey<Ref<com.vladsch.flexmark.util.ast.Document>> FOR_DOCUMENT = new DataKey<>("FOR_DOCUMENT", new Ref<>((com.vladsch.flexmark.util.ast.Document) null));
-    public static final DataKey<? extends Map<String, String>> TYPOGRAPHIC_REPLACEMENT_MAP = new DataKey<>("TYPOGRAPHIC_REPLACEMENT_MAP", new HashMap<String, String>());
+    public static final DataKey<? extends Map<String, String>> TYPOGRAPHIC_REPLACEMENT_MAP = new DataKey<>("TYPOGRAPHIC_REPLACEMENT_MAP", new HashMap<>());
 
     /**
      * if true then will dump HTML tree of body element to console when using {@link #convert(String, Appendable)}(String)
@@ -196,7 +196,7 @@ public class FlexmarkHtmlConverter {
 
     public static String[] EXPLICIT_LINK_TEXT_TAGS = new String[] { IMG_NODE };
 
-    private static final Map<Object, CellAlignment> TABLE_CELL_ALIGNMENTS = new LinkedHashMap<Object, CellAlignment>();
+    private static final Map<Object, CellAlignment> TABLE_CELL_ALIGNMENTS = new LinkedHashMap<>();
     private static final String EMOJI_ALT_PREFIX = "emoji ";
     static {
         TABLE_CELL_ALIGNMENTS.put(Pattern.compile("\\bleft\\b"), CellAlignment.LEFT);
@@ -207,7 +207,7 @@ public class FlexmarkHtmlConverter {
         TABLE_CELL_ALIGNMENTS.put("text-right", CellAlignment.RIGHT);
     }
 
-    private static final Map<String, String> SPECIAL_CHARS_MAP = new HashMap<String, String>();
+    private static final Map<String, String> SPECIAL_CHARS_MAP = new HashMap<>();
     private static final String TYPOGRAPHIC_QUOTES_PIPED = "“|”|‘|’|«|»|&ldquo;|&rdquo;|&lsquo;|&rsquo;|&apos;|&laquo;|&raquo;";
     private static final String TYPOGRAPHIC_SMARTS_PIPED = "…|–|—|&hellip;|&endash;|&emdash;";
     static {
@@ -239,7 +239,7 @@ public class FlexmarkHtmlConverter {
     private static final Pattern BULLET_LIST = Pattern.compile("^([·])\\s*$");
     private static final Pattern ALPHA_NUMERAL = Pattern.compile("^[a-z]+|[A-Z]+$");
 
-    public static final DataKey<Map<Object, CellAlignment>> TABLE_CELL_ALIGNMENT_MAP = new DataKey<Map<Object, CellAlignment>>("TABLE_CELL_ALIGNMENT_MAP", TABLE_CELL_ALIGNMENTS);
+    public static final DataKey<Map<Object, CellAlignment>> TABLE_CELL_ALIGNMENT_MAP = new DataKey<>("TABLE_CELL_ALIGNMENT_MAP", TABLE_CELL_ALIGNMENTS);
 
     final List<HtmlNodeRendererFactory> nodeConverterFactories;
     final HtmlConverterOptions htmlConverterOptions;
@@ -252,11 +252,11 @@ public class FlexmarkHtmlConverter {
         this.builder = new Builder(builder); // take a copy to avoid after creation side effects
         this.options = new DataSet(builder);
         this.htmlConverterOptions = new HtmlConverterOptions(this.options);
-        this.nodeConverterFactories = new ArrayList<HtmlNodeRendererFactory>(builder.nodeRendererFactories.size() + 1);
+        this.nodeConverterFactories = new ArrayList<>(builder.nodeRendererFactories.size() + 1);
         this.nodeConverterFactories.addAll(builder.nodeRendererFactories);
 
         // resolve renderer dependencies
-        List<DelegatingNodeRendererFactoryWrapper> nodeRenderers = new ArrayList<DelegatingNodeRendererFactoryWrapper>(builder.nodeRendererFactories.size());
+        List<DelegatingNodeRendererFactoryWrapper> nodeRenderers = new ArrayList<>(builder.nodeRendererFactories.size());
 
         for (int i = builder.nodeRendererFactories.size() - 1; i >= 0; i--) {
             HtmlNodeRendererFactory nodeRendererFactory = builder.nodeRendererFactories.get(i);
@@ -405,8 +405,8 @@ public class FlexmarkHtmlConverter {
      * Builder for configuring an {@link FlexmarkHtmlConverter}. See methods for default configuration.
      */
     public static class Builder extends BuilderBase<Builder> {
-        List<HtmlNodeRendererFactory> nodeRendererFactories = new ArrayList<HtmlNodeRendererFactory>();
-        List<HtmlLinkResolverFactory> linkResolverFactories = new ArrayList<HtmlLinkResolverFactory>();
+        List<HtmlNodeRendererFactory> nodeRendererFactories = new ArrayList<>();
+        List<HtmlLinkResolverFactory> linkResolverFactories = new ArrayList<>();
         HeaderIdGeneratorFactory htmlIdGeneratorFactory = null;
 
         public Builder() {
@@ -544,7 +544,7 @@ public class FlexmarkHtmlConverter {
 
         public RendererDependencies(List<RendererDependencyStage> dependentStages) {
             super(dependentStages);
-            List<DelegatingNodeRendererFactoryWrapper> blockPreProcessorFactories = new ArrayList<DelegatingNodeRendererFactoryWrapper>();
+            List<DelegatingNodeRendererFactoryWrapper> blockPreProcessorFactories = new ArrayList<>();
             for (RendererDependencyStage stage : dependentStages) {
                 blockPreProcessorFactories.addAll(stage.dependents);
             }
@@ -592,7 +592,7 @@ public class FlexmarkHtmlConverter {
         private boolean myTrace;
         private boolean myInlineCode;
         private Parser myParser = null;
-        private HashMap<LinkType, HashMap<String, ResolvedLink>> resolvedLinkMap = new HashMap<LinkType, HashMap<String, ResolvedLink>>();
+        private HashMap<LinkType, HashMap<String, ResolvedLink>> resolvedLinkMap = new HashMap<>();
         private HtmlLinkResolver[] myHtmlLinkResolvers;
         private HashMap<String, Reference> myReferenceUrlToReferenceMap;  // map of URL to reference node
         private HashSet<Reference> myExternalReferences;  // map of URL to reference node
@@ -605,9 +605,9 @@ public class FlexmarkHtmlConverter {
         MainHtmlConverter(DataHolder options, HtmlMarkdownWriter out, Document document, DataHolder parentOptions) {
             super(out);
             this.myOptions = new ScopedDataSet(parentOptions, options);
-            this.renderers = new HashMap<String, HtmlNodeRendererHandler>(32);
-            this.renderingPhases = new HashSet<HtmlConverterPhase>(HtmlConverterPhase.values().length);
-            this.phasedFormatters = new ArrayList<PhasedHtmlNodeRenderer>(nodeConverterFactories.size());
+            this.renderers = new HashMap<>(32);
+            this.renderingPhases = new HashSet<>(HtmlConverterPhase.values().length);
+            this.phasedFormatters = new ArrayList<>(nodeConverterFactories.size());
             this.resolvedLinkMap = null;
             this.myHtmlLinkResolvers = new HtmlLinkResolver[linkResolverFactories.size()];
 
@@ -626,8 +626,8 @@ public class FlexmarkHtmlConverter {
             }
 
             //myTrace = true;
-            myStateStack = new Stack<HtmlConverterState>();
-            myReferenceUrlToReferenceMap = new HashMap<String, Reference>();
+            myStateStack = new Stack<>();
+            myReferenceUrlToReferenceMap = new HashMap<>();
             myExternalReferences = new HashSet<>();
             myState = null;
 

@@ -31,16 +31,16 @@ public class AdmonitionExtension implements Parser.ParserExtension, HtmlRenderer
     public static final DataKey<Boolean> WITH_SPACES_INTERRUPTS_ITEM_PARAGRAPH = new DataKey<>("ADMONITION.WITH_SPACES_INTERRUPTS_ITEM_PARAGRAPH", true);
     public static final DataKey<Boolean> ALLOW_LAZY_CONTINUATION = new DataKey<>("ADMONITION.ALLOW_LAZY_CONTINUATION", true);
     public static final DataKey<String> UNRESOLVED_QUALIFIER = new DataKey<>("ADMONITION.UNRESOLVED_QUALIFIER", "note");
-    public static final DataKey<Map<String, String>> QUALIFIER_TYPE_MAP = new DataKey<Map<String, String>>("ADMONITION.QUALIFIER_TYPE_MAP", getQualifierTypeValueFactory());
-    public static final DataKey<Map<String, String>> QUALIFIER_TITLE_MAP = new DataKey<Map<String, String>>("ADMONITION.QUALIFIER_TITLE_MAP", getQualifierTitleValueFactory());
-    public static final DataKey<Map<String, String>> TYPE_SVG_MAP = new DataKey<Map<String, String>>("ADMONITION.TYPE_SVG_MAP", getQualifierSvgValueFactory());
+    public static final DataKey<Map<String, String>> QUALIFIER_TYPE_MAP = new DataKey<>("ADMONITION.QUALIFIER_TYPE_MAP", getQualifierTypeValueFactory());
+    public static final DataKey<Map<String, String>> QUALIFIER_TITLE_MAP = new DataKey<>("ADMONITION.QUALIFIER_TITLE_MAP", getQualifierTitleValueFactory());
+    public static final DataKey<Map<String, String>> TYPE_SVG_MAP = new DataKey<>("ADMONITION.TYPE_SVG_MAP", getQualifierSvgValueFactory());
 
     private static DataValueFactory<Map<String, String>> getQualifierTypeValueFactory() {
         return value -> getQualifierTypeMap();
     }
 
     public static Map<String, String> getQualifierTypeMap() {
-        HashMap<String, String> infoSvgMap = new HashMap<String, String>();
+        HashMap<String, String> infoSvgMap = new HashMap<>();
         // qualifier type map
         infoSvgMap.put("abstract", "abstract");
         infoSvgMap.put("summary", "abstract");
@@ -91,7 +91,7 @@ public class AdmonitionExtension implements Parser.ParserExtension, HtmlRenderer
     }
 
     public static Map<String, String> getQualifierTitleMap() {
-        HashMap<String, String> infoTitleMap = new HashMap<String, String>();
+        HashMap<String, String> infoTitleMap = new HashMap<>();
         infoTitleMap.put("abstract", "Abstract");
         infoTitleMap.put("summary", "Summary");
         infoTitleMap.put("tldr", "TLDR");
@@ -141,7 +141,7 @@ public class AdmonitionExtension implements Parser.ParserExtension, HtmlRenderer
     }
 
     public static Map<String, String> getQualifierSvgValueMap() {
-        HashMap<String, String> typeSvgMap = new HashMap<String, String>();
+        HashMap<String, String> typeSvgMap = new HashMap<>();
         typeSvgMap.put("abstract", getInputStreamContent(AdmonitionExtension.class.getResourceAsStream("/images/adm-abstract.svg")));
         typeSvgMap.put("bug", getInputStreamContent(AdmonitionExtension.class.getResourceAsStream("/images/adm-bug.svg")));
         typeSvgMap.put("danger", getInputStreamContent(AdmonitionExtension.class.getResourceAsStream("/images/adm-danger.svg")));

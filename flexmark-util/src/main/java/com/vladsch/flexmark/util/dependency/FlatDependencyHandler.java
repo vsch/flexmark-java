@@ -10,7 +10,7 @@ public class FlatDependencyHandler<T extends Dependent<T>> extends DependencyHan
 
     @Override
     protected FlatDependencyStage<T> createStage(List<T> dependents) {
-        return new FlatDependencyStage<T>(dependents);
+        return new FlatDependencyStage<>(dependents);
     }
 
     @Override
@@ -21,11 +21,11 @@ public class FlatDependencyHandler<T extends Dependent<T>> extends DependencyHan
 
     @Override
     protected FlatDependencies<T> createResolvedDependencies(List<FlatDependencyStage<T>> stages) {
-        return new FlatDependencies<T>(stages);
+        return new FlatDependencies<>(stages);
     }
 
     public static <T extends Dependent<T>> List<T> computeDependencies(List<T> dependentsList) {
-        FlatDependencyHandler<T> resolver = new FlatDependencyHandler<T>();
+        FlatDependencyHandler<T> resolver = new FlatDependencyHandler<>();
         return resolver.resolvedDependencies(dependentsList);
     }
 }

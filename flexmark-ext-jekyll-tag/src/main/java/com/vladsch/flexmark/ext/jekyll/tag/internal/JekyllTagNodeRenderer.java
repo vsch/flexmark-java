@@ -25,10 +25,10 @@ public class JekyllTagNodeRenderer implements NodeRenderer {
 
     @Override
     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
-        Set<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
+        Set<NodeRenderingHandler<?>> set = new HashSet<>();
         // @formatter:off
-        set.add(new NodeRenderingHandler<JekyllTag>(JekyllTag.class, this::render));
-        set.add(new NodeRenderingHandler<JekyllTagBlock>(JekyllTagBlock.class, this::render));
+        set.add(new NodeRenderingHandler<>(JekyllTag.class, this::render));
+        set.add(new NodeRenderingHandler<>(JekyllTagBlock.class, this::render));
         // @formatter:on
         return set;
     }

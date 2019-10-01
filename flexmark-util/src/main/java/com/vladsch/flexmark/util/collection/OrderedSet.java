@@ -27,8 +27,8 @@ public class OrderedSet<E> implements Set<E>, Iterable<E> {
     }
 
     public OrderedSet(int capacity, CollectionHost<E> host) {
-        this.myKeyMap = new HashMap<E, Integer>(capacity);
-        this.myValueList = new ArrayList<E>(capacity);
+        this.myKeyMap = new HashMap<>(capacity);
+        this.myValueList = new ArrayList<>(capacity);
         this.myValidIndices = new BitSet();
         this.myHost = host;
         this.myModificationCount = Integer.MIN_VALUE;
@@ -207,7 +207,7 @@ public class OrderedSet<E> implements Set<E>, Iterable<E> {
 
     public List<E> values() {
         if (!isSparse()) return myValueList;
-        List<E> list = new ArrayList<E>();
+        List<E> list = new ArrayList<>();
         for (E item : iterable()) list.add(item);
         return list;
     }
@@ -285,19 +285,19 @@ public class OrderedSet<E> implements Set<E>, Iterable<E> {
 
     @Override
     public ReversibleIndexedIterator<E> iterator() {
-        return new IndexedIterator<E, E, ReversibleIterator<Integer>>(getIndexedProxy(), indexIterator());
+        return new IndexedIterator<>(getIndexedProxy(), indexIterator());
     }
 
     public ReversibleIndexedIterator<E> reversedIterator() {
-        return new IndexedIterator<E, E, ReversibleIterator<Integer>>(getIndexedProxy(), reversedIndexIterator());
+        return new IndexedIterator<>(getIndexedProxy(), reversedIndexIterator());
     }
 
     public ReversibleIterable<E> iterable() {
-        return new IndexedIterable<E, E, ReversibleIterable<Integer>>(getIndexedProxy(), indexIterable());
+        return new IndexedIterable<>(getIndexedProxy(), indexIterable());
     }
 
     public ReversibleIterable<E> reversedIterable() {
-        return new IndexedIterable<E, E, ReversibleIterable<Integer>>(getIndexedProxy(), reversedIndexIterable());
+        return new IndexedIterable<>(getIndexedProxy(), reversedIndexIterable());
     }
 
     @Override

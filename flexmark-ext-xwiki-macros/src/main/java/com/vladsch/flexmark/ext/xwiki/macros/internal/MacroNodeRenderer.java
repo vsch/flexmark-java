@@ -24,11 +24,11 @@ public class MacroNodeRenderer implements NodeRenderer {
 
     @Override
     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
-        HashSet<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
-        set.add(new NodeRenderingHandler<Macro>(Macro.class, this::render));
-        set.add(new NodeRenderingHandler<MacroAttribute>(MacroAttribute.class, this::render));
-        set.add(new NodeRenderingHandler<MacroClose>(MacroClose.class, this::render));
-        set.add(new NodeRenderingHandler<MacroBlock>(MacroBlock.class, this::render));
+        HashSet<NodeRenderingHandler<?>> set = new HashSet<>();
+        set.add(new NodeRenderingHandler<>(Macro.class, this::render));
+        set.add(new NodeRenderingHandler<>(MacroAttribute.class, this::render));
+        set.add(new NodeRenderingHandler<>(MacroClose.class, this::render));
+        set.add(new NodeRenderingHandler<>(MacroBlock.class, this::render));
         return set;
     }
 

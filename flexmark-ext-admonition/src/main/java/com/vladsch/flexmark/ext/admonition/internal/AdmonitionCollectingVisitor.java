@@ -23,7 +23,7 @@ public class AdmonitionCollectingVisitor {
     }
 
     public void collect(Node node) {
-        qualifiers = new LinkedHashSet<String>();
+        qualifiers = new LinkedHashSet<>();
         myVisitor.visit(node);
     }
 

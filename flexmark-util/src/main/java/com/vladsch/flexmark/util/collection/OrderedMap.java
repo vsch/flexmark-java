@@ -28,11 +28,11 @@ public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
     }
 
     public OrderedMap(int capacity, CollectionHost<K> host) {
-        this.valueList = new ArrayList<V>(capacity);
+        this.valueList = new ArrayList<>(capacity);
         this.host = host;
         this.myIndexedEntryProxy = null;
         this.myIndexedValueProxy = null;
-        this.keySet = new OrderedSet<K>(capacity, new CollectionHost<K>() {
+        this.keySet = new OrderedSet<>(capacity, new CollectionHost<K>() {
             @Override
             public void adding(int index, K k, Object v) {
                 OrderedMap.this.adding(index, k, v);
@@ -131,7 +131,7 @@ public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
     }
 
     private Map.Entry<K, V> getEntry(int index) {
-        return new MapEntry<K, V>(keySet.getValue(index), valueList.get(index));
+        return new MapEntry<>(keySet.getValue(index), valueList.get(index));
     }
 
     public int getModificationCount() {
@@ -266,7 +266,7 @@ public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
             return valueList;
         }
 
-        ArrayList<V> values = new ArrayList<V>(keySet.size());
+        ArrayList<V> values = new ArrayList<>(keySet.size());
         Iterator<Integer> iterator = keySet.indexIterator();
         while (iterator.hasNext()) {
             values.add(valueList.get(iterator.next()));
@@ -288,7 +288,7 @@ public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
     public OrderedSet<Map.Entry<K, V>> entrySet() {
         // create it with inHostUpdate already set so we can populate it without callbacks
         inUpdate = true;
-        OrderedSet<Map.Entry<K, V>> values = new OrderedSet<Entry<K, V>>(keySet.size(), new EntryCollectionHost<K, V>());
+        OrderedSet<Map.Entry<K, V>> values = new OrderedSet<>(keySet.size(), new EntryCollectionHost<>());
         Iterator<Map.Entry<K, V>> iterator = entryIterator();
         while (iterator.hasNext()) {
             values.add(iterator.next());
@@ -302,7 +302,7 @@ public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
 
     public List<Entry<K, V>> entries() {
         // create it with inHostUpdate already set so we can populate it without callbacks
-        List<Map.Entry<K, V>> values = new ArrayList<Entry<K, V>>();
+        List<Map.Entry<K, V>> values = new ArrayList<>();
         Iterator<Map.Entry<K, V>> iterator = entryIterator();
         while (iterator.hasNext()) {
             values.add(iterator.next());
@@ -316,11 +316,11 @@ public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
     }
 
     public ReversibleIndexedIterator<V> valueIterator() {
-        return new IndexedIterator<V, V, ReversibleIterator<Integer>>(getIndexedValueProxy(), keySet.indexIterator());
+        return new IndexedIterator<>(getIndexedValueProxy(), keySet.indexIterator());
     }
 
     public ReversibleIndexedIterator<V> reversedValueIterator() {
-        return new IndexedIterator<V, V, ReversibleIterator<Integer>>(getIndexedValueProxy(), keySet.reversedIndexIterator());
+        return new IndexedIterator<>(getIndexedValueProxy(), keySet.reversedIndexIterator());
     }
 
     public ReversibleIndexedIterator<K> keyIterator() {
@@ -332,11 +332,11 @@ public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
     }
 
     public ReversibleIndexedIterator<Map.Entry<K, V>> entryIterator() {
-        return new IndexedIterator<Entry<K, V>, Entry<K, V>, ReversibleIterator<Integer>>(getIndexedEntryProxy(), keySet.indexIterator());
+        return new IndexedIterator<>(getIndexedEntryProxy(), keySet.indexIterator());
     }
 
     public ReversibleIndexedIterator<Map.Entry<K, V>> reversedEntryIterator() {
-        return new IndexedIterator<Entry<K, V>, Entry<K, V>, ReversibleIterator<Integer>>(getIndexedEntryProxy(), keySet.reversedIndexIterator());
+        return new IndexedIterator<>(getIndexedEntryProxy(), keySet.reversedIndexIterator());
     }
 
     public ReversibleIndexedIterator<Map.Entry<K, V>> reversedIterator() {
@@ -344,11 +344,11 @@ public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
     }
 
     public ReversibleIterable<V> valueIterable() {
-        return new IndexedIterable<V, V, ReversibleIterable<Integer>>(getIndexedValueProxy(), keySet.indexIterable());
+        return new IndexedIterable<>(getIndexedValueProxy(), keySet.indexIterable());
     }
 
     public ReversibleIterable<V> reversedValueIterable() {
-        return new IndexedIterable<V, V, ReversibleIterable<Integer>>(getIndexedValueProxy(), keySet.reversedIndexIterable());
+        return new IndexedIterable<>(getIndexedValueProxy(), keySet.reversedIndexIterable());
     }
 
     public ReversibleIterable<K> keyIterable() {
@@ -360,11 +360,11 @@ public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
     }
 
     public ReversibleIterable<Map.Entry<K, V>> entryIterable() {
-        return new IndexedIterable<Entry<K, V>, Entry<K, V>, ReversibleIterable<Integer>>(getIndexedEntryProxy(), keySet.indexIterable());
+        return new IndexedIterable<>(getIndexedEntryProxy(), keySet.indexIterable());
     }
 
     public ReversibleIterable<Entry<K, V>> reversedEntryIterable() {
-        return new IndexedIterable<Entry<K, V>, Entry<K, V>, ReversibleIterable<Integer>>(getIndexedEntryProxy(), keySet.reversedIndexIterable());
+        return new IndexedIterable<>(getIndexedEntryProxy(), keySet.reversedIndexIterable());
     }
 
     public ReversibleIterable<Map.Entry<K, V>> reversedIterable() {

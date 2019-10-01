@@ -17,7 +17,7 @@ public class OrderedMultiMapTest {
 
     @Test
     public void testAddRemove() throws Exception {
-        OrderedMultiMap<String, Integer> orderedMap = new OrderedMultiMap<String, Integer>();
+        OrderedMultiMap<String, Integer> orderedMap = new OrderedMultiMap<>();
 
         for (int i = 0; i < 10; i++) {
             Assert.assertEquals(null, orderedMap.put(String.valueOf(i), i));
@@ -50,7 +50,7 @@ public class OrderedMultiMapTest {
 
     @Test
     public void testAddRemoveReversed() throws Exception {
-        OrderedMultiMap<String, Integer> orderedMap = new OrderedMultiMap<String, Integer>();
+        OrderedMultiMap<String, Integer> orderedMap = new OrderedMultiMap<>();
 
         for (int i = 0; i < 10; i++) {
             Assert.assertEquals(null, orderedMap.put(String.valueOf(i), i));
@@ -104,8 +104,8 @@ public class OrderedMultiMapTest {
 
     @Test
     public void testRetainAll() throws Exception {
-        OrderedMultiMap<String, Integer> orderedMap = new OrderedMultiMap<String, Integer>();
-        OrderedSet<String> retainSet = new OrderedSet<String>();
+        OrderedMultiMap<String, Integer> orderedMap = new OrderedMultiMap<>();
+        OrderedSet<String> retainSet = new OrderedSet<>();
 
         for (int i = 0; i < 10; i++) {
             Assert.assertEquals(null, orderedMap.put(String.valueOf(i), i));
@@ -148,7 +148,7 @@ public class OrderedMultiMapTest {
 
     @Test
     public void testRemoveIteration() throws Exception {
-        OrderedMultiMap<String, Integer> orderedMap = new OrderedMultiMap<String, Integer>();
+        OrderedMultiMap<String, Integer> orderedMap = new OrderedMultiMap<>();
 
         for (int i = 0; i < 10; i++) {
             Assert.assertEquals(null, orderedMap.put(String.valueOf(i), i));
@@ -188,7 +188,7 @@ public class OrderedMultiMapTest {
 
     @Test
     public void testRemoveReversedReversedIteration() throws Exception {
-        OrderedMultiMap<String, Integer> orderedMap = new OrderedMultiMap<String, Integer>();
+        OrderedMultiMap<String, Integer> orderedMap = new OrderedMultiMap<>();
 
         for (int i = 0; i < 10; i++) {
             Assert.assertEquals(null, orderedMap.put(String.valueOf(i), i));
@@ -228,7 +228,7 @@ public class OrderedMultiMapTest {
 
     @Test
     public void testRemoveReversedIteration() throws Exception {
-        OrderedMultiMap<String, Integer> orderedMap = new OrderedMultiMap<String, Integer>();
+        OrderedMultiMap<String, Integer> orderedMap = new OrderedMultiMap<>();
 
         for (int i = 0; i < 10; i++) {
             Assert.assertEquals(null, orderedMap.put(String.valueOf(i), i));
@@ -272,7 +272,7 @@ public class OrderedMultiMapTest {
 
     @Test
     public void testRemoveIteratorReversedIteration() throws Exception {
-        OrderedMultiMap<String, Integer> orderedMap = new OrderedMultiMap<String, Integer>();
+        OrderedMultiMap<String, Integer> orderedMap = new OrderedMultiMap<>();
 
         for (int i = 0; i < 10; i++) {
             Assert.assertEquals(null, orderedMap.put(String.valueOf(i), i));
@@ -321,7 +321,7 @@ public class OrderedMultiMapTest {
      */
     @Test
     public void testAddRemoveValue() throws Exception {
-        OrderedMultiMap<String, Integer> orderedMap = new OrderedMultiMap<String, Integer>();
+        OrderedMultiMap<String, Integer> orderedMap = new OrderedMultiMap<>();
 
         for (int i = 0; i < 10; i++) {
             Assert.assertEquals(null, orderedMap.putValueKey(i, String.valueOf(i)));
@@ -354,7 +354,7 @@ public class OrderedMultiMapTest {
 
     @Test
     public void testAddRemoveReversedValue() throws Exception {
-        OrderedMultiMap<String, Integer> orderedMap = new OrderedMultiMap<String, Integer>();
+        OrderedMultiMap<String, Integer> orderedMap = new OrderedMultiMap<>();
 
         for (int i = 0; i < 10; i++) {
             Assert.assertEquals(null, orderedMap.putValueKey(i, String.valueOf(i)));
@@ -609,7 +609,7 @@ public class OrderedMultiMapTest {
 
     @Test
     public void testConcurrentModIterator() throws Exception {
-        OrderedMultiMap<String, Integer> orderedMap = new OrderedMultiMap<String, Integer>();
+        OrderedMultiMap<String, Integer> orderedMap = new OrderedMultiMap<>();
         orderedMap.put("0", 0);
         orderedMap.put("1", 1);
 
@@ -625,7 +625,7 @@ public class OrderedMultiMapTest {
 
     @Test
     public void testConcurrentModKeyIterator() throws Exception {
-        OrderedMultiMap<String, Integer> orderedMap = new OrderedMultiMap<String, Integer>();
+        OrderedMultiMap<String, Integer> orderedMap = new OrderedMultiMap<>();
         orderedMap.put("0", 0);
         orderedMap.put("1", 1);
 
@@ -641,7 +641,7 @@ public class OrderedMultiMapTest {
 
     @Test
     public void testConcurrentModValueIterator() throws Exception {
-        OrderedMultiMap<String, Integer> orderedMap = new OrderedMultiMap<String, Integer>();
+        OrderedMultiMap<String, Integer> orderedMap = new OrderedMultiMap<>();
         orderedMap.put("0", 0);
         orderedMap.put("1", 1);
 
@@ -657,7 +657,7 @@ public class OrderedMultiMapTest {
 
     @Test
     public void testConcurrentModIteratorOnKey() throws Exception {
-        OrderedMultiMap<String, Integer> orderedMap = new OrderedMultiMap<String, Integer>();
+        OrderedMultiMap<String, Integer> orderedMap = new OrderedMultiMap<>();
         orderedMap.put("0", 0);
         orderedMap.put("1", 1);
 
@@ -673,7 +673,7 @@ public class OrderedMultiMapTest {
 
     @Test
     public void testConcurrentModKeyIteratorOnKey() throws Exception {
-        OrderedMultiMap<String, Integer> orderedMap = new OrderedMultiMap<String, Integer>();
+        OrderedMultiMap<String, Integer> orderedMap = new OrderedMultiMap<>();
         orderedMap.put("0", 0);
         orderedMap.put("1", 1);
 
@@ -689,7 +689,7 @@ public class OrderedMultiMapTest {
 
     @Test
     public void testConcurrentModValueIteratorOnKey() throws Exception {
-        OrderedMultiMap<String, Integer> orderedMap = new OrderedMultiMap<String, Integer>();
+        OrderedMultiMap<String, Integer> orderedMap = new OrderedMultiMap<>();
         orderedMap.put("0", 0);
         orderedMap.put("1", 1);
 
@@ -705,7 +705,7 @@ public class OrderedMultiMapTest {
 
     @Test
     public void testConcurrentModIteratorOnValue() throws Exception {
-        OrderedMultiMap<String, Integer> orderedMap = new OrderedMultiMap<String, Integer>();
+        OrderedMultiMap<String, Integer> orderedMap = new OrderedMultiMap<>();
         orderedMap.put("0", 0);
         orderedMap.put("1", 1);
 
@@ -721,7 +721,7 @@ public class OrderedMultiMapTest {
 
     @Test
     public void testConcurrentModKeyIteratorOnValue() throws Exception {
-        OrderedMultiMap<String, Integer> orderedMap = new OrderedMultiMap<String, Integer>();
+        OrderedMultiMap<String, Integer> orderedMap = new OrderedMultiMap<>();
         orderedMap.put("0", 0);
         orderedMap.put("1", 1);
 
@@ -737,7 +737,7 @@ public class OrderedMultiMapTest {
 
     @Test
     public void testConcurrentModValueIteratorOnValue() throws Exception {
-        OrderedMultiMap<String, Integer> orderedMap = new OrderedMultiMap<String, Integer>();
+        OrderedMultiMap<String, Integer> orderedMap = new OrderedMultiMap<>();
         orderedMap.put("0", 0);
         orderedMap.put("1", 1);
 
@@ -753,7 +753,7 @@ public class OrderedMultiMapTest {
 
     @Test
     public void testAddConflict() throws Exception {
-        OrderedMultiMap<String, Integer> orderedMap = new OrderedMultiMap<String, Integer>();
+        OrderedMultiMap<String, Integer> orderedMap = new OrderedMultiMap<>();
         orderedMap.put("0", 0);
         orderedMap.put("1", 1);
         thrown.expect(IllegalStateException.class);
@@ -762,32 +762,32 @@ public class OrderedMultiMapTest {
 
     @Test
     public void testAddKeyValuePair() throws Exception {
-        OrderedMultiMap<String, Integer> orderedMap = new OrderedMultiMap<String, Integer>();
+        OrderedMultiMap<String, Integer> orderedMap = new OrderedMultiMap<>();
         orderedMap.put("0", 0);
         orderedMap.put("1", 1);
-        Assert.assertEquals(true, orderedMap.putKeyValuePair(new Pair<String, Integer>("2", 2)));
-        Assert.assertEquals(false, orderedMap.putKeyValuePair(new Pair<String, Integer>("2", 2)));
+        Assert.assertEquals(true, orderedMap.putKeyValuePair(new Pair<>("2", 2)));
+        Assert.assertEquals(false, orderedMap.putKeyValuePair(new Pair<>("2", 2)));
 
         thrown.expect(IllegalStateException.class);
-        Assert.assertEquals(false, orderedMap.putKeyValuePair(new Pair<String, Integer>("1", 0)));
+        Assert.assertEquals(false, orderedMap.putKeyValuePair(new Pair<>("1", 0)));
     }
 
     @Test
     public void testAddValueKeyPair() throws Exception {
-        OrderedMultiMap<String, Integer> orderedMap = new OrderedMultiMap<String, Integer>();
+        OrderedMultiMap<String, Integer> orderedMap = new OrderedMultiMap<>();
         orderedMap.put("0", 0);
         orderedMap.put("1", 1);
-        Assert.assertEquals(true, orderedMap.putValueKeyPair(new Pair<Integer, String>(2, "2")));
-        Assert.assertEquals(false, orderedMap.putValueKeyPair(new Pair<Integer, String>(2, "2")));
+        Assert.assertEquals(true, orderedMap.putValueKeyPair(new Pair<>(2, "2")));
+        Assert.assertEquals(false, orderedMap.putValueKeyPair(new Pair<>(2, "2")));
 
         thrown.expect(IllegalStateException.class);
-        Assert.assertEquals(false, orderedMap.putValueKeyPair(new Pair<Integer, String>(0, "1")));
+        Assert.assertEquals(false, orderedMap.putValueKeyPair(new Pair<>(0, "1")));
     }
 
     @Test
     public void testHostedCallback() throws Exception {
-        CollectionHostValidator<Paired<String, Integer>> validator = new CollectionHostValidator<Paired<String, Integer>>();
-        final OrderedMultiMap<String, Integer> orderedMap = new OrderedMultiMap<String, Integer>(validator.getHost());
+        CollectionHostValidator<Paired<String, Integer>> validator = new CollectionHostValidator<>();
+        final OrderedMultiMap<String, Integer> orderedMap = new OrderedMultiMap<>(validator.getHost());
 
         //validator.trace();
 

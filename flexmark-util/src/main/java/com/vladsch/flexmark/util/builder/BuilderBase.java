@@ -142,18 +142,18 @@ public abstract class BuilderBase<T extends BuilderBase> extends MutableDataSet 
 
         HashMap<Class, HashSet<Object>> points = ((BuilderBase) other).extensionApiPoints;
         for (Map.Entry<Class, HashSet<Object>> entry : points.entrySet()) {
-            extensionApiPoints.put(entry.getKey(), new HashSet<Object>(entry.getValue()));
+            extensionApiPoints.put(entry.getKey(), new HashSet<>(entry.getValue()));
         }
         loadedExtensions.addAll(((BuilderBase) other).loadedExtensions);
     }
 
     protected void withOptions(DataHolder options) {
-        List<Extension> extensions = new ArrayList<Extension>();
-        HashSet<Class> extensionSet = new HashSet<Class>();
+        List<Extension> extensions = new ArrayList<>();
+        HashSet<Class> extensionSet = new HashSet<>();
         HashSet<Class> unloadExtensionSet = null;
 
         if (options != null && options.contains(UNLOAD_EXTENSIONS)) {
-            unloadExtensionSet = new HashSet<Class>();
+            unloadExtensionSet = new HashSet<>();
             for (Extension extension : UNLOAD_EXTENSIONS.getFrom(options)) {
                 unloadExtensionSet.add(extension.getClass());
             }

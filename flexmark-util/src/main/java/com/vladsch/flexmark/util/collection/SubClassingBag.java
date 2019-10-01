@@ -13,7 +13,7 @@ public class SubClassingBag<T> {
 
     public SubClassingBag(ClassificationBag<Class, T> items, HashMap<Class, List<Class>> subClassMap) {
         myItems = items;
-        mySubClassMap = new HashMap<Class, BitSet>();
+        mySubClassMap = new HashMap<>();
 
         for (Class clazz : subClassMap.keySet()) {
             List<Class> classList = subClassMap.get(clazz);

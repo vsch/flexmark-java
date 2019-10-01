@@ -25,8 +25,8 @@ public class AdmonitionNodeFormatter implements NodeFormatter {
 
     @Override
     public Set<NodeFormattingHandler<?>> getNodeFormattingHandlers() {
-        return new HashSet<NodeFormattingHandler<? extends Node>>(Collections.singletonList(
-                new NodeFormattingHandler<AdmonitionBlock>(AdmonitionBlock.class, AdmonitionNodeFormatter.this::render)
+        return new HashSet<>(Collections.singletonList(
+                new NodeFormattingHandler<>(AdmonitionBlock.class, AdmonitionNodeFormatter.this::render)
         ));
     }
 

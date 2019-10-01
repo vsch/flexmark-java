@@ -21,7 +21,7 @@ public class ComboMarkdownCompatibilitySpecTest extends ComboExtraSpecTest {
             //.set(HtmlRenderer.RENDER_HEADER_ID, true)
             ;
 
-    private static final Map<String, DataHolder> optionsMap = new HashMap<String, DataHolder>();
+    private static final Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
 
     }

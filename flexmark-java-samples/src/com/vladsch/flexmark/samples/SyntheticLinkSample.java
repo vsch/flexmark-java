@@ -138,7 +138,7 @@ public class SyntheticLinkSample {
             @Override
             public Set<Class<? extends PostProcessorFactory>> getAfterDependents() {
                 // run this post processor after synthetic link processor
-                Set<Class<? extends PostProcessorFactory>> set = new HashSet<Class<? extends PostProcessorFactory>>();
+                Set<Class<? extends PostProcessorFactory>> set = new HashSet<>();
                 set.add(SyntheticLinkPostProcessor.Factory.class);
                 return set;
             }

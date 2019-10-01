@@ -87,7 +87,7 @@ public abstract class ComboDocxConverterSpecTestBase extends ComboSpecTestCase {
         }
     }
 
-    protected final Map<String, DataHolder> optionsMap = new HashMap<String, DataHolder>();
+    protected final Map<String, DataHolder> optionsMap = new HashMap<>();
 
     public ComboDocxConverterSpecTestBase(SpecExample example) {
         super(example);

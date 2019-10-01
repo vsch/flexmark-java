@@ -22,7 +22,7 @@ public class ComboIssuesSpecTest extends ComboSpecTestCase {
             .set(HtmlRenderer.INDENT_SIZE, 2)
             .set(HtmlRenderer.PERCENT_ENCODE_URLS, true);
 
-    protected static final Map<String, DataHolder> optionsMap = new HashMap<String, DataHolder>();
+    protected static final Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
         optionsMap.put("keep-last", new MutableDataSet().set(Parser.REFERENCES_KEEP, KeepType.LAST));
         optionsMap.put("keep-blank-lines", new MutableDataSet().set(Parser.BLANK_LINES_IN_AST, true));

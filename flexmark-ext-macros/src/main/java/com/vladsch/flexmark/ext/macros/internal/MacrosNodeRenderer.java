@@ -26,17 +26,17 @@ public class MacrosNodeRenderer implements PhasedNodeRenderer {
 
     @Override
     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
-        Set<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
+        Set<NodeRenderingHandler<?>> set = new HashSet<>();
         // @formatter:off
-        set.add(new NodeRenderingHandler<MacroReference>(MacroReference.class, this::render));
-        set.add(new NodeRenderingHandler<MacroDefinitionBlock>(MacroDefinitionBlock.class, this::render));
+        set.add(new NodeRenderingHandler<>(MacroReference.class, this::render));
+        set.add(new NodeRenderingHandler<>(MacroDefinitionBlock.class, this::render));
         // @formatter:on
         return set;
     }
 
     @Override
     public Set<RenderingPhase> getRenderingPhases() {
-        Set<RenderingPhase> set = new HashSet<RenderingPhase>();
+        Set<RenderingPhase> set = new HashSet<>();
         set.add(RenderingPhase.BODY_TOP);
         //set.add(RenderingPhase.BODY_BOTTOM);
         return set;

@@ -41,7 +41,7 @@ public class ThematicBreakParser extends AbstractBlockParser {
     public static class Factory implements CustomBlockParserFactory {
         @Override
         public Set<Class<? extends CustomBlockParserFactory>> getAfterDependents() {
-            return new HashSet<Class<? extends CustomBlockParserFactory>>(Arrays.asList(
+            return new HashSet<>(Arrays.asList(
                     BlockQuoteParser.Factory.class,
                     HeadingParser.Factory.class,
                     FencedCodeBlockParser.Factory.class,
@@ -54,7 +54,7 @@ public class ThematicBreakParser extends AbstractBlockParser {
 
         @Override
         public Set<Class<? extends CustomBlockParserFactory>> getBeforeDependents() {
-            return new HashSet<Class<? extends CustomBlockParserFactory>>(Arrays.asList(
+            return new HashSet<>(Arrays.asList(
                     //BlockQuoteParser.Factory.class,
                     //HeadingParser.Factory.class,
                     //FencedCodeBlockParser.Factory.class,

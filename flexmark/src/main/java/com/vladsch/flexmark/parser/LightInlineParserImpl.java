@@ -31,7 +31,7 @@ public class LightInlineParserImpl implements LightInlineParser {
     @Override
     public ArrayList<BasedSequence> getCurrentText() {
         if (currentText == null) {
-            currentText = new ArrayList<BasedSequence>();
+            currentText = new ArrayList<>();
         }
 
         return currentText;

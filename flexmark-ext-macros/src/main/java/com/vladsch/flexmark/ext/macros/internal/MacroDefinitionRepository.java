@@ -13,7 +13,7 @@ import java.util.*;
 
 @SuppressWarnings("WeakerAccess")
 public class MacroDefinitionRepository extends NodeRepository<MacroDefinitionBlock> {
-    private ArrayList<MacroDefinitionBlock> myReferencedMacroDefinitionBlocks = new ArrayList<MacroDefinitionBlock>();
+    private ArrayList<MacroDefinitionBlock> myReferencedMacroDefinitionBlocks = new ArrayList<>();
 
     public void addMacrosReference(MacroDefinitionBlock macroDefinitionBlock, MacroReference macros) {
         if (!macroDefinitionBlock.isReferenced()) {

@@ -21,9 +21,9 @@ public class TypographicNodeRenderer implements NodeRenderer {
 
     @Override
     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
-        HashSet<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
-        set.add(new NodeRenderingHandler<TypographicSmarts>(TypographicSmarts.class, this::render));
-        set.add(new NodeRenderingHandler<TypographicQuotes>(TypographicQuotes.class, this::render));
+        HashSet<NodeRenderingHandler<?>> set = new HashSet<>();
+        set.add(new NodeRenderingHandler<>(TypographicSmarts.class, this::render));
+        set.add(new NodeRenderingHandler<>(TypographicQuotes.class, this::render));
         return set;
     }
 

@@ -21,7 +21,7 @@ public class ComboEmojiCrashSpecTest extends ComboSpecTestCase {
             .set(Parser.EXTENSIONS, Collections.singleton(EmojiExtension.create()))
             .set(EmojiExtension.ROOT_IMAGE_PATH, "/img/");
 
-    private static final Map<String, DataHolder> optionsMap = new HashMap<String, DataHolder>();
+    private static final Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
         optionsMap.put("src-pos", new MutableDataSet().set(HtmlRenderer.SOURCE_POSITION_ATTRIBUTE, "md-pos"));
         optionsMap.put("use-github", new MutableDataSet().set(EmojiExtension.USE_SHORTCUT_TYPE, EmojiShortcutType.GITHUB));

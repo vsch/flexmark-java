@@ -13,7 +13,7 @@ import java.util.Set;
 
 @SuppressWarnings("WeakerAccess")
 public class EnumeratedReferenceRepository extends NodeRepository<EnumeratedReferenceBlock> {
-    private ArrayList<EnumeratedReferenceBlock> referencedEnumeratedReferenceBlocks = new ArrayList<EnumeratedReferenceBlock>();
+    private ArrayList<EnumeratedReferenceBlock> referencedEnumeratedReferenceBlocks = new ArrayList<>();
 
     public static String getType(String text) {
         int pos = text.lastIndexOf(':');

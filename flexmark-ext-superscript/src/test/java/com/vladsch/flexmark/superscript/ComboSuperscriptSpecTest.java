@@ -20,7 +20,7 @@ public class ComboSuperscriptSpecTest extends ComboSpecTestCase {
             //.set(HtmlRenderer.PERCENT_ENCODE_URLS, true)
             .set(Parser.EXTENSIONS, Collections.singleton(SuperscriptExtension.create()));
 
-    private static final Map<String, DataHolder> optionsMap = new HashMap<String, DataHolder>();
+    private static final Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
         optionsMap.put("src-pos", new MutableDataSet().set(HtmlRenderer.SOURCE_POSITION_ATTRIBUTE, "md-pos"));
         optionsMap.put("style-superscript", new MutableDataSet().set(SuperscriptExtension.SUPERSCRIPT_STYLE_HTML_OPEN, "<span class=\"text-sup\">").set(SuperscriptExtension.SUPERSCRIPT_STYLE_HTML_CLOSE, "</span>"));

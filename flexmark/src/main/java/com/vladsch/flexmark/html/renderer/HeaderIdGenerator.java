@@ -10,7 +10,7 @@ import com.vladsch.flexmark.util.ast.Node;
 import java.util.HashMap;
 
 public class HeaderIdGenerator implements HtmlIdGenerator, Disposable {
-    HashMap<String, Integer> headerBaseIds = new HashMap<String, Integer>();
+    HashMap<String, Integer> headerBaseIds = new HashMap<>();
     boolean resolveDupes;
     String toDashChars;
     String nonDashChars;

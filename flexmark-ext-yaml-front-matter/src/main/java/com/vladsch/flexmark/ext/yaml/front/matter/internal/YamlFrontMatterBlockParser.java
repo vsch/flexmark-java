@@ -89,7 +89,7 @@ public class YamlFrontMatterBlockParser extends AbstractBlockParser {
 
                 inLiteral = false;
                 currentKey = line.subSequence(matcher.start(1), matcher.end(1));
-                currentValues = new ArrayList<BasedSequence>();
+                currentValues = new ArrayList<>();
                 if ("|".equals(matcher.group(2))) {
                     inLiteral = true;
                 } else if (!"".equals(matcher.group(2))) {

@@ -459,7 +459,7 @@ public class XmlDocxSorter {
             writer.getDomConfig().setParameter("format-pretty-print", Boolean.TRUE); // Set this to true if the output needs to be beautified.
             writer.getDomConfig().setParameter("xml-declaration", false);
 
-            HashMap<String, HashMap<Pattern, DocxPartEntry>> contentTypeNameEntry = new HashMap<String, HashMap<Pattern, DocxPartEntry>>();
+            HashMap<String, HashMap<Pattern, DocxPartEntry>> contentTypeNameEntry = new HashMap<>();
             for (DocxPartEntry entry : entries) {
                 HashMap<Pattern, DocxPartEntry> entryHashMap = contentTypeNameEntry.get(entry.contentType);
                 if (entryHashMap == null) {

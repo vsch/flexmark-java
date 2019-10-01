@@ -17,7 +17,7 @@ public class TableRow {
     private boolean normalized = true;
 
     public TableRow() {
-        cells = new ArrayList<TableCell>();
+        cells = new ArrayList<>();
     }
 
     public List<TableCell> getCells() {

@@ -20,7 +20,7 @@ public class ComboTablesSpecTest extends ComboSpecTestCase {
             //.set(HtmlRenderer.PERCENT_ENCODE_URLS, true)
             .set(Parser.EXTENSIONS, Collections.singleton(TablesExtension.create()));
 
-    private static final Map<String, DataHolder> optionsMap = new HashMap<String, DataHolder>();
+    private static final Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
         //        optionsMap.put("custom", new MutableDataSet()
         //                .set(TablesExtension.TABLES, value)

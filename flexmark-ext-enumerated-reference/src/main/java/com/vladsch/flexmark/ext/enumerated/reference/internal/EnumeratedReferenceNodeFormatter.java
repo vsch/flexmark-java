@@ -47,10 +47,10 @@ public class EnumeratedReferenceNodeFormatter extends NodeRepositoryFormatter<En
 
     @Override
     public Set<NodeFormattingHandler<?>> getNodeFormattingHandlers() {
-        return new HashSet<NodeFormattingHandler<?>>(Arrays.asList(
-                new NodeFormattingHandler<EnumeratedReferenceText>(EnumeratedReferenceText.class, EnumeratedReferenceNodeFormatter.this::render),
-                new NodeFormattingHandler<EnumeratedReferenceLink>(EnumeratedReferenceLink.class, EnumeratedReferenceNodeFormatter.this::render),
-                new NodeFormattingHandler<EnumeratedReferenceBlock>(EnumeratedReferenceBlock.class, EnumeratedReferenceNodeFormatter.this::render)
+        return new HashSet<>(Arrays.asList(
+                new NodeFormattingHandler<>(EnumeratedReferenceText.class, EnumeratedReferenceNodeFormatter.this::render),
+                new NodeFormattingHandler<>(EnumeratedReferenceLink.class, EnumeratedReferenceNodeFormatter.this::render),
+                new NodeFormattingHandler<>(EnumeratedReferenceBlock.class, EnumeratedReferenceNodeFormatter.this::render)
         ));
     }
 
@@ -58,7 +58,7 @@ public class EnumeratedReferenceNodeFormatter extends NodeRepositoryFormatter<En
     public Set<Class<?>> getNodeClasses() {
         if (options.enumeratedReferencePlacement != ElementPlacement.AS_IS && options.enumeratedReferenceSort != ElementPlacementSort.SORT_UNUSED_LAST) return null;
         // noinspection ArraysAsListWithZeroOrOneArgument
-        return new HashSet<Class<?>>(Arrays.asList(
+        return new HashSet<>(Arrays.asList(
                 EnumeratedReferenceBlock.class
         ));
     }

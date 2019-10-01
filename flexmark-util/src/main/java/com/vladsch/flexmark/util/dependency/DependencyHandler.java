@@ -21,7 +21,7 @@ public abstract class DependencyHandler<D extends Dependent<D>, S, R extends Res
         } else {
             // resolve dependencies and processing lists
             int dependentCount = dependentsList.size();
-            DependentItemMap<D> dependentItemMap = new DependentItemMap<D>(dependentCount);
+            DependentItemMap<D> dependentItemMap = new DependentItemMap<>(dependentCount);
 
             for (D dependent : dependentsList) {
                 Class dependentClass = getDependentClass(dependent);
@@ -62,7 +62,7 @@ public abstract class DependencyHandler<D extends Dependent<D>, S, R extends Res
             dependentCount = dependentItemMap.size();
 
             BitSet newReady = new BitSet(dependentCount);
-            Ref<BitSet> newReadyRef = new Ref<BitSet>(newReady);
+            Ref<BitSet> newReadyRef = new Ref<>(newReady);
             ReversibleIndexedIterator<DependentItem<D>> iterator = dependentItemMap.valueIterator();
             while (iterator.hasNext()) {
                 DependentItem<D> item = iterator.next();
@@ -74,11 +74,11 @@ public abstract class DependencyHandler<D extends Dependent<D>, S, R extends Res
             BitSet dependents = new BitSet(dependentCount);
             dependents.set(0, dependentItemMap.size());
 
-            ArrayList<S> dependencyStages = new ArrayList<S>();
+            ArrayList<S> dependencyStages = new ArrayList<>();
 
             while (newReady.nextSetBit(0) != -1) {
                 // process these independents in unspecified order since they do not have dependencies
-                ArrayList<D> stageDependents = new ArrayList<D>();
+                ArrayList<D> stageDependents = new ArrayList<>();
                 BitSet nextDependents = new BitSet();
 
                 // collect block processors ready for processing, any non-globals go into independents

@@ -14,7 +14,7 @@ import static com.vladsch.flexmark.formatter.RenderPurpose.TRANSLATED;
 import static com.vladsch.flexmark.formatter.RenderPurpose.TRANSLATION_SPANS;
 
 public abstract class NodeRepositoryFormatter<R extends NodeRepository<B>, B extends Node & ReferenceNode<R, B, N>, N extends Node & ReferencingNode<R, B>> implements PhasedNodeFormatter {
-    public static final HashSet<FormattingPhase> FORMATTING_PHASES = new HashSet<FormattingPhase>(Arrays.asList(
+    public static final HashSet<FormattingPhase> FORMATTING_PHASES = new HashSet<>(Arrays.asList(
             FormattingPhase.COLLECT,
             FormattingPhase.DOCUMENT_TOP,
             FormattingPhase.DOCUMENT_BOTTOM
@@ -124,7 +124,7 @@ public abstract class NodeRepositoryFormatter<R extends NodeRepository<B>, B ext
         referenceRepository = getRepository(options);
         referenceList = referenceRepository.values();
         lastReference = referenceList.isEmpty() ? null : referenceList.get(referenceList.size() - 1);
-        unusedReferences = new HashSet<Node>();
+        unusedReferences = new HashSet<>();
         this.recheckUndefinedReferences = HtmlRenderer.RECHECK_UNDEFINED_REFERENCES.getFrom(options);
         repositoryNodesDone = false;
 
@@ -199,7 +199,7 @@ public abstract class NodeRepositoryFormatter<R extends NodeRepository<B>, B ext
     }
 
     private void formatReferences(NodeFormatterContext context, MarkdownWriter markdown) {
-        ArrayList<B> references = new ArrayList<B>(referenceList);
+        ArrayList<B> references = new ArrayList<>(referenceList);
 
         switch (getReferenceSort()) {
             case AS_IS:
@@ -210,8 +210,8 @@ public abstract class NodeRepositoryFormatter<R extends NodeRepository<B>, B ext
                 break;
 
             case SORT_UNUSED_LAST:
-                ArrayList<B> used = new ArrayList<B>();
-                ArrayList<B> unused = new ArrayList<B>();
+                ArrayList<B> used = new ArrayList<>();
+                ArrayList<B> unused = new ArrayList<>();
                 for (B footnote : references) {
                     if (unusedReferences.contains(footnote)) {
                         unused.add(footnote);

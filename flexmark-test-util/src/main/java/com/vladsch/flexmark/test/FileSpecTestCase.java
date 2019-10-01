@@ -47,7 +47,7 @@ public abstract class FileSpecTestCase extends RenderingTestCase {
     }
 
     public static List<Object[]> dataFromSeparateFiles(String[] fileNames, String prefix, boolean dumpHtml, boolean dumpAst) {
-        ArrayList<SpecExample> examples = new ArrayList<SpecExample>();
+        ArrayList<SpecExample> examples = new ArrayList<>();
 
         for (String name : fileNames) {
             String source = readResource(prefix + name + ".md");
@@ -72,7 +72,7 @@ public abstract class FileSpecTestCase extends RenderingTestCase {
             }
         }
 
-        List<Object[]> data = new ArrayList<Object[]>();
+        List<Object[]> data = new ArrayList<>();
 
         // NULL example runs full spec test
         data.add(new Object[] { SpecExample.getNull() });
@@ -84,7 +84,7 @@ public abstract class FileSpecTestCase extends RenderingTestCase {
     }
 
     public static List<Object[]> dataFromFiles(String[] fileNames, String prefix) {
-        ArrayList<SpecExample> examples = new ArrayList<SpecExample>();
+        ArrayList<SpecExample> examples = new ArrayList<>();
 
         for (String name : fileNames) {
             List<SpecExample> fileExamples = SpecReader.readExamples(prefix + name + "_ast_spec.md");
@@ -94,7 +94,7 @@ public abstract class FileSpecTestCase extends RenderingTestCase {
             }
         }
 
-        List<Object[]> data = new ArrayList<Object[]>();
+        List<Object[]> data = new ArrayList<>();
 
         for (SpecExample example : examples) {
             data.add(new Object[] { example });

@@ -73,7 +73,7 @@ public class Html5Entities {
     }
 
     private static Map<String, String> readEntities() {
-        Map<String, String> entities = new HashMap<String, String>();
+        Map<String, String> entities = new HashMap<>();
         InputStream stream = Html5Entities.class.getResourceAsStream(ENTITY_PATH);
         Charset charset = StandardCharsets.UTF_8;
         try {

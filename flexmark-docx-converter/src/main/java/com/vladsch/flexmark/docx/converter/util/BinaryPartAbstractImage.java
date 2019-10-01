@@ -322,7 +322,7 @@ public class BinaryPartAbstractImage {
         String mlBottom = ""
                 + "</wp:anchor>";
 
-        java.util.HashMap<String, String> mappings = new java.util.HashMap<String, String>();
+        java.util.HashMap<String, String> mappings = new java.util.HashMap<>();
 
         String ml;
 

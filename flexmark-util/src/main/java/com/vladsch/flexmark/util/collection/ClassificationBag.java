@@ -28,7 +28,7 @@ public class ClassificationBag<K, V> {
 
     public ClassificationBag(int capacity, Function<V, K> mapper, CollectionHost<V> host) {
         this.myHost = host;
-        this.myItems = new OrderedSet<V>(capacity, new CollectionHost<V>() {
+        this.myItems = new OrderedSet<>(capacity, new CollectionHost<V>() {
             @Override
             public void adding(int index, V v, Object v2) {
                 if (myHost != null && !myHost.skipHostUpdate()) myHost.adding(index, v, v2);
@@ -65,7 +65,7 @@ public class ClassificationBag<K, V> {
             }
         });
 
-        this.myBag = new IndexedItemBitSetMap<K, V>(mapper);
+        this.myBag = new IndexedItemBitSetMap<>(mapper);
     }
 
     public OrderedSet<V> getItems() {

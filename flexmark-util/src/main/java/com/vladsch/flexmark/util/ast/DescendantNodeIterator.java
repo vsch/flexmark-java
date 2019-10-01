@@ -40,7 +40,7 @@ public class DescendantNodeIterator implements ReversiblePeekingIterator<Node> {
         if (result.getFirstChild() != null) {
             // push the current iterator on to the stack and make the node's children the iterator
             if (iterator.hasNext()) {
-                if (iteratorStack == null) iteratorStack = new Stack<ReversiblePeekingIterator<Node>>();
+                if (iteratorStack == null) iteratorStack = new Stack<>();
                 iteratorStack.push(iterator);
             }
 

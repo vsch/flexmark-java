@@ -15,7 +15,7 @@ public class OrderedMapTest {
 
     @Test
     public void testAddRemove() throws Exception {
-        OrderedMap<String, Integer> orderedMap = new OrderedMap<String, Integer>();
+        OrderedMap<String, Integer> orderedMap = new OrderedMap<>();
 
         for (int i = 0; i < 10; i++) {
             Assert.assertEquals(null, orderedMap.put(String.valueOf(i), i));
@@ -48,7 +48,7 @@ public class OrderedMapTest {
 
     @Test
     public void testAddRemoveReversed() throws Exception {
-        OrderedMap<String, Integer> orderedMap = new OrderedMap<String, Integer>();
+        OrderedMap<String, Integer> orderedMap = new OrderedMap<>();
 
         for (int i = 0; i < 10; i++) {
             Assert.assertEquals(null, orderedMap.put(String.valueOf(i), i));
@@ -84,8 +84,8 @@ public class OrderedMapTest {
 
     @Test
     public void testRetainAll() throws Exception {
-        OrderedMap<String, Integer> orderedMap = new OrderedMap<String, Integer>();
-        OrderedSet<String> retainSet = new OrderedSet<String>();
+        OrderedMap<String, Integer> orderedMap = new OrderedMap<>();
+        OrderedSet<String> retainSet = new OrderedSet<>();
 
         for (int i = 0; i < 10; i++) {
             Assert.assertEquals(null, orderedMap.put(String.valueOf(i), i));
@@ -128,7 +128,7 @@ public class OrderedMapTest {
 
     @Test
     public void testRemoveIteration() throws Exception {
-        OrderedMap<String, Integer> orderedMap = new OrderedMap<String, Integer>();
+        OrderedMap<String, Integer> orderedMap = new OrderedMap<>();
 
         for (int i = 0; i < 10; i++) {
             Assert.assertEquals(null, orderedMap.put(String.valueOf(i), i));
@@ -168,7 +168,7 @@ public class OrderedMapTest {
 
     @Test
     public void testRemoveReversedReversedIteration() throws Exception {
-        OrderedMap<String, Integer> orderedMap = new OrderedMap<String, Integer>();
+        OrderedMap<String, Integer> orderedMap = new OrderedMap<>();
 
         for (int i = 0; i < 10; i++) {
             Assert.assertEquals(null, orderedMap.put(String.valueOf(i), i));
@@ -208,7 +208,7 @@ public class OrderedMapTest {
 
     @Test
     public void testRemoveReversedIteration() throws Exception {
-        OrderedMap<String, Integer> orderedMap = new OrderedMap<String, Integer>();
+        OrderedMap<String, Integer> orderedMap = new OrderedMap<>();
 
         for (int i = 0; i < 10; i++) {
             Assert.assertEquals(null, orderedMap.put(String.valueOf(i), i));
@@ -252,7 +252,7 @@ public class OrderedMapTest {
 
     @Test
     public void testRemoveIteratorReversedIteration() throws Exception {
-        OrderedMap<String, Integer> orderedMap = new OrderedMap<String, Integer>();
+        OrderedMap<String, Integer> orderedMap = new OrderedMap<>();
 
         for (int i = 0; i < 10; i++) {
             Assert.assertEquals(null, orderedMap.put(String.valueOf(i), i));
@@ -296,7 +296,7 @@ public class OrderedMapTest {
 
     @Test
     public void testConcurrentModIterator() throws Exception {
-        OrderedMap<String, Integer> orderedMap = new OrderedMap<String, Integer>();
+        OrderedMap<String, Integer> orderedMap = new OrderedMap<>();
         orderedMap.put("0", 0);
         orderedMap.put("1", 1);
 
@@ -312,7 +312,7 @@ public class OrderedMapTest {
 
     @Test
     public void testConcurrentModKeyIterator() throws Exception {
-        OrderedMap<String, Integer> orderedMap = new OrderedMap<String, Integer>();
+        OrderedMap<String, Integer> orderedMap = new OrderedMap<>();
         orderedMap.put("0", 0);
         orderedMap.put("1", 1);
 
@@ -328,7 +328,7 @@ public class OrderedMapTest {
 
     @Test
     public void testConcurrentModValueIterator() throws Exception {
-        OrderedMap<String, Integer> orderedMap = new OrderedMap<String, Integer>();
+        OrderedMap<String, Integer> orderedMap = new OrderedMap<>();
         orderedMap.put("0", 0);
         orderedMap.put("1", 1);
 
@@ -344,7 +344,7 @@ public class OrderedMapTest {
 
     @Test
     public void testConcurrentModIteratorOnKey() throws Exception {
-        OrderedMap<String, Integer> orderedMap = new OrderedMap<String, Integer>();
+        OrderedMap<String, Integer> orderedMap = new OrderedMap<>();
         orderedMap.put("0", 0);
         orderedMap.put("1", 1);
 
@@ -360,7 +360,7 @@ public class OrderedMapTest {
 
     @Test
     public void testConcurrentModKeyIteratorOnKey() throws Exception {
-        OrderedMap<String, Integer> orderedMap = new OrderedMap<String, Integer>();
+        OrderedMap<String, Integer> orderedMap = new OrderedMap<>();
         orderedMap.put("0", 0);
         orderedMap.put("1", 1);
 
@@ -376,7 +376,7 @@ public class OrderedMapTest {
 
     @Test
     public void testConcurrentModValueIteratorOnKey() throws Exception {
-        OrderedMap<String, Integer> orderedMap = new OrderedMap<String, Integer>();
+        OrderedMap<String, Integer> orderedMap = new OrderedMap<>();
         orderedMap.put("0", 0);
         orderedMap.put("1", 1);
 
@@ -392,8 +392,8 @@ public class OrderedMapTest {
 
     @Test
     public void testHostedCallback() throws Exception {
-        CollectionHostValidator<String> validator = new CollectionHostValidator<String>();
-        final OrderedMap<String, Integer> orderedMap = new OrderedMap<String, Integer>(validator.getHost());
+        CollectionHostValidator<String> validator = new CollectionHostValidator<>();
+        final OrderedMap<String, Integer> orderedMap = new OrderedMap<>(validator.getHost());
 
         //validator.trace();
 

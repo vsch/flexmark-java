@@ -23,8 +23,8 @@ public class GfmIssuesJiraRenderer implements NodeRenderer {
 
     @Override
     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
-        return new HashSet<NodeRenderingHandler<? extends Node>>(Collections.singletonList(
-                new NodeRenderingHandler<GfmIssue>(GfmIssue.class, this::render)
+        return new HashSet<>(Collections.singletonList(
+                new NodeRenderingHandler<>(GfmIssue.class, this::render)
         ));
     }
 

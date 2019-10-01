@@ -48,7 +48,7 @@ class DelegatingNodeRendererFactoryWrapper implements Function<DataHolder, NodeR
         if (myDelegates == null && nodeRenderers != null) {
             Set<Class<? extends NodeRendererFactory>> delegates = getDelegates();
             if (delegates != null) {
-                myDelegates = new HashSet<Class>();
+                myDelegates = new HashSet<>();
                 for (DelegatingNodeRendererFactoryWrapper factory : nodeRenderers) {
                     if (delegates.contains(factory.getFactory().getClass())) {
                         myDelegates.add(factory.getFactory().getClass());

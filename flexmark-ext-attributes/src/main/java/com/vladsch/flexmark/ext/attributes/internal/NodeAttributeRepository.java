@@ -11,7 +11,7 @@ import java.util.*;
 
 @SuppressWarnings("WeakerAccess")
 public class NodeAttributeRepository implements Map<Node, ArrayList<AttributesNode>> {
-    protected final HashMap<Node, ArrayList<AttributesNode>> nodeAttributesHashMap = new HashMap<Node, ArrayList<AttributesNode>>();
+    protected final HashMap<Node, ArrayList<AttributesNode>> nodeAttributesHashMap = new HashMap<>();
 
     public NodeAttributeRepository(DataHolder options) {
     }
@@ -57,7 +57,7 @@ public class NodeAttributeRepository implements Map<Node, ArrayList<AttributesNo
     public ArrayList<AttributesNode> put(Node key, AttributesNode value) {
         ArrayList<AttributesNode> another = nodeAttributesHashMap.get(key);
         if (another == null) {
-            another = new ArrayList<AttributesNode>();
+            another = new ArrayList<>();
             nodeAttributesHashMap.put(key, another);
         }
         another.add(value);

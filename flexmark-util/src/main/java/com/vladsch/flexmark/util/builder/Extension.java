@@ -16,6 +16,6 @@ import java.util.Set;
  * also have a static create() method that returns an instance of the extension.
  */
 public interface Extension {
-    Set<Extension> EMPTY_SET = new HashSet<Extension>();
-    Iterable<Extension> EMPTY_LIST = new ArrayList<Extension>();
+    Set<Extension> EMPTY_SET = new HashSet<>();
+    Iterable<Extension> EMPTY_LIST = new ArrayList<>();
 }

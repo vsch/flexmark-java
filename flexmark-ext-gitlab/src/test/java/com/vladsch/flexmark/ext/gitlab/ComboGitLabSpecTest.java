@@ -22,7 +22,7 @@ public class ComboGitLabSpecTest extends ComboSpecTestCase {
             .set(HtmlRenderer.RENDER_HEADER_ID, true)
             .set(Parser.EXTENSIONS, Arrays.asList(GitLabExtension.create()));
 
-    private static final Map<String, DataHolder> optionsMap = new HashMap<String, DataHolder>();
+    private static final Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
         optionsMap.put("src-pos", new MutableDataSet().set(HtmlRenderer.SOURCE_POSITION_ATTRIBUTE, "md-pos"));
         optionsMap.put("no-del", new MutableDataSet().set(GitLabExtension.DEL_PARSER, false));

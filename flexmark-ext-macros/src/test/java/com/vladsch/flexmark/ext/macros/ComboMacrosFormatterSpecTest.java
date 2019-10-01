@@ -31,7 +31,7 @@ public class ComboMacrosFormatterSpecTest extends ComboSpecTestCase {
             .set(Parser.LISTS_AUTO_LOOSE, false)
             .set(Parser.BLANK_LINES_IN_AST, true);
 
-    private static final Map<String, DataHolder> optionsMap = new HashMap<String, DataHolder>();
+    private static final Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
         //optionsMap.put("src-pos", new MutableDataSet().set(HtmlRenderer.SOURCE_POSITION_ATTRIBUTE, "md-pos"));
         //optionsMap.put("option1", new MutableDataSet().set(FormatterExtension.FORMATTER_OPTION1, true));

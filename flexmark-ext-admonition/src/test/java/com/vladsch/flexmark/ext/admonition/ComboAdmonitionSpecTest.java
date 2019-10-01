@@ -22,7 +22,7 @@ public class ComboAdmonitionSpecTest extends ComboSpecTestCase {
             //.set(HtmlRenderer.PERCENT_ENCODE_URLS, true)
             .set(Parser.EXTENSIONS, Arrays.asList(AdmonitionExtension.create(), TablesExtension.create()));
 
-    private static final Map<String, MutableDataHolder> optionsMap = new HashMap<String, MutableDataHolder>();
+    private static final Map<String, MutableDataHolder> optionsMap = new HashMap<>();
     static {
         optionsMap.put("src-pos", new MutableDataSet().set(HtmlRenderer.SOURCE_POSITION_ATTRIBUTE, "md-pos"));
         optionsMap.put("no-lazy-continuation", new MutableDataSet().set(AdmonitionExtension.ALLOW_LAZY_CONTINUATION, false));

@@ -12,7 +12,7 @@ public class DataSet implements DataHolder {
     }
 
     public DataSet(DataHolder other) {
-        dataSet = other == null ? new HashMap<DataKey<?>, Object>() : new HashMap<DataKey<?>, Object>(other.getAll());
+        dataSet = other == null ? new HashMap<>() : new HashMap<>(other.getAll());
     }
 
     @Override

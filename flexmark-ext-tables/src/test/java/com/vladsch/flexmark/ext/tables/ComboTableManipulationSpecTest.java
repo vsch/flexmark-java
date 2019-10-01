@@ -30,7 +30,7 @@ public class ComboTableManipulationSpecTest extends ComboSpecTestCase {
             .set(Parser.LISTS_AUTO_LOOSE, false)
             .set(Parser.BLANK_LINES_IN_AST, true);
 
-    private static final Map<String, DataHolder> optionsMap = new HashMap<String, DataHolder>();
+    private static final Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
         optionsMap.put("gfm", new MutableDataSet()
                 .set(TablesExtension.COLUMN_SPANS, false)

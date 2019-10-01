@@ -117,7 +117,7 @@ public class MacroDefinitionBlockParser extends AbstractBlockParser {
 
         @Override
         public Set<Class<? extends CustomBlockParserFactory>> getBeforeDependents() {
-            return new HashSet<Class<? extends CustomBlockParserFactory>>(Collections.singletonList(
+            return new HashSet<>(Collections.singletonList(
                     GitLabBlockQuoteParser.Factory.class
             ));
         }

@@ -161,7 +161,7 @@ public class TableBlockParser extends AbstractBlockParser {
 
     private static List<Alignment> parseAlignment(BasedSequence separatorLine) {
         List<BasedSequence> parts = split(separatorLine);
-        List<Alignment> alignments = new ArrayList<Alignment>();
+        List<Alignment> alignments = new ArrayList<>();
         for (BasedSequence part : parts) {
             BasedSequence trimmed = part.trim();
             boolean left = trimmed.startsWith(":");
@@ -175,7 +175,7 @@ public class TableBlockParser extends AbstractBlockParser {
     static List<BasedSequence> split(BasedSequence input) {
         BasedSequence line = input.trim();
         int lineLength = line.length();
-        List<BasedSequence> segments = new ArrayList<BasedSequence>();
+        List<BasedSequence> segments = new ArrayList<>();
 
         if (line.startsWith("|")) {
             //segments.add(line.subSequence(0, 1));

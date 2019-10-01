@@ -154,7 +154,7 @@ public class UnderlineExtensionSample {
 
         @Override
         public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
-            Set<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
+            Set<NodeRenderingHandler<?>> set = new HashSet<>();
             set.add(new NodeRenderingHandler<>(Underline.class, (node, context, html) -> {
                 if (context.getHtmlOptions().sourcePositionParagraphLines) {
                     html.withAttr().tag("ins");

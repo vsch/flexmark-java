@@ -114,7 +114,7 @@ public final class SegmentedSequence extends BasedSequenceImpl {
             BasedSequence lastSegment = null;
             BasedSequence firstSegment = segments.get(0);
             BasedSequence base = firstSegment.getBaseSequence();
-            ArrayList<BasedSequence> mergedSequences = new ArrayList<BasedSequence>();
+            ArrayList<BasedSequence> mergedSequences = new ArrayList<>();
             int startOffset = -1;
             int endOffset = -1;
 

@@ -30,7 +30,7 @@ public class ComboHtmlConverterIssueTest extends ComboSpecTestCase {
             //.set(Parser.EXTENSIONS, Collections.singleton(FlexmarkHtmlConverter.create())
             ;
 
-    private static final Map<String, DataHolder> optionsMap = new HashMap<String, DataHolder>();
+    private static final Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
         optionsMap.put("output-unknown", new MutableDataSet().set(FlexmarkHtmlConverter.OUTPUT_UNKNOWN_TAGS, true));
         optionsMap.put("nbsp", new MutableDataSet().set(FlexmarkHtmlConverter.NBSP_TEXT, "&nbsp;"));

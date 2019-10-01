@@ -30,15 +30,15 @@ public class SpecExampleNodeRenderer implements NodeRenderer
 
     @Override
     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
-        return new HashSet<NodeRenderingHandler<? extends Node>>(Arrays.asList(
-                new NodeRenderingHandler<SpecExampleBlock>(SpecExampleBlock.class, SpecExampleNodeRenderer.this::render),
-                new NodeRenderingHandler<SpecExampleOptionsList>(SpecExampleOptionsList.class, SpecExampleNodeRenderer.this::render),
-                new NodeRenderingHandler<SpecExampleOption>(SpecExampleOption.class, SpecExampleNodeRenderer.this::render),
-                new NodeRenderingHandler<SpecExampleOptionSeparator>(SpecExampleOptionSeparator.class, SpecExampleNodeRenderer.this::render),
-                new NodeRenderingHandler<SpecExampleSeparator>(SpecExampleSeparator.class, SpecExampleNodeRenderer.this::render),
-                new NodeRenderingHandler<SpecExampleSource>(SpecExampleSource.class, SpecExampleNodeRenderer.this::render),
-                new NodeRenderingHandler<SpecExampleHtml>(SpecExampleHtml.class, SpecExampleNodeRenderer.this::render),
-                new NodeRenderingHandler<SpecExampleAst>(SpecExampleAst.class, SpecExampleNodeRenderer.this::render)
+        return new HashSet<>(Arrays.asList(
+                new NodeRenderingHandler<>(SpecExampleBlock.class, SpecExampleNodeRenderer.this::render),
+                new NodeRenderingHandler<>(SpecExampleOptionsList.class, SpecExampleNodeRenderer.this::render),
+                new NodeRenderingHandler<>(SpecExampleOption.class, SpecExampleNodeRenderer.this::render),
+                new NodeRenderingHandler<>(SpecExampleOptionSeparator.class, SpecExampleNodeRenderer.this::render),
+                new NodeRenderingHandler<>(SpecExampleSeparator.class, SpecExampleNodeRenderer.this::render),
+                new NodeRenderingHandler<>(SpecExampleSource.class, SpecExampleNodeRenderer.this::render),
+                new NodeRenderingHandler<>(SpecExampleHtml.class, SpecExampleNodeRenderer.this::render),
+                new NodeRenderingHandler<>(SpecExampleAst.class, SpecExampleNodeRenderer.this::render)
         ));
     }
 

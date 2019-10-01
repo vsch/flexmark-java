@@ -22,7 +22,7 @@ public class ComboAdmonitionFormatterSpecTest extends ComboSpecTestCase {
             .set(Parser.LISTS_AUTO_LOOSE, false)
             .set(Parser.BLANK_LINES_IN_AST, true);
 
-    private static final Map<String, DataHolder> optionsMap = new HashMap<String, DataHolder>();
+    private static final Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
         //optionsMap.put("left-align-marker-remove", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_LEFT_ALIGN_MARKER, DiscretionaryText.REMOVE));
     }

@@ -23,14 +23,14 @@ public class TableNodeRenderer implements NodeRenderer {
 
     @Override
     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
-        return new HashSet<NodeRenderingHandler<? extends Node>>(Arrays.asList(
-                new NodeRenderingHandler<TableBlock>(TableBlock.class, this::render),
-                new NodeRenderingHandler<TableHead>(TableHead.class, this::render),
-                new NodeRenderingHandler<TableSeparator>(TableSeparator.class, this::render),
-                new NodeRenderingHandler<TableBody>(TableBody.class, this::render),
-                new NodeRenderingHandler<TableRow>(TableRow.class, this::render),
-                new NodeRenderingHandler<TableCell>(TableCell.class, this::render),
-                new NodeRenderingHandler<TableCaption>(TableCaption.class, this::render)
+        return new HashSet<>(Arrays.asList(
+                new NodeRenderingHandler<>(TableBlock.class, this::render),
+                new NodeRenderingHandler<>(TableHead.class, this::render),
+                new NodeRenderingHandler<>(TableSeparator.class, this::render),
+                new NodeRenderingHandler<>(TableBody.class, this::render),
+                new NodeRenderingHandler<>(TableRow.class, this::render),
+                new NodeRenderingHandler<>(TableCell.class, this::render),
+                new NodeRenderingHandler<>(TableCaption.class, this::render)
         ));
     }
 

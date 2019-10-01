@@ -7,7 +7,7 @@ import org.junit.Assert;
 import java.util.ArrayList;
 
 public class CollectionHostValidator<T> {
-    private final ArrayList<Paired<String, Object[]>> expectedCallBacks = new ArrayList<Paired<String, Object[]>>();
+    private final ArrayList<Paired<String, Object[]>> expectedCallBacks = new ArrayList<>();
     private int nextCallbackIndex;
     private int modificationCount;
 
@@ -84,7 +84,7 @@ public class CollectionHostValidator<T> {
         if (conditional) {
             int i = 0;
             while (i++ < repeat) {
-                expectedCallBacks.add(new Pair<String, Object[]>(callBack, params));
+                expectedCallBacks.add(new Pair<>(callBack, params));
             }
         }
         hadExpect();

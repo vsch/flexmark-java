@@ -30,7 +30,7 @@ public class DocxHelper {
         myFactory = factory;
         myOptions = options.isResolved ? options : new DocxRendererOptions(options, mlPackage);
         myDocumentPart = mlPackage.getMainDocumentPart();
-        myNumPrColorMap = new HashMap<String, BigInteger>();
+        myNumPrColorMap = new HashMap<>();
     }
 
     public Style getStyle(String styleId) {
@@ -386,7 +386,7 @@ public class DocxHelper {
      */
     public RPr getExplicitRPr(RPr rPr) {
         RPr styledRPr = myFactory.createRPr();
-        ArrayList<Style> styles = new ArrayList<Style>();
+        ArrayList<Style> styles = new ArrayList<>();
         RStyle pStyle = rPr.getRStyle();
         if (pStyle != null) {
             String styleId = pStyle.getVal();

@@ -77,7 +77,7 @@ import static com.vladsch.flexmark.html.renderer.LinkStatus.UNKNOWN;
 public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
     public static final DataKey<Integer> LIST_ITEM_NUMBER = new DataKey<>("LIST_ITEM_NUMBER", 0);
     public static final DataKey<ListSpacing> LIST_ITEM_SPACING = new DataKey<>("LIST_ITEM_SPACING", (ListSpacing) null);
-    public static final HashSet<DocxRendererPhase> RENDERING_PHASES = new HashSet<DocxRendererPhase>(Arrays.asList(
+    public static final HashSet<DocxRendererPhase> RENDERING_PHASES = new HashSet<>(Arrays.asList(
             DocxRendererPhase.COLLECT,
             DocxRendererPhase.DOCUMENT_TOP,
             DocxRendererPhase.DOCUMENT_BOTTOM
@@ -134,7 +134,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
 
         this.options = new DocxRendererOptions(options);
         listOptions = ListOptions.getFrom(options);
-        footnoteIDs = new HashMap<Node, BigInteger>();
+        footnoteIDs = new HashMap<>();
         lastTocBlock = null;
         ordinalRunnable = null;
 
@@ -216,72 +216,72 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
 
     @Override
     public Set<NodeDocxRendererHandler<?>> getNodeFormattingHandlers() {
-        return new HashSet<NodeDocxRendererHandler<? extends Node>>(Arrays.asList(
+        return new HashSet<>(Arrays.asList(
                 // Generic unknown node formatter
                 new NodeDocxRendererHandler<>(Node.class, CoreNodeDocxRenderer.this::render),
 
                 // core and extension nodes
-                new NodeDocxRendererHandler<AutoLink>(AutoLink.class, CoreNodeDocxRenderer.this::render),
-                new NodeDocxRendererHandler<BlankLine>(BlankLine.class, CoreNodeDocxRenderer.this::render),
-                new NodeDocxRendererHandler<BlockQuote>(BlockQuote.class, CoreNodeDocxRenderer.this::render),
-                new NodeDocxRendererHandler<GitLabBlockQuote>(GitLabBlockQuote.class, CoreNodeDocxRenderer.this::render),
-                new NodeDocxRendererHandler<AsideBlock>(AsideBlock.class, CoreNodeDocxRenderer.this::render),
-                new NodeDocxRendererHandler<Code>(Code.class, CoreNodeDocxRenderer.this::render),
-                new NodeDocxRendererHandler<Document>(Document.class, CoreNodeDocxRenderer.this::render),
-                new NodeDocxRendererHandler<Emphasis>(Emphasis.class, CoreNodeDocxRenderer.this::render),
-                new NodeDocxRendererHandler<StrongEmphasis>(StrongEmphasis.class, CoreNodeDocxRenderer.this::render),
-                new NodeDocxRendererHandler<Ins>(Ins.class, CoreNodeDocxRenderer.this::render),
-                new NodeDocxRendererHandler<GitLabIns>(GitLabIns.class, CoreNodeDocxRenderer.this::render),
-                new NodeDocxRendererHandler<MacroReference>(MacroReference.class, CoreNodeDocxRenderer.this::render),
-                new NodeDocxRendererHandler<MacroDefinitionBlock>(MacroDefinitionBlock.class, CoreNodeDocxRenderer.this::render),
-                new NodeDocxRendererHandler<Strikethrough>(Strikethrough.class, CoreNodeDocxRenderer.this::render),
-                new NodeDocxRendererHandler<GitLabDel>(GitLabDel.class, CoreNodeDocxRenderer.this::render),
-                new NodeDocxRendererHandler<Superscript>(Superscript.class, CoreNodeDocxRenderer.this::render),
-                new NodeDocxRendererHandler<Subscript>(Subscript.class, CoreNodeDocxRenderer.this::render),
-                new NodeDocxRendererHandler<FencedCodeBlock>(FencedCodeBlock.class, CoreNodeDocxRenderer.this::render),
-                new NodeDocxRendererHandler<Footnote>(Footnote.class, CoreNodeDocxRenderer.this::render),
-                new NodeDocxRendererHandler<FootnoteBlock>(FootnoteBlock.class, CoreNodeDocxRenderer.this::render),
-                new NodeDocxRendererHandler<HardLineBreak>(HardLineBreak.class, CoreNodeDocxRenderer.this::render),
-                new NodeDocxRendererHandler<Heading>(Heading.class, CoreNodeDocxRenderer.this::render),
-                new NodeDocxRendererHandler<HtmlBlock>(HtmlBlock.class, CoreNodeDocxRenderer.this::render),
-                new NodeDocxRendererHandler<HtmlCommentBlock>(HtmlCommentBlock.class, CoreNodeDocxRenderer.this::render),
-                new NodeDocxRendererHandler<HtmlInnerBlock>(HtmlInnerBlock.class, CoreNodeDocxRenderer.this::render),
-                new NodeDocxRendererHandler<HtmlInnerBlockComment>(HtmlInnerBlockComment.class, CoreNodeDocxRenderer.this::render),
-                new NodeDocxRendererHandler<HtmlEntity>(HtmlEntity.class, CoreNodeDocxRenderer.this::render),
-                new NodeDocxRendererHandler<HtmlInline>(HtmlInline.class, CoreNodeDocxRenderer.this::render),
-                new NodeDocxRendererHandler<HtmlInlineComment>(HtmlInlineComment.class, CoreNodeDocxRenderer.this::render),
-                new NodeDocxRendererHandler<Image>(Image.class, CoreNodeDocxRenderer.this::render),
-                new NodeDocxRendererHandler<ImageRef>(ImageRef.class, CoreNodeDocxRenderer.this::render),
-                new NodeDocxRendererHandler<IndentedCodeBlock>(IndentedCodeBlock.class, CoreNodeDocxRenderer.this::render),
-                new NodeDocxRendererHandler<Link>(Link.class, CoreNodeDocxRenderer.this::render),
-                new NodeDocxRendererHandler<LinkRef>(LinkRef.class, CoreNodeDocxRenderer.this::render),
-                new NodeDocxRendererHandler<BulletList>(BulletList.class, CoreNodeDocxRenderer.this::render),
-                new NodeDocxRendererHandler<OrderedList>(OrderedList.class, CoreNodeDocxRenderer.this::render),
-                new NodeDocxRendererHandler<BulletListItem>(BulletListItem.class, CoreNodeDocxRenderer.this::render),
-                new NodeDocxRendererHandler<OrderedListItem>(OrderedListItem.class, CoreNodeDocxRenderer.this::render),
-                new NodeDocxRendererHandler<MailLink>(MailLink.class, CoreNodeDocxRenderer.this::render),
-                new NodeDocxRendererHandler<Paragraph>(Paragraph.class, CoreNodeDocxRenderer.this::render),
-                new NodeDocxRendererHandler<Reference>(Reference.class, CoreNodeDocxRenderer.this::render),
-                new NodeDocxRendererHandler<SoftLineBreak>(SoftLineBreak.class, CoreNodeDocxRenderer.this::render),
-                new NodeDocxRendererHandler<StrongEmphasis>(StrongEmphasis.class, CoreNodeDocxRenderer.this::render),
-                new NodeDocxRendererHandler<Text>(Text.class, CoreNodeDocxRenderer.this::render),
-                new NodeDocxRendererHandler<TextBase>(TextBase.class, CoreNodeDocxRenderer.this::render),
-                new NodeDocxRendererHandler<ThematicBreak>(ThematicBreak.class, CoreNodeDocxRenderer.this::render),
-                new NodeDocxRendererHandler<TableBlock>(TableBlock.class, CoreNodeDocxRenderer.this::render),
-                new NodeDocxRendererHandler<TableHead>(TableHead.class, CoreNodeDocxRenderer.this::render),
-                new NodeDocxRendererHandler<TableSeparator>(TableSeparator.class, CoreNodeDocxRenderer.this::render),
-                new NodeDocxRendererHandler<TableBody>(TableBody.class, CoreNodeDocxRenderer.this::render),
-                new NodeDocxRendererHandler<TableRow>(TableRow.class, CoreNodeDocxRenderer.this::render),
-                new NodeDocxRendererHandler<TableCell>(TableCell.class, CoreNodeDocxRenderer.this::render),
-                new NodeDocxRendererHandler<TableCaption>(TableCaption.class, CoreNodeDocxRenderer.this::render),
-                new NodeDocxRendererHandler<TocBlock>(TocBlock.class, CoreNodeDocxRenderer.this::render),
-                new NodeDocxRendererHandler<SimTocBlock>(SimTocBlock.class, CoreNodeDocxRenderer.this::render),
-                new NodeDocxRendererHandler<EnumeratedReferenceText>(EnumeratedReferenceText.class, CoreNodeDocxRenderer.this::render),
-                new NodeDocxRendererHandler<EnumeratedReferenceLink>(EnumeratedReferenceLink.class, CoreNodeDocxRenderer.this::render),
-                new NodeDocxRendererHandler<EnumeratedReferenceBlock>(EnumeratedReferenceBlock.class, CoreNodeDocxRenderer.this::render),
-                new NodeDocxRendererHandler<AttributesNode>(AttributesNode.class, CoreNodeDocxRenderer.this::render),
-                new NodeDocxRendererHandler<AttributeNode>(AttributeNode.class, CoreNodeDocxRenderer.this::render),
-                new NodeDocxRendererHandler<Emoji>(Emoji.class, CoreNodeDocxRenderer.this::render)
+                new NodeDocxRendererHandler<>(AutoLink.class, CoreNodeDocxRenderer.this::render),
+                new NodeDocxRendererHandler<>(BlankLine.class, CoreNodeDocxRenderer.this::render),
+                new NodeDocxRendererHandler<>(BlockQuote.class, CoreNodeDocxRenderer.this::render),
+                new NodeDocxRendererHandler<>(GitLabBlockQuote.class, CoreNodeDocxRenderer.this::render),
+                new NodeDocxRendererHandler<>(AsideBlock.class, CoreNodeDocxRenderer.this::render),
+                new NodeDocxRendererHandler<>(Code.class, CoreNodeDocxRenderer.this::render),
+                new NodeDocxRendererHandler<>(Document.class, CoreNodeDocxRenderer.this::render),
+                new NodeDocxRendererHandler<>(Emphasis.class, CoreNodeDocxRenderer.this::render),
+                new NodeDocxRendererHandler<>(StrongEmphasis.class, CoreNodeDocxRenderer.this::render),
+                new NodeDocxRendererHandler<>(Ins.class, CoreNodeDocxRenderer.this::render),
+                new NodeDocxRendererHandler<>(GitLabIns.class, CoreNodeDocxRenderer.this::render),
+                new NodeDocxRendererHandler<>(MacroReference.class, CoreNodeDocxRenderer.this::render),
+                new NodeDocxRendererHandler<>(MacroDefinitionBlock.class, CoreNodeDocxRenderer.this::render),
+                new NodeDocxRendererHandler<>(Strikethrough.class, CoreNodeDocxRenderer.this::render),
+                new NodeDocxRendererHandler<>(GitLabDel.class, CoreNodeDocxRenderer.this::render),
+                new NodeDocxRendererHandler<>(Superscript.class, CoreNodeDocxRenderer.this::render),
+                new NodeDocxRendererHandler<>(Subscript.class, CoreNodeDocxRenderer.this::render),
+                new NodeDocxRendererHandler<>(FencedCodeBlock.class, CoreNodeDocxRenderer.this::render),
+                new NodeDocxRendererHandler<>(Footnote.class, CoreNodeDocxRenderer.this::render),
+                new NodeDocxRendererHandler<>(FootnoteBlock.class, CoreNodeDocxRenderer.this::render),
+                new NodeDocxRendererHandler<>(HardLineBreak.class, CoreNodeDocxRenderer.this::render),
+                new NodeDocxRendererHandler<>(Heading.class, CoreNodeDocxRenderer.this::render),
+                new NodeDocxRendererHandler<>(HtmlBlock.class, CoreNodeDocxRenderer.this::render),
+                new NodeDocxRendererHandler<>(HtmlCommentBlock.class, CoreNodeDocxRenderer.this::render),
+                new NodeDocxRendererHandler<>(HtmlInnerBlock.class, CoreNodeDocxRenderer.this::render),
+                new NodeDocxRendererHandler<>(HtmlInnerBlockComment.class, CoreNodeDocxRenderer.this::render),
+                new NodeDocxRendererHandler<>(HtmlEntity.class, CoreNodeDocxRenderer.this::render),
+                new NodeDocxRendererHandler<>(HtmlInline.class, CoreNodeDocxRenderer.this::render),
+                new NodeDocxRendererHandler<>(HtmlInlineComment.class, CoreNodeDocxRenderer.this::render),
+                new NodeDocxRendererHandler<>(Image.class, CoreNodeDocxRenderer.this::render),
+                new NodeDocxRendererHandler<>(ImageRef.class, CoreNodeDocxRenderer.this::render),
+                new NodeDocxRendererHandler<>(IndentedCodeBlock.class, CoreNodeDocxRenderer.this::render),
+                new NodeDocxRendererHandler<>(Link.class, CoreNodeDocxRenderer.this::render),
+                new NodeDocxRendererHandler<>(LinkRef.class, CoreNodeDocxRenderer.this::render),
+                new NodeDocxRendererHandler<>(BulletList.class, CoreNodeDocxRenderer.this::render),
+                new NodeDocxRendererHandler<>(OrderedList.class, CoreNodeDocxRenderer.this::render),
+                new NodeDocxRendererHandler<>(BulletListItem.class, CoreNodeDocxRenderer.this::render),
+                new NodeDocxRendererHandler<>(OrderedListItem.class, CoreNodeDocxRenderer.this::render),
+                new NodeDocxRendererHandler<>(MailLink.class, CoreNodeDocxRenderer.this::render),
+                new NodeDocxRendererHandler<>(Paragraph.class, CoreNodeDocxRenderer.this::render),
+                new NodeDocxRendererHandler<>(Reference.class, CoreNodeDocxRenderer.this::render),
+                new NodeDocxRendererHandler<>(SoftLineBreak.class, CoreNodeDocxRenderer.this::render),
+                new NodeDocxRendererHandler<>(StrongEmphasis.class, CoreNodeDocxRenderer.this::render),
+                new NodeDocxRendererHandler<>(Text.class, CoreNodeDocxRenderer.this::render),
+                new NodeDocxRendererHandler<>(TextBase.class, CoreNodeDocxRenderer.this::render),
+                new NodeDocxRendererHandler<>(ThematicBreak.class, CoreNodeDocxRenderer.this::render),
+                new NodeDocxRendererHandler<>(TableBlock.class, CoreNodeDocxRenderer.this::render),
+                new NodeDocxRendererHandler<>(TableHead.class, CoreNodeDocxRenderer.this::render),
+                new NodeDocxRendererHandler<>(TableSeparator.class, CoreNodeDocxRenderer.this::render),
+                new NodeDocxRendererHandler<>(TableBody.class, CoreNodeDocxRenderer.this::render),
+                new NodeDocxRendererHandler<>(TableRow.class, CoreNodeDocxRenderer.this::render),
+                new NodeDocxRendererHandler<>(TableCell.class, CoreNodeDocxRenderer.this::render),
+                new NodeDocxRendererHandler<>(TableCaption.class, CoreNodeDocxRenderer.this::render),
+                new NodeDocxRendererHandler<>(TocBlock.class, CoreNodeDocxRenderer.this::render),
+                new NodeDocxRendererHandler<>(SimTocBlock.class, CoreNodeDocxRenderer.this::render),
+                new NodeDocxRendererHandler<>(EnumeratedReferenceText.class, CoreNodeDocxRenderer.this::render),
+                new NodeDocxRendererHandler<>(EnumeratedReferenceLink.class, CoreNodeDocxRenderer.this::render),
+                new NodeDocxRendererHandler<>(EnumeratedReferenceBlock.class, CoreNodeDocxRenderer.this::render),
+                new NodeDocxRendererHandler<>(AttributesNode.class, CoreNodeDocxRenderer.this::render),
+                new NodeDocxRendererHandler<>(AttributeNode.class, CoreNodeDocxRenderer.this::render),
+                new NodeDocxRendererHandler<>(Emoji.class, CoreNodeDocxRenderer.this::render)
         ));
     }
 

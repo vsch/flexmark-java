@@ -2,7 +2,7 @@ package com.vladsch.flexmark.util;
 
 public class Pair<K, V> implements Paired<K, V> {
     public static <K1, V1> Pair<K1, V1> of(K1 first, V1 second) {
-        return new Pair<K1, V1>(first, second);
+        return new Pair<>(first, second);
     }
 
     private final K myFirst;

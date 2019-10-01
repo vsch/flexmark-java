@@ -60,8 +60,8 @@ public abstract class DocxContextImpl<T> implements DocxContext<T>, BlockFormatP
         myParaContainer = this;
         myContentContainer = this;
         myDocumentPart = out.getMainDocumentPart();
-        myBlockFormatProviders = new HashMap<T, BlockFormatProvider<T>>();
-        myRunFormatProviders = new HashMap<T, RunFormatProvider<T>>();
+        myBlockFormatProviders = new HashMap<>();
+        myRunFormatProviders = new HashMap<>();
         myBlockFormatProvider = this;
         myFootnoteRef = 1;
         myBookmarkID = new AtomicInteger(1);
@@ -663,7 +663,7 @@ public abstract class DocxContextImpl<T> implements DocxContext<T>, BlockFormatP
     @Override
     public void renderFencedCodeLines(List<? extends CharSequence> lines) {
         contextFramed(() -> {
-            setBlockFormatProvider(new FencedCodeBlockFormatProvider<T>(DocxContextImpl.this));
+            setBlockFormatProvider(new FencedCodeBlockFormatProvider<>(DocxContextImpl.this));
             createP();
 
             int[] leadColumns = new int[lines.size()];
@@ -675,7 +675,7 @@ public abstract class DocxContextImpl<T> implements DocxContext<T>, BlockFormatP
                 i++;
             }
 
-            ArrayList<BasedSequence> trimmedLines = new ArrayList<BasedSequence>();
+            ArrayList<BasedSequence> trimmedLines = new ArrayList<>();
             i = 0;
             for (CharSequence line : lines) {
                 StringBuilder sb = new StringBuilder();

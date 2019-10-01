@@ -84,7 +84,7 @@ public class InlineParserImpl extends LightInlineParserImpl implements InlinePar
         this.document = document;
         this.referenceRepository = document.get(Parser.REFERENCES);
 
-        linkRefProcessors = new ArrayList<LinkRefProcessor>(linkRefProcessorsData.processors.size());
+        linkRefProcessors = new ArrayList<>(linkRefProcessorsData.processors.size());
         for (LinkRefProcessorFactory factory : linkRefProcessorsData.processors) {
             linkRefProcessors.add(factory.apply(document));
         }
@@ -92,10 +92,10 @@ public class InlineParserImpl extends LightInlineParserImpl implements InlinePar
         // create custom processors
         if (inlineParserExtensionFactories != null) {
             Map<Character, List<InlineParserExtensionFactory>> extensions = calculateInlineParserExtensions(document, inlineParserExtensionFactories);
-            inlineParserExtensions = new HashMap<Character, List<InlineParserExtension>>(extensions.size());
+            inlineParserExtensions = new HashMap<>(extensions.size());
             Map<InlineParserExtensionFactory, InlineParserExtension> parserExtensionMap = new HashMap<>();
             for (Map.Entry<Character, List<InlineParserExtensionFactory>> entry : extensions.entrySet()) {
-                List<InlineParserExtension> extensionList = new ArrayList<InlineParserExtension>(entry.getValue().size());
+                List<InlineParserExtension> extensionList = new ArrayList<>(entry.getValue().size());
                 for (InlineParserExtensionFactory factory : entry.getValue()) {
                     InlineParserExtension parserExtension = parserExtensionMap.get(factory);
                     if (parserExtension == null) {
@@ -216,7 +216,7 @@ public class InlineParserImpl extends LightInlineParserImpl implements InlinePar
     @Override
     public void mergeIfNeeded(Text first, Text last) {
         if (first != null && last != null && first != last) {
-            ArrayList<BasedSequence> sb = new ArrayList<BasedSequence>();
+            ArrayList<BasedSequence> sb = new ArrayList<>();
             sb.add(first.getChars());
             Node node = first.getNext();
             Node stop = last.getNext();
@@ -466,7 +466,7 @@ public class InlineParserImpl extends LightInlineParserImpl implements InlinePar
         }
 
         appendNode(node);
-        if (customSpecialCharacterNodes == null) customSpecialCharacterNodes = new ArrayList<Node>();
+        if (customSpecialCharacterNodes == null) customSpecialCharacterNodes = new ArrayList<>();
         customSpecialCharacterNodes.add(node);
 
         int pos = index + 1;
@@ -1395,7 +1395,7 @@ public class InlineParserImpl extends LightInlineParserImpl implements InlinePar
 
     @Override
     public void processDelimiters(Delimiter stackBottom) {
-        Map<Character, Delimiter> openersBottom = new HashMap<Character, Delimiter>();
+        Map<Character, Delimiter> openersBottom = new HashMap<>();
 
         // find first closer above stackBottom:
         Delimiter closer = lastDelimiter;
@@ -1613,7 +1613,7 @@ public class InlineParserImpl extends LightInlineParserImpl implements InlinePar
     }
 
     static Map<Character, List<InlineParserExtensionFactory>> calculateInlineParserExtensions(DataHolder options, List<InlineParserExtensionFactory> extensionFactories) {
-        Map<Character, List<InlineParserExtensionFactory>> extensionMap = new HashMap<Character, List<InlineParserExtensionFactory>>();
+        Map<Character, List<InlineParserExtensionFactory>> extensionMap = new HashMap<>();
 
         for (InlineParserExtensionFactory factory : extensionFactories) {
             CharSequence chars = factory.getCharacters();
@@ -1621,7 +1621,7 @@ public class InlineParserImpl extends LightInlineParserImpl implements InlinePar
                 char c = chars.charAt(i);
                 List<InlineParserExtensionFactory> list = extensionMap.get(c);
                 if (list == null) {
-                    list = new ArrayList<InlineParserExtensionFactory>();
+                    list = new ArrayList<>();
                     extensionMap.put(c, list);
                 }
 
@@ -1630,14 +1630,14 @@ public class InlineParserImpl extends LightInlineParserImpl implements InlinePar
         }
 
         InlineParserExtensionDependencyHandler resolver = new InlineParserExtensionDependencyHandler();
-        Map<Character, List<InlineParserExtensionFactory>> extensions = new HashMap<Character, List<InlineParserExtensionFactory>>();
+        Map<Character, List<InlineParserExtensionFactory>> extensions = new HashMap<>();
         for (Character c : extensionMap.keySet()) {
             List<InlineParserExtensionFactory> list = extensionMap.get(c);
             List<InlineParserExtensionFactory> resolvedList = list;
 
             if (list.size() > 1) {
                 InlineParserExtensionDependencies dependencies = resolver.resolveDependencies(list);
-                resolvedList = new ArrayList<InlineParserExtensionFactory>(list.size());
+                resolvedList = new ArrayList<>(list.size());
                 for (InlineParserDependencyStage stage : dependencies.getDependentStages()) {
                     resolvedList.addAll(stage.dependents);
                 }
@@ -1673,7 +1673,7 @@ public class InlineParserImpl extends LightInlineParserImpl implements InlinePar
     }
 
     public static Map<Character, DelimiterProcessor> calculateDelimiterProcessors(DataHolder options, List<DelimiterProcessor> delimiterProcessors) {
-        Map<Character, DelimiterProcessor> map = new HashMap<Character, DelimiterProcessor>();
+        Map<Character, DelimiterProcessor> map = new HashMap<>();
         //addDelimiterProcessors(Arrays.asList(new AsteriskDelimiterProcessor(), new UnderscoreDelimiterProcessor()), map);
         if (options.get(Parser.ASTERISK_DELIMITER_PROCESSOR)) {
             addDelimiterProcessors(Collections.singletonList(new AsteriskDelimiterProcessor(Parser.STRONG_WRAPS_EMPHASIS.getFrom(options))), map);
@@ -1689,7 +1689,7 @@ public class InlineParserImpl extends LightInlineParserImpl implements InlinePar
     // nothing to add, this is for extensions.
     public static LinkRefProcessorData calculateLinkRefProcessors(DataHolder options, List<LinkRefProcessorFactory> linkRefProcessors) {
         if (linkRefProcessors.size() > 1) {
-            List<LinkRefProcessorFactory> sortedLinkProcessors = new ArrayList<LinkRefProcessorFactory>(linkRefProcessors.size());
+            List<LinkRefProcessorFactory> sortedLinkProcessors = new ArrayList<>(linkRefProcessors.size());
             sortedLinkProcessors.addAll(linkRefProcessors);
 
             int[] maxNestingLevelRef = new int[] { 0 };

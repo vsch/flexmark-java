@@ -20,7 +20,7 @@ public class MacroInlineParser implements InlineParserExtension {
 
     public MacroInlineParser(LightInlineParser inlineParser) {
         this.parsing = new MacroParsing(inlineParser.getParsing());
-        this.openMacros = new ArrayList<Macro>();
+        this.openMacros = new ArrayList<>();
     }
 
     @Override

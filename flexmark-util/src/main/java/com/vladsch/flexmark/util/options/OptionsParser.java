@@ -36,7 +36,7 @@ public class OptionsParser<T> implements OptionParser<T> {
         BasedSequence[] optionsList = optionsText.split(myOptionDelimiter, 0, BasedSequence.SPLIT_TRIM_SKIP_EMPTY);
         T result = options;
         if (provider == null) provider = MessageProvider.DEFAULT;
-        List<ParsedOption<T>> parsedOptions = new ArrayList<ParsedOption<T>>(optionsList.length);
+        List<ParsedOption<T>> parsedOptions = new ArrayList<>(optionsList.length);
 
         for (BasedSequence optionText : optionsList) {
             OptionParser<T> matched = null;
@@ -72,18 +72,18 @@ public class OptionsParser<T> implements OptionParser<T> {
                 if (message == null) {
                     Pair<T, List<ParsedOption<T>>> pair = matched.parseOption(optionValue, result, provider);
                     result = pair.getFirst();
-                    parsedOptions.add(new ParsedOption<T>(optionText, this, ParsedOptionStatus.VALID, null, pair.getSecond()));
+                    parsedOptions.add(new ParsedOption<>(optionText, this, ParsedOptionStatus.VALID, null, pair.getSecond()));
                 } else {
-                    parsedOptions.add(new ParsedOption<T>(optionText, this, ParsedOptionStatus.ERROR, new ParserMessage(optionName, ParsedOptionStatus.ERROR, message.toString())));
+                    parsedOptions.add(new ParsedOption<>(optionText, this, ParsedOptionStatus.ERROR, new ParserMessage(optionName, ParsedOptionStatus.ERROR, message.toString())));
                 }
             } else {
                 message = new DelimitedBuilder(", ");
                 message.append(provider.message(KEY_OPTION_0_DOES_NOT_MATCH, OPTION_0_DOES_NOT_MATCH, optionName));
                 appendOptionNames(message);
-                parsedOptions.add(new ParsedOption<T>(optionText, this, ParsedOptionStatus.ERROR, new ParserMessage(optionName, ParsedOptionStatus.ERROR, message.toString())));
+                parsedOptions.add(new ParsedOption<>(optionText, this, ParsedOptionStatus.ERROR, new ParserMessage(optionName, ParsedOptionStatus.ERROR, message.toString())));
             }
         }
-        return new Pair<T, List<ParsedOption<T>>>(result, parsedOptions);
+        return new Pair<>(result, parsedOptions);
     }
 
     public void appendOptionNames(DelimitedBuilder out) {

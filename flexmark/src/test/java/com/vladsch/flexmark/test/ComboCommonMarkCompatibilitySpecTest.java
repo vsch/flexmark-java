@@ -20,7 +20,7 @@ public class ComboCommonMarkCompatibilitySpecTest extends ComboExtraSpecTest {
             .set(HtmlRenderer.PERCENT_ENCODE_URLS, true)
             .set(HtmlRenderer.RENDER_HEADER_ID, true);
 
-    private static final Map<String, DataHolder> optionsMap = new HashMap<String, DataHolder>();
+    private static final Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
 
     }

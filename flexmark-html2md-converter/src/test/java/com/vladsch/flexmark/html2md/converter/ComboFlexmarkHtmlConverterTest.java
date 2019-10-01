@@ -35,7 +35,7 @@ public class ComboFlexmarkHtmlConverterTest extends ComboSpecTestCase {
             //.set(Parser.EXTENSIONS, Collections.singleton(FlexmarkHtmlConverter.create())
             ;
 
-    private static final Map<String, DataHolder> optionsMap = new HashMap<String, DataHolder>();
+    private static final Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
         optionsMap.put("output-unknown", new MutableDataSet().set(FlexmarkHtmlConverter.OUTPUT_UNKNOWN_TAGS, true));
         optionsMap.put("nbsp", new MutableDataSet().set(FlexmarkHtmlConverter.NBSP_TEXT, "&nbsp;"));
@@ -85,7 +85,7 @@ public class ComboFlexmarkHtmlConverterTest extends ComboSpecTestCase {
 
         optionsMap.put("typo-map", new MutableDataSet().set(FlexmarkHtmlConverter.TYPOGRAPHIC_REPLACEMENT_MAP, getTypographicReplacement()));
 
-        optionsMap.put("for-document", new MutableDataSet().set(FlexmarkHtmlConverter.FOR_DOCUMENT, new Ref<Document>(linkDocument())));
+        optionsMap.put("for-document", new MutableDataSet().set(FlexmarkHtmlConverter.FOR_DOCUMENT, new Ref<>(linkDocument())));
         optionsMap.put("link-resolver", new MutableDataSet().set(Parser.EXTENSIONS, Arrays.asList(HtmlConverterTextExtension.create())));
     }
     private static Map<String, String> getTypographicReplacement() {

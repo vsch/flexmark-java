@@ -41,15 +41,15 @@ public class TableNodeFormatter implements NodeFormatter {
 
     @Override
     public Set<NodeFormattingHandler<?>> getNodeFormattingHandlers() {
-        return new HashSet<NodeFormattingHandler<? extends Node>>(Arrays.asList(
-                new NodeFormattingHandler<TableBlock>(TableBlock.class, TableNodeFormatter.this::render),
-                new NodeFormattingHandler<TableHead>(TableHead.class, TableNodeFormatter.this::render),
-                new NodeFormattingHandler<TableSeparator>(TableSeparator.class, TableNodeFormatter.this::render),
-                new NodeFormattingHandler<TableBody>(TableBody.class, TableNodeFormatter.this::render),
-                new NodeFormattingHandler<TableRow>(TableRow.class, TableNodeFormatter.this::render),
-                new NodeFormattingHandler<TableCell>(TableCell.class, TableNodeFormatter.this::render),
-                new NodeFormattingHandler<TableCaption>(TableCaption.class, TableNodeFormatter.this::render),
-                new NodeFormattingHandler<Text>(Text.class, TableNodeFormatter.this::render)
+        return new HashSet<>(Arrays.asList(
+                new NodeFormattingHandler<>(TableBlock.class, TableNodeFormatter.this::render),
+                new NodeFormattingHandler<>(TableHead.class, TableNodeFormatter.this::render),
+                new NodeFormattingHandler<>(TableSeparator.class, TableNodeFormatter.this::render),
+                new NodeFormattingHandler<>(TableBody.class, TableNodeFormatter.this::render),
+                new NodeFormattingHandler<>(TableRow.class, TableNodeFormatter.this::render),
+                new NodeFormattingHandler<>(TableCell.class, TableNodeFormatter.this::render),
+                new NodeFormattingHandler<>(TableCaption.class, TableNodeFormatter.this::render),
+                new NodeFormattingHandler<>(Text.class, TableNodeFormatter.this::render)
         ));
     }
 

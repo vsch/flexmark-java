@@ -27,7 +27,7 @@ public class TaskListExtension implements Parser.ParserExtension, HtmlRenderer.H
     public static final DataKey<String> ITEM_NOT_DONE_MARKER = new DataKey<>("ITEM_NOT_DONE_MARKER", "<input type=\"checkbox\" class=\"task-list-item-checkbox\" disabled=\"disabled\" readonly=\"readonly\" />&nbsp;");
     public static final DataKey<String> TIGHT_ITEM_CLASS = new DataKey<>("TIGHT_ITEM_CLASS", "task-list-item");
 
-    public static final DataKey<String> LOOSE_ITEM_CLASS = new DataKey<String>("LOOSE_ITEM_CLASS", TIGHT_ITEM_CLASS);
+    public static final DataKey<String> LOOSE_ITEM_CLASS = new DataKey<>("LOOSE_ITEM_CLASS", TIGHT_ITEM_CLASS);
     public static final DataKey<String> PARAGRAPH_CLASS = new DataKey<>("PARAGRAPH_CLASS", "");
     public static final DataKey<String> ITEM_DONE_CLASS = new DataKey<>("ITEM_DONE_CLASS", "");
     public static final DataKey<String> ITEM_NOT_DONE_CLASS = new DataKey<>("ITEM_NOT_DONE_CLASS", "");

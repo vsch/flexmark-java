@@ -583,8 +583,8 @@ public class MarkdownTable {
         alignments = new CellAlignment[sepColumns];
         columnWidths = new int[sepColumns];
         BitSet spanAlignment = new BitSet(sepColumns);
-        List<ColumnSpan> columnSpans = new ArrayList<ColumnSpan>();
-        Ref<Integer> delta = new Ref<Integer>(0);
+        List<ColumnSpan> columnSpans = new ArrayList<>();
+        Ref<Integer> delta = new Ref<>(0);
 
         if (separator.rows.size() > 0) {
             TableRow row = separator.rows.get(0);
@@ -692,7 +692,7 @@ public class MarkdownTable {
             // now need to distribute extra width from spans to contained columns
             int[] additionalWidths = new int[sepColumns];
             BitSet unfixedColumns = new BitSet(sepColumns);
-            List<ColumnSpan> newColumnSpans = new ArrayList<ColumnSpan>(columnSpans.size());
+            List<ColumnSpan> newColumnSpans = new ArrayList<>(columnSpans.size());
 
             for (ColumnSpan columnSpan : columnSpans) {
                 int spanWidth = spanWidth(columnSpan.startColumn, columnSpan.columnSpan);
@@ -775,7 +775,7 @@ public class MarkdownTable {
 
     public void appendTable(LineFormattingAppendable out) {
         // we will prepare the separator based on max columns
-        Ref<Integer> delta = new Ref<Integer>(0);
+        Ref<Integer> delta = new Ref<>(0);
         String linePrefix = options.formatTableIndentPrefix;
         trackedOffsets.clear();
 

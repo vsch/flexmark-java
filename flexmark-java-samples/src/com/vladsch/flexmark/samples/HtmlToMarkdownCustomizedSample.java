@@ -76,7 +76,7 @@ public class HtmlToMarkdownCustomizedSample {
         @Override
         public Set<HtmlNodeRendererHandler<?>> getHtmlNodeRendererHandlers() {
             return new HashSet<>(Collections.singletonList(
-                    new HtmlNodeRendererHandler<Element>("kbd", Element.class, this::processKbd)
+                    new HtmlNodeRendererHandler<>("kbd", Element.class, this::processKbd)
             ));
         }
 

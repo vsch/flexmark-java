@@ -648,7 +648,7 @@ public class Utils {
     }
 
     public static <K, V> Map<K, V> withDefaults(Map<K, V> receiver, Map<K, V> defaults) {
-        HashMap<K, V> map = new HashMap<K, V>(receiver);
+        HashMap<K, V> map = new HashMap<>(receiver);
         for (Map.Entry<K, V> entry : defaults.entrySet()) {
             putIfMissing(map, entry.getKey(), entry::getValue);
         }

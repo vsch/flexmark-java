@@ -35,8 +35,8 @@ import static com.vladsch.flexmark.util.sequence.BasedSequence.NULL;
 public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceRepository, Reference, RefNode> {
     public static final DataKey<Integer> LIST_ITEM_NUMBER = new DataKey<>("LIST_ITEM_NUMBER", 0);
     public static final DataKey<ListSpacing> LIST_ITEM_SPACING = new DataKey<>("LIST_ITEM_SPACING", (ListSpacing) null);
-    public static final DataKey<Map<String, String>> UNIQUIFICATION_MAP = new DataKey<Map<String, String>>("REFERENCES_UNIQUIFICATION_MAP", new HashMap<>());
-    public static final DataKey<Map<String, String>> ATTRIBUTE_UNIQUIFICATION_ID_MAP = new DataKey<Map<String, String>>("ATTRIBUTE_UNIQUIFICATION_ID_MAP", new HashMap<String, String>());
+    public static final DataKey<Map<String, String>> UNIQUIFICATION_MAP = new DataKey<>("REFERENCES_UNIQUIFICATION_MAP", new HashMap<>());
+    public static final DataKey<Map<String, String>> ATTRIBUTE_UNIQUIFICATION_ID_MAP = new DataKey<>("ATTRIBUTE_UNIQUIFICATION_ID_MAP", new HashMap<>());
 
     public static class Factory implements NodeFormatterFactory {
         @Override
@@ -69,7 +69,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
     public Set<Class<?>> getNodeClasses() {
         if (formatterOptions.referencePlacement != ElementPlacement.AS_IS && formatterOptions.referenceSort != ElementPlacementSort.SORT_UNUSED_LAST) return null;
         // noinspection ArraysAsListWithZeroOrOneArgument
-        return new HashSet<Class<?>>(Arrays.asList(
+        return new HashSet<>(Arrays.asList(
                 RefNode.class
         ));
     }
@@ -197,44 +197,44 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
 
     @Override
     public Set<NodeFormattingHandler<?>> getNodeFormattingHandlers() {
-        return new HashSet<NodeFormattingHandler<? extends Node>>(Arrays.asList(
+        return new HashSet<>(Arrays.asList(
                 // Generic unknown node formatter
-                new NodeFormattingHandler<Node>(Node.class, CoreNodeFormatter.this::render),
+                new NodeFormattingHandler<>(Node.class, CoreNodeFormatter.this::render),
 
                 // specific nodes
-                new NodeFormattingHandler<AutoLink>(AutoLink.class, CoreNodeFormatter.this::render),
-                new NodeFormattingHandler<BlankLine>(BlankLine.class, CoreNodeFormatter.this::render),
-                new NodeFormattingHandler<BlockQuote>(BlockQuote.class, CoreNodeFormatter.this::render),
-                new NodeFormattingHandler<Code>(Code.class, CoreNodeFormatter.this::render),
-                new NodeFormattingHandler<Document>(Document.class, CoreNodeFormatter.this::render),
-                new NodeFormattingHandler<Emphasis>(Emphasis.class, CoreNodeFormatter.this::render),
-                new NodeFormattingHandler<FencedCodeBlock>(FencedCodeBlock.class, CoreNodeFormatter.this::render),
-                new NodeFormattingHandler<HardLineBreak>(HardLineBreak.class, CoreNodeFormatter.this::render),
-                new NodeFormattingHandler<Heading>(Heading.class, CoreNodeFormatter.this::render),
-                new NodeFormattingHandler<HtmlBlock>(HtmlBlock.class, CoreNodeFormatter.this::render),
-                new NodeFormattingHandler<HtmlCommentBlock>(HtmlCommentBlock.class, CoreNodeFormatter.this::render),
-                new NodeFormattingHandler<HtmlInnerBlock>(HtmlInnerBlock.class, CoreNodeFormatter.this::render),
-                new NodeFormattingHandler<HtmlInnerBlockComment>(HtmlInnerBlockComment.class, CoreNodeFormatter.this::render),
-                new NodeFormattingHandler<HtmlEntity>(HtmlEntity.class, CoreNodeFormatter.this::render),
-                new NodeFormattingHandler<HtmlInline>(HtmlInline.class, CoreNodeFormatter.this::render),
-                new NodeFormattingHandler<HtmlInlineComment>(HtmlInlineComment.class, CoreNodeFormatter.this::render),
-                new NodeFormattingHandler<Image>(Image.class, CoreNodeFormatter.this::render),
-                new NodeFormattingHandler<ImageRef>(ImageRef.class, CoreNodeFormatter.this::render),
-                new NodeFormattingHandler<IndentedCodeBlock>(IndentedCodeBlock.class, CoreNodeFormatter.this::render),
-                new NodeFormattingHandler<Link>(Link.class, CoreNodeFormatter.this::render),
-                new NodeFormattingHandler<LinkRef>(LinkRef.class, CoreNodeFormatter.this::render),
-                new NodeFormattingHandler<BulletList>(BulletList.class, CoreNodeFormatter.this::render),
-                new NodeFormattingHandler<OrderedList>(OrderedList.class, CoreNodeFormatter.this::render),
-                new NodeFormattingHandler<BulletListItem>(BulletListItem.class, CoreNodeFormatter.this::render),
-                new NodeFormattingHandler<OrderedListItem>(OrderedListItem.class, CoreNodeFormatter.this::render),
-                new NodeFormattingHandler<MailLink>(MailLink.class, CoreNodeFormatter.this::render),
-                new NodeFormattingHandler<Paragraph>(Paragraph.class, CoreNodeFormatter.this::render),
-                new NodeFormattingHandler<Reference>(Reference.class, CoreNodeFormatter.this::render),
-                new NodeFormattingHandler<SoftLineBreak>(SoftLineBreak.class, CoreNodeFormatter.this::render),
-                new NodeFormattingHandler<StrongEmphasis>(StrongEmphasis.class, CoreNodeFormatter.this::render),
-                new NodeFormattingHandler<Text>(Text.class, CoreNodeFormatter.this::render),
-                new NodeFormattingHandler<TextBase>(TextBase.class, CoreNodeFormatter.this::render),
-                new NodeFormattingHandler<ThematicBreak>(ThematicBreak.class, CoreNodeFormatter.this::render)
+                new NodeFormattingHandler<>(AutoLink.class, CoreNodeFormatter.this::render),
+                new NodeFormattingHandler<>(BlankLine.class, CoreNodeFormatter.this::render),
+                new NodeFormattingHandler<>(BlockQuote.class, CoreNodeFormatter.this::render),
+                new NodeFormattingHandler<>(Code.class, CoreNodeFormatter.this::render),
+                new NodeFormattingHandler<>(Document.class, CoreNodeFormatter.this::render),
+                new NodeFormattingHandler<>(Emphasis.class, CoreNodeFormatter.this::render),
+                new NodeFormattingHandler<>(FencedCodeBlock.class, CoreNodeFormatter.this::render),
+                new NodeFormattingHandler<>(HardLineBreak.class, CoreNodeFormatter.this::render),
+                new NodeFormattingHandler<>(Heading.class, CoreNodeFormatter.this::render),
+                new NodeFormattingHandler<>(HtmlBlock.class, CoreNodeFormatter.this::render),
+                new NodeFormattingHandler<>(HtmlCommentBlock.class, CoreNodeFormatter.this::render),
+                new NodeFormattingHandler<>(HtmlInnerBlock.class, CoreNodeFormatter.this::render),
+                new NodeFormattingHandler<>(HtmlInnerBlockComment.class, CoreNodeFormatter.this::render),
+                new NodeFormattingHandler<>(HtmlEntity.class, CoreNodeFormatter.this::render),
+                new NodeFormattingHandler<>(HtmlInline.class, CoreNodeFormatter.this::render),
+                new NodeFormattingHandler<>(HtmlInlineComment.class, CoreNodeFormatter.this::render),
+                new NodeFormattingHandler<>(Image.class, CoreNodeFormatter.this::render),
+                new NodeFormattingHandler<>(ImageRef.class, CoreNodeFormatter.this::render),
+                new NodeFormattingHandler<>(IndentedCodeBlock.class, CoreNodeFormatter.this::render),
+                new NodeFormattingHandler<>(Link.class, CoreNodeFormatter.this::render),
+                new NodeFormattingHandler<>(LinkRef.class, CoreNodeFormatter.this::render),
+                new NodeFormattingHandler<>(BulletList.class, CoreNodeFormatter.this::render),
+                new NodeFormattingHandler<>(OrderedList.class, CoreNodeFormatter.this::render),
+                new NodeFormattingHandler<>(BulletListItem.class, CoreNodeFormatter.this::render),
+                new NodeFormattingHandler<>(OrderedListItem.class, CoreNodeFormatter.this::render),
+                new NodeFormattingHandler<>(MailLink.class, CoreNodeFormatter.this::render),
+                new NodeFormattingHandler<>(Paragraph.class, CoreNodeFormatter.this::render),
+                new NodeFormattingHandler<>(Reference.class, CoreNodeFormatter.this::render),
+                new NodeFormattingHandler<>(SoftLineBreak.class, CoreNodeFormatter.this::render),
+                new NodeFormattingHandler<>(StrongEmphasis.class, CoreNodeFormatter.this::render),
+                new NodeFormattingHandler<>(Text.class, CoreNodeFormatter.this::render),
+                new NodeFormattingHandler<>(TextBase.class, CoreNodeFormatter.this::render),
+                new NodeFormattingHandler<>(ThematicBreak.class, CoreNodeFormatter.this::render)
         ));
     }
 
@@ -455,7 +455,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
                     minSpaces = Utils.min(minSpaces, leadColumns[i]);
                     i++;
                 }
-                ArrayList<BasedSequence> trimmedLines = new ArrayList<BasedSequence>();
+                ArrayList<BasedSequence> trimmedLines = new ArrayList<>();
                 if (minSpaces > 0) {
                     i = 0;
                     //StringBuilder out = new StringBuilder();
@@ -551,7 +551,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
     }
 
     public static void renderList(ListBlock node, NodeFormatterContext context, MarkdownWriter markdown) {
-        ArrayList<Node> itemList = new ArrayList<Node>();
+        ArrayList<Node> itemList = new ArrayList<>();
         Node item = node.getFirstChild();
         while (item != null) {
             itemList.add(item);
@@ -927,7 +927,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
     }
 
     public static final DataKey<Boolean> UNWRAPPED_AUTO_LINKS = new DataKey<>("UNWRAPPED_AUTO_LINKS", false);
-    public static final DataKey<HashSet<String>> UNWRAPPED_AUTO_LINKS_MAP = new DataKey<>("UNWRAPPED_AUTO_LINKS_MAP", new HashSet<String>());
+    public static final DataKey<HashSet<String>> UNWRAPPED_AUTO_LINKS_MAP = new DataKey<>("UNWRAPPED_AUTO_LINKS_MAP", new HashSet<>());
 
     private void render(AutoLink node, NodeFormatterContext context, MarkdownWriter markdown) {
         renderAutoLink(node, context, markdown, myTranslationAutolinkPrefix, null);

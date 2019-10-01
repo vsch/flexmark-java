@@ -34,11 +34,11 @@ public class AbbreviationNodePostProcessor extends NodePostProcessor {
         AbbreviationRepository abbrRepository = document.get(AbbreviationExtension.ABBREVIATIONS);
 
         if (!abbrRepository.isEmpty()) {
-            abbreviationMap = new HashMap<String, BasedSequence>();
+            abbreviationMap = new HashMap<>();
             StringBuilder sb = new StringBuilder();
 
             // sort reverse alphabetical order so longer ones match first. for sdk7
-            ArrayList<String> abbreviations = new ArrayList<String>(abbrRepository.keySet());
+            ArrayList<String> abbreviations = new ArrayList<>(abbrRepository.keySet());
             Collections.sort(abbreviations, Comparator.reverseOrder());
 
             for (String abbr : abbreviations) {
@@ -126,7 +126,7 @@ public class AbbreviationNodePostProcessor extends NodePostProcessor {
     public static class Factory extends NodePostProcessorFactory {
         @Override
         public Set<Class<? extends PostProcessorFactory>> getAfterDependents() {
-            HashSet<Class<? extends PostProcessorFactory>> set = new HashSet<Class<? extends PostProcessorFactory>>();
+            HashSet<Class<? extends PostProcessorFactory>> set = new HashSet<>();
             set.add(AutolinkNodePostProcessor.Factory.class);
             return set;
         }

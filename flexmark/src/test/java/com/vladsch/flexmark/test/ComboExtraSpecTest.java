@@ -22,7 +22,7 @@ public class ComboExtraSpecTest extends ComboSpecTestCase {
             .set(HtmlRenderer.OBFUSCATE_EMAIL_RANDOM, false)
             .set(HtmlRenderer.PERCENT_ENCODE_URLS, true);
 
-    protected static final Map<String, DataHolder> optionsMap = new HashMap<String, DataHolder>();
+    protected static final Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
         optionsMap.put("obfuscate-email", new MutableDataSet().set(HtmlRenderer.OBFUSCATE_EMAIL, true));
         optionsMap.put("keep-blank-lines", new MutableDataSet().set(Parser.BLANK_LINES_IN_AST, true));

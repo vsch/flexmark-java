@@ -43,17 +43,17 @@ public class HtmlRenderer implements IRender {
     public static final DataKey<Boolean> PERCENT_ENCODE_URLS = new DataKey<>("PERCENT_ENCODE_URLS", false);
     public static final DataKey<Integer> INDENT_SIZE = new DataKey<>("INDENT_SIZE", 0);
     public static final DataKey<Boolean> ESCAPE_HTML = new DataKey<>("ESCAPE_HTML", false);
-    public static final DataKey<Boolean> ESCAPE_HTML_BLOCKS = new DataKey<Boolean>("ESCAPE_HTML_BLOCKS", ESCAPE_HTML);
-    public static final DataKey<Boolean> ESCAPE_HTML_COMMENT_BLOCKS = new DataKey<Boolean>("ESCAPE_HTML_COMMENT_BLOCKS", ESCAPE_HTML_BLOCKS);
-    public static final DataKey<Boolean> ESCAPE_INLINE_HTML = new DataKey<Boolean>("ESCAPE_HTML_BLOCKS", ESCAPE_HTML);
-    public static final DataKey<Boolean> ESCAPE_INLINE_HTML_COMMENTS = new DataKey<Boolean>("ESCAPE_INLINE_HTML_COMMENTS", ESCAPE_INLINE_HTML);
+    public static final DataKey<Boolean> ESCAPE_HTML_BLOCKS = new DataKey<>("ESCAPE_HTML_BLOCKS", ESCAPE_HTML);
+    public static final DataKey<Boolean> ESCAPE_HTML_COMMENT_BLOCKS = new DataKey<>("ESCAPE_HTML_COMMENT_BLOCKS", ESCAPE_HTML_BLOCKS);
+    public static final DataKey<Boolean> ESCAPE_INLINE_HTML = new DataKey<>("ESCAPE_HTML_BLOCKS", ESCAPE_HTML);
+    public static final DataKey<Boolean> ESCAPE_INLINE_HTML_COMMENTS = new DataKey<>("ESCAPE_INLINE_HTML_COMMENTS", ESCAPE_INLINE_HTML);
     public static final DataKey<Boolean> SUPPRESS_HTML = new DataKey<>("SUPPRESS_HTML", false);
-    public static final DataKey<Boolean> SUPPRESS_HTML_BLOCKS = new DataKey<Boolean>("SUPPRESS_HTML_BLOCKS", SUPPRESS_HTML);
-    public static final DataKey<Boolean> SUPPRESS_HTML_COMMENT_BLOCKS = new DataKey<Boolean>("SUPPRESS_HTML_COMMENT_BLOCKS", SUPPRESS_HTML_BLOCKS);
-    public static final DataKey<Boolean> SUPPRESS_INLINE_HTML = new DataKey<Boolean>("SUPPRESS_INLINE_HTML", SUPPRESS_HTML);
-    public static final DataKey<Boolean> SUPPRESS_INLINE_HTML_COMMENTS = new DataKey<Boolean>("SUPPRESS_INLINE_HTML_COMMENTS", SUPPRESS_INLINE_HTML);
+    public static final DataKey<Boolean> SUPPRESS_HTML_BLOCKS = new DataKey<>("SUPPRESS_HTML_BLOCKS", SUPPRESS_HTML);
+    public static final DataKey<Boolean> SUPPRESS_HTML_COMMENT_BLOCKS = new DataKey<>("SUPPRESS_HTML_COMMENT_BLOCKS", SUPPRESS_HTML_BLOCKS);
+    public static final DataKey<Boolean> SUPPRESS_INLINE_HTML = new DataKey<>("SUPPRESS_INLINE_HTML", SUPPRESS_HTML);
+    public static final DataKey<Boolean> SUPPRESS_INLINE_HTML_COMMENTS = new DataKey<>("SUPPRESS_INLINE_HTML_COMMENTS", SUPPRESS_INLINE_HTML);
     public static final DataKey<Boolean> SOURCE_WRAP_HTML = new DataKey<>("SOURCE_WRAP_HTML", false);
-    public static final DataKey<Boolean> SOURCE_WRAP_HTML_BLOCKS = new DataKey<Boolean>("SOURCE_WRAP_HTML_BLOCKS", SOURCE_WRAP_HTML);
+    public static final DataKey<Boolean> SOURCE_WRAP_HTML_BLOCKS = new DataKey<>("SOURCE_WRAP_HTML_BLOCKS", SOURCE_WRAP_HTML);
     //public static final DataKey<Boolean> SOURCE_WRAP_INLINE_HTML = new DynamicDefaultKey<>("SOURCE_WRAP_INLINE_HTML", SOURCE_WRAP_HTML::getFrom);
     public static final DataKey<Boolean> HEADER_ID_GENERATOR_RESOLVE_DUPES = new DataKey<>("HEADER_ID_GENERATOR_RESOLVE_DUPES", true);
     public static final DataKey<String> HEADER_ID_GENERATOR_TO_DASH_CHARS = new DataKey<>("HEADER_ID_GENERATOR_TO_DASH_CHARS", " -_");
@@ -68,7 +68,7 @@ public class HtmlRenderer implements IRender {
     public static final DataKey<String> SOURCE_POSITION_ATTRIBUTE = new DataKey<>("SOURCE_POSITION_ATTRIBUTE", "");
     public static final DataKey<Boolean> SOURCE_POSITION_PARAGRAPH_LINES = new DataKey<>("SOURCE_POSITION_PARAGRAPH_LINES", false);
     public static final DataKey<String> TYPE = new DataKey<>("TYPE", "HTML");
-    public static final DataKey<ArrayList<TagRange>> TAG_RANGES = new DataKey<ArrayList<TagRange>>("TAG_RANGES", value -> new ArrayList<TagRange>());
+    public static final DataKey<ArrayList<TagRange>> TAG_RANGES = new DataKey<>("TAG_RANGES", value -> new ArrayList<>());
 
     public static final DataKey<Boolean> RECHECK_UNDEFINED_REFERENCES = new DataKey<>("RECHECK_UNDEFINED_REFERENCES", false);
     public static final DataKey<Boolean> OBFUSCATE_EMAIL = new DataKey<>("OBFUSCATE_EMAIL", false);
@@ -104,7 +104,7 @@ public class HtmlRenderer implements IRender {
      * <p>
      * Pair contains: rendererType, equivalentType
      */
-    public static final DataKey<List<Pair<String, String>>> RENDERER_TYPE_EQUIVALENCE = new DataKey<List<Pair<String, String>>>("RENDERER_TYPE_EQUIVALENCE", Collections.<Pair<String, String>>emptyList());
+    public static final DataKey<List<Pair<String, String>>> RENDERER_TYPE_EQUIVALENCE = new DataKey<>("RENDERER_TYPE_EQUIVALENCE", Collections.<Pair<String, String>>emptyList());
 
     // for convenience or these together and set FORMAT_FLAGS key above to the value, to have HtmlWriter apply these when rendering Html
     public static final int FORMAT_CONVERT_TABS = LineFormattingAppendable.CONVERT_TABS;
@@ -129,7 +129,7 @@ public class HtmlRenderer implements IRender {
         this.htmlIdGeneratorFactory = builder.htmlIdGeneratorFactory;
 
         // resolve renderer dependencies
-        List<DelegatingNodeRendererFactoryWrapper> nodeRenderers = new ArrayList<DelegatingNodeRendererFactoryWrapper>(builder.nodeRendererFactories.size());
+        List<DelegatingNodeRendererFactoryWrapper> nodeRenderers = new ArrayList<>(builder.nodeRendererFactories.size());
 
         for (int i = builder.nodeRendererFactories.size() - 1; i >= 0; i--) {
             NodeRendererFactory nodeRendererFactory = builder.nodeRendererFactories.get(i);
@@ -250,7 +250,7 @@ public class HtmlRenderer implements IRender {
             // need to add
             List<Pair<String, String>> equivalence = RENDERER_TYPE_EQUIVALENCE.getFrom(options);
             ArrayList<Pair<String, String>> newEquivalence = new ArrayList<>(equivalence);
-            newEquivalence.add(new Pair<String, String>(rendererType, supportedRendererType));
+            newEquivalence.add(new Pair<>(rendererType, supportedRendererType));
             options.set(RENDERER_TYPE_EQUIVALENCE, newEquivalence);
         }
         return options;
@@ -261,8 +261,8 @@ public class HtmlRenderer implements IRender {
      */
     public static class Builder extends BuilderBase<Builder> implements RendererBuilder {
         Map<Class, AttributeProviderFactory> attributeProviderFactories = new LinkedHashMap<>();
-        List<NodeRendererFactory> nodeRendererFactories = new ArrayList<NodeRendererFactory>();
-        List<LinkResolverFactory> linkResolverFactories = new ArrayList<LinkResolverFactory>();
+        List<NodeRendererFactory> nodeRendererFactories = new ArrayList<>();
+        List<LinkResolverFactory> linkResolverFactories = new ArrayList<>();
         HeaderIdGeneratorFactory htmlIdGeneratorFactory = null;
 
         public Builder() {
@@ -501,7 +501,7 @@ public class HtmlRenderer implements IRender {
 
         public RendererDependencies(List<RendererDependencyStage> dependentStages) {
             super(dependentStages);
-            List<DelegatingNodeRendererFactoryWrapper> blockPreProcessorFactories = new ArrayList<DelegatingNodeRendererFactoryWrapper>();
+            List<DelegatingNodeRendererFactoryWrapper> blockPreProcessorFactories = new ArrayList<>();
             for (RendererDependencyStage stage : dependentStages) {
                 blockPreProcessorFactories.addAll(stage.dependents);
             }
@@ -539,7 +539,7 @@ public class HtmlRenderer implements IRender {
         private DataHolder options;
         private RenderingPhase phase;
         private HtmlIdGenerator htmlIdGenerator;
-        private HashMap<LinkType, HashMap<String, ResolvedLink>> resolvedLinkMap = new HashMap<LinkType, HashMap<String, ResolvedLink>>();
+        private HashMap<LinkType, HashMap<String, ResolvedLink>> resolvedLinkMap = new HashMap<>();
         private AttributeProvider[] attributeProviders;
 
         @Override
@@ -570,9 +570,9 @@ public class HtmlRenderer implements IRender {
             super(htmlWriter);
             this.options = new ScopedDataSet(document, options);
             this.document = document;
-            this.renderers = new HashMap<Class<?>, NodeRenderingHandlerWrapper>(32);
-            this.renderingPhases = new HashSet<RenderingPhase>(RenderingPhase.values().length);
-            this.phasedRenderers = new ArrayList<PhasedNodeRenderer>(nodeRendererFactories.size());
+            this.renderers = new HashMap<>(32);
+            this.renderingPhases = new HashSet<>(RenderingPhase.values().length);
+            this.phasedRenderers = new ArrayList<>(nodeRendererFactories.size());
             this.myLinkResolvers = new LinkResolver[linkResolverFactories.size()];
             this.doNotRenderLinksNesting = htmlOptions.doNotRenderLinksInDocument ? 0 : 1;
             this.htmlIdGenerator = htmlIdGeneratorFactory != null ? htmlIdGeneratorFactory.create(this)
@@ -619,7 +619,7 @@ public class HtmlRenderer implements IRender {
         public ResolvedLink resolveLink(LinkType linkType, CharSequence url, Attributes attributes, Boolean urlEncode) {
             HashMap<String, ResolvedLink> resolvedLinks = resolvedLinkMap.get(linkType);
             if (resolvedLinks == null) {
-                resolvedLinks = new HashMap<String, ResolvedLink>();
+                resolvedLinks = new HashMap<>();
                 resolvedLinkMap.put(linkType, resolvedLinks);
             }
 

@@ -62,7 +62,7 @@ public class SpecIntegrationTest extends SpecTestCase {
     }
 
     private static Map<String, String> getOverriddenExamples() {
-        Map<String, String> m = new HashMap<String, String>();
+        Map<String, String> m = new HashMap<>();
 
         // Not a spec autolink because of space, but the resulting text contains a valid URL
         m.put("<http://foo.bar/baz bim>\n", "<p>&lt;<a href=\"http://foo.bar/baz\">http://foo.bar/baz</a> bim&gt;</p>\n");

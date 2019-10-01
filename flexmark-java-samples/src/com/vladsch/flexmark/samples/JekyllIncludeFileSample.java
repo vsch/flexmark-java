@@ -33,7 +33,7 @@ public class JekyllIncludeFileSample {
             Document doc = (Document) document;
             if (doc.contains(JekyllTagExtension.TAG_LIST)) {
                 List<JekyllTag> tagList = JekyllTagExtension.TAG_LIST.getFrom(doc);
-                Map<String, String> includeHtmlMap = new HashMap<String, String>();
+                Map<String, String> includeHtmlMap = new HashMap<>();
 
                 for (JekyllTag tag : tagList) {
                     String includeFile = tag.getParameters().toString();
@@ -70,7 +70,7 @@ public class JekyllIncludeFileSample {
     }
 
     public static void main(String[] args) {
-        Map<String, String> included = new HashMap<String, String>();
+        Map<String, String> included = new HashMap<>();
         included.put("test.md", "## Included Heading\n" +
                 "\n" +
                 "Included paragraph\n" +

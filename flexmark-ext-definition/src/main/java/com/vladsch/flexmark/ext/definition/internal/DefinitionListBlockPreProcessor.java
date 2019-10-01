@@ -56,14 +56,14 @@ public class DefinitionListBlockPreProcessor implements BlockPreProcessor {
     public static class Factory implements BlockPreProcessorFactory {
         @Override
         public Set<Class<? extends Block>> getBlockTypes() {
-            HashSet<Class<? extends Block>> set = new HashSet<Class<? extends Block>>();
+            HashSet<Class<? extends Block>> set = new HashSet<>();
             set.add(DefinitionList.class);
             return set;
         }
 
         @Override
         public Set<Class<? extends BlockPreProcessorFactory>> getAfterDependents() {
-            HashSet<Class<? extends BlockPreProcessorFactory>> set = new HashSet<Class<? extends BlockPreProcessorFactory>>();
+            HashSet<Class<? extends BlockPreProcessorFactory>> set = new HashSet<>();
             set.add(DefinitionListItemBlockPreProcessor.Factory.class);
             return set;
         }

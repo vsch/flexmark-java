@@ -162,7 +162,7 @@ public class TocUtils {
     }
 
     public static List<Heading> filteredHeadings(List<Heading> headings, TocOptions tocOptions) {
-        ArrayList<Heading> filteredHeadings = new ArrayList<Heading>(headings.size());
+        ArrayList<Heading> filteredHeadings = new ArrayList<>(headings.size());
 
         for (Heading header : headings) {
             if (tocOptions.isLevelIncluded(header.getLevel()) && !(header.getParent() instanceof SimTocContent)) {
@@ -174,12 +174,12 @@ public class TocUtils {
     }
 
     public static Paired<List<Heading>, List<String>> htmlHeadingTexts(NodeRendererContext context, List<Heading> headings, TocOptions tocOptions) {
-        final List<String> headingContents = new ArrayList<String>(headings.size());
+        final List<String> headingContents = new ArrayList<>(headings.size());
         final boolean isReversed = tocOptions.listType == TocOptions.ListType.SORTED_REVERSED || tocOptions.listType == TocOptions.ListType.FLAT_REVERSED;
         final boolean isSorted = tocOptions.listType == TocOptions.ListType.SORTED || tocOptions.listType == TocOptions.ListType.SORTED_REVERSED;
         final boolean needText = isReversed || isSorted;
-        final HashMap<String, Heading> headingNodes = !needText ? null : new HashMap<String, Heading>(headings.size());
-        final HashMap<String, String> headingTexts = !needText || tocOptions.isTextOnly ? null : new HashMap<String, String>(headings.size());
+        final HashMap<String, Heading> headingNodes = !needText ? null : new HashMap<>(headings.size());
+        final HashMap<String, String> headingTexts = !needText || tocOptions.isTextOnly ? null : new HashMap<>(headings.size());
 
         for (Heading heading : headings) {
             String headingContent;
@@ -219,7 +219,7 @@ public class TocUtils {
                 }
             }
 
-            headings = new ArrayList<Heading>();
+            headings = new ArrayList<>();
             for (String headingContent : headingContents) {
                 headings.add(headingNodes.get(headingContent));
             }
@@ -240,7 +240,7 @@ public class TocUtils {
     }
 
     public static List<String> markdownHeaderTexts(List<Heading> headings, TocOptions tocOptions) {
-        ArrayList<String> headingTexts = new ArrayList<String>(headings.size());
+        ArrayList<String> headingTexts = new ArrayList<>(headings.size());
         for (Heading header : headings) {
             String headerText;
             // need to skip anchor links but render emphasis

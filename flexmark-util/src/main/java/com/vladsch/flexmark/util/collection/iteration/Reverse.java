@@ -71,12 +71,12 @@ public class Reverse<T> implements ReversibleIterable<T> {
 
     @Override
     public ReversibleIterator<T> iterator() {
-        return new ReversedListIterator<T>(myList, myIsReversed);
+        return new ReversedListIterator<>(myList, myIsReversed);
     }
 
     @Override
     public ReversibleIterable<T> reversed() {
-        return new Reverse<T>(myList, !myIsReversed);
+        return new Reverse<>(myList, !myIsReversed);
     }
 
     @Override
@@ -86,6 +86,6 @@ public class Reverse<T> implements ReversibleIterable<T> {
 
     @Override
     public ReversibleIterator<T> reversedIterator() {
-        return new ReversedListIterator<T>(myList, !myIsReversed);
+        return new ReversedListIterator<>(myList, !myIsReversed);
     }
 }

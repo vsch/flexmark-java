@@ -25,17 +25,17 @@ public class ZzzzzzNodeRenderer implements NodeRenderer
 
     @Override
     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
-        Set<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
+        Set<NodeRenderingHandler<?>> set = new HashSet<>();
         // @formatter:off
-        set.add(new NodeRenderingHandler<Zzzzzz>(Zzzzzz.class, ZzzzzzNodeRenderer.this::render));// zzzoptionszzz(CUSTOM_NODE)
-        set.add(new NodeRenderingHandler<ZzzzzzBlock>(ZzzzzzBlock.class, ZzzzzzNodeRenderer.this::render));// zzzoptionszzz(CUSTOM_BLOCK_NODE),// zzzoptionszzz(CUSTOM_NODE)
+        set.add(new NodeRenderingHandler<>(Zzzzzz.class, ZzzzzzNodeRenderer.this::render));// zzzoptionszzz(CUSTOM_NODE)
+        set.add(new NodeRenderingHandler<>(ZzzzzzBlock.class, ZzzzzzNodeRenderer.this::render));// zzzoptionszzz(CUSTOM_BLOCK_NODE),// zzzoptionszzz(CUSTOM_NODE)
         // @formatter:on
         return set;
     }
 
     @Override//zzzoptionszzz(REMOVE, PHASED_NODE_RENDERER)
     public Set<RenderingPhase> getRenderingPhases() {//zzzoptionszzz(REMOVE, PHASED_NODE_RENDERER)
-        return new HashSet<RenderingPhase>(Collections.singletonList(RenderingPhase.BODY_BOTTOM));//zzzoptionszzz(REMOVE, PHASED_NODE_RENDERER)
+        return new HashSet<>(Collections.singletonList(RenderingPhase.BODY_BOTTOM));//zzzoptionszzz(REMOVE, PHASED_NODE_RENDERER)
     }//zzzoptionszzz(REMOVE, PHASED_NODE_RENDERER)
 
     @Override//zzzoptionszzz(REMOVE, PHASED_NODE_RENDERER)

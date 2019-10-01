@@ -23,11 +23,11 @@ public class AttributesNodeRenderer implements NodeRenderer {
     // only registered if assignTextAttributes is enabled
     @Override
     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
-        HashSet<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
-        set.add(new NodeRenderingHandler<AttributesNode>(AttributesNode.class, (node, context, html) -> {
+        HashSet<NodeRenderingHandler<?>> set = new HashSet<>();
+        set.add(new NodeRenderingHandler<>(AttributesNode.class, (node, context, html) -> {
 
         }));
-        set.add(new NodeRenderingHandler<TextBase>(TextBase.class, (node, context, html) -> {
+        set.add(new NodeRenderingHandler<>(TextBase.class, (node, context, html) -> {
             if (myOptions.assignTextAttributes) {
                 Attributes nodeAttributes = context.extendRenderingNodeAttributes(AttributablePart.NODE, null);
                 if (!nodeAttributes.isEmpty()) {

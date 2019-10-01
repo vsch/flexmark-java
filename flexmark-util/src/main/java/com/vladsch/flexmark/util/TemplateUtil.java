@@ -16,7 +16,7 @@ public class TemplateUtil {
         }
 
         public MappedResolver() {
-            this(new HashMap<String, String>());
+            this(new HashMap<>());
         }
 
         public MappedResolver set(String name, String value) {

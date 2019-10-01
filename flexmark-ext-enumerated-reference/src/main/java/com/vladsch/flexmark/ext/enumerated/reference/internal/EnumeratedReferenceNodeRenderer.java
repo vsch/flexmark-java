@@ -45,11 +45,11 @@ public class EnumeratedReferenceNodeRenderer implements PhasedNodeRenderer
 
     @Override
     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
-        Set<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
+        Set<NodeRenderingHandler<?>> set = new HashSet<>();
         // @formatter:off
-        set.add(new NodeRenderingHandler<EnumeratedReferenceText>(EnumeratedReferenceText.class, EnumeratedReferenceNodeRenderer.this::render));
-        set.add(new NodeRenderingHandler<EnumeratedReferenceLink>(EnumeratedReferenceLink.class, EnumeratedReferenceNodeRenderer.this::render));
-        set.add(new NodeRenderingHandler<EnumeratedReferenceBlock>(EnumeratedReferenceBlock.class, EnumeratedReferenceNodeRenderer.this::render));// ,// zzzoptionszzz(CUSTOM_NODE)
+        set.add(new NodeRenderingHandler<>(EnumeratedReferenceText.class, EnumeratedReferenceNodeRenderer.this::render));
+        set.add(new NodeRenderingHandler<>(EnumeratedReferenceLink.class, EnumeratedReferenceNodeRenderer.this::render));
+        set.add(new NodeRenderingHandler<>(EnumeratedReferenceBlock.class, EnumeratedReferenceNodeRenderer.this::render));// ,// zzzoptionszzz(CUSTOM_NODE)
         // @formatter:on
         return set;
     }

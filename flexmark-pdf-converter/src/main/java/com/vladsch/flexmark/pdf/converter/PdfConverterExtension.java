@@ -34,12 +34,12 @@ import java.io.OutputStream;
  * </p>
  */
 public class PdfConverterExtension {
-    public static final DataKey<PdfRendererBuilder.TextDirection> DEFAULT_TEXT_DIRECTION = new DataKey<PdfRendererBuilder.TextDirection>("DEFAULT_TEXT_DIRECTION", (PdfRendererBuilder.TextDirection) null);
+    public static final DataKey<PdfRendererBuilder.TextDirection> DEFAULT_TEXT_DIRECTION = new DataKey<>("DEFAULT_TEXT_DIRECTION", (PdfRendererBuilder.TextDirection) null);
     public static final DataKey<ProtectionPolicy> PROTECTION_POLICY = new DataKey<>("PROTECTION_POLICY", (ProtectionPolicy) null);
     public static final String DEFAULT_CSS_RESOURCE_PATH = "/default.css";
     public static final String DEFAULT_TOC_LIST_CLASS = "toc";
 
-    public static final DataKey<String> DEFAULT_CSS = new DataKey<String>("DEFAULT_CSS", value -> Utils.getResourceAsString(DEFAULT_CSS_RESOURCE_PATH, PdfConverterExtension.class));
+    public static final DataKey<String> DEFAULT_CSS = new DataKey<>("DEFAULT_CSS", value -> Utils.getResourceAsString(DEFAULT_CSS_RESOURCE_PATH, PdfConverterExtension.class));
 
     public static String embedCss(String html, String css) {
         if (css != null && !css.isEmpty()) {

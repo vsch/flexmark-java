@@ -116,7 +116,7 @@ public class ValueIterationAdapterImpl<N, T> implements ValueIterationAdapter<N,
     @NotNull
     @Override
     public <V> ValueIterationAdapter<N, V> andThen(ValueIterationAdapter<? super T, V> after) {
-        return new ValueIterationAdapterImpl<N, V>(new ChainedConsumerAdapter<>(myConsumerAdapter, after.getConsumerAdapter()));
+        return new ValueIterationAdapterImpl<>(new ChainedConsumerAdapter<>(myConsumerAdapter, after.getConsumerAdapter()));
     }
 
     @NotNull

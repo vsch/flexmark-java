@@ -19,19 +19,19 @@ public class NodeCollectingVisitor {
     public NodeCollectingVisitor(Set<Class> classes) {
         myClasses = classes.toArray(EMPTY_CLASSES);
 
-        mySubClassMap = new HashMap<Class, List<Class>>();
-        myIncluded = new HashSet<Class>();
+        mySubClassMap = new HashMap<>();
+        myIncluded = new HashSet<>();
         myIncluded.addAll(classes);
 
         for (Class clazz : classes) {
-            ArrayList<Class> classList = new ArrayList<Class>(1);
+            ArrayList<Class> classList = new ArrayList<>(1);
             classList.add(clazz);
             mySubClassMap.put(clazz, classList);
         }
 
-        myExcluded = new HashSet<Class>();
+        myExcluded = new HashSet<>();
 
-        myNodes = new ClassificationBag<Class, Node>(NODE_CLASSIFIER);
+        myNodes = new ClassificationBag<>(NODE_CLASSIFIER);
     }
 
     public void collect(Node node) {
@@ -39,7 +39,7 @@ public class NodeCollectingVisitor {
     }
 
     public SubClassingBag<Node> getSubClassingBag() {
-        return new SubClassingBag<Node>(myNodes, mySubClassMap);
+        return new SubClassingBag<>(myNodes, mySubClassMap);
     }
 
     private void visit(Node node) {
@@ -54,7 +54,7 @@ public class NodeCollectingVisitor {
                     myIncluded.add(nodeClass);
                     List<Class> classList = mySubClassMap.get(clazz);
                     if (classList == null) {
-                        classList = new ArrayList<Class>(2);
+                        classList = new ArrayList<>(2);
                         classList.add(clazz);
                         classList.add(nodeClass);
                         mySubClassMap.put(clazz, classList);

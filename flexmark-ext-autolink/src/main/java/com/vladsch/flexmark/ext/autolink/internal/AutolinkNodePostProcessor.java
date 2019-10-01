@@ -107,7 +107,7 @@ public class AutolinkNodePostProcessor extends NodePostProcessor {
         }
 
         Iterable<LinkSpan> links = linkExtractor.extractLinks(literal);
-        ArrayList<LinkSpan> linksList = new ArrayList<LinkSpan>();
+        ArrayList<LinkSpan> linksList = new ArrayList<>();
 
         for (LinkSpan link : links) {
             linksList.add(link);

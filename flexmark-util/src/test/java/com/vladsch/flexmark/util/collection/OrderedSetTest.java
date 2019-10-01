@@ -14,7 +14,7 @@ public class OrderedSetTest {
 
     @Test
     public void testAddRemove() throws Exception {
-        OrderedSet<String> orderedSet = new OrderedSet<String>();
+        OrderedSet<String> orderedSet = new OrderedSet<>();
 
         for (int i = 0; i < 10; i++) {
             Assert.assertEquals(true, orderedSet.add(String.valueOf(i)));
@@ -44,7 +44,7 @@ public class OrderedSetTest {
 
     @Test
     public void testAddRemoveReversed() throws Exception {
-        OrderedSet<String> orderedSet = new OrderedSet<String>();
+        OrderedSet<String> orderedSet = new OrderedSet<>();
 
         for (int i = 0; i < 10; i++) {
             Assert.assertEquals(true, orderedSet.add(String.valueOf(i)));
@@ -75,8 +75,8 @@ public class OrderedSetTest {
 
     @Test
     public void testRetainAll() throws Exception {
-        OrderedSet<String> orderedSet = new OrderedSet<String>();
-        OrderedSet<String> retainSet = new OrderedSet<String>();
+        OrderedSet<String> orderedSet = new OrderedSet<>();
+        OrderedSet<String> retainSet = new OrderedSet<>();
 
         for (int i = 0; i < 10; i++) {
             Assert.assertEquals(true, orderedSet.add(String.valueOf(i)));
@@ -110,7 +110,7 @@ public class OrderedSetTest {
 
     @Test
     public void testRemoveIteration() throws Exception {
-        OrderedSet<String> orderedSet = new OrderedSet<String>();
+        OrderedSet<String> orderedSet = new OrderedSet<>();
 
         for (int i = 0; i < 10; i++) {
             Assert.assertEquals(true, orderedSet.add(String.valueOf(i)));
@@ -147,7 +147,7 @@ public class OrderedSetTest {
 
     @Test
     public void testRemoveReversedIteration() throws Exception {
-        OrderedSet<String> orderedSet = new OrderedSet<String>();
+        OrderedSet<String> orderedSet = new OrderedSet<>();
 
         for (int i = 0; i < 10; i++) {
             Assert.assertEquals(true, orderedSet.add(String.valueOf(i)));
@@ -184,7 +184,7 @@ public class OrderedSetTest {
 
     @Test
     public void testConcurrentMod() throws Exception {
-        OrderedSet<String> orderedSet = new OrderedSet<String>();
+        OrderedSet<String> orderedSet = new OrderedSet<>();
 
         for (int i = 0; i < 10; i++) {
             Assert.assertEquals(true, orderedSet.add(String.valueOf(i)));
@@ -205,7 +205,7 @@ public class OrderedSetTest {
 
     @Test
     public void testSetConflict() throws Exception {
-        OrderedSet<String> orderedSet = new OrderedSet<String>();
+        OrderedSet<String> orderedSet = new OrderedSet<>();
 
         for (int i = 0; i < 10; i++) {
             Assert.assertEquals(true, orderedSet.add(String.valueOf(i)));

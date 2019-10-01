@@ -43,18 +43,18 @@ public class GitLabNodeRenderer implements NodeRenderer
 
     @Override
     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
-        Set<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
+        Set<NodeRenderingHandler<?>> set = new HashSet<>();
         // @formatter:off
-        set.add(new NodeRenderingHandler<GitLabIns>(GitLabIns.class, GitLabNodeRenderer.this::render));
-        set.add(new NodeRenderingHandler<GitLabDel>(GitLabDel.class, GitLabNodeRenderer.this::render));
-        set.add(new NodeRenderingHandler<GitLabInlineMath>(GitLabInlineMath.class, GitLabNodeRenderer.this::render));
-        set.add(new NodeRenderingHandler<GitLabBlockQuote>(GitLabBlockQuote.class, GitLabNodeRenderer.this::render));// ,// zzzoptionszzz(CUSTOM_NODE)
+        set.add(new NodeRenderingHandler<>(GitLabIns.class, GitLabNodeRenderer.this::render));
+        set.add(new NodeRenderingHandler<>(GitLabDel.class, GitLabNodeRenderer.this::render));
+        set.add(new NodeRenderingHandler<>(GitLabInlineMath.class, GitLabNodeRenderer.this::render));
+        set.add(new NodeRenderingHandler<>(GitLabBlockQuote.class, GitLabNodeRenderer.this::render));// ,// zzzoptionszzz(CUSTOM_NODE)
         if (options.renderBlockMath || options.renderBlockMermaid) {
-            set.add(new NodeRenderingHandler<FencedCodeBlock>(FencedCodeBlock.class, GitLabNodeRenderer.this::render));// ,// zzzoptionszzz(CUSTOM_NODE)
+            set.add(new NodeRenderingHandler<>(FencedCodeBlock.class, GitLabNodeRenderer.this::render));// ,// zzzoptionszzz(CUSTOM_NODE)
         }
         if (options.renderVideoImages) {
-            set.add(new NodeRenderingHandler<Image>(Image.class, GitLabNodeRenderer.this::render));// ,// zzzoptionszzz(CUSTOM_NODE)
-            set.add(new NodeRenderingHandler<ImageRef>(ImageRef.class, GitLabNodeRenderer.this::render));// ,// zzzoptionszzz(CUSTOM_NODE)
+            set.add(new NodeRenderingHandler<>(Image.class, GitLabNodeRenderer.this::render));// ,// zzzoptionszzz(CUSTOM_NODE)
+            set.add(new NodeRenderingHandler<>(ImageRef.class, GitLabNodeRenderer.this::render));// ,// zzzoptionszzz(CUSTOM_NODE)
         }
         // @formatter:on
         return set;

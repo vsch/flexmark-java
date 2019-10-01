@@ -26,7 +26,7 @@ public class TocExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRe
     public static final DataKey<Integer> LEVELS = new DataKey<>("LEVELS", TocOptions.DEFAULT_LEVELS);
     public static final DataKey<Boolean> IS_TEXT_ONLY = new DataKey<>("IS_TEXT_ONLY", false);
     public static final DataKey<Boolean> IS_NUMBERED = new DataKey<>("IS_NUMBERED", false);
-    public static final DataKey<TocOptions.ListType> LIST_TYPE = new DataKey<TocOptions.ListType>("LIST_TYPE", TocOptions.ListType.HIERARCHY);
+    public static final DataKey<TocOptions.ListType> LIST_TYPE = new DataKey<>("LIST_TYPE", TocOptions.ListType.HIERARCHY);
     public static final DataKey<Boolean> IS_HTML = new DataKey<>("IS_HTML", false);
     public static final DataKey<Integer> TITLE_LEVEL = new DataKey<>("TITLE_LEVEL", TocOptions.DEFAULT_TITLE_LEVEL);
     public static final DataKey<String> TITLE = new DataKey<>("TITLE", (String) null);

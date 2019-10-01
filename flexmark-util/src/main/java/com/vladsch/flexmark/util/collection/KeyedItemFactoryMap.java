@@ -16,8 +16,8 @@ public class KeyedItemFactoryMap<K, I, P> implements Map<K, Function<P, I>> {
     }
 
     public KeyedItemFactoryMap(P param, int capacity) {
-        this.factoryMap = new HashMap<K, Function<P, I>>(capacity);
-        this.itemMap = new HashMap<K, I>();
+        this.factoryMap = new HashMap<>(capacity);
+        this.itemMap = new HashMap<>();
         this.param = param;
     }
 

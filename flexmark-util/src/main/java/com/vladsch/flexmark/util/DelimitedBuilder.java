@@ -93,7 +93,7 @@ public class DelimitedBuilder {
 
     public DelimitedBuilder push(String delimiter) {
         unmark();
-        if (delimiterStack == null) delimiterStack = new Stack<String>();
+        if (delimiterStack == null) delimiterStack = new Stack<>();
         delimiterStack.push(this.delimiter);
         this.delimiter = delimiter;
         return this;

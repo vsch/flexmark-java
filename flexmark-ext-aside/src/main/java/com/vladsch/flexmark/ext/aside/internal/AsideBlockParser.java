@@ -124,14 +124,14 @@ public class AsideBlockParser extends AbstractBlockParser {
         @SuppressWarnings("UnnecessaryLocalVariable")
         @Override
         public Set<Class<? extends CustomBlockParserFactory>> getAfterDependents() {
-            HashSet<Class<? extends CustomBlockParserFactory>> set = new HashSet<Class<? extends CustomBlockParserFactory>>();
+            HashSet<Class<? extends CustomBlockParserFactory>> set = new HashSet<>();
             //set.add(BlockQuoteParser.Factory.class);
             return set;
         }
 
         @Override
         public Set<Class<? extends CustomBlockParserFactory>> getBeforeDependents() {
-            return new HashSet<Class<? extends CustomBlockParserFactory>>(Arrays.asList(
+            return new HashSet<>(Arrays.asList(
                     //BlockQuoteParser.Factory.class,
                     HeadingParser.Factory.class,
                     FencedCodeBlockParser.Factory.class,

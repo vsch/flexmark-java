@@ -16,7 +16,7 @@ import java.util.Set;
  */
 @Deprecated
 public abstract class NodeAdaptedVisitor<H extends NodeAdaptingVisitHandler<?, ?>> {
-    private final Map<Class<?>, H> myCustomHandlersMap = new HashMap<Class<?>, H>();
+    private final Map<Class<?>, H> myCustomHandlersMap = new HashMap<>();
 
     // Usage:
     //myVisitor = new NodeVisitor(

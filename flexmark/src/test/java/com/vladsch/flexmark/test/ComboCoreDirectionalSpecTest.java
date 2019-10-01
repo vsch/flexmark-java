@@ -18,7 +18,7 @@ public class ComboCoreDirectionalSpecTest extends ComboSpecTestCase {
             .set(Parser.INLINE_DELIMITER_DIRECTIONAL_PUNCTUATIONS, true)
             .set(HtmlRenderer.PERCENT_ENCODE_URLS, true);
 
-    private static final Map<String, DataHolder> optionsMap = new HashMap<String, DataHolder>();
+    private static final Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
         //optionsMap.put("keep-last", new MutableDataSet()
         //        .set(Parser.REFERENCES_KEEP, KeepType.LAST)

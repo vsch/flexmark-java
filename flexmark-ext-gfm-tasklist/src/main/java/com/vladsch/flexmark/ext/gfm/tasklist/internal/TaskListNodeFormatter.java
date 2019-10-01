@@ -32,10 +32,10 @@ public class TaskListNodeFormatter implements NodeFormatter {
 
     @Override
     public Set<NodeFormattingHandler<?>> getNodeFormattingHandlers() {
-        return new HashSet<NodeFormattingHandler<?>>(Arrays.asList(
-                new NodeFormattingHandler<TaskListItem>(TaskListItem.class, TaskListNodeFormatter.this::render),
-                new NodeFormattingHandler<BulletList>(BulletList.class, TaskListNodeFormatter.this::render),
-                new NodeFormattingHandler<OrderedList>(OrderedList.class, TaskListNodeFormatter.this::render)
+        return new HashSet<>(Arrays.asList(
+                new NodeFormattingHandler<>(TaskListItem.class, TaskListNodeFormatter.this::render),
+                new NodeFormattingHandler<>(BulletList.class, TaskListNodeFormatter.this::render),
+                new NodeFormattingHandler<>(OrderedList.class, TaskListNodeFormatter.this::render)
         ));
     }
 
@@ -110,12 +110,12 @@ public class TaskListNodeFormatter implements NodeFormatter {
             MarkdownWriter markdown,
             FormatOptions formatOptions
     ) {
-        ArrayList<Node> itemList = new ArrayList<Node>();
+        ArrayList<Node> itemList = new ArrayList<>();
 
         TaskListItemPlacement taskListItemPlacement = formatOptions.taskListItemPlacement;
         if (taskListItemPlacement != TaskListItemPlacement.AS_IS) {
-            ArrayList<Node> incompleteTasks = new ArrayList<Node>();
-            ArrayList<Node> completeItems = new ArrayList<Node>();
+            ArrayList<Node> incompleteTasks = new ArrayList<>();
+            ArrayList<Node> completeItems = new ArrayList<>();
             boolean incompleteDescendants = taskListItemPlacement == TaskListItemPlacement.INCOMPLETE_NESTED_FIRST || taskListItemPlacement == TaskListItemPlacement.COMPLETE_NESTED_TO_NON_TASK;
 
             Node item = node.getFirstChild();

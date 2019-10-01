@@ -136,7 +136,7 @@ public class FlexmarkHtmlParser {
     public static final DataKey<LinkConversion> EXT_INLINE_LINK = new DataKey<>("EXT_INLINE_LINK", LinkConversion.MARKDOWN_EXPLICIT);
     public static final DataKey<LinkConversion> EXT_INLINE_IMAGE = new DataKey<>("EXT_INLINE_IMAGE", LinkConversion.MARKDOWN_EXPLICIT);
     public static final DataKey<Ref<com.vladsch.flexmark.util.ast.Document>> FOR_DOCUMENT = new DataKey<>("FOR_DOCUMENT", new Ref<>((com.vladsch.flexmark.util.ast.Document) null));
-    public static final DataKey<? extends Map<String, String>> TYPOGRAPHIC_REPLACEMENT_MAP = new DataKey<>("TYPOGRAPHIC_REPLACEMENT_MAP", new HashMap<String, String>());
+    public static final DataKey<? extends Map<String, String>> TYPOGRAPHIC_REPLACEMENT_MAP = new DataKey<>("TYPOGRAPHIC_REPLACEMENT_MAP", new HashMap<>());
 
     /**
      * If true then will ignore rows with th columns after rows with td columns have been
@@ -146,7 +146,7 @@ public class FlexmarkHtmlParser {
      */
     public static final DataKey<Boolean> IGNORE_TABLE_HEADING_AFTER_ROWS = new DataKey<>("IGNORE_TABLE_HEADING_AFTER_ROWS", true);
 
-    private static final Map<Object, CellAlignment> tableCellAlignments = new LinkedHashMap<Object, CellAlignment>();
+    private static final Map<Object, CellAlignment> tableCellAlignments = new LinkedHashMap<>();
     private static final String EMOJI_ALT_PREFIX = "emoji ";
     static {
         tableCellAlignments.put(Pattern.compile("\\bleft\\b"), CellAlignment.LEFT);
@@ -157,7 +157,7 @@ public class FlexmarkHtmlParser {
         tableCellAlignments.put("text-right", CellAlignment.RIGHT);
     }
 
-    private static final Map<String, String> specialCharsMap = new HashMap<String, String>();
+    private static final Map<String, String> specialCharsMap = new HashMap<>();
     private static final String typographicQuotes = "“|”|‘|’|«|»|&ldquo;|&rdquo;|&lsquo;|&rsquo;|&apos;|&laquo;|&raquo;";
     private static final String typographicSmarts = "…|–|—|&hellip;|&endash;|&emdash;";
     static {
@@ -189,7 +189,7 @@ public class FlexmarkHtmlParser {
     private static final Pattern BULLET_LIST = Pattern.compile("^([·])\\s*$");
     private static final Pattern ALPHA_NUMERAL = Pattern.compile("^[a-z]+|[A-Z]+$");
 
-    public static final DataKey<Map<Object, CellAlignment>> TABLE_CELL_ALIGNMENT_MAP = new DataKey<Map<Object, CellAlignment>>("TABLE_CELL_ALIGNMENT_MAP", tableCellAlignments);
+    public static final DataKey<Map<Object, CellAlignment>> TABLE_CELL_ALIGNMENT_MAP = new DataKey<>("TABLE_CELL_ALIGNMENT_MAP", tableCellAlignments);
 
     private final HtmlParserOptions myOptions;
     private final Pattern specialCharsPattern;
@@ -225,11 +225,11 @@ public class FlexmarkHtmlParser {
     }
 
     private void resetForParse() {
-        myStateStack = new Stack<State>();
-        myAbbreviations = new HashMap<String, String>();
-        myReferenceUrlToReferenceMap = new HashMap<String, Reference>();
+        myStateStack = new Stack<>();
+        myAbbreviations = new HashMap<>();
+        myReferenceUrlToReferenceMap = new HashMap<>();
         myExternalReferences = new HashSet<>();
-        myMacrosMap = new HashMap<String, String>();
+        myMacrosMap = new HashMap<>();
         myState = null;
 
         Map<String, String> typographicReplacementMap = TYPOGRAPHIC_REPLACEMENT_MAP.getFrom(myFullOptions);
@@ -2306,7 +2306,7 @@ public class FlexmarkHtmlParser {
         }
     }
 
-    private final static Map<String, TagParam> ourTagProcessors = new HashMap<String, TagParam>();
+    private final static Map<String, TagParam> ourTagProcessors = new HashMap<>();
     static {
         ourTagProcessors.put("a", TagParam.tag(TagType.A, null));
         ourTagProcessors.put("abbr", TagParam.tag(TagType.ABBR, null));

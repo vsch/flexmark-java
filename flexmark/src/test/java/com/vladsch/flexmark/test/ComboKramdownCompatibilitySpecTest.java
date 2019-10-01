@@ -19,7 +19,7 @@ public class ComboKramdownCompatibilitySpecTest extends ComboExtraSpecTest {
             .set(HtmlRenderer.INDENT_SIZE, 4)
             .set(HtmlRenderer.PERCENT_ENCODE_URLS, true);
 
-    private static final Map<String, DataHolder> optionsMap = new HashMap<String, DataHolder>();
+    private static final Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
 
     }

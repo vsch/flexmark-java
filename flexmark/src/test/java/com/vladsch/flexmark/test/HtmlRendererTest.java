@@ -131,8 +131,8 @@ public class HtmlRendererTest {
     @Test
     public void overrideNodeRender() {
         NodeRendererFactory nodeRendererFactory = options -> () -> {
-            HashSet<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
-            set.add(new NodeRenderingHandler<Link>(Link.class, (node, context, html) -> context.getHtmlWriter().text("test")));
+            HashSet<NodeRenderingHandler<?>> set = new HashSet<>();
+            set.add(new NodeRenderingHandler<>(Link.class, (node, context, html) -> context.getHtmlWriter().text("test")));
 
             return set;
         };
@@ -145,8 +145,8 @@ public class HtmlRendererTest {
     @Test
     public void overrideInheritNodeRender() {
         NodeRendererFactory nodeRendererFactory = options -> () -> {
-            HashSet<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
-            set.add(new NodeRenderingHandler<Link>(Link.class, (node, context, html) -> {
+            HashSet<NodeRenderingHandler<?>> set = new HashSet<>();
+            set.add(new NodeRenderingHandler<>(Link.class, (node, context, html) -> {
                 if (node.getText().equals("bar")) {
                     context.getHtmlWriter().text("test");
                 } else {
@@ -168,8 +168,8 @@ public class HtmlRendererTest {
     @Test
     public void overrideInheritNodeRenderSubContext() {
         NodeRendererFactory nodeRendererFactory = options -> () -> {
-            HashSet<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
-            set.add(new NodeRenderingHandler<Link>(Link.class, (node, context, html) -> {
+            HashSet<NodeRenderingHandler<?>> set = new HashSet<>();
+            set.add(new NodeRenderingHandler<>(Link.class, (node, context, html) -> {
                 if (node.getText().equals("bar")) {
                     context.getHtmlWriter().text("test");
                 } else {
@@ -203,8 +203,8 @@ public class HtmlRendererTest {
     @Test
     public void overrideInheritDependentNodeRender() {
         NodeRendererFactory nodeRendererFactory = options -> () -> {
-            HashSet<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
-            set.add(new NodeRenderingHandler<Link>(Link.class, (node, context, html) -> {
+            HashSet<NodeRenderingHandler<?>> set = new HashSet<>();
+            set.add(new NodeRenderingHandler<>(Link.class, (node, context, html) -> {
                 if (node.getText().equals("bar")) {
                     context.getHtmlWriter().text("test");
                 } else if (node.getText().equals("bars")) {
@@ -221,8 +221,8 @@ public class HtmlRendererTest {
             @Override
             public NodeRenderer apply(DataHolder options) {
                 return () -> {
-                    HashSet<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
-                    set.add(new NodeRenderingHandler<Link>(Link.class, (node, context, html) -> {
+                    HashSet<NodeRenderingHandler<?>> set = new HashSet<>();
+                    set.add(new NodeRenderingHandler<>(Link.class, (node, context, html) -> {
                         if (node.getText().equals("bar")) {
                             context.getHtmlWriter().text("testing");
                         } else {
@@ -236,7 +236,7 @@ public class HtmlRendererTest {
 
             @Override
             public Set<Class<? extends NodeRendererFactory>> getDelegates() {
-                Set<Class<? extends NodeRendererFactory>> set = new HashSet<Class<? extends NodeRendererFactory>>();
+                Set<Class<? extends NodeRendererFactory>> set = new HashSet<>();
                 set.add(nodeRendererFactory.getClass());
                 return set;
             }
@@ -253,8 +253,8 @@ public class HtmlRendererTest {
     @Test
     public void overrideInheritDependentNodeRenderReversed() {
         NodeRendererFactory nodeRendererFactory = options -> () -> {
-            HashSet<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
-            set.add(new NodeRenderingHandler<Link>(Link.class, (node, context, html) -> {
+            HashSet<NodeRenderingHandler<?>> set = new HashSet<>();
+            set.add(new NodeRenderingHandler<>(Link.class, (node, context, html) -> {
                 if (node.getText().equals("bar")) {
                     context.getHtmlWriter().text("test");
                 } else if (node.getText().equals("bars")) {
@@ -271,8 +271,8 @@ public class HtmlRendererTest {
             @Override
             public NodeRenderer apply(DataHolder options) {
                 return () -> {
-                    HashSet<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
-                    set.add(new NodeRenderingHandler<Link>(Link.class, (node, context, html) -> {
+                    HashSet<NodeRenderingHandler<?>> set = new HashSet<>();
+                    set.add(new NodeRenderingHandler<>(Link.class, (node, context, html) -> {
                         if (node.getText().equals("bar")) {
                             context.getHtmlWriter().text("testing");
                         } else {
@@ -286,7 +286,7 @@ public class HtmlRendererTest {
 
             @Override
             public Set<Class<? extends NodeRendererFactory>> getDelegates() {
-                Set<Class<? extends NodeRendererFactory>> set = new HashSet<Class<? extends NodeRendererFactory>>();
+                Set<Class<? extends NodeRendererFactory>> set = new HashSet<>();
                 set.add(nodeRendererFactory.getClass());
                 return set;
             }
