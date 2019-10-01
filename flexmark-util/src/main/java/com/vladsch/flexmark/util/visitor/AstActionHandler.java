@@ -14,7 +14,7 @@ import java.util.function.BiFunction;
  * @param <A> action type, subclasses of {@link AstAction} and {@link AstHandler} provide actual functionality
  * @param <H> handler to invoke the functionality during AST traversal for specific node
  */
-public class AstActionHandler<C extends AstActionHandler<C, N, A, H>, N, A extends AstAction<? extends N>, H extends AstHandler<? extends N, A>> {
+public abstract class AstActionHandler<C extends AstActionHandler<C, N, A, H>, N, A extends AstAction<? super N>, H extends AstHandler<? extends N, A>> {
     private final Map<Class<? extends N>, H> myCustomHandlersMap = new HashMap<>();
     private final AstNode<N> myAdapter;
 
@@ -22,7 +22,7 @@ public class AstActionHandler<C extends AstActionHandler<C, N, A, H>, N, A exten
         myAdapter = adapter;
     }
 
-    public C addHandlers(H[]... handlers) {
+    protected C addHandlers(H[]... handlers) {
         for (H[] moreHandlers : handlers) {
             for (H handler : moreHandlers) {
                 myCustomHandlersMap.put(handler.getNodeType(), handler);
@@ -31,7 +31,7 @@ public class AstActionHandler<C extends AstActionHandler<C, N, A, H>, N, A exten
         return (C) this;
     }
 
-    public C addHandler(H handler) {
+    protected C addHandler(H handler) {
         myCustomHandlersMap.put(handler.getNodeType(), handler);
         return (C) this;
     }
