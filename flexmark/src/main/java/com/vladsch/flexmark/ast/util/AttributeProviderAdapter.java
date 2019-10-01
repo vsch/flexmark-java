@@ -2,6 +2,8 @@ package com.vladsch.flexmark.ast.util;
 
 import com.vladsch.flexmark.html.renderer.AttributablePart;
 import com.vladsch.flexmark.util.ast.Node;
+import com.vladsch.flexmark.util.ast.NodeVisitor;
+import com.vladsch.flexmark.util.ast.VisitHandler;
 import com.vladsch.flexmark.util.html.Attributes;
 import com.vladsch.flexmark.util.visitor.AstActionHandler;
 
@@ -13,12 +15,12 @@ public class AttributeProviderAdapter extends AstActionHandler<AttributeProvider
 
     public AttributeProviderAdapter(AttributeProvidingHandler... handlers) {
         super(Node.AST_ADAPTER);
-        addHandlers(handlers);
+        super.addHandlers(handlers);
     }
 
     public AttributeProviderAdapter(AttributeProvidingHandler[]... handlers) {
         super(Node.AST_ADAPTER);
-        addHandlers(handlers);
+        super.addHandlers(handlers);
     }
 
     public AttributeProviderAdapter(Collection<AttributeProvidingHandler> handlers) {
@@ -31,8 +33,16 @@ public class AttributeProviderAdapter extends AstActionHandler<AttributeProvider
     }
 
     // needed for backward compatibility with extension handler arrays typed as VisitHandler<?>[]
-    public AttributeProviderAdapter addHandlers(AttributeProvidingHandler[] handlers) {
+    public AttributeProviderAdapter addHandlers(AttributeProvidingHandler... handlers) {
         return super.addHandlers(handlers);
+    }
+
+    public AttributeProviderAdapter addHandlers(AttributeProvidingHandler[]... handlers) {
+        return super.addHandlers(handlers);
+    }
+
+    public AttributeProviderAdapter addHandler(AttributeProvidingHandler handler) {
+        return super.addHandler(handler);
     }
 
     @Override

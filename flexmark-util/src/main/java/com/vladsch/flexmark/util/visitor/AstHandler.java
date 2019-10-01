@@ -6,7 +6,7 @@ package com.vladsch.flexmark.util.visitor;
  * @param <N> node subclass
  * @param <A> node action
  */
-abstract public class AstHandler<N, A extends AstAction<N>> {
+abstract public class AstHandler<N, A extends AstAction<? super N>> {
     final private Class<N> myClass;
     final protected A myAdapter;
 

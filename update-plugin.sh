@@ -31,4 +31,5 @@ UpdJars ../touch-typists-completion-caddy/lib flexmark-util.jar flexmark-tree-it
 # Update flexmark-test-util.jar
 UpdJars ../CLionArduinoPlugin/lib flexmark-test-util.jar flexmark-formatter.jar flexmark-util.jar
 
+# This contains util and tree-iteration
 UpdProjects flexmark-parent.jar ../idea-multimarkdown1/lib ../idea-multimarkdown2/lib ../idea-multimarkdown3/lib ../markdown-profiling/lib ../MarkdownTest/lib

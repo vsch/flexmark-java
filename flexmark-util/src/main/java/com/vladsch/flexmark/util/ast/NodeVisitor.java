@@ -61,12 +61,12 @@ public class NodeVisitor extends AstActionHandler<NodeVisitor, Node, Visitor<Nod
 
     public NodeVisitor(VisitHandler... handlers) {
         super(Node.AST_ADAPTER);
-        addHandlers(handlers);
+        super.addHandlers(handlers);
     }
 
     public NodeVisitor(VisitHandler[]... handlers) {
         super(Node.AST_ADAPTER);
-        addHandlers(handlers);
+        super.addHandlers(handlers);
     }
 
     public NodeVisitor(Collection<VisitHandler> handlers) {
@@ -79,7 +79,11 @@ public class NodeVisitor extends AstActionHandler<NodeVisitor, Node, Visitor<Nod
     }
 
     // needed for backward compatibility with extension handler arrays typed as VisitHandler<?>[]
-    public NodeVisitor addHandlers(VisitHandler[] handlers) {
+    public NodeVisitor addHandlers(VisitHandler... handlers) {
+        return super.addHandlers(handlers);
+    }
+
+    public NodeVisitor addHandlers(VisitHandler[]... handlers) {
         return super.addHandlers(handlers);
     }
 
