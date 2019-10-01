@@ -1,21 +1,17 @@
 package com.vladsch.flexmark.samples;
 
-import com.vladsch.flexmark.ast.Code;
-import com.vladsch.flexmark.ast.Text;
+import com.vladsch.flexmark.ast.FencedCodeBlock;
 import com.vladsch.flexmark.ext.toc.TocExtension;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.html.HtmlRenderer.Builder;
 import com.vladsch.flexmark.html.HtmlRenderer.HtmlRendererExtension;
-import com.vladsch.flexmark.html.renderer.DelegatingNodeRendererFactory;
-import com.vladsch.flexmark.html.renderer.NodeRenderer;
-import com.vladsch.flexmark.html.renderer.NodeRendererFactory;
-import com.vladsch.flexmark.html.renderer.NodeRenderingHandler;
+import com.vladsch.flexmark.html.renderer.*;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
-import com.vladsch.flexmark.util.html.Escaping;
+import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -31,10 +27,10 @@ public class FencedCodeCustomRenderingSample {
     static final HtmlRenderer RENDERER = HtmlRenderer.builder(OPTIONS).indentSize(2).build();
 
     static class CustomNodeRenderer implements NodeRenderer {
-        private final boolean codeSoftLineBreaks;
+        private final boolean codeContentBlock;
 
         public CustomNodeRenderer(DataHolder options) {
-            codeSoftLineBreaks = Parser.CODE_SOFT_LINE_BREAKS.getFrom(options);
+            codeContentBlock = Parser.FENCED_CODE_CONTENT_BLOCK.getFrom(options);
         }
 
         public static class Factory implements DelegatingNodeRendererFactory {
@@ -45,13 +41,13 @@ public class FencedCodeCustomRenderingSample {
 
             @Override
             public Set<Class<? extends NodeRendererFactory>> getDelegates() {
-                Set<Class<? extends NodeRendererFactory>> set = new HashSet<>();
-                // add node renderer factory classes to which this renderer will delegate some of its rendering
-                // core node renderer is assumed to have all depend it so there is no need to add it
-                //set.add(TocNodeRenderer.Factory.class);
-                //return set;
+                // NOTE: add node renderer factory classes to which this renderer will delegate some rendering.
+                //       No need to add the CoreNodeRenderer, it is assumed to be depended on by all.
+//                Set<Class<? extends NodeRendererFactory>> set = new HashSet<>();
+//                set.add(TocNodeRenderer.Factory.class);
+//                return set;
 
-                // return null if renderer does not delegate or delegates only to core node renderer
+                // return null if renderer does not delegate or delegates only to CoreNodeRenderer
                 return null;
             }
         }
@@ -59,26 +55,35 @@ public class FencedCodeCustomRenderingSample {
         @Override
         public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
             HashSet<NodeRenderingHandler<?>> set = new HashSet<>();
-            set.add(new NodeRenderingHandler<>(Code.class, (node, context, html) -> {
+            set.add(new NodeRenderingHandler<>(FencedCodeBlock.class, (node, context, html) -> {
                 // test the node to see if it needs overriding
-                if (node.getOpeningMarker().length() == 3) {
-                    if (context.getHtmlOptions().sourcePositionParagraphLines) {
-                        html.withAttr().tag("pre");
+                BasedSequence info = node.getInfo();
+
+                if (info.equals("my-fenced-code")) {
+                    // standard fenced code rendering from CoreNodeRenderer with addition of converting class attribute of code tag to uppercase, customize it according to need
+                    html.line();
+                    html.srcPosWithTrailingEOL(node.getChars()).withAttr().tag("pre").openPre();
+
+                    if (info.isNotNull() && !info.isBlank()) {
+                        BasedSequence language = node.getInfoDelimitedByAny(" \t");
+                        // CUSTOMIZATION: uppercase the code tag class string
+                        html.attr("class", (context.getHtmlOptions().languageClassPrefix + language.unescape()).toUpperCase());
                     } else {
-                        html.srcPos(node.getText()).withAttr().tag("pre");
-                    }
-                    if (codeSoftLineBreaks && !context.getHtmlOptions().isSoftBreakAllSpaces) {
-                        for (Node child : node.getChildren()) {
-                            if (child instanceof Text) {
-                                html.text(Escaping.collapseWhitespace(child.getChars(), true));
-                            } else {
-                                context.render(child);
-                            }
+                        String noLanguageClass = context.getHtmlOptions().noLanguageClass.trim();
+                        if (!noLanguageClass.isEmpty()) {
+                            html.attr("class", noLanguageClass);
                         }
-                    } else {
-                        html.text(Escaping.collapseWhitespace(node.getText(), true));
                     }
-                    html.tag("/pre");
+
+                    html.srcPosWithEOL(node.getContentChars()).withAttr(CoreNodeRenderer.CODE_CONTENT).tag("code");
+                    if (codeContentBlock) {
+                        context.renderChildren(node);
+                    } else {
+                        html.text(node.getContentChars().normalizeEOL());
+                    }
+                    html.tag("/code");
+                    html.tag("/pre").closePre();
+                    html.lineIf(context.getHtmlOptions().htmlBlockCloseTagEol);
                 } else {
                     context.delegateRender();
                 }
@@ -108,13 +113,9 @@ public class FencedCodeCustomRenderingSample {
     public static void main(String[] args) {
         // You can re-use parser and renderer instances
         Node document = PARSER.parse("" +
-                "`test`\n" +
-                "\n" +
-                "``test``\n" +
-                "\n" +
-                "```test```\n" +
-                "\n" +
-                "````test````\n" +
+                "```my-fenced-code\n" +
+                "some text\n" +
+                "```\n" +
                 "");
         String html = RENDERER.render(document);
         System.out.println("``````markdown");

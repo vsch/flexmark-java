@@ -45,13 +45,13 @@ public class InlineCodeCustomRenderingSample {
 
             @Override
             public Set<Class<? extends NodeRendererFactory>> getDelegates() {
-                Set<Class<? extends NodeRendererFactory>> set = new HashSet<>();
-                // add node renderer factory classes to which this renderer will delegate some of its rendering
-                // core node renderer is assumed to have all depend it so there is no need to add it
-                //set.add(TocNodeRenderer.Factory.class);
-                //return set;
+                // NOTE: add node renderer factory classes to which this renderer will delegate some rendering.
+                //       No need to add the CoreNodeRenderer, it is assumed to be depended on by all.
+//                Set<Class<? extends NodeRendererFactory>> set = new HashSet<>();
+//                set.add(TocNodeRenderer.Factory.class);
+//                return set;
 
-                // return null if renderer does not delegate or delegates only to core node renderer
+                // return null if renderer does not delegate or delegates only to CoreNodeRenderer
                 return null;
             }
         }
