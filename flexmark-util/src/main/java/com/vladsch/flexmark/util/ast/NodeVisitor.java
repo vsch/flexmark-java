@@ -41,7 +41,7 @@ import java.util.function.BiConsumer;
  * logic of processing child nodes if withChildren is true and passing child processing to processChildren() instead of visitChildren.
  * <p>
  * {@code
- * H handler = getHandler(node);
+ * VisitHandler<?> handler = getHandler(node);
  * if (handler != null) {
  *    processor.accept(node, handler);
  * }  else if (withChildren) {
