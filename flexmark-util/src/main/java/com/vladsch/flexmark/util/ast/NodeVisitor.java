@@ -10,12 +10,14 @@ import java.util.function.BiConsumer;
  * while allowing easy configuration of custom visitor for nodes of interest to visit.
  * <p>
  * Usage:
+ * {@code
  * myVisitor = new NodeVisitor(
- * new VisitHandler<>(Document.class, this::visit),
- * new VisitHandler<>(HtmlEntity.class, this::visit),
- * new VisitHandler<>(SoftLineBreak.class, this::visit),
- * new VisitHandler<>(HardLineBreak.class, this::visit)
+ *     new VisitHandler&lt;&gt;(Document.class, this::visit),
+ *     new VisitHandler&lt;&gt;(HtmlEntity.class, this::visit),
+ *     new VisitHandler&lt;&gt;(SoftLineBreak.class, this::visit),
+ *     new VisitHandler&lt;&gt;(HardLineBreak.class, this::visit)
  * );
+ * }
  * <p>
  * Document doc;
  * myVisitor.visit(doc);
@@ -28,32 +30,36 @@ import java.util.function.BiConsumer;
  * Previously the implementation for visit(Node) looked like:
  * <p>
  * {@code
- * VisitHandler<?> handler = getHandler(node);
- * if (handler != null) {
- *    handler.visit(node);
- * } else {
- *    visitChildren(node);
+ * @Override
+ * public void visit(Node node) {
+ * processNode(node, true, this::visit);
+ *    VisitHandler&lt;?&gt; handler = getHandler(node);
+ *    if (handler != null) {
+ *        handler.visit(node);
+ *    } else {
+ *        visitChildren(node);
+ *    }
  * }
- * <p>
  * }
  * <p>
  * you will need to override {@link #processNode(Node node, boolean withChildren, BiConsumer consumer)}, and to change the
  * logic of processing child nodes if withChildren is true and passing child processing to processChildren() instead of visitChildren.
  * <p>
  * {@code
- * VisitHandler<?> handler = getHandler(node);
- * if (handler != null) {
- *    processor.accept(node, handler);
- * }  else if (withChildren) {
- *    processChildren(node, processor);
+ * @Override
+ * public void processNode(Node node, boolean withChildren, BiConsumer&lt;Node, Visitor&lt;Node&gt;&gt; processor) {
+ *     Visitor&lt;?&gt; handler = getAction(node);
+ *     if (handler != null) {
+ *         processor.accept(node, visitor);
+ *     }  else if (withChildren) {
+ *         processChildren(node, processor);
+ *     }
  * }
  * }
- * <p>
- * The VisitHandler argument will simply invoke the visit() function on the node.
  */
 @SuppressWarnings("rawtypes")
 public class NodeVisitor extends AstActionHandler<NodeVisitor, Node, Visitor<Node>, VisitHandler<Node>> implements NodeVisitHandler {
-    protected static final VisitHandler<Node>[] EMPTY_HANDLERS = new VisitHandler[0];
+    protected static final VisitHandler[] EMPTY_HANDLERS = new VisitHandler[0];
 
     public NodeVisitor() {
         super(Node.AST_ADAPTER);
@@ -61,12 +67,13 @@ public class NodeVisitor extends AstActionHandler<NodeVisitor, Node, Visitor<Nod
 
     public NodeVisitor(VisitHandler... handlers) {
         super(Node.AST_ADAPTER);
-        super.addHandlers(handlers);
+        super.addActionHandlers(handlers);
     }
 
     public NodeVisitor(VisitHandler[]... handlers) {
         super(Node.AST_ADAPTER);
-        super.addHandlers(handlers);
+        //noinspection unchecked
+        super.addActionHandlers(handlers);
     }
 
     public NodeVisitor(Collection<VisitHandler> handlers) {
@@ -74,21 +81,23 @@ public class NodeVisitor extends AstActionHandler<NodeVisitor, Node, Visitor<Nod
         addHandlers(handlers);
     }
 
+    // add handler variations
     public NodeVisitor addHandlers(Collection<VisitHandler> handlers) {
-        return addHandlers(handlers.toArray(EMPTY_HANDLERS));
+        return super.addActionHandlers(handlers.toArray(EMPTY_HANDLERS));
     }
 
-    // needed for backward compatibility with extension handler arrays typed as VisitHandler<?>[]
-    public NodeVisitor addHandlers(VisitHandler... handlers) {
-        return super.addHandlers(handlers);
+    public NodeVisitor addHandlers(VisitHandler[] handlers) {
+        return super.addActionHandlers(handlers);
     }
 
     public NodeVisitor addHandlers(VisitHandler[]... handlers) {
-        return super.addHandlers(handlers);
+        //noinspection unchecked
+        return super.addActionHandlers(handlers);
     }
 
     public NodeVisitor addHandler(VisitHandler handler) {
-        return super.addHandler(handler);
+        //noinspection unchecked
+        return super.addActionHandler(handler);
     }
 
     @Override
@@ -106,7 +115,7 @@ public class NodeVisitor extends AstActionHandler<NodeVisitor, Node, Visitor<Nod
         processChildren(parent, this::visit);
     }
 
-    private void visit(Node node, VisitHandler<?> handler) {
+    private void visit(Node node, Visitor<Node> handler) {
         handler.visit(node);
     }
 }

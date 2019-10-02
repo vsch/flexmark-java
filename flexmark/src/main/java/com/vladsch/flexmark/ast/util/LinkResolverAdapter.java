@@ -9,16 +9,17 @@ import java.util.Collection;
 
 @SuppressWarnings("rawtypes")
 public class LinkResolverAdapter extends AstActionHandler<LinkResolverAdapter, Node, LinkResolvingHandler.LinkResolvingVisitor<Node>, LinkResolvingHandler<Node>> implements LinkResolvingHandler.LinkResolvingVisitor<Node> {
-    protected static final LinkResolvingHandler<Node>[] EMPTY_HANDLERS = new LinkResolvingHandler[0];
+    protected static final LinkResolvingHandler[] EMPTY_HANDLERS = new LinkResolvingHandler[0];
 
     public LinkResolverAdapter(LinkResolvingHandler... handlers) {
         super(Node.AST_ADAPTER);
-        addHandlers(handlers);
+        super.addActionHandlers(handlers);
     }
 
     public LinkResolverAdapter(LinkResolvingHandler[]... handlers) {
         super(Node.AST_ADAPTER);
-        addHandlers(handlers);
+        //noinspection unchecked
+        super.addActionHandlers(handlers);
     }
 
     public LinkResolverAdapter(Collection<LinkResolvingHandler> handlers) {
@@ -26,13 +27,23 @@ public class LinkResolverAdapter extends AstActionHandler<LinkResolverAdapter, N
         addHandlers(handlers);
     }
 
+    // add handler variations
     public LinkResolverAdapter addHandlers(Collection<LinkResolvingHandler> handlers) {
-        return addHandlers(handlers.toArray(EMPTY_HANDLERS));
+        return super.addActionHandlers(handlers.toArray(EMPTY_HANDLERS));
     }
 
-    // needed for backward compatibility with extension handler arrays typed as VisitHandler<?>[]
     public LinkResolverAdapter addHandlers(LinkResolvingHandler[] handlers) {
-        return super.addHandlers(handlers);
+        return super.addActionHandlers(handlers);
+    }
+
+    public LinkResolverAdapter addHandlers(LinkResolvingHandler[]... handlers) {
+        //noinspection unchecked
+        return super.addActionHandlers(handlers);
+    }
+
+    public LinkResolverAdapter addHandler(LinkResolvingHandler handler) {
+        //noinspection unchecked
+        return super.addActionHandler(handler);
     }
 
     @Override

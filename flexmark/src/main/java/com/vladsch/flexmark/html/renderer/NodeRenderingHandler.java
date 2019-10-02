@@ -12,7 +12,7 @@ public class NodeRenderingHandler<N extends Node> extends AstHandler<N, NodeRend
 
     public void render(Node node, NodeRendererContext context, HtmlWriter html) {
         //noinspection unchecked
-        myAdapter.render((N) node, context, html);
+        getAdapter().render((N) node, context, html);
     }
 
     public static interface CustomNodeRenderer<N extends Node> extends AstAction<N> {

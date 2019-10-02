@@ -11,7 +11,7 @@ public class NodeDocxRendererHandler<N extends Node> extends AstHandler<N, NodeD
 
     public void render(Node node, DocxRendererContext context) {
         //noinspection unchecked
-        myAdapter.render((N) node, context);
+        getAdapter().render((N) node, context);
     }
 
     public static interface CustomNodeDocxRenderer<N extends Node> extends AstAction<N> {

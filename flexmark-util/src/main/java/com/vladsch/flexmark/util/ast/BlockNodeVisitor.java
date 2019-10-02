@@ -27,7 +27,7 @@ public class BlockNodeVisitor extends NodeVisitor {
     }
 
     @Override
-    public void processNode(Node node, boolean withChildren, BiConsumer<Node, VisitHandler<Node>> processor) {
+    public void processNode(Node node, boolean withChildren, BiConsumer<Node, Visitor<Node>> processor) {
         if (node instanceof Block) {
             super.processNode(node, withChildren, processor);
         }

@@ -115,7 +115,7 @@ code {
       <LinkMapSettings>
         <textMaps />
       </LinkMapSettings>
-      <EnhPreviewSettings allowBrowsingInPreview="false" openRemoteLinks="false" replaceUnicodeEmoji="false" showGitHubPageIfSynced="false" />
+      <EnhPreviewSettings allowBrowsingInPreview="false" openRemoteLinks="true" replaceUnicodeEmoji="false" showGitHubPageIfSynced="false" />
       <EnhHtmlSettings embedUrlContent="false" embedImages="false" embedHttpImages="false" mathConversion="0" />
     </option>
   </profile>

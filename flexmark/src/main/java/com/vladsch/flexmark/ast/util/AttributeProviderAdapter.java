@@ -11,16 +11,17 @@ import java.util.Collection;
 
 @SuppressWarnings("rawtypes")
 public class AttributeProviderAdapter extends AstActionHandler<AttributeProviderAdapter, Node, AttributeProvidingHandler.AttributeProvidingVisitor<Node>, AttributeProvidingHandler<Node>> implements AttributeProvidingHandler.AttributeProvidingVisitor<Node> {
-    protected static final AttributeProvidingHandler<Node>[] EMPTY_HANDLERS = new AttributeProvidingHandler[0];
+    protected static final AttributeProvidingHandler[] EMPTY_HANDLERS = new AttributeProvidingHandler[0];
 
     public AttributeProviderAdapter(AttributeProvidingHandler... handlers) {
         super(Node.AST_ADAPTER);
-        super.addHandlers(handlers);
+        super.addActionHandlers(handlers);
     }
 
     public AttributeProviderAdapter(AttributeProvidingHandler[]... handlers) {
         super(Node.AST_ADAPTER);
-        super.addHandlers(handlers);
+        //noinspection unchecked
+        super.addActionHandlers(handlers);
     }
 
     public AttributeProviderAdapter(Collection<AttributeProvidingHandler> handlers) {
@@ -34,19 +35,21 @@ public class AttributeProviderAdapter extends AstActionHandler<AttributeProvider
 
     // needed for backward compatibility with extension handler arrays typed as VisitHandler<?>[]
     public AttributeProviderAdapter addHandlers(AttributeProvidingHandler... handlers) {
-        return super.addHandlers(handlers);
+        return super.addActionHandlers(handlers);
     }
 
     public AttributeProviderAdapter addHandlers(AttributeProvidingHandler[]... handlers) {
-        return super.addHandlers(handlers);
+        //noinspection unchecked
+        return super.addActionHandlers(handlers);
     }
 
     public AttributeProviderAdapter addHandler(AttributeProvidingHandler handler) {
-        return super.addHandler(handler);
+        //noinspection unchecked
+        return super.addActionHandler(handler);
     }
 
     @Override
     public void setAttributes(Node node, AttributablePart part, Attributes attributes) {
-        processNodeOnly(node, (n, handler) -> handler.setAttributes(n, part, attributes));
+        processNode(node, false, (n, handler) -> handler.setAttributes(n, part, attributes));
     }
 }

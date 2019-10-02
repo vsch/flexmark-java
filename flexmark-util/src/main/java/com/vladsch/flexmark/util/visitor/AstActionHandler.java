@@ -14,34 +14,49 @@ import java.util.function.BiFunction;
  * @param <A> action type, subclasses of {@link AstAction} and {@link AstHandler} provide actual functionality
  * @param <H> handler to invoke the functionality during AST traversal for specific node
  */
-public abstract class AstActionHandler<C extends AstActionHandler<C, N, A, H>, N, A extends AstAction<? super N>, H extends AstHandler<? extends N, A>> {
+public abstract class AstActionHandler<C extends AstActionHandler<C, N, A, H>, N, A extends AstAction<N>, H extends AstHandler<N, A>> {
     private final Map<Class<? extends N>, H> myCustomHandlersMap = new HashMap<>();
-    private final AstNode<N> myAdapter;
+    private final AstNode<N> myAstAdapter;
 
-    public AstActionHandler(AstNode<N> adapter) {
-        myAdapter = adapter;
+    public AstActionHandler(AstNode<N> astAdapter) {
+        myAstAdapter = astAdapter;
     }
 
-    protected C addHandlers(H[]... handlers) {
+    @SafeVarargs
+    final protected C addActionHandlers(H[]... handlers) {
         for (H[] moreHandlers : handlers) {
             for (H handler : moreHandlers) {
                 myCustomHandlersMap.put(handler.getNodeType(), handler);
             }
         }
+        //noinspection unchecked
         return (C) this;
     }
 
-    protected C addHandler(H handler) {
+    protected C addActionHandler(H handler) {
         myCustomHandlersMap.put(handler.getNodeType(), handler);
+        //noinspection unchecked
         return (C) this;
     }
 
-    public H getHandler(N node) {
-        return (H) myCustomHandlersMap.get(node.getClass());
+    private A getAction(H handler) {
+        return handler == null ? null : handler.getAdapter();
     }
 
-    public H getHandler(Class<?> nodeClass) {
-        return (H) myCustomHandlersMap.get(nodeClass);
+    public A getAction(N node) {
+        return getAction(myCustomHandlersMap.get(node.getClass()));
+    }
+
+    public A getAction(Class<?> nodeClass) {
+        return getAction(myCustomHandlersMap.get(nodeClass));
+    }
+
+    protected H getHandler(N node) {
+        return myCustomHandlersMap.get(node.getClass());
+    }
+
+    protected H getHandler(Class<?> nodeClass) {
+        return myCustomHandlersMap.get(nodeClass);
     }
 
     public Set<Class<? extends N>> getNodeClasses() {
@@ -55,33 +70,25 @@ public abstract class AstActionHandler<C extends AstActionHandler<C, N, A, H>, N
      *
      * @param node         node being processed
      * @param withChildren whether to process child nodes if there is no handler for the node type
-     * @param processor    processor to invoke to perform the processing
+     * @param processor    processor to invoke to perform the processing, BiConsumer taking N node, and A action
      */
-    public void processNode(N node, boolean withChildren, BiConsumer<N, H> processor) {
-        H handler = getHandler(node);
-        if (handler != null) {
-            processor.accept(node, handler);
+    public void processNode(N node, boolean withChildren, BiConsumer<N, A> processor) {
+        A action = getAction(node);
+        if (action != null) {
+            processor.accept(node, action);
         } else if (withChildren) {
             processChildren(node, processor);
         }
     }
 
-    public void processNode(N parent, BiConsumer<N, H> processor) {
-        processNode(parent, true, processor);
-    }
-
-    public void processNodeOnly(N parent, BiConsumer<N, H> processor) {
-        processNode(parent, false, processor);
-    }
-
-    public void processChildren(N parent, BiConsumer<N, H> processor) {
-        N node = myAdapter.getFirstChild(parent);
-        while (node != null) {
+    public final void processChildren(N node, BiConsumer<N, A> processor) {
+        N child = myAstAdapter.getFirstChild(node);
+        while (child != null) {
             // A subclass of this visitor might modify the node, resulting in getNext returning a different node or no
             // node after visiting it. So get the next node before visiting.
-            N next = myAdapter.getNext(node);
-            processNode(node, true, processor);
-            node = next;
+            N next = myAstAdapter.getNext(child);
+            processNode(child, true, processor);
+            child = next;
         }
     }
 
@@ -94,10 +101,11 @@ public abstract class AstActionHandler<C extends AstActionHandler<C, N, A, H>, N
      * @param <R>     type of result returned by processor
      * @return result or defaultValue
      */
-    public <R> R processNodeOnly(N node, R defaultValue, BiFunction<N, H, R> processor) {
-        H handler = getHandler(node);
+    final public <R> R processNodeOnly(N node, R defaultValue, BiFunction<N, A, R> processor) {
+        A handler = getAction(node);
         Object[] value = { defaultValue };
         processNode(node, false, (n, h) -> value[0] = processor.apply(n, h));
+        //noinspection unchecked
         return (R) value[0];
     }
 }

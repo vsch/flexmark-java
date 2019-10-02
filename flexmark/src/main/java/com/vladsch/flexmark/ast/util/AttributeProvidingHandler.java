@@ -12,7 +12,8 @@ public class AttributeProvidingHandler<N extends Node> extends AstHandler<N, Att
     }
 
     public void setAttributes(Node node, AttributablePart part, Attributes attributes) {
-        myAdapter.setAttributes((N) node, part, attributes);
+        //noinspection unchecked
+        getAdapter().setAttributes((N) node, part, attributes);
     }
 
     public static interface AttributeProvidingVisitor<N extends Node> extends AstAction<N> {

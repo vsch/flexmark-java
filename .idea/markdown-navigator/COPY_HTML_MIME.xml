@@ -105,8 +105,8 @@
           </textMapGroup>
         </textMaps>
       </LinkMapSettings>
-      <EnhPreviewSettings allowBrowsingInPreview="false" openRemoteLinks="false" replaceUnicodeEmoji="false" showGitHubPageIfSynced="false" />
-      <EnhHtmlSettings embedUrlContent="false" embedImages="true" embedHttpImages="false" mathConversion="-1" />
+      <EnhPreviewSettings allowBrowsingInPreview="false" openRemoteLinks="true" replaceUnicodeEmoji="false" showGitHubPageIfSynced="false" />
+      <EnhHtmlSettings embedUrlContent="false" embedImages="false" embedHttpImages="false" mathConversion="0" />
     </option>
   </profile>
 </component>

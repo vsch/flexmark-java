@@ -13,7 +13,7 @@ public class LinkResolvingHandler<N extends Node> extends AstHandler<N, LinkReso
 
     public ResolvedLink resolveLink(Node node, LinkResolverContext context, ResolvedLink link) {
         //noinspection unchecked
-        return myAdapter.resolveLink((N) node, context, link);
+        return getAdapter().resolveLink((N) node, context, link);
     }
 
     public static interface LinkResolvingVisitor<N extends Node> extends AstAction<N> {

@@ -1,10 +1,7 @@
 package com.vladsch.flexmark.ast.util;
 
 import com.vladsch.flexmark.ast.*;
-import com.vladsch.flexmark.util.ast.DoNotCollectText;
-import com.vladsch.flexmark.util.ast.Node;
-import com.vladsch.flexmark.util.ast.NodeVisitor;
-import com.vladsch.flexmark.util.ast.VisitHandler;
+import com.vladsch.flexmark.util.ast.*;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.SegmentedSequenceBuilder;
 
@@ -48,10 +45,10 @@ public class TextCollectingVisitor {
         )
         {
             @Override
-            public void processNode(Node node, boolean withChildren, BiConsumer<Node, VisitHandler<Node>> processor) {
-                VisitHandler<?> handler = getHandler(node);
-                if (handler != null) {
-                    handler.visit(node);
+            public void processNode(Node node, boolean withChildren, BiConsumer<Node, Visitor<Node>> processor) {
+                Visitor<Node> visitor = getAction(node);
+                if (visitor != null) {
+                    processor.accept(node, visitor);
                 } else {
                     processChildren(node, processor);
                     if (myLineBreakNodes != null && myLineBreakNodes.contains(node.getClass()) && !node.isOrDescendantOfType(DoNotCollectText.class)) {

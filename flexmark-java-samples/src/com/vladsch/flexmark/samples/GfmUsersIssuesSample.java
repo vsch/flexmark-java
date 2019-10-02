@@ -5,10 +5,7 @@ import com.vladsch.flexmark.ext.gfm.issues.GfmIssuesExtension;
 import com.vladsch.flexmark.ext.gfm.strikethrough.StrikethroughExtension;
 import com.vladsch.flexmark.ext.gfm.users.GfmUsersExtension;
 import com.vladsch.flexmark.parser.Parser;
-import com.vladsch.flexmark.util.ast.Document;
-import com.vladsch.flexmark.util.ast.Node;
-import com.vladsch.flexmark.util.ast.NodeVisitor;
-import com.vladsch.flexmark.util.ast.VisitHandler;
+import com.vladsch.flexmark.util.ast.*;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 
@@ -23,7 +20,7 @@ public class GfmUsersIssuesSample {
         Document document = parser.parse("Hello, @world, and #1!");
         new NodeVisitor(new VisitHandler<?>[] { }) {
             @Override
-            public void processNode(Node node, boolean withChildren, BiConsumer<Node, VisitHandler<Node>> processor) {
+            public void processNode(Node node, boolean withChildren, BiConsumer<Node, Visitor<Node>> processor) {
                 System.out.println("Node: " + node);
                 super.processNode(node, withChildren, processor);
             }
