@@ -72,7 +72,7 @@ public abstract class AstActionHandler<C extends AstActionHandler<C, N, A, H>, N
      * @param withChildren whether to process child nodes if there is no handler for the node type
      * @param processor    processor to invoke to perform the processing, BiConsumer taking N node, and A action
      */
-    public void processNode(N node, boolean withChildren, BiConsumer<N, A> processor) {
+    protected void processNode(N node, boolean withChildren, BiConsumer<N, A> processor) {
         A action = getAction(node);
         if (action != null) {
             processor.accept(node, action);
@@ -81,7 +81,7 @@ public abstract class AstActionHandler<C extends AstActionHandler<C, N, A, H>, N
         }
     }
 
-    public final void processChildren(N node, BiConsumer<N, A> processor) {
+    protected final void processChildren(N node, BiConsumer<N, A> processor) {
         N child = myAstAdapter.getFirstChild(node);
         while (child != null) {
             // A subclass of this visitor might modify the node, resulting in getNext returning a different node or no
@@ -101,7 +101,7 @@ public abstract class AstActionHandler<C extends AstActionHandler<C, N, A, H>, N
      * @param <R>     type of result returned by processor
      * @return result or defaultValue
      */
-    final public <R> R processNodeOnly(N node, R defaultValue, BiFunction<N, A, R> processor) {
+    final protected <R> R processNodeOnly(N node, R defaultValue, BiFunction<N, A, R> processor) {
         A handler = getAction(node);
         Object[] value = { defaultValue };
         processNode(node, false, (n, h) -> value[0] = processor.apply(n, h));

@@ -31,7 +31,6 @@
       </option>
     </JavaCodeStyleSettings>
     <MarkdownNavigatorCodeStyleSettings>
-      <option name="WRAP_ON_TYPING" value="1" />
       <option name="KEEP_BLANK_LINES" value="1" />
       <option name="FORMAT_WITH_SOFT_WRAP" value="2" />
       <option name="LIST_ALIGN_FIRST_LINE_TEXT" value="true" />
@@ -54,7 +53,13 @@
       <option name="TOC_GENERATE_TEXT_ONLY" value="true" />
       <option name="TOC_TITLE_LEVEL" value="3" />
       <option name="RIGHT_MARGIN" value="96" />
+      <option name="TRAILING_SPACES_ID_1" value="flexmark-java-spec-example" />
+      <option name="WRAP_ON_TYPING" value="1" />
     </MarkdownNavigatorCodeStyleSettings>
+    <MarkdownNavigatorEnhCodeStyleSettings>
+      <option name="RIGHT_MARGIN" value="72" />
+      <option name="TRAILING_SPACES_ID_1" value="flexmark-java-spec-example" />
+    </MarkdownNavigatorEnhCodeStyleSettings>
     <XML>
       <option name="XML_ATTRIBUTE_WRAP" value="0" />
       <option name="XML_KEEP_BLANK_LINES" value="1" />
@@ -129,6 +134,9 @@
       <option name="DOWHILE_BRACE_FORCE" value="3" />
       <option name="WHILE_BRACE_FORCE" value="1" />
       <option name="FOR_BRACE_FORCE" value="1" />
+    </codeStyleSettings>
+    <codeStyleSettings language="Markdown">
+      <option name="RIGHT_MARGIN" value="96" />
     </codeStyleSettings>
     <codeStyleSettings language="PHP">
       <option name="LINE_COMMENT_AT_FIRST_COLUMN" value="false" />

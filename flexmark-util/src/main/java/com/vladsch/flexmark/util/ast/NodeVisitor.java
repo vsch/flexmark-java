@@ -82,6 +82,10 @@ public class NodeVisitor extends AstActionHandler<NodeVisitor, Node, Visitor<Nod
     }
 
     // add handler variations
+    public NodeVisitor addTypedHandlers(Collection<VisitHandler<?>> handlers) {
+        return super.addActionHandlers(handlers.toArray(EMPTY_HANDLERS));
+    }
+
     public NodeVisitor addHandlers(Collection<VisitHandler> handlers) {
         return super.addActionHandlers(handlers.toArray(EMPTY_HANDLERS));
     }

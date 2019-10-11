@@ -1682,6 +1682,68 @@ Document[0, 30]
 ````````````````````````````````
 
 
+## IntelliJ
+
+```````````````````````````````` example(IntelliJ: 1) options(intellij)
+!!! ⎮attention
+    attention  
+.
+<svg xmlns="http://www.w3.org/2000/svg" class="adm-hidden">
+  <symbol id="adm-note">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <g fill="currentColor">
+    <path d="m15.4 5h4.5v2.7h-4.5z" transform="matrix(-.7071 -.7071 .7071 -.7071 25.7188 23.288)"/>
+    <path d="m13.9 7 3.1 3.1-9.5 9.6-3.5.3.3-3.5z"/>
+    </g>
+    </svg>
+  </symbol>
+</svg>
+<div class="adm-block adm-note">
+<div class="adm-heading">
+<svg class="adm-icon"><use xlink:href="#adm-note" /></svg><span>⎮attention</span>
+</div>
+<div class="adm-body">
+  <p>attention</p>
+</div>
+</div>
+.
+Document[0, 30]
+  AdmonitionBlock[0, 30] open:[0, 3, "!!!"] info:[4, 14, "%1fattention"]
+    Paragraph[19, 30]
+      Text[19, 28] chars:[19, 28, "attention"]
+````````````````````````````````
+
+
+```````````````````````````````` example(IntelliJ: 2) options(intellij)
+!!! atte⎮ntion
+    attention  
+.
+<svg xmlns="http://www.w3.org/2000/svg" class="adm-hidden">
+  <symbol id="adm-note">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <g fill="currentColor">
+    <path d="m15.4 5h4.5v2.7h-4.5z" transform="matrix(-.7071 -.7071 .7071 -.7071 25.7188 23.288)"/>
+    <path d="m13.9 7 3.1 3.1-9.5 9.6-3.5.3.3-3.5z"/>
+    </g>
+    </svg>
+  </symbol>
+</svg>
+<div class="adm-block adm-note">
+<div class="adm-heading">
+<svg class="adm-icon"><use xlink:href="#adm-note" /></svg><span>Atte⎮ntion</span>
+</div>
+<div class="adm-body">
+  <p>attention</p>
+</div>
+</div>
+.
+Document[0, 30]
+  AdmonitionBlock[0, 30] open:[0, 3, "!!!"] info:[4, 14, "atte%1fntion"]
+    Paragraph[19, 30]
+      Text[19, 28] chars:[19, 28, "attention"]
+````````````````````````````````
+
+
 ## Source Position Attribute
 
 ```````````````````````````````` example(Source Position Attribute: 1) options(src-pos)

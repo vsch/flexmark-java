@@ -27,6 +27,7 @@ public class ComboAdmonitionSpecTest extends ComboSpecTestCase {
         optionsMap.put("src-pos", new MutableDataSet().set(HtmlRenderer.SOURCE_POSITION_ATTRIBUTE, "md-pos"));
         optionsMap.put("no-lazy-continuation", new MutableDataSet().set(AdmonitionExtension.ALLOW_LAZY_CONTINUATION, false));
         optionsMap.put("no-lead-space", new MutableDataSet().set(AdmonitionExtension.ALLOW_LEADING_SPACE, false));
+        optionsMap.put("intellij", new MutableDataSet().set(Parser.INTELLIJ_DUMMY_IDENTIFIER, true));
     }
 
     private static final Parser PARSER = Parser.builder(OPTIONS).build();
