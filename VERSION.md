@@ -175,6 +175,7 @@ flexmark-java
 
 ### Fixes
 
+* Fix: MarkdownTable index out of bounds in some functions when table has no rows
 * Fix: `DataSet` copy constructors to accept `null`
 * Fix: change `DataSet.keySet()` to `DataSet.getKeys()`
   * Deprecate: `DataSet.keySet()`

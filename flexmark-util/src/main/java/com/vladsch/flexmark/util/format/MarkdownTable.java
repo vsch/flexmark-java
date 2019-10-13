@@ -168,12 +168,15 @@ public class MarkdownTable {
     }
 
     public int getTableStartOffset() {
+        // MdNav:diagnostic/4134, index out of range
         List<TableRow> rows = getAllRows();
-        TableRow row = rows.get(0);
-        row.normalizeIfNeeded();
+        if (!rows.isEmpty()) {
+            TableRow row = rows.get(0);
+            row.normalizeIfNeeded();
 
-        if (row.cells.size() > 0) {
-            return row.cells.get(0).getStartOffset(null);
+            if (row.cells.size() > 0) {
+                return row.cells.get(0).getStartOffset(null);
+            }
         }
         return 0;
     }
@@ -534,8 +537,7 @@ public class MarkdownTable {
     public void addCell(TableCell cell) {
         TableSection tableSection = isSeparator ? separator : isHeading ? header : body;
 
-        if (isSeparator && (cell.columnSpan != 1 || cell.rowSpan != 1))
-            throw new IllegalStateException("Separator columns cannot span rows/columns");
+        if (isSeparator && (cell.columnSpan != 1 || cell.rowSpan != 1)) { throw new IllegalStateException("Separator columns cannot span rows/columns"); }
 
         TableRow currentRow = tableSection.get(tableSection.row);
 
@@ -551,8 +553,7 @@ public class MarkdownTable {
             int columnSpan = 1;
             while (columnSpan < cell.columnSpan) {
                 tableSection.expandTo(tableSection.row + rowSpan, tableSection.column + columnSpan);
-                if (tableSection.get(tableSection.row + rowSpan).cells.get(tableSection.column + columnSpan) != null)
-                    break;
+                if (tableSection.get(tableSection.row + rowSpan).cells.get(tableSection.column + columnSpan) != null) { break; }
 
                 tableSection.rows.get(tableSection.row + rowSpan).set(tableSection.column + columnSpan, TableCell.NULL);
                 columnSpan++;
@@ -889,12 +890,10 @@ public class MarkdownTable {
                     assert trackedPos == NOT_TRACKED;
                 } else {
                     if (options.leadTrailPipes && j == 0) out.append('|');
-                    if (alignment1 == CellAlignment.LEFT || alignment1 == CellAlignment.CENTER)
-                        out.append(':');
+                    if (alignment1 == CellAlignment.LEFT || alignment1 == CellAlignment.CENTER) { out.append(':'); }
 
                     out.repeat('-', dashCount);
-                    if (alignment1 == CellAlignment.RIGHT || alignment1 == CellAlignment.CENTER)
-                        out.append(':');
+                    if (alignment1 == CellAlignment.RIGHT || alignment1 == CellAlignment.CENTER) { out.append(':'); }
                 }
 
                 j++;
@@ -963,13 +962,17 @@ public class MarkdownTable {
                     BasedSequence cellText = cellText(row.cells, 0, true, false, 0, CellAlignment.LEFT, delta);
                     int captionOffset = out.offsetWithPending();
 
-                    if (cell.trackedTextOffset != NOT_TRACKED) {
-                        TableCell adjustedCell = row.cells.get(0);
-                        if (adjustedCell.trackedTextOffset != NOT_TRACKED) {
-                            trackedOffsets.put(cell.trackedTextOffset + cell.text.getStartOffset(), cellOffset + (cellText.isBlank() ? 1 : minLimit(adjustedCell.trackedTextOffset, 0) + adjustedCell.trackedTextAdjust));
+                    if (row.cells.size() > 0) {
+                        if (cell.trackedTextOffset != NOT_TRACKED) {
+                            TableCell adjustedCell = row.cells.get(0);
+                            if (adjustedCell.trackedTextOffset != NOT_TRACKED) {
+                                trackedOffsets.put(cell.trackedTextOffset + cell.text.getStartOffset(), cellOffset + (cellText.isBlank() ? 1 : minLimit(adjustedCell.trackedTextOffset, 0) + adjustedCell.trackedTextAdjust));
+                            }
                         }
+                        row.cells.set(0, cell);
+                    } else {
+                        row.cells.add(cell);
                     }
-                    row.cells.set(0, cell);
 
                     out.append(cellText);
 
@@ -1088,8 +1091,7 @@ public class MarkdownTable {
                 if (j == 0) {
                     if (options.leadTrailPipes) {
                         out.append('|');
-                        if (options.spaceAroundPipes && pipeNeedsSpaceAfter(cell))
-                            out.append(' ');
+                        if (options.spaceAroundPipes && pipeNeedsSpaceAfter(cell)) { out.append(' '); }
                     }
                 } else {
                     if (options.spaceAroundPipes && pipeNeedsSpaceAfter(cell)) out.append(' ');
@@ -1146,18 +1148,15 @@ public class MarkdownTable {
             out.repeat('|', span);
         } else {
             if (trackedSpanOffset == 0) {
-                if (offsets != null)
-                    offsets.put(cellInsideEndOffset + trackedSpanOffset, out.offsetWithPending());
+                if (offsets != null) { offsets.put(cellInsideEndOffset + trackedSpanOffset, out.offsetWithPending()); }
                 out.repeat('|', span);
             } else if (trackedSpanOffset < span) {
                 out.repeat('|', trackedSpanOffset);
-                if (offsets != null)
-                    offsets.put(cellInsideEndOffset + trackedSpanOffset, out.offsetWithPending());
+                if (offsets != null) { offsets.put(cellInsideEndOffset + trackedSpanOffset, out.offsetWithPending()); }
                 out.repeat('|', span - trackedSpanOffset);
             } else {
                 out.repeat('|', span);
-                if (offsets != null)
-                    offsets.put(cellInsideEndOffset + trackedSpanOffset, out.offsetWithPending());
+                if (offsets != null) { offsets.put(cellInsideEndOffset + trackedSpanOffset, out.offsetWithPending()); }
             }
         }
     }
@@ -1211,8 +1210,7 @@ public class MarkdownTable {
 
                     if (withTrackedOffset && needsPadding && cell.afterSpace) {
                         // if did not grow then move caret right
-                        if (spaceCount <= 0)
-                            adjustedCell = adjustedCell.withTrackedTextAdjust(1);
+                        if (spaceCount <= 0) { adjustedCell = adjustedCell.withTrackedTextAdjust(1); }
                     }
                     break;
 
@@ -1230,8 +1228,7 @@ public class MarkdownTable {
                     }
 
                     if (withTrackedOffset && needsPadding && cell.afterSpace) {
-                        if (spaceCount <= 0 || !cell.afterDelete)
-                            adjustedCell = adjustedCell.withTrackedTextAdjust(1);
+                        if (spaceCount <= 0 || !cell.afterDelete) { adjustedCell = adjustedCell.withTrackedTextAdjust(1); }
                     }
                     break;
 
@@ -1311,8 +1308,7 @@ public class MarkdownTable {
     private CellAlignment adjustCellAlignment(CellAlignment alignment) {
         switch (options.leftAlignMarker) {
             case ADD:
-                if (alignment == null || alignment == CellAlignment.NONE)
-                    alignment = CellAlignment.LEFT;
+                if (alignment == null || alignment == CellAlignment.NONE) { alignment = CellAlignment.LEFT; }
                 break;
             case REMOVE:
                 if (alignment == CellAlignment.LEFT) alignment = CellAlignment.NONE;
@@ -1356,8 +1352,7 @@ public class MarkdownTable {
         forAllSectionsRows(0, Integer.MAX_VALUE, sections, (row, allRowsIndex, rows, index) -> {
             if (!contained(allRowsIndex, skipRows)) {
                 int totalColumns = row.getTotalColumns();
-                if (totalColumns > 0)
-                    columns[0] = aggregator.apply(columns[0], totalColumns);
+                if (totalColumns > 0) { columns[0] = aggregator.apply(columns[0], totalColumns); }
             }
             return 0;
         });
