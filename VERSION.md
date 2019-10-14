@@ -7,6 +7,7 @@ flexmark-java
 
 - [To Do](#to-do)
 - [Next 0.60.0](#next-0600)
+    - [0.5.9.3](#0593)
     - [API Change](#api-change)
     - [Fixes](#fixes)
 - [0.50.40](#05040)
@@ -113,6 +114,8 @@ flexmark-java
       attributes node text.
 
 ## Next 0.60.0
+
+### 0.5.9.3
 
 ### API Change
 
