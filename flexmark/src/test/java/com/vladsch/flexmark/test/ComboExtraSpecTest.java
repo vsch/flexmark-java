@@ -8,6 +8,8 @@ import com.vladsch.flexmark.util.ast.IRender;
 import com.vladsch.flexmark.util.ast.KeepType;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.junit.runners.Parameterized;
 
 import java.util.ArrayList;
@@ -148,23 +150,30 @@ public class ComboExtraSpecTest extends ComboSpecTestCase {
         return getTestData(SPEC_RESOURCE);
     }
 
+    @Nullable
     @Override
     public DataHolder options(String optionSet) {
         return optionsSet(optionSet);
     }
 
+    @NotNull
     @Override
     public String getSpecResourceName() {
         return SPEC_RESOURCE;
     }
 
-    @Override
-    public IParse parser() {
+    @NotNull
+    public Parser parser() {
         return PARSER;
     }
 
-    @Override
-    public IRender renderer() {
+    @NotNull
+    public HtmlRenderer renderer() {
         return RENDERER;
+    }
+
+    @Override
+    public @NotNull SpecExampleRenderer getSpecExampleRenderer(@Nullable DataHolder exampleOptions) {
+        return new FlexmarkSpecExampleRenderer(exampleOptions, parser(),renderer(), true);
     }
 }

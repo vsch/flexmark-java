@@ -1,31 +1,34 @@
 package com.vladsch.flexmark.util.ast;
 
 import com.vladsch.flexmark.util.data.DataHolder;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Render interface for rendering implementation for RenderingTestCase
  */
 public interface IRender {
-    public void render(Node node, Appendable output);
+    public void render(Node node, @NotNull Appendable output);
 
     /**
      * Render the tree of nodes to HTML.
      *
-     * @param node the root node
+     * @param document the root node
      * @return the rendered HTML
      */
-    default String render(Node node) {
+    @NotNull
+    default String render(Node document) {
         StringBuilder sb = new StringBuilder();
-        render(node, sb);
+        render(document, sb);
         return sb.toString();
     }
 
-    IRender withOptions(DataHolder options);
+    @NotNull IRender withOptions(@Nullable DataHolder options);
 
     /**
      * Get Options for parsing
      *
      * @return DataHolder for options
      */
-    DataHolder getOptions();
+    @Nullable DataHolder getOptions();
 }

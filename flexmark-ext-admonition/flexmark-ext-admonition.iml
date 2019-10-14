@@ -32,5 +32,6 @@
     <orderEntry type="module" module-name="flexmark-test-util" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-ext-tables" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-formatter" />
+    <orderEntry type="library" name="org.jetbrains:annotations:15.0" level="project" />
   </component>
 </module>

@@ -5,21 +5,20 @@ import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.spec.SpecReader;
 import com.vladsch.flexmark.spec.UrlString;
 import com.vladsch.flexmark.test.ComboSpecTestCase;
-import com.vladsch.flexmark.test.DumpSpecReader;
+import com.vladsch.flexmark.test.FlexmarkSpecExampleRenderer;
+import com.vladsch.flexmark.test.SpecExampleRenderer;
 import com.vladsch.flexmark.util.ast.IParse;
 import com.vladsch.flexmark.util.ast.IRender;
-import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
-import org.junit.ComparisonFailure;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.junit.runners.Parameterized;
 
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import static org.junit.Assert.assertEquals;
 
 public class ComboHtmlConverterIssueTest extends ComboSpecTestCase {
     private static final String SPEC_RESOURCE = "/html_converter_issue_spec.md";
@@ -83,75 +82,44 @@ public class ComboHtmlConverterIssueTest extends ComboSpecTestCase {
         return getTestData(SPEC_RESOURCE);
     }
 
+    @Nullable
     @Override
     public DataHolder options(String optionSet) {
         return optionsSet(optionSet);
     }
 
+    @NotNull
     @Override
     public String getSpecResourceName() {
         return SPEC_RESOURCE;
     }
 
-    @Override
+    @NotNull
     public IParse parser() {
         return PARSER;
     }
 
-    @Override
+    @NotNull
     public IRender renderer() {
         return RENDERER;
     }
 
     @Override
-    public SpecReader create(InputStream inputStream, String fileUrl) {
-        dumpSpecReader = new HtmlSpecReader(inputStream, this, fileUrl, this);
+    public @NotNull
+    SpecExampleRenderer getSpecExampleRenderer(@Nullable DataHolder exampleOptions) {
+        return new FlexmarkSpecExampleRenderer(exampleOptions, parser(), renderer(), true);
+    }
+
+    @NotNull
+    @Override
+    public SpecReader create(@NotNull InputStream inputStream, @Nullable String fileUrl) {
+        dumpSpecReader = new HtmlSpecReader(inputStream, this, fileUrl);
         return dumpSpecReader;
     }
 
-    // reverse source and html
     @Override
-    protected void assertRendering(UrlString fileUrl, String source, String expectedHtml, String optionsSet) {
-        DataHolder options = optionsSet == null ? null : getOptions(example(), optionsSet);
-        String parseSource = expectedHtml;
-
-        if (options != null && options.get(NO_FILE_EOL)) {
-            parseSource = DumpSpecReader.trimTrailingEOL(parseSource);
-        }
-
-        Node node = parser().withOptions(options).parse(parseSource);
-        String renderedResult = renderer().withOptions(options).render(node);
-        String expectedResult = source;
-
-        actualSource(renderedResult, optionsSet);
-
-        boolean useActualHtml = useActualHtml();
-
-        // include source for better assertion errors
-        String expected;
-        String actual;
-        if (example() != null && example().getSection() != null) {
-            StringBuilder outExpected = new StringBuilder();
-            DumpSpecReader.addSpecExample(outExpected, expectedResult, expectedHtml, "", optionsSet, true, example().getSection(), example().getExampleNumber());
-            expected = outExpected.toString();
-
-            StringBuilder outActual = new StringBuilder();
-            DumpSpecReader.addSpecExample(outActual, useActualHtml ? renderedResult : expectedResult, expectedHtml, "", optionsSet, true, example().getSection(), example().getExampleNumber());
-            actual = outActual.toString();
-        } else {
-            expected = DumpSpecReader.addSpecExample(expectedResult, expectedHtml, "", optionsSet);
-            actual = DumpSpecReader.addSpecExample(useActualHtml ? renderedResult : expectedResult, expectedHtml, "", optionsSet);
-        }
-
-        specExample(expected, actual, optionsSet);
-        if (options != null && options.get(FAIL)) {
-            thrown.expect(ComparisonFailure.class);
-        }
-
-        if (fileUrl != null) {
-            assertEquals(fileUrl.toString(), expected, actual);
-        } else {
-            assertEquals(expected, actual);
-        }
+    protected void assertRendering(UrlString fileUrl, String source, String expectedHtml, String expectedAst, String optionsSet) {
+        // reverse source and html
+        super.assertRendering(fileUrl, expectedHtml, source, null, optionsSet);
     }
 }

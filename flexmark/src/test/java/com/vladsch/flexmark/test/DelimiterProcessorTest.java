@@ -17,6 +17,8 @@ import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.junit.Test;
 
 import java.util.HashSet;
@@ -29,11 +31,6 @@ public class DelimiterProcessorTest extends RenderingTestCase {
 
     private static final Parser PARSER = Parser.builder().customDelimiterProcessor(new AsymmetricDelimiterProcessor()).build();
     private static final HtmlRenderer RENDERER = HtmlRenderer.builder().nodeRendererFactory(new UpperCaseNodeRendererFactory()).build();
-
-    @Override
-    public SpecExample example() {
-        return null;
-    }
 
     @Test
     public void delimiterProcessorWithInvalidDelimiterUse() {
@@ -59,14 +56,20 @@ public class DelimiterProcessorTest extends RenderingTestCase {
         assertRendering("}foo{ bar", "<p>}foo{ bar</p>\n");
     }
 
+    @NotNull
     @Override
-    public Parser parser() {
-        return PARSER;
+    public SpecExample getExample() {
+        return SpecExample.getNull();
     }
 
     @Override
-    public HtmlRenderer renderer() {
-        return RENDERER;
+    public @Nullable DataHolder options(String optionSet) {
+        return null;
+    }
+
+    @Override
+    public @NotNull SpecExampleRenderer getSpecExampleRenderer(@Nullable DataHolder exampleOptions) {
+        return new FlexmarkSpecExampleRenderer(exampleOptions, PARSER, RENDERER, true);
     }
 
     private static class CustomDelimiterProcessor implements DelimiterProcessor {

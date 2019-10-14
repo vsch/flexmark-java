@@ -4,6 +4,7 @@ import com.vladsch.flexmark.spec.IRenderBase;
 import com.vladsch.flexmark.util.ast.IRender;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 
@@ -20,7 +21,7 @@ class HtmlRootNodeRenderer extends IRenderBase {
     }
 
     @Override
-    public void render(Node node, Appendable output) {
+    public void render(Node node, @NotNull Appendable output) {
         assert node instanceof HtmlParser.RootNode;
         String text = ((HtmlParser.RootNode) node).myRootNode;
         try {
@@ -30,8 +31,9 @@ class HtmlRootNodeRenderer extends IRenderBase {
         }
     }
 
+    @org.jetbrains.annotations.NotNull
     @Override
-    public IRender withOptions(DataHolder options) {
+    public IRender withOptions(@org.jetbrains.annotations.Nullable DataHolder options) {
         return new HtmlRootNodeRenderer(options);
     }
 }

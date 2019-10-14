@@ -2,6 +2,7 @@ package com.vladsch.flexmark.test;
 
 import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.spec.SpecReader;
+import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -36,13 +37,15 @@ public abstract class ComboSpecTestCase extends FullSpecTestCase {
     /**
      * @return return resource name for the spec to use for the examples of the test
      */
+    @NotNull
     public abstract String getSpecResourceName();
 
     public ComboSpecTestCase(SpecExample example) {
         this.example = example;
     }
 
-    public SpecExample example() {
+    @NotNull
+    final public SpecExample getExample() {
         return example;
     }
 
@@ -77,17 +80,6 @@ public abstract class ComboSpecTestCase extends FullSpecTestCase {
         return data;
     }
 
-    /**
-     * @return return true if actual result spec used in comparison should be output to stdout
-     */
-    public boolean outputActualFullSpec() {
-        return false;
-    }
-
-    public boolean includeExampleCoords() {
-        return true;
-    }
-
     protected String readResource(String resourcePath) {
         InputStream stream = ComboSpecTestCase.class.getResourceAsStream(resourcePath);
         return readStream(stream);
@@ -113,17 +105,16 @@ public abstract class ComboSpecTestCase extends FullSpecTestCase {
         if (!example.isSpecExample()) return;
 
         if (example.getAst() != null) {
-            assertRenderingAst(example.getFileUrl(), example.getSource(), example.getHtml(), example.getAst(), example.getOptionsSet());
+            assertRendering(example.getFileUrl(), example.getSource(), example.getHtml(), example.getAst(), example.getOptionsSet());
         } else {
             assertRendering(example.getFileUrl(), example.getSource(), example.getHtml(), example.getOptionsSet());
         }
     }
 
     /**
-     * @return false to not do full spec
      */
-    protected boolean fullTestSpecStarting() {
-        return true;
+    protected void fullTestSpecStarting() {
+
     }
 
     protected void fullTestSpecComplete() {
@@ -131,27 +122,23 @@ public abstract class ComboSpecTestCase extends FullSpecTestCase {
     }
 
     @Test
-    public void testFullSpec() throws Exception {
+    public void testFullSpec() {
         if (!example.isFullSpecExample()) return;
 
-        if (fullTestSpecStarting()) {
-            String specResourcePath = getSpecResourceName();
-            String fullSpec = SpecReader.readSpec(specResourcePath);
-            SpecReader reader = example == null || example.getFileUrl() == null ? SpecReader.createAndReadExamples(specResourcePath, this)
-                    : SpecReader.createAndReadExamples(specResourcePath, this, example.getFileUrl().toString());
-            String actual = dumpSpecReader.getFullSpec();
+        fullTestSpecStarting();
 
-            if (outputActualFullSpec()) {
-                System.out.println(actual);
-            }
+        String specResourcePath = getSpecResourceName();
+        String fullSpec = SpecReader.readSpec(specResourcePath);
+        SpecReader reader = example.getFileUrl() == null ? SpecReader.createAndReadExamples(specResourcePath, this)
+                : SpecReader.createAndReadExamples(specResourcePath, this, example.getFileUrl().toString());
+        String actual = dumpSpecReader.getFullSpec();
 
-            fullTestSpecComplete();
+        fullTestSpecComplete();
 
-            if (reader.getFileUrl() != null) {
-                assertEquals(reader.getFileUrl().toString(), fullSpec, actual);
-            } else {
-                assertEquals(fullSpec, actual);
-            }
+        if (reader.getFileUrl() != null) {
+            assertEquals(reader.getFileUrl().toString(), fullSpec, actual);
+        } else {
+            assertEquals(fullSpec, actual);
         }
     }
 }

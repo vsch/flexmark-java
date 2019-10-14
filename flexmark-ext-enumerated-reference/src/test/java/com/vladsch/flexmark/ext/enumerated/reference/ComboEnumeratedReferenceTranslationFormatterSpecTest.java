@@ -8,6 +8,8 @@ import com.vladsch.flexmark.html.renderer.HeaderIdGenerator;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.test.ComboSpecTestCase;
+import com.vladsch.flexmark.test.FlexmarkSpecExampleRenderer;
+import com.vladsch.flexmark.test.SpecExampleRenderer;
 import com.vladsch.flexmark.util.ast.IRender;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
@@ -15,6 +17,8 @@ import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import com.vladsch.flexmark.util.format.options.ElementPlacement;
 import com.vladsch.flexmark.util.format.options.ElementPlacementSort;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.junit.runners.Parameterized;
 
 import java.io.IOException;
@@ -88,13 +92,14 @@ public class ComboEnumeratedReferenceTranslationFormatterSpecTest extends ComboS
             myFormatter = formatter;
         }
 
+        @org.jetbrains.annotations.Nullable
         @Override
         public DataHolder getOptions() {
             return myFormatter.getOptions();
         }
 
         @Override
-        public void render(Node node, Appendable output) {
+        public void render(Node node, @NotNull Appendable output) {
             TranslationHandler handler = myFormatter.getTranslationHandler(new HeaderIdGenerator.Factory());
             String formattedOutput = myFormatter.translationRender(node, handler, RenderPurpose.TRANSLATION_SPANS);
 
@@ -156,15 +161,17 @@ public class ComboEnumeratedReferenceTranslationFormatterSpecTest extends ComboS
             }
         }
 
+        @org.jetbrains.annotations.NotNull
         @Override
-        public String render(Node node) {
+        public String render(Node document) {
             StringBuilder sb = new StringBuilder();
-            render(node, sb);
+            render(document, sb);
             return sb.toString();
         }
 
+        @org.jetbrains.annotations.NotNull
         @Override
-        public IRender withOptions(DataHolder options) {
+        public IRender withOptions(@org.jetbrains.annotations.Nullable DataHolder options) {
             return new TranslationFormatter(myFormatter.withOptions(options));
         }
     }
@@ -185,23 +192,21 @@ public class ComboEnumeratedReferenceTranslationFormatterSpecTest extends ComboS
         return getTestData(SPEC_RESOURCE);
     }
 
+    @Nullable
     @Override
     public DataHolder options(String optionSet) {
         return optionsSet(optionSet);
     }
 
+    @NotNull
     @Override
     public String getSpecResourceName() {
         return SPEC_RESOURCE;
     }
 
-    @Override
-    public Parser parser() {
-        return PARSER;
-    }
 
     @Override
-    public IRender renderer() {
-        return TRANSLATION_FORMATTER;
+    public @NotNull SpecExampleRenderer getSpecExampleRenderer(@Nullable DataHolder exampleOptions) {
+        return new FlexmarkSpecExampleRenderer(exampleOptions, PARSER, TRANSLATION_FORMATTER, true);
     }
 }

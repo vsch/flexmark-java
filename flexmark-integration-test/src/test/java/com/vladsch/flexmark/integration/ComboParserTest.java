@@ -17,8 +17,12 @@ import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import com.vladsch.flexmark.util.html.LineFormattingAppendable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.junit.Test;
 import org.junit.runners.Parameterized;
+import com.vladsch.flexmark.test.FlexmarkSpecExampleRenderer;
+import com.vladsch.flexmark.test.SpecExampleRenderer;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -73,27 +77,22 @@ public class ComboParserTest extends ComboSpecTestCase {
         return getTestData(SPEC_RESOURCE);
     }
 
+    @Nullable
     @Override
     public DataHolder options(String optionSet) {
         return optionsSet(optionSet);
     }
 
+    @NotNull
     @Override
     public String getSpecResourceName() {
         return SPEC_RESOURCE;
     }
-
     @Override
-    public Parser parser() {
-        return PARSER;
+    public @NotNull SpecExampleRenderer getSpecExampleRenderer(@Nullable DataHolder exampleOptions) {
+        return new FlexmarkSpecExampleRenderer(exampleOptions, PARSER, RENDERER, true);
     }
-
-    @Override
-    public HtmlRenderer renderer() {
-        return RENDERER;
-    }
-
-    //@Test
+//@Test
     public void testWrap() throws Exception {
         if (!example.isFullSpecExample()) return;
 

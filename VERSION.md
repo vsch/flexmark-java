@@ -116,17 +116,17 @@ flexmark-java
 
 ### API Change
 
-* [ ] Add: `org.jetbrains:annotations:15.0` dependency to have `@Nullable`/`@NotNull`
+* [x] Break: refactor and cleanup tests to eliminate duplicated code and allow easier reuse of
+      test cases with spec example data.
+* [x] Add: `org.jetbrains:annotations:15.0` dependency to have `@Nullable`/`@NotNull`
       annotations added for all parameters. I use IntelliJ IDEA for development and it helps to
       have these annotations for analysis of potential problems and use with Kotlin.
-
 * [ ] Break: split out generic AST utilities from `flexmark-util` module into separate smaller
       modules. IntelliJ IDEA migration to help with migration from 0.50.40 will be provided
       where needed if the package or class is changed. `com.vladsch.flexmark.util` will no
       longer contain any files but will contain the separate utilities modules with
       `flexmark-utils` module being an aggregation of all utilities modules, similar to
       `flexmark-all`
-
   * [ ] `ast/` classes to `flexmark-util-ast`, any other classes which depend on `Node` will
         most likely be moved here.
   * [ ] `builder/` classes to `flexmark-util-builder`
@@ -153,10 +153,8 @@ flexmark-java
     * [ ] `Ref.java` to `flexmark-util-misc`
     * [ ] `TemplateUtil.java` to `flexmark-util-misc`
     * [ ] `Utils.java` to `flexmark-util-misc`
-
 * [ ] Break: delete deprecated properties, methods and classes which were deprecated before `V
       0.60.0`
-
 * [x] Break: `NodeVisitor` implementation details have changed. If you were overriding
       `NodeVisitor.visit(Node)` in the previous version it is now `final` to ensure compile time
       error is generated. You will need to change your implementation. See comment in the class
@@ -942,6 +940,7 @@ flexmark-java
       * `com.vladsch.flexmark.formatter.internal.PhasedNodeFormatter` to `com.vladsch.flexmark.formatter.PhasedNodeFormatter`
       * `com.vladsch.flexmark.formatter.internal.NodeFormatterSubContext` to `com.vladsch.flexmark.formatter.NodeFormatterSubContext`
 <!--@formatter:on-->
+
 0.35.10
 -------
 

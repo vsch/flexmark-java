@@ -15,6 +15,19 @@ public class DataSet implements DataHolder {
         dataSet = other == null ? new HashMap<>() : new HashMap<>(other.getAll());
     }
 
+    public DataSet(DataHolder other, DataHolder overrides) {
+        if (other == null && overrides == null) {
+            dataSet = new HashMap<>();
+        } else if (other == null) {
+            dataSet = new HashMap<>(overrides.getAll());
+        } else if (overrides == null) {
+            dataSet = new HashMap<>(other.getAll());
+        } else {
+            dataSet = new HashMap<>(other.getAll());
+            dataSet.putAll(overrides.getAll());
+        }
+    }
+
     @Override
     public Map<DataKey<?>, Object> getAll() {
         return dataSet;
@@ -33,6 +46,7 @@ public class DataSet implements DataHolder {
     @Override
     public <T> T get(DataKey<T> key) {
         if (dataSet.containsKey(key)) {
+            //noinspection unchecked
             return (T) dataSet.get(key);
         } else {
             return key.getDefaultValue(this);

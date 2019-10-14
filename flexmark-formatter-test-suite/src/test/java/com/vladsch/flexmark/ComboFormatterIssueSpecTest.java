@@ -30,12 +30,16 @@ import com.vladsch.flexmark.parser.ParserEmulationProfile;
 import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.superscript.SuperscriptExtension;
 import com.vladsch.flexmark.test.ComboSpecTestCase;
+import com.vladsch.flexmark.test.FlexmarkSpecExampleRenderer;
+import com.vladsch.flexmark.test.SpecExampleRenderer;
+import com.vladsch.flexmark.test.TestUtils;
 import com.vladsch.flexmark.util.ast.Document;
-import com.vladsch.flexmark.util.ast.IParse;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import com.vladsch.flexmark.util.format.options.ElementPlacement;
 import com.vladsch.flexmark.util.format.options.ElementPlacementSort;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.junit.runners.Parameterized;
 
 import java.util.Arrays;
@@ -83,7 +87,7 @@ public class ComboFormatterIssueSpecTest extends ComboSpecTestCase {
         optionsMap.put("no-soft-breaks", new MutableDataSet().set(Formatter.KEEP_SOFT_LINE_BREAKS, false));
 
         optionsMap.put("no-append-references", new MutableDataSet().set(Formatter.APPEND_TRANSFERRED_REFERENCES, false)
-                .set(INCLUDED_DOCUMENT, "" +
+                .set(TestUtils.INCLUDED_DOCUMENT, "" +
                         "[^footnote]: Included footnote\n" +
                         "    with some extras\n" +
                         "\n" +
@@ -102,7 +106,7 @@ public class ComboFormatterIssueSpecTest extends ComboSpecTestCase {
         );
 
         optionsMap.put("append-references", new MutableDataSet().set(Formatter.APPEND_TRANSFERRED_REFERENCES, true)
-                .set(INCLUDED_DOCUMENT, "" +
+                .set(TestUtils.INCLUDED_DOCUMENT, "" +
                         "[^footnote]: Included footnote\n" +
                         "    with some extras\n" +
                         "\n" +
@@ -137,13 +141,19 @@ public class ComboFormatterIssueSpecTest extends ComboSpecTestCase {
     }
 
     @Override
-    protected IParse adjustParserForInclusion(IParse parserWithOptions, Document includedDocument) {
-        AbbreviationRepository abbreviationRepository = includedDocument.get(AbbreviationExtension.ABBREVIATIONS);
-        if (!abbreviationRepository.isEmpty()) {
-            // need to transfer it to parser
-            return parserWithOptions.withOptions(new MutableDataSet().set(AbbreviationExtension.ABBREVIATIONS, abbreviationRepository));
-        }
-        return parserWithOptions;
+    public @NotNull SpecExampleRenderer getSpecExampleRenderer(@Nullable DataHolder exampleOptions) {
+        return new FlexmarkSpecExampleRenderer(exampleOptions, parser(),renderer(), true) {
+            @Override
+            protected void adjustParserForInclusion() {
+                super.adjustParserForInclusion();
+
+                AbbreviationRepository abbreviationRepository = ((Document)getIncludedDocument()).get(AbbreviationExtension.ABBREVIATIONS);
+                if (!abbreviationRepository.isEmpty()) {
+                    // need to transfer it to parser
+                    setParserWithOptions(getParserWithOptions().withOptions(new MutableDataSet().set(AbbreviationExtension.ABBREVIATIONS, abbreviationRepository)));
+                }
+            }
+        };
     }
 
     @Parameterized.Parameters(name = "{0}")
@@ -151,22 +161,24 @@ public class ComboFormatterIssueSpecTest extends ComboSpecTestCase {
         return getTestData(SPEC_RESOURCE);
     }
 
+    @Nullable
     @Override
     public DataHolder options(String optionSet) {
         return optionsSet(optionSet);
     }
 
+    @NotNull
     @Override
     public String getSpecResourceName() {
         return SPEC_RESOURCE;
     }
 
-    @Override
+    @NotNull
     public Parser parser() {
         return PARSER;
     }
 
-    @Override
+    @NotNull
     public Formatter renderer() {
         return RENDERER;
     }

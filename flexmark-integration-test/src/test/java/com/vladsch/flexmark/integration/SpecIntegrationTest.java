@@ -7,8 +7,13 @@ import com.vladsch.flexmark.ext.yaml.front.matter.YamlFrontMatterExtension;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.spec.SpecExample;
+import com.vladsch.flexmark.test.FlexmarkSpecExampleRenderer;
+import com.vladsch.flexmark.test.SpecExampleRenderer;
 import com.vladsch.flexmark.test.SpecTestCase;
 import com.vladsch.flexmark.util.builder.Extension;
+import com.vladsch.flexmark.util.data.DataHolder;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -31,13 +36,19 @@ public class SpecIntegrationTest extends SpecTestCase {
     private static final HtmlRenderer RENDERER = HtmlRenderer.builder().extensions(EXTENSIONS).percentEncodeUrls(true).build();
     private static final Map<String, String> OVERRIDDEN_EXAMPLES = getOverriddenExamples();
 
+    @Override
+    public @Nullable DataHolder options(String optionSet) {
+        return null;
+    }
+
     public SpecIntegrationTest(SpecExample example) {
         super(example);
     }
 
+    @NotNull
     @Override
-    public SpecExample example() {
-        return null;
+    public SpecExample getExample() {
+        return SpecExample.getNull();
     }
 
     @Test
@@ -51,14 +62,10 @@ public class SpecIntegrationTest extends SpecTestCase {
         }
     }
 
-    @Override
-    public Parser parser() {
-        return PARSER;
-    }
 
     @Override
-    public HtmlRenderer renderer() {
-        return RENDERER;
+    public @NotNull SpecExampleRenderer getSpecExampleRenderer(@Nullable DataHolder exampleOptions) {
+        return new FlexmarkSpecExampleRenderer(exampleOptions, PARSER, RENDERER, true);
     }
 
     private static Map<String, String> getOverriddenExamples() {

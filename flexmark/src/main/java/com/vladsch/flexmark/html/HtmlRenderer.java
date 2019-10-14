@@ -17,6 +17,7 @@ import com.vladsch.flexmark.util.html.Attributes;
 import com.vladsch.flexmark.util.html.Escaping;
 import com.vladsch.flexmark.util.html.LineFormattingAppendable;
 import com.vladsch.flexmark.util.sequence.TagRange;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
@@ -176,6 +177,7 @@ public class HtmlRenderer implements IRender {
         return new Builder(options);
     }
 
+    @org.jetbrains.annotations.Nullable
     @Override
     public DataHolder getOptions() {
         return new DataSet(builder);
@@ -183,11 +185,9 @@ public class HtmlRenderer implements IRender {
 
     /**
      * Render a node to the appendable
-     *
-     * @param node   node to render
-     * @param output appendable to use for the output
-     */
-    public void render(Node node, Appendable output) {
+     *  @param node   node to render
+     * @param output appendable to use for the output*/
+    public void render(Node node, @NotNull Appendable output) {
         MainNodeRenderer renderer = new MainNodeRenderer(options, new HtmlWriter(htmlOptions.indentSize, htmlOptions.formatFlags, !htmlOptions.htmlBlockOpenTagEol, !htmlOptions.htmlBlockCloseTagEol), node.getDocument());
         renderer.render(node);
         renderer.flushTo(output, htmlOptions.maxTrailingBlankLines);
@@ -210,16 +210,18 @@ public class HtmlRenderer implements IRender {
     /**
      * Render the tree of nodes to HTML.
      *
-     * @param node the root node
+     * @param document the root node
      * @return the rendered HTML
      */
-    public String render(Node node) {
+    @NotNull
+    public String render(Node document) {
         StringBuilder sb = new StringBuilder();
-        render(node, sb);
+        render(document, sb);
         return sb.toString();
     }
 
-    public HtmlRenderer withOptions(DataHolder options) {
+    @NotNull
+    public HtmlRenderer withOptions(@org.jetbrains.annotations.Nullable DataHolder options) {
         return options == null ? this : new HtmlRenderer(new Builder(builder, options));
     }
 

@@ -8,8 +8,13 @@ import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.test.ComboSpecTestCase;
+import com.vladsch.flexmark.test.FlexmarkSpecExampleRenderer;
+import com.vladsch.flexmark.test.SpecExampleRenderer;
+import com.vladsch.flexmark.test.TestUtils;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.junit.runners.Parameterized;
 
 import java.util.*;
@@ -36,7 +41,7 @@ public class ComboAttributesFormatterSpecTest extends ComboSpecTestCase {
         optionsMap.put("text-attributes", new MutableDataSet().set(AttributesExtension.ASSIGN_TEXT_ATTRIBUTES, true));
         optionsMap.put("no-text-attributes", new MutableDataSet().set(AttributesExtension.ASSIGN_TEXT_ATTRIBUTES, false));
         optionsMap.put("src-pos", new MutableDataSet().set(HtmlRenderer.SOURCE_POSITION_ATTRIBUTE, "md-pos"));
-        optionsMap.put("IGNORED", new MutableDataSet().set(IGNORE, SKIP_IGNORED_TESTS));
+        optionsMap.put("IGNORED", new MutableDataSet().set(TestUtils.IGNORE, SKIP_IGNORED_TESTS));
     }
 
     private static final Parser PARSER = Parser.builder(OPTIONS).build();
@@ -57,23 +62,21 @@ public class ComboAttributesFormatterSpecTest extends ComboSpecTestCase {
         return getTestData(SPEC_RESOURCE);
     }
 
+    @Nullable
     @Override
     public DataHolder options(String optionSet) {
         return optionsSet(optionSet);
     }
 
+    @NotNull
     @Override
     public String getSpecResourceName() {
         return SPEC_RESOURCE;
     }
 
-    @Override
-    public Parser parser() {
-        return PARSER;
-    }
 
     @Override
-    public Formatter renderer() {
-        return RENDERER;
+    public @NotNull SpecExampleRenderer getSpecExampleRenderer(@Nullable DataHolder exampleOptions) {
+        return new FlexmarkSpecExampleRenderer(exampleOptions, PARSER, RENDERER, true);
     }
 }

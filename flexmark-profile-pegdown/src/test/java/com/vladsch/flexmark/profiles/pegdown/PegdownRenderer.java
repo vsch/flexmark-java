@@ -4,6 +4,7 @@ import com.vladsch.flexmark.spec.IRenderBase;
 import com.vladsch.flexmark.util.ast.IRender;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
+import org.jetbrains.annotations.NotNull;
 import org.pegdown.LinkRenderer;
 import org.pegdown.ToHtmlSerializer;
 import org.pegdown.ast.RootNode;
@@ -25,7 +26,7 @@ class PegdownRenderer extends IRenderBase {
     }
 
     @Override
-    public void render(Node node, Appendable output) {
+    public void render(Node node, @NotNull Appendable output) {
         assert node instanceof PegdownParser.PegdownRootNode;
 
         RootNode rootNode = ((PegdownParser.PegdownRootNode) node).myRootNode;
@@ -38,8 +39,9 @@ class PegdownRenderer extends IRenderBase {
         }
     }
 
+    @org.jetbrains.annotations.NotNull
     @Override
-    public IRender withOptions(DataHolder options) {
+    public IRender withOptions(@org.jetbrains.annotations.Nullable DataHolder options) {
         return new PegdownRenderer(options);
     }
 }

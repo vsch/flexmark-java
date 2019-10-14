@@ -1,8 +1,20 @@
 package com.vladsch.flexmark.test;
 
+import com.vladsch.flexmark.html.HtmlRenderer;
+import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.spec.SpecExample;
+import com.vladsch.flexmark.spec.SpecReader;
+import com.vladsch.flexmark.util.data.DataHolder;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.junit.Test;
 
-public class SpecialInputTest extends CoreRenderingTestCase {
+import java.io.InputStream;
+
+public class SpecialInputTest extends RenderingTestCase {
+
+    private static final Parser PARSER = Parser.builder().build();
+    private static final HtmlRenderer RENDERER = HtmlRenderer.builder().build();
 
     @Test
     public void empty() {
@@ -105,5 +117,22 @@ public class SpecialInputTest extends CoreRenderingTestCase {
         assertRendering("[foo][" + label2 + "]\n\n[" + label2 + "]: /", "<p><a href=\"/\">foo</a></p>\n");
         assertRendering(
                 "[foo][12" + label2 + "]\n\n[12" + label2 + "]: /", "<p>[foo][12" + label2 + "]</p>\n<p>[12" + label2 + "]: /</p>\n");
+    }
+
+    @Nullable
+    @Override
+    public DataHolder options(String optionSet) {
+        return null;
+    }
+
+    @NotNull
+    @Override
+    public SpecExample getExample() {
+        return SpecExample.getNull();
+    }
+
+    @Override
+    public @NotNull SpecExampleRenderer getSpecExampleRenderer(@Nullable DataHolder exampleOptions) {
+        return new FlexmarkSpecExampleRenderer(exampleOptions, PARSER, RENDERER, true);
     }
 }

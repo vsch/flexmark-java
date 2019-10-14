@@ -1,7 +1,10 @@
 package com.vladsch.flexmark.spec;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 import java.io.InputStream;
 
 public interface SpecReaderFactory {
-    SpecReader create(InputStream inputStream, final String fileUrl);
+    @NotNull SpecReader create(@NotNull InputStream inputStream, @Nullable String fileUrl);
 }

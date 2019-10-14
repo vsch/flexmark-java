@@ -5,6 +5,8 @@ import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.ParserEmulationProfile;
 import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.util.data.DataHolder;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class FullOrigSpec027CoreTest extends FullSpecTestCase {
     static final String SPEC_RESOURCE = "/spec.0.27.txt";
@@ -13,28 +15,35 @@ public class FullOrigSpec027CoreTest extends FullSpecTestCase {
     // The spec says URL-escaping is optional, but the examples assume that it's enabled.
     static final HtmlRenderer RENDERER = HtmlRenderer.builder(OPTIONS).percentEncodeUrls(true).build();
 
-    @Override
-    public SpecExample example() {
-        return null;
-    }
-
+    @NotNull
     @Override
     public String getSpecResourceName() {
         return SPEC_RESOURCE;
     }
 
-    @Override
+    @NotNull
     public Parser parser() {
         return PARSER;
     }
 
+    @NotNull
+    public HtmlRenderer renderer() {
+        return RENDERER;
+    }
+
+    @NotNull
     @Override
-    public boolean includeExampleCoords() {
-        return false;
+    public SpecExample getExample() {
+        return SpecExample.getNull();
     }
 
     @Override
-    public HtmlRenderer renderer() {
-        return RENDERER;
+    public @Nullable DataHolder options(String optionSet) {
+        return null;
+    }
+
+    @Override
+    public @NotNull SpecExampleRenderer getSpecExampleRenderer(@Nullable DataHolder exampleOptions) {
+        return new FlexmarkSpecExampleRenderer(exampleOptions, parser(),renderer(), false);
     }
 }

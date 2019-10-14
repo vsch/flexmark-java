@@ -5,8 +5,13 @@ import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.test.ComboSpecTestCase;
+import com.vladsch.flexmark.test.FlexmarkSpecExampleRenderer;
+import com.vladsch.flexmark.test.SpecExampleRenderer;
+import com.vladsch.flexmark.test.TestUtils;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.junit.Test;
 import org.junit.runners.Parameterized;
 
@@ -35,12 +40,12 @@ public class ComboTableSpecTest extends ComboSpecTestCase {
         optionsMap.put("keep-whitespace", new MutableDataSet().set(TablesExtension.TRIM_CELL_WHITESPACE, false));
         optionsMap.put("min-dashes-2", new MutableDataSet().set(TablesExtension.MIN_SEPARATOR_DASHES, 2));
         optionsMap.put("min-dashes-1", new MutableDataSet().set(TablesExtension.MIN_SEPARATOR_DASHES, 1));
-        optionsMap.put("strip-indent", new MutableDataSet().set(SOURCE_INDENT, "> > "));
+        optionsMap.put("strip-indent", new MutableDataSet().set(TestUtils.SOURCE_INDENT, "> > "));
         optionsMap.put("sub-parse", new MutableDataSet()
-                .set(SOURCE_PREFIX, "" +
+                .set(TestUtils.SOURCE_PREFIX, "" +
                         "Source Prefix\n" +
                         "")
-                .set(SOURCE_SUFFIX, "" +
+                .set(TestUtils.SOURCE_SUFFIX, "" +
                         "Source Suffix\n" +
                         "")
         );
@@ -65,24 +70,21 @@ public class ComboTableSpecTest extends ComboSpecTestCase {
         return getTestData(SPEC_RESOURCE);
     }
 
+    @Nullable
     @Override
     public DataHolder options(String optionSet) {
         return optionsSet(optionSet);
     }
 
+    @NotNull
     @Override
     public String getSpecResourceName() {
         return SPEC_RESOURCE;
     }
 
     @Override
-    public Parser parser() {
-        return PARSER;
-    }
-
-    @Override
-    public HtmlRenderer renderer() {
-        return RENDERER;
+    public @NotNull SpecExampleRenderer getSpecExampleRenderer(@Nullable DataHolder exampleOptions) {
+        return new FlexmarkSpecExampleRenderer(exampleOptions, PARSER, RENDERER, true);
     }
 
     @Test

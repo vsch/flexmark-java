@@ -29,6 +29,7 @@ import org.docx4j.openpackaging.parts.WordprocessingML.StyleDefinitionsPart;
 import org.docx4j.wml.CTBookmark;
 import org.docx4j.wml.Numbering;
 import org.docx4j.wml.Styles;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -165,6 +166,7 @@ public class DocxRenderer implements IRender {
         this.linkResolverFactories = FlatDependencyHandler.computeDependencies(builder.linkResolverFactories);
     }
 
+    @org.jetbrains.annotations.Nullable
     @Override
     public DataHolder getOptions() {
         return new DataSet(builder);
@@ -283,13 +285,14 @@ public class DocxRenderer implements IRender {
     /**
      * Render the tree of nodes to DocX.
      *
-     * @param node the root node
+     * @param document the root node
      * @return the rendered HTML
      */
-    public String render(Node node) {
+    @org.jetbrains.annotations.NotNull
+    public String render(Node document) {
         String resourcePath = DEFAULT_TEMPLATE_RESOURCE.getFrom(getOptions());
         WordprocessingMLPackage mlPackage = getDefaultTemplate(resourcePath);
-        render(node, mlPackage);
+        render(document, mlPackage);
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         try {
             mlPackage.save(outputStream, Docx4J.FLAG_SAVE_FLAT_XML);
@@ -305,7 +308,7 @@ public class DocxRenderer implements IRender {
     }
 
     @Override
-    public void render(Node node, Appendable output) {
+    public void render(Node node, @NotNull Appendable output) {
         String docx = render(node);
         try {
             output.append(docx);
@@ -314,7 +317,8 @@ public class DocxRenderer implements IRender {
         }
     }
 
-    public DocxRenderer withOptions(DataHolder options) {
+    @org.jetbrains.annotations.NotNull
+    public DocxRenderer withOptions(@org.jetbrains.annotations.Nullable DataHolder options) {
         return options == null ? this : new DocxRenderer(new Builder(builder, options));
     }
 

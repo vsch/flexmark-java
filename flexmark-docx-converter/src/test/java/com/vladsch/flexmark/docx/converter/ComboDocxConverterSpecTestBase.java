@@ -27,6 +27,12 @@ import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.spec.SpecReader;
 import com.vladsch.flexmark.superscript.SuperscriptExtension;
 import com.vladsch.flexmark.test.ComboSpecTestCase;
+import com.vladsch.flexmark.test.FlexmarkSpecExampleRenderer;
+import com.vladsch.flexmark.test.SpecExampleRenderer;
+import com.vladsch.flexmark.test.TestUtils;
+import com.vladsch.flexmark.util.ast.Document;
+import com.vladsch.flexmark.util.ast.IParse;
+import com.vladsch.flexmark.util.ast.IRender;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
@@ -37,6 +43,8 @@ import org.docx4j.Docx4J;
 import org.docx4j.openpackaging.exceptions.Docx4JException;
 import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
 import org.docx4j.wml.Text;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.*;
 import java.util.Arrays;
@@ -93,7 +101,7 @@ public abstract class ComboDocxConverterSpecTestBase extends ComboSpecTestCase {
         super(example);
 
         // add standard options
-        optionsMap.put("IGNORED", new MutableDataSet().set(IGNORE, SKIP_IGNORED_TESTS));
+        optionsMap.put("IGNORED", new MutableDataSet().set(TestUtils.IGNORE, SKIP_IGNORED_TESTS));
         optionsMap.put("caption-before", new MutableDataSet().set(DocxRenderer.TABLE_CAPTION_BEFORE_TABLE, true));
         optionsMap.put("emoji-github", new MutableDataSet().set(EmojiExtension.USE_SHORTCUT_TYPE, EmojiShortcutType.ANY_GITHUB_PREFERRED));
         optionsMap.put("emoji-unicode", new MutableDataSet().set(EmojiExtension.USE_IMAGE_TYPE, EmojiImageType.UNICODE_FALLBACK_TO_IMAGE));
@@ -108,9 +116,15 @@ public abstract class ComboDocxConverterSpecTestBase extends ComboSpecTestCase {
         optionsMap.put("yellow-missing-hyperlink", new MutableDataSet().set(DocxRenderer.LOCAL_HYPERLINK_MISSING_HIGHLIGHT, "yellow"));
     }
 
-    @Override
     public abstract DocxRenderer renderer();
+    public abstract IParse parser();
 
+    @Override
+    public @NotNull SpecExampleRenderer getSpecExampleRenderer(@Nullable DataHolder exampleOptions) {
+        return new FlexmarkSpecExampleRenderer(exampleOptions, parser(), renderer(), true);
+    }
+
+    @Nullable
     @Override
     final public DataHolder options(String optionSet) {
         if (optionSet == null) return null;
@@ -134,17 +148,18 @@ public abstract class ComboDocxConverterSpecTestBase extends ComboSpecTestCase {
     }
 
     @Override
-    protected void testCase(Node node, DataHolder options) {
+    public void testCase(SpecExampleRenderer exampleRenderer, DataHolder options) {
         if (!isDumpTestCaseFiles()) return;
+        Document document = (Document) ((FlexmarkSpecExampleRenderer) exampleRenderer).getDocument();
 
-        SpecExample specExample = example();
+        SpecExample specExample = getExample();
         if (!specExample.isFullSpecExample() && !specExample.getSection().isEmpty()) {
             // write it out to file, hard-coded for now                    IGNORE
             File file = new File(String.format("%s%s%s_%d.docx", getProjectRootDirectory(), getFileTestCaseDumpLocation(), specExample.getSection(), specExample.getExampleNumber()));
             File file2 = new File(String.format("%s%s%s_%d.xml", getProjectRootDirectory(), getFileTestCaseDumpLocation(), specExample.getSection(), specExample.getExampleNumber()));
             DocxRenderer withOptions = renderer().withOptions(options);
             WordprocessingMLPackage mlPackage = DocxRenderer.getDefaultTemplate(withOptions.getOptions());
-            withOptions.render(node, mlPackage);
+            withOptions.render(document, mlPackage);
 
             File parentDir = file.getParentFile();
             if (!parentDir.exists()) {
@@ -176,15 +191,15 @@ public abstract class ComboDocxConverterSpecTestBase extends ComboSpecTestCase {
     }
 
     @Override
-    public void addSpecExample(SpecExample example, Node node, DataHolder options, boolean ignoredCase, String actualHTML, String actualAST) {
+    public void addSpecExample(@NotNull SpecExample example, @NotNull SpecExampleRenderer exampleRenderer, DataHolder options, boolean ignoredTestCase, @NotNull String renderedHtml, @Nullable String renderedAst) {
         if (!isDumpAllTestCaseFiles()) return;
 
-        boolean failed = !ignoredCase && !actualHTML.equals(example.getHtml());
+        boolean failed = !ignoredTestCase && !exampleRenderer.renderHtml().equals(example.getHtml());
 
         // add source information
         myDocxContext.createP(myDocxContext.getRenderingOptions().HEADING_3);
 
-        if (ignoredCase) {
+        if (ignoredTestCase) {
             // does not match, need more stuff
 
             myDocxContext.createColor().setVal("BB002F");
@@ -224,7 +239,7 @@ public abstract class ComboDocxConverterSpecTestBase extends ComboSpecTestCase {
         }
 
         myDocxContext.createHorizontalLine();
-        renderer().withOptions(options).render(node, myPackage);
+        renderer().withOptions(options).render(((FlexmarkSpecExampleRenderer)exampleRenderer).getDocument(), myPackage);
         myDocxContext.createHorizontalLine();
 
         if (example.hasComment()) {
@@ -254,40 +269,39 @@ public abstract class ComboDocxConverterSpecTestBase extends ComboSpecTestCase {
     protected String myVisibleLineBreak;
 
     @Override
-    public boolean fullTestSpecStarting() {
-        if (!isDumpAllTestCaseFiles()) return true;
+    public void fullTestSpecStarting() {
+        if (isDumpAllTestCaseFiles()) {
+            myPackage = DocxRenderer.getDefaultTemplate(renderer().getOptions());
+            if (myPackage == null) return;
 
-        myPackage = DocxRenderer.getDefaultTemplate(renderer().getOptions());
-        if (myPackage == null) return true;
+            myDocxContext = new DocxContextImpl<Node>(myPackage, null) {
+                @Override
+                public Attributes extendRenderingNodeAttributes(AttributablePart part, Attributes attributes) {
+                    return null;
+                }
 
-        myDocxContext = new DocxContextImpl<Node>(myPackage, null) {
-            @Override
-            public Attributes extendRenderingNodeAttributes(AttributablePart part, Attributes attributes) {
-                return null;
-            }
+                @Override
+                public Attributes extendRenderingNodeAttributes(Node node, AttributablePart part, Attributes attributes) {
+                    return null;
+                }
 
-            @Override
-            public Attributes extendRenderingNodeAttributes(Node node, AttributablePart part, Attributes attributes) {
-                return null;
-            }
+                @Override
+                public String getNodeId(Node node) {
+                    return null;
+                }
 
-            @Override
-            public String getNodeId(Node node) {
-                return null;
-            }
+                @Override
+                public String getValidBookmarkName(String id) {
+                    return null;
+                }
 
-            @Override
-            public String getValidBookmarkName(String id) {
-                return null;
-            }
-
-            @Override
-            public Node getNodeFromId(String nodeId) {
-                return null;
-            }
-        };
-        myVisibleLineBreak = "¶";
-        return true;
+                @Override
+                public Node getNodeFromId(String nodeId) {
+                    return null;
+                }
+            };
+            myVisibleLineBreak = "¶";
+        }
     }
 
     @Override

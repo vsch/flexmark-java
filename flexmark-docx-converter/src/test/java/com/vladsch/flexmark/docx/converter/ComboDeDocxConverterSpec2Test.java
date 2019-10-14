@@ -4,6 +4,7 @@ import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
+import org.jetbrains.annotations.NotNull;
 import org.junit.runners.Parameterized;
 
 import java.util.List;
@@ -28,16 +29,19 @@ public class ComboDeDocxConverterSpec2Test extends ComboDocxConverterSpecTestBas
         return getTestData(SPEC_RESOURCE);
     }
 
+    @NotNull
     @Override
     public String getSpecResourceName() {
         return SPEC_RESOURCE;
     }
 
+    @org.jetbrains.annotations.NotNull
     @Override
     public Parser parser() {
         return PARSER;
     }
 
+    @org.jetbrains.annotations.NotNull
     @Override
     public DocxRenderer renderer() {
         return RENDERER;

@@ -50,7 +50,7 @@ public class JekyllIncludeFileSample {
 
                                 if (includeDoc instanceof Document) {
                                     // copy any definition of reference elements from included file to our document
-                                    parser.transferReferences(doc, includeDoc);
+                                    parser.transferReferences(doc, includeDoc, null);
                                 }
                             } else {
                                 includeHtmlMap.put(includeFile, text);

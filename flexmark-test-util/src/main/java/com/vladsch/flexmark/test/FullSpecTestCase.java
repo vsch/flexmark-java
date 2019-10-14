@@ -1,25 +1,25 @@
 package com.vladsch.flexmark.test;
 
-import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.spec.SpecReader;
 import com.vladsch.flexmark.spec.SpecReaderFactory;
 import com.vladsch.flexmark.spec.UrlString;
-import com.vladsch.flexmark.util.ast.Node;
-import com.vladsch.flexmark.util.data.DataHolder;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.junit.Test;
 
 import java.io.InputStream;
 
 import static org.junit.Assert.assertEquals;
 
-public abstract class FullSpecTestCase extends RenderingTestCase implements SpecReaderFactory {
+public abstract class FullSpecTestCase extends RenderingTestCase implements SpecExampleProcessor, SpecReaderFactory {
     public static final String SPEC_RESOURCE = "/ast_spec.md";
 
     protected DumpSpecReader dumpSpecReader;
 
+    @NotNull
     @Override
-    public SpecReader create(InputStream inputStream, final String fileUrl) {
-        dumpSpecReader = new DumpSpecReader(inputStream, this, fileUrl, this);
+    public SpecReader create(@NotNull InputStream inputStream, @Nullable final String fileUrl) {
+        dumpSpecReader = new DumpSpecReader(inputStream, this, fileUrl);
         return dumpSpecReader;
     }
 
@@ -27,25 +27,8 @@ public abstract class FullSpecTestCase extends RenderingTestCase implements Spec
         return create(inputStream, new UrlString(SpecReader.getSpecInputFileUrl(this.getSpecResourceName())).toString());
     }
 
-    /**
-     * @return return resource name for the spec to use for the examples of the test
-     */
+    @NotNull
     public abstract String getSpecResourceName();
-
-    public void addSpecExample(SpecExample example, Node node, DataHolder options, boolean ignoredCase, String html, String ast) {
-        return;
-    }
-
-    /**
-     * @return return true if actual result spec used in comparison should be output to stdout
-     */
-    public boolean outputActualFullSpec() {
-        return false;
-    }
-
-    public boolean includeExampleCoords() {
-        return true;
-    }
 
     @Test
     public void testFullSpec() throws Exception {
@@ -54,10 +37,6 @@ public abstract class FullSpecTestCase extends RenderingTestCase implements Spec
                 : SpecReader.createAndReadExamples(specResourcePath, this, dumpSpecReader.getFileUrl().toString());
         String fullSpec = SpecReader.readSpec(specResourcePath);
         String actual = dumpSpecReader.getFullSpec();
-
-        if (outputActualFullSpec()) {
-            System.out.println(actual);
-        }
 
         if (reader.getFileUrl() != null) {
             assertEquals(reader.getFileUrl().toString(), fullSpec, actual);

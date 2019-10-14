@@ -3,8 +3,13 @@ package com.vladsch.flexmark.ext.autolink;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.spec.SpecExample;
+import com.vladsch.flexmark.test.FlexmarkSpecExampleRenderer;
 import com.vladsch.flexmark.test.RenderingTestCase;
+import com.vladsch.flexmark.test.SpecExampleRenderer;
 import com.vladsch.flexmark.util.builder.Extension;
+import com.vladsch.flexmark.util.data.DataHolder;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.junit.Test;
 
 import java.util.Collections;
@@ -16,8 +21,14 @@ public class AutolinkTest extends RenderingTestCase {
     private static final HtmlRenderer RENDERER = HtmlRenderer.builder().extensions(EXTENSIONS).build();
 
     @Override
-    public SpecExample example() {
+    public @Nullable DataHolder options(String optionSet) {
         return null;
+    }
+
+    @NotNull
+    @Override
+    public SpecExample getExample() {
+        return SpecExample.getNull();
     }
 
     @Test
@@ -58,13 +69,9 @@ public class AutolinkTest extends RenderingTestCase {
                 "<http://example.com>", "<p><a href=\"http://example.com\">http://example.com</a></p>\n");
     }
 
-    @Override
-    public Parser parser() {
-        return PARSER;
-    }
 
     @Override
-    public HtmlRenderer renderer() {
-        return RENDERER;
+    public @NotNull SpecExampleRenderer getSpecExampleRenderer(@Nullable DataHolder exampleOptions) {
+        return new FlexmarkSpecExampleRenderer(exampleOptions, PARSER, RENDERER, true);
     }
 }

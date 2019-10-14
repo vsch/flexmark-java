@@ -69,6 +69,7 @@ public class SpecExample {
     // @formatter:on
 
     public boolean isFullSpecExample() {
+        //noinspection PointlessBooleanExpression
         return true
                 && Objects.equals(this.optionsSet, NULL.optionsSet)
                 && Objects.equals(this.section, NULL.section)
@@ -77,7 +78,7 @@ public class SpecExample {
                 && Objects.equals(this.html, NULL.html)
                 && Objects.equals(this.ast, NULL.ast)
                 && Objects.equals(this.comment, NULL.comment)
-                //&& Objects.equals(this.fileUrl, NULL.fileUrl)
+//                && Objects.equals(this.fileUrl, NULL.fileUrl)
                 ;
     }
 

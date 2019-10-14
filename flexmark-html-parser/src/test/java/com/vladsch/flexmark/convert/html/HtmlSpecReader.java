@@ -1,19 +1,17 @@
 package com.vladsch.flexmark.convert.html;
 
 import com.vladsch.flexmark.spec.SpecExample;
-import com.vladsch.flexmark.test.ActualExampleModifier;
-import com.vladsch.flexmark.test.DumpSpecReader;
-import com.vladsch.flexmark.test.FullSpecTestCase;
-import com.vladsch.flexmark.test.RenderingTestCase;
+import com.vladsch.flexmark.test.*;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
+import org.jetbrains.annotations.NotNull;
 import org.junit.AssumptionViolatedException;
 
 import java.io.InputStream;
 
 public class HtmlSpecReader extends DumpSpecReader {
-    public HtmlSpecReader(InputStream stream, FullSpecTestCase testCase, String fileUrl, ActualExampleModifier exampleModifier) {
-        super(stream, testCase, fileUrl, exampleModifier);
+    public HtmlSpecReader(InputStream stream, FullSpecTestCase testCase, String fileUrl) {
+        super(stream, testCase, fileUrl);
     }
 
     @Override
@@ -21,27 +19,29 @@ public class HtmlSpecReader extends DumpSpecReader {
         DataHolder options;
         boolean ignoredCase = false;
         try {
-            options = testCase.getOptions(example, example.getOptionsSet());
+            options = TestUtils.getOptions(example, example.getOptionsSet(), testCase::options);
         } catch (AssumptionViolatedException ignored) {
             ignoredCase = true;
             options = null;
         }
 
-        if (options != null && options.get(RenderingTestCase.FAIL)) {
+        if (options != null && options.get(TestUtils.FAIL)) {
             ignoredCase = true;
         }
 
         String parseSource = example.getHtml();
-        if (options != null && options.get(RenderingTestCase.NO_FILE_EOL)) {
-            parseSource = trimTrailingEOL(parseSource);
+        if (options != null && options.get(TestUtils.NO_FILE_EOL)) {
+            parseSource = TestUtils.trimTrailingEOL(parseSource);
         }
 
-        Node node = testCase.parser().withOptions(options).parse(parseSource);
-        String source = !ignoredCase && testCase.useActualHtml() ? testCase.renderer().withOptions(options).render(node) : example.getSource();
+        @NotNull SpecExampleRenderer exampleRenderer = testCase.getSpecExampleRenderer(options);
+        exampleRenderer.parse(parseSource);
+        exampleRenderer.finalizeDocument();
+        String source = !ignoredCase ? exampleRenderer.renderHtml() : example.getSource();
         String html = example.getHtml();
-        String ast = example.getAst() == null ? null : (!ignoredCase ? testCase.ast(node) : example.getAst());
+        String ast = example.getAst() == null ? null : (!ignoredCase ? exampleRenderer.getAst() : example.getAst());
 
         // include source so that diff can be used to update spec
-        addSpecExample(sb, source, html, ast, example.getOptionsSet(), testCase.includeExampleCoords(), example.getSection(), example.getExampleNumber());
+        TestUtils.addSpecExample(sb, source, html, ast, example.getOptionsSet(), exampleRenderer.includeExampleInfo(), example.getSection(), example.getExampleNumber());
     }
 }

@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.spec;
 
-import com.vladsch.flexmark.test.DumpSpecReader;
+import com.vladsch.flexmark.test.TestUtils;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -221,13 +221,12 @@ public class SpecReader {
             case SOURCE:
                 if (line.equals(TYPE_BREAK)) {
                     state = State.HTML;
-                    lineAbsorbed = true;
                 } else {
                     // examples use "rightwards arrow" to show tab
-                    String processedLine = DumpSpecReader.unShowTabs(line);
+                    String processedLine = TestUtils.unShowTabs(line);
                     source.append(processedLine).append('\n');
-                    lineAbsorbed = true;
                 }
+                lineAbsorbed = true;
                 break;
             case HTML:
                 if (line.equals(EXAMPLE_BREAK)) {
@@ -239,7 +238,7 @@ public class SpecReader {
                     state = State.AST;
                     lineAbsorbed = true;
                 } else {
-                    String processedLine = DumpSpecReader.unShowTabs(line);
+                    String processedLine = TestUtils.unShowTabs(line);
                     html.append(processedLine).append('\n');
                     lineAbsorbed = true;
                 }
@@ -249,11 +248,10 @@ public class SpecReader {
                     state = State.BEFORE;
                     addSpecExample(new SpecExample(optionsSet, section, exampleNumber, source.toString(), html.toString(), ast.toString(), comment == null ? null : comment.toString(), fileUrl));
                     resetContents();
-                    lineAbsorbed = true;
                 } else {
                     ast.append(line).append('\n');
-                    lineAbsorbed = true;
                 }
+                lineAbsorbed = true;
                 break;
         }
 

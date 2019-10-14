@@ -1,5 +1,11 @@
 package com.vladsch.flexmark.test;
 
+import com.vladsch.flexmark.html.HtmlRenderer;
+import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.spec.SpecExample;
+import com.vladsch.flexmark.util.data.DataHolder;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.junit.FixMethodOrder;
 import org.junit.Rule;
 import org.junit.Test;
@@ -14,8 +20,10 @@ import java.util.concurrent.TimeUnit;
  * Pathological input cases (from commonmark.js).
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class PathologicalTest extends CoreRenderingTestCase {
+public class PathologicalTest extends RenderingTestCase {
 
+    private static final Parser PARSER = Parser.builder().build();
+    private static final HtmlRenderer RENDERER = HtmlRenderer.builder().build();
     private int x = 100000;
 
     @Rule
@@ -102,5 +110,22 @@ public class PathologicalTest extends CoreRenderingTestCase {
         } catch (StackOverflowError error) {
             System.err.print("StackOverflow ");
         }
+    }
+
+    @Nullable
+    @Override
+    public DataHolder options(String optionSet) {
+        return null;
+    }
+
+    @NotNull
+    @Override
+    public SpecExample getExample() {
+        return SpecExample.getNull();
+    }
+
+    @Override
+    public @NotNull SpecExampleRenderer getSpecExampleRenderer(@Nullable DataHolder exampleOptions) {
+        return new FlexmarkSpecExampleRenderer(exampleOptions, PARSER, RENDERER, true);
     }
 }

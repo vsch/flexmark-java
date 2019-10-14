@@ -55,5 +55,6 @@
     <orderEntry type="module" module-name="flexmark-ext-youtube-embedded" />
     <orderEntry type="module" module-name="flexmark-html2md-converter" />
     <orderEntry type="library" name="org.docx4j:docx4j-JAXB-Internal" level="project" />
+    <orderEntry type="library" name="org.jetbrains:annotations:15.0" level="project" />
   </component>
 </module>

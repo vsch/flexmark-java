@@ -16,6 +16,7 @@ import com.vladsch.flexmark.util.builder.Extension;
 import com.vladsch.flexmark.util.data.*;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.CharSubSequence;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.io.Reader;
@@ -306,7 +307,7 @@ public class Parser implements IParse {
     private final InlineParserFactory inlineParserFactory;
     private final DataHolder options;
 
-    private Parser(Builder builder) {
+    Parser(Builder builder) {
         this.builder = new Builder(builder); // make a copy to avoid after creation side effects
         this.options = new DataSet(builder);
         this.blockParserFactories = DocumentParser.calculateBlockParserFactories(this.options, builder.blockParserFactories);
@@ -342,7 +343,7 @@ public class Parser implements IParse {
      * @param input the text to parse
      * @return the root node
      */
-    public Document parse(BasedSequence input) {
+    public @NotNull Document parse(@NotNull BasedSequence input) {
         DocumentParser documentParser = new DocumentParser(options, blockParserFactories, paragraphPreProcessorFactories,
                 blockPreProcessorDependencies, inlineParserFactory.inlineParser(options, specialCharacters, delimiterCharacters, delimiterProcessors, linkRefProcessors, inlineParserExtensionFactories));
         Document document = documentParser.parse(input);
@@ -357,7 +358,7 @@ public class Parser implements IParse {
      * @param input the text to parse
      * @return the root node
      */
-    public Document parse(String input) {
+    public @NotNull Document parse(@NotNull String input) {
         DocumentParser documentParser = new DocumentParser(options, blockParserFactories, paragraphPreProcessorFactories,
                 blockPreProcessorDependencies, inlineParserFactory.inlineParser(options, specialCharacters, delimiterCharacters, delimiterProcessors, linkRefProcessors, inlineParserExtensionFactories));
         Document document = documentParser.parse(CharSubSequence.of(input));
@@ -373,7 +374,7 @@ public class Parser implements IParse {
      * @return the root node
      * @throws IOException when reading throws an exception
      */
-    public Document parseReader(Reader input) throws IOException {
+    public @NotNull Document parseReader(@NotNull Reader input) throws IOException {
         DocumentParser documentParser = new DocumentParser(options, blockParserFactories, paragraphPreProcessorFactories,
                 blockPreProcessorDependencies, inlineParserFactory.inlineParser(options, specialCharacters, delimiterCharacters, delimiterProcessors, linkRefProcessors, inlineParserExtensionFactories));
         Document document = documentParser.parse(input);
@@ -385,22 +386,20 @@ public class Parser implements IParse {
         return document;
     }
 
-    public Parser withOptions(DataHolder options) {
+    @NotNull
+    public Parser withOptions(@org.jetbrains.annotations.Nullable DataHolder options) {
         return options == null ? this : new Parser(new Builder(builder, options));
     }
 
+    @org.jetbrains.annotations.Nullable
     @Override
     public DataHolder getOptions() {
         return new DataSet(builder);
     }
 
-    @Override
-    public boolean transferReferences(Document document, Document included) {
-        return transferReferences(document, included, null);
-    }
 
     @Override
-    public boolean transferReferences(Document document, Document included, Boolean onlyIfUndefined) {
+    public boolean transferReferences(@NotNull Document document, @NotNull Document included, Boolean onlyIfUndefined) {
         // transfer references from included to document
         boolean transferred = false;
 

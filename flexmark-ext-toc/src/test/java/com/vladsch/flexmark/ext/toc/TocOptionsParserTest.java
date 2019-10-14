@@ -9,6 +9,8 @@ import com.vladsch.flexmark.spec.IParseBase;
 import com.vladsch.flexmark.spec.IRenderBase;
 import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.test.ComboSpecTestCase;
+import com.vladsch.flexmark.test.FlexmarkSpecExampleRenderer;
+import com.vladsch.flexmark.test.SpecExampleRenderer;
 import com.vladsch.flexmark.util.Pair;
 import com.vladsch.flexmark.util.ast.*;
 import com.vladsch.flexmark.util.data.DataHolder;
@@ -20,6 +22,8 @@ import com.vladsch.flexmark.util.options.ParsedOption;
 import com.vladsch.flexmark.util.options.ParsedOptionStatus;
 import com.vladsch.flexmark.util.options.ParserMessage;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.junit.runners.Parameterized;
 
 import java.io.IOException;
@@ -140,7 +144,7 @@ public class TocOptionsParserTest extends ComboSpecTestCase {
         }
 
         @Override
-        public ParserNode parse(BasedSequence input) {
+        public @org.jetbrains.annotations.NotNull Node parse(@NotNull BasedSequence input) {
             // here we make the lexer parse the input sequence from start to finish and accumulate everything in custom nodes
             BasedSequence[] lines = input.split('\n');
             ParserNode example = new ParserNode("Example", input, null, null);
@@ -171,8 +175,9 @@ public class TocOptionsParserTest extends ComboSpecTestCase {
             return example;
         }
 
+        @org.jetbrains.annotations.NotNull
         @Override
-        public IParse withOptions(DataHolder options) {
+        public IParse withOptions(@org.jetbrains.annotations.Nullable DataHolder options) {
             return new Parser(options);
         }
     }
@@ -226,7 +231,7 @@ public class TocOptionsParserTest extends ComboSpecTestCase {
         }
 
         @Override
-        public void render(Node node, Appendable output) {
+        public void render(Node node, @NotNull Appendable output) {
             assert node instanceof ParserNode;
             TocOptions tocOptions = getOptions().get(TOC_OPTIONS);
             HtmlWriter html = new HtmlWriter(2, 0);
@@ -239,8 +244,9 @@ public class TocOptionsParserTest extends ComboSpecTestCase {
             }
         }
 
+        @org.jetbrains.annotations.NotNull
         @Override
-        public IRender withOptions(DataHolder options) {
+        public IRender withOptions(@org.jetbrains.annotations.Nullable DataHolder options) {
             return new Renderer(options);
         }
     }
@@ -254,23 +260,21 @@ public class TocOptionsParserTest extends ComboSpecTestCase {
         return getTestData(SPEC_RESOURCE);
     }
 
+    @Nullable
     @Override
     public DataHolder options(String optionSet) {
         return optionsSet(optionSet);
     }
 
+    @NotNull
     @Override
     public String getSpecResourceName() {
         return SPEC_RESOURCE;
     }
 
-    @Override
-    public IParse parser() {
-        return PARSER;
-    }
 
     @Override
-    public IRender renderer() {
-        return RENDERER;
+    public @NotNull SpecExampleRenderer getSpecExampleRenderer(@Nullable DataHolder exampleOptions) {
+        return new FlexmarkSpecExampleRenderer(exampleOptions, PARSER, RENDERER, true);
     }
 }

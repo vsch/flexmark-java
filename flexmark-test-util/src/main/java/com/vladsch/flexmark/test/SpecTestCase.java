@@ -32,7 +32,7 @@ public abstract class SpecTestCase extends RenderingTestCase {
     @Test
     public void testHtmlRendering() {
         if (example.getAst() != null) {
-            assertRenderingAst(example.getFileUrl(), example.getSource(), example.getHtml(), example.getAst(), example.getOptionsSet());
+            assertRendering(example.getFileUrl(), example.getSource(), example.getHtml(), example.getAst(), example.getOptionsSet());
         } else {
             assertRendering(example.getFileUrl(), example.getSource(), example.getHtml(), example.getOptionsSet());
         }

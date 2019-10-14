@@ -23,6 +23,7 @@ import com.vladsch.flexmark.util.format.options.*;
 import com.vladsch.flexmark.util.html.Attributes;
 import com.vladsch.flexmark.util.html.LineFormattingAppendable;
 import com.vladsch.flexmark.util.mappers.CharWidthProvider;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 import java.util.function.Function;
@@ -198,6 +199,7 @@ public class Formatter implements IRender {
         return new TranslationHandlerImpl(options, formatterOptions, new HeaderIdGenerator.Factory());
     }
 
+    @org.jetbrains.annotations.Nullable
     @Override
     public DataHolder getOptions() {
         return new DataSet(builder);
@@ -224,11 +226,9 @@ public class Formatter implements IRender {
 
     /**
      * Render a node to the appendable
-     *
-     * @param node   node to render
-     * @param output appendable to use for the output
-     */
-    public void render(Node node, Appendable output) {
+     *  @param node   node to render
+     * @param output appendable to use for the output*/
+    public void render(Node node, @NotNull Appendable output) {
         MainNodeFormatter renderer = new MainNodeFormatter(options, new MarkdownWriter(formatterOptions.formatFlags), node.getDocument(), null);
         renderer.render(node);
         renderer.flushTo(output, formatterOptions.maxTrailingBlankLines);
@@ -249,12 +249,13 @@ public class Formatter implements IRender {
     /**
      * Render the tree of nodes to markdown
      *
-     * @param node the root node
+     * @param document the root node
      * @return the formatted markdown
      */
-    public String render(Node node) {
+    @org.jetbrains.annotations.NotNull
+    public String render(Node document) {
         StringBuilder sb = new StringBuilder();
-        render(node, sb);
+        render(document, sb);
         return sb.toString();
     }
 
@@ -387,7 +388,8 @@ public class Formatter implements IRender {
         });
     }
 
-    public Formatter withOptions(DataHolder options) {
+    @org.jetbrains.annotations.NotNull
+    public Formatter withOptions(@org.jetbrains.annotations.Nullable DataHolder options) {
         return options == null ? this : new Formatter(new Builder(builder, options));
     }
 

@@ -9,6 +9,8 @@ import com.vladsch.flexmark.util.ast.IRender;
 import com.vladsch.flexmark.util.ast.KeepType;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.junit.runners.Parameterized;
 
 import java.util.ArrayList;
@@ -80,14 +82,14 @@ public class ComboIssuesSpecTest extends ComboSpecTestCase {
         optionsMap.put("html-comment-full-lines", new MutableDataSet().set(Parser.HTML_BLOCK_COMMENT_ONLY_FULL_LINE, true));
         optionsMap.put("allow-javascript", new MutableDataSet().set(HtmlRenderer.SUPPRESSED_LINKS, ""));
         optionsMap.put("pass-through", new MutableDataSet().set(HtmlRenderer.FORMAT_FLAGS, HtmlRenderer.PASS_THROUGH));
-        optionsMap.put("strip-indent", new MutableDataSet().set(SOURCE_INDENT, "> > "));
+        optionsMap.put("strip-indent", new MutableDataSet().set(TestUtils.SOURCE_INDENT, "> > "));
         optionsMap.put("no-html-blocks", new MutableDataSet().set(Parser.HTML_BLOCK_PARSER, false));
         optionsMap.put("url-spaces", new MutableDataSet().set(Parser.SPACE_IN_LINK_URLS, true));
         optionsMap.put("sub-parse", new MutableDataSet()
-                .set(SOURCE_PREFIX, "" +
+                .set(TestUtils.SOURCE_PREFIX, "" +
                         "Source Prefix\n" +
                         "")
-                .set(SOURCE_SUFFIX, "" +
+                .set(TestUtils.SOURCE_SUFFIX, "" +
                         "Source Suffix\n" +
                         "")
         );
@@ -126,23 +128,30 @@ public class ComboIssuesSpecTest extends ComboSpecTestCase {
         return getTestData(SPEC_RESOURCE);
     }
 
+    @Nullable
     @Override
     public DataHolder options(String optionSet) {
         return optionsSet(optionSet);
     }
 
+    @NotNull
     @Override
     public String getSpecResourceName() {
         return SPEC_RESOURCE;
     }
 
-    @Override
-    public IParse parser() {
+    @NotNull
+    public Parser parser() {
         return PARSER;
     }
 
-    @Override
-    public IRender renderer() {
+    @NotNull
+    public HtmlRenderer renderer() {
         return RENDERER;
+    }
+
+    @Override
+    public @NotNull SpecExampleRenderer getSpecExampleRenderer(@Nullable DataHolder exampleOptions) {
+        return new FlexmarkSpecExampleRenderer(exampleOptions, parser(),renderer(), true);
     }
 }

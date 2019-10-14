@@ -3,9 +3,14 @@ package com.vladsch.flexmark.ext.yaml.front.matter;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.spec.SpecExample;
+import com.vladsch.flexmark.test.FlexmarkSpecExampleRenderer;
 import com.vladsch.flexmark.test.RenderingTestCase;
+import com.vladsch.flexmark.test.SpecExampleRenderer;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.builder.Extension;
+import com.vladsch.flexmark.util.data.DataHolder;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.junit.Test;
 
 import java.util.Collections;
@@ -21,9 +26,10 @@ public class YamlFrontMatterTest extends RenderingTestCase {
     private static final Parser PARSER = Parser.builder().extensions(EXTENSIONS).build();
     private static final HtmlRenderer RENDERER = HtmlRenderer.builder().extensions(EXTENSIONS).build();
 
+    @NotNull
     @Override
-    public SpecExample example() {
-        return null;
+    public SpecExample getExample() {
+        return SpecExample.getNull();
     }
 
     @Test
@@ -223,12 +229,12 @@ public class YamlFrontMatterTest extends RenderingTestCase {
     }
 
     @Override
-    public Parser parser() {
-        return PARSER;
+    public @Nullable DataHolder options(String optionSet) {
+        return null;
     }
 
     @Override
-    public HtmlRenderer renderer() {
-        return RENDERER;
+    public @NotNull SpecExampleRenderer getSpecExampleRenderer(@Nullable DataHolder exampleOptions) {
+        return new FlexmarkSpecExampleRenderer(exampleOptions, PARSER, RENDERER, true);
     }
 }
