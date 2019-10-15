@@ -11,7 +11,6 @@
       <element id="module-output" name="flexmark-ext-gfm-tables" />
       <element id="module-output" name="flexmark-ext-tables" />
       <element id="module-output" name="flexmark-ext-yaml-front-matter" />
-      <element id="module-output" name="flexmark-test-util" />
       <element id="directory" name="META-INF">
         <element id="file-copy" path="$PROJECT_DIR$/META-INF/MANIFEST.MF" />
       </element>
@@ -49,7 +48,8 @@
       <element id="library" level="project" name="Maven: junit:junit:4.12" />
       <element id="library" level="project" name="Maven: org.hamcrest:hamcrest-core:1.3" />
       <element id="module-output" name="flexmark-util" />
-      <element id="module-output" name="flexmark-tree-iteration" />
+      <element id="module-output" name="flexmark-test-util" />
+      <element id="library" level="project" name="org.jetbrains:annotations:15.0" />
     </root>
   </artifact>
 </component>

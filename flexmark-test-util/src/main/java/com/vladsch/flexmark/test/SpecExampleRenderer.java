@@ -1,7 +1,5 @@
 package com.vladsch.flexmark.test;
 
-import com.vladsch.flexmark.util.ast.IParse;
-import com.vladsch.flexmark.util.ast.IRender;
 import com.vladsch.flexmark.util.data.DataHolder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -10,8 +8,6 @@ public interface SpecExampleRenderer {
     boolean includeExampleInfo();
 
     @Nullable DataHolder getOptions();
-    @NotNull IRender renderer();
-    @NotNull IParse parser();
 
     void includeDocument(@NotNull String includedText);
     void parse(CharSequence input);
@@ -21,5 +17,42 @@ public interface SpecExampleRenderer {
 
     // caches values and does not regenerate
     @NotNull String renderHtml();
-    @NotNull String getAst();
+    @Nullable String getAst();
+
+    SpecExampleRenderer NULL = new SpecExampleRenderer() {
+        @Override
+        public boolean includeExampleInfo() {
+            return false;
+        }
+
+        @Override
+        public @Nullable DataHolder getOptions() {
+            return null;
+        }
+
+        @Override
+        public void includeDocument(@NotNull String includedText) {
+
+        }
+
+        @Override
+        public void parse(CharSequence input) {
+
+        }
+
+        @Override
+        public void finalizeDocument() {
+
+        }
+
+        @Override
+        public @NotNull String renderHtml() {
+            return "";
+        }
+
+        @Override
+        public @Nullable String getAst() {
+            return null;
+        }
+    };
 }

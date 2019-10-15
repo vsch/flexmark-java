@@ -111,8 +111,6 @@ public abstract class ComboSpecTestCase extends FullSpecTestCase {
         }
     }
 
-    /**
-     */
     protected void fullTestSpecStarting() {
 
     }

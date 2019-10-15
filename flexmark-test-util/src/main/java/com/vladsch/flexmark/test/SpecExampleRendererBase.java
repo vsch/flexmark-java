@@ -37,13 +37,11 @@ public abstract class SpecExampleRendererBase implements SpecExampleRenderer {
     }
 
     @NotNull
-    @Override
     final public IRender renderer() {
         return myRender;
     }
 
     @NotNull
-    @Override
     final public IParse parser() {
         return myParser;
     }
