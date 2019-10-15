@@ -42,10 +42,10 @@ public class TestUtils {
     /**
      * process comma separated list of option sets and combine them for final set to use
      *
-     * @param example    spec example instance for which options are being processed
-     * @param optionSets comma separate list of option set names
-     * @param optionsProvider  function to take a string option name and provide settings based on it
-     * @param optionsCombiner  function that combines options, needed in those cases where simple overwrite of key values is not sufficient
+     * @param example         spec example instance for which options are being processed
+     * @param optionSets      comma separate list of option set names
+     * @param optionsProvider function to take a string option name and provide settings based on it
+     * @param optionsCombiner function that combines options, needed in those cases where simple overwrite of key values is not sufficient
      * @return combined set from applying these options together
      */
     public static DataHolder getOptions(@NotNull SpecExample example, @Nullable String optionSets, @NotNull Function<String, DataHolder> optionsProvider, @Nullable BiFunction<DataHolder, DataHolder, DataHolder> optionsCombiner) {
@@ -86,7 +86,7 @@ public class TestUtils {
                         }
 
                         if (optionsCombiner != null) {
-                             options = optionsCombiner.apply(options, dataSet);
+                            options = optionsCombiner.apply(options, dataSet);
                         } else {
                             // just overwrite
                             ((MutableDataHolder) options).setAll(dataSet);
@@ -113,10 +113,7 @@ public class TestUtils {
     }
 
     public static void throwIgnoredOption(SpecExample example, String optionSets, String option) {
-        if (example == null)
-            throw new AssumptionViolatedException("Ignored: SpecExample test case options(" + optionSets + ") is using " + option + " option");
-        else
-            throw new AssumptionViolatedException("Ignored: example(" + example.getSection() + ": " + example.getExampleNumber() + ") options(" + optionSets + ") is using " + option + " option");
+        if (example == null) { throw new AssumptionViolatedException("Ignored: SpecExample test case options(" + optionSets + ") is using " + option + " option"); } else { throw new AssumptionViolatedException("Ignored: example(" + example.getSection() + ": " + example.getExampleNumber() + ") options(" + optionSets + ") is using " + option + " option"); }
     }
 
     @NotNull
@@ -171,8 +168,7 @@ public class TestUtils {
         header.append("\n");
 
         // replace spaces so GitHub can display example as code fence, but not for original spec which has no coords
-        if (includeExampleCoords) sb.append(header.toString().replace(' ', '\u00A0'));
-        else sb.append(header.toString());
+        if (includeExampleCoords) { sb.append(header.toString().replace(' ', '\u00A0')); } else sb.append(header.toString());
 
         if (ast != null) {
             sb.append(showTabs(suffixWithEol(source) + SpecReader.TYPE_BREAK + "\n" + suffixWithEol(html)))
@@ -224,9 +220,9 @@ public class TestUtils {
      * Combine options that may have consumers of the key value.
      * Combine options that may have consumers of the key value.
      *
-     * @param other     options which are set first
-     * @param overrides options which are set next
-     * @param combinationFilter  filter to return true for all consumer keys that need chaining, null for all consumer keys need chaining
+     * @param other             options which are set first
+     * @param overrides         options which are set next
+     * @param combinationFilter filter to return true for all consumer keys that need chaining, null for all consumer keys need chaining
      * @return resulting options where all data keys which have consumer types are chained from other to overrides
      */
     @SuppressWarnings({ "unchecked", "rawtypes" })
@@ -247,12 +243,52 @@ public class TestUtils {
                     if (overrides.contains(dataKey) && dataKey.getDefaultValue(null) instanceof Consumer<?>) {
                         if (combinationFilter == null || combinationFilter.test(dataKey)) {
                             // this one is a copier, create combined consumer, other  first, followed by overrides
-                            dataSet.set(dataKey, ((Consumer)dataKey.getFrom(other)).andThen((Consumer) dataKey.getFrom(overrides)));
+                            dataSet.set(dataKey, chainConsumerDataKeys((DataKey<Consumer>) dataKey, other, overrides));
                         }
                     }
                 }
             }
             return dataSet.toImmutable();
+        }
+    }
+
+    @SuppressWarnings("rawtypes")
+    public static Consumer chainConsumerDataKeys(DataKey<Consumer> dataKey, @NotNull DataHolder other, @NotNull DataHolder overrides) {
+        //noinspection unchecked
+        return dataKey.getFrom(other).andThen(dataKey.getFrom(overrides));
+    }
+
+    /**
+     * Combine consumable data and data consumers from two data sets
+     *
+     * @param dataHolder      destination data holder
+     * @param dataKey         data key
+     * @param consumerDataKey data key for data consumer which may set some attributes in the data
+     * @param other           first data set
+     * @param overrides       overrides to the data set
+     * @param <T>             type of data
+     */
+    public static <T> void combineConsumerDataIn(@NotNull MutableDataHolder dataHolder, DataKey<T> dataKey, DataKey<Consumer<T>> consumerDataKey, @Nullable DataHolder other, @Nullable DataHolder overrides) {
+        if (overrides != null && overrides.contains(dataKey)) {
+            // overrides already contains the full data, just copy it
+            dataHolder.set(dataKey, dataKey.getFrom(overrides));
+        } else if (other != null) {
+            // have other
+            if (other.contains(consumerDataKey)) {
+                // contains the data consumer, let it modify the data and save the result in destination
+                T option = dataKey.getFrom(other);
+                consumerDataKey.getFrom(other).accept(option);
+                dataHolder.set(dataKey, option);
+            } else if (other.contains(dataKey)) {
+                // no consumer but has the data, copy the data to destination
+                T option = dataKey.getFrom(other);
+                dataHolder.set(dataKey, option);
+            }
+        }
+
+        // now copy the overriding consumer if it is defined
+        if (overrides != null && overrides.contains(consumerDataKey)) {
+            dataHolder.set(consumerDataKey, consumerDataKey.getFrom(overrides));
         }
     }
 }
