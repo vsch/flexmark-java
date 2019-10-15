@@ -204,6 +204,11 @@ public class TestUtils {
     }
 
     public static String getFormattedTimingInfo(String section, int exampleNumber, int iterations, long start, long parse, long render) {
-        return String.format(TIMED_FORMAT_STRING, section == null ? "" : section.trim() + ": " + exampleNumber, (parse - start) / 1000000.0 / iterations, (render - parse) / 1000000.0 / iterations, (render - start) / 1000000.0 / iterations);
+        return String.format(TIMED_FORMAT_STRING, getFormattedSection(section, exampleNumber), (parse - start) / 1000000.0 / iterations, (render - parse) / 1000000.0 / iterations, (render - start) / 1000000.0 / iterations);
+    }
+
+    @NotNull
+    public static String getFormattedSection(String section, int exampleNumber) {
+        return section == null ? "" : section.trim() + ": " + exampleNumber;
     }
 }
