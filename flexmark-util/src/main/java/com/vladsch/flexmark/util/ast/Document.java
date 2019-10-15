@@ -32,6 +32,9 @@ public class Document extends Block implements MutableDataHolder {
     public boolean contains(DataKey<?> key) { return dataSet.contains(key); }
 
     @Override
+    public int getConsumerDataKeys() { return dataSet.getConsumerDataKeys(); }
+
+    @Override
     public <T> T get(DataKey<T> key) {
         return dataSet.get(key);
     }

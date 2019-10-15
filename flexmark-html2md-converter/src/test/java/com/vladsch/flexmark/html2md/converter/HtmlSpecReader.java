@@ -2,7 +2,6 @@ package com.vladsch.flexmark.html2md.converter;
 
 import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.test.*;
-import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import org.jetbrains.annotations.NotNull;
 import org.junit.AssumptionViolatedException;
@@ -19,7 +18,7 @@ public class HtmlSpecReader extends DumpSpecReader {
         DataHolder options;
         boolean ignoredCase = false;
         try {
-            options = TestUtils.getOptions(example, example.getOptionsSet(), testCase::options);
+            options = TestUtils.getOptions(example, example.getOptionsSet(), testCase::options, testCase::combineOptions);
         } catch (AssumptionViolatedException ignored) {
             ignoredCase = true;
             options = null;

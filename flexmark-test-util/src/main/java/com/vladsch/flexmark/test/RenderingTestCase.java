@@ -3,6 +3,7 @@ package com.vladsch.flexmark.test;
 import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.spec.UrlString;
 import com.vladsch.flexmark.util.data.DataHolder;
+import com.vladsch.flexmark.util.data.DataSet;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.junit.ComparisonFailure;
@@ -17,6 +18,19 @@ public abstract class RenderingTestCase implements SpecExampleProcessor {
 
     @NotNull
     public abstract SpecExample getExample();
+
+    /**
+     * Override if combining option by overwriting corresponding keys is not sufficient
+     *
+     * @param other  options (set first), can be null
+     * @param overrides options (set second) can be null
+     * @return combined options, default implementation simply overwrites values of corresponding keys in overrides
+     */
+    @Nullable
+    @Override
+    public DataHolder combineOptions(@Nullable DataHolder other, @Nullable DataHolder overrides) {
+        return other != null && overrides != null ? new DataSet(other, overrides) : other != null ? other : overrides;
+    }
 
     public void testCase(SpecExampleRenderer exampleRenderer, DataHolder options) {
 
@@ -40,7 +54,7 @@ public abstract class RenderingTestCase implements SpecExampleProcessor {
 
     protected void assertRendering(UrlString fileUrl, String source, String expectedHtml, String expectedAst, String optionsSet) {
         SpecExample example = getExample();
-        DataHolder options = optionsSet == null ? null : TestUtils.getOptions(example, optionsSet, this::options);
+        DataHolder options = optionsSet == null ? null : TestUtils.getOptions(example, optionsSet, this::options, this::combineOptions);
 
         SpecExampleRenderer exampleRenderer = getSpecExampleRenderer(options);
 

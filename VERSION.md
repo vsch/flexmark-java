@@ -9,8 +9,8 @@ flexmark-java
 - [Next 0.60.0](#next-0600)
     - [0.5.9.3](#0593)
     - [API Change](#api-change)
+    - [Next 0.5.9.7](#next-0597)
     - [Next 0.5.9.5](#next-0595)
-    - [0.5.9.5](#0595)
     - [0.5.9.1](#0591)
 - [Next 0.50.42](#next-05042)
 - [0.50.40](#05040)
@@ -177,7 +177,7 @@ flexmark-java
     * `com.vladsch.flexmark.util.ast.NodeAdaptingVisitHandler`
     * `com.vladsch.flexmark.util.ast.NodeAdaptingVisitor`
 
-### Next 0.5.9.5
+### Next 0.5.9.7
 
 * [ ] Fix: Change spec example to variable number of sections
 * [ ] Fix: Create base classes for handling spec tests without needing to inherit from
@@ -187,8 +187,14 @@ flexmark-java
 * [ ] Add: yaml front matter configurator for modules. See:
       [Yaml Front Matter Configuration](../../wiki/Yaml-Front-Matter-Configuration)
 
-### 0.5.9.5
+### Next 0.5.9.5
 
+* Add: ability to combine data sets with `DataKey<Consumer<?>>` keys in a custom way. Needed if
+  some settings do not contain a single value but multiple values that are set with a consumer
+  setting some values in a structure. In such cases overwriting of these values may not be
+  correct and the consumers need to be chained so the results of the first consumer are passed to
+  the second.
+* Fix: add dual argument constructor to `MutableDataSet`
 * Fix: change `AttributesExtension.FENCED_CODE_INFO_ATTRIBUTES` to default `false` to match
   previous versions.
 

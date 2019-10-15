@@ -3,18 +3,19 @@ package com.vladsch.flexmark.test;
 import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.spec.SpecReader;
 import com.vladsch.flexmark.util.ast.Node;
-import com.vladsch.flexmark.util.data.DataHolder;
-import com.vladsch.flexmark.util.data.DataKey;
-import com.vladsch.flexmark.util.data.MutableDataHolder;
-import com.vladsch.flexmark.util.data.MutableDataSet;
+import com.vladsch.flexmark.util.data.*;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.SegmentedSequence;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.junit.AssumptionViolatedException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.BiFunction;
+import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.function.Predicate;
 
 import static com.vladsch.flexmark.util.Utils.suffixWithEol;
 
@@ -44,9 +45,10 @@ public class TestUtils {
      * @param example    spec example instance for which options are being processed
      * @param optionSets comma separate list of option set names
      * @param optionsProvider  function to take a string option name and provide settings based on it
+     * @param optionsCombiner  function that combines options, needed in those cases where simple overwrite of key values is not sufficient
      * @return combined set from applying these options together
      */
-    public static DataHolder getOptions(SpecExample example, String optionSets, Function<String, DataHolder> optionsProvider) {
+    public static DataHolder getOptions(@NotNull SpecExample example, @Nullable String optionSets, @NotNull Function<String, DataHolder> optionsProvider, @Nullable BiFunction<DataHolder, DataHolder, DataHolder> optionsCombiner) {
         if (optionSets == null) return null;
         String[] optionNames = optionSets.replace('\u00A0', ' ').split(",");
         DataHolder options = null;
@@ -82,7 +84,13 @@ public class TestUtils {
                             options = new MutableDataSet(options);
                             isFirst = false;
                         }
-                        ((MutableDataHolder) options).setAll(dataSet);
+
+                        if (optionsCombiner != null) {
+                             options = optionsCombiner.apply(options, dataSet);
+                        } else {
+                            // just overwrite
+                            ((MutableDataHolder) options).setAll(dataSet);
+                        }
                     } else {
                         throw new IllegalStateException("Option " + option + " is not implemented in the RenderingTestCase subclass");
                     }
@@ -210,5 +218,41 @@ public class TestUtils {
     @NotNull
     public static String getFormattedSection(String section, int exampleNumber) {
         return section == null ? "" : section.trim() + ": " + exampleNumber;
+    }
+
+    /**
+     * Combine options that may have consumers of the key value.
+     * Combine options that may have consumers of the key value.
+     *
+     * @param other     options which are set first
+     * @param overrides options which are set next
+     * @param combinationFilter  filter to return true for all consumer keys that need chaining, null for all consumer keys need chaining
+     * @return resulting options where all data keys which have consumer types are chained from other to overrides
+     */
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+    @NotNull
+    public static DataHolder combineConsumerOptions(@Nullable DataHolder other, @Nullable DataHolder overrides, @Nullable Predicate<DataKey<?>> combinationFilter) {
+        if (other == null && overrides == null) {
+            return new DataSet();
+        } else if (other == null) {
+            return new DataSet(overrides);
+        } else if (overrides == null) {
+            return new DataSet(other);
+        } else {
+            // may need to combine
+            MutableDataSet dataSet = new MutableDataSet(other, overrides);
+            if (other.getConsumerDataKeys() > 0 && overrides.getConsumerDataKeys() > 0) {
+                // need to scan keys
+                for (DataKey<?> dataKey : other.getKeys()) {
+                    if (overrides.contains(dataKey) && dataKey.getDefaultValue(null) instanceof Consumer<?>) {
+                        if (combinationFilter == null || combinationFilter.test(dataKey)) {
+                            // this one is a copier, create combined consumer, other  first, followed by overrides
+                            dataSet.set(dataKey, ((Consumer)dataKey.getFrom(other)).andThen((Consumer) dataKey.getFrom(overrides)));
+                        }
+                    }
+                }
+            }
+            return dataSet.toImmutable();
+        }
     }
 }
