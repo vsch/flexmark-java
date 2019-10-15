@@ -9,7 +9,9 @@ flexmark-java
 - [Next 0.60.0](#next-0600)
     - [0.5.9.3](#0593)
     - [API Change](#api-change)
-    - [Fixes](#fixes)
+    - [0.5.9.3](#0593)
+    - [0.5.9.1](#0591)
+- [Next 0.50.42](#next-05042)
 - [0.50.40](#05040)
 - [0.50.38](#05038)
 - [0.50.36](#05036)
@@ -174,7 +176,12 @@ flexmark-java
     * `com.vladsch.flexmark.util.ast.NodeAdaptingVisitHandler`
     * `com.vladsch.flexmark.util.ast.NodeAdaptingVisitor`
 
-### Fixes
+### 0.5.9.3
+
+* Fix: change `AttributesExtension.FENCED_CODE_INFO_ATTRIBUTES` to default `false` to match
+  previous versions.
+
+### 0.5.9.1
 
 * Fix: MarkdownTable index out of bounds in some functions when table has no rows
 * Fix: `DataSet` copy constructors to accept `null`
@@ -195,6 +202,12 @@ flexmark-java
 * Break: make `NodeAdaptedVisitor.myCustomHandlersMap` private. Use
   `NodeAdaptedVisitor.getHandler(Node)`, `NodeAdaptedVisitor.getHandler(Class<?>)`, and
   `NodeAdaptedVisitor.getNodeClasses()` to get access to contained data.
+
+Next 0.50.42
+------------
+
+* [ ] Fix: change `AttributesExtension.FENCED_CODE_INFO_ATTRIBUTES` to default `false` to match
+      previous versions.
 
 0.50.40
 -------

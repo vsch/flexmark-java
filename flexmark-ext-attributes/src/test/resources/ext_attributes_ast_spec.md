@@ -2557,20 +2557,20 @@ Document[0, 128]
 
 Fenced code info attributes
 
-```````````````````````````````` example Fenced Code: 1
+```````````````````````````````` example(Fenced Code: 1) options(info-attributes)
 ```plantuml {caption="Caption"}
 ```    
 .
 <pre caption="Caption"><code class="language-plantuml"></code></pre>
 .
-Document[0, 40]
+Document[0, 39]
   FencedCodeBlock[0, 35] open:[0, 3, "```"] info:[3, 12, "plantuml "] attributes:[12, 31, "{caption=\"Caption\"}"] lines[0] close:[32, 35, "```"]
     AttributesNode[12, 31] textOpen:[12, 13, "{"] text:[13, 30, "caption=\"Caption\""] textClose:[30, 31, "}"]
       AttributeNode[13, 30] name:[13, 20, "caption"] sep:[20, 21, "="] valueOpen:[21, 22, "\""] value:[22, 29, "Caption"] valueClose:[29, 30, "\""]
 ````````````````````````````````
 
 
-```````````````````````````````` example Fenced Code: 2
+```````````````````````````````` example(Fenced Code: 2) options(info-attributes)
 ```plantuml {caption="Caption"}
 PlatUML Code    
 ```    
@@ -2578,7 +2578,7 @@ PlatUML Code
 <pre caption="Caption"><code class="language-plantuml">PlatUML Code    
 </code></pre>
 .
-Document[0, 57]
+Document[0, 56]
   FencedCodeBlock[0, 52] open:[0, 3, "```"] info:[3, 12, "plantuml "] attributes:[12, 31, "{caption=\"Caption\"}"] content:[32, 49] lines[1] close:[49, 52, "```"]
     AttributesNode[12, 31] textOpen:[12, 13, "{"] text:[13, 30, "caption=\"Caption\""] textClose:[30, 31, "}"]
       AttributeNode[13, 30] name:[13, 20, "caption"] sep:[20, 21, "="] valueOpen:[21, 22, "\""] value:[22, 29, "Caption"] valueClose:[29, 30, "\""]
@@ -2586,7 +2586,7 @@ Document[0, 57]
 ````````````````````````````````
 
 
-```````````````````````````````` example Fenced Code: 3
+```````````````````````````````` example(Fenced Code: 3) options(info-attributes)
 ```plantuml {title="Title"} {caption="Caption"}
 PlatUML Code    
 ```    
@@ -2594,7 +2594,7 @@ PlatUML Code
 <pre title="Title" caption="Caption"><code class="language-plantuml">PlatUML Code    
 </code></pre>
 .
-Document[0, 73]
+Document[0, 72]
   FencedCodeBlock[0, 68] open:[0, 3, "```"] info:[3, 12, "plantuml "] attributes:[12, 47, "{title=\"Title\"} {caption=\"Caption\"}"] content:[48, 65] lines[1] close:[65, 68, "```"]
     AttributesNode[12, 27] textOpen:[12, 13, "{"] text:[13, 26, "title=\"Title\""] textClose:[26, 27, "}"]
       AttributeNode[13, 26] name:[13, 18, "title"] sep:[18, 19, "="] valueOpen:[19, 20, "\""] value:[20, 25, "Title"] valueClose:[25, 26, "\""]
@@ -2604,7 +2604,7 @@ Document[0, 73]
 ````````````````````````````````
 
 
-```````````````````````````````` example Fenced Code: 4
+```````````````````````````````` example(Fenced Code: 4) options(info-attributes)
 ```plantuml {title= {caption="Caption"}
 PlatUML Code    
 ```    
@@ -2612,7 +2612,7 @@ PlatUML Code
 <pre caption="Caption"><code class="language-plantuml">PlatUML Code    
 </code></pre>
 .
-Document[0, 65]
+Document[0, 64]
   FencedCodeBlock[0, 60] open:[0, 3, "```"] info:[3, 20, "plantuml {title= "] attributes:[20, 39, "{caption=\"Caption\"}"] content:[40, 57] lines[1] close:[57, 60, "```"]
     AttributesNode[20, 39] textOpen:[20, 21, "{"] text:[21, 38, "caption=\"Caption\""] textClose:[38, 39, "}"]
       AttributeNode[21, 38] name:[21, 28, "caption"] sep:[28, 29, "="] valueOpen:[29, 30, "\""] value:[30, 37, "Caption"] valueClose:[37, 38, "\""]
@@ -2620,7 +2620,7 @@ Document[0, 65]
 ````````````````````````````````
 
 
-```````````````````````````````` example Fenced Code: 5
+```````````````````````````````` example(Fenced Code: 5) options(info-attributes)
 ```plantuml {title="Title" caption="Cap"} {caption="Caption"}
 PlatUML Code    
 ```    
@@ -2628,7 +2628,7 @@ PlatUML Code
 <pre title="Title" caption="Caption"><code class="language-plantuml">PlatUML Code    
 </code></pre>
 .
-Document[0, 87]
+Document[0, 86]
   FencedCodeBlock[0, 82] open:[0, 3, "```"] info:[3, 12, "plantuml "] attributes:[12, 61, "{title=\"Title\" caption=\"Cap\"} {caption=\"Caption\"}"] content:[62, 79] lines[1] close:[79, 82, "```"]
     AttributesNode[12, 41] textOpen:[12, 13, "{"] text:[13, 40, "title=\"Title\" caption=\"Cap\""] textClose:[40, 41, "}"]
       AttributeNode[13, 26] name:[13, 18, "title"] sep:[18, 19, "="] valueOpen:[19, 20, "\""] value:[20, 25, "Title"] valueClose:[25, 26, "\""]
@@ -2639,7 +2639,7 @@ Document[0, 87]
 ````````````````````````````````
 
 
-```````````````````````````````` example Fenced Code: 6
+```````````````````````````````` example(Fenced Code: 6) options(info-attributes)
 ```info {#not-id} not {title="Title" caption="Cap"} {caption="Caption"}
 
 ```    
@@ -2647,7 +2647,7 @@ Document[0, 87]
 <pre title="Title" caption="Caption"><code class="language-info">
 </code></pre>
 .
-Document[0, 81]
+Document[0, 80]
   FencedCodeBlock[0, 76] open:[0, 3, "```"] info:[3, 22, "info {#not-id} not "] attributes:[22, 71, "{title=\"Title\" caption=\"Cap\"} {caption=\"Caption\"}"] content:[72, 73] lines[1] close:[73, 76, "```"]
     AttributesNode[22, 51] textOpen:[22, 23, "{"] text:[23, 50, "title=\"Title\" caption=\"Cap\""] textClose:[50, 51, "}"]
       AttributeNode[23, 36] name:[23, 28, "title"] sep:[28, 29, "="] valueOpen:[29, 30, "\""] value:[30, 35, "Title"] valueClose:[35, 36, "\""]
@@ -2696,6 +2696,51 @@ PlatUML Code
 Document[0, 45]
   FencedCodeBlock[0, 41] open:[0, 3, "```"] info:[3, 20, "plantuml {caption"] content:[21, 38] lines[1] close:[38, 41, "```"]
     Text[21, 38] chars:[21, 38, "PlatU …     \n"]
+````````````````````````````````
+
+
+```````````````````````````````` example Fenced Code: 10
+```plantuml
+```
+{caption="Caption"}
+.
+<pre caption="Caption"><code class="language-plantuml"></code></pre>
+.
+Document[0, 36]
+  FencedCodeBlock[0, 15] open:[0, 3, "```"] info:[3, 11, "plantuml"] lines[0] close:[12, 15, "```"]
+  Paragraph[16, 36]
+    AttributesNode[16, 35] textOpen:[16, 17, "{"] text:[17, 34, "caption=\"Caption\""] textClose:[34, 35, "}"]
+      AttributeNode[17, 34] name:[17, 24, "caption"] sep:[24, 25, "="] valueOpen:[25, 26, "\""] value:[26, 33, "Caption"] valueClose:[33, 34, "\""]
+````````````````````````````````
+
+
+```````````````````````````````` example(Fenced Code: 11) options(no-info-attributes)
+```plantuml
+```
+{caption="Caption"}
+.
+<pre caption="Caption"><code class="language-plantuml"></code></pre>
+.
+Document[0, 35]
+  FencedCodeBlock[0, 15] open:[0, 3, "```"] info:[3, 11, "plantuml"] lines[0] close:[12, 15, "```"]
+  Paragraph[16, 35]
+    AttributesNode[16, 35] textOpen:[16, 17, "{"] text:[17, 34, "caption=\"Caption\""] textClose:[34, 35, "}"]
+      AttributeNode[17, 34] name:[17, 24, "caption"] sep:[24, 25, "="] valueOpen:[25, 26, "\""] value:[26, 33, "Caption"] valueClose:[33, 34, "\""]
+````````````````````````````````
+
+
+```````````````````````````````` example(Fenced Code: 12) options(info-attributes)
+```plantuml
+```
+{caption="Caption"}
+.
+<pre caption="Caption"><code class="language-plantuml"></code></pre>
+.
+Document[0, 35]
+  FencedCodeBlock[0, 15] open:[0, 3, "```"] info:[3, 11, "plantuml"] lines[0] close:[12, 15, "```"]
+  Paragraph[16, 35]
+    AttributesNode[16, 35] textOpen:[16, 17, "{"] text:[17, 34, "caption=\"Caption\""] textClose:[34, 35, "}"]
+      AttributeNode[17, 34] name:[17, 24, "caption"] sep:[24, 25, "="] valueOpen:[25, 26, "\""] value:[26, 33, "Caption"] valueClose:[33, 34, "\""]
 ````````````````````````````````
 
 

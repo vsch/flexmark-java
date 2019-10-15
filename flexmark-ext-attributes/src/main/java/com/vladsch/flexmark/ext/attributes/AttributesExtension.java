@@ -26,7 +26,7 @@ public class AttributesExtension implements Parser.ParserExtension
     public static final DataKey<NodeAttributeRepository> NODE_ATTRIBUTES = new DataKey<>("NODE_ATTRIBUTES", NodeAttributeRepository::new);
     public static final DataKey<KeepType> ATTRIBUTES_KEEP = new DataKey<>("ATTRIBUTES_KEEP", KeepType.FIRST); // standard option to allow control over how to handle duplicates
     public static final DataKey<Boolean> ASSIGN_TEXT_ATTRIBUTES = new DataKey<>("ASSIGN_TEXT_ATTRIBUTES", true); // assign attributes to text if previous is not a space
-    public static final DataKey<Boolean> FENCED_CODE_INFO_ATTRIBUTES = new DataKey<>("FENCED_CODE_INFO_ATTRIBUTES", true); // assign attributes found at end of fenced code info strings
+    public static final DataKey<Boolean> FENCED_CODE_INFO_ATTRIBUTES = new DataKey<>("FENCED_CODE_INFO_ATTRIBUTES", false); // assign attributes found at end of fenced code info strings
     public static final DataKey<Boolean> WRAP_NON_ATTRIBUTE_TEXT = new DataKey<>("WRAP_NON_ATTRIBUTE_TEXT", true);
     public static final DataKey<Boolean> USE_EMPTY_IMPLICIT_AS_SPAN_DELIMITER = new DataKey<>("USE_EMPTY_IMPLICIT_AS_SPAN_DELIMITER", false);
 

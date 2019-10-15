@@ -53,6 +53,7 @@ public class ComboExtAttributesSpecTest extends ComboSpecTestCase {
         optionsMap.put("dont-wrap-non-attributes", new MutableDataSet().set(AttributesExtension.WRAP_NON_ATTRIBUTE_TEXT, false));
         optionsMap.put("empty-implicit-delimiters", new MutableDataSet().set(AttributesExtension.USE_EMPTY_IMPLICIT_AS_SPAN_DELIMITER, true));
         optionsMap.put("no-info-attributes", new MutableDataSet().set(AttributesExtension.FENCED_CODE_INFO_ATTRIBUTES, false));
+        optionsMap.put("info-attributes", new MutableDataSet().set(AttributesExtension.FENCED_CODE_INFO_ATTRIBUTES, true));
         optionsMap.put("src-pos", new MutableDataSet().set(HtmlRenderer.SOURCE_POSITION_ATTRIBUTE, "md-pos"));
     }
 
