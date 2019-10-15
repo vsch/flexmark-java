@@ -9,7 +9,8 @@ flexmark-java
 - [Next 0.60.0](#next-0600)
     - [0.5.9.3](#0593)
     - [API Change](#api-change)
-    - [0.5.9.3](#0593)
+    - [Next 0.5.9.5](#next-0595)
+    - [0.5.9.5](#0595)
     - [0.5.9.1](#0591)
 - [Next 0.50.42](#next-05042)
 - [0.50.40](#05040)
@@ -176,7 +177,17 @@ flexmark-java
     * `com.vladsch.flexmark.util.ast.NodeAdaptingVisitHandler`
     * `com.vladsch.flexmark.util.ast.NodeAdaptingVisitor`
 
-### 0.5.9.3
+### Next 0.5.9.5
+
+* [ ] Fix: Change spec example to variable number of sections
+* [ ] Fix: Create base classes for handling spec tests without needing to inherit from
+      superclass.
+* [ ] Fix: Rewrite combo spec and full spec to be merged like markdown navigator action spec
+      test.
+* [ ] Add: yaml front matter configurator for modules. See:
+      [Yaml Front Matter Configuration](../../wiki/Yaml-Front-Matter-Configuration)
+
+### 0.5.9.5
 
 * Fix: change `AttributesExtension.FENCED_CODE_INFO_ATTRIBUTES` to default `false` to match
   previous versions.

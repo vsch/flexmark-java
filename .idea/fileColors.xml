@@ -2,7 +2,7 @@
 <project version="4">
   <component name="SharedFileColors">
     <fileColor scope="Flexmark Ext Overview" color="Violet" />
-    <fileColor scope="Wiki" color="fefaff" />
+    <fileColor scope="Wiki" color="f9e6ff" />
     <fileColor scope="Changed Files" color="edfbff" />
   </component>
 </project>
