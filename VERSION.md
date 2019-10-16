@@ -10,7 +10,7 @@ flexmark-java
     - [0.5.9.3](#0593)
     - [API Change](#api-change)
     - [Next 0.5.9.7](#next-0597)
-    - [Next 0.5.9.5](#next-0595)
+    - [0.5.9.5](#0595)
     - [0.5.9.1](#0591)
 - [Next 0.50.42](#next-05042)
 - [0.50.40](#05040)
@@ -187,7 +187,7 @@ flexmark-java
 * [ ] Add: yaml front matter configurator for modules. See:
       [Yaml Front Matter Configuration](../../wiki/Yaml-Front-Matter-Configuration)
 
-### Next 0.5.9.5
+### 0.5.9.5
 
 * Add: `SpecExampleRenderer.finalizeRender()` to allow tests and others to clean up after each
   rendering
