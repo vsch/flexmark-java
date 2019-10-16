@@ -6,12 +6,9 @@ import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.test.ComboSpecTestCase;
 import com.vladsch.flexmark.test.FlexmarkSpecExampleRenderer;
 import com.vladsch.flexmark.test.SpecExampleRenderer;
-import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
-import com.vladsch.flexmark.util.format.MarkdownTable;
 import com.vladsch.flexmark.util.format.TableFormatOptions;
-import com.vladsch.flexmark.util.format.TableManipulator;
 import com.vladsch.flexmark.util.format.options.DiscretionaryText;
 import com.vladsch.flexmark.util.format.options.TableCaptionHandling;
 import com.vladsch.flexmark.util.mappers.CharWidthProvider;
@@ -255,7 +252,8 @@ public class ComboTableManipulationSpecTest extends ComboSpecTestCase {
 
 
     @Override
-    public @NotNull SpecExampleRenderer getSpecExampleRenderer(@Nullable DataHolder exampleOptions) {
-        return new FlexmarkSpecExampleRenderer(exampleOptions, PARSER, RENDERER, true);
+    public @NotNull SpecExampleRenderer getSpecExampleRenderer(@NotNull SpecExample example, @Nullable DataHolder exampleOptions) {
+        DataHolder combinedOptions = combineOptions(OPTIONS, exampleOptions);
+        return new FlexmarkSpecExampleRenderer(example, combinedOptions, PARSER.withOptions(combinedOptions), RENDERER.withOptions(combinedOptions), true);
     }
 }

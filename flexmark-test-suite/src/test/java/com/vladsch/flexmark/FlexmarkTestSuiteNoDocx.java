@@ -41,9 +41,10 @@ import com.vladsch.flexmark.superscript.ExtSuperscriptTestSuite;
 import com.vladsch.flexmark.test.CoreTestSuite;
 import com.vladsch.flexmark.util.UtilsTestSuite;
 import com.vladsch.flexmark.youtrack.converter.YouTrackConverterTestSuite;
+import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
-@org.junit.runner.RunWith(Suite.class)
+@RunWith(Suite.class)
 @Suite.SuiteClasses({
         UtilsTestSuite.class,
         CoreTestSuite.class,

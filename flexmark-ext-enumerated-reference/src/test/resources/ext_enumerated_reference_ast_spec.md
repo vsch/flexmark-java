@@ -341,7 +341,7 @@ Document[0, 186]
 <h1>2. Heading 2</h1>
 <h1>3. Heading 3</h1>
 .
-Document[0, 73]
+Document[0, 72]
   Heading[0, 18] textOpen:[0, 1, "#"] text:[2, 18, "[#hd1] Heading 1"]
     EnumeratedReferenceText[2, 8] textOpen:[2, 4, "[#"] text:[4, 7, "hd1"] textClose:[7, 8, "]"]
       Text[4, 7] chars:[4, 7, "hd1"]
@@ -354,8 +354,8 @@ Document[0, 73]
     EnumeratedReferenceText[42, 48] textOpen:[42, 44, "[#"] text:[44, 47, "hd1"] textClose:[47, 48, "]"]
       Text[44, 47] chars:[44, 47, "hd1"]
     Text[48, 58] chars:[48, 58, " Heading 3"]
-  EnumeratedReferenceBlock[60, 73] open:[60, 62] text:[62, 65] close:[65, 67] enumeratedReference:[68, 73]
-    Paragraph[68, 73]
+  EnumeratedReferenceBlock[60, 72] open:[60, 62] text:[62, 65] close:[65, 67] enumeratedReference:[68, 72]
+    Paragraph[68, 72]
       EnumeratedReferenceText[68, 71] textOpen:[68, 70, "[#"] text:[70, 70] textClose:[70, 71, "]"]
       Text[71, 72] chars:[71, 72, "."]
 ````````````````````````````````
@@ -400,7 +400,7 @@ Document[0, 73]
 <h3>2.1.1. Heading 2.1.1</h3>
 <h3>2.1.2. Heading 2.1.2</h3>
 .
-Document[0, 373]
+Document[0, 372]
   Heading[0, 18] textOpen:[0, 1, "#"] text:[2, 18, "[#hd1] Heading 1"]
     EnumeratedReferenceText[2, 8] textOpen:[2, 4, "[#"] text:[4, 7, "hd1"] textClose:[7, 8, "]"]
       Text[4, 7] chars:[4, 7, "hd1"]
@@ -453,8 +453,8 @@ Document[0, 373]
     Paragraph[355, 360]
       EnumeratedReferenceText[355, 358] textOpen:[355, 357, "[#"] text:[357, 357] textClose:[357, 358, "]"]
       Text[358, 359] chars:[358, 359, "."]
-  EnumeratedReferenceBlock[360, 373] open:[360, 362] text:[362, 365] close:[365, 367] enumeratedReference:[368, 373]
-    Paragraph[368, 373]
+  EnumeratedReferenceBlock[360, 372] open:[360, 362] text:[362, 365] close:[365, 367] enumeratedReference:[368, 372]
+    Paragraph[368, 372]
       EnumeratedReferenceText[368, 371] textOpen:[368, 370, "[#"] text:[370, 370] textClose:[370, 371, "]"]
       Text[371, 372] chars:[371, 372, "."]
 ````````````````````````````````
@@ -469,13 +469,13 @@ No block elements, only text parsing so the following is not a list item
 .
 <h1>* list 1 Heading 1</h1>
 .
-Document[0, 39]
+Document[0, 38]
   Heading[0, 18] textOpen:[0, 1, "#"] text:[2, 18, "[#hd1] Heading 1"]
     EnumeratedReferenceText[2, 8] textOpen:[2, 4, "[#"] text:[4, 7, "hd1"] textClose:[7, 8, "]"]
       Text[4, 7] chars:[4, 7, "hd1"]
     Text[8, 18] chars:[8, 18, " Heading 1"]
-  EnumeratedReferenceBlock[20, 39] open:[20, 22] text:[22, 25] close:[25, 27] enumeratedReference:[28, 39]
-    Paragraph[28, 39]
+  EnumeratedReferenceBlock[20, 38] open:[20, 22] text:[22, 25] close:[25, 27] enumeratedReference:[28, 38]
+    Paragraph[28, 38]
       Text[28, 35] chars:[28, 35, "* list "]
       EnumeratedReferenceText[35, 38] textOpen:[35, 37, "[#"] text:[37, 37] textClose:[37, 38, "]"]
 ````````````````````````````````
@@ -488,13 +488,13 @@ Document[0, 39]
 .
 <h1><em>list</em> 1 Heading 1</h1>
 .
-Document[0, 39]
+Document[0, 38]
   Heading[0, 18] textOpen:[0, 1, "#"] text:[2, 18, "[#hd1] Heading 1"]
     EnumeratedReferenceText[2, 8] textOpen:[2, 4, "[#"] text:[4, 7, "hd1"] textClose:[7, 8, "]"]
       Text[4, 7] chars:[4, 7, "hd1"]
     Text[8, 18] chars:[8, 18, " Heading 1"]
-  EnumeratedReferenceBlock[20, 39] open:[20, 22] text:[22, 25] close:[25, 27] enumeratedReference:[28, 39]
-    Paragraph[28, 39]
+  EnumeratedReferenceBlock[20, 38] open:[20, 22] text:[22, 25] close:[25, 27] enumeratedReference:[28, 38]
+    Paragraph[28, 38]
       Emphasis[28, 34] textOpen:[28, 29, "*"] text:[29, 33, "list"] textClose:[33, 34, "*"]
         Text[29, 33] chars:[29, 33, "list"]
       Text[34, 35] chars:[34, 35, " "]
@@ -510,14 +510,14 @@ Document[0, 39]
 .
 <h1><em>list</em> 1 Heading 1</h1>
 .
-Document[0, 66]
+Document[0, 65]
   Heading[0, 18] textOpen:[0, 1, "#"] text:[2, 18, "[#hd1] Heading 1"]
     EnumeratedReferenceText[2, 8] textOpen:[2, 4, "[#"] text:[4, 7, "hd1"] textClose:[7, 8, "]"]
       Text[4, 7] chars:[4, 7, "hd1"]
     Text[8, 18] chars:[8, 18, " Heading 1"]
   Reference[20, 46] refOpen:[20, 21, "["] ref:[21, 24, "hd1"] refClose:[24, 26, "]:"] url:[27, 46, "https://example.com"]
-  EnumeratedReferenceBlock[47, 66] open:[47, 49] text:[49, 52] close:[52, 54] enumeratedReference:[55, 66]
-    Paragraph[55, 66]
+  EnumeratedReferenceBlock[47, 65] open:[47, 49] text:[49, 52] close:[52, 54] enumeratedReference:[55, 65]
+    Paragraph[55, 65]
       Emphasis[55, 61] textOpen:[55, 56, "*"] text:[56, 60, "list"] textClose:[60, 61, "*"]
         Text[56, 60] chars:[56, 60, "list"]
       Text[61, 62] chars:[61, 62, " "]
@@ -535,7 +535,7 @@ Following paragraph text
 <h1><em>list</em> 1 Heading 1</h1>
 <p>Following paragraph text</p>
 .
-Document[0, 91]
+Document[0, 90]
   Heading[0, 18] textOpen:[0, 1, "#"] text:[2, 18, "[#hd1] Heading 1"]
     EnumeratedReferenceText[2, 8] textOpen:[2, 4, "[#"] text:[4, 7, "hd1"] textClose:[7, 8, "]"]
       Text[4, 7] chars:[4, 7, "hd1"]
@@ -547,7 +547,7 @@ Document[0, 91]
         Text[56, 60] chars:[56, 60, "list"]
       Text[61, 62] chars:[61, 62, " "]
       EnumeratedReferenceText[62, 65] textOpen:[62, 64, "[#"] text:[64, 64] textClose:[64, 65, "]"]
-  Paragraph[66, 91]
+  Paragraph[66, 90]
     Text[66, 90] chars:[66, 90, "Follo …  text"]
 ````````````````````````````````
 
@@ -575,7 +575,7 @@ Figure 1.1.</p>
 <p><img src="https://github.com/vsch/MarkdownTest/raw/master/image-base64.png" alt="image-base64.png" /><span id="hd1:fig:img2"> </span>
 Figure 2.1.</p>
 .
-Document[0, 313]
+Document[0, 312]
   Heading[0, 18] textOpen:[0, 1, "#"] text:[2, 18, "[#hd1] Heading 1"]
     EnumeratedReferenceText[2, 8] textOpen:[2, 4, "[#"] text:[4, 7, "hd1"] textClose:[7, 8, "]"]
       Text[4, 7] chars:[4, 7, "hd1"]
@@ -608,8 +608,8 @@ Document[0, 313]
     Paragraph[288, 293]
       EnumeratedReferenceText[288, 291] textOpen:[288, 290, "[#"] text:[290, 290] textClose:[290, 291, "]"]
       Text[291, 292] chars:[291, 292, "."]
-  EnumeratedReferenceBlock[293, 313] open:[293, 295] text:[295, 298] close:[298, 300] enumeratedReference:[301, 313]
-    Paragraph[301, 313]
+  EnumeratedReferenceBlock[293, 312] open:[293, 295] text:[295, 298] close:[298, 300] enumeratedReference:[301, 312]
+    Paragraph[301, 312]
       Text[301, 308] chars:[301, 308, "Figure "]
       EnumeratedReferenceText[308, 311] textOpen:[308, 310, "[#"] text:[310, 310] textClose:[310, 311, "]"]
       Text[311, 312] chars:[311, 312, "."]

@@ -40,6 +40,8 @@ public class TestUtils {
     public static final DataKey<String> SOURCE_SUFFIX = new DataKey<>("SOURCE_SUFFIX", "");
     public static final DataKey<String> SOURCE_INDENT = new DataKey<>("SOURCE_INDENT", "");
 
+    public static final DataHolder NO_FILE_EOL_FALSE = new MutableDataSet().set(NO_FILE_EOL, false).toImmutable();
+
     /**
      * process comma separated list of option sets and combine them for final set to use
      *
@@ -59,48 +61,56 @@ public class TestUtils {
             String option = optionName.trim();
             if (option.isEmpty() || option.startsWith("-")) continue;
 
-            if (option.equals(IGNORE_OPTION_NAME)) {
-                throwIgnoredOption(example, optionSets, option);
-            } else if (option.equals(FAIL_OPTION_NAME)) {
-                options = addOption(options, FAIL, true);
-            } else if (option.equals(NO_FILE_EOL_OPTION_NAME)) {
-                options = addOption(options, NO_FILE_EOL, true);
-            } else if (option.equals(FILE_EOL_OPTION_NAME)) {
-                options = addOption(options, NO_FILE_EOL, false);
-            } else if (option.equals(TIMED_OPTION_NAME)) {
-                options = addOption(options, TIMED, true);
-            } else if (option.equals(EMBED_TIMED_OPTION_NAME)) {
-                options = addOption(options, EMBED_TIMED, true);
-            } else {
-                if (options == null) {
-                    options = optionsProvider.apply(option);
-
+            switch (option) {
+                case IGNORE_OPTION_NAME:
+                    throwIgnoredOption(example, optionSets, option);
+                    break;
+                case FAIL_OPTION_NAME:
+                    options = addOption(options, FAIL, true);
+                    break;
+                case NO_FILE_EOL_OPTION_NAME:
+                    options = addOption(options, NO_FILE_EOL, true);
+                    break;
+                case FILE_EOL_OPTION_NAME:
+                    options = addOption(options, NO_FILE_EOL, false);
+                    break;
+                case TIMED_OPTION_NAME:
+                    options = addOption(options, TIMED, true);
+                    break;
+                case EMBED_TIMED_OPTION_NAME:
+                    options = addOption(options, EMBED_TIMED, true);
+                    break;
+                default:
                     if (options == null) {
-                        throw new IllegalStateException("Option " + option + " is not implemented in the RenderingTestCase subclass");
-                    }
-                } else {
-                    DataHolder dataSet = optionsProvider.apply(option);
+                        options = optionsProvider.apply(option);
 
-                    if (dataSet != null) {
-                        if (isFirst) {
-                            options = new MutableDataSet(options);
-                            isFirst = false;
-                        }
-
-                        if (optionsCombiner != null) {
-                            options = optionsCombiner.apply(options, dataSet);
-                        } else {
-                            // just overwrite
-                            ((MutableDataHolder) options).setAll(dataSet);
+                        if (options == null) {
+                            throw new IllegalStateException("Option " + option + " is not implemented in the RenderingTestCase subclass");
                         }
                     } else {
-                        throw new IllegalStateException("Option " + option + " is not implemented in the RenderingTestCase subclass");
-                    }
-                }
+                        DataHolder dataSet = optionsProvider.apply(option);
 
-                if (IGNORE.getFrom(options)) {
-                    throwIgnoredOption(example, optionSets, option);
-                }
+                        if (dataSet != null) {
+                            if (isFirst) {
+                                options = new MutableDataSet(options);
+                                isFirst = false;
+                            }
+
+                            if (optionsCombiner != null) {
+                                options = optionsCombiner.apply(options, dataSet);
+                            } else {
+                                // just overwrite
+                                ((MutableDataHolder) options).setAll(dataSet);
+                            }
+                        } else {
+                            throw new IllegalStateException("Option " + option + " is not implemented in the RenderingTestCase subclass");
+                        }
+                    }
+
+                    if (IGNORE.getFrom(options)) {
+                        throwIgnoredOption(example, optionSets, option);
+                    }
+                    break;
             }
         }
         return options;

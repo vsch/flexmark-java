@@ -496,7 +496,13 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
         markdown.pushPrefix().addPrefix(prefix);
         markdown.openPreFormatted(true);
         if (context.isTransformingText()) {
-            markdown.appendNonTranslating(node.getContentChars());
+            BasedSequence contentChars = node.getContentChars();
+            if (contentChars.trimmedEOL().isEmpty()) {
+                // need to always have EOL at the end
+                markdown.appendNonTranslating(Utils.suffixWith(contentChars.toString(), '\n'));
+            } else {
+                markdown.appendNonTranslating(contentChars);
+            }
         } else {
             if (formatterOptions.indentedCodeMinimizeIndent) {
                 List<BasedSequence> lines = node.getContentLines();

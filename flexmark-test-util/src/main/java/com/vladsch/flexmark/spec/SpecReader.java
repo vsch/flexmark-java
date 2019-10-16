@@ -1,6 +1,7 @@
 package com.vladsch.flexmark.spec;
 
 import com.vladsch.flexmark.test.TestUtils;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -186,7 +187,7 @@ public class SpecReader {
 
     }
 
-    protected void addSpecExample(SpecExample example) {
+    protected void addSpecExample(@NotNull SpecExample example) {
         examples.add(example);
     }
 

@@ -106,8 +106,8 @@ public class ComboHtmlConverterIssueTest extends ComboSpecTestCase {
 
     @Override
     public @NotNull
-    SpecExampleRenderer getSpecExampleRenderer(@Nullable DataHolder exampleOptions) {
-        return new FlexmarkSpecExampleRenderer(exampleOptions, parser(), renderer(), true);
+    SpecExampleRenderer getSpecExampleRenderer(@NotNull SpecExample example, @Nullable DataHolder exampleOptions) {
+        return new FlexmarkSpecExampleRenderer(example, exampleOptions, parser(), renderer(), true);
     }
 
     @NotNull

@@ -3,6 +3,7 @@ package com.vladsch.flexmark.docx.converter.util;
 import org.apache.xmlgraphics.image.loader.ImageInfo;
 import org.apache.xmlgraphics.image.loader.ImageSize;
 import org.docx4j.UnitsOfMeasurement;
+import org.docx4j.XmlUtils;
 import org.docx4j.dml.Graphic;
 import org.docx4j.dml.wordprocessingDrawing.Anchor;
 import org.docx4j.dml.wordprocessingDrawing.Inline;
@@ -31,6 +32,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
 import java.nio.ByteBuffer;
+import java.util.HashMap;
 import java.util.List;
 
 public class BinaryPartAbstractImage {
@@ -322,7 +324,7 @@ public class BinaryPartAbstractImage {
         String mlBottom = ""
                 + "</wp:anchor>";
 
-        java.util.HashMap<String, String> mappings = new java.util.HashMap<>();
+        HashMap<String, String> mappings = new HashMap<>();
 
         String ml;
 
@@ -346,7 +348,7 @@ public class BinaryPartAbstractImage {
         mappings.put("id1", Integer.toString(id1));
         mappings.put("id2", Integer.toString(id2));
 
-        Object o = org.docx4j.XmlUtils.unmarshallFromTemplate(ml, mappings);
+        Object o = XmlUtils.unmarshallFromTemplate(ml, mappings);
         Anchor anchor = (Anchor) ((JAXBElement) o).getValue();
 
         return anchor;

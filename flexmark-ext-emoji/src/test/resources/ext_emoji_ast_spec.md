@@ -21,10 +21,10 @@ more text :warning : more text
 <h1>some leading text</h1>
 <p>more text :warning : more text</p>
 .
-Document[0, 52]
+Document[0, 51]
   Heading[0, 19] textOpen:[0, 1, "#"] text:[2, 19, "some leading text"]
     Text[2, 19] chars:[2, 19, "some  …  text"]
-  Paragraph[21, 52]
+  Paragraph[21, 51]
     Text[21, 51] chars:[21, 51, "more  …  text"]
 ````````````````````````````````
 
@@ -38,10 +38,10 @@ more text : warning: more text
 <h1>some leading text</h1>
 <p>more text : warning: more text</p>
 .
-Document[0, 52]
+Document[0, 51]
   Heading[0, 19] textOpen:[0, 1, "#"] text:[2, 19, "some leading text"]
     Text[2, 19] chars:[2, 19, "some  …  text"]
-  Paragraph[21, 52]
+  Paragraph[21, 51]
     Text[21, 51] chars:[21, 51, "more  …  text"]
 ````````````````````````````````
 
@@ -57,10 +57,10 @@ more text :warning
 <p>more text :warning
 : more text</p>
 .
-Document[0, 52]
+Document[0, 51]
   Heading[0, 19] textOpen:[0, 1, "#"] text:[2, 19, "some leading text"]
     Text[2, 19] chars:[2, 19, "some  …  text"]
-  Paragraph[21, 52]
+  Paragraph[21, 51]
     Text[21, 39] chars:[21, 39, "more  … rning"]
     SoftLineBreak[39, 40]
     Text[40, 51] chars:[40, 51, ": mor …  text"]
@@ -78,10 +78,10 @@ warning: more text
 <p>more text :
 warning: more text</p>
 .
-Document[0, 52]
+Document[0, 51]
   Heading[0, 19] textOpen:[0, 1, "#"] text:[2, 19, "some leading text"]
     Text[2, 19] chars:[2, 19, "some  …  text"]
-  Paragraph[21, 52]
+  Paragraph[21, 51]
     Text[21, 32] chars:[21, 32, "more  … ext :"]
     SoftLineBreak[32, 33]
     Text[33, 51] chars:[33, 51, "warni …  text"]
@@ -97,10 +97,10 @@ Converts :warning: to its emoji image
 <h1>some leading text</h1>
 <p><img src="/img/warning.png" alt="emoji places:warning" height="20" width="20" align="absmiddle" /></p>
 .
-Document[0, 31]
+Document[0, 30]
   Heading[0, 19] textOpen:[0, 1, "#"] text:[2, 19, "some leading text"]
     Text[2, 19] chars:[2, 19, "some  …  text"]
-  Paragraph[21, 31]
+  Paragraph[21, 30]
     Emoji[21, 30] textOpen:[21, 22, ":"] text:[22, 29, "warning"] textClose:[29, 30, ":"]
       Text[22, 29] chars:[22, 29, "warning"]
 ````````````````````````````````
@@ -439,10 +439,10 @@ Should work in links
 <h1>some leading text</h1>
 <p><a href="/url"><img src="/img/warning.png" alt="emoji places:warning" height="20" width="20" align="absmiddle" /></a></p>
 .
-Document[0, 39]
+Document[0, 38]
   Heading[0, 19] textOpen:[0, 1, "#"] text:[2, 19, "some leading text"]
     Text[2, 19] chars:[2, 19, "some  …  text"]
-  Paragraph[21, 39]
+  Paragraph[21, 38]
     Link[21, 38] textOpen:[21, 22, "["] text:[22, 31, ":warning:"] textClose:[31, 32, "]"] linkOpen:[32, 33, "("] url:[33, 37, "/url"] pageRef:[33, 37, "/url"] linkClose:[37, 38, ")"]
       Emoji[22, 31] textOpen:[22, 23, ":"] text:[23, 30, "warning"] textClose:[30, 31, ":"]
         Text[23, 30] chars:[23, 30, "warning"]
@@ -506,10 +506,10 @@ Should work in links
 <h1>some leading text</h1>
 <p><a href="/url"><img src="/img/warning.png" alt="emoji places:warning" height="20" width="20" align="absmiddle" /></a></p>
 .
-Document[0, 39]
+Document[0, 38]
   Heading[0, 19] textOpen:[0, 1, "#"] text:[2, 19, "some leading text"]
     Text[2, 19] chars:[2, 19, "some  …  text"]
-  Paragraph[21, 39]
+  Paragraph[21, 38]
     Link[21, 38] textOpen:[21, 22, "["] text:[22, 31, ":warning:"] textClose:[31, 32, "]"] linkOpen:[32, 33, "("] url:[33, 37, "/url"] pageRef:[33, 37, "/url"] linkClose:[37, 38, ")"]
       Emoji[22, 31] textOpen:[22, 23, ":"] text:[23, 30, "warning"] textClose:[30, 31, ":"]
         Text[23, 30] chars:[23, 30, "warning"]
@@ -561,10 +561,10 @@ Unknown shortcuts are converted to text
 <h1>some leading text</h1>
 <p>:warnings:</p>
 .
-Document[0, 32]
+Document[0, 31]
   Heading[0, 19] textOpen:[0, 1, "#"] text:[2, 19, "some leading text"]
     Text[2, 19] chars:[2, 19, "some  …  text"]
-  Paragraph[21, 32]
+  Paragraph[21, 31]
     Emoji[21, 31] textOpen:[21, 22, ":"] text:[22, 30, "warnings"] textClose:[30, 31, ":"]
       Text[22, 30] chars:[22, 30, "warnings"]
 ````````````````````````````````
@@ -579,10 +579,10 @@ Unknown shortcuts are converted to text
 <h1>some leading text</h1>
 <p>:basecamp:</p>
 .
-Document[0, 32]
+Document[0, 31]
   Heading[0, 19] textOpen:[0, 1, "#"] text:[2, 19, "some leading text"]
     Text[2, 19] chars:[2, 19, "some  …  text"]
-  Paragraph[21, 32]
+  Paragraph[21, 31]
     Emoji[21, 31] textOpen:[21, 22, ":"] text:[22, 30, "basecamp"] textClose:[30, 31, ":"]
       Text[22, 30] chars:[22, 30, "basecamp"]
 ````````````````````````````````
@@ -687,10 +687,10 @@ Unknown shortcuts are converted to text with inline emphasis parsing
 <h1>some leading text</h1>
 <p>:<strong>warnings</strong>:</p>
 .
-Document[0, 36]
+Document[0, 35]
   Heading[0, 19] textOpen:[0, 1, "#"] text:[2, 19, "some leading text"]
     Text[2, 19] chars:[2, 19, "some  …  text"]
-  Paragraph[21, 36]
+  Paragraph[21, 35]
     Emoji[21, 35] textOpen:[21, 22, ":"] text:[22, 34, "**warnings**"] textClose:[34, 35, ":"]
       StrongEmphasis[22, 34] textOpen:[22, 24, "**"] text:[24, 32, "warnings"] textClose:[32, 34, "**"]
         Text[24, 32] chars:[24, 32, "warnings"]
@@ -741,8 +741,8 @@ Document[0, 38]
 .
 <p>На сервере выставлен пояс GMT 00:00. Оно всегда должно быть <em>&quot;3:50 ночи&quot;</em>, даже если</p>
 .
-Document[0, 85]
-  Paragraph[0, 85]
+Document[0, 84]
+  Paragraph[0, 84]
     Text[0, 60] chars:[0, 60, "На се … быть "]
     Emphasis[60, 73] textOpen:[60, 61, "*"] text:[61, 72, "\"3:50 ночи\""] textClose:[72, 73, "*"]
       Text[61, 72] chars:[61, 72, "\"3:50 … ночи\""]

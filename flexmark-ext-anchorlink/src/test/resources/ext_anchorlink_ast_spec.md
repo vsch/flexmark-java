@@ -19,7 +19,7 @@ Basic, anchor links wrap header text
 .
 <h1><a href="#enhanced-edition" id="enhanced-edition" class="anchor">Enhanced Edition</a></h1>
 .
-Document[0, 19]
+Document[0, 18]
   Heading[0, 18] textOpen:[0, 1, "#"] text:[2, 18, "Enhanced Edition"]
     AnchorLink[2, 18]
       Text[2, 18] chars:[2, 18, "Enhan … ition"]
@@ -35,7 +35,7 @@ Basic, duplicates
 <h1><a href="#enhanced-edition" id="enhanced-edition" class="anchor">Enhanced Edition</a></h1>
 <h1><a href="#enhanced-edition-1" id="enhanced-edition-1" class="anchor">Enhanced Edition</a></h1>
 .
-Document[0, 38]
+Document[0, 37]
   Heading[0, 18] textOpen:[0, 1, "#"] text:[2, 18, "Enhanced Edition"]
     AnchorLink[2, 18]
       Text[2, 18] chars:[2, 18, "Enhan … ition"]
@@ -56,7 +56,7 @@ Basic, duplicates, no look-ahead
 <h1><a href="#enhanced-edition-1" id="enhanced-edition-1" class="anchor">Enhanced Edition</a></h1>
 <h1><a href="#enhanced-edition-1" id="enhanced-edition-1" class="anchor">Enhanced Edition-1</a></h1>
 .
-Document[0, 59]
+Document[0, 58]
   Heading[0, 18] textOpen:[0, 1, "#"] text:[2, 18, "Enhanced Edition"]
     AnchorLink[2, 18]
       Text[2, 18] chars:[2, 18, "Enhan … ition"]

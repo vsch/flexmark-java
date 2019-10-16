@@ -1,8 +1,9 @@
 package com.vladsch.flexmark.ext.tables;
 
+import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
-@org.junit.runner.RunWith(Suite.class)
+@RunWith(Suite.class)
 @Suite.SuiteClasses({
         ComboTableSpecTest.class,
         ComboTableFormatterSpecTest.class,

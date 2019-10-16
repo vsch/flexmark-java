@@ -10,7 +10,10 @@ import org.jetbrains.annotations.Nullable;
 
 public class FullOrigSpec028CoreTest extends FullSpecTestCase {
     static final String SPEC_RESOURCE = "/spec.0.28.txt";
-    static final DataHolder OPTIONS = ParserEmulationProfile.COMMONMARK_0_28.getProfileOptions();
+    static final DataHolder OPTIONS =
+            ParserEmulationProfile.COMMONMARK_0_28.getProfileOptions()
+                    .set(TestUtils.NO_FILE_EOL, false).toImmutable();
+
     static final Parser PARSER = Parser.builder(OPTIONS).build();
     // The spec says URL-escaping is optional, but the examples assume that it's enabled.
     static final HtmlRenderer RENDERER = HtmlRenderer.builder(OPTIONS).percentEncodeUrls(true).build();
@@ -39,11 +42,12 @@ public class FullOrigSpec028CoreTest extends FullSpecTestCase {
 
     @Override
     public @Nullable DataHolder options(String optionSet) {
-        return null;
+        return OPTIONS;
     }
 
     @Override
-    public @NotNull SpecExampleRenderer getSpecExampleRenderer(@Nullable DataHolder exampleOptions) {
-        return new FlexmarkSpecExampleRenderer(exampleOptions, parser(),renderer(), false);
+    public @NotNull SpecExampleRenderer getSpecExampleRenderer(@NotNull SpecExample example, @Nullable DataHolder exampleOptions) {
+        DataHolder combinedOptions = combineOptions(OPTIONS, exampleOptions);
+        return new FlexmarkSpecExampleRenderer(example, combinedOptions, PARSER.withOptions(combinedOptions), RENDERER.withOptions(combinedOptions), false);
     }
 }

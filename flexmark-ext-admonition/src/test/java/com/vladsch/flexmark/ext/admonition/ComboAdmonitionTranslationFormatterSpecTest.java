@@ -82,7 +82,7 @@ public class ComboAdmonitionTranslationFormatterSpecTest extends ComboSpecTestCa
             myFormatter = formatter;
         }
 
-        @org.jetbrains.annotations.Nullable
+        @Nullable
         @Override
         public DataHolder getOptions() {
             return myFormatter.getOptions();
@@ -151,7 +151,7 @@ public class ComboAdmonitionTranslationFormatterSpecTest extends ComboSpecTestCa
             }
         }
 
-        @org.jetbrains.annotations.NotNull
+        @NotNull
         @Override
         public String render(@NotNull Node document) {
             StringBuilder sb = new StringBuilder();
@@ -159,14 +159,14 @@ public class ComboAdmonitionTranslationFormatterSpecTest extends ComboSpecTestCa
             return sb.toString();
         }
 
-        @org.jetbrains.annotations.NotNull
+        @NotNull
         @Override
-        public IRender withOptions(@org.jetbrains.annotations.Nullable DataHolder options) {
+        public IRender withOptions(@Nullable DataHolder options) {
             return new TranslationFormatter(myFormatter.withOptions(options));
         }
     }
 
-    final static TranslationFormatter TRANSLATION_FORMATTER = new TranslationFormatter(FORMATTER);
+    final static TranslationFormatter RENDERER = new TranslationFormatter(FORMATTER);
 
     private static DataHolder optionsSet(String optionSet) {
         if (optionSet == null) return null;
@@ -196,7 +196,8 @@ public class ComboAdmonitionTranslationFormatterSpecTest extends ComboSpecTestCa
 
 
     @Override
-    public @NotNull SpecExampleRenderer getSpecExampleRenderer(@Nullable DataHolder exampleOptions) {
-        return new FlexmarkSpecExampleRenderer(exampleOptions, PARSER, TRANSLATION_FORMATTER, true);
+    public @NotNull SpecExampleRenderer getSpecExampleRenderer(@NotNull SpecExample example, @Nullable DataHolder exampleOptions) {
+        DataHolder combinedOptions = combineOptions(OPTIONS, exampleOptions);
+        return new FlexmarkSpecExampleRenderer(example, combinedOptions, PARSER.withOptions(combinedOptions), RENDERER.withOptions(combinedOptions), true);
     }
 }

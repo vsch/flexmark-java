@@ -15,8 +15,8 @@ import com.vladsch.flexmark.util.format.options.ElementPlacementSort;
  * Extension for enumerated_references
  * <p>
  * Create it with {@link #create()} and then configure it on the builders
- * ({@link com.vladsch.flexmark.parser.Parser.Builder#extensions(Iterable)},
- * {@link com.vladsch.flexmark.html.HtmlRenderer.Builder#extensions(Iterable)}).
+ * ({@link Parser.Builder#extensions(Iterable)},
+ * {@link HtmlRenderer.Builder#extensions(Iterable)}).
  * </p>
  * <p>
  * The parsed enumerated_reference text is turned into {@link EnumeratedReferenceText} nodes.

@@ -19,8 +19,8 @@ The tests here are converted to commonmark spec.txt format and AST expected resu
 .
 <p>~foo~</p>
 .
-Document[0, 6]
-  Paragraph[0, 6]
+Document[0, 5]
+  Paragraph[0, 5]
     Text[0, 5] chars:[0, 5, "~foo~"]
 ````````````````````````````````
 
@@ -30,8 +30,8 @@ Document[0, 6]
 .
 <p><del>foo</del></p>
 .
-Document[0, 8]
-  Paragraph[0, 8]
+Document[0, 7]
+  Paragraph[0, 7]
     Strikethrough[0, 7] textOpen:[0, 2, "~~"] text:[2, 5, "foo"] textClose:[5, 7, "~~"]
       Text[2, 5] chars:[2, 5, "foo"]
 ````````````````````````````````
@@ -42,8 +42,8 @@ foo ~~~~
 .
 <p>foo ~~~~</p>
 .
-Document[0, 9]
-  Paragraph[0, 9]
+Document[0, 8]
+  Paragraph[0, 8]
     Text[0, 8] chars:[0, 8, "foo ~~~~"]
 ````````````````````````````````
 
@@ -53,8 +53,8 @@ Document[0, 9]
 .
 <p>~~foo</p>
 .
-Document[0, 6]
-  Paragraph[0, 6]
+Document[0, 5]
+  Paragraph[0, 5]
     Text[0, 5] chars:[0, 5, "~~foo"]
 ````````````````````````````````
 
@@ -64,8 +64,8 @@ foo~~
 .
 <p>foo~~</p>
 .
-Document[0, 6]
-  Paragraph[0, 6]
+Document[0, 5]
+  Paragraph[0, 5]
     Text[0, 5] chars:[0, 5, "foo~~"]
 ````````````````````````````````
 
@@ -75,8 +75,8 @@ Document[0, 6]
 .
 <p>~<del>foo</del>~</p>
 .
-Document[0, 10]
-  Paragraph[0, 10]
+Document[0, 9]
+  Paragraph[0, 9]
     Text[0, 1] chars:[0, 1, "~"]
     Strikethrough[1, 8] textOpen:[1, 3, "~~"] text:[3, 6, "foo"] textClose:[6, 8, "~~"]
       Text[3, 6] chars:[3, 6, "foo"]
@@ -89,8 +89,8 @@ Document[0, 10]
 .
 <p><del>foo</del>~</p>
 .
-Document[0, 9]
-  Paragraph[0, 9]
+Document[0, 8]
+  Paragraph[0, 8]
     Strikethrough[0, 7] textOpen:[0, 2, "~~"] text:[2, 5, "foo"] textClose:[5, 7, "~~"]
       Text[2, 5] chars:[2, 5, "foo"]
     Text[7, 8] chars:[7, 8, "~"]
@@ -120,7 +120,7 @@ Document[0, 9]
 <p><del>foo</del>~~<del>bar</del></p>
 <p><del>foo</del>~~~<del>bar</del></p>
 .
-Document[0, 111]
+Document[0, 110]
   Paragraph[0, 12] isTrailingBlankLine
     Strikethrough[0, 11] textOpen:[0, 2, "~~"] text:[2, 9, "foo~bar"] textClose:[9, 11, "~~"]
       Text[2, 9] chars:[2, 9, "foo~bar"]
@@ -149,7 +149,7 @@ Document[0, 111]
     Text[82, 84] chars:[82, 84, "~~"]
     Strikethrough[84, 91] textOpen:[84, 86, "~~"] text:[86, 89, "bar"] textClose:[89, 91, "~~"]
       Text[86, 89] chars:[86, 89, "bar"]
-  Paragraph[93, 111]
+  Paragraph[93, 110]
     Strikethrough[93, 100] textOpen:[93, 95, "~~"] text:[95, 98, "foo"] textClose:[98, 100, "~~"]
       Text[95, 98] chars:[95, 98, "foo"]
     Text[100, 103] chars:[100, 103, "~~~"]
@@ -163,8 +163,8 @@ Document[0, 111]
 .
 <p><del>Paragraph with <em>emphasis</em> and <strong>strong emphasis</strong></del></p>
 .
-Document[0, 54]
-  Paragraph[0, 54]
+Document[0, 53]
+  Paragraph[0, 53]
     Strikethrough[0, 53] textOpen:[0, 2, "~~"] text:[2, 51, "Parag … raph with *emphasis* and __strong emphasis__"] textClose:[51, 53, "~~"]
       Text[2, 17] chars:[2, 17, "Parag … with "]
       Emphasis[17, 27] textOpen:[17, 18, "*"] text:[18, 26, "emphasis"] textClose:[26, 27, "*"]
@@ -182,9 +182,9 @@ Document[0, 54]
 <p>strike <del>that</del></p>
 </blockquote>
 .
-Document[0, 18]
-  BlockQuote[0, 18] marker:[0, 1, ">"]
-    Paragraph[2, 18]
+Document[0, 17]
+  BlockQuote[0, 17] marker:[0, 1, ">"]
+    Paragraph[2, 17]
       Text[2, 9] chars:[2, 9, "strike "]
       Strikethrough[9, 17] textOpen:[9, 11, "~~"] text:[11, 15, "that"] textClose:[15, 17, "~~"]
         Text[11, 15] chars:[11, 15, "that"]

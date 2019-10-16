@@ -1,5 +1,6 @@
 package com.vladsch.flexmark.test;
 
+import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.util.data.DataHolder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -8,6 +9,7 @@ public interface SpecExampleRenderer {
     boolean includeExampleInfo();
 
     @Nullable DataHolder getOptions();
+    @NotNull SpecExample getExample();
 
     void includeDocument(@NotNull String includedText);
     void parse(CharSequence input);
@@ -42,6 +44,11 @@ public interface SpecExampleRenderer {
         @Override
         public void parse(CharSequence input) {
 
+        }
+
+        @Override
+        public @NotNull SpecExample getExample() {
+            return SpecExample.getNull();
         }
 
         @Override

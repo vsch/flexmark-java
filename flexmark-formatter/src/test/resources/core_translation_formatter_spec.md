@@ -1086,7 +1086,7 @@ paARaAGRaAph
 .
 # heEaADiING
 .
-Document[0, 12]
+Document[0, 13]
   Heading[0, 12] textOpen:[0, 1, "#"] text:[1, 8, "Heading"] textClose:[8, 12, "####"]
     Text[1, 8] chars:[1, 8, "Heading"]
 ````````````````````````````````

@@ -19,7 +19,7 @@ import java.util.Stack;
  */
 public interface HtmlNodeConverterContext extends NodeContext<Node, HtmlNodeConverterContext> {
     /**
-     * @return the {@link com.vladsch.flexmark.util.html.LineFormattingAppendable} writer to use
+     * @return the {@link LineFormattingAppendable} writer to use
      */
     HtmlMarkdownWriter getMarkdown();
 

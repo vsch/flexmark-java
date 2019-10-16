@@ -7,15 +7,12 @@ import com.vladsch.flexmark.spec.UrlString;
 import com.vladsch.flexmark.test.ComboSpecTestCase;
 import com.vladsch.flexmark.test.FlexmarkSpecExampleRenderer;
 import com.vladsch.flexmark.test.SpecExampleRenderer;
-import com.vladsch.flexmark.test.TestUtils;
 import com.vladsch.flexmark.util.ast.IParse;
 import com.vladsch.flexmark.util.ast.IRender;
-import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.junit.ComparisonFailure;
 import org.junit.runners.Parameterized;
 
 import java.io.InputStream;
@@ -106,8 +103,9 @@ public class ComboFlexmarkHtmlAttributesParserTest extends ComboSpecTestCase {
     }
 
     @Override
-    public @NotNull SpecExampleRenderer getSpecExampleRenderer(@Nullable DataHolder exampleOptions) {
-        return new FlexmarkSpecExampleRenderer(exampleOptions, PARSER, RENDERER, true);
+    public @NotNull SpecExampleRenderer getSpecExampleRenderer(@NotNull SpecExample example, @Nullable DataHolder exampleOptions) {
+        DataHolder combinedOptions = combineOptions(OPTIONS, exampleOptions);
+        return new FlexmarkSpecExampleRenderer(example, combinedOptions, PARSER.withOptions(combinedOptions), RENDERER.withOptions(combinedOptions), true);
     }
 
     @NotNull

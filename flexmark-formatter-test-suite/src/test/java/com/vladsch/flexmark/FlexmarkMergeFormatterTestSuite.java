@@ -6,9 +6,10 @@ import com.vladsch.flexmark.ext.enumerated.reference.MergeEnumeratedReferenceTes
 import com.vladsch.flexmark.ext.footnotes.MergeFootnotesTest;
 import com.vladsch.flexmark.ext.macros.MergeMacrosTest;
 import com.vladsch.flexmark.formatter.MergeFormatterCoreTest;
+import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
-@org.junit.runner.RunWith(Suite.class)
+@RunWith(Suite.class)
 @Suite.SuiteClasses({
         //UtilsTestSuite.class,
         //CoreTestSuite.class,

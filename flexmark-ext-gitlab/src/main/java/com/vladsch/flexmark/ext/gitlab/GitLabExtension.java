@@ -11,8 +11,8 @@ import com.vladsch.flexmark.util.data.MutableDataHolder;
  * Extension for git_labs
  * <p>
  * Create it with {@link #create()} and then configure it on the builders
- * ({@link com.vladsch.flexmark.parser.Parser.Builder#extensions(Iterable)},
- * {@link com.vladsch.flexmark.html.HtmlRenderer.Builder#extensions(Iterable)}).
+ * ({@link Parser.Builder#extensions(Iterable)},
+ * {@link HtmlRenderer.Builder#extensions(Iterable)}).
  * </p>
  * <p>
  * The parsed GitLab Flavoured Markdown

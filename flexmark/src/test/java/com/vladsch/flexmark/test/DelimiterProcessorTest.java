@@ -16,11 +16,13 @@ import com.vladsch.flexmark.parser.delimiter.DelimiterRun;
 import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
+import com.vladsch.flexmark.util.data.MutableDataSet;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.junit.Test;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Locale;
 import java.util.Set;
@@ -28,13 +30,15 @@ import java.util.Set;
 import static org.junit.Assert.assertEquals;
 
 public class DelimiterProcessorTest extends RenderingTestCase {
-
-    private static final Parser PARSER = Parser.builder().customDelimiterProcessor(new AsymmetricDelimiterProcessor()).build();
-    private static final HtmlRenderer RENDERER = HtmlRenderer.builder().nodeRendererFactory(new UpperCaseNodeRendererFactory()).build();
+    static final DataHolder OPTIONS = new MutableDataSet()
+            .set(TestUtils.NO_FILE_EOL, false)
+            .toImmutable();
+    private static final Parser PARSER = Parser.builder(OPTIONS).customDelimiterProcessor(new AsymmetricDelimiterProcessor()).build();
+    private static final HtmlRenderer RENDERER = HtmlRenderer.builder(OPTIONS).nodeRendererFactory(new UpperCaseNodeRendererFactory()).build();
 
     @Test
     public void delimiterProcessorWithInvalidDelimiterUse() {
-        Parser parser = Parser.builder()
+        Parser parser = Parser.builder(OPTIONS)
                 .customDelimiterProcessor(new CustomDelimiterProcessor(':', 0))
                 .customDelimiterProcessor(new CustomDelimiterProcessor(';', -1))
                 .build();
@@ -68,12 +72,12 @@ public class DelimiterProcessorTest extends RenderingTestCase {
     }
 
     @Override
-    public @NotNull SpecExampleRenderer getSpecExampleRenderer(@Nullable DataHolder exampleOptions) {
-        return new FlexmarkSpecExampleRenderer(exampleOptions, PARSER, RENDERER, true);
+    public @NotNull SpecExampleRenderer getSpecExampleRenderer(@NotNull SpecExample example, @Nullable DataHolder exampleOptions) {
+        DataHolder combinedOptions = combineOptions(OPTIONS, exampleOptions);
+        return new FlexmarkSpecExampleRenderer(example, combinedOptions, PARSER.withOptions(combinedOptions), RENDERER.withOptions(combinedOptions), true);
     }
 
     private static class CustomDelimiterProcessor implements DelimiterProcessor {
-
         private final char delimiterChar;
         private final int delimiterUse;
 

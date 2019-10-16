@@ -20,8 +20,8 @@ Abc|Def
 .
 <p>Abc|Def</p>
 .
-Document[0, 8]
-  Paragraph[0, 8]
+Document[0, 7]
+  Paragraph[0, 7]
     Text[0, 7] chars:[0, 7, "Abc|Def"]
 ````````````````````````````````
 
@@ -31,8 +31,8 @@ Abc | Def
 .
 <p>Abc | Def</p>
 .
-Document[0, 10]
-  Paragraph[0, 10]
+Document[0, 9]
+  Paragraph[0, 9]
     Text[0, 9] chars:[0, 9, "Abc | Def"]
 ````````````````````````````````
 
@@ -47,8 +47,8 @@ Abc|Def
   </thead>
 </table>
 .
-Document[0, 12]
-  TableBlock[0, 12]
+Document[0, 11]
+  TableBlock[0, 11]
     TableHead[0, 7]
       TableRow[0, 7]
         TableCell[0, 3] header text:[0, 3, "Abc"]
@@ -75,8 +75,8 @@ Abc|Def
   </thead>
 </table>
 .
-Document[0, 14]
-  TableBlock[0, 14]
+Document[0, 13]
+  TableBlock[0, 13]
     TableHead[0, 7]
       TableRow[0, 7]
         TableCell[0, 3] header text:[0, 3, "Abc"]
@@ -100,8 +100,8 @@ Abc|Def
 <p>Abc|Def
 |---|---</p>
 .
-Document[0, 18]
-  Paragraph[0, 18]
+Document[0, 17]
+  Paragraph[0, 17]
     Text[0, 7] chars:[0, 7, "Abc|Def"]
     SoftLineBreak[7, 8]
     Text[9, 17] chars:[9, 17, "|---|---"]
@@ -117,8 +117,8 @@ Abc|Def
 Abc|Def
 ---|---</p>
 .
-Document[0, 19]
-  Paragraph[0, 19]
+Document[0, 18]
+  Paragraph[0, 18]
     Text[0, 2] chars:[0, 2, "No"]
     SoftLineBreak[2, 3]
     Text[3, 10] chars:[3, 10, "Abc|Def"]
@@ -137,8 +137,8 @@ Abc|Def
   </thead>
 </table>
 .
-Document[0, 16]
-  TableBlock[0, 16]
+Document[0, 15]
+  TableBlock[0, 15]
     TableHead[0, 7]
       TableRow[0, 7]
         TableCell[0, 3] header text:[0, 3, "Abc"]
@@ -165,8 +165,8 @@ Document[0, 16]
   </thead>
 </table>
 .
-Document[0, 10]
-  TableBlock[0, 10]
+Document[0, 9]
+  TableBlock[0, 9]
     TableHead[0, 4]
       TableRow[0, 4]
         TableCell[1, 4] header text:[1, 4, "Abc"]
@@ -189,8 +189,8 @@ Document[0, 10]
   </thead>
 </table>
 .
-Document[0, 12]
-  TableBlock[0, 12]
+Document[0, 11]
+  TableBlock[0, 11]
     TableHead[0, 5]
       TableRow[0, 5]
         TableCell[1, 4] header text:[1, 4, "Abc"]
@@ -213,8 +213,8 @@ Abc|
   </thead>
 </table>
 .
-Document[0, 10]
-  TableBlock[0, 10]
+Document[0, 9]
+  TableBlock[0, 9]
     TableHead[0, 4]
       TableRow[0, 4]
         TableCell[0, 3] header text:[0, 3, "Abc"]
@@ -233,7 +233,7 @@ Document[0, 10]
 .
 <h2>|Abc</h2>
 .
-Document[0, 9]
+Document[0, 8]
   Heading[0, 8] text:[0, 4, "|Abc"] textClose:[5, 8, "---"]
     Text[0, 4] chars:[0, 4, "|Abc"]
 ````````````````````````````````
@@ -246,8 +246,8 @@ Abc
 <p>Abc
 |---</p>
 .
-Document[0, 9]
-  Paragraph[0, 9]
+Document[0, 8]
+  Paragraph[0, 8]
     Text[0, 3] chars:[0, 3, "Abc"]
     SoftLineBreak[3, 4]
     Text[4, 8] chars:[4, 8, "|---"]
@@ -268,8 +268,8 @@ Document[0, 9]
   </tbody>
 </table>
 .
-Document[0, 13]
-  TableBlock[0, 13]
+Document[0, 12]
+  TableBlock[0, 12]
     TableHead[0, 4]
       TableRow[0, 4]
         TableCell[1, 4] header text:[1, 4, "Abc"]
@@ -299,8 +299,8 @@ Document[0, 13]
   </tbody>
 </table>
 .
-Document[0, 16]
-  TableBlock[0, 16]
+Document[0, 15]
+  TableBlock[0, 15]
     TableHead[0, 5]
       TableRow[0, 5]
         TableCell[1, 4] header text:[1, 4, "Abc"]
@@ -330,8 +330,8 @@ Abc|
   </tbody>
 </table>
 .
-Document[0, 13]
-  TableBlock[0, 13]
+Document[0, 12]
+  TableBlock[0, 12]
     TableHead[0, 4]
       TableRow[0, 4]
         TableCell[0, 3] header text:[0, 3, "Abc"]
@@ -355,10 +355,10 @@ Document[0, 13]
 <h2>|Abc</h2>
 <p>|1</p>
 .
-Document[0, 12]
+Document[0, 11]
   Heading[0, 8] text:[0, 4, "|Abc"] textClose:[5, 8, "---"]
     Text[0, 4] chars:[0, 4, "|Abc"]
-  Paragraph[9, 12]
+  Paragraph[9, 11]
     Text[9, 11] chars:[9, 11, "|1"]
 ````````````````````````````````
 
@@ -375,7 +375,7 @@ Document[0, 12]
 </table>
 <p>1</p>
 .
-Document[0, 12]
+Document[0, 11]
   TableBlock[0, 10]
     TableHead[0, 4]
       TableRow[0, 4]
@@ -386,7 +386,7 @@ Document[0, 12]
         TableCell[6, 9] text:[6, 9, "---"]
           Text[6, 9] chars:[6, 9, "---"]
     TableBody[0, 0]
-  Paragraph[10, 12]
+  Paragraph[10, 11]
     Text[10, 11] chars:[10, 11, "1"]
 ````````````````````````````````
 
@@ -405,8 +405,8 @@ Abc|Def
   </tbody>
 </table>
 .
-Document[0, 20]
-  TableBlock[0, 20]
+Document[0, 19]
+  TableBlock[0, 19]
     TableHead[0, 7]
       TableRow[0, 7]
         TableCell[0, 3] header text:[0, 3, "Abc"]
@@ -437,8 +437,8 @@ Abc|Def|Ghi
 ---|---
 1|2|3</p>
 .
-Document[0, 26]
-  Paragraph[0, 26]
+Document[0, 25]
+  Paragraph[0, 25]
     Text[0, 11] chars:[0, 11, "Abc|D … f|Ghi"]
     SoftLineBreak[11, 12]
     Text[12, 19] chars:[12, 19, "---|---"]
@@ -461,8 +461,8 @@ Document[0, 26]
   </tbody>
 </table>
 .
-Document[0, 30]
-  TableBlock[1, 30]
+Document[0, 29]
+  TableBlock[1, 29]
     TableHead[1, 11]
       TableRow[1, 11]
         TableCell[1, 4] header text:[1, 4, "Abc"]
@@ -498,8 +498,8 @@ Abc|Def
   </tbody>
 </table>
 .
-Document[0, 24]
-  TableBlock[0, 24]
+Document[0, 23]
+  TableBlock[0, 23]
     TableHead[0, 7]
       TableRow[0, 7]
         TableCell[0, 3] header text:[0, 3, "Abc"]
@@ -535,8 +535,8 @@ Document[0, 24]
   </tbody>
 </table>
 .
-Document[0, 26]
-  TableBlock[0, 26]
+Document[0, 25]
+  TableBlock[0, 25]
     TableHead[0, 9]
       TableRow[0, 9]
         TableCell[1, 4] header text:[1, 4, "Abc"]
@@ -572,8 +572,8 @@ Document[0, 26]
   </tbody>
 </table>
 .
-Document[0, 22]
-  TableBlock[0, 22]
+Document[0, 21]
+  TableBlock[0, 21]
     TableHead[0, 9]
       TableRow[0, 9]
         TableCell[0, 5] header text:[0, 5, "*Abc*"]
@@ -610,8 +610,8 @@ Abc|Def
   </tbody>
 </table>
 .
-Document[0, 25]
-  TableBlock[0, 25]
+Document[0, 24]
+  TableBlock[0, 24]
     TableHead[0, 7]
       TableRow[0, 7]
         TableCell[0, 3] header text:[0, 3, "Abc"]
@@ -647,8 +647,8 @@ Abc|Def
   </tbody>
 </table>
 .
-Document[0, 24]
-  TableBlock[0, 24]
+Document[0, 23]
+  TableBlock[0, 23]
     TableHead[0, 7]
       TableRow[0, 7]
         TableCell[0, 3] header text:[0, 3, "Abc"]
@@ -684,8 +684,8 @@ Abc|Def
   </tbody>
 </table>
 .
-Document[0, 21]
-  TableBlock[0, 21]
+Document[0, 20]
+  TableBlock[0, 20]
     TableHead[0, 7]
       TableRow[0, 7]
         TableCell[0, 3] LEFT header text:[0, 3, "Abc"]
@@ -721,8 +721,8 @@ Abc|Def
   </tbody>
 </table>
 .
-Document[0, 21]
-  TableBlock[0, 21]
+Document[0, 20]
+  TableBlock[0, 20]
     TableHead[0, 7]
       TableRow[0, 7]
         TableCell[0, 3] RIGHT header text:[0, 3, "Abc"]
@@ -758,8 +758,8 @@ Abc|Def
   </tbody>
 </table>
 .
-Document[0, 22]
-  TableBlock[0, 22]
+Document[0, 21]
+  TableBlock[0, 21]
     TableHead[0, 7]
       TableRow[0, 7]
         TableCell[0, 3] CENTER header text:[0, 3, "Abc"]
@@ -795,8 +795,8 @@ Abc|Def
   </tbody>
 </table>
 .
-Document[0, 22]
-  TableBlock[0, 22]
+Document[0, 21]
+  TableBlock[0, 21]
     TableHead[0, 7]
       TableRow[0, 7]
         TableCell[0, 3] header text:[0, 3, "Abc"]
@@ -832,8 +832,8 @@ Abc|Def
   </tbody>
 </table>
 .
-Document[0, 23]
-  TableBlock[0, 23]
+Document[0, 22]
+  TableBlock[0, 22]
     TableHead[0, 7]
       TableRow[0, 7]
         TableCell[0, 3] LEFT header text:[0, 3, "Abc"]
@@ -862,8 +862,8 @@ Abc|Def
 <p>Abc|Def
 : ---|---</p>
 .
-Document[0, 19]
-  Paragraph[0, 19]
+Document[0, 18]
+  Paragraph[0, 18]
     Text[0, 7] chars:[0, 7, "Abc|Def"]
     SoftLineBreak[7, 8]
     Text[8, 17] chars:[8, 17, ": ---|---"]
@@ -877,8 +877,8 @@ Abc|Def
 <p>Abc|Def
 --- :|---</p>
 .
-Document[0, 18]
-  Paragraph[0, 18]
+Document[0, 17]
+  Paragraph[0, 17]
     Text[0, 7] chars:[0, 7, "Abc|Def"]
     SoftLineBreak[7, 8]
     Text[8, 17] chars:[8, 17, "--- :|---"]
@@ -892,8 +892,8 @@ Abc|Def
 <p>Abc|Def
 ---|: ---</p>
 .
-Document[0, 18]
-  Paragraph[0, 18]
+Document[0, 17]
+  Paragraph[0, 17]
     Text[0, 7] chars:[0, 7, "Abc|Def"]
     SoftLineBreak[7, 8]
     Text[8, 17] chars:[8, 17, "---|: ---"]
@@ -907,8 +907,8 @@ Abc|Def
 <p>Abc|Def
 ---|--- :</p>
 .
-Document[0, 18]
-  Paragraph[0, 18]
+Document[0, 17]
+  Paragraph[0, 17]
     Text[0, 7] chars:[0, 7, "Abc|Def"]
     SoftLineBreak[7, 8]
     Text[8, 17] chars:[8, 17, "---|--- :"]
@@ -929,8 +929,8 @@ Abc|Def
   </tbody>
 </table>
 .
-Document[0, 22]
-  TableBlock[0, 22]
+Document[0, 21]
+  TableBlock[0, 21]
     TableHead[0, 7]
       TableRow[0, 7]
         TableCell[0, 3] header text:[0, 3, "Abc"]
@@ -966,8 +966,8 @@ Abc|Def|Ghi
   </tbody>
 </table>
 .
-Document[0, 28]
-  TableBlock[0, 28]
+Document[0, 27]
+  TableBlock[0, 27]
     TableHead[0, 11]
       TableRow[0, 11]
         TableCell[0, 3] header text:[0, 3, "Abc"]
@@ -1010,9 +1010,9 @@ Document[0, 28]
   </table>
 </blockquote>
 .
-Document[0, 26]
-  BlockQuote[0, 26] marker:[0, 1, ">"]
-    TableBlock[2, 26]
+Document[0, 25]
+  BlockQuote[0, 25] marker:[0, 1, ">"]
+    TableBlock[2, 25]
       TableHead[2, 9]
         TableRow[2, 9]
           TableCell[2, 5] header text:[2, 5, "Abc"]
@@ -1050,7 +1050,7 @@ table, you are over
 </table>
 <p>table, you are over</p>
 .
-Document[0, 40]
+Document[0, 39]
   TableBlock[0, 20]
     TableHead[0, 7]
       TableRow[0, 7]
@@ -1070,7 +1070,7 @@ Document[0, 40]
           Text[16, 17] chars:[16, 17, "1"]
         TableCell[18, 19] text:[18, 19, "2"]
           Text[18, 19] chars:[18, 19, "2"]
-  Paragraph[20, 40]
+  Paragraph[20, 39]
     Text[20, 39] chars:[20, 39, "table …  over"]
 ````````````````````````````````
 
@@ -1095,7 +1095,7 @@ table, you are over
 </table>
 <p>table, you are over</p>
 .
-Document[0, 68]
+Document[0, 67]
   TableBlock[0, 35]
     TableHead[0, 13]
       TableRow[0, 13]
@@ -1146,11 +1146,11 @@ Issue #106, Table placed after code block does not parsed
   </tbody>
 </table>
 .
-Document[0, 69]
+Document[0, 68]
   Paragraph[0, 17] isTrailingBlankLine
     Code[0, 16] textOpen:[0, 1, "`"] text:[1, 15, "test  … test test"] textClose:[15, 16, "`"]
       Text[1, 15] chars:[1, 15, "test  …  test"]
-  TableBlock[18, 69]
+  TableBlock[18, 68]
     TableHead[18, 34]
       TableRow[18, 34]
         TableCell[21, 22] header text:[21, 22, "1"]

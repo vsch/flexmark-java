@@ -6,16 +6,16 @@ import com.vladsch.flexmark.util.data.MutableDataSet;
 
 import java.util.*;
 
-public abstract class BuilderBase<T extends BuilderBase> extends MutableDataSet {
+public abstract class BuilderBase<T extends BuilderBase<T>> extends MutableDataSet {
     public static final DataKey<Iterable<Extension>> EXTENSIONS = new DataKey<>("EXTENSIONS", Extension.EMPTY_LIST);
     public static final DataKey<Iterable<Extension>> UNLOAD_EXTENSIONS = new DataKey<>("UNLOAD_EXTENSIONS", Extension.EMPTY_LIST);
     public static final DataKey<Boolean> RELOAD_EXTENSIONS = new DataKey<>("RELOAD_EXTENSIONS", true);
 
     // loaded extensions
-    private final HashSet<Class> loadedExtensions = new HashSet<>();
+    private final HashSet<Class<?>> loadedExtensions = new HashSet<>();
 
     // map of which api points were loaded by which extensions
-    private final HashMap<Class, HashSet<Object>> extensionApiPoints = new HashMap<>();
+    private final HashMap<Class<?>, HashSet<Object>> extensionApiPoints = new HashMap<>();
     private Extension currentExtension;
 
     /**
@@ -43,7 +43,9 @@ public abstract class BuilderBase<T extends BuilderBase> extends MutableDataSet 
     /**
      * @param extensions extensions to load
      * @return {@code this}
+     * @deprecated use options with EXTENSIONS set
      */
+    @Deprecated
     final public T extensions(Iterable<? extends Extension> extensions) {
         // first give extensions a chance to modify parser options
         for (Extension extension : extensions) {
@@ -65,6 +67,13 @@ public abstract class BuilderBase<T extends BuilderBase> extends MutableDataSet 
             currentExtension = null;
         }
 
+        // KLUDGE: for old API Support
+        if (!contains(EXTENSIONS)) {
+            // need to set extensions
+            set(EXTENSIONS, extensions);
+        }
+
+        //noinspection unchecked
         return (T) this;
     }
 
@@ -83,7 +92,7 @@ public abstract class BuilderBase<T extends BuilderBase> extends MutableDataSet 
         }
     }
 
-    public void unloadExtension(Class extensionClass) {
+    public void unloadExtension(Class<?> extensionClass) {
         if (extensionClass != null) {
             if (loadedExtensions.contains(extensionClass)) {
                 HashSet<Object> apiPoints = extensionApiPoints.get(extensionClass);
@@ -117,8 +126,8 @@ public abstract class BuilderBase<T extends BuilderBase> extends MutableDataSet 
 
     public void unloadExtensions() {
         // unload any loaded extension points and extensions that are in the set so they can be re-loaded
-        ArrayList<Class> list = new ArrayList<>(loadedExtensions);
-        for (Class extension : list) {
+        ArrayList<Class<?>> list = new ArrayList<>(loadedExtensions);
+        for (Class<?> extension : list) {
             unloadExtension(extension);
         }
     }
@@ -140,17 +149,17 @@ public abstract class BuilderBase<T extends BuilderBase> extends MutableDataSet 
     protected BuilderBase(T other) {
         super(other);
 
-        HashMap<Class, HashSet<Object>> points = ((BuilderBase) other).extensionApiPoints;
-        for (Map.Entry<Class, HashSet<Object>> entry : points.entrySet()) {
+        HashMap<Class<?>, HashSet<Object>> points = ((BuilderBase<T>) other).extensionApiPoints;
+        for (Map.Entry<Class<?>, HashSet<Object>> entry : points.entrySet()) {
             extensionApiPoints.put(entry.getKey(), new HashSet<>(entry.getValue()));
         }
-        loadedExtensions.addAll(((BuilderBase) other).loadedExtensions);
+        loadedExtensions.addAll(((BuilderBase<?>) other).loadedExtensions);
     }
 
     protected void withOptions(DataHolder options) {
         List<Extension> extensions = new ArrayList<>();
-        HashSet<Class> extensionSet = new HashSet<>();
-        HashSet<Class> unloadExtensionSet = null;
+        HashSet<Class<?>> extensionSet = new HashSet<>();
+        HashSet<Class<?>> unloadExtensionSet = null;
 
         if (options != null && options.contains(UNLOAD_EXTENSIONS)) {
             unloadExtensionSet = new HashSet<>();
@@ -167,7 +176,7 @@ public abstract class BuilderBase<T extends BuilderBase> extends MutableDataSet 
         }
 
         if (options != null) {
-            for (DataKey key : options.getKeys()) {
+            for (DataKey<?> key : options.getKeys()) {
                 if (key == EXTENSIONS) {
                     for (Extension extension : options.get(EXTENSIONS)) {
                         if (unloadExtensionSet == null || !unloadExtensionSet.contains(extension.getClass())) {

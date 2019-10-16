@@ -20,8 +20,8 @@ no trailing pipes allowed, reserved for tables
 .
 <p>| Sample text |</p>
 .
-Document[0, 16]
-  Paragraph[0, 16]
+Document[0, 15]
+  Paragraph[0, 15]
     Text[0, 15] chars:[0, 15, "| Sam … ext |"]
 ````````````````````````````````
 
@@ -33,8 +33,8 @@ no trailing pipes allowed, reserved for tables
 .
 <p>| Sample text |</p>
 .
-Document[0, 19]
-  Paragraph[0, 19]
+Document[0, 18]
+  Paragraph[0, 18]
     Text[0, 15] chars:[0, 15, "| Sam … ext |"]
 ````````````````````````````````
 
@@ -50,11 +50,11 @@ Document[0, 19]
   baz</p>
 </aside>
 .
-Document[0, 20]
-  AsideBlock[0, 20] marker:[0, 1, "|"]
+Document[0, 19]
+  AsideBlock[0, 19] marker:[0, 1, "|"]
     Heading[2, 7] textOpen:[2, 3, "#"] text:[4, 7, "Foo"]
       Text[4, 7] chars:[4, 7, "Foo"]
-    Paragraph[10, 20]
+    Paragraph[10, 19]
       Text[10, 13] chars:[10, 13, "bar"]
       SoftLineBreak[13, 14]
       Text[16, 19] chars:[16, 19, "baz"]
@@ -74,11 +74,11 @@ The spaces after the `|` characters can be omitted:
   baz</p>
 </aside>
 .
-Document[0, 18]
-  AsideBlock[0, 18] marker:[0, 1, "|"]
+Document[0, 17]
+  AsideBlock[0, 17] marker:[0, 1, "|"]
     Heading[1, 6] textOpen:[1, 2, "#"] text:[3, 6, "Foo"]
       Text[3, 6] chars:[3, 6, "Foo"]
-    Paragraph[8, 18]
+    Paragraph[8, 17]
       Text[8, 11] chars:[8, 11, "bar"]
       SoftLineBreak[11, 12]
       Text[14, 17] chars:[14, 17, "baz"]
@@ -98,11 +98,11 @@ The `|` characters can be indented 1-3 spaces:
   baz</p>
 </aside>
 .
-Document[0, 27]
-  AsideBlock[3, 27] marker:[3, 4, "|"]
+Document[0, 26]
+  AsideBlock[3, 26] marker:[3, 4, "|"]
     Heading[5, 10] textOpen:[5, 6, "#"] text:[7, 10, "Foo"]
       Text[7, 10] chars:[7, 10, "Foo"]
-    Paragraph[16, 27]
+    Paragraph[16, 26]
       Text[16, 19] chars:[16, 19, "bar"]
       SoftLineBreak[19, 20]
       Text[23, 26] chars:[23, 26, "baz"]
@@ -121,8 +121,8 @@ Four spaces gives us a code block:
 | baz
 </code></pre>
 .
-Document[0, 32]
-  IndentedCodeBlock[4, 32]
+Document[0, 31]
+  IndentedCodeBlock[4, 31]
 ````````````````````````````````
 
 
@@ -139,11 +139,11 @@ baz
   baz</p>
 </aside>
 .
-Document[0, 18]
-  AsideBlock[0, 18] marker:[0, 1, "|"]
+Document[0, 17]
+  AsideBlock[0, 17] marker:[0, 1, "|"]
     Heading[2, 7] textOpen:[2, 3, "#"] text:[4, 7, "Foo"]
       Text[4, 7] chars:[4, 7, "Foo"]
-    Paragraph[10, 18]
+    Paragraph[10, 17]
       Text[10, 13] chars:[10, 13, "bar"]
       SoftLineBreak[13, 14]
       Text[14, 17] chars:[14, 17, "baz"]
@@ -163,9 +163,9 @@ baz
   foo</p>
 </aside>
 .
-Document[0, 16]
-  AsideBlock[0, 16] marker:[0, 1, "|"]
-    Paragraph[2, 16]
+Document[0, 15]
+  AsideBlock[0, 15] marker:[0, 1, "|"]
+    Paragraph[2, 15]
       Text[2, 5] chars:[2, 5, "bar"]
       SoftLineBreak[5, 6]
       Text[6, 9] chars:[6, 9, "baz"]
@@ -194,7 +194,7 @@ without changing the meaning:
 </aside>
 <hr />
 .
-Document[0, 10]
+Document[0, 9]
   AsideBlock[0, 6] marker:[0, 1, "|"]
     Paragraph[2, 6]
       Text[2, 5] chars:[2, 5, "foo"]
@@ -224,15 +224,15 @@ then the block quote ends after the first line:
   <li>bar</li>
 </ul>
 .
-Document[0, 14]
+Document[0, 13]
   AsideBlock[0, 8] marker:[0, 1, "|"]
     BulletList[2, 8] isTight
       BulletListItem[2, 8] open:[2, 3, "-"] isTight
         Paragraph[4, 8]
           Text[4, 7] chars:[4, 7, "foo"]
-  BulletList[8, 14] isTight
-    BulletListItem[8, 14] open:[8, 9, "-"] isTight
-      Paragraph[10, 14]
+  BulletList[8, 13] isTight
+    BulletListItem[8, 13] open:[8, 9, "-"] isTight
+      Paragraph[10, 13]
         Text[10, 13] chars:[10, 13, "bar"]
 ````````````````````````````````
 
@@ -251,10 +251,10 @@ fenced code block:
 <pre><code>bar
 </code></pre>
 .
-Document[0, 18]
+Document[0, 17]
   AsideBlock[0, 10] marker:[0, 1, "|"]
     IndentedCodeBlock[6, 10]
-  IndentedCodeBlock[14, 18]
+  IndentedCodeBlock[14, 17]
 ````````````````````````````````
 
 
@@ -269,12 +269,12 @@ foo
 <p>foo</p>
 <pre><code></code></pre>
 .
-Document[0, 14]
+Document[0, 13]
   AsideBlock[0, 6] marker:[0, 1, "|"]
     FencedCodeBlock[2, 6] open:[2, 5, "```"] lines[0]
   Paragraph[6, 10]
     Text[6, 9] chars:[6, 9, "foo"]
-  FencedCodeBlock[10, 14] open:[10, 13, "```"] lines[0]
+  FencedCodeBlock[10, 13] open:[10, 13, "```"] lines[0]
 ````````````````````````````````
 
 
@@ -289,9 +289,9 @@ Note that in the following case, we have a [lazy continuation line]:
   - bar</p>
 </aside>
 .
-Document[0, 16]
-  AsideBlock[0, 16] marker:[0, 1, "|"]
-    Paragraph[2, 16]
+Document[0, 15]
+  AsideBlock[0, 15] marker:[0, 1, "|"]
+    Paragraph[2, 15]
       Text[2, 5] chars:[2, 5, "foo"]
       SoftLineBreak[5, 6]
       Text[10, 15] chars:[10, 15, "- bar"]
@@ -315,8 +315,8 @@ A block quote can be empty:
 .
 <aside></aside>
 .
-Document[0, 2]
-  AsideBlock[0, 2] marker:[0, 1, "|"]
+Document[0, 1]
+  AsideBlock[0, 1] marker:[0, 1, "|"]
 ````````````````````````````````
 
 
@@ -338,8 +338,8 @@ Document[0, 2]
 .
 <aside></aside>
 .
-Document[0, 9]
-  AsideBlock[0, 9] marker:[0, 1, "|"]
+Document[0, 8]
+  AsideBlock[0, 8] marker:[0, 1, "|"]
 ````````````````````````````````
 
 
@@ -369,8 +369,8 @@ Can have initial or final blank lines:
   <p>foo</p>
 </aside>
 .
-Document[0, 12]
-  AsideBlock[0, 12] marker:[0, 1, "|"]
+Document[0, 11]
+  AsideBlock[0, 11] marker:[0, 1, "|"]
     Paragraph[4, 8] isTrailingBlankLine
       Text[4, 7] chars:[4, 7, "foo"]
 ````````````````````````````````
@@ -408,12 +408,12 @@ A blank line always separates block quotes:
   <p>bar</p>
 </aside>
 .
-Document[0, 13]
+Document[0, 12]
   AsideBlock[0, 6] marker:[0, 1, "|"]
     Paragraph[2, 6]
       Text[2, 5] chars:[2, 5, "foo"]
-  AsideBlock[7, 13] marker:[7, 8, "|"]
-    Paragraph[9, 13]
+  AsideBlock[7, 12] marker:[7, 8, "|"]
+    Paragraph[9, 12]
       Text[9, 12] chars:[9, 12, "bar"]
 ````````````````````````````````
 
@@ -433,9 +433,9 @@ Consecutiveness means that if we put these block quotes together, we get a singl
   bar</p>
 </aside>
 .
-Document[0, 12]
-  AsideBlock[0, 12] marker:[0, 1, "|"]
-    Paragraph[2, 12]
+Document[0, 11]
+  AsideBlock[0, 11] marker:[0, 1, "|"]
+    Paragraph[2, 11]
       Text[2, 5] chars:[2, 5, "foo"]
       SoftLineBreak[5, 6]
       Text[8, 11] chars:[8, 11, "bar"]
@@ -454,11 +454,11 @@ To get a block with two paragraphs, use:
   <p>bar</p>
 </aside>
 .
-Document[0, 14]
-  AsideBlock[0, 14] marker:[0, 1, "|"]
+Document[0, 13]
+  AsideBlock[0, 13] marker:[0, 1, "|"]
     Paragraph[2, 6] isTrailingBlankLine
       Text[2, 5] chars:[2, 5, "foo"]
-    Paragraph[10, 14]
+    Paragraph[10, 13]
       Text[10, 13] chars:[10, 13, "bar"]
 ````````````````````````````````
 
@@ -494,11 +494,11 @@ foo
   <p>bar</p>
 </aside>
 .
-Document[0, 10]
+Document[0, 9]
   Paragraph[0, 4]
     Text[0, 3] chars:[0, 3, "foo"]
-  AsideBlock[4, 10] marker:[4, 5, "|"]
-    Paragraph[6, 10]
+  AsideBlock[4, 9] marker:[4, 5, "|"]
+    Paragraph[6, 9]
       Text[6, 9] chars:[6, 9, "bar"]
 ````````````````````````````````
 
@@ -518,13 +518,13 @@ In general, blank lines are not needed before or after marker:
   <p>bbb</p>
 </aside>
 .
-Document[0, 16]
+Document[0, 15]
   AsideBlock[0, 6] marker:[0, 1, "|"]
     Paragraph[2, 6]
       Text[2, 5] chars:[2, 5, "aaa"]
   ThematicBreak[6, 9]
-  AsideBlock[10, 16] marker:[10, 11, "|"]
-    Paragraph[12, 16]
+  AsideBlock[10, 15] marker:[10, 11, "|"]
+    Paragraph[12, 15]
       Text[12, 15] chars:[12, 15, "bbb"]
 ````````````````````````````````
 
@@ -540,9 +540,9 @@ baz
   baz</p>
 </aside>
 .
-Document[0, 10]
-  AsideBlock[0, 10] marker:[0, 1, "|"]
-    Paragraph[2, 10]
+Document[0, 9]
+  AsideBlock[0, 9] marker:[0, 1, "|"]
+    Paragraph[2, 9]
       Text[2, 5] chars:[2, 5, "bar"]
       SoftLineBreak[5, 6]
       Text[6, 9] chars:[6, 9, "baz"]
@@ -559,11 +559,11 @@ baz
 </aside>
 <p>baz</p>
 .
-Document[0, 11]
+Document[0, 10]
   AsideBlock[0, 6] marker:[0, 1, "|"]
     Paragraph[2, 6]
       Text[2, 5] chars:[2, 5, "bar"]
-  Paragraph[7, 11]
+  Paragraph[7, 10]
     Text[7, 10] chars:[7, 10, "baz"]
 ````````````````````````````````
 
@@ -578,11 +578,11 @@ baz
 </aside>
 <p>baz</p>
 .
-Document[0, 12]
+Document[0, 11]
   AsideBlock[0, 8] marker:[0, 1, "|"]
     Paragraph[2, 6] isTrailingBlankLine
       Text[2, 5] chars:[2, 5, "bar"]
-  Paragraph[8, 12]
+  Paragraph[8, 11]
     Text[8, 11] chars:[8, 11, "baz"]
 ````````````````````````````````
 
@@ -623,11 +623,11 @@ bar
   </aside>
 </aside>
 .
-Document[0, 14]
-  AsideBlock[0, 14] marker:[0, 1, "|"]
-    AsideBlock[2, 14] marker:[2, 3, "|"]
-      AsideBlock[4, 14] marker:[4, 5, "|"]
-        Paragraph[6, 14]
+Document[0, 13]
+  AsideBlock[0, 13] marker:[0, 1, "|"]
+    AsideBlock[2, 13] marker:[2, 3, "|"]
+      AsideBlock[4, 13] marker:[4, 5, "|"]
+        Paragraph[6, 13]
           Text[6, 9] chars:[6, 9, "foo"]
           SoftLineBreak[9, 10]
           Text[10, 13] chars:[10, 13, "bar"]
@@ -649,11 +649,11 @@ Document[0, 14]
   </aside>
 </aside>
 .
-Document[0, 20]
-  AsideBlock[0, 20] marker:[0, 1, "|"]
-    AsideBlock[1, 20] marker:[1, 2, "|"]
-      AsideBlock[2, 20] marker:[2, 3, "|"]
-        Paragraph[4, 20]
+Document[0, 19]
+  AsideBlock[0, 19] marker:[0, 1, "|"]
+    AsideBlock[1, 19] marker:[1, 2, "|"]
+      AsideBlock[2, 19] marker:[2, 3, "|"]
+        Paragraph[4, 19]
           Text[4, 7] chars:[4, 7, "foo"]
           SoftLineBreak[7, 8]
           Text[10, 13] chars:[10, 13, "bar"]
@@ -678,11 +678,11 @@ includes both the `|` and a following space. So *five spaces* are needed after t
   <p>not code</p>
 </aside>
 .
-Document[0, 26]
+Document[0, 25]
   AsideBlock[0, 11] marker:[0, 1, "|"]
     IndentedCodeBlock[6, 11]
-  AsideBlock[12, 26] marker:[12, 13, "|"]
-    Paragraph[17, 26]
+  AsideBlock[12, 25] marker:[12, 13, "|"]
+    Paragraph[17, 25]
       Text[17, 25] chars:[17, 25, "not code"]
 ````````````````````````````````
 
@@ -727,15 +727,15 @@ without aside to next blank line causes an interrupted list with a second list a
   <li>two</li>
 </ol>
 .
-Document[0, 16]
+Document[0, 15]
   AsideBlock[0, 9] marker:[0, 1, "|"]
     OrderedList[2, 9] isTight delimiter:'.'
       OrderedListItem[2, 9] open:[2, 4, "1."] isTight
         Paragraph[5, 9]
           Text[5, 8] chars:[5, 8, "one"]
-  OrderedList[9, 16] isTight start:2 delimiter:'.'
-    OrderedListItem[9, 16] open:[9, 11, "2."] isTight
-      Paragraph[12, 16]
+  OrderedList[9, 15] isTight start:2 delimiter:'.'
+    OrderedListItem[9, 15] open:[9, 11, "2."] isTight
+      Paragraph[12, 15]
         Text[12, 15] chars:[12, 15, "two"]
 ````````````````````````````````
 

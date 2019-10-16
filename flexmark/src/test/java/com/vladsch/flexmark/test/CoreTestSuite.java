@@ -3,9 +3,10 @@ package com.vladsch.flexmark.test;
 import com.vladsch.flexmark.ast.util.TextCollectingVisitorTest;
 import com.vladsch.flexmark.parser.internal.HtmlDeepParserTest;
 import com.vladsch.flexmark.parser.internal.LinkDestinationParserTest;
+import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
-@org.junit.runner.RunWith(Suite.class)
+@RunWith(Suite.class)
 @Suite.SuiteClasses({
         AbstractVisitorTest.class,
         DelimitedNodeTest.class,

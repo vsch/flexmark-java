@@ -15,7 +15,7 @@ import com.vladsch.flexmark.util.data.MutableDataHolder;
  * <p>
  * Create it with {@link #create()} and then configure it on the builders
  * <p>
- * The parsed emoji shortcuts text regions are turned into {@link com.vladsch.flexmark.ext.wikilink.WikiLink} nodes.
+ * The parsed emoji shortcuts text regions are turned into {@link WikiLink} nodes.
  */
 public class WikiLinkExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension {
     public static final DataKey<Boolean> ALLOW_INLINES = new DataKey<>("ALLOW_INLINES", false);

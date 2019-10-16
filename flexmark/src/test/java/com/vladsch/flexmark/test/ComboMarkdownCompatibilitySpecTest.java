@@ -23,18 +23,9 @@ public class ComboMarkdownCompatibilitySpecTest extends ComboExtraSpecTest {
             //.set(HtmlRenderer.RENDER_HEADER_ID, true)
             ;
 
-    private static final Map<String, DataHolder> optionsMap = new HashMap<>();
-    static {
-
-    }
-
     private static final Parser PARSER = Parser.builder(OPTIONS).build();
     // The spec says URL-escaping is optional, but the examples assume that it's enabled.
     private static final HtmlRenderer RENDERER = HtmlRenderer.builder(OPTIONS).build();
-
-    private static DataHolder optionsSet(String optionSet) {
-        return optionsMap.get(optionSet);
-    }
 
     public ComboMarkdownCompatibilitySpecTest(SpecExample example) {
         super(example);
@@ -48,7 +39,7 @@ public class ComboMarkdownCompatibilitySpecTest extends ComboExtraSpecTest {
     @Nullable
     @Override
     public DataHolder options(String optionSet) {
-        return optionsSet(optionSet);
+        return null;
     }
 
     @NotNull
@@ -57,7 +48,8 @@ public class ComboMarkdownCompatibilitySpecTest extends ComboExtraSpecTest {
         return SPEC_RESOURCE;
     }
     @Override
-    public @NotNull SpecExampleRenderer getSpecExampleRenderer(@Nullable DataHolder exampleOptions) {
-        return new FlexmarkSpecExampleRenderer(exampleOptions, PARSER, RENDERER, true);
+    public @NotNull SpecExampleRenderer getSpecExampleRenderer(@NotNull SpecExample example, @Nullable DataHolder exampleOptions) {
+        DataHolder combinedOptions = combineOptions(OPTIONS, exampleOptions);
+        return new FlexmarkSpecExampleRenderer(example, combinedOptions, PARSER.withOptions(combinedOptions), RENDERER.withOptions(combinedOptions), true);
     }
 }

@@ -20,8 +20,8 @@ no spaces between brackets
 .
 <p>[ [not wiki link]]</p>
 .
-Document[0, 19]
-  Paragraph[0, 19]
+Document[0, 18]
+  Paragraph[0, 18]
     Text[0, 2] chars:[0, 2, "[ "]
     LinkRef[2, 17] referenceOpen:[2, 3, "["] reference:[3, 16, "not wiki link"] referenceClose:[16, 17, "]"]
       Text[3, 16] chars:[3, 16, "not w …  link"]
@@ -36,8 +36,8 @@ no spaces between brackets
 .
 <p>[[not wiki link] ]</p>
 .
-Document[0, 19]
-  Paragraph[0, 19]
+Document[0, 18]
+  Paragraph[0, 18]
     Text[0, 1] chars:[0, 1, "["]
     LinkRef[1, 16] referenceOpen:[1, 2, "["] reference:[2, 15, "not wiki link"] referenceClose:[15, 16, "]"]
       Text[2, 15] chars:[2, 15, "not w …  link"]
@@ -52,8 +52,8 @@ simple wiki link
 .
 <p><a href="wiki-link">wiki link</a></p>
 .
-Document[0, 14]
-  Paragraph[0, 14]
+Document[0, 13]
+  Paragraph[0, 13]
     WikiLink[0, 13] linkOpen:[0, 2, "[["] link:[2, 11, "wiki link"] pageRef:[2, 11, "wiki link"] linkClose:[11, 13, "]]"]
       Text[2, 11] chars:[2, 11, "wiki link"]
 ````````````````````````````````
@@ -66,8 +66,8 @@ simple wiki link with anchor ref
 .
 <p><a href="wiki-link#anchor-ref">wiki link#anchor-ref</a></p>
 .
-Document[0, 25]
-  Paragraph[0, 25]
+Document[0, 24]
+  Paragraph[0, 24]
     WikiLink[0, 24] linkOpen:[0, 2, "[["] link:[2, 22, "wiki link#anchor-ref"] pageRef:[2, 22, "wiki link#anchor-ref"] linkClose:[22, 24, "]]"]
       Text[2, 22] chars:[2, 22, "wiki  … r-ref"]
 ````````````````````````````````
@@ -114,8 +114,8 @@ simple wiki link with escaped anchor-ref
 <a href="wiki-link\#anchor-ref">wiki link\#anchor-ref</a>
 <a href="wiki-link\#anchor-ref">wiki link\#anchor-ref</a></p>
 .
-Document[0, 106]
-  Paragraph[0, 106]
+Document[0, 105]
+  Paragraph[0, 105]
     WikiLink[0, 24] linkOpen:[0, 2, "[["] link:[2, 22, "wiki link#anchor-ref"] pageRef:[2, 22, "wiki link#anchor-ref"] linkClose:[22, 24, "]]"]
       Text[2, 22] chars:[2, 22, "wiki  … r-ref"]
     SoftLineBreak[24, 25]
@@ -195,8 +195,8 @@ wiki link with text
 .
 <p><a href="wiki-link">wiki text</a></p>
 .
-Document[0, 24]
-  Paragraph[0, 24]
+Document[0, 23]
+  Paragraph[0, 23]
     WikiLink[0, 23] linkOpen:[0, 2, "[["] link:[12, 21, "wiki link"] pageRef:[12, 21, "wiki link"] textSep:[11, 12, "|"] text:[2, 11, "wiki text"] linkClose:[21, 23, "]]"]
       Text[2, 11] chars:[2, 11, "wiki text"]
 ````````````````````````````````
@@ -223,8 +223,8 @@ wiki link with text
 .
 <p><a href="wiki-link">wiki text\</a></p>
 .
-Document[0, 25]
-  Paragraph[0, 25]
+Document[0, 24]
+  Paragraph[0, 24]
     WikiLink[0, 24] linkOpen:[0, 2, "[["] link:[13, 22, "wiki link"] pageRef:[13, 22, "wiki link"] textSep:[12, 13, "|"] text:[2, 12, "wiki text\"] linkClose:[22, 24, "]]"]
       Text[2, 12] chars:[2, 12, "wiki text\"]
 ````````````````````````````````
@@ -289,8 +289,8 @@ wiki link with text, muliple pipes with escapes
 <a href="more-text|wiki-link">wiki text</a>
 <a href="more-text|wiki-link">wiki text\</a></p>
 .
-Document[0, 213]
-  Paragraph[0, 213]
+Document[0, 212]
+  Paragraph[0, 212]
     WikiLink[0, 33] linkOpen:[0, 2, "[["] link:[12, 31, "more text|wiki link"] pageRef:[12, 31, "more text|wiki link"] textSep:[11, 12, "|"] text:[2, 11, "wiki text"] linkClose:[31, 33, "]]"]
       Text[2, 11] chars:[2, 11, "wiki text"]
     SoftLineBreak[33, 34]
@@ -435,8 +435,8 @@ simple wiki link with inlines disabled
 .
 <p><a href="**wiki-link**">**wiki link**</a></p>
 .
-Document[0, 18]
-  Paragraph[0, 18]
+Document[0, 17]
+  Paragraph[0, 17]
     WikiLink[0, 17] linkOpen:[0, 2, "[["] link:[2, 15, "**wiki link**"] pageRef:[2, 15, "**wiki link**"] linkClose:[15, 17, "]]"]
       Text[2, 15] chars:[2, 15, "**wik … ink**"]
 ````````````````````````````````
@@ -707,8 +707,8 @@ simple wiki link with ! before
 .
 <p>!<a href="wiki-link">wiki link</a></p>
 .
-Document[0, 15]
-  Paragraph[0, 15]
+Document[0, 14]
+  Paragraph[0, 14]
     Text[0, 1] chars:[0, 1, "!"]
     WikiLink[1, 14] linkOpen:[1, 3, "[["] link:[3, 12, "wiki link"] pageRef:[3, 12, "wiki link"] linkClose:[12, 14, "]]"]
       Text[3, 12] chars:[3, 12, "wiki link"]
@@ -722,8 +722,8 @@ wiki link with text with ! before
 .
 <p>!<a href="wiki-link">wiki text</a></p>
 .
-Document[0, 25]
-  Paragraph[0, 25]
+Document[0, 24]
+  Paragraph[0, 24]
     Text[0, 1] chars:[0, 1, "!"]
     WikiLink[1, 24] linkOpen:[1, 3, "[["] link:[13, 22, "wiki link"] pageRef:[13, 22, "wiki link"] textSep:[12, 13, "|"] text:[3, 12, "wiki text"] linkClose:[22, 24, "]]"]
       Text[3, 12] chars:[3, 12, "wiki text"]
@@ -737,8 +737,8 @@ reference following will be a reference, even if not defined
 .
 <p><a href="wiki-link">wiki link</a>[ref]</p>
 .
-Document[0, 19]
-  Paragraph[0, 19]
+Document[0, 18]
+  Paragraph[0, 18]
     WikiLink[0, 13] linkOpen:[0, 2, "[["] link:[2, 11, "wiki link"] pageRef:[2, 11, "wiki link"] linkClose:[11, 13, "]]"]
       Text[2, 11] chars:[2, 11, "wiki link"]
     LinkRef[13, 18] referenceOpen:[13, 14, "["] reference:[14, 17, "ref"] referenceClose:[17, 18, "]"]
@@ -755,7 +755,7 @@ reference following will be a reference
 .
 <p><a href="wiki-link">wiki link</a><a href="/url">ref</a></p>
 .
-Document[0, 32]
+Document[0, 31]
   Paragraph[0, 19] isTrailingBlankLine
     WikiLink[0, 13] linkOpen:[0, 2, "[["] link:[2, 11, "wiki link"] pageRef:[2, 11, "wiki link"] linkClose:[11, 13, "]]"]
       Text[2, 11] chars:[2, 11, "wiki link"]
@@ -772,8 +772,8 @@ dummy reference following will be an empty reference
 .
 <p><a href="wiki-link">wiki link</a>[]</p>
 .
-Document[0, 16]
-  Paragraph[0, 16]
+Document[0, 15]
+  Paragraph[0, 15]
     WikiLink[0, 13] linkOpen:[0, 2, "[["] link:[2, 11, "wiki link"] pageRef:[2, 11, "wiki link"] linkClose:[11, 13, "]]"]
       Text[2, 11] chars:[2, 11, "wiki link"]
     LinkRef[13, 15] referenceOpen:[13, 14, "["] reference:[14, 14] referenceClose:[14, 15, "]"]
@@ -787,8 +787,8 @@ reference inside is not a wiki link but a link ref with brackets around it
 .
 <p>[[not wiki link][ref]]</p>
 .
-Document[0, 23]
-  Paragraph[0, 23]
+Document[0, 22]
+  Paragraph[0, 22]
     Text[0, 1] chars:[0, 1, "["]
     LinkRef[1, 21] textOpen:[1, 2, "["] text:[2, 15, "not wiki link"] textClose:[15, 16, "]"] referenceOpen:[16, 17, "["] reference:[17, 20, "ref"] referenceClose:[20, 21, "]"]
       Text[2, 15] chars:[2, 15, "not w …  link"]
@@ -803,8 +803,8 @@ dummy reference inside is not a wiki link but a link ref with brackets around it
 .
 <p>[[not wiki link][]]</p>
 .
-Document[0, 20]
-  Paragraph[0, 20]
+Document[0, 19]
+  Paragraph[0, 19]
     Text[0, 1] chars:[0, 1, "["]
     LinkRef[1, 18] referenceOpen:[1, 2, "["] reference:[2, 15, "not wiki link"] referenceClose:[15, 16, "]"] textOpen:[16, 17, "["] textClose:[17, 18, "]"]
       Text[2, 15] chars:[2, 15, "not w …  link"]
@@ -817,8 +817,8 @@ Document[0, 20]
 .
 <p><a href="wiki-link">wiki link</a> [^link][ref] <a href="^wiki-link">^wiki link</a></p>
 .
-Document[0, 42]
-  Paragraph[0, 42]
+Document[0, 41]
+  Paragraph[0, 41]
     WikiLink[0, 13] linkOpen:[0, 2, "[["] link:[2, 11, "wiki link"] pageRef:[2, 11, "wiki link"] linkClose:[11, 13, "]]"]
       Text[2, 11] chars:[2, 11, "wiki link"]
     Text[13, 14] chars:[13, 14, " "]
@@ -837,8 +837,8 @@ Exclamation before is just text
 .
 <p>!<a href="wiki-link">wiki link</a> [^link][ref] <a href="^wiki-link">^wiki link</a> <a href="wiki">wiki</a>[ref]</p>
 .
-Document[0, 57]
-  Paragraph[0, 57]
+Document[0, 56]
+  Paragraph[0, 56]
     Text[0, 1] chars:[0, 1, "!"]
     WikiLink[1, 14] linkOpen:[1, 3, "[["] link:[3, 12, "wiki link"] pageRef:[3, 12, "wiki link"] linkClose:[12, 14, "]]"]
       Text[3, 12] chars:[3, 12, "wiki link"]
@@ -903,8 +903,8 @@ With empty anchor ref
 .
 <p><a href="wiki-link#">wiki link#</a></p>
 .
-Document[0, 16]
-  Paragraph[0, 16]
+Document[0, 15]
+  Paragraph[0, 15]
     WikiLink[0, 14] linkOpen:[0, 2, "[["] link:[2, 12, "wiki link#"] pageRef:[2, 12, "wiki link#"] linkClose:[12, 14, "]]"]
       Text[2, 12] chars:[2, 12, "wiki link#"]
 ````````````````````````````````
@@ -931,8 +931,8 @@ With Anchor ref
 .
 <p><a href="wiki-link#anchor-ref">wiki link#anchor-ref</a></p>
 .
-Document[0, 26]
-  Paragraph[0, 26]
+Document[0, 25]
+  Paragraph[0, 25]
     WikiLink[0, 24] linkOpen:[0, 2, "[["] link:[2, 22, "wiki link#anchor-ref"] pageRef:[2, 22, "wiki link#anchor-ref"] linkClose:[22, 24, "]]"]
       Text[2, 22] chars:[2, 22, "wiki  … r-ref"]
 ````````````````````````````````
@@ -959,8 +959,8 @@ With text, empty anchor ref
 .
 <p><a href="wiki-link#">wiki text</a></p>
 .
-Document[0, 26]
-  Paragraph[0, 26]
+Document[0, 25]
+  Paragraph[0, 25]
     WikiLink[0, 24] linkOpen:[0, 2, "[["] link:[12, 22, "wiki link#"] pageRef:[12, 22, "wiki link#"] textSep:[11, 12, "|"] text:[2, 11, "wiki text"] linkClose:[22, 24, "]]"]
       Text[2, 11] chars:[2, 11, "wiki text"]
 ````````````````````````````````
@@ -987,8 +987,8 @@ With text, anchor ref
 .
 <p><a href="wiki-link#anchor-ref">wiki text</a></p>
 .
-Document[0, 36]
-  Paragraph[0, 36]
+Document[0, 35]
+  Paragraph[0, 35]
     WikiLink[0, 34] linkOpen:[0, 2, "[["] link:[12, 32, "wiki link#anchor-ref"] pageRef:[12, 32, "wiki link#anchor-ref"] textSep:[11, 12, "|"] text:[2, 11, "wiki text"] linkClose:[32, 34, "]]"]
       Text[2, 11] chars:[2, 11, "wiki text"]
 ````````````````````````````````
@@ -1277,8 +1277,8 @@ With empty anchor ref
 <a href="wiki'link#">wiki&rsquo;link#</a>
 <a href="'wiki-link#'">&rsquo;wiki link#&rsquo;</a></p>
 .
-Document[0, 68]
-  Paragraph[0, 68]
+Document[0, 67]
+  Paragraph[0, 67]
     WikiLink[0, 15] linkOpen:[0, 2, "[["] link:[2, 13, "wiki--link#"] pageRef:[2, 13, "wiki--link#"] linkClose:[13, 15, "]]"]
       Text[2, 6] chars:[2, 6, "wiki"]
       TypographicSmarts[6, 8] typographic: &ndash; 
@@ -1350,8 +1350,8 @@ With Anchor ref
 <a href="wiki'link#anchor-ref">wiki&rsquo;link#anchor-ref</a>
 <a href="'wiki-link'#anchor-ref">&rsquo;wiki link&rsquo;#anchor-ref</a></p>
 .
-Document[0, 109]
-  Paragraph[0, 109]
+Document[0, 108]
+  Paragraph[0, 108]
     WikiLink[0, 25] linkOpen:[0, 2, "[["] link:[2, 23, "wiki--link#anchor-ref"] pageRef:[2, 23, "wiki--link#anchor-ref"] linkClose:[23, 25, "]]"]
       Text[2, 6] chars:[2, 6, "wiki"]
       TypographicSmarts[6, 8] typographic: &ndash; 
@@ -1427,8 +1427,8 @@ With text, empty anchor ref
 <a href="wiki'link#">wiki&rsquo;link</a>
 <a href="'wiki-link'#">&rsquo;wiki link&rsquo;</a></p>
 .
-Document[0, 140]
-  Paragraph[0, 140]
+Document[0, 139]
+  Paragraph[0, 139]
     WikiLink[0, 24] linkOpen:[0, 2, "[["] link:[12, 22, "wiki link#"] pageRef:[12, 22, "wiki link#"] textSep:[11, 12, "|"] text:[2, 11, "wiki text"] linkClose:[22, 24, "]]"]
       Text[2, 11] chars:[2, 11, "wiki text"]
     SoftLineBreak[25, 26]
@@ -1511,8 +1511,8 @@ With text, anchor ref
 <a href="wiki'link#anchor-ref">wiki&rsquo;link</a>
 <a href="'wiki-link'#anchor-ref">&rsquo;wiki link&rsquo;</a></p>
 .
-Document[0, 190]
-  Paragraph[0, 190]
+Document[0, 189]
+  Paragraph[0, 189]
     WikiLink[0, 34] linkOpen:[0, 2, "[["] link:[12, 32, "wiki link#anchor-ref"] pageRef:[12, 32, "wiki link#anchor-ref"] textSep:[11, 12, "|"] text:[2, 11, "wiki text"] linkClose:[32, 34, "]]"]
       Text[2, 11] chars:[2, 11, "wiki text"]
     SoftLineBreak[35, 36]
@@ -2148,8 +2148,8 @@ simple wiki image ignored without wiki images option
 .
 <p>!<a href="wiki-image">wiki image</a></p>
 .
-Document[0, 16]
-  Paragraph[0, 16]
+Document[0, 15]
+  Paragraph[0, 15]
     Text[0, 1] chars:[0, 1, "!"]
     WikiLink[1, 15] linkOpen:[1, 3, "[["] link:[3, 13, "wiki image"] pageRef:[3, 13, "wiki image"] linkClose:[13, 15, "]]"]
       Text[3, 13] chars:[3, 13, "wiki image"]

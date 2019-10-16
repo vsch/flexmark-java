@@ -1,9 +1,10 @@
 package com.vladsch.flexmark.html;
 
 import com.vladsch.flexmark.html.renderer.HeaderIdGeneratorFactory;
+import com.vladsch.flexmark.util.builder.Extension;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 
-public interface RendererExtension extends com.vladsch.flexmark.util.builder.Extension {
+public interface RendererExtension extends Extension {
     /**
      * This method is called first on all extensions so that they can adjust the options that must be
      * common to all extensions.

@@ -17,6 +17,7 @@ import com.vladsch.flexmark.util.data.*;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.CharSubSequence;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 import java.io.Reader;
@@ -387,11 +388,11 @@ public class Parser implements IParse {
     }
 
     @NotNull
-    public Parser withOptions(@org.jetbrains.annotations.Nullable DataHolder options) {
+    public Parser withOptions(@Nullable DataHolder options) {
         return options == null ? this : new Parser(new Builder(builder, options));
     }
 
-    @org.jetbrains.annotations.Nullable
+    @Nullable
     @Override
     public DataHolder getOptions() {
         return new DataSet(builder);

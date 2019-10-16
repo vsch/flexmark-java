@@ -181,8 +181,8 @@ plain ^superscript^ text e^*i*pi^ = -1
     </w:p>
 </w:body>
 .
-Document[0, 39]
-  Paragraph[0, 39]
+Document[0, 38]
+  Paragraph[0, 38]
     Text[0, 6] chars:[0, 6, "plain "]
     Superscript[6, 19] textOpen:[6, 7, "^"] text:[7, 18, "superscript"] textClose:[18, 19, "^"]
       Text[7, 18] chars:[7, 18, "super … cript"]

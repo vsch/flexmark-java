@@ -19,8 +19,8 @@ foo http://one.org/ bar http://two.org/
 .
 <p>foo <a href="http://one.org/">http://one.org/</a> bar <a href="http://two.org/">http://two.org/</a></p>
 .
-Document[0, 40]
-  Paragraph[0, 40]
+Document[0, 39]
+  Paragraph[0, 39]
     TextBase[0, 39] chars:[0, 39, "foo h … .org/"]
       Text[0, 4] chars:[0, 4, "foo "]
       AutoLink[4, 19] text:[4, 19, "http://one.org/"] pageRef:[4, 19, "http://one.org/"]
@@ -36,8 +36,8 @@ foo http://one.org/ bar `code` baz http://two.org/
 .
 <p>foo <a href="http://one.org/">http://one.org/</a> bar <code>code</code> baz <a href="http://two.org/">http://two.org/</a></p>
 .
-Document[0, 51]
-  Paragraph[0, 51]
+Document[0, 50]
+  Paragraph[0, 50]
     TextBase[0, 24] chars:[0, 24, "foo h …  bar "]
       Text[0, 4] chars:[0, 4, "foo "]
       AutoLink[4, 19] text:[4, 19, "http://one.org/"] pageRef:[4, 19, "http://one.org/"]
@@ -59,8 +59,8 @@ foo http://one.org/#anchor bar `code` baz http://two.org/#anchor
 .
 <p>foo <a href="http://one.org/#anchor">http://one.org/#anchor</a> bar <code>code</code> baz <a href="http://two.org/#anchor">http://two.org/#anchor</a></p>
 .
-Document[0, 65]
-  Paragraph[0, 65]
+Document[0, 64]
+  Paragraph[0, 64]
     TextBase[0, 31] chars:[0, 31, "foo h …  bar "]
       Text[0, 4] chars:[0, 4, "foo "]
       AutoLink[4, 26] text:[4, 26, "http://one.org/#anchor"] pageRef:[4, 19, "http://one.org/"] anchorMarker:[19, 20, "#"] anchorRef:[20, 26, "anchor"]
@@ -114,8 +114,8 @@ http://example.com/one. Example 2 (see http://example.com/two). Example 3: http:
 .
 <p><a href="http://example.com/one">http://example.com/one</a>. Example 2 (see <a href="http://example.com/two">http://example.com/two</a>). Example 3: <a href="http://example.com/foo_(bar)">http://example.com/foo_(bar)</a></p>
 .
-Document[0, 104]
-  Paragraph[0, 104]
+Document[0, 103]
+  Paragraph[0, 103]
     TextBase[0, 103] chars:[0, 103, "http: … (bar)"]
       AutoLink[0, 22] text:[0, 22, "http://example.com/one"] pageRef:[0, 22, "http://example.com/one"]
         Text[0, 22] chars:[0, 22, "http: … m/one"]
@@ -135,8 +135,8 @@ www.example.com
 .
 <p><a href="http://www.example.com">www.example.com</a></p>
 .
-Document[0, 16]
-  Paragraph[0, 16]
+Document[0, 15]
+  Paragraph[0, 15]
     TextBase[0, 15] chars:[0, 15, "www.e … e.com"]
       AutoLink[0, 15] text:[0, 15, "www.example.com"] pageRef:[0, 15, "www.example.com"]
         Text[0, 15] chars:[0, 15, "www.e … e.com"]
@@ -148,8 +148,8 @@ foo@example.com
 .
 <p><a href="mailto:foo@example.com">foo@example.com</a></p>
 .
-Document[0, 16]
-  Paragraph[0, 16]
+Document[0, 15]
+  Paragraph[0, 15]
     TextBase[0, 15] chars:[0, 15, "foo@e … e.com"]
       MailLink[0, 15] text:[0, 15, "foo@example.com"]
         Text[0, 15] chars:[0, 15, "foo@e … e.com"]
@@ -168,8 +168,8 @@ foo@com
 .
 <p><a href="http://example.com">http://example.com</a></p>
 .
-Document[0, 21]
-  Paragraph[0, 21]
+Document[0, 20]
+  Paragraph[0, 20]
     AutoLink[0, 20] open:[0, 1, "<"] text:[1, 19, "http://example.com"] pageRef:[1, 19, "http://example.com"] close:[19, 20, ">"]
 ````````````````````````````````
 
@@ -181,8 +181,8 @@ https://google.com/abc?hello=456&world=789
 .
 <p><a href="https://google.com/abc?hello=456&amp;world=789">https://google.com/abc?hello=456&amp;world=789</a></p>
 .
-Document[0, 43]
-  Paragraph[0, 43]
+Document[0, 42]
+  Paragraph[0, 42]
     TextBase[0, 42] chars:[0, 42, "https … d=789"]
       AutoLink[0, 42] text:[0, 42, "https://google.com/abc?hello=456&world=789"] pageRef:[0, 42, "https://google.com/abc?hello=456&world=789"]
         Text[0, 42] chars:[0, 42, "https … d=789"]
@@ -282,7 +282,7 @@ http://example.com
 <pre><code>http://example.com 
 </code></pre>
 .
-Document[0, 28]
+Document[0, 27]
   FencedCodeBlock[0, 27] open:[0, 3, "```"] content:[4, 24] lines[1] close:[24, 27, "```"]
     Text[4, 24] chars:[4, 24, "http: … com \n"]
 ````````````````````````````````
@@ -318,8 +318,8 @@ auto link www.example.com
 .
 <p>auto link <a href="http://www.example.com">www.example.com</a></p>
 .
-Document[0, 26]
-  Paragraph[0, 26]
+Document[0, 25]
+  Paragraph[0, 25]
     TextBase[0, 25] chars:[0, 25, "auto  … e.com"]
       Text[0, 10] chars:[0, 10, "auto link "]
       AutoLink[10, 25] text:[10, 25, "www.example.com"] pageRef:[10, 25, "www.example.com"]
@@ -351,8 +351,8 @@ Issue #265, Autolink extension converts autolinks in inline code nodes in code
 .
 <p><code>http://..../wiki</code></p>
 .
-Document[0, 19]
-  Paragraph[0, 19]
+Document[0, 18]
+  Paragraph[0, 18]
     Code[0, 18] textOpen:[0, 1, "`"] text:[1, 17, "http: … //..../wiki"] textClose:[17, 18, "`"]
       Text[1, 17] chars:[1, 17, "http: … /wiki"]
 ````````````````````````````````
@@ -367,8 +367,8 @@ https://youtu.be/L1--OW4j0Pw
 .
 <p><a href="https://youtu.be/L1--OW4j0Pw">https://youtu.be/L1--OW4j0Pw</a></p>
 .
-Document[0, 29]
-  Paragraph[0, 29]
+Document[0, 28]
+  Paragraph[0, 28]
     TextBase[0, 28] chars:[0, 28, "https … 4j0Pw"]
       AutoLink[0, 28] text:[0, 28, "https://youtu.be/L1--OW4j0Pw"] pageRef:[0, 28, "https://youtu.be/L1--OW4j0Pw"]
         Text[0, 28] chars:[0, 28, "https … 4j0Pw"]
@@ -454,8 +454,8 @@ http://
 .
 <p><a href="http://">http://</a></p>
 .
-Document[0, 8]
-  Paragraph[0, 8]
+Document[0, 7]
+  Paragraph[0, 7]
     TextBase[0, 7] chars:[0, 7, "http://"]
       AutoLink[0, 7] text:[0, 7, "http://"] pageRef:[0, 7, "http://"]
         Text[0, 7] chars:[0, 7, "http://"]
@@ -467,8 +467,8 @@ http://abc http://
 .
 <p><a href="http://abc">http://abc</a> <a href="http://">http://</a></p>
 .
-Document[0, 19]
-  Paragraph[0, 19]
+Document[0, 18]
+  Paragraph[0, 18]
     TextBase[0, 18] chars:[0, 18, "http: … tp://"]
       AutoLink[0, 10] text:[0, 10, "http://abc"] pageRef:[0, 10, "http://abc"]
         Text[0, 10] chars:[0, 10, "http://abc"]
@@ -483,8 +483,8 @@ test http://
 .
 <p>test <a href="http://">http://</a></p>
 .
-Document[0, 13]
-  Paragraph[0, 13]
+Document[0, 12]
+  Paragraph[0, 12]
     TextBase[0, 12] chars:[0, 12, "test  … tp://"]
       Text[0, 5] chars:[0, 5, "test "]
       AutoLink[5, 12] text:[5, 12, "http://"] pageRef:[5, 12, "http://"]
@@ -497,8 +497,8 @@ test http://
 .
 <p>test <a href="http://">http://</a></p>
 .
-Document[0, 16]
-  Paragraph[0, 16]
+Document[0, 15]
+  Paragraph[0, 15]
     TextBase[0, 12] chars:[0, 12, "test  … tp://"]
       Text[0, 5] chars:[0, 5, "test "]
       AutoLink[5, 12] text:[5, 12, "http://"] pageRef:[5, 12, "http://"]
@@ -511,8 +511,8 @@ test custom.protocol-1+2://
 .
 <p>test <a href="custom.protocol-1+2://">custom.protocol-1+2://</a></p>
 .
-Document[0, 31]
-  Paragraph[0, 31]
+Document[0, 30]
+  Paragraph[0, 30]
     TextBase[0, 27] chars:[0, 27, "test  … +2://"]
       Text[0, 5] chars:[0, 5, "test "]
       AutoLink[5, 27] text:[5, 27, "custom.protocol-1+2://"] pageRef:[5, 27, "custom.protocol-1+2://"]
@@ -525,8 +525,8 @@ test custom.protocol-1+2://abc
 .
 <p>test <a href="custom.protocol-1+2://abc">custom.protocol-1+2://abc</a></p>
 .
-Document[0, 31]
-  Paragraph[0, 31]
+Document[0, 30]
+  Paragraph[0, 30]
     TextBase[0, 30] chars:[0, 30, "test  … //abc"]
       Text[0, 5] chars:[0, 5, "test "]
       AutoLink[5, 30] text:[5, 30, "custom.protocol-1+2://abc"] pageRef:[5, 30, "custom.protocol-1+2://abc"]
@@ -543,13 +543,32 @@ Issue of autolinks not parsed after built in auto link
 .
 <p><a href="http://test.com">http://test.com</a> <a href="http://www.vladsch.com">www.vladsch.com</a></p>
 .
-Document[0, 34]
-  Paragraph[0, 34]
+Document[0, 33]
+  Paragraph[0, 33]
     AutoLink[0, 17] open:[0, 1, "<"] text:[1, 16, "http://test.com"] pageRef:[1, 16, "http://test.com"] close:[16, 17, ">"]
     TextBase[17, 33] chars:[17, 33, " www. … h.com"]
       Text[17, 18] chars:[17, 18, " "]
       AutoLink[18, 33] text:[18, 33, "www.vladsch.com"] pageRef:[18, 33, "www.vladsch.com"]
         Text[18, 33] chars:[18, 33, "www.v … h.com"]
+````````````````````````````````
+
+
+## Issue xxx.3
+
+Issue of autolinks not parsed after built in auto link
+
+```````````````````````````````` example Issue xxx.3: 1
+<http://foo.bar/baz bim>
+.
+<p>&lt;<a href="http://foo.bar/baz">http://foo.bar/baz</a> bim&gt;</p>
+.
+Document[0, 24]
+  Paragraph[0, 24]
+    TextBase[0, 24] chars:[0, 24, "<http …  bim>"]
+      Text[0, 1] chars:[0, 1, "<"]
+      AutoLink[1, 19] text:[1, 19, "http://foo.bar/baz"] pageRef:[1, 19, "http://foo.bar/baz"]
+        Text[1, 19] chars:[1, 19, "http: … r/baz"]
+      Text[19, 24] chars:[19, 24, " bim>"]
 ````````````````````````````````
 
 

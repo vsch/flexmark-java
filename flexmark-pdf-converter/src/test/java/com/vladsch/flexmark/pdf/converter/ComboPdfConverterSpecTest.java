@@ -62,8 +62,8 @@ public class ComboPdfConverterSpecTest extends ComboSpecTestCase {
     }
 
     @Override
-    public @NotNull SpecExampleRenderer getSpecExampleRenderer(@Nullable DataHolder exampleOptions) {
-        return new FlexmarkSpecExampleRenderer(exampleOptions, PARSER, RENDERER, true) {
+    public @NotNull SpecExampleRenderer getSpecExampleRenderer(@NotNull SpecExample example, @Nullable DataHolder exampleOptions) {
+        return new FlexmarkSpecExampleRenderer(example, exampleOptions, PARSER, RENDERER, true) {
             @Override
             public @NotNull String renderHtml() {
                 String html = super.renderHtml();

@@ -58,7 +58,7 @@ indented code
 2. numbered item 2
 
 .
-Document[0, 304]
+Document[0, 303]
   Heading[0, 8] textOpen:[0, 1, "#"] text:[1, 8, "Heading"]
     Text[1, 8] chars:[1, 8, "Heading"]
   ThematicBreak[9, 14]
@@ -78,12 +78,12 @@ Document[0, 304]
   FencedCodeBlock[94, 181] open:[94, 97, "~~~"] info:[97, 101, "info"] content:[102, 178] lines[3] close:[178, 181, "~~~"]
     Text[102, 178] chars:[102, 178, "      … code\n"]
   IndentedCodeBlock[188, 260]
-  OrderedList[260, 304] isTight delimiter:'.'
+  OrderedList[260, 303] isTight delimiter:'.'
     OrderedListItem[260, 282] open:[260, 262, "1."] isTight
       Paragraph[263, 282]
         Text[263, 278] chars:[263, 278, "numbe … tem 1"]
-    OrderedListItem[282, 304] open:[282, 284, "1."] isTight
-      Paragraph[285, 304]
+    OrderedListItem[282, 303] open:[282, 284, "1."] isTight
+      Paragraph[285, 303]
         Text[285, 300] chars:[285, 300, "numbe … tem 2"]
 ````````````````````````````````
 
@@ -884,10 +884,10 @@ paragraph
 
 another paragraph
 .
-Document[0, 31]
+Document[0, 30]
   Paragraph[0, 10] isTrailingBlankLine
     Text[0, 9] chars:[0, 9, "paragraph"]
-  Paragraph[13, 31]
+  Paragraph[13, 30]
     Text[13, 30] chars:[13, 30, "anoth … graph"]
 ````````````````````````````````
 
@@ -1987,11 +1987,11 @@ line 1
 
 line 2
 .
-Document[0, 36]
+Document[0, 35]
   Paragraph[0, 7] isTrailingBlankLine
     Text[0, 6] chars:[0, 6, "line 1"]
   HtmlBlock[8, 28]
-  Paragraph[29, 36]
+  Paragraph[29, 35]
     Text[29, 35] chars:[29, 35, "line 2"]
 ````````````````````````````````
 
@@ -2009,11 +2009,11 @@ line 1
 
 line 2
 .
-Document[0, 34]
+Document[0, 33]
   Paragraph[0, 7] isTrailingBlankLine
     Text[0, 6] chars:[0, 6, "line 1"]
   HtmlBlock[8, 26]
-  Paragraph[27, 34]
+  Paragraph[27, 33]
     Text[27, 33] chars:[27, 33, "line 2"]
 ````````````````````````````````
 
@@ -2038,7 +2038,7 @@ not a list item
 
 not a list item
 .
-Document[0, 51]
+Document[0, 50]
   BulletList[0, 33] isLoose
     BulletListItem[0, 14] open:[0, 1, "*"] isLoose
       Paragraph[2, 14]
@@ -2048,7 +2048,7 @@ Document[0, 51]
       Paragraph[20, 32]
         Text[20, 31] chars:[20, 31, "list  … tem 2"]
     BulletListItem[32, 33] open:[32, 33, "*"] isLoose
-  Paragraph[35, 51]
+  Paragraph[35, 50]
     Text[35, 50] chars:[35, 50, "not a …  item"]
 ````````````````````````````````
 
@@ -2067,7 +2067,7 @@ not a list item
 
 not a list item
 .
-Document[0, 50]
+Document[0, 49]
   BulletList[0, 32] isTight
     BulletListItem[0, 14] open:[0, 1, "*"] isTight
       Paragraph[2, 14]
@@ -2077,7 +2077,7 @@ Document[0, 50]
       Paragraph[19, 31]
         Text[19, 30] chars:[19, 30, "list  … tem 2"]
     BulletListItem[31, 32] open:[31, 32, "*"] isTight
-  Paragraph[34, 50]
+  Paragraph[34, 49]
     Text[34, 49] chars:[34, 49, "not a …  item"]
 ````````````````````````````````
 

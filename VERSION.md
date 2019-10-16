@@ -9,7 +9,8 @@ flexmark-java
 - [Next 0.60.0](#next-0600)
     - [0.5.9.3](#0593)
     - [API Change](#api-change)
-    - [Next 0.5.9.9](#next-0599)
+    - [Next 0.5.9.11](#next-05911)
+    - [0.5.9.9](#0599)
     - [0.5.9.7](#0597)
     - [0.5.9.5](#0595)
     - [0.5.9.1](#0591)
@@ -178,15 +179,22 @@ flexmark-java
     * `com.vladsch.flexmark.util.ast.NodeAdaptingVisitHandler`
     * `com.vladsch.flexmark.util.ast.NodeAdaptingVisitor`
 
-### Next 0.5.9.9
+### Next 0.5.9.11
 
 * [ ] Fix: Change spec example to variable number of sections
 * [ ] Fix: Create base classes for handling spec tests without needing to inherit from
       superclass.
-* [ ] Fix: Rewrite combo spec and full spec to be merged like markdown navigator action spec
-      test.
+* [ ] Fix: URGENT: Rewrite combo spec and full spec to be merged like markdown navigator action
+      spec test and not requiring deep inheritance dependencies. Merge full test spec and
+      individual tests. for example see MdNav `LightPlatformCodeInsightSpecTestCase`
 * [ ] Add: yaml front matter configurator for modules. See:
       [Yaml Front Matter Configuration](../../wiki/Yaml-Front-Matter-Configuration)
+
+### 0.5.9.9
+
+* Fix: `NO_EOL` option for tests was applied inconsistently.
+* Fix: add `SpecExample` argument to `getSpecExampleRenderer`
+* Fix: add `SpecExampleParse` argument to `addSpecExample`
 * Fix: regression bug [#372, \[Regression?\] Attributes extension not applied to \`code\` tag of code blocks]
   * Add: `AttributesExtension.FENCED_CODE_ADD_ATTRIBUTES`, default
     `FencedCodeAddType.ADD_TO_PRE_CODE` for backward compatibility with 0.42, but if this is

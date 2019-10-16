@@ -144,7 +144,7 @@ public class TocOptionsParserTest extends ComboSpecTestCase {
         }
 
         @Override
-        public @org.jetbrains.annotations.NotNull Node parse(@NotNull BasedSequence input) {
+        public @NotNull Node parse(@NotNull BasedSequence input) {
             // here we make the lexer parse the input sequence from start to finish and accumulate everything in custom nodes
             BasedSequence[] lines = input.split('\n');
             ParserNode example = new ParserNode("Example", input, null, null);
@@ -175,9 +175,9 @@ public class TocOptionsParserTest extends ComboSpecTestCase {
             return example;
         }
 
-        @org.jetbrains.annotations.NotNull
+        @NotNull
         @Override
-        public IParse withOptions(@org.jetbrains.annotations.Nullable DataHolder options) {
+        public IParse withOptions(@Nullable DataHolder options) {
             return new Parser(options);
         }
     }
@@ -244,9 +244,9 @@ public class TocOptionsParserTest extends ComboSpecTestCase {
             }
         }
 
-        @org.jetbrains.annotations.NotNull
+        @NotNull
         @Override
-        public IRender withOptions(@org.jetbrains.annotations.Nullable DataHolder options) {
+        public IRender withOptions(@Nullable DataHolder options) {
             return new Renderer(options);
         }
     }
@@ -274,7 +274,8 @@ public class TocOptionsParserTest extends ComboSpecTestCase {
 
 
     @Override
-    public @NotNull SpecExampleRenderer getSpecExampleRenderer(@Nullable DataHolder exampleOptions) {
-        return new FlexmarkSpecExampleRenderer(exampleOptions, PARSER, RENDERER, true);
+    public @NotNull SpecExampleRenderer getSpecExampleRenderer(@NotNull SpecExample example, @Nullable DataHolder exampleOptions) {
+        DataHolder combinedOptions = combineOptions(OPTIONS, exampleOptions);
+        return new FlexmarkSpecExampleRenderer(example, combinedOptions, PARSER.withOptions(combinedOptions), RENDERER.withOptions(combinedOptions), true);
     }
 }

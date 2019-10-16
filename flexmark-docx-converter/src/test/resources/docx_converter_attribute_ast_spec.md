@@ -228,8 +228,8 @@ basic text
     </w:p>
 </w:body>
 .
-Document[0, 58]
-  Paragraph[0, 58]
+Document[0, 57]
+  Paragraph[0, 57]
     AttributesNode[0, 19] textOpen:[0, 1, "{"] text:[1, 18, "style=\"color:red\""] textClose:[18, 19, "}"]
       AttributeNode[1, 18] name:[1, 6, "style"] sep:[6, 7, "="] valueOpen:[7, 8, "\""] value:[8, 17, "color:red"] valueClose:[17, 18, "\""]
     Text[19, 25] chars:[19, 25, "plain "]
@@ -783,8 +783,8 @@ plain text{style="color:blue"}
     </w:p>
 </w:body>
 .
-Document[0, 31]
-  Paragraph[0, 31]
+Document[0, 30]
+  Paragraph[0, 30]
     TextBase[0, 10] chars:[0, 10, "plain text"]
       Text[0, 10] chars:[0, 10, "plain text"]
     AttributesNode[10, 30] textOpen:[10, 11, "{"] text:[11, 29, "style=\"color:blue\""] textClose:[29, 30, "}"]
@@ -1506,8 +1506,8 @@ basic text
     </w:p>
 </w:body>
 .
-Document[0, 78]
-  Paragraph[0, 78]
+Document[0, 77]
+  Paragraph[0, 77]
     AttributesNode[0, 19] textOpen:[0, 1, "{"] text:[1, 18, "style=\"color:red\""] textClose:[18, 19, "}"]
       AttributeNode[1, 18] name:[1, 6, "style"] sep:[6, 7, "="] valueOpen:[7, 8, "\""] value:[8, 17, "color:red"] valueClose:[17, 18, "\""]
     Text[19, 25] chars:[19, 25, "plain "]

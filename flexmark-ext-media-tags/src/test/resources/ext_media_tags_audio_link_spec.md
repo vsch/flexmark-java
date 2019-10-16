@@ -20,8 +20,8 @@ Media type is guessed based on extension.
 .
 <p><audio title="Audio Test" controls=""><source src="https://hpr.dogphilosophy.net/test/opus.opus" type="audio/ogg; codecs=opus" />Your browser does not support the audio element.</audio></p>
 .
-Document[0, 61]
-  Paragraph[0, 61]
+Document[0, 60]
+  Paragraph[0, 60]
     AudioLink[0, 60] textOpen:[0, 3, "!A["] text:[3, 13, "Audio Test"] textClose:[13, 14, "]"] linkOpen:[14, 15, "("] url:[15, 59, "https://hpr.dogphilosophy.net/test/opus.opus"] linkClose:[59, 60, ")"]
       Text[3, 13] chars:[3, 13, "Audio Test"]
 ````````````````````````````````
@@ -32,8 +32,8 @@ Document[0, 61]
 .
 <p><audio title="Audio Test" controls=""><source src="https://hpr.dogphilosophy.net/test/weba.weba" type="audio/webm" />Your browser does not support the audio element.</audio></p>
 .
-Document[0, 61]
-  Paragraph[0, 61]
+Document[0, 60]
+  Paragraph[0, 60]
     AudioLink[0, 60] textOpen:[0, 3, "!A["] text:[3, 13, "Audio Test"] textClose:[13, 14, "]"] linkOpen:[14, 15, "("] url:[15, 59, "https://hpr.dogphilosophy.net/test/weba.weba"] linkClose:[59, 60, ")"]
       Text[3, 13] chars:[3, 13, "Audio Test"]
 ````````````````````````````````
@@ -44,8 +44,8 @@ Document[0, 61]
 .
 <p><audio title="Audio Test" controls=""><source src="https://hpr.dogphilosophy.net/test/webmv2.webm" type="audio/webm; codecs=opus" />Your browser does not support the audio element.</audio></p>
 .
-Document[0, 63]
-  Paragraph[0, 63]
+Document[0, 62]
+  Paragraph[0, 62]
     AudioLink[0, 62] textOpen:[0, 3, "!A["] text:[3, 13, "Audio Test"] textClose:[13, 14, "]"] linkOpen:[14, 15, "("] url:[15, 61, "https://hpr.dogphilosophy.net/test/webmv2.webm"] linkClose:[61, 62, ")"]
       Text[3, 13] chars:[3, 13, "Audio Test"]
 ````````````````````````````````
@@ -56,8 +56,8 @@ Document[0, 63]
 .
 <p><audio title="Audio Test" controls=""><source src="https://hpr.dogphilosophy.net/test/ogg.ogg" type="audio/ogg" />Your browser does not support the audio element.</audio></p>
 .
-Document[0, 59]
-  Paragraph[0, 59]
+Document[0, 58]
+  Paragraph[0, 58]
     AudioLink[0, 58] textOpen:[0, 3, "!A["] text:[3, 13, "Audio Test"] textClose:[13, 14, "]"] linkOpen:[14, 15, "("] url:[15, 57, "https://hpr.dogphilosophy.net/test/ogg.ogg"] linkClose:[57, 58, ")"]
       Text[3, 13] chars:[3, 13, "Audio Test"]
 ````````````````````````````````
@@ -68,8 +68,8 @@ Document[0, 59]
 .
 <p><audio title="Audio Test" controls=""><source src="https://hpr.dogphilosophy.net/test/mp3.mp3" type="audio/mpeg" />Your browser does not support the audio element.</audio></p>
 .
-Document[0, 59]
-  Paragraph[0, 59]
+Document[0, 58]
+  Paragraph[0, 58]
     AudioLink[0, 58] textOpen:[0, 3, "!A["] text:[3, 13, "Audio Test"] textClose:[13, 14, "]"] linkOpen:[14, 15, "("] url:[15, 57, "https://hpr.dogphilosophy.net/test/mp3.mp3"] linkClose:[57, 58, ")"]
       Text[3, 13] chars:[3, 13, "Audio Test"]
 ````````````````````````````````
@@ -80,8 +80,8 @@ Document[0, 59]
 .
 <p><audio title="Audio Test" controls=""><source src="https://hpr.dogphilosophy.net/test/wav.wav" type="audio/wav" />Your browser does not support the audio element.</audio></p>
 .
-Document[0, 59]
-  Paragraph[0, 59]
+Document[0, 58]
+  Paragraph[0, 58]
     AudioLink[0, 58] textOpen:[0, 3, "!A["] text:[3, 13, "Audio Test"] textClose:[13, 14, "]"] linkOpen:[14, 15, "("] url:[15, 57, "https://hpr.dogphilosophy.net/test/wav.wav"] linkClose:[57, 58, ")"]
       Text[3, 13] chars:[3, 13, "Audio Test"]
 ````````````````````````````````
@@ -92,8 +92,8 @@ Document[0, 59]
 .
 <p><audio title="Audio Test" controls=""><source src="https://hpr.dogphilosophy.net/test/flac.flac" type="audio/flac" />Your browser does not support the audio element.</audio></p>
 .
-Document[0, 61]
-  Paragraph[0, 61]
+Document[0, 60]
+  Paragraph[0, 60]
     AudioLink[0, 60] textOpen:[0, 3, "!A["] text:[3, 13, "Audio Test"] textClose:[13, 14, "]"] linkOpen:[14, 15, "("] url:[15, 59, "https://hpr.dogphilosophy.net/test/flac.flac"] linkClose:[59, 60, ")"]
       Text[3, 13] chars:[3, 13, "Audio Test"]
 ````````````````````````````````
@@ -106,8 +106,8 @@ This audio file does not actually exist.  (Will return 404 if you build this pag
 .
 <p><audio title="Audio Test" controls=""><source src="my-fake-audio-type.custom" />Your browser does not support the audio element.</audio></p>
 .
-Document[0, 42]
-  Paragraph[0, 42]
+Document[0, 41]
+  Paragraph[0, 41]
     AudioLink[0, 41] textOpen:[0, 3, "!A["] text:[3, 13, "Audio Test"] textClose:[13, 14, "]"] linkOpen:[14, 15, "("] url:[15, 40, "my-fake-audio-type.custom"] linkClose:[40, 41, ")"]
       Text[3, 13] chars:[3, 13, "Audio Test"]
 ````````````````````````````````
@@ -119,8 +119,8 @@ Multiple sources can be specified by separating with a vertical bar '|'.
 .
 <p><audio title="Audio Test" controls=""><source src="https://hpr.dogphilosophy.net/test/opus.opus" type="audio/ogg; codecs=opus" /><source src="https://hpr.dogphilosophy.net/test/weba.weba" type="audio/webm" /><source src="https://hpr.dogphilosophy.net/test/webmv2.webm" type="audio/webm; codecs=opus" /><source src="https://hpr.dogphilosophy.net/test/ogg.ogg" type="audio/ogg" /><source src="https://hpr.dogphilosophy.net/test/mp3.mp3" type="audio/mpeg" /><source src="https://hpr.dogphilosophy.net/test/wav.wav" type="audio/wav" /><source src="https://hpr.dogphilosophy.net/test/flac.flac" type="audio/flac" />Your browser does not support the audio element.</audio></p>
 .
-Document[0, 327]
-  Paragraph[0, 327]
+Document[0, 326]
+  Paragraph[0, 326]
     AudioLink[0, 326] textOpen:[0, 3, "!A["] text:[3, 13, "Audio Test"] textClose:[13, 14, "]"] linkOpen:[14, 15, "("] url:[15, 325, "https://hpr.dogphilosophy.net/test/opus.opus|https://hpr.dogphilosophy.net/test/weba.weba|https://hpr.dogphilosophy.net/test/webmv2.webm|https://hpr.dogphilosophy.net/test/ogg.ogg|https://hpr.dogphilosophy.net/test/mp3.mp3|https://hpr.dogphilosophy.net/test/wav.wav|https://hpr.dogphilosophy.net/test/flac.flac"] linkClose:[325, 326, ")"]
       Text[3, 13] chars:[3, 13, "Audio Test"]
 ````````````````````````````````
@@ -132,8 +132,8 @@ Ignore escaped prefix '\A'.
 .
 <p>!A<a href="https://hpr.dogphilosophy.net/test/opus.opus">Audio Test</a></p>
 .
-Document[0, 62]
-  Paragraph[0, 62]
+Document[0, 61]
+  Paragraph[0, 61]
     Text[0, 3] chars:[0, 3, "\!A"]
     Link[3, 61] textOpen:[3, 4, "["] text:[4, 14, "Audio Test"] textClose:[14, 15, "]"] linkOpen:[15, 16, "("] url:[16, 60, "https://hpr.dogphilosophy.net/test/opus.opus"] pageRef:[16, 60, "https://hpr.dogphilosophy.net/test/opus.opus"] linkClose:[60, 61, ")"]
       Text[4, 14] chars:[4, 14, "Audio Test"]
@@ -146,8 +146,8 @@ Ignore escaped prefix '\\\A'.
 .
 <p>\!A<a href="https://hpr.dogphilosophy.net/test/opus.opus">Audio Test</a></p>
 .
-Document[0, 64]
-  Paragraph[0, 64]
+Document[0, 63]
+  Paragraph[0, 63]
     Text[0, 5] chars:[0, 5, "\\\!A"]
     Link[5, 63] textOpen:[5, 6, "["] text:[6, 16, "Audio Test"] textClose:[16, 17, "]"] linkOpen:[17, 18, "("] url:[18, 62, "https://hpr.dogphilosophy.net/test/opus.opus"] pageRef:[18, 62, "https://hpr.dogphilosophy.net/test/opus.opus"] linkClose:[62, 63, ")"]
       Text[6, 16] chars:[6, 16, "Audio Test"]
@@ -160,8 +160,8 @@ Don't ignore escaped prefix '\\A'.
 .
 <p>\<audio title="Audio Test" controls=""><source src="https://hpr.dogphilosophy.net/test/opus.opus" type="audio/ogg; codecs=opus" />Your browser does not support the audio element.</audio></p>
 .
-Document[0, 63]
-  Paragraph[0, 63]
+Document[0, 62]
+  Paragraph[0, 62]
     Text[0, 2] chars:[0, 2, "\\"]
     AudioLink[2, 62] textOpen:[2, 5, "!A["] text:[5, 15, "Audio Test"] textClose:[15, 16, "]"] linkOpen:[16, 17, "("] url:[17, 61, "https://hpr.dogphilosophy.net/test/opus.opus"] linkClose:[61, 62, ")"]
       Text[5, 15] chars:[5, 15, "Audio Test"]

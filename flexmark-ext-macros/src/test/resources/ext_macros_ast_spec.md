@@ -149,9 +149,9 @@ Plain text <<<macro>>>
 .
 <p>Plain text </p>
 .
-Document[0, 37]
+Document[0, 36]
   MacroDefinitionBlock[0, 13] open:[0, 3, ">>>"] name:[3, 8, "macro"] openTrail:[8, 8] close:[9, 12, "<<<"] closeTrail:[12, 13, "\n"]
-  Paragraph[14, 37]
+  Paragraph[14, 36]
     Text[14, 25] chars:[14, 25, "Plain … text "]
     MacroReference[25, 36] textOpen:[25, 28, "<<<"] text:[28, 33, "macro"] textClose:[33, 36, ">>>"]
 ````````````````````````````````
@@ -168,11 +168,11 @@ Plain text <<<macro>>>
 .
 <p>Plain text simple text</p>
 .
-Document[0, 49]
+Document[0, 48]
   MacroDefinitionBlock[0, 25] open:[0, 3, ">>>"] name:[3, 8, "macro"] openTrail:[8, 8] close:[21, 24, "<<<"] closeTrail:[24, 25, "\n"]
     Paragraph[9, 21] isTrailingBlankLine
       Text[9, 20] chars:[9, 20, "simpl …  text"]
-  Paragraph[26, 49]
+  Paragraph[26, 48]
     Text[26, 37] chars:[26, 37, "Plain … text "]
     MacroReference[37, 48] textOpen:[37, 40, "<<<"] text:[40, 45, "macro"] textClose:[45, 48, ">>>"]
 ````````````````````````````````
@@ -208,7 +208,7 @@ Plain text <<<macro>>>
 </table>
 </p>
 .
-Document[0, 115]
+Document[0, 114]
   MacroDefinitionBlock[0, 91] open:[0, 3, ">>>"] name:[3, 8, "macro"] openTrail:[8, 8] close:[87, 90, "<<<"] closeTrail:[90, 91, "\n"]
     BulletList[9, 37] isTight
       BulletListItem[9, 23] open:[9, 10, "*"] isTight
@@ -230,7 +230,7 @@ Document[0, 115]
         TableRow[71, 86] rowNumber=1
           TableCell[71, 86] LEFT textOpen:[71, 72, "|"] text:[73, 84, "column data"] textClose:[85, 86, "|"]
             Text[73, 84] chars:[73, 84, "colum …  data"]
-  Paragraph[92, 115]
+  Paragraph[92, 114]
     Text[92, 103] chars:[92, 103, "Plain … text "]
     MacroReference[103, 114] textOpen:[103, 106, "<<<"] text:[106, 111, "macro"] textClose:[111, 114, ">>>"]
 ````````````````````````````````
@@ -260,7 +260,7 @@ macro tables
 </table>
 </p>
 .
-Document[0, 98]
+Document[0, 97]
   MacroDefinitionBlock[0, 85] open:[0, 3, ">>>"] name:[3, 8, "macro"] openTrail:[8, 8] close:[81, 84, "<<<"] closeTrail:[84, 85, "\n"]
     TableBlock[9, 81]
       TableHead[9, 24]
@@ -284,7 +284,7 @@ Document[0, 98]
             StrongEmphasis[68, 76] textOpen:[68, 70, "**"] text:[70, 74, "data"] textClose:[74, 76, "**"]
               Text[70, 74] chars:[70, 74, "data"]
             Text[76, 78] chars:[76, 78, " 2"]
-  Paragraph[86, 98]
+  Paragraph[86, 97]
     MacroReference[86, 97] textOpen:[86, 89, "<<<"] text:[89, 94, "macro"] textClose:[94, 97, ">>>"]
 ````````````````````````````````
 
@@ -322,7 +322,7 @@ complex content for tables
   </tbody>
 </table>
 .
-Document[0, 185]
+Document[0, 184]
   MacroDefinitionBlock[0, 85] open:[0, 3, ">>>"] name:[3, 8, "macro"] openTrail:[8, 8] close:[81, 84, "<<<"] closeTrail:[84, 85, "\n"]
     TableBlock[9, 81]
       TableHead[9, 24]
@@ -346,7 +346,7 @@ Document[0, 185]
             StrongEmphasis[68, 76] textOpen:[68, 70, "**"] text:[70, 74, "data"] textClose:[74, 76, "**"]
               Text[70, 74] chars:[70, 74, "data"]
             Text[76, 78] chars:[76, 78, " 2"]
-  TableBlock[86, 185]
+  TableBlock[86, 184]
     TableHead[86, 118]
       TableRow[86, 118] rowNumber=1
         TableCell[86, 102] LEFT header textOpen:[86, 87, "|"] text:[88, 99, "outer first"] textClose:[101, 102, "|"]
@@ -386,12 +386,12 @@ Plain text <<<macro>>>
 </blockquote>
 </p>
 .
-Document[0, 57]
+Document[0, 56]
   MacroDefinitionBlock[0, 33] open:[0, 3, ">>>"] name:[3, 8, "macro"] openTrail:[8, 8] close:[29, 32, "<<<"] closeTrail:[32, 33, "\n"]
     GitLabBlockQuote[9, 29] open:[9, 12, ">>>"] openTrail:[12, 13, "\n"] close:[25, 28, ">>>"] closeTrail:[28, 29, "\n"]
       Paragraph[13, 25] isTrailingBlankLine
         Text[13, 24] chars:[13, 24, "Block … Quote"]
-  Paragraph[34, 57]
+  Paragraph[34, 56]
     Text[34, 45] chars:[34, 45, "Plain … text "]
     MacroReference[45, 56] textOpen:[45, 48, "<<<"] text:[48, 53, "macro"] textClose:[53, 56, ">>>"]
 ````````````````````````````````
@@ -420,7 +420,7 @@ Plain text <<<macro>>>
 </blockquote>
 </p>
 .
-Document[0, 84]
+Document[0, 83]
   MacroDefinitionBlock[0, 60] open:[0, 3, ">>>"] name:[3, 8, "macro"] openTrail:[8, 8] close:[56, 59, "<<<"] closeTrail:[59, 60, "\n"]
     GitLabBlockQuote[9, 29] open:[9, 12, ">>>"] openTrail:[12, 13, "\n"] close:[25, 28, ">>>"] closeTrail:[28, 29, "\n"]
       Paragraph[13, 25] isTrailingBlankLine
@@ -428,7 +428,7 @@ Document[0, 84]
     Paragraph[29, 48]
       Text[29, 47] chars:[29, 47, "Neste … Quote"]
     GitLabBlockQuote[48, 56] open:[48, 51, ">>>"] openTrail:[51, 52, "\n"] close:[52, 55, ">>>"] closeTrail:[55, 56, "\n"]
-  Paragraph[61, 84]
+  Paragraph[61, 83]
     Text[61, 72] chars:[61, 72, "Plain … text "]
     MacroReference[72, 83] textOpen:[72, 75, "<<<"] text:[75, 80, "macro"] textClose:[80, 83, ">>>"]
 ````````````````````````````````
@@ -460,7 +460,7 @@ Macro 2
 Macro 1
 </p>
 .
-Document[0, 121]
+Document[0, 120]
   MacroDefinitionBlock[0, 35] open:[0, 3, ">>>"] name:[3, 9, "macro1"] openTrail:[9, 9] close:[31, 34, "<<<"] closeTrail:[34, 35, "\n"]
     Paragraph[10, 31] isTrailingBlankLine
       Text[10, 17] chars:[10, 17, "Macro 1"]
@@ -474,7 +474,7 @@ Document[0, 121]
   Paragraph[72, 96] isTrailingBlankLine
     Text[72, 83] chars:[72, 83, "Plain … text "]
     MacroReference[83, 95] textOpen:[83, 86, "<<<"] text:[86, 92, "macro1"] textClose:[92, 95, ">>>"]
-  Paragraph[97, 121]
+  Paragraph[97, 120]
     Text[97, 108] chars:[97, 108, "Plain … text "]
     MacroReference[108, 120] textOpen:[108, 111, "<<<"] text:[111, 117, "macro2"] textClose:[117, 120, ">>>"]
 ````````````````````````````````

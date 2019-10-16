@@ -24,6 +24,7 @@ import com.vladsch.flexmark.util.html.Attributes;
 import com.vladsch.flexmark.util.html.LineFormattingAppendable;
 import com.vladsch.flexmark.util.mappers.CharWidthProvider;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 import java.util.function.Function;
@@ -199,7 +200,7 @@ public class Formatter implements IRender {
         return new TranslationHandlerImpl(options, formatterOptions, new HeaderIdGenerator.Factory());
     }
 
-    @org.jetbrains.annotations.Nullable
+    @Nullable
     @Override
     public DataHolder getOptions() {
         return new DataSet(builder);
@@ -252,7 +253,7 @@ public class Formatter implements IRender {
      * @param document the root node
      * @return the formatted markdown
      */
-    @org.jetbrains.annotations.NotNull
+    @NotNull
     public String render(@NotNull Node document) {
         StringBuilder sb = new StringBuilder();
         render(document, sb);
@@ -388,8 +389,8 @@ public class Formatter implements IRender {
         });
     }
 
-    @org.jetbrains.annotations.NotNull
-    public Formatter withOptions(@org.jetbrains.annotations.Nullable DataHolder options) {
+    @NotNull
+    public Formatter withOptions(@Nullable DataHolder options) {
         return options == null ? this : new Formatter(new Builder(builder, options));
     }
 

@@ -1432,8 +1432,8 @@ Html Blocks
     <!-- HTML Comment -->
 </div>
 .
-Document[0, 39]
-  HtmlBlock[0, 39]
+Document[0, 38]
+  HtmlBlock[0, 38]
     HtmlInnerBlock[0, 10] chars:[0, 10, "<div>\n    "]
     HtmlInnerBlockComment[10, 31] chars:[10, 31, "<!--  … t -->"]
     HtmlInnerBlock[31, 38] chars:[31, 38, "\n</div>"]
@@ -2490,7 +2490,7 @@ Multi-line code span
 &ldquo;xxx&rdquo;, &ldquo;zzz&rdquo; 
 ] } <code>|</code>{ &ldquo;key1&rdquo;: &ldquo;xxx&rdquo;, &ldquo;key2&rdquo;: &ldquo;xxx&rdquo; }```|</p>
 .
-Document[0, 150]
+Document[0, 149]
   TableBlock[0, 62]
     TableHead[0, 25]
       TableRow[0, 25] rowNumber=1
@@ -2514,7 +2514,7 @@ Document[0, 150]
           Text[49, 55] chars:[49, 55, " line "]
         TableCell[56, 61] text:[56, 61, " ```{"]
           Text[56, 61] chars:[56, 61, " ```{"]
-  Paragraph[62, 150]
+  Paragraph[62, 149]
     TypographicQuotes[62, 68] typographicOpening: &ldquo;  typographicClosing: &rdquo;  textOpen:[62, 63, "\""] text:[63, 67, "key1"] textClose:[67, 68, "\""]
       Text[63, 67] chars:[63, 67, "key1"]
     Text[68, 70] chars:[68, 70, ": "]
@@ -2602,8 +2602,8 @@ line ```{
 .
 <p>line <code>{ &quot;key1&quot;: &quot;xxx&quot;, &quot;key2&quot;: [ &quot;xxx&quot;, &quot;zzz&quot; ] }</code></p>
 .
-Document[0, 56]
-  Paragraph[0, 56]
+Document[0, 55]
+  Paragraph[0, 55]
     Text[0, 5] chars:[0, 5, "line "]
     Code[5, 55] textOpen:[5, 8, "```"] text:[8, 52, "{\n\"ke … y1\": \"xxx\",\n\"key2\": [\n\"xxx\",\n\"zzz\"\n]\n} "] textClose:[52, 55, "```"]
       Text[8, 52] chars:[8, 52, "{\n\"ke … \n]\n} "]
@@ -3055,8 +3055,8 @@ options for plain text rendering
   <li>Enable Auto Line Selections and select full lines without loosing time or column position by moving the caret to the start of line when selecting or pasting. <strong>Choose</strong> whether you want to <strong>paste full line</strong> selections: <strong>above</strong> or <strong>below</strong> the current line regardless of the caret&rsquo;s column.</li>
 </ul>
 .
-Document[0, 1097]
-  BulletList[0, 1097] isTight
+Document[0, 1096]
+  BulletList[0, 1096] isTight
     BulletListItem[0, 111] open:[0, 1, "*"] isTight
       Paragraph[2, 111]
         Text[2, 93] chars:[2, 93, "Enabl … ented"]
@@ -3135,8 +3135,8 @@ Document[0, 1097]
         Text[716, 753] chars:[716, 753, " to a … elds,"]
         SoftLineBreak[753, 754]
         Text[758, 793] chars:[758, 793, "stati … ters."]
-    BulletListItem[794, 1097] open:[794, 795, "*"] isTight
-      Paragraph[796, 1097]
+    BulletListItem[794, 1096] open:[794, 795, "*"] isTight
+      Paragraph[796, 1096]
         Text[796, 888] chars:[796, 888, "Enabl … on by"]
         SoftLineBreak[888, 889]
         Text[891, 956] chars:[891, 956, "movin … ing. "]
@@ -3288,7 +3288,7 @@ Issue markdown page generator
 .
 <h3><a href="#hello-html-and-body" id="hello-html-and-body"></a>hello <code>&lt;html&gt;</code> and <code>&lt;body&gt;</code></h3>
 .
-Document[0, 32]
+Document[0, 31]
   Heading[0, 31] textOpen:[0, 3, "###"] text:[4, 31, "hello `<html>` and `<body>`"]
     AnchorLink[4, 4]
     Text[4, 10] chars:[4, 10, "hello "]

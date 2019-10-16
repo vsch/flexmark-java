@@ -18,22 +18,14 @@ public class ComboCoreDirectionalSpecTest extends ComboSpecTestCase {
     private static final DataHolder OPTIONS = new MutableDataSet()
             .set(HtmlRenderer.INDENT_SIZE, 0)
             .set(Parser.INLINE_DELIMITER_DIRECTIONAL_PUNCTUATIONS, true)
-            .set(HtmlRenderer.PERCENT_ENCODE_URLS, true);
-
-    private static final Map<String, DataHolder> optionsMap = new HashMap<>();
-    static {
-        //optionsMap.put("keep-last", new MutableDataSet()
-        //        .set(Parser.REFERENCES_KEEP, KeepType.LAST)
-        //);
-    }
+            .set(HtmlRenderer.PERCENT_ENCODE_URLS, true)
+            .set(TestUtils.NO_FILE_EOL, false)
+            .toImmutable();
+    ;
 
     static final Parser PARSER = Parser.builder(OPTIONS).build();
     // The spec says URL-escaping is optional, but the examples assume that it's enabled.
     static final HtmlRenderer RENDERER = HtmlRenderer.builder(OPTIONS).build();
-
-    static DataHolder optionsSet(String optionSet) {
-        return optionsMap.get(optionSet);
-    }
 
     public ComboCoreDirectionalSpecTest(SpecExample example) {
         super(example);
@@ -47,7 +39,7 @@ public class ComboCoreDirectionalSpecTest extends ComboSpecTestCase {
     @Nullable
     @Override
     public DataHolder options(String optionSet) {
-        return optionsSet(optionSet);
+        return OPTIONS;
     }
 
     @NotNull
@@ -67,7 +59,8 @@ public class ComboCoreDirectionalSpecTest extends ComboSpecTestCase {
     }
 
     @Override
-    public @NotNull SpecExampleRenderer getSpecExampleRenderer(@Nullable DataHolder exampleOptions) {
-        return new FlexmarkSpecExampleRenderer(exampleOptions, parser(),renderer(), true);
+    public @NotNull SpecExampleRenderer getSpecExampleRenderer(@NotNull SpecExample example, @Nullable DataHolder exampleOptions) {
+        DataHolder combinedOptions = combineOptions(OPTIONS, exampleOptions);
+        return new FlexmarkSpecExampleRenderer(example, combinedOptions, PARSER.withOptions(combinedOptions), RENDERER.withOptions(combinedOptions), true);
     }
 }

@@ -121,13 +121,13 @@ Cond 1.3 text node {.red}
 <p><span class="red">Cond 1.2 text node</span></p>
 <p class="red">Cond 1.3 text node</p>
 .
-Document[0, 52]
+Document[0, 51]
   Paragraph[0, 25] isTrailingBlankLine
     TextBase[0, 18] chars:[0, 18, "Cond  …  node"]
       Text[0, 18] chars:[0, 18, "Cond  …  node"]
     AttributesNode[18, 24] textOpen:[18, 19, "{"] text:[19, 23, ".red"] textClose:[23, 24, "}"]
       AttributeNode[19, 23] name:[19, 20, "."] value:[20, 23, "red"] isImplicit isClass
-  Paragraph[26, 52]
+  Paragraph[26, 51]
     Text[26, 44] chars:[26, 44, "Cond  …  node"]
     AttributesNode[45, 51] textOpen:[45, 46, "{"] text:[46, 50, ".red"] textClose:[50, 51, "}"]
       AttributeNode[46, 50] name:[46, 47, "."] value:[47, 50, "red"] isImplicit isClass
@@ -144,7 +144,7 @@ Cond 1.3 text <!---->node {.red}
 <p>Cond 1.2 text <!----><span class="red">node</span></p>
 <p class="red">Cond 1.3 text <!---->node</p>
 .
-Document[0, 66]
+Document[0, 65]
   Paragraph[0, 32] isTrailingBlankLine
     Text[0, 14] chars:[0, 14, "Cond  … text "]
     HtmlInlineComment[14, 21] chars:[14, 21, "<!---->"]
@@ -152,7 +152,7 @@ Document[0, 66]
       Text[21, 25] chars:[21, 25, "node"]
     AttributesNode[25, 31] textOpen:[25, 26, "{"] text:[26, 30, ".red"] textClose:[30, 31, "}"]
       AttributeNode[26, 30] name:[26, 27, "."] value:[27, 30, "red"] isImplicit isClass
-  Paragraph[33, 66]
+  Paragraph[33, 65]
     Text[33, 47] chars:[33, 47, "Cond  … text "]
     HtmlInlineComment[47, 54] chars:[47, 54, "<!---->"]
     Text[54, 58] chars:[54, 58, "node"]
@@ -193,7 +193,7 @@ Cond 1.3 **text node {.red}**
 <p>Cond 1.2 <strong><span class="red">text node</span></strong></p>
 <p>Cond 1.3 <strong class="red">text node</strong></p>
 .
-Document[0, 60]
+Document[0, 59]
   Paragraph[0, 29] isTrailingBlankLine
     Text[0, 9] chars:[0, 9, "Cond 1.2 "]
     StrongEmphasis[9, 28] textOpen:[9, 11, "**"] text:[11, 26, "text node{.red}"] textClose:[26, 28, "**"]
@@ -201,7 +201,7 @@ Document[0, 60]
         Text[11, 20] chars:[11, 20, "text node"]
       AttributesNode[20, 26] textOpen:[20, 21, "{"] text:[21, 25, ".red"] textClose:[25, 26, "}"]
         AttributeNode[21, 25] name:[21, 22, "."] value:[22, 25, "red"] isImplicit isClass
-  Paragraph[30, 60]
+  Paragraph[30, 59]
     Text[30, 39] chars:[30, 39, "Cond 1.3 "]
     StrongEmphasis[39, 59] textOpen:[39, 41, "**"] text:[41, 57, "text node {.red}"] textClose:[57, 59, "**"]
       Text[41, 50] chars:[41, 50, "text node"]
@@ -220,7 +220,7 @@ Cond 1.3 **text <!---->node {.red}**
 <p>Cond 1.2 <strong>text <!----><span class="red">node</span></strong></p>
 <p>Cond 1.3 <strong class="red">text <!---->node</strong></p>
 .
-Document[0, 74]
+Document[0, 73]
   Paragraph[0, 36] isTrailingBlankLine
     Text[0, 9] chars:[0, 9, "Cond 1.2 "]
     StrongEmphasis[9, 35] textOpen:[9, 11, "**"] text:[11, 33, "text <!---->node{.red}"] textClose:[33, 35, "**"]
@@ -230,7 +230,7 @@ Document[0, 74]
         Text[23, 27] chars:[23, 27, "node"]
       AttributesNode[27, 33] textOpen:[27, 28, "{"] text:[28, 32, ".red"] textClose:[32, 33, "}"]
         AttributeNode[28, 32] name:[28, 29, "."] value:[29, 32, "red"] isImplicit isClass
-  Paragraph[37, 74]
+  Paragraph[37, 73]
     Text[37, 46] chars:[37, 46, "Cond 1.3 "]
     StrongEmphasis[46, 73] textOpen:[46, 48, "**"] text:[48, 71, "text <!---->node {.red}"] textClose:[71, 73, "**"]
       Text[48, 53] chars:[48, 53, "text "]
@@ -342,16 +342,16 @@ attributes assigned to list item
   </li>
 </ul>
 .
-Document[0, 56]
-  BulletList[0, 56] isLoose
+Document[0, 55]
+  BulletList[0, 55] isLoose
     BulletListItem[0, 27] open:[0, 1, "*"] isLoose hadBlankLineAfter
       Paragraph[2, 27] isTrailingBlankLine
         TextBase[2, 20] chars:[2, 20, "Cond  …  node"]
           Text[2, 20] chars:[2, 20, "Cond  …  node"]
         AttributesNode[20, 26] textOpen:[20, 21, "{"] text:[21, 25, ".red"] textClose:[25, 26, "}"]
           AttributeNode[21, 25] name:[21, 22, "."] value:[22, 25, "red"] isImplicit isClass
-    BulletListItem[28, 56] open:[28, 29, "*"] isLoose
-      Paragraph[30, 56]
+    BulletListItem[28, 55] open:[28, 29, "*"] isLoose
+      Paragraph[30, 55]
         Text[30, 48] chars:[30, 48, "Cond  …  node"]
         AttributesNode[49, 55] textOpen:[49, 50, "{"] text:[50, 54, ".red"] textClose:[54, 55, "}"]
           AttributeNode[50, 54] name:[50, 51, "."] value:[51, 54, "red"] isImplicit isClass
@@ -414,7 +414,7 @@ Cond 2.3 Some text **bold text**{.red}
 <p>Cond 2.2 Some text <strong class="red blue">bold text</strong></p>
 <p>Cond 2.3 Some text <strong class="red">bold text</strong></p>
 .
-Document[0, 127]
+Document[0, 126]
   Paragraph[0, 40] isTrailingBlankLine
     Text[0, 19] chars:[0, 19, "Cond  … text "]
     StrongEmphasis[19, 32] textOpen:[19, 21, "**"] text:[21, 30, "bold text"] textClose:[30, 32, "**"]
@@ -429,7 +429,7 @@ Document[0, 127]
       AttributeNode[74, 78] name:[74, 75, "."] value:[75, 78, "red"] isImplicit isClass
     AttributesNode[79, 86] textOpen:[79, 80, "{"] text:[80, 85, ".blue"] textClose:[85, 86, "}"]
       AttributeNode[80, 85] name:[80, 81, "."] value:[81, 85, "blue"] isImplicit isClass
-  Paragraph[88, 127]
+  Paragraph[88, 126]
     Text[88, 107] chars:[88, 107, "Cond  … text "]
     StrongEmphasis[107, 120] textOpen:[107, 109, "**"] text:[109, 118, "bold text"] textClose:[118, 120, "**"]
       Text[109, 118] chars:[109, 118, "bold text"]
@@ -488,8 +488,8 @@ attributes are assigned to the list element
   </li>
 </ul>
 .
-Document[0, 71]
-  BulletList[0, 71] isLoose
+Document[0, 70]
+  BulletList[0, 70] isLoose
     BulletListItem[0, 21] open:[0, 1, "*"] isLoose
       Paragraph[2, 21]
         AttributesNode[2, 8] textOpen:[2, 3, "{"] text:[3, 7, ".red"] textClose:[7, 8, "}"]
@@ -501,8 +501,8 @@ Document[0, 71]
     BulletListItem[36, 50] open:[36, 37, "*"] isLoose
       Paragraph[38, 50]
         Text[38, 49] chars:[38, 49, "list  … tem 1"]
-    BulletListItem[50, 71] open:[50, 51, "*"] isLoose
-      Paragraph[52, 71]
+    BulletListItem[50, 70] open:[50, 51, "*"] isLoose
+      Paragraph[52, 70]
         AttributesNode[52, 58] textOpen:[52, 53, "{"] text:[53, 57, ".red"] textClose:[57, 58, "}"]
           AttributeNode[53, 57] name:[53, 54, "."] value:[54, 57, "red"] isImplicit isClass
         Text[59, 70] chars:[59, 70, "list  … tem 2"]
@@ -529,8 +529,8 @@ Definition Term
   <dd>definition item 2</dd>
 </dl>
 .
-Document[0, 135]
-  DefinitionList[0, 135] isTight
+Document[0, 134]
+  DefinitionList[0, 134] isTight
     DefinitionTerm[0, 16]
       Paragraph[0, 16]
         Text[0, 15] chars:[0, 15, "Defin …  Term"]
@@ -548,8 +548,8 @@ Document[0, 135]
     DefinitionItem[84, 106] open:[84, 85, ":"] isTight
       Paragraph[88, 106]
         Text[88, 105] chars:[88, 105, "defin … tem 1"]
-    DefinitionItem[106, 135] open:[106, 107, ":"] isTight
-      Paragraph[110, 135]
+    DefinitionItem[106, 134] open:[106, 107, ":"] isTight
+      Paragraph[110, 134]
         AttributesNode[110, 116] textOpen:[110, 111, "{"] text:[111, 115, ".red"] textClose:[115, 116, "}"]
           AttributeNode[111, 115] name:[111, 112, "."] value:[112, 115, "red"] isImplicit isClass
         Text[117, 134] chars:[117, 134, "defin … tem 2"]
@@ -577,15 +577,15 @@ Assigned to paragraph of list item 2
   </li>
 </ul>
 .
-Document[0, 38]
-  BulletList[0, 38] isLoose
+Document[0, 37]
+  BulletList[0, 37] isLoose
     BulletListItem[0, 14] open:[0, 1, "*"] isLoose
       Paragraph[2, 14]
         Text[2, 13] chars:[2, 13, "list  … tem 1"]
-    BulletListItem[14, 38] open:[14, 15, "*"] isLoose hadBlankLineAfter
+    BulletListItem[14, 37] open:[14, 15, "*"] isLoose hadBlankLineAfter
       Paragraph[16, 28] isTrailingBlankLine
         Text[16, 27] chars:[16, 27, "list  … tem 2"]
-      Paragraph[31, 38]
+      Paragraph[31, 37]
         AttributesNode[31, 37] textOpen:[31, 32, "{"] text:[32, 36, ".red"] textClose:[36, 37, "}"]
           AttributeNode[32, 36] name:[32, 33, "."] value:[33, 36, "red"] isImplicit isClass
 ````````````````````````````````
@@ -609,15 +609,15 @@ Assigned to paragraph of list item 2
   </li>
 </ul>
 .
-Document[0, 39]
-  BulletList[0, 39] isLoose
+Document[0, 38]
+  BulletList[0, 38] isLoose
     BulletListItem[0, 14] open:[0, 1, "*"] isLoose hadBlankLineAfter
       Paragraph[2, 14] isTrailingBlankLine
         Text[2, 13] chars:[2, 13, "list  … tem 1"]
-    BulletListItem[15, 39] open:[15, 16, "*"] isLoose hadBlankLineAfter
+    BulletListItem[15, 38] open:[15, 16, "*"] isLoose hadBlankLineAfter
       Paragraph[17, 29] isTrailingBlankLine
         Text[17, 28] chars:[17, 28, "list  … tem 2"]
-      Paragraph[32, 39]
+      Paragraph[32, 38]
         AttributesNode[32, 38] textOpen:[32, 33, "{"] text:[33, 37, ".red"] textClose:[37, 38, "}"]
           AttributeNode[33, 37] name:[33, 34, "."] value:[34, 37, "red"] isImplicit isClass
 ````````````````````````````````
@@ -786,12 +786,12 @@ Assigned to block quote
   <p>block quote text</p>
 </blockquote>
 .
-Document[0, 31]
-  BlockQuote[0, 31] marker:[0, 1, ">"]
+Document[0, 30]
+  BlockQuote[0, 30] marker:[0, 1, ">"]
     Paragraph[2, 9] isTrailingBlankLine
       AttributesNode[2, 8] textOpen:[2, 3, "{"] text:[3, 7, ".red"] textClose:[7, 8, "}"]
         AttributeNode[3, 7] name:[3, 4, "."] value:[4, 7, "red"] isImplicit isClass
-    Paragraph[14, 31]
+    Paragraph[14, 30]
       Text[14, 30] chars:[14, 30, "block …  text"]
 ````````````````````````````````
 
@@ -809,10 +809,10 @@ Some paragraph
 .
 <p class="red">Some paragraph</p>
 .
-Document[0, 24]
+Document[0, 23]
   Paragraph[0, 15] isTrailingBlankLine
     Text[0, 14] chars:[0, 14, "Some  … graph"]
-  Paragraph[17, 24]
+  Paragraph[17, 23]
     AttributesNode[17, 23] textOpen:[17, 18, "{"] text:[18, 22, ".red"] textClose:[22, 23, "}"]
       AttributeNode[18, 22] name:[18, 19, "."] value:[19, 22, "red"] isImplicit isClass
 ````````````````````````````````
@@ -829,11 +829,11 @@ Assigned to previous block quote
   <p>Some paragraph</p>
 </blockquote>
 .
-Document[0, 26]
+Document[0, 25]
   BlockQuote[0, 17] marker:[0, 1, ">"]
     Paragraph[2, 17]
       Text[2, 16] chars:[2, 16, "Some  … graph"]
-  Paragraph[19, 26]
+  Paragraph[19, 25]
     AttributesNode[19, 25] textOpen:[19, 20, "{"] text:[20, 24, ".red"] textClose:[24, 25, "}"]
       AttributeNode[20, 24] name:[20, 21, "."] value:[21, 24, "red"] isImplicit isClass
 ````````````````````````````````
@@ -850,11 +850,11 @@ Assigned to previous paragraph in the block quote
   <p class="red">Some paragraph</p>
 </blockquote>
 .
-Document[0, 29]
-  BlockQuote[0, 29] marker:[0, 1, ">"]
+Document[0, 28]
+  BlockQuote[0, 28] marker:[0, 1, ">"]
     Paragraph[2, 17] isTrailingBlankLine
       Text[2, 16] chars:[2, 16, "Some  … graph"]
-    Paragraph[22, 29]
+    Paragraph[22, 28]
       AttributesNode[22, 28] textOpen:[22, 23, "{"] text:[23, 27, ".red"] textClose:[27, 28, "}"]
         AttributeNode[23, 27] name:[23, 24, "."] value:[24, 27, "red"] isImplicit isClass
 ````````````````````````````````
@@ -873,7 +873,7 @@ Assigned to previous list
   <li>list item 2</li>
 </ul>
 .
-Document[0, 37]
+Document[0, 36]
   BulletList[0, 28] isTight
     BulletListItem[0, 14] open:[0, 1, "*"] isTight
       Paragraph[2, 14]
@@ -881,7 +881,7 @@ Document[0, 37]
     BulletListItem[14, 28] open:[14, 15, "*"] isTight hadBlankLineAfter
       Paragraph[16, 28] isTrailingBlankLine
         Text[16, 27] chars:[16, 27, "list  … tem 2"]
-  Paragraph[30, 37]
+  Paragraph[30, 36]
     AttributesNode[30, 36] textOpen:[30, 31, "{"] text:[31, 35, ".red"] textClose:[35, 36, "}"]
       AttributeNode[31, 35] name:[31, 32, "."] value:[32, 35, "red"] isImplicit isClass
 ````````````````````````````````
@@ -905,7 +905,7 @@ definition term 2
   <dd>definition item 2.1</dd>
 </dl>
 .
-Document[0, 91]
+Document[0, 90]
   DefinitionList[0, 82] isTight
     DefinitionTerm[0, 18]
       Paragraph[0, 18]
@@ -919,7 +919,7 @@ Document[0, 91]
     DefinitionItem[60, 82] open:[60, 61, ":"] isTight hadBlankLineAfter
       Paragraph[62, 82] isTrailingBlankLine
         Text[62, 81] chars:[62, 81, "defin … m 2.1"]
-  Paragraph[84, 91]
+  Paragraph[84, 90]
     AttributesNode[84, 90] textOpen:[84, 85, "{"] text:[85, 89, ".red"] textClose:[89, 90, "}"]
       AttributeNode[85, 89] name:[85, 86, "."] value:[86, 89, "red"] isImplicit isClass
 ````````````````````````````````
@@ -944,7 +944,7 @@ Assigned to previous table
   </tbody>
 </table>
 .
-Document[0, 36]
+Document[0, 35]
   TableBlock[1, 28]
     TableHead[1, 9]
       TableRow[1, 9] rowNumber=1
@@ -958,7 +958,7 @@ Document[0, 36]
       TableRow[19, 27] rowNumber=1
         TableCell[19, 27] textOpen:[19, 20, "|"] text:[21, 25, "body"] textClose:[26, 27, "|"]
           Text[21, 25] chars:[21, 25, "body"]
-  Paragraph[29, 36]
+  Paragraph[29, 35]
     AttributesNode[29, 35] textOpen:[29, 30, "{"] text:[30, 34, ".red"] textClose:[34, 35, "}"]
       AttributeNode[30, 34] name:[30, 31, "."] value:[31, 34, "red"] isImplicit isClass
 ````````````````````````````````
@@ -978,10 +978,10 @@ Some paragraph
 <p>Some paragraph</p>
 <p class="red">Some Text</p>
 .
-Document[0, 34]
+Document[0, 33]
   Paragraph[0, 15] isTrailingBlankLine
     Text[0, 14] chars:[0, 14, "Some  … graph"]
-  Paragraph[17, 34]
+  Paragraph[17, 33]
     AttributesNode[17, 23] textOpen:[17, 18, "{"] text:[18, 22, ".red"] textClose:[22, 23, "}"]
       AttributeNode[18, 22] name:[18, 19, "."] value:[19, 22, "red"] isImplicit isClass
     Text[24, 33] chars:[24, 33, "Some Text"]
@@ -998,8 +998,8 @@ Some Text **{.red}bold text**
 .
 <p>Some Text <strong class="red">bold text</strong></p>
 .
-Document[0, 30]
-  Paragraph[0, 30]
+Document[0, 29]
+  Paragraph[0, 29]
     Text[0, 10] chars:[0, 10, "Some Text "]
     StrongEmphasis[10, 29] textOpen:[10, 12, "**"] text:[12, 27, "{.red}bold text"] textClose:[27, 29, "**"]
       AttributesNode[12, 18] textOpen:[12, 13, "{"] text:[13, 17, ".red"] textClose:[17, 18, "}"]
@@ -1023,7 +1023,7 @@ assigned to the element and has an `id` attribute.
 .
 <h1 id="heading">Heading</h1>
 .
-Document[0, 10]
+Document[0, 9]
   Heading[0, 9] textOpen:[0, 1, "#"] text:[2, 9, "Heading"]
     Text[2, 9] chars:[2, 9, "Heading"]
 ````````````````````````````````
@@ -1034,7 +1034,7 @@ Document[0, 10]
 .
 <h1 id="custom-id">Heading</h1>
 .
-Document[0, 23]
+Document[0, 22]
   Heading[0, 22] textOpen:[0, 1, "#"] text:[2, 22, "Heading {#custom-id}"]
     Text[2, 9] chars:[2, 9, "Heading"]
     AttributesNode[10, 22] textOpen:[10, 11, "{"] text:[11, 21, "#custom-id"] textClose:[21, 22, "}"]
@@ -1061,7 +1061,7 @@ Document[0, 22]
 .
 <h1 id="custom-id">Heading #</h1>
 .
-Document[0, 25]
+Document[0, 24]
   Heading[0, 24] textOpen:[0, 1, "#"] text:[2, 24, "Heading # {#custom-id}"]
     Text[2, 11] chars:[2, 11, "Heading #"]
     AttributesNode[12, 24] textOpen:[12, 13, "{"] text:[13, 23, "#custom-id"] textClose:[23, 24, "}"]
@@ -1075,7 +1075,7 @@ Heading {#custom-id}
 .
 <h1 id="custom-id">Heading</h1>
 .
-Document[0, 44]
+Document[0, 43]
   Heading[0, 43] text:[0, 20, "Heading {#custom-id}"] textClose:[21, 43, "======================"]
     Text[0, 7] chars:[0, 7, "Heading"]
     AttributesNode[8, 20] textOpen:[8, 9, "{"] text:[9, 19, "#custom-id"] textClose:[19, 20, "}"]
@@ -1089,7 +1089,7 @@ Heading {#123-heading}
 .
 <h1 id="123-heading">Heading</h1>
 .
-Document[0, 46]
+Document[0, 45]
   Heading[0, 45] text:[0, 22, "Heading {#123-heading}"] textClose:[23, 45, "======================"]
     Text[0, 7] chars:[0, 7, "Heading"]
     AttributesNode[8, 22] textOpen:[8, 9, "{"] text:[9, 21, "#123-heading"] textClose:[21, 22, "}"]
@@ -1116,12 +1116,12 @@ paragraph text.
 .
 <p><a href="http://example.com" style="color:red">test</a></p>
 .
-Document[0, 57]
+Document[0, 56]
   Paragraph[0, 7] isTrailingBlankLine
     LinkRef[0, 6] referenceOpen:[0, 1, "["] reference:[1, 5, "test"] referenceClose:[5, 6, "]"]
       Text[1, 5] chars:[1, 5, "test"]
   Reference[8, 34] refOpen:[8, 9, "["] ref:[9, 13, "test"] refClose:[13, 15, "]:"] url:[16, 34, "http://example.com"]
-  Paragraph[37, 57]
+  Paragraph[37, 56]
     AttributesNode[37, 56] textOpen:[37, 38, "{"] text:[38, 55, "style=\"color:red\""] textClose:[55, 56, "}"]
       AttributeNode[38, 55] name:[38, 43, "style"] sep:[43, 44, "="] valueOpen:[44, 45, "\""] value:[45, 54, "color:red"] valueClose:[54, 55, "\""]
 ````````````````````````````````
@@ -1139,7 +1139,7 @@ Document[0, 57]
 <p><a href="http://example.com" style="color:red">reference 1</a></p>
 <p><a href="http://example.com" style="color:red">reference 2</a></p>
 .
-Document[0, 93]
+Document[0, 92]
   Paragraph[0, 21] isTrailingBlankLine
     LinkRef[0, 19] textOpen:[0, 1, "["] text:[1, 12, "reference 1"] textClose:[12, 13, "]"] referenceOpen:[13, 14, "["] reference:[14, 18, "test"] referenceClose:[18, 19, "]"]
       Text[1, 12] chars:[1, 12, "refer … nce 1"]
@@ -1147,7 +1147,7 @@ Document[0, 93]
     LinkRef[22, 41] textOpen:[22, 23, "["] text:[23, 34, "reference 2"] textClose:[34, 35, "]"] referenceOpen:[35, 36, "["] reference:[36, 40, "test"] referenceClose:[40, 41, "]"]
       Text[23, 34] chars:[23, 34, "refer … nce 2"]
   Reference[44, 70] refOpen:[44, 45, "["] ref:[45, 49, "test"] refClose:[49, 51, "]:"] url:[52, 70, "http://example.com"]
-  Paragraph[73, 93]
+  Paragraph[73, 92]
     AttributesNode[73, 92] textOpen:[73, 74, "{"] text:[74, 91, "style=\"color:red\""] textClose:[91, 92, "}"]
       AttributeNode[74, 91] name:[74, 79, "style"] sep:[79, 80, "="] valueOpen:[80, 81, "\""] value:[81, 90, "color:red"] valueClose:[90, 91, "\""]
 ````````````````````````````````
@@ -1164,12 +1164,12 @@ Ref image
 .
 <p><img src="http://example.com/test.png" alt="test" style="border-color:red" /></p>
 .
-Document[0, 76]
+Document[0, 75]
   Paragraph[0, 8] isTrailingBlankLine
     ImageRef[0, 7] referenceOpen:[0, 2, "!["] reference:[2, 6, "test"] referenceClose:[6, 7, "]"]
       Text[2, 6] chars:[2, 6, "test"]
   Reference[9, 46] refOpen:[9, 10, "["] ref:[10, 14, "test"] refClose:[14, 16, "]:"] urlOpen:[17, 18, "<"] url:[18, 45, "http://example.com/test.png"] urlClose:[45, 46, ">"]
-  Paragraph[49, 76]
+  Paragraph[49, 75]
     AttributesNode[49, 75] textOpen:[49, 50, "{"] text:[50, 74, "style=\"border-color:red\""] textClose:[74, 75, "}"]
       AttributeNode[50, 74] name:[50, 55, "style"] sep:[55, 56, "="] valueOpen:[56, 57, "\""] value:[57, 73, "border-color:red"] valueClose:[73, 74, "\""]
 ````````````````````````````````
@@ -1187,7 +1187,7 @@ Document[0, 76]
 <p><img src="http://example.com/test.png" alt="reference 1" style="border-color:red" /></p>
 <p><img src="http://example.com/test.png" alt="reference 2" style="border-color:red" /></p>
 .
-Document[0, 111]
+Document[0, 110]
   Paragraph[0, 21] isTrailingBlankLine
     ImageRef[0, 20] textOpen:[0, 2, "!["] text:[2, 13, "reference 1"] textClose:[13, 14, "]"] referenceOpen:[14, 15, "["] reference:[15, 19, "test"] referenceClose:[19, 20, "]"]
       Text[2, 13] chars:[2, 13, "refer … nce 1"]
@@ -1195,7 +1195,7 @@ Document[0, 111]
     ImageRef[22, 42] textOpen:[22, 24, "!["] text:[24, 35, "reference 2"] textClose:[35, 36, "]"] referenceOpen:[36, 37, "["] reference:[37, 41, "test"] referenceClose:[41, 42, "]"]
       Text[24, 35] chars:[24, 35, "refer … nce 2"]
   Reference[44, 81] refOpen:[44, 45, "["] ref:[45, 49, "test"] refClose:[49, 51, "]:"] urlOpen:[52, 53, "<"] url:[53, 80, "http://example.com/test.png"] urlClose:[80, 81, ">"]
-  Paragraph[84, 111]
+  Paragraph[84, 110]
     AttributesNode[84, 110] textOpen:[84, 85, "{"] text:[85, 109, "style=\"border-color:red\""] textClose:[109, 110, "}"]
       AttributeNode[85, 109] name:[85, 90, "style"] sep:[90, 91, "="] valueOpen:[91, 92, "\""] value:[92, 108, "border-color:red"] valueClose:[108, 109, "\""]
 ````````````````````````````````
@@ -1223,8 +1223,8 @@ Sample text{.class-name}
 .
 <p><span class="class-name">Sample text</span></p>
 .
-Document[0, 25]
-  Paragraph[0, 25]
+Document[0, 24]
+  Paragraph[0, 24]
     TextBase[0, 11] chars:[0, 11, "Sampl …  text"]
       Text[0, 11] chars:[0, 11, "Sampl …  text"]
     AttributesNode[11, 24] textOpen:[11, 12, "{"] text:[12, 23, ".class-name"] textClose:[23, 24, "}"]
@@ -1250,8 +1250,8 @@ Paragraph{style="color:red"}
 .
 <p><span style="color:red">Paragraph</span></p>
 .
-Document[0, 29]
-  Paragraph[0, 29]
+Document[0, 28]
+  Paragraph[0, 28]
     TextBase[0, 9] chars:[0, 9, "Paragraph"]
       Text[0, 9] chars:[0, 9, "Paragraph"]
     AttributesNode[9, 28] textOpen:[9, 10, "{"] text:[10, 27, "style=\"color:red\""] textClose:[27, 28, "}"]
@@ -1307,8 +1307,8 @@ Sample<!----> text{.class-name}
 .
 <p>Sample<!----><span class="class-name"> text</span></p>
 .
-Document[0, 32]
-  Paragraph[0, 32]
+Document[0, 31]
+  Paragraph[0, 31]
     Text[0, 6] chars:[0, 6, "Sample"]
     HtmlInlineComment[6, 13] chars:[6, 13, "<!---->"]
     TextBase[13, 18] chars:[13, 18, " text"]
@@ -1323,8 +1323,8 @@ Sample text **bold<!----> text{.class-name}**
 .
 <p>Sample text <strong>bold<!----><span class="class-name"> text</span></strong></p>
 .
-Document[0, 46]
-  Paragraph[0, 46]
+Document[0, 45]
+  Paragraph[0, 45]
     Text[0, 12] chars:[0, 12, "Sampl … text "]
     StrongEmphasis[12, 45] textOpen:[12, 14, "**"] text:[14, 43, "bold<!----> text{.class-name}"] textClose:[43, 45, "**"]
       Text[14, 18] chars:[14, 18, "bold"]
@@ -1356,8 +1356,8 @@ Sample text **bold{.class-name}**
 .
 <p>Sample text <strong><span class="class-name">bold</span></strong></p>
 .
-Document[0, 34]
-  Paragraph[0, 34]
+Document[0, 33]
+  Paragraph[0, 33]
     Text[0, 12] chars:[0, 12, "Sampl … text "]
     StrongEmphasis[12, 33] textOpen:[12, 14, "**"] text:[14, 31, "bold{.class-name}"] textClose:[31, 33, "**"]
       TextBase[14, 18] chars:[14, 18, "bold"]
@@ -1431,16 +1431,16 @@ Document[0, 63]
   <li style="color:blue">list item</li>
 </ul>
 .
-Document[0, 64]
-  BulletList[0, 64] isTight
+Document[0, 63]
+  BulletList[0, 63] isTight
     BulletListItem[0, 31] open:[0, 1, "*"] isTight
       Paragraph[2, 31]
         TextBase[2, 11] chars:[2, 11, "list item"]
           Text[2, 11] chars:[2, 11, "list item"]
         AttributesNode[11, 30] textOpen:[11, 12, "{"] text:[12, 29, "style=\"color:red\""] textClose:[29, 30, "}"]
           AttributeNode[12, 29] name:[12, 17, "style"] sep:[17, 18, "="] valueOpen:[18, 19, "\""] value:[19, 28, "color:red"] valueClose:[28, 29, "\""]
-    BulletListItem[31, 64] open:[31, 32, "*"] isTight
-      Paragraph[33, 64]
+    BulletListItem[31, 63] open:[31, 32, "*"] isTight
+      Paragraph[33, 63]
         Text[33, 42] chars:[33, 42, "list item"]
         AttributesNode[43, 63] textOpen:[43, 44, "{"] text:[44, 62, "style=\"color:blue\""] textClose:[62, 63, "}"]
           AttributeNode[44, 62] name:[44, 49, "style"] sep:[49, 50, "="] valueOpen:[50, 51, "\""] value:[51, 61, "color:blue"] valueClose:[61, 62, "\""]
@@ -1489,10 +1489,10 @@ paragraph 1
 .
 <p style="color:red">paragraph 1</p>
 .
-Document[0, 33]
+Document[0, 32]
   Paragraph[0, 12] isTrailingBlankLine
     Text[0, 11] chars:[0, 11, "parag … aph 1"]
-  Paragraph[13, 33]
+  Paragraph[13, 32]
     AttributesNode[13, 32] textOpen:[13, 14, "{"] text:[14, 31, "style=\"color:red\""] textClose:[31, 32, "}"]
       AttributeNode[14, 31] name:[14, 19, "style"] sep:[19, 20, "="] valueOpen:[20, 21, "\""] value:[21, 30, "color:red"] valueClose:[30, 31, "\""]
 ````````````````````````````````
@@ -1507,11 +1507,11 @@ paragraph 1
 .
 <p>paragraph 1</p>
 .
-Document[0, 33]
+Document[0, 32]
   Paragraph[0, 20] isTrailingBlankLine
     AttributesNode[0, 19] textOpen:[0, 1, "{"] text:[1, 18, "style=\"color:red\""] textClose:[18, 19, "}"]
       AttributeNode[1, 18] name:[1, 6, "style"] sep:[6, 7, "="] valueOpen:[7, 8, "\""] value:[8, 17, "color:red"] valueClose:[17, 18, "\""]
-  Paragraph[21, 33]
+  Paragraph[21, 32]
     Text[21, 32] chars:[21, 32, "parag … aph 1"]
 ````````````````````````````````
 
@@ -1530,17 +1530,17 @@ paragraph 1
   <li>list item 2</li>
 </ul>
 .
-Document[0, 61]
+Document[0, 60]
   Paragraph[0, 12] isTrailingBlankLine
     Text[0, 11] chars:[0, 11, "parag … aph 1"]
-  BulletList[13, 61] isTight
+  BulletList[13, 60] isTight
     BulletListItem[13, 47] open:[13, 14, "*"] isTight
       Paragraph[15, 47]
         AttributesNode[15, 34] textOpen:[15, 16, "{"] text:[16, 33, "style=\"color:red\""] textClose:[33, 34, "}"]
           AttributeNode[16, 33] name:[16, 21, "style"] sep:[21, 22, "="] valueOpen:[22, 23, "\""] value:[23, 32, "color:red"] valueClose:[32, 33, "\""]
         Text[35, 46] chars:[35, 46, "list  … tem 1"]
-    BulletListItem[47, 61] open:[47, 48, "*"] isTight
-      Paragraph[49, 61]
+    BulletListItem[47, 60] open:[47, 48, "*"] isTight
+      Paragraph[49, 60]
         Text[49, 60] chars:[49, 60, "list  … tem 2"]
 ````````````````````````````````
 
@@ -1559,15 +1559,15 @@ paragraph 1
   <li>list item 1</li>
 </ul>
 .
-Document[0, 61]
+Document[0, 60]
   Paragraph[0, 12] isTrailingBlankLine
     Text[0, 11] chars:[0, 11, "parag … aph 1"]
-  BulletList[13, 61] isTight
+  BulletList[13, 60] isTight
     BulletListItem[13, 27] open:[13, 14, "*"] isTight
       Paragraph[15, 27]
         Text[15, 26] chars:[15, 26, "list  … tem 2"]
-    BulletListItem[27, 61] open:[27, 28, "*"] isTight
-      Paragraph[29, 61]
+    BulletListItem[27, 60] open:[27, 28, "*"] isTight
+      Paragraph[29, 60]
         AttributesNode[29, 48] textOpen:[29, 30, "{"] text:[30, 47, "style=\"color:red\""] textClose:[47, 48, "}"]
           AttributeNode[30, 47] name:[30, 35, "style"] sep:[35, 36, "="] valueOpen:[36, 37, "\""] value:[37, 46, "color:red"] valueClose:[46, 47, "\""]
         Text[49, 60] chars:[49, 60, "list  … tem 1"]
@@ -1582,7 +1582,7 @@ Heading
 .
 <h1 id="heading">Heading</h1>
 .
-Document[0, 16]
+Document[0, 15]
   Heading[0, 15] text:[0, 7, "Heading"] textClose:[8, 15, "======="]
     Text[0, 7] chars:[0, 7, "Heading"]
 ````````````````````````````````
@@ -1594,7 +1594,7 @@ Heading with emoji :+1:
 .
 <h1 id="heading-with-emoji">Heading with emoji <img src="/img/plus1.png" alt="emoji people:+1" height="20" width="20" align="absmiddle" /></h1>
 .
-Document[0, 48]
+Document[0, 47]
   Heading[0, 47] text:[0, 23, "Heading with emoji :+1:"] textClose:[24, 47, "======================="]
     Text[0, 19] chars:[0, 19, "Headi … moji "]
     Emoji[19, 23] textOpen:[19, 20, ":"] text:[20, 22, "+1"] textClose:[22, 23, ":"]
@@ -1628,7 +1628,7 @@ Heading{#id1} with multiple{#id2} anchors{#id3}
 .
 <h1 id="heading-with-multiple-anchors"><span id="id1">Heading</span><span id="id2"> with multiple</span><span id="id3"> anchors</span></h1>
 .
-Document[0, 96]
+Document[0, 95]
   Heading[0, 95] text:[0, 47, "Heading{#id1} with multiple{#id2} anchors{#id3}"] textClose:[48, 95, "==============================================="]
     TextBase[0, 7] chars:[0, 7, "Heading"]
       Text[0, 7] chars:[0, 7, "Heading"]
@@ -1672,7 +1672,7 @@ Heading{#id1} with multiple{#id2 style="color:red"} anchors{#id3}
 .
 <h1 id="heading-with-multiple-anchors"><span id="id1">Heading</span><span id="id2" style="color:red"> with multiple</span><span id="id3"> anchors</span></h1>
 .
-Document[0, 132]
+Document[0, 131]
   Heading[0, 131] text:[0, 65, "Heading{#id1} with multiple{#id2 style=\"color:red\"} anchors{#id3}"] textClose:[66, 131, "================================================================="]
     TextBase[0, 7] chars:[0, 7, "Heading"]
       Text[0, 7] chars:[0, 7, "Heading"]
@@ -1696,7 +1696,7 @@ Heading{#id1} with multiple{#id2 style="color:red"} anchors{#id3} {#id4}
 .
 <h1 id="id4"><span id="id1">Heading</span><span id="id2" style="color:red"> with multiple</span><span id="id3"> anchors</span></h1>
 .
-Document[0, 146]
+Document[0, 145]
   Heading[0, 145] text:[0, 72, "Heading{#id1} with multiple{#id2 style=\"color:red\"} anchors{#id3} {#id4}"] textClose:[73, 145, "========================================================================"]
     TextBase[0, 7] chars:[0, 7, "Heading"]
       Text[0, 7] chars:[0, 7, "Heading"]
@@ -1721,7 +1721,7 @@ Document[0, 146]
 .
 <h3 id="heading-with-trailing--more-text"><span style="color:red">Heading with trailing </span> More Text</h3>
 .
-Document[0, 58]
+Document[0, 57]
   Heading[0, 57] textOpen:[0, 3, "###"] text:[4, 57, "Heading with trailing { style='color:red' } More Text"]
     TextBase[4, 26] chars:[4, 26, "Headi … ling "]
       Text[4, 26] chars:[4, 26, "Headi … ling "]
@@ -1736,7 +1736,7 @@ Document[0, 58]
 .
 <h3 id="heading-with-trailing-more-text"><span style="color:red">Heading with trailing</span> More Text</h3>
 .
-Document[0, 57]
+Document[0, 56]
   Heading[0, 56] textOpen:[0, 3, "###"] text:[4, 56, "Heading with trailing{ style='color:red' } More Text"]
     TextBase[4, 25] chars:[4, 25, "Headi … iling"]
       Text[4, 25] chars:[4, 25, "Headi … iling"]
@@ -1751,7 +1751,7 @@ Document[0, 57]
 .
 <h3 id="heading-with-trailing"><span style="color:red">Heading with trailing</span></h3>
 .
-Document[0, 47]
+Document[0, 46]
   Heading[0, 46] textOpen:[0, 3, "###"] text:[4, 46, "Heading with trailing{ style='color:red' }"]
     TextBase[4, 25] chars:[4, 25, "Headi … iling"]
       Text[4, 25] chars:[4, 25, "Headi … iling"]
@@ -1765,7 +1765,7 @@ Document[0, 47]
 .
 <h3 id="explicit-id">Heading</h3>
 .
-Document[0, 27]
+Document[0, 26]
   Heading[0, 26] textOpen:[0, 3, "###"] text:[4, 26, "Heading {#explicit-id}"]
     Text[4, 11] chars:[4, 11, "Heading"]
     AttributesNode[12, 26] textOpen:[12, 13, "{"] text:[13, 25, "#explicit-id"] textClose:[25, 26, "}"]
@@ -1778,7 +1778,7 @@ Document[0, 27]
 .
 <h3 id="heading"><span id="explicit-id">Heading</span></h3>
 .
-Document[0, 26]
+Document[0, 25]
   Heading[0, 25] textOpen:[0, 3, "###"] text:[4, 25, "Heading{#explicit-id}"]
     TextBase[4, 11] chars:[4, 11, "Heading"]
       Text[4, 11] chars:[4, 11, "Heading"]
@@ -1793,7 +1793,7 @@ Heading {#explicit-id}
 .
 <h1 id="explicit-id">Heading</h1>
 .
-Document[0, 38]
+Document[0, 37]
   Heading[0, 37] text:[0, 22, "Heading {#explicit-id}"] textClose:[23, 37, "=============="]
     Text[0, 7] chars:[0, 7, "Heading"]
     AttributesNode[8, 22] textOpen:[8, 9, "{"] text:[9, 21, "#explicit-id"] textClose:[21, 22, "}"]
@@ -1807,7 +1807,7 @@ Heading{#explicit-id}
 .
 <h1 id="heading"><span id="explicit-id">Heading</span></h1>
 .
-Document[0, 37]
+Document[0, 36]
   Heading[0, 36] text:[0, 21, "Heading{#explicit-id}"] textClose:[22, 36, "=============="]
     TextBase[0, 7] chars:[0, 7, "Heading"]
       Text[0, 7] chars:[0, 7, "Heading"]
@@ -1841,7 +1841,7 @@ Default rendering with emphasis
 <h3 id="heading-111">Heading 1.1.1</h3>
 <h3 id="heading-3">Heading 1.1.2  <strong><em>some bold italic</em></strong></h3>
 .
-Document[0, 162]
+Document[0, 161]
   TocBlock[0, 7] openingMarker:[0, 1] tocKeyword:[1, 4] closingMarker:[4, 5]
   Heading[8, 46] textOpen:[8, 9, "#"] text:[10, 46, "Heading **some bold** 1 {#heading-1}"]
     Text[10, 18] chars:[10, 18, "Heading "]
@@ -1877,8 +1877,8 @@ This is a test. It works fine until a word like don't appears.{.style} Another s
 .
 <p><span class="style">This is a test. It works fine until a word like don&rsquo;t appears.</span><span class="style2"> Another style might follow.</span></p>
 .
-Document[0, 108]
-  Paragraph[0, 108]
+Document[0, 107]
+  Paragraph[0, 107]
     TextBase[0, 62] chars:[0, 62, "This  … ears."]
       Text[0, 51] chars:[0, 51, "This  … e don"]
       TypographicSmarts[51, 52] typographic: &rsquo; 
@@ -1899,8 +1899,8 @@ follow.{.style2}
 <p><span class="style">This is a test. It works fine until a word like &lsquo;don&rsquo;t&rsquo; appears.</span><span class="style2"> Another style might
 follow.</span></p>
 .
-Document[0, 110]
-  Paragraph[0, 110]
+Document[0, 109]
+  Paragraph[0, 109]
     TextBase[0, 64] chars:[0, 64, "This  … ears."]
       Text[0, 48] chars:[0, 48, "This  … like "]
       TypographicQuotes[48, 55] typographicOpening: &lsquo;  typographicClosing: &rsquo;  textOpen:[48, 49, "'"] text:[49, 54, "don't"] textClose:[54, 55, "'"]
@@ -1926,8 +1926,8 @@ follow.{.style2}
 <p><span class="style">This is a test. It works fine until a word like don't appears.</span><span class="style2"> Another style might
 follow.</span></p>
 .
-Document[0, 109]
-  Paragraph[0, 109]
+Document[0, 108]
+  Paragraph[0, 108]
     TextBase[0, 63] chars:[0, 63, "This  … ears."]
       Text[0, 51] chars:[0, 51, "This  … e don"]
       EscapedCharacter[51, 53] textOpen:[51, 52, "\"] text:[52, 53, "'"]
@@ -2017,8 +2017,8 @@ Cond 1.2 text node{.red}
 .
 <p><span class="red">Cond 1.2 text node</span></p>
 .
-Document[0, 25]
-  Paragraph[0, 25]
+Document[0, 24]
+  Paragraph[0, 24]
     TextBase[0, 18] chars:[0, 18, "Cond  …  node"]
       Text[0, 18] chars:[0, 18, "Cond  …  node"]
     AttributesNode[18, 24] textOpen:[18, 19, "{"] text:[19, 23, ".red"] textClose:[23, 24, "}"]
@@ -2033,8 +2033,8 @@ Cond 1.2 text {}node
 .
 <p>Cond 1.2 text {}node</p>
 .
-Document[0, 21]
-  Paragraph[0, 21]
+Document[0, 20]
+  Paragraph[0, 20]
     Text[0, 20] chars:[0, 20, "Cond  … }node"]
 ````````````````````````````````
 
@@ -2046,8 +2046,8 @@ Cond 1.2 text {}node{.red}
 .
 <p><span class="red">Cond 1.2 text {}node</span></p>
 .
-Document[0, 27]
-  Paragraph[0, 27]
+Document[0, 26]
+  Paragraph[0, 26]
     TextBase[0, 20] chars:[0, 20, "Cond  … }node"]
       Text[0, 20] chars:[0, 20, "Cond  … }node"]
     AttributesNode[20, 26] textOpen:[20, 21, "{"] text:[21, 25, ".red"] textClose:[25, 26, "}"]
@@ -2062,8 +2062,8 @@ Cond 1.2 text { }node{.red}
 .
 <p><span class="red">Cond 1.2 text { }node</span></p>
 .
-Document[0, 28]
-  Paragraph[0, 28]
+Document[0, 27]
+  Paragraph[0, 27]
     TextBase[0, 21] chars:[0, 21, "Cond  … }node"]
       Text[0, 21] chars:[0, 21, "Cond  … }node"]
     AttributesNode[21, 27] textOpen:[21, 22, "{"] text:[22, 26, ".red"] textClose:[26, 27, "}"]
@@ -2078,8 +2078,8 @@ Cond 1.2 text {.}node{.red}
 .
 <p><span class="red">Cond 1.2 text {.}node</span></p>
 .
-Document[0, 28]
-  Paragraph[0, 28]
+Document[0, 27]
+  Paragraph[0, 27]
     TextBase[0, 21] chars:[0, 21, "Cond  … }node"]
       Text[0, 21] chars:[0, 21, "Cond  … }node"]
     AttributesNode[21, 27] textOpen:[21, 22, "{"] text:[22, 26, ".red"] textClose:[26, 27, "}"]
@@ -2094,8 +2094,8 @@ Cond 1.2 text { #}node{.red}
 .
 <p><span class="red">Cond 1.2 text { #}node</span></p>
 .
-Document[0, 29]
-  Paragraph[0, 29]
+Document[0, 28]
+  Paragraph[0, 28]
     TextBase[0, 22] chars:[0, 22, "Cond  … }node"]
       Text[0, 22] chars:[0, 22, "Cond  … }node"]
     AttributesNode[22, 28] textOpen:[22, 23, "{"] text:[23, 27, ".red"] textClose:[27, 28, "}"]
@@ -2108,8 +2108,8 @@ Cond 1.2 text {# }node{.red}
 .
 <p><span class="red">Cond 1.2 text {# }node</span></p>
 .
-Document[0, 29]
-  Paragraph[0, 29]
+Document[0, 28]
+  Paragraph[0, 28]
     TextBase[0, 22] chars:[0, 22, "Cond  … }node"]
       Text[0, 22] chars:[0, 22, "Cond  … }node"]
     AttributesNode[22, 28] textOpen:[22, 23, "{"] text:[23, 27, ".red"] textClose:[27, 28, "}"]
@@ -2154,8 +2154,8 @@ Cond 1.2 text {#}node{.red}
 .
 <p><span class="red">Cond 1.2 text {#}node</span></p>
 .
-Document[0, 28]
-  Paragraph[0, 28]
+Document[0, 27]
+  Paragraph[0, 27]
     TextBase[0, 21] chars:[0, 21, "Cond  … }node"]
       Text[0, 21] chars:[0, 21, "Cond  … }node"]
     AttributesNode[21, 27] textOpen:[21, 22, "{"] text:[22, 26, ".red"] textClose:[26, 27, "}"]
@@ -2446,8 +2446,8 @@ text {   attribute=value}
 .
 <p attribute="value">text</p>
 .
-Document[0, 26]
-  Paragraph[0, 26]
+Document[0, 25]
+  Paragraph[0, 25]
     Text[0, 4] chars:[0, 4, "text"]
     AttributesNode[5, 25] textOpen:[5, 6, "{"] text:[6, 24, "   attribute=value"] textClose:[24, 25, "}"]
       AttributeNode[9, 24] name:[9, 18, "attribute"] sep:[18, 19, "="] value:[19, 24, "value"]
@@ -2461,8 +2461,8 @@ text {attribute=value   }
 .
 <p attribute="value">text</p>
 .
-Document[0, 26]
-  Paragraph[0, 26]
+Document[0, 25]
+  Paragraph[0, 25]
     Text[0, 4] chars:[0, 4, "text"]
     AttributesNode[5, 25] textOpen:[5, 6, "{"] text:[6, 24, "attribute=value   "] textClose:[24, 25, "}"]
       AttributeNode[6, 21] name:[6, 15, "attribute"] sep:[15, 16, "="] value:[16, 21, "value"]
@@ -2480,7 +2480,7 @@ Work with
 <p>Work with
 <a href="https://example.com" style="color:[[LINK]]">Markdown</a> files like you do with other languages in the IDE:</p>
 .
-Document[0, 129]
+Document[0, 128]
   Paragraph[0, 96] isTrailingBlankLine
     Text[0, 9] chars:[0, 9, "Work with"]
     SoftLineBreak[9, 10]
@@ -2502,7 +2502,7 @@ Work with
 <p>Work with
 <img src="https://example.com/image.png" alt="Markdown" style="color:[[LINK]]" /> files like you do with other languages in the IDE:</p>
 .
-Document[0, 140]
+Document[0, 139]
   Paragraph[0, 97] isTrailingBlankLine
     Text[0, 9] chars:[0, 9, "Work with"]
     SoftLineBreak[9, 10]
@@ -2522,8 +2522,8 @@ Work with
 <p>Work with
 <a href="https://example.com" style="color:[[LINK]]">Markdown</a> files like you do with other languages in the IDE:</p>
 .
-Document[0, 117]
-  Paragraph[0, 117]
+Document[0, 116]
+  Paragraph[0, 116]
     Text[0, 9] chars:[0, 9, "Work with"]
     SoftLineBreak[9, 10]
     Link[10, 41] textOpen:[10, 11, "["] text:[11, 19, "Markdown"] textClose:[19, 20, "]"] linkOpen:[20, 21, "("] url:[21, 40, "https://example.com"] pageRef:[21, 40, "https://example.com"] linkClose:[40, 41, ")"]
@@ -2541,8 +2541,8 @@ Work with
 <p>Work with
 <img src="https://example.com/image.png" alt="Markdown" style="color:[[LINK]]" /> files like you do with other languages in the IDE:</p>
 .
-Document[0, 128]
-  Paragraph[0, 128]
+Document[0, 127]
+  Paragraph[0, 127]
     Text[0, 9] chars:[0, 9, "Work with"]
     SoftLineBreak[9, 10]
     Image[10, 52] textOpen:[10, 12, "!["] text:[12, 20, "Markdown"] textClose:[20, 21, "]"] linkOpen:[21, 22, "("] url:[22, 51, "https://example.com/image.png"] pageRef:[22, 51, "https://example.com/image.png"] linkClose:[51, 52, ")"]
@@ -2708,9 +2708,9 @@ Attributes after element
 .
 <pre caption="Caption"><code class="language-plantuml" caption="Caption"></code></pre>
 .
-Document[0, 36]
+Document[0, 35]
   FencedCodeBlock[0, 15] open:[0, 3, "```"] info:[3, 11, "plantuml"] lines[0] close:[12, 15, "```"]
-  Paragraph[16, 36]
+  Paragraph[16, 35]
     AttributesNode[16, 35] textOpen:[16, 17, "{"] text:[17, 34, "caption=\"Caption\""] textClose:[34, 35, "}"]
       AttributeNode[17, 34] name:[17, 24, "caption"] sep:[24, 25, "="] valueOpen:[25, 26, "\""] value:[26, 33, "Caption"] valueClose:[33, 34, "\""]
 ````````````````````````````````
@@ -2888,8 +2888,8 @@ text {#_1_}{#_2_}
 .
 <p><span id="_2_">text </span></p>
 .
-Document[0, 18]
-  Paragraph[0, 18]
+Document[0, 17]
+  Paragraph[0, 17]
     TextBase[0, 5] chars:[0, 5, "text "]
       Text[0, 5] chars:[0, 5, "text "]
     AttributesNode[5, 11] textOpen:[5, 6, "{"] text:[6, 10, "#_1_"] textClose:[10, 11, "}"]

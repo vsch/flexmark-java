@@ -52,7 +52,7 @@ linters:
 ---
 
 .
-Document[0, 190]
+Document[0, 189]
   JekyllFrontMatterBlock[0, 189] open:[0, 3] content:[4, 186] close:[186, 189]
 ````````````````````````````````
 

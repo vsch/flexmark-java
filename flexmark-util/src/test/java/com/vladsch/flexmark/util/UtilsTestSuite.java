@@ -10,9 +10,10 @@ import com.vladsch.flexmark.util.options.AttributesTest;
 import com.vladsch.flexmark.util.options.MutableAttributeTest;
 import com.vladsch.flexmark.util.sequence.BasedSequenceImplTest;
 import com.vladsch.flexmark.util.sequence.RepeatedCharSequenceTest;
+import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
-@org.junit.runner.RunWith(Suite.class)
+@RunWith(Suite.class)
 @Suite.SuiteClasses({
         IntegerBitSetTest.class,
         OrderedSetTest.class,

@@ -38,10 +38,10 @@ task list item
   <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;abc</li>
 </ul>
 .
-Document[0, 9]
-  BulletList[0, 9] isTight
-    TaskListItem[0, 9] open:[0, 1, "-"] openSuffix:[2, 5, "[ ]"] isTight isNotDone
-      Paragraph[5, 9]
+Document[0, 8]
+  BulletList[0, 8] isTight
+    TaskListItem[0, 8] open:[0, 1, "-"] openSuffix:[2, 5, "[ ]"] isTight isNotDone
+      Paragraph[5, 8]
         Text[5, 8] chars:[5, 8, "abc"]
 ````````````````````````````````
 
@@ -171,7 +171,7 @@ empty task list items
   <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" readonly="readonly" />&nbsp;</li>
 </ul>
 .
-Document[0, 62]
+Document[0, 61]
   BulletList[0, 21] isTight
     TaskListItem[0, 5] open:[0, 1, "-"] openSuffix:[2, 5, "[ ]"] isTight isNotDone
     TaskListItem[6, 12] open:[6, 7, "-"] openSuffix:[9, 12, "[X]"] isTight isDone
@@ -226,7 +226,7 @@ non empty task list items
   <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" readonly="readonly" />&nbsp;task</li>
 </ul>
 .
-Document[0, 103]
+Document[0, 102]
   BulletList[0, 33] isTight
     TaskListItem[0, 11] open:[0, 1, "-"] openSuffix:[2, 5, "[ ]"] isTight isNotDone
       Paragraph[6, 11]
@@ -247,15 +247,15 @@ Document[0, 103]
     TaskListItem[58, 69] open:[58, 59, "*"] openSuffix:[60, 63, "[X]"] isLoose hadBlankLineAfter isDone
       Paragraph[64, 69] isTrailingBlankLine
         Text[64, 68] chars:[64, 68, "task"]
-  BulletList[70, 103] isTight
+  BulletList[70, 102] isTight
     TaskListItem[70, 81] open:[70, 71, "+"] openSuffix:[72, 75, "[ ]"] isTight isNotDone
       Paragraph[76, 81]
         Text[76, 80] chars:[76, 80, "task"]
     TaskListItem[81, 92] open:[81, 82, "+"] openSuffix:[83, 86, "[x]"] isTight isDone
       Paragraph[87, 92]
         Text[87, 91] chars:[87, 91, "task"]
-    TaskListItem[92, 103] open:[92, 93, "+"] openSuffix:[94, 97, "[X]"] isTight isDone
-      Paragraph[98, 103]
+    TaskListItem[92, 102] open:[92, 93, "+"] openSuffix:[94, 97, "[X]"] isTight isDone
+      Paragraph[98, 102]
         Text[98, 102] chars:[98, 102, "task"]
 ````````````````````````````````
 
@@ -299,7 +299,7 @@ non empty task list items with inlines
   <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" readonly="readonly" />&nbsp;task <strong>emphasis</strong></li>
 </ul>
 .
-Document[0, 220]
+Document[0, 219]
   BulletList[0, 72] isTight
     TaskListItem[0, 24] open:[0, 1, "-"] openSuffix:[2, 5, "[ ]"] isTight isNotDone
       Paragraph[6, 24]
@@ -332,7 +332,7 @@ Document[0, 220]
         Text[129, 134] chars:[129, 134, "task "]
         StrongEmphasis[134, 146] textOpen:[134, 136, "**"] text:[136, 144, "emphasis"] textClose:[144, 146, "**"]
           Text[136, 144] chars:[136, 144, "emphasis"]
-  BulletList[148, 220] isTight
+  BulletList[148, 219] isTight
     TaskListItem[148, 172] open:[148, 149, "+"] openSuffix:[150, 153, "[ ]"] isTight isNotDone
       Paragraph[154, 172]
         Text[154, 159] chars:[154, 159, "task "]
@@ -343,8 +343,8 @@ Document[0, 220]
         Text[178, 183] chars:[178, 183, "task "]
         StrongEmphasis[183, 195] textOpen:[183, 185, "**"] text:[185, 193, "emphasis"] textClose:[193, 195, "**"]
           Text[185, 193] chars:[185, 193, "emphasis"]
-    TaskListItem[196, 220] open:[196, 197, "+"] openSuffix:[198, 201, "[X]"] isTight isDone
-      Paragraph[202, 220]
+    TaskListItem[196, 219] open:[196, 197, "+"] openSuffix:[198, 201, "[X]"] isTight isDone
+      Paragraph[202, 219]
         Text[202, 207] chars:[202, 207, "task "]
         StrongEmphasis[207, 219] textOpen:[207, 209, "**"] text:[209, 217, "emphasis"] textClose:[217, 219, "**"]
           Text[209, 217] chars:[209, 217, "emphasis"]
@@ -386,8 +386,8 @@ nested task items
   </li>
 </ul>
 .
-Document[0, 108]
-  BulletList[0, 108] isLoose
+Document[0, 107]
+  BulletList[0, 107] isLoose
     BulletListItem[0, 34] open:[0, 1, "-"] isLoose
       Paragraph[2, 16]
         Text[2, 15] chars:[2, 15, "non-t …  item"]
@@ -402,12 +402,12 @@ Document[0, 108]
         TaskListItem[55, 71] open:[55, 56, "-"] openSuffix:[57, 60, "[ ]"] isTight hadBlankLineAfter isNotDone
           Paragraph[61, 71] isTrailingBlankLine
             Text[61, 70] chars:[61, 70, "task item"]
-    TaskListItem[74, 108] open:[74, 75, "-"] openSuffix:[76, 79, "[ ]"] isLoose isNotDone
+    TaskListItem[74, 107] open:[74, 75, "-"] openSuffix:[76, 79, "[ ]"] isLoose isNotDone
       Paragraph[80, 90]
         Text[80, 89] chars:[80, 89, "task item"]
-      BulletList[92, 108] isTight
-        BulletListItem[92, 108] open:[92, 93, "-"] isTight
-          Paragraph[94, 108]
+      BulletList[92, 107] isTight
+        BulletListItem[92, 107] open:[92, 93, "-"] isTight
+          Paragraph[94, 107]
             Text[94, 107] chars:[94, 107, "non t …  item"]
 ````````````````````````````````
 
@@ -768,13 +768,13 @@ task list item on ordered list item
   <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" readonly="readonly" />&nbsp;task</li>
 </ol>
 .
-Document[0, 24]
-  OrderedList[0, 24] isTight delimiter:'.'
+Document[0, 23]
+  OrderedList[0, 23] isTight delimiter:'.'
     TaskListItem[0, 12] open:[0, 2, "1."] openSuffix:[3, 6, "[ ]"] isTight isOrderedItem isNotDone
       Paragraph[7, 12]
         Text[7, 11] chars:[7, 11, "task"]
-    TaskListItem[12, 24] open:[12, 14, "2."] openSuffix:[15, 18, "[x]"] isTight isOrderedItem isDone
-      Paragraph[19, 24]
+    TaskListItem[12, 23] open:[12, 14, "2."] openSuffix:[15, 18, "[x]"] isTight isOrderedItem isDone
+      Paragraph[19, 23]
         Text[19, 23] chars:[19, 23, "task"]
 ````````````````````````````````
 
@@ -820,12 +820,12 @@ content indent is after task marker
   </li>
 </ul>
 .
-Document[0, 35]
-  BulletList[0, 35] isLoose
-    TaskListItem[0, 35] open:[0, 1, "-"] openSuffix:[2, 5, "[ ]"] isLoose hadBlankLineAfter isNotDone
+Document[0, 34]
+  BulletList[0, 34] isLoose
+    TaskListItem[0, 34] open:[0, 1, "-"] openSuffix:[2, 5, "[ ]"] isLoose hadBlankLineAfter isNotDone
       Paragraph[6, 11] isTrailingBlankLine
         Text[6, 10] chars:[6, 10, "task"]
-      Paragraph[14, 35]
+      Paragraph[14, 34]
         Text[14, 34] chars:[14, 34, "parag …  item"]
 ````````````````````````````````
 
@@ -859,7 +859,7 @@ content indent is after task marker
   </li>
 </ol>
 .
-Document[0, 83]
+Document[0, 82]
   BulletList[0, 35] isLoose
     TaskListItem[0, 35] open:[0, 1, "-"] openSuffix:[2, 5, "[ ]"] isLoose hadBlankLineAfter isNotDone
       Paragraph[6, 11] isTrailingBlankLine
@@ -867,11 +867,11 @@ Document[0, 83]
       Paragraph[14, 35] isTrailingBlankLine
         Text[14, 34] chars:[14, 34, "parag …  item"]
   HtmlCommentBlock[36, 45]
-  OrderedList[46, 83] isLoose delimiter:'.'
-    TaskListItem[46, 83] open:[46, 48, "1."] openSuffix:[49, 52, "[ ]"] isLoose hadBlankLineAfter isOrderedItem isNotDone
+  OrderedList[46, 82] isLoose delimiter:'.'
+    TaskListItem[46, 82] open:[46, 48, "1."] openSuffix:[49, 52, "[ ]"] isLoose hadBlankLineAfter isOrderedItem isNotDone
       Paragraph[53, 58] isTrailingBlankLine
         Text[53, 57] chars:[53, 57, "task"]
-      Paragraph[62, 83]
+      Paragraph[62, 82]
         Text[62, 82] chars:[62, 82, "parag …  item"]
 ````````````````````````````````
 
@@ -909,18 +909,18 @@ when content indent > code indent becomes code
   </li>
 </ol>
 .
-Document[0, 65]
+Document[0, 64]
   BulletList[0, 26] isTight
     BulletListItem[0, 11] open:[0, 1, "-"] isTight
       IndentedCodeBlock[6, 11]
     BulletListItem[11, 26] open:[11, 12, "-"] isTight hadBlankLineAfter
       IndentedCodeBlock[17, 26]
   HtmlCommentBlock[27, 36]
-  OrderedList[37, 65] isTight delimiter:'.'
+  OrderedList[37, 64] isTight delimiter:'.'
     OrderedListItem[37, 49] open:[37, 39, "1."] isTight
       IndentedCodeBlock[44, 49]
-    OrderedListItem[49, 65] open:[49, 51, "1."] isTight
-      IndentedCodeBlock[56, 65]
+    OrderedListItem[49, 64] open:[49, 51, "1."] isTight
+      IndentedCodeBlock[56, 64]
 ````````````````````````````````
 
 
@@ -957,18 +957,18 @@ when content indent > code indent becomes code
   </li>
 </ol>
 .
-Document[0, 66]
+Document[0, 65]
   BulletList[0, 27] isTight
     BulletListItem[0, 11] open:[0, 1, "-"] isTight
       IndentedCodeBlock[6, 11]
     TaskListItem[11, 27] open:[11, 12, "-"] openSuffix:[13, 16, "[ ]"] isTight hadBlankLineAfter isNotDone
       IndentedCodeBlock[21, 27]
   HtmlCommentBlock[28, 37]
-  OrderedList[38, 66] isTight delimiter:'.'
+  OrderedList[38, 65] isTight delimiter:'.'
     OrderedListItem[38, 50] open:[38, 40, "1."] isTight
       IndentedCodeBlock[45, 50]
-    TaskListItem[50, 66] open:[50, 52, "1."] openSuffix:[53, 56, "[ ]"] isTight isOrderedItem isNotDone
-      IndentedCodeBlock[61, 66]
+    TaskListItem[50, 65] open:[50, 52, "1."] openSuffix:[53, 56, "[ ]"] isTight isOrderedItem isNotDone
+      IndentedCodeBlock[61, 65]
 ````````````````````````````````
 
 
@@ -1158,8 +1158,8 @@ Deep indent testing, commonmark
   </li>
 </ul>
 .
-Document[0, 153]
-  BulletList[0, 153] isTight
+Document[0, 152]
+  BulletList[0, 152] isTight
     TaskListItem[0, 13] open:[0, 1, "*"] openSuffix:[2, 5, "[ ]"] isTight isNotDone
       Paragraph[6, 13]
         Text[6, 12] chars:[6, 12, "item 1"]
@@ -1180,8 +1180,8 @@ Document[0, 153]
       IndentedCodeBlock[103, 112]
     TaskListItem[112, 132] open:[112, 113, "*"] openSuffix:[114, 117, "[ ]"] isTight isNotDone
       IndentedCodeBlock[122, 132]
-    TaskListItem[132, 153] open:[132, 133, "*"] openSuffix:[134, 137, "[ ]"] isTight isNotDone
-      IndentedCodeBlock[142, 153]
+    TaskListItem[132, 152] open:[132, 133, "*"] openSuffix:[134, 137, "[ ]"] isTight isNotDone
+      IndentedCodeBlock[142, 152]
 ````````````````````````````````
 
 
@@ -1345,18 +1345,18 @@ Treat content as starting at the suffix.
   </li>
 </ul>
 .
-Document[0, 43]
-  BulletList[0, 43] isTight
-    TaskListItem[0, 43] open:[0, 1, "*"] openSuffix:[2, 5, "[ ]"] isTight isNotDone
+Document[0, 42]
+  BulletList[0, 42] isTight
+    TaskListItem[0, 42] open:[0, 1, "*"] openSuffix:[2, 5, "[ ]"] isTight isNotDone
       Paragraph[6, 11]
         Text[6, 10] chars:[6, 10, "item"]
-      BulletList[13, 43] isTight
-        TaskListItem[13, 43] open:[13, 14, "*"] openSuffix:[15, 18, "[ ]"] isTight isNotDone
+      BulletList[13, 42] isTight
+        TaskListItem[13, 42] open:[13, 14, "*"] openSuffix:[15, 18, "[ ]"] isTight isNotDone
           Paragraph[19, 26]
             Text[19, 25] chars:[19, 25, "item 2"]
-          BulletList[30, 43] isTight
-            TaskListItem[30, 43] open:[30, 31, "*"] openSuffix:[32, 35, "[ ]"] isTight isNotDone
-              Paragraph[36, 43]
+          BulletList[30, 42] isTight
+            TaskListItem[30, 42] open:[30, 31, "*"] openSuffix:[32, 35, "[ ]"] isTight isNotDone
+              Paragraph[36, 42]
                 Text[36, 42] chars:[36, 42, "item 2"]
 ````````````````````````````````
 

@@ -16,10 +16,10 @@ public class SpecExampleParse {
     private long myStartTime;
     private long myParseTime;
 
-    public SpecExampleParse(DataHolder options, SpecExampleRenderer exampleRenderer, DataHolder withExampleOptions, String parseSource) {
+    public SpecExampleParse(DataHolder options, SpecExampleRenderer exampleRenderer, DataHolder exampleOptions, String parseSource) {
         myOptions = options;
         myRenderer = exampleRenderer;
-        myExampleOptions = withExampleOptions;
+        myExampleOptions = exampleOptions;
         mySource = parseSource;
         parse(parseSource);
     }
@@ -57,7 +57,7 @@ public class SpecExampleParse {
     }
 
     public String parse(String source) {
-        if (myOptions != null && myOptions.get(TestUtils.NO_FILE_EOL)) {
+        if (TestUtils.NO_FILE_EOL.getFrom(myOptions)) {
             mySource = TestUtils.trimTrailingEOL(source);
         }
 

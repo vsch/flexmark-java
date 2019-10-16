@@ -188,6 +188,29 @@ WiIth coNtiINuUaAtiIoN teEXt. iNLiINeE _iItaALiIc_ aAND
 
     - item 1
     - item 2
+.
+Document[0, 264]
+  Paragraph[0, 44] isTrailingBlankLine
+    Text[0, 30] chars:[0, 30, "This  … tnote"]
+    LinkRef[30, 42] referenceOpen:[30, 31, "["] reference:[32, 41, "^footnote"] referenceClose:[41, 42, "]"]
+      Text[32, 41] chars:[32, 41, "^footnote"]
+    Text[42, 43] chars:[42, 43, "."]
+  BlankLine[44, 45]
+  Paragraph[45, 148] isTrailingBlankLine
+    LinkRef[45, 57] referenceOpen:[45, 46, "["] reference:[47, 56, "^footnote"] referenceClose:[56, 57, "]"]
+      Text[47, 56] chars:[47, 56, "^footnote"]
+    Text[57, 92] chars:[57, 92, ": Thi … note."]
+    SoftLineBreak[92, 93]
+    Text[93, 124] chars:[93, 124, "with  … line "]
+    Emphasis[124, 132] textOpen:[124, 125, "_"] text:[125, 131, "italic"] textClose:[131, 132, "_"]
+      Text[125, 131] chars:[125, 131, "italic"]
+    Text[132, 136] chars:[132, 136, " and"]
+    SoftLineBreak[137, 138]
+    StrongEmphasis[138, 146] textOpen:[138, 140, "**"] text:[140, 144, "bold"] textClose:[144, 146, "**"]
+      Text[140, 144] chars:[140, 144, "bold"]
+    Text[146, 147] chars:[146, 147, "."]
+  BlankLine[148, 149]
+  IndentedCodeBlock[153, 264]
 ````````````````````````````````
 
 
@@ -416,6 +439,22 @@ thiIS paARaAGRaAph haAS aA FootNoteE[^2].
     aLSo aA paARaAGRaAph oF theE FootNoteE
 
         indented code of the footnote
+.
+Document[0, 205]
+  Paragraph[0, 37] isTrailingBlankLine
+    Text[0, 29] chars:[0, 29, "This  … tnote"]
+    Footnote[29, 33] ordinal: 0  textOpen:[29, 31, "[^"] text:[31, 32, "2"] textClose:[32, 33, "]"]
+      Text[31, 32] chars:[31, 32, "2"]
+    Text[33, 34] chars:[33, 34, "."]
+  BlankLine[37, 38]
+  FootnoteBlock[38, 205] ordinal: 0  open:[38, 40] text:[40, 41] close:[41, 43] footnote:[44, 205]
+    Paragraph[44, 78] isTrailingBlankLine
+      Text[44, 77] chars:[44, 77, "This  … note."]
+    Paragraph[85, 119] isTrailingBlankLine
+      Text[85, 118] chars:[85, 118, "Anoth … tnote"]
+    Paragraph[130, 163] isTrailingBlankLine
+      Text[130, 162] chars:[130, 162, "Also  … tnote"]
+    IndentedCodeBlock[176, 205]
 ````````````````````````````````
 
 

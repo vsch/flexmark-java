@@ -35,13 +35,13 @@ public class ComboDeDocxConverterSpec2Test extends ComboDocxConverterSpecTestBas
         return SPEC_RESOURCE;
     }
 
-    @org.jetbrains.annotations.NotNull
+    @NotNull
     @Override
     public Parser parser() {
         return PARSER;
     }
 
-    @org.jetbrains.annotations.NotNull
+    @NotNull
     @Override
     public DocxRenderer renderer() {
         return RENDERER;

@@ -8,6 +8,7 @@ import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 class HtmlParser extends IParseBase {
     @SuppressWarnings("PointlessBitwiseExpression") final static public DataKey<Integer> HTML_EXTENSIONS = new DataKey<>("HTML_EXTENSIONS", 0
@@ -62,15 +63,15 @@ class HtmlParser extends IParseBase {
     }
 
     @Override
-    public @org.jetbrains.annotations.NotNull Node parse(@NotNull BasedSequence input) {
+    public @NotNull Node parse(@NotNull BasedSequence input) {
         // here we make the lexer parse the input sequence from start to finish and accumulate everything in custom nodes
         String rootNode = FlexmarkHtmlParser.parse(input.toString(), 1, getOptions());
         return new RootNode(rootNode);
     }
 
-    @org.jetbrains.annotations.NotNull
+    @NotNull
     @Override
-    public IParse withOptions(@org.jetbrains.annotations.Nullable DataHolder options) {
+    public IParse withOptions(@Nullable DataHolder options) {
         MutableDataSet mutableDataSet = new MutableDataSet(getOptions());
         if (options != null) mutableDataSet.setAll(options);
         return new HtmlParser(mutableDataSet);

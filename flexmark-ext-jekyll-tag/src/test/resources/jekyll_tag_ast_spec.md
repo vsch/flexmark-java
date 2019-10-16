@@ -19,8 +19,8 @@ no empty tags
 .
 <p>{% %}</p>
 .
-Document[0, 6]
-  Paragraph[0, 6]
+Document[0, 5]
+  Paragraph[0, 5]
     Text[0, 5] chars:[0, 5, "{% %}"]
 ````````````````````````````````
 
@@ -31,8 +31,8 @@ some tags
 {% tag %}
 .
 .
-Document[0, 10]
-  JekyllTagBlock[9, 10]
+Document[0, 9]
+  JekyllTagBlock[9, 9]
     JekyllTag[0, 9] open:[0, 2, "{%"] tag:[3, 6, "tag"] parameters:[7, 7] close:[7, 9, "%}"]
 ````````````````````````````````
 
@@ -43,8 +43,8 @@ some tags
 {% tag paramters %}
 .
 .
-Document[0, 20]
-  JekyllTagBlock[19, 20]
+Document[0, 19]
+  JekyllTagBlock[19, 19]
     JekyllTag[0, 19] open:[0, 2, "{%"] tag:[3, 6, "tag"] parameters:[7, 16, "paramters"] close:[17, 19, "%}"]
 ````````````````````````````````
 
@@ -56,8 +56,8 @@ inline tags
 .
 <p></p>
 .
-Document[0, 11]
-  Paragraph[1, 11]
+Document[0, 10]
+  Paragraph[1, 10]
     JekyllTag[1, 10] open:[1, 3, "{%"] tag:[4, 7, "tag"] parameters:[8, 8] close:[8, 10, "%}"]
 ````````````````````````````````
 
@@ -69,8 +69,8 @@ inline tags
 .
 <p></p>
 .
-Document[0, 21]
-  Paragraph[1, 21]
+Document[0, 20]
+  Paragraph[1, 20]
     JekyllTag[1, 20] open:[1, 3, "{%"] tag:[4, 7, "tag"] parameters:[8, 17, "paramters"] close:[18, 20, "%}"]
 ````````````````````````````````
 
@@ -120,8 +120,8 @@ include
 {% include  %}
 .
 .
-Document[0, 15]
-  JekyllTagBlock[14, 15]
+Document[0, 14]
+  JekyllTagBlock[14, 14]
     JekyllTag[0, 14] open:[0, 2, "{%"] tag:[3, 10, "include"] parameters:[12, 12] close:[12, 14, "%}"]
 ````````````````````````````````
 

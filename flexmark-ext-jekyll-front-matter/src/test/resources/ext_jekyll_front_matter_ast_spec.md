@@ -22,7 +22,7 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 ---
 .
 .
-Document[0, 160]
+Document[0, 159]
   JekyllFrontMatterBlock[0, 159] open:[0, 3] content:[4, 156] close:[156, 159]
 ````````````````````````````````
 
@@ -41,7 +41,7 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 ...
 .
 .
-Document[0, 160]
+Document[0, 159]
   JekyllFrontMatterBlock[0, 159] open:[0, 3] content:[4, 156] close:[156, 159]
 ````````````````````````````````
 
@@ -58,25 +58,25 @@ linters:
 ---
 .
 .
-Document[0, 190]
+Document[0, 189]
   JekyllFrontMatterBlock[0, 189] open:[0, 3] content:[4, 186] close:[186, 189]
 ````````````````````````````````
 
 
 ## Source Position Attribute
 
-````````````````````````````````
-
-
+```````````````````````````````` example(Source Position Attribute: 1) options(src-pos)
 ---
-
-title: JekyllFrontMatter Extension Spec author: version: date: '2016-06-06' license:
-'[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)' ... . . Document[0, 159]
-JekyllFrontMatterBlock[0, 159] open:[0, 3] content:[4, 156] close:[156, 159]
-
+title: JekyllFrontMatter Extension Spec
+author:
+version:
+date: '2016-06-06'
+license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
+---
+.
+.
+Document[0, 157]
+  JekyllFrontMatterBlock[0, 157] open:[0, 3] content:[4, 154] close:[154, 157]
 ````````````````````````````````
 
-````````````````````````````````
-
-````````````````````````````````
 

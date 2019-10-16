@@ -58,7 +58,7 @@ indented code
 2. numbered item 2
 
 .
-Document[0, 304]
+Document[0, 303]
   Heading[0, 8] textOpen:[0, 1, "#"] text:[1, 8, "Heading"]
     AnchorLink[1, 8]
       Text[1, 8] chars:[1, 8, "Heading"]
@@ -81,12 +81,12 @@ Document[0, 304]
     Text[102, 178] chars:[102, 178, "      … code\n"]
   BlankLine[183, 184]
   IndentedCodeBlock[188, 260]
-  OrderedList[260, 304] isTight delimiter:'.'
+  OrderedList[260, 303] isTight delimiter:'.'
     OrderedListItem[260, 282] open:[260, 262, "1."] isTight
       Paragraph[263, 282]
         Text[263, 278] chars:[263, 278, "numbe … tem 1"]
-    OrderedListItem[282, 304] open:[282, 284, "1."] isTight
-      Paragraph[285, 304]
+    OrderedListItem[282, 303] open:[282, 284, "1."] isTight
+      Paragraph[285, 303]
         Text[285, 300] chars:[285, 300, "numbe … tem 2"]
 ````````````````````````````````
 

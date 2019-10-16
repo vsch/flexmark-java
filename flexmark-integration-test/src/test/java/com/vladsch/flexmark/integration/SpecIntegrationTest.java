@@ -2,7 +2,7 @@ package com.vladsch.flexmark.integration;
 
 import com.vladsch.flexmark.ext.autolink.AutolinkExtension;
 import com.vladsch.flexmark.ext.gfm.strikethrough.StrikethroughExtension;
-import com.vladsch.flexmark.ext.gfm.tables.TablesExtension;
+import com.vladsch.flexmark.ext.tables.TablesExtension;
 import com.vladsch.flexmark.ext.yaml.front.matter.YamlFrontMatterExtension;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
@@ -10,8 +10,10 @@ import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.test.FlexmarkSpecExampleRenderer;
 import com.vladsch.flexmark.test.SpecExampleRenderer;
 import com.vladsch.flexmark.test.SpecTestCase;
+import com.vladsch.flexmark.test.TestUtils;
 import com.vladsch.flexmark.util.builder.Extension;
 import com.vladsch.flexmark.util.data.DataHolder;
+import com.vladsch.flexmark.util.data.MutableDataSet;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.junit.Test;
@@ -35,10 +37,11 @@ public class SpecIntegrationTest extends SpecTestCase {
     // The spec says URL-escaping is optional, but the examples assume that it's enabled.
     private static final HtmlRenderer RENDERER = HtmlRenderer.builder().extensions(EXTENSIONS).percentEncodeUrls(true).build();
     private static final Map<String, String> OVERRIDDEN_EXAMPLES = getOverriddenExamples();
+    static final DataHolder OPTIONS = new MutableDataSet().set(TestUtils.NO_FILE_EOL, false).toImmutable();
 
     @Override
     public @Nullable DataHolder options(String optionSet) {
-        return null;
+        return OPTIONS;
     }
 
     public SpecIntegrationTest(SpecExample example) {
@@ -64,8 +67,9 @@ public class SpecIntegrationTest extends SpecTestCase {
 
 
     @Override
-    public @NotNull SpecExampleRenderer getSpecExampleRenderer(@Nullable DataHolder exampleOptions) {
-        return new FlexmarkSpecExampleRenderer(exampleOptions, PARSER, RENDERER, true);
+    public @NotNull SpecExampleRenderer getSpecExampleRenderer(@NotNull SpecExample example, @Nullable DataHolder exampleOptions) {
+        DataHolder combinedOptions = combineOptions(OPTIONS, exampleOptions);
+        return new FlexmarkSpecExampleRenderer(example, combinedOptions, PARSER.withOptions(combinedOptions), RENDERER.withOptions(combinedOptions), true);
     }
 
     private static Map<String, String> getOverriddenExamples() {

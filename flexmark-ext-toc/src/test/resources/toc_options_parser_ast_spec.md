@@ -100,7 +100,7 @@ levels=9
   diff: [TOC]
   full: [TOC levels=3 bullet formatted hierarchy]
 .
-Example[0, 90]
+Example[0, 89]
   Style[0, 8]
     TocOptions[0, 8] status:IGNORED
       Message[7, 8] message:levels option value 0 is not an integer in the range [1, 6]
@@ -145,7 +145,7 @@ levels=0-9
   diff: [TOC levels=1-6]
   full: [TOC levels=1-6 bullet formatted hierarchy]
 .
-Example[0, 35]
+Example[0, 34]
   Style[0, 11]
     TocOptions[0, 10] status:VALID
   Style[12, 23]
@@ -205,7 +205,7 @@ decreasing
   diff: [TOC decreasing]
   full: [TOC levels=3 bullet formatted decreasing]
 .
-Example[0, 91]
+Example[0, 90]
   Style[0, 4]
     TocOptions[0, 4] status:ERROR
       Message[0, 4] message:Option html does not match any of: levels, bullet, numbered, text, formatted, hierarchy, flat, reversed, increasing, decreasing
@@ -351,7 +351,7 @@ sformatted
   diff: [TOC]
   full: [TOC levels=3 bullet formatted hierarchy]
 .
-Example[0, 51]
+Example[0, 50]
   Style[0, 5]
     TocOptions[0, 5] status:ERROR
       Message[0, 5] message:Option htmls does not match any of: levels, bullet, numbered, text, formatted, hierarchy, flat, reversed, increasing, decreasing

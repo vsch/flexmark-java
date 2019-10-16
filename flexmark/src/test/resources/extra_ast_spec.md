@@ -50,7 +50,7 @@ Code fence starting with setext header marker
 <pre><code class="language-markdown">---
 </code></pre>
 .
-Document[0, 20]
+Document[0, 19]
   FencedCodeBlock[0, 19] open:[0, 3, "```"] info:[3, 11, "markdown"] content:[12, 16] lines[1] close:[16, 19, "```"]
     Text[12, 16] chars:[12, 16, "---\n"]
 ````````````````````````````````
@@ -64,7 +64,7 @@ Document[0, 20]
 <pre><code class="language-markdown">===
 </code></pre>
 .
-Document[0, 20]
+Document[0, 19]
   FencedCodeBlock[0, 19] open:[0, 3, "```"] info:[3, 11, "markdown"] content:[12, 16] lines[1] close:[16, 19, "```"]
     Text[12, 16] chars:[12, 16, "===\n"]
 ````````````````````````````````
@@ -90,21 +90,21 @@ Make sure indentation is properly implemented
   </ul>
 </blockquote>
 .
-Document[0, 54]
-  BlockQuote[0, 54] marker:[0, 1, ">"]
-    BulletList[2, 54] isTight
+Document[0, 53]
+  BlockQuote[0, 53] marker:[0, 1, ">"]
+    BulletList[2, 53] isTight
       BulletListItem[2, 11] open:[2, 3, "-"] isTight
         Paragraph[4, 11]
           Text[4, 10] chars:[4, 10, "item 1"]
-      BulletListItem[13, 54] open:[13, 14, "-"] isTight
+      BulletListItem[13, 53] open:[13, 14, "-"] isTight
         Paragraph[15, 22]
           Text[15, 21] chars:[15, 21, "item 2"]
-        OrderedList[28, 54] isTight delimiter:'.'
+        OrderedList[28, 53] isTight delimiter:'.'
           OrderedListItem[28, 38] open:[28, 30, "1."] isTight
             Paragraph[31, 38]
               Text[31, 37] chars:[31, 37, "item 1"]
-          OrderedListItem[44, 54] open:[44, 46, "2."] isTight
-            Paragraph[47, 54]
+          OrderedListItem[44, 53] open:[44, 46, "2."] isTight
+            Paragraph[47, 53]
               Text[47, 53] chars:[47, 53, "item 2"]
 ````````````````````````````````
 
@@ -139,21 +139,21 @@ Make sure indentation is properly implemented
   </ul>
 </blockquote>
 .
-Document[0, 60]
-  BlockQuote[0, 60] marker:[0, 1, ">"]
-    BulletList[2, 60] isLoose
+Document[0, 59]
+  BlockQuote[0, 59] marker:[0, 1, ">"]
+    BulletList[2, 59] isLoose
       BulletListItem[2, 11] open:[2, 3, "-"] isLoose hadBlankLineAfter
         Paragraph[4, 11] isTrailingBlankLine
           Text[4, 10] chars:[4, 10, "item 1"]
-      BulletListItem[15, 60] open:[15, 16, "-"] isLoose hadBlankLineAfter
+      BulletListItem[15, 59] open:[15, 16, "-"] isLoose hadBlankLineAfter
         Paragraph[17, 24] isTrailingBlankLine
           Text[17, 23] chars:[17, 23, "item 2"]
-        OrderedList[32, 60] isLoose delimiter:'.'
+        OrderedList[32, 59] isLoose delimiter:'.'
           OrderedListItem[32, 42] open:[32, 34, "1."] isLoose hadBlankLineAfter
             Paragraph[35, 42] isTrailingBlankLine
               Text[35, 41] chars:[35, 41, "item 1"]
-          OrderedListItem[50, 60] open:[50, 52, "2."] isLoose
-            Paragraph[53, 60]
+          OrderedListItem[50, 59] open:[50, 52, "2."] isLoose
+            Paragraph[53, 59]
               Text[53, 59] chars:[53, 59, "item 2"]
 ````````````````````````````````
 
@@ -172,14 +172,14 @@ with lazy continuation
   </li>
 </ul>
 .
-Document[0, 46]
-  BulletList[0, 46] isTight
-    BulletListItem[0, 46] open:[0, 1, "-"] isTight
+Document[0, 45]
+  BulletList[0, 45] isTight
+    BulletListItem[0, 45] open:[0, 1, "-"] isTight
       Paragraph[2, 8]
         Text[2, 6] chars:[2, 6, "item"]
-      BulletList[10, 46] isTight
-        BulletListItem[10, 46] open:[10, 11, "-"] isTight
-          Paragraph[12, 46]
+      BulletList[10, 45] isTight
+        BulletListItem[10, 45] open:[10, 11, "-"] isTight
+          Paragraph[12, 45]
             Text[12, 20] chars:[12, 20, "sub item"]
             HardLineBreak[20, 23]
             Text[23, 45] chars:[23, 45, "with  … ation"]
@@ -200,14 +200,14 @@ Document[0, 46]
   </li>
 </ul>
 .
-Document[0, 58]
-  BulletList[0, 58] isTight
-    BulletListItem[0, 58] open:[0, 1, "-"] isTight
+Document[0, 57]
+  BulletList[0, 57] isTight
+    BulletListItem[0, 57] open:[0, 1, "-"] isTight
       Paragraph[2, 8]
         Text[2, 6] chars:[2, 6, "item"]
-      BulletList[10, 58] isTight
-        BulletListItem[10, 58] open:[10, 11, "-"] isTight
-          Paragraph[12, 58]
+      BulletList[10, 57] isTight
+        BulletListItem[10, 57] open:[10, 11, "-"] isTight
+          Paragraph[12, 57]
             Text[12, 20] chars:[12, 20, "sub item"]
             HardLineBreak[20, 23]
             Text[35, 57] chars:[35, 57, "with  … ation"]
@@ -225,7 +225,7 @@ Setext Heading with **bold** and _italic_ and `code`
 <h1>Atx Heading with <strong>bold</strong> and <em>italic</em> and <code>code</code></h1>
 <h2>Setext Heading with <strong>bold</strong> and <em>italic</em> and <code>code</code></h2>
 .
-Document[0, 159]
+Document[0, 158]
   Heading[0, 51] textOpen:[0, 1, "#"] text:[2, 51, "Atx Heading with **bold** and _italic_ and `code`"]
     Text[2, 19] chars:[2, 19, "Atx H … with "]
     StrongEmphasis[19, 27] textOpen:[19, 21, "**"] text:[21, 25, "bold"] textClose:[25, 27, "**"]
@@ -262,7 +262,7 @@ Test repository KEEP_FIRST behavior, meaning the first reference def is used
 .
 <p><a href="/url1">ref</a></p>
 .
-Document[0, 46]
+Document[0, 45]
   Paragraph[0, 6] isTrailingBlankLine
     LinkRef[0, 5] referenceOpen:[0, 1, "["] reference:[1, 4, "ref"] referenceClose:[4, 5, "]"]
       Text[1, 4] chars:[1, 4, "ref"]
@@ -306,7 +306,7 @@ References with up to 3 leading blanks should be processed.
 .
 <p><a href="/url1">ref</a></p>
 .
-Document[0, 21]
+Document[0, 20]
   Paragraph[0, 6] isTrailingBlankLine
     LinkRef[0, 5] referenceOpen:[0, 1, "["] reference:[1, 4, "ref"] referenceClose:[4, 5, "]"]
       Text[1, 4] chars:[1, 4, "ref"]
@@ -323,7 +323,7 @@ References with up to 3 leading blanks should be processed.
 .
 <p><a href="/url1">ref</a></p>
 .
-Document[0, 22]
+Document[0, 21]
   Paragraph[0, 6] isTrailingBlankLine
     LinkRef[0, 5] referenceOpen:[0, 1, "["] reference:[1, 4, "ref"] referenceClose:[4, 5, "]"]
       Text[1, 4] chars:[1, 4, "ref"]
@@ -340,7 +340,7 @@ References with up to 3 leading blanks should be processed.
 .
 <p><a href="/url1">ref</a></p>
 .
-Document[0, 23]
+Document[0, 22]
   Paragraph[0, 6] isTrailingBlankLine
     LinkRef[0, 5] referenceOpen:[0, 1, "["] reference:[1, 4, "ref"] referenceClose:[4, 5, "]"]
       Text[1, 4] chars:[1, 4, "ref"]
@@ -359,11 +359,11 @@ References with up to 3 leading blanks should be processed.
 <pre><code>[ref]: /url1
 </code></pre>
 .
-Document[0, 24]
+Document[0, 23]
   Paragraph[0, 6] isTrailingBlankLine
     LinkRef[0, 5] referenceOpen:[0, 1, "["] reference:[1, 4, "ref"] referenceClose:[4, 5, "]"]
       Text[1, 4] chars:[1, 4, "ref"]
-  IndentedCodeBlock[11, 24]
+  IndentedCodeBlock[11, 23]
 ````````````````````````````````
 
 
@@ -708,8 +708,8 @@ With auto loose setting for list
   <li>item 4</li>
 </ul>
 .
-Document[0, 97]
-  BulletList[0, 97] isTight
+Document[0, 96]
+  BulletList[0, 96] isTight
     BulletListItem[0, 9] open:[0, 1, "*"] isTight
       Paragraph[2, 9]
         Text[2, 8] chars:[2, 8, "item 1"]
@@ -729,8 +729,8 @@ Document[0, 97]
         BulletListItem[75, 88] open:[75, 76, "*"] isLoose
           Paragraph[77, 88]
             Text[77, 87] chars:[77, 87, "sub item 3"]
-    BulletListItem[88, 97] open:[88, 89, "*"] isTight
-      Paragraph[90, 97]
+    BulletListItem[88, 96] open:[88, 89, "*"] isTight
+      Paragraph[90, 96]
         Text[90, 96] chars:[90, 96, "item 4"]
 ````````````````````````````````
 
@@ -1009,8 +1009,8 @@ Without break all lists on two blank lines
   </li>
 </ul>
 .
-Document[0, 80]
-  BulletList[0, 80] isLoose
+Document[0, 79]
+  BulletList[0, 79] isLoose
     BulletListItem[0, 9] open:[0, 1, "*"] isLoose
       Paragraph[2, 9]
         Text[2, 8] chars:[2, 8, "item 1"]
@@ -1027,8 +1027,8 @@ Document[0, 80]
     BulletListItem[62, 71] open:[62, 63, "*"] isLoose
       Paragraph[64, 71]
         Text[64, 70] chars:[64, 70, "item 4"]
-    BulletListItem[71, 80] open:[71, 72, "*"] isLoose
-      Paragraph[73, 80]
+    BulletListItem[71, 79] open:[71, 72, "*"] isLoose
+      Paragraph[73, 79]
         Text[73, 79] chars:[73, 79, "item 5"]
 ````````````````````````````````
 
@@ -1175,8 +1175,8 @@ Without break on two blank lines
   <li>item 5</li>
 </ul>
 .
-Document[0, 114]
-  BulletList[0, 114] isTight
+Document[0, 113]
+  BulletList[0, 113] isTight
     BulletListItem[0, 9] open:[0, 1, "*"] isTight
       Paragraph[2, 9]
         Text[2, 8] chars:[2, 8, "item 1"]
@@ -1199,8 +1199,8 @@ Document[0, 114]
     BulletListItem[96, 105] open:[96, 97, "*"] isTight
       Paragraph[98, 105]
         Text[98, 104] chars:[98, 104, "item 4"]
-    BulletListItem[105, 114] open:[105, 106, "*"] isTight
-      Paragraph[107, 114]
+    BulletListItem[105, 113] open:[105, 106, "*"] isTight
+      Paragraph[107, 113]
         Text[107, 113] chars:[107, 113, "item 5"]
 ````````````````````````````````
 
@@ -1224,7 +1224,7 @@ With bullet matching for items within a list
   <li>item 1</li>
 </ul>
 .
-Document[0, 27]
+Document[0, 26]
   BulletList[0, 9] isTight
     BulletListItem[0, 9] open:[0, 1, "-"] isTight
       Paragraph[2, 9]
@@ -1233,9 +1233,9 @@ Document[0, 27]
     BulletListItem[9, 18] open:[9, 10, "*"] isTight
       Paragraph[11, 18]
         Text[11, 17] chars:[11, 17, "item 1"]
-  BulletList[18, 27] isTight
-    BulletListItem[18, 27] open:[18, 19, "+"] isTight
-      Paragraph[20, 27]
+  BulletList[18, 26] isTight
+    BulletListItem[18, 26] open:[18, 19, "+"] isTight
+      Paragraph[20, 26]
         Text[20, 26] chars:[20, 26, "item 1"]
 ````````````````````````````````
 
@@ -1282,16 +1282,16 @@ With start
   <li>item 3</li>
 </ol>
 .
-Document[0, 30]
-  OrderedList[0, 30] isTight start:2 delimiter:'.'
+Document[0, 29]
+  OrderedList[0, 29] isTight start:2 delimiter:'.'
     OrderedListItem[0, 10] open:[0, 2, "2."] isTight
       Paragraph[3, 10]
         Text[3, 9] chars:[3, 9, "item 1"]
     OrderedListItem[10, 20] open:[10, 12, "1."] isTight
       Paragraph[13, 20]
         Text[13, 19] chars:[13, 19, "item 2"]
-    OrderedListItem[20, 30] open:[20, 22, "3."] isTight
-      Paragraph[23, 30]
+    OrderedListItem[20, 29] open:[20, 22, "3."] isTight
+      Paragraph[23, 29]
         Text[23, 29] chars:[23, 29, "item 3"]
 ````````````````````````````````
 
@@ -1568,7 +1568,7 @@ This is a paragraph
   </li>
 </ul>
 .
-Document[0, 163]
+Document[0, 162]
   Paragraph[0, 30]
     Text[0, 19] chars:[0, 19, "This  … graph"]
     SoftLineBreak[19, 20]
@@ -1589,7 +1589,7 @@ Document[0, 163]
             Text[76, 82] chars:[76, 82, "item 2"]
   Paragraph[84, 105]
     Text[84, 103] chars:[84, 103, "This  … graph"]
-  BulletList[105, 163] isLoose
+  BulletList[105, 162] isLoose
     BulletListItem[105, 114] open:[105, 106, "-"] isLoose
       Paragraph[107, 114]
         Text[107, 113] chars:[107, 113, "item 1"]
@@ -1599,12 +1599,12 @@ Document[0, 163]
     BulletListItem[124, 141] open:[124, 125, "-"] isLoose
       Paragraph[126, 141]
         Text[126, 140] chars:[126, 140, "this  …  list"]
-    BulletListItem[141, 163] open:[141, 142, "-"] isLoose
+    BulletListItem[141, 162] open:[141, 142, "-"] isLoose
       Paragraph[143, 150]
         Text[143, 149] chars:[143, 149, "item 1"]
-      BulletList[154, 163] isTight
-        BulletListItem[154, 163] open:[154, 155, "-"] isTight
-          Paragraph[156, 163]
+      BulletList[154, 162] isTight
+        BulletListItem[154, 162] open:[154, 155, "-"] isTight
+          Paragraph[156, 162]
             Text[156, 162] chars:[156, 162, "item 2"]
 ````````````````````````````````
 
@@ -2444,15 +2444,15 @@ lazy continuation
   <li>item 2</li>
 </ol>
 .
-Document[0, 38]
-  OrderedList[0, 38] isTight delimiter:'.'
+Document[0, 37]
+  OrderedList[0, 37] isTight delimiter:'.'
     OrderedListItem[0, 28] open:[0, 2, "1."] isTight
       Paragraph[3, 28]
         Text[3, 9] chars:[3, 9, "item 1"]
         SoftLineBreak[9, 10]
         Text[10, 27] chars:[10, 27, "lazy  … ation"]
-    OrderedListItem[28, 38] open:[28, 30, "2."] isTight
-      Paragraph[31, 38]
+    OrderedListItem[28, 37] open:[28, 30, "2."] isTight
+      Paragraph[31, 37]
         Text[31, 37] chars:[31, 37, "item 2"]
 ````````````````````````````````
 
@@ -2879,7 +2879,7 @@ This is a paragraph
 <p>This is a paragraph</p>
 <hr />
 .
-Document[0, 24]
+Document[0, 23]
   Paragraph[0, 20]
     Text[0, 19] chars:[0, 19, "This  … graph"]
   ThematicBreak[20, 23]
@@ -2917,7 +2917,7 @@ Nested in other elements
   </ul>
 </blockquote>
 .
-Document[0, 8]
+Document[0, 7]
   BlockQuote[0, 7] marker:[0, 1, ">"]
     BulletList[2, 7] isTight
       BulletListItem[2, 7] open:[2, 3, "-"] isTight
@@ -2948,11 +2948,11 @@ This is a paragraph with html <span style="color:red;">Test</span> and an html c
 <p>paragraph</p>
 <p>This is a paragraph with html <span style="color:red;">Test</span> and an html comment <!-- comment --> embedded in it.</p>
 .
-Document[0, 197]
+Document[0, 196]
   HtmlBlock[0, 30]
   HtmlCommentBlock[31, 59]
   HtmlBlock[59, 76]
-  Paragraph[77, 197]
+  Paragraph[77, 196]
     Text[77, 107] chars:[77, 107, "This  … html "]
     HtmlInline[107, 132] chars:[107, 132, "<span … ed;\">"]
     Text[132, 136] chars:[132, 136, "Test"]
@@ -3307,9 +3307,9 @@ Html comments in block
 <div>
 </div>
 .
-Document[0, 35]
+Document[0, 34]
   HtmlCommentBlock[0, 22]
-  HtmlBlock[22, 35]
+  HtmlBlock[22, 34]
 ````````````````````````````````
 
 
@@ -3324,8 +3324,8 @@ Html comments in block
     <!-- HTML Comment -->
 </div>
 .
-Document[0, 39]
-  HtmlBlock[0, 39]
+Document[0, 38]
+  HtmlBlock[0, 38]
 ````````````````````````````````
 
 
@@ -3340,8 +3340,8 @@ Html comments in block
 </div>
 <!-- HTML Comment -->
 .
-Document[0, 35]
-  HtmlBlock[0, 35]
+Document[0, 34]
+  HtmlBlock[0, 34]
 ````````````````````````````````
 
 
@@ -3408,8 +3408,8 @@ math tag
 .
 <math></math>
 .
-Document[0, 14]
-  HtmlBlock[0, 14]
+Document[0, 13]
+  HtmlBlock[0, 13]
 ````````````````````````````````
 
 
@@ -3434,8 +3434,8 @@ text with <kbd>ENTER</kbd> embedded
 .
 <p>text with <kbd>ENTER</kbd> embedded</p>
 .
-Document[0, 36]
-  Paragraph[0, 36]
+Document[0, 35]
+  Paragraph[0, 35]
     Text[0, 10] chars:[0, 10, "text with "]
     HtmlInline[10, 15] chars:[10, 15, "<kbd>"]
     Text[15, 20] chars:[15, 20, "ENTER"]
@@ -3478,10 +3478,10 @@ Vladimir.
 <br />
 Vladimir.
 .
-Document[0, 32]
+Document[0, 31]
   Paragraph[0, 14] isTrailingBlankLine
     Text[0, 13] chars:[0, 13, "Best  … ards,"]
-  HtmlBlock[15, 32]
+  HtmlBlock[15, 31]
 ````````````````````````````````
 
 
@@ -3496,8 +3496,8 @@ please add  `add_gtest(`**`your_unittest`**` `**`your_unittest_unittest.cc`**` )
 .
 <p>please add  <code>add_gtest(</code><strong><code>your_unittest</code></strong><code></code><strong><code>your_unittest_unittest.cc</code></strong><code>)</code></p>
 .
-Document[0, 82]
-  Paragraph[0, 82]
+Document[0, 81]
+  Paragraph[0, 81]
     Text[0, 12] chars:[0, 12, "pleas … add  "]
     Code[12, 24] textOpen:[12, 13, "`"] text:[13, 23, "add_gtest("] textClose:[23, 24, "`"]
       Text[13, 23] chars:[13, 23, "add_gtest("]
@@ -3521,8 +3521,8 @@ Some weird commonmark processing of emphasis
 .
 <p><strong>bold<em>bold-italic</em>bold</strong></p>
 .
-Document[0, 26]
-  Paragraph[0, 26]
+Document[0, 25]
+  Paragraph[0, 25]
     StrongEmphasis[0, 25] textOpen:[0, 2, "**"] text:[2, 23, "bold*bold-italic*bold"] textClose:[23, 25, "**"]
       Text[2, 6] chars:[2, 6, "bold"]
       Emphasis[6, 19] textOpen:[6, 7, "*"] text:[7, 18, "bold-italic"] textClose:[18, 19, "*"]
@@ -3538,8 +3538,8 @@ more emphasis tests
 .
 <p><em>a<strong>b</strong>c</em></p>
 .
-Document[0, 10]
-  Paragraph[0, 10]
+Document[0, 9]
+  Paragraph[0, 9]
     Emphasis[0, 9] textOpen:[0, 1, "*"] text:[1, 8, "a**b**c"] textClose:[8, 9, "*"]
       Text[1, 2] chars:[1, 2, "a"]
       StrongEmphasis[2, 7] textOpen:[2, 4, "**"] text:[4, 5, "b"] textClose:[5, 7, "**"]
@@ -3555,8 +3555,8 @@ more emphasis tests
 .
 <p><em><strong>a</strong>b</em></p>
 .
-Document[0, 9]
-  Paragraph[0, 9]
+Document[0, 8]
+  Paragraph[0, 8]
     Emphasis[0, 8] textOpen:[0, 1, "*"] text:[1, 7, "**a**b"] textClose:[7, 8, "*"]
       StrongEmphasis[1, 6] textOpen:[1, 3, "**"] text:[3, 4, "a"] textClose:[4, 6, "**"]
         Text[3, 4] chars:[3, 4, "a"]
@@ -3642,8 +3642,8 @@ This works as expected:
 .
 <p><strong>bold <em>bold-italic</em> bold</strong></p>
 .
-Document[0, 28]
-  Paragraph[0, 28]
+Document[0, 27]
+  Paragraph[0, 27]
     StrongEmphasis[0, 27] textOpen:[0, 2, "**"] text:[2, 25, "bold *bold-italic* bold"] textClose:[25, 27, "**"]
       Text[2, 7] chars:[2, 7, "bold "]
       Emphasis[7, 20] textOpen:[7, 8, "*"] text:[8, 19, "bold-italic"] textClose:[19, 20, "*"]
@@ -3659,8 +3659,8 @@ code mixed with emphasis:
 .
 <p><code>code with</code><strong><code>bold</code></strong><code>inside</code></p>
 .
-Document[0, 32]
-  Paragraph[0, 32]
+Document[0, 31]
+  Paragraph[0, 31]
     Code[0, 12] textOpen:[0, 1, "`"] text:[1, 11, "code with "] textClose:[11, 12, "`"]
       Text[1, 11] chars:[1, 11, "code with "]
     StrongEmphasis[12, 22] textOpen:[12, 14, "**"] text:[14, 20, "`bold`"] textClose:[20, 22, "**"]
@@ -3728,7 +3728,7 @@ empty, no info
 <pre><code>
 </code></pre>
 .
-Document[0, 9]
+Document[0, 8]
   FencedCodeBlock[0, 8] open:[0, 3, "```"] content:[4, 5] lines[1] close:[5, 8, "```"]
     Text[4, 5] chars:[4, 5, "\n"]
 ````````````````````````````````
@@ -3761,7 +3761,7 @@ empty, info
 <pre><code class="language-info">
 </code></pre>
 .
-Document[0, 13]
+Document[0, 12]
   FencedCodeBlock[0, 12] open:[0, 3, "```"] info:[3, 7, "info"] content:[8, 9] lines[1] close:[9, 12, "```"]
     Text[8, 9] chars:[8, 9, "\n"]
 ````````````````````````````````
@@ -3858,8 +3858,8 @@ inline anchor <a id="test" href="#"></a><em></em> test
 .
 <p>inline anchor <a id="test" href="#"></a><em></em> test</p>
 .
-Document[0, 56]
-  Paragraph[0, 56]
+Document[0, 55]
+  Paragraph[0, 55]
     Text[0, 14] chars:[0, 14, "inlin … chor "]
     HtmlInline[14, 36] chars:[14, 36, "<a id … =\"#\">"]
     HtmlInline[36, 40] chars:[36, 40, "</a>"]
@@ -3878,7 +3878,7 @@ Break with trailing spaces
 .
 <hr />
 .
-Document[0, 21]
+Document[0, 20]
   ThematicBreak[0, 20]
 ````````````````````````````````
 
@@ -3890,8 +3890,8 @@ Document[0, 21]
 .
 <p><img src="/url" alt="alt" /></p>
 .
-Document[0, 14]
-  Paragraph[0, 14]
+Document[0, 13]
+  Paragraph[0, 13]
     Image[0, 12] textOpen:[0, 2, "!["] text:[2, 5, "alt"] textClose:[5, 6, "]"] linkOpen:[6, 7, "("] url:[7, 11, "/url"] pageRef:[7, 11, "/url"] linkClose:[11, 12, ")"]
       Text[2, 5] chars:[2, 5, "alt"]
 ````````````````````````````````
@@ -3906,9 +3906,9 @@ dummy ref
 .
 <p><img src="/url1" alt="ref" /></p>
 .
-Document[0, 23]
+Document[0, 22]
   Reference[0, 12] refOpen:[0, 1, "["] ref:[1, 4, "ref"] refClose:[4, 6, "]:"] url:[7, 12, "/url1"]
-  Paragraph[14, 23]
+  Paragraph[14, 22]
     ImageRef[14, 22] referenceOpen:[14, 16, "!["] reference:[16, 19, "ref"] referenceClose:[19, 20, "]"] textOpen:[20, 21, "["] textClose:[21, 22, "]"]
       Text[16, 19] chars:[16, 19, "ref"]
 ````````````````````````````````
@@ -4200,8 +4200,8 @@ Url encoded link address should not % encode the query separator `&`
 .
 <p><a href="http://url?opt=a&amp;opt1=b">test</a></p>
 .
-Document[0, 32]
-  Paragraph[0, 32]
+Document[0, 31]
+  Paragraph[0, 31]
     Link[0, 31] textOpen:[0, 1, "["] text:[1, 5, "test"] textClose:[5, 6, "]"] linkOpen:[6, 7, "("] url:[7, 30, "http://url?opt=a&opt1=b"] pageRef:[7, 30, "http://url?opt=a&opt1=b"] linkClose:[30, 31, ")"]
       Text[1, 5] chars:[1, 5, "test"]
 ````````````````````````````````
@@ -4214,9 +4214,9 @@ Document[0, 32]
 .
 <p><a href="/url1">ref</a></p>
 .
-Document[0, 22]
+Document[0, 21]
   Reference[0, 12] refOpen:[0, 1, "["] ref:[1, 4, "ref"] refClose:[4, 6, "]:"] url:[7, 12, "/url1"]
-  Paragraph[14, 22]
+  Paragraph[14, 21]
     LinkRef[14, 21] referenceOpen:[14, 15, "["] reference:[15, 18, "ref"] referenceClose:[18, 19, "]"] textOpen:[19, 20, "["] textClose:[20, 21, "]"]
       Text[15, 18] chars:[15, 18, "ref"]
 ````````````````````````````````
@@ -4232,11 +4232,11 @@ Escaped chars in links
 <p><a href="http://url(.com)">test</a></p>
 <p><img src="http://url(.com)" alt="test" /></p>
 .
-Document[0, 59]
+Document[0, 58]
   Paragraph[0, 30] isTrailingBlankLine
     Link[0, 26] textOpen:[0, 1, "["] text:[1, 5, "test"] textClose:[5, 6, "]"] linkOpen:[6, 7, "("] url:[7, 25, "http://url\(.com\)"] pageRef:[7, 25, "http://url\(.com\)"] linkClose:[25, 26, ")"]
       Text[1, 5] chars:[1, 5, "test"]
-  Paragraph[31, 59]
+  Paragraph[31, 58]
     Image[31, 58] textOpen:[31, 33, "!["] text:[33, 37, "test"] textClose:[37, 38, "]"] linkOpen:[38, 39, "("] url:[39, 57, "http://url\(.com\)"] pageRef:[39, 57, "http://url\(.com\)"] linkClose:[57, 58, ")"]
       Text[33, 37] chars:[33, 37, "test"]
 ````````````````````````````````
@@ -4252,12 +4252,12 @@ Document[0, 59]
 <p><a href="/url1(.com)">ref</a></p>
 <p><img src="/url1(.com)" alt="ref" /></p>
 .
-Document[0, 40]
+Document[0, 39]
   Reference[0, 20] refOpen:[0, 1, "["] ref:[1, 4, "ref"] refClose:[4, 6, "]:"] url:[7, 20, "/url1\(.com\)"]
   Paragraph[22, 30] isTrailingBlankLine
     LinkRef[22, 29] referenceOpen:[22, 23, "["] reference:[23, 26, "ref"] referenceClose:[26, 27, "]"] textOpen:[27, 28, "["] textClose:[28, 29, "]"]
       Text[23, 26] chars:[23, 26, "ref"]
-  Paragraph[31, 40]
+  Paragraph[31, 39]
     ImageRef[31, 39] referenceOpen:[31, 33, "!["] reference:[33, 36, "ref"] referenceClose:[36, 37, "]"] textOpen:[37, 38, "["] textClose:[38, 39, "]"]
       Text[33, 36] chars:[33, 36, "ref"]
 ````````````````````````````````
@@ -4476,8 +4476,8 @@ Jekyll macros in URL
 .
 <p>[Sample Link Spaces]({{ macro }} &quot;title&quot;)</p>
 .
-Document[0, 42]
-  Paragraph[0, 42]
+Document[0, 41]
+  Paragraph[0, 41]
     LinkRef[0, 20] referenceOpen:[0, 1, "["] reference:[1, 19, "Sample Link Spaces"] referenceClose:[19, 20, "]"]
       Text[1, 19] chars:[1, 19, "Sampl … paces"]
     Text[20, 41] chars:[20, 41, "({{ m … tle\")"]
@@ -4531,8 +4531,8 @@ Document[0, 42]
 .
 <p><a href="http://example.com/linkWithoutSpaces.html">http://example.com/linkWithoutSpaces.html</a></p>
 .
-Document[0, 45]
-  Paragraph[0, 45]
+Document[0, 44]
+  Paragraph[0, 44]
     AutoLink[0, 43] open:[0, 1, "<"] text:[1, 42, "http://example.com/linkWithoutSpaces.html"] pageRef:[1, 42, "http://example.com/linkWithoutSpaces.html"] close:[42, 43, ">"]
 ````````````````````````````````
 
@@ -4633,8 +4633,8 @@ empty link ref
 .
 <p>[ ]</p>
 .
-Document[0, 4]
-  Paragraph[0, 4]
+Document[0, 3]
+  Paragraph[0, 3]
     LinkRef[0, 3] referenceOpen:[0, 1, "["] reference:[2, 2] referenceClose:[2, 3, "]"]
       Text[2, 2]
 ````````````````````````````````
@@ -4647,8 +4647,8 @@ empty link ref
 .
 <p>[ ][]</p>
 .
-Document[0, 6]
-  Paragraph[0, 6]
+Document[0, 5]
+  Paragraph[0, 5]
     LinkRef[0, 5] referenceOpen:[0, 1, "["] reference:[2, 2] referenceClose:[2, 3, "]"] textOpen:[3, 4, "["] textClose:[4, 5, "]"]
       Text[2, 2]
 ````````````````````````````````
@@ -4661,8 +4661,8 @@ empty link ref
 .
 <p>[ ][ ]</p>
 .
-Document[0, 7]
-  Paragraph[0, 7]
+Document[0, 6]
+  Paragraph[0, 6]
     LinkRef[0, 6] textOpen:[0, 1, "["] text:[2, 2] textClose:[2, 3, "]"] referenceOpen:[3, 4, "["] reference:[5, 5] referenceClose:[5, 6, "]"]
       Text[2, 2]
 ````````````````````````````````
@@ -4675,8 +4675,8 @@ empty image ref
 .
 <p>![ ]</p>
 .
-Document[0, 5]
-  Paragraph[0, 5]
+Document[0, 4]
+  Paragraph[0, 4]
     ImageRef[0, 4] referenceOpen:[0, 2, "!["] reference:[3, 3] referenceClose:[3, 4, "]"]
       Text[3, 3]
 ````````````````````````````````
@@ -4689,8 +4689,8 @@ empty link ref
 .
 <p>![ ][]</p>
 .
-Document[0, 7]
-  Paragraph[0, 7]
+Document[0, 6]
+  Paragraph[0, 6]
     ImageRef[0, 6] referenceOpen:[0, 2, "!["] reference:[3, 3] referenceClose:[3, 4, "]"] textOpen:[4, 5, "["] textClose:[5, 6, "]"]
       Text[3, 3]
 ````````````````````````````````
@@ -4703,8 +4703,8 @@ empty link ref
 .
 <p>![ ][ ]</p>
 .
-Document[0, 8]
-  Paragraph[0, 8]
+Document[0, 7]
+  Paragraph[0, 7]
     ImageRef[0, 7] textOpen:[0, 2, "!["] text:[3, 3] textClose:[3, 4, "]"] referenceOpen:[4, 5, "["] reference:[6, 6] referenceClose:[6, 7, "]"]
       Text[3, 3]
 ````````````````````````````````
@@ -4753,15 +4753,15 @@ quote.
   <li>two</li>
 </ol>
 .
-Document[0, 16]
+Document[0, 15]
   BlockQuote[0, 9] marker:[0, 1, ">"]
     OrderedList[2, 9] isTight delimiter:'.'
       OrderedListItem[2, 9] open:[2, 4, "1."] isTight
         Paragraph[5, 9]
           Text[5, 8] chars:[5, 8, "one"]
-  OrderedList[9, 16] isTight start:2 delimiter:'.'
-    OrderedListItem[9, 16] open:[9, 11, "2."] isTight
-      Paragraph[12, 16]
+  OrderedList[9, 15] isTight start:2 delimiter:'.'
+    OrderedListItem[9, 15] open:[9, 11, "2."] isTight
+      Paragraph[12, 15]
         Text[12, 15] chars:[12, 15, "two"]
 ````````````````````````````````
 
@@ -4926,8 +4926,8 @@ line breaks
 <p>hard<br />
 line breaks</p>
 .
-Document[0, 20]
-  Paragraph[0, 20]
+Document[0, 19]
+  Paragraph[0, 19]
     Text[0, 4] chars:[0, 4, "hard"]
     HardLineBreak[4, 8]
     Text[8, 19] chars:[8, 19, "line  … reaks"]
@@ -4943,8 +4943,8 @@ line breaks
 <p>hard<br />
 line breaks</p>
 .
-Document[0, 22]
-  Paragraph[0, 22]
+Document[0, 21]
+  Paragraph[0, 21]
     Text[0, 4] chars:[0, 4, "hard"]
     HardLineBreak[4, 10]
     Text[10, 21] chars:[10, 21, "line  … reaks"]
@@ -4960,8 +4960,8 @@ line breaks
 <p>soft
 line breaks</p>
 .
-Document[0, 18]
-  Paragraph[0, 18]
+Document[0, 17]
+  Paragraph[0, 17]
     Text[0, 4] chars:[0, 4, "soft"]
     SoftLineBreak[4, 6]
     Text[6, 17] chars:[6, 17, "line  … reaks"]
@@ -4977,8 +4977,8 @@ line breaks
 <p>soft
 line breaks</p>
 .
-Document[0, 19]
-  Paragraph[0, 19]
+Document[0, 18]
+  Paragraph[0, 18]
     Text[0, 4] chars:[0, 4, "soft"]
     SoftLineBreak[5, 7]
     Text[7, 18] chars:[7, 18, "line  … reaks"]
@@ -5798,10 +5798,10 @@ Document[0, 162]
   <li><strong><strong>adsfasddasfdsa</strong></strong></li>
 </ul>
 .
-Document[0, 25]
-  BulletList[0, 25] isTight
-    BulletListItem[0, 25] open:[0, 1, "-"] isTight
-      Paragraph[2, 25]
+Document[0, 24]
+  BulletList[0, 24] isTight
+    BulletListItem[0, 24] open:[0, 1, "-"] isTight
+      Paragraph[2, 24]
         StrongEmphasis[2, 24] textOpen:[2, 4, "**"] text:[4, 22, "**adsfasddasfdsa**"] textClose:[22, 24, "**"]
           StrongEmphasis[4, 22] textOpen:[4, 6, "**"] text:[6, 20, "adsfasddasfdsa"] textClose:[20, 22, "**"]
             Text[6, 20] chars:[6, 20, "adsfa … sfdsa"]
@@ -6306,8 +6306,8 @@ Directional punctuation delimiter parsing
 .
 <p>可以**foo()**可以</p>
 .
-Document[0, 14]
-  Paragraph[0, 14]
+Document[0, 13]
+  Paragraph[0, 13]
     Text[0, 13] chars:[0, 13, "可以**f … )**可以"]
 ````````````````````````````````
 
@@ -6317,8 +6317,8 @@ Document[0, 14]
 .
 <p>可以**()foo()**可以</p>
 .
-Document[0, 16]
-  Paragraph[0, 16]
+Document[0, 15]
+  Paragraph[0, 15]
     Text[0, 15] chars:[0, 15, "可以**( … )**可以"]
 ````````````````````````````````
 
@@ -6328,8 +6328,8 @@ Document[0, 16]
 .
 <p>可以**()foo**可以</p>
 .
-Document[0, 14]
-  Paragraph[0, 14]
+Document[0, 13]
+  Paragraph[0, 13]
     Text[0, 13] chars:[0, 13, "可以**( … o**可以"]
 ````````````````````````````````
 
@@ -6490,8 +6490,8 @@ Document[0, 55]
 .
 <p><em><strong>foo</strong></em></p>
 .
-Document[0, 10]
-  Paragraph[0, 10]
+Document[0, 9]
+  Paragraph[0, 9]
     Emphasis[0, 9] textOpen:[0, 1, "*"] text:[1, 8, "**foo**"] textClose:[8, 9, "*"]
       StrongEmphasis[1, 8] textOpen:[1, 3, "**"] text:[3, 6, "foo"] textClose:[6, 8, "**"]
         Text[3, 6] chars:[3, 6, "foo"]
@@ -6503,8 +6503,8 @@ _____foo_____
 .
 <p><em><strong><strong>foo</strong></strong></em></p>
 .
-Document[0, 14]
-  Paragraph[0, 14]
+Document[0, 13]
+  Paragraph[0, 13]
     Emphasis[0, 13] textOpen:[0, 1, "_"] text:[1, 12, "____foo____"] textClose:[12, 13, "_"]
       StrongEmphasis[1, 12] textOpen:[1, 3, "__"] text:[3, 10, "__foo__"] textClose:[10, 12, "__"]
         StrongEmphasis[3, 10] textOpen:[3, 5, "__"] text:[5, 8, "foo"] textClose:[8, 10, "__"]
@@ -6546,8 +6546,8 @@ Document[0, 13]
 .
 <p><a href="foo(and(bar))">link</a></p>
 .
-Document[0, 22]
-  Paragraph[0, 22]
+Document[0, 21]
+  Paragraph[0, 21]
     Link[0, 21] textOpen:[0, 1, "["] text:[1, 5, "link"] textClose:[5, 6, "]"] linkOpen:[6, 7, "("] url:[7, 20, "foo(and(bar))"] pageRef:[7, 20, "foo(and(bar))"] linkClose:[20, 21, ")"]
       Text[1, 5] chars:[1, 5, "link"]
 ````````````````````````````````
@@ -6558,8 +6558,8 @@ Document[0, 22]
 .
 <p>[link](foo(and(bar))</p>
 .
-Document[0, 21]
-  Paragraph[0, 21]
+Document[0, 20]
+  Paragraph[0, 20]
     LinkRef[0, 6] referenceOpen:[0, 1, "["] reference:[1, 5, "link"] referenceClose:[5, 6, "]"]
       Text[1, 5] chars:[1, 5, "link"]
     Text[6, 20] chars:[6, 20, "(foo( … bar))"]
@@ -6571,8 +6571,8 @@ Document[0, 21]
 .
 <p><em>foo <a href="/url">bar</a></em></p>
 .
-Document[0, 18]
-  Paragraph[0, 18]
+Document[0, 17]
+  Paragraph[0, 17]
     Emphasis[0, 17] textOpen:[0, 1, "*"] text:[1, 16, "foo [bar](/url)"] textClose:[16, 17, "*"]
       Text[1, 5] chars:[1, 5, "foo "]
       Link[5, 16] textOpen:[5, 6, "["] text:[6, 9, "bar"] textClose:[9, 10, "]"] linkOpen:[10, 11, "("] url:[11, 15, "/url"] pageRef:[11, 15, "/url"] linkClose:[15, 16, ")"]
@@ -6585,8 +6585,8 @@ Document[0, 18]
 .
 <p>[link](/my uri)</p>
 .
-Document[0, 16]
-  Paragraph[0, 16]
+Document[0, 15]
+  Paragraph[0, 15]
     LinkRef[0, 6] referenceOpen:[0, 1, "["] reference:[1, 5, "link"] referenceClose:[5, 6, "]"]
       Text[1, 5] chars:[1, 5, "link"]
     Text[6, 15] chars:[6, 15, "(/my uri)"]
@@ -6598,8 +6598,8 @@ Document[0, 16]
 .
 <p>[link](&lt;/my uri&gt;)</p>
 .
-Document[0, 18]
-  Paragraph[0, 18]
+Document[0, 17]
+  Paragraph[0, 17]
     LinkRef[0, 6] referenceOpen:[0, 1, "["] reference:[1, 5, "link"] referenceClose:[5, 6, "]"]
       Text[1, 5] chars:[1, 5, "link"]
     Text[6, 17] chars:[6, 17, "(</my … uri>)"]
@@ -6613,8 +6613,8 @@ bar)
 <p>[link](foo
 bar)</p>
 .
-Document[0, 16]
-  Paragraph[0, 16]
+Document[0, 15]
+  Paragraph[0, 15]
     LinkRef[0, 6] referenceOpen:[0, 1, "["] reference:[1, 5, "link"] referenceClose:[5, 6, "]"]
       Text[1, 5] chars:[1, 5, "link"]
     Text[6, 10] chars:[6, 10, "(foo"]
@@ -6630,8 +6630,8 @@ bar>)
 <p>[link](<foo
 bar>)</p>
 .
-Document[0, 18]
-  Paragraph[0, 18]
+Document[0, 17]
+  Paragraph[0, 17]
     LinkRef[0, 6] referenceOpen:[0, 1, "["] reference:[1, 5, "link"] referenceClose:[5, 6, "]"]
       Text[1, 5] chars:[1, 5, "link"]
     Text[6, 7] chars:[6, 7, "("]
@@ -6645,8 +6645,8 @@ Document[0, 18]
 .
 <p><a href="foo(and(bar)">link</a></p>
 .
-Document[0, 23]
-  Paragraph[0, 23]
+Document[0, 22]
+  Paragraph[0, 22]
     Link[0, 22] textOpen:[0, 1, "["] text:[1, 5, "link"] textClose:[5, 6, "]"] linkOpen:[6, 7, "("] urlOpen:[7, 8, "<"] url:[8, 20, "foo(and(bar)"] urlClose:[20, 21, ">"] pageRef:[8, 20, "foo(and(bar)"] linkClose:[21, 22, ")"]
       Text[1, 5] chars:[1, 5, "link"]
 ````````````````````````````````
@@ -6657,8 +6657,8 @@ Document[0, 23]
 .
 <p><img src="/url2" alt="foo bar" /></p>
 .
-Document[0, 27]
-  Paragraph[0, 27]
+Document[0, 26]
+  Paragraph[0, 26]
     Image[0, 26] textOpen:[0, 2, "!["] text:[2, 18, "foo ![bar](/url)"] textClose:[18, 19, "]"] linkOpen:[19, 20, "("] url:[20, 25, "/url2"] pageRef:[20, 25, "/url2"] linkClose:[25, 26, ")"]
       Text[2, 6] chars:[2, 6, "foo "]
       Image[6, 18] textOpen:[6, 8, "!["] text:[8, 11, "bar"] textClose:[11, 12, "]"] linkOpen:[12, 13, "("] url:[13, 17, "/url"] pageRef:[13, 17, "/url"] linkClose:[17, 18, ")"]
@@ -6671,8 +6671,8 @@ Document[0, 27]
 .
 <p><img src="/url2" alt="foo bar" /></p>
 .
-Document[0, 26]
-  Paragraph[0, 26]
+Document[0, 25]
+  Paragraph[0, 25]
     Image[0, 25] textOpen:[0, 2, "!["] text:[2, 17, "foo [bar](/url)"] textClose:[17, 18, "]"] linkOpen:[18, 19, "("] url:[19, 24, "/url2"] pageRef:[19, 24, "/url2"] linkClose:[24, 25, ")"]
       Text[2, 6] chars:[2, 6, "foo "]
       Link[6, 17] textOpen:[6, 7, "["] text:[7, 10, "bar"] textClose:[10, 11, "]"] linkOpen:[11, 12, "("] url:[12, 16, "/url"] pageRef:[12, 16, "/url"] linkClose:[16, 17, ")"]
@@ -6685,8 +6685,8 @@ Document[0, 26]
 .
 <p><a href="/uri"><img src="moon.jpg" alt="moon" /></a></p>
 .
-Document[0, 26]
-  Paragraph[0, 26]
+Document[0, 25]
+  Paragraph[0, 25]
     Link[0, 25] textOpen:[0, 1, "["] text:[1, 18, "![moon](moon.jpg)"] textClose:[18, 19, "]"] linkOpen:[19, 20, "("] url:[20, 24, "/uri"] pageRef:[20, 24, "/uri"] linkClose:[24, 25, ")"]
       Image[1, 18] textOpen:[1, 3, "!["] text:[3, 7, "moon"] textClose:[7, 8, "]"] linkOpen:[8, 9, "("] url:[9, 17, "moon.jpg"] pageRef:[9, 17, "moon.jpg"] linkClose:[17, 18, ")"]
         Text[3, 7] chars:[3, 7, "moon"]
@@ -6700,8 +6700,8 @@ However, links may not contain other links, at any level of nesting.
 .
 <p>[foo <a href="/uri">bar</a>](/uri)</p>
 .
-Document[0, 24]
-  Paragraph[0, 24]
+Document[0, 23]
+  Paragraph[0, 23]
     Text[0, 5] chars:[0, 5, "[foo "]
     Link[5, 16] textOpen:[5, 6, "["] text:[6, 9, "bar"] textClose:[9, 10, "]"] linkOpen:[10, 11, "("] url:[11, 15, "/uri"] pageRef:[11, 15, "/uri"] linkClose:[15, 16, ")"]
       Text[6, 9] chars:[6, 9, "bar"]
@@ -6714,8 +6714,8 @@ Document[0, 24]
 .
 <p>[foo <em>[bar <a href="/uri">baz</a>](/uri)</em>](/uri)</p>
 .
-Document[0, 38]
-  Paragraph[0, 38]
+Document[0, 37]
+  Paragraph[0, 37]
     Text[0, 5] chars:[0, 5, "[foo "]
     Emphasis[5, 30] textOpen:[5, 6, "*"] text:[6, 29, "[bar [baz](/uri)](/uri)"] textClose:[29, 30, "*"]
       Text[6, 7] chars:[6, 7, "["]
@@ -6732,8 +6732,8 @@ Document[0, 38]
 .
 <p><img src="uri3" alt="[foo](uri2)" /></p>
 .
-Document[0, 29]
-  Paragraph[0, 29]
+Document[0, 28]
+  Paragraph[0, 28]
     Image[0, 28] textOpen:[0, 2, "!["] text:[2, 21, "[[foo](uri1)](uri2)"] textClose:[21, 22, "]"] linkOpen:[22, 23, "("] url:[23, 27, "uri3"] pageRef:[23, 27, "uri3"] linkClose:[27, 28, ")"]
       Text[2, 3] chars:[2, 3, "["]
       Link[3, 14] textOpen:[3, 4, "["] text:[4, 7, "foo"] textClose:[7, 8, "]"] linkOpen:[8, 9, "("] url:[9, 13, "uri1"] pageRef:[9, 13, "uri1"] linkClose:[13, 14, ")"]
@@ -6747,8 +6747,8 @@ Document[0, 29]
 .
 <p><a href="foo(and(bar)">link</a></p>
 .
-Document[0, 23]
-  Paragraph[0, 23]
+Document[0, 22]
+  Paragraph[0, 22]
     Link[0, 22] textOpen:[0, 1, "["] text:[1, 5, "link"] textClose:[5, 6, "]"] linkOpen:[6, 7, "("] urlOpen:[7, 8, "<"] url:[8, 20, "foo(and(bar)"] urlClose:[20, 21, ">"] pageRef:[8, 20, "foo(and(bar)"] linkClose:[21, 22, ")"]
       Text[1, 5] chars:[1, 5, "link"]
 ````````````````````````````````

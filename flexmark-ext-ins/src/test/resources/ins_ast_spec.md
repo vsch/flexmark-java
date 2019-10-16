@@ -17,8 +17,8 @@ Converts ++ins++ text to Ins nodes.
 .
 <p>+foo+</p>
 .
-Document[0, 67]
-  Paragraph[0, 67]
+Document[0, 66]
+  Paragraph[0, 66]
     Text[0, 5] chars:[0, 5, "+foo+"]
 ````````````````````````````````
 
@@ -28,8 +28,8 @@ Document[0, 67]
 .
 <p><ins>foo</ins></p>
 .
-Document[0, 67]
-  Paragraph[0, 67]
+Document[0, 66]
+  Paragraph[0, 66]
     Ins[0, 7] textOpen:[0, 2, "++"] text:[2, 5, "foo"] textClose:[5, 7, "++"]
       Text[2, 5] chars:[2, 5, "foo"]
 ````````````````````````````````
@@ -40,8 +40,8 @@ foo ++++
 .
 <p>foo ++++</p>
 .
-Document[0, 67]
-  Paragraph[0, 67]
+Document[0, 66]
+  Paragraph[0, 66]
     Text[0, 8] chars:[0, 8, "foo ++++"]
 ````````````````````````````````
 
@@ -51,8 +51,8 @@ Document[0, 67]
 .
 <p>++foo</p>
 .
-Document[0, 67]
-  Paragraph[0, 67]
+Document[0, 66]
+  Paragraph[0, 66]
     Text[0, 5] chars:[0, 5, "++foo"]
 ````````````````````````````````
 
@@ -62,8 +62,8 @@ foo++
 .
 <p>foo++</p>
 .
-Document[0, 67]
-  Paragraph[0, 67]
+Document[0, 66]
+  Paragraph[0, 66]
     Text[0, 5] chars:[0, 5, "foo++"]
 ````````````````````````````````
 
@@ -73,8 +73,8 @@ Document[0, 67]
 .
 <p>+<ins>foo</ins>+</p>
 .
-Document[0, 67]
-  Paragraph[0, 67]
+Document[0, 66]
+  Paragraph[0, 66]
     Text[0, 1] chars:[0, 1, "+"]
     Ins[1, 8] textOpen:[1, 3, "++"] text:[3, 6, "foo"] textClose:[6, 8, "++"]
       Text[3, 6] chars:[3, 6, "foo"]
@@ -87,8 +87,8 @@ Document[0, 67]
 .
 <p><ins>foo</ins>+</p>
 .
-Document[0, 67]
-  Paragraph[0, 67]
+Document[0, 66]
+  Paragraph[0, 66]
     Ins[0, 7] textOpen:[0, 2, "++"] text:[2, 5, "foo"] textClose:[5, 7, "++"]
       Text[2, 5] chars:[2, 5, "foo"]
     Text[7, 8] chars:[7, 8, "+"]
@@ -100,8 +100,8 @@ Document[0, 67]
 .
 <p><ins>foo+bar</ins></p>
 .
-Document[0, 67]
-  Paragraph[0, 67]
+Document[0, 66]
+  Paragraph[0, 66]
     Ins[0, 11] textOpen:[0, 2, "++"] text:[2, 9, "foo+bar"] textClose:[9, 11, "++"]
       Text[2, 9] chars:[2, 9, "foo+bar"]
 ````````````````````````````````
@@ -112,8 +112,8 @@ Document[0, 67]
 .
 <p><ins>foo</ins>bar++</p>
 .
-Document[0, 67]
-  Paragraph[0, 67]
+Document[0, 66]
+  Paragraph[0, 66]
     Ins[0, 7] textOpen:[0, 2, "++"] text:[2, 5, "foo"] textClose:[5, 7, "++"]
       Text[2, 5] chars:[2, 5, "foo"]
     Text[7, 12] chars:[7, 12, "bar++"]
@@ -125,8 +125,8 @@ Document[0, 67]
 .
 <p><ins>foo</ins>+bar++</p>
 .
-Document[0, 67]
-  Paragraph[0, 67]
+Document[0, 66]
+  Paragraph[0, 66]
     Ins[0, 7] textOpen:[0, 2, "++"] text:[2, 5, "foo"] textClose:[5, 7, "++"]
       Text[2, 5] chars:[2, 5, "foo"]
     Text[7, 13] chars:[7, 13, "+bar++"]
@@ -138,8 +138,8 @@ Document[0, 67]
 .
 <p><ins>foo</ins><ins>bar</ins></p>
 .
-Document[0, 67]
-  Paragraph[0, 67]
+Document[0, 66]
+  Paragraph[0, 66]
     Ins[0, 7] textOpen:[0, 2, "++"] text:[2, 5, "foo"] textClose:[5, 7, "++"]
       Text[2, 5] chars:[2, 5, "foo"]
     Ins[7, 14] textOpen:[7, 9, "++"] text:[9, 12, "bar"] textClose:[12, 14, "++"]
@@ -152,8 +152,8 @@ Document[0, 67]
 .
 <p><ins>foo</ins>+<ins>bar</ins></p>
 .
-Document[0, 67]
-  Paragraph[0, 67]
+Document[0, 66]
+  Paragraph[0, 66]
     Ins[0, 7] textOpen:[0, 2, "++"] text:[2, 5, "foo"] textClose:[5, 7, "++"]
       Text[2, 5] chars:[2, 5, "foo"]
     Text[7, 8] chars:[7, 8, "+"]
@@ -167,8 +167,8 @@ Document[0, 67]
 .
 <p><ins>foo</ins>++<ins>bar</ins></p>
 .
-Document[0, 67]
-  Paragraph[0, 67]
+Document[0, 66]
+  Paragraph[0, 66]
     Ins[0, 7] textOpen:[0, 2, "++"] text:[2, 5, "foo"] textClose:[5, 7, "++"]
       Text[2, 5] chars:[2, 5, "foo"]
     Text[7, 9] chars:[7, 9, "++"]
@@ -182,8 +182,8 @@ Document[0, 67]
 .
 <p><ins>foo</ins>+++<ins>bar</ins></p>
 .
-Document[0, 67]
-  Paragraph[0, 67]
+Document[0, 66]
+  Paragraph[0, 66]
     Ins[0, 7] textOpen:[0, 2, "++"] text:[2, 5, "foo"] textClose:[5, 7, "++"]
       Text[2, 5] chars:[2, 5, "foo"]
     Text[7, 10] chars:[7, 10, "+++"]
@@ -197,8 +197,8 @@ Document[0, 67]
 .
 <p><ins>Paragraph with <em>emphasis</em> and <strong>strong emphasis</strong></ins></p>
 .
-Document[0, 115]
-  Paragraph[0, 115]
+Document[0, 114]
+  Paragraph[0, 114]
     Ins[0, 53] textOpen:[0, 2, "++"] text:[2, 51, "Paragraph with *emphasis* and __strong emphasis__"] textClose:[51, 53, "++"]
       Text[2, 17] chars:[2, 17, "Parag … with "]
       Emphasis[17, 27] textOpen:[17, 18, "*"] text:[18, 26, "emphasis"] textClose:[26, 27, "*"]
@@ -216,9 +216,9 @@ Document[0, 115]
   <p>underline <ins>that</ins></p>
 </blockquote>
 .
-Document[0, 80]
-  BlockQuote[0, 80] marker:[0, 1, ">"]
-    Paragraph[2, 80]
+Document[0, 79]
+  BlockQuote[0, 79] marker:[0, 1, ">"]
+    Paragraph[2, 79]
       Text[2, 12] chars:[2, 12, "underline "]
       Ins[12, 20] textOpen:[12, 14, "++"] text:[14, 18, "that"] textClose:[18, 20, "++"]
         Text[14, 18] chars:[14, 18, "that"]

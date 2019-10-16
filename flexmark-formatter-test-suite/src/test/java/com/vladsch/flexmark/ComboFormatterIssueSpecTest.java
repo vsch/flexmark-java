@@ -141,8 +141,8 @@ public class ComboFormatterIssueSpecTest extends ComboSpecTestCase {
     }
 
     @Override
-    public @NotNull SpecExampleRenderer getSpecExampleRenderer(@Nullable DataHolder exampleOptions) {
-        return new FlexmarkSpecExampleRenderer(exampleOptions, parser(),renderer(), true) {
+    public @NotNull SpecExampleRenderer getSpecExampleRenderer(@NotNull SpecExample example, @Nullable DataHolder exampleOptions) {
+        return new FlexmarkSpecExampleRenderer(example, exampleOptions, parser(),renderer(), true) {
             @Override
             protected void adjustParserForInclusion() {
                 super.adjustParserForInclusion();
@@ -150,7 +150,7 @@ public class ComboFormatterIssueSpecTest extends ComboSpecTestCase {
                 AbbreviationRepository abbreviationRepository = ((Document)getIncludedDocument()).get(AbbreviationExtension.ABBREVIATIONS);
                 if (!abbreviationRepository.isEmpty()) {
                     // need to transfer it to parser
-                    setParserWithOptions(getParserWithOptions().withOptions(new MutableDataSet().set(AbbreviationExtension.ABBREVIATIONS, abbreviationRepository)));
+                    setParser(getParser().withOptions(new MutableDataSet().set(AbbreviationExtension.ABBREVIATIONS, abbreviationRepository)));
                 }
             }
         };

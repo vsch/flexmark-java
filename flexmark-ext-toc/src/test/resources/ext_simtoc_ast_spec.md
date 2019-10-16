@@ -70,7 +70,7 @@ no spaces after first bracket
 [ TOC]: #  
 .
 .
-Document[0, 12]
+Document[0, 11]
   Reference[0, 9] refOpen:[0, 1, "["] ref:[2, 5, "TOC"] refClose:[5, 7, "]:"] url:[8, 9, "#"]
 ````````````````````````````````
 
@@ -81,8 +81,8 @@ plain is ok
 [TOC]: #  
 .
 .
-Document[0, 11]
-  SimTocBlock[0, 11] openingMarker:[0, 1] tocKeyword:[1, 4] closingMarker:[4, 6] anchorMarker:[7, 8, "#"]
+Document[0, 10]
+  SimTocBlock[0, 10] openingMarker:[0, 1] tocKeyword:[1, 4] closingMarker:[4, 6] anchorMarker:[7, 8, "#"]
 ````````````````````````````````
 
 
@@ -150,8 +150,8 @@ accepts all text for style
 [TOC levels=a,b,c,d html markdown text formatted bullet numbered]: #  
 .
 .
-Document[0, 71]
-  SimTocBlock[0, 71] openingMarker:[0, 1] tocKeyword:[1, 4] style:[5, 64] closingMarker:[64, 66] anchorMarker:[67, 68, "#"]
+Document[0, 70]
+  SimTocBlock[0, 70] openingMarker:[0, 1] tocKeyword:[1, 4] style:[5, 64] closingMarker:[64, 66] anchorMarker:[67, 68, "#"]
 ````````````````````````````````
 
 
@@ -164,7 +164,7 @@ Absorbs only valid combinations, HTML or Heading with List, no blank lines
 .
 <h1 id="heading-1">Heading 1</h1>
 .
-Document[0, 84]
+Document[0, 83]
   SimTocBlock[0, 71] openingMarker:[0, 1] tocKeyword:[1, 4] style:[5, 64] closingMarker:[64, 66] anchorMarker:[67, 68, "#"]
   Heading[72, 83] textOpen:[72, 73, "#"] text:[74, 83, "Heading 1"]
     Text[74, 83] chars:[74, 83, "Heading 1"]
@@ -182,11 +182,11 @@ Absorbs only valid combinations, HTML or Heading with List, no blank lines
   <li>asfdasfd</li>
 </ul>
 .
-Document[0, 83]
+Document[0, 82]
   SimTocBlock[0, 71] openingMarker:[0, 1] tocKeyword:[1, 4] style:[5, 64] closingMarker:[64, 66] anchorMarker:[67, 68, "#"]
-  BulletList[72, 83] isTight
-    BulletListItem[72, 83] open:[72, 73, "-"] isTight
-      Paragraph[74, 83]
+  BulletList[72, 82] isTight
+    BulletListItem[72, 82] open:[72, 73, "-"] isTight
+      Paragraph[74, 82]
         Text[74, 82] chars:[74, 82, "asfdasfd"]
 ````````````````````````````````
 
@@ -200,9 +200,9 @@ Document[0, 83]
 <div>
 </div>
 .
-Document[0, 85]
+Document[0, 84]
   SimTocBlock[0, 71] openingMarker:[0, 1] tocKeyword:[1, 4] style:[5, 64] closingMarker:[64, 66] anchorMarker:[67, 68, "#"]
-  HtmlBlock[72, 85]
+  HtmlBlock[72, 84]
 ````````````````````````````````
 
 
@@ -227,18 +227,18 @@ Absorbs only valid combinations, HTML or Heading with List, no blank lines
   <li>asfdasfd</li>
 </ul>
 .
-Document[0, 123]
+Document[0, 122]
   SimTocBlock[0, 82] openingMarker:[0, 1] tocKeyword:[1, 4] style:[5, 64] closingMarker:[64, 66] anchorMarker:[67, 68, "#"]
     SimTocContent[71, 82]
       Heading[71, 82] textOpen:[71, 72, "#"] text:[73, 82, "Heading 1"]
   Heading[83, 97] textOpen:[83, 85, "##"] text:[86, 97, "Heading 1.1"]
     Text[86, 97] chars:[86, 97, "Headi … g 1.1"]
-  BulletList[98, 123] isTight
+  BulletList[98, 122] isTight
     BulletListItem[98, 112] open:[98, 99, "-"] isTight
       Paragraph[100, 112]
         Text[100, 111] chars:[100, 111, "afdas … dsadf"]
-    BulletListItem[112, 123] open:[112, 113, "-"] isTight
-      Paragraph[114, 123]
+    BulletListItem[112, 122] open:[112, 113, "-"] isTight
+      Paragraph[114, 122]
         Text[114, 122] chars:[114, 122, "asfdasfd"]
 ````````````````````````````````
 
@@ -257,16 +257,16 @@ Absorbs only valid combinations, HTML or Heading with List, no blank lines
   <li>asfdasfd</li>
 </ul>
 .
-Document[0, 109]
+Document[0, 108]
   SimTocBlock[0, 82] openingMarker:[0, 1] tocKeyword:[1, 4] style:[5, 64] closingMarker:[64, 66] anchorMarker:[67, 68, "#"]
     SimTocContent[71, 82]
       Heading[71, 82] textOpen:[71, 72, "#"] text:[73, 82, "Heading 1"]
-  BulletList[84, 109] isTight
+  BulletList[84, 108] isTight
     BulletListItem[84, 98] open:[84, 85, "-"] isTight
       Paragraph[86, 98]
         Text[86, 97] chars:[86, 97, "afdas … dsadf"]
-    BulletListItem[98, 109] open:[98, 99, "-"] isTight
-      Paragraph[100, 109]
+    BulletListItem[98, 108] open:[98, 99, "-"] isTight
+      Paragraph[100, 108]
         Text[100, 108] chars:[100, 108, "asfdasfd"]
 ````````````````````````````````
 
@@ -282,7 +282,7 @@ Absorbs only valid combinations, HTML or Heading with List, no blank lines
 .
 <h1 id="heading-1">Heading 1</h1>
 .
-Document[0, 109]
+Document[0, 108]
   SimTocBlock[0, 96] openingMarker:[0, 1] tocKeyword:[1, 4] style:[5, 64] closingMarker:[64, 66] anchorMarker:[67, 68, "#"]
     SimTocContent[71, 96]
       BulletList[71, 96] isTight
@@ -313,7 +313,7 @@ Absorbs only valid combinations, HTML or Heading with List, no blank lines
   <li>asfdasfd</li>
 </ul>
 .
-Document[0, 157]
+Document[0, 156]
   SimTocBlock[0, 141] openingMarker:[0, 1] tocKeyword:[1, 4] style:[5, 64] closingMarker:[64, 66] anchorMarker:[67, 68, "#"]
     SimTocContent[71, 141]
       Heading[71, 82] textOpen:[71, 72, "#"] text:[73, 82, "Heading 1"]
@@ -331,9 +331,9 @@ Document[0, 157]
             BulletListItem[130, 141] open:[130, 131, "-"] isTight
               Paragraph[132, 141]
                 Text[132, 140] chars:[132, 140, "asfdasfd"]
-  BulletList[146, 157] isTight
-    BulletListItem[146, 157] open:[146, 147, "-"] isTight
-      Paragraph[148, 157]
+  BulletList[146, 156] isTight
+    BulletListItem[146, 156] open:[146, 147, "-"] isTight
+      Paragraph[148, 156]
         Text[148, 156] chars:[148, 156, "asfdasfd"]
 ````````````````````````````````
 
@@ -356,12 +356,12 @@ Absorbs only valid combinations, HTML or Heading with List, no blank lines
   </ul>
 </div>
 .
-Document[0, 179]
+Document[0, 178]
   SimTocBlock[0, 130] openingMarker:[0, 1] tocKeyword:[1, 4] style:[5, 64] closingMarker:[64, 66] anchorMarker:[67, 68, "#"]
     SimTocContent[71, 130]
       HtmlBlock[71, 130]
   IndentedCodeBlock[141, 164]
-  HtmlBlock[164, 179]
+  HtmlBlock[164, 178]
 ````````````````````````````````
 
 
@@ -379,10 +379,10 @@ Absorbs only valid combinations, HTML or Heading with List, no blank lines
 ## Heading 1.1
 .
 .
-Document[0, 187]
-  SimTocBlock[0, 187] openingMarker:[0, 1] tocKeyword:[1, 4] style:[5, 64] closingMarker:[64, 66] anchorMarker:[67, 68, "#"]
-    SimTocContent[71, 187]
-      HtmlBlock[71, 187]
+Document[0, 186]
+  SimTocBlock[0, 186] openingMarker:[0, 1] tocKeyword:[1, 4] style:[5, 64] closingMarker:[64, 66] anchorMarker:[67, 68, "#"]
+    SimTocContent[71, 186]
+      HtmlBlock[71, 186]
 ````````````````````````````````
 
 
@@ -397,10 +397,10 @@ Absorbs only valid combinations, HTML or Heading with List, no blank lines
 - asfdasfd
 .
 .
-Document[0, 128]
-  SimTocBlock[0, 128] openingMarker:[0, 1] tocKeyword:[1, 4] style:[5, 64] closingMarker:[64, 66] anchorMarker:[67, 68, "#"]
-    SimTocContent[71, 128]
-      HtmlBlock[71, 128]
+Document[0, 127]
+  SimTocBlock[0, 127] openingMarker:[0, 1] tocKeyword:[1, 4] style:[5, 64] closingMarker:[64, 66] anchorMarker:[67, 68, "#"]
+    SimTocContent[71, 127]
+      HtmlBlock[71, 127]
 ````````````````````````````````
 
 
@@ -416,10 +416,10 @@ Absorbs only valid combinations, HTML or Heading with List, no blank lines
 </div>
 .
 .
-Document[0, 135]
-  SimTocBlock[0, 135] openingMarker:[0, 1] tocKeyword:[1, 4] style:[5, 64] closingMarker:[64, 66] anchorMarker:[67, 68, "#"]
-    SimTocContent[71, 135]
-      HtmlBlock[71, 135]
+Document[0, 134]
+  SimTocBlock[0, 134] openingMarker:[0, 1] tocKeyword:[1, 4] style:[5, 64] closingMarker:[64, 66] anchorMarker:[67, 68, "#"]
+    SimTocContent[71, 134]
+      HtmlBlock[71, 134]
 ````````````````````````````````
 
 
@@ -948,7 +948,7 @@ Default rendering with emphasis
 <h3 id="heading-111">Heading 1.1.1</h3>
 <h3 id="heading-112--some-bold-italic">Heading 1.1.2  <strong><em>some bold italic</em></strong></h3>
 .
-Document[0, 126]
+Document[0, 125]
   SimTocBlock[0, 10] openingMarker:[0, 1] tocKeyword:[1, 4] closingMarker:[4, 6] anchorMarker:[6, 7, "#"]
   Heading[11, 36] textOpen:[11, 12, "#"] text:[13, 36, "Heading **some bold** 1"]
     Text[13, 21] chars:[13, 21, "Heading "]
@@ -1136,9 +1136,9 @@ options, empty title
 [TOC levels=3]:# ''
 .
 .
-Document[0, 40]
+Document[0, 39]
   SimTocBlock[0, 20] openingMarker:[0, 1] tocKeyword:[1, 4] style:[5, 13] closingMarker:[13, 15] anchorMarker:[15, 16, "#"] openingTitleMarker:[17, 18, "\""] closingTitleMarker:[18, 19, "\""]
-  SimTocBlock[20, 40] openingMarker:[20, 21] tocKeyword:[21, 24] style:[25, 33] closingMarker:[33, 35] anchorMarker:[35, 36, "#"] openingTitleMarker:[37, 38, "'"] closingTitleMarker:[38, 39, "'"]
+  SimTocBlock[20, 39] openingMarker:[20, 21] tocKeyword:[21, 24] style:[25, 33] closingMarker:[33, 35] anchorMarker:[35, 36, "#"] openingTitleMarker:[37, 38, "'"] closingTitleMarker:[38, 39, "'"]
 ````````````````````````````````
 
 
@@ -1149,9 +1149,9 @@ options, title
 [TOC levels=3]:# 'title'
 .
 .
-Document[0, 50]
+Document[0, 49]
   SimTocBlock[0, 25] openingMarker:[0, 1] tocKeyword:[1, 4] style:[5, 13] closingMarker:[13, 15] anchorMarker:[15, 16, "#"] openingTitleMarker:[17, 18, "\""] title:[18, 23, "title"] closingTitleMarker:[23, 24, "\""]
-  SimTocBlock[25, 50] openingMarker:[25, 26] tocKeyword:[26, 29] style:[30, 38] closingMarker:[38, 40] anchorMarker:[40, 41, "#"] openingTitleMarker:[42, 43, "'"] title:[43, 48, "title"] closingTitleMarker:[48, 49, "'"]
+  SimTocBlock[25, 49] openingMarker:[25, 26] tocKeyword:[26, 29] style:[30, 38] closingMarker:[38, 40] anchorMarker:[40, 41, "#"] openingTitleMarker:[42, 43, "'"] title:[43, 48, "title"] closingTitleMarker:[48, 49, "'"]
 ````````````````````````````````
 
 
@@ -1162,9 +1162,9 @@ options, markers, empty title
 [TOC levels=3]:# '## '
 .
 .
-Document[0, 46]
+Document[0, 45]
   SimTocBlock[0, 23] openingMarker:[0, 1] tocKeyword:[1, 4] style:[5, 13] closingMarker:[13, 15] anchorMarker:[15, 16, "#"] openingTitleMarker:[17, 18, "\""] title:[18, 21, "## "] closingTitleMarker:[21, 22, "\""]
-  SimTocBlock[23, 46] openingMarker:[23, 24] tocKeyword:[24, 27] style:[28, 36] closingMarker:[36, 38] anchorMarker:[38, 39, "#"] openingTitleMarker:[40, 41, "'"] title:[41, 44, "## "] closingTitleMarker:[44, 45, "'"]
+  SimTocBlock[23, 45] openingMarker:[23, 24] tocKeyword:[24, 27] style:[28, 36] closingMarker:[36, 38] anchorMarker:[38, 39, "#"] openingTitleMarker:[40, 41, "'"] title:[41, 44, "## "] closingTitleMarker:[44, 45, "'"]
 ````````````````````````````````
 
 
@@ -1175,9 +1175,9 @@ options, markers, title
 [TOC levels=3]:# '##title'
 .
 .
-Document[0, 54]
+Document[0, 53]
   SimTocBlock[0, 27] openingMarker:[0, 1] tocKeyword:[1, 4] style:[5, 13] closingMarker:[13, 15] anchorMarker:[15, 16, "#"] openingTitleMarker:[17, 18, "\""] title:[18, 25, "##title"] closingTitleMarker:[25, 26, "\""]
-  SimTocBlock[27, 54] openingMarker:[27, 28] tocKeyword:[28, 31] style:[32, 40] closingMarker:[40, 42] anchorMarker:[42, 43, "#"] openingTitleMarker:[44, 45, "'"] title:[45, 52, "##title"] closingTitleMarker:[52, 53, "'"]
+  SimTocBlock[27, 53] openingMarker:[27, 28] tocKeyword:[28, 31] style:[32, 40] closingMarker:[40, 42] anchorMarker:[42, 43, "#"] openingTitleMarker:[44, 45, "'"] title:[45, 52, "##title"] closingTitleMarker:[52, 53, "'"]
 ````````````````````````````````
 
 
@@ -1188,9 +1188,9 @@ options, markers, title
 [TOC levels=3]:# '## title'
 .
 .
-Document[0, 56]
+Document[0, 55]
   SimTocBlock[0, 28] openingMarker:[0, 1] tocKeyword:[1, 4] style:[5, 13] closingMarker:[13, 15] anchorMarker:[15, 16, "#"] openingTitleMarker:[17, 18, "\""] title:[18, 26, "## title"] closingTitleMarker:[26, 27, "\""]
-  SimTocBlock[28, 56] openingMarker:[28, 29] tocKeyword:[29, 32] style:[33, 41] closingMarker:[41, 43] anchorMarker:[43, 44, "#"] openingTitleMarker:[45, 46, "'"] title:[46, 54, "## title"] closingTitleMarker:[54, 55, "'"]
+  SimTocBlock[28, 55] openingMarker:[28, 29] tocKeyword:[29, 32] style:[33, 41] closingMarker:[41, 43] anchorMarker:[43, 44, "#"] openingTitleMarker:[45, 46, "'"] title:[46, 54, "## title"] closingTitleMarker:[54, 55, "'"]
 ````````````````````````````````
 
 
@@ -1218,13 +1218,13 @@ options, title with escaped chars
   </ul>
 </div>
 .
-Document[0, 82]
+Document[0, 81]
   Heading[0, 11] textOpen:[0, 2, "##"] text:[3, 11, "Header 2"]
     Text[3, 11] chars:[3, 11, "Header 2"]
   Heading[12, 24] textOpen:[12, 15, "###"] text:[16, 24, "Header 3"]
     Text[16, 24] chars:[16, 24, "Header 3"]
   SimTocBlock[26, 54] openingMarker:[26, 27] tocKeyword:[27, 30] style:[31, 39] closingMarker:[39, 41] anchorMarker:[41, 42, "#"] openingTitleMarker:[43, 44, "\""] title:[44, 52, "title\\"s"] closingTitleMarker:[52, 53, "\""]
-  SimTocBlock[54, 82] openingMarker:[54, 55] tocKeyword:[55, 58] style:[59, 67] closingMarker:[67, 69] anchorMarker:[69, 70, "#"] openingTitleMarker:[71, 72, "'"] title:[72, 80, "title\'s"] closingTitleMarker:[80, 81, "'"]
+  SimTocBlock[54, 81] openingMarker:[54, 55] tocKeyword:[55, 58] style:[59, 67] closingMarker:[67, 69] anchorMarker:[69, 70, "#"] openingTitleMarker:[71, 72, "'"] title:[72, 80, "title\'s"] closingTitleMarker:[80, 81, "'"]
 ````````````````````````````````
 
 
@@ -1259,7 +1259,7 @@ start with missing first level
 <h2 id="header-4">Header 4</h2>
 <h1 id="header-5">Header 5</h1>
 .
-Document[0, 82]
+Document[0, 81]
   SimTocBlock[0, 21] openingMarker:[0, 1] tocKeyword:[1, 4] style:[5, 15] closingMarker:[15, 17] anchorMarker:[17, 18, "#"]
   Heading[23, 34] textOpen:[23, 25, "##"] text:[26, 34, "Header 1"]
     Text[26, 34] chars:[26, 34, "Header 1"]
@@ -1302,7 +1302,7 @@ start with missing first 2 levels
 <h3 id="header-3">Header 3</h3>
 <h1 id="header-4">Header 4</h1>
 .
-Document[0, 72]
+Document[0, 71]
   SimTocBlock[0, 21] openingMarker:[0, 1] tocKeyword:[1, 4] style:[5, 15] closingMarker:[15, 17] anchorMarker:[17, 18, "#"]
   Heading[23, 35] textOpen:[23, 26, "###"] text:[27, 35, "Header 1"]
     Text[27, 35] chars:[27, 35, "Header 1"]

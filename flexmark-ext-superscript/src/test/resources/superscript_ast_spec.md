@@ -19,8 +19,8 @@ The tests here are converted to commonmark spec.txt format and AST expected resu
 .
 <p><sup>foo</sup></p>
 .
-Document[0, 6]
-  Paragraph[0, 6]
+Document[0, 5]
+  Paragraph[0, 5]
     Superscript[0, 5] textOpen:[0, 1, "^"] text:[1, 4, "foo"] textClose:[4, 5, "^"]
       Text[1, 4] chars:[1, 4, "foo"]
 ````````````````````````````````
@@ -31,8 +31,8 @@ Document[0, 6]
 .
 <p><sup><sup>foo</sup></sup></p>
 .
-Document[0, 8]
-  Paragraph[0, 8]
+Document[0, 7]
+  Paragraph[0, 7]
     Superscript[0, 7] textOpen:[0, 1, "^"] text:[1, 6, "^foo^"] textClose:[6, 7, "^"]
       Superscript[1, 6] textOpen:[1, 2, "^"] text:[2, 5, "foo"] textClose:[5, 6, "^"]
         Text[2, 5] chars:[2, 5, "foo"]
@@ -44,8 +44,8 @@ foo ^^^^
 .
 <p>foo ^^^^</p>
 .
-Document[0, 9]
-  Paragraph[0, 9]
+Document[0, 8]
+  Paragraph[0, 8]
     Text[0, 8] chars:[0, 8, "foo ^^^^"]
 ````````````````````````````````
 
@@ -55,8 +55,8 @@ Document[0, 9]
 .
 <p>^^foo</p>
 .
-Document[0, 6]
-  Paragraph[0, 6]
+Document[0, 5]
+  Paragraph[0, 5]
     Text[0, 5] chars:[0, 5, "^^foo"]
 ````````````````````````````````
 
@@ -66,8 +66,8 @@ foo^^
 .
 <p>foo^^</p>
 .
-Document[0, 6]
-  Paragraph[0, 6]
+Document[0, 5]
+  Paragraph[0, 5]
     Text[0, 5] chars:[0, 5, "foo^^"]
 ````````````````````````````````
 
@@ -77,8 +77,8 @@ Document[0, 6]
 .
 <p><sup><sup><sup>foo</sup></sup></sup></p>
 .
-Document[0, 10]
-  Paragraph[0, 10]
+Document[0, 9]
+  Paragraph[0, 9]
     Superscript[0, 9] textOpen:[0, 1, "^"] text:[1, 8, "^^foo^^"] textClose:[8, 9, "^"]
       Superscript[1, 8] textOpen:[1, 2, "^"] text:[2, 7, "^foo^"] textClose:[7, 8, "^"]
         Superscript[2, 7] textOpen:[2, 3, "^"] text:[3, 6, "foo"] textClose:[6, 7, "^"]
@@ -91,8 +91,8 @@ Document[0, 10]
 .
 <p><sup><sup>foo</sup></sup>^</p>
 .
-Document[0, 9]
-  Paragraph[0, 9]
+Document[0, 8]
+  Paragraph[0, 8]
     Superscript[0, 7] textOpen:[0, 1, "^"] text:[1, 6, "^foo^"] textClose:[6, 7, "^"]
       Superscript[1, 6] textOpen:[1, 2, "^"] text:[2, 5, "foo"] textClose:[5, 6, "^"]
         Text[2, 5] chars:[2, 5, "foo"]
@@ -123,7 +123,7 @@ Document[0, 9]
 <p><sup>foo</sup>^^^^<sup>bar</sup></p>
 <p><sup>foo</sup>^^^^^<sup>bar</sup></p>
 .
-Document[0, 97]
+Document[0, 96]
   Paragraph[0, 10] isTrailingBlankLine
     Superscript[0, 5] textOpen:[0, 1, "^"] text:[1, 4, "foo"] textClose:[4, 5, "^"]
       Text[1, 4] chars:[1, 4, "foo"]
@@ -157,7 +157,7 @@ Document[0, 97]
     Text[70, 74] chars:[70, 74, "^^^^"]
     Superscript[74, 79] textOpen:[74, 75, "^"] text:[75, 78, "bar"] textClose:[78, 79, "^"]
       Text[75, 78] chars:[75, 78, "bar"]
-  Paragraph[81, 97]
+  Paragraph[81, 96]
     Superscript[81, 86] textOpen:[81, 82, "^"] text:[82, 85, "foo"] textClose:[85, 86, "^"]
       Text[82, 85] chars:[82, 85, "foo"]
     Text[86, 91] chars:[86, 91, "^^^^^"]
@@ -171,8 +171,8 @@ Document[0, 97]
 .
 <p><sup>Paragraph with <em>emphasis</em> and <strong>strong emphasis</strong></sup></p>
 .
-Document[0, 52]
-  Paragraph[0, 52]
+Document[0, 51]
+  Paragraph[0, 51]
     Superscript[0, 51] textOpen:[0, 1, "^"] text:[1, 50, "Paragraph with *emphasis* and __strong emphasis__"] textClose:[50, 51, "^"]
       Text[1, 16] chars:[1, 16, "Parag … with "]
       Emphasis[16, 26] textOpen:[16, 17, "*"] text:[17, 25, "emphasis"] textClose:[25, 26, "*"]
@@ -190,9 +190,9 @@ Document[0, 52]
   <p>strike <sup><sup>that</sup></sup></p>
 </blockquote>
 .
-Document[0, 18]
-  BlockQuote[0, 18] marker:[0, 1, ">"]
-    Paragraph[2, 18]
+Document[0, 17]
+  BlockQuote[0, 17] marker:[0, 1, ">"]
+    Paragraph[2, 17]
       Text[2, 9] chars:[2, 9, "strike "]
       Superscript[9, 17] textOpen:[9, 10, "^"] text:[10, 16, "^that^"] textClose:[16, 17, "^"]
         Superscript[10, 16] textOpen:[10, 11, "^"] text:[11, 15, "that"] textClose:[15, 16, "^"]
@@ -205,8 +205,8 @@ e^iπ^ = -1
 .
 <p>e<sup>iπ</sup> = -1</p>
 .
-Document[0, 11]
-  Paragraph[0, 11]
+Document[0, 10]
+  Paragraph[0, 10]
     Text[0, 1] chars:[0, 1, "e"]
     Superscript[1, 5] textOpen:[1, 2, "^"] text:[2, 4, "iπ"] textClose:[4, 5, "^"]
       Text[2, 4] chars:[2, 4, "iπ"]

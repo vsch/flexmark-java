@@ -18,6 +18,7 @@ import com.vladsch.flexmark.util.html.Escaping;
 import com.vladsch.flexmark.util.html.LineFormattingAppendable;
 import com.vladsch.flexmark.util.sequence.TagRange;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
@@ -177,7 +178,7 @@ public class HtmlRenderer implements IRender {
         return new Builder(options);
     }
 
-    @org.jetbrains.annotations.Nullable
+    @Nullable
     @Override
     public DataHolder getOptions() {
         return new DataSet(builder);
@@ -221,7 +222,7 @@ public class HtmlRenderer implements IRender {
     }
 
     @NotNull
-    public HtmlRenderer withOptions(@org.jetbrains.annotations.Nullable DataHolder options) {
+    public HtmlRenderer withOptions(@Nullable DataHolder options) {
         return options == null ? this : new HtmlRenderer(new Builder(builder, options));
     }
 
@@ -262,7 +263,7 @@ public class HtmlRenderer implements IRender {
      * Builder for configuring an {@link HtmlRenderer}. See methods for default configuration.
      */
     public static class Builder extends BuilderBase<Builder> implements RendererBuilder {
-        Map<Class, AttributeProviderFactory> attributeProviderFactories = new LinkedHashMap<>();
+        Map<Class<?>, AttributeProviderFactory> attributeProviderFactories = new LinkedHashMap<>();
         List<NodeRendererFactory> nodeRendererFactories = new ArrayList<>();
         List<LinkResolverFactory> linkResolverFactories = new ArrayList<>();
         HeaderIdGeneratorFactory htmlIdGeneratorFactory = null;
@@ -280,7 +281,7 @@ public class HtmlRenderer implements IRender {
             super(other);
 
             this.attributeProviderFactories.putAll(other.attributeProviderFactories);
-            //this.nodeRendererFactories.addAll(other.nodeRendererFactories);
+            this.nodeRendererFactories.addAll(other.nodeRendererFactories);
             this.linkResolverFactories.addAll(other.linkResolverFactories);
             this.htmlIdGeneratorFactory = other.htmlIdGeneratorFactory;
         }
@@ -516,6 +517,8 @@ public class HtmlRenderer implements IRender {
     }
 
     private static class RendererDependencyHandler extends DependencyHandler<DelegatingNodeRendererFactoryWrapper, RendererDependencyStage, RendererDependencies> {
+        RendererDependencyHandler() {}
+
         @Override
         protected Class getDependentClass(DelegatingNodeRendererFactoryWrapper dependent) {
             return dependent.getFactory().getClass();

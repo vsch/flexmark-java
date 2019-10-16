@@ -1,14 +1,14 @@
 ---
 title: Typographic Extension Spec
-author: 
-version: 
+author:
+version:
 date: '2016-06-06'
 license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 ...
 
 ---
 
-## TypographicQuotes  
+## TypographicQuotes
 
 Converts:
 
@@ -23,8 +23,8 @@ a'l'ordre'b
 .
 <p>a&rsquo;l&rsquo;ordre&rsquo;b</p>
 .
-Document[0, 12]
-  Paragraph[0, 12]
+Document[0, 11]
+  Paragraph[0, 11]
     Text[0, 1] chars:[0, 1, "a"]
     TypographicSmarts[1, 2] typographic: &rsquo; 
     Text[2, 3] chars:[2, 3, "l"]
@@ -41,8 +41,8 @@ a"l"ordre"b
 .
 <p>a&quot;l&quot;ordre&quot;b</p>
 .
-Document[0, 12]
-  Paragraph[0, 12]
+Document[0, 11]
+  Paragraph[0, 11]
     Text[0, 11] chars:[0, 11, "a\"l\"o … dre\"b"]
 ````````````````````````````````
 
@@ -54,8 +54,8 @@ basic quotes
 .
 <p>&lsquo;l&rsquo;ordre&rsquo;</p>
 .
-Document[0, 10]
-  Paragraph[0, 10]
+Document[0, 9]
+  Paragraph[0, 9]
     TypographicQuotes[0, 9] typographicOpening: &lsquo;  typographicClosing: &rsquo;  textOpen:[0, 1, "'"] text:[1, 8, "l'ordre"] textClose:[8, 9, "'"]
       Text[1, 2] chars:[1, 2, "l"]
       TypographicSmarts[2, 3] typographic: &rsquo; 
@@ -68,8 +68,8 @@ Document[0, 10]
 .
 <p>&lsquo;l''ordre&rsquo;</p>
 .
-Document[0, 11]
-  Paragraph[0, 11]
+Document[0, 10]
+  Paragraph[0, 10]
     TypographicQuotes[0, 10] typographicOpening: &lsquo;  typographicClosing: &rsquo;  textOpen:[0, 1, "'"] text:[1, 9, "l''ordre"] textClose:[9, 10, "'"]
       Text[1, 9] chars:[1, 9, "l''ordre"]
 ````````````````````````````````
@@ -80,8 +80,8 @@ Document[0, 11]
 .
 <p><strong>&lsquo;l&rsquo;ordre&rsquo;</strong></p>
 .
-Document[0, 14]
-  Paragraph[0, 14]
+Document[0, 13]
+  Paragraph[0, 13]
     StrongEmphasis[0, 13] textOpen:[0, 2, "**"] text:[2, 11, "'l'ordre'"] textClose:[11, 13, "**"]
       TypographicQuotes[2, 11] typographicOpening: &lsquo;  typographicClosing: &rsquo;  textOpen:[2, 3, "'"] text:[3, 10, "l'ordre"] textClose:[10, 11, "'"]
         Text[3, 4] chars:[3, 4, "l"]
@@ -95,8 +95,8 @@ Document[0, 14]
 .
 <p>&lsquo;<strong>l&rsquo;ordre</strong>&rsquo;</p>
 .
-Document[0, 14]
-  Paragraph[0, 14]
+Document[0, 13]
+  Paragraph[0, 13]
     TypographicQuotes[0, 13] typographicOpening: &lsquo;  typographicClosing: &rsquo;  textOpen:[0, 1, "'"] text:[1, 12, "**l'ordre**"] textClose:[12, 13, "'"]
       StrongEmphasis[1, 12] textOpen:[1, 3, "**"] text:[3, 10, "l'ordre"] textClose:[10, 12, "**"]
         Text[3, 4] chars:[3, 4, "l"]
@@ -110,8 +110,8 @@ Document[0, 14]
 .
 <p><strong>&lsquo;l''ordre&rsquo;</strong></p>
 .
-Document[0, 15]
-  Paragraph[0, 15]
+Document[0, 14]
+  Paragraph[0, 14]
     StrongEmphasis[0, 14] textOpen:[0, 2, "**"] text:[2, 12, "'l''ordre'"] textClose:[12, 14, "**"]
       TypographicQuotes[2, 12] typographicOpening: &lsquo;  typographicClosing: &rsquo;  textOpen:[2, 3, "'"] text:[3, 11, "l''ordre"] textClose:[11, 12, "'"]
         Text[3, 11] chars:[3, 11, "l''ordre"]
@@ -123,8 +123,8 @@ Document[0, 15]
 .
 <p><strong>&ldquo;l&rsquo;ordre&rdquo;</strong></p>
 .
-Document[0, 14]
-  Paragraph[0, 14]
+Document[0, 13]
+  Paragraph[0, 13]
     StrongEmphasis[0, 13] textOpen:[0, 2, "**"] text:[2, 11, "\"l'ordre\""] textClose:[11, 13, "**"]
       TypographicQuotes[2, 11] typographicOpening: &ldquo;  typographicClosing: &rdquo;  textOpen:[2, 3, "\""] text:[3, 10, "l'ordre"] textClose:[10, 11, "\""]
         Text[3, 4] chars:[3, 4, "l"]
@@ -138,8 +138,8 @@ Document[0, 14]
 .
 <p>&ldquo;<strong>l&rsquo;ordre</strong>&rdquo;</p>
 .
-Document[0, 14]
-  Paragraph[0, 14]
+Document[0, 13]
+  Paragraph[0, 13]
     TypographicQuotes[0, 13] typographicOpening: &ldquo;  typographicClosing: &rdquo;  textOpen:[0, 1, "\""] text:[1, 12, "**l'ordre**"] textClose:[12, 13, "\""]
       StrongEmphasis[1, 12] textOpen:[1, 3, "**"] text:[3, 10, "l'ordre"] textClose:[10, 12, "**"]
         Text[3, 4] chars:[3, 4, "l"]
@@ -153,8 +153,8 @@ Document[0, 14]
 .
 <p><strong>&ldquo;l''ordre&rdquo;</strong></p>
 .
-Document[0, 15]
-  Paragraph[0, 15]
+Document[0, 14]
+  Paragraph[0, 14]
     StrongEmphasis[0, 14] textOpen:[0, 2, "**"] text:[2, 12, "\"l''ordre\""] textClose:[12, 14, "**"]
       TypographicQuotes[2, 12] typographicOpening: &ldquo;  typographicClosing: &rdquo;  textOpen:[2, 3, "\""] text:[3, 11, "l''ordre"] textClose:[11, 12, "\""]
         Text[3, 11] chars:[3, 11, "l''ordre"]
@@ -166,8 +166,8 @@ a's and b's
 .
 <p>a&rsquo;s and b&rsquo;s</p>
 .
-Document[0, 12]
-  Paragraph[0, 12]
+Document[0, 11]
+  Paragraph[0, 11]
     Text[0, 1] chars:[0, 1, "a"]
     TypographicSmarts[1, 2] typographic: &rsquo; 
     Text[2, 9] chars:[2, 9, "s and b"]
@@ -181,8 +181,8 @@ Document[0, 12]
 .
 <p>&rsquo;Twas the night before Christmas.</p>
 .
-Document[0, 34]
-  Paragraph[0, 34]
+Document[0, 33]
+  Paragraph[0, 33]
     TypographicSmarts[0, 1] typographic: &rsquo; 
     Text[1, 33] chars:[1, 33, "Twas  … tmas."]
 ````````````````````````````````
@@ -193,8 +193,8 @@ Sample "double" 'single' <<angle>> "l'ordre" 'l'ordre' <span>test</span>
 .
 <p>Sample &ldquo;double&rdquo; &lsquo;single&rsquo; &laquo;angle&raquo; &ldquo;l&rsquo;ordre&rdquo; &lsquo;l&rsquo;ordre&rsquo; <span>test</span></p>
 .
-Document[0, 73]
-  Paragraph[0, 73]
+Document[0, 72]
+  Paragraph[0, 72]
     Text[0, 7] chars:[0, 7, "Sample "]
     TypographicQuotes[7, 15] typographicOpening: &ldquo;  typographicClosing: &rdquo;  textOpen:[7, 8, "\""] text:[8, 14, "double"] textClose:[14, 15, "\""]
       Text[8, 14] chars:[8, 14, "double"]
@@ -228,8 +228,8 @@ Sample \"double\" \'single\' \<<angle\>> \"l'ordre" \'l'ordre\'
 .
 <p>Sample &quot;double&quot; 'single' &lt;&lt;angle&gt;&gt; &quot;l&rsquo;ordre&quot; 'l&rsquo;ordre'</p>
 .
-Document[0, 64]
-  Paragraph[0, 64]
+Document[0, 63]
+  Paragraph[0, 63]
     Text[0, 44] chars:[0, 44, "Sampl … > \\"l"]
     TypographicSmarts[44, 45] typographic: &rsquo; 
     Text[45, 55] chars:[45, 55, "ordre\" \'l"]
@@ -245,8 +245,8 @@ Sample \"double\" \'single\' \<<angle>\> \"l'ordre" \'l'ordre\'
 .
 <p>Sample &quot;double&quot; 'single' &lt;<angle>&gt; &quot;l&rsquo;ordre&quot; 'l&rsquo;ordre'</p>
 .
-Document[0, 64]
-  Paragraph[0, 64]
+Document[0, 63]
+  Paragraph[0, 63]
     Text[0, 31] chars:[0, 31, "Sampl … \' \<"]
     HtmlInline[31, 38] chars:[31, 38, "<angle>"]
     Text[38, 44] chars:[38, 44, "\> \\"l"]
@@ -272,7 +272,7 @@ Document[0, 54]
 ````````````````````````````````
 
 
-## Typographic Smarts  
+## Typographic Smarts
 
 Converts:
 
@@ -293,7 +293,7 @@ en--dash and em---dash
 <p>Sample with l&rsquo;existence, from 1&hellip;2 and so on&hellip;</p>
 <p>en&ndash;dash and em&mdash;dash</p>
 .
-Document[0, 76]
+Document[0, 75]
   Paragraph[0, 52] isTrailingBlankLine
     Text[0, 13] chars:[0, 13, "Sampl … ith l"]
     TypographicSmarts[13, 14] typographic: &rsquo; 
@@ -301,7 +301,7 @@ Document[0, 76]
     TypographicSmarts[31, 34] typographic: &hellip; 
     Text[34, 45] chars:[34, 45, "2 and … so on"]
     TypographicSmarts[45, 50] typographic: &hellip; 
-  Paragraph[53, 76]
+  Paragraph[53, 75]
     Text[53, 55] chars:[53, 55, "en"]
     TypographicSmarts[55, 57] typographic: &ndash; 
     Text[57, 68] chars:[57, 68, "dash  … nd em"]
@@ -320,10 +320,10 @@ en\--dash and em\---dash
 <p>Sample with l'existence, from 1...2 and so on. . .</p>
 <p>en--dash and em-&ndash;dash</p>
 .
-Document[0, 81]
+Document[0, 80]
   Paragraph[0, 55] isTrailingBlankLine
     Text[0, 53] chars:[0, 53, "Sampl … . . ."]
-  Paragraph[56, 81]
+  Paragraph[56, 80]
     Text[56, 74] chars:[56, 74, "en\-- …  em\-"]
     TypographicSmarts[74, 76] typographic: &ndash; 
     Text[76, 80] chars:[76, 80, "dash"]
@@ -340,10 +340,10 @@ en-\-dash and em-\--dash
 <p>Sample with l'existence, from 1...2 and so on. . .</p>
 <p>en--dash and em---dash</p>
 .
-Document[0, 81]
+Document[0, 80]
   Paragraph[0, 55] isTrailingBlankLine
     Text[0, 53] chars:[0, 53, "Sampl … . . ."]
-  Paragraph[56, 81]
+  Paragraph[56, 80]
     Text[56, 80] chars:[56, 80, "en-\- … -dash"]
 ````````````````````````````````
 
@@ -358,10 +358,10 @@ en-\-dash and em--\-dash
 <p>Sample with l'existence, from 1...2 and so on. . .</p>
 <p>en--dash and em&ndash;-dash</p>
 .
-Document[0, 81]
+Document[0, 80]
   Paragraph[0, 55] isTrailingBlankLine
     Text[0, 53] chars:[0, 53, "Sampl … . . ."]
-  Paragraph[56, 81]
+  Paragraph[56, 80]
     Text[56, 72] chars:[56, 72, "en-\- … nd em"]
     TypographicSmarts[72, 74] typographic: &ndash; 
     Text[74, 80] chars:[74, 80, "\-dash"]
@@ -413,7 +413,7 @@ Document[0, 75]
 ````````````````````````````````
 
 
-## Issue #70 
+## Issue #70
 
 Issue #70, parse failed for angle quotes if the end angle quote follows with a line feed or a
 carriage return

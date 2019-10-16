@@ -1,8 +1,10 @@
 package com.vladsch.flexmark.convert.html;
 
 import com.vladsch.flexmark.spec.SpecExample;
-import com.vladsch.flexmark.test.*;
-import com.vladsch.flexmark.util.ast.Node;
+import com.vladsch.flexmark.test.DumpSpecReader;
+import com.vladsch.flexmark.test.FullSpecTestCase;
+import com.vladsch.flexmark.test.SpecExampleRenderer;
+import com.vladsch.flexmark.test.TestUtils;
 import com.vladsch.flexmark.util.data.DataHolder;
 import org.jetbrains.annotations.NotNull;
 import org.junit.AssumptionViolatedException;
@@ -15,26 +17,28 @@ public class HtmlSpecReader extends DumpSpecReader {
     }
 
     @Override
-    protected void addSpecExample(SpecExample example) {
-        DataHolder options;
+    protected void addSpecExample(@NotNull SpecExample example) {
+        DataHolder exampleOptions;
         boolean ignoredCase = false;
         try {
-            options = TestUtils.getOptions(example, example.getOptionsSet(), testCase::options, testCase::combineOptions);
+            exampleOptions = TestUtils.getOptions(example, example.getOptionsSet(), testCase::options, testCase::combineOptions);
         } catch (AssumptionViolatedException ignored) {
             ignoredCase = true;
-            options = null;
+            exampleOptions = null;
         }
 
-        if (options != null && options.get(TestUtils.FAIL)) {
+        if (exampleOptions != null && exampleOptions.get(TestUtils.FAIL)) {
             ignoredCase = true;
         }
 
         String parseSource = example.getHtml();
-        if (options != null && options.get(TestUtils.NO_FILE_EOL)) {
+
+        @NotNull SpecExampleRenderer exampleRenderer = testCase.getSpecExampleRenderer(example, exampleOptions);
+
+        if (TestUtils.NO_FILE_EOL.getFrom(exampleRenderer.getOptions())) {
             parseSource = TestUtils.trimTrailingEOL(parseSource);
         }
 
-        @NotNull SpecExampleRenderer exampleRenderer = testCase.getSpecExampleRenderer(options);
         exampleRenderer.parse(parseSource);
         exampleRenderer.finalizeDocument();
         String source = !ignoredCase ? exampleRenderer.renderHtml() : example.getSource();

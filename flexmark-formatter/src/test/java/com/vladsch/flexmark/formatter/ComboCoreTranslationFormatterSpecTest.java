@@ -37,7 +37,9 @@ public class ComboCoreTranslationFormatterSpecTest extends ComboSpecTestCase {
             .set(Parser.HTML_FOR_TRANSLATOR, true)
             .set(Parser.PARSE_INNER_HTML_COMMENTS, true)
             .set(Parser.HEADING_NO_ATX_SPACE, true)
-            .set(Formatter.MAX_TRAILING_BLANK_LINES, 0);
+            .set(Formatter.MAX_TRAILING_BLANK_LINES, 0)
+            .set(TestUtils.NO_FILE_EOL, false)
+            ;
 
     static final DataKey<Boolean> DETAILS = new DataKey<>("DETAILS", SHOW_INTERMEDIATE);
 
@@ -149,7 +151,7 @@ public class ComboCoreTranslationFormatterSpecTest extends ComboSpecTestCase {
             myFormatter = formatter;
         }
 
-        @org.jetbrains.annotations.Nullable
+        @Nullable
         @Override
         public DataHolder getOptions() {
             return myFormatter.getOptions();
@@ -218,7 +220,7 @@ public class ComboCoreTranslationFormatterSpecTest extends ComboSpecTestCase {
             }
         }
 
-        @org.jetbrains.annotations.NotNull
+        @NotNull
         @Override
         public String render(@NotNull Node document) {
             StringBuilder sb = new StringBuilder();
@@ -226,14 +228,14 @@ public class ComboCoreTranslationFormatterSpecTest extends ComboSpecTestCase {
             return sb.toString();
         }
 
-        @org.jetbrains.annotations.NotNull
+        @NotNull
         @Override
-        public IRender withOptions(@org.jetbrains.annotations.Nullable DataHolder options) {
+        public IRender withOptions(@Nullable DataHolder options) {
             return new TranslationFormatter(myFormatter.withOptions(options));
         }
     }
 
-    final static TranslationFormatter TRANSLATION_FORMATTER = new TranslationFormatter(FORMATTER);
+    final static TranslationFormatter RENDERER = new TranslationFormatter(FORMATTER);
 
     private static DataHolder optionsSet(String optionSet) {
         if (optionSet == null) return null;
@@ -262,7 +264,8 @@ public class ComboCoreTranslationFormatterSpecTest extends ComboSpecTestCase {
     }
 
     @Override
-    public @NotNull SpecExampleRenderer getSpecExampleRenderer(@Nullable DataHolder exampleOptions) {
-        return new FlexmarkSpecExampleRenderer(exampleOptions, PARSER, TRANSLATION_FORMATTER, true);
+    public @NotNull SpecExampleRenderer getSpecExampleRenderer(@NotNull SpecExample example, @Nullable DataHolder exampleOptions) {
+        DataHolder combinedOptions = combineOptions(OPTIONS, exampleOptions);
+        return new FlexmarkSpecExampleRenderer(example, combinedOptions, PARSER.withOptions(combinedOptions), RENDERER.withOptions(combinedOptions), true);
     }
 }

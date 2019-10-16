@@ -30,6 +30,7 @@ import org.docx4j.wml.CTBookmark;
 import org.docx4j.wml.Numbering;
 import org.docx4j.wml.Styles;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -166,7 +167,7 @@ public class DocxRenderer implements IRender {
         this.linkResolverFactories = FlatDependencyHandler.computeDependencies(builder.linkResolverFactories);
     }
 
-    @org.jetbrains.annotations.Nullable
+    @Nullable
     @Override
     public DataHolder getOptions() {
         return new DataSet(builder);
@@ -288,7 +289,7 @@ public class DocxRenderer implements IRender {
      * @param document the root node
      * @return the rendered HTML
      */
-    @org.jetbrains.annotations.NotNull
+    @NotNull
     public String render(@NotNull Node document) {
         String resourcePath = DEFAULT_TEMPLATE_RESOURCE.getFrom(getOptions());
         WordprocessingMLPackage mlPackage = getDefaultTemplate(resourcePath);
@@ -317,8 +318,8 @@ public class DocxRenderer implements IRender {
         }
     }
 
-    @org.jetbrains.annotations.NotNull
-    public DocxRenderer withOptions(@org.jetbrains.annotations.Nullable DataHolder options) {
+    @NotNull
+    public DocxRenderer withOptions(@Nullable DataHolder options) {
         return options == null ? this : new DocxRenderer(new Builder(builder, options));
     }
 

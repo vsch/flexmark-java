@@ -2301,7 +2301,7 @@ See [@tmp:test]
     </w:p>
 </w:body>
 .
-Document[0, 75]
+Document[0, 74]
   Paragraph[0, 16] isTrailingBlankLine
     TextBase[0, 4] chars:[0, 4, "text"]
       Text[0, 4] chars:[0, 4, "text"]

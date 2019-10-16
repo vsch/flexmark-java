@@ -262,7 +262,7 @@ public class Utils {
 
     public static String removePrefix(String receiver, char prefix) {
         if (receiver != null) {
-            if (receiver.startsWith(java.lang.String.valueOf(prefix))) {
+            if (receiver.startsWith(String.valueOf(prefix))) {
                 return receiver.substring(1);
             }
             return receiver;
@@ -280,7 +280,7 @@ public class Utils {
 
     public static String removePrefix(String receiver, String prefix) {
         if (receiver != null) {
-            if (receiver.startsWith(java.lang.String.valueOf(prefix))) {
+            if (receiver.startsWith(String.valueOf(prefix))) {
                 return receiver.substring(prefix.length());
             }
             return receiver;
@@ -291,7 +291,7 @@ public class Utils {
     public static String removeAnyPrefix(String receiver, String... prefixes) {
         if (receiver != null) {
             for (String prefix : prefixes) {
-                if (receiver.startsWith(java.lang.String.valueOf(prefix))) {
+                if (receiver.startsWith(String.valueOf(prefix))) {
                     return receiver.substring(prefix.length());
                 }
             }
@@ -325,7 +325,7 @@ public class Utils {
 
     public static String removeSuffix(String receiver, char suffix) {
         if (receiver != null) {
-            if (receiver.endsWith(java.lang.String.valueOf(suffix))) {
+            if (receiver.endsWith(String.valueOf(suffix))) {
                 return receiver.substring(0, receiver.length() - 1);
             }
             return receiver;
@@ -343,7 +343,7 @@ public class Utils {
 
     public static String removeSuffix(String receiver, String suffix) {
         if (receiver != null) {
-            if (receiver.endsWith(java.lang.String.valueOf(suffix))) {
+            if (receiver.endsWith(String.valueOf(suffix))) {
                 return receiver.substring(0, receiver.length() - suffix.length());
             }
             return receiver;
@@ -354,7 +354,7 @@ public class Utils {
     public static String removeAnySuffix(String receiver, String... suffixes) {
         if (receiver != null) {
             for (String suffix : suffixes) {
-                if (receiver.endsWith(java.lang.String.valueOf(suffix))) {
+                if (receiver.endsWith(String.valueOf(suffix))) {
                     return receiver.substring(0, receiver.length() - suffix.length());
                 }
             }

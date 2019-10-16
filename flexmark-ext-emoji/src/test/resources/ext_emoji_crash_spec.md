@@ -886,7 +886,7 @@ Converts :warning: to its emoji image
     to increase compatibility with existing markdown parsers.</li>
 </ul>
 .
-Document[0, 26736]
+Document[0, 26735]
   Heading[0, 21] textOpen:[0, 2, "##"] text:[3, 21, "Markdown Navigator"]
     Text[3, 21] chars:[3, 21, "Markd … gator"]
   Paragraph[23, 61] isTrailingBlankLine
@@ -2152,7 +2152,7 @@ Document[0, 26736]
             Text[24868, 24889] chars:[24868, 24889, "Multi …  URLs"]
   Heading[24891, 24912] textOpen:[24891, 24895, "####"] text:[24896, 24912, "Enhanced Edition"]
     Text[24896, 24912] chars:[24896, 24912, "Enhan … ition"]
-  BulletList[24914, 26736] isTight
+  BulletList[24914, 26735] isTight
     BulletListItem[24914, 24996] open:[24914, 24915, "*"] isTight
       Paragraph[24916, 24996]
         Text[24916, 24985] chars:[24916, 24985, "Chang … ngs. "]
@@ -2218,8 +2218,8 @@ Document[0, 26736]
     BulletListItem[26531, 26579] open:[26531, 26532, "*"] isTight
       Paragraph[26533, 26579]
         Text[26533, 26578] chars:[26533, 26578, "Add:  … k fix"]
-    BulletListItem[26579, 26736] open:[26579, 26580, "*"] isTight
-      Paragraph[26581, 26736]
+    BulletListItem[26579, 26735] open:[26579, 26580, "*"] isTight
+      Paragraph[26581, 26735]
         Text[26581, 26659] chars:[26581, 26659, "Add:  …  the "]
         Code[26659, 26668] textOpen:[26659, 26660, "`"] text:[26660, 26667, "[TOC]:#"] textClose:[26667, 26668, "`"]
           Text[26660, 26667] chars:[26660, 26667, "[TOC]:#"]

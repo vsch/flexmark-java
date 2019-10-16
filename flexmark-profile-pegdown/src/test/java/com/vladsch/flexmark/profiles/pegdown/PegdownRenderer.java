@@ -5,6 +5,7 @@ import com.vladsch.flexmark.util.ast.IRender;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.pegdown.LinkRenderer;
 import org.pegdown.ToHtmlSerializer;
 import org.pegdown.ast.RootNode;
@@ -39,9 +40,9 @@ class PegdownRenderer extends IRenderBase {
         }
     }
 
-    @org.jetbrains.annotations.NotNull
+    @NotNull
     @Override
-    public IRender withOptions(@org.jetbrains.annotations.Nullable DataHolder options) {
+    public IRender withOptions(@Nullable DataHolder options) {
         return new PegdownRenderer(options);
     }
 }

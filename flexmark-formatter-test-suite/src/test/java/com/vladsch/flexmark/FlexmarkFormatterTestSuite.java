@@ -21,9 +21,10 @@ import com.vladsch.flexmark.ext.tables.ComboTableTranslationFormatterSpecTest;
 import com.vladsch.flexmark.ext.yaml.front.matter.ComboYamlFrontMatterFormatterSpecTest;
 import com.vladsch.flexmark.formatter.ComboCoreFormatterSpecTest;
 import com.vladsch.flexmark.formatter.ComboCoreTranslationFormatterSpecTest;
+import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
-@org.junit.runner.RunWith(Suite.class)
+@RunWith(Suite.class)
 @Suite.SuiteClasses({
         //UtilsTestSuite.class,
         //CoreTestSuite.class,

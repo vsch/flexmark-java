@@ -30,7 +30,7 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 ---
 
 .
-Document[0, 160]
+Document[0, 159]
   YamlFrontMatterBlock[0, 159]
     YamlFrontMatterNode[4, 43]
       YamlFrontMatterValue[11, 43]
@@ -63,7 +63,7 @@ linters:
 ---
 
 .
-Document[0, 190]
+Document[0, 189]
   YamlFrontMatterBlock[0, 189]
     YamlFrontMatterNode[4, 79]
       YamlFrontMatterValue[17, 29]

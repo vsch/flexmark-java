@@ -1,9 +1,10 @@
 package com.vladsch.flexmark;
 
 import com.vladsch.flexmark.docx.converter.DocxConverterTestSuite;
+import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
-@org.junit.runner.RunWith(Suite.class)
+@RunWith(Suite.class)
 @Suite.SuiteClasses({
         //UtilsTestSuite.class,
         //CoreTestSuite.class,

@@ -1,5 +1,6 @@
 package com.vladsch.flexmark.test;
 
+import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.IParse;
 import com.vladsch.flexmark.util.ast.IRender;
@@ -12,21 +13,15 @@ import org.jetbrains.annotations.Nullable;
 public class FlexmarkSpecExampleRenderer extends SpecExampleRendererBase {
     private @Nullable Node myIncludedDocument = null;
     private @Nullable Node myDocument = null;
-    private @NotNull IParse myParserWithOptions;
-    private final @NotNull IRender myRendererWithOptions;
     private @Nullable String myRenderedHtml;
     private @Nullable String myRenderedAst;
 
-    public FlexmarkSpecExampleRenderer(@Nullable DataHolder options, @NotNull IParse parser, @NotNull IRender render) {
-        super(options, parser, render);
-        myParserWithOptions = parser().withOptions(options);
-        myRendererWithOptions = renderer().withOptions(options);
+    public FlexmarkSpecExampleRenderer(@NotNull SpecExample example, @Nullable DataHolder options, @NotNull IParse parser, @NotNull IRender render) {
+        super(example, options, parser, render);
     }
 
-    public FlexmarkSpecExampleRenderer(@Nullable DataHolder options, @NotNull IParse parser, @NotNull IRender render, boolean includeExampleCoord) {
-        super(options, parser, render, includeExampleCoord);
-        myParserWithOptions = parser().withOptions(options);
-        myRendererWithOptions = renderer().withOptions(options);
+    public FlexmarkSpecExampleRenderer(@NotNull SpecExample example, @Nullable DataHolder options, @NotNull IParse parser, @NotNull IRender render, boolean includeExampleCoord) {
+        super(example, options, parser, render, includeExampleCoord);
     }
 
     @Override
@@ -36,7 +31,7 @@ public class FlexmarkSpecExampleRenderer extends SpecExampleRendererBase {
 
         if (!includedText.isEmpty()) {
             // need to parse and transfer references
-            myIncludedDocument = myParserWithOptions.parse(includedText);
+            myIncludedDocument = getParser().parse(includedText);
             adjustParserForInclusion();
         }
     }
@@ -47,18 +42,9 @@ public class FlexmarkSpecExampleRenderer extends SpecExampleRendererBase {
         return myIncludedDocument;
     }
 
-    @NotNull
-    protected IParse getParserWithOptions() {
-        return myParserWithOptions;
-    }
-
-    protected void setParserWithOptions(@NotNull IParse parserWithOptions) {
-        myParserWithOptions = parserWithOptions;
-    }
-
     @Override
     public void parse(CharSequence input) {
-        myDocument = myParserWithOptions.parse(BasedSequenceImpl.of(input));
+        myDocument = getParser().parse(BasedSequenceImpl.of(input));
     }
 
     @Override
@@ -72,7 +58,7 @@ public class FlexmarkSpecExampleRenderer extends SpecExampleRendererBase {
 
     protected void adjustParserForInclusion() {
         if (myDocument instanceof Document && myIncludedDocument instanceof Document) {
-            myParserWithOptions.transferReferences((Document) myDocument, (Document) myIncludedDocument, null);
+            getParser().transferReferences((Document) myDocument, (Document) myIncludedDocument, null);
         }
     }
 
@@ -85,7 +71,7 @@ public class FlexmarkSpecExampleRenderer extends SpecExampleRendererBase {
     public @NotNull String renderHtml() {
         assert myDocument != null;
         if (myRenderedHtml == null) {
-            myRenderedHtml = myRendererWithOptions.render(myDocument);
+            myRenderedHtml = getRenderer().render(myDocument);
         }
         return myRenderedHtml;
     }

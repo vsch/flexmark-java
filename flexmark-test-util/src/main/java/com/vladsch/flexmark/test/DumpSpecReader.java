@@ -3,6 +3,7 @@ package com.vladsch.flexmark.test;
 import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.spec.SpecReader;
 import com.vladsch.flexmark.util.data.DataHolder;
+import org.jetbrains.annotations.NotNull;
 import org.junit.AssumptionViolatedException;
 
 import java.io.InputStream;
@@ -29,29 +30,29 @@ public class DumpSpecReader extends SpecReader {
     }
 
     @Override
-    protected void addSpecExample(SpecExample example) {
-        DataHolder options;
+    protected void addSpecExample(@NotNull SpecExample example) {
+        DataHolder exampleOptions;
         boolean ignoredTestCase = false;
 
         try {
-            options = TestUtils.getOptions(example, example.getOptionsSet(), testCase::options, testCase::combineOptions);
+            exampleOptions = TestUtils.getOptions(example, example.getOptionsSet(), testCase::options, testCase::combineOptions);
         } catch (AssumptionViolatedException ignored) {
             ignoredTestCase = true;
-            options = null;
+            exampleOptions = null;
         }
 
-        if (options != null && options.get(FAIL)) {
+        if (exampleOptions != null && exampleOptions.get(FAIL)) {
             ignoredTestCase = true;
         }
 
-        SpecExampleRenderer exampleRenderer = testCase.getSpecExampleRenderer(options);
+        SpecExampleRenderer exampleRenderer = testCase.getSpecExampleRenderer(example, exampleOptions);
 
-        SpecExampleParse specExampleParse = new SpecExampleParse(options, exampleRenderer, exampleRenderer.getOptions(), example.getSource());
-        String source = specExampleParse.getSource();
-        boolean timed = specExampleParse.isTimed();
-        int iterations = specExampleParse.getIterations();
-        long start = specExampleParse.getStartTime();
-        long parse = specExampleParse.getParseTime();
+        SpecExampleParse exampleParse = new SpecExampleParse(exampleRenderer.getOptions(), exampleRenderer, exampleOptions, example.getSource());
+        String source = exampleParse.getSource();
+        boolean timed = exampleParse.isTimed();
+        int iterations = exampleParse.getIterations();
+        long start = exampleParse.getStartTime();
+        long parse = exampleParse.getParseTime();
 
         String html;
         if (!ignoredTestCase) {
@@ -73,7 +74,7 @@ public class DumpSpecReader extends SpecReader {
         String ast = example.getAst() == null ? null : (!ignoredTestCase ? exampleRenderer.getAst() : example.getAst());
 
         // allow other formats to accumulate
-        testCase.addSpecExample(example, exampleRenderer, options, ignoredTestCase, html, ast);
+        testCase.addSpecExample(exampleRenderer, exampleParse, exampleOptions, ignoredTestCase, html, ast);
         exampleRenderer.finalizeRender();
 
         if (embedTimed) {

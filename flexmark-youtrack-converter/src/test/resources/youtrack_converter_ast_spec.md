@@ -37,7 +37,7 @@ Atx headings
 ======Heading 6======
 
 .
-Document[0, 87]
+Document[0, 86]
   Heading[0, 11] textOpen:[0, 1, "#"] text:[2, 11, "Heading 1"]
     Text[2, 11] chars:[2, 11, "Heading 1"]
   Heading[12, 24] textOpen:[12, 14, "##"] text:[15, 24, "Heading 2"]
@@ -67,7 +67,7 @@ Heading 2
 ==Heading 2==
 
 .
-Document[0, 41]
+Document[0, 40]
   Heading[0, 19] text:[0, 9, "Heading 1"] textClose:[10, 19, "========="]
     Text[0, 9] chars:[0, 9, "Heading 1"]
   Heading[21, 40] text:[21, 30, "Heading 2"] textClose:[31, 40, "---------"]
@@ -85,8 +85,8 @@ Text formatting *emphasis*, **strong emphasis**, `inline code`
 Text formatting ''emphasis'', *strong emphasis*, `inline code`
 
 .
-Document[0, 63]
-  Paragraph[0, 63]
+Document[0, 62]
+  Paragraph[0, 62]
     Text[0, 16] chars:[0, 16, "Text  … ting "]
     Emphasis[16, 26] textOpen:[16, 17, "*"] text:[17, 25, "emphasis"] textClose:[25, 26, "*"]
       Text[17, 25] chars:[17, 25, "emphasis"]
@@ -107,8 +107,8 @@ Text with [link](http://link.com), image ![image](http://link.com/image.png), ma
 Text with [link|http://link.com], image !http://link.com/image.png!, mail [vladimir@vladsch.com|mailto:vladimir@vladsch.com]
 
 .
-Document[0, 106]
-  Paragraph[0, 106]
+Document[0, 105]
+  Paragraph[0, 105]
     Text[0, 10] chars:[0, 10, "Text with "]
     Link[10, 33] textOpen:[10, 11, "["] text:[11, 15, "link"] textClose:[15, 16, "]"] linkOpen:[16, 17, "("] url:[17, 32, "http://link.com"] pageRef:[17, 32, "http://link.com"] linkClose:[32, 33, ")"]
       Text[11, 15] chars:[11, 15, "link"]
@@ -129,7 +129,7 @@ Text with [link], image ![image], mail <vladimir@vladsch.com>
 Text with [link|http://link.com], image !http://link.com/image.png!, mail [vladimir@vladsch.com|mailto:vladimir@vladsch.com]
 
 .
-Document[0, 122]
+Document[0, 121]
   Paragraph[0, 62] isTrailingBlankLine
     Text[0, 10] chars:[0, 10, "Text with "]
     LinkRef[10, 16] referenceOpen:[10, 11, "["] reference:[11, 15, "link"] referenceClose:[15, 16, "]"]
@@ -154,9 +154,9 @@ Single line block quote
 > simple block quote
 
 .
-Document[0, 21]
-  BlockQuote[0, 21] marker:[0, 1, ">"]
-    Paragraph[2, 21]
+Document[0, 20]
+  BlockQuote[0, 20] marker:[0, 1, ">"]
+    Paragraph[2, 20]
       Text[2, 20] chars:[2, 20, "simpl … quote"]
 ````````````````````````````````
 
@@ -170,9 +170,9 @@ Simple
 > simple block quote paragraph.
 
 .
-Document[0, 34]
-  BlockQuote[0, 34] marker:[0, 1, ">"]
-    Paragraph[2, 34]
+Document[0, 33]
+  BlockQuote[0, 33] marker:[0, 1, ">"]
+    Paragraph[2, 33]
       Text[2, 20] chars:[2, 20, "simpl … quote"]
       SoftLineBreak[20, 21]
       Text[23, 33] chars:[23, 33, "paragraph."]
@@ -193,13 +193,13 @@ Multi-paragraph
 > another block quote paragraph.
 
 .
-Document[0, 71]
-  BlockQuote[0, 71] marker:[0, 1, ">"]
+Document[0, 70]
+  BlockQuote[0, 70] marker:[0, 1, ">"]
     Paragraph[2, 34] isTrailingBlankLine
       Text[2, 20] chars:[2, 20, "simpl … quote"]
       SoftLineBreak[20, 21]
       Text[23, 33] chars:[23, 33, "paragraph."]
-    Paragraph[38, 71]
+    Paragraph[38, 70]
       Text[38, 57] chars:[38, 57, "anoth … quote"]
       SoftLineBreak[57, 58]
       Text[60, 70] chars:[60, 70, "paragraph."]
@@ -221,11 +221,11 @@ Some text
 More Text
 
 .
-Document[0, 25]
+Document[0, 24]
   Paragraph[0, 10] isTrailingBlankLine
     Text[0, 9] chars:[0, 9, "Some text"]
   ThematicBreak[11, 14]
-  Paragraph[15, 25]
+  Paragraph[15, 24]
     Text[15, 24] chars:[15, 24, "More Text"]
 ````````````````````````````````
 
@@ -243,13 +243,13 @@ with lazy continuation
 * item 2 with lazy continuation
 
 .
-Document[0, 41]
-  BulletList[0, 41] isTight
+Document[0, 40]
+  BulletList[0, 40] isTight
     BulletListItem[0, 9] open:[0, 1, "-"] isTight
       Paragraph[2, 9]
         Text[2, 8] chars:[2, 8, "item 1"]
-    BulletListItem[9, 41] open:[9, 10, "-"] isTight
-      Paragraph[11, 41]
+    BulletListItem[9, 40] open:[9, 10, "-"] isTight
+      Paragraph[11, 40]
         Text[11, 17] chars:[11, 17, "item 2"]
         SoftLineBreak[17, 18]
         Text[18, 40] chars:[18, 40, "with  … ation"]
@@ -267,13 +267,13 @@ with lazy continuation
 # item 2 with lazy continuation
 
 .
-Document[0, 43]
-  OrderedList[0, 43] isTight delimiter:'.'
+Document[0, 42]
+  OrderedList[0, 42] isTight delimiter:'.'
     OrderedListItem[0, 10] open:[0, 2, "1."] isTight
       Paragraph[3, 10]
         Text[3, 9] chars:[3, 9, "item 1"]
-    OrderedListItem[10, 43] open:[10, 12, "2."] isTight
-      Paragraph[13, 43]
+    OrderedListItem[10, 42] open:[10, 12, "2."] isTight
+      Paragraph[13, 42]
         Text[13, 19] chars:[13, 19, "item 2"]
         SoftLineBreak[19, 20]
         Text[20, 42] chars:[20, 42, "with  … ation"]
@@ -301,8 +301,8 @@ lazy continuation
 ** sub-item 1
 
 .
-Document[0, 123]
-  BulletList[0, 123] isTight
+Document[0, 122]
+  BulletList[0, 122] isTight
     BulletListItem[0, 99] open:[0, 1, "-"] isTight
       Paragraph[2, 27]
         Text[2, 8] chars:[2, 8, "item 1"]
@@ -323,12 +323,12 @@ Document[0, 123]
             BulletListItem[82, 99] open:[82, 83, "-"] isTight
               Paragraph[84, 99]
                 Text[84, 98] chars:[84, 98, "sub-s … tem 1"]
-    BulletListItem[99, 123] open:[99, 100, "-"] isTight
+    BulletListItem[99, 122] open:[99, 100, "-"] isTight
       Paragraph[101, 108]
         Text[101, 107] chars:[101, 107, "item 2"]
-      BulletList[110, 123] isTight
-        BulletListItem[110, 123] open:[110, 111, "-"] isTight
-          Paragraph[112, 123]
+      BulletList[110, 122] isTight
+        BulletListItem[110, 122] open:[110, 111, "-"] isTight
+          Paragraph[112, 122]
             Text[112, 122] chars:[112, 122, "sub-item 1"]
 ````````````````````````````````
 
@@ -354,8 +354,8 @@ lazy continuation
 ## sub-item 1
 
 .
-Document[0, 137]
-  OrderedList[0, 137] isTight delimiter:'.'
+Document[0, 136]
+  OrderedList[0, 136] isTight delimiter:'.'
     OrderedListItem[0, 110] open:[0, 2, "1."] isTight
       Paragraph[3, 28]
         Text[3, 9] chars:[3, 9, "item 1"]
@@ -376,12 +376,12 @@ Document[0, 137]
             OrderedListItem[92, 110] open:[92, 94, "1."] isTight
               Paragraph[95, 110]
                 Text[95, 109] chars:[95, 109, "sub-s … tem 1"]
-    OrderedListItem[110, 137] open:[110, 112, "1."] isTight
+    OrderedListItem[110, 136] open:[110, 112, "1."] isTight
       Paragraph[113, 120]
         Text[113, 119] chars:[113, 119, "item 2"]
-      OrderedList[123, 137] isTight delimiter:'.'
-        OrderedListItem[123, 137] open:[123, 125, "1."] isTight
-          Paragraph[126, 137]
+      OrderedList[123, 136] isTight delimiter:'.'
+        OrderedListItem[123, 136] open:[123, 125, "1."] isTight
+          Paragraph[126, 136]
             Text[126, 136] chars:[126, 136, "sub-item 1"]
 ````````````````````````````````
 
@@ -679,7 +679,7 @@ Who ''said'' that?
 Well now.
 
 .
-Document[0, 382]
+Document[0, 381]
   Heading[0, 23] text:[0, 11, "Heading One"] textClose:[12, 23, "==========="]
     Text[0, 11] chars:[0, 11, "Headi … g One"]
   TableBlock[25, 229]
@@ -749,7 +749,7 @@ Document[0, 382]
     Text[335, 341] chars:[335, 341, " that?"]
   Heading[343, 370] text:[343, 356, "And On And On"] textClose:[357, 370, "============="]
     Text[343, 356] chars:[343, 356, "And O … nd On"]
-  Paragraph[372, 382]
+  Paragraph[372, 381]
     Text[372, 381] chars:[372, 381, "Well now."]
 ````````````````````````````````
 
@@ -765,8 +765,8 @@ Abc|Def
 ||Abc||Def||
 
 .
-Document[0, 16]
-  TableBlock[0, 16]
+Document[0, 15]
+  TableBlock[0, 15]
     TableHead[0, 7]
       TableRow[0, 7] rowNumber=1
         TableCell[0, 4] header text:[0, 3, "Abc"] textClose:[3, 4, "|"]
@@ -792,8 +792,8 @@ Document[0, 16]
 |1|
 
 .
-Document[0, 13]
-  TableBlock[0, 13]
+Document[0, 12]
+  TableBlock[0, 12]
     TableHead[0, 4]
       TableRow[0, 4] rowNumber=1
         TableCell[0, 4] header textOpen:[0, 1, "|"] text:[1, 4, "Abc"]
@@ -818,8 +818,8 @@ Abc|Def
 |1|2|
 
 .
-Document[0, 20]
-  TableBlock[0, 20]
+Document[0, 19]
+  TableBlock[0, 19]
     TableHead[0, 7]
       TableRow[0, 7] rowNumber=1
         TableCell[0, 4] header text:[0, 3, "Abc"] textClose:[3, 4, "|"]
@@ -850,8 +850,8 @@ Abc|Def|Ghi
 |1|2|3|
 
 .
-Document[0, 26]
-  TableBlock[0, 26]
+Document[0, 25]
+  TableBlock[0, 25]
     TableHead[0, 11]
       TableRow[0, 11] rowNumber=1
         TableCell[0, 4] header text:[0, 3, "Abc"] textClose:[3, 4, "|"]
@@ -886,8 +886,8 @@ Document[0, 26]
 |1|2|
 
 .
-Document[0, 22]
-  TableBlock[0, 22]
+Document[0, 21]
+  TableBlock[0, 21]
     TableHead[0, 9]
       TableRow[0, 9] rowNumber=1
         TableCell[0, 6] header text:[0, 5, "*Abc*"] textClose:[5, 6, "|"]
@@ -920,9 +920,9 @@ Document[0, 22]
 > |1|2|
 
 .
-Document[0, 26]
-  BlockQuote[0, 26] marker:[0, 1, ">"]
-    TableBlock[2, 26]
+Document[0, 25]
+  BlockQuote[0, 25] marker:[0, 1, ">"]
+    TableBlock[2, 25]
       TableHead[2, 9]
         TableRow[2, 9] rowNumber=1
           TableCell[2, 6] header text:[2, 5, "Abc"] textClose:[5, 6, "|"]
@@ -957,7 +957,7 @@ inlines should be processed
 |[ref|/url]|`code`|
 
 .
-Document[0, 48]
+Document[0, 47]
   TableBlock[0, 35]
     TableHead[0, 13]
       TableRow[0, 13] rowNumber=1
@@ -996,8 +996,8 @@ Column spans are created with repeated | pipes one for each additional column to
 |span|
 
 .
-Document[0, 29]
-  TableBlock[0, 29]
+Document[0, 28]
+  TableBlock[0, 28]
     TableHead[0, 8]
       TableRow[0, 8] rowNumber=1
         TableCell[0, 5] header textOpen:[0, 1, "|"] text:[1, 4, "Abc"] textClose:[4, 5, "|"]
@@ -1030,8 +1030,8 @@ Now we try varying the header lines and make sure we get the right output
 |span|
 
 .
-Document[0, 38]
-  TableBlock[0, 38]
+Document[0, 37]
+  TableBlock[0, 37]
     TableHead[0, 17]
       TableRow[0, 8] rowNumber=1
         TableCell[0, 5] header textOpen:[0, 1, "|"] text:[1, 4, "Abc"] textClose:[4, 5, "|"]
@@ -1065,8 +1065,8 @@ No header lines
 |col1|col2|
 
 .
-Document[0, 25]
-  TableBlock[0, 25]
+Document[0, 24]
+  TableBlock[0, 24]
     TableHead[0, 0]
     TableSeparator[0, 9]
       TableRow[0, 9]
@@ -1092,8 +1092,8 @@ No body lines
 ||col1||col2||
 
 .
-Document[0, 25]
-  TableBlock[0, 25]
+Document[0, 24]
+  TableBlock[0, 24]
     TableHead[0, 14]
       TableRow[0, 14] rowNumber=1
         TableCell[0, 8] header textOpen:[0, 1, "|"] text:[2, 6, "col1"] textClose:[7, 8, "|"]
@@ -1444,8 +1444,8 @@ real life table
 |    Anchor link reference refactoring with update to referenced header text| |X|
 
 .
-Document[0, 10153]
-  TableBlock[0, 10153]
+Document[0, 10152]
+  TableBlock[0, 10152]
     TableHead[0, 142]
       TableRow[0, 142] rowNumber=1
         TableCell[0, 123] LEFT header textOpen:[0, 1, "|"] text:[2, 9, "Feature"] textClose:[122, 123, "|"]

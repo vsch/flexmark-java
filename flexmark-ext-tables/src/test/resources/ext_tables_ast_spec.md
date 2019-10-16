@@ -21,8 +21,8 @@ lines and table caption.
   <tbody></tbody>
 </table>
 .
-Document[0, 22]
-  TableBlock[0, 22]
+Document[0, 21]
+  TableBlock[0, 21]
     TableHead[0, 0]
     TableSeparator[0, 21]
       TableRow[0, 21]
@@ -39,8 +39,8 @@ Abc|Def
 .
 <p>Abc|Def</p>
 .
-Document[0, 8]
-  Paragraph[0, 8]
+Document[0, 7]
+  Paragraph[0, 7]
     Text[0, 7] chars:[0, 7, "Abc|Def"]
 ````````````````````````````````
 
@@ -50,8 +50,8 @@ Abc | Def
 .
 <p>Abc | Def</p>
 .
-Document[0, 10]
-  Paragraph[0, 10]
+Document[0, 9]
+  Paragraph[0, 9]
     Text[0, 9] chars:[0, 9, "Abc | Def"]
 ````````````````````````````````
 
@@ -63,8 +63,8 @@ Abc|Def
 <p>Abc|Def
 -|-</p>
 .
-Document[0, 12]
-  Paragraph[0, 12]
+Document[0, 11]
+  Paragraph[0, 11]
     Text[0, 7] chars:[0, 7, "Abc|Def"]
     SoftLineBreak[7, 8]
     Text[8, 11] chars:[8, 11, "-|-"]
@@ -78,8 +78,8 @@ Abc|Def
 <p>Abc|Def
 --|--</p>
 .
-Document[0, 14]
-  Paragraph[0, 14]
+Document[0, 13]
+  Paragraph[0, 13]
     Text[0, 7] chars:[0, 7, "Abc|Def"]
     SoftLineBreak[7, 8]
     Text[8, 13] chars:[8, 13, "--|--"]
@@ -93,8 +93,8 @@ Abc|Def
 <p>Abc|Def
 |---|---</p>
 .
-Document[0, 18]
-  Paragraph[0, 18]
+Document[0, 17]
+  Paragraph[0, 17]
     Text[0, 7] chars:[0, 7, "Abc|Def"]
     SoftLineBreak[7, 8]
     Text[9, 17] chars:[9, 17, "|---|---"]
@@ -110,8 +110,8 @@ Abc|Def
 Abc|Def
 ---|---</p>
 .
-Document[0, 19]
-  Paragraph[0, 19]
+Document[0, 18]
+  Paragraph[0, 18]
     Text[0, 2] chars:[0, 2, "No"]
     SoftLineBreak[2, 3]
     Text[3, 10] chars:[3, 10, "Abc|Def"]
@@ -131,8 +131,8 @@ Abc|Def
   <tbody></tbody>
 </table>
 .
-Document[0, 16]
-  TableBlock[0, 16]
+Document[0, 15]
+  TableBlock[0, 15]
     TableHead[0, 7]
       TableRow[0, 7] rowNumber=1
         TableCell[0, 4] header text:[0, 3, "Abc"] textClose:[3, 4, "|"]
@@ -162,8 +162,8 @@ Abc|Def
   <tbody></tbody>
 </table>
 .
-Document[0, 16]
-  TableBlock[0, 16]
+Document[0, 15]
+  TableBlock[0, 15]
     TableHead[0, 7]
       TableRow[0, 7] rowNumber=1
         TableCell[0, 4] LEFT header text:[0, 3, "Abc"] textClose:[3, 4, "|"]
@@ -193,8 +193,8 @@ Abc|Def
   <tbody></tbody>
 </table>
 .
-Document[0, 16]
-  TableBlock[0, 16]
+Document[0, 15]
+  TableBlock[0, 15]
     TableHead[0, 7]
       TableRow[0, 7] rowNumber=1
         TableCell[0, 4] RIGHT header text:[0, 3, "Abc"] textClose:[3, 4, "|"]
@@ -222,8 +222,8 @@ Abc|Def
   <tbody></tbody>
 </table>
 .
-Document[0, 16]
-  TableBlock[0, 16]
+Document[0, 15]
+  TableBlock[0, 15]
     TableHead[0, 7]
       TableRow[0, 7] rowNumber=1
         TableCell[0, 4] CENTER header text:[0, 3, "Abc"] textClose:[3, 4, "|"]
@@ -251,8 +251,8 @@ Document[0, 16]
   <tbody></tbody>
 </table>
 .
-Document[0, 10]
-  TableBlock[0, 10]
+Document[0, 9]
+  TableBlock[0, 9]
     TableHead[0, 4]
       TableRow[0, 4] rowNumber=1
         TableCell[0, 4] header textOpen:[0, 1, "|"] text:[1, 4, "Abc"]
@@ -276,8 +276,8 @@ Document[0, 10]
   <tbody></tbody>
 </table>
 .
-Document[0, 12]
-  TableBlock[0, 12]
+Document[0, 11]
+  TableBlock[0, 11]
     TableHead[0, 5]
       TableRow[0, 5] rowNumber=1
         TableCell[0, 5] header textOpen:[0, 1, "|"] text:[1, 4, "Abc"] textClose:[4, 5, "|"]
@@ -301,8 +301,8 @@ Abc|
   <tbody></tbody>
 </table>
 .
-Document[0, 10]
-  TableBlock[0, 10]
+Document[0, 9]
+  TableBlock[0, 9]
     TableHead[0, 4]
       TableRow[0, 4] rowNumber=1
         TableCell[0, 4] header text:[0, 3, "Abc"] textClose:[3, 4, "|"]
@@ -321,7 +321,7 @@ Document[0, 10]
 .
 <h2>|Abc</h2>
 .
-Document[0, 9]
+Document[0, 8]
   Heading[0, 8] text:[0, 4, "|Abc"] textClose:[5, 8, "---"]
     Text[0, 4] chars:[0, 4, "|Abc"]
 ````````````````````````````````
@@ -334,8 +334,8 @@ Abc
 <p>Abc
 |---</p>
 .
-Document[0, 9]
-  Paragraph[0, 9]
+Document[0, 8]
+  Paragraph[0, 8]
     Text[0, 3] chars:[0, 3, "Abc"]
     SoftLineBreak[3, 4]
     Text[4, 8] chars:[4, 8, "|---"]
@@ -356,8 +356,8 @@ Document[0, 9]
   </tbody>
 </table>
 .
-Document[0, 13]
-  TableBlock[0, 13]
+Document[0, 12]
+  TableBlock[0, 12]
     TableHead[0, 4]
       TableRow[0, 4] rowNumber=1
         TableCell[0, 4] header textOpen:[0, 1, "|"] text:[1, 4, "Abc"]
@@ -387,8 +387,8 @@ Document[0, 13]
   </tbody>
 </table>
 .
-Document[0, 16]
-  TableBlock[0, 16]
+Document[0, 15]
+  TableBlock[0, 15]
     TableHead[0, 5]
       TableRow[0, 5] rowNumber=1
         TableCell[0, 5] header textOpen:[0, 1, "|"] text:[1, 4, "Abc"] textClose:[4, 5, "|"]
@@ -418,8 +418,8 @@ Abc|
   </tbody>
 </table>
 .
-Document[0, 13]
-  TableBlock[0, 13]
+Document[0, 12]
+  TableBlock[0, 12]
     TableHead[0, 4]
       TableRow[0, 4] rowNumber=1
         TableCell[0, 4] header text:[0, 3, "Abc"] textClose:[3, 4, "|"]
@@ -443,10 +443,10 @@ Document[0, 13]
 <h2>|Abc</h2>
 <p>|1</p>
 .
-Document[0, 12]
+Document[0, 11]
   Heading[0, 8] text:[0, 4, "|Abc"] textClose:[5, 8, "---"]
     Text[0, 4] chars:[0, 4, "|Abc"]
-  Paragraph[9, 12]
+  Paragraph[9, 11]
     Text[9, 11] chars:[9, 11, "|1"]
 ````````````````````````````````
 
@@ -464,7 +464,7 @@ Document[0, 12]
 </table>
 <p>1</p>
 .
-Document[0, 12]
+Document[0, 11]
   TableBlock[0, 10]
     TableHead[0, 4]
       TableRow[0, 4] rowNumber=1
@@ -475,7 +475,7 @@ Document[0, 12]
         TableCell[5, 9] textOpen:[5, 6, "|"] text:[6, 9, "---"]
           Text[6, 9] chars:[6, 9, "---"]
     TableBody[9, 9]
-  Paragraph[10, 12]
+  Paragraph[10, 11]
     Text[10, 11] chars:[10, 11, "1"]
 ````````````````````````````````
 
@@ -494,8 +494,8 @@ Abc|Def
   </tbody>
 </table>
 .
-Document[0, 20]
-  TableBlock[0, 20]
+Document[0, 19]
+  TableBlock[0, 19]
     TableHead[0, 7]
       TableRow[0, 7] rowNumber=1
         TableCell[0, 4] header text:[0, 3, "Abc"] textClose:[3, 4, "|"]
@@ -531,8 +531,8 @@ Abc|Def|Ghi
   </tbody>
 </table>
 .
-Document[0, 26]
-  TableBlock[0, 26]
+Document[0, 25]
+  TableBlock[0, 25]
     TableHead[0, 11]
       TableRow[0, 11] rowNumber=1
         TableCell[0, 4] header text:[0, 3, "Abc"] textClose:[3, 4, "|"]
@@ -572,8 +572,8 @@ Document[0, 26]
   </tbody>
 </table>
 .
-Document[0, 30]
-  TableBlock[1, 30]
+Document[0, 29]
+  TableBlock[1, 29]
     TableHead[1, 11]
       TableRow[1, 11] rowNumber=1
         TableCell[1, 7] header text:[1, 4, "Abc"] textClose:[6, 7, "|"]
@@ -609,8 +609,8 @@ Abc|Def
   </tbody>
 </table>
 .
-Document[0, 24]
-  TableBlock[0, 24]
+Document[0, 23]
+  TableBlock[0, 23]
     TableHead[0, 7]
       TableRow[0, 7] rowNumber=1
         TableCell[0, 4] header text:[0, 3, "Abc"] textClose:[3, 4, "|"]
@@ -646,8 +646,8 @@ Document[0, 24]
   </tbody>
 </table>
 .
-Document[0, 26]
-  TableBlock[0, 26]
+Document[0, 25]
+  TableBlock[0, 25]
     TableHead[0, 9]
       TableRow[0, 9] rowNumber=1
         TableCell[0, 5] header textOpen:[0, 1, "|"] text:[1, 4, "Abc"] textClose:[4, 5, "|"]
@@ -685,8 +685,8 @@ Abc|Def
   </tbody>
 </table>
 .
-Document[0, 24]
-  TableBlock[0, 24]
+Document[0, 23]
+  TableBlock[0, 23]
     TableHead[0, 7]
       TableRow[0, 7] rowNumber=1
         TableCell[0, 4] header text:[0, 3, "Abc"] textClose:[3, 4, "|"]
@@ -726,8 +726,8 @@ Abc|Def
   </tbody>
 </table>
 .
-Document[0, 25]
-  TableBlock[0, 25]
+Document[0, 24]
+  TableBlock[0, 24]
     TableHead[0, 7]
       TableRow[0, 7] rowNumber=1
         TableCell[0, 4] header text:[0, 3, "Abc"] textClose:[3, 4, "|"]
@@ -767,8 +767,8 @@ Abc|Def
   </tbody>
 </table>
 .
-Document[0, 28]
-  TableBlock[0, 28]
+Document[0, 27]
+  TableBlock[0, 27]
     TableHead[0, 7]
       TableRow[0, 7] rowNumber=1
         TableCell[0, 4] header text:[0, 3, "Abc"] textClose:[3, 4, "|"]
@@ -804,8 +804,8 @@ Document[0, 28]
   </tbody>
 </table>
 .
-Document[0, 22]
-  TableBlock[0, 22]
+Document[0, 21]
+  TableBlock[0, 21]
     TableHead[0, 9]
       TableRow[0, 9] rowNumber=1
         TableCell[0, 6] header text:[0, 5, "*Abc*"] textClose:[5, 6, "|"]
@@ -842,8 +842,8 @@ Abc|Def
   </tbody>
 </table>
 .
-Document[0, 25]
-  TableBlock[0, 25]
+Document[0, 24]
+  TableBlock[0, 24]
     TableHead[0, 7]
       TableRow[0, 7] rowNumber=1
         TableCell[0, 4] header text:[0, 3, "Abc"] textClose:[3, 4, "|"]
@@ -920,8 +920,8 @@ Abc|Def
   </tbody>
 </table>
 .
-Document[0, 24]
-  TableBlock[0, 24]
+Document[0, 23]
+  TableBlock[0, 23]
     TableHead[0, 7]
       TableRow[0, 7] rowNumber=1
         TableCell[0, 4] header text:[0, 3, "Abc"] textClose:[3, 4, "|"]
@@ -957,8 +957,8 @@ Abc|Def
   </tbody>
 </table>
 .
-Document[0, 21]
-  TableBlock[0, 21]
+Document[0, 20]
+  TableBlock[0, 20]
     TableHead[0, 7]
       TableRow[0, 7] rowNumber=1
         TableCell[0, 4] LEFT header text:[0, 3, "Abc"] textClose:[3, 4, "|"]
@@ -994,8 +994,8 @@ Abc|Def
   </tbody>
 </table>
 .
-Document[0, 21]
-  TableBlock[0, 21]
+Document[0, 20]
+  TableBlock[0, 20]
     TableHead[0, 7]
       TableRow[0, 7] rowNumber=1
         TableCell[0, 4] RIGHT header text:[0, 3, "Abc"] textClose:[3, 4, "|"]
@@ -1031,8 +1031,8 @@ Abc|Def
   </tbody>
 </table>
 .
-Document[0, 22]
-  TableBlock[0, 22]
+Document[0, 21]
+  TableBlock[0, 21]
     TableHead[0, 7]
       TableRow[0, 7] rowNumber=1
         TableCell[0, 4] CENTER header text:[0, 3, "Abc"] textClose:[3, 4, "|"]
@@ -1068,8 +1068,8 @@ Abc|Def
   </tbody>
 </table>
 .
-Document[0, 22]
-  TableBlock[0, 22]
+Document[0, 21]
+  TableBlock[0, 21]
     TableHead[0, 7]
       TableRow[0, 7] rowNumber=1
         TableCell[0, 4] header text:[0, 3, "Abc"] textClose:[3, 4, "|"]
@@ -1105,8 +1105,8 @@ Abc|Def
   </tbody>
 </table>
 .
-Document[0, 23]
-  TableBlock[0, 23]
+Document[0, 22]
+  TableBlock[0, 22]
     TableHead[0, 7]
       TableRow[0, 7] rowNumber=1
         TableCell[0, 4] LEFT header text:[0, 3, "Abc"] textClose:[3, 4, "|"]
@@ -1135,8 +1135,8 @@ Abc|Def
 <p>Abc|Def
 --- :|---</p>
 .
-Document[0, 18]
-  Paragraph[0, 18]
+Document[0, 17]
+  Paragraph[0, 17]
     Text[0, 7] chars:[0, 7, "Abc|Def"]
     SoftLineBreak[7, 8]
     Text[8, 17] chars:[8, 17, "--- :|---"]
@@ -1150,8 +1150,8 @@ Abc|Def
 <p>Abc|Def
 ---|: ---</p>
 .
-Document[0, 18]
-  Paragraph[0, 18]
+Document[0, 17]
+  Paragraph[0, 17]
     Text[0, 7] chars:[0, 7, "Abc|Def"]
     SoftLineBreak[7, 8]
     Text[8, 17] chars:[8, 17, "---|: ---"]
@@ -1165,8 +1165,8 @@ Abc|Def
 <p>Abc|Def
 ---|--- :</p>
 .
-Document[0, 18]
-  Paragraph[0, 18]
+Document[0, 17]
+  Paragraph[0, 17]
     Text[0, 7] chars:[0, 7, "Abc|Def"]
     SoftLineBreak[7, 8]
     Text[8, 17] chars:[8, 17, "---|--- :"]
@@ -1187,8 +1187,8 @@ Abc|Def
   </tbody>
 </table>
 .
-Document[0, 22]
-  TableBlock[0, 22]
+Document[0, 21]
+  TableBlock[0, 21]
     TableHead[0, 7]
       TableRow[0, 7] rowNumber=1
         TableCell[0, 4] header text:[0, 3, "Abc"] textClose:[3, 4, "|"]
@@ -1265,8 +1265,8 @@ Abc|Def|Ghi
   </tbody>
 </table>
 .
-Document[0, 28]
-  TableBlock[0, 28]
+Document[0, 27]
+  TableBlock[0, 27]
     TableHead[0, 11]
       TableRow[0, 11] rowNumber=1
         TableCell[0, 4] header text:[0, 3, "Abc"] textClose:[3, 4, "|"]
@@ -1308,9 +1308,9 @@ Document[0, 28]
   </table>
 </blockquote>
 .
-Document[0, 26]
-  BlockQuote[0, 26] marker:[0, 1, ">"]
-    TableBlock[2, 26]
+Document[0, 25]
+  BlockQuote[0, 25] marker:[0, 1, ">"]
+    TableBlock[2, 25]
       TableHead[2, 9]
         TableRow[2, 9] rowNumber=1
           TableCell[2, 6] header text:[2, 5, "Abc"] textClose:[5, 6, "|"]
@@ -1348,7 +1348,7 @@ table, you are over
 </table>
 <p>table, you are over</p>
 .
-Document[0, 40]
+Document[0, 39]
   TableBlock[0, 20]
     TableHead[0, 7]
       TableRow[0, 7] rowNumber=1
@@ -1368,7 +1368,7 @@ Document[0, 40]
           Text[16, 17] chars:[16, 17, "1"]
         TableCell[18, 19] text:[18, 19, "2"]
           Text[18, 19] chars:[18, 19, "2"]
-  Paragraph[20, 40]
+  Paragraph[20, 39]
     Text[20, 39] chars:[20, 39, "table …  over"]
 ````````````````````````````````
 
@@ -1393,7 +1393,7 @@ table, you are over
 </table>
 <p>table, you are over</p>
 .
-Document[0, 68]
+Document[0, 67]
   TableBlock[0, 35]
     TableHead[0, 13]
       TableRow[0, 13] rowNumber=1
@@ -1443,7 +1443,7 @@ table, you are over
 </table>
 <p>table, you are over</p>
 .
-Document[0, 92]
+Document[0, 91]
   TableBlock[0, 59]
     TableHead[0, 30]
       TableRow[0, 30] rowNumber=1
@@ -1499,8 +1499,8 @@ Column spans are created with repeated | pipes one for each additional column to
   </tbody>
 </table>
 .
-Document[0, 29]
-  TableBlock[0, 29]
+Document[0, 28]
+  TableBlock[0, 28]
     TableHead[0, 8]
       TableRow[0, 8] rowNumber=1
         TableCell[0, 5] header textOpen:[0, 1, "|"] text:[1, 4, "Abc"] textClose:[4, 5, "|"]
@@ -1538,8 +1538,8 @@ Now we try varying the header lines and make sure we get the right output
   </tbody>
 </table>
 .
-Document[0, 38]
-  TableBlock[0, 38]
+Document[0, 37]
+  TableBlock[0, 37]
     TableHead[0, 17]
       TableRow[0, 8] rowNumber=1
         TableCell[0, 5] header textOpen:[0, 1, "|"] text:[1, 4, "Abc"] textClose:[4, 5, "|"]
@@ -1577,8 +1577,8 @@ No header lines
   </tbody>
 </table>
 .
-Document[0, 25]
-  TableBlock[0, 25]
+Document[0, 24]
+  TableBlock[0, 24]
     TableHead[0, 0]
     TableSeparator[0, 9]
       TableRow[0, 9]
@@ -1608,8 +1608,8 @@ No body lines
   <tbody></tbody>
 </table>
 .
-Document[0, 25]
-  TableBlock[0, 25]
+Document[0, 24]
+  TableBlock[0, 24]
     TableHead[0, 14]
       TableRow[0, 14] rowNumber=1
         TableCell[0, 8] header textOpen:[0, 1, "|"] text:[2, 6, "col1"] textClose:[7, 8, "|"]
@@ -1641,7 +1641,7 @@ With caption
   <caption>Caption <strong>bold</strong> <em>italic</em> <code>code</code></caption>
 </table>
 .
-Document[0, 79]
+Document[0, 78]
   TableBlock[0, 68]
     TableHead[0, 14]
       TableRow[0, 14] rowNumber=1
@@ -1727,8 +1727,8 @@ Alignment should be taken from column after span is added
   </tbody>
 </table>
 .
-Document[0, 204]
-  TableBlock[0, 204]
+Document[0, 203]
+  TableBlock[0, 203]
     TableHead[0, 33]
       TableRow[0, 33] rowNumber=1
         TableCell[0, 15] LEFT header textOpen:[0, 1, "|"] text:[2, 5, "day"] textClose:[14, 15, "|"]
@@ -1797,8 +1797,8 @@ Document[0, 204]
   </tbody>
 </table>
 .
-Document[0, 74]
-  TableBlock[0, 74]
+Document[0, 73]
+  TableBlock[0, 73]
     TableHead[0, 9]
       TableRow[0, 9] rowNumber=1
         TableCell[0, 5] header textOpen:[0, 1, "|"] text:[2, 3, "c"] textClose:[4, 5, "|"]
@@ -2343,8 +2343,8 @@ real life table
   </tbody>
 </table>
 .
-Document[0, 10153]
-  TableBlock[0, 10153]
+Document[0, 10152]
+  TableBlock[0, 10152]
     TableHead[0, 142]
       TableRow[0, 142] rowNumber=1
         TableCell[0, 123] LEFT header textOpen:[0, 1, "|"] text:[2, 9, "Feature"] textClose:[122, 123, "|"]
@@ -3349,7 +3349,7 @@ Issue #95, TextCollectingVisitor collects 2nd row of table heading
   </tbody>
 </table>
 .
-Document[0, 303]
+Document[0, 302]
   TableBlock[0, 102]
     TableHead[0, 33]
       TableRow[0, 33] rowNumber=1
@@ -3369,7 +3369,7 @@ Document[0, 303]
           Text[70, 82] chars:[70, 82, "Conte …  Cell"]
         TableCell[85, 101] text:[86, 98, "Content Cell"] textClose:[100, 101, "|"]
           Text[86, 98] chars:[86, 98, "Conte …  Cell"]
-  TableBlock[103, 303]
+  TableBlock[103, 302]
     TableHead[103, 152]
       TableRow[103, 152] rowNumber=1
         TableCell[103, 119] LEFT header textOpen:[103, 104, "|"] text:[105, 117, "Left-aligned"] textClose:[118, 119, "|"]
@@ -3431,13 +3431,13 @@ Place specified block in the specified point.
   </tbody>
 </table>
 .
-Document[0, 450]
+Document[0, 449]
   Paragraph[0, 87] isTrailingBlankLine
     Text[0, 45] chars:[0, 45, "Place … oint."]
     SoftLineBreak[45, 46]
     Code[46, 86] textOpen:[46, 47, "`"] text:[47, 85, "BLOCK … _SET <Block> <Location> [Physics]"] textClose:[85, 86, "`"]
       Text[47, 85] chars:[47, 85, "BLOCK … sics]"]
-  TableBlock[88, 450]
+  TableBlock[88, 449]
     TableHead[88, 133]
       TableRow[88, 133] rowNumber=1
         TableCell[88, 101] header textOpen:[88, 89, "|"] text:[90, 99, "Parameter"] textClose:[100, 101, "|"]
@@ -3646,7 +3646,7 @@ parsed as heading because table processing occurs on paragraphs only
 |---|---|---|
 |1|2|3|</h2>
 .
-Document[0, 34]
+Document[0, 33]
   Heading[0, 33] text:[0, 29, "|a|b|c|\n|---|---|---|\n|1|2|3|"] textClose:[30, 33, "---"]
     Text[0, 7] chars:[0, 7, "|a|b|c|"]
     SoftLineBreak[7, 8]
@@ -3668,7 +3668,7 @@ parsed as heading because table processing occurs on paragraphs only
 |---|---|---|
 |1|2|3|</h1>
 .
-Document[0, 34]
+Document[0, 33]
   Heading[0, 33] text:[0, 29, "|a|b|c|\n|---|---|---|\n|1|2|3|"] textClose:[30, 33, "==="]
     Text[0, 7] chars:[0, 7, "|a|b|c|"]
     SoftLineBreak[7, 8]
@@ -3738,8 +3738,8 @@ Issue #216, Wrong source positions for Tables with empty TableHead/TableBody
   <tbody></tbody>
 </table>
 .
-Document[0, 11]
-  TableBlock[1, 11]
+Document[0, 10]
+  TableBlock[1, 10]
     TableHead[1, 1]
     TableSeparator[1, 10]
       TableRow[1, 10]
@@ -3763,8 +3763,8 @@ Document[0, 11]
   </tbody>
 </table>
 .
-Document[0, 17]
-  TableBlock[1, 17]
+Document[0, 16]
+  TableBlock[1, 16]
     TableHead[1, 1]
     TableSeparator[1, 10]
       TableRow[1, 10]
@@ -3995,58 +3995,58 @@ Parse sub sequences
   </tbody>
 </table>
 .
-Document[18, 477]
-  TableBlock[18, 476]
-    TableHead[18, 145]
-      TableRow[18, 79] rowNumber=1
-        TableCell[18, 60] LEFT header textOpen:[18, 19, "|"] text:[20, 24, "Left"] textClose:[59, 60, "|"]
-          Text[20, 24] chars:[20, 24, "Left"]
-        TableCell[60, 69] RIGHT header text:[62, 67, "Right"] textClose:[68, 69, "|"]
-          Text[62, 67] chars:[62, 67, "Right"]
-        TableCell[69, 79] CENTER header text:[70, 76, "Center"] textClose:[78, 79, "|"]
-          Text[70, 76] chars:[70, 76, "Center"]
-      TableRow[84, 145] rowNumber=2
-        TableCell[84, 126] LEFT header textOpen:[84, 85, "|"] text:[86, 90, "Left"] textClose:[125, 126, "|"]
-          Text[86, 90] chars:[86, 90, "Left"]
-        TableCell[126, 135] RIGHT header text:[128, 133, "Right"] textClose:[134, 135, "|"]
-          Text[128, 133] chars:[128, 133, "Right"]
-        TableCell[135, 145] CENTER header text:[136, 142, "Center"] textClose:[144, 145, "|"]
-          Text[136, 142] chars:[136, 142, "Center"]
-    TableSeparator[150, 211]
-      TableRow[150, 211]
-        TableCell[150, 192] LEFT textOpen:[150, 151, "|"] text:[151, 191, ":---------------------------------------"] textClose:[191, 192, "|"]
-          Text[151, 191] chars:[151, 191, ":---- … -----"]
-        TableCell[192, 201] RIGHT text:[192, 200, "-------:"] textClose:[200, 201, "|"]
-          Text[192, 200] chars:[192, 200, "-------:"]
-        TableCell[201, 211] CENTER text:[201, 210, ":-------:"] textClose:[210, 211, "|"]
-          Text[201, 210] chars:[201, 210, ":-------:"]
-    TableBody[216, 475]
-      TableRow[216, 277] rowNumber=1
-        TableCell[216, 258] LEFT textOpen:[216, 217, "|"] text:[218, 239, "ditem 1 can be longer"] textClose:[257, 258, "|"]
-          Text[218, 239] chars:[218, 239, "ditem … onger"]
-        TableCell[258, 267] RIGHT text:[259, 265, "125.30"] textClose:[266, 267, "|"]
-          Text[259, 265] chars:[259, 265, "125.30"]
-        TableCell[267, 277] CENTER text:[270, 273, "yes"] textClose:[276, 277, "|"]
-          Text[270, 273] chars:[270, 273, "yes"]
-      TableRow[282, 343] rowNumber=2
-        TableCell[282, 324] LEFT textOpen:[282, 283, "|"] text:[284, 322, "item 2  this is a test of table formng"] textClose:[323, 324, "|"]
-          Text[284, 322] chars:[284, 322, "item  … ormng"]
-        TableCell[324, 343] RIGHT span=2 text:[332, 340, "1,234.00"] textClose:[341, 343, "||"]
-          Text[332, 340] chars:[332, 340, "1,234.00"]
-      TableRow[348, 409] rowNumber=3
-        TableCell[348, 390] LEFT textOpen:[348, 349, "|"] text:[350, 375, "item 3 much longer format"] textClose:[389, 390, "|"]
-          Text[350, 375] chars:[350, 375, "item  … ormat"]
-        TableCell[390, 399] RIGHT text:[392, 397, "10.50"] textClose:[398, 399, "|"]
-          Text[392, 397] chars:[392, 397, "10.50"]
-        TableCell[399, 409] CENTER text:[401, 406, "maybe"] textClose:[408, 409, "|"]
-          Text[401, 406] chars:[401, 406, "maybe"]
-      TableRow[414, 475] rowNumber=4
-        TableCell[414, 456] LEFT textOpen:[414, 415, "|"] text:[416, 428, "item 4 short"] textClose:[455, 456, "|"]
-          Text[416, 428] chars:[416, 428, "item  … short"]
-        TableCell[456, 465] RIGHT text:[458, 463, "34.10"] textClose:[464, 465, "|"]
-          Text[458, 463] chars:[458, 463, "34.10"]
-        TableCell[465, 475] CENTER text:[466, 473, "not now"] textClose:[474, 475, "|"]
-          Text[466, 473] chars:[466, 473, "not now"]
+Document[4, 463]
+  TableBlock[4, 462]
+    TableHead[4, 131]
+      TableRow[4, 65] rowNumber=1
+        TableCell[4, 46] LEFT header textOpen:[4, 5, "|"] text:[6, 10, "Left"] textClose:[45, 46, "|"]
+          Text[6, 10] chars:[6, 10, "Left"]
+        TableCell[46, 55] RIGHT header text:[48, 53, "Right"] textClose:[54, 55, "|"]
+          Text[48, 53] chars:[48, 53, "Right"]
+        TableCell[55, 65] CENTER header text:[56, 62, "Center"] textClose:[64, 65, "|"]
+          Text[56, 62] chars:[56, 62, "Center"]
+      TableRow[70, 131] rowNumber=2
+        TableCell[70, 112] LEFT header textOpen:[70, 71, "|"] text:[72, 76, "Left"] textClose:[111, 112, "|"]
+          Text[72, 76] chars:[72, 76, "Left"]
+        TableCell[112, 121] RIGHT header text:[114, 119, "Right"] textClose:[120, 121, "|"]
+          Text[114, 119] chars:[114, 119, "Right"]
+        TableCell[121, 131] CENTER header text:[122, 128, "Center"] textClose:[130, 131, "|"]
+          Text[122, 128] chars:[122, 128, "Center"]
+    TableSeparator[136, 197]
+      TableRow[136, 197]
+        TableCell[136, 178] LEFT textOpen:[136, 137, "|"] text:[137, 177, ":---------------------------------------"] textClose:[177, 178, "|"]
+          Text[137, 177] chars:[137, 177, ":---- … -----"]
+        TableCell[178, 187] RIGHT text:[178, 186, "-------:"] textClose:[186, 187, "|"]
+          Text[178, 186] chars:[178, 186, "-------:"]
+        TableCell[187, 197] CENTER text:[187, 196, ":-------:"] textClose:[196, 197, "|"]
+          Text[187, 196] chars:[187, 196, ":-------:"]
+    TableBody[202, 461]
+      TableRow[202, 263] rowNumber=1
+        TableCell[202, 244] LEFT textOpen:[202, 203, "|"] text:[204, 225, "ditem 1 can be longer"] textClose:[243, 244, "|"]
+          Text[204, 225] chars:[204, 225, "ditem … onger"]
+        TableCell[244, 253] RIGHT text:[245, 251, "125.30"] textClose:[252, 253, "|"]
+          Text[245, 251] chars:[245, 251, "125.30"]
+        TableCell[253, 263] CENTER text:[256, 259, "yes"] textClose:[262, 263, "|"]
+          Text[256, 259] chars:[256, 259, "yes"]
+      TableRow[268, 329] rowNumber=2
+        TableCell[268, 310] LEFT textOpen:[268, 269, "|"] text:[270, 308, "item 2  this is a test of table formng"] textClose:[309, 310, "|"]
+          Text[270, 308] chars:[270, 308, "item  … ormng"]
+        TableCell[310, 329] RIGHT span=2 text:[318, 326, "1,234.00"] textClose:[327, 329, "||"]
+          Text[318, 326] chars:[318, 326, "1,234.00"]
+      TableRow[334, 395] rowNumber=3
+        TableCell[334, 376] LEFT textOpen:[334, 335, "|"] text:[336, 361, "item 3 much longer format"] textClose:[375, 376, "|"]
+          Text[336, 361] chars:[336, 361, "item  … ormat"]
+        TableCell[376, 385] RIGHT text:[378, 383, "10.50"] textClose:[384, 385, "|"]
+          Text[378, 383] chars:[378, 383, "10.50"]
+        TableCell[385, 395] CENTER text:[387, 392, "maybe"] textClose:[394, 395, "|"]
+          Text[387, 392] chars:[387, 392, "maybe"]
+      TableRow[400, 461] rowNumber=4
+        TableCell[400, 442] LEFT textOpen:[400, 401, "|"] text:[402, 414, "item 4 short"] textClose:[441, 442, "|"]
+          Text[402, 414] chars:[402, 414, "item  … short"]
+        TableCell[442, 451] RIGHT text:[444, 449, "34.10"] textClose:[450, 451, "|"]
+          Text[444, 449] chars:[444, 449, "34.10"]
+        TableCell[451, 461] CENTER text:[452, 459, "not now"] textClose:[460, 461, "|"]
+          Text[452, 459] chars:[452, 459, "not now"]
 ````````````````````````````````
 
 
@@ -4066,8 +4066,8 @@ Document[18, 477]
   </tbody>
 </table>
 .
-Document[0, 77]
-  TableBlock[0, 77]
+Document[0, 76]
+  TableBlock[0, 76]
     TableHead[0, 24]
       TableRow[0, 24] rowNumber=1
         TableCell[0, 24] header textOpen:[0, 1, "|"] text:[2, 22, "Abc Long -- 'quoted'"] textClose:[23, 24, "|"]
@@ -4139,8 +4139,8 @@ Jack|25
 Tom|23
 Jack|25</p>
 .
-Document[0, 28]
-  Paragraph[0, 28]
+Document[0, 27]
+  Paragraph[0, 27]
     Text[0, 8] chars:[0, 8, "name|age"]
     SoftLineBreak[8, 9]
     Text[9, 12] chars:[9, 12, "-|-"]

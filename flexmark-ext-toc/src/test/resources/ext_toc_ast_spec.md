@@ -61,14 +61,14 @@ no spaces between brackets
 <p>[ TOC ]</p>
 <p>[TOC ]</p>
 .
-Document[0, 26]
+Document[0, 25]
   Paragraph[0, 8] isTrailingBlankLine
     LinkRef[0, 6] referenceOpen:[0, 1, "["] reference:[2, 5, "TOC"] referenceClose:[5, 6, "]"]
       Text[2, 5] chars:[2, 5, "TOC"]
   Paragraph[9, 18] isTrailingBlankLine
     LinkRef[9, 16] referenceOpen:[9, 10, "["] reference:[11, 14, "TOC"] referenceClose:[15, 16, "]"]
       Text[11, 14] chars:[11, 14, "TOC"]
-  Paragraph[19, 26]
+  Paragraph[19, 25]
     LinkRef[19, 25] referenceOpen:[19, 20, "["] reference:[20, 23, "TOC"] referenceClose:[24, 25, "]"]
       Text[20, 23] chars:[20, 23, "TOC"]
 ````````````````````````````````
@@ -165,7 +165,7 @@ Invalid level
 <h3 id="heading-201">Heading 2.0.1</h3>
 <h3 id="heading-202">Heading 2.0.2</h3>
 .
-Document[0, 261]
+Document[0, 260]
   TocBlock[0, 16] openingMarker:[0, 1] tocKeyword:[1, 4] style:[5, 13] closingMarker:[13, 14]
   TocBlock[17, 33] openingMarker:[17, 18] tocKeyword:[18, 21] style:[22, 30] closingMarker:[30, 31]
   TocBlock[34, 50] openingMarker:[34, 35] tocKeyword:[35, 38] style:[39, 47] closingMarker:[47, 48]
@@ -350,7 +350,7 @@ Default rendering with emphasis
 <h3 id="heading-111">Heading 1.1.1</h3>
 <h3 id="heading-112--some-bold-italic">Heading 1.1.2  <strong><em>some bold italic</em></strong></h3>
 .
-Document[0, 123]
+Document[0, 122]
   TocBlock[0, 7] openingMarker:[0, 1] tocKeyword:[1, 4] closingMarker:[4, 5]
   Heading[8, 33] textOpen:[8, 9, "#"] text:[10, 33, "Heading **some bold** 1"]
     Text[10, 18] chars:[10, 18, "Heading "]
@@ -535,7 +535,7 @@ Invalid levels take default
 <h3 id="heading-201">Heading 2.0.1</h3>
 <h3 id="heading-202">Heading 2.0.2</h3>
 .
-Document[0, 261]
+Document[0, 260]
   TocBlock[0, 16] openingMarker:[0, 1] tocKeyword:[1, 4] style:[5, 13] closingMarker:[13, 14]
   TocBlock[17, 33] openingMarker:[17, 18] tocKeyword:[18, 21] style:[22, 30] closingMarker:[30, 31]
   TocBlock[34, 50] openingMarker:[34, 35] tocKeyword:[35, 38] style:[39, 47] closingMarker:[47, 48]

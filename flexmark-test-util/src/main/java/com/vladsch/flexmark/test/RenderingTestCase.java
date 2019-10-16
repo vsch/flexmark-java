@@ -22,7 +22,7 @@ public abstract class RenderingTestCase implements SpecExampleProcessor {
     /**
      * Override if combining option by overwriting corresponding keys is not sufficient
      *
-     * @param other  options (set first), can be null
+     * @param other     options (set first), can be null
      * @param overrides options (set second) can be null
      * @return combined options, default implementation simply overwrites values of corresponding keys in overrides
      */
@@ -32,11 +32,11 @@ public abstract class RenderingTestCase implements SpecExampleProcessor {
         return other != null && overrides != null ? new DataSet(other, overrides) : other != null ? other : overrides;
     }
 
-    public void testCase(SpecExampleRenderer exampleRenderer, DataHolder options) {
+    public void testCase(SpecExampleRenderer exampleRenderer, DataHolder exampleOptions) {
 
     }
 
-    public void addSpecExample(@NotNull SpecExample example, @NotNull SpecExampleRenderer exampleRenderer, DataHolder options, boolean ignoredTestCase, @NotNull String renderedHtml, @Nullable String renderedAst) {
+    public void addSpecExample(@NotNull SpecExampleRenderer exampleRenderer, @NotNull SpecExampleParse exampleParse, DataHolder exampleOptions, boolean ignoredTestCase, @NotNull String renderedHtml, @Nullable String renderedAst) {
 
     }
 
@@ -54,12 +54,11 @@ public abstract class RenderingTestCase implements SpecExampleProcessor {
 
     protected void assertRendering(UrlString fileUrl, String source, String expectedHtml, String expectedAst, String optionsSet) {
         SpecExample example = getExample();
-        DataHolder options = optionsSet == null ? null : TestUtils.getOptions(example, optionsSet, this::options, this::combineOptions);
+        DataHolder exampleOptions = TestUtils.getOptions(example, optionsSet, this::options, this::combineOptions);
 
-        SpecExampleRenderer exampleRenderer = getSpecExampleRenderer(options);
+        SpecExampleRenderer exampleRenderer = getSpecExampleRenderer(example, exampleOptions);
 
-        SpecExampleParse specExampleParse = new SpecExampleParse(options, exampleRenderer, exampleRenderer.getOptions(), source);
-        String parseSource = specExampleParse.getSource();
+        SpecExampleParse specExampleParse = new SpecExampleParse(exampleRenderer.getOptions(), exampleRenderer, exampleOptions, source);
         boolean timed = specExampleParse.isTimed();
         int iterations = specExampleParse.getIterations();
 
@@ -75,7 +74,7 @@ public abstract class RenderingTestCase implements SpecExampleProcessor {
             System.out.print(formattedTimingInfo);
         }
 
-        testCase(exampleRenderer, options);
+        testCase(exampleRenderer, exampleOptions);
         exampleRenderer.finalizeRender();
 
         String expected;
@@ -103,7 +102,7 @@ public abstract class RenderingTestCase implements SpecExampleProcessor {
             actual = TestUtils.addSpecExample(source, html, ast, optionsSet);
         }
 
-        if (options != null && options.get(TestUtils.FAIL)) {
+        if (exampleOptions != null && exampleOptions.get(TestUtils.FAIL)) {
             thrown.expect(ComparisonFailure.class);
         }
 

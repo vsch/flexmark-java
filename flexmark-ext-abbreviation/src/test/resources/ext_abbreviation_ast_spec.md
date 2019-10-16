@@ -40,9 +40,9 @@ This has an Abbr embedded in it.
 .
 <p>This has an <abbr title="Abbreviation">Abbr</abbr> embedded in it.</p>
 .
-Document[0, 55]
+Document[0, 54]
   AbbreviationBlock[0, 20] open:[0, 2] text:[2, 6] close:[6, 8] abbreviation:[8, 20]
-  Paragraph[22, 55]
+  Paragraph[22, 54]
     TextBase[22, 54] chars:[22, 54, "This  … n it."]
       Text[22, 34] chars:[22, 34, "This  … s an "]
       Abbreviation[34, 38] chars:[34, 38, "Abbr"]
@@ -59,9 +59,9 @@ This has an Abbr embedded in it.
 .
 <p>This has an <abbr title="Abbreviation has *emphasis*, **bold** or `code`">Abbr</abbr> embedded in it.</p>
 .
-Document[0, 91]
+Document[0, 90]
   AbbreviationBlock[0, 56] open:[0, 2] text:[2, 6] close:[6, 8] abbreviation:[9, 56]
-  Paragraph[58, 91]
+  Paragraph[58, 90]
     TextBase[58, 90] chars:[58, 90, "This  … n it."]
       Text[58, 70] chars:[58, 70, "This  … s an "]
       Abbreviation[70, 74] chars:[70, 74, "Abbr"]
@@ -91,7 +91,7 @@ Document[0, 90]
 *[Abbre]: Abbreviation 2
 .
 .
-Document[0, 49]
+Document[0, 48]
   AbbreviationBlock[0, 23] open:[0, 2] text:[2, 6] close:[6, 8] abbreviation:[9, 23]
   AbbreviationBlock[24, 48] open:[24, 26] text:[26, 31] close:[31, 33] abbreviation:[34, 48]
 ````````````````````````````````
@@ -107,10 +107,10 @@ And this has another Abbr embedded in it.
 <p>This has an <abbr title="Abbreviation 2">Abbre</abbr> embedded in it.
 And this has another <abbr title="Abbreviation 1">Abbr</abbr> embedded in it.</p>
 .
-Document[0, 126]
+Document[0, 125]
   AbbreviationBlock[0, 23] open:[0, 2] text:[2, 6] close:[6, 8] abbreviation:[9, 23]
   AbbreviationBlock[24, 48] open:[24, 26] text:[26, 31] close:[31, 33] abbreviation:[34, 48]
-  Paragraph[50, 126]
+  Paragraph[50, 125]
     TextBase[50, 83] chars:[50, 83, "This  … n it."]
       Text[50, 62] chars:[50, 62, "This  … s an "]
       Abbreviation[62, 67] chars:[62, 67, "Abbre"]
@@ -131,10 +131,10 @@ U.S.A. is an abbreviation and so is US of A, an abbreviation.
 .
 <p><abbr title="United States of America">U.S.A.</abbr> is an abbreviation and so is <abbr title="United States of America">US of A</abbr>, an abbreviation.</p>
 .
-Document[0, 136]
+Document[0, 135]
   AbbreviationBlock[0, 35] open:[0, 2] text:[2, 8] close:[8, 10] abbreviation:[11, 35]
   AbbreviationBlock[36, 72] open:[36, 38] text:[38, 45] close:[45, 47] abbreviation:[48, 72]
-  Paragraph[74, 136]
+  Paragraph[74, 135]
     TextBase[74, 135] chars:[74, 135, "U.S.A … tion."]
       Abbreviation[74, 80] chars:[74, 80, "U.S.A."]
       Text[80, 110] chars:[80, 110, " is a … o is "]
@@ -152,11 +152,11 @@ U.S.A., US of A, and US are all abbreviations.
 .
 <p><abbr title="United States of America">U.S.A.</abbr>, <abbr title="United States of America">US of A</abbr>, and <abbr title="United States">US</abbr> are all abbreviations.</p>
 .
-Document[0, 142]
+Document[0, 141]
   AbbreviationBlock[0, 20] open:[0, 2] text:[2, 4] close:[4, 6] abbreviation:[7, 20]
   AbbreviationBlock[21, 56] open:[21, 23] text:[23, 29] close:[29, 31] abbreviation:[32, 56]
   AbbreviationBlock[57, 93] open:[57, 59] text:[59, 66] close:[66, 68] abbreviation:[69, 93]
-  Paragraph[95, 142]
+  Paragraph[95, 141]
     TextBase[95, 141] chars:[95, 141, "U.S.A … ions."]
       Abbreviation[95, 101] chars:[95, 101, "U.S.A."]
       Text[101, 103] chars:[101, 103, ", "]
@@ -276,7 +276,7 @@ Let's transfert documents through TCP/IP, using TCP packets.
 <p>And here we have a <abbr title="Compact Disk">CD</abbr>, some CDs, and some other <abbr title="Compact Disk">CD</abbr>&rsquo;s.</p>
 <p>Let&rsquo;s transfert documents through <abbr title="Transmission Control Protocol">TCP</abbr>/<abbr title="Internet Protocol">IP</abbr>, using <abbr title="Transmission Control Protocol">TCP</abbr> packets.</p>
 .
-Document[0, 536]
+Document[0, 535]
   Paragraph[0, 38] isTrailingBlankLine
     TextBase[0, 37] chars:[0, 37, "Some  … TML4."]
       Text[0, 16] chars:[0, 16, "Some  … bout "]
@@ -335,8 +335,8 @@ Document[0, 536]
 .
 <p><ins>TCP</ins></p>
 .
-Document[0, 8]
-  Paragraph[0, 8]
+Document[0, 7]
+  Paragraph[0, 7]
     Ins[0, 7] textOpen:[0, 2, "++"] text:[2, 5, "TCP"] textClose:[5, 7, "++"]
       Text[2, 5] chars:[2, 5, "TCP"]
 ````````````````````````````````
@@ -347,8 +347,8 @@ Document[0, 8]
 .
 <p><del>TCP</del></p>
 .
-Document[0, 8]
-  Paragraph[0, 8]
+Document[0, 7]
+  Paragraph[0, 7]
     Strikethrough[0, 7] textOpen:[0, 2, "~~"] text:[2, 5, "TCP"] textClose:[5, 7, "~~"]
       Text[2, 5] chars:[2, 5, "TCP"]
 ````````````````````````````````
@@ -361,7 +361,7 @@ Document[0, 8]
 .
 <p><ins><abbr title="Transmission Control Protocol">TCP</abbr></ins></p>
 .
-Document[0, 47]
+Document[0, 46]
   Paragraph[0, 8] isTrailingBlankLine
     Ins[0, 7] textOpen:[0, 2, "++"] text:[2, 5, "TCP"] textClose:[5, 7, "++"]
       TextBase[2, 5] chars:[2, 5, "TCP"]
@@ -377,7 +377,7 @@ Document[0, 47]
 .
 <p><del><abbr title="Transmission Control Protocol">TCP</abbr></del></p>
 .
-Document[0, 47]
+Document[0, 46]
   Paragraph[0, 8] isTrailingBlankLine
     Strikethrough[0, 7] textOpen:[0, 2, "~~"] text:[2, 5, "TCP"] textClose:[5, 7, "~~"]
       TextBase[2, 5] chars:[2, 5, "TCP"]

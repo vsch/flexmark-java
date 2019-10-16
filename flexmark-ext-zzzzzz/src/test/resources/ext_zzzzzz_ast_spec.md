@@ -1,14 +1,14 @@
 ---
 title: Zzzzzz Extension Spec
-author: 
-version: 
+author:
+version:
 date: '2016-06-06'
 license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 ...
 
 ---
 
-## Zzzzzz  
+## Zzzzzz
 
 Converts zzzzzz text to Zzzzzz nodes.
 
@@ -37,9 +37,9 @@ Sample  text
   <p>I said <em>Hello</em> to him.</p>
 </blockquote>
 .
-Document[0, 25]
-  BlockQuote[0, 25] marker:[0, 1, ">"]
-    Paragraph[2, 25]
+Document[0, 24]
+  BlockQuote[0, 24] marker:[0, 1, ">"]
+    Paragraph[2, 24]
       TextBase[2, 9] chars:[2, 9, "I said "]
         Text[2, 9] chars:[2, 9, "I said "]
       Emphasis[9, 16] textOpen:[9, 10, "*"] text:[10, 15, "Hello"] textClose:[15, 16, "*"]
@@ -55,8 +55,8 @@ Document[0, 25]
 .
 <p>(<ul><li>item1</li><li>item2</li></ul>)</p>
 .
-Document[0, 40]
-  Paragraph[0, 40]
+Document[0, 39]
+  Paragraph[0, 39]
     TextBase[0, 1] chars:[0, 1, "("]
       Text[0, 1] chars:[0, 1, "("]
     HtmlInline[1, 5] chars:[1, 5, "<ul>"]
@@ -88,8 +88,8 @@ Document[0, 40]
   </tbody>
 </table>
 .
-Document[0, 156]
-  TableBlock[0, 156]
+Document[0, 155]
+  TableBlock[0, 155]
     TableHead[0, 25]
       TableRow[0, 25] rowNumber=1
         TableCell[0, 9] header textOpen:[0, 1, "|"] text:[2, 7, "col 1"] textClose:[8, 9, "|"]
@@ -156,8 +156,8 @@ Document[0, 156]
   </tbody>
 </table>
 .
-Document[0, 133]
-  TableBlock[0, 133]
+Document[0, 132]
+  TableBlock[0, 132]
     TableHead[0, 25]
       TableRow[0, 25] rowNumber=1
         TableCell[0, 9] header textOpen:[0, 1, "|"] text:[2, 7, "col 1"] textClose:[8, 9, "|"]

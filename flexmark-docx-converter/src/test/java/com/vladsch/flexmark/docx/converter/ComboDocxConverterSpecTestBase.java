@@ -26,13 +26,9 @@ import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.spec.SpecReader;
 import com.vladsch.flexmark.superscript.SuperscriptExtension;
-import com.vladsch.flexmark.test.ComboSpecTestCase;
-import com.vladsch.flexmark.test.FlexmarkSpecExampleRenderer;
-import com.vladsch.flexmark.test.SpecExampleRenderer;
-import com.vladsch.flexmark.test.TestUtils;
+import com.vladsch.flexmark.test.*;
 import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.IParse;
-import com.vladsch.flexmark.util.ast.IRender;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
@@ -120,8 +116,8 @@ public abstract class ComboDocxConverterSpecTestBase extends ComboSpecTestCase {
     public abstract IParse parser();
 
     @Override
-    public @NotNull SpecExampleRenderer getSpecExampleRenderer(@Nullable DataHolder exampleOptions) {
-        return new FlexmarkSpecExampleRenderer(exampleOptions, parser(), renderer(), true);
+    public @NotNull SpecExampleRenderer getSpecExampleRenderer(@NotNull SpecExample example, @Nullable DataHolder exampleOptions) {
+        return new FlexmarkSpecExampleRenderer(example, exampleOptions, parser(), renderer(), true);
     }
 
     @Nullable
@@ -148,7 +144,7 @@ public abstract class ComboDocxConverterSpecTestBase extends ComboSpecTestCase {
     }
 
     @Override
-    public void testCase(SpecExampleRenderer exampleRenderer, DataHolder options) {
+    public void testCase(SpecExampleRenderer exampleRenderer, DataHolder exampleOptions) {
         if (!isDumpTestCaseFiles()) return;
         Document document = (Document) ((FlexmarkSpecExampleRenderer) exampleRenderer).getDocument();
 
@@ -157,7 +153,7 @@ public abstract class ComboDocxConverterSpecTestBase extends ComboSpecTestCase {
             // write it out to file, hard-coded for now                    IGNORE
             File file = new File(String.format("%s%s%s_%d.docx", getProjectRootDirectory(), getFileTestCaseDumpLocation(), specExample.getSection(), specExample.getExampleNumber()));
             File file2 = new File(String.format("%s%s%s_%d.xml", getProjectRootDirectory(), getFileTestCaseDumpLocation(), specExample.getSection(), specExample.getExampleNumber()));
-            DocxRenderer withOptions = renderer().withOptions(options);
+            DocxRenderer withOptions = renderer().withOptions(exampleOptions);
             WordprocessingMLPackage mlPackage = DocxRenderer.getDefaultTemplate(withOptions.getOptions());
             withOptions.render(document, mlPackage);
 
@@ -191,7 +187,7 @@ public abstract class ComboDocxConverterSpecTestBase extends ComboSpecTestCase {
     }
 
     @Override
-    public void addSpecExample(@NotNull SpecExample example, @NotNull SpecExampleRenderer exampleRenderer, DataHolder options, boolean ignoredTestCase, @NotNull String renderedHtml, @Nullable String renderedAst) {
+    public void addSpecExample(@NotNull SpecExampleRenderer exampleRenderer, @NotNull SpecExampleParse exampleParse, DataHolder exampleOptions, boolean ignoredTestCase, @NotNull String renderedHtml, @Nullable String renderedAst) {
         if (!isDumpAllTestCaseFiles()) return;
 
         boolean failed = !ignoredTestCase && !exampleRenderer.renderHtml().equals(example.getHtml());
@@ -239,7 +235,7 @@ public abstract class ComboDocxConverterSpecTestBase extends ComboSpecTestCase {
         }
 
         myDocxContext.createHorizontalLine();
-        renderer().withOptions(options).render(((FlexmarkSpecExampleRenderer)exampleRenderer).getDocument(), myPackage);
+        renderer().withOptions(exampleOptions).render(((FlexmarkSpecExampleRenderer)exampleRenderer).getDocument(), myPackage);
         myDocxContext.createHorizontalLine();
 
         if (example.hasComment()) {

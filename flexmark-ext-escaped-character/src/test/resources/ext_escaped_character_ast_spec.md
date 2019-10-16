@@ -17,8 +17,8 @@ Sample  \t\e\x\t and \\ \- \~
 .
 <p>Sample  \t\e\x\t and \ - ~</p>
 .
-Document[0, 30]
-  Paragraph[0, 30]
+Document[0, 29]
+  Paragraph[0, 29]
     TextBase[0, 29] chars:[0, 29, "Sampl … \- \~"]
       Text[0, 21] chars:[0, 21, "Sampl …  and "]
       EscapedCharacter[21, 23] textOpen:[21, 22, "\"] text:[22, 23, "\"]
@@ -68,19 +68,19 @@ Document[0, 29]
   </li>
 </ul>
 .
-Document[0, 83]
-  BulletList[0, 83] isTight
-    BulletListItem[0, 83] open:[0, 1, "-"] isTight
+Document[0, 82]
+  BulletList[0, 82] isTight
+    BulletListItem[0, 82] open:[0, 1, "-"] isTight
       Paragraph[2, 12]
         Text[2, 11] chars:[2, 11, "some item"]
-      BulletList[16, 83] isTight
+      BulletList[16, 82] isTight
         BulletListItem[16, 60] open:[16, 17, "-"] isTight
           Paragraph[18, 60]
             Text[18, 31] chars:[18, 31, "some  …  item"]
             SoftLineBreak[31, 32]
             Text[38, 59] chars:[38, 59, "conti …     \"]
-        BulletListItem[64, 83] open:[64, 65, "-"] isTight
-          Paragraph[66, 83]
+        BulletListItem[64, 82] open:[64, 65, "-"] isTight
+          Paragraph[66, 82]
             Text[66, 82] chars:[66, 82, "anoth …  item"]
 ````````````````````````````````
 
@@ -95,7 +95,7 @@ this is not escaped \.
 <pre><code>this is not escaped \. 
 </code></pre>
 .
-Document[0, 32]
+Document[0, 31]
   FencedCodeBlock[0, 31] open:[0, 3, "```"] content:[4, 28] lines[1] close:[28, 31, "```"]
     Text[4, 28] chars:[4, 28, "this  …  \. \n"]
 ````````````````````````````````

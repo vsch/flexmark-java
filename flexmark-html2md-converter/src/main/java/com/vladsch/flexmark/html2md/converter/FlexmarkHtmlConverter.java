@@ -18,6 +18,7 @@ import com.vladsch.flexmark.util.dependency.ResolvedDependencies;
 import com.vladsch.flexmark.util.format.RomanNumeral;
 import com.vladsch.flexmark.util.format.TableFormatOptions;
 import com.vladsch.flexmark.util.format.options.TableCaptionHandling;
+import com.vladsch.flexmark.util.html.Attribute;
 import com.vladsch.flexmark.util.html.Attributes;
 import com.vladsch.flexmark.util.html.CellAlignment;
 import com.vladsch.flexmark.util.html.LineFormattingAppendable;
@@ -45,7 +46,7 @@ import java.util.regex.Pattern;
 @SuppressWarnings("WeakerAccess")
 public class FlexmarkHtmlConverter {
     /**
-     * output control for FormattingAppendable, see {@link com.vladsch.flexmark.util.html.LineFormattingAppendable#setOptions(int)}
+     * output control for FormattingAppendable, see {@link LineFormattingAppendable#setOptions(int)}
      */
     public static final DataKey<Integer> FORMAT_FLAGS = new DataKey<>("FORMAT_FLAGS", LineFormattingAppendable.SUPPRESS_TRAILING_WHITESPACE | LineFormattingAppendable.COLLAPSE_WHITESPACE | LineFormattingAppendable.PREFIX_PRE_FORMATTED);
     public static final DataKey<Integer> MAX_BLANK_LINES = new DataKey<>("MAX_BLANK_LINES", 2);
@@ -1010,7 +1011,7 @@ public class FlexmarkHtmlConverter {
         public void transferIdToParent() {
             if (myStateStack.isEmpty())
                 throw new IllegalStateException("transferIdToParent with an empty stack");
-            com.vladsch.flexmark.util.html.Attribute attribute = myState.myAttributes.get("id");
+            Attribute attribute = myState.myAttributes.get("id");
             myState.myAttributes.remove("id");
             if (attribute != null && !attribute.getValue().isEmpty()) {
                 HtmlConverterState state = myStateStack.peek();
@@ -1047,7 +1048,7 @@ public class FlexmarkHtmlConverter {
             Attributes attributes = new Attributes();
 
             for (String include : includes) {
-                com.vladsch.flexmark.util.html.Attribute attribute = myState.myAttributes.get(include);
+                Attribute attribute = myState.myAttributes.get(include);
                 if (attribute != null) {
                     myState.myAttributes.remove(include);
                     attributes.addValue(attribute);

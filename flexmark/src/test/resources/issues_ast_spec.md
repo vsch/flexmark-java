@@ -21,8 +21,8 @@ line after hard break
 <p>test<br />
 line after hard break</p>
 .
-Document[0, 29]
-  Paragraph[0, 29]
+Document[0, 28]
+  Paragraph[0, 28]
     Text[0, 4] chars:[0, 4, "test"]
     HardLineBreak[4, 7]
     Text[7, 28] chars:[7, 28, "line  … break"]
@@ -44,9 +44,9 @@ some text
 </code></pre>
 <p>some text</p>
 .
-Document[0, 17]
+Document[0, 16]
   IndentedCodeBlock[1, 6]
-  Paragraph[7, 17]
+  Paragraph[7, 16]
     Text[7, 16] chars:[7, 16, "some text"]
 ````````````````````````````````
 
@@ -69,9 +69,9 @@ code
 </code></pre>
 <p>some text</p>
 .
-Document[0, 26]
+Document[0, 25]
   IndentedCodeBlock[1, 14]
-  Paragraph[16, 26]
+  Paragraph[16, 25]
     Text[16, 25] chars:[16, 25, "some text"]
 ````````````````````````````````
 
@@ -87,8 +87,8 @@ not a flexmark-java issue.
 .
 <p>@someone</p>
 .
-Document[0, 9]
-  Paragraph[0, 9]
+Document[0, 8]
+  Paragraph[0, 8]
     Text[0, 8] chars:[0, 8, "@someone"]
 ````````````````````````````````
 
@@ -109,7 +109,7 @@ This note demonstrates some of what [Markdown][1] is capable of doing.
 ....
 <em>Note: the fourth item uses the Unicode character for <a href="http://www.fileformat.info/info/unicode/char/2163/index.htm">Roman numeral four</a>.</em></p>
 .
-Document[0, 276]
+Document[0, 275]
   Paragraph[0, 156] isTrailingBlankLine
     Text[0, 36] chars:[0, 36, "This  … what "]
     LinkRef[36, 49] textOpen:[36, 37, "["] text:[37, 45, "Markdown"] textClose:[45, 46, "]"] referenceOpen:[46, 47, "["] reference:[47, 48, "1"] referenceClose:[48, 49, "]"]
@@ -200,7 +200,7 @@ Incorrect: [amazon][2]⏎
 .
 <p>Incorrect: <a href="http://www.amazon.com/">amazon</a></p>
 .
-Document[0, 82]
+Document[0, 81]
   Paragraph[0, 24] isTrailingBlankLine
     Text[0, 11] chars:[0, 11, "Incor … ect: "]
     LinkRef[11, 22] textOpen:[11, 12, "["] text:[12, 18, "amazon"] textClose:[18, 19, "]"] referenceOpen:[19, 20, "["] reference:[20, 21, "2"] referenceClose:[21, 22, "]"]
@@ -218,7 +218,7 @@ Incorrect: [amazon][2]
 .
 <p>Incorrect: <a href="http://www.amazon.com/">amazon</a></p>
 .
-Document[0, 80]
+Document[0, 79]
   Paragraph[0, 23] isTrailingBlankLine
     Text[0, 11] chars:[0, 11, "Incor … ect: "]
     LinkRef[11, 22] textOpen:[11, 12, "["] text:[12, 18, "amazon"] textClose:[18, 19, "]"] referenceOpen:[19, 20, "["] reference:[20, 21, "2"] referenceClose:[21, 22, "]"]
@@ -235,8 +235,8 @@ Test text **emphasis**
 .
 <p>Test text <strong>emphasis</strong></p>
 .
-Document[0, 23]
-  Paragraph[0, 23]
+Document[0, 22]
+  Paragraph[0, 22]
     Text[0, 10] chars:[0, 10, "Test text "]
     StrongEmphasis[10, 22] textOpen:[10, 12, "**"] text:[12, 20, "emphasis"] textClose:[20, 22, "**"]
       Text[12, 20] chars:[12, 20, "emphasis"]
@@ -250,8 +250,8 @@ Test text `inline code`
 .
 <p>Test text <code>inline code</code></p>
 .
-Document[0, 24]
-  Paragraph[0, 24]
+Document[0, 23]
+  Paragraph[0, 23]
     Text[0, 10] chars:[0, 10, "Test text "]
     Code[10, 23] textOpen:[10, 11, "`"] text:[11, 22, "inlin … e code"] textClose:[22, 23, "`"]
       Text[11, 22] chars:[11, 22, "inlin …  code"]
@@ -270,7 +270,7 @@ lines
 lines
 </code></pre>
 .
-Document[0, 30]
+Document[0, 29]
   FencedCodeBlock[0, 29] open:[0, 3, "```"] info:[3, 7, "info"] content:[8, 26] lines[2] close:[26, 29, "```"]
     Text[8, 26] chars:[8, 26, "fence … ines\n"]
 ````````````````````````````````
@@ -353,8 +353,8 @@ data-role="example">
 some content here
 </span></p>
 .
-Document[0, 66]
-  Paragraph[0, 66]
+Document[0, 65]
+  Paragraph[0, 65]
     HtmlInline[0, 38] chars:[0, 38, "<span … ple\">"]
     SoftLineBreak[38, 39]
     Text[39, 56] chars:[39, 56, "some  …  here"]
@@ -384,9 +384,9 @@ HTML block parsing
     <p>test2</p>
 </div>
 .
-Document[0, 68]
+Document[0, 67]
   HtmlCommentBlock[0, 9]
-  HtmlBlock[9, 68]
+  HtmlBlock[9, 67]
 ````````````````````````````````
 
 
@@ -405,9 +405,9 @@ HTML block parsing, error only detects `<div>` and not the `<![CDATA[` following
 ]]&gt;&lt;/div&gt;
 </code></pre>
 .
-Document[0, 91]
+Document[0, 90]
   HtmlBlock[0, 61]
-  IndentedCodeBlock[70, 91]
+  IndentedCodeBlock[70, 90]
 ````````````````````````````````
 
 
@@ -428,10 +428,10 @@ HTML block parsing, error only detects `<div>` and not the `<![CDATA[` following
 </code></pre>
 <p>]]&gt;</div></p>
 .
-Document[0, 88]
+Document[0, 87]
   HtmlBlock[0, 62]
   IndentedCodeBlock[71, 78]
-  Paragraph[78, 88]
+  Paragraph[78, 87]
     Text[78, 81] chars:[78, 81, "]]>"]
     HtmlInline[81, 87] chars:[81, 87, "</div>"]
 ````````````````````````````````
@@ -452,8 +452,8 @@ HTML block parsing, error only detects `<div>` and not the `<![CDATA[` following
     </div>
 ]]>
 .
-Document[0, 76]
-  HtmlBlock[0, 76]
+Document[0, 75]
+  HtmlBlock[0, 75]
 ````````````````````````````````
 
 
@@ -468,7 +468,7 @@ Issue #109, Image Ref missing title tag in rendered HTML
 .
 <p><img src="/images/icons/up_16.gif" alt="alt text" title="Title" /></p>
 .
-Document[0, 55]
+Document[0, 54]
   Paragraph[0, 16] isTrailingBlankLine
     ImageRef[0, 15] textOpen:[0, 2, "!["] text:[2, 10, "alt text"] textClose:[10, 11, "]"] referenceOpen:[11, 12, "["] reference:[12, 14, "id"] referenceClose:[14, 15, "]"]
       Text[2, 10] chars:[2, 10, "alt text"]
@@ -488,7 +488,7 @@ Minimal case of url resolver bug.
 <p><img src="/images/icons/up_16.gif" alt="alt text" title="Title" /></p>
 <p><img src="/images/icons/up_16.gif" alt="alt text" title="Title" /></p>
 .
-Document[0, 101]
+Document[0, 100]
   Paragraph[0, 45] isTrailingBlankLine
     Image[0, 44] textOpen:[0, 2, "!["] text:[2, 10, "alt text"] textClose:[10, 11, "]"] linkOpen:[11, 12, "("] url:[12, 35, "/images/icons/up_16.gif"] pageRef:[12, 35, "/images/icons/up_16.gif"] titleOpen:[36, 37, "\""] title:[37, 42, "Title"] titleClose:[42, 43, "\""] linkClose:[43, 44, ")"]
       Text[2, 10] chars:[2, 10, "alt text"]
@@ -509,7 +509,7 @@ Document[0, 101]
 <p><img src="/images/icons/up_16.gif" alt="alt text" /></p>
 <p><img src="/images/icons/up_16.gif" alt="alt text" title="Title" /></p>
 .
-Document[0, 93]
+Document[0, 92]
   Paragraph[0, 37] isTrailingBlankLine
     Image[0, 36] textOpen:[0, 2, "!["] text:[2, 10, "alt text"] textClose:[10, 11, "]"] linkOpen:[11, 12, "("] url:[12, 35, "/images/icons/up_16.gif"] pageRef:[12, 35, "/images/icons/up_16.gif"] linkClose:[35, 36, ")"]
       Text[2, 10] chars:[2, 10, "alt text"]
@@ -530,12 +530,12 @@ Document[0, 93]
 <p><img src="/images/icons/up_16.gif" alt="alt text" title="Title" /></p>
 <p><img src="/images/icons/up_16.gif" alt="alt text" /></p>
 .
-Document[0, 93]
+Document[0, 92]
   Paragraph[0, 16] isTrailingBlankLine
     ImageRef[0, 15] textOpen:[0, 2, "!["] text:[2, 10, "alt text"] textClose:[10, 11, "]"] referenceOpen:[11, 12, "["] reference:[12, 14, "id"] referenceClose:[14, 15, "]"]
       Text[2, 10] chars:[2, 10, "alt text"]
   Reference[17, 54] refOpen:[17, 18, "["] ref:[18, 20, "id"] refClose:[20, 22, "]:"] url:[23, 46, "/images/icons/up_16.gif"] titleOpen:[47, 48, "\""] title:[48, 53, "Title"] titleClose:[53, 54, "\""]
-  Paragraph[56, 93]
+  Paragraph[56, 92]
     Image[56, 92] textOpen:[56, 58, "!["] text:[58, 66, "alt text"] textClose:[66, 67, "]"] linkOpen:[67, 68, "("] url:[68, 91, "/images/icons/up_16.gif"] pageRef:[68, 91, "/images/icons/up_16.gif"] linkClose:[91, 92, ")"]
       Text[58, 66] chars:[58, 66, "alt text"]
 ````````````````````````````````
@@ -548,7 +548,7 @@ Document[0, 93]
 .
 <p><a href="/images/icons/up_16.gif" title="Title">alt text</a></p>
 .
-Document[0, 54]
+Document[0, 53]
   Paragraph[0, 15] isTrailingBlankLine
     LinkRef[0, 14] textOpen:[0, 1, "["] text:[1, 9, "alt text"] textClose:[9, 10, "]"] referenceOpen:[10, 11, "["] reference:[11, 13, "id"] referenceClose:[13, 14, "]"]
       Text[1, 9] chars:[1, 9, "alt text"]
@@ -568,7 +568,7 @@ Minimal case of url resolver bug.
 <p><a href="/images/icons/up_16.gif" title="Title">alt text</a></p>
 <p><a href="/images/icons/up_16.gif" title="Title">alt text</a></p>
 .
-Document[0, 99]
+Document[0, 98]
   Paragraph[0, 44] isTrailingBlankLine
     Link[0, 43] textOpen:[0, 1, "["] text:[1, 9, "alt text"] textClose:[9, 10, "]"] linkOpen:[10, 11, "("] url:[11, 34, "/images/icons/up_16.gif"] pageRef:[11, 34, "/images/icons/up_16.gif"] titleOpen:[35, 36, "\""] title:[36, 41, "Title"] titleClose:[41, 42, "\""] linkClose:[42, 43, ")"]
       Text[1, 9] chars:[1, 9, "alt text"]
@@ -589,7 +589,7 @@ Document[0, 99]
 <p><a href="/images/icons/up_16.gif">alt text</a></p>
 <p><a href="/images/icons/up_16.gif" title="Title">alt text</a></p>
 .
-Document[0, 91]
+Document[0, 90]
   Paragraph[0, 36] isTrailingBlankLine
     Link[0, 35] textOpen:[0, 1, "["] text:[1, 9, "alt text"] textClose:[9, 10, "]"] linkOpen:[10, 11, "("] url:[11, 34, "/images/icons/up_16.gif"] pageRef:[11, 34, "/images/icons/up_16.gif"] linkClose:[34, 35, ")"]
       Text[1, 9] chars:[1, 9, "alt text"]
@@ -610,12 +610,12 @@ Document[0, 91]
 <p><a href="/images/icons/up_16.gif" title="Title">alt text</a></p>
 <p><a href="/images/icons/up_16.gif">alt text</a></p>
 .
-Document[0, 91]
+Document[0, 90]
   Paragraph[0, 15] isTrailingBlankLine
     LinkRef[0, 14] textOpen:[0, 1, "["] text:[1, 9, "alt text"] textClose:[9, 10, "]"] referenceOpen:[10, 11, "["] reference:[11, 13, "id"] referenceClose:[13, 14, "]"]
       Text[1, 9] chars:[1, 9, "alt text"]
   Reference[16, 53] refOpen:[16, 17, "["] ref:[17, 19, "id"] refClose:[19, 21, "]:"] url:[22, 45, "/images/icons/up_16.gif"] titleOpen:[46, 47, "\""] title:[47, 52, "Title"] titleClose:[52, 53, "\""]
-  Paragraph[55, 91]
+  Paragraph[55, 90]
     Link[55, 90] textOpen:[55, 56, "["] text:[56, 64, "alt text"] textClose:[64, 65, "]"] linkOpen:[65, 66, "("] url:[66, 89, "/images/icons/up_16.gif"] pageRef:[66, 89, "/images/icons/up_16.gif"] linkClose:[89, 90, ")"]
       Text[56, 64] chars:[56, 64, "alt text"]
 ````````````````````````````````
@@ -633,7 +633,7 @@ summary(cars)
 <pre><code class="language-{r,">summary(cars)
 </code></pre>
 .
-Document[0, 37]
+Document[0, 36]
   FencedCodeBlock[0, 36] open:[0, 3, "```"] info:[3, 18, "{r, echo=FALSE}"] content:[19, 33] lines[1] close:[33, 36, "```"]
     Text[19, 33] chars:[19, 33, "summa … ars)\n"]
 ````````````````````````````````
@@ -649,8 +649,8 @@ So _this_ is italic and **this** is bold
 .
 <p>So <em>this</em> is italic and <strong>this</strong> is bold</p>
 .
-Document[0, 41]
-  Paragraph[0, 41]
+Document[0, 40]
+  Paragraph[0, 40]
     Text[0, 3] chars:[0, 3, "So "]
     Emphasis[3, 9] textOpen:[3, 4, "_"] text:[4, 8, "this"] textClose:[8, 9, "_"]
       Text[4, 8] chars:[4, 8, "this"]
@@ -786,10 +786,10 @@ Task List
   <li>[x] Task 3</li>
 </ul>
 .
-Document[0, 49]
+Document[0, 48]
   Paragraph[0, 10]
     Text[0, 9] chars:[0, 9, "Task List"]
-  BulletList[10, 49] isTight
+  BulletList[10, 48] isTight
     BulletListItem[10, 23] open:[10, 11, "-"] isTight
       Paragraph[12, 23]
         LinkRef[12, 15] referenceOpen:[12, 13, "["] reference:[13, 14, "x"] referenceClose:[14, 15, "]"]
@@ -800,8 +800,8 @@ Document[0, 49]
         LinkRef[25, 28] referenceOpen:[25, 26, "["] reference:[27, 27] referenceClose:[27, 28, "]"]
           Text[27, 27]
         Text[28, 35] chars:[28, 35, " Task 2"]
-    BulletListItem[36, 49] open:[36, 37, "-"] isTight
-      Paragraph[38, 49]
+    BulletListItem[36, 48] open:[36, 37, "-"] isTight
+      Paragraph[38, 48]
         LinkRef[38, 41] referenceOpen:[38, 39, "["] reference:[39, 40, "x"] referenceClose:[40, 41, "]"]
           Text[39, 40] chars:[39, 40, "x"]
         Text[41, 48] chars:[41, 48, " Task 3"]
@@ -837,7 +837,7 @@ Issue #132, order list <ol> without "start=" ?
   <li><a href="http://www.example.com">Another Example.com</a></li>
 </ol>
 .
-Document[0, 210]
+Document[0, 209]
   Paragraph[0, 12]
     StrongEmphasis[0, 11] textOpen:[0, 2, "**"] text:[2, 9, "Ordered"] textClose:[9, 11, "**"]
       Text[2, 9] chars:[2, 9, "Ordered"]
@@ -852,7 +852,7 @@ Document[0, 210]
       Paragraph[35, 42]
         Text[35, 41] chars:[35, 41, "Item 3"]
   HtmlCommentBlock[42, 51]
-  OrderedList[51, 210] isTight delimiter:'.'
+  OrderedList[51, 209] isTight delimiter:'.'
     OrderedListItem[51, 92] open:[51, 53, "1."] isTight
       Paragraph[54, 92]
         Link[54, 91] textOpen:[54, 55, "["] text:[55, 66, "Example.com"] textClose:[66, 67, "]"] linkOpen:[67, 68, "("] url:[68, 90, "http://www.example.com"] pageRef:[68, 90, "http://www.example.com"] linkClose:[90, 91, ")"]
@@ -865,8 +865,8 @@ Document[0, 210]
       Paragraph[130, 161]
         Link[130, 160] textOpen:[130, 131, "["] text:[131, 137, "Yahoo!"] textClose:[137, 138, "]"] linkOpen:[138, 139, "("] url:[139, 159, "http://www.yahoo.com"] pageRef:[139, 159, "http://www.yahoo.com"] linkClose:[159, 160, ")"]
           Text[131, 137] chars:[131, 137, "Yahoo!"]
-    OrderedListItem[161, 210] open:[161, 163, "4."] isTight
-      Paragraph[164, 210]
+    OrderedListItem[161, 209] open:[161, 163, "4."] isTight
+      Paragraph[164, 209]
         Link[164, 209] textOpen:[164, 165, "["] text:[165, 184, "Another Example.com"] textClose:[184, 185, "]"] linkOpen:[185, 186, "("] url:[186, 208, "http://www.example.com"] pageRef:[186, 208, "http://www.example.com"] linkClose:[208, 209, ")"]
           Text[165, 184] chars:[165, 184, "Anoth … e.com"]
 ````````````````````````````````
@@ -944,8 +944,8 @@ without the custom URL extension it works
 .
 <p><a href="https://ci.tensorflow.org/job/tensorflow-master-cpu"><img src="https://ci.tensorflow.org/buildStatus/icon?job=tensorflow-master-cpu" alt="Build Status" /></a></p>
 .
-Document[0, 142]
-  Paragraph[0, 142]
+Document[0, 141]
+  Paragraph[0, 141]
     Link[0, 140] textOpen:[0, 1, "["] text:[1, 86, "![Build Status](https://ci.tensorflow.org/buildStatus/icon?job=tensorflow-master-cpu)"] textClose:[86, 87, "]"] linkOpen:[87, 88, "("] url:[88, 139, "https://ci.tensorflow.org/job/tensorflow-master-cpu"] pageRef:[88, 139, "https://ci.tensorflow.org/job/tensorflow-master-cpu"] linkClose:[139, 140, ")"]
       Image[1, 86] textOpen:[1, 3, "!["] text:[3, 15, "Build Status"] textClose:[15, 16, "]"] linkOpen:[16, 17, "("] url:[17, 85, "https://ci.tensorflow.org/buildStatus/icon?job=tensorflow-master-cpu"] pageRef:[17, 85, "https://ci.tensorflow.org/buildStatus/icon?job=tensorflow-master-cpu"] linkClose:[85, 86, ")"]
         Text[3, 15] chars:[3, 15, "Build … tatus"]
@@ -961,8 +961,8 @@ Issue #158, HTML comments parse as blocks despite having following text
 .
 <!--Comment--> Markdown text.
 .
-Document[0, 30]
-  HtmlCommentBlock[0, 30]
+Document[0, 29]
+  HtmlCommentBlock[0, 29]
 ````````````````````````````````
 
 
@@ -989,9 +989,9 @@ The opening tag can be indented 1-3 spaces, but not 4:
 <pre><code>&lt;!-- foo --&gt;
 </code></pre>
 .
-Document[0, 33]
+Document[0, 32]
   HtmlCommentBlock[0, 15]
-  IndentedCodeBlock[20, 33]
+  IndentedCodeBlock[20, 32]
 ````````````````````````````````
 
 
@@ -1008,9 +1008,9 @@ bar
    baz -->
 <p>okay</p>
 .
-Document[0, 30]
+Document[0, 29]
   HtmlCommentBlock[0, 25]
-  Paragraph[25, 30]
+  Paragraph[25, 29]
     Text[25, 29] chars:[25, 29, "okay"]
 ````````````````````````````````
 
@@ -1079,8 +1079,8 @@ Issue #221, XSS: Javascript execution through links
 .
 <p>Something New</p>
 .
-Document[0, 37]
-  Paragraph[0, 37]
+Document[0, 36]
+  Paragraph[0, 36]
     Link[0, 36] textOpen:[0, 1, "["] text:[1, 14, "Something New"] textClose:[14, 15, "]"] linkOpen:[15, 16, "("] url:[16, 35, "javascript:alert(1)"] pageRef:[16, 35, "javascript:alert(1)"] linkClose:[35, 36, ")"]
       Text[1, 14] chars:[1, 14, "Somet … g New"]
 ````````````````````````````````
@@ -1109,7 +1109,7 @@ Issue #243
 .
 <p><img src="https://www.example.com/img.png" alt="Alt text" title="test" /></p>
 .
-Document[0, 62]
+Document[0, 61]
   Paragraph[0, 16] isTrailingBlankLine
     ImageRef[0, 15] textOpen:[0, 2, "!["] text:[2, 10, "Alt text"] textClose:[10, 11, "]"] referenceOpen:[11, 12, "["] reference:[12, 14, "id"] referenceClose:[14, 15, "]"]
       Text[2, 10] chars:[2, 10, "Alt text"]
@@ -1126,7 +1126,7 @@ bare image
 .
 <p><img src="https://www.example.com/img.png" alt="id" title="test" /></p>
 .
-Document[0, 54]
+Document[0, 53]
   Paragraph[0, 8] isTrailingBlankLine
     ImageRef[0, 7] referenceOpen:[0, 2, "!["] reference:[2, 4, "id"] referenceClose:[4, 5, "]"] textOpen:[5, 6, "["] textClose:[6, 7, "]"]
       Text[2, 4] chars:[2, 4, "id"]
@@ -1145,10 +1145,10 @@ Issue #246
   <li>May 23 - <a href="http://download.ahnlab.com/kr/site/library/%5BReport%5DAndariel_Threat_Group.pdf">[Ahnlab] [KR] Andariel Group Trend Report</a></li>
 </ul>
 .
-Document[0, 133]
-  BulletList[0, 133] isTight
-    BulletListItem[0, 133] open:[0, 1, "*"] isTight
-      Paragraph[2, 133]
+Document[0, 132]
+  BulletList[0, 132] isTight
+    BulletListItem[0, 132] open:[0, 1, "*"] isTight
+      Paragraph[2, 132]
         Text[2, 11] chars:[2, 11, "May 23 - "]
         Link[11, 132] textOpen:[11, 12, "["] text:[12, 53, "[Ahnlab] [KR] Andariel Group Trend Report"] textClose:[53, 54, "]"] linkOpen:[54, 55, "("] url:[55, 131, "http://download.ahnlab.com/kr/site/library/[Report]Andariel_Threat_Group.pdf"] pageRef:[55, 131, "http://download.ahnlab.com/kr/site/library/[Report]Andariel_Threat_Group.pdf"] linkClose:[131, 132, ")"]
           Text[12, 53] chars:[12, 53, "[Ahnl … eport"]
@@ -1240,14 +1240,14 @@ Document[0, 103]
 </div>
 </div>
 .
-Document[0, 61]
+Document[0, 60]
   HtmlBlock[0, 12]
   Heading[13, 21] textOpen:[13, 14, "#"] text:[15, 21, "test 1"]
     Text[15, 21] chars:[15, 21, "test 1"]
   HtmlBlock[23, 36]
   Heading[37, 45] textOpen:[37, 38, "#"] text:[39, 45, "test 2"]
     Text[39, 45] chars:[39, 45, "test 2"]
-  HtmlBlock[47, 61]
+  HtmlBlock[47, 60]
 ````````````````````````````````
 
 
@@ -1295,8 +1295,8 @@ Issue xxx-1, leading spaces tab not part of indented code, which is correct
 public void testPipeInTable() {
 </code></pre>
 .
-Document[0, 46]
-  IndentedCodeBlock[4, 46]
+Document[0, 45]
+  IndentedCodeBlock[4, 45]
 ````````````````````````````````
 
 
@@ -1308,8 +1308,8 @@ Document[0, 46]
 public void testPipeInTable() {
 </code></pre>
 .
-Document[0, 42]
-  IndentedCodeBlock[2, 42]
+Document[0, 41]
+  IndentedCodeBlock[2, 41]
 ````````````````````````````````
 
 
@@ -1321,8 +1321,8 @@ Document[0, 42]
 public void testPipeInTable() {
 </code></pre>
 .
-Document[0, 44]
-  IndentedCodeBlock[3, 44]
+Document[0, 43]
+  IndentedCodeBlock[3, 43]
 ````````````````````````````````
 
 
@@ -1334,8 +1334,8 @@ Document[0, 44]
 public void testPipeInTable() {
 </code></pre>
 .
-Document[0, 46]
-  IndentedCodeBlock[4, 46]
+Document[0, 45]
+  IndentedCodeBlock[4, 45]
 ````````````````````````````````
 
 
@@ -1347,8 +1347,8 @@ Document[0, 46]
 →public void testPipeInTable() {
 </code></pre>
 .
-Document[0, 48]
-  IndentedCodeBlock[4, 48]
+Document[0, 47]
+  IndentedCodeBlock[4, 47]
 ````````````````````````````````
 
 
@@ -1406,8 +1406,8 @@ Issue xxx-2, leading spaces tab not part of indented code, which is correct
 .
 <p><a href="https://www.google.com">www.google.com</a></p>
 .
-Document[0, 44]
-  Paragraph[0, 44]
+Document[0, 43]
+  Paragraph[0, 43]
     Link[0, 43] textOpen:[0, 1, "["] text:[2, 16, "www.google.com"] textClose:[18, 19, "]"] linkOpen:[19, 20, "("] url:[20, 42, "https://www.google.com"] pageRef:[20, 42, "https://www.google.com"] linkClose:[42, 43, ")"]
       Text[2, 16] chars:[2, 16, "www.g … e.com"]
 ````````````````````````````````
@@ -1604,17 +1604,17 @@ Document[4, 499]
   </li>
 </ul>
 .
-Document[18, 514]
-  BulletList[18, 513] isLoose
-    BulletListItem[18, 513] open:[18, 19, "*"] isLoose hadBlankLineAfter
-      Paragraph[20, 122] isTrailingBlankLine
-        Text[20, 110] chars:[20, 110, "Fix:  … ed by"]
-        SoftLineBreak[110, 111]
-        Code[117, 120] textOpen:[117, 118, "`"] text:[118, 119, "|"] textClose:[119, 120, "`"]
-          Text[118, 119] chars:[118, 119, "|"]
-        Text[120, 121] chars:[120, 121, ":"]
-      FencedCodeBlock[133, 513] open:[133, 136, "```"] info:[136, 144, "markdown"] content:[151, 504] lines[10] close:[510, 513, "```"]
-        Text[151, 504] chars:[151, 504, "7. El … ion,\n"]
+Document[4, 499]
+  BulletList[4, 499] isLoose
+    BulletListItem[4, 499] open:[4, 5, "*"] isLoose hadBlankLineAfter
+      Paragraph[6, 108] isTrailingBlankLine
+        Text[6, 96] chars:[6, 96, "Fix:  … ed by"]
+        SoftLineBreak[96, 97]
+        Code[103, 106] textOpen:[103, 104, "`"] text:[104, 105, "|"] textClose:[105, 106, "`"]
+          Text[104, 105] chars:[104, 105, "|"]
+        Text[106, 107] chars:[106, 107, ":"]
+      FencedCodeBlock[119, 499] open:[119, 122, "```"] info:[122, 130, "markdown"] content:[137, 490] lines[10] close:[496, 499, "```"]
+        Text[137, 490] chars:[137, 490, "7. El … ion,\n"]
 ````````````````````````````````
 
 
@@ -2081,8 +2081,8 @@ Issue #302, Markdown conversion to HTML of links and images don't convert near <
 .
 <p><strong>Note</strong>: When sent as a Bearer token</p> ![External Groups Whitelist field](images/external-groups-whitelist.png)
 .
-Document[0, 131]
-  HtmlBlock[0, 131]
+Document[0, 130]
+  HtmlBlock[0, 130]
 ````````````````````````````````
 
 
@@ -2091,8 +2091,8 @@ Document[0, 131]
 .
 <p><strong>Note</strong>: When sent as a Bearer token <img src="images/external-groups-whitelist.png" alt="External Groups Whitelist field" /></p>
 .
-Document[0, 124]
-  Paragraph[0, 124]
+Document[0, 123]
+  Paragraph[0, 123]
     HtmlInline[0, 8] chars:[0, 8, "<strong>"]
     Text[8, 12] chars:[8, 12, "Note"]
     HtmlInline[12, 21] chars:[12, 21, "</strong>"]
@@ -2130,7 +2130,7 @@ Document[0, 130]
 .
 <p><a href="http://example.com">text</a></p>
 .
-Document[0, 40]
+Document[0, 39]
   Paragraph[0, 9] isTrailingBlankLine
     LinkRef[0, 8] referenceOpen:[0, 1, "["] reference:[2, 6, "text"] referenceClose:[7, 8, "]"]
       Text[2, 6] chars:[2, 6, "text"]
@@ -2145,7 +2145,7 @@ Document[0, 40]
 .
 <p><img src="http://example.com" alt="text" /></p>
 .
-Document[0, 41]
+Document[0, 40]
   Paragraph[0, 10] isTrailingBlankLine
     ImageRef[0, 9] referenceOpen:[0, 2, "!["] reference:[3, 7, "text"] referenceClose:[8, 9, "]"]
       Text[3, 7] chars:[3, 7, "text"]
@@ -2158,8 +2158,8 @@ Document[0, 41]
 .
 <p><a href="http://example.com">text</a></p>
 .
-Document[0, 29]
-  Paragraph[0, 29]
+Document[0, 28]
+  Paragraph[0, 28]
     Link[0, 28] textOpen:[0, 1, "["] text:[2, 6, "text"] textClose:[7, 8, "]"] linkOpen:[8, 9, "("] url:[9, 27, "http://example.com"] pageRef:[9, 27, "http://example.com"] linkClose:[27, 28, ")"]
       Text[2, 6] chars:[2, 6, "text"]
 ````````````````````````````````
@@ -2180,12 +2180,12 @@ nested lists should have correct offsets
   </li>
 </ul>
 .
-Document[0, 14]
-  BulletList[0, 14] isTight
-    BulletListItem[0, 14] open:[0, 1, "*"] isTight
-      BulletList[2, 14] isTight
-        BulletListItem[2, 14] open:[2, 3, "*"] isTight
-          Paragraph[4, 14]
+Document[0, 13]
+  BulletList[0, 13] isTight
+    BulletListItem[0, 13] open:[0, 1, "*"] isTight
+      BulletList[2, 13] isTight
+        BulletListItem[2, 13] open:[2, 3, "*"] isTight
+          Paragraph[4, 13]
             Text[4, 13] chars:[4, 13, "list item"]
 ````````````````````````````````
 

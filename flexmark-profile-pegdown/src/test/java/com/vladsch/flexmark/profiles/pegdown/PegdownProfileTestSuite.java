@@ -1,8 +1,9 @@
 package com.vladsch.flexmark.profiles.pegdown;
 
+import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
-@org.junit.runner.RunWith(Suite.class)
+@RunWith(Suite.class)
 @Suite.SuiteClasses({
         ComboPegdownSpecTest.class,
         ComboPegdownCompatibilitySpecTest.class,

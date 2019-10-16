@@ -906,7 +906,7 @@ reference[^id]
 [^id]: Footnote text.
 
 .
-Document[0, 75]
+Document[0, 74]
   Paragraph[0, 36] isTrailingBlankLine
     Text[0, 29] chars:[0, 29, "Dupli … rence"]
     Footnote[29, 34] ordinal: 0  textOpen:[29, 31, "[^"] text:[31, 33, "id"] textClose:[33, 34, "]"]
@@ -918,8 +918,8 @@ Document[0, 75]
     Footnote[46, 51] ordinal: 0  textOpen:[46, 48, "[^"] text:[48, 50, "id"] textClose:[50, 51, "]"]
       Text[48, 50] chars:[48, 50, "id"]
   BlankLine[52, 53]
-  FootnoteBlock[53, 75] ordinal: 0  open:[53, 55] text:[55, 57] close:[57, 59] footnote:[60, 75]
-    Paragraph[60, 75]
+  FootnoteBlock[53, 74] ordinal: 0  open:[53, 55] text:[55, 57] close:[57, 59] footnote:[60, 74]
+    Paragraph[60, 74]
       Text[60, 74] chars:[60, 74, "Footn … text."]
 ````````````````````````````````
 

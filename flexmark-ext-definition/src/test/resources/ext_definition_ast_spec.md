@@ -121,8 +121,8 @@ not a definition
 .
 <p>: definition item</p>
 .
-Document[0, 19]
-  Paragraph[0, 19]
+Document[0, 18]
+  Paragraph[0, 18]
     Text[0, 17] chars:[0, 17, ": def …  item"]
 ````````````````````````````````
 
@@ -138,10 +138,10 @@ not a definition
     : definition item</li>
 </ul>
 .
-Document[0, 33]
-  BulletList[0, 33] isTight
-    BulletListItem[0, 33] open:[0, 1, "-"] isTight
-      Paragraph[2, 33]
+Document[0, 32]
+  BulletList[0, 32] isTight
+    BulletListItem[0, 32] open:[0, 1, "-"] isTight
+      Paragraph[2, 32]
         Text[2, 13] chars:[2, 13, "bulle …  item"]
         SoftLineBreak[13, 14]
         Text[14, 31] chars:[14, 31, ": def …  item"]
@@ -159,10 +159,10 @@ not a definition
     : definition item</li>
 </ol>
 .
-Document[0, 36]
-  OrderedList[0, 36] isTight delimiter:'.'
-    OrderedListItem[0, 36] open:[0, 2, "1."] isTight
-      Paragraph[3, 36]
+Document[0, 35]
+  OrderedList[0, 35] isTight delimiter:'.'
+    OrderedListItem[0, 35] open:[0, 2, "1."] isTight
+      Paragraph[3, 35]
         Text[3, 16] chars:[3, 16, "numbe …  item"]
         SoftLineBreak[16, 17]
         Text[17, 34] chars:[17, 34, ": def …  item"]
@@ -178,10 +178,10 @@ not a definition
 <h2>Header</h2>
 <p>: definition item</p>
 .
-Document[0, 29]
+Document[0, 28]
   Heading[0, 9] textOpen:[0, 2, "##"] text:[3, 9, "Header"]
     Text[3, 9] chars:[3, 9, "Header"]
-  Paragraph[10, 29]
+  Paragraph[10, 28]
     Text[10, 27] chars:[10, 27, ": def …  item"]
 ````````````````````````````````
 
@@ -199,10 +199,10 @@ some stuff
 </code></pre>
 <p>: definition item</p>
 .
-Document[0, 47]
+Document[0, 46]
   FencedCodeBlock[0, 26] open:[0, 3, "```"] info:[3, 11, "markdown"] content:[12, 23] lines[1] close:[23, 26, "```"]
     Text[12, 23] chars:[12, 23, "some  … tuff\n"]
-  Paragraph[28, 47]
+  Paragraph[28, 46]
     Text[28, 45] chars:[28, 45, ": def …  item"]
 ````````````````````````````````
 
@@ -218,9 +218,9 @@ not a definition in a lazy block quote
   : definition item</p>
 </blockquote>
 .
-Document[0, 32]
-  BlockQuote[0, 32] marker:[0, 1, ">"]
-    Paragraph[2, 32]
+Document[0, 31]
+  BlockQuote[0, 31] marker:[0, 1, ">"]
+    Paragraph[2, 31]
       Text[2, 12] chars:[2, 12, "definition"]
       SoftLineBreak[12, 13]
       Text[13, 30] chars:[13, 30, ": def …  item"]
@@ -240,14 +240,14 @@ a definition in a block quote
   </dl>
 </blockquote>
 .
-Document[0, 39]
-  BlockQuote[0, 39] marker:[0, 1, ">"]
-    DefinitionList[2, 39] isTight
+Document[0, 38]
+  BlockQuote[0, 38] marker:[0, 1, ">"]
+    DefinitionList[2, 38] isTight
       DefinitionTerm[2, 18]
         Paragraph[2, 18]
           Text[2, 17] chars:[2, 17, "Defin …  Term"]
-      DefinitionItem[20, 39] open:[20, 21, ":"] isTight
-        Paragraph[22, 39]
+      DefinitionItem[20, 38] open:[20, 21, ":"] isTight
+        Paragraph[22, 38]
           Text[22, 37] chars:[22, 37, "defin …  item"]
 ````````````````````````````````
 
@@ -263,13 +263,13 @@ Definition Term
   <dd>definition item</dd>
 </dl>
 .
-Document[0, 35]
-  DefinitionList[0, 35] isTight
+Document[0, 34]
+  DefinitionList[0, 34] isTight
     DefinitionTerm[0, 16]
       Paragraph[0, 16]
         Text[0, 15] chars:[0, 15, "Defin …  Term"]
-    DefinitionItem[16, 35] open:[16, 17, ":"] isTight
-      Paragraph[18, 35]
+    DefinitionItem[16, 34] open:[16, 17, ":"] isTight
+      Paragraph[18, 34]
         Text[18, 33] chars:[18, 33, "defin …  item"]
 ````````````````````````````````
 
@@ -285,13 +285,13 @@ Definition Term
   <dd>definition item</dd>
 </dl>
 .
-Document[0, 35]
-  DefinitionList[0, 35] isTight
+Document[0, 34]
+  DefinitionList[0, 34] isTight
     DefinitionTerm[0, 16]
       Paragraph[0, 16]
         Text[0, 15] chars:[0, 15, "Defin …  Term"]
-    DefinitionItem[16, 35] open:[16, 17, ":"] isTight
-      Paragraph[18, 35]
+    DefinitionItem[16, 34] open:[16, 17, ":"] isTight
+      Paragraph[18, 34]
         Text[18, 33] chars:[18, 33, "defin …  item"]
 ````````````````````````````````
 
@@ -586,16 +586,16 @@ Term 1
   </dd>
 </dl>
 .
-Document[0, 77]
-  DefinitionList[0, 77] isLoose
+Document[0, 76]
+  DefinitionList[0, 76] isLoose
     DefinitionTerm[0, 7]
       Paragraph[0, 7]
         Text[0, 6] chars:[0, 6, "Term 1"]
     DefinitionItem[7, 36] open:[7, 8, ":"] isLoose hadBlankLineAfter
       Paragraph[11, 36] isTrailingBlankLine
         Text[11, 35] chars:[11, 35, "Defin … raph)"]
-    DefinitionItem[38, 77] open:[38, 39, ":"] isLoose
-      Paragraph[42, 77]
+    DefinitionItem[38, 76] open:[38, 39, ":"] isLoose
+      Paragraph[42, 76]
         Text[42, 76] chars:[42, 76, "Text  … raph)"]
 ````````````````````````````````
 
@@ -893,8 +893,8 @@ Term 4
   </dd>
 </dl>
 .
-Document[0, 816]
-  DefinitionList[0, 816] isLoose
+Document[0, 815]
+  DefinitionList[0, 815] isLoose
     DefinitionTerm[0, 7]
       Paragraph[0, 7]
         Text[0, 6] chars:[0, 6, "Term 1"]
@@ -954,8 +954,8 @@ Document[0, 816]
         Text[710, 741] chars:[710, 741, "Defin … ine 2"]
       Paragraph[751, 783]
         Text[751, 782] chars:[751, 782, "Defin … ine 1"]
-    DefinitionItem[783, 816] open:[783, 784, ":"] isLoose
-      Paragraph[787, 816]
+    DefinitionItem[783, 815] open:[783, 784, ":"] isLoose
+      Paragraph[787, 815]
         Text[787, 815] chars:[787, 815, "Defin … raph)"]
 ````````````````````````````````
 
@@ -971,15 +971,15 @@ Definition **Term**
   <dd>definition <code>item</code></dd>
 </dl>
 .
-Document[0, 41]
-  DefinitionList[0, 41] isTight
+Document[0, 40]
+  DefinitionList[0, 40] isTight
     DefinitionTerm[0, 20]
       Paragraph[0, 20]
         Text[0, 11] chars:[0, 11, "Defin … tion "]
         StrongEmphasis[11, 19] textOpen:[11, 13, "**"] text:[13, 17, "Term"] textClose:[17, 19, "**"]
           Text[13, 17] chars:[13, 17, "Term"]
-    DefinitionItem[20, 41] open:[20, 21, ":"] isTight
-      Paragraph[22, 41]
+    DefinitionItem[20, 40] open:[20, 21, ":"] isTight
+      Paragraph[22, 40]
         Text[22, 33] chars:[22, 33, "defin … tion "]
         Code[33, 39] textOpen:[33, 34, "`"] text:[34, 38, "item"] textClose:[38, 39, "`"]
           Text[34, 38] chars:[34, 38, "item"]
@@ -999,16 +999,16 @@ Another** Definition Term
   <dd>definition <code>item</code></dd>
 </dl>
 .
-Document[0, 66]
-  DefinitionList[0, 66] isTight
+Document[0, 65]
+  DefinitionList[0, 65] isTight
     DefinitionTerm[0, 19]
       Paragraph[0, 19]
         Text[0, 17] chars:[0, 17, "Defin … *Term"]
     DefinitionTerm[19, 46]
       Paragraph[19, 46]
         Text[19, 44] chars:[19, 44, "Anoth …  Term"]
-    DefinitionItem[46, 66] open:[46, 47, ":"] isTight
-      Paragraph[48, 66]
+    DefinitionItem[46, 65] open:[46, 47, ":"] isTight
+      Paragraph[48, 65]
         Text[48, 59] chars:[48, 59, "defin … tion "]
         Code[59, 65] textOpen:[59, 60, "`"] text:[60, 64, "item"] textClose:[64, 65, "`"]
           Text[60, 64] chars:[60, 64, "item"]
@@ -1032,17 +1032,17 @@ Definition Term
   <dd>definition item</dd>
 </dl>
 .
-Document[0, 51]
+Document[0, 50]
   BulletList[0, 14] isTight
     BulletListItem[0, 14] open:[0, 1, "-"] isTight hadBlankLineAfter
       Paragraph[2, 14] isTrailingBlankLine
         Text[2, 13] chars:[2, 13, "bulle …  item"]
-  DefinitionList[16, 51] isTight
+  DefinitionList[16, 50] isTight
     DefinitionTerm[16, 33]
       Paragraph[16, 33]
         Text[16, 31] chars:[16, 31, "Defin …  Term"]
-    DefinitionItem[33, 51] open:[33, 34, ":"] isTight
-      Paragraph[35, 51]
+    DefinitionItem[33, 50] open:[33, 34, ":"] isTight
+      Paragraph[35, 50]
         Text[35, 50] chars:[35, 50, "defin …  item"]
 ````````````````````````````````
 
@@ -1193,16 +1193,16 @@ Definition Term
   <dd>Another definition of above term</dd>
 </dl>
 .
-Document[0, 78]
-  DefinitionList[0, 78] isTight
+Document[0, 77]
+  DefinitionList[0, 77] isTight
     DefinitionTerm[0, 16]
       Paragraph[0, 16]
         Text[0, 15] chars:[0, 15, "Defin …  Term"]
     DefinitionItem[16, 43] open:[16, 17, ":"] isTight
       Paragraph[18, 43]
         Text[18, 42] chars:[18, 42, "Defin …  term"]
-    DefinitionItem[43, 78] open:[43, 44, ":"] isTight
-      Paragraph[45, 78]
+    DefinitionItem[43, 77] open:[43, 44, ":"] isTight
+      Paragraph[45, 77]
         Text[45, 77] chars:[45, 77, "Anoth …  term"]
 ````````````````````````````````
 
@@ -1770,7 +1770,7 @@ and <a href="http://www.tpope.net/node/106">expanded upon by Tim Pope</a>.</p>
     specified, defaults to <code>false</code>.</dd>
 </dl>
 .
-Document[0, 1834]
+Document[0, 1833]
   Heading[0, 72] text:[0, 35, "Commit Message Length Configuration"] textClose:[37, 72, "==================================="]
     Text[0, 35] chars:[0, 35, "Commi … ation"]
   Paragraph[212, 643] isTrailingBlankLine
@@ -1792,7 +1792,7 @@ Document[0, 1834]
     Link[583, 641] textOpen:[583, 584, "["] text:[584, 609, "expanded upon by Tim Pope"] textClose:[609, 610, "]"] linkOpen:[610, 611, "("] url:[611, 640, "http://www.tpope.net/node/106"] pageRef:[611, 640, "http://www.tpope.net/node/106"] linkClose:[640, 641, ")"]
       Text[584, 609] chars:[584, 609, "expan …  Pope"]
     Text[641, 642] chars:[641, 642, "."]
-  DefinitionList[782, 1834] isTight
+  DefinitionList[782, 1833] isTight
     DefinitionTerm[782, 813]
       Paragraph[782, 813]
         Text[782, 812] chars:[782, 812, "commi … ength"]
@@ -1822,8 +1822,8 @@ Document[0, 1834]
     DefinitionTerm[1665, 1693]
       Paragraph[1665, 1693]
         Text[1665, 1692] chars:[1665, 1692, "commi … oLong"]
-    DefinitionItem[1693, 1834] open:[1693, 1694, ":"] isTight
-      Paragraph[1695, 1834]
+    DefinitionItem[1693, 1833] open:[1693, 1694, ":"] isTight
+      Paragraph[1695, 1833]
         Text[1695, 1705] chars:[1695, 1705, "If set to "]
         Code[1705, 1711] textOpen:[1705, 1706, "`"] text:[1706, 1710, "true"] textClose:[1710, 1711, "`"]
           Text[1706, 1710] chars:[1706, 1710, "true"]

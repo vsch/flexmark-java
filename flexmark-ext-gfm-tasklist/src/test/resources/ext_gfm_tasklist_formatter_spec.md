@@ -76,8 +76,8 @@ default
     * [X] list item 5.2.3
 
 .
-Document[0, 628]
-  BulletList[0, 628] isTight
+Document[0, 627]
+  BulletList[0, 627] isTight
     BulletListItem[0, 132] open:[0, 1, "*"] isTight
       Paragraph[2, 14]
         Text[2, 13] chars:[2, 13, "list  … tem 1"]
@@ -158,25 +158,25 @@ Document[0, 628]
             BulletListItem[478, 496] open:[478, 479, "*"] isTight
               Paragraph[480, 496]
                 Text[480, 495] chars:[480, 495, "list  … 4.2.3"]
-    BulletListItem[496, 628] open:[496, 497, "*"] isTight
+    BulletListItem[496, 627] open:[496, 497, "*"] isTight
       Paragraph[498, 510]
         Text[498, 509] chars:[498, 509, "list  … tem 5"]
-      BulletList[512, 628] isTight
+      BulletList[512, 627] isTight
         TaskListItem[512, 532] open:[512, 513, "*"] openSuffix:[514, 517, "[ ]"] isTight isNotDone
           Paragraph[518, 532]
             Text[518, 531] chars:[518, 531, "list  … m 5.1"]
-        TaskListItem[534, 628] open:[534, 535, "*"] openSuffix:[536, 539, "[x]"] isTight isDone
+        TaskListItem[534, 627] open:[534, 535, "*"] openSuffix:[536, 539, "[x]"] isTight isDone
           Paragraph[540, 554]
             Text[540, 553] chars:[540, 553, "list  … m 5.2"]
-          BulletList[558, 628] isTight
+          BulletList[558, 627] isTight
             BulletListItem[558, 576] open:[558, 559, "*"] isTight
               Paragraph[560, 576]
                 Text[560, 575] chars:[560, 575, "list  … 5.2.1"]
             TaskListItem[580, 602] open:[580, 581, "*"] openSuffix:[582, 585, "[ ]"] isTight isNotDone
               Paragraph[586, 602]
                 Text[586, 601] chars:[586, 601, "list  … 5.2.2"]
-            TaskListItem[606, 628] open:[606, 607, "*"] openSuffix:[608, 611, "[X]"] isTight isDone
-              Paragraph[612, 628]
+            TaskListItem[606, 627] open:[606, 607, "*"] openSuffix:[608, 611, "[X]"] isTight isDone
+              Paragraph[612, 627]
                 Text[612, 627] chars:[612, 627, "list  … 5.2.3"]
 ````````````````````````````````
 
@@ -756,14 +756,14 @@ Document[0, 27]
   * item 2
 
 .
-Document[0, 24]
-  BulletList[0, 24] isTight
-    TaskListItem[0, 24] open:[0, 1, "*"] openSuffix:[2, 5, "[ ]"] isTight isNotDone
+Document[0, 23]
+  BulletList[0, 23] isTight
+    TaskListItem[0, 23] open:[0, 1, "*"] openSuffix:[2, 5, "[ ]"] isTight isNotDone
       Paragraph[6, 11]
         Text[6, 10] chars:[6, 10, "task"]
-      BulletList[15, 24] isTight
-        BulletListItem[15, 24] open:[15, 16, "*"] isTight
-          Paragraph[17, 24]
+      BulletList[15, 23] isTight
+        BulletListItem[15, 23] open:[15, 16, "*"] isTight
+          Paragraph[17, 23]
             Text[17, 23] chars:[17, 23, "item 2"]
 ````````````````````````````````
 
@@ -783,8 +783,8 @@ Document[0, 24]
 * [ ] task
 
 .
-Document[0, 51]
-  BulletList[0, 51] isLoose
+Document[0, 50]
+  BulletList[0, 50] isLoose
     TaskListItem[0, 24] open:[0, 1, "*"] openSuffix:[2, 5, "[ ]"] isLoose isNotDone
       Paragraph[6, 11]
         Text[6, 10] chars:[6, 10, "task"]
@@ -796,8 +796,8 @@ Document[0, 51]
     TaskListItem[29, 40] open:[29, 30, "*"] openSuffix:[31, 34, "[ ]"] isLoose isNotDone
       Paragraph[35, 40]
         Text[35, 39] chars:[35, 39, "task"]
-    TaskListItem[40, 51] open:[40, 41, "*"] openSuffix:[42, 45, "[ ]"] isLoose isNotDone
-      Paragraph[46, 51]
+    TaskListItem[40, 50] open:[40, 41, "*"] openSuffix:[42, 45, "[ ]"] isLoose isNotDone
+      Paragraph[46, 50]
         Text[46, 50] chars:[46, 50, "task"]
 ````````````````````````````````
 
@@ -822,7 +822,7 @@ not a list item
 
 not a list item
 .
-Document[0, 67]
+Document[0, 66]
   BulletList[0, 49] isLoose
     TaskListItem[0, 18] open:[0, 1, "*"] openSuffix:[2, 5, "[ ]"] isLoose isNotDone
       Paragraph[6, 18]
@@ -833,7 +833,7 @@ Document[0, 67]
       Paragraph[32, 44]
         Text[32, 43] chars:[32, 43, "list  … tem 2"]
     TaskListItem[44, 49] open:[44, 45, "*"] openSuffix:[46, 49, "[ ]"] isLoose isNotDone
-  Paragraph[51, 67]
+  Paragraph[51, 66]
     Text[51, 66] chars:[51, 66, "not a …  item"]
 ````````````````````````````````
 
@@ -852,7 +852,7 @@ not a list item
 
 not a list item
 .
-Document[0, 66]
+Document[0, 65]
   BulletList[0, 48] isTight
     TaskListItem[0, 18] open:[0, 1, "*"] openSuffix:[2, 5, "[ ]"] isTight isNotDone
       Paragraph[6, 18]
@@ -862,7 +862,7 @@ Document[0, 66]
       Paragraph[31, 43]
         Text[31, 42] chars:[31, 42, "list  … tem 2"]
     TaskListItem[43, 48] open:[43, 44, "*"] openSuffix:[45, 48, "[ ]"] isTight isNotDone
-  Paragraph[50, 66]
+  Paragraph[50, 65]
     Text[50, 65] chars:[50, 65, "not a …  item"]
 ````````````````````````````````
 

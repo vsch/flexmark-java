@@ -8,6 +8,7 @@ import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 class HtmlConverter extends IParseBase {
     @SuppressWarnings("PointlessBitwiseExpression") final static public DataKey<Integer> HTML_EXTENSIONS = new DataKey<>("HTML_EXTENSIONS", 0
@@ -70,7 +71,7 @@ class HtmlConverter extends IParseBase {
 
     @NotNull
     @Override
-    public IParse withOptions(@org.jetbrains.annotations.Nullable DataHolder options) {
+    public IParse withOptions(@Nullable DataHolder options) {
         MutableDataSet mutableDataSet = new MutableDataSet(getOptions());
         if (options != null) mutableDataSet.setAll(options);
         return new HtmlConverter(mutableDataSet);

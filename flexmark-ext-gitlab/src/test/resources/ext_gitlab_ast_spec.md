@@ -48,8 +48,8 @@ A paragraph
   <p>A paragraph</p>
 </blockquote>
 .
-Document[0, 42]
-  GitLabBlockQuote[0, 42] open:[0, 3, ">>>"] openTrail:[3, 4, "\n"] close:[38, 41, ">>>"] closeTrail:[41, 42, "\n"]
+Document[0, 41]
+  GitLabBlockQuote[0, 41] open:[0, 3, ">>>"] openTrail:[3, 4, "\n"] close:[38, 41, ">>>"] closeTrail:[41, 41]
     Paragraph[4, 25] isTrailingBlankLine
       Text[4, 24] chars:[4, 24, "Block … tents"]
     Paragraph[26, 38] isTrailingBlankLine
@@ -66,8 +66,8 @@ Block Quote Contents
   <p>Block Quote Contents</p>
 </blockquote>
 .
-Document[0, 29]
-  GitLabBlockQuote[0, 29] open:[0, 3, ">>>"] openTrail:[3, 4, "\n"] close:[25, 28, ">>>"] closeTrail:[28, 29, "\n"]
+Document[0, 28]
+  GitLabBlockQuote[0, 28] open:[0, 3, ">>>"] openTrail:[3, 4, "\n"] close:[25, 28, ">>>"] closeTrail:[28, 28]
     Paragraph[4, 25] isTrailingBlankLine
       Text[4, 24] chars:[4, 24, "Block … tents"]
 ````````````````````````````````
@@ -121,13 +121,13 @@ Nested Block Quote Contents
 <blockquote>
 </blockquote>
 .
-Document[0, 65]
+Document[0, 64]
   GitLabBlockQuote[0, 29] open:[0, 3, ">>>"] openTrail:[3, 4, "\n"] close:[25, 28, ">>>"] closeTrail:[28, 29, "\n"]
     Paragraph[4, 25] isTrailingBlankLine
       Text[4, 24] chars:[4, 24, "Block … tents"]
   Paragraph[29, 57]
     Text[29, 56] chars:[29, 56, "Neste … tents"]
-  GitLabBlockQuote[57, 65] open:[57, 60, ">>>"] openTrail:[60, 61, "\n"] close:[61, 64, ">>>"] closeTrail:[64, 65, "\n"]
+  GitLabBlockQuote[57, 64] open:[57, 60, ">>>"] openTrail:[60, 61, "\n"] close:[61, 64, ">>>"] closeTrail:[64, 64]
 ````````````````````````````````
 
 
@@ -179,7 +179,7 @@ Another Nested Block Quote Contents
 <blockquote>
 </blockquote>
 .
-Document[0, 124]
+Document[0, 123]
   GitLabBlockQuote[0, 29] open:[0, 3, ">>>"] openTrail:[3, 4, "\n"] close:[25, 28, ">>>"] closeTrail:[28, 29, "\n"]
     Paragraph[4, 25] isTrailingBlankLine
       Text[4, 24] chars:[4, 24, "Block … tents"]
@@ -190,7 +190,7 @@ Document[0, 124]
       Text[61, 75] chars:[61, 75, "Some  …  text"]
   Paragraph[80, 116]
     Text[80, 115] chars:[80, 115, "Anoth … tents"]
-  GitLabBlockQuote[116, 124] open:[116, 119, ">>>"] openTrail:[119, 120, "\n"] close:[120, 123, ">>>"] closeTrail:[123, 124, "\n"]
+  GitLabBlockQuote[116, 123] open:[116, 119, ">>>"] openTrail:[119, 120, "\n"] close:[120, 123, ">>>"] closeTrail:[123, 123]
 ````````````````````````````````
 
 
@@ -203,8 +203,8 @@ unmatched
 .
 <p>{+inserted-}</p>
 .
-Document[0, 13]
-  Paragraph[0, 13]
+Document[0, 12]
+  Paragraph[0, 12]
     Text[0, 12] chars:[0, 12, "{+ins … ted-}"]
 ````````````````````````````````
 
@@ -214,8 +214,8 @@ Document[0, 13]
 .
 <p>[+inserted-]</p>
 .
-Document[0, 13]
-  Paragraph[0, 13]
+Document[0, 12]
+  Paragraph[0, 12]
     Text[0, 12] chars:[0, 12, "[+ins … ted-]"]
 ````````````````````````````````
 
@@ -225,8 +225,8 @@ Document[0, 13]
 .
 <p>{+inserted+]</p>
 .
-Document[0, 13]
-  Paragraph[0, 13]
+Document[0, 12]
+  Paragraph[0, 12]
     Text[0, 12] chars:[0, 12, "{+ins … ted+]"]
 ````````````````````````````````
 
@@ -236,8 +236,8 @@ Document[0, 13]
 .
 <p>[+inserted+}</p>
 .
-Document[0, 13]
-  Paragraph[0, 13]
+Document[0, 12]
+  Paragraph[0, 12]
     Text[0, 12] chars:[0, 12, "[+ins … ted+}"]
 ````````````````````````````````
 
@@ -247,8 +247,8 @@ Document[0, 13]
 .
 <p>{-deleted+}</p>
 .
-Document[0, 12]
-  Paragraph[0, 12]
+Document[0, 11]
+  Paragraph[0, 11]
     Text[0, 11] chars:[0, 11, "{-del … ted+}"]
 ````````````````````````````````
 
@@ -258,8 +258,8 @@ Document[0, 12]
 .
 <p>[-deleted+]</p>
 .
-Document[0, 12]
-  Paragraph[0, 12]
+Document[0, 11]
+  Paragraph[0, 11]
     Text[0, 11] chars:[0, 11, "[-del … ted+]"]
 ````````````````````````````````
 
@@ -269,8 +269,8 @@ Document[0, 12]
 .
 <p>{-deleted-]</p>
 .
-Document[0, 12]
-  Paragraph[0, 12]
+Document[0, 11]
+  Paragraph[0, 11]
     Text[0, 11] chars:[0, 11, "{-del … ted-]"]
 ````````````````````````````````
 
@@ -280,8 +280,8 @@ Document[0, 12]
 .
 <p>[-deleted-}</p>
 .
-Document[0, 12]
-  Paragraph[0, 12]
+Document[0, 11]
+  Paragraph[0, 11]
     Text[0, 11] chars:[0, 11, "[-del … ted-}"]
 ````````````````````````````````
 
@@ -293,8 +293,8 @@ matched
 .
 <p><ins>inserted</ins></p>
 .
-Document[0, 13]
-  Paragraph[0, 13]
+Document[0, 12]
+  Paragraph[0, 12]
     GitLabIns[0, 12] textOpen:[0, 2, "{+"] text:[2, 10, "inserted"] textClose:[10, 12, "+}"]
       Text[2, 10] chars:[2, 10, "inserted"]
 ````````````````````````````````
@@ -305,8 +305,8 @@ Document[0, 13]
 .
 <p><ins>inserted</ins></p>
 .
-Document[0, 13]
-  Paragraph[0, 13]
+Document[0, 12]
+  Paragraph[0, 12]
     GitLabIns[0, 12] textOpen:[0, 2, "[+"] text:[2, 10, "inserted"] textClose:[10, 12, "+]"]
       Text[2, 10] chars:[2, 10, "inserted"]
 ````````````````````````````````
@@ -317,8 +317,8 @@ Document[0, 13]
 .
 <p><del>deleted</del></p>
 .
-Document[0, 12]
-  Paragraph[0, 12]
+Document[0, 11]
+  Paragraph[0, 11]
     GitLabDel[0, 11] textOpen:[0, 2, "{-"] text:[2, 9, "deleted"] textClose:[9, 11, "-}"]
       Text[2, 9] chars:[2, 9, "deleted"]
 ````````````````````````````````
@@ -329,8 +329,8 @@ Document[0, 12]
 .
 <p><del>deleted</del></p>
 .
-Document[0, 12]
-  Paragraph[0, 12]
+Document[0, 11]
+  Paragraph[0, 11]
     GitLabDel[0, 11] textOpen:[0, 2, "[-"] text:[2, 9, "deleted"] textClose:[9, 11, "-]"]
       Text[2, 9] chars:[2, 9, "deleted"]
 ````````````````````````````````
@@ -422,8 +422,8 @@ nested
 .
 <p><ins>inserted <del>deleted</del></ins></p>
 .
-Document[0, 25]
-  Paragraph[0, 25]
+Document[0, 24]
+  Paragraph[0, 24]
     GitLabIns[0, 24] textOpen:[0, 2, "[+"] text:[2, 22, "inserted [-deleted-]"] textClose:[22, 24, "+]"]
       Text[2, 11] chars:[2, 11, "inserted "]
       GitLabDel[11, 22] textOpen:[11, 13, "[-"] text:[13, 20, "deleted"] textClose:[20, 22, "-]"]
@@ -436,8 +436,8 @@ Document[0, 25]
 .
 <p><em><ins><strong>inserted</strong> <del>deleted</del></ins></em></p>
 .
-Document[0, 31]
-  Paragraph[0, 31]
+Document[0, 30]
+  Paragraph[0, 30]
     Emphasis[0, 30] textOpen:[0, 1, "*"] text:[1, 29, "[+**inserted** [-deleted-]+]"] textClose:[29, 30, "*"]
       GitLabIns[1, 29] textOpen:[1, 3, "[+"] text:[3, 27, "**inserted** [-deleted-]"] textClose:[27, 29, "+]"]
         StrongEmphasis[3, 15] textOpen:[3, 5, "**"] text:[5, 13, "inserted"] textClose:[13, 15, "**"]
@@ -455,8 +455,8 @@ $`a^2+b^2=c^2`$
 .
 <p><span class="katex">a^2+b^2=c^2</span></p>
 .
-Document[0, 16]
-  Paragraph[0, 16]
+Document[0, 15]
+  Paragraph[0, 15]
     GitLabInlineMath[0, 15] textOpen:[0, 2, "$`"] text:[2, 13, "a^2+b^2=c^2"] textClose:[13, 15, "`$"]
 ````````````````````````````````
 
@@ -466,8 +466,8 @@ Prefix $`a^2+b^2=c^2`$ suffix
 .
 <p>Prefix <span class="katex">a^2+b^2=c^2</span> suffix</p>
 .
-Document[0, 30]
-  Paragraph[0, 30]
+Document[0, 29]
+  Paragraph[0, 29]
     Text[0, 7] chars:[0, 7, "Prefix "]
     GitLabInlineMath[7, 22] textOpen:[7, 9, "$`"] text:[9, 20, "a^2+b^2=c^2"] textClose:[20, 22, "`$"]
     Text[22, 29] chars:[22, 29, " suffix"]
@@ -479,8 +479,8 @@ prefix $`\Pr\left[\sum_{i=1}^k X_i > c \right] \leq 2^{-\Omega(c^2 k)}$$ $$\sum_
 .
 <p>prefix <span class="katex">\Pr\left[\sum_{i=1}^k X_i &gt; c \right] \leq 2^{-\Omega(c^2 k)}$$ $$\sum_{i=1}^\infty \frac{1}{2^i} = 1</span></p>
 .
-Document[0, 113]
-  Paragraph[0, 113]
+Document[0, 112]
+  Paragraph[0, 112]
     Text[0, 7] chars:[0, 7, "prefix "]
     GitLabInlineMath[7, 112] textOpen:[7, 9, "$`"] text:[9, 110, "\Pr\left[\sum_{i=1}^k X_i > c \right] \leq 2^{-\Omega(c^2 k)}$$ $$\sum_{i=1}^\infty \frac{1}{2^i} = 1"] textClose:[110, 112, "`$"]
 ````````````````````````````````
@@ -495,8 +495,8 @@ $$\sum_{i=1}^\infty \frac{1}{2^i} = 1`$
 <p>prefix <span class="katex">\Pr\left[\sum_{i=1}^k X_i &gt; c \right] \leq 2^{-\Omega(c^2 k)}$$ 
 $$\sum_{i=1}^\infty \frac{1}{2^i} = 1</span></p>
 .
-Document[0, 114]
-  Paragraph[0, 114]
+Document[0, 113]
+  Paragraph[0, 113]
     Text[0, 7] chars:[0, 7, "prefix "]
     GitLabInlineMath[7, 113] textOpen:[7, 9, "$`"] text:[9, 111, "\Pr\left[\sum_{i=1}^k X_i > c \right] \leq 2^{-\Omega(c^2 k)}$$ \n$$\sum_{i=1}^\infty \frac{1}{2^i} = 1"] textClose:[111, 113, "`$"]
 ````````````````````````````````
@@ -513,7 +513,7 @@ a^2+b^2=c^2
 a^2+b^2=c^2
 </div>
 .
-Document[0, 24]
+Document[0, 23]
   FencedCodeBlock[0, 23] open:[0, 3, "```"] info:[3, 7, "math"] content:[8, 20] lines[1] close:[20, 23, "```"]
     Text[8, 20] chars:[8, 20, "a^2+b … =c^2\n"]
 ````````````````````````````````
@@ -597,7 +597,7 @@ graph TD;
   C--&gt;D;
 </div>
 .
-Document[0, 61]
+Document[0, 60]
   FencedCodeBlock[0, 60] open:[0, 3, "```"] info:[3, 10, "mermaid"] content:[11, 57] lines[5] close:[57, 60, "```"]
     Text[11, 57] chars:[11, 57, "graph … ->D;\n"]
 ````````````````````````````````
@@ -706,8 +706,8 @@ Document[0, 60]
 </div>
 </p>
 .
-Document[0, 20]
-  Paragraph[0, 20]
+Document[0, 19]
+  Paragraph[0, 19]
     Image[0, 19] textOpen:[0, 2, "!["] text:[2, 7, "Video"] textClose:[7, 8, "]"] linkOpen:[8, 9, "("] url:[9, 18, "video.mp4"] pageRef:[9, 18, "video.mp4"] linkClose:[18, 19, ")"]
       Text[2, 7] chars:[2, 7, "Video"]
 ````````````````````````````````
@@ -850,7 +850,7 @@ GitHub does not convert non-ascii heading text to lowercase while GitLab does
 .
 <h2 id="тест-заголовок">Тест Заголовок</h2>
 .
-Document[0, 18]
+Document[0, 17]
   Heading[0, 17] textOpen:[0, 2, "##"] text:[3, 17, "Тест Заголовок"]
     Text[3, 17] chars:[3, 17, "Тест  … ловок"]
 ````````````````````````````````
@@ -863,7 +863,7 @@ GitHub does not convert non-ascii heading text to lowercase while GitLab does
 .
 <h2 id="test-heading">Test Heading</h2>
 .
-Document[0, 16]
+Document[0, 15]
   Heading[0, 15] textOpen:[0, 2, "##"] text:[3, 15, "Test Heading"]
     Text[3, 15] chars:[3, 15, "Test  … ading"]
 ````````````````````````````````

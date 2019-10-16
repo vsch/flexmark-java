@@ -6,23 +6,25 @@ import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.test.FlexmarkSpecExampleRenderer;
 import com.vladsch.flexmark.test.RenderingTestCase;
 import com.vladsch.flexmark.test.SpecExampleRenderer;
+import com.vladsch.flexmark.test.TestUtils;
 import com.vladsch.flexmark.util.ast.Node;
-import com.vladsch.flexmark.util.builder.Extension;
 import com.vladsch.flexmark.util.data.DataHolder;
+import com.vladsch.flexmark.util.data.MutableDataSet;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.junit.Test;
 
 import java.util.Collections;
-import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
 
 public class StrikethroughTest extends RenderingTestCase {
-
-    private static final Set<Extension> EXTENSIONS = Collections.singleton(StrikethroughExtension.create());
-    private static final Parser PARSER = Parser.builder().extensions(EXTENSIONS).build();
-    private static final HtmlRenderer RENDERER = HtmlRenderer.builder().extensions(EXTENSIONS).build();
+    static final DataHolder OPTIONS = new MutableDataSet()
+            .set(TestUtils.NO_FILE_EOL, false)
+            .set(Parser.EXTENSIONS, Collections.singleton(StrikethroughExtension.create()))
+            .toImmutable();
+    private static final Parser PARSER = Parser.builder(OPTIONS).build();
+    private static final HtmlRenderer RENDERER = HtmlRenderer.builder(OPTIONS).build();
 
     @Override
     public @Nullable DataHolder options(String optionSet) {
@@ -95,9 +97,9 @@ public class StrikethroughTest extends RenderingTestCase {
         assertEquals("~~", strikethrough.getClosingMarker().toString());
     }
 
-
     @Override
-    public @NotNull SpecExampleRenderer getSpecExampleRenderer(@Nullable DataHolder exampleOptions) {
-        return new FlexmarkSpecExampleRenderer(exampleOptions, PARSER, RENDERER, true);
+    public @NotNull SpecExampleRenderer getSpecExampleRenderer(@NotNull SpecExample example, @Nullable DataHolder exampleOptions) {
+        DataHolder combinedOptions = combineOptions(OPTIONS, exampleOptions);
+        return new FlexmarkSpecExampleRenderer(example, combinedOptions, PARSER.withOptions(combinedOptions), RENDERER.withOptions(combinedOptions), true);
     }
 }

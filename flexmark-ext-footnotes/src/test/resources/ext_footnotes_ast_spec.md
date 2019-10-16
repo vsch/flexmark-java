@@ -260,13 +260,13 @@ with continuation text. Inline _italic_ and
   </ol>
 </div>
 .
-Document[0, 262]
+Document[0, 261]
   Paragraph[0, 42] isTrailingBlankLine
     Text[0, 29] chars:[0, 29, "This  … tnote"]
     Footnote[29, 40] ordinal: 1  textOpen:[29, 31, "[^"] text:[31, 39, "footnote"] textClose:[39, 40, "]"]
       Text[31, 39] chars:[31, 39, "footnote"]
     Text[40, 41] chars:[40, 41, "."]
-  FootnoteBlock[43, 262] ordinal: 1  open:[43, 45] text:[45, 53] close:[53, 55] footnote:[56, 262]
+  FootnoteBlock[43, 261] ordinal: 1  open:[43, 45] text:[45, 53] close:[53, 55] footnote:[56, 261]
     Paragraph[56, 145] isTrailingBlankLine
       Text[56, 89] chars:[56, 89, "This  … note."]
       SoftLineBreak[89, 90]
@@ -282,12 +282,12 @@ Document[0, 262]
       Text[150, 192] chars:[150, 192, "Multi … other"]
       SoftLineBreak[193, 194]
       Text[198, 230] chars:[198, 230, "markd … ists."]
-    BulletList[240, 262] isTight
+    BulletList[240, 261] isTight
       BulletListItem[240, 249] open:[240, 241, "-"] isTight
         Paragraph[242, 249]
           Text[242, 248] chars:[242, 248, "item 1"]
-      BulletListItem[253, 262] open:[253, 254, "-"] isTight
-        Paragraph[255, 262]
+      BulletListItem[253, 261] open:[253, 254, "-"] isTight
+        Paragraph[255, 261]
           Text[255, 261] chars:[255, 261, "item 2"]
 ````````````````````````````````
 
@@ -318,7 +318,7 @@ markdown elements such as lists.
 - item 2
 </code></pre>
 .
-Document[0, 265]
+Document[0, 264]
   Paragraph[0, 44] isTrailingBlankLine
     Text[0, 30] chars:[0, 30, "This  … tnote"]
     LinkRef[30, 42] referenceOpen:[30, 31, "["] reference:[32, 41, "^footnote"] referenceClose:[41, 42, "]"]
@@ -337,7 +337,7 @@ Document[0, 265]
     StrongEmphasis[138, 146] textOpen:[138, 140, "**"] text:[140, 144, "bold"] textClose:[144, 146, "**"]
       Text[140, 144] chars:[140, 144, "bold"]
     Text[146, 147] chars:[146, 147, "."]
-  IndentedCodeBlock[153, 265]
+  IndentedCodeBlock[153, 264]
 ````````````````````````````````
 
 
@@ -379,7 +379,7 @@ with continuation text. Inline _italic_ and
   </ol>
 </div>
 .
-Document[0, 351]
+Document[0, 350]
   Paragraph[0, 35] isTrailingBlankLine
     Text[0, 29] chars:[0, 29, "This  … tnote"]
     Footnote[29, 33] ordinal: 1  textOpen:[29, 31, "[^"] text:[31, 32, "2"] textClose:[32, 33, "]"]
@@ -397,7 +397,7 @@ Document[0, 351]
       StrongEmphasis[128, 136] textOpen:[128, 130, "**"] text:[130, 134, "bold"] textClose:[134, 136, "**"]
         Text[130, 134] chars:[130, 134, "bold"]
       Text[136, 137] chars:[136, 137, "."]
-  FootnoteBlock[139, 351] ordinal: 1  open:[139, 141] text:[141, 142] close:[142, 144] footnote:[145, 351]
+  FootnoteBlock[139, 350] ordinal: 1  open:[139, 141] text:[141, 142] close:[142, 144] footnote:[145, 350]
     Paragraph[145, 234] isTrailingBlankLine
       Text[145, 178] chars:[145, 178, "This  … note."]
       SoftLineBreak[178, 179]
@@ -413,12 +413,12 @@ Document[0, 351]
       Text[239, 281] chars:[239, 281, "Multi … other"]
       SoftLineBreak[282, 283]
       Text[287, 319] chars:[287, 319, "markd … ists."]
-    BulletList[329, 351] isTight
+    BulletList[329, 350] isTight
       BulletListItem[329, 338] open:[329, 330, "-"] isTight
         Paragraph[331, 338]
           Text[331, 337] chars:[331, 337, "item 1"]
-      BulletListItem[342, 351] open:[342, 343, "-"] isTight
-        Paragraph[344, 351]
+      BulletListItem[342, 350] open:[342, 343, "-"] isTight
+        Paragraph[344, 350]
           Text[344, 350] chars:[344, 350, "item 2"]
 ````````````````````````````````
 
@@ -440,14 +440,14 @@ with continuation text. Inline _italic_ and
 .
 <p>This paragraph has a footnote[^<strong>footnote</strong>].</p>
 .
-Document[0, 266]
+Document[0, 265]
   Paragraph[0, 46] isTrailingBlankLine
     Text[0, 29] chars:[0, 29, "This  … tnote"]
     Footnote[29, 44] ordinal: 0  textOpen:[29, 31, "[^"] text:[31, 43, "**footnote**"] textClose:[43, 44, "]"]
       StrongEmphasis[31, 43] textOpen:[31, 33, "**"] text:[33, 41, "footnote"] textClose:[41, 43, "**"]
         Text[33, 41] chars:[33, 41, "footnote"]
     Text[44, 45] chars:[44, 45, "."]
-  FootnoteBlock[47, 266] ordinal: 0  open:[47, 49] text:[49, 57] close:[57, 59] footnote:[60, 266]
+  FootnoteBlock[47, 265] ordinal: 0  open:[47, 49] text:[49, 57] close:[57, 59] footnote:[60, 265]
     Paragraph[60, 149] isTrailingBlankLine
       Text[60, 93] chars:[60, 93, "This  … note."]
       SoftLineBreak[93, 94]
@@ -463,12 +463,12 @@ Document[0, 266]
       Text[154, 196] chars:[154, 196, "Multi … other"]
       SoftLineBreak[197, 198]
       Text[202, 234] chars:[202, 234, "markd … ists."]
-    BulletList[244, 266] isTight
+    BulletList[244, 265] isTight
       BulletListItem[244, 253] open:[244, 245, "-"] isTight
         Paragraph[246, 253]
           Text[246, 252] chars:[246, 252, "item 1"]
-      BulletListItem[257, 266] open:[257, 258, "-"] isTight
-        Paragraph[259, 266]
+      BulletListItem[257, 265] open:[257, 258, "-"] isTight
+        Paragraph[259, 265]
           Text[259, 265] chars:[259, 265, "item 2"]
 ````````````````````````````````
 
@@ -517,7 +517,7 @@ with continuation text. Inline _italic_ and
   </ol>
 </div>
 .
-Document[0, 377]
+Document[0, 376]
   Paragraph[0, 61] isTrailingBlankLine
     Text[0, 29] chars:[0, 29, "This  … tnote"]
     Footnote[29, 33] ordinal: 1  textOpen:[29, 31, "[^"] text:[31, 32, "2"] textClose:[32, 33, "]"]
@@ -538,7 +538,7 @@ Document[0, 377]
       StrongEmphasis[154, 162] textOpen:[154, 156, "**"] text:[156, 160, "bold"] textClose:[160, 162, "**"]
         Text[156, 160] chars:[156, 160, "bold"]
       Text[162, 163] chars:[162, 163, "."]
-  FootnoteBlock[165, 377] ordinal: 1  open:[165, 167] text:[167, 168] close:[168, 170] footnote:[171, 377]
+  FootnoteBlock[165, 376] ordinal: 1  open:[165, 167] text:[167, 168] close:[168, 170] footnote:[171, 376]
     Paragraph[171, 260] isTrailingBlankLine
       Text[171, 204] chars:[171, 204, "This  … note."]
       SoftLineBreak[204, 205]
@@ -554,12 +554,12 @@ Document[0, 377]
       Text[265, 307] chars:[265, 307, "Multi … other"]
       SoftLineBreak[308, 309]
       Text[313, 345] chars:[313, 345, "markd … ists."]
-    BulletList[355, 377] isTight
+    BulletList[355, 376] isTight
       BulletListItem[355, 364] open:[355, 356, "-"] isTight
         Paragraph[357, 364]
           Text[357, 363] chars:[357, 363, "item 1"]
-      BulletListItem[368, 377] open:[368, 369, "-"] isTight
-        Paragraph[370, 377]
+      BulletListItem[368, 376] open:[368, 369, "-"] isTight
+        Paragraph[370, 376]
           Text[370, 376] chars:[370, 376, "item 2"]
 ````````````````````````````````
 
@@ -608,13 +608,13 @@ with continuation text. Inline _italic_ and
   </ol>
 </div>
 .
-Document[0, 385]
+Document[0, 384]
   Paragraph[0, 37] isTrailingBlankLine
     Text[0, 29] chars:[0, 29, "This  … tnote"]
     Footnote[29, 33] ordinal: 1  textOpen:[29, 31, "[^"] text:[31, 32, "2"] textClose:[32, 33, "]"]
       Text[31, 32] chars:[31, 32, "2"]
     Text[33, 34] chars:[33, 34, "."]
-  FootnoteBlock[38, 385] ordinal: 1  open:[38, 40] text:[40, 41] close:[41, 43] footnote:[44, 385]
+  FootnoteBlock[38, 384] ordinal: 1  open:[38, 40] text:[40, 41] close:[41, 43] footnote:[44, 384]
     Paragraph[44, 133] isTrailingBlankLine
       Text[44, 77] chars:[44, 77, "This  … note."]
       SoftLineBreak[77, 78]
@@ -640,8 +640,8 @@ Document[0, 385]
       BulletListItem[259, 268] open:[259, 260, "-"] isTight hadBlankLineAfter
         Paragraph[261, 268] isTrailingBlankLine
           Text[261, 267] chars:[261, 267, "item 2"]
-    FootnoteBlock[277, 385] ordinal: 2  open:[277, 279] text:[279, 280] close:[280, 282] footnote:[283, 385]
-      Paragraph[283, 385]
+    FootnoteBlock[277, 384] ordinal: 2  open:[277, 279] text:[279, 280] close:[280, 282] footnote:[283, 384]
+      Paragraph[283, 384]
         Text[283, 321] chars:[283, 321, "This  … note."]
         SoftLineBreak[321, 322]
         Text[326, 357] chars:[326, 357, "with  … line "]
@@ -834,20 +834,20 @@ This paragraph has a footnote[^2].
   </ol>
 </div>
 .
-Document[0, 206]
+Document[0, 205]
   Paragraph[0, 37] isTrailingBlankLine
     Text[0, 29] chars:[0, 29, "This  … tnote"]
     Footnote[29, 33] ordinal: 1  textOpen:[29, 31, "[^"] text:[31, 32, "2"] textClose:[32, 33, "]"]
       Text[31, 32] chars:[31, 32, "2"]
     Text[33, 34] chars:[33, 34, "."]
-  FootnoteBlock[38, 206] ordinal: 1  open:[38, 40] text:[40, 41] close:[41, 43] footnote:[44, 206]
+  FootnoteBlock[38, 205] ordinal: 1  open:[38, 40] text:[40, 41] close:[41, 43] footnote:[44, 205]
     Paragraph[44, 78] isTrailingBlankLine
       Text[44, 77] chars:[44, 77, "This  … note."]
     Paragraph[85, 119] isTrailingBlankLine
       Text[85, 118] chars:[85, 118, "Anoth … tnote"]
     Paragraph[130, 163] isTrailingBlankLine
       Text[130, 162] chars:[130, 162, "Also  … tnote"]
-    IndentedCodeBlock[176, 206]
+    IndentedCodeBlock[176, 205]
 ````````````````````````````````
 
 
@@ -950,7 +950,7 @@ Incorrect: amazon[^2]⏎
   </ol>
 </div>
 .
-Document[0, 85]
+Document[0, 84]
   Paragraph[0, 23] isTrailingBlankLine
     Text[0, 17] chars:[0, 17, "Incor … mazon"]
     Footnote[17, 21] ordinal: 1  textOpen:[17, 19, "[^"] text:[19, 20, "2"] textClose:[20, 21, "]"]
@@ -958,8 +958,8 @@ Document[0, 85]
   FootnoteBlock[24, 54] ordinal: 0  open:[24, 26] text:[26, 27] close:[27, 29] footnote:[30, 54]
     Paragraph[30, 54] isTrailingBlankLine
       Text[30, 52] chars:[30, 52, "http: … .com/"]
-  FootnoteBlock[56, 85] ordinal: 1  open:[56, 58] text:[58, 59] close:[59, 61] footnote:[62, 85]
-    Paragraph[62, 85]
+  FootnoteBlock[56, 84] ordinal: 1  open:[56, 58] text:[58, 59] close:[59, 61] footnote:[62, 84]
+    Paragraph[62, 84]
       Text[62, 84] chars:[62, 84, "http: … .com/"]
 ````````````````````````````````
 
@@ -982,7 +982,7 @@ Incorrect: amazon[^2]
   </ol>
 </div>
 .
-Document[0, 82]
+Document[0, 81]
   Paragraph[0, 22] isTrailingBlankLine
     Text[0, 17] chars:[0, 17, "Incor … mazon"]
     Footnote[17, 21] ordinal: 1  textOpen:[17, 19, "[^"] text:[19, 20, "2"] textClose:[20, 21, "]"]
@@ -990,8 +990,8 @@ Document[0, 82]
   FootnoteBlock[23, 52] ordinal: 0  open:[23, 25] text:[25, 26] close:[26, 28] footnote:[29, 52]
     Paragraph[29, 52] isTrailingBlankLine
       Text[29, 51] chars:[29, 51, "http: … .com/"]
-  FootnoteBlock[53, 82] ordinal: 1  open:[53, 55] text:[55, 56] close:[56, 58] footnote:[59, 82]
-    Paragraph[59, 82]
+  FootnoteBlock[53, 81] ordinal: 1  open:[53, 55] text:[55, 56] close:[56, 58] footnote:[59, 81]
+    Paragraph[59, 81]
       Text[59, 81] chars:[59, 81, "http: … .com/"]
 ````````````````````````````````
 
@@ -1020,7 +1020,7 @@ reference[^id]
   </ol>
 </div>
 .
-Document[0, 75]
+Document[0, 74]
   Paragraph[0, 36] isTrailingBlankLine
     Text[0, 29] chars:[0, 29, "Dupli … rence"]
     Footnote[29, 34] ordinal: 1  textOpen:[29, 31, "[^"] text:[31, 33, "id"] textClose:[33, 34, "]"]
@@ -1030,8 +1030,8 @@ Document[0, 75]
     Text[37, 46] chars:[37, 46, "reference"]
     Footnote[46, 51] ordinal: 1  textOpen:[46, 48, "[^"] text:[48, 50, "id"] textClose:[50, 51, "]"]
       Text[48, 50] chars:[48, 50, "id"]
-  FootnoteBlock[53, 75] ordinal: 1  open:[53, 55] text:[55, 57] close:[57, 59] footnote:[60, 75]
-    Paragraph[60, 75]
+  FootnoteBlock[53, 74] ordinal: 1  open:[53, 55] text:[55, 57] close:[57, 59] footnote:[60, 74]
+    Paragraph[60, 74]
       Text[60, 74] chars:[60, 74, "Footn … text."]
 ````````````````````````````````
 

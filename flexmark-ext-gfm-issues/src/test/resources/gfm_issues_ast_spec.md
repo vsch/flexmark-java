@@ -19,8 +19,8 @@ abc #123abc xyz
 .
 <p>abc #123abc xyz</p>
 .
-Document[0, 16]
-  Paragraph[0, 16]
+Document[0, 15]
+  Paragraph[0, 15]
     Text[0, 15] chars:[0, 15, "abc # … c xyz"]
 ````````````````````````````````
 
@@ -30,8 +30,8 @@ abc #123-4 xyz
 .
 <p>abc <a href="issues/123">#123</a>-4 xyz</p>
 .
-Document[0, 15]
-  Paragraph[0, 15]
+Document[0, 14]
+  Paragraph[0, 14]
     Text[0, 4] chars:[0, 4, "abc "]
     GfmIssue[4, 8] textOpen:[4, 5, "#"] text:[5, 8, "123"]
     Text[8, 14] chars:[8, 14, "-4 xyz"]
@@ -43,8 +43,8 @@ abc #123
 .
 <p>abc <a href="issues/123">#123</a></p>
 .
-Document[0, 9]
-  Paragraph[0, 9]
+Document[0, 8]
+  Paragraph[0, 8]
     Text[0, 4] chars:[0, 4, "abc "]
     GfmIssue[4, 8] textOpen:[4, 5, "#"] text:[5, 8, "123"]
 ````````````````````````````````
@@ -97,8 +97,8 @@ abc #123 xyz
 .
 <p>abc <a href="issues/123">#123</a> xyz</p>
 .
-Document[0, 13]
-  Paragraph[0, 13]
+Document[0, 12]
+  Paragraph[0, 12]
     Text[0, 4] chars:[0, 4, "abc "]
     GfmIssue[4, 8] textOpen:[4, 5, "#"] text:[5, 8, "123"]
     Text[8, 12] chars:[8, 12, " xyz"]
@@ -112,8 +112,8 @@ xyz
 <p>abc <a href="issues/123">#123</a>
 xyz</p>
 .
-Document[0, 13]
-  Paragraph[0, 13]
+Document[0, 12]
+  Paragraph[0, 12]
     Text[0, 4] chars:[0, 4, "abc "]
     GfmIssue[4, 8] textOpen:[4, 5, "#"] text:[5, 8, "123"]
     SoftLineBreak[8, 9]

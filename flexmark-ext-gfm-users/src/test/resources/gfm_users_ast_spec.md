@@ -20,8 +20,8 @@ abc @abcdef1.asdasdf xyz
 .
 <p>abc <a href="https://github.com/abcdef1"><strong>@abcdef1</strong></a>.asdasdf xyz</p>
 .
-Document[0, 25]
-  Paragraph[0, 25]
+Document[0, 24]
+  Paragraph[0, 24]
     Text[0, 4] chars:[0, 4, "abc "]
     GfmUser[4, 12] textOpen:[4, 5, "@"] text:[5, 12, "abcdef1"]
     Text[12, 24] chars:[12, 24, ".asda … f xyz"]
@@ -35,8 +35,8 @@ abc test@test.com
 .
 <p>abc test@test.com</p>
 .
-Document[0, 18]
-  Paragraph[0, 18]
+Document[0, 17]
+  Paragraph[0, 17]
     Text[0, 17] chars:[0, 17, "abc t … t.com"]
 ````````````````````````````````
 
@@ -46,8 +46,8 @@ abc_test@test.com
 .
 <p>abc_test@test.com</p>
 .
-Document[0, 18]
-  Paragraph[0, 18]
+Document[0, 17]
+  Paragraph[0, 17]
     Text[0, 17] chars:[0, 17, "abc_t … t.com"]
 ````````````````````````````````
 
@@ -59,8 +59,8 @@ abc @1234567890123456789012345678901234567890
 .
 <p>abc @1234567890123456789012345678901234567890</p>
 .
-Document[0, 46]
-  Paragraph[0, 46]
+Document[0, 45]
+  Paragraph[0, 45]
     Text[0, 45] chars:[0, 45, "abc @ … 67890"]
 ````````````````````````````````
 
@@ -72,8 +72,8 @@ abc @123456789012345678901234567890123456789
 .
 <p>abc <a href="https://github.com/123456789012345678901234567890123456789"><strong>@123456789012345678901234567890123456789</strong></a></p>
 .
-Document[0, 45]
-  Paragraph[0, 45]
+Document[0, 44]
+  Paragraph[0, 44]
     Text[0, 4] chars:[0, 4, "abc "]
     GfmUser[4, 44] textOpen:[4, 5, "@"] text:[5, 44, "123456789012345678901234567890123456789"]
 ````````````````````````````````
@@ -84,8 +84,8 @@ abc @123-4 xyz
 .
 <p>abc <a href="https://github.com/123-4"><strong>@123-4</strong></a> xyz</p>
 .
-Document[0, 15]
-  Paragraph[0, 15]
+Document[0, 14]
+  Paragraph[0, 14]
     Text[0, 4] chars:[0, 4, "abc "]
     GfmUser[4, 10] textOpen:[4, 5, "@"] text:[5, 10, "123-4"]
     Text[10, 14] chars:[10, 14, " xyz"]
@@ -97,8 +97,8 @@ abc @123
 .
 <p>abc <a href="https://github.com/123"><strong>@123</strong></a></p>
 .
-Document[0, 9]
-  Paragraph[0, 9]
+Document[0, 8]
+  Paragraph[0, 8]
     Text[0, 4] chars:[0, 4, "abc "]
     GfmUser[4, 8] textOpen:[4, 5, "@"] text:[5, 8, "123"]
 ````````````````````````````````
@@ -151,8 +151,8 @@ abc @123 xyz
 .
 <p>abc <a href="https://github.com/123"><strong>@123</strong></a> xyz</p>
 .
-Document[0, 13]
-  Paragraph[0, 13]
+Document[0, 12]
+  Paragraph[0, 12]
     Text[0, 4] chars:[0, 4, "abc "]
     GfmUser[4, 8] textOpen:[4, 5, "@"] text:[5, 8, "123"]
     Text[8, 12] chars:[8, 12, " xyz"]
@@ -166,8 +166,8 @@ xyz
 <p>abc <a href="https://github.com/123"><strong>@123</strong></a>
 xyz</p>
 .
-Document[0, 13]
-  Paragraph[0, 13]
+Document[0, 12]
+  Paragraph[0, 12]
     Text[0, 4] chars:[0, 4, "abc "]
     GfmUser[4, 8] textOpen:[4, 5, "@"] text:[5, 8, "123"]
     SoftLineBreak[8, 9]
