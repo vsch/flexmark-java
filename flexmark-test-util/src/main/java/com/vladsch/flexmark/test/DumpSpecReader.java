@@ -74,6 +74,7 @@ public class DumpSpecReader extends SpecReader {
 
         // allow other formats to accumulate
         testCase.addSpecExample(example, exampleRenderer, options, ignoredTestCase, html, ast);
+        exampleRenderer.finalizeRender();
 
         if (embedTimed) {
             sb.append(timingInfo);

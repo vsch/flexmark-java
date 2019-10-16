@@ -15,14 +15,14 @@ import java.io.IOException;
 import java.io.Reader;
 
 public abstract class IParseBase implements IParse {
-    private final MutableDataSet myOptions;
+    private final DataHolder myOptions;
 
     public IParseBase() {
         this(null);
     }
 
     public IParseBase(DataHolder options) {
-        myOptions = options != null ? new MutableDataSet(options) : new MutableDataSet();
+        myOptions = options;
     }
 
     @Override
@@ -58,7 +58,7 @@ public abstract class IParseBase implements IParse {
     }
 
     @Nullable
-    public MutableDataSet getOptions() {
+    public DataHolder getOptions() {
         return myOptions;
     }
 }

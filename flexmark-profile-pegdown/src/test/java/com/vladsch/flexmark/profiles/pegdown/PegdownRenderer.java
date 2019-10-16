@@ -26,7 +26,7 @@ class PegdownRenderer extends IRenderBase {
     }
 
     @Override
-    public void render(Node node, @NotNull Appendable output) {
+    public void render(@NotNull Node node, @NotNull Appendable output) {
         assert node instanceof PegdownParser.PegdownRootNode;
 
         RootNode rootNode = ((PegdownParser.PegdownRootNode) node).myRootNode;

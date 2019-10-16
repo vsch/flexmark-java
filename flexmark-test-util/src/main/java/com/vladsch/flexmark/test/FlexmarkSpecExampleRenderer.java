@@ -98,4 +98,9 @@ public class FlexmarkSpecExampleRenderer extends SpecExampleRendererBase {
         }
         return myRenderedAst;
     }
+
+    @Override
+    public void finalizeRender() {
+
+    }
 }

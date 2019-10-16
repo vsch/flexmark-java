@@ -3,11 +3,9 @@ package com.vladsch.flexmark.util.data;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.function.Consumer;
 
 public class DataSet implements DataHolder {
     protected final HashMap<DataKey<?>, Object> dataSet;
-    protected int consumerCount;
 
     public DataSet() {
         this(null);
@@ -15,40 +13,18 @@ public class DataSet implements DataHolder {
 
     public DataSet(DataHolder other) {
         dataSet = other == null ? new HashMap<>() : new HashMap<>(other.getAll());
-        consumerCount = other == null ? 0 : other.getConsumerDataKeys();
-    }
-
-    public int getConsumerDataKeys() {
-        return consumerCount;
     }
 
     public DataSet(DataHolder other, DataHolder overrides) {
         if (other == null && overrides == null) {
             dataSet = new HashMap<>();
-            consumerCount = 0;
         } else if (other == null) {
             dataSet = new HashMap<>(overrides.getAll());
-            consumerCount = overrides.getConsumerDataKeys();
         } else if (overrides == null) {
             dataSet = new HashMap<>(other.getAll());
-            consumerCount = other.getConsumerDataKeys();
         } else {
             dataSet = new HashMap<>(other.getAll());
-            consumerCount = other.getConsumerDataKeys();
             dataSet.putAll(overrides.getAll());
-
-            if (consumerCount == 0) {
-                consumerCount = overrides.getConsumerDataKeys();
-            } else if (overrides.getConsumerDataKeys() > 0) {
-                // need to scan to see if they overlap, if not increment consumer count
-                for (DataKey<?> dataKey : overrides.getKeys()) {
-                    if (dataKey.getDefaultValue(null) instanceof Consumer<?>) {
-                        if (!other.contains(dataKey)) {
-                            consumerCount++;
-                        }
-                    }
-                }
-            }
         }
     }
 
@@ -78,11 +54,15 @@ public class DataSet implements DataHolder {
     }
 
     public static DataSet merge(DataHolder... dataHolders) {
-        return MutableDataSet.merge(dataHolders).toImmutable();
+        DataSet dataSet = new DataSet();
+        for (DataHolder dataHolder : dataHolders) {
+            if (dataHolder != null) dataSet.dataSet.putAll(dataHolder.getAll());
+        }
+        return dataSet;
     }
 
     @Override
-    public MutableDataSet toMutable() {
+    public MutableDataHolder toMutable() {
         return new MutableDataSet(this);
     }
 

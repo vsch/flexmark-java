@@ -15,6 +15,10 @@ public interface SpecExampleRenderer {
     // after all parsing is complete gives a chance to handle insertion of included doc
     void finalizeDocument();
 
+    // after all rendering information is collected, give chance to release resources and reset test settings needed for renderHtml or other functions.
+    // after this there will be no more calls to renderer for this iteration
+    void finalizeRender();
+
     // caches values and does not regenerate
     @NotNull String renderHtml();
     @Nullable String getAst();
@@ -53,6 +57,11 @@ public interface SpecExampleRenderer {
         @Override
         public @Nullable String getAst() {
             return null;
+        }
+
+        @Override
+        public void finalizeRender() {
+
         }
     };
 }

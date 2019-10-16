@@ -289,7 +289,7 @@ public class DocxRenderer implements IRender {
      * @return the rendered HTML
      */
     @org.jetbrains.annotations.NotNull
-    public String render(Node document) {
+    public String render(@NotNull Node document) {
         String resourcePath = DEFAULT_TEMPLATE_RESOURCE.getFrom(getOptions());
         WordprocessingMLPackage mlPackage = getDefaultTemplate(resourcePath);
         render(document, mlPackage);
@@ -308,7 +308,7 @@ public class DocxRenderer implements IRender {
     }
 
     @Override
-    public void render(Node node, @NotNull Appendable output) {
+    public void render(@NotNull Node node, @NotNull Appendable output) {
         String docx = render(node);
         try {
             output.append(docx);

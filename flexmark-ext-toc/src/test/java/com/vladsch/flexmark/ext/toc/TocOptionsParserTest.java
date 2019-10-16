@@ -39,8 +39,8 @@ public class TocOptionsParserTest extends ComboSpecTestCase {
             //.set(Parser.EXTENSIONS, Collections.singletonList(SimTocExtension.create()))
             ;
 
-    private static DataKey<TocOptions> TOC_OPTIONS = new DataKey<>("TOC_OPTIONS", TocOptions.DEFAULT);
-    private static DataKey<Boolean> SIM_TOC = new DataKey<>("SIM_TOC", false);
+    static DataKey<TocOptions> TOC_OPTIONS = new DataKey<>("TOC_OPTIONS", TocOptions.DEFAULT);
+    static DataKey<Boolean> SIM_TOC = new DataKey<>("SIM_TOC", false);
 
     private static final Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
@@ -149,7 +149,7 @@ public class TocOptionsParserTest extends ComboSpecTestCase {
             BasedSequence[] lines = input.split('\n');
             ParserNode example = new ParserNode("Example", input, null, null);
             for (BasedSequence line : lines) {
-                Pair<TocOptions, List<ParsedOption<TocOptions>>> pair = myParser.parseOption(line, getOptions().get(TOC_OPTIONS), null);
+                Pair<TocOptions, List<ParsedOption<TocOptions>>> pair = myParser.parseOption(line, TOC_OPTIONS.getFrom(getOptions()), null);
                 ParserNode root = new ParserNode("Style", line, null, null);
                 root.setTocOptions(pair.getFirst());
                 example.appendChild(root);
@@ -203,14 +203,14 @@ public class TocOptionsParserTest extends ComboSpecTestCase {
 
             @Override
             public void visit(ParserNode node) {
-                ParserNode parserNode = (ParserNode) node;
+                ParserNode parserNode = node;
                 TocOptions nodeTocOptions = parserNode.getTocOptions();
                 if (nodeTocOptions != null) {
                     html.raw("'").raw(parserNode.getChars().toString()).raw("' => ");
                     html.raw(nodeTocOptions.toString()).line();
                     html.indent();
 
-                    if (getOptions().get(SIM_TOC)) {
+                    if (SIM_TOC.getFrom(getOptions())) {
                         html.raw("diff: ").raw(TocUtils.getSimTocPrefix(nodeTocOptions, defaultOptions)).line();
                         html.raw("full: ").raw(TocUtils.getSimTocPrefix(nodeTocOptions, null)).line();
                     } else {
@@ -231,9 +231,9 @@ public class TocOptionsParserTest extends ComboSpecTestCase {
         }
 
         @Override
-        public void render(Node node, @NotNull Appendable output) {
+        public void render(@NotNull Node node, @NotNull Appendable output) {
             assert node instanceof ParserNode;
-            TocOptions tocOptions = getOptions().get(TOC_OPTIONS);
+            TocOptions tocOptions = TOC_OPTIONS.getFrom(getOptions());
             HtmlWriter html = new HtmlWriter(2, 0);
             RenderingVisitor visitor = new RenderingVisitor(html, tocOptions);
             visitor.render(node);

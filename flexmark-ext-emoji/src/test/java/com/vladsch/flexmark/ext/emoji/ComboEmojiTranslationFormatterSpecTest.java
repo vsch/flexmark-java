@@ -99,7 +99,7 @@ public class ComboEmojiTranslationFormatterSpecTest extends ComboSpecTestCase {
         }
 
         @Override
-        public void render(Node node, @NotNull Appendable output) {
+        public void render(@NotNull Node node, @NotNull Appendable output) {
             TranslationHandler handler = myFormatter.getTranslationHandler(new HeaderIdGenerator.Factory());
             String formattedOutput = myFormatter.translationRender(node, handler, RenderPurpose.TRANSLATION_SPANS);
 
@@ -163,7 +163,7 @@ public class ComboEmojiTranslationFormatterSpecTest extends ComboSpecTestCase {
 
         @org.jetbrains.annotations.NotNull
         @Override
-        public String render(Node document) {
+        public String render(@NotNull Node document) {
             StringBuilder sb = new StringBuilder();
             render(document, sb);
             return sb.toString();

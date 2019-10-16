@@ -92,4 +92,8 @@ public class SpecExampleParse {
         myRenderer.finalizeDocument();
         return mySource;
     }
+
+    public void finalizeRender() {
+        myRenderer.finalizeRender();
+    }
 }

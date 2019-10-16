@@ -228,7 +228,7 @@ public class Formatter implements IRender {
      * Render a node to the appendable
      *  @param node   node to render
      * @param output appendable to use for the output*/
-    public void render(Node node, @NotNull Appendable output) {
+    public void render(@NotNull Node node, @NotNull Appendable output) {
         MainNodeFormatter renderer = new MainNodeFormatter(options, new MarkdownWriter(formatterOptions.formatFlags), node.getDocument(), null);
         renderer.render(node);
         renderer.flushTo(output, formatterOptions.maxTrailingBlankLines);
@@ -253,7 +253,7 @@ public class Formatter implements IRender {
      * @return the formatted markdown
      */
     @org.jetbrains.annotations.NotNull
-    public String render(Node document) {
+    public String render(@NotNull Node document) {
         StringBuilder sb = new StringBuilder();
         render(document, sb);
         return sb.toString();

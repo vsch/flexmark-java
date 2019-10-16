@@ -76,6 +76,7 @@ public abstract class RenderingTestCase implements SpecExampleProcessor {
         }
 
         testCase(exampleRenderer, options);
+        exampleRenderer.finalizeRender();
 
         String expected;
         String actual;

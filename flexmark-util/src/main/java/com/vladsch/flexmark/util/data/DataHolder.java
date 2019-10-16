@@ -8,12 +8,6 @@ public interface DataHolder {
     Collection<DataKey<?>> getKeys();
 
     /**
-     * optimization, returns number of its keys which have Consumer data type
-     * @return count of consumer data keys
-     */
-    int getConsumerDataKeys();
-
-    /**
      * @return collection of keys
      * @deprecated use {@link #getKeys()}
      */

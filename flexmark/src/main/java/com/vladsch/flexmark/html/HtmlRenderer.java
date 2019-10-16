@@ -187,7 +187,7 @@ public class HtmlRenderer implements IRender {
      * Render a node to the appendable
      *  @param node   node to render
      * @param output appendable to use for the output*/
-    public void render(Node node, @NotNull Appendable output) {
+    public void render(@NotNull Node node, @NotNull Appendable output) {
         MainNodeRenderer renderer = new MainNodeRenderer(options, new HtmlWriter(htmlOptions.indentSize, htmlOptions.formatFlags, !htmlOptions.htmlBlockOpenTagEol, !htmlOptions.htmlBlockCloseTagEol), node.getDocument());
         renderer.render(node);
         renderer.flushTo(output, htmlOptions.maxTrailingBlankLines);
@@ -214,7 +214,7 @@ public class HtmlRenderer implements IRender {
      * @return the rendered HTML
      */
     @NotNull
-    public String render(Node document) {
+    public String render(@NotNull Node document) {
         StringBuilder sb = new StringBuilder();
         render(document, sb);
         return sb.toString();

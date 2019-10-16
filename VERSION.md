@@ -189,6 +189,8 @@ flexmark-java
 
 ### Next 0.5.9.5
 
+* Add: `SpecExampleRenderer.finalizeRender()` to allow tests and others to clean up after each
+  rendering
 * Add: ability to combine data sets with `DataKey<Consumer<?>>` keys in a custom way. Needed if
   some settings do not contain a single value but multiple values that are set with a consumer
   setting some values in a structure. In such cases overwriting of these values may not be

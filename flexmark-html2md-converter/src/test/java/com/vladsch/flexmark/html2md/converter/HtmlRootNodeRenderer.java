@@ -22,7 +22,7 @@ class HtmlRootNodeRenderer extends IRenderBase {
     }
 
     @Override
-    public void render(Node node, @NotNull Appendable output) {
+    public void render(@NotNull Node node, @NotNull Appendable output) {
         assert node instanceof HtmlConverter.RootNode;
         String text = ((HtmlConverter.RootNode) node).myRootNode;
         try {

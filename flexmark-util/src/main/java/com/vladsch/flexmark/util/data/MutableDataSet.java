@@ -1,8 +1,5 @@
 package com.vladsch.flexmark.util.data;
 
-import java.util.HashMap;
-import java.util.function.Consumer;
-
 public class MutableDataSet extends DataSet implements MutableDataHolder {
     public MutableDataSet() {
         super();
@@ -18,9 +15,6 @@ public class MutableDataSet extends DataSet implements MutableDataHolder {
 
     @Override
     public <T> MutableDataSet set(DataKey<? extends T> key, T value) {
-        if (key.getDefaultValue(null) instanceof Consumer<?> && !dataSet.containsKey(key)) {
-            consumerCount++;
-        }
         dataSet.put(key, value);
         return this;
     }
@@ -51,10 +45,7 @@ public class MutableDataSet extends DataSet implements MutableDataHolder {
 
     @Override
     public <T> MutableDataSet remove(DataKey<T> key) {
-        Object remove = dataSet.remove(key);
-        if (remove != null && key.getDefaultValue(null) instanceof Consumer<?>) {
-            consumerCount--;
-        }
+        dataSet.remove(key);
         return this;
     }
 
@@ -66,10 +57,6 @@ public class MutableDataSet extends DataSet implements MutableDataHolder {
         } else {
             T newValue = key.getDefaultValue(this);
             dataSet.put(key, newValue);
-
-            if (newValue instanceof Consumer<?>) {
-                consumerCount++;
-            }
             return newValue;
         }
     }
@@ -77,9 +64,7 @@ public class MutableDataSet extends DataSet implements MutableDataHolder {
     public static MutableDataSet merge(DataHolder... dataHolders) {
         MutableDataSet dataSet = new MutableDataSet();
         for (DataHolder dataHolder : dataHolders) {
-            if (dataHolder != null) {
-                dataSet.setAll(dataHolder);
-            }
+            if (dataHolder != null) dataSet.dataSet.putAll(dataHolder.getAll());
         }
         return dataSet;
     }
@@ -90,14 +75,13 @@ public class MutableDataSet extends DataSet implements MutableDataHolder {
     }
 
     @Override
-    public DataSet toImmutable() {
+    public DataHolder toImmutable() {
         return new DataSet(this);
     }
 
     @Override
     public MutableDataHolder clear() {
         dataSet.clear();
-        consumerCount = 0;
         return this;
     }
 }

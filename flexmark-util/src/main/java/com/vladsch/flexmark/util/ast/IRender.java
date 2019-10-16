@@ -8,7 +8,7 @@ import org.jetbrains.annotations.Nullable;
  * Render interface for rendering implementation for RenderingTestCase
  */
 public interface IRender {
-    public void render(Node node, @NotNull Appendable output);
+    public void render(@NotNull Node node, @NotNull Appendable output);
 
     /**
      * Render the tree of nodes to HTML.
@@ -17,7 +17,7 @@ public interface IRender {
      * @return the rendered HTML
      */
     @NotNull
-    default String render(Node document) {
+    default String render(@NotNull Node document) {
         StringBuilder sb = new StringBuilder();
         render(document, sb);
         return sb.toString();
