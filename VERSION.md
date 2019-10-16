@@ -187,16 +187,22 @@ flexmark-java
       test.
 * [ ] Add: yaml front matter configurator for modules. See:
       [Yaml Front Matter Configuration](../../wiki/Yaml-Front-Matter-Configuration)
+* Fix: regression bug [#372, \[Regression?\] Attributes extension not applied to \`code\` tag of code blocks]
+  * Add: `AttributesExtension.FENCED_CODE_ADD_ATTRIBUTES`, default
+    `FencedCodeAddType.ADD_TO_PRE_CODE` for backward compatibility with 0.42, but if this is
+    option is not set and `AttributesExtension.FENCED_CODE_INFO_ATTRIBUTES` is set to `true`,
+    default will change to `FencedCodeAddType.ADD_TO_PRE` since attributes after info are used
+    to add to the `code` tag.
 
 ### 0.5.9.7
 
 * Add: `SpecExampleRenderer.finalizeRender()` to allow tests and others to clean up after each
   rendering
 * Add: ability to combine data sets with `DataKey<Consumer<?>>` keys in a custom way. Needed if
-  some settings do not contain a single value but multiple values that are set with a consumer
-  setting some values in a structure. In such cases overwriting of these values may not be
-  correct and the consumers need to be chained so the results of the first consumer are passed to
-  the second.
+  some option values do not contain a single value but multiple values that are set with a
+  consumer changing some values in a structure. In such cases overwriting of these values may
+  not be correct and the consumers need to invoked so the results of second consumer get to
+  apply changes to options.
 * Fix: add dual argument constructor to `MutableDataSet`
 
 ### 0.5.9.5
@@ -1803,4 +1809,6 @@ setting either will affect both keys. For information on these keys see
 [NodeInsertingPostProcessorSample.java]: https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/samples/NodeInsertingPostProcessorSample.java
 [PdfLandscapeConverter.java]: https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/samples/PdfLandscapeConverter.java
 [YouTrack: IDEA-207453]: https://youtrack.jetbrains.com/issue/IDEA-207453 "Add Conversion of ref anchor to UrlFilter for file line navigation"
+[#372, \[Regression?\] Attributes extension not applied to \`code\` tag of code blocks]: https://github.com/vsch/flexmark-java/issues/372
+
 

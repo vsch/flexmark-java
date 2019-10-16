@@ -27,6 +27,7 @@ public class AttributesExtension implements Parser.ParserExtension
     public static final DataKey<KeepType> ATTRIBUTES_KEEP = new DataKey<>("ATTRIBUTES_KEEP", KeepType.FIRST); // standard option to allow control over how to handle duplicates
     public static final DataKey<Boolean> ASSIGN_TEXT_ATTRIBUTES = new DataKey<>("ASSIGN_TEXT_ATTRIBUTES", true); // assign attributes to text if previous is not a space
     public static final DataKey<Boolean> FENCED_CODE_INFO_ATTRIBUTES = new DataKey<>("FENCED_CODE_INFO_ATTRIBUTES", false); // assign attributes found at end of fenced code info strings
+    public static final DataKey<FencedCodeAddType> FENCED_CODE_ADD_ATTRIBUTES = new DataKey<>("FENCED_CODE_ADD_ATTRIBUTES", FencedCodeAddType.ADD_TO_PRE_CODE); // assign attributes to pre/code tag
     public static final DataKey<Boolean> WRAP_NON_ATTRIBUTE_TEXT = new DataKey<>("WRAP_NON_ATTRIBUTE_TEXT", true);
     public static final DataKey<Boolean> USE_EMPTY_IMPLICIT_AS_SPAN_DELIMITER = new DataKey<>("USE_EMPTY_IMPLICIT_AS_SPAN_DELIMITER", false);
 
@@ -39,7 +40,10 @@ public class AttributesExtension implements Parser.ParserExtension
 
     @Override
     public void parserOptions(MutableDataHolder options) {
-
+        if (options.contains(FENCED_CODE_INFO_ATTRIBUTES) && options.get(FENCED_CODE_INFO_ATTRIBUTES) && !options.contains(FENCED_CODE_ADD_ATTRIBUTES)) {
+            // change default to pre only, to add to code use attributes after info
+            options.set(FENCED_CODE_ADD_ATTRIBUTES, FencedCodeAddType.ADD_TO_PRE);
+        }
     }
 
     @Override
