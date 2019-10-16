@@ -9,7 +9,8 @@ flexmark-java
 - [Next 0.60.0](#next-0600)
     - [0.5.9.3](#0593)
     - [API Change](#api-change)
-    - [Next 0.5.9.7](#next-0597)
+    - [Next 0.5.9.9](#next-0599)
+    - [0.5.9.7](#0597)
     - [0.5.9.5](#0595)
     - [0.5.9.1](#0591)
 - [Next 0.50.42](#next-05042)
@@ -177,7 +178,7 @@ flexmark-java
     * `com.vladsch.flexmark.util.ast.NodeAdaptingVisitHandler`
     * `com.vladsch.flexmark.util.ast.NodeAdaptingVisitor`
 
-### Next 0.5.9.7
+### Next 0.5.9.9
 
 * [ ] Fix: Change spec example to variable number of sections
 * [ ] Fix: Create base classes for handling spec tests without needing to inherit from
@@ -187,7 +188,7 @@ flexmark-java
 * [ ] Add: yaml front matter configurator for modules. See:
       [Yaml Front Matter Configuration](../../wiki/Yaml-Front-Matter-Configuration)
 
-### 0.5.9.5
+### 0.5.9.7
 
 * Add: `SpecExampleRenderer.finalizeRender()` to allow tests and others to clean up after each
   rendering
@@ -197,6 +198,9 @@ flexmark-java
   correct and the consumers need to be chained so the results of the first consumer are passed to
   the second.
 * Fix: add dual argument constructor to `MutableDataSet`
+
+### 0.5.9.5
+
 * Fix: change `AttributesExtension.FENCED_CODE_INFO_ATTRIBUTES` to default `false` to match
   previous versions.
 
