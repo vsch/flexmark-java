@@ -7,7 +7,6 @@ import org.junit.runners.Suite;
 @Suite.SuiteClasses({
         BoundsIntegrationTest.class,
         SpecIntegrationTest.class,
-        ComboParserTest.class,
 })
 public class IntegrationTestSuite {
 }

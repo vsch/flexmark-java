@@ -21,9 +21,9 @@ public abstract class SpecExampleRendererBase implements SpecExampleRenderer {
 
     public SpecExampleRendererBase(@NotNull SpecExample example, @Nullable DataHolder options, @NotNull IParse parser, @NotNull IRender render, boolean includeExampleInfo) {
         myExample = example;
-        myOptions = new DataSet(options);
-        myParser = parser.withOptions(options);
-        myRender = render.withOptions(options);
+        myOptions = options == null ? new DataSet() : options.toImmutable();
+        myParser = parser;
+        myRender = render;
         myIncludeExampleInfo = includeExampleInfo;
     }
 

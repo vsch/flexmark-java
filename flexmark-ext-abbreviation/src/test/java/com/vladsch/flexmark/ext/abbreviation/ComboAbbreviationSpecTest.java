@@ -49,15 +49,6 @@ public class ComboAbbreviationSpecTest extends ComboSpecTestCase {
                 SuperscriptExtension.create())
         ));
     }
-
-    static final Parser PARSER = Parser.builder(OPTIONS).build();
-    // The spec says URL-escaping is optional, but the examples assume that it's enabled.
-    static final HtmlRenderer RENDERER = HtmlRenderer.builder(OPTIONS).build();
-
-    static DataHolder optionsSet(String optionSet) {
-        return optionsMap.get(optionSet);
-    }
-
     public ComboAbbreviationSpecTest(SpecExample example) {
         super(example);
     }
@@ -69,8 +60,8 @@ public class ComboAbbreviationSpecTest extends ComboSpecTestCase {
 
     @Nullable
     @Override
-    public DataHolder options(String optionSet) {
-        return optionsSet(optionSet);
+    public DataHolder options(String option) {
+        return optionsMap.get(option);
     }
 
     @NotNull
@@ -78,9 +69,10 @@ public class ComboAbbreviationSpecTest extends ComboSpecTestCase {
     public String getSpecResourceName() {
         return SPEC_RESOURCE;
     }
+
     @Override
     public @NotNull SpecExampleRenderer getSpecExampleRenderer(@NotNull SpecExample example, @Nullable DataHolder exampleOptions) {
         DataHolder combinedOptions = combineOptions(OPTIONS, exampleOptions);
-        return new FlexmarkSpecExampleRenderer(example, combinedOptions, PARSER.withOptions(combinedOptions), RENDERER.withOptions(combinedOptions), true);
+        return new FlexmarkSpecExampleRenderer(example, combinedOptions, Parser.builder(combinedOptions).build(), HtmlRenderer.builder(combinedOptions).build(), true);
     }
 }

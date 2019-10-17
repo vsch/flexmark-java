@@ -1,37 +1,27 @@
 package com.vladsch.flexmark.formatter;
 
-import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.ParserEmulationProfile;
 import com.vladsch.flexmark.spec.SpecExample;
-import com.vladsch.flexmark.test.ComboSpecTestCase;
-import com.vladsch.flexmark.test.FlexmarkSpecExampleRenderer;
-import com.vladsch.flexmark.test.SpecExampleRenderer;
 import com.vladsch.flexmark.util.ast.KeepType;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import com.vladsch.flexmark.util.format.options.*;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.junit.runners.Parameterized;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ComboCoreFormatterNoBlankLinesSpecTest extends ComboSpecTestCase {
-    private static final String SPEC_RESOURCE = "/core_formatter_no_blankline_spec.md";
-    private static final DataHolder OPTIONS = new MutableDataSet()
-            //.set(FormattingRenderer.INDENT_SIZE, 2)
-            //.set(HtmlRenderer.PERCENT_ENCODE_URLS, true)
-            //.set(Parser.EXTENSIONS, Collections.singleton(FormatterExtension.create()))
-            .set(Parser.BLANK_LINES_IN_AST, false)
-            .set(Parser.HEADING_NO_ATX_SPACE, true);
+public class ComboCoreTranslationFormatterSpecTest extends ComboCoreTranslationFormatterSpecTestBase {
+    private static final String SPEC_RESOURCE = "/core_translation_formatter_spec.md";
 
     private static final Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
         //optionsMap.put("src-pos", new MutableDataSet().set(HtmlRenderer.SOURCE_POSITION_ATTRIBUTE, "md-pos"));
         //optionsMap.put("option1", new MutableDataSet().set(FormatterExtension.FORMATTER_OPTION1, true));
+        optionsMap.put("details", new MutableDataSet().set(DETAILS, true));
         optionsMap.put("format-fixed-indent", new MutableDataSet().set(Formatter.FORMATTER_EMULATION_PROFILE, ParserEmulationProfile.FIXED_INDENT));
         optionsMap.put("parse-fixed-indent", new MutableDataSet().set(Parser.PARSER_EMULATION_PROFILE, ParserEmulationProfile.FIXED_INDENT));
         optionsMap.put("format-github", new MutableDataSet().set(Formatter.FORMATTER_EMULATION_PROFILE, ParserEmulationProfile.GITHUB_DOC));
@@ -97,31 +87,18 @@ public class ComboCoreFormatterNoBlankLinesSpecTest extends ComboSpecTestCase {
         //optionsMap.put("code-trailing-spaces-keep-none", new MutableDataSet().set(Formatter.CODE_KEEP_TRAILING_SPACES, TrailingSpaces.KEEP_NONE));
     }
 
-    public ComboCoreFormatterNoBlankLinesSpecTest(SpecExample example) {
-        super(example);
+    public ComboCoreTranslationFormatterSpecTest(@NotNull SpecExample example) {
+        super(example, null, optionsMap);
     }
 
     @Parameterized.Parameters(name = "{0}")
     public static List<Object[]> data() {
-        return getTestData( SPEC_RESOURCE);
-    }
-
-    @Nullable
-    @Override
-    public DataHolder options(String option) {
-        return optionsMap.get(option);
+        return getTestData(SPEC_RESOURCE);
     }
 
     @NotNull
     @Override
     public String getSpecResourceName() {
         return SPEC_RESOURCE;
-    }
-
-
-    @Override
-    public @NotNull SpecExampleRenderer getSpecExampleRenderer(@NotNull SpecExample example, @Nullable DataHolder exampleOptions) {
-        DataHolder combinedOptions = combineOptions(OPTIONS, exampleOptions);
-        return new FlexmarkSpecExampleRenderer(example, combinedOptions, Parser.builder(combinedOptions).build(), Formatter.builder(combinedOptions).build(), true);
     }
 }

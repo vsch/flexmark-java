@@ -694,7 +694,7 @@ public class Utils {
         }
     }
 
-    public static String getResourceAsString(String resourcePath, Class clazz) {
+    public static String getResourceAsString(Class<?> clazz, String resourcePath) {
         InputStream stream = clazz.getResourceAsStream(resourcePath);
         StringBuilder sb = new StringBuilder();
         streamAppend(sb, stream);

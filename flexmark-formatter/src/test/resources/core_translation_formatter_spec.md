@@ -1086,7 +1086,7 @@ paARaAGRaAph
 .
 # heEaADiING
 .
-Document[0, 13]
+Document[0, 12]
   Heading[0, 12] textOpen:[0, 1, "#"] text:[1, 8, "Heading"] textClose:[8, 12, "####"]
     Text[1, 8] chars:[1, 8, "Heading"]
 ````````````````````````````````
@@ -1916,7 +1916,11 @@ Handle proper GitHub indented code in list items
 .
 * iIteEm
 
+      indented code
+
   * SuUB-iIteEm
+    
+        indented sub-item code
 ````````````````````````````````
 
 
@@ -1931,7 +1935,11 @@ Handle proper GitHub indented code in list items
 .
 1. iIteEm
 
+      indented code
+
    1. SuUB-iIteEm
+
+          indented sub-item code
 ````````````````````````````````
 
 

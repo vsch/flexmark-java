@@ -23,8 +23,6 @@ public interface IRender {
         return sb.toString();
     }
 
-    @NotNull IRender withOptions(@Nullable DataHolder options);
-
     /**
      * Get Options for parsing
      *

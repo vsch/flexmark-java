@@ -1,5 +1,6 @@
 package com.vladsch.flexmark.formatter;
 
+import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.ParserEmulationProfile;
 import com.vladsch.flexmark.spec.SpecExample;
@@ -98,28 +99,19 @@ public class ComboCoreFormatterSpecTest extends ComboSpecTestCase {
         //optionsMap.put("code-trailing-spaces-keep-none", new MutableDataSet().set(Formatter.CODE_KEEP_TRAILING_SPACES, TrailingSpaces.KEEP_NONE));
     }
 
-    private static final Parser PARSER = Parser.builder(OPTIONS).build();
-    // The spec says URL-escaping is optional, but the examples assume that it's enabled.
-    private static final Formatter RENDERER = Formatter.builder(OPTIONS).build();
-
-    private static DataHolder optionsSet(String optionSet) {
-        if (optionSet == null) return null;
-        return optionsMap.get(optionSet);
-    }
-
     public ComboCoreFormatterSpecTest(SpecExample example) {
         super(example);
     }
 
     @Parameterized.Parameters(name = "{0}")
     public static List<Object[]> data() {
-        return getTestData(SPEC_RESOURCE);
+        return getTestData( SPEC_RESOURCE);
     }
 
     @Nullable
     @Override
-    public DataHolder options(String optionSet) {
-        return optionsSet(optionSet);
+    public DataHolder options(String option) {
+        return optionsMap.get(option);
     }
 
     @NotNull
@@ -132,6 +124,6 @@ public class ComboCoreFormatterSpecTest extends ComboSpecTestCase {
     @Override
     public @NotNull SpecExampleRenderer getSpecExampleRenderer(@NotNull SpecExample example, @Nullable DataHolder exampleOptions) {
         DataHolder combinedOptions = combineOptions(OPTIONS, exampleOptions);
-        return new FlexmarkSpecExampleRenderer(example, combinedOptions, PARSER.withOptions(combinedOptions), RENDERER.withOptions(combinedOptions), true);
+        return new FlexmarkSpecExampleRenderer(example, combinedOptions, Parser.builder(combinedOptions).build(), Formatter.builder(combinedOptions).build(), true);
     }
 }

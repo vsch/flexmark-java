@@ -13,6 +13,8 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.junit.AssumptionViolatedException;
 
+import java.io.File;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.BiFunction;
@@ -41,6 +43,8 @@ public class TestUtils {
     public static final DataKey<String> SOURCE_INDENT = new DataKey<>("SOURCE_INDENT", "");
 
     public static final DataHolder NO_FILE_EOL_FALSE = new MutableDataSet().set(NO_FILE_EOL, false).toImmutable();
+    public static final String DEFAULT_SPEC_RESOURCE = "/spec.txt";
+    public static final String DEFAULT_URL_PREFIX = "fqn://";  // use class fqn with resource path query
 
     /**
      * process comma separated list of option sets and combine them for final set to use
@@ -49,7 +53,6 @@ public class TestUtils {
      * @param optionSets      comma separate list of option set names
      * @param optionsProvider function to take a string option name and provide settings based on it
      * @param optionsCombiner function that combines options, needed in those cases where simple overwrite of key values is not sufficient
-     *
      * @return combined set from applying these options together
      */
     public static DataHolder getOptions(@NotNull SpecExample example, @Nullable String optionSets, @NotNull Function<String, DataHolder> optionsProvider, @Nullable BiFunction<DataHolder, DataHolder, DataHolder> optionsCombiner) {
@@ -226,5 +229,68 @@ public class TestUtils {
     @NotNull
     public static String getFormattedSection(String section, int exampleNumber) {
         return section == null ? "" : section.trim() + ": " + exampleNumber;
+    }
+
+    @NotNull
+    public static String getSpecResourceName(@NotNull String testClassName, @NotNull String specResource) {
+        File specInfo = new File(specResource);
+        File classInfo = new File("/" + testClassName.replace('.', '/'));
+        return !specInfo.isAbsolute() ? new File(classInfo.getPath(), specResource).getPath() : specResource;
+    }
+
+    @NotNull
+    public static String getSpecResourceFileUrl(@NotNull Class<?> resourceClass, @NotNull String specResource, @NotNull String urlPrefix) {
+        String resolvedSpecResource = getSpecResourceName(resourceClass.getName(), specResource);
+        if (urlPrefix.equals(DEFAULT_URL_PREFIX)) {
+//            return DEFAULT_URL_PREFIX + resourceClass.getName().replace('.', '/') + "?" + resolvedSpecResource;
+            URL url = resourceClass.getResource(resolvedSpecResource);
+            return adjustedFileUrl(url);
+        }
+        return urlPrefix + specResource;
+    }
+
+    public static List<Object[]> getTestData(@NotNull Class<?> resourceClass, @NotNull String specResource, @NotNull String urlPrefix) {
+        String resolvedSpecResource = getSpecResourceName(resourceClass.getName(), specResource);
+        String fileUrl = getSpecResourceFileUrl(resourceClass, resolvedSpecResource, urlPrefix);
+        List<SpecExample> examples = SpecReader.readExamples(resourceClass, specResource, null, fileUrl);
+        List<Object[]> data = new ArrayList<>();
+
+        // NULL example runs full spec test
+        data.add(new Object[] { SpecExample.NULL.withFileUrl(fileUrl) });
+
+        for (SpecExample example : examples) {
+            data.add(new Object[] { example });
+        }
+        return data;
+    }
+
+    public static @NotNull String getUrlWithLineNumber(@NotNull String fileUrl, int lineNumber) {
+        return (lineNumber > 0) ? fileUrl + ":" + (lineNumber + 1) : fileUrl;
+    }
+
+    public static final String TARGET_TEST_CLASSES = "/target/test-classes/";
+    public static final String OUT_TEST = "/out/test/";
+    public static final String FILE_PROTOCOL = "file://";
+    public static final String TEST_RESOURCES = "/test/resources/";
+
+    public static String adjustedFileUrl(URL url) {
+        String externalForm = url.toExternalForm();
+        if (externalForm.startsWith("file:/")) {
+            String noFileProtocol = externalForm.substring("file:".length());
+            if (noFileProtocol.contains(TARGET_TEST_CLASSES)) {
+                return noFileProtocol.replace(TARGET_TEST_CLASSES, "/src/test/resources/");
+            } else {
+                int pos = noFileProtocol.indexOf(OUT_TEST);
+                if (pos > 0) {
+                    int pathPos = noFileProtocol.indexOf("/", pos + OUT_TEST.length());
+                    if (pathPos > 0) {
+                        return FILE_PROTOCOL + noFileProtocol.substring(0, pos) + "/" + noFileProtocol.substring(pos + OUT_TEST.length(), pathPos) + "/src/test/resources/" + noFileProtocol.substring(pathPos + 1);
+                    }
+                }
+            }
+            return FILE_PROTOCOL + noFileProtocol;
+        } else {
+            return externalForm;
+        }
     }
 }

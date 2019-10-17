@@ -389,11 +389,6 @@ public class Formatter implements IRender {
         });
     }
 
-    @NotNull
-    public Formatter withOptions(@Nullable DataHolder options) {
-        return options == null ? this : new Formatter(new Builder(builder, options));
-    }
-
     /**
      * Builder for configuring an {@link Formatter}. See methods for default configuration.
      */

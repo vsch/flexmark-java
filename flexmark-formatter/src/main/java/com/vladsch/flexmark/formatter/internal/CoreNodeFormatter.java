@@ -867,8 +867,10 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
 
     private void render(HtmlCommentBlock node, NodeFormatterContext context, MarkdownWriter markdown) {
         // here we need to make it translating, it is a comment
-        BasedSequence text = node.getChars().subSequence(4, node.getChars().length() - 4);
-        markdown.appendTranslating("<!--", text, "-->", node.getChars().trimmedEOL());
+        BasedSequence trimmed = node.getChars().trimEOL();
+        BasedSequence text = trimmed.subSequence(4, trimmed.length() - 3);
+        BasedSequence trimmedEOL = BasedSequence.EOL;
+        markdown.appendTranslating("<!--", text, "-->", trimmedEOL);
         //markdown.append(node.getChars());
     }
 

@@ -20,18 +20,19 @@ public class AutolinkTest extends RenderingTestCase {
             .set(TestUtils.NO_FILE_EOL, false)
             .set(Parser.EXTENSIONS, Collections.singleton(AutolinkExtension.create()))
             .toImmutable();
+
     private static final Parser PARSER = Parser.builder(OPTIONS).build();
     private static final HtmlRenderer RENDERER = HtmlRenderer.builder(OPTIONS).build();
 
     @Override
-    public @Nullable DataHolder options(String optionSet) {
+    public @Nullable DataHolder options(String option) {
         return null;
     }
 
     @NotNull
     @Override
     public SpecExample getExample() {
-        return SpecExample.getNull();
+        return SpecExample.NULL;
     }
 
     @Test
@@ -75,6 +76,6 @@ public class AutolinkTest extends RenderingTestCase {
     @Override
     public @NotNull SpecExampleRenderer getSpecExampleRenderer(@NotNull SpecExample example, @Nullable DataHolder exampleOptions) {
         DataHolder combinedOptions = combineOptions(OPTIONS, exampleOptions);
-        return new FlexmarkSpecExampleRenderer(example, combinedOptions, PARSER.withOptions(combinedOptions), RENDERER.withOptions(combinedOptions), true);
-    }
+        return new FlexmarkSpecExampleRenderer(example, combinedOptions, Parser.builder(combinedOptions).build(), HtmlRenderer.builder(combinedOptions).build(), true);
+}
 }

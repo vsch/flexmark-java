@@ -12,7 +12,10 @@ import com.vladsch.flexmark.test.ComboSpecTestCase;
 import com.vladsch.flexmark.test.FlexmarkSpecExampleRenderer;
 import com.vladsch.flexmark.test.SpecExampleRenderer;
 import com.vladsch.flexmark.util.Pair;
-import com.vladsch.flexmark.util.ast.*;
+import com.vladsch.flexmark.util.ast.IParse;
+import com.vladsch.flexmark.util.ast.Node;
+import com.vladsch.flexmark.util.ast.NodeVisitor;
+import com.vladsch.flexmark.util.ast.VisitHandler;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
@@ -46,14 +49,6 @@ public class TocOptionsParserTest extends ComboSpecTestCase {
     static {
         optionsMap.put("sim-toc", new MutableDataSet().set(SIM_TOC, true));
         //optionsMap.put("text-only", new MutableDataSet().set(SimTocExtension.HEADER_TEXT_ONLY, true));
-    }
-
-    private static final IParse PARSER = new Parser(OPTIONS);
-    private static final IRender RENDERER = new Renderer(OPTIONS);
-
-    private static DataHolder optionsSet(String optionSet) {
-        if (optionSet == null) return null;
-        return optionsMap.get(optionSet);
     }
 
     interface ParserVisitor {
@@ -243,12 +238,6 @@ public class TocOptionsParserTest extends ComboSpecTestCase {
                 e.printStackTrace();
             }
         }
-
-        @NotNull
-        @Override
-        public IRender withOptions(@Nullable DataHolder options) {
-            return new Renderer(options);
-        }
     }
 
     public TocOptionsParserTest(SpecExample example) {
@@ -262,8 +251,8 @@ public class TocOptionsParserTest extends ComboSpecTestCase {
 
     @Nullable
     @Override
-    public DataHolder options(String optionSet) {
-        return optionsSet(optionSet);
+    public DataHolder options(String option) {
+        return optionsMap.get(option);
     }
 
     @NotNull
@@ -272,10 +261,9 @@ public class TocOptionsParserTest extends ComboSpecTestCase {
         return SPEC_RESOURCE;
     }
 
-
     @Override
     public @NotNull SpecExampleRenderer getSpecExampleRenderer(@NotNull SpecExample example, @Nullable DataHolder exampleOptions) {
-        DataHolder combinedOptions = combineOptions(OPTIONS, exampleOptions);
-        return new FlexmarkSpecExampleRenderer(example, combinedOptions, PARSER.withOptions(combinedOptions), RENDERER.withOptions(combinedOptions), true);
+        DataHolder OPTIONS = combineOptions(TocOptionsParserTest.OPTIONS, exampleOptions);
+        return new FlexmarkSpecExampleRenderer(example, OPTIONS, new Parser(OPTIONS), new Renderer(OPTIONS), true);
     }
 }

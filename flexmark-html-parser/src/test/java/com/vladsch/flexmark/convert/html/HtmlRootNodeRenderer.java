@@ -1,11 +1,9 @@
 package com.vladsch.flexmark.convert.html;
 
 import com.vladsch.flexmark.spec.IRenderBase;
-import com.vladsch.flexmark.util.ast.IRender;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 
@@ -30,11 +28,5 @@ class HtmlRootNodeRenderer extends IRenderBase {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    @NotNull
-    @Override
-    public IRender withOptions(@Nullable DataHolder options) {
-        return new HtmlRootNodeRenderer(options);
     }
 }

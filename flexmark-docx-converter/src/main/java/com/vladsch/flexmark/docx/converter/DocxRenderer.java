@@ -318,11 +318,6 @@ public class DocxRenderer implements IRender {
         }
     }
 
-    @NotNull
-    public DocxRenderer withOptions(@Nullable DataHolder options) {
-        return options == null ? this : new DocxRenderer(new Builder(builder, options));
-    }
-
     /**
      * Builder for configuring an {@link DocxRenderer}. See methods for default configuration.
      */

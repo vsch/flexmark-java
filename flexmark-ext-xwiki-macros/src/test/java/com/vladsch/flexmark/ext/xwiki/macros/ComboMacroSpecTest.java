@@ -30,16 +30,6 @@ public class ComboMacroSpecTest extends ComboSpecTestCase {
         optionsMap.put("no-inlines", new MutableDataSet().set(MacroExtension.ENABLE_INLINE_MACROS, false));
         optionsMap.put("no-blocks", new MutableDataSet().set(MacroExtension.ENABLE_BLOCK_MACROS, false));
     }
-
-    private static final Parser PARSER = Parser.builder(OPTIONS).build();
-    // The spec says URL-escaping is optional, but the examples assume that it's enabled.
-    private static final HtmlRenderer RENDERER = HtmlRenderer.builder(OPTIONS).build();
-
-    private static DataHolder optionsSet(String optionSet) {
-        if (optionSet == null) return null;
-        return optionsMap.get(optionSet);
-    }
-
     public ComboMacroSpecTest(SpecExample example) {
         super(example);
     }
@@ -51,8 +41,8 @@ public class ComboMacroSpecTest extends ComboSpecTestCase {
 
     @Nullable
     @Override
-    public DataHolder options(String optionSet) {
-        return optionsSet(optionSet);
+    public DataHolder options(String option) {
+        return optionsMap.get(option);
     }
 
     @NotNull
@@ -61,10 +51,9 @@ public class ComboMacroSpecTest extends ComboSpecTestCase {
         return SPEC_RESOURCE;
     }
 
-
     @Override
     public @NotNull SpecExampleRenderer getSpecExampleRenderer(@NotNull SpecExample example, @Nullable DataHolder exampleOptions) {
         DataHolder combinedOptions = combineOptions(OPTIONS, exampleOptions);
-        return new FlexmarkSpecExampleRenderer(example, combinedOptions, PARSER.withOptions(combinedOptions), RENDERER.withOptions(combinedOptions), true);
+        return new FlexmarkSpecExampleRenderer(example, combinedOptions, Parser.builder(combinedOptions).build(), HtmlRenderer.builder(combinedOptions).build(), true);
     }
 }

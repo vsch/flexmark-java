@@ -192,6 +192,9 @@ flexmark-java
 
 ### 0.5.9.9
 
+* [ ] Fix: remove loading/unloading and other test support code from builder, no longer needed.
+* [ ] Fix: remove need to load/unload extensions. Properly handle removal from EXTENSIONS
+      property for those tests that need it.
 * Fix: `NO_EOL` option for tests was applied inconsistently.
 * Fix: add `SpecExample` argument to `getSpecExampleRenderer`
 * Fix: add `SpecExampleParse` argument to `addSpecExample`

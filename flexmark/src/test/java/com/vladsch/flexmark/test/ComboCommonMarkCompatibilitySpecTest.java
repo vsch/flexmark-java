@@ -10,9 +10,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.junit.runners.Parameterized;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class ComboCommonMarkCompatibilitySpecTest extends ComboExtraSpecTest {
     private static final String SPEC_RESOURCE = "/commonmark_compatibility_spec.md";
@@ -22,22 +20,18 @@ public class ComboCommonMarkCompatibilitySpecTest extends ComboExtraSpecTest {
             .set(HtmlRenderer.PERCENT_ENCODE_URLS, true)
             .set(HtmlRenderer.RENDER_HEADER_ID, true);
 
-    private static final Parser PARSER = Parser.builder(OPTIONS).build();
-    // The spec says URL-escaping is optional, but the examples assume that it's enabled.
-    private static final HtmlRenderer RENDERER = HtmlRenderer.builder(OPTIONS).build();
-
     public ComboCommonMarkCompatibilitySpecTest(SpecExample example) {
         super(example);
     }
 
     @Parameterized.Parameters(name = "{0}")
     public static List<Object[]> data() {
-        return getTestData(SPEC_RESOURCE);
+        return getTestData( SPEC_RESOURCE);
     }
 
     @Nullable
     @Override
-    public DataHolder options(String optionSet) {
+    public DataHolder options(String option) {
         return null;
     }
 
@@ -49,6 +43,6 @@ public class ComboCommonMarkCompatibilitySpecTest extends ComboExtraSpecTest {
     @Override
     public @NotNull SpecExampleRenderer getSpecExampleRenderer(@NotNull SpecExample example, @Nullable DataHolder exampleOptions) {
         DataHolder combinedOptions = combineOptions(OPTIONS, exampleOptions);
-        return new FlexmarkSpecExampleRenderer(example, combinedOptions, PARSER.withOptions(combinedOptions), RENDERER.withOptions(combinedOptions), true);
-    }
+        return new FlexmarkSpecExampleRenderer(example, combinedOptions, Parser.builder(combinedOptions).build(), HtmlRenderer.builder(combinedOptions).build(), true);
+}
 }

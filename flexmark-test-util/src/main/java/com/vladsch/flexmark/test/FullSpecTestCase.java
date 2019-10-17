@@ -2,7 +2,6 @@ package com.vladsch.flexmark.test;
 
 import com.vladsch.flexmark.spec.SpecReader;
 import com.vladsch.flexmark.spec.SpecReaderFactory;
-import com.vladsch.flexmark.spec.UrlString;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.junit.Test;
@@ -12,8 +11,6 @@ import java.io.InputStream;
 import static org.junit.Assert.assertEquals;
 
 public abstract class FullSpecTestCase extends RenderingTestCase implements SpecExampleProcessor, SpecReaderFactory {
-    public static final String SPEC_RESOURCE = "/ast_spec.md";
-
     protected DumpSpecReader dumpSpecReader;
 
     @NotNull
@@ -23,23 +20,18 @@ public abstract class FullSpecTestCase extends RenderingTestCase implements Spec
         return dumpSpecReader;
     }
 
-    public SpecReader create(InputStream inputStream) {
-        return create(inputStream, new UrlString(SpecReader.getSpecInputFileUrl(this.getSpecResourceName())).toString());
-    }
-
     @NotNull
     public abstract String getSpecResourceName();
 
     @Test
-    public void testFullSpec() throws Exception {
+    public void testFullSpec() {
         String specResourcePath = getSpecResourceName();
-        SpecReader reader = dumpSpecReader == null || dumpSpecReader.getFileUrl() == null ? SpecReader.createAndReadExamples(specResourcePath, this)
-                : SpecReader.createAndReadExamples(specResourcePath, this, dumpSpecReader.getFileUrl().toString());
-        String fullSpec = SpecReader.readSpec(specResourcePath);
+        SpecReader reader = SpecReader.createAndReadExamples(this.getClass(), specResourcePath, this, dumpSpecReader == null ? "" : dumpSpecReader.getFileUrl());
+        String fullSpec = SpecReader.readSpec(this.getClass(), specResourcePath);
         String actual = dumpSpecReader.getFullSpec();
 
-        if (reader.getFileUrl() != null) {
-            assertEquals(reader.getFileUrl().toString(), fullSpec, actual);
+        if (!reader.getFileUrl().isEmpty()) {
+            assertEquals(reader.getFileUrl(), fullSpec, actual);
         } else {
             assertEquals(fullSpec, actual);
         }

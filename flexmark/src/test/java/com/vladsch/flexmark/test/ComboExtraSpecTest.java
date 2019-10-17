@@ -130,15 +130,6 @@ public class ComboExtraSpecTest extends ComboSpecTestCase {
         userTags.add("tag");
         optionsMap.put("user-block-tags", new MutableDataSet().set(Parser.HTML_BLOCK_TAGS, userTags));
     }
-
-    private static final Parser PARSER = Parser.builder(OPTIONS).build();
-    // The spec says URL-escaping is optional, but the examples assume that it's enabled.
-    private static final HtmlRenderer RENDERER = HtmlRenderer.builder(OPTIONS).build();
-
-    private static DataHolder optionsSet(String optionSet) {
-        return optionsMap.get(optionSet);
-    }
-
     public ComboExtraSpecTest(SpecExample example) {
         super(example);
     }
@@ -150,8 +141,8 @@ public class ComboExtraSpecTest extends ComboSpecTestCase {
 
     @Nullable
     @Override
-    public DataHolder options(String optionSet) {
-        return optionsSet(optionSet);
+    public DataHolder options(String option) {
+        return optionsMap.get(option);
     }
 
     @NotNull
@@ -161,18 +152,18 @@ public class ComboExtraSpecTest extends ComboSpecTestCase {
     }
 
     @NotNull
-    public Parser parser() {
-        return PARSER;
+    public Parser parser(@Nullable DataHolder OPTIONS) {
+        return Parser.builder(OPTIONS).build();
     }
 
     @NotNull
-    public HtmlRenderer renderer() {
-        return RENDERER;
+    public HtmlRenderer renderer(@Nullable DataHolder OPTIONS) {
+        return HtmlRenderer.builder(OPTIONS).build();
     }
 
     @Override
     public @NotNull SpecExampleRenderer getSpecExampleRenderer(@NotNull SpecExample example, @Nullable DataHolder exampleOptions) {
         DataHolder combinedOptions = combineOptions(OPTIONS, exampleOptions);
-        return new FlexmarkSpecExampleRenderer(example, combinedOptions, PARSER.withOptions(combinedOptions), RENDERER.withOptions(combinedOptions), true);
+        return new FlexmarkSpecExampleRenderer(example, combinedOptions, Parser.builder(combinedOptions).build(), HtmlRenderer.builder(combinedOptions).build(), true);
     }
 }

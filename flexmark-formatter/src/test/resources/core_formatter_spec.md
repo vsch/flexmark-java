@@ -2556,7 +2556,7 @@ Table of contents:
   - [Command-line](#command-line)
 - [Team](#team)
 
-<!-- /TOC-->
+<!-- /TOC -->
 .
 Document[0, 162]
   Paragraph[0, 19] isTrailingBlankLine

@@ -28,7 +28,6 @@ import com.vladsch.flexmark.spec.SpecReader;
 import com.vladsch.flexmark.superscript.SuperscriptExtension;
 import com.vladsch.flexmark.test.*;
 import com.vladsch.flexmark.util.ast.Document;
-import com.vladsch.flexmark.util.ast.IParse;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
@@ -54,47 +53,45 @@ public abstract class ComboDocxConverterSpecTestBase extends ComboSpecTestCase {
     static final boolean DUMP_ALL_TESTS_FILES = !SKIP_IGNORED_TESTS;
     static final String PROJECT_ROOT_DIRECTORY = "/Users/vlad/src/projects/flexmark-java";
 
-    // standard options
-    protected static final DataHolder OPTIONS = new MutableDataSet()
-            .set(HtmlRenderer.INDENT_SIZE, 2)
-            .set(Parser.EXTENSIONS, Arrays.asList(
-                    AsideExtension.create(),
-                    AttributesExtension.create(),
-                    AutolinkExtension.create(),
-                    DefinitionExtension.create(),
-                    EmojiExtension.create(),
-                    EnumeratedReferenceExtension.create(),
-                    FootnoteExtension.create(),
-                    GitLabExtension.create(),
-                    InsExtension.create(),
-                    MacrosExtension.create(),
-                    SimTocExtension.create(),
-                    StrikethroughSubscriptExtension.create(),
-                    SuperscriptExtension.create(),
-                    TablesExtension.create(),
-                    TocExtension.create(),
-                    WikiLinkExtension.create()
-            ))
-            .set(DocxRenderer.RENDER_BODY_ONLY, true)
-            .set(DocxRenderer.DOC_RELATIVE_URL, String.format("file://%s", PROJECT_ROOT_DIRECTORY))
-            .set(DocxRenderer.DOC_ROOT_URL, String.format("file://%s/assets", PROJECT_ROOT_DIRECTORY))
-            .set(DocxRenderer.SUPPRESS_HTML, true);
     static {
         // Set up a simple configuration that logs on the console.
         Logger root = Logger.getRootLogger();
         root.addAppender(new NullAppender());
     }
-    protected static void deleteTestCaseDumpFiles(String path) {
-        File dir = new File(path);
-        for (File file : dir.listFiles()) {
-            file.delete();
-        }
-    }
 
     protected final Map<String, DataHolder> optionsMap = new HashMap<>();
+    private final DataHolder myDefaultOptions;
 
-    public ComboDocxConverterSpecTestBase(SpecExample example) {
+    public ComboDocxConverterSpecTestBase(SpecExample example, @Nullable DataHolder defaultOptions) {
         super(example);
+
+        // standard options
+        DataHolder OPTIONS = new MutableDataSet()
+                .set(HtmlRenderer.INDENT_SIZE, 2)
+                .set(Parser.EXTENSIONS, Arrays.asList(
+                        AsideExtension.create(),
+                        AttributesExtension.create(),
+                        AutolinkExtension.create(),
+                        DefinitionExtension.create(),
+                        EmojiExtension.create(),
+                        EnumeratedReferenceExtension.create(),
+                        FootnoteExtension.create(),
+                        GitLabExtension.create(),
+                        InsExtension.create(),
+                        MacrosExtension.create(),
+                        SimTocExtension.create(),
+                        StrikethroughSubscriptExtension.create(),
+                        SuperscriptExtension.create(),
+                        TablesExtension.create(),
+                        TocExtension.create(),
+                        WikiLinkExtension.create()
+                ))
+                .set(DocxRenderer.RENDER_BODY_ONLY, true)
+                .set(DocxRenderer.DOC_RELATIVE_URL, String.format("file://%s", PROJECT_ROOT_DIRECTORY))
+                .set(DocxRenderer.DOC_ROOT_URL, String.format("file://%s/assets", PROJECT_ROOT_DIRECTORY))
+                .set(DocxRenderer.SUPPRESS_HTML, true);
+
+        myDefaultOptions = combineOptions(OPTIONS, defaultOptions);
 
         // add standard options
         optionsMap.put("IGNORED", new MutableDataSet().set(TestUtils.IGNORE, SKIP_IGNORED_TESTS));
@@ -112,40 +109,29 @@ public abstract class ComboDocxConverterSpecTestBase extends ComboSpecTestCase {
         optionsMap.put("yellow-missing-hyperlink", new MutableDataSet().set(DocxRenderer.LOCAL_HYPERLINK_MISSING_HIGHLIGHT, "yellow"));
     }
 
-    public abstract DocxRenderer renderer();
-    public abstract IParse parser();
-
     @Override
     public @NotNull SpecExampleRenderer getSpecExampleRenderer(@NotNull SpecExample example, @Nullable DataHolder exampleOptions) {
-        return new FlexmarkSpecExampleRenderer(example, exampleOptions, parser(), renderer(), true);
+        DataHolder combineOptions = combineOptions(myDefaultOptions, exampleOptions);
+        return new FlexmarkSpecExampleRenderer(example, combineOptions, Parser.builder(combineOptions).build(), DocxRenderer.builder(combineOptions).build(), true);
     }
 
     @Nullable
     @Override
-    final public DataHolder options(String optionSet) {
-        if (optionSet == null) return null;
-        return optionsMap.get(optionSet);
+    final public DataHolder options(String option) {
+        if (option == null) return null;
+        return optionsMap.get(option);
     }
 
-    // start of base
-    public boolean isDumpTestCaseFiles() {
-        return DUMP_TEST_CASE_FILES;
-    }
+    public abstract @NotNull String getProjectRootDirectory();
+    public abstract @NotNull String getFileTestCaseDumpLocation();
 
-    public boolean isDumpAllTestCaseFiles() {
-        return DUMP_ALL_TESTS_FILES;
-    }
-
-    public abstract String getProjectRootDirectory();
-    public abstract String getFileTestCaseDumpLocation();
-
-    final public String getFileAllTestsDumpName() {
+    final public @NotNull String getFileAllTestsDumpName() {
         return getFileTestCaseDumpLocation() + "AllTests";
     }
 
     @Override
-    public void testCase(SpecExampleRenderer exampleRenderer, DataHolder exampleOptions) {
-        if (!isDumpTestCaseFiles()) return;
+    public void testCase(SpecExampleRenderer exampleRenderer, SpecExampleParse exampleParse, DataHolder exampleOptions) {
+        if (!DUMP_TEST_CASE_FILES) return;
         Document document = (Document) ((FlexmarkSpecExampleRenderer) exampleRenderer).getDocument();
 
         SpecExample specExample = getExample();
@@ -153,12 +139,14 @@ public abstract class ComboDocxConverterSpecTestBase extends ComboSpecTestCase {
             // write it out to file, hard-coded for now                    IGNORE
             File file = new File(String.format("%s%s%s_%d.docx", getProjectRootDirectory(), getFileTestCaseDumpLocation(), specExample.getSection(), specExample.getExampleNumber()));
             File file2 = new File(String.format("%s%s%s_%d.xml", getProjectRootDirectory(), getFileTestCaseDumpLocation(), specExample.getSection(), specExample.getExampleNumber()));
-            DocxRenderer withOptions = renderer().withOptions(exampleOptions);
+            DataHolder combinedOptions = combineOptions(myDefaultOptions, exampleOptions);
+            DocxRenderer withOptions = DocxRenderer.builder(combinedOptions).build();
             WordprocessingMLPackage mlPackage = DocxRenderer.getDefaultTemplate(withOptions.getOptions());
             withOptions.render(document, mlPackage);
 
             File parentDir = file.getParentFile();
             if (!parentDir.exists()) {
+                //noinspection ResultOfMethodCallIgnored
                 parentDir.mkdirs();
             }
 
@@ -173,11 +161,7 @@ public abstract class ComboDocxConverterSpecTestBase extends ComboSpecTestCase {
                     fileWriter.append(s);
                     fileWriter.append('\n');
                     fileWriter.close();
-                } catch (Docx4JException e) {
-                    e.printStackTrace();
-                } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
+                } catch (Docx4JException | IOException e) {
                     e.printStackTrace();
                 }
             } catch (Docx4JException e) {
@@ -187,8 +171,8 @@ public abstract class ComboDocxConverterSpecTestBase extends ComboSpecTestCase {
     }
 
     @Override
-    public void addSpecExample(@NotNull SpecExampleRenderer exampleRenderer, @NotNull SpecExampleParse exampleParse, DataHolder exampleOptions, boolean ignoredTestCase, @NotNull String renderedHtml, @Nullable String renderedAst) {
-        if (!isDumpAllTestCaseFiles()) return;
+    public void addSpecExample(@NotNull SpecExampleRenderer exampleRenderer, @NotNull SpecExampleParse exampleParse, DataHolder exampleOptions, boolean ignoredTestCase, @NotNull String html, @Nullable String ast) {
+        if (!DUMP_ALL_TESTS_FILES) return;
 
         boolean failed = !ignoredTestCase && !exampleRenderer.renderHtml().equals(example.getHtml());
 
@@ -235,7 +219,8 @@ public abstract class ComboDocxConverterSpecTestBase extends ComboSpecTestCase {
         }
 
         myDocxContext.createHorizontalLine();
-        renderer().withOptions(exampleOptions).render(((FlexmarkSpecExampleRenderer)exampleRenderer).getDocument(), myPackage);
+        DataHolder combinedOptions = combineOptions(myDefaultOptions, exampleOptions);
+        DocxRenderer.builder(combinedOptions).build().render(((FlexmarkSpecExampleRenderer)exampleRenderer).getDocument(), myPackage);
         myDocxContext.createHorizontalLine();
 
         if (example.hasComment()) {
@@ -266,8 +251,8 @@ public abstract class ComboDocxConverterSpecTestBase extends ComboSpecTestCase {
 
     @Override
     public void fullTestSpecStarting() {
-        if (isDumpAllTestCaseFiles()) {
-            myPackage = DocxRenderer.getDefaultTemplate(renderer().getOptions());
+        if (DUMP_ALL_TESTS_FILES) {
+            myPackage = DocxRenderer.getDefaultTemplate(myDefaultOptions);
             if (myPackage == null) return;
 
             myDocxContext = new DocxContextImpl<Node>(myPackage, null) {
@@ -302,7 +287,7 @@ public abstract class ComboDocxConverterSpecTestBase extends ComboSpecTestCase {
 
     @Override
     protected void fullTestSpecComplete() {
-        if (!isDumpAllTestCaseFiles() || myPackage == null) return;
+        if (!DUMP_ALL_TESTS_FILES || myPackage == null) return;
 
         // write it out to file, hard-coded for now                    IGNORE
         File file = new File(String.format("%s%s.docx", getProjectRootDirectory(), getFileAllTestsDumpName()));
@@ -324,11 +309,7 @@ public abstract class ComboDocxConverterSpecTestBase extends ComboSpecTestCase {
             fileWriter.append(s);
             fileWriter.append('\n');
             fileWriter.close();
-        } catch (Docx4JException e) {
-            e.printStackTrace();
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (Docx4JException | IOException e) {
             e.printStackTrace();
         }
     }

@@ -3,8 +3,6 @@ package com.vladsch.flexmark.spec;
 import com.vladsch.flexmark.util.ast.IRender;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
-import com.vladsch.flexmark.util.data.DataSet;
-import com.vladsch.flexmark.util.data.MutableDataSet;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -16,12 +14,6 @@ public abstract class IRenderBase implements IRender {
         public void render(@NotNull Node node, @NotNull Appendable output) {
 
         }
-
-        @NotNull
-        @Override
-        public IRender withOptions(@Nullable DataHolder options) {
-            return this;
-        }
     };
 
     public static final IRender TextRenderer = new IRenderBase() {
@@ -32,12 +24,6 @@ public abstract class IRenderBase implements IRender {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }
-
-        @NotNull
-        @Override
-        public IRender withOptions(@Nullable DataHolder options) {
-            return this;
         }
     };
 

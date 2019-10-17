@@ -1,9 +1,6 @@
 package com.vladsch.flexmark.docx.converter;
 
-import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.spec.SpecExample;
-import com.vladsch.flexmark.util.data.DataHolder;
-import com.vladsch.flexmark.util.data.MutableDataSet;
 import org.jetbrains.annotations.NotNull;
 import org.junit.runners.Parameterized;
 
@@ -13,13 +10,8 @@ public class ComboDocxConverterAttributeSpecTest extends ComboDocxConverterSpecT
     private static final String SPEC_RESOURCE = "/docx_converter_attribute_ast_spec.md";
     static final String FILE_TEST_CASE_DUMP_LOCATION = "/flexmark-docx-converter/src/test/resources/docx_converter_attribute_ast_spec/";
 
-    private static final DataHolder OPTIONS = new MutableDataSet(ComboDocxConverterSpecTestBase.OPTIONS);
-
-    private static final Parser PARSER = Parser.builder(OPTIONS).build();
-    private static final DocxRenderer RENDERER = DocxRenderer.builder(OPTIONS).build();
-
     public ComboDocxConverterAttributeSpecTest(SpecExample example) {
-        super(example);
+        super(example, null);
     }
 
     @Parameterized.Parameters(name = "{0}")
@@ -35,21 +27,11 @@ public class ComboDocxConverterAttributeSpecTest extends ComboDocxConverterSpecT
 
     @NotNull
     @Override
-    public Parser parser() {
-        return PARSER;
-    }
-
-    @NotNull
-    @Override
-    public DocxRenderer renderer() {
-        return RENDERER;
-    }
-
-    @Override
     public String getProjectRootDirectory() {
         return PROJECT_ROOT_DIRECTORY;
     }
 
+    @NotNull
     @Override
     public String getFileTestCaseDumpLocation() {
         return FILE_TEST_CASE_DUMP_LOCATION;

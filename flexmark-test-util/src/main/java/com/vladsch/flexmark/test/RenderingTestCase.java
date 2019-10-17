@@ -1,7 +1,6 @@
 package com.vladsch.flexmark.test;
 
 import com.vladsch.flexmark.spec.SpecExample;
-import com.vladsch.flexmark.spec.UrlString;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataSet;
 import org.jetbrains.annotations.NotNull;
@@ -32,15 +31,22 @@ public abstract class RenderingTestCase implements SpecExampleProcessor {
         return other != null && overrides != null ? new DataSet(other, overrides) : other != null ? other : overrides;
     }
 
-    public void testCase(SpecExampleRenderer exampleRenderer, DataHolder exampleOptions) {
+    /**
+     * Called after processing individual test case
+     *
+     * @param exampleRenderer renderer used
+     * @param exampleParse    parse information
+     * @param exampleOptions  example options
+     */
+    public void testCase(SpecExampleRenderer exampleRenderer, SpecExampleParse exampleParse, DataHolder exampleOptions) {
 
     }
 
-    public void addSpecExample(@NotNull SpecExampleRenderer exampleRenderer, @NotNull SpecExampleParse exampleParse, DataHolder exampleOptions, boolean ignoredTestCase, @NotNull String renderedHtml, @Nullable String renderedAst) {
+    public void addSpecExample(@NotNull SpecExampleRenderer exampleRenderer, @NotNull SpecExampleParse exampleParse, DataHolder exampleOptions, boolean ignoredTestCase, @NotNull String html, @Nullable String ast) {
 
     }
 
-    final protected void assertRendering(UrlString fileUrl, String source, String expectedHtml) {
+    final protected void assertRendering(String fileUrl, String source, String expectedHtml) {
         assertRendering(fileUrl, source, expectedHtml, null, null);
     }
 
@@ -48,11 +54,11 @@ public abstract class RenderingTestCase implements SpecExampleProcessor {
         assertRendering(null, source, expectedHtml, null, null);
     }
 
-    final protected void assertRendering(UrlString fileUrl, String source, String expectedHtml, String optionsSet) {
+    final protected void assertRendering(String fileUrl, String source, String expectedHtml, String optionsSet) {
         assertRendering(fileUrl, source, expectedHtml, null, optionsSet);
     }
 
-    protected void assertRendering(UrlString fileUrl, String source, String expectedHtml, String expectedAst, String optionsSet) {
+    protected void assertRendering(@Nullable String message, @NotNull String source, @NotNull String expectedHtml, @Nullable String expectedAst, @Nullable String optionsSet) {
         SpecExample example = getExample();
         DataHolder exampleOptions = TestUtils.getOptions(example, optionsSet, this::options, this::combineOptions);
 
@@ -74,7 +80,7 @@ public abstract class RenderingTestCase implements SpecExampleProcessor {
             System.out.print(formattedTimingInfo);
         }
 
-        testCase(exampleRenderer, exampleOptions);
+        testCase(exampleRenderer, specExampleParse, exampleOptions);
         exampleRenderer.finalizeRender();
 
         String expected;
@@ -106,8 +112,8 @@ public abstract class RenderingTestCase implements SpecExampleProcessor {
             thrown.expect(ComparisonFailure.class);
         }
 
-        if (fileUrl != null) {
-            assertEquals(fileUrl.toString(), expected, actual);
+        if (message != null) {
+            assertEquals(message, expected, actual);
         } else {
             assertEquals(expected, actual);
         }

@@ -359,8 +359,8 @@ public class HtmlRendererTest {
         DataHolder OPTIONS1 = new MutableDataSet().set(CustomLinkResolverImpl.DOC_RELATIVE_URL, "/url1");
         DataHolder OPTIONS2 = new MutableDataSet().set(CustomLinkResolverImpl.DOC_RELATIVE_URL, "/url2");
         HtmlRenderer renderer = HtmlRenderer.builder(OPTIONS).linkResolverFactory(new CustomLinkResolverImpl.Factory()).build();
-        HtmlRenderer renderer1 = renderer.withOptions(OPTIONS1);
-        HtmlRenderer renderer2 = renderer.withOptions(OPTIONS2);
+        HtmlRenderer renderer1 = HtmlRenderer.builder(OPTIONS1).linkResolverFactory(new CustomLinkResolverImpl.Factory()).build();
+        HtmlRenderer renderer2 = HtmlRenderer.builder(OPTIONS2).linkResolverFactory(new CustomLinkResolverImpl.Factory()).build();
         String rendered = renderer.render(parse("foo [bar](/url)"));
         String rendered1 = renderer1.render(parse("foo [bar](/url)"));
         String rendered2 = renderer2.render(parse("foo [bar](/url)"));

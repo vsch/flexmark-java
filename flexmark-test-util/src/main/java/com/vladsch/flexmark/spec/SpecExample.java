@@ -1,52 +1,38 @@
 package com.vladsch.flexmark.spec;
 
+import com.vladsch.flexmark.test.TestUtils;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 import java.util.Objects;
 
 public class SpecExample {
-    private static final SpecExample NULL = new SpecExample(null, "", 0, "", "", "", "", null, true);
+    public static final SpecExample NULL = new SpecExample("", 0, null, "", 0, "", "", null, null, true);
 
-    public static SpecExample getNull() {
-        return NULL;
-    }
-
-    public static SpecExample getNull(UrlString fileUrl) {
-        return NULL.withFileUrl(fileUrl);
-    }
-
-    public static SpecExample getNull(String fileUrl) {
-        return NULL.withFileUrl(fileUrl);
-    }
-
-    private final String optionsSet;
-    private final String section;
+    private final @NotNull String fileUrl;
+    private final int lineNumber;
+    private final @Nullable String optionsSet;
+    private final @Nullable String section;
     private final int exampleNumber;
-    private final String source;
-    private final String html;
-    private final String ast;
-    private final String comment;
-    private final UrlString fileUrl;
+    private final @NotNull String source;
+    private final @NotNull String html;
+    private final @Nullable String ast;
+    private final @Nullable String comment;
     private final boolean isNull;
 
-    public SpecExample(String optionsSet, String section, int exampleNumber, String source, String html) {
-        this(optionsSet, section, exampleNumber, source, html, null);
+    public SpecExample(@NotNull String fileUrl, int lineNumber, @Nullable String optionsSet, @Nullable String section, int exampleNumber, @NotNull String source, @NotNull String html, @Nullable String ast, String comment) {
+        this(fileUrl, lineNumber, optionsSet, section, exampleNumber, source, html, ast, comment, false);
     }
 
-    public SpecExample(String optionsSet, String section, int exampleNumber, String source, String html, String ast) {
-        this(optionsSet, section, exampleNumber, source, html, null, null, null);
-    }
-
-    public SpecExample(String optionsSet, String section, int exampleNumber, String source, String html, String ast, String comment, final UrlString fileUrl) {
-        this(optionsSet, section, exampleNumber, source, html, ast, comment, fileUrl, false);
-    }
-
-    private SpecExample(String optionsSet, String section, int exampleNumber, String source, String html, String ast, String comment, final UrlString fileUrl, boolean isNull) {
+    private SpecExample(@NotNull String fileUrl, int lineNumber, @Nullable String optionsSet, @Nullable String section, int exampleNumber, @NotNull String source, @NotNull String html, @Nullable String ast, String comment, boolean isNull) {
+        this.fileUrl = fileUrl;
+        this.lineNumber = lineNumber;
         this.section = section;
         this.exampleNumber = exampleNumber;
         this.source = source;
         this.html = html;
         this.ast = ast;
         this.comment = comment == null ? null : comment.trim();
-        this.fileUrl = fileUrl;
         this.isNull = isNull;
 
         if (optionsSet == null) {
@@ -58,19 +44,17 @@ public class SpecExample {
     }
 
     // @formatter:off
-    public SpecExample withOptionsSet(String optionsSet) { return new SpecExample(optionsSet, section, exampleNumber, source, html, ast, comment, fileUrl , isNull); }
-    public SpecExample withSection(String section) { return new SpecExample(optionsSet, section, exampleNumber, source, html, ast, comment, fileUrl , isNull); }
-    public SpecExample withExampleNumber(int exampleNumber) { return new SpecExample(optionsSet, section, exampleNumber, source, html, ast, comment, fileUrl , isNull); }
-    public SpecExample withSource(String source) { return new SpecExample(optionsSet, section, exampleNumber, source, html, ast, comment, fileUrl , isNull); }
-    public SpecExample withHtml(String html) { return new SpecExample(optionsSet, section, exampleNumber, source, html, ast, comment, fileUrl , isNull); }
-    public SpecExample withAst(String ast) { return new SpecExample(optionsSet, section, exampleNumber, source, html, ast, comment, fileUrl , isNull); }
-    public SpecExample withFileUrl(UrlString fileUrl) { return new SpecExample(optionsSet, section, exampleNumber, source, html, ast, comment, fileUrl, isNull); }
-    public SpecExample withFileUrl(String fileUrl) { return new SpecExample(optionsSet, section, exampleNumber, source, html, ast, comment, new UrlString(fileUrl), isNull); }
+    public SpecExample withFileUrl(@NotNull String fileUrl) { return new SpecExample(fileUrl, lineNumber, optionsSet, section, exampleNumber, source, html, ast, comment , isNull); }
+    public SpecExample withOptionsSet(@Nullable String optionsSet) { return new SpecExample(fileUrl, lineNumber, optionsSet, section, exampleNumber, source, html, ast, comment , isNull); }
+    public SpecExample withSection(@Nullable String section) { return new SpecExample(fileUrl, lineNumber, optionsSet, section, exampleNumber, source, html, ast, comment , isNull); }
+    public SpecExample withExampleNumber(int exampleNumber) { return new SpecExample(fileUrl, lineNumber, optionsSet, section, exampleNumber, source, html, ast, comment , isNull); }
+    public SpecExample withSource(@NotNull String source) { return new SpecExample(fileUrl, lineNumber, optionsSet, section, exampleNumber, source, html, ast, comment , isNull); }
+    public SpecExample withHtml(@NotNull String html) { return new SpecExample(fileUrl, lineNumber, optionsSet, section, exampleNumber, source, html, ast, comment , isNull); }
+    public SpecExample withAst(@Nullable String ast) { return new SpecExample(fileUrl, lineNumber, optionsSet, section, exampleNumber, source, html, ast, comment , isNull); }
     // @formatter:on
 
     public boolean isFullSpecExample() {
-        //noinspection PointlessBooleanExpression
-        return true
+        return this != NULL
                 && Objects.equals(this.optionsSet, NULL.optionsSet)
                 && Objects.equals(this.section, NULL.section)
                 && this.exampleNumber == NULL.exampleNumber
@@ -78,7 +62,6 @@ public class SpecExample {
                 && Objects.equals(this.html, NULL.html)
                 && Objects.equals(this.ast, NULL.ast)
                 && Objects.equals(this.comment, NULL.comment)
-//                && Objects.equals(this.fileUrl, NULL.fileUrl)
                 ;
     }
 
@@ -94,26 +77,32 @@ public class SpecExample {
         return !isNull;
     }
 
+    @Nullable
     public String getOptionsSet() {
         return optionsSet;
     }
 
-    public UrlString getFileUrl() {
-        return fileUrl;
+    @NotNull
+    public String getFileUrl() {
+        return TestUtils.getUrlWithLineNumber(fileUrl, lineNumber);
     }
 
+    @NotNull
     public String getSource() {
         return source;
     }
 
+    @NotNull
     public String getHtml() {
         return html;
     }
 
+    @Nullable
     public String getAst() {
         return ast;
     }
 
+    @Nullable
     public String getSection() {
         return section;
     }
@@ -122,6 +111,7 @@ public class SpecExample {
         return exampleNumber;
     }
 
+    @Nullable
     public String getComment() {
         return comment;
     }
@@ -133,6 +123,8 @@ public class SpecExample {
     @Override
     public String toString() {
         if (this.isNull()) {
+            return "NULL";
+        } else if (this.isFullSpecExample()) {
             return "Full Spec Test";
         } else {
             return "Section \"" + section + "\" example " + exampleNumber;

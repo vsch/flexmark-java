@@ -41,16 +41,6 @@ public class ComboJekyllFrontMatterFormatterSpecTest extends ComboSpecTestCase {
         optionsMap.put("references-sort", new MutableDataSet().set(Formatter.REFERENCE_SORT, ElementPlacementSort.SORT));
         optionsMap.put("references-sort-unused-last", new MutableDataSet().set(Formatter.REFERENCE_SORT, ElementPlacementSort.SORT_UNUSED_LAST));
     }
-
-    private static final Parser PARSER = Parser.builder(OPTIONS).build();
-    // The spec says URL-escaping is optional, but the examples assume that it's enabled.
-    private static final Formatter RENDERER = Formatter.builder(OPTIONS).build();
-
-    private static DataHolder optionsSet(String optionSet) {
-        if (optionSet == null) return null;
-        return optionsMap.get(optionSet);
-    }
-
     public ComboJekyllFrontMatterFormatterSpecTest(SpecExample example) {
         super(example);
     }
@@ -62,8 +52,8 @@ public class ComboJekyllFrontMatterFormatterSpecTest extends ComboSpecTestCase {
 
     @Nullable
     @Override
-    public DataHolder options(String optionSet) {
-        return optionsSet(optionSet);
+    public DataHolder options(String option) {
+        return optionsMap.get(option);
     }
 
     @NotNull
@@ -72,10 +62,9 @@ public class ComboJekyllFrontMatterFormatterSpecTest extends ComboSpecTestCase {
         return SPEC_RESOURCE;
     }
 
-
     @Override
     public @NotNull SpecExampleRenderer getSpecExampleRenderer(@NotNull SpecExample example, @Nullable DataHolder exampleOptions) {
         DataHolder combinedOptions = combineOptions(OPTIONS, exampleOptions);
-        return new FlexmarkSpecExampleRenderer(example, combinedOptions, PARSER.withOptions(combinedOptions), RENDERER.withOptions(combinedOptions), true);
+        return new FlexmarkSpecExampleRenderer(example, combinedOptions, Parser.builder(combinedOptions).build(), Formatter.builder(combinedOptions).build(), true);
     }
 }

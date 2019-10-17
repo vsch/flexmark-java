@@ -1,11 +1,9 @@
 package com.vladsch.flexmark.profiles.pegdown;
 
 import com.vladsch.flexmark.spec.IRenderBase;
-import com.vladsch.flexmark.util.ast.IRender;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.pegdown.LinkRenderer;
 import org.pegdown.ToHtmlSerializer;
 import org.pegdown.ast.RootNode;
@@ -38,11 +36,5 @@ class PegdownRenderer extends IRenderBase {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    @NotNull
-    @Override
-    public IRender withOptions(@Nullable DataHolder options) {
-        return new PegdownRenderer(options);
     }
 }

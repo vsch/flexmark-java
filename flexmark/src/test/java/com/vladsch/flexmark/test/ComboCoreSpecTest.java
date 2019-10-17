@@ -35,8 +35,8 @@ public class ComboCoreSpecTest extends ComboSpecTestCase {
 
     @Nullable
     @Override
-    public DataHolder options(String optionSet) {
-        return OPTIONS;
+    public DataHolder options(String option) {
+        return null;
     }
 
     @NotNull
@@ -48,6 +48,6 @@ public class ComboCoreSpecTest extends ComboSpecTestCase {
     @Override
     public @NotNull SpecExampleRenderer getSpecExampleRenderer(@NotNull SpecExample example, @Nullable DataHolder exampleOptions) {
         DataHolder combinedOptions = combineOptions(OPTIONS, exampleOptions);
-        return new FlexmarkSpecExampleRenderer(example, combinedOptions, PARSER.withOptions(combinedOptions), RENDERER.withOptions(combinedOptions), true);
+        return new FlexmarkSpecExampleRenderer(example, combinedOptions, PARSER, RENDERER, true);
     }
 }

@@ -7,17 +7,17 @@ import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.test.ComboSpecTestCase;
 import com.vladsch.flexmark.test.FlexmarkSpecExampleRenderer;
 import com.vladsch.flexmark.test.SpecExampleRenderer;
-import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.builder.BuilderBase;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
 import java.util.*;
 
+@RunWith(Parameterized.class)
 public class ComboAutolinkSpecTest extends ComboSpecTestCase {
     static final String SPEC_RESOURCE = "/ext_autolink_ast_spec.md";
     private static final DataHolder OPTIONS = new MutableDataSet()
@@ -36,16 +36,6 @@ public class ComboAutolinkSpecTest extends ComboSpecTestCase {
         //                .set(AutolinkExtension.AUTOLINK, value)
         //        );
     }
-
-    static final Parser PARSER = Parser.builder(OPTIONS).build();
-    // The spec says URL-escaping is optional, but the examples assume that it's enabled.
-    static final HtmlRenderer RENDERER = HtmlRenderer.builder(OPTIONS).build();
-
-    static DataHolder optionsSet(String optionSet) {
-        if (optionSet == null) return null;
-        return optionsMap.get(optionSet);
-    }
-
     public ComboAutolinkSpecTest(SpecExample example) {
         super(example);
     }
@@ -57,8 +47,8 @@ public class ComboAutolinkSpecTest extends ComboSpecTestCase {
 
     @Nullable
     @Override
-    public DataHolder options(String optionSet) {
-        return optionsSet(optionSet);
+    public DataHolder options(String option) {
+        return optionsMap.get(option);
     }
 
     @NotNull
@@ -66,21 +56,10 @@ public class ComboAutolinkSpecTest extends ComboSpecTestCase {
     public String getSpecResourceName() {
         return SPEC_RESOURCE;
     }
+
     @Override
     public @NotNull SpecExampleRenderer getSpecExampleRenderer(@NotNull SpecExample example, @Nullable DataHolder exampleOptions) {
         DataHolder combinedOptions = combineOptions(OPTIONS, exampleOptions);
-        return new FlexmarkSpecExampleRenderer(example, combinedOptions, PARSER.withOptions(combinedOptions), RENDERER.withOptions(combinedOptions), true);
-    }
-@Test
-    public void testSpecTxt() throws Exception {
-        if (!example.isFullSpecExample()) return;
-
-        HtmlRenderer RENDERER = HtmlRenderer.builder(OPTIONS).build();
-        Parser PARSER = Parser.builder(OPTIONS).build();
-
-        String source = readResource("/spec.txt");
-        Node node = PARSER.parse(source);
-        //String html = readResource("/table.html");
-        //assertRendering(source, html);
+        return new FlexmarkSpecExampleRenderer(example, combinedOptions, Parser.builder(combinedOptions).build(), HtmlRenderer.builder(combinedOptions).build(), true);
     }
 }

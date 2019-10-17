@@ -8,6 +8,7 @@ import com.vladsch.flexmark.test.ComboSpecTestCase;
 import com.vladsch.flexmark.test.FlexmarkSpecExampleRenderer;
 import com.vladsch.flexmark.test.SpecExampleRenderer;
 import com.vladsch.flexmark.test.TestUtils;
+import com.vladsch.flexmark.util.Utils;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import org.jetbrains.annotations.NotNull;
@@ -67,13 +68,13 @@ public class ComboTableSpecTest extends ComboSpecTestCase {
 
     @Parameterized.Parameters(name = "{0}")
     public static List<Object[]> data() {
-        return getTestData(SPEC_RESOURCE);
+        return getTestData( SPEC_RESOURCE);
     }
 
     @Nullable
     @Override
-    public DataHolder options(String optionSet) {
-        return optionsSet(optionSet);
+    public DataHolder options(String option) {
+        return optionsMap.get(option);
     }
 
     @NotNull
@@ -85,19 +86,16 @@ public class ComboTableSpecTest extends ComboSpecTestCase {
     @Override
     public @NotNull SpecExampleRenderer getSpecExampleRenderer(@NotNull SpecExample example, @Nullable DataHolder exampleOptions) {
         DataHolder combinedOptions = combineOptions(OPTIONS, exampleOptions);
-        return new FlexmarkSpecExampleRenderer(example, combinedOptions, PARSER.withOptions(combinedOptions), RENDERER.withOptions(combinedOptions), true);
-    }
+        return new FlexmarkSpecExampleRenderer(example, combinedOptions, Parser.builder(combinedOptions).build(), HtmlRenderer.builder(combinedOptions).build(), true);
+}
 
     @Test
-    public void testTable() throws Exception {
+    public void testTable() {
         if (!example.isFullSpecExample()) return;
 
-        final HtmlRenderer RENDERER = HtmlRenderer.builder(OPTIONS).build();
-        final Parser PARSER = Parser.builder(OPTIONS).build();
+        String source = Utils.getResourceAsString(ComboTableSpecTest.class, "/table.md");
+        String html = Utils.getResourceAsString(ComboTableSpecTest.class, "/table.html");
 
-        String source = readResource("/table.md");
-        String html = readResource("/table.html");
-
-        assertRendering(example.getFileUrl(), source, html);
+        assertRendering(example.getFileUrl().toString(), source, html, null,example.getOptionsSet());
     }
 }

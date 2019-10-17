@@ -14,19 +14,14 @@ public class ComboDeDocxConverterSpec2Test extends ComboDocxConverterSpecTestBas
     private static final String FILE_TEST_CASE_DUMP_LOCATION = "/flexmark-docx-converter/src/test/resources/docx_converter_de_ast_spec2/";
     private static final String TEMPLATE_XML = "/DE-Template.xml";
 
-    private static final DataHolder OPTIONS = new MutableDataSet(ComboDocxConverterSpecTestBase.OPTIONS)
-            .set(DocxRenderer.DEFAULT_TEMPLATE_RESOURCE, TEMPLATE_XML);
-
-    private static final Parser PARSER = Parser.builder(OPTIONS).build();
-    private static final DocxRenderer RENDERER = DocxRenderer.builder(OPTIONS).build();
-
     public ComboDeDocxConverterSpec2Test(SpecExample example) {
-        super(example);
+        super(example, new MutableDataSet()
+                .set(DocxRenderer.DEFAULT_TEMPLATE_RESOURCE, TEMPLATE_XML));
     }
 
     @Parameterized.Parameters(name = "{0}")
     public static List<Object[]> data() {
-        return getTestData(SPEC_RESOURCE);
+        return getTestData( SPEC_RESOURCE);
     }
 
     @NotNull
@@ -37,21 +32,11 @@ public class ComboDeDocxConverterSpec2Test extends ComboDocxConverterSpecTestBas
 
     @NotNull
     @Override
-    public Parser parser() {
-        return PARSER;
-    }
-
-    @NotNull
-    @Override
-    public DocxRenderer renderer() {
-        return RENDERER;
-    }
-
-    @Override
     public String getProjectRootDirectory() {
         return PROJECT_ROOT_DIRECTORY;
     }
 
+    @NotNull
     @Override
     public String getFileTestCaseDumpLocation() {
         return FILE_TEST_CASE_DUMP_LOCATION;

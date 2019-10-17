@@ -22,14 +22,13 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.junit.Test;
 
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Locale;
 import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
 
-public class DelimiterProcessorTest extends RenderingTestCase {
+final public class DelimiterProcessorTest extends RenderingTestCase {
     static final DataHolder OPTIONS = new MutableDataSet()
             .set(TestUtils.NO_FILE_EOL, false)
             .toImmutable();
@@ -63,18 +62,18 @@ public class DelimiterProcessorTest extends RenderingTestCase {
     @NotNull
     @Override
     public SpecExample getExample() {
-        return SpecExample.getNull();
+        return SpecExample.NULL;
     }
 
     @Override
-    public @Nullable DataHolder options(String optionSet) {
+    public @Nullable DataHolder options(String option) {
         return null;
     }
 
     @Override
     public @NotNull SpecExampleRenderer getSpecExampleRenderer(@NotNull SpecExample example, @Nullable DataHolder exampleOptions) {
         DataHolder combinedOptions = combineOptions(OPTIONS, exampleOptions);
-        return new FlexmarkSpecExampleRenderer(example, combinedOptions, PARSER.withOptions(combinedOptions), RENDERER.withOptions(combinedOptions), true);
+        return new FlexmarkSpecExampleRenderer(example, combinedOptions, PARSER, RENDERER, true);
     }
 
     private static class CustomDelimiterProcessor implements DelimiterProcessor {

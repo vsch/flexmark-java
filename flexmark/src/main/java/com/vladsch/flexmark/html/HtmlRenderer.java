@@ -221,11 +221,6 @@ public class HtmlRenderer implements IRender {
         return sb.toString();
     }
 
-    @NotNull
-    public HtmlRenderer withOptions(@Nullable DataHolder options) {
-        return options == null ? this : new HtmlRenderer(new Builder(builder, options));
-    }
-
     static public boolean isCompatibleRendererType(MutableDataHolder options, String supportedRendererType) {
         String rendererType = HtmlRenderer.TYPE.getFrom(options);
         return isCompatibleRendererType(options, rendererType, supportedRendererType);
@@ -394,7 +389,6 @@ public class HtmlRenderer implements IRender {
          * @param percentEncodeUrls true to percent-encode, false for leaving as-is
          * @return {@code this}
          */
-        @SuppressWarnings("SameParameterValue")
         public Builder percentEncodeUrls(boolean percentEncodeUrls) {
             this.set(PERCENT_ENCODE_URLS, percentEncodeUrls);
             return this;

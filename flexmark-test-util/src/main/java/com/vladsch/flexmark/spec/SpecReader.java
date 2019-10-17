@@ -2,12 +2,12 @@ package com.vladsch.flexmark.spec;
 
 import com.vladsch.flexmark.test.TestUtils;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
@@ -44,44 +44,17 @@ public class SpecReader {
 
     protected List<SpecExample> examples = new ArrayList<>();
 
-    protected SpecReader(InputStream stream, String fileUrl) {
+    protected SpecReader(@NotNull InputStream stream, @NotNull String fileUrl) {
         this.inputStream = stream;
         this.fileUrl = fileUrl;
     }
 
-    public static List<SpecExample> readExamples() {
-        return readExamples(null, null, null);
-    }
-
-    public static List<SpecExample> readExamples(String specResource) {
-        return readExamples(specResource, (String) null);
-    }
-
-    public static List<SpecExample> readExamples(String specResource, String urlString) {
-        if (urlString == null) {
-            URL fileUrl = getSpecInputFileUrl(specResource);
-            urlString = new UrlString(fileUrl).toString();
-        }
-
-        List<SpecExample> examples = readExamples(specResource, null, urlString);
-        if (examples.size() == 0) {
-            throw new IllegalStateException("No examples were found in " + specResource);
-        }
-        return examples;
-    }
-
-    public static SpecReader createAndReadExamples(String specResource, SpecReaderFactory readerFactory) {
-        URL fileUrl = getSpecInputFileUrl(specResource);
-        UrlString urlString = new UrlString(fileUrl);
-        return createAndReadExamples(specResource, readerFactory, urlString.toString());
-    }
-
-    public static SpecReader createAndReadExamples(String specResource, SpecReaderFactory readerFactory, String urlString) {
+    public static SpecReader createAndReadExamples(@NotNull Class<?> resourceClass, @NotNull String specResource, @Nullable SpecReaderFactory readerFactory, @NotNull String fileUrl) {
         try {
             SpecReader reader;
-            InputStream stream = getSpecInputStream(specResource);
-            if (readerFactory == null) reader = new SpecReader(stream, urlString);
-            else reader = readerFactory.create(stream, urlString);
+            InputStream stream = getSpecInputStream(resourceClass, specResource);
+            if (readerFactory == null) reader = new SpecReader(stream, fileUrl);
+            else reader = readerFactory.create(stream, fileUrl);
             reader.read();
             return reader;
         } catch (IOException e) {
@@ -89,34 +62,21 @@ public class SpecReader {
         }
     }
 
-    public static List<SpecExample> readExamples(String specResource, SpecReaderFactory readerFactory) {
-        URL fileUrl = getSpecInputFileUrl(specResource);
-        UrlString urlString = new UrlString(fileUrl);
-        return readExamples(specResource, readerFactory, urlString.toString());
-    }
-
-    public static List<SpecExample> readExamples(String specResource, SpecReaderFactory readerFactory, String urlString) {
+    public static List<SpecExample> readExamples(@NotNull Class<?> resourceClass, @NotNull String specResource, @Nullable SpecReaderFactory readerFactory, @NotNull String fileUrl) {
         try {
             SpecReader reader;
-            InputStream stream = getSpecInputStream(specResource);
-            if (readerFactory == null) reader = new SpecReader(stream, urlString);
-            else reader = readerFactory.create(stream, urlString);
+            String useSpecResource = TestUtils.getSpecResourceName(resourceClass.getName(), specResource);
+            InputStream stream = getSpecInputStream(resourceClass, useSpecResource);
+            if (readerFactory == null) reader = new SpecReader(stream, fileUrl);
+            else reader = readerFactory.create(stream, fileUrl);
             return reader.read();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public static List<String> readExamplesAsString() {
-        return readExamplesAsString(null, null);
-    }
-
-    public static List<String> readExamplesAsString(String specResource) {
-        return readExamplesAsString(specResource, null);
-    }
-
-    public static List<String> readExamplesAsString(String specResource, SpecReaderFactory readerFactory) {
-        List<SpecExample> examples = SpecReader.readExamples(specResource, readerFactory);
+    public static List<String> readExamplesAsString(@NotNull Class<?> resourceName, @NotNull String specResource, @Nullable SpecReaderFactory readerFactory, @NotNull String fileUrl) {
+        List<SpecExample> examples = SpecReader.readExamples(resourceName, specResource, readerFactory, fileUrl);
         List<String> result = new ArrayList<>();
         for (SpecExample example : examples) {
             result.add(example.getSource());
@@ -124,15 +84,11 @@ public class SpecReader {
         return result;
     }
 
-    public static String readSpec() {
-        return readSpec(null);
-    }
-
-    public static String readSpec(String specResource) {
+    public static String readSpec(@NotNull Class<?> resourceClass, @NotNull String specResource) {
         StringBuilder sb = new StringBuilder();
         try {
             String line;
-            InputStream inputStream = getSpecInputStream(specResource);
+            InputStream inputStream = getSpecInputStream(resourceClass, specResource);
             InputStreamReader streamReader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
             BufferedReader reader = new BufferedReader(streamReader);
             while ((line = reader.readLine()) != null) {
@@ -148,24 +104,13 @@ public class SpecReader {
         }
     }
 
-    public static InputStream getSpecInputStream() {
-        return getSpecInputStream(null);
-    }
-
-    public static InputStream getSpecInputStream(String specResource) {
-        String specPath = specResource != null ? specResource : "/spec.txt";
-        InputStream stream = SpecReader.class.getResourceAsStream(specPath);
+    public static InputStream getSpecInputStream(@NotNull Class<?> resourceClass, @NotNull String specResource) {
+        InputStream stream = resourceClass.getResourceAsStream(specResource);
         if (stream == null) {
             throw new IllegalStateException("Could not load " + specResource + " classpath resource");
         }
 
         return stream;
-    }
-
-    public static URL getSpecInputFileUrl(String specResource) {
-        String specPath = specResource != null ? specResource : "/spec.txt";
-        URL url = SpecReader.class.getResource(specPath);
-        return url;
     }
 
     protected List<SpecExample> read() throws IOException {
@@ -191,14 +136,14 @@ public class SpecReader {
         examples.add(example);
     }
 
-    public UrlString getFileUrl() {
-        return new UrlString(fileUrl, contentLineNumber);
+    @NotNull
+    public String getFileUrl() {
+        return fileUrl;
     }
 
     protected void processLine(String line) {
         boolean lineAbsorbed = false;
         boolean lineProcessed = false;
-        UrlString fileUrl = getFileUrl();
 
         switch (state) {
             case BEFORE:
@@ -232,7 +177,7 @@ public class SpecReader {
             case HTML:
                 if (line.equals(EXAMPLE_BREAK)) {
                     state = State.BEFORE;
-                    addSpecExample(new SpecExample(optionsSet, section, exampleNumber, source.toString(), html.toString(), null, comment == null ? null : comment.toString(), fileUrl));
+                    addSpecExample(new SpecExample(fileUrl, contentLineNumber, optionsSet, section, exampleNumber, source.toString(), html.toString(), null, comment == null ? null : comment.toString()));
                     resetContents();
                     lineAbsorbed = true;
                 } else if (line.equals(TYPE_BREAK)) {
@@ -247,7 +192,7 @@ public class SpecReader {
             case AST:
                 if (line.equals(EXAMPLE_BREAK)) {
                     state = State.BEFORE;
-                    addSpecExample(new SpecExample(optionsSet, section, exampleNumber, source.toString(), html.toString(), ast.toString(), comment == null ? null : comment.toString(), fileUrl));
+                    addSpecExample(new SpecExample(fileUrl, contentLineNumber, optionsSet, section, exampleNumber, source.toString(), html.toString(), ast.toString(), comment == null ? null : comment.toString()));
                     resetContents();
                 } else {
                     ast.append(line).append('\n');

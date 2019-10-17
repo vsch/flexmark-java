@@ -9,9 +9,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.junit.runners.Parameterized;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class ComboCoreDirectionalSpecTest extends ComboSpecTestCase {
     static final String SPEC_RESOURCE = "/ast_spec.md";
@@ -22,10 +20,6 @@ public class ComboCoreDirectionalSpecTest extends ComboSpecTestCase {
             .set(TestUtils.NO_FILE_EOL, false)
             .toImmutable();
     ;
-
-    static final Parser PARSER = Parser.builder(OPTIONS).build();
-    // The spec says URL-escaping is optional, but the examples assume that it's enabled.
-    static final HtmlRenderer RENDERER = HtmlRenderer.builder(OPTIONS).build();
 
     public ComboCoreDirectionalSpecTest(SpecExample example) {
         super(example);
@@ -38,8 +32,8 @@ public class ComboCoreDirectionalSpecTest extends ComboSpecTestCase {
 
     @Nullable
     @Override
-    public DataHolder options(String optionSet) {
-        return OPTIONS;
+    public DataHolder options(String option) {
+        return null;
     }
 
     @NotNull
@@ -48,19 +42,9 @@ public class ComboCoreDirectionalSpecTest extends ComboSpecTestCase {
         return SPEC_RESOURCE;
     }
 
-    @NotNull
-    public Parser parser() {
-        return PARSER;
-    }
-
-    @NotNull
-    public HtmlRenderer renderer() {
-        return RENDERER;
-    }
-
     @Override
     public @NotNull SpecExampleRenderer getSpecExampleRenderer(@NotNull SpecExample example, @Nullable DataHolder exampleOptions) {
         DataHolder combinedOptions = combineOptions(OPTIONS, exampleOptions);
-        return new FlexmarkSpecExampleRenderer(example, combinedOptions, PARSER.withOptions(combinedOptions), RENDERER.withOptions(combinedOptions), true);
+        return new FlexmarkSpecExampleRenderer(example, combinedOptions, Parser.builder(combinedOptions).build(), HtmlRenderer.builder(combinedOptions).build(), true);
     }
 }

@@ -2,7 +2,7 @@ package com.vladsch.flexmark.formatter;
 
 import com.vladsch.flexmark.html.renderer.HeaderIdGenerator;
 import com.vladsch.flexmark.parser.Parser;
-iimport com.vladsch.flexmark.spec.SpecExample;
+import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.test.ComboSpecTestCase;
 import com.vladsch.flexmark.test.FlexmarkSpecExampleRenderer;
 import com.vladsch.flexmark.test.SpecExampleRenderer;
@@ -42,7 +42,8 @@ public abstract class ComboCoreTranslationFormatterSpecTestBase extends ComboSpe
                 .set(Parser.PARSE_INNER_HTML_COMMENTS, true)
                 .set(Parser.HEADING_NO_ATX_SPACE, true)
                 .set(Formatter.MAX_TRAILING_BLANK_LINES, 0)
-                .set(TestUtils.NO_FILE_EOL, false).toImmutable();
+//                .set(TestUtils.NO_FILE_EOL, false)
+                .toImmutable();
 
         myDefaultOptions = combineOptions(OPTIONS, defaultOptions);
 
@@ -57,9 +58,9 @@ public abstract class ComboCoreTranslationFormatterSpecTestBase extends ComboSpe
 
     @Nullable
     @Override
-    final public DataHolder options(String optionSet) {
-        if (optionSet == null) return null;
-        return optionsMap.get(optionSet);
+    final public DataHolder options(String option) {
+        if (option == null) return null;
+        return optionsMap.get(option);
     }
 
     private Parser getParser(@Nullable DataHolder OPTIONS) {

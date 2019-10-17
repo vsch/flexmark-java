@@ -17,8 +17,8 @@ import java.util.List;
 @State(Scope.Benchmark)
 public class SpecBenchmark {
 
-    private static final String SPEC = SpecReader.readSpec();
-    private static final List<String> SPEC_EXAMPLES = SpecReader.readExamplesAsString();
+    private static final String SPEC = SpecReader.readSpec(TestUtils.class, TestUtils.DEFAULT_SPEC_RESOURCE);
+    private static final List<String> SPEC_EXAMPLES = SpecReader.readExamplesAsString(TestUtils.class, TestUtils.DEFAULT_SPEC_RESOURCE, null,TestUtils.DEFAULT_URL_PREFIX);
     private static final Parser PARSER = Parser.builder().build();
     private static final HtmlRenderer RENDERER = HtmlRenderer.builder().build();
 

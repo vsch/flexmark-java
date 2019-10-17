@@ -39,12 +39,12 @@ public class ParserTest {
     public void ioReaderTest() throws IOException {
         Parser parser = Parser.builder().build();
 
-        InputStream input1 = SpecReader.getSpecInputStream();
+        InputStream input1 = SpecReader.getSpecInputStream(TestUtils.class, TestUtils.DEFAULT_SPEC_RESOURCE);
         Node document1;
         InputStreamReader reader = new InputStreamReader(input1, StandardCharsets.UTF_8);
         document1 = parser.parseReader(reader);
 
-        String spec = SpecReader.readSpec();
+        String spec = SpecReader.readSpec(TestUtils.class, TestUtils.DEFAULT_SPEC_RESOURCE);
         Node document2 = parser.parse(spec);
 
         HtmlRenderer renderer = HtmlRenderer.builder().escapeHtml(true).build();

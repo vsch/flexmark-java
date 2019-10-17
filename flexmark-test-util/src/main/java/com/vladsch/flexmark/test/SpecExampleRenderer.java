@@ -48,7 +48,7 @@ public interface SpecExampleRenderer {
 
         @Override
         public @NotNull SpecExample getExample() {
-            return SpecExample.getNull();
+            return SpecExample.NULL;
         }
 
         @Override

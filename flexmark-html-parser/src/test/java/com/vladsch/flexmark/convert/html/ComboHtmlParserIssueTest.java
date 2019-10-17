@@ -3,7 +3,6 @@ package com.vladsch.flexmark.convert.html;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.spec.SpecReader;
-import com.vladsch.flexmark.spec.UrlString;
 import com.vladsch.flexmark.test.ComboSpecTestCase;
 import com.vladsch.flexmark.test.FlexmarkSpecExampleRenderer;
 import com.vladsch.flexmark.test.SpecExampleRenderer;
@@ -19,8 +18,6 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import static org.junit.Assert.assertEquals;
 
 public class ComboHtmlParserIssueTest extends ComboSpecTestCase {
     private static final String SPEC_RESOURCE = "/html_parser_issue_spec.md";
@@ -62,10 +59,6 @@ public class ComboHtmlParserIssueTest extends ComboSpecTestCase {
 
     private static final IRender RENDERER = new HtmlRootNodeRenderer(OPTIONS);
 
-    private static DataHolder optionsSet(String optionSet) {
-        return optionsMap.get(optionSet);
-    }
-
     public ComboHtmlParserIssueTest(SpecExample example) {
         super(example);
     }
@@ -77,8 +70,8 @@ public class ComboHtmlParserIssueTest extends ComboSpecTestCase {
 
     @Nullable
     @Override
-    public DataHolder options(String optionSet) {
-        return optionsSet(optionSet);
+    public DataHolder options(String option) {
+        return optionsMap.get(option);
     }
 
     @NotNull
@@ -89,8 +82,8 @@ public class ComboHtmlParserIssueTest extends ComboSpecTestCase {
 
     @Override
     public @NotNull SpecExampleRenderer getSpecExampleRenderer(@NotNull SpecExample example, @Nullable DataHolder exampleOptions) {
-        DataHolder combinedOptions = combineOptions(OPTIONS, exampleOptions);
-        return new FlexmarkSpecExampleRenderer(example, combinedOptions, PARSER.withOptions(combinedOptions), RENDERER.withOptions(combinedOptions), true);
+        DataHolder combineOptions = combineOptions(OPTIONS, exampleOptions);
+        return new FlexmarkSpecExampleRenderer(example, combineOptions, new HtmlParser(combineOptions), new HtmlRootNodeRenderer(combineOptions), true);
     }
 
     @NotNull
@@ -101,7 +94,7 @@ public class ComboHtmlParserIssueTest extends ComboSpecTestCase {
     }
 
     @Override
-    protected void assertRendering(UrlString fileUrl, String source, String expectedHtml, String expectedAst, String optionsSet) {
+    protected void assertRendering(@Nullable String fileUrl, @NotNull String source, @NotNull String expectedHtml, @Nullable String expectedAst, @Nullable String optionsSet) {
         // reverse source and html
         super.assertRendering(fileUrl, expectedHtml, source, null, optionsSet);
     }
