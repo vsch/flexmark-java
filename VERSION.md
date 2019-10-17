@@ -264,7 +264,8 @@ flexmark-java
 0.50.42
 -------
 
-* Fix: regression bug [#372, \[Regression?\] Attributes extension not applied to \`code\` tag of code blocks]
+* Fix: regression bug
+  [#372, \[Regression?\] Attributes extension not applied to \`code\` tag of code blocks]
   * Add: `AttributesExtension.FENCED_CODE_ADD_ATTRIBUTES`, default
     `FencedCodeAddType.ADD_TO_PRE_CODE` for backward compatibility with 0.42, but if this is
     option is not set and `AttributesExtension.FENCED_CODE_INFO_ATTRIBUTES` is set to `true`,
