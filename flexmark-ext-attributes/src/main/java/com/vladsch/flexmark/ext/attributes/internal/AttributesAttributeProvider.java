@@ -21,15 +21,18 @@ import static com.vladsch.flexmark.util.html.Attribute.CLASS_ATTR;
 
 public class AttributesAttributeProvider implements AttributeProvider {
     private final NodeAttributeRepository nodeAttributeRepository;
+    private final AttributesOptions attributeOptions;
 
     public AttributesAttributeProvider(LinkResolverContext context) {
         DataHolder options = context.getOptions();
+        attributeOptions = new AttributesOptions(options);
         nodeAttributeRepository = AttributesExtension.NODE_ATTRIBUTES.getFrom(options);
     }
 
     @Override
     public void setAttributes(Node node, AttributablePart part, Attributes attributes) {
-        if (part != CoreNodeRenderer.CODE_CONTENT) {
+        // regression bug, issue #372, add option, default to both as before
+        if (part == CoreNodeRenderer.CODE_CONTENT ? attributeOptions.fencedCodeAddAttributes.addToCode : attributeOptions.fencedCodeAddAttributes.addToPre) {
             ArrayList<AttributesNode> nodeAttributesList = nodeAttributeRepository.get(node);
             if (nodeAttributesList != null) {
                 // add these as attributes

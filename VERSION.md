@@ -113,6 +113,12 @@ flexmark-java
 0.50.42
 -------
 
+* Fix: regression bug [#372, \[Regression?\] Attributes extension not applied to \`code\` tag of code blocks]
+  * Add: `AttributesExtension.FENCED_CODE_ADD_ATTRIBUTES`, default
+    `FencedCodeAddType.ADD_TO_PRE_CODE` for backward compatibility with 0.42, but if this is
+    option is not set and `AttributesExtension.FENCED_CODE_INFO_ATTRIBUTES` is set to `true`,
+    default will change to `FencedCodeAddType.ADD_TO_PRE` since attributes after info are used
+    to add to the `code` tag.
 * Fix: data set copy constructors to accept `null`
 * Fix: change `DataSet.keySet()` to `DataSet.getKeys()`
   * Deprecate: `DataSet.keySet()`
@@ -1703,3 +1709,5 @@ setting either will affect both keys. For information on these keys see
 [PdfLandscapeConverter.java]: https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/samples/PdfLandscapeConverter.java
 [YouTrack: IDEA-207453]: https://youtrack.jetbrains.com/issue/IDEA-207453 "Add Conversion of ref anchor to UrlFilter for file line navigation"
 
+
+[#372, \[Regression?\] Attributes extension not applied to \`code\` tag of code blocks]: https://github.com/vsch/flexmark-java/issues/372
