@@ -69,18 +69,18 @@
       </highlightList>
       <directories>
         <option name="$PROJECT_DIR$/FlexmarkJavaAssets/doc/comms/youtrack/images" />
-        <option name="$PROJECT_DIR$/FlexmarkJavaAssets/doc/comms/issues/images" />
-        <option name="$PROJECT_DIR$/flexmark-docx-converter/src/main/resources/emoji" />
-        <option name="$PROJECT_DIR$/flexmark-ext-tables/src/main/javadoc" />
-        <option name="$PROJECT_DIR$/flexmark-ext-admonition/src/main/resources/images" />
-        <option name="$PROJECT_DIR$/flexmark-docx-converter/src/test/resources/05-SW-Software-Development/media" />
-        <option name="$PROJECT_DIR$/FlexmarkJavaAssets/doc/comms/issues" />
-        <option name="$PROJECT_DIR$/assets/images" />
-        <option name="$PROJECT_DIR$/flexmark-ext-xwiki-macros/src/main/javadoc" />
-        <option name="$PROJECT_DIR$/flexmark-java.wiki/resources" />
-        <option name="$PROJECT_DIR$/flexmark-ext-admonition/src/main/javadoc" />
         <option name="$PROJECT_DIR$/flexmark-ext-enumerated-reference/src/main/javadoc" />
+        <option name="$PROJECT_DIR$/flexmark-ext-admonition/src/main/javadoc" />
         <option name="$PROJECT_DIR$/FlexmarkJavaAssets/doc/images" />
+        <option name="$PROJECT_DIR$/flexmark-ext-xwiki-macros/src/main/javadoc" />
+        <option name="$PROJECT_DIR$/FlexmarkJavaAssets/doc/comms/issues" />
+        <option name="$PROJECT_DIR$/flexmark-ext-admonition/src/main/resources/images" />
+        <option name="$PROJECT_DIR$/FlexmarkJavaAssets/doc/comms/issues/images" />
+        <option name="$PROJECT_DIR$/flexmark-docx-converter/src/test/resources/05-SW-Software-Development/media" />
+        <option name="$PROJECT_DIR$/flexmark-docx-converter/src/main/resources/emoji" />
+        <option name="$PROJECT_DIR$/flexmark-java.wiki/resources" />
+        <option name="$PROJECT_DIR$/flexmark-ext-tables/src/main/javadoc" />
+        <option name="$PROJECT_DIR$/assets/images" />
       </directories>
       <filenames />
     </PasteImageHistory>

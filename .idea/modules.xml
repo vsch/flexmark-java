@@ -48,6 +48,7 @@
       <module fileurl="file://$PROJECT_DIR$/flexmark-java.iml" filepath="$PROJECT_DIR$/flexmark-java.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-java-samples/flexmark-java-samples.iml" filepath="$PROJECT_DIR$/flexmark-java-samples/flexmark-java-samples.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-jira-converter/flexmark-jira-converter.iml" filepath="$PROJECT_DIR$/flexmark-jira-converter/flexmark-jira-converter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/flexmark-osgi/flexmark-osgi.iml" filepath="$PROJECT_DIR$/flexmark-osgi/flexmark-osgi.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-pdf-converter/flexmark-pdf-converter.iml" filepath="$PROJECT_DIR$/flexmark-pdf-converter/flexmark-pdf-converter.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-profile-pegdown/flexmark-profile-pegdown.iml" filepath="$PROJECT_DIR$/flexmark-profile-pegdown/flexmark-profile-pegdown.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-test-suite/flexmark-test-suite.iml" filepath="$PROJECT_DIR$/flexmark-test-suite/flexmark-test-suite.iml" />

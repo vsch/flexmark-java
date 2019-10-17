@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="SharedFileColors">
-    <fileColor scope="Flexmark Ext Overview" color="Violet" />
-    <fileColor scope="Wiki" color="fefaff" />
-    <fileColor scope="Changed Files" color="edfbff" />
+    <fileColor scope="Plugin Description" color="Rose" />
+    <fileColor scope="HTML Notice" color="Rose" />
+    <fileColor scope="launch-debug" color="Rose" />
+    <fileColor scope="Asset/Doc" color="Blue" />
+    <fileColor scope="Wiki" color="fae6ff" />
   </component>
 </project>
