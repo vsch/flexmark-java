@@ -422,22 +422,24 @@ public class TranslationHandlerImpl implements TranslationHandler {
 
     @Override
     public CharSequence transformNonTranslating(CharSequence prefix, CharSequence nonTranslatingText, CharSequence suffix, CharSequence suffix2) {
+        // need to transfer trailing EOLs to id
+        CharSequence trimmedEOL;
+        if (suffix2 != null) {
+            trimmedEOL = suffix2;
+        } else {
+            BasedSequence basedSequence = BasedSequenceImpl.of(nonTranslatingText);
+            trimmedEOL = basedSequence.trimmedEOL();
+        }
+
         switch (myRenderPurpose) {
             case TRANSLATION_SPANS:
-                // need to transfer trailing EOLs to id
-                CharSequence trimmedEOL;
-                if (suffix2 != null) {
-                    trimmedEOL = suffix2;
-                } else {
-                    BasedSequence basedSequence = BasedSequenceImpl.of(nonTranslatingText);
-                    trimmedEOL = basedSequence.trimmedEOL();
-                }
                 String replacedTextId = getPlaceholderId(myFormatterOptions.translationIdFormat, ++myPlaceholderId, prefix, suffix, trimmedEOL);
                 myNonTranslatingTexts.put(replacedTextId, nonTranslatingText.toString());
                 return replacedTextId;
 
             case TRANSLATED_SPANS:
-                return getPlaceholderId(myFormatterOptions.translationIdFormat, ++myPlaceholderId, prefix, suffix, suffix2);
+                String placeholderId = getPlaceholderId(myFormatterOptions.translationIdFormat, ++myPlaceholderId, prefix, suffix, trimmedEOL);
+                return placeholderId;
 
             case TRANSLATED:
                 if (nonTranslatingText.length() > 0) {

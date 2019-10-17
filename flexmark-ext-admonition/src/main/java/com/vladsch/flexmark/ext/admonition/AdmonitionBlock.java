@@ -1,5 +1,7 @@
 package com.vladsch.flexmark.ext.admonition;
 
+import com.vladsch.flexmark.ast.Paragraph;
+import com.vladsch.flexmark.ast.ParagraphContainer;
 import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
@@ -8,7 +10,7 @@ import java.util.List;
 /**
  * An Admonition block node
  */
-public class AdmonitionBlock extends Block {
+public class AdmonitionBlock extends Block implements ParagraphContainer {
     private BasedSequence openingMarker = BasedSequence.NULL;
     private BasedSequence info = BasedSequence.NULL;
     protected BasedSequence titleOpeningMarker = BasedSequence.NULL;
@@ -114,5 +116,21 @@ public class AdmonitionBlock extends Block {
             title = BasedSequence.NULL;
             titleClosingMarker = BasedSequence.NULL;
         }
+    }
+
+    @Override
+    public boolean isParagraphEndWrappingDisabled(Paragraph node) {
+        return false;
+    }
+
+    @Override
+    public boolean isParagraphStartWrappingDisabled(Paragraph node) {
+        if (node == getFirstChild()) {
+            // need to see if there is a blank line between it and our start
+            int ourEOL = getChars().getBaseSequence().endOfLine(getChars().getStartOffset());
+            int childStartEOL = node.getChars().getBaseSequence().startOfLine(node.getChars().getStartOffset());
+            return ourEOL + 1 == childStartEOL;
+        }
+        return false;
     }
 }

@@ -126,7 +126,6 @@ indented 1
     
 .
 ???+ note ""
-
     first child paragraph
 
 ````````````````````````````````
@@ -140,7 +139,6 @@ indented 2
     
 .
 ???+ note ""
-
     first child paragraph
 
 ````````````````````````````````
@@ -154,7 +152,6 @@ indented 3
     
 .
 ???+ note ""
-
     first child paragraph
 
 ````````````````````````````````
@@ -183,7 +180,6 @@ nested
         embedded
 .
 ???+ note ""
-
     first child paragraph
 
     !!! note
@@ -225,7 +221,7 @@ with multiple children
 ````````````````````````````````
 
 
-collapsed with multiple children     
+collapsed with multiple children
 
 ```````````````````````````````` example Basic Tests: 16
 ??? example 

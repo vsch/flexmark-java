@@ -20,6 +20,7 @@ import com.vladsch.flexmark.util.format.options.ListSpacing;
 import com.vladsch.flexmark.util.html.LineFormattingAppendable;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.RepeatedCharSequence;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 import java.util.regex.Matcher;
@@ -63,6 +64,49 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
         myHtmlBlockPrefix = "<" + this.formatterOptions.translationHtmlBlockPrefix;
         myHtmlInlinePrefix = this.formatterOptions.translationHtmlInlinePrefix;
         myTranslationAutolinkPrefix = this.formatterOptions.translationAutolinkPrefix;
+    }
+
+    @Override
+    public Set<NodeFormattingHandler<?>> getNodeFormattingHandlers() {
+        return new HashSet<>(Arrays.asList(
+                // Generic unknown node formatter
+                new NodeFormattingHandler<>(Node.class, CoreNodeFormatter.this::render),
+
+                // specific nodes
+                new NodeFormattingHandler<>(AutoLink.class, CoreNodeFormatter.this::render),
+                new NodeFormattingHandler<>(BlankLine.class, CoreNodeFormatter.this::render),
+                new NodeFormattingHandler<>(BlockQuote.class, CoreNodeFormatter.this::render),
+                new NodeFormattingHandler<>(Code.class, CoreNodeFormatter.this::render),
+                new NodeFormattingHandler<>(Document.class, CoreNodeFormatter.this::render),
+                new NodeFormattingHandler<>(Emphasis.class, CoreNodeFormatter.this::render),
+                new NodeFormattingHandler<>(FencedCodeBlock.class, CoreNodeFormatter.this::render),
+                new NodeFormattingHandler<>(HardLineBreak.class, CoreNodeFormatter.this::render),
+                new NodeFormattingHandler<>(Heading.class, CoreNodeFormatter.this::render),
+                new NodeFormattingHandler<>(HtmlBlock.class, CoreNodeFormatter.this::render),
+                new NodeFormattingHandler<>(HtmlCommentBlock.class, CoreNodeFormatter.this::render),
+                new NodeFormattingHandler<>(HtmlInnerBlock.class, CoreNodeFormatter.this::render),
+                new NodeFormattingHandler<>(HtmlInnerBlockComment.class, CoreNodeFormatter.this::render),
+                new NodeFormattingHandler<>(HtmlEntity.class, CoreNodeFormatter.this::render),
+                new NodeFormattingHandler<>(HtmlInline.class, CoreNodeFormatter.this::render),
+                new NodeFormattingHandler<>(HtmlInlineComment.class, CoreNodeFormatter.this::render),
+                new NodeFormattingHandler<>(Image.class, CoreNodeFormatter.this::render),
+                new NodeFormattingHandler<>(ImageRef.class, CoreNodeFormatter.this::render),
+                new NodeFormattingHandler<>(IndentedCodeBlock.class, CoreNodeFormatter.this::render),
+                new NodeFormattingHandler<>(Link.class, CoreNodeFormatter.this::render),
+                new NodeFormattingHandler<>(LinkRef.class, CoreNodeFormatter.this::render),
+                new NodeFormattingHandler<>(BulletList.class, CoreNodeFormatter.this::render),
+                new NodeFormattingHandler<>(OrderedList.class, CoreNodeFormatter.this::render),
+                new NodeFormattingHandler<>(BulletListItem.class, CoreNodeFormatter.this::render),
+                new NodeFormattingHandler<>(OrderedListItem.class, CoreNodeFormatter.this::render),
+                new NodeFormattingHandler<>(MailLink.class, CoreNodeFormatter.this::render),
+                new NodeFormattingHandler<>(Paragraph.class, CoreNodeFormatter.this::render),
+                new NodeFormattingHandler<>(Reference.class, CoreNodeFormatter.this::render),
+                new NodeFormattingHandler<>(SoftLineBreak.class, CoreNodeFormatter.this::render),
+                new NodeFormattingHandler<>(StrongEmphasis.class, CoreNodeFormatter.this::render),
+                new NodeFormattingHandler<>(Text.class, CoreNodeFormatter.this::render),
+                new NodeFormattingHandler<>(TextBase.class, CoreNodeFormatter.this::render),
+                new NodeFormattingHandler<>(ThematicBreak.class, CoreNodeFormatter.this::render)
+        ));
     }
 
     @Override
@@ -193,49 +237,6 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
                 }
             }
         }
-    }
-
-    @Override
-    public Set<NodeFormattingHandler<?>> getNodeFormattingHandlers() {
-        return new HashSet<>(Arrays.asList(
-                // Generic unknown node formatter
-                new NodeFormattingHandler<>(Node.class, CoreNodeFormatter.this::render),
-
-                // specific nodes
-                new NodeFormattingHandler<>(AutoLink.class, CoreNodeFormatter.this::render),
-                new NodeFormattingHandler<>(BlankLine.class, CoreNodeFormatter.this::render),
-                new NodeFormattingHandler<>(BlockQuote.class, CoreNodeFormatter.this::render),
-                new NodeFormattingHandler<>(Code.class, CoreNodeFormatter.this::render),
-                new NodeFormattingHandler<>(Document.class, CoreNodeFormatter.this::render),
-                new NodeFormattingHandler<>(Emphasis.class, CoreNodeFormatter.this::render),
-                new NodeFormattingHandler<>(FencedCodeBlock.class, CoreNodeFormatter.this::render),
-                new NodeFormattingHandler<>(HardLineBreak.class, CoreNodeFormatter.this::render),
-                new NodeFormattingHandler<>(Heading.class, CoreNodeFormatter.this::render),
-                new NodeFormattingHandler<>(HtmlBlock.class, CoreNodeFormatter.this::render),
-                new NodeFormattingHandler<>(HtmlCommentBlock.class, CoreNodeFormatter.this::render),
-                new NodeFormattingHandler<>(HtmlInnerBlock.class, CoreNodeFormatter.this::render),
-                new NodeFormattingHandler<>(HtmlInnerBlockComment.class, CoreNodeFormatter.this::render),
-                new NodeFormattingHandler<>(HtmlEntity.class, CoreNodeFormatter.this::render),
-                new NodeFormattingHandler<>(HtmlInline.class, CoreNodeFormatter.this::render),
-                new NodeFormattingHandler<>(HtmlInlineComment.class, CoreNodeFormatter.this::render),
-                new NodeFormattingHandler<>(Image.class, CoreNodeFormatter.this::render),
-                new NodeFormattingHandler<>(ImageRef.class, CoreNodeFormatter.this::render),
-                new NodeFormattingHandler<>(IndentedCodeBlock.class, CoreNodeFormatter.this::render),
-                new NodeFormattingHandler<>(Link.class, CoreNodeFormatter.this::render),
-                new NodeFormattingHandler<>(LinkRef.class, CoreNodeFormatter.this::render),
-                new NodeFormattingHandler<>(BulletList.class, CoreNodeFormatter.this::render),
-                new NodeFormattingHandler<>(OrderedList.class, CoreNodeFormatter.this::render),
-                new NodeFormattingHandler<>(BulletListItem.class, CoreNodeFormatter.this::render),
-                new NodeFormattingHandler<>(OrderedListItem.class, CoreNodeFormatter.this::render),
-                new NodeFormattingHandler<>(MailLink.class, CoreNodeFormatter.this::render),
-                new NodeFormattingHandler<>(Paragraph.class, CoreNodeFormatter.this::render),
-                new NodeFormattingHandler<>(Reference.class, CoreNodeFormatter.this::render),
-                new NodeFormattingHandler<>(SoftLineBreak.class, CoreNodeFormatter.this::render),
-                new NodeFormattingHandler<>(StrongEmphasis.class, CoreNodeFormatter.this::render),
-                new NodeFormattingHandler<>(Text.class, CoreNodeFormatter.this::render),
-                new NodeFormattingHandler<>(TextBase.class, CoreNodeFormatter.this::render),
-                new NodeFormattingHandler<>(ThematicBreak.class, CoreNodeFormatter.this::render)
-        ));
     }
 
     private void render(Node node, NodeFormatterContext context, MarkdownWriter markdown) {
@@ -433,8 +434,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
         if (closingMarkerLen < formatterOptions.fencedCodeMarkerLength) closingMarkerLen = formatterOptions.fencedCodeMarkerLength;
 
         openingMarker = RepeatedCharSequence.of(String.valueOf(openingMarkerChar), openingMarkerLen);
-        if (formatterOptions.fencedCodeMatchClosingMarker || closingMarkerChar == '\0') closingMarker = openingMarker;
-        else closingMarker = RepeatedCharSequence.of(String.valueOf(closingMarkerChar), closingMarkerLen);
+        if (formatterOptions.fencedCodeMatchClosingMarker || closingMarkerChar == '\0') { closingMarker = openingMarker; } else closingMarker = RepeatedCharSequence.of(String.valueOf(closingMarkerChar), closingMarkerLen);
 
         markdown.append(openingMarker);
         if (formatterOptions.fencedCodeSpaceBeforeInfo) markdown.append(' ');
@@ -484,26 +484,33 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
 
     private void render(IndentedCodeBlock node, NodeFormatterContext context, MarkdownWriter markdown) {
         markdown.blankLine();
-        String prefix = RepeatedCharSequence.of(" ", listOptions.getCodeIndent()).toString();
 
-        if (formatterOptions.emulationProfile == ParserEmulationProfile.GITHUB_DOC) {
-            if (node.getParent() instanceof ListItem) {
-                BasedSequence marker = ((ListItem) node.getParent()).getOpeningMarker();
-                prefix = RepeatedCharSequence.of(" ", Utils.minLimit(8 - marker.length() - 1, 4)).toString();
-            }
-        }
-
-        markdown.pushPrefix().addPrefix(prefix);
-        markdown.openPreFormatted(true);
         if (context.isTransformingText()) {
+            // here we need actual prefix in the code or the generated partial doc will not be accurate and cause translated AST to be wrong
             BasedSequence contentChars = node.getContentChars();
-            if (contentChars.trimmedEOL().isEmpty()) {
-                // need to always have EOL at the end
-                markdown.appendNonTranslating(Utils.suffixWith(contentChars.toString(), '\n'));
-            } else {
-                markdown.appendNonTranslating(contentChars);
+            String prefix = getActualAdditionalPrefix(contentChars, markdown);
+
+            // need to always have EOL at the end and make sure no leading spaces on id at translated collection
+            if (context.getRenderPurpose() == TRANSLATED) {
+                contentChars = contentChars.trimStart();
             }
+
+            markdown.pushPrefix().addPrefix(prefix);
+            markdown.openPreFormatted(true);
+            markdown.appendNonTranslating(Utils.suffixWith(contentChars.toString(), '\n'));
         } else {
+            String prefix = RepeatedCharSequence.of(" ", listOptions.getCodeIndent()).toString();
+
+            if (formatterOptions.emulationProfile == ParserEmulationProfile.GITHUB_DOC) {
+                if (node.getParent() instanceof ListItem) {
+                    BasedSequence marker = ((ListItem) node.getParent()).getOpeningMarker();
+                    prefix = RepeatedCharSequence.of(" ", Utils.minLimit(8 - marker.length() - 1, 4)).toString();
+                }
+            }
+
+            markdown.pushPrefix().addPrefix(prefix);
+            markdown.openPreFormatted(true);
+
             if (formatterOptions.indentedCodeMinimizeIndent) {
                 List<BasedSequence> lines = node.getContentLines();
                 int[] leadColumns = new int[lines.size()];
@@ -535,6 +542,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
                 markdown.append(node.getContentChars());
             }
         }
+
         markdown.closePreFormatted();
         markdown.popPrefix(true);
         markdown.tailBlankLine();
@@ -549,21 +557,26 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
     }
 
     private void render(BulletListItem node, NodeFormatterContext context, MarkdownWriter markdown) {
-        renderListItem(node, context, markdown, listOptions, "", false);
+        renderListItem(node, context, markdown, listOptions, node.getMarkerSuffix(), false);
     }
 
     private void render(OrderedListItem node, NodeFormatterContext context, MarkdownWriter markdown) {
-        renderListItem(node, context, markdown, listOptions, "", false);
+        renderListItem(node, context, markdown, listOptions, node.getMarkerSuffix(), false);
     }
 
     public static void renderList(ListBlock node, NodeFormatterContext context, MarkdownWriter markdown) {
-        ArrayList<Node> itemList = new ArrayList<>();
-        Node item = node.getFirstChild();
-        while (item != null) {
-            itemList.add(item);
-            item = item.getNext();
+        if (context.isTransformingText()) {
+            // CAUTION: during translation no formatting should be done
+            context.renderChildren(node);
+        } else {
+            ArrayList<Node> itemList = new ArrayList<>();
+            Node item = node.getFirstChild();
+            while (item != null) {
+                itemList.add(item);
+                item = item.getNext();
+            }
+            renderList(node, context, markdown, itemList);
         }
-        renderList(node, context, markdown, itemList);
     }
 
     public static void renderList(ListBlock node, NodeFormatterContext context, MarkdownWriter markdown, List<Node> itemList) {
@@ -616,83 +629,152 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
         }
     }
 
+    @NotNull
+    public static String getActualAdditionalPrefix(BasedSequence contentChars, MarkdownWriter markdown) {
+        String prefix;
+        int parentPrefix = markdown.getPrefix().length();
+        int column = contentChars.getBaseSequence().getColumnAtIndex(contentChars.getStartOffset());
+
+        prefix = RepeatedCharSequence.of(" ", Utils.minLimit(0, column - parentPrefix)).toString();
+        return prefix;
+    }
+
+    @NotNull
+    public static String getAdditionalPrefix(BasedSequence fromChars, BasedSequence toChars) {
+        String prefix;
+        int parentPrefix = fromChars.getStartOffset();
+        int column = toChars.getStartOffset();
+
+        prefix = RepeatedCharSequence.of(" ", Utils.minLimit(0, column - parentPrefix)).toString();
+        return prefix;
+    }
+
     public static void renderListItem(
             ListItem node,
             NodeFormatterContext context,
             MarkdownWriter markdown,
-            ListOptions listOptions, CharSequence markerSuffix,
+            ListOptions listOptions,
+            BasedSequence markerSuffix,
             boolean addBlankLineLooseItems
     ) {
         FormatterOptions options = context.getFormatterOptions();
 
-        if (options.listRemoveEmptyItems && !(node.hasChildren() && node.getFirstChildAnyNot(BlankLine.class) != null)) {
-            return;
-        }
+        if (context.isTransformingText()) {
+            BasedSequence openingMarker = node.getOpeningMarker();
+            String itemContentPrefix;
+            String itemContentSpacer;
+            String prefix;
+            String additionalPrefix = getActualAdditionalPrefix(openingMarker, markdown);
 
-        CharSequence openingMarker = node.getOpeningMarker();
-        if (node instanceof OrderedListItem) {
-            char delimiter = openingMarker.charAt(openingMarker.length() - 1);
-            CharSequence number = openingMarker.subSequence(0, openingMarker.length() - 1);
+            if (node.getFirstChild() == null) {
+                // TEST: not sure if this works, need an empty list item with no children to test
+                itemContentPrefix = RepeatedCharSequence.of(' ', openingMarker.length() + (listOptions.isItemContentAfterSuffix() ? markerSuffix.length() : 0) + 1).toString();
+                prefix = additionalPrefix + itemContentPrefix;
 
-            switch (options.listNumberedMarker) {
-                case ANY:
-                    break;
-                case DOT:
-                    delimiter = '.';
-                    break;
-                case PAREN:
-                    delimiter = ')';
-                    break;
-                default:
-                    throw new IllegalStateException("Missing case for ListNumberedMarker " + options.listNumberedMarker.name());
-            }
-
-            if (options.listRenumberItems) {
-                Document document = context.getDocument();
-                Integer itemNumber = document.get(LIST_ITEM_NUMBER);
-                openingMarker = String.format(Locale.US, "%d%c", itemNumber++, delimiter);
-                document.set(LIST_ITEM_NUMBER, itemNumber);
+                itemContentSpacer = " ";
             } else {
-                openingMarker = String.format("%s%c", number, delimiter);
+                BasedSequence childContent = node.getFirstChild().getChars();
+                itemContentPrefix = getAdditionalPrefix(markerSuffix.isEmpty() ? openingMarker : markerSuffix, childContent);
+                prefix = additionalPrefix + itemContentPrefix;
+
+                itemContentSpacer = getAdditionalPrefix(markerSuffix.isEmpty() ? openingMarker.getEmptySuffix() : markerSuffix.getEmptySuffix(), childContent);
             }
-        } else {
-            switch (options.listBulletMarker) {
-                case ANY:
-                    break;
-                case DASH:
-                    openingMarker = "-";
-                    break;
-                case ASTERISK:
-                    openingMarker = "*";
-                    break;
-                case PLUS:
-                    openingMarker = "+";
-                    break;
-                default:
-                    throw new IllegalStateException("Missing case for ListBulletMarker " + options.listBulletMarker.name());
+
+            markdown.pushPrefix().addPrefix(prefix, true);
+            markdown.append(additionalPrefix).append(openingMarker);
+
+            if (!markerSuffix.isEmpty()) {
+                String markerSuffixIndent = getAdditionalPrefix(openingMarker.getEmptySuffix(), markerSuffix);
+                markdown.append(markerSuffixIndent).append(markerSuffix);
             }
-        }
 
-        CharSequence prefix = options.itemContentIndent ? RepeatedCharSequence.of(' ', openingMarker.length() + (listOptions.isItemContentAfterSuffix() ? markerSuffix.length() : 0) + 1)
-                : RepeatedCharSequence.of(" ", listOptions.getItemIndent()).toString();
+            markdown.append(itemContentSpacer);
 
-        markdown.pushPrefix().addPrefix(prefix, true);
+            // if have no item text and followed by eol then add EOL
+            if (!(node.getFirstChild() instanceof Paragraph)) {
+                if (node.getFirstChild() == null) {
+                    markdown.append("\n");
+                } else {
+                    int posEOL = node.getChars().getBaseSequence().endOfLine(openingMarker.getEndOffset());
+                    if (posEOL < node.getFirstChild().getChars().getStartOffset()) {
+                        // output EOL
+                        markdown.append("\n");
+                    }
+                }
+            }
 
-        markdown.append(openingMarker).append(' ').append(markerSuffix);
-
-        if (node.hasChildren() && node.getFirstChildAnyNot(BlankLine.class) != null) {
             context.renderChildren(node);
-            if (addBlankLineLooseItems && (node.isLoose() || node.getDocument().get(LIST_ITEM_SPACING) == ListSpacing.LOOSE)) {
-                markdown.tailBlankLine();
-            }
+            markdown.popPrefix();
         } else {
-            if (node.isLoose()) {
-                markdown.tailBlankLine();
-            } else {
-                markdown.line();
+            if (options.listRemoveEmptyItems && !(node.hasChildren() && node.getFirstChildAnyNot(BlankLine.class) != null)) {
+                return;
             }
+
+            CharSequence openingMarker = node.getOpeningMarker();
+            if (node instanceof OrderedListItem) {
+                char delimiter = openingMarker.charAt(openingMarker.length() - 1);
+                CharSequence number = openingMarker.subSequence(0, openingMarker.length() - 1);
+
+                switch (options.listNumberedMarker) {
+                    case ANY:
+                        break;
+                    case DOT:
+                        delimiter = '.';
+                        break;
+                    case PAREN:
+                        delimiter = ')';
+                        break;
+                    default:
+                        throw new IllegalStateException("Missing case for ListNumberedMarker " + options.listNumberedMarker.name());
+                }
+
+                if (options.listRenumberItems) {
+                    Document document = context.getDocument();
+                    Integer itemNumber = document.get(LIST_ITEM_NUMBER);
+                    openingMarker = String.format(Locale.US, "%d%c", itemNumber++, delimiter);
+                    document.set(LIST_ITEM_NUMBER, itemNumber);
+                } else {
+                    openingMarker = String.format("%s%c", number, delimiter);
+                }
+            } else {
+                switch (options.listBulletMarker) {
+                    case ANY:
+                        break;
+                    case DASH:
+                        openingMarker = "-";
+                        break;
+                    case ASTERISK:
+                        openingMarker = "*";
+                        break;
+                    case PLUS:
+                        openingMarker = "+";
+                        break;
+                    default:
+                        throw new IllegalStateException("Missing case for ListBulletMarker " + options.listBulletMarker.name());
+                }
+            }
+
+            CharSequence prefix = options.itemContentIndent ? RepeatedCharSequence.of(' ', openingMarker.length() + (listOptions.isItemContentAfterSuffix() ? markerSuffix.length() : 0) + 1)
+                    : RepeatedCharSequence.of(" ", listOptions.getItemIndent()).toString();
+
+            markdown.pushPrefix().addPrefix(prefix, true);
+
+            markdown.append(openingMarker).append(' ').append(markerSuffix);
+
+            if (node.hasChildren() && node.getFirstChildAnyNot(BlankLine.class) != null) {
+                context.renderChildren(node);
+                if (addBlankLineLooseItems && (node.isLoose() || node.getDocument().get(LIST_ITEM_SPACING) == ListSpacing.LOOSE)) {
+                    markdown.tailBlankLine();
+                }
+            } else {
+                if (node.isLoose()) {
+                    markdown.tailBlankLine();
+                } else {
+                    markdown.line();
+                }
+            }
+            markdown.popPrefix();
         }
-        markdown.popPrefix();
     }
 
     private void render(Emphasis node, NodeFormatterContext context, MarkdownWriter markdown) {
@@ -727,44 +809,52 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
     }
 
     private void render(Paragraph node, NodeFormatterContext context, MarkdownWriter markdown) {
-        if (node.getParent() instanceof ParagraphContainer) {
-            boolean startWrappingDisabled = ((ParagraphContainer) node.getParent()).isParagraphStartWrappingDisabled(node);
-            boolean endWrappingDisabled = ((ParagraphContainer) node.getParent()).isParagraphEndWrappingDisabled(node);
-            if (startWrappingDisabled || endWrappingDisabled) {
-                if (!startWrappingDisabled) markdown.blankLine();
-                renderTextBlockParagraphLines(node, context, markdown);
-                if (!endWrappingDisabled) markdown.blankLine();
-            } else {
-                renderLooseParagraph(node, context, markdown);
+        if (context.isTransformingText()) {
+            // leave all as is
+            renderTextBlockParagraphLines(node, context, markdown);
+            if (node.isTrailingBlankLine()) {
+                markdown.tailBlankLine();
             }
         } else {
-            if (!(node.getParent() instanceof ParagraphItemContainer)) {
-                if (!node.isTrailingBlankLine() && (node.getNext() == null || node.getNext() instanceof ListBlock)) {
+            if (node.getParent() instanceof ParagraphContainer) {
+                boolean startWrappingDisabled = ((ParagraphContainer) node.getParent()).isParagraphStartWrappingDisabled(node);
+                boolean endWrappingDisabled = ((ParagraphContainer) node.getParent()).isParagraphEndWrappingDisabled(node);
+                if (startWrappingDisabled || endWrappingDisabled) {
+                    if (!startWrappingDisabled) markdown.blankLine();
                     renderTextBlockParagraphLines(node, context, markdown);
+                    if (!endWrappingDisabled) markdown.blankLine();
                 } else {
                     renderLooseParagraph(node, context, markdown);
                 }
             } else {
-                boolean isItemParagraph = ((ParagraphItemContainer) node.getParent()).isItemParagraph(node);
-                if (isItemParagraph) {
-                    ListSpacing itemSpacing = context.getDocument().get(LIST_ITEM_SPACING);
-                    if (itemSpacing == ListSpacing.TIGHT) {
+                if (!(node.getParent() instanceof ParagraphItemContainer)) {
+                    if (!node.isTrailingBlankLine() && (node.getNext() == null || node.getNext() instanceof ListBlock)) {
                         renderTextBlockParagraphLines(node, context, markdown);
-                    } else if (itemSpacing == ListSpacing.LOOSE) {
-                        if (node.getParent().getNextAnyNot(BlankLine.class) == null) {
-                            renderTextBlockParagraphLines(node, context, markdown);
-                        } else {
-                            renderLooseItemParagraph(node, context, markdown);
-                        }
                     } else {
-                        if (!((ParagraphItemContainer) node.getParent()).isParagraphWrappingDisabled(node, listOptions, context.getOptions())) {
-                            renderLooseItemParagraph(node, context, markdown);
-                        } else {
-                            renderTextBlockParagraphLines(node, context, markdown);
-                        }
+                        renderLooseParagraph(node, context, markdown);
                     }
                 } else {
-                    renderLooseParagraph(node, context, markdown);
+                    boolean isItemParagraph = ((ParagraphItemContainer) node.getParent()).isItemParagraph(node);
+                    if (isItemParagraph) {
+                        ListSpacing itemSpacing = context.getDocument().get(LIST_ITEM_SPACING);
+                        if (itemSpacing == ListSpacing.TIGHT) {
+                            renderTextBlockParagraphLines(node, context, markdown);
+                        } else if (itemSpacing == ListSpacing.LOOSE) {
+                            if (node.getParent().getNextAnyNot(BlankLine.class) == null) {
+                                renderTextBlockParagraphLines(node, context, markdown);
+                            } else {
+                                renderLooseItemParagraph(node, context, markdown);
+                            }
+                        } else {
+                            if (!((ParagraphItemContainer) node.getParent()).isParagraphWrappingDisabled(node, listOptions, context.getOptions())) {
+                                renderLooseItemParagraph(node, context, markdown);
+                            } else {
+                                renderTextBlockParagraphLines(node, context, markdown);
+                            }
+                        }
+                    } else {
+                        renderLooseParagraph(node, context, markdown);
+                    }
                 }
             }
         }
@@ -902,13 +992,8 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
 
     private void render(HtmlInline node, NodeFormatterContext context, MarkdownWriter markdown) {
         switch (context.getRenderPurpose()) {
+            case TRANSLATED_SPANS:
             case TRANSLATION_SPANS: {
-                String prefix = node.getChars().startsWith("</") ? "</" : "<";
-                markdown.appendNonTranslating(prefix + myHtmlInlinePrefix, node.getChars(), ">");
-            }
-            break;
-
-            case TRANSLATED_SPANS: {
                 String prefix = node.getChars().startsWith("</") ? "</" : "<";
                 markdown.appendNonTranslating(prefix + myHtmlInlinePrefix, node.getChars(), ">");
             }

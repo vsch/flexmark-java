@@ -54,7 +54,8 @@ public class SpecExample {
     // @formatter:on
 
     public boolean isFullSpecExample() {
-        return this != NULL
+        return this != NULL && isNull
+                && !Objects.equals(this.fileUrl, NULL.fileUrl)
                 && Objects.equals(this.optionsSet, NULL.optionsSet)
                 && Objects.equals(this.section, NULL.section)
                 && this.exampleNumber == NULL.exampleNumber
@@ -122,12 +123,12 @@ public class SpecExample {
 
     @Override
     public String toString() {
-        if (this.isNull()) {
+        if (this.isFullSpecExample()) {
+            return "Full Spec";
+        } else if (this == NULL) {
             return "NULL";
-        } else if (this.isFullSpecExample()) {
-            return "Full Spec Test";
         } else {
-            return "Section \"" + section + "\" example " + exampleNumber;
+            return "" + section + ": " + exampleNumber;
         }
     }
 }

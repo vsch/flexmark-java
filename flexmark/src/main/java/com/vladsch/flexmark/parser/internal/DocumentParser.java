@@ -4,12 +4,10 @@ import com.vladsch.flexmark.ast.Paragraph;
 import com.vladsch.flexmark.ast.util.ClassifyingBlockTracker;
 import com.vladsch.flexmark.ast.util.Parsing;
 import com.vladsch.flexmark.parser.InlineParser;
-import com.vladsch.flexmark.parser.InlineParserExtensionFactory;
 import com.vladsch.flexmark.parser.InlineParserFactory;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.block.*;
 import com.vladsch.flexmark.parser.core.*;
-import com.vladsch.flexmark.parser.delimiter.DelimiterProcessor;
 import com.vladsch.flexmark.util.ast.*;
 import com.vladsch.flexmark.util.collection.ItemFactoryMap;
 import com.vladsch.flexmark.util.collection.iteration.ReversibleIterable;
@@ -110,6 +108,7 @@ public class DocumentParser implements ParserState {
     private int nextNonSpaceColumn = 0;
     private int indent = 0;
     private boolean blank;
+    private boolean isBlankLine;
     private BlankLine blankLine = null;
 
     private final List<BlockParserFactory> blockParserFactories;
@@ -541,6 +540,11 @@ public class DocumentParser implements ParserState {
     }
 
     @Override
+    public boolean isBlankLine() {
+        return isBlankLine;
+    }
+
+    @Override
     public BlockParser getActiveBlockParser() {
         return activeBlockParsers.get(activeBlockParsers.size() - 1);
     }
@@ -606,6 +610,9 @@ public class DocumentParser implements ParserState {
                     }
                 }
             }
+
+            // KLUDGE: may work to detect when a real blank line follows a paragraph
+            isBlankLine = wasBlank;
 
             BlockContinue result = blockParser.tryContinue(this);
             if (result instanceof BlockContinueImpl) {

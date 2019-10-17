@@ -147,14 +147,12 @@ public class DocxRenderer implements IRender {
     final List<NodeDocxRendererFactory> nodeFormatterFactories;
     //final DocxRendererOptions rendererOptions;
     private final DataHolder options;
-    private final Builder builder;
     final List<LinkResolverFactory> linkResolverFactories;
     final List<AttributeProviderFactory> attributeProviderFactories;
     final HeaderIdGeneratorFactory htmlIdGeneratorFactory;
 
-    private DocxRenderer(Builder builder) {
-        this.builder = new Builder(builder); // take a copy to avoid after creation side effects
-        this.options = new DataSet(builder);
+    DocxRenderer(Builder builder) {
+        this.options = builder.toImmutable();
         this.htmlIdGeneratorFactory = builder.htmlIdGeneratorFactory;
         //this.rendererOptions = new DocxRendererOptions(this.options);
         this.nodeFormatterFactories = new ArrayList<>(builder.nodeDocxRendererFactories.size() + 1);
@@ -170,7 +168,7 @@ public class DocxRenderer implements IRender {
     @Nullable
     @Override
     public DataHolder getOptions() {
-        return new DataSet(builder);
+        return options;
     }
 
     /**
@@ -305,12 +303,12 @@ public class DocxRenderer implements IRender {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        return null;
+        return "";
     }
 
     @Override
-    public void render(@NotNull Node node, @NotNull Appendable output) {
-        String docx = render(node);
+    public void render(@NotNull Node document, @NotNull Appendable output) {
+        String docx = render(document);
         try {
             output.append(docx);
         } catch (IOException e) {
@@ -334,20 +332,6 @@ public class DocxRenderer implements IRender {
         public Builder(DataHolder options) {
             super(options);
             loadExtensions();
-        }
-
-        public Builder(Builder other) {
-            super(other);
-
-            this.attributeProviderFactories.addAll(other.attributeProviderFactories);
-            //this.nodeDocxRendererFactories.addAll(other.nodeDocxRendererFactories);
-            this.linkResolverFactories.addAll(other.linkResolverFactories);
-            this.htmlIdGeneratorFactory = other.htmlIdGeneratorFactory;
-        }
-
-        public Builder(Builder other, DataHolder options) {
-            this(other);
-            withOptions(options);
         }
 
         @Override
@@ -389,6 +373,7 @@ public class DocxRenderer implements IRender {
         /**
          * @return the configured {@link DocxRenderer}
          */
+        @NotNull
         public DocxRenderer build() {
             return new DocxRenderer(this);
         }

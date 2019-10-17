@@ -68,12 +68,4 @@ class HtmlConverter extends IParseBase {
         String rootNode = FlexmarkHtmlConverter.builder(getOptions()).build().convert(input.toString(), 1);
         return new RootNode(rootNode);
     }
-
-    @NotNull
-    @Override
-    public IParse withOptions(@Nullable DataHolder options) {
-        MutableDataSet mutableDataSet = new MutableDataSet(getOptions());
-        if (options != null) mutableDataSet.setAll(options);
-        return new HtmlConverter(mutableDataSet);
-    }
 }

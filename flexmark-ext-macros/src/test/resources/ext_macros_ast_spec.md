@@ -170,7 +170,7 @@ Plain text <<<macro>>>
 .
 Document[0, 48]
   MacroDefinitionBlock[0, 25] open:[0, 3, ">>>"] name:[3, 8, "macro"] openTrail:[8, 8] close:[21, 24, "<<<"] closeTrail:[24, 25, "\n"]
-    Paragraph[9, 21] isTrailingBlankLine
+    Paragraph[9, 21]
       Text[9, 20] chars:[9, 20, "simpl …  text"]
   Paragraph[26, 48]
     Text[26, 37] chars:[26, 37, "Plain … text "]
@@ -389,7 +389,7 @@ Plain text <<<macro>>>
 Document[0, 56]
   MacroDefinitionBlock[0, 33] open:[0, 3, ">>>"] name:[3, 8, "macro"] openTrail:[8, 8] close:[29, 32, "<<<"] closeTrail:[32, 33, "\n"]
     GitLabBlockQuote[9, 29] open:[9, 12, ">>>"] openTrail:[12, 13, "\n"] close:[25, 28, ">>>"] closeTrail:[28, 29, "\n"]
-      Paragraph[13, 25] isTrailingBlankLine
+      Paragraph[13, 25]
         Text[13, 24] chars:[13, 24, "Block … Quote"]
   Paragraph[34, 56]
     Text[34, 45] chars:[34, 45, "Plain … text "]
@@ -423,7 +423,7 @@ Plain text <<<macro>>>
 Document[0, 83]
   MacroDefinitionBlock[0, 60] open:[0, 3, ">>>"] name:[3, 8, "macro"] openTrail:[8, 8] close:[56, 59, "<<<"] closeTrail:[59, 60, "\n"]
     GitLabBlockQuote[9, 29] open:[9, 12, ">>>"] openTrail:[12, 13, "\n"] close:[25, 28, ">>>"] closeTrail:[28, 29, "\n"]
-      Paragraph[13, 25] isTrailingBlankLine
+      Paragraph[13, 25]
         Text[13, 24] chars:[13, 24, "Block … Quote"]
     Paragraph[29, 48]
       Text[29, 47] chars:[29, 47, "Neste … Quote"]
@@ -462,12 +462,12 @@ Macro 1
 .
 Document[0, 120]
   MacroDefinitionBlock[0, 35] open:[0, 3, ">>>"] name:[3, 9, "macro1"] openTrail:[9, 9] close:[31, 34, "<<<"] closeTrail:[34, 35, "\n"]
-    Paragraph[10, 31] isTrailingBlankLine
+    Paragraph[10, 31]
       Text[10, 17] chars:[10, 17, "Macro 1"]
       SoftLineBreak[17, 18]
       MacroReference[18, 30] textOpen:[18, 21, "<<<"] text:[21, 27, "macro2"] textClose:[27, 30, ">>>"]
   MacroDefinitionBlock[36, 71] open:[36, 39, ">>>"] name:[39, 45, "macro2"] openTrail:[45, 45] close:[67, 70, "<<<"] closeTrail:[70, 71, "\n"]
-    Paragraph[46, 67] isTrailingBlankLine
+    Paragraph[46, 67]
       Text[46, 53] chars:[46, 53, "Macro 2"]
       SoftLineBreak[53, 54]
       MacroReference[54, 66] textOpen:[54, 57, "<<<"] text:[57, 63, "macro1"] textClose:[63, 66, ">>>"]
@@ -506,7 +506,7 @@ Plain text <<<macro>>>
 Document[0, 83]
   MacroDefinitionBlock[0, 60] open:[0, 3, ">>>"] name:[3, 8, "macro"] openTrail:[8, 8] close:[56, 59, "<<<"] closeTrail:[59, 60, "\n"]
     GitLabBlockQuote[9, 29] open:[9, 12, ">>>"] openTrail:[12, 13, "\n"] close:[25, 28, ">>>"] closeTrail:[28, 29, "\n"]
-      Paragraph[13, 25] isTrailingBlankLine
+      Paragraph[13, 25]
         Text[13, 24] chars:[13, 24, "Block … Quote"]
     Paragraph[29, 48]
       Text[29, 47] chars:[29, 47, "Neste … Quote"]

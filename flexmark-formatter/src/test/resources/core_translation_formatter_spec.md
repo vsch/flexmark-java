@@ -18,18 +18,18 @@ brackets of all types are excluded.
 
 [Markdown]
 .
---------------------------
+- Translating Spans ------
 [_1_]
 
 [_2_]
---------------------------
+- Translated Spans --------
 <<<Markdown
 >>>maARKDoWN
---------------------------
+- Partial ----------------
 [_1_]
 
 [_2_]
---------------------------
+- Translated -------------
 [maARKDoWN]
 
 [maARKDoWN]
@@ -41,14 +41,14 @@ HTML Blocks not translated
 ```````````````````````````````` example(Formatter: 2) options(details)
 <span>this is a test</span>
 .
---------------------------
+- Translating Spans ------
 <__1_>this is a test</__2_>
---------------------------
+- Translated Spans --------
 <<<<__1_>this is a test</__2_>
 >>><__1_>thiIS iIS aA teESt</__2_>
---------------------------
+- Partial ----------------
 <__1_>thiIS iIS aA teESt</__2_>
---------------------------
+- Translated -------------
 <span>thiIS iIS aA teESt</span>
 ````````````````````````````````
 
@@ -80,16 +80,16 @@ inline comments translate
 ```````````````````````````````` example(Formatter: 5) options(details)
 This <!--this is a test--> is a test
 .
---------------------------
+- Translating Spans ------
 This <!--_1_--> is a test
---------------------------
+- Translated Spans --------
 <<<this is a test
 >>>thiIS iIS aA teESt
 <<<This <!--_1_--> is a test
 >>>thiIS <!--_1_--> iIS aA teESt
---------------------------
+- Partial ----------------
 thiIS <!--_1_--> iIS aA teESt
---------------------------
+- Translated -------------
 thiIS <!--thiIS iIS aA teESt--> iIS aA teESt
 ````````````````````````````````
 
@@ -376,16 +376,16 @@ woRK WiIth ![maARKDoWN](https://test.com/doc.png "teESt")
 .
 1. LiISt iIteEm 1
    1. LiISt iIteEm 1.1
-   2. LiISt iIteEm 1.2
+   1. LiISt iIteEm 1.2
       1. LiISt iIteEm 1.2.1
-      2. LiISt iIteEm 1.2.2
-      3. LiISt iIteEm 1.2.3
-2. LiISt iIteEm 2
+      1. LiISt iIteEm 1.2.2
+      1. LiISt iIteEm 1.2.3
+1. LiISt iIteEm 2
    1. LiISt iIteEm 2.1
-   2. LiISt iIteEm 2.2
+   1. LiISt iIteEm 2.2
       1. LiISt iIteEm 2.2.1
-      2. LiISt iIteEm 2.2.2
-      3. LiISt iIteEm 2.2.3
+      1. LiISt iIteEm 2.2.2
+      1. LiISt iIteEm 2.2.3
 ````````````````````````````````
 
 
@@ -405,17 +405,16 @@ woRK WiIth ![maARKDoWN](https://test.com/doc.png "teESt")
 .
 1. LiISt iIteEm 1
    1. LiISt iIteEm 1.1
-   2. LiISt iIteEm 1.2
+   1. LiISt iIteEm 1.2
       1) LiISt iIteEm 1.2.1
-      2) LiISt iIteEm 1.2.2
-      3) LiISt iIteEm 1.2.3
-
+      1) LiISt iIteEm 1.2.2
+      1) LiISt iIteEm 1.2.3
 1) LiISt iIteEm 2
    1) LiISt iIteEm 2.1
-   2) LiISt iIteEm 2.2
+   1) LiISt iIteEm 2.2
       1. LiISt iIteEm 2.2.1
-      2. LiISt iIteEm 2.2.2
-      3. LiISt iIteEm 2.2.3
+      1. LiISt iIteEm 2.2.2
+      1. LiISt iIteEm 2.2.3
 ````````````````````````````````
 
 
@@ -437,7 +436,7 @@ woRK WiIth ![maARKDoWN](https://test.com/doc.png "teESt")
 .
 1. LiISt iIteEm 1
    1. LiISt iIteEm 1.1
-   2. LiISt iIteEm 1.2
+   1) LiISt iIteEm 1.2
 ````````````````````````````````
 
 
@@ -446,9 +445,9 @@ woRK WiIth ![maARKDoWN](https://test.com/doc.png "teESt")
    1. list item 1.1
    1) list item 1.2
 .
-1) LiISt iIteEm 1
-   1) LiISt iIteEm 1.1
-   2) LiISt iIteEm 1.2
+1. LiISt iIteEm 1
+   1. LiISt iIteEm 1.1
+   1) LiISt iIteEm 1.2
 ````````````````````````````````
 
 
@@ -493,9 +492,9 @@ paragraph
 .
 paARaAGRaAph
 1. iIteEm 1
-2. iIteEm 2
+1. iIteEm 2
    1. iIteEm 2.1
-   2. iIteEm 2.2
+   1. iIteEm 2.2
 ````````````````````````````````
 
 
@@ -507,7 +506,6 @@ paragraph
   * item 2.2
 .
 paARaAGRaAph
-
 * iIteEm 1
 * iIteEm 2
   * iIteEm 2.1
@@ -523,11 +521,10 @@ paragraph
    1. item 2.2
 .
 paARaAGRaAph
-
 1. iIteEm 1
-2. iIteEm 2
+1. iIteEm 2
    1. iIteEm 2.1
-   2. iIteEm 2.2
+   1. iIteEm 2.2
 ````````````````````````````````
 
 
@@ -537,10 +534,10 @@ paARaAGRaAph
   + item 2.1
   + item 2.2
 .
-* iIteEm 1
-* iIteEm 2
-  * iIteEm 2.1
-  * iIteEm 2.2
++ iIteEm 1
++ iIteEm 2
+  + iIteEm 2.1
+  + iIteEm 2.2
 ````````````````````````````````
 
 
@@ -550,10 +547,10 @@ paARaAGRaAph
   * item 2.1
   * item 2.2
 .
-+ iIteEm 1
-+ iIteEm 2
-  + iIteEm 2.1
-  + iIteEm 2.2
+* iIteEm 1
+* iIteEm 2
+  * iIteEm 2.1
+  * iIteEm 2.2
 ````````````````````````````````
 
 
@@ -563,10 +560,10 @@ paARaAGRaAph
   * item 2.1
   * item 2.2
 .
-- iIteEm 1
-- iIteEm 2
-  - iIteEm 2.1
-  - iIteEm 2.2
+* iIteEm 1
+* iIteEm 2
+  * iIteEm 2.1
+  * iIteEm 2.2
 ````````````````````````````````
 
 
@@ -589,10 +586,10 @@ paARaAGRaAph
    1. item 2.1
    1. item 2.2
 .
-1) iIteEm 1
-1) iIteEm 2
-   1) iIteEm 2.1
-   1) iIteEm 2.2
+1. iIteEm 1
+1. iIteEm 2
+   1. iIteEm 2.1
+   1. iIteEm 2.2
 ````````````````````````````````
 
 
@@ -602,10 +599,10 @@ paARaAGRaAph
    1) item 2.1
    1) item 2.2
 .
-1. iIteEm 1
-1. iIteEm 2
-   1. iIteEm 2.1
-   1. iIteEm 2.2
+1) iIteEm 1
+1) iIteEm 2
+   1) iIteEm 2.1
+   1) iIteEm 2.2
 ````````````````````````````````
 
 
@@ -621,9 +618,7 @@ list spacing
 * item 3
 .
 * iIteEm 1
-
 * iIteEm 2
-
   * iIteEm 2.1
 
   * iIteEm 2.2
@@ -642,9 +637,7 @@ list spacing
 * item 3
 .
 * iIteEm 1
-
 * iIteEm 2
-
   * iIteEm 2.1
 
   * iIteEm 2.2
@@ -665,7 +658,9 @@ list spacing
 * iIteEm 1
 * iIteEm 2
   * iIteEm 2.1
+
   * iIteEm 2.2
+
 * iIteEm 3
 ````````````````````````````````
 
@@ -680,9 +675,7 @@ list spacing
 * item 3
 .
 * iIteEm 1
-
 * iIteEm 2
-
   * iIteEm 2.1
 
   * iIteEm 2.2
@@ -705,6 +698,7 @@ list spacing
   * iIteEm 2.1
 
   * iIteEm 2.2
+
 * iIteEm 3
 ````````````````````````````````
 
@@ -725,6 +719,7 @@ paragraph
   * iIteEm 2.1
 
   * iIteEm 2.2
+
 * iIteEm 3
 
 paARaAGRaAph
@@ -745,7 +740,9 @@ paragraph
 * iIteEm 1
 * iIteEm 2
   * iIteEm 2.1
+
   * iIteEm 2.2
+
 * iIteEm 3
 
 paARaAGRaAph
@@ -764,12 +761,10 @@ list family changing
 * item 3
 .
 * iIteEm 1
-
 * iIteEm 2
+  * iIteEm 2.1
 
-    * iIteEm 2.1
-
-    * iIteEm 2.2
+  * iIteEm 2.2
 
 * iIteEm 3
 ````````````````````````````````
@@ -1744,7 +1739,6 @@ aDDS miISSiING eEDiItoR aActiIoNS FoR eEND oF WoRD NaAViIGaAtiIoN BuUt thaAt iIS
 
 * eNaABLeE auUto iNDeENt liINeES aAFteER moVeE LiINeE/SeELeEctiIoN uUp oR DoWN aActiIoNS to haAVeE theEm iINDeENteED
   aAuUtomaAtiIcaALLyY.
-
 * uSeE smaARt paASteE to eELiImiINaAteE caASeE chaANGeE aAND pReEFiIX eEDiItS WheEN paAStiING iIDeENtiIFiIeERS. mia WiILL
   maAtch caASeE aAND StyYLeE oF iIDeENtiIFiIeER aAt DeEStiINaAtiIoN WheEN yYouU paASteE, uUNDo to GeEt ReESuULtS BeEFoReE
   mia aADJuUSteED theEm. copyY `myColumnData` aAND paASteE iIt oVeER `DEFAULT_VALUE` to GeEt `COLUMN_DATA`,
@@ -1756,20 +1750,15 @@ aDDS miISSiING eEDiItoR aActiIoNS FoR eEND oF WoRD NaAViIGaAtiIoN BuUt thaAt iIS
 
   deEFaAuULt pReEFiIXeES: `my`, `our`, `is`, `get`, `set` to aALLoW paAStiING oVeER meEmBeER FiIeELDS, StaAtiIc
   FiIeELDS, GeEtteERS aAND SeEtteERS.
-
 * eNaABLeE auUto liINeE seELeEctiIoNS aAND SeELeEct FuULL LiINeES WiIthouUt LooSiING tiImeE oR coLuUmN poSiItiIoN ByY
   moViING theE caAReEt to theE StaARt oF LiINeE WheEN SeELeEctiING oR paAStiING. **chooSeE** WheEtheER yYouU WaANt
   to **paASteE FuULL LiINeE** SeELeEctiIoNS: **aABoVeE** oR **BeELoW** theE cuURReENt LiINeE ReEGaARDLeESS oF theE
   caAReEt'S coLuUmN.
-
 * toGGLeE BeEtWeEeEN SeELeEctiIoN aAND muULtiIpLeE caAReEtS oN SeELeEcteED LiINeES to SaAVeE tiImeE ReE-SeELeEctiING theE
   SaAmeE teEXt aAGaAiIN.
-
 * fiILteER muULtiIpLeE caAReEtS SaAVeES yYouU tiImeE WheEN cReEaAtiING muULtiIpLeE caAReEtS ByY ReEmoViING caAReEtS oN
   BLaANK oR commeENt LiINeES So yYouU caAN eEDiIt oNLyY coDeE LiINeES.
-
 * eNhaANceED paASteE FRom hiIStoRyY DiIaALoG:
-
   * **comBiINeE**, **aARRaANGeE** aAND **ReEVeERSeE** theE oRDeER oF coNteENt eENtRiIeES
   * **comBiINeE muULtiIpLeE** cLiIpBoaARD coNteENtS **WiIth caAReEt iINFoRmaAtiIoN iINtaAct**
   * **paASteE aAND ReE-cReEaAteE muULtiIpLeE caAReEtS** FRom iINFoRmaAtiIoN aALReEaADyY StoReED oN theE cLiIpBoaARD
@@ -1859,21 +1848,21 @@ woRK WiIth [maARKDoWN] FiILeES LiIKeE yYouU Do WiIth otheER LaANGuUaAGeES iIN th
 FoR:
 
 * compLeEtiIoNS to ReEDuUceE tyYpiING
-* LiINK aADDReESS ⇐ FiILeES
-* ReEF aANchoRS ⇐ heEaADiINGS
-* FootNoteE ReEFS ⇐ FootNoteES
-* ReEF LiINKS/ReEF iImaAGeES ⇐ ReEFeEReENceES
-* LiINK teEXt ⇐ ReEF aANchoR/LiINK aADDReESS
+  * LiINK aADDReESS ⇐ FiILeES
+  * ReEF aANchoRS ⇐ heEaADiINGS
+  * FootNoteE ReEFS ⇐ FootNoteES
+  * ReEF LiINKS/ReEF iImaAGeES ⇐ ReEFeEReENceES
+  * LiINK teEXt ⇐ ReEF aANchoR/LiINK aADDReESS
 * eERRoR aAND WaARNiING aANNotaAtiIoNS to heELp caAtch miIStaAKeES eEaARLyY
 * iINteENtiIoN aActiIoNS FoR FaASt ReESuULtS WiIth LeESS eEFFoRt
 * WRaAp oN tyYpiING to KeEeEp iIt NiIceELyY FoRmaAtteED aAS yYouU eEDiIt
 * FoRmaAttiING to chaANGeE FoRmaAt WiIth aA KeEyY StRoKeE
 * NaAViIGaAtiIoN aAND FiIND uUSaAGeES to FiIND ReEFeEReENceES WiIthouUt eEFFoRt
 * ReEFaActoRiING oF aALL ReEFeEReENciING eELeEmeENtS: to KeEeEp iIt aALL iIN SyYNc WhiILeE eEVoLViING
-* FiILeES ⟺ LiINKS
-* heEaADiINGS ⟺ ReEF aANchoRS
-* FootNoteES ⟺ FootNoteE ReEFS
-* ReEFeEReENceES ⟺ ReEF LiINKS/ReEF iImaAGeES
+  * FiILeES ⟺ LiINKS
+  * heEaADiINGS ⟺ ReEF aANchoRS
+  * FootNoteES ⟺ FootNoteE ReEFS
+  * ReEFeEReENceES ⟺ ReEF LiINKS/ReEF iImaAGeES
 * giIthuUB StyYLeE ReENDeERiING thaAt yYouU aAReE uUSeED to, ouUt oF theE BoX
 * faASt tyYpiING ReESpoNSeE FoR DiIStRaActiIoN FReEeE eEDiItiING
 * fuULLyY cuUStomiIZaABLeE to aADJuUSt to yYouUR pRoJeEct'S NeEeEDS aAND yYouUR pReEFeEReENceES
@@ -1887,13 +1876,13 @@ FoR:
 * **html teEXt** pReEViIeEW aAND eEXpoRt
 * soFt wRaAp **oN RiIGht maARGiIN**
 * **foRmaAt** WiIth coDeE StyYLeE:
-* **muULtiI-ByYteE** SuUppoRt WiIth miIXeED chaARaActeER WiIDth
-* **taABLeE** JuUStiIFiIcaAtiIoN
-* **wRaAp oN tyYpiING** aAuUto FoRmaAt oF eELeEmeENt
-* **reENuUmBeERiING** oF LiISt iIteEmS
+  * **muULtiI-ByYteE** SuUppoRt WiIth miIXeED chaARaActeER WiIDth
+  * **taABLeE** JuUStiIFiIcaAtiIoN
+  * **wRaAp oN tyYpiING** aAuUto FoRmaAt oF eELeEmeENt
+  * **reENuUmBeERiING** oF LiISt iIteEmS
 * **biIDiIReEctiIoNaAL** souURceE aAND pReEViIeEW SyYNchRoNiIZaAtiIoN
-* **scRoLLS** pReEViIeEW to ShoW SouURceE eELeEmeENt aAt caAReEt
-* **moVeES caAReEt** to SouURceE LiINeE oF eELeEmeENt cLiIcKeED iIN pReEViIeEW
+  * **scRoLLS** pReEViIeEW to ShoW SouURceE eELeEmeENt aAt caAReEt
+  * **moVeES caAReEt** to SouURceE LiINeE oF eELeEmeENt cLiIcKeED iIN pReEViIeEW
 * aLSo DoeES **compLeEtiIoNS, ReEFaActoRiING, VaALiIDaAtiIoN, LaANGuUaAGeE iINJeEctiIoNS, coDeE FoLDiING**
 * **fuULLyY coNFiIGuURaABLeE** ByY pRoJeEct WiIth SuUppoRt FoR ScopeES
 * uNDeERStaANDS **giIthuUB WiIKiI** NuUaANceES
@@ -1905,7 +1894,7 @@ FoR:
 
 Handle proper GitHub indented code in list items
 
-```````````````````````````````` example(Format Conversion: 3) options(parse-fixed-indent, format-github)
+```````````````````````````````` example(Format Conversion: 3) options(parse-fixed-indent, format-github, details, ast-details)
 * item 
 
         indented code
@@ -1914,13 +1903,81 @@ Handle proper GitHub indented code in list items
     
             indented sub-item code
 .
+- Translating Spans ------
+* item
+
+        _1_
+
+    * sub-item
+
+            _2_
+- Translated Spans --------
+<<<item
+>>>iIteEm
+<<<sub-item
+>>>SuUB-iIteEm
+- Partial ----------------
 * iIteEm
 
-      indented code
+        _1_
 
-  * SuUB-iIteEm
-    
-        indented sub-item code
+    * SuUB-iIteEm
+
+            _2_
+- Translated -------------
+* iIteEm
+
+        indented code
+
+    * SuUB-iIteEm
+
+            indented sub-item code
+.
+- Original ----------------
+Document[0, 95]
+  BulletList[0, 95] isLoose
+    BulletListItem[0, 95] open:[0, 1, "*"] isLoose hadBlankLineAfter
+      Paragraph[2, 8] isTrailingBlankLine
+        Text[2, 6] chars:[2, 6, "item"]
+      BlankLine[8, 9]
+      IndentedCodeBlock[17, 31]
+      BlankLine[31, 40]
+      BulletList[44, 95] isLoose
+        BulletListItem[44, 95] open:[44, 45, "*"] isLoose hadBlankLineAfter
+          Paragraph[46, 56] isTrailingBlankLine
+            Text[46, 54] chars:[46, 54, "sub-item"]
+          BlankLine[56, 61]
+          IndentedCodeBlock[73, 95]
+- Partial ----------------
+Document[0, 58]
+  BulletList[0, 58] isLoose
+    BulletListItem[0, 58] open:[0, 1, "*"] isLoose hadBlankLineAfter
+      Paragraph[2, 9] isTrailingBlankLine
+        Text[2, 8] chars:[2, 8, "iIteEm"]
+      BlankLine[9, 10]
+      IndentedCodeBlock[18, 22]
+      BlankLine[22, 23]
+      BulletList[27, 58] isLoose
+        BulletListItem[27, 58] open:[27, 28, "*"] isLoose hadBlankLineAfter
+          Paragraph[29, 41] isTrailingBlankLine
+            Text[29, 40] chars:[29, 40, "SuUB- … IteEm"]
+          BlankLine[41, 42]
+          IndentedCodeBlock[54, 58]
+- Translated -------------
+Document[0, 87]
+  BulletList[0, 87] isLoose
+    BulletListItem[0, 87] open:[0, 1, "*"] isLoose hadBlankLineAfter
+      Paragraph[2, 9] isTrailingBlankLine
+        Text[2, 8] chars:[2, 8, "iIteEm"]
+      BlankLine[9, 10]
+      IndentedCodeBlock[18, 32]
+      BlankLine[32, 33]
+      BulletList[37, 87] isLoose
+        BulletListItem[37, 87] open:[37, 38, "*"] isLoose hadBlankLineAfter
+          Paragraph[39, 51] isTrailingBlankLine
+            Text[39, 50] chars:[39, 50, "SuUB- … IteEm"]
+          BlankLine[51, 52]
+          IndentedCodeBlock[64, 87]
 ````````````````````````````````
 
 
@@ -1935,11 +1992,11 @@ Handle proper GitHub indented code in list items
 .
 1. iIteEm
 
-      indented code
+        indented code
 
-   1. SuUB-iIteEm
+    1. SuUB-iIteEm
 
-          indented sub-item code
+            indented sub-item code
 ````````````````````````````````
 
 
@@ -1986,13 +2043,10 @@ LiINeE 2
 not a list item
 .
 * LiISt iIteEm 1
-
 * 
 
 * LiISt iIteEm 2
-
 * 
-
 Not aA LiISt iIteEm
 ````````````````````````````````
 
@@ -2008,7 +2062,6 @@ not a list item
 * 
 * LiISt iIteEm 2
 * 
-
 Not aA LiISt iIteEm
 ````````````````````````````````
 
@@ -2024,9 +2077,10 @@ With removal of empty list items
 not a list item
 .
 * LiISt iIteEm 1
+* 
 
 * LiISt iIteEm 2
-
+* 
 Not aA LiISt iIteEm
 ````````````````````````````````
 
@@ -2039,8 +2093,9 @@ Not aA LiISt iIteEm
 not a list item
 .
 * LiISt iIteEm 1
+* 
 * LiISt iIteEm 2
-
+* 
 Not aA LiISt iIteEm
 ````````````````````````````````
 
@@ -2054,9 +2109,10 @@ Not aA LiISt iIteEm
 not a list item
 .
 1. LiISt iIteEm 1
+1. 
 
-2. LiISt iIteEm 2
-
+1. LiISt iIteEm 2
+1. 
 Not aA LiISt iIteEm
 ````````````````````````````````
 
@@ -2069,8 +2125,9 @@ Not aA LiISt iIteEm
 not a list item
 .
 1. LiISt iIteEm 1
-2. LiISt iIteEm 2
-
+1. 
+1. LiISt iIteEm 2
+1. 
 Not aA LiISt iIteEm
 ````````````````````````````````
 
@@ -2119,16 +2176,16 @@ following text
 ```````````````````````````````` example(Empty List Items: 9) options(details)
 Paragraph text with embedded link [Example Link](http://example.com) in it.
 .
---------------------------
+- Translating Spans ------
 Paragraph text with embedded link [_1_](_2_) in it.
---------------------------
+- Translated Spans --------
 <<<Example Link
 >>>eXaAmpLeE liINK
 <<<Paragraph text with embedded link [_1_](_2_) in it.
 >>>paARaAGRaAph teEXt WiIth eEmBeEDDeED LiINK [_1_](_2_) iIN iIt.
---------------------------
+- Partial ----------------
 paARaAGRaAph teEXt WiIth eEmBeEDDeED LiINK [_1_](_2_) iIN iIt.
---------------------------
+- Translated -------------
 paARaAGRaAph teEXt WiIth eEmBeEDDeED LiINK [eXaAmpLeE liINK](http://example.com) iIN iIt.
 ````````````````````````````````
 

@@ -40,7 +40,7 @@ public class HtmlSpecReader extends DumpSpecReader {
 
         exampleRenderer.parse(parseSource);
         exampleRenderer.finalizeDocument();
-        String source = !ignoredCase ? exampleRenderer.renderHtml() : example.getSource();
+        String source = !ignoredCase ? exampleRenderer.getHtml() : example.getSource();
         String html = example.getHtml();
         String ast = example.getAst() == null ? null : (!ignoredCase ? exampleRenderer.getAst() : example.getAst());
 

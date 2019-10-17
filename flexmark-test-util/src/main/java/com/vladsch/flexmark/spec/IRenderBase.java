@@ -11,16 +11,16 @@ import java.io.IOException;
 public abstract class IRenderBase implements IRender {
     public static final IRender NullRenderer = new IRenderBase() {
         @Override
-        public void render(@NotNull Node node, @NotNull Appendable output) {
+        public void render(@NotNull Node document, @NotNull Appendable output) {
 
         }
     };
 
     public static final IRender TextRenderer = new IRenderBase() {
         @Override
-        public void render(@NotNull Node node, @NotNull Appendable output) {
+        public void render(@NotNull Node document, @NotNull Appendable output) {
             try {
-                output.append(node.getChars());
+                output.append(document.getChars());
             } catch (IOException e) {
                 e.printStackTrace();
             }

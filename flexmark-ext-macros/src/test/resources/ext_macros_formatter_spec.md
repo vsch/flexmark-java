@@ -184,7 +184,7 @@ Plain text <<<macro>>>
 Document[0, 56]
   MacroDefinitionBlock[0, 33] open:[0, 3, ">>>"] name:[3, 8, "macro"] openTrail:[8, 8] close:[29, 32, "<<<"] closeTrail:[32, 33, "\n"]
     GitLabBlockQuote[9, 29] open:[9, 12, ">>>"] openTrail:[12, 13, "\n"] close:[25, 28, ">>>"] closeTrail:[28, 29, "\n"]
-      Paragraph[13, 25] isTrailingBlankLine
+      Paragraph[13, 25]
         Text[13, 24] chars:[13, 24, "Block … Quote"]
   BlankLine[33, 34]
   Paragraph[34, 56]
@@ -211,9 +211,7 @@ Plain text <<<macro>>>
 >>>
 Block Quote
 >>>
-
 Nested Block Quote
-
 <<<
 
 <<<
@@ -224,9 +222,9 @@ Plain text <<<macro>>>
 Document[0, 83]
   MacroDefinitionBlock[0, 52] open:[0, 3, ">>>"] name:[3, 8, "macro"] openTrail:[8, 8] close:[48, 51, "<<<"] closeTrail:[51, 52, "\n"]
     GitLabBlockQuote[9, 29] open:[9, 12, ">>>"] openTrail:[12, 13, "\n"] close:[25, 28, ">>>"] closeTrail:[28, 29, "\n"]
-      Paragraph[13, 25] isTrailingBlankLine
+      Paragraph[13, 25]
         Text[13, 24] chars:[13, 24, "Block … Quote"]
-    Paragraph[29, 48] isTrailingBlankLine
+    Paragraph[29, 48]
       Text[29, 47] chars:[29, 47, "Neste … Quote"]
   Paragraph[52, 60] isTrailingBlankLine
     Text[52, 55] chars:[52, 55, "<<<"]

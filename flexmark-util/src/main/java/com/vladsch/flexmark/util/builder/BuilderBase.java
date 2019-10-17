@@ -3,13 +3,12 @@ package com.vladsch.flexmark.util.builder;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.data.MutableDataSet;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
 public abstract class BuilderBase<T extends BuilderBase<T>> extends MutableDataSet {
-    public static final DataKey<Iterable<Extension>> EXTENSIONS = new DataKey<>("EXTENSIONS", Extension.EMPTY_LIST);
-    public static final DataKey<Iterable<Extension>> UNLOAD_EXTENSIONS = new DataKey<>("UNLOAD_EXTENSIONS", Extension.EMPTY_LIST);
-    public static final DataKey<Boolean> RELOAD_EXTENSIONS = new DataKey<>("RELOAD_EXTENSIONS", true);
+    public static final DataKey<Collection<Extension>> EXTENSIONS = new DataKey<>("EXTENSIONS", Extension.EMPTY_LIST);
 
     // loaded extensions
     private final HashSet<Class<?>> loadedExtensions = new HashSet<>();
@@ -46,12 +45,15 @@ public abstract class BuilderBase<T extends BuilderBase<T>> extends MutableDataS
      * @deprecated use options with EXTENSIONS set
      */
     @Deprecated
-    final public T extensions(Iterable<? extends Extension> extensions) {
+    final public T extensions(Collection<? extends Extension> extensions) {
+        ArrayList<Extension> addedExtensions = new ArrayList<>(get(EXTENSIONS).size() + extensions.size());
+
         // first give extensions a chance to modify parser options
         for (Extension extension : extensions) {
             currentExtension = extension;
             if (!loadedExtensions.contains(extension.getClass())) {
                 preloadExtension(extension);
+                addedExtensions.add(extension);
             }
             currentExtension = null;
         }
@@ -62,20 +64,27 @@ public abstract class BuilderBase<T extends BuilderBase<T>> extends MutableDataS
             if (!loadedExtensions.contains(extensionClass)) {
                 if (loadExtension(extension)) {
                     loadedExtensions.add(extensionClass);
+                    addedExtensions.add(extension);
                 }
             }
             currentExtension = null;
         }
 
-        // KLUDGE: for old API Support
-        if (!contains(EXTENSIONS)) {
-            // need to set extensions
-            set(EXTENSIONS, extensions);
+        if (!addedExtensions.isEmpty()) {
+            // need to set extensions to options to make it all consistent
+            addedExtensions.addAll(0, get(EXTENSIONS));
+            set(EXTENSIONS, addedExtensions);
         }
 
         //noinspection unchecked
         return (T) this;
     }
+
+    /**
+     * @return actual instance the builder is supposed to build
+     */
+    @NotNull
+    public abstract Object build();
 
     /**
      * Call to add extension API point to track
@@ -92,25 +101,6 @@ public abstract class BuilderBase<T extends BuilderBase<T>> extends MutableDataS
         }
     }
 
-    public void unloadExtension(Class<?> extensionClass) {
-        if (extensionClass != null) {
-            if (loadedExtensions.contains(extensionClass)) {
-                HashSet<Object> apiPoints = extensionApiPoints.get(extensionClass);
-                if (apiPoints != null) {
-                    // remove existing one of the same class
-                    ArrayList<Object> list = new ArrayList<>(apiPoints);
-                    for (Object apiPoint : list) {
-                        if (apiPoint instanceof DataKey) this.getAll().remove(apiPoint);
-                        else removeApiPoint(apiPoint);
-                        apiPoints.remove(apiPoint);
-                    }
-                }
-
-                loadedExtensions.remove(extensionClass);
-            }
-        }
-    }
-
     /**
      * Tracks keys set by extension initialization
      *
@@ -119,17 +109,9 @@ public abstract class BuilderBase<T extends BuilderBase<T>> extends MutableDataS
      * @return builder
      */
     @Override
-    public <T> MutableDataSet set(DataKey<? extends T> key, T value) {
+    public <D> MutableDataSet set(DataKey<? extends D> key, D value) {
         addExtensionApiPoint(key);
         return super.set(key, value);
-    }
-
-    public void unloadExtensions() {
-        // unload any loaded extension points and extensions that are in the set so they can be re-loaded
-        ArrayList<Class<?>> list = new ArrayList<>(loadedExtensions);
-        for (Class<?> extension : list) {
-            unloadExtension(extension);
-        }
     }
 
     protected BuilderBase(DataHolder options) {
@@ -153,53 +135,7 @@ public abstract class BuilderBase<T extends BuilderBase<T>> extends MutableDataS
         for (Map.Entry<Class<?>, HashSet<Object>> entry : points.entrySet()) {
             extensionApiPoints.put(entry.getKey(), new HashSet<>(entry.getValue()));
         }
+
         loadedExtensions.addAll(((BuilderBase<?>) other).loadedExtensions);
-    }
-
-    protected void withOptions(DataHolder options) {
-        List<Extension> extensions = new ArrayList<>();
-        HashSet<Class<?>> extensionSet = new HashSet<>();
-        HashSet<Class<?>> unloadExtensionSet = null;
-
-        if (options != null && options.contains(UNLOAD_EXTENSIONS)) {
-            unloadExtensionSet = new HashSet<>();
-            for (Extension extension : UNLOAD_EXTENSIONS.getFrom(options)) {
-                unloadExtensionSet.add(extension.getClass());
-            }
-        }
-
-        for (Extension extension : get(EXTENSIONS)) {
-            if (unloadExtensionSet == null || !unloadExtensionSet.contains(extension.getClass())) {
-                extensions.add(extension);
-                extensionSet.add(extension.getClass());
-            }
-        }
-
-        if (options != null) {
-            for (DataKey<?> key : options.getKeys()) {
-                if (key == EXTENSIONS) {
-                    for (Extension extension : options.get(EXTENSIONS)) {
-                        if (unloadExtensionSet == null || !unloadExtensionSet.contains(extension.getClass())) {
-                            if (!extensionSet.contains(extension.getClass())) {
-                                extensions.add(extension);
-                            }
-                        }
-                    }
-                } else {
-                    set(key, options.get(key));
-                }
-            }
-        }
-
-        if (options != null && options.contains(RELOAD_EXTENSIONS)) {
-            if (RELOAD_EXTENSIONS.getFrom(options)) {
-                unloadExtensions();
-            }
-        } else if (RELOAD_EXTENSIONS.getFrom(this)) {
-            unloadExtensions();
-        }
-
-        set(EXTENSIONS, extensions);
-        extensions(extensions);
     }
 }

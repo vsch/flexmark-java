@@ -52,7 +52,7 @@ Document[0, 41]
   GitLabBlockQuote[0, 41] open:[0, 3, ">>>"] openTrail:[3, 4, "\n"] close:[38, 41, ">>>"] closeTrail:[41, 41]
     Paragraph[4, 25] isTrailingBlankLine
       Text[4, 24] chars:[4, 24, "Block … tents"]
-    Paragraph[26, 38] isTrailingBlankLine
+    Paragraph[26, 38]
       Text[26, 37] chars:[26, 37, "A par … graph"]
 ````````````````````````````````
 
@@ -68,7 +68,7 @@ Block Quote Contents
 .
 Document[0, 28]
   GitLabBlockQuote[0, 28] open:[0, 3, ">>>"] openTrail:[3, 4, "\n"] close:[25, 28, ">>>"] closeTrail:[28, 28]
-    Paragraph[4, 25] isTrailingBlankLine
+    Paragraph[4, 25]
       Text[4, 24] chars:[4, 24, "Block … tents"]
 ````````````````````````````````
 
@@ -123,7 +123,7 @@ Nested Block Quote Contents
 .
 Document[0, 64]
   GitLabBlockQuote[0, 29] open:[0, 3, ">>>"] openTrail:[3, 4, "\n"] close:[25, 28, ">>>"] closeTrail:[28, 29, "\n"]
-    Paragraph[4, 25] isTrailingBlankLine
+    Paragraph[4, 25]
       Text[4, 24] chars:[4, 24, "Block … tents"]
   Paragraph[29, 57]
     Text[29, 56] chars:[29, 56, "Neste … tents"]
@@ -148,7 +148,7 @@ Nested Block Quote Contents
 .
 Document[0, 64]
   GitLabBlockQuote[0, 29] open:[0, 3, ">>>"] openTrail:[3, 4, "\n"] close:[25, 28, ">>>"] closeTrail:[28, 29, "\n"]
-    Paragraph[4, 25] isTrailingBlankLine
+    Paragraph[4, 25]
       Text[4, 24] chars:[4, 24, "Block … tents"]
   Paragraph[29, 57]
     Text[29, 56] chars:[29, 56, "Neste … tents"]
@@ -181,12 +181,12 @@ Another Nested Block Quote Contents
 .
 Document[0, 123]
   GitLabBlockQuote[0, 29] open:[0, 3, ">>>"] openTrail:[3, 4, "\n"] close:[25, 28, ">>>"] closeTrail:[28, 29, "\n"]
-    Paragraph[4, 25] isTrailingBlankLine
+    Paragraph[4, 25]
       Text[4, 24] chars:[4, 24, "Block … tents"]
   Paragraph[29, 57]
     Text[29, 56] chars:[29, 56, "Neste … tents"]
   GitLabBlockQuote[57, 80] open:[57, 60, ">>>"] openTrail:[60, 61, "\n"] close:[76, 79, ">>>"] closeTrail:[79, 80, "\n"]
-    Paragraph[61, 76] isTrailingBlankLine
+    Paragraph[61, 76]
       Text[61, 75] chars:[61, 75, "Some  …  text"]
   Paragraph[80, 116]
     Text[80, 115] chars:[80, 115, "Anoth … tents"]
@@ -833,7 +833,7 @@ Nested Block Quote Contents
 .
 Document[0, 64]
   GitLabBlockQuote[0, 29] open:[0, 3, ">>>"] openTrail:[3, 4, "\n"] close:[25, 28, ">>>"] closeTrail:[28, 29, "\n"]
-    Paragraph[4, 25] isTrailingBlankLine
+    Paragraph[4, 25]
       Text[4, 24] chars:[4, 24, "Block … tents"]
   Paragraph[29, 57]
     Text[29, 56] chars:[29, 56, "Neste … tents"]

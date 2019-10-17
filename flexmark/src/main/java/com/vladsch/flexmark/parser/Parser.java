@@ -13,7 +13,9 @@ import com.vladsch.flexmark.parser.internal.PostProcessorManager;
 import com.vladsch.flexmark.util.ast.*;
 import com.vladsch.flexmark.util.builder.BuilderBase;
 import com.vladsch.flexmark.util.builder.Extension;
-import com.vladsch.flexmark.util.data.*;
+import com.vladsch.flexmark.util.data.DataHolder;
+import com.vladsch.flexmark.util.data.DataKey;
+import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.CharSubSequence;
 import org.jetbrains.annotations.NotNull;
@@ -33,7 +35,7 @@ import java.util.*;
  * }</pre>
  */
 public class Parser implements IParse {
-    public static final DataKey<Iterable<Extension>> EXTENSIONS = BuilderBase.EXTENSIONS;
+    public static final DataKey<Collection<Extension>> EXTENSIONS = BuilderBase.EXTENSIONS;
 
     public static final DataKey<KeepType> REFERENCES_KEEP = new DataKey<>("REFERENCES_KEEP", KeepType.FIRST);
     public static final DataKey<ReferenceRepository> REFERENCES = new DataKey<>("REFERENCES", ReferenceRepository::new);
@@ -299,7 +301,6 @@ public class Parser implements IParse {
     private final Map<Character, DelimiterProcessor> delimiterProcessors;
     private final BitSet delimiterCharacters;
     private final BitSet specialCharacters;
-    private final Builder builder;
     private final PostProcessorManager.PostProcessorDependencies postProcessorDependencies;
     private final DocumentParser.ParagraphPreProcessorDependencies paragraphPreProcessorFactories;
     private final DocumentParser.BlockPreProcessorDependencies blockPreProcessorDependencies;
@@ -309,8 +310,7 @@ public class Parser implements IParse {
     private final DataHolder options;
 
     Parser(Builder builder) {
-        this.builder = new Builder(builder); // make a copy to avoid after creation side effects
-        this.options = new DataSet(builder);
+        this.options = builder.toImmutable();
         this.blockParserFactories = DocumentParser.calculateBlockParserFactories(this.options, builder.blockParserFactories);
         this.inlineParserFactory = builder.inlineParserFactory == null ? DocumentParser.INLINE_PARSER_FACTORY : builder.inlineParserFactory;
         this.paragraphPreProcessorFactories = DocumentParser.calculateParagraphPreProcessors(this.options, builder.paragraphPreProcessorFactories, this.inlineParserFactory);
@@ -387,17 +387,11 @@ public class Parser implements IParse {
         return document;
     }
 
-    @NotNull
-    public Parser withOptions(@Nullable DataHolder options) {
-        return options == null ? this : new Parser(new Builder(builder, options));
-    }
-
     @Nullable
     @Override
     public DataHolder getOptions() {
-        return new DataSet(builder);
+        return options;
     }
-
 
     @Override
     public boolean transferReferences(@NotNull Document document, @NotNull Document included, Boolean onlyIfUndefined) {
@@ -436,14 +430,14 @@ public class Parser implements IParse {
      * Builder for configuring a {@link Parser}.
      */
     public static class Builder extends BuilderBase<Builder> {
-        private final List<CustomBlockParserFactory> blockParserFactories = new ArrayList<>();
-        private final List<DelimiterProcessor> delimiterProcessors = new ArrayList<>();
-        private final List<PostProcessorFactory> postProcessorFactories = new ArrayList<>();
-        private final List<ParagraphPreProcessorFactory> paragraphPreProcessorFactories = new ArrayList<>();
-        private final List<BlockPreProcessorFactory> blockPreProcessorFactories = new ArrayList<>();
-        private final List<LinkRefProcessorFactory> linkRefProcessors = new ArrayList<>();
-        private final List<InlineParserExtensionFactory> inlineParserExtensionFactories = new ArrayList<>();
-        private InlineParserFactory inlineParserFactory = null;
+        final List<CustomBlockParserFactory> blockParserFactories = new ArrayList<>();
+        final List<DelimiterProcessor> delimiterProcessors = new ArrayList<>();
+        final List<PostProcessorFactory> postProcessorFactories = new ArrayList<>();
+        final List<ParagraphPreProcessorFactory> paragraphPreProcessorFactories = new ArrayList<>();
+        final List<BlockPreProcessorFactory> blockPreProcessorFactories = new ArrayList<>();
+        final List<LinkRefProcessorFactory> linkRefProcessors = new ArrayList<>();
+        final List<InlineParserExtensionFactory> inlineParserExtensionFactories = new ArrayList<>();
+        InlineParserFactory inlineParserFactory = null;
 
         public Builder(DataHolder options) {
             super(options);
@@ -454,42 +448,17 @@ public class Parser implements IParse {
             super();
         }
 
-        public Builder(Builder other) {
-            super(other);
-
-            blockParserFactories.addAll(other.blockParserFactories);
-            delimiterProcessors.addAll(other.delimiterProcessors);
-            postProcessorFactories.addAll(other.postProcessorFactories);
-            paragraphPreProcessorFactories.addAll(other.paragraphPreProcessorFactories);
-            blockPreProcessorFactories.addAll(other.blockPreProcessorFactories);
-            linkRefProcessors.addAll(other.linkRefProcessors);
-            inlineParserFactory = other.inlineParserFactory;
-            inlineParserExtensionFactories.addAll(other.inlineParserExtensionFactories);
-        }
-
-        public Builder(Builder other, DataHolder options) {
-            this(other);
-            withOptions(options);
-        }
-
         /**
          * @return the configured {@link Parser}
          */
+        @NotNull
         public Parser build() {
             return new Parser(this);
         }
 
         @Override
         protected void removeApiPoint(Object apiPoint) {
-            if (apiPoint instanceof CustomBlockParserFactory) this.blockParserFactories.remove(apiPoint);
-            else if (apiPoint instanceof DelimiterProcessor) this.delimiterProcessors.remove(apiPoint);
-            else if (apiPoint instanceof PostProcessorFactory) this.postProcessorFactories.remove(apiPoint);
-            else if (apiPoint instanceof ParagraphPreProcessorFactory) this.paragraphPreProcessorFactories.remove(apiPoint);
-            else if (apiPoint instanceof BlockPreProcessorFactory) this.blockPreProcessorFactories.remove(apiPoint);
-            else if (apiPoint instanceof LinkRefProcessorFactory) this.linkRefProcessors.remove(apiPoint);
-            else if (apiPoint instanceof InlineParserExtensionFactory) this.inlineParserExtensionFactories.remove(apiPoint);
-            else if (apiPoint instanceof InlineParserFactory) this.inlineParserFactory = null;
-            else {
+            if (apiPoint instanceof CustomBlockParserFactory) { this.blockParserFactories.remove(apiPoint); } else if (apiPoint instanceof DelimiterProcessor) { this.delimiterProcessors.remove(apiPoint); } else if (apiPoint instanceof PostProcessorFactory) { this.postProcessorFactories.remove(apiPoint); } else if (apiPoint instanceof ParagraphPreProcessorFactory) { this.paragraphPreProcessorFactories.remove(apiPoint); } else if (apiPoint instanceof BlockPreProcessorFactory) { this.blockPreProcessorFactories.remove(apiPoint); } else if (apiPoint instanceof LinkRefProcessorFactory) { this.linkRefProcessors.remove(apiPoint); } else if (apiPoint instanceof InlineParserExtensionFactory) { this.inlineParserExtensionFactories.remove(apiPoint); } else if (apiPoint instanceof InlineParserFactory) { this.inlineParserFactory = null; } else {
                 throw new IllegalStateException("Unknown data point type: " + apiPoint.getClass().getName());
             }
         }

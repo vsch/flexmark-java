@@ -128,10 +128,6 @@ public class ComboFormatterIssueSpecTest extends ComboSpecTestCase {
         );
     }
 
-    private static final Parser PARSER = Parser.builder(OPTIONS).build();
-    // The spec says URL-escaping is optional, but the examples assume that it's enabled.
-    private static final Formatter RENDERER = Formatter.builder(OPTIONS).build();
-
     public ComboFormatterIssueSpecTest(SpecExample example) {
         super(example);
     }
@@ -146,8 +142,9 @@ public class ComboFormatterIssueSpecTest extends ComboSpecTestCase {
 
                 AbbreviationRepository abbreviationRepository = ((Document)getIncludedDocument()).get(AbbreviationExtension.ABBREVIATIONS);
                 if (!abbreviationRepository.isEmpty()) {
-                    // need to transfer it to parser
-                    setParser(getParser().withOptions(new MutableDataSet().set(AbbreviationExtension.ABBREVIATIONS, abbreviationRepository)));
+                    DataHolder withAbbreviations = getOptions().toMutable().set(AbbreviationExtension.ABBREVIATIONS, abbreviationRepository).toImmutable();
+                    // need to transfer it to new instance of parser
+                    setParser(Parser.builder(withAbbreviations).build());
                 }
             }
         };

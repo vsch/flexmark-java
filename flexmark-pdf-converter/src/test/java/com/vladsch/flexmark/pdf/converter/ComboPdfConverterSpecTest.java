@@ -57,8 +57,8 @@ public class ComboPdfConverterSpecTest extends ComboSpecTestCase {
         DataHolder combinedOptions = combineOptions(OPTIONS, exampleOptions);
         return new FlexmarkSpecExampleRenderer(example, combinedOptions, Parser.builder(combinedOptions).build(), HtmlRenderer.builder(combinedOptions).build(), true) {
             @Override
-            public @NotNull String renderHtml() {
-                String html = super.renderHtml();
+            protected @NotNull String renderHtml() {
+                String html = super.getHtml();
                 return PdfConverterExtension.embedCss(html, PdfConverterExtension.DEFAULT_CSS.getFrom(options(null)));
             }
         };

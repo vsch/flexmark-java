@@ -3,6 +3,7 @@ package com.vladsch.flexmark.test;
 import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.spec.SpecReader;
 import com.vladsch.flexmark.util.ast.Node;
+import com.vladsch.flexmark.util.builder.Extension;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
@@ -16,6 +17,7 @@ import org.junit.AssumptionViolatedException;
 import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.Function;
@@ -45,6 +47,8 @@ public class TestUtils {
     public static final DataHolder NO_FILE_EOL_FALSE = new MutableDataSet().set(NO_FILE_EOL, false).toImmutable();
     public static final String DEFAULT_SPEC_RESOURCE = "/spec.txt";
     public static final String DEFAULT_URL_PREFIX = "fqn://";  // use class fqn with resource path query
+    public static final DataKey<Collection<Extension>> UNLOAD_EXTENSIONS = new DataKey<>("UNLOAD_EXTENSIONS", Extension.EMPTY_LIST);
+    public static final DataKey<Collection<Extension>> LOAD_EXTENSIONS = new DataKey<>("LOAD_EXTENSIONS", Extension.EMPTY_LIST);
 
     /**
      * process comma separated list of option sets and combine them for final set to use

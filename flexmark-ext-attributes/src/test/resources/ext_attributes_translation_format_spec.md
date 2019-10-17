@@ -281,11 +281,9 @@ attributes are assigned to the list element
 * {.red} list item 2
 .
 * {.red} LiISt iIteEm 1
-
 * LiISt iIteEm 2
 
 * LiISt iIteEm 1
-
 * {.red} LiISt iIteEm 2
 ````````````````````````````````
 
@@ -324,7 +322,6 @@ Assigned to paragraph of list item 2
   {.red}
 .
 * LiISt iIteEm 1
-
 * LiISt iIteEm 2
 
   {.red}
@@ -400,7 +397,6 @@ Assigned to paragraph
 
 .
 * LiISt iIteEm 1
-
 * LiISt iIteEm 2
 
   {.red} someE teEXt
@@ -680,22 +676,22 @@ Ref image
 
 {style="border-color:red"}
 .
---------------------------
+- Translating Spans ------
 ![_1_]
 
 [_2_]: <_3_>
 
 {._4_}
---------------------------
+- Translated Spans --------
 <<<test
 >>>teESt
---------------------------
+- Partial ----------------
 ![_1_]
 
 [_2_]: <_3_>
 
 {._4_}
---------------------------
+- Translated -------------
 ![teESt]
 
 [teESt]: <http://example.com/test.png>

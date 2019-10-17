@@ -22,7 +22,7 @@ public interface SpecExampleRenderer {
     void finalizeRender();
 
     // caches values and does not regenerate
-    @NotNull String renderHtml();
+    @NotNull String getHtml();
     @Nullable String getAst();
 
     SpecExampleRenderer NULL = new SpecExampleRenderer() {
@@ -57,7 +57,7 @@ public interface SpecExampleRenderer {
         }
 
         @Override
-        public @NotNull String renderHtml() {
+        public @NotNull String getHtml() {
             return "";
         }
 

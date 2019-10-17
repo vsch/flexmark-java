@@ -20,9 +20,9 @@ class HtmlRootNodeRenderer extends IRenderBase {
     }
 
     @Override
-    public void render(@NotNull Node node, @NotNull Appendable output) {
-        assert node instanceof HtmlConverter.RootNode;
-        String text = ((HtmlConverter.RootNode) node).myRootNode;
+    public void render(@NotNull Node document, @NotNull Appendable output) {
+        assert document instanceof HtmlConverter.RootNode;
+        String text = ((HtmlConverter.RootNode) document).myRootNode;
         try {
             output.append(text);
         } catch (IOException e) {

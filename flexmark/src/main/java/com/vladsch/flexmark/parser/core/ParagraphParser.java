@@ -25,7 +25,11 @@ public class ParagraphParser extends AbstractBlockParser {
         if (!state.isBlank()) {
             return BlockContinue.atIndex(state.getIndex());
         } else {
-            block.setTrailingBlankLine(true);
+            boolean blankLine = state.isBlankLine();
+            if (!blankLine) {
+                int tmp = 0;
+            }
+            block.setTrailingBlankLine(blankLine);
             return BlockContinue.none();
         }
     }

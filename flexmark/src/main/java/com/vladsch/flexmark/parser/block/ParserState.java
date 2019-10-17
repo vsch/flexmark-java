@@ -56,6 +56,11 @@ public interface ParserState extends BlockTracker, BlockParserTracker {
     boolean isBlank();
 
     /**
+     * @return true if the current line is blank starting from the index
+     */
+    boolean isBlankLine();
+
+    /**
      * @return the deepest open block parser
      */
     BlockParser getActiveBlockParser();

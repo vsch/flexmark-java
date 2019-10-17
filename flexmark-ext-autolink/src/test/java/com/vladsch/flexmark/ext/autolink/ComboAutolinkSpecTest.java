@@ -7,7 +7,7 @@ import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.test.ComboSpecTestCase;
 import com.vladsch.flexmark.test.FlexmarkSpecExampleRenderer;
 import com.vladsch.flexmark.test.SpecExampleRenderer;
-import com.vladsch.flexmark.util.builder.BuilderBase;
+import com.vladsch.flexmark.test.TestUtils;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import org.jetbrains.annotations.NotNull;
@@ -28,7 +28,7 @@ public class ComboAutolinkSpecTest extends ComboSpecTestCase {
     private static final Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
         optionsMap.put("src-pos", new MutableDataSet().set(HtmlRenderer.SOURCE_POSITION_ATTRIBUTE, "md-pos"));
-        optionsMap.put("no-autolink", new MutableDataSet().set(BuilderBase.UNLOAD_EXTENSIONS, Collections.singleton(AutolinkExtension.create())));
+        optionsMap.put("no-autolink", new MutableDataSet().set(TestUtils.UNLOAD_EXTENSIONS, Collections.singleton(AutolinkExtension.create())));
         optionsMap.put("ignore-google", new MutableDataSet().set(AutolinkExtension.IGNORE_LINKS, "www.google.com"));
         optionsMap.put("intellij-dummy", new MutableDataSet().set(Parser.INTELLIJ_DUMMY_IDENTIFIER, true));
         optionsMap.put("typographic-ext", new MutableDataSet().set(Parser.EXTENSIONS, Arrays.asList(AutolinkExtension.create(), TypographicExtension.create())));

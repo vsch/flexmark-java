@@ -9,7 +9,8 @@ flexmark-java
 - [Next 0.60.0](#next-0600)
     - [0.5.9.3](#0593)
     - [API Change](#api-change)
-    - [Next 0.5.9.11](#next-05911)
+    - [Next 0.5.9.13](#next-05913)
+    - [0.5.9.11](#05911)
     - [0.5.9.9](#0599)
     - [0.5.9.7](#0597)
     - [0.5.9.5](#0595)
@@ -179,26 +180,43 @@ flexmark-java
     * `com.vladsch.flexmark.util.ast.NodeAdaptingVisitHandler`
     * `com.vladsch.flexmark.util.ast.NodeAdaptingVisitor`
 
-### Next 0.5.9.11
+### Next 0.5.9.13
 
 * [ ] Fix: Change spec example to variable number of sections
 * [ ] Fix: Create base classes for handling spec tests without needing to inherit from
       superclass.
+* [ ] Add: yaml front matter configurator for modules. See:
+      [Yaml Front Matter Configuration](../../wiki/Yaml-Front-Matter-Configuration)
 * [ ] Fix: URGENT: Rewrite combo spec and full spec to be merged like markdown navigator action
       spec test and not requiring deep inheritance dependencies. Merge full test spec and
       individual tests. for example see MdNav `LightPlatformCodeInsightSpecTestCase`
-* [ ] Add: yaml front matter configurator for modules. See:
-      [Yaml Front Matter Configuration](../../wiki/Yaml-Front-Matter-Configuration)
+
+### 0.5.9.11
+
+* Fix: remove need to load/unload extensions. Properly handle removal from `EXTENSIONS` property
+  for those tests that need it by implementing `LOAD_EXTENSIONS` property and
+  `UNLOAD_EXTENSIONS` property handling in `RenderingTestCase.combineOptions(DataHolder,
+  DataHolder)`.
+* Fix: remove loading/unloading and other test support code from builder, no longer needed,
+  including `withOptions()` and builder construction from another builder.
+* Fix: change `EXTENSIONS` from `Iterable` to `Collection`, which should not affect most code
+  and easier to work with.
+* Fix: translation mode formatting would loose indented code blocks in items if these blocks
+  were indented more than the minimum indent for the item.
+* Fix: paragraphs in containers that have non-blank termination marker would be erroneously
+  marked as isTrailingBlankLine when they were terminated because the container was closed not
+  because of a blank line.
+* Fix: First paragraph of `AdmonitionBlock` would always format with leading blank line. Now it
+  formats as it was in original markdown to allow preserving format as is when it is not
+  significant or confusing.
 
 ### 0.5.9.9
 
-* [ ] Fix: remove loading/unloading and other test support code from builder, no longer needed.
-* [ ] Fix: remove need to load/unload extensions. Properly handle removal from EXTENSIONS
-      property for those tests that need it.
 * Fix: `NO_EOL` option for tests was applied inconsistently.
 * Fix: add `SpecExample` argument to `getSpecExampleRenderer`
 * Fix: add `SpecExampleParse` argument to `addSpecExample`
-* Fix: regression bug [#372, \[Regression?\] Attributes extension not applied to \`code\` tag of code blocks]
+* Fix: regression bug
+  [#372, \[Regression?\] Attributes extension not applied to \`code\` tag of code blocks]
   * Add: `AttributesExtension.FENCED_CODE_ADD_ATTRIBUTES`, default
     `FencedCodeAddType.ADD_TO_PRE_CODE` for backward compatibility with 0.42, but if this is
     option is not set and `AttributesExtension.FENCED_CODE_INFO_ATTRIBUTES` is set to `true`,
@@ -1810,6 +1828,7 @@ setting either will affect both keys. For information on these keys see
 [#351, Is there any special format requirement for processing html data to markdown]: https://github.com/vsch/flexmark-java/issues/351
 [#357, HTML to markdown and removed nested list]: https://github.com/vsch/flexmark-java/issues/357
 [#362, ArrayIndexOutOfBoundsException in BasedSequence.indexOfAll]: https://github.com/vsch/flexmark-java/issues/362
+[#372, \[Regression?\] Attributes extension not applied to \`code\` tag of code blocks]: https://github.com/vsch/flexmark-java/issues/372
 [Admonition Extension, Material for MkDocs]: https://squidfunk.github.io/mkdocs-material/extensions/admonition/
 [Awesome Console]: https://plugins.jetbrains.com/plugin/7677-awesome-console "Awesome Console"
 [HtmlToMarkdownCustomizedSample.java]: https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/samples/HtmlToMarkdownCustomizedSample.java
@@ -1820,6 +1839,4 @@ setting either will affect both keys. For information on these keys see
 [NodeInsertingPostProcessorSample.java]: https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/samples/NodeInsertingPostProcessorSample.java
 [PdfLandscapeConverter.java]: https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/samples/PdfLandscapeConverter.java
 [YouTrack: IDEA-207453]: https://youtrack.jetbrains.com/issue/IDEA-207453 "Add Conversion of ref anchor to UrlFilter for file line navigation"
-[#372, \[Regression?\] Attributes extension not applied to \`code\` tag of code blocks]: https://github.com/vsch/flexmark-java/issues/372
-
 

@@ -45,38 +45,42 @@ public class TaskListNodeFormatter implements NodeFormatter {
     }
 
     private void render(TaskListItem node, NodeFormatterContext context, MarkdownWriter markdown) {
-        BasedSequence markerSuffix = node.getMarkerSuffix();
-        switch (myOptions.taskListItemCase) {
-            case AS_IS:
-                break;
-            case LOWERCASE:
-                markerSuffix = markerSuffix.toLowerCase();
-                break;
-            case UPPERCASE:
-                markerSuffix = markerSuffix.toUpperCase();
-                break;
-            default:
-                throw new IllegalStateException("Missing case for TaskListItemCase " + myOptions.taskListItemCase.name());
-        }
-
-        if (node.isItemDoneMarker()) {
-            switch (myOptions.taskListItemPlacement) {
+        if (context.isTransformingText()) {
+            CoreNodeFormatter.renderListItem(node, context, markdown, listOptions, node.getMarkerSuffix(), false);
+        } else {
+            BasedSequence markerSuffix = node.getMarkerSuffix();
+            switch (myOptions.taskListItemCase) {
                 case AS_IS:
-                case INCOMPLETE_FIRST:
-                case INCOMPLETE_NESTED_FIRST:
                     break;
-                case COMPLETE_TO_NON_TASK:
-                case COMPLETE_NESTED_TO_NON_TASK:
-                    markerSuffix = BasedSequence.NULL;
+                case LOWERCASE:
+                    markerSuffix = markerSuffix.toLowerCase();
+                    break;
+                case UPPERCASE:
+                    markerSuffix = markerSuffix.toUpperCase();
                     break;
                 default:
-                    throw new IllegalStateException("Missing case for ListItemPlacement " + myOptions.taskListItemPlacement.name());
+                    throw new IllegalStateException("Missing case for TaskListItemCase " + myOptions.taskListItemCase.name());
             }
-        }
 
-        // task list item node overrides isParagraphWrappingDisabled which affects empty list item blank line rendering
-        boolean forceLooseItem = node.isLoose() && (node.hasChildren() && node.getFirstChildAnyNot(BlankLine.class) != null);
-        CoreNodeFormatter.renderListItem(node, context, markdown, listOptions, markerSuffix.isEmpty() ? markerSuffix : markerSuffix.append(" "), forceLooseItem);
+            if (node.isItemDoneMarker()) {
+                switch (myOptions.taskListItemPlacement) {
+                    case AS_IS:
+                    case INCOMPLETE_FIRST:
+                    case INCOMPLETE_NESTED_FIRST:
+                        break;
+                    case COMPLETE_TO_NON_TASK:
+                    case COMPLETE_NESTED_TO_NON_TASK:
+                        markerSuffix = BasedSequence.NULL;
+                        break;
+                    default:
+                        throw new IllegalStateException("Missing case for ListItemPlacement " + myOptions.taskListItemPlacement.name());
+                }
+            }
+
+            // task list item node overrides isParagraphWrappingDisabled which affects empty list item blank line rendering
+            boolean forceLooseItem = node.isLoose() && (node.hasChildren() && node.getFirstChildAnyNot(BlankLine.class) != null);
+            CoreNodeFormatter.renderListItem(node, context, markdown, listOptions, markerSuffix.isEmpty() ? markerSuffix : markerSuffix.append(" "), forceLooseItem);
+        }
     }
 
     private void render(BulletList node, NodeFormatterContext context, MarkdownWriter markdown) {
@@ -110,44 +114,48 @@ public class TaskListNodeFormatter implements NodeFormatter {
             MarkdownWriter markdown,
             FormatOptions formatOptions
     ) {
-        ArrayList<Node> itemList = new ArrayList<>();
-
-        TaskListItemPlacement taskListItemPlacement = formatOptions.taskListItemPlacement;
-        if (taskListItemPlacement != TaskListItemPlacement.AS_IS) {
-            ArrayList<Node> incompleteTasks = new ArrayList<>();
-            ArrayList<Node> completeItems = new ArrayList<>();
-            boolean incompleteDescendants = taskListItemPlacement == TaskListItemPlacement.INCOMPLETE_NESTED_FIRST || taskListItemPlacement == TaskListItemPlacement.COMPLETE_NESTED_TO_NON_TASK;
-
-            Node item = node.getFirstChild();
-            while (item != null) {
-                if (item instanceof TaskListItem) {
-                    TaskListItem taskItem = (TaskListItem) item;
-                    if (!taskItem.isItemDoneMarker() || (incompleteDescendants && hasIncompleteDescendants(item))) {
-                        incompleteTasks.add(item);
-                    } else {
-                        completeItems.add(item);
-                    }
-                } else {
-                    if (incompleteDescendants && hasIncompleteDescendants(item)) {
-                        incompleteTasks.add(item);
-                    } else {
-                        completeItems.add(item);
-                    }
-                }
-                item = item.getNext();
-            }
-
-            itemList.addAll(incompleteTasks);
-            itemList.addAll(completeItems);
+        if (context.isTransformingText()) {
+            context.renderChildren(node);
         } else {
-            Node item = node.getFirstChild();
-            while (item != null) {
-                itemList.add(item);
-                item = item.getNext();
-            }
-        }
+            ArrayList<Node> itemList = new ArrayList<>();
 
-        CoreNodeFormatter.renderList(node, context, markdown, itemList);
+            TaskListItemPlacement taskListItemPlacement = formatOptions.taskListItemPlacement;
+            if (taskListItemPlacement != TaskListItemPlacement.AS_IS) {
+                ArrayList<Node> incompleteTasks = new ArrayList<>();
+                ArrayList<Node> completeItems = new ArrayList<>();
+                boolean incompleteDescendants = taskListItemPlacement == TaskListItemPlacement.INCOMPLETE_NESTED_FIRST || taskListItemPlacement == TaskListItemPlacement.COMPLETE_NESTED_TO_NON_TASK;
+
+                Node item = node.getFirstChild();
+                while (item != null) {
+                    if (item instanceof TaskListItem) {
+                        TaskListItem taskItem = (TaskListItem) item;
+                        if (!taskItem.isItemDoneMarker() || (incompleteDescendants && hasIncompleteDescendants(item))) {
+                            incompleteTasks.add(item);
+                        } else {
+                            completeItems.add(item);
+                        }
+                    } else {
+                        if (incompleteDescendants && hasIncompleteDescendants(item)) {
+                            incompleteTasks.add(item);
+                        } else {
+                            completeItems.add(item);
+                        }
+                    }
+                    item = item.getNext();
+                }
+
+                itemList.addAll(incompleteTasks);
+                itemList.addAll(completeItems);
+            } else {
+                Node item = node.getFirstChild();
+                while (item != null) {
+                    itemList.add(item);
+                    item = item.getNext();
+                }
+            }
+
+            CoreNodeFormatter.renderList(node, context, markdown, itemList);
+        }
     }
 
     public static class Factory implements NodeFormatterFactory {

@@ -8,7 +8,9 @@ import org.jetbrains.annotations.Nullable;
  * Render interface for rendering implementation for RenderingTestCase
  */
 public interface IRender {
-    public void render(@NotNull Node node, @NotNull Appendable output);
+    // CAUTION: the reason this is not a Document, which it always is in practice is for tests which generate
+    //    a fake NODE and generating a fake Document (unless made into an interface and without extras) would be too difficult
+    public void render(@NotNull Node document, @NotNull Appendable output);
 
     /**
      * Render the tree of nodes to HTML.

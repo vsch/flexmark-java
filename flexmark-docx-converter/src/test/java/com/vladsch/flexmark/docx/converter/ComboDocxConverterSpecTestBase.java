@@ -174,7 +174,7 @@ public abstract class ComboDocxConverterSpecTestBase extends ComboSpecTestCase {
     public void addSpecExample(@NotNull SpecExampleRenderer exampleRenderer, @NotNull SpecExampleParse exampleParse, DataHolder exampleOptions, boolean ignoredTestCase, @NotNull String html, @Nullable String ast) {
         if (!DUMP_ALL_TESTS_FILES) return;
 
-        boolean failed = !ignoredTestCase && !exampleRenderer.renderHtml().equals(example.getHtml());
+        boolean failed = !ignoredTestCase && !exampleRenderer.getHtml().equals(example.getHtml());
 
         // add source information
         myDocxContext.createP(myDocxContext.getRenderingOptions().HEADING_3);

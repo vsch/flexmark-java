@@ -1,7 +1,10 @@
 package com.vladsch.flexmark.test;
 
 import com.vladsch.flexmark.spec.SpecExample;
+import com.vladsch.flexmark.util.builder.BuilderBase;
+import com.vladsch.flexmark.util.builder.Extension;
 import com.vladsch.flexmark.util.data.DataHolder;
+import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.data.DataSet;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -9,9 +12,31 @@ import org.junit.ComparisonFailure;
 import org.junit.Rule;
 import org.junit.rules.ExpectedException;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.LinkedHashSet;
+
 import static org.junit.Assert.assertEquals;
 
 public abstract class RenderingTestCase implements SpecExampleProcessor {
+    public static final DataKey<Boolean> IGNORE = TestUtils.IGNORE;
+    public static final DataKey<Boolean> FAIL = TestUtils.FAIL;
+    public static final DataKey<Boolean> NO_FILE_EOL = TestUtils.NO_FILE_EOL;
+    public static final DataKey<Integer> TIMED_ITERATIONS = TestUtils.TIMED_ITERATIONS;
+    public static final DataKey<Boolean> EMBED_TIMED = TestUtils.EMBED_TIMED;
+    public static final DataKey<Boolean> TIMED = TestUtils.TIMED;
+    public static final DataKey<String> INCLUDED_DOCUMENT = TestUtils.INCLUDED_DOCUMENT;
+    public static final DataKey<String> SOURCE_PREFIX = TestUtils.SOURCE_PREFIX;
+    public static final DataKey<String> SOURCE_SUFFIX = TestUtils.SOURCE_SUFFIX;
+    public static final DataKey<String> SOURCE_INDENT = TestUtils.SOURCE_INDENT;
+
+    public static final DataHolder NO_FILE_EOL_FALSE = TestUtils.NO_FILE_EOL_FALSE;
+    public static final String DEFAULT_SPEC_RESOURCE = TestUtils.DEFAULT_SPEC_RESOURCE;
+    public static final String DEFAULT_URL_PREFIX = TestUtils.DEFAULT_URL_PREFIX;
+    public static final DataKey<Collection<Extension>> UNLOAD_EXTENSIONS = TestUtils.UNLOAD_EXTENSIONS;
+    public static final DataKey<Collection<Extension>> LOAD_EXTENSIONS = TestUtils.LOAD_EXTENSIONS;
+    public static final DataKey<Collection<Extension>> EXTENSIONS = BuilderBase.EXTENSIONS;
+
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
@@ -28,7 +53,39 @@ public abstract class RenderingTestCase implements SpecExampleProcessor {
     @Nullable
     @Override
     public DataHolder combineOptions(@Nullable DataHolder other, @Nullable DataHolder overrides) {
-        return other != null && overrides != null ? new DataSet(other, overrides) : other != null ? other : overrides;
+        // here we handle load and unload extension directives to convert them to adding/removing extensions from EXTENSIONS
+        if (other != null && overrides != null) {
+            return new DataSet(resolveLoadUnload(other), resolveLoadUnload(overrides));
+        } else if (other != null) {
+            return resolveLoadUnload(other);
+        } else {
+            return resolveLoadUnload(overrides);
+        }
+    }
+
+    private DataHolder resolveLoadUnload(@Nullable DataHolder options) {
+        if (options != null && (options.contains(LOAD_EXTENSIONS) || options.contains(UNLOAD_EXTENSIONS))) {
+            Collection<Extension> extensions = options.get(EXTENSIONS);
+            Collection<Extension> loadExtensions = options.get(LOAD_EXTENSIONS);
+            Collection<Extension> unloadExtensions = options.get(UNLOAD_EXTENSIONS);
+            if (!loadExtensions.isEmpty() || !unloadExtensions.isEmpty() && !extensions.isEmpty()) {
+                LinkedHashSet<Extension> resolvedExtensions = new LinkedHashSet<>(extensions);
+                resolvedExtensions.addAll(loadExtensions);
+                resolvedExtensions.removeAll(unloadExtensions);
+                return options.toMutable()
+                        .remove(LOAD_EXTENSIONS)
+                        .remove(UNLOAD_EXTENSIONS)
+                        .set(EXTENSIONS, new ArrayList<>(resolvedExtensions))
+                        .toImmutable();
+            } else {
+                // just remove the offending keys
+                return options.toMutable()
+                        .remove(LOAD_EXTENSIONS)
+                        .remove(UNLOAD_EXTENSIONS)
+                        .toImmutable();
+            }
+        }
+        return options;
     }
 
     /**
@@ -68,8 +125,8 @@ public abstract class RenderingTestCase implements SpecExampleProcessor {
         boolean timed = specExampleParse.isTimed();
         int iterations = specExampleParse.getIterations();
 
-        String html = exampleRenderer.renderHtml();
-        for (int i = 1; i < iterations; i++) exampleRenderer.renderHtml();
+        String html = exampleRenderer.getHtml();
+        for (int i = 1; i < iterations; i++) exampleRenderer.getHtml();
         long render = System.nanoTime();
 
         String ast = expectedAst == null ? "" : exampleRenderer.getAst();

@@ -68,12 +68,4 @@ class HtmlParser extends IParseBase {
         String rootNode = FlexmarkHtmlParser.parse(input.toString(), 1, getOptions());
         return new RootNode(rootNode);
     }
-
-    @NotNull
-    @Override
-    public IParse withOptions(@Nullable DataHolder options) {
-        MutableDataSet mutableDataSet = new MutableDataSet(getOptions());
-        if (options != null) mutableDataSet.setAll(options);
-        return new HtmlParser(mutableDataSet);
-    }
 }

@@ -121,11 +121,9 @@ public class HtmlRenderer implements IRender {
     private final HeaderIdGeneratorFactory htmlIdGeneratorFactory;
     private final HtmlRendererOptions htmlOptions;
     private final DataHolder options;
-    private final Builder builder;
 
     HtmlRenderer(Builder builder) {
-        this.builder = new Builder(builder); // take a copy to avoid after creation side effects
-        this.options = new DataSet(builder);
+        this.options = builder.toImmutable();
         this.htmlOptions = new HtmlRendererOptions(this.options);
 
         this.htmlIdGeneratorFactory = builder.htmlIdGeneratorFactory;
@@ -181,16 +179,16 @@ public class HtmlRenderer implements IRender {
     @Nullable
     @Override
     public DataHolder getOptions() {
-        return new DataSet(builder);
+        return options;
     }
 
     /**
      * Render a node to the appendable
-     *  @param node   node to render
+     *  @param document   node to render
      * @param output appendable to use for the output*/
-    public void render(@NotNull Node node, @NotNull Appendable output) {
-        MainNodeRenderer renderer = new MainNodeRenderer(options, new HtmlWriter(htmlOptions.indentSize, htmlOptions.formatFlags, !htmlOptions.htmlBlockOpenTagEol, !htmlOptions.htmlBlockCloseTagEol), node.getDocument());
-        renderer.render(node);
+    public void render(@NotNull Node document, @NotNull Appendable output) {
+        MainNodeRenderer renderer = new MainNodeRenderer(options, new HtmlWriter(htmlOptions.indentSize, htmlOptions.formatFlags, !htmlOptions.htmlBlockOpenTagEol, !htmlOptions.htmlBlockCloseTagEol), document.getDocument());
+        renderer.render(document);
         renderer.flushTo(output, htmlOptions.maxTrailingBlankLines);
         renderer.dispose();
     }
@@ -272,20 +270,6 @@ public class HtmlRenderer implements IRender {
             loadExtensions();
         }
 
-        public Builder(Builder other) {
-            super(other);
-
-            this.attributeProviderFactories.putAll(other.attributeProviderFactories);
-            this.nodeRendererFactories.addAll(other.nodeRendererFactories);
-            this.linkResolverFactories.addAll(other.linkResolverFactories);
-            this.htmlIdGeneratorFactory = other.htmlIdGeneratorFactory;
-        }
-
-        public Builder(Builder other, DataHolder options) {
-            this(other);
-            withOptions(options);
-        }
-
         @Override
         protected void removeApiPoint(Object apiPoint) {
             if (apiPoint instanceof AttributeProviderFactory) this.attributeProviderFactories.remove(apiPoint.getClass());
@@ -325,6 +309,7 @@ public class HtmlRenderer implements IRender {
         /**
          * @return the configured {@link HtmlRenderer}
          */
+        @NotNull
         public HtmlRenderer build() {
             return new HtmlRenderer(this);
         }

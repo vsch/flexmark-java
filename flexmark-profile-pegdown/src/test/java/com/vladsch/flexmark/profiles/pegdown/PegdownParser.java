@@ -71,12 +71,4 @@ class PegdownParser extends IParseBase {
         RootNode rootNode = new PegDownProcessor(pegdownExtensions).parseMarkdown(input.toString().toCharArray());
         return new PegdownRootNode(rootNode);
     }
-
-    @NotNull
-    @Override
-    public IParse withOptions(@Nullable DataHolder options) {
-        MutableDataSet mutableDataSet = new MutableDataSet(getOptions());
-        if (options != null) mutableDataSet.setAll(options);
-        return new PegdownParser(mutableDataSet);
-    }
 }

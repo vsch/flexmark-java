@@ -1,8 +1,6 @@
 package com.vladsch.flexmark.util.builder;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Base interface for a parser/renderer extension.
@@ -16,6 +14,6 @@ import java.util.Set;
  * also have a static create() method that returns an instance of the extension.
  */
 public interface Extension {
-    Set<Extension> EMPTY_SET = new HashSet<>();
-    Iterable<Extension> EMPTY_LIST = new ArrayList<>();
+    Set<Extension> EMPTY_SET = Collections.emptySet();
+    Collection<Extension> EMPTY_LIST = Collections.emptyList();
 }

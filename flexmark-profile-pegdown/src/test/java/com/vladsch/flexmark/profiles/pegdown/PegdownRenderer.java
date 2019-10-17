@@ -25,10 +25,10 @@ class PegdownRenderer extends IRenderBase {
     }
 
     @Override
-    public void render(@NotNull Node node, @NotNull Appendable output) {
-        assert node instanceof PegdownParser.PegdownRootNode;
+    public void render(@NotNull Node document, @NotNull Appendable output) {
+        assert document instanceof PegdownParser.PegdownRootNode;
 
-        RootNode rootNode = ((PegdownParser.PegdownRootNode) node).myRootNode;
+        RootNode rootNode = ((PegdownParser.PegdownRootNode) document).myRootNode;
         String html = mySerializer.toHtml(rootNode);
         try {
             output.append(html);

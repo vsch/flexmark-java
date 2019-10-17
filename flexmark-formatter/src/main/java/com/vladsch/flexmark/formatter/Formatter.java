@@ -116,13 +116,11 @@ public class Formatter implements IRender {
 
     final FormatterOptions formatterOptions;
     private final DataHolder options;
-    private final Builder builder;
     final List<LinkResolverFactory> linkResolverFactories;
     private final NodeFormatterDependencies nodeFormatterFactories;
 
-    private Formatter(Builder builder) {
-        this.builder = new Builder(builder); // take a copy to avoid after creation side effects
-        this.options = new DataSet(builder);
+    Formatter(Builder builder) {
+        this.options = builder.toImmutable();
         this.formatterOptions = new FormatterOptions(this.options);
         //this.nodeFormatterFactories = new ArrayList<NodeFormatterFactory>(builder.nodeFormatterFactories.size() + 1);
         //this.nodeFormatterFactories.addAll(builder.nodeFormatterFactories);
@@ -200,10 +198,10 @@ public class Formatter implements IRender {
         return new TranslationHandlerImpl(options, formatterOptions, new HeaderIdGenerator.Factory());
     }
 
-    @Nullable
+    @NotNull
     @Override
     public DataHolder getOptions() {
-        return new DataSet(builder);
+        return options;
     }
 
     /**
@@ -227,11 +225,11 @@ public class Formatter implements IRender {
 
     /**
      * Render a node to the appendable
-     *  @param node   node to render
+     *  @param document   node to render
      * @param output appendable to use for the output*/
-    public void render(@NotNull Node node, @NotNull Appendable output) {
-        MainNodeFormatter renderer = new MainNodeFormatter(options, new MarkdownWriter(formatterOptions.formatFlags), node.getDocument(), null);
-        renderer.render(node);
+    public void render(@NotNull Node document, @NotNull Appendable output) {
+        MainNodeFormatter renderer = new MainNodeFormatter(options, new MarkdownWriter(formatterOptions.formatFlags), document.getDocument(), null);
+        renderer.render(document);
         renderer.flushTo(output, formatterOptions.maxTrailingBlankLines);
     }
 
@@ -263,35 +261,35 @@ public class Formatter implements IRender {
     /**
      * Render a node to the appendable
      *
-     * @param node   node to render
+     * @param document   node to render
      * @param output appendable to use for the output
      */
-    public void translationRender(Node node, Appendable output, TranslationHandler translationHandler, RenderPurpose renderPurpose) {
-        translationRender(node, output, formatterOptions.maxTrailingBlankLines, translationHandler, renderPurpose);
+    public void translationRender(Node document, Appendable output, TranslationHandler translationHandler, RenderPurpose renderPurpose) {
+        translationRender(document, output, formatterOptions.maxTrailingBlankLines, translationHandler, renderPurpose);
     }
 
     /**
      * Render the tree of nodes to markdown
      *
-     * @param node the root node
+     * @param document the root node
      * @return the formatted markdown
      */
-    public String translationRender(Node node, TranslationHandler translationHandler, RenderPurpose renderPurpose) {
+    public String translationRender(Node document, TranslationHandler translationHandler, RenderPurpose renderPurpose) {
         StringBuilder sb = new StringBuilder();
-        translationRender(node, sb, translationHandler, renderPurpose);
+        translationRender(document, sb, translationHandler, renderPurpose);
         return sb.toString();
     }
 
     /**
      * Render a node to the appendable
      *
-     * @param node   node to render
+     * @param document   node to render
      * @param output appendable to use for the output
      */
-    public void translationRender(Node node, Appendable output, int maxTrailingBlankLines, TranslationHandler translationHandler, RenderPurpose renderPurpose) {
+    public void translationRender(Node document, Appendable output, int maxTrailingBlankLines, TranslationHandler translationHandler, RenderPurpose renderPurpose) {
         translationHandler.setRenderPurpose(renderPurpose);
-        MainNodeFormatter renderer = new MainNodeFormatter(options, new MarkdownWriter(formatterOptions.formatFlags /*| FormattingAppendable.PASS_THROUGH*/), node.getDocument(), translationHandler);
-        renderer.render(node);
+        MainNodeFormatter renderer = new MainNodeFormatter(options, new MarkdownWriter(formatterOptions.formatFlags | LineFormattingAppendable.ALLOW_LEADING_WHITESPACE /*| FormattingAppendable.PASS_THROUGH*/), document.getDocument(), translationHandler);
+        renderer.render(document);
         renderer.flushTo(output, maxTrailingBlankLines);
     }
 
@@ -407,23 +405,10 @@ public class Formatter implements IRender {
             loadExtensions();
         }
 
-        public Builder(Builder other) {
-            super(other);
-
-            this.attributeProviderFactories.addAll(other.attributeProviderFactories);
-            //this.nodeFormatterFactories.addAll(other.nodeFormatterFactories); // not re-used
-            this.linkResolverFactories.addAll(other.linkResolverFactories);
-            //this.htmlIdGeneratorFactory = other.htmlIdGeneratorFactory;
-        }
-
-        public Builder(Builder other, DataHolder options) {
-            this(other);
-            withOptions(options);
-        }
-
         /**
          * @return the configured {@link Formatter}
          */
+        @NotNull
         public Formatter build() {
             return new Formatter(this);
         }

@@ -167,7 +167,6 @@ nested
         embedded
 .
 ???+ note ""
-
     FiIRSt chiILD paARaAGRaAph
 
     !!! note

@@ -25,24 +25,24 @@ text [^footnote] embedded.
 with continuation
 
 .
---------------------------
+- Translating Spans ------
 text [^_1_] embedded.
 
 [^_1_]: footnote text
     with continuation
---------------------------
+- Translated Spans --------
 <<<text [^_1_] embedded.
 >>>teEXt [^_1_] eEmBeEDDeED.
 <<<footnote text
 with continuation
 >>>FootNoteE teEXt
 WiIth coNtiINuUaAtiIoN
---------------------------
+- Partial ----------------
 teEXt [^_1_] eEmBeEDDeED.
 
 [^_1_]: FootNoteE teEXt
     WiIth coNtiINuUaAtiIoN
---------------------------
+- Translated -------------
 teEXt [^footnote] eEmBeEDDeED.
 
 [^footnote]: FootNoteE teEXt

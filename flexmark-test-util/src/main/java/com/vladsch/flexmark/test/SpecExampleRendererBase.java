@@ -14,6 +14,7 @@ public abstract class SpecExampleRendererBase implements SpecExampleRenderer {
     private @NotNull IParse myParser;
     private @NotNull IRender myRender;
     private final boolean myIncludeExampleInfo;
+    private boolean myIsFinalized;
 
     public SpecExampleRendererBase(@NotNull SpecExample example, @Nullable DataHolder options, @NotNull IParse parser, @NotNull IRender render) {
         this(example, options, parser, render, true);
@@ -25,6 +26,16 @@ public abstract class SpecExampleRendererBase implements SpecExampleRenderer {
         myParser = parser;
         myRender = render;
         myIncludeExampleInfo = includeExampleInfo;
+    }
+
+    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
+    public boolean isFinalized() {
+        return myIsFinalized;
+    }
+
+    @Override
+    public void finalizeRender() {
+        myIsFinalized = true;
     }
 
     @Override
@@ -40,7 +51,7 @@ public abstract class SpecExampleRendererBase implements SpecExampleRenderer {
     @NotNull
     @Override
     public DataHolder getOptions() {
-        return new DataSet(myOptions);
+        return myOptions.toImmutable();
     }
 
     @NotNull

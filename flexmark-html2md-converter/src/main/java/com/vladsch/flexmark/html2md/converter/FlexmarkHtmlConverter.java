@@ -24,6 +24,7 @@ import com.vladsch.flexmark.util.html.CellAlignment;
 import com.vladsch.flexmark.util.html.LineFormattingAppendable;
 import com.vladsch.flexmark.util.html.LineFormattingAppendableImpl;
 import com.vladsch.flexmark.util.sequence.BasedSequenceImpl;
+import org.jetbrains.annotations.NotNull;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -245,13 +246,11 @@ public class FlexmarkHtmlConverter {
     final List<HtmlNodeRendererFactory> nodeConverterFactories;
     final HtmlConverterOptions htmlConverterOptions;
     private final DataHolder options;
-    private final Builder builder;
     private final List<DelegatingNodeRendererFactoryWrapper> nodeRendererFactories;
     private final List<HtmlLinkResolverFactory> linkResolverFactories;
 
-    private FlexmarkHtmlConverter(Builder builder) {
-        this.builder = new Builder(builder); // take a copy to avoid after creation side effects
-        this.options = new DataSet(builder);
+    FlexmarkHtmlConverter(Builder builder) {
+        this.options = builder.toImmutable();
         this.htmlConverterOptions = new HtmlConverterOptions(this.options);
         this.nodeConverterFactories = new ArrayList<>(builder.nodeRendererFactories.size() + 1);
         this.nodeConverterFactories.addAll(builder.nodeRendererFactories);
@@ -280,7 +279,7 @@ public class FlexmarkHtmlConverter {
     }
 
     public DataHolder getOptions() {
-        return new DataSet(builder);
+        return options;
     }
 
     /**
@@ -398,10 +397,6 @@ public class FlexmarkHtmlConverter {
         return sb.toString();
     }
 
-    public FlexmarkHtmlConverter withOptions(DataHolder options) {
-        return options == null ? this : new FlexmarkHtmlConverter(new Builder(builder, options));
-    }
-
     /**
      * Builder for configuring an {@link FlexmarkHtmlConverter}. See methods for default configuration.
      */
@@ -419,22 +414,10 @@ public class FlexmarkHtmlConverter {
             loadExtensions();
         }
 
-        public Builder(Builder other) {
-            super(other);
-
-            //this.nodeFormatterFactories.addAll(other.nodeRendererFactories); // not re-used
-            this.linkResolverFactories.addAll(other.linkResolverFactories);
-            //this.htmlIdGeneratorFactory = other.htmlIdGeneratorFactory;
-        }
-
-        public Builder(Builder other, DataHolder options) {
-            this(other);
-            withOptions(options);
-        }
-
         /**
          * @return the configured {@link FlexmarkHtmlConverter}
          */
+        @NotNull
         public FlexmarkHtmlConverter build() {
             return new FlexmarkHtmlConverter(this);
         }

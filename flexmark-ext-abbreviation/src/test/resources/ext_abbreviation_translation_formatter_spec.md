@@ -34,20 +34,20 @@ Should work without trailing EOL
 
 This has an Abbr embedded in it.
 .
---------------------------
+- Translating Spans ------
 *[-1-]: _2_
 
 This has an -1- embedded in it.
---------------------------
+- Translated Spans --------
 <<<Abbreviation
 >>>aBBReEViIaAtiIoN
 <<<This has an -1- embedded in it.
 >>>thiIS haAS aAN -1- eEmBeEDDeED iIN iIt.
---------------------------
+- Partial ----------------
 *[-1-]: _2_
 
 thiIS haAS aAN -1- eEmBeEDDeED iIN iIt.
---------------------------
+- Translated -------------
 *[Abbr]: aBBReEViIaAtiIoN
 
 thiIS haAS aAN Abbr eEmBeEDDeED iIN iIt.
@@ -153,7 +153,6 @@ Paragraph with second line having a reference
 
 .
 paARaAGRaAph WiIth SeEcoND LiINeE haAViING aA ReEFeEReENceE
-
 *[test]: teESt aABBReEViIaAtiIoN
 ````````````````````````````````
 

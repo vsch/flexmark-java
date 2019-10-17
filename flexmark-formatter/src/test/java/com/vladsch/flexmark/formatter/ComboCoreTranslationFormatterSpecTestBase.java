@@ -7,6 +7,7 @@ import com.vladsch.flexmark.test.ComboSpecTestCase;
 import com.vladsch.flexmark.test.FlexmarkSpecExampleRenderer;
 import com.vladsch.flexmark.test.SpecExampleRenderer;
 import com.vladsch.flexmark.test.TestUtils;
+import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.IRender;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
@@ -23,10 +24,11 @@ import java.util.Map;
 
 public abstract class ComboCoreTranslationFormatterSpecTestBase extends ComboSpecTestCase {
     static final boolean SKIP_IGNORED_TESTS = true;
-    private static final String SPEC_RESOURCE = "/core_translation_formatter_spec.md";
     private static final boolean SHOW_INTERMEDIATE = false;
+    private static final boolean SHOW_INTERMEDIATE_AST = false;
 
     static final DataKey<Boolean> DETAILS = new DataKey<>("DETAILS", SHOW_INTERMEDIATE);
+    static final DataKey<Boolean> AST_DETAILS = new DataKey<>("AST_DETAILS", SHOW_INTERMEDIATE_AST);
 
     // spacer
     private final Map<String, DataHolder> optionsMap = new HashMap<>();
@@ -49,6 +51,7 @@ public abstract class ComboCoreTranslationFormatterSpecTestBase extends ComboSpe
 
         // add standard options
         this.optionsMap.put("details", new MutableDataSet().set(DETAILS, true));
+        this.optionsMap.put("ast-details", new MutableDataSet().set(AST_DETAILS, true));
         this.optionsMap.put("IGNORED", new MutableDataSet().set(TestUtils.IGNORE, SKIP_IGNORED_TESTS));
 
         if (optionsMap != null) {
@@ -74,7 +77,17 @@ public abstract class ComboCoreTranslationFormatterSpecTestBase extends ComboSpe
     @Override
     final public @NotNull SpecExampleRenderer getSpecExampleRenderer(@NotNull SpecExample example, @Nullable DataHolder exampleOptions) {
         DataHolder combinedOptions = combineOptions(myDefaultOptions, exampleOptions);
-        return new FlexmarkSpecExampleRenderer(example, combinedOptions, getParser(combinedOptions), getRenderer(combinedOptions), true);
+        return new FlexmarkSpecExampleRenderer(example, combinedOptions, getParser(combinedOptions), getRenderer(combinedOptions), true) {
+            @Override
+            protected @NotNull String renderAst() {
+                TranslationFormatter translationFormatter = (TranslationFormatter) getRenderer();
+                if (translationFormatter.isShowIntermediateAst()) {
+                    return translationFormatter.getAst();
+                } else {
+                    return super.renderAst();
+                }
+            }
+        };
     }
 
     static CharSequence translate(CharSequence text) {
@@ -105,9 +118,27 @@ public abstract class ComboCoreTranslationFormatterSpecTestBase extends ComboSpe
 
     static class TranslationFormatter implements IRender {
         final Formatter myFormatter;
+        boolean myShowIntermediate;
+        boolean myShowIntermediateAst;
+        private @Nullable String myAst = null;
 
         public TranslationFormatter(Formatter formatter) {
             myFormatter = formatter;
+            myShowIntermediate = myFormatter.getOptions().get(DETAILS);
+            myShowIntermediateAst = myFormatter.getOptions().get(AST_DETAILS);
+        }
+
+        public boolean isShowIntermediate() {
+            return myShowIntermediate;
+        }
+
+        public boolean isShowIntermediateAst() {
+            return myShowIntermediateAst;
+        }
+
+        @NotNull
+        public String getAst() {
+            return myAst == null ? "" : myAst;
         }
 
         @Nullable
@@ -118,22 +149,29 @@ public abstract class ComboCoreTranslationFormatterSpecTestBase extends ComboSpe
 
         @Override
         public void render(@NotNull Node node, @NotNull Appendable output) {
+            Document document = (Document) node;
+
             TranslationHandler handler = myFormatter.getTranslationHandler(new HeaderIdGenerator.Factory());
-            String formattedOutput = myFormatter.translationRender(node, handler, RenderPurpose.TRANSLATION_SPANS);
+            String formattedOutput = myFormatter.translationRender(document, handler, RenderPurpose.TRANSLATION_SPANS);
 
             // now need to output translation strings, delimited
             List<String> translatingTexts = handler.getTranslatingTexts();
 
-            boolean showIntermediate = node.getDocument().get(DETAILS);
+            StringBuilder outputAst = myShowIntermediateAst ? new StringBuilder() : null;
 
             try {
-                if (showIntermediate) {
-                    output.append("--------------------------\n");
+                if (myShowIntermediate) {
+                    output.append("- Translating Spans ------\n");
                     output.append(formattedOutput);
-                    output.append("--------------------------\n");
+                    output.append("- Translated Spans --------\n");
                 }
             } catch (IOException e) {
                 e.printStackTrace();
+            }
+
+            if (myShowIntermediateAst) {
+                outputAst.append("- Original ----------------\n");
+                outputAst.append(TestUtils.ast(document));
             }
 
             ArrayList<CharSequence> translatedTexts = new ArrayList<>(translatingTexts.size());
@@ -141,7 +179,7 @@ public abstract class ComboCoreTranslationFormatterSpecTestBase extends ComboSpe
                 CharSequence translated = translate(text);
                 translatedTexts.add(translated);
                 try {
-                    if (showIntermediate) {
+                    if (myShowIntermediate) {
                         output.append("<<<").append(text).append('\n');
                         output.append(">>>").append(translated).append('\n');
                     }
@@ -151,41 +189,50 @@ public abstract class ComboCoreTranslationFormatterSpecTestBase extends ComboSpe
             }
 
             // use the translations
-            if (showIntermediate) {
+            if (myShowIntermediate) {
                 try {
-                    output.append("--------------------------\n");
+                    output.append("- Partial ----------------\n");
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
 
             handler.setTranslatedTexts(translatedTexts);
-            String partial = myFormatter.translationRender(node, handler, RenderPurpose.TRANSLATED_SPANS);
+            String partial = myFormatter.translationRender(document, handler, RenderPurpose.TRANSLATED_SPANS);
 
-            if (showIntermediate) {
+            if (myShowIntermediate) {
                 try {
                     output.append(partial);
-                    output.append("--------------------------\n");
+                    output.append("- Translated -------------\n");
+//                  output.append("--------------------------\n");
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
             Node partialDoc = Parser.builder(getOptions()).build().parse(partial);
+
+            if (myShowIntermediateAst) {
+                outputAst.append("- Partial ----------------\n");
+                outputAst.append(TestUtils.ast(partialDoc));
+            }
+
             String translated = myFormatter.translationRender(partialDoc, handler, RenderPurpose.TRANSLATED);
             try {
                 output.append(translated);
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }
 
-        @NotNull
-        @Override
-        public String render(@NotNull Node document) {
-            StringBuilder sb = new StringBuilder();
-            render(document, sb);
-            return sb.toString();
+            if (myShowIntermediateAst) {
+                Node translatedDoc = Parser.builder(getOptions()).build().parse(translated);
+
+                outputAst.append("- Translated -------------\n");
+                outputAst.append(TestUtils.ast(translatedDoc));
+            }
+
+            if (myShowIntermediateAst) {
+                myAst = outputAst.toString();
+            }
         }
     }
-
 }

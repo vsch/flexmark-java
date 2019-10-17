@@ -68,25 +68,44 @@ public class FlexmarkSpecExampleRenderer extends SpecExampleRendererBase {
     }
 
     @Override
-    public @NotNull String renderHtml() {
-        assert myDocument != null;
-        if (myRenderedHtml == null) {
-            myRenderedHtml = getRenderer().render(myDocument);
+    final public @NotNull String getHtml() {
+        if (myRenderedHtml == null || !isFinalized()) {
+            myRenderedHtml = renderHtml();
         }
         return myRenderedHtml;
     }
 
     @Override
-    public @NotNull String getAst() {
-        assert myDocument != null;
-        if (myRenderedAst == null) {
-            myRenderedAst = TestUtils.ast(myDocument);
+    final public @NotNull String getAst() {
+        if (myRenderedAst == null || !isFinalized()) {
+            myRenderedAst = renderAst();
         }
         return myRenderedAst;
     }
 
+    /**
+     * Override to customize
+     *
+     * @return HTML string, will be cached after document is finalized to allow for timing collection iterations,
+     */
+    @NotNull
+    protected String renderHtml() {
+        assert myDocument != null;
+        return getRenderer().render(myDocument);
+    }
+
+    /**
+      * Override to customize
+     * @return HTML string, will be cached after document is finalized to allow for timing collection iterations,
+     */
+    @NotNull
+    protected String renderAst() {
+        assert myDocument != null;
+        return TestUtils.ast(myDocument);
+    }
+
     @Override
     public void finalizeRender() {
-
+        super.finalizeRender();
     }
 }

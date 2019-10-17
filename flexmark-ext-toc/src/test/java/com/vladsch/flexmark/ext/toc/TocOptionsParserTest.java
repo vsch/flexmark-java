@@ -169,12 +169,6 @@ public class TocOptionsParserTest extends ComboSpecTestCase {
 
             return example;
         }
-
-        @NotNull
-        @Override
-        public IParse withOptions(@Nullable DataHolder options) {
-            return new Parser(options);
-        }
     }
 
     public static class Renderer extends IRenderBase {
@@ -226,12 +220,12 @@ public class TocOptionsParserTest extends ComboSpecTestCase {
         }
 
         @Override
-        public void render(@NotNull Node node, @NotNull Appendable output) {
-            assert node instanceof ParserNode;
+        public void render(@NotNull Node document, @NotNull Appendable output) {
+            assert document instanceof ParserNode;
             TocOptions tocOptions = TOC_OPTIONS.getFrom(getOptions());
             HtmlWriter html = new HtmlWriter(2, 0);
             RenderingVisitor visitor = new RenderingVisitor(html, tocOptions);
-            visitor.render(node);
+            visitor.render(document);
             try {
                 html.appendTo(output, 0);
             } catch (IOException e) {

@@ -56,8 +56,8 @@ public class DumpSpecReader extends SpecReader {
 
         String html;
         if (!ignoredTestCase) {
-            html = exampleRenderer.renderHtml();
-            for (int i = 1; i < iterations; i++) exampleRenderer.renderHtml();
+            html = exampleRenderer.getHtml();
+            for (int i = 1; i < iterations; i++) exampleRenderer.getHtml();
         } else {
             html = example.getHtml();
         }

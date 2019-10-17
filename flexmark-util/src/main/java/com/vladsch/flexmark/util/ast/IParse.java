@@ -44,14 +44,6 @@ public interface IParse {
     @NotNull Node parseReader(@NotNull Reader input) throws IOException;
 
     /**
-     * Return an IParse instance configured for passed in options
-     *
-     * @param options options to use for a new instance
-     * @return a new instance of IParse implementation with the given options applied
-     */
-    @NotNull IParse withOptions(@Nullable DataHolder options);
-
-    /**
      * Get Options for parsing
      *
      * @return DataHolder for options
