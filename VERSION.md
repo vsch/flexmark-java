@@ -72,22 +72,13 @@ Next 0.60.0
 
 ### API Changes
 
-* [x] Break: refactor and cleanup tests to eliminate duplicated code and allow easier reuse of
-      test cases with spec example data.
-* [x] Add: `org.jetbrains:annotations:15.0` dependency to have `@Nullable`/`@NotNull`
-      annotations added for all parameters. I use IntelliJ IDEA for development and it helps to
-      have these annotations for analysis of potential problems and use with Kotlin.
-* [x] Break: move formatter tests to `flexmark-formatter-test` module to allow sharing of
-      formatter base classes in extensions without causing dependency cycles in formatter
-      module.
-* [x] Break: move formatter module into `flexmark` core. this module is almost always included
-      anyway because most extension have a dependency on formatter for their custom formatting
-      implementations. Having it as part of the core allows relying on its functionality in all
-      modules.
-* [x] Break: move `com.vladsch.flexmark.spec` and `com.vladsch.flexmark.util` in
-      `flexmark-test-util` to `com.vladsch.flexmark.test.spec` and
-      `com.vladsch.flexmark.test.util` respectively to respect the naming convention between
-      modules and their packages.
+:warning: Upcoming release of 0.60.0 will have some breaking changes due to re-organization,
+renaming and clean up of some implementation classes.
+
+Please give feedback on the upcoming changes if you have concerns about breaking your code:
+
+* [ ] Break: delete deprecated properties, methods and classes which were deprecated before `V
+      0.60.0`
 * [ ] Break: split out generic AST utilities from `flexmark-util` module into separate smaller
       modules. IntelliJ IDEA migration to help with migration from 0.50.40 will be provided
       where needed if the package or class is changed. `com.vladsch.flexmark.util` will no
@@ -120,8 +111,22 @@ Next 0.60.0
     * [ ] `Ref.java` to `flexmark-util-misc`
     * [ ] `TemplateUtil.java` to `flexmark-util-misc`
     * [ ] `Utils.java` to `flexmark-util-misc`
-* [ ] Break: delete deprecated properties, methods and classes which were deprecated before `V
-      0.60.0`
+* [x] Add: `org.jetbrains:annotations:15.0` dependency to have `@Nullable`/`@NotNull`
+      annotations added for all parameters. I use IntelliJ IDEA for development and it helps to
+      have these annotations for analysis of potential problems and use with Kotlin.
+* [x] Break: refactor and cleanup tests to eliminate duplicated code and allow easier reuse of
+      test cases with spec example data.
+* [x] Break: move formatter tests to `flexmark-formatter-test` module to allow sharing of
+      formatter base classes in extensions without causing dependency cycles in formatter
+      module.
+* [x] Break: move formatter module into `flexmark` core. this module is almost always included
+      anyway because most extension have a dependency on formatter for their custom formatting
+      implementations. Having it as part of the core allows relying on its functionality in all
+      modules.
+* [x] Break: move `com.vladsch.flexmark.spec` and `com.vladsch.flexmark.util` in
+      `flexmark-test-util` to `com.vladsch.flexmark.test.spec` and
+      `com.vladsch.flexmark.test.util` respectively to respect the naming convention between
+      modules and their packages.
 * [x] Break: `NodeVisitor` implementation details have changed. If you were overriding
       `NodeVisitor.visit(Node)` in the previous version it is now `final` to ensure compile time
       error is generated. You will need to change your implementation. See comment in the class
