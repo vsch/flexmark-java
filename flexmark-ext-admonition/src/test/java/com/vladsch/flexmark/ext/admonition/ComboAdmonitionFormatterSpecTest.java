@@ -2,10 +2,10 @@ package com.vladsch.flexmark.ext.admonition;
 
 import com.vladsch.flexmark.formatter.Formatter;
 import com.vladsch.flexmark.parser.Parser;
-import com.vladsch.flexmark.spec.SpecExample;
-import com.vladsch.flexmark.test.ComboSpecTestCase;
-import com.vladsch.flexmark.test.FlexmarkSpecExampleRenderer;
-import com.vladsch.flexmark.test.SpecExampleRenderer;
+import com.vladsch.flexmark.test.spec.SpecExample;
+import com.vladsch.flexmark.test.util.ComboSpecTestCase;
+import com.vladsch.flexmark.test.util.FlexmarkSpecExampleRenderer;
+import com.vladsch.flexmark.test.util.SpecExampleRenderer;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import org.jetbrains.annotations.NotNull;

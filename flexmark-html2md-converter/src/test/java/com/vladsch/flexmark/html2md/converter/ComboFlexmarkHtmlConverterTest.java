@@ -2,11 +2,11 @@ package com.vladsch.flexmark.html2md.converter;
 
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
-import com.vladsch.flexmark.spec.SpecExample;
-import com.vladsch.flexmark.spec.SpecReader;
-import com.vladsch.flexmark.test.ComboSpecTestCase;
-import com.vladsch.flexmark.test.FlexmarkSpecExampleRenderer;
-import com.vladsch.flexmark.test.SpecExampleRenderer;
+import com.vladsch.flexmark.test.spec.SpecExample;
+import com.vladsch.flexmark.test.spec.SpecReader;
+import com.vladsch.flexmark.test.util.ComboSpecTestCase;
+import com.vladsch.flexmark.test.util.FlexmarkSpecExampleRenderer;
+import com.vladsch.flexmark.test.util.SpecExampleRenderer;
 import com.vladsch.flexmark.util.Ref;
 import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.data.DataHolder;

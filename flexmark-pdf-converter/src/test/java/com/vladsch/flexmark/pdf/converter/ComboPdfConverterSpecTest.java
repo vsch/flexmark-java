@@ -3,10 +3,10 @@ package com.vladsch.flexmark.pdf.converter;
 import com.openhtmltopdf.pdfboxout.PdfRendererBuilder;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
-import com.vladsch.flexmark.spec.SpecExample;
-import com.vladsch.flexmark.test.ComboSpecTestCase;
-import com.vladsch.flexmark.test.FlexmarkSpecExampleRenderer;
-import com.vladsch.flexmark.test.SpecExampleRenderer;
+import com.vladsch.flexmark.test.spec.SpecExample;
+import com.vladsch.flexmark.test.util.ComboSpecTestCase;
+import com.vladsch.flexmark.test.util.FlexmarkSpecExampleRenderer;
+import com.vladsch.flexmark.test.util.SpecExampleRenderer;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import org.jetbrains.annotations.NotNull;
@@ -57,7 +57,7 @@ public class ComboPdfConverterSpecTest extends ComboSpecTestCase {
         return new FlexmarkSpecExampleRenderer(example, combinedOptions, Parser.builder(combinedOptions).build(), HtmlRenderer.builder(combinedOptions).build(), true) {
             @Override
             protected @NotNull String renderHtml() {
-                String html = super.getHtml();
+                String html = super.renderHtml();
                 return PdfConverterExtension.embedCss(html, PdfConverterExtension.DEFAULT_CSS.getFrom(options(null)));
             }
         };

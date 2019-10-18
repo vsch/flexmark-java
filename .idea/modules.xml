@@ -40,7 +40,6 @@
       <module fileurl="file://$PROJECT_DIR$/flexmark-ext-yaml-front-matter/flexmark-ext-yaml-front-matter.iml" filepath="$PROJECT_DIR$/flexmark-ext-yaml-front-matter/flexmark-ext-yaml-front-matter.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-ext-youtube-embedded/flexmark-ext-youtube-embedded.iml" filepath="$PROJECT_DIR$/flexmark-ext-youtube-embedded/flexmark-ext-youtube-embedded.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-ext-zzzzzz/flexmark-ext-zzzzzz.iml" filepath="$PROJECT_DIR$/flexmark-ext-zzzzzz/flexmark-ext-zzzzzz.iml" />
-      <module fileurl="file://$PROJECT_DIR$/flexmark-formatter/flexmark-formatter.iml" filepath="$PROJECT_DIR$/flexmark-formatter/flexmark-formatter.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-formatter-test/flexmark-formatter-test.iml" filepath="$PROJECT_DIR$/flexmark-formatter-test/flexmark-formatter-test.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-formatter-test-suite/flexmark-formatter-test-suite.iml" filepath="$PROJECT_DIR$/flexmark-formatter-test-suite/flexmark-formatter-test-suite.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-html-parser/flexmark-html-parser.iml" filepath="$PROJECT_DIR$/flexmark-html-parser/flexmark-html-parser.iml" />

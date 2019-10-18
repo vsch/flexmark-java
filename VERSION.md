@@ -194,9 +194,14 @@ Next 0.59.15
 0.59.13
 -------
 
-* Fix: move formatter tests to `flexmark-formatter-test` module to allow sharing of formatter
+* Break: move formatter tests to `flexmark-formatter-test` module to allow sharing of formatter
   base classes in extensions without causing dependency cycles in formatter module.
-* Fix: move
+* Break: move formatter module into `flexmark` core since most extension have a dependency on
+  formatter for their custom formatting implementations, this module is almost always included
+  anyway. Having it as part of the core allows relying on its functionality in all modules.
+* Break: move `com.vladsch.flexmark.spec` and `com.vladsch.flexmark.util` in
+  `flexmark-test-util` to `com.vladsch.flexmark.test.spec` and `com.vladsch.flexmark.test.util`
+  respectively to respect the naming convention between modules and their packages.
 
 ### 0.59.11
 

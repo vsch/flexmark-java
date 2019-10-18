@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.formatter.test;
 
-import com.vladsch.flexmark.spec.SpecExample;
+import com.vladsch.flexmark.test.spec.SpecExample;
 import org.jetbrains.annotations.NotNull;
 import org.junit.runners.Parameterized;
 

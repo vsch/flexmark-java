@@ -2,11 +2,11 @@ package com.vladsch.flexmark.ext.gfm.strikethrough;
 
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
-import com.vladsch.flexmark.spec.SpecExample;
-import com.vladsch.flexmark.test.FlexmarkSpecExampleRenderer;
-import com.vladsch.flexmark.test.RenderingTestCase;
-import com.vladsch.flexmark.test.SpecExampleRenderer;
-import com.vladsch.flexmark.test.TestUtils;
+import com.vladsch.flexmark.test.spec.SpecExample;
+import com.vladsch.flexmark.test.util.FlexmarkSpecExampleRenderer;
+import com.vladsch.flexmark.test.util.RenderingTestCase;
+import com.vladsch.flexmark.test.util.SpecExampleRenderer;
+import com.vladsch.flexmark.test.util.TestUtils;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;

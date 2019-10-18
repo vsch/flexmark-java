@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.profiles.pegdown;
 
-import com.vladsch.flexmark.spec.IRenderBase;
+import com.vladsch.flexmark.test.spec.IRenderBase;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import org.jetbrains.annotations.NotNull;

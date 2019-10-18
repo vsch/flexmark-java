@@ -1,9 +1,9 @@
 package com.vladsch.flexmark.integration;
 
 import com.vladsch.flexmark.parser.Parser;
-import com.vladsch.flexmark.spec.SpecExample;
-import com.vladsch.flexmark.spec.SpecReader;
-import com.vladsch.flexmark.test.TestUtils;
+import com.vladsch.flexmark.test.spec.SpecExample;
+import com.vladsch.flexmark.test.spec.SpecReader;
+import com.vladsch.flexmark.test.util.TestUtils;
 import com.vladsch.flexmark.util.ast.Node;
 import org.junit.Test;
 import org.junit.runner.RunWith;

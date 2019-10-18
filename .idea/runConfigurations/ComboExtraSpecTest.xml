@@ -3,7 +3,7 @@
     <module name="flexmark" />
     <extension name="coverage">
       <pattern>
-        <option name="PATTERN" value="com.vladsch.flexmark.formatter.test.*" />
+        <option name="PATTERN" value="com.vladsch.flexmark.test.formatter.*" />
         <option name="ENABLED" value="true" />
       </pattern>
     </extension>

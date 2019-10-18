@@ -6,7 +6,7 @@ import com.vladsch.flexmark.ast.Link;
 import com.vladsch.flexmark.ast.Text;
 import com.vladsch.flexmark.formatter.Formatter;
 import com.vladsch.flexmark.parser.Parser;
-import com.vladsch.flexmark.test.AstCollectingVisitor;
+import com.vladsch.flexmark.test.util.AstCollectingVisitor;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.ast.NodeVisitor;
 import com.vladsch.flexmark.util.ast.VisitHandler;

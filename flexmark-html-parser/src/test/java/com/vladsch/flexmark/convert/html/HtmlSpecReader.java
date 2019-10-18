@@ -1,10 +1,10 @@
 package com.vladsch.flexmark.convert.html;
 
-import com.vladsch.flexmark.spec.SpecExample;
-import com.vladsch.flexmark.test.DumpSpecReader;
-import com.vladsch.flexmark.test.FullSpecTestCase;
-import com.vladsch.flexmark.test.SpecExampleRenderer;
-import com.vladsch.flexmark.test.TestUtils;
+import com.vladsch.flexmark.test.spec.SpecExample;
+import com.vladsch.flexmark.test.util.DumpSpecReader;
+import com.vladsch.flexmark.test.util.FullSpecTestCase;
+import com.vladsch.flexmark.test.util.SpecExampleRenderer;
+import com.vladsch.flexmark.test.util.TestUtils;
 import com.vladsch.flexmark.util.data.DataHolder;
 import org.jetbrains.annotations.NotNull;
 import org.junit.AssumptionViolatedException;

@@ -16,8 +16,8 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static com.vladsch.flexmark.spec.SpecReader.EXAMPLE_KEYWORD;
-import static com.vladsch.flexmark.spec.SpecReader.OPTIONS_KEYWORD;
+import static com.vladsch.flexmark.test.spec.SpecReader.EXAMPLE_KEYWORD;
+import static com.vladsch.flexmark.test.spec.SpecReader.OPTIONS_KEYWORD;
 import static com.vladsch.flexmark.util.sequence.BasedSequence.SPLIT_INCLUDE_DELIM_PARTS;
 import static com.vladsch.flexmark.util.sequence.BasedSequence.WHITESPACE_NBSP_CHARS;
 

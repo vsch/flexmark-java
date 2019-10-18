@@ -48,7 +48,6 @@
     <orderEntry type="module" module-name="flexmark-ext-xwiki-macros" />
     <orderEntry type="module" module-name="flexmark-ext-yaml-front-matter" />
     <orderEntry type="module" module-name="flexmark-ext-youtube-embedded" />
-    <orderEntry type="module" module-name="flexmark-formatter" />
     <orderEntry type="module" module-name="flexmark-formatter-test-suite" />
     <orderEntry type="module" module-name="flexmark-html-parser" />
     <orderEntry type="module" module-name="flexmark-html2md-converter" />

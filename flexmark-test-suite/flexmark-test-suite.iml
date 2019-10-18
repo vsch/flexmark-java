@@ -46,7 +46,6 @@
     <orderEntry type="module" module-name="flexmark-ext-yaml-front-matter" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-ext-youtube-embedded" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-ext-zzzzzz" scope="TEST" />
-    <orderEntry type="module" module-name="flexmark-formatter" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-formatter-test-suite" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-html-parser" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-integration-test" scope="TEST" />

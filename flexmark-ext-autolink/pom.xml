@@ -40,10 +40,5 @@
             <artifactId>flexmark-ext-typographic</artifactId>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>com.vladsch.flexmark</groupId>
-            <artifactId>flexmark-formatter</artifactId>
-            <scope>test</scope>
-        </dependency>
     </dependencies>
 </project>

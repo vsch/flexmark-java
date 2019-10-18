@@ -36,9 +36,11 @@ import com.vladsch.flexmark.formatter.test.CoreFormatterTestSuite;
 import com.vladsch.flexmark.html2md.converter.FlexmarkHtmlConverterTestSuite;
 import com.vladsch.flexmark.integration.IntegrationTestSuite;
 import com.vladsch.flexmark.jira.converter.JiraConverterTestSuite;
+import com.vladsch.flexmark.pdf.converter.PdfConverterTestSuite;
 import com.vladsch.flexmark.profiles.pegdown.PegdownProfileTestSuite;
 import com.vladsch.flexmark.superscript.ExtSuperscriptTestSuite;
-import com.vladsch.flexmark.test.CoreTestSuite;
+import com.vladsch.flexmark.test.util.CoreTestSuite;
+import com.vladsch.flexmark.tree.iteration.TreeIterationTestSuite;
 import com.vladsch.flexmark.util.UtilsTestSuite;
 import com.vladsch.flexmark.youtrack.converter.YouTrackConverterTestSuite;
 import org.junit.runner.RunWith;
@@ -46,7 +48,7 @@ import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-        UtilsTestSuite.class,
+        CoreFormatterTestSuite.class,
         CoreTestSuite.class,
         ExtAbbreviationTestSuite.class,
         ExtAdmonitionTestSuite.class,
@@ -65,31 +67,31 @@ import org.junit.runners.Suite;
         ExtGfmTaskListTestSuite.class,
         ExtGfmUsersTestSuite.class,
         ExtGitLabTestSuite.class,
+        ExtInsTestSuite.class,
         ExtJekyllFrontMatterTestSuite.class,
         ExtJekyllTagTestSuite.class,
-        ExtInsTestSuite.class,
         ExtMacrosTestSuite.class,
         ExtMediaTagsTestSuite.class,
-        ExtSuperscriptTestSuite.class,
         ExtSpecExampleTestSuite.class,
+        ExtSuperscriptTestSuite.class,
         ExtTablesTestSuite.class,
         ExtTocTestSuite.class,
+//        TreeIterationTestSuite.class, // has no tests for now
         ExtTypographicTestSuite.class,
         ExtWikiLinkTestSuite.class,
         ExtXWikiMacroTestSuite.class,
         ExtYamlFrontMatterTestSuite.class,
         ExtYouTubeLinkTestSuite.class,
         ExtZzzzzzTestSuite.class,
-        FlexmarkHtmlParserTestSuite.class,
-        FlexmarkHtmlConverterTestSuite.class,
-        JiraConverterTestSuite.class,
-        YouTrackConverterTestSuite.class,
-        IntegrationTestSuite.class,
-        PegdownProfileTestSuite.class,
-        CoreFormatterTestSuite.class,
         FlexmarkFormatterTestSuite.class,
-        //DocxConverterTestSuite.class,
-        //ComboDocxUserSpecDisabled.class
+        FlexmarkHtmlConverterTestSuite.class,
+        FlexmarkHtmlParserTestSuite.class,
+        IntegrationTestSuite.class,
+        JiraConverterTestSuite.class,
+        PdfConverterTestSuite.class,
+        PegdownProfileTestSuite.class,
+        UtilsTestSuite.class,
+        YouTrackConverterTestSuite.class,
 })
 public class FlexmarkTestSuiteNoDocx {
 }

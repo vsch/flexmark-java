@@ -42,7 +42,6 @@
                 <include>com.vladsch.flexmark:flexmark-ext-wikilink</include>
                 <include>com.vladsch.flexmark:flexmark-ext-yaml-front-matter</include>
                 <include>com.vladsch.flexmark:flexmark-ext-youtube-embedded</include>
-                <include>com.vladsch.flexmark:flexmark-formatter</include>
                 <include>com.vladsch.flexmark:flexmark-html-parser</include>
                 <include>com.vladsch.flexmark:flexmark-jira-converter</include>
                 <include>com.vladsch.flexmark:flexmark-pdf-converter</include>

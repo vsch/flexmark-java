@@ -29,7 +29,6 @@
     <orderEntry type="module" module-name="flexmark" />
     <orderEntry type="module" module-name="flexmark-test-util" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-util" />
-    <orderEntry type="module" module-name="flexmark-formatter" />
     <orderEntry type="module" module-name="flexmark-ext-aside" />
     <orderEntry type="module" module-name="flexmark-ext-attributes" />
     <orderEntry type="module" module-name="flexmark-ext-definition" />

@@ -58,7 +58,6 @@
         <module>flexmark-ext-yaml-front-matter</module>
         <module>flexmark-ext-youtube-embedded</module>
         <module>flexmark-ext-zzzzzz</module>
-        <module>flexmark-formatter</module>
         <module>flexmark-formatter-test</module>
         <module>flexmark-html-parser</module>
         <module>flexmark-html2md-converter</module>
@@ -385,11 +384,6 @@
             <dependency>
                 <groupId>com.vladsch.flexmark</groupId>
                 <artifactId>flexmark-ext-zzzzzz</artifactId>
-                <version>0.60.0</version>
-            </dependency>
-            <dependency>
-                <groupId>com.vladsch.flexmark</groupId>
-                <artifactId>flexmark-formatter</artifactId>
                 <version>0.60.0</version>
             </dependency>
             <dependency>

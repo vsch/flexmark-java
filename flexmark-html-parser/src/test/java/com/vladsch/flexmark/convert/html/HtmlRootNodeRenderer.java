@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.convert.html;
 
-import com.vladsch.flexmark.spec.IRenderBase;
+import com.vladsch.flexmark.test.spec.IRenderBase;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import org.jetbrains.annotations.NotNull;
