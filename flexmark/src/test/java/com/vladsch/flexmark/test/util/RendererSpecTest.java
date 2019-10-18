@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ComboExtraSpecTest extends ComboSpecTestCase {
+public class RendererSpecTest extends ComboSpecTestCase {
     private static final String SPEC_RESOURCE = "/extra_ast_spec.md";
     private static final DataHolder OPTIONS = new MutableDataSet()
             .set(HtmlRenderer.INDENT_SIZE, 2)
@@ -131,7 +131,7 @@ public class ComboExtraSpecTest extends ComboSpecTestCase {
         userTags.add("tag");
         optionsMap.put("user-block-tags", new MutableDataSet().set(Parser.HTML_BLOCK_TAGS, userTags));
     }
-    public ComboExtraSpecTest(SpecExample example) {
+    public RendererSpecTest(SpecExample example) {
         super(example, optionsMap, OPTIONS);
     }
 
