@@ -10,7 +10,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class UsageExampleTest {
+final public class UsageExampleTest {
 
     @Test
     public void parseAndRender() {
@@ -30,14 +30,14 @@ public class UsageExampleTest {
         assertEquals(4, visitor.wordCount);
     }
 
-    class WordCountVisitor {
+    static class WordCountVisitor {
         int wordCount = 0;
 
         private final NodeVisitor myVisitor;
 
         public WordCountVisitor() {
             myVisitor = new NodeVisitor(
-                    new VisitHandler<>(Text.class, text -> WordCountVisitor.this.visit(text))
+                    new VisitHandler<>(Text.class, WordCountVisitor.this::visit)
             );
         }
 

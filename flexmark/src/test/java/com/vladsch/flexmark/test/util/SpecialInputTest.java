@@ -9,14 +9,10 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.junit.Test;
 
-public class SpecialInputTest extends RenderingTestCase {
-
+final public class SpecialInputTest extends RenderingTestCase {
     static final DataHolder OPTIONS = new MutableDataSet()
             .set(TestUtils.NO_FILE_EOL, false)
             .toImmutable();
-
-    private static final Parser PARSER = Parser.builder(OPTIONS).build();
-    private static final HtmlRenderer RENDERER = HtmlRenderer.builder(OPTIONS).build();
 
     @Test
     public void empty() {
@@ -135,7 +131,7 @@ public class SpecialInputTest extends RenderingTestCase {
 
     @Override
     public @NotNull SpecExampleRenderer getSpecExampleRenderer(@NotNull SpecExample example, @Nullable DataHolder exampleOptions) {
-        DataHolder combinedOptions = combineOptions(OPTIONS, exampleOptions);
-        return new FlexmarkSpecExampleRenderer(example, combinedOptions, PARSER, RENDERER, true);
+        DataHolder combineOptions = combineOptions(OPTIONS, exampleOptions);
+        return new FlexmarkSpecExampleRenderer(example, combineOptions, Parser.builder(combineOptions).build(), HtmlRenderer.builder(combineOptions).build(), true);
     }
 }

@@ -29,5 +29,5 @@ import org.junit.runners.Suite;
         HtmlDeepParserTest.class,
         HtmlEmbeddedAttributeTest.class,
 })
-public class CoreTestSuite {
+final public class CoreTestSuite {
 }

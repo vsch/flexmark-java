@@ -9,5 +9,5 @@ import org.junit.runners.Suite;
         PathologicalTest.class,
         PathologicalSpcUrlTest.class,
 })
-public class PathologicalTestSuite {
+final public class PathologicalTestSuite {
 }

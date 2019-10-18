@@ -17,7 +17,7 @@ import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
 
-public class HtmlRendererTest {
+final public class HtmlRendererTest {
 
     @Test
     public void htmlAllowingShouldNotEscapeInlineHtml() {
@@ -87,7 +87,6 @@ public class HtmlRendererTest {
         AttributeProviderFactory factory = new IndependentAttributeProviderFactory() {
             @Override
             public AttributeProvider apply(LinkResolverContext context) {
-                //noinspection ReturnOfInnerClass
                 return (node, part, attributes) -> {
                     if (node instanceof FencedCodeBlock && part == CoreNodeRenderer.CODE_CONTENT) {
                         FencedCodeBlock fencedCodeBlock = (FencedCodeBlock) node;

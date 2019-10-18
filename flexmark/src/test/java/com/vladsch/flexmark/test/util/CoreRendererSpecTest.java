@@ -2,22 +2,18 @@ package com.vladsch.flexmark.test.util;
 
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
-import com.vladsch.flexmark.test.spec.ResourceLocation;
 import com.vladsch.flexmark.test.spec.SpecExample;
 import com.vladsch.flexmark.util.ast.KeepType;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.junit.runners.Parameterized;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-public class CoreRendererSpecTest extends ComboSpecTestCase {
-    private static final String SPEC_RESOURCE = "/extra_ast_spec.md";
+public abstract class CoreRendererSpecTest extends ComboSpecTestCase {
     private static final DataHolder OPTIONS = new MutableDataSet()
             .set(HtmlRenderer.INDENT_SIZE, 2)
             .set(HtmlRenderer.OBFUSCATE_EMAIL_RANDOM, false)
@@ -25,6 +21,9 @@ public class CoreRendererSpecTest extends ComboSpecTestCase {
 
     protected static final Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
+        ArrayList<String> userTags = new ArrayList<>(Parser.HTML_BLOCK_TAGS.getFrom(null));
+        userTags.add("tag");
+        optionsMap.put("user-block-tags", new MutableDataSet().set(Parser.HTML_BLOCK_TAGS, userTags));
         optionsMap.put("obfuscate-email", new MutableDataSet().set(HtmlRenderer.OBFUSCATE_EMAIL, true));
         optionsMap.put("keep-blank-lines", new MutableDataSet().set(Parser.BLANK_LINES_IN_AST, true));
         optionsMap.put("keep-last", new MutableDataSet().set(Parser.REFERENCES_KEEP, KeepType.LAST));
@@ -65,7 +64,6 @@ public class CoreRendererSpecTest extends ComboSpecTestCase {
         optionsMap.put("suppress-inline-html-comments", new MutableDataSet().set(HtmlRenderer.SUPPRESS_INLINE_HTML_COMMENTS, true));
         optionsMap.put("no-class-prefix", new MutableDataSet().set(HtmlRenderer.FENCED_CODE_LANGUAGE_CLASS_PREFIX, ""));
         optionsMap.put("no-language-class", new MutableDataSet().set(HtmlRenderer.FENCED_CODE_NO_LANGUAGE_CLASS, "nohighlight"));
-        //optionsMap.put("parse-anchor-links", new MutableDataSet().set(Parser.PARSE_INLINE_ANCHOR_LINKS, true));
         optionsMap.put("parse-inner-comments", new MutableDataSet().set(Parser.PARSE_INNER_HTML_COMMENTS, true));
         optionsMap.put("multi-line-image-url", new MutableDataSet().set(Parser.PARSE_MULTI_LINE_IMAGE_URLS, true));
         optionsMap.put("unmatched-fence", new MutableDataSet().set(Parser.MATCH_CLOSING_FENCE_CHARACTERS, false));
@@ -99,7 +97,6 @@ public class CoreRendererSpecTest extends ComboSpecTestCase {
         optionsMap.put("spec-027", new MutableDataSet().set(Parser.STRONG_WRAPS_EMPHASIS, true));
         optionsMap.put("custom-list-marker", new MutableDataSet().set(Parser.LISTS_ITEM_PREFIX_CHARS, "*/"));
         optionsMap.put("no-p-tags", new MutableDataSet().set(HtmlRenderer.NO_P_TAGS_USE_BR, true));
-        //optionsMap.put("src-wrap-inline", new MutableDataSet().set(HtmlRenderer.SOURCE_WRAP_INLINE_HTML, true));
         optionsMap.put("list-markdown-navigator", new MutableDataSet()
                 .set(Parser.LISTS_AUTO_LOOSE, false)
                 .set(Parser.LISTS_AUTO_LOOSE, false)
@@ -126,37 +123,13 @@ public class CoreRendererSpecTest extends ComboSpecTestCase {
                 .set(Parser.LISTS_EMPTY_ORDERED_SUB_ITEM_INTERRUPTS_ITEM_PARAGRAPH, true)
                 .set(Parser.LISTS_EMPTY_ORDERED_NON_ONE_SUB_ITEM_INTERRUPTS_ITEM_PARAGRAPH, true)
         );
-
-        ArrayList<String> userTags = new ArrayList<>(Parser.HTML_BLOCK_TAGS.getFrom(null));
-        userTags.add("tag");
-        optionsMap.put("user-block-tags", new MutableDataSet().set(Parser.HTML_BLOCK_TAGS, userTags));
     }
-    public CoreRendererSpecTest(SpecExample example) {
-        super(example, optionsMap, OPTIONS);
-    }
-
-    @Parameterized.Parameters(name = "{0}")
-    public static List<Object[]> data() {
-        return getTestData(SPEC_RESOURCE);
+    public CoreRendererSpecTest(@NotNull SpecExample example, @Nullable Map<String, DataHolder> optionMap, @Nullable DataHolder... defaultOptions) {
+        super(example, optionsMaps(optionsMap, optionMap), dataHolders(OPTIONS, defaultOptions));
     }
 
     @Override
-    public @NotNull ResourceLocation getSpecResourceLocation() {
-        return ResourceLocation.of(SPEC_RESOURCE);
-    }
-
-    @NotNull
-    public Parser parser(@Nullable DataHolder OPTIONS) {
-        return Parser.builder(OPTIONS).build();
-    }
-
-    @NotNull
-    public HtmlRenderer renderer(@Nullable DataHolder OPTIONS) {
-        return HtmlRenderer.builder(OPTIONS).build();
-    }
-
-    @Override
-    public @NotNull SpecExampleRenderer getSpecExampleRenderer(@NotNull SpecExample example, @Nullable DataHolder exampleOptions) {
+    final public @NotNull SpecExampleRenderer getSpecExampleRenderer(@NotNull SpecExample example, @Nullable DataHolder exampleOptions) {
         DataHolder combinedOptions = combineOptions(OPTIONS, exampleOptions);
         return new FlexmarkSpecExampleRenderer(example, combinedOptions, Parser.builder(combinedOptions).build(), HtmlRenderer.builder(combinedOptions).build(), true);
     }

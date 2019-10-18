@@ -12,5 +12,5 @@ import org.junit.runners.Suite;
         ComboGitHubCompatibilitySpecTest.class,
         ComboPegdownCompatibilitySpecTest.class,
 })
-public class CoreCompatibilityTestSuite {
+final public class CoreCompatibilityTestSuite {
 }

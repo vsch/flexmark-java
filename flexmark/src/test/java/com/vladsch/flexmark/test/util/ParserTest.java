@@ -26,7 +26,7 @@ import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.*;
 
-public class ParserTest {
+final public class ParserTest {
 
     @Test
     public void emptyReaderTest() throws IOException {

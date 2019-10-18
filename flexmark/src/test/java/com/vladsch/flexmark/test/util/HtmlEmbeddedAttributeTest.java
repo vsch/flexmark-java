@@ -18,10 +18,11 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Arrays;
+import java.util.Collections;
 
 import static org.junit.Assert.assertEquals;
 
-public class HtmlEmbeddedAttributeTest {
+final public class HtmlEmbeddedAttributeTest {
     MutableDataSet OPTIONS;
     Parser PARSER;
     HtmlRenderer RENDERER;
@@ -29,7 +30,7 @@ public class HtmlEmbeddedAttributeTest {
     @Before
     public void setUp() throws Exception {
         OPTIONS = new MutableDataSet();
-        OPTIONS.set(Parser.EXTENSIONS, Arrays.asList(TestNodePostProcessorExtension.create()));
+        OPTIONS.set(Parser.EXTENSIONS, Collections.singletonList(TestNodePostProcessorExtension.create()));
 
         PARSER = Parser.builder(OPTIONS).build();
         RENDERER = HtmlRenderer.builder(OPTIONS).build();
@@ -56,7 +57,7 @@ public class HtmlEmbeddedAttributeTest {
 
     static class TestNodePostProcessor extends NodePostProcessor {
         private static class TestNodeFactory extends NodePostProcessorFactory {
-            private TestNodeFactory(DataHolder options) {
+            TestNodeFactory(DataHolder options) {
                 super(false);
                 addNodes(Paragraph.class);
             }

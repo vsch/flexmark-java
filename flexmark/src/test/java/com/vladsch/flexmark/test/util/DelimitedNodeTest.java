@@ -14,7 +14,7 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
-public class DelimitedNodeTest {
+final public class DelimitedNodeTest {
 
     @Test
     public void emphasisDelimiters() {
@@ -28,8 +28,8 @@ public class DelimitedNodeTest {
 
         final List<DelimitedNode> list = new ArrayList<>();
         NodeVisitor visitor = new NodeVisitor(
-                new VisitHandler<>(Emphasis.class, e -> list.add(e)),
-                new VisitHandler<>(StrongEmphasis.class, e -> list.add(e))
+                new VisitHandler<>(Emphasis.class, list::add),
+                new VisitHandler<>(StrongEmphasis.class, list::add)
         );
 
         visitor.visit(document);
