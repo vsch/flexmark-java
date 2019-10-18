@@ -175,12 +175,17 @@ custom node renderer if you need to override the generated link HTML.
 [pegdown] in addition to extensions available in pegdown 1.6.0.
 [Available Extensions via PegdownOptionsAdapter](../../wiki/Pegdown-Migration#available-extensions-via-pegdownoptionsadapter)
 
-### Latest Additions
+### Latest Additions and Changes
 
+* Major reorganization and code cleanup of implementation for next version 0.60.0
+  * Formatter implementation is now part of code implementation in `flexmark` module
+  * Tests cleaned up to eliminate duplication and hacks
+  * Test Util made reusable for other projects. Having markdown as the source code for tests is
+    too convenient to have it only used for `flexmark-java` tests.
 * [Flexmark Architecture and Dependencies Diagrams](https://sourcespy.com/github/flexmark/)
   thanks to great work by [Alex Karezin](mailto:javadiagrams@gmail.com) you can get an overview
   of module dependencies with ability to drill down to packages and classes.
-* [Merge API](../../wiki/Merge-API) to merge multiple markdown documents into a single document.
+* [Merge API](../../wiki/Markdown-Merge-API) to merge multiple markdown documents into a single document.
 * [Docx Renderer Extension: Limited Attributes Node Handling](../../wiki/Docx-Renderer-Extension#limited-attributes-node-handling)
 * Extensible HTML to Markdown Converter module:
   [flexmark-html2md-converter](https://github.com/vsch/flexmark-java/blob/master/flexmark-html2md-converter).
