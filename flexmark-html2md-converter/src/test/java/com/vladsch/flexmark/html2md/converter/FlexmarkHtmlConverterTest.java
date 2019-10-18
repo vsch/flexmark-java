@@ -14,22 +14,16 @@ import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.junit.runners.Parameterized;
 
-import java.io.InputStream;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-public class ComboFlexmarkHtmlConverterTest extends ComboSpecTestCase {
+public class FlexmarkHtmlConverterTest extends ComboSpecTestCase {
     private static final String SPEC_RESOURCE = "/flexmark_html_converter_spec.md";
     private static final DataHolder OPTIONS = new MutableDataSet()
             .set(HtmlRenderer.INDENT_SIZE, 2)
-            .set(FlexmarkHtmlConverter.OUTPUT_ATTRIBUTES_ID, false)
-            //.set(HtmlRenderer.PERCENT_ENCODE_URLS, true)
-            //.set(Parser.EXTENSIONS, Collections.singleton(FlexmarkHtmlConverter.create())
-            ;
+            .set(FlexmarkHtmlConverter.OUTPUT_ATTRIBUTES_ID, false);
 
     private static final Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
@@ -115,35 +109,25 @@ public class ComboFlexmarkHtmlConverterTest extends ComboSpecTestCase {
                 "");
     }
 
-    public ComboFlexmarkHtmlConverterTest(@NotNull SpecExample example) {
-        super(example);
-    }
-
-    @Parameterized.Parameters(name = "{0}")
-    public static List<Object[]> data() {
-        return getTestData(SPEC_RESOURCE);
+    public FlexmarkHtmlConverterTest(@NotNull SpecExample example, @Nullable Map<String, DataHolder> optionMap, @Nullable DataHolder... defaultOptions) {
+        super(example, optionsMaps(optionsMap, optionMap), dataHolders(OPTIONS, defaultOptions));
     }
 
     @Override
-    public @NotNull ResourceLocation getSpecResourceLocation() {
-        return ResourceLocation.of(SPEC_RESOURCE);
-    }
-
-    @Override
-    public @NotNull
-    SpecExampleRenderer getSpecExampleRenderer(@NotNull SpecExample example, @Nullable DataHolder exampleOptions) {
+    @NotNull
+    final public SpecExampleRenderer getSpecExampleRenderer(@NotNull SpecExample example, @Nullable DataHolder exampleOptions) {
         DataHolder combineOptions = combineOptions(OPTIONS, exampleOptions);
         return new FlexmarkSpecExampleRenderer(example, combineOptions, new HtmlConverter(combineOptions), new HtmlRootNodeRenderer(combineOptions), true);
     }
 
     @NotNull
     @Override
-    public HtmlSpecReader create(@NotNull ResourceLocation location) {
+    final public HtmlSpecReader create(@NotNull ResourceLocation location) {
         return SpecReader.create(location, (stream, fileUrl) -> new HtmlSpecReader(stream, this, fileUrl));
     }
 
     @Override
-    protected void assertRendering(@Nullable String fileUrl, @NotNull String source, @NotNull String expectedHtml, @Nullable String expectedAst, @Nullable String optionsSet) {
+    final protected void assertRendering(@Nullable String fileUrl, @NotNull String source, @NotNull String expectedHtml, @Nullable String expectedAst, @Nullable String optionsSet) {
         // reverse source and html
         super.assertRendering(fileUrl, expectedHtml, source, null, optionsSet);
     }
