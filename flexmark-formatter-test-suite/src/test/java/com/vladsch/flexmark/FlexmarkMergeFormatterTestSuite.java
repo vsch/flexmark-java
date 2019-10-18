@@ -5,7 +5,7 @@ import com.vladsch.flexmark.ext.attributes.MergeAttributesTest;
 import com.vladsch.flexmark.ext.enumerated.reference.MergeEnumeratedReferenceTest;
 import com.vladsch.flexmark.ext.footnotes.MergeFootnotesTest;
 import com.vladsch.flexmark.ext.macros.MergeMacrosTest;
-import com.vladsch.flexmark.formatter.MergeFormatterCoreTest;
+import com.vladsch.flexmark.formatter.test.MergeFormatterCoreTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 

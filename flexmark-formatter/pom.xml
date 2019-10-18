@@ -14,16 +14,11 @@
     <dependencies>
         <dependency>
             <groupId>com.vladsch.flexmark</groupId>
-            <artifactId>flexmark-util</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.vladsch.flexmark</groupId>
             <artifactId>flexmark</artifactId>
         </dependency>
         <dependency>
             <groupId>com.vladsch.flexmark</groupId>
-            <artifactId>flexmark-test-util</artifactId>
-            <scope>test</scope>
+            <artifactId>flexmark-util</artifactId>
         </dependency>
     </dependencies>
 </project>

@@ -1,5 +1,6 @@
-package com.vladsch.flexmark.formatter;
+package com.vladsch.flexmark.formatter.test;
 
+import com.vladsch.flexmark.formatter.Formatter;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.data.DataHolder;

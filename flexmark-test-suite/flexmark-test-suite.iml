@@ -57,7 +57,8 @@
     <orderEntry type="module" module-name="flexmark-util" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-youtrack-converter" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-html2md-converter" scope="TEST" />
-    <orderEntry type="module" module-name="flexmark-tree-iteration" />
-    <orderEntry type="library" name="org.jetbrains:annotations:15.0" level="project" />
+    <orderEntry type="module" module-name="flexmark-tree-iteration" scope="TEST" />
+    <orderEntry type="library" scope="TEST" name="org.jetbrains:annotations:15.0" level="project" />
+    <orderEntry type="module" module-name="flexmark-formatter-test" scope="TEST" />
   </component>
 </module>

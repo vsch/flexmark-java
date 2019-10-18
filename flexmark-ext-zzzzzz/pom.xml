@@ -14,11 +14,20 @@
     <dependencies>
         <dependency>
             <groupId>com.vladsch.flexmark</groupId>
-            <artifactId>flexmark-util</artifactId>
+            <artifactId>flexmark</artifactId>
         </dependency>
         <dependency>
             <groupId>com.vladsch.flexmark</groupId>
-            <artifactId>flexmark</artifactId>
+            <artifactId>flexmark-formatter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.vladsch.flexmark</groupId>
+            <artifactId>flexmark-formatter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.vladsch.flexmark</groupId>
+            <artifactId>flexmark-util</artifactId>
         </dependency>
         <dependency>
             <groupId>com.vladsch.flexmark</groupId>
@@ -29,10 +38,6 @@
             <groupId>com.vladsch.flexmark</groupId>
             <artifactId>flexmark-ext-tables</artifactId>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.vladsch.flexmark</groupId>
-            <artifactId>flexmark-formatter</artifactId>
         </dependency>
     </dependencies>
 </project>

@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.ext.admonition;
 
-import com.vladsch.flexmark.formatter.ComboCoreTranslationFormatterSpecTestBase;
+import com.vladsch.flexmark.formatter.test.ComboTranslationFormatterSpecTestBase;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.util.data.DataHolder;
@@ -11,7 +11,7 @@ import org.junit.runners.Parameterized;
 import java.util.Collections;
 import java.util.List;
 
-public class ComboAdmonitionTranslationFormatterSpecTest extends ComboCoreTranslationFormatterSpecTestBase {
+public class ComboAdmonitionTranslationFormatterSpecTest extends ComboTranslationFormatterSpecTestBase {
     private static final String SPEC_RESOURCE = "/ext_admonition_translation_formatter_spec.md";
     private static final DataHolder OPTIONS = new MutableDataSet()
             .set(Parser.EXTENSIONS, Collections.singleton(AdmonitionExtension.create()))

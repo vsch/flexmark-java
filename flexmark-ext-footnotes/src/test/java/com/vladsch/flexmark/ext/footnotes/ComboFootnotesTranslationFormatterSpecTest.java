@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.ext.footnotes;
 
-import com.vladsch.flexmark.formatter.ComboCoreTranslationFormatterSpecTestBase;
+import com.vladsch.flexmark.formatter.test.ComboTranslationFormatterSpecTestBase;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.util.data.DataHolder;
@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ComboFootnotesTranslationFormatterSpecTest extends ComboCoreTranslationFormatterSpecTestBase {
+public class ComboFootnotesTranslationFormatterSpecTest extends ComboTranslationFormatterSpecTestBase {
     private static final String SPEC_RESOURCE = "/ext_footnotes_translation_formatter_spec.md";
     private static final DataHolder OPTIONS = new MutableDataSet()
             .set(Parser.EXTENSIONS, Collections.singleton(FootnoteExtension.create()));

@@ -8,7 +8,8 @@ flexmark-java
 - [To Do](#to-do)
 - [Next 0.60.0](#next-0600)
     - [API Change](#api-change)
-- [Next 0.59.13](#next-05913)
+- [Next 0.59.15](#next-05915)
+- [0.59.13](#05913)
     - [0.59.11](#05911)
     - [0.59.9](#0599)
     - [0.59.7](#0597)
@@ -178,7 +179,7 @@ Next 0.60.0
     * `com.vladsch.flexmark.util.ast.NodeAdaptingVisitHandler`
     * `com.vladsch.flexmark.util.ast.NodeAdaptingVisitor`
 
-Next 0.59.13
+Next 0.59.15
 ------------
 
 * [ ] Fix: Change spec example to variable number of sections
@@ -189,6 +190,13 @@ Next 0.59.13
 * [ ] Fix: URGENT: Rewrite combo spec and full spec to be merged like markdown navigator action
       spec test and not requiring deep inheritance dependencies. Merge full test spec and
       individual tests. for example see MdNav `LightPlatformCodeInsightSpecTestCase`
+
+0.59.13
+-------
+
+* Fix: move formatter tests to `flexmark-formatter-test` module to allow sharing of formatter
+  base classes in extensions without causing dependency cycles in formatter module.
+* Fix: move
 
 ### 0.59.11
 

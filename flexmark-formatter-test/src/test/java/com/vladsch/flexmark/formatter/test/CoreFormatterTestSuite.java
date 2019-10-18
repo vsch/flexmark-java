@@ -1,4 +1,4 @@
-package com.vladsch.flexmark.formatter;
+package com.vladsch.flexmark.formatter.test;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;

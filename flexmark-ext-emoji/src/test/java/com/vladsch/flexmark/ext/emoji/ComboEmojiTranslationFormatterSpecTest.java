@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.ext.emoji;
 
-import com.vladsch.flexmark.formatter.ComboCoreTranslationFormatterSpecTestBase;
+import com.vladsch.flexmark.formatter.test.ComboTranslationFormatterSpecTestBase;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.spec.SpecExample;
@@ -14,7 +14,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ComboEmojiTranslationFormatterSpecTest extends ComboCoreTranslationFormatterSpecTestBase {
+public class ComboEmojiTranslationFormatterSpecTest extends ComboTranslationFormatterSpecTestBase {
     private static final String SPEC_RESOURCE = "/ext_emoji_translation_formatter_spec.md";
     private static final DataHolder OPTIONS = new MutableDataSet()
             .set(Parser.EXTENSIONS, Collections.singleton(EmojiExtension.create()));

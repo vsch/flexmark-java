@@ -39,6 +39,7 @@
     <orderEntry type="module" module-name="flexmark-ext-superscript" />
     <orderEntry type="module" module-name="flexmark-ext-xwiki-macros" />
     <orderEntry type="module" module-name="flexmark-formatter" />
+    <orderEntry type="module" module-name="flexmark-formatter-test" scope="TEST"/>
     <orderEntry type="module" module-name="flexmark-pdf-converter" />
     <orderEntry type="library" name="com.openhtmltopdf:openhtmltopdf-core" level="project" />
     <orderEntry type="library" name="com.openhtmltopdf:openhtmltopdf-jsoup-dom-converter" level="project" />

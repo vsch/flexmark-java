@@ -1,9 +1,10 @@
-package com.vladsch.flexmark.formatter;
+package com.vladsch.flexmark.formatter.test;
 
 import com.vladsch.flexmark.ast.Image;
 import com.vladsch.flexmark.ast.InlineLinkNode;
 import com.vladsch.flexmark.ast.Link;
 import com.vladsch.flexmark.ast.Text;
+import com.vladsch.flexmark.formatter.Formatter;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.test.AstCollectingVisitor;
 import com.vladsch.flexmark.util.ast.Node;

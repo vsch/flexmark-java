@@ -7,8 +7,8 @@
         <option name="ENABLED" value="true" />
       </pattern>
     </extension>
-    <option name="PACKAGE_NAME" value="com.vladsch.flexmark.formatter" />
-    <option name="MAIN_CLASS_NAME" value="com.vladsch.flexmark.formatter.ComboCoreTranslationFormatterSpecTest" />
+    <option name="PACKAGE_NAME" value="com.vladsch.flexmark.formatter.test" />
+    <option name="MAIN_CLASS_NAME" value="com.vladsch.flexmark.formatter.test.ComboCoreTranslationFormatterSpecTest" />
     <option name="METHOD_NAME" value="" />
     <option name="TEST_OBJECT" value="class" />
     <option name="VM_PARAMETERS" />

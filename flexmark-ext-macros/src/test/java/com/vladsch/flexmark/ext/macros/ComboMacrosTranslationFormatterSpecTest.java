@@ -2,7 +2,7 @@ package com.vladsch.flexmark.ext.macros;
 
 import com.vladsch.flexmark.ext.gitlab.GitLabExtension;
 import com.vladsch.flexmark.ext.tables.TablesExtension;
-import com.vladsch.flexmark.formatter.ComboCoreTranslationFormatterSpecTestBase;
+import com.vladsch.flexmark.formatter.test.ComboTranslationFormatterSpecTestBase;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.util.data.DataHolder;
@@ -17,7 +17,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ComboMacrosTranslationFormatterSpecTest extends ComboCoreTranslationFormatterSpecTestBase {
+public class ComboMacrosTranslationFormatterSpecTest extends ComboTranslationFormatterSpecTestBase {
     private static final String SPEC_RESOURCE = "/ext_macros_translation_formatter_spec.md";
     private static final DataHolder OPTIONS = new MutableDataSet()
             .set(Parser.EXTENSIONS, Arrays.asList(MacrosExtension.create(), GitLabExtension.create(), TablesExtension.create()))

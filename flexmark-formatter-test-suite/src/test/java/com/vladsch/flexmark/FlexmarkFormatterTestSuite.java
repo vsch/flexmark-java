@@ -19,47 +19,31 @@ import com.vladsch.flexmark.ext.macros.ComboMacrosTranslationFormatterSpecTest;
 import com.vladsch.flexmark.ext.tables.ComboTableFormatterSpecTest;
 import com.vladsch.flexmark.ext.tables.ComboTableTranslationFormatterSpecTest;
 import com.vladsch.flexmark.ext.yaml.front.matter.ComboYamlFrontMatterFormatterSpecTest;
-import com.vladsch.flexmark.formatter.ComboCoreFormatterSpecTest;
-import com.vladsch.flexmark.formatter.ComboCoreTranslationFormatterSpecTest;
+import com.vladsch.flexmark.formatter.test.ComboCoreFormatterSpecTest;
+import com.vladsch.flexmark.formatter.test.ComboCoreTranslationFormatterSpecTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-        //UtilsTestSuite.class,
-        //CoreTestSuite.class,
         ComboAdmonitionFormatterSpecTest.class,
         ComboAdmonitionTranslationFormatterSpecTest.class,
         ComboAbbreviationFormatterSpecTest.class,
         ComboAbbreviationTranslationFormatterSpecTest.class,
-        //ComboAnchorLinkFormatterSpecTest.class,
         ComboAttributesFormatterSpecTest.class,
         ComboAttributesTranslationFormatterSpecTest.class,
-        //ComboAsideFormatterSpecTest.class,
-        //ComboAutolinkFormatterSpecTest.class,
         ComboDefinitionFormatterSpecTest.class,
         ComboEmojiTranslationFormatterSpecTest.class,
-        //ComboEscapedCharacterFormatterSpecTest.class,
         ComboEnumeratedReferenceFormatterSpecTest.class,
         ComboEnumeratedReferenceTranslationFormatterSpecTest.class,
         ComboFootnotesFormatterSpecTest.class,
         ComboFootnotesTranslationFormatterSpecTest.class,
-        //ComboGfmStrikethroughFormatterSpecTest.class,
-        //ComboGfmTablesFormatterSpecTest.class,
         ComboGfmTaskListFormatterSpecTest.class,
         ComboJekyllFrontMatterFormatterSpecTest.class,
-        //ComboJekyllTagFormatterSpecTest.class,
-        //ComboInsFormatterSpecTest.class,
         ComboMacrosFormatterSpecTest.class,
         ComboMacrosTranslationFormatterSpecTest.class,
-        //ComboSuperscriptFormatterSpecTest.class,
-        //ComboSpecExampleFormatterSpecTest.class,
         ComboTableFormatterSpecTest.class,
         ComboTableTranslationFormatterSpecTest.class,
-        //ComboTocFormatterSpecTest.class,
-        //ComboTypographicFormatterSpecTest.class,
-        //ComboWikiLinkFormatterSpecTest.class,
-        //ComboXWikiMacroFormatterSpecTest.class,
         ComboYamlFrontMatterFormatterSpecTest.class,
         ComboCoreFormatterSpecTest.class,
         ComboCoreTranslationFormatterSpecTest.class,

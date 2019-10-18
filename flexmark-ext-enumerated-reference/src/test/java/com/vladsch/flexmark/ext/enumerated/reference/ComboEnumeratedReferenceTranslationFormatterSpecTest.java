@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.ext.enumerated.reference;
 
 import com.vladsch.flexmark.ext.attributes.AttributesExtension;
-import com.vladsch.flexmark.formatter.ComboCoreTranslationFormatterSpecTestBase;
+import com.vladsch.flexmark.formatter.test.ComboTranslationFormatterSpecTestBase;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.util.data.DataHolder;
@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ComboEnumeratedReferenceTranslationFormatterSpecTest extends ComboCoreTranslationFormatterSpecTestBase {
+public class ComboEnumeratedReferenceTranslationFormatterSpecTest extends ComboTranslationFormatterSpecTestBase {
     private static final String SPEC_RESOURCE = "/ext_enumerated_reference_translation_formatter_spec.md";
     private static final DataHolder OPTIONS = new MutableDataSet()
             .set(Parser.EXTENSIONS, Arrays.asList(EnumeratedReferenceExtension.create(), AttributesExtension.create()));

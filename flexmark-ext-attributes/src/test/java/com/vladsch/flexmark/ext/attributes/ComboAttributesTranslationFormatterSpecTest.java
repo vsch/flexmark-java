@@ -3,7 +3,7 @@ package com.vladsch.flexmark.ext.attributes;
 import com.vladsch.flexmark.ext.anchorlink.AnchorLinkExtension;
 import com.vladsch.flexmark.ext.emoji.EmojiExtension;
 import com.vladsch.flexmark.ext.toc.TocExtension;
-import com.vladsch.flexmark.formatter.ComboCoreTranslationFormatterSpecTestBase;
+import com.vladsch.flexmark.formatter.test.ComboTranslationFormatterSpecTestBase;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.spec.SpecExample;
@@ -15,7 +15,7 @@ import org.junit.runners.Parameterized;
 
 import java.util.*;
 
-public class ComboAttributesTranslationFormatterSpecTest extends ComboCoreTranslationFormatterSpecTestBase {
+public class ComboAttributesTranslationFormatterSpecTest extends ComboTranslationFormatterSpecTestBase {
     static final boolean SKIP_IGNORED_TESTS = ComboAttributesFormatterSpecTest.SKIP_IGNORED_TESTS;
     private static final String SPEC_RESOURCE = "/ext_attributes_translation_format_spec.md";
     private static final DataHolder OPTIONS = new MutableDataSet()
