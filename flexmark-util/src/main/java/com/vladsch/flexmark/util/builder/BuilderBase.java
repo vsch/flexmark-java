@@ -1,5 +1,6 @@
 package com.vladsch.flexmark.util.builder;
 
+import com.vladsch.flexmark.util.SharedDataKeys;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.data.MutableDataSet;
@@ -8,7 +9,6 @@ import org.jetbrains.annotations.NotNull;
 import java.util.*;
 
 public abstract class BuilderBase<T extends BuilderBase<T>> extends MutableDataSet {
-    public static final DataKey<Collection<Extension>> EXTENSIONS = new DataKey<>("EXTENSIONS", Extension.EMPTY_LIST);
 
     // loaded extensions
     private final HashSet<Class<?>> loadedExtensions = new HashSet<>();
@@ -46,7 +46,7 @@ public abstract class BuilderBase<T extends BuilderBase<T>> extends MutableDataS
      */
     @Deprecated
     final public T extensions(Collection<? extends Extension> extensions) {
-        ArrayList<Extension> addedExtensions = new ArrayList<>(get(EXTENSIONS).size() + extensions.size());
+        ArrayList<Extension> addedExtensions = new ArrayList<>(get(SharedDataKeys.EXTENSIONS).size() + extensions.size());
 
         // first give extensions a chance to modify parser options
         for (Extension extension : extensions) {
@@ -72,8 +72,8 @@ public abstract class BuilderBase<T extends BuilderBase<T>> extends MutableDataS
 
         if (!addedExtensions.isEmpty()) {
             // need to set extensions to options to make it all consistent
-            addedExtensions.addAll(0, get(EXTENSIONS));
-            set(EXTENSIONS, addedExtensions);
+            addedExtensions.addAll(0, get(SharedDataKeys.EXTENSIONS));
+            set(SharedDataKeys.EXTENSIONS, addedExtensions);
         }
 
         //noinspection unchecked
@@ -119,8 +119,8 @@ public abstract class BuilderBase<T extends BuilderBase<T>> extends MutableDataS
     }
 
     protected void loadExtensions() {
-        if (contains(EXTENSIONS)) {
-            extensions(get(EXTENSIONS));
+        if (contains(SharedDataKeys.EXTENSIONS)) {
+            extensions(get(SharedDataKeys.EXTENSIONS));
         }
     }
 
