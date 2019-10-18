@@ -6,7 +6,9 @@ import com.vladsch.flexmark.ext.footnotes.FootnoteExtension;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.*;
-import com.vladsch.flexmark.util.ast.*;
+import com.vladsch.flexmark.util.ast.Document;
+import com.vladsch.flexmark.util.ast.NodeVisitor;
+import com.vladsch.flexmark.util.ast.VisitHandler;
 import com.vladsch.flexmark.util.data.DataHolder;
 
 import java.util.Arrays;

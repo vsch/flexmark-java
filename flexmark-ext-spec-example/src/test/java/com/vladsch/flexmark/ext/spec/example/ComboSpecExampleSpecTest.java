@@ -37,14 +37,13 @@ public class ComboSpecExampleSpecTest extends ComboSpecTestCase {
         optionsMap.put("as-def-list", new MutableDataSet().set(SpecExampleExtension.SPEC_EXAMPLE_RENDER_AS, RenderAs.DEFINITION_LIST));
         optionsMap.put("as-fenced-code", new MutableDataSet().set(SpecExampleExtension.SPEC_EXAMPLE_RENDER_AS, RenderAs.FENCED_CODE));
     }
-
     public ComboSpecExampleSpecTest(SpecExample example) {
         super(example);
     }
 
     @Parameterized.Parameters(name = "{0}")
     public static List<Object[]> data() {
-        return getTestData( SPEC_RESOURCE);
+        return getTestData(SPEC_RESOURCE);
     }
 
     @Nullable
@@ -59,10 +58,9 @@ public class ComboSpecExampleSpecTest extends ComboSpecTestCase {
         return SPEC_RESOURCE;
     }
 
-
     @Override
     public @NotNull SpecExampleRenderer getSpecExampleRenderer(@NotNull SpecExample example, @Nullable DataHolder exampleOptions) {
         DataHolder combinedOptions = combineOptions(OPTIONS, exampleOptions);
         return new FlexmarkSpecExampleRenderer(example, combinedOptions, Parser.builder(combinedOptions).build(), HtmlRenderer.builder(combinedOptions).build(), true);
-}
+    }
 }

@@ -41,14 +41,13 @@ public class ComboDefinitionFormatterSpecTest extends ComboSpecTestCase {
         optionsMap.put("marker-type-tilde", new MutableDataSet().set(DefinitionExtension.FORMAT_MARKER_TYPE, DefinitionMarker.TILDE));
         optionsMap.put("no-blank-lines", new MutableDataSet().set(Parser.BLANK_LINES_IN_AST, false));
     }
-
     public ComboDefinitionFormatterSpecTest(SpecExample example) {
         super(example);
     }
 
     @Parameterized.Parameters(name = "{0}")
     public static List<Object[]> data() {
-        return getTestData( SPEC_RESOURCE);
+        return getTestData(SPEC_RESOURCE);
     }
 
     @Nullable
@@ -63,10 +62,9 @@ public class ComboDefinitionFormatterSpecTest extends ComboSpecTestCase {
         return SPEC_RESOURCE;
     }
 
-
     @Override
     public @NotNull SpecExampleRenderer getSpecExampleRenderer(@NotNull SpecExample example, @Nullable DataHolder exampleOptions) {
         DataHolder combinedOptions = combineOptions(OPTIONS, exampleOptions);
         return new FlexmarkSpecExampleRenderer(example, combinedOptions, Parser.builder(combinedOptions).build(), Formatter.builder(combinedOptions).build(), true);
-}
+    }
 }

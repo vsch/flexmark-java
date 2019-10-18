@@ -1,8 +1,6 @@
 package com.vladsch.flexmark.docx.converter;
 
-import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.spec.SpecExample;
-import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import org.jetbrains.annotations.NotNull;
 import org.junit.runners.Parameterized;
@@ -21,7 +19,7 @@ public class ComboDeDocxConverterSpec2Test extends ComboDocxConverterSpecTestBas
 
     @Parameterized.Parameters(name = "{0}")
     public static List<Object[]> data() {
-        return getTestData( SPEC_RESOURCE);
+        return getTestData(SPEC_RESOURCE);
     }
 
     @NotNull

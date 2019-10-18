@@ -36,7 +36,7 @@ public class ComboSuperscriptSpecTest extends ComboSpecTestCase {
 
     @Parameterized.Parameters(name = "{0}")
     public static List<Object[]> data() {
-        return getTestData( SPEC_RESOURCE);
+        return getTestData(SPEC_RESOURCE);
     }
 
     @Nullable
@@ -50,7 +50,6 @@ public class ComboSuperscriptSpecTest extends ComboSpecTestCase {
     public String getSpecResourceName() {
         return SPEC_RESOURCE;
     }
-
 
     @Override
     public @NotNull SpecExampleRenderer getSpecExampleRenderer(@NotNull SpecExample example, @Nullable DataHolder exampleOptions) {

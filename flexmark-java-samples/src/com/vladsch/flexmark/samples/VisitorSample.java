@@ -5,6 +5,7 @@ import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.ast.NodeVisitor;
 import com.vladsch.flexmark.util.ast.VisitHandler;
+
 @SuppressWarnings({ "WeakerAccess" })
 public class VisitorSample {
     int wordCount;

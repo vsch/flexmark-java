@@ -20,7 +20,6 @@ import com.vladsch.flexmark.util.html.Attributes;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
 
-import java.util.Arrays;
 import java.util.Collections;
 
 /**

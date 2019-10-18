@@ -25,7 +25,6 @@ import com.vladsch.flexmark.ext.typographic.TypographicExtension;
 import com.vladsch.flexmark.ext.wikilink.WikiLinkExtension;
 import com.vladsch.flexmark.ext.yaml.front.matter.YamlFrontMatterExtension;
 import com.vladsch.flexmark.formatter.Formatter;
-import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.ParserEmulationProfile;
 import com.vladsch.flexmark.spec.SpecExample;
@@ -127,7 +126,6 @@ public class ComboFormatterIssueSpecTest extends ComboSpecTestCase {
                 .set(Formatter.REFERENCE_SORT, ElementPlacementSort.SORT)
         );
     }
-
     public ComboFormatterIssueSpecTest(SpecExample example) {
         super(example);
     }
@@ -140,7 +138,7 @@ public class ComboFormatterIssueSpecTest extends ComboSpecTestCase {
             protected void adjustParserForInclusion() {
                 super.adjustParserForInclusion();
 
-                AbbreviationRepository abbreviationRepository = ((Document)getIncludedDocument()).get(AbbreviationExtension.ABBREVIATIONS);
+                AbbreviationRepository abbreviationRepository = ((Document) getIncludedDocument()).get(AbbreviationExtension.ABBREVIATIONS);
                 if (!abbreviationRepository.isEmpty()) {
                     DataHolder withAbbreviations = getOptions().toMutable().set(AbbreviationExtension.ABBREVIATIONS, abbreviationRepository).toImmutable();
                     // need to transfer it to new instance of parser
@@ -152,7 +150,7 @@ public class ComboFormatterIssueSpecTest extends ComboSpecTestCase {
 
     @Parameterized.Parameters(name = "{0}")
     public static List<Object[]> data() {
-        return getTestData( SPEC_RESOURCE);
+        return getTestData(SPEC_RESOURCE);
     }
 
     @Nullable

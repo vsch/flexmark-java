@@ -45,14 +45,13 @@ public class ComboTypographicSpecTest extends ComboSpecTestCase {
         optionsMap.put("no-quotes", new MutableDataSet().set(TypographicExtension.ENABLE_QUOTES, false));
         optionsMap.put("no-smarts", new MutableDataSet().set(TypographicExtension.ENABLE_SMARTS, false));
     }
-
     public ComboTypographicSpecTest(SpecExample example) {
         super(example);
     }
 
     @Parameterized.Parameters(name = "{0}")
     public static List<Object[]> data() {
-        return getTestData( SPEC_RESOURCE);
+        return getTestData(SPEC_RESOURCE);
     }
 
     @Nullable
@@ -66,7 +65,6 @@ public class ComboTypographicSpecTest extends ComboSpecTestCase {
     public String getSpecResourceName() {
         return SPEC_RESOURCE;
     }
-
 
     @Override
     public @NotNull SpecExampleRenderer getSpecExampleRenderer(@NotNull SpecExample example, @Nullable DataHolder exampleOptions) {

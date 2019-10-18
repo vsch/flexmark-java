@@ -86,7 +86,6 @@ public class ComboCoreTranslationFormatterSpecTest extends ComboCoreTranslationF
         //optionsMap.put("code-trailing-spaces-keep-line-break", new MutableDataSet().set(Formatter.CODE_KEEP_TRAILING_SPACES, TrailingSpaces.KEEP_LINE_BREAK));
         //optionsMap.put("code-trailing-spaces-keep-none", new MutableDataSet().set(Formatter.CODE_KEEP_TRAILING_SPACES, TrailingSpaces.KEEP_NONE));
     }
-
     public ComboCoreTranslationFormatterSpecTest(@NotNull SpecExample example) {
         super(example, null, optionsMap);
     }

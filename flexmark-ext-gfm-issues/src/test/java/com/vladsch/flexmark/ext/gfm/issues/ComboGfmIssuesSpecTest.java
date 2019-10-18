@@ -32,14 +32,13 @@ public class ComboGfmIssuesSpecTest extends ComboSpecTestCase {
         optionsMap.put("suffix", new MutableDataSet().set(GfmIssuesExtension.GIT_HUB_ISSUE_URL_SUFFIX, "&"));
         optionsMap.put("bold", new MutableDataSet().set(GfmIssuesExtension.GIT_HUB_ISSUE_HTML_PREFIX, "<strong>").set(GfmIssuesExtension.GIT_HUB_ISSUE_HTML_SUFFIX, "</strong>"));
     }
-
     public ComboGfmIssuesSpecTest(SpecExample example) {
         super(example);
     }
 
     @Parameterized.Parameters(name = "{0}")
     public static List<Object[]> data() {
-        return getTestData( SPEC_RESOURCE);
+        return getTestData(SPEC_RESOURCE);
     }
 
     @Nullable
@@ -53,7 +52,6 @@ public class ComboGfmIssuesSpecTest extends ComboSpecTestCase {
     public String getSpecResourceName() {
         return SPEC_RESOURCE;
     }
-
 
     @Override
     public @NotNull SpecExampleRenderer getSpecExampleRenderer(@NotNull SpecExample example, @Nullable DataHolder exampleOptions) {

@@ -68,7 +68,7 @@ public class ComboTableSpecTest extends ComboSpecTestCase {
 
     @Parameterized.Parameters(name = "{0}")
     public static List<Object[]> data() {
-        return getTestData( SPEC_RESOURCE);
+        return getTestData(SPEC_RESOURCE);
     }
 
     @Nullable
@@ -87,7 +87,7 @@ public class ComboTableSpecTest extends ComboSpecTestCase {
     public @NotNull SpecExampleRenderer getSpecExampleRenderer(@NotNull SpecExample example, @Nullable DataHolder exampleOptions) {
         DataHolder combinedOptions = combineOptions(OPTIONS, exampleOptions);
         return new FlexmarkSpecExampleRenderer(example, combinedOptions, Parser.builder(combinedOptions).build(), HtmlRenderer.builder(combinedOptions).build(), true);
-}
+    }
 
     @Test
     public void testTable() {
@@ -96,6 +96,6 @@ public class ComboTableSpecTest extends ComboSpecTestCase {
         String source = Utils.getResourceAsString(ComboTableSpecTest.class, "/table.md");
         String html = Utils.getResourceAsString(ComboTableSpecTest.class, "/table.html");
 
-        assertRendering(example.getFileUrl().toString(), source, html, null,example.getOptionsSet());
+        assertRendering(example.getFileUrl().toString(), source, html, null, example.getOptionsSet());
     }
 }

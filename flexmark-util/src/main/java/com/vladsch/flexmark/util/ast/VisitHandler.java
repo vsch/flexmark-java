@@ -12,6 +12,6 @@ public class VisitHandler<N extends Node> extends AstHandler<N, Visitor<N>> impl
 
     public void visit(Node node) {
         //noinspection unchecked
-        getAdapter().visit((N)node);
+        getAdapter().visit((N) node);
     }
 }

@@ -2,7 +2,10 @@ package com.vladsch.flexmark.ext.enumerated.reference.internal;
 
 import com.vladsch.flexmark.ast.*;
 import com.vladsch.flexmark.ext.enumerated.reference.*;
-import com.vladsch.flexmark.util.ast.*;
+import com.vladsch.flexmark.util.ast.DoNotCollectText;
+import com.vladsch.flexmark.util.ast.Node;
+import com.vladsch.flexmark.util.ast.NodeVisitor;
+import com.vladsch.flexmark.util.ast.VisitHandler;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.SegmentedSequenceBuilder;
 

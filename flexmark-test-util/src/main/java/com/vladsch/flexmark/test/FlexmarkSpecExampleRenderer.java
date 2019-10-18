@@ -95,7 +95,8 @@ public class FlexmarkSpecExampleRenderer extends SpecExampleRendererBase {
     }
 
     /**
-      * Override to customize
+     * Override to customize
+     *
      * @return HTML string, will be cached after document is finalized to allow for timing collection iterations,
      */
     @NotNull

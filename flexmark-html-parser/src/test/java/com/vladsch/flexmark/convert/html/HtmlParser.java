@@ -1,14 +1,11 @@
 package com.vladsch.flexmark.convert.html;
 
 import com.vladsch.flexmark.spec.IParseBase;
-import com.vladsch.flexmark.util.ast.IParse;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKey;
-import com.vladsch.flexmark.util.data.MutableDataSet;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 class HtmlParser extends IParseBase {
     @SuppressWarnings("PointlessBitwiseExpression") final static public DataKey<Integer> HTML_EXTENSIONS = new DataKey<>("HTML_EXTENSIONS", 0

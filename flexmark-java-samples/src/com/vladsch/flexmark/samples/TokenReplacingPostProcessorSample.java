@@ -14,7 +14,6 @@ import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 
-import java.util.Arrays;
 import java.util.Collections;
 
 /**

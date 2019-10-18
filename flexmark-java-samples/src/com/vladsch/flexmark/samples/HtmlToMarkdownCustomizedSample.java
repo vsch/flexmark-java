@@ -9,7 +9,6 @@ import com.vladsch.flexmark.util.data.MutableDataSet;
 import org.jsoup.nodes.Element;
 import org.jsoup.nodes.Node;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;

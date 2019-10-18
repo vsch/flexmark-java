@@ -24,7 +24,6 @@ import com.vladsch.flexmark.util.html.Attributes;
 import com.vladsch.flexmark.util.html.LineFormattingAppendable;
 import com.vladsch.flexmark.util.mappers.CharWidthProvider;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 import java.util.function.Function;
@@ -225,8 +224,10 @@ public class Formatter implements IRender {
 
     /**
      * Render a node to the appendable
-     *  @param document   node to render
-     * @param output appendable to use for the output*/
+     *
+     * @param document node to render
+     * @param output   appendable to use for the output
+     */
     public void render(@NotNull Node document, @NotNull Appendable output) {
         MainNodeFormatter renderer = new MainNodeFormatter(options, new MarkdownWriter(formatterOptions.formatFlags), document.getDocument(), null);
         renderer.render(document);
@@ -261,8 +262,8 @@ public class Formatter implements IRender {
     /**
      * Render a node to the appendable
      *
-     * @param document   node to render
-     * @param output appendable to use for the output
+     * @param document node to render
+     * @param output   appendable to use for the output
      */
     public void translationRender(Node document, Appendable output, TranslationHandler translationHandler, RenderPurpose renderPurpose) {
         translationRender(document, output, formatterOptions.maxTrailingBlankLines, translationHandler, renderPurpose);
@@ -283,8 +284,8 @@ public class Formatter implements IRender {
     /**
      * Render a node to the appendable
      *
-     * @param document   node to render
-     * @param output appendable to use for the output
+     * @param document node to render
+     * @param output   appendable to use for the output
      */
     public void translationRender(Node document, Appendable output, int maxTrailingBlankLines, TranslationHandler translationHandler, RenderPurpose renderPurpose) {
         translationHandler.setRenderPurpose(renderPurpose);

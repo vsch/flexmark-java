@@ -120,7 +120,6 @@ public class ComboFormatterTestSuiteSpecTest extends ComboSpecTestCase {
         optionsMap.put("task-placement-complete-to-non-task", new MutableDataSet().set(TaskListExtension.FORMAT_LIST_ITEM_PLACEMENT, TaskListItemPlacement.COMPLETE_TO_NON_TASK));
         optionsMap.put("task-placement-complete-nested-to-non-task", new MutableDataSet().set(TaskListExtension.FORMAT_LIST_ITEM_PLACEMENT, TaskListItemPlacement.COMPLETE_NESTED_TO_NON_TASK));
     }
-
     public ComboFormatterTestSuiteSpecTest(SpecExample example) {
         super(example);
     }

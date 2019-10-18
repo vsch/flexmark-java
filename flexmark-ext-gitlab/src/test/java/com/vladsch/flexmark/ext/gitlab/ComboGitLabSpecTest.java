@@ -45,14 +45,13 @@ public class ComboGitLabSpecTest extends ComboSpecTestCase {
         optionsMap.put("video-link-format", new MutableDataSet().set(GitLabExtension.VIDEO_IMAGE_LINK_TEXT_FORMAT, "Get Video '%s'"));
         optionsMap.put("video-class", new MutableDataSet().set(GitLabExtension.VIDEO_IMAGE_CLASS, "video-class"));
     }
-
     public ComboGitLabSpecTest(SpecExample example) {
         super(example);
     }
 
     @Parameterized.Parameters(name = "{0}")
     public static List<Object[]> data() {
-        return getTestData( SPEC_RESOURCE);
+        return getTestData(SPEC_RESOURCE);
     }
 
     @Nullable
@@ -66,9 +65,10 @@ public class ComboGitLabSpecTest extends ComboSpecTestCase {
     public String getSpecResourceName() {
         return SPEC_RESOURCE;
     }
+
     @Override
     public @NotNull SpecExampleRenderer getSpecExampleRenderer(@NotNull SpecExample example, @Nullable DataHolder exampleOptions) {
         DataHolder combinedOptions = combineOptions(OPTIONS, exampleOptions);
         return new FlexmarkSpecExampleRenderer(example, combinedOptions, Parser.builder(combinedOptions).build(), HtmlRenderer.builder(combinedOptions).build(), true);
-}
+    }
 }

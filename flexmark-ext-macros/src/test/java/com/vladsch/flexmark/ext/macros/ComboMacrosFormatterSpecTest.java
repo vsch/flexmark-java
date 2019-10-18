@@ -48,14 +48,13 @@ public class ComboMacrosFormatterSpecTest extends ComboSpecTestCase {
         optionsMap.put("references-sort", new MutableDataSet().set(MacrosExtension.MACRO_DEFINITIONS_SORT, ElementPlacementSort.SORT));
         optionsMap.put("references-sort-unused-last", new MutableDataSet().set(MacrosExtension.MACRO_DEFINITIONS_SORT, ElementPlacementSort.SORT_UNUSED_LAST));
     }
-
     public ComboMacrosFormatterSpecTest(SpecExample example) {
         super(example);
     }
 
     @Parameterized.Parameters(name = "{0}")
     public static List<Object[]> data() {
-        return getTestData( SPEC_RESOURCE);
+        return getTestData(SPEC_RESOURCE);
     }
 
     @Nullable
@@ -70,10 +69,9 @@ public class ComboMacrosFormatterSpecTest extends ComboSpecTestCase {
         return SPEC_RESOURCE;
     }
 
-
     @Override
     public @NotNull SpecExampleRenderer getSpecExampleRenderer(@NotNull SpecExample example, @Nullable DataHolder exampleOptions) {
         DataHolder combinedOptions = combineOptions(OPTIONS, exampleOptions);
         return new FlexmarkSpecExampleRenderer(example, combinedOptions, Parser.builder(combinedOptions).build(), Formatter.builder(combinedOptions).build(), true);
-}
+    }
 }

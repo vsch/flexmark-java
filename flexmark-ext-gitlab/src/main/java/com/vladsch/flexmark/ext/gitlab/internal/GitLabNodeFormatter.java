@@ -4,7 +4,6 @@ import com.vladsch.flexmark.ext.gitlab.GitLabBlockQuote;
 import com.vladsch.flexmark.formatter.*;
 import com.vladsch.flexmark.util.data.DataHolder;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;

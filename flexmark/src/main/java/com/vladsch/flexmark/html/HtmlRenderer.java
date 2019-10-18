@@ -9,7 +9,10 @@ import com.vladsch.flexmark.util.ast.IRender;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.builder.BuilderBase;
 import com.vladsch.flexmark.util.builder.Extension;
-import com.vladsch.flexmark.util.data.*;
+import com.vladsch.flexmark.util.data.DataHolder;
+import com.vladsch.flexmark.util.data.DataKey;
+import com.vladsch.flexmark.util.data.MutableDataHolder;
+import com.vladsch.flexmark.util.data.ScopedDataSet;
 import com.vladsch.flexmark.util.dependency.DependencyHandler;
 import com.vladsch.flexmark.util.dependency.FlatDependencyHandler;
 import com.vladsch.flexmark.util.dependency.ResolvedDependencies;
@@ -184,8 +187,10 @@ public class HtmlRenderer implements IRender {
 
     /**
      * Render a node to the appendable
-     *  @param document   node to render
-     * @param output appendable to use for the output*/
+     *
+     * @param document node to render
+     * @param output   appendable to use for the output
+     */
     public void render(@NotNull Node document, @NotNull Appendable output) {
         MainNodeRenderer renderer = new MainNodeRenderer(options, new HtmlWriter(htmlOptions.indentSize, htmlOptions.formatFlags, !htmlOptions.htmlBlockOpenTagEol, !htmlOptions.htmlBlockCloseTagEol), document.getDocument());
         renderer.render(document);

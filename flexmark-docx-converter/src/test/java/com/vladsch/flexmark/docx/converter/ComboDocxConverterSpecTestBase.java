@@ -41,7 +41,10 @@ import org.docx4j.wml.Text;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.io.*;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -52,7 +55,6 @@ public abstract class ComboDocxConverterSpecTestBase extends ComboSpecTestCase {
     static final boolean DUMP_TEST_CASE_FILES = !SKIP_IGNORED_TESTS;
     static final boolean DUMP_ALL_TESTS_FILES = !SKIP_IGNORED_TESTS;
     static final String PROJECT_ROOT_DIRECTORY = "/Users/vlad/src/projects/flexmark-java";
-
     static {
         // Set up a simple configuration that logs on the console.
         Logger root = Logger.getRootLogger();
@@ -220,7 +222,7 @@ public abstract class ComboDocxConverterSpecTestBase extends ComboSpecTestCase {
 
         myDocxContext.createHorizontalLine();
         DataHolder combinedOptions = combineOptions(myDefaultOptions, exampleOptions);
-        DocxRenderer.builder(combinedOptions).build().render(((FlexmarkSpecExampleRenderer)exampleRenderer).getDocument(), myPackage);
+        DocxRenderer.builder(combinedOptions).build().render(((FlexmarkSpecExampleRenderer) exampleRenderer).getDocument(), myPackage);
         myDocxContext.createHorizontalLine();
 
         if (example.hasComment()) {

@@ -41,14 +41,13 @@ public class ComboFootnotesFormatterSpecTest extends ComboSpecTestCase {
         optionsMap.put("references-sort", new MutableDataSet().set(FootnoteExtension.FOOTNOTE_SORT, ElementPlacementSort.SORT));
         optionsMap.put("references-sort-unused-last", new MutableDataSet().set(FootnoteExtension.FOOTNOTE_SORT, ElementPlacementSort.SORT_UNUSED_LAST));
     }
-
     public ComboFootnotesFormatterSpecTest(SpecExample example) {
         super(example);
     }
 
     @Parameterized.Parameters(name = "{0}")
     public static List<Object[]> data() {
-        return getTestData( SPEC_RESOURCE);
+        return getTestData(SPEC_RESOURCE);
     }
 
     @Nullable
@@ -67,5 +66,5 @@ public class ComboFootnotesFormatterSpecTest extends ComboSpecTestCase {
     public @NotNull SpecExampleRenderer getSpecExampleRenderer(@NotNull SpecExample example, @Nullable DataHolder exampleOptions) {
         DataHolder combinedOptions = combineOptions(OPTIONS, exampleOptions);
         return new FlexmarkSpecExampleRenderer(example, combinedOptions, Parser.builder(combinedOptions).build(), Formatter.builder(combinedOptions).build(), true);
-}
+    }
 }

@@ -26,16 +26,16 @@ public class FullOrigSpec028CoreTest extends FullSpecTestCase {
         return Parser.builder(OPTIONS).build();
     }
 
-@NotNull
+    @NotNull
     public HtmlRenderer renderer(@Nullable DataHolder OPTIONS) {
         return HtmlRenderer.builder(OPTIONS).build();
     }
 
-@NotNull
+    @NotNull
     @Override
     public SpecExample getExample() {
-    return SpecExample.NULL;
-}
+        return SpecExample.NULL;
+    }
 
     @Override
     public @Nullable DataHolder options(String option) {

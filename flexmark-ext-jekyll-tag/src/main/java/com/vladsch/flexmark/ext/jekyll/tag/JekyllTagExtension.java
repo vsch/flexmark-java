@@ -5,9 +5,7 @@ import com.vladsch.flexmark.ext.jekyll.tag.internal.JekyllTagInlineParserExtensi
 import com.vladsch.flexmark.ext.jekyll.tag.internal.JekyllTagNodeRenderer;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
-import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKey;
-import com.vladsch.flexmark.util.data.DataValueFactory;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 
 import java.util.ArrayList;

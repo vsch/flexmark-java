@@ -95,10 +95,10 @@ public abstract class AstActionHandler<C extends AstActionHandler<C, N, A, H>, N
     /**
      * Process the node and return value from the processor
      *
-     * @param node    node to process
+     * @param node         node to process
      * @param defaultValue default value if no handler is defined for the node
-     * @param processor processor to pass the node and handler for processing
-     * @param <R>     type of result returned by processor
+     * @param processor    processor to pass the node and handler for processing
+     * @param <R>          type of result returned by processor
      * @return result or defaultValue
      */
     final protected <R> R processNodeOnly(N node, R defaultValue, BiFunction<N, A, R> processor) {

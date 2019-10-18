@@ -4,7 +4,6 @@ import com.vladsch.flexmark.util.collection.BoundedMaxAggregator;
 import com.vladsch.flexmark.util.collection.BoundedMinAggregator;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

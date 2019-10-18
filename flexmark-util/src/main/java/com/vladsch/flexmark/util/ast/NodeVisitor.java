@@ -12,10 +12,10 @@ import java.util.function.BiConsumer;
  * Usage:
  * {@code
  * myVisitor = new NodeVisitor(
- *     new VisitHandler&lt;&gt;(Document.class, this::visit),
- *     new VisitHandler&lt;&gt;(HtmlEntity.class, this::visit),
- *     new VisitHandler&lt;&gt;(SoftLineBreak.class, this::visit),
- *     new VisitHandler&lt;&gt;(HardLineBreak.class, this::visit)
+ * new VisitHandler&lt;&gt;(Document.class, this::visit),
+ * new VisitHandler&lt;&gt;(HtmlEntity.class, this::visit),
+ * new VisitHandler&lt;&gt;(SoftLineBreak.class, this::visit),
+ * new VisitHandler&lt;&gt;(HardLineBreak.class, this::visit)
  * );
  * }
  * <p>
@@ -30,15 +30,15 @@ import java.util.function.BiConsumer;
  * Previously the implementation for visit(Node) looked like:
  * <p>
  * {@code
- * @Override
- * public void visit(Node node) {
+ *
+ * @Override public void visit(Node node) {
  * processNode(node, true, this::visit);
- *    VisitHandler&lt;?&gt; handler = getHandler(node);
- *    if (handler != null) {
- *        handler.visit(node);
- *    } else {
- *        visitChildren(node);
- *    }
+ * VisitHandler&lt;?&gt; handler = getHandler(node);
+ * if (handler != null) {
+ * handler.visit(node);
+ * } else {
+ * visitChildren(node);
+ * }
  * }
  * }
  * <p>
@@ -46,14 +46,13 @@ import java.util.function.BiConsumer;
  * logic of processing child nodes if withChildren is true and passing child processing to processChildren() instead of visitChildren.
  * <p>
  * {@code
- * @Override
- * public void processNode(Node node, boolean withChildren, BiConsumer&lt;Node, Visitor&lt;Node&gt;&gt; processor) {
- *     Visitor&lt;?&gt; handler = getAction(node);
- *     if (handler != null) {
- *         processor.accept(node, visitor);
- *     }  else if (withChildren) {
- *         processChildren(node, processor);
- *     }
+ * @Override public void processNode(Node node, boolean withChildren, BiConsumer&lt;Node, Visitor&lt;Node&gt;&gt; processor) {
+ * Visitor&lt;?&gt; handler = getAction(node);
+ * if (handler != null) {
+ * processor.accept(node, visitor);
+ * }  else if (withChildren) {
+ * processChildren(node, processor);
+ * }
  * }
  * }
  */

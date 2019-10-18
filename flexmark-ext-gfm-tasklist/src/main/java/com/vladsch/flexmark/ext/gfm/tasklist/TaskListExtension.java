@@ -4,12 +4,9 @@ import com.vladsch.flexmark.ext.gfm.tasklist.internal.TaskListItemBlockPreProces
 import com.vladsch.flexmark.ext.gfm.tasklist.internal.TaskListNodeFormatter;
 import com.vladsch.flexmark.ext.gfm.tasklist.internal.TaskListNodeRenderer;
 import com.vladsch.flexmark.formatter.Formatter;
-import com.vladsch.flexmark.formatter.NodeFormatter;
-import com.vladsch.flexmark.formatter.NodeFormatterFactory;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.ListOptions;
 import com.vladsch.flexmark.parser.Parser;
-import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 

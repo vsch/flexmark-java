@@ -35,8 +35,8 @@ public interface SpecExampleProcessor {
      * @param exampleParse    example parse state
      * @param exampleOptions  example options
      * @param ignoredTestCase true if ignored example
-     * @param html      html used for comparison to expected html
-     * @param ast       ast used for comparison to expected ast
+     * @param html            html used for comparison to expected html
+     * @param ast             ast used for comparison to expected ast
      */
     void addSpecExample(@NotNull SpecExampleRenderer exampleRenderer, @NotNull SpecExampleParse exampleParse, @Nullable DataHolder exampleOptions, boolean ignoredTestCase, @NotNull String html, @Nullable String ast);
 }

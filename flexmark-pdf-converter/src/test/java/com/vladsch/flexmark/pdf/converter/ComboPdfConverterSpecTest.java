@@ -30,14 +30,13 @@ public class ComboPdfConverterSpecTest extends ComboSpecTestCase {
         optionsMap.put("ltr-text", new MutableDataSet().set(PdfConverterExtension.DEFAULT_TEXT_DIRECTION, PdfRendererBuilder.TextDirection.LTR));
         optionsMap.put("rtl-text", new MutableDataSet().set(PdfConverterExtension.DEFAULT_TEXT_DIRECTION, PdfRendererBuilder.TextDirection.RTL));
     }
-
     public ComboPdfConverterSpecTest(SpecExample example) {
         super(example);
     }
 
     @Parameterized.Parameters(name = "{0}")
     public static List<Object[]> data() {
-        return getTestData( SPEC_RESOURCE);
+        return getTestData(SPEC_RESOURCE);
     }
 
     @Nullable

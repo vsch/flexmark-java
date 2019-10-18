@@ -4,7 +4,10 @@ import com.vladsch.flexmark.ast.Text;
 import com.vladsch.flexmark.ast.TextBase;
 import com.vladsch.flexmark.parser.block.DocumentPostProcessor;
 import com.vladsch.flexmark.parser.block.DocumentPostProcessorFactory;
-import com.vladsch.flexmark.util.ast.*;
+import com.vladsch.flexmark.util.ast.DoNotDecorate;
+import com.vladsch.flexmark.util.ast.Document;
+import com.vladsch.flexmark.util.ast.NodeVisitor;
+import com.vladsch.flexmark.util.ast.VisitHandler;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 public class ZzzzzzDocumentPostProcessor extends DocumentPostProcessor {

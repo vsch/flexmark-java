@@ -34,9 +34,13 @@ public class NodeVisitorTest {
 
         // generic node handler when specific one is not defined
         public void visit(Node node) {}
+
         public void visit(Block node) {}
+
         public void visit(BlankLine node) {}
+
         public void visit(ContentNode node) {}
+
         public void visit(Document node) {}
     }
 
@@ -51,8 +55,13 @@ public class NodeVisitorTest {
 
         // generic node handler when specific one is not defined
         public void visit(Node node) {}
+
         public void visit(Block node) {}
+
         public void visit(BlankLine node) {}
+
         public void visit(ContentNode node) {}
-        public void visit(Document node) {}}
+
+        public void visit(Document node) {}
+    }
 }

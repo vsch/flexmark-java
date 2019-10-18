@@ -542,8 +542,7 @@ public class MarkdownTable {
         TableRow currentRow = tableSection.get(tableSection.row);
 
         // skip cells that are already set
-        while (tableSection.column < currentRow.cells.size() && currentRow.cells.get(tableSection.column) != null)
-            tableSection.column++;
+        while (tableSection.column < currentRow.cells.size() && currentRow.cells.get(tableSection.column) != null) { tableSection.column++; }
 
         int rowSpan = 0;
         while (rowSpan < cell.rowSpan) {

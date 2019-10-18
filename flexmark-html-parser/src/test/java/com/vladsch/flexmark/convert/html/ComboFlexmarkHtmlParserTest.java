@@ -9,8 +9,6 @@ import com.vladsch.flexmark.test.FlexmarkSpecExampleRenderer;
 import com.vladsch.flexmark.test.SpecExampleRenderer;
 import com.vladsch.flexmark.util.Ref;
 import com.vladsch.flexmark.util.ast.Document;
-import com.vladsch.flexmark.util.ast.IParse;
-import com.vladsch.flexmark.util.ast.IRender;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import org.jetbrains.annotations.NotNull;
@@ -129,7 +127,7 @@ public class ComboFlexmarkHtmlParserTest extends ComboSpecTestCase {
 
     @Parameterized.Parameters(name = "{0}")
     public static List<Object[]> data() {
-        return getTestData( SPEC_RESOURCE);
+        return getTestData(SPEC_RESOURCE);
     }
 
     @Nullable
@@ -148,7 +146,7 @@ public class ComboFlexmarkHtmlParserTest extends ComboSpecTestCase {
     public @NotNull SpecExampleRenderer getSpecExampleRenderer(@NotNull SpecExample example, @Nullable DataHolder exampleOptions) {
         DataHolder combineOptions = combineOptions(OPTIONS, exampleOptions);
         return new FlexmarkSpecExampleRenderer(example, combineOptions, new HtmlParser(combineOptions), new HtmlRootNodeRenderer(combineOptions), true);
-}
+    }
 
     @NotNull
     @Override

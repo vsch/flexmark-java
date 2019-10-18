@@ -37,12 +37,12 @@ public class FullOrigSpecCoreTest extends FullSpecTestCase {
         return Parser.builder(OPTIONS).build();
     }
 
-@NotNull
+    @NotNull
     public HtmlRenderer renderer(@Nullable DataHolder OPTIONS) {
         return HtmlRenderer.builder(OPTIONS).build();
     }
 
-@Override
+    @Override
     public @NotNull SpecExampleRenderer getSpecExampleRenderer(@NotNull SpecExample example, @Nullable DataHolder exampleOptions) {
         DataHolder combinedOptions = combineOptions(OPTIONS, exampleOptions);
         return new FlexmarkSpecExampleRenderer(example, combinedOptions, parser(combinedOptions), renderer(combinedOptions), false);

@@ -6,7 +6,6 @@ import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.test.ComboSpecTestCase;
 import com.vladsch.flexmark.test.FlexmarkSpecExampleRenderer;
 import com.vladsch.flexmark.test.SpecExampleRenderer;
-import com.vladsch.flexmark.test.TestUtils;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import com.vladsch.flexmark.util.format.options.ElementPlacement;
@@ -42,14 +41,13 @@ public class ComboAbbreviationFormatterSpecTest extends ComboSpecTestCase {
         optionsMap.put("references-sort", new MutableDataSet().set(AbbreviationExtension.ABBREVIATIONS_SORT, ElementPlacementSort.SORT));
         optionsMap.put("references-sort-unused-last", new MutableDataSet().set(AbbreviationExtension.ABBREVIATIONS_SORT, ElementPlacementSort.SORT_UNUSED_LAST));
     }
-
     public ComboAbbreviationFormatterSpecTest(SpecExample example) {
         super(example);
     }
 
     @Parameterized.Parameters(name = "{0}")
     public static List<Object[]> data() {
-        return getTestData( SPEC_RESOURCE);
+        return getTestData(SPEC_RESOURCE);
     }
 
     @Nullable
@@ -64,10 +62,9 @@ public class ComboAbbreviationFormatterSpecTest extends ComboSpecTestCase {
         return SPEC_RESOURCE;
     }
 
-
     @Override
     public @NotNull SpecExampleRenderer getSpecExampleRenderer(@NotNull SpecExample example, @Nullable DataHolder exampleOptions) {
         DataHolder combinedOptions = combineOptions(OPTIONS, exampleOptions);
         return new FlexmarkSpecExampleRenderer(example, combinedOptions, Parser.builder(combinedOptions).build(), Formatter.builder(combinedOptions).build(), true);
-}
+    }
 }

@@ -6,9 +6,6 @@ import com.vladsch.flexmark.spec.SpecReader;
 import com.vladsch.flexmark.test.ComboSpecTestCase;
 import com.vladsch.flexmark.test.FlexmarkSpecExampleRenderer;
 import com.vladsch.flexmark.test.SpecExampleRenderer;
-import com.vladsch.flexmark.test.TestUtils;
-import com.vladsch.flexmark.util.ast.IParse;
-import com.vladsch.flexmark.util.ast.IRender;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import com.vladsch.flexmark.util.format.TableFormatOptions;
@@ -58,14 +55,13 @@ public class ComboAppHtmlConverterTest extends ComboSpecTestCase {
         optionsMap.put("math-text", new MutableDataSet().set(FlexmarkHtmlConverter.EXT_MATH, ExtensionConversion.TEXT));
         optionsMap.put("math-markdown", new MutableDataSet().set(FlexmarkHtmlConverter.EXT_MATH, ExtensionConversion.MARKDOWN));
     }
-
     public ComboAppHtmlConverterTest(SpecExample example) {
         super(example);
     }
 
     @Parameterized.Parameters(name = "{0}")
     public static List<Object[]> data() {
-        return getTestData( SPEC_RESOURCE);
+        return getTestData(SPEC_RESOURCE);
     }
 
     @Nullable
@@ -85,7 +81,7 @@ public class ComboAppHtmlConverterTest extends ComboSpecTestCase {
     SpecExampleRenderer getSpecExampleRenderer(@NotNull SpecExample example, @Nullable DataHolder exampleOptions) {
         DataHolder combineOptions = combineOptions(OPTIONS, exampleOptions);
         return new FlexmarkSpecExampleRenderer(example, combineOptions, new HtmlConverter(combineOptions), new HtmlRootNodeRenderer(combineOptions), true);
-}
+    }
 
     @NotNull
     @Override

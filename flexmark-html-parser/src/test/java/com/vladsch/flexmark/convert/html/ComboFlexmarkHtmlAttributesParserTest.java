@@ -6,8 +6,6 @@ import com.vladsch.flexmark.spec.SpecReader;
 import com.vladsch.flexmark.test.ComboSpecTestCase;
 import com.vladsch.flexmark.test.FlexmarkSpecExampleRenderer;
 import com.vladsch.flexmark.test.SpecExampleRenderer;
-import com.vladsch.flexmark.util.ast.IParse;
-import com.vladsch.flexmark.util.ast.IRender;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import org.jetbrains.annotations.NotNull;
@@ -18,8 +16,6 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import static org.junit.Assert.assertEquals;
 
 public class ComboFlexmarkHtmlAttributesParserTest extends ComboSpecTestCase {
     private static final String SPEC_RESOURCE = "/flexmark_html_attributes_parser_spec.md";
@@ -71,14 +67,13 @@ public class ComboFlexmarkHtmlAttributesParserTest extends ComboSpecTestCase {
         optionsMap.put("html-ext-inline-sub", new MutableDataSet().set(FlexmarkHtmlParser.EXT_INLINE_SUB, ExtensionConversion.HTML));
         optionsMap.put("html-ext-inline-sup", new MutableDataSet().set(FlexmarkHtmlParser.EXT_INLINE_SUP, ExtensionConversion.HTML));
     }
-
     public ComboFlexmarkHtmlAttributesParserTest(SpecExample example) {
         super(example);
     }
 
     @Parameterized.Parameters(name = "{0}")
     public static List<Object[]> data() {
-        return getTestData( SPEC_RESOURCE);
+        return getTestData(SPEC_RESOURCE);
     }
 
     @Nullable
@@ -97,7 +92,7 @@ public class ComboFlexmarkHtmlAttributesParserTest extends ComboSpecTestCase {
     public @NotNull SpecExampleRenderer getSpecExampleRenderer(@NotNull SpecExample example, @Nullable DataHolder exampleOptions) {
         DataHolder combineOptions = combineOptions(OPTIONS, exampleOptions);
         return new FlexmarkSpecExampleRenderer(example, combineOptions, new HtmlParser(combineOptions), new HtmlRootNodeRenderer(combineOptions), true);
-}
+    }
 
     @NotNull
     @Override

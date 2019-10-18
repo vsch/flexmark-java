@@ -27,14 +27,13 @@ public class ComboMediaTagsPictureLinkSpecTest extends ComboSpecTestCase {
     static {
         // optionsMap data would go here, if I had some to set
     }
-
     public ComboMediaTagsPictureLinkSpecTest(SpecExample example) {
         super(example);
     }
 
     @Parameterized.Parameters(name = "{0}")
     public static List<Object[]> data() {
-        return getTestData( SPEC_RESOURCE);
+        return getTestData(SPEC_RESOURCE);
     }
 
     @Nullable

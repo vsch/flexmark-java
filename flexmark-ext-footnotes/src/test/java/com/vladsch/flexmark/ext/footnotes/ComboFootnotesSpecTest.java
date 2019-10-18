@@ -38,7 +38,6 @@ public class ComboFootnotesSpecTest extends ComboSpecTestCase {
         optionsMap.put("back-link-class-text", new MutableDataSet().set(FootnoteExtension.FOOTNOTE_BACK_LINK_REF_CLASS, "text"));
         optionsMap.put("item-indent-8", new MutableDataSet().set(Parser.LISTS_ITEM_INDENT, 8));
     }
-
     static DataHolder optionsSet(String optionSet) {
         return optionsMap.get(optionSet);
     }
@@ -49,7 +48,7 @@ public class ComboFootnotesSpecTest extends ComboSpecTestCase {
 
     @Parameterized.Parameters(name = "{0}")
     public static List<Object[]> data() {
-        return getTestData( SPEC_RESOURCE);
+        return getTestData(SPEC_RESOURCE);
     }
 
     @Nullable
@@ -63,9 +62,10 @@ public class ComboFootnotesSpecTest extends ComboSpecTestCase {
     public String getSpecResourceName() {
         return SPEC_RESOURCE;
     }
+
     @Override
     public @NotNull SpecExampleRenderer getSpecExampleRenderer(@NotNull SpecExample example, @Nullable DataHolder exampleOptions) {
         DataHolder combinedOptions = combineOptions(OPTIONS, exampleOptions);
         return new FlexmarkSpecExampleRenderer(example, combinedOptions, Parser.builder(combinedOptions).build(), HtmlRenderer.builder(combinedOptions).build(), true);
-}
+    }
 }
