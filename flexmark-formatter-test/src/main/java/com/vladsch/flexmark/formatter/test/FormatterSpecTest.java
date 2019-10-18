@@ -16,7 +16,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 
-public abstract class ComboFormatterSpecTestBase extends ComboSpecTestCase {
+public abstract class FormatterSpecTest extends ComboSpecTestCase {
     static final boolean SKIP_IGNORED_TESTS = true;
 
     private static final DataHolder OPTIONS = new MutableDataSet()
@@ -37,8 +37,8 @@ public abstract class ComboFormatterSpecTestBase extends ComboSpecTestCase {
         optionsMap.put("max-blank-lines-3", new MutableDataSet().set(Formatter.MAX_BLANK_LINES, 3));
         optionsMap.put("no-tailing-blanks", new MutableDataSet().set(Formatter.MAX_TRAILING_BLANK_LINES, 0));
     }
-    public ComboFormatterSpecTestBase(@NotNull SpecExample example, @Nullable DataHolder... defaultOptions) {
-        super(example, optionsMap, dataHolders(OPTIONS, defaultOptions));
+    public FormatterSpecTest(@NotNull SpecExample example, @Nullable Map<String, DataHolder> optionMap, @Nullable DataHolder... defaultOptions) {
+        super(example, optionsMaps(optionsMap, optionMap), dataHolders(OPTIONS, defaultOptions));
     }
 
     @Override

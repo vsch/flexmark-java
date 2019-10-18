@@ -17,6 +17,8 @@ import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.data.MutableDataSet;
+import com.vladsch.flexmark.util.format.options.ElementPlacement;
+import com.vladsch.flexmark.util.format.options.ElementPlacementSort;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -26,7 +28,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public abstract class ComboTranslationFormatterSpecTestBase extends ComboSpecTestCase {
+public abstract class TranslationFormatterSpecTest extends ComboSpecTestCase {
     static final boolean SKIP_IGNORED_TESTS = true;
     private static final boolean SHOW_INTERMEDIATE = false;
     private static final boolean SHOW_INTERMEDIATE_AST = false;
@@ -57,8 +59,20 @@ public abstract class ComboTranslationFormatterSpecTestBase extends ComboSpecTes
         optionsMap.put("no-tailing-blanks", new MutableDataSet().set(Formatter.MAX_TRAILING_BLANK_LINES, 0));
     }
 
-    public ComboTranslationFormatterSpecTestBase(@NotNull SpecExample example, @Nullable DataHolder... options) {
-        super(example, optionsMap, dataHolders(OPTIONS, options));
+    public static @NotNull Map<String, DataHolder> placementAndSortOptions(DataKey<ElementPlacement> placementDataKey, DataKey<ElementPlacementSort> sortDataKey) {
+        Map<String, DataHolder> optionsMap = new HashMap<>();
+        optionsMap.put("references-as-is", new MutableDataSet().set(placementDataKey, ElementPlacement.AS_IS));
+        optionsMap.put("references-document-top", new MutableDataSet().set(placementDataKey, ElementPlacement.DOCUMENT_TOP));
+        optionsMap.put("references-group-with-first", new MutableDataSet().set(placementDataKey, ElementPlacement.GROUP_WITH_FIRST));
+        optionsMap.put("references-group-with-last", new MutableDataSet().set(placementDataKey, ElementPlacement.GROUP_WITH_LAST));
+        optionsMap.put("references-document-bottom", new MutableDataSet().set(placementDataKey, ElementPlacement.DOCUMENT_BOTTOM));
+        optionsMap.put("references-sort", new MutableDataSet().set(sortDataKey, ElementPlacementSort.SORT));
+        optionsMap.put("references-sort-unused-last", new MutableDataSet().set(sortDataKey, ElementPlacementSort.SORT_UNUSED_LAST));
+        return optionsMap;
+    }
+
+    public TranslationFormatterSpecTest(@NotNull SpecExample example, @Nullable Map<String, DataHolder> optionMap, @Nullable DataHolder... defaultOptions) {
+        super(example, optionsMaps(optionsMap, optionMap), dataHolders(OPTIONS, defaultOptions));
     }
 
     private Parser getParser(@Nullable DataHolder OPTIONS) {
