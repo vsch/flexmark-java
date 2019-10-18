@@ -1,6 +1,7 @@
 package com.vladsch.flexmark.test;
 
 import com.vladsch.flexmark.spec.SpecExample;
+import com.vladsch.flexmark.util.SharedDataKeys;
 import com.vladsch.flexmark.util.builder.BuilderBase;
 import com.vladsch.flexmark.util.builder.Extension;
 import com.vladsch.flexmark.util.data.DataHolder;
@@ -35,7 +36,7 @@ public abstract class RenderingTestCase implements SpecExampleProcessor {
     public static final String DEFAULT_URL_PREFIX = TestUtils.DEFAULT_URL_PREFIX;
     public static final DataKey<Collection<Extension>> UNLOAD_EXTENSIONS = TestUtils.UNLOAD_EXTENSIONS;
     public static final DataKey<Collection<Extension>> LOAD_EXTENSIONS = TestUtils.LOAD_EXTENSIONS;
-    public static final DataKey<Collection<Extension>> EXTENSIONS = BuilderBase.EXTENSIONS;
+    public static final DataKey<Collection<Extension>> EXTENSIONS = SharedDataKeys.EXTENSIONS;
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
