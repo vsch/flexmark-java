@@ -1,31 +1,27 @@
 package com.vladsch.flexmark.convert.html;
 
 import com.vladsch.flexmark.html.HtmlRenderer;
+import com.vladsch.flexmark.test.spec.ResourceLocation;
 import com.vladsch.flexmark.test.spec.SpecExample;
 import com.vladsch.flexmark.test.spec.SpecReader;
 import com.vladsch.flexmark.test.util.ComboSpecTestCase;
 import com.vladsch.flexmark.test.util.FlexmarkSpecExampleRenderer;
 import com.vladsch.flexmark.test.util.SpecExampleRenderer;
-import com.vladsch.flexmark.util.ast.IParse;
-import com.vladsch.flexmark.util.ast.IRender;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.junit.runners.Parameterized;
 
-import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ComboHtmlParserIssueTest extends ComboSpecTestCase {
+public class ComboHtmlParserTestBase extends ComboSpecTestCase {
     private static final String SPEC_RESOURCE = "/html_parser_issue_spec.md";
-    private static final DataHolder OPTIONS = new MutableDataSet()
+    @SuppressWarnings("deprecation") private static final DataHolder OPTIONS = new MutableDataSet()
             .set(HtmlRenderer.INDENT_SIZE, 2)
             .set(FlexmarkHtmlParser.OUTPUT_ATTRIBUTES_ID, false)
-            //.set(HtmlRenderer.PERCENT_ENCODE_URLS, true)
-            //.set(Parser.EXTENSIONS, Collections.singleton(FlexmarkHtmlParser.create())
             ;
 
     private static final Map<String, DataHolder> optionsMap = new HashMap<>();
@@ -54,12 +50,7 @@ public class ComboHtmlParserIssueTest extends ComboSpecTestCase {
         optionsMap.put("skip-heading-6", new MutableDataSet().set(FlexmarkHtmlParser.SKIP_HEADING_6, true));
         optionsMap.put("skip-attributes", new MutableDataSet().set(FlexmarkHtmlParser.SKIP_ATTRIBUTES, true));
     }
-
-    private static final IParse PARSER = new HtmlParser(OPTIONS);
-
-    private static final IRender RENDERER = new HtmlRootNodeRenderer(OPTIONS);
-
-    public ComboHtmlParserIssueTest(SpecExample example) {
+    public ComboHtmlParserTestBase(SpecExample example) {
         super(example);
     }
 
@@ -74,10 +65,9 @@ public class ComboHtmlParserIssueTest extends ComboSpecTestCase {
         return optionsMap.get(option);
     }
 
-    @NotNull
     @Override
-    public String getSpecResourceName() {
-        return SPEC_RESOURCE;
+    public @NotNull ResourceLocation getSpecResourceLocation() {
+        return ResourceLocation.of(SPEC_RESOURCE);
     }
 
     @Override
@@ -88,9 +78,8 @@ public class ComboHtmlParserIssueTest extends ComboSpecTestCase {
 
     @NotNull
     @Override
-    public SpecReader create(@NotNull InputStream inputStream, @Nullable String fileUrl) {
-        dumpSpecReader = new HtmlSpecReader(inputStream, this, fileUrl);
-        return dumpSpecReader;
+    public HtmlSpecReader create(@NotNull ResourceLocation location) {
+        return SpecReader.create(location, (stream, fileUrl) -> new HtmlSpecReader(stream, this, fileUrl));
     }
 
     @Override
