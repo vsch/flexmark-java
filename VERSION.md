@@ -7,14 +7,13 @@ flexmark-java
 
 - [To Do](#to-do)
 - [Next 0.60.0](#next-0600)
-    - [0.5.9.3](#0593)
     - [API Change](#api-change)
-    - [Next 0.5.9.13](#next-05913)
-    - [0.5.9.11](#05911)
-    - [0.5.9.9](#0599)
-    - [0.5.9.7](#0597)
-    - [0.5.9.5](#0595)
-    - [0.5.9.1](#0591)
+- [Next 0.59.13](#next-05913)
+    - [0.59.11](#05911)
+    - [0.59.9](#0599)
+    - [0.59.7](#0597)
+    - [0.59.5](#0595)
+    - [0.59.1](#0591)
 - [0.50.42](#05042)
 - [0.50.40](#05040)
 - [0.50.38](#05038)
@@ -119,9 +118,8 @@ flexmark-java
 * [ ] Add: `flexmark-ext-attributes` formatting of individual attributes instead of dumping the
       attributes node text.
 
-## Next 0.60.0
-
-### 0.5.9.3
+Next 0.60.0
+-----------
 
 ### API Change
 
@@ -180,7 +178,8 @@ flexmark-java
     * `com.vladsch.flexmark.util.ast.NodeAdaptingVisitHandler`
     * `com.vladsch.flexmark.util.ast.NodeAdaptingVisitor`
 
-### Next 0.5.9.13
+Next 0.59.13
+------------
 
 * [ ] Fix: Change spec example to variable number of sections
 * [ ] Fix: Create base classes for handling spec tests without needing to inherit from
@@ -191,7 +190,7 @@ flexmark-java
       spec test and not requiring deep inheritance dependencies. Merge full test spec and
       individual tests. for example see MdNav `LightPlatformCodeInsightSpecTestCase`
 
-### 0.5.9.11
+### 0.59.11
 
 * Fix: remove need to load/unload extensions. Properly handle removal from `EXTENSIONS` property
   for those tests that need it by implementing `LOAD_EXTENSIONS` property and
@@ -210,7 +209,7 @@ flexmark-java
   formats as it was in original markdown to allow preserving format as is when it is not
   significant or confusing.
 
-### 0.5.9.9
+### 0.59.9
 
 * Fix: `NO_EOL` option for tests was applied inconsistently.
 * Fix: add `SpecExample` argument to `getSpecExampleRenderer`
@@ -223,7 +222,7 @@ flexmark-java
     default will change to `FencedCodeAddType.ADD_TO_PRE` since attributes after info are used
     to add to the `code` tag.
 
-### 0.5.9.7
+### 0.59.7
 
 * Add: `SpecExampleRenderer.finalizeRender()` to allow tests and others to clean up after each
   rendering
@@ -234,12 +233,12 @@ flexmark-java
   apply changes to options.
 * Fix: add dual argument constructor to `MutableDataSet`
 
-### 0.5.9.5
+### 0.59.5
 
 * Fix: change `AttributesExtension.FENCED_CODE_INFO_ATTRIBUTES` to default `false` to match
   previous versions.
 
-### 0.5.9.1
+### 0.59.1
 
 * Fix: MarkdownTable index out of bounds in some functions when table has no rows
 * Fix: `DataSet` copy constructors to accept `null`
