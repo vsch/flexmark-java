@@ -15,7 +15,7 @@ flexmark-java
     - [0.5.9.7](#0597)
     - [0.5.9.5](#0595)
     - [0.5.9.1](#0591)
-- [Next 0.50.42](#next-05042)
+- [0.50.42](#05042)
 - [0.50.40](#05040)
 - [0.50.38](#05038)
 - [0.50.36](#05036)
@@ -261,11 +261,33 @@ flexmark-java
   `NodeAdaptedVisitor.getHandler(Node)`, `NodeAdaptedVisitor.getHandler(Class<?>)`, and
   `NodeAdaptedVisitor.getNodeClasses()` to get access to contained data.
 
-Next 0.50.42
-------------
+0.50.42
+-------
 
-* [ ] Fix: change `AttributesExtension.FENCED_CODE_INFO_ATTRIBUTES` to default `false` to match
-      previous versions.
+* Fix: regression bug [#372, \[Regression?\] Attributes extension not applied to \`code\` tag of code blocks]
+  * Add: `AttributesExtension.FENCED_CODE_ADD_ATTRIBUTES`, default
+    `FencedCodeAddType.ADD_TO_PRE_CODE` for backward compatibility with 0.42, but if this is
+    option is not set and `AttributesExtension.FENCED_CODE_INFO_ATTRIBUTES` is set to `true`,
+    default will change to `FencedCodeAddType.ADD_TO_PRE` since attributes after info are used
+    to add to the `code` tag.
+* Fix: data set copy constructors to accept `null`
+* Fix: change `DataSet.keySet()` to `DataSet.getKeys()`
+  * Deprecate: `DataSet.keySet()`
+* Add: `BasedSequence.extendByAny(CharSequence charSet, int maxCount)` to extend the based
+  sequence to include any following contiguous characters from the underlying based sequence
+  that are in `charSet`. Variations include `BasedSequence.extendByAny(CharSequence)` for
+  unlimited count and `BasedSequence.extendByOneOfAny(CharSequence)` for max count of 1.
+* Add: `BasedSequence.extendToAny(CharSequence charSet, int maxCount)` to extend the based
+  sequence to include first of any following characters from the underlying based sequence that
+  are in `charSet`. Variations include `BasedSequence.extendToAny(CharSequence)` for unlimited
+  count.
+* Add: `BasedSequence.prefixWithIndent(int maxColumns)` to extend the based sequence to include
+  leading indent from the underlying based sequence up to a maximum of given columns. Tabs are
+  taken into account as set to 4 space columns. Variations include
+  `BasedSequence.prefixWithIndent()` for unlimited indent.
+* Break: make `NodeAdaptedVisitor.myCustomHandlersMap` private. Use
+  `NodeAdaptedVisitor.getHandler(Node)`, `NodeAdaptedVisitor.getHandler(Class<?>)`, and
+  `NodeAdaptedVisitor.getNodeClasses()` to get access to contained data.
 
 0.50.40
 -------
