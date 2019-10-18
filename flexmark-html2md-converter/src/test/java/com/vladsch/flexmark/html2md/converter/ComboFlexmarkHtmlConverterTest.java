@@ -2,6 +2,7 @@ package com.vladsch.flexmark.html2md.converter;
 
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.test.spec.ResourceLocation;
 import com.vladsch.flexmark.test.spec.SpecExample;
 import com.vladsch.flexmark.test.spec.SpecReader;
 import com.vladsch.flexmark.test.util.ComboSpecTestCase;
@@ -114,7 +115,7 @@ public class ComboFlexmarkHtmlConverterTest extends ComboSpecTestCase {
                 "");
     }
 
-    public ComboFlexmarkHtmlConverterTest(SpecExample example) {
+    public ComboFlexmarkHtmlConverterTest(@NotNull SpecExample example) {
         super(example);
     }
 
@@ -123,16 +124,9 @@ public class ComboFlexmarkHtmlConverterTest extends ComboSpecTestCase {
         return getTestData(SPEC_RESOURCE);
     }
 
-    @Nullable
     @Override
-    public DataHolder options(String option) {
-        return optionsMap.get(option);
-    }
-
-    @NotNull
-    @Override
-    public String getSpecResourceName() {
-        return SPEC_RESOURCE;
+    public @NotNull ResourceLocation getSpecResourceLocation() {
+        return ResourceLocation.of(SPEC_RESOURCE);
     }
 
     @Override
@@ -144,9 +138,8 @@ public class ComboFlexmarkHtmlConverterTest extends ComboSpecTestCase {
 
     @NotNull
     @Override
-    public SpecReader create(@NotNull InputStream inputStream, @Nullable String fileUrl) {
-        dumpSpecReader = new HtmlSpecReader(inputStream, this, fileUrl);
-        return dumpSpecReader;
+    public HtmlSpecReader create(@NotNull ResourceLocation location) {
+        return SpecReader.create(location, (stream, fileUrl) -> new HtmlSpecReader(stream, this, fileUrl));
     }
 
     @Override
