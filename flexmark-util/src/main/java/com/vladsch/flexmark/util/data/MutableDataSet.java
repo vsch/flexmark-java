@@ -9,10 +9,6 @@ public class MutableDataSet extends DataSet implements MutableDataHolder {
         super(other);
     }
 
-    public MutableDataSet(DataHolder other, DataHolder overrides) {
-        super(other, overrides);
-    }
-
     @Override
     public <T> MutableDataSet set(DataKey<T> key, T value) {
         dataSet.put(key, value);
@@ -20,16 +16,26 @@ public class MutableDataSet extends DataSet implements MutableDataHolder {
     }
 
     @Override
-    public MutableDataHolder setFrom(MutableDataSetter dataSetter) {
-        return dataSetter.setIn(this);
+    public MutableDataSet setFrom(MutableDataSetter dataSetter) {
+        dataSetter.setIn(this);
+        return this;
     }
 
     @Override
     public MutableDataSet setAll(DataHolder other) {
-        for (DataKey<?> key : other.getKeys()) {
-            dataSet.put(key, key.getFrom(other));
-        }
+        DataSet original = new DataSet(this); //keep a copy in case we have aggregateAction keys which other also has
+        dataSet.putAll(other.getAll());
         return this;
+    }
+
+    public static MutableDataSet merge(DataHolder... dataHolders) {
+        MutableDataSet dataSet = new MutableDataSet();
+        for (DataHolder dataHolder : dataHolders) {
+            if (dataHolder != null) {
+                dataSet.dataSet.putAll(dataHolder.getAll());
+            }
+        }
+        return dataSet;
     }
 
     @Override
@@ -61,26 +67,18 @@ public class MutableDataSet extends DataSet implements MutableDataHolder {
         }
     }
 
-    public static MutableDataSet merge(DataHolder... dataHolders) {
-        MutableDataSet dataSet = new MutableDataSet();
-        for (DataHolder dataHolder : dataHolders) {
-            if (dataHolder != null) dataSet.dataSet.putAll(dataHolder.getAll());
-        }
-        return dataSet;
-    }
-
     @Override
     public MutableDataSet toMutable() {
         return this;
     }
 
     @Override
-    public DataHolder toImmutable() {
+    public DataSet toImmutable() {
         return new DataSet(this);
     }
 
     @Override
-    public MutableDataHolder clear() {
+    public MutableDataSet clear() {
         dataSet.clear();
         return this;
     }

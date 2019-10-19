@@ -24,7 +24,7 @@ public class ComboAutolinkSpecTest extends RendererSpecTest {
 
     private static final Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
-        optionsMap.put("no-autolink", new MutableDataSet().set(TestUtils.UNLOAD_EXTENSIONS, Collections.singleton(AutolinkExtension.class)));
+        optionsMap.put("no-autolink", new MutableDataSet().set(TestUtils.UNLOAD_EXTENSIONS, Collections.singletonList(AutolinkExtension.class)));
         optionsMap.put("ignore-google", new MutableDataSet().set(AutolinkExtension.IGNORE_LINKS, "www.google.com"));
         optionsMap.put("intellij-dummy", new MutableDataSet().set(Parser.INTELLIJ_DUMMY_IDENTIFIER, true));
         optionsMap.put("typographic-ext", new MutableDataSet().set(Parser.EXTENSIONS, Arrays.asList(AutolinkExtension.create(), TypographicExtension.create())));

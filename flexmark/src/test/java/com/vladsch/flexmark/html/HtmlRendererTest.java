@@ -1,4 +1,4 @@
-package com.vladsch.flexmark.test.util;
+package com.vladsch.flexmark.html;
 
 import com.vladsch.flexmark.ast.FencedCodeBlock;
 import com.vladsch.flexmark.ast.Image;

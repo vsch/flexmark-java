@@ -9,6 +9,7 @@ flexmark-java
 - [Next 0.60.0](#next-0600)
     - [API Changes](#api-changes)
 - [Next 0.59.21](#next-05921)
+- [0.59.21](#05921)
 - [0.59.19](#05919)
 - [0.59.17](#05917)
 - [0.59.15](#05915)
@@ -155,6 +156,17 @@ Next 0.59.21
 * [ ] Fix: URGENT: Rewrite combo spec and full spec to be merged like markdown navigator action
       spec test and not requiring deep inheritance dependencies. Merge full test spec and
       individual tests. for example see MdNav `LightPlatformCodeInsightSpecTestCase`
+
+0.59.21
+-------
+
+* Fix: move flexmark modules test classes out of `test.util` package which is for
+  `flexmark-test-util` module's test classes
+* Add: `DataSet.registerDataKeyAggregator(DataKeyAggregator)` to allow for aggregation action
+  keys and aggregation for combining keys which require this. Only applied in
+  * `DataSet.aggregate()`
+  * `DataSet.aggregate(DataHolder, DataHolder)`
+  * `DataSet.aggregateActions(DataHolder, DataHolder)`
 
 0.59.19
 -------

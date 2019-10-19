@@ -1,4 +1,4 @@
-package com.vladsch.flexmark.test.util;
+package com.vladsch.flexmark.ast;
 
 import com.vladsch.flexmark.ast.Code;
 import com.vladsch.flexmark.ast.Paragraph;

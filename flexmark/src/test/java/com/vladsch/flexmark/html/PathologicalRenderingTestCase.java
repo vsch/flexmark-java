@@ -1,9 +1,14 @@
-package com.vladsch.flexmark.test.util;
+package com.vladsch.flexmark.html;
 
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.test.util.FlexmarkSpecExampleRenderer;
+import com.vladsch.flexmark.test.util.RenderingTestCase;
+import com.vladsch.flexmark.test.util.SpecExampleRenderer;
+import com.vladsch.flexmark.test.util.Strings;
 import com.vladsch.flexmark.test.util.spec.SpecExample;
 import com.vladsch.flexmark.util.data.DataHolder;
+import com.vladsch.flexmark.util.data.DataSet;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -31,7 +36,7 @@ public abstract class PathologicalRenderingTestCase extends RenderingTestCase {
 
     @Override
     final public @NotNull SpecExampleRenderer getSpecExampleRenderer(@NotNull SpecExample example, @Nullable DataHolder exampleOptions) {
-        DataHolder combinedOptions = combineOptions(OPTIONS, exampleOptions);
+        DataHolder combinedOptions = DataSet.aggregate(OPTIONS, exampleOptions);
         return new FlexmarkSpecExampleRenderer(example, combinedOptions, Parser.builder(combinedOptions).build(), HtmlRenderer.builder(combinedOptions).build(), true);
     }
 

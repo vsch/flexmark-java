@@ -24,9 +24,6 @@ public interface SpecExampleProcessor {
         return example;
     }
 
-    // return combined options, some may need more than just overwrites, as in case of consumers that set some instance values
-    @Nullable DataHolder combineOptions(@Nullable DataHolder other, @Nullable DataHolder overrides);
-
     /**
      * Get spec renderer for an example spec
      *

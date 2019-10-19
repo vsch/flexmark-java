@@ -9,6 +9,7 @@ import com.vladsch.flexmark.test.util.SpecExampleRenderer;
 import com.vladsch.flexmark.util.Ref;
 import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.data.DataHolder;
+import com.vladsch.flexmark.util.data.DataSet;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import com.vladsch.flexmark.util.format.TableFormatOptions;
 import org.jetbrains.annotations.NotNull;
@@ -125,7 +126,7 @@ public abstract class HtmlConverterTest extends ComboSpecTestCase {
     @Override
     @NotNull
     final public SpecExampleRenderer getSpecExampleRenderer(@NotNull SpecExample example, @Nullable DataHolder exampleOptions) {
-        DataHolder combineOptions = combineOptions(myDefaultOptions, exampleOptions);
+        DataHolder combineOptions = aggregate(myDefaultOptions, exampleOptions);
         return new FlexmarkSpecExampleRenderer(example, combineOptions, new HtmlConverter(combineOptions), new HtmlRootNodeRenderer(combineOptions), true);
     }
 

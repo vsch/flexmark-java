@@ -5,8 +5,7 @@ import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-        PathologicalTest.class,
-        PathologicalSpcUrlTest.class,
+        LoadUnloadDataKeyAggregatorTest.class,
 })
-final public class PathologicalTestSuite {
+public class TestUtilsTestSuite {
 }

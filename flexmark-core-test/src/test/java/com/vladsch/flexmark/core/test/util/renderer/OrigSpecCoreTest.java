@@ -8,6 +8,7 @@ import com.vladsch.flexmark.test.util.FullSpecTestCase;
 import com.vladsch.flexmark.test.util.SpecExampleRenderer;
 import com.vladsch.flexmark.test.util.TestUtils;
 import com.vladsch.flexmark.util.data.DataHolder;
+import com.vladsch.flexmark.util.data.DataSet;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -21,7 +22,7 @@ public abstract class OrigSpecCoreTest extends FullSpecTestCase {
     final private @Nullable DataHolder myDefaultOptions;
 
     public OrigSpecCoreTest(@Nullable DataHolder defaultOptions) {
-        myDefaultOptions = combineOptions(OPTIONS, defaultOptions);
+        myDefaultOptions = DataSet.aggregate(OPTIONS, defaultOptions);
     }
 
     @Override
@@ -31,7 +32,7 @@ public abstract class OrigSpecCoreTest extends FullSpecTestCase {
 
     @Override
     final public @NotNull SpecExampleRenderer getSpecExampleRenderer(@NotNull SpecExample example, @Nullable DataHolder exampleOptions) {
-        DataHolder combineOptions = combineOptions(myDefaultOptions, exampleOptions);
+        DataHolder combineOptions = DataSet.aggregate(myDefaultOptions, exampleOptions);
         return new FlexmarkSpecExampleRenderer(example, combineOptions, Parser.builder(combineOptions).build(), HtmlRenderer.builder(combineOptions).build(), false);
     }
 }

@@ -1,4 +1,4 @@
-package com.vladsch.flexmark.test.util;
+package com.vladsch.flexmark.parser.delimiter;
 
 import com.vladsch.flexmark.ast.DelimitedNode;
 import com.vladsch.flexmark.ast.Text;
@@ -13,9 +13,14 @@ import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.core.delimiter.Delimiter;
 import com.vladsch.flexmark.parser.delimiter.DelimiterProcessor;
 import com.vladsch.flexmark.parser.delimiter.DelimiterRun;
+import com.vladsch.flexmark.test.util.FlexmarkSpecExampleRenderer;
+import com.vladsch.flexmark.test.util.RenderingTestCase;
+import com.vladsch.flexmark.test.util.SpecExampleRenderer;
+import com.vladsch.flexmark.test.util.TestUtils;
 import com.vladsch.flexmark.test.util.spec.SpecExample;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
+import com.vladsch.flexmark.util.data.DataSet;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import org.jetbrains.annotations.NotNull;
@@ -66,7 +71,7 @@ final public class DelimiterProcessorTest extends RenderingTestCase {
 
     @Override
     public @NotNull SpecExampleRenderer getSpecExampleRenderer(@NotNull SpecExample example, @Nullable DataHolder exampleOptions) {
-        DataHolder combinedOptions = combineOptions(OPTIONS, exampleOptions);
+        DataHolder combinedOptions = DataSet.aggregate(OPTIONS, exampleOptions);
         return new FlexmarkSpecExampleRenderer(example, combinedOptions, PARSER, RENDERER, true);
     }
 

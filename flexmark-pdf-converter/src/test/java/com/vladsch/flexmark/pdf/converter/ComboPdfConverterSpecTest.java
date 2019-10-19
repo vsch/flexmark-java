@@ -9,6 +9,7 @@ import com.vladsch.flexmark.test.util.ComboSpecTestCase;
 import com.vladsch.flexmark.test.util.FlexmarkSpecExampleRenderer;
 import com.vladsch.flexmark.test.util.SpecExampleRenderer;
 import com.vladsch.flexmark.util.data.DataHolder;
+import com.vladsch.flexmark.util.data.DataSet;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -42,7 +43,7 @@ public class ComboPdfConverterSpecTest extends ComboSpecTestCase {
 
     @Override
     public @NotNull SpecExampleRenderer getSpecExampleRenderer(@NotNull SpecExample example, @Nullable DataHolder exampleOptions) {
-        DataHolder combinedOptions = combineOptions(null, exampleOptions);
+        DataHolder combinedOptions = aggregate(null, exampleOptions);
         return new FlexmarkSpecExampleRenderer(example, combinedOptions, Parser.builder(combinedOptions).build(), HtmlRenderer.builder(combinedOptions).build(), true) {
             @Override
             protected @NotNull String renderHtml() {

@@ -36,6 +36,7 @@ import com.vladsch.flexmark.test.util.SpecExampleRenderer;
 import com.vladsch.flexmark.test.util.TestUtils;
 import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.data.DataHolder;
+import com.vladsch.flexmark.util.data.DataSet;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import com.vladsch.flexmark.util.format.options.ElementPlacement;
 import com.vladsch.flexmark.util.format.options.ElementPlacementSort;
@@ -131,7 +132,7 @@ public class ComboFormatterIssueSpecTest extends ComboSpecTestCase {
 
     @Override
     public @NotNull SpecExampleRenderer getSpecExampleRenderer(@NotNull SpecExample example, @Nullable DataHolder exampleOptions) {
-        DataHolder combinedOptions = combineOptions(OPTIONS, exampleOptions);
+        DataHolder combinedOptions = aggregate(OPTIONS, exampleOptions);
         return new FlexmarkSpecExampleRenderer(example, combinedOptions, Parser.builder(combinedOptions).build(), Formatter.builder(combinedOptions).build(), true) {
             @Override
             protected void adjustParserForInclusion() {

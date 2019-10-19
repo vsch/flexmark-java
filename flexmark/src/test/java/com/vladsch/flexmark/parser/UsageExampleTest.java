@@ -1,4 +1,4 @@
-package com.vladsch.flexmark.test.util;
+package com.vladsch.flexmark.parser;
 
 import com.vladsch.flexmark.ast.Text;
 import com.vladsch.flexmark.html.HtmlRenderer;

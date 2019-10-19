@@ -1,9 +1,11 @@
-package com.vladsch.flexmark.test.util;
+package com.vladsch.flexmark.parser;
 
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.test.util.*;
 import com.vladsch.flexmark.test.util.spec.SpecExample;
 import com.vladsch.flexmark.util.data.DataHolder;
+import com.vladsch.flexmark.util.data.DataSet;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -125,7 +127,7 @@ final public class SpecialInputTest extends RenderingTestCase {
 
     @Override
     public @NotNull SpecExampleRenderer getSpecExampleRenderer(@NotNull SpecExample example, @Nullable DataHolder exampleOptions) {
-        DataHolder combineOptions = combineOptions(OPTIONS, exampleOptions);
+        DataHolder combineOptions = DataSet.aggregate(OPTIONS, exampleOptions);
         return new FlexmarkSpecExampleRenderer(example, combineOptions, Parser.builder(combineOptions).build(), HtmlRenderer.builder(combineOptions).build(), true);
     }
 }

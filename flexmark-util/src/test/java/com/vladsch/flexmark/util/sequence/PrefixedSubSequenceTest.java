@@ -1,8 +1,5 @@
-package com.vladsch.flexmark.test.util;
+package com.vladsch.flexmark.util.sequence;
 
-import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.BasedSequenceImpl;
-import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
 import org.junit.Test;
 
 import static junit.framework.TestCase.assertEquals;

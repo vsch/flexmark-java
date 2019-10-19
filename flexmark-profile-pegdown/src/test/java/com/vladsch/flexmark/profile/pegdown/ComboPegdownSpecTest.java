@@ -6,6 +6,7 @@ import com.vladsch.flexmark.test.util.ComboSpecTestCase;
 import com.vladsch.flexmark.test.util.FlexmarkSpecExampleRenderer;
 import com.vladsch.flexmark.test.util.SpecExampleRenderer;
 import com.vladsch.flexmark.util.data.DataHolder;
+import com.vladsch.flexmark.util.data.DataSet;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -34,7 +35,7 @@ public class ComboPegdownSpecTest extends ComboSpecTestCase {
 
     @Override
     public @NotNull SpecExampleRenderer getSpecExampleRenderer(@NotNull SpecExample example, @Nullable DataHolder exampleOptions) {
-        DataHolder combineOptions = combineOptions(OPTIONS, exampleOptions);
+        DataHolder combineOptions = aggregate(OPTIONS, exampleOptions);
         return new FlexmarkSpecExampleRenderer(example, combineOptions, new PegdownParser(combineOptions), new PegdownRenderer(combineOptions), true);
     }
 }

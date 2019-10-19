@@ -10,7 +10,10 @@ public interface DataHolder {
     boolean contains(DataKey<?> key);
     <T> T get(DataKey<T> key);
 
-    MutableDataHolder toMutable();
+    MutableDataSet toMutable();
+    DataSet toImmutable();
 
-    DataHolder toImmutable();
+    default DataSet toDataSet() {
+        return this instanceof DataSet ? (DataSet) this : this instanceof MutableDataHolder ? toMutable() : toImmutable();
+    }
 }

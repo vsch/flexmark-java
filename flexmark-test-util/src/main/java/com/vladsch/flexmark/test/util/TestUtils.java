@@ -3,7 +3,6 @@ package com.vladsch.flexmark.test.util;
 import com.vladsch.flexmark.test.util.spec.ResourceLocation;
 import com.vladsch.flexmark.test.util.spec.SpecExample;
 import com.vladsch.flexmark.test.util.spec.SpecReader;
-import com.vladsch.flexmark.util.SharedDataKeys;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.builder.Extension;
 import com.vladsch.flexmark.util.data.*;
@@ -16,10 +15,9 @@ import org.junit.AssumptionViolatedException;
 import java.io.File;
 import java.net.URL;
 import java.util.*;
-import java.util.function.BiFunction;
 import java.util.function.Function;
 
-import static com.vladsch.flexmark.util.Utils.suffixWithEol;
+import static com.vladsch.flexmark.util.Utils.*;
 
 public class TestUtils {
     public static final String IGNORE_OPTION_NAME = "IGNORE";
@@ -44,8 +42,8 @@ public class TestUtils {
     public static final DataHolder NO_FILE_EOL_FALSE = new MutableDataSet().set(NO_FILE_EOL, false).toImmutable();
     public static final String DEFAULT_SPEC_RESOURCE = "/spec.txt";
     public static final String DEFAULT_URL_PREFIX = "fqn://";  // use class fqn to figure it out
-    public static final DataKey<Collection<Class<? extends Extension>>> UNLOAD_EXTENSIONS = new DataKey<>("UNLOAD_EXTENSIONS", Collections.emptyList());
-    public static final DataKey<Collection<Extension>> LOAD_EXTENSIONS = new DataKey<>("LOAD_EXTENSIONS", Extension.EMPTY_LIST);
+    public static final DataKey<Collection<Class<? extends Extension>>> UNLOAD_EXTENSIONS = LoadUnloadDataKeyAggregator.UNLOAD_EXTENSIONS;
+    public static final DataKey<Collection<Extension>> LOAD_EXTENSIONS = LoadUnloadDataKeyAggregator.LOAD_EXTENSIONS;
     public static final @NotNull ResourceLocation DEFAULT_RESOURCE_LOCATION = ResourceLocation.of(TestUtils.class, TestUtils.DEFAULT_SPEC_RESOURCE, TestUtils.DEFAULT_URL_PREFIX);
 
     /**
@@ -54,14 +52,12 @@ public class TestUtils {
      * @param example         spec example instance for which options are being processed
      * @param optionSets      comma separate list of option set names
      * @param optionsProvider function to take a string option name and provide settings based on it
-     * @param optionsCombiner function that combines options, needed in those cases where simple overwrite of key values is not sufficient
      * @return combined set from applying these options together
      */
-    public static DataHolder getOptions(@NotNull SpecExample example, @Nullable String optionSets, @NotNull Function<String, DataHolder> optionsProvider, @Nullable BiFunction<DataHolder, DataHolder, DataHolder> optionsCombiner) {
+    public static DataHolder getOptions(@NotNull SpecExample example, @Nullable String optionSets, @NotNull Function<String, DataHolder> optionsProvider) {
         if (optionSets == null) return null;
         String[] optionNames = optionSets.replace('\u00A0', ' ').split(",");
         DataHolder options = null;
-        boolean isFirst = true;
         for (String optionName : optionNames) {
             String option = optionName.trim();
             if (option.isEmpty() || option.startsWith("-")) continue;
@@ -96,23 +92,14 @@ public class TestUtils {
                         DataHolder dataSet = optionsProvider.apply(option);
 
                         if (dataSet != null) {
-                            if (isFirst) {
-                                options = new MutableDataSet(options);
-                                isFirst = false;
-                            }
-
-                            if (optionsCombiner != null) {
-                                options = optionsCombiner.apply(options, dataSet);
-                            } else {
-                                // just overwrite
-                                ((MutableDataHolder) options).setAll(dataSet);
-                            }
+                            // CAUTION: have to only aggregate actions here
+                            options = DataSet.aggregateActions(options, dataSet);
                         } else {
                             throw new IllegalStateException("Option " + option + " is not implemented in the RenderingTestCase subclass");
                         }
                     }
 
-                    if (IGNORE.getFrom(options)) {
+                    if (options != null && options.contains(IGNORE) && IGNORE.getFrom(options)) {
                         throwIgnoredOption(example, optionSets, option);
                     }
                     break;
@@ -304,38 +291,12 @@ public class TestUtils {
         }
     }
 
-    public static DataHolder resolveLoadUnload(@Nullable DataHolder options) {
-        if (options != null && (options.contains(LOAD_EXTENSIONS) || options.contains(UNLOAD_EXTENSIONS))) {
-            if (options.contains(SharedDataKeys.EXTENSIONS)) {
-                Collection<Extension> extensions = options.get(SharedDataKeys.EXTENSIONS);
-                Collection<Extension> loadExtensions = options.get(LOAD_EXTENSIONS);
-                Collection<Class<? extends Extension>> unloadExtensions = options.get(UNLOAD_EXTENSIONS);
-                if (!loadExtensions.isEmpty() || !unloadExtensions.isEmpty() && !extensions.isEmpty()) {
-                    LinkedHashSet<Extension> resolvedExtensions = new LinkedHashSet<>(extensions);
-                    resolvedExtensions.addAll(loadExtensions);
-                    resolvedExtensions.removeIf((extension) -> unloadExtensions.contains(extension.getClass()));
-                    return options.toMutable()
-                            .remove(LOAD_EXTENSIONS)
-                            .remove(UNLOAD_EXTENSIONS)
-                            .set(SharedDataKeys.EXTENSIONS, new ArrayList<>(resolvedExtensions))
-                            .toImmutable();
-                }
-            }
-            // just remove the offending keys
-            return options.toMutable()
-                    .remove(LOAD_EXTENSIONS)
-                    .remove(UNLOAD_EXTENSIONS)
-                    .toImmutable();
-        }
-        return options;
-    }
-
     @Nullable
-    public static DataHolder combineDefaultOptions(@Nullable DataHolder[] defaultOptions, @NotNull BiFunction<DataHolder, DataHolder, DataHolder> optionsCombiner) {
+    public static DataHolder combineDefaultOptions(@Nullable DataHolder[] defaultOptions) {
         DataHolder combinedOptions = null;
         if (defaultOptions != null) {
             for (DataHolder options : defaultOptions) {
-                combinedOptions = optionsCombiner.apply(combinedOptions, options);
+                combinedOptions = DataSet.aggregate(combinedOptions, options);
             }
         }
         return combinedOptions == null ? null : combinedOptions.toImmutable();
@@ -365,15 +326,22 @@ public class TestUtils {
         return holders;
     }
 
-    public @Nullable
-    static DataHolder combineLoadUnloadOptions(@Nullable DataHolder other, @Nullable DataHolder overrides) {
-        if (other != null && overrides != null) {
-            DataHolder combinedOptions = new DataSet(resolveLoadUnload(other), overrides);
-            return resolveLoadUnload(combinedOptions);
-        } else if (other != null) {
-            return resolveLoadUnload(other);
-        } else {
-            return resolveLoadUnload(overrides);
+    @NotNull
+    public static String getTestResourceRootDirectoryForModule(@NotNull Class<?> resourceClass, @NotNull String moduleRootPackage) {
+        String fileUrl;
+        fileUrl = getSpecResourceFileUrl(resourceClass, wrapWith(moduleRootPackage, "/", ".txt"), DEFAULT_URL_PREFIX);
+        return removePrefix(removeSuffix(fileUrl, suffixWith(moduleRootPackage, ".txt")), FILE_PROTOCOL);
+    }
+
+    @NotNull
+    public static String getRootDirectoryForModule(@NotNull Class<?> resourceClass, @NotNull String moduleDirectoryName) {
+        // get project root from our class file url path
+        String fileUrl = SpecExample.ofCaller(0, resourceClass, "", "", "").getFileUrl();
+        int pos = fileUrl.indexOf(wrapWith(moduleDirectoryName, '/'));
+        if (pos != -1) {
+            fileUrl = fileUrl.substring(0, pos);
         }
+        fileUrl = fileUrl.substring(FILE_PROTOCOL.length());
+        return fileUrl;
     }
 }

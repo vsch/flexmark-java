@@ -16,10 +16,7 @@ import com.vladsch.flexmark.util.Pair;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.ast.NodeVisitor;
 import com.vladsch.flexmark.util.ast.VisitHandler;
-import com.vladsch.flexmark.util.data.DataHolder;
-import com.vladsch.flexmark.util.data.DataKey;
-import com.vladsch.flexmark.util.data.MutableDataHolder;
-import com.vladsch.flexmark.util.data.MutableDataSet;
+import com.vladsch.flexmark.util.data.*;
 import com.vladsch.flexmark.util.options.OptionsParser;
 import com.vladsch.flexmark.util.options.ParsedOption;
 import com.vladsch.flexmark.util.options.ParsedOptionStatus;
@@ -250,7 +247,7 @@ public class TocOptionsParserTest extends ComboSpecTestCase {
 
     @Override
     public @NotNull SpecExampleRenderer getSpecExampleRenderer(@NotNull SpecExample example, @Nullable DataHolder exampleOptions) {
-        DataHolder OPTIONS = combineOptions(TocOptionsParserTest.OPTIONS, exampleOptions);
+        DataHolder OPTIONS = aggregate(TocOptionsParserTest.OPTIONS, exampleOptions);
         return new FlexmarkSpecExampleRenderer(example, OPTIONS, new Parser(OPTIONS), new Renderer(OPTIONS), true);
     }
 }

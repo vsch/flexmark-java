@@ -1,7 +1,7 @@
-package com.vladsch.flexmark.test.util;
+package com.vladsch.flexmark.parser;
 
 import com.vladsch.flexmark.html.HtmlRenderer;
-import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.test.util.TestUtils;
 import com.vladsch.flexmark.test.util.spec.SpecReader;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Scope;

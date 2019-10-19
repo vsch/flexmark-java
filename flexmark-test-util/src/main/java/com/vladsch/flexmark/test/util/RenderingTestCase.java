@@ -38,20 +38,6 @@ public abstract class RenderingTestCase implements SpecExampleProcessor {
     public ExpectedException thrown = ExpectedException.none();
 
     /**
-     * Override if combining option by overwriting corresponding keys is not sufficient
-     *
-     * @param other     options (set first), can be null
-     * @param overrides options (set second) can be null
-     * @return combined options, default implementation simply overwrites values of corresponding keys in overrides
-     */
-    @Nullable
-    @Override
-    public DataHolder combineOptions(@Nullable DataHolder other, @Nullable DataHolder overrides) {
-        // here we handle load and unload extension directives to convert them to adding/removing extensions from EXTENSIONS
-        return TestUtils.combineLoadUnloadOptions(other, overrides);
-    }
-
-    /**
      * Called after processing individual test case
      *
      * @param exampleRenderer renderer used
@@ -94,7 +80,7 @@ public abstract class RenderingTestCase implements SpecExampleProcessor {
         String optionsSet = example.getOptionsSet();
         String expectedHtml = example.getHtml();
         String expectedAst = example.getAst();
-        DataHolder exampleOptions = TestUtils.getOptions(example, optionsSet, this::options, this::combineOptions);
+        DataHolder exampleOptions = TestUtils.getOptions(example, optionsSet, this::options);
 
         SpecExampleRenderer exampleRenderer = getSpecExampleRenderer(example, exampleOptions);
 

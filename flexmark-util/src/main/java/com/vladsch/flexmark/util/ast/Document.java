@@ -90,25 +90,24 @@ public class Document extends Block implements MutableDataHolder {
     public <T> T getOrCompute(DataKey<T> key) { return dataSet.getOrCompute(key); }
 
     @Override
-    public <T> MutableDataHolder remove(DataKey<T> key) { return dataSet.remove(key); }
+    public <T> MutableDataSet remove(DataKey<T> key) { return dataSet.remove(key); }
 
     @Override
-    public <T> MutableDataHolder set(DataKey<T> key, T value) { return dataSet.set(key, value);}
+    public <T> MutableDataSet set(DataKey<T> key, T value) { return dataSet.set(key, value);}
 
     @Override
-    public MutableDataHolder setFrom(MutableDataSetter dataSetter) { return dataSet.setFrom(dataSetter); }
+    public MutableDataSet setFrom(MutableDataSetter dataSetter) { return dataSet.setFrom(dataSetter); }
 
     @Override
-    public MutableDataHolder setAll(DataHolder other) {
-        dataSet.setAll(other);
-        return dataSet;
+    public MutableDataSet setAll(DataHolder other) {
+        return dataSet.setAll(other);
     }
 
     @Override
-    public MutableDataHolder toMutable() { return dataSet.toMutable(); }
+    public MutableDataSet toMutable() { return dataSet.toMutable(); }
 
     @Override
-    public DataHolder toImmutable() { return dataSet.toImmutable(); }
+    public DataSet toImmutable() { return dataSet.toImmutable(); }
 
     @Override
     public MutableDataHolder clear() {

@@ -6,6 +6,7 @@ import com.vladsch.flexmark.test.util.spec.SpecExample;
 import com.vladsch.flexmark.test.util.FlexmarkSpecExampleRenderer;
 import com.vladsch.flexmark.test.util.SpecExampleRenderer;
 import com.vladsch.flexmark.util.data.DataHolder;
+import com.vladsch.flexmark.util.data.DataSet;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -18,7 +19,7 @@ public abstract class FormatterSpecTest extends FormatterTranslationSpecTestBase
 
     @Override
     final public @NotNull SpecExampleRenderer getSpecExampleRenderer(@NotNull SpecExample example, @Nullable DataHolder exampleOptions) {
-        DataHolder combinedOptions = combineOptions(myDefaultOptions, exampleOptions);
+        DataHolder combinedOptions = aggregate(myDefaultOptions, exampleOptions);
         return new FlexmarkSpecExampleRenderer(example, combinedOptions, Parser.builder(combinedOptions).build(), Formatter.builder(combinedOptions).build(), true);
     }
 }

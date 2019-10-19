@@ -48,7 +48,7 @@ public class DumpSpecReader extends SpecReader {
         boolean ignoredTestCase = false;
 
         try {
-            exampleOptions = TestUtils.getOptions(example, example.getOptionsSet(), testCase::options, testCase::combineOptions);
+            exampleOptions = TestUtils.getOptions(example, example.getOptionsSet(), testCase::options);
         } catch (AssumptionViolatedException ignored) {
             ignoredTestCase = true;
             exampleOptions = null;

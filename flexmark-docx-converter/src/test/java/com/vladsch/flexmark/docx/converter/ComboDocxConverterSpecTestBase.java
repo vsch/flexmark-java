@@ -30,6 +30,7 @@ import com.vladsch.flexmark.test.util.spec.SpecReader;
 import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
+import com.vladsch.flexmark.util.data.DataSet;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import com.vladsch.flexmark.util.html.Attributes;
 import org.apache.log4j.Logger;
@@ -49,7 +50,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.vladsch.flexmark.test.util.TestUtils.FILE_PROTOCOL;
 import static com.vladsch.flexmark.util.Utils.*;
 
 public abstract class ComboDocxConverterSpecTestBase extends ComboSpecTestCase {
@@ -57,25 +57,13 @@ public abstract class ComboDocxConverterSpecTestBase extends ComboSpecTestCase {
     static final boolean SKIP_IGNORED_TESTS = true;
     static final boolean DUMP_TEST_CASE_FILES = !SKIP_IGNORED_TESTS;
     static final boolean DUMP_ALL_TESTS_FILES = !SKIP_IGNORED_TESTS;
-    static final String PROJECT_ROOT_DIRECTORY;
-    static final String TEST_ROOT_DIRECTORY;
+    static final String PROJECT_ROOT_DIRECTORY = TestUtils.getRootDirectoryForModule(ComboDocxConverterSpecTestBase.class, "flexmark-docx-converter");
+    static final String TEST_ROOT_DIRECTORY = TestUtils.getTestResourceRootDirectoryForModule(ComboDocxConverterSpecTestBase.class, "com.vladsch.flexmark.docx.converter");
     public static final String[] EMPTY_STRINGS = new String[0];
     static {
         // Set up a simple configuration that logs on the console.
         Logger root = Logger.getRootLogger();
         root.addAppender(new NullAppender());
-
-        // get project root from our class file url path
-        String fileUrl = SpecExample.ofCaller(0, ComboDocxConverterSpecTestBase.class, "", "", "").getFileUrl();
-        int pos = fileUrl.indexOf("/flexmark-docx-converter");
-        if (pos != -1) {
-            fileUrl = fileUrl.substring(0, pos);
-        }
-        fileUrl = fileUrl.substring(FILE_PROTOCOL.length());
-        PROJECT_ROOT_DIRECTORY = fileUrl;
-
-        fileUrl = TestUtils.getSpecResourceFileUrl(ComboDocxConverterSpecTestBase.class, "/com.vladsch.flexmark.docx.converter.txt", DEFAULT_URL_PREFIX);
-        TEST_ROOT_DIRECTORY = removePrefix(removeSuffix(fileUrl, "com.vladsch.flexmark.docx.converter.txt"), FILE_PROTOCOL);
     }
 
     // standard options
@@ -121,12 +109,12 @@ public abstract class ComboDocxConverterSpecTestBase extends ComboSpecTestCase {
         optionsMap.put("yellow-missing-hyperlink", new MutableDataSet().set(DocxRenderer.LOCAL_HYPERLINK_MISSING_HIGHLIGHT, "yellow"));
     }
     public ComboDocxConverterSpecTestBase(@NotNull SpecExample example, @Nullable Map<String, DataHolder> optionMap, @Nullable DataHolder... defaultOptions) {
-        super(example, ComboSpecTestCase.optionsMaps(optionsMap, optionMap), ComboSpecTestCase.dataHolders(OPTIONS, defaultOptions));
+        super(example, optionsMaps(optionsMap, optionMap), dataHolders(OPTIONS, defaultOptions));
     }
 
     @Override
     public @NotNull SpecExampleRenderer getSpecExampleRenderer(@NotNull SpecExample example, @Nullable DataHolder exampleOptions) {
-        DataHolder combineOptions = combineOptions(myDefaultOptions, exampleOptions);
+        DataHolder combineOptions = aggregate(myDefaultOptions, exampleOptions);
         return new FlexmarkSpecExampleRenderer(example, combineOptions, Parser.builder(combineOptions).build(), DocxRenderer.builder(combineOptions).build(), true);
     }
 
@@ -150,7 +138,7 @@ public abstract class ComboDocxConverterSpecTestBase extends ComboSpecTestCase {
             // write it out to file, hard-coded for now                    IGNORE
             File file = new File(String.format("%s%s_%d.docx", getFileTestCaseDumpLocation(), specExample.getSection(), specExample.getExampleNumber()));
             File file2 = new File(String.format("%s%s_%d.xml", getFileTestCaseDumpLocation(), specExample.getSection(), specExample.getExampleNumber()));
-            DataHolder combinedOptions = combineOptions(myDefaultOptions, exampleOptions);
+            DataHolder combinedOptions = aggregate(myDefaultOptions, exampleOptions);
             DocxRenderer withOptions = DocxRenderer.builder(combinedOptions).build();
             WordprocessingMLPackage mlPackage = DocxRenderer.getDefaultTemplate(withOptions.getOptions());
             withOptions.render(document, mlPackage);
@@ -230,7 +218,7 @@ public abstract class ComboDocxConverterSpecTestBase extends ComboSpecTestCase {
         }
 
         myDocxContext.createHorizontalLine();
-        DataHolder combinedOptions = combineOptions(myDefaultOptions, exampleOptions);
+        DataHolder combinedOptions = aggregate(myDefaultOptions, exampleOptions);
         DocxRenderer.builder(combinedOptions).build().render(((FlexmarkSpecExampleRenderer) exampleRenderer).getDocument(), myPackage);
         myDocxContext.createHorizontalLine();
 

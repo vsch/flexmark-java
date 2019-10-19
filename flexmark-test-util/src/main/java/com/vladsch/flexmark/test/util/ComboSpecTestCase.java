@@ -4,6 +4,7 @@ import com.vladsch.flexmark.test.util.spec.ResourceLocation;
 import com.vladsch.flexmark.test.util.spec.SpecExample;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKey;
+import com.vladsch.flexmark.util.data.DataSet;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import com.vladsch.flexmark.util.format.options.ElementPlacement;
 import com.vladsch.flexmark.util.format.options.ElementPlacementSort;
@@ -26,7 +27,7 @@ public abstract class ComboSpecTestCase extends FullSpecTestCase {
 
     public ComboSpecTestCase(@NotNull SpecExample example, @Nullable Map<String, DataHolder> optionMap, @Nullable DataHolder... defaultOptions) {
         this.example = example;
-        myDefaultOptions = TestUtils.combineDefaultOptions(defaultOptions,this::combineOptions);
+        myDefaultOptions = TestUtils.combineDefaultOptions(defaultOptions);
         if (optionMap != null) optionsMap.putAll(optionMap);
     }
 
@@ -50,6 +51,11 @@ public abstract class ComboSpecTestCase extends FullSpecTestCase {
     @Nullable
     public static DataHolder[] dataHolders(@Nullable DataHolder other, @Nullable DataHolder[] overrides) {
         return TestUtils.dataHolders(other, overrides);
+    }
+
+    @NotNull
+    public static DataHolder aggregate(@Nullable DataHolder other, @Nullable DataHolder overrides) {
+        return DataSet.aggregate(other, overrides);
     }
 
     @Nullable

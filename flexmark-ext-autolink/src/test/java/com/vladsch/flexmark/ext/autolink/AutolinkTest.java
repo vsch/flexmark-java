@@ -8,6 +8,7 @@ import com.vladsch.flexmark.test.util.RenderingTestCase;
 import com.vladsch.flexmark.test.util.SpecExampleRenderer;
 import com.vladsch.flexmark.test.util.TestUtils;
 import com.vladsch.flexmark.util.data.DataHolder;
+import com.vladsch.flexmark.util.data.DataSet;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -26,7 +27,7 @@ public class AutolinkTest extends RenderingTestCase {
 
     @Override
     public @NotNull SpecExampleRenderer getSpecExampleRenderer(@NotNull SpecExample example, @Nullable DataHolder exampleOptions) {
-        DataHolder combinedOptions = combineOptions(OPTIONS, exampleOptions);
+        DataHolder combinedOptions = DataSet.aggregate(OPTIONS, exampleOptions);
         return new FlexmarkSpecExampleRenderer(example, combinedOptions, PARSER, RENDERER, true);
     }
 

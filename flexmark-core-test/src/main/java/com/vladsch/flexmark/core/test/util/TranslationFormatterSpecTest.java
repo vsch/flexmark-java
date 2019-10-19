@@ -15,6 +15,7 @@ import com.vladsch.flexmark.util.ast.IRender;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKey;
+import com.vladsch.flexmark.util.data.DataSet;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -57,7 +58,7 @@ public abstract class TranslationFormatterSpecTest extends FormatterTranslationS
 
     @Override
     final public @NotNull SpecExampleRenderer getSpecExampleRenderer(@NotNull SpecExample example, @Nullable DataHolder exampleOptions) {
-        DataHolder combinedOptions = combineOptions(myDefaultOptions, exampleOptions);
+        DataHolder combinedOptions = aggregate(myDefaultOptions, exampleOptions);
         return new FlexmarkSpecExampleRenderer(example, combinedOptions, getParser(combinedOptions), getRenderer(combinedOptions), true) {
             @Override
             protected @NotNull String renderAst() {
