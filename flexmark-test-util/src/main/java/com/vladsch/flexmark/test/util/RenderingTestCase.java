@@ -89,7 +89,7 @@ public abstract class RenderingTestCase implements SpecExampleProcessor {
 
     final protected void assertRendering(@NotNull SpecExample specExample) {
         SpecExample example = checkExample(specExample);
-        String message = example.getFileUrl();
+        String message = example.getFileUrlWithLineNumber();
         String source = example.getSource();
         String optionsSet = example.getOptionsSet();
         String expectedHtml = example.getHtml();

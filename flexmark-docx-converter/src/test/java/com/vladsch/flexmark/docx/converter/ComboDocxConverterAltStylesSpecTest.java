@@ -11,7 +11,6 @@ import java.util.List;
 
 public class ComboDocxConverterAltStylesSpecTest extends ComboDocxConverterSpecTestBase {
     private static final String SPEC_RESOURCE = "/docx_converter_ast_alt_styles_spec.md";
-    static final String FILE_TEST_CASE_DUMP_LOCATION = "/flexmark-docx-converter/src/test/resources/docx_converter_ast_alt_styles_spec/";
     public static final String TEMPLATE_XML = "/empty-numbered-headings.xml";
 
     private static final DataHolder OPTIONS = new MutableDataSet()
@@ -30,11 +29,5 @@ public class ComboDocxConverterAltStylesSpecTest extends ComboDocxConverterSpecT
     @Override
     public @NotNull ResourceLocation getSpecResourceLocation() {
         return ResourceLocation.of(SPEC_RESOURCE);
-    }
-
-    @NotNull
-    @Override
-    public String getFileTestCaseDumpLocation() {
-        return FILE_TEST_CASE_DUMP_LOCATION;
     }
 }

@@ -28,23 +28,56 @@ public class SmartsInlineParser implements InlineParserExtension {
 
     @Override
     public boolean parse(LightInlineParser inlineParser) {
-        BasedSequence match = inlineParser.match(parsing.SMARTS);
+        // hard coding implementation because pattern matching can be very slow for large files
+        BasedSequence input = inlineParser.getInput();
+        int iMax = input.length();
+        String typographicSmarts = null;
+        BasedSequence match = null;
+
+        int i = inlineParser.getIndex();
+        char c = input.charAt(i);
+
+        if (c == '.') {
+            if (input.matchChars(parsing.ELIPSIS, i)) {
+                match = input.subSequence(i, i + parsing.ELIPSIS.length());
+                typographicSmarts = "&hellip;";
+            } else if (input.matchChars(parsing.ELIPSIS_SPACED, i)) {
+                match = input.subSequence(i, i + parsing.ELIPSIS_SPACED.length());
+                typographicSmarts = "&hellip;";
+            }
+        } else if (c == '-') {
+            if (input.matchChars(parsing.EM_DASH, i)) {
+                match = input.subSequence(i, i + parsing.EM_DASH.length());
+                typographicSmarts = "&mdash;";
+            } else if (input.matchChars(parsing.EN_DASH, i)) {
+                match = input.subSequence(i, i + parsing.EN_DASH.length());
+                typographicSmarts = "&ndash;";
+            }
+        }
+
         if (match != null) {
-            BasedSequence input = inlineParser.getInput();
             inlineParser.flushTextNode();
-
-            String typographicSmarts;
-
-            if (match.matches(parsing.ELIPSIS)) typographicSmarts = "&hellip;";
-            else if (match.matches(parsing.ELIPSIS_SPACED)) typographicSmarts = "&hellip;";
-            else if (match.matches(parsing.EN_DASH)) typographicSmarts = "&ndash;";
-            else if (match.matches(parsing.EM_DASH)) typographicSmarts = "&mdash;";
-            else return false;
-
+            inlineParser.setIndex(i + match.length());
             TypographicSmarts smarts = new TypographicSmarts(match, typographicSmarts);
             inlineParser.getBlock().appendChild(smarts);
             return true;
         }
+//        BasedSequence match = inlineParser.match(parsing.SMARTS);
+//        if (match != null) {
+//            inlineParser.flushTextNode();
+//
+//            String typographicSmarts;
+//
+//            if (match.matches(parsing.ELIPSIS)) typographicSmarts = "&hellip;";
+//            else if (match.matches(parsing.ELIPSIS_SPACED)) typographicSmarts = "&hellip;";
+//            else if (match.matches(parsing.EN_DASH)) typographicSmarts = "&ndash;";
+//            else if (match.matches(parsing.EM_DASH)) typographicSmarts = "&mdash;";
+//            else return false;
+//
+//            TypographicSmarts smarts = new TypographicSmarts(match, typographicSmarts);
+//            inlineParser.getBlock().appendChild(smarts);
+//            return true;
+//        }
         return false;
     }
 

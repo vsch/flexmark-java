@@ -16,6 +16,7 @@ import com.vladsch.flexmark.ext.gfm.strikethrough.StrikethroughSubscriptExtensio
 import com.vladsch.flexmark.ext.gitlab.GitLabExtension;
 import com.vladsch.flexmark.ext.ins.InsExtension;
 import com.vladsch.flexmark.ext.macros.MacrosExtension;
+import com.vladsch.flexmark.ext.superscript.SuperscriptExtension;
 import com.vladsch.flexmark.ext.tables.TablesExtension;
 import com.vladsch.flexmark.ext.toc.SimTocExtension;
 import com.vladsch.flexmark.ext.toc.TocExtension;
@@ -23,10 +24,9 @@ import com.vladsch.flexmark.ext.wikilink.WikiLinkExtension;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.html.renderer.AttributablePart;
 import com.vladsch.flexmark.parser.Parser;
-import com.vladsch.flexmark.ext.superscript.SuperscriptExtension;
+import com.vladsch.flexmark.test.util.*;
 import com.vladsch.flexmark.test.util.spec.SpecExample;
 import com.vladsch.flexmark.test.util.spec.SpecReader;
-import com.vladsch.flexmark.test.util.*;
 import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
@@ -49,16 +49,35 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.vladsch.flexmark.test.util.TestUtils.FILE_PROTOCOL;
+import static com.vladsch.flexmark.util.Utils.*;
+
 public abstract class ComboDocxConverterSpecTestBase extends ComboSpecTestCase {
     // RELEASE : change to true for release
     static final boolean SKIP_IGNORED_TESTS = true;
     static final boolean DUMP_TEST_CASE_FILES = !SKIP_IGNORED_TESTS;
     static final boolean DUMP_ALL_TESTS_FILES = !SKIP_IGNORED_TESTS;
+    static final String PROJECT_ROOT_DIRECTORY;
+    static final String TEST_ROOT_DIRECTORY;
+    public static final String[] EMPTY_STRINGS = new String[0];
     static {
         // Set up a simple configuration that logs on the console.
         Logger root = Logger.getRootLogger();
         root.addAppender(new NullAppender());
+
+        // get project root from our class file url path
+        String fileUrl = SpecExample.ofCaller(0, ComboDocxConverterSpecTestBase.class, "", "", "").getFileUrl();
+        int pos = fileUrl.indexOf("/flexmark-docx-converter");
+        if (pos != -1) {
+            fileUrl = fileUrl.substring(0, pos);
+        }
+        fileUrl = fileUrl.substring(FILE_PROTOCOL.length());
+        PROJECT_ROOT_DIRECTORY = fileUrl;
+
+        fileUrl = TestUtils.getSpecResourceFileUrl(ComboDocxConverterSpecTestBase.class, "/com.vladsch.flexmark.docx.converter.txt", DEFAULT_URL_PREFIX);
+        TEST_ROOT_DIRECTORY = removePrefix(removeSuffix(fileUrl, "com.vladsch.flexmark.docx.converter.txt"), FILE_PROTOCOL);
     }
+
     // standard options
     private static final DataHolder OPTIONS = new MutableDataSet()
             .set(HtmlRenderer.INDENT_SIZE, 2)
@@ -81,6 +100,8 @@ public abstract class ComboDocxConverterSpecTestBase extends ComboSpecTestCase {
                     WikiLinkExtension.create()
             ))
             .set(DocxRenderer.RENDER_BODY_ONLY, true)
+            .set(DocxRenderer.DOC_RELATIVE_URL, String.format("file://%s", PROJECT_ROOT_DIRECTORY))
+            .set(DocxRenderer.DOC_ROOT_URL, String.format("file://%s/assets", PROJECT_ROOT_DIRECTORY))
             .set(DocxRenderer.SUPPRESS_HTML, true);
 
     private static HashMap<String, DataHolder> optionsMap = new HashMap<>();
@@ -109,11 +130,11 @@ public abstract class ComboDocxConverterSpecTestBase extends ComboSpecTestCase {
         return new FlexmarkSpecExampleRenderer(example, combineOptions, Parser.builder(combineOptions).build(), DocxRenderer.builder(combineOptions).build(), true);
     }
 
-    final public @NotNull String getProjectRootDirectory() {
-        return PROJECT_ROOT_DIRECTORY;
+    final public @NotNull String getFileTestCaseDumpLocation() {
+        String specResource = removeSuffix(removePrefix(getSpecResourceLocation().getResourcePath(), '/'), '/');
+        String testDir = suffixWith(removeSuffix(specResource, ".md"), '/');
+        return TEST_ROOT_DIRECTORY + testDir;
     }
-
-    public abstract @NotNull String getFileTestCaseDumpLocation();
 
     final public @NotNull String getFileAllTestsDumpName() {
         return getFileTestCaseDumpLocation() + "AllTests";
@@ -125,10 +146,10 @@ public abstract class ComboDocxConverterSpecTestBase extends ComboSpecTestCase {
         Document document = (Document) ((FlexmarkSpecExampleRenderer) exampleRenderer).getDocument();
 
         SpecExample specExample = example;
-        if (!specExample.isFullSpecExample() && !specExample.getSection().isEmpty()) {
+        if (!specExample.isFullSpecExample() && specExample.getSection() != null && !specExample.getSection().isEmpty()) {
             // write it out to file, hard-coded for now                    IGNORE
-            File file = new File(String.format("%s%s%s_%d.docx", getProjectRootDirectory(), getFileTestCaseDumpLocation(), specExample.getSection(), specExample.getExampleNumber()));
-            File file2 = new File(String.format("%s%s%s_%d.xml", getProjectRootDirectory(), getFileTestCaseDumpLocation(), specExample.getSection(), specExample.getExampleNumber()));
+            File file = new File(String.format("%s%s_%d.docx", getFileTestCaseDumpLocation(), specExample.getSection(), specExample.getExampleNumber()));
+            File file2 = new File(String.format("%s%s_%d.xml", getFileTestCaseDumpLocation(), specExample.getSection(), specExample.getExampleNumber()));
             DataHolder combinedOptions = combineOptions(myDefaultOptions, exampleOptions);
             DocxRenderer withOptions = DocxRenderer.builder(combinedOptions).build();
             WordprocessingMLPackage mlPackage = DocxRenderer.getDefaultTemplate(withOptions.getOptions());
@@ -215,7 +236,7 @@ public abstract class ComboDocxConverterSpecTestBase extends ComboSpecTestCase {
 
         if (example.hasComment()) {
             String comment = example.getComment();
-            String[] lines = comment.split("\n\\s*\n");
+            String[] lines = comment == null ? EMPTY_STRINGS : comment.split("\n\\s*\n");
             for (String line : lines) {
                 String trimmed = line.trim();
                 if (!trimmed.isEmpty()) {
@@ -280,8 +301,8 @@ public abstract class ComboDocxConverterSpecTestBase extends ComboSpecTestCase {
         if (!DUMP_ALL_TESTS_FILES || myPackage == null) return;
 
         // write it out to file, hard-coded for now                    IGNORE
-        File file = new File(String.format("%s%s.docx", getProjectRootDirectory(), getFileAllTestsDumpName()));
-        File file2 = new File(String.format("%s%s.xml", getProjectRootDirectory(), getFileAllTestsDumpName()));
+        File file = new File(String.format("%s.docx", getFileAllTestsDumpName()));
+        File file2 = new File(String.format("%s.xml", getFileAllTestsDumpName()));
         WordprocessingMLPackage mlPackage = myPackage;
 
         File parentDir = file.getParentFile();

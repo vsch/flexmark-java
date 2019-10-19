@@ -11,7 +11,6 @@ import java.util.List;
 
 public class ComboDeDocxConverterSpec2Test extends ComboDocxConverterSpecTestBase {
     private static final String SPEC_RESOURCE = "/docx_converter_de_ast_spec2.md";
-    private static final String FILE_TEST_CASE_DUMP_LOCATION = "/flexmark-docx-converter/src/test/resources/docx_converter_de_ast_spec2/";
     private static final String TEMPLATE_XML = "/DE-Template.xml";
 
     private static final DataHolder OPTIONS = new MutableDataSet()
@@ -30,11 +29,5 @@ public class ComboDeDocxConverterSpec2Test extends ComboDocxConverterSpecTestBas
     @Override
     public @NotNull ResourceLocation getSpecResourceLocation() {
         return ResourceLocation.of(SPEC_RESOURCE);
-    }
-
-    @NotNull
-    @Override
-    public String getFileTestCaseDumpLocation() {
-        return FILE_TEST_CASE_DUMP_LOCATION;
     }
 }

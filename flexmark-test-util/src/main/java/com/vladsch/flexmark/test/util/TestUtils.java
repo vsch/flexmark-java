@@ -43,7 +43,7 @@ public class TestUtils {
 
     public static final DataHolder NO_FILE_EOL_FALSE = new MutableDataSet().set(NO_FILE_EOL, false).toImmutable();
     public static final String DEFAULT_SPEC_RESOURCE = "/spec.txt";
-    public static final String DEFAULT_URL_PREFIX = "fqn://";  // use class fqn with resource path query
+    public static final String DEFAULT_URL_PREFIX = "fqn://";  // use class fqn to figure it out
     public static final DataKey<Collection<Class<? extends Extension>>> UNLOAD_EXTENSIONS = new DataKey<>("UNLOAD_EXTENSIONS", Collections.emptyList());
     public static final DataKey<Collection<Extension>> LOAD_EXTENSIONS = new DataKey<>("LOAD_EXTENSIONS", Extension.EMPTY_LIST);
     public static final @NotNull ResourceLocation DEFAULT_RESOURCE_LOCATION = ResourceLocation.of(TestUtils.class, TestUtils.DEFAULT_SPEC_RESOURCE, TestUtils.DEFAULT_URL_PREFIX);

@@ -219,6 +219,8 @@ Next 0.59.21
 * Add: creation of `SpecExample` instance based on caller information with correct file/line of
   the source calling `RenderingTestCase.assertRendering(String, String, String)` or its
   variants.
+* Fix: convert typographic smarts inline parser to match strings instead of using regex which
+  sometimes takes long to execute for no apparent reason.
 
 0.59.17
 -------

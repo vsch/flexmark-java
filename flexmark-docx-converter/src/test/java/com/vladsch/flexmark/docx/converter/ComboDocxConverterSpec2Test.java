@@ -9,7 +9,6 @@ import java.util.List;
 
 public class ComboDocxConverterSpec2Test extends ComboDocxConverterSpecTestBase {
     private static final String SPEC_RESOURCE = "/docx_converter_ast_spec2.md";
-    static final String FILE_TEST_CASE_DUMP_LOCATION = "/flexmark-docx-converter/src/test/resources/docx_converter_ast_spec2/";
 
     public ComboDocxConverterSpec2Test(@NotNull SpecExample example) {
         super(example, null);
@@ -23,11 +22,5 @@ public class ComboDocxConverterSpec2Test extends ComboDocxConverterSpecTestBase 
     @Override
     public @NotNull ResourceLocation getSpecResourceLocation() {
         return ResourceLocation.of(SPEC_RESOURCE);
-    }
-
-    @NotNull
-    @Override
-    public String getFileTestCaseDumpLocation() {
-        return FILE_TEST_CASE_DUMP_LOCATION;
     }
 }

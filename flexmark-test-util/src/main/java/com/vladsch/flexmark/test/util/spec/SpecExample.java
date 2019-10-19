@@ -89,8 +89,13 @@ public class SpecExample {
     }
 
     @NotNull
-    public String getFileUrl() {
+    public String getFileUrlWithLineNumber() {
         return TestUtils.getUrlWithLineNumber(resourceLocation.getFileUrl(), lineNumber);
+    }
+
+    @NotNull
+    public String getFileUrl() {
+        return resourceLocation.getFileUrl();
     }
 
     @NotNull
