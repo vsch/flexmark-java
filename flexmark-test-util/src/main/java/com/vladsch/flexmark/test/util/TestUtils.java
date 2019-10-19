@@ -227,7 +227,7 @@ public class TestUtils {
     public static String getSpecResourceName(@NotNull String testClassName, @NotNull String resourcePath) {
         File specInfo = new File(resourcePath);
         File classInfo = new File("/" + testClassName.replace('.', '/'));
-        return !specInfo.isAbsolute() ? new File(classInfo.getPath(), resourcePath).getPath() : resourcePath;
+        return !specInfo.isAbsolute() ? new File(classInfo.getParent(), resourcePath).getPath() : resourcePath;
     }
 
     @NotNull
