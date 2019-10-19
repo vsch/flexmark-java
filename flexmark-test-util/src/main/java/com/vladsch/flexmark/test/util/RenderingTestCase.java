@@ -5,16 +5,13 @@ import com.vladsch.flexmark.util.SharedDataKeys;
 import com.vladsch.flexmark.util.builder.Extension;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKey;
-import com.vladsch.flexmark.util.data.DataSet;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.junit.ComparisonFailure;
 import org.junit.Rule;
 import org.junit.rules.ExpectedException;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.LinkedHashSet;
 
 import static org.junit.Assert.assertEquals;
 
@@ -51,40 +48,7 @@ public abstract class RenderingTestCase implements SpecExampleProcessor {
     @Override
     public DataHolder combineOptions(@Nullable DataHolder other, @Nullable DataHolder overrides) {
         // here we handle load and unload extension directives to convert them to adding/removing extensions from EXTENSIONS
-        if (other != null && overrides != null) {
-            DataHolder combinedOptions = new DataSet(resolveLoadUnload(other), overrides);
-            return resolveLoadUnload(combinedOptions);
-        } else if (other != null) {
-            return resolveLoadUnload(other);
-        } else {
-            return resolveLoadUnload(overrides);
-        }
-    }
-
-    private DataHolder resolveLoadUnload(@Nullable DataHolder options) {
-        if (options != null && (options.contains(LOAD_EXTENSIONS) || options.contains(UNLOAD_EXTENSIONS))) {
-            if (options.contains(EXTENSIONS)) {
-                Collection<Extension> extensions = options.get(EXTENSIONS);
-                Collection<Extension> loadExtensions = options.get(LOAD_EXTENSIONS);
-                Collection<Class<? extends Extension>> unloadExtensions = options.get(UNLOAD_EXTENSIONS);
-                if (!loadExtensions.isEmpty() || !unloadExtensions.isEmpty() && !extensions.isEmpty()) {
-                    LinkedHashSet<Extension> resolvedExtensions = new LinkedHashSet<>(extensions);
-                    resolvedExtensions.addAll(loadExtensions);
-                    resolvedExtensions.removeIf((extension) -> unloadExtensions.contains(extension.getClass()));
-                    return options.toMutable()
-                            .remove(LOAD_EXTENSIONS)
-                            .remove(UNLOAD_EXTENSIONS)
-                            .set(EXTENSIONS, new ArrayList<>(resolvedExtensions))
-                            .toImmutable();
-                }
-            }
-            // just remove the offending keys
-            return options.toMutable()
-                    .remove(LOAD_EXTENSIONS)
-                    .remove(UNLOAD_EXTENSIONS)
-                    .toImmutable();
-        }
-        return options;
+        return TestUtils.combineLoadUnloadOptions(other, overrides);
     }
 
     /**
@@ -94,11 +58,21 @@ public abstract class RenderingTestCase implements SpecExampleProcessor {
      * @param exampleParse    parse information
      * @param exampleOptions  example options
      */
-    public void testCase(SpecExampleRenderer exampleRenderer, SpecExampleParse exampleParse, DataHolder exampleOptions) {
+    public void addSpecExample(SpecExampleRenderer exampleRenderer, SpecExampleParse exampleParse, DataHolder exampleOptions) {
 
     }
 
-    public void addSpecExample(@NotNull SpecExampleRenderer exampleRenderer, @NotNull SpecExampleParse exampleParse, DataHolder exampleOptions, boolean ignoredTestCase, @NotNull String html, @Nullable String ast) {
+    /**
+     * Called when processing full spec test case by DumpSpecReader
+     *
+     * @param exampleRenderer example renderer
+     * @param exampleParse    example parse state
+     * @param exampleOptions  example options
+     * @param ignoredTestCase true if ignored example
+     * @param html            html used for comparison to expected html
+     * @param ast             ast used for comparison to expected ast
+     */
+    public void addFullSpecExample(@NotNull SpecExampleRenderer exampleRenderer, @NotNull SpecExampleParse exampleParse, DataHolder exampleOptions, boolean ignoredTestCase, @NotNull String html, @Nullable String ast) {
 
     }
 
@@ -148,7 +122,7 @@ public abstract class RenderingTestCase implements SpecExampleProcessor {
             System.out.print(formattedTimingInfo);
         }
 
-        testCase(exampleRenderer, specExampleParse, exampleOptions);
+        addSpecExample(exampleRenderer, specExampleParse, exampleOptions);
         exampleRenderer.finalizeRender();
 
         String expected;

@@ -103,7 +103,7 @@ public abstract class ComboDocxConverterSpecTestBase extends ComboSpecTestCase {
         optionsMap.put("yellow-missing-hyperlink", new MutableDataSet().set(DocxRenderer.LOCAL_HYPERLINK_MISSING_HIGHLIGHT, "yellow"));
     }
     public ComboDocxConverterSpecTestBase(@NotNull SpecExample example, @Nullable Map<String, DataHolder> optionMap, @Nullable DataHolder... defaultOptions) {
-        super(example, optionsMaps(optionsMap, optionMap), dataHolders(OPTIONS, defaultOptions));
+        super(example, ComboSpecTestCase.optionsMaps(optionsMap, optionMap), ComboSpecTestCase.dataHolders(OPTIONS, defaultOptions));
     }
 
     @Override
@@ -123,7 +123,7 @@ public abstract class ComboDocxConverterSpecTestBase extends ComboSpecTestCase {
     }
 
     @Override
-    final public void testCase(SpecExampleRenderer exampleRenderer, SpecExampleParse exampleParse, DataHolder exampleOptions) {
+    final public void addSpecExample(SpecExampleRenderer exampleRenderer, SpecExampleParse exampleParse, DataHolder exampleOptions) {
         if (!DUMP_TEST_CASE_FILES) return;
         Document document = (Document) ((FlexmarkSpecExampleRenderer) exampleRenderer).getDocument();
 
@@ -164,7 +164,7 @@ public abstract class ComboDocxConverterSpecTestBase extends ComboSpecTestCase {
     }
 
     @Override
-    final public void addSpecExample(@NotNull SpecExampleRenderer exampleRenderer, @NotNull SpecExampleParse exampleParse, DataHolder exampleOptions, boolean ignoredTestCase, @NotNull String html, @Nullable String ast) {
+    final public void addFullSpecExample(@NotNull SpecExampleRenderer exampleRenderer, @NotNull SpecExampleParse exampleParse, DataHolder exampleOptions, boolean ignoredTestCase, @NotNull String html, @Nullable String ast) {
         if (!DUMP_ALL_TESTS_FILES) return;
 
         boolean failed = !ignoredTestCase && !exampleRenderer.getHtml().equals(example.getHtml());

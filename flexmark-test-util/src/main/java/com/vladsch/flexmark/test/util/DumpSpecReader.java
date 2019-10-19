@@ -86,7 +86,7 @@ public class DumpSpecReader extends SpecReader {
         String ast = example.getAst() == null ? null : (!ignoredTestCase ? exampleRenderer.getAst() : example.getAst());
 
         // allow other formats to accumulate
-        testCase.addSpecExample(exampleRenderer, exampleParse, exampleOptions, ignoredTestCase, html, ast);
+        testCase.addFullSpecExample(exampleRenderer, exampleParse, exampleOptions, ignoredTestCase, html, ast);
         exampleRenderer.finalizeRender();
 
         if (embedTimed) {

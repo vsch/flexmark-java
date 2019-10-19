@@ -6,6 +6,7 @@ import com.vladsch.flexmark.formatter.TranslationHandler;
 import com.vladsch.flexmark.html.renderer.HeaderIdGenerator;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.test.spec.SpecExample;
+import com.vladsch.flexmark.test.util.ComboSpecTestCase;
 import com.vladsch.flexmark.test.util.FlexmarkSpecExampleRenderer;
 import com.vladsch.flexmark.test.util.SpecExampleRenderer;
 import com.vladsch.flexmark.test.util.TestUtils;
@@ -43,7 +44,7 @@ public abstract class TranslationFormatterSpecTest extends FormatterTranslationS
         optionsMap.put("ast-details", new MutableDataSet().set(AST_DETAILS, true));
     }
     public TranslationFormatterSpecTest(@NotNull SpecExample example, @Nullable Map<String, DataHolder> optionMap, @Nullable DataHolder... defaultOptions) {
-        super(example, optionsMaps(optionsMap, optionMap), dataHolders(OPTIONS, defaultOptions));
+        super(example, ComboSpecTestCase.optionsMaps(optionsMap, optionMap), ComboSpecTestCase.dataHolders(OPTIONS, defaultOptions));
     }
 
     private Parser getParser(@Nullable DataHolder OPTIONS) {

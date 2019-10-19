@@ -4,6 +4,7 @@ import com.vladsch.flexmark.core.test.util.FormatterSpecTest;
 import com.vladsch.flexmark.formatter.Formatter;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.test.spec.SpecExample;
+import com.vladsch.flexmark.test.util.ComboSpecTestCase;
 import com.vladsch.flexmark.util.ast.KeepType;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
@@ -63,6 +64,6 @@ public abstract class ComboCoreFormatterSpecTestBase extends FormatterSpecTest {
         optionsMap.put("no-soft-breaks", new MutableDataSet().set(Formatter.KEEP_SOFT_LINE_BREAKS, false));
     }
     public ComboCoreFormatterSpecTestBase(@NotNull SpecExample example, @Nullable Map<String, DataHolder> optionMap, @Nullable DataHolder... defaultOptions) {
-        super(example, optionsMaps(optionsMap, optionMap), defaultOptions);
+        super(example, ComboSpecTestCase.optionsMaps(optionsMap, optionMap), defaultOptions);
     }
 }

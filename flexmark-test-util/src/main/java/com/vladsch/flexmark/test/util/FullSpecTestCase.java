@@ -24,7 +24,7 @@ public abstract class FullSpecTestCase extends RenderingTestCase implements Spec
     }
 
     @Test
-    public void testFullSpec() {
+    public void testSpecExample() {
 
         fullTestSpecStarting();
         ResourceLocation location = getSpecResourceLocation();

@@ -3,12 +3,10 @@ package com.vladsch.flexmark.test.util;
 import com.vladsch.flexmark.test.spec.ResourceLocation;
 import com.vladsch.flexmark.test.spec.SpecExample;
 import com.vladsch.flexmark.test.spec.SpecReader;
+import com.vladsch.flexmark.util.SharedDataKeys;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.builder.Extension;
-import com.vladsch.flexmark.util.data.DataHolder;
-import com.vladsch.flexmark.util.data.DataKey;
-import com.vladsch.flexmark.util.data.MutableDataHolder;
-import com.vladsch.flexmark.util.data.MutableDataSet;
+import com.vladsch.flexmark.util.data.*;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.SegmentedSequence;
 import org.jetbrains.annotations.NotNull;
@@ -17,10 +15,7 @@ import org.junit.AssumptionViolatedException;
 
 import java.io.File;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
@@ -264,12 +259,12 @@ public class TestUtils {
         return getTestData(location.getResourceClass(), location.getResourcePath(), location.getFileUrlPrefix());
     }
 
-    public static List<Object[]> getTestData(@NotNull Class<?> resourceClass, @NotNull String resourcePath, @NotNull String urlPrefix) {
+    public static ArrayList<Object[]> getTestData(@NotNull Class<?> resourceClass, @NotNull String resourcePath, @NotNull String urlPrefix) {
         String resolvedResourcePath = getSpecResourceName(resourceClass.getName(), resourcePath);
         String fileUrl = getSpecResourceFileUrl(resourceClass, resolvedResourcePath, urlPrefix);
         SpecReader specReader = SpecReader.createAndReadExamples(resourceClass, resourcePath, fileUrl);
         List<SpecExample> examples = specReader.getExamples();
-        List<Object[]> data = new ArrayList<>();
+        ArrayList<Object[]> data = new ArrayList<>();
 
         // NULL example runs full spec test
         data.add(new Object[] { SpecExample.NULL.withFileUrl(fileUrl) });
@@ -307,6 +302,79 @@ public class TestUtils {
             return FILE_PROTOCOL + noFileProtocol;
         } else {
             return externalForm;
+        }
+    }
+
+    public static DataHolder resolveLoadUnload(@Nullable DataHolder options) {
+        if (options != null && (options.contains(LOAD_EXTENSIONS) || options.contains(UNLOAD_EXTENSIONS))) {
+            if (options.contains(SharedDataKeys.EXTENSIONS)) {
+                Collection<Extension> extensions = options.get(SharedDataKeys.EXTENSIONS);
+                Collection<Extension> loadExtensions = options.get(LOAD_EXTENSIONS);
+                Collection<Class<? extends Extension>> unloadExtensions = options.get(UNLOAD_EXTENSIONS);
+                if (!loadExtensions.isEmpty() || !unloadExtensions.isEmpty() && !extensions.isEmpty()) {
+                    LinkedHashSet<Extension> resolvedExtensions = new LinkedHashSet<>(extensions);
+                    resolvedExtensions.addAll(loadExtensions);
+                    resolvedExtensions.removeIf((extension) -> unloadExtensions.contains(extension.getClass()));
+                    return options.toMutable()
+                            .remove(LOAD_EXTENSIONS)
+                            .remove(UNLOAD_EXTENSIONS)
+                            .set(SharedDataKeys.EXTENSIONS, new ArrayList<>(resolvedExtensions))
+                            .toImmutable();
+                }
+            }
+            // just remove the offending keys
+            return options.toMutable()
+                    .remove(LOAD_EXTENSIONS)
+                    .remove(UNLOAD_EXTENSIONS)
+                    .toImmutable();
+        }
+        return options;
+    }
+
+    @Nullable
+    public static DataHolder combineDefaultOptions(@Nullable DataHolder[] defaultOptions, @NotNull BiFunction<DataHolder, DataHolder, DataHolder> optionsCombiner) {
+        DataHolder combinedOptions = null;
+        if (defaultOptions != null) {
+            for (DataHolder options : defaultOptions) {
+                combinedOptions = optionsCombiner.apply(combinedOptions, options);
+            }
+        }
+        return combinedOptions == null ? null : combinedOptions.toImmutable();
+    }
+
+    @Nullable
+    public static Map<String, DataHolder> optionsMaps(@Nullable Map<String, DataHolder> other, @Nullable Map<String, DataHolder> overrides) {
+        if (other != null && overrides != null) {
+            HashMap<String, DataHolder> map = new HashMap<>(other);
+            map.putAll(overrides);
+            return map;
+        } else if (other != null) {
+            return other;
+        } else {
+            return overrides;
+        }
+    }
+
+    @Nullable
+    public static DataHolder[] dataHolders(@Nullable DataHolder other, @Nullable DataHolder[] overrides) {
+        if (other == null) return overrides;
+        else if (overrides == null || overrides.length == 0) return new DataHolder[] { other };
+
+        DataHolder[] holders = new DataHolder[overrides.length + 1];
+        System.arraycopy(overrides, 0, holders, 1, overrides.length);
+        holders[0] = other;
+        return holders;
+    }
+
+    public @Nullable
+    static DataHolder combineLoadUnloadOptions(@Nullable DataHolder other, @Nullable DataHolder overrides) {
+        if (other != null && overrides != null) {
+            DataHolder combinedOptions = new DataSet(resolveLoadUnload(other), overrides);
+            return resolveLoadUnload(combinedOptions);
+        } else if (other != null) {
+            return resolveLoadUnload(other);
+        } else {
+            return resolveLoadUnload(overrides);
         }
     }
 }

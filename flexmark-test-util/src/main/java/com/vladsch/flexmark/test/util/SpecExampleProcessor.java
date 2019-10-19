@@ -46,5 +46,5 @@ public interface SpecExampleProcessor {
      * @param html            html used for comparison to expected html
      * @param ast             ast used for comparison to expected ast
      */
-    void addSpecExample(@NotNull SpecExampleRenderer exampleRenderer, @NotNull SpecExampleParse exampleParse, @Nullable DataHolder exampleOptions, boolean ignoredTestCase, @NotNull String html, @Nullable String ast);
+    void addFullSpecExample(@NotNull SpecExampleRenderer exampleRenderer, @NotNull SpecExampleParse exampleParse, @Nullable DataHolder exampleOptions, boolean ignoredTestCase, @NotNull String html, @Nullable String ast);
 }

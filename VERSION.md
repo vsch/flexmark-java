@@ -8,7 +8,8 @@ flexmark-java
 - [To Do](#to-do)
 - [Next 0.60.0](#next-0600)
     - [API Changes](#api-changes)
-- [Next 0.59.17](#next-05917)
+- [Next 0.59.19](#next-05919)
+- [0.59.17](#05917)
 - [0.59.15](#05915)
 - [0.59.13](#05913)
     - [0.59.11](#05911)
@@ -142,7 +143,7 @@ Please give feedback on the upcoming changes if you have concerns about breaking
     * `com.vladsch.flexmark.util.ast.NodeAdaptingVisitHandler`
     * `com.vladsch.flexmark.util.ast.NodeAdaptingVisitor`
 
-Next 0.59.17
+Next 0.59.19
 ------------
 
 * [ ] Fix: Change spec example to variable number of sections
@@ -153,6 +154,14 @@ Next 0.59.17
 * [ ] Fix: URGENT: Rewrite combo spec and full spec to be merged like markdown navigator action
       spec test and not requiring deep inheritance dependencies. Merge full test spec and
       individual tests. for example see MdNav `LightPlatformCodeInsightSpecTestCase`
+
+0.59.17
+-------
+
+* Fix: make `SpecExampleRendererBase` reusable by moving any references to flexmark parsing
+  rendering specifics to `FlexmarkSpecExampleRenderer` and moving up not related to flexmark
+  parsing, like caching of generated HTML and AST.
+* Fix: consolidate full spec and individual example test case in to one method.
 
 0.59.15
 -------

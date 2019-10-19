@@ -69,12 +69,6 @@ public class SpecIntegrationTest extends RendererSpecTest {
         return false;
     }
 
-    @Override
-    public void testFullSpec() {
-        // we don't want it because it will not match and we cannot modify the full spec.
-        super.testFullSpec();
-    }
-
     private static Map<String, String> getOverriddenExamples() {
         Map<String, String> m = new HashMap<>();
 

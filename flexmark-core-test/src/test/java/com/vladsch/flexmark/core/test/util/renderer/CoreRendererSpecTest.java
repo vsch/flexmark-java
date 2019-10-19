@@ -4,6 +4,7 @@ import com.vladsch.flexmark.core.test.util.RendererSpecTest;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.test.spec.SpecExample;
+import com.vladsch.flexmark.test.util.ComboSpecTestCase;
 import com.vladsch.flexmark.util.ast.KeepType;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
@@ -124,6 +125,6 @@ public abstract class CoreRendererSpecTest extends RendererSpecTest {
         );
     }
     public CoreRendererSpecTest(@NotNull SpecExample example, @Nullable Map<String, DataHolder> optionMap, @Nullable DataHolder... defaultOptions) {
-        super(example, optionsMaps(optionsMap, optionMap), dataHolders(OPTIONS, defaultOptions));
+        super(example, ComboSpecTestCase.optionsMaps(optionsMap, optionMap), ComboSpecTestCase.dataHolders(OPTIONS, defaultOptions));
     }
 }

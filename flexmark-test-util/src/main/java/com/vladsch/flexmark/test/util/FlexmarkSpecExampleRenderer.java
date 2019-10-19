@@ -13,15 +13,17 @@ import org.jetbrains.annotations.Nullable;
 public class FlexmarkSpecExampleRenderer extends SpecExampleRendererBase {
     private @Nullable Node myIncludedDocument = null;
     private @Nullable Node myDocument = null;
-    private @Nullable String myRenderedHtml;
-    private @Nullable String myRenderedAst;
+    private @NotNull IParse myParser;
+    private @NotNull IRender myRender;
 
     public FlexmarkSpecExampleRenderer(@NotNull SpecExample example, @Nullable DataHolder options, @NotNull IParse parser, @NotNull IRender render) {
-        super(example, options, parser, render);
+        this(example, options, parser, render, true);
     }
 
     public FlexmarkSpecExampleRenderer(@NotNull SpecExample example, @Nullable DataHolder options, @NotNull IParse parser, @NotNull IRender render, boolean includeExampleCoord) {
-        super(example, options, parser, render, includeExampleCoord);
+        super(example, options, includeExampleCoord);
+        myParser = parser;
+        myRender = render;
     }
 
     @Override
@@ -67,28 +69,13 @@ public class FlexmarkSpecExampleRenderer extends SpecExampleRendererBase {
         return myDocument;
     }
 
-    @Override
-    final public @NotNull String getHtml() {
-        if (myRenderedHtml == null || !isFinalized()) {
-            myRenderedHtml = renderHtml();
-        }
-        return myRenderedHtml;
-    }
-
-    @Override
-    final public @NotNull String getAst() {
-        if (myRenderedAst == null || !isFinalized()) {
-            myRenderedAst = renderAst();
-        }
-        return myRenderedAst;
-    }
-
     /**
      * Override to customize
      *
      * @return HTML string, will be cached after document is finalized to allow for timing collection iterations,
      */
     @NotNull
+    @Override
     protected String renderHtml() {
         assert myDocument != null;
         return getRenderer().render(myDocument);
@@ -100,6 +87,7 @@ public class FlexmarkSpecExampleRenderer extends SpecExampleRendererBase {
      * @return HTML string, will be cached after document is finalized to allow for timing collection iterations,
      */
     @NotNull
+    @Override
     protected String renderAst() {
         assert myDocument != null;
         return TestUtils.ast(myDocument);
@@ -108,5 +96,23 @@ public class FlexmarkSpecExampleRenderer extends SpecExampleRendererBase {
     @Override
     public void finalizeRender() {
         super.finalizeRender();
+    }
+
+    @NotNull
+    final public IParse getParser() {
+        return myParser;
+    }
+
+    public void setParser(@NotNull IParse parser) {
+        myParser = parser;
+    }
+
+    public void setRender(@NotNull IRender render) {
+        myRender = render;
+    }
+
+    @NotNull
+    final public IRender getRenderer() {
+        return myRender;
     }
 }
