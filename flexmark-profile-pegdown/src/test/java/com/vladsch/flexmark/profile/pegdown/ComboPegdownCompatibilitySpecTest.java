@@ -1,0 +1,34 @@
+package com.vladsch.flexmark.profile.pegdown;
+
+import com.vladsch.flexmark.core.test.util.RendererSpecTest;
+import com.vladsch.flexmark.html.HtmlRenderer;
+import com.vladsch.flexmark.test.spec.ResourceLocation;
+import com.vladsch.flexmark.test.spec.SpecExample;
+import com.vladsch.flexmark.util.data.DataHolder;
+import org.jetbrains.annotations.NotNull;
+import org.junit.runners.Parameterized;
+
+import java.util.List;
+
+public class ComboPegdownCompatibilitySpecTest extends RendererSpecTest {
+    private static final String SPEC_RESOURCE = "/pegdown_profile_compatibility_spec.md";
+    static final DataHolder OPTIONS = PegdownOptionsAdapter.flexmarkOptions(
+            Extensions.FENCED_CODE_BLOCKS | Extensions.AUTOLINKS
+    ).toMutable()
+            .set(HtmlRenderer.OBFUSCATE_EMAIL_RANDOM, false)
+            .toImmutable();
+
+    public ComboPegdownCompatibilitySpecTest(@NotNull SpecExample example) {
+        super(example, null, OPTIONS);
+    }
+
+    @Parameterized.Parameters(name = "{0}")
+    public static List<Object[]> data() {
+        return getTestData(SPEC_RESOURCE);
+    }
+
+    @Override
+    public @NotNull ResourceLocation getSpecResourceLocation() {
+        return ResourceLocation.of(SPEC_RESOURCE);
+    }
+}

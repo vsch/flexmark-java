@@ -8,7 +8,8 @@ flexmark-java
 - [To Do](#to-do)
 - [Next 0.60.0](#next-0600)
     - [API Changes](#api-changes)
-- [Next 0.59.19](#next-05919)
+- [Next 0.59.21](#next-05921)
+- [0.59.19](#05919)
 - [0.59.17](#05917)
 - [0.59.15](#05915)
 - [0.59.13](#05913)
@@ -143,7 +144,7 @@ Please give feedback on the upcoming changes if you have concerns about breaking
     * `com.vladsch.flexmark.util.ast.NodeAdaptingVisitHandler`
     * `com.vladsch.flexmark.util.ast.NodeAdaptingVisitor`
 
-Next 0.59.19
+Next 0.59.21
 ------------
 
 * [ ] Fix: Change spec example to variable number of sections
@@ -154,6 +155,70 @@ Next 0.59.19
 * [ ] Fix: URGENT: Rewrite combo spec and full spec to be merged like markdown navigator action
       spec test and not requiring deep inheritance dependencies. Merge full test spec and
       individual tests. for example see MdNav `LightPlatformCodeInsightSpecTestCase`
+
+0.59.19
+-------
+
+* Fix: convert all resource info to `ResourceLocation`
+* Add: class location resolution via file under test `resources` named for the root package of
+  the module and containing directory path(s) from parent of `resources` directory to get source
+  root for test files. for maven builds it is `java/`. This allows resolving absolute file path
+  for class files in tests for generating the location `file:///`
+  * Fix: package for some modules did not follow module/package naming convention
+    * Fix: move `flexmark-ext-superscript` to proper package by naming convention
+      `com.vladsch.flexmark.ext.superscript`
+    * Fix: move `flexmark-profile-pegdown` to proper package by naming convention
+      `com.vladsch.flexmark.profile.pegdown`
+    * Fix: move `flexmark-test-util` `spec` package under `com.vladsch.flexmark.test.util`
+      package
+  * Add: test class location helpers to all modules:
+    * `flexmark-core-test/src/test/resources/com.vladsch.flexmark.core.test.txt`
+    * `flexmark-docx-converter/src/test/resources/com.vladsch.flexmark.docx.converter.txt`
+    * `flexmark-ext-abbreviation/src/test/resources/com.vladsch.flexmark.ext.abbreviation.txt`
+    * `flexmark-ext-admonition/src/test/resources/com.vladsch.flexmark.ext.admonition.txt`
+    * `flexmark-ext-anchorlink/src/test/resources/com.vladsch.flexmark.ext.anchorlink.txt`
+    * `flexmark-ext-aside/src/test/resources/com.vladsch.flexmark.ext.aside.txt`
+    * `flexmark-ext-attributes/src/test/resources/com.vladsch.flexmark.ext.attributes.txt`
+    * `flexmark-ext-autolink/src/test/resources/com.vladsch.flexmark.ext.autolink.txt`
+    * `flexmark-ext-definition/src/test/resources/com.vladsch.flexmark.ext.definition.txt`
+    * `flexmark-ext-emoji/src/test/resources/com.vladsch.flexmark.ext.emoji.txt`
+    * `flexmark-ext-enumerated-reference/src/test/resources/com.vladsch.flexmark.ext.enumerated.reference.txt`
+    * `flexmark-ext-escaped-character/src/test/resources/com.vladsch.flexmark.ext.escaped.character.txt`
+    * `flexmark-ext-footnotes/src/test/resources/com.vladsch.flexmark.ext.footnotes.txt`
+    * `flexmark-ext-gfm-issues/src/test/resources/com.vladsch.flexmark.ext.gfm.issues.txt`
+    * `flexmark-ext-gfm-strikethrough/src/test/resources/com.vladsch.flexmark.ext.gfm.strikethrough.txt`
+    * `flexmark-ext-gfm-tasklist/src/test/resources/com.vladsch.flexmark.ext.gfm.tasklist.txt`
+    * `flexmark-ext-gfm-users/src/test/resources/com.vladsch.flexmark.ext.gfm.users.txt`
+    * `flexmark-ext-gitlab/src/test/resources/com.vladsch.flexmark.ext.gitlab.txt`
+    * `flexmark-ext-ins/src/test/resources/com.vladsch.flexmark.ext.ins.txt`
+    * `flexmark-ext-jekyll-front-matter/src/test/resources/com.vladsch.flexmark.ext.jekyll.front.matter.txt`
+    * `flexmark-ext-jekyll-tag/src/test/resources/com.vladsch.flexmark.ext.jekyll.tag.txt`
+    * `flexmark-ext-macros/src/test/resources/com.vladsch.flexmark.ext.macros.txt`
+    * `flexmark-ext-media-tags/src/test/resources/com.vladsch.flexmark.ext.media.tags.txt`
+    * `flexmark-ext-spec-example/src/test/resources/com.vladsch.flexmark.ext.spec.example.txt`
+    * `flexmark-ext-superscript/src/test/resources/com.vladsch.flexmark.ext.superscript.txt`
+    * `flexmark-ext-tables/src/test/resources/com.vladsch.flexmark.ext.tables.txt`
+    * `flexmark-ext-toc/src/test/resources/com.vladsch.flexmark.ext.toc.txt`
+    * `flexmark-ext-typographic/src/test/resources/com.vladsch.flexmark.ext.typographic.txt`
+    * `flexmark-ext-wikilink/src/test/resources/com.vladsch.flexmark.ext.wikilink.txt`
+    * `flexmark-ext-xwiki-macros/src/test/resources/com.vladsch.flexmark.ext.xwiki.macros.txt`
+    * `flexmark-ext-yaml-front-matter/src/test/resources/com.vladsch.flexmark.ext.yaml.front.matter.txt`
+    * `flexmark-ext-youtube-embedded/src/test/resources/com.vladsch.flexmark.ext.youtube.embedded.txt`
+    * `flexmark-ext-zzzzzz/src/test/resources/com.vladsch.flexmark.ext.zzzzzz.txt`
+    * `flexmark-formatter-test-suite/src/test/resources/com.vladsch.flexmark.formatter.test.suite.txt`
+    * `flexmark-html2md-converter/src/test/resources/com.vladsch.flexmark.html2md.converter.txt`
+    * `flexmark-integration-test/src/test/resources/com.vladsch.flexmark.integration.test.txt`
+    * `flexmark-java.wiki/src/test/resources/com.vladsch.flexmark-java.wiki.txt`
+    * `flexmark-jira-converter/src/test/resources/com.vladsch.flexmark.jira.converter.txt`
+    * `flexmark-pdf-converter/src/test/resources/com.vladsch.flexmark.pdf.converter.txt`
+    * `flexmark-profile-pegdown/src/test/resources/com.vladsch.flexmark.profile.pegdown.txt`
+    * `flexmark-tree-iteration/src/test/resources/com.vladsch.flexmark.tree.iteration.txt`
+    * `flexmark-util/src/test/resources/com.vladsch.flexmark.util.txt`
+    * `flexmark-youtrack-converter/src/test/resources/com.vladsch.flexmark.youtrack.converter.txt`
+    * `flexmark/src/test/resources/com.vladsch.flexmark.txt`
+* Add: creation of `SpecExample` instance based on caller information with correct file/line of
+  the source calling `RenderingTestCase.assertRendering(String, String, String)` or its
+  variants.
 
 0.59.17
 -------
@@ -1072,12 +1137,12 @@ Next 0.59.19
 [#362, ArrayIndexOutOfBoundsException in BasedSequence.indexOfAll]: https://github.com/vsch/flexmark-java/issues/362
 [#372, \[Regression?\] Attributes extension not applied to \`code\` tag of code blocks]: https://github.com/vsch/flexmark-java/issues/372
 [Awesome Console]: https://plugins.jetbrains.com/plugin/7677-awesome-console "Awesome Console"
-[HtmlToMarkdownCustomizedSample.java]: https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/samples/HtmlToMarkdownCustomizedSample.java
+[HtmlToMarkdownCustomizedSample.java]: https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/java/samples/HtmlToMarkdownCustomizedSample.java
 [Kijimuna]: https://github.com/Kijimuna
 [migrate 0_35_x to 0_40_0.xml]: /assets/migrations/migrate%20flexmark-java%200_35_x%20to%200_40_0.xml
 [migrate flexmark-java 0_40_x to 0_42_0]: https://github.com/vsch/flexmark-java/blob/master/assets/migrations/migrate%20flexmark-java%200_40_x%20to%200_42_0.xml
 [migrate flexmark-java 0_42_x to 0_50_0.xml]: https://github.com/vsch/flexmark-java/blob/master/assets/migrations/migrate%20flexmark-java%200_42_x%20to%200_50_0.xml
-[NodeInsertingPostProcessorSample.java]: https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/samples/NodeInsertingPostProcessorSample.java
-[PdfLandscapeConverter.java]: https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/samples/PdfLandscapeConverter.java
+[NodeInsertingPostProcessorSample.java]: https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/java/samples/NodeInsertingPostProcessorSample.java
+[PdfLandscapeConverter.java]: https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/java/samples/PdfLandscapeConverter.java
 [YouTrack: IDEA-207453]: https://youtrack.jetbrains.com/issue/IDEA-207453 "Add Conversion of ref anchor to UrlFilter for file line navigation"
 

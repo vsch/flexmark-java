@@ -46,6 +46,7 @@ public class TestUtils {
     public static final String DEFAULT_URL_PREFIX = "fqn://";  // use class fqn with resource path query
     public static final DataKey<Collection<Class<? extends Extension>>> UNLOAD_EXTENSIONS = new DataKey<>("UNLOAD_EXTENSIONS", Collections.emptyList());
     public static final DataKey<Collection<Extension>> LOAD_EXTENSIONS = new DataKey<>("LOAD_EXTENSIONS", Extension.EMPTY_LIST);
+    public static final @NotNull ResourceLocation DEFAULT_RESOURCE_LOCATION = ResourceLocation.of(TestUtils.class, TestUtils.DEFAULT_SPEC_RESOURCE, TestUtils.DEFAULT_URL_PREFIX);
 
     /**
      * process comma separated list of option sets and combine them for final set to use
@@ -240,34 +241,32 @@ public class TestUtils {
     }
 
     @NotNull
-    public static String getSpecResourceFileUrl(@NotNull ResourceLocation location) {
-        return getSpecResourceFileUrl(location.getResourceClass(), location.getResourcePath(), location.getFileUrlPrefix());
-    }
-
-    @NotNull
     public static String getSpecResourceFileUrl(@NotNull Class<?> resourceClass, @NotNull String resourcePath, @NotNull String urlPrefix) {
-        String resolvedResourcePath = getSpecResourceName(resourceClass.getName(), resourcePath);
-        if (urlPrefix.equals(DEFAULT_URL_PREFIX)) {
+        if (resourcePath.isEmpty()) {
+            throw new IllegalStateException("Empty resource paths not supported");
+        } else {
+            String resolvedResourcePath = getSpecResourceName(resourceClass.getName(), resourcePath);
+            if (urlPrefix.equals(DEFAULT_URL_PREFIX)) {
 //            return DEFAULT_URL_PREFIX + resourceClass.getName().replace('.', '/') + "?" + resolvedSpecResource;
-            URL url = resourceClass.getResource(resolvedResourcePath);
-            return adjustedFileUrl(url);
-        }
-        return urlPrefix + resolvedResourcePath;
-    }
+                URL url = resourceClass.getResource(resolvedResourcePath);
+                return adjustedFileUrl(url);
+            }
 
-    public static List<Object[]> getTestData(@NotNull ResourceLocation location) {
-        return getTestData(location.getResourceClass(), location.getResourcePath(), location.getFileUrlPrefix());
+            return urlPrefix + resolvedResourcePath;
+        }
     }
 
     public static ArrayList<Object[]> getTestData(@NotNull Class<?> resourceClass, @NotNull String resourcePath, @NotNull String urlPrefix) {
-        String resolvedResourcePath = getSpecResourceName(resourceClass.getName(), resourcePath);
-        String fileUrl = getSpecResourceFileUrl(resourceClass, resolvedResourcePath, urlPrefix);
-        SpecReader specReader = SpecReader.createAndReadExamples(resourceClass, resourcePath, fileUrl);
+        return getTestData(ResourceLocation.of(resourceClass, resourcePath, urlPrefix));
+    }
+
+    public static ArrayList<Object[]> getTestData(@NotNull ResourceLocation location) {
+        SpecReader specReader = SpecReader.createAndReadExamples(location);
         List<SpecExample> examples = specReader.getExamples();
         ArrayList<Object[]> data = new ArrayList<>();
 
         // NULL example runs full spec test
-        data.add(new Object[] { SpecExample.NULL.withFileUrl(fileUrl) });
+        data.add(new Object[] { SpecExample.NULL.withResourceLocation(location) });
 
         for (SpecExample example : examples) {
             data.add(new Object[] { example });

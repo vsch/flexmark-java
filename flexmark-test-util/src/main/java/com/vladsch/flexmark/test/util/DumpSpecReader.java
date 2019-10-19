@@ -1,5 +1,6 @@
 package com.vladsch.flexmark.test.util;
 
+import com.vladsch.flexmark.test.spec.ResourceLocation;
 import com.vladsch.flexmark.test.spec.SpecExample;
 import com.vladsch.flexmark.test.spec.SpecReader;
 import com.vladsch.flexmark.util.data.DataHolder;
@@ -14,8 +15,8 @@ public class DumpSpecReader extends SpecReader {
     protected final SpecExampleProcessor testCase;
     protected StringBuilder exampleComment;
 
-    public DumpSpecReader(InputStream stream, SpecExampleProcessor testCase, String fileUrl) {
-        super(stream, fileUrl);
+    public DumpSpecReader(@NotNull InputStream stream, @NotNull SpecExampleProcessor testCase, @NotNull ResourceLocation location) {
+        super(stream, location);
         this.testCase = testCase;
     }
 

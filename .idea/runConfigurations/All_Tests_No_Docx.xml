@@ -1,8 +1,8 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="All Tests No Docx" type="JUnit" factoryName="JUnit">
     <module name="flexmark-test-suite" />
-    <option name="PACKAGE_NAME" value="com.vladsch.flexmark" />
-    <option name="MAIN_CLASS_NAME" value="com.vladsch.flexmark.FlexmarkTestSuiteNoDocx" />
+    <option name="PACKAGE_NAME" value="com.vladsch.flexmark.test.suite" />
+    <option name="MAIN_CLASS_NAME" value="com.vladsch.flexmark.test.suite.FlexmarkTestSuiteNoDocx" />
     <option name="METHOD_NAME" value="" />
     <option name="TEST_OBJECT" value="class" />
     <option name="PARAMETERS" value="" />

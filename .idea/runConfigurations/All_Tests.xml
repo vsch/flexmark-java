@@ -1,27 +1,21 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="All Tests" type="JUnit" factoryName="JUnit" singleton="true">
-    <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
     <module name="flexmark-test-suite" />
-    <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-    <option name="ALTERNATIVE_JRE_PATH" />
-    <option name="PACKAGE_NAME" value="com.vladsch.flexmark" />
-    <option name="MAIN_CLASS_NAME" value="com.vladsch.flexmark.FlexmarkTestSuite" />
+    <option name="PACKAGE_NAME" value="com.vladsch.flexmark.test.suite" />
+    <option name="MAIN_CLASS_NAME" value="com.vladsch.flexmark.test.suite.FlexmarkTestSuite" />
     <option name="METHOD_NAME" value="" />
     <option name="TEST_OBJECT" value="class" />
-    <option name="VM_PARAMETERS" value="-ea" />
     <option name="PARAMETERS" value="" />
     <option name="WORKING_DIRECTORY" value="file://$MODULE_DIR$" />
-    <option name="ENV_VARIABLES" />
-    <option name="PASS_PARENT_ENVS" value="true" />
     <option name="TEST_SEARCH_SCOPE">
       <value defaultName="wholeProject" />
     </option>
-    <envs />
     <dir value="$PROJECT_DIR$/flexmark-test-suite/src/test/java/com/vladsch/flexmark" />
-    <patterns />
     <RunnerSettings RunnerId="Debug with VisualVM">
       <option name="visualVMId" value="39089742193516" />
     </RunnerSettings>
-    <method />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
   </configuration>
 </component>

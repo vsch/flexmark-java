@@ -7,9 +7,9 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public abstract class SpecExampleRendererBase implements SpecExampleRenderer {
-    private final @NotNull SpecExample myExample;
-    private final @NotNull DataHolder myOptions;
-    private final boolean myIncludeExampleInfo;
+    protected final @NotNull SpecExample myExample;
+    protected final @NotNull DataHolder myOptions;
+    protected final boolean myIncludeExampleInfo;
     private boolean myIsFinalized;
     private @Nullable String myRenderedHtml;
     private @Nullable String myRenderedAst;

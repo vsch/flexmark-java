@@ -6,7 +6,7 @@ import com.vladsch.flexmark.ext.gfm.strikethrough.StrikethroughSubscriptExtensio
 import com.vladsch.flexmark.ext.ins.InsExtension;
 import com.vladsch.flexmark.ext.typographic.TypographicExtension;
 import com.vladsch.flexmark.parser.Parser;
-import com.vladsch.flexmark.superscript.SuperscriptExtension;
+import com.vladsch.flexmark.ext.superscript.SuperscriptExtension;
 import com.vladsch.flexmark.test.spec.ResourceLocation;
 import com.vladsch.flexmark.test.spec.SpecExample;
 import com.vladsch.flexmark.util.data.DataHolder;

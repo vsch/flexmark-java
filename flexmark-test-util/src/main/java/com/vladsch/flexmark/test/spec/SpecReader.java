@@ -28,7 +28,7 @@ public class SpecReader {
     protected static final Pattern SECTION_PATTERN = Pattern.compile("#{1,6} +(.*)");
 
     protected final @NotNull InputStream inputStream;
-    protected final @NotNull String fileUrl;
+    protected final @NotNull ResourceLocation resourceLocation;
     protected final List<SpecExample> examples = new ArrayList<>();
 
     protected State state = State.BEFORE;
@@ -42,21 +42,28 @@ public class SpecReader {
     protected int lineNumber = 0;
     protected int contentLineNumber = 0;
 
-    protected SpecReader(@NotNull InputStream stream, @NotNull String fileUrl) {
+    protected SpecReader(@NotNull InputStream stream, @NotNull ResourceLocation location) {
         this.inputStream = stream;
-        this.fileUrl = fileUrl;
+        this.resourceLocation = location;
     }
 
     @NotNull
     public String getFileUrl() {
-        return fileUrl;
+        return resourceLocation.getFileUrl();
     }
 
+    @NotNull
+    public ResourceLocation getResourceLocation() {
+        return resourceLocation;
+    }
+
+    @NotNull
     public List<SpecExample> getExamples() {
         return examples;
     }
 
-    public @NotNull List<String> getExamplesSourceAsString() {
+    @NotNull
+    public List<String> getExamplesSourceAsString() {
         List<String> result = new ArrayList<>();
         for (SpecExample example : examples) {
             result.add(example.getSource());
@@ -65,45 +72,28 @@ public class SpecReader {
     }
 
     public static @NotNull SpecReader create(@NotNull ResourceLocation location) {
-        return create(location.getResourceClass(), location.getResourcePath(), location.getFileUrl(), SpecReader::new);
-    }
-
-    public static @NotNull SpecReader create(@NotNull Class<?> resourceClass, @NotNull String specResource, @NotNull String fileUrl) {
-        return create(resourceClass, specResource, fileUrl, SpecReader::new);
+        return create(location, SpecReader::new);
     }
 
     public static @NotNull <S extends SpecReader> S create(@NotNull ResourceLocation location, @NotNull SpecReaderFactory<S> readerFactory) {
-        return create(location.getResourceClass(), location.getResourcePath(), location.getFileUrl(), readerFactory);
+        InputStream stream = getSpecInputStream(location);
+        return readerFactory.create(stream, location);
     }
 
-    public static @NotNull <S extends SpecReader> S create(@NotNull Class<?> resourceClass, @NotNull String specResource, @NotNull String fileUrl, @NotNull SpecReaderFactory<S> readerFactory) {
-        InputStream stream = getSpecInputStream(resourceClass, specResource);
-        return readerFactory.create(stream, fileUrl);
+    public static @NotNull SpecReader createAndReadExamples(@NotNull ResourceLocation location) {
+        return createAndReadExamples(location, SpecReader::new);
     }
-
-    public static @NotNull SpecReader createAndReadExamples(@NotNull Class<?> resourceClass, @NotNull String specResource, @NotNull String fileUrl) {
-        return createAndReadExamples(resourceClass, specResource, fileUrl, SpecReader::new);
-    }
-
     public static @NotNull <S extends SpecReader> S createAndReadExamples(@NotNull ResourceLocation location, @NotNull SpecReaderFactory<S> readerFactory) {
-        return createAndReadExamples(location.getResourceClass(), location.getResourcePath(), location.getFileUrl(), readerFactory);
-    }
-
-    public static @NotNull <S extends SpecReader> S createAndReadExamples(@NotNull Class<?> resourceClass, @NotNull String specResource, @NotNull String fileUrl, @NotNull SpecReaderFactory<S> readerFactory) {
-        S reader = create(resourceClass, specResource, fileUrl, readerFactory);
+        S reader = create(location, readerFactory);
         reader.readExamples();
         return reader;
     }
 
     public static @NotNull String readSpec(@NotNull ResourceLocation location) {
-        return readSpec(location.getResourceClass(), location.getResourcePath());
-    }
-
-    public static @NotNull String readSpec(@NotNull Class<?> resourceClass, @NotNull String specResource) {
         StringBuilder sb = new StringBuilder();
         try {
             String line;
-            InputStream inputStream = getSpecInputStream(resourceClass, specResource);
+            InputStream inputStream = getSpecInputStream(location);
             InputStreamReader streamReader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
             BufferedReader reader = new BufferedReader(streamReader);
             while ((line = reader.readLine()) != null) {
@@ -119,11 +109,11 @@ public class SpecReader {
         }
     }
 
-    public static @NotNull InputStream getSpecInputStream(@NotNull Class<?> resourceClass, @NotNull String specResource) {
-        String useSpecResource = TestUtils.getSpecResourceName(resourceClass.getName(), specResource);
-        InputStream stream = resourceClass.getResourceAsStream(useSpecResource);
+    public static @NotNull InputStream getSpecInputStream(@NotNull ResourceLocation location) {
+        String useSpecResource = location.getResolvedResourcePath();
+        InputStream stream = location.getResourceClass().getResourceAsStream(useSpecResource);
         if (stream == null) {
-            throw new IllegalStateException("Could not load " + specResource + " classpath resource for " + resourceClass);
+            throw new IllegalStateException("Could not load " + location);
         }
 
         return stream;
@@ -190,7 +180,7 @@ public class SpecReader {
             case HTML:
                 if (line.equals(EXAMPLE_BREAK)) {
                     state = State.BEFORE;
-                    addSpecExample(new SpecExample(fileUrl, contentLineNumber, optionsSet, section, exampleNumber, source.toString(), html.toString(), null, comment == null ? null : comment.toString()));
+                    addSpecExample(new SpecExample(resourceLocation, contentLineNumber, optionsSet, section, exampleNumber, source.toString(), html.toString(), null, comment == null ? null : comment.toString()));
                     resetContents();
                     lineAbsorbed = true;
                 } else if (line.equals(TYPE_BREAK)) {
@@ -205,7 +195,7 @@ public class SpecReader {
             case AST:
                 if (line.equals(EXAMPLE_BREAK)) {
                     state = State.BEFORE;
-                    addSpecExample(new SpecExample(fileUrl, contentLineNumber, optionsSet, section, exampleNumber, source.toString(), html.toString(), ast.toString(), comment == null ? null : comment.toString()));
+                    addSpecExample(new SpecExample(resourceLocation, contentLineNumber, optionsSet, section, exampleNumber, source.toString(), html.toString(), ast.toString(), comment == null ? null : comment.toString()));
                     resetContents();
                 } else {
                     ast.append(line).append('\n');

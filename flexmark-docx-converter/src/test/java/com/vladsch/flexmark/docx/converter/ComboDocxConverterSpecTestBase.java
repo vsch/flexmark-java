@@ -23,7 +23,7 @@ import com.vladsch.flexmark.ext.wikilink.WikiLinkExtension;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.html.renderer.AttributablePart;
 import com.vladsch.flexmark.parser.Parser;
-import com.vladsch.flexmark.superscript.SuperscriptExtension;
+import com.vladsch.flexmark.ext.superscript.SuperscriptExtension;
 import com.vladsch.flexmark.test.spec.SpecExample;
 import com.vladsch.flexmark.test.spec.SpecReader;
 import com.vladsch.flexmark.test.util.*;
@@ -54,7 +54,6 @@ public abstract class ComboDocxConverterSpecTestBase extends ComboSpecTestCase {
     static final boolean SKIP_IGNORED_TESTS = true;
     static final boolean DUMP_TEST_CASE_FILES = !SKIP_IGNORED_TESTS;
     static final boolean DUMP_ALL_TESTS_FILES = !SKIP_IGNORED_TESTS;
-    static final String PROJECT_ROOT_DIRECTORY = "/Users/vlad/src/projects/flexmark-java";
     static {
         // Set up a simple configuration that logs on the console.
         Logger root = Logger.getRootLogger();
@@ -82,8 +81,6 @@ public abstract class ComboDocxConverterSpecTestBase extends ComboSpecTestCase {
                     WikiLinkExtension.create()
             ))
             .set(DocxRenderer.RENDER_BODY_ONLY, true)
-            .set(DocxRenderer.DOC_RELATIVE_URL, String.format("file://%s", PROJECT_ROOT_DIRECTORY))
-            .set(DocxRenderer.DOC_ROOT_URL, String.format("file://%s/assets", PROJECT_ROOT_DIRECTORY))
             .set(DocxRenderer.SUPPRESS_HTML, true);
 
     private static HashMap<String, DataHolder> optionsMap = new HashMap<>();

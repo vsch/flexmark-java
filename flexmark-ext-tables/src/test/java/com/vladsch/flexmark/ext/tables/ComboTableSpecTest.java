@@ -67,6 +67,6 @@ public class ComboTableSpecTest extends RendererSpecTest {
         String source = Utils.getResourceAsString(ComboTableSpecTest.class, "/table.md");
         String html = Utils.getResourceAsString(ComboTableSpecTest.class, "/table.html");
 
-        assertRendering(example.getFileUrl().toString(), source, html, null, example.getOptionsSet());
+        assertRendering(example.withSource(source).withHtml(html).withAst(null));
     }
 }

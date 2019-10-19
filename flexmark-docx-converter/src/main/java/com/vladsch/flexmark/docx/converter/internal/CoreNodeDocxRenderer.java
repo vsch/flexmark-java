@@ -32,7 +32,7 @@ import com.vladsch.flexmark.ext.toc.TocBlockBase;
 import com.vladsch.flexmark.html.renderer.*;
 import com.vladsch.flexmark.parser.ListOptions;
 import com.vladsch.flexmark.parser.Parser;
-import com.vladsch.flexmark.superscript.Superscript;
+import com.vladsch.flexmark.ext.superscript.Superscript;
 import com.vladsch.flexmark.util.ImageUtils;
 import com.vladsch.flexmark.util.Pair;
 import com.vladsch.flexmark.util.ast.Document;

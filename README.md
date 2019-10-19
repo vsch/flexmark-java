@@ -53,7 +53,7 @@ following sample:
 ```
 
 Source:
-[BasicSample.java](flexmark-java-samples/src/com/vladsch/flexmark/samples/BasicSample.java)
+[BasicSample.java](flexmark-java-samples/src/com/vladsch/flexmark/java/samples/BasicSample.java)
 
 ```java
 package com.vladsch.flexmark.samples;
@@ -124,8 +124,8 @@ extension flags. `PegdownOptionsAdapter.getFlexmarkOptions()` will return a fres
 ```java
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
-import com.vladsch.flexmark.profiles.pegdown.Extensions;
-import com.vladsch.flexmark.profiles.pegdown.PegdownOptionsAdapter;
+import com.vladsch.flexmark.profile.pegdown.Extensions;
+import com.vladsch.flexmark.profile.pegdown.PegdownOptionsAdapter;
 import com.vladsch.flexmark.util.data.DataHolder;
 
 public class PegdownOptions {
@@ -150,8 +150,8 @@ To get closer to original pegdown HTML block parsing behavior use the method whi
 ```java
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
-import com.vladsch.flexmark.profiles.pegdown.Extensions;
-import com.vladsch.flexmark.profiles.pegdown.PegdownOptionsAdapter;
+import com.vladsch.flexmark.profile.pegdown.Extensions;
+import com.vladsch.flexmark.profile.pegdown.PegdownOptionsAdapter;
 import com.vladsch.flexmark.util.data.DataHolder;
 
 public class PegdownOptions {
@@ -167,7 +167,7 @@ public class PegdownOptions {
 ```
 
 A sample with a
-[custom link resolver](https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/samples/PegdownCustomLinkResolverOptions.java)
+[custom link resolver](https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/java/samples/PegdownCustomLinkResolverOptions.java)
 is also available, which includes link resolver for changing URLs or attributes of links and a
 custom node renderer if you need to override the generated link HTML.
 
@@ -228,7 +228,7 @@ custom node renderer if you need to override the generated link HTML.
 * Custom node rendering API with ability to invoke standard rendering for an overridden node,
   allowing custom node renders that only handle special cases and let the rest be rendered as
   usual.
-  [PegdownCustomLinkResolverOptions](https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/samples/PegdownCustomLinkResolverOptions.java)
+  [PegdownCustomLinkResolverOptions](https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/java/samples/PegdownCustomLinkResolverOptions.java)
 * [Gfm Issues](https://github.com/vsch/flexmark-java/wiki/Extensions#gfm-issues) and
   [Gfm Users](https://github.com/vsch/flexmark-java/wiki/Extensions#gfm-users) extensions for
   parsing and rendering `#123` and `@user-name` respectively.
@@ -622,14 +622,14 @@ BSD (2-clause) licensed, see [LICENSE.txt] file.
 [commonmark-java]: https://github.com/atlassian/commonmark-java
 [commonMarkSpec.md]: https://github.com/vsch/idea-multimarkdown/blob/master/test/data/performance/commonMarkSpec.md
 [docx4j]: https://www.docx4java.org/trac/docx4j
-[DocxConverter Sample]: https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/samples/DocxConverterCommonMark.java
-[Extensions.java]: flexmark-profile-pegdown/src/main/java/com/vladsch/flexmark/profiles/pegdown/Extensions.java
+[DocxConverter Sample]: https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/java/samples/DocxConverterCommonMark.java
+[Extensions.java]: flexmark-profile-pegdown/src/main/java/com/vladsch/flexmark/profile/pegdown/Extensions.java
 [flexmark-java]: https://github.com/vsch/flexmark-java
 [GitHub]: https://github.com/vsch/laravel-translation-manager
 [GitHub Issues page]: ../../issues
 [hang-pegdown.md]: https://github.com/vsch/idea-multimarkdown/blob/master/test/data/performance/hang-pegdown.md
 [hang-pegdown2.md]: https://github.com/vsch/idea-multimarkdown/blob/master/test/data/performance/hang-pegdown2.md
-[HtmlToMarkdownCustomizedSample.java]: https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/samples/HtmlToMarkdownCustomizedSample.java
+[HtmlToMarkdownCustomizedSample.java]: https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/java/samples/HtmlToMarkdownCustomizedSample.java
 [Include Markdown and HTML File Content]: ../../wiki/Usage#include-markdown-and-html-file-content
 [intellij-markdown]: https://github.com/valich/intellij-markdown
 [Jekyll]: https://jekyllrb.com
@@ -642,7 +642,7 @@ BSD (2-clause) licensed, see [LICENSE.txt] file.
 [Open HTML To PDF]: https://github.com/danfickle/openhtmltopdf
 [pegdown]: http://pegdown.org
 [Pegdown - Achilles heel of the Markdown Navigator plugin]: http://vladsch.com/blog/15
-[PegdownOptionsAdapter.java]: flexmark-profile-pegdown/src/main/java/com/vladsch/flexmark/profiles/pegdown/PegdownOptionsAdapter.java
+[PegdownOptionsAdapter.java]: flexmark-profile-pegdown/src/main/java/com/vladsch/flexmark/profile/pegdown/PegdownOptionsAdapter.java
 [PHP Markdown Extra]: https://michelf.ca/projects/php-markdown/extra/#abbr
 [spec.txt]: https://github.com/vsch/idea-multimarkdown/blob/master/test/data/performance/spec.md
 [VERSION.md]: https://github.com/vsch/idea-multimarkdown/blob/master/test/data/performance/VERSION.md

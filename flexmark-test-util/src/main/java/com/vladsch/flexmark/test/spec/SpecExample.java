@@ -1,15 +1,20 @@
 package com.vladsch.flexmark.test.spec;
 
 import com.vladsch.flexmark.test.util.TestUtils;
+import com.vladsch.flexmark.util.Utils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.io.File;
+import java.net.URL;
 import java.util.Objects;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 public class SpecExample {
-    public static final SpecExample NULL = new SpecExample("", 0, null, "", 0, "", "", null, null, true);
+    public static final SpecExample NULL = new SpecExample(ResourceLocation.NULL, 0, null, "", 0, "", "", null, null, true);
 
-    private final @NotNull String fileUrl;
+    private final @NotNull ResourceLocation resourceLocation;
     private final int lineNumber;
     private final @Nullable String optionsSet;
     private final @Nullable String section;
@@ -20,12 +25,12 @@ public class SpecExample {
     private final @Nullable String comment;
     private final boolean isNull;
 
-    public SpecExample(@NotNull String fileUrl, int lineNumber, @Nullable String optionsSet, @Nullable String section, int exampleNumber, @NotNull String source, @NotNull String html, @Nullable String ast, String comment) {
-        this(fileUrl, lineNumber, optionsSet, section, exampleNumber, source, html, ast, comment, false);
+    public SpecExample(@NotNull ResourceLocation resourceLocation, int lineNumber, @Nullable String optionsSet, @Nullable String section, int exampleNumber, @NotNull String source, @NotNull String html, @Nullable String ast, String comment) {
+        this(resourceLocation, lineNumber, optionsSet, section, exampleNumber, source, html, ast, comment, false);
     }
 
-    private SpecExample(@NotNull String fileUrl, int lineNumber, @Nullable String optionsSet, @Nullable String section, int exampleNumber, @NotNull String source, @NotNull String html, @Nullable String ast, String comment, boolean isNull) {
-        this.fileUrl = fileUrl;
+    private SpecExample(@NotNull ResourceLocation resourceLocation, int lineNumber, @Nullable String optionsSet, @Nullable String section, int exampleNumber, @NotNull String source, @NotNull String html, @Nullable String ast, String comment, boolean isNull) {
+        this.resourceLocation = resourceLocation;
         this.lineNumber = lineNumber;
         this.section = section;
         this.exampleNumber = exampleNumber;
@@ -44,18 +49,18 @@ public class SpecExample {
     }
 
     // @formatter:off
-    public SpecExample withFileUrl(@NotNull String fileUrl) { return new SpecExample(fileUrl, lineNumber, optionsSet, section, exampleNumber, source, html, ast, comment , isNull); }
-    public SpecExample withOptionsSet(@Nullable String optionsSet) { return new SpecExample(fileUrl, lineNumber, optionsSet, section, exampleNumber, source, html, ast, comment , isNull); }
-    public SpecExample withSection(@Nullable String section) { return new SpecExample(fileUrl, lineNumber, optionsSet, section, exampleNumber, source, html, ast, comment , isNull); }
-    public SpecExample withExampleNumber(int exampleNumber) { return new SpecExample(fileUrl, lineNumber, optionsSet, section, exampleNumber, source, html, ast, comment , isNull); }
-    public SpecExample withSource(@NotNull String source) { return new SpecExample(fileUrl, lineNumber, optionsSet, section, exampleNumber, source, html, ast, comment , isNull); }
-    public SpecExample withHtml(@NotNull String html) { return new SpecExample(fileUrl, lineNumber, optionsSet, section, exampleNumber, source, html, ast, comment , isNull); }
-    public SpecExample withAst(@Nullable String ast) { return new SpecExample(fileUrl, lineNumber, optionsSet, section, exampleNumber, source, html, ast, comment , isNull); }
+    public SpecExample withResourceLocation(@NotNull ResourceLocation location) { return new SpecExample(location, lineNumber, optionsSet, section, exampleNumber, source, html, ast, comment , isNull); }
+    public SpecExample withOptionsSet(@Nullable String optionsSet) { return new SpecExample(resourceLocation, lineNumber, optionsSet, section, exampleNumber, source, html, ast, comment , isNull); }
+    public SpecExample withSection(@Nullable String section) { return new SpecExample(resourceLocation, lineNumber, optionsSet, section, exampleNumber, source, html, ast, comment , isNull); }
+    public SpecExample withExampleNumber(int exampleNumber) { return new SpecExample(resourceLocation, lineNumber, optionsSet, section, exampleNumber, source, html, ast, comment , isNull); }
+    public SpecExample withSource(@NotNull String source) { return new SpecExample(resourceLocation, lineNumber, optionsSet, section, exampleNumber, source, html, ast, comment , isNull); }
+    public SpecExample withHtml(@NotNull String html) { return new SpecExample(resourceLocation, lineNumber, optionsSet, section, exampleNumber, source, html, ast, comment , isNull); }
+    public SpecExample withAst(@Nullable String ast) { return new SpecExample(resourceLocation, lineNumber, optionsSet, section, exampleNumber, source, html, ast, comment , isNull); }
     // @formatter:on
 
     public boolean isFullSpecExample() {
         return this != NULL && isNull
-                && !Objects.equals(this.fileUrl, NULL.fileUrl)
+                && !Objects.equals(this.resourceLocation, NULL.resourceLocation)
                 && Objects.equals(this.optionsSet, NULL.optionsSet)
                 && Objects.equals(this.section, NULL.section)
                 && this.exampleNumber == NULL.exampleNumber
@@ -85,7 +90,12 @@ public class SpecExample {
 
     @NotNull
     public String getFileUrl() {
-        return TestUtils.getUrlWithLineNumber(fileUrl, lineNumber);
+        return TestUtils.getUrlWithLineNumber(resourceLocation.getFileUrl(), lineNumber);
+    }
+
+    @NotNull
+    public ResourceLocation getResourceLocation() {
+        return resourceLocation;
     }
 
     @NotNull
@@ -130,5 +140,43 @@ public class SpecExample {
         } else {
             return "" + section + ": " + exampleNumber;
         }
+    }
+
+    final private static ConcurrentMap<String, String> classMap = new ConcurrentHashMap<>();
+
+    public static @NotNull SpecExample ofCaller(int callNesting, Class<?> resourceClass, @NotNull String source, @NotNull String html, @Nullable String ast) {
+        StackTraceElement[] trace = Thread.currentThread().getStackTrace();
+        StackTraceElement traceElement = trace[callNesting + 2];
+        String javaClassFile = classMap.get(resourceClass.getName());
+        if (javaClassFile == null) {
+            String fileName = traceElement.getFileName();
+            // need path to class, so fake it with class resource file
+            String javaFilePath = resourceClass.getName().replace('.', '/');
+            File javaPathFile = new File("/" + javaFilePath).getParentFile();
+            String javaPath = javaPathFile.getPath() + "/" + fileName;
+            URL url = null;
+            String prefix = null;
+            String resourcePath = null;
+            while (true) {
+                String absolutePath = Utils.removeSuffix(javaPathFile.getPath(), "/");
+                resourcePath = absolutePath.substring(1).replace('/', '.') + ".txt";
+                url = resourceClass.getResource("/" + resourcePath);
+                if (url != null) {
+                    prefix = Utils.getResourceAsString(resourceClass, "/" + resourcePath).trim();
+                    break;
+                }
+                javaPathFile = javaPathFile.getParentFile();
+                if (javaPathFile == null) break;
+            }
+            if (url == null) {
+                throw new IllegalStateException("Class mapping file not found for Class " + resourceClass + " add file under test resources with package for name and .txt extension");
+            }
+            String fileUrl = TestUtils.adjustedFileUrl(url);
+            javaClassFile = fileUrl.replaceFirst("/resources((?:/[^/]*?)*)/" + resourcePath, Utils.prefixWith(Utils.removeSuffix(prefix, '/'), '/') + "$1" + javaPath);
+            classMap.put(resourceClass.getName(), javaClassFile);
+        }
+
+        ResourceLocation location = ResourceLocation.of(resourceClass, "", "", javaClassFile);
+        return new SpecExample(location, traceElement.getLineNumber() - 1, null, traceElement.getMethodName(), 0, source, html, ast, "");
     }
 }

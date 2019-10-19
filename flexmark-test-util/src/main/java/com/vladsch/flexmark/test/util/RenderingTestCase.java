@@ -79,20 +79,12 @@ public abstract class RenderingTestCase implements SpecExampleProcessor {
     /*
      * Convenience functions for those tests that do not have an example
      */
-    final protected void assertRendering(String fileUrl, String source, String expectedHtml) {
-        assertRendering(fileUrl, source, expectedHtml, null, null);
+    final protected void assertRendering(@NotNull String source, @NotNull String html) {
+        assertRendering(SpecExample.ofCaller(1, this.getClass(), source, html, null));
     }
 
-    final protected void assertRendering(String source, String expectedHtml) {
-        assertRendering(null, source, expectedHtml, null, null);
-    }
-
-    final protected void assertRendering(String fileUrl, String source, String expectedHtml, String optionsSet) {
-        assertRendering(fileUrl, source, expectedHtml, null, optionsSet);
-    }
-
-    final protected void assertRendering(@Nullable String message, @NotNull String source, @NotNull String expectedHtml, @Nullable String expectedAst, @Nullable String optionsSet) {
-        assertRendering(new SpecExample(message == null ? "" : message, 0, optionsSet, "", 0, source, expectedHtml, expectedAst, null));
+    final protected void assertRendering(@NotNull String source, @NotNull String html, @Nullable String ast) {
+        assertRendering(SpecExample.ofCaller(1, this.getClass(), source, html, ast));
     }
 
     final protected void assertRendering(@NotNull SpecExample specExample) {
