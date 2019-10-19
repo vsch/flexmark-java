@@ -46,6 +46,4 @@ public class ComboEmojiCrashSpecTest extends RendererSpecTest {
     public @NotNull ResourceLocation getSpecResourceLocation() {
         return ResourceLocation.of(SPEC_RESOURCE);
     }
-
-
 }

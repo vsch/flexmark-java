@@ -20,7 +20,6 @@ public class ComboEmojiTranslationFormatterSpecTest extends TranslationFormatter
             .set(Parser.EXTENSIONS, Collections.singleton(EmojiExtension.create()))
             .toImmutable();
 
-
     private static final Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
         optionsMap.put("use-github", new MutableDataSet().set(EmojiExtension.USE_SHORTCUT_TYPE, EmojiShortcutType.GITHUB));

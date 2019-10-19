@@ -1,8 +1,8 @@
 package com.vladsch.flexmark.youtrack.converter;
 
+import com.vladsch.flexmark.core.test.util.RendererSpecTest;
 import com.vladsch.flexmark.ext.gfm.strikethrough.StrikethroughExtension;
 import com.vladsch.flexmark.ext.tables.TablesExtension;
-import com.vladsch.flexmark.core.test.util.RendererSpecTest;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.test.spec.ResourceLocation;
 import com.vladsch.flexmark.test.spec.SpecExample;

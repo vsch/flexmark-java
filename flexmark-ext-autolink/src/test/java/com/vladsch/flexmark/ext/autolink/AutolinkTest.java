@@ -72,6 +72,4 @@ public class AutolinkTest extends RenderingTestCase {
         assertRendering(
                 "<http://example.com>", "<p><a href=\"http://example.com\">http://example.com</a></p>\n");
     }
-
-
 }

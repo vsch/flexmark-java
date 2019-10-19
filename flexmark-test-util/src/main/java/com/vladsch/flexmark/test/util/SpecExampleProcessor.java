@@ -16,6 +16,7 @@ public interface SpecExampleProcessor {
 
     /**
      * Allows tests to modify example during reading (DumpSpecReader)
+     *
      * @param example example as it is in the test or spec file
      * @return modified example if needed
      */

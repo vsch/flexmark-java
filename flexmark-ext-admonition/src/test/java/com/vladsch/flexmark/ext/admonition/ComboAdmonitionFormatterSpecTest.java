@@ -20,7 +20,7 @@ public class ComboAdmonitionFormatterSpecTest extends FormatterSpecTest {
             .toImmutable();
 
     public ComboAdmonitionFormatterSpecTest(@NotNull SpecExample example) {
-        super(example,null,OPTIONS);
+        super(example, null, OPTIONS);
     }
 
     @Parameterized.Parameters(name = "{0}")

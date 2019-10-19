@@ -16,7 +16,7 @@ public class TableTextCollectingVisitorTest {
     public void test_basic() {
         DataHolder options = new MutableDataSet()
                 .set(Parser.EXTENSIONS, Arrays.asList(TablesExtension.create()))
-            .toImmutable();
+                .toImmutable();
 
         Parser parser = Parser.builder(options).build();
         String markdown =

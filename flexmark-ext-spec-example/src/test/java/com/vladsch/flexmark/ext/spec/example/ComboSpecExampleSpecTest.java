@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.ext.spec.example;
 
-import com.vladsch.flexmark.ext.spec.example.internal.RenderAs;
 import com.vladsch.flexmark.core.test.util.RendererSpecTest;
+import com.vladsch.flexmark.ext.spec.example.internal.RenderAs;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.test.spec.ResourceLocation;

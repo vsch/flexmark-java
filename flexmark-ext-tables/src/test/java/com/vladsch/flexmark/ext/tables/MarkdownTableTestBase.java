@@ -28,13 +28,11 @@ public class MarkdownTableTestBase {
         if (options == null) {
             options = new MutableDataSet()
                     .set(Parser.EXTENSIONS, Arrays.asList(TablesExtension.create()))
-            .toImmutable();
-
+                    .toImmutable();
         } else {
             options = new MutableDataSet(options)
                     .set(Parser.EXTENSIONS, Arrays.asList(TablesExtension.create()))
-            .toImmutable();
-
+                    .toImmutable();
         }
 
         Parser parser = Parser.builder(options).build();

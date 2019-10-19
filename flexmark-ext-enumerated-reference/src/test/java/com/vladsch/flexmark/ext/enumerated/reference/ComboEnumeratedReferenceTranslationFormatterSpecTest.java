@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.ext.enumerated.reference;
 
-import com.vladsch.flexmark.ext.attributes.AttributesExtension;
 import com.vladsch.flexmark.core.test.util.TranslationFormatterSpecTest;
+import com.vladsch.flexmark.ext.attributes.AttributesExtension;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.test.spec.ResourceLocation;
 import com.vladsch.flexmark.test.spec.SpecExample;
@@ -19,7 +19,6 @@ public class ComboEnumeratedReferenceTranslationFormatterSpecTest extends Transl
     private static final DataHolder OPTIONS = new MutableDataSet()
             .set(Parser.EXTENSIONS, Arrays.asList(EnumeratedReferenceExtension.create(), AttributesExtension.create()))
             .toImmutable();
-
 
     private static final Map<String, DataHolder> optionsMap = placementAndSortOptions(EnumeratedReferenceExtension.ENUMERATED_REFERENCE_PLACEMENT, EnumeratedReferenceExtension.ENUMERATED_REFERENCE_SORT);
 
