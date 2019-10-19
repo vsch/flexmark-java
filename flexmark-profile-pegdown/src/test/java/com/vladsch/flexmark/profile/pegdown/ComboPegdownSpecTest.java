@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.profile.pegdown;
 
-import com.vladsch.flexmark.test.spec.ResourceLocation;
-import com.vladsch.flexmark.test.spec.SpecExample;
+import com.vladsch.flexmark.test.util.spec.ResourceLocation;
+import com.vladsch.flexmark.test.util.spec.SpecExample;
 import com.vladsch.flexmark.test.util.ComboSpecTestCase;
 import com.vladsch.flexmark.test.util.FlexmarkSpecExampleRenderer;
 import com.vladsch.flexmark.test.util.SpecExampleRenderer;

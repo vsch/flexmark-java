@@ -1,8 +1,8 @@
 package com.vladsch.flexmark.core.test.util.formatter;
 
 import com.vladsch.flexmark.parser.Parser;
-import com.vladsch.flexmark.test.spec.ResourceLocation;
-import com.vladsch.flexmark.test.spec.SpecExample;
+import com.vladsch.flexmark.test.util.spec.ResourceLocation;
+import com.vladsch.flexmark.test.util.spec.SpecExample;
 import com.vladsch.flexmark.test.util.ComboSpecTestCase;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;

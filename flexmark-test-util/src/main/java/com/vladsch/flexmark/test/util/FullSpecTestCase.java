@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.test.util;
 
-import com.vladsch.flexmark.test.spec.ResourceLocation;
-import com.vladsch.flexmark.test.spec.SpecReader;
+import com.vladsch.flexmark.test.util.spec.ResourceLocation;
+import com.vladsch.flexmark.test.util.spec.SpecReader;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 

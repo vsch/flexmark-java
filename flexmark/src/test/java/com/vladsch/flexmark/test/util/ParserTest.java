@@ -4,7 +4,7 @@ import com.vladsch.flexmark.ast.*;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.block.*;
-import com.vladsch.flexmark.test.spec.SpecReader;
+import com.vladsch.flexmark.test.util.spec.SpecReader;
 import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.Node;

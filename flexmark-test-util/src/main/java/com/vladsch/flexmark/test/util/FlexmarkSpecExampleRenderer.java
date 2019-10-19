@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.test.util;
 
-import com.vladsch.flexmark.test.spec.SpecExample;
+import com.vladsch.flexmark.test.util.spec.SpecExample;
 import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.IParse;
 import com.vladsch.flexmark.util.ast.IRender;

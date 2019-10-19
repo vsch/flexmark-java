@@ -2,7 +2,7 @@ package com.vladsch.flexmark.ext.yaml.front.matter;
 
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
-import com.vladsch.flexmark.test.spec.SpecExample;
+import com.vladsch.flexmark.test.util.spec.SpecExample;
 import com.vladsch.flexmark.test.util.FlexmarkSpecExampleRenderer;
 import com.vladsch.flexmark.test.util.RenderingTestCase;
 import com.vladsch.flexmark.test.util.SpecExampleRenderer;

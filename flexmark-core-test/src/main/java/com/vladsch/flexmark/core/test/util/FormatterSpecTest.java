@@ -2,7 +2,7 @@ package com.vladsch.flexmark.core.test.util;
 
 import com.vladsch.flexmark.formatter.Formatter;
 import com.vladsch.flexmark.parser.Parser;
-import com.vladsch.flexmark.test.spec.SpecExample;
+import com.vladsch.flexmark.test.util.spec.SpecExample;
 import com.vladsch.flexmark.test.util.FlexmarkSpecExampleRenderer;
 import com.vladsch.flexmark.test.util.SpecExampleRenderer;
 import com.vladsch.flexmark.util.data.DataHolder;

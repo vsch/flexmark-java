@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.profile.pegdown;
 
-import com.vladsch.flexmark.test.spec.IParseBase;
+import com.vladsch.flexmark.test.util.spec.IParseBase;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKey;

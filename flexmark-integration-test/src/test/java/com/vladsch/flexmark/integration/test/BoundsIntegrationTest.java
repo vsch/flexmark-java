@@ -1,8 +1,8 @@
 package com.vladsch.flexmark.integration.test;
 
 import com.vladsch.flexmark.parser.Parser;
-import com.vladsch.flexmark.test.spec.SpecExample;
-import com.vladsch.flexmark.test.spec.SpecReader;
+import com.vladsch.flexmark.test.util.spec.SpecExample;
+import com.vladsch.flexmark.test.util.spec.SpecReader;
 import com.vladsch.flexmark.test.util.TestUtils;
 import com.vladsch.flexmark.util.ast.Node;
 import org.junit.Test;

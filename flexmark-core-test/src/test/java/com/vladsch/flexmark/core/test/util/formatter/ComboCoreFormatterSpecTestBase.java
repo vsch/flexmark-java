@@ -3,7 +3,7 @@ package com.vladsch.flexmark.core.test.util.formatter;
 import com.vladsch.flexmark.core.test.util.FormatterSpecTest;
 import com.vladsch.flexmark.formatter.Formatter;
 import com.vladsch.flexmark.parser.Parser;
-import com.vladsch.flexmark.test.spec.SpecExample;
+import com.vladsch.flexmark.test.util.spec.SpecExample;
 import com.vladsch.flexmark.test.util.ComboSpecTestCase;
 import com.vladsch.flexmark.util.ast.KeepType;
 import com.vladsch.flexmark.util.data.DataHolder;

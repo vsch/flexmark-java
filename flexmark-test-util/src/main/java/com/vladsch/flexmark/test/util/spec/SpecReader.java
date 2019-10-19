@@ -1,4 +1,4 @@
-package com.vladsch.flexmark.test.spec;
+package com.vladsch.flexmark.test.util.spec;
 
 import com.vladsch.flexmark.test.util.TestUtils;
 import org.jetbrains.annotations.NotNull;

@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.core.test.util.renderer;
 
 import com.vladsch.flexmark.parser.ParserEmulationProfile;
-import com.vladsch.flexmark.test.spec.ResourceLocation;
+import com.vladsch.flexmark.test.util.spec.ResourceLocation;
 import com.vladsch.flexmark.util.data.DataHolder;
 import org.jetbrains.annotations.NotNull;
 

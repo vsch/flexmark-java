@@ -2,8 +2,8 @@ package com.vladsch.flexmark.ext.admonition;
 
 import com.vladsch.flexmark.core.test.util.TranslationFormatterSpecTest;
 import com.vladsch.flexmark.parser.Parser;
-import com.vladsch.flexmark.test.spec.ResourceLocation;
-import com.vladsch.flexmark.test.spec.SpecExample;
+import com.vladsch.flexmark.test.util.spec.ResourceLocation;
+import com.vladsch.flexmark.test.util.spec.SpecExample;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import org.jetbrains.annotations.NotNull;

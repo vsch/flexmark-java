@@ -1,4 +1,4 @@
-package com.vladsch.flexmark.test.spec;
+package com.vladsch.flexmark.test.util.spec;
 
 import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.IParse;

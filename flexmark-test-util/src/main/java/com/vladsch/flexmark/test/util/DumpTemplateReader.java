@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.test.util;
 
-import com.vladsch.flexmark.test.spec.TemplateEntry;
-import com.vladsch.flexmark.test.spec.TemplateReader;
+import com.vladsch.flexmark.test.util.spec.TemplateEntry;
+import com.vladsch.flexmark.test.util.spec.TemplateReader;
 
 import java.io.InputStream;
 

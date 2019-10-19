@@ -13,7 +13,7 @@ import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.core.delimiter.Delimiter;
 import com.vladsch.flexmark.parser.delimiter.DelimiterProcessor;
 import com.vladsch.flexmark.parser.delimiter.DelimiterRun;
-import com.vladsch.flexmark.test.spec.SpecExample;
+import com.vladsch.flexmark.test.util.spec.SpecExample;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;

@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.core.test.util.renderer;
 
-import com.vladsch.flexmark.test.spec.ResourceLocation;
+import com.vladsch.flexmark.test.util.spec.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 
 final public class FullOrigSpecCoreTest extends OrigSpecCoreTest {

@@ -2,7 +2,7 @@ package com.vladsch.flexmark.test.util;
 
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
-import com.vladsch.flexmark.test.spec.SpecReader;
+import com.vladsch.flexmark.test.util.spec.SpecReader;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.State;

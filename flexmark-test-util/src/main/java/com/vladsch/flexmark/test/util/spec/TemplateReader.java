@@ -1,4 +1,4 @@
-package com.vladsch.flexmark.test.spec;
+package com.vladsch.flexmark.test.util.spec;
 
 import java.io.BufferedReader;
 import java.io.IOException;

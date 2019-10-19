@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.html2md.converter;
 
-import com.vladsch.flexmark.test.spec.ResourceLocation;
-import com.vladsch.flexmark.test.spec.SpecExample;
+import com.vladsch.flexmark.test.util.spec.ResourceLocation;
+import com.vladsch.flexmark.test.util.spec.SpecExample;
 import org.jetbrains.annotations.NotNull;
 import org.junit.runners.Parameterized;
 
