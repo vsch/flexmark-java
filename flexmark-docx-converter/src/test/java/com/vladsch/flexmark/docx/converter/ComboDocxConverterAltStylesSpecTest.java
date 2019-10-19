@@ -11,6 +11,7 @@ import java.util.List;
 
 public class ComboDocxConverterAltStylesSpecTest extends ComboDocxConverterSpecTestBase {
     private static final String SPEC_RESOURCE = "/docx_converter_ast_alt_styles_spec.md";
+    public static final @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
     public static final String TEMPLATE_XML = "/empty-numbered-headings.xml";
 
     private static final DataHolder OPTIONS = new MutableDataSet()
@@ -23,11 +24,6 @@ public class ComboDocxConverterAltStylesSpecTest extends ComboDocxConverterSpecT
 
     @Parameterized.Parameters(name = "{0}")
     public static List<Object[]> data() {
-        return getTestData(SPEC_RESOURCE);
-    }
-
-    @Override
-    public @NotNull ResourceLocation getSpecResourceLocation() {
-        return ResourceLocation.of(SPEC_RESOURCE);
+        return getTestData(RESOURCE_LOCATION);
     }
 }

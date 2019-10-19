@@ -2,11 +2,11 @@ package com.vladsch.flexmark.ext.autolink;
 
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
-import com.vladsch.flexmark.test.util.spec.SpecExample;
 import com.vladsch.flexmark.test.util.FlexmarkSpecExampleRenderer;
 import com.vladsch.flexmark.test.util.RenderingTestCase;
 import com.vladsch.flexmark.test.util.SpecExampleRenderer;
 import com.vladsch.flexmark.test.util.TestUtils;
+import com.vladsch.flexmark.test.util.spec.SpecExample;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataSet;
 import com.vladsch.flexmark.util.data.MutableDataSet;
@@ -17,7 +17,7 @@ import org.junit.Test;
 import java.util.Collections;
 
 public class AutolinkTest extends RenderingTestCase {
-    static final DataHolder OPTIONS = new MutableDataSet()
+    private static final DataHolder OPTIONS = new MutableDataSet()
             .set(TestUtils.NO_FILE_EOL, false)
             .set(Parser.EXTENSIONS, Collections.singleton(AutolinkExtension.create()))
             .toImmutable();

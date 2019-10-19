@@ -17,6 +17,7 @@ import java.util.*;
 
 public class ComboAttributesTranslationFormatterSpecTest extends TranslationFormatterSpecTest {
     private static final String SPEC_RESOURCE = "/ext_attributes_translation_format_spec.md";
+    public static final @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
     private static final DataHolder OPTIONS = new MutableDataSet()
             .set(Parser.EXTENSIONS, Collections.singleton(AttributesExtension.create()))
             .toImmutable();
@@ -36,13 +37,8 @@ public class ComboAttributesTranslationFormatterSpecTest extends TranslationForm
         super(example, optionsMap, OPTIONS);
     }
 
-    @Override
-    public @NotNull ResourceLocation getSpecResourceLocation() {
-        return ResourceLocation.of(SPEC_RESOURCE);
-    }
-
     @Parameterized.Parameters(name = "{0}")
     public static List<Object[]> data() {
-        return getTestData(SPEC_RESOURCE);
+        return getTestData(RESOURCE_LOCATION);
     }
 }

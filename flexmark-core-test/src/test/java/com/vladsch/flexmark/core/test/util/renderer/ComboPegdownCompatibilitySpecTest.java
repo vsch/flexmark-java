@@ -3,9 +3,9 @@ package com.vladsch.flexmark.core.test.util.renderer;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.ParserEmulationProfile;
+import com.vladsch.flexmark.test.util.ComboSpecTestCase;
 import com.vladsch.flexmark.test.util.spec.ResourceLocation;
 import com.vladsch.flexmark.test.util.spec.SpecExample;
-import com.vladsch.flexmark.test.util.ComboSpecTestCase;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import org.jetbrains.annotations.NotNull;
@@ -17,8 +17,9 @@ import java.util.Map;
 
 final public class ComboPegdownCompatibilitySpecTest extends CoreRendererSpecTest {
     private static final String SPEC_RESOURCE = "/core_pegdown_compatibility_spec.md";
+    public static final @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
 
-    static final DataHolder OPTIONS = new MutableDataSet().setFrom(ParserEmulationProfile.PEGDOWN_STRICT)
+    private static final DataHolder OPTIONS = new MutableDataSet().setFrom(ParserEmulationProfile.PEGDOWN_STRICT)
             .set(HtmlRenderer.INDENT_SIZE, 2)
             .set(HtmlRenderer.PERCENT_ENCODE_URLS, true)
             .toMutable();
@@ -46,11 +47,6 @@ final public class ComboPegdownCompatibilitySpecTest extends CoreRendererSpecTes
 
     @Parameterized.Parameters(name = "{0}")
     public static List<Object[]> data() {
-        return ComboSpecTestCase.getTestData(SPEC_RESOURCE);
-    }
-
-    @Override
-    public @NotNull ResourceLocation getSpecResourceLocation() {
-        return ResourceLocation.of(SPEC_RESOURCE);
+        return ComboSpecTestCase.getTestData(RESOURCE_LOCATION);
     }
 }

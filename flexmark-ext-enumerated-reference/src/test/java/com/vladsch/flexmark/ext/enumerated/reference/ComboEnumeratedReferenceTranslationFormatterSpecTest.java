@@ -16,6 +16,7 @@ import java.util.Map;
 
 public class ComboEnumeratedReferenceTranslationFormatterSpecTest extends TranslationFormatterSpecTest {
     private static final String SPEC_RESOURCE = "/ext_enumerated_reference_translation_formatter_spec.md";
+    public static final @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
     private static final DataHolder OPTIONS = new MutableDataSet()
             .set(Parser.EXTENSIONS, Arrays.asList(EnumeratedReferenceExtension.create(), AttributesExtension.create()))
             .toImmutable();
@@ -26,13 +27,8 @@ public class ComboEnumeratedReferenceTranslationFormatterSpecTest extends Transl
         super(example, optionsMap, OPTIONS);
     }
 
-    @Override
-    public @NotNull ResourceLocation getSpecResourceLocation() {
-        return ResourceLocation.of(SPEC_RESOURCE);
-    }
-
     @Parameterized.Parameters(name = "{0}")
     public static List<Object[]> data() {
-        return getTestData(SPEC_RESOURCE);
+        return getTestData(RESOURCE_LOCATION);
     }
 }

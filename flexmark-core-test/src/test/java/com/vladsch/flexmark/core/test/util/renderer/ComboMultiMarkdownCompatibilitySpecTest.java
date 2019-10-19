@@ -13,6 +13,7 @@ import java.util.List;
 
 final public class ComboMultiMarkdownCompatibilitySpecTest extends CoreRendererSpecTest {
     private static final String SPEC_RESOURCE = "/core_multi_markdown_compatibility_spec.md";
+    public static final @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
     private static final DataHolder OPTIONS = new MutableDataSet()
             .setFrom(ParserEmulationProfile.MULTI_MARKDOWN)
             .set(HtmlRenderer.INDENT_SIZE, 4)
@@ -24,11 +25,6 @@ final public class ComboMultiMarkdownCompatibilitySpecTest extends CoreRendererS
 
     @Parameterized.Parameters(name = "{0}")
     public static List<Object[]> data() {
-        return getTestData(SPEC_RESOURCE);
-    }
-
-    @Override
-    public @NotNull ResourceLocation getSpecResourceLocation() {
-        return ResourceLocation.of(SPEC_RESOURCE);
+        return getTestData(RESOURCE_LOCATION);
     }
 }

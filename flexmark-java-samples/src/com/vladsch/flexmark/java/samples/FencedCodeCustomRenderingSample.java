@@ -18,7 +18,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class FencedCodeCustomRenderingSample {
-    static final DataHolder OPTIONS = new MutableDataSet().set(Parser.EXTENSIONS, Arrays.asList(
+    private static final DataHolder OPTIONS = new MutableDataSet().set(Parser.EXTENSIONS, Arrays.asList(
             TocExtension.create(),
             CustomExtension.create()
     ));

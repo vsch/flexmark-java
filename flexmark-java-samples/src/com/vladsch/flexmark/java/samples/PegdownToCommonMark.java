@@ -9,7 +9,7 @@ import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 
 public class PegdownToCommonMark {
-    static final DataHolder OPTIONS = PegdownOptionsAdapter.flexmarkOptions(
+    private static final DataHolder OPTIONS = PegdownOptionsAdapter.flexmarkOptions(
             Extensions.ALL
     );
 

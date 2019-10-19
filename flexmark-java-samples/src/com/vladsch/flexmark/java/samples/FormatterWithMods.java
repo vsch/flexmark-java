@@ -17,7 +17,7 @@ import com.vladsch.flexmark.util.sequence.SegmentedSequence;
 import java.util.Arrays;
 
 public class FormatterWithMods {
-    static final DataHolder OPTIONS = new MutableDataSet();
+    private static final DataHolder OPTIONS = new MutableDataSet();
 
     static final MutableDataSet FORMAT_OPTIONS = new MutableDataSet();
     static {

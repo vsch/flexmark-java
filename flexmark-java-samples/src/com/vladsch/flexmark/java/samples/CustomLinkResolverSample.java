@@ -23,7 +23,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class CustomLinkResolverSample {
-    static final DataHolder OPTIONS = new MutableDataSet().set(Parser.EXTENSIONS, Collections.singletonList(CustomExtension.create()));
+    private static final DataHolder OPTIONS = new MutableDataSet().set(Parser.EXTENSIONS, Collections.singletonList(CustomExtension.create()));
 
     public static final DataKey<String> DOC_RELATIVE_URL = new DataKey<>("DOC_RELATIVE_URL", "");
     public static final DataKey<String> DOC_ROOT_URL = new DataKey<>("DOC_ROOT_URL", "");

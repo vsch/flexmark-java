@@ -1,10 +1,10 @@
 package com.vladsch.flexmark.ext.superscript;
 
-import com.vladsch.flexmark.html.HtmlRenderer;
-import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.ext.superscript.internal.SuperscriptDelimiterProcessor;
 import com.vladsch.flexmark.ext.superscript.internal.SuperscriptJiraRenderer;
 import com.vladsch.flexmark.ext.superscript.internal.SuperscriptNodeRenderer;
+import com.vladsch.flexmark.html.HtmlRenderer;
+import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 

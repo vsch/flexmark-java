@@ -17,6 +17,7 @@ import java.util.Map;
 
 public class ComboMacrosFormatterSpecTest extends FormatterSpecTest {
     private static final String SPEC_RESOURCE = "/ext_macros_formatter_spec.md";
+    public static final @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
     private static final DataHolder OPTIONS = new MutableDataSet()
             .set(Parser.EXTENSIONS, Arrays.asList(MacrosExtension.create(), GitLabExtension.create(), TablesExtension.create()))
             .set(GitLabExtension.RENDER_BLOCK_MATH, false)
@@ -35,11 +36,6 @@ public class ComboMacrosFormatterSpecTest extends FormatterSpecTest {
 
     @Parameterized.Parameters(name = "{0}")
     public static List<Object[]> data() {
-        return getTestData(SPEC_RESOURCE);
-    }
-
-    @Override
-    public @NotNull ResourceLocation getSpecResourceLocation() {
-        return ResourceLocation.of(SPEC_RESOURCE);
+        return getTestData(RESOURCE_LOCATION);
     }
 }

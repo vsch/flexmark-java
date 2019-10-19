@@ -2,8 +2,6 @@ package com.vladsch.flexmark.ext.typographic.internal;
 
 import com.vladsch.flexmark.ast.util.Parsing;
 
-import java.util.regex.Pattern;
-
 class SmartsParsing {
     final Parsing myParsing;
     final String ELIPSIS;

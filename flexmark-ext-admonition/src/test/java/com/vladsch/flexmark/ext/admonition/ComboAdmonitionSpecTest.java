@@ -18,6 +18,7 @@ import java.util.Map;
 
 public class ComboAdmonitionSpecTest extends RendererSpecTest {
     private static final String SPEC_RESOURCE = "/ext_admonition_ast_spec.md";
+    public static final @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
     private static final DataHolder OPTIONS = new MutableDataSet()
             .set(Parser.EXTENSIONS, Arrays.asList(AdmonitionExtension.create(), TablesExtension.create()))
             .toImmutable();
@@ -35,11 +36,6 @@ public class ComboAdmonitionSpecTest extends RendererSpecTest {
 
     @Parameterized.Parameters(name = "{0}")
     public static List<Object[]> data() {
-        return getTestData(SPEC_RESOURCE);
-    }
-
-    @Override
-    public @NotNull ResourceLocation getSpecResourceLocation() {
-        return ResourceLocation.of(SPEC_RESOURCE);
+        return getTestData(RESOURCE_LOCATION);
     }
 }

@@ -1,5 +1,6 @@
 package com.vladsch.flexmark.test.suite;
 
+import com.vladsch.flexmark.CoreTestSuite;
 import com.vladsch.flexmark.core.test.util.formatter.CoreFormatterTestSuite;
 import com.vladsch.flexmark.core.test.util.renderer.CoreRendererTestSuite;
 import com.vladsch.flexmark.ext.abbreviation.ExtAbbreviationTestSuite;
@@ -24,6 +25,7 @@ import com.vladsch.flexmark.ext.jekyll.tag.ExtJekyllTagTestSuite;
 import com.vladsch.flexmark.ext.macros.ExtMacrosTestSuite;
 import com.vladsch.flexmark.ext.media.tags.ExtMediaTagsTestSuite;
 import com.vladsch.flexmark.ext.spec.example.ExtSpecExampleTestSuite;
+import com.vladsch.flexmark.ext.superscript.ExtSuperscriptTestSuite;
 import com.vladsch.flexmark.ext.tables.ExtTablesTestSuite;
 import com.vladsch.flexmark.ext.toc.ExtTocTestSuite;
 import com.vladsch.flexmark.ext.typographic.ExtTypographicTestSuite;
@@ -38,8 +40,6 @@ import com.vladsch.flexmark.integration.test.IntegrationTestSuite;
 import com.vladsch.flexmark.jira.converter.JiraConverterTestSuite;
 import com.vladsch.flexmark.pdf.converter.PdfConverterTestSuite;
 import com.vladsch.flexmark.profile.pegdown.PegdownProfileTestSuite;
-import com.vladsch.flexmark.ext.superscript.ExtSuperscriptTestSuite;
-import com.vladsch.flexmark.CoreTestSuite;
 import com.vladsch.flexmark.test.util.TestUtilsTestSuite;
 import com.vladsch.flexmark.util.UtilsTestSuite;
 import com.vladsch.flexmark.youtrack.converter.YouTrackConverterTestSuite;

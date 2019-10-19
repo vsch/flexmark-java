@@ -1,12 +1,12 @@
 package com.vladsch.flexmark.ext.superscript.internal;
 
+import com.vladsch.flexmark.ext.superscript.Superscript;
 import com.vladsch.flexmark.ext.superscript.SuperscriptExtension;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.NodeRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
 import com.vladsch.flexmark.html.renderer.NodeRendererFactory;
 import com.vladsch.flexmark.html.renderer.NodeRenderingHandler;
-import com.vladsch.flexmark.ext.superscript.Superscript;
 import com.vladsch.flexmark.util.data.DataHolder;
 
 import java.util.HashSet;

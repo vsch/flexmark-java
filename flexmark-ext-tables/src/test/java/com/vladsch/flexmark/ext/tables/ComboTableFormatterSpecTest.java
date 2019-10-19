@@ -21,6 +21,7 @@ import java.util.Map;
 
 public class ComboTableFormatterSpecTest extends FormatterSpecTest {
     private static final String SPEC_RESOURCE = "/ext_tables_formatter_spec.md";
+    public static final @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
     private static final DataHolder OPTIONS = new MutableDataSet()
             .set(Parser.EXTENSIONS, Collections.singleton(TablesExtension.create()))
             .set(Parser.LISTS_AUTO_LOOSE, false)
@@ -90,11 +91,6 @@ public class ComboTableFormatterSpecTest extends FormatterSpecTest {
 
     @Parameterized.Parameters(name = "{0}")
     public static List<Object[]> data() {
-        return getTestData(SPEC_RESOURCE);
-    }
-
-    @Override
-    public @NotNull ResourceLocation getSpecResourceLocation() {
-        return ResourceLocation.of(SPEC_RESOURCE);
+        return getTestData(RESOURCE_LOCATION);
     }
 }

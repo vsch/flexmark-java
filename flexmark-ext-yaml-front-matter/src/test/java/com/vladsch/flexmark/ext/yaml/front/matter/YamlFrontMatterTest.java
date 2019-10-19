@@ -2,11 +2,11 @@ package com.vladsch.flexmark.ext.yaml.front.matter;
 
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
-import com.vladsch.flexmark.test.util.spec.SpecExample;
 import com.vladsch.flexmark.test.util.FlexmarkSpecExampleRenderer;
 import com.vladsch.flexmark.test.util.RenderingTestCase;
 import com.vladsch.flexmark.test.util.SpecExampleRenderer;
 import com.vladsch.flexmark.test.util.TestUtils;
+import com.vladsch.flexmark.test.util.spec.SpecExample;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataSet;
@@ -23,7 +23,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class YamlFrontMatterTest extends RenderingTestCase {
-    static final DataHolder OPTIONS = new MutableDataSet()
+    private static final DataHolder OPTIONS = new MutableDataSet()
             .set(TestUtils.NO_FILE_EOL, false)
             .set(Parser.EXTENSIONS, Collections.singleton(YamlFrontMatterExtension.create()))
             .toImmutable();

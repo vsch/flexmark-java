@@ -3,8 +3,8 @@ package com.vladsch.flexmark.core.test.util.renderer;
 import com.vladsch.flexmark.core.test.util.RendererSpecTest;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
-import com.vladsch.flexmark.test.util.spec.SpecExample;
 import com.vladsch.flexmark.test.util.ComboSpecTestCase;
+import com.vladsch.flexmark.test.util.spec.SpecExample;
 import com.vladsch.flexmark.util.ast.KeepType;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
@@ -20,7 +20,7 @@ public abstract class CoreRendererSpecTest extends RendererSpecTest {
             .set(HtmlRenderer.OBFUSCATE_EMAIL_RANDOM, false)
             .toImmutable();
 
-    protected static final Map<String, DataHolder> optionsMap = new HashMap<>();
+    private static final Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
         ArrayList<String> userTags = new ArrayList<>(Parser.HTML_BLOCK_TAGS.getFrom(null));
         userTags.add("tag");

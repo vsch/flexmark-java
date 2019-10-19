@@ -16,6 +16,7 @@ import java.util.List;
 
 public class ComboEmojiJiraTest extends RendererSpecTest {
     private static final String SPEC_RESOURCE = "/ext_emoji_jira_spec.md";
+    public static final @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
     private static final DataHolder OPTIONS = new MutableDataSet()
             .set(HtmlRenderer.RENDER_HEADER_ID, false)
             .set(HtmlRenderer.GENERATE_HEADER_ID, true)
@@ -28,11 +29,6 @@ public class ComboEmojiJiraTest extends RendererSpecTest {
 
     @Parameterized.Parameters(name = "{0}")
     public static List<Object[]> data() {
-        return getTestData(SPEC_RESOURCE);
-    }
-
-    @Override
-    public @NotNull ResourceLocation getSpecResourceLocation() {
-        return ResourceLocation.of(SPEC_RESOURCE);
+        return getTestData(RESOURCE_LOCATION);
     }
 }

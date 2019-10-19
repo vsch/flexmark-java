@@ -1,8 +1,6 @@
 package com.vladsch.flexmark.html;
 
 import com.vladsch.flexmark.ast.Paragraph;
-import com.vladsch.flexmark.html.EmbeddedAttributeProvider;
-import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.block.NodePostProcessor;
 import com.vladsch.flexmark.parser.block.NodePostProcessorFactory;

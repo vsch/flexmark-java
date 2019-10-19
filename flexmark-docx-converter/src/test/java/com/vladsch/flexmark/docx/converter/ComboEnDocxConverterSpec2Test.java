@@ -9,6 +9,7 @@ import java.util.List;
 
 public class ComboEnDocxConverterSpec2Test extends ComboDocxConverterSpecTestBase {
     private static final String SPEC_RESOURCE = "/docx_converter_ast_spec2.md";
+    public static final @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
 
     public ComboEnDocxConverterSpec2Test(@NotNull SpecExample example) {
         super(example, null);
@@ -16,11 +17,6 @@ public class ComboEnDocxConverterSpec2Test extends ComboDocxConverterSpecTestBas
 
     @Parameterized.Parameters(name = "{0}")
     public static List<Object[]> data() {
-        return getTestData(SPEC_RESOURCE);
-    }
-
-    @Override
-    public @NotNull ResourceLocation getSpecResourceLocation() {
-        return ResourceLocation.of(SPEC_RESOURCE);
+        return getTestData(RESOURCE_LOCATION);
     }
 }

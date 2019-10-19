@@ -12,7 +12,7 @@ import com.vladsch.flexmark.util.data.MutableDataSet;
 import java.util.Arrays;
 
 public class FormatterMergeSample {
-    static final DataHolder OPTIONS = new MutableDataSet()
+    private static final DataHolder OPTIONS = new MutableDataSet()
             .set(Parser.EXTENSIONS, Arrays.asList(
                     AttributesExtension.create(),
                     FootnoteExtension.create(),

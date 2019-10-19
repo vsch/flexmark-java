@@ -19,7 +19,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class ParagraphCustomRenderingSample {
-    static final DataHolder OPTIONS = new MutableDataSet().set(Parser.EXTENSIONS, Collections.singletonList(
+    private static final DataHolder OPTIONS = new MutableDataSet().set(Parser.EXTENSIONS, Collections.singletonList(
             CustomExtension.create()
     ));
 

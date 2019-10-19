@@ -7,7 +7,7 @@ import com.vladsch.flexmark.pdf.converter.PdfConverterExtension;
 import com.vladsch.flexmark.profile.pegdown.Extensions;
 import com.vladsch.flexmark.profile.pegdown.PegdownOptionsAdapter;
 import com.vladsch.flexmark.util.ast.Node;
-import com.vladsch.flexmark.util.data.MutableDataHolder;
+import com.vladsch.flexmark.util.data.DataHolder;
 import org.apache.commons.io.IOUtils;
 import org.apache.pdfbox.pdmodel.encryption.AccessPermission;
 import org.apache.pdfbox.pdmodel.encryption.StandardProtectionPolicy;
@@ -17,13 +17,11 @@ import java.io.InputStream;
 import java.io.StringWriter;
 
 public class PdfConverter {
-    static final MutableDataHolder OPTIONS = PegdownOptionsAdapter.flexmarkOptions(
+    static final DataHolder OPTIONS = PegdownOptionsAdapter.flexmarkOptions(
             Extensions.ALL & ~(Extensions.ANCHORLINKS | Extensions.EXTANCHORLINKS_WRAP)
             , TocExtension.create()).toMutable()
             .set(TocExtension.LIST_CLASS, PdfConverterExtension.DEFAULT_TOC_LIST_CLASS)
-            //.set(HtmlRenderer.GENERATE_HEADER_ID, true)
-            //.set(HtmlRenderer.RENDER_HEADER_ID, true)
-            ;
+            .toImmutable();
 
     static String getResourceFileContent(String resourcePath) {
         StringWriter writer = new StringWriter();
@@ -159,7 +157,7 @@ public class PdfConverter {
         PdfConverterExtension.exportToPdf("/Users/vlad/src/pdf/flexmark-java.pdf", html, "", OPTIONS);
 
         // add PDF protection policy
-        OPTIONS.set(PdfConverterExtension.PROTECTION_POLICY, new StandardProtectionPolicy("opassword", "upassword", new AccessPermission()));
+        OPTIONS.toMutable().set(PdfConverterExtension.PROTECTION_POLICY, new StandardProtectionPolicy("opassword", "upassword", new AccessPermission()));
 
         PdfConverterExtension.exportToPdf("/Users/vlad/src/pdf/flexmark-java-pwd-protected.pdf", html, "", OPTIONS);
         System.out.println("Output PDF to /Users/vlad/src/pdf/flexmark-java-pwd-protected.pdf");

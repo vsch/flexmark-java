@@ -28,10 +28,9 @@ import java.util.Collections;
  */
 public class NodeInsertingPostProcessorSample {
 
-    static final MutableDataSet OPTIONS = new MutableDataSet();
-    static {
-        OPTIONS.set(Parser.EXTENSIONS, Collections.singletonList(NodeInsertingPostProcessorExtension.create()));
-    }
+    static final DataHolder OPTIONS = new MutableDataSet()
+            .set(Parser.EXTENSIONS, Collections.singletonList(NodeInsertingPostProcessorExtension.create()))
+            .toImmutable();
 
     static final Parser PARSER = Parser.builder(OPTIONS).build();
     static final HtmlRenderer RENDERER = HtmlRenderer.builder(OPTIONS).build();

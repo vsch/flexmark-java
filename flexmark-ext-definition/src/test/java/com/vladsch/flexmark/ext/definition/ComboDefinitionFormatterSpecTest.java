@@ -17,6 +17,7 @@ import java.util.Map;
 
 public class ComboDefinitionFormatterSpecTest extends FormatterSpecTest {
     private static final String SPEC_RESOURCE = "/ext_definition_formatter_spec.md";
+    public static final @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
     private static final DataHolder OPTIONS = new MutableDataSet()
             .set(Parser.EXTENSIONS, Collections.singleton(DefinitionExtension.create()))
             .set(Parser.LISTS_AUTO_LOOSE, false)
@@ -38,11 +39,6 @@ public class ComboDefinitionFormatterSpecTest extends FormatterSpecTest {
 
     @Parameterized.Parameters(name = "{0}")
     public static List<Object[]> data() {
-        return getTestData(SPEC_RESOURCE);
-    }
-
-    @Override
-    public @NotNull ResourceLocation getSpecResourceLocation() {
-        return ResourceLocation.of(SPEC_RESOURCE);
+        return getTestData(RESOURCE_LOCATION);
     }
 }

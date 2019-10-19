@@ -18,7 +18,6 @@ public class LoadUnloadDataKeyAggregator implements DataKeyAggregator {
     static {
         DataSet.registerDataKeyAggregator(INSTANCE);
     }
-
     private LoadUnloadDataKeyAggregator() {
 
     }
@@ -54,14 +53,14 @@ public class LoadUnloadDataKeyAggregator implements DataKeyAggregator {
             // have to combine these
             ArrayList<Extension> loadExtensions = new ArrayList<>(LOAD_EXTENSIONS.getFrom(other));
             loadExtensions.addAll(LOAD_EXTENSIONS.getFrom(overrides));
-            combined = combined.toMutable().set(LOAD_EXTENSIONS,loadExtensions);
+            combined = combined.toMutable().set(LOAD_EXTENSIONS, loadExtensions);
         }
 
         if (other.contains(UNLOAD_EXTENSIONS) && overrides.contains(UNLOAD_EXTENSIONS)) {
             // have to combine these
             ArrayList<Class<? extends Extension>> loadExtensions = new ArrayList<>(UNLOAD_EXTENSIONS.getFrom(other));
             loadExtensions.addAll(UNLOAD_EXTENSIONS.getFrom(overrides));
-            combined = combined.toMutable().set(UNLOAD_EXTENSIONS,loadExtensions);
+            combined = combined.toMutable().set(UNLOAD_EXTENSIONS, loadExtensions);
         }
         return combined;
     }

@@ -22,10 +22,9 @@ import java.util.Collections;
  */
 public class TokenReplacingPostProcessorSample {
 
-    static final MutableDataSet OPTIONS = new MutableDataSet();
-    static {
-        OPTIONS.set(Parser.EXTENSIONS, Collections.singletonList(LinkReplacingExtension.create()));
-    }
+    static final DataHolder OPTIONS = new MutableDataSet()
+            .set(Parser.EXTENSIONS, Collections.singletonList(LinkReplacingExtension.create()))
+            .toImmutable();
 
     static final Parser PARSER = Parser.builder(OPTIONS).build();
     static final HtmlRenderer RENDERER = HtmlRenderer.builder(OPTIONS).build();

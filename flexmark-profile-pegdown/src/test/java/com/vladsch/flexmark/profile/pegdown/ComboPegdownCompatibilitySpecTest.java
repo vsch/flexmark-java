@@ -12,7 +12,8 @@ import java.util.List;
 
 public class ComboPegdownCompatibilitySpecTest extends RendererSpecTest {
     private static final String SPEC_RESOURCE = "/pegdown_profile_compatibility_spec.md";
-    static final DataHolder OPTIONS = PegdownOptionsAdapter.flexmarkOptions(
+    public static final @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
+    private static final DataHolder OPTIONS = PegdownOptionsAdapter.flexmarkOptions(
             Extensions.FENCED_CODE_BLOCKS | Extensions.AUTOLINKS
     ).toMutable()
             .set(HtmlRenderer.OBFUSCATE_EMAIL_RANDOM, false)
@@ -24,11 +25,6 @@ public class ComboPegdownCompatibilitySpecTest extends RendererSpecTest {
 
     @Parameterized.Parameters(name = "{0}")
     public static List<Object[]> data() {
-        return getTestData(SPEC_RESOURCE);
-    }
-
-    @Override
-    public @NotNull ResourceLocation getSpecResourceLocation() {
-        return ResourceLocation.of(SPEC_RESOURCE);
+        return getTestData(RESOURCE_LOCATION);
     }
 }

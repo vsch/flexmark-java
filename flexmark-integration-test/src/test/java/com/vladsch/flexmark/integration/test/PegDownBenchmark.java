@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.integration.test;
 
-import com.vladsch.flexmark.test.util.spec.SpecReader;
 import com.vladsch.flexmark.test.util.TestUtils;
+import com.vladsch.flexmark.test.util.spec.SpecReader;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.State;

@@ -16,6 +16,7 @@ import java.util.List;
 
 public class ComboExtEnumeratedReferenceSpecTest extends RendererSpecTest {
     private static final String SPEC_RESOURCE = "/ext_enumerated_reference_ast_spec.md";
+    public static final @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
     private static final DataHolder OPTIONS = new MutableDataSet()
             .set(TablesExtension.WITH_CAPTION, true)
             .set(Parser.EXTENSIONS, Arrays.asList(EnumeratedReferenceExtension.create(), AttributesExtension.create(), TablesExtension.create()))
@@ -27,11 +28,6 @@ public class ComboExtEnumeratedReferenceSpecTest extends RendererSpecTest {
 
     @Parameterized.Parameters(name = "{0}")
     public static List<Object[]> data() {
-        return getTestData(SPEC_RESOURCE);
-    }
-
-    @Override
-    public @NotNull ResourceLocation getSpecResourceLocation() {
-        return ResourceLocation.of(SPEC_RESOURCE);
+        return getTestData(RESOURCE_LOCATION);
     }
 }

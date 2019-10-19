@@ -13,7 +13,9 @@ public abstract class FullSpecTestCase extends RenderingTestCase implements Spec
         return SpecReader.create(location, (stream, fileUrl) -> new DumpSpecReader(stream, this, fileUrl));
     }
 
-    protected abstract @NotNull ResourceLocation getSpecResourceLocation();
+    protected @NotNull ResourceLocation getSpecResourceLocation() {
+        return ResourceLocation.NULL;
+    }
 
     protected void fullTestSpecStarting() {
 
@@ -25,9 +27,10 @@ public abstract class FullSpecTestCase extends RenderingTestCase implements Spec
 
     @Test
     public void testSpecExample() {
+        ResourceLocation location = getSpecResourceLocation();
+        if (location.isNull()) return;
 
         fullTestSpecStarting();
-        ResourceLocation location = getSpecResourceLocation();
         DumpSpecReader reader = create(location);
         reader.readExamples();
         fullTestSpecComplete();

@@ -7,9 +7,9 @@ import com.vladsch.flexmark.ext.tables.TablesExtension;
 import com.vladsch.flexmark.ext.yaml.front.matter.YamlFrontMatterExtension;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.test.util.TestUtils;
 import com.vladsch.flexmark.test.util.spec.ResourceLocation;
 import com.vladsch.flexmark.test.util.spec.SpecExample;
-import com.vladsch.flexmark.test.util.TestUtils;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import org.jetbrains.annotations.NotNull;
@@ -27,6 +27,7 @@ import java.util.Map;
 
 @RunWith(Parameterized.class)
 public class SpecIntegrationTest extends RendererSpecTest {
+    public static final @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(TestUtils.DEFAULT_SPEC_RESOURCE);
     private static DataHolder OPTIONS = new MutableDataSet()
             .set(Parser.EXTENSIONS, Arrays.asList(
                     AutolinkExtension.create(),
@@ -56,12 +57,7 @@ public class SpecIntegrationTest extends RendererSpecTest {
 
     @Parameterized.Parameters(name = "{0}")
     public static List<Object[]> data() {
-        return getTestData(TestUtils.DEFAULT_SPEC_RESOURCE);
-    }
-
-    @Override
-    public @NotNull ResourceLocation getSpecResourceLocation() {
-        return ResourceLocation.of(TestUtils.DEFAULT_SPEC_RESOURCE);
+        return getTestData(RESOURCE_LOCATION);
     }
 
     @Override

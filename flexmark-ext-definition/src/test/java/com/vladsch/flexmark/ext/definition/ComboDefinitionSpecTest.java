@@ -17,6 +17,7 @@ import java.util.Map;
 
 public class ComboDefinitionSpecTest extends RendererSpecTest {
     private static final String SPEC_RESOURCE = "/ext_definition_ast_spec.md";
+    public static final @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
     private static final DataHolder OPTIONS = new MutableDataSet()
             .set(Parser.EXTENSIONS, Collections.singleton(DefinitionExtension.create()))
             .toImmutable();
@@ -34,11 +35,6 @@ public class ComboDefinitionSpecTest extends RendererSpecTest {
 
     @Parameterized.Parameters(name = "{0}")
     public static List<Object[]> data() {
-        return getTestData(SPEC_RESOURCE);
-    }
-
-    @Override
-    public @NotNull ResourceLocation getSpecResourceLocation() {
-        return ResourceLocation.of(SPEC_RESOURCE);
+        return getTestData(RESOURCE_LOCATION);
     }
 }

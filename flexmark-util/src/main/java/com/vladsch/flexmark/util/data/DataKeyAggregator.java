@@ -9,7 +9,7 @@ public interface DataKeyAggregator {
     /**
      * Combine options by applying aggregate action keys
      *
-     * @param combined  set of combined options (by overwriting or combined by prior aggregator)
+     * @param combined set of combined options (by overwriting or combined by prior aggregator)
      * @return combined and cleaned of aggregate action keys, return MutableDataHolder if it was modified so downstream aggregators re-use the mutable
      */
     @NotNull DataHolder aggregate(@NotNull DataHolder combined);

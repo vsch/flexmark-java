@@ -5,7 +5,7 @@ import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.profile.pegdown.Extensions;
 import com.vladsch.flexmark.profile.pegdown.PegdownOptionsAdapter;
 import com.vladsch.flexmark.util.ast.Node;
-import com.vladsch.flexmark.util.data.MutableDataHolder;
+import com.vladsch.flexmark.util.data.DataHolder;
 import org.apache.commons.io.IOUtils;
 import org.docx4j.Docx4J;
 import org.docx4j.openpackaging.exceptions.Docx4JException;
@@ -18,15 +18,15 @@ import java.io.StringWriter;
 
 public class DocxConverterPegdown {
     // don't need to use pegdown options adapter. You can setup the options as you like. I find this is a quick way to add all the fixings
-    static final MutableDataHolder OPTIONS = PegdownOptionsAdapter.flexmarkOptions(
-            Extensions.ALL & ~(Extensions.ANCHORLINKS | Extensions.EXTANCHORLINKS_WRAP)
-    ).toMutable()
+    static final DataHolder OPTIONS = PegdownOptionsAdapter.flexmarkOptions(
+            Extensions.ALL & ~(Extensions.ANCHORLINKS | Extensions.EXTANCHORLINKS_WRAP))
+            .toMutable()
             .set(DocxRenderer.SUPPRESS_HTML, true)
             // the DocxLinkResolver is added automatically, or alternately set it to false and add your own link resolver
             //.set(DocxRenderer.DEFAULT_LINK_RESOLVER, true)
             .set(DocxRenderer.DOC_RELATIVE_URL, "file:///Users/vlad/src/pdf") // this will be used for URLs like 'images/...' or './' or '../'
             .set(DocxRenderer.DOC_ROOT_URL, "file:///Users/vlad/src/pdf") // this will be used for URLs like: '/...'
-            ;
+            .toImmutable();
 
     static String getResourceFileContent(String resourcePath) {
         StringWriter writer = new StringWriter();

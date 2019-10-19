@@ -12,6 +12,7 @@ import java.util.List;
 
 final public class ComboExtraSpecTest extends CoreRendererSpecTest {
     private static final String SPEC_RESOURCE = "/core_extra_ast_spec.md";
+    public static final @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
 
     private static final DataHolder OPTIONS = new MutableDataSet()
             .set(HtmlRenderer.PERCENT_ENCODE_URLS, true)
@@ -23,11 +24,6 @@ final public class ComboExtraSpecTest extends CoreRendererSpecTest {
 
     @Parameterized.Parameters(name = "{0}")
     public static List<Object[]> data() {
-        return getTestData(SPEC_RESOURCE);
-    }
-
-    @Override
-    public @NotNull ResourceLocation getSpecResourceLocation() {
-        return ResourceLocation.of(SPEC_RESOURCE);
+        return getTestData(RESOURCE_LOCATION);
     }
 }

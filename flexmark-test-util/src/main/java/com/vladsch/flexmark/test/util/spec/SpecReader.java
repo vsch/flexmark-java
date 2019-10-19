@@ -42,7 +42,7 @@ public class SpecReader {
     protected int lineNumber = 0;
     protected int contentLineNumber = 0;
 
-    protected SpecReader(@NotNull InputStream stream, @NotNull ResourceLocation location) {
+    public SpecReader(@NotNull InputStream stream, @NotNull ResourceLocation location) {
         this.inputStream = stream;
         this.resourceLocation = location;
     }
@@ -83,6 +83,7 @@ public class SpecReader {
     public static @NotNull SpecReader createAndReadExamples(@NotNull ResourceLocation location) {
         return createAndReadExamples(location, SpecReader::new);
     }
+
     public static @NotNull <S extends SpecReader> S createAndReadExamples(@NotNull ResourceLocation location, @NotNull SpecReaderFactory<S> readerFactory) {
         S reader = create(location, readerFactory);
         reader.readExamples();

@@ -11,8 +11,6 @@ import com.vladsch.flexmark.html.renderer.NodeRenderingHandler;
 import com.vladsch.flexmark.parser.InlineParser;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.core.delimiter.Delimiter;
-import com.vladsch.flexmark.parser.delimiter.DelimiterProcessor;
-import com.vladsch.flexmark.parser.delimiter.DelimiterRun;
 import com.vladsch.flexmark.test.util.FlexmarkSpecExampleRenderer;
 import com.vladsch.flexmark.test.util.RenderingTestCase;
 import com.vladsch.flexmark.test.util.SpecExampleRenderer;
@@ -34,7 +32,7 @@ import java.util.Set;
 import static org.junit.Assert.assertEquals;
 
 final public class DelimiterProcessorTest extends RenderingTestCase {
-    static final DataHolder OPTIONS = new MutableDataSet()
+    private static final DataHolder OPTIONS = new MutableDataSet()
             .set(TestUtils.NO_FILE_EOL, false)
             .toImmutable();
     private static final Parser PARSER = Parser.builder(OPTIONS).customDelimiterProcessor(new AsymmetricDelimiterProcessor()).build();

@@ -7,16 +7,14 @@ import com.vladsch.flexmark.pdf.converter.PdfConverterExtension;
 import com.vladsch.flexmark.profile.pegdown.Extensions;
 import com.vladsch.flexmark.profile.pegdown.PegdownOptionsAdapter;
 import com.vladsch.flexmark.util.ast.Node;
-import com.vladsch.flexmark.util.data.MutableDataHolder;
+import com.vladsch.flexmark.util.data.DataHolder;
 
 public class PdfLandscapeConverter {
-    static final MutableDataHolder OPTIONS = PegdownOptionsAdapter.flexmarkOptions(
+    static final DataHolder OPTIONS = PegdownOptionsAdapter.flexmarkOptions(
             Extensions.ALL & ~(Extensions.ANCHORLINKS | Extensions.EXTANCHORLINKS_WRAP)
             , TocExtension.create()).toMutable()
             .set(TocExtension.LIST_CLASS, PdfConverterExtension.DEFAULT_TOC_LIST_CLASS)
-            //.set(HtmlRenderer.GENERATE_HEADER_ID, true)
-            //.set(HtmlRenderer.RENDER_HEADER_ID, true)
-            ;
+            .toImmutable();
 
     public static void main(String[] args) {
         String markdown = "" +

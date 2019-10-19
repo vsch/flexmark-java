@@ -19,7 +19,8 @@ public class DataSet implements DataHolder {
 
     /**
      * aggregate actions of two data sets, actions not applied
-     * @param other   first set of options
+     *
+     * @param other     first set of options
      * @param overrides overrides on options
      * @return resulting options where aggregate action keys were aggregated but not applied
      */
@@ -48,8 +49,9 @@ public class DataSet implements DataHolder {
 
     /**
      * Aggregate two sets of options by aggregating their aggregate action keys then applying those actions on the resulting collection
-     * @param other       options with aggregate actions already applied, no aggregate action keys are expected or checked
-     * @param overrides   overrides which may contain aggregate actions
+     *
+     * @param other     options with aggregate actions already applied, no aggregate action keys are expected or checked
+     * @param overrides overrides which may contain aggregate actions
      * @return resulting options with aggregate actions applied and removed from set
      */
     @NotNull
@@ -59,9 +61,9 @@ public class DataSet implements DataHolder {
         } else if (overrides == null) {
             return other;
         } else if (other == null) {
-            return overrides.toImmutable().aggregate().toImmutable();
+            return overrides.toDataSet().aggregate().toImmutable();
         } else {
-            return aggregateActions(other, overrides).toImmutable().aggregate();
+            return aggregateActions(other, overrides).toDataSet().aggregate().toImmutable();
         }
     }
 

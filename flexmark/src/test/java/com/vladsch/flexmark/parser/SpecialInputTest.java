@@ -1,7 +1,6 @@
 package com.vladsch.flexmark.parser;
 
 import com.vladsch.flexmark.html.HtmlRenderer;
-import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.test.util.*;
 import com.vladsch.flexmark.test.util.spec.SpecExample;
 import com.vladsch.flexmark.util.data.DataHolder;
@@ -12,7 +11,7 @@ import org.jetbrains.annotations.Nullable;
 import org.junit.Test;
 
 final public class SpecialInputTest extends RenderingTestCase {
-    static final DataHolder OPTIONS = new MutableDataSet()
+    private static final DataHolder OPTIONS = new MutableDataSet()
             .set(TestUtils.NO_FILE_EOL, false)
             .toImmutable();
 

@@ -14,6 +14,7 @@ import java.util.List;
 
 public class ComboYouTubeLinkSpecTest extends RendererSpecTest {
     private static final String SPEC_RESOURCE = "/ext_youtube_link_spec.md";
+    public static final @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
     private static final DataHolder OPTIONS = new MutableDataSet()
             .set(Parser.EXTENSIONS, Collections.singleton(YouTubeLinkExtension.create()))
             .toImmutable();
@@ -24,11 +25,6 @@ public class ComboYouTubeLinkSpecTest extends RendererSpecTest {
 
     @Parameterized.Parameters(name = "{0}")
     public static List<Object[]> data() {
-        return getTestData(SPEC_RESOURCE);
-    }
-
-    @Override
-    public @NotNull ResourceLocation getSpecResourceLocation() {
-        return ResourceLocation.of(SPEC_RESOURCE);
+        return getTestData(RESOURCE_LOCATION);
     }
 }

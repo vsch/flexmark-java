@@ -56,7 +56,7 @@ public class ResourceLocation {
         return resolvedResourcePath;
     }
 
-    boolean isNull() {
+    public boolean isNull() {
         return this == NULL;
     }
 

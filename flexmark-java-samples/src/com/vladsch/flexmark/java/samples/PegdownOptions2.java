@@ -5,7 +5,7 @@ import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.profile.pegdown.Extensions;
 import com.vladsch.flexmark.profile.pegdown.PegdownOptionsAdapter;
 import com.vladsch.flexmark.util.ast.Node;
-import com.vladsch.flexmark.util.data.MutableDataHolder;
+import com.vladsch.flexmark.util.data.DataHolder;
 
 public class PegdownOptions2 {
     static boolean headerLinks = false;
@@ -14,7 +14,7 @@ public class PegdownOptions2 {
     static String processed;
     static String data = "";
 
-    static final MutableDataHolder OPTIONS = PegdownOptionsAdapter.flexmarkOptions(
+    static final DataHolder OPTIONS = PegdownOptionsAdapter.flexmarkOptions(
             Extensions.ALL - (headerLinks ? 0 : Extensions.ANCHORLINKS)
                     - (hardwrap ? 0 : Extensions.HARDWRAPS) + (allowHtml ? 0 : Extensions.SUPPRESS_ALL_HTML)
             // add your extra extensions here
@@ -32,7 +32,7 @@ public class PegdownOptions2 {
         processed = RENDERER.render(document);
     }
     public static void main(String[] args) {
-        MutableDataHolder OPTIONS = PegdownOptionsAdapter.flexmarkOptions(
+        DataHolder OPTIONS = PegdownOptionsAdapter.flexmarkOptions(
                 Extensions.ALL - (headerLinks ? 0 : Extensions.ANCHORLINKS)
                         - (hardwrap ? 0 : Extensions.HARDWRAPS) + (allowHtml ? 0 : Extensions.SUPPRESS_ALL_HTML)
                 // add your extra extensions here
@@ -40,7 +40,7 @@ public class PegdownOptions2 {
         ).toMutable()
                 // set additional options here:
                 //.set(HtmlRenderer.FENCED_CODE_LANGUAGE_CLASS_PREFIX,"")
-                ;
+                .toImmutable();
 
         Parser PARSER = Parser.builder(OPTIONS).build();
         HtmlRenderer RENDERER = HtmlRenderer.builder(OPTIONS).build();

@@ -20,7 +20,6 @@ import java.util.Map;
 
 @RunWith(Parameterized.class)
 public abstract class ComboSpecTestCase extends FullSpecTestCase {
-
     protected final @NotNull SpecExample example;
     protected final @NotNull Map<String, DataHolder> optionsMap = new HashMap<>();
     protected final @Nullable DataHolder myDefaultOptions;
@@ -65,6 +64,11 @@ public abstract class ComboSpecTestCase extends FullSpecTestCase {
         return optionsMap.get(option);
     }
 
+    @Override
+    final protected @NotNull ResourceLocation getSpecResourceLocation() {
+        return example.getResourceLocation();
+    }
+
     @Test
     public void testSpecExample() {
         if (example.isFullSpecExample()) {
@@ -74,19 +78,7 @@ public abstract class ComboSpecTestCase extends FullSpecTestCase {
         }
     }
 
-    protected static @NotNull List<Object[]> getTestData(@NotNull String resourcePath) {
-        return TestUtils.getTestData(ComboSpecTestCase.class, resourcePath, TestUtils.DEFAULT_URL_PREFIX);
-    }
-
-    protected static @NotNull List<Object[]> getTestData(@NotNull Class<?> resourceClass, @NotNull String resourcePath) {
-        return TestUtils.getTestData(resourceClass, resourcePath, TestUtils.DEFAULT_URL_PREFIX);
-    }
-
     protected static @NotNull List<Object[]> getTestData(@NotNull ResourceLocation location) {
         return TestUtils.getTestData(location);
-    }
-
-    protected static @NotNull List<Object[]> getTestData(@NotNull Class<?> resourceClass, @NotNull String resourcePath, @NotNull String fileUrlPrefix) {
-        return TestUtils.getTestData(resourceClass, resourcePath, fileUrlPrefix);
     }
 }

@@ -11,6 +11,7 @@ import java.util.List;
 
 public class ComboAppHtmlAttributeConverterTest extends HtmlConverterTest {
     private static final String SPEC_RESOURCE = "/app_html_attribute_converter_spec.md";
+    public static final @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
     private static final DataHolder OPTIONS = new MutableDataSet()
             .set(FlexmarkHtmlConverter.OUTPUT_ATTRIBUTES_ID, true)
             .toImmutable();
@@ -21,11 +22,6 @@ public class ComboAppHtmlAttributeConverterTest extends HtmlConverterTest {
 
     @Parameterized.Parameters(name = "{0}")
     public static List<Object[]> data() {
-        return getTestData(SPEC_RESOURCE);
-    }
-
-    @Override
-    public @NotNull ResourceLocation getSpecResourceLocation() {
-        return ResourceLocation.of(SPEC_RESOURCE);
+        return getTestData(RESOURCE_LOCATION);
     }
 }

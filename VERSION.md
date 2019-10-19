@@ -9,6 +9,7 @@ flexmark-java
 - [Next 0.60.0](#next-0600)
     - [API Changes](#api-changes)
 - [Next 0.59.21](#next-05921)
+- [0.59.23](#05923)
 - [0.59.21](#05921)
 - [0.59.19](#05919)
 - [0.59.17](#05917)
@@ -156,6 +157,15 @@ Next 0.59.21
 * [ ] Fix: URGENT: Rewrite combo spec and full spec to be merged like markdown navigator action
       spec test and not requiring deep inheritance dependencies. Merge full test spec and
       individual tests. for example see MdNav `LightPlatformCodeInsightSpecTestCase`
+
+0.59.23
+-------
+
+* Fix: change all tests to use static const `ResourceLocation` instead of creating a new
+  instance.
+* Fix: make `ComboSpecTestCase.getSpecResourceLocation()` final and remove it from all
+  subclasses.
+
 
 0.59.21
 -------
