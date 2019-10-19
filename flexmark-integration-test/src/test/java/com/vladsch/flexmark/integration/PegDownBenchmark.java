@@ -19,7 +19,7 @@ import java.util.List;
 public class PegDownBenchmark {
 
     private static final String SPEC = SpecReader.readSpec(TestUtils.class, TestUtils.DEFAULT_SPEC_RESOURCE);
-    private static final List<String> SPEC_EXAMPLES = SpecReader.readExamplesAsString(TestUtils.class, TestUtils.DEFAULT_SPEC_RESOURCE, null, TestUtils.DEFAULT_URL_PREFIX);
+    private static final List<String> SPEC_EXAMPLES = SpecReader.createAndReadExamples(TestUtils.class, TestUtils.DEFAULT_SPEC_RESOURCE, TestUtils.DEFAULT_URL_PREFIX).getExamplesSourceAsString();
     private static final PegDownProcessor PROCESSOR = new PegDownProcessor(Extensions.FENCED_CODE_BLOCKS);
 
     public static void main(String[] args) throws Exception {

@@ -1,13 +1,11 @@
 package com.vladsch.flexmark.test.util;
 
+import com.vladsch.flexmark.test.spec.ResourceLocation;
 import com.vladsch.flexmark.test.spec.SpecExample;
 import com.vladsch.flexmark.test.spec.SpecReader;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.builder.Extension;
-import com.vladsch.flexmark.util.data.DataHolder;
-import com.vladsch.flexmark.util.data.DataKey;
-import com.vladsch.flexmark.util.data.MutableDataHolder;
-import com.vladsch.flexmark.util.data.MutableDataSet;
+import com.vladsch.flexmark.util.data.*;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.SegmentedSequence;
 import org.jetbrains.annotations.NotNull;
@@ -18,6 +16,7 @@ import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.Function;
@@ -47,7 +46,7 @@ public class TestUtils {
     public static final DataHolder NO_FILE_EOL_FALSE = new MutableDataSet().set(NO_FILE_EOL, false).toImmutable();
     public static final String DEFAULT_SPEC_RESOURCE = "/spec.txt";
     public static final String DEFAULT_URL_PREFIX = "fqn://";  // use class fqn with resource path query
-    public static final DataKey<Collection<Extension>> UNLOAD_EXTENSIONS = new DataKey<>("UNLOAD_EXTENSIONS", Extension.EMPTY_LIST);
+    public static final DataKey<Collection<Class<? extends Extension>>> UNLOAD_EXTENSIONS = new DataKey<>("UNLOAD_EXTENSIONS", Collections.emptyList());
     public static final DataKey<Collection<Extension>> LOAD_EXTENSIONS = new DataKey<>("LOAD_EXTENSIONS", Extension.EMPTY_LIST);
 
     /**
@@ -236,27 +235,37 @@ public class TestUtils {
     }
 
     @NotNull
-    public static String getSpecResourceName(@NotNull String testClassName, @NotNull String specResource) {
-        File specInfo = new File(specResource);
+    public static String getSpecResourceName(@NotNull String testClassName, @NotNull String resourcePath) {
+        File specInfo = new File(resourcePath);
         File classInfo = new File("/" + testClassName.replace('.', '/'));
-        return !specInfo.isAbsolute() ? new File(classInfo.getPath(), specResource).getPath() : specResource;
+        return !specInfo.isAbsolute() ? new File(classInfo.getPath(), resourcePath).getPath() : resourcePath;
     }
 
     @NotNull
-    public static String getSpecResourceFileUrl(@NotNull Class<?> resourceClass, @NotNull String specResource, @NotNull String urlPrefix) {
-        String resolvedSpecResource = getSpecResourceName(resourceClass.getName(), specResource);
-        if (urlPrefix.equals(DEFAULT_URL_PREFIX)) {
-//            return DEFAULT_URL_PREFIX + resourceClass.getName().replace('.', '/') + "?" + resolvedSpecResource;
-            URL url = resourceClass.getResource(resolvedSpecResource);
-            return adjustedFileUrl(url);
-        }
-        return urlPrefix + specResource;
+    public static String getSpecResourceFileUrl(@NotNull ResourceLocation location) {
+        return getSpecResourceFileUrl(location.getResourceClass(), location.getResourcePath(), location.getFileUrlPrefix());
     }
 
-    public static List<Object[]> getTestData(@NotNull Class<?> resourceClass, @NotNull String specResource, @NotNull String urlPrefix) {
-        String resolvedSpecResource = getSpecResourceName(resourceClass.getName(), specResource);
-        String fileUrl = getSpecResourceFileUrl(resourceClass, resolvedSpecResource, urlPrefix);
-        List<SpecExample> examples = SpecReader.readExamples(resourceClass, specResource, null, fileUrl);
+    @NotNull
+    public static String getSpecResourceFileUrl(@NotNull Class<?> resourceClass, @NotNull String resourcePath, @NotNull String urlPrefix) {
+        String resolvedResourcePath = getSpecResourceName(resourceClass.getName(), resourcePath);
+        if (urlPrefix.equals(DEFAULT_URL_PREFIX)) {
+//            return DEFAULT_URL_PREFIX + resourceClass.getName().replace('.', '/') + "?" + resolvedSpecResource;
+            URL url = resourceClass.getResource(resolvedResourcePath);
+            return adjustedFileUrl(url);
+        }
+        return urlPrefix + resolvedResourcePath;
+    }
+
+    public static List<Object[]> getTestData(@NotNull ResourceLocation location) {
+        return getTestData(location.getResourceClass(), location.getResourcePath(), location.getFileUrlPrefix());
+    }
+
+    public static List<Object[]> getTestData(@NotNull Class<?> resourceClass, @NotNull String resourcePath, @NotNull String urlPrefix) {
+        String resolvedResourcePath = getSpecResourceName(resourceClass.getName(), resourcePath);
+        String fileUrl = getSpecResourceFileUrl(resourceClass, resolvedResourcePath, urlPrefix);
+        SpecReader specReader = SpecReader.createAndReadExamples(resourceClass, resourcePath, fileUrl);
+        List<SpecExample> examples = specReader.getExamples();
         List<Object[]> data = new ArrayList<>();
 
         // NULL example runs full spec test

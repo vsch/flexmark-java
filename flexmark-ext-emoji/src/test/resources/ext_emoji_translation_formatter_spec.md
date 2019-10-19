@@ -473,28 +473,6 @@ Unknown shortcuts are converted to text with inline emphasis parsing
 ````````````````````````````````
 
 
-## Source Position Attribute
-
-```````````````````````````````` example(Source Position Attribute: 1) options(src-pos)
-# some leading text 
-:warning:
-.
-# SomeE LeEaADiING teEXt
-
-:warning:
-````````````````````````````````
-
-
-```````````````````````````````` example(Source Position Attribute: 2) options(src-pos)
-# some leading text 
-[:warning:](/url)
-.
-# SomeE LeEaADiING teEXt
-
-[:WaARNiING:](/url)
-````````````````````````````````
-
-
 ## Issue 168
 
 #168, Text with colons is incorrectly interpreted as an invalid emoji shortcut

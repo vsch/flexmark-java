@@ -1028,19 +1028,3 @@ teEXt {#value}
 ````````````````````````````````
 
 
-## Source Position Attribute
-
-```````````````````````````````` example(Source Position Attribute: 1) options(src-pos, no-text-attributes)
-Paragraph{style="color:red"}
-.
-paARaAGRaAph{style="color:red"}
-````````````````````````````````
-
-
-```````````````````````````````` example(Source Position Attribute: 2) options(src-pos)
-Paragraph{style="color:red"}
-.
-paARaAGRaAph{style="color:red"}
-````````````````````````````````
-
-

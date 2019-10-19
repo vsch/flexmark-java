@@ -7,6 +7,7 @@
       <module fileurl="file://$PROJECT_DIR$/FlexmarkJavaAssets/ScalaSamples/ScalaSamples.iml" filepath="$PROJECT_DIR$/FlexmarkJavaAssets/ScalaSamples/ScalaSamples.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark/flexmark.iml" filepath="$PROJECT_DIR$/flexmark/flexmark.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-all/flexmark-all.iml" filepath="$PROJECT_DIR$/flexmark-all/flexmark-all.iml" />
+      <module fileurl="file://$PROJECT_DIR$/flexmark-core-test/flexmark-core-test.iml" filepath="$PROJECT_DIR$/flexmark-core-test/flexmark-core-test.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-docx-converter/flexmark-docx-converter.iml" filepath="$PROJECT_DIR$/flexmark-docx-converter/flexmark-docx-converter.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-ext-abbreviation/flexmark-ext-abbreviation.iml" filepath="$PROJECT_DIR$/flexmark-ext-abbreviation/flexmark-ext-abbreviation.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-ext-admonition/flexmark-ext-admonition.iml" filepath="$PROJECT_DIR$/flexmark-ext-admonition/flexmark-ext-admonition.iml" />
@@ -40,9 +41,7 @@
       <module fileurl="file://$PROJECT_DIR$/flexmark-ext-yaml-front-matter/flexmark-ext-yaml-front-matter.iml" filepath="$PROJECT_DIR$/flexmark-ext-yaml-front-matter/flexmark-ext-yaml-front-matter.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-ext-youtube-embedded/flexmark-ext-youtube-embedded.iml" filepath="$PROJECT_DIR$/flexmark-ext-youtube-embedded/flexmark-ext-youtube-embedded.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-ext-zzzzzz/flexmark-ext-zzzzzz.iml" filepath="$PROJECT_DIR$/flexmark-ext-zzzzzz/flexmark-ext-zzzzzz.iml" />
-      <module fileurl="file://$PROJECT_DIR$/flexmark-formatter-test/flexmark-formatter-test.iml" filepath="$PROJECT_DIR$/flexmark-formatter-test/flexmark-formatter-test.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-formatter-test-suite/flexmark-formatter-test-suite.iml" filepath="$PROJECT_DIR$/flexmark-formatter-test-suite/flexmark-formatter-test-suite.iml" />
-      <module fileurl="file://$PROJECT_DIR$/flexmark-html-parser/flexmark-html-parser.iml" filepath="$PROJECT_DIR$/flexmark-html-parser/flexmark-html-parser.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-html2md-converter/flexmark-html2md-converter.iml" filepath="$PROJECT_DIR$/flexmark-html2md-converter/flexmark-html2md-converter.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-integration-test/flexmark-integration-test.iml" filepath="$PROJECT_DIR$/flexmark-integration-test/flexmark-integration-test.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-java.iml" filepath="$PROJECT_DIR$/flexmark-java.iml" />

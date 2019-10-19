@@ -7,6 +7,7 @@ import com.vladsch.flexmark.ext.toc.internal.TocUtils;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.test.spec.IParseBase;
 import com.vladsch.flexmark.test.spec.IRenderBase;
+import com.vladsch.flexmark.test.spec.ResourceLocation;
 import com.vladsch.flexmark.test.spec.SpecExample;
 import com.vladsch.flexmark.test.util.ComboSpecTestCase;
 import com.vladsch.flexmark.test.util.FlexmarkSpecExampleRenderer;
@@ -233,8 +234,8 @@ public class TocOptionsParserTest extends ComboSpecTestCase {
         }
     }
 
-    public TocOptionsParserTest(SpecExample example) {
-        super(example);
+    public TocOptionsParserTest(@NotNull SpecExample example) {
+        super(example, optionsMap, OPTIONS);
     }
 
     @Parameterized.Parameters(name = "{0}")
@@ -242,16 +243,9 @@ public class TocOptionsParserTest extends ComboSpecTestCase {
         return getTestData(SPEC_RESOURCE);
     }
 
-    @Nullable
     @Override
-    public DataHolder options(String option) {
-        return optionsMap.get(option);
-    }
-
-    @NotNull
-    @Override
-    public String getSpecResourceName() {
-        return SPEC_RESOURCE;
+    public @NotNull ResourceLocation getSpecResourceLocation() {
+        return ResourceLocation.of(SPEC_RESOURCE);
     }
 
     @Override

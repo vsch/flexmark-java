@@ -123,12 +123,6 @@ final public class SpecialInputTest extends RenderingTestCase {
         return null;
     }
 
-    @NotNull
-    @Override
-    public SpecExample getExample() {
-        return SpecExample.NULL;
-    }
-
     @Override
     public @NotNull SpecExampleRenderer getSpecExampleRenderer(@NotNull SpecExample example, @Nullable DataHolder exampleOptions) {
         DataHolder combineOptions = combineOptions(OPTIONS, exampleOptions);

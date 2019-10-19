@@ -14,7 +14,7 @@ public class MutableDataSet extends DataSet implements MutableDataHolder {
     }
 
     @Override
-    public <T> MutableDataSet set(DataKey<? extends T> key, T value) {
+    public <T> MutableDataSet set(DataKey<T> key, T value) {
         dataSet.put(key, value);
         return this;
     }
@@ -27,7 +27,7 @@ public class MutableDataSet extends DataSet implements MutableDataHolder {
     @Override
     public MutableDataSet setAll(DataHolder other) {
         for (DataKey<?> key : other.getKeys()) {
-            set(key, other.get(key));
+            dataSet.put(key, key.getFrom(other));
         }
         return this;
     }

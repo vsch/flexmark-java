@@ -1,24 +1,24 @@
 package com.vladsch.flexmark.integration;
 
+import com.vladsch.flexmark.core.test.util.RendererSpecTest;
 import com.vladsch.flexmark.ext.autolink.AutolinkExtension;
 import com.vladsch.flexmark.ext.gfm.strikethrough.StrikethroughExtension;
 import com.vladsch.flexmark.ext.tables.TablesExtension;
 import com.vladsch.flexmark.ext.yaml.front.matter.YamlFrontMatterExtension;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.test.spec.ResourceLocation;
 import com.vladsch.flexmark.test.spec.SpecExample;
-import com.vladsch.flexmark.test.util.*;
+import com.vladsch.flexmark.test.util.TestUtils;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -26,7 +26,7 @@ import java.util.Map;
  */
 
 @RunWith(Parameterized.class)
-public class SpecIntegrationTest extends RenderingTestCase {
+public class SpecIntegrationTest extends RendererSpecTest {
     private static DataHolder OPTIONS = new MutableDataSet()
             .set(Parser.EXTENSIONS, Arrays.asList(
                     AutolinkExtension.create(),
@@ -35,51 +35,44 @@ public class SpecIntegrationTest extends RenderingTestCase {
                     YamlFrontMatterExtension.create())
             )
             .set(TestUtils.NO_FILE_EOL, false)
+            .set(HtmlRenderer.INDENT_SIZE, 0)
             .set(HtmlRenderer.PERCENT_ENCODE_URLS, true)
             .toImmutable();
 
     private static final Map<String, String> OVERRIDDEN_EXAMPLES = getOverriddenExamples();
 
-    protected final SpecExample example;
-
-    @Override
-    public @Nullable DataHolder options(String option) {
-        return null;
-    }
-
-    public SpecIntegrationTest(SpecExample example) {
-        this.example = example;
+    public SpecIntegrationTest(@NotNull SpecExample example) {
+        super(example, null, OPTIONS);
     }
 
     @NotNull
-    @Override
-    public SpecExample getExample() {
+    public SpecExample checkExample(@NotNull SpecExample example) {
+        String expectedHtml = OVERRIDDEN_EXAMPLES.get(example.getSource());
+        if (expectedHtml != null) {
+            return example.withHtml(expectedHtml);
+        }
         return example;
     }
 
-    @Parameterized.Parameters
-    public static Collection<Object[]> data() {
-        return TestUtils.getTestData(ComboSpecTestCase.class, TestUtils.DEFAULT_SPEC_RESOURCE, TestUtils.DEFAULT_URL_PREFIX);
-    }
-
-    @Test
-    public void testHtmlRendering() {
-        String expectedHtml = OVERRIDDEN_EXAMPLES.get(example.getSource());
-        if (expectedHtml != null) {
-            assertRendering(example.getFileUrl(), example.getSource(), expectedHtml);
-        } else {
-            if (example.getAst() != null) {
-                assertRendering(example.getFileUrl(), example.getSource(), example.getHtml(), example.getAst(), example.getOptionsSet());
-            } else {
-                assertRendering(example.getFileUrl(), example.getSource(), example.getHtml(), example.getOptionsSet());
-            }
-        }
+    @Parameterized.Parameters(name = "{0}")
+    public static List<Object[]> data() {
+        return getTestData(TestUtils.DEFAULT_SPEC_RESOURCE);
     }
 
     @Override
-    public @NotNull SpecExampleRenderer getSpecExampleRenderer(@NotNull SpecExample example, @Nullable DataHolder exampleOptions) {
-        DataHolder combinedOptions = combineOptions(OPTIONS, exampleOptions);
-        return new FlexmarkSpecExampleRenderer(example, combinedOptions, Parser.builder(combinedOptions).build(), HtmlRenderer.builder(combinedOptions).build(), true);
+    public @NotNull ResourceLocation getSpecResourceLocation() {
+        return ResourceLocation.of(TestUtils.DEFAULT_SPEC_RESOURCE);
+    }
+
+    @Override
+    protected boolean wantExampleInfo() {
+        return false;
+    }
+
+    @Override
+    public void testFullSpec() {
+        // we don't want it because it will not match and we cannot modify the full spec.
+        super.testFullSpec();
     }
 
     private static Map<String, String> getOverriddenExamples() {

@@ -1,34 +1,29 @@
 package com.vladsch.flexmark.ext.gitlab;
 
+import com.vladsch.flexmark.core.test.util.RendererSpecTest;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.test.spec.ResourceLocation;
 import com.vladsch.flexmark.test.spec.SpecExample;
-import com.vladsch.flexmark.test.util.ComboSpecTestCase;
-import com.vladsch.flexmark.test.util.FlexmarkSpecExampleRenderer;
-import com.vladsch.flexmark.test.util.SpecExampleRenderer;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.junit.runners.Parameterized;
 
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ComboGitLabSpecTest extends ComboSpecTestCase {
+public class ComboGitLabSpecTest extends RendererSpecTest {
     private static final String SPEC_RESOURCE = "/ext_gitlab_ast_spec.md";
     private static final DataHolder OPTIONS = new MutableDataSet()
-            .set(HtmlRenderer.INDENT_SIZE, 2)
-            //.set(HtmlRenderer.PERCENT_ENCODE_URLS, true)
-            .set(HtmlRenderer.PERCENT_ENCODE_URLS, true)
             .set(HtmlRenderer.RENDER_HEADER_ID, true)
-            .set(Parser.EXTENSIONS, Arrays.asList(GitLabExtension.create()));
+            .set(Parser.EXTENSIONS, Collections.singletonList(GitLabExtension.create()))
+            .toImmutable();
 
     private static final Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
-        optionsMap.put("src-pos", new MutableDataSet().set(HtmlRenderer.SOURCE_POSITION_ATTRIBUTE, "md-pos"));
         optionsMap.put("no-del", new MutableDataSet().set(GitLabExtension.DEL_PARSER, false));
         optionsMap.put("no-ins", new MutableDataSet().set(GitLabExtension.INS_PARSER, false));
         optionsMap.put("no-quotes", new MutableDataSet().set(GitLabExtension.BLOCK_QUOTE_PARSER, false));
@@ -45,8 +40,8 @@ public class ComboGitLabSpecTest extends ComboSpecTestCase {
         optionsMap.put("video-link-format", new MutableDataSet().set(GitLabExtension.VIDEO_IMAGE_LINK_TEXT_FORMAT, "Get Video '%s'"));
         optionsMap.put("video-class", new MutableDataSet().set(GitLabExtension.VIDEO_IMAGE_CLASS, "video-class"));
     }
-    public ComboGitLabSpecTest(SpecExample example) {
-        super(example);
+    public ComboGitLabSpecTest(@NotNull SpecExample example) {
+        super(example, optionsMap, OPTIONS);
     }
 
     @Parameterized.Parameters(name = "{0}")
@@ -54,21 +49,8 @@ public class ComboGitLabSpecTest extends ComboSpecTestCase {
         return getTestData(SPEC_RESOURCE);
     }
 
-    @Nullable
     @Override
-    public DataHolder options(String option) {
-        return optionsMap.get(option);
-    }
-
-    @NotNull
-    @Override
-    public String getSpecResourceName() {
-        return SPEC_RESOURCE;
-    }
-
-    @Override
-    public @NotNull SpecExampleRenderer getSpecExampleRenderer(@NotNull SpecExample example, @Nullable DataHolder exampleOptions) {
-        DataHolder combinedOptions = combineOptions(OPTIONS, exampleOptions);
-        return new FlexmarkSpecExampleRenderer(example, combinedOptions, Parser.builder(combinedOptions).build(), HtmlRenderer.builder(combinedOptions).build(), true);
+    public @NotNull ResourceLocation getSpecResourceLocation() {
+        return ResourceLocation.of(SPEC_RESOURCE);
     }
 }

@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.samples;
 
-import com.vladsch.flexmark.convert.html.FlexmarkHtmlParser;
+import com.vladsch.flexmark.html2md.converter.FlexmarkHtmlConverter;
 
 public class HtmlToMarkdownSample {
     public static void main(String[] args) {
@@ -19,7 +19,7 @@ public class HtmlToMarkdownSample {
                 "    </table>\n" +
                 "  </li>\n" +
                 "</ul>";
-        String markdown = FlexmarkHtmlParser.parse(html);
+        String markdown = FlexmarkHtmlConverter.builder().build().convert(html);
 
         System.out.println("HTML:");
         System.out.println(html);

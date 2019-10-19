@@ -1,7 +1,8 @@
 package com.vladsch.flexmark.ext.admonition;
 
-import com.vladsch.flexmark.formatter.test.ComboTranslationFormatterSpecTestBase;
+import com.vladsch.flexmark.core.test.util.TranslationFormatterSpecTest;
 import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.test.spec.ResourceLocation;
 import com.vladsch.flexmark.test.spec.SpecExample;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
@@ -11,20 +12,19 @@ import org.junit.runners.Parameterized;
 import java.util.Collections;
 import java.util.List;
 
-public class ComboAdmonitionTranslationFormatterSpecTest extends ComboTranslationFormatterSpecTestBase {
+public class ComboAdmonitionTranslationFormatterSpecTest extends TranslationFormatterSpecTest {
     private static final String SPEC_RESOURCE = "/ext_admonition_translation_formatter_spec.md";
     private static final DataHolder OPTIONS = new MutableDataSet()
             .set(Parser.EXTENSIONS, Collections.singleton(AdmonitionExtension.create()))
             .set(Parser.LISTS_AUTO_LOOSE, false);
 
-    public ComboAdmonitionTranslationFormatterSpecTest(SpecExample example) {
-        super(example, OPTIONS, null);
+    public ComboAdmonitionTranslationFormatterSpecTest(@NotNull SpecExample example) {
+        super(example, null, OPTIONS);
     }
 
-    @NotNull
     @Override
-    public String getSpecResourceName() {
-        return SPEC_RESOURCE;
+    public @NotNull ResourceLocation getSpecResourceLocation() {
+        return ResourceLocation.of(SPEC_RESOURCE);
     }
 
     @Parameterized.Parameters(name = "{0}")

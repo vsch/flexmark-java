@@ -1,9 +1,9 @@
 package com.vladsch.flexmark.util.data;
 
 public class DataKey<T> {
-    private final String name;
-    private final DataValueFactory<T> factory;
-    private final T defaultValue;
+    protected final String name;
+    protected final DataValueFactory<T> factory;
+    protected final T defaultValue;
 
     /**
      * Creates a DataKey with a computed default value dynamically.
@@ -26,7 +26,7 @@ public class DataKey<T> {
      * @param name       See {@link #getName()}.
      * @param defaultKey The DataKey to take the default value from at time of construction.
      */
-    public DataKey(String name, DataKey<? extends T> defaultKey) {
+    public DataKey(String name, DataKey<T> defaultKey) {
         this(name, defaultKey::getFrom);
     }
 
@@ -48,6 +48,11 @@ public class DataKey<T> {
 
     public T getFrom(DataHolder holder) {
         return holder == null ? defaultValue : holder.get(this);
+    }
+
+    public MutableDataHolder set(MutableDataHolder holder, T value) {
+        holder.set(this,value);
+        return holder;
     }
 
     @Override

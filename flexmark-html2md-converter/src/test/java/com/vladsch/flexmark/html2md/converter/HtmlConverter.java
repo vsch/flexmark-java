@@ -8,7 +8,7 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 import org.jetbrains.annotations.NotNull;
 
 class HtmlConverter extends IParseBase {
-    @SuppressWarnings("PointlessBitwiseExpression") final static public DataKey<Integer> HTML_EXTENSIONS = new DataKey<>("HTML_EXTENSIONS", 0
+    final static public DataKey<Integer> HTML_EXTENSIONS = new DataKey<>("HTML_EXTENSIONS", 0
             //| Extensions.ABBREVIATIONS
             //| Extensions.EXTANCHORLINKS /*| Extensions.EXTANCHORLINKS_WRAP*/
             //| Extensions.AUTOLINKS

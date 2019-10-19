@@ -5,7 +5,6 @@ import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-        ComboExtraSpecTest.class,
         PathologicalTest.class,
         PathologicalSpcUrlTest.class,
 })

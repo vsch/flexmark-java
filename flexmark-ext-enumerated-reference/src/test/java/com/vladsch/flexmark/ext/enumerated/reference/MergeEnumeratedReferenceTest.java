@@ -14,9 +14,6 @@ import static org.junit.Assert.assertEquals;
 
 public class MergeEnumeratedReferenceTest {
     private static DataHolder OPTIONS = new MutableDataSet()
-            //.set(FormattingRenderer.INDENT_SIZE, 2)
-            //.set(HtmlRenderer.PERCENT_ENCODE_URLS, true)
-            //.set(Parser.EXTENSIONS, Collections.singleton(FormatterExtension.create()))
             .set(Parser.EXTENSIONS, Arrays.asList(EnumeratedReferenceExtension.create(), AttributesExtension.create()))
             .set(Parser.BLANK_LINES_IN_AST, true)
             .set(Parser.PARSE_INNER_HTML_COMMENTS, true)

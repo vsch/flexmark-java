@@ -1,16 +1,13 @@
 package com.vladsch.flexmark.ext.gfm.tasklist;
 
 import com.vladsch.flexmark.formatter.Formatter;
+import com.vladsch.flexmark.core.test.util.FormatterSpecTest;
 import com.vladsch.flexmark.parser.Parser;
-import com.vladsch.flexmark.parser.ParserEmulationProfile;
+import com.vladsch.flexmark.test.spec.ResourceLocation;
 import com.vladsch.flexmark.test.spec.SpecExample;
-import com.vladsch.flexmark.test.util.ComboSpecTestCase;
-import com.vladsch.flexmark.test.util.FlexmarkSpecExampleRenderer;
-import com.vladsch.flexmark.test.util.SpecExampleRenderer;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.junit.runners.Parameterized;
 
 import java.util.Collections;
@@ -18,21 +15,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ComboGfmTaskListFormatterSpecTest extends ComboSpecTestCase {
+public class ComboGfmTaskListFormatterSpecTest extends FormatterSpecTest {
     private static final String SPEC_RESOURCE = "/ext_gfm_tasklist_formatter_spec.md";
     private static final DataHolder OPTIONS = new MutableDataSet()
-            //.set(FormattingRenderer.INDENT_SIZE, 2)
-            //.set(HtmlRenderer.PERCENT_ENCODE_URLS, true)
             .set(Parser.EXTENSIONS, Collections.singleton(TaskListExtension.create()))
-            .set(Parser.BLANK_LINES_IN_AST, true)
-            .set(Parser.HEADING_NO_ATX_SPACE, true);
+            .toImmutable();
 
     private static final Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
-        //optionsMap.put("src-pos", new MutableDataSet().set(HtmlRenderer.SOURCE_POSITION_ATTRIBUTE, "md-pos"));
-        //optionsMap.put("option1", new MutableDataSet().set(FormatterExtension.FORMATTER_OPTION1, true));
         optionsMap.put("no-suffix-content", new MutableDataSet().set(Parser.LISTS_ITEM_CONTENT_AFTER_SUFFIX, true));
-        optionsMap.put("format-fixed-indent", new MutableDataSet().set(Formatter.FORMATTER_EMULATION_PROFILE, ParserEmulationProfile.FIXED_INDENT));
         optionsMap.put("task-case-as-is", new MutableDataSet().set(TaskListExtension.FORMAT_LIST_ITEM_CASE, TaskListItemCase.AS_IS));
         optionsMap.put("task-case-lowercase", new MutableDataSet().set(TaskListExtension.FORMAT_LIST_ITEM_CASE, TaskListItemCase.LOWERCASE));
         optionsMap.put("task-case-uppercase", new MutableDataSet().set(TaskListExtension.FORMAT_LIST_ITEM_CASE, TaskListItemCase.UPPERCASE));
@@ -43,8 +34,8 @@ public class ComboGfmTaskListFormatterSpecTest extends ComboSpecTestCase {
         optionsMap.put("task-placement-complete-nested-to-non-task", new MutableDataSet().set(TaskListExtension.FORMAT_LIST_ITEM_PLACEMENT, TaskListItemPlacement.COMPLETE_NESTED_TO_NON_TASK));
         optionsMap.put("remove-empty-items", new MutableDataSet().set(Formatter.LIST_REMOVE_EMPTY_ITEMS, true));
     }
-    public ComboGfmTaskListFormatterSpecTest(SpecExample example) {
-        super(example);
+    public ComboGfmTaskListFormatterSpecTest(@NotNull SpecExample example) {
+        super(example, optionsMap, OPTIONS);
     }
 
     @Parameterized.Parameters(name = "{0}")
@@ -52,21 +43,8 @@ public class ComboGfmTaskListFormatterSpecTest extends ComboSpecTestCase {
         return getTestData(SPEC_RESOURCE);
     }
 
-    @Nullable
     @Override
-    public DataHolder options(String option) {
-        return optionsMap.get(option);
-    }
-
-    @NotNull
-    @Override
-    public String getSpecResourceName() {
-        return SPEC_RESOURCE;
-    }
-
-    @Override
-    public @NotNull SpecExampleRenderer getSpecExampleRenderer(@NotNull SpecExample example, @Nullable DataHolder exampleOptions) {
-        DataHolder combinedOptions = combineOptions(OPTIONS, exampleOptions);
-        return new FlexmarkSpecExampleRenderer(example, combinedOptions, Parser.builder(combinedOptions).build(), Formatter.builder(combinedOptions).build(), true);
+    public @NotNull ResourceLocation getSpecResourceLocation() {
+        return ResourceLocation.of(SPEC_RESOURCE);
     }
 }

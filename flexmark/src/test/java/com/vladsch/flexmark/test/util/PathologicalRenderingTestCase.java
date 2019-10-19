@@ -29,12 +29,6 @@ public abstract class PathologicalRenderingTestCase extends RenderingTestCase {
         return null;
     }
 
-    @NotNull
-    @Override
-    final public SpecExample getExample() {
-        return SpecExample.NULL;
-    }
-
     @Override
     final public @NotNull SpecExampleRenderer getSpecExampleRenderer(@NotNull SpecExample example, @Nullable DataHolder exampleOptions) {
         DataHolder combinedOptions = combineOptions(OPTIONS, exampleOptions);

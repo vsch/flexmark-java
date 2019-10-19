@@ -59,12 +59,6 @@ final public class DelimiterProcessorTest extends RenderingTestCase {
         assertRendering("}foo{ bar", "<p>}foo{ bar</p>\n");
     }
 
-    @NotNull
-    @Override
-    public SpecExample getExample() {
-        return SpecExample.NULL;
-    }
-
     @Override
     public @Nullable DataHolder options(String option) {
         return null;

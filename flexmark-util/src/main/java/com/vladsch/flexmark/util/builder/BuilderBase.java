@@ -42,9 +42,7 @@ public abstract class BuilderBase<T extends BuilderBase<T>> extends MutableDataS
     /**
      * @param extensions extensions to load
      * @return {@code this}
-     * @deprecated use options with EXTENSIONS set
      */
-    @Deprecated
     final public T extensions(Collection<? extends Extension> extensions) {
         ArrayList<Extension> addedExtensions = new ArrayList<>(get(SharedDataKeys.EXTENSIONS).size() + extensions.size());
 
@@ -109,7 +107,7 @@ public abstract class BuilderBase<T extends BuilderBase<T>> extends MutableDataS
      * @return builder
      */
     @Override
-    public <D> MutableDataSet set(DataKey<? extends D> key, D value) {
+    public <D> MutableDataSet set(DataKey<D> key, D value) {
         addExtensionApiPoint(key);
         return super.set(key, value);
     }

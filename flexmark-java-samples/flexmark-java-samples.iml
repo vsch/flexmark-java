@@ -38,13 +38,12 @@
     <orderEntry type="module" module-name="flexmark-ext-jekyll-tag" />
     <orderEntry type="module" module-name="flexmark-ext-superscript" />
     <orderEntry type="module" module-name="flexmark-ext-xwiki-macros" />
-    <orderEntry type="module" module-name="flexmark-formatter-test" scope="TEST" />
+    <orderEntry type="module" module-name="flexmark-core-test" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-pdf-converter" />
     <orderEntry type="library" name="com.openhtmltopdf:openhtmltopdf-core" level="project" />
     <orderEntry type="library" name="com.openhtmltopdf:openhtmltopdf-jsoup-dom-converter" level="project" />
     <orderEntry type="library" name="com.openhtmltopdf:openhtmltopdf-pdfbox" level="project" />
     <orderEntry type="library" name="com.openhtmltopdf:openhtmltopdf-rtl-support" level="project" />
-    <orderEntry type="module" module-name="flexmark-html-parser" />
     <orderEntry type="module" module-name="flexmark-docx-converter" />
     <orderEntry type="module" module-name="flexmark-ext-admonition" />
     <orderEntry type="module" module-name="flexmark-ext-attributes" />

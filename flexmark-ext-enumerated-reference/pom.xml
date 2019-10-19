@@ -32,7 +32,7 @@
         </dependency>
         <dependency>
             <groupId>com.vladsch.flexmark</groupId>
-            <artifactId>flexmark-formatter-test</artifactId>
+            <artifactId>flexmark-core-test</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>

@@ -15,7 +15,9 @@ public class TableTextCollectingVisitorTest {
     @Test
     public void test_basic() {
         DataHolder options = new MutableDataSet()
-                .set(Parser.EXTENSIONS, Arrays.asList(TablesExtension.create()));
+                .set(Parser.EXTENSIONS, Arrays.asList(TablesExtension.create()))
+            .toImmutable();
+
         Parser parser = Parser.builder(options).build();
         String markdown =
                 "| First Header  | Second Header |\n" +

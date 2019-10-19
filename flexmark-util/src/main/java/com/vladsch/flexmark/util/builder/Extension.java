@@ -1,8 +1,6 @@
 package com.vladsch.flexmark.util.builder;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Base interface for a parser/renderer extension.

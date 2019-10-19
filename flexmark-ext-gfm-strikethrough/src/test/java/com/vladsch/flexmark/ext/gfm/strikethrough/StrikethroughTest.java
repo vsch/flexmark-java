@@ -23,18 +23,18 @@ public class StrikethroughTest extends RenderingTestCase {
             .set(TestUtils.NO_FILE_EOL, false)
             .set(Parser.EXTENSIONS, Collections.singleton(StrikethroughExtension.create()))
             .toImmutable();
-    private static final Parser PARSER = Parser.builder(OPTIONS).build();
-    private static final HtmlRenderer RENDERER = HtmlRenderer.builder(OPTIONS).build();
+    private static final @NotNull Parser PARSER = Parser.builder(OPTIONS).build();
+    private static final @NotNull HtmlRenderer RENDERER = HtmlRenderer.builder(OPTIONS).build();
+
+    @Override
+    public @NotNull SpecExampleRenderer getSpecExampleRenderer(@NotNull SpecExample example, @Nullable DataHolder exampleOptions) {
+        DataHolder combinedOptions = combineOptions(OPTIONS, exampleOptions);
+        return new FlexmarkSpecExampleRenderer(example, combinedOptions, PARSER, RENDERER, true);
+    }
 
     @Override
     public @Nullable DataHolder options(String option) {
         return null;
-    }
-
-    @NotNull
-    @Override
-    public SpecExample getExample() {
-        return SpecExample.NULL;
     }
 
     @Test
@@ -95,11 +95,5 @@ public class StrikethroughTest extends RenderingTestCase {
         Strikethrough strikethrough = (Strikethrough) document.getFirstChild().getFirstChild();
         assertEquals("~~", strikethrough.getOpeningMarker().toString());
         assertEquals("~~", strikethrough.getClosingMarker().toString());
-    }
-
-    @Override
-    public @NotNull SpecExampleRenderer getSpecExampleRenderer(@NotNull SpecExample example, @Nullable DataHolder exampleOptions) {
-        DataHolder combinedOptions = combineOptions(OPTIONS, exampleOptions);
-        return new FlexmarkSpecExampleRenderer(example, combinedOptions, Parser.builder(combinedOptions).build(), HtmlRenderer.builder(combinedOptions).build(), true);
     }
 }

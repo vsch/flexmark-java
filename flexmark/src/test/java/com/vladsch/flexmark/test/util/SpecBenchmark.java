@@ -15,7 +15,7 @@ import java.util.Collections;
 import java.util.List;
 
 @State(Scope.Benchmark)
-final public class SpecBenchmark {
+public class SpecBenchmark {
     private static final String SPEC = SpecReader.readSpec(TestUtils.class, TestUtils.DEFAULT_SPEC_RESOURCE);
     private static final List<String> SPEC_EXAMPLES =
             SpecReader.createAndReadExamples(TestUtils.class, TestUtils.DEFAULT_SPEC_RESOURCE, TestUtils.DEFAULT_URL_PREFIX)

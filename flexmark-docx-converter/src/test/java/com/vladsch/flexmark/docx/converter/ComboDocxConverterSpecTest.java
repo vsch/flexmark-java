@@ -1,5 +1,6 @@
 package com.vladsch.flexmark.docx.converter;
 
+import com.vladsch.flexmark.test.spec.ResourceLocation;
 import com.vladsch.flexmark.test.spec.SpecExample;
 import org.jetbrains.annotations.NotNull;
 import org.junit.runners.Parameterized;
@@ -10,7 +11,7 @@ public class ComboDocxConverterSpecTest extends ComboDocxConverterSpecTestBase {
     private static final String SPEC_RESOURCE = "/docx_converter_ast_spec.md";
     static final String FILE_TEST_CASE_DUMP_LOCATION = "/flexmark-docx-converter/src/test/resources/docx_converter_ast_spec/";
 
-    public ComboDocxConverterSpecTest(SpecExample example) {
+    public ComboDocxConverterSpecTest(@NotNull SpecExample example) {
         super(example, null);
     }
 
@@ -19,16 +20,9 @@ public class ComboDocxConverterSpecTest extends ComboDocxConverterSpecTestBase {
         return getTestData(SPEC_RESOURCE);
     }
 
-    @NotNull
     @Override
-    public String getSpecResourceName() {
-        return SPEC_RESOURCE;
-    }
-
-    @NotNull
-    @Override
-    public String getProjectRootDirectory() {
-        return PROJECT_ROOT_DIRECTORY;
+    public @NotNull ResourceLocation getSpecResourceLocation() {
+        return ResourceLocation.of(SPEC_RESOURCE);
     }
 
     @NotNull

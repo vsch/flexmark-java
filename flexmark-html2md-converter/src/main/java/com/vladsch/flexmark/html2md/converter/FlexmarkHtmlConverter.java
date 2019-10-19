@@ -130,7 +130,7 @@ public class FlexmarkHtmlConverter {
     public static final DataKey<LinkConversion> EXT_INLINE_LINK = new DataKey<>("EXT_INLINE_LINK", LinkConversion.MARKDOWN_EXPLICIT);
     public static final DataKey<LinkConversion> EXT_INLINE_IMAGE = new DataKey<>("EXT_INLINE_IMAGE", LinkConversion.MARKDOWN_EXPLICIT);
     public static final DataKey<Ref<com.vladsch.flexmark.util.ast.Document>> FOR_DOCUMENT = new DataKey<>("FOR_DOCUMENT", new Ref<>((com.vladsch.flexmark.util.ast.Document) null));
-    public static final DataKey<? extends Map<String, String>> TYPOGRAPHIC_REPLACEMENT_MAP = new DataKey<>("TYPOGRAPHIC_REPLACEMENT_MAP", new HashMap<>());
+    public static final DataKey<Map<String, String>> TYPOGRAPHIC_REPLACEMENT_MAP = new DataKey<>("TYPOGRAPHIC_REPLACEMENT_MAP", new HashMap<>());
 
     /**
      * if true then will dump HTML tree of body element to console when using {@link #convert(String, Appendable)}(String)

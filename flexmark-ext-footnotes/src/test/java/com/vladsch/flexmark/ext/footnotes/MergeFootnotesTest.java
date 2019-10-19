@@ -7,16 +7,13 @@ import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import org.junit.Test;
 
-import java.util.Arrays;
+import java.util.Collections;
 
 import static org.junit.Assert.assertEquals;
 
 public class MergeFootnotesTest {
     private static DataHolder OPTIONS = new MutableDataSet()
-            //.set(FormattingRenderer.INDENT_SIZE, 2)
-            //.set(HtmlRenderer.PERCENT_ENCODE_URLS, true)
-            //.set(Parser.EXTENSIONS, Collections.singleton(FormatterExtension.create()))
-            .set(Parser.EXTENSIONS, Arrays.asList(FootnoteExtension.create()))
+            .set(Parser.EXTENSIONS, Collections.singletonList(FootnoteExtension.create()))
             .set(Parser.BLANK_LINES_IN_AST, true)
             .set(Parser.PARSE_INNER_HTML_COMMENTS, true)
             .set(Parser.HEADING_NO_ATX_SPACE, true)

@@ -116,9 +116,8 @@ Please give feedback on the upcoming changes if you have concerns about breaking
       have these annotations for analysis of potential problems and use with Kotlin.
 * [x] Break: refactor and cleanup tests to eliminate duplicated code and allow easier reuse of
       test cases with spec example data.
-* [x] Break: move formatter tests to `flexmark-formatter-test` module to allow sharing of
-      formatter base classes in extensions without causing dependency cycles in formatter
-      module.
+* [x] Break: move formatter tests to `flexmark-core-test` module to allow sharing of formatter
+      base classes in extensions without causing dependency cycles in formatter module.
 * [x] Break: move formatter module into `flexmark` core. this module is almost always included
       anyway because most extension have a dependency on formatter for their custom formatting
       implementations. Having it as part of the core allows relying on its functionality in all
@@ -158,8 +157,8 @@ Next 0.59.15
 0.59.13
 -------
 
-* Break: move formatter tests to `flexmark-formatter-test` module to allow sharing of formatter
-  base classes in extensions without causing dependency cycles in formatter module.
+* Break: move formatter tests and html renderer to `flexmark-core-test` module to allow sharing
+  of test base classes in extensions without causing dependency cycles in formatter module.
 * Break: move formatter module into `flexmark` core. this module is almost always included
   anyway because most extension have a dependency on formatter for their custom formatting
   implementations. Having it as part of the core allows relying on its functionality in all
@@ -167,6 +166,18 @@ Next 0.59.15
 * Break: move `com.vladsch.flexmark.spec` and `com.vladsch.flexmark.util` in
   `flexmark-test-util` to `com.vladsch.flexmark.test.spec` and `com.vladsch.flexmark.test.util`
   respectively to respect the naming convention between modules and their packages.
+* Break: remove `flexmark-html-parser`, `flexmark-html2md-converter` is a replacement
+* Fix: revert back to `MutableDataSet.set(DataKey<T>, T)` to enforce compile time type checking
+  for typed class values
+* Fix: clean up all tests to eliminate duplication and unnecessary interface methods.
+
+  |    Metric     |  Before |   After |
+  |---------------|--------:|--------:|
+  | Files         |    1264 |    1297 |
+  | Lines         | 124,192 | 118,755 |
+  | Source Lines  |  96,669 |  92,145 |
+  | Comment Lines |   9,878 |   9,597 |
+  | Blank Lines   |  17,646 |  17,013 |
 
 ### 0.59.11
 

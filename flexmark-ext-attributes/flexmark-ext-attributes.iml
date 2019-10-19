@@ -35,7 +35,7 @@
     <orderEntry type="library" scope="TEST" name="Maven: org.hamcrest:hamcrest-core:1.3" level="project" />
     <orderEntry type="module" module-name="flexmark-ext-definition" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-ext-tables" scope="TEST" />
-    <orderEntry type="module" module-name="flexmark-formatter-test" scope="TEST" />
+    <orderEntry type="module" module-name="flexmark-core-test" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-ext-typographic" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-ext-escaped-character" scope="TEST" />
     <orderEntry type="library" name="org.jetbrains:annotations:15.0" level="project" />

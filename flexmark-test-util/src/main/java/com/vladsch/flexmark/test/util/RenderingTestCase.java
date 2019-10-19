@@ -33,15 +33,12 @@ public abstract class RenderingTestCase implements SpecExampleProcessor {
     public static final DataHolder NO_FILE_EOL_FALSE = TestUtils.NO_FILE_EOL_FALSE;
     public static final String DEFAULT_SPEC_RESOURCE = TestUtils.DEFAULT_SPEC_RESOURCE;
     public static final String DEFAULT_URL_PREFIX = TestUtils.DEFAULT_URL_PREFIX;
-    public static final DataKey<Collection<Extension>> UNLOAD_EXTENSIONS = TestUtils.UNLOAD_EXTENSIONS;
+    public static final DataKey<Collection<Class<? extends Extension>>> UNLOAD_EXTENSIONS = TestUtils.UNLOAD_EXTENSIONS;
     public static final DataKey<Collection<Extension>> LOAD_EXTENSIONS = TestUtils.LOAD_EXTENSIONS;
     public static final DataKey<Collection<Extension>> EXTENSIONS = SharedDataKeys.EXTENSIONS;
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
-
-    @NotNull
-    public abstract SpecExample getExample();
 
     /**
      * Override if combining option by overwriting corresponding keys is not sufficient
@@ -55,7 +52,8 @@ public abstract class RenderingTestCase implements SpecExampleProcessor {
     public DataHolder combineOptions(@Nullable DataHolder other, @Nullable DataHolder overrides) {
         // here we handle load and unload extension directives to convert them to adding/removing extensions from EXTENSIONS
         if (other != null && overrides != null) {
-            return new DataSet(resolveLoadUnload(other), resolveLoadUnload(overrides));
+            DataHolder combinedOptions = new DataSet(resolveLoadUnload(other), overrides);
+            return resolveLoadUnload(combinedOptions);
         } else if (other != null) {
             return resolveLoadUnload(other);
         } else {
@@ -65,25 +63,26 @@ public abstract class RenderingTestCase implements SpecExampleProcessor {
 
     private DataHolder resolveLoadUnload(@Nullable DataHolder options) {
         if (options != null && (options.contains(LOAD_EXTENSIONS) || options.contains(UNLOAD_EXTENSIONS))) {
-            Collection<Extension> extensions = options.get(EXTENSIONS);
-            Collection<Extension> loadExtensions = options.get(LOAD_EXTENSIONS);
-            Collection<Extension> unloadExtensions = options.get(UNLOAD_EXTENSIONS);
-            if (!loadExtensions.isEmpty() || !unloadExtensions.isEmpty() && !extensions.isEmpty()) {
-                LinkedHashSet<Extension> resolvedExtensions = new LinkedHashSet<>(extensions);
-                resolvedExtensions.addAll(loadExtensions);
-                resolvedExtensions.removeAll(unloadExtensions);
-                return options.toMutable()
-                        .remove(LOAD_EXTENSIONS)
-                        .remove(UNLOAD_EXTENSIONS)
-                        .set(EXTENSIONS, new ArrayList<>(resolvedExtensions))
-                        .toImmutable();
-            } else {
-                // just remove the offending keys
-                return options.toMutable()
-                        .remove(LOAD_EXTENSIONS)
-                        .remove(UNLOAD_EXTENSIONS)
-                        .toImmutable();
+            if (options.contains(EXTENSIONS)) {
+                Collection<Extension> extensions = options.get(EXTENSIONS);
+                Collection<Extension> loadExtensions = options.get(LOAD_EXTENSIONS);
+                Collection<Class<? extends Extension>> unloadExtensions = options.get(UNLOAD_EXTENSIONS);
+                if (!loadExtensions.isEmpty() || !unloadExtensions.isEmpty() && !extensions.isEmpty()) {
+                    LinkedHashSet<Extension> resolvedExtensions = new LinkedHashSet<>(extensions);
+                    resolvedExtensions.addAll(loadExtensions);
+                    resolvedExtensions.removeIf((extension) -> unloadExtensions.contains(extension.getClass()));
+                    return options.toMutable()
+                            .remove(LOAD_EXTENSIONS)
+                            .remove(UNLOAD_EXTENSIONS)
+                            .set(EXTENSIONS, new ArrayList<>(resolvedExtensions))
+                            .toImmutable();
+                }
             }
+            // just remove the offending keys
+            return options.toMutable()
+                    .remove(LOAD_EXTENSIONS)
+                    .remove(UNLOAD_EXTENSIONS)
+                    .toImmutable();
         }
         return options;
     }
@@ -103,6 +102,9 @@ public abstract class RenderingTestCase implements SpecExampleProcessor {
 
     }
 
+    /*
+     * Convenience functions for those tests that do not have an example
+     */
     final protected void assertRendering(String fileUrl, String source, String expectedHtml) {
         assertRendering(fileUrl, source, expectedHtml, null, null);
     }
@@ -115,8 +117,17 @@ public abstract class RenderingTestCase implements SpecExampleProcessor {
         assertRendering(fileUrl, source, expectedHtml, null, optionsSet);
     }
 
-    protected void assertRendering(@Nullable String message, @NotNull String source, @NotNull String expectedHtml, @Nullable String expectedAst, @Nullable String optionsSet) {
-        SpecExample example = getExample();
+    final protected void assertRendering(@Nullable String message, @NotNull String source, @NotNull String expectedHtml, @Nullable String expectedAst, @Nullable String optionsSet) {
+        assertRendering(new SpecExample(message == null ? "" : message, 0, optionsSet, "", 0, source, expectedHtml, expectedAst, null));
+    }
+
+    final protected void assertRendering(@NotNull SpecExample specExample) {
+        SpecExample example = checkExample(specExample);
+        String message = example.getFileUrl();
+        String source = example.getSource();
+        String optionsSet = example.getOptionsSet();
+        String expectedHtml = example.getHtml();
+        String expectedAst = example.getAst();
         DataHolder exampleOptions = TestUtils.getOptions(example, optionsSet, this::options, this::combineOptions);
 
         SpecExampleRenderer exampleRenderer = getSpecExampleRenderer(example, exampleOptions);
@@ -169,7 +180,7 @@ public abstract class RenderingTestCase implements SpecExampleProcessor {
             thrown.expect(ComparisonFailure.class);
         }
 
-        if (message != null) {
+        if (!message.isEmpty()) {
             assertEquals(message, expected, actual);
         } else {
             assertEquals(expected, actual);

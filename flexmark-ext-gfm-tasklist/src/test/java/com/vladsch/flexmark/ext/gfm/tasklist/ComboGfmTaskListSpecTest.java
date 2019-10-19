@@ -1,16 +1,14 @@
 package com.vladsch.flexmark.ext.gfm.tasklist;
 
+import com.vladsch.flexmark.core.test.util.RendererSpecTest;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.ParserEmulationProfile;
+import com.vladsch.flexmark.test.spec.ResourceLocation;
 import com.vladsch.flexmark.test.spec.SpecExample;
-import com.vladsch.flexmark.test.util.ComboSpecTestCase;
-import com.vladsch.flexmark.test.util.FlexmarkSpecExampleRenderer;
-import com.vladsch.flexmark.test.util.SpecExampleRenderer;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.junit.runners.Parameterized;
 
 import java.util.Collections;
@@ -18,18 +16,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ComboGfmTaskListSpecTest extends ComboSpecTestCase {
+public class ComboGfmTaskListSpecTest extends RendererSpecTest {
     static final String SPEC_RESOURCE = "/ext_gfm_tasklist_ast_spec.md";
     private static final DataHolder OPTIONS = new MutableDataSet()
-            .set(HtmlRenderer.INDENT_SIZE, 2)
-            //.set(HtmlRenderer.PERCENT_ENCODE_URLS, true)
-            .set(Parser.EXTENSIONS, Collections.singleton(TaskListExtension.create()));
+            .set(Parser.EXTENSIONS, Collections.singleton(TaskListExtension.create()))
+            .toImmutable();
 
     private static final Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
         optionsMap.put("no-suffix-content", new MutableDataSet().set(Parser.LISTS_ITEM_CONTENT_AFTER_SUFFIX, true));
         optionsMap.put("marker-space", new MutableDataSet().set(Parser.LISTS_ITEM_MARKER_SPACE, true));
-        optionsMap.put("src-pos", new MutableDataSet().set(HtmlRenderer.SOURCE_POSITION_ATTRIBUTE, "md-pos"));
         optionsMap.put("src-pos-lines", new MutableDataSet().set(HtmlRenderer.SOURCE_POSITION_PARAGRAPH_LINES, true));
         optionsMap.put("item-class", new MutableDataSet().set(TaskListExtension.TIGHT_ITEM_CLASS, ""));
         optionsMap.put("loose-class", new MutableDataSet().set(TaskListExtension.LOOSE_ITEM_CLASS, ""));
@@ -48,12 +44,8 @@ public class ComboGfmTaskListSpecTest extends ComboSpecTestCase {
                 .set(Parser.EXTENSIONS, Collections.singleton(TaskListExtension.create()))
         );
     }
-    static DataHolder optionsSet(String optionSet) {
-        return optionsMap.get(optionSet);
-    }
-
-    public ComboGfmTaskListSpecTest(SpecExample example) {
-        super(example);
+    public ComboGfmTaskListSpecTest(@NotNull SpecExample example) {
+        super(example, optionsMap, OPTIONS);
     }
 
     @Parameterized.Parameters(name = "{0}")
@@ -61,21 +53,8 @@ public class ComboGfmTaskListSpecTest extends ComboSpecTestCase {
         return getTestData(SPEC_RESOURCE);
     }
 
-    @Nullable
     @Override
-    public DataHolder options(String option) {
-        return optionsMap.get(option);
-    }
-
-    @NotNull
-    @Override
-    public String getSpecResourceName() {
-        return SPEC_RESOURCE;
-    }
-
-    @Override
-    public @NotNull SpecExampleRenderer getSpecExampleRenderer(@NotNull SpecExample example, @Nullable DataHolder exampleOptions) {
-        DataHolder combinedOptions = combineOptions(OPTIONS, exampleOptions);
-        return new FlexmarkSpecExampleRenderer(example, combinedOptions, Parser.builder(combinedOptions).build(), HtmlRenderer.builder(combinedOptions).build(), true);
+    public @NotNull ResourceLocation getSpecResourceLocation() {
+        return ResourceLocation.of(SPEC_RESOURCE);
     }
 }

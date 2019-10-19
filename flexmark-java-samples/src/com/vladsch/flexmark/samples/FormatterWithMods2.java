@@ -4,7 +4,7 @@ import com.vladsch.flexmark.ast.Image;
 import com.vladsch.flexmark.ast.Link;
 import com.vladsch.flexmark.ast.LinkNodeBase;
 import com.vladsch.flexmark.ast.Reference;
-import com.vladsch.flexmark.convert.html.FlexmarkHtmlParser;
+import com.vladsch.flexmark.html2md.converter.FlexmarkHtmlConverter;
 import com.vladsch.flexmark.formatter.Formatter;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.ast.Node;
@@ -63,7 +63,7 @@ public class FormatterWithMods2 {
     // use the PARSER to parse and RENDERER to parse pegdown indentation rules and render CommonMark
     public static void main(String[] args) {
         String html = "<img src=\"//img.alicdn.com/tfscom/TB1mR4xPpXXXXXvapXXXXXXXXXX.jpg\" >";
-        String markdown = FlexmarkHtmlParser.parse(html);
+        String markdown = FlexmarkHtmlConverter.builder().build().convert(html);
 
         System.out.println("html\n");
         System.out.println(html);

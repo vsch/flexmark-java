@@ -5,6 +5,6 @@ import org.jetbrains.annotations.Nullable;
 
 import java.io.InputStream;
 
-public interface SpecReaderFactory {
-    @NotNull SpecReader create(@NotNull InputStream inputStream, @Nullable String fileUrl);
+public interface SpecReaderFactory<S extends SpecReader> {
+    @NotNull S create(@NotNull InputStream inputStream, @Nullable String fileUrl);
 }

@@ -1,6 +1,5 @@
 package com.vladsch.flexmark;
 
-import com.vladsch.flexmark.convert.html.FlexmarkHtmlParserTestSuite;
 import com.vladsch.flexmark.ext.abbreviation.ExtAbbreviationTestSuite;
 import com.vladsch.flexmark.ext.admonition.ExtAdmonitionTestSuite;
 import com.vladsch.flexmark.ext.anchorlink.ExtAnchorLinkTestSuite;
@@ -32,15 +31,15 @@ import com.vladsch.flexmark.ext.xwiki.macros.ExtXWikiMacroTestSuite;
 import com.vladsch.flexmark.ext.yaml.front.matter.ExtYamlFrontMatterTestSuite;
 import com.vladsch.flexmark.ext.youtube.embedded.ExtYouTubeLinkTestSuite;
 import com.vladsch.flexmark.ext.zzzzzz.ExtZzzzzzTestSuite;
-import com.vladsch.flexmark.formatter.test.CoreFormatterTestSuite;
+import com.vladsch.flexmark.core.test.util.formatter.CoreFormatterTestSuite;
 import com.vladsch.flexmark.html2md.converter.FlexmarkHtmlConverterTestSuite;
 import com.vladsch.flexmark.integration.IntegrationTestSuite;
 import com.vladsch.flexmark.jira.converter.JiraConverterTestSuite;
 import com.vladsch.flexmark.pdf.converter.PdfConverterTestSuite;
 import com.vladsch.flexmark.profiles.pegdown.PegdownProfileTestSuite;
+import com.vladsch.flexmark.core.test.util.renderer.CoreRendererTestSuite;
 import com.vladsch.flexmark.superscript.ExtSuperscriptTestSuite;
 import com.vladsch.flexmark.test.util.CoreTestSuite;
-import com.vladsch.flexmark.tree.iteration.TreeIterationTestSuite;
 import com.vladsch.flexmark.util.UtilsTestSuite;
 import com.vladsch.flexmark.youtrack.converter.YouTrackConverterTestSuite;
 import org.junit.runner.RunWith;
@@ -49,6 +48,7 @@ import org.junit.runners.Suite;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
         CoreFormatterTestSuite.class,
+        CoreRendererTestSuite.class,
         CoreTestSuite.class,
         ExtAbbreviationTestSuite.class,
         ExtAdmonitionTestSuite.class,
@@ -85,7 +85,6 @@ import org.junit.runners.Suite;
         ExtZzzzzzTestSuite.class,
         FlexmarkFormatterTestSuite.class,
         FlexmarkHtmlConverterTestSuite.class,
-        FlexmarkHtmlParserTestSuite.class,
         IntegrationTestSuite.class,
         JiraConverterTestSuite.class,
         PdfConverterTestSuite.class,

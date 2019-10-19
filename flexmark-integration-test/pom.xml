@@ -98,6 +98,11 @@
             <groupId>com.vladsch.flexmark</groupId>
             <artifactId>flexmark-util</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.vladsch.flexmark</groupId>
+            <artifactId>flexmark-core-test</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>

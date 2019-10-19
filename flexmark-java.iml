@@ -47,7 +47,6 @@
     <orderEntry type="module" module-name="flexmark-ext-yaml-front-matter" />
     <orderEntry type="module" module-name="flexmark-ext-zzzzzz" />
     <orderEntry type="module" module-name="flexmark-formatter-test-suite" />
-    <orderEntry type="module" module-name="flexmark-html-parser" />
     <orderEntry type="module" module-name="flexmark-integration-test" />
     <orderEntry type="module" module-name="flexmark-java-samples" />
     <orderEntry type="module" module-name="flexmark-jira-converter" />

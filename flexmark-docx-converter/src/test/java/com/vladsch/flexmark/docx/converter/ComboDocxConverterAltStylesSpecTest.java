@@ -1,6 +1,8 @@
 package com.vladsch.flexmark.docx.converter;
 
+import com.vladsch.flexmark.test.spec.ResourceLocation;
 import com.vladsch.flexmark.test.spec.SpecExample;
+import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import org.jetbrains.annotations.NotNull;
 import org.junit.runners.Parameterized;
@@ -12,9 +14,12 @@ public class ComboDocxConverterAltStylesSpecTest extends ComboDocxConverterSpecT
     static final String FILE_TEST_CASE_DUMP_LOCATION = "/flexmark-docx-converter/src/test/resources/docx_converter_ast_alt_styles_spec/";
     public static final String TEMPLATE_XML = "/empty-numbered-headings.xml";
 
-    public ComboDocxConverterAltStylesSpecTest(SpecExample example) {
-        super(example, new MutableDataSet()
-                .set(DocxRenderer.DEFAULT_TEMPLATE_RESOURCE, TEMPLATE_XML));
+    private static final DataHolder OPTIONS = new MutableDataSet()
+            .set(DocxRenderer.DEFAULT_TEMPLATE_RESOURCE, TEMPLATE_XML)
+            .toImmutable();
+
+    public ComboDocxConverterAltStylesSpecTest(@NotNull SpecExample example) {
+        super(example, null, OPTIONS);
     }
 
     @Parameterized.Parameters(name = "{0}")
@@ -22,16 +27,9 @@ public class ComboDocxConverterAltStylesSpecTest extends ComboDocxConverterSpecT
         return getTestData(SPEC_RESOURCE);
     }
 
-    @NotNull
     @Override
-    public String getSpecResourceName() {
-        return SPEC_RESOURCE;
-    }
-
-    @NotNull
-    @Override
-    public String getProjectRootDirectory() {
-        return PROJECT_ROOT_DIRECTORY;
+    public @NotNull ResourceLocation getSpecResourceLocation() {
+        return ResourceLocation.of(SPEC_RESOURCE);
     }
 
     @NotNull

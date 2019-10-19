@@ -1,5 +1,6 @@
 package com.vladsch.flexmark.profiles.pegdown;
 
+import com.vladsch.flexmark.test.spec.ResourceLocation;
 import com.vladsch.flexmark.test.spec.SpecExample;
 import com.vladsch.flexmark.test.util.ComboSpecTestCase;
 import com.vladsch.flexmark.test.util.FlexmarkSpecExampleRenderer;
@@ -10,21 +11,15 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.junit.runners.Parameterized;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class ComboPegdownSpecTest extends ComboSpecTestCase {
     private static final String SPEC_RESOURCE = "/pegdown_spec.md";
     private static final DataHolder OPTIONS = new MutableDataSet()
             .set(PegdownParser.PEGDOWN_EXTENSIONS, Extensions.FENCED_CODE_BLOCKS);
 
-    private static final Map<String, DataHolder> optionsMap = new HashMap<>();
-    static {
-
-    }
-    public ComboPegdownSpecTest(SpecExample example) {
-        super(example);
+    public ComboPegdownSpecTest(@NotNull SpecExample example) {
+        super(example, null, OPTIONS);
     }
 
     @Parameterized.Parameters(name = "{0}")
@@ -32,16 +27,9 @@ public class ComboPegdownSpecTest extends ComboSpecTestCase {
         return getTestData(SPEC_RESOURCE);
     }
 
-    @Nullable
     @Override
-    public DataHolder options(String option) {
-        return optionsMap.get(option);
-    }
-
-    @NotNull
-    @Override
-    public String getSpecResourceName() {
-        return SPEC_RESOURCE;
+    public @NotNull ResourceLocation getSpecResourceLocation() {
+        return ResourceLocation.of(SPEC_RESOURCE);
     }
 
     @Override

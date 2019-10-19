@@ -10,6 +10,7 @@ import java.io.InputStream;
 
 public class DumpSpecReader extends SpecReader {
     protected final StringBuilder sb = new StringBuilder();
+    protected final StringBuilder sbExp = new StringBuilder();
     protected final SpecExampleProcessor testCase;
     protected StringBuilder exampleComment;
 
@@ -22,13 +23,26 @@ public class DumpSpecReader extends SpecReader {
         return sb.toString();
     }
 
-    @Override
-    public void addSpecLine(String line) {
-        sb.append(line).append("\n");
+    public String getExpectedFullSpec() {
+        return sbExp.toString();
+    }
+
+    public void readExamples() {
+        super.readExamples();
     }
 
     @Override
-    protected void addSpecExample(@NotNull SpecExample example) {
+    public void addSpecLine(String line) {
+        sb.append(line).append("\n");
+        sbExp.append(line).append("\n");
+    }
+
+    @Override
+    protected void addSpecExample(@NotNull SpecExample specExample) {
+        // not needed but to keep it consistent with SpecReader
+        super.addSpecExample(specExample);
+
+        SpecExample example = testCase.checkExample(specExample);
         DataHolder exampleOptions;
         boolean ignoredTestCase = false;
 
@@ -45,12 +59,12 @@ public class DumpSpecReader extends SpecReader {
 
         SpecExampleRenderer exampleRenderer = testCase.getSpecExampleRenderer(example, exampleOptions);
 
-        SpecExampleParse exampleParse = new SpecExampleParse(exampleRenderer.getOptions(), exampleRenderer, exampleOptions, example.getSource());
-        String source = exampleParse.getSource();
-        boolean timed = exampleParse.isTimed();
-        int iterations = exampleParse.getIterations();
-        long start = exampleParse.getStartTime();
-        long parse = exampleParse.getParseTime();
+        final SpecExampleParse exampleParse = new SpecExampleParse(exampleRenderer.getOptions(), exampleRenderer, exampleOptions, example.getSource());
+        final String source = exampleParse.getSource();
+        final boolean timed = exampleParse.isTimed();
+        final int iterations = exampleParse.getIterations();
+        final long start = exampleParse.getStartTime();
+        final long parse = exampleParse.getParseTime();
 
         String html;
         if (!ignoredTestCase) {
@@ -81,5 +95,6 @@ public class DumpSpecReader extends SpecReader {
 
         // include source so that diff can be used to update spec
         TestUtils.addSpecExample(sb, source, html, ast, example.getOptionsSet(), exampleRenderer.includeExampleInfo(), example.getSection(), example.getExampleNumber());
+        TestUtils.addSpecExample(sbExp, source, example.getHtml(), example.getAst(), example.getOptionsSet(), exampleRenderer.includeExampleInfo(), example.getSection(), example.getExampleNumber());
     }
 }

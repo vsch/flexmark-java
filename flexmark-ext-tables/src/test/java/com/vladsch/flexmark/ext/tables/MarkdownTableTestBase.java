@@ -27,10 +27,14 @@ public class MarkdownTableTestBase {
     protected MarkdownTable[] getTables(CharSequence markdown, DataHolder options) {
         if (options == null) {
             options = new MutableDataSet()
-                    .set(Parser.EXTENSIONS, Arrays.asList(TablesExtension.create()));
+                    .set(Parser.EXTENSIONS, Arrays.asList(TablesExtension.create()))
+            .toImmutable();
+
         } else {
             options = new MutableDataSet(options)
-                    .set(Parser.EXTENSIONS, Arrays.asList(TablesExtension.create()));
+                    .set(Parser.EXTENSIONS, Arrays.asList(TablesExtension.create()))
+            .toImmutable();
+
         }
 
         Parser parser = Parser.builder(options).build();

@@ -175,11 +175,6 @@
         </dependency>
         <dependency>
             <groupId>com.vladsch.flexmark</groupId>
-            <artifactId>flexmark-html-parser</artifactId>
-            <version>0.60.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.vladsch.flexmark</groupId>
             <artifactId>flexmark-html2md-converter</artifactId>
             <version>0.60.0</version>
         </dependency>

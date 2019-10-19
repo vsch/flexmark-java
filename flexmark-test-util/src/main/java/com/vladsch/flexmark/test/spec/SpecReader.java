@@ -2,7 +2,6 @@ package com.vladsch.flexmark.test.spec;
 
 import com.vladsch.flexmark.test.util.TestUtils;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -28,7 +27,9 @@ public class SpecReader {
     public static final String TYPE_TEST_BREAK = "…";
     protected static final Pattern SECTION_PATTERN = Pattern.compile("#{1,6} +(.*)");
 
-    protected final InputStream inputStream;
+    protected final @NotNull InputStream inputStream;
+    protected final @NotNull String fileUrl;
+    protected final List<SpecExample> examples = new ArrayList<>();
 
     protected State state = State.BEFORE;
     protected String section;
@@ -38,45 +39,24 @@ public class SpecReader {
     protected StringBuilder ast;
     protected StringBuilder comment;
     protected int exampleNumber = 0;
-    final protected String fileUrl;
     protected int lineNumber = 0;
     protected int contentLineNumber = 0;
-
-    protected List<SpecExample> examples = new ArrayList<>();
 
     protected SpecReader(@NotNull InputStream stream, @NotNull String fileUrl) {
         this.inputStream = stream;
         this.fileUrl = fileUrl;
     }
 
-    public static SpecReader createAndReadExamples(@NotNull Class<?> resourceClass, @NotNull String specResource, @Nullable SpecReaderFactory readerFactory, @NotNull String fileUrl) {
-        try {
-            SpecReader reader;
-            InputStream stream = getSpecInputStream(resourceClass, specResource);
-            if (readerFactory == null) reader = new SpecReader(stream, fileUrl);
-            else reader = readerFactory.create(stream, fileUrl);
-            reader.read();
-            return reader;
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+    @NotNull
+    public String getFileUrl() {
+        return fileUrl;
     }
 
-    public static List<SpecExample> readExamples(@NotNull Class<?> resourceClass, @NotNull String specResource, @Nullable SpecReaderFactory readerFactory, @NotNull String fileUrl) {
-        try {
-            SpecReader reader;
-            String useSpecResource = TestUtils.getSpecResourceName(resourceClass.getName(), specResource);
-            InputStream stream = getSpecInputStream(resourceClass, useSpecResource);
-            if (readerFactory == null) reader = new SpecReader(stream, fileUrl);
-            else reader = readerFactory.create(stream, fileUrl);
-            return reader.read();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+    public List<SpecExample> getExamples() {
+        return examples;
     }
 
-    public static List<String> readExamplesAsString(@NotNull Class<?> resourceName, @NotNull String specResource, @Nullable SpecReaderFactory readerFactory, @NotNull String fileUrl) {
-        List<SpecExample> examples = SpecReader.readExamples(resourceName, specResource, readerFactory, fileUrl);
+    public @NotNull List<String> getExamplesSourceAsString() {
         List<String> result = new ArrayList<>();
         for (SpecExample example : examples) {
             result.add(example.getSource());
@@ -84,7 +64,42 @@ public class SpecReader {
         return result;
     }
 
-    public static String readSpec(@NotNull Class<?> resourceClass, @NotNull String specResource) {
+    public static @NotNull SpecReader create(@NotNull ResourceLocation location) {
+        return create(location.getResourceClass(), location.getResourcePath(), location.getFileUrl(), SpecReader::new);
+    }
+
+    public static @NotNull SpecReader create(@NotNull Class<?> resourceClass, @NotNull String specResource, @NotNull String fileUrl) {
+        return create(resourceClass, specResource, fileUrl, SpecReader::new);
+    }
+
+    public static @NotNull <S extends SpecReader> S create(@NotNull ResourceLocation location, @NotNull SpecReaderFactory<S> readerFactory) {
+        return create(location.getResourceClass(), location.getResourcePath(), location.getFileUrl(), readerFactory);
+    }
+
+    public static @NotNull <S extends SpecReader> S create(@NotNull Class<?> resourceClass, @NotNull String specResource, @NotNull String fileUrl, @NotNull SpecReaderFactory<S> readerFactory) {
+        InputStream stream = getSpecInputStream(resourceClass, specResource);
+        return readerFactory.create(stream, fileUrl);
+    }
+
+    public static @NotNull SpecReader createAndReadExamples(@NotNull Class<?> resourceClass, @NotNull String specResource, @NotNull String fileUrl) {
+        return createAndReadExamples(resourceClass, specResource, fileUrl, SpecReader::new);
+    }
+
+    public static @NotNull <S extends SpecReader> S createAndReadExamples(@NotNull ResourceLocation location, @NotNull SpecReaderFactory<S> readerFactory) {
+        return createAndReadExamples(location.getResourceClass(), location.getResourcePath(), location.getFileUrl(), readerFactory);
+    }
+
+    public static @NotNull <S extends SpecReader> S createAndReadExamples(@NotNull Class<?> resourceClass, @NotNull String specResource, @NotNull String fileUrl, @NotNull SpecReaderFactory<S> readerFactory) {
+        S reader = create(resourceClass, specResource, fileUrl, readerFactory);
+        reader.readExamples();
+        return reader;
+    }
+
+    public static @NotNull String readSpec(@NotNull ResourceLocation location) {
+        return readSpec(location.getResourceClass(), location.getResourcePath());
+    }
+
+    public static @NotNull String readSpec(@NotNull Class<?> resourceClass, @NotNull String specResource) {
         StringBuilder sb = new StringBuilder();
         try {
             String line;
@@ -104,27 +119,30 @@ public class SpecReader {
         }
     }
 
-    public static InputStream getSpecInputStream(@NotNull Class<?> resourceClass, @NotNull String specResource) {
-        InputStream stream = resourceClass.getResourceAsStream(specResource);
+    public static @NotNull InputStream getSpecInputStream(@NotNull Class<?> resourceClass, @NotNull String specResource) {
+        String useSpecResource = TestUtils.getSpecResourceName(resourceClass.getName(), specResource);
+        InputStream stream = resourceClass.getResourceAsStream(useSpecResource);
         if (stream == null) {
-            throw new IllegalStateException("Could not load " + specResource + " classpath resource");
+            throw new IllegalStateException("Could not load " + specResource + " classpath resource for " + resourceClass);
         }
 
         return stream;
     }
 
-    protected List<SpecExample> read() throws IOException {
-        resetContents();
+    public void readExamples() {
+        try {
+            resetContents();
 
-        String line;
-        lineNumber = 0;
-        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
-        while ((line = reader.readLine()) != null) {
-            lineNumber++;
-            processLine(line);
+            String line;
+            lineNumber = 0;
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
+            while ((line = reader.readLine()) != null) {
+                lineNumber++;
+                processLine(line);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
-
-        return examples;
     }
 
     // can use these to generate spec from source
@@ -134,11 +152,6 @@ public class SpecReader {
 
     protected void addSpecExample(@NotNull SpecExample example) {
         examples.add(example);
-    }
-
-    @NotNull
-    public String getFileUrl() {
-        return fileUrl;
     }
 
     protected void processLine(String line) {

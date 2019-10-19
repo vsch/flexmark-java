@@ -1,8 +1,8 @@
 package com.vladsch.flexmark.ext.emoji;
 
-import com.vladsch.flexmark.formatter.test.ComboTranslationFormatterSpecTestBase;
-import com.vladsch.flexmark.html.HtmlRenderer;
+import com.vladsch.flexmark.core.test.util.TranslationFormatterSpecTest;
 import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.test.spec.ResourceLocation;
 import com.vladsch.flexmark.test.spec.SpecExample;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
@@ -14,14 +14,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ComboEmojiTranslationFormatterSpecTest extends ComboTranslationFormatterSpecTestBase {
+public class ComboEmojiTranslationFormatterSpecTest extends TranslationFormatterSpecTest {
     private static final String SPEC_RESOURCE = "/ext_emoji_translation_formatter_spec.md";
     private static final DataHolder OPTIONS = new MutableDataSet()
-            .set(Parser.EXTENSIONS, Collections.singleton(EmojiExtension.create()));
+            .set(Parser.EXTENSIONS, Collections.singleton(EmojiExtension.create()))
+            .toImmutable();
+
 
     private static final Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
-        optionsMap.put("src-pos", new MutableDataSet().set(HtmlRenderer.SOURCE_POSITION_ATTRIBUTE, "md-pos"));
         optionsMap.put("use-github", new MutableDataSet().set(EmojiExtension.USE_SHORTCUT_TYPE, EmojiShortcutType.GITHUB));
         optionsMap.put("use-cheat", new MutableDataSet().set(EmojiExtension.USE_SHORTCUT_TYPE, EmojiShortcutType.EMOJI_CHEAT_SHEET));
         optionsMap.put("prefer-github", new MutableDataSet().set(EmojiExtension.USE_SHORTCUT_TYPE, EmojiShortcutType.ANY_GITHUB_PREFERRED));
@@ -32,14 +33,13 @@ public class ComboEmojiTranslationFormatterSpecTest extends ComboTranslationForm
         optionsMap.put("no-size", new MutableDataSet().set(EmojiExtension.ATTR_IMAGE_SIZE, ""));
         optionsMap.put("no-align", new MutableDataSet().set(EmojiExtension.ATTR_ALIGN, ""));
     }
-    public ComboEmojiTranslationFormatterSpecTest(SpecExample example) {
-        super(example, OPTIONS, optionsMap);
+    public ComboEmojiTranslationFormatterSpecTest(@NotNull SpecExample example) {
+        super(example, optionsMap, OPTIONS);
     }
 
-    @NotNull
     @Override
-    public String getSpecResourceName() {
-        return SPEC_RESOURCE;
+    public @NotNull ResourceLocation getSpecResourceLocation() {
+        return ResourceLocation.of(SPEC_RESOURCE);
     }
 
     @Parameterized.Parameters(name = "{0}")
