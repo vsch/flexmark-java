@@ -83,18 +83,6 @@ public class HeaderIdGenerator implements HtmlIdGenerator, Disposable {
         return generateId(headerText, toDashChars, null, noDupedDashes, nonAsciiToLowercase);
     }
 
-    /**
-     * @param headerText
-     * @param toDashChars
-     * @param noDupedDashes
-     * @return header id
-     * @deprecated use {@link #generateId(CharSequence, String, String, boolean, boolean)}
-     */
-    @Deprecated
-    public static String generateId(CharSequence headerText, String toDashChars, boolean noDupedDashes) {
-        return generateId(headerText, toDashChars, null, noDupedDashes, true);
-    }
-
     @SuppressWarnings("WeakerAccess")
     public static String generateId(CharSequence headerText, String toDashChars, String nonDashChars, boolean noDupedDashes, boolean nonAsciiToLowercase) {
         int iMax = headerText.length();

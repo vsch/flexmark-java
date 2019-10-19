@@ -27,9 +27,9 @@ import com.vladsch.flexmark.ext.yaml.front.matter.YamlFrontMatterExtension;
 import com.vladsch.flexmark.formatter.Formatter;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.ParserEmulationProfile;
+import com.vladsch.flexmark.superscript.SuperscriptExtension;
 import com.vladsch.flexmark.test.spec.ResourceLocation;
 import com.vladsch.flexmark.test.spec.SpecExample;
-import com.vladsch.flexmark.superscript.SuperscriptExtension;
 import com.vladsch.flexmark.test.util.ComboSpecTestCase;
 import com.vladsch.flexmark.test.util.FlexmarkSpecExampleRenderer;
 import com.vladsch.flexmark.test.util.SpecExampleRenderer;
@@ -126,7 +126,7 @@ public class ComboFormatterIssueSpecTest extends ComboSpecTestCase {
         );
     }
     public ComboFormatterIssueSpecTest(@NotNull SpecExample example) {
-        super(example,optionsMap, OPTIONS);
+        super(example, optionsMap, OPTIONS);
     }
 
     @Override

@@ -194,8 +194,6 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
                         block.setHasTableSeparator(true);
                     }
                 }
-            } else if (options.multiLineRows) {
-                // TODO: need to do inline parsing here to determine whether we have open element constructs which need to include the next line
             }
 
             tableLines.add(rowLine);
@@ -431,6 +429,7 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
         return alignments;
     }
 
+    @SuppressWarnings("SameParameterValue")
     private static List<BasedSequence> split(BasedSequence input, boolean columnSpans, boolean wantPipes) {
         BasedSequence line = input.trim();
         int lineLength = line.length();

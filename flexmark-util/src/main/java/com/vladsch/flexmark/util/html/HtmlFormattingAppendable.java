@@ -6,6 +6,7 @@ import java.util.Stack;
 /**
  * Used to help with HTML output generation and formatting of HTML
  */
+@SuppressWarnings("UnusedReturnValue")
 public interface HtmlFormattingAppendable extends LineFormattingAppendable {
     Attributes getAttributes();
     HtmlFormattingAppendable setAttributes(Attributes attributes);
@@ -25,11 +26,6 @@ public interface HtmlFormattingAppendable extends LineFormattingAppendable {
     // tag tracking
     public Stack<String> getOpenTags();
     public List<String> getOpenTagsAfterLast(CharSequence latestTag);
-
-    @Deprecated
-    default HtmlFormattingAppendable withCondLine() {
-        return withCondLineOnChildText();
-    }
 
     HtmlFormattingAppendable withCondLineOnChildText();
     HtmlFormattingAppendable withCondIndent();

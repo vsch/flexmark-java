@@ -62,31 +62,6 @@ public class EnumeratedReferences {
         enumeratedReferenceOrdinals.put(text, ordinals);
     }
 
-    /**
-     * @param text anchor id with type reference
-     * @return ordinal or 0 for anchor id
-     * @deprecated only returns the last ordinal for the text, does not support compound ordinal numbering
-     * use {@link #getEnumeratedReferenceOrdinals(String)} to get compound ordinals
-     */
-    @Deprecated
-    public int getOrdinal(String text) {
-        int[] ordinals = enumeratedReferenceOrdinals.get(text);
-        return ordinals == null ? 0 : ordinals[ordinals.length - 1];
-    }
-
-    /**
-     * Get format node for given type:id
-     *
-     * @param text reference text
-     * @return enumerated reference block or null if not defined
-     * @deprecated use {@link #getEnumeratedReferenceOrdinals(String)} instead which supports compound enumerated ordinals
-     */
-    @Deprecated
-    public Node getFormatNode(String text) {
-        String type = EnumeratedReferenceRepository.getType(text);
-        return referenceRepository.get(type);
-    }
-
     public EnumeratedReferenceRendering[] getEnumeratedReferenceOrdinals(String text) {
         String type = EnumeratedReferenceRepository.getType(text);
 

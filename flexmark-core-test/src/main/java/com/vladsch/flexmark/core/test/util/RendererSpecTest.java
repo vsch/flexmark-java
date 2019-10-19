@@ -23,7 +23,6 @@ public abstract class RendererSpecTest extends ComboSpecTestCase {
     static {
         optionsMap.put("src-pos", new MutableDataSet().set(HtmlRenderer.SOURCE_POSITION_ATTRIBUTE, "md-pos"));
     }
-
     public RendererSpecTest(@NotNull SpecExample example, @Nullable Map<String, DataHolder> optionMap, @Nullable DataHolder... defaultOptions) {
         super(example, optionsMaps(optionsMap, optionMap), dataHolders(OPTIONS, defaultOptions));
     }

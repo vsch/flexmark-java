@@ -40,7 +40,6 @@
         <module name="flexmark-ext-gfm-strikethrough" />
         <module name="flexmark-ext-wikilink" />
         <module name="flexmark-ext-definition" />
-        <module name="flexmark-ext-gfm-tables" />
         <module name="flexmark-ext-toc" />
         <module name="flexmark-integration-test" />
         <module name="flexmark-ext-abbreviation" />

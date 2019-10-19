@@ -31,12 +31,12 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 /**
- * Renders a tree of nodes to HTML.
+ * Renders a tree of nodes to Markdown.
  * <p>
  * Start with the {@link #builder} method to configure the renderer. Example:
  * <pre><code>
- * HtmlRenderer renderer = HtmlRenderer.builder().escapeHtml(true).build();
- * renderer.render(node);
+ * Formatter formatter = Formatter.builder().build();
+ * formatter.render(node);
  * </code></pre>
  */
 @SuppressWarnings("WeakerAccess")
@@ -67,8 +67,6 @@ public class Formatter implements IRender {
     public static final DataKey<Integer> FENCED_CODE_MARKER_LENGTH = new DataKey<>("FENCED_CODE_MARKER_LENGTH", 3);
     public static final DataKey<CodeFenceMarker> FENCED_CODE_MARKER_TYPE = new DataKey<>("FENCED_CODE_MARKER_TYPE", CodeFenceMarker.ANY);
     public static final DataKey<Boolean> LIST_ADD_BLANK_LINE_BEFORE = new DataKey<>("LIST_ADD_BLANK_LINE_BEFORE", false);
-    //public static final DataKey<Boolean> LIST_ALIGN_FIRST_LINE_TEXT = new DataKey<>("LIST_ALIGN_FIRST_LINE_TEXT", false);
-    //public static final DataKey<Boolean> LIST_ALIGN_CHILD_BLOCKS = new DataKey<>("LIST_ALIGN_CHILD_BLOCKS", true);
     public static final DataKey<Boolean> LIST_RENUMBER_ITEMS = new DataKey<>("LIST_RENUMBER_ITEMS", true);
     public static final DataKey<Boolean> LIST_REMOVE_EMPTY_ITEMS = new DataKey<>("LIST_REMOVE_EMPTY_ITEMS", false);
     public static final DataKey<ListBulletMarker> LIST_BULLET_MARKER = new DataKey<>("LIST_BULLET_MARKER", ListBulletMarker.ANY);
@@ -79,14 +77,7 @@ public class Formatter implements IRender {
     public static final DataKey<Boolean> KEEP_IMAGE_LINKS_AT_START = new DataKey<>("KEEP_IMAGE_LINKS_AT_START", false);
     public static final DataKey<Boolean> KEEP_EXPLICIT_LINKS_AT_START = new DataKey<>("KEEP_EXPLICIT_LINKS_AT_START", false);
     public static final DataKey<Boolean> OPTIMIZED_INLINE_RENDERING = new DataKey<>("OPTIMIZED_INLINE_RENDERING", false);
-    //public static final DataKey<TrailingSpaces> KEEP_TRAILING_SPACES = new DataKey<>("KEEP_TRAILING_SPACES", TrailingSpaces.KEEP_LINE_BREAK);
-    //public static final DataKey<TrailingSpaces> CODE_KEEP_TRAILING_SPACES = new DataKey<>("CODE_KEEP_TRAILING_SPACES", TrailingSpaces.KEEP_ALL);
     public static final DataKey<CharWidthProvider> FORMAT_CHAR_WIDTH_PROVIDER = TableFormatOptions.FORMAT_CHAR_WIDTH_PROVIDER;
-
-    /**
-     * @deprecated use FORMAT_ prefixed name
-     */
-    @Deprecated public static final DataKey<CharWidthProvider> CHAR_WIDTH_PROVIDER = TableFormatOptions.FORMAT_CHAR_WIDTH_PROVIDER;
 
     public static final DataKey<TableCaptionHandling> FORMAT_TABLE_CAPTION = TableFormatOptions.FORMAT_TABLE_CAPTION;
     public static final DataKey<DiscretionaryText> FORMAT_TABLE_CAPTION_SPACES = TableFormatOptions.FORMAT_TABLE_CAPTION_SPACES;
@@ -122,15 +113,13 @@ public class Formatter implements IRender {
     Formatter(Builder builder) {
         this.options = builder.toImmutable();
         this.formatterOptions = new FormatterOptions(this.options);
-        //this.nodeFormatterFactories = new ArrayList<NodeFormatterFactory>(builder.nodeFormatterFactories.size() + 1);
-        //this.nodeFormatterFactories.addAll(builder.nodeFormatterFactories);
 
         this.linkResolverFactories = FlatDependencyHandler.computeDependencies(builder.linkResolverFactories);
         this.nodeFormatterFactories = calculateBlockPreProcessors(this.options, builder.nodeFormatterFactories);
     }
 
     public static class NodeFormatterDependencyStage {
-        private final List<NodeFormatterFactory> dependents;
+        final List<NodeFormatterFactory> dependents;
 
         public NodeFormatterDependencyStage(List<NodeFormatterFactory> dependents) {
             // compute mappings
@@ -139,6 +128,8 @@ public class Formatter implements IRender {
     }
 
     private static class NodeFormatterDependencyHandler extends DependencyHandler<NodeFormatterFactory, NodeFormatterDependencyStage, NodeFormatterDependencies> {
+        NodeFormatterDependencyHandler() {}
+
         @Override
         protected Class<? extends NodeFormatterFactory> getDependentClass(NodeFormatterFactory dependent) {
             return dependent.getClass();

@@ -1,5 +1,8 @@
 package com.vladsch.flexmark;
 
+import com.vladsch.flexmark.core.test.util.formatter.ComboCoreFormatterSpecTest;
+import com.vladsch.flexmark.core.test.util.formatter.ComboCoreTranslationFormatterSpecTest;
+import com.vladsch.flexmark.core.test.util.formatter.MergeFormatterCoreTest;
 import com.vladsch.flexmark.ext.abbreviation.ComboAbbreviationFormatterSpecTest;
 import com.vladsch.flexmark.ext.abbreviation.ComboAbbreviationTranslationFormatterSpecTest;
 import com.vladsch.flexmark.ext.abbreviation.MergeAbbreviationsTest;
@@ -24,9 +27,6 @@ import com.vladsch.flexmark.ext.macros.MergeMacrosTest;
 import com.vladsch.flexmark.ext.tables.ComboTableFormatterSpecTest;
 import com.vladsch.flexmark.ext.tables.ComboTableTranslationFormatterSpecTest;
 import com.vladsch.flexmark.ext.yaml.front.matter.ComboYamlFrontMatterFormatterSpecTest;
-import com.vladsch.flexmark.core.test.util.formatter.ComboCoreFormatterSpecTest;
-import com.vladsch.flexmark.core.test.util.formatter.ComboCoreTranslationFormatterSpecTest;
-import com.vladsch.flexmark.core.test.util.formatter.MergeFormatterCoreTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 

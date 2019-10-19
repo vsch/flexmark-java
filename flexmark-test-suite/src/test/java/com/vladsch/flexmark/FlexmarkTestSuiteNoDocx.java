@@ -1,5 +1,7 @@
 package com.vladsch.flexmark;
 
+import com.vladsch.flexmark.core.test.util.formatter.CoreFormatterTestSuite;
+import com.vladsch.flexmark.core.test.util.renderer.CoreRendererTestSuite;
 import com.vladsch.flexmark.ext.abbreviation.ExtAbbreviationTestSuite;
 import com.vladsch.flexmark.ext.admonition.ExtAdmonitionTestSuite;
 import com.vladsch.flexmark.ext.anchorlink.ExtAnchorLinkTestSuite;
@@ -13,7 +15,6 @@ import com.vladsch.flexmark.ext.escaped.character.ExtEscapedCharacterTestSuite;
 import com.vladsch.flexmark.ext.footnotes.ExtFootnotesTestSuite;
 import com.vladsch.flexmark.ext.gfm.issues.ExtGfmIssuesTestSuite;
 import com.vladsch.flexmark.ext.gfm.strikethrough.ExtGfmStrikethroughTestSuite;
-import com.vladsch.flexmark.ext.gfm.tables.ExtGfmTablesTestSuite;
 import com.vladsch.flexmark.ext.gfm.tasklist.ExtGfmTaskListTestSuite;
 import com.vladsch.flexmark.ext.gfm.users.ExtGfmUsersTestSuite;
 import com.vladsch.flexmark.ext.gitlab.ExtGitLabTestSuite;
@@ -31,13 +32,11 @@ import com.vladsch.flexmark.ext.xwiki.macros.ExtXWikiMacroTestSuite;
 import com.vladsch.flexmark.ext.yaml.front.matter.ExtYamlFrontMatterTestSuite;
 import com.vladsch.flexmark.ext.youtube.embedded.ExtYouTubeLinkTestSuite;
 import com.vladsch.flexmark.ext.zzzzzz.ExtZzzzzzTestSuite;
-import com.vladsch.flexmark.core.test.util.formatter.CoreFormatterTestSuite;
 import com.vladsch.flexmark.html2md.converter.FlexmarkHtmlConverterTestSuite;
 import com.vladsch.flexmark.integration.IntegrationTestSuite;
 import com.vladsch.flexmark.jira.converter.JiraConverterTestSuite;
 import com.vladsch.flexmark.pdf.converter.PdfConverterTestSuite;
 import com.vladsch.flexmark.profiles.pegdown.PegdownProfileTestSuite;
-import com.vladsch.flexmark.core.test.util.renderer.CoreRendererTestSuite;
 import com.vladsch.flexmark.superscript.ExtSuperscriptTestSuite;
 import com.vladsch.flexmark.test.util.CoreTestSuite;
 import com.vladsch.flexmark.util.UtilsTestSuite;
@@ -63,7 +62,6 @@ import org.junit.runners.Suite;
         ExtFootnotesTestSuite.class,
         ExtGfmIssuesTestSuite.class,
         ExtGfmStrikethroughTestSuite.class,
-        ExtGfmTablesTestSuite.class,
         ExtGfmTaskListTestSuite.class,
         ExtGfmUsersTestSuite.class,
         ExtGitLabTestSuite.class,

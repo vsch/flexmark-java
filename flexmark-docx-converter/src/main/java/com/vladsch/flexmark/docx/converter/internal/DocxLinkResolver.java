@@ -27,12 +27,12 @@ public class DocxLinkResolver implements LinkResolver {
         // context.getHtmlOptions();
         String docRelativeURL = DocxRenderer.DOC_RELATIVE_URL.getFrom(context.getOptions());
         if (docRelativeURL != null) {
-            docRelativeURL = Utils.removeStart(docRelativeURL, '/');
+            docRelativeURL = Utils.removePrefix(docRelativeURL, '/');
         }
 
         String docRootURL = DocxRenderer.DOC_ROOT_URL.getFrom(context.getOptions());
         if (docRootURL != null) {
-            docRootURL = Utils.removeStart(docRootURL, '/');
+            docRootURL = Utils.removePrefix(docRootURL, '/');
         }
         this.docRelativeURL = docRelativeURL;
         this.docRootURL = docRootURL;

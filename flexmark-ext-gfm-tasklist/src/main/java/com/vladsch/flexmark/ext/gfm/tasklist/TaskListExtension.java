@@ -18,8 +18,6 @@ import com.vladsch.flexmark.util.data.MutableDataHolder;
  * The bullet list items that begin with [ ], [x] or [X] are turned into TaskListItem nodes
  */
 public class TaskListExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension, Formatter.FormatterExtension {
-    // for webview use "<span class=\"taskitem\">" + (node.isDone() ? "X" : "O") + "</span>"
-    // for swing use ""
     public static final DataKey<String> ITEM_DONE_MARKER = new DataKey<>("ITEM_DONE_MARKER", "<input type=\"checkbox\" class=\"task-list-item-checkbox\" checked=\"checked\" disabled=\"disabled\" readonly=\"readonly\" />&nbsp;");
     public static final DataKey<String> ITEM_NOT_DONE_MARKER = new DataKey<>("ITEM_NOT_DONE_MARKER", "<input type=\"checkbox\" class=\"task-list-item-checkbox\" disabled=\"disabled\" readonly=\"readonly\" />&nbsp;");
     public static final DataKey<String> TIGHT_ITEM_CLASS = new DataKey<>("TIGHT_ITEM_CLASS", "task-list-item");
@@ -28,11 +26,6 @@ public class TaskListExtension implements Parser.ParserExtension, HtmlRenderer.H
     public static final DataKey<String> PARAGRAPH_CLASS = new DataKey<>("PARAGRAPH_CLASS", "");
     public static final DataKey<String> ITEM_DONE_CLASS = new DataKey<>("ITEM_DONE_CLASS", "");
     public static final DataKey<String> ITEM_NOT_DONE_CLASS = new DataKey<>("ITEM_NOT_DONE_CLASS", "");
-
-    /**
-     * @deprecated use TIGHT_ITEM_CLASS instead
-     */
-    @Deprecated public static final DataKey<String> ITEM_CLASS = TIGHT_ITEM_CLASS;
 
     // formatting options
     public static final DataKey<TaskListItemCase> FORMAT_LIST_ITEM_CASE = new DataKey<>("FORMAT_LIST_ITEM_CASE", TaskListItemCase.AS_IS);

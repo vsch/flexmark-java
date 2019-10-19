@@ -63,22 +63,6 @@ public class PegdownOptionsAdapter {
     }
 
     /**
-     * @deprecated Use {@link #haveAnyExtensions(int)}
-     */
-    @Deprecated
-    public boolean haveExtensions(int mask) {
-        return haveAnyExtensions(mask);
-    }
-
-    /**
-     * @deprecated Use {@link #haveAllExtensions(int)}
-     */
-    @Deprecated
-    public boolean allExtensions(int mask) {
-        return haveAllExtensions(mask);
-    }
-
-    /**
      * Test if any given extensions are set
      *
      * @param mask extension flag mask
@@ -116,104 +100,104 @@ public class PegdownOptionsAdapter {
             // Setup List Options for Fixed List Indent profile
             options.setFrom(strictHtml ? ParserEmulationProfile.PEGDOWN_STRICT : ParserEmulationProfile.PEGDOWN);
 
-            options.set(HtmlRenderer.SUPPRESS_HTML_BLOCKS, haveExtensions(SUPPRESS_HTML_BLOCKS));
-            options.set(HtmlRenderer.SUPPRESS_INLINE_HTML, haveExtensions(SUPPRESS_INLINE_HTML));
+            options.set(HtmlRenderer.SUPPRESS_HTML_BLOCKS, haveAnyExtensions(SUPPRESS_HTML_BLOCKS));
+            options.set(HtmlRenderer.SUPPRESS_INLINE_HTML, haveAnyExtensions(SUPPRESS_INLINE_HTML));
 
             // add default extensions in pegdown
             extensions.add(EscapedCharacterExtension.create());
 
-            if (haveExtensions(ABBREVIATIONS)) {
+            if (haveAnyExtensions(ABBREVIATIONS)) {
                 extensions.add(AbbreviationExtension.create());
                 options.set(AbbreviationExtension.ABBREVIATIONS_KEEP, KeepType.LAST);
             }
 
-            if (haveExtensions(ANCHORLINKS | EXTANCHORLINKS)) {
+            if (haveAnyExtensions(ANCHORLINKS | EXTANCHORLINKS)) {
                 options.set(HtmlRenderer.RENDER_HEADER_ID, false);
                 extensions.add(AnchorLinkExtension.create());
-                if (haveExtensions(EXTANCHORLINKS)) {
+                if (haveAnyExtensions(EXTANCHORLINKS)) {
                     options.set(AnchorLinkExtension.ANCHORLINKS_WRAP_TEXT, false);
-                } else if (haveExtensions(ANCHORLINKS)) {
+                } else if (haveAnyExtensions(ANCHORLINKS)) {
                     options.set(AnchorLinkExtension.ANCHORLINKS_WRAP_TEXT, true);
                 }
             }
 
-            if (haveExtensions(AUTOLINKS)) {
+            if (haveAnyExtensions(AUTOLINKS)) {
                 extensions.add(AutolinkExtension.create());
             }
 
-            if (haveExtensions(DEFINITIONS)) {
+            if (haveAnyExtensions(DEFINITIONS)) {
                 // not implemented yet, but have placeholder
                 extensions.add(DefinitionExtension.create());
             }
 
-            if (!haveExtensions(FENCED_CODE_BLOCKS)) {
+            if (!haveAnyExtensions(FENCED_CODE_BLOCKS)) {
                 // disable fenced code blocks
                 options.set(Parser.FENCED_CODE_BLOCK_PARSER, false);
             } else {
                 options.set(Parser.MATCH_CLOSING_FENCE_CHARACTERS, false);
             }
 
-            if (haveExtensions(FORCELISTITEMPARA)) {
+            if (haveAnyExtensions(FORCELISTITEMPARA)) {
                 // first item is loose if second item is loose
                 options.set(Parser.LISTS_LOOSE_WHEN_HAS_NON_LIST_CHILDREN, true);
             } else {
                 // should already be set
             }
 
-            if (haveExtensions(HARDWRAPS)) {
+            if (haveAnyExtensions(HARDWRAPS)) {
                 options.set(HtmlRenderer.SOFT_BREAK, "<br />\n");
                 options.set(HtmlRenderer.HARD_BREAK, "<br />\n");
             }
 
-            if (!haveExtensions(ATXHEADERSPACE)) {
+            if (!haveAnyExtensions(ATXHEADERSPACE)) {
                 options.set(Parser.HEADING_NO_ATX_SPACE, true);
             }
 
-            if (haveExtensions(QUOTES | SMARTS)) {
+            if (haveAnyExtensions(QUOTES | SMARTS)) {
                 // not implemented yet, have placeholder
                 extensions.add(TypographicExtension.create());
-                options.set(TypographicExtension.ENABLE_SMARTS, haveExtensions(SMARTS));
-                options.set(TypographicExtension.ENABLE_QUOTES, haveExtensions(QUOTES));
+                options.set(TypographicExtension.ENABLE_SMARTS, haveAnyExtensions(SMARTS));
+                options.set(TypographicExtension.ENABLE_QUOTES, haveAnyExtensions(QUOTES));
             }
 
-            if (!haveExtensions(RELAXEDHRULES)) {
+            if (!haveAnyExtensions(RELAXEDHRULES)) {
                 options.set(Parser.THEMATIC_BREAK_RELAXED_START, false);
             }
 
-            if (haveExtensions(TABLES)) {
+            if (haveAnyExtensions(TABLES)) {
                 extensions.add(TablesExtension.create());
                 options.set(TablesExtension.TRIM_CELL_WHITESPACE, false);
                 options.set(TablesExtension.HEADER_SEPARATOR_COLUMN_MATCH, false);
             }
 
-            if (haveExtensions(TASKLISTITEMS)) {
+            if (haveAnyExtensions(TASKLISTITEMS)) {
                 extensions.add(TaskListExtension.create());
             }
 
-            if (haveExtensions(WIKILINKS)) {
+            if (haveAnyExtensions(WIKILINKS)) {
                 extensions.add(WikiLinkExtension.create());
                 // pegdown does not have an option for selecting Creole or GitHub wiki link syntax: Creole puts page ref first, link text second, GitHub the other way around
                 options.set(WikiLinkExtension.LINK_FIRST_SYNTAX, false);
             }
 
-            if (haveExtensions(SUBSCRIPT) && haveExtensions(STRIKETHROUGH)) {
+            if (haveAnyExtensions(SUBSCRIPT) && haveAnyExtensions(STRIKETHROUGH)) {
                 // first item is loose if second item is loose
                 extensions.add(StrikethroughSubscriptExtension.create());
-            } else if (haveExtensions(STRIKETHROUGH)) {
+            } else if (haveAnyExtensions(STRIKETHROUGH)) {
                 extensions.add(StrikethroughExtension.create());
-            } else if (haveExtensions(SUBSCRIPT)) {
+            } else if (haveAnyExtensions(SUBSCRIPT)) {
                 extensions.add(SubscriptExtension.create());
             }
 
-            if (haveExtensions(SUPERSCRIPT)) {
+            if (haveAnyExtensions(SUPERSCRIPT)) {
                 extensions.add(SuperscriptExtension.create());
             }
 
-            if (haveExtensions(INSERTED)) {
+            if (haveAnyExtensions(INSERTED)) {
                 extensions.add(InsExtension.create());
             }
 
-            if (haveExtensions(TOC)) {
+            if (haveAnyExtensions(TOC)) {
                 extensions.add(SimTocExtension.create());
                 options.set(TocExtension.BLANK_LINE_SPACER, true);
 
@@ -226,11 +210,11 @@ public class PegdownOptionsAdapter {
             //// need to set the location of the emoji icons from emoji-cheat-sheet on github or http://www.emoji-cheat-sheet.com/
             ////options.set(EmojiExtension.ROOT_IMAGE_PATH, emojiInstallDirectory());
 
-            if (haveExtensions(MULTI_LINE_IMAGE_URLS)) {
+            if (haveAnyExtensions(MULTI_LINE_IMAGE_URLS)) {
                 options.set(Parser.PARSE_MULTI_LINE_IMAGE_URLS, true);
             }
 
-            if (haveExtensions(FOOTNOTES)) {
+            if (haveAnyExtensions(FOOTNOTES)) {
                 extensions.add(FootnoteExtension.create());
                 options.set(FootnoteExtension.FOOTNOTES_KEEP, KeepType.LAST);
             }

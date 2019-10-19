@@ -1,5 +1,6 @@
 package com.vladsch.flexmark.ext.attributes;
 
+import com.vladsch.flexmark.core.test.util.RendererSpecTest;
 import com.vladsch.flexmark.ext.anchorlink.AnchorLinkExtension;
 import com.vladsch.flexmark.ext.definition.DefinitionExtension;
 import com.vladsch.flexmark.ext.emoji.EmojiExtension;
@@ -7,7 +8,6 @@ import com.vladsch.flexmark.ext.escaped.character.EscapedCharacterExtension;
 import com.vladsch.flexmark.ext.tables.TablesExtension;
 import com.vladsch.flexmark.ext.toc.TocExtension;
 import com.vladsch.flexmark.ext.typographic.TypographicExtension;
-import com.vladsch.flexmark.core.test.util.RendererSpecTest;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.test.spec.ResourceLocation;

@@ -3,7 +3,6 @@ package com.vladsch.flexmark.ext.enumerated.reference.internal;
 import com.vladsch.flexmark.ast.*;
 import com.vladsch.flexmark.ext.enumerated.reference.*;
 import com.vladsch.flexmark.util.ast.DoNotCollectText;
-import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.ast.NodeVisitor;
 import com.vladsch.flexmark.util.ast.VisitHandler;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
@@ -35,46 +34,6 @@ public class EnumRefTextCollectingVisitor {
 
     public String getText() {
         return out.toString();
-    }
-
-    /**
-     * @param node format node
-     * @deprecated use {@link #collect(BasedSequence, EnumeratedReferenceRendering[], String)}
-     */
-    @Deprecated
-    public void collect(Node node) {
-        out = new SegmentedSequenceBuilder(node.getChars());
-        visitor.visit(node);
-    }
-
-    /**
-     * @param node format node
-     * @deprecated use {@link #collectAndGetText(BasedSequence, EnumeratedReferenceRendering[], String)}
-     */
-    @Deprecated
-    public String collectAndGetText(Node node) {
-        collect(node);
-        return out.toString();
-    }
-
-    /**
-     * @param node format node
-     * @deprecated use {@link #collectAndGetSegments(BasedSequence, EnumeratedReferenceRendering[], String)}
-     */
-    @Deprecated
-    public BasedSequence[] collectAndGetSegments(Node node) {
-        collect(node);
-        return out.toSegments();
-    }
-
-    /**
-     * @param node format node
-     * @deprecated use {@link #collectAndGetSequence(BasedSequence, EnumeratedReferenceRendering[], String)}
-     */
-    @Deprecated
-    public BasedSequence collectAndGetSequence(Node node) {
-        collect(node);
-        return out.toBasedSequence();
     }
 
     public void collect(BasedSequence basedSequence, EnumeratedReferenceRendering[] renderings, String defaultFormat) {

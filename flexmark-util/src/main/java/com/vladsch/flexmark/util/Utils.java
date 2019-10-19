@@ -252,14 +252,6 @@ public class Utils {
         }
     }
 
-    /*
-     * @deprecated Use removePrefix
-     */
-    @Deprecated
-    public static String removeStart(String receiver, char prefix) {
-        return removePrefix(receiver, prefix);
-    }
-
     public static String removePrefix(String receiver, char prefix) {
         if (receiver != null) {
             if (receiver.startsWith(String.valueOf(prefix))) {
@@ -268,14 +260,6 @@ public class Utils {
             return receiver;
         }
         return "";
-    }
-
-    /*
-     * @deprecated Use removePrefix
-     */
-    @Deprecated
-    public static String removeStart(String receiver, String prefix) {
-        return removePrefix(receiver, prefix);
     }
 
     public static String removePrefix(String receiver, String prefix) {
@@ -315,14 +299,6 @@ public class Utils {
         return BasedSequenceImpl.of(sequence);
     }
 
-    /*
-     * @deprecated Use removeSuffix
-     */
-    @Deprecated
-    public static String removeEnd(String receiver, char suffix) {
-        return removeSuffix(receiver, suffix);
-    }
-
     public static String removeSuffix(String receiver, char suffix) {
         if (receiver != null) {
             if (receiver.endsWith(String.valueOf(suffix))) {
@@ -331,14 +307,6 @@ public class Utils {
             return receiver;
         }
         return "";
-    }
-
-    /*
-     * @deprecated Use removeSuffix
-     */
-    @Deprecated
-    public static String removeEnd(String receiver, String suffix) {
-        return removeSuffix(receiver, suffix);
     }
 
     public static String removeSuffix(String receiver, String suffix) {

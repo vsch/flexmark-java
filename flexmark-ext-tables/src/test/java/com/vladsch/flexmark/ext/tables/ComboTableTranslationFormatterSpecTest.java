@@ -22,7 +22,6 @@ public class ComboTableTranslationFormatterSpecTest extends TranslationFormatter
             .set(Parser.EXTENSIONS, Collections.singleton(TablesExtension.create()))
             .toImmutable();
 
-
     private static final Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
         optionsMap.put("gfm", new MutableDataSet()

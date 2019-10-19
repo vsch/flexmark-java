@@ -62,7 +62,6 @@ public abstract class ComboCoreFormatterSpecTestBase extends FormatterSpecTest {
         optionsMap.put("no-hard-breaks", new MutableDataSet().set(Formatter.KEEP_HARD_LINE_BREAKS, false));
         optionsMap.put("no-soft-breaks", new MutableDataSet().set(Formatter.KEEP_SOFT_LINE_BREAKS, false));
     }
-
     public ComboCoreFormatterSpecTestBase(@NotNull SpecExample example, @Nullable Map<String, DataHolder> optionMap, @Nullable DataHolder... defaultOptions) {
         super(example, optionsMaps(optionsMap, optionMap), defaultOptions);
     }

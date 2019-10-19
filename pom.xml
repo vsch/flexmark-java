@@ -39,7 +39,6 @@
         <module>flexmark-ext-footnotes</module>
         <module>flexmark-ext-gfm-issues</module>
         <module>flexmark-ext-gfm-strikethrough</module>
-        <module>flexmark-ext-gfm-tables</module>
         <module>flexmark-ext-gfm-tasklist</module>
         <module>flexmark-ext-gfm-users</module>
         <module>flexmark-ext-gitlab</module>
@@ -288,11 +287,6 @@
             <dependency>
                 <groupId>com.vladsch.flexmark</groupId>
                 <artifactId>flexmark-ext-gfm-strikethrough</artifactId>
-                <version>0.60.0</version>
-            </dependency>
-            <dependency>
-                <groupId>com.vladsch.flexmark</groupId>
-                <artifactId>flexmark-ext-gfm-tables</artifactId>
                 <version>0.60.0</version>
             </dependency>
             <dependency>

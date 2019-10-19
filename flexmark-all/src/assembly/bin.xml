@@ -25,7 +25,6 @@
                 <include>com.vladsch.flexmark:flexmark-ext-footnotes</include>
                 <include>com.vladsch.flexmark:flexmark-ext-gfm-issues</include>
                 <include>com.vladsch.flexmark:flexmark-ext-gfm-strikethrough</include>
-                <include>com.vladsch.flexmark:flexmark-ext-gfm-tables</include>
                 <include>com.vladsch.flexmark:flexmark-ext-gfm-tasklist</include>
                 <include>com.vladsch.flexmark:flexmark-ext-gfm-users</include>
                 <include>com.vladsch.flexmark:flexmark-ext-gitlab</include>

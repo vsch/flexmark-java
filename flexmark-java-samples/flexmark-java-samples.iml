@@ -18,7 +18,6 @@
     <orderEntry type="module" module-name="flexmark-ext-escaped-character" />
     <orderEntry type="module" module-name="flexmark-ext-footnotes" />
     <orderEntry type="module" module-name="flexmark-ext-gfm-strikethrough" />
-    <orderEntry type="module" module-name="flexmark-ext-gfm-tables" />
     <orderEntry type="module" module-name="flexmark-ext-gfm-tasklist" />
     <orderEntry type="module" module-name="flexmark-ext-jekyll-front-matter" />
     <orderEntry type="module" module-name="flexmark-ext-spec-example" />

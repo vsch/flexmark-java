@@ -90,11 +90,6 @@
         </dependency>
         <dependency>
             <groupId>com.vladsch.flexmark</groupId>
-            <artifactId>flexmark-ext-gfm-tables</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.vladsch.flexmark</groupId>
             <artifactId>flexmark-ext-gfm-tasklist</artifactId>
             <version>${project.version}</version>
         </dependency>

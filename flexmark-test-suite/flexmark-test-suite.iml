@@ -27,7 +27,6 @@
     <orderEntry type="module" module-name="flexmark-ext-footnotes" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-ext-gfm-issues" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-ext-gfm-strikethrough" scope="TEST" />
-    <orderEntry type="module" module-name="flexmark-ext-gfm-tables" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-ext-gfm-tasklist" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-ext-gfm-users" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-ext-gitlab" scope="TEST" />

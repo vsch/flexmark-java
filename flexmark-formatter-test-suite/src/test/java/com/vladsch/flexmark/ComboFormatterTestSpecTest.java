@@ -1,5 +1,6 @@
 package com.vladsch.flexmark;
 
+import com.vladsch.flexmark.core.test.util.FormatterSpecTest;
 import com.vladsch.flexmark.ext.abbreviation.AbbreviationExtension;
 import com.vladsch.flexmark.ext.anchorlink.AnchorLinkExtension;
 import com.vladsch.flexmark.ext.aside.AsideExtension;
@@ -24,7 +25,6 @@ import com.vladsch.flexmark.ext.typographic.TypographicExtension;
 import com.vladsch.flexmark.ext.wikilink.WikiLinkExtension;
 import com.vladsch.flexmark.ext.yaml.front.matter.YamlFrontMatterExtension;
 import com.vladsch.flexmark.formatter.Formatter;
-import com.vladsch.flexmark.core.test.util.FormatterSpecTest;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.superscript.SuperscriptExtension;
 import com.vladsch.flexmark.test.spec.ResourceLocation;

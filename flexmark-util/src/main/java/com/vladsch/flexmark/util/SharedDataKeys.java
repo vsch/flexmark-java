@@ -7,7 +7,6 @@ import java.util.Collection;
 
 public class SharedDataKeys {
 
-
     // BuilderBase
     public static final DataKey<Collection<Extension>> EXTENSIONS = new DataKey<>("EXTENSIONS", Extension.EMPTY_LIST);
 
@@ -35,9 +34,7 @@ public class SharedDataKeys {
     public static final DataKey<Boolean> GENERATE_HEADER_ID = new DataKey<>("GENERATE_HEADER_ID", true);
     public static final DataKey<Boolean> DO_NOT_RENDER_LINKS = new DataKey<>("DO_NOT_RENDER_LINKS", false);
 
-
     // Formatter
     public static final DataKey<Integer> FORMATTER_MAX_BLANK_LINES = new DataKey<>("FORMATTER_MAX_BLANK_LINES", 2);
     public static final DataKey<Integer> FORMATTER_MAX_TRAILING_BLANK_LINES = new DataKey<>("FORMATTER_MAX_TRAILING_BLANK_LINES", 1);
-
 }

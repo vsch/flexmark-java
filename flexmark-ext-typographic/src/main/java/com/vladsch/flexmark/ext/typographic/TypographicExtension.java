@@ -16,15 +16,6 @@ import com.vladsch.flexmark.util.data.MutableDataHolder;
 public class TypographicExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension {
     public static final DataKey<Boolean> ENABLE_QUOTES = new DataKey<>("ENABLE_QUOTES", true);
     public static final DataKey<Boolean> ENABLE_SMARTS = new DataKey<>("ENABLE_SMARTS", true);
-    /**
-     * @deprecated use {@link #ENABLE_QUOTES}
-     */
-    @Deprecated public static final DataKey<Boolean> TYPOGRAPHIC_QUOTES = ENABLE_QUOTES;
-    /**
-     * @deprecated use {@link #ENABLE_SMARTS}
-     */
-    @Deprecated public static final DataKey<Boolean> TYPOGRAPHIC_SMARTS = ENABLE_SMARTS;
-
     public static final DataKey<String> ANGLE_QUOTE_CLOSE = new DataKey<>("ANGLE_QUOTE_CLOSE", "&raquo;");
     public static final DataKey<String> ANGLE_QUOTE_OPEN = new DataKey<>("ANGLE_QUOTE_OPEN", "&laquo;");
     public static final DataKey<String> ANGLE_QUOTE_UNMATCHED = new DataKey<>("ANGLE_QUOTE_UNMATCHED", (String) null);

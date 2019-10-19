@@ -1,9 +1,9 @@
 package com.vladsch.flexmark.ext.attributes;
 
+import com.vladsch.flexmark.core.test.util.FormatterSpecTest;
 import com.vladsch.flexmark.ext.anchorlink.AnchorLinkExtension;
 import com.vladsch.flexmark.ext.emoji.EmojiExtension;
 import com.vladsch.flexmark.ext.toc.TocExtension;
-import com.vladsch.flexmark.core.test.util.FormatterSpecTest;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.test.spec.ResourceLocation;

@@ -7,10 +7,7 @@ import com.vladsch.flexmark.test.spec.SpecExample;
 import com.vladsch.flexmark.test.util.ComboSpecTestCase;
 import com.vladsch.flexmark.test.util.TestUtils;
 import com.vladsch.flexmark.util.data.DataHolder;
-import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.data.MutableDataSet;
-import com.vladsch.flexmark.util.format.options.ElementPlacement;
-import com.vladsch.flexmark.util.format.options.ElementPlacementSort;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -37,7 +34,6 @@ public abstract class FormatterTranslationSpecTestBase extends ComboSpecTestCase
         optionsMap.put("max-blank-lines-3", new MutableDataSet().set(Formatter.MAX_BLANK_LINES, 3));
         optionsMap.put("no-tailing-blanks", new MutableDataSet().set(Formatter.MAX_TRAILING_BLANK_LINES, 0));
     }
-
     public FormatterTranslationSpecTestBase(@NotNull SpecExample example, @Nullable Map<String, DataHolder> optionMap, @Nullable DataHolder... defaultOptions) {
         super(example, optionsMaps(optionsMap, optionMap), dataHolders(OPTIONS, defaultOptions));
     }

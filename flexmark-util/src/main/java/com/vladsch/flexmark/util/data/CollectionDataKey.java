@@ -1,7 +1,6 @@
 package com.vladsch.flexmark.util.data;
 
 import java.util.Collection;
-import java.util.Collections;
 
 public class CollectionDataKey<T> extends DataKey<Collection<T>> {
     /**

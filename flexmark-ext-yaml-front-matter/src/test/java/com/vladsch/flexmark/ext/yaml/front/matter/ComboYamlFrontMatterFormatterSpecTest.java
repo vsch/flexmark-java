@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.ext.yaml.front.matter;
 
-import com.vladsch.flexmark.formatter.Formatter;
 import com.vladsch.flexmark.core.test.util.FormatterSpecTest;
+import com.vladsch.flexmark.formatter.Formatter;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.test.spec.ResourceLocation;
 import com.vladsch.flexmark.test.spec.SpecExample;

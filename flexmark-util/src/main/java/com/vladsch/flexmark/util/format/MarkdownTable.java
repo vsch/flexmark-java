@@ -1027,7 +1027,6 @@ public class MarkdownTable {
 
             default:
             case AS_IS:
-                if (options.removeCaption) append = false;
                 break;
         }
 

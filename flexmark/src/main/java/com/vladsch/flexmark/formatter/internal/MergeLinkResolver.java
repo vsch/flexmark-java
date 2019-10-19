@@ -26,12 +26,12 @@ public class MergeLinkResolver implements LinkResolver {
         // context.getHtmlOptions();
         String docRelativeURL = Formatter.DOC_RELATIVE_URL.getFrom(context.getOptions());
         if (docRelativeURL != null) {
-            docRelativeURL = Utils.removeStart(docRelativeURL, '/');
+            docRelativeURL = Utils.removePrefix(docRelativeURL, '/');
         }
 
         String docRootURL = Formatter.DOC_ROOT_URL.getFrom(context.getOptions());
         if (docRootURL != null) {
-            docRootURL = Utils.removeStart(docRootURL, '/');
+            docRootURL = Utils.removePrefix(docRootURL, '/');
         }
 
         this.docRelativeURL = docRelativeURL;

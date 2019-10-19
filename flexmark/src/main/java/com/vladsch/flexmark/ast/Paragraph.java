@@ -58,7 +58,8 @@ public class Paragraph extends Block {
     }
 
     @Override
-    @Deprecated
+    // FIX: add indent tracking then deprecate. ContentNode does not have indents
+//    @Deprecated
     public void setContent(BasedSequence chars, List<BasedSequence> lineSegments) {
         super.setContent(chars, lineSegments);
     }
@@ -71,7 +72,8 @@ public class Paragraph extends Block {
     }
 
     @Override
-    @Deprecated
+    // FIX: add indent tracking then deprecate. ContentNode does not have indents
+//    @Deprecated
     public void setContent(List<BasedSequence> lineSegments) {
         super.setContent(lineSegments);
     }

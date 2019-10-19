@@ -8,7 +8,8 @@ flexmark-java
 - [To Do](#to-do)
 - [Next 0.60.0](#next-0600)
     - [API Changes](#api-changes)
-- [Next 0.59.15](#next-05915)
+- [Next 0.59.17](#next-05917)
+- [0.59.15](#05915)
 - [0.59.13](#05913)
     - [0.59.11](#05911)
     - [0.59.9](#0599)
@@ -77,8 +78,7 @@ renaming and clean up of some implementation classes.
 
 Please give feedback on the upcoming changes if you have concerns about breaking your code:
 
-* [ ] Break: delete deprecated properties, methods and classes which were deprecated before `V
-      0.60.0`
+* [ ] Break: delete deprecated properties, methods and classes
 * [ ] Break: split out generic AST utilities from `flexmark-util` module into separate smaller
       modules. IntelliJ IDEA migration to help with migration from 0.50.40 will be provided
       where needed if the package or class is changed. `com.vladsch.flexmark.util` will no
@@ -142,7 +142,7 @@ Please give feedback on the upcoming changes if you have concerns about breaking
     * `com.vladsch.flexmark.util.ast.NodeAdaptingVisitHandler`
     * `com.vladsch.flexmark.util.ast.NodeAdaptingVisitor`
 
-Next 0.59.15
+Next 0.59.17
 ------------
 
 * [ ] Fix: Change spec example to variable number of sections
@@ -153,6 +153,13 @@ Next 0.59.15
 * [ ] Fix: URGENT: Rewrite combo spec and full spec to be merged like markdown navigator action
       spec test and not requiring deep inheritance dependencies. Merge full test spec and
       individual tests. for example see MdNav `LightPlatformCodeInsightSpecTestCase`
+
+0.59.15
+-------
+
+* Fix: delete deprecated methods, classes, fields.
+* Fix: delete deprecated flexmark-ext-gfm-tables
+* Fix: format code
 
 0.59.13
 -------

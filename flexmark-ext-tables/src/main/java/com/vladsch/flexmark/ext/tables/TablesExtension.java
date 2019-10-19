@@ -35,12 +35,6 @@ public class TablesExtension implements Parser.ParserExtension, HtmlRenderer.Htm
     public static final DataKey<String> CLASS_NAME = new DataKey<>("CLASS_NAME", "");
     public static final DataKey<Boolean> WITH_CAPTION = new DataKey<>("WITH_CAPTION", true);
 
-    /**
-     * @deprecated was never implemented
-     */
-    @Deprecated
-    public static final DataKey<Boolean> MULTI_LINE_ROWS = new DataKey<>("MULTI_LINE_ROWS", false);
-
     // format options copy from TableFormatOptions
     public static final DataKey<Boolean> FORMAT_TABLE_TRIM_CELL_WHITESPACE = TableFormatOptions.FORMAT_TABLE_TRIM_CELL_WHITESPACE;
     public static final DataKey<Boolean> FORMAT_TABLE_LEAD_TRAIL_PIPES = TableFormatOptions.FORMAT_TABLE_LEAD_TRAIL_PIPES;
@@ -56,83 +50,6 @@ public class TablesExtension implements Parser.ParserExtension, HtmlRenderer.Htm
     public static final DataKey<TableCaptionHandling> FORMAT_TABLE_CAPTION = TableFormatOptions.FORMAT_TABLE_CAPTION;
     public static final DataKey<DiscretionaryText> FORMAT_TABLE_CAPTION_SPACES = TableFormatOptions.FORMAT_TABLE_CAPTION_SPACES;
     public static final DataKey<String> FORMAT_TABLE_INDENT_PREFIX = TableFormatOptions.FORMAT_TABLE_INDENT_PREFIX;
-
-    /**
-     * @deprecated use FORMAT_TABLE_ prefixed name
-     */
-    @Deprecated public static final DataKey<Boolean> FORMAT_LEAD_TRAIL_PIPES = TableFormatOptions.FORMAT_TABLE_LEAD_TRAIL_PIPES;
-    /**
-     * @deprecated use FORMAT_TABLE_ prefixed name
-     */
-    @Deprecated public static final DataKey<Boolean> FORMAT_SPACE_AROUND_PIPES = TableFormatOptions.FORMAT_TABLE_SPACE_AROUND_PIPES;
-    /**
-     * @deprecated use FORMAT_TABLE_ prefixed name
-     */
-    @Deprecated public static final DataKey<Boolean> FORMAT_ADJUST_COLUMN_WIDTH = TableFormatOptions.FORMAT_TABLE_ADJUST_COLUMN_WIDTH;
-    /**
-     * @deprecated use FORMAT_TABLE_ prefixed name
-     */
-    @Deprecated public static final DataKey<Boolean> FORMAT_APPLY_COLUMN_ALIGNMENT = TableFormatOptions.FORMAT_TABLE_APPLY_COLUMN_ALIGNMENT;
-    /**
-     * @deprecated use FORMAT_TABLE_ prefixed name
-     */
-    @Deprecated public static final DataKey<Boolean> FORMAT_FILL_MISSING_COLUMNS = TableFormatOptions.FORMAT_TABLE_FILL_MISSING_COLUMNS;
-
-    /**
-     * @deprecated use FORMAT_TABLE_ prefixed name
-     */
-    @Deprecated public static final DataKey<Boolean> FORMAT_REMOVE_CAPTION = TableFormatOptions.REMOVE_CAPTION;
-
-    /**
-     * @deprecated use FORMAT_TABLE_ prefixed name
-     */
-    @Deprecated public static final DataKey<DiscretionaryText> FORMAT_LEFT_ALIGN_MARKER = TableFormatOptions.FORMAT_TABLE_LEFT_ALIGN_MARKER;
-    /**
-     * @deprecated use FORMAT_TABLE_ prefixed name
-     */
-    @Deprecated public static final DataKey<Integer> FORMAT_MIN_SEPARATOR_COLUMN_WIDTH = TableFormatOptions.FORMAT_TABLE_MIN_SEPARATOR_COLUMN_WIDTH;
-    /**
-     * @deprecated use FORMAT_TABLE_ prefixed name
-     */
-    @Deprecated public static final DataKey<Integer> FORMAT_MIN_SEPARATOR_DASHES = TableFormatOptions.FORMAT_TABLE_MIN_SEPARATOR_DASHES;
-
-    /**
-     * @deprecated use FORMAT_TABLE_CAPTION with enum value, this option only has effect FORMAT_TABLE_CAPTION is set to AS_IS
-     */
-    @Deprecated public static final DataKey<Boolean> REMOVE_CAPTION = TableFormatOptions.REMOVE_CAPTION;
-
-    /**
-     * @deprecated use FORMAT_TABLE_ prefixed name
-     */
-    @Deprecated public static final DataKey<Boolean> LEAD_TRAIL_PIPES = TableFormatOptions.LEAD_TRAIL_PIPES;
-    /**
-     * @deprecated use FORMAT_TABLE_ prefixed name
-     */
-    @Deprecated public static final DataKey<Boolean> SPACE_AROUND_PIPES = TableFormatOptions.SPACE_AROUND_PIPES;
-    /**
-     * @deprecated use FORMAT_TABLE_ prefixed name
-     */
-    @Deprecated public static final DataKey<Boolean> ADJUST_COLUMN_WIDTH = TableFormatOptions.ADJUST_COLUMN_WIDTH;
-    /**
-     * @deprecated use FORMAT_TABLE_ prefixed name
-     */
-    @Deprecated public static final DataKey<Boolean> APPLY_COLUMN_ALIGNMENT = TableFormatOptions.APPLY_COLUMN_ALIGNMENT;
-    /**
-     * @deprecated use FORMAT_TABLE_ prefixed name
-     */
-    @Deprecated public static final DataKey<Boolean> FILL_MISSING_COLUMNS = TableFormatOptions.FILL_MISSING_COLUMNS;
-    /**
-     * @deprecated use FORMAT_TABLE_ prefixed name
-     */
-    @Deprecated public static final DataKey<DiscretionaryText> LEFT_ALIGN_MARKER = TableFormatOptions.LEFT_ALIGN_MARKER;
-    /**
-     * @deprecated use FORMAT_TABLE_ prefixed name
-     */
-    @Deprecated public static final DataKey<Integer> MIN_SEPARATOR_COLUMN_WIDTH = TableFormatOptions.MIN_SEPARATOR_COLUMN_WIDTH;
-    /**
-     * @deprecated use FORMAT_TABLE_ prefixed name
-     */
-    @Deprecated public static final DataKey<CharWidthProvider> CHAR_WIDTH_PROVIDER = TableFormatOptions.CHAR_WIDTH_PROVIDER;
 
     public static TablesExtension create() {
         return new TablesExtension();

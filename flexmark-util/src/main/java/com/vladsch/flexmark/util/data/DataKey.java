@@ -51,7 +51,7 @@ public class DataKey<T> {
     }
 
     public MutableDataHolder set(MutableDataHolder holder, T value) {
-        holder.set(this,value);
+        holder.set(this, value);
         return holder;
     }
 

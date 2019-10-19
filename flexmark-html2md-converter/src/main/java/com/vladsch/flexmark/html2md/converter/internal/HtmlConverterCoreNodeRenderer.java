@@ -961,7 +961,7 @@ public class HtmlConverterCoreNodeRenderer implements PhasedHtmlNodeRenderer {
                 Element code = (Element) next;
                 //text = code.toString();
                 preText.renderChildren(code, false, null);
-                if (className.isEmpty()) className = Utils.removeStart(code.className(), "language-");
+                if (className.isEmpty()) className = Utils.removePrefix(code.className(), "language-");
             } else if (next.nodeName().equalsIgnoreCase("br")) {
                 preText.getMarkdown().append("\n");
             } else if (next.nodeName().equalsIgnoreCase("#text")) {
