@@ -26,7 +26,7 @@ public abstract class OrigSpecCoreTest extends FullSpecTestCase {
     }
 
     @Override
-    final public @Nullable DataHolder options(String option) {
+    final public @Nullable DataHolder options(@NotNull String option) {
         return null;
     }
 

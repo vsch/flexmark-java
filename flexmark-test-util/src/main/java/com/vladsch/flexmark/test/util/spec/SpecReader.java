@@ -13,6 +13,8 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static com.vladsch.flexmark.test.util.spec.SpecReader.State.COMMENT;
+
 public class SpecReader {
     public static final String EXAMPLE_KEYWORD = "example";
     public static final String EXAMPLE_BREAK = "````````````````````````````````";
@@ -41,6 +43,7 @@ public class SpecReader {
     protected int exampleNumber = 0;
     protected int lineNumber = 0;
     protected int contentLineNumber = 0;
+    protected int commentLineNumber = 0;
 
     public SpecReader(@NotNull InputStream stream, @NotNull ResourceLocation location) {
         this.inputStream = stream;
@@ -131,6 +134,11 @@ public class SpecReader {
                 lineNumber++;
                 processLine(line);
             }
+
+            if (state == COMMENT) {
+                // unterminated comment
+                throw new IllegalStateException("Unterminated comment\n" + resourceLocation.getFileUrl(commentLineNumber));
+            }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -150,7 +158,22 @@ public class SpecReader {
         boolean lineProcessed = false;
 
         switch (state) {
+            case COMMENT:
+                // look for comment end
+                if (line.trim().startsWith("-->")) {
+                    lineProcessed = true;
+                    state = State.BEFORE;
+                }
+                break;
+
             case BEFORE:
+                if (line.trim().startsWith("<!--")) {
+                    state = COMMENT;
+                    lineProcessed = true;
+                    commentLineNumber = lineNumber - 1;
+                    break;
+                }
+
                 Matcher matcher = SECTION_PATTERN.matcher(line);
                 if (matcher.matches()) {
                     section = matcher.group(1);
@@ -226,6 +249,6 @@ public class SpecReader {
     }
 
     protected enum State {
-        BEFORE, SOURCE, HTML, AST
+        BEFORE, SOURCE, HTML, AST, COMMENT
     }
 }

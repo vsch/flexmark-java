@@ -90,7 +90,7 @@ public class SpecExample {
 
     @NotNull
     public String getFileUrlWithLineNumber() {
-        return TestUtils.getUrlWithLineNumber(resourceLocation.getFileUrl(), lineNumber);
+        return resourceLocation.getFileUrl(lineNumber);
     }
 
     @NotNull

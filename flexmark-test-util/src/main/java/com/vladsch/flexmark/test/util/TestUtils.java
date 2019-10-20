@@ -1,8 +1,10 @@
 package com.vladsch.flexmark.test.util;
 
 import com.vladsch.flexmark.test.util.spec.ResourceLocation;
+import com.vladsch.flexmark.test.util.spec.ResourceUrlResolver;
 import com.vladsch.flexmark.test.util.spec.SpecExample;
 import com.vladsch.flexmark.test.util.spec.SpecReader;
+import com.vladsch.flexmark.util.Pair;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.builder.Extension;
 import com.vladsch.flexmark.util.data.DataHolder;
@@ -18,11 +20,17 @@ import org.junit.AssumptionViolatedException;
 import java.io.File;
 import java.net.URL;
 import java.util.*;
+import java.util.function.BiFunction;
 import java.util.function.Function;
 
 import static com.vladsch.flexmark.util.Utils.*;
 
 public class TestUtils {
+    static {
+         // CAUTION: need to register our url resolvers
+         FlexmarkResourceUrlResolver.registerUrlResolvers();
+    }
+
     public static final String IGNORE_OPTION_NAME = "IGNORE";
     public static final DataKey<Boolean> IGNORE = new DataKey<>(IGNORE_OPTION_NAME, false);
     public static final String FAIL_OPTION_NAME = "FAIL";
@@ -47,7 +55,47 @@ public class TestUtils {
     public static final String DEFAULT_URL_PREFIX = "fqn://";  // use class fqn to figure it out
     public static final DataKey<Collection<Class<? extends Extension>>> UNLOAD_EXTENSIONS = LoadUnloadDataKeyAggregator.UNLOAD_EXTENSIONS;
     public static final DataKey<Collection<Extension>> LOAD_EXTENSIONS = LoadUnloadDataKeyAggregator.LOAD_EXTENSIONS;
+    final public static DataKey<BiFunction<String, String, DataHolder>> CUSTOM_OPTION = new DataKey<>("CUSTOM_OPTION", (option, params) -> null);
+    public static final String FILE_PROTOCOL = ResourceUrlResolver.FILE_PROTOCOL;
     public static final @NotNull ResourceLocation DEFAULT_RESOURCE_LOCATION = ResourceLocation.of(TestUtils.class, TestUtils.DEFAULT_SPEC_RESOURCE, TestUtils.DEFAULT_URL_PREFIX);
+
+
+    public static DataHolder processOption(@NotNull Map<String, DataHolder> optionsMap, @NotNull String option) {
+        DataHolder dataHolder = optionsMap.get(option);
+        String customOption = option;
+        String params = null;
+
+        if (dataHolder == null) {
+            // see if parameterized option
+            Pair<String, String> optionPair = parseCustomOption(option);
+            if (optionPair != null) {
+                // parameterized, see if there is a handler defined for it
+                customOption = optionPair.getFirst();
+                params = optionPair.getSecond();
+                dataHolder = optionsMap.get(customOption);
+            }
+        }
+
+        // if custom option is set then delegate to it
+        if (dataHolder != null && dataHolder.contains(CUSTOM_OPTION)) {
+            BiFunction<String, String, DataHolder> customHandler = CUSTOM_OPTION.getFrom(dataHolder);
+            dataHolder = customHandler.apply(customOption, params);
+        }
+
+        return dataHolder;
+    }
+
+    @Nullable
+    public static Pair<String, String> parseCustomOption(@NotNull String option) {
+        int pos = option.indexOf("[");
+        if (pos > 0 && pos < option.length() && option.endsWith("]")) {
+            // parameterized, see if there is a handler defined for it
+            String customOption = option.substring(0, pos);
+            String params = option.substring(pos + 1, option.length() - 1);
+            return Pair.of(customOption, params);
+        }
+        return null;
+    }
 
     /**
      * process comma separated list of option sets and combine them for final set to use
@@ -89,7 +137,7 @@ public class TestUtils {
                         options = optionsProvider.apply(option);
 
                         if (options == null) {
-                            throw new IllegalStateException("Option " + option + " is not implemented in the RenderingTestCase subclass");
+                            throw new IllegalStateException("Option " + option + " is not implemented in the RenderingTestCase subclass\n" + example.getFileUrlWithLineNumber());
                         }
                     } else {
                         DataHolder dataSet = optionsProvider.apply(option);
@@ -98,7 +146,7 @@ public class TestUtils {
                             // CAUTION: have to only aggregate actions here
                             options = DataSet.aggregateActions(options, dataSet);
                         } else {
-                            throw new IllegalStateException("Option " + option + " is not implemented in the RenderingTestCase subclass");
+                            throw new IllegalStateException("Option " + option + " is not implemented in the RenderingTestCase subclass\n" + example.getFileUrlWithLineNumber());
                         }
                     }
 
@@ -120,7 +168,11 @@ public class TestUtils {
     }
 
     public static void throwIgnoredOption(SpecExample example, String optionSets, String option) {
-        if (example == null) { throw new AssumptionViolatedException("Ignored: SpecExample test case options(" + optionSets + ") is using " + option + " option"); } else { throw new AssumptionViolatedException("Ignored: example(" + example.getSection() + ": " + example.getExampleNumber() + ") options(" + optionSets + ") is using " + option + " option"); }
+        if (example == null) {
+            throw new AssumptionViolatedException("Ignored: SpecExample test case options(" + optionSets + ") is using " + option + " option\n" + example.getFileUrlWithLineNumber());
+        } else {
+            throw new AssumptionViolatedException("Ignored: example(" + example.getSection() + ": " + example.getExampleNumber() + ") options(" + optionSets + ") is using " + option + " option\n" + example.getFileUrlWithLineNumber());
+        }
     }
 
     @NotNull
@@ -268,30 +320,8 @@ public class TestUtils {
         return (lineNumber > 0) ? fileUrl + ":" + (lineNumber + 1) : fileUrl;
     }
 
-    public static final String TARGET_TEST_CLASSES = "/target/test-classes/";
-    public static final String OUT_TEST = "/out/test/";
-    public static final String FILE_PROTOCOL = "file://";
-    public static final String TEST_RESOURCES = "/test/resources/";
-
     public static String adjustedFileUrl(URL url) {
-        String externalForm = url.toExternalForm();
-        if (externalForm.startsWith("file:/")) {
-            String noFileProtocol = externalForm.substring("file:".length());
-            if (noFileProtocol.contains(TARGET_TEST_CLASSES)) {
-                return noFileProtocol.replace(TARGET_TEST_CLASSES, "/src/test/resources/");
-            } else {
-                int pos = noFileProtocol.indexOf(OUT_TEST);
-                if (pos > 0) {
-                    int pathPos = noFileProtocol.indexOf("/", pos + OUT_TEST.length());
-                    if (pathPos > 0) {
-                        return FILE_PROTOCOL + noFileProtocol.substring(0, pos) /* + "/" + noFileProtocol.substring(pos + OUT_TEST.length(), pathPos)*/ + "/test/src/" + noFileProtocol.substring(pathPos + 1);
-                    }
-                }
-            }
-            return FILE_PROTOCOL + noFileProtocol;
-        } else {
-            return externalForm;
-        }
+        return ResourceLocation.adjustedFileUrl(url);
     }
 
     @Nullable

@@ -17,9 +17,12 @@ import org.junit.runners.Parameterized;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.BiFunction;
 
 @RunWith(Parameterized.class)
 public abstract class ComboSpecTestCase extends FullSpecTestCase {
+    final public static DataKey<BiFunction<String, String, DataHolder>> CUSTOM_OPTION = TestUtils.CUSTOM_OPTION;
+
     protected final @NotNull SpecExample example;
     protected final @NotNull Map<String, DataHolder> optionsMap = new HashMap<>();
     protected final @Nullable DataHolder myDefaultOptions;
@@ -59,9 +62,8 @@ public abstract class ComboSpecTestCase extends FullSpecTestCase {
 
     @Nullable
     @Override
-    final public DataHolder options(String option) {
-        if (option == null) return null;
-        return optionsMap.get(option);
+    public DataHolder options(@NotNull String option) {
+        return TestUtils.processOption(optionsMap, option);
     }
 
     @Override

@@ -43,7 +43,7 @@ public class ComboPdfConverterSpecTest extends ComboSpecTestCase {
             @Override
             protected @NotNull String renderHtml() {
                 String html = super.renderHtml();
-                return PdfConverterExtension.embedCss(html, PdfConverterExtension.DEFAULT_CSS.getFrom(options(null)));
+                return PdfConverterExtension.embedCss(html, PdfConverterExtension.DEFAULT_CSS.getFrom(myDefaultOptions));
             }
         };
     }

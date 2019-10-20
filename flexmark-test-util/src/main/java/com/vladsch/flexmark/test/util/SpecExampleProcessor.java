@@ -12,7 +12,7 @@ public interface SpecExampleProcessor {
      * @param option name of the options set to use
      * @return options or null to use default
      */
-    @Nullable DataHolder options(String option);
+    @Nullable DataHolder options(@NotNull String option);
 
     /**
      * Allows tests to modify example during reading (DumpSpecReader)

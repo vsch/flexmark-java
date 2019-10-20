@@ -2851,7 +2851,8 @@ Document[0, 35]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Fenced Code: 20) options(info-attributes, fenced-code-to-pre)
+<!--
+```````````````````````````````` example(Fenced Code: 20) options(info-attributes, fenced-code-to-pre, custom[ test ])
 ```plantuml
 ```
 {caption="Caption"}
@@ -2864,6 +2865,7 @@ Document[0, 35]
     AttributesNode[16, 35] textOpen:[16, 17, "{"] text:[17, 34, "caption=\"Caption\""] textClose:[34, 35, "}"]
       AttributeNode[17, 34] name:[17, 24, "caption"] sep:[24, 25, "="] valueOpen:[25, 26, "\""] value:[26, 33, "Caption"] valueClose:[33, 34, "\""]
 ````````````````````````````````
+-->
 
 
 ```````````````````````````````` example(Fenced Code: 21) options(info-attributes, fenced-code-to-code)

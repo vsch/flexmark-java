@@ -29,7 +29,7 @@ public abstract class PathologicalRenderingTestCase extends RenderingTestCase {
 
     @Nullable
     @Override
-    final public DataHolder options(String option) {
+    final public DataHolder options(@NotNull String option) {
         return null;
     }
 

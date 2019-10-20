@@ -63,7 +63,7 @@ final public class DelimiterProcessorTest extends RenderingTestCase {
     }
 
     @Override
-    public @Nullable DataHolder options(String option) {
+    public @Nullable DataHolder options(@NotNull String option) {
         return null;
     }
 

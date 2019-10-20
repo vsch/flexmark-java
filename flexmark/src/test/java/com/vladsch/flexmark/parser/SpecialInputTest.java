@@ -120,7 +120,7 @@ final public class SpecialInputTest extends RenderingTestCase {
 
     @Nullable
     @Override
-    public DataHolder options(String option) {
+    public DataHolder options(@NotNull String option) {
         return null;
     }
 

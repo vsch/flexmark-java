@@ -9,6 +9,7 @@ flexmark-java
 - [Next 0.60.0](#next-0600)
     - [API Changes](#api-changes)
 - [Next](#next)
+- [0.59.27](#05927)
 - [0.59.25](#05925)
 - [0.59.23](#05923)
 - [0.59.21](#05921)
@@ -151,13 +152,47 @@ Next
 ----
 
 * [ ] Fix: Change spec example to variable number of sections
-* [ ] Fix: Create base classes for handling spec tests without needing to inherit from
-      superclass.
 * [ ] Add: yaml front matter configurator for modules. See:
       [Yaml Front Matter Configuration](../../wiki/Yaml-Front-Matter-Configuration)
-* [ ] Fix: URGENT: Rewrite combo spec and full spec to be merged like markdown navigator action
-      spec test and not requiring deep inheritance dependencies. Merge full test spec and
-      individual tests. for example see MdNav `LightPlatformCodeInsightSpecTestCase`
+
+0.59.27
+-------
+
+* Add: parameterized test case options, ones that have option name followed by `[` and
+  terminated by `]`. Used for custom handling variations of option. These should set
+  `TestUtils.CUSTOM_OPTION` to a `BiFunction<String option, String text, DataHolder>` where
+  `option` is the option name (`type` in example), `text` is the text between `[]`.
+
+      optionsMap.put("type", new MutableDataSet().set(CUSTOM_OPTION, ActionSpecTestCase::typeOption));
+
+  ```
+    public static DataHolder typeOption(String option, String params) {
+      // allow escape
+      String text = params
+              .replace("\\\\", "\\")
+              .replace("\\]", "]")
+              .replace("\\t", "\t")
+              .replace("\\n", "\n")
+              .replace("\\r", "\r")
+              .replace("\\b", "\b");
+
+      return new MutableDataSet().set(ACTION_NAME, TYPE_ACTION).set(TYPE_ACTION_TEXT, text);
+  }
+  ```
+* Add: now if test option `DataHolder` with `TestUtils.CUSTOM_OPTION` set then it will be
+  invoked even when no `[]` present to allow handling of empty params, which will be `null` in
+  this case.
+* Add: before checking for parameterized option the full option with params and `[]` is tried.
+  If present then its results are used, but also checked if `TestUtils.CUSTOM_OPTION` is
+  present.
+* Add: `ResourceUrlResolver`, registered via
+  `ResourceLocation.registerUrlResolver(Function<String, String>)` to allow resource URL
+  conversion to URL used in example messages to be adjusted by project. Must register resolvers
+  before trying to get an instance of `ResourceLocation` since resolution of file url is done in
+  constructor.
+* Add: example's URL in exceptions when processing undefined example option.
+* Add: HTML comment handling to `SpecReader`, start/end comment tags must be the first non-blank
+  on the line and outside of spec example.
 
 0.59.25
 -------
@@ -171,7 +206,6 @@ Next
   instance.
 * Fix: make `ComboSpecTestCase.getSpecResourceLocation()` final and remove it from all
   subclasses.
-
 
 0.59.21
 -------
