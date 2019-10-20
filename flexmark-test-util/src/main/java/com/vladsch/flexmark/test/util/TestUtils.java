@@ -284,7 +284,7 @@ public class TestUtils {
                 if (pos > 0) {
                     int pathPos = noFileProtocol.indexOf("/", pos + OUT_TEST.length());
                     if (pathPos > 0) {
-                        return FILE_PROTOCOL + noFileProtocol.substring(0, pos) + "/" + noFileProtocol.substring(pos + OUT_TEST.length(), pathPos) + "/src/test/resources/" + noFileProtocol.substring(pathPos + 1);
+                        return FILE_PROTOCOL + noFileProtocol.substring(0, pos) /* + "/" + noFileProtocol.substring(pos + OUT_TEST.length(), pathPos)*/ + "/test/src/" + noFileProtocol.substring(pathPos + 1);
                     }
                 }
             }

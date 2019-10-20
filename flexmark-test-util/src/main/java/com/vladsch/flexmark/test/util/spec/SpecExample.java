@@ -164,7 +164,7 @@ public class SpecExample {
             String resourcePath = null;
             while (true) {
                 String absolutePath = Utils.removeSuffix(javaPathFile.getPath(), "/");
-                resourcePath = absolutePath.substring(1).replace('/', '.') + ".txt";
+                resourcePath = Utils.removePrefix(absolutePath,'/').replace('/', '.') + ".txt";
                 url = resourceClass.getResource("/" + resourcePath);
                 if (url != null) {
                     prefix = Utils.getResourceAsString(resourceClass, "/" + resourcePath).trim();
