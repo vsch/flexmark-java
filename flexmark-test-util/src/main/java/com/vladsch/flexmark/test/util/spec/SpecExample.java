@@ -90,7 +90,12 @@ public class SpecExample {
 
     @NotNull
     public String getFileUrlWithLineNumber() {
-        return resourceLocation.getFileUrl(lineNumber);
+        return getFileUrlWithLineNumber(0);
+    }
+
+    @NotNull
+    public String getFileUrlWithLineNumber(int lineOffset) {
+        return resourceLocation.getFileUrl(Utils.minLimit(lineNumber + lineOffset, 0));
     }
 
     @NotNull
@@ -164,7 +169,7 @@ public class SpecExample {
             String resourcePath = null;
             while (true) {
                 String absolutePath = Utils.removeSuffix(javaPathFile.getPath(), "/");
-                resourcePath = Utils.removePrefix(absolutePath,'/').replace('/', '.') + ".txt";
+                resourcePath = Utils.removePrefix(absolutePath, '/').replace('/', '.') + ".txt";
                 url = resourceClass.getResource("/" + resourcePath);
                 if (url != null) {
                     prefix = Utils.getResourceAsString(resourceClass, "/" + resourcePath).trim();

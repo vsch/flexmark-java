@@ -27,8 +27,8 @@ import static com.vladsch.flexmark.util.Utils.*;
 
 public class TestUtils {
     static {
-         // CAUTION: need to register our url resolvers
-         FlexmarkResourceUrlResolver.registerUrlResolvers();
+        // CAUTION: need to register our url resolvers
+        FlexmarkResourceUrlResolver.registerUrlResolvers();
     }
 
     public static final String IGNORE_OPTION_NAME = "IGNORE";
@@ -58,7 +58,6 @@ public class TestUtils {
     final public static DataKey<BiFunction<String, String, DataHolder>> CUSTOM_OPTION = new DataKey<>("CUSTOM_OPTION", (option, params) -> null);
     public static final String FILE_PROTOCOL = ResourceUrlResolver.FILE_PROTOCOL;
     public static final @NotNull ResourceLocation DEFAULT_RESOURCE_LOCATION = ResourceLocation.of(TestUtils.class, TestUtils.DEFAULT_SPEC_RESOURCE, TestUtils.DEFAULT_URL_PREFIX);
-
 
     public static DataHolder processOption(@NotNull Map<String, DataHolder> optionsMap, @NotNull String option) {
         DataHolder dataHolder = optionsMap.get(option);
@@ -137,7 +136,7 @@ public class TestUtils {
                         options = optionsProvider.apply(option);
 
                         if (options == null) {
-                            throw new IllegalStateException("Option " + option + " is not implemented in the RenderingTestCase subclass\n" + example.getFileUrlWithLineNumber());
+                            throwIllegalStateException(example, option);
                         }
                     } else {
                         DataHolder dataSet = optionsProvider.apply(option);
@@ -146,7 +145,7 @@ public class TestUtils {
                             // CAUTION: have to only aggregate actions here
                             options = DataSet.aggregateActions(options, dataSet);
                         } else {
-                            throw new IllegalStateException("Option " + option + " is not implemented in the RenderingTestCase subclass\n" + example.getFileUrlWithLineNumber());
+                            throwIllegalStateException(example, option);
                         }
                     }
 
@@ -167,12 +166,12 @@ public class TestUtils {
         }
     }
 
-    public static void throwIgnoredOption(SpecExample example, String optionSets, String option) {
-        if (example == null) {
-            throw new AssumptionViolatedException("Ignored: SpecExample test case options(" + optionSets + ") is using " + option + " option\n" + example.getFileUrlWithLineNumber());
-        } else {
-            throw new AssumptionViolatedException("Ignored: example(" + example.getSection() + ": " + example.getExampleNumber() + ") options(" + optionSets + ") is using " + option + " option\n" + example.getFileUrlWithLineNumber());
-        }
+    public static void throwIllegalStateException(@NotNull SpecExample example, @NotNull String option) {
+        throw new IllegalStateException("Option " + option + " is not implemented in the RenderingTestCase subclass\n" + example.getFileUrlWithLineNumber(-1));
+    }
+
+    public static void throwIgnoredOption(@NotNull SpecExample example, @NotNull String optionSets, @NotNull String option) {
+        throw new AssumptionViolatedException("Ignored: example(" + example.getSection() + ": " + example.getExampleNumber() + ") options(" + optionSets + ") is using " + option + " option\n" + example.getFileUrlWithLineNumber(-1));
     }
 
     @NotNull
