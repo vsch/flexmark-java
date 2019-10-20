@@ -27,7 +27,7 @@ public abstract class ComboSpecTestCase extends FullSpecTestCase {
     protected final @NotNull Map<String, DataHolder> optionsMap = new HashMap<>();
     protected final @Nullable DataHolder myDefaultOptions;
 
-    public ComboSpecTestCase(@NotNull SpecExample example, @Nullable Map<String, DataHolder> optionMap, @Nullable DataHolder... defaultOptions) {
+    public ComboSpecTestCase(@NotNull SpecExample example, @Nullable Map<String, ? extends DataHolder> optionMap, @Nullable DataHolder... defaultOptions) {
         this.example = example;
         myDefaultOptions = TestUtils.combineDefaultOptions(defaultOptions);
         if (optionMap != null) optionsMap.putAll(optionMap);
@@ -46,7 +46,7 @@ public abstract class ComboSpecTestCase extends FullSpecTestCase {
     }
 
     @Nullable
-    public static Map<String, DataHolder> optionsMaps(@Nullable Map<String, DataHolder> other, @Nullable Map<String, DataHolder> overrides) {
+    public static Map<String, ? extends DataHolder> optionsMaps(@Nullable Map<String, ? extends DataHolder> other, @Nullable Map<String, ? extends DataHolder> overrides) {
         return TestUtils.optionsMaps(other, overrides);
     }
 

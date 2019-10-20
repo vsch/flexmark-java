@@ -13,6 +13,7 @@ import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.test.util.spec.ResourceLocation;
 import com.vladsch.flexmark.test.util.spec.SpecExample;
 import com.vladsch.flexmark.util.data.DataHolder;
+import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import org.jetbrains.annotations.NotNull;
 import org.junit.runners.Parameterized;
@@ -39,7 +40,7 @@ public class ComboExtAttributesSpecTest extends RendererSpecTest {
             ))
             .toImmutable();
 
-    private static final Map<String, DataHolder> optionsMap = new HashMap<>();
+    private static final Map<String, MutableDataHolder> optionsMap = new HashMap<>();
     static {
         optionsMap.put("anchors", new MutableDataSet()
                 .set(Parser.EXTENSIONS, Arrays.asList(AnchorLinkExtension.create(), AttributesExtension.create(), TocExtension.create(), EmojiExtension.create()))

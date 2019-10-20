@@ -334,7 +334,7 @@ public class TestUtils {
     }
 
     @Nullable
-    public static Map<String, DataHolder> optionsMaps(@Nullable Map<String, DataHolder> other, @Nullable Map<String, DataHolder> overrides) {
+    public static Map<String, ? extends DataHolder> optionsMaps(@Nullable Map<String, ? extends DataHolder> other, @Nullable Map<String, ? extends DataHolder> overrides) {
         if (other != null && overrides != null) {
             HashMap<String, DataHolder> map = new HashMap<>(other);
             map.putAll(overrides);

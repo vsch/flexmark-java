@@ -10,6 +10,7 @@ flexmark-java
     - [API Changes](#api-changes)
 - [Next](#next)
 - [0.59.28](#05928)
+- [0.59.28](#05928)
 - [0.59.27](#05927)
 - [0.59.25](#05925)
 - [0.59.23](#05923)
@@ -155,6 +156,12 @@ Next
 * [ ] Fix: Change spec example to variable number of sections
 * [ ] Add: yaml front matter configurator for modules. See:
       [Yaml Front Matter Configuration](../../wiki/Yaml-Front-Matter-Configuration)
+
+0.59.28
+-------
+
+* Fix: change all test case construction param from `Map<String, DataHolder>` to `Map<String, ?
+  extends DataHolder>` to allow for any type implementing the right map.
 
 0.59.28
 -------

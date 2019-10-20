@@ -43,7 +43,7 @@ public abstract class TranslationFormatterSpecTest extends FormatterTranslationS
         optionsMap.put("details", new MutableDataSet().set(DETAILS, true));
         optionsMap.put("ast-details", new MutableDataSet().set(AST_DETAILS, true));
     }
-    public TranslationFormatterSpecTest(@NotNull SpecExample example, @Nullable Map<String, DataHolder> optionMap, @Nullable DataHolder... defaultOptions) {
+    public TranslationFormatterSpecTest(@NotNull SpecExample example, @Nullable Map<String, ? extends DataHolder> optionMap, @Nullable DataHolder... defaultOptions) {
         super(example, ComboSpecTestCase.optionsMaps(optionsMap, optionMap), ComboSpecTestCase.dataHolders(OPTIONS, defaultOptions));
     }
 

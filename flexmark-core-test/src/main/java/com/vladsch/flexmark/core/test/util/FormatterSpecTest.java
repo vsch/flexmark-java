@@ -12,7 +12,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Map;
 
 public abstract class FormatterSpecTest extends FormatterTranslationSpecTestBase {
-    public FormatterSpecTest(@NotNull SpecExample example, @Nullable Map<String, DataHolder> optionMap, @Nullable DataHolder... defaultOptions) {
+    public FormatterSpecTest(@NotNull SpecExample example, @Nullable Map<String, ? extends DataHolder> optionMap, @Nullable DataHolder... defaultOptions) {
         super(example, optionMap, defaultOptions);
     }
 
