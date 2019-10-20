@@ -25,7 +25,8 @@ function UpdJars() {
 
 # Update flexmark-util.jar flexmark-tree-iteration.jar
 UpdJars ../plugin-util/lib flexmark-util.jar flexmark-tree-iteration.jar
-#UpdJars ../MissingInActions/lib flexmark-util.jar flexmark-tree-iteration.jar
+UpdJars ../MissingInActions/lib flexmark-util.jar flexmark-tree-iteration.jar
+UpdJars ../idea-multimarkdown3/lib flexmark-util.jar flexmark-tree-iteration.jar
 UpdJars ../touch-typists-completion-caddy/lib flexmark-util.jar flexmark-tree-iteration.jar
 
 # Update flexmark-test-util.jar

@@ -7,10 +7,8 @@
     <htmlFiles>
       <exportedFile path="$PROJECT_DIR$/flexmark-ext-gfm-users/src/main/javadoc/overview.html" settingsVersion="D96B5AAF-FCB94777" />
       <exportedFile path="$PROJECT_DIR$/flexmark-ext-toc/src/main/javadoc/overview.html" settingsVersion="D96B5AAF-FCB94777" />
-      <exportedFile path="$PROJECT_DIR$/flexmark-formatter/src/main/javadoc/overview.html" settingsVersion="D96B5AAF-FCB94777" />
       <exportedFile path="$PROJECT_DIR$/flexmark-ext-attributes/src/main/javadoc/overview.html" settingsVersion="D96B5AAF-FCB94777" />
       <exportedFile path="$PROJECT_DIR$/flexmark-html2md-converter/src/main/javadoc/overview.html" settingsVersion="D96B5AAF-FCB94777" />
-      <exportedFile path="$PROJECT_DIR$/flexmark-formatter-test/src/main/javadoc/overview.html" settingsVersion="D96B5AAF-FCB94777" />
       <exportedFile path="$PROJECT_DIR$/flexmark-ext-autolink/src/main/javadoc/overview.html" settingsVersion="D96B5AAF-FCB94777" />
       <exportedFile path="$PROJECT_DIR$/flexmark-ext-xwiki-macros/src/main/javadoc/overview.html" settingsVersion="D96B5AAF-FCB94777" />
       <exportedFile path="$PROJECT_DIR$/flexmark-jira-converter/src/main/javadoc/overview.html" settingsVersion="D96B5AAF-FCB94777" />
@@ -24,6 +22,7 @@
       <exportedFile path="$PROJECT_DIR$/flexmark-ext-jekyll-tag/src/main/javadoc/overview.html" settingsVersion="D96B5AAF-FCB94777" />
       <exportedFile path="$PROJECT_DIR$/flexmark-ext-zzzzzz/src/main/javadoc/overview.html" settingsVersion="D96B5AAF-FCB94777" />
       <exportedFile path="$PROJECT_DIR$/flexmark-ext-definition/src/main/javadoc/overview.html" settingsVersion="D96B5AAF-FCB94777" />
+      <exportedFile path="$PROJECT_DIR$/flexmark-core-test/src/main/javadoc/overview.html" settingsVersion="D96B5AAF-FCB94777" />
       <exportedFile path="$PROJECT_DIR$/flexmark-ext-spec-example/src/main/javadoc/overview.html" settingsVersion="D96B5AAF-FCB94777" />
       <exportedFile path="$PROJECT_DIR$/flexmark-ext-media-tags/src/main/javadoc/overview.html" settingsVersion="D96B5AAF-FCB94777" />
       <exportedFile path="$PROJECT_DIR$/flexmark-ext-gfm-issues/src/main/javadoc/overview.html" settingsVersion="D96B5AAF-FCB94777" />
@@ -38,10 +37,8 @@
       <exportedFile path="$PROJECT_DIR$/flexmark-ext-anchorlink/src/main/javadoc/overview.html" settingsVersion="D96B5AAF-FCB94777" />
       <exportedFile path="$PROJECT_DIR$/flexmark/src/main/javadoc/overview.html" settingsVersion="D96B5AAF-FCB94777" />
       <exportedFile path="$PROJECT_DIR$/flexmark-ext-aside/src/main/javadoc/overview.html" settingsVersion="D96B5AAF-FCB94777" />
-      <exportedFile path="$PROJECT_DIR$/flexmark-ext-gfm-tables/src/main/javadoc/overview.html" settingsVersion="D96B5AAF-FCB94777" />
       <exportedFile path="$PROJECT_DIR$/flexmark-ext-gfm-tasklist/src/main/javadoc/overview.html" settingsVersion="D96B5AAF-FCB94777" />
       <exportedFile path="$PROJECT_DIR$/flexmark-ext-gitlab/src/main/javadoc/overview.html" settingsVersion="D96B5AAF-FCB94777" />
-      <exportedFile path="$PROJECT_DIR$/flexmark-html-parser/src/main/javadoc/overview.html" settingsVersion="D96B5AAF-FCB94777" />
       <exportedFile path="$PROJECT_DIR$/flexmark-ext-ins/src/main/javadoc/overview.html" settingsVersion="D96B5AAF-FCB94777" />
       <exportedFile path="$PROJECT_DIR$/flexmark-ext-superscript/src/main/javadoc/overview.html" settingsVersion="D96B5AAF-FCB94777" />
       <exportedFile path="$PROJECT_DIR$/flexmark-ext-admonition/src/main/javadoc/overview.html" settingsVersion="D96B5AAF-FCB94777" />
