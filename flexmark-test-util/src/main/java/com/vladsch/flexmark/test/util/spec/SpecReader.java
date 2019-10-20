@@ -158,19 +158,30 @@ public class SpecReader {
         boolean lineProcessed = false;
 
         switch (state) {
-            case COMMENT:
+            case COMMENT: {
                 // look for comment end
-                if (line.trim().startsWith("-->")) {
-                    lineProcessed = true;
-                    state = State.BEFORE;
-                }
-                break;
+                String trimmed = line.trim();
 
-            case BEFORE:
-                if (line.trim().startsWith("<!--")) {
-                    state = COMMENT;
+                if (line.trim().startsWith("-->")) {
+                    if (trimmed.endsWith("<!--")) {
+                        // reset line number
+                        commentLineNumber = lineNumber - 1;
+                    } else {
+                        state = State.BEFORE;
+                    }
                     lineProcessed = true;
-                    commentLineNumber = lineNumber - 1;
+                }
+            }
+            break;
+
+            case BEFORE: {
+                String trimmed = line.trim();
+                if (trimmed.startsWith("<!--")) {
+                    if (!trimmed.endsWith("-->")) {
+                        state = COMMENT;
+                        commentLineNumber = lineNumber - 1;
+                    }
+                    lineProcessed = true;
                     break;
                 }
 
@@ -190,7 +201,8 @@ public class SpecReader {
                     contentLineNumber = lineNumber;
                     lineAbsorbed = true;
                 }
-                break;
+            }
+            break;
             case SOURCE:
                 if (line.equals(TYPE_BREAK)) {
                     state = State.HTML;
