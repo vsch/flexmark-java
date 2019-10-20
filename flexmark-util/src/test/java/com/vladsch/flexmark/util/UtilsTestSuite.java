@@ -9,31 +9,33 @@ import com.vladsch.flexmark.util.options.AttributeTest;
 import com.vladsch.flexmark.util.options.AttributesTest;
 import com.vladsch.flexmark.util.options.MutableAttributeTest;
 import com.vladsch.flexmark.util.sequence.BasedSequenceImplTest;
+import com.vladsch.flexmark.util.sequence.PrefixedSubSequenceTest;
 import com.vladsch.flexmark.util.sequence.RepeatedCharSequenceTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-        IntegerBitSetTest.class,
-        OrderedSetTest.class,
-        OrderedMapTest.class,
-        DocumentTest.class,
-        OrderedMultiMapTest.class,
-        ClassificationBagTest.class,
-        BasedSequenceImplTest.class,
-        AttributeTest.class,
-        MutableAttributeTest.class,
         AttributesTest.class,
-        LineFormattingAppendableImplTest.class,
-        RepeatedCharSequenceTest.class,
-        HtmlFormattingAppendableBaseTest.class,
-        MaxAggregatorTest.class,
-        MinAggregatorTest.class,
+        AttributeTest.class,
+        BasedSequenceImplTest.class,
         BoundedMaxAggregatorTest.class,
         BoundedMinAggregatorTest.class,
+        ClassificationBagTest.class,
+        DocumentTest.class,
         HtmlBuilderTest.class,
+        HtmlFormattingAppendableBaseTest.class,
         HtmlHelpersTest.class,
+        IntegerBitSetTest.class,
+        LineFormattingAppendableImplTest.class,
+        MaxAggregatorTest.class,
+        MinAggregatorTest.class,
+        MutableAttributeTest.class,
+        OrderedMapTest.class,
+        OrderedMultiMapTest.class,
+        OrderedSetTest.class,
+        PrefixedSubSequenceTest.class,
+        RepeatedCharSequenceTest.class,
         TemplateUtilTest.class,
         UtilsTest.class,
 })

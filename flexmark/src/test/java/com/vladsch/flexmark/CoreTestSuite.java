@@ -12,7 +12,6 @@ import com.vladsch.flexmark.parser.UsageExampleTest;
 import com.vladsch.flexmark.parser.delimiter.DelimiterProcessorTest;
 import com.vladsch.flexmark.parser.internal.HtmlDeepParserTest;
 import com.vladsch.flexmark.parser.internal.LinkDestinationParserTest;
-import com.vladsch.flexmark.util.sequence.PrefixedSubSequenceTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
@@ -25,7 +24,6 @@ import org.junit.runners.Suite;
         ParserTest.class,
         LinkDestinationParserTest.class,
         PathologicalTestSuite.class,
-        PrefixedSubSequenceTest.class,
         SpecialInputTest.class,
         UsageExampleTest.class,
         TextCollectingVisitorTest.class,
