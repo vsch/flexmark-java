@@ -56,7 +56,7 @@ public class TestUtils {
     public static final String FILE_PROTOCOL = ResourceUrlResolver.FILE_PROTOCOL;
     public static final @NotNull ResourceLocation DEFAULT_RESOURCE_LOCATION = ResourceLocation.of(TestUtils.class, TestUtils.DEFAULT_SPEC_RESOURCE, TestUtils.DEFAULT_URL_PREFIX);
 
-    public static DataHolder processOption(@NotNull Map<String, DataHolder> optionsMap, @NotNull String option) {
+    public static DataHolder processOption(@NotNull Map<String, ? extends DataHolder> optionsMap, @NotNull String option) {
         DataHolder dataHolder = optionsMap.get(option);
         String customOption = option;
         String params = null;
