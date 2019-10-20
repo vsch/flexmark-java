@@ -33,8 +33,8 @@ public class DumpSpecReader extends SpecReader {
     }
 
     @Override
-    public void addSpecLine(String line) {
-        sb.append(line).append("\n");
+    public void addSpecLine(String line, boolean isSpecExampleOpen) {
+        if (!isSpecExampleOpen) sb.append(line).append("\n");
         sbExp.append(line).append("\n");
     }
 
@@ -95,7 +95,7 @@ public class DumpSpecReader extends SpecReader {
         }
 
         // include source so that diff can be used to update spec
-        TestUtils.addSpecExample(sb, source, html, ast, example.getOptionsSet(), exampleRenderer.includeExampleInfo(), example.getSection(), example.getExampleNumber());
-        TestUtils.addSpecExample(sbExp, source, example.getHtml(), example.getAst(), example.getOptionsSet(), exampleRenderer.includeExampleInfo(), example.getSection(), example.getExampleNumber());
+        TestUtils.addSpecExample(true, sb, source, html, ast, example.getOptionsSet(), exampleRenderer.includeExampleInfo(), example.getSection(), example.getExampleNumber());
+        TestUtils.addSpecExample(false, sbExp, source, example.getHtml(), example.getAst(), example.getOptionsSet(), exampleRenderer.includeExampleInfo(), example.getSection(), example.getExampleNumber());
     }
 }

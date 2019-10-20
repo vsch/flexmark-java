@@ -112,20 +112,20 @@ public abstract class RenderingTestCase implements SpecExampleProcessor {
                 outExpected.append(formattedTimingInfo);
             }
 
-            TestUtils.addSpecExample(outExpected, source, expectedHtml, expectedAst == null ? "" : expectedAst, optionsSet, true, example.getSection(), example.getExampleNumber());
+            TestUtils.addSpecExample(true, outExpected, source, expectedHtml, expectedAst == null ? "" : expectedAst, optionsSet, true, example.getSection(), example.getExampleNumber());
             expected = outExpected.toString();
 
             StringBuilder outActual = new StringBuilder();
-            TestUtils.addSpecExample(outActual, source, html, ast, optionsSet, true, example.getSection(), example.getExampleNumber());
+            TestUtils.addSpecExample(true, outActual, source, html, ast, optionsSet, true, example.getSection(), example.getExampleNumber());
             actual = outActual.toString();
         } else {
             if (embedTimed) {
                 expected = formattedTimingInfo +
-                        TestUtils.addSpecExample(source, expectedHtml, expectedAst == null ? "" : expectedAst, optionsSet);
+                        TestUtils.addSpecExample(true, source, expectedHtml, expectedAst == null ? "" : expectedAst, optionsSet);
             } else {
-                expected = TestUtils.addSpecExample(source, expectedHtml, ast, optionsSet);
+                expected = TestUtils.addSpecExample(true, source, expectedHtml, ast, optionsSet);
             }
-            actual = TestUtils.addSpecExample(source, html, ast, optionsSet);
+            actual = TestUtils.addSpecExample(true, source, html, ast, optionsSet);
         }
 
         if (exampleOptions != null && exampleOptions.get(TestUtils.FAIL)) {

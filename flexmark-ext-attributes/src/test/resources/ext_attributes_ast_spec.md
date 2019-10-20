@@ -2868,7 +2868,7 @@ Document[0, 35]
 -->
 
 
-```````````````````````````````` example(Fenced Code: 21) options(info-attributes, fenced-code-to-code)
+```````````````````````````````` example(Fenced Code: 20) options(info-attributes, fenced-code-to-code)
 ```plantuml
 ```
 {caption="Caption"}

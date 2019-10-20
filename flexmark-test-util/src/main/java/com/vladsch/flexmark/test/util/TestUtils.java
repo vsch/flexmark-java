@@ -1,9 +1,6 @@
 package com.vladsch.flexmark.test.util;
 
-import com.vladsch.flexmark.test.util.spec.ResourceLocation;
-import com.vladsch.flexmark.test.util.spec.ResourceUrlResolver;
-import com.vladsch.flexmark.test.util.spec.SpecExample;
-import com.vladsch.flexmark.test.util.spec.SpecReader;
+import com.vladsch.flexmark.test.util.spec.*;
 import com.vladsch.flexmark.util.Pair;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.builder.Extension;
@@ -202,28 +199,30 @@ public class TestUtils {
         return result;
     }
 
-    public static String addSpecExample(String source, String html, String ast, String optionsSet) {
+    public static String addSpecExample(boolean includeExampleStart, String source, String html, String ast, String optionsSet) {
         StringBuilder sb = new StringBuilder();
-        addSpecExample(sb, source, html, ast, optionsSet, false, "", 0);
+        addSpecExample(includeExampleStart, sb, source, html, ast, optionsSet, false, "", 0);
         return sb.toString();
     }
 
-    public static void addSpecExample(StringBuilder sb, String source, String html, String ast, String optionsSet, boolean includeExampleCoords, String section, int number) {
+    public static void addSpecExample(boolean includeExampleStart, StringBuilder sb, String source, String html, String ast, String optionsSet, boolean includeExampleCoords, String section, int number) {
         // include source so that diff can be used to update spec
         StringBuilder header = new StringBuilder();
 
-        header.append(SpecReader.EXAMPLE_START);
-        if (includeExampleCoords) {
-            if (optionsSet != null) {
-                header.append("(").append(section == null ? "" : section.trim()).append(": ").append(number).append(")");
-            } else {
-                header.append(" ").append(section == null ? "" : section.trim()).append(": ").append(number);
+        if (includeExampleStart) {
+            header.append(SpecReader.EXAMPLE_START);
+            if (includeExampleCoords) {
+                if (optionsSet != null) {
+                    header.append("(").append(section == null ? "" : section.trim()).append(": ").append(number).append(")");
+                } else {
+                    header.append(" ").append(section == null ? "" : section.trim()).append(": ").append(number);
+                }
             }
+            if (optionsSet != null) {
+                header.append(SpecReader.OPTIONS_STRING + "(").append(optionsSet).append(")");
+            }
+            header.append("\n");
         }
-        if (optionsSet != null) {
-            header.append(SpecReader.OPTIONS_STRING + "(").append(optionsSet).append(")");
-        }
-        header.append("\n");
 
         // replace spaces so GitHub can display example as code fence, but not for original spec which has no coords
         if (includeExampleCoords) { sb.append(header.toString().replace(' ', '\u00A0')); } else sb.append(header.toString());
@@ -320,7 +319,7 @@ public class TestUtils {
     }
 
     public static String adjustedFileUrl(URL url) {
-        return ResourceLocation.adjustedFileUrl(url);
+        return ResourceResolverManager.adjustedFileUrl(url);
     }
 
     @Nullable

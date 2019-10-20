@@ -9,6 +9,7 @@ flexmark-java
 - [Next 0.60.0](#next-0600)
     - [API Changes](#api-changes)
 - [Next](#next)
+- [0.59.28](#05928)
 - [0.59.27](#05927)
 - [0.59.25](#05925)
 - [0.59.23](#05923)
@@ -154,6 +155,13 @@ Next
 * [ ] Fix: Change spec example to variable number of sections
 * [ ] Add: yaml front matter configurator for modules. See:
       [Yaml Front Matter Configuration](../../wiki/Yaml-Front-Matter-Configuration)
+
+0.59.28
+-------
+
+* Fix: pass through opening line of spec example to `DumpSpecReader` so it can construct an
+  accurate full spec version of expected text.
+* Fix: add `ResourceResolverManager` to handle `ResourceUrlResolver` registration.
 
 0.59.27
 -------

@@ -145,7 +145,7 @@ public class SpecReader {
     }
 
     // can use these to generate spec from source
-    protected void addSpecLine(String line) {
+    protected void addSpecLine(String line, boolean isSpecExampleOpen) {
 
     }
 
@@ -199,7 +199,8 @@ public class SpecReader {
                     state = State.SOURCE;
                     exampleNumber++;
                     contentLineNumber = lineNumber;
-                    lineAbsorbed = true;
+                    // NOTE: let dump spec reader get the actual definition line for comparison
+                    //lineAbsorbed = true;
                 }
             }
             break;
@@ -247,7 +248,7 @@ public class SpecReader {
                 if (comment == null) comment = new StringBuilder();
                 comment.append(line).append('\n');
             }
-            addSpecLine(line);
+            addSpecLine(line, state != State.BEFORE && state != COMMENT);
         }
     }
 

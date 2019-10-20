@@ -1,14 +1,15 @@
 package com.vladsch.flexmark.test.util;
 
 import com.vladsch.flexmark.test.util.spec.ResourceLocation;
+import com.vladsch.flexmark.test.util.spec.ResourceResolverManager;
 import com.vladsch.flexmark.test.util.spec.ResourceUrlResolver;
 
 import static com.vladsch.flexmark.test.util.spec.ResourceUrlResolver.*;
 
 public class FlexmarkResourceUrlResolver {
     public static void registerUrlResolvers() {
-        ResourceLocation.registerUrlResolver(new TargetTestClassUrlResolver());
-        ResourceLocation.registerUrlResolver(new OutTestResourcesUrlResolver());
+        ResourceResolverManager.registerUrlResolver(new TargetTestClassUrlResolver());
+        ResourceResolverManager.registerUrlResolver(new OutTestResourcesUrlResolver());
     }
 
     private static class TargetTestClassUrlResolver implements ResourceUrlResolver {
