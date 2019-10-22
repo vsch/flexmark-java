@@ -25,21 +25,27 @@ public class MutableDataSet extends DataSet implements MutableDataHolder {
     }
 
     private <T> MutableDataSet set(DataKeyBase<T> key, T value) {
-        dataSet.put(key, value);
+        synchronized (dataSet) {
+            dataSet.put(key, value);
+        }
         return this;
     }
 
     @NotNull
     @Override
     public MutableDataSet setFrom(@NotNull MutableDataSetter dataSetter) {
-        dataSetter.setIn(this);
+        synchronized (dataSet) {
+            dataSetter.setIn(this);
+        }
         return this;
     }
 
     @NotNull
     @Override
     public MutableDataSet setAll(@NotNull DataHolder other) {
-        dataSet.putAll(other.getAll());
+        synchronized (dataSet) {
+            dataSet.putAll(other.getAll());
+        }
         return this;
     }
 
@@ -56,20 +62,32 @@ public class MutableDataSet extends DataSet implements MutableDataHolder {
     @NotNull
     @Override
     public MutableDataHolder setIn(@NotNull MutableDataHolder dataHolder) {
-        dataHolder.setAll(this);
+        synchronized (dataSet) {
+            dataHolder.setAll(this);
+        }
         return dataHolder;
     }
 
     @NotNull
     @Override
     public <T> MutableDataSet remove(@NotNull DataKeyBase<T> key) {
-        dataSet.remove(key);
+        synchronized (dataSet) {
+            dataSet.remove(key);
+        }
         return this;
     }
 
     @Override
     public @Nullable Object getOrCompute(@NotNull DataKeyBase<?> key, @NotNull DataValueFactory<?> factory) {
-        return dataSet.computeIfAbsent(key, k -> factory.apply(this));
+        synchronized (dataSet) {
+            if (dataSet.containsKey(key)) {
+                return dataSet.get(key);
+            }
+
+            Object value = factory.apply(this);
+            dataSet.put(key,value);
+            return value;
+        }
     }
 
     @NotNull
@@ -81,7 +99,9 @@ public class MutableDataSet extends DataSet implements MutableDataHolder {
     @NotNull
     @Override
     public DataSet toImmutable() {
-        return new DataSet(this);
+        synchronized (dataSet) {
+            return new DataSet(this);
+        }
     }
 
     @Override
@@ -92,7 +112,9 @@ public class MutableDataSet extends DataSet implements MutableDataHolder {
     @NotNull
     @Override
     public MutableDataSet clear() {
-        dataSet.clear();
+        synchronized (dataSet) {
+            dataSet.clear();
+        }
         return this;
     }
 }

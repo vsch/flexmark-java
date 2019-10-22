@@ -9,7 +9,7 @@ flexmark-java
 - [Next 0.60.0](#next-0600)
     - [API Changes](#api-changes)
 - [Next](#next)
-- [Next 0.59.34](#next-05934)
+- [0.59.34](#05934)
 - [0.59.32](#05932)
 - [0.59.30](#05930)
 - [0.59.28](#05928)
@@ -158,11 +158,16 @@ Next
 * [ ] Fix: Change spec example to variable number of sections
 * [ ] Add: yaml front matter configurator for modules. See:
       [Yaml Front Matter Configuration](../../wiki/Yaml-Front-Matter-Configuration)
-
-Next 0.59.34
-------------
-
 * [ ] Add: spec example language per section options and rendering in HTML.
+
+0.59.34
+-------
+
+* Add: synchronized around `HashMap` modification to ensure thread safety. Elimination of
+  nullable keys would allow using `ConcurrentHashMap` in `DataSet` but access and modification
+  to options is done at start of parse as extensions and core load their options, afterwards the
+  data set is mostly not modified or accessed.
+
 
 0.59.32
 -------
