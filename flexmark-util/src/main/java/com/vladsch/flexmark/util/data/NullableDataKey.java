@@ -3,13 +3,13 @@ package com.vladsch.flexmark.util.data;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class DataKey<T> {
+public class NullableDataKey<T> {
     protected final @NotNull String name;
     protected final @NotNull DataValueFactory<T> factory;
     protected final @Nullable T defaultValue;
 
     /**
-     * Creates a DataKey with a computed default value and a provided default value when data holder is null.
+     * Creates a NullableDataKey with a computed default value and a provided default value when data holder is null.
      * <p>
      * Use this constructor to ensure that factory is never called with null data holder value
      *
@@ -17,40 +17,40 @@ public class DataKey<T> {
      * @param defaultValue default to use when data holder is null
      * @param factory      data value factory for creating a new default value for the key for a non-null data holder
      */
-    public DataKey(@NotNull String name, @Nullable T defaultValue, @NotNull DataValueNotNullFactory<T> factory) {
+    public NullableDataKey(@NotNull String name, @Nullable T defaultValue, @NotNull DataValueNotNullFactory<T> factory) {
         this.name = name;
         this.defaultValue = defaultValue;
         this.factory = factory;
     }
 
     /**
-     * Creates a DataKey with a computed default value dynamically.
+     * Creates a NullableDataKey with a computed default value dynamically.
      *
      * On construction will invoke factory with null data holder to get the default value
      *
      * @param name    See {@link #getName()}.
      * @param factory data value factory for creating a new default value for the key
      */
-    public DataKey(@NotNull String name, @NotNull DataValueFactory<T> factory) {
+    public NullableDataKey(@NotNull String name, @NotNull DataValueFactory<T> factory) {
         this.name = name;
         this.defaultValue = factory.apply(null);
         this.factory = factory;
     }
 
     /**
-     * Creates a DataKey with a dynamic default value taken from a value of another key
+     * Creates a NullableDataKey with a dynamic default value taken from a value of another key
      * <p>
      * does not cache the returned default value but will always delegate to another key until this key
      * gets its own value set.
      *
      * @param name       See {@link #getName()}.
-     * @param defaultKey The DataKey to take the default value from at time of construction.
+     * @param defaultKey The NullableDataKey to take the default value from at time of construction.
      */
-    public DataKey(String name, DataKey<T> defaultKey) {
+    public NullableDataKey(String name, NullableDataKey<T> defaultKey) {
         this(name, defaultKey.defaultValue, defaultKey::get);
     }
 
-    public DataKey(String name, T defaultValue) {
+    public NullableDataKey(String name, T defaultValue) {
         this(name, defaultValue, options -> defaultValue);
     }
 
@@ -94,9 +94,9 @@ public class DataKey<T> {
     public String toString() {
         // factory applied to null in constructor, no sense doing it again here
         if (defaultValue != null) {
-            return "DataKey<" + defaultValue.getClass().getName().substring(defaultValue.getClass().getPackage().getName().length() + 1) + "> " + name;
+            return "NullableDataKey<" + defaultValue.getClass().getName().substring(defaultValue.getClass().getPackage().getName().length() + 1) + "> " + name;
         } else {
-            return "DataKey<unknown> " + name;
+            return "NullableDataKey<unknown> " + name;
         }
     }
 
