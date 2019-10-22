@@ -16,6 +16,8 @@ import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
+import com.vladsch.flexmark.util.data.NullableDataKey;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Set;
 
@@ -24,11 +26,11 @@ public class CustomContextDataSample {
 
     }
 
-    public static final DataKey<XhtmlContent> XHTML_CONTENT = new DataKey<>("XHTML_CONTENT", (XhtmlContent) null);
+    public static final NullableDataKey<XhtmlContent> XHTML_CONTENT = new NullableDataKey<>("XHTML_CONTENT");
 
     static class CustomExtension implements HtmlRenderer.HtmlRendererExtension {
         @Override
-        public void rendererOptions(MutableDataHolder options) {
+        public void rendererOptions(@NotNull MutableDataHolder options) {
 
         }
 
@@ -53,7 +55,7 @@ public class CustomContextDataSample {
         @Override
         public ResolvedLink resolveLink(Node node, LinkResolverContext context, ResolvedLink link) {
             Document document = node.getDocument();
-            XhtmlContent xhtmlContent = document.get(XHTML_CONTENT);
+            XhtmlContent xhtmlContent = XHTML_CONTENT.get(document);
 
             if (node instanceof WikiImage) {
                 // resolve wiki image link

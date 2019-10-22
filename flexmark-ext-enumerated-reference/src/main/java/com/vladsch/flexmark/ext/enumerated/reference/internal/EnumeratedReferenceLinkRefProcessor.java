@@ -15,7 +15,7 @@ public class EnumeratedReferenceLinkRefProcessor implements LinkRefProcessor {
     private final EnumeratedReferenceRepository enumeratedReferenceRepository;
 
     public EnumeratedReferenceLinkRefProcessor(Document document) {
-        this.enumeratedReferenceRepository = document.get(EnumeratedReferenceExtension.ENUMERATED_REFERENCES);
+        this.enumeratedReferenceRepository = EnumeratedReferenceExtension.ENUMERATED_REFERENCES.get(document);
     }
 
     @Override

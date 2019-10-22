@@ -39,7 +39,7 @@ public class Parser implements IParse {
     public static final DataKey<Collection<Extension>> EXTENSIONS = SharedDataKeys.EXTENSIONS;
 
     public static final DataKey<KeepType> REFERENCES_KEEP = new DataKey<>("REFERENCES_KEEP", KeepType.FIRST);
-    public static final DataKey<ReferenceRepository> REFERENCES = new DataKey<>("REFERENCES", ReferenceRepository::new);
+    public static final DataKey<ReferenceRepository> REFERENCES = new DataKey<>("REFERENCES", new ReferenceRepository(null), ReferenceRepository::new);
 
     public static final DataKey<Boolean> ASTERISK_DELIMITER_PROCESSOR = new DataKey<>("ASTERISK_DELIMITER_PROCESSOR", true);
 
@@ -113,7 +113,8 @@ public class Parser implements IParse {
     public static final DataKey<Boolean> HTML_BLOCK_DEEP_PARSE_NON_BLOCK = new DataKey<>("HTML_BLOCK_DEEP_PARSE_NON_BLOCK", true);
     public static final DataKey<Boolean> HTML_BLOCK_COMMENT_ONLY_FULL_LINE = new DataKey<>("HTML_BLOCK_COMMENT_ONLY_FULL_LINE", false);
     public static final DataKey<Boolean> HTML_BLOCK_START_ONLY_ON_BLOCK_TAGS = new DataKey<>("HTML_BLOCK_START_ONLY_ON_BLOCK_TAGS", HTML_BLOCK_DEEP_PARSER);
-    public static final DataKey<List<String>> HTML_BLOCK_TAGS = new DataKey<>("HTML_BLOCK_TAGS", value -> Arrays.asList(
+
+    public static final DataKey<List<String>> HTML_BLOCK_TAGS = new DataKey<>("HTML_BLOCK_TAGS", Arrays.asList(
             "address",
             "article",
             "aside",
@@ -281,7 +282,6 @@ public class Parser implements IParse {
 
     // separate setting for CODE_BLOCK_INDENT
     public static final DataKey<Integer> CODE_BLOCK_INDENT = new DataKey<>("CODE_BLOCK_INDENT", LISTS_ITEM_INDENT);
-
     private final List<CustomBlockParserFactory> blockParserFactories;
     private final Map<Character, DelimiterProcessor> delimiterProcessors;
     private final BitSet delimiterCharacters;
@@ -384,7 +384,7 @@ public class Parser implements IParse {
         boolean transferred = false;
 
         if (options.contains(EXTENSIONS)) {
-            for (Extension extension : options.get(EXTENSIONS)) {
+            for (Extension extension : EXTENSIONS.get(options)) {
                 if (extension instanceof ReferenceHoldingExtension) {
                     ReferenceHoldingExtension parserExtension = (ReferenceHoldingExtension) extension;
                     if (parserExtension.transferReferences(document, included)) transferred = true;
@@ -587,7 +587,7 @@ public class Parser implements IParse {
      * @return mutable options
      */
     public static MutableDataHolder addExtensions(MutableDataHolder options, Extension... extensions) {
-        Iterable<Extension> extensionIterable = options.get(Parser.EXTENSIONS);
+        Iterable<Extension> extensionIterable = Parser.EXTENSIONS.get(options);
         ArrayList<Extension> extensionList = new ArrayList<>(Arrays.asList(extensions));
 
         for (Extension extension : extensionIterable) {
@@ -606,7 +606,7 @@ public class Parser implements IParse {
      * @return mutable options
      */
     public static MutableDataHolder removeExtensions(MutableDataHolder options, Class... extensions) {
-        Iterable<Extension> extensionIterable = options.get(Parser.EXTENSIONS);
+        Iterable<Extension> extensionIterable = Parser.EXTENSIONS.get(options);
         HashSet<Extension> extensionList = new HashSet<>();
 
         for (Extension extension : extensionIterable) {

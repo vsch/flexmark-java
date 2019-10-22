@@ -9,6 +9,7 @@ import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.ast.ReferenceNode;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * A Footnote definition node containing text and other inline nodes nodes as children.
@@ -73,6 +74,7 @@ public class FootnoteBlock extends Block implements ReferenceNode<FootnoteReposi
         segmentSpan(out, footnote, "footnote");
     }
 
+    @NotNull
     @Override
     public BasedSequence[] getSegments() {
         return new BasedSequence[] { openingMarker, text, closingMarker, footnote };

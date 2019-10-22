@@ -54,7 +54,7 @@ public class DumpSpecReader extends SpecReader {
             exampleOptions = null;
         }
 
-        if (exampleOptions != null && exampleOptions.get(TestUtils.FAIL)) {
+        if (exampleOptions != null && TestUtils.FAIL.get(exampleOptions)) {
             ignoredTestCase = true;
         }
 

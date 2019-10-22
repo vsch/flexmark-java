@@ -5,6 +5,7 @@ import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.ast.ReferenceNode;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * A block node that contains the abbreviation definition
@@ -33,6 +34,7 @@ public class AbbreviationBlock extends Block implements ReferenceNode<Abbreviati
         segmentSpan(out, abbreviation, "abbreviation");
     }
 
+    @NotNull
     @Override
     public BasedSequence[] getSegments() {
         return new BasedSequence[] { openingMarker, text, closingMarker, abbreviation };

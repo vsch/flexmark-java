@@ -16,6 +16,7 @@ import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -29,7 +30,7 @@ public class TitleExtract {
 
     static class HeadingExtension implements HtmlRendererExtension {
         @Override
-        public void rendererOptions(MutableDataHolder options) {
+        public void rendererOptions(@NotNull MutableDataHolder options) {
             // add any configuration settings to options you want to apply to everything, here
         }
 
@@ -77,7 +78,7 @@ public class TitleExtract {
         void render(Heading node, NodeRendererContext context, HtmlWriter html) {
             if (node.getLevel() == 1) {
                 // render without anchor link
-                int extensions = context.getOptions().get(ParserEmulationProfile.PEGDOWN_EXTENSIONS);
+                int extensions = ParserEmulationProfile.PEGDOWN_EXTENSIONS.get(context.getOptions());
                 if (context.getHtmlOptions().renderHeaderId || haveExtension(extensions, Extensions.ANCHORLINKS) || haveAllExtensions(extensions, Extensions.EXTANCHORLINKS | Extensions.EXTANCHORLINKS_WRAP)) {
                     String id = context.getNodeId(node);
                     if (id != null) {

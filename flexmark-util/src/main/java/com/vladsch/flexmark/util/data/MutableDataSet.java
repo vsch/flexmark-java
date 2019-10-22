@@ -1,6 +1,7 @@
 package com.vladsch.flexmark.util.data;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class MutableDataSet extends DataSet implements MutableDataHolder {
     public MutableDataSet() {
@@ -12,7 +13,7 @@ public class MutableDataSet extends DataSet implements MutableDataHolder {
     }
 
     @Override
-    public <T> MutableDataSet set(DataKey<T> key, T value) {
+    public <T> MutableDataSet set(DataKeyBase<T> key, T value) {
         dataSet.put(key, value);
         return this;
     }
@@ -40,33 +41,22 @@ public class MutableDataSet extends DataSet implements MutableDataHolder {
         return dataSet;
     }
 
+    @NotNull
     @Override
-    public MutableDataHolder setIn(MutableDataHolder dataHolder) {
+    public MutableDataHolder setIn(@NotNull MutableDataHolder dataHolder) {
         dataHolder.setAll(this);
         return dataHolder;
     }
 
     @Override
-    public <T> T get(@NotNull DataKey<T> key) {
-        return getOrCompute(key);
-    }
-
-    @Override
-    public <T> MutableDataSet remove(DataKey<T> key) {
+    public <T> MutableDataSet remove(DataKeyBase<T> key) {
         dataSet.remove(key);
         return this;
     }
 
     @Override
-    public <T> T getOrCompute(DataKey<T> key) {
-        if (dataSet.containsKey(key)) {
-            //noinspection unchecked
-            return (T) dataSet.get(key);
-        } else {
-            T newValue = key.getDefaultValue(this);
-            dataSet.put(key, newValue);
-            return newValue;
-        }
+    public @Nullable Object getOrCompute(@NotNull DataKeyBase<?> key, @NotNull DataValueFactory<?> factory) {
+        return dataSet.computeIfAbsent(key, k -> factory.apply(this));
     }
 
     @NotNull
@@ -79,6 +69,11 @@ public class MutableDataSet extends DataSet implements MutableDataHolder {
     @Override
     public DataSet toImmutable() {
         return new DataSet(this);
+    }
+
+    @Override
+    public @NotNull MutableDataSet toDataSet() {
+        return this;
     }
 
     @Override

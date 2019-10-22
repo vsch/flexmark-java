@@ -162,11 +162,24 @@ Next
 -------
 
 * Fix: add nullable annotations to `DataSet` and `DataKey` classes
-* Fix: add 3 argument constructor for `DataKey` which ensures `factory.apply` data holder is
-  never null.
+* Break: `DataKey` now represents not null data values, use `NullableDataKey` if using nullable
+  values, for processing of either type of data key, use `DataKeyBase` super class which does
+  not specify nullability for the data value.
+* Break: `DataValueFactory` now has non-nullable dataHolder argument and nullable result. Use:
+  * `DataNotNullValueFactory` for nullable result and non nullable dataHolder
+  * `DataValueNullableFactory` for nullable result and nullable dataHolder
+  * `DataNotNullValueNullableFactory` for non-nullable result and non-nullable dataHolder
+* Add: `DataKey` 3 argument constructor with pre-computed non null default value to be used for
+  null dataHolder defaults. This way the factory is `DataNotNullValueFactory` which takes a
+  non-null data holder and returns a computed value.
+* Add: `NullableDataKey` 3 argument constructor with pre-computed nullable default value to be
+  used for null dataHolder defaults. This way the factory is `DataValueFactory` which
+  takes a non-null data holder and returns a computed value.
 * Fix: add `DataKey.get(DataHolder)` to replace `DataKey.getFrom(DataHolder)`, shorter and
-  compatible with Kotlin array access syntax.
+  compatible with Kotlin array access syntax, also handles nullability of data.
 * Fix: deprecate `DataKey.getFrom()`
+* Fix: replace all `DataHolder.get()` by `DataKey.get()`
+* Fix: add nullability annotations to `Node` and a few other classes
 
 0.59.30
 -------

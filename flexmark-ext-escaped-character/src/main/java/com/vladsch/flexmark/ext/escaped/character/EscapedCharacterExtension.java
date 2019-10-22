@@ -5,6 +5,7 @@ import com.vladsch.flexmark.ext.escaped.character.internal.EscapedCharacterNodeR
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Extension for escaped_characters
@@ -22,7 +23,7 @@ public class EscapedCharacterExtension implements Parser.ParserExtension, HtmlRe
     }
 
     @Override
-    public void rendererOptions(MutableDataHolder options) {
+    public void rendererOptions(@NotNull MutableDataHolder options) {
 
     }
 

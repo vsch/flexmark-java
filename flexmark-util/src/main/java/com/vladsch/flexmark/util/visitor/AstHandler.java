@@ -1,5 +1,7 @@
 package com.vladsch.flexmark.util.visitor;
 
+import org.jetbrains.annotations.NotNull;
+
 /**
  * Base class for tracking generic node to specific node handler
  *
@@ -7,19 +9,19 @@ package com.vladsch.flexmark.util.visitor;
  * @param <A> node action
  */
 abstract public class AstHandler<N, A extends AstAction<? super N>> {
-    final private Class<? extends N> myClass;
-    final private A myAdapter;
+    final private @NotNull Class<? extends N> myClass;
+    final private @NotNull A myAdapter;
 
-    public AstHandler(Class<? extends N> klass, A adapter) {
+    public AstHandler(@NotNull Class<? extends N> klass, @NotNull A adapter) {
         myClass = klass;
         myAdapter = adapter;
     }
 
-    public Class<? extends N> getNodeType() {
+    public @NotNull Class<? extends N> getNodeType() {
         return myClass;
     }
 
-    public A getAdapter() {
+    public @NotNull A getAdapter() {
         return myAdapter;
     }
 

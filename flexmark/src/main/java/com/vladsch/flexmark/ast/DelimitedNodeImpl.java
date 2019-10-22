@@ -2,6 +2,7 @@ package com.vladsch.flexmark.ast;
 
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import org.jetbrains.annotations.NotNull;
 
 public abstract class DelimitedNodeImpl extends Node implements DelimitedNode {
     protected BasedSequence openingMarker = BasedSequence.NULL;
@@ -13,6 +14,7 @@ public abstract class DelimitedNodeImpl extends Node implements DelimitedNode {
         delimitedSegmentSpanChars(out, openingMarker, text, closingMarker, "text");
     }
 
+    @NotNull
     @Override
     public BasedSequence[] getSegments() {
         return new BasedSequence[] { openingMarker, text, closingMarker };

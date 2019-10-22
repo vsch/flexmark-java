@@ -397,7 +397,8 @@ public class TableRow {
 
     @Override
     public String toString() {
-        return this.getClass().getSimpleName() + "{" +
+        // NOTE: show not simple name but name of container class if any
+        return this.getClass().getName().substring(getClass().getPackage().getName().length() + 1) + "{" +
                 " beforeOffset=" + beforeOffset +
                 ", afterOffset=" + afterOffset +
                 ", normalized=" + normalized +

@@ -8,6 +8,8 @@ import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
+import com.vladsch.flexmark.util.data.NullableDataKey;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Extension for GFM strikethrough using ~~ (GitHub Flavored Markdown).
@@ -17,10 +19,10 @@ import com.vladsch.flexmark.util.data.MutableDataHolder;
  * The parsed strikethrough text regions are turned into {@link Strikethrough} nodes.
  */
 public class StrikethroughSubscriptExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension {
-    public static final DataKey<String> STRIKETHROUGH_STYLE_HTML_OPEN = new DataKey<>("STRIKETHROUGH_STYLE_HTML_OPEN", (String) null);
-    public static final DataKey<String> STRIKETHROUGH_STYLE_HTML_CLOSE = new DataKey<>("STRIKETHROUGH_STYLE_HTML_CLOSE", (String) null);
-    public static final DataKey<String> SUBSCRIPT_STYLE_HTML_OPEN = new DataKey<>("SUBSCRIPT_STYLE_HTML_OPEN", (String) null);
-    public static final DataKey<String> SUBSCRIPT_STYLE_HTML_CLOSE = new DataKey<>("SUBSCRIPT_STYLE_HTML_CLOSE", (String) null);
+    public static final NullableDataKey<String> STRIKETHROUGH_STYLE_HTML_OPEN = new NullableDataKey<>("STRIKETHROUGH_STYLE_HTML_OPEN");
+    public static final NullableDataKey<String> STRIKETHROUGH_STYLE_HTML_CLOSE = new NullableDataKey<>("STRIKETHROUGH_STYLE_HTML_CLOSE");
+    public static final NullableDataKey<String> SUBSCRIPT_STYLE_HTML_OPEN = new NullableDataKey<>("SUBSCRIPT_STYLE_HTML_OPEN");
+    public static final NullableDataKey<String> SUBSCRIPT_STYLE_HTML_CLOSE = new NullableDataKey<>("SUBSCRIPT_STYLE_HTML_CLOSE");
 
     private StrikethroughSubscriptExtension() {
     }
@@ -30,7 +32,7 @@ public class StrikethroughSubscriptExtension implements Parser.ParserExtension, 
     }
 
     @Override
-    public void rendererOptions(MutableDataHolder options) {
+    public void rendererOptions(@NotNull MutableDataHolder options) {
 
     }
 

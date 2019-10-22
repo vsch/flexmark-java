@@ -4,6 +4,7 @@ import com.vladsch.flexmark.ext.zzzzzz.ZzzzzzExtension;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSetter;
+import org.jetbrains.annotations.NotNull;
 
 class ZzzzzzOptions implements MutableDataSetter {
     public final boolean zzzzzzOption1;
@@ -16,8 +17,9 @@ class ZzzzzzOptions implements MutableDataSetter {
         zzzzzzOption3 = ZzzzzzExtension.ZZZZZZ_OPTION3.get(options);
     }
 
+    @NotNull
     @Override
-    public MutableDataHolder setIn(MutableDataHolder dataHolder) {
+    public MutableDataHolder setIn(@NotNull MutableDataHolder dataHolder) {
         dataHolder.set(ZzzzzzExtension.ZZZZZZ_OPTION1, zzzzzzOption1);
         dataHolder.set(ZzzzzzExtension.ZZZZZZ_OPTION2, zzzzzzOption2);
         dataHolder.set(ZzzzzzExtension.ZZZZZZ_OPTION3, zzzzzzOption3);

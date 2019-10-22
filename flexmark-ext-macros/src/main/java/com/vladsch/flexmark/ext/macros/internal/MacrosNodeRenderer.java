@@ -23,7 +23,7 @@ public class MacrosNodeRenderer implements PhasedNodeRenderer {
 
     public MacrosNodeRenderer(DataHolder options) {
         this.options = new MacrosOptions(options);
-        this.repository = options.get(MacrosExtension.MACRO_DEFINITIONS);
+        this.repository = MacrosExtension.MACRO_DEFINITIONS.get(options);
         this.recheckUndefinedReferences = HtmlRenderer.RECHECK_UNDEFINED_REFERENCES.get(options);
     }
 

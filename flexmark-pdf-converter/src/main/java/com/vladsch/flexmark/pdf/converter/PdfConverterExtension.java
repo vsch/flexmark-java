@@ -9,6 +9,7 @@ import com.openhtmltopdf.pdfboxout.PdfRendererBuilder;
 import com.vladsch.flexmark.util.Utils;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKey;
+import com.vladsch.flexmark.util.data.NullableDataKey;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.encryption.ProtectionPolicy;
 import org.jsoup.Jsoup;
@@ -34,12 +35,12 @@ import java.io.OutputStream;
  * </p>
  */
 public class PdfConverterExtension {
-    public static final DataKey<PdfRendererBuilder.TextDirection> DEFAULT_TEXT_DIRECTION = new DataKey<>("DEFAULT_TEXT_DIRECTION", (PdfRendererBuilder.TextDirection) null);
-    public static final DataKey<ProtectionPolicy> PROTECTION_POLICY = new DataKey<>("PROTECTION_POLICY", (ProtectionPolicy) null);
+    public static final NullableDataKey<PdfRendererBuilder.TextDirection> DEFAULT_TEXT_DIRECTION = new NullableDataKey<>("DEFAULT_TEXT_DIRECTION");
+    public static final NullableDataKey<ProtectionPolicy> PROTECTION_POLICY = new NullableDataKey<>("PROTECTION_POLICY");
     public static final String DEFAULT_CSS_RESOURCE_PATH = "/default.css";
     public static final String DEFAULT_TOC_LIST_CLASS = "toc";
 
-    public static final DataKey<String> DEFAULT_CSS = new DataKey<>("DEFAULT_CSS", value -> Utils.getResourceAsString(PdfConverterExtension.class, DEFAULT_CSS_RESOURCE_PATH));
+    public static final DataKey<String> DEFAULT_CSS = new DataKey<>("DEFAULT_CSS", () -> Utils.getResourceAsString(PdfConverterExtension.class, DEFAULT_CSS_RESOURCE_PATH));
 
     public static String embedCss(String html, String css) {
         if (css != null && !css.isEmpty()) {
@@ -68,11 +69,7 @@ public class PdfConverterExtension {
                 }
             }
 
-            if (pos != -1) {
-                StringBuilder sb = new StringBuilder();
-                sb.append(html.subSequence(0, pos)).append(prefix).append(css).append(suffix).append(html.subSequence(pos, html.length())).append(tail);
-                return sb.toString();
-            }
+            return html.subSequence(0, pos) + prefix + css + suffix + html.subSequence(pos, html.length()) + tail;
         }
         return html;
     }
@@ -80,7 +77,7 @@ public class PdfConverterExtension {
     public static void exportToPdf(String out, String html, String url, DataHolder options) {
         String css = DEFAULT_CSS.get(options);
         html = embedCss(html, css);
-        exportToPdf(out, html, url, options.get(DEFAULT_TEXT_DIRECTION), options.get(PROTECTION_POLICY));
+        exportToPdf(out, html, url, DEFAULT_TEXT_DIRECTION.get(options), PROTECTION_POLICY.get(options));
     }
 
     public static void exportToPdf(String out, String html, String url, PdfRendererBuilder.TextDirection defaultTextDirection) {
@@ -97,7 +94,7 @@ public class PdfConverterExtension {
     }
 
     public static void exportToPdf(OutputStream os, String html, String url, DataHolder options) {
-        exportToPdf(os, html, url, options.get(DEFAULT_TEXT_DIRECTION), options.get(PROTECTION_POLICY));
+        exportToPdf(os, html, url, DEFAULT_TEXT_DIRECTION.get(options), PROTECTION_POLICY.get(options));
     }
 
     public static void exportToPdf(OutputStream os, String html, String url, PdfRendererBuilder.TextDirection defaultTextDirection) {

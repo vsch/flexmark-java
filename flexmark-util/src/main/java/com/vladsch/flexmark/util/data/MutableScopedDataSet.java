@@ -1,6 +1,7 @@
 package com.vladsch.flexmark.util.data;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -24,14 +25,13 @@ public class MutableScopedDataSet extends MutableDataSet {
         return parent;
     }
 
-    @NotNull
     @Override
-    public Map<DataKey<?>, Object> getAll() {
+    public @NotNull Map<? extends DataKeyBase<?>, Object> getAll() {
         if (parent != null) {
-            HashMap<DataKey<?>, Object> all = new HashMap<>(super.getAll());
-            for (DataKey<?> key : parent.getKeys()) {
+            HashMap<DataKeyBase<?>, Object> all = new HashMap<>(super.getAll());
+            for (DataKeyBase<?> key : parent.getKeys()) {
                 if (!contains(key)) {
-                    all.put(key, parent.get(key));
+                    all.put(key, key.get(parent));
                 }
             }
 
@@ -41,12 +41,11 @@ public class MutableScopedDataSet extends MutableDataSet {
         }
     }
 
-    @NotNull
     @Override
-    public Collection<DataKey<?>> getKeys() {
+    public @NotNull Collection<? extends DataKeyBase<?>> getKeys() {
         if (parent != null) {
-            ArrayList<DataKey<?>> all = new ArrayList<>(super.getKeys());
-            for (DataKey<?> key : parent.getKeys()) {
+            ArrayList<DataKeyBase<?>> all = new ArrayList<>(super.getKeys());
+            for (DataKeyBase<?> key : parent.getKeys()) {
                 if (!contains(key)) {
                     all.add(key);
                 }
@@ -59,16 +58,16 @@ public class MutableScopedDataSet extends MutableDataSet {
     }
 
     @Override
-    public boolean contains(@NotNull DataKey<?> key) {
+    public boolean contains(@NotNull DataKeyBase<?> key) {
         return super.contains(key) || (parent != null && parent.contains(key));
     }
 
     @Override
-    public <T> T get(@NotNull DataKey<T> key) {
+    public @Nullable Object getOrCompute(@NotNull DataKeyBase<?> key, @NotNull DataValueFactory<?> factory) {
         if (parent == null || super.contains(key) || !parent.contains(key)) {
-            return super.get(key);
+            return super.getOrCompute(key, factory);
         } else {
-            return parent.get(key);
+            return parent.getOrCompute(key, factory);
         }
     }
 }

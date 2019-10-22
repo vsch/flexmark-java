@@ -5,6 +5,7 @@ import com.vladsch.flexmark.util.ast.DoNotDecorate;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.CharSubSequence;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Table cell separator only used during parsing, not part of the AST, use the {@link TableCell#getOpeningMarker()} and {@link TableCell#getClosingMarker()}
@@ -21,6 +22,7 @@ class TableColumnSeparator extends Node implements DoNotDecorate {
         super(CharSubSequence.of(chars));
     }
 
+    @NotNull
     @Override
     public BasedSequence[] getSegments() {
         return EMPTY_SEGMENTS;

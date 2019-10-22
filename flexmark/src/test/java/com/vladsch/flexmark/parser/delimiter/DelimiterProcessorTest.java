@@ -188,6 +188,7 @@ final public class DelimiterProcessorTest extends RenderingTestCase {
         protected BasedSequence text = BasedSequence.NULL;
         protected BasedSequence closingMarker = BasedSequence.NULL;
 
+        @NotNull
         @Override
         public BasedSequence[] getSegments() {
             return new BasedSequence[] { openingMarker, text, closingMarker };

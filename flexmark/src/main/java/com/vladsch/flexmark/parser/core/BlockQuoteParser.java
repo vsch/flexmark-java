@@ -28,12 +28,12 @@ public class BlockQuoteParser extends AbstractBlockParser {
 
     public BlockQuoteParser(DataHolder options, BasedSequence marker) {
         block.setOpeningMarker(marker);
-        continueToBlankLine = options.get(Parser.BLOCK_QUOTE_EXTEND_TO_BLANK_LINE);
-        allowLeadingSpace = options.get(Parser.BLOCK_QUOTE_ALLOW_LEADING_SPACE);
-        ignoreBlankLine = options.get(Parser.BLOCK_QUOTE_IGNORE_BLANK_LINE);
-        interruptsParagraph = options.get(Parser.BLOCK_QUOTE_INTERRUPTS_PARAGRAPH);
-        interruptsItemParagraph = options.get(Parser.BLOCK_QUOTE_INTERRUPTS_ITEM_PARAGRAPH);
-        withLeadSpacesInterruptsItemParagraph = options.get(Parser.BLOCK_QUOTE_WITH_LEAD_SPACES_INTERRUPTS_ITEM_PARAGRAPH);
+        continueToBlankLine = Parser.BLOCK_QUOTE_EXTEND_TO_BLANK_LINE.get(options);
+        allowLeadingSpace = Parser.BLOCK_QUOTE_ALLOW_LEADING_SPACE.get(options);
+        ignoreBlankLine = Parser.BLOCK_QUOTE_IGNORE_BLANK_LINE.get(options);
+        interruptsParagraph = Parser.BLOCK_QUOTE_INTERRUPTS_PARAGRAPH.get(options);
+        interruptsItemParagraph = Parser.BLOCK_QUOTE_INTERRUPTS_ITEM_PARAGRAPH.get(options);
+        withLeadSpacesInterruptsItemParagraph = Parser.BLOCK_QUOTE_WITH_LEAD_SPACES_INTERRUPTS_ITEM_PARAGRAPH.get(options);
     }
 
     @Override
@@ -60,7 +60,7 @@ public class BlockQuoteParser extends AbstractBlockParser {
     public void closeBlock(ParserState state) {
         block.setCharsFromContent();
 
-        if (!state.getProperties().get(Parser.BLANK_LINES_IN_AST)) {
+        if (!Parser.BLANK_LINES_IN_AST.get(state.getProperties())) {
             removeBlankLines();
         }
     }

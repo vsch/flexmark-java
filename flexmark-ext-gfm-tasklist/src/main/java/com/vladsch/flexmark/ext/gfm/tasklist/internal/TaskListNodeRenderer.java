@@ -24,13 +24,13 @@ public class TaskListNodeRenderer implements NodeRenderer {
     private final ListOptions listOptions;
 
     public TaskListNodeRenderer(DataHolder options) {
-        doneMarker = options.get(TaskListExtension.ITEM_DONE_MARKER);
-        notDoneMarker = options.get(TaskListExtension.ITEM_NOT_DONE_MARKER);
-        tightItemClass = options.get(TaskListExtension.TIGHT_ITEM_CLASS);
-        looseItemClass = options.get(TaskListExtension.LOOSE_ITEM_CLASS);
-        itemDoneClass = options.get(TaskListExtension.ITEM_DONE_CLASS);
-        itemNotDoneClass = options.get(TaskListExtension.ITEM_NOT_DONE_CLASS);
-        paragraphClass = options.get(TaskListExtension.PARAGRAPH_CLASS);
+        doneMarker = TaskListExtension.ITEM_DONE_MARKER.get(options);
+        notDoneMarker = TaskListExtension.ITEM_NOT_DONE_MARKER.get(options);
+        tightItemClass = TaskListExtension.TIGHT_ITEM_CLASS.get(options);
+        looseItemClass = TaskListExtension.LOOSE_ITEM_CLASS.get(options);
+        itemDoneClass = TaskListExtension.ITEM_DONE_CLASS.get(options);
+        itemNotDoneClass = TaskListExtension.ITEM_NOT_DONE_CLASS.get(options);
+        paragraphClass = TaskListExtension.PARAGRAPH_CLASS.get(options);
         listOptions = ListOptions.getFrom(options);
     }
 

@@ -27,9 +27,9 @@ public class LoadUnloadDataKeyAggregator implements DataKeyAggregator {
         if (combined.contains(LOAD_EXTENSIONS) || combined.contains(UNLOAD_EXTENSIONS)) {
             // have something to work with, or at least clean
             if (combined.contains(SharedDataKeys.EXTENSIONS) || combined.contains(LOAD_EXTENSIONS)) {
-                Collection<Extension> extensions = combined.get(SharedDataKeys.EXTENSIONS);
-                Collection<Extension> loadExtensions = combined.get(LOAD_EXTENSIONS);
-                Collection<Class<? extends Extension>> unloadExtensions = combined.get(UNLOAD_EXTENSIONS);
+                Collection<Extension> extensions = SharedDataKeys.EXTENSIONS.get(combined);
+                Collection<Extension> loadExtensions = LOAD_EXTENSIONS.get(combined);
+                Collection<Class<? extends Extension>> unloadExtensions = UNLOAD_EXTENSIONS.get(combined);
 
                 if (!loadExtensions.isEmpty() || !unloadExtensions.isEmpty() && !extensions.isEmpty()) {
                     LinkedHashSet<Extension> resolvedExtensions = new LinkedHashSet<>(extensions);

@@ -1,6 +1,7 @@
 package com.vladsch.flexmark.ext.toc;
 
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * A simulated toc block node
@@ -20,6 +21,7 @@ public class SimTocBlock extends TocBlockBase {
         segmentSpanChars(out, closingTitleMarker, "closingTitleMarker");
     }
 
+    @NotNull
     @Override
     public BasedSequence[] getSegments() {
         BasedSequence[] nodeSegments = new BasedSequence[] { openingMarker, tocKeyword, style, closingMarker, anchorMarker, openingTitleMarker, title, closingTitleMarker };

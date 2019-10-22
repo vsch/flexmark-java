@@ -3,15 +3,11 @@ package com.vladsch.flexmark.util.data;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.lang.annotation.Annotation;
+import java.util.function.Supplier;
 
-public class NullableDataKey<T> {
-    private final @NotNull String name;
-    private final @NotNull DataValueFactory<T> factory;
-    private final @Nullable T defaultValue;
-
+public class NullableDataKey<T> extends DataKeyBase<T> {
     /**
-     * Creates a NullableDataKey with a computed default value and a provided default value when data holder is null.
+     * Creates a DataKey with nullable data value and factory with non-nullable dataHolder
      * <p>
      * Use this constructor to ensure that factory is never called with null data holder value
      *
@@ -20,23 +16,31 @@ public class NullableDataKey<T> {
      * @param factory      data value factory for creating a new default value for the key for a non-null data holder
      */
     public NullableDataKey(@NotNull String name, @Nullable T defaultValue, @NotNull DataValueFactory<T> factory) {
-        this.name = name;
-        this.defaultValue = defaultValue;
-        this.factory = factory;
+        super(name, defaultValue, factory);
     }
 
     /**
-     * Creates a NullableDataKey with a computed default value dynamically.
-     *
+     * Creates a DataKey with a computed default value dynamically.
+     * <p>
      * On construction will invoke factory with null data holder to get the default value
      *
      * @param name    See {@link #getName()}.
      * @param factory data value factory for creating a new default value for the key
      */
     public NullableDataKey(@NotNull String name, @NotNull DataValueNullableFactory<T> factory) {
-        this.name = name;
-        this.defaultValue = factory.apply(null);
-        this.factory = factory;
+        super(name, factory.apply(null), factory);
+    }
+
+    /**
+     * Creates a DataKey with nullable data value and factory not dependent on data holder
+     * <p>
+     * Use this constructor to ensure that factory is never called with null data holder value
+     *
+     * @param name         See {@link #getName()}.
+     * @param supplier     data value factory for creating a new default value for the key not dependent on dataHolder
+     */
+    public NullableDataKey(@NotNull String name, @NotNull Supplier<T> supplier) {
+        super(name, supplier.get(), (holder) -> supplier.get());
     }
 
     /**
@@ -48,78 +52,50 @@ public class NullableDataKey<T> {
      * @param name       See {@link #getName()}.
      * @param defaultKey The NullableDataKey to take the default value from at time of construction.
      */
-    public NullableDataKey(String name, NullableDataKey<T> defaultKey) {
-        this(name, defaultKey.defaultValue, defaultKey::get);
+    public NullableDataKey(@NotNull String name, @NotNull DataKeyBase<T> defaultKey) {
+        this(name, defaultKey.getDefaultValue(), defaultKey::get);
     }
 
-    public NullableDataKey(String name, T defaultValue) {
+    public NullableDataKey(@NotNull String name, @Nullable T defaultValue) {
         this(name, defaultValue, options -> defaultValue);
     }
 
-    @NotNull
-    public String getName() {
-        return name;
-    }
-
-    @NotNull
-    public DataValueFactory<T> getFactory() {
-        return factory;
+    /**
+     * Create a DataKey with null default value and factory producing null values
+     * @param name key name
+     */
+    public NullableDataKey(@NotNull String name) {
+        this(name, null, options -> null);
     }
 
     @Nullable
-    public T igetDefaultValue() {
-        return defaultValue;
+    public T getDefaultValue() {
+        return super.getDefaultValue();
     }
 
     @Nullable
     public T getDefaultValue(@NotNull DataHolder holder) {
-        return factory.apply(holder);
+        return super.getDefaultValue(holder);
     }
 
     @Nullable
     public T get(@Nullable DataHolder holder) {
-        //noinspection unchecked
-        return holder == null ? defaultValue : (T) holder.getOrCompute(this, this::getDefaultValue);
+        return super.get(holder);
     }
 
-    /**
-     * @param holder    data holder
-     * @return return default value if holder is null, current value in holder or compute a new value
-     * @deprecated use get
-     */
-    @Deprecated
-    @Nullable
-    final public T getFrom(@Nullable DataHolder holder) {
-        return get(holder);
-    }
-
-    public MutableDataHolder set(MutableDataHolder holder, T value) {
-        holder.set(this, value);
-        return holder;
+    @NotNull
+    public MutableDataHolder set(@NotNull MutableDataHolder holder, @Nullable T value) {
+        return super.set(holder, value);
     }
 
     @Override
     public String toString() {
+        // factory applied to null in constructor, no sense doing it again here
+        T defaultValue = getDefaultValue();
         if (defaultValue != null) {
-            return "NullableDataKey<" + defaultValue.getClass().getName().substring(defaultValue.getClass().getPackage().getName().length() + 1) + "> " + name;
+            return "DataKey<" + defaultValue.getClass().getName().substring(defaultValue.getClass().getPackage().getName().length() + 1) + "> " + getName();
         } else {
-            return "NullableDataKey<unknown> " + name;
+            return "DataKey<null> " + getName();
         }
-    }
-
-    /**
-     * Compare only by address. Every key instance is unique
-     *
-     * @param o other
-     * @return true if equal
-     */
-    @Override
-    final public boolean equals(Object o) {
-        return this == o;
-    }
-
-    @Override
-    final public int hashCode() {
-        return super.hashCode();
     }
 }

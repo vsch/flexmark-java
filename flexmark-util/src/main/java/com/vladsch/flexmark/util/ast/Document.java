@@ -4,6 +4,7 @@ import com.vladsch.flexmark.util.Utils;
 import com.vladsch.flexmark.util.data.*;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
 import java.util.Map;
@@ -13,6 +14,7 @@ import static com.vladsch.flexmark.util.sequence.BasedSequence.EMPTY_LIST;
 public class Document extends Block implements MutableDataHolder {
     private final MutableDataSet dataSet;
 
+    @NotNull
     @Override
     public BasedSequence[] getSegments() {
         return EMPTY_SEGMENTS;
@@ -23,26 +25,64 @@ public class Document extends Block implements MutableDataHolder {
         dataSet = new MutableDataSet(options);
     }
 
-    @NotNull
     @Override
-    public Map<DataKey<?>, Object> getAll() { return dataSet.getAll(); }
-
-    @NotNull
-    @Override
-    public Collection<DataKey<?>> getKeys() { return dataSet.getKeys(); }
-
-    @Override
-    public boolean contains(@NotNull DataKey<?> key) { return dataSet.contains(key); }
-
-    @Override
-    public <T> T get(@NotNull DataKey<T> key) {
-        return dataSet.get(key);
+    public MutableDataHolder clear() {
+        throw new UnsupportedOperationException();
     }
 
     @Override
-    public MutableDataHolder setIn(MutableDataHolder dataHolder) {
-        return dataSet.setIn(dataHolder);
-    }
+    public <T> MutableDataSet set(DataKeyBase<T> key, T value) {return dataSet.set(key, value);}
+
+    @Override
+    public MutableDataSet setFrom(MutableDataSetter dataSetter) {return dataSet.setFrom(dataSetter);}
+
+    @Override
+    public MutableDataSet setAll(DataHolder other) {return dataSet.setAll(other);}
+
+    public static MutableDataSet merge(DataHolder... dataHolders) {return MutableDataSet.merge(dataHolders);}
+
+    @NotNull
+    @Override
+    public MutableDataHolder setIn(@NotNull MutableDataHolder dataHolder) {return dataSet.setIn(dataHolder);}
+
+    @Override
+    public <T> MutableDataSet remove(DataKeyBase<T> key) {return dataSet.remove(key);}
+
+    @Override
+    @Nullable
+    public Object getOrCompute(@NotNull DataKeyBase<?> key, @NotNull DataValueFactory<?> factory) {return dataSet.getOrCompute(key, factory);}
+
+    @Override
+    @NotNull
+    public MutableDataSet toMutable() {return dataSet.toMutable();}
+
+    @Override
+    @NotNull
+    public DataSet toImmutable() {return dataSet.toImmutable();}
+
+    @Override
+    @NotNull
+    public MutableDataSet toDataSet() {return dataSet.toDataSet();}
+
+    @NotNull
+    public static DataHolder aggregateActions(@NotNull DataHolder other, @NotNull DataHolder overrides) {return DataSet.aggregateActions(other, overrides);}
+
+    @NotNull
+    public DataHolder aggregate() {return dataSet.aggregate();}
+
+    @NotNull
+    public static DataHolder aggregate(@Nullable DataHolder other, @Nullable DataHolder overrides) {return DataSet.aggregate(other, overrides);}
+
+    @Override
+    @NotNull
+    public Map<? extends DataKeyBase<?>, Object> getAll() {return dataSet.getAll();}
+
+    @Override
+    @NotNull
+    public Collection<? extends DataKeyBase<?>> getKeys() {return dataSet.getKeys();}
+
+    @Override
+    public boolean contains(@NotNull DataKeyBase<?> key) {return dataSet.contains(key);}
 
     @Override
     public int getLineCount() {
@@ -87,35 +127,5 @@ public class Document extends Block implements MutableDataHolder {
             }
             return iMax;
         }
-    }
-
-    @Override
-    public <T> T getOrCompute(DataKey<T> key) { return dataSet.getOrCompute(key); }
-
-    @Override
-    public <T> MutableDataSet remove(DataKey<T> key) { return dataSet.remove(key); }
-
-    @Override
-    public <T> MutableDataSet set(DataKey<T> key, T value) { return dataSet.set(key, value);}
-
-    @Override
-    public MutableDataSet setFrom(MutableDataSetter dataSetter) { return dataSet.setFrom(dataSetter); }
-
-    @Override
-    public MutableDataSet setAll(DataHolder other) {
-        return dataSet.setAll(other);
-    }
-
-    @NotNull
-    @Override
-    public MutableDataSet toMutable() { return dataSet.toMutable(); }
-
-    @NotNull
-    @Override
-    public DataSet toImmutable() { return dataSet.toImmutable(); }
-
-    @Override
-    public MutableDataHolder clear() {
-        throw new UnsupportedOperationException();
     }
 }

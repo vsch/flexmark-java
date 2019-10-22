@@ -15,6 +15,7 @@ import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -39,6 +40,7 @@ public class UnderlineExtensionSample {
         private BasedSequence text = BasedSequence.NULL;
         private BasedSequence closingMarker = BasedSequence.NULL;
 
+        @NotNull
         @Override
         public BasedSequence[] getSegments() {
             return new BasedSequence[] { openingMarker, text, closingMarker };
@@ -177,7 +179,7 @@ public class UnderlineExtensionSample {
         private UnderlineExtension() { }
 
         @Override
-        public void rendererOptions(MutableDataHolder options) { }
+        public void rendererOptions(@NotNull MutableDataHolder options) { }
 
         @Override
         public void parserOptions(MutableDataHolder options) { }

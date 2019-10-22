@@ -4,6 +4,7 @@ import com.vladsch.flexmark.ast.Paragraph;
 import com.vladsch.flexmark.ast.ParagraphContainer;
 import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -17,6 +18,7 @@ public class AdmonitionBlock extends Block implements ParagraphContainer {
     protected BasedSequence title = BasedSequence.NULL;
     protected BasedSequence titleClosingMarker = BasedSequence.NULL;
 
+    @NotNull
     @Override
     public BasedSequence[] getSegments() {
         return new BasedSequence[] {
@@ -28,6 +30,7 @@ public class AdmonitionBlock extends Block implements ParagraphContainer {
         };
     }
 
+    @NotNull
     @Override
     public BasedSequence[] getSegmentsForChars() {
         return new BasedSequence[] {

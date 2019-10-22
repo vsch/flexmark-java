@@ -7,6 +7,7 @@ import com.vladsch.flexmark.ast.util.TextNodeConverter;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.html.CellAlignment;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Table cell of a {@link TableRow} containing inline nodes.
@@ -110,6 +111,7 @@ public class TableCell extends Node implements DelimitedNode {
         this.span = span;
     }
 
+    @NotNull
     @Override
     public BasedSequence[] getSegments() {
         return new BasedSequence[] { openingMarker, text, closingMarker };

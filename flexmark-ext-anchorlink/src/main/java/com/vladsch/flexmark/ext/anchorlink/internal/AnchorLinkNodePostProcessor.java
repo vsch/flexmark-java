@@ -52,7 +52,7 @@ public class AnchorLinkNodePostProcessor extends NodePostProcessor {
         public Factory(DataHolder options) {
             super(false);
 
-            if (options.get(ANCHORLINKS_NO_BLOCK_QUOTE)) {
+            if (ANCHORLINKS_NO_BLOCK_QUOTE.get(options)) {
                 addNodeWithExclusions(Heading.class, BlockQuote.class);
             } else {
                 addNodes(Heading.class);

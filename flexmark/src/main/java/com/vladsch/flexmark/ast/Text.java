@@ -4,6 +4,7 @@ import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.CharSubSequence;
 import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
+import org.jetbrains.annotations.NotNull;
 
 public final class Text extends Node {
     public Text() {
@@ -21,6 +22,7 @@ public final class Text extends Node {
         super(PrefixedSubSequence.of(chars, baseSeq));
     }
 
+    @NotNull
     @Override
     public BasedSequence[] getSegments() {
         return EMPTY_SEGMENTS;

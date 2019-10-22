@@ -53,6 +53,7 @@ class HtmlConverter extends IParseBase {
             myRootNode = rootNode;
         }
 
+        @NotNull
         @Override
         public BasedSequence[] getSegments() {
             return Node.EMPTY_SEGMENTS;

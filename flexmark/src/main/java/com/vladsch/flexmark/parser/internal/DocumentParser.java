@@ -330,8 +330,8 @@ public class DocumentParser implements ParserState {
         this.documentBlockParser = new DocumentBlockParser();
         activateBlockParser(this.documentBlockParser);
         this.currentPhase = ParserPhase.STARTING;
-        this.blankLinesInAst = options.get(BLANK_LINES_IN_AST);
-        this.trackDocumentLines = options.get(TRACK_DOCUMENT_LINES);
+        this.blankLinesInAst = BLANK_LINES_IN_AST.get(options);
+        this.trackDocumentLines = TRACK_DOCUMENT_LINES.get(options);
     }
 
     @Override
@@ -350,7 +350,7 @@ public class DocumentParser implements ParserState {
 
         // need to keep core parsers in the right order, this is done through their dependencies
         for (Map.Entry<CustomBlockParserFactory, DataKey<Boolean>> entry : CORE_FACTORIES_DATA_KEYS.entrySet()) {
-            if (options.get(entry.getValue())) {
+            if (entry.getValue().get(options)) {
                 list.add(entry.getKey());
             }
         }

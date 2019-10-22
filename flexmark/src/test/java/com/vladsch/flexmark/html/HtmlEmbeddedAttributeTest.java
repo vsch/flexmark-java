@@ -12,6 +12,7 @@ import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import com.vladsch.flexmark.util.html.Attributes;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import org.jetbrains.annotations.NotNull;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -89,7 +90,7 @@ final public class HtmlEmbeddedAttributeTest {
         private TestNodePostProcessorExtension() { }
 
         @Override
-        public void rendererOptions(MutableDataHolder options) {
+        public void rendererOptions(@NotNull MutableDataHolder options) {
             // add any configuration settings to options you want to apply to everything, here
         }
 

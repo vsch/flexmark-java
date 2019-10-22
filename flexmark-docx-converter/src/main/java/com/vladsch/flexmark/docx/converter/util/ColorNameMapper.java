@@ -1,5 +1,8 @@
 package com.vladsch.flexmark.docx.converter.util;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 import java.awt.Color;
 import java.util.HashMap;
 import java.util.Map;
@@ -35,7 +38,7 @@ public class ColorNameMapper {
      * @param c2 color 2
      * @return distance between two colors
      */
-    public static double colorDistance(Color c1, Color c2) {
+    public static double colorDistance(@NotNull Color c1, @NotNull Color c2) {
         int red1 = c1.getRed();
         int red2 = c2.getRed();
         int rmean = (red1 + red2) >> 1;
@@ -45,7 +48,7 @@ public class ColorNameMapper {
         return Math.sqrt((((512 + rmean) * r * r) >> 8) + 4 * g * g + (((767 - rmean) * b * b) >> 8));
     }
 
-    public static String colorToString(Color color) {
+    public static String colorToString(@NotNull Color color) {
         int r = color.getRed();
         int g = color.getGreen();
         int b = color.getBlue();
@@ -53,29 +56,38 @@ public class ColorNameMapper {
         return String.format("%02x%02x%02x", r, g, b);
     }
 
-    public static Color colorFromString(String color) {
+    @NotNull
+    public static Color colorFromString(@NotNull String color) {
         return new Color(
                 Integer.valueOf(color.substring(0, 2), 16),
                 Integer.valueOf(color.substring(2, 4), 16),
                 Integer.valueOf(color.substring(4, 6), 16));
     }
 
-    public static boolean isHexColor(String color) {
+    public static boolean isHexColor(@NotNull String color) {
         return color.matches(hexPattern);
     }
 
-    public static boolean isNamedColor(String color) {
+    public static boolean isNamedColor(@NotNull String color) {
         return colors.containsKey(color);
     }
 
-    public static String getValidNamedOrHexColor(String s) {
+    @Nullable
+    public static String getValidNamedOrHexColor(@NotNull String s) {
         if (ColorNameMapper.isNamedColor(s) || ColorNameMapper.isHexColor(s)) {
             return s;
         }
         return null;
     }
 
-    public static String getValidHexColor(String s) {
+    @NotNull
+    public static String getValidHexColorOrDefault(@NotNull String s, @NotNull String defaultValue) {
+        String hexColor = getValidHexColor(s);
+        return hexColor != null ? hexColor : defaultValue;
+    }
+
+    @Nullable
+    public static String getValidHexColor(@NotNull String s) {
         if (ColorNameMapper.isNamedColor(s)) {
             return colorToString(colors.get(s));
         } else if (ColorNameMapper.isHexColor(s)) {
@@ -84,7 +96,8 @@ public class ColorNameMapper {
         return null;
     }
 
-    public static String findClosestNamedColor(Color color) {
+    @NotNull
+    public static String findClosestNamedColor(@NotNull Color color) {
         String colorName = "black";
         double minDistance = Double.MAX_VALUE;
 
@@ -98,7 +111,8 @@ public class ColorNameMapper {
         return colorName;
     }
 
-    public static String findClosestNamedColor(String color) {
+    @NotNull
+    public static String findClosestNamedColor(@NotNull String color) {
         return findClosestNamedColor(colorFromString(color));
     }
 }

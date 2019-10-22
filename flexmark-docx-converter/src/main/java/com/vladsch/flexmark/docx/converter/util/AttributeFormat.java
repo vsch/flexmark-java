@@ -2,18 +2,20 @@ package com.vladsch.flexmark.docx.converter.util;
 
 import com.vladsch.flexmark.util.Utils;
 import org.docx4j.wml.*;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.math.BigInteger;
 
 public class AttributeFormat {
-    final public String fontFamily;
-    final public String fontSize;
-    final public Boolean fontBold;
-    final public Boolean fontItalic;
-    final public String textColor;
-    final public String fillColor;
+    final public @Nullable String fontFamily;
+    final public @Nullable String fontSize;
+    final public @Nullable Boolean fontBold;
+    final public @Nullable Boolean fontItalic;
+    final public @Nullable String textColor;
+    final public @Nullable String fillColor;
 
-    public AttributeFormat(String fontFamily, String fontSize, String fontWeight, String fontStyle, String textColor, String fillColor) {
+    public AttributeFormat(@Nullable String fontFamily, @Nullable String fontSize, @Nullable String fontWeight, @Nullable String fontStyle, @Nullable String textColor, @Nullable String fillColor) {
         this.fontFamily = getValidFontFamily(trimEmptyToNull(fontFamily));
         this.fontSize = getValidFontSize(trimEmptyToNull(fontSize));
         this.fontBold = getValidFontBold(trimEmptyToNull(fontWeight));
@@ -22,7 +24,8 @@ public class AttributeFormat {
         this.fillColor = getValidNamedOrHexColor(trimEmptyToNull(fillColor));
     }
 
-    private static String trimEmptyToNull(String textColor) {
+    @Nullable
+    private static String trimEmptyToNull(@Nullable String textColor) {
         if (textColor == null) return null;
 
         String trimmed = textColor.trim();
@@ -39,27 +42,30 @@ public class AttributeFormat {
                 fillColor == null;
     }
 
-    String getValidHexColor(String s) {
+    @Nullable String getValidHexColor(@Nullable String s) {
         if (s == null) return null;
 
         return ColorNameMapper.getValidHexColor(s);
     }
 
-    String getValidNamedOrHexColor(String s) {
+    @Nullable String getValidNamedOrHexColor(@Nullable String s) {
         if (s == null) return null;
 
         return ColorNameMapper.getValidNamedOrHexColor(s);
     }
 
-    private String getValidFontFamily(String fontFamily) {
+    @Nullable
+    private String getValidFontFamily(@Nullable String fontFamily) {
         return fontFamily == null || fontFamily.isEmpty() ? null : fontFamily;
     }
 
-    private String getValidFontSize(String fontSize) {
+    @Nullable
+    private String getValidFontSize(@Nullable String fontSize) {
         return fontSize == null || fontSize.isEmpty() ? null : fontSize;
     }
 
-    private Boolean getValidFontBold(String s) {
+    @Nullable
+    private Boolean getValidFontBold(@Nullable String s) {
         if (s == null) return null;
 
         switch (s) {
@@ -80,7 +86,8 @@ public class AttributeFormat {
         return null;
     }
 
-    private Boolean getValidFontItalic(String s) {
+    @Nullable
+    private Boolean getValidFontItalic(@Nullable String s) {
         if (s == null) return null;
 
         switch (s) {
@@ -102,7 +109,8 @@ public class AttributeFormat {
         return null;
     }
 
-    public <T> CTShd getShd(DocxContext<T> docx) {
+    @NotNull
+    public <T> CTShd getShd(@NotNull DocxContext<T> docx) {
         CTShd shd = docx.getFactory().createCTShd();
         shd.setColor("auto");
         shd.setFill(fillColor);
@@ -110,11 +118,11 @@ public class AttributeFormat {
         return shd;
     }
 
-    public <T> void setFormatRPr(RPrAbstract rPr, DocxContext<T> docx) {
+    public <T> void setFormatRPr(@NotNull RPrAbstract rPr, @NotNull DocxContext<T> docx) {
         if (textColor != null) {
             Color color = docx.getFactory().createColor();
             rPr.setColor(color);
-            color.setVal(ColorNameMapper.getValidHexColor(textColor).toUpperCase());
+            color.setVal(ColorNameMapper.getValidHexColorOrDefault(textColor, "000000").toUpperCase());
 
             rPr.setColor(color);
         }

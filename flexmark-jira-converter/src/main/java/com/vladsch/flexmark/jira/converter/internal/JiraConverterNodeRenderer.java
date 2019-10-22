@@ -27,7 +27,7 @@ public class JiraConverterNodeRenderer implements NodeRenderer {
     private final boolean recheckUndefinedReferences;
 
     public JiraConverterNodeRenderer(DataHolder options) {
-        this.referenceRepository = options.get(Parser.REFERENCES);
+        this.referenceRepository = Parser.REFERENCES.get(options);
         recheckUndefinedReferences = HtmlRenderer.RECHECK_UNDEFINED_REFERENCES.get(options);
         this.listOptions = ListOptions.getFrom(options);
     }

@@ -16,6 +16,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class ReferenceRepository extends NodeRepository<Reference> {
+
     public ReferenceRepository(DataHolder options) {
         super(Parser.REFERENCES_KEEP.get(options));
     }

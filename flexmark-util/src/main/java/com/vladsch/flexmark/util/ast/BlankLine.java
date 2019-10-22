@@ -1,6 +1,7 @@
 package com.vladsch.flexmark.util.ast;
 
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import org.jetbrains.annotations.NotNull;
 
 public class BlankLine extends Block {
     private Block claimedBlankLine = null;
@@ -29,6 +30,7 @@ public class BlankLine extends Block {
         this.claimedBlankLine = claimedBlankLine;
     }
 
+    @NotNull
     @Override
     public BasedSequence[] getSegments() {
         return EMPTY_SEGMENTS;

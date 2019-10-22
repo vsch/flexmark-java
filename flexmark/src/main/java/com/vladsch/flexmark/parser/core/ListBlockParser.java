@@ -124,7 +124,7 @@ public class ListBlockParser extends AbstractBlockParser {
     public void closeBlock(ParserState state) {
         finalizeListTight(state);
 
-        if (state.getProperties().get(BLANK_LINES_IN_AST)) {
+        if (BLANK_LINES_IN_AST.get(state.getProperties())) {
             // need to transfer trailing blank line nodes from last item to parent list
             ListBlock block = getBlock();
 

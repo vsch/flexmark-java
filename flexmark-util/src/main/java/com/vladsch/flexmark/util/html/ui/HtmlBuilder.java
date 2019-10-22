@@ -56,8 +56,10 @@ public class HtmlBuilder extends HtmlFormattingAppendableBase<HtmlBuilder> {
                 super.attr((Attribute) convert);
                 super.withAttr();
             } else {
+                //noinspection rawtypes
                 HtmlStyler styler = getHtmlStyler(convert);
-                if (styler == null) throw new IllegalStateException("Don't know how to style " + convert.getClass().getSimpleName());
+                // NOTE: show not simple name but name of container class if any
+                if (styler == null) throw new IllegalStateException("Don't know how to style " + convert.getClass().getName().substring(getClass().getPackage().getName().length() + 1));
 
                 //noinspection unchecked
                 String value = styler.getStyle(styler.getStyleable(convert));

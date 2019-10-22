@@ -2,6 +2,7 @@ package com.vladsch.flexmark.ast;
 
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Inline HTML element.
@@ -15,6 +16,7 @@ public class HtmlEntity extends Node {
     }
 
     // TODO: add opening and closing marker with intermediate text so that completions can be easily done
+    @NotNull
     @Override
     public BasedSequence[] getSegments() {
         return EMPTY_SEGMENTS;

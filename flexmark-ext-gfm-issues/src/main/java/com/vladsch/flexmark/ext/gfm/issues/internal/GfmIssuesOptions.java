@@ -4,6 +4,7 @@ import com.vladsch.flexmark.ext.gfm.issues.GfmIssuesExtension;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSetter;
+import org.jetbrains.annotations.NotNull;
 
 class GfmIssuesOptions implements MutableDataSetter {
     public final String gitHubIssuesUrlRoot;
@@ -20,8 +21,9 @@ class GfmIssuesOptions implements MutableDataSetter {
         gitHubIssueTextSuffix = GfmIssuesExtension.GIT_HUB_ISSUE_HTML_SUFFIX.get(options);
     }
 
+    @NotNull
     @Override
-    public MutableDataHolder setIn(MutableDataHolder dataHolder) {
+    public MutableDataHolder setIn(@NotNull MutableDataHolder dataHolder) {
         dataHolder.set(GfmIssuesExtension.GIT_HUB_ISSUES_URL_ROOT, gitHubIssuesUrlRoot);
         dataHolder.set(GfmIssuesExtension.GIT_HUB_ISSUE_URL_PREFIX, gitHubIssueUrlPrefix);
         dataHolder.set(GfmIssuesExtension.GIT_HUB_ISSUE_URL_SUFFIX, gitHubIssueUrlSuffix);

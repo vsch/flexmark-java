@@ -37,7 +37,7 @@ public class GitLabNodeRenderer implements NodeRenderer
     public GitLabNodeRenderer(DataHolder options) {
         this.options = new GitLabOptions(options);
         this.codeContentBlock = Parser.FENCED_CODE_CONTENT_BLOCK.get(options);
-        this.referenceRepository = options.get(Parser.REFERENCES);
+        this.referenceRepository = Parser.REFERENCES.get(options);
         this.recheckUndefinedReferences = HtmlRenderer.RECHECK_UNDEFINED_REFERENCES.get(options);
     }
 

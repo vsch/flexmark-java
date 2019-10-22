@@ -8,6 +8,7 @@ import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.ast.ReferenceNode;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * A EnumeratedReference block node
@@ -36,6 +37,7 @@ public class EnumeratedReferenceBlock extends Block implements ReferenceNode<Enu
         segmentSpan(out, enumeratedReference, "enumeratedReference");
     }
 
+    @NotNull
     @Override
     public BasedSequence[] getSegments() {
         return new BasedSequence[] { openingMarker, text, closingMarker, enumeratedReference };

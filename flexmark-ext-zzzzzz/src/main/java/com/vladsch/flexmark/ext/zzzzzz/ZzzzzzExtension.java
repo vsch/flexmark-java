@@ -8,6 +8,7 @@ import com.vladsch.flexmark.util.ast.KeepType;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Extension for zzzzzzs
@@ -21,7 +22,7 @@ public class ZzzzzzExtension implements Parser.ParserExtension
         , Parser.ReferenceHoldingExtension //zzzoptionszzz(CUSTOM_NODE_REPOSITORY)
 {
     public static final DataKey<KeepType> ZZZZZZS_KEEP = new DataKey<>("ZZZZZZS_KEEP", KeepType.FIRST); //zzzoptionszzz(CUSTOM_NODE_REPOSITORY) standard option to allow control over how to handle duplicates
-    public static final DataKey<ZzzzzzRepository> ZZZZZZS = new DataKey<>("ZZZZZZS", ZzzzzzRepository::new); //zzzoptionszzz(CUSTOM_NODE_REPOSITORY)
+    public static final DataKey<ZzzzzzRepository> ZZZZZZS = new DataKey<>("ZZZZZZS", new ZzzzzzRepository(null), ZzzzzzRepository::new); //zzzoptionszzz(CUSTOM_NODE_REPOSITORY)
     public static final DataKey<Boolean> ZZZZZZ_OPTION1 = new DataKey<>("ZZZZZZ_OPTION1", false); //zzzoptionszzz(CUSTOM_PROPERTIES)
     public static final DataKey<String> ZZZZZZ_OPTION2 = new DataKey<>("ZZZZZZ_OPTION2", "default"); //zzzoptionszzz(CUSTOM_PROPERTIES)
     public static final DataKey<Integer> ZZZZZZ_OPTION3 = new DataKey<>("ZZZZZZ_OPTION3", Integer.MAX_VALUE); //zzzoptionszzz(CUSTOM_PROPERTIES)
@@ -37,7 +38,7 @@ public class ZzzzzzExtension implements Parser.ParserExtension
     }
 
     @Override
-    public void rendererOptions(MutableDataHolder options) {
+    public void rendererOptions(@NotNull MutableDataHolder options) {
 
     }
 

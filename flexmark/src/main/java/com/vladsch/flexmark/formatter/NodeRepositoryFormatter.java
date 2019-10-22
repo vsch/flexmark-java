@@ -143,7 +143,7 @@ public abstract class NodeRepositoryFormatter<R extends NodeRepository<B>, B ext
             if (context.getRenderPurpose() == TRANSLATION_SPANS) {
                 context.getTranslationStore().set(myReferenceMapKey, new HashMap<String, String>());
             }
-            referenceTranslationMap = context.getTranslationStore().get(myReferenceMapKey);
+            referenceTranslationMap = myReferenceMapKey.get(context.getTranslationStore());
         }
 
         switch (phase) {
@@ -160,7 +160,7 @@ public abstract class NodeRepositoryFormatter<R extends NodeRepository<B>, B ext
                         }
                     }
 
-                    referenceUniqificationMap = context.getTranslationStore().get(myReferenceUniqificationMapKey);
+                    referenceUniqificationMap = myReferenceUniqificationMapKey.get(context.getTranslationStore());
                 }
 
                 if (getTranslationReferencePlacement(context) != ElementPlacement.AS_IS && getReferenceSort() == ElementPlacementSort.SORT_UNUSED_LAST) {
@@ -276,7 +276,7 @@ public abstract class NodeRepositoryFormatter<R extends NodeRepository<B>, B ext
         MergeContext mergeContext = context.getMergeContext();
         mergeContext.forEachPrecedingDocument(document, (docContext, doc, index) -> {
             NodeRepository<B> docRefs = getRepository(doc);
-            Map<String, String> uniquificationMap = docContext.getTranslationStore().get(myReferenceUniqificationMapKey);
+            Map<String, String> uniquificationMap = myReferenceUniqificationMapKey.get(docContext.getTranslationStore());
             NodeRepository.transferReferences(combinedRefs, docRefs, true, uniquificationMap);
         });
 

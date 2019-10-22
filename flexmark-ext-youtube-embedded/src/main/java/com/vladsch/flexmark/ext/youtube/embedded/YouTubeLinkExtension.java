@@ -5,6 +5,7 @@ import com.vladsch.flexmark.ext.youtube.embedded.internal.YouTubeLinkNodeRendere
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
+import org.jetbrains.annotations.NotNull;
 
 public class YouTubeLinkExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension {
     private YouTubeLinkExtension() {
@@ -20,7 +21,7 @@ public class YouTubeLinkExtension implements Parser.ParserExtension, HtmlRendere
     }
 
     @Override
-    public void rendererOptions(MutableDataHolder options) {
+    public void rendererOptions(@NotNull MutableDataHolder options) {
 
     }
 

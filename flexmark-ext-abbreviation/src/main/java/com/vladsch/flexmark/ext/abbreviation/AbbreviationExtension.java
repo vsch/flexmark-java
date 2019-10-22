@@ -10,6 +10,7 @@ import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.format.options.ElementPlacement;
 import com.vladsch.flexmark.util.format.options.ElementPlacementSort;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Extension for adding abbreviations to markdown
@@ -27,7 +28,7 @@ public class AbbreviationExtension implements Parser.ParserExtension, HtmlRender
     /**
      * A {@link DataKey} that is used to get the document's Node repository holding all the abbreviations defined in the current document.
      */
-    public static final DataKey<AbbreviationRepository> ABBREVIATIONS = new DataKey<>("ABBREVIATIONS", AbbreviationRepository::new);
+    public static final DataKey<AbbreviationRepository> ABBREVIATIONS = new DataKey<>("ABBREVIATIONS", new AbbreviationRepository(null), AbbreviationRepository::new);
 
     /**
      * A {@link DataKey} that is used to set the use links option when true, default is false and abbr tag will be used in the rendered HTML.
@@ -51,7 +52,7 @@ public class AbbreviationExtension implements Parser.ParserExtension, HtmlRender
     }
 
     @Override
-    public void rendererOptions(MutableDataHolder options) {
+    public void rendererOptions(@NotNull MutableDataHolder options) {
 
     }
 

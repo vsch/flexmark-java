@@ -9,6 +9,7 @@ import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.ast.KeepType;
 import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Extension for attributes
@@ -23,7 +24,7 @@ public class AttributesExtension implements Parser.ParserExtension
         , Formatter.FormatterExtension
         //, Parser.ReferenceHoldingExtension
 {
-    public static final DataKey<NodeAttributeRepository> NODE_ATTRIBUTES = new DataKey<>("NODE_ATTRIBUTES", NodeAttributeRepository::new);
+    public static final DataKey<NodeAttributeRepository> NODE_ATTRIBUTES = new DataKey<>("NODE_ATTRIBUTES", new NodeAttributeRepository(null), NodeAttributeRepository::new);
     public static final DataKey<KeepType> ATTRIBUTES_KEEP = new DataKey<>("ATTRIBUTES_KEEP", KeepType.FIRST); // standard option to allow control over how to handle duplicates
     public static final DataKey<Boolean> ASSIGN_TEXT_ATTRIBUTES = new DataKey<>("ASSIGN_TEXT_ATTRIBUTES", true); // assign attributes to text if previous is not a space
     public static final DataKey<Boolean> FENCED_CODE_INFO_ATTRIBUTES = new DataKey<>("FENCED_CODE_INFO_ATTRIBUTES", false); // assign attributes found at end of fenced code info strings
@@ -40,7 +41,7 @@ public class AttributesExtension implements Parser.ParserExtension
 
     @Override
     public void parserOptions(MutableDataHolder options) {
-        if (options.contains(FENCED_CODE_INFO_ATTRIBUTES) && options.get(FENCED_CODE_INFO_ATTRIBUTES) && !options.contains(FENCED_CODE_ADD_ATTRIBUTES)) {
+        if (options.contains(FENCED_CODE_INFO_ATTRIBUTES) && FENCED_CODE_INFO_ATTRIBUTES.get(options) && !options.contains(FENCED_CODE_ADD_ATTRIBUTES)) {
             // change default to pre only, to add to code use attributes after info
             options.set(FENCED_CODE_ADD_ATTRIBUTES, FencedCodeAddType.ADD_TO_PRE);
         }
@@ -58,7 +59,7 @@ public class AttributesExtension implements Parser.ParserExtension
     }
 
     @Override
-    public void rendererOptions(MutableDataHolder options) {
+    public void rendererOptions(@NotNull MutableDataHolder options) {
 
     }
 

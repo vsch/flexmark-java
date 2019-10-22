@@ -3,6 +3,7 @@ package com.vladsch.flexmark.ext.xwiki.macros;
 import com.vladsch.flexmark.util.ast.DoNotDecorate;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * A macros node
@@ -14,6 +15,7 @@ public class MacroAttribute extends Node implements DoNotDecorate {
     protected BasedSequence value = BasedSequence.NULL;
     protected BasedSequence closingMarker = BasedSequence.NULL;
 
+    @NotNull
     @Override
     public BasedSequence[] getSegments() {
         //return EMPTY_SEGMENTS;

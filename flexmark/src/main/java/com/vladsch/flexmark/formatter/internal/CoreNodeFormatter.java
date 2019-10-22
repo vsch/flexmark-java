@@ -11,9 +11,7 @@ import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.ParserEmulationProfile;
 import com.vladsch.flexmark.util.Utils;
 import com.vladsch.flexmark.util.ast.*;
-import com.vladsch.flexmark.util.data.DataHolder;
-import com.vladsch.flexmark.util.data.DataKey;
-import com.vladsch.flexmark.util.data.MutableDataHolder;
+import com.vladsch.flexmark.util.data.*;
 import com.vladsch.flexmark.util.format.options.ElementPlacement;
 import com.vladsch.flexmark.util.format.options.ElementPlacementSort;
 import com.vladsch.flexmark.util.format.options.ListSpacing;
@@ -35,9 +33,9 @@ import static com.vladsch.flexmark.util.sequence.BasedSequence.NULL;
 @SuppressWarnings("WeakerAccess")
 public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceRepository, Reference, RefNode> {
     public static final DataKey<Integer> LIST_ITEM_NUMBER = new DataKey<>("LIST_ITEM_NUMBER", 0);
-    public static final DataKey<ListSpacing> LIST_ITEM_SPACING = new DataKey<>("LIST_ITEM_SPACING", (ListSpacing) null);
-    public static final DataKey<Map<String, String>> UNIQUIFICATION_MAP = new DataKey<>("REFERENCES_UNIQUIFICATION_MAP", new HashMap<>());
-    public static final DataKey<Map<String, String>> ATTRIBUTE_UNIQUIFICATION_ID_MAP = new DataKey<>("ATTRIBUTE_UNIQUIFICATION_ID_MAP", new HashMap<>());
+    public static final NullableDataKey<ListSpacing> LIST_ITEM_SPACING = new NullableDataKey<>("LIST_ITEM_SPACING");
+    public static final DataKey<Map<String, String>> UNIQUIFICATION_MAP = new DataKey<>("REFERENCES_UNIQUIFICATION_MAP", HashMap::new);
+    public static final DataKey<Map<String, String>> ATTRIBUTE_UNIQUIFICATION_ID_MAP = new DataKey<>("ATTRIBUTE_UNIQUIFICATION_ID_MAP", HashMap::new);
 
     public static class Factory implements NodeFormatterFactory {
         @Override
@@ -198,15 +196,15 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
     public void renderDocument(NodeFormatterContext context, MarkdownWriter markdown, Document document, FormattingPhase phase) {
         super.renderDocument(context, markdown, document, phase);
 
-        attributeUniquificationIdMap = context.getTranslationStore().get(ATTRIBUTE_UNIQUIFICATION_ID_MAP);
+        attributeUniquificationIdMap = ATTRIBUTE_UNIQUIFICATION_ID_MAP.get(context.getTranslationStore());
 
         if (phase == DOCUMENT_BOTTOM) {
             if (context.getFormatterOptions().appendTransferredReferences) {
                 // we will transfer all references which were not part of our document
-                ArrayList<DataKey<?>> keys = new ArrayList<>();
+                ArrayList<DataKeyBase<?>> keys = new ArrayList<>();
 
-                for (DataKey<?> key : document.getAll().keySet()) {
-                    if (document.get(key) instanceof NodeRepository) {
+                for (DataKeyBase<?> key : document.getAll().keySet()) {
+                    if (key.get(document) instanceof NodeRepository) {
                         keys.add(key);
                     }
                 }
@@ -215,8 +213,8 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
 
                 boolean firstAppend = true;
 
-                for (DataKey<?> key : keys) {
-                    if (document.get(key) instanceof NodeRepository) {
+                for (DataKeyBase<?> key : keys) {
+                    if (key.get(document) instanceof NodeRepository) {
                         NodeRepository<?> repository = (NodeRepository<?>) key.get((DataHolder) document);
                         Set<?> nodes = repository.getReferencedElements(document);
 
@@ -280,7 +278,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
     }
 
     private void render(BlankLine node, NodeFormatterContext context, MarkdownWriter markdown) {
-        if (context.getDocument().get(LIST_ITEM_SPACING) == null && markdown.offsetWithPending() > 0) {
+        if (LIST_ITEM_SPACING.get(context.getDocument()) == null && markdown.offsetWithPending() > 0) {
             if (!(node.getPrevious() == null || node.getPrevious() instanceof BlankLine)) {
                 blankLines = 0;
             }
@@ -585,8 +583,8 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
         }
 
         Document document = context.getDocument();
-        ListSpacing listSpacing = document.get(LIST_ITEM_SPACING);
-        int listItemNumber = document.get(LIST_ITEM_NUMBER);
+        ListSpacing listSpacing = LIST_ITEM_SPACING.get(document);
+        int listItemNumber = LIST_ITEM_NUMBER.get(document);
         document.set(LIST_ITEM_NUMBER, node instanceof OrderedList ? ((OrderedList) node).getStartNumber() : 1);
 
         ListSpacing itemSpacing = null;
@@ -730,7 +728,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
 
                 if (options.listRenumberItems) {
                     Document document = context.getDocument();
-                    Integer itemNumber = document.get(LIST_ITEM_NUMBER);
+                    Integer itemNumber = LIST_ITEM_NUMBER.get(document);
                     openingMarker = String.format(Locale.US, "%d%c", itemNumber++, delimiter);
                     document.set(LIST_ITEM_NUMBER, itemNumber);
                 } else {
@@ -763,7 +761,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
 
             if (node.hasChildren() && node.getFirstChildAnyNot(BlankLine.class) != null) {
                 context.renderChildren(node);
-                if (addBlankLineLooseItems && (node.isLoose() || node.getDocument().get(LIST_ITEM_SPACING) == ListSpacing.LOOSE)) {
+                if (addBlankLineLooseItems && (node.isLoose() || LIST_ITEM_SPACING.get(node.getDocument()) == ListSpacing.LOOSE)) {
                     markdown.tailBlankLine();
                 }
             } else {
@@ -836,7 +834,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
                 } else {
                     boolean isItemParagraph = ((ParagraphItemContainer) node.getParent()).isItemParagraph(node);
                     if (isItemParagraph) {
-                        ListSpacing itemSpacing = context.getDocument().get(LIST_ITEM_SPACING);
+                        ListSpacing itemSpacing = LIST_ITEM_SPACING.get(context.getDocument());
                         if (itemSpacing == ListSpacing.TIGHT) {
                             renderTextBlockParagraphLines(node, context, markdown);
                         } else if (itemSpacing == ListSpacing.LOOSE) {
@@ -1038,7 +1036,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
                         // unwrapped, need to store it
                         myTranslationStore.set(UNWRAPPED_AUTO_LINKS, true);
                         markdown.append("<");
-                        markdown.appendNonTranslating(prefix, node.getText(), suffix, null, s -> myTranslationStore.get(UNWRAPPED_AUTO_LINKS_MAP).add(s));
+                        markdown.appendNonTranslating(prefix, node.getText(), suffix, null, s -> UNWRAPPED_AUTO_LINKS_MAP.get(myTranslationStore).add(s));
                         markdown.append(">");
                     } else {
                         markdown.append("<");
@@ -1053,7 +1051,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
                     break;
 
                 case TRANSLATED:
-                    if (myTranslationStore.get(UNWRAPPED_AUTO_LINKS) && myTranslationStore.get(UNWRAPPED_AUTO_LINKS_MAP).contains(node.getText().toString())) {
+                    if (UNWRAPPED_AUTO_LINKS.get(myTranslationStore) && UNWRAPPED_AUTO_LINKS_MAP.get(myTranslationStore).contains(node.getText().toString())) {
                         markdown.appendNonTranslating(prefix, node.getText(), suffix);
                     } else {
                         markdown.append("<");

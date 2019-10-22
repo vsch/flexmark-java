@@ -8,6 +8,8 @@ import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
+import com.vladsch.flexmark.util.data.NullableDataKey;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Extension for GFM strikethrough using ~~ (GitHub Flavored Markdown).
@@ -19,8 +21,8 @@ import com.vladsch.flexmark.util.data.MutableDataHolder;
  * </p>
  */
 public class SubscriptExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension {
-    public static final DataKey<String> SUBSCRIPT_STYLE_HTML_OPEN = StrikethroughSubscriptExtension.SUBSCRIPT_STYLE_HTML_OPEN;
-    public static final DataKey<String> SUBSCRIPT_STYLE_HTML_CLOSE = StrikethroughSubscriptExtension.SUBSCRIPT_STYLE_HTML_CLOSE;
+    public static final NullableDataKey<String> SUBSCRIPT_STYLE_HTML_OPEN = StrikethroughSubscriptExtension.SUBSCRIPT_STYLE_HTML_OPEN;
+    public static final NullableDataKey<String> SUBSCRIPT_STYLE_HTML_CLOSE = StrikethroughSubscriptExtension.SUBSCRIPT_STYLE_HTML_CLOSE;
 
     private SubscriptExtension() {
     }
@@ -30,7 +32,7 @@ public class SubscriptExtension implements Parser.ParserExtension, HtmlRenderer.
     }
 
     @Override
-    public void rendererOptions(MutableDataHolder options) {
+    public void rendererOptions(@NotNull MutableDataHolder options) {
 
     }
 

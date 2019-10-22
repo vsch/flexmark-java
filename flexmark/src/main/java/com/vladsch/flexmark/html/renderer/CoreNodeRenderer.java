@@ -53,7 +53,7 @@ public class CoreNodeRenderer implements NodeRenderer {
     private int nextLineStartOffset;
 
     public CoreNodeRenderer(DataHolder options) {
-        referenceRepository = options.get(Parser.REFERENCES);
+        referenceRepository = Parser.REFERENCES.get(options);
         recheckUndefinedReferences = HtmlRenderer.RECHECK_UNDEFINED_REFERENCES.get(options);
         listOptions = ListOptions.getFrom(options);
         obfuscateEmail = HtmlRenderer.OBFUSCATE_EMAIL.get(options);

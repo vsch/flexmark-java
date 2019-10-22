@@ -2,6 +2,7 @@ package com.vladsch.flexmark.ext.toc;
 
 import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * A TOC node
@@ -20,6 +21,7 @@ public abstract class TocBlockBase extends Block {
         segmentSpan(out, closingMarker, "closingMarker");
     }
 
+    @NotNull
     @Override
     public BasedSequence[] getSegments() {
         BasedSequence[] nodeSegments = new BasedSequence[] { openingMarker, tocKeyword, style, closingMarker };

@@ -3,9 +3,10 @@ package com.vladsch.flexmark.formatter;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.visitor.AstAction;
 import com.vladsch.flexmark.util.visitor.AstHandler;
+import org.jetbrains.annotations.NotNull;
 
 public class NodeFormattingHandler<N extends Node> extends AstHandler<N, NodeFormattingHandler.CustomNodeFormatter<N>> {
-    public NodeFormattingHandler(Class<N> aClass, CustomNodeFormatter<N> adapter) {
+    public NodeFormattingHandler(@NotNull Class<N> aClass, @NotNull CustomNodeFormatter<N> adapter) {
         super(aClass, adapter);
     }
 

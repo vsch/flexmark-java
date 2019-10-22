@@ -1,9 +1,7 @@
 package com.vladsch.flexmark.util.builder;
 
 import com.vladsch.flexmark.util.SharedDataKeys;
-import com.vladsch.flexmark.util.data.DataHolder;
-import com.vladsch.flexmark.util.data.DataKey;
-import com.vladsch.flexmark.util.data.MutableDataSet;
+import com.vladsch.flexmark.util.data.*;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
@@ -44,7 +42,7 @@ public abstract class BuilderBase<T extends BuilderBase<T>> extends MutableDataS
      * @return {@code this}
      */
     final public T extensions(Collection<? extends Extension> extensions) {
-        ArrayList<Extension> addedExtensions = new ArrayList<>(get(SharedDataKeys.EXTENSIONS).size() + extensions.size());
+        ArrayList<Extension> addedExtensions = new ArrayList<>(SharedDataKeys.EXTENSIONS.get(this).size() + extensions.size());
 
         // first give extensions a chance to modify parser options
         for (Extension extension : extensions) {
@@ -70,7 +68,7 @@ public abstract class BuilderBase<T extends BuilderBase<T>> extends MutableDataS
 
         if (!addedExtensions.isEmpty()) {
             // need to set extensions to options to make it all consistent
-            addedExtensions.addAll(0, get(SharedDataKeys.EXTENSIONS));
+            addedExtensions.addAll(0, SharedDataKeys.EXTENSIONS.get(this));
             set(SharedDataKeys.EXTENSIONS, addedExtensions);
         }
 
@@ -107,7 +105,7 @@ public abstract class BuilderBase<T extends BuilderBase<T>> extends MutableDataS
      * @return builder
      */
     @Override
-    public <D> MutableDataSet set(DataKey<D> key, D value) {
+    public <D> MutableDataSet set(DataKeyBase<D> key, D value) {
         addExtensionApiPoint(key);
         return super.set(key, value);
     }
@@ -118,7 +116,7 @@ public abstract class BuilderBase<T extends BuilderBase<T>> extends MutableDataS
 
     protected void loadExtensions() {
         if (contains(SharedDataKeys.EXTENSIONS)) {
-            extensions(get(SharedDataKeys.EXTENSIONS));
+            extensions(SharedDataKeys.EXTENSIONS.get(this));
         }
     }
 

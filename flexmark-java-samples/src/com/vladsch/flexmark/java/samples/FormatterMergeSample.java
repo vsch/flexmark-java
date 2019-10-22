@@ -23,7 +23,7 @@ public class FormatterMergeSample {
     static {
         // copy extensions from Pegdown compatible to Formatting
         FORMAT_OPTIONS
-                .set(Parser.EXTENSIONS, OPTIONS.get(Parser.EXTENSIONS))
+                .set(Parser.EXTENSIONS, Parser.EXTENSIONS.get(OPTIONS))
                 .set(Formatter.DEFAULT_LINK_RESOLVER, true)
         ;
     }

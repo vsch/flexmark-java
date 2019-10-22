@@ -29,12 +29,12 @@ public class AsideBlockParser extends AbstractBlockParser {
 
     public AsideBlockParser(DataHolder options, BasedSequence marker) {
         block.setOpeningMarker(marker);
-        continueToBlankLine = options.get(AsideExtension.EXTEND_TO_BLANK_LINE);
-        allowLeadingSpace = options.get(AsideExtension.ALLOW_LEADING_SPACE);
-        ignoreBlankLine = options.get(AsideExtension.IGNORE_BLANK_LINE);
-        interruptsParagraph = options.get(AsideExtension.INTERRUPTS_PARAGRAPH);
-        interruptsItemParagraph = options.get(AsideExtension.INTERRUPTS_ITEM_PARAGRAPH);
-        withLeadSpacesInterruptsItemParagraph = options.get(AsideExtension.WITH_LEAD_SPACES_INTERRUPTS_ITEM_PARAGRAPH);
+        continueToBlankLine = AsideExtension.EXTEND_TO_BLANK_LINE.get(options);
+        allowLeadingSpace = AsideExtension.ALLOW_LEADING_SPACE.get(options);
+        ignoreBlankLine = AsideExtension.IGNORE_BLANK_LINE.get(options);
+        interruptsParagraph = AsideExtension.INTERRUPTS_PARAGRAPH.get(options);
+        interruptsItemParagraph = AsideExtension.INTERRUPTS_ITEM_PARAGRAPH.get(options);
+        withLeadSpacesInterruptsItemParagraph = AsideExtension.WITH_LEAD_SPACES_INTERRUPTS_ITEM_PARAGRAPH.get(options);
     }
 
     @Override
@@ -61,7 +61,7 @@ public class AsideBlockParser extends AbstractBlockParser {
     public void closeBlock(ParserState state) {
         block.setCharsFromContent();
 
-        if (!state.getProperties().get(Parser.BLANK_LINES_IN_AST)) {
+        if (!Parser.BLANK_LINES_IN_AST.get(state.getProperties())) {
             removeBlankLines();
         }
     }

@@ -10,10 +10,7 @@ import com.vladsch.flexmark.util.ast.IRender;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.builder.BuilderBase;
 import com.vladsch.flexmark.util.builder.Extension;
-import com.vladsch.flexmark.util.data.DataHolder;
-import com.vladsch.flexmark.util.data.DataKey;
-import com.vladsch.flexmark.util.data.MutableDataHolder;
-import com.vladsch.flexmark.util.data.ScopedDataSet;
+import com.vladsch.flexmark.util.data.*;
 import com.vladsch.flexmark.util.dependency.DependencyHandler;
 import com.vladsch.flexmark.util.dependency.FlatDependencyHandler;
 import com.vladsch.flexmark.util.dependency.ResolvedDependencies;
@@ -39,13 +36,13 @@ import java.util.*;
 public class HtmlRenderer implements IRender {
     public static final DataKey<String> SOFT_BREAK = new DataKey<>("SOFT_BREAK", "\n");
     public static final DataKey<String> HARD_BREAK = new DataKey<>("HARD_BREAK", "<br />\n");
-    public static final DataKey<String> STRONG_EMPHASIS_STYLE_HTML_OPEN = new DataKey<>("STRONG_EMPHASIS_STYLE_HTML_OPEN", (String) null);
-    public static final DataKey<String> STRONG_EMPHASIS_STYLE_HTML_CLOSE = new DataKey<>("STRONG_EMPHASIS_STYLE_HTML_CLOSE", (String) null);
-    public static final DataKey<String> EMPHASIS_STYLE_HTML_OPEN = new DataKey<>("EMPHASIS_STYLE_HTML_OPEN", (String) null);
-    public static final DataKey<String> EMPHASIS_STYLE_HTML_CLOSE = new DataKey<>("EMPHASIS_STYLE_HTML_CLOSE", (String) null);
-    public static final DataKey<String> CODE_STYLE_HTML_OPEN = new DataKey<>("CODE_STYLE_HTML_OPEN", (String) null);
-    public static final DataKey<String> CODE_STYLE_HTML_CLOSE = new DataKey<>("CODE_STYLE_HTML_CLOSE", (String) null);
-    public static final DataKey<String> INLINE_CODE_SPLICE_CLASS = new DataKey<>("INLINE_CODE_SPLICE_CLASS", (String) null);
+    public static final NullableDataKey<String> STRONG_EMPHASIS_STYLE_HTML_OPEN = new NullableDataKey<>("STRONG_EMPHASIS_STYLE_HTML_OPEN");
+    public static final NullableDataKey<String> STRONG_EMPHASIS_STYLE_HTML_CLOSE = new NullableDataKey<>("STRONG_EMPHASIS_STYLE_HTML_CLOSE");
+    public static final NullableDataKey<String> EMPHASIS_STYLE_HTML_OPEN = new NullableDataKey<>("EMPHASIS_STYLE_HTML_OPEN");
+    public static final NullableDataKey<String> EMPHASIS_STYLE_HTML_CLOSE = new NullableDataKey<>("EMPHASIS_STYLE_HTML_CLOSE");
+    public static final NullableDataKey<String> CODE_STYLE_HTML_OPEN = new NullableDataKey<>("CODE_STYLE_HTML_OPEN");
+    public static final NullableDataKey<String> CODE_STYLE_HTML_CLOSE = new NullableDataKey<>("CODE_STYLE_HTML_CLOSE");
+    public static final NullableDataKey<String> INLINE_CODE_SPLICE_CLASS = new NullableDataKey<>("INLINE_CODE_SPLICE_CLASS");
     public static final DataKey<Boolean> PERCENT_ENCODE_URLS = SharedDataKeys.PERCENT_ENCODE_URLS;
     public static final DataKey<Integer> INDENT_SIZE = SharedDataKeys.INDENT_SIZE;
     public static final DataKey<Boolean> ESCAPE_HTML = new DataKey<>("ESCAPE_HTML", false);
@@ -74,7 +71,7 @@ public class HtmlRenderer implements IRender {
     public static final DataKey<String> SOURCE_POSITION_ATTRIBUTE = new DataKey<>("SOURCE_POSITION_ATTRIBUTE", "");
     public static final DataKey<Boolean> SOURCE_POSITION_PARAGRAPH_LINES = new DataKey<>("SOURCE_POSITION_PARAGRAPH_LINES", false);
     public static final DataKey<String> TYPE = new DataKey<>("TYPE", "HTML");
-    public static final DataKey<ArrayList<TagRange>> TAG_RANGES = new DataKey<>("TAG_RANGES", value -> new ArrayList<>());
+    public static final DataKey<ArrayList<TagRange>> TAG_RANGES = new DataKey<>("TAG_RANGES", ArrayList::new);
 
     public static final DataKey<Boolean> RECHECK_UNDEFINED_REFERENCES = new DataKey<>("RECHECK_UNDEFINED_REFERENCES", false);
     public static final DataKey<Boolean> OBFUSCATE_EMAIL = new DataKey<>("OBFUSCATE_EMAIL", false);
@@ -119,12 +116,12 @@ public class HtmlRenderer implements IRender {
     public static final int FORMAT_ALL_OPTIONS = LineFormattingAppendable.FORMAT_ALL;
 
     // now not final only to allow disposal of resources
-    private final List<AttributeProviderFactory> attributeProviderFactories;
-    private final List<DelegatingNodeRendererFactoryWrapper> nodeRendererFactories;
-    private final List<LinkResolverFactory> linkResolverFactories;
-    private final HeaderIdGeneratorFactory htmlIdGeneratorFactory;
-    private final HtmlRendererOptions htmlOptions;
-    private final DataHolder options;
+    final List<AttributeProviderFactory> attributeProviderFactories;
+    final List<DelegatingNodeRendererFactoryWrapper> nodeRendererFactories;
+    final List<LinkResolverFactory> linkResolverFactories;
+    final HeaderIdGeneratorFactory htmlIdGeneratorFactory;
+    final HtmlRendererOptions htmlOptions;
+    final DataHolder options;
 
     HtmlRenderer(Builder builder) {
         this.options = builder.toImmutable();

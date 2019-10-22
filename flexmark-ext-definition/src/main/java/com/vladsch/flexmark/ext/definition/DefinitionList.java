@@ -3,6 +3,7 @@ package com.vladsch.flexmark.ext.definition;
 import com.vladsch.flexmark.ast.ListBlock;
 import com.vladsch.flexmark.util.ast.BlockContent;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -25,6 +26,7 @@ public class DefinitionList extends ListBlock {
         super(blockContent);
     }
 
+    @NotNull
     @Override
     public BasedSequence[] getSegments() {
         return EMPTY_SEGMENTS;

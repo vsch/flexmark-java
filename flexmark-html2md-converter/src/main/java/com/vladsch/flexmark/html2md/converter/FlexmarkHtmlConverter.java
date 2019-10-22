@@ -541,7 +541,7 @@ public class FlexmarkHtmlConverter {
 
     private static class RendererDependencyHandler extends DependencyHandler<DelegatingNodeRendererFactoryWrapper, RendererDependencyStage, RendererDependencies> {
         @Override
-        protected Class getDependentClass(DelegatingNodeRendererFactoryWrapper dependent) {
+        protected Class<?> getDependentClass(DelegatingNodeRendererFactoryWrapper dependent) {
             return dependent.getFactory().getClass();
         }
 

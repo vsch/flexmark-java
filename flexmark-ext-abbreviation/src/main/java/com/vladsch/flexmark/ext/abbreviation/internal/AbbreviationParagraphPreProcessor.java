@@ -25,7 +25,7 @@ public class AbbreviationParagraphPreProcessor implements ParagraphPreProcessor 
 
     private AbbreviationParagraphPreProcessor(DataHolder options) {
         this.options = new AbbreviationOptions(options);
-        abbreviationMap = options.get(AbbreviationExtension.ABBREVIATIONS);
+        abbreviationMap = AbbreviationExtension.ABBREVIATIONS.get(options);
     }
 
     @Override

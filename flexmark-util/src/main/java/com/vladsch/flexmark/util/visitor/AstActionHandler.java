@@ -1,5 +1,8 @@
 package com.vladsch.flexmark.util.visitor;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -15,15 +18,15 @@ import java.util.function.BiFunction;
  * @param <H> handler to invoke the functionality during AST traversal for specific node
  */
 public abstract class AstActionHandler<C extends AstActionHandler<C, N, A, H>, N, A extends AstAction<N>, H extends AstHandler<N, A>> {
-    private final Map<Class<? extends N>, H> myCustomHandlersMap = new HashMap<>();
-    private final AstNode<N> myAstAdapter;
+    private final @NotNull Map<Class<? extends N>, H> myCustomHandlersMap = new HashMap<>();
+    private final @NotNull AstNode<N> myAstAdapter;
 
-    public AstActionHandler(AstNode<N> astAdapter) {
+    public AstActionHandler(@NotNull AstNode<N> astAdapter) {
         myAstAdapter = astAdapter;
     }
 
     @SafeVarargs
-    final protected C addActionHandlers(H[]... handlers) {
+    final protected @NotNull C addActionHandlers(@NotNull H[]... handlers) {
         for (H[] moreHandlers : handlers) {
             for (H handler : moreHandlers) {
                 myCustomHandlersMap.put(handler.getNodeType(), handler);
@@ -33,33 +36,33 @@ public abstract class AstActionHandler<C extends AstActionHandler<C, N, A, H>, N
         return (C) this;
     }
 
-    protected C addActionHandler(H handler) {
+    protected @NotNull C addActionHandler(@NotNull H handler) {
         myCustomHandlersMap.put(handler.getNodeType(), handler);
         //noinspection unchecked
         return (C) this;
     }
 
-    private A getAction(H handler) {
+    private @Nullable A getAction(@Nullable H handler) {
         return handler == null ? null : handler.getAdapter();
     }
 
-    public A getAction(N node) {
+    public @Nullable A getAction(@NotNull N node) {
         return getAction(myCustomHandlersMap.get(node.getClass()));
     }
 
-    public A getAction(Class<?> nodeClass) {
+    public @Nullable A getAction(@NotNull Class<?> nodeClass) {
         return getAction(myCustomHandlersMap.get(nodeClass));
     }
 
-    protected H getHandler(N node) {
+    protected @Nullable H getHandler(@NotNull N node) {
         return myCustomHandlersMap.get(node.getClass());
     }
 
-    protected H getHandler(Class<?> nodeClass) {
+    protected @Nullable H getHandler(@NotNull Class<?> nodeClass) {
         return myCustomHandlersMap.get(nodeClass);
     }
 
-    public Set<Class<? extends N>> getNodeClasses() {
+    public @NotNull Set<Class<? extends N>> getNodeClasses() {
         return myCustomHandlersMap.keySet();
     }
 
@@ -72,7 +75,7 @@ public abstract class AstActionHandler<C extends AstActionHandler<C, N, A, H>, N
      * @param withChildren whether to process child nodes if there is no handler for the node type
      * @param processor    processor to invoke to perform the processing, BiConsumer taking N node, and A action
      */
-    protected void processNode(N node, boolean withChildren, BiConsumer<N, A> processor) {
+    protected void processNode(@NotNull N node, boolean withChildren, @NotNull BiConsumer<N, A> processor) {
         A action = getAction(node);
         if (action != null) {
             processor.accept(node, action);
@@ -81,7 +84,7 @@ public abstract class AstActionHandler<C extends AstActionHandler<C, N, A, H>, N
         }
     }
 
-    protected final void processChildren(N node, BiConsumer<N, A> processor) {
+    protected final void processChildren(@NotNull N node, @NotNull BiConsumer<N, A> processor) {
         N child = myAstAdapter.getFirstChild(node);
         while (child != null) {
             // A subclass of this visitor might modify the node, resulting in getNext returning a different node or no
@@ -101,8 +104,7 @@ public abstract class AstActionHandler<C extends AstActionHandler<C, N, A, H>, N
      * @param <R>          type of result returned by processor
      * @return result or defaultValue
      */
-    final protected <R> R processNodeOnly(N node, R defaultValue, BiFunction<N, A, R> processor) {
-        A handler = getAction(node);
+    final protected <R> R processNodeOnly(@NotNull N node, R defaultValue, @NotNull BiFunction<N, A, R> processor) {
         Object[] value = { defaultValue };
         processNode(node, false, (n, h) -> value[0] = processor.apply(n, h));
         //noinspection unchecked

@@ -75,7 +75,7 @@ public class DefinitionNodeFormatter implements NodeFormatter {
         context.renderChildren(node);
         markdown.popPrefix();
 
-        if (!context.getOptions().get(BLANK_LINES_IN_AST)) {
+        if (!BLANK_LINES_IN_AST.get(context.getOptions())) {
             // add blank lines after last paragraph item
             Node child = node.getLastChild();
             if (child instanceof Paragraph && ((Paragraph) child).isTrailingBlankLine()) {

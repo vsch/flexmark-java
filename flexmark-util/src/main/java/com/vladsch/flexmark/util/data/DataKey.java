@@ -18,19 +18,19 @@ public class DataKey<T> extends DataKeyBase<T> {
     }
 
     /**
-     * Creates a DataKey with a computed default value dynamically.
+     * Creates a DataKey with non-null data value and factory
      * <p>
-     * On construction will invoke factory with null data holder to get the default value
+     * Use this constructor to ensure that factory is never called with null data holder value
      *
-     * @param name    See {@link #getName()}.
-     * @param factory data value factory for creating a new default value for the key
+     * @param name         See {@link #getName()}.
+     * @param supplier     data value factory for creating a new default value for the key not dependent on dataHolder
      */
-    public DataKey(@NotNull String name, @NotNull DataNotNullValueNullableFactory<T> factory) {
-        super(name, factory.apply(null), factory);
+    public DataKey(@NotNull String name, @NotNull NotNullValueSupplier<T> supplier) {
+        super(name, supplier.get(), (holder) -> supplier.get());
     }
 
     /**
-     * Creates a NullableDataKey with a dynamic default value taken from a value of another key
+     * Creates a DataKey with a dynamic default value taken from a value of another key
      * <p>
      * does not cache the returned default value but will always delegate to another key until this key
      * gets its own value set.
@@ -38,11 +38,11 @@ public class DataKey<T> extends DataKeyBase<T> {
      * @param name       See {@link #getName()}.
      * @param defaultKey The NullableDataKey to take the default value from at time of construction.
      */
-    public DataKey(String name, DataKey<T> defaultKey) {
+    public DataKey(@NotNull String name, @NotNull DataKey<T> defaultKey) {
         this(name, defaultKey.getDefaultValue(), defaultKey::get);
     }
 
-    public DataKey(String name, T defaultValue) {
+    public DataKey(@NotNull String name, @NotNull T defaultValue) {
         this(name, defaultValue, options -> defaultValue);
     }
 

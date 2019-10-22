@@ -7,6 +7,7 @@ import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.ast.ReferencingNode;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * A Footnote referencing node
@@ -35,7 +36,7 @@ public class Footnote extends Node implements DelimitedNode, DoNotDecorate, Refe
     @Override
     public FootnoteBlock getReferenceNode(Document document) {
         if (footnoteBlock != null || text.isEmpty()) return footnoteBlock;
-        footnoteBlock = getFootnoteBlock(document.get(FootnoteExtension.FOOTNOTES));
+        footnoteBlock = getFootnoteBlock(FootnoteExtension.FOOTNOTES.get(document));
         return footnoteBlock;
     }
 
@@ -62,6 +63,7 @@ public class Footnote extends Node implements DelimitedNode, DoNotDecorate, Refe
         this.footnoteBlock = footnoteBlock;
     }
 
+    @NotNull
     @Override
     public BasedSequence[] getSegments() {
         return new BasedSequence[] { openingMarker, text, closingMarker };

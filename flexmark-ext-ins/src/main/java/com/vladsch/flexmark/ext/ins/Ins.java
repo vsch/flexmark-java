@@ -3,6 +3,7 @@ package com.vladsch.flexmark.ext.ins;
 import com.vladsch.flexmark.ast.DelimitedNode;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * A Ins node
@@ -13,6 +14,7 @@ public class Ins extends Node implements DelimitedNode {
     protected BasedSequence closingMarker = BasedSequence.NULL;
     protected String insBlockText;
 
+    @NotNull
     @Override
     public BasedSequence[] getSegments() {
         //return EMPTY_SEGMENTS;

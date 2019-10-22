@@ -6,6 +6,8 @@ import com.vladsch.flexmark.parser.InlineParser;
 import com.vladsch.flexmark.parser.block.*;
 import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.util.data.DataHolder;
+import com.vladsch.flexmark.util.data.DataKey;
+import com.vladsch.flexmark.util.data.DataKeyBase;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 import java.util.Set;
@@ -35,8 +37,8 @@ public class AbbreviationBlockParser extends AbstractBlockParser {
     @Override
     public void closeBlock(ParserState state) {
         // add it to the map
-        AbbreviationRepository abbreviationMap = state.getProperties().get(AbbreviationExtension.ABBREVIATIONS);
-        abbreviationMap.put(abbreviationMap.normalizeKey(block.getText()).toString(), block);
+        AbbreviationRepository abbreviationMap = AbbreviationExtension.ABBREVIATIONS.get(state.getProperties());
+        abbreviationMap.put(abbreviationMap.normalizeKey(block.getText()), block);
     }
 
     @Override

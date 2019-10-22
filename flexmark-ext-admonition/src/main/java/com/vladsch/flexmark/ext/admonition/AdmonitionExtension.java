@@ -8,7 +8,9 @@ import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.data.DataValueFactory;
+import com.vladsch.flexmark.util.data.DataValueNullableFactory;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.*;
 import java.util.HashMap;
@@ -31,13 +33,9 @@ public class AdmonitionExtension implements Parser.ParserExtension, HtmlRenderer
     public static final DataKey<Boolean> WITH_SPACES_INTERRUPTS_ITEM_PARAGRAPH = new DataKey<>("ADMONITION.WITH_SPACES_INTERRUPTS_ITEM_PARAGRAPH", true);
     public static final DataKey<Boolean> ALLOW_LAZY_CONTINUATION = new DataKey<>("ADMONITION.ALLOW_LAZY_CONTINUATION", true);
     public static final DataKey<String> UNRESOLVED_QUALIFIER = new DataKey<>("ADMONITION.UNRESOLVED_QUALIFIER", "note");
-    public static final DataKey<Map<String, String>> QUALIFIER_TYPE_MAP = new DataKey<>("ADMONITION.QUALIFIER_TYPE_MAP", getQualifierTypeValueFactory());
-    public static final DataKey<Map<String, String>> QUALIFIER_TITLE_MAP = new DataKey<>("ADMONITION.QUALIFIER_TITLE_MAP", getQualifierTitleValueFactory());
-    public static final DataKey<Map<String, String>> TYPE_SVG_MAP = new DataKey<>("ADMONITION.TYPE_SVG_MAP", getQualifierSvgValueFactory());
-
-    private static DataValueFactory<Map<String, String>> getQualifierTypeValueFactory() {
-        return value -> getQualifierTypeMap();
-    }
+    public static final DataKey<Map<String, String>> QUALIFIER_TYPE_MAP = new DataKey<>("ADMONITION.QUALIFIER_TYPE_MAP", AdmonitionExtension::getQualifierTypeMap);
+    public static final DataKey<Map<String, String>> QUALIFIER_TITLE_MAP = new DataKey<>("ADMONITION.QUALIFIER_TITLE_MAP", AdmonitionExtension::getQualifierTitleMap);
+    public static final DataKey<Map<String, String>> TYPE_SVG_MAP = new DataKey<>("ADMONITION.TYPE_SVG_MAP", AdmonitionExtension::getQualifierSvgValueMap);
 
     public static Map<String, String> getQualifierTypeMap() {
         HashMap<String, String> infoSvgMap = new HashMap<>();
@@ -86,10 +84,6 @@ public class AdmonitionExtension implements Parser.ParserExtension, HtmlRenderer
         return infoSvgMap;
     }
 
-    private static DataValueFactory<Map<String, String>> getQualifierTitleValueFactory() {
-        return value -> getQualifierTitleMap();
-    }
-
     public static Map<String, String> getQualifierTitleMap() {
         HashMap<String, String> infoTitleMap = new HashMap<>();
         infoTitleMap.put("abstract", "Abstract");
@@ -134,10 +128,6 @@ public class AdmonitionExtension implements Parser.ParserExtension, HtmlRenderer
         infoTitleMap.put("attention", "Attention");
 
         return infoTitleMap;
-    }
-
-    private static DataValueFactory<Map<String, String>> getQualifierSvgValueFactory() {
-        return value -> getQualifierSvgValueMap();
     }
 
     public static Map<String, String> getQualifierSvgValueMap() {
@@ -203,7 +193,7 @@ public class AdmonitionExtension implements Parser.ParserExtension, HtmlRenderer
     }
 
     @Override
-    public void rendererOptions(MutableDataHolder options) {
+    public void rendererOptions(@NotNull MutableDataHolder options) {
 
     }
 

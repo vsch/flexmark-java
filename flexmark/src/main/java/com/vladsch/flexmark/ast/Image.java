@@ -1,10 +1,12 @@
 package com.vladsch.flexmark.ast;
 
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import org.jetbrains.annotations.NotNull;
 
 public class Image extends InlineLinkNode {
     private BasedSequence urlContent = BasedSequence.NULL;
 
+    @NotNull
     @Override
     public BasedSequence[] getSegments() {
         return new BasedSequence[] {

@@ -40,6 +40,7 @@ import com.vladsch.flexmark.util.ast.*;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.data.MutableScopedDataSet;
+import com.vladsch.flexmark.util.data.NullableDataKey;
 import com.vladsch.flexmark.util.format.options.ListSpacing;
 import com.vladsch.flexmark.util.html.Attribute;
 import com.vladsch.flexmark.util.html.Attributes;
@@ -76,7 +77,7 @@ import static com.vladsch.flexmark.html.renderer.LinkStatus.UNKNOWN;
 @SuppressWarnings({ "WeakerAccess", "MethodMayBeStatic", "OverlyCoupledClass" })
 public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
     public static final DataKey<Integer> LIST_ITEM_NUMBER = new DataKey<>("LIST_ITEM_NUMBER", 0);
-    public static final DataKey<ListSpacing> LIST_ITEM_SPACING = new DataKey<>("LIST_ITEM_SPACING", (ListSpacing) null);
+    public static final NullableDataKey<ListSpacing> LIST_ITEM_SPACING = new NullableDataKey<>("LIST_ITEM_SPACING");
     public static final HashSet<DocxRendererPhase> RENDERING_PHASES = new HashSet<>(Arrays.asList(
             DocxRendererPhase.COLLECT,
             DocxRendererPhase.DOCUMENT_TOP,
@@ -97,6 +98,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
     protected final int tableLeftIndent;
     protected final String tableStyle;
     private int imageId;
+    @SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
     private final HashMap<Node, BigInteger> footnoteIDs; // cannot re-use footnote ids, so this is dead code, left in for future if needed
     private TocBlockBase lastTocBlock;
     private long[] numberedLists = new long[128];
@@ -211,7 +213,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
     }
 
     public ReferenceRepository getRepository(DataHolder options) {
-        return options.get(Parser.REFERENCES);
+        return Parser.REFERENCES.get(options);
     }
 
     @Override
@@ -670,7 +672,6 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
             }
         } else if (node.getParent() instanceof BulletList) {
             if (node == node.getParent().getFirstChild()) {
-                idNum = numId;
                 ensureBulletListLength(listLevel);
                 bulletLists[listLevel] = idNum;
             } else {
@@ -697,20 +698,20 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
             // inner blocks handle rendering
             docx.renderChildren(node);
         } else {
-            renderHtmlBlock(node, docx, docx.getDocxRendererOptions().suppressHtmlBlocks, true || docx.getDocxRendererOptions().escapeHtmlBlocks);
+            renderHtmlBlock(node, docx, docx.getDocxRendererOptions().suppressHtmlBlocks, true /*|| docx.getDocxRendererOptions().escapeHtmlBlocks*/);
         }
     }
 
     private void render(HtmlCommentBlock node, DocxRendererContext docx) {
-        renderHtmlBlock(node, docx, docx.getDocxRendererOptions().suppressHtmlCommentBlocks, true || docx.getDocxRendererOptions().escapeHtmlCommentBlocks);
+        renderHtmlBlock(node, docx, docx.getDocxRendererOptions().suppressHtmlCommentBlocks, true /*|| docx.getDocxRendererOptions().escapeHtmlCommentBlocks*/);
     }
 
     private void render(HtmlInnerBlock node, DocxRendererContext docx) {
-        renderHtmlBlock(node, docx, docx.getDocxRendererOptions().suppressHtmlBlocks, true || docx.getDocxRendererOptions().escapeHtmlBlocks);
+        renderHtmlBlock(node, docx, docx.getDocxRendererOptions().suppressHtmlBlocks, true /*|| docx.getDocxRendererOptions().escapeHtmlBlocks*/);
     }
 
     private void render(HtmlInnerBlockComment node, DocxRendererContext docx) {
-        renderHtmlBlock(node, docx, docx.getDocxRendererOptions().suppressHtmlCommentBlocks, true || docx.getDocxRendererOptions().escapeHtmlCommentBlocks);
+        renderHtmlBlock(node, docx, docx.getDocxRendererOptions().suppressHtmlCommentBlocks, true /*|| docx.getDocxRendererOptions().escapeHtmlCommentBlocks*/);
     }
 
     public void renderHtmlBlock(HtmlBlockBase node, DocxRendererContext docx, boolean suppress, boolean escape) {
@@ -748,14 +749,14 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
         //if (docx.getDocxRendererOptions().sourceWrapInlineHtml) {
         //    html.srcPos(node.getChars()).withAttr(AttributablePart.NODE_POSITION).tag("span");
         //}
-        renderInlineHtml(node, docx, docx.getDocxRendererOptions().suppressInlineHtml, true || docx.getDocxRendererOptions().escapeInlineHtml);
+        renderInlineHtml(node, docx, docx.getDocxRendererOptions().suppressInlineHtml, true /*|| docx.getDocxRendererOptions().escapeInlineHtml*/);
         //if (docx.getDocxRendererOptions().sourceWrapInlineHtml) {
         //    html.tag("/span");
         //}
     }
 
     private void render(HtmlInlineComment node, DocxRendererContext docx) {
-        renderInlineHtml(node, docx, docx.getDocxRendererOptions().suppressInlineHtmlComments, true || docx.getDocxRendererOptions().escapeInlineHtmlComments);
+        renderInlineHtml(node, docx, docx.getDocxRendererOptions().suppressInlineHtmlComments, true /*|| docx.getDocxRendererOptions().escapeInlineHtmlComments*/);
     }
 
     public void renderInlineHtml(HtmlInlineBase node, DocxRendererContext docx, boolean suppress, boolean escape) {
@@ -1714,7 +1715,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
             } else {
                 if (compoundRunnable != null) {
                     docx.text(defaultText + " ");
-                    if (compoundRunnable != null) compoundRunnable.run();
+                    compoundRunnable.run();
                     docx.text(referenceOrdinal + (needSeparator ? "." : ""));
                 } else {
                     docx.text(defaultText + " " + referenceOrdinal + (needSeparator ? "." : ""));

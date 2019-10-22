@@ -85,7 +85,7 @@ public class MacroDefinitionBlockParser extends AbstractBlockParser {
         block.setCharsFromContent();
 
         // add it to the map
-        MacroDefinitionRepository macrosRepository = state.getProperties().get(MacrosExtension.MACRO_DEFINITIONS);
+        MacroDefinitionRepository macrosRepository = MacrosExtension.MACRO_DEFINITIONS.get(state.getProperties());
         macrosRepository.put(macrosRepository.normalizeKey(block.getName()), block);
     }
 

@@ -15,6 +15,10 @@ import java.util.*;
 public class ZzzzzzRepository extends NodeRepository<ZzzzzzBlock> {
     private ArrayList<ZzzzzzBlock> referencedZzzzzzBlocks = new ArrayList<>();
 
+    public ZzzzzzRepository(DataHolder options) {
+        super(ZzzzzzExtension.ZZZZZZS_KEEP.get(options));
+    }
+
     public void addZzzzzzReference(ZzzzzzBlock zzzzzzBlock, Zzzzzz zzzzzz) {
         if (!zzzzzzBlock.isReferenced()) {
             referencedZzzzzzBlocks.add(zzzzzzBlock);
@@ -34,10 +38,6 @@ public class ZzzzzzRepository extends NodeRepository<ZzzzzzBlock> {
 
     public List<ZzzzzzBlock> getReferencedZzzzzzBlocks() {
         return referencedZzzzzzBlocks;
-    }
-
-    public ZzzzzzRepository(DataHolder options) {
-        super(ZzzzzzExtension.ZZZZZZS_KEEP.get(options));
     }
 
     @Override

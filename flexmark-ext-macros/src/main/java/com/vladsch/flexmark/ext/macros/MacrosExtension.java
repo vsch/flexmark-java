@@ -10,6 +10,7 @@ import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.format.options.ElementPlacement;
 import com.vladsch.flexmark.util.format.options.ElementPlacementSort;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Extension for macros
@@ -24,7 +25,7 @@ public class MacrosExtension implements Parser.ParserExtension
         , Formatter.FormatterExtension
 {
     public static final DataKey<KeepType> MACRO_DEFINITIONS_KEEP = new DataKey<>("MACRO_DEFINITIONS_KEEP", KeepType.FIRST); // standard option to allow control over how to handle duplicates
-    public static final DataKey<MacroDefinitionRepository> MACRO_DEFINITIONS = new DataKey<>("MACRO_DEFINITIONS", MacroDefinitionRepository::new);
+    public static final DataKey<MacroDefinitionRepository> MACRO_DEFINITIONS = new DataKey<>("MACRO_DEFINITIONS", new MacroDefinitionRepository(null), MacroDefinitionRepository::new);
     //public static final DataKey<Boolean> MACROS_OPTION1 = new DataKey<>("MACROS_OPTION1", false);
     //public static final DataKey<String> MACROS_OPTION2 = new DataKey<>("MACROS_OPTION2", "default");
     //public static final DataKey<Integer> MACROS_OPTION3 = new DataKey<>("MACROS_OPTION3", Integer.MAX_VALUE);
@@ -43,7 +44,7 @@ public class MacrosExtension implements Parser.ParserExtension
     }
 
     @Override
-    public void rendererOptions(MutableDataHolder options) {
+    public void rendererOptions(@NotNull MutableDataHolder options) {
 
     }
 

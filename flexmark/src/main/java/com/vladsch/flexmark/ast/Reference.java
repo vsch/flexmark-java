@@ -5,12 +5,14 @@ import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.ast.ReferenceNode;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
+import org.jetbrains.annotations.NotNull;
 
 public class Reference extends LinkNodeBase implements ReferenceNode<ReferenceRepository, Reference, RefNode> {
     protected BasedSequence openingMarker = BasedSequence.NULL;
     protected BasedSequence reference = BasedSequence.NULL;
     protected BasedSequence closingMarker = BasedSequence.NULL;
 
+    @NotNull
     @Override
     public BasedSequence[] getSegments() {
         return new BasedSequence[] {
@@ -29,6 +31,7 @@ public class Reference extends LinkNodeBase implements ReferenceNode<ReferenceRe
         };
     }
 
+    @NotNull
     @Override
     public BasedSequence[] getSegmentsForChars() {
         return new BasedSequence[] {

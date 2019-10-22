@@ -3,6 +3,7 @@ package com.vladsch.flexmark.ext.wikilink;
 import com.vladsch.flexmark.util.ast.DoNotDecorate;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import org.jetbrains.annotations.NotNull;
 
 public class WikiNode extends Node implements DoNotDecorate {
     protected BasedSequence openingMarker = BasedSequence.NULL;
@@ -15,6 +16,7 @@ public class WikiNode extends Node implements DoNotDecorate {
     protected BasedSequence closingMarker = BasedSequence.NULL;
     protected final boolean linkIsFirst;
 
+    @NotNull
     @Override
     public BasedSequence[] getSegments() {
         if (linkIsFirst) {

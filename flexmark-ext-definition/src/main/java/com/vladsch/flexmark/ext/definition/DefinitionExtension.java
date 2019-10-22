@@ -7,6 +7,7 @@ import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.format.options.DefinitionMarker;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Extension for definitions
@@ -38,7 +39,7 @@ public class DefinitionExtension implements Parser.ParserExtension, HtmlRenderer
     }
 
     @Override
-    public void rendererOptions(MutableDataHolder options) {
+    public void rendererOptions(@NotNull MutableDataHolder options) {
 
     }
 

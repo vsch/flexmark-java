@@ -13,6 +13,7 @@ import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -67,7 +68,7 @@ public class TocSubContextSample2 {
 
     static class CustomExtension implements HtmlRendererExtension {
         @Override
-        public void rendererOptions(MutableDataHolder options) {
+        public void rendererOptions(@NotNull MutableDataHolder options) {
 
         }
 
@@ -93,7 +94,7 @@ public class TocSubContextSample2 {
                 "### Heading 1.1.2  **_some bold italic_**\n" +
                 "");
         String html = RENDERER.render(document);
-        String toc = document.get(TOC_HTML);
+        String toc = TOC_HTML.get(document);
 
         System.out.println("<div class=\"toc\">");
         System.out.print(toc);

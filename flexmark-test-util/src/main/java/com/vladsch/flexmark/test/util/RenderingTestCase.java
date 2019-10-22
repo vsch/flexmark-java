@@ -128,7 +128,7 @@ public abstract class RenderingTestCase implements SpecExampleProcessor {
             actual = TestUtils.addSpecExample(true, source, html, ast, optionsSet);
         }
 
-        if (exampleOptions != null && exampleOptions.get(TestUtils.FAIL)) {
+        if (exampleOptions != null && TestUtils.FAIL.get(exampleOptions)) {
             thrown.expect(ComparisonFailure.class);
         }
 

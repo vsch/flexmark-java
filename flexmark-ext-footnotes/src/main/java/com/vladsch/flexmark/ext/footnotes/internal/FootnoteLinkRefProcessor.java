@@ -17,7 +17,7 @@ public class FootnoteLinkRefProcessor implements LinkRefProcessor {
     private final FootnoteRepository footnoteRepository;
 
     public FootnoteLinkRefProcessor(Document document) {
-        this.footnoteRepository = document.get(FootnoteExtension.FOOTNOTES);
+        this.footnoteRepository = FootnoteExtension.FOOTNOTES.get(document);
     }
 
     @Override

@@ -2,6 +2,7 @@ package com.vladsch.flexmark.ext.tables;
 
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Table row of a {@link TableHead} or {@link TableBody} containing {@link TableCell TableCells}.
@@ -18,6 +19,7 @@ public class TableRow extends Node {
         if (rowNumber != 0) out.append(" rowNumber=").append(rowNumber);
     }
 
+    @NotNull
     @Override
     public BasedSequence[] getSegments() {
         return EMPTY_SEGMENTS;

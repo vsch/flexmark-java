@@ -10,6 +10,7 @@ import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.format.options.ElementPlacement;
 import com.vladsch.flexmark.util.format.options.ElementPlacementSort;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Extension for enumerated_references
@@ -28,8 +29,8 @@ public class EnumeratedReferenceExtension implements Parser.ParserExtension
         , Formatter.FormatterExtension
 {
     public static final DataKey<KeepType> ENUMERATED_REFERENCES_KEEP = new DataKey<>("ENUMERATED_REFERENCES_KEEP", KeepType.FIRST); // standard option to allow control over how to handle duplicates
-    public static final DataKey<EnumeratedReferenceRepository> ENUMERATED_REFERENCES = new DataKey<>("ENUMERATED_REFERENCES", EnumeratedReferenceRepository::new);
-    public static final DataKey<EnumeratedReferences> ENUMERATED_REFERENCE_ORDINALS = new DataKey<>("ENUMERATED_REFERENCE_ORDINALS", EnumeratedReferences::new);
+    public static final DataKey<EnumeratedReferenceRepository> ENUMERATED_REFERENCES = new DataKey<>("ENUMERATED_REFERENCES", new EnumeratedReferenceRepository(null), EnumeratedReferenceRepository::new);
+    public static final DataKey<EnumeratedReferences> ENUMERATED_REFERENCE_ORDINALS = new DataKey<>("ENUMERATED_REFERENCE_ORDINALS", new EnumeratedReferences(null), EnumeratedReferences::new);
 
     // formatter options
     public static final DataKey<ElementPlacement> ENUMERATED_REFERENCE_PLACEMENT = new DataKey<>("ENUMERATED_REFERENCE_PLACEMENT", ElementPlacement.AS_IS);
@@ -43,7 +44,7 @@ public class EnumeratedReferenceExtension implements Parser.ParserExtension
     }
 
     @Override
-    public void rendererOptions(MutableDataHolder options) {
+    public void rendererOptions(@NotNull MutableDataHolder options) {
 
     }
 

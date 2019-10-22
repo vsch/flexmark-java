@@ -104,13 +104,13 @@ public class HtmlBlockParser extends AbstractBlockParser {
         this.closingPattern = closingPattern;
         this.block = isComment ? new HtmlCommentBlock() : new HtmlBlock();
         this.deepParser = deepParser;
-        this.parseInnerHtmlComments = options.get(Parser.PARSE_INNER_HTML_COMMENTS);
+        this.parseInnerHtmlComments = Parser.PARSE_INNER_HTML_COMMENTS.get(options);
         //this.htmlBlockDeepParser = options.get(Parser.HTML_BLOCK_DEEP_PARSER);
-        this.myHtmlBlockDeepParseNonBlock = options.get(Parser.HTML_BLOCK_DEEP_PARSE_NON_BLOCK);
-        this.myHtmlBlockDeepParseBlankLineInterrupts = options.get(Parser.HTML_BLOCK_DEEP_PARSE_BLANK_LINE_INTERRUPTS);
-        this.myHtmlBlockDeepParseMarkdownInterruptsClosed = options.get(Parser.HTML_BLOCK_DEEP_PARSE_MARKDOWN_INTERRUPTS_CLOSED);
-        this.myHtmlBlockDeepParseBlankLineInterruptsPartialTag = options.get(Parser.HTML_BLOCK_DEEP_PARSE_BLANK_LINE_INTERRUPTS_PARTIAL_TAG);
-        this.myHtmlBlockDeepParseIndentedCodeInterrupts = options.get(Parser.HTML_BLOCK_DEEP_PARSE_INDENTED_CODE_INTERRUPTS);
+        this.myHtmlBlockDeepParseNonBlock = Parser.HTML_BLOCK_DEEP_PARSE_NON_BLOCK.get(options);
+        this.myHtmlBlockDeepParseBlankLineInterrupts = Parser.HTML_BLOCK_DEEP_PARSE_BLANK_LINE_INTERRUPTS.get(options);
+        this.myHtmlBlockDeepParseMarkdownInterruptsClosed = Parser.HTML_BLOCK_DEEP_PARSE_MARKDOWN_INTERRUPTS_CLOSED.get(options);
+        this.myHtmlBlockDeepParseBlankLineInterruptsPartialTag = Parser.HTML_BLOCK_DEEP_PARSE_BLANK_LINE_INTERRUPTS_PARTIAL_TAG.get(options);
+        this.myHtmlBlockDeepParseIndentedCodeInterrupts = Parser.HTML_BLOCK_DEEP_PARSE_INDENTED_CODE_INTERRUPTS.get(options);
         //this.myHtmlBlockDeepParseOpenTagsOnOneLine = options.get(Parser.HTML_BLOCK_DEEP_PARSE_FIRST_OPEN_TAG_ON_ONE_LINE);
     }
 
@@ -288,11 +288,11 @@ public class HtmlBlockParser extends AbstractBlockParser {
         private BlockFactory(DataHolder options) {
             super(options);
             myHtmlCommentBlocksInterruptParagraph = Parser.HTML_COMMENT_BLOCKS_INTERRUPT_PARAGRAPH.get(options);
-            this.myHtmlBlockDeepParser = options.get(Parser.HTML_BLOCK_DEEP_PARSER);
-            this.myHtmlBlockDeepParseNonBlock = options.get(Parser.HTML_BLOCK_DEEP_PARSE_NON_BLOCK);
-            this.myHtmlBlockDeepParseFirstOpenTagOnOneLine = options.get(Parser.HTML_BLOCK_DEEP_PARSE_FIRST_OPEN_TAG_ON_ONE_LINE);
-            this.myHtmlBlockCommentOnlyFullLine = options.get(Parser.HTML_BLOCK_COMMENT_ONLY_FULL_LINE);
-            this.myHtmlBlockStartOnlyOnBlockTags = options.get(Parser.HTML_BLOCK_START_ONLY_ON_BLOCK_TAGS);
+            this.myHtmlBlockDeepParser = Parser.HTML_BLOCK_DEEP_PARSER.get(options);
+            this.myHtmlBlockDeepParseNonBlock = Parser.HTML_BLOCK_DEEP_PARSE_NON_BLOCK.get(options);
+            this.myHtmlBlockDeepParseFirstOpenTagOnOneLine = Parser.HTML_BLOCK_DEEP_PARSE_FIRST_OPEN_TAG_ON_ONE_LINE.get(options);
+            this.myHtmlBlockCommentOnlyFullLine = Parser.HTML_BLOCK_COMMENT_ONLY_FULL_LINE.get(options);
+            this.myHtmlBlockStartOnlyOnBlockTags = Parser.HTML_BLOCK_START_ONLY_ON_BLOCK_TAGS.get(options);
         }
 
         @Override

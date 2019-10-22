@@ -23,8 +23,8 @@ public class ZzzzzzAttributeProvider implements AttributeProvider {
 
     public ZzzzzzAttributeProvider(LinkResolverContext context) {
         DataHolder options = context.getOptions();
-        this.localOnlyTargetClass = options.get(ZzzzzzExtension.LOCAL_ONLY_TARGET_CLASS);
-        this.missingTargetClass = options.get(ZzzzzzExtension.MISSING_TARGET_CLASS);
+        this.localOnlyTargetClass = ZzzzzzExtension.LOCAL_ONLY_TARGET_CLASS.get(options);
+        this.missingTargetClass = ZzzzzzExtension.MISSING_TARGET_CLASS.get(options);
 
         this.nodeAdapter = new AttributeProviderAdapter(
                 new AttributeProvidingHandler<>(Image.class, this::setLinkAttributes),

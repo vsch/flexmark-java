@@ -5,6 +5,7 @@ import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSetter;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 
@@ -176,7 +177,8 @@ public class ListOptions implements MutableDataSetter {
         return new MutableListOptions(this);
     }
 
-    public MutableDataHolder setIn(MutableDataHolder options) {
+    @NotNull
+    public MutableDataHolder setIn(@NotNull MutableDataHolder options) {
         options.set(Parser.PARSER_EMULATION_PROFILE, getParserEmulationProfile());
         getItemInterrupt().setIn(options);
 

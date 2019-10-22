@@ -4,6 +4,7 @@ import com.vladsch.flexmark.ext.gitlab.GitLabExtension;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSetter;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.HashSet;
 
@@ -53,8 +54,9 @@ public class GitLabOptions implements MutableDataSetter {
         }
     }
 
+    @NotNull
     @Override
-    public MutableDataHolder setIn(MutableDataHolder dataHolder) {
+    public MutableDataHolder setIn(@NotNull MutableDataHolder dataHolder) {
         dataHolder.set(GitLabExtension.INS_PARSER, insParser);
         dataHolder.set(GitLabExtension.DEL_PARSER, delParser);
         dataHolder.set(GitLabExtension.INLINE_MATH_PARSER, inlineMathParser);

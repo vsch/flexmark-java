@@ -4,6 +4,7 @@ import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.youtrack.converter.internal.YouTrackConverterNodeRenderer;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Extension for youtrack_converters
@@ -26,7 +27,7 @@ public class YouTrackConverterExtension implements Parser.ParserExtension, HtmlR
     }
 
     @Override
-    public void rendererOptions(MutableDataHolder options) {
+    public void rendererOptions(@NotNull MutableDataHolder options) {
         String rendererType = HtmlRenderer.TYPE.get(options);
         if (rendererType.equals("HTML")) {
             // add youtrack equivalence

@@ -6,7 +6,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.*;
 
 public class DataSet implements DataHolder {
-    protected final HashMap<DataKey<?>, Object> dataSet;
+    protected final HashMap<DataKeyBase<?>, Object> dataSet;
 
     public DataSet() {
         this(null);
@@ -69,30 +69,27 @@ public class DataSet implements DataHolder {
         }
     }
 
-    @NotNull
     @Override
-    public Map<DataKey<?>, Object> getAll() {
+    public @NotNull Map<? extends DataKeyBase<?>, Object> getAll() {
         return dataSet;
     }
 
-    @NotNull
     @Override
-    public Collection<DataKey<?>> getKeys() {
+    public @NotNull Collection<? extends DataKeyBase<?>> getKeys() {
         return dataSet.keySet();
     }
 
     @Override
-    public boolean contains(@NotNull DataKey<?> key) {
+    public boolean contains(@NotNull DataKeyBase<?> key) {
         return dataSet.containsKey(key);
     }
 
     @Override
-    public <T> T get(@NotNull DataKey<T> key) {
+    public @Nullable Object getOrCompute(@NotNull DataKeyBase<?> key, @NotNull DataValueFactory<?> factory) {
         if (dataSet.containsKey(key)) {
-            //noinspection unchecked
-            return (T) dataSet.get(key);
+            return dataSet.get(key);
         } else {
-            return key.getDefaultValue(this);
+            return factory.apply(this);
         }
     }
 
@@ -114,6 +111,11 @@ public class DataSet implements DataHolder {
     @NotNull
     @Override
     public DataSet toImmutable() {
+        return this;
+    }
+
+    @Override
+    public @NotNull DataSet toDataSet() {
         return this;
     }
 

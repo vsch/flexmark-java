@@ -105,8 +105,8 @@ public abstract class TranslationFormatterSpecTest extends FormatterTranslationS
 
         public TranslationFormatter(Formatter formatter) {
             myFormatter = formatter;
-            myShowIntermediate = myFormatter.getOptions().get(DETAILS);
-            myShowIntermediateAst = myFormatter.getOptions().get(AST_DETAILS);
+            myShowIntermediate = DETAILS.get(myFormatter.getOptions());
+            myShowIntermediateAst = AST_DETAILS.get(myFormatter.getOptions());
         }
 
         public boolean isShowIntermediate() {

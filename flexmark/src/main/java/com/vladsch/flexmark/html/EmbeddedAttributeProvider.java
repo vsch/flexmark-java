@@ -5,6 +5,7 @@ import com.vladsch.flexmark.html.renderer.LinkResolverContext;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.html.Attributes;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Provider which will provide attributes stored in the node's first {@link EmbeddedNodeAttributes} of the node's children
@@ -18,7 +19,7 @@ public class EmbeddedAttributeProvider implements AttributeProvider {
         }
     };
 
-    private EmbeddedAttributeProvider() {
+    EmbeddedAttributeProvider() {
     }
 
     @Override
@@ -40,13 +41,14 @@ public class EmbeddedAttributeProvider implements AttributeProvider {
             this.attributes = attributes;
         }
 
+        @NotNull
         @Override
         public BasedSequence[] getSegments() {
             return Node.EMPTY_SEGMENTS;
         }
 
         @Override
-        public void astString(StringBuilder out, boolean withExtra) {
+        public void astString(@NotNull StringBuilder out, boolean withExtra) {
             out.append(EmbeddedNodeAttributes.class.getSimpleName());
             out.append("[").append(getStartOffset()).append(", ").append(getEndOffset()).append("]");
             out.append(", attributes: ").append(attributes.toString());
@@ -55,7 +57,7 @@ public class EmbeddedAttributeProvider implements AttributeProvider {
         }
 
         @Override
-        public void astExtraChars(StringBuilder out) {
+        public void astExtraChars(@NotNull StringBuilder out) {
         }
     }
 }

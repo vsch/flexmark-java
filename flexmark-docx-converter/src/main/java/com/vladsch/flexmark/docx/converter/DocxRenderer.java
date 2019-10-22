@@ -140,7 +140,7 @@ public class DocxRenderer implements IRender {
 
     public static final DataKey<String> DOC_EMOJI_ROOT_IMAGE_PATH = new DataKey<>("DOC_EMOJI_ROOT_IMAGE_PATH", EMOJI_RESOURCE_PREFIX, options -> {
         if (options.contains(EmojiExtension.ROOT_IMAGE_PATH)) {
-            return options.get(EmojiExtension.ROOT_IMAGE_PATH);
+            return EmojiExtension.ROOT_IMAGE_PATH.get(options);
         }
 
         // kludge it to use our resources
@@ -298,7 +298,7 @@ public class DocxRenderer implements IRender {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         try {
             mlPackage.save(outputStream, Docx4J.FLAG_SAVE_FLAT_XML);
-            String s = options.get(RENDER_BODY_ONLY) ? XmlFormatter.formatDocumentBody(outputStream.toString("UTF-8"))
+            String s = RENDER_BODY_ONLY.get(options) ? XmlFormatter.formatDocumentBody(outputStream.toString("UTF-8"))
                     : XmlDocxSorter.sortDocumentParts(outputStream.toString("UTF-8"));
             return s;
         } catch (Docx4JException e) {
@@ -367,7 +367,7 @@ public class DocxRenderer implements IRender {
                 return true;
             } else if (extension instanceof RendererExtension) {
                 RendererExtension htmlRendererExtension = (RendererExtension) extension;
-                htmlRendererExtension.extend(this, this.get(HtmlRenderer.TYPE));
+                htmlRendererExtension.extend(this, HtmlRenderer.TYPE.get(this));
                 return true;
             }
             return false;

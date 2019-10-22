@@ -42,7 +42,7 @@ public class LoadUnloadDataKeyAggregatorTest {
         DataHolder OPTIONS = new MutableDataSet();
 
         DataHolder result = TestUtils.getOptions(SpecExample.NULL, "load1", LoadUnloadDataKeyAggregatorTest::getOption);
-        assertEquals(Collections.singletonList(Extension1.class), toClasses(result.get(LOAD_EXTENSIONS)));
+        assertEquals(Collections.singletonList(Extension1.class), toClasses(LOAD_EXTENSIONS.get(result)));
     }
 
     @Test
@@ -50,14 +50,14 @@ public class LoadUnloadDataKeyAggregatorTest {
         DataHolder OPTIONS = new MutableDataSet();
 
         DataHolder result = TestUtils.getOptions(SpecExample.NULL, "load1,load3", LoadUnloadDataKeyAggregatorTest::getOption);
-        assertEquals(Arrays.asList(Extension1.class, Extension3.class), toClasses(result.get(LOAD_EXTENSIONS)));
+        assertEquals(Arrays.asList(Extension1.class, Extension3.class), toClasses(LOAD_EXTENSIONS.get(result)));
         DataHolder result1 = DataSet.aggregate(OPTIONS, result);
-        assertEquals(Arrays.asList(Extension1.class, Extension3.class), toClasses(result1.get(SharedDataKeys.EXTENSIONS)));
+        assertEquals(Arrays.asList(Extension1.class, Extension3.class), toClasses(SharedDataKeys.EXTENSIONS.get(result1)));
 
         DataHolder result2 = TestUtils.getOptions(SpecExample.NULL, "unload1,unload2", LoadUnloadDataKeyAggregatorTest::getOption);
 
         DataHolder result3 = DataSet.aggregate(result1, result2);
-        assertEquals(Collections.singletonList(Extension3.class), toClasses(result3.get(SharedDataKeys.EXTENSIONS)));
+        assertEquals(Collections.singletonList(Extension3.class), toClasses(SharedDataKeys.EXTENSIONS.get(result3)));
     }
 
     static Collection<Class<?>> toClasses(Collection<Extension> extensions) {

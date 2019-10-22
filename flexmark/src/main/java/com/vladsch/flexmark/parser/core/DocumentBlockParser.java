@@ -48,7 +48,7 @@ public class DocumentBlockParser extends AbstractBlockParser implements BlankLin
 
     @Override
     public void closeBlock(ParserState state) {
-        if (state.getProperties().get(TRACK_DOCUMENT_LINES)) {
+        if (TRACK_DOCUMENT_LINES.get(state.getProperties())) {
             document.setContent(state.getLineSegments());
         }
     }

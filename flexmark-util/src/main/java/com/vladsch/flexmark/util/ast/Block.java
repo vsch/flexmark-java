@@ -1,6 +1,8 @@
 package com.vladsch.flexmark.util.ast;
 
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
@@ -24,12 +26,13 @@ public abstract class Block extends ContentNode {
         super(blockContent);
     }
 
+    @Nullable
     public Block getParent() {
         return (Block) super.getParent();
     }
 
     @Override
-    protected void setParent(Node parent) {
+    protected void setParent(@Nullable Node parent) {
         if (!(parent instanceof Block)) {
             throw new IllegalArgumentException("Parent of block must also be block (can not be inline)");
         }

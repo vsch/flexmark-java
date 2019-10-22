@@ -6,6 +6,7 @@ import com.vladsch.flexmark.ext.gfm.tasklist.TaskListItemPlacement;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSetter;
+import org.jetbrains.annotations.NotNull;
 
 @SuppressWarnings("WeakerAccess")
 public class FormatOptions implements MutableDataSetter {
@@ -21,8 +22,9 @@ public class FormatOptions implements MutableDataSetter {
         taskListItemPlacement = TaskListExtension.FORMAT_LIST_ITEM_PLACEMENT.get(options);
     }
 
+    @NotNull
     @Override
-    public MutableDataHolder setIn(MutableDataHolder dataHolder) {
+    public MutableDataHolder setIn(@NotNull MutableDataHolder dataHolder) {
         dataHolder.set(TaskListExtension.FORMAT_LIST_ITEM_CASE, taskListItemCase);
         dataHolder.set(TaskListExtension.FORMAT_LIST_ITEM_PLACEMENT, taskListItemPlacement);
         return dataHolder;

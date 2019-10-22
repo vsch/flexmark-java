@@ -3,6 +3,7 @@ package com.vladsch.flexmark.ext.zzzzzz;
 import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * A Zzzzzz block node
@@ -48,6 +49,7 @@ public class ZzzzzzBlock extends Block {
         segmentSpan(out, zzzzzz, "zzzzzz");
     }
 
+    @NotNull
     @Override
     public BasedSequence[] getSegments() {
         return new BasedSequence[] { openingMarker, text, closingMarker, zzzzzz };

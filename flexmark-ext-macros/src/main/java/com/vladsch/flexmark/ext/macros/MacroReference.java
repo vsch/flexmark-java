@@ -7,6 +7,7 @@ import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.ast.ReferencingNode;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * A MacroReference node
@@ -30,7 +31,7 @@ public class MacroReference extends Node implements DelimitedNode, DoNotDecorate
     @Override
     public MacroDefinitionBlock getReferenceNode(Document document) {
         if (myMacroDefinitionBlock != null || text.isEmpty()) return myMacroDefinitionBlock;
-        myMacroDefinitionBlock = getMacroDefinitionBlock(document.get(MacrosExtension.MACRO_DEFINITIONS));
+        myMacroDefinitionBlock = getMacroDefinitionBlock(MacrosExtension.MACRO_DEFINITIONS.get(document));
         return myMacroDefinitionBlock;
     }
 
@@ -53,6 +54,7 @@ public class MacroReference extends Node implements DelimitedNode, DoNotDecorate
         this.myMacroDefinitionBlock = macroDefinitionBlock;
     }
 
+    @NotNull
     @Override
     public BasedSequence[] getSegments() {
         //return EMPTY_SEGMENTS;

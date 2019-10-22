@@ -8,6 +8,7 @@ import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.ast.*;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 import java.util.function.BiConsumer;
@@ -20,7 +21,7 @@ public class GfmUsersIssuesSample {
         Document document = parser.parse("Hello, @world, and #1!");
         new NodeVisitor(new VisitHandler<?>[] { }) {
             @Override
-            public void processNode(Node node, boolean withChildren, BiConsumer<Node, Visitor<Node>> processor) {
+            public void processNode(@NotNull Node node, boolean withChildren, @NotNull BiConsumer<Node, Visitor<Node>> processor) {
                 System.out.println("Node: " + node);
                 super.processNode(node, withChildren, processor);
             }

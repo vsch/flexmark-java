@@ -3,6 +3,7 @@ package com.vladsch.flexmark.ext.jekyll.front.matter;
 import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * A JekyllFrontMatter block node
@@ -18,6 +19,7 @@ public class JekyllFrontMatterBlock extends Block {
         segmentSpan(out, closingMarker, "close");
     }
 
+    @NotNull
     @Override
     public BasedSequence[] getSegments() {
         return new BasedSequence[] { openingMarker, closingMarker };

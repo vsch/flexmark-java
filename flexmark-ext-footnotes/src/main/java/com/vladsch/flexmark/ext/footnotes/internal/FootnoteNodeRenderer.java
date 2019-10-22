@@ -24,7 +24,7 @@ public class FootnoteNodeRenderer implements PhasedNodeRenderer {
 
     public FootnoteNodeRenderer(DataHolder options) {
         this.options = new FootnoteOptions(options);
-        this.footnoteRepository = options.get(FootnoteExtension.FOOTNOTES);
+        this.footnoteRepository = FootnoteExtension.FOOTNOTES.get(options);
         this.recheckUndefinedReferences = HtmlRenderer.RECHECK_UNDEFINED_REFERENCES.get(options);
         this.footnoteRepository.resolveFootnoteOrdinals();
     }

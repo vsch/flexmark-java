@@ -56,7 +56,7 @@ public class ListItemParser extends AbstractBlockParser {
         // Issue 66, fenced code can only be contained in GitHub Doc mode if it is indented more than list item
         if (block instanceof FencedCodeBlock) {
             // see if it indented more than our marker
-            if (state.getProperties().get(PARSER_EMULATION_PROFILE) == GITHUB_DOC) {
+            if (PARSER_EMULATION_PROFILE.get(state.getProperties()) == GITHUB_DOC) {
                 // Issue #66, if we are in a list item and our indent == list indent then we interrupt the list
                 FencedCodeBlockParser parser = (FencedCodeBlockParser) blockParser;
                 return myListData.markerIndent < parser.getFenceMarkerIndent();

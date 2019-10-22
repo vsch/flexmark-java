@@ -7,6 +7,8 @@ import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
+import com.vladsch.flexmark.util.data.NullableDataKey;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Extension for ins
@@ -16,8 +18,8 @@ import com.vladsch.flexmark.util.data.MutableDataHolder;
  * The parsed ins text is turned into {@link Ins} nodes.
  */
 public class InsExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension {
-    public static final DataKey<String> INS_STYLE_HTML_OPEN = new DataKey<>("INS_STYLE_HTML_OPEN", (String) null);
-    public static final DataKey<String> INS_STYLE_HTML_CLOSE = new DataKey<>("INS_STYLE_HTML_CLOSE", (String) null);
+    public static final NullableDataKey<String> INS_STYLE_HTML_OPEN = new NullableDataKey<>("INS_STYLE_HTML_OPEN");
+    public static final NullableDataKey<String> INS_STYLE_HTML_CLOSE = new NullableDataKey<>("INS_STYLE_HTML_CLOSE");
 
     private InsExtension() {
     }
@@ -27,7 +29,7 @@ public class InsExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRe
     }
 
     @Override
-    public void rendererOptions(MutableDataHolder options) {
+    public void rendererOptions(@NotNull MutableDataHolder options) {
 
     }
 

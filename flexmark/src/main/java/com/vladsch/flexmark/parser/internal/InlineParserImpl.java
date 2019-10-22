@@ -82,7 +82,7 @@ public class InlineParserImpl extends LightInlineParserImpl implements InlinePar
     @Override
     public void initializeDocument(Document document) {
         this.document = document;
-        this.referenceRepository = document.get(Parser.REFERENCES);
+        this.referenceRepository = Parser.REFERENCES.get(document);
 
         linkRefProcessors = new ArrayList<>(linkRefProcessorsData.processors.size());
         for (LinkRefProcessorFactory factory : linkRefProcessorsData.processors) {
@@ -115,7 +115,7 @@ public class InlineParserImpl extends LightInlineParserImpl implements InlinePar
 
     @Override
     public void finalizeDocument(Document document) {
-        assert this.referenceRepository == document.get(Parser.REFERENCES);
+        assert this.referenceRepository == Parser.REFERENCES.get(document);
 
         if (inlineParserExtensions != null) {
             for (List<InlineParserExtension> extensionList : inlineParserExtensions.values()) {
@@ -1619,12 +1619,7 @@ public class InlineParserImpl extends LightInlineParserImpl implements InlinePar
             CharSequence chars = factory.getCharacters();
             for (int i = 0; i < chars.length(); i++) {
                 char c = chars.charAt(i);
-                List<InlineParserExtensionFactory> list = extensionMap.get(c);
-                if (list == null) {
-                    list = new ArrayList<>();
-                    extensionMap.put(c, list);
-                }
-
+                List<InlineParserExtensionFactory> list = extensionMap.computeIfAbsent(c, k -> new ArrayList<>());
                 list.add(factory);
             }
         }
@@ -1675,10 +1670,10 @@ public class InlineParserImpl extends LightInlineParserImpl implements InlinePar
     public static Map<Character, DelimiterProcessor> calculateDelimiterProcessors(DataHolder options, List<DelimiterProcessor> delimiterProcessors) {
         Map<Character, DelimiterProcessor> map = new HashMap<>();
         //addDelimiterProcessors(Arrays.asList(new AsteriskDelimiterProcessor(), new UnderscoreDelimiterProcessor()), map);
-        if (options.get(Parser.ASTERISK_DELIMITER_PROCESSOR)) {
+        if (Parser.ASTERISK_DELIMITER_PROCESSOR.get(options)) {
             addDelimiterProcessors(Collections.singletonList(new AsteriskDelimiterProcessor(Parser.STRONG_WRAPS_EMPHASIS.get(options))), map);
         }
-        if (options.get(Parser.UNDERSCORE_DELIMITER_PROCESSOR)) {
+        if (Parser.UNDERSCORE_DELIMITER_PROCESSOR.get(options)) {
             addDelimiterProcessors(Collections.singletonList(new UnderscoreDelimiterProcessor(Parser.STRONG_WRAPS_EMPHASIS.get(options))), map);
         }
 

@@ -1,5 +1,7 @@
 package com.vladsch.flexmark.util.ast;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Collection;
 import java.util.function.BiConsumer;
 
@@ -27,7 +29,7 @@ public class BlockNodeVisitor extends NodeVisitor {
     }
 
     @Override
-    public void processNode(Node node, boolean withChildren, BiConsumer<Node, Visitor<Node>> processor) {
+    public void processNode(@NotNull Node node, boolean withChildren, @NotNull BiConsumer<Node, Visitor<Node>> processor) {
         if (node instanceof Block) {
             super.processNode(node, withChildren, processor);
         }

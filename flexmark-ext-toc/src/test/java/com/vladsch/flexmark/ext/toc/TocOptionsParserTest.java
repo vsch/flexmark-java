@@ -110,6 +110,7 @@ public class TocOptionsParserTest extends ComboSpecTestCase {
             return options;
         }
 
+        @NotNull
         @Override
         public BasedSequence[] getSegments() {
             return EMPTY_SEGMENTS;
@@ -121,6 +122,7 @@ public class TocOptionsParserTest extends ComboSpecTestCase {
             if (message != null) out.append(" message:").append(message);
         }
 
+        @NotNull
         @Override
         public String getNodeName() {
             return nodeType;

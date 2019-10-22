@@ -36,6 +36,7 @@ import com.vladsch.flexmark.test.util.spec.ResourceLocation;
 import com.vladsch.flexmark.test.util.spec.SpecExample;
 import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.data.DataHolder;
+import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import com.vladsch.flexmark.util.format.options.ElementPlacement;
 import com.vladsch.flexmark.util.format.options.ElementPlacementSort;
@@ -138,7 +139,7 @@ public class ComboFormatterIssueSpecTest extends ComboSpecTestCase {
             protected void adjustParserForInclusion() {
                 super.adjustParserForInclusion();
 
-                AbbreviationRepository abbreviationRepository = ((Document) getIncludedDocument()).get(AbbreviationExtension.ABBREVIATIONS);
+                AbbreviationRepository abbreviationRepository = AbbreviationExtension.ABBREVIATIONS.get((MutableDataHolder) ((Document) getIncludedDocument()));
                 if (!abbreviationRepository.isEmpty()) {
                     DataHolder withAbbreviations = getOptions().toMutable().set(AbbreviationExtension.ABBREVIATIONS, abbreviationRepository).toImmutable();
                     // need to transfer it to new instance of parser

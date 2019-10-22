@@ -18,6 +18,7 @@ import com.vladsch.flexmark.util.dependency.ResolvedDependencies;
 import java.util.*;
 
 public class PostProcessorManager {
+    @SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
     private static final HashMap<DataKey<Boolean>, PostProcessorFactory> CORE_POST_PROCESSORS = new HashMap<>();
     static {
         //CORE_POST_PROCESSORS.put(Parser.REFERENCE_PARAGRAPH_PRE_PROCESSOR, new ReferencePreProcessorFactory());
@@ -119,9 +120,9 @@ public class PostProcessorManager {
     }
 
     public static class PostProcessorDependencyStage {
-        private final Map<Class<? extends Node>, Set<Class<?>>> myNodeMap;
-        private final boolean myWithExclusions;
-        private final List<PostProcessorFactory> dependents;
+        final Map<Class<? extends Node>, Set<Class<?>>> myNodeMap;
+        final boolean myWithExclusions;
+        final List<PostProcessorFactory> dependents;
 
         public PostProcessorDependencyStage(List<PostProcessorFactory> dependents) {
             // compute mappings
@@ -141,7 +142,7 @@ public class PostProcessorManager {
                             Set<Class<?>> value = entry.getValue();
                             if (classes == null) {
                                 // copy so it is not modified by additional dependencies injecting other exclusions by mistake
-                                classes = new HashSet(value);
+                                classes = new HashSet<>(value);
                                 //noinspection unchecked
                                 nodeMap.put((Class<? extends Node>) entry.getKey(), classes);
                             } else {
@@ -186,6 +187,8 @@ public class PostProcessorManager {
     }
 
     private static class PostProcessDependencyHandler extends DependencyHandler<PostProcessorFactory, PostProcessorDependencyStage, PostProcessorDependencies> {
+        PostProcessDependencyHandler() {}
+
         @Override
         protected Class<? extends PostProcessorFactory> getDependentClass(PostProcessorFactory dependent) {
             return dependent.getClass();

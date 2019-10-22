@@ -37,8 +37,8 @@ public class FencedCodeBlockParser extends AbstractBlockParser {
         this.fenceLength = fenceLength;
         this.fenceIndent = fenceIndent;
         this.fenceMarkerIndent = fenceIndent + fenceMarkerIndent;
-        this.matchingCloser = options.get(Parser.MATCH_CLOSING_FENCE_CHARACTERS);
-        this.codeContentBlock = options.get(Parser.FENCED_CODE_CONTENT_BLOCK);
+        this.matchingCloser = Parser.MATCH_CLOSING_FENCE_CHARACTERS.get(options);
+        this.codeContentBlock = Parser.FENCED_CODE_CONTENT_BLOCK.get(options);
     }
 
     @Override

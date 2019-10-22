@@ -4,6 +4,7 @@ import com.vladsch.flexmark.html.renderer.AttributablePart;
 import com.vladsch.flexmark.html.renderer.LinkStatus;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
 import com.vladsch.flexmark.html.renderer.ResolvedLink;
+import com.vladsch.flexmark.util.data.DataKeyBase;
 import com.vladsch.flexmark.util.html.Attribute;
 import com.vladsch.flexmark.util.html.Attributes;
 import com.vladsch.flexmark.util.html.HtmlFormattingAppendableBase;
@@ -132,19 +133,19 @@ public class HtmlWriter extends HtmlFormattingAppendableBase<HtmlWriter> {
 
                 if (pos != -1) {
                     try {
-                        startOffset = Integer.valueOf(attributeValue.substring(0, pos));
+                        startOffset = Integer.parseInt(attributeValue.substring(0, pos));
                     } catch (Throwable ignored) {
 
                     }
                     try {
-                        endOffset = Integer.valueOf(attributeValue.substring(pos + 1));
+                        endOffset = Integer.parseInt(attributeValue.substring(pos + 1));
                     } catch (Throwable ignored) {
 
                     }
                 }
 
                 if (startOffset >= 0 && startOffset < endOffset) {
-                    ArrayList<TagRange> tagRanges = context.getDocument().get(HtmlRenderer.TAG_RANGES);
+                    ArrayList<TagRange> tagRanges = HtmlRenderer.TAG_RANGES.get(context.getDocument());
                     tagRanges.add(new TagRange(tagName, startOffset, endOffset));
                 }
             }

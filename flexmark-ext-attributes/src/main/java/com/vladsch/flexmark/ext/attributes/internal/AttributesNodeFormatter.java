@@ -22,14 +22,14 @@ import static com.vladsch.flexmark.formatter.RenderPurpose.TRANSLATED;
 import static com.vladsch.flexmark.formatter.RenderPurpose.TRANSLATION_SPANS;
 
 public class AttributesNodeFormatter implements PhasedNodeFormatter, ExplicitAttributeIdProvider {
-    public static final DataKey<Map<String, String>> ATTRIBUTE_TRANSLATION_MAP = new DataKey<>("ATTRIBUTE_TRANSLATION_MAP", new HashMap<>());
-    public static final DataKey<Map<String, String>> ATTRIBUTE_TRANSLATED_MAP = new DataKey<>("ATTRIBUTE_TRANSLATED_MAP", new HashMap<>());
-    public static final DataKey<Map<String, String>> ATTRIBUTE_ORIGINAL_ID_MAP = new DataKey<>("ATTRIBUTE_ORIGINAL_ID_MAP", new HashMap<>());
+    public static final DataKey<Map<String, String>> ATTRIBUTE_TRANSLATION_MAP = new DataKey<>("ATTRIBUTE_TRANSLATION_MAP", HashMap::new);
+    public static final DataKey<Map<String, String>> ATTRIBUTE_TRANSLATED_MAP = new DataKey<>("ATTRIBUTE_TRANSLATED_MAP", HashMap::new);
+    public static final DataKey<Map<String, String>> ATTRIBUTE_ORIGINAL_ID_MAP = new DataKey<>("ATTRIBUTE_ORIGINAL_ID_MAP", HashMap::new);
 
     // need to have this one available in core formatter
     public static final DataKey<Map<String, String>> ATTRIBUTE_UNIQUIFICATION_ID_MAP = CoreNodeFormatter.ATTRIBUTE_UNIQUIFICATION_ID_MAP;
 
-    public static final DataKey<Map<String, String>> ATTRIBUTE_UNIQUIFICATION_CATEGORY_MAP = new DataKey<>("ATTRIBUTE_UNIQUIFICATION_CATEGORY_MAP", new HashMap<>());
+    public static final DataKey<Map<String, String>> ATTRIBUTE_UNIQUIFICATION_CATEGORY_MAP = new DataKey<>("ATTRIBUTE_UNIQUIFICATION_CATEGORY_MAP", HashMap::new);
     public static final DataKey<Integer> ATTRIBUTE_TRANSLATION_ID = new DataKey<>("ATTRIBUTE_TRANSLATION_ID", 0); // next attribute index
 
     private Map<String, String> attributeTranslationMap;
@@ -58,7 +58,7 @@ public class AttributesNodeFormatter implements PhasedNodeFormatter, ExplicitAtt
         if (node instanceof Heading) {
             // if our id != generated id we add explicit attributes if none are found already
             if (context.getRenderPurpose() == TRANSLATED) {
-                if (!hasIdAttribute(node) && attributeUniquificationIdMap != null) {
+                if (hasNoIdAttribute(node) && attributeUniquificationIdMap != null) {
                     //System.out.println(String.format("Checking attribute id unique map for %s to %s, purpose: %s", this.toString(), attributeUniquificationIdMap.toString(), context.getRenderPurpose().toString()));
                     String uniqueId = attributeUniquificationIdMap.getOrDefault(id, id);
                     if (!uniqueId.equals(id)) {
@@ -71,7 +71,7 @@ public class AttributesNodeFormatter implements PhasedNodeFormatter, ExplicitAtt
         }
     }
 
-    private boolean hasIdAttribute(Node node) {
+    boolean hasNoIdAttribute(Node node) {
         boolean haveIdAttribute = false;
 
         for (Node child : node.getChildren()) {
@@ -87,7 +87,7 @@ public class AttributesNodeFormatter implements PhasedNodeFormatter, ExplicitAtt
                 if (haveIdAttribute) break;
             }
         }
-        return haveIdAttribute;
+        return !haveIdAttribute;
     }
 
     @Override
@@ -111,8 +111,7 @@ public class AttributesNodeFormatter implements PhasedNodeFormatter, ExplicitAtt
 
                         mergeContext.forEachPrecedingDocument(document, (docContext, doc, index) -> {
                             NodeAttributeRepository attributes = AttributesExtension.NODE_ATTRIBUTES.get(doc);
-                            Map<String, String> idUniquificationMap = docContext.getTranslationStore().get(ATTRIBUTE_UNIQUIFICATION_ID_MAP);
-                            //Map<String, String> categoryUniquificationMap = docContext.getTranslationStore().get(ATTRIBUTE_UNIQUIFICATION);
+                            Map<String, String> idUniquificationMap = ATTRIBUTE_UNIQUIFICATION_ID_MAP.get(docContext.getTranslationStore());
 
                             for (List<AttributesNode> attributesNodes : attributes.values()) {
                                 for (AttributesNode attributesNode : attributesNodes) {
@@ -123,7 +122,7 @@ public class AttributesNodeFormatter implements PhasedNodeFormatter, ExplicitAtt
                                             if (attributeNode.isId()) {
                                                 // this one needs to be mapped
                                                 String key = attributeNode.getValue().toString();
-                                                String newKey = idUniquificationMap == null ? key : idUniquificationMap.getOrDefault(key, key);
+                                                String newKey = idUniquificationMap.getOrDefault(key, key);
 
                                                 if (mergedUniquified.contains(newKey)) {
                                                     // will occur if an undefined attribute id is used by enum ref and defined in a later file
@@ -143,7 +142,7 @@ public class AttributesNodeFormatter implements PhasedNodeFormatter, ExplicitAtt
                                     @Override
                                     protected void visit(AnchorRefTarget refTarget) {
                                         Node node = (Node) refTarget;
-                                        if (!hasIdAttribute(node)) {
+                                        if (hasNoIdAttribute(node)) {
                                             String key = generator.getId(node);
 
                                             if (key == null) {
@@ -153,7 +152,7 @@ public class AttributesNodeFormatter implements PhasedNodeFormatter, ExplicitAtt
                                             }
 
                                             if (key != null) {
-                                                String newKey = idUniquificationMap == null ? key : idUniquificationMap.getOrDefault(key, key);
+                                                String newKey = idUniquificationMap.getOrDefault(key, key);
 
                                                 if (mergedUniquified.contains(newKey)) {
                                                     // will occur if an undefined attribute id is used by enum ref and defined in a later file
@@ -169,8 +168,8 @@ public class AttributesNodeFormatter implements PhasedNodeFormatter, ExplicitAtt
 
                         // now make ours unique
                         NodeAttributeRepository attributes = AttributesExtension.NODE_ATTRIBUTES.get(document);
-                        Map<String, String> idUniquificationMap = context.getTranslationStore().get(ATTRIBUTE_UNIQUIFICATION_ID_MAP);
-                        Map<String, String> categoryUniquificationMap = context.getTranslationStore().get(ATTRIBUTE_UNIQUIFICATION_CATEGORY_MAP);
+                        Map<String, String> idUniquificationMap = ATTRIBUTE_UNIQUIFICATION_ID_MAP.get(context.getTranslationStore());
+                        Map<String, String> categoryUniquificationMap = ATTRIBUTE_UNIQUIFICATION_CATEGORY_MAP.get(context.getTranslationStore());
                         Map<String, String> idMap = new HashMap<>();
 
                         for (List<AttributesNode> attributesNodes : attributes.values()) {
@@ -192,9 +191,7 @@ public class AttributesNodeFormatter implements PhasedNodeFormatter, ExplicitAtt
                                                 String uniqueCategory = category;
 
                                                 // now may need to map category if enum ref format blocks clash
-                                                if (categoryUniquificationMap != null) {
-                                                    uniqueCategory = categoryUniquificationMap.getOrDefault(category, category);
-                                                }
+                                                uniqueCategory = categoryUniquificationMap.getOrDefault(category, category);
 
                                                 useKey = String.format("%s:%s", uniqueCategory, id);
                                             }
@@ -224,7 +221,7 @@ public class AttributesNodeFormatter implements PhasedNodeFormatter, ExplicitAtt
                                 protected void visit(AnchorRefTarget refTarget) {
                                     Node node = (Node) refTarget;
 
-                                    if (!hasIdAttribute(node)) {
+                                    if (hasNoIdAttribute(node)) {
                                         String key = generator.getId(node);
 
                                         if (key == null) {
@@ -260,12 +257,12 @@ public class AttributesNodeFormatter implements PhasedNodeFormatter, ExplicitAtt
             }
         }
 
-        attributeUniquificationIdMap = context.getTranslationStore().get(ATTRIBUTE_UNIQUIFICATION_ID_MAP);
+        attributeUniquificationIdMap = ATTRIBUTE_UNIQUIFICATION_ID_MAP.get(context.getTranslationStore());
         //System.out.println(String.format("Getting attribute id unique map for %s to %s, purpose: %s, phase: %s", this.toString(), attributeUniquificationIdMap.toString(), context.getRenderPurpose().toString(), phase.toString()));
 
-        attributeTranslationMap = context.getTranslationStore().get(ATTRIBUTE_TRANSLATION_MAP);
-        attributeTranslatedMap = context.getTranslationStore().get(ATTRIBUTE_TRANSLATED_MAP);
-        attributeOriginalIdMap = context.getTranslationStore().get(ATTRIBUTE_ORIGINAL_ID_MAP);
+        attributeTranslationMap = ATTRIBUTE_TRANSLATION_MAP.get(context.getTranslationStore());
+        attributeTranslatedMap = ATTRIBUTE_TRANSLATED_MAP.get(context.getTranslationStore());
+        attributeOriginalIdMap = ATTRIBUTE_ORIGINAL_ID_MAP.get(context.getTranslationStore());
     }
 
     // only registered if assignTextAttributes is enabled
@@ -278,16 +275,14 @@ public class AttributesNodeFormatter implements PhasedNodeFormatter, ExplicitAtt
     }
 
     public static String getEncodedIdAttribute(String category, String categoryId, NodeFormatterContext context, MarkdownWriter markdown) {
-        Map<String, String> attributeTranslationMap = context.getTranslationStore().get(ATTRIBUTE_TRANSLATION_MAP);
-        Map<String, String> attributeTranslatedMap = context.getTranslationStore().get(ATTRIBUTE_TRANSLATED_MAP);
+        Map<String, String> attributeTranslationMap = ATTRIBUTE_TRANSLATION_MAP.get(context.getTranslationStore());
+        Map<String, String> attributeTranslatedMap = ATTRIBUTE_TRANSLATED_MAP.get(context.getTranslationStore());
         String id = getEncodedIdAttribute(category, categoryId, context, markdown, attributeTranslationMap, attributeTranslatedMap);
 
         if (context.getRenderPurpose() == TRANSLATED) {
-            Map<String, String> idUniquificationMap = context.getTranslationStore().get(ATTRIBUTE_UNIQUIFICATION_ID_MAP);
-            //Map<String, String> categoryUniquificationMap = context.getTranslationStore().get(ATTRIBUTE_UNIQUIFICATION_CATEGORY_MAP);
-            if (idUniquificationMap != null && !idUniquificationMap.isEmpty()) {
-                String useId = idUniquificationMap.getOrDefault(id, id);
-                return useId;
+            Map<String, String> idUniquificationMap = ATTRIBUTE_UNIQUIFICATION_ID_MAP.get(context.getTranslationStore());
+            if (!idUniquificationMap.isEmpty()) {
+                return idUniquificationMap.getOrDefault(id, id);
             }
         }
         return id;
@@ -296,7 +291,7 @@ public class AttributesNodeFormatter implements PhasedNodeFormatter, ExplicitAtt
     private static String getEncodedIdAttribute(String category, String categoryId, NodeFormatterContext context, MarkdownWriter markdown, Map<String, String> attributeTranslationMap, Map<String, String> attributeTranslatedMap) {
         String encodedCategory = category;
         String encodedId = categoryId;
-        int placeholderId = context.getTranslationStore().get(ATTRIBUTE_TRANSLATION_ID);
+        int placeholderId = ATTRIBUTE_TRANSLATION_ID.get(context.getTranslationStore());
 
         switch (context.getRenderPurpose()) {
             case TRANSLATION_SPANS:

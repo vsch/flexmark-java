@@ -22,7 +22,7 @@ public class FormatterWithMods {
     static final MutableDataSet FORMAT_OPTIONS = new MutableDataSet();
     static {
         // copy extensions from Pegdown compatible to Formatting
-        FORMAT_OPTIONS.set(Parser.EXTENSIONS, OPTIONS.get(Parser.EXTENSIONS));
+        FORMAT_OPTIONS.set(Parser.EXTENSIONS, Parser.EXTENSIONS.get(OPTIONS));
     }
 
     static final Parser PARSER = Parser.builder(OPTIONS).build();

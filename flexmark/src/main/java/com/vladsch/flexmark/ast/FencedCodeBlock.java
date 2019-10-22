@@ -3,6 +3,7 @@ package com.vladsch.flexmark.ast;
 import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.util.ast.DoNotDecorate;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -25,6 +26,7 @@ public class FencedCodeBlock extends Block implements DoNotDecorate {
         segmentSpanChars(out, closingMarker, "close");
     }
 
+    @NotNull
     @Override
     public BasedSequence[] getSegments() {
         return new BasedSequence[] { openingMarker, info, attributes, getContentChars(), closingMarker };

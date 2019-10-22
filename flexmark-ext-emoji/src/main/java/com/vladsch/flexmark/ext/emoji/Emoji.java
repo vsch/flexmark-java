@@ -4,6 +4,7 @@ import com.vladsch.flexmark.ast.DelimitedNode;
 import com.vladsch.flexmark.util.ast.DoNotCollectText;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * An emoji node containing emoji shortcut text
@@ -13,6 +14,7 @@ public class Emoji extends Node implements DelimitedNode, DoNotCollectText {
     protected BasedSequence text = BasedSequence.NULL;
     protected BasedSequence closingMarker = BasedSequence.NULL;
 
+    @NotNull
     @Override
     public BasedSequence[] getSegments() {
         return new BasedSequence[] { openingMarker, text, closingMarker };

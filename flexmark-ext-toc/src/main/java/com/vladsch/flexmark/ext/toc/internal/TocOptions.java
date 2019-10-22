@@ -7,6 +7,8 @@ import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSetter;
 import com.vladsch.flexmark.util.sequence.SubSequence;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 @SuppressWarnings("WeakerAccess")
 public class TocOptions implements Immutable<TocOptions, TocOptions.AsMutable>, MutableDataSetter {
@@ -57,7 +59,7 @@ public class TocOptions implements Immutable<TocOptions, TocOptions.AsMutable>, 
         this(levels, isHtml, isTextOnly, isNumbered, titleLevel, title, listType, false, true, "", "", true);
     }
 
-    public TocOptions(TocOptions.AsMutable other) {
+    public TocOptions(@NotNull TocOptions.AsMutable other) {
         levels = other.levels;
         isTextOnly = other.isTextOnly;
         isNumbered = other.isNumbered;
@@ -74,7 +76,7 @@ public class TocOptions implements Immutable<TocOptions, TocOptions.AsMutable>, 
         isCaseSensitiveTocTag = other.isCaseSensitiveTocTag;
     }
 
-    public TocOptions(TocOptions other) {
+    public TocOptions(@NotNull TocOptions other) {
         levels = other.levels;
         isTextOnly = other.isTextOnly;
         isNumbered = other.isNumbered;
@@ -95,7 +97,7 @@ public class TocOptions implements Immutable<TocOptions, TocOptions.AsMutable>, 
     //    this(options, true);
     //}
 
-    public TocOptions(DataHolder options, boolean isSimToc) {
+    public TocOptions(@Nullable DataHolder options, boolean isSimToc) {
         this(
                 TocExtension.LEVELS.get(options),
                 TocExtension.IS_HTML.get(options),
@@ -112,8 +114,9 @@ public class TocOptions implements Immutable<TocOptions, TocOptions.AsMutable>, 
         );
     }
 
+    @NotNull
     @Override
-    public MutableDataHolder setIn(MutableDataHolder dataHolder) {
+    public MutableDataHolder setIn(@NotNull MutableDataHolder dataHolder) {
         dataHolder.set(TocExtension.LEVELS, levels);
         dataHolder.set(TocExtension.IS_TEXT_ONLY, isTextOnly);
         dataHolder.set(TocExtension.IS_NUMBERED, isNumbered);
@@ -331,8 +334,9 @@ public class TocOptions implements Immutable<TocOptions, TocOptions.AsMutable>, 
             return new TocOptions(this);
         }
 
+        @NotNull
         @Override
-        public MutableDataHolder setIn(MutableDataHolder dataHolder) {
+        public MutableDataHolder setIn(@NotNull MutableDataHolder dataHolder) {
             return toImmutable().setIn(dataHolder);
         }
 

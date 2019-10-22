@@ -7,6 +7,8 @@ import com.vladsch.flexmark.html.renderer.AttributablePart;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
+import com.vladsch.flexmark.util.data.NullableDataKey;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Extension for tocs
@@ -27,7 +29,7 @@ public class SimTocExtension implements Parser.ParserExtension, HtmlRenderer.Htm
     public static final DataKey<TocOptions.ListType> LIST_TYPE = TocExtension.LIST_TYPE;
     public static final DataKey<Boolean> IS_HTML = TocExtension.IS_HTML;
     public static final DataKey<Integer> TITLE_LEVEL = TocExtension.TITLE_LEVEL;
-    public static final DataKey<String> TITLE = TocExtension.TITLE;
+    public static final NullableDataKey<String> TITLE = TocExtension.TITLE;
     public static final DataKey<Boolean> AST_INCLUDE_OPTIONS = TocExtension.AST_INCLUDE_OPTIONS;
     public static final DataKey<Boolean> BLANK_LINE_SPACER = TocExtension.BLANK_LINE_SPACER;
     public static final DataKey<String> DIV_CLASS = TocExtension.DIV_CLASS;
@@ -46,7 +48,7 @@ public class SimTocExtension implements Parser.ParserExtension, HtmlRenderer.Htm
     }
 
     @Override
-    public void rendererOptions(MutableDataHolder options) {
+    public void rendererOptions(@NotNull MutableDataHolder options) {
         // set header id options if not already set
         if (!options.contains(HtmlRenderer.GENERATE_HEADER_ID)) {
             options.set(HtmlRenderer.GENERATE_HEADER_ID, true);

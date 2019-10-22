@@ -1,5 +1,7 @@
 package com.vladsch.flexmark.util.data;
 
+import org.jetbrains.annotations.NotNull;
+
 public interface MutableDataSetter {
-    MutableDataHolder setIn(MutableDataHolder dataHolder);
+    @NotNull MutableDataHolder setIn(@NotNull MutableDataHolder dataHolder);
 }

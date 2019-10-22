@@ -23,7 +23,7 @@ public class DefinitionListBlockPreProcessor implements BlockPreProcessor {
 
     @Override
     public void preProcess(ParserState state, Block block) {
-        Boolean blankLinesInAST = state.getProperties().get(BLANK_LINES_IN_AST);
+        Boolean blankLinesInAST = BLANK_LINES_IN_AST.get(state.getProperties());
 
         if (block instanceof DefinitionList) {
             // need to propagate loose/tight

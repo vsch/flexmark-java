@@ -36,7 +36,6 @@ public class BlockContent {
 
     public BlockContent(BlockContent other, int startLine, int lineIndent) {
         // copy content from other
-        assert lines.size() == lineIndents.size() : "lines and eols should be of the same size";
         assert other.lines.size() == other.lineIndents.size() : "lines and eols should be of the same size";
 
         if (other.lines.size() > 0 && startLine < lineIndent) {
@@ -73,7 +72,7 @@ public class BlockContent {
     }
 
     public boolean hasSingleLine() {
-        return lines.size() > 0 && lines.size() == 1;
+        return lines.size() == 1;
     }
 
     public BasedSequence getContents() {

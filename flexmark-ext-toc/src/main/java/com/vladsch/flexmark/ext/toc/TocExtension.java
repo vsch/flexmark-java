@@ -9,6 +9,8 @@ import com.vladsch.flexmark.html.renderer.AttributablePart;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
+import com.vladsch.flexmark.util.data.NullableDataKey;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Extension for tocs
@@ -29,7 +31,7 @@ public class TocExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRe
     public static final DataKey<TocOptions.ListType> LIST_TYPE = new DataKey<>("LIST_TYPE", TocOptions.ListType.HIERARCHY);
     public static final DataKey<Boolean> IS_HTML = new DataKey<>("IS_HTML", false);
     public static final DataKey<Integer> TITLE_LEVEL = new DataKey<>("TITLE_LEVEL", TocOptions.DEFAULT_TITLE_LEVEL);
-    public static final DataKey<String> TITLE = new DataKey<>("TITLE", (String) null);
+    public static final NullableDataKey<String> TITLE = new NullableDataKey<>("TITLE");
     public static final DataKey<Boolean> AST_INCLUDE_OPTIONS = new DataKey<>("AST_INCLUDE_OPTIONS", false);
     public static final DataKey<Boolean> BLANK_LINE_SPACER = new DataKey<>("BLANK_LINE_SPACER", false);
     public static final DataKey<String> DIV_CLASS = new DataKey<>("DIV_CLASS", "");
@@ -38,7 +40,7 @@ public class TocExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRe
 
     // format options
     public static final DataKey<SimTocGenerateOnFormat> FORMAT_UPDATE_ON_FORMAT = new DataKey<>("FORMAT_UPDATE_ON_FORMAT", SimTocGenerateOnFormat.UPDATE);
-    public static final DataKey<TocOptions> FORMAT_OPTIONS = new DataKey<>("FORMAT_OPTIONS", options -> new TocOptions(options, false));
+    public static final DataKey<TocOptions> FORMAT_OPTIONS = new DataKey<>("FORMAT_OPTIONS", new TocOptions(null,false), options -> new TocOptions(options, false));
 
     private TocExtension() {
     }
@@ -48,7 +50,7 @@ public class TocExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRe
     }
 
     @Override
-    public void rendererOptions(MutableDataHolder options) {
+    public void rendererOptions(@NotNull MutableDataHolder options) {
         // set header id options if not already set
         if (!options.contains(HtmlRenderer.RENDER_HEADER_ID)) {
             options.set(HtmlRenderer.RENDER_HEADER_ID, true);

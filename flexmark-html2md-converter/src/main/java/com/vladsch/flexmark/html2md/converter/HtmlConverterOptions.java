@@ -6,6 +6,7 @@ import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSetter;
 import com.vladsch.flexmark.util.format.TableFormatOptions;
 import com.vladsch.flexmark.util.html.CellAlignment;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 import java.util.regex.Pattern;
@@ -191,8 +192,9 @@ public class HtmlConverterOptions implements MutableDataSetter {
         wrappedTags = FlexmarkHtmlConverter.WRAPPED_TAGS.get(options);
     }
 
+    @NotNull
     @Override
-    public MutableDataHolder setIn(MutableDataHolder dataHolder) {
+    public MutableDataHolder setIn(@NotNull MutableDataHolder dataHolder) {
         dataHolder.set(FlexmarkHtmlConverter.LIST_CONTENT_INDENT, listContentIndent);
         dataHolder.set(FlexmarkHtmlConverter.SETEXT_HEADINGS, setextHeadings);
         dataHolder.set(FlexmarkHtmlConverter.OUTPUT_UNKNOWN_TAGS, outputUnknownTags);

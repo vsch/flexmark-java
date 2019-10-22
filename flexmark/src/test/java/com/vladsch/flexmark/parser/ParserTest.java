@@ -13,6 +13,7 @@ import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -322,6 +323,7 @@ final public class ParserTest {
         DashBlock() {
         }
 
+        @NotNull
         @Override
         public BasedSequence[] getSegments() {
             return EMPTY_SEGMENTS;

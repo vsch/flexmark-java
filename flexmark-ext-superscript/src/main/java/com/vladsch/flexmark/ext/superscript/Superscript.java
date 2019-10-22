@@ -3,6 +3,7 @@ package com.vladsch.flexmark.ext.superscript;
 import com.vladsch.flexmark.ast.DelimitedNode;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * A Superscript node
@@ -13,6 +14,7 @@ public class Superscript extends Node implements DelimitedNode {
     protected BasedSequence closingMarker = BasedSequence.NULL;
     protected String superscriptBlockText;
 
+    @NotNull
     @Override
     public BasedSequence[] getSegments() {
         //return EMPTY_SEGMENTS;

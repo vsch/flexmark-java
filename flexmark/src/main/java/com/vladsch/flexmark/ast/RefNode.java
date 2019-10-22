@@ -5,6 +5,7 @@ import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.ReferencingNode;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import org.jetbrains.annotations.NotNull;
 
 public abstract class RefNode extends LinkNode implements LinkRefDerived, ReferencingNode<ReferenceRepository, Reference> {
     protected BasedSequence textOpeningMarker = BasedSequence.NULL;
@@ -15,6 +16,7 @@ public abstract class RefNode extends LinkNode implements LinkRefDerived, Refere
     protected BasedSequence referenceClosingMarker = BasedSequence.NULL;
     protected boolean isDefined = false;
 
+    @NotNull
     @Override
     public BasedSequence[] getSegments() {
         if (isReferenceTextCombined()) {
@@ -147,7 +149,7 @@ public abstract class RefNode extends LinkNode implements LinkRefDerived, Refere
 
     @Override
     public Reference getReferenceNode(Document document) {
-        return getReferenceNode(document.get(Parser.REFERENCES));
+        return getReferenceNode(Parser.REFERENCES.get(document));
     }
 
     @Override
