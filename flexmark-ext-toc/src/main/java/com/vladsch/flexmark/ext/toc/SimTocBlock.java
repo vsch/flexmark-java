@@ -13,7 +13,7 @@ public class SimTocBlock extends TocBlockBase {
     protected BasedSequence closingTitleMarker = BasedSequence.NULL;
 
     @Override
-    public void getAstExtra(StringBuilder out) {
+    public void getAstExtra(@NotNull StringBuilder out) {
         super.getAstExtra(out);
         segmentSpanChars(out, anchorMarker, "anchorMarker");
         segmentSpanChars(out, openingTitleMarker, "openingTitleMarker");

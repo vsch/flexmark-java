@@ -22,10 +22,11 @@ public class WhiteSpace extends Node {
     }
 
     @Override
-    public void getAstExtra(StringBuilder out) {
+    public void getAstExtra(@NotNull StringBuilder out) {
         astExtraChars(out);
     }
 
+    @NotNull
     @Override
     protected String toStringAttributes() {
         return "text=" + getChars();

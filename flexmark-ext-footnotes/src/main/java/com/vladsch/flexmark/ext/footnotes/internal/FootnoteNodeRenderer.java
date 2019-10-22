@@ -10,6 +10,7 @@ import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.NodeVisitor;
 import com.vladsch.flexmark.util.ast.VisitHandler;
 import com.vladsch.flexmark.util.data.DataHolder;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -46,7 +47,7 @@ public class FootnoteNodeRenderer implements PhasedNodeRenderer {
     }
 
     @Override
-    public void renderDocument(NodeRendererContext context, HtmlWriter html, Document document, RenderingPhase phase) {
+    public void renderDocument(@NotNull NodeRendererContext context, @NotNull HtmlWriter html, @NotNull Document document, @NotNull RenderingPhase phase) {
         if (phase == RenderingPhase.BODY_TOP) {
             if (recheckUndefinedReferences) {
                 // need to see if have undefined footnotes that were defined after parsing
@@ -126,8 +127,9 @@ public class FootnoteNodeRenderer implements PhasedNodeRenderer {
     }
 
     public static class Factory implements NodeRendererFactory {
+        @NotNull
         @Override
-        public NodeRenderer apply(DataHolder options) {
+        public NodeRenderer apply(@NotNull DataHolder options) {
             return new FootnoteNodeRenderer(options);
         }
     }

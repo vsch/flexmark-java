@@ -8,6 +8,7 @@ import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.ast.NodeRepository;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKey;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -19,16 +20,19 @@ public class AbbreviationRepository extends NodeRepository<AbbreviationBlock> {
         super(AbbreviationExtension.ABBREVIATIONS_KEEP.get(options));
     }
 
+    @NotNull
     @Override
     public DataKey<AbbreviationRepository> getDataKey() {
         return AbbreviationExtension.ABBREVIATIONS;
     }
 
+    @NotNull
     @Override
     public DataKey<KeepType> getKeepDataKey() {
         return AbbreviationExtension.ABBREVIATIONS_KEEP;
     }
 
+    @NotNull
     @Override
     public Set<AbbreviationBlock> getReferencedElements(Node parent) {
         HashSet<AbbreviationBlock> references = new HashSet<>();

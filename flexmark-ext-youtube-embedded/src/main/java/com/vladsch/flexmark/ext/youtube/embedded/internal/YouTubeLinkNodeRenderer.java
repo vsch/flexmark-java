@@ -4,6 +4,7 @@ import com.vladsch.flexmark.ext.youtube.embedded.YouTubeLink;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.*;
 import com.vladsch.flexmark.util.data.DataHolder;
+import org.jetbrains.annotations.NotNull;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -68,8 +69,9 @@ public class YouTubeLinkNodeRenderer implements NodeRenderer {
     }
 
     public static class Factory implements NodeRendererFactory {
+        @NotNull
         @Override
-        public NodeRenderer apply(DataHolder options) {
+        public NodeRenderer apply(@NotNull DataHolder options) {
             return new YouTubeLinkNodeRenderer(options);
         }
     }

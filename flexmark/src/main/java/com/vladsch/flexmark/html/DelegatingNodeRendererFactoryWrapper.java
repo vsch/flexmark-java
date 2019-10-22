@@ -5,6 +5,8 @@ import com.vladsch.flexmark.html.renderer.NodeRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRendererFactory;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.dependency.Dependent;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.HashSet;
 import java.util.List;
@@ -17,7 +19,7 @@ import java.util.function.Function;
 class DelegatingNodeRendererFactoryWrapper implements Function<DataHolder, NodeRenderer>, Dependent<DelegatingNodeRendererFactoryWrapper>, DelegatingNodeRendererFactory {
     private final NodeRendererFactory nodeRendererFactory;
     private List<DelegatingNodeRendererFactoryWrapper> nodeRenderers;
-    private Set<Class> myDelegates = null;
+    private Set<Class<?>> myDelegates = null;
 
     public DelegatingNodeRendererFactoryWrapper(List<DelegatingNodeRendererFactoryWrapper> nodeRenderers, NodeRendererFactory nodeRendererFactory) {
         this.nodeRendererFactory = nodeRendererFactory;
@@ -25,28 +27,28 @@ class DelegatingNodeRendererFactoryWrapper implements Function<DataHolder, NodeR
     }
 
     @Override
-    public NodeRenderer apply(DataHolder options) {
+    public @NotNull NodeRenderer apply(@NotNull DataHolder options) {
         return nodeRendererFactory.apply(options);
     }
 
-    public NodeRendererFactory getFactory() {
+    public @NotNull NodeRendererFactory getFactory() {
         return nodeRendererFactory;
     }
 
     @Override
-    public Set<Class<? extends NodeRendererFactory>> getDelegates() {
+    public @Nullable Set<Class<?>> getDelegates() {
         return nodeRendererFactory instanceof DelegatingNodeRendererFactory ? ((DelegatingNodeRendererFactory) nodeRendererFactory).getDelegates() : null;
     }
 
     @Override
-    public final Set<? extends Class> getAfterDependents() {
+    public final @Nullable Set<Class<?>> getAfterDependents() {
         return null;
     }
 
     @Override
-    public Set<? extends Class> getBeforeDependents() {
+    public @Nullable Set<Class<?>> getBeforeDependents() {
         if (myDelegates == null && nodeRenderers != null) {
-            Set<Class<? extends NodeRendererFactory>> delegates = getDelegates();
+            Set<Class<?>> delegates = getDelegates();
             if (delegates != null) {
                 myDelegates = new HashSet<>();
                 for (DelegatingNodeRendererFactoryWrapper factory : nodeRenderers) {

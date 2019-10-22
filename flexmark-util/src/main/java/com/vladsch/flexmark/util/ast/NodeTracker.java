@@ -1,11 +1,13 @@
 package com.vladsch.flexmark.util.ast;
 
-public interface NodeTracker {
-    void nodeAdded(Node node);
-    void nodeAddedWithChildren(Node node);
-    void nodeAddedWithDescendants(Node node);
+import org.jetbrains.annotations.NotNull;
 
-    void nodeRemoved(Node node);
-    void nodeRemovedWithChildren(Node node);
-    void nodeRemovedWithDescendants(Node node);
+public interface NodeTracker {
+    void nodeAdded(@NotNull Node node);
+    void nodeAddedWithChildren(@NotNull Node node);
+    void nodeAddedWithDescendants(@NotNull Node node);
+
+    void nodeRemoved(@NotNull Node node);
+    void nodeRemovedWithChildren(@NotNull Node node);
+    void nodeRemovedWithDescendants(@NotNull Node node);
 }

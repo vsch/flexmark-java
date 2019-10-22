@@ -14,7 +14,7 @@ import java.util.Map;
 public class MacroBlock extends Block {
 
     @Override
-    public void getAstExtra(StringBuilder out) {
+    public void getAstExtra(@NotNull StringBuilder out) {
         if (isClosedTag()) out.append(" isClosed");
         segmentSpanChars(out, getMacroContentChars(), "macroContent");
     }

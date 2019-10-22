@@ -12,13 +12,15 @@ public class MutableDataSet extends DataSet implements MutableDataHolder {
         super(other);
     }
 
+    @NotNull
     @Override
-    public <T> MutableDataSet set(DataKey<T> key, @NotNull T value) {
+    public <T> MutableDataSet set(@NotNull DataKey<T> key, @NotNull T value) {
         return set((DataKeyBase<T>) key, value);
     }
 
+    @NotNull
     @Override
-    public <T> MutableDataSet set(NullableDataKey<T> key, @Nullable T value) {
+    public <T> MutableDataSet set(@NotNull NullableDataKey<T> key, @Nullable T value) {
         return set((DataKeyBase<T>) key, value);
     }
 
@@ -27,14 +29,16 @@ public class MutableDataSet extends DataSet implements MutableDataHolder {
         return this;
     }
 
+    @NotNull
     @Override
-    public MutableDataSet setFrom(MutableDataSetter dataSetter) {
+    public MutableDataSet setFrom(@NotNull MutableDataSetter dataSetter) {
         dataSetter.setIn(this);
         return this;
     }
 
+    @NotNull
     @Override
-    public MutableDataSet setAll(DataHolder other) {
+    public MutableDataSet setAll(@NotNull DataHolder other) {
         dataSet.putAll(other.getAll());
         return this;
     }
@@ -56,8 +60,9 @@ public class MutableDataSet extends DataSet implements MutableDataHolder {
         return dataHolder;
     }
 
+    @NotNull
     @Override
-    public <T> MutableDataSet remove(DataKeyBase<T> key) {
+    public <T> MutableDataSet remove(@NotNull DataKeyBase<T> key) {
         dataSet.remove(key);
         return this;
     }
@@ -84,6 +89,7 @@ public class MutableDataSet extends DataSet implements MutableDataHolder {
         return this;
     }
 
+    @NotNull
     @Override
     public MutableDataSet clear() {
         dataSet.clear();

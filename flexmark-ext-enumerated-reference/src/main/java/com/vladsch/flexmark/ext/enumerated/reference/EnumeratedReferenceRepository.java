@@ -5,6 +5,7 @@ import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.ast.NodeRepository;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKey;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -34,16 +35,19 @@ public class EnumeratedReferenceRepository extends NodeRepository<EnumeratedRefe
         super(EnumeratedReferenceExtension.ENUMERATED_REFERENCES_KEEP.get(options));
     }
 
+    @NotNull
     @Override
     public DataKey<EnumeratedReferenceRepository> getDataKey() {
         return EnumeratedReferenceExtension.ENUMERATED_REFERENCES;
     }
 
+    @NotNull
     @Override
     public DataKey<KeepType> getKeepDataKey() {
         return EnumeratedReferenceExtension.ENUMERATED_REFERENCES_KEEP;
     }
 
+    @NotNull
     @Override
     public Set<EnumeratedReferenceBlock> getReferencedElements(Node parent) {
         HashSet<EnumeratedReferenceBlock> references = new HashSet<>();

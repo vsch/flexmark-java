@@ -1,6 +1,7 @@
 package com.vladsch.flexmark.parser.block;
 
 import com.vladsch.flexmark.parser.PostProcessorFactory;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
 import java.util.Set;
@@ -16,13 +17,15 @@ public abstract class DocumentPostProcessorFactory implements PostProcessorFacto
         return null;
     }
 
+    @Nullable
     @Override
-    public Set<Class<? extends PostProcessorFactory>> getAfterDependents() {
+    public Set<Class<?>> getAfterDependents() {
         return null;
     }
 
+    @Nullable
     @Override
-    public Set<Class<? extends PostProcessorFactory>> getBeforeDependents() {
+    public Set<Class<?>> getBeforeDependents() {
         return null;
     }
 

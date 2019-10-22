@@ -16,6 +16,8 @@ import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.options.ParsedOption;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Set;
@@ -159,13 +161,15 @@ public class SimTocBlockParser extends AbstractBlockParser {
     }
 
     public static class Factory implements CustomBlockParserFactory {
+        @Nullable
         @Override
-        public Set<Class<? extends CustomBlockParserFactory>> getAfterDependents() {
+        public Set<Class<?>> getAfterDependents() {
             return null;
         }
 
+        @Nullable
         @Override
-        public Set<Class<? extends CustomBlockParserFactory>> getBeforeDependents() {
+        public Set<Class<?>> getBeforeDependents() {
             return null;
         }
 
@@ -174,8 +178,9 @@ public class SimTocBlockParser extends AbstractBlockParser {
             return false;
         }
 
+        @NotNull
         @Override
-        public BlockParserFactory apply(DataHolder options) {
+        public BlockParserFactory apply(@NotNull DataHolder options) {
             return new BlockFactory(options);
         }
     }

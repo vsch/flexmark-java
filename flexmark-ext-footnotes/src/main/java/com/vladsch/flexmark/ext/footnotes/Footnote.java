@@ -28,6 +28,7 @@ public class Footnote extends Node implements DelimitedNode, DoNotDecorate, Refe
 
     protected int referenceOrdinal;
 
+    @NotNull
     @Override
     public BasedSequence getReference() {
         return text;
@@ -70,7 +71,7 @@ public class Footnote extends Node implements DelimitedNode, DoNotDecorate, Refe
     }
 
     @Override
-    public void getAstExtra(StringBuilder out) {
+    public void getAstExtra(@NotNull StringBuilder out) {
         out.append(" ordinal: ").append(footnoteBlock != null ? footnoteBlock.getFootnoteOrdinal() : 0).append(" ");
         delimitedSegmentSpanChars(out, openingMarker, text, closingMarker, "text");
     }

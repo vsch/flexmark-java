@@ -9,7 +9,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public class SpecExampleOptionSeparator extends Node {
     @Override
-    public void getAstExtra(StringBuilder out) {
+    public void getAstExtra(@NotNull StringBuilder out) {
     }
 
     @NotNull

@@ -43,7 +43,7 @@ public class AdmonitionBlock extends Block implements ParagraphContainer {
     }
 
     @Override
-    public void getAstExtra(StringBuilder out) {
+    public void getAstExtra(@NotNull StringBuilder out) {
         BasedSequence content = getContentChars();
         int lines = getContentLines().size();
         segmentSpanChars(out, openingMarker, "open");

@@ -3,6 +3,8 @@ package com.vladsch.flexmark.ext.gitlab.internal;
 import com.vladsch.flexmark.ext.gitlab.GitLabBlockQuote;
 import com.vladsch.flexmark.formatter.*;
 import com.vladsch.flexmark.util.data.DataHolder;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -14,6 +16,7 @@ public class GitLabNodeFormatter implements NodeFormatter {
 
     }
 
+    @Nullable
     @Override
     public Set<NodeFormattingHandler<?>> getNodeFormattingHandlers() {
         return new HashSet<>(Collections.singletonList(
@@ -21,6 +24,7 @@ public class GitLabNodeFormatter implements NodeFormatter {
         ));
     }
 
+    @Nullable
     @Override
     public Set<Class<?>> getNodeClasses() {
         return new HashSet<>(Collections.singletonList(
@@ -35,8 +39,9 @@ public class GitLabNodeFormatter implements NodeFormatter {
     }
 
     public static class Factory implements NodeFormatterFactory {
+        @NotNull
         @Override
-        public NodeFormatter create(DataHolder options) {
+        public NodeFormatter create(@NotNull DataHolder options) {
             return new GitLabNodeFormatter(options);
         }
     }

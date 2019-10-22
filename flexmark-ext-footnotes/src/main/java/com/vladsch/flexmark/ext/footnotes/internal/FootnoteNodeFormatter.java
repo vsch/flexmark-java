@@ -8,6 +8,8 @@ import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.format.options.ElementPlacement;
 import com.vladsch.flexmark.util.format.options.ElementPlacementSort;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
@@ -47,6 +49,7 @@ public class FootnoteNodeFormatter extends NodeRepositoryFormatter<FootnoteRepos
         markdown.blankLine();
     }
 
+    @Nullable
     @Override
     public Set<NodeFormattingHandler<?>> getNodeFormattingHandlers() {
         return new HashSet<>(Arrays.asList(
@@ -55,6 +58,7 @@ public class FootnoteNodeFormatter extends NodeRepositoryFormatter<FootnoteRepos
         ));
     }
 
+    @Nullable
     @Override
     public Set<Class<?>> getNodeClasses() {
         if (options.footnotePlacement != ElementPlacement.AS_IS && options.footnoteSort != ElementPlacementSort.SORT_UNUSED_LAST) return null;
@@ -80,8 +84,9 @@ public class FootnoteNodeFormatter extends NodeRepositoryFormatter<FootnoteRepos
     }
 
     public static class Factory implements NodeFormatterFactory {
+        @NotNull
         @Override
-        public NodeFormatter create(DataHolder options) {
+        public NodeFormatter create(@NotNull DataHolder options) {
             return new FootnoteNodeFormatter(options);
         }
     }

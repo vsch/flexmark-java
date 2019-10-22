@@ -81,7 +81,7 @@ public class ZzzzzzExtension implements Parser.ParserExtension
     }
 
     @Override
-    public void extend(HtmlRenderer.Builder rendererBuilder, String rendererType) {
+    public void extend(@NotNull HtmlRenderer.Builder rendererBuilder, @NotNull String rendererType) {
         if (rendererBuilder.isRendererType("HTML")) {
             rendererBuilder.nodeRendererFactory(new ZzzzzzNodeRenderer.Factory());// zzzoptionszzz(NODE_RENDERER, PHASED_NODE_RENDERER)
             rendererBuilder.linkResolverFactory(new ZzzzzzLinkResolver.Factory());// zzzoptionszzz(LINK_RESOLVER, NODE_RENDERER, PHASED_NODE_RENDERER)

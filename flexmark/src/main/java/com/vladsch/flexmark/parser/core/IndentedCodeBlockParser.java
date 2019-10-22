@@ -10,6 +10,8 @@ import com.vladsch.flexmark.util.ast.BlockContent;
 import com.vladsch.flexmark.util.collection.iteration.Reverse;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
@@ -71,8 +73,9 @@ public class IndentedCodeBlockParser extends AbstractBlockParser {
     }
 
     public static class Factory implements CustomBlockParserFactory {
+        @Nullable
         @Override
-        public Set<Class<? extends CustomBlockParserFactory>> getAfterDependents() {
+        public Set<Class<?>> getAfterDependents() {
             return new HashSet<>(Arrays.asList(
                     BlockQuoteParser.Factory.class,
                     HeadingParser.Factory.class,
@@ -84,8 +87,9 @@ public class IndentedCodeBlockParser extends AbstractBlockParser {
             ));
         }
 
+        @Nullable
         @Override
-        public Set<Class<? extends CustomBlockParserFactory>> getBeforeDependents() {
+        public Set<Class<?>> getBeforeDependents() {
             return Collections.emptySet();
             //return new HashSet<>(Arrays.asList(
             //        //BlockQuoteParser.Factory.class,
@@ -103,8 +107,9 @@ public class IndentedCodeBlockParser extends AbstractBlockParser {
             return false;
         }
 
+        @NotNull
         @Override
-        public BlockParserFactory apply(DataHolder options) {
+        public BlockParserFactory apply(@NotNull DataHolder options) {
             return new BlockFactory(options);
         }
     }

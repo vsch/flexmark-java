@@ -52,7 +52,7 @@ public abstract class InlineLinkNode extends LinkNode {
     }
 
     @Override
-    public void getAstExtra(StringBuilder out) {
+    public void getAstExtra(@NotNull StringBuilder out) {
         delimitedSegmentSpanChars(out, textOpeningMarker, text, textClosingMarker, "text");
         segmentSpanChars(out, linkOpeningMarker, "linkOpen");
         delimitedSegmentSpanChars(out, urlOpeningMarker, url, urlClosingMarker, "url");
@@ -162,6 +162,7 @@ public abstract class InlineLinkNode extends LinkNode {
         this.linkClosingMarker = linkClosingMarker;
     }
 
+    @NotNull
     @Override
     protected String toStringAttributes() {
         return "text=" + text + ", url=" + url + ", title=" + title;

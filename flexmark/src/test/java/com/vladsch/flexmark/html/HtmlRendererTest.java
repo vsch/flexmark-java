@@ -9,6 +9,7 @@ import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.data.MutableDataSet;
+import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 
 import java.util.HashSet;
@@ -84,8 +85,9 @@ final public class HtmlRendererTest {
     @Test
     public void attributeProviderForCodeBlock() {
         AttributeProviderFactory factory = new IndependentAttributeProviderFactory() {
+            @NotNull
             @Override
-            public AttributeProvider apply(LinkResolverContext context) {
+            public AttributeProvider apply(@NotNull LinkResolverContext context) {
                 return (node, part, attributes) -> {
                     if (node instanceof FencedCodeBlock && part == CoreNodeRenderer.CODE_CONTENT) {
                         FencedCodeBlock fencedCodeBlock = (FencedCodeBlock) node;
@@ -109,8 +111,9 @@ final public class HtmlRendererTest {
     @Test
     public void attributeProviderForImage() {
         AttributeProviderFactory factory = new IndependentAttributeProviderFactory() {
+            @NotNull
             @Override
-            public AttributeProvider apply(LinkResolverContext context) {
+            public AttributeProvider apply(@NotNull LinkResolverContext context) {
                 return (node, part, attributes) -> {
                     if (node instanceof Image) {
                         attributes.remove("alt");
@@ -215,8 +218,9 @@ final public class HtmlRendererTest {
         };
 
         NodeRendererFactory nodeRendererFactory2 = new DelegatingNodeRendererFactory() {
+            @NotNull
             @Override
-            public NodeRenderer apply(DataHolder options) {
+            public NodeRenderer apply(@NotNull DataHolder options) {
                 return () -> {
                     HashSet<NodeRenderingHandler<?>> set = new HashSet<>();
                     set.add(new NodeRenderingHandler<>(Link.class, (node, context, html) -> {
@@ -232,8 +236,8 @@ final public class HtmlRendererTest {
             }
 
             @Override
-            public Set<Class<? extends NodeRendererFactory>> getDelegates() {
-                Set<Class<? extends NodeRendererFactory>> set = new HashSet<>();
+            public Set<Class<?>> getDelegates() {
+                Set<Class<?>> set = new HashSet<>();
                 set.add(nodeRendererFactory.getClass());
                 return set;
             }
@@ -265,8 +269,9 @@ final public class HtmlRendererTest {
         };
 
         NodeRendererFactory nodeRendererFactory2 = new DelegatingNodeRendererFactory() {
+            @NotNull
             @Override
-            public NodeRenderer apply(DataHolder options) {
+            public NodeRenderer apply(@NotNull DataHolder options) {
                 return () -> {
                     HashSet<NodeRenderingHandler<?>> set = new HashSet<>();
                     set.add(new NodeRenderingHandler<>(Link.class, (node, context, html) -> {
@@ -282,8 +287,8 @@ final public class HtmlRendererTest {
             }
 
             @Override
-            public Set<Class<? extends NodeRendererFactory>> getDelegates() {
-                Set<Class<? extends NodeRendererFactory>> set = new HashSet<>();
+            public Set<Class<?>> getDelegates() {
+                Set<Class<?>> set = new HashSet<>();
                 set.add(nodeRendererFactory.getClass());
                 return set;
             }
@@ -330,8 +335,9 @@ final public class HtmlRendererTest {
             docUrl = DOC_RELATIVE_URL.get(context.getOptions());
         }
 
+        @NotNull
         @Override
-        public ResolvedLink resolveLink(Node node, LinkResolverContext context, ResolvedLink link) {
+        public ResolvedLink resolveLink(@NotNull Node node, @NotNull LinkResolverContext context, @NotNull ResolvedLink link) {
             if (node instanceof Link) {
                 Link linkNode = (Link) node;
                 if (linkNode.getUrl().equals("/url")) {
@@ -342,8 +348,9 @@ final public class HtmlRendererTest {
         }
 
         static class Factory extends IndependentLinkResolverFactory {
+            @NotNull
             @Override
-            public LinkResolver apply(LinkResolverContext context) {
+            public LinkResolver apply(@NotNull LinkResolverContext context) {
                 return new CustomLinkResolverImpl(context);
             }
         }

@@ -2,6 +2,7 @@ package com.vladsch.flexmark.html2md.converter;
 
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.dependency.Dependent;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.HashSet;
 import java.util.List;
@@ -14,7 +15,7 @@ import java.util.function.Function;
 class DelegatingNodeRendererFactoryWrapper implements Function<DataHolder, HtmlNodeRenderer>, Dependent<DelegatingNodeRendererFactoryWrapper>, DelegatingNodeRendererFactory {
     private final HtmlNodeRendererFactory nodeRendererFactory;
     private List<DelegatingNodeRendererFactoryWrapper> nodeRenderers;
-    private Set<Class> myDelegates = null;
+    private Set<Class<?>> myDelegates = null;
 
     public DelegatingNodeRendererFactoryWrapper(List<DelegatingNodeRendererFactoryWrapper> nodeRenderers, HtmlNodeRendererFactory nodeRendererFactory) {
         this.nodeRendererFactory = nodeRendererFactory;
@@ -31,19 +32,21 @@ class DelegatingNodeRendererFactoryWrapper implements Function<DataHolder, HtmlN
     }
 
     @Override
-    public Set<Class<? extends HtmlNodeRendererFactory>> getDelegates() {
+    public Set<Class<?>> getDelegates() {
         return nodeRendererFactory instanceof DelegatingNodeRendererFactory ? ((DelegatingNodeRendererFactory) nodeRendererFactory).getDelegates() : null;
     }
 
+    @Nullable
     @Override
-    public final Set<? extends Class> getAfterDependents() {
+    public final Set<Class<?>> getAfterDependents() {
         return null;
     }
 
+    @Nullable
     @Override
-    public Set<? extends Class> getBeforeDependents() {
+    public Set<Class<?>> getBeforeDependents() {
         if (myDelegates == null && nodeRenderers != null) {
-            Set<Class<? extends HtmlNodeRendererFactory>> delegates = getDelegates();
+            Set<Class<?>> delegates = getDelegates();
             if (delegates != null) {
                 myDelegates = new HashSet<>();
                 for (DelegatingNodeRendererFactoryWrapper factory : nodeRenderers) {

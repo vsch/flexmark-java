@@ -77,7 +77,7 @@ public class TablesExtension implements Parser.ParserExtension, HtmlRenderer.Htm
     }
 
     @Override
-    public void extend(HtmlRenderer.Builder rendererBuilder, String rendererType) {
+    public void extend(@NotNull HtmlRenderer.Builder rendererBuilder, @NotNull String rendererType) {
         if (rendererBuilder.isRendererType("HTML")) {
             rendererBuilder.nodeRendererFactory(new TableNodeRenderer.Factory());
         } else if (rendererBuilder.isRendererType("JIRA")) {

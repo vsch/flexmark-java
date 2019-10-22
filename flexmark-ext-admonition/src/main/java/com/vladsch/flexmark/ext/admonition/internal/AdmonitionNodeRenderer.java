@@ -6,6 +6,7 @@ import com.vladsch.flexmark.html.renderer.*;
 import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.html.Attribute;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.HashSet;
 import java.util.LinkedHashSet;
@@ -41,7 +42,7 @@ public class AdmonitionNodeRenderer implements PhasedNodeRenderer {
     }
 
     @Override
-    public void renderDocument(NodeRendererContext context, HtmlWriter html, Document document, RenderingPhase phase) {
+    public void renderDocument(@NotNull NodeRendererContext context, @NotNull HtmlWriter html, @NotNull Document document, @NotNull RenderingPhase phase) {
         if (phase == BODY_TOP) {
             // dump out the SVG used by the rest of the nodes
 
@@ -125,8 +126,9 @@ public class AdmonitionNodeRenderer implements PhasedNodeRenderer {
     }
 
     public static class Factory implements NodeRendererFactory {
+        @NotNull
         @Override
-        public NodeRenderer apply(DataHolder options) {
+        public NodeRenderer apply(@NotNull DataHolder options) {
             return new AdmonitionNodeRenderer(options);
         }
     }

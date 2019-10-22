@@ -6,6 +6,7 @@ import com.vladsch.flexmark.util.html.Escaping;
 import com.vladsch.flexmark.util.mappers.CharMapper;
 import com.vladsch.flexmark.util.mappers.LowerCaseMapper;
 import com.vladsch.flexmark.util.mappers.UpperCaseMapper;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -1281,6 +1282,7 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
         return (T) this;
     }
 
+    @NotNull
     @Override
     public String toString() {
         int iMax = length();

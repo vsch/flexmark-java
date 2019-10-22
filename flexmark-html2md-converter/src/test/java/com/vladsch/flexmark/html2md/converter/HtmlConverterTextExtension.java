@@ -2,6 +2,7 @@ package com.vladsch.flexmark.html2md.converter;
 
 import com.vladsch.flexmark.html.renderer.ResolvedLink;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
+import org.jetbrains.annotations.Nullable;
 import org.jsoup.nodes.Node;
 
 import java.util.Set;
@@ -34,13 +35,15 @@ public class HtmlConverterTextExtension implements FlexmarkHtmlConverter.HtmlCon
         }
 
         static class Factory implements HtmlLinkResolverFactory {
+            @Nullable
             @Override
-            public Set<Class<? extends HtmlLinkResolverFactory>> getAfterDependents() {
+            public Set<Class<?>> getAfterDependents() {
                 return null;
             }
 
+            @Nullable
             @Override
-            public Set<Class<? extends HtmlLinkResolverFactory>> getBeforeDependents() {
+            public Set<Class<?>> getBeforeDependents() {
                 return null;
             }
 

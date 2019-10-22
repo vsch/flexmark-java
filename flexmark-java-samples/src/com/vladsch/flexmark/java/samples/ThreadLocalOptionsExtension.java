@@ -5,6 +5,7 @@ import com.vladsch.flexmark.html.RendererExtension;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.data.DataSet;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
+import org.jetbrains.annotations.NotNull;
 
 public class ThreadLocalOptionsExtension implements
         Parser.ParserExtension,
@@ -51,13 +52,13 @@ public class ThreadLocalOptionsExtension implements
     }
 
     @Override
-    public void rendererOptions(MutableDataHolder options) {
+    public void rendererOptions(@NotNull MutableDataHolder options) {
         // copy thread local options to builder
         options.setAll(threadOptions.get());
     }
 
     @Override
-    public void extend(RendererBuilder rendererBuilder, String rendererType) {
+    public void extend(@NotNull RendererBuilder rendererBuilder, @NotNull String rendererType) {
 
     }
 }

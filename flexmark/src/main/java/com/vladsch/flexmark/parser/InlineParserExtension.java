@@ -1,8 +1,10 @@
 package com.vladsch.flexmark.parser;
 
+import org.jetbrains.annotations.NotNull;
+
 public interface InlineParserExtension {
-    void finalizeDocument(InlineParser inlineParser);
-    void finalizeBlock(InlineParser inlineParser);
+    void finalizeDocument(@NotNull InlineParser inlineParser);
+    void finalizeBlock(@NotNull InlineParser inlineParser);
 
     /**
      * Parse input
@@ -10,5 +12,5 @@ public interface InlineParserExtension {
      * @param inlineParser
      * @return true if character input was processed
      */
-    boolean parse(LightInlineParser inlineParser);
+    boolean parse(@NotNull LightInlineParser inlineParser);
 }

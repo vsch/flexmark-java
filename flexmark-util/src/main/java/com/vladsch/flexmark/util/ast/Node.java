@@ -93,7 +93,7 @@ public abstract class Node {
         return count;
     }
 
-    public Node getOldestAncestorOfTypeAfter(@NotNull Class<?> ancestor, @NotNull Class<?> after) {
+    public @Nullable Node getOldestAncestorOfTypeAfter(@NotNull Class<?> ancestor, @NotNull Class<?> after) {
         Node parent = getParent();
         Node oldestAncestor = null;
         while (parent != null) {
@@ -104,7 +104,7 @@ public abstract class Node {
         return oldestAncestor;
     }
 
-    public Node getChildOfType(@NotNull Class<?>... classes) {
+    public @Nullable Node getChildOfType(@NotNull Class<?>... classes) {
         Node child = getFirstChild();
         while (child != null) {
             for (Class<?> nodeType : classes) {
@@ -124,6 +124,7 @@ public abstract class Node {
         return -1;
     }
 
+    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     public boolean isOrDescendantOfType(@NotNull Class<?>... classes) {
         Node node = this;
         while (node != null) {
@@ -222,7 +223,7 @@ public abstract class Node {
         while (node != null && !(node instanceof Document)) {
             node = node.getParent();
         }
-        assert node != null: "Node should always have Document ancestor";
+        assert node != null : "Node should always have Document ancestor";
         return (Document) node;
     }
 
@@ -452,7 +453,7 @@ public abstract class Node {
         return getClass().getName().substring(getClass().getPackage().getName().length() + 1) + "{" + toStringAttributes() + "}";
     }
 
-    public void getAstExtra(StringBuilder out) {
+    public void getAstExtra(@NotNull StringBuilder out) {
 
     }
 
@@ -478,38 +479,38 @@ public abstract class Node {
         }
     }
 
-    protected String toStringAttributes() {
+    protected @NotNull String toStringAttributes() {
         return "";
     }
 
     public abstract @NotNull BasedSequence[] getSegments();
 
-    public static @NotNull BasedSequence getLeadSegment(BasedSequence[] segments) {
+    public static @NotNull BasedSequence getLeadSegment(@NotNull BasedSequence[] segments) {
         for (BasedSequence segment : segments) {
-            if (segment != null && segment != BasedSequence.NULL) return segment;
+            if (segment != BasedSequence.NULL) return segment;
         }
 
         return BasedSequence.NULL;
     }
 
-    public static @NotNull BasedSequence getTrailSegment(BasedSequence[] segments) {
+    public static @NotNull BasedSequence getTrailSegment(@NotNull BasedSequence[] segments) {
         int iMax = segments.length;
 
         for (int i = iMax; i-- > 0; ) {
             BasedSequence segment = segments[i];
-            if (segment != null && segment != BasedSequence.NULL) return segment;
+            if (segment != BasedSequence.NULL) return segment;
         }
 
         return BasedSequence.NULL;
     }
 
-    public static @NotNull BasedSequence spanningChars(BasedSequence... segments) {
+    public static @NotNull BasedSequence spanningChars(@NotNull BasedSequence... segments) {
         int startOffset = Integer.MAX_VALUE;
         int endOffset = -1;
         BasedSequence firstSequence = null;
         BasedSequence lastSequence = null;
         for (BasedSequence segment : segments) {
-            if (segment != null && segment != BasedSequence.NULL) {
+            if (segment != BasedSequence.NULL) {
                 if (startOffset > segment.getStartOffset()) {
                     startOffset = segment.getStartOffset();
                     firstSequence = segment;
@@ -590,7 +591,7 @@ public abstract class Node {
     }
 
     public static void segmentSpanChars(
-            StringBuilder out,
+            @NotNull StringBuilder out,
             int startOffset,
             int endOffset,
             @Nullable String name,

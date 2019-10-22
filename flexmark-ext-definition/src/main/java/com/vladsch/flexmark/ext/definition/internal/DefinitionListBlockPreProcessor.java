@@ -8,6 +8,7 @@ import com.vladsch.flexmark.parser.block.ParserState;
 import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -61,15 +62,17 @@ public class DefinitionListBlockPreProcessor implements BlockPreProcessor {
             return set;
         }
 
+        @Nullable
         @Override
-        public Set<Class<? extends BlockPreProcessorFactory>> getAfterDependents() {
-            HashSet<Class<? extends BlockPreProcessorFactory>> set = new HashSet<>();
+        public Set<Class<?>> getAfterDependents() {
+            HashSet<Class<?>> set = new HashSet<>();
             set.add(DefinitionListItemBlockPreProcessor.Factory.class);
             return set;
         }
 
+        @Nullable
         @Override
-        public Set<Class<? extends BlockPreProcessorFactory>> getBeforeDependents() {
+        public Set<Class<?>> getBeforeDependents() {
             return null;
         }
 

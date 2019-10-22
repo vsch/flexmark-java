@@ -6,6 +6,7 @@ import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
+import org.jetbrains.annotations.Nullable;
 import org.jsoup.nodes.Element;
 import org.jsoup.nodes.Node;
 
@@ -28,13 +29,15 @@ public class HtmlToMarkdownCustomizedSample {
         }
 
         static class Factory implements HtmlLinkResolverFactory {
+            @Nullable
             @Override
-            public Set<Class<? extends HtmlLinkResolverFactory>> getAfterDependents() {
+            public Set<Class<?>> getAfterDependents() {
                 return null;
             }
 
+            @Nullable
             @Override
-            public Set<Class<? extends HtmlLinkResolverFactory>> getBeforeDependents() {
+            public Set<Class<?>> getBeforeDependents() {
                 return null;
             }
 

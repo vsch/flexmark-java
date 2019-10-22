@@ -1,15 +1,19 @@
 package com.vladsch.flexmark.html;
 
+import org.jetbrains.annotations.Nullable;
+
 import java.util.Set;
 
 public abstract class IndependentLinkResolverFactory implements LinkResolverFactory {
+    @Nullable
     @Override
-    public Set<Class<? extends LinkResolverFactory>> getAfterDependents() {
+    public Set<Class<?>> getAfterDependents() {
         return null;
     }
 
+    @Nullable
     @Override
-    public Set<Class<? extends LinkResolverFactory>> getBeforeDependents() {
+    public Set<Class<?>> getBeforeDependents() {
         return null;
     }
 

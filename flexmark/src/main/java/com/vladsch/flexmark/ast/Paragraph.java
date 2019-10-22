@@ -20,7 +20,7 @@ public class Paragraph extends Block {
     }
 
     @Override
-    public void getAstExtra(StringBuilder out) {
+    public void getAstExtra(@NotNull StringBuilder out) {
         super.getAstExtra(out);
         if (trailingBlankLine) out.append(" isTrailingBlankLine");
     }
@@ -62,7 +62,7 @@ public class Paragraph extends Block {
     @Override
     // FIX: add indent tracking then deprecate. ContentNode does not have indents
 //    @Deprecated
-    public void setContent(BasedSequence chars, List<BasedSequence> lineSegments) {
+    public void setContent(@NotNull BasedSequence chars, @NotNull List<BasedSequence> lineSegments) {
         super.setContent(chars, lineSegments);
     }
 
@@ -76,12 +76,12 @@ public class Paragraph extends Block {
     @Override
     // FIX: add indent tracking then deprecate. ContentNode does not have indents
 //    @Deprecated
-    public void setContent(List<BasedSequence> lineSegments) {
+    public void setContent(@NotNull List<BasedSequence> lineSegments) {
         super.setContent(lineSegments);
     }
 
     @Override
-    public void setContent(BlockContent blockContent) {
+    public void setContent(@NotNull BlockContent blockContent) {
         super.setContent(blockContent);
         setLineIndents(blockContent.getLineIndents());
     }

@@ -25,7 +25,7 @@ public class TypographicQuotes extends Node implements DelimitedNode, DoNotAttri
     }
 
     @Override
-    public void getAstExtra(StringBuilder out) {
+    public void getAstExtra(@NotNull StringBuilder out) {
         if (openingMarker.isNotNull()) out.append(" typographicOpening: ").append(typographicOpening).append(" ");
         if (closingMarker.isNotNull()) out.append(" typographicClosing: ").append(typographicClosing).append(" ");
         delimitedSegmentSpanChars(out, openingMarker, text, closingMarker, "text");

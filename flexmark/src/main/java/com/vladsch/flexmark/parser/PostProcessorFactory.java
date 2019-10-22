@@ -2,6 +2,8 @@ package com.vladsch.flexmark.parser;
 
 import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.dependency.Dependent;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
 import java.util.Set;
@@ -14,12 +16,12 @@ public interface PostProcessorFactory extends Function<Document, PostProcessor>,
      *
      * @return a map of desired node types mapped to a set of ancestors under which the post processor does not process the block
      */
-    Map<Class<?>, Set<Class<?>>> getNodeTypes();
+    @Nullable Map<Class<?>, Set<Class<?>>> getNodeTypes();
 
     /**
      * @param document for which to create the post processor
      * @return post processor for the document
      */
     @Override
-    PostProcessor apply(Document document);
+    @NotNull PostProcessor apply(@NotNull Document document);
 }

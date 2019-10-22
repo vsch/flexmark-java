@@ -41,7 +41,7 @@ public abstract class RefNode extends LinkNode implements LinkRefDerived, Refere
     }
 
     @Override
-    public void getAstExtra(StringBuilder out) {
+    public void getAstExtra(@NotNull StringBuilder out) {
         if (isReferenceTextCombined()) {
             delimitedSegmentSpanChars(out, referenceOpeningMarker, reference, referenceClosingMarker, "reference");
             delimitedSegmentSpanChars(out, textOpeningMarker, text, textClosingMarker, "text");
@@ -142,6 +142,7 @@ public abstract class RefNode extends LinkNode implements LinkRefDerived, Refere
         return text;
     }
 
+    @NotNull
     @Override
     public BasedSequence getReference() {
         return reference;
@@ -206,6 +207,7 @@ public abstract class RefNode extends LinkNode implements LinkRefDerived, Refere
         this.referenceClosingMarker = referenceClosingMarker;
     }
 
+    @NotNull
     @Override
     protected String toStringAttributes() {
         return "text=" + text + ", reference=" + reference;

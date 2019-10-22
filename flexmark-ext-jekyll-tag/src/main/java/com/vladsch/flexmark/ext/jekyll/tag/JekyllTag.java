@@ -21,7 +21,7 @@ public class JekyllTag extends Node {
     }
 
     @Override
-    public void getAstExtra(StringBuilder out) {
+    public void getAstExtra(@NotNull StringBuilder out) {
         segmentSpanChars(out, openingMarker, "open");
         segmentSpanChars(out, tag, "tag");
         segmentSpanChars(out, parameters, "parameters");

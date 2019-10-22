@@ -29,7 +29,7 @@ public class SpecExampleBlock extends Block {
     private BasedSequence closingMarker = BasedSequence.NULL;
 
     @Override
-    public void getAstExtra(StringBuilder out) {
+    public void getAstExtra(@NotNull StringBuilder out) {
         //BasedSequence content = getContentChars();
         //int lines = getSegments().length;
         //segmentSpanChars(out, openingMarker, "open");

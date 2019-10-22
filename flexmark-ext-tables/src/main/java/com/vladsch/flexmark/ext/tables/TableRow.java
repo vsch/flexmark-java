@@ -14,7 +14,7 @@ public class TableRow extends Node {
     private int rowNumber;
 
     @Override
-    public void getAstExtra(StringBuilder out) {
+    public void getAstExtra(@NotNull StringBuilder out) {
         super.getAstExtra(out);
         if (rowNumber != 0) out.append(" rowNumber=").append(rowNumber);
     }

@@ -6,6 +6,8 @@ import com.vladsch.flexmark.html.Disposable;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.Node;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
 
@@ -68,13 +70,15 @@ public class HeaderIdGenerator implements HtmlIdGenerator, Disposable {
         return null;
     }
 
+    @Nullable
     @Override
-    public String getId(Node node) {
+    public String getId(@NotNull Node node) {
         return node instanceof AnchorRefTarget ? ((AnchorRefTarget) node).getAnchorRefId() : null;
     }
 
+    @Nullable
     @Override
-    public String getId(CharSequence text) {
+    public String getId(@NotNull CharSequence text) {
         return generateId(text.toString());
     }
 
@@ -118,11 +122,13 @@ public class HeaderIdGenerator implements HtmlIdGenerator, Disposable {
     }
 
     public static class Factory implements HeaderIdGeneratorFactory, HtmlIdGeneratorFactory {
+        @NotNull
         @Override
         public HeaderIdGenerator create(LinkResolverContext context) {
             return new HeaderIdGenerator();
         }
 
+        @NotNull
         @Override
         public HeaderIdGenerator create() {
             return new HeaderIdGenerator();

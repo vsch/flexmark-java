@@ -1,5 +1,7 @@
 package com.vladsch.flexmark.util.sequence;
 
+import org.jetbrains.annotations.NotNull;
+
 /**
  * A CharSequence that references original char[] and maps '\0' to '\uFFFD'
  * a subSequence() returns a sub-sequence from the original base sequence
@@ -108,6 +110,7 @@ public final class CharSubSequence extends BasedSequenceImpl {
         return obj == this || (obj instanceof CharSequence && toString().equals(obj.toString()));
     }
 
+    @NotNull
     @Override
     public String toString() {
         return String.valueOf(baseChars, startOffset, endOffset - startOffset);

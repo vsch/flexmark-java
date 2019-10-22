@@ -35,14 +35,15 @@ public class ParagraphCustomRenderingSample {
         }
 
         public static class Factory implements DelegatingNodeRendererFactory {
+            @NotNull
             @Override
-            public NodeRenderer apply(DataHolder options) {
+            public NodeRenderer apply(@NotNull DataHolder options) {
                 return new CustomNodeRenderer(options);
             }
 
             @Override
-            public Set<Class<? extends NodeRendererFactory>> getDelegates() {
-                Set<Class<? extends NodeRendererFactory>> set = new HashSet<>();
+            public Set<Class<?>> getDelegates() {
+                Set<Class<?>> set = new HashSet<>();
                 // add node renderer factory classes to which this renderer will delegate some of its rendering
                 // core node renderer is assumed to have all depend it so there is no need to add it
                 //set.add(TocNodeRenderer.Factory.class);
@@ -73,7 +74,7 @@ public class ParagraphCustomRenderingSample {
         }
 
         @Override
-        public void extend(Builder rendererBuilder, String rendererType) {
+        public void extend(@NotNull Builder rendererBuilder, @NotNull String rendererType) {
             rendererBuilder.nodeRendererFactory(new CustomNodeRenderer.Factory());
         }
 

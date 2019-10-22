@@ -2,6 +2,7 @@ package com.vladsch.flexmark.util.ast;
 
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class BlankLine extends Block {
     private Block claimedBlankLine = null;
@@ -10,21 +11,23 @@ public class BlankLine extends Block {
         return claimedBlankLine != null;
     }
 
+    @Nullable
     public Block getClaimedBlankLine() {
         return claimedBlankLine;
     }
 
-    public BlankLine setClaimedBlankLine(Block claimedBlankLine) {
+    @SuppressWarnings("UnusedReturnValue")
+    public BlankLine setClaimedBlankLine(@NotNull Block claimedBlankLine) {
         this.claimedBlankLine = claimedBlankLine;
         return this;
     }
 
-    public BlankLine(BasedSequence chars) {
+    public BlankLine(@NotNull BasedSequence chars) {
         super(chars);
         setCharsFromContent();
     }
 
-    public BlankLine(BasedSequence chars, Block claimedBlankLine) {
+    public BlankLine(@NotNull BasedSequence chars, @NotNull Block claimedBlankLine) {
         super(chars);
         setCharsFromContent();
         this.claimedBlankLine = claimedBlankLine;

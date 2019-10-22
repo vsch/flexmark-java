@@ -14,6 +14,7 @@ import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -355,13 +356,15 @@ final public class ParserTest {
     }
 
     public static class DashBlockParserFactory implements CustomBlockParserFactory {
+        @Nullable
         @Override
-        public Set<Class<? extends CustomBlockParserFactory>> getAfterDependents() {
+        public Set<Class<?>> getAfterDependents() {
             return null;
         }
 
+        @Nullable
         @Override
-        public Set<Class<? extends CustomBlockParserFactory>> getBeforeDependents() {
+        public Set<Class<?>> getBeforeDependents() {
             return null;
         }
 
@@ -370,8 +373,9 @@ final public class ParserTest {
             return false;
         }
 
+        @NotNull
         @Override
-        public BlockParserFactory apply(DataHolder options) {
+        public BlockParserFactory apply(@NotNull DataHolder options) {
             return new BlockFactory(options);
         }
     }

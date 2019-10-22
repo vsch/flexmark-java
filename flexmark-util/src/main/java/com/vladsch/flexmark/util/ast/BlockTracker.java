@@ -1,11 +1,13 @@
 package com.vladsch.flexmark.util.ast;
 
-public interface BlockTracker {
-    void blockAdded(Block node);
-    void blockAddedWithChildren(Block node);
-    void blockAddedWithDescendants(Block node);
+import org.jetbrains.annotations.NotNull;
 
-    void blockRemoved(Block node);
-    void blockRemovedWithChildren(Block node);
-    void blockRemovedWithDescendants(Block node);
+public interface BlockTracker {
+    void blockAdded(@NotNull Block node);
+    void blockAddedWithChildren(@NotNull Block node);
+    void blockAddedWithDescendants(@NotNull Block node);
+
+    void blockRemoved(@NotNull Block node);
+    void blockRemovedWithChildren(@NotNull Block node);
+    void blockRemovedWithDescendants(@NotNull Block node);
 }

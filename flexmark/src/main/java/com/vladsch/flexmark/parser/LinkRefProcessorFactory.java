@@ -2,6 +2,7 @@ package com.vladsch.flexmark.parser;
 
 import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.data.DataHolder;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Function;
 
@@ -16,7 +17,7 @@ public interface LinkRefProcessorFactory extends Function<Document, LinkRefProce
      * @param options options
      * @return true if ! is part of the desired element, false otherwise
      */
-    boolean getWantExclamationPrefix(DataHolder options);
+    boolean getWantExclamationPrefix(@NotNull DataHolder options);
 
     /**
      * Whether the element consists of nested [] inside the link ref. For example Wiki link [[]] processor would return 1
@@ -28,7 +29,7 @@ public interface LinkRefProcessorFactory extends Function<Document, LinkRefProce
      * @param options options
      * @return nesting level for references, {@code >0} for nesting
      */
-    int getBracketNestingLevel(DataHolder options);
+    int getBracketNestingLevel(@NotNull DataHolder options);
 
     /**
      * Create a link ref processor for the document
@@ -37,5 +38,5 @@ public interface LinkRefProcessorFactory extends Function<Document, LinkRefProce
      * @return link ref processor
      */
     @Override
-    LinkRefProcessor apply(Document document);
+    @NotNull LinkRefProcessor apply(@NotNull Document document);
 }

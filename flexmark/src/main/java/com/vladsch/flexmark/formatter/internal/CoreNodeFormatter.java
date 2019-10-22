@@ -19,6 +19,7 @@ import com.vladsch.flexmark.util.html.LineFormattingAppendable;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.RepeatedCharSequence;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 import java.util.regex.Matcher;
@@ -38,8 +39,9 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
     public static final DataKey<Map<String, String>> ATTRIBUTE_UNIQUIFICATION_ID_MAP = new DataKey<>("ATTRIBUTE_UNIQUIFICATION_ID_MAP", HashMap::new);
 
     public static class Factory implements NodeFormatterFactory {
+        @NotNull
         @Override
-        public NodeFormatter create(DataHolder options) {
+        public NodeFormatter create(@NotNull DataHolder options) {
             return new CoreNodeFormatter(options);
         }
     }
@@ -64,6 +66,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
         myTranslationAutolinkPrefix = this.formatterOptions.translationAutolinkPrefix;
     }
 
+    @Nullable
     @Override
     public Set<NodeFormattingHandler<?>> getNodeFormattingHandlers() {
         return new HashSet<>(Arrays.asList(
@@ -107,6 +110,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
         ));
     }
 
+    @Nullable
     @Override
     public Set<Class<?>> getNodeClasses() {
         if (formatterOptions.referencePlacement != ElementPlacement.AS_IS && formatterOptions.referenceSort != ElementPlacementSort.SORT_UNUSED_LAST) return null;
@@ -193,7 +197,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
     }
 
     @Override
-    public void renderDocument(NodeFormatterContext context, MarkdownWriter markdown, Document document, FormattingPhase phase) {
+    public void renderDocument(@NotNull NodeFormatterContext context, @NotNull MarkdownWriter markdown, @NotNull Document document, @NotNull FormattingPhase phase) {
         super.renderDocument(context, markdown, document, phase);
 
         attributeUniquificationIdMap = ATTRIBUTE_UNIQUIFICATION_ID_MAP.get(context.getTranslationStore());

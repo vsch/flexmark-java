@@ -25,6 +25,7 @@ import com.vladsch.flexmark.util.html.Attributes;
 import com.vladsch.flexmark.util.html.LineFormattingAppendable;
 import com.vladsch.flexmark.util.mappers.CharWidthProvider;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 import java.util.function.Function;
@@ -130,16 +131,19 @@ public class Formatter implements IRender {
     private static class NodeFormatterDependencyHandler extends DependencyHandler<NodeFormatterFactory, NodeFormatterDependencyStage, NodeFormatterDependencies> {
         NodeFormatterDependencyHandler() {}
 
+        @NotNull
         @Override
         protected Class<?> getDependentClass(NodeFormatterFactory dependent) {
             return dependent.getClass();
         }
 
+        @NotNull
         @Override
         protected NodeFormatterDependencies createResolvedDependencies(List<NodeFormatterDependencyStage> stages) {
             return new NodeFormatterDependencies(stages);
         }
 
+        @NotNull
         @Override
         protected NodeFormatterDependencyStage createStage(List<NodeFormatterFactory> dependents) {
             return new NodeFormatterDependencyStage(dependents);
@@ -407,7 +411,7 @@ public class Formatter implements IRender {
         }
 
         @Override
-        protected void removeApiPoint(Object apiPoint) {
+        protected void removeApiPoint(@NotNull Object apiPoint) {
             if (apiPoint instanceof AttributeProviderFactory) this.attributeProviderFactories.remove(apiPoint);
             else if (apiPoint instanceof NodeFormatterFactory) this.nodeFormatterFactories.remove(apiPoint);
             else if (apiPoint instanceof LinkResolverFactory) this.linkResolverFactories.remove(apiPoint);
@@ -418,7 +422,7 @@ public class Formatter implements IRender {
         }
 
         @Override
-        protected void preloadExtension(Extension extension) {
+        protected void preloadExtension(@NotNull Extension extension) {
             if (extension instanceof FormatterExtension) {
                 FormatterExtension formatterExtension = (FormatterExtension) extension;
                 formatterExtension.rendererOptions(this);
@@ -426,7 +430,7 @@ public class Formatter implements IRender {
         }
 
         @Override
-        protected boolean loadExtension(Extension extension) {
+        protected boolean loadExtension(@NotNull Extension extension) {
             if (extension instanceof FormatterExtension) {
                 FormatterExtension formatterExtension = (FormatterExtension) extension;
                 formatterExtension.extend(this);
@@ -486,7 +490,7 @@ public class Formatter implements IRender {
 
     private class MainNodeFormatter extends NodeFormatterSubContext {
         private final Document document;
-        private final Map<Class, NodeFormattingHandler<?>> renderers;
+        private final Map<Class<?>, NodeFormattingHandler<?>> renderers;
         private final SubClassingBag<Node> collectedNodes;
 
         private final List<PhasedNodeFormatter> phasedFormatters;
@@ -505,7 +509,7 @@ public class Formatter implements IRender {
             this.document = document;
             this.renderers = new HashMap<>(32);
             this.renderingPhases = new HashSet<>(FormattingPhase.values().length);
-            Set<Class> collectNodeTypes = new HashSet<>(100);
+            Set<Class<?>> collectNodeTypes = new HashSet<>(100);
 
             Boolean defaultLinkResolver = DEFAULT_LINK_RESOLVER.get(options);
             this.myLinkResolvers = new LinkResolver[linkResolverFactories.size() + (defaultLinkResolver ? 1 : 0)];
@@ -572,18 +576,21 @@ public class Formatter implements IRender {
             }
         }
 
+        @NotNull
         @Override
-        public String encodeUrl(CharSequence url) {
+        public String encodeUrl(@NotNull CharSequence url) {
             return String.valueOf(url);
         }
 
+        @NotNull
         @Override
-        public ResolvedLink resolveLink(LinkType linkType, CharSequence url, Boolean urlEncode) {
+        public ResolvedLink resolveLink(@NotNull LinkType linkType, @NotNull CharSequence url, Boolean urlEncode) {
             return resolveLink(this, linkType, url, (Attributes) null, urlEncode);
         }
 
+        @NotNull
         @Override
-        public ResolvedLink resolveLink(LinkType linkType, CharSequence url, Attributes attributes, Boolean urlEncode) {
+        public ResolvedLink resolveLink(@NotNull LinkType linkType, @NotNull CharSequence url, Attributes attributes, Boolean urlEncode) {
             return resolveLink(this, linkType, url, attributes, urlEncode);
         }
 
@@ -612,12 +619,13 @@ public class Formatter implements IRender {
         }
 
         @Override
-        public void addExplicitId(Node node, String id, NodeFormatterContext context, MarkdownWriter markdown) {
+        public void addExplicitId(@NotNull Node node, @NotNull String id, @NotNull NodeFormatterContext context, @NotNull MarkdownWriter markdown) {
             if (myExplicitAttributeIdProvider != null) {
                 myExplicitAttributeIdProvider.addExplicitId(node, id, context, markdown);
             }
         }
 
+        @NotNull
         @Override
         public RenderPurpose getRenderPurpose() {
             return myTranslationHandler == null ? RenderPurpose.FORMAT : myTranslationHandler.getRenderPurpose();
@@ -628,29 +636,33 @@ public class Formatter implements IRender {
             return myTranslationHandler != null && myTranslationHandler.isTransformingText();
         }
 
+        @NotNull
         @Override
-        public CharSequence transformNonTranslating(CharSequence prefix, CharSequence nonTranslatingText, CharSequence suffix, CharSequence suffix2) {
+        public CharSequence transformNonTranslating(CharSequence prefix, @NotNull CharSequence nonTranslatingText, CharSequence suffix, CharSequence suffix2) {
             return myTranslationHandler == null ? nonTranslatingText : myTranslationHandler.transformNonTranslating(prefix, nonTranslatingText, suffix, suffix2);
         }
 
+        @NotNull
         @Override
-        public CharSequence transformTranslating(CharSequence prefix, CharSequence translatingText, CharSequence suffix, CharSequence suffix2) {
+        public CharSequence transformTranslating(CharSequence prefix, @NotNull CharSequence translatingText, CharSequence suffix, CharSequence suffix2) {
             return myTranslationHandler == null ? translatingText : myTranslationHandler.transformTranslating(prefix, translatingText, suffix, suffix2);
         }
 
+        @NotNull
         @Override
-        public CharSequence transformAnchorRef(CharSequence pageRef, CharSequence anchorRef) {
+        public CharSequence transformAnchorRef(@NotNull CharSequence pageRef, @NotNull CharSequence anchorRef) {
             return myTranslationHandler == null ? anchorRef : myTranslationHandler.transformAnchorRef(pageRef, anchorRef);
         }
 
         @Override
-        public void postProcessNonTranslating(Function<String, CharSequence> postProcessor, Runnable scope) {
+        public void postProcessNonTranslating(@NotNull Function<String, CharSequence> postProcessor, @NotNull Runnable scope) {
             if (myTranslationHandler != null) myTranslationHandler.postProcessNonTranslating(postProcessor, scope);
             else scope.run();
         }
 
+        @NotNull
         @Override
-        public <T> T postProcessNonTranslating(Function<String, CharSequence> postProcessor, Supplier<T> scope) {
+        public <T> T postProcessNonTranslating(@NotNull Function<String, CharSequence> postProcessor, @NotNull Supplier<T> scope) {
             if (myTranslationHandler != null) return myTranslationHandler.postProcessNonTranslating(postProcessor, scope);
             else return scope.get();
         }
@@ -671,7 +683,7 @@ public class Formatter implements IRender {
         }
 
         @Override
-        public void translatingSpan(TranslatingSpanRender render) {
+        public void translatingSpan(@NotNull TranslatingSpanRender render) {
             if (myTranslationHandler != null) {
                 myTranslationHandler.translatingSpan(render);
             } else {
@@ -680,7 +692,7 @@ public class Formatter implements IRender {
         }
 
         @Override
-        public void nonTranslatingSpan(TranslatingSpanRender render) {
+        public void nonTranslatingSpan(@NotNull TranslatingSpanRender render) {
             if (myTranslationHandler != null) {
                 myTranslationHandler.nonTranslatingSpan(render);
             } else {
@@ -689,7 +701,7 @@ public class Formatter implements IRender {
         }
 
         @Override
-        public void translatingRefTargetSpan(Node target, TranslatingSpanRender render) {
+        public void translatingRefTargetSpan(@Nullable Node target, @NotNull TranslatingSpanRender render) {
             if (myTranslationHandler != null) {
                 myTranslationHandler.translatingRefTargetSpan(target, render);
             } else {
@@ -697,6 +709,7 @@ public class Formatter implements IRender {
             }
         }
 
+        @NotNull
         @Override
         public MutableDataHolder getTranslationStore() {
             if (myTranslationHandler != null) {
@@ -707,7 +720,7 @@ public class Formatter implements IRender {
         }
 
         @Override
-        public void customPlaceholderFormat(TranslationPlaceholderGenerator generator, TranslatingSpanRender render) {
+        public void customPlaceholderFormat(@NotNull TranslationPlaceholderGenerator generator, @NotNull TranslatingSpanRender render) {
             if (myTranslationHandler != null) {
                 myTranslationHandler.customPlaceholderFormat(generator, render);
             } else {
@@ -715,53 +728,62 @@ public class Formatter implements IRender {
             }
         }
 
+        @NotNull
         @Override
         public Node getCurrentNode() {
             return renderingNode;
         }
 
+        @NotNull
         @Override
         public DataHolder getOptions() {
             return options;
         }
 
+        @NotNull
         @Override
         public FormatterOptions getFormatterOptions() {
             return formatterOptions;
         }
 
+        @NotNull
         @Override
         public Document getDocument() {
             return document;
         }
 
+        @NotNull
         @Override
         public FormattingPhase getFormattingPhase() {
             return phase;
         }
 
         @Override
-        public void render(Node node) {
+        public void render(@NotNull Node node) {
             renderNode(node, this);
         }
 
+        @NotNull
         @Override
-        public final Iterable<? extends Node> nodesOfType(Class<?>[] classes) {
+        public final Iterable<? extends Node> nodesOfType(@NotNull Class<?>[] classes) {
             return collectedNodes == null ? NULL_ITERABLE : collectedNodes.itemsOfType(Node.class, classes);
         }
 
+        @NotNull
         @Override
-        public final Iterable<? extends Node> nodesOfType(Collection<Class<?>> classes) {
+        public final Iterable<? extends Node> nodesOfType(@NotNull Collection<Class<?>> classes) {
             return collectedNodes == null ? NULL_ITERABLE : collectedNodes.itemsOfType(Node.class, classes);
         }
 
+        @NotNull
         @Override
-        public final Iterable<? extends Node> reversedNodesOfType(Class<?>[] classes) {
+        public final Iterable<? extends Node> reversedNodesOfType(@NotNull Class<?>[] classes) {
             return collectedNodes == null ? NULL_ITERABLE : collectedNodes.reversedItemsOfType(Node.class, classes);
         }
 
+        @NotNull
         @Override
-        public final Iterable<? extends Node> reversedNodesOfType(Collection<Class<?>> classes) {
+        public final Iterable<? extends Node> reversedNodesOfType(@NotNull Collection<Class<?>> classes) {
             return collectedNodes == null ? NULL_ITERABLE : collectedNodes.reversedItemsOfType(Node.class, classes);
         }
 
@@ -821,7 +843,7 @@ public class Formatter implements IRender {
             }
         }
 
-        public void renderChildren(Node parent) {
+        public void renderChildren(@NotNull Node parent) {
             renderChildrenNode(parent, this);
         }
 
@@ -844,48 +866,58 @@ public class Formatter implements IRender {
                 myMainNodeRenderer = mainNodeRenderer;
             }
 
+            @NotNull
             @Override
             public MutableDataHolder getTranslationStore() {
                 return myMainNodeRenderer.getTranslationStore();
             }
 
+            @NotNull
             @Override
-            public final Iterable<? extends Node> nodesOfType(Class<?>[] classes) {
+            public final Iterable<? extends Node> nodesOfType(@NotNull Class<?>[] classes) {
                 return myMainNodeRenderer.nodesOfType(classes);
             }
 
+            @NotNull
             @Override
-            public final Iterable<? extends Node> nodesOfType(Collection<Class<?>> classes) {
+            public final Iterable<? extends Node> nodesOfType(@NotNull Collection<Class<?>> classes) {
                 return myMainNodeRenderer.nodesOfType(classes);
             }
 
+            @NotNull
             @Override
-            public final Iterable<? extends Node> reversedNodesOfType(Class<?>[] classes) {
+            public final Iterable<? extends Node> reversedNodesOfType(@NotNull Class<?>[] classes) {
                 return myMainNodeRenderer.reversedNodesOfType(classes);
             }
 
+            @NotNull
             @Override
-            public final Iterable<? extends Node> reversedNodesOfType(Collection<Class<?>> classes) {
+            public final Iterable<? extends Node> reversedNodesOfType(@NotNull Collection<Class<?>> classes) {
                 return myMainNodeRenderer.reversedNodesOfType(classes);
             }
 
+            @NotNull
             @Override
             public DataHolder getOptions() {return myMainNodeRenderer.getOptions();}
 
+            @NotNull
             @Override
             public FormatterOptions getFormatterOptions() {return myMainNodeRenderer.getFormatterOptions();}
 
+            @NotNull
             @Override
             public Document getDocument() {return myMainNodeRenderer.getDocument();}
 
+            @NotNull
             @Override
             public FormattingPhase getFormattingPhase() {return myMainNodeRenderer.getFormattingPhase();}
 
             @Override
-            public void render(Node node) {
+            public void render(@NotNull Node node) {
                 myMainNodeRenderer.renderNode(node, this);
             }
 
+            @NotNull
             @Override
             public Node getCurrentNode() {
                 return myMainNodeRenderer.getCurrentNode();
@@ -900,13 +932,15 @@ public class Formatter implements IRender {
             }
 
             @Override
-            public void renderChildren(Node parent) {
+            public void renderChildren(@NotNull Node parent) {
                 myMainNodeRenderer.renderChildrenNode(parent, this);
             }
 
+            @NotNull
             @Override
             public MarkdownWriter getMarkdown() { return markdown; }
 
+            @NotNull
             @Override
             public RenderPurpose getRenderPurpose() {
                 return myMainNodeRenderer.getRenderPurpose();
@@ -917,63 +951,70 @@ public class Formatter implements IRender {
                 return myMainNodeRenderer.isTransformingText();
             }
 
+            @NotNull
             @Override
-            public CharSequence transformNonTranslating(CharSequence prefix, CharSequence nonTranslatingText, CharSequence suffix, CharSequence suffix2) {
+            public CharSequence transformNonTranslating(CharSequence prefix, @NotNull CharSequence nonTranslatingText, CharSequence suffix, CharSequence suffix2) {
                 return myMainNodeRenderer.transformNonTranslating(prefix, nonTranslatingText, suffix, suffix2);
             }
 
+            @NotNull
             @Override
-            public CharSequence transformTranslating(CharSequence prefix, CharSequence translatingText, CharSequence suffix, CharSequence suffix2) {
+            public CharSequence transformTranslating(CharSequence prefix, @NotNull CharSequence translatingText, CharSequence suffix, CharSequence suffix2) {
                 return myMainNodeRenderer.transformTranslating(prefix, translatingText, suffix, suffix2);
             }
 
+            @NotNull
             @Override
-            public CharSequence transformAnchorRef(CharSequence pageRef, CharSequence anchorRef) {
+            public CharSequence transformAnchorRef(@NotNull CharSequence pageRef, @NotNull CharSequence anchorRef) {
                 return myMainNodeRenderer.transformAnchorRef(pageRef, anchorRef);
             }
 
             @Override
-            public void translatingSpan(TranslatingSpanRender render) {
+            public void translatingSpan(@NotNull TranslatingSpanRender render) {
                 myMainNodeRenderer.translatingSpan(render);
             }
 
             @Override
-            public void nonTranslatingSpan(TranslatingSpanRender render) {
+            public void nonTranslatingSpan(@NotNull TranslatingSpanRender render) {
                 myMainNodeRenderer.nonTranslatingSpan(render);
             }
 
             @Override
-            public void translatingRefTargetSpan(Node target, TranslatingSpanRender render) {
+            public void translatingRefTargetSpan(@Nullable Node target, @NotNull TranslatingSpanRender render) {
                 myMainNodeRenderer.translatingRefTargetSpan(target, render);
             }
 
             @Override
-            public void customPlaceholderFormat(TranslationPlaceholderGenerator generator, TranslatingSpanRender render) {
+            public void customPlaceholderFormat(@NotNull TranslationPlaceholderGenerator generator, @NotNull TranslatingSpanRender render) {
                 myMainNodeRenderer.customPlaceholderFormat(generator, render);
             }
 
+            @NotNull
             @Override
-            public String encodeUrl(CharSequence url) {
+            public String encodeUrl(@NotNull CharSequence url) {
                 return myMainNodeRenderer.encodeUrl(url);
             }
 
+            @NotNull
             @Override
-            public ResolvedLink resolveLink(LinkType linkType, CharSequence url, Boolean urlEncode) {
+            public ResolvedLink resolveLink(@NotNull LinkType linkType, @NotNull CharSequence url, Boolean urlEncode) {
                 return myMainNodeRenderer.resolveLink(this, linkType, url, (Attributes) null, urlEncode);
             }
 
+            @NotNull
             @Override
-            public ResolvedLink resolveLink(LinkType linkType, CharSequence url, Attributes attributes, Boolean urlEncode) {
+            public ResolvedLink resolveLink(@NotNull LinkType linkType, @NotNull CharSequence url, Attributes attributes, Boolean urlEncode) {
                 return myMainNodeRenderer.resolveLink(this, linkType, url, attributes, urlEncode);
             }
 
             @Override
-            public void postProcessNonTranslating(Function<String, CharSequence> postProcessor, Runnable scope) {
+            public void postProcessNonTranslating(@NotNull Function<String, CharSequence> postProcessor, @NotNull Runnable scope) {
                 myMainNodeRenderer.postProcessNonTranslating(postProcessor, scope);
             }
 
+            @NotNull
             @Override
-            public <T> T postProcessNonTranslating(Function<String, CharSequence> postProcessor, Supplier<T> scope) {
+            public <T> T postProcessNonTranslating(@NotNull Function<String, CharSequence> postProcessor, @NotNull Supplier<T> scope) {
                 return myMainNodeRenderer.postProcessNonTranslating(postProcessor, scope);
             }
 
@@ -988,7 +1029,7 @@ public class Formatter implements IRender {
             }
 
             @Override
-            public void addExplicitId(Node node, String id, NodeFormatterContext context, MarkdownWriter markdown) {
+            public void addExplicitId(@NotNull Node node, @NotNull String id, @NotNull NodeFormatterContext context, @NotNull MarkdownWriter markdown) {
                 myMainNodeRenderer.addExplicitId(node, id, context, markdown);
             }
 

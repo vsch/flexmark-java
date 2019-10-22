@@ -1,5 +1,7 @@
 package com.vladsch.flexmark.util.sequence;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -320,6 +322,7 @@ public interface BasedSequence extends RichCharSequence<BasedSequence> {
             return Range.NULL;
         }
 
+        @NotNull
         @Override
         public String toString() {
             return "";

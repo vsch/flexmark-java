@@ -14,6 +14,7 @@ import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -31,7 +32,7 @@ public class PegdownCustomLinkResolverOptions {
         }
 
         @Override
-        public void extend(HtmlRenderer.Builder rendererBuilder, String rendererType) {
+        public void extend(@NotNull HtmlRenderer.Builder rendererBuilder, @NotNull String rendererType) {
             rendererBuilder.linkResolverFactory(new CustomLinkResolver.Factory());
             rendererBuilder.nodeRendererFactory(new CustomLinkRenderer.Factory());
         }
@@ -48,8 +49,9 @@ public class PegdownCustomLinkResolverOptions {
             // context.getHtmlOptions();
         }
 
+        @NotNull
         @Override
-        public ResolvedLink resolveLink(Node node, LinkResolverContext context, ResolvedLink link) {
+        public ResolvedLink resolveLink(@NotNull Node node, @NotNull LinkResolverContext context, @NotNull ResolvedLink link) {
             // you can also set/clear/modify attributes through ResolvedLink.getAttributes() and ResolvedLink.getNonNullAttributes()
 
             if (node instanceof WikiImage) {
@@ -71,13 +73,15 @@ public class PegdownCustomLinkResolverOptions {
         }
 
         static class Factory implements LinkResolverFactory {
+            @Nullable
             @Override
-            public Set<Class<? extends LinkResolverFactory>> getAfterDependents() {
+            public Set<Class<?>> getAfterDependents() {
                 return null;
             }
 
+            @Nullable
             @Override
-            public Set<Class<? extends LinkResolverFactory>> getBeforeDependents() {
+            public Set<Class<?>> getBeforeDependents() {
                 return null;
             }
 
@@ -86,8 +90,9 @@ public class PegdownCustomLinkResolverOptions {
                 return false;
             }
 
+            @NotNull
             @Override
-            public LinkResolver apply(LinkResolverContext context) {
+            public LinkResolver apply(@NotNull LinkResolverContext context) {
                 return new CustomLinkResolver(context);
             }
         }
@@ -95,14 +100,15 @@ public class PegdownCustomLinkResolverOptions {
 
     static class CustomLinkRenderer implements NodeRenderer {
         public static class Factory implements DelegatingNodeRendererFactory {
+            @NotNull
             @Override
-            public NodeRenderer apply(DataHolder options) {
+            public NodeRenderer apply(@NotNull DataHolder options) {
                 return new CustomLinkRenderer();
             }
 
             @Override
-            public Set<Class<? extends NodeRendererFactory>> getDelegates() {
-                ///Set<Class<? extends NodeRendererFactory>> set = new HashSet<Class<? extends NodeRendererFactory>>();
+            public Set<Class<?>> getDelegates() {
+                ///Set<Class<?>>();
                 // add node renderer factory classes to which this renderer will delegate some of its rendering
                 // core node renderer is assumed to have all depend it so there is no need to add it
                 //set.add(WikiLinkNodeRenderer.Factory.class);

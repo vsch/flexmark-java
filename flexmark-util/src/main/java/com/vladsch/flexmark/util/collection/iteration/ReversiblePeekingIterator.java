@@ -1,5 +1,8 @@
 package com.vladsch.flexmark.util.collection.iteration;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 public interface ReversiblePeekingIterator<E> extends ReversibleIterator<E> {
-    E peek();
+    @Nullable E peek();
 }

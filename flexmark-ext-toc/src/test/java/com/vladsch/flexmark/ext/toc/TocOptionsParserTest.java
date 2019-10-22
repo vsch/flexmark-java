@@ -117,7 +117,7 @@ public class TocOptionsParserTest extends ComboSpecTestCase {
         }
 
         @Override
-        public void getAstExtra(StringBuilder out) {
+        public void getAstExtra(@NotNull StringBuilder out) {
             if (status != null) out.append(" status:").append(status.name());
             if (message != null) out.append(" message:").append(message);
         }

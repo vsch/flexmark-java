@@ -7,6 +7,8 @@ import com.vladsch.flexmark.parser.core.delimiter.Delimiter;
 import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.BitSet;
 import java.util.List;
@@ -27,22 +29,22 @@ public interface InlineParser extends LightInlineParser {
      */
     void parse(BasedSequence input, Node node);
 
-    Delimiter getLastDelimiter();
-    Bracket getLastBracket();
-    List<Node> parseCustom(BasedSequence input, Node node, BitSet customCharacters, Map<Character, CharacterNodeFactory> nodeFactoryMap);
-    void mergeTextNodes(Node fromNode, Node toNode);
-    void mergeIfNeeded(Text first, Text last);
-    BasedSequence toEOL();
+    @Nullable Delimiter getLastDelimiter();
+    @Nullable Bracket getLastBracket();
+    @NotNull List<Node> parseCustom(@NotNull BasedSequence input, @NotNull Node node, @NotNull BitSet customCharacters, @NotNull Map<Character, CharacterNodeFactory> nodeFactoryMap);
+    void mergeTextNodes(@Nullable Node fromNode, @Nullable Node toNode);
+    void mergeIfNeeded(@Nullable Text first, @Nullable Text last);
+    @Nullable BasedSequence toEOL();
     boolean parseNewline();
-    BasedSequence parseLinkDestination();
-    BasedSequence parseLinkTitle();
+    @Nullable BasedSequence parseLinkDestination();
+    @Nullable BasedSequence parseLinkTitle();
     int parseLinkLabel();
     boolean parseAutolink();
     boolean parseHtmlInline();
     boolean parseEntity();
-    void processDelimiters(Delimiter stackBottom);
-    void removeDelimitersBetween(Delimiter opener, Delimiter closer);
-    void removeDelimiterAndNode(Delimiter delim);
-    void removeDelimiterKeepNode(Delimiter delim);
-    void removeDelimiter(Delimiter delim);
+    void processDelimiters(@Nullable Delimiter stackBottom);
+    void removeDelimitersBetween(@NotNull Delimiter opener, @NotNull Delimiter closer);
+    void removeDelimiterAndNode(@NotNull Delimiter delim);
+    void removeDelimiterKeepNode(@NotNull Delimiter delim);
+    void removeDelimiter(@NotNull Delimiter delim);
 }

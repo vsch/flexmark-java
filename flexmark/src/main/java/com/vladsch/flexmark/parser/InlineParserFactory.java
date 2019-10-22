@@ -3,6 +3,7 @@ package com.vladsch.flexmark.parser;
 import com.vladsch.flexmark.parser.delimiter.DelimiterProcessor;
 import com.vladsch.flexmark.parser.internal.LinkRefProcessorData;
 import com.vladsch.flexmark.util.data.DataHolder;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.BitSet;
 import java.util.List;
@@ -10,12 +11,12 @@ import java.util.Map;
 
 public interface InlineParserFactory {
     InlineParser inlineParser(
-            DataHolder options,
-            BitSet specialCharacters,
-            BitSet delimiterCharacters,
-            Map<Character,
+            @NotNull DataHolder options,
+            @NotNull BitSet specialCharacters,
+            @NotNull BitSet delimiterCharacters,
+            @NotNull Map<Character,
                     DelimiterProcessor> delimiterProcessors,
-            LinkRefProcessorData linkRefProcessors,
-            List<InlineParserExtensionFactory> inlineParserExtensions
+            @NotNull LinkRefProcessorData linkRefProcessors,
+            @NotNull List<InlineParserExtensionFactory> inlineParserExtensions
     );
 }

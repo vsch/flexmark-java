@@ -15,7 +15,7 @@ public class FencedCodeBlock extends Block implements DoNotDecorate {
     private BasedSequence closingMarker = BasedSequence.NULL;
 
     @Override
-    public void getAstExtra(StringBuilder out) {
+    public void getAstExtra(@NotNull StringBuilder out) {
         BasedSequence content = getContentChars();
         int lines = getContentLines().size();
         segmentSpanChars(out, openingMarker, "open");

@@ -20,6 +20,7 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.CharSubSequence;
 import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
 import com.vladsch.flexmark.util.sequence.SubSequence;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -137,27 +138,27 @@ public class DocumentParser implements ParserState {
         blockTracker.blockParserRemoved(blockParser);
     }
 
-    public void blockAdded(Block node) {
+    public void blockAdded(@NotNull Block node) {
         blockTracker.blockAdded(node);
     }
 
-    public void blockAddedWithChildren(Block node) {
+    public void blockAddedWithChildren(@NotNull Block node) {
         blockTracker.blockAddedWithChildren(node);
     }
 
-    public void blockAddedWithDescendants(Block node) {
+    public void blockAddedWithDescendants(@NotNull Block node) {
         blockTracker.blockAddedWithDescendants(node);
     }
 
-    public void blockRemoved(Block node) {
+    public void blockRemoved(@NotNull Block node) {
         blockTracker.blockRemoved(node);
     }
 
-    public void blockRemovedWithChildren(Block node) {
+    public void blockRemovedWithChildren(@NotNull Block node) {
         blockTracker.blockRemovedWithChildren(node);
     }
 
-    public void blockRemovedWithDescendants(Block node) {
+    public void blockRemovedWithDescendants(@NotNull Block node) {
         blockTracker.blockRemovedWithDescendants(node);
     }
 
@@ -198,16 +199,19 @@ public class DocumentParser implements ParserState {
     }
 
     private static class ParagraphDependencyHandler extends DependencyHandler<ParagraphPreProcessorFactory, ParagraphPreProcessorDependencyStage, ParagraphPreProcessorDependencies> {
+        @NotNull
         @Override
-        protected Class<? extends ParagraphPreProcessorFactory> getDependentClass(ParagraphPreProcessorFactory dependent) {
+        protected Class<?> getDependentClass(ParagraphPreProcessorFactory dependent) {
             return dependent.getClass();
         }
 
+        @NotNull
         @Override
         protected ParagraphPreProcessorDependencies createResolvedDependencies(List<ParagraphPreProcessorDependencyStage> stages) {
             return new ParagraphPreProcessorDependencies(stages);
         }
 
+        @NotNull
         @Override
         protected ParagraphPreProcessorDependencyStage createStage(List<ParagraphPreProcessorFactory> dependents) {
             return new ParagraphPreProcessorDependencyStage(dependents);
@@ -230,16 +234,19 @@ public class DocumentParser implements ParserState {
     }
 
     private static class CustomBlockParserDependencyHandler extends DependencyHandler<CustomBlockParserFactory, CustomBlockParserDependencyStage, CustomBlockParserDependencies> {
+        @NotNull
         @Override
-        protected Class<? extends CustomBlockParserFactory> getDependentClass(CustomBlockParserFactory dependent) {
+        protected Class<?> getDependentClass(CustomBlockParserFactory dependent) {
             return dependent.getClass();
         }
 
+        @NotNull
         @Override
         protected CustomBlockParserDependencies createResolvedDependencies(List<CustomBlockParserDependencyStage> stages) {
             return new CustomBlockParserDependencies(stages);
         }
 
+        @NotNull
         @Override
         protected CustomBlockParserDependencyStage createStage(List<CustomBlockParserFactory> dependents) {
             return new CustomBlockParserDependencyStage(dependents);
@@ -289,16 +296,19 @@ public class DocumentParser implements ParserState {
     }
 
     private static class BlockDependencyHandler extends DependencyHandler<BlockPreProcessorFactory, BlockPreProcessorDependencyStage, BlockPreProcessorDependencies> {
+        @NotNull
         @Override
-        protected Class<? extends BlockPreProcessorFactory> getDependentClass(BlockPreProcessorFactory dependent) {
+        protected Class<?> getDependentClass(BlockPreProcessorFactory dependent) {
             return dependent.getClass();
         }
 
+        @NotNull
         @Override
         protected BlockPreProcessorDependencies createResolvedDependencies(List<BlockPreProcessorDependencyStage> stages) {
             return new BlockPreProcessorDependencies(stages);
         }
 
+        @NotNull
         @Override
         protected BlockPreProcessorDependencyStage createStage(List<BlockPreProcessorFactory> dependents) {
             return new BlockPreProcessorDependencyStage(dependents);

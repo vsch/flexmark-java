@@ -1,5 +1,7 @@
 package com.vladsch.flexmark.util.dependency;
 
+import org.jetbrains.annotations.Nullable;
+
 import java.util.Set;
 
 public interface Dependent<S> {
@@ -8,14 +10,14 @@ public interface Dependent<S> {
      * if any of the blocks in the list affect global state then these will be run on ALL blocks of the document
      * before this pre processor is called.
      */
-    Set<? extends Class> getAfterDependents();
+    @Nullable Set<Class<?>> getAfterDependents();
 
     /**
      * @return null or a list of processors before which this has to be run
      * if any of the blocks in the list affect global state then these will be run on ALL blocks of the document
      * before this pre processor is called.
      */
-    Set<? extends Class> getBeforeDependents();
+    @Nullable Set<Class<?>> getBeforeDependents();
 
     /**
      * @return true if this dependent affects the global scope, which means that any that depend on it have to

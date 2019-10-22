@@ -19,6 +19,7 @@ import com.vladsch.flexmark.util.data.MutableDataSet;
 import com.vladsch.flexmark.util.html.Attributes;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Collections;
 
@@ -44,8 +45,9 @@ public class NodeInsertingPostProcessorSample {
                 addNodes(ImageRef.class);
             }
 
+            @NotNull
             @Override
-            public NodePostProcessor apply(Document document) {
+            public NodePostProcessor apply(@NotNull Document document) {
                 return new NodeInsertingPostProcessor();
             }
         }
@@ -55,7 +57,7 @@ public class NodeInsertingPostProcessorSample {
         }
 
         @Override
-        public void process(NodeTracker state, Node node) {
+        public void process(@NotNull NodeTracker state, @NotNull Node node) {
             BasedSequence paragraphText = BasedSequence.NULL;
             if (node instanceof ImageRef) { // [foo](http://example.com)
                 ImageRef imageRef = (ImageRef) node;

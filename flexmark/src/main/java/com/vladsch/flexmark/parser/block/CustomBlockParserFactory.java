@@ -2,6 +2,7 @@ package com.vladsch.flexmark.parser.block;
 
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.dependency.Dependent;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Function;
 
@@ -10,5 +11,5 @@ import java.util.function.Function;
  */
 public interface CustomBlockParserFactory extends Function<DataHolder, BlockParserFactory>, Dependent<CustomBlockParserFactory> {
     @Override
-    BlockParserFactory apply(DataHolder options);
+    @NotNull BlockParserFactory apply(@NotNull DataHolder options);
 }

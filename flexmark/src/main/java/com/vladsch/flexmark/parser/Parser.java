@@ -442,14 +442,14 @@ public class Parser implements IParse {
         }
 
         @Override
-        protected void removeApiPoint(Object apiPoint) {
+        protected void removeApiPoint(@NotNull Object apiPoint) {
             if (apiPoint instanceof CustomBlockParserFactory) { this.blockParserFactories.remove(apiPoint); } else if (apiPoint instanceof DelimiterProcessor) { this.delimiterProcessors.remove(apiPoint); } else if (apiPoint instanceof PostProcessorFactory) { this.postProcessorFactories.remove(apiPoint); } else if (apiPoint instanceof ParagraphPreProcessorFactory) { this.paragraphPreProcessorFactories.remove(apiPoint); } else if (apiPoint instanceof BlockPreProcessorFactory) { this.blockPreProcessorFactories.remove(apiPoint); } else if (apiPoint instanceof LinkRefProcessorFactory) { this.linkRefProcessors.remove(apiPoint); } else if (apiPoint instanceof InlineParserExtensionFactory) { this.inlineParserExtensionFactories.remove(apiPoint); } else if (apiPoint instanceof InlineParserFactory) { this.inlineParserFactory = null; } else {
                 throw new IllegalStateException("Unknown data point type: " + apiPoint.getClass().getName());
             }
         }
 
         @Override
-        protected void preloadExtension(Extension extension) {
+        protected void preloadExtension(@NotNull Extension extension) {
             if (extension instanceof ParserExtension) {
                 ParserExtension parserExtension = (ParserExtension) extension;
                 parserExtension.parserOptions(this);
@@ -457,7 +457,7 @@ public class Parser implements IParse {
         }
 
         @Override
-        protected boolean loadExtension(Extension extension) {
+        protected boolean loadExtension(@NotNull Extension extension) {
             if (extension instanceof ParserExtension) {
                 ParserExtension parserExtension = (ParserExtension) extension;
                 parserExtension.extend(this);

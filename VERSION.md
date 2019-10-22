@@ -179,7 +179,7 @@ Next
   compatible with Kotlin array access syntax, also handles nullability of data.
 * Fix: deprecate `DataKey.getFrom()`
 * Fix: replace all `DataHolder.get()` by `DataKey.get()`
-* Fix: add nullability annotations to `Node` and a few other classes
+* Fix: add nullability annotations to a boat load of classes.
 * Add: `MutableDataHolder.set(@NotNull DataKey<T>, @NotNull T)` and
   `MutableDataHolder.set(@NotNull NullableDataKey<T>, @Nullable T)` to respect nullability of
   key's data value.

@@ -1,6 +1,7 @@
 package com.vladsch.flexmark.html.renderer;
 
 import com.vladsch.flexmark.util.data.DataHolder;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Function;
 
@@ -14,5 +15,5 @@ public interface NodeRendererFactory extends Function<DataHolder, NodeRenderer> 
      * @param options the context for rendering (normally passed on to the node renderer)
      * @return a node renderer
      */
-    NodeRenderer apply(DataHolder options);
+    @NotNull NodeRenderer apply(@NotNull DataHolder options);
 }

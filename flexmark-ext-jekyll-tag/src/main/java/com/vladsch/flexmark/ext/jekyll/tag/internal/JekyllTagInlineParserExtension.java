@@ -7,6 +7,8 @@ import com.vladsch.flexmark.parser.InlineParserExtension;
 import com.vladsch.flexmark.parser.InlineParserExtensionFactory;
 import com.vladsch.flexmark.parser.LightInlineParser;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Set;
@@ -22,16 +24,16 @@ public class JekyllTagInlineParserExtension implements InlineParserExtension {
     }
 
     @Override
-    public void finalizeDocument(InlineParser inlineParser) {
+    public void finalizeDocument(@NotNull InlineParser inlineParser) {
 
     }
 
     @Override
-    public void finalizeBlock(InlineParser inlineParser) {
+    public void finalizeBlock(@NotNull InlineParser inlineParser) {
     }
 
     @Override
-    public boolean parse(LightInlineParser inlineParser) {
+    public boolean parse(@NotNull LightInlineParser inlineParser) {
         if (inlineParser.peek(1) == '%' && (inlineParser.peek(2) == ' ' || inlineParser.peek(2) == '\t')) {
             BasedSequence input = inlineParser.getInput();
             Matcher matcher = inlineParser.matcher(parsing.MACRO_TAG);
@@ -57,23 +59,27 @@ public class JekyllTagInlineParserExtension implements InlineParserExtension {
     }
 
     public static class Factory implements InlineParserExtensionFactory {
+        @Nullable
         @Override
-        public Set<Class<? extends InlineParserExtensionFactory>> getAfterDependents() {
+        public Set<Class<?>> getAfterDependents() {
             return null;
         }
 
+        @NotNull
         @Override
         public CharSequence getCharacters() {
             return "{";
         }
 
+        @Nullable
         @Override
-        public Set<Class<? extends InlineParserExtensionFactory>> getBeforeDependents() {
+        public Set<Class<?>> getBeforeDependents() {
             return null;
         }
 
+        @NotNull
         @Override
-        public InlineParserExtension apply(LightInlineParser lightInlineParser) {
+        public InlineParserExtension apply(@NotNull LightInlineParser lightInlineParser) {
             return new JekyllTagInlineParserExtension(lightInlineParser);
         }
 

@@ -19,6 +19,8 @@ package com.vladsch.flexmark.util.html.ui;
 
 import com.vladsch.flexmark.util.html.*;
 import com.vladsch.flexmark.util.sequence.CharSubSequence;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import javax.swing.plaf.FontUIResource;
 import java.awt.Font;
@@ -73,8 +75,9 @@ public class HtmlBuilder extends HtmlFormattingAppendableBase<HtmlBuilder> {
         return this;
     }
 
+    @NotNull
     @Override
-    public HtmlBuilder attr(CharSequence name, CharSequence value) {
+    public HtmlBuilder attr(@NotNull CharSequence name, @Nullable CharSequence value) {
         super.withAttr();
         return super.attr(name, value);
     }
@@ -84,14 +87,16 @@ public class HtmlBuilder extends HtmlFormattingAppendableBase<HtmlBuilder> {
         return super.attr(Attribute.STYLE_ATTR, value);
     }
 
+    @NotNull
     @Override
-    public HtmlBuilder attr(Attribute... attribute) {
+    public HtmlBuilder attr(@NotNull Attribute... attribute) {
         super.withAttr();
         return super.attr(attribute);
     }
 
+    @NotNull
     @Override
-    public HtmlBuilder attr(Attributes attributes) {
+    public HtmlBuilder attr(@NotNull Attributes attributes) {
         super.withAttr();
         return super.attr(attributes);
     }

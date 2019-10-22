@@ -21,14 +21,14 @@ public abstract class BuilderBase<T extends BuilderBase<T>> extends MutableDataS
      *
      * @param apiPoint api point object
      */
-    protected abstract void removeApiPoint(Object apiPoint);
+    protected abstract void removeApiPoint(@NotNull Object apiPoint);
 
     /**
      * Preload operation for extension, perform any data config and other operation needed for loading extension
      *
      * @param extension to preload
      */
-    protected abstract void preloadExtension(Extension extension);
+    protected abstract void preloadExtension(@NotNull Extension extension);
 
     /**
      * Load extension if it is valid
@@ -36,13 +36,13 @@ public abstract class BuilderBase<T extends BuilderBase<T>> extends MutableDataS
      * @param extension to load
      * @return true if extension was loaded
      */
-    protected abstract boolean loadExtension(Extension extension);
+    protected abstract boolean loadExtension(@NotNull Extension extension);
 
     /**
      * @param extensions extensions to load
      * @return {@code this}
      */
-    final public T extensions(Collection<? extends Extension> extensions) {
+    final public @NotNull T extensions(@NotNull Collection<? extends Extension> extensions) {
         ArrayList<Extension> addedExtensions = new ArrayList<>(SharedDataKeys.EXTENSIONS.get(this).size() + extensions.size());
 
         // first give extensions a chance to modify parser options
@@ -88,7 +88,7 @@ public abstract class BuilderBase<T extends BuilderBase<T>> extends MutableDataS
      *
      * @param apiPoint point registered
      */
-    protected void addExtensionApiPoint(Object apiPoint) {
+    protected void addExtensionApiPoint(@NotNull Object apiPoint) {
         Extension extension = currentExtension;
 
         if (extension != null) {
@@ -105,16 +105,23 @@ public abstract class BuilderBase<T extends BuilderBase<T>> extends MutableDataS
      * @param value value for the key
      * @return builder
      */
+    @NotNull
     @Override
-    public <V> MutableDataSet set(DataKey<V> key, @NotNull V value) {
+    public <V> MutableDataSet set(@NotNull DataKey<V> key, @NotNull V value) {
+        addExtensionApiPoint(key);
+        return super.set(key, value);
+    }
+
+    @NotNull
+    @Override
+    public <V> MutableDataSet set(@NotNull NullableDataKey<V> key, @Nullable V value) {
         addExtensionApiPoint(key);
         return super.set(key, value);
     }
 
     @Override
-    public <V> MutableDataSet set(NullableDataKey<V> key, @Nullable V value) {
-        addExtensionApiPoint(key);
-        return super.set(key, value);
+    public <V> V get(@NotNull DataKey<V> key) {
+        return key.get(this);
     }
 
     protected BuilderBase(DataHolder options) {
@@ -129,16 +136,5 @@ public abstract class BuilderBase<T extends BuilderBase<T>> extends MutableDataS
 
     protected BuilderBase() {
         super();
-    }
-
-    protected BuilderBase(T other) {
-        super(other);
-
-        HashMap<Class<?>, HashSet<Object>> points = ((BuilderBase<T>) other).extensionApiPoints;
-        for (Map.Entry<Class<?>, HashSet<Object>> entry : points.entrySet()) {
-            extensionApiPoints.put(entry.getKey(), new HashSet<>(entry.getValue()));
-        }
-
-        loadedExtensions.addAll(((BuilderBase<?>) other).loadedExtensions);
     }
 }

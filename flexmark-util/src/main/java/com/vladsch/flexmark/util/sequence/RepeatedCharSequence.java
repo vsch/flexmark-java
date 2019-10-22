@@ -1,5 +1,7 @@
 package com.vladsch.flexmark.util.sequence;
 
+import org.jetbrains.annotations.NotNull;
+
 /**
  * CharSequence that repeats in a wraparound the given sequence.
  * <p>
@@ -63,6 +65,7 @@ public class RepeatedCharSequence implements CharSequence {
         return obj == this || (obj instanceof CharSequence && toString().equals(obj.toString()));
     }
 
+    @NotNull
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

@@ -14,7 +14,7 @@ public abstract class TocBlockBase extends Block {
     protected BasedSequence closingMarker = BasedSequence.NULL;
 
     @Override
-    public void getAstExtra(StringBuilder out) {
+    public void getAstExtra(@NotNull StringBuilder out) {
         segmentSpan(out, openingMarker, "openingMarker");
         segmentSpan(out, tocKeyword, "tocKeyword");
         segmentSpan(out, style, "style");

@@ -53,7 +53,7 @@ public class YouTubeLinkSample {
         }
 
         @Override
-        public void process(NodeTracker state, Node node) {
+        public void process(@NotNull NodeTracker state, @NotNull Node node) {
             if (node instanceof Link) {
                 Node previous = node.getPrevious();
 
@@ -81,8 +81,9 @@ public class YouTubeLinkSample {
                 addNodes(Link.class);
             }
 
+            @NotNull
             @Override
-            public NodePostProcessor apply(Document document) {
+            public NodePostProcessor apply(@NotNull Document document) {
                 return new YouTubeLinkNodePostProcessor(document);
             }
         }
@@ -118,8 +119,9 @@ public class YouTubeLinkSample {
         }
 
         public static class Factory implements NodeRendererFactory {
+            @NotNull
             @Override
-            public NodeRenderer apply(DataHolder options) {
+            public NodeRenderer apply(@NotNull DataHolder options) {
                 return new YouTubeLinkNodeRenderer(options);
             }
         }
@@ -149,7 +151,7 @@ public class YouTubeLinkSample {
         }
 
         @Override
-        public void extend(HtmlRenderer.Builder rendererBuilder, String rendererType) {
+        public void extend(@NotNull HtmlRenderer.Builder rendererBuilder, @NotNull String rendererType) {
             if (rendererBuilder.isRendererType("HTML")) {
                 rendererBuilder.nodeRendererFactory(new YouTubeLinkNodeRenderer.Factory());
             } else if (rendererBuilder.isRendererType("JIRA")) {

@@ -14,7 +14,7 @@ import java.util.List;
 public class JekyllTagBlock extends Block {
 
     @Override
-    public void getAstExtra(StringBuilder out) {
+    public void getAstExtra(@NotNull StringBuilder out) {
     }
 
     @NotNull

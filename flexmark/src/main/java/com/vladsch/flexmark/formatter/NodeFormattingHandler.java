@@ -10,12 +10,12 @@ public class NodeFormattingHandler<N extends Node> extends AstHandler<N, NodeFor
         super(aClass, adapter);
     }
 
-    public void render(Node node, NodeFormatterContext context, MarkdownWriter markdown) {
+    public void render(@NotNull Node node, @NotNull NodeFormatterContext context, @NotNull MarkdownWriter markdown) {
         //noinspection unchecked
         getAdapter().render((N) node, context, markdown);
     }
 
     public static interface CustomNodeFormatter<N extends Node> extends AstAction<N> {
-        void render(N node, NodeFormatterContext context, MarkdownWriter markdown);
+        void render(@NotNull N node, @NotNull NodeFormatterContext context, @NotNull MarkdownWriter markdown);
     }
 }

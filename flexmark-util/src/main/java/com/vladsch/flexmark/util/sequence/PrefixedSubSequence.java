@@ -1,5 +1,7 @@
 package com.vladsch.flexmark.util.sequence;
 
+import org.jetbrains.annotations.NotNull;
+
 /**
  * A CharSequence that references original char sequence, maps '\0' to '\uFFFD' and is prefixed with a fixed string
  * a subSequence() returns a sub-sequence from the original base sequence, possibly with a prefix if it falls in range
@@ -93,6 +95,7 @@ public final class PrefixedSubSequence extends BasedSequenceImpl {
         throw new StringIndexOutOfBoundsException("String index out of range: " + end);
     }
 
+    @NotNull
     @Override
     public String toString() {
         return prefix + base;

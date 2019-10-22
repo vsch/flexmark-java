@@ -2,6 +2,7 @@ package com.vladsch.flexmark.ast;
 
 import com.vladsch.flexmark.util.ast.DoNotLinkDecorate;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import org.jetbrains.annotations.NotNull;
 
 public class Code extends DelimitedNodeImpl implements DoNotLinkDecorate {
     public Code() {
@@ -16,7 +17,7 @@ public class Code extends DelimitedNodeImpl implements DoNotLinkDecorate {
     }
 
     @Override
-    public void getAstExtra(StringBuilder out) {
+    public void getAstExtra(@NotNull StringBuilder out) {
         delimitedSegmentSpan(out, openingMarker, text, closingMarker, "text");
     }
 }

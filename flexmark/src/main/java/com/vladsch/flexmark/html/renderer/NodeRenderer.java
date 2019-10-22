@@ -1,5 +1,7 @@
 package com.vladsch.flexmark.html.renderer;
 
+import org.jetbrains.annotations.Nullable;
+
 import java.util.Set;
 
 /**
@@ -9,5 +11,5 @@ public interface NodeRenderer {
     /**
      * @return the mapping of nodes this renderer handles to rendering function
      */
-    Set<NodeRenderingHandler<?>> getNodeRenderingHandlers();
+    @Nullable Set<NodeRenderingHandler<?>> getNodeRenderingHandlers();
 }

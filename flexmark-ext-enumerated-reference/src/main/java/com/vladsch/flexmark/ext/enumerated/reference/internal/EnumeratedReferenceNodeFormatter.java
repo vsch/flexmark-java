@@ -7,6 +7,8 @@ import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.format.options.ElementPlacement;
 import com.vladsch.flexmark.util.format.options.ElementPlacementSort;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -45,6 +47,7 @@ public class EnumeratedReferenceNodeFormatter extends NodeRepositoryFormatter<En
         markdown.blankLine();
     }
 
+    @Nullable
     @Override
     public Set<NodeFormattingHandler<?>> getNodeFormattingHandlers() {
         return new HashSet<>(Arrays.asList(
@@ -54,6 +57,7 @@ public class EnumeratedReferenceNodeFormatter extends NodeRepositoryFormatter<En
         ));
     }
 
+    @Nullable
     @Override
     public Set<Class<?>> getNodeClasses() {
         if (options.enumeratedReferencePlacement != ElementPlacement.AS_IS && options.enumeratedReferenceSort != ElementPlacementSort.SORT_UNUSED_LAST) return null;
@@ -98,11 +102,7 @@ public class EnumeratedReferenceNodeFormatter extends NodeRepositoryFormatter<En
     private void render(EnumeratedReferenceLink node, NodeFormatterContext context, MarkdownWriter markdown) {
         markdown.append("[@");
         if (context.isTransformingText()) {
-            if (context.isTransformingText()) {
-                renderReferenceText(node.getText(), context, markdown);
-            } else {
-                context.renderChildren(node);
-            }
+            renderReferenceText(node.getText(), context, markdown);
         } else {
             context.renderChildren(node);
         }
@@ -110,13 +110,15 @@ public class EnumeratedReferenceNodeFormatter extends NodeRepositoryFormatter<En
     }
 
     public static class Factory implements NodeFormatterFactory {
+        @NotNull
         @Override
-        public NodeFormatter create(DataHolder options) {
+        public NodeFormatter create(@NotNull DataHolder options) {
             return new EnumeratedReferenceNodeFormatter(options);
         }
 
+        @Nullable
         @Override
-        public Set<? extends Class> getAfterDependents() {
+        public Set<Class<?>> getAfterDependents() {
             // run before attributes formatter so categories are uniquified first
             // renderers are sorted in reverse order for backward compatibility
             Set<Class<?>> aSet = new HashSet<>();
@@ -124,8 +126,9 @@ public class EnumeratedReferenceNodeFormatter extends NodeRepositoryFormatter<En
             return aSet;
         }
 
+        @Nullable
         @Override
-        public Set<? extends Class> getBeforeDependents() {
+        public Set<Class<?>> getBeforeDependents() {
             return null;
         }
     }

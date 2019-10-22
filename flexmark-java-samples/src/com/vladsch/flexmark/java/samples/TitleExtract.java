@@ -35,7 +35,7 @@ public class TitleExtract {
         }
 
         @Override
-        public void extend(HtmlRenderer.Builder rendererBuilder, String rendererType) {
+        public void extend(@NotNull HtmlRenderer.Builder rendererBuilder, @NotNull String rendererType) {
             rendererBuilder.nodeRendererFactory(new HeadingNodeRenderer.Factory());
         }
 
@@ -101,14 +101,15 @@ public class TitleExtract {
         }
 
         public static class Factory implements DelegatingNodeRendererFactory {
+            @NotNull
             @Override
-            public NodeRenderer apply(DataHolder options) {
+            public NodeRenderer apply(@NotNull DataHolder options) {
                 return new HeadingNodeRenderer(options);
             }
 
             @Override
-            public Set<Class<? extends NodeRendererFactory>> getDelegates() {
-                Set<Class<? extends NodeRendererFactory>> delegates = new HashSet<>();
+            public Set<Class<?>> getDelegates() {
+                Set<Class<?>> delegates = new HashSet<>();
                 delegates.add(AnchorLinkNodeRenderer.Factory.class);
                 return delegates;
             }

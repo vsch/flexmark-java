@@ -15,6 +15,7 @@ import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.ast.NodeTracker;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import org.jetbrains.annotations.NotNull;
 
 public class EnumeratedReferenceNodePostProcessor extends NodePostProcessor {
     private final EnumeratedReferences enumeratedReferences;
@@ -27,7 +28,7 @@ public class EnumeratedReferenceNodePostProcessor extends NodePostProcessor {
     }
 
     @Override
-    public void process(NodeTracker state, Node node) {
+    public void process(@NotNull NodeTracker state, @NotNull Node node) {
         if (node instanceof AttributesNode) {
             AttributesNode attributesNode = (AttributesNode) node;
 
@@ -61,8 +62,9 @@ public class EnumeratedReferenceNodePostProcessor extends NodePostProcessor {
             addNodes(AttributesNode.class, Heading.class);
         }
 
+        @NotNull
         @Override
-        public NodePostProcessor apply(Document document) {
+        public NodePostProcessor apply(@NotNull Document document) {
             return new EnumeratedReferenceNodePostProcessor(document);
         }
     }

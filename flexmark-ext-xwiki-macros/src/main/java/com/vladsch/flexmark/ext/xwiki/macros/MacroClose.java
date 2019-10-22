@@ -20,7 +20,7 @@ public class MacroClose extends Node {
     }
 
     @Override
-    public void getAstExtra(StringBuilder out) {
+    public void getAstExtra(@NotNull StringBuilder out) {
         delimitedSegmentSpanChars(out, openingMarker, name, closingMarker, "name");
     }
 

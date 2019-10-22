@@ -9,6 +9,7 @@ import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import org.jetbrains.annotations.NotNull;
 
 public class FootnoteLinkRefProcessor implements LinkRefProcessor {
     static final boolean WANT_EXCLAMATION_PREFIX = false;
@@ -31,12 +32,13 @@ public class FootnoteLinkRefProcessor implements LinkRefProcessor {
     }
 
     @Override
-    public boolean isMatch(BasedSequence nodeChars) {
+    public boolean isMatch(@NotNull BasedSequence nodeChars) {
         return nodeChars.length() >= 3 && nodeChars.charAt(0) == '[' && nodeChars.charAt(1) == '^' && nodeChars.endCharAt(1) == ']';
     }
 
+    @NotNull
     @Override
-    public Node createNode(BasedSequence nodeChars) {
+    public Node createNode(@NotNull BasedSequence nodeChars) {
         BasedSequence footnoteId = nodeChars.midSequence(2, -1).trim();
         FootnoteBlock footnoteBlock = footnoteId.length() > 0 ? footnoteRepository.get(footnoteId.toString()) : null;
 
@@ -49,35 +51,37 @@ public class FootnoteLinkRefProcessor implements LinkRefProcessor {
         return footnote;
     }
 
+    @NotNull
     @Override
-    public BasedSequence adjustInlineText(Document document, Node node) {
+    public BasedSequence adjustInlineText(@NotNull Document document, @NotNull Node node) {
         assert node instanceof Footnote;
         return ((Footnote) node).getText();
     }
 
     @Override
-    public boolean allowDelimiters(BasedSequence chars, Document document, Node node) {
+    public boolean allowDelimiters(@NotNull BasedSequence chars, @NotNull Document document, @NotNull Node node) {
         return true;
     }
 
     @Override
-    public void updateNodeElements(Document document, Node node) {
+    public void updateNodeElements(@NotNull Document document, @NotNull Node node) {
 
     }
 
     public static class Factory implements LinkRefProcessorFactory {
+        @NotNull
         @Override
-        public LinkRefProcessor apply(Document document) {
+        public LinkRefProcessor apply(@NotNull Document document) {
             return new FootnoteLinkRefProcessor(document);
         }
 
         @Override
-        public boolean getWantExclamationPrefix(DataHolder options) {
+        public boolean getWantExclamationPrefix(@NotNull DataHolder options) {
             return WANT_EXCLAMATION_PREFIX;
         }
 
         @Override
-        public int getBracketNestingLevel(DataHolder options) {
+        public int getBracketNestingLevel(@NotNull DataHolder options) {
             return BRACKET_NESTING_LEVEL;
         }
     }

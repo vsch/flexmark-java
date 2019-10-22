@@ -16,7 +16,7 @@ public class HtmlInline extends HtmlInlineBase {
     }
 
     @Override
-    public void getAstExtra(StringBuilder out) {
+    public void getAstExtra(@NotNull StringBuilder out) {
         astExtraChars(out);
     }
 

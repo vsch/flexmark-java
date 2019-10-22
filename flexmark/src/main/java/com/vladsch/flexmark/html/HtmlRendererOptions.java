@@ -2,19 +2,21 @@ package com.vladsch.flexmark.html;
 
 import com.vladsch.flexmark.util.Utils;
 import com.vladsch.flexmark.util.data.DataHolder;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.regex.Pattern;
 
 public class HtmlRendererOptions {
-    public final String softBreak;
+    public final @NotNull String softBreak;
     public final boolean isSoftBreakAllSpaces;
-    public final String hardBreak;
-    public final String strongEmphasisStyleHtmlOpen;
-    public final String strongEmphasisStyleHtmlClose;
-    public final String emphasisStyleHtmlOpen;
-    public final String emphasisStyleHtmlClose;
-    public final String codeStyleHtmlOpen;
-    public final String codeStyleHtmlClose;
+    public final @NotNull String hardBreak;
+    public final @Nullable String strongEmphasisStyleHtmlOpen;
+    public final @Nullable String strongEmphasisStyleHtmlClose;
+    public final @Nullable String emphasisStyleHtmlOpen;
+    public final @Nullable String emphasisStyleHtmlClose;
+    public final @Nullable String codeStyleHtmlOpen;
+    public final @Nullable String codeStyleHtmlClose;
     public final boolean escapeHtmlBlocks;
     public final boolean escapeHtmlCommentBlocks;
     public final boolean escapeInlineHtml;
@@ -28,10 +30,10 @@ public class HtmlRendererOptions {
     public final boolean doNotRenderLinksInDocument;
     public final boolean renderHeaderId;
     public final boolean generateHeaderIds;
-    public final String languageClassPrefix;
-    public final String noLanguageClass;
-    public final String sourcePositionAttribute;
-    public final String inlineCodeSpliceClass;
+    public final @NotNull String languageClassPrefix;
+    public final @NotNull String noLanguageClass;
+    public final @NotNull String sourcePositionAttribute;
+    public final @Nullable String inlineCodeSpliceClass;
     public final boolean sourcePositionParagraphLines;
     public final boolean sourceWrapHtmlBlocks;
     public final int formatFlags;
@@ -41,8 +43,8 @@ public class HtmlRendererOptions {
     public final boolean unescapeHtmlEntities;
     public final boolean noPTagsUseBr;
     //public final boolean wrapTightItemParagraphInSpan;
-    public final String autolinkWwwPrefix;
-    public final Pattern suppressedLinks;
+    public final @NotNull String autolinkWwwPrefix;
+    public final @Nullable Pattern suppressedLinks;
 
     public HtmlRendererOptions(DataHolder options) {
         softBreak = HtmlRenderer.SOFT_BREAK.get(options);

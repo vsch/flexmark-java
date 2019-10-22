@@ -10,13 +10,14 @@ import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.ast.NodeTracker;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import org.jetbrains.annotations.NotNull;
 
 public class YouTubeLinkNodePostProcessor extends NodePostProcessor {
     public YouTubeLinkNodePostProcessor(DataHolder options) {
     }
 
     @Override
-    public void process(NodeTracker state, Node node) {
+    public void process(@NotNull NodeTracker state, @NotNull Node node) {
         if (node instanceof Link) {
             Node previous = node.getPrevious();
 
@@ -47,8 +48,9 @@ public class YouTubeLinkNodePostProcessor extends NodePostProcessor {
             addNodes(Link.class);
         }
 
+        @NotNull
         @Override
-        public NodePostProcessor apply(Document document) {
+        public NodePostProcessor apply(@NotNull Document document) {
             return new YouTubeLinkNodePostProcessor(document);
         }
     }

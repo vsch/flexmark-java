@@ -18,7 +18,7 @@ import java.util.function.IntConsumer;
 public class BitIntegerSet implements Set<Integer>, ReversibleIterable<Integer> {
     public static final int[] EMPTY_INT = new int[0];
 
-    private final BitSet myBits;
+    private final @NotNull BitSet myBits;
     private final boolean myReversed;
 
     public BitIntegerSet() {
@@ -30,16 +30,16 @@ public class BitIntegerSet implements Set<Integer>, ReversibleIterable<Integer> 
         myReversed = false;
     }
 
-    public BitIntegerSet(BitSet other) {
+    public BitIntegerSet(@NotNull BitSet other) {
         myBits = (BitSet) other.clone();
         myReversed = false;
     }
 
-    public BitIntegerSet(BitIntegerSet other) {
+    public BitIntegerSet(@NotNull BitIntegerSet other) {
         this(other, other.isReversed());
     }
 
-    private BitIntegerSet(BitIntegerSet other, boolean reversed) {
+    private BitIntegerSet(@NotNull BitIntegerSet other, boolean reversed) {
         myBits = (BitSet) other.myBits.clone();
         myReversed = reversed;
     }
@@ -86,7 +86,7 @@ public class BitIntegerSet implements Set<Integer>, ReversibleIterable<Integer> 
     }
 
     @Override
-    public boolean contains(Object o) {
+    public boolean contains(@Nullable Object o) {
         return o instanceof Integer && myBits.get((Integer) o);
     }
 
@@ -103,7 +103,7 @@ public class BitIntegerSet implements Set<Integer>, ReversibleIterable<Integer> 
 
     @NotNull
     @Override
-    public <T> T[] toArray(T[] array) {
+    public <T> T[] toArray(@NotNull T[] array) {
         Object[] objects = array;
         int count = cardinality();
 
@@ -129,14 +129,14 @@ public class BitIntegerSet implements Set<Integer>, ReversibleIterable<Integer> 
     }
 
     @Override
-    public boolean add(Integer item) {
+    public boolean add(@NotNull Integer item) {
         boolean old = myBits.get(item);
         myBits.set(item);
         return old;
     }
 
     @NotNull
-    public int[] toArray(int[] array) {
+    public int[] toArray(@Nullable int[] array) {
         return toArray(array, 0);
     }
 
@@ -164,7 +164,7 @@ public class BitIntegerSet implements Set<Integer>, ReversibleIterable<Integer> 
     }
 
     @Override
-    public boolean remove(Object o) {
+    public boolean remove(@Nullable Object o) {
         if (!(o instanceof Integer) || !myBits.get((Integer) o)) return false;
         myBits.clear((Integer) o);
         return true;
@@ -312,14 +312,14 @@ public class BitIntegerSet implements Set<Integer>, ReversibleIterable<Integer> 
     public @NotNull BitIntegerSet clear(int i) {myBits.clear(i); return this;}
     public @NotNull BitIntegerSet clear(int i, int i1) {myBits.clear(i, i1); return this;}
 
-    public @NotNull BitIntegerSet and(BitSet set) {myBits.and(set); return this;}
-    public @NotNull BitIntegerSet or(BitSet set) {myBits.or(set); return this;}
-    public @NotNull BitIntegerSet xor(BitSet set) {myBits.xor(set); return this;}
-    public @NotNull BitIntegerSet andNot(BitSet set) {myBits.andNot(set); return this;}
-    public @NotNull BitIntegerSet and(BitIntegerSet set) {myBits.and(set.myBits); return this;}
-    public @NotNull BitIntegerSet or(BitIntegerSet set) {myBits.or(set.myBits); return this;}
-    public @NotNull BitIntegerSet xor(BitIntegerSet set) {myBits.xor(set.myBits); return this;}
-    public @NotNull BitIntegerSet andNot(BitIntegerSet set) {myBits.andNot(set.myBits); return this;}
+    public @NotNull BitIntegerSet and(@NotNull BitSet set) {myBits.and(set); return this;}
+    public @NotNull BitIntegerSet or(@NotNull BitSet set) {myBits.or(set); return this;}
+    public @NotNull BitIntegerSet xor(@NotNull BitSet set) {myBits.xor(set); return this;}
+    public @NotNull BitIntegerSet andNot(@NotNull BitSet set) {myBits.andNot(set); return this;}
+    public @NotNull BitIntegerSet and(@NotNull BitIntegerSet set) {myBits.and(set.myBits); return this;}
+    public @NotNull BitIntegerSet or(@NotNull BitIntegerSet set) {myBits.or(set.myBits); return this;}
+    public @NotNull BitIntegerSet xor(@NotNull BitIntegerSet set) {myBits.xor(set.myBits); return this;}
+    public @NotNull BitIntegerSet andNot(@NotNull BitIntegerSet set) {myBits.andNot(set.myBits); return this;}
 
     public boolean get(int i) {return myBits.get(i);}
 

@@ -3,6 +3,7 @@ package com.vladsch.flexmark.util.ast;
 import com.vladsch.flexmark.util.collection.CopyOnWriteRef;
 import com.vladsch.flexmark.util.collection.OrderedMap;
 import com.vladsch.flexmark.util.collection.OrderedSet;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
@@ -25,7 +26,7 @@ public class NodeClassifierVisitor extends NodeVisitorBase implements NodeTracke
         myExclusionSet = myClassifyingNodeTracker.getExclusionSet();
     }
 
-    public ClassifyingNodeTracker classify(Node node) {
+    public @NotNull ClassifyingNodeTracker classify(@NotNull Node node) {
         // no double dipping
         assert !myClassificationDone;
         visit(node);
@@ -34,20 +35,20 @@ public class NodeClassifierVisitor extends NodeVisitorBase implements NodeTracke
     }
 
     @Override
-    public void visit(Node node) {
+    public void visit(@NotNull Node node) {
         visitChildren(node);
     }
 
     // @formatter:off
-    @Override public void nodeRemoved(Node node) { }
-    @Override public void nodeRemovedWithChildren(Node node) { }
-    @Override public void nodeRemovedWithDescendants(Node node) { }
-    @Override public void nodeAddedWithChildren(Node node) { nodeAdded(node); }
-    @Override public void nodeAddedWithDescendants(Node node) { nodeAdded(node); }
+    @Override public void nodeRemoved(@NotNull Node node) { }
+    @Override public void nodeRemovedWithChildren(@NotNull Node node) { }
+    @Override public void nodeRemovedWithDescendants(@NotNull Node node) { }
+    @Override public void nodeAddedWithChildren(@NotNull Node node) { nodeAdded(node); }
+    @Override public void nodeAddedWithDescendants(@NotNull Node node) { nodeAdded(node); }
     // @formatter:on
 
     @Override
-    public void nodeAdded(Node node) {
+    public void nodeAdded(@NotNull Node node) {
         if (myClassificationDone) {
             if (node.getParent() == null) {
                 throw new IllegalStateException("Node must be inserted into the document before calling node tracker nodeAdded functions");
@@ -131,7 +132,7 @@ public class NodeClassifierVisitor extends NodeVisitorBase implements NodeTracke
      * @param parent the parent node whose children should be visited
      */
     @Override
-    public void visitChildren(Node parent) {
+    public void visitChildren(@NotNull Node parent) {
         if (!myClassificationDone) {
             // initial collection phase
             if (!(parent instanceof Document)) {

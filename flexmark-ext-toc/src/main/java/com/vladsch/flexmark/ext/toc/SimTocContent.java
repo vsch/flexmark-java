@@ -20,7 +20,7 @@ public class SimTocContent extends Block implements DoNotDecorate {
     }
 
     @Override
-    public void getAstExtra(StringBuilder out) {
+    public void getAstExtra(@NotNull StringBuilder out) {
     }
 
     public SimTocContent() {

@@ -1,28 +1,31 @@
 package com.vladsch.flexmark.util.collection;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 import java.util.function.Function;
 
 public class CopyOnWriteRef<T> {
-    private T myValue;
+    private @Nullable T myValue;
     private int myReferenceCount;
-    private Function<T, T> myCloner;
+    private @NotNull Function<T, T> myCloner;
 
-    public CopyOnWriteRef(T value, Function<T, T> cloner) {
+    public CopyOnWriteRef(@Nullable T value, @NotNull Function<T, T> cloner) {
         myValue = value;
         myReferenceCount = 0;
         myCloner = cloner;
     }
 
-    public T getPeek() {
+    public @Nullable T getPeek() {
         return myValue;
     }
 
-    public T getImmutable() {
+    public @Nullable T getImmutable() {
         if (myValue != null) myReferenceCount++;
         return myValue;
     }
 
-    public T getMutable() {
+    public @Nullable T getMutable() {
         if (myReferenceCount > 0) {
             myValue = myCloner.apply(myValue);
             myReferenceCount = 0;
@@ -30,7 +33,7 @@ public class CopyOnWriteRef<T> {
         return myValue;
     }
 
-    public void setValue(T value) {
+    public void setValue(@Nullable T value) {
         myReferenceCount = 0;
         myValue = myCloner.apply(value);
     }

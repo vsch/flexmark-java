@@ -12,6 +12,7 @@ import com.vladsch.flexmark.html.renderer.LinkStatus;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.html.Attributes;
+import org.jetbrains.annotations.NotNull;
 
 import static com.vladsch.flexmark.html.renderer.AttributablePart.LINK;
 import static com.vladsch.flexmark.util.html.Attribute.LINK_STATUS_ATTR;
@@ -35,7 +36,7 @@ public class ZzzzzzAttributeProvider implements AttributeProvider {
     }
 
     @Override
-    public void setAttributes(Node node, AttributablePart part, Attributes attributes) {
+    public void setAttributes(@NotNull Node node, @NotNull AttributablePart part, @NotNull Attributes attributes) {
         nodeAdapter.setAttributes(node, part, attributes);
     }
 
@@ -56,12 +57,12 @@ public class ZzzzzzAttributeProvider implements AttributeProvider {
 
     public static class Factory extends IndependentAttributeProviderFactory {
         //@Override
-        //public Set<Class<? extends AttributeProviderFactory>> getAfterDependents() {
+        //public Set<Class<?>> getAfterDependents() {
         //    return null;
         //}
         //
         //@Override
-        //public Set<Class<? extends AttributeProviderFactory>> getBeforeDependents() {
+        //public Set<Class<?>> getBeforeDependents() {
         //    return null;
         //}
         //
@@ -70,8 +71,9 @@ public class ZzzzzzAttributeProvider implements AttributeProvider {
         //    return false;
         //}
 
+        @NotNull
         @Override
-        public AttributeProvider apply(LinkResolverContext context) {
+        public AttributeProvider apply(@NotNull LinkResolverContext context) {
             return new ZzzzzzAttributeProvider(context);
         }
     }

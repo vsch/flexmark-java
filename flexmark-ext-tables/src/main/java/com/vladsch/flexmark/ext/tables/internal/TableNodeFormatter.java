@@ -13,6 +13,8 @@ import com.vladsch.flexmark.util.format.TableFormatOptions;
 import com.vladsch.flexmark.util.html.CellAlignment;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.BasedSequenceImpl;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
@@ -34,11 +36,13 @@ public class TableNodeFormatter implements NodeFormatter {
         parserTrimCellWhiteSpace = TablesExtension.TRIM_CELL_WHITESPACE.get(options);
     }
 
+    @Nullable
     @Override
     public Set<Class<?>> getNodeClasses() {
         return null;
     }
 
+    @Nullable
     @Override
     public Set<NodeFormattingHandler<?>> getNodeFormattingHandlers() {
         return new HashSet<>(Arrays.asList(
@@ -195,8 +199,9 @@ public class TableNodeFormatter implements NodeFormatter {
     }
 
     public static class Factory implements NodeFormatterFactory {
+        @NotNull
         @Override
-        public NodeFormatter create(DataHolder options) {
+        public NodeFormatter create(@NotNull DataHolder options) {
             return new TableNodeFormatter(options);
         }
     }

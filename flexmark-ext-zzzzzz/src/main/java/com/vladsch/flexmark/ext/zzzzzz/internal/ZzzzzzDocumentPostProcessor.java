@@ -9,6 +9,7 @@ import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.NodeVisitor;
 import com.vladsch.flexmark.util.ast.VisitHandler;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import org.jetbrains.annotations.NotNull;
 
 public class ZzzzzzDocumentPostProcessor extends DocumentPostProcessor {
     private final NodeVisitor myVisitor;
@@ -19,8 +20,9 @@ public class ZzzzzzDocumentPostProcessor extends DocumentPostProcessor {
         );
     }
 
+    @NotNull
     @Override
-    public Document processDocument(Document document) {
+    public Document processDocument(@NotNull Document document) {
         myVisitor.visit(document);
         return document;
     }
@@ -45,8 +47,9 @@ public class ZzzzzzDocumentPostProcessor extends DocumentPostProcessor {
     }
 
     public static class Factory extends DocumentPostProcessorFactory {
+        @NotNull
         @Override
-        public DocumentPostProcessor apply(Document document) {
+        public DocumentPostProcessor apply(@NotNull Document document) {
             return new ZzzzzzDocumentPostProcessor(document);
         }
     }

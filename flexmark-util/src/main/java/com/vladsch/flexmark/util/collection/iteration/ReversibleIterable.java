@@ -1,9 +1,11 @@
 package com.vladsch.flexmark.util.collection.iteration;
 
+import org.jetbrains.annotations.NotNull;
+
 public interface ReversibleIterable<E> extends Iterable<E> {
     @Override
-    ReversibleIterator<E> iterator();
-    ReversibleIterable<E> reversed();
+    @NotNull ReversibleIterator<E> iterator();
+    @NotNull ReversibleIterable<E> reversed();
     boolean isReversed();
-    ReversibleIterator<E> reversedIterator();
+    @NotNull ReversibleIterator<E> reversedIterator();
 }

@@ -10,15 +10,15 @@ public abstract class Block extends ContentNode {
     public Block() {
     }
 
-    public Block(BasedSequence chars) {
+    public Block(@NotNull BasedSequence chars) {
         super(chars);
     }
 
-    public Block(BasedSequence chars, List<BasedSequence> lineSegments) {
+    public Block(@NotNull BasedSequence chars, @NotNull List<BasedSequence> lineSegments) {
         super(chars, lineSegments);
     }
 
-    public Block(List<BasedSequence> lineSegments) {
+    public Block(@NotNull List<BasedSequence> lineSegments) {
         super(lineSegments);
     }
 
@@ -33,7 +33,7 @@ public abstract class Block extends ContentNode {
 
     @Override
     protected void setParent(@Nullable Node parent) {
-        if (!(parent instanceof Block)) {
+        if (parent != null && !(parent instanceof Block)) {
             throw new IllegalArgumentException("Parent of block must also be block (can not be inline)");
         }
         super.setParent(parent);

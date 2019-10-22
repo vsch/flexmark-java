@@ -2,33 +2,36 @@ package com.vladsch.flexmark.html.renderer;
 
 import com.vladsch.flexmark.util.html.Attribute;
 import com.vladsch.flexmark.util.html.Attributes;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class ResolvedLink {
-    private final LinkType myLinkType;
-    private final String myUrl;
-    private final LinkStatus myStatus;
-    private Attributes myAttributes;
+    private final @NotNull LinkType myLinkType;
+    private final @NotNull String myUrl;
+    private final @NotNull LinkStatus myStatus;
+    private @Nullable Attributes myAttributes;
 
-    public ResolvedLink(LinkType linkType, CharSequence url) {
+    public ResolvedLink(@NotNull LinkType linkType, @NotNull CharSequence url) {
         this(linkType, url, null, LinkStatus.UNKNOWN);
     }
 
-    public ResolvedLink(LinkType linkType, CharSequence url, Attributes attributes) {
+    public ResolvedLink(@NotNull LinkType linkType, @NotNull CharSequence url, @Nullable Attributes attributes) {
         this(linkType, url, attributes, LinkStatus.UNKNOWN);
     }
 
+    @Nullable
     public Attributes getAttributes() {
         return myAttributes;
     }
 
-    public Attributes getNonNullAttributes() {
+    public @NotNull Attributes getNonNullAttributes() {
         if (myAttributes == null) {
             myAttributes = new Attributes();
         }
         return myAttributes;
     }
 
-    public ResolvedLink(LinkType linkType, CharSequence url, Attributes attributes, LinkStatus status) {
+    public ResolvedLink(@NotNull LinkType linkType, CharSequence url, @Nullable Attributes attributes, @NotNull LinkStatus status) {
         myLinkType = linkType;
         myUrl = String.valueOf(url);
         myStatus = status;
@@ -38,28 +41,31 @@ public class ResolvedLink {
     }
 
     // @formatter:off
-    public ResolvedLink withLinkType(LinkType linkType) { return linkType == this.myLinkType ? this : new ResolvedLink(linkType, myUrl, myAttributes, myStatus); }
-    public ResolvedLink withStatus(LinkStatus status) { return status == this.myStatus ? this : new ResolvedLink(myLinkType, myUrl, myAttributes, status); }
+    public ResolvedLink withLinkType(@NotNull LinkType linkType) { return linkType == this.myLinkType ? this : new ResolvedLink(linkType, myUrl, myAttributes, myStatus); }
+    public ResolvedLink withStatus(@NotNull LinkStatus status) { return status == this.myStatus ? this : new ResolvedLink(myLinkType, myUrl, myAttributes, status); }
     // @formatter:on
 
+    @NotNull
     public LinkType getLinkType() {
         return myLinkType;
     }
 
+    @NotNull
     public LinkStatus getStatus() {
         return myStatus;
     }
 
-    public ResolvedLink withUrl(CharSequence url) {
+    public @NotNull ResolvedLink withUrl(@NotNull CharSequence url) {
         String useUrl = String.valueOf(url);
         return this.myUrl.equals(useUrl) ? this : new ResolvedLink(myLinkType, useUrl, myAttributes, myStatus);
     }
 
+    @NotNull
     public String getUrl() {
         return myUrl;
     }
 
-    public String getPageRef() {
+    public @NotNull String getPageRef() {
         // parse out the anchor marker and ref
         int pos = myUrl.indexOf('#');
         if (pos < 0) {
@@ -69,7 +75,7 @@ public class ResolvedLink {
         }
     }
 
-    public String getAnchorRef() {
+    public @Nullable String getAnchorRef() {
         // parse out the anchor marker and ref
         int pos = myUrl.indexOf('#');
         if (pos < 0) {
@@ -79,9 +85,9 @@ public class ResolvedLink {
         }
     }
 
-    public ResolvedLink withTitle(CharSequence title) {
+    public @NotNull ResolvedLink withTitle(@Nullable CharSequence title) {
         String haveTitle = myAttributes == null ? null : myAttributes.getValue(Attribute.TITLE_ATTR);
-        if (title == haveTitle || haveTitle != null && haveTitle.contentEquals(title)) return this;
+        if (title == haveTitle || haveTitle != null && title != null && haveTitle.contentEquals(title)) return this;
 
         Attributes attributes = new Attributes(myAttributes);
         if (title == null) {
@@ -93,13 +99,13 @@ public class ResolvedLink {
         return new ResolvedLink(myLinkType, myUrl, attributes, myStatus);
     }
 
-    public String getTitle() {
+    public @Nullable String getTitle() {
         return myAttributes == null ? null : myAttributes.getValue(Attribute.TITLE_ATTR);
     }
 
-    public ResolvedLink withTarget(CharSequence target) {
+    public @NotNull ResolvedLink withTarget(@Nullable CharSequence target) {
         String haveTarget = myAttributes == null ? null : myAttributes.getValue(Attribute.TARGET_ATTR);
-        if (target == haveTarget || haveTarget != null && haveTarget.contentEquals(target)) return this;
+        if (target == haveTarget || haveTarget != null && target != null && haveTarget.contentEquals(target)) return this;
 
         Attributes attributes = new Attributes(myAttributes);
         if (target == null) {

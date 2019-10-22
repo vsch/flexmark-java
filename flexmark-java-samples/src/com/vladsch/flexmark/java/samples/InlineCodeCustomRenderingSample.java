@@ -39,16 +39,17 @@ public class InlineCodeCustomRenderingSample {
         }
 
         public static class Factory implements DelegatingNodeRendererFactory {
+            @NotNull
             @Override
-            public NodeRenderer apply(DataHolder options) {
+            public NodeRenderer apply(@NotNull DataHolder options) {
                 return new CustomNodeRenderer(options);
             }
 
             @Override
-            public Set<Class<? extends NodeRendererFactory>> getDelegates() {
+            public Set<Class<?>> getDelegates() {
                 // NOTE: add node renderer factory classes to which this renderer will delegate some rendering.
                 //       No need to add the CoreNodeRenderer, it is assumed to be depended on by all.
-//                Set<Class<? extends NodeRendererFactory>> set = new HashSet<>();
+//                Set<Class<?>> set = new HashSet<>();
 //                set.add(TocNodeRenderer.Factory.class);
 //                return set;
 
@@ -96,7 +97,7 @@ public class InlineCodeCustomRenderingSample {
         }
 
         @Override
-        public void extend(Builder rendererBuilder, String rendererType) {
+        public void extend(@NotNull Builder rendererBuilder, @NotNull String rendererType) {
             rendererBuilder.nodeRendererFactory(new CustomNodeRenderer.Factory());
         }
 

@@ -24,6 +24,8 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
 import com.vladsch.flexmark.util.sequence.ReplacedTextMapper;
 import com.vladsch.flexmark.util.sequence.SubSequence;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -37,7 +39,7 @@ public class SyntheticLinkSample {
         }
 
         @Override
-        public void process(NodeTracker state, Node node) {
+        public void process(@NotNull NodeTracker state, @NotNull Node node) {
             BasedSequence original = node.getChars();
             ReplacedTextMapper textMapper = new ReplacedTextMapper(original);
             BasedSequence literal = Escaping.unescape(original, textMapper);
@@ -100,8 +102,9 @@ public class SyntheticLinkSample {
                 addNodeWithExclusions(Text.class, DoNotLinkDecorate.class);
             }
 
+            @NotNull
             @Override
-            public NodePostProcessor apply(Document document) {
+            public NodePostProcessor apply(@NotNull Document document) {
                 return new SyntheticLinkPostProcessor(document);
             }
         }
@@ -111,8 +114,9 @@ public class SyntheticLinkSample {
         public AppendedMarkdownPostProcessor(DataHolder options) {
         }
 
+        @NotNull
         @Override
-        public Document processDocument(Document document) {
+        public Document processDocument(@NotNull Document document) {
             // here you can append some markdown text but keep it based on original input by
             // using PrefixedSubSequence with only prefix without any characters from input string
 
@@ -129,15 +133,17 @@ public class SyntheticLinkSample {
         }
 
         public static class Factory extends DocumentPostProcessorFactory {
+            @NotNull
             @Override
-            public PostProcessor apply(Document document) {
+            public PostProcessor apply(@NotNull Document document) {
                 return new AppendedMarkdownPostProcessor(document);
             }
 
+            @Nullable
             @Override
-            public Set<Class<? extends PostProcessorFactory>> getAfterDependents() {
+            public Set<Class<?>> getAfterDependents() {
                 // run this post processor after synthetic link processor
-                Set<Class<? extends PostProcessorFactory>> set = new HashSet<>();
+                Set<Class<?>> set = new HashSet<>();
                 set.add(SyntheticLinkPostProcessor.Factory.class);
                 return set;
             }

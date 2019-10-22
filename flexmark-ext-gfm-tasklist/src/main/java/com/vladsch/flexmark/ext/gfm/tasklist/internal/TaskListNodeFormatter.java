@@ -14,6 +14,8 @@ import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,6 +32,7 @@ public class TaskListNodeFormatter implements NodeFormatter {
         listOptions = ListOptions.getFrom(options);
     }
 
+    @Nullable
     @Override
     public Set<NodeFormattingHandler<?>> getNodeFormattingHandlers() {
         return new HashSet<>(Arrays.asList(
@@ -39,6 +42,7 @@ public class TaskListNodeFormatter implements NodeFormatter {
         ));
     }
 
+    @Nullable
     @Override
     public Set<Class<?>> getNodeClasses() {
         return null;
@@ -159,8 +163,9 @@ public class TaskListNodeFormatter implements NodeFormatter {
     }
 
     public static class Factory implements NodeFormatterFactory {
+        @NotNull
         @Override
-        public NodeFormatter create(DataHolder options) {
+        public NodeFormatter create(@NotNull DataHolder options) {
             return new TaskListNodeFormatter(options);
         }
     }

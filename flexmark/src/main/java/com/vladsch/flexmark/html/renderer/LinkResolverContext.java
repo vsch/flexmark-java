@@ -5,6 +5,8 @@ import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.html.Attributes;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public interface LinkResolverContext {
 
@@ -14,33 +16,33 @@ public interface LinkResolverContext {
      *
      * @return the current renderer options {@link DataHolder}
      */
-    DataHolder getOptions();
+    @NotNull DataHolder getOptions();
     /**
      * @return the {@link Document} node of the current context
      */
-    Document getDocument();
+    @NotNull Document getDocument();
     /**
      * @param url to be encoded
      * @return an encoded URL (depending on the configuration)
      */
-    String encodeUrl(CharSequence url);
+    @NotNull String encodeUrl(@NotNull CharSequence url);
     /**
      * Render the specified node and its children using the configured renderers. This should be used to render child
      * nodes; be careful not to pass the node that is being rendered, that would result in an endless loop.
      *
      * @param node the node to render
      */
-    void render(Node node);
+    void render(@NotNull Node node);
     /**
      * Render the children of the node, used by custom renderers
      *
      * @param parent node the children of which are to be rendered
      */
-    void renderChildren(Node parent);
+    void renderChildren(@NotNull Node parent);
     /**
      * @return the current node being rendered
      */
-    Node getCurrentNode();
+    @NotNull Node getCurrentNode();
     /**
      * Resolve link for rendering. Link Resolvers are going to be called until one returns ResolvedLink with getStatus() != LinkStatus.Unknown
      * <p>
@@ -54,7 +56,7 @@ public interface LinkResolverContext {
      * @param urlEncode whether the link should be url encoded, if null then the value of {@link HtmlRenderer#PERCENT_ENCODE_URLS} will be used to determine whether the resolved URL is to be encoded.
      * @return resolved link url for this link and its resolved status
      */
-    ResolvedLink resolveLink(LinkType linkType, CharSequence url, Boolean urlEncode);
+    @NotNull ResolvedLink resolveLink(@NotNull LinkType linkType, @NotNull CharSequence url, @Nullable Boolean urlEncode);
     /**
      * Resolve link for rendering. Link Resolvers are going to be called until one returns ResolvedLink with getStatus() != LinkStatus.Unknown
      * <p>
@@ -69,5 +71,5 @@ public interface LinkResolverContext {
      * @param urlEncode  whether the link should be url encoded, if null then the value of {@link HtmlRenderer#PERCENT_ENCODE_URLS} will be used to determine whether the resolved URL is to be encoded.
      * @return resolved link url for this link and its resolved status
      */
-    ResolvedLink resolveLink(LinkType linkType, CharSequence url, Attributes attributes, Boolean urlEncode);
+    @NotNull ResolvedLink resolveLink(@NotNull LinkType linkType, @NotNull CharSequence url, @Nullable Attributes attributes, @Nullable Boolean urlEncode);
 }

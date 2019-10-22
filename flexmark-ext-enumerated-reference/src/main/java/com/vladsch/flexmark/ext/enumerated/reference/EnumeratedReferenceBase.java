@@ -17,6 +17,7 @@ public class EnumeratedReferenceBase extends Node implements DelimitedNode, DoNo
     protected BasedSequence closingMarker = BasedSequence.NULL;
     protected EnumeratedReferenceBlock enumeratedReferenceBlock;
 
+    @NotNull
     @Override
     public BasedSequence getReference() {
         return text;
@@ -57,7 +58,7 @@ public class EnumeratedReferenceBase extends Node implements DelimitedNode, DoNo
     }
 
     @Override
-    public void getAstExtra(StringBuilder out) {
+    public void getAstExtra(@NotNull StringBuilder out) {
         delimitedSegmentSpanChars(out, openingMarker, text, closingMarker, "text");
     }
 

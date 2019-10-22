@@ -32,7 +32,7 @@ public class OrderedList extends ListBlock {
     }
 
     @Override
-    public void getAstExtra(StringBuilder out) {
+    public void getAstExtra(@NotNull StringBuilder out) {
         super.getAstExtra(out);
         if (startNumber > 1) out.append(" start:").append(startNumber);
         out.append(" delimiter:'").append(delimiter).append("'");

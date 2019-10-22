@@ -6,6 +6,7 @@ import com.vladsch.flexmark.util.ast.ReferenceNode;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class Reference extends LinkNodeBase implements ReferenceNode<ReferenceRepository, Reference, RefNode> {
     protected BasedSequence openingMarker = BasedSequence.NULL;
@@ -55,13 +56,14 @@ public class Reference extends LinkNodeBase implements ReferenceNode<ReferenceRe
         return getReference().compareTo(other.getReference());
     }
 
+    @Nullable
     @Override
-    public RefNode getReferencingNode(Node node) {
+    public RefNode getReferencingNode(@NotNull Node node) {
         return node instanceof RefNode ? (RefNode) node : null;
     }
 
     @Override
-    public void getAstExtra(StringBuilder out) {
+    public void getAstExtra(@NotNull StringBuilder out) {
         delimitedSegmentSpanChars(out, openingMarker, reference, closingMarker, "ref");
         delimitedSegmentSpanChars(out, urlOpeningMarker, url, urlClosingMarker, "url");
         delimitedSegmentSpanChars(out, titleOpeningMarker, title, titleClosingMarker, "title");
@@ -180,6 +182,7 @@ public class Reference extends LinkNodeBase implements ReferenceNode<ReferenceRe
         this.title = title;
     }
 
+    @NotNull
     @Override
     protected String toStringAttributes() {
         return "reference=" + reference + ", url=" + url;

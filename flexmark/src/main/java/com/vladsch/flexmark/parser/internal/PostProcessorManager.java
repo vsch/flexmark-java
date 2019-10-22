@@ -14,6 +14,7 @@ import com.vladsch.flexmark.util.dependency.DependencyHandler;
 import com.vladsch.flexmark.util.dependency.DependentItem;
 import com.vladsch.flexmark.util.dependency.DependentItemMap;
 import com.vladsch.flexmark.util.dependency.ResolvedDependencies;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
@@ -189,16 +190,19 @@ public class PostProcessorManager {
     private static class PostProcessDependencyHandler extends DependencyHandler<PostProcessorFactory, PostProcessorDependencyStage, PostProcessorDependencies> {
         PostProcessDependencyHandler() {}
 
+        @NotNull
         @Override
-        protected Class<? extends PostProcessorFactory> getDependentClass(PostProcessorFactory dependent) {
+        protected Class<?> getDependentClass(PostProcessorFactory dependent) {
             return dependent.getClass();
         }
 
+        @NotNull
         @Override
         protected PostProcessorDependencies createResolvedDependencies(List<PostProcessorDependencyStage> stages) {
             return new PostProcessorDependencies(stages);
         }
 
+        @NotNull
         @Override
         protected PostProcessorDependencyStage createStage(List<PostProcessorFactory> dependents) {
             return new PostProcessorDependencyStage(dependents);

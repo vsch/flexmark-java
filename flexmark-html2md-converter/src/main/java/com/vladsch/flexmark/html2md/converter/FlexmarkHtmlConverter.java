@@ -422,7 +422,7 @@ public class FlexmarkHtmlConverter {
         }
 
         @Override
-        protected void removeApiPoint(Object apiPoint) {
+        protected void removeApiPoint(@NotNull Object apiPoint) {
             if (apiPoint instanceof HtmlNodeRendererFactory) this.nodeRendererFactories.remove(apiPoint);
             else if (apiPoint instanceof HtmlLinkResolverFactory) this.linkResolverFactories.remove(apiPoint);
             else if (apiPoint instanceof HeaderIdGeneratorFactory) this.htmlIdGeneratorFactory = null;
@@ -432,7 +432,7 @@ public class FlexmarkHtmlConverter {
         }
 
         @Override
-        protected void preloadExtension(Extension extension) {
+        protected void preloadExtension(@NotNull Extension extension) {
             if (extension instanceof HtmlConverterExtension) {
                 HtmlConverterExtension htmlConverterExtension = (HtmlConverterExtension) extension;
                 htmlConverterExtension.rendererOptions(this);
@@ -440,7 +440,7 @@ public class FlexmarkHtmlConverter {
         }
 
         @Override
-        protected boolean loadExtension(Extension extension) {
+        protected boolean loadExtension(@NotNull Extension extension) {
             if (extension instanceof HtmlConverterExtension) {
                 HtmlConverterExtension htmlConverterExtension = (HtmlConverterExtension) extension;
                 htmlConverterExtension.extend(this);
@@ -540,16 +540,19 @@ public class FlexmarkHtmlConverter {
     }
 
     private static class RendererDependencyHandler extends DependencyHandler<DelegatingNodeRendererFactoryWrapper, RendererDependencyStage, RendererDependencies> {
+        @NotNull
         @Override
         protected Class<?> getDependentClass(DelegatingNodeRendererFactoryWrapper dependent) {
             return dependent.getFactory().getClass();
         }
 
+        @NotNull
         @Override
         protected RendererDependencies createResolvedDependencies(List<RendererDependencyStage> stages) {
             return new RendererDependencies(stages);
         }
 
+        @NotNull
         @Override
         protected RendererDependencyStage createStage(List<DelegatingNodeRendererFactoryWrapper> dependents) {
             return new RendererDependencyStage(dependents);

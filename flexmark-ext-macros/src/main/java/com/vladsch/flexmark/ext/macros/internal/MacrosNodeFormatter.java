@@ -10,6 +10,8 @@ import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.format.options.ElementPlacement;
 import com.vladsch.flexmark.util.format.options.ElementPlacementSort;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
@@ -51,6 +53,7 @@ public class MacrosNodeFormatter extends NodeRepositoryFormatter<MacroDefinition
         markdown.line().append("<<<").blankLine();
     }
 
+    @Nullable
     @Override
     public Set<NodeFormattingHandler<?>> getNodeFormattingHandlers() {
         return new HashSet<>(Arrays.asList(
@@ -59,6 +62,7 @@ public class MacrosNodeFormatter extends NodeRepositoryFormatter<MacroDefinition
         ));
     }
 
+    @Nullable
     @Override
     public Set<Class<?>> getNodeClasses() {
         if (options.macrosPlacement != ElementPlacement.AS_IS && options.macrosSort != ElementPlacementSort.SORT_UNUSED_LAST) return null;
@@ -84,8 +88,9 @@ public class MacrosNodeFormatter extends NodeRepositoryFormatter<MacroDefinition
     }
 
     public static class Factory implements NodeFormatterFactory {
+        @NotNull
         @Override
-        public NodeFormatter create(DataHolder options) {
+        public NodeFormatter create(@NotNull DataHolder options) {
             return new MacrosNodeFormatter(options);
         }
     }

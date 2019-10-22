@@ -1,5 +1,7 @@
 package com.vladsch.flexmark.html.renderer;
 
+import org.jetbrains.annotations.NotNull;
+
 /**
  * Specifies the node part for which attributes can be provided
  */
@@ -11,11 +13,11 @@ public class AttributablePart {
 
     private final String myName;
 
-    public AttributablePart(String name) {
+    public AttributablePart(@NotNull String name) {
         this.myName = name;
     }
 
-    public String getName() {
+    public @NotNull String getName() {
         return myName;
     }
 

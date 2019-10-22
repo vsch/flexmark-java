@@ -3,6 +3,7 @@ package com.vladsch.flexmark.parser;
 import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Processing of elements which are based on a link ref: [] or ![]
@@ -35,7 +36,7 @@ public interface LinkRefProcessor {
      * @param nodeChars text to match, including [] or ![]
      * @return true if it is a match
      */
-    boolean isMatch(BasedSequence nodeChars);
+    boolean isMatch(@NotNull BasedSequence nodeChars);
 
     /**
      * Create the desired element that was previously matched with isMatch
@@ -43,7 +44,7 @@ public interface LinkRefProcessor {
      * @param nodeChars char sequence from which to create the node
      * @return Node element to be inserted into the tree
      */
-    Node createNode(BasedSequence nodeChars);
+    @NotNull Node createNode(@NotNull BasedSequence nodeChars);
 
     /**
      * Adjust child nodes' text as needed when some of the link ref text was used in the opening or closing sequence of the node
@@ -53,7 +54,7 @@ public interface LinkRefProcessor {
      * @param node     node whose inline text is to be adjusted to reflect some of the text having been used as part of the opener and/or closer sequence.
      * @return adjusted sequence to use for this node's child text
      */
-    BasedSequence adjustInlineText(Document document, Node node);
+    @NotNull BasedSequence adjustInlineText(@NotNull Document document, @NotNull Node node);
 
     /**
      * Allows the delimiter processor to allow/disallow other delimiters in its inline text
@@ -62,7 +63,7 @@ public interface LinkRefProcessor {
      * @param document document, can be used to get options
      * @param node     delimited node created by this processor  @return true if delimiters are allowed in this part of the node's text
      */
-    boolean allowDelimiters(BasedSequence chars, Document document, Node node);
+    boolean allowDelimiters(@NotNull BasedSequence chars, @NotNull Document document, @NotNull Node node);
 
     /**
      * Allows the processor to adjust nodes' elements after all delimiters have been processed inside the inlined text
@@ -70,5 +71,5 @@ public interface LinkRefProcessor {
      * @param document document, can be used to get parsing options
      * @param node     node whose elements can be adjusted
      */
-    void updateNodeElements(Document document, Node node);
+    void updateNodeElements(@NotNull Document document, @NotNull Node node);
 }

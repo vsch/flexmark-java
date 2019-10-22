@@ -9,6 +9,7 @@ import com.vladsch.flexmark.parser.block.ParserState;
 import com.vladsch.flexmark.parser.core.ReferencePreProcessorFactory;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.BitSet;
 import java.util.HashMap;
@@ -78,15 +79,17 @@ public class ZzzzzzParagraphPreProcessor implements ParagraphPreProcessor {
                 return false;
             }
 
+            @Nullable
             @Override
-            public Set<Class<? extends ParagraphPreProcessorFactory>> getAfterDependents() {
-                HashSet<Class<? extends ParagraphPreProcessorFactory>> set = new HashSet<>();
+            public Set<Class<?>> getAfterDependents() {
+                HashSet<Class<?>> set = new HashSet<>();
                 set.add(ReferencePreProcessorFactory.class);
                 return set;
             }
 
+            @Nullable
             @Override
-            public Set<Class<? extends ParagraphPreProcessorFactory>> getBeforeDependents() {
+            public Set<Class<?>> getBeforeDependents() {
                 return null;
             }
 

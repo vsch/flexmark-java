@@ -44,7 +44,7 @@ public class YouTrackConverterExtension implements Parser.ParserExtension, HtmlR
     }
 
     @Override
-    public void extend(HtmlRenderer.Builder rendererBuilder, String rendererType) {
+    public void extend(@NotNull HtmlRenderer.Builder rendererBuilder, @NotNull String rendererType) {
         if (rendererBuilder.isRendererType("YOUTRACK")) {
             rendererBuilder.nodeRendererFactory(new YouTrackConverterNodeRenderer.Factory());
         } else {

@@ -41,7 +41,7 @@ public class ZzzzzzBlock extends Block {
     }
 
     @Override
-    public void getAstExtra(StringBuilder out) {
+    public void getAstExtra(@NotNull StringBuilder out) {
         out.append(" ordinal: " + zzzzzzOrdinal + " ");
         segmentSpan(out, openingMarker, "open");
         segmentSpan(out, text, "text");

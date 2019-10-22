@@ -1,10 +1,12 @@
 package com.vladsch.flexmark.util.collection.iteration;
 
+import org.jetbrains.annotations.NotNull;
+
 public interface ReversiblePeekingIterable<E> extends ReversibleIterable<E> {
     @Override
-    ReversiblePeekingIterator<E> iterator();
+    @NotNull ReversiblePeekingIterator<E> iterator();
     @Override
-    ReversiblePeekingIterable<E> reversed();
+    @NotNull ReversiblePeekingIterable<E> reversed();
     @Override
-    ReversiblePeekingIterator<E> reversedIterator();
+    @NotNull ReversiblePeekingIterator<E> reversedIterator();
 }

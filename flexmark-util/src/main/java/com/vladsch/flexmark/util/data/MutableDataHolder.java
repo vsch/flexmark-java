@@ -28,7 +28,7 @@ public interface MutableDataHolder extends DataHolder, MutableDataSetter {
      * @param value value to store
      * @return mutable data holder for chained calls
      */
-     <T> MutableDataHolder set(DataKey<T> key, @NotNull T value);
+    @NotNull <T> MutableDataHolder set(@NotNull DataKey<T> key, @NotNull T value);
 
     /**
      * Store the given value for the key
@@ -38,7 +38,7 @@ public interface MutableDataHolder extends DataHolder, MutableDataSetter {
      * @param value value to store
      * @return mutable data holder for chained calls
      */
-    <T> MutableDataHolder set(NullableDataKey<T> key, @Nullable T value);
+    @NotNull <T> MutableDataHolder set(@NotNull NullableDataKey<T> key, @Nullable T value);
 
     /**
      * Remove the stored value for the key, used to force to default or to force recompute
@@ -47,7 +47,7 @@ public interface MutableDataHolder extends DataHolder, MutableDataSetter {
      * @param key data key to remove
      * @return mutable data holder for chained calls
      */
-    <T> MutableDataHolder remove(DataKeyBase<T> key);
+    @NotNull <T> MutableDataHolder remove(@NotNull DataKeyBase<T> key);
 
     /**
      * Store the given value for the key
@@ -55,7 +55,7 @@ public interface MutableDataHolder extends DataHolder, MutableDataSetter {
      * @param dataSetter data setter which will set values
      * @return mutable data holder for chained calls
      */
-    MutableDataHolder setFrom(MutableDataSetter dataSetter);
+    @NotNull MutableDataHolder setFrom(@NotNull MutableDataSetter dataSetter);
 
     /**
      * Copy all values from one data holder to this data holder
@@ -63,7 +63,7 @@ public interface MutableDataHolder extends DataHolder, MutableDataSetter {
      * @param other data holder from which to copy all values
      * @return mutable data holder for chained calls
      */
-    MutableDataHolder setAll(DataHolder other);
+    @NotNull MutableDataHolder setAll(@NotNull DataHolder other);
 
     /**
      * Set options in given mutable data holder
@@ -80,5 +80,5 @@ public interface MutableDataHolder extends DataHolder, MutableDataSetter {
      *
      * @return mutable data holder for chained calls
      */
-    MutableDataHolder clear();
+    @NotNull MutableDataHolder clear();
 }

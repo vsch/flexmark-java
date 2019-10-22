@@ -18,6 +18,7 @@ import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -56,8 +57,9 @@ public class CustomLinkResolverSample {
             relativeParts = docRelativeURL == null ? EMPTY_STRINGS : docRelativeURL.split("/");
         }
 
+        @NotNull
         @Override
-        public ResolvedLink resolveLink(Node node, LinkResolverContext context, ResolvedLink link) {
+        public ResolvedLink resolveLink(@NotNull Node node, @NotNull LinkResolverContext context, @NotNull ResolvedLink link) {
             Document document = node.getDocument();
 
             if (node instanceof Image || node instanceof Link || node instanceof Reference) {
@@ -135,13 +137,15 @@ public class CustomLinkResolverSample {
         }
 
         public static class Factory implements LinkResolverFactory {
+            @Nullable
             @Override
-            public Set<Class<? extends LinkResolverFactory>> getAfterDependents() {
+            public Set<Class<?>> getAfterDependents() {
                 return null;
             }
 
+            @Nullable
             @Override
-            public Set<Class<? extends LinkResolverFactory>> getBeforeDependents() {
+            public Set<Class<?>> getBeforeDependents() {
                 return null;
             }
 
@@ -150,8 +154,9 @@ public class CustomLinkResolverSample {
                 return false;
             }
 
+            @NotNull
             @Override
-            public LinkResolver apply(LinkResolverContext context) {
+            public LinkResolver apply(@NotNull LinkResolverContext context) {
                 return new com.vladsch.flexmark.docx.converter.internal.DocxLinkResolver(context);
             }
         }
@@ -164,7 +169,7 @@ public class CustomLinkResolverSample {
         }
 
         @Override
-        public void extend(Builder rendererBuilder, String rendererType) {
+        public void extend(@NotNull Builder rendererBuilder, @NotNull String rendererType) {
             rendererBuilder.linkResolverFactory(new DocxLinkResolver.Factory());
             rendererBuilder.nodeRendererFactory(new CustomLinkRenderer.Factory());
         }
@@ -176,14 +181,15 @@ public class CustomLinkResolverSample {
 
     static class CustomLinkRenderer implements NodeRenderer {
         public static class Factory implements DelegatingNodeRendererFactory {
+            @NotNull
             @Override
-            public NodeRenderer apply(DataHolder options) {
+            public NodeRenderer apply(@NotNull DataHolder options) {
                 return new CustomLinkRenderer();
             }
 
             @Override
-            public Set<Class<? extends NodeRendererFactory>> getDelegates() {
-                ///Set<Class<? extends NodeRendererFactory>> set = new HashSet<Class<? extends NodeRendererFactory>>();
+            public Set<Class<?>> getDelegates() {
+                ///Set<Class<?>>();
                 // add node renderer factory classes to which this renderer will delegate some of its rendering
                 // core node renderer is assumed to have all depend it so there is no need to add it
                 //set.add(WikiLinkNodeRenderer.Factory.class);

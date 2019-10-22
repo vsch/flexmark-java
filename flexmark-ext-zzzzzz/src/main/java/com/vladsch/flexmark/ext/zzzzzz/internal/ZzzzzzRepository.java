@@ -8,6 +8,7 @@ import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.ast.NodeRepository;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKey;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
@@ -40,16 +41,19 @@ public class ZzzzzzRepository extends NodeRepository<ZzzzzzBlock> {
         return referencedZzzzzzBlocks;
     }
 
+    @NotNull
     @Override
     public DataKey<ZzzzzzRepository> getDataKey() {
         return ZzzzzzExtension.ZZZZZZS;
     }
 
+    @NotNull
     @Override
     public DataKey<KeepType> getKeepDataKey() {
         return ZzzzzzExtension.ZZZZZZS_KEEP;
     }
 
+    @NotNull
     @Override
     public Set<ZzzzzzBlock> getReferencedElements(Node parent) {
         HashSet<ZzzzzzBlock> references = new HashSet<>();

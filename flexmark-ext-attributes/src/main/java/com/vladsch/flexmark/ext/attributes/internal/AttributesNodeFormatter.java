@@ -15,6 +15,8 @@ import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
@@ -43,18 +45,20 @@ public class AttributesNodeFormatter implements PhasedNodeFormatter, ExplicitAtt
 
     }
 
+    @Nullable
     @Override
     public Set<Class<?>> getNodeClasses() {
         return null;
     }
 
+    @Nullable
     @Override
     public Set<FormattingPhase> getFormattingPhases() {
         return Collections.singleton(FormattingPhase.COLLECT);
     }
 
     @Override
-    public void addExplicitId(Node node, String id, NodeFormatterContext context, MarkdownWriter markdown) {
+    public void addExplicitId(@NotNull Node node, @NotNull String id, @NotNull NodeFormatterContext context, @NotNull MarkdownWriter markdown) {
         if (node instanceof Heading) {
             // if our id != generated id we add explicit attributes if none are found already
             if (context.getRenderPurpose() == TRANSLATED) {
@@ -91,7 +95,7 @@ public class AttributesNodeFormatter implements PhasedNodeFormatter, ExplicitAtt
     }
 
     @Override
-    public void renderDocument(NodeFormatterContext context, MarkdownWriter markdown, Document document, FormattingPhase phase) {
+    public void renderDocument(@NotNull NodeFormatterContext context, @NotNull MarkdownWriter markdown, @NotNull Document document, @NotNull FormattingPhase phase) {
         // reset storage for attribute keys and attributes map
         if (context.isTransformingText()) {
             context.getTranslationStore().set(ATTRIBUTE_TRANSLATION_ID, 0);
@@ -266,6 +270,7 @@ public class AttributesNodeFormatter implements PhasedNodeFormatter, ExplicitAtt
     }
 
     // only registered if assignTextAttributes is enabled
+    @Nullable
     @Override
     public Set<NodeFormattingHandler<?>> getNodeFormattingHandlers() {
         HashSet<NodeFormattingHandler<?>> set = new HashSet<>();
@@ -445,8 +450,9 @@ public class AttributesNodeFormatter implements PhasedNodeFormatter, ExplicitAtt
     }
 
     public static class Factory implements NodeFormatterFactory {
+        @NotNull
         @Override
-        public NodeFormatter create(DataHolder options) {
+        public NodeFormatter create(@NotNull DataHolder options) {
             return new AttributesNodeFormatter(options);
         }
     }

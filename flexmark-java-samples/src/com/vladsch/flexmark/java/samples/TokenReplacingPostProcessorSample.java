@@ -13,6 +13,7 @@ import com.vladsch.flexmark.util.ast.NodeTracker;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Collections;
 
@@ -40,14 +41,15 @@ public class TokenReplacingPostProcessorSample {
                 addNodes(Image.class);
             }
 
+            @NotNull
             @Override
-            public NodePostProcessor apply(Document document) {
+            public NodePostProcessor apply(@NotNull Document document) {
                 return new LinkReplacingPostProcessor();
             }
         }
 
         @Override
-        public void process(NodeTracker state, Node node) {
+        public void process(@NotNull NodeTracker state, @NotNull Node node) {
             if (node instanceof Link) { // [foo](http://example.com)
                 Link link = (Link) node;
                 Text text = new Text(link.getText());

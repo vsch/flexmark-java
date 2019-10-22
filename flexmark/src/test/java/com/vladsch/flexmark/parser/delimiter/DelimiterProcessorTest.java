@@ -236,8 +236,9 @@ final public class DelimiterProcessorTest extends RenderingTestCase {
     private static class UpperCaseNodeRendererFactory implements NodeRendererFactory {
         UpperCaseNodeRendererFactory() {}
 
+        @NotNull
         @Override
-        public NodeRenderer apply(DataHolder options) {
+        public NodeRenderer apply(@NotNull DataHolder options) {
             return new UpperCaseNodeRenderer(options);
         }
     }

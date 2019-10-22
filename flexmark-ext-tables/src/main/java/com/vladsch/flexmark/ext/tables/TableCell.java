@@ -118,7 +118,7 @@ public class TableCell extends Node implements DelimitedNode {
     }
 
     @Override
-    public void getAstExtra(StringBuilder out) {
+    public void getAstExtra(@NotNull StringBuilder out) {
         if (alignment != null) out.append(" ").append(alignment);
         if (header) out.append(" header");
         if (span > 1) out.append(" span=" + span);

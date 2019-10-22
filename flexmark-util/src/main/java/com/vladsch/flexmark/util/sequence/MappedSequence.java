@@ -1,6 +1,7 @@
 package com.vladsch.flexmark.util.sequence;
 
 import com.vladsch.flexmark.util.mappers.CharMapper;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * A CharSequence that maps characters according to CharMapper
@@ -93,6 +94,7 @@ public final class MappedSequence extends BasedSequenceImpl {
         return base.length();
     }
 
+    @NotNull
     @Override
     public String toString() {
         //noinspection StringBufferReplaceableByString

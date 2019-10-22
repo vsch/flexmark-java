@@ -7,6 +7,8 @@ import com.vladsch.flexmark.parser.block.*;
 import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Set;
 import java.util.regex.Matcher;
@@ -68,13 +70,15 @@ public class AdmonitionBlockParser extends AbstractBlockParser {
     }
 
     public static class Factory implements CustomBlockParserFactory {
+        @Nullable
         @Override
-        public Set<Class<? extends CustomBlockParserFactory>> getAfterDependents() {
+        public Set<Class<?>> getAfterDependents() {
             return null;
         }
 
+        @Nullable
         @Override
-        public Set<Class<? extends CustomBlockParserFactory>> getBeforeDependents() {
+        public Set<Class<?>> getBeforeDependents() {
             return null;
         }
 
@@ -83,8 +87,9 @@ public class AdmonitionBlockParser extends AbstractBlockParser {
             return false;
         }
 
+        @NotNull
         @Override
-        public BlockParserFactory apply(DataHolder options) {
+        public BlockParserFactory apply(@NotNull DataHolder options) {
             return new BlockFactory(options);
         }
     }

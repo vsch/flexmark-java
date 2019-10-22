@@ -81,7 +81,7 @@ public class AbbreviationExtension implements Parser.ParserExtension, HtmlRender
     }
 
     @Override
-    public void extend(HtmlRenderer.Builder rendererBuilder, String rendererType) {
+    public void extend(@NotNull HtmlRenderer.Builder rendererBuilder, @NotNull String rendererType) {
         if (rendererBuilder.isRendererType("HTML")) {
             rendererBuilder.nodeRendererFactory(new AbbreviationNodeRenderer.Factory());
         } else if (rendererBuilder.isRendererType("JIRA")) {

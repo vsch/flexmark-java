@@ -14,6 +14,8 @@ import com.vladsch.flexmark.util.html.Escaping;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
 import com.vladsch.flexmark.util.sequence.ReplacedTextMapper;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -26,6 +28,7 @@ public class SyntheticLinkFormatterSample {
         public SyntheticLinkNodeFormatter(DataHolder options) {
         }
 
+        @Nullable
         @Override
         public Set<Class<?>> getNodeClasses() {
             return new HashSet<>(Collections.singletonList(
@@ -33,6 +36,7 @@ public class SyntheticLinkFormatterSample {
             ));
         }
 
+        @Nullable
         @Override
         public Set<FormattingPhase> getFormattingPhases() {
             Set<FormattingPhase> set = new HashSet<>();
@@ -41,7 +45,7 @@ public class SyntheticLinkFormatterSample {
         }
 
         @Override
-        public void renderDocument(NodeFormatterContext context, MarkdownWriter markdown, Document document, FormattingPhase phase) {
+        public void renderDocument(@NotNull NodeFormatterContext context, @NotNull MarkdownWriter markdown, @NotNull Document document, @NotNull FormattingPhase phase) {
             switch (phase) {
                 case DOCUMENT_BOTTOM:
                     markdown.blankLine();
@@ -54,6 +58,7 @@ public class SyntheticLinkFormatterSample {
             }
         }
 
+        @Nullable
         @Override
         public Set<NodeFormattingHandler<?>> getNodeFormattingHandlers() {
             return new HashSet<>(Collections.singletonList(
@@ -98,8 +103,9 @@ public class SyntheticLinkFormatterSample {
         }
 
         static class Factory implements NodeFormatterFactory {
+            @NotNull
             @Override
-            public NodeFormatter create(DataHolder options) {
+            public NodeFormatter create(@NotNull DataHolder options) {
                 return new SyntheticLinkNodeFormatter(options);
             }
         }

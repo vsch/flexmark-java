@@ -47,7 +47,7 @@ public class UnderlineExtensionSample {
         }
 
         @Override
-        public void getAstExtra(StringBuilder out) {
+        public void getAstExtra(@NotNull StringBuilder out) {
             Node.delimitedSegmentSpan(out, openingMarker, text, closingMarker, "text");
         }
 
@@ -147,8 +147,9 @@ public class UnderlineExtensionSample {
 
         public static class Factory implements NodeRendererFactory {
 
+            @NotNull
             @Override
-            public NodeRenderer apply(DataHolder options) {
+            public NodeRenderer apply(@NotNull DataHolder options) {
                 return new UnderlineNodeRenderer();
             }
         }
@@ -190,7 +191,7 @@ public class UnderlineExtensionSample {
         }
 
         @Override
-        public void extend(HtmlRenderer.Builder rendererBuilder, String rendererType) {
+        public void extend(@NotNull HtmlRenderer.Builder rendererBuilder, @NotNull String rendererType) {
             rendererBuilder.nodeRendererFactory(new UnderlineNodeRenderer.Factory());
         }
 

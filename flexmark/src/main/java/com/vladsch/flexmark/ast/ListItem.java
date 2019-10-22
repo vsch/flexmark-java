@@ -45,7 +45,7 @@ public abstract class ListItem extends Block implements ParagraphItemContainer, 
     }
 
     @Override
-    public void getAstExtra(StringBuilder out) {
+    public void getAstExtra(@NotNull StringBuilder out) {
         segmentSpanChars(out, openingMarker, "open");
         segmentSpanChars(out, markerSuffix, "openSuffix");
         if (isTight()) out.append(" isTight");

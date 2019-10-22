@@ -30,7 +30,7 @@ public class Image extends InlineLinkNode {
     }
 
     @Override
-    public void getAstExtra(StringBuilder out) {
+    public void getAstExtra(@NotNull StringBuilder out) {
         delimitedSegmentSpanChars(out, textOpeningMarker, text, textClosingMarker, "text");
         segmentSpanChars(out, linkOpeningMarker, "linkOpen");
         delimitedSegmentSpanChars(out, urlOpeningMarker, url, urlClosingMarker, "url");

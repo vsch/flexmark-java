@@ -23,7 +23,7 @@ public class MacroAttribute extends Node implements DoNotDecorate {
     }
 
     @Override
-    public void getAstExtra(StringBuilder out) {
+    public void getAstExtra(@NotNull StringBuilder out) {
         segmentSpanChars(out, attribute, "attribute");
         segmentSpanChars(out, separator, "separator");
         delimitedSegmentSpanChars(out, openingMarker, value, closingMarker, "value");

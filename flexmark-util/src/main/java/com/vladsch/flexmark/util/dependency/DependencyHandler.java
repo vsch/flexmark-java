@@ -2,13 +2,15 @@ package com.vladsch.flexmark.util.dependency;
 
 import com.vladsch.flexmark.util.Ref;
 import com.vladsch.flexmark.util.collection.iteration.ReversibleIndexedIterator;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
+@SuppressWarnings("rawtypes")
 public abstract class DependencyHandler<D extends Dependent<D>, S, R extends ResolvedDependencies<S>> {
-    protected abstract S createStage(List<D> dependents);
-    protected abstract Class getDependentClass(D dependent);
-    protected abstract R createResolvedDependencies(List<S> stages);
+    protected abstract @NotNull S createStage(List<D> dependents);
+    protected abstract @NotNull Class getDependentClass(D dependent);
+    protected abstract @NotNull R createResolvedDependencies(List<S> stages);
 
     public R resolveDependencies(List<D> dependentsList) {
         if (dependentsList.size() == 0) {
@@ -34,10 +36,10 @@ public abstract class DependencyHandler<D extends Dependent<D>, S, R extends Res
 
             for (Map.Entry<Class, DependentItem<D>> entry : dependentItemMap) {
                 DependentItem<D> item = entry.getValue();
-                Set<? extends Class> afterDependencies = item.dependent.getAfterDependents();
+                Set<Class<?>> afterDependencies = item.dependent.getAfterDependents();
 
                 if (afterDependencies != null && afterDependencies.size() > 0) {
-                    for (Class<? extends D> dependentClass : afterDependencies) {
+                    for (Class<?> dependentClass : afterDependencies) {
                         DependentItem<D> dependentItem = dependentItemMap.get(dependentClass);
                         if (dependentItem != null) {
                             item.addDependency(dependentItem);
@@ -46,9 +48,9 @@ public abstract class DependencyHandler<D extends Dependent<D>, S, R extends Res
                     }
                 }
 
-                Set<? extends Class> beforeDependents = item.dependent.getBeforeDependents();
+                Set<Class<?>> beforeDependents = item.dependent.getBeforeDependents();
                 if (beforeDependents != null && beforeDependents.size() > 0) {
-                    for (Class<? extends D> dependentClass : beforeDependents) {
+                    for (Class<?> dependentClass : beforeDependents) {
                         DependentItem<D> dependentItem = dependentItemMap.get(dependentClass);
                         if (dependentItem != null) {
                             dependentItem.addDependency(item);

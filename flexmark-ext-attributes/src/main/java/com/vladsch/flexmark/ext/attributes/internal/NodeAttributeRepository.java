@@ -6,6 +6,7 @@ import com.vladsch.flexmark.util.ast.KeepType;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKey;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
@@ -70,7 +71,7 @@ public class NodeAttributeRepository implements Map<Node, ArrayList<AttributesNo
     }
 
     @Override
-    public void putAll(Map<? extends Node, ? extends ArrayList<AttributesNode>> m) {
+    public void putAll(@NotNull Map<? extends Node, ? extends ArrayList<AttributesNode>> m) {
         nodeAttributesHashMap.putAll(m);
     }
 
@@ -79,16 +80,19 @@ public class NodeAttributeRepository implements Map<Node, ArrayList<AttributesNo
         nodeAttributesHashMap.clear();
     }
 
+    @NotNull
     @Override
     public Set<Node> keySet() {
         return nodeAttributesHashMap.keySet();
     }
 
+    @NotNull
     @Override
     public Collection<ArrayList<AttributesNode>> values() {
         return nodeAttributesHashMap.values();
     }
 
+    @NotNull
     @Override
     public Set<Entry<Node, ArrayList<AttributesNode>>> entrySet() {
         return nodeAttributesHashMap.entrySet();

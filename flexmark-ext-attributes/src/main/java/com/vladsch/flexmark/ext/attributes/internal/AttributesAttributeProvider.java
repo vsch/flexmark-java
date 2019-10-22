@@ -14,6 +14,7 @@ import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.html.Attribute;
 import com.vladsch.flexmark.util.html.Attributes;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
@@ -30,7 +31,7 @@ public class AttributesAttributeProvider implements AttributeProvider {
     }
 
     @Override
-    public void setAttributes(Node node, AttributablePart part, Attributes attributes) {
+    public void setAttributes(@NotNull Node node, @NotNull AttributablePart part, @NotNull Attributes attributes) {
         // regression bug, issue #372, add option, default to both as before
         if (part == CoreNodeRenderer.CODE_CONTENT ? attributeOptions.fencedCodeAddAttributes.addToCode : attributeOptions.fencedCodeAddAttributes.addToPre) {
             ArrayList<AttributesNode> nodeAttributesList = nodeAttributeRepository.get(node);
@@ -75,12 +76,12 @@ public class AttributesAttributeProvider implements AttributeProvider {
 
     public static class Factory extends IndependentAttributeProviderFactory {
         //@Override
-        //public Set<Class<? extends AttributeProviderFactory>> getAfterDependents() {
+        //public Set<Class<?>> getAfterDependents() {
         //    return null;
         //}
         //
         //@Override
-        //public Set<Class<? extends AttributeProviderFactory>> getBeforeDependents() {
+        //public Set<Class<?>> getBeforeDependents() {
         //    return null;
         //}
         //
@@ -89,8 +90,9 @@ public class AttributesAttributeProvider implements AttributeProvider {
         //    return false;
         //}
 
+        @NotNull
         @Override
-        public AttributeProvider apply(LinkResolverContext context) {
+        public AttributeProvider apply(@NotNull LinkResolverContext context) {
             return new AttributesAttributeProvider(context);
         }
     }

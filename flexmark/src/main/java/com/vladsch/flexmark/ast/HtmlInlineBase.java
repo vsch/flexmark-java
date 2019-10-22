@@ -17,7 +17,7 @@ public abstract class HtmlInlineBase extends Node {
     }
 
     @Override
-    public void getAstExtra(StringBuilder out) {
+    public void getAstExtra(@NotNull StringBuilder out) {
         astExtraChars(out);
     }
 

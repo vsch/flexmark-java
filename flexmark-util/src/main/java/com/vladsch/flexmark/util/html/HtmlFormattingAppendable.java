@@ -1,5 +1,8 @@
 package com.vladsch.flexmark.util.html;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 import java.util.List;
 import java.util.Stack;
 
@@ -8,39 +11,39 @@ import java.util.Stack;
  */
 @SuppressWarnings("UnusedReturnValue")
 public interface HtmlFormattingAppendable extends LineFormattingAppendable {
-    Attributes getAttributes();
-    HtmlFormattingAppendable setAttributes(Attributes attributes);
+    @Nullable Attributes getAttributes();
+    @NotNull HtmlFormattingAppendable setAttributes(@NotNull Attributes attributes);
     boolean inPre();
-    HtmlFormattingAppendable openPre();
-    HtmlFormattingAppendable closePre();
-    HtmlFormattingAppendable raw(CharSequence s);
-    HtmlFormattingAppendable raw(CharSequence s, int count);
-    HtmlFormattingAppendable rawPre(CharSequence s);
-    HtmlFormattingAppendable rawIndentedPre(CharSequence s);
-    HtmlFormattingAppendable text(CharSequence s);
-    HtmlFormattingAppendable attr(CharSequence attrName, CharSequence value);
-    HtmlFormattingAppendable attr(Attribute... attribute);
-    HtmlFormattingAppendable attr(Attributes attributes);
-    HtmlFormattingAppendable withAttr();
+    @NotNull HtmlFormattingAppendable openPre();
+    @NotNull HtmlFormattingAppendable closePre();
+    @NotNull HtmlFormattingAppendable raw(@NotNull CharSequence s);
+    @NotNull HtmlFormattingAppendable raw(@NotNull CharSequence s, int count);
+    @NotNull HtmlFormattingAppendable rawPre(@NotNull CharSequence s);
+    @NotNull HtmlFormattingAppendable rawIndentedPre(@NotNull CharSequence s);
+    @NotNull HtmlFormattingAppendable text(@NotNull CharSequence s);
+    @NotNull HtmlFormattingAppendable attr(@NotNull CharSequence attrName, @NotNull CharSequence value);
+    @NotNull HtmlFormattingAppendable attr(@NotNull Attribute... attribute);
+    @NotNull HtmlFormattingAppendable attr(@NotNull Attributes attributes);
+    @NotNull HtmlFormattingAppendable withAttr();
 
     // tag tracking
-    public Stack<String> getOpenTags();
-    public List<String> getOpenTagsAfterLast(CharSequence latestTag);
+    @NotNull Stack<String> getOpenTags();
+    @NotNull List<String> getOpenTagsAfterLast(@NotNull CharSequence latestTag);
 
-    HtmlFormattingAppendable withCondLineOnChildText();
-    HtmlFormattingAppendable withCondIndent();
+    @NotNull HtmlFormattingAppendable withCondLineOnChildText();
+    @NotNull HtmlFormattingAppendable withCondIndent();
 
-    HtmlFormattingAppendable tagVoid(CharSequence tagName);
-    HtmlFormattingAppendable tag(CharSequence tagName);
-    HtmlFormattingAppendable tag(CharSequence tagName, Runnable runnable);
-    HtmlFormattingAppendable tag(CharSequence tagName, boolean voidElement);
-    HtmlFormattingAppendable tag(CharSequence tagName, boolean withIndent, boolean withLine, Runnable runnable);
+    @NotNull HtmlFormattingAppendable tagVoid(@NotNull CharSequence tagName);
+    @NotNull HtmlFormattingAppendable tag(@NotNull CharSequence tagName);
+    @NotNull HtmlFormattingAppendable tag(@NotNull CharSequence tagName, @NotNull Runnable runnable);
+    @NotNull HtmlFormattingAppendable tag(@NotNull CharSequence tagName, boolean voidElement);
+    @NotNull HtmlFormattingAppendable tag(@NotNull CharSequence tagName, boolean withIndent, boolean withLine, @NotNull Runnable runnable);
 
-    HtmlFormattingAppendable tagVoidLine(CharSequence tagName);
-    HtmlFormattingAppendable tagLine(CharSequence tagName);
-    HtmlFormattingAppendable tagLine(CharSequence tagName, boolean voidElement);
-    HtmlFormattingAppendable tagLine(CharSequence tagName, Runnable runnable);
-    HtmlFormattingAppendable tagIndent(CharSequence tagName, Runnable runnable);
-    HtmlFormattingAppendable tagLineIndent(CharSequence tagName, Runnable runnable);
-    HtmlFormattingAppendable closeTag(CharSequence tagName);
+    @NotNull HtmlFormattingAppendable tagVoidLine(@NotNull CharSequence tagName);
+    @NotNull HtmlFormattingAppendable tagLine(@NotNull CharSequence tagName);
+    @NotNull HtmlFormattingAppendable tagLine(@NotNull CharSequence tagName, boolean voidElement);
+    @NotNull HtmlFormattingAppendable tagLine(@NotNull CharSequence tagName, @NotNull Runnable runnable);
+    @NotNull HtmlFormattingAppendable tagIndent(@NotNull CharSequence tagName, @NotNull Runnable runnable);
+    @NotNull HtmlFormattingAppendable tagLineIndent(@NotNull CharSequence tagName, @NotNull Runnable runnable);
+    @NotNull HtmlFormattingAppendable closeTag(@NotNull CharSequence tagName);
 }

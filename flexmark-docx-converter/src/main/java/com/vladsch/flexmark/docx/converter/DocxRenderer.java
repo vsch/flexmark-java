@@ -332,13 +332,13 @@ public class DocxRenderer implements IRender {
             super();
         }
 
-        public Builder(DataHolder options) {
+        public Builder(@Nullable DataHolder options) {
             super(options);
             loadExtensions();
         }
 
         @Override
-        protected void removeApiPoint(Object apiPoint) {
+        protected void removeApiPoint(@NotNull Object apiPoint) {
             if (apiPoint instanceof AttributeProviderFactory) this.attributeProviderFactories.remove(apiPoint);
             else if (apiPoint instanceof NodeDocxRendererFactory) this.nodeDocxRendererFactories.remove(apiPoint);
             else if (apiPoint instanceof LinkResolverFactory) this.linkResolverFactories.remove(apiPoint);
@@ -349,7 +349,7 @@ public class DocxRenderer implements IRender {
         }
 
         @Override
-        protected void preloadExtension(Extension extension) {
+        protected void preloadExtension(@NotNull Extension extension) {
             if (extension instanceof DocxRendererExtension) {
                 DocxRendererExtension docxRendererExtension = (DocxRendererExtension) extension;
                 docxRendererExtension.rendererOptions(this);
@@ -360,7 +360,7 @@ public class DocxRenderer implements IRender {
         }
 
         @Override
-        protected boolean loadExtension(Extension extension) {
+        protected boolean loadExtension(@NotNull Extension extension) {
             if (extension instanceof DocxRendererExtension) {
                 DocxRendererExtension docxRendererExtension = (DocxRendererExtension) extension;
                 docxRendererExtension.extend(this);
@@ -408,8 +408,9 @@ public class DocxRenderer implements IRender {
          * @param linkResolverFactory the factory for creating a node renderer
          * @return {@code this}
          */
+        @NotNull
         @Override
-        public Builder linkResolverFactory(LinkResolverFactory linkResolverFactory) {
+        public Builder linkResolverFactory(@NotNull LinkResolverFactory linkResolverFactory) {
             this.linkResolverFactories.add(linkResolverFactory);
             addExtensionApiPoint(linkResolverFactory);
             return this;
@@ -421,8 +422,9 @@ public class DocxRenderer implements IRender {
          * @param attributeProviderFactory the attribute provider factory to add
          * @return {@code this}
          */
+        @NotNull
         @Override
-        public Builder attributeProviderFactory(AttributeProviderFactory attributeProviderFactory) {
+        public Builder attributeProviderFactory(@NotNull AttributeProviderFactory attributeProviderFactory) {
             this.attributeProviderFactories.add(attributeProviderFactory);
             addExtensionApiPoint(attributeProviderFactory);
             return this;
@@ -434,8 +436,9 @@ public class DocxRenderer implements IRender {
          * @param htmlIdGeneratorFactory the factory for generating header tag id attributes
          * @return {@code this}
          */
+        @NotNull
         @Override
-        public Builder htmlIdGeneratorFactory(HeaderIdGeneratorFactory htmlIdGeneratorFactory) {
+        public Builder htmlIdGeneratorFactory(@NotNull HeaderIdGeneratorFactory htmlIdGeneratorFactory) {
             //noinspection VariableNotUsedInsideIf
             if (this.htmlIdGeneratorFactory != null) {
                 throw new IllegalStateException("custom header id factory is already set to " + htmlIdGeneratorFactory.getClass().getName());
@@ -480,7 +483,7 @@ public class DocxRenderer implements IRender {
 
     private class MainDocxRenderer extends DocxContextImpl<Node> implements DocxRendererContext {
         private final Document document;
-        private final Map<Class<?>, NodeDocxRendererHandler> renderers;
+        private final Map<Class<?>, NodeDocxRendererHandler<?>> renderers;
         private final SubClassingBag<Node> collectedNodes;
         final HashSet<Class<?>> bookmarkWrapsChildren;
 
@@ -504,7 +507,7 @@ public class DocxRenderer implements IRender {
             this.document = document;
             this.renderers = new HashMap<>(32);
             this.renderingPhases = new HashSet<>(DocxRendererPhase.values().length);
-            Set<Class> collectNodeTypes = new HashSet<>(100);
+            Set<Class<?>> collectNodeTypes = new HashSet<>(100);
             this.phasedFormatters = new ArrayList<>(nodeFormatterFactories.size());
             Boolean defaultLinkResolver = DEFAULT_LINK_RESOLVER.get(options);
             this.myLinkResolvers = new LinkResolver[linkResolverFactories.size() + (defaultLinkResolver ? 1 : 0)];
@@ -544,7 +547,7 @@ public class DocxRenderer implements IRender {
                 Set<NodeDocxRendererHandler<?>> formattingHandlers = nodeDocxRenderer.getNodeFormattingHandlers();
                 if (formattingHandlers == null) continue;
 
-                for (NodeDocxRendererHandler nodeType : formattingHandlers) {
+                for (NodeDocxRendererHandler<?> nodeType : formattingHandlers) {
                     // Overwrite existing renderer
                     renderers.put(nodeType.getNodeType(), nodeType);
                 }
@@ -644,8 +647,9 @@ public class DocxRenderer implements IRender {
             return nodeIdMap.getFirst(nodeId);
         }
 
+        @NotNull
         @Override
-        public String encodeUrl(CharSequence url) {
+        public String encodeUrl(@NotNull CharSequence url) {
             if (rendererOptions.percentEncodeUrls) {
                 return Escaping.percentEncodeUrl(url);
             } else {
@@ -654,7 +658,7 @@ public class DocxRenderer implements IRender {
         }
 
         @Override
-        public Attributes extendRenderingNodeAttributes(AttributablePart part, Attributes attributes) {
+        public Attributes extendRenderingNodeAttributes(@NotNull AttributablePart part, @Nullable Attributes attributes) {
             Attributes attr = attributes != null ? attributes : new Attributes();
             for (AttributeProvider attributeProvider : myAttributeProviders) {
                 attributeProvider.setAttributes(this.renderingNode, part, attr);
@@ -663,7 +667,7 @@ public class DocxRenderer implements IRender {
         }
 
         @Override
-        public Attributes extendRenderingNodeAttributes(Node node, AttributablePart part, Attributes attributes) {
+        public Attributes extendRenderingNodeAttributes(@NotNull Node node, @NotNull AttributablePart part, @Nullable Attributes attributes) {
             Attributes attr = attributes != null ? attributes : new Attributes();
             for (AttributeProvider attributeProvider : myAttributeProviders) {
                 attributeProvider.setAttributes(node, part, attr);
@@ -672,25 +676,26 @@ public class DocxRenderer implements IRender {
         }
 
         @Override
-        public Node getCurrentNode() {
+        public @NotNull Node getCurrentNode() {
             return renderingNode;
         }
 
         @Override
-        public Node getContextFrame() {
+        public @NotNull Node getContextFrame() {
             return renderingNode;
         }
 
         @Override
-        public DataHolder getOptions() {
+        public @NotNull DataHolder getOptions() {
             return options;
         }
 
         @Override
-        public DocxRendererOptions getDocxRendererOptions() {
+        public @NotNull DocxRendererOptions getDocxRendererOptions() {
             return rendererOptions;
         }
 
+        @NotNull
         @Override
         public Document getDocument() {
             return document;
@@ -721,13 +726,15 @@ public class DocxRenderer implements IRender {
             return collectedNodes == null ? NULL_ITERABLE : collectedNodes.reversedItemsOfType(Node.class, classes);
         }
 
+        @NotNull
         @Override
-        public ResolvedLink resolveLink(LinkType linkType, CharSequence url, Boolean urlEncode) {
+        public ResolvedLink resolveLink(@NotNull LinkType linkType, @NotNull CharSequence url, Boolean urlEncode) {
             return resolveLink(linkType, url, (Attributes) null, urlEncode);
         }
 
+        @NotNull
         @Override
-        public ResolvedLink resolveLink(LinkType linkType, CharSequence url, Attributes attributes, Boolean urlEncode) {
+        public ResolvedLink resolveLink(@NotNull LinkType linkType, @NotNull CharSequence url, Attributes attributes, Boolean urlEncode) {
             HashMap<String, ResolvedLink> resolvedLinks = resolvedLinkMap.computeIfAbsent(linkType, k -> new HashMap<>());
 
             String urlSeq = String.valueOf(url);
@@ -756,14 +763,14 @@ public class DocxRenderer implements IRender {
         }
 
         @Override
-        public void render(Node node) {
+        public void render(@NotNull Node node) {
             if (node instanceof Document) {
                 htmlIdGenerator.generateIds(document);
 
                 // now create a map of node to id so we can validate hyperlinks
                 new AllNodesVisitor() {
                     @Override
-                    protected void process(Node node) {
+                    protected void process(@NotNull Node node) {
                         String id = calculateNodeId(node);
                         if (id != null && !id.isEmpty()) {
                             nodeIdMap.add(node, id);
@@ -846,7 +853,7 @@ public class DocxRenderer implements IRender {
             }
         }
 
-        public void renderChildren(Node parent) {
+        public void renderChildren(@NotNull Node parent) {
             String id = getNodeId(parent);
             if (id != null && !id.isEmpty()) {
                 if (bookmarkWrapsChildren.contains(parent.getClass())) {

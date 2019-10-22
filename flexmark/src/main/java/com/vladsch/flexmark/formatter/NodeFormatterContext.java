@@ -8,6 +8,7 @@ import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.format.NodeContext;
 import com.vladsch.flexmark.util.format.options.ElementPlacementSort;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
 
@@ -18,7 +19,7 @@ public interface NodeFormatterContext extends NodeContext<Node, NodeFormatterCon
     /**
      * @return the HTML writer to use
      */
-    MarkdownWriter getMarkdown();
+    @NotNull MarkdownWriter getMarkdown();
 
     /**
      * Render the specified node and its children using the configured renderers. This should be used to render child
@@ -26,19 +27,19 @@ public interface NodeFormatterContext extends NodeContext<Node, NodeFormatterCon
      *
      * @param node the node to render
      */
-    void render(Node node);
+    void render(@NotNull Node node);
 
     /**
      * Render the children of the node, used by custom renderers
      *
      * @param parent node the children of which are to be rendered
      */
-    void renderChildren(Node parent);
+    void renderChildren(@NotNull Node parent);
 
     /**
      * @return current rendering phase
      */
-    FormattingPhase getFormattingPhase();
+    @NotNull FormattingPhase getFormattingPhase();
 
     /**
      * Get the current rendering context {@link DataHolder}. These are the options passed or set on the {@link Formatter#builder()} or passed to {@link Formatter#builder(DataHolder)}.
@@ -46,17 +47,17 @@ public interface NodeFormatterContext extends NodeContext<Node, NodeFormatterCon
      *
      * @return the current renderer options {@link DataHolder}
      */
-    DataHolder getOptions();
+    @NotNull DataHolder getOptions();
 
     /**
      * @return the {@link FormatterOptions} for the context.
      */
-    FormatterOptions getFormatterOptions();
+    @NotNull FormatterOptions getFormatterOptions();
 
     /**
      * @return the {@link Document} node of the current context
      */
-    Document getDocument();
+    @NotNull Document getDocument();
 
     /**
      * Get iterable of nodes of given types, in order of their appearance in the document tree, depth first traversal.
@@ -70,8 +71,8 @@ public interface NodeFormatterContext extends NodeContext<Node, NodeFormatterCon
      * @param classes node classes to return
      * @return iterable
      */
-    Iterable<? extends Node> nodesOfType(Class<?>[] classes);
-    Iterable<? extends Node> nodesOfType(Collection<Class<?>> classes);
+    @NotNull Iterable<? extends Node> nodesOfType(@NotNull Class<?>[] classes);
+    @NotNull Iterable<? extends Node> nodesOfType(@NotNull Collection<Class<?>> classes);
     /**
      * Get iterable of nodes of given types, in reverse order of their appearance in the document tree, depth first traversal.
      * Only node classes returned by {@link NodeFormatter#getNodeClasses()} of all loaded extensions
@@ -84,6 +85,6 @@ public interface NodeFormatterContext extends NodeContext<Node, NodeFormatterCon
      * @param classes node classes to return
      * @return iterable
      */
-    Iterable<? extends Node> reversedNodesOfType(Class<?>[] classes);
-    Iterable<? extends Node> reversedNodesOfType(Collection<Class<?>> classes);
+    @NotNull Iterable<? extends Node> reversedNodesOfType(@NotNull Class<?>[] classes);
+    @NotNull Iterable<? extends Node> reversedNodesOfType(@NotNull Collection<Class<?>> classes);
 }

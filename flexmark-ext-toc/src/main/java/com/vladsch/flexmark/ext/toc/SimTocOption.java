@@ -17,7 +17,7 @@ public class SimTocOption extends Node implements DoNotDecorate {
     }
 
     @Override
-    public void getAstExtra(StringBuilder out) {
+    public void getAstExtra(@NotNull StringBuilder out) {
         astExtraChars(out);
     }
 

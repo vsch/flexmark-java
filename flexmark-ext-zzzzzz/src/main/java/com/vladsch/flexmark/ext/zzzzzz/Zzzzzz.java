@@ -32,7 +32,7 @@ public class Zzzzzz extends Node implements DelimitedNode, DoNotDecorate {
     }
 
     @Override
-    public void getAstExtra(StringBuilder out) {
+    public void getAstExtra(@NotNull StringBuilder out) {
         out.append(" ordinal: ").append(zzzzzzBlock != null ? zzzzzzBlock.getZzzzzzOrdinal() : 0).append(" ");
         delimitedSegmentSpanChars(out, openingMarker, text, closingMarker, "text");
     }

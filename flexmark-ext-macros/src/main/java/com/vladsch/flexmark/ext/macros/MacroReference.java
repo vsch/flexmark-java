@@ -23,6 +23,7 @@ public class MacroReference extends Node implements DelimitedNode, DoNotDecorate
         return myMacroDefinitionBlock != null;
     }
 
+    @NotNull
     @Override
     public BasedSequence getReference() {
         return text;
@@ -62,7 +63,7 @@ public class MacroReference extends Node implements DelimitedNode, DoNotDecorate
     }
 
     @Override
-    public void getAstExtra(StringBuilder out) {
+    public void getAstExtra(@NotNull StringBuilder out) {
         delimitedSegmentSpanChars(out, openingMarker, text, closingMarker, "text");
     }
 

@@ -6,6 +6,8 @@ import com.vladsch.flexmark.parser.InlineParserExtension;
 import com.vladsch.flexmark.parser.InlineParserExtensionFactory;
 import com.vladsch.flexmark.parser.LightInlineParser;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Set;
 import java.util.regex.Pattern;
@@ -18,17 +20,17 @@ public class GfmUsersInlineParserExtension implements InlineParserExtension {
     }
 
     @Override
-    public void finalizeDocument(InlineParser inlineParser) {
+    public void finalizeDocument(@NotNull InlineParser inlineParser) {
 
     }
 
     @Override
-    public void finalizeBlock(InlineParser inlineParser) {
+    public void finalizeBlock(@NotNull InlineParser inlineParser) {
 
     }
 
     @Override
-    public boolean parse(LightInlineParser inlineParser) {
+    public boolean parse(@NotNull LightInlineParser inlineParser) {
         int index = inlineParser.getIndex();
         boolean isPossible = index == 0;
         if (!isPossible) {
@@ -55,23 +57,27 @@ public class GfmUsersInlineParserExtension implements InlineParserExtension {
     }
 
     public static class Factory implements InlineParserExtensionFactory {
+        @Nullable
         @Override
-        public Set<Class<? extends InlineParserExtensionFactory>> getAfterDependents() {
+        public Set<Class<?>> getAfterDependents() {
             return null;
         }
 
+        @NotNull
         @Override
         public CharSequence getCharacters() {
             return "@";
         }
 
+        @Nullable
         @Override
-        public Set<Class<? extends InlineParserExtensionFactory>> getBeforeDependents() {
+        public Set<Class<?>> getBeforeDependents() {
             return null;
         }
 
+        @NotNull
         @Override
-        public InlineParserExtension apply(LightInlineParser lightInlineParser) {
+        public InlineParserExtension apply(@NotNull LightInlineParser lightInlineParser) {
             return new GfmUsersInlineParserExtension(lightInlineParser);
         }
 

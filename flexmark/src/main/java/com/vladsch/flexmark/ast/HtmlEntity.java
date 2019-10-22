@@ -11,7 +11,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public class HtmlEntity extends Node {
     @Override
-    public void getAstExtra(StringBuilder out) {
+    public void getAstExtra(@NotNull StringBuilder out) {
         if (!getChars().isEmpty()) out.append(" \"").append(getChars()).append("\"");
     }
 

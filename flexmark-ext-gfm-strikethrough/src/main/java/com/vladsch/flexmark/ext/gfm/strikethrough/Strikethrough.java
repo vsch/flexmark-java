@@ -20,7 +20,7 @@ public class Strikethrough extends Node implements DelimitedNode {
     }
 
     @Override
-    public void getAstExtra(StringBuilder out) {
+    public void getAstExtra(@NotNull StringBuilder out) {
         delimitedSegmentSpan(out, openingMarker, text, closingMarker, "text");
     }
 

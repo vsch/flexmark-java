@@ -1,12 +1,14 @@
 package com.vladsch.flexmark.html;
 
 import com.vladsch.flexmark.html.renderer.NodeRenderingHandler;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 class NodeRenderingHandlerWrapper {
-    public final NodeRenderingHandler<?> myRenderingHandler;
-    public final NodeRenderingHandlerWrapper myPreviousRenderingHandler;
+    public final @NotNull NodeRenderingHandler<?> myRenderingHandler;
+    public final @Nullable NodeRenderingHandlerWrapper myPreviousRenderingHandler;
 
-    public NodeRenderingHandlerWrapper(NodeRenderingHandler<?> renderingHandler, NodeRenderingHandlerWrapper previousRenderingHandler) {
+    public NodeRenderingHandlerWrapper(@NotNull NodeRenderingHandler<?> renderingHandler, @Nullable NodeRenderingHandlerWrapper previousRenderingHandler) {
         myRenderingHandler = renderingHandler;
         myPreviousRenderingHandler = previousRenderingHandler;
     }

@@ -16,7 +16,7 @@ public class HtmlInlineComment extends HtmlInlineBase {
     }
 
     @Override
-    public void getAstExtra(StringBuilder out) {
+    public void getAstExtra(@NotNull StringBuilder out) {
         astExtraChars(out);
     }
 

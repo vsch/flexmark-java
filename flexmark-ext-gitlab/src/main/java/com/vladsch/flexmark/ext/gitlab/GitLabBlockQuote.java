@@ -19,7 +19,7 @@ public class GitLabBlockQuote extends Block implements ParagraphContainer {
     private BasedSequence closingTrailing = BasedSequence.NULL;
 
     @Override
-    public void getAstExtra(StringBuilder out) {
+    public void getAstExtra(@NotNull StringBuilder out) {
         segmentSpanChars(out, openingMarker, "open");
         segmentSpanChars(out, openingTrailing, "openTrail");
         segmentSpanChars(out, closingMarker, "close");

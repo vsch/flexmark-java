@@ -25,7 +25,7 @@ public class Macro extends Node {
     }
 
     @Override
-    public void getAstExtra(StringBuilder out) {
+    public void getAstExtra(@NotNull StringBuilder out) {
         segmentSpanChars(out, openingMarker, "open");
         segmentSpanChars(out, name, "name");
         segmentSpanChars(out, attributeText, "attributes");

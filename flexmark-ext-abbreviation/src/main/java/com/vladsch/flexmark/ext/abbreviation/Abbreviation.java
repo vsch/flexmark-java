@@ -27,10 +27,11 @@ public class Abbreviation extends Node implements DoNotDecorate, DoNotLinkDecora
     }
 
     @Override
-    public void getAstExtra(StringBuilder out) {
+    public void getAstExtra(@NotNull StringBuilder out) {
         astExtraChars(out);
     }
 
+    @NotNull
     @Override
     protected String toStringAttributes() {
         return "text=" + getChars();
@@ -41,6 +42,7 @@ public class Abbreviation extends Node implements DoNotDecorate, DoNotLinkDecora
         return true;
     }
 
+    @NotNull
     @Override
     public BasedSequence getReference() {
         return abbreviation;

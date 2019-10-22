@@ -3,9 +3,12 @@ package com.vladsch.flexmark.formatter;
 import com.vladsch.flexmark.ast.BlockQuote;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.format.MarkdownWriterBase;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Consumer;
 
+@SuppressWarnings("UnusedReturnValue")
 public class MarkdownWriter extends MarkdownWriterBase<MarkdownWriter, Node, NodeFormatterContext> {
     public MarkdownWriter() {
         this(0);
@@ -22,7 +25,7 @@ public class MarkdownWriter extends MarkdownWriterBase<MarkdownWriter, Node, Nod
         return parent instanceof BlockQuote && parent.getLastChild() == node;
     }
 
-    public MarkdownWriter tailBlankLine(int count) {
+    public @NotNull MarkdownWriter tailBlankLine(int count) {
         if (isLastBlockQuoteChild()) {
             // Needed to not add block quote prefix to trailing blank lines
             CharSequence prefix = getPrefix();
@@ -36,19 +39,19 @@ public class MarkdownWriter extends MarkdownWriterBase<MarkdownWriter, Node, Nod
         return this;
     }
 
-    public MarkdownWriter appendNonTranslating(CharSequence csq) {
+    public @NotNull MarkdownWriter appendNonTranslating(@NotNull CharSequence csq) {
         return appendNonTranslating(null, csq, null, null);
     }
 
-    public MarkdownWriter appendNonTranslating(CharSequence prefix, CharSequence csq) {
+    public @NotNull MarkdownWriter appendNonTranslating(@Nullable CharSequence prefix, @NotNull CharSequence csq) {
         return appendNonTranslating(prefix, csq, null, null);
     }
 
-    public MarkdownWriter appendNonTranslating(CharSequence prefix, CharSequence csq, CharSequence suffix) {
+    public @NotNull MarkdownWriter appendNonTranslating(@Nullable CharSequence prefix, @NotNull CharSequence csq, @Nullable CharSequence suffix) {
         return appendNonTranslating(prefix, csq, suffix, null);
     }
 
-    public MarkdownWriter appendNonTranslating(CharSequence prefix, CharSequence csq, CharSequence suffix, CharSequence suffix2) {
+    public @NotNull MarkdownWriter appendNonTranslating(@Nullable CharSequence prefix, @NotNull CharSequence csq, @Nullable CharSequence suffix, @Nullable CharSequence suffix2) {
         if (context.isTransformingText()) {
             append(context.transformNonTranslating(prefix, csq, suffix, suffix2));
         } else {
@@ -57,7 +60,7 @@ public class MarkdownWriter extends MarkdownWriterBase<MarkdownWriter, Node, Nod
         return this;
     }
 
-    public MarkdownWriter appendNonTranslating(CharSequence prefix, CharSequence csq, CharSequence suffix, CharSequence suffix2, Consumer<String> placeholderConsumer) {
+    public @NotNull MarkdownWriter appendNonTranslating(@Nullable CharSequence prefix, @NotNull CharSequence csq, @Nullable CharSequence suffix, @Nullable CharSequence suffix2, @NotNull Consumer<String> placeholderConsumer) {
         if (context.isTransformingText()) {
             append(context.transformNonTranslating(prefix, csq, suffix, suffix2));
         } else {
@@ -66,19 +69,19 @@ public class MarkdownWriter extends MarkdownWriterBase<MarkdownWriter, Node, Nod
         return this;
     }
 
-    public MarkdownWriter appendTranslating(CharSequence csq) {
+    public @NotNull MarkdownWriter appendTranslating(@NotNull CharSequence csq) {
         return appendTranslating(null, csq, null, null);
     }
 
-    public MarkdownWriter appendTranslating(CharSequence prefix, CharSequence csq) {
+    public @NotNull MarkdownWriter appendTranslating(@Nullable CharSequence prefix, @NotNull CharSequence csq) {
         return appendTranslating(prefix, csq, null, null);
     }
 
-    public MarkdownWriter appendTranslating(CharSequence prefix, CharSequence csq, CharSequence suffix) {
+    public @NotNull MarkdownWriter appendTranslating(@Nullable CharSequence prefix, @NotNull CharSequence csq, @Nullable CharSequence suffix) {
         return appendTranslating(prefix, csq, suffix, null);
     }
 
-    public MarkdownWriter appendTranslating(CharSequence prefix, CharSequence csq, CharSequence suffix, CharSequence suffix2) {
+    public @NotNull MarkdownWriter appendTranslating(@Nullable CharSequence prefix, @NotNull CharSequence csq, @Nullable CharSequence suffix, @Nullable CharSequence suffix2) {
         if (context.isTransformingText()) {
             append(context.transformTranslating(prefix, csq, suffix, suffix2));
         } else {

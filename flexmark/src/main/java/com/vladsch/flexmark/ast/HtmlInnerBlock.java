@@ -16,7 +16,7 @@ public class HtmlInnerBlock extends HtmlBlockBase {
     }
 
     @Override
-    public void getAstExtra(StringBuilder out) {
+    public void getAstExtra(@NotNull StringBuilder out) {
         astExtraChars(out);
     }
 

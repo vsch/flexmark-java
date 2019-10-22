@@ -3,6 +3,8 @@ package com.vladsch.flexmark.util.html;
 import com.vladsch.flexmark.util.Utils;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.RepeatedCharSequence;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,16 +13,16 @@ import java.util.List;
 import java.util.Stack;
 
 @SuppressWarnings("unchecked")
-public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase> implements HtmlFormattingAppendable {
+public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase<T>> implements HtmlFormattingAppendable {
     private LineFormattingAppendable out;
 
-    private Attributes currentAttributes;
+    private @Nullable Attributes currentAttributes;
     private boolean indentOnFirstEol = false;
     private boolean lineOnChildText = false;
     private boolean withAttributes = false;
     private boolean suppressOpenTagLine = false;
     private boolean suppressCloseTagLine = false;
-    private final Stack<String> myOpenTags = new Stack<>();
+    private final @NotNull Stack<String> myOpenTags = new Stack<>();
 
     public HtmlFormattingAppendableBase(LineFormattingAppendable other, boolean inheritIndent) {
         this.out = new LineFormattingAppendableImpl(other.getOptions());
@@ -44,24 +46,25 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
         return suppressCloseTagLine;
     }
 
-    public T setSuppressCloseTagLine(boolean suppressCloseTagLine) {
+    @SuppressWarnings("UnusedReturnValue")
+    public @NotNull T setSuppressCloseTagLine(boolean suppressCloseTagLine) {
         this.suppressCloseTagLine = suppressCloseTagLine;
         return (T) this;
     }
 
     @Override
-    public String toString() {
+    public @NotNull String toString() {
         return out.toString();
     }
 
     @Override
-    public T openPre() {
+    public @NotNull T openPre() {
         out.openPreFormatted(true);
         return (T) this;
     }
 
     @Override
-    public T closePre() {
+    public @NotNull T closePre() {
         out.closePreFormatted();
         return (T) this;
     }
@@ -76,19 +79,19 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
     }
 
     @Override
-    public T raw(CharSequence s) {
+    public @NotNull T raw(@NotNull CharSequence s) {
         out.append(s);
         return (T) this;
     }
 
-    public T raw(CharSequence s, int count) {
+    public @NotNull T raw(@NotNull CharSequence s, int count) {
         int i = count;
         while (i-- > 0) out.append(s);
         return (T) this;
     }
 
     @Override
-    public T rawPre(CharSequence s) {
+    public @NotNull T rawPre(@NotNull CharSequence s) {
         // if previous pre-formatted did not have an EOL and this one does, need to transfer the EOL
         // to previous pre-formatted to have proper handling of first/last line, otherwise this opening
         // pre-formatted, blows away previous last line pre-formatted information
@@ -103,22 +106,25 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
         return (T) this;
     }
 
+    @NotNull
     @Override
-    public T rawIndentedPre(CharSequence s) {
+    public T rawIndentedPre(@NotNull CharSequence s) {
         out.openPreFormatted(true)
                 .append(s)
                 .closePreFormatted();
         return (T) this;
     }
 
+    @NotNull
     @Override
-    public T text(CharSequence s) {
+    public T text(@NotNull CharSequence s) {
         out.append(Escaping.escapeHtml(s, false));
         return (T) this;
     }
 
+    @NotNull
     @Override
-    public T attr(CharSequence attrName, CharSequence value) {
+    public T attr(@NotNull CharSequence attrName, @Nullable CharSequence value) {
         if (currentAttributes == null) {
             currentAttributes = new Attributes();
         }
@@ -126,8 +132,9 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
         return (T) this;
     }
 
+    @NotNull
     @Override
-    public T attr(Attribute... attribute) {
+    public T attr(@NotNull Attribute... attribute) {
         if (currentAttributes == null) {
             currentAttributes = new Attributes();
         }
@@ -137,8 +144,9 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
         return (T) this;
     }
 
+    @NotNull
     @Override
-    public T attr(Attributes attributes) {
+    public T attr(@NotNull Attributes attributes) {
         if (attributes != null && !attributes.isEmpty()) {
             if (currentAttributes == null) {
                 currentAttributes = new Attributes(attributes);
@@ -149,6 +157,7 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
         return (T) this;
     }
 
+    @NotNull
     @Override
     public T withAttr() {
         withAttributes = true;
@@ -160,36 +169,42 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
         return currentAttributes;
     }
 
+    @NotNull
     @Override
-    public T setAttributes(Attributes attributes) {
+    public T setAttributes(@NotNull Attributes attributes) {
         currentAttributes = attributes;
         return (T) this;
     }
 
+    @NotNull
     @Override
     public T withCondLineOnChildText() {
         lineOnChildText = true;
         return (T) this;
     }
 
+    @NotNull
     @Override
     public T withCondIndent() {
         indentOnFirstEol = true;
         return (T) this;
     }
 
+    @NotNull
     @Override
-    public T tag(CharSequence tagName) {
+    public T tag(@NotNull CharSequence tagName) {
         return tag(tagName, false);
     }
 
+    @NotNull
     @Override
-    public T tag(CharSequence tagName, Runnable runnable) {
+    public T tag(@NotNull CharSequence tagName, @NotNull Runnable runnable) {
         return tag(tagName, false, false, runnable);
     }
 
+    @NotNull
     @Override
-    public T tagVoid(CharSequence tagName) {
+    public T tagVoid(@NotNull CharSequence tagName) {
         return tag(tagName, true);
     }
 
@@ -217,13 +232,15 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
         popTag(tagName);
     }
 
+    @NotNull
     @Override
     public Stack<String> getOpenTags() {
         return myOpenTags;
     }
 
+    @NotNull
     @Override
-    public List<String> getOpenTagsAfterLast(CharSequence latestTag) {
+    public List<String> getOpenTagsAfterLast(@NotNull CharSequence latestTag) {
         if (myOpenTags.isEmpty()) return Collections.EMPTY_LIST;
 
         List<String> tagList = new ArrayList<>(myOpenTags);
@@ -239,8 +256,9 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
         return tagList.subList(lastPos, iMax);
     }
 
+    @NotNull
     @Override
-    public T tag(CharSequence tagName, boolean voidElement) {
+    public T tag(@NotNull CharSequence tagName, boolean voidElement) {
         if (tagName.length() == 0 || tagName.charAt(0) == '/') return closeTag(tagName);
 
         Attributes attributes = null;
@@ -278,8 +296,9 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
         return (T) this;
     }
 
+    @NotNull
     @Override
-    public T closeTag(CharSequence tagName) {
+    public T closeTag(@NotNull CharSequence tagName) {
         if (tagName.length() == 0) throw new IllegalStateException("closeTag called with tag:'" + tagName + "'");
 
         if (tagName.charAt(0) == '/') {
@@ -292,8 +311,9 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
         return (T) this;
     }
 
+    @NotNull
     @Override
-    public T tag(CharSequence tagName, boolean withIndent, boolean withLine, Runnable runnable) {
+    public T tag(@NotNull CharSequence tagName, boolean withIndent, boolean withLine, @NotNull Runnable runnable) {
         boolean isLineOnChildText = lineOnChildText;
         boolean isIndentOnFirstEol = indentOnFirstEol;
         lineOnChildText = false;
@@ -344,38 +364,44 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
         return (T) this;
     }
 
+    @NotNull
     @Override
-    public T tagVoidLine(CharSequence tagName) {
+    public T tagVoidLine(@NotNull CharSequence tagName) {
         lineIf(!suppressOpenTagLine).tagVoid(tagName).lineIf(!suppressCloseTagLine);
         return (T) this;
     }
 
+    @NotNull
     @Override
-    public T tagLine(CharSequence tagName) {
+    public T tagLine(@NotNull CharSequence tagName) {
         lineIf(!suppressOpenTagLine).tag(tagName).lineIf(!suppressCloseTagLine);
         return (T) this;
     }
 
+    @NotNull
     @Override
-    public T tagLine(CharSequence tagName, boolean voidElement) {
+    public T tagLine(@NotNull CharSequence tagName, boolean voidElement) {
         lineIf(!suppressOpenTagLine).tag(tagName, voidElement).lineIf(!suppressCloseTagLine);
         return (T) this;
     }
 
+    @NotNull
     @Override
-    public T tagLine(CharSequence tagName, Runnable runnable) {
+    public T tagLine(@NotNull CharSequence tagName, @NotNull Runnable runnable) {
         lineIf(!suppressOpenTagLine).tag(tagName, false, false, runnable).lineIf(!suppressCloseTagLine);
         return (T) this;
     }
 
+    @NotNull
     @Override
-    public T tagIndent(CharSequence tagName, Runnable runnable) {
+    public T tagIndent(@NotNull CharSequence tagName, @NotNull Runnable runnable) {
         tag(tagName, true, false, runnable);
         return (T) this;
     }
 
+    @NotNull
     @Override
-    public T tagLineIndent(CharSequence tagName, Runnable runnable) {
+    public T tagLineIndent(@NotNull CharSequence tagName, @NotNull Runnable runnable) {
         tag(tagName, true, true, runnable);
         return (T) this;
     }

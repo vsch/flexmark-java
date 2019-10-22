@@ -13,7 +13,7 @@ public class JekyllFrontMatterBlock extends Block {
     protected BasedSequence closingMarker = BasedSequence.NULL;
 
     @Override
-    public void getAstExtra(StringBuilder out) {
+    public void getAstExtra(@NotNull StringBuilder out) {
         segmentSpan(out, openingMarker, "open");
         segmentSpan(out, getContent(), "content");
         segmentSpan(out, closingMarker, "close");

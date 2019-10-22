@@ -18,6 +18,6 @@ public class AnchorLink extends Node {
     }
 
     @Override
-    public void getAstExtra(StringBuilder out) {
+    public void getAstExtra(@NotNull StringBuilder out) {
     }
 }

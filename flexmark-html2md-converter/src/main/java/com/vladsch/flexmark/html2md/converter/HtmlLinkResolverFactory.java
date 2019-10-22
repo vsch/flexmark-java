@@ -1,16 +1,19 @@
 package com.vladsch.flexmark.html2md.converter;
 
 import com.vladsch.flexmark.util.dependency.Dependent;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Set;
 import java.util.function.Function;
 
 public interface HtmlLinkResolverFactory extends Function<HtmlNodeConverterContext, HtmlLinkResolver>, Dependent<HtmlLinkResolverFactory> {
+    @Nullable
     @Override
-    Set<Class<? extends HtmlLinkResolverFactory>> getAfterDependents();
+    Set<Class<?>> getAfterDependents();
 
+    @Nullable
     @Override
-    Set<Class<? extends HtmlLinkResolverFactory>> getBeforeDependents();
+    Set<Class<?>> getBeforeDependents();
 
     @Override
     boolean affectsGlobalScope();

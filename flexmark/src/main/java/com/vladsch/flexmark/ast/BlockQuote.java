@@ -12,7 +12,7 @@ public class BlockQuote extends Block implements KeepTrailingBlankLineContainer 
     private BasedSequence openingMarker = BasedSequence.NULL;
 
     @Override
-    public void getAstExtra(StringBuilder out) {
+    public void getAstExtra(@NotNull StringBuilder out) {
         segmentSpanChars(out, openingMarker, "marker");
     }
 

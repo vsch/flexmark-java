@@ -26,7 +26,7 @@ public class AutoLink extends DelimitedLinkNode {
     }
 
     @Override
-    public void getAstExtra(StringBuilder out) {
+    public void getAstExtra(@NotNull StringBuilder out) {
         segmentSpanChars(out, openingMarker, "open");
         segmentSpanChars(out, text, "text");
         if (pageRef.isNotNull()) segmentSpanChars(out, pageRef, "pageRef");

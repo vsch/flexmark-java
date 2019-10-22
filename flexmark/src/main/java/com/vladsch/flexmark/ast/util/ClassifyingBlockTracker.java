@@ -12,18 +12,20 @@ import com.vladsch.flexmark.util.collection.CollectionHost;
 import com.vladsch.flexmark.util.collection.OrderedMultiMap;
 import com.vladsch.flexmark.util.collection.OrderedSet;
 import com.vladsch.flexmark.util.collection.iteration.ReversiblePeekingIterable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class ClassifyingBlockTracker implements BlockTracker, BlockParserTracker {
     protected final ClassificationBag<Class<?>, Node> nodeClassifier = new ClassificationBag<>(NodeClassifier.INSTANCE);
     protected final OrderedMultiMap<BlockParser, Block> allBlockParsersMap = new OrderedMultiMap<>(new CollectionHost<Paired<BlockParser, Block>>() {
         @Override
-        public void adding(int index, Paired<BlockParser, Block> paired, Object v) {
+        public void adding(int index, @Nullable Paired<BlockParser, Block> paired, @Nullable Object v) {
             Block block = paired.getSecond();
             if (block != null) nodeClassifier.add(block);
         }
 
         @Override
-        public Object removing(int index, Paired<BlockParser, Block> paired) {
+        public Object removing(int index, @Nullable Paired<BlockParser, Block> paired) {
             Block block = paired.getSecond();
             if (block != null) nodeClassifier.remove(block);
             return paired;
@@ -95,20 +97,20 @@ public class ClassifyingBlockTracker implements BlockTracker, BlockParserTracker
     }
 
     @Override
-    public void blockAdded(Block node) {
+    public void blockAdded(@NotNull Block node) {
         validateLinked(node);
         allBlockParsersMap.putValueKey(node, null);
     }
 
     @Override
-    public void blockAddedWithChildren(Block node) {
+    public void blockAddedWithChildren(@NotNull Block node) {
         validateLinked(node);
         allBlockParsersMap.putValueKey(node, null);
         addBlocks(node.getChildren());
     }
 
     @Override
-    public void blockAddedWithDescendants(Block node) {
+    public void blockAddedWithDescendants(@NotNull Block node) {
         validateLinked(node);
         allBlockParsersMap.putValueKey(node, null);
         addBlocks(node.getDescendants());
@@ -129,20 +131,20 @@ public class ClassifyingBlockTracker implements BlockTracker, BlockParserTracker
     }
 
     @Override
-    public void blockRemoved(Block node) {
+    public void blockRemoved(@NotNull Block node) {
         validateUnlinked(node);
         allBlockParsersMap.removeValue(node);
     }
 
     @Override
-    public void blockRemovedWithChildren(Block node) {
+    public void blockRemovedWithChildren(@NotNull Block node) {
         validateUnlinked(node);
         allBlockParsersMap.removeValue(node);
         removeBlocks(node.getChildren());
     }
 
     @Override
-    public void blockRemovedWithDescendants(Block node) {
+    public void blockRemovedWithDescendants(@NotNull Block node) {
         validateUnlinked(node);
         allBlockParsersMap.removeValue(node);
         removeBlocks(node.getDescendants());

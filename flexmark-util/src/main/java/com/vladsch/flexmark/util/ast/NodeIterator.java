@@ -1,6 +1,8 @@
 package com.vladsch.flexmark.util.ast;
 
 import com.vladsch.flexmark.util.collection.iteration.ReversiblePeekingIterator;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.NoSuchElementException;
 import java.util.function.Consumer;
@@ -88,6 +90,7 @@ public class NodeIterator implements ReversiblePeekingIterator<Node> {
     /**
      * @return the node which would be returned by a call to {@link #next()} or null if there is no next node.
      */
+    @Nullable
     public Node peek() {
         if (node != null) {
             return node;
@@ -137,6 +140,7 @@ public class NodeIterator implements ReversiblePeekingIterator<Node> {
             throw new NoSuchElementException();
         }
 
+        @Nullable
         @Override
         public Node peek() {
             return null;

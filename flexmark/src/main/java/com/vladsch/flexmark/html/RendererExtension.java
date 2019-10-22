@@ -3,6 +3,7 @@ package com.vladsch.flexmark.html;
 import com.vladsch.flexmark.html.renderer.HeaderIdGeneratorFactory;
 import com.vladsch.flexmark.util.builder.Extension;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
+import org.jetbrains.annotations.NotNull;
 
 public interface RendererExtension extends Extension {
     /**
@@ -11,7 +12,7 @@ public interface RendererExtension extends Extension {
      *
      * @param options option set that will be used for the builder
      */
-    void rendererOptions(MutableDataHolder options);
+    void rendererOptions(@NotNull MutableDataHolder options);
 
     /**
      * Called to give each extension to register extension points that it contains
@@ -22,5 +23,5 @@ public interface RendererExtension extends Extension {
      * @see HtmlRenderer.Builder#linkResolverFactory(LinkResolverFactory)
      * @see HtmlRenderer.Builder#htmlIdGeneratorFactory(HeaderIdGeneratorFactory)
      */
-    void extend(RendererBuilder rendererBuilder, String rendererType);
+    void extend(@NotNull RendererBuilder rendererBuilder, @NotNull String rendererType);
 }

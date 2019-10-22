@@ -2,6 +2,8 @@ package com.vladsch.flexmark.formatter;
 
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.dependency.Dependent;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Set;
 
@@ -16,15 +18,15 @@ public interface NodeFormatterFactory extends Dependent<NodeFormatterFactory> {
      * @param options the context for rendering (normally passed on to the node renderer)
      * @return a node renderer
      */
-    NodeFormatter create(DataHolder options);
+    @NotNull NodeFormatter create(@NotNull DataHolder options);
 
     @Override
-    default Set<? extends Class> getAfterDependents() {
+    default @Nullable Set<Class<?>> getAfterDependents() {
         return null;
     }
 
     @Override
-    default Set<? extends Class> getBeforeDependents() {
+    default @Nullable Set<Class<?>> getBeforeDependents() {
         return null;
     }
 

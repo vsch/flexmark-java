@@ -11,6 +11,8 @@ import com.vladsch.flexmark.parser.LightInlineParser;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.BasedSequenceImpl;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,12 +28,12 @@ public class GitLabInlineParser implements InlineParserExtension {
     }
 
     @Override
-    public void finalizeDocument(InlineParser inlineParser) {
+    public void finalizeDocument(@NotNull InlineParser inlineParser) {
 
     }
 
     @Override
-    public void finalizeBlock(InlineParser inlineParser) {
+    public void finalizeBlock(@NotNull InlineParser inlineParser) {
         // convert any unclosed ones to text
         for (int j = openInlines.size(); j-- > 0; ) {
             GitLabInline gitLabInline = openInlines.get(j);
@@ -44,7 +46,7 @@ public class GitLabInlineParser implements InlineParserExtension {
     }
 
     @Override
-    public boolean parse(LightInlineParser inlineParser) {
+    public boolean parse(@NotNull LightInlineParser inlineParser) {
         char firstChar = inlineParser.peek();
         char secondChar = inlineParser.peek(1);
         if ((firstChar == '{' || firstChar == '[') && (options.insParser && secondChar == '+' || options.delParser && secondChar == '-')) {
@@ -95,23 +97,27 @@ public class GitLabInlineParser implements InlineParserExtension {
     }
 
     public static class Factory implements InlineParserExtensionFactory {
+        @Nullable
         @Override
-        public Set<Class<? extends InlineParserExtensionFactory>> getAfterDependents() {
+        public Set<Class<?>> getAfterDependents() {
             return null;
         }
 
+        @NotNull
         @Override
         public CharSequence getCharacters() {
             return "{[-+";
         }
 
+        @Nullable
         @Override
-        public Set<Class<? extends InlineParserExtensionFactory>> getBeforeDependents() {
+        public Set<Class<?>> getBeforeDependents() {
             return null;
         }
 
+        @NotNull
         @Override
-        public InlineParserExtension apply(LightInlineParser lightInlineParser) {
+        public InlineParserExtension apply(@NotNull LightInlineParser lightInlineParser) {
             return new GitLabInlineParser(lightInlineParser);
         }
 

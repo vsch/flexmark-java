@@ -24,7 +24,7 @@ public class AttributeNode extends Node implements DoNotDecorate {
     }
 
     @Override
-    public void getAstExtra(StringBuilder out) {
+    public void getAstExtra(@NotNull StringBuilder out) {
         segmentSpanChars(out, name, "name");
         segmentSpanChars(out, attributeSeparator, "sep");
         delimitedSegmentSpanChars(out, openingMarker, value, closingMarker, "value");

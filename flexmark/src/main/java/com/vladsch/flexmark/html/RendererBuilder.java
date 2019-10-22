@@ -2,6 +2,7 @@ package com.vladsch.flexmark.html;
 
 import com.vladsch.flexmark.html.renderer.HeaderIdGeneratorFactory;
 import com.vladsch.flexmark.util.data.DataHolder;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Extension point for RenderingExtensions that only provide attributes, link resolvers or html id generators
@@ -14,7 +15,7 @@ public interface RendererBuilder extends DataHolder {
      * @param attributeProviderFactory the attribute provider factory to add
      * @return {@code this}
      */
-    RendererBuilder attributeProviderFactory(AttributeProviderFactory attributeProviderFactory);
+    @NotNull RendererBuilder attributeProviderFactory(@NotNull AttributeProviderFactory attributeProviderFactory);
     /**
      * Add a factory for instantiating a node renderer (done when rendering). This allows to override the rendering
      * of node types or define rendering for custom node types.
@@ -25,7 +26,7 @@ public interface RendererBuilder extends DataHolder {
      * @param linkResolverFactory the factory for creating a node renderer
      * @return {@code this}
      */
-    RendererBuilder linkResolverFactory(LinkResolverFactory linkResolverFactory);
+    @NotNull RendererBuilder linkResolverFactory(@NotNull LinkResolverFactory linkResolverFactory);
 
     /**
      * Add a factory for generating the header id attribute from the header's text
@@ -33,5 +34,5 @@ public interface RendererBuilder extends DataHolder {
      * @param htmlIdGeneratorFactory the factory for generating header tag id attributes
      * @return {@code this}
      */
-    public RendererBuilder htmlIdGeneratorFactory(HeaderIdGeneratorFactory htmlIdGeneratorFactory);
+    @NotNull RendererBuilder htmlIdGeneratorFactory(@NotNull HeaderIdGeneratorFactory htmlIdGeneratorFactory);
 }

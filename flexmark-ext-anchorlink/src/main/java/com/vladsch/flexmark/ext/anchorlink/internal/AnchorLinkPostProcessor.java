@@ -5,6 +5,7 @@ import com.vladsch.flexmark.ext.anchorlink.AnchorLink;
 import com.vladsch.flexmark.parser.block.DocumentPostProcessor;
 import com.vladsch.flexmark.parser.block.DocumentPostProcessorFactory;
 import com.vladsch.flexmark.util.ast.*;
+import org.jetbrains.annotations.NotNull;
 
 public class AnchorLinkPostProcessor extends DocumentPostProcessor {
     private final AnchorLinkOptions options;
@@ -17,8 +18,9 @@ public class AnchorLinkPostProcessor extends DocumentPostProcessor {
         );
     }
 
+    @NotNull
     @Override
-    public Document processDocument(Document document) {
+    public Document processDocument(@NotNull Document document) {
         myVisitor.visit(document);
         return document;
     }
@@ -47,8 +49,9 @@ public class AnchorLinkPostProcessor extends DocumentPostProcessor {
     }
 
     public static class Factory extends DocumentPostProcessorFactory {
+        @NotNull
         @Override
-        public DocumentPostProcessor apply(Document document) {
+        public DocumentPostProcessor apply(@NotNull Document document) {
             return new AnchorLinkPostProcessor(document);
         }
     }

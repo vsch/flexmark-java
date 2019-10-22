@@ -9,7 +9,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public class SpecExampleOptionsList extends Node {
     @Override
-    public void getAstExtra(StringBuilder out) {
+    public void getAstExtra(@NotNull StringBuilder out) {
         astExtraChars(out);
     }
 

@@ -1,5 +1,7 @@
 package com.vladsch.flexmark.formatter;
 
+import org.jetbrains.annotations.Nullable;
+
 import java.util.Set;
 
 /**
@@ -9,7 +11,7 @@ public interface NodeFormatter {
     /**
      * @return the mapping of nodes this renderer handles to rendering function
      */
-    Set<NodeFormattingHandler<?>> getNodeFormattingHandlers();
+    @Nullable Set<NodeFormattingHandler<?>> getNodeFormattingHandlers();
 
     /**
      * Collect nodes of given type so that they can be quickly accessed without traversing the AST
@@ -17,5 +19,5 @@ public interface NodeFormatter {
      *
      * @return the nodes of interest to this formatter during formatting.
      */
-    Set<Class<?>> getNodeClasses();
+    @Nullable Set<Class<?>> getNodeClasses();
 }

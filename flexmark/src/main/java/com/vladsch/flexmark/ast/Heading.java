@@ -17,7 +17,7 @@ public class Heading extends Block implements AnchorRefTarget {
     protected boolean explicitAnchorRefId = false;
 
     @Override
-    public void getAstExtra(StringBuilder out) {
+    public void getAstExtra(@NotNull StringBuilder out) {
         delimitedSegmentSpanChars(out, openingMarker, text, closingMarker, "text");
     }
 

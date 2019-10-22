@@ -18,6 +18,7 @@ import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.data.NullableDataKey;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Set;
 
@@ -35,7 +36,7 @@ public class CustomContextDataSample {
         }
 
         @Override
-        public void extend(HtmlRenderer.Builder rendererBuilder, String rendererType) {
+        public void extend(@NotNull HtmlRenderer.Builder rendererBuilder, @NotNull String rendererType) {
             rendererBuilder.linkResolverFactory(new CustomLinkResolver.Factory());
         }
 
@@ -52,8 +53,9 @@ public class CustomContextDataSample {
             // context.getHtmlOptions();
         }
 
+        @NotNull
         @Override
-        public ResolvedLink resolveLink(Node node, LinkResolverContext context, ResolvedLink link) {
+        public ResolvedLink resolveLink(@NotNull Node node, @NotNull LinkResolverContext context, @NotNull ResolvedLink link) {
             Document document = node.getDocument();
             XhtmlContent xhtmlContent = XHTML_CONTENT.get(document);
 
@@ -76,13 +78,15 @@ public class CustomContextDataSample {
         }
 
         static class Factory implements LinkResolverFactory {
+            @Nullable
             @Override
-            public Set<Class<? extends LinkResolverFactory>> getAfterDependents() {
+            public Set<Class<?>> getAfterDependents() {
                 return null;
             }
 
+            @Nullable
             @Override
-            public Set<Class<? extends LinkResolverFactory>> getBeforeDependents() {
+            public Set<Class<?>> getBeforeDependents() {
                 return null;
             }
 
@@ -91,8 +95,9 @@ public class CustomContextDataSample {
                 return false;
             }
 
+            @NotNull
             @Override
-            public LinkResolver apply(LinkResolverContext context) {
+            public LinkResolver apply(@NotNull LinkResolverContext context) {
                 return new CustomLinkResolver(context);
             }
         }

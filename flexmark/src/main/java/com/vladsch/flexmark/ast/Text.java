@@ -29,13 +29,14 @@ public final class Text extends Node {
     }
 
     @Override
-    public void getAstExtra(StringBuilder out) {
+    public void getAstExtra(@NotNull StringBuilder out) {
         astExtraChars(out);
         if (getChars() instanceof PrefixedSubSequence) {
             astChars(out, getChars(), "text");
         }
     }
 
+    @NotNull
     @Override
     protected String toStringAttributes() {
         return "text=" + getChars();

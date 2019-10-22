@@ -14,6 +14,8 @@ import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.html.Escaping;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.ReplacedTextMapper;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 import java.util.regex.Matcher;
@@ -64,7 +66,7 @@ public class AbbreviationNodePostProcessor extends NodePostProcessor {
     }
 
     @Override
-    public void process(NodeTracker state, Node node) {
+    public void process(@NotNull NodeTracker state, @NotNull Node node) {
         if (abbreviations == null) return;
 
         BasedSequence original = node.getChars();
@@ -125,9 +127,10 @@ public class AbbreviationNodePostProcessor extends NodePostProcessor {
     }
 
     public static class Factory extends NodePostProcessorFactory {
+        @Nullable
         @Override
-        public Set<Class<? extends PostProcessorFactory>> getAfterDependents() {
-            HashSet<Class<? extends PostProcessorFactory>> set = new HashSet<>();
+        public Set<Class<?>> getAfterDependents() {
+            HashSet<Class<?>> set = new HashSet<>();
             set.add(AutolinkNodePostProcessor.Factory.class);
             return set;
         }
@@ -137,8 +140,9 @@ public class AbbreviationNodePostProcessor extends NodePostProcessor {
             addNodeWithExclusions(Text.class, DoNotDecorate.class, DoNotLinkDecorate.class);
         }
 
+        @NotNull
         @Override
-        public NodePostProcessor apply(Document document) {
+        public NodePostProcessor apply(@NotNull Document document) {
             return new AbbreviationNodePostProcessor(document);
         }
     }

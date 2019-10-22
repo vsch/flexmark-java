@@ -10,6 +10,8 @@ import com.vladsch.flexmark.util.ast.BlockContent;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.SegmentedSequence;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -134,8 +136,9 @@ public class FencedCodeBlockParser extends AbstractBlockParser {
     }
 
     public static class Factory implements CustomBlockParserFactory {
+        @Nullable
         @Override
-        public Set<Class<? extends CustomBlockParserFactory>> getAfterDependents() {
+        public Set<Class<?>> getAfterDependents() {
             return new HashSet<>(Arrays.asList(
                     BlockQuoteParser.Factory.class,
                     HeadingParser.Factory.class
@@ -147,8 +150,9 @@ public class FencedCodeBlockParser extends AbstractBlockParser {
             ));
         }
 
+        @Nullable
         @Override
-        public Set<Class<? extends CustomBlockParserFactory>> getBeforeDependents() {
+        public Set<Class<?>> getBeforeDependents() {
             return new HashSet<>(Arrays.asList(
                     //BlockQuoteParser.Factory.class,
                     //HeadingParser.Factory.class,
@@ -165,8 +169,9 @@ public class FencedCodeBlockParser extends AbstractBlockParser {
             return false;
         }
 
+        @NotNull
         @Override
-        public BlockParserFactory apply(DataHolder options) {
+        public BlockParserFactory apply(@NotNull DataHolder options) {
             return new BlockFactory(options);
         }
     }

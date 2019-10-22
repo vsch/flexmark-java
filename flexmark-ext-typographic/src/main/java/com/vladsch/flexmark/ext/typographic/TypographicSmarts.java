@@ -29,7 +29,7 @@ public class TypographicSmarts extends Node implements DoNotAttributeDecorate, T
     }
 
     @Override
-    public void getAstExtra(StringBuilder out) {
+    public void getAstExtra(@NotNull StringBuilder out) {
         out.append(" typographic: ").append(typographicText).append(" ");
     }
 
@@ -47,6 +47,7 @@ public class TypographicSmarts extends Node implements DoNotAttributeDecorate, T
         return EMPTY_SEGMENTS;
     }
 
+    @NotNull
     @Override
     protected String toStringAttributes() {
         return "text=" + getChars();

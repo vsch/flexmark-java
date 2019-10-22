@@ -22,6 +22,8 @@ import com.vladsch.flexmark.util.dependency.ResolvedDependencies;
 import com.vladsch.flexmark.util.html.Escaping;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.SegmentedSequence;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 import java.util.regex.Matcher;
@@ -74,7 +76,7 @@ public class InlineParserImpl extends LightInlineParserImpl implements InlinePar
         this.specialCharacters = specialCharacters;
         this.inlineParserExtensionFactories = !inlineParserExtensionFactories.isEmpty() ? inlineParserExtensionFactories : null;
 
-        if (this.options.useHardcodedLinkAddressParser && true) {
+        if (this.options.useHardcodedLinkAddressParser) {
             this.linkDestinationParser = new LinkDestinationParser(this.options.spaceInLinkUrls, this.options.parseJekyllMacrosInUrls, this.options.intellijDummyIdentifier);
         }
     }
@@ -136,8 +138,9 @@ public class InlineParserImpl extends LightInlineParserImpl implements InlinePar
         return lastBracket;
     }
 
+    @NotNull
     @Override
-    public List<Node> parseCustom(BasedSequence input, Node node, BitSet customCharacters, Map<Character, CharacterNodeFactory> nodeFactoryMap) {
+    public List<Node> parseCustom(@NotNull BasedSequence input, @NotNull Node node, @NotNull BitSet customCharacters, @NotNull Map<Character, CharacterNodeFactory> nodeFactoryMap) {
         this.customCharacters = customCharacters;
         this.specialCharacters.or(customCharacters);
         this.customSpecialCharacterFactoryMap = nodeFactoryMap;
@@ -185,7 +188,7 @@ public class InlineParserImpl extends LightInlineParserImpl implements InlinePar
     }
 
     @Override
-    public void mergeTextNodes(Node fromNode, Node toNode) {
+    public void mergeTextNodes(@Nullable Node fromNode, @Nullable Node toNode) {
         Text first = null;
         Text last = null;
 
@@ -1498,7 +1501,7 @@ public class InlineParserImpl extends LightInlineParserImpl implements InlinePar
     }
 
     @Override
-    public void removeDelimitersBetween(Delimiter opener, Delimiter closer) {
+    public void removeDelimitersBetween(@NotNull Delimiter opener, @NotNull Delimiter closer) {
         Delimiter delimiter = closer.getPrevious();
         while (delimiter != null && delimiter != opener) {
             Delimiter previousDelimiter = delimiter.getPrevious();
@@ -1513,7 +1516,7 @@ public class InlineParserImpl extends LightInlineParserImpl implements InlinePar
      * @param delim delimiter to remove
      */
     @Override
-    public void removeDelimiterAndNode(Delimiter delim) {
+    public void removeDelimiterAndNode(@NotNull Delimiter delim) {
         Text node = delim.getNode();
         Text previousText = delim.getPreviousNonDelimiterTextNode();
         Text nextText = delim.getNextNonDelimiterTextNode();
@@ -1533,7 +1536,7 @@ public class InlineParserImpl extends LightInlineParserImpl implements InlinePar
      * @param delim delimiter being processed
      */
     @Override
-    public void removeDelimiterKeepNode(Delimiter delim) {
+    public void removeDelimiterKeepNode(@NotNull Delimiter delim) {
         Node node;
         DelimiterProcessor delimiterProcessor = delimiterProcessors.get(delim.getDelimiterChar());
         node = delimiterProcessor != null ? delimiterProcessor.unmatchedDelimiterNode(this, delim) : null;
@@ -1568,7 +1571,7 @@ public class InlineParserImpl extends LightInlineParserImpl implements InlinePar
     }
 
     @Override
-    public void removeDelimiter(Delimiter delim) {
+    public void removeDelimiter(@NotNull Delimiter delim) {
         if (delim.getPrevious() != null) {
             delim.getPrevious().setNext(delim.getNext());
         }
@@ -1596,16 +1599,19 @@ public class InlineParserImpl extends LightInlineParserImpl implements InlinePar
     }
 
     static class InlineParserExtensionDependencyHandler extends DependencyHandler<InlineParserExtensionFactory, InlineParserDependencyStage, InlineParserExtensionDependencies> {
+        @NotNull
         @Override
-        protected Class<? extends InlineParserExtensionFactory> getDependentClass(InlineParserExtensionFactory dependent) {
+        protected Class<?> getDependentClass(InlineParserExtensionFactory dependent) {
             return dependent.getClass();
         }
 
+        @NotNull
         @Override
         protected InlineParserExtensionDependencies createResolvedDependencies(List<InlineParserDependencyStage> stages) {
             return new InlineParserExtensionDependencies(stages);
         }
 
+        @NotNull
         @Override
         protected InlineParserDependencyStage createStage(List<InlineParserExtensionFactory> dependents) {
             return new InlineParserDependencyStage(dependents);

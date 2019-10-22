@@ -26,7 +26,7 @@ public class AttributeProviderSample {
         }
 
         @Override
-        public void extend(HtmlRenderer.Builder rendererBuilder, String rendererType) {
+        public void extend(@NotNull HtmlRenderer.Builder rendererBuilder, @NotNull String rendererType) {
             rendererBuilder.attributeProviderFactory(SampleAttributeProvider.Factory());
         }
 
@@ -37,7 +37,7 @@ public class AttributeProviderSample {
 
     static class SampleAttributeProvider implements AttributeProvider {
         @Override
-        public void setAttributes(Node node, AttributablePart part, Attributes attributes) {
+        public void setAttributes(@NotNull Node node, @NotNull AttributablePart part, @NotNull Attributes attributes) {
             if (node instanceof AutoLink && part == AttributablePart.LINK) {
 
 /*
@@ -72,8 +72,9 @@ public class AttributeProviderSample {
 
         static AttributeProviderFactory Factory() {
             return new IndependentAttributeProviderFactory() {
+                @NotNull
                 @Override
-                public AttributeProvider apply(LinkResolverContext context) {
+                public AttributeProvider apply(@NotNull LinkResolverContext context) {
                     return new SampleAttributeProvider();
                 }
             };

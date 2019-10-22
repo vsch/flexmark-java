@@ -1,18 +1,20 @@
 package com.vladsch.flexmark.html.renderer;
 
+import org.jetbrains.annotations.NotNull;
+
 public class LinkType {
     public static final LinkType LINK = new LinkType("LINK");
     public static final LinkType IMAGE = new LinkType("IMAGE");
     public static final LinkType LINK_REF = new LinkType("LINK_REF");
     public static final LinkType IMAGE_REF = new LinkType("IMAGE_REF");
 
-    private final String myName;
+    private final @NotNull String myName;
 
-    public LinkType(String name) {
+    public LinkType(@NotNull String name) {
         this.myName = name;
     }
 
-    public String getName() {
+    public @NotNull String getName() {
         return myName;
     }
 

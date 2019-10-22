@@ -9,6 +9,7 @@ import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.ast.NodeTracker;
 import com.vladsch.flexmark.util.data.DataHolder;
+import org.jetbrains.annotations.NotNull;
 
 import static com.vladsch.flexmark.ext.anchorlink.AnchorLinkExtension.ANCHORLINKS_NO_BLOCK_QUOTE;
 
@@ -20,7 +21,7 @@ public class AnchorLinkNodePostProcessor extends NodePostProcessor {
     }
 
     @Override
-    public void process(NodeTracker state, Node node) {
+    public void process(@NotNull NodeTracker state, @NotNull Node node) {
         if (node instanceof Heading) {
             //if (node.isOrDescendantOfType(BlockQuote.class)) {
             //    int tmp = 0;
@@ -59,8 +60,9 @@ public class AnchorLinkNodePostProcessor extends NodePostProcessor {
             }
         }
 
+        @NotNull
         @Override
-        public NodePostProcessor apply(Document document) {
+        public NodePostProcessor apply(@NotNull Document document) {
             return new AnchorLinkNodePostProcessor(document);
         }
     }

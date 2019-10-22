@@ -6,6 +6,8 @@ import com.vladsch.flexmark.formatter.*;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.format.MarkdownTable;
 import com.vladsch.flexmark.util.format.TableFormatOptions;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -20,11 +22,13 @@ public class SimTocNodeFormatter implements NodeFormatter {
         this.options = new TableFormatOptions(options);
     }
 
+    @Nullable
     @Override
     public Set<Class<?>> getNodeClasses() {
         return null;
     }
 
+    @Nullable
     @Override
     public Set<NodeFormattingHandler<?>> getNodeFormattingHandlers() {
         return new HashSet<>(Arrays.asList(
@@ -42,8 +46,9 @@ public class SimTocNodeFormatter implements NodeFormatter {
     }
 
     public static class Factory implements NodeFormatterFactory {
+        @NotNull
         @Override
-        public NodeFormatter create(DataHolder options) {
+        public NodeFormatter create(@NotNull DataHolder options) {
             return new SimTocNodeFormatter(options);
         }
     }

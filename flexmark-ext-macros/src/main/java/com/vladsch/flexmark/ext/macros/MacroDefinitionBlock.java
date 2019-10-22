@@ -7,6 +7,7 @@ import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.ast.ReferenceNode;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
@@ -65,7 +66,7 @@ public class MacroDefinitionBlock extends Block implements ReferenceNode<MacroDe
     }
 
     @Override
-    public void getAstExtra(StringBuilder out) {
+    public void getAstExtra(@NotNull StringBuilder out) {
         segmentSpanChars(out, openingMarker, "open");
         segmentSpanChars(out, name, "name");
         segmentSpanChars(out, openingTrailing, "openTrail");
@@ -79,8 +80,9 @@ public class MacroDefinitionBlock extends Block implements ReferenceNode<MacroDe
         return new BasedSequence[] { openingMarker, name, openingTrailing, closingMarker, closingTrailing };
     }
 
+    @Nullable
     @Override
-    public MacroReference getReferencingNode(Node node) {
+    public MacroReference getReferencingNode(@NotNull Node node) {
         return node instanceof MacroReference ? (MacroReference) node : null;
     }
 

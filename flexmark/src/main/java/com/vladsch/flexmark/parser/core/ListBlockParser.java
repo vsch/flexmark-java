@@ -14,6 +14,8 @@ import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.collection.iteration.ReversiblePeekingIterator;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -408,8 +410,9 @@ public class ListBlockParser extends AbstractBlockParser {
     }
 
     public static class Factory implements CustomBlockParserFactory {
+        @Nullable
         @Override
-        public Set<Class<? extends CustomBlockParserFactory>> getAfterDependents() {
+        public Set<Class<?>> getAfterDependents() {
             return new HashSet<>(Arrays.asList(
                     BlockQuoteParser.Factory.class,
                     HeadingParser.Factory.class,
@@ -421,9 +424,10 @@ public class ListBlockParser extends AbstractBlockParser {
             ));
         }
 
+        @Nullable
         @Override
-        public Set<Class<? extends CustomBlockParserFactory>> getBeforeDependents() {
-            HashSet<Class<? extends CustomBlockParserFactory>> set = new HashSet<>();
+        public Set<Class<?>> getBeforeDependents() {
+            HashSet<Class<?>> set = new HashSet<>();
             set.add(IndentedCodeBlockParser.Factory.class);
             return set;
             //return new HashSet<>(Arrays.asList(
@@ -442,8 +446,9 @@ public class ListBlockParser extends AbstractBlockParser {
             return false;
         }
 
+        @NotNull
         @Override
-        public BlockParserFactory apply(DataHolder options) {
+        public BlockParserFactory apply(@NotNull DataHolder options) {
             return new BlockFactory(options);
         }
     }

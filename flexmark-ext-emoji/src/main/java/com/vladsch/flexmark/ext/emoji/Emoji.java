@@ -21,7 +21,7 @@ public class Emoji extends Node implements DelimitedNode, DoNotCollectText {
     }
 
     @Override
-    public void getAstExtra(StringBuilder out) {
+    public void getAstExtra(@NotNull StringBuilder out) {
         delimitedSegmentSpanChars(out, openingMarker, text, closingMarker, "text");
     }
 

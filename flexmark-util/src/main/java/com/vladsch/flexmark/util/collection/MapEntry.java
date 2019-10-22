@@ -1,45 +1,49 @@
 package com.vladsch.flexmark.util.collection;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 import java.util.Map;
+import java.util.Objects;
 
 public final class MapEntry<K, V> implements Map.Entry<K, V> {
-    private final K myKey;
-    private final V myValue;
+    private final @NotNull K myKey;
+    private final @Nullable V myValue;
 
-    public MapEntry(K key, V value) {
+    public MapEntry(@NotNull K key, @Nullable V value) {
         myKey = key;
         myValue = value;
     }
 
     @Override
-    public K getKey() {
+    public @NotNull K getKey() {
         return myKey;
     }
 
     @Override
-    public V getValue() {
+    public @Nullable V getValue() {
         return myValue;
     }
 
     @Override
-    public V setValue(V v) {
+    public @Nullable V setValue(V v) {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(@Nullable Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
         MapEntry<?, ?> entry = (MapEntry<?, ?>) o;
 
-        if (myKey != null ? !myKey.equals(entry.myKey) : entry.myKey != null) return false;
-        return myValue != null ? myValue.equals(entry.myValue) : entry.myValue == null;
+        if (!Objects.equals(myKey, entry.myKey)) return false;
+        return Objects.equals(myValue, entry.myValue);
     }
 
     @Override
     public int hashCode() {
-        int result = myKey != null ? myKey.hashCode() : 0;
+        int result = myKey.hashCode();
         result = 31 * result + (myValue != null ? myValue.hashCode() : 0);
         return result;
     }

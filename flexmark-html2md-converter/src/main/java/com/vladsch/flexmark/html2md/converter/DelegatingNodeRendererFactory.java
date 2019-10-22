@@ -11,5 +11,5 @@ public interface DelegatingNodeRendererFactory extends HtmlNodeRendererFactory {
      *
      * @return list of renderer factories
      */
-    Set<Class<? extends HtmlNodeRendererFactory>> getDelegates();
+    Set<Class<?>> getDelegates();
 }

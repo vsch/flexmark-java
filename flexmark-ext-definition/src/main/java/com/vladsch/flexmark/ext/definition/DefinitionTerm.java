@@ -14,7 +14,7 @@ import org.jetbrains.annotations.NotNull;
 public class DefinitionTerm extends ListItem {
 
     @Override
-    public void getAstExtra(StringBuilder out) {
+    public void getAstExtra(@NotNull StringBuilder out) {
     }
 
     @NotNull

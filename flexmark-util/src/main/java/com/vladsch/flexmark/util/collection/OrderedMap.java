@@ -1,6 +1,8 @@
 package com.vladsch.flexmark.util.collection;
 
 import com.vladsch.flexmark.util.collection.iteration.*;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 import java.util.function.Consumer;
@@ -8,12 +10,12 @@ import java.util.function.Function;
 
 @SuppressWarnings("WeakerAccess")
 public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
-    private final OrderedSet<K> keySet;
-    private final ArrayList<V> valueList;
-    private final CollectionHost<K> host;
-    private boolean inUpdate;
-    private Indexed<Entry<K, V>> myIndexedEntryProxy;
-    private Indexed<V> myIndexedValueProxy;
+    final @NotNull OrderedSet<K> keySet;
+    private final @NotNull ArrayList<V> valueList;
+    private final @Nullable CollectionHost<K> host;
+    boolean inUpdate;
+    private @Nullable Indexed<Entry<K, V>> myIndexedEntryProxy;
+    private @Nullable Indexed<V> myIndexedValueProxy;
 
     public OrderedMap() {
         this(0, null);
@@ -23,23 +25,23 @@ public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
         this(capacity, null);
     }
 
-    public OrderedMap(CollectionHost<K> host) {
+    public OrderedMap(@NotNull CollectionHost<K> host) {
         this(0, host);
     }
 
-    public OrderedMap(int capacity, CollectionHost<K> host) {
+    public OrderedMap(int capacity, @Nullable CollectionHost<K> host) {
         this.valueList = new ArrayList<>(capacity);
         this.host = host;
         this.myIndexedEntryProxy = null;
         this.myIndexedValueProxy = null;
         this.keySet = new OrderedSet<>(capacity, new CollectionHost<K>() {
             @Override
-            public void adding(int index, K k, Object v) {
+            public void adding(int index, @Nullable K k, @Nullable Object v) {
                 OrderedMap.this.adding(index, k, v);
             }
 
             @Override
-            public Object removing(int index, K k) {
+            public Object removing(int index, @Nullable K k) {
                 return OrderedMap.this.removing(index, k);
             }
 
@@ -66,7 +68,7 @@ public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
         });
     }
 
-    public Indexed<Map.Entry<K, V>> getIndexedEntryProxy() {
+    public @NotNull Indexed<Map.Entry<K, V>> getIndexedEntryProxy() {
         if (myIndexedEntryProxy != null) return myIndexedEntryProxy;
         myIndexedEntryProxy = new Indexed<Map.Entry<K, V>>() {
             @Override
@@ -98,7 +100,7 @@ public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
         return myIndexedEntryProxy;
     }
 
-    public Indexed<V> getIndexedValueProxy() {
+    public @NotNull Indexed<V> getIndexedValueProxy() {
         if (myIndexedValueProxy != null) return myIndexedValueProxy;
         myIndexedValueProxy = new Indexed<V>() {
             @Override
@@ -130,7 +132,7 @@ public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
         return myIndexedValueProxy;
     }
 
-    private Map.Entry<K, V> getEntry(int index) {
+    @NotNull Map.Entry<K, V> getEntry(int index) {
         return new MapEntry<>(keySet.getValue(index), valueList.get(index));
     }
 
@@ -138,7 +140,7 @@ public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
         return keySet.getModificationCount();
     }
 
-    void adding(int index, K k, Object v) {
+    void adding(int index, @NotNull K k, @NotNull Object v) {
         if (v == null) throw new IllegalArgumentException();
         if (host != null && !host.skipHostUpdate()) {
             host.adding(index, k, v);
@@ -154,7 +156,7 @@ public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
         addNulls(index);
     }
 
-    Object removing(int index, K k) {
+    Object removing(int index, @NotNull K k) {
         if (host != null && !host.skipHostUpdate()) {
             host.removing(index, k);
         }
@@ -179,13 +181,13 @@ public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
     }
 
     @Override
-    public boolean containsKey(Object o) {
+    public boolean containsKey(@Nullable Object o) {
         //noinspection SuspiciousMethodCalls
         return keySet.contains(o);
     }
 
     @Override
-    public boolean containsValue(Object o) {
+    public boolean containsValue(@Nullable Object o) {
         //noinspection SuspiciousMethodCalls
         int index = valueList.indexOf(o);
         return keySet.isValidIndex(index);
@@ -202,13 +204,13 @@ public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
     }
 
     @Override
-    public V get(Object o) {
+    public @Nullable V get(@Nullable Object o) {
         int index = keySet.indexOf(o);
         return index == -1 ? null : valueList.get(index);
     }
 
     @Override
-    public V put(K k, V v) {
+    public @Nullable V put(@NotNull K k, @NotNull V v) {
         int index = keySet.indexOf(k);
         if (index == -1) {
             keySet.add(k, v);
@@ -220,7 +222,7 @@ public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
         return old;
     }
 
-    public V computeIfMissing(K k, Function<? super K, ? extends V> runnableValue) {
+    public @NotNull V computeIfMissing(@NotNull K k, @NotNull Function<? super K, ? extends V> runnableValue) {
         int index = keySet.indexOf(k);
         if (index == -1) {
             V v = runnableValue.apply(k);
@@ -232,19 +234,19 @@ public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
     }
 
     @Override
-    public V remove(Object o) {
+    public @NotNull V remove(@Nullable Object o) {
         //noinspection unchecked
         return (V) keySet.removeHosted(o);
     }
 
     @Override
-    public void putAll(Map<? extends K, ? extends V> map) {
+    public void putAll(@NotNull Map<? extends K, ? extends V> map) {
         for (Map.Entry<? extends K, ? extends V> entry : map.entrySet()) {
             put(entry.getKey(), entry.getValue());
         }
     }
 
-    public void addAll(Collection<? extends Map.Entry<? extends K, ? extends V>> entries) {
+    public void addAll(@NotNull Collection<? extends Map.Entry<? extends K, ? extends V>> entries) {
         for (Map.Entry<? extends K, ? extends V> entry : entries) {
             put(entry.getKey(), entry.getValue());
         }
@@ -255,11 +257,13 @@ public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
         keySet.clear();
     }
 
+    @NotNull
     @Override
     public OrderedSet<K> keySet() {
         return keySet;
     }
 
+    @NotNull
     @Override
     public Collection<V> values() {
         if (!keySet.isSparse()) {
@@ -274,16 +278,17 @@ public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
         return values;
     }
 
-    public K getKey(int index) {
+    public @Nullable K getKey(int index) {
         if (!keySet.isValidIndex(index)) return null;
         return keySet.getValueList().get(index);
     }
 
-    public V getValue(int index) {
+    public @Nullable V getValue(int index) {
         if (!keySet.isValidIndex(index)) return null;
         return valueList.get(index);
     }
 
+    @NotNull
     @Override
     public OrderedSet<Map.Entry<K, V>> entrySet() {
         // create it with inHostUpdate already set so we can populate it without callbacks
@@ -300,7 +305,7 @@ public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
         return values;
     }
 
-    public List<Entry<K, V>> entries() {
+    public @NotNull List<Entry<K, V>> entries() {
         // create it with inHostUpdate already set so we can populate it without callbacks
         List<Map.Entry<K, V>> values = new ArrayList<>();
         Iterator<Map.Entry<K, V>> iterator = entryIterator();
@@ -310,64 +315,64 @@ public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
         return values;
     }
 
-    public List<K> keys() {
+    public @NotNull List<K> keys() {
         // create it with inHostUpdate already set so we can populate it without callbacks
         return keySet.values();
     }
 
-    public ReversibleIndexedIterator<V> valueIterator() {
+    public @NotNull ReversibleIndexedIterator<V> valueIterator() {
         return new IndexedIterator<>(getIndexedValueProxy(), keySet.indexIterator());
     }
 
-    public ReversibleIndexedIterator<V> reversedValueIterator() {
+    public @NotNull ReversibleIndexedIterator<V> reversedValueIterator() {
         return new IndexedIterator<>(getIndexedValueProxy(), keySet.reversedIndexIterator());
     }
 
-    public ReversibleIndexedIterator<K> keyIterator() {
+    public @NotNull ReversibleIndexedIterator<K> keyIterator() {
         return keySet.iterator();
     }
 
-    public ReversibleIndexedIterator<K> reversedKeyIterator() {
+    public @NotNull ReversibleIndexedIterator<K> reversedKeyIterator() {
         return keySet.reversedIterator();
     }
 
-    public ReversibleIndexedIterator<Map.Entry<K, V>> entryIterator() {
+    public @NotNull ReversibleIndexedIterator<Map.Entry<K, V>> entryIterator() {
         return new IndexedIterator<>(getIndexedEntryProxy(), keySet.indexIterator());
     }
 
-    public ReversibleIndexedIterator<Map.Entry<K, V>> reversedEntryIterator() {
+    public @NotNull ReversibleIndexedIterator<Map.Entry<K, V>> reversedEntryIterator() {
         return new IndexedIterator<>(getIndexedEntryProxy(), keySet.reversedIndexIterator());
     }
 
-    public ReversibleIndexedIterator<Map.Entry<K, V>> reversedIterator() {
+    public @NotNull ReversibleIndexedIterator<Map.Entry<K, V>> reversedIterator() {
         return reversedEntryIterator();
     }
 
-    public ReversibleIterable<V> valueIterable() {
+    public @NotNull ReversibleIterable<V> valueIterable() {
         return new IndexedIterable<>(getIndexedValueProxy(), keySet.indexIterable());
     }
 
-    public ReversibleIterable<V> reversedValueIterable() {
+    public @NotNull ReversibleIterable<V> reversedValueIterable() {
         return new IndexedIterable<>(getIndexedValueProxy(), keySet.reversedIndexIterable());
     }
 
-    public ReversibleIterable<K> keyIterable() {
+    public @NotNull ReversibleIterable<K> keyIterable() {
         return keySet.iterable();
     }
 
-    public ReversibleIterable<K> reversedKeyIterable() {
+    public @NotNull ReversibleIterable<K> reversedKeyIterable() {
         return keySet.reversedIterable();
     }
 
-    public ReversibleIterable<Map.Entry<K, V>> entryIterable() {
+    public @NotNull ReversibleIterable<Map.Entry<K, V>> entryIterable() {
         return new IndexedIterable<>(getIndexedEntryProxy(), keySet.indexIterable());
     }
 
-    public ReversibleIterable<Entry<K, V>> reversedEntryIterable() {
+    public @NotNull ReversibleIterable<Entry<K, V>> reversedEntryIterable() {
         return new IndexedIterable<>(getIndexedEntryProxy(), keySet.reversedIndexIterable());
     }
 
-    public ReversibleIterable<Map.Entry<K, V>> reversedIterable() {
+    public @NotNull ReversibleIterable<Map.Entry<K, V>> reversedIterable() {
         return reversedEntryIterable();
     }
 
@@ -375,6 +380,7 @@ public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
      * Iterable
      */
 
+    @NotNull
     @Override
     public ReversibleIndexedIterator<Map.Entry<K, V>> iterator() {
         return entryIterator();
@@ -408,13 +414,13 @@ public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
 
     private class EntryCollectionHost<KK extends K, VV extends V> implements CollectionHost<Map.Entry<KK, VV>> {
         @Override
-        public void adding(int index, Entry<KK, VV> entry, Object v) {
+        public void adding(int index, @Nullable Entry<KK, VV> entry, @Nullable Object v) {
             assert v == null;
             OrderedMap.this.keySet.add(entry.getKey(), entry.getValue());
         }
 
         @Override
-        public Object removing(int index, Entry<KK, VV> entry) {
+        public Object removing(int index, @Nullable Entry<KK, VV> entry) {
             OrderedMap.this.keySet.removeIndex(index);
             return entry;
         }

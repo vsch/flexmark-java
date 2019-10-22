@@ -1,5 +1,7 @@
 package com.vladsch.flexmark.html.renderer;
 
+import org.jetbrains.annotations.Nullable;
+
 import java.util.Set;
 
 /**
@@ -11,5 +13,5 @@ public interface DelegatingNodeRendererFactory extends NodeRendererFactory {
      *
      * @return list of renderer factories
      */
-    Set<Class<? extends NodeRendererFactory>> getDelegates();
+    @Nullable Set<Class<?>> getDelegates();
 }

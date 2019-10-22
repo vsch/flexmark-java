@@ -14,9 +14,8 @@ import static com.vladsch.flexmark.util.sequence.BasedSequence.EMPTY_LIST;
 public class Document extends Block implements MutableDataHolder {
     private final MutableDataSet dataSet;
 
-    @NotNull
     @Override
-    public BasedSequence[] getSegments() {
+    public @NotNull BasedSequence[] getSegments() {
         return EMPTY_SEGMENTS;
     }
 
@@ -26,21 +25,28 @@ public class Document extends Block implements MutableDataHolder {
     }
 
     @Override
-    public MutableDataHolder clear() {
+    public @NotNull MutableDataHolder clear() {
         throw new UnsupportedOperationException();
     }
 
+    @NotNull
     @Override
-    public <T> MutableDataHolder set(DataKey<T> key, @NotNull T value) {return dataSet.set(key, value);}
+    public <T> MutableDataHolder set(@NotNull DataKey<T> key, @NotNull T value) {return dataSet.set(key, value);}
+
+    @NotNull
+    @Override
+    public <T> MutableDataHolder set(@NotNull NullableDataKey<T> key, @Nullable T value) {return dataSet.set(key, value);}
 
     @Override
-    public <T> MutableDataHolder set(NullableDataKey<T> key, @Nullable T value) {return dataSet.set(key, value);}
+    public <T> T get(@NotNull DataKey<T> key) { return key.get(this);}
 
+    @NotNull
     @Override
-    public MutableDataSet setFrom(MutableDataSetter dataSetter) {return dataSet.setFrom(dataSetter);}
+    public MutableDataSet setFrom(@NotNull MutableDataSetter dataSetter) {return dataSet.setFrom(dataSetter);}
 
+    @NotNull
     @Override
-    public MutableDataSet setAll(DataHolder other) {return dataSet.setAll(other);}
+    public MutableDataSet setAll(@NotNull DataHolder other) {return dataSet.setAll(other);}
 
     public static MutableDataSet merge(DataHolder... dataHolders) {return MutableDataSet.merge(dataHolders);}
 
@@ -48,8 +54,9 @@ public class Document extends Block implements MutableDataHolder {
     @Override
     public MutableDataHolder setIn(@NotNull MutableDataHolder dataHolder) {return dataSet.setIn(dataHolder);}
 
+    @NotNull
     @Override
-    public <T> MutableDataSet remove(DataKeyBase<T> key) {return dataSet.remove(key);}
+    public <T> MutableDataSet remove(@NotNull DataKeyBase<T> key) {return dataSet.remove(key);}
 
     @Override
     @Nullable

@@ -1,6 +1,7 @@
 package com.vladsch.flexmark.util.ast;
 
 import com.vladsch.flexmark.util.visitor.AstActionHandler;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
 import java.util.function.BiConsumer;
@@ -64,61 +65,63 @@ public class NodeVisitor extends AstActionHandler<NodeVisitor, Node, Visitor<Nod
         super(Node.AST_ADAPTER);
     }
 
-    public NodeVisitor(VisitHandler... handlers) {
+    public NodeVisitor(@NotNull VisitHandler... handlers) {
         super(Node.AST_ADAPTER);
         super.addActionHandlers(handlers);
     }
 
-    public NodeVisitor(VisitHandler[]... handlers) {
+    public NodeVisitor(@NotNull VisitHandler[]... handlers) {
         super(Node.AST_ADAPTER);
         //noinspection unchecked
         super.addActionHandlers(handlers);
     }
 
-    public NodeVisitor(Collection<VisitHandler> handlers) {
+    public NodeVisitor(@NotNull Collection<VisitHandler> handlers) {
         super(Node.AST_ADAPTER);
         addHandlers(handlers);
     }
 
     // add handler variations
-    public NodeVisitor addTypedHandlers(Collection<VisitHandler<?>> handlers) {
+    public @NotNull NodeVisitor addTypedHandlers(@NotNull Collection<VisitHandler<?>> handlers) {
         return super.addActionHandlers(handlers.toArray(EMPTY_HANDLERS));
     }
 
-    public NodeVisitor addHandlers(Collection<VisitHandler> handlers) {
+    @SuppressWarnings("UnusedReturnValue")
+    public @NotNull NodeVisitor addHandlers(@NotNull Collection<VisitHandler> handlers) {
         return super.addActionHandlers(handlers.toArray(EMPTY_HANDLERS));
     }
 
-    public NodeVisitor addHandlers(VisitHandler[] handlers) {
+    public @NotNull NodeVisitor addHandlers(@NotNull VisitHandler[] handlers) {
         return super.addActionHandlers(handlers);
     }
 
-    public NodeVisitor addHandlers(VisitHandler[]... handlers) {
+    public @NotNull NodeVisitor addHandlers(@NotNull VisitHandler[]... handlers) {
         //noinspection unchecked
         return super.addActionHandlers(handlers);
     }
 
-    public NodeVisitor addHandler(VisitHandler handler) {
+    @SuppressWarnings("UnusedReturnValue")
+    public @NotNull NodeVisitor addHandler(@NotNull VisitHandler handler) {
         //noinspection unchecked
         return super.addActionHandler(handler);
     }
 
     @Override
-    final public void visit(Node node) {
+    final public void visit(@NotNull Node node) {
         processNode(node, true, this::visit);
     }
 
     @Override
-    final public void visitNodeOnly(Node node) {
+    final public void visitNodeOnly(@NotNull Node node) {
         processNode(node, false, this::visit);
     }
 
     @Override
-    final public void visitChildren(Node parent) {
+    final public void visitChildren(@NotNull Node parent) {
         processChildren(parent, this::visit);
     }
 
-    private void visit(Node node, Visitor<Node> handler) {
+    private void visit(@NotNull Node node, @NotNull Visitor<Node> handler) {
         handler.visit(node);
     }
 }

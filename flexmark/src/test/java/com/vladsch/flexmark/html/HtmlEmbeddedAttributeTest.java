@@ -60,8 +60,9 @@ final public class HtmlEmbeddedAttributeTest {
                 addNodes(Paragraph.class);
             }
 
+            @NotNull
             @Override
-            public NodePostProcessor apply(Document document) {
+            public NodePostProcessor apply(@NotNull Document document) {
                 return new TestNodePostProcessor();
             }
         }
@@ -71,7 +72,7 @@ final public class HtmlEmbeddedAttributeTest {
         }
 
         @Override
-        public void process(NodeTracker state, Node node) {
+        public void process(@NotNull NodeTracker state, @NotNull Node node) {
             BasedSequence paragraphText = BasedSequence.NULL;
             if (node instanceof Paragraph) { // [foo](http://example.com)
                 Attributes attributes = new Attributes();
@@ -95,7 +96,7 @@ final public class HtmlEmbeddedAttributeTest {
         }
 
         @Override
-        public void extend(HtmlRenderer.Builder rendererBuilder, String rendererType) {
+        public void extend(@NotNull HtmlRenderer.Builder rendererBuilder, @NotNull String rendererType) {
             rendererBuilder.attributeProviderFactory(EmbeddedAttributeProvider.Factory);
         }
 

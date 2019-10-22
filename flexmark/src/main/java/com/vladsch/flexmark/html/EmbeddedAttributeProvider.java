@@ -13,8 +13,9 @@ import org.jetbrains.annotations.NotNull;
 public class EmbeddedAttributeProvider implements AttributeProvider {
 
     public static final IndependentAttributeProviderFactory Factory = new IndependentAttributeProviderFactory() {
+        @NotNull
         @Override
-        public AttributeProvider apply(LinkResolverContext context) {
+        public AttributeProvider apply(@NotNull LinkResolverContext context) {
             return new EmbeddedAttributeProvider();
         }
     };
@@ -23,7 +24,7 @@ public class EmbeddedAttributeProvider implements AttributeProvider {
     }
 
     @Override
-    public void setAttributes(Node node, AttributablePart part, Attributes attributes) {
+    public void setAttributes(@NotNull Node node, @NotNull AttributablePart part, @NotNull Attributes attributes) {
         if (part == AttributablePart.NODE) {
             Node firstChild = node.getChildOfType(EmbeddedNodeAttributes.class);
             if (firstChild instanceof EmbeddedNodeAttributes) {
@@ -34,9 +35,9 @@ public class EmbeddedAttributeProvider implements AttributeProvider {
 
     // so we can attach attributes to any node in the AST and have a generic attribute provider serve them up
     public static class EmbeddedNodeAttributes extends Node {
-        final Attributes attributes;
+        final @NotNull Attributes attributes;
 
-        public EmbeddedNodeAttributes(Node parent, Attributes attributes) {
+        public EmbeddedNodeAttributes(@NotNull Node parent, @NotNull Attributes attributes) {
             super(parent.getChars().subSequence(0, 0));
             this.attributes = attributes;
         }

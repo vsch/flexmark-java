@@ -16,15 +16,15 @@ public class BlockNodeVisitor extends NodeVisitor {
     public BlockNodeVisitor() {
     }
 
-    public BlockNodeVisitor(VisitHandler... handlers) {
+    public BlockNodeVisitor(@NotNull VisitHandler... handlers) {
         super(handlers);
     }
 
-    public BlockNodeVisitor(VisitHandler[]... handlers) {
+    public BlockNodeVisitor(@NotNull VisitHandler[]... handlers) {
         super(handlers);
     }
 
-    public BlockNodeVisitor(Collection<VisitHandler> handlers) {
+    public BlockNodeVisitor(@NotNull Collection<VisitHandler> handlers) {
         super(handlers);
     }
 

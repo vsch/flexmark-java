@@ -4,12 +4,12 @@ import com.vladsch.flexmark.html.renderer.AttributablePart;
 import com.vladsch.flexmark.html.renderer.LinkStatus;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
 import com.vladsch.flexmark.html.renderer.ResolvedLink;
-import com.vladsch.flexmark.util.data.DataKeyBase;
 import com.vladsch.flexmark.util.html.Attribute;
 import com.vladsch.flexmark.util.html.Attributes;
 import com.vladsch.flexmark.util.html.HtmlFormattingAppendableBase;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.TagRange;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
@@ -32,27 +32,27 @@ public class HtmlWriter extends HtmlFormattingAppendableBase<HtmlWriter> {
         setSuppressCloseTagLine(suppressCloseTagLine);
     }
 
-    void setContext(NodeRendererContext context) {
+    void setContext(@NotNull NodeRendererContext context) {
         this.context = context;
     }
 
-    public NodeRendererContext getContext() {
+    public @NotNull NodeRendererContext getContext() {
         return context;
     }
 
-    public HtmlWriter srcPos() {
+    public @NotNull HtmlWriter srcPos() {
         return srcPos(context.getCurrentNode().getChars());
     }
 
-    public HtmlWriter srcPosWithEOL() {
+    public @NotNull HtmlWriter srcPosWithEOL() {
         return srcPosWithEOL(context.getCurrentNode().getChars());
     }
 
-    public HtmlWriter srcPosWithTrailingEOL() {
+    public @NotNull HtmlWriter srcPosWithTrailingEOL() {
         return srcPosWithTrailingEOL(context.getCurrentNode().getChars());
     }
 
-    public HtmlWriter srcPos(BasedSequence sourceText) {
+    public @NotNull HtmlWriter srcPos(@NotNull BasedSequence sourceText) {
         if (sourceText.isNotNull()) {
             BasedSequence trimmed = sourceText.trimEOL();
             return srcPos(trimmed.getStartOffset(), trimmed.getEndOffset());
@@ -61,7 +61,7 @@ public class HtmlWriter extends HtmlFormattingAppendableBase<HtmlWriter> {
     }
 
     @SuppressWarnings("WeakerAccess")
-    public HtmlWriter srcPosWithEOL(BasedSequence sourceText) {
+    public @NotNull HtmlWriter srcPosWithEOL(@NotNull BasedSequence sourceText) {
         if (sourceText.isNotNull()) {
             return srcPos(sourceText.getStartOffset(), sourceText.getEndOffset());
         }
@@ -69,7 +69,7 @@ public class HtmlWriter extends HtmlFormattingAppendableBase<HtmlWriter> {
     }
 
     @SuppressWarnings("WeakerAccess")
-    public HtmlWriter srcPosWithTrailingEOL(BasedSequence sourceText) {
+    public @NotNull HtmlWriter srcPosWithTrailingEOL(@NotNull BasedSequence sourceText) {
         if (sourceText.isNotNull()) {
             int endOffset = sourceText.getEndOffset();
             BasedSequence base = sourceText.getBaseSequence();
@@ -92,34 +92,36 @@ public class HtmlWriter extends HtmlFormattingAppendableBase<HtmlWriter> {
         return this;
     }
 
-    public HtmlWriter srcPos(int startOffset, int endOffset) {
+    public @NotNull HtmlWriter srcPos(int startOffset, int endOffset) {
         if (startOffset <= endOffset && !context.getHtmlOptions().sourcePositionAttribute.isEmpty()) {
             super.attr(context.getHtmlOptions().sourcePositionAttribute, startOffset + "-" + endOffset);
         }
         return this;
     }
 
+    @NotNull
     public HtmlWriter withAttr() {
         return withAttr(AttributablePart.NODE);
     }
 
-    public HtmlWriter withAttr(AttributablePart part) {
+    public @NotNull HtmlWriter withAttr(@NotNull AttributablePart part) {
         super.withAttr();
         useAttributes = part;
         return this;
     }
 
-    public HtmlWriter withAttr(LinkStatus status) {
+    public @NotNull HtmlWriter withAttr(@NotNull LinkStatus status) {
         attr(Attribute.LINK_STATUS_ATTR, status.getName());
         return withAttr(AttributablePart.LINK);
     }
 
-    public HtmlWriter withAttr(ResolvedLink resolvedLink) {
+    public @NotNull HtmlWriter withAttr(@NotNull ResolvedLink resolvedLink) {
         return withAttr(resolvedLink.getStatus());
     }
 
+    @NotNull
     @Override
-    public HtmlWriter tag(CharSequence tagName, boolean voidElement) {
+    public HtmlWriter tag(@NotNull CharSequence tagName, boolean voidElement) {
         if (useAttributes != null) {
             final Attributes attributes = context.extendRenderingNodeAttributes(useAttributes, getAttributes());
             String sourcePositionAttribute = context.getHtmlOptions().sourcePositionAttribute;

@@ -45,7 +45,7 @@ public class WikiNode extends Node implements DoNotDecorate {
     }
 
     @Override
-    public void getAstExtra(StringBuilder out) {
+    public void getAstExtra(@NotNull StringBuilder out) {
         if (linkIsFirst) {
             segmentSpanChars(out, openingMarker, "linkOpen");
             segmentSpanChars(out, text, "text");
