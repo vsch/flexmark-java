@@ -117,7 +117,9 @@ code {
       </LinkMapSettings>
       <EnhPreviewSettings allowBrowsingInPreview="false" openRemoteLinks="true" replaceUnicodeEmoji="false" showGitHubPageIfSynced="false" />
       <EnhHtmlSettings embedUrlContent="false" embedImages="false" embedHttpImages="false" mathConversion="-1" />
-      <FlexmarkHtmlSettings flexmarkSpecExampleRendering="0" flexmarkSpecExampleRenderHtml="false" />
+      <FlexmarkHtmlSettings flexmarkSpecExampleRendering="0" flexmarkSpecExampleRenderHtml="false">
+        <flexmarkSectionLanguages />
+      </FlexmarkHtmlSettings>
     </option>
   </profile>
 </component>
