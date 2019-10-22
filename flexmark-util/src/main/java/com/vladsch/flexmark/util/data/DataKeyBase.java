@@ -3,7 +3,7 @@ package com.vladsch.flexmark.util.data;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public abstract class DataKeyBase<T> {
+public abstract class DataKeyBase<T> implements MutableDataValueSetter<T> {
     private final @NotNull String name;
     private final @NotNull DataValueFactory<T> factory;
     private final T defaultValue;
@@ -71,12 +71,6 @@ public abstract class DataKeyBase<T> {
     @Deprecated
     final public T getFrom(@Nullable DataHolder holder) {
         return get(holder);
-    }
-
-    @NotNull
-    public MutableDataHolder set(@NotNull MutableDataHolder holder, T value) {
-        holder.set(this, value);
-        return holder;
     }
 
     @Override

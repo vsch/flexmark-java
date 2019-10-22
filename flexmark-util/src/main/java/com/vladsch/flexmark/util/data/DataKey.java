@@ -22,8 +22,8 @@ public class DataKey<T> extends DataKeyBase<T> {
      * <p>
      * Use this constructor to ensure that factory is never called with null data holder value
      *
-     * @param name         See {@link #getName()}.
-     * @param supplier     data value factory for creating a new default value for the key not dependent on dataHolder
+     * @param name     See {@link #getName()}.
+     * @param supplier data value factory for creating a new default value for the key not dependent on dataHolder
      */
     public DataKey(@NotNull String name, @NotNull NotNullValueSupplier<T> supplier) {
         super(name, supplier.get(), (holder) -> supplier.get());
@@ -66,9 +66,9 @@ public class DataKey<T> extends DataKeyBase<T> {
         return super.get(holder);
     }
 
-    @NotNull
-    public MutableDataHolder set(@NotNull MutableDataHolder holder, @NotNull T value) {
-        return super.set(holder, value);
+    @Override
+    public @NotNull MutableDataHolder set(@NotNull MutableDataHolder dataHolder, @NotNull T value) {
+        return dataHolder.set(this, value);
     }
 
     @Override

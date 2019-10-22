@@ -3,6 +3,7 @@ package com.vladsch.flexmark.util.builder;
 import com.vladsch.flexmark.util.SharedDataKeys;
 import com.vladsch.flexmark.util.data.*;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
@@ -105,7 +106,13 @@ public abstract class BuilderBase<T extends BuilderBase<T>> extends MutableDataS
      * @return builder
      */
     @Override
-    public <D> MutableDataSet set(DataKeyBase<D> key, D value) {
+    public <V> MutableDataSet set(DataKey<V> key, @NotNull V value) {
+        addExtensionApiPoint(key);
+        return super.set(key, value);
+    }
+
+    @Override
+    public <V> MutableDataSet set(NullableDataKey<V> key, @Nullable V value) {
         addExtensionApiPoint(key);
         return super.set(key, value);
     }

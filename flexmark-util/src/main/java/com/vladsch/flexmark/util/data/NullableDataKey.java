@@ -83,9 +83,9 @@ public class NullableDataKey<T> extends DataKeyBase<T> {
         return super.get(holder);
     }
 
-    @NotNull
-    public MutableDataHolder set(@NotNull MutableDataHolder holder, @Nullable T value) {
-        return super.set(holder, value);
+    @Override
+    public @NotNull MutableDataHolder set(@NotNull MutableDataHolder dataHolder, @Nullable T value) {
+        return dataHolder.set(this, value);
     }
 
     @Override

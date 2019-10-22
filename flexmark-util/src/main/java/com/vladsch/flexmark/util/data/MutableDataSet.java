@@ -13,7 +13,16 @@ public class MutableDataSet extends DataSet implements MutableDataHolder {
     }
 
     @Override
-    public <T> MutableDataSet set(DataKeyBase<T> key, T value) {
+    public <T> MutableDataSet set(DataKey<T> key, @NotNull T value) {
+        return set((DataKeyBase<T>) key, value);
+    }
+
+    @Override
+    public <T> MutableDataSet set(NullableDataKey<T> key, @Nullable T value) {
+        return set((DataKeyBase<T>) key, value);
+    }
+
+    private <T> MutableDataSet set(DataKeyBase<T> key, T value) {
         dataSet.put(key, value);
         return this;
     }
@@ -26,7 +35,6 @@ public class MutableDataSet extends DataSet implements MutableDataHolder {
 
     @Override
     public MutableDataSet setAll(DataHolder other) {
-        DataSet original = new DataSet(this); //keep a copy in case we have aggregateAction keys which other also has
         dataSet.putAll(other.getAll());
         return this;
     }

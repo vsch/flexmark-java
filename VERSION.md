@@ -180,6 +180,11 @@ Next
 * Fix: deprecate `DataKey.getFrom()`
 * Fix: replace all `DataHolder.get()` by `DataKey.get()`
 * Fix: add nullability annotations to `Node` and a few other classes
+* Add: `MutableDataHolder.set(@NotNull DataKey<T>, @NotNull T)` and
+  `MutableDataHolder.set(@NotNull NullableDataKey<T>, @Nullable T)` to respect nullability of
+  key's data value.
+* Add: `DataKey.set(@NotNull MutableDataHolder, @NotNull T)` and `NullableDataKey.set(@NotNull
+  MutableDataHolder, @Nullable T)` to allow setting data values via keys, if needed.
 
 0.59.30
 -------

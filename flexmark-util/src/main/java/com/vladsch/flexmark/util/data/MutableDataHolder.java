@@ -1,6 +1,7 @@
 package com.vladsch.flexmark.util.data;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public interface MutableDataHolder extends DataHolder, MutableDataSetter {
     /**
@@ -27,7 +28,17 @@ public interface MutableDataHolder extends DataHolder, MutableDataSetter {
      * @param value value to store
      * @return mutable data holder for chained calls
      */
-    <T> MutableDataHolder set(DataKeyBase<T> key, T value);
+     <T> MutableDataHolder set(DataKey<T> key, @NotNull T value);
+
+    /**
+     * Store the given value for the key
+     *
+     * @param <T>   data type of the data referred by the key
+     * @param key   data key
+     * @param value value to store
+     * @return mutable data holder for chained calls
+     */
+    <T> MutableDataHolder set(NullableDataKey<T> key, @Nullable T value);
 
     /**
      * Remove the stored value for the key, used to force to default or to force recompute
