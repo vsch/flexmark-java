@@ -18,7 +18,7 @@ public class JekyllTagInlineParserExtension implements InlineParserExtension {
 
     public JekyllTagInlineParserExtension(LightInlineParser lightInlineParser) {
         this.parsing = new JekyllTagParsing(lightInlineParser.getParsing());
-        this.listIncludesOnly = JekyllTagExtension.LIST_INCLUDES_ONLY.getFrom(lightInlineParser.getDocument());
+        this.listIncludesOnly = JekyllTagExtension.LIST_INCLUDES_ONLY.get(lightInlineParser.getDocument());
     }
 
     @Override
@@ -44,7 +44,7 @@ public class JekyllTagInlineParserExtension implements InlineParserExtension {
 
                 //noinspection EqualsBetweenInconvertibleTypes
                 if (!listIncludesOnly || tagName.equals(JekyllTagBlockParser.INCLUDE_TAG)) {
-                    List<JekyllTag> tagList = JekyllTagExtension.TAG_LIST.getFrom(inlineParser.getDocument());
+                    List<JekyllTag> tagList = JekyllTagExtension.TAG_LIST.get(inlineParser.getDocument());
                     tagList.add(macro);
                 }
 

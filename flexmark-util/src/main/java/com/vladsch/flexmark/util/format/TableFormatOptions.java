@@ -59,21 +59,21 @@ public class TableFormatOptions implements MutableDataSetter {
     }
 
     public TableFormatOptions(DataHolder options) {
-        leadTrailPipes = FORMAT_TABLE_LEAD_TRAIL_PIPES.getFrom(options);
-        spaceAroundPipes = FORMAT_TABLE_SPACE_AROUND_PIPES.getFrom(options);
-        adjustColumnWidth = FORMAT_TABLE_ADJUST_COLUMN_WIDTH.getFrom(options);
-        applyColumnAlignment = FORMAT_TABLE_APPLY_COLUMN_ALIGNMENT.getFrom(options);
-        fillMissingColumns = FORMAT_TABLE_FILL_MISSING_COLUMNS.getFrom(options);
-        leftAlignMarker = FORMAT_TABLE_LEFT_ALIGN_MARKER.getFrom(options);
-        minSeparatorColumnWidth = FORMAT_TABLE_MIN_SEPARATOR_COLUMN_WIDTH.getFrom(options);
-        minSeparatorDashes = FORMAT_TABLE_MIN_SEPARATOR_DASHES.getFrom(options);
-        charWidthProvider = FORMAT_CHAR_WIDTH_PROVIDER.getFrom(options);
-        formatTableCaption = FORMAT_TABLE_CAPTION.getFrom(options);
-        formatTableCaptionSpaces = FORMAT_TABLE_CAPTION_SPACES.getFrom(options);
-        formatTableIndentPrefix = FORMAT_TABLE_INDENT_PREFIX.getFrom(options);
-        trimCellWhitespace = FORMAT_TABLE_TRIM_CELL_WHITESPACE.getFrom(options);
-        tableManipulator = FORMAT_TABLE_MANIPULATOR.getFrom(options);
-        dumpIntellijOffsets = FORMAT_TABLE_DUMP_TRACKING_OFFSETS.getFrom(options);
+        leadTrailPipes = FORMAT_TABLE_LEAD_TRAIL_PIPES.get(options);
+        spaceAroundPipes = FORMAT_TABLE_SPACE_AROUND_PIPES.get(options);
+        adjustColumnWidth = FORMAT_TABLE_ADJUST_COLUMN_WIDTH.get(options);
+        applyColumnAlignment = FORMAT_TABLE_APPLY_COLUMN_ALIGNMENT.get(options);
+        fillMissingColumns = FORMAT_TABLE_FILL_MISSING_COLUMNS.get(options);
+        leftAlignMarker = FORMAT_TABLE_LEFT_ALIGN_MARKER.get(options);
+        minSeparatorColumnWidth = FORMAT_TABLE_MIN_SEPARATOR_COLUMN_WIDTH.get(options);
+        minSeparatorDashes = FORMAT_TABLE_MIN_SEPARATOR_DASHES.get(options);
+        charWidthProvider = FORMAT_CHAR_WIDTH_PROVIDER.get(options);
+        formatTableCaption = FORMAT_TABLE_CAPTION.get(options);
+        formatTableCaptionSpaces = FORMAT_TABLE_CAPTION_SPACES.get(options);
+        formatTableIndentPrefix = FORMAT_TABLE_INDENT_PREFIX.get(options);
+        trimCellWhitespace = FORMAT_TABLE_TRIM_CELL_WHITESPACE.get(options);
+        tableManipulator = FORMAT_TABLE_MANIPULATOR.get(options);
+        dumpIntellijOffsets = FORMAT_TABLE_DUMP_TRACKING_OFFSETS.get(options);
 
         spaceWidth = charWidthProvider.spaceWidth();
         spacePad = spaceAroundPipes ? 2 * spaceWidth : 0;

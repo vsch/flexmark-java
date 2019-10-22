@@ -46,7 +46,7 @@ public class MacroExtension implements Parser.ParserExtension, HtmlRenderer.Html
 
     @Override
     public void extend(Parser.Builder parserBuilder) {
-        if (ENABLE_BLOCK_MACROS.getFrom(parserBuilder)) parserBuilder.customBlockParserFactory(new MacroBlockParser.Factory());
-        if (ENABLE_INLINE_MACROS.getFrom(parserBuilder)) parserBuilder.customInlineParserExtensionFactory(new MacroInlineParser.Factory());
+        if (ENABLE_BLOCK_MACROS.get(parserBuilder)) parserBuilder.customBlockParserFactory(new MacroBlockParser.Factory());
+        if (ENABLE_INLINE_MACROS.get(parserBuilder)) parserBuilder.customInlineParserExtensionFactory(new MacroInlineParser.Factory());
     }
 }

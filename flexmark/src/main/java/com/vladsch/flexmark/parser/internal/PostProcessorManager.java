@@ -37,7 +37,7 @@ public class PostProcessorManager {
         // add core block preprocessors
         //list.addAll(CORE_POST_PROCESSORS.keySet().stream().filter(options::get).map(key -> CORE_POST_PROCESSORS.get(key)).collect(Collectors.toList()));
         for (DataKey<Boolean> processorDataKey : CORE_POST_PROCESSORS.keySet()) {
-            if (processorDataKey.getFrom(options)) {
+            if (processorDataKey.get(options)) {
                 PostProcessorFactory preProcessorFactory = CORE_POST_PROCESSORS.get(processorDataKey);
                 list.add(preProcessorFactory);
             }

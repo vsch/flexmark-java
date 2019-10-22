@@ -9,7 +9,7 @@ class MacrosOptions implements MutableDataSetter {
     public final boolean sourceWrapMacroReferences;
 
     public MacrosOptions(DataHolder options) {
-        sourceWrapMacroReferences = MacrosExtension.SOURCE_WRAP_MACRO_REFERENCES.getFrom(options);
+        sourceWrapMacroReferences = MacrosExtension.SOURCE_WRAP_MACRO_REFERENCES.get(options);
     }
 
     @Override

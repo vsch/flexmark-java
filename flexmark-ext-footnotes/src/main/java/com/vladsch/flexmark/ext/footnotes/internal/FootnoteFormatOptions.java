@@ -11,7 +11,7 @@ public class FootnoteFormatOptions {
     public final ElementPlacementSort footnoteSort;
 
     public FootnoteFormatOptions(DataHolder options) {
-        footnotePlacement = FootnoteExtension.FOOTNOTE_PLACEMENT.getFrom(options);
-        footnoteSort = FootnoteExtension.FOOTNOTE_SORT.getFrom(options);
+        footnotePlacement = FootnoteExtension.FOOTNOTE_PLACEMENT.get(options);
+        footnoteSort = FootnoteExtension.FOOTNOTE_SORT.get(options);
     }
 }

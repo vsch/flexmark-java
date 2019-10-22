@@ -22,7 +22,7 @@ public class TocBlockParser extends AbstractBlockParser {
 
         public TocParsing(DataHolder options) {
             super(options);
-            if (CASE_SENSITIVE_TOC_TAG.getFrom(options)) {
+            if (CASE_SENSITIVE_TOC_TAG.get(options)) {
                 this.TOC_BLOCK_START = Pattern.compile("^\\[TOC(?:\\s+([^\\]]+))?]\\s*$");
                 ;
             } else {

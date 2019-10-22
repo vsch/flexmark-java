@@ -25,7 +25,7 @@ public class MacrosNodeFormatter extends NodeRepositoryFormatter<MacroDefinition
 
     @Override
     public MacroDefinitionRepository getRepository(DataHolder options) {
-        return MacrosExtension.MACRO_DEFINITIONS.getFrom(options);
+        return MacrosExtension.MACRO_DEFINITIONS.get(options);
     }
 
     @Override

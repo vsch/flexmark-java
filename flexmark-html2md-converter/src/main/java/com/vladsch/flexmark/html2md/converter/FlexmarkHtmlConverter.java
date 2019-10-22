@@ -309,7 +309,7 @@ public class FlexmarkHtmlConverter {
     public void convert(String html, Appendable output) {
         Document document = Jsoup.parse(html);
 
-        if (DUMP_HTML_TREE.getFrom(getOptions())) {
+        if (DUMP_HTML_TREE.get(getOptions())) {
             LineFormattingAppendableImpl trace = new LineFormattingAppendableImpl(0);
             trace.setIndentPrefix("  ");
             dumpHtmlTree(trace, document.body());
@@ -341,7 +341,7 @@ public class FlexmarkHtmlConverter {
     public String convert(String html, int maxBlankLines) {
         Document document = Jsoup.parse(html);
 
-        if (DUMP_HTML_TREE.getFrom(getOptions())) {
+        if (DUMP_HTML_TREE.get(getOptions())) {
             LineFormattingAppendableImpl trace = new LineFormattingAppendableImpl(0);
             trace.setIndentPrefix("  ");
             dumpHtmlTree(trace, document.body());
@@ -614,7 +614,7 @@ public class FlexmarkHtmlConverter {
             myExternalReferences = new HashSet<>();
             myState = null;
 
-            Map<String, String> typographicReplacementMap = TYPOGRAPHIC_REPLACEMENT_MAP.getFrom(myOptions);
+            Map<String, String> typographicReplacementMap = TYPOGRAPHIC_REPLACEMENT_MAP.get(myOptions);
             if (!typographicReplacementMap.isEmpty()) {
                 mySpecialCharsMap = typographicReplacementMap;
             } else {
@@ -650,7 +650,7 @@ public class FlexmarkHtmlConverter {
             }
 
             this.document = document;
-            this.myForDocument = FlexmarkHtmlConverter.FOR_DOCUMENT.getFrom(options).value;
+            this.myForDocument = FlexmarkHtmlConverter.FOR_DOCUMENT.get(options).value;
         }
 
         @Override

@@ -55,7 +55,7 @@ public class EnumeratedReferenceExtension implements Parser.ParserExtension
     @Override
     public boolean transferReferences(MutableDataHolder document, DataHolder included) {
         if (document.contains(ENUMERATED_REFERENCES) && included.contains(ENUMERATED_REFERENCES)) {
-            return Parser.transferReferences(ENUMERATED_REFERENCES.getFrom(document), ENUMERATED_REFERENCES.getFrom(included), ENUMERATED_REFERENCES_KEEP.getFrom(document) == KeepType.FIRST);
+            return Parser.transferReferences(ENUMERATED_REFERENCES.get(document), ENUMERATED_REFERENCES.get(included), ENUMERATED_REFERENCES_KEEP.get(document) == KeepType.FIRST);
         }
         return false;
     }

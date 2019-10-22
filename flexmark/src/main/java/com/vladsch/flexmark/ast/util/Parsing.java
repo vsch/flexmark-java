@@ -95,10 +95,10 @@ public class Parsing {
 
     public Parsing(DataHolder options) {
         this.options = options;
-        this.intellijDummyIdentifier = Parser.INTELLIJ_DUMMY_IDENTIFIER.getFrom(options);
-        this.htmlForTranslator = Parser.HTML_FOR_TRANSLATOR.getFrom(options);
-        this.translationHtmlInlineTagPattern = Parser.TRANSLATION_HTML_INLINE_TAG_PATTERN.getFrom(options);
-        this.translationAutolinkTagPattern = Parser.TRANSLATION_AUTOLINK_TAG_PATTERN.getFrom(options);
+        this.intellijDummyIdentifier = Parser.INTELLIJ_DUMMY_IDENTIFIER.get(options);
+        this.htmlForTranslator = Parser.HTML_FOR_TRANSLATOR.get(options);
+        this.translationHtmlInlineTagPattern = Parser.TRANSLATION_HTML_INLINE_TAG_PATTERN.get(options);
+        this.translationAutolinkTagPattern = Parser.TRANSLATION_AUTOLINK_TAG_PATTERN.get(options);
 
         this.EOL = "(?:\r\n|\r|\n)";
         this.ADDITIONAL_CHARS = ADDITIONAL_CHARS();
@@ -108,7 +108,7 @@ public class Parsing {
         this.LINK_LABEL = Pattern
                 .compile("^\\[(?:[^\\\\\\[\\]]|" + ESCAPED_CHAR + "|\\\\){0,999}\\]");
 
-        this.LINK_DESTINATION_ANGLES = Parser.SPACE_IN_LINK_URLS.getFrom(options)
+        this.LINK_DESTINATION_ANGLES = Parser.SPACE_IN_LINK_URLS.get(options)
                 ? Pattern.compile("^(?:[<](?:[^<> \\t\\n\\\\\\x00]" + '|' + ESCAPED_CHAR + '|' + "\\\\| (?![\"']))*[>])")
                 : Pattern.compile("^(?:[<](?:[^<> \\t\\n\\\\\\x00]" + '|' + ESCAPED_CHAR + '|' + "\\\\)*[>])");
 
@@ -138,15 +138,15 @@ public class Parsing {
         this.IN_MATCHED_PARENS_W_SP = "\\((" + REG_CHAR_SP + '|' + ESCAPED_CHAR + ")*\\)";
         this.IN_BRACES_W_SP = "\\{\\{(?:[^{}\\\\" + EXCLUDED_0_TO_SPACE + "]| |\t)*\\}\\}";
         this.LINK_DESTINATION = Pattern.compile(
-                "^(?:" + (Parser.PARSE_JEKYLL_MACROS_IN_URLS.getFrom(options) ? IN_BRACES_W_SP + "|" : "") +
-                        (Parser.SPACE_IN_LINK_URLS.getFrom(options) ? "(?:" + REG_CHAR_SP + ")|" : REG_CHAR + "|") +
-                        ESCAPED_CHAR + "|\\\\|" + (Parser.SPACE_IN_LINK_URLS.getFrom(options) ? IN_PARENS_W_SP : IN_PARENS_NOSP) + ")*");
+                "^(?:" + (Parser.PARSE_JEKYLL_MACROS_IN_URLS.get(options) ? IN_BRACES_W_SP + "|" : "") +
+                        (Parser.SPACE_IN_LINK_URLS.get(options) ? "(?:" + REG_CHAR_SP + ")|" : REG_CHAR + "|") +
+                        ESCAPED_CHAR + "|\\\\|" + (Parser.SPACE_IN_LINK_URLS.get(options) ? IN_PARENS_W_SP : IN_PARENS_NOSP) + ")*");
         this.LINK_DESTINATION_MATCHED_PARENS = Pattern.compile(
-                "^(?:" + (Parser.PARSE_JEKYLL_MACROS_IN_URLS.getFrom(options) ? IN_BRACES_W_SP + "|" : "")
-                        + (Parser.SPACE_IN_LINK_URLS.getFrom(options) ? "(?:" + REG_CHAR_SP + ")|" : REG_CHAR + "|") +
+                "^(?:" + (Parser.PARSE_JEKYLL_MACROS_IN_URLS.get(options) ? IN_BRACES_W_SP + "|" : "")
+                        + (Parser.SPACE_IN_LINK_URLS.get(options) ? "(?:" + REG_CHAR_SP + ")|" : REG_CHAR + "|") +
                         ESCAPED_CHAR + "|\\\\|\\(|\\))*");
         this.LINK_DESTINATION_MATCHED_PARENS_NOSP = Pattern.compile(
-                "^(?:" + (Parser.PARSE_JEKYLL_MACROS_IN_URLS.getFrom(options) ? IN_BRACES_W_SP + "|" : "")
+                "^(?:" + (Parser.PARSE_JEKYLL_MACROS_IN_URLS.get(options) ? IN_BRACES_W_SP + "|" : "")
                         + (false ? "(?:" + REG_CHAR_SP + ")|" : REG_CHAR + "|") +
                         ESCAPED_CHAR + "|\\\\|\\(|\\))*");
         this.HTMLCOMMENT = "<!---->|<!--(?:-?[^>-])(?:-?[^-])*-->";
@@ -220,15 +220,15 @@ public class Parsing {
                 (htmlForTranslator ? "|<(?:" + translationHtmlInlineTagPattern + ")>|</(?:" + translationHtmlInlineTagPattern + ")>" : "") + ")";
         this.HTML_TAG = Pattern.compile('^' + HTMLTAG, Pattern.CASE_INSENSITIVE);
 
-        final String itemPrefixChars = LISTS_ITEM_PREFIX_CHARS.getFrom(options);
-        if (LISTS_ITEM_MARKER_SPACE.getFrom(options)) {
-            if (LISTS_ORDERED_ITEM_DOT_ONLY.getFrom(options)) {
+        final String itemPrefixChars = LISTS_ITEM_PREFIX_CHARS.get(options);
+        if (LISTS_ITEM_MARKER_SPACE.get(options)) {
+            if (LISTS_ORDERED_ITEM_DOT_ONLY.get(options)) {
                 this.LIST_ITEM_MARKER = Pattern.compile("^([\\Q" + itemPrefixChars + "\\E])(?=[ \t])|^(\\d{1,9})([.])(?=[ \t])");
             } else {
                 this.LIST_ITEM_MARKER = Pattern.compile("^([\\Q" + itemPrefixChars + "\\E])(?=[ \t])|^(\\d{1,9})([.)])(?=[ \t])");
             }
         } else {
-            if (LISTS_ORDERED_ITEM_DOT_ONLY.getFrom(options)) {
+            if (LISTS_ORDERED_ITEM_DOT_ONLY.get(options)) {
                 this.LIST_ITEM_MARKER = Pattern.compile("^([\\Q" + itemPrefixChars + "\\E])(?= |\t|$)|^(\\d{1,9})([.])(?= |\t|$)");
             } else {
                 this.LIST_ITEM_MARKER = Pattern.compile("^([\\Q" + itemPrefixChars + "\\E])(?= |\t|$)|^(\\d{1,9})([.)])(?= |\t|$)");
@@ -236,7 +236,7 @@ public class Parsing {
         }
 
         // make sure this is consistent with lists settings
-        this.CODE_BLOCK_INDENT = Parser.CODE_BLOCK_INDENT.getFrom(options);
+        this.CODE_BLOCK_INDENT = Parser.CODE_BLOCK_INDENT.get(options);
 
         // list of characters not allowed in link URL
         this.INVALID_LINK_CHARS = " \t";

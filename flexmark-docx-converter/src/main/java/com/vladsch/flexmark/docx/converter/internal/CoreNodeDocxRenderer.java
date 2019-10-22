@@ -123,13 +123,13 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
 
     public CoreNodeDocxRenderer(DataHolder options) {
         referenceRepository = getRepository(options);
-        recheckUndefinedReferences = DocxRenderer.RECHECK_UNDEFINED_REFERENCES.getFrom(options);
-        linebreakOnInlineHtmlBr = DocxRenderer.LINEBREAK_ON_INLINE_HTML_BR.getFrom(options);
-        tableCaptionToParagraph = DocxRenderer.TABLE_CAPTION_TO_PARAGRAPH.getFrom(options);
-        tableCaptionBeforeTable = DocxRenderer.TABLE_CAPTION_BEFORE_TABLE.getFrom(options);
-        tablePreferredWidthPct = DocxRenderer.TABLE_PREFERRED_WIDTH_PCT.getFrom(options);
-        tableLeftIndent = DocxRenderer.TABLE_LEFT_INDENT.getFrom(options);
-        tableStyle = DocxRenderer.TABLE_STYLE.getFrom(options);
+        recheckUndefinedReferences = DocxRenderer.RECHECK_UNDEFINED_REFERENCES.get(options);
+        linebreakOnInlineHtmlBr = DocxRenderer.LINEBREAK_ON_INLINE_HTML_BR.get(options);
+        tableCaptionToParagraph = DocxRenderer.TABLE_CAPTION_TO_PARAGRAPH.get(options);
+        tableCaptionBeforeTable = DocxRenderer.TABLE_CAPTION_BEFORE_TABLE.get(options);
+        tablePreferredWidthPct = DocxRenderer.TABLE_PREFERRED_WIDTH_PCT.get(options);
+        tableLeftIndent = DocxRenderer.TABLE_LEFT_INDENT.get(options);
+        tableStyle = DocxRenderer.TABLE_STYLE.get(options);
         repositoryNodesDone = false;
 
         this.options = new DocxRendererOptions(options);
@@ -139,7 +139,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
         ordinalRunnable = null;
 
         MutableScopedDataSet options1 = new MutableScopedDataSet(options);
-        options1.set(EmojiExtension.ROOT_IMAGE_PATH, DocxRenderer.DOC_EMOJI_ROOT_IMAGE_PATH.getFrom(options));
+        options1.set(EmojiExtension.ROOT_IMAGE_PATH, DocxRenderer.DOC_EMOJI_ROOT_IMAGE_PATH.get(options));
         emojiOptions = new EmojiOptions(options1);
         headerIdGenerator = new HeaderIdGenerator.Factory().create();
 
@@ -163,7 +163,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
                 break;
 
             case DOCUMENT_TOP:
-                enumeratedOrdinals = EnumeratedReferenceExtension.ENUMERATED_REFERENCE_ORDINALS.getFrom(document);
+                enumeratedOrdinals = EnumeratedReferenceExtension.ENUMERATED_REFERENCE_ORDINALS.get(document);
                 break;
 
             case DOCUMENT_BOTTOM:

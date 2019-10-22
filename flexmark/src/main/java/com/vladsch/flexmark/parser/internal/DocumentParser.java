@@ -376,7 +376,7 @@ public class DocumentParser implements ParserState {
         if (inlineParserFactory == INLINE_PARSER_FACTORY) {
             //list.addAll(CORE_PARAGRAPH_PRE_PROCESSORS.keySet().stream().filter(options::get).map(key -> CORE_PARAGRAPH_PRE_PROCESSORS.get(key)).collect(Collectors.toList()));
             for (DataKey<Boolean> preProcessorDataKey : CORE_PARAGRAPH_PRE_PROCESSORS.keySet()) {
-                if (preProcessorDataKey.getFrom(options)) {
+                if (preProcessorDataKey.get(options)) {
                     ParagraphPreProcessorFactory preProcessorFactory = CORE_PARAGRAPH_PRE_PROCESSORS.get(preProcessorDataKey);
                     list.add(preProcessorFactory);
                 }
@@ -398,7 +398,7 @@ public class DocumentParser implements ParserState {
         // add core block preprocessors
         //list.addAll(CORE_BLOCK_PRE_PROCESSORS.keySet().stream().filter(options::get).map(key -> CORE_BLOCK_PRE_PROCESSORS.get(key)).collect(Collectors.toList()));
         for (DataKey<Boolean> preProcessorDataKey : CORE_BLOCK_PRE_PROCESSORS.keySet()) {
-            if (preProcessorDataKey.getFrom(options)) {
+            if (preProcessorDataKey.get(options)) {
                 BlockPreProcessorFactory preProcessorFactory = CORE_BLOCK_PRE_PROCESSORS.get(preProcessorDataKey);
                 list.add(preProcessorFactory);
             }

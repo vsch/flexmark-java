@@ -125,7 +125,7 @@ public abstract class NodeRepositoryFormatter<R extends NodeRepository<B>, B ext
         referenceList = referenceRepository.values();
         lastReference = referenceList.isEmpty() ? null : referenceList.get(referenceList.size() - 1);
         unusedReferences = new HashSet<>();
-        this.recheckUndefinedReferences = HtmlRenderer.RECHECK_UNDEFINED_REFERENCES.getFrom(options);
+        this.recheckUndefinedReferences = HtmlRenderer.RECHECK_UNDEFINED_REFERENCES.get(options);
         repositoryNodesDone = false;
 
         myComparator = Comparable::compareTo;

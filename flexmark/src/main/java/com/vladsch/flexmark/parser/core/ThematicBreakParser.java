@@ -103,7 +103,7 @@ public class ThematicBreakParser extends AbstractBlockParser {
         final boolean relaxedStart;
 
         public ThematicBreakOptions(DataHolder options) {
-            this.relaxedStart = Parser.THEMATIC_BREAK_RELAXED_START.getFrom(options);
+            this.relaxedStart = Parser.THEMATIC_BREAK_RELAXED_START.get(options);
         }
     }
 }

@@ -31,7 +31,7 @@ public class EnumeratedReferenceRepository extends NodeRepository<EnumeratedRefe
 
     public EnumeratedReferenceRepository(DataHolder options) {
         //super(options == null ? KeepType.LAST : EnumeratedReferenceExtension.ENUMERATED_REFERENCES_KEEP.getFrom(options));
-        super(EnumeratedReferenceExtension.ENUMERATED_REFERENCES_KEEP.getFrom(options));
+        super(EnumeratedReferenceExtension.ENUMERATED_REFERENCES_KEEP.get(options));
     }
 
     @Override

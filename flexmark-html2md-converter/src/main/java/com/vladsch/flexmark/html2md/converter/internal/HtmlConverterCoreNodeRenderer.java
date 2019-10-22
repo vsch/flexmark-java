@@ -132,7 +132,7 @@ public class HtmlConverterCoreNodeRenderer implements PhasedHtmlNodeRenderer {
                 com.vladsch.flexmark.util.ast.Document myForDocument = context.getForDocument();
 
                 if (myForDocument != null) {
-                    ReferenceRepository referenceRepository = Parser.REFERENCES.getFrom(myForDocument);
+                    ReferenceRepository referenceRepository = Parser.REFERENCES.get(myForDocument);
                     if (referenceRepository != null) {
                         HashMap<String, Reference> referenceUrlToReferenceMap = context.getReferenceUrlToReferenceMap();
                         HashSet<Reference> externalReferences = context.getExternalReferences();

@@ -136,7 +136,7 @@ public class TocOptionsParserTest extends ComboSpecTestCase {
 
         public Parser(DataHolder options) {
             super(options);
-            myParser = SIM_TOC.getFrom(options) ? new SimTocOptionsParser() : new TocOptionsParser();
+            myParser = SIM_TOC.get(options) ? new SimTocOptionsParser() : new TocOptionsParser();
         }
 
         @Override
@@ -145,7 +145,7 @@ public class TocOptionsParserTest extends ComboSpecTestCase {
             BasedSequence[] lines = input.split('\n');
             ParserNode example = new ParserNode("Example", input, null, null);
             for (BasedSequence line : lines) {
-                Pair<TocOptions, List<ParsedOption<TocOptions>>> pair = myParser.parseOption(line, TOC_OPTIONS.getFrom(getOptions()), null);
+                Pair<TocOptions, List<ParsedOption<TocOptions>>> pair = myParser.parseOption(line, TOC_OPTIONS.get(getOptions()), null);
                 ParserNode root = new ParserNode("Style", line, null, null);
                 root.setTocOptions(pair.getFirst());
                 example.appendChild(root);
@@ -200,7 +200,7 @@ public class TocOptionsParserTest extends ComboSpecTestCase {
                     html.raw(nodeTocOptions.toString()).line();
                     html.indent();
 
-                    if (SIM_TOC.getFrom(getOptions())) {
+                    if (SIM_TOC.get(getOptions())) {
                         html.raw("diff: ").raw(TocUtils.getSimTocPrefix(nodeTocOptions, defaultOptions)).line();
                         html.raw("full: ").raw(TocUtils.getSimTocPrefix(nodeTocOptions, null)).line();
                     } else {
@@ -223,7 +223,7 @@ public class TocOptionsParserTest extends ComboSpecTestCase {
         @Override
         public void render(@NotNull Node document, @NotNull Appendable output) {
             assert document instanceof ParserNode;
-            TocOptions tocOptions = TOC_OPTIONS.getFrom(getOptions());
+            TocOptions tocOptions = TOC_OPTIONS.get(getOptions());
             HtmlWriter html = new HtmlWriter(2, 0);
             RenderingVisitor visitor = new RenderingVisitor(html, tocOptions);
             visitor.render(document);

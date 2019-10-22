@@ -43,7 +43,7 @@ final public class ComboIssuesSpecTest extends CoreRendererSpecTest {
                         "")
         );
 
-        final List<String> customHtmlBlockTags = new ArrayList<>(Parser.HTML_BLOCK_TAGS.getFrom(null));
+        final List<String> customHtmlBlockTags = new ArrayList<>(Parser.HTML_BLOCK_TAGS.get(null));
         customHtmlBlockTags.add("warp10-warpscript-widget");
         optionsMap.put("custom-html-block", new MutableDataSet()
                 .set(Parser.HTML_BLOCK_TAGS, customHtmlBlockTags)

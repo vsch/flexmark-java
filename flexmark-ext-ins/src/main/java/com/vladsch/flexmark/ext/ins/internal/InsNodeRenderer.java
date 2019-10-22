@@ -17,8 +17,8 @@ public class InsNodeRenderer implements NodeRenderer {
     private final String insStyleHtmlClose;
 
     public InsNodeRenderer(DataHolder options) {
-        insStyleHtmlOpen = InsExtension.INS_STYLE_HTML_OPEN.getFrom(options);
-        insStyleHtmlClose = InsExtension.INS_STYLE_HTML_CLOSE.getFrom(options);
+        insStyleHtmlOpen = InsExtension.INS_STYLE_HTML_OPEN.get(options);
+        insStyleHtmlClose = InsExtension.INS_STYLE_HTML_CLOSE.get(options);
     }
 
     @Override

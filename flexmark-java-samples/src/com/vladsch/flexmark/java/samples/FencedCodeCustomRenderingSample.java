@@ -30,7 +30,7 @@ public class FencedCodeCustomRenderingSample {
         private final boolean codeContentBlock;
 
         public CustomNodeRenderer(DataHolder options) {
-            codeContentBlock = Parser.FENCED_CODE_CONTENT_BLOCK.getFrom(options);
+            codeContentBlock = Parser.FENCED_CODE_CONTENT_BLOCK.get(options);
         }
 
         public static class Factory implements DelegatingNodeRendererFactory {

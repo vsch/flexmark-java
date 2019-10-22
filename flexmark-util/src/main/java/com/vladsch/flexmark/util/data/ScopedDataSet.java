@@ -1,5 +1,7 @@
 package com.vladsch.flexmark.util.data;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -22,6 +24,7 @@ public class ScopedDataSet extends DataSet {
         return parent;
     }
 
+    @NotNull
     @Override
     public Map<DataKey<?>, Object> getAll() {
         if (parent != null) {
@@ -40,6 +43,7 @@ public class ScopedDataSet extends DataSet {
         }
     }
 
+    @NotNull
     @Override
     public Collection<DataKey<?>> getKeys() {
         if (parent != null) {
@@ -59,12 +63,12 @@ public class ScopedDataSet extends DataSet {
     }
 
     @Override
-    public boolean contains(DataKey<?> key) {
+    public boolean contains(@NotNull DataKey<?> key) {
         return super.contains(key) || (parent != null && parent.contains(key));
     }
 
     @Override
-    public <T> T get(DataKey<T> key) {
+    public <T> T get(@NotNull DataKey<T> key) {
         if (parent == null || super.contains(key) || !parent.contains(key)) {
             return super.get(key);
         } else {

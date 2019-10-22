@@ -55,7 +55,6 @@
       <option name="TOC_GENERATE_TEXT_ONLY" value="true" />
       <option name="TOC_TITLE_LEVEL" value="3" />
       <option name="RIGHT_MARGIN" value="96" />
-      <option name="TRAILING_SPACES_ID_1" value="flexmark-java-spec-example" />
       <option name="WRAP_ON_TYPING" value="1" />
     </MarkdownNavigatorCodeStyleSettings>
     <MarkdownNavigatorEnhCodeStyleSettings>

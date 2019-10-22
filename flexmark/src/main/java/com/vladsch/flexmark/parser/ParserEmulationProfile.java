@@ -83,7 +83,7 @@ public enum ParserEmulationProfile implements MutableDataSetter {
                         ;
             }
             if (this == PEGDOWN || this == PEGDOWN_STRICT) {
-                int pegdownExtensions = PEGDOWN_EXTENSIONS.getFrom(dataHolder);
+                int pegdownExtensions = PEGDOWN_EXTENSIONS.get(dataHolder);
 
                 return new MutableListOptions().setParserEmulationFamily(this)
                         .setAutoLoose(false)
@@ -397,7 +397,7 @@ public enum ParserEmulationProfile implements MutableDataSetter {
                     .set(Parser.LINKS_ALLOW_MATCHED_PARENTHESES, false)
             ;
         } else if (this == PEGDOWN || this == PEGDOWN_STRICT) {
-            int pegdownExtensions = PEGDOWN_EXTENSIONS.getFrom(dataHolder);
+            int pegdownExtensions = PEGDOWN_EXTENSIONS.get(dataHolder);
 
             getOptions(dataHolder).setIn(dataHolder);
             dataHolder

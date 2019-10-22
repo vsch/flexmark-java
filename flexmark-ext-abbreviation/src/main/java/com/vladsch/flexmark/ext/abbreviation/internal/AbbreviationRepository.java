@@ -16,7 +16,7 @@ import java.util.Set;
 public class AbbreviationRepository extends NodeRepository<AbbreviationBlock> {
 
     public AbbreviationRepository(DataHolder options) {
-        super(AbbreviationExtension.ABBREVIATIONS_KEEP.getFrom(options));
+        super(AbbreviationExtension.ABBREVIATIONS_KEEP.get(options));
     }
 
     @Override

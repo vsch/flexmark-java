@@ -34,7 +34,7 @@ public class InlineCodeCustomRenderingSample {
         private final boolean codeSoftLineBreaks;
 
         public CustomNodeRenderer(DataHolder options) {
-            codeSoftLineBreaks = Parser.CODE_SOFT_LINE_BREAKS.getFrom(options);
+            codeSoftLineBreaks = Parser.CODE_SOFT_LINE_BREAKS.get(options);
         }
 
         public static class Factory implements DelegatingNodeRendererFactory {

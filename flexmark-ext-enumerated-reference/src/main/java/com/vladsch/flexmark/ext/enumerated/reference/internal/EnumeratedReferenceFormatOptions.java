@@ -11,7 +11,7 @@ public class EnumeratedReferenceFormatOptions {
     public final ElementPlacementSort enumeratedReferenceSort;
 
     public EnumeratedReferenceFormatOptions(DataHolder options) {
-        enumeratedReferencePlacement = EnumeratedReferenceExtension.ENUMERATED_REFERENCE_PLACEMENT.getFrom(options);
-        enumeratedReferenceSort = EnumeratedReferenceExtension.ENUMERATED_REFERENCE_SORT.getFrom(options);
+        enumeratedReferencePlacement = EnumeratedReferenceExtension.ENUMERATED_REFERENCE_PLACEMENT.get(options);
+        enumeratedReferenceSort = EnumeratedReferenceExtension.ENUMERATED_REFERENCE_SORT.get(options);
     }
 }

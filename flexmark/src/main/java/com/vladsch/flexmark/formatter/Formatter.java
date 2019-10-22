@@ -507,7 +507,7 @@ public class Formatter implements IRender {
             this.renderingPhases = new HashSet<>(FormattingPhase.values().length);
             Set<Class> collectNodeTypes = new HashSet<>(100);
 
-            Boolean defaultLinkResolver = DEFAULT_LINK_RESOLVER.getFrom(options);
+            Boolean defaultLinkResolver = DEFAULT_LINK_RESOLVER.get(options);
             this.myLinkResolvers = new LinkResolver[linkResolverFactories.size() + (defaultLinkResolver ? 1 : 0)];
 
             for (int i = 0; i < linkResolverFactories.size(); i++) {

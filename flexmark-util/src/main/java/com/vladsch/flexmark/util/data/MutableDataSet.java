@@ -1,5 +1,7 @@
 package com.vladsch.flexmark.util.data;
 
+import org.jetbrains.annotations.NotNull;
+
 public class MutableDataSet extends DataSet implements MutableDataHolder {
     public MutableDataSet() {
         super();
@@ -45,7 +47,7 @@ public class MutableDataSet extends DataSet implements MutableDataHolder {
     }
 
     @Override
-    public <T> T get(DataKey<T> key) {
+    public <T> T get(@NotNull DataKey<T> key) {
         return getOrCompute(key);
     }
 
@@ -67,11 +69,13 @@ public class MutableDataSet extends DataSet implements MutableDataHolder {
         }
     }
 
+    @NotNull
     @Override
     public MutableDataSet toMutable() {
         return this;
     }
 
+    @NotNull
     @Override
     public DataSet toImmutable() {
         return new DataSet(this);

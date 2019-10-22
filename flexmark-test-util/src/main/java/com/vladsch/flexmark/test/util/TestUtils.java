@@ -74,7 +74,7 @@ public class TestUtils {
 
         // if custom option is set then delegate to it
         if (dataHolder != null && dataHolder.contains(CUSTOM_OPTION)) {
-            BiFunction<String, String, DataHolder> customHandler = CUSTOM_OPTION.getFrom(dataHolder);
+            BiFunction<String, String, DataHolder> customHandler = CUSTOM_OPTION.get(dataHolder);
             dataHolder = customHandler.apply(customOption, params);
         }
 
@@ -146,7 +146,7 @@ public class TestUtils {
                         }
                     }
 
-                    if (options != null && options.contains(IGNORE) && IGNORE.getFrom(options)) {
+                    if (options != null && options.contains(IGNORE) && IGNORE.get(options)) {
                         throwIgnoredOption(example, optionSets, option);
                     }
                     break;

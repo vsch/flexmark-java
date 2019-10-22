@@ -120,7 +120,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
 
     @Override
     public ReferenceRepository getRepository(DataHolder options) {
-        return Parser.REFERENCES.getFrom(options);
+        return Parser.REFERENCES.get(options);
     }
 
     @Override
@@ -217,7 +217,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
 
                 for (DataKey<?> key : keys) {
                     if (document.get(key) instanceof NodeRepository) {
-                        NodeRepository<?> repository = (NodeRepository<?>) key.getFrom(document);
+                        NodeRepository<?> repository = (NodeRepository<?>) key.get((DataHolder) document);
                         Set<?> nodes = repository.getReferencedElements(document);
 
                         for (Object value : nodes) {

@@ -19,8 +19,8 @@ public class JekyllTagNodeRenderer implements NodeRenderer {
     private final Map<String, String> includeContent;
 
     public JekyllTagNodeRenderer(DataHolder options) {
-        enabledRendering = JekyllTagExtension.ENABLE_RENDERING.getFrom(options);
-        includeContent = JekyllTagExtension.INCLUDED_HTML.getFrom(options);
+        enabledRendering = JekyllTagExtension.ENABLE_RENDERING.get(options);
+        includeContent = JekyllTagExtension.INCLUDED_HTML.get(options);
     }
 
     @Override

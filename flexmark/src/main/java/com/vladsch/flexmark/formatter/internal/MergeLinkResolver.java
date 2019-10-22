@@ -24,12 +24,12 @@ public class MergeLinkResolver implements LinkResolver {
         // can use context for custom settings
         // context.getDocument();
         // context.getHtmlOptions();
-        String docRelativeURL = Formatter.DOC_RELATIVE_URL.getFrom(context.getOptions());
+        String docRelativeURL = Formatter.DOC_RELATIVE_URL.get(context.getOptions());
         if (docRelativeURL != null) {
             docRelativeURL = Utils.removePrefix(docRelativeURL, '/');
         }
 
-        String docRootURL = Formatter.DOC_ROOT_URL.getFrom(context.getOptions());
+        String docRootURL = Formatter.DOC_ROOT_URL.get(context.getOptions());
         if (docRootURL != null) {
             docRootURL = Utils.removePrefix(docRootURL, '/');
         }

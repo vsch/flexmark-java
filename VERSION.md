@@ -9,6 +9,7 @@ flexmark-java
 - [Next 0.60.0](#next-0600)
     - [API Changes](#api-changes)
 - [Next](#next)
+- [0.59.32](#05932)
 - [0.59.30](#05930)
 - [0.59.28](#05928)
 - [0.59.27](#05927)
@@ -156,6 +157,16 @@ Next
 * [ ] Fix: Change spec example to variable number of sections
 * [ ] Add: yaml front matter configurator for modules. See:
       [Yaml Front Matter Configuration](../../wiki/Yaml-Front-Matter-Configuration)
+
+0.59.32
+-------
+
+* Fix: add nullable annotations to `DataSet` and `DataKey` classes
+* Fix: add 3 argument constructor for `DataKey` which ensures `factory.apply` data holder is
+  never null.
+* Fix: add `DataKey.get(DataHolder)` to replace `DataKey.getFrom(DataHolder)`, shorter and
+  compatible with Kotlin array access syntax.
+* Fix: deprecate `DataKey.getFrom()`
 
 0.59.30
 -------

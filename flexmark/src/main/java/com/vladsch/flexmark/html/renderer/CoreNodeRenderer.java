@@ -54,12 +54,12 @@ public class CoreNodeRenderer implements NodeRenderer {
 
     public CoreNodeRenderer(DataHolder options) {
         referenceRepository = options.get(Parser.REFERENCES);
-        recheckUndefinedReferences = HtmlRenderer.RECHECK_UNDEFINED_REFERENCES.getFrom(options);
+        recheckUndefinedReferences = HtmlRenderer.RECHECK_UNDEFINED_REFERENCES.get(options);
         listOptions = ListOptions.getFrom(options);
-        obfuscateEmail = HtmlRenderer.OBFUSCATE_EMAIL.getFrom(options);
-        obfuscateEmailRandom = HtmlRenderer.OBFUSCATE_EMAIL_RANDOM.getFrom(options);
-        codeContentBlock = Parser.FENCED_CODE_CONTENT_BLOCK.getFrom(options);
-        codeSoftLineBreaks = Parser.CODE_SOFT_LINE_BREAKS.getFrom(options);
+        obfuscateEmail = HtmlRenderer.OBFUSCATE_EMAIL.get(options);
+        obfuscateEmailRandom = HtmlRenderer.OBFUSCATE_EMAIL_RANDOM.get(options);
+        codeContentBlock = Parser.FENCED_CODE_CONTENT_BLOCK.get(options);
+        codeSoftLineBreaks = Parser.CODE_SOFT_LINE_BREAKS.get(options);
         myLines = null;
         myEOLs = null;
         myNextLine = 0;

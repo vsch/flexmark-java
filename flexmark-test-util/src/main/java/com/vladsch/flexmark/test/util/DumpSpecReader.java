@@ -76,7 +76,7 @@ public class DumpSpecReader extends SpecReader {
         }
         long render = System.nanoTime();
 
-        boolean embedTimed = TestUtils.EMBED_TIMED.getFrom(exampleRenderer.getOptions());
+        boolean embedTimed = TestUtils.EMBED_TIMED.get(exampleRenderer.getOptions());
 
         String timingInfo = TestUtils.getFormattedTimingInfo(example.getSection(), example.getExampleNumber(), iterations, start, parse, render);
 

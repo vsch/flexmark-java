@@ -1,5 +1,7 @@
 package com.vladsch.flexmark.util.data;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Collection;
 
 public class CollectionDataKey<T> extends DataKey<Collection<T>> {
@@ -30,6 +32,7 @@ public class CollectionDataKey<T> extends DataKey<Collection<T>> {
         this(name, options -> defaultValue);
     }
 
+    @NotNull
     public DataValueFactory<Collection<T>> getFactory() {
         return super.getFactory();
     }
@@ -39,7 +42,7 @@ public class CollectionDataKey<T> extends DataKey<Collection<T>> {
     }
 
     public Collection<T> getFrom(DataHolder holder) {
-        return super.getFrom(holder);
+        return get(holder);
     }
 
     @Override

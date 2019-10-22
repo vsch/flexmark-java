@@ -11,9 +11,9 @@ class ZzzzzzOptions implements MutableDataSetter {
     public final int zzzzzzOption3;
 
     public ZzzzzzOptions(DataHolder options) {
-        zzzzzzOption1 = ZzzzzzExtension.ZZZZZZ_OPTION1.getFrom(options);
-        zzzzzzOption2 = ZzzzzzExtension.ZZZZZZ_OPTION2.getFrom(options);
-        zzzzzzOption3 = ZzzzzzExtension.ZZZZZZ_OPTION3.getFrom(options);
+        zzzzzzOption1 = ZzzzzzExtension.ZZZZZZ_OPTION1.get(options);
+        zzzzzzOption2 = ZzzzzzExtension.ZZZZZZ_OPTION2.get(options);
+        zzzzzzOption3 = ZzzzzzExtension.ZZZZZZ_OPTION3.get(options);
     }
 
     @Override

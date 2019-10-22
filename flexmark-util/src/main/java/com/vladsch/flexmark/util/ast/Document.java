@@ -3,6 +3,7 @@ package com.vladsch.flexmark.util.ast;
 import com.vladsch.flexmark.util.Utils;
 import com.vladsch.flexmark.util.data.*;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
 import java.util.Map;
@@ -22,17 +23,19 @@ public class Document extends Block implements MutableDataHolder {
         dataSet = new MutableDataSet(options);
     }
 
+    @NotNull
     @Override
     public Map<DataKey<?>, Object> getAll() { return dataSet.getAll(); }
 
+    @NotNull
     @Override
     public Collection<DataKey<?>> getKeys() { return dataSet.getKeys(); }
 
     @Override
-    public boolean contains(DataKey<?> key) { return dataSet.contains(key); }
+    public boolean contains(@NotNull DataKey<?> key) { return dataSet.contains(key); }
 
     @Override
-    public <T> T get(DataKey<T> key) {
+    public <T> T get(@NotNull DataKey<T> key) {
         return dataSet.get(key);
     }
 
@@ -103,9 +106,11 @@ public class Document extends Block implements MutableDataHolder {
         return dataSet.setAll(other);
     }
 
+    @NotNull
     @Override
     public MutableDataSet toMutable() { return dataSet.toMutable(); }
 
+    @NotNull
     @Override
     public DataSet toImmutable() { return dataSet.toImmutable(); }
 

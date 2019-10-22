@@ -93,7 +93,7 @@ public abstract class RenderingTestCase implements SpecExampleProcessor {
         long render = System.nanoTime();
 
         String ast = expectedAst == null ? "" : exampleRenderer.getAst();
-        boolean embedTimed = TestUtils.EMBED_TIMED.getFrom(exampleRenderer.getOptions());
+        boolean embedTimed = TestUtils.EMBED_TIMED.get(exampleRenderer.getOptions());
 
         String formattedTimingInfo = TestUtils.getFormattedTimingInfo(iterations, specExampleParse.getStartTime(), specExampleParse.getParseTime(), render);
         if (timed || embedTimed) {

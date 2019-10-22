@@ -16,7 +16,7 @@ class AttributeParsing {
         String unquotedValue = myParsing.UNQUOTEDVALUE;//.replace("]+","}{"); // exclude braces
         this.ATTRIBUTE = Pattern.compile("\\s*([#.]" + unquotedValue + "|" + myParsing.ATTRIBUTENAME + ")\\s*(?:=\\s*(" + myParsing.ATTRIBUTEVALUE + ")?" + ")?");
 
-        if (USE_EMPTY_IMPLICIT_AS_SPAN_DELIMITER.getFrom(parsing.options)) {
+        if (USE_EMPTY_IMPLICIT_AS_SPAN_DELIMITER.get(parsing.options)) {
             this.ATTRIBUTES_TAG = Pattern.compile(
                     "^\\{((?:[#.])|(?:" + "\\s*([#.]" + unquotedValue + "|" + myParsing.ATTRIBUTENAME + ")\\s*(?:=\\s*(" + myParsing.ATTRIBUTEVALUE + ")?" + ")?" + ")" +
                             "(?:" + "\\s+([#.]" + unquotedValue + "|" + myParsing.ATTRIBUTENAME + ")\\s*(?:=\\s*(" + myParsing.ATTRIBUTEVALUE + ")?" + ")?" + ")*" + "\\s*)\\}"

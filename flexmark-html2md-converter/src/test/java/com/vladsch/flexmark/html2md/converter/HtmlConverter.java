@@ -33,7 +33,7 @@ class HtmlConverter extends IParseBase {
     final static public DataKey<Integer> HTML_EXTENSIONS_REMOVE = new DataKey<>("HTML_EXTENSIONS_REMOVE", 0);
 
     public static int getHtmlExtensions(DataHolder options) {
-        return (HTML_EXTENSIONS.getFrom(options) | HTML_EXTENSIONS_ADD.getFrom(options)) & ~HTML_EXTENSIONS_REMOVE.getFrom(options);
+        return (HTML_EXTENSIONS.get(options) | HTML_EXTENSIONS_ADD.get(options)) & ~HTML_EXTENSIONS_REMOVE.get(options);
     }
 
     public HtmlConverter() {

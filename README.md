@@ -35,7 +35,8 @@ drill down to packages and classes, updated from the repository sources. :thumbs
 * Java 8 or above, Java 9+ compatible
 * Android compatibility to be added
 * The project is on Maven: `com.vladsch.flexmark`
-* The core has no dependencies; for extensions, see below
+* The core has no dependencies other than `org.jetbrains:annotations:15.0`. For extensions, see
+  extension description below.
 
   The API is still evolving to accommodate new extensions and functionality.
 

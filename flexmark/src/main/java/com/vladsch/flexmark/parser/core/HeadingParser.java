@@ -27,10 +27,10 @@ public class HeadingParser extends AbstractBlockParser {
         public HeadingParsing(DataHolder options) {
             super(options);
 
-            ATX_HEADING = Parser.HEADING_NO_ATX_SPACE.getFrom(options) ? Pattern.compile("^#{1,6}(?:[ \t]*|$)") : Parser.HEADING_NO_EMPTY_HEADING_WITHOUT_SPACE.getFrom(options) ? Pattern.compile("^#{1,6}[ \t]+") : Pattern.compile("^#{1,6}(?:[ \t]+|$)");
-            ATX_TRAILING = Parser.HEADING_NO_ATX_SPACE.getFrom(options) ? Pattern.compile("[ \t]*#+[ \t]*$") : Pattern.compile("(^| |\t)[ \t]*#+[ \t]*$");
+            ATX_HEADING = Parser.HEADING_NO_ATX_SPACE.get(options) ? Pattern.compile("^#{1,6}(?:[ \t]*|$)") : Parser.HEADING_NO_EMPTY_HEADING_WITHOUT_SPACE.get(options) ? Pattern.compile("^#{1,6}[ \t]+") : Pattern.compile("^#{1,6}(?:[ \t]+|$)");
+            ATX_TRAILING = Parser.HEADING_NO_ATX_SPACE.get(options) ? Pattern.compile("[ \t]*#+[ \t]*$") : Pattern.compile("(^| |\t)[ \t]*#+[ \t]*$");
 
-            int minLength = Parser.HEADING_SETEXT_MARKER_LENGTH.getFrom(options);
+            int minLength = Parser.HEADING_SETEXT_MARKER_LENGTH.get(options);
             SETEXT_HEADING = minLength <= 1 ? Pattern.compile("^(?:=+|-+)[ \t]*$") : Pattern.compile("^(?:={" + minLength + ",}|-{" + minLength + ",})[ \t]*$");
         }
     }
@@ -206,11 +206,11 @@ public class HeadingParser extends AbstractBlockParser {
         final int setextMarkerLength;
 
         public HeadingOptions(DataHolder options) {
-            this.noAtxSpace = Parser.HEADING_NO_ATX_SPACE.getFrom(options);
-            this.noEmptyHeadingWithoutSpace = Parser.HEADING_NO_EMPTY_HEADING_WITHOUT_SPACE.getFrom(options);
-            this.noLeadSpace = Parser.HEADING_NO_LEAD_SPACE.getFrom(options);
-            this.canInterruptItemParagraph = Parser.HEADING_CAN_INTERRUPT_ITEM_PARAGRAPH.getFrom(options);
-            this.setextMarkerLength = Parser.HEADING_SETEXT_MARKER_LENGTH.getFrom(options);
+            this.noAtxSpace = Parser.HEADING_NO_ATX_SPACE.get(options);
+            this.noEmptyHeadingWithoutSpace = Parser.HEADING_NO_EMPTY_HEADING_WITHOUT_SPACE.get(options);
+            this.noLeadSpace = Parser.HEADING_NO_LEAD_SPACE.get(options);
+            this.canInterruptItemParagraph = Parser.HEADING_CAN_INTERRUPT_ITEM_PARAGRAPH.get(options);
+            this.setextMarkerLength = Parser.HEADING_SETEXT_MARKER_LENGTH.get(options);
         }
     }
 }

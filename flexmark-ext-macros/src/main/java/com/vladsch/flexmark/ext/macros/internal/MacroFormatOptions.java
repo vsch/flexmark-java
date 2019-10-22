@@ -11,7 +11,7 @@ public class MacroFormatOptions {
     public final ElementPlacementSort macrosSort;
 
     public MacroFormatOptions(DataHolder options) {
-        macrosPlacement = MacrosExtension.MACRO_DEFINITIONS_PLACEMENT.getFrom(options);
-        macrosSort = MacrosExtension.MACRO_DEFINITIONS_SORT.getFrom(options);
+        macrosPlacement = MacrosExtension.MACRO_DEFINITIONS_PLACEMENT.get(options);
+        macrosSort = MacrosExtension.MACRO_DEFINITIONS_SORT.get(options);
     }
 }

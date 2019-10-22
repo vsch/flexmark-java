@@ -394,8 +394,8 @@ public class Parser implements IParse {
 
         // transfer references
         if (document.contains(REFERENCES) && included.contains(REFERENCES)) {
-            if (transferReferences(REFERENCES.getFrom(document), REFERENCES.getFrom(included),
-                    onlyIfUndefined != null ? onlyIfUndefined : REFERENCES_KEEP.getFrom(document) == KeepType.FIRST)
+            if (transferReferences(REFERENCES.get(document), REFERENCES.get(included),
+                    onlyIfUndefined != null ? onlyIfUndefined : REFERENCES_KEEP.get(document) == KeepType.FIRST)
             ) {
                 transferred = true;
             }

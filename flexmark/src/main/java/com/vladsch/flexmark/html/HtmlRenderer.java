@@ -152,7 +152,7 @@ public class HtmlRenderer implements IRender {
         // KLUDGE: but for now works
         boolean addEmbedded = !builder.attributeProviderFactories.containsKey(EmbeddedAttributeProvider.Factory.getClass());
         List<AttributeProviderFactory> values = new ArrayList<>(builder.attributeProviderFactories.values());
-        if (addEmbedded && EMBEDDED_ATTRIBUTE_PROVIDER.getFrom(options)) {
+        if (addEmbedded && EMBEDDED_ATTRIBUTE_PROVIDER.get(options)) {
             // add it first so the rest can override it if needed
             values.add(0, EmbeddedAttributeProvider.Factory);
         }
@@ -226,7 +226,7 @@ public class HtmlRenderer implements IRender {
     }
 
     static public boolean isCompatibleRendererType(MutableDataHolder options, String supportedRendererType) {
-        String rendererType = HtmlRenderer.TYPE.getFrom(options);
+        String rendererType = HtmlRenderer.TYPE.get(options);
         return isCompatibleRendererType(options, rendererType, supportedRendererType);
     }
 
@@ -235,7 +235,7 @@ public class HtmlRenderer implements IRender {
             return true;
         }
 
-        List<Pair<String, String>> equivalence = RENDERER_TYPE_EQUIVALENCE.getFrom(options);
+        List<Pair<String, String>> equivalence = RENDERER_TYPE_EQUIVALENCE.get(options);
 
         for (Pair<String, String> pair : equivalence) {
             if (rendererType.equals(pair.getFirst())) {
@@ -250,7 +250,7 @@ public class HtmlRenderer implements IRender {
     static public MutableDataHolder addRenderTypeEquivalence(MutableDataHolder options, String rendererType, String supportedRendererType) {
         if (!isCompatibleRendererType(options, rendererType, supportedRendererType)) {
             // need to add
-            List<Pair<String, String>> equivalence = RENDERER_TYPE_EQUIVALENCE.getFrom(options);
+            List<Pair<String, String>> equivalence = RENDERER_TYPE_EQUIVALENCE.get(options);
             ArrayList<Pair<String, String>> newEquivalence = new ArrayList<>(equivalence);
             newEquivalence.add(new Pair<>(rendererType, supportedRendererType));
             options.set(RENDERER_TYPE_EQUIVALENCE, newEquivalence);
@@ -362,7 +362,7 @@ public class HtmlRenderer implements IRender {
         }
 
         public boolean isRendererType(String supportedRendererType) {
-            String rendererType = HtmlRenderer.TYPE.getFrom(this);
+            String rendererType = HtmlRenderer.TYPE.get(this);
             return HtmlRenderer.isCompatibleRendererType(this, rendererType, supportedRendererType);
         }
 

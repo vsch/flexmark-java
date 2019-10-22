@@ -37,7 +37,7 @@ public class MacroDefinitionRepository extends NodeRepository<MacroDefinitionBlo
     }
 
     public MacroDefinitionRepository(DataHolder options) {
-        super(MacrosExtension.MACRO_DEFINITIONS_KEEP.getFrom(options));
+        super(MacrosExtension.MACRO_DEFINITIONS_KEEP.get(options));
     }
 
     @Override

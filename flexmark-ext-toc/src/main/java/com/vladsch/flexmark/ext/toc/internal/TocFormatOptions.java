@@ -15,8 +15,8 @@ public class TocFormatOptions implements MutableDataSetter {
     }
 
     public TocFormatOptions(DataHolder options) {
-        this.updateOnFormat = TocExtension.FORMAT_UPDATE_ON_FORMAT.getFrom(options);
-        this.options = TocExtension.FORMAT_OPTIONS.getFrom(options);
+        this.updateOnFormat = TocExtension.FORMAT_UPDATE_ON_FORMAT.get(options);
+        this.options = TocExtension.FORMAT_OPTIONS.get(options);
     }
 
     @Override

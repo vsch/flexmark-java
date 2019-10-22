@@ -22,7 +22,7 @@ public abstract class CoreRendererSpecTest extends RendererSpecTest {
 
     private static final Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
-        ArrayList<String> userTags = new ArrayList<>(Parser.HTML_BLOCK_TAGS.getFrom(null));
+        ArrayList<String> userTags = new ArrayList<>(Parser.HTML_BLOCK_TAGS.get(null));
         userTags.add("tag");
         optionsMap.put("user-block-tags", new MutableDataSet().set(Parser.HTML_BLOCK_TAGS, userTags));
         optionsMap.put("obfuscate-email", new MutableDataSet().set(HtmlRenderer.OBFUSCATE_EMAIL, true));

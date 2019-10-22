@@ -46,7 +46,7 @@ public class Abbreviation extends Node implements DoNotDecorate, DoNotLinkDecora
 
     @Override
     public AbbreviationBlock getReferenceNode(Document document) {
-        return getReferenceNode(AbbreviationExtension.ABBREVIATIONS.getFrom(document));
+        return getReferenceNode(AbbreviationExtension.ABBREVIATIONS.get(document));
     }
 
     @Override

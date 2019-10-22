@@ -35,7 +35,7 @@ class PegdownParser extends IParseBase {
     final static public DataKey<Integer> PEGDOWN_EXTENSIONS_REMOVE = new DataKey<>("PEGDOWN_EXTENSIONS_REMOVE", 0);
 
     public static int getPegdownExtensions(DataHolder options) {
-        return (PEGDOWN_EXTENSIONS.getFrom(options) | PEGDOWN_EXTENSIONS_ADD.getFrom(options)) & ~PEGDOWN_EXTENSIONS_REMOVE.getFrom(options);
+        return (PEGDOWN_EXTENSIONS.get(options) | PEGDOWN_EXTENSIONS_ADD.get(options)) & ~PEGDOWN_EXTENSIONS_REMOVE.get(options);
     }
 
     public PegdownParser() {

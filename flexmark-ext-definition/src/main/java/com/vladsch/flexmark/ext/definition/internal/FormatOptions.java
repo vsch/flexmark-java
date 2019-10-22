@@ -10,7 +10,7 @@ public class FormatOptions {
     public final DefinitionMarker markerType;
 
     public FormatOptions(DataHolder options) {
-        markerSpaces = DefinitionExtension.FORMAT_MARKER_SPACES.getFrom(options);
-        markerType = DefinitionExtension.FORMAT_MARKER_TYPE.getFrom(options);
+        markerSpaces = DefinitionExtension.FORMAT_MARKER_SPACES.get(options);
+        markerType = DefinitionExtension.FORMAT_MARKER_TYPE.get(options);
     }
 }

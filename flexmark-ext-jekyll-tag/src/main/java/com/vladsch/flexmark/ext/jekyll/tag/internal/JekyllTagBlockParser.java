@@ -98,7 +98,7 @@ public class JekyllTagBlockParser extends AbstractBlockParser {
         BlockFactory(DataHolder options) {
             super(options);
             this.parsing = new JekyllTagParsing(new Parsing(options));
-            listIncludesOnly = JekyllTagExtension.LIST_INCLUDES_ONLY.getFrom(options);
+            listIncludesOnly = JekyllTagExtension.LIST_INCLUDES_ONLY.get(options);
         }
 
         @Override
@@ -123,7 +123,7 @@ public class JekyllTagBlockParser extends AbstractBlockParser {
 
                     //noinspection EqualsBetweenInconvertibleTypes
                     if (!listIncludesOnly || tagName.equals(INCLUDE_TAG)) {
-                        List<JekyllTag> tagList = JekyllTagExtension.TAG_LIST.getFrom(state.getProperties());
+                        List<JekyllTag> tagList = JekyllTagExtension.TAG_LIST.get(state.getProperties());
                         tagList.add(tagNode);
                     }
 

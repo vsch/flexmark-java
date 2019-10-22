@@ -64,7 +64,7 @@ public class AttributesExtension implements Parser.ParserExtension
 
     @Override
     public void extend(HtmlRenderer.Builder rendererBuilder, String rendererType) {
-        if (ASSIGN_TEXT_ATTRIBUTES.getFrom(rendererBuilder)) {
+        if (ASSIGN_TEXT_ATTRIBUTES.get(rendererBuilder)) {
             rendererBuilder.nodeRendererFactory(new AttributesNodeRenderer.Factory());
         }
         rendererBuilder.attributeProviderFactory(new AttributesAttributeProvider.Factory());

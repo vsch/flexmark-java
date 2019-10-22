@@ -11,7 +11,7 @@ public class FormatOptions {
     public final ElementPlacementSort abbreviationsSort;
 
     public FormatOptions(DataHolder options) {
-        abbreviationsPlacement = AbbreviationExtension.ABBREVIATIONS_PLACEMENT.getFrom(options);
-        abbreviationsSort = AbbreviationExtension.ABBREVIATIONS_SORT.getFrom(options);
+        abbreviationsPlacement = AbbreviationExtension.ABBREVIATIONS_PLACEMENT.get(options);
+        abbreviationsSort = AbbreviationExtension.ABBREVIATIONS_SORT.get(options);
     }
 }

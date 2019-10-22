@@ -27,7 +27,7 @@ public class YouTrackConverterExtension implements Parser.ParserExtension, HtmlR
 
     @Override
     public void rendererOptions(MutableDataHolder options) {
-        String rendererType = HtmlRenderer.TYPE.getFrom(options);
+        String rendererType = HtmlRenderer.TYPE.get(options);
         if (rendererType.equals("HTML")) {
             // add youtrack equivalence
             HtmlRenderer.addRenderTypeEquivalence(options, "YOUTRACK", "JIRA");

@@ -23,9 +23,9 @@ public class AbbreviationNodeFormatter extends NodeRepositoryFormatter<Abbreviat
         super(options, ABBREVIATION_TRANSLATION_MAP, ABBREVIATION_UNIQUIFICATION_MAP);
         this.options = new FormatOptions(options);
 
-        String transformedId = String.format(Formatter.TRANSLATION_ID_FORMAT.getFrom(options), 1);
+        String transformedId = String.format(Formatter.TRANSLATION_ID_FORMAT.get(options), 1);
         transformUnderscores = transformedId.startsWith("_") && transformedId.endsWith("_");
-        makeMergedAbbreviationsUnique = AbbreviationExtension.MAKE_MERGED_ABBREVIATIONS_UNIQUE.getFrom(options);
+        makeMergedAbbreviationsUnique = AbbreviationExtension.MAKE_MERGED_ABBREVIATIONS_UNIQUE.get(options);
     }
 
     @Override
@@ -35,7 +35,7 @@ public class AbbreviationNodeFormatter extends NodeRepositoryFormatter<Abbreviat
 
     @Override
     public AbbreviationRepository getRepository(DataHolder options) {
-        return AbbreviationExtension.ABBREVIATIONS.getFrom(options);
+        return AbbreviationExtension.ABBREVIATIONS.get(options);
     }
 
     @Override

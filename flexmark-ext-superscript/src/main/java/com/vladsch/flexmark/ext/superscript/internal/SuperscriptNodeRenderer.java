@@ -17,8 +17,8 @@ public class SuperscriptNodeRenderer implements NodeRenderer {
     private final String superscriptStyleHtmlClose;
 
     public SuperscriptNodeRenderer(DataHolder options) {
-        superscriptStyleHtmlOpen = SuperscriptExtension.SUPERSCRIPT_STYLE_HTML_OPEN.getFrom(options);
-        superscriptStyleHtmlClose = SuperscriptExtension.SUPERSCRIPT_STYLE_HTML_CLOSE.getFrom(options);
+        superscriptStyleHtmlOpen = SuperscriptExtension.SUPERSCRIPT_STYLE_HTML_OPEN.get(options);
+        superscriptStyleHtmlClose = SuperscriptExtension.SUPERSCRIPT_STYLE_HTML_CLOSE.get(options);
     }
 
     @Override

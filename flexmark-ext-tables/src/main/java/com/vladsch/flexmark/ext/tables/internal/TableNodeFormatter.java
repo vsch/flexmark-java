@@ -29,9 +29,9 @@ public class TableNodeFormatter implements NodeFormatter {
 
     public TableNodeFormatter(DataHolder options) {
         this.options = new TableFormatOptions(options);
-        isIntellijDummyIdentifier = Parser.INTELLIJ_DUMMY_IDENTIFIER.getFrom(options);
+        isIntellijDummyIdentifier = Parser.INTELLIJ_DUMMY_IDENTIFIER.get(options);
         intellijDummyIdentifier = isIntellijDummyIdentifier ? Parsing.INTELLIJ_DUMMY_IDENTIFIER : "";
-        parserTrimCellWhiteSpace = TablesExtension.TRIM_CELL_WHITESPACE.getFrom(options);
+        parserTrimCellWhiteSpace = TablesExtension.TRIM_CELL_WHITESPACE.get(options);
     }
 
     @Override

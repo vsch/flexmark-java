@@ -97,18 +97,18 @@ public class TocOptions implements Immutable<TocOptions, TocOptions.AsMutable>, 
 
     public TocOptions(DataHolder options, boolean isSimToc) {
         this(
-                TocExtension.LEVELS.getFrom(options),
-                TocExtension.IS_HTML.getFrom(options),
-                TocExtension.IS_TEXT_ONLY.getFrom(options),
-                TocExtension.IS_NUMBERED.getFrom(options),
-                TocExtension.TITLE_LEVEL.getFrom(options),
-                TocExtension.TITLE.getFrom(options) == null ? (isSimToc ? DEFAULT_TITLE : "") : TocExtension.TITLE.getFrom(options),
-                TocExtension.LIST_TYPE.getFrom(options),
-                TocExtension.AST_INCLUDE_OPTIONS.getFrom(options),
-                TocExtension.BLANK_LINE_SPACER.getFrom(options),
-                TocExtension.DIV_CLASS.getFrom(options),
-                TocExtension.LIST_CLASS.getFrom(options),
-                TocExtension.CASE_SENSITIVE_TOC_TAG.getFrom(options)
+                TocExtension.LEVELS.get(options),
+                TocExtension.IS_HTML.get(options),
+                TocExtension.IS_TEXT_ONLY.get(options),
+                TocExtension.IS_NUMBERED.get(options),
+                TocExtension.TITLE_LEVEL.get(options),
+                TocExtension.TITLE.get(options) == null ? (isSimToc ? DEFAULT_TITLE : "") : TocExtension.TITLE.get(options),
+                TocExtension.LIST_TYPE.get(options),
+                TocExtension.AST_INCLUDE_OPTIONS.get(options),
+                TocExtension.BLANK_LINE_SPACER.get(options),
+                TocExtension.DIV_CLASS.get(options),
+                TocExtension.LIST_CLASS.get(options),
+                TocExtension.CASE_SENSITIVE_TOC_TAG.get(options)
         );
     }
 

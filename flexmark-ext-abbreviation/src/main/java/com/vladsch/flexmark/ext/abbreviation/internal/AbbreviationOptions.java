@@ -7,6 +7,6 @@ public class AbbreviationOptions {
     protected final boolean useLinks;
 
     public AbbreviationOptions(DataHolder options) {
-        this.useLinks = AbbreviationExtension.USE_LINKS.getFrom(options);
+        this.useLinks = AbbreviationExtension.USE_LINKS.get(options);
     }
 }

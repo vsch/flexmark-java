@@ -78,7 +78,7 @@ public class PdfConverterExtension {
     }
 
     public static void exportToPdf(String out, String html, String url, DataHolder options) {
-        String css = DEFAULT_CSS.getFrom(options);
+        String css = DEFAULT_CSS.get(options);
         html = embedCss(html, css);
         exportToPdf(out, html, url, options.get(DEFAULT_TEXT_DIRECTION), options.get(PROTECTION_POLICY));
     }

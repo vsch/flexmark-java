@@ -13,11 +13,11 @@ class GfmUsersOptions implements MutableDataSetter {
     public final String gitHubUserTextSuffix;
 
     public GfmUsersOptions(DataHolder options) {
-        gitHubIssuesUrlRoot = GfmUsersExtension.GIT_HUB_USERS_URL_ROOT.getFrom(options);
-        gitHubIssueUrlPrefix = GfmUsersExtension.GIT_HUB_USER_URL_PREFIX.getFrom(options);
-        gitHubIssueUrlSuffix = GfmUsersExtension.GIT_HUB_USER_URL_SUFFIX.getFrom(options);
-        gitHubUserTextPrefix = GfmUsersExtension.GIT_HUB_USER_HTML_PREFIX.getFrom(options);
-        gitHubUserTextSuffix = GfmUsersExtension.GIT_HUB_USER_HTML_SUFFIX.getFrom(options);
+        gitHubIssuesUrlRoot = GfmUsersExtension.GIT_HUB_USERS_URL_ROOT.get(options);
+        gitHubIssueUrlPrefix = GfmUsersExtension.GIT_HUB_USER_URL_PREFIX.get(options);
+        gitHubIssueUrlSuffix = GfmUsersExtension.GIT_HUB_USER_URL_SUFFIX.get(options);
+        gitHubUserTextPrefix = GfmUsersExtension.GIT_HUB_USER_HTML_PREFIX.get(options);
+        gitHubUserTextSuffix = GfmUsersExtension.GIT_HUB_USER_HTML_SUFFIX.get(options);
     }
 
     @Override

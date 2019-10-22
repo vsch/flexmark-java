@@ -31,7 +31,7 @@ public class EnumeratedReferenceParagraphPreProcessor implements ParagraphPrePro
 
     private EnumeratedReferenceParagraphPreProcessor(DataHolder options) {
         this.options = new EnumeratedReferenceOptions(options);
-        enumeratedReferences = EnumeratedReferenceExtension.ENUMERATED_REFERENCES.getFrom(options);
+        enumeratedReferences = EnumeratedReferenceExtension.ENUMERATED_REFERENCES.get(options);
     }
 
     @Override

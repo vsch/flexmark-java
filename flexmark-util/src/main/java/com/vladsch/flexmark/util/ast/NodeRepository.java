@@ -16,7 +16,8 @@ public abstract class NodeRepository<T> implements Map<String, T> {
     // function implementing extraction of referenced elements by given node or its children
     public abstract Set<T> getReferencedElements(Node parent);
 
-    protected void visitNodes(Node parent, Consumer<Node> runnable, Class<? extends Node>... classes) {
+    @SafeVarargs
+    protected final void visitNodes(Node parent, Consumer<Node> runnable, Class<? extends Node>... classes) {
         ArrayList<VisitHandler<?>> handlers = new ArrayList<>();
         NodeVisitor visitor = new NodeVisitor();
         for (Class<? extends Node> clazz : classes) {

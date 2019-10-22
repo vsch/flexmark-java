@@ -110,7 +110,7 @@ public class AttributesNodeFormatter implements PhasedNodeFormatter, ExplicitAtt
                         //HashSet<String> mergedCategories = new HashSet<>();
 
                         mergeContext.forEachPrecedingDocument(document, (docContext, doc, index) -> {
-                            NodeAttributeRepository attributes = AttributesExtension.NODE_ATTRIBUTES.getFrom(doc);
+                            NodeAttributeRepository attributes = AttributesExtension.NODE_ATTRIBUTES.get(doc);
                             Map<String, String> idUniquificationMap = docContext.getTranslationStore().get(ATTRIBUTE_UNIQUIFICATION_ID_MAP);
                             //Map<String, String> categoryUniquificationMap = docContext.getTranslationStore().get(ATTRIBUTE_UNIQUIFICATION);
 
@@ -168,7 +168,7 @@ public class AttributesNodeFormatter implements PhasedNodeFormatter, ExplicitAtt
                         });
 
                         // now make ours unique
-                        NodeAttributeRepository attributes = AttributesExtension.NODE_ATTRIBUTES.getFrom(document);
+                        NodeAttributeRepository attributes = AttributesExtension.NODE_ATTRIBUTES.get(document);
                         Map<String, String> idUniquificationMap = context.getTranslationStore().get(ATTRIBUTE_UNIQUIFICATION_ID_MAP);
                         Map<String, String> categoryUniquificationMap = context.getTranslationStore().get(ATTRIBUTE_UNIQUIFICATION_CATEGORY_MAP);
                         Map<String, String> idMap = new HashMap<>();

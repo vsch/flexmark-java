@@ -58,7 +58,7 @@ public class EnumeratedReferenceBlockParser extends AbstractBlockParser {
         content = null;
 
         // add block to reference repository
-        EnumeratedReferenceRepository enumeratedReferences = EnumeratedReferenceExtension.ENUMERATED_REFERENCES.getFrom(state.getProperties());
+        EnumeratedReferenceRepository enumeratedReferences = EnumeratedReferenceExtension.ENUMERATED_REFERENCES.get(state.getProperties());
         enumeratedReferences.put(block.getText().toString(), block);
     }
 

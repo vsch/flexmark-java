@@ -1,17 +1,37 @@
 package com.vladsch.flexmark.util.data;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 public class DataKey<T> {
-    protected final String name;
-    protected final DataValueFactory<T> factory;
-    protected final T defaultValue;
+    protected final @NotNull String name;
+    protected final @NotNull DataValueFactory<T> factory;
+    protected final @Nullable T defaultValue;
+
+    /**
+     * Creates a DataKey with a computed default value and a provided default value when data holder is null.
+     * <p>
+     * Use this constructor to ensure that factory is never called with null data holder value
+     *
+     * @param name         See {@link #getName()}.
+     * @param defaultValue default to use when data holder is null
+     * @param factory      data value factory for creating a new default value for the key for a non-null data holder
+     */
+    public DataKey(@NotNull String name, @Nullable T defaultValue, @NotNull DataValueNotNullFactory<T> factory) {
+        this.name = name;
+        this.defaultValue = defaultValue;
+        this.factory = factory;
+    }
 
     /**
      * Creates a DataKey with a computed default value dynamically.
      *
+     * On construction will invoke factory with null data holder to get the default value
+     *
      * @param name    See {@link #getName()}.
      * @param factory data value factory for creating a new default value for the key
      */
-    public DataKey(String name, DataValueFactory<T> factory) {
+    public DataKey(@NotNull String name, @NotNull DataValueFactory<T> factory) {
         this.name = name;
         this.defaultValue = factory.apply(null);
         this.factory = factory;
@@ -27,27 +47,42 @@ public class DataKey<T> {
      * @param defaultKey The DataKey to take the default value from at time of construction.
      */
     public DataKey(String name, DataKey<T> defaultKey) {
-        this(name, defaultKey::getFrom);
+        this(name, defaultKey.defaultValue, defaultKey::get);
     }
 
     public DataKey(String name, T defaultValue) {
-        this(name, options -> defaultValue);
+        this(name, defaultValue, options -> defaultValue);
     }
 
+    @NotNull
     public String getName() {
         return name;
     }
 
+    @NotNull
     public DataValueFactory<T> getFactory() {
         return factory;
     }
 
-    public T getDefaultValue(DataHolder holder) {
+    @Nullable
+    public T getDefaultValue(@Nullable DataHolder holder) {
         return holder == null ? defaultValue : factory.apply(holder);
     }
 
-    public T getFrom(DataHolder holder) {
+    @Nullable
+    public T get(@Nullable DataHolder holder) {
         return holder == null ? defaultValue : holder.get(this);
+    }
+
+    /**
+     * @param holder    data holder
+     * @return return default value if holder is null, current value in holder or compute a new value
+     * @deprecated use get
+     */
+    @Deprecated
+    @Nullable
+    public T getFrom(@Nullable DataHolder holder) {
+        return get(holder);
     }
 
     public MutableDataHolder set(MutableDataHolder holder, T value) {
@@ -57,20 +92,11 @@ public class DataKey<T> {
 
     @Override
     public String toString() {
+        // factory applied to null in constructor, no sense doing it again here
         if (defaultValue != null) {
             return "DataKey<" + defaultValue.getClass().getName().substring(defaultValue.getClass().getPackage().getName().length() + 1) + "> " + name;
         } else {
-            try {
-                T defaultValue = factory.apply(null);
-            } catch (Throwable e) {
-                return "DataKey(" + super.toString() + " " + name + ") factory " + factory + " generated an exception on apply(null)";
-            }
-
-            if (defaultValue != null) {
-                return "DataKey<" + defaultValue.getClass().getName().substring(defaultValue.getClass().getPackage().getName().length() + 1) + "> " + name;
-            } else {
-                return "DataKey<unknown> " + name;
-            }
+            return "DataKey<unknown> " + name;
         }
     }
 

@@ -28,7 +28,7 @@ public class DefinitionListItemBlockPreProcessor implements BlockPreProcessor {
 
     public DefinitionListItemBlockPreProcessor(DataHolder options) {
         this.options = new DefinitionOptions(options);
-        blankLinesInAst = BLANK_LINES_IN_AST.getFrom(options);
+        blankLinesInAst = BLANK_LINES_IN_AST.get(options);
     }
 
     @Override

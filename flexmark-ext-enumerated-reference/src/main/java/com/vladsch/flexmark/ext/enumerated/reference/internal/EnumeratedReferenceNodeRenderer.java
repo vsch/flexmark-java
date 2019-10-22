@@ -39,7 +39,7 @@ public class EnumeratedReferenceNodeRenderer implements PhasedNodeRenderer
         if (phase == RenderingPhase.HEAD_TOP) {
             headerIdGenerator.generateIds(document);
         } else if (phase == RenderingPhase.BODY_TOP) {
-            enumeratedOrdinals = EnumeratedReferenceExtension.ENUMERATED_REFERENCE_ORDINALS.getFrom(document);
+            enumeratedOrdinals = EnumeratedReferenceExtension.ENUMERATED_REFERENCE_ORDINALS.get(document);
         }
     }
 

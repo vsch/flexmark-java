@@ -25,19 +25,19 @@ public class DocxLinkResolver implements LinkResolver {
         // can use context for custom settings
         // context.getDocument();
         // context.getHtmlOptions();
-        String docRelativeURL = DocxRenderer.DOC_RELATIVE_URL.getFrom(context.getOptions());
+        String docRelativeURL = DocxRenderer.DOC_RELATIVE_URL.get(context.getOptions());
         if (docRelativeURL != null) {
             docRelativeURL = Utils.removePrefix(docRelativeURL, '/');
         }
 
-        String docRootURL = DocxRenderer.DOC_ROOT_URL.getFrom(context.getOptions());
+        String docRootURL = DocxRenderer.DOC_ROOT_URL.get(context.getOptions());
         if (docRootURL != null) {
             docRootURL = Utils.removePrefix(docRootURL, '/');
         }
         this.docRelativeURL = docRelativeURL;
         this.docRootURL = docRootURL;
         relativeParts = docRelativeURL.split("/");
-        prefixWwwLinks = DocxRenderer.PREFIX_WWW_LINKS.getFrom(context.getOptions());
+        prefixWwwLinks = DocxRenderer.PREFIX_WWW_LINKS.get(context.getOptions());
     }
 
     @Override

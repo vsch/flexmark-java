@@ -1,5 +1,7 @@
 package com.vladsch.flexmark.util.data;
 
+import org.jetbrains.annotations.NotNull;
+
 public interface MutableDataHolder extends DataHolder, MutableDataSetter {
     /**
      * Get the given key, if it does not exist then use the key's factory to create a new value and put it into the collection
@@ -9,7 +11,7 @@ public interface MutableDataHolder extends DataHolder, MutableDataSetter {
      * @return return stored value or newly created value
      */
     @Override
-    <T> T get(DataKey<T> key);
+    <T> T get(@NotNull DataKey<T> key);
 
     /**
      * Store the given value for the key

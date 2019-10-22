@@ -49,13 +49,13 @@ public class TypographicExtension implements Parser.ParserExtension, HtmlRendere
 
     @Override
     public void extend(Parser.Builder parserBuilder) {
-        if (ENABLE_QUOTES.getFrom(parserBuilder)) {
+        if (ENABLE_QUOTES.get(parserBuilder)) {
             TypographicOptions options = new TypographicOptions(parserBuilder);
             parserBuilder.customDelimiterProcessor(new AngleQuoteDelimiterProcessor(options));
             parserBuilder.customDelimiterProcessor(new SingleQuoteDelimiterProcessor(options));
             parserBuilder.customDelimiterProcessor(new DoubleQuoteDelimiterProcessor(options));
         }
-        if (ENABLE_SMARTS.getFrom(parserBuilder)) {
+        if (ENABLE_SMARTS.get(parserBuilder)) {
             parserBuilder.customInlineParserExtensionFactory(new SmartsInlineParser.Factory());
         }
     }

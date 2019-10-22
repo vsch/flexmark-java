@@ -21,7 +21,7 @@ public class EnumeratedReferenceNodePostProcessor extends NodePostProcessor {
     private final HtmlIdGenerator headerIdGenerator;
 
     public EnumeratedReferenceNodePostProcessor(Document document) {
-        enumeratedReferences = EnumeratedReferenceExtension.ENUMERATED_REFERENCE_ORDINALS.getFrom(document);
+        enumeratedReferences = EnumeratedReferenceExtension.ENUMERATED_REFERENCE_ORDINALS.get(document);
         headerIdGenerator = new HeaderIdGenerator.Factory().create();
         headerIdGenerator.generateIds(document);
     }

@@ -26,7 +26,7 @@ public class AttributesAttributeProvider implements AttributeProvider {
     public AttributesAttributeProvider(LinkResolverContext context) {
         DataHolder options = context.getOptions();
         attributeOptions = new AttributesOptions(options);
-        nodeAttributeRepository = AttributesExtension.NODE_ATTRIBUTES.getFrom(options);
+        nodeAttributeRepository = AttributesExtension.NODE_ATTRIBUTES.get(options);
     }
 
     @Override

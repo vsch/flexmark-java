@@ -23,7 +23,7 @@ public class FootnoteNodeFormatter extends NodeRepositoryFormatter<FootnoteRepos
 
     @Override
     public FootnoteRepository getRepository(DataHolder options) {
-        return FootnoteExtension.FOOTNOTES.getFrom(options);
+        return FootnoteExtension.FOOTNOTES.get(options);
     }
 
     @Override

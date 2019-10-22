@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="FlexmarkProjectSettings">
+    <FlexmarkHtmlSettings flexmarkSpecExampleRendering="1" flexmarkSpecExampleRenderHtml="true">
+      <flexmarkSectionLanguages>
+        <option name="1" value="Markdown" />
+        <option name="2" value="HTML" />
+        <option name="3" value="flexmark-ast:1" />
+      </flexmarkSectionLanguages>
+    </FlexmarkHtmlSettings>
+  </component>
   <component name="MarkdownProjectSettings">
     <PreviewSettings splitEditorLayout="FIRST" splitEditorPreview="PREVIEW" useGrayscaleRendering="false" zoomFactor="1.0" maxImageWidth="0" synchronizePreviewPosition="true" highlightPreviewType="LINE" highlightFadeOut="2" highlightOnTyping="false" synchronizeSourcePosition="true" verticallyAlignSourceAndPreviewSyncPosition="true" showSearchHighlightsInPreview="true" showSelectionInPreview="true" lastLayoutSetsDefault="false">
       <PanelProvider>
@@ -89,13 +98,13 @@
     line-height: 1.6;
 }
 
-code { 
+code {
     background-color:#f0f0f0;
     border-radius:2px;
     padding:1px 0 0 0;
     border:1px solid #e0e0e0;
     font-family:Consolas,Inconsolata,Courier,monospace;
-    font-size:0.9em;color:#b00042; 
+    font-size:0.9em;color:#b00042;
 }
 
 .search-highlight {

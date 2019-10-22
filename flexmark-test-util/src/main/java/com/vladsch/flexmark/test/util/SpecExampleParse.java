@@ -57,13 +57,13 @@ public class SpecExampleParse {
     }
 
     public String parse(String source) {
-        if (TestUtils.NO_FILE_EOL.getFrom(myOptions)) {
+        if (TestUtils.NO_FILE_EOL.get(myOptions)) {
             mySource = TestUtils.trimTrailingEOL(source);
         }
 
-        String sourcePrefix = TestUtils.SOURCE_PREFIX.getFrom(myExampleOptions);
-        String sourceSuffix = TestUtils.SOURCE_SUFFIX.getFrom(myExampleOptions);
-        String sourceIndent = TestUtils.SOURCE_INDENT.getFrom(myExampleOptions);
+        String sourcePrefix = TestUtils.SOURCE_PREFIX.get(myExampleOptions);
+        String sourceSuffix = TestUtils.SOURCE_SUFFIX.get(myExampleOptions);
+        String sourceIndent = TestUtils.SOURCE_INDENT.get(myExampleOptions);
 
         BasedSequence input;
 
@@ -76,12 +76,12 @@ public class SpecExampleParse {
 
         input = TestUtils.stripIndent(input, sourceIndent);
 
-        String includedText = TestUtils.INCLUDED_DOCUMENT.getFrom(myExampleOptions);
+        String includedText = TestUtils.INCLUDED_DOCUMENT.get(myExampleOptions);
 
         myRenderer.includeDocument(includedText);
 
-        myTimed = TestUtils.TIMED.getFrom(myExampleOptions);
-        myIterations = myTimed ? TestUtils.TIMED_ITERATIONS.getFrom(myExampleOptions) : 1;
+        myTimed = TestUtils.TIMED.get(myExampleOptions);
+        myIterations = myTimed ? TestUtils.TIMED_ITERATIONS.get(myExampleOptions) : 1;
 
         myStartTime = System.nanoTime();
 

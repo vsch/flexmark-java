@@ -9,8 +9,8 @@ class MacroOptions {
     public final boolean enableRendering;
 
     public MacroOptions(DataHolder options) {
-        enableInlineMacros = MacroExtension.ENABLE_INLINE_MACROS.getFrom(options);
-        enableBlockMacros = MacroExtension.ENABLE_BLOCK_MACROS.getFrom(options);
-        enableRendering = MacroExtension.ENABLE_RENDERING.getFrom(options);
+        enableInlineMacros = MacroExtension.ENABLE_INLINE_MACROS.get(options);
+        enableBlockMacros = MacroExtension.ENABLE_BLOCK_MACROS.get(options);
+        enableRendering = MacroExtension.ENABLE_RENDERING.get(options);
     }
 }

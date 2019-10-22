@@ -41,33 +41,33 @@ public class ListOptions implements MutableDataSetter {
     }
 
     private ListOptions(DataHolder options) {
-        myParserEmulationProfile = Parser.PARSER_EMULATION_PROFILE.getFrom(options);
+        myParserEmulationProfile = Parser.PARSER_EMULATION_PROFILE.get(options);
         itemInterrupt = new ItemInterrupt(options);
 
-        autoLoose = Parser.LISTS_AUTO_LOOSE.getFrom(options);
-        autoLooseOneLevelLists = Parser.LISTS_AUTO_LOOSE_ONE_LEVEL_LISTS.getFrom(options);
-        delimiterMismatchToNewList = Parser.LISTS_DELIMITER_MISMATCH_TO_NEW_LIST.getFrom(options);
-        endOnDoubleBlank = Parser.LISTS_END_ON_DOUBLE_BLANK.getFrom(options);
-        itemMarkerSpace = Parser.LISTS_ITEM_MARKER_SPACE.getFrom(options);
-        itemTypeMismatchToNewList = Parser.LISTS_ITEM_TYPE_MISMATCH_TO_NEW_LIST.getFrom(options);
-        itemTypeMismatchToSubList = Parser.LISTS_ITEM_TYPE_MISMATCH_TO_SUB_LIST.getFrom(options);
-        looseWhenPrevHasTrailingBlankLine = Parser.LISTS_LOOSE_WHEN_PREV_HAS_TRAILING_BLANK_LINE.getFrom(options);
-        looseWhenLastItemPrevHasTrailingBlankLine = Parser.LISTS_LOOSE_WHEN_LAST_ITEM_PREV_HAS_TRAILING_BLANK_LINE.getFrom(options);
-        looseWhenHasNonListChildren = Parser.LISTS_LOOSE_WHEN_HAS_NON_LIST_CHILDREN.getFrom(options);
-        looseWhenBlankLineFollowsItemParagraph = Parser.LISTS_LOOSE_WHEN_BLANK_LINE_FOLLOWS_ITEM_PARAGRAPH.getFrom(options);
-        looseWhenHasLooseSubItem = Parser.LISTS_LOOSE_WHEN_HAS_LOOSE_SUB_ITEM.getFrom(options);
-        looseWhenHasTrailingBlankLine = Parser.LISTS_LOOSE_WHEN_HAS_TRAILING_BLANK_LINE.getFrom(options);
-        looseWhenContainsBlankLine = Parser.LISTS_LOOSE_WHEN_CONTAINS_BLANK_LINE.getFrom(options);
-        numberedItemMarkerSuffixed = Parser.LISTS_NUMBERED_ITEM_MARKER_SUFFIXED.getFrom(options);
-        orderedItemDotOnly = Parser.LISTS_ORDERED_ITEM_DOT_ONLY.getFrom(options);
-        orderedListManualStart = Parser.LISTS_ORDERED_LIST_MANUAL_START.getFrom(options);
-        itemContentAfterSuffix = Parser.LISTS_ITEM_CONTENT_AFTER_SUFFIX.getFrom(options);
-        itemPrefixChars = Parser.LISTS_ITEM_PREFIX_CHARS.getFrom(options);
+        autoLoose = Parser.LISTS_AUTO_LOOSE.get(options);
+        autoLooseOneLevelLists = Parser.LISTS_AUTO_LOOSE_ONE_LEVEL_LISTS.get(options);
+        delimiterMismatchToNewList = Parser.LISTS_DELIMITER_MISMATCH_TO_NEW_LIST.get(options);
+        endOnDoubleBlank = Parser.LISTS_END_ON_DOUBLE_BLANK.get(options);
+        itemMarkerSpace = Parser.LISTS_ITEM_MARKER_SPACE.get(options);
+        itemTypeMismatchToNewList = Parser.LISTS_ITEM_TYPE_MISMATCH_TO_NEW_LIST.get(options);
+        itemTypeMismatchToSubList = Parser.LISTS_ITEM_TYPE_MISMATCH_TO_SUB_LIST.get(options);
+        looseWhenPrevHasTrailingBlankLine = Parser.LISTS_LOOSE_WHEN_PREV_HAS_TRAILING_BLANK_LINE.get(options);
+        looseWhenLastItemPrevHasTrailingBlankLine = Parser.LISTS_LOOSE_WHEN_LAST_ITEM_PREV_HAS_TRAILING_BLANK_LINE.get(options);
+        looseWhenHasNonListChildren = Parser.LISTS_LOOSE_WHEN_HAS_NON_LIST_CHILDREN.get(options);
+        looseWhenBlankLineFollowsItemParagraph = Parser.LISTS_LOOSE_WHEN_BLANK_LINE_FOLLOWS_ITEM_PARAGRAPH.get(options);
+        looseWhenHasLooseSubItem = Parser.LISTS_LOOSE_WHEN_HAS_LOOSE_SUB_ITEM.get(options);
+        looseWhenHasTrailingBlankLine = Parser.LISTS_LOOSE_WHEN_HAS_TRAILING_BLANK_LINE.get(options);
+        looseWhenContainsBlankLine = Parser.LISTS_LOOSE_WHEN_CONTAINS_BLANK_LINE.get(options);
+        numberedItemMarkerSuffixed = Parser.LISTS_NUMBERED_ITEM_MARKER_SUFFIXED.get(options);
+        orderedItemDotOnly = Parser.LISTS_ORDERED_ITEM_DOT_ONLY.get(options);
+        orderedListManualStart = Parser.LISTS_ORDERED_LIST_MANUAL_START.get(options);
+        itemContentAfterSuffix = Parser.LISTS_ITEM_CONTENT_AFTER_SUFFIX.get(options);
+        itemPrefixChars = Parser.LISTS_ITEM_PREFIX_CHARS.get(options);
 
-        codeIndent = Parser.LISTS_CODE_INDENT.getFrom(options);
-        itemIndent = Parser.LISTS_ITEM_INDENT.getFrom(options);
-        newItemCodeIndent = Parser.LISTS_NEW_ITEM_CODE_INDENT.getFrom(options);
-        itemMarkerSuffixes = Parser.LISTS_ITEM_MARKER_SUFFIXES.getFrom(options);
+        codeIndent = Parser.LISTS_CODE_INDENT.get(options);
+        itemIndent = Parser.LISTS_ITEM_INDENT.get(options);
+        newItemCodeIndent = Parser.LISTS_NEW_ITEM_CODE_INDENT.get(options);
+        itemMarkerSuffixes = Parser.LISTS_ITEM_MARKER_SUFFIXES.get(options);
     }
 
     ListOptions(ListOptions other) {
@@ -209,7 +209,7 @@ public class ListOptions implements MutableDataSetter {
     }
 
     public static void addItemMarkerSuffixes(MutableDataHolder options, String... itemMarkerSuffixes) {
-        String[] suffixes = Parser.LISTS_ITEM_MARKER_SUFFIXES.getFrom(options);
+        String[] suffixes = Parser.LISTS_ITEM_MARKER_SUFFIXES.get(options);
         int addSuffixCount = itemMarkerSuffixes.length;
 
         int iMax = itemMarkerSuffixes.length;
@@ -384,25 +384,25 @@ public class ListOptions implements MutableDataSetter {
         }
 
         public ItemInterrupt(DataHolder options) {
-            bulletItemInterruptsParagraph = Parser.LISTS_BULLET_ITEM_INTERRUPTS_PARAGRAPH.getFrom(options);
-            orderedItemInterruptsParagraph = Parser.LISTS_ORDERED_ITEM_INTERRUPTS_PARAGRAPH.getFrom(options);
-            orderedNonOneItemInterruptsParagraph = Parser.LISTS_ORDERED_NON_ONE_ITEM_INTERRUPTS_PARAGRAPH.getFrom(options);
+            bulletItemInterruptsParagraph = Parser.LISTS_BULLET_ITEM_INTERRUPTS_PARAGRAPH.get(options);
+            orderedItemInterruptsParagraph = Parser.LISTS_ORDERED_ITEM_INTERRUPTS_PARAGRAPH.get(options);
+            orderedNonOneItemInterruptsParagraph = Parser.LISTS_ORDERED_NON_ONE_ITEM_INTERRUPTS_PARAGRAPH.get(options);
 
-            emptyBulletItemInterruptsParagraph = Parser.LISTS_EMPTY_BULLET_ITEM_INTERRUPTS_PARAGRAPH.getFrom(options);
-            emptyOrderedItemInterruptsParagraph = Parser.LISTS_EMPTY_ORDERED_ITEM_INTERRUPTS_PARAGRAPH.getFrom(options);
-            emptyOrderedNonOneItemInterruptsParagraph = Parser.LISTS_EMPTY_ORDERED_NON_ONE_ITEM_INTERRUPTS_PARAGRAPH.getFrom(options);
+            emptyBulletItemInterruptsParagraph = Parser.LISTS_EMPTY_BULLET_ITEM_INTERRUPTS_PARAGRAPH.get(options);
+            emptyOrderedItemInterruptsParagraph = Parser.LISTS_EMPTY_ORDERED_ITEM_INTERRUPTS_PARAGRAPH.get(options);
+            emptyOrderedNonOneItemInterruptsParagraph = Parser.LISTS_EMPTY_ORDERED_NON_ONE_ITEM_INTERRUPTS_PARAGRAPH.get(options);
 
-            bulletItemInterruptsItemParagraph = Parser.LISTS_BULLET_ITEM_INTERRUPTS_ITEM_PARAGRAPH.getFrom(options);
-            orderedItemInterruptsItemParagraph = Parser.LISTS_ORDERED_ITEM_INTERRUPTS_ITEM_PARAGRAPH.getFrom(options);
-            orderedNonOneItemInterruptsItemParagraph = Parser.LISTS_ORDERED_NON_ONE_ITEM_INTERRUPTS_ITEM_PARAGRAPH.getFrom(options);
+            bulletItemInterruptsItemParagraph = Parser.LISTS_BULLET_ITEM_INTERRUPTS_ITEM_PARAGRAPH.get(options);
+            orderedItemInterruptsItemParagraph = Parser.LISTS_ORDERED_ITEM_INTERRUPTS_ITEM_PARAGRAPH.get(options);
+            orderedNonOneItemInterruptsItemParagraph = Parser.LISTS_ORDERED_NON_ONE_ITEM_INTERRUPTS_ITEM_PARAGRAPH.get(options);
 
-            emptyBulletItemInterruptsItemParagraph = Parser.LISTS_EMPTY_BULLET_ITEM_INTERRUPTS_ITEM_PARAGRAPH.getFrom(options);
-            emptyOrderedItemInterruptsItemParagraph = Parser.LISTS_EMPTY_ORDERED_ITEM_INTERRUPTS_ITEM_PARAGRAPH.getFrom(options);
-            emptyOrderedNonOneItemInterruptsItemParagraph = Parser.LISTS_EMPTY_ORDERED_NON_ONE_ITEM_INTERRUPTS_ITEM_PARAGRAPH.getFrom(options);
+            emptyBulletItemInterruptsItemParagraph = Parser.LISTS_EMPTY_BULLET_ITEM_INTERRUPTS_ITEM_PARAGRAPH.get(options);
+            emptyOrderedItemInterruptsItemParagraph = Parser.LISTS_EMPTY_ORDERED_ITEM_INTERRUPTS_ITEM_PARAGRAPH.get(options);
+            emptyOrderedNonOneItemInterruptsItemParagraph = Parser.LISTS_EMPTY_ORDERED_NON_ONE_ITEM_INTERRUPTS_ITEM_PARAGRAPH.get(options);
 
-            emptyBulletSubItemInterruptsItemParagraph = Parser.LISTS_EMPTY_BULLET_SUB_ITEM_INTERRUPTS_ITEM_PARAGRAPH.getFrom(options);
-            emptyOrderedSubItemInterruptsItemParagraph = Parser.LISTS_EMPTY_ORDERED_SUB_ITEM_INTERRUPTS_ITEM_PARAGRAPH.getFrom(options);
-            emptyOrderedNonOneSubItemInterruptsItemParagraph = Parser.LISTS_EMPTY_ORDERED_NON_ONE_SUB_ITEM_INTERRUPTS_ITEM_PARAGRAPH.getFrom(options);
+            emptyBulletSubItemInterruptsItemParagraph = Parser.LISTS_EMPTY_BULLET_SUB_ITEM_INTERRUPTS_ITEM_PARAGRAPH.get(options);
+            emptyOrderedSubItemInterruptsItemParagraph = Parser.LISTS_EMPTY_ORDERED_SUB_ITEM_INTERRUPTS_ITEM_PARAGRAPH.get(options);
+            emptyOrderedNonOneSubItemInterruptsItemParagraph = Parser.LISTS_EMPTY_ORDERED_NON_ONE_SUB_ITEM_INTERRUPTS_ITEM_PARAGRAPH.get(options);
         }
 
         public void setIn(MutableDataHolder options) {

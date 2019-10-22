@@ -32,7 +32,7 @@ public class SimTocBlockParser extends AbstractBlockParser {
 
         public TocParsing(DataHolder options) {
             super(options);
-            if (CASE_SENSITIVE_TOC_TAG.getFrom(options)) {
+            if (CASE_SENSITIVE_TOC_TAG.get(options)) {
                 this.TOC_BLOCK_START = Pattern.compile("^\\[TOC(?:\\s+([^\\]]+))?]:\\s*#(?:\\s+(" + super.LINK_TITLE_STRING + "))?\\s*$");
             } else {
                 this.TOC_BLOCK_START = Pattern.compile("^\\[(?i:TOC)(?:\\s+([^\\]]+))?]:\\s*#(?:\\s+(" + super.LINK_TITLE_STRING + "))?\\s*$");

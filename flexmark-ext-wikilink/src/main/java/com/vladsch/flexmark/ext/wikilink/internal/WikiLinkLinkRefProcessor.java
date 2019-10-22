@@ -58,18 +58,18 @@ public class WikiLinkLinkRefProcessor implements LinkRefProcessor {
     public boolean allowDelimiters(BasedSequence chars, Document document, Node node) {
         assert (node instanceof WikiNode);
         WikiNode wikiNode = (WikiNode) node;
-        return node instanceof WikiLink && WikiLinkExtension.ALLOW_INLINES.getFrom(document) && wikiNode.getText().ifNull(wikiNode.getLink()).containsAllOf(chars);
+        return node instanceof WikiLink && WikiLinkExtension.ALLOW_INLINES.get(document) && wikiNode.getText().ifNull(wikiNode.getLink()).containsAllOf(chars);
     }
 
     @Override
     public void updateNodeElements(Document document, Node node) {
         assert (node instanceof WikiNode);
         WikiNode wikiNode = (WikiNode) node;
-        if (node instanceof WikiLink && WikiLinkExtension.ALLOW_INLINES.getFrom(document)) {
+        if (node instanceof WikiLink && WikiLinkExtension.ALLOW_INLINES.get(document)) {
             // need to update link and pageRef with plain text versions
             if (wikiNode.getText().isNull()) {
                 BasedSequence link = new TextCollectingVisitor().collectAndGetSequence(node);
-                wikiNode.setLink(link, WikiLinkExtension.ALLOW_ANCHORS.getFrom(document), WikiLinkExtension.ALLOW_ANCHOR_ESCAPE.getFrom(document));
+                wikiNode.setLink(link, WikiLinkExtension.ALLOW_ANCHORS.get(document), WikiLinkExtension.ALLOW_ANCHOR_ESCAPE.get(document));
             }
         }
     }
@@ -88,7 +88,7 @@ public class WikiLinkLinkRefProcessor implements LinkRefProcessor {
 
         @Override
         public boolean getWantExclamationPrefix(DataHolder options) {
-            return WikiLinkExtension.IMAGE_LINKS.getFrom(options);
+            return WikiLinkExtension.IMAGE_LINKS.get(options);
         }
 
         @Override

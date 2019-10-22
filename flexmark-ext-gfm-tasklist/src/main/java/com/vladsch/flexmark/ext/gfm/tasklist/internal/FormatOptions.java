@@ -17,8 +17,8 @@ public class FormatOptions implements MutableDataSetter {
     }
 
     public FormatOptions(DataHolder options) {
-        taskListItemCase = TaskListExtension.FORMAT_LIST_ITEM_CASE.getFrom(options);
-        taskListItemPlacement = TaskListExtension.FORMAT_LIST_ITEM_PLACEMENT.getFrom(options);
+        taskListItemCase = TaskListExtension.FORMAT_LIST_ITEM_CASE.get(options);
+        taskListItemPlacement = TaskListExtension.FORMAT_LIST_ITEM_PLACEMENT.get(options);
     }
 
     @Override

@@ -14,11 +14,11 @@ class AttributesOptions implements MutableDataSetter {
     public final FencedCodeAddType fencedCodeAddAttributes;
 
     public AttributesOptions(DataHolder options) {
-        assignTextAttributes = AttributesExtension.ASSIGN_TEXT_ATTRIBUTES.getFrom(options);
-        wrapNonAttributeText = AttributesExtension.WRAP_NON_ATTRIBUTE_TEXT.getFrom(options);
-        useEmptyImplicitAsSpanDelimiter = AttributesExtension.USE_EMPTY_IMPLICIT_AS_SPAN_DELIMITER.getFrom(options);
-        fencedCodeInfoAttributes = AttributesExtension.FENCED_CODE_INFO_ATTRIBUTES.getFrom(options);
-        fencedCodeAddAttributes = AttributesExtension.FENCED_CODE_ADD_ATTRIBUTES.getFrom(options);
+        assignTextAttributes = AttributesExtension.ASSIGN_TEXT_ATTRIBUTES.get(options);
+        wrapNonAttributeText = AttributesExtension.WRAP_NON_ATTRIBUTE_TEXT.get(options);
+        useEmptyImplicitAsSpanDelimiter = AttributesExtension.USE_EMPTY_IMPLICIT_AS_SPAN_DELIMITER.get(options);
+        fencedCodeInfoAttributes = AttributesExtension.FENCED_CODE_INFO_ATTRIBUTES.get(options);
+        fencedCodeAddAttributes = AttributesExtension.FENCED_CODE_ADD_ATTRIBUTES.get(options);
     }
 
     @Override

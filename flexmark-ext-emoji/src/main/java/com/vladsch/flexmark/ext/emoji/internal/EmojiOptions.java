@@ -14,11 +14,11 @@ public class EmojiOptions {
     public final String attrImageClass;
 
     public EmojiOptions(DataHolder options) {
-        this.useShortcutType = EmojiExtension.USE_SHORTCUT_TYPE.getFrom(options);
-        this.attrAlign = EmojiExtension.ATTR_ALIGN.getFrom(options);
-        this.attrImageSize = EmojiExtension.ATTR_IMAGE_SIZE.getFrom(options);
-        this.rootImagePath = EmojiExtension.ROOT_IMAGE_PATH.getFrom(options);
-        this.useImageType = EmojiExtension.USE_IMAGE_TYPE.getFrom(options);
-        this.attrImageClass = EmojiExtension.ATTR_IMAGE_CLASS.getFrom(options);
+        this.useShortcutType = EmojiExtension.USE_SHORTCUT_TYPE.get(options);
+        this.attrAlign = EmojiExtension.ATTR_ALIGN.get(options);
+        this.attrImageSize = EmojiExtension.ATTR_IMAGE_SIZE.get(options);
+        this.rootImagePath = EmojiExtension.ROOT_IMAGE_PATH.get(options);
+        this.useImageType = EmojiExtension.USE_IMAGE_TYPE.get(options);
+        this.attrImageClass = EmojiExtension.ATTR_IMAGE_CLASS.get(options);
     }
 }

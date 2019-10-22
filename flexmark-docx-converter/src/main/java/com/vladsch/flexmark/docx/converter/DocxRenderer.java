@@ -138,8 +138,8 @@ public class DocxRenderer implements IRender {
     // internal stuff
     public static final String EMOJI_RESOURCE_PREFIX = "emoji:";
 
-    public static final DataKey<String> DOC_EMOJI_ROOT_IMAGE_PATH = new DataKey<>("DOC_EMOJI_ROOT_IMAGE_PATH", options -> {
-        if (options != null && options.contains(EmojiExtension.ROOT_IMAGE_PATH)) {
+    public static final DataKey<String> DOC_EMOJI_ROOT_IMAGE_PATH = new DataKey<>("DOC_EMOJI_ROOT_IMAGE_PATH", EMOJI_RESOURCE_PREFIX, options -> {
+        if (options.contains(EmojiExtension.ROOT_IMAGE_PATH)) {
             return options.get(EmojiExtension.ROOT_IMAGE_PATH);
         }
 
@@ -194,7 +194,7 @@ public class DocxRenderer implements IRender {
     }
 
     public static WordprocessingMLPackage getDefaultTemplate(DataHolder options) {
-        return getDefaultTemplate(DEFAULT_TEMPLATE_RESOURCE.getFrom(options));
+        return getDefaultTemplate(DEFAULT_TEMPLATE_RESOURCE.get(options));
     }
 
     public static WordprocessingMLPackage getDefaultTemplate() {
@@ -231,7 +231,7 @@ public class DocxRenderer implements IRender {
 
             if (documentPart.getStyleDefinitionsPart() == null) {
                 StyleDefinitionsPart stylesPart = new org.docx4j.openpackaging.parts.WordprocessingML.StyleDefinitionsPart();
-                Styles styles = (Styles) XmlUtils.unmarshalString(STYLES_XML.getFrom(options));
+                Styles styles = (Styles) XmlUtils.unmarshalString(STYLES_XML.get(options));
                 stylesPart.setJaxbElement(styles);
                 documentPart.addTargetPart(stylesPart); // NB - add it to main doc part, not package!
                 assert documentPart.getStyleDefinitionsPart() != null : "Styles failed to set";
@@ -240,7 +240,7 @@ public class DocxRenderer implements IRender {
             if (documentPart.getNumberingDefinitionsPart() == null) {
                 // add it
                 NumberingDefinitionsPart numberingPart = new org.docx4j.openpackaging.parts.WordprocessingML.NumberingDefinitionsPart();
-                Numbering numbering = (Numbering) XmlUtils.unmarshalString(NUMBERING_XML.getFrom(options));
+                Numbering numbering = (Numbering) XmlUtils.unmarshalString(NUMBERING_XML.get(options));
                 numberingPart.setJaxbElement(numbering);
                 documentPart.addTargetPart(numberingPart); // NB - add it to main doc part, not package!
                 assert documentPart.getNumberingDefinitionsPart() != null : "Numbering failed to set";
@@ -292,7 +292,7 @@ public class DocxRenderer implements IRender {
      */
     @NotNull
     public String render(@NotNull Node document) {
-        String resourcePath = DEFAULT_TEMPLATE_RESOURCE.getFrom(getOptions());
+        String resourcePath = DEFAULT_TEMPLATE_RESOURCE.get(getOptions());
         WordprocessingMLPackage mlPackage = getDefaultTemplate(resourcePath);
         render(document, mlPackage);
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
@@ -506,7 +506,7 @@ public class DocxRenderer implements IRender {
             this.renderingPhases = new HashSet<>(DocxRendererPhase.values().length);
             Set<Class> collectNodeTypes = new HashSet<>(100);
             this.phasedFormatters = new ArrayList<>(nodeFormatterFactories.size());
-            Boolean defaultLinkResolver = DEFAULT_LINK_RESOLVER.getFrom(options);
+            Boolean defaultLinkResolver = DEFAULT_LINK_RESOLVER.get(options);
             this.myLinkResolvers = new LinkResolver[linkResolverFactories.size() + (defaultLinkResolver ? 1 : 0)];
             this.htmlIdGenerator = htmlIdGeneratorFactory != null ? htmlIdGeneratorFactory.create(this)
                     : new HeaderIdGenerator.Factory().create(this);

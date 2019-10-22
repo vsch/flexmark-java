@@ -7,6 +7,6 @@ public class EnumeratedReferenceOptions {
     final int contentIndent;
 
     public EnumeratedReferenceOptions(DataHolder options) {
-        this.contentIndent = Parser.LISTS_ITEM_INDENT.getFrom(options);
+        this.contentIndent = Parser.LISTS_ITEM_INDENT.get(options);
     }
 }

@@ -23,7 +23,7 @@ public class EnumeratedReferenceNodeFormatter extends NodeRepositoryFormatter<En
 
     @Override
     public EnumeratedReferenceRepository getRepository(DataHolder options) {
-        return EnumeratedReferenceExtension.ENUMERATED_REFERENCES.getFrom(options);
+        return EnumeratedReferenceExtension.ENUMERATED_REFERENCES.get(options);
     }
 
     @Override

@@ -30,9 +30,9 @@ public class AutolinkNodePostProcessor extends NodePostProcessor {
             .build();
 
     public AutolinkNodePostProcessor(Document document) {
-        String ignoreLinks = AutolinkExtension.IGNORE_LINKS.getFrom(document);
+        String ignoreLinks = AutolinkExtension.IGNORE_LINKS.get(document);
         ignoredLinks = ignoreLinks.isEmpty() ? null : Pattern.compile(ignoreLinks);
-        intellijDummyIdentifier = Parser.INTELLIJ_DUMMY_IDENTIFIER.getFrom(document);
+        intellijDummyIdentifier = Parser.INTELLIJ_DUMMY_IDENTIFIER.get(document);
     }
 
     public boolean isIgnoredLinkPrefix(CharSequence url) {

@@ -30,7 +30,7 @@ public class YouTrackConverterNodeRenderer implements NodeRenderer
 
     public YouTrackConverterNodeRenderer(DataHolder options) {
         this.referenceRepository = options.get(Parser.REFERENCES);
-        recheckUndefinedReferences = HtmlRenderer.RECHECK_UNDEFINED_REFERENCES.getFrom(options);
+        recheckUndefinedReferences = HtmlRenderer.RECHECK_UNDEFINED_REFERENCES.get(options);
         this.listOptions = ListOptions.getFrom(options);
     }
 

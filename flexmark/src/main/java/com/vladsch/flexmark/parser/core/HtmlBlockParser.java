@@ -34,7 +34,7 @@ public class HtmlBlockParser extends AbstractBlockParser {
             // dynamic block tags
             StringBuilder sb = new StringBuilder();
             String delimiter = "";
-            for (String tag : Parser.HTML_BLOCK_TAGS.getFrom(options)) {
+            for (String tag : Parser.HTML_BLOCK_TAGS.get(options)) {
                 sb.append(delimiter)
                         .append("\\Q")
                         .append(tag)
@@ -42,10 +42,10 @@ public class HtmlBlockParser extends AbstractBlockParser {
                 delimiter = "|";
             }
 
-            boolean forTranslator = Parser.HTML_FOR_TRANSLATOR.getFrom(options);
+            boolean forTranslator = Parser.HTML_FOR_TRANSLATOR.get(options);
             if (forTranslator) {
                 sb.append(delimiter)
-                        .append(Parser.TRANSLATION_HTML_BLOCK_TAG_PATTERN.getFrom(options));
+                        .append(Parser.TRANSLATION_HTML_BLOCK_TAG_PATTERN.get(options));
                 delimiter = "|";
             }
 
@@ -287,7 +287,7 @@ public class HtmlBlockParser extends AbstractBlockParser {
 
         private BlockFactory(DataHolder options) {
             super(options);
-            myHtmlCommentBlocksInterruptParagraph = Parser.HTML_COMMENT_BLOCKS_INTERRUPT_PARAGRAPH.getFrom(options);
+            myHtmlCommentBlocksInterruptParagraph = Parser.HTML_COMMENT_BLOCKS_INTERRUPT_PARAGRAPH.get(options);
             this.myHtmlBlockDeepParser = options.get(Parser.HTML_BLOCK_DEEP_PARSER);
             this.myHtmlBlockDeepParseNonBlock = options.get(Parser.HTML_BLOCK_DEEP_PARSE_NON_BLOCK);
             this.myHtmlBlockDeepParseFirstOpenTagOnOneLine = options.get(Parser.HTML_BLOCK_DEEP_PARSE_FIRST_OPEN_TAG_ON_ONE_LINE);
@@ -302,7 +302,7 @@ public class HtmlBlockParser extends AbstractBlockParser {
 
             if (state.getIndent() < 4 && line.charAt(nextNonSpace) == '<' && !(matchedBlockParser.getBlockParser() instanceof HtmlBlockParser)) {
                 if (myHtmlBlockDeepParser) {
-                    HtmlDeepParser deepParser = new HtmlDeepParser(Parser.HTML_BLOCK_TAGS.getFrom(state.getProperties()));
+                    HtmlDeepParser deepParser = new HtmlDeepParser(Parser.HTML_BLOCK_TAGS.get(state.getProperties()));
                     deepParser.parseHtmlChunk(line.subSequence(nextNonSpace, line.length()), myHtmlBlockStartOnlyOnBlockTags, myHtmlBlockDeepParseNonBlock, myHtmlBlockDeepParseFirstOpenTagOnOneLine);
                     if (deepParser.hadHtml()) {
                         // have our html block start

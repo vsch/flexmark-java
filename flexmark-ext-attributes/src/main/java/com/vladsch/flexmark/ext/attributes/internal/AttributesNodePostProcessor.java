@@ -21,7 +21,7 @@ public class AttributesNodePostProcessor extends NodePostProcessor {
     private AttributesInlineParserExtension myParserExtension;
 
     public AttributesNodePostProcessor(Document document) {
-        nodeAttributeRepository = AttributesExtension.NODE_ATTRIBUTES.getFrom(document);
+        nodeAttributeRepository = AttributesExtension.NODE_ATTRIBUTES.get(document);
         myOptions = new AttributesOptions(document);
     }
 

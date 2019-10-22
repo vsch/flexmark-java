@@ -327,7 +327,7 @@ final public class HtmlRendererTest {
         final String docUrl;
 
         public CustomLinkResolverImpl(LinkResolverContext context) {
-            docUrl = DOC_RELATIVE_URL.getFrom(context.getOptions());
+            docUrl = DOC_RELATIVE_URL.get(context.getOptions());
         }
 
         @Override

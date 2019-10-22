@@ -161,10 +161,10 @@ public class AsideBlockParser extends AbstractBlockParser {
 
         BlockFactory(DataHolder options) {
             super(options);
-            allowLeadingSpace = AsideExtension.ALLOW_LEADING_SPACE.getFrom(options);
-            interruptsParagraph = AsideExtension.INTERRUPTS_PARAGRAPH.getFrom(options);
-            interruptsItemParagraph = AsideExtension.INTERRUPTS_ITEM_PARAGRAPH.getFrom(options);
-            withLeadSpacesInterruptsItemParagraph = AsideExtension.WITH_LEAD_SPACES_INTERRUPTS_ITEM_PARAGRAPH.getFrom(options);
+            allowLeadingSpace = AsideExtension.ALLOW_LEADING_SPACE.get(options);
+            interruptsParagraph = AsideExtension.INTERRUPTS_PARAGRAPH.get(options);
+            interruptsItemParagraph = AsideExtension.INTERRUPTS_ITEM_PARAGRAPH.get(options);
+            withLeadSpacesInterruptsItemParagraph = AsideExtension.WITH_LEAD_SPACES_INTERRUPTS_ITEM_PARAGRAPH.get(options);
         }
 
         public BlockStart tryStart(ParserState state, MatchedBlockParser matchedBlockParser) {

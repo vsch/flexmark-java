@@ -32,7 +32,7 @@ public class JekyllIncludeFileSample {
         if (document instanceof Document) {
             Document doc = (Document) document;
             if (doc.contains(JekyllTagExtension.TAG_LIST)) {
-                List<JekyllTag> tagList = JekyllTagExtension.TAG_LIST.getFrom(doc);
+                List<JekyllTag> tagList = JekyllTagExtension.TAG_LIST.get(doc);
                 Map<String, String> includeHtmlMap = new HashMap<>();
 
                 for (JekyllTag tag : tagList) {

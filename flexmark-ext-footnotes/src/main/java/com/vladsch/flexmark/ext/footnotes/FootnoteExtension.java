@@ -58,7 +58,7 @@ public class FootnoteExtension implements Parser.ParserExtension, HtmlRenderer.H
     @Override
     public boolean transferReferences(MutableDataHolder document, DataHolder included) {
         if (document.contains(FOOTNOTES) && included.contains(FOOTNOTES)) {
-            return Parser.transferReferences(FOOTNOTES.getFrom(document), FOOTNOTES.getFrom(included), FOOTNOTES_KEEP.getFrom(document) == KeepType.FIRST);
+            return Parser.transferReferences(FOOTNOTES.get(document), FOOTNOTES.get(included), FOOTNOTES_KEEP.get(document) == KeepType.FIRST);
         }
         return false;
     }

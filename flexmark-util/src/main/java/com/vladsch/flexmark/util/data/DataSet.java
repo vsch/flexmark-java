@@ -24,6 +24,7 @@ public class DataSet implements DataHolder {
      * @param overrides overrides on options
      * @return resulting options where aggregate action keys were aggregated but not applied
      */
+    @NotNull
     public static DataHolder aggregateActions(@NotNull DataHolder other, @NotNull DataHolder overrides) {
         DataSet combined = new DataSet(other);
         combined.dataSet.putAll(overrides.getAll());
@@ -39,6 +40,7 @@ public class DataSet implements DataHolder {
      *
      * @return resulting data holder
      */
+    @NotNull
     public DataHolder aggregate() {
         DataHolder combined = this;
         for (DataKeyAggregator combiner : ourDataKeyAggregators) {
@@ -67,23 +69,25 @@ public class DataSet implements DataHolder {
         }
     }
 
+    @NotNull
     @Override
     public Map<DataKey<?>, Object> getAll() {
         return dataSet;
     }
 
+    @NotNull
     @Override
     public Collection<DataKey<?>> getKeys() {
         return dataSet.keySet();
     }
 
     @Override
-    public boolean contains(DataKey<?> key) {
+    public boolean contains(@NotNull DataKey<?> key) {
         return dataSet.containsKey(key);
     }
 
     @Override
-    public <T> T get(DataKey<T> key) {
+    public <T> T get(@NotNull DataKey<T> key) {
         if (dataSet.containsKey(key)) {
             //noinspection unchecked
             return (T) dataSet.get(key);
@@ -92,27 +96,28 @@ public class DataSet implements DataHolder {
         }
     }
 
-    public static DataSet merge(DataHolder... dataHolders) {
+    @NotNull
+    public static DataSet merge(@NotNull DataHolder... dataHolders) {
         DataSet dataSet = new DataSet();
         for (DataHolder dataHolder : dataHolders) {
-            if (dataHolder != null) {
-                dataSet.dataSet.putAll(dataHolder.getAll());
-            }
+            dataSet.dataSet.putAll(dataHolder.getAll());
         }
         return dataSet;
     }
 
+    @NotNull
     @Override
     public MutableDataSet toMutable() {
         return new MutableDataSet(this);
     }
 
+    @NotNull
     @Override
     public DataSet toImmutable() {
         return this;
     }
 
-    static ArrayList<DataKeyAggregator> ourDataKeyAggregators = new ArrayList<>();
+    private static final ArrayList<DataKeyAggregator> ourDataKeyAggregators = new ArrayList<>();
 
     public static void registerDataKeyAggregator(@NotNull DataKeyAggregator keyAggregator) {
         if (isAggregatorRegistered(keyAggregator)) {

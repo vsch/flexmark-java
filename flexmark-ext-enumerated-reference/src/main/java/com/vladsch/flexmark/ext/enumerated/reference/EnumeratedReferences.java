@@ -15,7 +15,7 @@ public class EnumeratedReferences {
     private final HashMap<String, int[]> enumeratedReferenceOrdinals;
 
     public EnumeratedReferences(DataHolder options) {
-        referenceRepository = EnumeratedReferenceExtension.ENUMERATED_REFERENCES.getFrom(options);
+        referenceRepository = EnumeratedReferenceExtension.ENUMERATED_REFERENCES.get(options);
         enumerationCounters = new HashMap<>();
         enumeratedReferenceOrdinals = new HashMap<>();
     }

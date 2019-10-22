@@ -49,7 +49,7 @@ public class ZzzzzzExtension implements Parser.ParserExtension
     @Override
     public boolean transferReferences(MutableDataHolder document, DataHolder included) {
         if (document.contains(ZZZZZZS) && included.contains(ZZZZZZS)) {
-            return Parser.transferReferences(ZZZZZZS.getFrom(document), ZZZZZZS.getFrom(included), ZZZZZZS_KEEP.getFrom(document) == KeepType.FIRST);
+            return Parser.transferReferences(ZZZZZZS.get(document), ZZZZZZS.get(included), ZZZZZZS_KEEP.get(document) == KeepType.FIRST);
         }
         return false;
     }
