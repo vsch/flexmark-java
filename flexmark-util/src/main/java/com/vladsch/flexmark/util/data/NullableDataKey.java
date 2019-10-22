@@ -3,10 +3,12 @@ package com.vladsch.flexmark.util.data;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.lang.annotation.Annotation;
+
 public class NullableDataKey<T> {
-    protected final @NotNull String name;
-    protected final @NotNull DataValueFactory<T> factory;
-    protected final @Nullable T defaultValue;
+    private final @NotNull String name;
+    private final @NotNull DataValueFactory<T> factory;
+    private final @Nullable T defaultValue;
 
     /**
      * Creates a NullableDataKey with a computed default value and a provided default value when data holder is null.
@@ -17,7 +19,7 @@ public class NullableDataKey<T> {
      * @param defaultValue default to use when data holder is null
      * @param factory      data value factory for creating a new default value for the key for a non-null data holder
      */
-    public NullableDataKey(@NotNull String name, @Nullable T defaultValue, @NotNull DataValueNotNullFactory<T> factory) {
+    public NullableDataKey(@NotNull String name, @Nullable T defaultValue, @NotNull DataValueFactory<T> factory) {
         this.name = name;
         this.defaultValue = defaultValue;
         this.factory = factory;
@@ -31,7 +33,7 @@ public class NullableDataKey<T> {
      * @param name    See {@link #getName()}.
      * @param factory data value factory for creating a new default value for the key
      */
-    public NullableDataKey(@NotNull String name, @NotNull DataValueFactory<T> factory) {
+    public NullableDataKey(@NotNull String name, @NotNull DataValueNullableFactory<T> factory) {
         this.name = name;
         this.defaultValue = factory.apply(null);
         this.factory = factory;
@@ -65,13 +67,19 @@ public class NullableDataKey<T> {
     }
 
     @Nullable
-    public T getDefaultValue(@Nullable DataHolder holder) {
-        return holder == null ? defaultValue : factory.apply(holder);
+    public T igetDefaultValue() {
+        return defaultValue;
+    }
+
+    @Nullable
+    public T getDefaultValue(@NotNull DataHolder holder) {
+        return factory.apply(holder);
     }
 
     @Nullable
     public T get(@Nullable DataHolder holder) {
-        return holder == null ? defaultValue : holder.get(this);
+        //noinspection unchecked
+        return holder == null ? defaultValue : (T) holder.getOrCompute(this, this::getDefaultValue);
     }
 
     /**
@@ -81,7 +89,7 @@ public class NullableDataKey<T> {
      */
     @Deprecated
     @Nullable
-    public T getFrom(@Nullable DataHolder holder) {
+    final public T getFrom(@Nullable DataHolder holder) {
         return get(holder);
     }
 
@@ -92,7 +100,6 @@ public class NullableDataKey<T> {
 
     @Override
     public String toString() {
-        // factory applied to null in constructor, no sense doing it again here
         if (defaultValue != null) {
             return "NullableDataKey<" + defaultValue.getClass().getName().substring(defaultValue.getClass().getPackage().getName().length() + 1) + "> " + name;
         } else {
