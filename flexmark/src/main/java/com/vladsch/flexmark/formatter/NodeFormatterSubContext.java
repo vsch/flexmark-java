@@ -2,7 +2,6 @@ package com.vladsch.flexmark.formatter;
 
 import com.vladsch.flexmark.util.ast.Node;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 

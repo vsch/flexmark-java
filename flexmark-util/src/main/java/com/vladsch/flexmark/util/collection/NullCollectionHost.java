@@ -1,6 +1,5 @@
 package com.vladsch.flexmark.util.collection;
 
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class NullCollectionHost<K> implements CollectionHost<K> {

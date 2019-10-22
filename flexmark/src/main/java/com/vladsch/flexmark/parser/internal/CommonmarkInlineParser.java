@@ -4,6 +4,7 @@ import com.vladsch.flexmark.parser.InlineParserExtensionFactory;
 import com.vladsch.flexmark.parser.delimiter.DelimiterProcessor;
 import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.data.DataHolder;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.BitSet;
 import java.util.List;
@@ -18,7 +19,7 @@ public class CommonmarkInlineParser extends InlineParserImpl {
     }
 
     @Override
-    public void initializeDocument(Document document) {
+    public void initializeDocument(@NotNull Document document) {
         super.initializeDocument(document);
     }
 }

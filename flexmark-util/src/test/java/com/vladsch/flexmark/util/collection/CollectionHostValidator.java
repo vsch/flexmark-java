@@ -2,7 +2,6 @@ package com.vladsch.flexmark.util.collection;
 
 import com.vladsch.flexmark.util.Pair;
 import com.vladsch.flexmark.util.Paired;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.junit.Assert;
 

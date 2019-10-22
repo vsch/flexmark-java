@@ -20,14 +20,14 @@ import java.util.Map;
  */
 public interface InlineParser extends LightInlineParser {
 
-    void initializeDocument(Document document);
-    void finalizeDocument(Document document);
+    void initializeDocument(@NotNull Document document);
+    void finalizeDocument(@NotNull Document document);
 
     /**
      * @param input the content to parse as inline
      * @param node  the node to append resulting nodes to (as children)
      */
-    void parse(BasedSequence input, Node node);
+    void parse(@NotNull BasedSequence input, @NotNull Node node);
 
     @Nullable Delimiter getLastDelimiter();
     @Nullable Bracket getLastBracket();

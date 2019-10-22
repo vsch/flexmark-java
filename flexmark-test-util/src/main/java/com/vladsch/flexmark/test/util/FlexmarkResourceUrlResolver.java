@@ -1,10 +1,10 @@
 package com.vladsch.flexmark.test.util;
 
-import com.vladsch.flexmark.test.util.spec.ResourceLocation;
 import com.vladsch.flexmark.test.util.spec.ResourceResolverManager;
 import com.vladsch.flexmark.test.util.spec.ResourceUrlResolver;
 
-import static com.vladsch.flexmark.test.util.spec.ResourceUrlResolver.*;
+import static com.vladsch.flexmark.test.util.spec.ResourceUrlResolver.isFileProtocol;
+import static com.vladsch.flexmark.test.util.spec.ResourceUrlResolver.removeProtocol;
 
 public class FlexmarkResourceUrlResolver {
     public static void registerUrlResolvers() {

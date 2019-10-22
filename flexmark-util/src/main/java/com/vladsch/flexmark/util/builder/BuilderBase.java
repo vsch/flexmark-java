@@ -1,11 +1,17 @@
 package com.vladsch.flexmark.util.builder;
 
 import com.vladsch.flexmark.util.SharedDataKeys;
-import com.vladsch.flexmark.util.data.*;
+import com.vladsch.flexmark.util.data.DataHolder;
+import com.vladsch.flexmark.util.data.DataKey;
+import com.vladsch.flexmark.util.data.MutableDataSet;
+import com.vladsch.flexmark.util.data.NullableDataKey;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
 
 public abstract class BuilderBase<T extends BuilderBase<T>> extends MutableDataSet {
 

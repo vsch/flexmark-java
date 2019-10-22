@@ -5,7 +5,6 @@ import com.vladsch.flexmark.ext.ins.internal.InsJiraRenderer;
 import com.vladsch.flexmark.ext.ins.internal.InsNodeRenderer;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
-import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.data.NullableDataKey;
 import org.jetbrains.annotations.NotNull;

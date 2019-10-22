@@ -36,8 +36,8 @@ public class NullableDataKey<T> extends DataKeyBase<T> {
      * <p>
      * Use this constructor to ensure that factory is never called with null data holder value
      *
-     * @param name         See {@link #getName()}.
-     * @param supplier     data value factory for creating a new default value for the key not dependent on dataHolder
+     * @param name     See {@link #getName()}.
+     * @param supplier data value factory for creating a new default value for the key not dependent on dataHolder
      */
     public NullableDataKey(@NotNull String name, @NotNull Supplier<T> supplier) {
         super(name, supplier.get(), (holder) -> supplier.get());
@@ -62,6 +62,7 @@ public class NullableDataKey<T> extends DataKeyBase<T> {
 
     /**
      * Create a DataKey with null default value and factory producing null values
+     *
      * @param name key name
      */
     public NullableDataKey(@NotNull String name) {

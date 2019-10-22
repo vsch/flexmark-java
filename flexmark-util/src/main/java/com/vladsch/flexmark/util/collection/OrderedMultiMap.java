@@ -34,12 +34,12 @@ public class OrderedMultiMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V
         this.myIndexedProxy = null;
         this.myValueSet = new OrderedSet<>(capacity, new CollectionHost<V>() {
             @Override
-            public void adding(int index, @Nullable  V v, @Nullable  Object k) {
+            public void adding(int index, @Nullable V v, @Nullable Object k) {
                 addingValue(index, v, k);
             }
 
             @Override
-            public Object removing(int index, @Nullable  V v) {
+            public Object removing(int index, @Nullable V v) {
                 return removingValue(index, v);
             }
 
@@ -66,12 +66,12 @@ public class OrderedMultiMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V
 
         this.myKeySet = new OrderedSet<>(capacity, new CollectionHost<K>() {
             @Override
-            public void adding(int index, @Nullable  K k, @Nullable  Object v) {
+            public void adding(int index, @Nullable K k, @Nullable Object v) {
                 addingKey(index, k, v);
             }
 
             @Override
-            public Object removing(int index, @Nullable  K k) {
+            public Object removing(int index, @Nullable K k) {
                 return removingKey(index, k);
             }
 
@@ -138,7 +138,7 @@ public class OrderedMultiMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V
     }
 
     @SuppressWarnings("unchecked")
-    void addingKey(int index, @Nullable  K k, @Nullable Object v) {
+    void addingKey(int index, @Nullable K k, @Nullable Object v) {
         assert !myInValueUpdate;
 
         myInValueUpdate = true;
@@ -161,7 +161,7 @@ public class OrderedMultiMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V
         myInValueUpdate = false;
     }
 
-    Object removingKey(int index, @Nullable  K k) {
+    Object removingKey(int index, @Nullable K k) {
         assert !myInValueUpdate;
 
         myInValueUpdate = true;
@@ -174,7 +174,7 @@ public class OrderedMultiMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V
     }
 
     @SuppressWarnings("unchecked")
-    void addingValue(int index, @Nullable  V v, @Nullable Object k) {
+    void addingValue(int index, @Nullable V v, @Nullable Object k) {
         assert !myInKeyUpdate;
 
         myInKeyUpdate = true;
@@ -246,7 +246,7 @@ public class OrderedMultiMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V
     }
 
     @Override
-    public @Nullable V put(@Nullable  K k, @Nullable  V v) {
+    public @Nullable V put(@Nullable K k, @Nullable V v) {
         return putKeyValue(k, v);
     }
 

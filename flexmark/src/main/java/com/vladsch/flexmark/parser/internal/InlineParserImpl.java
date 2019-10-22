@@ -82,7 +82,7 @@ public class InlineParserImpl extends LightInlineParserImpl implements InlinePar
     }
 
     @Override
-    public void initializeDocument(Document document) {
+    public void initializeDocument(@NotNull Document document) {
         this.document = document;
         this.referenceRepository = Parser.REFERENCES.get(document);
 
@@ -116,7 +116,7 @@ public class InlineParserImpl extends LightInlineParserImpl implements InlinePar
     }
 
     @Override
-    public void finalizeDocument(Document document) {
+    public void finalizeDocument(@NotNull Document document) {
         assert this.referenceRepository == Parser.REFERENCES.get(document);
 
         if (inlineParserExtensions != null) {
@@ -156,7 +156,7 @@ public class InlineParserImpl extends LightInlineParserImpl implements InlinePar
      * Parse content in block into inline children, using reference map to resolve references.
      */
     @Override
-    public void parse(BasedSequence content, Node block) {
+    public void parse(@NotNull BasedSequence content, @NotNull Node block) {
         this.block = block;
         this.input = content.trim();
         this.index = 0;

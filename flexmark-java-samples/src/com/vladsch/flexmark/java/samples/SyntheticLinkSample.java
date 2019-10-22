@@ -7,7 +7,6 @@ import com.vladsch.flexmark.ast.TextBase;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.PostProcessor;
-import com.vladsch.flexmark.parser.PostProcessorFactory;
 import com.vladsch.flexmark.parser.block.DocumentPostProcessor;
 import com.vladsch.flexmark.parser.block.DocumentPostProcessorFactory;
 import com.vladsch.flexmark.parser.block.NodePostProcessor;
