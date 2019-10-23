@@ -9,6 +9,7 @@ flexmark-java
 - [Next 0.60.0](#next-0600)
     - [API Changes](#api-changes)
 - [Next](#next)
+- [0.59.36](#05936)
 - [0.59.34](#05934)
 - [0.59.32](#05932)
 - [0.59.30](#05930)
@@ -159,6 +160,13 @@ Next
 * [ ] Add: yaml front matter configurator for modules. See:
       [Yaml Front Matter Configuration](../../wiki/Yaml-Front-Matter-Configuration)
 * [ ] Add: spec example language per section options and rendering in HTML.
+
+0.59.36
+-------
+
+* Fix: remove synchronization. The issue was with using `HashMap.computeIfAbsent()` and passing
+  the factory, which could and would access and create other keys. This caused concurrent
+  modification, not threading. Now computing value with factory then adding it to the dataSet.
 
 0.59.34
 -------
