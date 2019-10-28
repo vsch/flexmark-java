@@ -58,6 +58,7 @@ public class ComboExtAttributesSpecTest extends RendererSpecTest {
         optionsMap.put("fenced-code-to-code", new MutableDataSet().set(AttributesExtension.FENCED_CODE_ADD_ATTRIBUTES, FencedCodeAddType.ADD_TO_CODE));
         optionsMap.put("custom", new MutableDataSet().set(CUSTOM_OPTION, (option, text) -> null));
     }
+
     public ComboExtAttributesSpecTest(@NotNull SpecExample example) {
         super(example, optionsMap, OPTIONS);
     }

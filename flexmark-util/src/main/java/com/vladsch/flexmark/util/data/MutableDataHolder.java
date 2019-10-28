@@ -47,7 +47,7 @@ public interface MutableDataHolder extends DataHolder, MutableDataSetter {
      * @param key data key to remove
      * @return mutable data holder for chained calls
      */
-    @NotNull <T> MutableDataHolder remove(@NotNull DataKeyBase<T> key);
+    @NotNull MutableDataHolder remove(@NotNull DataKeyBase<?> key);
 
     /**
      * Store the given value for the key

@@ -62,7 +62,7 @@ public class MutableDataSet extends DataSet implements MutableDataHolder {
 
     @NotNull
     @Override
-    public <T> MutableDataSet remove(@NotNull DataKeyBase<T> key) {
+    public MutableDataSet remove(@NotNull DataKeyBase<?> key) {
         dataSet.remove(key);
         return this;
     }

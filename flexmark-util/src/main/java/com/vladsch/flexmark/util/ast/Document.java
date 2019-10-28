@@ -56,7 +56,7 @@ public class Document extends Block implements MutableDataHolder {
 
     @NotNull
     @Override
-    public <T> MutableDataSet remove(@NotNull DataKeyBase<T> key) {return dataSet.remove(key);}
+    public MutableDataSet remove(@NotNull DataKeyBase<?> key) {return dataSet.remove(key);}
 
     @Override
     @Nullable

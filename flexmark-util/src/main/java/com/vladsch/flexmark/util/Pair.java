@@ -1,5 +1,7 @@
 package com.vladsch.flexmark.util;
 
+import java.util.Objects;
+
 public class Pair<K, V> implements Paired<K, V> {
     public static <K1, V1> Pair<K1, V1> of(K1 first, V1 second) {
         return new Pair<>(first, second);
@@ -49,8 +51,8 @@ public class Pair<K, V> implements Paired<K, V> {
 
         Pair<?, ?> pair = (Pair<?, ?>) o;
 
-        if (myFirst != null ? !myFirst.equals(pair.myFirst) : pair.myFirst != null) return false;
-        return mySecond != null ? mySecond.equals(pair.mySecond) : pair.mySecond == null;
+        if (!Objects.equals(myFirst, pair.myFirst)) return false;
+        return Objects.equals(mySecond, pair.mySecond);
     }
 
     @Override

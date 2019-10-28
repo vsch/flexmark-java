@@ -29,7 +29,7 @@ public class HeadingParser extends AbstractBlockParser {
         public HeadingParsing(DataHolder options) {
             super(options);
 
-            ATX_HEADING = Parser.HEADING_NO_ATX_SPACE.get(options) ? Pattern.compile("^#{1,6}(?:[ \t]*|$)") : Parser.HEADING_NO_EMPTY_HEADING_WITHOUT_SPACE.get(options) ? Pattern.compile("^#{1,6}[ \t]+") : Pattern.compile("^#{1,6}(?:[ \t]+|$)");
+            ATX_HEADING = Parser.HEADING_NO_ATX_SPACE.get(options) ? Pattern.compile("^#{1,6}(?:[ \t]*|$)") : Parser.HEADING_NO_EMPTY_HEADING_WITHOUT_SPACE.get(options) ? Pattern.compile("^#{1,6}(?:[ \t]*(?=[^ \t#])|[ \t]+$)") : Pattern.compile("^#{1,6}(?:[ \t]+|$)");
             ATX_TRAILING = Parser.HEADING_NO_ATX_SPACE.get(options) ? Pattern.compile("[ \t]*#+[ \t]*$") : Pattern.compile("(^| |\t)[ \t]*#+[ \t]*$");
 
             int minLength = Parser.HEADING_SETEXT_MARKER_LENGTH.get(options);

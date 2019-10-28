@@ -657,6 +657,17 @@ public abstract class Node {
             segmentSpanChars(out, sequence.getStartOffset(), sequence.getEndOffset(), name, sequence.toString());
     }
 
+    public static void segmentSpanCharsToVisible(@NotNull StringBuilder out, @NotNull BasedSequence sequence, @NotNull String name) {
+        if (sequence.isNotNull()) {
+            if (sequence.length() <= 10) {
+                segmentSpanChars(out, sequence.getStartOffset(), sequence.getEndOffset(), name, sequence.toVisibleWhitespaceString());
+            } else {
+                // give the first 5 and last 5
+                segmentSpanChars(out, sequence.getStartOffset(), sequence.getEndOffset(), name, sequence.subSequence(0, 5).toVisibleWhitespaceString(), SPLICE, sequence.endSequence(sequence.length() - 5).toVisibleWhitespaceString());
+            }
+        }
+    }
+
     public static void delimitedSegmentSpan(
             @NotNull StringBuilder out,
             @NotNull BasedSequence openingSequence,

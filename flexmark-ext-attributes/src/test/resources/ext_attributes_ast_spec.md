@@ -2866,9 +2866,6 @@ Document[0, 35]
       AttributeNode[17, 34] name:[17, 24, "caption"] sep:[24, 25, "="] valueOpen:[25, 26, "\""] value:[26, 33, "Caption"] valueClose:[33, 34, "\""]
 ````````````````````````````````
 -->
-
-
-
 ```````````````````````````````` example(Fenced Code: 20) options(info-attributes, fenced-code-to-code)
 ```plantuml
 ```
