@@ -118,7 +118,11 @@ code {
       <EnhPreviewSettings allowBrowsingInPreview="false" openRemoteLinks="true" replaceUnicodeEmoji="false" showGitHubPageIfSynced="false" />
       <EnhHtmlSettings embedUrlContent="false" embedImages="false" embedHttpImages="false" mathConversion="-1" />
       <FlexmarkHtmlSettings flexmarkSpecExampleRendering="0" flexmarkSpecExampleRenderHtml="false">
-        <flexmarkSectionLanguages />
+        <flexmarkSectionLanguages>
+          <option name="1" value="Markdown" />
+          <option name="2" value="HTML" />
+          <option name="3" value="flexmark-ast:1" />
+        </flexmarkSectionLanguages>
       </FlexmarkHtmlSettings>
     </option>
   </profile>

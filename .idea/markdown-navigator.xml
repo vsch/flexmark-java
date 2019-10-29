@@ -5,7 +5,7 @@
       <flexmarkSectionLanguages>
         <option name="1" value="Markdown" />
         <option name="2" value="HTML" />
-        <option name="3" value="flexmark-ast:1" />
+        <option name="3" value="flexmark-ast:1,2" />
       </flexmarkSectionLanguages>
     </FlexmarkHtmlSettings>
   </component>
@@ -27,7 +27,7 @@
         <option name="EXTANCHORLINKS" value="false" />
         <option name="EXTANCHORLINKS_WRAP" value="false" />
         <option name="FENCED_CODE_BLOCKS" value="true" />
-        <option name="FOOTNOTES" value="true" />
+        <option name="FOOTNOTES" value="false" />
         <option name="HARDWRAPS" value="false" />
         <option name="HTML_DEEP_PARSER" value="false" />
         <option name="INSERTED" value="false" />
