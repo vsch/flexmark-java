@@ -15,8 +15,8 @@ public class DumpSpecReader extends SpecReader {
     protected final SpecExampleProcessor testCase;
     protected StringBuilder exampleComment;
 
-    public DumpSpecReader(@NotNull InputStream stream, @NotNull SpecExampleProcessor testCase, @NotNull ResourceLocation location) {
-        super(stream, location);
+    public DumpSpecReader(@NotNull InputStream stream, @NotNull SpecExampleProcessor testCase, @NotNull ResourceLocation location, boolean compoundSections) {
+        super(stream, location, compoundSections);
         this.testCase = testCase;
     }
 

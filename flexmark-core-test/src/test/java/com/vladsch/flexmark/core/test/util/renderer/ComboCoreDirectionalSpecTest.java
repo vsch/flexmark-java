@@ -27,6 +27,10 @@ final public class ComboCoreDirectionalSpecTest extends CoreRendererSpecTest {
         super(example, null, OPTIONS);
     }
 
+    protected boolean compoundSections() {
+        return false;
+    }
+
     @Parameterized.Parameters(name = "{0}")
     public static List<Object[]> data() {
         return getTestData(RESOURCE_LOCATION);

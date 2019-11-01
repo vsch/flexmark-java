@@ -1,5 +1,5 @@
 ---
-title: Formatter Extension Spec
+title: Formatter Translation Spec
 author:
 version:
 date: '2016-06-06'
@@ -7,6 +7,8 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 ...
 
 ---
+
+# Formatter Translation Spec
 
 ## Formatter
 
@@ -329,7 +331,7 @@ woRK WiIth ![maARKDoWN](https://test.com/doc.png "teESt")
 ````````````````````````````````
 
 
-### Lists
+## Lists
 
 ```````````````````````````````` example Lists: 1
 * list item 1
@@ -792,7 +794,7 @@ NeEXt LiINeE
 ````````````````````````````````
 
 
-### Block Quotes
+## Block Quotes
 
 ```````````````````````````````` example(Block Quotes: 1) options(block-quote-compact-with-space, fenced-code-minimize)
 > > block quote
@@ -945,7 +947,7 @@ LaAZyY coNtiINuUaAtiIoN
 ````````````````````````````````
 
 
-### Blank Lines
+## Blank Lines
 
 default
 
@@ -1032,7 +1034,7 @@ paARaAGRaAph
 ````````````````````````````````
 
 
-### Headings
+## Headings
 
 ```````````````````````````````` example(Headings: 1) options(atx-space-remove)
 # Heading
@@ -1123,7 +1125,7 @@ heEaADiING
 ````````````````````````````````
 
 
-### Thematic Break
+## Thematic Break
 
 ```````````````````````````````` example Thematic Break: 1
 ---
@@ -1139,7 +1141,7 @@ heEaADiING
 ````````````````````````````````
 
 
-### Fenced Code
+## Fenced Code
 
 ```````````````````````````````` example Fenced Code: 1
 ```info
@@ -1321,7 +1323,7 @@ thiIS iIS [spaARtaA](http://sparta.com#anchor)
 ````````````````````````````````
 
 
-### Link Text Translation
+## Link Text Translation
 
 ```````````````````````````````` example Link Text Translation: 1
 [**Translated *Bold-Italic***](http://example.com)
@@ -1370,7 +1372,7 @@ thiIS iIS [spaARtaA](http://sparta.com#anchor)
 ````````````````````````````````
 
 
-### Reference Placement
+## Reference Placement
 
 default
 
@@ -1662,7 +1664,7 @@ paARaAGRaAph 3
 ````````````````````````````````
 
 
-### Images and links at start of line
+## Images and links at start of line
 
 ```````````````````````````````` example Images and links at start of line: 1
 text with [link](/url) followed by ![alt](/image)

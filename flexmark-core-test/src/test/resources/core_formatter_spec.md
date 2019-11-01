@@ -1,5 +1,5 @@
 ---
-title: Formatter Extension Spec
+title: Formatter Spec
 author:
 version:
 date: '2016-06-06'
@@ -7,6 +7,8 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 ...
 
 ---
+
+# Formatter Spec Tests
 
 ## Formatter
 
@@ -230,7 +232,7 @@ indented code
 ````````````````````````````````
 
 
-### Lists
+## Lists
 
 ```````````````````````````````` example Lists: 1
 * list item 1
@@ -733,7 +735,7 @@ next line
 ````````````````````````````````
 
 
-### Block Quotes
+## Block Quotes
 
 ```````````````````````````````` example(Block Quotes: 1) options(block-quote-compact-with-space, fenced-code-minimize)
 > 1. numbered item 1
@@ -957,7 +959,7 @@ lazy continuation
 ````````````````````````````````
 
 
-### Blank Lines
+## Blank Lines
 
 default
 
@@ -1096,7 +1098,7 @@ Document[0, 12]
 ````````````````````````````````
 
 
-### Headings
+## Headings
 
 ```````````````````````````````` example(Headings: 1) options(atx-space-remove)
 # Heading
@@ -1198,7 +1200,7 @@ Heading
 ````````````````````````````````
 
 
-### Thematic Break
+## Thematic Break
 
 ```````````````````````````````` example Thematic Break: 1
 ---
@@ -1216,7 +1218,7 @@ Heading
 ````````````````````````````````
 
 
-### Fenced Code
+## Fenced Code
 
 ```````````````````````````````` example Fenced Code: 1
 ```info
@@ -1411,7 +1413,7 @@ closing
 ````````````````````````````````
 
 
-### Reference Placement
+## Reference Placement
 
 default
 
@@ -1658,7 +1660,7 @@ paragraph 3
 ````````````````````````````````
 
 
-### Images and links at start of line
+## Images and links at start of line
 
 ```````````````````````````````` example Images and links at start of line: 1
 text with [link](/url) followed by ![alt](/image)

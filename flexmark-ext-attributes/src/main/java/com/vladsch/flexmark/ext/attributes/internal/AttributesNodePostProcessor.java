@@ -58,7 +58,7 @@ public class AttributesNodePostProcessor extends NodePostProcessor {
                     Node parentPreviousNotBlankLine = parent.getPreviousAnyNot(BlankLine.class);
                     if (parentPreviousNotBlankLine == null) {
                         //              1. attributes go to the paragraph parent's parent
-                        attributeOwner = parent.getParent().getParent();
+                        attributeOwner = parent.getGrandParent();
                     } else {
                         if (attributesNode.getNextAnyNot(AttributesNode.class, BlankLine.class) == null) {
                             //                  2. attributes go to paragraph's previous sibling,

@@ -10,7 +10,11 @@ import static org.junit.Assert.assertEquals;
 public abstract class FullSpecTestCase extends RenderingTestCase implements SpecExampleProcessor {
     @NotNull
     public DumpSpecReader create(@NotNull ResourceLocation location) {
-        return SpecReader.create(location, (stream, fileUrl) -> new DumpSpecReader(stream, this, fileUrl));
+        return SpecReader.create(location, (stream, fileUrl) -> new DumpSpecReader(stream, this, fileUrl, compoundSections()));
+    }
+
+    protected boolean compoundSections() {
+        return false;
     }
 
     protected @NotNull ResourceLocation getSpecResourceLocation() {

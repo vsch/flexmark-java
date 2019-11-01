@@ -27,15 +27,15 @@
       <exportedFile path="$PROJECT_DIR$/flexmark-ext-typographic/src/main/javadoc/overview.html" settingsVersion="D16B5AAF-FCB94777" />
       <exportedFile path="$PROJECT_DIR$/flexmark-ext-tables/src/main/javadoc/overview.html" settingsVersion="D16B5AAF-FCB94777" />
       <exportedFile path="$PROJECT_DIR$/flexmark-tree-iteration/src/main/javadoc/overview.html" settingsVersion="D16B5AAF-FCB94777" />
-      <exportedFile path="$PROJECT_DIR$/flexmark-ext-yaml-front-matter/src/main/javadoc/overview.html" settingsVersion="D16B5AAF-FCB94777" />
-      <exportedFile path="$PROJECT_DIR$/flexmark-ext-gfm-strikethrough/src/main/javadoc/overview.html" settingsVersion="D16B5AAF-FCB94777" />
       <exportedFile path="$PROJECT_DIR$/flexmark-docx-converter/src/main/javadoc/overview.html" settingsVersion="D16B5AAF-FCB94777" />
       <exportedFile path="$PROJECT_DIR$/flexmark-ext-abbreviation/src/main/javadoc/overview.html" settingsVersion="D16B5AAF-FCB94777" />
+      <exportedFile path="$PROJECT_DIR$/flexmark-ext-gfm-strikethrough/src/main/javadoc/overview.html" settingsVersion="D16B5AAF-FCB94777" />
+      <exportedFile path="$PROJECT_DIR$/flexmark-ext-yaml-front-matter/src/main/javadoc/overview.html" settingsVersion="D16B5AAF-FCB94777" />
       <exportedFile path="$PROJECT_DIR$/flexmark-ext-anchorlink/src/main/javadoc/overview.html" settingsVersion="D16B5AAF-FCB94777" />
-      <exportedFile path="$PROJECT_DIR$/flexmark/src/main/javadoc/overview.html" settingsVersion="D16B5AAF-FCB94777" />
       <exportedFile path="$PROJECT_DIR$/flexmark-ext-aside/src/main/javadoc/overview.html" settingsVersion="D16B5AAF-FCB94777" />
-      <exportedFile path="$PROJECT_DIR$/flexmark-ext-gfm-tasklist/src/main/javadoc/overview.html" settingsVersion="D16B5AAF-FCB94777" />
+      <exportedFile path="$PROJECT_DIR$/flexmark/src/main/javadoc/overview.html" settingsVersion="D16B5AAF-FCB94777" />
       <exportedFile path="$PROJECT_DIR$/flexmark-ext-gitlab/src/main/javadoc/overview.html" settingsVersion="D16B5AAF-FCB94777" />
+      <exportedFile path="$PROJECT_DIR$/flexmark-ext-gfm-tasklist/src/main/javadoc/overview.html" settingsVersion="D16B5AAF-FCB94777" />
       <exportedFile path="$PROJECT_DIR$/flexmark-ext-ins/src/main/javadoc/overview.html" settingsVersion="D16B5AAF-FCB94777" />
       <exportedFile path="$PROJECT_DIR$/flexmark-ext-admonition/src/main/javadoc/overview.html" settingsVersion="D16B5AAF-FCB94777" />
       <exportedFile path="$PROJECT_DIR$/flexmark-ext-superscript/src/main/javadoc/overview.html" settingsVersion="D16B5AAF-FCB94777" />

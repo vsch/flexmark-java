@@ -30,7 +30,7 @@ public class BoundsIntegrationTest {
 
     @Parameterized.Parameters(name = "{0}")
     public static List<Object[]> data() {
-        SpecReader specReader = SpecReader.createAndReadExamples(TestUtils.DEFAULT_RESOURCE_LOCATION);
+        SpecReader specReader = SpecReader.createAndReadExamples(TestUtils.DEFAULT_RESOURCE_LOCATION, false);
         List<SpecExample> examples = specReader.getExamples();
         List<Object[]> data = new ArrayList<>();
         for (SpecExample example : examples) {

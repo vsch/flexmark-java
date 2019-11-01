@@ -92,9 +92,9 @@ public class TableJiraRenderer implements NodeRenderer {
 
     private void render(TableCell node, NodeRendererContext context, HtmlWriter html) {
         context.renderChildren(node);
-        if (node.getParent().getParent() instanceof TableHead) {
+        if (node.getGrandParent() instanceof TableHead) {
             html.raw("||");
-        } else if (node.getParent().getParent() instanceof TableBody) {
+        } else if (node.getGrandParent() instanceof TableBody) {
             html.raw("|");
         }
     }

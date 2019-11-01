@@ -186,7 +186,7 @@ public class SpecExample {
             classMap.put(resourceClass.getName(), javaClassFile);
         }
 
-        ResourceLocation location = ResourceLocation.of(resourceClass, "", "", javaClassFile);
+        ResourceLocation location = new ResourceLocation(resourceClass, "", javaClassFile);
         return new SpecExample(location, traceElement.getLineNumber() - 1, null, traceElement.getMethodName(), 0, source, html, ast, "");
     }
 }

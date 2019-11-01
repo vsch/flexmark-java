@@ -9,6 +9,8 @@ import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.data.DataSet;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.BasedSequenceImpl;
+import com.vladsch.flexmark.util.sequence.RichCharSequenceImpl;
 import com.vladsch.flexmark.util.sequence.SegmentedSequence;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -49,13 +51,12 @@ public class TestUtils {
 
     public static final DataHolder NO_FILE_EOL_FALSE = new MutableDataSet().set(NO_FILE_EOL, false).toImmutable();
     public static final String DEFAULT_SPEC_RESOURCE = "/spec.txt";
-    public static final String DEFAULT_URL_PREFIX = "fqn://";  // use class fqn to figure it out
     public static final DataKey<Collection<Class<? extends Extension>>> UNLOAD_EXTENSIONS = LoadUnloadDataKeyAggregator.UNLOAD_EXTENSIONS;
     public static final DataKey<Collection<Extension>> LOAD_EXTENSIONS = LoadUnloadDataKeyAggregator.LOAD_EXTENSIONS;
     final private static DataHolder EMPTY_OPTIONS = new DataSet();
     final public static DataKey<BiFunction<String, String, DataHolder>> CUSTOM_OPTION = new DataKey<>("CUSTOM_OPTION", (option, params) -> EMPTY_OPTIONS);
     public static final String FILE_PROTOCOL = ResourceUrlResolver.FILE_PROTOCOL;
-    public static final @NotNull ResourceLocation DEFAULT_RESOURCE_LOCATION = ResourceLocation.of(TestUtils.class, TestUtils.DEFAULT_SPEC_RESOURCE, TestUtils.DEFAULT_URL_PREFIX);
+    public static final @NotNull ResourceLocation DEFAULT_RESOURCE_LOCATION = ResourceLocation.of(TestUtils.class, TestUtils.DEFAULT_SPEC_RESOURCE);
 
     public static DataHolder processOption(@NotNull Map<String, ? extends DataHolder> optionsMap, @NotNull String option) {
         DataHolder dataHolder = optionsMap.get(option);
@@ -82,13 +83,46 @@ public class TestUtils {
         return dataHolder;
     }
 
+    @NotNull
+    public static Pair<String, Integer> addSpecSection(@NotNull String headingLine, @NotNull String headingText, String[] sectionHeadings) {
+        assert sectionHeadings.length == 7;
+        int lastSectionLevel = RichCharSequenceImpl.of(headingLine).countLeading('#');
+        sectionHeadings[lastSectionLevel] = headingText;
+        int iMax = 7;
+        for (int i = lastSectionLevel + 1; i < iMax; i++) {
+            sectionHeadings[i] = null;
+        }
+
+        StringBuilder sb = new StringBuilder();
+        String sep = "";
+        int level = 0;
+        for (String heading : sectionHeadings) {
+            if (heading != null && level > 1) {
+                sb.append(sep).append(heading);
+                sep = " - ";
+                if (level == lastSectionLevel) break;
+            }
+            level++;
+        }
+
+        String section = sb.toString();
+        if (section.isEmpty()) section = headingText;
+        return Pair.of(section, lastSectionLevel);
+    }
+
     @Nullable
     public static Pair<String, String> parseCustomOption(@NotNull String option) {
+        @Nullable Pair<BasedSequence, BasedSequence> pair = parseCustomOption(BasedSequenceImpl.of(option));
+        return pair == null ? null : Pair.of(pair.getFirst().toString(), pair.getSecond().toString());
+    }
+
+    @Nullable
+    public static Pair<BasedSequence, BasedSequence> parseCustomOption(@NotNull BasedSequence option) {
         int pos = option.indexOf("[");
         if (pos > 0 && pos < option.length() && option.endsWith("]")) {
             // parameterized, see if there is a handler defined for it
-            String customOption = option.substring(0, pos);
-            String params = option.substring(pos + 1, option.length() - 1);
+            BasedSequence customOption = option.subSequence(0, pos);
+            BasedSequence params = option.subSequence(pos + 1, option.length() - 1);
             return Pair.of(customOption, params);
         }
         return null;
@@ -275,34 +309,31 @@ public class TestUtils {
     }
 
     @NotNull
-    public static String getSpecResourceName(@NotNull String testClassName, @NotNull String resourcePath) {
+    public static String getResolvedSpecResourcePath(@NotNull String testClassName, @NotNull String resourcePath) {
         File specInfo = new File(resourcePath);
         File classInfo = new File("/" + testClassName.replace('.', '/'));
-        return !specInfo.isAbsolute() ? new File(classInfo.getParent(), resourcePath).getPath() : resourcePath;
+        return !specInfo.isAbsolute() ? new File(classInfo.getParent(), resourcePath).getAbsolutePath() : resourcePath;
     }
 
     @NotNull
-    public static String getSpecResourceFileUrl(@NotNull Class<?> resourceClass, @NotNull String resourcePath, @NotNull String urlPrefix) {
+    public static String getAbsoluteSpecResourcePath(@NotNull String testClassPath, @NotNull String resourceRootPath, @NotNull String resourcePath) {
+        File resourceFile = resourcePath.startsWith("/") ? new File(resourceRootPath, resourcePath.substring(1)) : new File(new File(testClassPath).getParent(), resourcePath);
+        return resourceFile.getAbsolutePath();
+    }
+
+    @NotNull
+    public static String getSpecResourceFileUrl(@NotNull Class<?> resourceClass, @NotNull String resourcePath) {
         if (resourcePath.isEmpty()) {
             throw new IllegalStateException("Empty resource paths not supported");
         } else {
-            String resolvedResourcePath = getSpecResourceName(resourceClass.getName(), resourcePath);
-            if (urlPrefix.equals(DEFAULT_URL_PREFIX)) {
-//            return DEFAULT_URL_PREFIX + resourceClass.getName().replace('.', '/') + "?" + resolvedSpecResource;
-                URL url = resourceClass.getResource(resolvedResourcePath);
-                return adjustedFileUrl(url);
-            }
-
-            return urlPrefix + resolvedResourcePath;
+            String resolvedResourcePath = getResolvedSpecResourcePath(resourceClass.getName(), resourcePath);
+            URL url = resourceClass.getResource(resolvedResourcePath);
+            return adjustedFileUrl(url);
         }
     }
 
-    public static ArrayList<Object[]> getTestData(@NotNull Class<?> resourceClass, @NotNull String resourcePath, @NotNull String urlPrefix) {
-        return getTestData(ResourceLocation.of(resourceClass, resourcePath, urlPrefix));
-    }
-
     public static ArrayList<Object[]> getTestData(@NotNull ResourceLocation location) {
-        SpecReader specReader = SpecReader.createAndReadExamples(location);
+        SpecReader specReader = SpecReader.createAndReadExamples(location, true);
         List<SpecExample> examples = specReader.getExamples();
         ArrayList<Object[]> data = new ArrayList<>();
 
@@ -361,7 +392,7 @@ public class TestUtils {
     @NotNull
     public static String getTestResourceRootDirectoryForModule(@NotNull Class<?> resourceClass, @NotNull String moduleRootPackage) {
         String fileUrl;
-        fileUrl = getSpecResourceFileUrl(resourceClass, wrapWith(moduleRootPackage, "/", ".txt"), DEFAULT_URL_PREFIX);
+        fileUrl = getSpecResourceFileUrl(resourceClass, wrapWith(moduleRootPackage, "/", ".txt"));
         return removePrefix(removeSuffix(fileUrl, suffixWith(moduleRootPackage, ".txt")), FILE_PROTOCOL);
     }
 

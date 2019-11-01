@@ -370,6 +370,10 @@ public abstract class Node {
         return parent;
     }
 
+    public @Nullable Node getGrandParent() {
+        return parent == null ? null : parent.getParent();
+    }
+
     protected void setParent(@Nullable Node parent) {
         this.parent = parent;
     }

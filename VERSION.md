@@ -161,7 +161,6 @@ Next
 * [ ] Fix: Change spec example to variable number of sections
 * [ ] Add: yaml front matter configurator for modules. See:
       [Yaml Front Matter Configuration](../../wiki/Yaml-Front-Matter-Configuration)
-* [ ] Add: spec example language per section options and rendering in HTML.
 
 Next 0.59.40
 ------------
@@ -170,6 +169,13 @@ Next 0.59.40
 * [ ] Add: `RichSequence.trimStartToEOL()`
 * [ ] Add: `RichSequence.extendEndToEOL()`
 * [ ] Add: `RichSequence.extendStartToEOL()`
+* Add: spec example language per section options and rendering in HTML.
+  * [ ] Add: Tests for section name options
+* Add: compound spec-example sections, to combine previous lower level headings via `splice(" -
+  ")` for better organization of tests and to allow hierarchical structure view for spec files
+  in Markdown Navigator
+* Fix: remove all file url prefix for tests. Either provide the file url for the spec or default
+  resolution will be used.
 
 0.59.38
 -------
@@ -193,7 +199,6 @@ Next 0.59.40
   to options is done at start of parse as extensions and core load their options, afterwards the
   data set is mostly not modified or accessed.
 
-
 0.59.32
 -------
 
@@ -209,8 +214,8 @@ Next 0.59.40
   null dataHolder defaults. This way the factory is `DataNotNullValueFactory` which takes a
   non-null data holder and returns a computed value.
 * Add: `NullableDataKey` 3 argument constructor with pre-computed nullable default value to be
-  used for null dataHolder defaults. This way the factory is `DataValueFactory` which
-  takes a non-null data holder and returns a computed value.
+  used for null dataHolder defaults. This way the factory is `DataValueFactory` which takes a
+  non-null data holder and returns a computed value.
 * Fix: add `DataKey.get(DataHolder)` to replace `DataKey.getFrom(DataHolder)`, shorter and
   compatible with Kotlin array access syntax, also handles nullability of data.
 * Fix: deprecate `DataKey.getFrom()`

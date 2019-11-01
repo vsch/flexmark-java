@@ -29,7 +29,6 @@ public abstract class RenderingTestCase implements SpecExampleProcessor {
 
     public static final DataHolder NO_FILE_EOL_FALSE = TestUtils.NO_FILE_EOL_FALSE;
     public static final String DEFAULT_SPEC_RESOURCE = TestUtils.DEFAULT_SPEC_RESOURCE;
-    public static final String DEFAULT_URL_PREFIX = TestUtils.DEFAULT_URL_PREFIX;
     public static final DataKey<Collection<Class<? extends Extension>>> UNLOAD_EXTENSIONS = TestUtils.UNLOAD_EXTENSIONS;
     public static final DataKey<Collection<Extension>> LOAD_EXTENSIONS = TestUtils.LOAD_EXTENSIONS;
     public static final DataKey<Collection<Extension>> EXTENSIONS = SharedDataKeys.EXTENSIONS;

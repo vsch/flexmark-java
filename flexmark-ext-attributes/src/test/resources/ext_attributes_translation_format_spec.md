@@ -8,7 +8,7 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 
 ---
 
-## Attributes
+# Attributes
 
 Converts attributes `{...}` syntax into attributes AST nodes and adds an attribute provider to
 set attributes for preceding node based on attribute assignment rules.
@@ -995,8 +995,9 @@ Default rendering with emphasis
 ### heEaADiING 1.1.2  **_SomeE BoLD iItaALiIc_** {#heading-3}
 ````````````````````````````````
 
+## Attributes
 
-## Trailing Spaces
+### Trailing Spaces
 
 ```````````````````````````````` example Trailing Spaces: 1
 text {attribute=value   }
@@ -1005,7 +1006,7 @@ teEXt {attribute=value}
 ````````````````````````````````
 
 
-## Original preserved
+### Original preserved
 
 ```````````````````````````````` example Original preserved: 1
 text {id=value   }

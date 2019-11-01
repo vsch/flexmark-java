@@ -1,6 +1,8 @@
 package com.vladsch.flexmark.test.util.spec;
 
 import com.vladsch.flexmark.test.util.TestUtils;
+import com.vladsch.flexmark.util.Pair;
+import com.vladsch.flexmark.util.sequence.RichCharSequenceImpl;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.BufferedReader;
@@ -31,7 +33,11 @@ public class SpecReader {
 
     protected final @NotNull InputStream inputStream;
     protected final @NotNull ResourceLocation resourceLocation;
+    protected final boolean compoundSections;
     protected final List<SpecExample> examples = new ArrayList<>();
+
+    protected final String[] sections = new String[7]; // 0 is not used and signals no section when indexed by lastSectionLevel
+    protected int lastSectionLevel = 1;
 
     protected State state = State.BEFORE;
     protected String section;
@@ -45,9 +51,10 @@ public class SpecReader {
     protected int contentLineNumber = 0;
     protected int commentLineNumber = 0;
 
-    public SpecReader(@NotNull InputStream stream, @NotNull ResourceLocation location) {
+    public SpecReader(@NotNull InputStream stream, @NotNull ResourceLocation location, boolean compoundSections) {
         this.inputStream = stream;
         this.resourceLocation = location;
+        this.compoundSections = compoundSections;
     }
 
     @NotNull
@@ -74,8 +81,8 @@ public class SpecReader {
         return result;
     }
 
-    public static @NotNull SpecReader create(@NotNull ResourceLocation location) {
-        return create(location, SpecReader::new);
+    public static @NotNull SpecReader create(@NotNull ResourceLocation location, boolean compoundSections) {
+        return create(location, (stream, location1) -> new SpecReader(stream, location1, compoundSections));
     }
 
     public static @NotNull <S extends SpecReader> S create(@NotNull ResourceLocation location, @NotNull SpecReaderFactory<S> readerFactory) {
@@ -83,8 +90,8 @@ public class SpecReader {
         return readerFactory.create(stream, location);
     }
 
-    public static @NotNull SpecReader createAndReadExamples(@NotNull ResourceLocation location) {
-        return createAndReadExamples(location, SpecReader::new);
+    public static @NotNull SpecReader createAndReadExamples(@NotNull ResourceLocation location, boolean compoundSections) {
+        return createAndReadExamples(location, (stream, location1) -> new SpecReader(stream, location1, compoundSections));
     }
 
     public static @NotNull <S extends SpecReader> S createAndReadExamples(@NotNull ResourceLocation location, @NotNull SpecReaderFactory<S> readerFactory) {
@@ -187,7 +194,14 @@ public class SpecReader {
 
                 Matcher matcher = SECTION_PATTERN.matcher(line);
                 if (matcher.matches()) {
-                    section = matcher.group(1);
+                    if (compoundSections) {
+                        Pair<String, Integer> pair = TestUtils.addSpecSection(matcher.group(), matcher.group(1), sections);
+                        lastSectionLevel = pair.getSecond();
+                        section = pair.getFirst();
+                    } else {
+                        section = matcher.group(1);
+                    }
+
                     lineProcessed = true;
                     exampleNumber = 0;
                 } else if (line.startsWith(EXAMPLE_START) || line.startsWith(EXAMPLE_START_NBSP)) {

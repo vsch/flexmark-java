@@ -18,7 +18,7 @@ import java.util.List;
 public class SpecBenchmark {
     private static final String SPEC = SpecReader.readSpec(TestUtils.DEFAULT_RESOURCE_LOCATION);
     private static final List<String> SPEC_EXAMPLES =
-            SpecReader.createAndReadExamples(TestUtils.DEFAULT_RESOURCE_LOCATION)
+            SpecReader.createAndReadExamples(TestUtils.DEFAULT_RESOURCE_LOCATION, false)
                     .getExamplesSourceAsString();
     private static final Parser PARSER = Parser.builder().build();
     private static final HtmlRenderer RENDERER = HtmlRenderer.builder().build();

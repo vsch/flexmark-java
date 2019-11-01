@@ -10,7 +10,7 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 
 ## Markdown elements
 
-### Markdown elements - empty text
+### empty text
 
 empty text
 
@@ -19,7 +19,7 @@ empty text
 ````````````````````````````````
 
 
-### Markdown elements - Abbreviation
+### Abbreviation
 
 `Abbreviation` `AbbreviationBlock`
 
@@ -129,7 +129,7 @@ Paragraph with second line having a reference
 ````````````````````````````````
 
 
-### Markdown elements - AnchorLink
+### AnchorLink
 
 `AnchorLink`
 
@@ -156,7 +156,7 @@ Setext Heading 2
 ````````````````````````````````
 
 
-### Markdown elements - AutoLink
+### AutoLink
 
 `AutoLink`
 
@@ -190,7 +190,7 @@ text example@example.com
 ````````````````````````````````
 
 
-### Markdown elements - BlockQuote
+### BlockQuote
 
 `BlockQuote`
 
@@ -331,7 +331,7 @@ Nested, Lazy continuation less, with prefix
 ````````````````````````````````
 
 
-### Markdown elements - BulletList
+### BulletList
 
 `BulletList` `BulletListItem` `TaskListItem` `TaskListItemMarker`
 
@@ -590,7 +590,7 @@ Bullet items can have headings as children
 ````````````````````````````````
 
 
-### Markdown elements - Code
+### Code
 
 `Code`
 
@@ -627,7 +627,7 @@ Last line
 ````````````````````````````````
 
 
-### Markdown elements - DefinitionItem
+### DefinitionItem
 
 `DefinitionList` `DefinitionTerm` `DefinitionItem`
 
@@ -873,7 +873,7 @@ Term 4
 ````````````````````````````````
 
 
-### Markdown elements - Emphasis
+### Emphasis
 
 `Emphasis`
 
@@ -901,7 +901,7 @@ text *italic*
 ````````````````````````````````
 
 
-### Markdown elements - EscapedCharacter
+### EscapedCharacter
 
 `EscapedCharacter`
 
@@ -912,7 +912,7 @@ text *italic*
 ````````````````````````````````
 
 
-### Markdown elements - FencedCodeBlock
+### FencedCodeBlock
 
 `FencedCodeBlock`
 
@@ -1026,7 +1026,7 @@ some text
 ````````````````````````````````
 
 
-### Markdown elements - HardLineBreak
+### HardLineBreak
 
 `HardLineBreak`
 
@@ -1052,7 +1052,7 @@ more text</p>
 ````````````````````````````````
 
 
-### Markdown elements - Heading
+### Heading
 
 `Heading`
 
@@ -1171,7 +1171,7 @@ Atx 6
 ````````````````````````````````
 
 
-### Markdown elements - HtmlBlock
+### HtmlBlock
 
 `HtmlBlock`
 
@@ -1192,7 +1192,7 @@ Html Blocks
 ````````````````````````````````
 
 
-### Markdown elements - HtmlCommentBlock
+### HtmlCommentBlock
 
 `HtmlCommentBlock`
 
@@ -1223,7 +1223,7 @@ non-empty whitespace
 ````````````````````````````````
 
 
-### Markdown elements - HtmlEntity
+### HtmlEntity
 
 `HtmlEntity`
 
@@ -1284,7 +1284,7 @@ embedded</p>
 ````````````````````````````````
 
 
-### Markdown elements - HtmlInline
+### HtmlInline
 
 `HtmlInline`
 
@@ -1360,7 +1360,7 @@ text with <span>span</span>
 ````````````````````````````````
 
 
-### Markdown elements - HtmlInlineComment
+### HtmlInlineComment
 
 `HtmlInlineComment`
 
@@ -1417,7 +1417,7 @@ Last line
 ````````````````````````````````
 
 
-### Markdown elements - HtmlInnerBlock
+### HtmlInnerBlock
 
 `HtmlInnerBlock` `HtmlInnerBlockComment`
 
@@ -1440,7 +1440,7 @@ Document[0, 38]
 ````````````````````````````````
 
 
-### Markdown elements - Image
+### Image
 
 `Image`
 
@@ -1462,7 +1462,7 @@ text with ![alt](/url) embedded
 ````````````````````````````````
 
 
-### Markdown elements - ImageRef
+### ImageRef
 
 `ImageRef`
 
@@ -1511,7 +1511,7 @@ dummy ref
 ````````````````````````````````
 
 
-### Markdown elements - IndentedCodeBlock
+### IndentedCodeBlock
 
 `IndentedCodeBlock`
 
@@ -1601,7 +1601,7 @@ more code
 ````````````````````````````````
 
 
-### Markdown elements - JekyllFrontMatterBlock
+### JekyllFrontMatterBlock
 
 `JekyllFrontMatterBlock` FlexmarkFrontMatter
 
@@ -1639,7 +1639,7 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 ````````````````````````````````
 
 
-### Markdown elements - Link
+### Link
 
 `Link`
 
@@ -1726,7 +1726,7 @@ Heading [![alt](/url2)](/url)
 ````````````````````````````````
 
 
-### Markdown elements - LinkRef
+### LinkRef
 
 `LinkRef`
 
@@ -1775,7 +1775,7 @@ dummy ref
 ````````````````````````````````
 
 
-### Markdown elements - MailLink
+### MailLink
 
 `MailLink`
 
@@ -1815,7 +1815,7 @@ text with name@url.dom
 ````````````````````````````````
 
 
-### Markdown elements - OrderedList
+### OrderedList
 
 `OrderedList` `OrderedListItem`
 
@@ -1982,7 +1982,7 @@ no parens delimiter
 ````````````````````````````````
 
 
-### Markdown elements - Paragraph
+### Paragraph
 
 `Paragraph` `Text` `TextBase`
 
@@ -2030,7 +2030,7 @@ Paragraphs Following the item text should have paragraph wrappers
 ````````````````````````````````
 
 
-### Markdown elements - Reference
+### Reference
 
 `Reference`
 
@@ -2075,7 +2075,7 @@ this is an undefined footnote [^undef]
 ````````````````````````````````
 
 
-### Markdown elements - SoftLineBreak
+### SoftLineBreak
 
 `SoftLineBreak`
 
@@ -2088,7 +2088,7 @@ line 3
 ````````````````````````````````
 
 
-### Markdown elements - Strikethrough
+### Strikethrough
 
 `Strikethrough`
 
@@ -2104,7 +2104,7 @@ text ~italic~
 ````````````````````````````````
 
 
-### Markdown elements - StrongEmphasis
+### StrongEmphasis
 
 `StrongEmphasis`
 
@@ -2120,7 +2120,7 @@ text **italic**
 ````````````````````````````````
 
 
-### Markdown elements - TableBlock
+### TableBlock
 
 `TableBlock` `TableBody` `TableCaption` `TableCell` `TableHead` `TableRow` `TableSeparator`
 
@@ -2610,7 +2610,7 @@ Document[0, 55]
 ````````````````````````````````
 
 
-### Markdown elements - ThematicBreak
+### ThematicBreak
 
 `ThematicBreak`
 
@@ -2621,7 +2621,7 @@ Document[0, 55]
 ````````````````````````````````
 
 
-### Markdown elements - TypographicQuotes
+### TypographicQuotes
 
 `TypographicQuotes`
 
@@ -2643,7 +2643,7 @@ Sample \"double\" \'single\' \<<angle\>> \"l\'ordre\" \'l\'ordre\'
 ````````````````````````````````
 
 
-### Markdown elements - TypographicSmarts
+### TypographicSmarts
 
 `TypographicSmarts`
 
@@ -2671,7 +2671,7 @@ en\--dash and em\---dash
 ````````````````````````````````
 
 
-### Markdown elements - WikiLink
+### WikiLink
 
 `WikiLink`
 

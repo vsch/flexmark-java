@@ -11,6 +11,9 @@ import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Extension for spec_examples
  * <p>
@@ -19,6 +22,20 @@ import org.jetbrains.annotations.NotNull;
  * The parsed spec_example text is turned into {@link SpecExample} nodes.
  */
 public class SpecExampleExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension {
+    private static final Map<Integer, String> DEFAULT_LANGUAGE_MAPPING = new HashMap<>();
+    static {
+        DEFAULT_LANGUAGE_MAPPING.put(1, "markdown");
+        DEFAULT_LANGUAGE_MAPPING.put(2, "html");
+        DEFAULT_LANGUAGE_MAPPING.put(3, "text");
+    }
+
+    private static final Map<Integer, String> DEFAULT_SECTION_MAPPING = new HashMap<>();
+    static {
+        DEFAULT_SECTION_MAPPING.put(1, "Source");
+        DEFAULT_SECTION_MAPPING.put(2, "Html");
+        DEFAULT_SECTION_MAPPING.put(3, "AST");
+    }
+
     public static final DataKey<Boolean> SPEC_EXAMPLE_RENDER_RAW_HTML = new DataKey<>("SPEC_EXAMPLE_RENDER_RAW_HTML", true);
     public static final DataKey<String> SPEC_EXAMPLE_RENDERED_HTML_PREFIX = new DataKey<>("SPEC_EXAMPLE_RENDERED_HTML_PREFIX", "<div style=\"border:solid #cccccc 1px;padding:0 20px 10px 20px;\">");
     public static final DataKey<String> SPEC_EXAMPLE_RENDERED_HTML_SUFFIX = new DataKey<>("SPEC_EXAMPLE_RENDERED_HTML_SUFFIX", "</div>");
@@ -26,6 +43,8 @@ public class SpecExampleExtension implements Parser.ParserExtension, HtmlRendere
     public static final DataKey<String> SPEC_EXAMPLE_BREAK = new DataKey<>("SPEC_EXAMPLE_BREAK", SpecReader.EXAMPLE_BREAK);
     public static final DataKey<String> SPEC_TYPE_BREAK = new DataKey<>("SPEC_TYPE_BREAK", SpecReader.TYPE_BREAK);
     public static final DataKey<Boolean> SPEC_OPTION_NODES = new DataKey<>("SPEC_OPTION_NODES", true);
+    public static final DataKey<Map<Integer, String>> SPEC_EXAMPLE_SECTION_LANGUAGES = new DataKey<>("SPEC_EXAMPLE_SECTION_LANGUAGES", DEFAULT_LANGUAGE_MAPPING);
+    public static final DataKey<Map<Integer, String>> SPEC_EXAMPLE_SECTION_NAMES = new DataKey<>("SPEC_EXAMPLE_SECTION_NAMES", DEFAULT_SECTION_MAPPING);
 
     private SpecExampleExtension() {
     }

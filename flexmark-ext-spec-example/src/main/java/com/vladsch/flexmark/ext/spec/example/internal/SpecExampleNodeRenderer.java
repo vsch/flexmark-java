@@ -65,38 +65,39 @@ public class SpecExampleNodeRenderer implements NodeRenderer
     private void render(SpecExampleSource node, NodeRendererContext context, HtmlWriter html) {
         BasedSequence text = node.getChars();
 
-        switch (options.renderAs) {
-            case DEFINITION_LIST:
-                html.tag("dt").text("Source").tag("/dt").line();
-                html.tag("dd");
-                render(text, "markdown", context, html);
-                html.tag("/dd").line();
-                break;
+        String sectionLanguage = options.sectionLanguages.getOrDefault(1, "text");
+        String sectionName = options.sectionNames.getOrDefault(1, sectionLanguage.substring(0, 1).toUpperCase() + sectionLanguage.substring(1));
 
-            case SECTIONS:
-                if (!text.isEmpty()) {
-                    html.tagVoidLine("hr");
-                    render(text, "markdown", context, html);
-                }
-                break;
-
-            case FENCED_CODE:
-            default:
-                break;
-        }
+        renderSpecExampleSection(text, sectionLanguage, sectionName, context, html);
     }
 
     private void render(SpecExampleHtml node, NodeRendererContext context, HtmlWriter html) {
         BasedSequence text = node.getChars();
 
+        String sectionLanguage = options.sectionLanguages.getOrDefault(2, "text");
+        String sectionName = options.sectionNames.getOrDefault(2, sectionLanguage.substring(0, 1).toUpperCase() + sectionLanguage.substring(1));
+
+        renderSpecExampleSection(text, sectionLanguage, sectionName, context, html);
+    }
+
+    private void render(SpecExampleAst node, NodeRendererContext context, HtmlWriter html) {
+        BasedSequence text = node.getChars();
+
+        String sectionLanguage = options.sectionLanguages.getOrDefault(3, "text");
+        String sectionName = options.sectionNames.getOrDefault(3, sectionLanguage.substring(0, 1).toUpperCase() + sectionLanguage.substring(1));
+
+        renderSpecExampleSection(text, sectionLanguage, sectionName, context, html);
+    }
+
+    private void renderSpecExampleSection(BasedSequence text, String sectionLanguage, String sectionName, NodeRendererContext context, HtmlWriter html) {
         switch (options.renderAs) {
             case DEFINITION_LIST:
-                html.tag("dt").text("Html").tag("/dt").line();
+                html.tag("dt").text(sectionName).tag("/dt").line();
                 html.tag("dd");
-                render(text, "html", context, html);
+                render(text, sectionLanguage, context, html);
                 html.tag("/dd").line();
-                if (options.renderHtml) {
-                    html.tag("dt").text("Rendered Html").tag("/dt").line();
+                if (options.renderHtml && sectionLanguage.equals("html")) {
+                    html.tag("dt").text("Rendered " + sectionName).tag("/dt").line();
                     html.tag("dd");
                     html.raw(options.renderedHtmlPrefix)
                             .rawIndentedPre(text.normalizeEOL())
@@ -109,38 +110,14 @@ public class SpecExampleNodeRenderer implements NodeRenderer
             case SECTIONS:
                 if (!text.isEmpty()) {
                     html.tagVoidLine("hr");
-                    render(text, "html", context, html);
-                    if (options.renderHtml) {
+                    render(text, sectionLanguage, context, html);
+                    if (options.renderHtml && sectionLanguage.equals("html")) {
                         html.tagVoidLine("hr");
                         html.raw(options.renderedHtmlPrefix)
                                 .rawIndentedPre(text.normalizeEOL())
                                 .raw(options.renderedHtmlSuffix)
                                 .line();
                     }
-                }
-                break;
-
-            case FENCED_CODE:
-            default:
-                break;
-        }
-    }
-
-    private void render(SpecExampleAst node, NodeRendererContext context, HtmlWriter html) {
-        BasedSequence text = node.getChars();
-
-        switch (options.renderAs) {
-            case DEFINITION_LIST:
-                html.tag("dt").text("AST").tag("/dt").line();
-                html.tag("dd");
-                render(text, "text", context, html);
-                html.tag("/dd").line();
-                break;
-
-            case SECTIONS:
-                if (!text.isEmpty()) {
-                    html.tagVoidLine("hr");
-                    render(text, "text", context, html);
                 }
                 break;
 

@@ -8,11 +8,11 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 
 ---
 
-## JiraConverter
+# JiraConverter
 
 Converts markdown to JIRA formatting
 
-### Headings
+## Headings
 
 Atx headings
 
@@ -75,7 +75,7 @@ Document[0, 44]
 ````````````````````````````````
 
 
-### Text formatting
+## Text formatting
 
 Simple
 
@@ -157,7 +157,7 @@ Document[0, 52]
 ````````````````````````````````
 
 
-### Block quotes
+## Block quotes
 
 Single line block quote
 
@@ -249,7 +249,7 @@ Document[0, 24]
 ````````````````````````````````
 
 
-### Lists
+## Lists
 
 Bullet lists
 
@@ -464,7 +464,7 @@ Document[0, 141]
 ````````````````````````````````
 
 
-### Fenced code
+## Fenced code
 
 plain
 
@@ -504,7 +504,7 @@ Document[0, 27]
 ````````````````````````````````
 
 
-### Paragraph Spacing
+## Paragraph Spacing
 
 multiple paragraphs
 

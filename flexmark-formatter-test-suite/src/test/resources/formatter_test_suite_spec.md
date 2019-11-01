@@ -1,5 +1,5 @@
 ---
-title: DocxRenderer
+title: Formatter Test Suite
 author:
 version:
 date: '2016-06-06'
@@ -7,6 +7,8 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 ...
 
 ---
+
+# Formatter Test Suite
 
 ## Formatter
 
@@ -139,7 +141,7 @@ indented code
 ````````````````````````````````
 
 
-### Lists
+## Lists
 
 ```````````````````````````````` example Lists: 1
 * list item 1
@@ -171,7 +173,7 @@ indented code
 ````````````````````````````````
 
 
-### Block Quotes
+## Block Quotes
 
 ```````````````````````````````` example(Block Quotes: 1) options(block-quote-compact-with-space)
 > #Heading
