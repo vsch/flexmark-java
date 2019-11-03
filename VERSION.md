@@ -9,7 +9,7 @@ flexmark-java
 - [Next 0.60.0](#next-0600)
     - [API Changes](#api-changes)
 - [Next](#next)
-- [Next 0.59.40](#next-05940)
+- [0.59.40](#05940)
 - [0.59.38](#05938)
 - [0.59.36](#05936)
 - [0.59.34](#05934)
@@ -161,16 +161,19 @@ Next
 * [ ] Fix: Change spec example to variable number of sections
 * [ ] Add: yaml front matter configurator for modules. See:
       [Yaml Front Matter Configuration](../../wiki/Yaml-Front-Matter-Configuration)
-
-Next 0.59.40
-------------
-
 * [ ] Add: `RichSequence.trimEndToEOL()`
 * [ ] Add: `RichSequence.trimStartToEOL()`
 * [ ] Add: `RichSequence.extendEndToEOL()`
 * [ ] Add: `RichSequence.extendStartToEOL()`
 * Add: spec example language per section options and rendering in HTML.
   * [ ] Add: Tests for section name options
+
+0.59.40
+-------
+
+* Break: remove example option parsing related `TestUtils` methods.
+* Add: spec example language per section options and rendering in HTML.
+* Add: `ExampleOption` to parse and provide information about
 * Add: compound spec-example sections, to combine previous lower level headings via `splice(" -
   ")` for better organization of tests and to allow hierarchical structure view for spec files
   in Markdown Navigator

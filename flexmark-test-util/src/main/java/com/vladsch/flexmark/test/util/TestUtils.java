@@ -1,6 +1,7 @@
 package com.vladsch.flexmark.test.util;
 
 import com.vladsch.flexmark.test.util.spec.*;
+import com.vladsch.flexmark.util.DelimitedBuilder;
 import com.vladsch.flexmark.util.Pair;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.builder.Extension;
@@ -9,7 +10,6 @@ import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.data.DataSet;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.BasedSequenceImpl;
 import com.vladsch.flexmark.util.sequence.RichCharSequenceImpl;
 import com.vladsch.flexmark.util.sequence.SegmentedSequence;
 import org.jetbrains.annotations.NotNull;
@@ -30,20 +30,26 @@ public class TestUtils {
         FlexmarkResourceUrlResolver.registerUrlResolvers();
     }
 
-    public static final String IGNORE_OPTION_NAME = "IGNORE";
-    public static final DataKey<Boolean> IGNORE = new DataKey<>(IGNORE_OPTION_NAME, false);
-    public static final String FAIL_OPTION_NAME = "FAIL";
-    public static final DataKey<Boolean> FAIL = new DataKey<>(FAIL_OPTION_NAME, false);
-    public static final String NO_FILE_EOL_OPTION_NAME = "NO_FILE_EOL";
-    public static final DataKey<Boolean> NO_FILE_EOL = new DataKey<>(NO_FILE_EOL_OPTION_NAME, true);
-    public static final String FILE_EOL_OPTION_NAME = "FILE_EOL";
-    public static final String TIMED_ITERATIONS_NAME = "TIMED_ITERATIONS_NAME";
-    public static final DataKey<Integer> TIMED_ITERATIONS = new DataKey<>(TIMED_ITERATIONS_NAME, 100);
-    public static final String TIMED_OPTION_NAME = "TIMED";
-    public static final DataKey<Boolean> EMBED_TIMED = new DataKey<>(TIMED_OPTION_NAME, false);
-    public static final DataKey<Boolean> TIMED = new DataKey<>(TIMED_OPTION_NAME, false);
+    public static final char DISABLED_OPTION_PREFIX_CHAR = '-';
+    public static final String DISABLED_OPTION_PREFIX = String.valueOf(DISABLED_OPTION_PREFIX_CHAR);
+
     public static final String EMBED_TIMED_OPTION_NAME = "EMBED_TIMED";
+    public static final String FAIL_OPTION_NAME = "FAIL";
+    public static final String FILE_EOL_OPTION_NAME = "FILE_EOL";
+    public static final String IGNORE_OPTION_NAME = "IGNORE";
+    public static final String NO_FILE_EOL_OPTION_NAME = "NO_FILE_EOL";
+    public static final String TIMED_ITERATIONS_OPTION_NAME = "TIMED_ITERATIONS";
+    public static final String TIMED_OPTION_NAME = "TIMED";
+
+    public static final DataKey<Boolean> EMBED_TIMED = new DataKey<>(TIMED_OPTION_NAME, false);
+    public static final DataKey<Boolean> FAIL = new DataKey<>(FAIL_OPTION_NAME, false);
+    public static final DataKey<Boolean> IGNORE = new DataKey<>(IGNORE_OPTION_NAME, false);
+    public static final DataKey<Boolean> NO_FILE_EOL = new DataKey<>(NO_FILE_EOL_OPTION_NAME, true);
+    public static final DataKey<Boolean> TIMED = new DataKey<>(TIMED_OPTION_NAME, false);
+    public static final DataKey<Integer> TIMED_ITERATIONS = new DataKey<>(TIMED_ITERATIONS_OPTION_NAME, 100);
+
     public static final String TIMED_FORMAT_STRING = "Timing %s: parse %.3f ms, render %.3f ms, total %.3f\n";
+
     public static final DataKey<String> INCLUDED_DOCUMENT = new DataKey<>("INCLUDED_DOCUMENT", "");
     public static final DataKey<String> SOURCE_PREFIX = new DataKey<>("SOURCE_PREFIX", "");
     public static final DataKey<String> SOURCE_SUFFIX = new DataKey<>("SOURCE_SUFFIX", "");
@@ -59,28 +65,80 @@ public class TestUtils {
     public static final @NotNull ResourceLocation DEFAULT_RESOURCE_LOCATION = ResourceLocation.of(TestUtils.class, TestUtils.DEFAULT_SPEC_RESOURCE);
 
     public static DataHolder processOption(@NotNull Map<String, ? extends DataHolder> optionsMap, @NotNull String option) {
-        DataHolder dataHolder = optionsMap.get(option);
-        String customOption = option;
-        String params = null;
+        DataHolder dataHolder = null;
+        if (!option.startsWith(DISABLED_OPTION_PREFIX)) {
+            dataHolder = optionsMap.get(option);
+            String customOption = option;
+            String params = null;
 
-        if (dataHolder == null) {
-            // see if parameterized option
-            Pair<String, String> optionPair = parseCustomOption(option);
-            if (optionPair != null) {
-                // parameterized, see if there is a handler defined for it
-                customOption = optionPair.getFirst();
-                params = optionPair.getSecond();
-                dataHolder = optionsMap.get(customOption);
+            if (dataHolder == null) {
+                // see if parameterized option
+                ExampleOption exampleOption = ExampleOption.of(option);
+                if (exampleOption.isCustom) {
+                    // parameterized, see if there is a handler defined for it
+                    customOption = exampleOption.getOptionName();
+                    params = exampleOption.getCustomParams();
+                    dataHolder = optionsMap.get(customOption);
+                }
+            }
+
+            // if custom option is set then delegate to it
+            if (dataHolder != null && dataHolder.contains(CUSTOM_OPTION)) {
+                BiFunction<String, String, DataHolder> customHandler = CUSTOM_OPTION.get(dataHolder);
+                dataHolder = customHandler.apply(customOption, params);
+            }
+        }
+        return dataHolder;
+    }
+
+    @NotNull
+    public static <T> HashMap<String, T> buildOptionsMap(@NotNull String[] options, @NotNull BiFunction<ExampleOption, Integer, T> factory) {
+        HashMap<String, T> hashMap = new HashMap<>();
+        int i = 0;
+        for (String option : options) {
+            hashMap.put(option, factory.apply(ExampleOption.of(option), i));
+            i++;
+        }
+        return hashMap;
+    }
+
+    /**
+     * Build options map, optionally ensuring all built-ins are present
+     *
+     * @param ensureAllBuiltInPresent if true, throws IllegalStateException if some built-in options are missing
+     * @param options                 array of object arrays, each row represents option values
+     *                                with first element ([0]) of each row being an option string.
+     *                                Each row is passed to factory to allow creating custom options.
+     * @param factory                 factory creating a type from ExampleOption and given row of parameters
+     * @param <T>                     type of value in the map
+     * @return constructed hash map of option name
+     */
+    @NotNull
+    public static <T> HashMap<String, T> buildOptionsMap(boolean ensureAllBuiltInPresent, @NotNull Object[][] options, @NotNull BiFunction<ExampleOption, Object[], T> factory) {
+        HashMap<String, T> hashMap = new HashMap<>();
+        HashSet<String> builtInSet = new HashSet<>(ExampleOption.getBuiltInOptions().keySet());
+
+        for (Object[] optionData : options) {
+            assert optionData[0] instanceof String;
+            String option = (String) optionData[0];
+
+            ExampleOption exampleOption = ExampleOption.of(option);
+            hashMap.put(option, factory.apply(exampleOption, optionData));
+            if (exampleOption.isBuiltIn && exampleOption.isValid && !(exampleOption.isCustom || exampleOption.isDisabled)) {
+                builtInSet.remove(exampleOption.getOptionName());
             }
         }
 
-        // if custom option is set then delegate to it
-        if (dataHolder != null && dataHolder.contains(CUSTOM_OPTION)) {
-            BiFunction<String, String, DataHolder> customHandler = CUSTOM_OPTION.get(dataHolder);
-            dataHolder = customHandler.apply(customOption, params);
-        }
+        if (ensureAllBuiltInPresent && !builtInSet.isEmpty()) {
+            DelimitedBuilder sb = new DelimitedBuilder(",\n    ");
+            sb.append("    ");
+            for (String option : builtInSet) {
+                sb.append(option).mark();
+            }
 
-        return dataHolder;
+            throw new IllegalStateException("Not all built-in options present. Missing:\n" + sb.toString());
+        }
+        return hashMap;
     }
 
     @NotNull
@@ -108,24 +166,6 @@ public class TestUtils {
         String section = sb.toString();
         if (section.isEmpty()) section = headingText;
         return Pair.of(section, lastSectionLevel);
-    }
-
-    @Nullable
-    public static Pair<String, String> parseCustomOption(@NotNull String option) {
-        @Nullable Pair<BasedSequence, BasedSequence> pair = parseCustomOption(BasedSequenceImpl.of(option));
-        return pair == null ? null : Pair.of(pair.getFirst().toString(), pair.getSecond().toString());
-    }
-
-    @Nullable
-    public static Pair<BasedSequence, BasedSequence> parseCustomOption(@NotNull BasedSequence option) {
-        int pos = option.indexOf("[");
-        if (pos > 0 && pos < option.length() && option.endsWith("]")) {
-            // parameterized, see if there is a handler defined for it
-            BasedSequence customOption = option.subSequence(0, pos);
-            BasedSequence params = option.subSequence(pos + 1, option.length() - 1);
-            return Pair.of(customOption, params);
-        }
-        return null;
     }
 
     /**
