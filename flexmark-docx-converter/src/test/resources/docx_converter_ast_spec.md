@@ -8,11 +8,11 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 
 ---
 
-## DocxConverter
+# DocxConverter
 
 Converts markdown to docx
 
-### Paragraphs
+## Paragraphs
 
 basic text
 
@@ -9671,7 +9671,7 @@ list with aside block
 ````````````````````````````````
 
 
-# Headings
+## Headings
 
 ```````````````````````````````` example Headings: 1
 # Heading
