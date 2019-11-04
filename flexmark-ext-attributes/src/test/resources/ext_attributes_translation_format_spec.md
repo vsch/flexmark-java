@@ -273,7 +273,7 @@ Cond 3.1 attributes go to the paragraph parent's parent
 
 attributes are assigned to the list element
 
-```````````````````````````````` example Cond 3.1: 1
+```````````````````````````````` example No Previous Sibling - Cond 3.1: 1
 * {.red} list item 1
 * list item 2
 
@@ -290,7 +290,7 @@ attributes are assigned to the list element
 
 attributes are assigned to the definition list
 
-```````````````````````````````` example Cond 3.1: 2
+```````````````````````````````` example No Previous Sibling - Cond 3.1: 2
 Definition Term
 :   {.red} definition item 1
 :   definition item 2
@@ -315,7 +315,7 @@ Cond 3.2 attributes go to paragraph's previous sibling,
 
 Assigned to paragraph of list item 2
 
-```````````````````````````````` example Cond 3.2: 1
+```````````````````````````````` example No Previous Sibling - Cond 3.2: 1
 * list item 1
 * list item 2
 
@@ -330,7 +330,7 @@ Assigned to paragraph of list item 2
 
 Assigned to paragraph of list item 2
 
-```````````````````````````````` example Cond 3.2: 2
+```````````````````````````````` example No Previous Sibling - Cond 3.2: 2
 * list item 1
 
 * list item 2
@@ -347,7 +347,7 @@ Assigned to paragraph of list item 2
 
 Assigned to definition item 2 paragraph
 
-```````````````````````````````` example Cond 3.2: 3
+```````````````````````````````` example No Previous Sibling - Cond 3.2: 3
 definition term
 : definition item 1
 : definition item 2
@@ -365,7 +365,7 @@ DeEFiINiItiIoN teERm
 
 Assigned to definition item 2 paragraph
 
-```````````````````````````````` example Cond 3.2: 4
+```````````````````````````````` example No Previous Sibling - Cond 3.2: 4
 definition term
 : definition item 1
 
@@ -389,7 +389,7 @@ Cond 3.3 attributes go to the paragraph
 
 Assigned to paragraph
 
-```````````````````````````````` example Cond 3.3: 1
+```````````````````````````````` example No Previous Sibling - Cond 3.3: 1
 * list item 1
 * list item 2
 
@@ -405,7 +405,7 @@ Assigned to paragraph
 
 Assigned to definition item 2
 
-```````````````````````````````` example Cond 3.3: 2
+```````````````````````````````` example No Previous Sibling - Cond 3.3: 2
 definition term
 : definition item 1
 : definition item 2
@@ -430,7 +430,7 @@ DeEFiINiItiIoN teERm
 
 Assigned to block quote
 
-```````````````````````````````` example Cond 3.4: 1
+```````````````````````````````` example No Previous Sibling - Cond 3.4: 1
 > {.red}
 > 
 > block quote text
@@ -447,7 +447,7 @@ Cond 3.5 attributes go to paragraph's previous sibling,
 
 Assigned to previous paragraph
 
-```````````````````````````````` example Cond 3.5: 1
+```````````````````````````````` example No Previous Sibling - Cond 3.5: 1
 Some paragraph
  
 {.red}
@@ -460,7 +460,7 @@ someE paARaAGRaAph
 
 Assigned to previous block quote
 
-```````````````````````````````` example Cond 3.5: 2
+```````````````````````````````` example No Previous Sibling - Cond 3.5: 2
 > Some paragraph
  
 {.red}
@@ -473,7 +473,7 @@ Assigned to previous block quote
 
 Assigned to previous paragraph in the block quote
 
-```````````````````````````````` example Cond 3.5: 3
+```````````````````````````````` example No Previous Sibling - Cond 3.5: 3
 > Some paragraph
 > 
 > {.red}
@@ -486,7 +486,7 @@ Assigned to previous paragraph in the block quote
 
 Assigned to previous list
 
-```````````````````````````````` example Cond 3.5: 4
+```````````````````````````````` example No Previous Sibling - Cond 3.5: 4
 * list item 1
 * list item 2
  
@@ -501,7 +501,7 @@ Assigned to previous list
 
 Assigned to previous definition list
 
-```````````````````````````````` example Cond 3.5: 5
+```````````````````````````````` example No Previous Sibling - Cond 3.5: 5
 definition term 1
 : definition item 1.1
  
@@ -522,7 +522,7 @@ DeEFiINiItiIoN teERm 2
 
 Assigned to previous table
 
-```````````````````````````````` example Cond 3.5: 6
+```````````````````````````````` example No Previous Sibling - Cond 3.5: 6
 
 | head |
 |------|
@@ -544,7 +544,7 @@ Cond 3.6 attributes go to the paragraph
 
 Assigned to paragraph
 
-```````````````````````````````` example Cond 3.6: 1
+```````````````````````````````` example No Previous Sibling - Cond 3.6: 1
 Some paragraph
  
 {.red} Some Text
@@ -560,7 +560,7 @@ someE paARaAGRaAph
 * non paragraph parent
 * Cond 3.7 attributes go to the parent
 
-```````````````````````````````` example Cond 3.7: 1
+```````````````````````````````` example No Previous Sibling - Cond 3.7: 1
 Some Text **{.red}bold text**
 .
 someE teEXt **{.red}BoLD teEXt**
@@ -577,35 +577,35 @@ assigned to the element and has an `id` attribute.
 
 ### Cond 4.1
 
-```````````````````````````````` example Cond 4.1: 1
+```````````````````````````````` example Anchor Targets - Cond 4.1: 1
 # Heading
 .
 # heEaADiING
 ````````````````````````````````
 
 
-```````````````````````````````` example Cond 4.1: 2
+```````````````````````````````` example Anchor Targets - Cond 4.1: 2
 # Heading {#custom-id}
 .
 # heEaADiING {#custom-id}
 ````````````````````````````````
 
 
-```````````````````````````````` example(Cond 4.1: 3) options(anchors)
+```````````````````````````````` example(Anchor Targets - Cond 4.1: 3) options(anchors)
 # Heading {#custom-id}
 .
 # heEaADiING {#custom-id}
 ````````````````````````````````
 
 
-```````````````````````````````` example Cond 4.1: 4
+```````````````````````````````` example Anchor Targets - Cond 4.1: 4
 # Heading # {#custom-id}
 .
 # heEaADiING # {#custom-id}
 ````````````````````````````````
 
 
-```````````````````````````````` example Cond 4.1: 5
+```````````````````````````````` example Anchor Targets - Cond 4.1: 5
 Heading {#custom-id}
 ======================
 .
@@ -614,7 +614,7 @@ heEaADiING {#custom-id}
 ````````````````````````````````
 
 
-```````````````````````````````` example Cond 4.1: 6
+```````````````````````````````` example Anchor Targets - Cond 4.1: 6
 Heading {#123-heading}
 ======================
 .
@@ -633,7 +633,7 @@ paragraph text.
 
 ### Cond 5.1
 
-```````````````````````````````` example Cond 5.1: 1
+```````````````````````````````` example Attributes on Reference - Cond 5.1: 1
 [test]
 
 [test]: http://example.com 
@@ -648,7 +648,7 @@ paragraph text.
 ````````````````````````````````
 
 
-```````````````````````````````` example Cond 5.1: 2
+```````````````````````````````` example Attributes on Reference - Cond 5.1: 2
 [reference 1][test] 
 
 [reference 2][test] 
@@ -669,7 +669,7 @@ paragraph text.
 
 Ref image
 
-```````````````````````````````` example(Cond 5.1: 3) options(details)
+```````````````````````````````` example(Attributes on Reference - Cond 5.1: 3) options(details)
 ![test]
 
 [test]: <http://example.com/test.png> 
@@ -700,7 +700,7 @@ Ref image
 ````````````````````````````````
 
 
-```````````````````````````````` example Cond 5.1: 4
+```````````````````````````````` example Attributes on Reference - Cond 5.1: 4
 ![reference 1][test]
 
 ![reference 2][test]
@@ -995,11 +995,12 @@ Default rendering with emphasis
 ### heEaADiING 1.1.2  **_SomeE BoLD iItaALiIc_** {#heading-3}
 ````````````````````````````````
 
+
 ## Attributes
 
 ### Trailing Spaces
 
-```````````````````````````````` example Trailing Spaces: 1
+```````````````````````````````` example Attributes - Trailing Spaces: 1
 text {attribute=value   }
 .
 teEXt {attribute=value}
@@ -1008,21 +1009,21 @@ teEXt {attribute=value}
 
 ### Original preserved
 
-```````````````````````````````` example Original preserved: 1
+```````````````````````````````` example Attributes - Original preserved: 1
 text {id=value   }
 .
 teEXt {id=value}
 ````````````````````````````````
 
 
-```````````````````````````````` example Original preserved: 2
+```````````````````````````````` example Attributes - Original preserved: 2
 text {id="value"   }
 .
 teEXt {id="value"}
 ````````````````````````````````
 
 
-```````````````````````````````` example Original preserved: 3
+```````````````````````````````` example Attributes - Original preserved: 3
 text {#value }
 .
 teEXt {#value}

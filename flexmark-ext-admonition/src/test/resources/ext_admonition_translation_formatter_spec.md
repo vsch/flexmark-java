@@ -12,7 +12,7 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 
 ### Basic Tests
 
-```````````````````````````````` example Basic Tests: 1
+```````````````````````````````` example Admonition Extension - Basic Tests: 1
 !!! note
     first child paragraph  
 .
@@ -23,7 +23,7 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 
 with title
 
-```````````````````````````````` example Basic Tests: 2
+```````````````````````````````` example Admonition Extension - Basic Tests: 2
 !!! note "Title"
     first child paragraph  
 .
@@ -34,7 +34,7 @@ with title
 
 no heading
 
-```````````````````````````````` example Basic Tests: 3
+```````````````````````````````` example Admonition Extension - Basic Tests: 3
 !!! note ""
     first child paragraph  
 .
@@ -45,7 +45,7 @@ no heading
 
 collapsed
 
-```````````````````````````````` example Basic Tests: 4
+```````````````````````````````` example Admonition Extension - Basic Tests: 4
 ??? note
     first child paragraph  
 .
@@ -56,7 +56,7 @@ collapsed
 
 collapsed with title
 
-```````````````````````````````` example Basic Tests: 5
+```````````````````````````````` example Admonition Extension - Basic Tests: 5
 ??? note "Title"
     first child paragraph  
 .
@@ -67,7 +67,7 @@ collapsed with title
 
 collapsed with empty title
 
-```````````````````````````````` example Basic Tests: 6
+```````````````````````````````` example Admonition Extension - Basic Tests: 6
 ??? note ""
     first child paragraph  
 .
@@ -78,7 +78,7 @@ collapsed with empty title
 
 open
 
-```````````````````````````````` example Basic Tests: 7
+```````````````````````````````` example Admonition Extension - Basic Tests: 7
 ???+ note
     first child paragraph  
 .
@@ -89,7 +89,7 @@ open
 
 open with title
 
-```````````````````````````````` example Basic Tests: 8
+```````````````````````````````` example Admonition Extension - Basic Tests: 8
 ???+ note "Title"
     first child paragraph  
 .
@@ -100,7 +100,7 @@ open with title
 
 open with empty title
 
-```````````````````````````````` example Basic Tests: 9
+```````````````````````````````` example Admonition Extension - Basic Tests: 9
 ???+ note ""
     first child paragraph  
 .
@@ -111,7 +111,7 @@ open with empty title
 
 indented 1
 
-```````````````````````````````` example Basic Tests: 10
+```````````````````````````````` example Admonition Extension - Basic Tests: 10
  ???+ note ""
     first child paragraph  
     
@@ -123,7 +123,7 @@ indented 1
 
 indented 2
 
-```````````````````````````````` example Basic Tests: 11
+```````````````````````````````` example Admonition Extension - Basic Tests: 11
   ???+ note ""
     first child paragraph  
     
@@ -135,7 +135,7 @@ indented 2
 
 indented 3
 
-```````````````````````````````` example Basic Tests: 12
+```````````````````````````````` example Admonition Extension - Basic Tests: 12
    ???+ note ""
     first child paragraph  
     
@@ -147,7 +147,7 @@ indented 3
 
 indented 4
 
-```````````````````````````````` example Basic Tests: 13
+```````````````````````````````` example Admonition Extension - Basic Tests: 13
     ???+ note ""
         first child paragraph  
     
@@ -159,7 +159,7 @@ indented 4
 
 nested
 
-```````````````````````````````` example Basic Tests: 14
+```````````````````````````````` example Admonition Extension - Basic Tests: 14
 ???+ note ""
     first child paragraph  
     
@@ -176,7 +176,7 @@ nested
 
 with multiple children
 
-```````````````````````````````` example Basic Tests: 15
+```````````````````````````````` example Admonition Extension - Basic Tests: 15
 !!! note "Title" 
 
     ## Heading 2
@@ -208,7 +208,7 @@ with multiple children
 
 collapsed with multiple children
 
-```````````````````````````````` example Basic Tests: 16
+```````````````````````````````` example Admonition Extension - Basic Tests: 16
 ??? example 
 
     ## Heading 2
@@ -240,7 +240,7 @@ collapsed with multiple children
 
 with lazy continuation of first paragraph
 
-```````````````````````````````` example Basic Tests: 17
+```````````````````````````````` example Admonition Extension - Basic Tests: 17
 !!! note
 lazy continuation 
 .

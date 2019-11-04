@@ -86,7 +86,7 @@ Qualifiers are used to select the icon and the color of the block.
 
 ### Basic Tests
 
-```````````````````````````````` example Basic Tests: 1
+```````````````````````````````` example Admonition - Basic Tests: 1
 !!! note
     first child paragraph  
 .
@@ -118,7 +118,7 @@ Document[0, 36]
 
 with title
 
-```````````````````````````````` example Basic Tests: 2
+```````````````````````````````` example Admonition - Basic Tests: 2
 !!! note "Title"
     first child paragraph  
 .
@@ -150,7 +150,7 @@ Document[0, 44]
 
 no heading
 
-```````````````````````````````` example Basic Tests: 3
+```````````````````````````````` example Admonition - Basic Tests: 3
 !!! note ""
     first child paragraph  
 .
@@ -179,7 +179,7 @@ Document[0, 39]
 
 collapsed
 
-```````````````````````````````` example Basic Tests: 4
+```````````````````````````````` example Admonition - Basic Tests: 4
 ??? note
     first child paragraph  
 .
@@ -211,7 +211,7 @@ Document[0, 36]
 
 collapsed with title
 
-```````````````````````````````` example Basic Tests: 5
+```````````````````````````````` example Admonition - Basic Tests: 5
 ??? note "Title"
     first child paragraph  
 .
@@ -243,7 +243,7 @@ Document[0, 44]
 
 collapsed with empty title
 
-```````````````````````````````` example Basic Tests: 6
+```````````````````````````````` example Admonition - Basic Tests: 6
 ??? note ""
     first child paragraph  
 .
@@ -272,7 +272,7 @@ Document[0, 39]
 
 open
 
-```````````````````````````````` example Basic Tests: 7
+```````````````````````````````` example Admonition - Basic Tests: 7
 ???+ note
     first child paragraph  
 .
@@ -304,7 +304,7 @@ Document[0, 37]
 
 open with title
 
-```````````````````````````````` example Basic Tests: 8
+```````````````````````````````` example Admonition - Basic Tests: 8
 ???+ note "Title"
     first child paragraph  
 .
@@ -336,7 +336,7 @@ Document[0, 45]
 
 open with empty title
 
-```````````````````````````````` example Basic Tests: 9
+```````````````````````````````` example Admonition - Basic Tests: 9
 ???+ note ""
     first child paragraph  
 .
@@ -365,7 +365,7 @@ Document[0, 40]
 
 in block quote
 
-```````````````````````````````` example Basic Tests: 10
+```````````````````````````````` example Admonition - Basic Tests: 10
 > ???+ note ""
 >     first child paragraph  
 .
@@ -397,7 +397,7 @@ Document[0, 44]
 
 indented 1
 
-```````````````````````````````` example Basic Tests: 11
+```````````````````````````````` example Admonition - Basic Tests: 11
  ???+ note ""
     first child paragraph  
     
@@ -427,7 +427,7 @@ Document[0, 47]
 
 indented 2
 
-```````````````````````````````` example Basic Tests: 12
+```````````````````````````````` example Admonition - Basic Tests: 12
   ???+ note ""
     first child paragraph  
     
@@ -457,7 +457,7 @@ Document[0, 48]
 
 indented 3
 
-```````````````````````````````` example Basic Tests: 13
+```````````````````````````````` example Admonition - Basic Tests: 13
    ???+ note ""
     first child paragraph  
     
@@ -487,7 +487,7 @@ Document[0, 49]
 
 indented 4
 
-```````````````````````````````` example Basic Tests: 14
+```````````````````````````````` example Admonition - Basic Tests: 14
     ???+ note ""
         first child paragraph  
     
@@ -503,7 +503,7 @@ Document[0, 54]
 
 nested
 
-```````````````````````````````` example Basic Tests: 15
+```````````````````````````````` example Admonition - Basic Tests: 15
 ???+ note ""
     first child paragraph  
     
@@ -546,7 +546,7 @@ Document[0, 75]
 
 with multiple children
 
-```````````````````````````````` example Basic Tests: 16
+```````````````````````````````` example Admonition - Basic Tests: 16
 !!! note "Title" 
 
     ## Heading 2
@@ -625,7 +625,7 @@ Document[0, 180]
 
 collapsed with multiple children
 
-```````````````````````````````` example Basic Tests: 17
+```````````````````````````````` example Admonition - Basic Tests: 17
 ??? example 
 
     ## Heading 2
@@ -708,7 +708,7 @@ Document[0, 175]
 
 with lazy continuation of first paragraph
 
-```````````````````````````````` example Basic Tests: 18
+```````````````````````````````` example Admonition - Basic Tests: 18
 !!! note
 lazy continuation 
 .
@@ -740,7 +740,7 @@ Document[0, 27]
 
 lazy continuation disabled
 
-```````````````````````````````` example(Basic Tests: 19) options(no-lazy-continuation)
+```````````````````````````````` example(Admonition - Basic Tests: 19) options(no-lazy-continuation)
 !!! note
 lazy continuation 
 .
@@ -771,7 +771,7 @@ Document[0, 27]
 
 with leading space
 
-```````````````````````````````` example Basic Tests: 20
+```````````````````````````````` example Admonition - Basic Tests: 20
   !!! note
 lazy continuation 
 .
@@ -801,7 +801,7 @@ Document[0, 29]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Basic Tests: 21) options(no-lead-space)
+```````````````````````````````` example(Admonition - Basic Tests: 21) options(no-lead-space)
   !!! note
 lazy continuation 
 .
@@ -818,7 +818,7 @@ Document[0, 29]
 
 Inside block quote
 
-```````````````````````````````` example Basic Tests: 22
+```````````````````````````````` example Admonition - Basic Tests: 22
 > !!! note
 > lazy continuation 
 .
@@ -853,7 +853,7 @@ Document[0, 31]
 
 Try all qualifiers
 
-```````````````````````````````` example Basic Tests: 23
+```````````````````````````````` example Admonition - Basic Tests: 23
 !!! abstract
     abstract  
 .
@@ -885,7 +885,7 @@ Document[0, 27]
 ````````````````````````````````
 
 
-```````````````````````````````` example Basic Tests: 24
+```````````````````````````````` example Admonition - Basic Tests: 24
 !!! summary
     summary  
 .
@@ -917,7 +917,7 @@ Document[0, 25]
 ````````````````````````````````
 
 
-```````````````````````````````` example Basic Tests: 25
+```````````````````````````````` example Admonition - Basic Tests: 25
 !!! tldr
     tldr  
 .
@@ -949,7 +949,7 @@ Document[0, 19]
 ````````````````````````````````
 
 
-```````````````````````````````` example Basic Tests: 26
+```````````````````````````````` example Admonition - Basic Tests: 26
 !!! bug
     bug  
 .
@@ -987,7 +987,7 @@ Document[0, 17]
 ````````````````````````````````
 
 
-```````````````````````````````` example Basic Tests: 27
+```````````````````````````````` example Admonition - Basic Tests: 27
 !!! danger
     danger  
 .
@@ -1014,7 +1014,7 @@ Document[0, 23]
 ````````````````````````````````
 
 
-```````````````````````````````` example Basic Tests: 28
+```````````````````````````````` example Admonition - Basic Tests: 28
 !!! error
     error  
 .
@@ -1041,7 +1041,7 @@ Document[0, 21]
 ````````````````````````````````
 
 
-```````````````````````````````` example Basic Tests: 29
+```````````````````````````````` example Admonition - Basic Tests: 29
 !!! example
     example  
 .
@@ -1075,7 +1075,7 @@ Document[0, 25]
 ````````````````````````````````
 
 
-```````````````````````````````` example Basic Tests: 30
+```````````````````````````````` example Admonition - Basic Tests: 30
 !!! snippet
     snippet  
 .
@@ -1109,7 +1109,7 @@ Document[0, 25]
 ````````````````````````````````
 
 
-```````````````````````````````` example Basic Tests: 31
+```````````````````````````````` example Admonition - Basic Tests: 31
 !!! failure
     failure  
 .
@@ -1136,7 +1136,7 @@ Document[0, 25]
 ````````````````````````````````
 
 
-```````````````````````````````` example Basic Tests: 32
+```````````````````````````````` example Admonition - Basic Tests: 32
 !!! fail
     fail  
 .
@@ -1163,7 +1163,7 @@ Document[0, 19]
 ````````````````````````````````
 
 
-```````````````````````````````` example Basic Tests: 33
+```````````````````````````````` example Admonition - Basic Tests: 33
 !!! missing
     missing  
 .
@@ -1190,7 +1190,7 @@ Document[0, 25]
 ````````````````````````````````
 
 
-```````````````````````````````` example Basic Tests: 34
+```````````````````````````````` example Admonition - Basic Tests: 34
 !!! question
     question  
 .
@@ -1217,7 +1217,7 @@ Document[0, 27]
 ````````````````````````````````
 
 
-```````````````````````````````` example Basic Tests: 35
+```````````````````````````````` example Admonition - Basic Tests: 35
 !!! help
     help  
 .
@@ -1244,7 +1244,7 @@ Document[0, 19]
 ````````````````````````````````
 
 
-```````````````````````````````` example Basic Tests: 36
+```````````````````````````````` example Admonition - Basic Tests: 36
 !!! faq
     faq  
 .
@@ -1271,7 +1271,7 @@ Document[0, 17]
 ````````````````````````````````
 
 
-```````````````````````````````` example Basic Tests: 37
+```````````````````````````````` example Admonition - Basic Tests: 37
 !!! info
     info  
 .
@@ -1298,7 +1298,7 @@ Document[0, 19]
 ````````````````````````````````
 
 
-```````````````````````````````` example Basic Tests: 38
+```````````````````````````````` example Admonition - Basic Tests: 38
 !!! todo
     todo  
 .
@@ -1325,7 +1325,7 @@ Document[0, 19]
 ````````````````````````````````
 
 
-```````````````````````````````` example Basic Tests: 39
+```````````````````````````````` example Admonition - Basic Tests: 39
 !!! note
     note  
 .
@@ -1355,7 +1355,7 @@ Document[0, 19]
 ````````````````````````````````
 
 
-```````````````````````````````` example Basic Tests: 40
+```````````````````````````````` example Admonition - Basic Tests: 40
 !!! seealso
     seealso  
 .
@@ -1385,7 +1385,7 @@ Document[0, 25]
 ````````````````````````````````
 
 
-```````````````````````````````` example Basic Tests: 41
+```````````````````````````````` example Admonition - Basic Tests: 41
 !!! quote
     quote  
 .
@@ -1412,7 +1412,7 @@ Document[0, 21]
 ````````````````````````````````
 
 
-```````````````````````````````` example Basic Tests: 42
+```````````````````````````````` example Admonition - Basic Tests: 42
 !!! cite
     cite  
 .
@@ -1439,7 +1439,7 @@ Document[0, 19]
 ````````````````````````````````
 
 
-```````````````````````````````` example Basic Tests: 43
+```````````````````````````````` example Admonition - Basic Tests: 43
 !!! success
     success  
 .
@@ -1466,7 +1466,7 @@ Document[0, 25]
 ````````````````````````````````
 
 
-```````````````````````````````` example Basic Tests: 44
+```````````````````````````````` example Admonition - Basic Tests: 44
 !!! check
     check  
 .
@@ -1493,7 +1493,7 @@ Document[0, 21]
 ````````````````````````````````
 
 
-```````````````````````````````` example Basic Tests: 45
+```````````````````````````````` example Admonition - Basic Tests: 45
 !!! done
     done  
 .
@@ -1520,7 +1520,7 @@ Document[0, 19]
 ````````````````````````````````
 
 
-```````````````````````````````` example Basic Tests: 46
+```````````````````````````````` example Admonition - Basic Tests: 46
 !!! tip
     tip  
 .
@@ -1547,7 +1547,7 @@ Document[0, 17]
 ````````````````````````````````
 
 
-```````````````````````````````` example Basic Tests: 47
+```````````````````````````````` example Admonition - Basic Tests: 47
 !!! hint
     hint  
 .
@@ -1574,7 +1574,7 @@ Document[0, 19]
 ````````````````````````````````
 
 
-```````````````````````````````` example Basic Tests: 48
+```````````````````````````````` example Admonition - Basic Tests: 48
 !!! important
     important  
 .
@@ -1601,7 +1601,7 @@ Document[0, 29]
 ````````````````````````````````
 
 
-```````````````````````````````` example Basic Tests: 49
+```````````````````````````````` example Admonition - Basic Tests: 49
 !!! warning
     warning  
 .
@@ -1628,7 +1628,7 @@ Document[0, 25]
 ````````````````````````````````
 
 
-```````````````````````````````` example Basic Tests: 50
+```````````````````````````````` example Admonition - Basic Tests: 50
 !!! caution
     caution  
 .
@@ -1655,7 +1655,7 @@ Document[0, 25]
 ````````````````````````````````
 
 
-```````````````````````````````` example Basic Tests: 51
+```````````````````````````````` example Admonition - Basic Tests: 51
 !!! attention
     attention  
 .

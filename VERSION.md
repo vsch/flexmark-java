@@ -9,6 +9,7 @@ flexmark-java
 - [Next 0.60.0](#next-0600)
     - [API Changes](#api-changes)
 - [Next](#next)
+- [0.59.42](#05942)
 - [0.59.40](#05940)
 - [0.59.38](#05938)
 - [0.59.36](#05936)
@@ -167,6 +168,11 @@ Next
 * [ ] Add: `RichSequence.extendStartToEOL()`
 * Add: spec example language per section options and rendering in HTML.
   * [ ] Add: Tests for section name options
+
+0.59.42
+-------
+
+* Fix: reformat tests for compound sections
 
 0.59.40
 -------

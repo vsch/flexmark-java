@@ -8,8 +8,6 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 
 ---
 
-# Extra Core Tests
-
 ## Extra tests
 
 Should be ignored
@@ -693,7 +691,7 @@ Document[0, 13]
 
 With auto loose setting for list
 
-```````````````````````````````` example No Auto Loose: 1
+```````````````````````````````` example List - No Auto Loose: 1
 * item 1
 * item 2
 * item 3
@@ -752,7 +750,7 @@ Document[0, 96]
 
 Without auto loose setting for list
 
-```````````````````````````````` example(No Auto Loose: 2) options(list-no-loose)
+```````````````````````````````` example(List - No Auto Loose: 2) options(list-no-loose)
 * item 1
 * item 2
 * item 3
@@ -811,7 +809,7 @@ Document[0, 96]
 
 Without auto loose setting for list with loose if previous loose item
 
-```````````````````````````````` example(No Auto Loose, Loose Item if Previous Loose: 1) options(list-no-loose, list-loose-if-prev)
+```````````````````````````````` example(List - No Auto Loose, Loose Item if Previous Loose: 1) options(list-no-loose, list-loose-if-prev)
 * item 1
 * item 2
 * item 3
@@ -872,7 +870,7 @@ Document[0, 67]
 
 Without auto loose setting for list with loose if previous loose item
 
-```````````````````````````````` example(No Auto Loose, Loose Item if Previous Loose: 2) options(list-no-loose, list-loose-if-prev)
+```````````````````````````````` example(List - No Auto Loose, Loose Item if Previous Loose: 2) options(list-no-loose, list-loose-if-prev)
 * main item 
     * item 1
     * item 2
@@ -944,7 +942,7 @@ Document[0, 120]
 
 With break all lists on two blank lines
 
-```````````````````````````````` example(No Break on Double Blank Line: 1) options(list-break)
+```````````````````````````````` example(List - No Break on Double Blank Line: 1) options(list-break)
 * item 1
 * item 2
     * sub item 1
@@ -995,7 +993,7 @@ Document[0, 79]
 
 Without break all lists on two blank lines
 
-```````````````````````````````` example No Break on Double Blank Line: 2
+```````````````````````````````` example List - No Break on Double Blank Line: 2
 * item 1
 * item 2
     * sub item 1
@@ -1050,7 +1048,7 @@ Document[0, 79]
 
 Without break all lists on two blank lines no auto loose
 
-```````````````````````````````` example(No Break on Double Blank Line: 3) options(list-no-loose, list-no-break)
+```````````````````````````````` example(List - No Break on Double Blank Line: 3) options(list-no-loose, list-no-break)
 * item 1
 * item 2
     * sub item 1
@@ -1099,7 +1097,7 @@ Document[0, 79]
 
 With break all lists on two blank lines
 
-```````````````````````````````` example(No Break on Double Blank Line: 4) options(list-break)
+```````````````````````````````` example(List - No Break on Double Blank Line: 4) options(list-break)
 * item 1
 * item 2
     * sub item 1
@@ -1156,7 +1154,7 @@ Document[0, 113]
 
 Without break on two blank lines
 
-```````````````````````````````` example No Break on Double Blank Line: 5
+```````````````````````````````` example List - No Break on Double Blank Line: 5
 * item 1
 * item 2
     * sub item 1
@@ -1224,7 +1222,7 @@ Document[0, 113]
 
 With bullet matching for items within a list
 
-```````````````````````````````` example No Bullet Match: 1
+```````````````````````````````` example List - No Bullet Match: 1
 - item 1
 * item 1
 + item 1
@@ -1257,7 +1255,7 @@ Document[0, 26]
 
 Without bullet matching for items within a list
 
-```````````````````````````````` example(No Bullet Match: 2) options(list-no-bullet-match)
+```````````````````````````````` example(List - No Bullet Match: 2) options(list-no-bullet-match)
 - item 1
 * item 2
 + item 3
@@ -1286,7 +1284,7 @@ Document[0, 26]
 
 With start
 
-```````````````````````````````` example No Manual Start: 1
+```````````````````````````````` example List - No Manual Start: 1
 2. item 1
 1. item 2
 3. item 3
@@ -1313,7 +1311,7 @@ Document[0, 29]
 
 Without start
 
-```````````````````````````````` example(No Manual Start: 2) options(list-no-start)
+```````````````````````````````` example(List - No Manual Start: 2) options(list-no-start)
 2. item 1
 1. item 1
 1. item 1
@@ -1343,7 +1341,7 @@ Document[0, 29]
 Without relaxed start. Lists start only if preceded by a blank line and sub-lists only when
 starting with 1.
 
-```````````````````````````````` example(Paragraph Break Options: 1) options(bullet-no-para-break, ordered-no-para-break, ordered-no-non-1-item-break)
+```````````````````````````````` example(List - Paragraph Break Options: 1) options(bullet-no-para-break, ordered-no-para-break, ordered-no-non-1-item-break)
 1. this is a list
 1. item 1
    1. item 2
@@ -1375,7 +1373,7 @@ Document[0, 40]
 Without relaxed start. Lists start only if preceded by a blank line and sub-lists only when
 starting with 1.
 
-```````````````````````````````` example(Paragraph Break Options: 2) options(bullet-no-para-break, ordered-no-non-1-item-break)
+```````````````````````````````` example(List - Paragraph Break Options: 2) options(bullet-no-para-break, ordered-no-non-1-item-break)
 1. this is a list
 1. item 1
    2. item 2
@@ -1402,7 +1400,7 @@ Document[0, 40]
 Without relaxed start. Lists start only if preceded by a blank line and sub-lists only when
 starting with 1 or no ordered start restriction
 
-```````````````````````````````` example(Paragraph Break Options: 3) options(ordered-non-1-para-break, ordered-no-non-1-item-break)
+```````````````````````````````` example(List - Paragraph Break Options: 3) options(ordered-non-1-para-break, ordered-no-non-1-item-break)
 This is a paragraph
 2. this is a list
 1. item 1
@@ -1433,7 +1431,7 @@ Document[0, 60]
 Without relaxed start. Lists start only if preceded by a blank line and sub-lists only when
 starting with 1 or no ordered start restriction
 
-```````````````````````````````` example(Paragraph Break Options: 4) options(ordered-non-1-para-break, ordered-non-1-item-break)
+```````````````````````````````` example(List - Paragraph Break Options: 4) options(ordered-non-1-para-break, ordered-non-1-item-break)
 This is a paragraph
 2. this is a list
 1. item 1
@@ -1469,7 +1467,7 @@ Document[0, 60]
 Without relaxed start. Lists start only if preceded by a blank line and sub-lists only when
 starting with 1 or no ordered start restriction
 
-```````````````````````````````` example(Paragraph Break Options: 5) options(ordered-non-1-item-break)
+```````````````````````````````` example(List - Paragraph Break Options: 5) options(ordered-non-1-item-break)
 1. this is a list
 1. item 1
    2. item 2
@@ -1500,7 +1498,7 @@ Document[0, 40]
 
 Without relaxed start. Lists start only if preceded by a blank line.
 
-```````````````````````````````` example(Paragraph Break Options: 6) options(bullet-no-para-break, ordered-no-para-break)
+```````````````````````````````` example(List - Paragraph Break Options: 6) options(bullet-no-para-break, ordered-no-para-break)
 - this is a list
 - item 1
   - item 2
@@ -1531,7 +1529,7 @@ Document[0, 36]
 
 With relaxed start. Lists can start without preceding blank lines.
 
-```````````````````````````````` example Paragraph Break Options: 7
+```````````````````````````````` example List - Paragraph Break Options: 7
 This is a paragraph
 2. item 1
 1. item 2
@@ -1627,7 +1625,7 @@ Document[0, 162]
 Without relaxed start. Lists start only if preceded by a blank line. Items and sub-items can
 start without a blank line.
 
-```````````````````````````````` example(Paragraph Break Options: 8) options(bullet-no-para-break, ordered-no-para-break)
+```````````````````````````````` example(List - Paragraph Break Options: 8) options(bullet-no-para-break, ordered-no-para-break)
 This is a paragraph
 2. item 1
 1. item 2
@@ -1708,7 +1706,7 @@ Document[0, 159]
 Without relaxed start for bullet Lists start only if preceded by a blank line. Items and
 sub-items can start without a blank line.
 
-```````````````````````````````` example(Paragraph Break Options: 9) options(bullet-no-para-break)
+```````````````````````````````` example(List - Paragraph Break Options: 9) options(bullet-no-para-break)
 This is a paragraph
 1. item 1
 1. item 2
@@ -1798,7 +1796,7 @@ Document[0, 159]
 With relaxed start but not for ordered lists. Ordered lists start only if preceded by a blank
 line.
 
-```````````````````````````````` example(Paragraph Break Options: 10) options(ordered-no-para-break)
+```````````````````````````````` example(List - Paragraph Break Options: 10) options(ordered-no-para-break)
 This is a paragraph
 2. item 1
 1. item 2
@@ -1887,7 +1885,7 @@ Document[0, 159]
 
 Ordered items must have a blank line before them
 
-```````````````````````````````` example(Paragraph Break Options: 11) options(ordered-no-para-break, ordered-no-item-break)
+```````````````````````````````` example(List - Paragraph Break Options: 11) options(ordered-no-para-break, ordered-no-item-break)
 This is a paragraph
 2. not item 1
 1. not item 2
@@ -1908,7 +1906,7 @@ Document[0, 47]
 
 Ordered items must have a blank line before them
 
-```````````````````````````````` example(Paragraph Break Options: 12) options(ordered-no-para-break, ordered-no-item-break)
+```````````````````````````````` example(List - Paragraph Break Options: 12) options(ordered-no-para-break, ordered-no-item-break)
 1. item 1.0
 
 2. item 2.0
@@ -1947,7 +1945,7 @@ Document[0, 51]
 
 Ordered items must have a blank line before them, but not bullet items
 
-```````````````````````````````` example(Paragraph Break Options: 13) options(ordered-no-para-break, ordered-no-item-break)
+```````````````````````````````` example(List - Paragraph Break Options: 13) options(ordered-no-para-break, ordered-no-item-break)
 This is a paragraph
 - item 1
 - item 2
@@ -1974,7 +1972,7 @@ Document[0, 37]
 Bullet items must have a blank line before them when preceded by paragraph but should not append
 following child paragraph
 
-```````````````````````````````` example(Paragraph Break Options: 14) options(bullet-no-para-break, list-no-type-match, list-no-loose)
+```````````````````````````````` example(List - Paragraph Break Options: 14) options(bullet-no-para-break, list-no-type-match, list-no-loose)
 - item 1 paragraph
   * sublist
 - item 2 paragraph
@@ -2011,7 +2009,7 @@ Document[0, 64]
 
 Bullet items must have a blank line before them
 
-```````````````````````````````` example(Paragraph Break Options: 15) options(bullet-no-para-break, bullet-no-item-break)
+```````````````````````````````` example(List - Paragraph Break Options: 15) options(bullet-no-para-break, bullet-no-item-break)
 This is a paragraph
 - not item 1
 - not item 2
@@ -2032,7 +2030,7 @@ Document[0, 45]
 
 Bullet items must have a blank line before them
 
-```````````````````````````````` example(Paragraph Break Options: 16) options(bullet-no-para-break, bullet-no-item-break)
+```````````````````````````````` example(List - Paragraph Break Options: 16) options(bullet-no-para-break, bullet-no-item-break)
 - item 1.0
 
 - item 2.0
@@ -2071,7 +2069,7 @@ Document[0, 47]
 
 Bullet items must have a blank line before them, but not ordered items
 
-```````````````````````````````` example(Paragraph Break Options: 17) options(bullet-no-para-break, bullet-no-item-break)
+```````````````````````````````` example(List - Paragraph Break Options: 17) options(bullet-no-para-break, bullet-no-item-break)
 This is a paragraph
 1. item 1
 2. item 2
@@ -2097,7 +2095,7 @@ Document[0, 39]
 
 All items must have a blank line before them
 
-```````````````````````````````` example(Paragraph Break Options: 18) options(bullet-no-para-break, bullet-no-item-break, ordered-no-para-break, ordered-no-item-break)
+```````````````````````````````` example(List - Paragraph Break Options: 18) options(bullet-no-para-break, bullet-no-item-break, ordered-no-para-break, ordered-no-item-break)
 This is a paragraph
 2. not item 1
 1. not item 2
@@ -2199,7 +2197,7 @@ Document[0, 208]
 
 Without ordered items dot only
 
-```````````````````````````````` example Marker Options: 1
+```````````````````````````````` example List - Marker Options: 1
 1. item 1
 2. item 2
 
@@ -2241,7 +2239,7 @@ Document[0, 43]
 
 With ordered items dot only
 
-```````````````````````````````` example(Marker Options: 2) options(ordered-dot-only)
+```````````````````````````````` example(List - Marker Options: 2) options(ordered-dot-only)
 1. item 1
 2. item 2
 
@@ -2274,7 +2272,7 @@ Document[0, 43]
 
 An ordered list after bullet list with no bullet matching
 
-```````````````````````````````` example(Marker Options: 3) options(list-no-bullet-match)
+```````````````````````````````` example(List - Marker Options: 3) options(list-no-bullet-match)
 - item 1
 - item 2
 + item 3
@@ -2320,7 +2318,7 @@ Document[0, 56]
 
 A bullet list after an ordered list with no bullet matching
 
-```````````````````````````````` example(Marker Options: 4) options(list-no-bullet-match)
+```````````````````````````````` example(List - Marker Options: 4) options(list-no-bullet-match)
 2. item 1
 1. item 2
 
@@ -2366,7 +2364,7 @@ Document[0, 56]
 
 An ordered list after bullet list, no type match
 
-```````````````````````````````` example(Marker Options: 5) options(list-no-type-match)
+```````````````````````````````` example(List - Marker Options: 5) options(list-no-type-match)
 - item 1
 - item 2
 
@@ -2407,7 +2405,7 @@ Document[0, 38]
 
 A bullet list after an ordered list, no type match
 
-```````````````````````````````` example(Marker Options: 6) options(list-no-type-match)
+```````````````````````````````` example(List - Marker Options: 6) options(list-no-type-match)
 2. item 1
 1. item 2
 
@@ -2448,7 +2446,7 @@ Document[0, 38]
 
 An ordered list item can interrupt a previous list item's paragraph
 
-```````````````````````````````` example Marker Options: 7
+```````````````````````````````` example List - Marker Options: 7
 1. item 1
 lazy continuation
 2. item 2
@@ -2475,7 +2473,7 @@ Document[0, 37]
 An ordered list sub item can interrupt its parent item's paragraph even if it does not start
 with 1 when start setting is disabled.
 
-```````````````````````````````` example(Marker Options: 8) options(list-no-start)
+```````````````````````````````` example(List - Marker Options: 8) options(list-no-start)
 1. item 1
 lazy continuation
    2. item 1.1
@@ -2505,7 +2503,7 @@ Document[0, 42]
 
 nested
 
-```````````````````````````````` example(Marker Options: 9) options(list-no-start)
+```````````````````````````````` example(List - Marker Options: 9) options(list-no-start)
 4. item 1
 3. item 2
    2. item 2.1
@@ -2541,7 +2539,7 @@ Document[0, 44]
 
 nested, no ordered start, no ordered para break, no ordered item paragraph break
 
-```````````````````````````````` example(Marker Options: 10) options(list-no-start, ordered-no-para-break, ordered-no-item-break)
+```````````````````````````````` example(List - Marker Options: 10) options(list-no-start, ordered-no-para-break, ordered-no-item-break)
 4. item 1
 3. item 2
    2. item 2.1
@@ -2570,7 +2568,7 @@ Document[0, 44]
 
 nested, no ordered start, no ordered para break, no ordered item paragraph break
 
-```````````````````````````````` example(Marker Options: 11) options(list-no-start, ordered-no-para-break, ordered-no-item-break)
+```````````````````````````````` example(List - Marker Options: 11) options(list-no-start, ordered-no-para-break, ordered-no-item-break)
 4. item 1
 
 3. item 2
@@ -2614,7 +2612,7 @@ Document[0, 51]
 
 no relaxed ordered start with exception for another item's paragraph
 
-```````````````````````````````` example(Marker Options: 12) options(list-no-start, ordered-no-para-break)
+```````````````````````````````` example(List - Marker Options: 12) options(list-no-start, ordered-no-para-break)
 4. item 1
 3. item 2
    2. item 2.1
@@ -2665,7 +2663,7 @@ Document[0, 113]
 no relaxed ordered start with exception for another item's paragraph but only if manual list
 start is enabled
 
-```````````````````````````````` example(Marker Options: 13) options(ordered-no-para-break, ordered-no-item-break)
+```````````````````````````````` example(List - Marker Options: 13) options(ordered-no-para-break, ordered-no-item-break)
 4. item 1
 3. item 2
    2. item 2.1
@@ -2711,7 +2709,7 @@ Document[0, 112]
 
 nested, no bullet para break, no bullet item paragraph break
 
-```````````````````````````````` example(Marker Options: 14) options(bullet-no-para-break, bullet-no-item-break)
+```````````````````````````````` example(List - Marker Options: 14) options(bullet-no-para-break, bullet-no-item-break)
 - item 1
 - item 2
   - item 2.1
@@ -2740,7 +2738,7 @@ Document[0, 39]
 
 nested, no ordered start, no ordered para break, no ordered item paragraph break
 
-```````````````````````````````` example(Marker Options: 15) options(bullet-no-para-break, bullet-no-item-break)
+```````````````````````````````` example(List - Marker Options: 15) options(bullet-no-para-break, bullet-no-item-break)
 - item 1
 
 - item 2
@@ -2784,7 +2782,7 @@ Document[0, 46]
 
 mismatched item to sub-item
 
-```````````````````````````````` example(Marker Options: 16) options(list-item-mismatch-to-subitem)
+```````````````````````````````` example(List - Marker Options: 16) options(list-item-mismatch-to-subitem)
 - item
 1. sub-item
 1. sub-item
@@ -2834,7 +2832,7 @@ Document[0, 61]
 
 mismatched item to sub-item
 
-```````````````````````````````` example(Marker Options: 17) options(list-item-mismatch-to-subitem)
+```````````````````````````````` example(List - Marker Options: 17) options(list-item-mismatch-to-subitem)
 1. item
 - sub-item
 - sub-item
@@ -2889,7 +2887,7 @@ Document[0, 59]
 With relaxed rules. Thematic break can occur without a preceding blank line. Applies to
 non-dashed thematic break, dashes are a heading.
 
-```````````````````````````````` example No Relaxed Rules: 1
+```````````````````````````````` example Thematic Break - No Relaxed Rules: 1
 This is a paragraph
 ***
 .
@@ -2906,7 +2904,7 @@ Document[0, 23]
 Without relaxed rules. Thematic break must be preceded by a blank line. Applies to non-dashed
 thematic break, dashes are a heading.
 
-```````````````````````````````` example(No Relaxed Rules: 2) options(thematic-break-no-relaxed-start)
+```````````````````````````````` example(Thematic Break - No Relaxed Rules: 2) options(thematic-break-no-relaxed-start)
 This is a paragraph
 ***
 .
@@ -2923,7 +2921,7 @@ Document[0, 23]
 
 Nested in other elements
 
-```````````````````````````````` example No Relaxed Rules: 3
+```````````````````````````````` example Thematic Break - No Relaxed Rules: 3
 > - ***
 .
 <blockquote>
@@ -2948,7 +2946,7 @@ Document[0, 7]
 
 Default pass it all through
 
-```````````````````````````````` example Encode Options: 1
+```````````````````````````````` example HTML - Encode Options: 1
 <div>
 <p>paragraph</p>
 </div>
@@ -2982,7 +2980,7 @@ Document[0, 196]
 
 Encode all html
 
-```````````````````````````````` example(Encode Options: 2) options(escape-html)
+```````````````````````````````` example(HTML - Encode Options: 2) options(escape-html)
 <div>
 <p>paragraph</p>
 </div>
@@ -3016,7 +3014,7 @@ Document[0, 196]
 
 Encode html blocks
 
-```````````````````````````````` example(Encode Options: 3) options(escape-html-blocks)
+```````````````````````````````` example(HTML - Encode Options: 3) options(escape-html-blocks)
 <div>
 <p>paragraph</p>
 </div>
@@ -3050,7 +3048,7 @@ Document[0, 196]
 
 Encode html block comments
 
-```````````````````````````````` example(Encode Options: 4) options(escape-html-comment-blocks)
+```````````````````````````````` example(HTML - Encode Options: 4) options(escape-html-comment-blocks)
 <div>
 <p>paragraph</p>
 </div>
@@ -3084,7 +3082,7 @@ Document[0, 196]
 
 Encode inline html
 
-```````````````````````````````` example(Encode Options: 5) options(escape-inline-html)
+```````````````````````````````` example(HTML - Encode Options: 5) options(escape-inline-html)
 <div>
 <p>paragraph</p>
 </div>
@@ -3118,7 +3116,7 @@ Document[0, 196]
 
 Encode inline html comments
 
-```````````````````````````````` example(Encode Options: 6) options(escape-inline-html-comments)
+```````````````````````````````` example(HTML - Encode Options: 6) options(escape-inline-html-comments)
 <div>
 <p>paragraph</p>
 </div>
@@ -3154,7 +3152,7 @@ Document[0, 196]
 
 Suppress all html
 
-```````````````````````````````` example(Suppress Options: 1) options(suppress-html)
+```````````````````````````````` example(HTML - Suppress Options: 1) options(suppress-html)
 <div>
 <p>paragraph</p>
 </div>
@@ -3183,7 +3181,7 @@ Document[0, 196]
 
 Suppress html blocks
 
-```````````````````````````````` example(Suppress Options: 2) options(suppress-html-blocks)
+```````````````````````````````` example(HTML - Suppress Options: 2) options(suppress-html-blocks)
 <div>
 <p>paragraph</p>
 </div>
@@ -3212,7 +3210,7 @@ Document[0, 196]
 
 Suppress html comment blocks
 
-```````````````````````````````` example(Suppress Options: 3) options(suppress-html-comment-blocks)
+```````````````````````````````` example(HTML - Suppress Options: 3) options(suppress-html-comment-blocks)
 <div>
 <p>paragraph</p>
 </div>
@@ -3245,7 +3243,7 @@ Document[0, 196]
 
 Suppress inline html
 
-```````````````````````````````` example(Suppress Options: 4) options(suppress-inline-html)
+```````````````````````````````` example(HTML - Suppress Options: 4) options(suppress-inline-html)
 <div>
 <p>paragraph</p>
 </div>
@@ -3279,7 +3277,7 @@ Document[0, 196]
 
 Suppress inline html comments
 
-```````````````````````````````` example(Suppress Options: 5) options(suppress-inline-html-comments)
+```````````````````````````````` example(HTML - Suppress Options: 5) options(suppress-inline-html-comments)
 <div>
 <p>paragraph</p>
 </div>
@@ -3315,7 +3313,7 @@ Document[0, 196]
 
 Html comments in block
 
-```````````````````````````````` example Parse Inner Comments: 1
+```````````````````````````````` example HTML - Parse Inner Comments: 1
 <!-- HTML Comment -->
 <div>
 </div>
@@ -3332,7 +3330,7 @@ Document[0, 34]
 
 Html comments in block
 
-```````````````````````````````` example Parse Inner Comments: 2
+```````````````````````````````` example HTML - Parse Inner Comments: 2
 <div>
     <!-- HTML Comment -->
 </div>
@@ -3348,7 +3346,7 @@ Document[0, 38]
 
 Html comments in block
 
-```````````````````````````````` example Parse Inner Comments: 3
+```````````````````````````````` example HTML - Parse Inner Comments: 3
 <div>
 </div>
 <!-- HTML Comment -->
@@ -3364,7 +3362,7 @@ Document[0, 34]
 
 Html comments in block, parse inner comments
 
-```````````````````````````````` example(Parse Inner Comments: 4) options(parse-inner-comments)
+```````````````````````````````` example(HTML - Parse Inner Comments: 4) options(parse-inner-comments)
 <!-- HTML Comment -->
 <div>
 </div>
@@ -3381,7 +3379,7 @@ Document[0, 34]
 
 Html comments in block, parse inner comments
 
-```````````````````````````````` example(Parse Inner Comments: 5) options(parse-inner-comments)
+```````````````````````````````` example(HTML - Parse Inner Comments: 5) options(parse-inner-comments)
 <div>
     <!-- HTML Comment -->
 </div>
@@ -3400,7 +3398,7 @@ Document[0, 38]
 
 Html comments in block, parse inner comments
 
-```````````````````````````````` example(Parse Inner Comments: 6) options(parse-inner-comments)
+```````````````````````````````` example(HTML - Parse Inner Comments: 6) options(parse-inner-comments)
 <div>
 </div>
 <!-- HTML Comment -->
@@ -3508,7 +3506,7 @@ Document[0, 31]
 
 Emphasis around inline code spans
 
-```````````````````````````````` example Emphasis: 1
+```````````````````````````````` example GFM - Emphasis: 1
 please add  `add_gtest(`**`your_unittest`**` `**`your_unittest_unittest.cc`**` )`
 .
 <p>please add  <code>add_gtest(</code><strong><code>your_unittest</code></strong><code></code><strong><code>your_unittest_unittest.cc</code></strong><code>)</code></p>
@@ -3533,7 +3531,7 @@ Document[0, 81]
 
 Some weird commonmark processing of emphasis
 
-```````````````````````````````` example Emphasis: 2
+```````````````````````````````` example GFM - Emphasis: 2
 **bold*bold-italic*bold**
 .
 <p><strong>bold<em>bold-italic</em>bold</strong></p>
@@ -3550,7 +3548,7 @@ Document[0, 25]
 
 more emphasis tests
 
-```````````````````````````````` example Emphasis: 3
+```````````````````````````````` example GFM - Emphasis: 3
 *a**b**c*
 .
 <p><em>a<strong>b</strong>c</em></p>
@@ -3567,7 +3565,7 @@ Document[0, 9]
 
 more emphasis tests
 
-```````````````````````````````` example Emphasis: 4
+```````````````````````````````` example GFM - Emphasis: 4
 ***a**b*
 .
 <p><em><strong>a</strong>b</em></p>
@@ -3583,7 +3581,7 @@ Document[0, 8]
 
 more emphasis tests
 
-```````````````````````````````` example Emphasis: 5
+```````````````````````````````` example GFM - Emphasis: 5
 *b**a***
 
 .
@@ -3600,7 +3598,7 @@ Document[0, 10]
 
 more emphasis tests
 
-```````````````````````````````` example Emphasis: 6
+```````````````````````````````` example GFM - Emphasis: 6
 *a**b**c*
 
 .
@@ -3618,7 +3616,7 @@ Document[0, 11]
 
 more emphasis tests
 
-```````````````````````````````` example Emphasis: 7
+```````````````````````````````` example GFM - Emphasis: 7
 **a*b*c**
 
 .
@@ -3636,7 +3634,7 @@ Document[0, 11]
 
 more emphasis tests
 
-```````````````````````````````` example Emphasis: 8
+```````````````````````````````` example GFM - Emphasis: 8
 **a b*b*b c**
 
 .
@@ -3654,7 +3652,7 @@ Document[0, 15]
 
 This works as expected:
 
-```````````````````````````````` example Emphasis: 9
+```````````````````````````````` example GFM - Emphasis: 9
 **bold *bold-italic* bold**
 .
 <p><strong>bold <em>bold-italic</em> bold</strong></p>
@@ -3671,7 +3669,7 @@ Document[0, 27]
 
 code mixed with emphasis:
 
-```````````````````````````````` example Emphasis: 10
+```````````````````````````````` example GFM - Emphasis: 10
 `code with `**`bold`**` inside`
 .
 <p><code>code with</code><strong><code>bold</code></strong><code>inside</code></p>
@@ -3872,29 +3870,7 @@ Option not to match closing fence characters to opening ones
 ```
 proper unmatched fenced code
 ~~~
-.                ## Fenced Code
-
-Option not to match closing fence characters to opening ones
-
 .
-````````````````````````````````
-
-
-```
-proper unmatched fenced code
-```
-
-.
-
-<pre><code>proper unmatched fenced code
-</code></pre>
-. Document[0, 36] FencedCodeBlock[0, 36] open:[0, 3, "```"] content:[4, 33] lines[1]
-close:[33, 36, "~~~"] Text[4, 33] chars:[4, 33, "prope … code\n"]
-
-````````````````````````````````
-
-
-
 <pre><code>proper unmatched fenced code
 </code></pre>
 .
@@ -3902,6 +3878,22 @@ Document[0, 36]
   FencedCodeBlock[0, 36] open:[0, 3, "```"] content:[4, 33] lines[1] close:[33, 36, "~~~"]
     Text[4, 33] chars:[4, 33, "prope … code\n"]
 ````````````````````````````````
+
+
+```````````````````````````````` example(Fenced Code Options: 12) options(unmatched-fence)
+```
+proper unmatched fenced code
+```
+
+.
+<pre><code>proper unmatched fenced code
+</code></pre>
+.
+Document[0, 38]
+  FencedCodeBlock[0, 36] open:[0, 3, "```"] content:[4, 33] lines[1] close:[33, 36, "```"]
+    Text[4, 33] chars:[4, 33, "prope … code\n"]
+````````````````````````````````
+
 
 ## Anchor links option
 
@@ -5025,7 +5017,7 @@ Document[0, 18]
 
 ### General
 
-```````````````````````````````` example(General: 1) options(src-pos)
+```````````````````````````````` example(Source Position Attribute - General: 1) options(src-pos)
 <http://url> 
 `code` 
 _text_ 
@@ -5139,7 +5131,7 @@ Document[0, 230]
 
 ### Fenced Code
 
-```````````````````````````````` example(Fenced Code: 1) options(src-pos)
+```````````````````````````````` example(Source Position Attribute - Fenced Code: 1) options(src-pos)
 ```text
 text
 ```
@@ -5156,7 +5148,7 @@ Document[0, 18]
 
 fenced code with trailing spaces and tabs on close
 
-```````````````````````````````` example(Fenced Code: 2) options(src-pos)
+```````````````````````````````` example(Source Position Attribute - Fenced Code: 2) options(src-pos)
 ```text
 text
 ``` →
@@ -5177,7 +5169,7 @@ Document[0, 24]
 
 ### Paragraph
 
-```````````````````````````````` example(Paragraph: 1) options(src-pos, src-pos-lines)
+```````````````````````````````` example(Source Position Attribute - Paragraph: 1) options(src-pos, src-pos-lines)
 text
 .
 <p md-pos="0-4"><span md-pos="0-4">text</span></p>
@@ -5190,7 +5182,7 @@ Document[0, 4]
 
 Wrap individual paragraph lines in source position marked spans
 
-```````````````````````````````` example(Paragraph: 2) options(src-pos, src-pos-lines)
+```````````````````````````````` example(Source Position Attribute - Paragraph: 2) options(src-pos, src-pos-lines)
 paragraph test 
 with multiple lazy lines
 all should be src pos wrapped
@@ -5338,7 +5330,7 @@ Document[0, 455]
 
 Wrap individual paragraph lines in source position marked spans
 
-```````````````````````````````` example(Paragraph: 3) options(src-pos, src-pos-lines)
+```````````````````````````````` example(Source Position Attribute - Paragraph: 3) options(src-pos, src-pos-lines)
 paragraph test 
 with multiple lazy lines
 all should be src pos wrapped
@@ -5359,7 +5351,7 @@ Document[0, 70]
 
 Wrap individual paragraph lines in source position marked spans with spanning inlines
 
-```````````````````````````````` example(Paragraph: 4) options(src-pos, src-pos-lines)
+```````````````````````````````` example(Source Position Attribute - Paragraph: 4) options(src-pos, src-pos-lines)
 paragraph `test 
  with` multiple lazy **lines
 paragraph `test
@@ -5399,7 +5391,7 @@ Document[0, 131]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Paragraph: 5) options(src-pos, src-pos-lines-splice)
+```````````````````````````````` example(Source Position Attribute - Paragraph: 5) options(src-pos, src-pos-lines-splice)
 paragraph `test 
  with` multiple lazy **lines
 paragraph `test
@@ -5441,7 +5433,7 @@ Document[0, 131]
 
 Wrap individual paragraph lines in source position marked spans tight list items
 
-```````````````````````````````` example(Paragraph: 6) options(src-pos, src-pos-lines)
+```````````````````````````````` example(Source Position Attribute - Paragraph: 6) options(src-pos, src-pos-lines)
 - item
 with multiple lazy lines
 all should be src pos wrapped
@@ -5488,7 +5480,7 @@ Document[0, 137]
 
 Wrap individual paragraph lines in source position marked spans loose list items
 
-```````````````````````````````` example(Paragraph: 7) options(src-pos, src-pos-lines)
+```````````````````````````````` example(Source Position Attribute - Paragraph: 7) options(src-pos, src-pos-lines)
 - item
 
 - item
@@ -5555,7 +5547,7 @@ Document[0, 154]
 
 ### List Item
 
-```````````````````````````````` example(List Item: 1) options(src-pos, src-pos-lines)
+```````````````````````````````` example(Source Position Attribute - List Item: 1) options(src-pos, src-pos-lines)
 * a 
 .
 <ul>
@@ -5574,7 +5566,7 @@ Document[0, 4]
 
 no source wrap HTML
 
-```````````````````````````````` example(HTML: 1) options(src-pos, src-pos-lines)
+```````````````````````````````` example(Source Position Attribute - HTML: 1) options(src-pos, src-pos-lines)
 <div>
 <p>HTML Block</p>
 </div>
@@ -5598,7 +5590,7 @@ Document[0, 64]
 
 source wrap HTML
 
-```````````````````````````````` example(HTML: 2) options(src-pos, src-pos-lines, src-wrap-html)
+```````````````````````````````` example(Source Position Attribute - HTML: 2) options(src-pos, src-pos-lines, src-wrap-html)
 <div>
 <p>HTML Block</p>
 </div>
@@ -5624,7 +5616,7 @@ Document[0, 64]
 
 source wrap HTML blocks
 
-```````````````````````````````` example(HTML: 3) options(src-pos, src-pos-lines, src-wrap-blocks)
+```````````````````````````````` example(Source Position Attribute - HTML: 3) options(src-pos, src-pos-lines, src-wrap-blocks)
 <div>
 <p>HTML Block</p>
 </div>
@@ -5850,7 +5842,7 @@ Document[0, 24]
 
 ### Blank Lines in AST
 
-```````````````````````````````` example(Blank Lines in AST: 1) options(keep-blank-lines)
+```````````````````````````````` example(Lists - Markdown Navigator - Blank Lines in AST: 1) options(keep-blank-lines)
 ## Heading
 
 
@@ -5938,7 +5930,7 @@ Document[0, 139]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Blank Lines in AST: 2) options(keep-blank-lines)
+```````````````````````````````` example(Lists - Markdown Navigator - Blank Lines in AST: 2) options(keep-blank-lines)
 * item 1
   * item 1.1 
   

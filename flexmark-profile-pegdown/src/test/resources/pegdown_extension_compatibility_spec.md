@@ -2832,7 +2832,7 @@ With text, anchor ref
 
 encoding of &, =
 
-```````````````````````````````` example Multi-Line Image URL: 1
+```````````````````````````````` example Markdown elements - Multi-Line Image URL: 1
 ![ref](/url1?
 one = 1 & line
 ) trailing text
@@ -2843,7 +2843,7 @@ one = 1 & line
 
 encoding of +
 
-```````````````````````````````` example Multi-Line Image URL: 2
+```````````````````````````````` example Markdown elements - Multi-Line Image URL: 2
 ![ref](/url1?
 one = 1 + line
 ) trailing text
@@ -2854,7 +2854,7 @@ one = 1 + line
 
 ### Extra Style Elements
 
-```````````````````````````````` example Extra Style Elements: 1
+```````````````````````````````` example Markdown elements - Extra Style Elements: 1
 ~subscript~ ^superscript^ ++inserted++
 .
 <p><sub>subscript</sub> <sup>superscript</sup> <ins>inserted</ins></p>
@@ -2863,7 +2863,7 @@ one = 1 + line
 
 ### Gfm Task List Items
 
-```````````````````````````````` example Gfm Task List Items: 1
+```````````````````````````````` example Markdown elements - Gfm Task List Items: 1
 - [ ] task item
 - [x] task item
 - [x] task item
@@ -2876,7 +2876,7 @@ one = 1 + line
 ````````````````````````````````
 
 
-```````````````````````````````` example Gfm Task List Items: 2
+```````````````````````````````` example Markdown elements - Gfm Task List Items: 2
 1. [ ] task item
 1. [x] task item
 1. [x] task item
@@ -2893,7 +2893,7 @@ one = 1 + line
 
 Text and inlines, hierarchy
 
-```````````````````````````````` example Table Of Contents: 1
+```````````````````````````````` example Markdown elements - Table Of Contents: 1
 [TOC hierarchy] 
 
 # Heading **some bold** 1
@@ -2919,7 +2919,7 @@ Text and inlines, hierarchy
 
 Text only, sorted
 
-```````````````````````````````` example Table Of Contents: 2
+```````````````````````````````` example Markdown elements - Table Of Contents: 2
 [TOC text sorted] 
 
 ## Heading 1.1 _some italic_
@@ -2945,7 +2945,7 @@ Text only, sorted
 
 Text only, reverse sorted
 
-```````````````````````````````` example Table Of Contents: 3
+```````````````````````````````` example Markdown elements - Table Of Contents: 3
 [TOC text decreasing] 
 
 ## Heading 1.1 _some italic_
@@ -2968,7 +2968,7 @@ Text only, reverse sorted
 
 Text and inlines, sorted
 
-```````````````````````````````` example Table Of Contents: 4
+```````````````````````````````` example Markdown elements - Table Of Contents: 4
 [TOC increasing] 
 
 ### Heading 1.1.2  **_some bold italic_**
@@ -2991,7 +2991,7 @@ Text and inlines, sorted
 
 Text and inlines, unsorted
 
-```````````````````````````````` example Table Of Contents: 5
+```````````````````````````````` example Markdown elements - Table Of Contents: 5
 [TOC flat] 
 
 ### Heading 1.1.2  **_some bold italic_**
@@ -3012,7 +3012,7 @@ Text and inlines, unsorted
 ````````````````````````````````
 
 
-```````````````````````````````` example(Table Of Contents: 6) options(hard-breaks)
+```````````````````````````````` example(Markdown elements - Table Of Contents: 6) options(hard-breaks)
 paragraph with
 hard breaks
 option
@@ -3282,7 +3282,6 @@ Document[0, 50]
 
 Issue markdown page generator
 
-
 ```````````````````````````````` example Issue: 1
 ### hello `<html>` and `<body>`
 .
@@ -3298,4 +3297,5 @@ Document[0, 31]
     Code[23, 31] textOpen:[23, 24, "`"] text:[24, 30, "<body>"] textClose:[30, 31, "`"]
       Text[24, 30] chars:[24, 30, "<body>"]
 ````````````````````````````````
+
 

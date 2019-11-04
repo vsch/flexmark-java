@@ -466,7 +466,7 @@ Cond 3.1 attributes go to the paragraph parent's parent
 
 attributes are assigned to the list element
 
-```````````````````````````````` example Cond 3.1: 1
+```````````````````````````````` example No Previous Sibling - Cond 3.1: 1
 * {.red} list item 1
 * list item 2
 
@@ -511,7 +511,7 @@ Document[0, 70]
 
 attributes are assigned to the definition list
 
-```````````````````````````````` example Cond 3.1: 2
+```````````````````````````````` example No Previous Sibling - Cond 3.1: 2
 Definition Term
 :   {.red} definition item 1
 :   definition item 2
@@ -562,7 +562,7 @@ Cond 3.2 attributes go to paragraph's previous sibling,
 
 Assigned to paragraph of list item 2
 
-```````````````````````````````` example Cond 3.2: 1
+```````````````````````````````` example No Previous Sibling - Cond 3.2: 1
 * list item 1
 * list item 2
 
@@ -593,7 +593,7 @@ Document[0, 37]
 
 Assigned to paragraph of list item 2
 
-```````````````````````````````` example Cond 3.2: 2
+```````````````````````````````` example No Previous Sibling - Cond 3.2: 2
 * list item 1
 
 * list item 2
@@ -625,7 +625,7 @@ Document[0, 38]
 
 Assigned to definition item 2 paragraph
 
-```````````````````````````````` example Cond 3.2: 3
+```````````````````````````````` example No Previous Sibling - Cond 3.2: 3
 definition term
 : definition item 1
 : definition item 2
@@ -658,7 +658,7 @@ Document[0, 67]
 
 Assigned to definition item 2 paragraph
 
-```````````````````````````````` example Cond 3.2: 4
+```````````````````````````````` example No Previous Sibling - Cond 3.2: 4
 definition term
 : definition item 1
 
@@ -700,7 +700,7 @@ Cond 3.3 attributes go to the paragraph
 
 Assigned to paragraph
 
-```````````````````````````````` example Cond 3.3: 1
+```````````````````````````````` example No Previous Sibling - Cond 3.3: 1
 * list item 1
 * list item 2
 
@@ -734,7 +734,7 @@ Document[0, 49]
 
 Assigned to definition item 2
 
-```````````````````````````````` example Cond 3.3: 2
+```````````````````````````````` example No Previous Sibling - Cond 3.3: 2
 definition term
 : definition item 1
 : definition item 2
@@ -777,7 +777,7 @@ Document[0, 77]
 
 Assigned to block quote
 
-```````````````````````````````` example Cond 3.4: 1
+```````````````````````````````` example No Previous Sibling - Cond 3.4: 1
 > {.red}
 > 
 > block quote text
@@ -802,7 +802,7 @@ Cond 3.5 attributes go to paragraph's previous sibling,
 
 Assigned to previous paragraph
 
-```````````````````````````````` example Cond 3.5: 1
+```````````````````````````````` example No Previous Sibling - Cond 3.5: 1
 Some paragraph
  
 {.red}
@@ -820,7 +820,7 @@ Document[0, 23]
 
 Assigned to previous block quote
 
-```````````````````````````````` example Cond 3.5: 2
+```````````````````````````````` example No Previous Sibling - Cond 3.5: 2
 > Some paragraph
  
 {.red}
@@ -841,7 +841,7 @@ Document[0, 25]
 
 Assigned to previous paragraph in the block quote
 
-```````````````````````````````` example Cond 3.5: 3
+```````````````````````````````` example No Previous Sibling - Cond 3.5: 3
 > Some paragraph
 > 
 > {.red}
@@ -862,7 +862,7 @@ Document[0, 28]
 
 Assigned to previous list
 
-```````````````````````````````` example Cond 3.5: 4
+```````````````````````````````` example No Previous Sibling - Cond 3.5: 4
 * list item 1
 * list item 2
  
@@ -889,7 +889,7 @@ Document[0, 36]
 
 Assigned to previous definition list
 
-```````````````````````````````` example Cond 3.5: 5
+```````````````````````````````` example No Previous Sibling - Cond 3.5: 5
 definition term 1
 : definition item 1.1
  
@@ -927,7 +927,7 @@ Document[0, 90]
 
 Assigned to previous table
 
-```````````````````````````````` example Cond 3.5: 6
+```````````````````````````````` example No Previous Sibling - Cond 3.5: 6
 
 | head |
 |------|
@@ -970,7 +970,7 @@ Cond 3.6 attributes go to the paragraph
 
 Assigned to paragraph
 
-```````````````````````````````` example Cond 3.6: 1
+```````````````````````````````` example No Previous Sibling - Cond 3.6: 1
 Some paragraph
  
 {.red} Some Text
@@ -993,7 +993,7 @@ Document[0, 33]
 * non paragraph parent
 * Cond 3.7 attributes go to the parent
 
-```````````````````````````````` example Cond 3.7: 1
+```````````````````````````````` example No Previous Sibling - Cond 3.7: 1
 Some Text **{.red}bold text**
 .
 <p>Some Text <strong class="red">bold text</strong></p>
@@ -1018,7 +1018,7 @@ assigned to the element and has an `id` attribute.
 
 ### Cond 4.1
 
-```````````````````````````````` example Cond 4.1: 1
+```````````````````````````````` example Anchor Targets - Cond 4.1: 1
 # Heading
 .
 <h1 id="heading">Heading</h1>
@@ -1029,7 +1029,7 @@ Document[0, 9]
 ````````````````````````````````
 
 
-```````````````````````````````` example Cond 4.1: 2
+```````````````````````````````` example Anchor Targets - Cond 4.1: 2
 # Heading {#custom-id}
 .
 <h1 id="custom-id">Heading</h1>
@@ -1042,7 +1042,7 @@ Document[0, 22]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Cond 4.1: 3) options(anchors)
+```````````````````````````````` example(Anchor Targets - Cond 4.1: 3) options(anchors)
 # Heading {#custom-id}
 .
 <h1><a href="#custom-id" id="custom-id"></a>Heading</h1>
@@ -1056,7 +1056,7 @@ Document[0, 22]
 ````````````````````````````````
 
 
-```````````````````````````````` example Cond 4.1: 4
+```````````````````````````````` example Anchor Targets - Cond 4.1: 4
 # Heading # {#custom-id}
 .
 <h1 id="custom-id">Heading #</h1>
@@ -1069,7 +1069,7 @@ Document[0, 24]
 ````````````````````````````````
 
 
-```````````````````````````````` example Cond 4.1: 5
+```````````````````````````````` example Anchor Targets - Cond 4.1: 5
 Heading {#custom-id}
 ======================
 .
@@ -1083,7 +1083,7 @@ Document[0, 43]
 ````````````````````````````````
 
 
-```````````````````````````````` example Cond 4.1: 6
+```````````````````````````````` example Anchor Targets - Cond 4.1: 6
 Heading {#123-heading}
 ======================
 .
@@ -1107,7 +1107,7 @@ paragraph text.
 
 ### Cond 5.1
 
-```````````````````````````````` example Cond 5.1: 1
+```````````````````````````````` example Attributes on Reference - Cond 5.1: 1
 [test]
 
 [test]: http://example.com 
@@ -1127,7 +1127,7 @@ Document[0, 56]
 ````````````````````````````````
 
 
-```````````````````````````````` example Cond 5.1: 2
+```````````````````````````````` example Attributes on Reference - Cond 5.1: 2
 [reference 1][test] 
 
 [reference 2][test] 
@@ -1155,7 +1155,7 @@ Document[0, 92]
 
 Ref image
 
-```````````````````````````````` example Cond 5.1: 3
+```````````````````````````````` example Attributes on Reference - Cond 5.1: 3
 ![test]
 
 [test]: <http://example.com/test.png> 
@@ -1175,7 +1175,7 @@ Document[0, 75]
 ````````````````````````````````
 
 
-```````````````````````````````` example Cond 5.1: 4
+```````````````````````````````` example Attributes on Reference - Cond 5.1: 4
 ![reference 1][test]
 
 ![reference 2][test]

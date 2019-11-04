@@ -5,7 +5,7 @@
       <flexmarkSectionLanguages>
         <option name="1" value="Markdown" />
         <option name="2" value="HTML" />
-        <option name="3" value="flexmark-ast:1,2" />
+        <option name="3" value="flexmark-ast:1" />
       </flexmarkSectionLanguages>
     </FlexmarkHtmlSettings>
   </component>
