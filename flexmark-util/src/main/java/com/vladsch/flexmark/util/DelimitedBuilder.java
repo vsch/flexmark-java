@@ -28,7 +28,6 @@ import java.util.Stack;
 public class DelimitedBuilder {
     private String delimiter;
     private StringBuilder out;
-    private boolean hadSome = false;
     private boolean pending = false;
     private int lastLen = 0;
     private Stack<String> delimiterStack = null;
@@ -76,7 +75,7 @@ public class DelimitedBuilder {
 
     public DelimitedBuilder mark() {
         int length = out != null ? out.length() : 0;
-        pending |= lastLen != length;
+        if (lastLen != length) pending = true;
         lastLen = length;
         return this;
     }
@@ -114,46 +113,40 @@ public class DelimitedBuilder {
         }
     }
 
-    private DelimitedBuilder had() {
-        //int length = out.length();
-        //hadSome = lastLen != length;
-        return this;
-    }
-
     public DelimitedBuilder append(char v) {
         doPending();
         out.append(v);
-        return had();
+        return this;
     }
 
     public DelimitedBuilder append(int v) {
         doPending();
         out.append(v);
-        return had();
+        return this;
     }
 
     public DelimitedBuilder append(boolean v) {
         doPending();
         out.append(v);
-        return had();
+        return this;
     }
 
     public DelimitedBuilder append(long v) {
         doPending();
         out.append(v);
-        return had();
+        return this;
     }
 
     public DelimitedBuilder append(float v) {
         doPending();
         out.append(v);
-        return had();
+        return this;
     }
 
     public DelimitedBuilder append(double v) {
         doPending();
         out.append(v);
-        return had();
+        return this;
     }
 
     public DelimitedBuilder append(String v) {
@@ -161,7 +154,7 @@ public class DelimitedBuilder {
             doPending();
             out.append(v);
         }
-        return had();
+        return this;
     }
 
     public DelimitedBuilder append(String v, int start, int end) {
@@ -169,7 +162,7 @@ public class DelimitedBuilder {
             doPending();
             out.append(v, start, end);
         }
-        return had();
+        return this;
     }
 
     public DelimitedBuilder append(CharSequence v) {
@@ -177,7 +170,7 @@ public class DelimitedBuilder {
             doPending();
             out.append(v);
         }
-        return had();
+        return this;
     }
 
     public DelimitedBuilder append(CharSequence v, int start, int end) {
@@ -185,7 +178,7 @@ public class DelimitedBuilder {
             doPending();
             out.append(v, start, end);
         }
-        return had();
+        return this;
     }
 
     public DelimitedBuilder append(char[] v) {
@@ -193,7 +186,7 @@ public class DelimitedBuilder {
             doPending();
             out.append(v);
         }
-        return had();
+        return this;
     }
 
     public DelimitedBuilder append(char[] v, int start, int end) {
@@ -201,13 +194,13 @@ public class DelimitedBuilder {
             doPending();
             out.append(v, start, end);
         }
-        return had();
+        return this;
     }
 
     public DelimitedBuilder appendCodePoint(int codePoint) {
         doPending();
         out.appendCodePoint(codePoint);
-        return had();
+        return this;
     }
 
     public <V> DelimitedBuilder appendAll(V[] v) {

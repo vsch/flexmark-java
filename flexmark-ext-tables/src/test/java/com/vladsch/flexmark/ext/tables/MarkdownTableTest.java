@@ -2574,6 +2574,130 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         assertEquals(pos + 50, offset);
     }
 
+    @Test
+    public void test_LeftCaretAfterNoSpace() {
+        String markdown = "" +
+                "|       names^       |\n" +
+                "|-------------------|\n" +
+                "| Works with builds |\n" +
+                "";
+
+        int pos = markdown.indexOf("^");
+        BasedSequence source = BasedSequenceImpl.of(markdown.substring(0, pos) + markdown.substring(pos + 1));
+        MarkdownTable table = getTable(source, formatOptions("", null).toMutable().set(TablesExtension.FORMAT_TABLE_LEFT_ALIGN_MARKER, DiscretionaryText.AS_IS));
+        assertTrue(table.addTrackedOffset(pos, null, false));
+        HtmlWriter out = new HtmlWriter(0, HtmlWriter.FORMAT_ALL);
+        table.appendTable(out);
+        String formattedTable = out.toString(0);
+        Map<Integer, Integer> offsets = table.getTrackedOffsets();
+        int offset = offsets.get(pos);
+
+        assertEquals("" +
+                "|       names       |\n" +
+                "|-------------------|\n" +
+                "| Works with builds |\n" +
+                "", formattedTable);
+        assertEquals("" +
+                "|       names^       |\n" +
+                "|-------------------|\n" +
+                "| Works with builds |\n" +
+                "", formattedTable.substring(0, offset) + "^" + formattedTable.substring(offset));
+        assertEquals(pos, offset);
+    }
+
+    @Test
+    public void test_LeftCaretAfterSpace() {
+        String markdown = "" +
+                "|       names ^      |\n" +
+                "|-------------------|\n" +
+                "| Works with builds |\n" +
+                "";
+
+        int pos = markdown.indexOf("^");
+        BasedSequence source = BasedSequenceImpl.of(markdown.substring(0, pos) + markdown.substring(pos + 1));
+        MarkdownTable table = getTable(source, formatOptions("", null).toMutable().set(TablesExtension.FORMAT_TABLE_LEFT_ALIGN_MARKER, DiscretionaryText.AS_IS));
+        assertTrue(table.addTrackedOffset(pos, null, false));
+        HtmlWriter out = new HtmlWriter(0, HtmlWriter.FORMAT_ALL);
+        table.appendTable(out);
+        String formattedTable = out.toString(0);
+        Map<Integer, Integer> offsets = table.getTrackedOffsets();
+        int offset = offsets.get(pos);
+
+        assertEquals("" +
+                "|       names       |\n" +
+                "|-------------------|\n" +
+                "| Works with builds |\n" +
+                "", formattedTable);
+        assertEquals("" +
+                "|       names ^      |\n" +
+                "|-------------------|\n" +
+                "| Works with builds |\n" +
+                "", formattedTable.substring(0, offset) + "^" + formattedTable.substring(offset));
+        assertEquals(pos, offset);
+    }
+
+    @Test
+    public void test_LeftCaretAfter2Spaces() {
+        String markdown = "" +
+                "|       names  ^     |\n" +
+                "|-------------------|\n" +
+                "| Works with builds |\n" +
+                "";
+
+        int pos = markdown.indexOf("^");
+        BasedSequence source = BasedSequenceImpl.of(markdown.substring(0, pos) + markdown.substring(pos + 1));
+        MarkdownTable table = getTable(source, formatOptions("", null).toMutable().set(TablesExtension.FORMAT_TABLE_LEFT_ALIGN_MARKER, DiscretionaryText.AS_IS));
+        assertTrue(table.addTrackedOffset(pos, null, false));
+        HtmlWriter out = new HtmlWriter(0, HtmlWriter.FORMAT_ALL);
+        table.appendTable(out);
+        String formattedTable = out.toString(0);
+        Map<Integer, Integer> offsets = table.getTrackedOffsets();
+        int offset = offsets.get(pos);
+
+        assertEquals("" +
+                "|       names       |\n" +
+                "|-------------------|\n" +
+                "| Works with builds |\n" +
+                "", formattedTable);
+        assertEquals("" +
+                "|       names  ^     |\n" +
+                "|-------------------|\n" +
+                "| Works with builds |\n" +
+                "", formattedTable.substring(0, offset) + "^" + formattedTable.substring(offset));
+        assertEquals(pos, offset);
+    }
+
+    @Test
+    public void test_LeftCaretAfter3Spaces() {
+        String markdown = "" +
+                "|       names   ^    |\n" +
+                "|-------------------|\n" +
+                "| Works with builds |\n" +
+                "";
+
+        int pos = markdown.indexOf("^");
+        BasedSequence source = BasedSequenceImpl.of(markdown.substring(0, pos) + markdown.substring(pos + 1));
+        MarkdownTable table = getTable(source, formatOptions("", null).toMutable().set(TablesExtension.FORMAT_TABLE_LEFT_ALIGN_MARKER, DiscretionaryText.AS_IS));
+        assertTrue(table.addTrackedOffset(pos, null, false));
+        HtmlWriter out = new HtmlWriter(0, HtmlWriter.FORMAT_ALL);
+        table.appendTable(out);
+        String formattedTable = out.toString(0);
+        Map<Integer, Integer> offsets = table.getTrackedOffsets();
+        int offset = offsets.get(pos);
+
+        assertEquals("" +
+                "|       names       |\n" +
+                "|-------------------|\n" +
+                "| Works with builds |\n" +
+                "", formattedTable);
+        assertEquals("" +
+                "|       names   ^    |\n" +
+                "|-------------------|\n" +
+                "| Works with builds |\n" +
+                "", formattedTable.substring(0, offset) + "^" + formattedTable.substring(offset));
+        assertEquals(pos, offset);
+    }
+
     // these are tested with manipulators
     @Test
     public void allRows() {

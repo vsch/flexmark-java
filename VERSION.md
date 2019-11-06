@@ -168,10 +168,18 @@ Next
 * [ ] Add: `RichSequence.extendStartToEOL()`
 * Add: spec example language per section options and rendering in HTML.
   * [ ] Add: Tests for section name options
+* [ ] Fix: table formatting caret position tracking affects alignment even when not inserting,
+      just formatting. Need to keep track of whether format after typing or just format. Then
+      caret position should only track but not force spaces behind it to be preserved. See
+      failed tests in `com.vladsch.flexmark.ext.tables.MarkdownTableTest`
 
 0.59.42
 -------
 
+* [ ] Fix: Add `TextContainer` node type to allow extracting text nodes without having to know
+      all of the node types. The text container should implement ability to append to
+      `StringBuilder` its text equivalent. A visitor needs to be provided so child nodes could
+      be visited.
 * Fix: reformat tests for compound sections
 
 0.59.40

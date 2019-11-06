@@ -3,6 +3,29 @@ package com.vladsch.flexmark.util.data;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+/**
+ * NOTE: Constructors have changed in a breaking way from 0.50.x and prior implementations
+ *
+ * Previously you could provide:
+ *
+ * 1. [T] defaultValue
+ * 2. DataValueFactory[T]
+ * 3. DataKey[T]
+ *
+ * Options 1. and 2. are not available separately and both have to be provided to the constructor
+ * to eliminate the need for handling null for DataHolder in the data value factory.
+ *
+ * Now you have the following choices:
+ *
+ * 1. [T] defaultValue AND DataNotNullValueFactory
+ * 2. NotNullValueSupplier[T]
+ * 3. DataKey[T] from which default value will be taken on construction, and values will be retrieved if no value is set for this key
+ *
+ * Additional changes include separating NullableDataKey out so that DataKey values cannot be null. If you need
+ * a key with null result value then use NullableDataKey which is identical to DataKey but allows nulls to be used for values.
+ *
+ * @param <T>  type of data held by the key
+ */
 public class DataKey<T> extends DataKeyBase<T> {
     /**
      * Creates a DataKey with non-null data value and factory
