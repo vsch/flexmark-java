@@ -135,7 +135,7 @@ public class ImageUtils {
     /**
      * @param cachedImageFile file
      * @return Could be {@code null} if the image could not be read from the file (because of whatever strange
-     * reason).
+     *         reason).
      */
     public static BufferedImage loadImageFromFile(File cachedImageFile) {
         if (cachedImageFile == null || !cachedImageFile.isFile()) {
@@ -154,7 +154,7 @@ public class ImageUtils {
                     continue;
                 }
 
-                if (i > 0) System.err.println("");
+                if (i > 0) System.err.println();
 
                 return read;
             }

@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.util.format;
 
 public interface TableCellManipulator {
-    final int BREAK = Integer.MIN_VALUE;
+    int BREAK = Integer.MIN_VALUE;
 
     /**
      * loop over table row cells

@@ -401,8 +401,7 @@ public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
         OrderedMap<?, ?> set = (OrderedMap<?, ?>) o;
 
         if (size() != set.size()) return false;
-        if (!entrySet().equals(set.entrySet())) return false;
-        return true;
+        return entrySet().equals(set.entrySet());
     }
 
     @Override

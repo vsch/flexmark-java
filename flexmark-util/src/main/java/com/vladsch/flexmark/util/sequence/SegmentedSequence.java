@@ -4,7 +4,6 @@ import com.vladsch.flexmark.util.collection.iteration.ArrayIterable;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static java.lang.Integer.MIN_VALUE;
@@ -109,8 +108,8 @@ public final class SegmentedSequence extends BasedSequenceImpl {
      *
      * @param segments list of based sequences to put into a based sequence
      * @return based sequence of segments. Result is a sequence which looks like
-     * all the segments were concatenated, while still maintaining
-     * the original offset for each character when using {@link #getIndexOffset(int)}(int index)
+     *         all the segments were concatenated, while still maintaining
+     *         the original offset for each character when using {@link #getIndexOffset(int)}(int index)
      */
     public static BasedSequence of(@NotNull Iterable<? extends BasedSequence> segments) {
         BasedSequence lastSegment = null;
@@ -129,9 +128,7 @@ public final class SegmentedSequence extends BasedSequenceImpl {
             for (BasedSequence segment : segments) {
                 if (segment == null || segment.isNull()) continue;
 
-                if (base.getBase() != segment.getBase()) {
-                    assert false : "all segments must come from the same base sequence";
-                }
+                assert base.getBase() == segment.getBase() : "all segments must come from the same base sequence";
 
                 if (startOffset == -1) startOffset = segment.getStartOffset();
                 endOffset = segment.getEndOffset();
@@ -180,9 +177,7 @@ public final class SegmentedSequence extends BasedSequenceImpl {
         int lastEnd = base.getStartOffset();
         for (BasedSequence segment : segments) {
             assert base.getBase() == segment.getBase() : "all segments must come from the same base sequence, segments[" + index + "], length so far: " + length;
-            if (segment.getStartOffset() < lastEnd) {
-                assert false : "segments must be in increasing index order from base sequence start=" + segment.getStartOffset() + ", length=" + length + " at index: " + index;
-            }
+            assert segment.getStartOffset() >= lastEnd : "segments must be in increasing index order from base sequence start=" + segment.getStartOffset() + ", length=" + length + " at index: " + index;
             lastEnd = segment.getEndOffset();
             length += segment.length();
             index++;

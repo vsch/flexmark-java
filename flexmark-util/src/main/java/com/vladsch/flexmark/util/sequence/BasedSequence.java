@@ -181,8 +181,8 @@ public interface BasedSequence extends RichSequence<BasedSequence> {
      *
      * @param other sequence to append to end of this one
      * @return based sequence that contains the span from start of this sequence and end of other
-     * <p>
-     * assertion will fail if the other sequence is not a continuation of this one
+     *         <p>
+     *         assertion will fail if the other sequence is not a continuation of this one
      */
     BasedSequence spliceAtEnd(BasedSequence other);
 
@@ -251,11 +251,11 @@ public interface BasedSequence extends RichSequence<BasedSequence> {
 
     /**
      * Extend in contained based sequence
-     * @param eolChars  characters to consider as EOL, note {@link #eolStartLength(int)} {@link #eolEndLength(int)} should report length of EOL found if length > 1
-     * @param includeEol   if to include the eol in the string
      *
+     * @param eolChars   characters to consider as EOL, note {@link #eolStartLength(int)} {@link #eolEndLength(int)} should report length of EOL found if length > 1
+     * @param includeEol if to include the eol in the string
      * @return resulting sequence after extension. If already spanning the line then this sequence is returned.
-     *              if the last character of this sequence are found in eolChars then no extension will be performed since it already includes the line end
+     *         if the last character of this sequence are found in eolChars then no extension will be performed since it already includes the line end
      */
     BasedSequence extendToEndOfLine(CharSequence eolChars, boolean includeEol);
     BasedSequence extendToEndOfLine(CharSequence eolChars);
@@ -264,11 +264,11 @@ public interface BasedSequence extends RichSequence<BasedSequence> {
 
     /**
      * Extend in contained based sequence
-     * @param eolChars  characters to consider as EOL, note {@link #eolStartLength(int)} {@link #eolEndLength(int)} should report length of EOL found if length > 1
-     * @param includeEol   if to include the eol in the string
      *
+     * @param eolChars   characters to consider as EOL, note {@link #eolStartLength(int)} {@link #eolEndLength(int)} should report length of EOL found if length > 1
+     * @param includeEol if to include the eol in the string
      * @return resulting sequence after extension. If already spanning the line then this sequence is returned.
-     *              if the first character of this sequence are found in eolChars then no extension will be performed since it already includes the line end
+     *         if the first character of this sequence are found in eolChars then no extension will be performed since it already includes the line end
      */
     BasedSequence extendToStartOfLine(CharSequence eolChars, boolean includeEol);
     BasedSequence extendToStartOfLine(CharSequence eolChars);

@@ -386,7 +386,7 @@ public class OrderedSet<E> implements Set<E>, Iterable<E> {
             myValidIndices.clear();
         } else {
             if (myHost == null && index == myValueList.size() - 1) {
-                myValueList.remove((int) index);
+                myValueList.remove(index);
             }
             myValidIndices.clear(index);
         }
@@ -402,7 +402,7 @@ public class OrderedSet<E> implements Set<E>, Iterable<E> {
     public @Nullable Object removeHosted(@Nullable Object o) {
         Integer index = myKeyMap.get(o);
         if (index == null) return null;
-        return removeIndexHosted((int) index);
+        return removeIndexHosted(index);
     }
 
     @Override

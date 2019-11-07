@@ -363,7 +363,7 @@ public class MarkdownTable {
 
     public void deleteRows(int rowIndex, int count) {
         int maxColumns = getMaxColumns();
-        boolean handled[] = new boolean[] { false };
+        boolean[] handled = new boolean[] { false };
         if (rowIndex <= header.rows.size()) {
             int i = count;
             while (i-- > 0 && rowIndex < header.rows.size()) {
@@ -380,7 +380,7 @@ public class MarkdownTable {
 
     public void insertRows(int rowIndex, int count) {
         int maxColumns = getMaxColumns();
-        boolean handled[] = new boolean[] { false };
+        boolean[] handled = new boolean[] { false };
         if (rowIndex <= header.rows.size()) {
             insertRows(header.rows, rowIndex, count, maxColumns);
         } else {

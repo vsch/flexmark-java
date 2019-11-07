@@ -202,7 +202,7 @@ public class OrderedMultiMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V
 
         myInKeyUpdate = true;
         if (myHost != null && !myHost.skipHostUpdate()) {
-            myHost.removing(index, new Pair<>((K) null, v));
+            myHost.removing(index, new Pair<>(null, v));
         }
         Object r = myKeySet.removeIndexHosted(index);
         myInKeyUpdate = false;
@@ -642,8 +642,7 @@ public class OrderedMultiMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V
         OrderedMultiMap<?, ?> set = (OrderedMultiMap<?, ?>) o;
 
         if (size() != set.size()) return false;
-        if (!entrySet().equals(set.entrySet())) return false;
-        return true;
+        return entrySet().equals(set.entrySet());
     }
 
     @Override
