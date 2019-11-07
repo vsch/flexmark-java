@@ -2,7 +2,7 @@ package com.vladsch.flexmark.util.html;
 
 import com.vladsch.flexmark.util.Utils;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.RepeatedCharSequence;
+import com.vladsch.flexmark.util.sequence.RepeatedSequence;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -31,7 +31,7 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
 
     public HtmlFormattingAppendableBase(int indentSize, int formatOptions) {
         this.out = new LineFormattingAppendableImpl(formatOptions);
-        this.out.setIndentPrefix(RepeatedCharSequence.of(" ", indentSize).toString());
+        this.out.setIndentPrefix(RepeatedSequence.of(" ", indentSize).toString());
     }
 
     public boolean isSuppressOpenTagLine() {

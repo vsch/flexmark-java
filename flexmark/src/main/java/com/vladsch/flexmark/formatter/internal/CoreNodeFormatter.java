@@ -17,7 +17,7 @@ import com.vladsch.flexmark.util.format.options.ElementPlacementSort;
 import com.vladsch.flexmark.util.format.options.ListSpacing;
 import com.vladsch.flexmark.util.html.LineFormattingAppendable;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.RepeatedCharSequence;
+import com.vladsch.flexmark.util.sequence.RepeatedSequence;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -435,8 +435,8 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
         if (openingMarkerLen < formatterOptions.fencedCodeMarkerLength) openingMarkerLen = formatterOptions.fencedCodeMarkerLength;
         if (closingMarkerLen < formatterOptions.fencedCodeMarkerLength) closingMarkerLen = formatterOptions.fencedCodeMarkerLength;
 
-        openingMarker = RepeatedCharSequence.of(String.valueOf(openingMarkerChar), openingMarkerLen);
-        if (formatterOptions.fencedCodeMatchClosingMarker || closingMarkerChar == '\0') { closingMarker = openingMarker; } else closingMarker = RepeatedCharSequence.of(String.valueOf(closingMarkerChar), closingMarkerLen);
+        openingMarker = RepeatedSequence.of(String.valueOf(openingMarkerChar), openingMarkerLen);
+        if (formatterOptions.fencedCodeMatchClosingMarker || closingMarkerChar == '\0') { closingMarker = openingMarker; } else closingMarker = RepeatedSequence.of(String.valueOf(closingMarkerChar), closingMarkerLen);
 
         markdown.append(openingMarker);
         if (formatterOptions.fencedCodeSpaceBeforeInfo) markdown.append(' ');
@@ -501,12 +501,12 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
             markdown.openPreFormatted(true);
             markdown.appendNonTranslating(Utils.suffixWith(contentChars.toString(), '\n'));
         } else {
-            String prefix = RepeatedCharSequence.of(" ", listOptions.getCodeIndent()).toString();
+            String prefix = RepeatedSequence.of(" ", listOptions.getCodeIndent()).toString();
 
             if (formatterOptions.emulationProfile == ParserEmulationProfile.GITHUB_DOC) {
                 if (node.getParent() instanceof ListItem) {
                     BasedSequence marker = ((ListItem) node.getParent()).getOpeningMarker();
-                    prefix = RepeatedCharSequence.of(" ", Utils.minLimit(8 - marker.length() - 1, 4)).toString();
+                    prefix = RepeatedSequence.of(" ", Utils.minLimit(8 - marker.length() - 1, 4)).toString();
                 }
             }
 
@@ -637,7 +637,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
         int parentPrefix = markdown.getPrefix().length();
         int column = contentChars.getBaseSequence().getColumnAtIndex(contentChars.getStartOffset());
 
-        prefix = RepeatedCharSequence.of(" ", Utils.minLimit(0, column - parentPrefix)).toString();
+        prefix = RepeatedSequence.of(" ", Utils.minLimit(0, column - parentPrefix)).toString();
         return prefix;
     }
 
@@ -647,7 +647,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
         int parentPrefix = fromChars.getStartOffset();
         int column = toChars.getStartOffset();
 
-        prefix = RepeatedCharSequence.of(" ", Utils.minLimit(0, column - parentPrefix)).toString();
+        prefix = RepeatedSequence.of(" ", Utils.minLimit(0, column - parentPrefix)).toString();
         return prefix;
     }
 
@@ -670,7 +670,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
 
             if (node.getFirstChild() == null) {
                 // TEST: not sure if this works, need an empty list item with no children to test
-                itemContentPrefix = RepeatedCharSequence.of(' ', openingMarker.length() + (listOptions.isItemContentAfterSuffix() ? markerSuffix.length() : 0) + 1).toString();
+                itemContentPrefix = RepeatedSequence.of(' ', openingMarker.length() + (listOptions.isItemContentAfterSuffix() ? markerSuffix.length() : 0) + 1).toString();
                 prefix = additionalPrefix + itemContentPrefix;
 
                 itemContentSpacer = " ";
@@ -756,8 +756,8 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
                 }
             }
 
-            CharSequence prefix = options.itemContentIndent ? RepeatedCharSequence.of(' ', openingMarker.length() + (listOptions.isItemContentAfterSuffix() ? markerSuffix.length() : 0) + 1)
-                    : RepeatedCharSequence.of(" ", listOptions.getItemIndent()).toString();
+            CharSequence prefix = options.itemContentIndent ? RepeatedSequence.of(' ', openingMarker.length() + (listOptions.isItemContentAfterSuffix() ? markerSuffix.length() : 0) + 1)
+                    : RepeatedSequence.of(" ", listOptions.getItemIndent()).toString();
 
             markdown.pushPrefix().addPrefix(prefix, true);
 

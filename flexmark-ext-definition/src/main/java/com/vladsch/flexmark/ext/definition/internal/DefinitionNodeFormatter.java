@@ -9,7 +9,7 @@ import com.vladsch.flexmark.parser.ListOptions;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.RepeatedCharSequence;
+import com.vladsch.flexmark.util.sequence.RepeatedSequence;
 import com.vladsch.flexmark.util.sequence.SubSequence;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -59,7 +59,7 @@ public class DefinitionNodeFormatter implements NodeFormatter {
         BasedSequence openMarkerSpaces = openMarkerChars.subSequence(1);
 
         if (options.markerSpaces >= 1 && openMarkerSpaces.length() != options.markerSpaces) {
-            openMarkerSpaces = SubSequence.of(RepeatedCharSequence.of(' ', options.markerSpaces));
+            openMarkerSpaces = SubSequence.of(RepeatedSequence.of(' ', options.markerSpaces));
         }
 
         switch (options.markerType) {
@@ -74,7 +74,7 @@ public class DefinitionNodeFormatter implements NodeFormatter {
         }
 
         markdown.line().append(openMarker).append(openMarkerSpaces);
-        RepeatedCharSequence prefix = RepeatedCharSequence.of(' ', context.getFormatterOptions().itemContentIndent ? openMarker.length() + openMarkerSpaces.length() : listOptions.getItemIndent());
+        RepeatedSequence prefix = RepeatedSequence.of(' ', context.getFormatterOptions().itemContentIndent ? openMarker.length() + openMarkerSpaces.length() : listOptions.getItemIndent());
         markdown.pushPrefix().addPrefix(prefix);
         context.renderChildren(node);
         markdown.popPrefix();

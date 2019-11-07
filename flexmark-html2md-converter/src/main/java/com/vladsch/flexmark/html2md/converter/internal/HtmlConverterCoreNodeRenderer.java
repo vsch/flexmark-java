@@ -17,7 +17,7 @@ import com.vladsch.flexmark.util.html.CellAlignment;
 import com.vladsch.flexmark.util.html.LineFormattingAppendable;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.BasedSequenceImpl;
-import com.vladsch.flexmark.util.sequence.RepeatedCharSequence;
+import com.vladsch.flexmark.util.sequence.RepeatedSequence;
 import com.vladsch.flexmark.util.sequence.SubSequence;
 import org.jsoup.nodes.*;
 import org.jsoup.select.Elements;
@@ -400,7 +400,7 @@ public class HtmlConverterCoreNodeRenderer implements PhasedHtmlNodeRenderer {
         context.processConditional(myHtmlConverterOptions.extInlineCode, element, () -> {
             BasedSequence text = SubSequence.of(element.ownText());
             int backTickCount = getMaxRepeatedChars(text, '`', 1);
-            CharSequence backTicks = RepeatedCharSequence.of("`", backTickCount);
+            CharSequence backTicks = RepeatedSequence.of("`", backTickCount);
             context.inlineCode(() -> context.processTextNodes(element, false, myHtmlConverterOptions.extInlineCode.isTextOnly() ? "" : backTicks));
         });
     }
@@ -495,7 +495,7 @@ public class HtmlConverterCoreNodeRenderer implements PhasedHtmlNodeRenderer {
             firstIsPara = true;
         }
 
-        CharSequence childPrefix = RepeatedCharSequence.of(" ", myHtmlConverterOptions.listContentIndent ? myHtmlConverterOptions.definitionMarkerSpaces + 1 : 4);
+        CharSequence childPrefix = RepeatedSequence.of(" ", myHtmlConverterOptions.listContentIndent ? myHtmlConverterOptions.definitionMarkerSpaces + 1 : 4);
 
         out.line().setOptions(options & ~LineFormattingAppendable.COLLAPSE_WHITESPACE);
         out.append(':').repeat(' ', myHtmlConverterOptions.definitionMarkerSpaces);
@@ -708,7 +708,7 @@ public class HtmlConverterCoreNodeRenderer implements PhasedHtmlNodeRenderer {
 
         listState.itemCount++;
         CharSequence itemPrefix = listState.getItemPrefix(this.myHtmlConverterOptions);
-        CharSequence childPrefix = RepeatedCharSequence.of(" ", myHtmlConverterOptions.listContentIndent ? itemPrefix.length() : 4);
+        CharSequence childPrefix = RepeatedSequence.of(" ", myHtmlConverterOptions.listContentIndent ? itemPrefix.length() : 4);
 
         out.line().append(itemPrefix);
         out.pushPrefix();
@@ -812,7 +812,7 @@ public class HtmlConverterCoreNodeRenderer implements PhasedHtmlNodeRenderer {
                     if (item != element && item.childNodeSize() > 0) {
                         if (hadListItem) {
                             CharSequence itemPrefix = listState.getItemPrefix(this.myHtmlConverterOptions);
-                            CharSequence childPrefix = RepeatedCharSequence.of(" ", myHtmlConverterOptions.listContentIndent ? itemPrefix.length() : 4);
+                            CharSequence childPrefix = RepeatedSequence.of(" ", myHtmlConverterOptions.listContentIndent ? itemPrefix.length() : 4);
                             //out.line().append(itemPrefix);
                             out.pushPrefix();
                             out.addPrefix(childPrefix, true);
@@ -980,7 +980,7 @@ public class HtmlConverterCoreNodeRenderer implements PhasedHtmlNodeRenderer {
         //text = Escaping.unescapeHtml(text);
 
         int backTickCount = getMaxRepeatedChars(text, '`', 3);
-        CharSequence backTicks = RepeatedCharSequence.of("`", backTickCount);
+        CharSequence backTicks = RepeatedSequence.of("`", backTickCount);
 
         if (!myHtmlConverterOptions.skipFencedCode && (!className.isEmpty() || text.trim().isEmpty() || !hadCode)) {
             out.blankLine().append(backTicks);

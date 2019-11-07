@@ -3,7 +3,7 @@ package com.vladsch.flexmark.ext.admonition.internal;
 import com.vladsch.flexmark.ext.admonition.AdmonitionBlock;
 import com.vladsch.flexmark.formatter.*;
 import com.vladsch.flexmark.util.data.DataHolder;
-import com.vladsch.flexmark.util.sequence.RepeatedCharSequence;
+import com.vladsch.flexmark.util.sequence.RepeatedSequence;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -40,7 +40,7 @@ public class AdmonitionNodeFormatter implements NodeFormatter {
             markdown.append(' ').append('"').appendTranslating(node.getTitle()).append('"');
         }
         markdown.line();
-        markdown.pushPrefix().addPrefix(RepeatedCharSequence.of(" ", options.contentIndent).toString());
+        markdown.pushPrefix().addPrefix(RepeatedSequence.of(" ", options.contentIndent).toString());
         context.renderChildren(node);
         markdown.blankLine();
         markdown.popPrefix();
