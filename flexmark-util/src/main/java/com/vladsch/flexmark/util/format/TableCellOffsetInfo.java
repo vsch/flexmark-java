@@ -252,7 +252,7 @@ public class TableCellOffsetInfo {
         BasedSequence baseSequence = lastCell.text.getBaseSequence();
 
         int eolPos = baseSequence.endOfLineAnyEOL(offset);
-        return table.getCellOffsetInfo(eolPos == -1 ? offset : eolPos + baseSequence.eolLength(eolPos));
+        return table.getCellOffsetInfo(eolPos == -1 ? offset : eolPos + baseSequence.eolStartLength(eolPos));
     }
 
     /**

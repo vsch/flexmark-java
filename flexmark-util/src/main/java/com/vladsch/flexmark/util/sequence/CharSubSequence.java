@@ -105,11 +105,6 @@ public final class CharSubSequence extends BasedSequenceImpl {
         return toString().hashCode();
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        return obj == this || (obj instanceof CharSequence && toString().equals(obj.toString()));
-    }
-
     @NotNull
     @Override
     public String toString() {

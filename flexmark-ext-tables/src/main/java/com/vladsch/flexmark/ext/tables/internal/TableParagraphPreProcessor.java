@@ -185,7 +185,7 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
                 break;
             }
 
-            BasedSequence fullRowLine = block.getLineIndent(rowNumber) <= blockIndent ? rowLine.trimEOL() : rowLine.baseSubSequence(rowLine.getStartOffset() - (block.getLineIndent(rowNumber) - blockIndent), rowLine.getEndOffset() - rowLine.eolLength());
+            BasedSequence fullRowLine = block.getLineIndent(rowNumber) <= blockIndent ? rowLine.trimEOL() : rowLine.baseSubSequence(rowLine.getStartOffset() - (block.getLineIndent(rowNumber) - blockIndent), rowLine.getEndOffset() - rowLine.eolEndLength());
             if (separatorLineNumber == -1) {
                 if (rowNumber >= options.minHeaderRows
                         && TABLE_HEADER_SEPARATOR.matcher(rowLine).matches()) {
@@ -209,7 +209,7 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
         for (BasedSequence rowLine : tableLines) {
             int rowNumber = tableRows.size();
 
-            BasedSequence fullRowLine = block.getLineIndent(rowNumber) <= blockIndent ? rowLine.trimEOL() : rowLine.baseSubSequence(rowLine.getStartOffset() - (block.getLineIndent(rowNumber) - blockIndent), rowLine.getEndOffset() - rowLine.eolLength());
+            BasedSequence fullRowLine = block.getLineIndent(rowNumber) <= blockIndent ? rowLine.trimEOL() : rowLine.baseSubSequence(rowLine.getStartOffset() - (block.getLineIndent(rowNumber) - blockIndent), rowLine.getEndOffset() - rowLine.eolEndLength());
             boolean isSeparator = rowNumber == separatorLineNumber;
             TableRow tableRow = new TableRow(fullRowLine);
             int tableRowNumber;

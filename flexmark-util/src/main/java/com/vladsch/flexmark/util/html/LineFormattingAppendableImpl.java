@@ -249,7 +249,7 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
         //}
         assert range.getStart() <= range.getEnd();
 
-        myLines.add(range.isNull() ? BasedSequence.NULL : range.subSequence(myAppendable));
+        myLines.add(range.isNull() ? BasedSequence.NULL : range.basedSubSequence(myAppendable));
         if (range.isEmpty() && !prefix.isEmpty()) {
             prefix = prefix.trimEnd();
             myPrefixes.add(prefix);

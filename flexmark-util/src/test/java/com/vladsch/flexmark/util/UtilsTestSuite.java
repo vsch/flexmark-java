@@ -38,6 +38,7 @@ import org.junit.runners.Suite;
         RepeatedCharSequenceTest.class,
         TemplateUtilTest.class,
         UtilsTest.class,
+        ArrayUtilsTest.class,
 })
 public class UtilsTestSuite {
 }

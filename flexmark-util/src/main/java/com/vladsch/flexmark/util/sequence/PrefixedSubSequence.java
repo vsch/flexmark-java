@@ -106,11 +106,6 @@ public final class PrefixedSubSequence extends BasedSequenceImpl {
         return toString().hashCode();
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        return obj == this || (obj instanceof CharSequence && toString().equals(obj.toString()));
-    }
-
     public static PrefixedSubSequence repeatOf(CharSequence prefix, int count, BasedSequence baseSeq) {
         return of(RepeatedCharSequence.of(prefix, count).toString(), baseSeq, 0, baseSeq.length());
     }

@@ -220,52 +220,17 @@ public abstract class BasedSequenceImpl extends RichCharSequenceBase<BasedSequen
         else return this.baseSubSequence(other.getEndOffset(), getEndOffset());
     }
 
-    @Override
-    public boolean equals(Object other) {
-        return (this == other) || other instanceof CharSequence && ((CharSequence) other).length() == length() && matchChars((CharSequence) other, 0, false);
-    }
-
-    @Override
-    public boolean equalsIgnoreCase(CharSequence other) {
-        return (this == other) || (other != null) && other.length() == length() && matchChars(other, 0, true);
-    }
-
-    @Override
-    public boolean equals(Object other, boolean ignoreCase) {
-        return (this == other) || other instanceof CharSequence && ((CharSequence) other).length() == length() && matchChars((CharSequence) other, 0, ignoreCase);
-    }
-
-    @Override
-    public int compareTo(CharSequence other) {
-        int len1 = length();
-        int len2 = other.length();
-        int iMax = len1 <= len2 ? len1 : len2;
-        for (int i = 0; i < iMax; i++) {
-            char c1 = charAt(i);
-            char c2 = other.charAt(i);
-            if (c1 != c2) {
-                return c1 - c2;
-            }
-        }
-        return len1 - len2;
-    }
-
     public static BasedSequence of(CharSequence charSequence) {
-        if (charSequence instanceof BasedSequence) return ((BasedSequence) charSequence);
-        else if (charSequence instanceof String) return CharSubSequence.of(charSequence);
-        else if (charSequence != null) return SubSequence.of(charSequence);
-        return BasedSequence.NULL;
+        return of(charSequence, 0, charSequence.length());
     }
 
     public static BasedSequence of(CharSequence charSequence, int start) {
-        if (charSequence instanceof BasedSequence) return ((BasedSequence) charSequence).subSequence(start);
-        else if (charSequence instanceof String) return CharSubSequence.of(charSequence, start);
-        else return SubSequence.of(charSequence, start);
+        return of(charSequence, start, charSequence.length());
     }
 
     public static BasedSequence of(CharSequence charSequence, int start, int end) {
         if (charSequence instanceof BasedSequence) return ((BasedSequence) charSequence).subSequence(start, end);
-        else if (charSequence instanceof String) return CharSubSequence.of(charSequence, start, end);
-        else return SubSequence.of(charSequence, start, end);
+        else if (charSequence instanceof String) return CharSubSequence.of(charSequence).subSequence(start, end);
+        else return SubSequence.of(charSequence).subSequence(start, end);
     }
 }

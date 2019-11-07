@@ -9,6 +9,7 @@ import java.net.URLEncoder;
 import java.util.*;
 import java.util.function.BiFunction;
 import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 public class Utils {
@@ -501,9 +502,7 @@ public class Utils {
     }
 
     public static int rangeLimit(int receiver, int minBound, int maxBound) {
-        if (receiver < minBound) return minBound;
-        else if (receiver > maxBound) return maxBound;
-        else return receiver;
+        return Math.min(Math.max(receiver, minBound), maxBound);
     }
 
     public static float max(float receiver, float... others) {
@@ -531,23 +530,7 @@ public class Utils {
     }
 
     public static float rangeLimit(float receiver, float minBound, float maxBound) {
-        if (receiver < minBound) return minBound;
-        else if (receiver > maxBound) return maxBound;
-        else return receiver;
-    }
-
-    public static <T> boolean contained(T value, T[] array) {
-        for (T item : array) {
-            if (item.equals(value)) return true;
-        }
-        return false;
-    }
-
-    public static boolean contained(int value, int[] array) {
-        for (int item : array) {
-            if (item == value) return true;
-        }
-        return false;
+        return Math.min(Math.max(receiver, minBound), maxBound);
     }
 
     public static Integer parseUnsignedIntOrNull(String text) {

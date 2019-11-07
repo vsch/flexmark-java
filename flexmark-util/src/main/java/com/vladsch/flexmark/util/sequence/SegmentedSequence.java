@@ -340,11 +340,6 @@ public final class SegmentedSequence extends BasedSequenceImpl {
         return toString().hashCode();
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        return obj == this || (obj instanceof CharSequence && toString().equals(obj.toString()));
-    }
-
     public static BasedSequence of(BasedSequence... segments) {
         return of(Arrays.asList(segments));
     }

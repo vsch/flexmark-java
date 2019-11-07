@@ -46,15 +46,11 @@ final public class RichCharSequenceImpl extends RichCharSequenceBase<RichCharSeq
     }
 
     public static RichCharSequenceImpl of(CharSequence charSequence) {
-        if (charSequence instanceof RichCharSequenceImpl) return ((RichCharSequenceImpl) charSequence);
-        else if (charSequence != null) return of(charSequence, 0, charSequence.length());
-        return NULL;
+        return of(charSequence, 0, charSequence.length());
     }
 
     public static RichCharSequenceImpl of(CharSequence charSequence, int start) {
-        if (charSequence instanceof RichCharSequenceImpl) return ((RichCharSequenceImpl) charSequence).subSequence(start);
-        else if (charSequence != null) return of(charSequence, start, charSequence.length());
-        return NULL;
+        return of(charSequence, start, charSequence.length());
     }
 
     public static RichCharSequenceImpl of(CharSequence charSequence, int start, int end) {

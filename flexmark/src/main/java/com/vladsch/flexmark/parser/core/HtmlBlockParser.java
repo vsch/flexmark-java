@@ -195,7 +195,7 @@ public class HtmlBlockParser extends AbstractBlockParser {
             // need to break it up into non-comments and comments
             int lastIndex = 0;
             BasedSequence chars = block.getContentChars();
-            if (chars.eolLength() > 0) chars = chars.midSequence(0, -1);
+            if (chars.eolEndLength() > 0) chars = chars.midSequence(0, -1);
             // RegEx for HTML can go into an infinite loop, we do manual search to avoid this
             //Matcher matcher = state.getParsing().HTML_COMMENT.matcher(chars);
             //while (matcher.find()) {

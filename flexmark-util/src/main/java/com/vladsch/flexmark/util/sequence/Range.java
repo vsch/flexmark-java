@@ -14,9 +14,15 @@ public class Range {
 
     public int getEnd() { return myEnd; }
 
+    // Kotlin compatibility getters
     public int component1() { return myStart; }
 
     public int component2() { return myEnd; }
+
+    // compatibility getters with JetBrains API TextRange
+    public int getStartOffset() { return myStart; }
+
+    public int getEndOffset() { return myEnd; }
 
     public Range(int start, int end) {
         myStart = start;
@@ -40,13 +46,22 @@ public class Range {
         return start == myStart && end == myEnd ? this : new Range(start, end);
     }
 
-    public BasedSequence subSequence(CharSequence charSequence) {
-        return BasedSequenceImpl.of(charSequence, myStart, myEnd);
+    public BasedSequence basedSubSequence(CharSequence charSequence) {
+        return BasedSequenceImpl.of(charSequence).subSequence(myStart, myEnd);
     }
 
-    public BasedSequence safeSubSequence(CharSequence charSequence) {
+    public BasedSequence basedSafeSubSequence(CharSequence charSequence) {
         int end = Math.min(charSequence.length(), myEnd);
-        return isNull() ? BasedSequence.NULL : BasedSequenceImpl.of(charSequence, Math.min(end, Math.max(0, myStart)), end);
+        return isNull() ? BasedSequence.NULL : BasedSequenceImpl.of(charSequence).subSequence(Math.min(end, Math.max(0, myStart)), end);
+    }
+
+    public RichCharSequenceImpl richSubSequence(CharSequence charSequence) {
+        return RichCharSequenceImpl.of(charSequence).subSequence(this);
+    }
+
+    public RichCharSequenceImpl richSafeSubSequence(CharSequence charSequence) {
+        int end = Math.min(charSequence.length(), myEnd);
+        return isNull() ? RichCharSequenceImpl.NULL : RichCharSequenceImpl.of(charSequence).subSequence(Math.min(end, Math.max(0, myStart)), end);
     }
 
     public boolean contains(int index) {
@@ -205,7 +220,7 @@ public class Range {
     }
 
     public Range expandToInclude(int start, int end) {
-        return withRange(myStart > start ? start : myStart, myEnd < end ? end : myEnd);
+        return withRange(Math.min(myStart, start), Math.max(myEnd, end));
     }
 
     @Override

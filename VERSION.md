@@ -162,10 +162,6 @@ Next
 * [ ] Fix: Change spec example to variable number of sections
 * [ ] Add: yaml front matter configurator for modules. See:
       [Yaml Front Matter Configuration](../../wiki/Yaml-Front-Matter-Configuration)
-* [ ] Add: `RichSequence.trimEndToEOL()`
-* [ ] Add: `RichSequence.trimStartToEOL()`
-* [ ] Add: `RichSequence.extendEndToEOL()`
-* [ ] Add: `RichSequence.extendStartToEOL()`
 * Add: spec example language per section options and rendering in HTML.
   * [ ] Add: Tests for section name options
 * [ ] Fix: table formatting caret position tracking affects alignment even when not inserting,
@@ -176,11 +172,48 @@ Next
 0.59.42
 -------
 
+* [ ] Add: `Range RichCharSequence.indexOfEol()` - find next EOL, default: `\n`, `\r` or `\r\n`,
+      but can provide vararg of char sequences to treat as valid EOLs
+* [ ] Add: `Range RichCharSequence.lastIndexOfEol()` - find previous EOL, default: `\n`, `\r` or
+      `\r\n`, but can provide vararg of char sequences to treat as valid EOLs
+* [ ] Add: `RichCharSequence.trimEndToEol(boolean includeEOL = false, CharSequence... eolList)`
+      \- trim end to next EOL
+* [ ] Add: `RichCharSequence.trimmedEndToEol(boolean includeEOL = false, CharSequence...
+      eolList)` - trimmed end after next EOL
+* [ ] Add: `RichCharSequence.trimStartToEol(boolean includeEOL = false, CharSequence...
+      eolList)` - trim start to previous EOL
+* [ ] Add: `RichCharSequence.extendEndToEol(boolean includeEOL = false, CharSequence...
+      eolList)` - extend end to next EOL
+* [ ] Add: `RichCharSequence.extendStartToEol(boolean includeEOL = false, CharSequence...
+      eolList)` - extend start to previous EOL
+* [ ] Add: `RichCharSequence.indexOfBlankLine(CharSequence whiteSpaceList=" \t", CharSequence...
+      eolList)` - find next blank line
+* [ ] Add: `RichCharSequence.lastIndexOfBlankLine(CharSequence whiteSpaceList=" \t",
+      CharSequence... eolList)` - find previous blank line
+* [ ] Add: `Range RichCharSequence.indexOfSpan(CharSequence charSet)` - find next contiguous
+      range of given characters. ie. `indexOfSpan("\n \t")` will find the next range of blanks.
+      `indexOfSpan("` `` ` `` ` ")` will find the next range of back ticks.
+* [ ] Add: `Range RichCharSequence.lastIndexOfSpan(CharSequence charSet)` - find previous
+      contiguous range of given characters. ie. `indexOfSpan("\n \t")` will find the next range
+      of blanks. `indexOfSpan("` `` ` `` ` ")` will find the next range of back ticks.
 * [ ] Fix: Add `TextContainer` node type to allow extracting text nodes without having to know
       all of the node types. The text container should implement ability to append to
       `StringBuilder` its text equivalent. A visitor needs to be provided so child nodes could
       be visited.
+* Add: `ArrayUtils` for searching arrays of `<T>` on value or predicate
+  * `indexOf()` variations for forward search
+  * `lastIndexOf()` variations for backward search
+  * `firstOf()` variations for forward search returning matched element or `null`
+  * `lastOf()` variations for backward search returning matched element or `null`
+* Break: `RichCharSequence` all `trim`, `trimStart`, `trimEnd` `keepLength` argument is now
+  `keep` with different meaning. Instead of min length of string to keep, it is min number of
+  trimmable characters to keep, which is more useful but does break compatibility. Now it can be
+  used to leave whitespace padding up to a maximum of `keep` characters.
 * Fix: reformat tests for compound sections
+* Break: rename `Range.subSequence()` to `Range.basedSubSequence()`
+* Break: rename `Range.safeSubSequence()` to `Range.safeBasedSubSequence()`
+* Add: `Range.richSubSequence()`
+* Add: `Range.safeRichBasedSubSequence()`
 
 0.59.40
 -------

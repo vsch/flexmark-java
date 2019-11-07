@@ -29,6 +29,7 @@
       <option name="PACKAGES_TO_USE_IMPORT_ON_DEMAND">
         <value />
       </option>
+      <option name="JD_INDENT_ON_CONTINUATION" value="true" />
     </JavaCodeStyleSettings>
     <MarkdownNavigatorCodeStyleSettings>
       <option name="KEEP_BLANK_LINES" value="1" />

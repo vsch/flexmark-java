@@ -1,5 +1,6 @@
 package com.vladsch.flexmark.util.format;
 
+import com.vladsch.flexmark.util.ArrayUtils;
 import com.vladsch.flexmark.util.Ref;
 import com.vladsch.flexmark.util.Utils;
 import com.vladsch.flexmark.util.ast.Node;
@@ -1329,7 +1330,7 @@ public class MarkdownTable {
             int iMax = row.cells.size();
             int count = 0;
             for (int i = 0; i < iMax; i++) {
-                if (!contained(i, skipColumns)) count += row.cells.get(i).columnSpan;
+                if (!ArrayUtils.contained(i, skipColumns)) count += row.cells.get(i).columnSpan;
             }
             if (count != 0) {
                 columns[0] = aggregator.apply(columns[0], count);
@@ -1348,7 +1349,7 @@ public class MarkdownTable {
         Integer[] columns = new Integer[] { null };
 
         forAllSectionsRows(0, Integer.MAX_VALUE, sections, (row, allRowsIndex, rows, index) -> {
-            if (!contained(allRowsIndex, skipRows)) {
+            if (!ArrayUtils.contained(allRowsIndex, skipRows)) {
                 int totalColumns = row.getTotalColumns();
                 if (totalColumns > 0) { columns[0] = aggregator.apply(columns[0], totalColumns); }
             }
