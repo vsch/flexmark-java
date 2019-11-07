@@ -286,6 +286,7 @@ public interface BasedSequence extends RichCharSequence<BasedSequence> {
             throw new StringIndexOutOfBoundsException("String index: " + index + " out of range: 0, " + length());
         }
 
+        @NotNull
         @Override
         public BasedSequence subSequence(int i, int i1) {
             if (i == 0 && i1 == 0) return this;

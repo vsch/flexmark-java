@@ -73,6 +73,7 @@ public final class PrefixedSubSequence extends BasedSequenceImpl {
         throw new StringIndexOutOfBoundsException("String index out of range: " + index);
     }
 
+    @NotNull
     @Override
     public BasedSequence subSequence(int start, int end) {
         if (start >= 0 && end <= base.length() + prefixLength) {

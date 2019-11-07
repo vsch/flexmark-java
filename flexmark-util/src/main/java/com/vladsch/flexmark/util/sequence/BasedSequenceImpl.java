@@ -3,6 +3,8 @@ package com.vladsch.flexmark.util.sequence;
 import com.vladsch.flexmark.util.Utils;
 import com.vladsch.flexmark.util.html.Escaping;
 import com.vladsch.flexmark.util.mappers.CharMapper;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * A CharSequence that references original char sequence and maps '\0' to '\uFFFD'
@@ -17,18 +19,21 @@ public abstract class BasedSequenceImpl extends RichCharSequenceBase<BasedSequen
         return NULL;
     }
 
+    @NotNull
     @Override
     public BasedSequence[] emptyArray() {
         return EMPTY_ARRAY;
     }
 
+    @NotNull
     @Override
     public BasedSequence nullSequence() {
         return NULL;
     }
 
+    @NotNull
     @Override
-    public BasedSequence sequenceOf(CharSequence charSequence, int startIndex, int endIndex) {
+    public BasedSequence sequenceOf(@Nullable CharSequence charSequence, int startIndex, int endIndex) {
         return of(charSequence, startIndex, endIndex);
     }
 
@@ -42,6 +47,7 @@ public abstract class BasedSequenceImpl extends RichCharSequenceBase<BasedSequen
         return Range.of(startOffset - baseOffset, endOffset - baseOffset);
     }
 
+    @NotNull
     @Override
     public final BasedSequence toMapped(CharMapper mapper) {
         return MappedSequence.of(mapper, this);
@@ -151,6 +157,18 @@ public abstract class BasedSequenceImpl extends RichCharSequenceBase<BasedSequen
         if (charSet.length() == 0) return this;
         int count = getBaseSequence().countLeadingNot(charSet, getEndOffset(), getEndOffset() + maxCount);
         return count == getBaseSequence().length() - getEndOffset() ? this : baseSubSequence(getStartOffset(), getEndOffset() + count + 1);
+    }
+
+    @NotNull
+    @Override
+    public BasedSequence sequenceOf(@NotNull Iterable<BasedSequence> sequences) {
+        return SegmentedSequence.of(sequences);
+    }
+
+    @NotNull
+    @Override
+    public BasedSequence prefixWith(@Nullable CharSequence prefix) {
+        return prefix == null || prefix.length() == 0 ? this : PrefixedSubSequence.of(prefix.toString(), this);
     }
 
     @Override

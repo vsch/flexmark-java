@@ -1,6 +1,8 @@
 package com.vladsch.flexmark.util.sequence;
 
 import com.vladsch.flexmark.util.Pair;
+import com.vladsch.flexmark.util.collection.iteration.ArrayIterable;
+import com.vladsch.flexmark.util.collection.iteration.MappingIterable;
 import com.vladsch.flexmark.util.html.Escaping;
 import com.vladsch.flexmark.util.mappers.CharMapper;
 import com.vladsch.flexmark.util.mappers.LowerCaseMapper;
@@ -8,10 +10,7 @@ import com.vladsch.flexmark.util.mappers.UpperCaseMapper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
+import java.util.*;
 import java.util.function.BiPredicate;
 import java.util.function.Predicate;
 
@@ -89,14 +88,28 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
         return visibleSpacesMap.containsKey(c);
     }
 
+    @NotNull
     @Override
-    public T sequenceOf(CharSequence charSequence) {
-        return sequenceOf(charSequence, 0, charSequence.length());
+    public T sequenceOf(@Nullable CharSequence charSequence) {
+        return charSequence == null ? nullSequence() : sequenceOf(charSequence, 0, charSequence.length());
     }
 
+    @NotNull
     @Override
-    public T sequenceOf(CharSequence charSequence, int startIndex) {
-        return sequenceOf(charSequence, startIndex, charSequence.length());
+    public T sequenceOf(@Nullable CharSequence charSequence, int startIndex) {
+        return charSequence == null ? nullSequence() : sequenceOf(charSequence, startIndex, charSequence.length());
+    }
+
+    @NotNull
+    @Override
+    public T sequenceOf(T... sequences) {
+        return sequenceOf(new ArrayIterable<>(sequences));
+    }
+
+    @NotNull
+    @Override
+    public T sequenceOf(@NotNull Iterable<T> sequences) {
+        return sequenceOf(concatenate(null, sequences));
     }
 
     /**
@@ -105,7 +118,8 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
      * @param range range to get, coordinates offset form start of this sequence
      * @return sequence whose contents reflect the selected portion, if range.isNull() then this is returned
      */
-    public T subSequence(Range range) {
+    @NotNull
+    public T subSequence(@NotNull Range range) {
         return range.isNull() ? (T) this : subSequence(range.getStart(), range.getEnd());
     }
 
@@ -115,7 +129,8 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
      * @param range range to get, coordinates offset form start of this sequence
      * @return sequence whose contents come before the selected range, if range.isNull() then {@link #nullSequence()}
      */
-    public T subSequenceBefore(Range range) {
+    @NotNull
+    public T subSequenceBefore(@NotNull Range range) {
         return range.isNull() ? nullSequence() : subSequence(0, range.getStart());
     }
 
@@ -125,7 +140,8 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
      * @param range range to get, coordinates offset form start of this sequence
      * @return sequence whose contents come after the selected range, if range.isNull() then {@link #nullSequence()}
      */
-    public T subSequenceAfter(Range range) {
+    @NotNull
+    public T subSequenceAfter(@NotNull Range range) {
         return range.isNull() ? nullSequence() : subSequence(range.getEnd());
     }
 
@@ -139,18 +155,15 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
         return Pair.of(subSequenceBefore(range), subSequenceAfter(range));
     }
 
+    @NotNull
     @Override
     final public T endSequence(int start, int end) {
         int length = length();
         int useStart = length - start;
         int useEnd = length - end;
 
-        if (useStart < 0) useStart = 0;
-        else if (useStart > length) useStart = length;
-        if (useEnd < 0) useEnd = 0;
-        else if (useEnd > length) useEnd = length;
-
-        if (useStart > useEnd) useStart = useEnd;
+        useEnd = rangeLimit(useEnd, 0, length);
+        useStart = rangeLimit(useStart, useEnd, length);
 
         if (useStart == 0 && useEnd == length) {
             return (T) this;
@@ -159,6 +172,7 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
         }
     }
 
+    @NotNull
     @Override
     final public T endSequence(int start) {
         int length = length();
@@ -178,18 +192,16 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
         return charAt(length - index);
     }
 
+    @NotNull
     @Override
     final public T midSequence(int start, int end) {
         int length = length();
         int useStart = start < 0 ? length + start : start;
         int useEnd = end < 0 ? length + end : end;
 
-        if (useStart < 0) useStart = 0;
-        else if (useStart > length) useStart = length;
-        if (useEnd < 0) useEnd = 0;
-        else if (useEnd > length) useEnd = length;
+        useEnd = rangeLimit(useEnd, 0, length);
+        useStart = rangeLimit(useStart, useEnd, length);
 
-        if (useStart > useEnd) useStart = useEnd;
         if (useStart == 0 && useEnd == length) {
             return (T) this;
         } else {
@@ -197,6 +209,7 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
         }
     }
 
+    @NotNull
     @Override
     final public T midSequence(int start) {
         int length = length();
@@ -234,12 +247,12 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
     }
 
     // @formatter:off
-    @Override final public int indexOf(CharSequence s) { return indexOf(s, 0, length()); }
-    @Override final public int indexOf(CharSequence s, int fromIndex) { return indexOf(s, fromIndex, length()); }
+    @Override final public int indexOf(@NotNull CharSequence s) { return indexOf(s, 0, length()); }
+    @Override final public int indexOf(@NotNull CharSequence s, int fromIndex) { return indexOf(s, fromIndex, length()); }
     // @formatter:on
 
     @Override
-    final public int indexOf(CharSequence s, int fromIndex, int endIndex) {
+    final public int indexOf(@NotNull CharSequence s, int fromIndex, int endIndex) {
         fromIndex = Math.max(fromIndex, 0);
 
         int sMax = s.length();
@@ -261,19 +274,15 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
         return -1;
     }
 
-    final public Range indexOfEol(CharSequence s, int fromIndex, int endIndex) {
-        return Range.NULL;
-    }
-
     // @formatter:off
     @Override final public int indexOf(char c) { return indexOf(c, 0, length()); }
     @Override final public int indexOfAny(char c1, char c2) { return indexOfAny(c1, c2, 0, length()); }
     @Override final public int indexOfAny(char c1, char c2, char c3) { return indexOfAny(c1, c2, c3, 0, length()); }
-    @Override final public int indexOfAny(CharSequence s) { return indexOfAny(s, 0, length()); }
+    @Override final public int indexOfAny(@NotNull CharSequence s) { return indexOfAny(s, 0, length()); }
     @Override final public int indexOf(char c, int fromIndex) { return indexOf(c, fromIndex, length()); }
     @Override final public int indexOfAny(char c1, char c2, int fromIndex) { return indexOfAny(c1, c2, fromIndex, length()); }
     @Override final public int indexOfAny(char c1, char c2, char c3, int fromIndex) { return indexOfAny(c1, c2, c3, fromIndex, length()); }
-    @Override final public int indexOfAny(CharSequence s, int index) { return indexOfAny(s, index, length()); }
+    @Override final public int indexOfAny(@NotNull CharSequence s, int index) { return indexOfAny(s, index, length()); }
     // @formatter:on
 
     @Override
@@ -312,7 +321,7 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
     }
 
     @Override
-    final public int indexOfAny(CharSequence s, int fromIndex, int endIndex) {
+    final public int indexOfAny(@NotNull CharSequence s, int fromIndex, int endIndex) {
         switch (s.length()) {
             case 0:
                 return fromIndex;
@@ -339,11 +348,11 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
     @Override final public int indexOfNot(char c) { return indexOfNot(c, 0, length()); }
     @Override final public int indexOfAnyNot(char c1, char c2) { return indexOfAnyNot(c1, c2, 0, length()); }
     @Override final public int indexOfAnyNot(char c1, char c2, char c3) { return indexOfAnyNot(c1, c2, c3, 0, length()); }
-    @Override final public int indexOfAnyNot(CharSequence s) { return indexOfAnyNot(s, 0, length()); }
+    @Override final public int indexOfAnyNot(@NotNull CharSequence s) { return indexOfAnyNot(s, 0, length()); }
     @Override final public int indexOfNot(char c, int fromIndex) { return indexOfNot(c, fromIndex, length()); }
     @Override final public int indexOfAnyNot(char c1, char c2, int fromIndex) { return indexOfAnyNot(c1, c2, fromIndex, length()); }
     @Override final public int indexOfAnyNot(char c1, char c2, char c3, int fromIndex) { return indexOfAnyNot(c1, c2, c3, fromIndex, length()); }
-    @Override final public int indexOfAnyNot(CharSequence s, int fromIndex) { return indexOfAnyNot(s, fromIndex, length()); }
+    @Override final public int indexOfAnyNot(@NotNull CharSequence s, int fromIndex) { return indexOfAnyNot(s, fromIndex, length()); }
     // @formatter:on
 
     @Override
@@ -382,7 +391,7 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
     }
 
     @Override
-    final public int indexOfAnyNot(CharSequence s, int fromIndex, int endIndex) {
+    final public int indexOfAnyNot(@NotNull CharSequence s, int fromIndex, int endIndex) {
         if (fromIndex < endIndex) {
             switch (s.length()) {
                 case 0:
@@ -408,12 +417,12 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
     }
 
     // @formatter:off
-    @Override final public int lastIndexOf(CharSequence s) { return lastIndexOf(s, 0, length()); }
-    @Override final public int lastIndexOf(CharSequence s, int fromIndex) { return lastIndexOf(s, 0, fromIndex); }
+    @Override final public int lastIndexOf(@NotNull CharSequence s) { return lastIndexOf(s, 0, length()); }
+    @Override final public int lastIndexOf(@NotNull CharSequence s, int fromIndex) { return lastIndexOf(s, 0, fromIndex); }
     // @formatter:on
 
     @Override
-    final public int lastIndexOf(CharSequence s, int startIndex, int fromIndex) {
+    final public int lastIndexOf(@NotNull CharSequence s, int startIndex, int fromIndex) {
         startIndex = Math.max(startIndex, 0);
 
         int sMax = s.length();
@@ -437,14 +446,14 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
     }
 
     // @formatter:off
-    @Override final public int lastIndexOf(char c)                                        { return lastIndexOf(c, 0, length()); }
-    @Override final public int lastIndexOfAny(char c1, char c2)                           { return lastIndexOfAny(c1, c2, 0, length()); }
-    @Override final public int lastIndexOfAny(char c1, char c2, char c3)                  { return lastIndexOfAny(c1, c2, c3, 0, length()); }
-    @Override final public int lastIndexOfAny(CharSequence s)                             { return lastIndexOfAny(s, 0, length()); }
-    @Override final public int lastIndexOf(char c, int fromIndex)                        { return lastIndexOf(c, 0, fromIndex); }
-    @Override final public int lastIndexOfAny(char c1, char c2, int fromIndex)           { return lastIndexOfAny(c1, c2, 0, fromIndex); }
-    @Override final public int lastIndexOfAny(char c1, char c2, char c3, int fromIndex)  { return lastIndexOfAny(c1, c2, c3, 0, fromIndex); }
-    @Override final public int lastIndexOfAny(CharSequence s, int fromIndex)             { return lastIndexOfAny(s, 0, fromIndex); }
+    @Override final public int lastIndexOf(char c)                                          { return lastIndexOf(c, 0, length()); }
+    @Override final public int lastIndexOfAny(char c1, char c2)                             { return lastIndexOfAny(c1, c2, 0, length()); }
+    @Override final public int lastIndexOfAny(char c1, char c2, char c3)                    { return lastIndexOfAny(c1, c2, c3, 0, length()); }
+    @Override final public int lastIndexOfAny(@NotNull CharSequence s)                      { return lastIndexOfAny(s, 0, length()); }
+    @Override final public int lastIndexOf(char c, int fromIndex)                           { return lastIndexOf(c, 0, fromIndex); }
+    @Override final public int lastIndexOfAny(char c1, char c2, int fromIndex)              { return lastIndexOfAny(c1, c2, 0, fromIndex); }
+    @Override final public int lastIndexOfAny(char c1, char c2, char c3, int fromIndex)     { return lastIndexOfAny(c1, c2, c3, 0, fromIndex); }
+    @Override final public int lastIndexOfAny(@NotNull CharSequence s, int fromIndex)       { return lastIndexOfAny(s, 0, fromIndex); }
     // @formatter:on
 
     @Override
@@ -486,7 +495,7 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
     }
 
     @Override
-    final public int lastIndexOfAny(CharSequence s, int startIndex, int fromIndex) {
+    final public int lastIndexOfAny(@NotNull CharSequence s, int startIndex, int fromIndex) {
         switch (s.length()) {
             case 0:
                 return startIndex;
@@ -511,14 +520,14 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
     }
 
     // @formatter:off
-    @Override final public int lastIndexOfNot(char c)                                         { return lastIndexOfNot(c, 0, length()); }
-    @Override final public int lastIndexOfAnyNot(char c1, char c2)                            { return lastIndexOfAnyNot(c1, c2, 0, length()); }
-    @Override final public int lastIndexOfAnyNot(char c1, char c2, char c3)                   { return lastIndexOfAnyNot(c1, c2, c3, 0, length()); }
-    @Override final public int lastIndexOfAnyNot(CharSequence s)                              { return lastIndexOfAnyNot(s, 0, length()); }
-    @Override final public int lastIndexOfNot(char c, int fromIndex)                         { return lastIndexOfNot(c, 0, fromIndex); }
-    @Override final public int lastIndexOfAnyNot(char c1, char c2, int fromIndex)            { return lastIndexOfAnyNot(c1, c2, 0, fromIndex); }
-    @Override final public int lastIndexOfAnyNot(char c1, char c2, char c3, int fromIndex)   { return lastIndexOfAnyNot(c1, c2, c3, 0, fromIndex); }
-    @Override final public int lastIndexOfAnyNot(CharSequence s, int fromIndex)              { return lastIndexOfAnyNot(s, 0, fromIndex); }
+    @Override final public int lastIndexOfNot(char c)                                                   { return lastIndexOfNot(c, 0, length()); }
+    @Override final public int lastIndexOfAnyNot(char c1, char c2)                                      { return lastIndexOfAnyNot(c1, c2, 0, length()); }
+    @Override final public int lastIndexOfAnyNot(char c1, char c2, char c3)                             { return lastIndexOfAnyNot(c1, c2, c3, 0, length()); }
+    @Override final public int lastIndexOfAnyNot(@NotNull CharSequence s)                               { return lastIndexOfAnyNot(s, 0, length()); }
+    @Override final public int lastIndexOfNot(char c, int fromIndex)                                    { return lastIndexOfNot(c, 0, fromIndex); }
+    @Override final public int lastIndexOfAnyNot(char c1, char c2, int fromIndex)                       { return lastIndexOfAnyNot(c1, c2, 0, fromIndex); }
+    @Override final public int lastIndexOfAnyNot(char c1, char c2, char c3, int fromIndex)              { return lastIndexOfAnyNot(c1, c2, c3, 0, fromIndex); }
+    @Override final public int lastIndexOfAnyNot(@NotNull CharSequence s, int fromIndex)                { return lastIndexOfAnyNot(s, 0, fromIndex); }
     // @formatter:on
 
     @Override
@@ -560,7 +569,7 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
     }
 
     @Override
-    final public int lastIndexOfAnyNot(CharSequence s, int startIndex, int fromIndex) {
+    final public int lastIndexOfAnyNot(@NotNull CharSequence s, int startIndex, int fromIndex) {
         switch (s.length()) {
             case 0:
                 return startIndex;
@@ -585,17 +594,17 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
     }
 
     // @formatter:off
-    @Override final public int countOf(char c)                                        { return countOf(c, 0, length()); }
-    @Override final public int countOfNot(char c)                                     { return countOfNot(c, 0, length()); }
-    @Override final public int countOf(char c, int fromIndex)                         { return countOf(c, fromIndex, length()); }
-    @Override final public int countOfNot(char c, int fromIndex)                      { return countOfNot(c, fromIndex, length()); }
+    @Override final public int countOf(char c)                                                  { return countOf(c, 0, length()); }
+    @Override final public int countOfNot(char c)                                               { return countOfNot(c, 0, length()); }
+    @Override final public int countOf(char c, int fromIndex)                                   { return countOf(c, fromIndex, length()); }
+    @Override final public int countOfNot(char c, int fromIndex)                                { return countOfNot(c, fromIndex, length()); }
 
-    @Override final public int countOf()                                              { return countOfAny(WHITESPACE_NO_EOL_CHARS, 0, length()); }
-    @Override final public int countOfNot()                                           { return countOfAnyNot(WHITESPACE_NO_EOL_CHARS, 0, length()); }
-    @Override final public int countOfAny(CharSequence chars)                         { return countOfAny(chars, 0, length()); }
-    @Override final public int countOfAnyNot(CharSequence chars)                      { return countOfAnyNot(chars, 0, length()); }
-    @Override final public int countOfAny(CharSequence chars, int fromIndex)          { return countOfAny(chars, fromIndex, length()); }
-    @Override final public int countOfAnyNot(CharSequence chars, int fromIndex)       { return countOfAnyNot(chars, fromIndex, length()); }
+    @Override final public int countOf()                                                        { return countOfAny(WHITESPACE_NO_EOL_CHARS, 0, length()); }
+    @Override final public int countOfNot()                                                     { return countOfAnyNot(WHITESPACE_NO_EOL_CHARS, 0, length()); }
+    @Override final public int countOfAny(@NotNull CharSequence chars)                          { return countOfAny(chars, 0, length()); }
+    @Override final public int countOfAnyNot(@NotNull CharSequence chars)                       { return countOfAnyNot(chars, 0, length()); }
+    @Override final public int countOfAny(@NotNull CharSequence chars, int fromIndex)           { return countOfAny(chars, fromIndex, length()); }
+    @Override final public int countOfAnyNot(@NotNull CharSequence chars, int fromIndex)        { return countOfAnyNot(chars, fromIndex, length()); }
     // @formatter:on
 
     @Override
@@ -613,7 +622,7 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
     }
 
     @Override
-    final public int countOfAny(CharSequence s, int fromIndex, int endIndex) {
+    final public int countOfAny(@NotNull CharSequence s, int fromIndex, int endIndex) {
         fromIndex = Math.max(fromIndex, 0);
         endIndex = Math.min(endIndex, length());
 
@@ -640,7 +649,7 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
     }
 
     @Override
-    final public int countOfAnyNot(CharSequence s, int fromIndex, int endIndex) {
+    final public int countOfAnyNot(@NotNull CharSequence s, int fromIndex, int endIndex) {
         fromIndex = Math.max(fromIndex, 0);
         endIndex = Math.min(endIndex, length());
 
@@ -701,24 +710,24 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
     }
 
     // @formatter:off
-    @Override final public int countLeading()                                          { return this.countLeading(WHITESPACE_NO_EOL_CHARS, 0, length()); }
-    @Override final public int countLeadingNot()                                       { return this.countLeadingNot(WHITESPACE_NO_EOL_CHARS, 0, length()); }
-    @Override final public int countTrailing()                                         { return this.countTrailing(WHITESPACE_NO_EOL_CHARS, 0, length()); }
-    @Override final public int countTrailingNot()                                      { return this.countTrailingNot(WHITESPACE_NO_EOL_CHARS, 0, length()); }
+    @Override final public int countLeading()                                                   { return this.countLeading(WHITESPACE_NO_EOL_CHARS, 0, length()); }
+    @Override final public int countLeadingNot()                                                { return this.countLeadingNot(WHITESPACE_NO_EOL_CHARS, 0, length()); }
+    @Override final public int countTrailing()                                                  { return this.countTrailing(WHITESPACE_NO_EOL_CHARS, 0, length()); }
+    @Override final public int countTrailingNot()                                               { return this.countTrailingNot(WHITESPACE_NO_EOL_CHARS, 0, length()); }
 
-    @Override final public int countLeading(CharSequence chars)                        { return countLeading(chars, 0, length()); }
-    @Override final public int countLeadingNot(CharSequence chars)                     { return countLeadingNot(chars, 0, length()); }
-    @Override final public int countLeading(CharSequence chars, int fromIndex)         { return countLeading(chars, fromIndex, length()); }
-    @Override final public int countLeadingNot(CharSequence chars, int fromIndex)      { return countLeadingNot(chars, fromIndex, length()); }
+    @Override final public int countLeading(@NotNull CharSequence chars)                        { return countLeading(chars, 0, length()); }
+    @Override final public int countLeadingNot(@NotNull CharSequence chars)                     { return countLeadingNot(chars, 0, length()); }
+    @Override final public int countLeading(@NotNull CharSequence chars, int fromIndex)         { return countLeading(chars, fromIndex, length()); }
+    @Override final public int countLeadingNot(@NotNull CharSequence chars, int fromIndex)      { return countLeadingNot(chars, fromIndex, length()); }
 
-    @Override final public int countTrailing(CharSequence chars)                       { return countTrailing(chars, 0, length()); }
-    @Override final public int countTrailingNot(CharSequence chars)                    { return countTrailingNot(chars, 0, length()); }
-    @Override final public int countTrailing(CharSequence chars, int fromIndex)        { return countTrailing(chars, 0, fromIndex); }
-    @Override final public int countTrailingNot(CharSequence chars, int fromIndex)     { return countTrailingNot(chars, 0, fromIndex); }
+    @Override final public int countTrailing(@NotNull CharSequence chars)                       { return countTrailing(chars, 0, length()); }
+    @Override final public int countTrailingNot(@NotNull CharSequence chars)                    { return countTrailingNot(chars, 0, length()); }
+    @Override final public int countTrailing(@NotNull CharSequence chars, int fromIndex)        { return countTrailing(chars, 0, fromIndex); }
+    @Override final public int countTrailingNot(@NotNull CharSequence chars, int fromIndex)     { return countTrailingNot(chars, 0, fromIndex); }
     // @formatter:on
 
     @Override
-    final public int countLeading(CharSequence chars, int fromIndex, int endIndex) {
+    final public int countLeading(@NotNull CharSequence chars, int fromIndex, int endIndex) {
         if (chars.length() == 0) return 0;
 
         endIndex = Math.min(endIndex, length());
@@ -734,7 +743,7 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
     }
 
     @Override
-    final public int countLeadingColumns(int startColumn, CharSequence chars) {
+    final public int countLeadingColumns(int startColumn, @NotNull CharSequence chars) {
         if (chars.length() == 0) return 0;
 
         int fromIndex = 0;
@@ -757,7 +766,7 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
     }
 
     @Override
-    final public int countTrailing(CharSequence chars, int startIndex, int fromIndex) {
+    final public int countTrailing(@NotNull CharSequence chars, int startIndex, int fromIndex) {
         if (chars.length() == 0) return 0;
 
         fromIndex = Math.min(fromIndex, length());
@@ -768,7 +777,7 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
     }
 
     @Override
-    final public int countLeadingNot(CharSequence chars, int fromIndex, int endIndex) {
+    final public int countLeadingNot(@NotNull CharSequence chars, int fromIndex, int endIndex) {
         endIndex = Math.min(endIndex, length());
         fromIndex = rangeLimit(fromIndex, 0, endIndex);
 
@@ -777,7 +786,7 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
     }
 
     @Override
-    final public int countTrailingNot(CharSequence chars, int startIndex, int fromIndex) {
+    final public int countTrailingNot(@NotNull CharSequence chars, int startIndex, int fromIndex) {
         fromIndex = Math.min(fromIndex, length());
         startIndex = rangeLimit(startIndex, 0, fromIndex);
 
@@ -786,56 +795,59 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
     }
 
     // @formatter:off
-    @Override final public T trimStart(CharSequence chars) { return trimStart(0, chars);}
-    @Override final public T trimmedStart(CharSequence chars) { return trimmedStart(0, chars);}
-    @Override final public T trimEnd(CharSequence chars) { return trimEnd(0, chars);}
-    @Override final public T trimmedEnd(CharSequence chars) { return trimmedEnd(0, chars);}
-    @Override final public T trim(CharSequence chars) { return trim(0, chars);}
-    @Override final public Pair<T, T> trimmed(CharSequence chars) { return trimmed(0, chars);}
-    @Override final public T trimStart(int keep) { return trimStart(keep, WHITESPACE_CHARS);}
-    @Override final public T trimmedStart(int keep) { return trimmedStart(keep, WHITESPACE_CHARS);}
-    @Override final public T trimEnd(int keep) { return trimEnd(keep, WHITESPACE_CHARS);}
-    @Override final public T trimmedEnd(int keep) { return trimmedEnd(keep, WHITESPACE_CHARS);}
-    @Override final public T trim(int keep) { return trim(keep, WHITESPACE_CHARS);}
-    @Override final public Pair<T, T> trimmed(int keep) { return trimmed(keep, WHITESPACE_CHARS);}
-    @Override final public T trimStart() { return trimStart(0, WHITESPACE_CHARS);}
-    @Override final public T trimmedStart() { return trimmedStart(0, WHITESPACE_CHARS);}
-    @Override final public T trimEnd() { return trimEnd(0, WHITESPACE_CHARS);}
-    @Override final public T trimmedEnd() { return trimmedEnd(0, WHITESPACE_CHARS);}
-    @Override final public T trim() { return trim(0, WHITESPACE_CHARS);}
-    @Override final public Pair<T, T> trimmed() { return trimmed(0, WHITESPACE_CHARS);}
-    @Override final public T trimStart(int keep, CharSequence chars) { return subSequence(trimStartRange(keep, chars));}
-    @Override final public T trimmedStart(int keep, CharSequence chars) { return subSequenceBefore(trimStartRange(keep, chars));}
-    @Override final public T trimEnd(int keep, CharSequence chars) { return subSequence(trimEndRange(keep, chars));}
-    @Override final public T trimmedEnd(int keep, CharSequence chars) { return subSequenceAfter(trimEndRange(keep, chars));}
-    @Override final public T trim(int keep, CharSequence chars) { return subSequence(trimRange(keep, chars));}
-    @Override final public Pair<T, T> trimmed(int keep, CharSequence chars) { return subSequenceBeforeAfter(trimRange(keep, chars));}
+    @NotNull @Override final public T trimStart(@NotNull CharSequence chars) {  return subSequence(trimStartRange(0, chars));}
+    @NotNull @Override final public T trimmedStart(@NotNull CharSequence chars) { return trimmedStart(0, chars);}
+    @NotNull @Override final public T trimEnd(@NotNull CharSequence chars) { return trimEnd(0, chars);}
+    @NotNull @Override final public T trimmedEnd(@NotNull CharSequence chars) { return trimmedEnd(0, chars);}
+    @NotNull @Override final public T trim(@NotNull CharSequence chars) { return trim(0, chars);}
+    @NotNull @Override final public Pair<T, T> trimmed(@NotNull CharSequence chars) { return trimmed(0, chars);}
+    @NotNull @Override final public T trimStart(int keep) { return trimStart(keep, WHITESPACE_CHARS);}
+    @NotNull @Override final public T trimmedStart(int keep) { return trimmedStart(keep, WHITESPACE_CHARS);}
+    @NotNull @Override final public T trimEnd(int keep) { return trimEnd(keep, WHITESPACE_CHARS);}
+    @NotNull @Override final public T trimmedEnd(int keep) { return trimmedEnd(keep, WHITESPACE_CHARS);}
+    @NotNull @Override final public T trim(int keep) { return trim(keep, WHITESPACE_CHARS);}
+    @NotNull @Override final public Pair<T, T> trimmed(int keep) { return trimmed(keep, WHITESPACE_CHARS);}
+    @NotNull @Override final public T trimStart() { return trimStart(0, WHITESPACE_CHARS);}
+    @NotNull @Override final public T trimmedStart() { return trimmedStart(0, WHITESPACE_CHARS);}
+    @NotNull @Override final public T trimEnd() { return trimEnd(0, WHITESPACE_CHARS);}
+    @NotNull @Override final public T trimmedEnd() { return trimmedEnd(0, WHITESPACE_CHARS);}
+    @NotNull @Override final public T trim() { return trim(0, WHITESPACE_CHARS);}
+    @NotNull @Override final public Pair<T, T> trimmed() { return trimmed(0, WHITESPACE_CHARS);}
+    @NotNull @Override final public T trimStart(int keep, @NotNull CharSequence chars) { return subSequence(trimStartRange(keep, chars));}
+    @NotNull @Override final public T trimmedStart(int keep, @NotNull CharSequence chars) { return subSequenceBefore(trimStartRange(keep, chars));}
+    @NotNull @Override final public T trimEnd(int keep, @NotNull CharSequence chars) { return subSequence(trimEndRange(keep, chars));}
+    @NotNull @Override final public T trimmedEnd(int keep, @NotNull CharSequence chars) { return subSequenceAfter(trimEndRange(keep, chars));}
+    @NotNull @Override final public T trim(int keep, @NotNull CharSequence chars) { return subSequence(trimRange(keep, chars));}
+    @NotNull @Override final public Pair<T, T> trimmed(int keep, @NotNull CharSequence chars) { return subSequenceBeforeAfter(trimRange(keep, chars));}
 
-    @Override final public Range trimStartRange(CharSequence chars) { return trimStartRange(0, chars);}
-    @Override final public Range trimEndRange(CharSequence chars) { return trimEndRange(0, chars);}
-    @Override final public Range trimRange(CharSequence chars) { return trimRange(0, chars);}
-    @Override final public Range trimStartRange(int keep) { return trimStartRange(keep, WHITESPACE_CHARS);}
-    @Override final public Range trimEndRange(int keep) { return trimEndRange(keep, WHITESPACE_CHARS);}
-    @Override final public Range trimRange(int keep) { return trimRange(keep, WHITESPACE_CHARS);}
-    @Override final public Range trimStartRange() { return trimStartRange(0, WHITESPACE_CHARS);}
-    @Override final public Range trimEndRange() { return trimEndRange(0, WHITESPACE_CHARS);}
-    @Override final public Range trimRange() { return trimRange(0, WHITESPACE_CHARS);}
+    @NotNull @Override final public Range trimStartRange(@NotNull CharSequence chars) { return trimStartRange(0, chars);}
+    @NotNull @Override final public Range trimEndRange(@NotNull CharSequence chars) { return trimEndRange(0, chars);}
+    @NotNull @Override final public Range trimRange(@NotNull CharSequence chars) { return trimRange(0, chars);}
+    @NotNull @Override final public Range trimStartRange(int keep) { return trimStartRange(keep, WHITESPACE_CHARS);}
+    @NotNull @Override final public Range trimEndRange(int keep) { return trimEndRange(keep, WHITESPACE_CHARS);}
+    @NotNull @Override final public Range trimRange(int keep) { return trimRange(keep, WHITESPACE_CHARS);}
+    @NotNull @Override final public Range trimStartRange() { return trimStartRange(0, WHITESPACE_CHARS);}
+    @NotNull @Override final public Range trimEndRange() { return trimEndRange(0, WHITESPACE_CHARS);}
+    @NotNull @Override final public Range trimRange() { return trimRange(0, WHITESPACE_CHARS);}
     // @formatter:on
 
+    @NotNull
     @Override
-    final public Range trimStartRange(int keep, CharSequence chars) {
+    final public Range trimStartRange(int keep, @NotNull CharSequence chars) {
         int trim = countLeading(chars, 0, length());
         return trim > keep ? Range.of(trim - keep, length()) : Range.NULL;
     }
 
+    @NotNull
     @Override
-    final public Range trimEndRange(int keep, CharSequence chars) {
+    final public Range trimEndRange(int keep, @NotNull CharSequence chars) {
         int trim = countTrailing(chars, 0, length());
         return trim > keep ? Range.of(0, length() - trim + keep) : Range.NULL;
     }
 
+    @NotNull
     @Override
-    final public Range trimRange(int keep, CharSequence chars) {
+    final public Range trimRange(int keep, @NotNull CharSequence chars) {
         if (keep >= length()) return Range.NULL;
 
         int trimStart = countLeading(chars, 0, length());
@@ -848,21 +860,25 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
         }
     }
 
+    @NotNull
     @Override
     final public T padStart(int length, char pad) {
         return length <= length() ? (T) this : sequenceOf(RepeatedCharSequence.of(pad, length - length()));
     }
 
+    @NotNull
     @Override
     final public T padEnd(int length, char pad) {
         return length <= length() ? (T) this : append(RepeatedCharSequence.of(pad, length - length()));
     }
 
+    @NotNull
     @Override
     final public T padStart(int length) {
         return padStart(length, ' ');
     }
 
+    @NotNull
     @Override
     final public T padEnd(int length) {
         return padEnd(length, ' ');
@@ -927,28 +943,28 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
     // @formatter:on
 
     @Override
-    final public int startOfDelimitedBy(CharSequence s, int index) {
+    final public int startOfDelimitedBy(@NotNull CharSequence s, int index) {
         index = rangeLimit(index, 0, length());
         int offset = lastIndexOf(s, index - 1);
         return offset == -1 ? 0 : offset + 1;
     }
 
     @Override
-    final public int startOfDelimitedByAny(CharSequence s, int index) {
+    final public int startOfDelimitedByAny(@NotNull CharSequence s, int index) {
         index = rangeLimit(index, 0, length());
         int offset = lastIndexOfAny(s, index - 1);
         return offset == -1 ? 0 : offset + 1;
     }
 
     @Override
-    final public int startOfDelimitedByAnyNot(CharSequence s, int index) {
+    final public int startOfDelimitedByAnyNot(@NotNull CharSequence s, int index) {
         index = rangeLimit(index, 0, length());
         int offset = lastIndexOfAnyNot(s, index - 1);
         return offset == -1 ? 0 : offset + 1;
     }
 
     @Override
-    final public int endOfDelimitedBy(CharSequence s, int index) {
+    final public int endOfDelimitedBy(@NotNull CharSequence s, int index) {
         int length = length();
         index = rangeLimit(index, 0, length);
         int offset = indexOf(s, index);
@@ -956,7 +972,7 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
     }
 
     @Override
-    final public int endOfDelimitedByAny(CharSequence s, int index) {
+    final public int endOfDelimitedByAny(@NotNull CharSequence s, int index) {
         int length = length();
         index = rangeLimit(index, 0, length);
         int offset = indexOfAny(s, index);
@@ -964,46 +980,52 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
     }
 
     @Override
-    final public int endOfDelimitedByAnyNot(CharSequence s, int index) {
+    final public int endOfDelimitedByAnyNot(@NotNull CharSequence s, int index) {
         int length = length();
         index = rangeLimit(index, 0, length);
         int offset = indexOfAnyNot(s, index);
         return offset == -1 ? length : offset;
     }
 
+    @NotNull
     @Override
     public Range lineRangeAt(int index) {
         return Range.of(startOfLine(index), endOfLine(index));
     }
 
+    @NotNull
     @Override
     public Range lineRangeAtAnyEOL(int index) {
         return Range.of(startOfLineAnyEOL(index), endOfLineAnyEOL(index));
     }
 
     // @formatter:off
-    @Override final public T lineAt(int index) {return subSequence(lineRangeAt(index));}
-    @Override final public T lineAtAnyEOL(int index) {return subSequence(lineRangeAtAnyEOL(index));}
+    @NotNull @Override final public T lineAt(int index) {return subSequence(lineRangeAt(index));}
+    @NotNull @Override final public T lineAtAnyEOL(int index) {return subSequence(lineRangeAtAnyEOL(index));}
     // @formatter:on
 
+    @NotNull
     @Override
     final public T trimEOL() {
         Range range = eolEndRange(length());
         return range.isNull() ? (T) this : subSequenceBefore(range);
     }
 
+    @NotNull
     @Override
     final public T trimmedEOL() {
         Range range = eolEndRange(length());
         return range.isNull() ? nullSequence() : subSequence(range);
     }
 
+    @NotNull
     @Override
     final public Range eolEndRange(int eolEnd) {
         int eolLength = eolEndLength(eolEnd);
         return eolLength == 0 ? Range.NULL : Range.of(eolEnd - eolLength, eolEnd);
     }
 
+    @NotNull
     @Override
     public Range eolStartRange(int eolStart) {
         int eolLength = eolEndLength(eolStart);
@@ -1011,18 +1033,19 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
     }
 
     // @formatter:off
-    @Override final public T trimTailBlankLines() {Range range = lastBlankLinesRange();return range.isNull() ? (T) this : subSequenceBefore(range);}
-    @Override final public T trimLeadBlankLines() {Range range = blankLinesRange();return range.isNull() ? (T) this : subSequenceAfter(range);}
-    @Override final public Range blankLinesRange() {return blankLinesRange(RichCharSequence.EOL, 0, length());}
-    @Override final public Range blankLinesRange(int startIndex) {return blankLinesRange(RichCharSequence.EOL, startIndex, length());}
-    @Override final public Range blankLinesRange(int fromIndex, int endIndex) { return blankLinesRange(RichCharSequence.EOL, fromIndex, endIndex);}
-    @Override final public Range lastBlankLinesRange() {return lastBlankLinesRange(RichCharSequence.EOL, 0, length());}
-    @Override final public Range lastBlankLinesRange(int fromIndex) {return lastBlankLinesRange(RichCharSequence.EOL, fromIndex, length());}
-    @Override final public Range lastBlankLinesRange(int startIndex, int fromIndex) { return lastBlankLinesRange(RichCharSequence.EOL,startIndex,fromIndex);}
+    @NotNull @Override final public T trimTailBlankLines() {Range range = trailingBlankLinesRange();return range.isNull() ? (T) this : subSequenceBefore(range);}
+    @NotNull @Override final public T trimLeadBlankLines() {Range range = leadingBlankLinesRange();return range.isNull() ? (T) this : subSequenceAfter(range);}
+    @NotNull @Override final public Range leadingBlankLinesRange() {return leadingBlankLinesRange(RichCharSequence.EOL, 0, length());}
+    @NotNull @Override final public Range leadingBlankLinesRange(int startIndex) {return leadingBlankLinesRange(RichCharSequence.EOL, startIndex, length());}
+    @NotNull @Override final public Range leadingBlankLinesRange(int fromIndex, int endIndex) { return leadingBlankLinesRange(RichCharSequence.EOL, fromIndex, endIndex);}
+    @NotNull @Override final public Range trailingBlankLinesRange() {return trailingBlankLinesRange(RichCharSequence.EOL, 0, length());}
+    @NotNull @Override final public Range trailingBlankLinesRange(int fromIndex) {return trailingBlankLinesRange(RichCharSequence.EOL, fromIndex, length());}
+    @NotNull @Override final public Range trailingBlankLinesRange(int startIndex, int fromIndex) { return trailingBlankLinesRange(RichCharSequence.EOL,startIndex,fromIndex);}
     // @formatter:on
 
+    @NotNull
     @Override
-    final public Range lastBlankLinesRange(CharSequence eolChars, int startIndex, int fromIndex) {
+    final public Range trailingBlankLinesRange(CharSequence eolChars, int startIndex, int fromIndex) {
         fromIndex = Math.min(fromIndex, length());
         startIndex = rangeLimit(startIndex, 0, fromIndex);
 
@@ -1032,7 +1055,7 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
 
         for (i = iMax; i-- > startIndex; ) {
             char c = charAt(i);
-            if (c == '\n') lastEOL = i + 1;
+            if (indexOf(eolChars, c) != -1) lastEOL = Math.min(i + Math.min(eolStartLength(i), 1), fromIndex);
             else if (c != ' ' && c != '\t') break;
         }
 
@@ -1041,8 +1064,9 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
         else return Range.NULL;
     }
 
+    @NotNull
     @Override
-    final public Range blankLinesRange(CharSequence eolChars, int fromIndex, int endIndex) {
+    final public Range leadingBlankLinesRange(@NotNull CharSequence eolChars, int fromIndex, int endIndex) {
         endIndex = Math.min(endIndex, length());
         fromIndex = rangeLimit(fromIndex, 0, endIndex);
 
@@ -1052,43 +1076,108 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
 
         for (i = fromIndex; i < iMax; i++) {
             char c = charAt(i);
-            if (c == '\n') lastEOL = i;
+            if (indexOf(eolChars, c) != -1) lastEOL = i;
             else if (c != ' ' && c != '\t') break;
         }
 
         if (i == iMax) return Range.of(fromIndex, endIndex);
-        else if (lastEOL >= 0) return Range.of(fromIndex, lastEOL + 1);
-        else {return Range.NULL;}
+        else if (lastEOL >= 0) return Range.of(fromIndex, Math.min(lastEOL + Math.min(eolStartLength(lastEOL), 1), endIndex));
+        else return Range.NULL;
     }
 
     // @formatter:off
-    @Override final public T ifNull(T other) {return isNull() ? other : (T) this;}
-    @Override final public T ifNullEmptyAfter(T other) {return isNull() ? other.subSequence(other.length(), other.length()) : (T) this;}
-    @Override final public T ifNullEmptyBefore(T other) {return isNull() ? other.subSequence(0, 0) : (T) this;}
-    @Override final public T nullIfEmpty() {return isEmpty() ? nullSequence() : (T) this;}
-    @Override final public T nullIfBlank() {return isBlank() ? nullSequence() : (T) this;}
-    @Override final public T nullIf(boolean condition) {return condition ? nullSequence() : (T) this;}
-    @Override final public T nullIfNot(BiPredicate<? super T, ? super CharSequence> predicate, CharSequence... matches) {return nullIf(predicate.negate(),matches);}
-    @Override final public T nullIf(Predicate<? super CharSequence> predicate, CharSequence... matches) {return nullIf((o1, o2) -> predicate.test(o2), matches);}
-    @Override final public T nullIfNot(Predicate<? super CharSequence> predicate, CharSequence... matches) {return nullIfNot((o1, o2) -> predicate.test(o2), matches);}
-    @Override final public T nullIf(CharSequence... matches) {return nullIf((Predicate<? super CharSequence>) this::matches,matches);}
-    @Override final public T nullIfNot(CharSequence... matches) {return nullIfNot((Predicate<? super CharSequence>) this::matches,matches);}
-    @Override final public T nullIfStartsWith(CharSequence... matches) {return nullIf((Predicate<? super CharSequence>) this::startsWith,matches);}
-    @Override final public T nullIfNotStartsWith(CharSequence... matches) {return nullIfNot((Predicate<? super CharSequence>) this::startsWith,matches);}
-    @Override final public T nullIfEndsWith(CharSequence... matches) {return nullIf((Predicate<? super CharSequence>) this::endsWith,matches);}
-    @Override final public T nullIfNotEndsWith(CharSequence... matches) {return nullIfNot((Predicate<? super CharSequence>) this::endsWith,matches);}
-    @Override final public T nullIfStartsWithIgnoreCase(CharSequence... matches) {return nullIf((Predicate<? super CharSequence>) this::startsWithIgnoreCase,matches);}
-    @Override final public T nullIfNotStartsWithIgnoreCase(CharSequence... matches) {return nullIfNot((Predicate<? super CharSequence>) this::startsWithIgnoreCase,matches);}
-    @Override final public T nullIfEndsWithIgnoreCase(CharSequence... matches) {return nullIf((Predicate<? super CharSequence>) this::endsWithIgnoreCase,matches);}
-    @Override final public T nullIfNotEndsWithIgnoreCase(CharSequence... matches) {return nullIfNot((Predicate<? super CharSequence>) this::endsWithIgnoreCase,matches);}
-    @Override final public T nullIfStartsWith(boolean ignoreCase, CharSequence... matches) {return nullIf((Predicate<? super CharSequence>) prefix -> startsWith(prefix, ignoreCase),matches);}
-    @Override final public T nullIfNotStartsWith(boolean ignoreCase, CharSequence... matches) {return nullIfNot((Predicate<? super CharSequence>) prefix -> startsWith(prefix, ignoreCase),matches);}
-    @Override final public T nullIfEndsWith(boolean ignoreCase, CharSequence... matches) {return nullIf((Predicate<? super CharSequence>) suffix -> endsWith(suffix, ignoreCase),matches);}
-    @Override final public T nullIfNotEndsWith(boolean ignoreCase, CharSequence... matches) {return nullIfNot((Predicate<? super CharSequence>) suffix -> endsWith(suffix, ignoreCase),matches);}
+    @NotNull @Override final public List<Range> blankLinesRemovedRanges() { return blankLinesRemovedRanges(RichCharSequence.EOL, 0, length());}
+    @NotNull @Override final public List<Range> blankLinesRemovedRanges(int fromIndex) { return blankLinesRemovedRanges(RichCharSequence.EOL, fromIndex, length());}
+    @NotNull @Override final public List<Range> blankLinesRemovedRanges(int fromIndex, int endIndex) { return blankLinesRemovedRanges(RichCharSequence.EOL, fromIndex, endIndex);}
     // @formatter:on
 
+    @NotNull
     @Override
-    final public T nullIf(BiPredicate<? super T, ? super CharSequence> predicate, CharSequence... matches) {
+    final public List<Range> blankLinesRemovedRanges(@NotNull CharSequence eolChars, int fromIndex, int endIndex) {
+        endIndex = Math.min(endIndex, length());
+        fromIndex = rangeLimit(fromIndex, 0, endIndex);
+        int lastPos = fromIndex;
+        ArrayList<Range> ranges = new ArrayList<>();
+
+        while (lastPos < endIndex) {
+            Range blankLines = leadingBlankLinesRange(eolChars, lastPos, endIndex);
+            if (blankLines.isNull()) {
+                int endOfLine = Math.min(endOfLine(lastPos) + 1, endIndex);
+                if (lastPos < endOfLine) ranges.add(Range.of(lastPos, endOfLine));
+                lastPos = endOfLine;
+            } else {
+                if (lastPos < blankLines.getStart()) ranges.add(Range.of(lastPos, blankLines.getStart()));
+                lastPos = blankLines.getEnd();
+            }
+        }
+        return ranges;
+    }
+
+    // @formatter:off
+    @NotNull @Override public T trimEndToEndOfLine(boolean includeEol) { return trimEndToEndOfLine(RichCharSequence.EOL,includeEol, 0);  }
+    @NotNull @Override public T trimEndToEndOfLine(int index) { return trimEndToEndOfLine(RichCharSequence.EOL,false, 0);  }
+    @NotNull @Override public T trimEndToEndOfLine() { return trimEndToEndOfLine(RichCharSequence.EOL,false, 0);   }
+    @NotNull @Override public T trimEndToEndOfLine(boolean includeEol, int index) { return trimEndToEndOfLine(RichCharSequence.EOL,includeEol, index); }
+
+    @NotNull @Override public T trimToStartOfLine(boolean includeEol) { return trimToStartOfLine(RichCharSequence.EOL,includeEol, 0);  }
+    @NotNull @Override public T trimToStartOfLine(int index) { return trimToStartOfLine(RichCharSequence.EOL,false, 0);  }
+    @NotNull @Override public T trimToStartOfLine() { return trimToStartOfLine(RichCharSequence.EOL,false, 0);   }
+    @NotNull @Override public T trimToStartOfLine(boolean includeEol, int index) { return trimToStartOfLine(RichCharSequence.EOL,includeEol, index); }
+    // @formatter:on
+
+    @NotNull
+    @Override
+    // TEST:
+    public T trimEndToEndOfLine(@NotNull CharSequence eolChars, boolean includeEol, int index) {
+        int eolPos = endOfDelimitedByAny(eolChars, index);
+        if (eolPos < length()) {
+            int endIndex = includeEol ? eolPos + eolStartLength(eolPos + 1) : eolPos;
+            return subSequence(0, endIndex);
+        }
+        return (T) this;
+    }
+
+    @NotNull
+    @Override
+    // TEST:
+    public T trimToStartOfLine(@NotNull CharSequence eolChars, boolean includeEol, int index) {
+        int eolPos = startOfDelimitedByAny(eolChars, index);
+        if (eolPos > 0) {
+            int startIndex = includeEol ? eolPos - eolEndLength(eolPos - 1) : eolPos;
+            return subSequence(startIndex);
+        }
+        return (T) this;
+    }
+
+    // @formatter:off
+    @NotNull @Override final public T ifNull(@NotNull T other) {return isNull() ? other : (T) this;}
+    @NotNull @Override final public T ifNullEmptyAfter(@NotNull T other) {return isNull() ? other.subSequence(other.length(), other.length()) : (T) this;}
+    @NotNull @Override final public T ifNullEmptyBefore(@NotNull T other) {return isNull() ? other.subSequence(0, 0) : (T) this;}
+    @NotNull @Override final public T nullIfEmpty() {return isEmpty() ? nullSequence() : (T) this;}
+    @NotNull @Override final public T nullIfBlank() {return isBlank() ? nullSequence() : (T) this;}
+    @NotNull @Override final public T nullIf(boolean condition) {return condition ? nullSequence() : (T) this;}
+    @NotNull @Override final public T nullIfNot(@NotNull BiPredicate<? super T, ? super CharSequence> predicate, CharSequence... matches) {return nullIf(predicate.negate(),matches);}
+    @NotNull @Override final public T nullIf(@NotNull Predicate<? super CharSequence> predicate, CharSequence... matches) {return nullIf((o1, o2) -> predicate.test(o2), matches);}
+    @NotNull @Override final public T nullIfNot(@NotNull Predicate<? super CharSequence> predicate, CharSequence... matches) {return nullIfNot((o1, o2) -> predicate.test(o2), matches);}
+    @NotNull @Override final public T nullIf(CharSequence... matches) {return nullIf((Predicate<? super CharSequence>) this::matches,matches);}
+    @NotNull @Override final public T nullIfNot(CharSequence... matches) {return nullIfNot((Predicate<? super CharSequence>) this::matches,matches);}
+    @NotNull @Override final public T nullIfStartsWith(CharSequence... matches) {return nullIf((Predicate<? super CharSequence>) this::startsWith,matches);}
+    @NotNull @Override final public T nullIfNotStartsWith(CharSequence... matches) {return nullIfNot((Predicate<? super CharSequence>) this::startsWith,matches);}
+    @NotNull @Override final public T nullIfEndsWith(CharSequence... matches) {return nullIf((Predicate<? super CharSequence>) this::endsWith,matches);}
+    @NotNull @Override final public T nullIfNotEndsWith(CharSequence... matches) {return nullIfNot((Predicate<? super CharSequence>) this::endsWith,matches);}
+    @NotNull @Override final public T nullIfStartsWithIgnoreCase(CharSequence... matches) {return nullIf((Predicate<? super CharSequence>) this::startsWithIgnoreCase,matches);}
+    @NotNull @Override final public T nullIfNotStartsWithIgnoreCase(CharSequence... matches) {return nullIfNot((Predicate<? super CharSequence>) this::startsWithIgnoreCase,matches);}
+    @NotNull @Override final public T nullIfEndsWithIgnoreCase(CharSequence... matches) {return nullIf((Predicate<? super CharSequence>) this::endsWithIgnoreCase,matches);}
+    @NotNull @Override final public T nullIfNotEndsWithIgnoreCase(CharSequence... matches) {return nullIfNot((Predicate<? super CharSequence>) this::endsWithIgnoreCase,matches);}
+    @NotNull @Override final public T nullIfStartsWith(boolean ignoreCase, CharSequence... matches) {return nullIf((Predicate<? super CharSequence>) prefix -> startsWith(prefix, ignoreCase),matches);}
+    @NotNull @Override final public T nullIfNotStartsWith(boolean ignoreCase, CharSequence... matches) {return nullIfNot((Predicate<? super CharSequence>) prefix -> startsWith(prefix, ignoreCase),matches);}
+    @NotNull @Override final public T nullIfEndsWith(boolean ignoreCase, CharSequence... matches) {return nullIf((Predicate<? super CharSequence>) suffix -> endsWith(suffix, ignoreCase),matches);}
+    @NotNull @Override final public T nullIfNotEndsWith(boolean ignoreCase, CharSequence... matches) {return nullIfNot((Predicate<? super CharSequence>) suffix -> endsWith(suffix, ignoreCase),matches);}
+    // @formatter:on
+
+    @NotNull
+    @Override
+    final public T nullIf(@NotNull BiPredicate<? super T, ? super CharSequence> predicate, CharSequence... matches) {
         for (CharSequence match : matches) {
             if (predicate.test((T) this, match)) return nullSequence();
         }
@@ -1100,72 +1189,80 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
     @Override final public boolean isBlank() {return isEmpty() || countLeading(WHITESPACE_CHARS, 0, length()) == length();}
     @Override final public boolean isNull() {return this == nullSequence();}
     @Override final public boolean isNotNull() {return this != nullSequence();}
-    @Override final public boolean endsWith(CharSequence suffix) {return length() > 0 && matchCharsReversed(suffix, length() - 1, false);}
-    @Override final public boolean startsWith(CharSequence prefix) {return length() > 0 && matchChars(prefix, 0, false);}
-    @Override final public boolean endsWith(CharSequence suffix, boolean ignoreCase) {return length() > 0 && matchCharsReversed(suffix, length() - 1, ignoreCase);}
-    @Override final public boolean startsWith(CharSequence prefix, boolean ignoreCase) {return length() > 0 && matchChars(prefix, 0, ignoreCase);}
+    @Override final public boolean endsWith(@NotNull CharSequence suffix) {return length() > 0 && matchCharsReversed(suffix, length() - 1, false);}
+    @Override final public boolean startsWith(@NotNull CharSequence prefix) {return length() > 0 && matchChars(prefix, 0, false);}
+    @Override final public boolean endsWith(@NotNull CharSequence suffix, boolean ignoreCase) {return length() > 0 && matchCharsReversed(suffix, length() - 1, ignoreCase);}
+    @Override final public boolean startsWith(@NotNull CharSequence prefix, boolean ignoreCase) {return length() > 0 && matchChars(prefix, 0, ignoreCase);}
     // @formatter:on
 
     // @formatter:off
-    @Override final public T removeSuffix(CharSequence suffix) {return !endsWith(suffix) ? (T) this : subSequence(0, length() - suffix.length());}
-    @Override final public T removePrefix(CharSequence prefix) {return !startsWith(prefix) ? (T) this : subSequence(prefix.length(), length());}
-    @Override final public T removeProperSuffix(CharSequence suffix) {return length() <= suffix.length() || !endsWith(suffix) ? (T) this : subSequence(0, length() - suffix.length());}
-    @Override final public T removeProperPrefix(CharSequence prefix) {return length() <= prefix.length() || !startsWith(prefix) ? (T) this : subSequence(prefix.length(), length());}
-    @Override final public boolean endsWithIgnoreCase(CharSequence suffix) {return length() > 0 && matchCharsReversed(suffix, length() - 1, true);}
-    @Override final public boolean startsWithIgnoreCase(CharSequence prefix) {return length() > 0 && matchChars(prefix, 0, true);}
-    @Override final public T removeSuffixIgnoreCase(CharSequence suffix) {return !endsWithIgnoreCase(suffix) ? (T) this : subSequence(0, length() - suffix.length());}
-    @Override final public T removePrefixIgnoreCase(CharSequence prefix) {return !startsWithIgnoreCase(prefix) ? (T) this : subSequence(prefix.length(), length());}
-    @Override final public T removeProperSuffixIgnoreCase(CharSequence suffix) {return length() <= suffix.length() || !endsWithIgnoreCase(suffix) ? (T) this : subSequence(0, length() - suffix.length());}
-    @Override final public T removeProperPrefixIgnoreCase(CharSequence prefix) {return length() <= prefix.length() || !startsWithIgnoreCase(prefix) ? (T) this : subSequence(prefix.length(), length());}
-    @Override final public T removeSuffix(CharSequence suffix, boolean ignoreCase) {return !endsWith(suffix, ignoreCase) ? (T) this : subSequence(0, length() - suffix.length());}
-    @Override final public T removePrefix(CharSequence prefix, boolean ignoreCase) {return !startsWith(prefix, ignoreCase) ? (T) this : subSequence(prefix.length(), length());}
-    @Override final public T removeProperSuffix(CharSequence suffix, boolean ignoreCase) {return length() <= suffix.length() || !endsWith(suffix, ignoreCase) ? (T) this : subSequence(0, length() - suffix.length());}
-    @Override final public T removeProperPrefix(CharSequence prefix, boolean ignoreCase) {return length() <= prefix.length() || !startsWith(prefix, ignoreCase) ? (T) this : subSequence(prefix.length(), length());}
+    @NotNull @Override final public T removeSuffix(@NotNull CharSequence suffix) {return !endsWith(suffix) ? (T) this : subSequence(0, length() - suffix.length());}
+    @NotNull @Override final public T removePrefix(@NotNull CharSequence prefix) {return !startsWith(prefix) ? (T) this : subSequence(prefix.length(), length());}
+    @NotNull @Override final public T removeProperSuffix(@NotNull CharSequence suffix) {return length() <= suffix.length() || !endsWith(suffix) ? (T) this : subSequence(0, length() - suffix.length());}
+    @NotNull @Override final public T removeProperPrefix(@NotNull CharSequence prefix) {return length() <= prefix.length() || !startsWith(prefix) ? (T) this : subSequence(prefix.length(), length());}
+    @Override final public boolean endsWithIgnoreCase(@NotNull CharSequence suffix) {return length() > 0 && matchCharsReversed(suffix, length() - 1, true);}
+    @Override final public boolean startsWithIgnoreCase(@NotNull CharSequence prefix) {return length() > 0 && matchChars(prefix, 0, true);}
+    @NotNull @Override final public T removeSuffixIgnoreCase(@NotNull CharSequence suffix) {return !endsWithIgnoreCase(suffix) ? (T) this : subSequence(0, length() - suffix.length());}
+    @NotNull @Override final public T removePrefixIgnoreCase(@NotNull CharSequence prefix) {return !startsWithIgnoreCase(prefix) ? (T) this : subSequence(prefix.length(), length());}
+    @NotNull @Override final public T removeProperSuffixIgnoreCase(@NotNull CharSequence suffix) {return length() <= suffix.length() || !endsWithIgnoreCase(suffix) ? (T) this : subSequence(0, length() - suffix.length());}
+    @NotNull @Override final public T removeProperPrefixIgnoreCase(@NotNull CharSequence prefix) {return length() <= prefix.length() || !startsWithIgnoreCase(prefix) ? (T) this : subSequence(prefix.length(), length());}
+    @NotNull @Override final public T removeSuffix(@NotNull CharSequence suffix, boolean ignoreCase) {return !endsWith(suffix, ignoreCase) ? (T) this : subSequence(0, length() - suffix.length());}
+    @NotNull @Override final public T removePrefix(@NotNull CharSequence prefix, boolean ignoreCase) {return !startsWith(prefix, ignoreCase) ? (T) this : subSequence(prefix.length(), length());}
+    @NotNull @Override final public T removeProperSuffix(@NotNull CharSequence suffix, boolean ignoreCase) {return length() <= suffix.length() || !endsWith(suffix, ignoreCase) ? (T) this : subSequence(0, length() - suffix.length());}
+    @NotNull @Override final public T removeProperPrefix(@NotNull CharSequence prefix, boolean ignoreCase) {return length() <= prefix.length() || !startsWith(prefix, ignoreCase) ? (T) this : subSequence(prefix.length(), length());}
     // @formatter:on
 
+    @NotNull
     @Override
+    // TEST:
     final public T toLowerCase() {
         return toMapped(LowerCaseMapper.INSTANCE);
     }
 
+    @NotNull
     @Override
+    // TEST:
     final public T toUpperCase() {
         return toMapped(UpperCaseMapper.INSTANCE);
     }
 
+    @NotNull
     @Override
     final public T toLowerCase(Locale locale) {
         return toMapped(new LowerCaseMapper(locale));
     }
 
+    @NotNull
     @Override
     final public T toUpperCase(Locale locale) {
         return toMapped(new UpperCaseMapper(locale));
     }
 
+    @NotNull
     @Override
     public T toMapped(CharMapper mapper) {
         return sequenceOf(MappedSequence.of(mapper, this));
     }
 
     // @formatter:off
-    @Override final public boolean matches(CharSequence chars) {return chars.length() == length() && matchChars(chars, 0, false);}
-    @Override final public boolean matchesIgnoreCase(CharSequence chars) {return chars.length() == length() && matchChars(chars, 0, true);}
-    @Override final public boolean matches(CharSequence chars, boolean ignoreCase) {return chars.length() == length() && matchChars(chars, 0, ignoreCase);}
+    @Override final public boolean matches(@NotNull CharSequence chars) {return chars.length() == length() && matchChars(chars, 0, false);}
+    @Override final public boolean matchesIgnoreCase(@NotNull CharSequence chars) {return chars.length() == length() && matchChars(chars, 0, true);}
+    @Override final public boolean matches(@NotNull CharSequence chars, boolean ignoreCase) {return chars.length() == length() && matchChars(chars, 0, ignoreCase);}
 
-    @Override final public boolean matchChars(CharSequence chars) {return matchChars(chars, 0, false);}
-    @Override final public boolean matchCharsIgnoreCase(CharSequence chars) {return matchChars(chars, 0, true);}
-    @Override final public boolean matchChars(CharSequence chars, boolean ignoreCase) {return matchChars(chars, 0, ignoreCase);}
-    @Override final public boolean matchChars(CharSequence chars, int startIndex) {return matchChars(chars, startIndex, false);}
-    @Override final public boolean matchCharsIgnoreCase(CharSequence chars, int startIndex) {return matchChars(chars, startIndex, false);}
+    @Override final public boolean matchChars(@NotNull CharSequence chars) {return matchChars(chars, 0, false);}
+    @Override final public boolean matchCharsIgnoreCase(@NotNull CharSequence chars) {return matchChars(chars, 0, true);}
+    @Override final public boolean matchChars(@NotNull CharSequence chars, boolean ignoreCase) {return matchChars(chars, 0, ignoreCase);}
+    @Override final public boolean matchChars(@NotNull CharSequence chars, int startIndex) {return matchChars(chars, startIndex, false);}
+    @Override final public boolean matchCharsIgnoreCase(@NotNull CharSequence chars, int startIndex) {return matchChars(chars, startIndex, false);}
 
-    @Override final public boolean matchCharsReversed(CharSequence chars, int endIndex) {return endIndex + 1 >= chars.length() && matchChars(chars, endIndex + 1 - chars.length(), false);}
-    @Override final public boolean matchCharsReversedIgnoreCase(CharSequence chars, int endIndex) {return endIndex + 1 >= chars.length() && matchChars(chars, endIndex + 1 - chars.length(), true);}
-    @Override final public boolean matchCharsReversed(CharSequence chars, int endIndex, boolean ignoreCase) {return endIndex + 1 >= chars.length() && matchChars(chars, endIndex + 1 - chars.length(), ignoreCase);}
+    @Override final public boolean matchCharsReversed(@NotNull CharSequence chars, int endIndex) {return endIndex + 1 >= chars.length() && matchChars(chars, endIndex + 1 - chars.length(), false);}
+    @Override final public boolean matchCharsReversedIgnoreCase(@NotNull CharSequence chars, int endIndex) {return endIndex + 1 >= chars.length() && matchChars(chars, endIndex + 1 - chars.length(), true);}
+    @Override final public boolean matchCharsReversed(@NotNull CharSequence chars, int endIndex, boolean ignoreCase) {return endIndex + 1 >= chars.length() && matchChars(chars, endIndex + 1 - chars.length(), ignoreCase);}
     // @formatter:on
 
     @Override
-    final public boolean matchChars(CharSequence chars, int startIndex, boolean ignoreCase) {
+    // TEST:
+    final public boolean matchChars(@NotNull CharSequence chars, int startIndex, boolean ignoreCase) {
         int iMax = chars.length();
         if (iMax > length() - startIndex) return false;
 
@@ -1197,6 +1294,7 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
         return true;
     }
 
+    @NotNull
     @Override
     final public T subSequence(int start) {
         return subSequence(start, length());
@@ -1215,16 +1313,19 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
         return sb.toString();
     }
 
+    @NotNull
     @Override
     final public String normalizeEOL() {
         return Escaping.normalizeEOL(toString());
     }
 
+    @NotNull
     @Override
     final public String normalizeEndWithEOL() {
         return Escaping.normalizeEndWithEOL(toString());
     }
 
+    @NotNull
     @Override
     final public String toVisibleWhitespaceString() {
         StringBuilder sb = new StringBuilder();
@@ -1242,84 +1343,19 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
         return sb.toString();
     }
 
+    // @formatter:off
+    @NotNull @Override final public T[] split(char delimiter) {return split(String.valueOf(delimiter), 0, 0, WHITESPACE_CHARS);}
+    @NotNull @Override final public T[] split(char delimiter, int limit) {return split(String.valueOf(delimiter), limit, 0, WHITESPACE_CHARS);}
+    @NotNull @Override final public T[] split(char delimiter, int limit, int flags) {return split(String.valueOf(delimiter), limit, flags, WHITESPACE_CHARS);}
+    @NotNull @Override final public T[] split(char delimiter, int limit, int flags, String trimChars) {return split(String.valueOf(delimiter), limit, flags, trimChars);}
+    @NotNull @Override final public T[] split(@NotNull CharSequence delimiter) {return split(delimiter, 0, 0, WHITESPACE_CHARS);}
+    @NotNull @Override final public T[] split(@NotNull CharSequence delimiter, int limit) {return split(delimiter, limit, 0, WHITESPACE_CHARS);}
+    @NotNull @Override final public T[] split(@NotNull CharSequence delimiter, int limit, int flags) {return split(delimiter, limit, flags, WHITESPACE_CHARS);}
+    // @formatter:on
+
+    @NotNull
     @Override
-    final public T[] split(char delimiter) {
-        return split(delimiter, 0);
-    }
-
-    @Override
-    final public T[] split(char delimiter, int limit) {
-        return split(delimiter, limit, 0);
-    }
-
-    @Override
-    final public T[] split(char delimiter, int limit, int flags) {
-        return split(delimiter, limit, flags, WHITESPACE_CHARS);
-    }
-
-    @Override
-    final public T[] split(CharSequence delimiter) {
-        return split(delimiter, 0);
-    }
-
-    @Override
-    final public T[] split(CharSequence delimiter, int limit) {
-        return split(delimiter, limit, 0);
-    }
-
-    @Override
-    final public T[] split(CharSequence delimiter, int limit, int flags) {
-        return split(delimiter, limit, flags, WHITESPACE_CHARS);
-    }
-
-    @Override
-    final public T[] split(char delimiter, int limit, int flags, String trimChars) {
-        if (trimChars == null) trimChars = WHITESPACE_CHARS;
-        if (limit < 1) limit = Integer.MAX_VALUE;
-
-        boolean includeDelimiterParts = (flags & SPLIT_INCLUDE_DELIM_PARTS) != 0;
-        int includeDelimiter = !includeDelimiterParts && (flags & SPLIT_INCLUDE_DELIMS) != 0 ? 1 : 0;
-        boolean trimParts = (flags & SPLIT_TRIM_PARTS) != 0;
-        boolean skipEmpty = (flags & SPLIT_SKIP_EMPTY) != 0;
-        ArrayList<T> items = new ArrayList<>();
-
-        int lastPos = 0;
-        int length = length();
-        if (limit > 1) {
-            while (lastPos < length) {
-                int pos = indexOf(delimiter, lastPos);
-                if (pos < 0) break;
-
-                if (lastPos < pos || !skipEmpty) {
-                    T item = subSequence(lastPos, pos + includeDelimiter);
-                    if (trimParts) item = item.trim(trimChars);
-                    if (!item.isEmpty() || !skipEmpty) {
-                        items.add(item);
-                        if (includeDelimiterParts) {
-                            items.add(subSequence(pos, pos + 1));
-                        }
-                        if (items.size() >= limit - 1) {
-                            lastPos = pos + 1;
-                            break;
-                        }
-                    }
-                }
-                lastPos = pos + 1;
-            }
-        }
-
-        if (lastPos < length) {
-            T item = subSequence(lastPos, length);
-            if (trimParts) item = item.trim(trimChars);
-            if (!item.isEmpty() || !skipEmpty) {
-                items.add(item);
-            }
-        }
-        return items.toArray(emptyArray());
-    }
-
-    @Override
-    final public T[] split(CharSequence delimiter, int limit, int flags, String trimChars) {
+    final public T[] split(@NotNull CharSequence delimiter, int limit, int flags, @Nullable String trimChars) {
         if (trimChars == null) trimChars = WHITESPACE_CHARS;
         if (limit < 1) limit = Integer.MAX_VALUE;
 
@@ -1364,19 +1400,37 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
         return items.toArray(emptyArray());
     }
 
+    @NotNull
     @Override
-    final public T appendTo(StringBuilder out) {
+    final public T appendTo(@NotNull StringBuilder out) {
         return appendTo(out, 0, length());
     }
 
+    @NotNull
     @Override
-    final public T appendTo(StringBuilder out, int start) {
+    final public T appendTo(@NotNull StringBuilder out, int start) {
         return appendTo(out, start, length());
     }
 
+    @NotNull
     @Override
-    final public T appendTo(StringBuilder out, int start, int end) {
-        out.append(this, start, end);
+    public T appendTo(@NotNull StringBuilder out, Range... ranges) {
+        return appendRangesTo(out, new ArrayIterable<>(ranges));
+    }
+
+    @NotNull
+    @Override
+    final public T appendRangesTo(@NotNull StringBuilder out, Iterable<? extends Range> ranges) {
+        for (Range range : ranges) {
+            if (range != null && range.isNotNull()) appendTo(out, range.getStart(), range.getEnd());
+        }
+        return (T) this;
+    }
+
+    @NotNull
+    @Override
+    final public T appendTo(@NotNull StringBuilder out, int startIndex, int endIndex) {
+        out.append(this, startIndex, endIndex);
         return (T) this;
     }
 
@@ -1400,8 +1454,9 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
         return indices;
     }
 
+    @NotNull
     @Override
-    final public int[] indexOfAll(CharSequence s) {
+    final public int[] indexOfAll(@NotNull CharSequence s) {
         int length = s.length();
         if (length == 0) return EMPTY_INDICES;
         int pos = indexOf(s);
@@ -1420,42 +1475,123 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
         return truncateTo(indices, iMax);
     }
 
+    @NotNull
     @Override
-    final public T replace(CharSequence find, CharSequence replace) {
+    // TEST:
+    public T prefixWith(@Nullable CharSequence prefix) {
+        return prefix == null || prefix.length() == 0 ? (T) this : sequenceOf(sequenceOf(prefix), (T) this);
+    }
+
+    @NotNull
+    @Override
+    // TEST:
+    public T suffixWith(@Nullable CharSequence suffix) {
+        // convoluted to allow BasedCharSequence to use PrefixedCharSequence so all fits into SegmentedCharSequence
+        return suffix == null || suffix.length() == 0 ? (T) this : sequenceOf((T) this, subSequence(length(), length()).prefixWith(suffix));
+    }
+
+    @NotNull
+    @Override
+    // TEST:
+    public T prefixOnceWith(@Nullable CharSequence prefix) {
+        return prefix == null || prefix.length() == 0 || startsWith(prefix) ? (T) this : prefixWith(prefix);
+    }
+
+    @NotNull
+    @Override
+    // TEST:
+    public T suffixOnceWith(@Nullable CharSequence suffix) {
+        return suffix == null || suffix.length() == 0 || endsWith(suffix) ? (T) this : suffixWith(suffix);
+    }
+
+    @NotNull
+    @Override
+    // TEST:
+    public T replace(int startIndex, int endIndex, @NotNull CharSequence replacement) {
+        int length = length();
+        startIndex = Math.min(startIndex, 0);
+        endIndex = Math.max(endIndex, length);
+
+        if (startIndex == 0 && endIndex == length) return sequenceOf(subSequence(endIndex, endIndex).prefixWith(replacement));
+        else if (startIndex == 0) return sequenceOf(subSequence(0, endIndex), subSequence(endIndex).prefixWith(replacement));
+        else if (endIndex == length) return sequenceOf(subSequence(0, startIndex), subSequence(endIndex, endIndex).prefixWith(replacement));
+        else return sequenceOf(subSequence(0, startIndex), subSequence(endIndex, endIndex).prefixWith(replacement), subSequence(endIndex));
+    }
+
+    @NotNull
+    @Override
+    // TEST:
+    final public T replace(@NotNull CharSequence find, @NotNull CharSequence replace) {
         int[] indices = indexOfAll(find);
         if (indices.length == 0) return (T) this;
 
+        ArrayList<T> segments = new ArrayList<>(indices.length + 2);
+
         int iMax = indices.length;
-        StringBuilder sb = new StringBuilder(length() + (replace.length() - find.length()) * iMax);
+        int length = length();
+
         int i = 0;
         int lastPos = 0;
         while (i < iMax) {
             int pos = indices[i++];
-            if (lastPos < pos) appendTo(sb, lastPos, pos);
+            if (lastPos < pos) segments.add(subSequence(lastPos, pos));
             lastPos = pos + find.length();
-            sb.append(replace);
+            segments.add(subSequence(lastPos, lastPos).prefixWith(replace));
         }
 
-        if (lastPos < length()) {
-            appendTo(sb, lastPos, length());
+        if (lastPos < length) {
+            segments.add(subSequence(lastPos, length));
         }
 
-        return sequenceOf(sb);
+        return sequenceOf(segments);
     }
 
+    @NotNull
     @Override
+    // TEST:
     final public T append(CharSequence... others) {
-        if (others.length > 0) {
-            int total = 0;
-            for (CharSequence other : others) total += other.length();
-            StringBuilder sb = new StringBuilder(length() + total);
-            appendTo(sb);
-            for (CharSequence other : others) {
-                sb.append(other);
-            }
-            return sequenceOf(sb);
+        return append(new ArrayIterable<>(others));
+    }
+
+    @Nullable
+    public static CharSequence concatenate(@Nullable CharSequence prefix, Iterable<? extends CharSequence> others) {
+        int total = 0;
+        for (CharSequence other : others) {
+            if (other != null) total += other.length();
         }
-        return (T) this;
+
+        if (total > 0) {
+            StringBuilder sb = new StringBuilder((prefix == null ? 0 : prefix.length()) + total);
+            if (prefix != null) sb.append(prefix);
+            for (CharSequence other : others) {
+                if (other != null && other.length() > 0) sb.append(other);
+            }
+            return sb;
+        }
+
+        return prefix;
+    }
+
+    @NotNull
+    @Override
+    // TEST:
+    final public T append(Iterable<? extends CharSequence> others) {
+        CharSequence result = concatenate(this, others);
+        return result == this ? (T) this : sequenceOf(result);
+    }
+
+    @NotNull
+    @Override
+    // TEST:
+    public T extractRanges(Range... ranges) {
+        return extractRanges(new ArrayIterable<>(ranges));
+    }
+
+    @NotNull
+    @Override
+    // TEST:
+    public T extractRanges(Iterable<? extends Range> ranges) {
+        return sequenceOf(new MappingIterable<>(ranges, range -> range == null || range.isNull() ? null : subSequence(range)));
     }
 
     @Override
@@ -1464,6 +1600,7 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
         return index - (lineStart == -1 ? 0 : lineStart + eolStartLength(lineStart));
     }
 
+    @NotNull
     @Override
     final public Pair<Integer, Integer> getLineColumnAtIndex(int index) {
         int iMax = length();
@@ -1501,12 +1638,12 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
     }
 
     @Override
-    public boolean equalsIgnoreCase(Object other) {
+    public boolean equalsIgnoreCase(@Nullable Object other) {
         return (this == other) || (other instanceof CharSequence) && ((CharSequence) other).length() == length() && matchChars((CharSequence) other, 0, true);
     }
 
     @Override
-    public boolean equals(Object other, boolean ignoreCase) {
+    public boolean equals(@Nullable Object other, boolean ignoreCase) {
         return (this == other) || other instanceof CharSequence && ((CharSequence) other).length() == length() && matchChars((CharSequence) other, 0, ignoreCase);
     }
 }

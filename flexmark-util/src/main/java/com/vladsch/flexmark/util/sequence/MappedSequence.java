@@ -47,6 +47,7 @@ public final class MappedSequence extends BasedSequenceImpl {
         return mapper.map(c);
     }
 
+    @NotNull
     @Override
     public BasedSequence subSequence(int start, int end) {
         BasedSequence baseSequence = base.subSequence(start, end);

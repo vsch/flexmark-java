@@ -2,7 +2,11 @@ package com.vladsch.flexmark.util.sequence;
 
 import com.vladsch.flexmark.util.Pair;
 import com.vladsch.flexmark.util.mappers.CharMapper;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.function.BiPredicate;
 import java.util.function.Predicate;
@@ -25,8 +29,8 @@ public interface RichCharSequence<T extends RichCharSequence<?>> extends CharSeq
     char EOL_CHAR1 = EOL_CHARS.charAt(0);
     char EOL_CHAR2 = EOL_CHARS.charAt(1);
 
-    T[] emptyArray();
-    T nullSequence();
+    @NotNull T[] emptyArray();
+    @NotNull T nullSequence();
 
     /**
      * @return the last character of the sequence or '\0' if empty
@@ -46,7 +50,7 @@ public interface RichCharSequence<T extends RichCharSequence<?>> extends CharSeq
      * @return based sequence whose contents reflect the selected portion
      */
     @Override
-    T subSequence(int start, int end);
+    @NotNull T subSequence(int start, int end);
 
     /**
      * Get a portion of this sequence selected by range
@@ -54,7 +58,7 @@ public interface RichCharSequence<T extends RichCharSequence<?>> extends CharSeq
      * @param range range to get, coordinates offset form start of this sequence
      * @return based sequence whose contents reflect the selected portion, if range.isNull() then {@link #nullSequence()}
      */
-    T subSequence(Range range);
+    @NotNull T subSequence(@NotNull Range range);
 
     /**
      * Get a portion of this sequence before one selected by range
@@ -62,7 +66,7 @@ public interface RichCharSequence<T extends RichCharSequence<?>> extends CharSeq
      * @param range range to get, coordinates offset form start of this sequence
      * @return based sequence whose contents reflect the selected portion, if range.isNull() then {@link #nullSequence()}
      */
-    T subSequenceBefore(Range range);
+    @NotNull T subSequenceBefore(@NotNull Range range);
 
     /**
      * Get a portion of this sequence after one selected by range
@@ -70,7 +74,7 @@ public interface RichCharSequence<T extends RichCharSequence<?>> extends CharSeq
      * @param range range to get, coordinates offset form start of this sequence
      * @return based sequence whose contents reflect the selected portion, if range.isNull() then {@link #nullSequence()}
      */
-    T subSequenceAfter(Range range);
+    @NotNull T subSequenceAfter(@NotNull Range range);
 
     /**
      * Get a portion of this sequence starting from a given offset to end of the sequence
@@ -78,7 +82,7 @@ public interface RichCharSequence<T extends RichCharSequence<?>> extends CharSeq
      * @param start offset from start of this sequence
      * @return based sequence whose contents reflect the selected portion
      */
-    T subSequence(int start);
+    @NotNull T subSequence(int start);
 
     /**
      * Convenience method to get characters offset from end of sequence.
@@ -88,7 +92,7 @@ public interface RichCharSequence<T extends RichCharSequence<?>> extends CharSeq
      * @param end   offset from end of sequence [ 0..length() )
      * @return selected portion spanning length() - start to length() - end of this sequence
      */
-    T endSequence(int start, int end);
+    @NotNull T endSequence(int start, int end);
 
     /**
      * Convenience method to get characters offset from end of sequence.
@@ -97,7 +101,7 @@ public interface RichCharSequence<T extends RichCharSequence<?>> extends CharSeq
      * @param start offset from end of sequence [ 0..length() )
      * @return selected portion spanning length() - start to length() of this sequence
      */
-    T endSequence(int start);
+    @NotNull T endSequence(int start);
 
     // index from the end of the sequence
     // no exceptions are thrown, instead a \0 is returned for an invalid index
@@ -121,7 +125,7 @@ public interface RichCharSequence<T extends RichCharSequence<?>> extends CharSeq
      * @param end   offset into this sequence
      * @return selected portion spanning start to end of this sequence. If offset is &lt;0 then it is taken as relative to length()
      */
-    T midSequence(int start, int end);
+    @NotNull T midSequence(int start, int end);
 
     /**
      * Convenience method to get characters offset from start or end of sequence.
@@ -133,7 +137,7 @@ public interface RichCharSequence<T extends RichCharSequence<?>> extends CharSeq
      * @param start offset into this sequence
      * @return selected portion spanning start to length() of this sequence. If offset is &lt;0 then it is taken as relative to length()
      */
-    T midSequence(int start);
+    @NotNull T midSequence(int start);
 
     /**
      * Convenience method to get characters offset from start or end of sequence.
@@ -152,7 +156,7 @@ public interface RichCharSequence<T extends RichCharSequence<?>> extends CharSeq
      * @param charSequence char sequence from which to construct a rich char sequence
      * @return rich char sequence from given inputs
      */
-    T sequenceOf(CharSequence charSequence);
+    @NotNull T sequenceOf(@Nullable CharSequence charSequence);
 
     /**
      * Factory function
@@ -161,7 +165,7 @@ public interface RichCharSequence<T extends RichCharSequence<?>> extends CharSeq
      * @param startIndex   start index of the sequence to use
      * @return rich char sequence from given inputs
      */
-    T sequenceOf(CharSequence charSequence, int startIndex);
+    @NotNull T sequenceOf(@Nullable CharSequence charSequence, int startIndex);
 
     /**
      * Factory function
@@ -171,7 +175,16 @@ public interface RichCharSequence<T extends RichCharSequence<?>> extends CharSeq
      * @param endIndex     end index of the sequence to use
      * @return rich char sequence from given inputs
      */
-    T sequenceOf(CharSequence charSequence, int startIndex, int endIndex);
+    @NotNull T sequenceOf(@Nullable CharSequence charSequence, int startIndex, int endIndex);
+
+    /**
+     * Create a sequence out of concatenation of other sequences
+     *
+     * @param sequences sequences to concatenate
+     * @return resulting sequence
+     */
+    @NotNull T sequenceOf(T... sequences);
+    @NotNull T sequenceOf(@NotNull Iterable<T> sequences);
 
     /**
      * All index methods return the position or -1 if not found of the given character, characters or string.
@@ -217,73 +230,73 @@ public interface RichCharSequence<T extends RichCharSequence<?>> extends CharSeq
      * @param s character sequence whose occurrence to find
      * @return index where found or -1
      */
-    int indexOf(CharSequence s);
-    int indexOf(CharSequence s, int fromIndex);
-    int indexOf(CharSequence s, int fromIndex, int endIndex);
+    int indexOf(@NotNull CharSequence s);
+    int indexOf(@NotNull CharSequence s, int fromIndex);
+    int indexOf(@NotNull CharSequence s, int fromIndex, int endIndex);
 
     int indexOf(char c);
     int indexOfAny(char c1, char c2);
     int indexOfAny(char c1, char c2, char c3);
-    int indexOfAny(CharSequence s);
+    int indexOfAny(@NotNull CharSequence s);
 
     int indexOf(char c, int fromIndex);
     int indexOfAny(char c1, char c2, int fromIndex);
     int indexOfAny(char c1, char c2, char c3, int fromIndex);
-    int indexOfAny(CharSequence s, int fromIndex);
+    int indexOfAny(@NotNull CharSequence s, int fromIndex);
 
     int indexOf(char c, int fromIndex, int endIndex);
     int indexOfAny(char c1, char c2, int fromIndex, int endIndex);
     int indexOfAny(char c1, char c2, char c3, int fromIndex, int endIndex);
-    int indexOfAny(CharSequence s, int fromIndex, int endIndex);
+    int indexOfAny(@NotNull CharSequence s, int fromIndex, int endIndex);
 
     int indexOfNot(char c);
     int indexOfAnyNot(char c1, char c2);
     int indexOfAnyNot(char c1, char c2, char c3);
-    int indexOfAnyNot(CharSequence s);
+    int indexOfAnyNot(@NotNull CharSequence s);
 
     int indexOfNot(char c, int fromIndex);
     int indexOfAnyNot(char c1, char c2, int fromIndex);
     int indexOfAnyNot(char c1, char c2, char c3, int fromIndex);
-    int indexOfAnyNot(CharSequence s, int fromIndex);
+    int indexOfAnyNot(@NotNull CharSequence s, int fromIndex);
 
     int indexOfNot(char c, int fromIndex, int endIndex);
     int indexOfAnyNot(char c1, char c2, int fromIndex, int endIndex);
     int indexOfAnyNot(char c1, char c2, char c3, int fromIndex, int endIndex);
-    int indexOfAnyNot(CharSequence s, int fromIndex, int endIndex);
+    int indexOfAnyNot(@NotNull CharSequence s, int fromIndex, int endIndex);
 
-    int lastIndexOf(CharSequence s);
-    int lastIndexOf(CharSequence s, int fromIndex);
-    int lastIndexOf(CharSequence s, int startIndex, int fromIndex);
+    int lastIndexOf(@NotNull CharSequence s);
+    int lastIndexOf(@NotNull CharSequence s, int fromIndex);
+    int lastIndexOf(@NotNull CharSequence s, int startIndex, int fromIndex);
 
     int lastIndexOf(char c);
     int lastIndexOfAny(char c1, char c2);
     int lastIndexOfAny(char c1, char c2, char c3);
-    int lastIndexOfAny(CharSequence s);
+    int lastIndexOfAny(@NotNull CharSequence s);
 
     int lastIndexOf(char c, int fromIndex);
     int lastIndexOfAny(char c1, char c2, int fromIndex);
     int lastIndexOfAny(char c1, char c2, char c3, int fromIndex);
-    int lastIndexOfAny(CharSequence s, int fromIndex);
+    int lastIndexOfAny(@NotNull CharSequence s, int fromIndex);
 
     int lastIndexOf(char c, int startIndex, int fromIndex);
     int lastIndexOfAny(char c1, char c2, int startIndex, int fromIndex);
     int lastIndexOfAny(char c1, char c2, char c3, int startIndex, int fromIndex);
-    int lastIndexOfAny(CharSequence s, int startIndex, int fromIndex);
+    int lastIndexOfAny(@NotNull CharSequence s, int startIndex, int fromIndex);
 
     int lastIndexOfNot(char c);
     int lastIndexOfAnyNot(char c1, char c2);
     int lastIndexOfAnyNot(char c1, char c2, char c3);
-    int lastIndexOfAnyNot(CharSequence s);
+    int lastIndexOfAnyNot(@NotNull CharSequence s);
 
     int lastIndexOfNot(char c, int fromIndex);
     int lastIndexOfAnyNot(char c1, char c2, int fromIndex);
     int lastIndexOfAnyNot(char c1, char c2, char c3, int fromIndex);
-    int lastIndexOfAnyNot(CharSequence s, int fromIndex);
+    int lastIndexOfAnyNot(@NotNull CharSequence s, int fromIndex);
 
     int lastIndexOfNot(char c, int startIndex, int fromIndex);
     int lastIndexOfAnyNot(char c1, char c2, int startIndex, int fromIndex);
     int lastIndexOfAnyNot(char c1, char c2, char c3, int startIndex, int fromIndex);
-    int lastIndexOfAnyNot(CharSequence s, int startIndex, int fromIndex);
+    int lastIndexOfAnyNot(@NotNull CharSequence s, int startIndex, int fromIndex);
 
     /**
      * Count leading/trailing characters of this sequence
@@ -326,19 +339,19 @@ public interface RichCharSequence<T extends RichCharSequence<?>> extends CharSeq
      * @param chars set of contiguous characters which should be counted at start of sequence
      * @return number of chars in contiguous span at start of sequence
      */
-    int countLeading(CharSequence chars);
-    int countLeadingNot(CharSequence chars);
-    int countLeading(CharSequence chars, int startIndex);
-    int countLeadingNot(CharSequence chars, int startIndex);
-    int countLeading(CharSequence chars, int startIndex, int endIndex);
-    int countLeadingNot(CharSequence chars, int startIndex, int endIndex);
+    int countLeading(@NotNull CharSequence chars);
+    int countLeadingNot(@NotNull CharSequence chars);
+    int countLeading(@NotNull CharSequence chars, int startIndex);
+    int countLeadingNot(@NotNull CharSequence chars, int startIndex);
+    int countLeading(@NotNull CharSequence chars, int startIndex, int endIndex);
+    int countLeadingNot(@NotNull CharSequence chars, int startIndex, int endIndex);
 
-    int countTrailing(CharSequence chars);
-    int countTrailingNot(CharSequence chars);
-    int countTrailing(CharSequence chars, int startIndex);
-    int countTrailingNot(CharSequence chars, int startIndex);
-    int countTrailing(CharSequence chars, int startIndex, int endIndex);
-    int countTrailingNot(CharSequence chars, int startIndex, int endIndex);
+    int countTrailing(@NotNull CharSequence chars);
+    int countTrailingNot(@NotNull CharSequence chars);
+    int countTrailing(@NotNull CharSequence chars, int startIndex);
+    int countTrailingNot(@NotNull CharSequence chars, int startIndex);
+    int countTrailing(@NotNull CharSequence chars, int startIndex, int endIndex);
+    int countTrailingNot(@NotNull CharSequence chars, int startIndex, int endIndex);
 
     int countLeading(char c);
     int countLeadingNot(char c);
@@ -368,14 +381,14 @@ public interface RichCharSequence<T extends RichCharSequence<?>> extends CharSeq
     int countOf(char c, int startIndex, int endIndex);
     int countOfNot(char c, int startIndex, int endIndex);
 
-    int countOfAny(CharSequence chars);
-    int countOfAnyNot(CharSequence chars);
-    int countOfAny(CharSequence chars, int startIndex);
-    int countOfAnyNot(CharSequence chars, int startIndex);
-    int countOfAny(CharSequence chars, int startIndex, int endIndex);
-    int countOfAnyNot(CharSequence chars, int startIndex, int endIndex);
+    int countOfAny(@NotNull CharSequence chars);
+    int countOfAnyNot(@NotNull CharSequence chars);
+    int countOfAny(@NotNull CharSequence chars, int startIndex);
+    int countOfAnyNot(@NotNull CharSequence chars, int startIndex);
+    int countOfAny(@NotNull CharSequence chars, int startIndex, int endIndex);
+    int countOfAnyNot(@NotNull CharSequence chars, int startIndex, int endIndex);
 
-    int countLeadingColumns(int startColumn, CharSequence chars);
+    int countLeadingColumns(int startColumn, @NotNull CharSequence chars);
 
     /**
      * Range of kept sequence when  trim start/end of this sequence is performed, characters to trim are passed in the sequence argument
@@ -388,21 +401,21 @@ public interface RichCharSequence<T extends RichCharSequence<?>> extends CharSeq
      * @param chars set of characters to trim from start of line
      * @return range in this sequence to keep or Range.NULL if to keep all
      */
-    Range trimStartRange(int keep, CharSequence chars);
-    Range trimEndRange(int keep, CharSequence chars);
-    Range trimRange(int keep, CharSequence chars);
+    @NotNull Range trimStartRange(int keep, @NotNull CharSequence chars);
+    @NotNull Range trimEndRange(int keep, @NotNull CharSequence chars);
+    @NotNull Range trimRange(int keep, @NotNull CharSequence chars);
 
-    Range trimStartRange(CharSequence chars);
-    Range trimEndRange(CharSequence chars);
-    Range trimRange(CharSequence chars);
+    @NotNull Range trimStartRange(@NotNull CharSequence chars);
+    @NotNull Range trimEndRange(@NotNull CharSequence chars);
+    @NotNull Range trimRange(@NotNull CharSequence chars);
 
-    Range trimStartRange(int keep);
-    Range trimEndRange(int keep);
-    Range trimRange(int keep);
+    @NotNull Range trimStartRange(int keep);
+    @NotNull Range trimEndRange(int keep);
+    @NotNull Range trimRange(int keep);
 
-    Range trimStartRange();
-    Range trimEndRange();
-    Range trimRange();
+    @NotNull Range trimStartRange();
+    @NotNull Range trimEndRange();
+    @NotNull Range trimRange();
 
     /**
      * Trim, Trim start/end of this sequence, characters to trim are passed in the sequence argument
@@ -415,21 +428,21 @@ public interface RichCharSequence<T extends RichCharSequence<?>> extends CharSeq
      * @param chars set of characters to trim from start of line
      * @return sequence after it is trimmed
      */
-    T trimStart(int keep, CharSequence chars);
-    T trimEnd(int keep, CharSequence chars);
-    T trim(int keep, CharSequence chars);
+    @NotNull T trimStart(int keep, @NotNull CharSequence chars);
+    @NotNull T trimEnd(int keep, @NotNull CharSequence chars);
+    @NotNull T trim(int keep, @NotNull CharSequence chars);
 
-    T trimStart(int keep);
-    T trimEnd(int keep);
-    T trim(int keep);
+    @NotNull T trimStart(int keep);
+    @NotNull T trimEnd(int keep);
+    @NotNull T trim(int keep);
 
-    T trimStart(CharSequence chars);
-    T trimEnd(CharSequence chars);
-    T trim(CharSequence chars);
+    @NotNull T trimStart(@NotNull CharSequence chars);
+    @NotNull T trimEnd(@NotNull CharSequence chars);
+    @NotNull T trim(@NotNull CharSequence chars);
 
-    T trimStart();
-    T trimEnd();
-    T trim();
+    @NotNull T trimStart();
+    @NotNull T trimEnd();
+    @NotNull T trim();
 
     /**
      * Get the characters Trimmed, Trimmed from start/end of this sequence, characters to trim are passed in the sequence argument
@@ -442,26 +455,26 @@ public interface RichCharSequence<T extends RichCharSequence<?>> extends CharSeq
      * @param chars set of characters to trim from start of line
      * @return part of the sequence that was trimmed from the start
      */
-    T trimmedStart(int keep, CharSequence chars);
-    T trimmedEnd(int keep, CharSequence chars);
-    Pair<T, T> trimmed(int keep, CharSequence chars);
+    @NotNull T trimmedStart(int keep, @NotNull CharSequence chars);
+    @NotNull T trimmedEnd(int keep, @NotNull CharSequence chars);
+    @NotNull Pair<T, T> trimmed(int keep, @NotNull CharSequence chars);
 
-    T trimmedStart(int keep);
-    T trimmedEnd(int keep);
-    Pair<T, T> trimmed(int keep);
+    @NotNull T trimmedStart(int keep);
+    @NotNull T trimmedEnd(int keep);
+    @NotNull Pair<T, T> trimmed(int keep);
 
-    T trimmedStart(CharSequence chars);
-    T trimmedEnd(CharSequence chars);
-    Pair<T, T> trimmed(CharSequence chars);
+    @NotNull T trimmedStart(@NotNull CharSequence chars);
+    @NotNull T trimmedEnd(@NotNull CharSequence chars);
+    @NotNull Pair<T, T> trimmed(@NotNull CharSequence chars);
 
-    T trimmedStart();
-    T trimmedEnd();
-    Pair<T, T> trimmed();
+    @NotNull T trimmedStart();
+    @NotNull T trimmedEnd();
+    @NotNull Pair<T, T> trimmed();
 
-    T padStart(int length, char pad);
-    T padEnd(int length, char pad);
-    T padStart(int length);
-    T padEnd(int length);
+    @NotNull T padStart(int length, char pad);
+    @NotNull T padEnd(int length, char pad);
+    @NotNull T padStart(int length);
+    @NotNull T padEnd(int length);
 
     boolean isEmpty();
     boolean isBlank();
@@ -475,7 +488,7 @@ public interface RichCharSequence<T extends RichCharSequence<?>> extends CharSeq
      * @param other based sequence to return if this is nullSequence()
      * @return this or other
      */
-    T ifNull(T other);
+    @NotNull T ifNull(@NotNull T other);
 
     /**
      * If this sequence is the nullSequence() instance then returns an empty subSequence from the end of other,
@@ -484,7 +497,7 @@ public interface RichCharSequence<T extends RichCharSequence<?>> extends CharSeq
      * @param other based sequence from which to take the empty sequence
      * @return this or other.subSequence(other.length(), other.length())
      */
-    T ifNullEmptyAfter(T other);
+    @NotNull T ifNullEmptyAfter(@NotNull T other);
 
     /**
      * If this sequence is the nullSequence() instance then returns an empty subSequence from the start of other,
@@ -493,21 +506,21 @@ public interface RichCharSequence<T extends RichCharSequence<?>> extends CharSeq
      * @param other based sequence from which to take the empty sequence
      * @return this or other.subSequence(0, 0)
      */
-    T ifNullEmptyBefore(T other);
+    @NotNull T ifNullEmptyBefore(@NotNull T other);
 
     /**
      * If this sequence is empty return nullSequence() otherwise returns this sequence.
      *
      * @return this or nullSequence()
      */
-    T nullIfEmpty();
+    @NotNull T nullIfEmpty();
 
     /**
      * If this sequence is blank return nullSequence() otherwise returns this sequence.
      *
      * @return this or nullSequence()
      */
-    T nullIfBlank();
+    @NotNull T nullIfBlank();
 
     /**
      * If condition is true return nullSequence() otherwise returns this sequence.
@@ -515,7 +528,7 @@ public interface RichCharSequence<T extends RichCharSequence<?>> extends CharSeq
      * @param condition when true return NULL else this
      * @return this or nullSequence()
      */
-    T nullIf(boolean condition);
+    @NotNull T nullIf(boolean condition);
 
     /**
      * If predicate returns true for this sequence and one of given sequences return nullSequence() otherwise returns this sequence.
@@ -524,8 +537,8 @@ public interface RichCharSequence<T extends RichCharSequence<?>> extends CharSeq
      * @param matches   match sequence list
      * @return this or nullSequence()
      */
-    T nullIf(BiPredicate<? super T, ? super CharSequence> predicate, CharSequence... matches);
-    T nullIfNot(BiPredicate<? super T, ? super CharSequence> predicate, CharSequence... matches);
+    @NotNull T nullIf(@NotNull BiPredicate<? super T, ? super CharSequence> predicate, CharSequence... matches);
+    @NotNull T nullIfNot(@NotNull BiPredicate<? super T, ? super CharSequence> predicate, CharSequence... matches);
 
     /**
      * If predicate returns true for one of given sequences return nullSequence() otherwise returns this sequence.
@@ -533,8 +546,8 @@ public interface RichCharSequence<T extends RichCharSequence<?>> extends CharSeq
      * @param matches match sequence list
      * @return this or nullSequence()
      */
-    T nullIf(Predicate<? super CharSequence> predicate, CharSequence... matches);
-    T nullIfNot(Predicate<? super CharSequence> predicate, CharSequence... matches);
+    @NotNull T nullIf(@NotNull Predicate<? super CharSequence> predicate, CharSequence... matches);
+    @NotNull T nullIfNot(@NotNull Predicate<? super CharSequence> predicate, CharSequence... matches);
 
     /**
      * If this sequence matches one of given sequences return nullSequence() otherwise returns this sequence.
@@ -542,30 +555,30 @@ public interface RichCharSequence<T extends RichCharSequence<?>> extends CharSeq
      * @param matches match sequence list
      * @return this or nullSequence()
      */
-    T nullIf(CharSequence... matches);
-    T nullIfNot(CharSequence... matches);
+    @NotNull T nullIf(CharSequence... matches);
+    @NotNull T nullIfNot(CharSequence... matches);
 
-    T nullIfStartsWith(CharSequence... matches);
-    T nullIfNotStartsWith(CharSequence... matches);
+    @NotNull T nullIfStartsWith(CharSequence... matches);
+    @NotNull T nullIfNotStartsWith(CharSequence... matches);
 
     @Deprecated
-    default T nullIfStartsWithNot(CharSequence... matches) {
+    default @NotNull T nullIfStartsWithNot(CharSequence... matches) {
         return nullIfNotStartsWith(matches);
     }
 
-    T nullIfEndsWith(CharSequence... matches);
-    T nullIfNotEndsWith(CharSequence... matches);
-    T nullIfStartsWithIgnoreCase(CharSequence... matches);
-    T nullIfNotStartsWithIgnoreCase(CharSequence... matches);
-    T nullIfEndsWithIgnoreCase(CharSequence... matches);
-    T nullIfNotEndsWithIgnoreCase(CharSequence... matches);
-    T nullIfStartsWith(boolean ignoreCase, CharSequence... matches);
-    T nullIfNotStartsWith(boolean ignoreCase, CharSequence... matches);
-    T nullIfEndsWith(boolean ignoreCase, CharSequence... matches);
-    T nullIfNotEndsWith(boolean ignoreCase, CharSequence... matches);
+    @NotNull T nullIfEndsWith(CharSequence... matches);
+    @NotNull T nullIfNotEndsWith(CharSequence... matches);
+    @NotNull T nullIfStartsWithIgnoreCase(CharSequence... matches);
+    @NotNull T nullIfNotStartsWithIgnoreCase(CharSequence... matches);
+    @NotNull T nullIfEndsWithIgnoreCase(CharSequence... matches);
+    @NotNull T nullIfNotEndsWithIgnoreCase(CharSequence... matches);
+    @NotNull T nullIfStartsWith(boolean ignoreCase, CharSequence... matches);
+    @NotNull T nullIfNotStartsWith(boolean ignoreCase, CharSequence... matches);
+    @NotNull T nullIfEndsWith(boolean ignoreCase, CharSequence... matches);
+    @NotNull T nullIfNotEndsWith(boolean ignoreCase, CharSequence... matches);
 
     @Deprecated
-    default T nullIfEndsWithNot(CharSequence... matches) {
+    default @NotNull T nullIfEndsWithNot(CharSequence... matches) {
         return nullIfNotEndsWith(matches);
     }
 
@@ -630,7 +643,7 @@ public interface RichCharSequence<T extends RichCharSequence<?>> extends CharSeq
      *               if 0 or less then 0 is returned.
      * @return range of eol given by index of its end or Range.NULL if no eol ends at index
      */
-    Range eolEndRange(int eolEnd);
+    @NotNull Range eolEndRange(int eolEnd);
 
     /**
      * Return Range of eol at given index
@@ -640,21 +653,21 @@ public interface RichCharSequence<T extends RichCharSequence<?>> extends CharSeq
      *                 if 0 or less then it is the same as 0
      * @return range of eol given by index of its end or Range.NULL if no eol starts at index
      */
-    Range eolStartRange(int eolStart);
+    @NotNull Range eolStartRange(int eolStart);
 
     /**
      * Trim eol at the end of this sequence
      *
      * @return sequence with one EOL trimmed off if it had one
      */
-    T trimEOL();
+    @NotNull T trimEOL();
 
     /**
      * Get Trimmed eol from the end of this sequence
      *
      * @return trimmed off EOL if sequence had one or {@link #nullSequence()}
      */
-    T trimmedEOL();
+    @NotNull T trimmedEOL();
 
     /**
      * Find start/end region in this sequence delimited by any characters in argument or the CharSequence
@@ -665,13 +678,13 @@ public interface RichCharSequence<T extends RichCharSequence<?>> extends CharSeq
      * @param index from which to start looking for end of region
      * @return index of end of region delimited by s
      */
-    int endOfDelimitedBy(CharSequence s, int index);
-    int endOfDelimitedByAny(CharSequence s, int index);
-    int endOfDelimitedByAnyNot(CharSequence s, int index);
+    int endOfDelimitedBy(@NotNull CharSequence s, int index);
+    int endOfDelimitedByAny(@NotNull CharSequence s, int index);
+    int endOfDelimitedByAnyNot(@NotNull CharSequence s, int index);
 
-    int startOfDelimitedBy(CharSequence s, int index);
-    int startOfDelimitedByAny(CharSequence s, int index);
-    int startOfDelimitedByAnyNot(CharSequence s, int index);
+    int startOfDelimitedBy(@NotNull CharSequence s, int index);
+    int startOfDelimitedByAny(@NotNull CharSequence s, int index);
+    int startOfDelimitedByAnyNot(@NotNull CharSequence s, int index);
 
     /**
      * Get the offset of the end of line at given index, end of line delimited by \n
@@ -711,14 +724,14 @@ public interface RichCharSequence<T extends RichCharSequence<?>> extends CharSeq
      * @param index index at which to get the line
      * @return range in sequence for the line delimited by '\n', containing index
      */
-    Range lineRangeAt(int index);
+    @NotNull Range lineRangeAt(int index);
     /**
      * Get the line characters at given index, line delimited by \n, \r or \r\n
      *
      * @param index index at which to get the line
      * @return range in sequence for the line delimited by end of line, containing index
      */
-    Range lineRangeAtAnyEOL(int index);
+    @NotNull Range lineRangeAtAnyEOL(int index);
 
     /**
      * Get the line characters at given index, line delimited by \n
@@ -726,7 +739,7 @@ public interface RichCharSequence<T extends RichCharSequence<?>> extends CharSeq
      * @param index index at which to get the line
      * @return sub-sequence for the line containing index
      */
-    T lineAt(int index);
+    @NotNull T lineAt(int index);
 
     /**
      * Get the line characters at given index, line delimited by \n, \r or \r\n
@@ -734,68 +747,102 @@ public interface RichCharSequence<T extends RichCharSequence<?>> extends CharSeq
      * @param index index at which to get the line
      * @return sub-sequence for the line containing index
      */
-    T lineAtAnyEOL(int index);
+    @NotNull T lineAtAnyEOL(int index);
 
     /**
      * Trim leading trailing blank lines in this sequence
      *
      * @return return sequence with trailing blank lines trimmed off
      */
-    T trimTailBlankLines();
-    T trimLeadBlankLines();
+    @NotNull T trimTailBlankLines();
+    @NotNull T trimLeadBlankLines();
 
     /**
-     * Get next Range of blank lines at given index offsets in sequence
+     * Get Range of leading blank lines at given index offsets in sequence
      *
-     *
-     * @param eolChars  characters to consider as EOL, note {@link #eolStartLength(int)} should report length of EOL found if it is > 1
-     * @param startIndex minimum index in sequence to check and include in range of blank lines
+     * @param eolChars   characters to consider as EOL, note {@link #eolStartLength(int)} should report length of EOL found if length > 1
+     * @param fromIndex minimum index in sequence to check and include in range of blank lines
      *                   can be any value, if less than 0 it is the same as 0,
      *                   if greater than length() it is the same as length()
-     * @param fromIndex  index in sequence from which to start blank line search, also maximum index to include in blank lines range
+     * @param endIndex  index in sequence from which to start blank line search, also maximum index to include in blank lines range
      *                   can be any value, if less than 0 it is the same as 0,
      *                   if greater than length() it is the same as length()
      * @return range of blank lines at or before fromIndex and ranging to minimum of startIndex, Range.NULL if none found
      *         if the range in sequence contains only whitespace characters then the whole range will be returned
      *         even if contains no EOL characters
      */
-    Range blankLinesRange(CharSequence eolChars, int startIndex, int fromIndex);
+    @NotNull Range leadingBlankLinesRange(@NotNull CharSequence eolChars, int fromIndex, int endIndex);
     /**
-     * Get previous Range of blank lines at given index offsets in sequence
+     * Get Range of trailing blank lines at given index offsets in sequence
      *
-     * @param eolChars  characters to consider as EOL, note {@link #eolStartLength(int)} should report length of EOL found if it is > 1
-     * @param fromIndex index in sequence from which to start blank line search, also maximum index to include in blank lines range
+     * @param eolChars  characters to consider as EOL, note {@link #eolStartLength(int)} should report length of EOL found if length > 1
+     * @param startIndex index in sequence from which to start blank line search, also maximum index to include in blank lines range
      *                  can be any value, if less than 0 it is the same as 0,
      *                  if greater than length() it is the same as length()
-     * @param endIndex  maximum index in sequence to check and include in range of blank lines
+     * @param fromIndex  maximum index in sequence to check and include in range of blank lines
      *                  can be any value, if less than 0 it is the same as 0,
      *                  if greater than length() it is the same as length()
      * @return range of blank lines at or before fromIndex and ranging to minimum of startIndex
      *         if the range in sequence contains only whitespace characters then the whole range will be returned
      *         even if contains no EOL characters
      */
-    Range lastBlankLinesRange(CharSequence eolChars, int fromIndex, int endIndex);
+    @NotNull Range trailingBlankLinesRange(CharSequence eolChars, int startIndex, int fromIndex);
 
-    Range blankLinesRange();
-    Range blankLinesRange(int startIndex);
-    Range blankLinesRange(int fromIndex, int endIndex);
-    Range lastBlankLinesRange();
-    Range lastBlankLinesRange(int fromIndex);
-    Range lastBlankLinesRange(int startIndex, int fromIndex);
+    @NotNull Range leadingBlankLinesRange();
+    @NotNull Range leadingBlankLinesRange(int startIndex);
+    @NotNull Range leadingBlankLinesRange(int fromIndex, int endIndex);
+    @NotNull Range trailingBlankLinesRange();
+    @NotNull Range trailingBlankLinesRange(int fromIndex);
+    @NotNull Range trailingBlankLinesRange(int startIndex, int fromIndex);
+
+    @NotNull List<Range> blankLinesRemovedRanges();
+    @NotNull List<Range> blankLinesRemovedRanges(int fromIndex);
+    @NotNull List<Range> blankLinesRemovedRanges(int fromIndex, int endIndex);
+    @NotNull List<Range> blankLinesRemovedRanges(@NotNull CharSequence eolChars, int fromIndex, int endIndex);
+
+    /**
+     * Trim end to end of line containing index
+     *
+     * @param eolChars  characters to consider as EOL, note {@link #eolStartLength(int)} should report length of EOL found if length > 1
+     * @param index   index for offset contained by the line
+     *                  can be any value, if less than 0 it is the same as 0,
+     *                  if greater than length() it is the same as length()
+     * @return trimmed version of the sequence to given EOL or the original sequence
+     */
+    @NotNull T trimEndToEndOfLine(@NotNull CharSequence eolChars, boolean includeEol, int index);
+    @NotNull T trimEndToEndOfLine(boolean includeEol, int index);
+    @NotNull T trimEndToEndOfLine(boolean includeEol);
+    @NotNull T trimEndToEndOfLine(int index);
+    @NotNull T trimEndToEndOfLine();
+
+    /**
+     * Trim start to start of line containing index
+     *
+     * @param eolChars  characters to consider as EOL, note {@link #eolStartLength(int)} should report length of EOL found if length > 1
+     * @param index   index for offset contained by the line
+     *                  can be any value, if less than 0 it is the same as 0,
+     *                  if greater than length() it is the same as length()
+     * @return trimmed version of the sequence to given EOL or the original sequence
+     */
+    @NotNull T trimToStartOfLine(@NotNull CharSequence eolChars, boolean includeEol, int index);
+    @NotNull T trimToStartOfLine(boolean includeEol, int index);
+    @NotNull T trimToStartOfLine(boolean includeEol);
+    @NotNull T trimToStartOfLine(int index);
+    @NotNull T trimToStartOfLine();
 
     /**
      * replace any \r\n and \r by \n
      *
      * @return string with only \n for line separators
      */
-    String normalizeEOL();
+    @NotNull String normalizeEOL();
 
     /**
      * replace any \r\n and \r by \n, append terminating EOL if one is not present
      *
      * @return string with only \n for line separators and terminated by \n
      */
-    String normalizeEndWithEOL();
+    @NotNull String normalizeEndWithEOL();
 
     /*
      * comparison helpers
@@ -807,9 +854,9 @@ public interface RichCharSequence<T extends RichCharSequence<?>> extends CharSeq
      * @param chars characters to match against
      * @return true if match
      */
-    boolean matches(CharSequence chars);
-    boolean matchesIgnoreCase(CharSequence chars);
-    boolean matches(CharSequence chars, boolean ignoreCase);
+    boolean matches(@NotNull CharSequence chars);
+    boolean matchesIgnoreCase(@NotNull CharSequence chars);
+    boolean matches(@NotNull CharSequence chars, boolean ignoreCase);
 
     /**
      * Test the sequence for a match to another CharSequence, ignoring case differences
@@ -817,7 +864,7 @@ public interface RichCharSequence<T extends RichCharSequence<?>> extends CharSeq
      * @param other characters to match against
      * @return true if match
      */
-    boolean equalsIgnoreCase(Object other);
+    boolean equalsIgnoreCase(@Nullable Object other);
 
     /**
      * Test the sequence for a match to another CharSequence
@@ -826,7 +873,7 @@ public interface RichCharSequence<T extends RichCharSequence<?>> extends CharSeq
      * @param ignoreCase case ignored when true
      * @return true if match
      */
-    boolean equals(Object other, boolean ignoreCase);
+    boolean equals(@Nullable Object other, boolean ignoreCase);
 
     /**
      * Test the sequence portion for a match to another CharSequence
@@ -834,9 +881,9 @@ public interface RichCharSequence<T extends RichCharSequence<?>> extends CharSeq
      * @param chars characters to match against
      * @return true if characters at the start of this sequence match
      */
-    boolean matchChars(CharSequence chars);
-    boolean matchCharsIgnoreCase(CharSequence chars);
-    boolean matchChars(CharSequence chars, boolean ignoreCase);
+    boolean matchChars(@NotNull CharSequence chars);
+    boolean matchCharsIgnoreCase(@NotNull CharSequence chars);
+    boolean matchChars(@NotNull CharSequence chars, boolean ignoreCase);
 
     /**
      * Test the sequence portion for a match to another CharSequence
@@ -845,9 +892,9 @@ public interface RichCharSequence<T extends RichCharSequence<?>> extends CharSeq
      * @param startIndex index from which to start the match
      * @return true if characters at the start index of this sequence match
      */
-    boolean matchChars(CharSequence chars, int startIndex);
-    boolean matchCharsIgnoreCase(CharSequence chars, int startIndex);
-    boolean matchChars(CharSequence chars, int startIndex, boolean ignoreCase);
+    boolean matchChars(@NotNull CharSequence chars, int startIndex);
+    boolean matchCharsIgnoreCase(@NotNull CharSequence chars, int startIndex);
+    boolean matchChars(@NotNull CharSequence chars, int startIndex, boolean ignoreCase);
 
     /**
      * Test the sequence portion for a match to another CharSequence, reverse order
@@ -856,9 +903,9 @@ public interface RichCharSequence<T extends RichCharSequence<?>> extends CharSeq
      * @param endIndex index from which to start the match and proceed to 0
      * @return true if characters at the start index of this sequence match
      */
-    boolean matchCharsReversed(CharSequence chars, int endIndex);
-    boolean matchCharsReversedIgnoreCase(CharSequence chars, int endIndex);
-    boolean matchCharsReversed(CharSequence chars, int endIndex, boolean ignoreCase);
+    boolean matchCharsReversed(@NotNull CharSequence chars, int endIndex);
+    boolean matchCharsReversedIgnoreCase(@NotNull CharSequence chars, int endIndex);
+    boolean matchCharsReversed(@NotNull CharSequence chars, int endIndex, boolean ignoreCase);
 
     /**
      * test if this sequence ends with given characters
@@ -866,7 +913,7 @@ public interface RichCharSequence<T extends RichCharSequence<?>> extends CharSeq
      * @param suffix characters to test
      * @return true if ends with suffix
      */
-    boolean endsWith(CharSequence suffix);
+    boolean endsWith(@NotNull CharSequence suffix);
 
     /**
      * test if this sequence ends with given characters, ignoring case differences
@@ -874,7 +921,7 @@ public interface RichCharSequence<T extends RichCharSequence<?>> extends CharSeq
      * @param suffix characters to test
      * @return true if ends with suffix
      */
-    boolean endsWithIgnoreCase(CharSequence suffix);
+    boolean endsWithIgnoreCase(@NotNull CharSequence suffix);
 
     /**
      * test if this sequence ends with given characters
@@ -883,7 +930,7 @@ public interface RichCharSequence<T extends RichCharSequence<?>> extends CharSeq
      * @param ignoreCase case ignored when true
      * @return true if ends with suffix
      */
-    boolean endsWith(CharSequence suffix, boolean ignoreCase);
+    boolean endsWith(@NotNull CharSequence suffix, boolean ignoreCase);
 
     /**
      * test if this sequence starts with given characters
@@ -891,7 +938,7 @@ public interface RichCharSequence<T extends RichCharSequence<?>> extends CharSeq
      * @param prefix characters to test
      * @return true if starts with prefix
      */
-    boolean startsWith(CharSequence prefix);
+    boolean startsWith(@NotNull CharSequence prefix);
 
     /**
      * test if this sequence starts with given characters, ignoring case differences
@@ -899,7 +946,7 @@ public interface RichCharSequence<T extends RichCharSequence<?>> extends CharSeq
      * @param prefix characters to test
      * @return true if starts with prefix
      */
-    boolean startsWithIgnoreCase(CharSequence prefix);
+    boolean startsWithIgnoreCase(@NotNull CharSequence prefix);
 
     /**
      * test if this sequence starts with given characters
@@ -908,7 +955,7 @@ public interface RichCharSequence<T extends RichCharSequence<?>> extends CharSeq
      * @param ignoreCase case ignored when true
      * @return true if starts with prefix
      */
-    boolean startsWith(CharSequence prefix, boolean ignoreCase);
+    boolean startsWith(@NotNull CharSequence prefix, boolean ignoreCase);
 
     /**
      * Remove suffix if present
@@ -916,7 +963,7 @@ public interface RichCharSequence<T extends RichCharSequence<?>> extends CharSeq
      * @param suffix characters to remove
      * @return sequence with suffix removed, or same sequence if no suffix was present
      */
-    T removeSuffix(CharSequence suffix);
+    @NotNull T removeSuffix(@NotNull CharSequence suffix);
 
     /**
      * Remove suffix if present, ignoring case differences
@@ -924,7 +971,7 @@ public interface RichCharSequence<T extends RichCharSequence<?>> extends CharSeq
      * @param suffix characters to remove
      * @return sequence with suffix removed, or same sequence if no suffix was present
      */
-    T removeSuffixIgnoreCase(CharSequence suffix);
+    @NotNull T removeSuffixIgnoreCase(@NotNull CharSequence suffix);
 
     /**
      * Remove suffix if present
@@ -933,7 +980,7 @@ public interface RichCharSequence<T extends RichCharSequence<?>> extends CharSeq
      * @param ignoreCase case ignored when true
      * @return sequence with suffix removed, or same sequence if no suffix was present
      */
-    T removeSuffix(CharSequence suffix, boolean ignoreCase);
+    @NotNull T removeSuffix(@NotNull CharSequence suffix, boolean ignoreCase);
 
     /**
      * Remove prefix if present
@@ -941,7 +988,7 @@ public interface RichCharSequence<T extends RichCharSequence<?>> extends CharSeq
      * @param prefix characters to remove
      * @return sequence with prefix removed, or same sequence if no prefix was present
      */
-    T removePrefix(CharSequence prefix);
+    @NotNull T removePrefix(@NotNull CharSequence prefix);
 
     /**
      * Remove prefix if present, ignoring case differences
@@ -949,7 +996,7 @@ public interface RichCharSequence<T extends RichCharSequence<?>> extends CharSeq
      * @param prefix characters to remove
      * @return sequence with prefix removed, or same sequence if no prefix was present
      */
-    T removePrefixIgnoreCase(CharSequence prefix);
+    @NotNull T removePrefixIgnoreCase(@NotNull CharSequence prefix);
 
     /**
      * Remove prefix if present
@@ -958,7 +1005,7 @@ public interface RichCharSequence<T extends RichCharSequence<?>> extends CharSeq
      * @param ignoreCase case ignored when true
      * @return sequence with prefix removed, or same sequence if no prefix was present
      */
-    T removePrefix(CharSequence prefix, boolean ignoreCase);
+    @NotNull T removePrefix(@NotNull CharSequence prefix, boolean ignoreCase);
 
     /**
      * Remove suffix if present but only if this sequence is longer than the suffix
@@ -966,7 +1013,7 @@ public interface RichCharSequence<T extends RichCharSequence<?>> extends CharSeq
      * @param suffix characters to remove
      * @return sequence with suffix removed, or same sequence if no suffix was present
      */
-    T removeProperSuffix(CharSequence suffix);
+    @NotNull T removeProperSuffix(@NotNull CharSequence suffix);
 
     /**
      * Remove suffix if present but only if this sequence is longer than the suffix, ignoring case differences
@@ -974,7 +1021,7 @@ public interface RichCharSequence<T extends RichCharSequence<?>> extends CharSeq
      * @param suffix characters to remove
      * @return sequence with suffix removed, or same sequence if no suffix was present
      */
-    T removeProperSuffixIgnoreCase(CharSequence suffix);
+    @NotNull T removeProperSuffixIgnoreCase(@NotNull CharSequence suffix);
 
     /**
      * Remove suffix if present but only if this sequence is longer than the suffix
@@ -983,7 +1030,7 @@ public interface RichCharSequence<T extends RichCharSequence<?>> extends CharSeq
      * @param ignoreCase case ignored when true
      * @return sequence with suffix removed, or same sequence if no suffix was present
      */
-    T removeProperSuffix(CharSequence suffix, boolean ignoreCase);
+    @NotNull T removeProperSuffix(@NotNull CharSequence suffix, boolean ignoreCase);
 
     /**
      * Remove prefix if present but only if this sequence is longer than the suffix
@@ -991,7 +1038,7 @@ public interface RichCharSequence<T extends RichCharSequence<?>> extends CharSeq
      * @param prefix characters to remove
      * @return sequence with prefix removed, or same sequence if no prefix was present
      */
-    T removeProperPrefix(CharSequence prefix);
+    @NotNull T removeProperPrefix(@NotNull CharSequence prefix);
 
     /**
      * Remove prefix if present but only if this sequence is longer than the suffix, ignoring case differences
@@ -999,7 +1046,7 @@ public interface RichCharSequence<T extends RichCharSequence<?>> extends CharSeq
      * @param prefix characters to remove
      * @return sequence with prefix removed, or same sequence if no prefix was present
      */
-    T removeProperPrefixIgnoreCase(CharSequence prefix);
+    @NotNull T removeProperPrefixIgnoreCase(@NotNull CharSequence prefix);
 
     /**
      * Remove prefix if present but only if this sequence is longer than the suffix
@@ -1008,20 +1055,20 @@ public interface RichCharSequence<T extends RichCharSequence<?>> extends CharSeq
      * @param ignoreCase case ignored when true
      * @return sequence with prefix removed, or same sequence if no prefix was present
      */
-    T removeProperPrefix(CharSequence prefix, boolean ignoreCase);
+    @NotNull T removeProperPrefix(@NotNull CharSequence prefix, boolean ignoreCase);
 
     /**
      * Map characters of this sequence to: Uppercase, Lowercase or use custom mapping
      *
      * @return lowercase version of sequence
      */
-    T toLowerCase();
-    T toUpperCase();
-    T toLowerCase(Locale locale);
-    T toUpperCase(Locale locale);
-    T toMapped(CharMapper mapper);
+    @NotNull T toLowerCase();
+    @NotNull T toUpperCase();
+    @NotNull T toLowerCase(Locale locale);
+    @NotNull T toUpperCase(Locale locale);
+    @NotNull T toMapped(CharMapper mapper);
 
-    String toVisibleWhitespaceString();
+    @NotNull String toVisibleWhitespaceString();
 
     int SPLIT_INCLUDE_DELIMS = 1;
     int SPLIT_TRIM_PARTS = 2;
@@ -1043,14 +1090,14 @@ public interface RichCharSequence<T extends RichCharSequence<?>> extends CharSeq
      * @param trimChars set of characters that should be used for trimming individual split results
      * @return List of split results
      */
-    T[] split(char delimiter, int limit, int flags, String trimChars);
-    T[] split(char delimiter);
-    T[] split(char delimiter, int limit);
-    T[] split(char delimiter, int limit, int flags);
-    T[] split(CharSequence delimiter);
-    T[] split(CharSequence delimiter, int limit);
-    T[] split(CharSequence delimiter, int limit, int flags);
-    T[] split(CharSequence delimiter, int limit, int flags, String trimChars);
+    @NotNull T[] split(char delimiter, int limit, int flags, String trimChars);
+    @NotNull T[] split(char delimiter);
+    @NotNull T[] split(char delimiter, int limit);
+    @NotNull T[] split(char delimiter, int limit, int flags);
+    @NotNull T[] split(@NotNull CharSequence delimiter);
+    @NotNull T[] split(@NotNull CharSequence delimiter, int limit);
+    @NotNull T[] split(@NotNull CharSequence delimiter, int limit, int flags);
+    @NotNull T[] split(@NotNull CharSequence delimiter, int limit, int flags, @Nullable String trimChars);
 
     /**
      * Get indices of all occurrences of a sequence
@@ -1058,7 +1105,47 @@ public interface RichCharSequence<T extends RichCharSequence<?>> extends CharSeq
      * @param s sequence whose indices to find
      * @return array of indices
      */
-    int[] indexOfAll(CharSequence s);
+    @NotNull int[] indexOfAll(@NotNull CharSequence s);
+
+    /**
+     * Prefix this sequence with a char sequence
+     *
+     * @param prefix char sequence
+     * @return resulting sequence
+     */
+    @NotNull T prefixWith(@Nullable CharSequence prefix);
+    /**
+     * Prefix this sequence with a char sequence
+     *
+     * @param suffix char sequence
+     * @return resulting sequence
+     */
+    @NotNull T suffixWith(@Nullable CharSequence suffix);
+
+    /**
+     * Prefix this sequence with a char sequence if not already starting with prefix
+     *
+     * @param prefix char sequence
+     * @return resulting sequence
+     */
+    @NotNull T prefixOnceWith(@Nullable CharSequence prefix);
+    /**
+     * Suffix this sequence with a char sequence if not already ending with suffix
+     *
+     * @param suffix char sequence
+     * @return resulting sequence
+     */
+    @NotNull T suffixOnceWith(@Nullable CharSequence suffix);
+
+    /**
+     * Replace part of the sequence with a char sequence
+     *
+     * @param startIndex  start index of replaced part
+     * @param endIndex    end index of replaced part
+     * @param replacement char sequence
+     * @return resulting sequence
+     */
+    @NotNull T replace(int startIndex, int endIndex, @NotNull CharSequence replacement);
 
     /**
      * Replace all occurrences of one sequence with another
@@ -1067,12 +1154,42 @@ public interface RichCharSequence<T extends RichCharSequence<?>> extends CharSeq
      * @param replace replacement sequence
      * @return array of indices
      */
-    T replace(CharSequence find, CharSequence replace);
+    @NotNull T replace(@NotNull CharSequence find, @NotNull CharSequence replace);
 
-    T appendTo(StringBuilder out);
-    T appendTo(StringBuilder out, int start);
-    T appendTo(StringBuilder out, int start, int end);
-    T append(CharSequence... others);
+    /**
+     * Append helpers
+     *
+     * @param out        string builder
+     * @param startIndex start index
+     * @param endIndex   end index
+     * @return this
+     */
+    @NotNull T appendTo(@NotNull StringBuilder out, int startIndex, int endIndex);
+
+    @NotNull T appendTo(@NotNull StringBuilder out);
+    @NotNull T appendTo(@NotNull StringBuilder out, int start);
+
+    /**
+     * Append given ranges of this sequence to string builder
+     *
+     * @param out    string builder to append to
+     * @param ranges ranges to append, null range or one for which range.isNull() is true ranges are skipped
+     * @return this
+     */
+    @NotNull T appendTo(@NotNull StringBuilder out, Range... ranges);
+    @NotNull T appendRangesTo(@NotNull StringBuilder out, Iterable<? extends Range> ranges);
+
+    @NotNull T extractRanges(Range... ranges);
+    @NotNull T extractRanges(Iterable<? extends Range> ranges);
+
+    /**
+     * Concatenate this sequence and list of others, returning sequence of result
+     *
+     * @param others list of char sequences to append to this sequence, null sequences are skipped
+     * @return appended sequence
+     */
+    @NotNull T append(CharSequence... others);
+    @NotNull T append(Iterable<? extends CharSequence> others);
 
     /**
      * Get the line and column information from index into sequence
@@ -1081,7 +1198,7 @@ public interface RichCharSequence<T extends RichCharSequence<?>> extends CharSeq
      * @return Pair(line, column) where line and column are 0 based,
      *         throws IllegalArgumentException if index &lt; 0 or &gt; length.
      */
-    Pair<Integer, Integer> getLineColumnAtIndex(int index);
+    @NotNull Pair<Integer, Integer> getLineColumnAtIndex(int index);
 
     int getColumnAtIndex(int index);
 }

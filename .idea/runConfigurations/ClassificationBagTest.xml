@@ -3,7 +3,7 @@
     <module name="flexmark" />
     <extension name="coverage">
       <pattern>
-        <option name="PATTERN" value="com.vladsch.flexmark.tree.iteration.*" />
+        <option name="PATTERN" value="com.vladsch.flexmark.util.collection.iteration.*" />
         <option name="ENABLED" value="true" />
       </pattern>
     </extension>

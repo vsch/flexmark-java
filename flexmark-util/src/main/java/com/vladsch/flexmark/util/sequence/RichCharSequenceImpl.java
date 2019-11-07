@@ -1,5 +1,8 @@
 package com.vladsch.flexmark.util.sequence;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 /**
  * A CharSequence that references original char sequence and maps '\0' to '\uFFFD'
  * a subSequence() returns a sub-sequence from the original base sequence
@@ -14,21 +17,25 @@ final public class RichCharSequenceImpl extends RichCharSequenceBase<RichCharSeq
         this.charSequence = charSequence;
     }
 
+    @NotNull
     @Override
     public RichCharSequenceImpl[] emptyArray() {
         return EMPTY_ARRAY;
     }
 
+    @NotNull
     @Override
     public RichCharSequenceImpl nullSequence() {
         return NULL;
     }
 
+    @NotNull
     @Override
-    public RichCharSequenceImpl sequenceOf(CharSequence charSequence, int startIndex, int endIndex) {
+    public RichCharSequenceImpl sequenceOf(@Nullable CharSequence charSequence, int startIndex, int endIndex) {
         return of(charSequence, startIndex, endIndex);
     }
 
+    @NotNull
     @Override
     public RichCharSequenceImpl subSequence(int start, int end) {
         if (start == 0 && end == charSequence.length()) return this;

@@ -1,5 +1,6 @@
 package com.vladsch.flexmark.tree.iteration;
 
+import com.vladsch.flexmark.util.collection.iteration.ArrayIterable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

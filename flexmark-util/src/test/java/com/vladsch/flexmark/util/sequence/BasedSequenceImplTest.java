@@ -687,21 +687,84 @@ public class BasedSequenceImplTest {
 
     @Test
     public void test_blankLinesRange() {
-        assertEquals(Range.of(0, 1), BasedSequenceImpl.of("\n\t    test\n").blankLinesRange());
-        assertEquals(Range.of(0, 4), BasedSequenceImpl.of("\n  \n\t    test\n").blankLinesRange());
-        assertEquals(Range.of(0, 5), BasedSequenceImpl.of("\n\t  \n\t    test\n\n").blankLinesRange());
-        assertEquals(Range.of(0, 5), BasedSequenceImpl.of("\n \t \n\t    test\n     \n").blankLinesRange());
-        assertEquals(Range.of(0, 2), BasedSequenceImpl.of("\n\n\t    test\n     \n\n\t\n").blankLinesRange());
-        assertEquals(Range.of(0, 6), BasedSequenceImpl.of("\n   \t\n\t    test\n     \n\n\t\n\t     ").blankLinesRange());
+        assertEquals(Range.of(0, 1), BasedSequenceImpl.of("\n\t    test\n").leadingBlankLinesRange());
+        assertEquals(Range.of(0, 4), BasedSequenceImpl.of("\n  \n\t    test\n").leadingBlankLinesRange());
+        assertEquals(Range.of(0, 5), BasedSequenceImpl.of("\n\t  \n\t    test\n\n").leadingBlankLinesRange());
+        assertEquals(Range.of(0, 5), BasedSequenceImpl.of("\n \t \n\t    test\n     \n").leadingBlankLinesRange());
+        assertEquals(Range.of(0, 2), BasedSequenceImpl.of("\n\n\t    test\n     \n\n\t\n").leadingBlankLinesRange());
+        assertEquals(Range.of(0, 6), BasedSequenceImpl.of("\n   \t\n\t    test\n     \n\n\t\n\t     ").leadingBlankLinesRange());
     }
 
     @Test
     public void test_lastBlankLinesRange() {
-        assertSame(Range.NULL, BasedSequenceImpl.of("\n\t    test\n").lastBlankLinesRange());
-        assertSame(Range.NULL, BasedSequenceImpl.of("\n\n\t    test\n").lastBlankLinesRange());
-        assertEquals(Range.of(12, 13), BasedSequenceImpl.of("\n\n\t    test\n\n").lastBlankLinesRange());
-        assertEquals(Range.of(12, 18), BasedSequenceImpl.of("\n\n\t    test\n     \n").lastBlankLinesRange());
-        assertEquals(Range.of(12, 21), BasedSequenceImpl.of("\n\n\t    test\n     \n\n\t\n").lastBlankLinesRange());
-        assertEquals(Range.of(12, 27), BasedSequenceImpl.of("\n\n\t    test\n     \n\n\t\n\t     ").lastBlankLinesRange());
+        assertSame(Range.NULL, BasedSequenceImpl.of("\n\t    test\n").trailingBlankLinesRange());
+        assertSame(Range.NULL, BasedSequenceImpl.of("\n\n\t    test\n").trailingBlankLinesRange());
+        assertEquals(Range.of(12, 13), BasedSequenceImpl.of("\n\n\t    test\n\n").trailingBlankLinesRange());
+        assertEquals(Range.of(12, 18), BasedSequenceImpl.of("\n\n\t    test\n     \n").trailingBlankLinesRange());
+        assertEquals(Range.of(12, 21), BasedSequenceImpl.of("\n\n\t    test\n     \n\n\t\n").trailingBlankLinesRange());
+        assertEquals(Range.of(12, 27), BasedSequenceImpl.of("\n\n\t    test\n     \n\n\t\n\t     ").trailingBlankLinesRange());
+    }
+
+    @Test
+    public void test_removeBlankLinesRanges1() {
+        String input = "\n" +
+                "\t    test\n" +
+                "\n" +
+                "\n" +
+                "";
+
+        String result = "" +
+                "\t    test\n" +
+                "";
+
+        BasedSequence sequence = BasedSequenceImpl.of(input);
+        assertEquals(result, sequence.extractRanges(sequence.blankLinesRemovedRanges()).toString());
+    }
+
+    @Test
+    public void test_removeBlankLinesRanges2() {
+        String input = "\n" +
+                "\t    test\n" +
+                "\n" +
+                "    t\n" +
+                "\n" +
+                "";
+
+        String result = "" +
+                "\t    test\n" +
+                "    t\n" +
+                "";
+
+        BasedSequence sequence = BasedSequenceImpl.of(input);
+        assertEquals(result, sequence.extractRanges(sequence.blankLinesRemovedRanges()).toString());
+    }
+
+    @Test
+    public void test_removeBlankLinesRanges3() {
+        String input = "\n" +
+                "\t    test\n" +
+                "\n" +
+                "    t1\n" +
+                "\n" +
+                "    t2\n" +
+                "\n" +
+                "\n" +
+                "\n" +
+                "    t3\n" +
+                "\n" +
+                "    t4\n" +
+                "\n" +
+                "";
+
+        String result = "" +
+                "\t    test\n" +
+                "    t1\n" +
+                "    t2\n" +
+                "    t3\n" +
+                "    t4\n" +
+                "";
+
+        BasedSequence sequence = BasedSequenceImpl.of(input);
+        assertEquals(result, sequence.extractRanges(sequence.blankLinesRemovedRanges()).toString());
     }
 }

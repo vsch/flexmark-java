@@ -1,5 +1,8 @@
 package com.vladsch.flexmark.util.sequence;
 
+import com.vladsch.flexmark.util.collection.iteration.ArrayIterable;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -109,17 +112,22 @@ public final class SegmentedSequence extends BasedSequenceImpl {
      * all the segments were concatenated, while still maintaining
      * the original offset for each character when using {@link #getIndexOffset(int)}(int index)
      */
-    public static BasedSequence of(List<BasedSequence> segments) {
-        if (segments.size() != 0) {
-            BasedSequence lastSegment = null;
-            BasedSequence firstSegment = segments.get(0);
+    public static BasedSequence of(@NotNull Iterable<? extends BasedSequence> segments) {
+        BasedSequence lastSegment = null;
+        BasedSequence firstSegment = null;
+        for (BasedSequence sequence : segments) {
+            firstSegment = sequence;
+            break;
+        }
+
+        if (firstSegment != null) {
             BasedSequence base = firstSegment.getBaseSequence();
             ArrayList<BasedSequence> mergedSequences = new ArrayList<>();
             int startOffset = -1;
             int endOffset = -1;
 
             for (BasedSequence segment : segments) {
-                if (segment.isNull()) continue;
+                if (segment == null || segment.isNull()) continue;
 
                 if (base.getBase() != segment.getBase()) {
                     assert false : "all segments must come from the same base sequence";
@@ -318,6 +326,7 @@ public final class SegmentedSequence extends BasedSequenceImpl {
         return baseSeq.baseSubSequence(start, end);
     }
 
+    @NotNull
     @Override
     public BasedSequence subSequence(int start, int end) {
         if (start < 0 || start > length) {
@@ -341,6 +350,6 @@ public final class SegmentedSequence extends BasedSequenceImpl {
     }
 
     public static BasedSequence of(BasedSequence... segments) {
-        return of(Arrays.asList(segments));
+        return of(new ArrayIterable<>(segments));
     }
 }

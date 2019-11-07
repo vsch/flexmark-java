@@ -172,30 +172,24 @@ Next
 0.59.42
 -------
 
-* [ ] Add: `Range RichCharSequence.indexOfEol()` - find next EOL, default: `\n`, `\r` or `\r\n`,
-      but can provide vararg of char sequences to treat as valid EOLs
-* [ ] Add: `Range RichCharSequence.lastIndexOfEol()` - find previous EOL, default: `\n`, `\r` or
-      `\r\n`, but can provide vararg of char sequences to treat as valid EOLs
-* [ ] Add: `RichCharSequence.trimEndToEol(boolean includeEOL = false, CharSequence... eolList)`
-      \- trim end to next EOL
-* [ ] Add: `RichCharSequence.trimmedEndToEol(boolean includeEOL = false, CharSequence...
-      eolList)` - trimmed end after next EOL
-* [ ] Add: `RichCharSequence.trimStartToEol(boolean includeEOL = false, CharSequence...
-      eolList)` - trim start to previous EOL
-* [ ] Add: `RichCharSequence.extendEndToEol(boolean includeEOL = false, CharSequence...
-      eolList)` - extend end to next EOL
-* [ ] Add: `RichCharSequence.extendStartToEol(boolean includeEOL = false, CharSequence...
-      eolList)` - extend start to previous EOL
-* [ ] Add: `RichCharSequence.indexOfBlankLine(CharSequence whiteSpaceList=" \t", CharSequence...
-      eolList)` - find next blank line
-* [ ] Add: `RichCharSequence.lastIndexOfBlankLine(CharSequence whiteSpaceList=" \t",
-      CharSequence... eolList)` - find previous blank line
-* [ ] Add: `Range RichCharSequence.indexOfSpan(CharSequence charSet)` - find next contiguous
-      range of given characters. ie. `indexOfSpan("\n \t")` will find the next range of blanks.
-      `indexOfSpan("` `` ` `` ` ")` will find the next range of back ticks.
-* [ ] Add: `Range RichCharSequence.lastIndexOfSpan(CharSequence charSet)` - find previous
-      contiguous range of given characters. ie. `indexOfSpan("\n \t")` will find the next range
-      of blanks. `indexOfSpan("` `` ` `` ` ")` will find the next range of back ticks.
+* Fix: `RichCharSequence` which is extended by `BasedCharSequence`
+    <!-- @formatter:off -->
+    * [ ] Add: `RichCharSequence.trimEndToEndOfLine(CharSequence eolChars, boolean includeEol, int index)` - trim end to end of line at index
+    * [ ] Add: `RichCharSequence.trimToStartOfLine(CharSequence, boolean, int)` - trimmed end after next EOL
+    * [ ] Add: `RichCharSequence.trimStartToEol(boolean includeEOL = false, CharSequence... eolList)` - trim start to previous EOL
+    * [ ] Add: `RichCharSequence.extendEndToEol(boolean includeEOL = false, CharSequence... eolList)` - extend end to next EOL
+    * [ ] Add: `RichCharSequence.extendStartToEol(boolean includeEOL = false, CharSequence... eolList)` - extend start to previous EOL
+    * Add: `RichCharSequence.leadingBlankLinesRange(CharSequence eolChars, int fromIndex, int endIndex)` - find next range of blank lines
+    * Add: `RichCharSequence.trailingBlankLinesRange(CharSequence eolChars, int startIndex, int fromIndex)` - find previous range of blank lines
+    * Add: `RichCharSequence.blankLinesRemovedRanges(CharSequence eolChars, int fromIndex, int endIndex)` - list of ranges in sequence between `fromIndex` and `endIndex`  excluding all blank lines
+    <!-- @formatter:on -->
+
+    * [ ] Add: `Range RichCharSequence.indexOfSpan(CharSequence charSet)` - find next contiguous
+          range of given characters. ie. `indexOfSpan("\n \t")` will find the next range of blanks.
+          `indexOfSpan("` `` ` `` ` ")` will find the next range of back ticks.
+    * [ ] Add: `Range RichCharSequence.lastIndexOfSpan(CharSequence charSet)` - find previous
+          contiguous range of given characters. ie. `indexOfSpan("\n \t")` will find the next range
+          of blanks. `indexOfSpan("` `` ` `` ` ")` will find the next range of back ticks.
 * [ ] Fix: Add `TextContainer` node type to allow extracting text nodes without having to know
       all of the node types. The text container should implement ability to append to
       `StringBuilder` its text equivalent. A visitor needs to be provided so child nodes could
