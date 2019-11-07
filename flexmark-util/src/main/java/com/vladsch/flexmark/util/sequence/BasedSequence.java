@@ -10,11 +10,11 @@ import java.util.List;
  * a subSequence() returns a sub-sequence from the original base sequence
  */
 @SuppressWarnings("SameParameterValue")
-public interface BasedSequence extends RichCharSequence<BasedSequence> {
+public interface BasedSequence extends RichSequence<BasedSequence> {
     BasedSequence NULL = new EmptyBasedSequence();
     BasedSequence EMPTY = new EmptyBasedSequence();
-    BasedSequence EOL = CharSubSequence.of(RichCharSequence.EOL);
-    BasedSequence SPACE = CharSubSequence.of(RichCharSequence.SPACE);
+    BasedSequence EOL = CharSubSequence.of(RichSequence.EOL);
+    BasedSequence SPACE = CharSubSequence.of(RichSequence.SPACE);
     List<BasedSequence> EMPTY_LIST = new ArrayList<>();
     BasedSequence[] EMPTY_ARRAY = new BasedSequence[0];
     BasedSequence[] EMPTY_SEGMENTS = new BasedSequence[0];
@@ -235,13 +235,9 @@ public interface BasedSequence extends RichCharSequence<BasedSequence> {
      */
     BasedSequence extendByAny(CharSequence charSet, int maxCount);
 
-    default BasedSequence extendByAny(CharSequence charSet) {
-        return extendByAny(charSet, Integer.MAX_VALUE - getEndOffset());
-    }
+    BasedSequence extendByAny(CharSequence charSet);
 
-    default BasedSequence extendByOneOfAny(CharSequence charSet) {
-        return extendByAny(charSet, 1);
-    }
+    BasedSequence extendByOneOfAny(CharSequence charSet);
 
     /**
      * Extend this based sequence to include up to the next character from underlying based sequence
@@ -251,10 +247,33 @@ public interface BasedSequence extends RichCharSequence<BasedSequence> {
      * @return sequence which
      */
     BasedSequence extendToAny(CharSequence charSet, int maxCount);
+    BasedSequence extendToAny(CharSequence charSet);
 
-    default BasedSequence extendToAny(CharSequence charSet) {
-        return extendToAny(charSet, Integer.MAX_VALUE - getEndOffset());
-    }
+    /**
+     * Extend in contained based sequence
+     * @param eolChars  characters to consider as EOL, note {@link #eolStartLength(int)} {@link #eolEndLength(int)} should report length of EOL found if length > 1
+     * @param includeEol   if to include the eol in the string
+     *
+     * @return resulting sequence after extension. If already spanning the line then this sequence is returned.
+     *              if the last character of this sequence are found in eolChars then no extension will be performed since it already includes the line end
+     */
+    BasedSequence extendToEndOfLine(CharSequence eolChars, boolean includeEol);
+    BasedSequence extendToEndOfLine(CharSequence eolChars);
+    BasedSequence extendToEndOfLine(boolean includeEol);
+    BasedSequence extendToEndOfLine();
+
+    /**
+     * Extend in contained based sequence
+     * @param eolChars  characters to consider as EOL, note {@link #eolStartLength(int)} {@link #eolEndLength(int)} should report length of EOL found if length > 1
+     * @param includeEol   if to include the eol in the string
+     *
+     * @return resulting sequence after extension. If already spanning the line then this sequence is returned.
+     *              if the first character of this sequence are found in eolChars then no extension will be performed since it already includes the line end
+     */
+    BasedSequence extendToStartOfLine(CharSequence eolChars, boolean includeEol);
+    BasedSequence extendToStartOfLine(CharSequence eolChars);
+    BasedSequence extendToStartOfLine(boolean includeEol);
+    BasedSequence extendToStartOfLine();
 
     /**
      * Extend this based sequence to include characters from underlying based sequence

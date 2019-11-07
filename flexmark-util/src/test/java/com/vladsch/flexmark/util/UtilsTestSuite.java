@@ -10,7 +10,7 @@ import com.vladsch.flexmark.util.options.AttributesTest;
 import com.vladsch.flexmark.util.options.MutableAttributeTest;
 import com.vladsch.flexmark.util.sequence.BasedSequenceImplTest;
 import com.vladsch.flexmark.util.sequence.PrefixedSubSequenceTest;
-import com.vladsch.flexmark.util.sequence.RepeatedCharSequenceTest;
+import com.vladsch.flexmark.util.sequence.RepeatedSequenceTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
@@ -35,7 +35,7 @@ import org.junit.runners.Suite;
         OrderedMultiMapTest.class,
         OrderedSetTest.class,
         PrefixedSubSequenceTest.class,
-        RepeatedCharSequenceTest.class,
+        RepeatedSequenceTest.class,
         TemplateUtilTest.class,
         UtilsTest.class,
         ArrayUtilsTest.class,

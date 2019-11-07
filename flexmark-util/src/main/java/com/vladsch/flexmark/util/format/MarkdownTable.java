@@ -13,7 +13,7 @@ import com.vladsch.flexmark.util.html.LineFormattingAppendable;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.BasedSequenceImpl;
 import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
-import com.vladsch.flexmark.util.sequence.RepeatedCharSequence;
+import com.vladsch.flexmark.util.sequence.RepeatedSequence;
 
 import java.util.*;
 import java.util.function.BiFunction;
@@ -1180,7 +1180,7 @@ public class MarkdownTable {
             if (cell.trackedTextOffset > cell.text.length()) {
                 // add padding spaces
                 suffixed = cell.trackedTextOffset - cell.text.length() - 1;
-                text = text.append(RepeatedCharSequence.of(' ', suffixed));
+                text = text.append(RepeatedSequence.of(' ', suffixed));
             } else if (cell.trackedTextOffset < 0) {
                 neededPrefix = true;
             }

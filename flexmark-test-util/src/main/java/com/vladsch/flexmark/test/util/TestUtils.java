@@ -10,7 +10,7 @@ import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.data.DataSet;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.RichCharSequenceImpl;
+import com.vladsch.flexmark.util.sequence.RichSequenceImpl;
 import com.vladsch.flexmark.util.sequence.SegmentedSequence;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -144,7 +144,7 @@ public class TestUtils {
     @NotNull
     public static Pair<String, Integer> addSpecSection(@NotNull String headingLine, @NotNull String headingText, String[] sectionHeadings) {
         assert sectionHeadings.length == 7;
-        int lastSectionLevel = RichCharSequenceImpl.of(headingLine).countLeading('#');
+        int lastSectionLevel = RichSequenceImpl.of(headingLine).countLeading('#');
         sectionHeadings[lastSectionLevel] = headingText;
         int iMax = 7;
         for (int i = lastSectionLevel + 1; i < iMax; i++) {

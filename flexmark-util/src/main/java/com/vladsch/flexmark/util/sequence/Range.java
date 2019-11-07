@@ -55,13 +55,13 @@ public class Range {
         return isNull() ? BasedSequence.NULL : BasedSequenceImpl.of(charSequence).subSequence(Math.min(end, Math.max(0, myStart)), end);
     }
 
-    public RichCharSequenceImpl richSubSequence(CharSequence charSequence) {
-        return RichCharSequenceImpl.of(charSequence).subSequence(this);
+    public RichSequenceImpl richSubSequence(CharSequence charSequence) {
+        return RichSequenceImpl.of(charSequence).subSequence(this);
     }
 
-    public RichCharSequenceImpl richSafeSubSequence(CharSequence charSequence) {
+    public RichSequenceImpl richSafeSubSequence(CharSequence charSequence) {
         int end = Math.min(charSequence.length(), myEnd);
-        return isNull() ? RichCharSequenceImpl.NULL : RichCharSequenceImpl.of(charSequence).subSequence(Math.min(end, Math.max(0, myStart)), end);
+        return isNull() ? RichSequenceImpl.NULL : RichSequenceImpl.of(charSequence).subSequence(Math.min(end, Math.max(0, myStart)), end);
     }
 
     public boolean contains(int index) {

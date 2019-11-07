@@ -5,7 +5,6 @@ import com.vladsch.flexmark.util.mappers.CharMapper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.function.BiPredicate;
@@ -16,7 +15,7 @@ import java.util.function.Predicate;
  * a subSequence() returns a sub-sequence from the original base sequence
  */
 @SuppressWarnings("SameParameterValue")
-public interface RichCharSequence<T extends RichCharSequence<?>> extends CharSequence, Comparable<CharSequence> {
+public interface RichSequence<T extends RichSequence<?>> extends CharSequence, Comparable<CharSequence> {
     String EOL = "\n";
     String SPACE = " ";
 
@@ -116,7 +115,7 @@ public interface RichCharSequence<T extends RichCharSequence<?>> extends CharSeq
 
     /**
      * Convenience method to get characters offset from start or end of sequence.
-     * when offset &gt;= then it is offset from the start of the sequence,
+     * when offset &gt;=0 then it is offset from the start of the sequence,
      * when &lt;0 then from the end
      * <p>
      * no exceptions are thrown, instead a \0 is returned for an invalid index positions
@@ -760,13 +759,13 @@ public interface RichCharSequence<T extends RichCharSequence<?>> extends CharSeq
     /**
      * Get Range of leading blank lines at given index offsets in sequence
      *
-     * @param eolChars   characters to consider as EOL, note {@link #eolStartLength(int)} should report length of EOL found if length > 1
+     * @param eolChars  characters to consider as EOL, note {@link #eolStartLength(int)} should report length of EOL found if length > 1
      * @param fromIndex minimum index in sequence to check and include in range of blank lines
-     *                   can be any value, if less than 0 it is the same as 0,
-     *                   if greater than length() it is the same as length()
+     *                  can be any value, if less than 0 it is the same as 0,
+     *                  if greater than length() it is the same as length()
      * @param endIndex  index in sequence from which to start blank line search, also maximum index to include in blank lines range
-     *                   can be any value, if less than 0 it is the same as 0,
-     *                   if greater than length() it is the same as length()
+     *                  can be any value, if less than 0 it is the same as 0,
+     *                  if greater than length() it is the same as length()
      * @return range of blank lines at or before fromIndex and ranging to minimum of startIndex, Range.NULL if none found
      *         if the range in sequence contains only whitespace characters then the whole range will be returned
      *         even if contains no EOL characters
@@ -775,13 +774,13 @@ public interface RichCharSequence<T extends RichCharSequence<?>> extends CharSeq
     /**
      * Get Range of trailing blank lines at given index offsets in sequence
      *
-     * @param eolChars  characters to consider as EOL, note {@link #eolStartLength(int)} should report length of EOL found if length > 1
+     * @param eolChars   characters to consider as EOL, note {@link #eolStartLength(int)} should report length of EOL found if length > 1
      * @param startIndex index in sequence from which to start blank line search, also maximum index to include in blank lines range
-     *                  can be any value, if less than 0 it is the same as 0,
-     *                  if greater than length() it is the same as length()
+     *                   can be any value, if less than 0 it is the same as 0,
+     *                   if greater than length() it is the same as length()
      * @param fromIndex  maximum index in sequence to check and include in range of blank lines
-     *                  can be any value, if less than 0 it is the same as 0,
-     *                  if greater than length() it is the same as length()
+     *                   can be any value, if less than 0 it is the same as 0,
+     *                   if greater than length() it is the same as length()
      * @return range of blank lines at or before fromIndex and ranging to minimum of startIndex
      *         if the range in sequence contains only whitespace characters then the whole range will be returned
      *         even if contains no EOL characters
@@ -803,25 +802,25 @@ public interface RichCharSequence<T extends RichCharSequence<?>> extends CharSeq
     /**
      * Trim end to end of line containing index
      *
-     * @param eolChars  characters to consider as EOL, note {@link #eolStartLength(int)} should report length of EOL found if length > 1
-     * @param index   index for offset contained by the line
-     *                  can be any value, if less than 0 it is the same as 0,
-     *                  if greater than length() it is the same as length()
+     * @param eolChars characters to consider as EOL, note {@link #eolStartLength(int)} should report length of EOL found if length > 1
+     * @param index    index for offset contained by the line
+     *                 can be any value, if less than 0 it is the same as 0,
+     *                 if greater than length() it is the same as length()
      * @return trimmed version of the sequence to given EOL or the original sequence
      */
-    @NotNull T trimEndToEndOfLine(@NotNull CharSequence eolChars, boolean includeEol, int index);
-    @NotNull T trimEndToEndOfLine(boolean includeEol, int index);
-    @NotNull T trimEndToEndOfLine(boolean includeEol);
-    @NotNull T trimEndToEndOfLine(int index);
-    @NotNull T trimEndToEndOfLine();
+    @NotNull T trimToEndOfLine(@NotNull CharSequence eolChars, boolean includeEol, int index);
+    @NotNull T trimToEndOfLine(boolean includeEol, int index);
+    @NotNull T trimToEndOfLine(boolean includeEol);
+    @NotNull T trimToEndOfLine(int index);
+    @NotNull T trimToEndOfLine();
 
     /**
      * Trim start to start of line containing index
      *
-     * @param eolChars  characters to consider as EOL, note {@link #eolStartLength(int)} should report length of EOL found if length > 1
-     * @param index   index for offset contained by the line
-     *                  can be any value, if less than 0 it is the same as 0,
-     *                  if greater than length() it is the same as length()
+     * @param eolChars characters to consider as EOL, note {@link #eolStartLength(int)} should report length of EOL found if length > 1
+     * @param index    index for offset contained by the line
+     *                 can be any value, if less than 0 it is the same as 0,
+     *                 if greater than length() it is the same as length()
      * @return trimmed version of the sequence to given EOL or the original sequence
      */
     @NotNull T trimToStartOfLine(@NotNull CharSequence eolChars, boolean includeEol, int index);

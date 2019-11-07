@@ -10,7 +10,7 @@ import org.jetbrains.annotations.Nullable;
  * A CharSequence that references original char sequence and maps '\0' to '\uFFFD'
  * a subSequence() returns a sub-sequence from the original base sequence
  */
-public abstract class BasedSequenceImpl extends RichCharSequenceBase<BasedSequence> implements BasedSequence {
+public abstract class BasedSequenceImpl extends RichSequenceBase<BasedSequence> implements BasedSequence {
     public static BasedSequence firstNonNull(BasedSequence... sequences) {
         for (BasedSequence sequence : sequences) {
             if (sequence != null && sequence != NULL) return sequence;
@@ -153,10 +153,74 @@ public abstract class BasedSequenceImpl extends RichCharSequenceBase<BasedSequen
     }
 
     @Override
+    public BasedSequence extendToAny(CharSequence charSet) {
+        return extendToAny(charSet, Integer.MAX_VALUE - getEndOffset());
+    }
+
+    @Override
+    public BasedSequence extendByAny(CharSequence charSet) {
+        return extendByAny(charSet, Integer.MAX_VALUE - getEndOffset());
+    }
+
+    @Override
+    public BasedSequence extendByOneOfAny(CharSequence charSet) {
+        return extendByAny(charSet, 1);
+    }
+
+    @Override
     public BasedSequence extendToAny(CharSequence charSet, int maxCount) {
         if (charSet.length() == 0) return this;
         int count = getBaseSequence().countLeadingNot(charSet, getEndOffset(), getEndOffset() + maxCount);
         return count == getBaseSequence().length() - getEndOffset() ? this : baseSubSequence(getStartOffset(), getEndOffset() + count + 1);
+    }
+
+    // @formatter:off
+    @Override final public BasedSequence extendToEndOfLine(CharSequence eolChars) { return extendToEndOfLine(eolChars, false);}
+    @Override final public BasedSequence extendToEndOfLine(boolean includeEol) { return extendToEndOfLine(RichSequence.EOL, includeEol);}
+    @Override final public BasedSequence extendToEndOfLine() { return extendToEndOfLine(RichSequence.EOL, false);}
+    @Override final public BasedSequence extendToStartOfLine(CharSequence eolChars) { return extendToStartOfLine(eolChars, false);}
+    @Override final public BasedSequence extendToStartOfLine(boolean includeEol) { return extendToStartOfLine(RichSequence.EOL, includeEol);}
+    @Override final public BasedSequence extendToStartOfLine() { return extendToStartOfLine(RichSequence.EOL, false);}
+    // @formatter:on
+
+    @Override
+    final public BasedSequence extendToEndOfLine(CharSequence eolChars, boolean includeEol) {
+        int endOffset = getEndOffset();
+
+        // if already have eol then no need to check
+        if (indexOf(eolChars, lastChar()) != -1) return this;
+
+        BasedSequence baseSequence = getBaseSequence();
+        int endOfLine = baseSequence.endOfLine(endOffset);
+
+        if (includeEol) {
+            endOfLine = Math.min(baseSequence.length(), endOfLine + Math.min(baseSequence.eolStartLength(endOfLine), 1));
+        }
+
+        if (endOfLine != endOffset) {
+            return baseSequence.subSequence(getStartOffset(), endOfLine);
+        }
+        return this;
+    }
+
+    @Override
+    public BasedSequence extendToStartOfLine(CharSequence eolChars, boolean includeEol) {
+        int startOffset = getStartOffset();
+
+        // if already have eol then no need to check
+        if (indexOf(eolChars, firstChar()) != -1) return this;
+
+        BasedSequence baseSequence = getBaseSequence();
+        int startOfLine = baseSequence.startOfLine(startOffset);
+
+        if (includeEol) {
+            startOfLine = Math.max(0, startOfLine - Math.min(baseSequence.eolEndLength(startOfLine - 1), 1));
+        }
+
+        if (startOfLine != startOffset) {
+            return baseSequence.subSequence(startOfLine, getEndOffset());
+        }
+        return this;
     }
 
     @NotNull

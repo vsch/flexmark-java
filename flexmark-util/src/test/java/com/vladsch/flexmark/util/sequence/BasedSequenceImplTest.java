@@ -53,6 +53,71 @@ public class BasedSequenceImplTest {
     }
 
     @Test
+    public void test_endSequence() {
+        assertEquals("", BasedSequenceImpl.of("0123456789").endSequence(0).toString());
+        assertEquals("9", BasedSequenceImpl.of("0123456789").endSequence(1).toString());
+        assertEquals("89", BasedSequenceImpl.of("0123456789").endSequence(2).toString());
+        assertEquals("789", BasedSequenceImpl.of("0123456789").endSequence(3).toString());
+        assertEquals("6789", BasedSequenceImpl.of("0123456789").endSequence(4).toString());
+        assertEquals("56789", BasedSequenceImpl.of("0123456789").endSequence(5).toString());
+        assertEquals("456789", BasedSequenceImpl.of("0123456789").endSequence(6).toString());
+        assertEquals("3456789", BasedSequenceImpl.of("0123456789").endSequence(7).toString());
+        assertEquals("23456789", BasedSequenceImpl.of("0123456789").endSequence(8).toString());
+        assertEquals("123456789", BasedSequenceImpl.of("0123456789").endSequence(9).toString());
+        assertEquals("0123456789", BasedSequenceImpl.of("0123456789").endSequence(10).toString());
+    }
+
+    @Test
+    public void test_endSequence2() {
+        assertEquals("", BasedSequenceImpl.of("0123456789").endSequence(0, 2).toString());
+        assertEquals("", BasedSequenceImpl.of("0123456789").endSequence(1, 2).toString());
+        assertEquals("", BasedSequenceImpl.of("0123456789").endSequence(2, 2).toString());
+        assertEquals("7", BasedSequenceImpl.of("0123456789").endSequence(3, 2).toString());
+        assertEquals("67", BasedSequenceImpl.of("0123456789").endSequence(4, 2).toString());
+        assertEquals("567", BasedSequenceImpl.of("0123456789").endSequence(5, 2).toString());
+        assertEquals("4567", BasedSequenceImpl.of("0123456789").endSequence(6, 2).toString());
+        assertEquals("34567", BasedSequenceImpl.of("0123456789").endSequence(7, 2).toString());
+        assertEquals("234567", BasedSequenceImpl.of("0123456789").endSequence(8, 2).toString());
+        assertEquals("1234567", BasedSequenceImpl.of("0123456789").endSequence(9, 2).toString());
+        assertEquals("01234567", BasedSequenceImpl.of("0123456789").endSequence(10, 2).toString());
+    }
+
+    @Test
+    public void test_midSequence() {
+        assertEquals("0123456789", BasedSequenceImpl.of("0123456789").midSequence(0).toString());
+        assertEquals("123456789", BasedSequenceImpl.of("0123456789").midSequence(1).toString());
+        assertEquals("23456789", BasedSequenceImpl.of("0123456789").midSequence(2).toString());
+        assertEquals("3456789", BasedSequenceImpl.of("0123456789").midSequence(3).toString());
+        assertEquals("456789", BasedSequenceImpl.of("0123456789").midSequence(4).toString());
+        assertEquals("56789", BasedSequenceImpl.of("0123456789").midSequence(5).toString());
+        assertEquals("6789", BasedSequenceImpl.of("0123456789").midSequence(6).toString());
+        assertEquals("789", BasedSequenceImpl.of("0123456789").midSequence(7).toString());
+        assertEquals("89", BasedSequenceImpl.of("0123456789").midSequence(8).toString());
+        assertEquals("9", BasedSequenceImpl.of("0123456789").midSequence(9).toString());
+        assertEquals("", BasedSequenceImpl.of("0123456789").midSequence(10).toString());
+        assertEquals("9", BasedSequenceImpl.of("0123456789").midSequence(-1).toString());
+        assertEquals("89", BasedSequenceImpl.of("0123456789").midSequence(-2).toString());
+        assertEquals("789", BasedSequenceImpl.of("0123456789").midSequence(-3).toString());
+        assertEquals("6789", BasedSequenceImpl.of("0123456789").midSequence(-4).toString());
+        assertEquals("56789", BasedSequenceImpl.of("0123456789").midSequence(-5).toString());
+        assertEquals("456789", BasedSequenceImpl.of("0123456789").midSequence(-6).toString());
+        assertEquals("3456789", BasedSequenceImpl.of("0123456789").midSequence(-7).toString());
+        assertEquals("23456789", BasedSequenceImpl.of("0123456789").midSequence(-8).toString());
+        assertEquals("123456789", BasedSequenceImpl.of("0123456789").midSequence(-9).toString());
+        assertEquals("0123456789", BasedSequenceImpl.of("0123456789").midSequence(-10).toString());
+    }
+
+    @Test
+    public void test_midSequence2() {
+        assertEquals("12345678", BasedSequenceImpl.of("0123456789").midSequence(1, -1).toString());
+        assertEquals("234567", BasedSequenceImpl.of("0123456789").midSequence(2, -2).toString());
+        assertEquals("3456", BasedSequenceImpl.of("0123456789").midSequence(3, -3).toString());
+        assertEquals("45", BasedSequenceImpl.of("0123456789").midSequence(4, -4).toString());
+        assertEquals("", BasedSequenceImpl.of("0123456789").midSequence(5, -5).toString());
+        assertEquals("", BasedSequenceImpl.of("0123456789").midSequence(6, -6).toString());
+    }
+
+    @Test
     public void test_countLeading() throws Exception {
         assertEquals(0, BasedSequenceImpl.of("       ").countLeading(""));
         assertEquals("       ".length(), BasedSequenceImpl.of("       ").countLeading(" "));
@@ -306,6 +371,16 @@ public class BasedSequenceImplTest {
         for (BasedSequence basedSequence : list) sl.add(basedSequence.toString());
 
         assertArrayEquals(new String[] { "1", "2", "3", "4", "5" }, sl.toArray(new String[0]));
+    }
+
+    @Test
+    public void testSplitEol() throws Exception {
+        BasedSequence sequence = SubSequence.of("   line1 \nline2 \n line3 \n");
+        BasedSequence[] list = sequence.split('\n', 0, BasedSequence.SPLIT_INCLUDE_DELIMS);
+        ArrayList<String> sl = new ArrayList<>(list.length);
+        for (BasedSequence basedSequence : list) sl.add(basedSequence.toString());
+
+        assertArrayEquals(new String[] { "   line1 \n", "line2 \n", " line3 \n" }, sl.toArray(new String[0]));
     }
 
     @Test
@@ -766,5 +841,49 @@ public class BasedSequenceImplTest {
 
         BasedSequence sequence = BasedSequenceImpl.of(input);
         assertEquals(result, sequence.extractRanges(sequence.blankLinesRemovedRanges()).toString());
+    }
+
+    @Test
+    public void test_extendToEndOfLine() {
+        String input = "" +
+                "0123456789\n" +
+                "abcdefghij\n" +
+                "\n";
+
+        BasedSequence sequence = BasedSequenceImpl.of(input);
+
+        assertEquals("0123456789", sequence.subSequence(0, 0).extendToEndOfLine().toString());
+        assertEquals("123456789", sequence.subSequence(1, 9).extendToEndOfLine().toString());
+        assertEquals("bcdefghij", sequence.subSequence(12, 13).extendToEndOfLine().toString());
+        assertEquals("", sequence.subSequence(22, 22).extendToEndOfLine().toString());
+        assertEquals("\n", sequence.subSequence(22, 23).extendToEndOfLine().toString());
+
+        assertEquals("0123456789\n", sequence.subSequence(0, 0).extendToEndOfLine(true).toString());
+        assertEquals("123456789\n", sequence.subSequence(1, 9).extendToEndOfLine(true).toString());
+        assertEquals("bcdefghij\n", sequence.subSequence(12, 13).extendToEndOfLine(true).toString());
+        assertEquals("\n", sequence.subSequence(22, 22).extendToEndOfLine(true).toString());
+        assertEquals("\n", sequence.subSequence(22, 23).extendToEndOfLine(true).toString());
+    }
+
+    @Test
+    public void test_extendToStartOfLine() {
+        String input = "" +
+                "0123456789\n" +
+                "abcdefghij\n" +
+                "\n";
+
+        BasedSequence sequence = BasedSequenceImpl.of(input);
+
+        assertEquals("", sequence.subSequence(0, 0).extendToStartOfLine().toString());
+        assertEquals("012345678", sequence.subSequence(1, 9).extendToStartOfLine().toString());
+        assertEquals("ab", sequence.subSequence(12, 13).extendToStartOfLine().toString());
+        assertEquals("", sequence.subSequence(22, 22).extendToStartOfLine().toString());
+        assertEquals("\n", sequence.subSequence(22, 23).extendToStartOfLine().toString());
+
+        assertEquals("", sequence.subSequence(0, 0).extendToStartOfLine(true).toString());
+        assertEquals("012345678", sequence.subSequence(1, 9).extendToStartOfLine(true).toString());
+        assertEquals("\nab", sequence.subSequence(12, 13).extendToStartOfLine(true).toString());
+        assertEquals("\n", sequence.subSequence(22, 22).extendToStartOfLine(true).toString());
+        assertEquals("\n", sequence.subSequence(22, 23).extendToStartOfLine(true).toString());
     }
 }

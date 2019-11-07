@@ -168,32 +168,38 @@ Next
       just formatting. Need to keep track of whether format after typing or just format. Then
       caret position should only track but not force spaces behind it to be preserved. See
       failed tests in `com.vladsch.flexmark.ext.tables.MarkdownTableTest`
-
-0.59.42
--------
-
-* Fix: `RichCharSequence` which is extended by `BasedCharSequence`
-    <!-- @formatter:off -->
-    * [ ] Add: `RichCharSequence.trimEndToEndOfLine(CharSequence eolChars, boolean includeEol, int index)` - trim end to end of line at index
-    * [ ] Add: `RichCharSequence.trimToStartOfLine(CharSequence, boolean, int)` - trimmed end after next EOL
-    * [ ] Add: `RichCharSequence.trimStartToEol(boolean includeEOL = false, CharSequence... eolList)` - trim start to previous EOL
-    * [ ] Add: `RichCharSequence.extendEndToEol(boolean includeEOL = false, CharSequence... eolList)` - extend end to next EOL
-    * [ ] Add: `RichCharSequence.extendStartToEol(boolean includeEOL = false, CharSequence... eolList)` - extend start to previous EOL
-    * Add: `RichCharSequence.leadingBlankLinesRange(CharSequence eolChars, int fromIndex, int endIndex)` - find next range of blank lines
-    * Add: `RichCharSequence.trailingBlankLinesRange(CharSequence eolChars, int startIndex, int fromIndex)` - find previous range of blank lines
-    * Add: `RichCharSequence.blankLinesRemovedRanges(CharSequence eolChars, int fromIndex, int endIndex)` - list of ranges in sequence between `fromIndex` and `endIndex`  excluding all blank lines
-    <!-- @formatter:on -->
-
-    * [ ] Add: `Range RichCharSequence.indexOfSpan(CharSequence charSet)` - find next contiguous
-          range of given characters. ie. `indexOfSpan("\n \t")` will find the next range of blanks.
-          `indexOfSpan("` `` ` `` ` ")` will find the next range of back ticks.
-    * [ ] Add: `Range RichCharSequence.lastIndexOfSpan(CharSequence charSet)` - find previous
-          contiguous range of given characters. ie. `indexOfSpan("\n \t")` will find the next range
-          of blanks. `indexOfSpan("` `` ` `` ` ")` will find the next range of back ticks.
 * [ ] Fix: Add `TextContainer` node type to allow extracting text nodes without having to know
       all of the node types. The text container should implement ability to append to
       `StringBuilder` its text equivalent. A visitor needs to be provided so child nodes could
       be visited.
+* [ ] Fix: change `BasedSequenceImpl` to use `Range` instead of `startOffset` and `endOffset`
+
+0.59.42
+-------
+
+* Break: rename `RichCharSequence` to `RichSequence` shorter and lines up with `BasedSequence`,
+* Break: rename `RichCharSequenceBase` to `RichSequenceBase`
+* Break: rename `RichCharSequenceImpl` to `RichSequenceImpl`
+* Break: rename `RepeatedCharSequence` to `RepeatedSequence`
+* Fix: `RichCharSequence` which is extended by `BasedCharSequence`
+  <!-- @formatter:off -->
+  * Add: `BasedSequence.extendToEndOfLine(CharSequence eolChars, boolean includeEol)` - extend end to end of line in basedSequence
+  * Add: `BasedSequence.extendStartToStartOfLine(CharSequence eolChars, boolean includeEol)` - extend start to start of line in basedSequence
+  * Add: `RichCharSequence.trimToEndOfLine(CharSequence eolChars, boolean includeEol, int index)` - trim end to end of line at index
+  * Add: `RichCharSequence.trimToStartOfLine(CharSequence, boolean, int)` - trimmed end after next EOL
+  * Add: `RichCharSequence.leadingBlankLinesRange(CharSequence eolChars, int fromIndex, int endIndex)` - find next range of blank lines
+  * Add: `RichCharSequence.trailingBlankLinesRange(CharSequence eolChars, int startIndex, int fromIndex)` - find previous range of blank lines
+  * Add: `RichCharSequence.blankLinesRemovedRanges(CharSequence eolChars, int fromIndex, int endIndex)` - list of ranges in sequence between `fromIndex` and `endIndex`  excluding all blank lines
+  * Add: range based methods:
+    * `RichCharSequence.subSequence(Range)`
+    * `RichCharSequence.subSequenceAfter(Range)`
+    * `RichCharSequence.subSequenceBefore(Range)`
+  <!-- @formatter:on -->
+* Add: to `BasedSequence`
+    <!-- @formatter:off -->
+    * Add: `BasedSequence.extendToEndOfLine(CharSequence eolChars, boolean includeEol)` - extend end to end of line in basedSequence
+    * Add: `BasedSequence.extendStartToStartOfLine(CharSequence eolChars, boolean includeEol)` - extend start to start of line in basedSequence
+    <!-- @formatter:on -->
 * Add: `ArrayUtils` for searching arrays of `<T>` on value or predicate
   * `indexOf()` variations for forward search
   * `lastIndexOf()` variations for backward search

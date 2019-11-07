@@ -2,7 +2,6 @@ package com.vladsch.flexmark.test.util.spec;
 
 import com.vladsch.flexmark.test.util.TestUtils;
 import com.vladsch.flexmark.util.Pair;
-import com.vladsch.flexmark.util.sequence.RichCharSequenceImpl;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.BufferedReader;

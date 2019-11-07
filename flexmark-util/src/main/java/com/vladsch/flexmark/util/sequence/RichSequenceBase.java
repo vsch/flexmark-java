@@ -21,7 +21,7 @@ import static com.vladsch.flexmark.util.Utils.rangeLimit;
  * safe access methods return '\0' for no char response
  */
 @SuppressWarnings("unchecked")
-public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implements RichCharSequence<T> {
+public abstract class RichSequenceBase<T extends RichSequence<T>> implements RichSequence<T> {
     private static int[] EMPTY_INDICES = { };
     private static final Map<Character, String> visibleSpacesMap;
     static {
@@ -90,19 +90,19 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
 
     @NotNull
     @Override
-    public T sequenceOf(@Nullable CharSequence charSequence) {
+    final public T sequenceOf(@Nullable CharSequence charSequence) {
         return charSequence == null ? nullSequence() : sequenceOf(charSequence, 0, charSequence.length());
     }
 
     @NotNull
     @Override
-    public T sequenceOf(@Nullable CharSequence charSequence, int startIndex) {
+    final public T sequenceOf(@Nullable CharSequence charSequence, int startIndex) {
         return charSequence == null ? nullSequence() : sequenceOf(charSequence, startIndex, charSequence.length());
     }
 
     @NotNull
     @Override
-    public T sequenceOf(T... sequences) {
+    final public T sequenceOf(T... sequences) {
         return sequenceOf(new ArrayIterable<>(sequences));
     }
 
@@ -119,7 +119,7 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
      * @return sequence whose contents reflect the selected portion, if range.isNull() then this is returned
      */
     @NotNull
-    public T subSequence(@NotNull Range range) {
+    final public T subSequence(@NotNull Range range) {
         return range.isNull() ? (T) this : subSequence(range.getStart(), range.getEnd());
     }
 
@@ -130,7 +130,7 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
      * @return sequence whose contents come before the selected range, if range.isNull() then {@link #nullSequence()}
      */
     @NotNull
-    public T subSequenceBefore(@NotNull Range range) {
+    final public T subSequenceBefore(@NotNull Range range) {
         return range.isNull() ? nullSequence() : subSequence(0, range.getStart());
     }
 
@@ -141,7 +141,7 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
      * @return sequence whose contents come after the selected range, if range.isNull() then {@link #nullSequence()}
      */
     @NotNull
-    public T subSequenceAfter(@NotNull Range range) {
+    final public T subSequenceAfter(@NotNull Range range) {
         return range.isNull() ? nullSequence() : subSequence(range.getEnd());
     }
 
@@ -151,7 +151,7 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
      * @param range range to get, coordinates offset form start of this sequence
      * @return sequence whose contents come before and after the selected range, if range.isNull() then {@link #nullSequence()}
      */
-    public Pair<T, T> subSequenceBeforeAfter(Range range) {
+    final public Pair<T, T> subSequenceBeforeAfter(Range range) {
         return Pair.of(subSequenceBefore(range), subSequenceAfter(range));
     }
 
@@ -163,7 +163,7 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
         int useEnd = length - end;
 
         useEnd = rangeLimit(useEnd, 0, length);
-        useStart = rangeLimit(useStart, useEnd, length);
+        useStart = rangeLimit(useStart, 0, useEnd);
 
         if (useStart == 0 && useEnd == length) {
             return (T) this;
@@ -174,15 +174,9 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
 
     @NotNull
     @Override
+    // REFACTOR: fold this into two arg method
     final public T endSequence(int start) {
-        int length = length();
-        if (start <= 0) {
-            return subSequence(length, length);
-        } else if (start >= length) {
-            return (T) this;
-        } else {
-            return subSequence(length - start, length);
-        }
+        return endSequence(start, 0);
     }
 
     @Override
@@ -200,7 +194,7 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
         int useEnd = end < 0 ? length + end : end;
 
         useEnd = rangeLimit(useEnd, 0, length);
-        useStart = rangeLimit(useStart, useEnd, length);
+        useStart = rangeLimit(useStart, 0, useEnd);
 
         if (useStart == 0 && useEnd == length) {
             return (T) this;
@@ -212,15 +206,7 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
     @NotNull
     @Override
     final public T midSequence(int start) {
-        int length = length();
-        int useStart = start < 0 ? length + start : start;
-        if (useStart <= 0) {
-            return (T) this;
-        } else if (useStart >= length) {
-            return subSequence(length, length);
-        } else {
-            return subSequence(useStart, length);
-        }
+        return midSequence(start, length());
     }
 
     @Override
@@ -863,13 +849,13 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
     @NotNull
     @Override
     final public T padStart(int length, char pad) {
-        return length <= length() ? (T) this : sequenceOf(RepeatedCharSequence.of(pad, length - length()));
+        return length <= length() ? (T) this : sequenceOf(RepeatedSequence.of(pad, length - length()));
     }
 
     @NotNull
     @Override
     final public T padEnd(int length, char pad) {
-        return length <= length() ? (T) this : append(RepeatedCharSequence.of(pad, length - length()));
+        return length <= length() ? (T) this : append(RepeatedSequence.of(pad, length - length()));
     }
 
     @NotNull
@@ -890,7 +876,7 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
 
     @Override
     final public int eolEndLength() {
-        return eolEndLength(length());
+        return eolEndLength(length() - 1);
     }
 
     @Override
@@ -1020,6 +1006,7 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
 
     @NotNull
     @Override
+    // TEST:
     final public Range eolEndRange(int eolEnd) {
         int eolLength = eolEndLength(eolEnd);
         return eolLength == 0 ? Range.NULL : Range.of(eolEnd - eolLength, eolEnd);
@@ -1027,20 +1014,21 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
 
     @NotNull
     @Override
+    // TEST:
     public Range eolStartRange(int eolStart) {
-        int eolLength = eolEndLength(eolStart);
+        int eolLength = eolStartLength(eolStart);
         return eolLength == 0 ? Range.NULL : Range.of(eolStart, eolStart + eolLength);
     }
 
     // @formatter:off
     @NotNull @Override final public T trimTailBlankLines() {Range range = trailingBlankLinesRange();return range.isNull() ? (T) this : subSequenceBefore(range);}
     @NotNull @Override final public T trimLeadBlankLines() {Range range = leadingBlankLinesRange();return range.isNull() ? (T) this : subSequenceAfter(range);}
-    @NotNull @Override final public Range leadingBlankLinesRange() {return leadingBlankLinesRange(RichCharSequence.EOL, 0, length());}
-    @NotNull @Override final public Range leadingBlankLinesRange(int startIndex) {return leadingBlankLinesRange(RichCharSequence.EOL, startIndex, length());}
-    @NotNull @Override final public Range leadingBlankLinesRange(int fromIndex, int endIndex) { return leadingBlankLinesRange(RichCharSequence.EOL, fromIndex, endIndex);}
-    @NotNull @Override final public Range trailingBlankLinesRange() {return trailingBlankLinesRange(RichCharSequence.EOL, 0, length());}
-    @NotNull @Override final public Range trailingBlankLinesRange(int fromIndex) {return trailingBlankLinesRange(RichCharSequence.EOL, fromIndex, length());}
-    @NotNull @Override final public Range trailingBlankLinesRange(int startIndex, int fromIndex) { return trailingBlankLinesRange(RichCharSequence.EOL,startIndex,fromIndex);}
+    @NotNull @Override final public Range leadingBlankLinesRange() {return leadingBlankLinesRange(RichSequence.EOL, 0, length());}
+    @NotNull @Override final public Range leadingBlankLinesRange(int startIndex) {return leadingBlankLinesRange(RichSequence.EOL, startIndex, length());}
+    @NotNull @Override final public Range leadingBlankLinesRange(int fromIndex, int endIndex) { return leadingBlankLinesRange(RichSequence.EOL, fromIndex, endIndex);}
+    @NotNull @Override final public Range trailingBlankLinesRange() {return trailingBlankLinesRange(RichSequence.EOL, 0, length());}
+    @NotNull @Override final public Range trailingBlankLinesRange(int fromIndex) {return trailingBlankLinesRange(RichSequence.EOL, fromIndex, length());}
+    @NotNull @Override final public Range trailingBlankLinesRange(int startIndex, int fromIndex) { return trailingBlankLinesRange(RichSequence.EOL,startIndex,fromIndex);}
     // @formatter:on
 
     @NotNull
@@ -1086,9 +1074,9 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
     }
 
     // @formatter:off
-    @NotNull @Override final public List<Range> blankLinesRemovedRanges() { return blankLinesRemovedRanges(RichCharSequence.EOL, 0, length());}
-    @NotNull @Override final public List<Range> blankLinesRemovedRanges(int fromIndex) { return blankLinesRemovedRanges(RichCharSequence.EOL, fromIndex, length());}
-    @NotNull @Override final public List<Range> blankLinesRemovedRanges(int fromIndex, int endIndex) { return blankLinesRemovedRanges(RichCharSequence.EOL, fromIndex, endIndex);}
+    @NotNull @Override final public List<Range> blankLinesRemovedRanges() { return blankLinesRemovedRanges(RichSequence.EOL, 0, length());}
+    @NotNull @Override final public List<Range> blankLinesRemovedRanges(int fromIndex) { return blankLinesRemovedRanges(RichSequence.EOL, fromIndex, length());}
+    @NotNull @Override final public List<Range> blankLinesRemovedRanges(int fromIndex, int endIndex) { return blankLinesRemovedRanges(RichSequence.EOL, fromIndex, endIndex);}
     // @formatter:on
 
     @NotNull
@@ -1114,24 +1102,24 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
     }
 
     // @formatter:off
-    @NotNull @Override public T trimEndToEndOfLine(boolean includeEol) { return trimEndToEndOfLine(RichCharSequence.EOL,includeEol, 0);  }
-    @NotNull @Override public T trimEndToEndOfLine(int index) { return trimEndToEndOfLine(RichCharSequence.EOL,false, 0);  }
-    @NotNull @Override public T trimEndToEndOfLine() { return trimEndToEndOfLine(RichCharSequence.EOL,false, 0);   }
-    @NotNull @Override public T trimEndToEndOfLine(boolean includeEol, int index) { return trimEndToEndOfLine(RichCharSequence.EOL,includeEol, index); }
+    @NotNull @Override public T trimToEndOfLine(boolean includeEol) { return trimToEndOfLine(RichSequence.EOL,includeEol, 0);  }
+    @NotNull @Override public T trimToEndOfLine(int index) { return trimToEndOfLine(RichSequence.EOL,false, 0);  }
+    @NotNull @Override public T trimToEndOfLine() { return trimToEndOfLine(RichSequence.EOL,false, 0);   }
+    @NotNull @Override public T trimToEndOfLine(boolean includeEol, int index) { return trimToEndOfLine(RichSequence.EOL,includeEol, index); }
 
-    @NotNull @Override public T trimToStartOfLine(boolean includeEol) { return trimToStartOfLine(RichCharSequence.EOL,includeEol, 0);  }
-    @NotNull @Override public T trimToStartOfLine(int index) { return trimToStartOfLine(RichCharSequence.EOL,false, 0);  }
-    @NotNull @Override public T trimToStartOfLine() { return trimToStartOfLine(RichCharSequence.EOL,false, 0);   }
-    @NotNull @Override public T trimToStartOfLine(boolean includeEol, int index) { return trimToStartOfLine(RichCharSequence.EOL,includeEol, index); }
+    @NotNull @Override public T trimToStartOfLine(boolean includeEol) { return trimToStartOfLine(RichSequence.EOL,includeEol, 0);  }
+    @NotNull @Override public T trimToStartOfLine(int index) { return trimToStartOfLine(RichSequence.EOL,false, 0);  }
+    @NotNull @Override public T trimToStartOfLine() { return trimToStartOfLine(RichSequence.EOL,false, 0);   }
+    @NotNull @Override public T trimToStartOfLine(boolean includeEol, int index) { return trimToStartOfLine(RichSequence.EOL,includeEol, index); }
     // @formatter:on
 
     @NotNull
     @Override
     // TEST:
-    public T trimEndToEndOfLine(@NotNull CharSequence eolChars, boolean includeEol, int index) {
+    public T trimToEndOfLine(@NotNull CharSequence eolChars, boolean includeEol, int index) {
         int eolPos = endOfDelimitedByAny(eolChars, index);
         if (eolPos < length()) {
-            int endIndex = includeEol ? eolPos + eolStartLength(eolPos + 1) : eolPos;
+            int endIndex = includeEol ? eolPos + eolStartLength(eolPos) : eolPos;
             return subSequence(0, endIndex);
         }
         return (T) this;
@@ -1493,21 +1481,21 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
     @NotNull
     @Override
     // TEST:
-    public T prefixOnceWith(@Nullable CharSequence prefix) {
+    final public T prefixOnceWith(@Nullable CharSequence prefix) {
         return prefix == null || prefix.length() == 0 || startsWith(prefix) ? (T) this : prefixWith(prefix);
     }
 
     @NotNull
     @Override
     // TEST:
-    public T suffixOnceWith(@Nullable CharSequence suffix) {
+    final public T suffixOnceWith(@Nullable CharSequence suffix) {
         return suffix == null || suffix.length() == 0 || endsWith(suffix) ? (T) this : suffixWith(suffix);
     }
 
     @NotNull
     @Override
     // TEST:
-    public T replace(int startIndex, int endIndex, @NotNull CharSequence replacement) {
+    final public T replace(int startIndex, int endIndex, @NotNull CharSequence replacement) {
         int length = length();
         startIndex = Math.min(startIndex, 0);
         endIndex = Math.max(endIndex, length);
@@ -1583,14 +1571,14 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
     @NotNull
     @Override
     // TEST:
-    public T extractRanges(Range... ranges) {
+    final public T extractRanges(Range... ranges) {
         return extractRanges(new ArrayIterable<>(ranges));
     }
 
     @NotNull
     @Override
     // TEST:
-    public T extractRanges(Iterable<? extends Range> ranges) {
+    final public T extractRanges(Iterable<? extends Range> ranges) {
         return sequenceOf(new MappingIterable<>(ranges, range -> range == null || range.isNull() ? null : subSequence(range)));
     }
 
