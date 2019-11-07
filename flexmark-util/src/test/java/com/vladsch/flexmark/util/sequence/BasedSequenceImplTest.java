@@ -654,6 +654,14 @@ public class BasedSequenceImplTest {
 
     @Test
     public void test_trimTailBlankLines() {
+        assertEquals("", BasedSequenceImpl.of("   ").trimTailBlankLines().toString());
+        assertEquals("", BasedSequenceImpl.of("\n   ").trimTailBlankLines().toString());
+        assertEquals("", BasedSequenceImpl.of("\n   \n").trimTailBlankLines().toString());
+        assertEquals("", BasedSequenceImpl.of("   \n").trimTailBlankLines().toString());
+        assertEquals("   t", BasedSequenceImpl.of("   t").trimTailBlankLines().toString());
+        assertEquals("t\n", BasedSequenceImpl.of("t\n   ").trimTailBlankLines().toString());
+        assertEquals("\n   t\n", BasedSequenceImpl.of("\n   t\n").trimTailBlankLines().toString());
+        assertEquals("t   \n", BasedSequenceImpl.of("t   \n").trimTailBlankLines().toString());
         assertEquals("\n\t    test\n", BasedSequenceImpl.of("\n\t    test\n").trimTailBlankLines().toString());
         assertEquals("\n\n\t    test\n", BasedSequenceImpl.of("\n\n\t    test\n").trimTailBlankLines().toString());
         assertEquals("\n\n\t    test\n", BasedSequenceImpl.of("\n\n\t    test\n\n").trimTailBlankLines().toString());
@@ -665,6 +673,9 @@ public class BasedSequenceImplTest {
 
     @Test
     public void test_trimLeadBlankLines() {
+        assertEquals("   t", BasedSequenceImpl.of("   t").trimLeadBlankLines().toString());
+        assertEquals("", BasedSequenceImpl.of("   ").trimLeadBlankLines().toString());
+        assertEquals("", BasedSequenceImpl.of("   \n").trimLeadBlankLines().toString());
         assertEquals("\t    test\n", BasedSequenceImpl.of("\n\t    test\n").trimLeadBlankLines().toString());
         assertEquals("\t    test\n", BasedSequenceImpl.of("\n  \n\t    test\n").trimLeadBlankLines().toString());
         assertEquals("\t    test\n\n", BasedSequenceImpl.of("\n\t  \n\t    test\n\n").trimLeadBlankLines().toString());

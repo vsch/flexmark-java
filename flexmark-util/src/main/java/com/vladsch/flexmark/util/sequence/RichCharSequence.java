@@ -747,6 +747,8 @@ public interface RichCharSequence<T extends RichCharSequence<?>> extends CharSeq
     /**
      * Get next Range of blank lines at given index offsets in sequence
      *
+     *
+     * @param eolChars  characters to consider as EOL, note {@link #eolStartLength(int)} should report length of EOL found if it is > 1
      * @param startIndex minimum index in sequence to check and include in range of blank lines
      *                   can be any value, if less than 0 it is the same as 0,
      *                   if greater than length() it is the same as length()
@@ -754,11 +756,14 @@ public interface RichCharSequence<T extends RichCharSequence<?>> extends CharSeq
      *                   can be any value, if less than 0 it is the same as 0,
      *                   if greater than length() it is the same as length()
      * @return range of blank lines at or before fromIndex and ranging to minimum of startIndex, Range.NULL if none found
+     *         if the range in sequence contains only whitespace characters then the whole range will be returned
+     *         even if contains no EOL characters
      */
-    Range blankLinesRange(int startIndex, int fromIndex);
+    Range blankLinesRange(CharSequence eolChars, int startIndex, int fromIndex);
     /**
      * Get previous Range of blank lines at given index offsets in sequence
      *
+     * @param eolChars  characters to consider as EOL, note {@link #eolStartLength(int)} should report length of EOL found if it is > 1
      * @param fromIndex index in sequence from which to start blank line search, also maximum index to include in blank lines range
      *                  can be any value, if less than 0 it is the same as 0,
      *                  if greater than length() it is the same as length()
@@ -766,13 +771,17 @@ public interface RichCharSequence<T extends RichCharSequence<?>> extends CharSeq
      *                  can be any value, if less than 0 it is the same as 0,
      *                  if greater than length() it is the same as length()
      * @return range of blank lines at or before fromIndex and ranging to minimum of startIndex
+     *         if the range in sequence contains only whitespace characters then the whole range will be returned
+     *         even if contains no EOL characters
      */
-    Range lastBlankLinesRange(int fromIndex, int endIndex);
+    Range lastBlankLinesRange(CharSequence eolChars, int fromIndex, int endIndex);
 
     Range blankLinesRange();
     Range blankLinesRange(int startIndex);
+    Range blankLinesRange(int fromIndex, int endIndex);
     Range lastBlankLinesRange();
     Range lastBlankLinesRange(int fromIndex);
+    Range lastBlankLinesRange(int startIndex, int fromIndex);
 
     /**
      * replace any \r\n and \r by \n

@@ -122,7 +122,7 @@ public class UtilsTest {
 
     @Test
     public void testRangeLimit() {
-        assertEquals(-28, Utils.rangeLimit(-33, -28, -34));
+        assertEquals(-33, Utils.rangeLimit(-33, -34, -28));
         assertEquals(-134f, Utils.rangeLimit(-149f, -134f, -0.0f), 0.0f);
         assertEquals(-75, Utils.rangeLimit(50, 10, -75));
         assertEquals(0, Utils.rangeLimit(1, 0, 0));

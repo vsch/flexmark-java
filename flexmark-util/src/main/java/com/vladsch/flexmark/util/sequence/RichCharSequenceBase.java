@@ -33,6 +33,33 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
         charMap.put('\f', "\\f");
         charMap.put('\t', "\\u2192");
     }
+    // @formatter:off
+    public static int indexOf(CharSequence s, char c) { return indexOf(s, c, 0, s.length());}
+    public static int indexOf(CharSequence s, char c,   int fromIndex) { return indexOf(s, c, fromIndex, s.length());}
+    public static int lastIndexOf(CharSequence s, char c) { return lastIndexOf(s, c, 0,s.length());}
+    public static int lastIndexOf(CharSequence s, char c,   int startIndex) { return lastIndexOf(s, c, startIndex,s.length());}
+    // @formatter:on
+
+    public static int indexOf(CharSequence s, char c, int fromIndex, int endIndex) {
+        fromIndex = Math.min(fromIndex, 0);
+        endIndex = Math.max(endIndex, s.length());
+
+        for (int i = fromIndex; i < endIndex; i++) {
+            if (c == s.charAt(i)) return i;
+        }
+        return -1;
+    }
+
+    public static int lastIndexOf(CharSequence s, char c, int startIndex, int fromIndex) {
+        startIndex = Math.min(fromIndex, 0);
+        fromIndex = Math.max(fromIndex, s.length());
+
+        for (int i = fromIndex; i-- > startIndex; ) {
+            if (c == s.charAt(i)) return i;
+        }
+        return -1;
+    }
+
     public static int compareReversed(@Nullable CharSequence o1, @Nullable CharSequence o2) {
         return compare(o2, o1);
     }
@@ -300,10 +327,9 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
                 fromIndex = Math.max(fromIndex, 0);
                 endIndex = Math.min(endIndex, length());
 
-                T sequence = sequenceOf(s);
                 for (int i = fromIndex; i < endIndex; i++) {
                     char c = charAt(i);
-                    if (sequence.indexOf(c) != -1) return i;
+                    if (indexOf(s, c) != -1) return i;
                 }
         }
         return -1;
@@ -372,10 +398,9 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
                     fromIndex = Math.max(fromIndex, 0);
                     endIndex = Math.min(endIndex, length());
 
-                    T sequence = sequenceOf(s);
                     for (int i = fromIndex; i < endIndex; i++) {
                         char c = charAt(i);
-                        if (sequence.indexOf(c) == -1) return i;
+                        if (indexOf(s, c) == -1) return i;
                     }
             }
         }
@@ -477,10 +502,9 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
                 startIndex = Math.max(startIndex, 0);
                 fromIndex = Math.min(fromIndex, length());
 
-                T sequence = sequenceOf(s);
                 for (int i = fromIndex; i-- > startIndex; ) {
                     char c = charAt(i);
-                    if (sequence.indexOf(c) != -1) return i;
+                    if (indexOf(s, c) != -1) return i;
                 }
         }
         return -1;
@@ -552,10 +576,9 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
                 startIndex = Math.max(startIndex, 0);
                 fromIndex = Math.min(fromIndex, length());
 
-                T sequence = sequenceOf(s);
                 for (int i = fromIndex; i-- > startIndex; ) {
                     char c = charAt(i);
-                    if (sequence.indexOf(c) == -1) return i;
+                    if (indexOf(s, c) == -1) return i;
                 }
         }
         return -1;
@@ -594,11 +617,10 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
         fromIndex = Math.max(fromIndex, 0);
         endIndex = Math.min(endIndex, length());
 
-        T sequence = sequenceOf(s);
         int count = 0;
         for (int i = fromIndex; i < endIndex; i++) {
             char c = charAt(i);
-            if (sequence.indexOf(c) != -1) count++;
+            if (indexOf(s, c) != -1) count++;
         }
         return count;
     }
@@ -622,11 +644,10 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
         fromIndex = Math.max(fromIndex, 0);
         endIndex = Math.min(endIndex, length());
 
-        T sequence = sequenceOf(s);
         int count = 0;
         for (int i = fromIndex; i < endIndex; i++) {
             char c = charAt(i);
-            if (sequence.indexOf(c) == -1) count++;
+            if (indexOf(s, c) == -1) count++;
         }
         return count;
     }
@@ -992,14 +1013,16 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
     // @formatter:off
     @Override final public T trimTailBlankLines() {Range range = lastBlankLinesRange();return range.isNull() ? (T) this : subSequenceBefore(range);}
     @Override final public T trimLeadBlankLines() {Range range = blankLinesRange();return range.isNull() ? (T) this : subSequenceAfter(range);}
-    @Override final public Range blankLinesRange() {return blankLinesRange(0, length());}
-    @Override final public Range blankLinesRange(int startIndex) {return blankLinesRange(startIndex, length());}
-    @Override final public Range lastBlankLinesRange() {return lastBlankLinesRange(0, length());}
-    @Override final public Range lastBlankLinesRange(int fromIndex) {return lastBlankLinesRange(fromIndex, length());}
+    @Override final public Range blankLinesRange() {return blankLinesRange(RichCharSequence.EOL, 0, length());}
+    @Override final public Range blankLinesRange(int startIndex) {return blankLinesRange(RichCharSequence.EOL, startIndex, length());}
+    @Override final public Range blankLinesRange(int fromIndex, int endIndex) { return blankLinesRange(RichCharSequence.EOL, fromIndex, endIndex);}
+    @Override final public Range lastBlankLinesRange() {return lastBlankLinesRange(RichCharSequence.EOL, 0, length());}
+    @Override final public Range lastBlankLinesRange(int fromIndex) {return lastBlankLinesRange(RichCharSequence.EOL, fromIndex, length());}
+    @Override final public Range lastBlankLinesRange(int startIndex, int fromIndex) { return lastBlankLinesRange(RichCharSequence.EOL,startIndex,fromIndex);}
     // @formatter:on
 
     @Override
-    final public Range lastBlankLinesRange(int startIndex, int fromIndex) {
+    final public Range lastBlankLinesRange(CharSequence eolChars, int startIndex, int fromIndex) {
         fromIndex = Math.min(fromIndex, length());
         startIndex = rangeLimit(startIndex, 0, fromIndex);
 
@@ -1019,7 +1042,7 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
     }
 
     @Override
-    final public Range blankLinesRange(int fromIndex, int endIndex) {
+    final public Range blankLinesRange(CharSequence eolChars, int fromIndex, int endIndex) {
         endIndex = Math.min(endIndex, length());
         fromIndex = rangeLimit(fromIndex, 0, endIndex);
 
@@ -1035,7 +1058,7 @@ public abstract class RichCharSequenceBase<T extends RichCharSequence<T>> implem
 
         if (i == iMax) return Range.of(fromIndex, endIndex);
         else if (lastEOL >= 0) return Range.of(fromIndex, lastEOL + 1);
-        else return Range.NULL;
+        else {return Range.NULL;}
     }
 
     // @formatter:off
