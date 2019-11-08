@@ -106,8 +106,7 @@ public class AttributeImpl implements Attribute {
         Attribute attribute = (Attribute) o;
 
         if (!myName.equals(attribute.getName())) return false;
-        if (!myValue.equals(attribute.getValue())) return false;
-        return true;
+        return myValue.equals(attribute.getValue());
     }
 
     @Override

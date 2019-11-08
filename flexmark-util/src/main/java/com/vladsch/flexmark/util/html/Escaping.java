@@ -12,7 +12,7 @@ import java.util.regex.Pattern;
 public class Escaping {
 
     // pure chars not for pattern
-    public static final String ESCAPABLE_CHARS = "\"#$%&\'()*+,./:;<=>?@[]\\^_`{|}~-";
+    public static final String ESCAPABLE_CHARS = "\"#$%&'()*+,./:;<=>?@[]\\^_`{|}~-";
 
     public static final String ESCAPABLE = "[!" +
             ESCAPABLE_CHARS

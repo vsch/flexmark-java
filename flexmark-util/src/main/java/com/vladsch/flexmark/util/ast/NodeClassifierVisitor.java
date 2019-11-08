@@ -136,7 +136,7 @@ public class NodeClassifierVisitor extends NodeVisitorBase implements NodeTracke
         if (!myClassificationDone) {
             // initial collection phase
             if (!(parent instanceof Document)) {
-                myClassifyingNodeTracker.nodeAdded((Node) parent);
+                myClassifyingNodeTracker.nodeAdded(parent);
             }
         } else {
             // postProcessor modification update phase
@@ -144,12 +144,12 @@ public class NodeClassifierVisitor extends NodeVisitorBase implements NodeTracke
 
         if (parent.getFirstChild() != null) {
             pushNodeAncestry();
-            if (updateNodeAncestry((Node) parent, myNodeAncestryBitSet)) {
+            if (updateNodeAncestry(parent, myNodeAncestryBitSet)) {
                 super.visitChildren(parent);
             }
             popNodeAncestry();
         } else {
-            updateNodeAncestry((Node) parent, myNodeAncestryBitSet);
+            updateNodeAncestry(parent, myNodeAncestryBitSet);
         }
     }
 }

@@ -33,29 +33,29 @@ import java.util.function.BiConsumer;
  * {@code
  *
  * @Override public void visit(Node node) {
- * processNode(node, true, this::visit);
- * VisitHandler&lt;?&gt; handler = getHandler(node);
- * if (handler != null) {
- * handler.visit(node);
- * } else {
- * visitChildren(node);
- * }
- * }
- * }
- * <p>
- * you will need to override {@link #processNode(Node node, boolean withChildren, BiConsumer consumer)}, and to change the
- * logic of processing child nodes if withChildren is true and passing child processing to processChildren() instead of visitChildren.
- * <p>
- * {@code
+ *         processNode(node, true, this::visit);
+ *         VisitHandler&lt;?&gt; handler = getHandler(node);
+ *         if (handler != null) {
+ *         handler.visit(node);
+ *         } else {
+ *         visitChildren(node);
+ *         }
+ *         }
+ *         }
+ *         <p>
+ *         you will need to override {@link #processNode(Node node, boolean withChildren, BiConsumer consumer)}, and to change the
+ *         logic of processing child nodes if withChildren is true and passing child processing to processChildren() instead of visitChildren.
+ *         <p>
+ *         {@code
  * @Override public void processNode(Node node, boolean withChildren, BiConsumer&lt;Node, Visitor&lt;Node&gt;&gt; processor) {
- * Visitor&lt;?&gt; handler = getAction(node);
- * if (handler != null) {
- * processor.accept(node, visitor);
- * }  else if (withChildren) {
- * processChildren(node, processor);
- * }
- * }
- * }
+ *         Visitor&lt;?&gt; handler = getAction(node);
+ *         if (handler != null) {
+ *         processor.accept(node, visitor);
+ *         }  else if (withChildren) {
+ *         processChildren(node, processor);
+ *         }
+ *         }
+ *         }
  */
 @SuppressWarnings("rawtypes")
 public class NodeVisitor extends AstActionHandler<NodeVisitor, Node, Visitor<Node>, VisitHandler<Node>> implements NodeVisitHandler {

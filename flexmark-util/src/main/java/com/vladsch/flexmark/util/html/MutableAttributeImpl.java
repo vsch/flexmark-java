@@ -231,8 +231,7 @@ public class MutableAttributeImpl implements MutableAttribute {
         Attribute attribute = (Attribute) o;
 
         if (!myName.equals(attribute.getName())) return false;
-        if (!getValue().equals(attribute.getValue())) return false;
-        return true;
+        return getValue().equals(attribute.getValue());
     }
 
     @Override
