@@ -6,27 +6,46 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
-import java.util.Locale;
 import java.util.function.BiPredicate;
 import java.util.function.Predicate;
 
 /**
- * A CharSequence that references original char sequence and maps '\0' to '\uFFFD'
- * a subSequence() returns a sub-sequence from the original base sequence
+ * A CharSequence that provides a rich set of manipulation methods
+ * <p>
+ * safe access methods return '\0' for no char response. If your input sequence has '\0' then it should be
+ * wrapped in a {@link MappedRichSequence} wrapper with {@link com.vladsch.flexmark.util.mappers.NullEncoder#encodeNull} mapper
+ * and {@link com.vladsch.flexmark.util.mappers.NullEncoder#decodeNull} mapper to get original null chars
  */
 @SuppressWarnings("SameParameterValue")
 public interface RichSequence<T extends RichSequence<?>> extends CharSequence, Comparable<CharSequence> {
     String EOL = "\n";
     String SPACE = " ";
+    String EOL_CHARS = "\r\n";
+
+    char EOL_CHAR = EOL_CHARS.charAt(1);
+    char EOL_CHAR1 = EOL_CHARS.charAt(0);
+    char EOL_CHAR2 = EOL_CHARS.charAt(1);
+
+    char SPC = ' ';
+    char NUL = '\0';
+    char ENC_NUL = '\uFFFD';
+    char NBSP = '\u00A0';
 
     String WHITESPACE_NO_EOL_CHARS = " \t";
     String WHITESPACE_CHARS = " \t\r\n";
     String WHITESPACE_NBSP_CHARS = " \t\r\n\u00A0";
 
-    String EOL_CHARS = "\r\n";
-    char EOL_CHAR = EOL_CHARS.charAt(1);
-    char EOL_CHAR1 = EOL_CHARS.charAt(0);
-    char EOL_CHAR2 = EOL_CHARS.charAt(1);
+    static RichSequenceImpl of(CharSequence charSequence) {
+        return RichSequenceImpl.create(charSequence, 0, charSequence.length());
+    }
+
+    static RichSequenceImpl of(CharSequence charSequence, int startIndex) {
+        return RichSequenceImpl.create(charSequence, startIndex, charSequence.length());
+    }
+
+    static RichSequenceImpl of(CharSequence charSequence, int startIndex, int endIndex) {
+        return RichSequenceImpl.create(charSequence, startIndex, endIndex);
+    }
 
     @NotNull T[] emptyArray();
     @NotNull T nullSequence();
@@ -44,12 +63,12 @@ public interface RichSequence<T extends RichSequence<?>> extends CharSequence, C
     /**
      * Get a portion of this sequence
      *
-     * @param start offset from start of this sequence
-     * @param end   offset from start of this sequence
+     * @param startIndex offset from startIndex of this sequence
+     * @param endIndex   offset from startIndex of this sequence
      * @return based sequence whose contents reflect the selected portion
      */
     @Override
-    @NotNull T subSequence(int start, int end);
+    @NotNull T subSequence(int startIndex, int endIndex);
 
     /**
      * Get a portion of this sequence selected by range
@@ -76,31 +95,31 @@ public interface RichSequence<T extends RichSequence<?>> extends CharSequence, C
     @NotNull T subSequenceAfter(@NotNull Range range);
 
     /**
-     * Get a portion of this sequence starting from a given offset to end of the sequence
+     * Get a portion of this sequence starting from a given offset to endIndex of the sequence
      *
-     * @param start offset from start of this sequence
+     * @param startIndex offset from startIndex of this sequence
      * @return based sequence whose contents reflect the selected portion
      */
-    @NotNull T subSequence(int start);
+    @NotNull T subSequence(int startIndex);
 
     /**
-     * Convenience method to get characters offset from end of sequence.
+     * Convenience method to get characters offset from endIndex of sequence.
      * no exceptions are thrown, instead a \0 is returned for an invalid index positions
      *
-     * @param start offset from end of sequence [ 0..length() )
-     * @param end   offset from end of sequence [ 0..length() )
-     * @return selected portion spanning length() - start to length() - end of this sequence
+     * @param startIndex offset from endIndex of sequence [ 0..length() )
+     * @param endIndex   offset from endIndex of sequence [ 0..length() )
+     * @return selected portion spanning length() - startIndex to length() - endIndex of this sequence
      */
-    @NotNull T endSequence(int start, int end);
+    @NotNull T endSequence(int startIndex, int endIndex);
 
     /**
-     * Convenience method to get characters offset from end of sequence.
+     * Convenience method to get characters offset from endIndex of sequence.
      * no exceptions are thrown, instead a \0 is returned for an invalid index positions
      *
-     * @param start offset from end of sequence [ 0..length() )
-     * @return selected portion spanning length() - start to length() of this sequence
+     * @param startIndex offset from endIndex of sequence [ 0..length() )
+     * @return selected portion spanning length() - startIndex to length() of this sequence
      */
-    @NotNull T endSequence(int start);
+    @NotNull T endSequence(int startIndex);
 
     // index from the end of the sequence
     // no exceptions are thrown, instead a \0 is returned for an invalid index
@@ -120,11 +139,11 @@ public interface RichSequence<T extends RichSequence<?>> extends CharSequence, C
      * <p>
      * no exceptions are thrown, instead a \0 is returned for an invalid index positions
      *
-     * @param start offset into this sequence
-     * @param end   offset into this sequence
-     * @return selected portion spanning start to end of this sequence. If offset is &lt;0 then it is taken as relative to length()
+     * @param startIndex offset into this sequence
+     * @param endIndex   offset into this sequence
+     * @return selected portion spanning startIndex to endIndex of this sequence. If offset is &lt;0 then it is taken as relative to length()
      */
-    @NotNull T midSequence(int start, int end);
+    @NotNull T midSequence(int startIndex, int end);
 
     /**
      * Convenience method to get characters offset from start or end of sequence.
@@ -133,10 +152,10 @@ public interface RichSequence<T extends RichSequence<?>> extends CharSequence, C
      * <p>
      * no exceptions are thrown, instead a \0 is returned for an invalid index positions
      *
-     * @param start offset into this sequence
-     * @return selected portion spanning start to length() of this sequence. If offset is &lt;0 then it is taken as relative to length()
+     * @param startIndex offset into this sequence
+     * @return selected portion spanning startIndex to length() of this sequence. If offset is &lt;0 then it is taken as relative to length()
      */
-    @NotNull T midSequence(int start);
+    @NotNull T midSequence(int startIndex);
 
     /**
      * Convenience method to get characters offset from start or end of sequence.
@@ -1063,8 +1082,6 @@ public interface RichSequence<T extends RichSequence<?>> extends CharSequence, C
      */
     @NotNull T toLowerCase();
     @NotNull T toUpperCase();
-    @NotNull T toLowerCase(Locale locale);
-    @NotNull T toUpperCase(Locale locale);
     @NotNull T toMapped(CharMapper mapper);
 
     @NotNull String toVisibleWhitespaceString();
@@ -1161,21 +1178,27 @@ public interface RichSequence<T extends RichSequence<?>> extends CharSequence, C
      * @param out        string builder
      * @param startIndex start index
      * @param endIndex   end index
+     * @param charMapper mapping to use for output or null if none
      * @return this
      */
+    @NotNull T appendTo(@NotNull StringBuilder out, @Nullable CharMapper charMapper, int startIndex, int endIndex);
+    @NotNull T appendTo(@NotNull StringBuilder out, @Nullable CharMapper charMapper);
+    @NotNull T appendTo(@NotNull StringBuilder out, @Nullable CharMapper charMapper, int startIndex);
     @NotNull T appendTo(@NotNull StringBuilder out, int startIndex, int endIndex);
-
     @NotNull T appendTo(@NotNull StringBuilder out);
-    @NotNull T appendTo(@NotNull StringBuilder out, int start);
+    @NotNull T appendTo(@NotNull StringBuilder out, int startIndex);
 
     /**
      * Append given ranges of this sequence to string builder
      *
-     * @param out    string builder to append to
-     * @param ranges ranges to append, null range or one for which range.isNull() is true ranges are skipped
+     * @param out        string builder to append to
+     * @param charMapper mapping to use for output or null if none
+     * @param ranges     ranges to append, null range or one for which range.isNull() is true ranges are skipped
      * @return this
      */
-    @NotNull T appendTo(@NotNull StringBuilder out, Range... ranges);
+    @NotNull T appendRangesTo(@NotNull StringBuilder out, @Nullable CharMapper charMapper, Range... ranges);
+    @NotNull T appendRangesTo(@NotNull StringBuilder out, Range... ranges);
+    @NotNull T appendRangesTo(@NotNull StringBuilder out, @Nullable CharMapper charMapper, Iterable<? extends Range> ranges);
     @NotNull T appendRangesTo(@NotNull StringBuilder out, Iterable<? extends Range> ranges);
 
     @NotNull T extractRanges(Range... ranges);

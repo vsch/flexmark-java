@@ -4,16 +4,15 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * A CharSequence that references original char sequence and maps '\0' to '\uFFFD'
- * a subSequence() returns a sub-sequence from the original base sequence
+ * A RichSequence implementation
  */
-final public class RichSequenceImpl extends RichSequenceBase<RichSequenceImpl> {
+public class RichSequenceImpl extends RichSequenceBase<RichSequenceImpl> {
     public static final RichSequenceImpl NULL = new RichSequenceImpl("");
     public static final RichSequenceImpl[] EMPTY_ARRAY = new RichSequenceImpl[0];
 
     final CharSequence charSequence;
 
-    public RichSequenceImpl(CharSequence charSequence) {
+    private RichSequenceImpl(CharSequence charSequence) {
         this.charSequence = charSequence;
     }
 
@@ -37,9 +36,9 @@ final public class RichSequenceImpl extends RichSequenceBase<RichSequenceImpl> {
 
     @NotNull
     @Override
-    public RichSequenceImpl subSequence(int start, int end) {
-        if (start == 0 && end == charSequence.length()) return this;
-        return new RichSequenceImpl(charSequence.subSequence(start, end));
+    public RichSequenceImpl subSequence(int startIndex, int endIndex) {
+        if (startIndex == 0 && endIndex == charSequence.length()) return this;
+        return create(charSequence, startIndex, endIndex);
     }
 
     @Override
@@ -52,20 +51,35 @@ final public class RichSequenceImpl extends RichSequenceBase<RichSequenceImpl> {
         return charSequence.charAt(index);
     }
 
-    public static RichSequenceImpl of(CharSequence charSequence) {
-        return of(charSequence, 0, charSequence.length());
-    }
-
-    public static RichSequenceImpl of(CharSequence charSequence, int start) {
-        return of(charSequence, start, charSequence.length());
-    }
-
-    public static RichSequenceImpl of(CharSequence charSequence, int start, int end) {
-        if (charSequence instanceof RichSequenceImpl) return ((RichSequenceImpl) charSequence).subSequence(start, end);
+    static RichSequenceImpl create(CharSequence charSequence, int startIndex, int endIndex) {
+        if (charSequence instanceof RichSequenceImpl) return ((RichSequenceImpl) charSequence).subSequence(startIndex, endIndex);
         else if (charSequence != null) {
-            if (start == 0 && end == charSequence.length()) return new RichSequenceImpl(charSequence);
-            else return new RichSequenceImpl(charSequence.subSequence(start, end));
-        }
-        return NULL;
+            if (startIndex == 0 && endIndex == charSequence.length()) return new RichSequenceImpl(charSequence);
+            else return new RichSequenceImpl(charSequence.subSequence(startIndex, endIndex));
+        } else return NULL;
+    }
+
+    /**
+     * @deprecated use {@link RichSequence#of} instead
+     */
+    @Deprecated
+    public static RichSequenceImpl of(CharSequence charSequence) {
+        return RichSequence.of(charSequence, 0, charSequence.length());
+    }
+
+    /**
+     * @deprecated use {@link RichSequence#of} instead
+     */
+    @Deprecated
+    public static RichSequenceImpl of(CharSequence charSequence, int startIndex) {
+        return RichSequence.of(charSequence, startIndex, charSequence.length());
+    }
+
+    /**
+     * @deprecated use {@link RichSequence#of} instead
+     */
+    @Deprecated
+    public static RichSequenceImpl of(CharSequence charSequence, int startIndex, int endIndex) {
+        return RichSequence.of(charSequence, startIndex, endIndex);
     }
 }

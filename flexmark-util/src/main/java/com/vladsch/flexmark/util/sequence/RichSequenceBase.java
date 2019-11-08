@@ -4,21 +4,23 @@ import com.vladsch.flexmark.util.Pair;
 import com.vladsch.flexmark.util.collection.iteration.ArrayIterable;
 import com.vladsch.flexmark.util.collection.iteration.MappingIterable;
 import com.vladsch.flexmark.util.html.Escaping;
+import com.vladsch.flexmark.util.mappers.ChangeCase;
 import com.vladsch.flexmark.util.mappers.CharMapper;
-import com.vladsch.flexmark.util.mappers.LowerCaseMapper;
-import com.vladsch.flexmark.util.mappers.UpperCaseMapper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.function.BiPredicate;
 import java.util.function.Predicate;
 
 import static com.vladsch.flexmark.util.Utils.rangeLimit;
 
 /**
- * A CharSequence that wraps original char sequence and adds rich set of string manipulation and test functions.
- * safe access methods return '\0' for no char response
+ * An abstract base for RichSequence which implements most of the methods allowing subclasses to
+ * implement RichSequence with minimal support methods
  */
 @SuppressWarnings("unchecked")
 public abstract class RichSequenceBase<T extends RichSequence<T>> implements RichSequence<T> {
@@ -157,10 +159,10 @@ public abstract class RichSequenceBase<T extends RichSequence<T>> implements Ric
 
     @NotNull
     @Override
-    final public T endSequence(int start, int end) {
+    final public T endSequence(int startIndex, int endIndex) {
         int length = length();
-        int useStart = length - start;
-        int useEnd = length - end;
+        int useStart = length - startIndex;
+        int useEnd = length - endIndex;
 
         useEnd = rangeLimit(useEnd, 0, length);
         useStart = rangeLimit(useStart, 0, useEnd);
@@ -175,23 +177,23 @@ public abstract class RichSequenceBase<T extends RichSequence<T>> implements Ric
     @NotNull
     @Override
     // REFACTOR: fold this into two arg method
-    final public T endSequence(int start) {
-        return endSequence(start, 0);
+    final public T endSequence(int startIndex) {
+        return endSequence(startIndex, 0);
     }
 
     @Override
     final public char endCharAt(int index) {
         int length = length();
-        if (index < 0 || index >= length) return '\0';
+        if (index < 0 || index >= length) return NUL;
         return charAt(length - index);
     }
 
     @NotNull
     @Override
-    final public T midSequence(int start, int end) {
+    final public T midSequence(int startIndex, int endIndex) {
         int length = length();
-        int useStart = start < 0 ? length + start : start;
-        int useEnd = end < 0 ? length + end : end;
+        int useStart = startIndex < 0 ? length + startIndex : startIndex;
+        int useEnd = endIndex < 0 ? length + endIndex : endIndex;
 
         useEnd = rangeLimit(useEnd, 0, length);
         useStart = rangeLimit(useStart, 0, useEnd);
@@ -205,14 +207,14 @@ public abstract class RichSequenceBase<T extends RichSequence<T>> implements Ric
 
     @NotNull
     @Override
-    final public T midSequence(int start) {
-        return midSequence(start, length());
+    final public T midSequence(int startIndex) {
+        return midSequence(startIndex, length());
     }
 
     @Override
     final public char midCharAt(int index) {
         int length = length();
-        if (index < -length || index >= length) return '\0';
+        if (index < -length || index >= length) return NUL;
         return charAt(index < 0 ? length + index : index);
     }
 
@@ -221,7 +223,7 @@ public abstract class RichSequenceBase<T extends RichSequence<T>> implements Ric
      */
     @Override
     final public char lastChar() {
-        return isEmpty() ? '\0' : charAt(length() - 1);
+        return isEmpty() ? NUL : charAt(length() - 1);
     }
 
     /**
@@ -229,7 +231,7 @@ public abstract class RichSequenceBase<T extends RichSequence<T>> implements Ric
      */
     @Override
     final public char firstChar() {
-        return isEmpty() ? '\0' : charAt(0);
+        return isEmpty() ? NUL : charAt(0);
     }
 
     // @formatter:off
@@ -1204,32 +1206,20 @@ public abstract class RichSequenceBase<T extends RichSequence<T>> implements Ric
     @Override
     // TEST:
     final public T toLowerCase() {
-        return toMapped(LowerCaseMapper.INSTANCE);
+        return toMapped(ChangeCase.toLowerCase);
     }
 
     @NotNull
     @Override
     // TEST:
     final public T toUpperCase() {
-        return toMapped(UpperCaseMapper.INSTANCE);
-    }
-
-    @NotNull
-    @Override
-    final public T toLowerCase(Locale locale) {
-        return toMapped(new LowerCaseMapper(locale));
-    }
-
-    @NotNull
-    @Override
-    final public T toUpperCase(Locale locale) {
-        return toMapped(new UpperCaseMapper(locale));
+        return toMapped(ChangeCase.toUpperCase);
     }
 
     @NotNull
     @Override
     public T toMapped(CharMapper mapper) {
-        return sequenceOf(MappedSequence.of(mapper, this));
+        return sequenceOf(MappedRichSequence.of(mapper, (T) this));
     }
 
     // @formatter:off
@@ -1284,8 +1274,8 @@ public abstract class RichSequenceBase<T extends RichSequence<T>> implements Ric
 
     @NotNull
     @Override
-    final public T subSequence(int start) {
-        return subSequence(start, length());
+    final public T subSequence(int startIndex) {
+        return subSequence(startIndex, length());
     }
 
     @NotNull
@@ -1388,37 +1378,36 @@ public abstract class RichSequenceBase<T extends RichSequence<T>> implements Ric
         return items.toArray(emptyArray());
     }
 
-    @NotNull
-    @Override
-    final public T appendTo(@NotNull StringBuilder out) {
-        return appendTo(out, 0, length());
-    }
+    // @formatter:off
+    @NotNull @Override final public T appendTo(@NotNull StringBuilder out, @Nullable CharMapper charMapper) {return appendTo(out, charMapper, 0, length());}
+    @NotNull @Override final public T appendTo(@NotNull StringBuilder out, @Nullable CharMapper charMapper, int startIndex) {return appendTo(out, charMapper, startIndex, length());}
+    @NotNull @Override final public T appendTo(@NotNull StringBuilder out) {return appendTo(out, null, 0, length());}
+    @NotNull @Override final public T appendTo(@NotNull StringBuilder out, int startIndex) {return appendTo(out, null, startIndex, length());}
+    @NotNull @Override final public T appendTo(@NotNull StringBuilder out, int startIndex, int endIndex) {return appendTo(out, null, startIndex, endIndex);}
+    // @formatter:on
 
     @NotNull
     @Override
-    final public T appendTo(@NotNull StringBuilder out, int start) {
-        return appendTo(out, start, length());
-    }
-
-    @NotNull
-    @Override
-    public T appendTo(@NotNull StringBuilder out, Range... ranges) {
-        return appendRangesTo(out, new ArrayIterable<>(ranges));
-    }
-
-    @NotNull
-    @Override
-    final public T appendRangesTo(@NotNull StringBuilder out, Iterable<? extends Range> ranges) {
-        for (Range range : ranges) {
-            if (range != null && range.isNotNull()) appendTo(out, range.getStart(), range.getEnd());
-        }
+    final public T appendTo(@NotNull StringBuilder out, @Nullable CharMapper charMapper, int startIndex, int endIndex) {
+        CharSequence useSequence = charMapper == null ? this : toMapped(charMapper);
+        out.append(useSequence, startIndex, endIndex);
         return (T) this;
     }
 
+    // @formatter:off
+    @NotNull @Override final public T appendRangesTo(@NotNull StringBuilder out, @Nullable CharMapper charMapper, Range... ranges) {return appendRangesTo(out, charMapper, new ArrayIterable<>(ranges));}
+    @NotNull @Override final public T appendRangesTo(@NotNull StringBuilder out, Range... ranges) {return appendRangesTo(out, null, new ArrayIterable<>(ranges));}
+    @NotNull @Override final public T appendRangesTo(@NotNull StringBuilder out, Iterable<? extends Range> ranges) {return appendRangesTo(out, null, ranges);}
+    // @formatter:on
+
     @NotNull
     @Override
-    final public T appendTo(@NotNull StringBuilder out, int startIndex, int endIndex) {
-        out.append(this, startIndex, endIndex);
+    final public T appendRangesTo(@NotNull StringBuilder out, @Nullable CharMapper charMapper, Iterable<? extends Range> ranges) {
+        CharSequence useSequence = charMapper == null ? this : toMapped(charMapper);
+
+        for (Range range : ranges) {
+            if (range != null && range.isNotNull()) out.append(useSequence, range.getStart(), range.getEnd());
+        }
         return (T) this;
     }
 
@@ -1597,7 +1586,6 @@ public abstract class RichSequenceBase<T extends RichSequence<T>> implements Ric
         }
 
         boolean hadCr = false;
-        boolean hadEOL = true;
         int line = 0;
         int col = 0;
         for (int i = 0; i < index; i++) {
