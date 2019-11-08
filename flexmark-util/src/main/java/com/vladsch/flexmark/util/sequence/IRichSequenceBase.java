@@ -23,7 +23,7 @@ import static com.vladsch.flexmark.util.Utils.rangeLimit;
  * implement RichSequence with minimal support methods
  */
 @SuppressWarnings("unchecked")
-public abstract class RichSequenceBase<T extends RichSequence<T>> implements RichSequence<T> {
+public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements IRichSequence<T> {
     private static int[] EMPTY_INDICES = { };
     private static final Map<Character, String> visibleSpacesMap;
     static {
@@ -1025,12 +1025,12 @@ public abstract class RichSequenceBase<T extends RichSequence<T>> implements Ric
     // @formatter:off
     @NotNull @Override final public T trimTailBlankLines() {Range range = trailingBlankLinesRange();return range.isNull() ? (T) this : subSequenceBefore(range);}
     @NotNull @Override final public T trimLeadBlankLines() {Range range = leadingBlankLinesRange();return range.isNull() ? (T) this : subSequenceAfter(range);}
-    @NotNull @Override final public Range leadingBlankLinesRange() {return leadingBlankLinesRange(RichSequence.EOL, 0, length());}
-    @NotNull @Override final public Range leadingBlankLinesRange(int startIndex) {return leadingBlankLinesRange(RichSequence.EOL, startIndex, length());}
-    @NotNull @Override final public Range leadingBlankLinesRange(int fromIndex, int endIndex) { return leadingBlankLinesRange(RichSequence.EOL, fromIndex, endIndex);}
-    @NotNull @Override final public Range trailingBlankLinesRange() {return trailingBlankLinesRange(RichSequence.EOL, 0, length());}
-    @NotNull @Override final public Range trailingBlankLinesRange(int fromIndex) {return trailingBlankLinesRange(RichSequence.EOL, fromIndex, length());}
-    @NotNull @Override final public Range trailingBlankLinesRange(int startIndex, int fromIndex) { return trailingBlankLinesRange(RichSequence.EOL,startIndex,fromIndex);}
+    @NotNull @Override final public Range leadingBlankLinesRange() {return leadingBlankLinesRange(IRichSequence.EOL, 0, length());}
+    @NotNull @Override final public Range leadingBlankLinesRange(int startIndex) {return leadingBlankLinesRange(IRichSequence.EOL, startIndex, length());}
+    @NotNull @Override final public Range leadingBlankLinesRange(int fromIndex, int endIndex) { return leadingBlankLinesRange(IRichSequence.EOL, fromIndex, endIndex);}
+    @NotNull @Override final public Range trailingBlankLinesRange() {return trailingBlankLinesRange(IRichSequence.EOL, 0, length());}
+    @NotNull @Override final public Range trailingBlankLinesRange(int fromIndex) {return trailingBlankLinesRange(IRichSequence.EOL, fromIndex, length());}
+    @NotNull @Override final public Range trailingBlankLinesRange(int startIndex, int fromIndex) { return trailingBlankLinesRange(IRichSequence.EOL,startIndex,fromIndex);}
     // @formatter:on
 
     @NotNull
@@ -1076,9 +1076,9 @@ public abstract class RichSequenceBase<T extends RichSequence<T>> implements Ric
     }
 
     // @formatter:off
-    @NotNull @Override final public List<Range> blankLinesRemovedRanges() { return blankLinesRemovedRanges(RichSequence.EOL, 0, length());}
-    @NotNull @Override final public List<Range> blankLinesRemovedRanges(int fromIndex) { return blankLinesRemovedRanges(RichSequence.EOL, fromIndex, length());}
-    @NotNull @Override final public List<Range> blankLinesRemovedRanges(int fromIndex, int endIndex) { return blankLinesRemovedRanges(RichSequence.EOL, fromIndex, endIndex);}
+    @NotNull @Override final public List<Range> blankLinesRemovedRanges() { return blankLinesRemovedRanges(IRichSequence.EOL, 0, length());}
+    @NotNull @Override final public List<Range> blankLinesRemovedRanges(int fromIndex) { return blankLinesRemovedRanges(IRichSequence.EOL, fromIndex, length());}
+    @NotNull @Override final public List<Range> blankLinesRemovedRanges(int fromIndex, int endIndex) { return blankLinesRemovedRanges(IRichSequence.EOL, fromIndex, endIndex);}
     // @formatter:on
 
     @NotNull
@@ -1104,15 +1104,15 @@ public abstract class RichSequenceBase<T extends RichSequence<T>> implements Ric
     }
 
     // @formatter:off
-    @NotNull @Override public T trimToEndOfLine(boolean includeEol) { return trimToEndOfLine(RichSequence.EOL,includeEol, 0);  }
-    @NotNull @Override public T trimToEndOfLine(int index) { return trimToEndOfLine(RichSequence.EOL,false, 0);  }
-    @NotNull @Override public T trimToEndOfLine() { return trimToEndOfLine(RichSequence.EOL,false, 0);   }
-    @NotNull @Override public T trimToEndOfLine(boolean includeEol, int index) { return trimToEndOfLine(RichSequence.EOL,includeEol, index); }
+    @NotNull @Override public T trimToEndOfLine(boolean includeEol) { return trimToEndOfLine(IRichSequence.EOL,includeEol, 0);  }
+    @NotNull @Override public T trimToEndOfLine(int index) { return trimToEndOfLine(IRichSequence.EOL,false, 0);  }
+    @NotNull @Override public T trimToEndOfLine() { return trimToEndOfLine(IRichSequence.EOL,false, 0);   }
+    @NotNull @Override public T trimToEndOfLine(boolean includeEol, int index) { return trimToEndOfLine(IRichSequence.EOL,includeEol, index); }
 
-    @NotNull @Override public T trimToStartOfLine(boolean includeEol) { return trimToStartOfLine(RichSequence.EOL,includeEol, 0);  }
-    @NotNull @Override public T trimToStartOfLine(int index) { return trimToStartOfLine(RichSequence.EOL,false, 0);  }
-    @NotNull @Override public T trimToStartOfLine() { return trimToStartOfLine(RichSequence.EOL,false, 0);   }
-    @NotNull @Override public T trimToStartOfLine(boolean includeEol, int index) { return trimToStartOfLine(RichSequence.EOL,includeEol, index); }
+    @NotNull @Override public T trimToStartOfLine(boolean includeEol) { return trimToStartOfLine(IRichSequence.EOL,includeEol, 0);  }
+    @NotNull @Override public T trimToStartOfLine(int index) { return trimToStartOfLine(IRichSequence.EOL,false, 0);  }
+    @NotNull @Override public T trimToStartOfLine() { return trimToStartOfLine(IRichSequence.EOL,false, 0);   }
+    @NotNull @Override public T trimToStartOfLine(boolean includeEol, int index) { return trimToStartOfLine(IRichSequence.EOL,includeEol, index); }
     // @formatter:on
 
     @NotNull

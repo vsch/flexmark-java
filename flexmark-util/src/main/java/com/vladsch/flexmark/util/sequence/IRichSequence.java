@@ -17,7 +17,7 @@ import java.util.function.Predicate;
  * and {@link com.vladsch.flexmark.util.mappers.NullEncoder#decodeNull} mapper to get original null chars
  */
 @SuppressWarnings("SameParameterValue")
-public interface RichSequence<T extends RichSequence<?>> extends CharSequence, Comparable<CharSequence> {
+public interface IRichSequence<T extends IRichSequence<?>> extends CharSequence, Comparable<CharSequence> {
     String EOL = "\n";
     String SPACE = " ";
     String EOL_CHARS = "\r\n";
