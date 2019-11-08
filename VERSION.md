@@ -183,22 +183,20 @@ Next
 * Break: rename `RepeatedCharSequence` to `RepeatedSequence`
 * Fix: `RichCharSequence` which is extended by `BasedCharSequence`
   <!-- @formatter:off -->
-  * Add: `BasedSequence.extendToEndOfLine(CharSequence eolChars, boolean includeEol)` - extend end to end of line in basedSequence
-  * Add: `BasedSequence.extendStartToStartOfLine(CharSequence eolChars, boolean includeEol)` - extend start to start of line in basedSequence
-  * Add: `RichCharSequence.trimToEndOfLine(CharSequence eolChars, boolean includeEol, int index)` - trim end to end of line at index
-  * Add: `RichCharSequence.trimToStartOfLine(CharSequence, boolean, int)` - trimmed end after next EOL
-  * Add: `RichCharSequence.leadingBlankLinesRange(CharSequence eolChars, int fromIndex, int endIndex)` - find next range of blank lines
-  * Add: `RichCharSequence.trailingBlankLinesRange(CharSequence eolChars, int startIndex, int fromIndex)` - find previous range of blank lines
-  * Add: `RichCharSequence.blankLinesRemovedRanges(CharSequence eolChars, int fromIndex, int endIndex)` - list of ranges in sequence between `fromIndex` and `endIndex`  excluding all blank lines
+  * Add: `RichSequence.trimToEndOfLine(CharSequence eolChars, boolean includeEol, int index)` - trim end to end of line at index
+  * Add: `RichSequence.trimToStartOfLine(CharSequence, boolean, int)` - trimmed end after next EOL
+  * Add: `RichSequence.leadingBlankLinesRange(CharSequence eolChars, int fromIndex, int endIndex)` - find next range of blank lines
+  * Add: `RichSequence.trailingBlankLinesRange(CharSequence eolChars, int startIndex, int fromIndex)` - find previous range of blank lines
+  * Add: `RichSequence.blankLinesRemovedRanges(CharSequence eolChars, int fromIndex, int endIndex)` - list of ranges in sequence between `fromIndex` and `endIndex`  excluding all blank lines
   * Add: range based methods:
-    * `RichCharSequence.subSequence(Range)`
-    * `RichCharSequence.subSequenceAfter(Range)`
-    * `RichCharSequence.subSequenceBefore(Range)`
+    * `RichSequence.subSequence(Range)`
+    * `RichSequence.subSequenceAfter(Range)`
+    * `RichSequence.subSequenceBefore(Range)`
   <!-- @formatter:on -->
 * Add: to `BasedSequence`
     <!-- @formatter:off -->
     * Add: `BasedSequence.extendToEndOfLine(CharSequence eolChars, boolean includeEol)` - extend end to end of line in basedSequence
-    * Add: `BasedSequence.extendStartToStartOfLine(CharSequence eolChars, boolean includeEol)` - extend start to start of line in basedSequence
+    * Add: `BasedSequence.extendToStartOfLine(CharSequence eolChars, boolean includeEol)` - extend start to start of line in basedSequence
     <!-- @formatter:on -->
 * Add: `ArrayUtils` for searching arrays of `<T>` on value or predicate
   * `indexOf()` variations for forward search

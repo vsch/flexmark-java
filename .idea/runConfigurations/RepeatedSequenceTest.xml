@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="RepeatedCharSequenceTest" type="JUnit" factoryName="JUnit" singleton="true" nameIsGenerated="true">
+  <configuration default="false" name="RepeatedSequenceTest" type="JUnit" factoryName="JUnit" singleton="true" nameIsGenerated="true">
     <module name="flexmark-util" />
     <extension name="coverage">
       <pattern>
@@ -8,7 +8,7 @@
       </pattern>
     </extension>
     <option name="PACKAGE_NAME" value="com.vladsch.flexmark.util.sequence" />
-    <option name="MAIN_CLASS_NAME" value="com.vladsch.flexmark.util.sequence.RepeatedCharSequenceTest" />
+    <option name="MAIN_CLASS_NAME" value="com.vladsch.flexmark.util.sequence.RepeatedSequenceTest" />
     <option name="METHOD_NAME" value="" />
     <option name="TEST_OBJECT" value="class" />
     <option name="PARAMETERS" value="" />
