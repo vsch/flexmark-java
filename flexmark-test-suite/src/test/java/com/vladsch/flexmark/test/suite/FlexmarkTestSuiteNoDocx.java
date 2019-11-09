@@ -92,7 +92,7 @@ import org.junit.runners.Suite;
     UtilsTestSuite.class,
     TestUtilsTestSuite.class,
     YouTrackConverterTestSuite.class,
-    SmartParagraphCharSequenceTest.class,
+    MarkdownParagraphTest.class,
 })
 public class FlexmarkTestSuiteNoDocx {
 }

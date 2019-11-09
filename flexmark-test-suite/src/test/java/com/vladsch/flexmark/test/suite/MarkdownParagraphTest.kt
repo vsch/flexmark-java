@@ -8,7 +8,7 @@ import org.junit.After
 import org.junit.Assert.*
 import org.junit.Test
 
-class SmartParagraphCharSequenceTest {
+class MarkdownParagraphTest {
 
     val simplePar = """Lorem ipsum dolor sit amet, consectetaur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."""
 
