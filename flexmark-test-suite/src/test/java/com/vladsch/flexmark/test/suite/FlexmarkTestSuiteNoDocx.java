@@ -43,6 +43,8 @@ import com.vladsch.flexmark.profile.pegdown.PegdownProfileTestSuite;
 import com.vladsch.flexmark.test.util.TestUtilsTestSuite;
 import com.vladsch.flexmark.util.UtilsTestSuite;
 import com.vladsch.flexmark.youtrack.converter.YouTrackConverterTestSuite;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
@@ -95,4 +97,5 @@ import org.junit.runners.Suite;
     MarkdownParagraphTest.class,
 })
 public class FlexmarkTestSuiteNoDocx {
+
 }
