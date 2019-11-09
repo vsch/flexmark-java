@@ -184,14 +184,16 @@ Next
 * Break: rename `RichCharSequenceBase` to `IRichSequenceBase`
 * Break: rename `RichCharSequenceImpl` to `RichSequenceImpl`
 * Break: rename `RepeatedCharSequence` to `RepeatedSequence`
-* Break: move `com.vladsch.flexmark.tree.iteration.ArrayIterable` to `com.vladsch.flexmark.util.collection.iteration.ArrayIterable`
-* Break: move `com.vladsch.flexmark.util.html.CellAlignment` to `com.vladsch.flexmark.util.collection.iteration.ArrayIterable`
 * Add: `RichSequence.of` for creating `RichSequence` instances
 * Add: `BasedSequence.of` for creating `BasedSequence` instances
 * Deprecate: `RichSequenceImpl.of`, use `RichSequence.of` instead
 * Deprecate: `BasedSequenceImpl.of`, use `BasedSequence.of` instead
 * Deprecate: `SubSequence.of`, use `BasedSequence.of` instead
 * Deprecate: `UpperCaseMapper` and `LowerCaseMapper` use `ChangeCase.toUpperCase` and `ChangeCase.toLowerCase`
+* Break: move
+  * `com.vladsch.flexmark.tree.iteration.ArrayIterable` to `com.vladsch.flexmark.util.collection.iteration.ArrayIterable`
+  * `com.vladsch.flexmark.util.html.CellAlignment` to `com.vladsch.flexmark.util.collection.iteration.ArrayIterable`
+  * `com.vladsch.flexmark.ast.DelimitedNode` to `com.vladsch.flexmark.util.ast.DelimitedNode`
 * Fix: `IRichSequence` and by extension `RichSequence` and `BasedSequence`
   <!-- @formatter:off -->
   * Add: `IRichSequence.trimToEndOfLine(CharSequence eolChars, boolean includeEol, int index)` - trim end to end of line at index
@@ -205,10 +207,45 @@ Next
     * `IRichSequence.subSequenceBefore(Range)`
   <!-- @formatter:on -->
 * Add: to `BasedSequence`
-    <!-- @formatter:off -->
-    * Add: `BasedSequence.extendToEndOfLine(CharSequence eolChars, boolean includeEol)` - extend end to end of line in basedSequence
-    * Add: `BasedSequence.extendToStartOfLine(CharSequence eolChars, boolean includeEol)` - extend start to start of line in basedSequence
-    <!-- @formatter:on -->
+  <!-- @formatter:off -->
+  * Add: `BasedSequence.extendToEndOfLine(CharSequence eolChars, boolean includeEol)` - extend end to end of line in basedSequence
+  * Add: `BasedSequence.extendToStartOfLine(CharSequence eolChars, boolean includeEol)` - extend start to start of line in basedSequence
+  <!-- @formatter:on -->
+  * Convenience methods returning coordinates from the base sequence
+    * `@NotNull Pair<Integer, Integer> baseLineColumnAtIndex(int index);`
+    * `@NotNull Range baseLineRangeAtIndex(int index);`
+    * `int baseEndOfLine(int index);`
+    * `int baseEndOfLineAnyEOL(int index);`
+    * `int baseStartOfLine(int index);`
+    * `int baseStartOfLineAnyEOL(int index);`
+    * `int baseColumnAtIndex(int index);`
+    * `@NotNull Pair<Integer, Integer> baseLineColumnAtStart();`
+    * `@NotNull Pair<Integer, Integer> baseLineColumnAtEnd();`
+    * `int baseEndOfLine();`
+    * `int baseEndOfLineAnyEOL();`
+    * `int baseStartOfLine();`
+    * `int baseStartOfLineAnyEOL();`
+    * `@NotNull Range baseLineRangeAtStart();`
+    * `@NotNull Range baseLineRangeAtEnd();`
+    * `int baseColumnAtEnd();`
+    * `int baseColumnAtStart();`
+* Add: to `Node` convenience methods delegated to `getChars()`
+  * `int getStartOffset()`  to `getStartOffset()`
+  * `int getEndOffset()`  to `getEndOffset()`
+  * `int getTextLength()`  to `length()`
+  * `BasedSequence getBaseSequence()`  to `getBaseSequence()`
+  * `Range getSourceRange()`  to `etSourceRange()`
+  * `BasedSequence baseSubSequence(int startIndex, int endIndex)`  to `baseSubSequence(startIndex, endIndex)`
+  * `BasedSequence baseSubSequence(int startIndex)`  to `baseSubSequence(startIndex)`
+  * `BasedSequence getEmptyPrefix()`  to `getEmptyPrefix()`
+  * `BasedSequence getEmptySuffix()`  to `getEmptySuffix()`
+  * `int getStartOfLine()`  to `baseStartOfLine()`
+  * `int getEndOfLine()`  to `baseEndOfLine()`
+  * `int startOfLine(int index)`  to `baseStartOfLine(index)`
+  * `int endOfLine(int index)`  to `baseEndOfLine(index)`
+  * `Pair<Integer, Integer> lineColumnAtIndex(int index)`  to `baseLineColumnAtIndex(index)`
+  * `Pair<Integer, Integer> lineColumnAtStart()`  to `baseLineColumnAtStart()`
+  * `Pair<Integer, Integer> getLineColumnAtEnd()`  to `baseLineColumnAtEnd()`
 * Add: `ArrayUtils` for searching arrays of `<T>` on value or predicate
   * `indexOf()` variations for forward search
   * `lastIndexOf()` variations for backward search

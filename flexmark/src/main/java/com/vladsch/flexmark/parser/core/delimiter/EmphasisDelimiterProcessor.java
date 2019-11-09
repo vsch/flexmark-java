@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.parser.core.delimiter;
 
-import com.vladsch.flexmark.ast.DelimitedNode;
+import com.vladsch.flexmark.util.ast.DelimitedNode;
 import com.vladsch.flexmark.ast.Emphasis;
 import com.vladsch.flexmark.ast.StrongEmphasis;
 import com.vladsch.flexmark.parser.InlineParser;

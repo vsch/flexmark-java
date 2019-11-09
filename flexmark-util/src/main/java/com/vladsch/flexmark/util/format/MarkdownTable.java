@@ -187,7 +187,7 @@ public class MarkdownTable {
             row.normalizeIfNeeded();
             TableCell lastCell = row.cells.get(row.cells.size() - 1);
             BasedSequence lastSegment = lastCell.getLastSegment();
-            int lineEndOffset = lastSegment.getBaseSequence().indexOfAny("\r\n", lastSegment.getEndOffset());
+            int lineEndOffset = lastSegment.baseEndOfLineAnyEOL();
             if (lineEndOffset == -1) lineEndOffset = lastSegment.getEndOffset();
 
             if (offset <= lineEndOffset) {

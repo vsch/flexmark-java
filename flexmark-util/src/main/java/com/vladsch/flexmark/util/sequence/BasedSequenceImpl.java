@@ -1,5 +1,6 @@
 package com.vladsch.flexmark.util.sequence;
 
+import com.vladsch.flexmark.util.Pair;
 import com.vladsch.flexmark.util.Utils;
 import com.vladsch.flexmark.util.html.Escaping;
 import com.vladsch.flexmark.util.mappers.CharMapper;
@@ -300,6 +301,38 @@ public abstract class BasedSequenceImpl extends IRichSequenceBase<BasedSequence>
         else if (other.getEndOffset() <= getStartOffset()) return this;
         else return this.baseSubSequence(other.getEndOffset(), getEndOffset());
     }
+
+    @Override
+    public @NotNull Range lineRangeAt(int index) {
+        return super.lineRangeAt(index);
+    }
+
+    @Override
+    public @NotNull Range lineRangeAtAnyEOL(int index) {
+        return super.lineRangeAtAnyEOL(index);
+    }
+
+    // @formatter:off
+    @Override public @NotNull Range baseLineRangeAtIndex(int index) { return getBaseSequence().lineRangeAt(index); }
+    @Override public @NotNull Pair<Integer, Integer> baseLineColumnAtIndex(int index) { return getBaseSequence().lineColumnAtIndex(index);}
+    @Override public int baseEndOfLine(int index) { return getBaseSequence().endOfLine(index); }
+    @Override public int baseEndOfLineAnyEOL(int index) { return getBaseSequence().endOfLineAnyEOL(index); }
+    @Override public int baseStartOfLine(int index) { return getBaseSequence().startOfLine(index); }
+    @Override public int baseStartOfLineAnyEOL(int index) { return getBaseSequence().startOfLineAnyEOL(index); }
+    @Override public int baseColumnAtIndex(int index) { return getBaseSequence().columnAtIndex(index); }
+
+    @Override public int baseEndOfLine() { return baseEndOfLine(getEndOffset()); }
+    @Override public int baseEndOfLineAnyEOL() { return baseEndOfLineAnyEOL(getEndOffset()); }
+    @Override public int baseColumnAtEnd() { return baseColumnAtIndex(getEndOffset()); }
+    @Override public @NotNull Range baseLineRangeAtEnd() { return baseLineRangeAtIndex(getEndOffset()); }
+    @Override public @NotNull Pair<Integer, Integer> baseLineColumnAtEnd() { return baseLineColumnAtIndex(getEndOffset());}
+
+    @Override public int baseStartOfLine() { return baseStartOfLine(getStartOffset()); }
+    @Override public int baseStartOfLineAnyEOL() { return baseStartOfLineAnyEOL(getStartOffset()); }
+    @Override public int baseColumnAtStart() { return baseColumnAtIndex(getStartOffset()); }
+    @Override public @NotNull Range baseLineRangeAtStart() { return baseLineRangeAtIndex(getStartOffset()); }
+    @Override public @NotNull Pair<Integer, Integer> baseLineColumnAtStart() {return baseLineColumnAtIndex(getStartOffset());}
+    // @formatter:on
 
     /**
      * @deprecated  use {@link BasedSequence#of} instead

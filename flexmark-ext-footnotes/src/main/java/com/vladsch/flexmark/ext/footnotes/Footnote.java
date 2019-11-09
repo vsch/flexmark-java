@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.ext.footnotes;
 
-import com.vladsch.flexmark.ast.DelimitedNode;
+import com.vladsch.flexmark.util.ast.DelimitedNode;
 import com.vladsch.flexmark.ext.footnotes.internal.FootnoteRepository;
 import com.vladsch.flexmark.util.ast.DoNotDecorate;
 import com.vladsch.flexmark.util.ast.Document;

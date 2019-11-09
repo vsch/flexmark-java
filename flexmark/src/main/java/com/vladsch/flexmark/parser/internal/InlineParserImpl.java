@@ -261,7 +261,7 @@ public class InlineParserImpl extends LightInlineParserImpl implements InlinePar
             leadingSpaces = contentChars.countLeading(BasedSequence.WHITESPACE_NO_EOL_CHARS);
         }
 
-        return contentChars.getStartOffset() - block.getChars().getStartOffset();
+        return contentChars.getStartOffset() - block.getStartOffset();
     }
 
     /**
@@ -1107,7 +1107,7 @@ public class InlineParserImpl extends LightInlineParserImpl implements InlinePar
         int startOffset = nodeChars.getStartOffset();
         int endOffset = nodeChars.getEndOffset();
         while (next != null) {
-            if (next instanceof LinkRef && (isDefined == null || ((LinkRef) next).isDefined() == isDefined) && !(next.getChars().getStartOffset() >= endOffset || next.getChars().getEndOffset() <= startOffset)) {
+            if (next instanceof LinkRef && (isDefined == null || ((LinkRef) next).isDefined() == isDefined) && !(next.getStartOffset() >= endOffset || next.getEndOffset() <= startOffset)) {
                 return true;
             }
             next = next.getNext();

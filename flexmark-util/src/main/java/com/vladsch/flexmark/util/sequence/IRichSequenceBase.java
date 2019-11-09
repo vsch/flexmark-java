@@ -1566,14 +1566,14 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
     }
 
     @Override
-    final public int getColumnAtIndex(int index) {
+    final public int columnAtIndex(int index) {
         int lineStart = lastIndexOfAny(EOL_CHARS, index);
         return index - (lineStart == -1 ? 0 : lineStart + eolStartLength(lineStart));
     }
 
     @NotNull
     @Override
-    final public Pair<Integer, Integer> getLineColumnAtIndex(int index) {
+    final public Pair<Integer, Integer> lineColumnAtIndex(int index) {
         int iMax = length();
         if (index < 0 || index > iMax) {
             throw new IllegalArgumentException("Index: " + index + " out of range [0, " + iMax + "]");

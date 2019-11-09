@@ -826,7 +826,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
 
                 if (docx.getDocxRendererOptions().errorsToStdErr) {
                     // output details of error
-                    Pair<Integer, Integer> atIndex = urlSrc.getBaseSequence().getLineColumnAtIndex(urlSrc.getStartOffset());
+                    Pair<Integer, Integer> atIndex = urlSrc.baseLineColumnAtStart();
                     String sourceFile = docx.getDocxRendererOptions().errorSourceFile;
                     if (sourceFile.isEmpty()) {
                         sourceFile = "on line ";

@@ -88,7 +88,7 @@ public class AttributesNodePostProcessor extends NodePostProcessor {
                 attributeOwner = parent;
             }
         } else {
-            if ((!myOptions.assignTextAttributes && (previous instanceof Text || previous instanceof TextBase)) || previous.getChars().getEndOffset() < attributesNode.getStartOffset()) {
+            if ((!myOptions.assignTextAttributes && (previous instanceof Text || previous instanceof TextBase)) || previous.getEndOffset() < attributesNode.getStartOffset()) {
                 // either previous is text and no text attributes or not attached to the previous node
                 // then attributes go to parent unless overridden by delimited attribute spans
 
@@ -330,8 +330,8 @@ public class AttributesNodePostProcessor extends NodePostProcessor {
                     Node lastAttributes = dummyBlock.getLastChild();
 
                     // truncate info to exclude attributes
-                    fencedCodeBlock.setInfo(fencedCodeBlock.getChars().baseSubSequence(info.getStartOffset(), firstAttributes.getStartOffset()));
-                    fencedCodeBlock.setAttributes(fencedCodeBlock.getChars().baseSubSequence(firstAttributes.getStartOffset(), lastAttributes.getEndOffset()));
+                    fencedCodeBlock.setInfo(fencedCodeBlock.baseSubSequence(info.getStartOffset(), firstAttributes.getStartOffset()));
+                    fencedCodeBlock.setAttributes(fencedCodeBlock.baseSubSequence(firstAttributes.getStartOffset(), lastAttributes.getEndOffset()));
 
                     for (Node attributesNode : dummyBlock.getChildren()) {
                         if (myLightInlineParser.getIndex() >= myLightInlineParser.getInput().length()) {

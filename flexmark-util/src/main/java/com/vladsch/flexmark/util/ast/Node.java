@@ -1,5 +1,6 @@
 package com.vladsch.flexmark.util.ast;
 
+import com.vladsch.flexmark.util.Pair;
 import com.vladsch.flexmark.util.Utils;
 import com.vladsch.flexmark.util.collection.iteration.ReversiblePeekingIterable;
 import com.vladsch.flexmark.util.collection.iteration.ReversiblePeekingIterator;
@@ -56,7 +57,17 @@ public abstract class Node {
     public BasedSequence baseSubSequence(int startIndex) {return chars.baseSubSequence(startIndex);}
     public BasedSequence getEmptyPrefix() {return chars.getEmptyPrefix();}
     public BasedSequence getEmptySuffix() {return chars.getEmptySuffix();}
+
+    public int getStartOfLine() { return chars.baseStartOfLine(); }
+    public int getEndOfLine() { return chars.baseEndOfLine(); }
+    public int startOfLine(int index) { return chars.baseStartOfLine(index); }
+    public int endOfLine(int index) { return chars.baseEndOfLine(index); }
+    public Pair<Integer, Integer> lineColumnAtIndex(int index) { return chars.baseLineColumnAtIndex(index); }
+    public Pair<Integer, Integer> lineColumnAtStart() { return chars.baseLineColumnAtStart(); }
+    public Pair<Integer, Integer> getLineColumnAtEnd() { return chars.baseLineColumnAtEnd(); }
     // @formatter:on
+
+
 
     public @Nullable Node getAncestorOfType(@NotNull Class<?>... classes) {
         Node parent = getParent();
@@ -762,7 +773,7 @@ public abstract class Node {
             return BasedSequence.NULL;
         }
 
-        return firstChild.getChars().baseSubSequence(firstChild.getStartOffset(), lastChild.getEndOffset());
+        return firstChild.baseSubSequence(firstChild.getStartOffset(), lastChild.getEndOffset());
     }
 
     public BasedSequence getExactChildChars() {
@@ -787,7 +798,7 @@ public abstract class Node {
                         if (last != null) segments.add(last.getChars());
                     } else {
                         if (last != null && child.getPrevious() != null) {
-                            segments.add(last.getChars().baseSubSequence(last.getStartOffset(), child.getPrevious().getEndOffset()));
+                            segments.add(last.baseSubSequence(last.getStartOffset(), child.getPrevious().getEndOffset()));
                         }
                     }
                 }
@@ -802,13 +813,13 @@ public abstract class Node {
             if (last != null) {
                 // insert chars between last child and this node
                 if (child != null) {
-                    segments.add(last.getChars().baseSubSequence(last.getStartOffset(), child.getEndOffset()));
+                    segments.add(last.baseSubSequence(last.getStartOffset(), child.getEndOffset()));
                 }
             }
 
             return segments.size() == 1 ? segments.get(0) : SegmentedSequence.of(segments);
         } else {
-            return firstChild.getChars().baseSubSequence(firstChild.getStartOffset(), lastChild.getEndOffset());
+            return firstChild.baseSubSequence(firstChild.getStartOffset(), lastChild.getEndOffset());
         }
     }
 

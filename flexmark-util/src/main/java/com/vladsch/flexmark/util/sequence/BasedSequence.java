@@ -1,5 +1,6 @@
 package com.vladsch.flexmark.util.sequence;
 
+import com.vladsch.flexmark.util.Pair;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -296,6 +297,28 @@ public interface BasedSequence extends IRichSequence<BasedSequence> {
      * @return sequence which
      */
     BasedSequence prefixWithIndent(int maxColumns);
+
+    /*
+      These are convenience methods returning coordinates in Base Sequence of this sequence
+     */
+    @NotNull Pair<Integer, Integer> baseLineColumnAtIndex(int index);
+    @NotNull Range baseLineRangeAtIndex(int index);
+    int baseEndOfLine(int index);
+    int baseEndOfLineAnyEOL(int index);
+    int baseStartOfLine(int index);
+    int baseStartOfLineAnyEOL(int index);
+    int baseColumnAtIndex(int index);
+
+    @NotNull Pair<Integer, Integer> baseLineColumnAtStart();
+    @NotNull Pair<Integer, Integer> baseLineColumnAtEnd();
+    int baseEndOfLine();
+    int baseEndOfLineAnyEOL();
+    int baseStartOfLine();
+    int baseStartOfLineAnyEOL();
+    @NotNull Range baseLineRangeAtStart();
+    @NotNull Range baseLineRangeAtEnd();
+    int baseColumnAtEnd();
+    int baseColumnAtStart();
 
     default BasedSequence prefixWithIndent() {
         return prefixWithIndent(Integer.MAX_VALUE);

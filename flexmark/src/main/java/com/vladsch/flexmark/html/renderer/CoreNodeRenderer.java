@@ -263,10 +263,10 @@ public class CoreNodeRenderer implements NodeRenderer {
         if (range.getEnd() <= endOffset) {
             endOffset = range.getEnd();
             endOffset -= eolLength;
-            endOffset -= parentNode.getChars().baseSubSequence(startOffset, endOffset).countTrailing(BasedSequence.WHITESPACE_NO_EOL_CHARS);
+            endOffset -= parentNode.baseSubSequence(startOffset, endOffset).countTrailing(BasedSequence.WHITESPACE_NO_EOL_CHARS);
             myNextLine++;
             nextLineStartOffset = range.getEnd();
-            nextLineStartOffset += parentNode.getChars().baseSubSequence(nextLineStartOffset, parentNode.getChars().getEndOffset()).countLeading(BasedSequence.WHITESPACE_NO_EOL_CHARS);
+            nextLineStartOffset += parentNode.baseSubSequence(nextLineStartOffset, parentNode.getEndOffset()).countLeading(BasedSequence.WHITESPACE_NO_EOL_CHARS);
         }
 
         if (range.getStart() > startOffset) {
@@ -282,7 +282,7 @@ public class CoreNodeRenderer implements NodeRenderer {
         myNextLine++;
 
         // remove trailing spaces from text
-        int countTrailing = node.getChars().baseSubSequence(nextLineStartOffset, range.getEnd() - eolLength).countTrailing(" \t");
+        int countTrailing = node.baseSubSequence(nextLineStartOffset, range.getEnd() - eolLength).countTrailing(" \t");
         if (!outputBreakText && countTrailing > 0) {
             countTrailing--;
         }
@@ -292,7 +292,7 @@ public class CoreNodeRenderer implements NodeRenderer {
         nextLineStartOffset = range.getEnd();
 
         // remove leading spaces
-        nextLineStartOffset += node.getChars().baseSubSequence(nextLineStartOffset, node.getChars().getBaseSequence().length()).countLeading(BasedSequence.WHITESPACE_NO_EOL_CHARS);
+        nextLineStartOffset += node.baseSubSequence(nextLineStartOffset, node.getChars().getBaseSequence().length()).countLeading(BasedSequence.WHITESPACE_NO_EOL_CHARS);
     }
 
     private void renderLooseParagraph(Paragraph node, NodeRendererContext context, HtmlWriter html) {

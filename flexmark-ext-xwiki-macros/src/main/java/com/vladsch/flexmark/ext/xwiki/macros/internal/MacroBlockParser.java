@@ -106,9 +106,9 @@ public class MacroBlockParser extends AbstractBlockParser {
             Node node = block.getLastChild();
             BasedSequence contentLine;
             if (node instanceof MacroClose) {
-                contentLine = macro.getChars().baseSubSequence(macro.getEndOffset(), node.getStartOffset());
+                contentLine = macro.baseSubSequence(macro.getEndOffset(), node.getStartOffset());
             } else {
-                contentLine = macro.getChars().baseSubSequence(macro.getEndOffset(), macro.getEndOffset());
+                contentLine = macro.baseSubSequence(macro.getEndOffset(), macro.getEndOffset());
             }
 
             lines.add(contentLine);

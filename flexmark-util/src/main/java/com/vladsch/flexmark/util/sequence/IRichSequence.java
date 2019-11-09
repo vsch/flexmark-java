@@ -1208,7 +1208,17 @@ public interface IRichSequence<T extends IRichSequence<?>> extends CharSequence,
      * @return Pair(line, column) where line and column are 0 based,
      *         throws IllegalArgumentException if index &lt; 0 or &gt; length.
      */
-    @NotNull Pair<Integer, Integer> getLineColumnAtIndex(int index);
+    @NotNull Pair<Integer, Integer> lineColumnAtIndex(int index);
+    @Deprecated
+    default @NotNull Pair<Integer, Integer> getLineColumnAtIndex(int index) {
+        return lineColumnAtIndex(index);
+    }
 
-    int getColumnAtIndex(int index);
+    int columnAtIndex(int index);
+
+    @Deprecated
+    default int getColumnAtIndex(int index) {
+        return columnAtIndex(index);
+    }
+
 }

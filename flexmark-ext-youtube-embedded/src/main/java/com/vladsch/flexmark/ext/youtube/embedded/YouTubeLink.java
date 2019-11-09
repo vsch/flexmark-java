@@ -9,8 +9,8 @@ public class YouTubeLink extends InlineLinkNode {
     }
 
     public YouTubeLink(Link other) {
-        super(other.getChars().baseSubSequence(other.getChars().getStartOffset() - 1, other.getChars().getEndOffset()),
-                other.getChars().baseSubSequence(other.getChars().getStartOffset() - 1, other.getTextOpeningMarker().getEndOffset()),
+        super(other.baseSubSequence(other.getStartOffset() - 1, other.getEndOffset()),
+                other.baseSubSequence(other.getStartOffset() - 1, other.getTextOpeningMarker().getEndOffset()),
                 other.getText(),
                 other.getTextClosingMarker(),
                 other.getLinkOpeningMarker(),

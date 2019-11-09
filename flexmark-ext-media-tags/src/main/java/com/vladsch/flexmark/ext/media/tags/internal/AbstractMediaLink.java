@@ -17,8 +17,8 @@ public abstract class AbstractMediaLink extends InlineLinkNode {
     }
 
     public AbstractMediaLink(String prefix, String type, Link other) {
-        super(other.getChars().baseSubSequence(other.getChars().getStartOffset() - prefix.length(), other.getChars().getEndOffset()),
-                other.getChars().baseSubSequence(other.getChars().getStartOffset() - prefix.length(), other.getTextOpeningMarker().getEndOffset()),
+        super(other.baseSubSequence(other.getStartOffset() - prefix.length(), other.getEndOffset()),
+                other.baseSubSequence(other.getStartOffset() - prefix.length(), other.getTextOpeningMarker().getEndOffset()),
                 other.getText(),
                 other.getTextClosingMarker(),
                 other.getLinkOpeningMarker(),
@@ -32,7 +32,7 @@ public abstract class AbstractMediaLink extends InlineLinkNode {
         this.PREFIX = prefix;
         this.TYPE = type;
 
-        verifyBasedSequence(other.getChars(), other.getChars().getStartOffset() - prefix.length());
+        verifyBasedSequence(other.getChars(), other.getStartOffset() - prefix.length());
     }
 
     public final String getPrefix() {

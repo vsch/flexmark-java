@@ -56,7 +56,7 @@ public class EnumeratedReferenceBlockParser extends AbstractBlockParser {
     public void closeBlock(ParserState state) {
         // set the enumeratedReference from closingMarker to end
         block.setCharsFromContent();
-        block.setEnumeratedReference(block.getChars().subSequence(block.getClosingMarker().getEndOffset() - block.getChars().getStartOffset()).trimStart());
+        block.setEnumeratedReference(block.getChars().subSequence(block.getClosingMarker().getEndOffset() - block.getStartOffset()).trimStart());
         content = null;
 
         // add block to reference repository

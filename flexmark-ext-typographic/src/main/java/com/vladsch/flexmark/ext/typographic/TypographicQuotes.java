@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.ext.typographic;
 
-import com.vladsch.flexmark.ast.DelimitedNode;
+import com.vladsch.flexmark.util.ast.DelimitedNode;
 import com.vladsch.flexmark.util.ast.DoNotAttributeDecorate;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.ast.TypographicText;

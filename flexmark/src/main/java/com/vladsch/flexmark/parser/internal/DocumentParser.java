@@ -894,7 +894,7 @@ public class DocumentParser implements ParserState {
         // remove BlankLine nodes that are part of the block's content
         while (true) {
             Node next = block.getNext();
-            if (next instanceof BlankLine && next.getChars().getEndOffset() <= block.getChars().getEndOffset()) {
+            if (next instanceof BlankLine && next.getEndOffset() <= block.getEndOffset()) {
                 next.unlink();
             } else {
                 break;

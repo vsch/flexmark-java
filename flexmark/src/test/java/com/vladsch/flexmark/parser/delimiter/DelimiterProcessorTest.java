@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.parser.delimiter;
 
-import com.vladsch.flexmark.ast.DelimitedNode;
+import com.vladsch.flexmark.util.ast.DelimitedNode;
 import com.vladsch.flexmark.ast.Text;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.html.HtmlWriter;
@@ -26,7 +26,6 @@ import org.jetbrains.annotations.Nullable;
 import org.junit.Test;
 
 import java.util.HashSet;
-import java.util.Locale;
 import java.util.Set;
 
 import static org.junit.Assert.assertEquals;

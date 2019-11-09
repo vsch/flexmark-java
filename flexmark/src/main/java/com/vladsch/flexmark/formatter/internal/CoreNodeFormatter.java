@@ -364,7 +364,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
 
         switch (formatterOptions.blockQuoteMarkers) {
             case AS_IS:
-                prefix = node.getChars().baseSubSequence(node.getOpeningMarker().getStartOffset(), node.getFirstChild().getStartOffset()).toString();
+                prefix = node.baseSubSequence(node.getOpeningMarker().getStartOffset(), node.getFirstChild().getStartOffset()).toString();
                 break;
             case ADD_COMPACT:
                 prefix = ">";
@@ -636,7 +636,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
     public static String getActualAdditionalPrefix(BasedSequence contentChars, MarkdownWriter markdown) {
         String prefix;
         int parentPrefix = markdown.getPrefix().length();
-        int column = contentChars.getBaseSequence().getColumnAtIndex(contentChars.getStartOffset());
+        int column = contentChars.baseColumnAtStart();
 
         prefix = RepeatedSequence.of(" ", Utils.minLimit(0, column - parentPrefix)).toString();
         return prefix;
@@ -698,8 +698,8 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
                 if (node.getFirstChild() == null) {
                     markdown.append("\n");
                 } else {
-                    int posEOL = node.getChars().getBaseSequence().endOfLine(openingMarker.getEndOffset());
-                    if (posEOL < node.getFirstChild().getChars().getStartOffset()) {
+                    int posEOL = node.endOfLine(openingMarker.getEndOffset());
+                    if (posEOL < node.getFirstChild().getStartOffset()) {
                         // output EOL
                         markdown.append("\n");
                     }

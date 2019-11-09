@@ -386,7 +386,7 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
                 Node firstNode = node.getPrevious() instanceof WhiteSpace ? node.getPrevious() : node;
                 Node lastNode = node.getNext() instanceof WhiteSpace ? node.getNext() : node;
 
-                Text text = new Text(node.getChars().baseSubSequence(firstNode.getStartOffset(), lastNode.getEndOffset()));
+                Text text = new Text(node.baseSubSequence(firstNode.getStartOffset(), lastNode.getEndOffset()));
                 node.insertBefore(text);
                 node.unlink();
                 firstNode.unlink();

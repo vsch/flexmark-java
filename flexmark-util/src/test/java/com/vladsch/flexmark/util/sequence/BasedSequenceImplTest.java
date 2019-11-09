@@ -474,9 +474,9 @@ public class BasedSequenceImplTest {
         BasedSequence text = BasedSequence.of(charSequence, 0, charSequence.length());
 
         for (int j = 0; j < jMax; j++) {
-            final Pair<Integer, Integer> atIndex = text.getLineColumnAtIndex(j);
+            final Pair<Integer, Integer> atIndex = text.lineColumnAtIndex(j);
             if (!info.get(j).equals(atIndex)) {
-                text.getLineColumnAtIndex(j);
+                text.lineColumnAtIndex(j);
             }
             assertEquals("Failed at " + j, info.get(j), atIndex);
         }

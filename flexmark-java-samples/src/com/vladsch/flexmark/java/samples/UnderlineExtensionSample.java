@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.java.samples;
 
-import com.vladsch.flexmark.ast.DelimitedNode;
+import com.vladsch.flexmark.util.ast.DelimitedNode;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRendererFactory;

@@ -131,7 +131,7 @@ public class AdmonitionBlock extends Block implements ParagraphContainer {
         if (node == getFirstChild()) {
             // need to see if there is a blank line between it and our start
             int ourEOL = getChars().getBaseSequence().endOfLine(getChars().getStartOffset());
-            int childStartEOL = node.getChars().getBaseSequence().startOfLine(node.getChars().getStartOffset());
+            int childStartEOL = node.getStartOfLine();
             return ourEOL + 1 == childStartEOL;
         }
         return false;
