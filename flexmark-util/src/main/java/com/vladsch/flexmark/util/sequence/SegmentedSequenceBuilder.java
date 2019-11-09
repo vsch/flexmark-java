@@ -2,15 +2,13 @@ package com.vladsch.flexmark.util.sequence;
 
 import org.jetbrains.annotations.NotNull;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * A Builder for Segmented BasedSequences
  */
-public final class SegmentedSequenceBuilder {
+public final class SegmentedSequenceBuilder implements SequenceBuilder<SegmentedSequenceBuilder, BasedSequence> {
     private final ArrayList<BasedSequence> segments;
     private final BasedSequence base;
 
@@ -28,6 +26,7 @@ public final class SegmentedSequenceBuilder {
         return new SegmentedSequenceBuilder(base);
     }
 
+    @Override
     public SegmentedSequenceBuilder append(SegmentedSequenceBuilder other) {
         if (base != other.base) {
             throw new IllegalArgumentException("append SegmentedSequenceBuilder called with other having different base: " + base.hashCode() + " got: " + other.base.hashCode());
@@ -36,6 +35,7 @@ public final class SegmentedSequenceBuilder {
         return this;
     }
 
+    @Override
     public SegmentedSequenceBuilder append(CharSequence s) {
         if (s instanceof BasedSequence) return append((BasedSequence) s);
         else if (s.length() > 0) return append(s.toString());
@@ -66,7 +66,8 @@ public final class SegmentedSequenceBuilder {
         }
     }
 
-    public BasedSequence toBasedSequence() {
+    @Override
+    public BasedSequence toSequence() {
         return SegmentedSequence.of(segments);
     }
 
@@ -101,6 +102,7 @@ public final class SegmentedSequenceBuilder {
         segments.set(segments.size() - 1, s);
     }
 
+    @Override
     public int length() {
         int total = 0;
         BasedSequence last = null;
@@ -117,6 +119,7 @@ public final class SegmentedSequenceBuilder {
         return total;
     }
 
+    @Override
     public boolean isEmpty() {
         for (BasedSequence s : segments) {
             if (!s.isEmpty()) return false;
@@ -133,9 +136,9 @@ public final class SegmentedSequenceBuilder {
             if (s.isEmpty()) continue;
 
             if (last != null && last.getEndOffset() < s.getStartOffset()
-                    && (BasedSequence.WHITESPACE_CHARS.indexOf(last.charAt(last.length() - 1)) == -1)
-                    && BasedSequence.WHITESPACE_CHARS.indexOf(s.charAt(0)) == -1
-                    && s.baseSubSequence(last.getEndOffset(), s.getStartOffset()).endsWith(" ")
+                && (BasedSequence.WHITESPACE_CHARS.indexOf(last.charAt(last.length() - 1)) == -1)
+                && BasedSequence.WHITESPACE_CHARS.indexOf(s.charAt(0)) == -1
+                && s.baseSubSequence(last.getEndOffset(), s.getStartOffset()).endsWith(" ")
             ) {
                 sb.append(' ');
             }
