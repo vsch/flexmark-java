@@ -11,7 +11,7 @@ import static java.lang.Integer.MIN_VALUE;
 /**
  * A BasedSequence which consists of segments of other BasedSequences
  */
-public final class SegmentedSequence extends BasedSequenceImpl {
+public final class SegmentedSequence extends BasedSequenceImpl implements ReplacedBasedSequence {
     private final BasedSequence baseSeq;  // base sequence
     private final char[] nonBaseChars;    // all non-base characters, offset by baseStartOffset. When baseOffsets[] < 0, take -ve - 1 to get index into this array
     private final int[] baseOffsets;      // list of base offsets, offset by baseStartOffset
@@ -20,11 +20,13 @@ public final class SegmentedSequence extends BasedSequenceImpl {
     private final int startOffset;        // this sequence's start offset in base
     private final int endOffset;          // this sequence's end offset in base
 
+    @NotNull
     @Override
     public Object getBase() {
         return baseSeq.getBase();
     }
 
+    @NotNull
     @Override
     public BasedSequence getBaseSequence() {
         return baseSeq.getBaseSequence();
@@ -48,6 +50,7 @@ public final class SegmentedSequence extends BasedSequenceImpl {
         return endOffset;
     }
 
+    @NotNull
     @Override
     public Range getIndexRange(int startOffset, int endOffset) {
         // we assume that start/end is within our range
@@ -65,7 +68,6 @@ public final class SegmentedSequence extends BasedSequenceImpl {
 
         if (start < 0) start = 0;
         if (end < start) end = start;
-        if (start > end) start = end;
         return Range.of(start, end);
     }
 
@@ -136,7 +138,7 @@ public final class SegmentedSequence extends BasedSequenceImpl {
 
                 if (segment.isEmpty()) continue;  // skip empty sequences, they serve no purpose
 
-                if (segment instanceof PrefixedSubSequence || segment instanceof SegmentedSequence) {
+                if (segment instanceof ReplacedBasedSequence) {
                     if (lastSegment != null) mergedSequences.add(lastSegment);
                     mergedSequences.add(segment);
                     lastSegment = null;
@@ -178,7 +180,7 @@ public final class SegmentedSequence extends BasedSequenceImpl {
         int lastEnd = base.getStartOffset();
         for (BasedSequence segment : segments) {
             assert base.getBase() == segment.getBase() : "all segments must come from the same base sequence, segments[" + index + "], length so far: " + length;
-            assert segment.getStartOffset() >= lastEnd : "segments must be in increasing index order from base sequence start=" + segment.getStartOffset() + ", length=" + length + " at index: " + index;
+            assert segment.getStartOffset() >= lastEnd : "segments must be in increasing index order from base sequence start=" + segment.getStartOffset() + " lastEnd:" + lastEnd + ", length=" + length + " at index: " + index;
             lastEnd = segment.getEndOffset();
             length += segment.length();
             index++;
@@ -286,6 +288,7 @@ public final class SegmentedSequence extends BasedSequenceImpl {
         return length;
     }
 
+    @NotNull
     @Override
     public Range getSourceRange() {
         return Range.of(getStartOffset(), getEndOffset());
@@ -310,6 +313,7 @@ public final class SegmentedSequence extends BasedSequenceImpl {
         return baseSeq.charAt(offset);
     }
 
+    @NotNull
     @Override
     public BasedSequence baseSubSequence(int startIndex, int endIndex) {
         if (startIndex < 0 || startIndex > baseSeq.length()) {

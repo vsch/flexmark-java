@@ -38,6 +38,13 @@ public abstract class BasedSequenceImpl extends IRichSequenceBase<BasedSequence>
     }
 
     @Override
+    public <B extends SequenceBuilder<B, BasedSequence>> @NotNull B getBuilder() {
+        //noinspection unchecked
+        return (B) new BasedSequenceBuilder(getBaseSequence());
+    }
+
+    @NotNull
+    @Override
     public Range getIndexRange(int startOffset, int endOffset) {
         // we assume that start/end is within our range
         int baseOffset = getStartOffset();
@@ -53,6 +60,7 @@ public abstract class BasedSequenceImpl extends IRichSequenceBase<BasedSequence>
         return MappedBasedSequence.mappedOf(mapper, this);
     }
 
+    @NotNull
     @Override
     public BasedSequence baseSubSequence(int startIndex) {
         return baseSubSequence(startIndex, getBaseSequence().getEndOffset());
@@ -72,53 +80,61 @@ public abstract class BasedSequenceImpl extends IRichSequenceBase<BasedSequence>
         }
     }
 
+    @NotNull
     @Override
     public BasedSequence getEmptyPrefix() {
         return subSequence(0, 0);
     }
 
+    @NotNull
     @Override
     public BasedSequence getEmptySuffix() {
         return subSequence(length());
     }
 
+    @NotNull
     @Override
     public String unescape() {
         return Escaping.unescapeString(this);
     }
 
+    @NotNull
     @Override
     public String unescapeNoEntities() {
         return Escaping.unescapeString(this, false);
     }
 
+    @NotNull
     @Override
-    public BasedSequence unescape(ReplacedTextMapper textMapper) {
+    public BasedSequence unescape(@NotNull ReplacedTextMapper textMapper) {
         return Escaping.unescape(this, textMapper);
     }
 
+    @NotNull
     @Override
-    public BasedSequence normalizeEOL(ReplacedTextMapper textMapper) {
+    public BasedSequence normalizeEOL(@NotNull ReplacedTextMapper textMapper) {
         return Escaping.normalizeEOL(this, textMapper);
     }
 
+    @NotNull
     @Override
-    public BasedSequence normalizeEndWithEOL(ReplacedTextMapper textMapper) {
+    public BasedSequence normalizeEndWithEOL(@NotNull ReplacedTextMapper textMapper) {
         return Escaping.normalizeEndWithEOL(this, textMapper);
     }
 
     @Override
-    public boolean isContinuedBy(BasedSequence other) {
+    public boolean isContinuedBy(@NotNull BasedSequence other) {
         return other.length() > 0 && length() > 0 && other.getBase() == getBase() && other.getStartOffset() == getEndOffset();
     }
 
     @Override
-    public boolean isContinuationOf(BasedSequence other) {
+    public boolean isContinuationOf(@NotNull BasedSequence other) {
         return other.length() > 0 && length() > 0 && other.getBase() == getBase() && other.getEndOffset() == getStartOffset();
     }
 
+    @NotNull
     @Override
-    public BasedSequence spliceAtEnd(BasedSequence other) {
+    public BasedSequence spliceAtEnd(@NotNull BasedSequence other) {
         if (other.isEmpty()) {
             return this;
         } else if (isEmpty()) {
@@ -129,62 +145,69 @@ public abstract class BasedSequenceImpl extends IRichSequenceBase<BasedSequence>
     }
 
     @Override
-    public boolean containsAllOf(BasedSequence other) {
+    public boolean containsAllOf(@NotNull BasedSequence other) {
         return getBase() == other.getBase() && other.getStartOffset() >= getStartOffset() && other.getEndOffset() <= getEndOffset();
     }
 
     @Override
-    public boolean containsSomeOf(BasedSequence other) {
+    public boolean containsSomeOf(@NotNull BasedSequence other) {
         return getBase() == other.getBase() && !(getStartOffset() >= other.getEndOffset() || getEndOffset() <= other.getStartOffset());
     }
 
+    @NotNull
     @Override
-    public BasedSequence intersect(BasedSequence other) {
+    public BasedSequence intersect(@NotNull BasedSequence other) {
         if (getBase() != other.getBase()) return BasedSequence.NULL;
         else if (other.getEndOffset() <= getStartOffset()) return subSequence(0, 0);
         else if (other.getStartOffset() >= getEndOffset()) return subSequence(length(), length());
         else return this.baseSubSequence(Utils.max(getStartOffset(), other.getStartOffset()), Utils.min(getEndOffset(), other.getEndOffset()));
     }
 
+    @NotNull
     @Override
-    public BasedSequence extendByAny(CharSequence charSet, int maxCount) {
+    public BasedSequence extendByAny(@NotNull CharSequence charSet, int maxCount) {
         int count = getBaseSequence().countLeading(charSet, getEndOffset(), getEndOffset() + maxCount);
         return count == 0 ? this : baseSubSequence(getStartOffset(), getEndOffset() + count);
     }
 
+    @NotNull
     @Override
-    public BasedSequence extendToAny(CharSequence charSet) {
+    public BasedSequence extendToAny(@NotNull CharSequence charSet) {
         return extendToAny(charSet, Integer.MAX_VALUE - getEndOffset());
     }
 
+    @NotNull
     @Override
-    public BasedSequence extendByAny(CharSequence charSet) {
+    public BasedSequence extendByAny(@NotNull CharSequence charSet) {
         return extendByAny(charSet, Integer.MAX_VALUE - getEndOffset());
     }
 
+    @NotNull
     @Override
-    public BasedSequence extendByOneOfAny(CharSequence charSet) {
+    public BasedSequence extendByOneOfAny(@NotNull CharSequence charSet) {
         return extendByAny(charSet, 1);
     }
 
+    @NotNull
     @Override
-    public BasedSequence extendToAny(CharSequence charSet, int maxCount) {
+    public BasedSequence extendToAny(@NotNull CharSequence charSet, int maxCount) {
         if (charSet.length() == 0) return this;
         int count = getBaseSequence().countLeadingNot(charSet, getEndOffset(), getEndOffset() + maxCount);
         return count == getBaseSequence().length() - getEndOffset() ? this : baseSubSequence(getStartOffset(), getEndOffset() + count + 1);
     }
 
     // @formatter:off
-    @Override final public BasedSequence extendToEndOfLine(CharSequence eolChars) { return extendToEndOfLine(eolChars, false);}
-    @Override final public BasedSequence extendToEndOfLine(boolean includeEol) { return extendToEndOfLine(IRichSequence.EOL, includeEol);}
-    @Override final public BasedSequence extendToEndOfLine() { return extendToEndOfLine(IRichSequence.EOL, false);}
-    @Override final public BasedSequence extendToStartOfLine(CharSequence eolChars) { return extendToStartOfLine(eolChars, false);}
-    @Override final public BasedSequence extendToStartOfLine(boolean includeEol) { return extendToStartOfLine(IRichSequence.EOL, includeEol);}
-    @Override final public BasedSequence extendToStartOfLine() { return extendToStartOfLine(IRichSequence.EOL, false);}
+    @NotNull@Override final public BasedSequence extendToEndOfLine(@NotNull CharSequence eolChars) { return extendToEndOfLine(eolChars, false);}
+    @NotNull@Override final public BasedSequence extendToEndOfLine(boolean includeEol) { return extendToEndOfLine(IRichSequence.EOL, includeEol);}
+    @NotNull@Override final public BasedSequence extendToEndOfLine() { return extendToEndOfLine(IRichSequence.EOL, false);}
+    @NotNull@Override final public BasedSequence extendToStartOfLine(@NotNull CharSequence eolChars) { return extendToStartOfLine(eolChars, false);}
+    @NotNull@Override final public BasedSequence extendToStartOfLine(boolean includeEol) { return extendToStartOfLine(IRichSequence.EOL, includeEol);}
+    @NotNull@Override final public BasedSequence extendToStartOfLine() { return extendToStartOfLine(IRichSequence.EOL, false);}
     // @formatter:on
 
+    @NotNull
     @Override
-    final public BasedSequence extendToEndOfLine(CharSequence eolChars, boolean includeEol) {
+    final public BasedSequence extendToEndOfLine(@NotNull CharSequence eolChars, boolean includeEol) {
         int endOffset = getEndOffset();
 
         // if already have eol then no need to check
@@ -203,8 +226,9 @@ public abstract class BasedSequenceImpl extends IRichSequenceBase<BasedSequence>
         return this;
     }
 
+    @NotNull
     @Override
-    public BasedSequence extendToStartOfLine(CharSequence eolChars, boolean includeEol) {
+    public BasedSequence extendToStartOfLine(@NotNull CharSequence eolChars, boolean includeEol) {
         int startOffset = getStartOffset();
 
         // if already have eol then no need to check
@@ -214,7 +238,7 @@ public abstract class BasedSequenceImpl extends IRichSequenceBase<BasedSequence>
         int startOfLine = baseSequence.startOfLine(startOffset);
 
         if (includeEol) {
-            startOfLine = Math.max(0, startOfLine - Math.min(baseSequence.eolEndLength(startOfLine - 1), 1));
+            startOfLine = Math.max(0, startOfLine - Math.min(baseSequence.eolEndLength(startOfLine), 1));
         }
 
         if (startOfLine != startOffset) {
@@ -225,16 +249,11 @@ public abstract class BasedSequenceImpl extends IRichSequenceBase<BasedSequence>
 
     @NotNull
     @Override
-    public BasedSequence sequenceOf(@NotNull Iterable<BasedSequence> sequences) {
-        return SegmentedSequence.of(sequences);
-    }
-
-    @NotNull
-    @Override
     public BasedSequence prefixWith(@Nullable CharSequence prefix) {
         return prefix == null || prefix.length() == 0 ? this : PrefixedSubSequence.prefixOf(prefix.toString(), this);
     }
 
+    @NotNull
     @Override
     public BasedSequence prefixWithIndent(int maxColumns) {
         int offset = getStartOffset();
@@ -286,16 +305,18 @@ public abstract class BasedSequenceImpl extends IRichSequenceBase<BasedSequence>
         return offset == getStartOffset() ? this : baseSubSequence(offset, getEndOffset());
     }
 
+    @NotNull
     @Override
-    public BasedSequence prefixOf(BasedSequence other) {
+    public BasedSequence prefixOf(@NotNull BasedSequence other) {
         if (getBase() != other.getBase()) return BasedSequence.NULL;
         else if (other.getStartOffset() <= getStartOffset()) return subSequence(0, 0);
         else if (other.getStartOffset() >= getEndOffset()) return this;
         else return this.baseSubSequence(getStartOffset(), other.getStartOffset());
     }
 
+    @NotNull
     @Override
-    public BasedSequence suffixOf(BasedSequence other) {
+    public BasedSequence suffixOf(@NotNull BasedSequence other) {
         if (getBase() != other.getBase()) return BasedSequence.NULL;
         else if (other.getEndOffset() >= getEndOffset()) return subSequence(length(), length());
         else if (other.getEndOffset() <= getStartOffset()) return this;

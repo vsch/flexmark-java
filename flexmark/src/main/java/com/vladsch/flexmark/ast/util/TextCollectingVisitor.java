@@ -3,7 +3,7 @@ package com.vladsch.flexmark.ast.util;
 import com.vladsch.flexmark.ast.*;
 import com.vladsch.flexmark.util.ast.*;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.SegmentedSequenceBuilder;
+import com.vladsch.flexmark.util.sequence.BasedSequenceBuilder;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
@@ -12,7 +12,7 @@ import java.util.function.BiConsumer;
 
 @SuppressWarnings("WeakerAccess")
 public class TextCollectingVisitor {
-    private SegmentedSequenceBuilder out;
+    private BasedSequenceBuilder out;
     private final NodeVisitor myVisitor;
     private final HashSet<Class<?>> myLineBreakNodes;
 
@@ -65,7 +65,7 @@ public class TextCollectingVisitor {
     }
 
     public void collect(Node node) {
-        out = new SegmentedSequenceBuilder(node.getChars());
+        out = new BasedSequenceBuilder(node.getChars());
         myVisitor.visit(node);
     }
 
@@ -81,7 +81,7 @@ public class TextCollectingVisitor {
 
     public BasedSequence collectAndGetSequence(Node node) {
         collect(node);
-        return out.toBasedSequence();
+        return out.toSequence();
     }
 
     private void visit(Paragraph node) {

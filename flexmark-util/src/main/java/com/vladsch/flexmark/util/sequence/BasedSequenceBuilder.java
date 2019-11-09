@@ -8,51 +8,75 @@ import java.util.List;
 /**
  * A Builder for Segmented BasedSequences
  */
-public final class SegmentedSequenceBuilder implements SequenceBuilder<SegmentedSequenceBuilder, BasedSequence> {
+public final class BasedSequenceBuilder implements SequenceBuilder<BasedSequenceBuilder, BasedSequence> {
     private final ArrayList<BasedSequence> segments;
     private final BasedSequence base;
+    private int lastEndOffset = -1;
 
-    public SegmentedSequenceBuilder(BasedSequence base) {
+    public BasedSequenceBuilder(BasedSequence base) {
         this.segments = new ArrayList<>();
-        this.base = base;
+        this.base = base.getBaseSequence();
     }
 
-    public SegmentedSequenceBuilder(BasedSequence base, int initialCapacity) {
+    public BasedSequenceBuilder(BasedSequence base, int initialCapacity) {
         this.segments = new ArrayList<>(initialCapacity);
         this.base = base;
     }
 
-    public SegmentedSequenceBuilder subContext() {
-        return new SegmentedSequenceBuilder(base);
+    @NotNull
+    @Override
+    public BasedSequenceBuilder subContext() {
+        return new BasedSequenceBuilder(base);
     }
 
+    @NotNull
     @Override
-    public SegmentedSequenceBuilder append(SegmentedSequenceBuilder other) {
+    public BasedSequenceBuilder append(@NotNull BasedSequenceBuilder other) {
         if (base != other.base) {
-            throw new IllegalArgumentException("append SegmentedSequenceBuilder called with other having different base: " + base.hashCode() + " got: " + other.base.hashCode());
+            throw new IllegalArgumentException("append BasedSequenceBuilder called with other having different base: " + base.hashCode() + " got: " + other.base.hashCode());
         }
-        segments.addAll(other.segments);
+
+        if (!other.isEmpty()) {
+            BasedSequence s = other.getLastSegment();
+            if (lastEndOffset >= 0) {
+                if (s.getStartOffset() < lastEndOffset) {
+                    throw new IllegalArgumentException("append BasedSequenceBuilder called with last segment of other having startOffset < lastEndOffset, startOffset: " + s.getStartOffset() + " lastEndOffset: " + lastEndOffset);
+                }
+            }
+
+            lastEndOffset = s.getEndOffset();
+            segments.addAll(other.segments);
+        }
         return this;
     }
 
+    @NotNull
     @Override
-    public SegmentedSequenceBuilder append(CharSequence s) {
+    public BasedSequenceBuilder append(@NotNull CharSequence s) {
         if (s instanceof BasedSequence) return append((BasedSequence) s);
         else if (s.length() > 0) return append(s.toString());
         else return this;
     }
 
-    public SegmentedSequenceBuilder append(BasedSequence s) {
+    public BasedSequenceBuilder append(BasedSequence s) {
         if (s.isNotNull()) {
             if (s.getBaseSequence() != base) {
-                throw new IllegalArgumentException("setLastSegment called with segment having different base: " + base.hashCode() + " got: " + s.getBaseSequence().hashCode());
+                throw new IllegalArgumentException("append called with segment having different base: " + base.hashCode() + " got: " + s.getBaseSequence().hashCode());
             }
+
+            if (lastEndOffset >= 0) {
+                if (s.getStartOffset() < lastEndOffset) {
+                    throw new IllegalArgumentException("append called with segment having startOffset < lastEndOffset, startOffset: " + s.getStartOffset() + " lastEndOffset: " + lastEndOffset);
+                }
+            }
+
+            lastEndOffset = s.getEndOffset();
             segments.add(s);
         }
         return this;
     }
 
-    public SegmentedSequenceBuilder append(String str) {
+    public BasedSequenceBuilder append(String str) {
         if (str.isEmpty()) return this;
         else {
             BasedSequence useBase;
@@ -66,19 +90,23 @@ public final class SegmentedSequenceBuilder implements SequenceBuilder<Segmented
         }
     }
 
+    @NotNull
     @Override
     public BasedSequence toSequence() {
         return SegmentedSequence.of(segments);
     }
 
+    @NotNull
     public BasedSequence[] toSegments() {
         return segments.toArray(BasedSequence.EMPTY_SEGMENTS);
     }
 
+    @NotNull
     public List<BasedSequence> getSegments() {
         return segments;
     }
 
+    @NotNull
     public BasedSequence getLastSegment() {
         return segments.size() == 0 ? BasedSequence.NULL : segments.get(segments.size() - 1);
     }

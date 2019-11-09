@@ -38,7 +38,7 @@ public class Range {
         myEnd = end;
     }
 
-    public Range(Range other) {
+    protected Range(Range other) {
         myStart = other.myStart;
         myEnd = other.myEnd;
     }
@@ -96,7 +96,7 @@ public class Range {
     }
 
     @NotNull
-    public CharSequence charSafeSubSequence(@NotNull CharSequence charSequence) {
+    public CharSequence safeSubSequence(@NotNull CharSequence charSequence) {
         int end = Math.min(charSequence.length(), myEnd);
         return isNull() ? charSequence.subSequence(0, 0) : charSequence.subSequence(Math.min(end, Math.max(0, myStart)), end);
     }

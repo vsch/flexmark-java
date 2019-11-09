@@ -7,15 +7,17 @@ import org.jetbrains.annotations.NotNull;
  * <p>
  * a subSequence() returns a sub-sequence from the original base sequence, possibly with a prefix if it falls in range
  */
-public final class PrefixedSubSequence extends BasedSequenceImpl {
+public final class PrefixedSubSequence extends BasedSequenceImpl implements ReplacedBasedSequence {
     private final CharSequence prefix;
     private final BasedSequence base;
 
+    @NotNull
     @Override
     public Object getBase() {
         return base.getBase();
     }
 
+    @NotNull
     @Override
     public BasedSequence getBaseSequence() {
         return base.getBaseSequence();
@@ -31,11 +33,13 @@ public final class PrefixedSubSequence extends BasedSequenceImpl {
         return base.getEndOffset();
     }
 
+    @NotNull
     @Override
     public Range getSourceRange() {
         return base.getSourceRange();
     }
 
+    @NotNull
     @Override
     public BasedSequence baseSubSequence(int startIndex, int endIndex) {
         return base.baseSubSequence(startIndex, endIndex);

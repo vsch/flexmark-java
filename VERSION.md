@@ -9,7 +9,7 @@ flexmark-java
 - [Next 0.60.0](#next-0600)
     - [API Changes](#api-changes)
 - [Next](#next)
-- [0.59.42](#05942)
+- [Next 0.59.42](#next-05942)
 - [0.59.40](#05940)
 - [0.59.38](#05938)
 - [0.59.36](#05936)
@@ -177,12 +177,15 @@ Next
 `repeatOf`, `prefixOf` otherwise it is possible to have the wrong factory method called and not see it.
 
 
-0.59.42
--------
+Next 0.59.42
+------------
 
 * [ ] Add: `Formatter` Paragraph wrapping.
 * Add: `MarkdownParagraph` to utils to wrap paragraph text.
   * [ ] Test: position marker preservation with direction type
+* Break: `BasedSequence.append(CharSequence[])` now constructs as segmented sequence so proper
+ordering of segments is enforced. This means `IllegalArgumentException` will be thrown when this
+  condition is not met. To get old functionality you need to create an appended string of all sequences and `BasedSequence.of()` on that string.
 * Break: rename `MappedSequence` to `MappedBasedSequence` to allow for `MappedRichSequence`
 * Break: rename `RichCharSequence` to `IRichSequence` to separate base interfaces for rich and based sequences and
   allow for `RichSequence` to be the base interface for rich sequences similar to `BasedSequence` for based sequences
@@ -210,6 +213,11 @@ Next
     * `IRichSequence.subSequence(Range)`
     * `IRichSequence.subSequenceAfter(Range)`
     * `IRichSequence.subSequenceBefore(Range)`
+  * Add: editing methods:
+    * `IRichSequence.insert(CharSequence, int)` insert another char sequence at index
+    * `IRichSequence.delete(int, int)` delete range in this sequence
+    * `IRichSequence.replace(CharSequence, CharSequence)` one char sequence in this sequence with another
+    * `IRichSequence.replace(int, int, CharSequence)` range in this sequence with char sequence
   <!-- @formatter:on -->
 * Add: to `BasedSequence`
   <!-- @formatter:off -->

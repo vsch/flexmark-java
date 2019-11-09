@@ -6,9 +6,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.function.Supplier;
 
 public class MarkdownParagraph {
     final private static char MARKDOWN_START_LINE_CHAR = BasedSequence.LS;             // https://www.fileformat.info/info/unicode/char/2028/index.htm LINE_SEPARATOR this one is not preserved but will cause a line break if not already at beginning of line
@@ -222,7 +220,7 @@ public class MarkdownParagraph {
         final int[] pos = { 0 };
         final int[] lineCount = { 0 };
         ArrayList<Token> lineWords = new ArrayList<>();
-        SegmentedSequenceBuilder result = new SegmentedSequenceBuilder(myReplacedChars, myReplacedChars.length());
+        BasedSequenceBuilder result = new BasedSequenceBuilder(myReplacedChars, myReplacedChars.length());
         int spaceWidth = myCharWidthProvider.spaceWidth();
         final int[] lineIndent = { spaceWidth * getFirstIndent() };
         int nextIndent = spaceWidth * getIndent();
@@ -316,10 +314,10 @@ public class MarkdownParagraph {
             addLine(result, chars, lineWords, wordsOnLine[0], lineCount[0], (lineWidth[0] - pos[0] - lineIndent[0]) / spaceWidth, true);
         }
 
-        return result.toBasedSequence();
+        return result.toSequence();
     }
 
-    private void addLine(SegmentedSequenceBuilder result, BasedSequence charSequence, ArrayList<Token> lineWords, int wordsOnLine, int lineCount, int extraSpaces, boolean lastLine) {
+    private void addLine(BasedSequenceBuilder result, BasedSequence charSequence, ArrayList<Token> lineWords, int wordsOnLine, int lineCount, int extraSpaces, boolean lastLine) {
         int leadSpaces = 0;
         int addSpaces = 0;
         int remSpaces = 0;
@@ -403,7 +401,7 @@ public class MarkdownParagraph {
      * @param chars sequence of spaces
      * @param count number of desired spaces
      */
-    public void replaceSpaces(@NotNull SegmentedSequenceBuilder result, @NotNull BasedSequence chars, int count, @NotNull MarkerDirection markerDirection, int markerIndex) {
+    public void replaceSpaces(@NotNull BasedSequenceBuilder result, @NotNull BasedSequence chars, int count, @NotNull MarkerDirection markerDirection, int markerIndex) {
         assert count >= 0;
 
         if (chars.length() == 0) {

@@ -122,9 +122,15 @@ public class Document extends Block implements MutableDataHolder {
             int nextLineEnd = preText.endOfLineAnyEOL(0);
             int length = preText.length();
             while (nextLineEnd < length) {
-                int lengthWithEOL = nextLineEnd + preText.eolStartLength(nextLineEnd);
+                if (preText.endOfLineAnyEOL(nextLineEnd) == 0) {
+                    int tmp = 0;
+                }
+                int eolLength = preText.eolStartLength(nextLineEnd);
+                int lengthWithEOL = nextLineEnd + eolLength;
                 if (offset >= lengthWithEOL) lineNumber++; // do not treat offset between \r and \n as complete line
+                int oldNextLineEnd = nextLineEnd;
                 nextLineEnd = preText.endOfLineAnyEOL(lengthWithEOL);
+                assert nextLineEnd > oldNextLineEnd;
             }
 
             return lineNumber;

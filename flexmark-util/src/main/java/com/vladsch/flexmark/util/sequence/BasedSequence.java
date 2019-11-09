@@ -8,7 +8,7 @@ import java.util.List;
 
 /**
  * A CharSequence that references original char sequence with offsets into original preserved
- *
+ * <p>
  * a subSequence() returns a sub-sequence from the original base sequence with corresponding offsets
  */
 @SuppressWarnings("SameParameterValue")
@@ -22,16 +22,24 @@ public interface BasedSequence extends IRichSequence<BasedSequence> {
     BasedSequence[] EMPTY_SEGMENTS = new BasedSequence[0];
     BasedSequence LINE_SEP = CharSubSequence.of(IRichSequence.LINE_SEP);
 
-    static BasedSequence of(CharSequence charSequence) {
-        return  BasedSequenceImpl.create(charSequence, 0, charSequence.length());
+    @NotNull
+    static BasedSequence of(@NotNull CharSequence charSequence) {
+        return BasedSequenceImpl.create(charSequence, 0, charSequence.length());
     }
 
-    static BasedSequence of(CharSequence charSequence, int startIndex) {
-        return  BasedSequenceImpl.create(charSequence, startIndex, charSequence.length());
+    @NotNull
+    static BasedSequence of(@NotNull CharSequence charSequence, int startIndex) {
+        return BasedSequenceImpl.create(charSequence, startIndex, charSequence.length());
     }
 
-    static BasedSequence of(CharSequence charSequence, int startIndex, int endIndex) {
-        return  BasedSequenceImpl.create(charSequence, startIndex, endIndex);
+    @NotNull
+    static BasedSequence of(@NotNull CharSequence charSequence, int startIndex, int endIndex) {
+        return BasedSequenceImpl.create(charSequence, startIndex, endIndex);
+    }
+
+    @NotNull
+    static BasedSequenceBuilder builder(@NotNull BasedSequence sequence) {
+        return new BasedSequenceBuilder(sequence);
     }
 
     /**
@@ -39,6 +47,7 @@ public interface BasedSequence extends IRichSequence<BasedSequence> {
      *
      * @return underlying object containing original text
      */
+    @NotNull
     Object getBase();
 
     /**
@@ -46,6 +55,7 @@ public interface BasedSequence extends IRichSequence<BasedSequence> {
      *
      * @return base sequence
      */
+    @NotNull
     BasedSequence getBaseSequence();
 
     /**
@@ -77,6 +87,7 @@ public interface BasedSequence extends IRichSequence<BasedSequence> {
      * @param endOffset   end offset into base sequence
      * @return range into this sequence that spans start and end offset.
      */
+    @NotNull
     Range getIndexRange(int startOffset, int endOffset);
 
     /**
@@ -84,6 +95,7 @@ public interface BasedSequence extends IRichSequence<BasedSequence> {
      *
      * @return Range of start offset and end offset
      */
+    @NotNull
     Range getSourceRange();
 
     /**
@@ -93,6 +105,7 @@ public interface BasedSequence extends IRichSequence<BasedSequence> {
      * @param endIndex   offset from 0 of original sequence
      * @return based sequence whose contents reflect the selected portion
      */
+    @NotNull
     BasedSequence baseSubSequence(int startIndex, int endIndex);
 
     /**
@@ -101,6 +114,7 @@ public interface BasedSequence extends IRichSequence<BasedSequence> {
      * @param startIndex offset from 0 of original sequence
      * @return based sequence from startIndex to the endIndex
      */
+    @NotNull
     BasedSequence baseSubSequence(int startIndex);
 
     /**
@@ -126,6 +140,7 @@ public interface BasedSequence extends IRichSequence<BasedSequence> {
      *
      * @return same as subSequence(0,0)
      */
+    @NotNull
     BasedSequence getEmptyPrefix();
 
     /**
@@ -133,6 +148,7 @@ public interface BasedSequence extends IRichSequence<BasedSequence> {
      *
      * @return same as subSequence(length())
      */
+    @NotNull
     BasedSequence getEmptySuffix();
 
     /**
@@ -140,6 +156,7 @@ public interface BasedSequence extends IRichSequence<BasedSequence> {
      *
      * @return unescaped text
      */
+    @NotNull
     String unescape();
 
     /**
@@ -147,6 +164,7 @@ public interface BasedSequence extends IRichSequence<BasedSequence> {
      *
      * @return unescaped text
      */
+    @NotNull
     String unescapeNoEntities();
 
     /**
@@ -155,7 +173,8 @@ public interface BasedSequence extends IRichSequence<BasedSequence> {
      * @param textMapper replaced text mapper which will be uses to map unescaped index to original source index
      * @return unescaped text in based sequence
      */
-    BasedSequence unescape(ReplacedTextMapper textMapper);
+    @NotNull
+    BasedSequence unescape(@NotNull ReplacedTextMapper textMapper);
 
     /**
      * replace any \r\n and \r by \n
@@ -163,7 +182,8 @@ public interface BasedSequence extends IRichSequence<BasedSequence> {
      * @param textMapper replaced text mapper which will be uses to map unescaped index to original source index
      * @return based sequence with only \n for line separators
      */
-    BasedSequence normalizeEOL(ReplacedTextMapper textMapper);
+    @NotNull
+    BasedSequence normalizeEOL(@NotNull ReplacedTextMapper textMapper);
 
     /**
      * replace any \r\n and \r by \n, append terminating EOL if one is not present
@@ -171,7 +191,8 @@ public interface BasedSequence extends IRichSequence<BasedSequence> {
      * @param textMapper replaced text mapper which will be uses to map unescaped index to original source index
      * @return based sequence with only \n for line separators and terminated by \n
      */
-    BasedSequence normalizeEndWithEOL(ReplacedTextMapper textMapper);
+    @NotNull
+    BasedSequence normalizeEndWithEOL(@NotNull ReplacedTextMapper textMapper);
 
     /**
      * Test if the given sequence is a continuation of this sequence in original source text
@@ -179,7 +200,7 @@ public interface BasedSequence extends IRichSequence<BasedSequence> {
      * @param other sequence to test
      * @return true if the given sequence is a continuation of this one in the original text
      */
-    boolean isContinuedBy(BasedSequence other);
+    boolean isContinuedBy(@NotNull BasedSequence other);
 
     /**
      * Test if this sequence is a continuation of the given sequence in original source text
@@ -187,7 +208,7 @@ public interface BasedSequence extends IRichSequence<BasedSequence> {
      * @param other sequence to test
      * @return true if this sequence is a continuation of the given sequence in original source text
      */
-    boolean isContinuationOf(BasedSequence other);
+    boolean isContinuationOf(@NotNull BasedSequence other);
 
     /**
      * Splice the given sequence to the end of this one and return a BasedSequence of the result.
@@ -196,10 +217,11 @@ public interface BasedSequence extends IRichSequence<BasedSequence> {
      *
      * @param other sequence to append to end of this one
      * @return based sequence that contains the span from start of this sequence and end of other
-     *         <p>
-     *         assertion will fail if the other sequence is not a continuation of this one
+     *     <p>
+     *     assertion will fail if the other sequence is not a continuation of this one
      */
-    BasedSequence spliceAtEnd(BasedSequence other);
+    @NotNull
+    BasedSequence spliceAtEnd(@NotNull BasedSequence other);
 
     /**
      * start/end offset based containment, not textual
@@ -207,7 +229,7 @@ public interface BasedSequence extends IRichSequence<BasedSequence> {
      * @param other based sequence from the same base
      * @return true if other is contained in this
      */
-    boolean containsAllOf(BasedSequence other);
+    boolean containsAllOf(@NotNull BasedSequence other);
 
     /**
      * start/end offset based containment, not textual
@@ -215,7 +237,7 @@ public interface BasedSequence extends IRichSequence<BasedSequence> {
      * @param other based sequence from the same base
      * @return true if other is contained in this
      */
-    boolean containsSomeOf(BasedSequence other);
+    boolean containsSomeOf(@NotNull BasedSequence other);
 
     /**
      * Get the prefix part of this from other, start/end offset based containment, not textual
@@ -223,7 +245,8 @@ public interface BasedSequence extends IRichSequence<BasedSequence> {
      * @param other based sequence from the same base
      * @return prefix part of this as compared to other, start/end offset based, not content
      */
-    BasedSequence prefixOf(BasedSequence other);
+    @NotNull
+    BasedSequence prefixOf(@NotNull BasedSequence other);
 
     /**
      * Get the suffix part of this from other, start/end offset based containment, not textual
@@ -231,7 +254,8 @@ public interface BasedSequence extends IRichSequence<BasedSequence> {
      * @param other based sequence from the same base
      * @return suffix part of this as compared to other, start/end offset based, not content
      */
-    BasedSequence suffixOf(BasedSequence other);
+    @NotNull
+    BasedSequence suffixOf(@NotNull BasedSequence other);
 
     /**
      * start/end offset based intersection, not textual
@@ -239,7 +263,8 @@ public interface BasedSequence extends IRichSequence<BasedSequence> {
      * @param other based sequence from the same parent
      * @return sequence which is the intersection of the range of this and other
      */
-    BasedSequence intersect(BasedSequence other);
+    @NotNull
+    BasedSequence intersect(@NotNull BasedSequence other);
 
     /**
      * Extend this based sequence to include characters from underlying based sequence
@@ -248,11 +273,14 @@ public interface BasedSequence extends IRichSequence<BasedSequence> {
      * @param maxCount maximum extra characters to include
      * @return sequence which
      */
-    BasedSequence extendByAny(CharSequence charSet, int maxCount);
+    @NotNull
+    BasedSequence extendByAny(@NotNull CharSequence charSet, int maxCount);
 
-    BasedSequence extendByAny(CharSequence charSet);
+    @NotNull
+    BasedSequence extendByAny(@NotNull CharSequence charSet);
 
-    BasedSequence extendByOneOfAny(CharSequence charSet);
+    @NotNull
+    BasedSequence extendByOneOfAny(@NotNull CharSequence charSet);
 
     /**
      * Extend this based sequence to include up to the next character from underlying based sequence
@@ -261,8 +289,10 @@ public interface BasedSequence extends IRichSequence<BasedSequence> {
      * @param maxCount maximum extra characters to include
      * @return sequence which
      */
-    BasedSequence extendToAny(CharSequence charSet, int maxCount);
-    BasedSequence extendToAny(CharSequence charSet);
+    @NotNull
+    BasedSequence extendToAny(@NotNull CharSequence charSet, int maxCount);
+    @NotNull
+    BasedSequence extendToAny(@NotNull CharSequence charSet);
 
     /**
      * Extend in contained based sequence
@@ -270,12 +300,12 @@ public interface BasedSequence extends IRichSequence<BasedSequence> {
      * @param eolChars   characters to consider as EOL, note {@link #eolStartLength(int)} {@link #eolEndLength(int)} should report length of EOL found if length > 1
      * @param includeEol if to include the eol in the string
      * @return resulting sequence after extension. If already spanning the line then this sequence is returned.
-     *         if the last character of this sequence are found in eolChars then no extension will be performed since it already includes the line end
+     *     if the last character of this sequence are found in eolChars then no extension will be performed since it already includes the line end
      */
-    BasedSequence extendToEndOfLine(CharSequence eolChars, boolean includeEol);
-    BasedSequence extendToEndOfLine(CharSequence eolChars);
-    BasedSequence extendToEndOfLine(boolean includeEol);
-    BasedSequence extendToEndOfLine();
+    @NotNull BasedSequence extendToEndOfLine(@NotNull CharSequence eolChars, boolean includeEol);
+    @NotNull BasedSequence extendToEndOfLine(@NotNull CharSequence eolChars);
+    @NotNull BasedSequence extendToEndOfLine(boolean includeEol);
+    @NotNull BasedSequence extendToEndOfLine();
 
     /**
      * Extend in contained based sequence
@@ -283,12 +313,12 @@ public interface BasedSequence extends IRichSequence<BasedSequence> {
      * @param eolChars   characters to consider as EOL, note {@link #eolStartLength(int)} {@link #eolEndLength(int)} should report length of EOL found if length > 1
      * @param includeEol if to include the eol in the string
      * @return resulting sequence after extension. If already spanning the line then this sequence is returned.
-     *         if the first character of this sequence are found in eolChars then no extension will be performed since it already includes the line end
+     *     if the first character of this sequence are found in eolChars then no extension will be performed since it already includes the line end
      */
-    BasedSequence extendToStartOfLine(CharSequence eolChars, boolean includeEol);
-    BasedSequence extendToStartOfLine(CharSequence eolChars);
-    BasedSequence extendToStartOfLine(boolean includeEol);
-    BasedSequence extendToStartOfLine();
+    @NotNull BasedSequence extendToStartOfLine(@NotNull CharSequence eolChars, boolean includeEol);
+    @NotNull BasedSequence extendToStartOfLine(@NotNull CharSequence eolChars);
+    @NotNull BasedSequence extendToStartOfLine(boolean includeEol);
+    @NotNull BasedSequence extendToStartOfLine();
 
     /**
      * Extend this based sequence to include characters from underlying based sequence
@@ -297,7 +327,7 @@ public interface BasedSequence extends IRichSequence<BasedSequence> {
      * @param maxColumns maximum columns to include
      * @return sequence which
      */
-    BasedSequence prefixWithIndent(int maxColumns);
+    @NotNull BasedSequence prefixWithIndent(int maxColumns);
 
     /*
       These are convenience methods returning coordinates in Base Sequence of this sequence
@@ -322,6 +352,7 @@ public interface BasedSequence extends IRichSequence<BasedSequence> {
     int baseColumnAtEnd();
     int baseColumnAtStart();
 
+    @NotNull
     default BasedSequence prefixWithIndent() {
         return prefixWithIndent(Integer.MAX_VALUE);
     }
@@ -350,16 +381,19 @@ public interface BasedSequence extends IRichSequence<BasedSequence> {
             throw new StringIndexOutOfBoundsException("EMPTY subSequence(" + i + "," + i1 + ") only subSequence(0, 0) is allowed");
         }
 
+        @NotNull
         @Override
         public BasedSequence baseSubSequence(int startIndex, int endIndex) {
             return subSequence(startIndex, endIndex);
         }
 
+        @NotNull
         @Override
         public BasedSequence getBaseSequence() {
             return BasedSequence.NULL;
         }
 
+        @NotNull
         @Override
         public BasedSequence getBase() {
             return BasedSequence.NULL;
@@ -375,6 +409,7 @@ public interface BasedSequence extends IRichSequence<BasedSequence> {
             return 0;
         }
 
+        @NotNull
         @Override
         public Range getSourceRange() {
             return Range.NULL;

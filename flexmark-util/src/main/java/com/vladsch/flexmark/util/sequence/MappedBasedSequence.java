@@ -7,7 +7,7 @@ import org.jetbrains.annotations.Nullable;
 /**
  * A BasedSequence which maps characters according to CharMapper
  */
-final public class MappedBasedSequence extends BasedSequenceImpl implements MappedSequence<BasedSequence> {
+final public class MappedBasedSequence extends BasedSequenceImpl implements MappedSequence<BasedSequence>, ReplacedBasedSequence {
     private final CharMapper mapper;
     private final BasedSequence base;
 
@@ -57,11 +57,13 @@ final public class MappedBasedSequence extends BasedSequenceImpl implements Mapp
         return baseSequence == base ? this : new MappedBasedSequence(mapper, baseSequence);
     }
 
+    @NotNull
     @Override
     public Object getBase() {
         return base.getBase();
     }
 
+    @NotNull
     @Override
     public BasedSequence getBaseSequence() {
         return base.getBaseSequence();
@@ -79,14 +81,16 @@ final public class MappedBasedSequence extends BasedSequenceImpl implements Mapp
 
     @Override
     public int getIndexOffset(int index) {
-        return base.getIndexOffset(index);
+        return base.charAt(index) == charAt(index) ? base.getIndexOffset(index) : -1;
     }
 
+    @NotNull
     @Override
     public Range getSourceRange() {
         return base.getSourceRange();
     }
 
+    @NotNull
     @Override
     public BasedSequence baseSubSequence(int startIndex, int endIndex) {
         BasedSequence basedSequence = base.baseSubSequence(startIndex, endIndex);

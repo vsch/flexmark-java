@@ -32,6 +32,12 @@ public class RichSequenceImpl extends IRichSequenceBase<RichSequence> implements
         return of(charSequence, startIndex, endIndex);
     }
 
+    @Override
+    public <B extends SequenceBuilder<B, RichSequence>> @NotNull B getBuilder() {
+        //noinspection unchecked
+        return (B) new RichSequenceBuilder();
+    }
+
     @NotNull
     @Override
     public RichSequence subSequence(int startIndex, int endIndex) {

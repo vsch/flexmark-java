@@ -2,7 +2,6 @@ package com.vladsch.flexmark.util.sequence;
 
 import com.vladsch.flexmark.util.Pair;
 import com.vladsch.flexmark.util.collection.iteration.ArrayIterable;
-import com.vladsch.flexmark.util.collection.iteration.MappingIterable;
 import com.vladsch.flexmark.util.html.Escaping;
 import com.vladsch.flexmark.util.mappers.ChangeCase;
 import com.vladsch.flexmark.util.mappers.CharMapper;
@@ -102,18 +101,6 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
         return charSequence == null ? nullSequence() : sequenceOf(charSequence, startIndex, charSequence.length());
     }
 
-    @NotNull
-    @Override
-    final public T sequenceOf(T... sequences) {
-        return sequenceOf(new ArrayIterable<>(sequences));
-    }
-
-    @NotNull
-    @Override
-    public T sequenceOf(@NotNull Iterable<T> sequences) {
-        return sequenceOf(concatenate(null, sequences));
-    }
-
     /**
      * Get a portion of this sequence selected by range
      *
@@ -176,7 +163,6 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
 
     @NotNull
     @Override
-    // REFACTOR: fold this into two arg method
     final public T endSequence(int startIndex) {
         return endSequence(startIndex, 0);
     }
@@ -218,20 +204,19 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
         return charAt(index < 0 ? length + index : index);
     }
 
-    /**
-     * @return the last character of the sequence or '\0' if empty
-     */
     @Override
     final public char lastChar() {
         return isEmpty() ? NUL : charAt(length() - 1);
     }
 
-    /**
-     * @return the first character of the sequence or '\0' if empty
-     */
     @Override
     final public char firstChar() {
         return isEmpty() ? NUL : charAt(0);
+    }
+
+    @Override
+    public char safeCharAt(int index) {
+        return index < 0 || index >= length() ? NUL : charAt(index);
     }
 
     // @formatter:off
@@ -878,49 +863,53 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
 
     @Override
     final public int eolEndLength() {
-        return eolEndLength(length() - 1);
+        return eolEndLength(length());
     }
 
     @Override
     final public int eolEndLength(int eolEnd) {
-        int startIndex = Math.min(eolEnd, length() - 1);
-        int pos = startIndex;
-        if (pos >= 0) {
-            char c = charAt(pos);
-            if (c == '\r') {
-                pos--;
-                if (pos >= 0) {
-                    if (charAt(pos) == '\n') {
-                        pos--;
-                    }
-                }
-            } else if (c == '\n') {
-                pos--;
+        int pos = Math.min(eolEnd - 1, length() - 1);
+        if (pos < 0) return 0;
+
+        int len = 0;
+        char c = charAt(pos);
+        if (c == '\r') {
+            if (safeCharAt(pos + 1) != '\n') {
+                len = 1;
+            }
+        } else if (c == '\n') {
+            if (safeCharAt(pos - 1) == '\r') {
+                len = 2;
+            } else {
+                len = 1;
             }
         }
-
-        return startIndex - pos;
+        return len;
     }
 
     @Override
     final public int eolStartLength(int eolStart) {
-        int pos = eolStart;
         int length = length();
+        int pos = Math.min(eolStart, length);
+
+        int len = 0;
+
         if (pos >= 0 && pos < length) {
             char c = charAt(pos);
             if (c == '\r') {
-                pos++;
-                if (pos < length) {
-                    if (charAt(pos) == '\n') {
-                        pos++;
-                    }
+                if (safeCharAt(pos + 1) == '\n') {
+                    len = 2;
+                } else {
+                    len = 1;
                 }
             } else if (c == '\n') {
-                pos++;
+                if (safeCharAt(pos - 1) != '\r') {
+                    len = 1;
+                }
             }
         }
 
-        return pos - eolStart;
+        return len;
     }
 
     // @formatter:off
@@ -995,20 +984,19 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
     @NotNull
     @Override
     final public T trimEOL() {
-        Range range = eolEndRange(length());
-        return range.isNull() ? (T) this : subSequenceBefore(range);
+        int eolLength = eolEndLength();
+        return eolLength > 0 ? subSequence(0, length() - eolLength) : (T) this;
     }
 
     @NotNull
     @Override
     final public T trimmedEOL() {
-        Range range = eolEndRange(length());
-        return range.isNull() ? nullSequence() : subSequence(range);
+        int eolLength = eolEndLength();
+        return eolLength > 0 ? subSequence(length() - eolLength) : nullSequence();
     }
 
     @NotNull
     @Override
-    // TEST:
     final public Range eolEndRange(int eolEnd) {
         int eolLength = eolEndLength(eolEnd);
         return eolLength == 0 ? Range.NULL : Range.of(eolEnd - eolLength, eolEnd);
@@ -1016,15 +1004,14 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
 
     @NotNull
     @Override
-    // TEST:
     public Range eolStartRange(int eolStart) {
         int eolLength = eolStartLength(eolStart);
         return eolLength == 0 ? Range.NULL : Range.of(eolStart, eolStart + eolLength);
     }
 
     // @formatter:off
-    @NotNull @Override final public T trimTailBlankLines() {Range range = trailingBlankLinesRange();return range.isNull() ? (T) this : subSequenceBefore(range);}
-    @NotNull @Override final public T trimLeadBlankLines() {Range range = leadingBlankLinesRange();return range.isNull() ? (T) this : subSequenceAfter(range);}
+    @NotNull @Override final public T trimTailBlankLines() {Range range = trailingBlankLinesRange();return range.isNull() ?  (T) this : subSequenceBefore(range);}
+    @NotNull @Override final public T trimLeadBlankLines() {Range range = leadingBlankLinesRange();return range.isNull() ?  (T) this : subSequenceAfter(range);}
     @NotNull @Override final public Range leadingBlankLinesRange() {return leadingBlankLinesRange(IRichSequence.EOL, 0, length());}
     @NotNull @Override final public Range leadingBlankLinesRange(int startIndex) {return leadingBlankLinesRange(IRichSequence.EOL, startIndex, length());}
     @NotNull @Override final public Range leadingBlankLinesRange(int fromIndex, int endIndex) { return leadingBlankLinesRange(IRichSequence.EOL, fromIndex, endIndex);}
@@ -1201,6 +1188,39 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
     @NotNull @Override final public T removeProperSuffix(@NotNull CharSequence suffix, boolean ignoreCase) {return length() <= suffix.length() || !endsWith(suffix, ignoreCase) ? (T) this : subSequence(0, length() - suffix.length());}
     @NotNull @Override final public T removeProperPrefix(@NotNull CharSequence prefix, boolean ignoreCase) {return length() <= prefix.length() || !startsWith(prefix, ignoreCase) ? (T) this : subSequence(prefix.length(), length());}
     // @formatter:on
+
+    @NotNull
+    @Override
+    public T insert(@NotNull CharSequence chars, int index) {
+        index = Math.max(0, Math.min(length(), index));
+
+        if (chars.length() == 0) {
+            return (T) this;
+        } else if (index == 0) {
+            return prefixWith(chars);
+        } else if (index == length()) {
+            return suffixWith(chars);
+        } else {
+            return getBuilder().append(subSequence(0, index)).append(chars).append(subSequence(index)).toSequence();
+        }
+    }
+
+    @NotNull
+    @Override
+    public T delete(int startIndex, int endIndex) {
+        endIndex = Math.max(0, Math.min(length(), endIndex));
+        startIndex = Math.min(endIndex, Math.max(0, startIndex));
+
+        if (startIndex == endIndex) {
+            return (T) this;
+        } else if (startIndex == 0) {
+            return subSequence(endIndex);
+        } else if (endIndex == length()) {
+            return subSequence(0, startIndex);
+        } else {
+            return getBuilder().append(subSequence(0, startIndex)).append(subSequence(endIndex)).toSequence();
+        }
+    }
 
     @NotNull
     @Override
@@ -1448,55 +1468,46 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
 
     @NotNull
     @Override
-    // TEST:
     public T prefixWith(@Nullable CharSequence prefix) {
-        return prefix == null || prefix.length() == 0 ? (T) this : sequenceOf(sequenceOf(prefix), (T) this);
+        return prefix == null || prefix.length() == 0 ? (T) this : getBuilder().append(prefix).append(this).toSequence();
     }
 
     @NotNull
     @Override
-    // TEST:
     public T suffixWith(@Nullable CharSequence suffix) {
         // convoluted to allow BasedCharSequence to use PrefixedCharSequence so all fits into SegmentedCharSequence
-        return suffix == null || suffix.length() == 0 ? (T) this : sequenceOf((T) this, subSequence(length(), length()).prefixWith(suffix));
+        return suffix == null || suffix.length() == 0 ? (T) this : getBuilder().append(this).append(suffix).toSequence();
     }
 
     @NotNull
     @Override
-    // TEST:
     final public T prefixOnceWith(@Nullable CharSequence prefix) {
         return prefix == null || prefix.length() == 0 || startsWith(prefix) ? (T) this : prefixWith(prefix);
     }
 
     @NotNull
     @Override
-    // TEST:
     final public T suffixOnceWith(@Nullable CharSequence suffix) {
         return suffix == null || suffix.length() == 0 || endsWith(suffix) ? (T) this : suffixWith(suffix);
     }
 
     @NotNull
     @Override
-    // TEST:
     final public T replace(int startIndex, int endIndex, @NotNull CharSequence replacement) {
         int length = length();
-        startIndex = Math.min(startIndex, 0);
-        endIndex = Math.max(endIndex, length);
+        startIndex = Math.max(startIndex, 0);
+        endIndex = Math.min(endIndex, length);
 
-        if (startIndex == 0 && endIndex == length) return sequenceOf(subSequence(endIndex, endIndex).prefixWith(replacement));
-        else if (startIndex == 0) return sequenceOf(subSequence(0, endIndex), subSequence(endIndex).prefixWith(replacement));
-        else if (endIndex == length) return sequenceOf(subSequence(0, startIndex), subSequence(endIndex, endIndex).prefixWith(replacement));
-        else return sequenceOf(subSequence(0, startIndex), subSequence(endIndex, endIndex).prefixWith(replacement), subSequence(endIndex));
+        SequenceBuilder<?, T> segments = getBuilder();
+        return segments.append(subSequence(0, startIndex)).append(replacement).append(subSequence(endIndex)).toSequence();
     }
 
     @NotNull
     @Override
-    // TEST:
     final public T replace(@NotNull CharSequence find, @NotNull CharSequence replace) {
         int[] indices = indexOfAll(find);
         if (indices.length == 0) return (T) this;
-
-        ArrayList<T> segments = new ArrayList<>(indices.length + 2);
+        SequenceBuilder<?, T> segments = getBuilder();
 
         int iMax = indices.length;
         int length = length();
@@ -1505,64 +1516,49 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
         int lastPos = 0;
         while (i < iMax) {
             int pos = indices[i++];
-            if (lastPos < pos) segments.add(subSequence(lastPos, pos));
+            if (lastPos < pos) segments.append(subSequence(lastPos, pos));
             lastPos = pos + find.length();
-            segments.add(subSequence(lastPos, lastPos).prefixWith(replace));
+            segments.append(replace);
         }
 
         if (lastPos < length) {
-            segments.add(subSequence(lastPos, length));
+            segments.append(subSequence(lastPos, length));
         }
 
-        return sequenceOf(segments);
+        return segments.toSequence();
     }
 
     @NotNull
     @Override
-    // TEST:
-    final public T append(CharSequence... others) {
-        return append(new ArrayIterable<>(others));
-    }
-
-    @Nullable
-    public static CharSequence concatenate(@Nullable CharSequence prefix, Iterable<? extends CharSequence> others) {
-        int total = 0;
-        for (CharSequence other : others) {
-            if (other != null) total += other.length();
-        }
-
-        if (total > 0) {
-            StringBuilder sb = new StringBuilder((prefix == null ? 0 : prefix.length()) + total);
-            if (prefix != null) sb.append(prefix);
-            for (CharSequence other : others) {
-                if (other != null && other.length() > 0) sb.append(other);
-            }
-            return sb;
-        }
-
-        return prefix;
+    final public T append(CharSequence... sequences) {
+        return append(new ArrayIterable<>(sequences));
     }
 
     @NotNull
     @Override
-    // TEST:
-    final public T append(Iterable<? extends CharSequence> others) {
-        CharSequence result = concatenate(this, others);
-        return result == this ? (T) this : sequenceOf(result);
+    final public T append(Iterable<? extends CharSequence> sequences) {
+        SequenceBuilder<?, T> segments = getBuilder();
+        segments.append(this);
+        for (CharSequence sequence : sequences) {
+            segments.append(sequence);
+        }
+        return segments.toSequence();
     }
 
     @NotNull
     @Override
-    // TEST:
     final public T extractRanges(Range... ranges) {
         return extractRanges(new ArrayIterable<>(ranges));
     }
 
     @NotNull
     @Override
-    // TEST:
-    final public T extractRanges(Iterable<? extends Range> ranges) {
-        return sequenceOf(new MappingIterable<>(ranges, range -> range == null || range.isNull() ? null : subSequence(range)));
+    final public T extractRanges(Iterable<Range> ranges) {
+        SequenceBuilder<?, T> segments = getBuilder();
+        for (Range range : ranges) {
+            if (!(range == null || range.isNull())) segments.append(range.safeSubSequence(this));
+        }
+        return segments.toSequence();
     }
 
     @Override

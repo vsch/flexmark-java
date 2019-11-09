@@ -1203,7 +1203,7 @@ public class MarkdownTable {
             switch (alignment) {
                 case LEFT:
                     if (spaceCount > 0) {
-                        text = text.append(PrefixedSubSequence.repeatOf(" ", spaceCount, text.subSequence(0, 0)));
+                        text = text.append(PrefixedSubSequence.repeatOf(" ", spaceCount, text.getEmptySuffix()));
                     }
 
                     if (withTrackedOffset && needsPadding && cell.afterSpace) {
@@ -1233,7 +1233,7 @@ public class MarkdownTable {
                 case CENTER:
                     int count = spaceCount / 2;
                     if (spaceCount > 0) {
-                        text = PrefixedSubSequence.repeatOf(" ", count, text).append(PrefixedSubSequence.repeatOf(" ", spaceCount - count, text.subSequence(0, 0)));
+                        text = PrefixedSubSequence.repeatOf(" ", count, text).append(PrefixedSubSequence.repeatOf(" ", spaceCount - count, text.getEmptySuffix()));
 
                         if (withTrackedOffset && cell.trackedTextOffset != NOT_TRACKED) {
                             adjustedCell = cell.withTrackedOffset(maxLimit(text.length(), cell.trackedTextOffset + count));

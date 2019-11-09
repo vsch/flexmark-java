@@ -79,4 +79,40 @@ public class MappedBasedSequenceTest {
         assertEquals(input, sequence.toString());
         assertEquals(encodedInput, mapEncoded.toString());
     }
+
+    @Test
+    public void test_chain2() {
+        String input = "This Is Mixed\n";
+        String encodedInput = "THIS\u00A0IS\u00A0MIXED\n";
+
+        BasedSequence sequence = BasedSequence.of(input);
+        BasedSequence mapEncoded = sequence.toMapped(ChangeCase.toUpperCase).toMapped(SpaceMapper.toNonBreakSpace);
+
+        assertEquals(input, sequence.toString());
+        assertEquals(encodedInput, mapEncoded.toString());
+    }
+
+    @Test
+    public void test_segmented() {
+        String input = "This Is Mixed\n";
+        String encodedInput = "<THIS IS MIXED\n";
+
+        BasedSequence sequence = BasedSequence.of(input);
+        BasedSequence mapEncoded = sequence.toMapped(ChangeCase.toUpperCase).prefixWith("<");
+
+        assertEquals(input, sequence.toString());
+        assertEquals(encodedInput, mapEncoded.toString());
+    }
+
+    @Test
+    public void test_segmented2() {
+        String input = "This Is Mixed\n";
+        String encodedInput = "THIS IS MIXED\n>";
+
+        BasedSequence sequence = BasedSequence.of(input);
+        BasedSequence mapEncoded = sequence.toMapped(ChangeCase.toUpperCase).suffixWith(">");
+
+        assertEquals(input, sequence.toString());
+        assertEquals(encodedInput, mapEncoded.toString());
+    }
 }

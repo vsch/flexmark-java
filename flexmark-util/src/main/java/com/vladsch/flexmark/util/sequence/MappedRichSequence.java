@@ -62,6 +62,12 @@ public class MappedRichSequence extends IRichSequenceBase<RichSequence> implemen
         } else return new MappedRichSequence(mapper, base.sequenceOf(baseSeq, startIndex, endIndex));
     }
 
+    @Override
+    public <B extends SequenceBuilder<B, RichSequence>> @NotNull B getBuilder() {
+        //noinspection unchecked
+        return (B) new RichSequenceBuilder();
+    }
+
     @NotNull
     @Override
     public RichSequence toMapped(CharMapper mapper) {

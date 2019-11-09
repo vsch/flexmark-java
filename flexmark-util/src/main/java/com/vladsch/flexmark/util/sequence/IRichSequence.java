@@ -17,7 +17,7 @@ import java.util.function.Predicate;
  * and {@link com.vladsch.flexmark.util.mappers.NullEncoder#decodeNull} mapper to get original null chars
  */
 @SuppressWarnings("SameParameterValue")
-public interface IRichSequence<T extends IRichSequence<?>> extends CharSequence, Comparable<CharSequence> {
+public interface IRichSequence<T extends IRichSequence<T>> extends CharSequence, Comparable<CharSequence> {
     String EOL = "\n";
     String SPACE = " ";
     String EOL_CHARS = "\r\n";
@@ -49,6 +49,14 @@ public interface IRichSequence<T extends IRichSequence<?>> extends CharSequence,
      * @return the first character of the sequence or '\0' if empty
      */
     char firstChar();
+
+    /**
+     * return char at index or '\0' if index &lt;0 or &gt;=length()
+     *
+     * @param index index
+     * @return char or '\0'
+     */
+    char safeCharAt(int index);
 
     /**
      * Get a portion of this sequence
@@ -133,7 +141,7 @@ public interface IRichSequence<T extends IRichSequence<?>> extends CharSequence,
      * @param endIndex   offset into this sequence
      * @return selected portion spanning startIndex to endIndex of this sequence. If offset is &lt;0 then it is taken as relative to length()
      */
-    @NotNull T midSequence(int startIndex, int end);
+    @NotNull T midSequence(int startIndex, int endIndex);
 
     /**
      * Convenience method to get characters offset from start or end of sequence.
@@ -186,13 +194,11 @@ public interface IRichSequence<T extends IRichSequence<?>> extends CharSequence,
     @NotNull T sequenceOf(@Nullable CharSequence charSequence, int startIndex, int endIndex);
 
     /**
-     * Create a sequence out of concatenation of other sequences
+     * Get a sequence builder for this sequence type
      *
-     * @param sequences sequences to concatenate
-     * @return resulting sequence
+     * @return builder which can build this type of sequence
      */
-    @NotNull T sequenceOf(T... sequences);
-    @NotNull T sequenceOf(@NotNull Iterable<T> sequences);
+    @NotNull <B extends SequenceBuilder<B, T>> B getBuilder();
 
     /**
      * All index methods return the position or -1 if not found of the given character, characters or string.
@@ -664,14 +670,14 @@ public interface IRichSequence<T extends IRichSequence<?>> extends CharSequence,
     @NotNull Range eolStartRange(int eolStart);
 
     /**
-     * Trim eol at the end of this sequence
+     * Trim last eol at the end of this sequence,
      *
      * @return sequence with one EOL trimmed off if it had one
      */
     @NotNull T trimEOL();
 
     /**
-     * Get Trimmed eol from the end of this sequence
+     * Get Trimmed part by {@link #trimEOL()}
      *
      * @return trimmed off EOL if sequence had one or {@link #nullSequence()}
      */
@@ -776,8 +782,8 @@ public interface IRichSequence<T extends IRichSequence<?>> extends CharSequence,
      *                  can be any value, if less than 0 it is the same as 0,
      *                  if greater than length() it is the same as length()
      * @return range of blank lines at or before fromIndex and ranging to minimum of startIndex, Range.NULL if none found
-     *         if the range in sequence contains only whitespace characters then the whole range will be returned
-     *         even if contains no EOL characters
+     *     if the range in sequence contains only whitespace characters then the whole range will be returned
+     *     even if contains no EOL characters
      */
     @NotNull Range leadingBlankLinesRange(@NotNull CharSequence eolChars, int fromIndex, int endIndex);
     /**
@@ -791,8 +797,8 @@ public interface IRichSequence<T extends IRichSequence<?>> extends CharSequence,
      *                   can be any value, if less than 0 it is the same as 0,
      *                   if greater than length() it is the same as length()
      * @return range of blank lines at or before fromIndex and ranging to minimum of startIndex
-     *         if the range in sequence contains only whitespace characters then the whole range will be returned
-     *         even if contains no EOL characters
+     *     if the range in sequence contains only whitespace characters then the whole range will be returned
+     *     even if contains no EOL characters
      */
     @NotNull Range trailingBlankLinesRange(CharSequence eolChars, int startIndex, int fromIndex);
 
@@ -1066,6 +1072,45 @@ public interface IRichSequence<T extends IRichSequence<?>> extends CharSequence,
     @NotNull T removeProperPrefix(@NotNull CharSequence prefix, boolean ignoreCase);
 
     /**
+     * Insert char sequence at given index
+     *
+     * @param chars char sequence to insert
+     * @param index index of insertion. if &gt;length of this sequence then same as length, if &lt;0 then same as 0
+     * @return resulting sequence
+     *     based sequence implementation may throw an IllegalArgumentException
+     *     if inserting another based sequence out of order based on offsets
+     */
+    @NotNull T insert(@NotNull CharSequence chars, int index);
+
+    /**
+     * Delete range in sequence
+     *
+     * @param startIndex start index of deletion
+     * @param endIndex   end index, not inclusive, of insertion
+     * @return resulting sequence
+     */
+    @NotNull T delete(int startIndex, int endIndex);
+
+    /**
+     * Replace part of the sequence with a char sequence
+     *
+     * @param startIndex  start index of replaced part
+     * @param endIndex    end index of replaced part
+     * @param replacement char sequence
+     * @return resulting sequence
+     */
+    @NotNull T replace(int startIndex, int endIndex, @NotNull CharSequence replacement);
+
+    /**
+     * Replace all occurrences of one sequence with another
+     *
+     * @param find    sequence to find
+     * @param replace replacement sequence
+     * @return array of indices
+     */
+    @NotNull T replace(@NotNull CharSequence find, @NotNull CharSequence replace);
+
+    /**
      * Map characters of this sequence to: Uppercase, Lowercase or use custom mapping
      *
      * @return lowercase version of sequence
@@ -1144,25 +1189,6 @@ public interface IRichSequence<T extends IRichSequence<?>> extends CharSequence,
     @NotNull T suffixOnceWith(@Nullable CharSequence suffix);
 
     /**
-     * Replace part of the sequence with a char sequence
-     *
-     * @param startIndex  start index of replaced part
-     * @param endIndex    end index of replaced part
-     * @param replacement char sequence
-     * @return resulting sequence
-     */
-    @NotNull T replace(int startIndex, int endIndex, @NotNull CharSequence replacement);
-
-    /**
-     * Replace all occurrences of one sequence with another
-     *
-     * @param find    sequence to find
-     * @param replace replacement sequence
-     * @return array of indices
-     */
-    @NotNull T replace(@NotNull CharSequence find, @NotNull CharSequence replace);
-
-    /**
      * Append helpers
      *
      * @param out        string builder
@@ -1191,24 +1217,33 @@ public interface IRichSequence<T extends IRichSequence<?>> extends CharSequence,
     @NotNull T appendRangesTo(@NotNull StringBuilder out, @Nullable CharMapper charMapper, Iterable<? extends Range> ranges);
     @NotNull T appendRangesTo(@NotNull StringBuilder out, Iterable<? extends Range> ranges);
 
+    /**
+     * Build a sequence of ranges in this sequence
+     * <p>
+     * NOTE: BasedSequence ranges must be non-overlapping and ordered by startOffset or
+     * IllegalArgumentException will be thrown
+     *
+     * @param ranges ranges to extract
+     * @return resulting sequence
+     */
     @NotNull T extractRanges(Range... ranges);
-    @NotNull T extractRanges(Iterable<? extends Range> ranges);
+    @NotNull T extractRanges(Iterable<Range> ranges);
 
     /**
      * Concatenate this sequence and list of others, returning sequence of result
      *
-     * @param others list of char sequences to append to this sequence, null sequences are skipped
+     * @param sequences list of char sequences to append to this sequence, null sequences are skipped
      * @return appended sequence
      */
-    @NotNull T append(CharSequence... others);
-    @NotNull T append(Iterable<? extends CharSequence> others);
+    @NotNull T append(CharSequence... sequences);
+    @NotNull T append(Iterable<? extends CharSequence> sequences);
 
     /**
      * Get the line and column information from index into sequence
      *
      * @param index index for which to get line information
      * @return Pair(line, column) where line and column are 0 based,
-     *         throws IllegalArgumentException if index &lt; 0 or &gt; length.
+     *     throws IllegalArgumentException if index &lt; 0 or &gt; length.
      */
     @NotNull Pair<Integer, Integer> lineColumnAtIndex(int index);
     @Deprecated
@@ -1222,5 +1257,4 @@ public interface IRichSequence<T extends IRichSequence<?>> extends CharSequence,
     default int getColumnAtIndex(int index) {
         return columnAtIndex(index);
     }
-
 }

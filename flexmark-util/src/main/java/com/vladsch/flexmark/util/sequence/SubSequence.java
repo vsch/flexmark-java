@@ -18,11 +18,13 @@ public final class SubSequence extends BasedSequenceImpl {
     private final int startOffset;
     private final int endOffset;
 
+    @NotNull
     @Override
     public SubSequence getBaseSequence() {
         return base;
     }
 
+    @NotNull
     @Override
     public Object getBase() {
         return baseSeq;
@@ -58,6 +60,7 @@ public final class SubSequence extends BasedSequenceImpl {
         return endOffset - startOffset;
     }
 
+    @NotNull
     @Override
     public Range getSourceRange() {
         return Range.of(startOffset, endOffset);
@@ -92,6 +95,7 @@ public final class SubSequence extends BasedSequenceImpl {
         throw new StringIndexOutOfBoundsException("SubCharSequence index: " + endIndex + " out of range: 0, " + length());
     }
 
+    @NotNull
     @Override
     public SubSequence baseSubSequence(int startIndex, int endIndex) {
         if (startIndex >= 0 && endIndex <= base.length()) {
