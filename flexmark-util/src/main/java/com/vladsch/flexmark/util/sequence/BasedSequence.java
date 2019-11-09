@@ -300,6 +300,7 @@ public interface BasedSequence extends IRichSequence<BasedSequence> {
 
     /*
       These are convenience methods returning coordinates in Base Sequence of this sequence
+      TEST: all these need tests
      */
     @NotNull Pair<Integer, Integer> baseLineColumnAtIndex(int index);
     @NotNull Range baseLineRangeAtIndex(int index);
