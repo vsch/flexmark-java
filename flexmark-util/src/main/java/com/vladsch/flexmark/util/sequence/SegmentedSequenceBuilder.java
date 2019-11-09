@@ -1,6 +1,8 @@
 package com.vladsch.flexmark.util.sequence;
 
-inteimport org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
