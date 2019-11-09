@@ -5,7 +5,7 @@ import org.junit.Test;
 import static junit.framework.TestCase.assertEquals;
 
 final public class PrefixedSubSequenceTest {
-    private final BasedSequence sequence = BasedSequenceImpl.of("abcdefghi", 3, 6);
+    private final BasedSequence sequence = BasedSequence.of("abcdefghi", 3, 6);
     private final BasedSequence substring = PrefixedSubSequence.of("0123", sequence);
 
     @Test

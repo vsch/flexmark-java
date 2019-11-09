@@ -1216,12 +1216,6 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
         return toMapped(ChangeCase.toUpperCase);
     }
 
-    @NotNull
-    @Override
-    public T toMapped(CharMapper mapper) {
-        return sequenceOf(MappedRichSequence.of(mapper, (T) this));
-    }
-
     // @formatter:off
     @Override final public boolean matches(@NotNull CharSequence chars) {return chars.length() == length() && matchChars(chars, 0, false);}
     @Override final public boolean matchesIgnoreCase(@NotNull CharSequence chars) {return chars.length() == length() && matchChars(chars, 0, true);}

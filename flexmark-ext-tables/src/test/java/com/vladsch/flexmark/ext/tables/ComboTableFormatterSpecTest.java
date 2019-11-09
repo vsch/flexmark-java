@@ -9,8 +9,8 @@ import com.vladsch.flexmark.util.data.MutableDataSet;
 import com.vladsch.flexmark.util.format.TableFormatOptions;
 import com.vladsch.flexmark.util.format.options.DiscretionaryText;
 import com.vladsch.flexmark.util.format.options.TableCaptionHandling;
-import com.vladsch.flexmark.util.mappers.CharWidthProvider;
-import com.vladsch.flexmark.util.sequence.BasedSequenceImpl;
+import com.vladsch.flexmark.util.format.CharWidthProvider;
+import com.vladsch.flexmark.util.sequence.BasedSequence;
 import org.jetbrains.annotations.NotNull;
 import org.junit.runners.Parameterized;
 
@@ -80,7 +80,7 @@ public class ComboTableFormatterSpecTest extends FormatterSpecTest {
 
                     @Override
                     public int charWidth(CharSequence s) {
-                        return BasedSequenceImpl.of(s).countLeadingNot(TableFormatOptions.INTELLIJ_DUMMY_IDENTIFIER_CHAR);
+                        return BasedSequence.of(s, 0, s.length()).countLeadingNot(TableFormatOptions.INTELLIJ_DUMMY_IDENTIFIER_CHAR);
                     }
                 })
         );

@@ -1,6 +1,7 @@
 package com.vladsch.flexmark.util.html;
 
 import com.vladsch.flexmark.util.Immutable;
+import com.vladsch.flexmark.util.sequence.IRichSequence;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -16,7 +17,9 @@ public interface Attribute extends Immutable<Attribute, MutableAttribute> {
     String TARGET_ATTR = "target";
     Attribute NO_FOLLOW = AttributeImpl.of("rel", "nofollow");
     Set<String> NON_RENDERING_WHEN_EMPTY = new HashSet<>(Arrays.asList(CLASS_ATTR, ID_ATTR, NAME_ATTR, STYLE_ATTR));
-    char NUL = '\0';
+
+    @Deprecated
+    char NUL = IRichSequence.NUL;
 
     String getName();
     String getValue();

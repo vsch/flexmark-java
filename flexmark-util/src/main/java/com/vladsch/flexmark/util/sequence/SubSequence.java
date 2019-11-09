@@ -3,8 +3,14 @@ package com.vladsch.flexmark.util.sequence;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * A CharSequence that references original char sequence and maps '\0' to '\uFFFD'
- * a subSequence() returns a sub-sequence from the original base sequence
+ * A BasedSequence implementation which wraps original CharSequence to provide a BasedSequence for
+ * all its sub sequences, a subSequence() returns a SubSequence from the original base sequence.
+ * <p>
+ * NOTE: No substitution is performed for '\0' encoding. If your input sequence has '\0'
+ * which you want preserved then your text should be wrapped in a {@link MappedRichSequence}
+ * wrapper with {@link com.vladsch.flexmark.util.mappers.NullEncoder#encodeNull} mapper
+ * and {@link com.vladsch.flexmark.util.mappers.NullEncoder#decodeNull} mapper to get original null chars
+ * <p>
  */
 public final class SubSequence extends BasedSequenceImpl {
     private final CharSequence baseSeq;
@@ -38,13 +44,13 @@ public final class SubSequence extends BasedSequenceImpl {
         endOffset = charSequence.length();
     }
 
-    private SubSequence(SubSequence subSequence, int start, int end) {
-        assert start > 0 || end < subSequence.length();
+    private SubSequence(SubSequence subSequence, int startIndex, int endIndex) {
+        assert startIndex >= 0 && endIndex >= startIndex && endIndex <= subSequence.length() : String.format("SubSequence must have startIndex >= 0 && endIndex >= startIndex && endIndex <= %d, got startIndex:%d, endIndex: %d", subSequence.length(), startIndex, endIndex);
 
         base = subSequence;
         baseSeq = subSequence.baseSeq;
-        startOffset = subSequence.startOffset + start;
-        endOffset = subSequence.startOffset + end;
+        startOffset = subSequence.startOffset + startIndex;
+        endOffset = subSequence.startOffset + endIndex;
     }
 
     @Override
@@ -69,32 +75,32 @@ public final class SubSequence extends BasedSequenceImpl {
     public char charAt(int index) {
         if (index >= 0 && index < endOffset - startOffset) {
             char c = baseSeq.charAt(index + startOffset);
-            return c == '\0' ? '\uFFFD' : c;
+            return c == NUL ? ENC_NUL : c;
         }
-        throw new StringIndexOutOfBoundsException("SubCharSequence index: " + index + " out of range: 0, " + length());
+        throw new StringIndexOutOfBoundsException("SubSequence index: " + index + " out of range: 0, " + length());
     }
 
     @NotNull
     @Override
-    public SubSequence subSequence(int start, int end) {
-        if (start >= 0 && end <= endOffset - startOffset) {
-            return baseSubSequence(startOffset + start, startOffset + end);
+    public SubSequence subSequence(int startIndex, int endIndex) {
+        if (startIndex >= 0 && endIndex <= endOffset - startOffset) {
+            return baseSubSequence(startOffset + startIndex, startOffset + endIndex);
         }
-        if (start < 0 || startOffset + start > endOffset) {
-            throw new StringIndexOutOfBoundsException("SubCharSequence index: " + start + " out of range: 0, " + length());
+        if (startIndex < 0 || startOffset + startIndex > endOffset) {
+            throw new StringIndexOutOfBoundsException("SubCharSequence index: " + startIndex + " out of range: 0, " + length());
         }
-        throw new StringIndexOutOfBoundsException("SubCharSequence index: " + end + " out of range: 0, " + length());
+        throw new StringIndexOutOfBoundsException("SubCharSequence index: " + endIndex + " out of range: 0, " + length());
     }
 
     @Override
-    public SubSequence baseSubSequence(int start, int end) {
-        if (start >= 0 && end <= base.length()) {
-            return start == startOffset && end == endOffset ? this : base != this ? base.baseSubSequence(start, end) : new SubSequence(this, start, end);
+    public SubSequence baseSubSequence(int startIndex, int endIndex) {
+        if (startIndex >= 0 && endIndex <= base.length()) {
+            return startIndex == startOffset && endIndex == endOffset ? this : base != this ? base.baseSubSequence(startIndex, endIndex) : new SubSequence(this, startIndex, endIndex);
         }
-        if (start < 0 || start > base.length()) {
-            throw new StringIndexOutOfBoundsException("SubCharSequence index: " + start + " out of range: 0, " + length());
+        if (startIndex < 0 || startIndex > base.length()) {
+            throw new StringIndexOutOfBoundsException("SubCharSequence index: " + startIndex + " out of range: 0, " + length());
         }
-        throw new StringIndexOutOfBoundsException("SubCharSequence index: " + end + " out of range: 0, " + length());
+        throw new StringIndexOutOfBoundsException("SubCharSequence index: " + endIndex + " out of range: 0, " + length());
     }
 
     @Override
@@ -102,32 +108,32 @@ public final class SubSequence extends BasedSequenceImpl {
         return toString().hashCode();
     }
 
-    @NotNull
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder(length());
-        appendTo(sb, 0, length());
-        return sb.toString();
+    static BasedSequence create(CharSequence charSequence, int startIndex, int endIndex) {
+        if (charSequence instanceof BasedSequence) return ((BasedSequence) charSequence).subSequence(startIndex, endIndex);
+        else return charSequence == null ? BasedSequence.NULL : new SubSequence(charSequence).subSequence(startIndex, endIndex);
     }
 
+    /**
+     * @deprecated  use {@link BasedSequence#of} instead
+     */
+    @Deprecated
     public static BasedSequence of(CharSequence charSequence) {
-        if (charSequence instanceof BasedSequence) return (BasedSequence) charSequence;
-        else {
-            return charSequence == null ? BasedSequence.NULL : new SubSequence(charSequence);
-        }
+        return BasedSequence.of(charSequence, 0, charSequence.length());
     }
 
-    public static BasedSequence of(CharSequence charSequence, int start) {
-        if (charSequence instanceof BasedSequence) return ((BasedSequence) charSequence).subSequence(start);
-        else {
-            return charSequence == null ? BasedSequence.NULL : start == 0 ? new SubSequence(charSequence) : new SubSequence(charSequence).subSequence(start, charSequence.length());
-        }
+    /**
+     * @deprecated  use {@link IRichSequence#of} instead
+     */
+    @Deprecated
+    public static BasedSequence of(CharSequence charSequence, int startIndex) {
+        return BasedSequence.of(charSequence, startIndex, charSequence.length());
     }
 
-    public static BasedSequence of(CharSequence charSequence, int start, int end) {
-        if (charSequence instanceof BasedSequence) return ((BasedSequence) charSequence).subSequence(start, end);
-        else {
-            return charSequence == null ? BasedSequence.NULL : start == 0 && end == charSequence.length() ? new SubSequence(charSequence) : new SubSequence(charSequence).subSequence(start, end);
-        }
+    /**
+     * @deprecated  use {@link IRichSequence#of} instead
+     */
+    @Deprecated
+    public static BasedSequence of(CharSequence charSequence, int startIndex, int endIndex) {
+        return BasedSequence.of(charSequence, startIndex, endIndex);
     }
 }

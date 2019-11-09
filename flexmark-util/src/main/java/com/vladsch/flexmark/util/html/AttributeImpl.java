@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.util.html;
 
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.SubSequence;
+import com.vladsch.flexmark.util.sequence.IRichSequence;
 
 public class AttributeImpl implements Attribute {
     private final String myName;
@@ -50,11 +50,11 @@ public class AttributeImpl implements Attribute {
     public static int indexOfValue(CharSequence value, CharSequence valueName, char valueListDelimiter, char valueNameDelimiter) {
         if (valueName.length() == 0 || value.length() == 0) return -1;
 
-        if (valueListDelimiter == NUL) {
+        if (valueListDelimiter == IRichSequence.NUL) {
             return value.equals(valueName) ? 0 : -1;
         } else {
             int lastPos = 0;
-            BasedSequence subSeq = SubSequence.of(value);
+            BasedSequence subSeq = BasedSequence.of(value, 0, value.length());
             while (lastPos < value.length()) {
                 int pos = subSeq.indexOf(valueName, lastPos);
                 if (pos == -1) break;
@@ -62,10 +62,10 @@ public class AttributeImpl implements Attribute {
                 int endPos = pos + valueName.length();
                 if (pos == 0
                         || value.charAt(pos - 1) == valueListDelimiter
-                        || valueNameDelimiter != NUL && value.charAt(pos - 1) == valueNameDelimiter) {
+                        || valueNameDelimiter != IRichSequence.NUL && value.charAt(pos - 1) == valueNameDelimiter) {
                     if (endPos >= value.length()
                             || value.charAt(endPos) == valueListDelimiter
-                            || valueNameDelimiter != NUL && value.charAt(endPos) == valueNameDelimiter) {
+                            || valueNameDelimiter != IRichSequence.NUL && value.charAt(endPos) == valueNameDelimiter) {
                         return pos;
                     }
                 }
@@ -129,20 +129,20 @@ public class AttributeImpl implements Attribute {
     }
 
     public static AttributeImpl of(CharSequence attrName) {
-        return of(attrName, attrName, NUL, NUL);
+        return of(attrName, attrName, IRichSequence.NUL, IRichSequence.NUL);
     }
 
     public static AttributeImpl of(CharSequence attrName, CharSequence value) {
-        return of(attrName, value, NUL, NUL);
+        return of(attrName, value, IRichSequence.NUL, IRichSequence.NUL);
     }
 
     public static AttributeImpl of(CharSequence attrName, CharSequence value, char valueListDelimiter) {
-        return of(attrName, value, valueListDelimiter, NUL);
+        return of(attrName, value, valueListDelimiter, IRichSequence.NUL);
     }
 
     public static AttributeImpl of(CharSequence attrName, CharSequence value, char valueListDelimiter, char valueNameDelimiter) {
         if (attrName.equals(CLASS_ATTR)) {
-            return new AttributeImpl(attrName, value, ' ', NUL);
+            return new AttributeImpl(attrName, value, ' ', IRichSequence.NUL);
         } else if (attrName.equals(STYLE_ATTR)) {
             return new AttributeImpl(attrName, value, ';', ':');
         }

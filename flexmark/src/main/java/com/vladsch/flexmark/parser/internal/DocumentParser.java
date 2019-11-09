@@ -19,7 +19,6 @@ import com.vladsch.flexmark.util.dependency.ResolvedDependencies;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.CharSubSequence;
 import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
-import com.vladsch.flexmark.util.sequence.SubSequence;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.BufferedReader;
@@ -430,7 +429,7 @@ public class DocumentParser implements ParserState {
      * @return Document node of the resulting AST
      */
     public Document parse(CharSequence source) {
-        BasedSequence input = SubSequence.of(source);
+        BasedSequence input = BasedSequence.of(source, 0, source.length());
         int lineStart = 0;
         int lineBreak;
         int lineEOL;

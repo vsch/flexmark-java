@@ -173,25 +173,36 @@ Next
       `StringBuilder` its text equivalent. A visitor needs to be provided so child nodes could
       be visited.
 * [ ] Fix: change `BasedSequenceImpl` to use `Range` instead of `startOffset` and `endOffset`
+* [ ] Add: `Formatter` Paragraph wrapping.
 
 0.59.42
 -------
 
-* Break: rename `RichCharSequence` to `RichSequence` shorter and lines up with `BasedSequence`,
-* Break: rename `RichCharSequenceBase` to `RichSequenceBase`
+* Break: rename `MappedSequence` to `MappedBasedSequence` to allow for `MappedRichSequence`
+* Break: rename `RichCharSequence` to `IRichSequence` to separate base interfaces for rich and based sequences and
+  allow for `RichSequence` to be the base interface for rich sequences similar to `BasedSequence` for based sequences
+* Break: rename `RichCharSequenceBase` to `IRichSequenceBase`
 * Break: rename `RichCharSequenceImpl` to `RichSequenceImpl`
 * Break: rename `RepeatedCharSequence` to `RepeatedSequence`
-* Fix: `RichCharSequence` which is extended by `BasedCharSequence`
+* Break: move `com.vladsch.flexmark.tree.iteration.ArrayIterable` to `com.vladsch.flexmark.util.collection.iteration.ArrayIterable`
+* Break: move `com.vladsch.flexmark.util.html.CellAlignment` to `com.vladsch.flexmark.util.collection.iteration.ArrayIterable`
+* Add: `RichSequence.of` for creating `RichSequence` instances
+* Add: `BasedSequence.of` for creating `BasedSequence` instances
+* Deprecate: `RichSequenceImpl.of`, use `RichSequence.of` instead
+* Deprecate: `BasedSequenceImpl.of`, use `BasedSequence.of` instead
+* Deprecate: `SubSequence.of`, use `BasedSequence.of` instead
+* Deprecate: `UpperCaseMapper` and `LowerCaseMapper` use `ChangeCase.toUpperCase` and `ChangeCase.toLowerCase`
+* Fix: `IRichSequence` and by extension `RichSequence` and `BasedSequence`
   <!-- @formatter:off -->
-  * Add: `RichSequence.trimToEndOfLine(CharSequence eolChars, boolean includeEol, int index)` - trim end to end of line at index
-  * Add: `RichSequence.trimToStartOfLine(CharSequence, boolean, int)` - trimmed end after next EOL
-  * Add: `RichSequence.leadingBlankLinesRange(CharSequence eolChars, int fromIndex, int endIndex)` - find next range of blank lines
-  * Add: `RichSequence.trailingBlankLinesRange(CharSequence eolChars, int startIndex, int fromIndex)` - find previous range of blank lines
-  * Add: `RichSequence.blankLinesRemovedRanges(CharSequence eolChars, int fromIndex, int endIndex)` - list of ranges in sequence between `fromIndex` and `endIndex`  excluding all blank lines
+  * Add: `IRichSequence.trimToEndOfLine(CharSequence eolChars, boolean includeEol, int index)` - trim end to end of line at index
+  * Add: `IRichSequence.trimToStartOfLine(CharSequence, boolean, int)` - trimmed end after next EOL
+  * Add: `IRichSequence.leadingBlankLinesRange(CharSequence eolChars, int fromIndex, int endIndex)` - find next range of blank lines
+  * Add: `IRichSequence.trailingBlankLinesRange(CharSequence eolChars, int startIndex, int fromIndex)` - find previous range of blank lines
+  * Add: `IRichSequence.blankLinesRemovedRanges(CharSequence eolChars, int fromIndex, int endIndex)` - list of ranges in sequence between `fromIndex` and `endIndex`  excluding all blank lines
   * Add: range based methods:
-    * `RichSequence.subSequence(Range)`
-    * `RichSequence.subSequenceAfter(Range)`
-    * `RichSequence.subSequenceBefore(Range)`
+    * `IRichSequence.subSequence(Range)`
+    * `IRichSequence.subSequenceAfter(Range)`
+    * `IRichSequence.subSequenceBefore(Range)`
   <!-- @formatter:on -->
 * Add: to `BasedSequence`
     <!-- @formatter:off -->
@@ -208,10 +219,13 @@ Next
   trimmable characters to keep, which is more useful but does break compatibility. Now it can be
   used to leave whitespace padding up to a maximum of `keep` characters.
 * Fix: reformat tests for compound sections
-* Break: rename `Range.subSequence()` to `Range.basedSubSequence()`
-* Break: rename `Range.safeSubSequence()` to `Range.safeBasedSubSequence()`
+* Deprecate: `Range.subSequence(CharSequence)` use `Range.basedSubSequence(CharSequence)`, `Range.richSubSequence(CharSequence)` or for plain sequences `Range.charSubSequence(CharSequence)`
+* Fix: rename `Range.subSequence()` to `Range.basedSubSequence()`
+* Fix: rename `Range.safeSubSequence()` to `Range.safeBasedSubSequence()` which limit the subsequence within 0 to length
 * Add: `Range.richSubSequence()`
-* Add: `Range.safeRichBasedSubSequence()`
+* Add: `Range.safeRichBasedSubSequence()` which limit the subsequence within 0 to length
+* Add: `Range.charSubSequence()`
+* Add: `Range.safeCharBasedSubSequence()` which limit the subsequence within 0 to length
 
 0.59.40
 -------

@@ -3,9 +3,7 @@ package com.vladsch.flexmark.util.html;
 import com.vladsch.flexmark.util.Pair;
 import com.vladsch.flexmark.util.Utils;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.BasedSequenceImpl;
 import com.vladsch.flexmark.util.sequence.Range;
-import com.vladsch.flexmark.util.sequence.SubSequence;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -109,7 +107,7 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
 
     @Override
     public LineFormattingAppendable setIndentPrefix(CharSequence prefix) {
-        myIndentPrefix = prefix == null ? BasedSequence.NULL : BasedSequenceImpl.of(prefix);
+        myIndentPrefix = prefix == null ? BasedSequence.NULL : BasedSequence.of(prefix, 0, prefix.length());
         return this;
     }
 
@@ -135,9 +133,9 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
     public LineFormattingAppendable setPrefix(CharSequence prefix, boolean afterEol) {
         if (!myPassThrough) {
             if (afterEol) {
-                myPrefixAfterEol = prefix == null ? BasedSequence.NULL : BasedSequenceImpl.of(prefix);
+                myPrefixAfterEol = prefix == null ? BasedSequence.NULL : BasedSequence.of(prefix, 0, prefix.length());
             } else {
-                myPrefix = prefix == null ? BasedSequence.NULL : BasedSequenceImpl.of(prefix);
+                myPrefix = prefix == null ? BasedSequence.NULL : BasedSequence.of(prefix, 0, prefix.length());
                 myPrefixAfterEol = myPrefix;
             }
         }
@@ -493,11 +491,12 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
         if (prefix != null && prefix.length() > 0 && suffix != null && suffix.length() > 0) {
             StringBuilder sb = new StringBuilder();
             sb.append(prefix).append(suffix);
-            return BasedSequenceImpl.of(sb.toString());
+            CharSequence charSequence = sb.toString();
+            return BasedSequence.of(charSequence, 0, charSequence.length());
         } else if (prefix != null && prefix.length() > 0) {
-            return BasedSequenceImpl.of(prefix);
+            return BasedSequence.of(prefix, 0, prefix.length());
         } else if (suffix != null && suffix.length() > 0) {
-            return BasedSequenceImpl.of(suffix);
+            return BasedSequence.of(suffix, 0, suffix.length());
         } else {
             return BasedSequence.NULL;
         }
@@ -525,7 +524,7 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
 
             int endOffset = myAppendable.length();
 
-            BasedSequence combinedPrefix = haveOptions(PREFIX_PRE_FORMATTED) || !lineAppendable.isPreFormattedLine(startLine + i) ? combinedPrefix(myPrefix, prefix) : SubSequence.NULL;
+            BasedSequence combinedPrefix = haveOptions(PREFIX_PRE_FORMATTED) || !lineAppendable.isPreFormattedLine(startLine + i) ? combinedPrefix(myPrefix, prefix) : BasedSequence.NULL;
             addLineRange(new Range(startOffset, endOffset - 1), combinedPrefix);
             myLineStart = endOffset;
         }
@@ -552,7 +551,7 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
                     }
                     myPrefixes.set(i, lastPrefix);
                 } else {
-                    myPrefixes.set(i, SubSequence.NULL);
+                    myPrefixes.set(i, BasedSequence.NULL);
                 }
             }
         }

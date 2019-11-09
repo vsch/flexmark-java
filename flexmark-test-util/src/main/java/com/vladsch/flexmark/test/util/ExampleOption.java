@@ -1,7 +1,6 @@
 package com.vladsch.flexmark.test.util;
 
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.BasedSequenceImpl;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -26,7 +25,7 @@ public class ExampleOption {
         BasedSequence optionName;
         BasedSequence customParams;
         boolean isDisabled = false;
-        BasedSequence optionText = BasedSequenceImpl.of(option);
+        BasedSequence optionText = BasedSequence.of(option, 0, option.length());
 
         int pos = optionText.indexOf("[");
         if (pos > 0 && pos < optionText.length() && optionText.endsWith("]")) {

@@ -3,12 +3,12 @@ package com.vladsch.flexmark.util.sequence;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * A CharSequence that references original char sequence, maps '\0' to '\uFFFD' and is prefixed with a fixed string
+ * A BasedSequence with an out of scope of original char sequence prefix
+ * <p>
  * a subSequence() returns a sub-sequence from the original base sequence, possibly with a prefix if it falls in range
  */
 public final class PrefixedSubSequence extends BasedSequenceImpl {
-    private final String prefix;
-    private final int prefixLength;
+    private final CharSequence prefix;
     private final BasedSequence base;
 
     @Override
@@ -37,32 +37,32 @@ public final class PrefixedSubSequence extends BasedSequenceImpl {
     }
 
     @Override
-    public BasedSequence baseSubSequence(int start, int end) {
-        return base.baseSubSequence(start, end);
+    public BasedSequence baseSubSequence(int startIndex, int endIndex) {
+        return base.baseSubSequence(startIndex, endIndex);
     }
 
-    private PrefixedSubSequence(String prefix, BasedSequence baseSeq, int start, int end, boolean replaceChar) {
-        this.prefix = replaceChar ? prefix.replace('\0', '\uFFFD') : prefix;
-        this.prefixLength = prefix.length();
-        this.base = of(baseSeq, start, end);
+    private PrefixedSubSequence(CharSequence prefix, BasedSequence baseSeq, int startIndex, int endIndex) {
+        this.prefix = prefix;
+        this.base = BasedSequence.of(baseSeq, startIndex, endIndex);
     }
 
     @Override
     public int length() {
-        return prefixLength + base.length();
+        return prefix.length() + base.length();
     }
 
     @Override
     public int getIndexOffset(int index) {
-        if (index < prefixLength) {
+        if (index < prefix.length()) {
             // KLUDGE: to allow creation of segmented sequences that have prefixed characters not from original base
             return -1;
         }
-        return base.getIndexOffset(index - prefixLength);
+        return base.getIndexOffset(index - prefix.length());
     }
 
     @Override
     public char charAt(int index) {
+        int prefixLength = prefix.length();
         if (index >= 0 && index < base.length() + prefixLength) {
             if (index < prefixLength) {
                 return prefix.charAt(index);
@@ -75,31 +75,35 @@ public final class PrefixedSubSequence extends BasedSequenceImpl {
 
     @NotNull
     @Override
-    public BasedSequence subSequence(int start, int end) {
-        if (start >= 0 && end <= base.length() + prefixLength) {
-            if (start < prefixLength) {
-                if (end <= prefixLength) {
+    public BasedSequence subSequence(int startIndex, int endIndex) {
+        int prefixLength = prefix.length();
+        if (startIndex >= 0 && endIndex <= base.length() + prefixLength) {
+            if (startIndex < prefixLength) {
+                if (endIndex <= prefixLength) {
                     // all from prefix
-                    return new PrefixedSubSequence(prefix.substring(start, end), base.subSequence(0, 0), 0, 0, false);
+                    return new PrefixedSubSequence(prefix.subSequence(startIndex, endIndex), base.subSequence(0, 0), 0, 0);
                 } else {
                     // some from prefix some from base
-                    return new PrefixedSubSequence(prefix.substring(start), base, 0, end - prefixLength, false);
+                    return new PrefixedSubSequence(prefix.subSequence(startIndex, prefixLength), base, 0, endIndex - prefixLength);
                 }
             } else {
                 // all from base
-                return base.subSequence(start - prefixLength, end - prefixLength);
+                return base.subSequence(startIndex - prefixLength, endIndex - prefixLength);
             }
         }
-        if (start < 0 || start > base.length() + prefixLength) {
-            throw new StringIndexOutOfBoundsException("String index out of range: " + start);
+        if (startIndex < 0 || startIndex > base.length() + prefixLength) {
+            throw new StringIndexOutOfBoundsException("String index out of range: " + startIndex);
         }
-        throw new StringIndexOutOfBoundsException("String index out of range: " + end);
+        throw new StringIndexOutOfBoundsException("String index out of range: " + endIndex);
     }
 
     @NotNull
     @Override
     public String toString() {
-        return prefix + base;
+        StringBuilder sb = new StringBuilder();
+        sb.append(prefix);
+        base.appendTo(sb);
+        return sb.toString();
     }
 
     @Override
@@ -112,18 +116,18 @@ public final class PrefixedSubSequence extends BasedSequenceImpl {
     }
 
     public static PrefixedSubSequence repeatOf(char prefix, int count, BasedSequence baseSeq) {
-        return of(RepeatedSequence.of(prefix, count).toString(), baseSeq, 0, baseSeq.length());
+        return of(RepeatedSequence.of(prefix, count), baseSeq, 0, baseSeq.length());
     }
 
-    public static PrefixedSubSequence of(String prefix, BasedSequence baseSeq) {
+    public static PrefixedSubSequence of(CharSequence prefix, BasedSequence baseSeq) {
         return of(prefix, baseSeq, 0, baseSeq.length());
     }
 
-    public static PrefixedSubSequence of(String prefix, BasedSequence baseSeq, int start) {
-        return of(prefix, baseSeq, start, baseSeq.length());
+    public static PrefixedSubSequence of(CharSequence prefix, BasedSequence baseSeq, int startIndex) {
+        return of(prefix, baseSeq, startIndex, baseSeq.length());
     }
 
-    public static PrefixedSubSequence of(String prefix, BasedSequence baseSeq, int start, int end) {
-        return new PrefixedSubSequence(prefix, baseSeq, start, end, true);
+    public static PrefixedSubSequence of(CharSequence prefix, BasedSequence baseSeq, int startIndex, int endIndex) {
+        return new PrefixedSubSequence(prefix, baseSeq, startIndex, endIndex);
     }
 }

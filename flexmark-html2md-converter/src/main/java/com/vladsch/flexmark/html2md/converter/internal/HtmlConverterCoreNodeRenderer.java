@@ -16,9 +16,7 @@ import com.vladsch.flexmark.util.format.TableCell;
 import com.vladsch.flexmark.util.html.CellAlignment;
 import com.vladsch.flexmark.util.html.LineFormattingAppendable;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.BasedSequenceImpl;
 import com.vladsch.flexmark.util.sequence.RepeatedSequence;
-import com.vladsch.flexmark.util.sequence.SubSequence;
 import org.jsoup.nodes.*;
 import org.jsoup.select.Elements;
 
@@ -182,7 +180,8 @@ public class HtmlConverterCoreNodeRenderer implements PhasedHtmlNodeRenderer {
                     for (Map.Entry<String, String> entry : myMacrosMap.entrySet()) {
                         out.blankLine();
                         out.append(">>>").append(entry.getKey()).line();
-                        BasedSequence value = BasedSequenceImpl.of(entry.getValue());
+                        CharSequence charSequence = entry.getValue();
+                        BasedSequence value = BasedSequence.of(charSequence, 0, charSequence.length());
                         out.append(value.trimEnd()).append("\n");
                         out.append("<<<\n");
                         out.blankLine();
@@ -202,7 +201,7 @@ public class HtmlConverterCoreNodeRenderer implements PhasedHtmlNodeRenderer {
     }
 
     public static int getMaxRepeatedChars(CharSequence text, char c, int minCount) {
-        BasedSequence chars = BasedSequenceImpl.of(text);
+        BasedSequence chars = BasedSequence.of(text, 0, text.length());
         int lastPos = 0;
         while (lastPos < chars.length()) {
             int pos = chars.indexOf(c, lastPos);
@@ -398,7 +397,8 @@ public class HtmlConverterCoreNodeRenderer implements PhasedHtmlNodeRenderer {
 
     private void processCode(Element element, HtmlNodeConverterContext context, HtmlMarkdownWriter out) {
         context.processConditional(myHtmlConverterOptions.extInlineCode, element, () -> {
-            BasedSequence text = SubSequence.of(element.ownText());
+            CharSequence charSequence = element.ownText();
+            BasedSequence text = BasedSequence.of(charSequence, 0, charSequence.length());
             int backTickCount = getMaxRepeatedChars(text, '`', 1);
             CharSequence backTicks = RepeatedSequence.of("`", backTickCount);
             context.inlineCode(() -> context.processTextNodes(element, false, myHtmlConverterOptions.extInlineCode.isTextOnly() ? "" : backTicks));
@@ -429,7 +429,7 @@ public class HtmlConverterCoreNodeRenderer implements PhasedHtmlNodeRenderer {
                     int lineCount = out.getLineCount();
                     if (lineCount > 0) {
                         CharSequence lineContent = out.getLineContent(lineCount - 1);
-                        int pendingSpace = BasedSequenceImpl.of(lineContent).countTrailing(BasedSequence.WHITESPACE_NO_EOL_CHARS);
+                        int pendingSpace = BasedSequence.of(lineContent, 0, lineContent.length()).countTrailing(BasedSequence.WHITESPACE_NO_EOL_CHARS);
                         if (pendingSpace < 2) {
                             // replace last line
                             out.removeLines(lineCount - 1, lineCount);
@@ -1168,7 +1168,7 @@ public class HtmlConverterCoreNodeRenderer implements PhasedHtmlNodeRenderer {
 
         // skip cells defined by row spans in previous rows
         if (!myTableSuppressColumns) {
-            myTable.addCell(new TableCell(null, SubSequence.NULL, cellText.replace("\n", " "), BasedSequence.NULL, rowSpan, colSpan, alignment));
+            myTable.addCell(new TableCell(null, BasedSequence.NULL, cellText.replace("\n", " "), BasedSequence.NULL, rowSpan, colSpan, alignment));
         }
     }
 

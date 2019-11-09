@@ -1,7 +1,6 @@
 package com.vladsch.flexmark.util;
 
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.BasedSequenceImpl;
 
 import java.io.*;
 import java.net.URLDecoder;
@@ -296,7 +295,7 @@ public class Utils {
     }
 
     public static BasedSequence asBased(CharSequence sequence) {
-        return BasedSequenceImpl.of(sequence);
+        return BasedSequence.of(sequence, 0, sequence.length());
     }
 
     public static String removeSuffix(String receiver, char suffix) {

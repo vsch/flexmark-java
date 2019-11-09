@@ -35,18 +35,6 @@ public interface IRichSequence<T extends IRichSequence<?>> extends CharSequence,
     String WHITESPACE_CHARS = " \t\r\n";
     String WHITESPACE_NBSP_CHARS = " \t\r\n\u00A0";
 
-    static RichSequenceImpl of(CharSequence charSequence) {
-        return RichSequenceImpl.create(charSequence, 0, charSequence.length());
-    }
-
-    static RichSequenceImpl of(CharSequence charSequence, int startIndex) {
-        return RichSequenceImpl.create(charSequence, startIndex, charSequence.length());
-    }
-
-    static RichSequenceImpl of(CharSequence charSequence, int startIndex, int endIndex) {
-        return RichSequenceImpl.create(charSequence, startIndex, endIndex);
-    }
-
     @NotNull T[] emptyArray();
     @NotNull T nullSequence();
 

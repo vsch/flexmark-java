@@ -30,6 +30,7 @@ import static com.vladsch.flexmark.formatter.RenderPurpose.*;
 import static com.vladsch.flexmark.util.format.options.DiscretionaryText.ADD;
 import static com.vladsch.flexmark.util.format.options.DiscretionaryText.AS_IS;
 import static com.vladsch.flexmark.util.sequence.BasedSequence.NULL;
+import static com.vladsch.flexmark.util.sequence.IRichSequence.NUL;
 
 @SuppressWarnings("WeakerAccess")
 public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceRepository, Reference, RefNode> {
@@ -415,7 +416,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
         CharSequence openingMarker = node.getOpeningMarker();
         CharSequence closingMarker = node.getClosingMarker();
         char openingMarkerChar = openingMarker.charAt(0);
-        char closingMarkerChar = closingMarker.length() > 0 ? closingMarker.charAt(0) : '\0';
+        char closingMarkerChar = closingMarker.length() > 0 ? closingMarker.charAt(0) : NUL;
         int openingMarkerLen = openingMarker.length();
         int closingMarkerLen = closingMarker.length();
 
@@ -436,7 +437,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
         if (closingMarkerLen < formatterOptions.fencedCodeMarkerLength) closingMarkerLen = formatterOptions.fencedCodeMarkerLength;
 
         openingMarker = RepeatedSequence.of(String.valueOf(openingMarkerChar), openingMarkerLen);
-        if (formatterOptions.fencedCodeMatchClosingMarker || closingMarkerChar == '\0') { closingMarker = openingMarker; } else closingMarker = RepeatedSequence.of(String.valueOf(closingMarkerChar), closingMarkerLen);
+        if (formatterOptions.fencedCodeMatchClosingMarker || closingMarkerChar == NUL) { closingMarker = openingMarker; } else closingMarker = RepeatedSequence.of(String.valueOf(closingMarkerChar), closingMarkerLen);
 
         markdown.append(openingMarker);
         if (formatterOptions.fencedCodeSpaceBeforeInfo) markdown.append(' ');

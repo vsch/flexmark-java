@@ -10,7 +10,6 @@ import com.vladsch.flexmark.parser.InlineParserExtensionFactory;
 import com.vladsch.flexmark.parser.LightInlineParser;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.BasedSequenceImpl;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -64,7 +63,8 @@ public class GitLabInlineParser implements InlineParserExtension {
         if (((options.insParser && firstChar == '+' || options.delParser && firstChar == '-')) && (secondChar == ']' || secondChar == '}')) {
             // possible closed, if matches open
             BasedSequence input = inlineParser.getInput().subSequence(inlineParser.getIndex());
-            BasedSequence matchOpen = BasedSequenceImpl.of(secondChar == ']' ? (firstChar == '+' ? "[+" : "[-") : (firstChar == '+' ? "{+" : "{-"));
+            CharSequence charSequence = secondChar == ']' ? (firstChar == '+' ? "[+" : "[-") : (firstChar == '+' ? "{+" : "{-");
+            BasedSequence matchOpen = BasedSequence.of(charSequence, 0, charSequence.length());
 
             for (int i = openInlines.size(); i-- > 0; ) {
                 GitLabInline open = openInlines.get(i);

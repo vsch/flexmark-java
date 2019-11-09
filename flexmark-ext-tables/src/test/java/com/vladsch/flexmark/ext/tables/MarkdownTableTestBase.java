@@ -9,8 +9,8 @@ import com.vladsch.flexmark.util.format.MarkdownTable;
 import com.vladsch.flexmark.util.format.TableCellOffsetInfo;
 import com.vladsch.flexmark.util.format.options.DiscretionaryText;
 import com.vladsch.flexmark.util.format.options.TableCaptionHandling;
-import com.vladsch.flexmark.util.mappers.CharWidthProvider;
-import com.vladsch.flexmark.util.sequence.BasedSequenceImpl;
+import com.vladsch.flexmark.util.format.CharWidthProvider;
+import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -36,7 +36,7 @@ public class MarkdownTableTestBase {
         }
 
         Parser parser = Parser.builder(options).build();
-        Node document = parser.parse(BasedSequenceImpl.of(markdown));
+        Node document = parser.parse(BasedSequence.of(markdown, 0, markdown.length()));
         TableExtractingVisitor tableVisitor = new TableExtractingVisitor(options);
         return tableVisitor.getTables(document);
     }
@@ -104,7 +104,7 @@ public class MarkdownTableTestBase {
 
                     @Override
                     public int charWidth(CharSequence s) {
-                        return BasedSequenceImpl.of(s).countLeadingNot(INTELLIJ_DUMMY_IDENTIFIER_CHAR);
+                        return BasedSequence.of(s, 0, s.length()).countLeadingNot(INTELLIJ_DUMMY_IDENTIFIER_CHAR);
                     }
                 });
         return useOptions;

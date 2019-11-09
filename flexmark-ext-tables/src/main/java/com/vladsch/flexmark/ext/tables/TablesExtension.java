@@ -13,7 +13,7 @@ import com.vladsch.flexmark.util.format.TableFormatOptions;
 import com.vladsch.flexmark.util.format.TableManipulator;
 import com.vladsch.flexmark.util.format.options.DiscretionaryText;
 import com.vladsch.flexmark.util.format.options.TableCaptionHandling;
-import com.vladsch.flexmark.util.mappers.CharWidthProvider;
+import com.vladsch.flexmark.util.format.CharWidthProvider;
 import org.jetbrains.annotations.NotNull;
 
 /**

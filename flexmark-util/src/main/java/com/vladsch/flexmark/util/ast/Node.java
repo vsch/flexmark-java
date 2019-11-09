@@ -5,8 +5,8 @@ import com.vladsch.flexmark.util.collection.iteration.ReversiblePeekingIterable;
 import com.vladsch.flexmark.util.collection.iteration.ReversiblePeekingIterator;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
+import com.vladsch.flexmark.util.sequence.Range;
 import com.vladsch.flexmark.util.sequence.SegmentedSequence;
-import com.vladsch.flexmark.util.sequence.SubSequence;
 import com.vladsch.flexmark.util.visitor.AstNode;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -42,6 +42,21 @@ public abstract class Node {
     public Node(@NotNull BasedSequence chars) {
         this.chars = chars;
     }
+
+    /*
+     * getChars() convenience delegates
+     */
+    // @formatter:off
+    public int getStartOffset() { return chars.getStartOffset();}
+    public int getEndOffset() { return chars.getEndOffset();}
+    public int getTextLength() { return chars.length();}
+    public BasedSequence getBaseSequence() {return chars.getBaseSequence();}
+    public Range getSourceRange() {return chars.getSourceRange();}
+    public BasedSequence baseSubSequence(int startIndex, int endIndex) {return chars.baseSubSequence(startIndex, endIndex);}
+    public BasedSequence baseSubSequence(int startIndex) {return chars.baseSubSequence(startIndex);}
+    public BasedSequence getEmptyPrefix() {return chars.getEmptyPrefix();}
+    public BasedSequence getEmptySuffix() {return chars.getEmptySuffix();}
+    // @formatter:on
 
     public @Nullable Node getAncestorOfType(@NotNull Class<?>... classes) {
         Node parent = getParent();
@@ -241,18 +256,6 @@ public abstract class Node {
         Node lastNode = this;
         while (this.getClass().isInstance(lastNode.getNext())) lastNode = lastNode.getNext();
         return lastNode;
-    }
-
-    public int getStartOffset() {
-        return chars.getStartOffset();
-    }
-
-    public int getEndOffset() {
-        return chars.getEndOffset();
-    }
-
-    public int getTextLength() {
-        return chars.length();
     }
 
     public @Nullable Node getPrevious() {
@@ -535,7 +538,7 @@ public abstract class Node {
     }
 
     public void setCharsFromContentOnly() {
-        chars = SubSequence.NULL;
+        chars = BasedSequence.NULL;
         setCharsFromContent();
     }
 

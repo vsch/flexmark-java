@@ -3,16 +3,14 @@ package com.vladsch.flexmark.util.format;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.html.CellAlignment;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.BasedSequenceImpl;
 import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
-import com.vladsch.flexmark.util.sequence.SubSequence;
 
 import static com.vladsch.flexmark.util.Utils.*;
 
 @SuppressWarnings("WeakerAccess")
 public class TableCell {
-    public final static TableCell NULL = new TableCell(null, SubSequence.NULL, " ", BasedSequence.NULL, 1, 0, CellAlignment.NONE);
-    public final static TableCell DEFAULT_CELL = new TableCell(null, SubSequence.NULL, " ", BasedSequence.NULL, 1, 1, CellAlignment.NONE);
+    public final static TableCell NULL = new TableCell(null, BasedSequence.NULL, " ", BasedSequence.NULL, 1, 0, CellAlignment.NONE);
+    public final static TableCell DEFAULT_CELL = new TableCell(null, BasedSequence.NULL, " ", BasedSequence.NULL, 1, 1, CellAlignment.NONE);
     public static final int NOT_TRACKED = Integer.MAX_VALUE;
 
     public final Node tableCellNode;   // node if needed for finer text manipulation
@@ -80,10 +78,10 @@ public class TableCell {
             boolean afterDelete
 
     ) {
-        BasedSequence chars = BasedSequenceImpl.of(text);
+        BasedSequence chars = BasedSequence.of(text, 0, text.length());
         this.tableCellNode = tableCellNode;
-        this.openMarker = BasedSequenceImpl.of(openMarker);
-        this.closeMarker = BasedSequenceImpl.of(closeMarker);
+        this.openMarker = BasedSequence.of(openMarker, 0, openMarker.length());
+        this.closeMarker = BasedSequence.of(closeMarker, 0, closeMarker.length());
         BasedSequence useMarker = this.openMarker.isEmpty() ? this.closeMarker.subSequence(0, 0) : this.openMarker.subSequence(this.openMarker.length());
         this.text = chars.isEmpty() && chars != BasedSequence.NULL ? PrefixedSubSequence.of(" ", useMarker) : chars;
         this.rowSpan = rowSpan;

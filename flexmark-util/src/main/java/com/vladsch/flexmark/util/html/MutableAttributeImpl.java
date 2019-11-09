@@ -1,5 +1,7 @@
 package com.vladsch.flexmark.util.html;
 
+import com.vladsch.flexmark.util.sequence.IRichSequence;
+
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.function.BiConsumer;
@@ -67,7 +69,7 @@ public class MutableAttributeImpl implements MutableAttribute {
     protected Map<String, String> getValueMap() {
         if (myValues == null) {
             myValues = new LinkedHashMap<>();
-            if (myValueListDelimiter != NUL) {
+            if (myValueListDelimiter != IRichSequence.NUL) {
                 if (!myValue.isEmpty()) {
                     int lastPos = 0;
                     while (lastPos < myValue.length()) {
@@ -76,7 +78,7 @@ public class MutableAttributeImpl implements MutableAttribute {
                         int endPos = pos == -1 ? myValue.length() : pos;
                         if (lastPos < endPos) {
                             String value = myValue.substring(lastPos, endPos);
-                            int namePos = myValueNameDelimiter != NUL ? value.indexOf(myValueNameDelimiter) : -1;
+                            int namePos = myValueNameDelimiter != IRichSequence.NUL ? value.indexOf(myValueNameDelimiter) : -1;
 
                             if (namePos == -1) {
                                 myValues.put(value, "");
@@ -104,9 +106,9 @@ public class MutableAttributeImpl implements MutableAttribute {
      */
     @SuppressWarnings("WeakerAccess")
     protected String valueFromMap() {
-        if (myValueListDelimiter != NUL) {
+        if (myValueListDelimiter != IRichSequence.NUL) {
             StringBuilder sb = new StringBuilder();
-            if (myValueNameDelimiter != NUL) {
+            if (myValueNameDelimiter != IRichSequence.NUL) {
                 String sep = "";
                 String del = String.valueOf(myValueListDelimiter);
                 for (Map.Entry<String, String> entry : myValues.entrySet()) {
@@ -149,12 +151,12 @@ public class MutableAttributeImpl implements MutableAttribute {
     }
 
     public MutableAttributeImpl setValue(CharSequence value) {
-        if (myValueListDelimiter != NUL) {
+        if (myValueListDelimiter != IRichSequence.NUL) {
             if (value != null && value.length() != 0) {
                 Map<String, String> valueMap = getValueMap();
 
                 forEachValue(value, (itemName, itemValue) -> {
-                    if (myValueNameDelimiter != NUL && itemValue.isEmpty()) {
+                    if (myValueNameDelimiter != IRichSequence.NUL && itemValue.isEmpty()) {
                         valueMap.remove(itemName);
                     } else {
                         valueMap.put(itemName, itemValue);
@@ -183,7 +185,7 @@ public class MutableAttributeImpl implements MutableAttribute {
             if (lastPos < endPos) {
                 String valueItem = useValue.substring(lastPos, endPos).trim();
                 if (!valueItem.isEmpty()) {
-                    int namePos = myValueNameDelimiter == NUL ? -1 : valueItem.indexOf(myValueNameDelimiter);
+                    int namePos = myValueNameDelimiter == IRichSequence.NUL ? -1 : valueItem.indexOf(myValueNameDelimiter);
                     String itemName = namePos == -1 ? valueItem : valueItem.substring(0, namePos);
                     String itemValue = namePos == -1 ? "" : valueItem.substring(namePos + 1);
 
@@ -197,7 +199,7 @@ public class MutableAttributeImpl implements MutableAttribute {
     }
 
     public MutableAttributeImpl removeValue(CharSequence value) {
-        if (myValueListDelimiter != NUL) {
+        if (myValueListDelimiter != IRichSequence.NUL) {
             if (value != null && value.length() != 0) {
                 Map<String, String> valueMap = getValueMap();
                 boolean[] removed = { false };
@@ -254,20 +256,20 @@ public class MutableAttributeImpl implements MutableAttribute {
     }
 
     public static MutableAttributeImpl of(CharSequence attrName) {
-        return of(attrName, attrName, NUL, NUL);
+        return of(attrName, attrName, IRichSequence.NUL, IRichSequence.NUL);
     }
 
     public static MutableAttributeImpl of(CharSequence attrName, CharSequence value) {
-        return of(attrName, value, NUL, NUL);
+        return of(attrName, value, IRichSequence.NUL, IRichSequence.NUL);
     }
 
     public static MutableAttributeImpl of(CharSequence attrName, CharSequence value, char valueListDelimiter) {
-        return of(attrName, value, valueListDelimiter, NUL);
+        return of(attrName, value, valueListDelimiter, IRichSequence.NUL);
     }
 
     public static MutableAttributeImpl of(CharSequence attrName, CharSequence value, char valueListDelimiter, char valueNameDelimiter) {
         if (CLASS_ATTR.contentEquals(attrName)) {
-            return new MutableAttributeImpl(attrName, value, ' ', NUL);
+            return new MutableAttributeImpl(attrName, value, ' ', IRichSequence.NUL);
         } else if (STYLE_ATTR.contentEquals(attrName)) {
             return new MutableAttributeImpl(attrName, value, ';', ':');
         }

@@ -12,7 +12,6 @@ import com.vladsch.flexmark.util.format.MarkdownTable;
 import com.vladsch.flexmark.util.format.TableFormatOptions;
 import com.vladsch.flexmark.util.html.CellAlignment;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.BasedSequenceImpl;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -136,7 +135,7 @@ public class TableNodeFormatter implements NodeFormatter {
         } else {
             // KLUDGE: to reuse the table formatting logic of MarkdownTable
             String dummyCaption = node.hasChildren() ? "dummy" : "";
-            String formattedCaption = MarkdownTable.formattedCaption(BasedSequenceImpl.of(dummyCaption), options);
+            String formattedCaption = MarkdownTable.formattedCaption(BasedSequence.of(dummyCaption, 0, ((CharSequence) dummyCaption).length()), options);
 
             if (formattedCaption != null) {
                 markdown.line().append(node.getOpeningMarker());

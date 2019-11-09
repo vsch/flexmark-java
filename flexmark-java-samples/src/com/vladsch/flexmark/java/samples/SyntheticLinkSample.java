@@ -72,7 +72,7 @@ public class SyntheticLinkSample {
 
                 BasedSequence linkAddress = PrefixedSubSequence.of("http://commonmark.org", linkText.getEmptySuffix());
 
-                linkNode = new Link(SubSequence.NULL, linkText, BasedSequence.NULL, BasedSequence.NULL, linkAddress, BasedSequence.NULL);
+                linkNode = new Link(BasedSequence.NULL, linkText, BasedSequence.NULL, BasedSequence.NULL, linkAddress, BasedSequence.NULL);
 
                 linkNode.setCharsFromContent();
                 linkNode.appendChild(contentNode);

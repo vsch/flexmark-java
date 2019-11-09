@@ -7,10 +7,9 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * A CharSequence that references original char sequence and maps '\0' to '\uFFFD'
- * a subSequence() returns a sub-sequence from the original base sequence
+ * Implementation of BaseSequence
  */
-public abstract class BasedSequenceImpl extends RichSequenceBase<BasedSequence> implements BasedSequence {
+public abstract class BasedSequenceImpl extends IRichSequenceBase<BasedSequence> implements BasedSequence {
     public static BasedSequence firstNonNull(BasedSequence... sequences) {
         for (BasedSequence sequence : sequences) {
             if (sequence != null && sequence != NULL) return sequence;
@@ -34,7 +33,7 @@ public abstract class BasedSequenceImpl extends RichSequenceBase<BasedSequence> 
     @NotNull
     @Override
     public BasedSequence sequenceOf(@Nullable CharSequence charSequence, int startIndex, int endIndex) {
-        return of(charSequence, startIndex, endIndex);
+        return BasedSequence.of(charSequence, startIndex, endIndex);
     }
 
     @Override
@@ -49,18 +48,18 @@ public abstract class BasedSequenceImpl extends RichSequenceBase<BasedSequence> 
 
     @NotNull
     @Override
-    public final BasedSequence toMapped(CharMapper mapper) {
-        return MappedSequence.of(mapper, this);
+    public BasedSequence toMapped(CharMapper mapper) {
+        return MappedBasedSequence.of(mapper, this);
     }
 
     @Override
-    public BasedSequence baseSubSequence(int start) {
-        return baseSubSequence(start, getBaseSequence().getEndOffset());
+    public BasedSequence baseSubSequence(int startIndex) {
+        return baseSubSequence(startIndex, getBaseSequence().getEndOffset());
     }
 
     @Override
     public char safeCharAt(int index) {
-        return index < 0 || index >= length() ? '\0' : charAt(index);
+        return index < 0 || index >= length() ? NUL : charAt(index);
     }
 
     @Override
@@ -140,7 +139,7 @@ public abstract class BasedSequenceImpl extends RichSequenceBase<BasedSequence> 
 
     @Override
     public BasedSequence intersect(BasedSequence other) {
-        if (getBase() != other.getBase()) return SubSequence.NULL;
+        if (getBase() != other.getBase()) return BasedSequence.NULL;
         else if (other.getEndOffset() <= getStartOffset()) return subSequence(0, 0);
         else if (other.getStartOffset() >= getEndOffset()) return subSequence(length(), length());
         else return this.baseSubSequence(Utils.max(getStartOffset(), other.getStartOffset()), Utils.min(getEndOffset(), other.getEndOffset()));
@@ -176,11 +175,11 @@ public abstract class BasedSequenceImpl extends RichSequenceBase<BasedSequence> 
 
     // @formatter:off
     @Override final public BasedSequence extendToEndOfLine(CharSequence eolChars) { return extendToEndOfLine(eolChars, false);}
-    @Override final public BasedSequence extendToEndOfLine(boolean includeEol) { return extendToEndOfLine(RichSequence.EOL, includeEol);}
-    @Override final public BasedSequence extendToEndOfLine() { return extendToEndOfLine(RichSequence.EOL, false);}
+    @Override final public BasedSequence extendToEndOfLine(boolean includeEol) { return extendToEndOfLine(IRichSequence.EOL, includeEol);}
+    @Override final public BasedSequence extendToEndOfLine() { return extendToEndOfLine(IRichSequence.EOL, false);}
     @Override final public BasedSequence extendToStartOfLine(CharSequence eolChars) { return extendToStartOfLine(eolChars, false);}
-    @Override final public BasedSequence extendToStartOfLine(boolean includeEol) { return extendToStartOfLine(RichSequence.EOL, includeEol);}
-    @Override final public BasedSequence extendToStartOfLine() { return extendToStartOfLine(RichSequence.EOL, false);}
+    @Override final public BasedSequence extendToStartOfLine(boolean includeEol) { return extendToStartOfLine(IRichSequence.EOL, includeEol);}
+    @Override final public BasedSequence extendToStartOfLine() { return extendToStartOfLine(IRichSequence.EOL, false);}
     // @formatter:on
 
     @Override
@@ -288,7 +287,7 @@ public abstract class BasedSequenceImpl extends RichSequenceBase<BasedSequence> 
 
     @Override
     public BasedSequence prefixOf(BasedSequence other) {
-        if (getBase() != other.getBase()) return SubSequence.NULL;
+        if (getBase() != other.getBase()) return BasedSequence.NULL;
         else if (other.getStartOffset() <= getStartOffset()) return subSequence(0, 0);
         else if (other.getStartOffset() >= getEndOffset()) return this;
         else return this.baseSubSequence(getStartOffset(), other.getStartOffset());
@@ -296,23 +295,43 @@ public abstract class BasedSequenceImpl extends RichSequenceBase<BasedSequence> 
 
     @Override
     public BasedSequence suffixOf(BasedSequence other) {
-        if (getBase() != other.getBase()) return SubSequence.NULL;
+        if (getBase() != other.getBase()) return BasedSequence.NULL;
         else if (other.getEndOffset() >= getEndOffset()) return subSequence(length(), length());
         else if (other.getEndOffset() <= getStartOffset()) return this;
         else return this.baseSubSequence(other.getEndOffset(), getEndOffset());
     }
 
+    /**
+     * @deprecated  use {@link BasedSequence#of} instead
+     */
+    @Deprecated
+    static BasedSequence create(CharSequence charSequence, int startIndex, int endIndex) {
+        if (charSequence instanceof BasedSequence) return ((BasedSequence) charSequence).subSequence(startIndex, endIndex);
+        else if (charSequence instanceof String) return CharSubSequence.of(charSequence).subSequence(startIndex, endIndex);
+        else return SubSequence.create(charSequence, startIndex, endIndex);
+    }
+
+    /**
+     * @deprecated  use {@link BasedSequence#of} instead
+     */
+    @Deprecated
     public static BasedSequence of(CharSequence charSequence) {
-        return of(charSequence, 0, charSequence.length());
+        return BasedSequence.of(charSequence, 0, charSequence.length());
     }
 
-    public static BasedSequence of(CharSequence charSequence, int start) {
-        return of(charSequence, start, charSequence.length());
+    /**
+     * @deprecated  use {@link BasedSequence#of} instead
+     */
+    @Deprecated
+    public static BasedSequence of(CharSequence charSequence, int startIndex) {
+        return BasedSequence.of(charSequence, startIndex, charSequence.length());
     }
 
-    public static BasedSequence of(CharSequence charSequence, int start, int end) {
-        if (charSequence instanceof BasedSequence) return ((BasedSequence) charSequence).subSequence(start, end);
-        else if (charSequence instanceof String) return CharSubSequence.of(charSequence).subSequence(start, end);
-        else return SubSequence.of(charSequence).subSequence(start, end);
+    /**
+     * @deprecated  use {@link BasedSequence#of} instead
+     */
+    @Deprecated
+    public static BasedSequence of(CharSequence charSequence, int startIndex, int endIndex) {
+        return BasedSequence.of(charSequence, startIndex, endIndex);
     }
 }

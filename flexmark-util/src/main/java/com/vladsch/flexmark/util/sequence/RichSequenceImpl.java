@@ -1,15 +1,13 @@
 package com.vladsch.flexmark.util.sequence;
 
+import com.vladsch.flexmark.util.mappers.CharMapper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
  * A RichSequence implementation
  */
-public class RichSequenceImpl extends RichSequenceBase<RichSequenceImpl> {
-    public static final RichSequenceImpl NULL = new RichSequenceImpl("");
-    public static final RichSequenceImpl[] EMPTY_ARRAY = new RichSequenceImpl[0];
-
+public class RichSequenceImpl extends IRichSequenceBase<RichSequence> implements RichSequence {
     final CharSequence charSequence;
 
     private RichSequenceImpl(CharSequence charSequence) {
@@ -18,25 +16,25 @@ public class RichSequenceImpl extends RichSequenceBase<RichSequenceImpl> {
 
     @NotNull
     @Override
-    public RichSequenceImpl[] emptyArray() {
+    public RichSequence[] emptyArray() {
         return EMPTY_ARRAY;
     }
 
     @NotNull
     @Override
-    public RichSequenceImpl nullSequence() {
+    public RichSequence nullSequence() {
         return NULL;
     }
 
     @NotNull
     @Override
-    public RichSequenceImpl sequenceOf(@Nullable CharSequence charSequence, int startIndex, int endIndex) {
+    public RichSequence sequenceOf(@Nullable CharSequence charSequence, int startIndex, int endIndex) {
         return of(charSequence, startIndex, endIndex);
     }
 
     @NotNull
     @Override
-    public RichSequenceImpl subSequence(int startIndex, int endIndex) {
+    public RichSequence subSequence(int startIndex, int endIndex) {
         if (startIndex == 0 && endIndex == charSequence.length()) return this;
         return create(charSequence, startIndex, endIndex);
     }
@@ -51,8 +49,14 @@ public class RichSequenceImpl extends RichSequenceBase<RichSequenceImpl> {
         return charSequence.charAt(index);
     }
 
-    static RichSequenceImpl create(CharSequence charSequence, int startIndex, int endIndex) {
-        if (charSequence instanceof RichSequenceImpl) return ((RichSequenceImpl) charSequence).subSequence(startIndex, endIndex);
+    @NotNull
+    @Override
+    public RichSequence toMapped(CharMapper mapper) {
+        return MappedRichSequence.of(mapper, this);
+    }
+
+    static RichSequence create(CharSequence charSequence, int startIndex, int endIndex) {
+        if (charSequence instanceof RichSequence) return ((RichSequence) charSequence).subSequence(startIndex, endIndex);
         else if (charSequence != null) {
             if (startIndex == 0 && endIndex == charSequence.length()) return new RichSequenceImpl(charSequence);
             else return new RichSequenceImpl(charSequence.subSequence(startIndex, endIndex));
@@ -63,7 +67,7 @@ public class RichSequenceImpl extends RichSequenceBase<RichSequenceImpl> {
      * @deprecated use {@link RichSequence#of} instead
      */
     @Deprecated
-    public static RichSequenceImpl of(CharSequence charSequence) {
+    public static RichSequence of(CharSequence charSequence) {
         return RichSequence.of(charSequence, 0, charSequence.length());
     }
 
@@ -71,7 +75,7 @@ public class RichSequenceImpl extends RichSequenceBase<RichSequenceImpl> {
      * @deprecated use {@link RichSequence#of} instead
      */
     @Deprecated
-    public static RichSequenceImpl of(CharSequence charSequence, int startIndex) {
+    public static RichSequence of(CharSequence charSequence, int startIndex) {
         return RichSequence.of(charSequence, startIndex, charSequence.length());
     }
 
@@ -79,7 +83,7 @@ public class RichSequenceImpl extends RichSequenceBase<RichSequenceImpl> {
      * @deprecated use {@link RichSequence#of} instead
      */
     @Deprecated
-    public static RichSequenceImpl of(CharSequence charSequence, int startIndex, int endIndex) {
+    public static RichSequence of(CharSequence charSequence, int startIndex, int endIndex) {
         return RichSequence.of(charSequence, startIndex, endIndex);
     }
 }

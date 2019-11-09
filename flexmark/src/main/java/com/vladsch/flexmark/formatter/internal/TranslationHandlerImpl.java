@@ -9,7 +9,6 @@ import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.BasedSequenceImpl;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -435,7 +434,7 @@ public class TranslationHandlerImpl implements TranslationHandler {
         if (suffix2 != null) {
             trimmedEOL = suffix2;
         } else {
-            BasedSequence basedSequence = BasedSequenceImpl.of(nonTranslatingText);
+            BasedSequence basedSequence = BasedSequence.of(nonTranslatingText, 0, nonTranslatingText.length());
             trimmedEOL = basedSequence.trimmedEOL();
         }
 

@@ -258,7 +258,7 @@ final public class DelimiterProcessorTest extends RenderingTestCase {
             for (Node child = node.getFirstChild(); child != null; child = child.getNext()) {
                 if (child instanceof Text) {
                     Text text = (Text) child;
-                    text.setChars(text.getChars().toUpperCase(Locale.ENGLISH));
+                    text.setChars(text.getChars().toUpperCase());
                 }
                 context.render(child);
             }

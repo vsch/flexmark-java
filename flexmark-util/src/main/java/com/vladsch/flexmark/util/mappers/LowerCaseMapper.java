@@ -2,6 +2,10 @@ package com.vladsch.flexmark.util.mappers;
 
 import java.util.Locale;
 
+/**
+ * @deprecated use {@link ChangeCase#toLowerCase}
+ */
+@Deprecated
 public class LowerCaseMapper implements CharMapper {
     public static final LowerCaseMapper INSTANCE = new LowerCaseMapper();
 

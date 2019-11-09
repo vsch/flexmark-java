@@ -5,7 +5,7 @@ import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.ParserEmulationProfile;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.format.options.*;
-import com.vladsch.flexmark.util.mappers.CharWidthProvider;
+import com.vladsch.flexmark.util.format.CharWidthProvider;
 
 public class FormatterOptions {
     public final boolean itemContentIndent;

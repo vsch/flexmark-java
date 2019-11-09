@@ -2238,6 +2238,68 @@ Spaces in URLs stack overflow when parsing long embedded images.
 ````````````````````````````````
 
 
+### 11
+
+Comments keep their leading whitespace by design of the spec
+
+```````````````````````````````` example Issues xxx - 11: 1
+  <!-- @formatter:off -->
+.
+  <!-- @formatter:off -->
+.
+Document[0, 25]
+  HtmlCommentBlock[0, 25]
+````````````````````````````````
+
+
+```````````````````````````````` example Issues xxx - 11: 2
+* Add: to `BasedSequence`
+     <!-- @formatter:off -->
+.
+<ul>
+  <li>Add: to <code>BasedSequence</code>   <!-- @formatter:off --></li>
+</ul>
+.
+Document[0, 54]
+  BulletList[0, 54] isTight
+    BulletListItem[0, 54] open:[0, 1, "*"] isTight
+      Paragraph[2, 26]
+        Text[2, 10] chars:[2, 10, "Add: to "]
+        Code[10, 25] textOpen:[10, 11, "`"] text:[11, 24, "Based … Sequence"] textClose:[24, 25, "`"]
+          Text[11, 24] chars:[11, 24, "Based … uence"]
+      HtmlCommentBlock[28, 54]
+````````````````````````````````
+
+
+```````````````````````````````` example(Issues xxx - 11: 3) options(deep-html-parser)
+  <!-- @formatter:off -->
+.
+  <!-- @formatter:off -->
+.
+Document[0, 25]
+  HtmlCommentBlock[0, 25]
+````````````````````````````````
+
+
+```````````````````````````````` example(Issues xxx - 11: 4) options(deep-html-parser)
+* Add: to `BasedSequence`
+     <!-- @formatter:off -->
+.
+<ul>
+  <li>Add: to <code>BasedSequence</code>   <!-- @formatter:off --></li>
+</ul>
+.
+Document[0, 54]
+  BulletList[0, 54] isTight
+    BulletListItem[0, 54] open:[0, 1, "*"] isTight
+      Paragraph[2, 26]
+        Text[2, 10] chars:[2, 10, "Add: to "]
+        Code[10, 25] textOpen:[10, 11, "`"] text:[11, 24, "Based … Sequence"] textClose:[24, 25, "`"]
+          Text[11, 24] chars:[11, 24, "Based … uence"]
+      HtmlCommentBlock[28, 54]
+````````````````````````````````
+
+
 ## StackOverflow
 
 spurious, cannot duplicate

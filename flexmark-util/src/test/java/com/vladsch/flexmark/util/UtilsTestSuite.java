@@ -8,9 +8,7 @@ import com.vladsch.flexmark.util.html.ui.HtmlHelpersTest;
 import com.vladsch.flexmark.util.options.AttributeTest;
 import com.vladsch.flexmark.util.options.AttributesTest;
 import com.vladsch.flexmark.util.options.MutableAttributeTest;
-import com.vladsch.flexmark.util.sequence.BasedSequenceImplTest;
-import com.vladsch.flexmark.util.sequence.PrefixedSubSequenceTest;
-import com.vladsch.flexmark.util.sequence.RepeatedSequenceTest;
+import com.vladsch.flexmark.util.sequence.*;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
@@ -39,6 +37,8 @@ import org.junit.runners.Suite;
         TemplateUtilTest.class,
         UtilsTest.class,
         ArrayUtilsTest.class,
+        MappedBasedSequenceTest.class,
+        MappedRichSequenceTest.class,
 })
 public class UtilsTestSuite {
 }

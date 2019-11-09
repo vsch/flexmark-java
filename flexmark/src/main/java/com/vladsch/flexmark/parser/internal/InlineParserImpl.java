@@ -28,6 +28,9 @@ import org.jetbrains.annotations.Nullable;
 import java.util.*;
 import java.util.regex.Matcher;
 
+import static com.vladsch.flexmark.util.sequence.IRichSequence.EOL;
+import static com.vladsch.flexmark.util.sequence.IRichSequence.NUL;
+
 public class InlineParserImpl extends LightInlineParserImpl implements InlineParser, ParagraphPreProcessor {
     protected final BitSet originalSpecialCharacters;
     protected final BitSet delimiterCharacters;
@@ -358,7 +361,7 @@ public class InlineParserImpl extends LightInlineParserImpl implements InlinePar
         boolean res = false;
 
         char c = peek();
-        if (c == '\0') {
+        if (c == NUL) {
             return false;
         }
 
@@ -477,7 +480,7 @@ public class InlineParserImpl extends LightInlineParserImpl implements InlinePar
             index++;
             c = peek();
         }
-        while (c != '\0' && factory.skipNext(c));
+        while (c != NUL && factory.skipNext(c));
 
         if (pos < index && factory.wantSkippedWhitespace()) {
             block.appendChild(new WhiteSpace(input.subSequence(pos, index)));
@@ -1350,10 +1353,10 @@ public class InlineParserImpl extends LightInlineParserImpl implements InlinePar
             return null;
         }
 
-        String before = startIndex == 0 ? "\n" : String.valueOf(input.charAt(startIndex - 1));
+        String before = startIndex == 0 ? EOL : String.valueOf(input.charAt(startIndex - 1));
 
         char charAfter = peek();
-        String after = charAfter == '\0' ? "\n" : String.valueOf(charAfter);
+        String after = charAfter == NUL ? EOL : String.valueOf(charAfter);
 
         // We could be more lazy here, in most cases we don't need to do every match case.
         boolean beforeIsPunctuation;

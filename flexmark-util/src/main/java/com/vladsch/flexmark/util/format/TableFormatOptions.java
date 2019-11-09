@@ -6,7 +6,6 @@ import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSetter;
 import com.vladsch.flexmark.util.format.options.DiscretionaryText;
 import com.vladsch.flexmark.util.format.options.TableCaptionHandling;
-import com.vladsch.flexmark.util.mappers.CharWidthProvider;
 import org.jetbrains.annotations.NotNull;
 
 @SuppressWarnings("WeakerAccess")

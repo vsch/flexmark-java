@@ -4,7 +4,6 @@ import com.vladsch.flexmark.docx.converter.DocxRendererOptions;
 import com.vladsch.flexmark.util.Utils;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.BasedSequenceImpl;
 import org.docx4j.model.styles.StyleUtil;
 import org.docx4j.openpackaging.exceptions.Docx4JException;
 import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
@@ -670,7 +669,7 @@ public abstract class DocxContextImpl<T> implements DocxContext<T>, BlockFormatP
             int minSpaces = Integer.MAX_VALUE;
             int i = 0;
             for (CharSequence line : lines) {
-                leadColumns[i] = BasedSequenceImpl.of(line).countLeadingColumns(0, " \t");
+                leadColumns[i] = BasedSequence.of(line, 0, line.length()).countLeadingColumns(0, " \t");
                 minSpaces = Utils.min(minSpaces, leadColumns[i]);
                 i++;
             }
@@ -682,7 +681,7 @@ public abstract class DocxContextImpl<T> implements DocxContext<T>, BlockFormatP
 
                 int spaces = leadColumns[i] - minSpaces;
                 while (spaces-- > 0) sb.append(' ');
-                sb.append(BasedSequenceImpl.of(line).trim());
+                sb.append(BasedSequence.of(line, 0, line.length()).trim());
 
                 // Create object for p
                 text(sb.toString());

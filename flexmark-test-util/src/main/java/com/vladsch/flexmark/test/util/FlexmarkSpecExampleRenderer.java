@@ -6,7 +6,7 @@ import com.vladsch.flexmark.util.ast.IParse;
 import com.vladsch.flexmark.util.ast.IRender;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
-import com.vladsch.flexmark.util.sequence.BasedSequenceImpl;
+import com.vladsch.flexmark.util.sequence.BasedSequence;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -46,7 +46,7 @@ public class FlexmarkSpecExampleRenderer extends SpecExampleRendererBase {
 
     @Override
     public void parse(CharSequence input) {
-        myDocument = getParser().parse(BasedSequenceImpl.of(input));
+        myDocument = getParser().parse(BasedSequence.of(input, 0, input.length()));
     }
 
     @Override

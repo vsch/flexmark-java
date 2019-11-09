@@ -2,7 +2,6 @@ package com.vladsch.flexmark.test.util;
 
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.BasedSequenceImpl;
 
 import static com.vladsch.flexmark.util.Utils.suffixWith;
 
@@ -69,9 +68,9 @@ public class SpecExampleParse {
 
         if (!sourcePrefix.isEmpty() || !sourceSuffix.isEmpty()) {
             String combinedSource = sourcePrefix + suffixWith(mySource, "\n") + sourceSuffix;
-            input = BasedSequenceImpl.of(combinedSource).subSequence(sourcePrefix.length(), combinedSource.length() - sourceSuffix.length());
+            input = BasedSequence.of(combinedSource, 0, ((CharSequence) combinedSource).length()).subSequence(sourcePrefix.length(), combinedSource.length() - sourceSuffix.length());
         } else {
-            input = BasedSequenceImpl.of(mySource);
+            input = BasedSequence.of(mySource, 0, ((CharSequence) mySource).length());
         }
 
         input = TestUtils.stripIndent(input, sourceIndent);

@@ -10,7 +10,7 @@ import org.jetbrains.annotations.NotNull;
  * The hashCode is purposefully matched to the string equivalent or this.toString().hashCode()
  */
 public class RepeatedSequence implements CharSequence {
-    public static RepeatedSequence NULL = new RepeatedSequence(SubSequence.NULL, 0, 0);
+    public static RepeatedSequence NULL = new RepeatedSequence(BasedSequence.NULL, 0, 0);
 
     private final CharSequence myChars;
     private final int myStartIndex;
@@ -35,9 +35,9 @@ public class RepeatedSequence implements CharSequence {
     }
 
     @Override
-    public CharSequence subSequence(int start, int end) {
-        if (start >= 0 && start <= end && end <= myEndIndex - myStartIndex) {
-            return (start == end) ? NULL : start == myStartIndex && end == myEndIndex ? this : new RepeatedSequence(myChars, myStartIndex + start, myStartIndex + end);
+    public CharSequence subSequence(int startIndex, int endIndex) {
+        if (startIndex >= 0 && startIndex <= endIndex && endIndex <= myEndIndex - myStartIndex) {
+            return (startIndex == endIndex) ? NULL : startIndex == myStartIndex && endIndex == myEndIndex ? this : new RepeatedSequence(myChars, myStartIndex + startIndex, myStartIndex + endIndex);
         }
 
         throw new IllegalArgumentException("subSequence($startIndex, $endIndex) in RepeatedCharSequence('', " + myStartIndex + ", " + myEndIndex + ")");
@@ -81,7 +81,7 @@ public class RepeatedSequence implements CharSequence {
         return new RepeatedSequence(chars, 0, chars.length() * count);
     }
 
-    public static RepeatedSequence of(CharSequence chars, int start, int end) {
-        return new RepeatedSequence(chars, start, end);
+    public static RepeatedSequence of(CharSequence chars, int startIndex, int endIndex) {
+        return new RepeatedSequence(chars, startIndex, endIndex);
     }
 }

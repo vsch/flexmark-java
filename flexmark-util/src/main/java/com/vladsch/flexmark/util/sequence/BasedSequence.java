@@ -6,18 +6,31 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * A CharSequence that references original char sequence and maps '\0' to '\uFFFD'
- * a subSequence() returns a sub-sequence from the original base sequence
+ * A CharSequence that references original char sequence with offsets into original preserved
+ *
+ * a subSequence() returns a sub-sequence from the original base sequence with corresponding offsets
  */
 @SuppressWarnings("SameParameterValue")
-public interface BasedSequence extends RichSequence<BasedSequence> {
+public interface BasedSequence extends IRichSequence<BasedSequence> {
     BasedSequence NULL = new EmptyBasedSequence();
     BasedSequence EMPTY = new EmptyBasedSequence();
-    BasedSequence EOL = CharSubSequence.of(RichSequence.EOL);
-    BasedSequence SPACE = CharSubSequence.of(RichSequence.SPACE);
+    BasedSequence EOL = CharSubSequence.of(IRichSequence.EOL);
+    BasedSequence SPACE = CharSubSequence.of(IRichSequence.SPACE);
     List<BasedSequence> EMPTY_LIST = new ArrayList<>();
     BasedSequence[] EMPTY_ARRAY = new BasedSequence[0];
     BasedSequence[] EMPTY_SEGMENTS = new BasedSequence[0];
+
+    static BasedSequence of(CharSequence charSequence) {
+        return  BasedSequenceImpl.create(charSequence, 0, charSequence.length());
+    }
+
+    static BasedSequence of(CharSequence charSequence, int startIndex) {
+        return  BasedSequenceImpl.create(charSequence, startIndex, charSequence.length());
+    }
+
+    static BasedSequence of(CharSequence charSequence, int startIndex, int endIndex) {
+        return  BasedSequenceImpl.create(charSequence, startIndex, endIndex);
+    }
 
     /**
      * Get the underlying object on which this sequence contents are based
@@ -74,19 +87,19 @@ public interface BasedSequence extends RichSequence<BasedSequence> {
     /**
      * Get a portion of the original sequence that this sequence is based on
      *
-     * @param start offset from 0 of original sequence
-     * @param end   offset from 0 of original sequence
+     * @param startIndex offset from 0 of original sequence
+     * @param endIndex   offset from 0 of original sequence
      * @return based sequence whose contents reflect the selected portion
      */
-    BasedSequence baseSubSequence(int start, int end);
+    BasedSequence baseSubSequence(int startIndex, int endIndex);
 
     /**
      * Get a portion of the original sequence that this sequence is based on
      *
-     * @param start offset from 0 of original sequence
-     * @return based sequence from start to the end
+     * @param startIndex offset from 0 of original sequence
+     * @return based sequence from startIndex to the endIndex
      */
-    BasedSequence baseSubSequence(int start);
+    BasedSequence baseSubSequence(int startIndex);
 
     /**
      * Safe, if index out of range returns '\0'
@@ -313,8 +326,8 @@ public interface BasedSequence extends RichSequence<BasedSequence> {
         }
 
         @Override
-        public BasedSequence baseSubSequence(int start, int end) {
-            return subSequence(start, end);
+        public BasedSequence baseSubSequence(int startIndex, int endIndex) {
+            return subSequence(startIndex, endIndex);
         }
 
         @Override

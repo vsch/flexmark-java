@@ -1,4 +1,4 @@
-package com.vladsch.flexmark.util.mappers;
+package com.vladsch.flexmark.util.format;
 
 public interface CharWidthProvider {
     int spaceWidth();

@@ -10,7 +10,6 @@ import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.RepeatedSequence;
-import com.vladsch.flexmark.util.sequence.SubSequence;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -59,17 +58,18 @@ public class DefinitionNodeFormatter implements NodeFormatter {
         BasedSequence openMarkerSpaces = openMarkerChars.subSequence(1);
 
         if (options.markerSpaces >= 1 && openMarkerSpaces.length() != options.markerSpaces) {
-            openMarkerSpaces = SubSequence.of(RepeatedSequence.of(' ', options.markerSpaces));
+            CharSequence charSequence = RepeatedSequence.of(' ', options.markerSpaces);
+            openMarkerSpaces = BasedSequence.of(charSequence, 0, charSequence.length());
         }
 
         switch (options.markerType) {
             case ANY:
                 break;
             case COLON:
-                openMarker = SubSequence.of(":");
+                openMarker = BasedSequence.of(":", 0, ((CharSequence) ":").length());
                 break;
             case TILDE:
-                openMarker = SubSequence.of("~");
+                openMarker = BasedSequence.of("~", 0, ((CharSequence) "~").length());
                 break;
         }
 

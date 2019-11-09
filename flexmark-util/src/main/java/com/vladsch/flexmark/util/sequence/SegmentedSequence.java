@@ -9,8 +9,7 @@ import java.util.List;
 import static java.lang.Integer.MIN_VALUE;
 
 /**
- * A CharSequence that references original char sequence and maps '\0' to '\uFFFD'
- * a subSequence() returns a sub-sequence from the original base sequence
+ * A BasedSequence which consists of segments of other BasedSequences
  */
 public final class SegmentedSequence extends BasedSequenceImpl {
     private final BasedSequence baseSeq;  // base sequence
@@ -161,7 +160,7 @@ public final class SegmentedSequence extends BasedSequenceImpl {
                 return new SegmentedSequence(mergedSequences, startOffset, endOffset);
             }
         }
-        return SubSequence.NULL;
+        return BasedSequence.NULL;
     }
 
     private SegmentedSequence(List<BasedSequence> segments, int startOffset, int endOffset) {
@@ -171,7 +170,7 @@ public final class SegmentedSequence extends BasedSequenceImpl {
 
         int length = 0;
 
-        BasedSequence base = segments.size() > 0 ? segments.get(0).getBaseSequence() : SubSequence.NULL;
+        BasedSequence base = segments.size() > 0 ? segments.get(0).getBaseSequence() : BasedSequence.NULL;
 
         int index = 0;
         int lastEnd = base.getStartOffset();
@@ -310,32 +309,32 @@ public final class SegmentedSequence extends BasedSequenceImpl {
     }
 
     @Override
-    public BasedSequence baseSubSequence(int start, int end) {
-        if (start < 0 || start > baseSeq.length()) {
-            throw new StringIndexOutOfBoundsException("String index out of range: " + start);
+    public BasedSequence baseSubSequence(int startIndex, int endIndex) {
+        if (startIndex < 0 || startIndex > baseSeq.length()) {
+            throw new StringIndexOutOfBoundsException("String index out of range: " + startIndex);
         }
-        if (end < 0 || end > baseSeq.length()) {
-            throw new StringIndexOutOfBoundsException("String index out of range: " + end);
+        if (endIndex < 0 || endIndex > baseSeq.length()) {
+            throw new StringIndexOutOfBoundsException("String index out of range: " + endIndex);
         }
 
-        return baseSeq.baseSubSequence(start, end);
+        return baseSeq.baseSubSequence(startIndex, endIndex);
     }
 
     @NotNull
     @Override
-    public BasedSequence subSequence(int start, int end) {
-        if (start < 0 || start > length) {
-            throw new StringIndexOutOfBoundsException("String index out of range: " + start);
+    public BasedSequence subSequence(int startIndex, int endIndex) {
+        if (startIndex < 0 || startIndex > length) {
+            throw new StringIndexOutOfBoundsException("String index out of range: " + startIndex);
         }
 
-        if (end < 0 || end > length) {
-            throw new StringIndexOutOfBoundsException("String index out of range: " + end);
+        if (endIndex < 0 || endIndex > length) {
+            throw new StringIndexOutOfBoundsException("String index out of range: " + endIndex);
         }
 
-        if (start == 0 && end == length) {
+        if (startIndex == 0 && endIndex == length) {
             return this;
         } else {
-            return new SegmentedSequence(baseSeq, baseOffsets, baseStartOffset + start, nonBaseChars, end - start);
+            return new SegmentedSequence(baseSeq, baseOffsets, baseStartOffset + startIndex, nonBaseChars, endIndex - startIndex);
         }
     }
 

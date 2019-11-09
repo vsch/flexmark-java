@@ -6,7 +6,6 @@ import com.vladsch.flexmark.util.format.TableCellOffsetInfo;
 import com.vladsch.flexmark.util.format.TableFormatOptions;
 import com.vladsch.flexmark.util.format.options.DiscretionaryText;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.BasedSequenceImpl;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -27,7 +26,8 @@ public class TableCellOffsetInfoTest extends MarkdownTableTestBase {
                 "";
 
         int pos = markdown.indexOf("^");
-        BasedSequence source = BasedSequenceImpl.of(markdown.substring(0, pos) + markdown.substring(pos + 1));
+        CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
+        BasedSequence source = BasedSequence.of(charSequence, 0, charSequence.length());
         MarkdownTable table = getTable(source, formatOptions("", null).toMutable().set(TableFormatOptions.FORMAT_TABLE_LEFT_ALIGN_MARKER, DiscretionaryText.AS_IS));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.FORMAT_ALL);
         table.appendTable(out);
@@ -70,7 +70,8 @@ public class TableCellOffsetInfoTest extends MarkdownTableTestBase {
                 "";
 
         int pos = markdown.indexOf("^");
-        BasedSequence source = BasedSequenceImpl.of(markdown.substring(0, pos) + markdown.substring(pos + 1));
+        CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
+        BasedSequence source = BasedSequence.of(charSequence, 0, charSequence.length());
         MarkdownTable table = getTable(source, formatOptions("", null));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.FORMAT_ALL);
         table.appendTable(out);
@@ -359,7 +360,8 @@ public class TableCellOffsetInfoTest extends MarkdownTableTestBase {
                 "";
 
         int pos = markdown.indexOf("^");
-        BasedSequence source = BasedSequenceImpl.of(markdown.substring(0, pos) + markdown.substring(pos + 1));
+        CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
+        BasedSequence source = BasedSequence.of(charSequence, 0, charSequence.length());
         MarkdownTable table = getTable(source, formatOptions("", null));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.FORMAT_ALL);
         table.appendTable(out);

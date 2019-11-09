@@ -14,7 +14,6 @@ import com.vladsch.flexmark.util.ast.BlockContent;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.BasedSequenceImpl;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashSet;
@@ -51,7 +50,7 @@ public class DefinitionListItemBlockPreProcessor implements BlockPreProcessor {
                 final Paragraph paragraph = (Paragraph) previous;
                 Node afterParagraph = previous.getNext();
 
-                Node paragraphPreviousNonBlank = paragraph.getPreviousAnyNot(BlankLine.class);
+                Node paragraphPrevNonBlank = paragraph.getPreviousAnyNot(BlankLine.class);
                 Node paragraphPrevious = paragraph.getPrevious();
                 final Node paragraphParent = paragraph.getParent();
 
@@ -62,10 +61,11 @@ public class DefinitionListItemBlockPreProcessor implements BlockPreProcessor {
                 final boolean hadPreviousList;
                 if (options.doubleBlankLineBreaksList) {
                     // intervening characters between previous paragraph and definition terms
-                    final BasedSequence interSpace = paragraphPreviousNonBlank == null ? BasedSequence.NULL : BasedSequenceImpl.of(paragraphPreviousNonBlank.getChars().baseSubSequence(paragraphPreviousNonBlank.getChars().getEndOffset(), paragraph.getChars().getStartOffset()).normalizeEOL());
-                    hadPreviousList = paragraphPreviousNonBlank instanceof DefinitionList && interSpace.countLeading('\n') < 2;
+                    final BasedSequence interSpace = paragraphPrevNonBlank == null ? BasedSequence.NULL :
+                            BasedSequence.of(paragraphPrevNonBlank.baseSubSequence(paragraphPrevNonBlank.getEndOffset(), paragraph.getStartOffset()).normalizeEOL());
+                    hadPreviousList = paragraphPrevNonBlank instanceof DefinitionList && interSpace.countLeading('\n') < 2;
                 } else {
-                    hadPreviousList = paragraphPreviousNonBlank instanceof DefinitionList;
+                    hadPreviousList = paragraphPrevNonBlank instanceof DefinitionList;
                 }
 
                 final DefinitionList definitionList = new DefinitionList();
@@ -107,7 +107,7 @@ public class DefinitionListItemBlockPreProcessor implements BlockPreProcessor {
                 definitionList.takeChildren(trailingBlankLines);
 
                 if (hadPreviousList) {
-                    final DefinitionList previousList = (DefinitionList) paragraphPreviousNonBlank;
+                    final DefinitionList previousList = (DefinitionList) paragraphPrevNonBlank;
                     previousList.takeChildren(definitionList);
                     for (Node node : definitionList.getChildren()) {
                         node.unlink();
@@ -118,7 +118,7 @@ public class DefinitionListItemBlockPreProcessor implements BlockPreProcessor {
                     previousList.setCharsFromContent();
                 } else {
                     // insert new one, after paragraphPrevious
-                    if (paragraphPreviousNonBlank != null) {
+                    if (paragraphPrevNonBlank != null) {
                         paragraphPrevious.insertAfter(definitionList);
                     } else {
                         if (paragraphParent.getFirstChild() != null) {

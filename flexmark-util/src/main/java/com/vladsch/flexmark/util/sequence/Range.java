@@ -1,5 +1,7 @@
 package com.vladsch.flexmark.util.sequence;
 
+import org.jetbrains.annotations.NotNull;
+
 public class Range {
     public static final Range NULL = new Range(0, 0);
 
@@ -46,22 +48,50 @@ public class Range {
         return start == myStart && end == myEnd ? this : new Range(start, end);
     }
 
-    public BasedSequence basedSubSequence(CharSequence charSequence) {
-        return BasedSequenceImpl.of(charSequence).subSequence(myStart, myEnd);
+    /**
+     * Return a based subsequence of sequence given by this range
+     *
+     * @param charSequence char sequence from which to extract the range
+     * @return resulting based subsequence
+     * @deprecated use {@link #basedSubSequence(CharSequence)} instead
+     */
+    @NotNull
+    @Deprecated
+    public BasedSequence subSequence(@NotNull CharSequence charSequence) {
+        return basedSubSequence(charSequence);
     }
 
-    public BasedSequence basedSafeSubSequence(CharSequence charSequence) {
+    @NotNull
+    public BasedSequence basedSubSequence(@NotNull CharSequence charSequence) {
+        return BasedSequence.of(charSequence, myStart, myEnd);
+    }
+
+    @NotNull
+    public BasedSequence basedSafeSubSequence(@NotNull CharSequence charSequence) {
         int end = Math.min(charSequence.length(), myEnd);
-        return isNull() ? BasedSequence.NULL : BasedSequenceImpl.of(charSequence).subSequence(Math.min(end, Math.max(0, myStart)), end);
+        return isNull() ? BasedSequence.NULL : BasedSequence.of(charSequence, Math.min(end, Math.max(0, myStart)), end);
     }
 
-    public RichSequenceImpl richSubSequence(CharSequence charSequence) {
-        return RichSequenceImpl.of(charSequence).subSequence(this);
+    @NotNull
+    public RichSequence richSubSequence(@NotNull CharSequence charSequence) {
+        return RichSequence.of(charSequence.subSequence(myStart, myEnd));
     }
 
-    public RichSequenceImpl richSafeSubSequence(CharSequence charSequence) {
+    @NotNull
+    public RichSequence richSafeSubSequence(@NotNull CharSequence charSequence) {
         int end = Math.min(charSequence.length(), myEnd);
-        return isNull() ? RichSequenceImpl.NULL : RichSequenceImpl.of(charSequence).subSequence(Math.min(end, Math.max(0, myStart)), end);
+        return isNull() ? RichSequence.NULL : RichSequence.of(charSequence, Math.min(end, Math.max(0, myStart)), end);
+    }
+
+    @NotNull
+    public CharSequence charSubSequence(@NotNull CharSequence charSequence) {
+        return charSequence.subSequence(myStart, myEnd);
+    }
+
+    @NotNull
+    public CharSequence charSafeSubSequence(@NotNull CharSequence charSequence) {
+        int end = Math.min(charSequence.length(), myEnd);
+        return isNull() ? charSequence.subSequence(0, 0) : charSequence.subSequence(Math.min(end, Math.max(0, myStart)), end);
     }
 
     public boolean contains(int index) {

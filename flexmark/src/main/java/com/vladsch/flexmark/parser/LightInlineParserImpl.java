@@ -15,6 +15,8 @@ import java.util.regex.MatchResult;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static com.vladsch.flexmark.util.sequence.IRichSequence.NUL;
+
 public class LightInlineParserImpl implements LightInlineParser {
 
     final protected InlineParserOptions options;
@@ -232,7 +234,7 @@ public class LightInlineParserImpl implements LightInlineParser {
         if (index < input.length()) {
             return input.charAt(index);
         } else {
-            return '\0';
+            return NUL;
         }
     }
 
@@ -241,7 +243,7 @@ public class LightInlineParserImpl implements LightInlineParser {
         if (index + ahead < input.length()) {
             return input.charAt(index + ahead);
         } else {
-            return '\0';
+            return NUL;
         }
     }
 

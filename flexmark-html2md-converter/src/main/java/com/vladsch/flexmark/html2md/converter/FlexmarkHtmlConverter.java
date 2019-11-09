@@ -22,7 +22,7 @@ import com.vladsch.flexmark.util.format.RomanNumeral;
 import com.vladsch.flexmark.util.format.TableFormatOptions;
 import com.vladsch.flexmark.util.format.options.TableCaptionHandling;
 import com.vladsch.flexmark.util.html.*;
-import com.vladsch.flexmark.util.sequence.BasedSequenceImpl;
+import com.vladsch.flexmark.util.sequence.BasedSequence;
 import org.jetbrains.annotations.NotNull;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -696,7 +696,7 @@ public class FlexmarkHtmlConverter {
                 if (title != null && !title.trim().isEmpty()) {
                     if (reference.getTitle().isBlank()) {
                         // just add it to the existing reference
-                        reference.setTitle(BasedSequenceImpl.of(title));
+                        reference.setTitle(BasedSequence.of(title, 0, ((CharSequence) title).length()));
                         return reference;
                     } else if (reference.getTitle().equals(title.trim())) {
                         return reference;

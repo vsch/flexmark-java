@@ -11,7 +11,6 @@ import com.vladsch.flexmark.util.format.options.DiscretionaryText;
 import com.vladsch.flexmark.util.html.CellAlignment;
 import com.vladsch.flexmark.util.html.LineFormattingAppendable;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.BasedSequenceImpl;
 import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
 import com.vladsch.flexmark.util.sequence.RepeatedSequence;
 
@@ -99,7 +98,7 @@ public class MarkdownTable {
             CharSequence caption,
             CharSequence captionClose
     ) {
-        setCaptionCell(new TableCell(tableCellNode, captionOpen, options.formatTableCaptionSpaces == DiscretionaryText.AS_IS ? caption : BasedSequenceImpl.of(caption).trim(), captionClose, 1, 1));
+        setCaptionCell(new TableCell(tableCellNode, captionOpen, options.formatTableCaptionSpaces == DiscretionaryText.AS_IS ? caption : BasedSequence.of(caption, 0, caption.length()).trim(), captionClose, 1, 1));
     }
 
     public int getHeadingRowCount() {
@@ -912,7 +911,7 @@ public class MarkdownTable {
         TableCell captionCell = getCaptionCell();
         String captionText = formattedCaption(captionCell.text, options);
         if (captionText != null) {
-            BasedSequence formattedCaption = BasedSequenceImpl.of(captionText);
+            BasedSequence formattedCaption = BasedSequence.of(captionText, 0, ((CharSequence) captionText).length());
             boolean handled = false;
 
             if (this.caption.rows.size() > 0) {

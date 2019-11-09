@@ -3,8 +3,7 @@ package com.vladsch.flexmark.util.sequence;
 import java.util.ArrayList;
 
 /**
- * A CharSequence that references original char sequence and maps '\0' to '\uFFFD' a
- * subSequence() returns a sub-sequence from the original base sequence
+ * A Builder for Segmented BasedSequences
  */
 public final class SegmentedSequenceBuilder {
     private final ArrayList<BasedSequence> segments;
