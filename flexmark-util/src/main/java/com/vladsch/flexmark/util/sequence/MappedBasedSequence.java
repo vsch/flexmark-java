@@ -93,15 +93,15 @@ final public class MappedBasedSequence extends BasedSequenceImpl implements Mapp
         return basedSequence == base ? this : new MappedBasedSequence(mapper, basedSequence);
     }
 
-    public static BasedSequence of(CharMapper mapper, BasedSequence baseSeq) {
-        return of(mapper, baseSeq, 0, baseSeq.length());
+    public static BasedSequence mappedOf(CharMapper mapper, BasedSequence baseSeq) {
+        return mappedOf(mapper, baseSeq, 0, baseSeq.length());
     }
 
-    public static BasedSequence of(CharMapper mapper, BasedSequence baseSeq, int startIndex) {
-        return of(mapper, baseSeq, startIndex, baseSeq.length());
+    public static BasedSequence mappedOf(CharMapper mapper, BasedSequence baseSeq, int startIndex) {
+        return mappedOf(mapper, baseSeq, startIndex, baseSeq.length());
     }
 
-    public static BasedSequence of(CharMapper mapper, BasedSequence baseSeq, int startIndex, int endIndex) {
+    public static BasedSequence mappedOf(CharMapper mapper, BasedSequence baseSeq, int startIndex, int endIndex) {
         return new MappedBasedSequence(mapper, baseSeq.subSequence(startIndex, endIndex));
     }
 }

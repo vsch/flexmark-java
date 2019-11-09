@@ -40,7 +40,7 @@ public class AdmonitionNodeFormatter implements NodeFormatter {
             markdown.append(' ').append('"').appendTranslating(node.getTitle()).append('"');
         }
         markdown.line();
-        markdown.pushPrefix().addPrefix(RepeatedSequence.of(" ", options.contentIndent).toString());
+        markdown.pushPrefix().addPrefix(RepeatedSequence.repeatOf(" ", options.contentIndent).toString());
         context.renderChildren(node);
         markdown.blankLine();
         markdown.popPrefix();

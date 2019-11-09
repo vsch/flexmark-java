@@ -39,7 +39,7 @@ public class Reference extends LinkNodeBase implements ReferenceNode<ReferenceRe
                 openingMarker,
                 reference,
                 closingMarker,
-                PrefixedSubSequence.of(" ", closingMarker.getEmptySuffix()),
+                PrefixedSubSequence.prefixOf(" ", closingMarker.getEmptySuffix()),
                 urlOpeningMarker,
                 pageRef,
                 anchorMarker,

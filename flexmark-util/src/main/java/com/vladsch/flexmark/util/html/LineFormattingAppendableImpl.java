@@ -264,7 +264,7 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
         int startOffset = myLineStart;
         myLineStart = myAppendable.length();
         int endOffset = myLineStart;
-        addLineRange(new Range(startOffset, endOffset - 1), myPrefix);
+        addLineRange(Range.of(startOffset, endOffset - 1), myPrefix);
         myAllWhitespace = true;
         myWasWhitespace = false;
         myLineOnFirstText = 0;
@@ -302,11 +302,11 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
         boolean needPrefix = haveOptions(PREFIX_PRE_FORMATTED) || (myPreFormattedNesting == 0 && myPreFormattedLastLine != currentLine || myPreFormattedFirstLine == currentLine);
 
         if (myPassThrough) {
-            return new Pair<>(new Range(startOffset, endOffset - 1), needPrefix ? myPrefix : BasedSequence.NULL);
+            return new Pair<>(Range.of(startOffset, endOffset - 1), needPrefix ? myPrefix : BasedSequence.NULL);
         } else {
             if (myAllWhitespace && (myPreFormattedNesting == 0 && !(myPreFormattedFirstLine == currentLine || myPreFormattedLastLine == currentLine))) {
                 if (haveOptions(ALLOW_LEADING_EOL) && myAppendable.length() == 0) {
-                    return new Pair<>(new Range(startOffset, endOffset - 1), needPrefix ? myPrefix : BasedSequence.NULL);
+                    return new Pair<>(Range.of(startOffset, endOffset - 1), needPrefix ? myPrefix : BasedSequence.NULL);
                 } else {
                     return new Pair<>(Range.NULL, BasedSequence.NULL);
                 }
@@ -343,7 +343,7 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
                     if (endOffset < myPreFormattedLastLineOffset + 1) endOffset = myPreFormattedLastLineOffset + 1;
                 }
 
-                return new Pair<>(new Range(startOffset, endOffset - 1), needPrefix ? myPrefix : BasedSequence.NULL);
+                return new Pair<>(Range.of(startOffset, endOffset - 1), needPrefix ? myPrefix : BasedSequence.NULL);
             }
         }
     }
@@ -525,7 +525,7 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
             int endOffset = myAppendable.length();
 
             BasedSequence combinedPrefix = haveOptions(PREFIX_PRE_FORMATTED) || !lineAppendable.isPreFormattedLine(startLine + i) ? combinedPrefix(myPrefix, prefix) : BasedSequence.NULL;
-            addLineRange(new Range(startOffset, endOffset - 1), combinedPrefix);
+            addLineRange(Range.of(startOffset, endOffset - 1), combinedPrefix);
             myLineStart = endOffset;
         }
         return this;

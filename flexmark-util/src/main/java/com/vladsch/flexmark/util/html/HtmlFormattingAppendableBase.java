@@ -31,7 +31,7 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
 
     public HtmlFormattingAppendableBase(int indentSize, int formatOptions) {
         this.out = new LineFormattingAppendableImpl(formatOptions);
-        this.out.setIndentPrefix(RepeatedSequence.of(" ", indentSize).toString());
+        this.out.setIndentPrefix(RepeatedSequence.repeatOf(" ", indentSize).toString());
     }
 
     public boolean isSuppressOpenTagLine() {

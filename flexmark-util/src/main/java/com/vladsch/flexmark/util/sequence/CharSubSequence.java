@@ -54,7 +54,7 @@ public final class CharSubSequence extends BasedSequenceImpl {
 
     @Override
     public Range getSourceRange() {
-        return new Range(startOffset, endOffset);
+        return Range.of(startOffset, endOffset);
     }
 
     @Override

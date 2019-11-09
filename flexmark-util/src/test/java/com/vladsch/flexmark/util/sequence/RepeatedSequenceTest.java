@@ -32,7 +32,7 @@ public class RepeatedSequenceTest {
         String orig = "abcdef";
         String result = orig;
 
-        RepeatedSequence test = RepeatedSequence.of(orig, 2);
+        CharSequence test = RepeatedSequence.repeatOf(orig, 2);
         result = orig + orig;
         assertEquals(result, test.toString());
         assertEquals(result.length(), test.length());
@@ -46,7 +46,7 @@ public class RepeatedSequenceTest {
         String orig = "abcdef";
         String result = orig;
 
-        RepeatedSequence test = RepeatedSequence.of(orig, 3, orig.length() + 3);
+        CharSequence test = RepeatedSequence.repeatOf(orig, 3, orig.length() + 3);
         result = orig.substring(3) + orig.substring(0, 3);
         assertEquals(result, test.toString());
         assertEquals(result.length(), test.length());
@@ -54,7 +54,7 @@ public class RepeatedSequenceTest {
         test_subSequence(result, test);
         test_charAt(result, test);
 
-        test = RepeatedSequence.of(orig, 3, orig.length() + 5);
+        test = RepeatedSequence.repeatOf(orig, 3, orig.length() + 5);
         result = orig.substring(3) + orig.substring(0, 5);
         assertEquals(result, test.toString());
         assertEquals(result.length(), test.length());
@@ -63,14 +63,14 @@ public class RepeatedSequenceTest {
         test_charAt(result, test);
     }
 
-    private void test_charAt(String result, RepeatedSequence chars) throws Exception {
+    private void test_charAt(String result, CharSequence chars) throws Exception {
         int iMax = result.length();
         for (int i = 0; i < iMax; i++) {
             assertEquals(String.valueOf(result.charAt(i)), String.valueOf(chars.charAt(i)));
         }
     }
 
-    private void test_subSequence(String result, RepeatedSequence chars) throws Exception {
+    private void test_subSequence(String result, CharSequence chars) throws Exception {
         int iMax = result.length();
         for (int i = 0; i < iMax; i++) {
             for (int j = iMax - i - 1; j >= 0 && j >= i; j--) {

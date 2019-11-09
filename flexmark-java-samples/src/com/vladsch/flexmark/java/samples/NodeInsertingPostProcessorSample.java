@@ -74,7 +74,7 @@ public class NodeInsertingPostProcessorSample {
                 assert paragraphParent != null;
 
                 // create a text element to hold the text
-                Text text = new Text(PrefixedSubSequence.of(paragraphText.toString(), paragraphParent.getChars().getEmptySuffix()));
+                Text text = new Text(PrefixedSubSequence.prefixOf(paragraphText.toString(), paragraphParent.getChars().getEmptySuffix()));
 
                 // create a paragraph for the text
                 Paragraph paragraph = new Paragraph(text.getChars());

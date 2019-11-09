@@ -436,8 +436,8 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
         if (openingMarkerLen < formatterOptions.fencedCodeMarkerLength) openingMarkerLen = formatterOptions.fencedCodeMarkerLength;
         if (closingMarkerLen < formatterOptions.fencedCodeMarkerLength) closingMarkerLen = formatterOptions.fencedCodeMarkerLength;
 
-        openingMarker = RepeatedSequence.of(String.valueOf(openingMarkerChar), openingMarkerLen);
-        if (formatterOptions.fencedCodeMatchClosingMarker || closingMarkerChar == NUL) { closingMarker = openingMarker; } else closingMarker = RepeatedSequence.of(String.valueOf(closingMarkerChar), closingMarkerLen);
+        openingMarker = RepeatedSequence.repeatOf(String.valueOf(openingMarkerChar), openingMarkerLen);
+        if (formatterOptions.fencedCodeMatchClosingMarker || closingMarkerChar == NUL) { closingMarker = openingMarker; } else closingMarker = RepeatedSequence.repeatOf(String.valueOf(closingMarkerChar), closingMarkerLen);
 
         markdown.append(openingMarker);
         if (formatterOptions.fencedCodeSpaceBeforeInfo) markdown.append(' ');
@@ -502,12 +502,12 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
             markdown.openPreFormatted(true);
             markdown.appendNonTranslating(Utils.suffixWith(contentChars.toString(), '\n'));
         } else {
-            String prefix = RepeatedSequence.of(" ", listOptions.getCodeIndent()).toString();
+            String prefix = RepeatedSequence.repeatOf(" ", listOptions.getCodeIndent()).toString();
 
             if (formatterOptions.emulationProfile == ParserEmulationProfile.GITHUB_DOC) {
                 if (node.getParent() instanceof ListItem) {
                     BasedSequence marker = ((ListItem) node.getParent()).getOpeningMarker();
-                    prefix = RepeatedSequence.of(" ", Utils.minLimit(8 - marker.length() - 1, 4)).toString();
+                    prefix = RepeatedSequence.repeatOf(" ", Utils.minLimit(8 - marker.length() - 1, 4)).toString();
                 }
             }
 
@@ -638,7 +638,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
         int parentPrefix = markdown.getPrefix().length();
         int column = contentChars.baseColumnAtStart();
 
-        prefix = RepeatedSequence.of(" ", Utils.minLimit(0, column - parentPrefix)).toString();
+        prefix = RepeatedSequence.repeatOf(" ", Utils.minLimit(0, column - parentPrefix)).toString();
         return prefix;
     }
 
@@ -648,7 +648,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
         int parentPrefix = fromChars.getStartOffset();
         int column = toChars.getStartOffset();
 
-        prefix = RepeatedSequence.of(" ", Utils.minLimit(0, column - parentPrefix)).toString();
+        prefix = RepeatedSequence.repeatOf(" ", Utils.minLimit(0, column - parentPrefix)).toString();
         return prefix;
     }
 
@@ -671,7 +671,8 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
 
             if (node.getFirstChild() == null) {
                 // TEST: not sure if this works, need an empty list item with no children to test
-                itemContentPrefix = RepeatedSequence.of(' ', openingMarker.length() + (listOptions.isItemContentAfterSuffix() ? markerSuffix.length() : 0) + 1).toString();
+                int count = openingMarker.length() + (listOptions.isItemContentAfterSuffix() ? markerSuffix.length() : 0) + 1;
+                itemContentPrefix = RepeatedSequence.repeatOf(' ', count).toString();
                 prefix = additionalPrefix + itemContentPrefix;
 
                 itemContentSpacer = " ";
@@ -757,8 +758,9 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
                 }
             }
 
-            CharSequence prefix = options.itemContentIndent ? RepeatedSequence.of(' ', openingMarker.length() + (listOptions.isItemContentAfterSuffix() ? markerSuffix.length() : 0) + 1)
-                    : RepeatedSequence.of(" ", listOptions.getItemIndent()).toString();
+            int count = openingMarker.length() + (listOptions.isItemContentAfterSuffix() ? markerSuffix.length() : 0) + 1;
+            CharSequence prefix = options.itemContentIndent ? RepeatedSequence.repeatOf(' ', count)
+                    : RepeatedSequence.repeatOf(" ", listOptions.getItemIndent()).toString();
 
             markdown.pushPrefix().addPrefix(prefix, true);
 

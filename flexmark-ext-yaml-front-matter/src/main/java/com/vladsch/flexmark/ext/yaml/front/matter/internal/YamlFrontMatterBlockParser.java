@@ -104,7 +104,7 @@ public class YamlFrontMatterBlockParser extends AbstractBlockParser {
                     matcher = REGEX_METADATA_LITERAL.matcher(line);
                     if (matcher.matches()) {
                         if (currentValues.size() == 1) {
-                            BasedSequence combined = SegmentedSequence.of(currentValues.get(0), PrefixedSubSequence.of("\n", line.subSequence(matcher.start(1), matcher.end(1)).trim()));
+                            BasedSequence combined = SegmentedSequence.of(currentValues.get(0), PrefixedSubSequence.prefixOf("\n", line.subSequence(matcher.start(1), matcher.end(1)).trim()));
                             currentValues.set(0, combined);
                         } else {
                             currentValues.add(line.subSequence(matcher.start(1), matcher.end(1)).trim());

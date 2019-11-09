@@ -76,13 +76,13 @@ public class Escaping {
         public void replace(BasedSequence original, int startIndex, int endIndex, ReplacedTextMapper textMapper) {
             String s1 = original.subSequence(startIndex, endIndex).toString();
             if (s1.equals("&")) {
-                textMapper.addReplacedText(startIndex, endIndex, PrefixedSubSequence.of("&amp;", BasedSequence.NULL));
+                textMapper.addReplacedText(startIndex, endIndex, PrefixedSubSequence.prefixOf("&amp;", BasedSequence.NULL));
             } else if (s1.equals("<")) {
-                textMapper.addReplacedText(startIndex, endIndex, PrefixedSubSequence.of("&lt;", BasedSequence.NULL));
+                textMapper.addReplacedText(startIndex, endIndex, PrefixedSubSequence.prefixOf("&lt;", BasedSequence.NULL));
             } else if (s1.equals(">")) {
-                textMapper.addReplacedText(startIndex, endIndex, PrefixedSubSequence.of("&gt;", BasedSequence.NULL));
+                textMapper.addReplacedText(startIndex, endIndex, PrefixedSubSequence.prefixOf("&gt;", BasedSequence.NULL));
             } else if (s1.equals("\"")) {
-                textMapper.addReplacedText(startIndex, endIndex, PrefixedSubSequence.of("&quot;", BasedSequence.NULL));
+                textMapper.addReplacedText(startIndex, endIndex, PrefixedSubSequence.prefixOf("&quot;", BasedSequence.NULL));
             } else {
                 textMapper.addOriginalText(startIndex, endIndex);
             }
@@ -176,7 +176,7 @@ public class Escaping {
                     textMapper.addOriginalText(startIndex, endIndex);
                 } else {
                     // %25 is the percent-encoding for %
-                    textMapper.addReplacedText(startIndex, startIndex + 1, PrefixedSubSequence.of("%25", BasedSequence.NULL));
+                    textMapper.addReplacedText(startIndex, startIndex + 1, PrefixedSubSequence.prefixOf("%25", BasedSequence.NULL));
                     textMapper.addOriginalText(startIndex + 1, endIndex);
                 }
             } else {
@@ -188,7 +188,7 @@ public class Escaping {
                     sbItem.append(HEX_DIGITS[(b >> 4) & 0xF]);
                     sbItem.append(HEX_DIGITS[b & 0xF]);
                 }
-                textMapper.addReplacedText(startIndex, endIndex, PrefixedSubSequence.of(sbItem.toString(), BasedSequence.NULL));
+                textMapper.addReplacedText(startIndex, endIndex, PrefixedSubSequence.prefixOf(sbItem.toString(), BasedSequence.NULL));
             }
         }
     };

@@ -33,7 +33,7 @@ public class LineCollectingVisitor {
 
     private void finalizeLines() {
         if (myStartOffset < myEndOffset) {
-            Range range = new Range(myStartOffset, myEndOffset);
+            Range range = Range.of(myStartOffset, myEndOffset);
             myLines.add(range);
             myEOLs.add(0);
             myStartOffset = myEndOffset;
@@ -64,14 +64,14 @@ public class LineCollectingVisitor {
     }
 
     private void visit(SoftLineBreak node) {
-        Range range = new Range(myStartOffset, node.getEndOffset());
+        Range range = Range.of(myStartOffset, node.getEndOffset());
         myLines.add(range);
         myEOLs.add(node.getTextLength());
         myStartOffset = node.getEndOffset();
     }
 
     private void visit(HardLineBreak node) {
-        Range range = new Range(myStartOffset, node.getEndOffset());
+        Range range = Range.of(myStartOffset, node.getEndOffset());
         myLines.add(range);
         myEOLs.add(node.getTextLength());
         myStartOffset = node.getEndOffset();

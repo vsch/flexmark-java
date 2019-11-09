@@ -68,7 +68,7 @@ public class ReplacedTextMapper {
     public void addReplacedText(int startIndex, int endIndex, BasedSequence replacedSequence) {
         if (isFinalized()) throw new IllegalStateException("Cannot modify finalized ReplacedTextMapper");
 
-        regions.add(new ReplacedTextRegion(original.subSequence(startIndex, endIndex).getSourceRange(), new Range(startIndex, endIndex), new Range(replacedLength, replacedLength + replacedSequence.length())));
+        regions.add(new ReplacedTextRegion(original.subSequence(startIndex, endIndex).getSourceRange(), Range.of(startIndex, endIndex), Range.of(replacedLength, replacedLength + replacedSequence.length())));
         replacedLength += replacedSequence.length();
         replacedSegments.add(replacedSequence);
     }
@@ -78,7 +78,7 @@ public class ReplacedTextMapper {
 
         if (startIndex < endIndex) {
             BasedSequence originalSegment = original.subSequence(startIndex, endIndex);
-            regions.add(new ReplacedTextRegion(originalSegment.getSourceRange(), new Range(startIndex, endIndex), new Range(replacedLength, replacedLength + originalSegment.length())));
+            regions.add(new ReplacedTextRegion(originalSegment.getSourceRange(), Range.of(startIndex, endIndex), Range.of(replacedLength, replacedLength + originalSegment.length())));
             replacedLength += originalSegment.length();
             replacedSegments.add(originalSegment);
         }

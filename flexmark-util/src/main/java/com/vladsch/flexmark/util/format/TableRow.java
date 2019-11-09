@@ -321,7 +321,7 @@ public class TableRow {
                 // need to change its text to previous cell's end
                 int endOffset = prevCell.getEndOffset();
                 // diagnostic/3095, text is not the right source for the sequence if closeMarker is not empty
-                empty = empty.withText(PrefixedSubSequence.of(" ", prevCell.getLastSegment().getBaseSequence(), endOffset, endOffset));
+                empty = empty.withText(PrefixedSubSequence.prefixOf(" ", prevCell.getLastSegment().getBaseSequence(), endOffset, endOffset));
 
                 cells.add(columnIndex <= cells.size() ? columnIndex : cells.size(), empty);
                 prevCell = empty;

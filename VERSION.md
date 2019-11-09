@@ -173,11 +173,16 @@ Next
       `StringBuilder` its text equivalent. A visitor needs to be provided so child nodes could
       be visited.
 * [ ] Fix: change `BasedSequenceImpl` to use `Range` instead of `startOffset` and `endOffset`
-* [ ] Add: `Formatter` Paragraph wrapping.
+* Deprecate: all static factory method named `of` to more specific so that errors are less likely.
+`repeatOf`, `prefixOf` otherwise it is possible to have the wrong factory method called and not see it.
+
 
 0.59.42
 -------
 
+* [ ] Add: `Formatter` Paragraph wrapping.
+* Add: `MarkdownParagraph` to utils to wrap paragraph text.
+  * [ ] Test: position marker preservation with direction type
 * Break: rename `MappedSequence` to `MappedBasedSequence` to allow for `MappedRichSequence`
 * Break: rename `RichCharSequence` to `IRichSequence` to separate base interfaces for rich and based sequences and
   allow for `RichSequence` to be the base interface for rich sequences similar to `BasedSequence` for based sequences

@@ -50,7 +50,7 @@ public abstract class BasedSequenceImpl extends IRichSequenceBase<BasedSequence>
     @NotNull
     @Override
     public BasedSequence toMapped(CharMapper mapper) {
-        return MappedBasedSequence.of(mapper, this);
+        return MappedBasedSequence.mappedOf(mapper, this);
     }
 
     @Override
@@ -232,7 +232,7 @@ public abstract class BasedSequenceImpl extends IRichSequenceBase<BasedSequence>
     @NotNull
     @Override
     public BasedSequence prefixWith(@Nullable CharSequence prefix) {
-        return prefix == null || prefix.length() == 0 ? this : PrefixedSubSequence.of(prefix.toString(), this);
+        return prefix == null || prefix.length() == 0 ? this : PrefixedSubSequence.prefixOf(prefix.toString(), this);
     }
 
     @Override
@@ -334,10 +334,6 @@ public abstract class BasedSequenceImpl extends IRichSequenceBase<BasedSequence>
     @Override public @NotNull Pair<Integer, Integer> baseLineColumnAtStart() {return baseLineColumnAtIndex(getStartOffset());}
     // @formatter:on
 
-    /**
-     * @deprecated  use {@link BasedSequence#of} instead
-     */
-    @Deprecated
     static BasedSequence create(CharSequence charSequence, int startIndex, int endIndex) {
         if (charSequence instanceof BasedSequence) return ((BasedSequence) charSequence).subSequence(startIndex, endIndex);
         else if (charSequence instanceof String) return CharSubSequence.of(charSequence).subSequence(startIndex, endIndex);

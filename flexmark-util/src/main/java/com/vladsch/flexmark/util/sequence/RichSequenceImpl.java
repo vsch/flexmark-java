@@ -52,7 +52,7 @@ public class RichSequenceImpl extends IRichSequenceBase<RichSequence> implements
     @NotNull
     @Override
     public RichSequence toMapped(CharMapper mapper) {
-        return MappedRichSequence.of(mapper, this);
+        return MappedRichSequence.mappedOf(mapper, this);
     }
 
     static RichSequence create(CharSequence charSequence, int startIndex, int endIndex) {

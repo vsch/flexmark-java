@@ -851,13 +851,13 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
     @NotNull
     @Override
     final public T padStart(int length, char pad) {
-        return length <= length() ? (T) this : sequenceOf(RepeatedSequence.of(pad, length - length()));
+        return length <= length() ? (T) this : sequenceOf(RepeatedSequence.repeatOf(pad, length - length()));
     }
 
     @NotNull
     @Override
     final public T padEnd(int length, char pad) {
-        return length <= length() ? (T) this : append(RepeatedSequence.of(pad, length - length()));
+        return length <= length() ? (T) this : append(RepeatedSequence.repeatOf(pad, length - length()));
     }
 
     @NotNull

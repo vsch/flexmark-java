@@ -60,7 +60,7 @@ public final class SubSequence extends BasedSequenceImpl {
 
     @Override
     public Range getSourceRange() {
-        return new Range(startOffset, endOffset);
+        return Range.of(startOffset, endOffset);
     }
 
     @Override

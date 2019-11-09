@@ -20,6 +20,7 @@ public interface BasedSequence extends IRichSequence<BasedSequence> {
     List<BasedSequence> EMPTY_LIST = new ArrayList<>();
     BasedSequence[] EMPTY_ARRAY = new BasedSequence[0];
     BasedSequence[] EMPTY_SEGMENTS = new BasedSequence[0];
+    BasedSequence LINE_SEP = CharSubSequence.of(IRichSequence.LINE_SEP);
 
     static BasedSequence of(CharSequence charSequence) {
         return  BasedSequenceImpl.create(charSequence, 0, charSequence.length());

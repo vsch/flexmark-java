@@ -19,7 +19,7 @@ public final class Text extends Node {
     }
 
     public Text(String chars, BasedSequence baseSeq) {
-        super(PrefixedSubSequence.of(chars, baseSeq));
+        super(PrefixedSubSequence.prefixOf(chars, baseSeq));
     }
 
     @NotNull

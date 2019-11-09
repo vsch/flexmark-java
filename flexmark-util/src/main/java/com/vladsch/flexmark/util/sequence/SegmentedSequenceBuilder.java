@@ -19,20 +19,29 @@ public final class SegmentedSequenceBuilder {
         this.base = base;
     }
 
+    public SegmentedSequenceBuilder append(CharSequence s) {
+        if (s instanceof BasedSequence) return append((BasedSequence) s);
+        else if (s.length() > 0) return append(s.toString());
+        else return this;
+    }
+
     public SegmentedSequenceBuilder append(BasedSequence s) {
         segments.add(s);
         return this;
     }
 
     public SegmentedSequenceBuilder append(String str) {
-        BasedSequence useBase;
-        if (segments.isEmpty()) {
-            useBase = base.subSequence(0, 0);
-        } else {
-            useBase = segments.get(segments.size() - 1);
-            useBase = useBase.subSequence(useBase.length(), useBase.length());
+        if (str.isEmpty()) return this;
+        else {
+            BasedSequence useBase;
+            if (segments.isEmpty()) {
+                useBase = base.subSequence(0, 0);
+            } else {
+                useBase = segments.get(segments.size() - 1);
+                useBase = useBase.subSequence(useBase.length(), useBase.length());
+            }
+            return append(PrefixedSubSequence.prefixOf(str, useBase));
         }
-        return append(PrefixedSubSequence.of(str, useBase));
     }
 
     public BasedSequence toBasedSequence() {

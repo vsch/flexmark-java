@@ -22,7 +22,6 @@ import com.vladsch.flexmark.util.html.Escaping;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
 import com.vladsch.flexmark.util.sequence.ReplacedTextMapper;
-import com.vladsch.flexmark.util.sequence.SubSequence;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -70,7 +69,7 @@ public class SyntheticLinkSample {
                 Text contentNode = new Text(linkText);
                 LinkNode linkNode;
 
-                BasedSequence linkAddress = PrefixedSubSequence.of("http://commonmark.org", linkText.getEmptySuffix());
+                BasedSequence linkAddress = PrefixedSubSequence.prefixOf("http://commonmark.org", linkText.getEmptySuffix());
 
                 linkNode = new Link(BasedSequence.NULL, linkText, BasedSequence.NULL, BasedSequence.NULL, linkAddress, BasedSequence.NULL);
 
@@ -120,7 +119,7 @@ public class SyntheticLinkSample {
             // using PrefixedSubSequence with only prefix without any characters from input string
 
             // here we create a based sequence of "inserted" text with offset set to end of input string
-            BasedSequence insertedText = PrefixedSubSequence.of("Some inserted text with a link [flexmark-java](https://github.com/vsch/flexmark-java) in paragraph.", document.getChars().subSequence(document.getChars().length()));
+            BasedSequence insertedText = PrefixedSubSequence.prefixOf("Some inserted text with a link [flexmark-java](https://github.com/vsch/flexmark-java) in paragraph.", document.getChars().subSequence(document.getChars().length()));
 
             // parse using the same options as the document but remove the SyntheticLinkExtension to prevent infinite recursion
             MutableDataHolder options = Parser.removeExtensions(new MutableDataSet(document), SyntheticLinkExtension.class);

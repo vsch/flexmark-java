@@ -19,7 +19,7 @@ public class DefinitionNodeRenderer implements NodeRenderer {
 
     public DefinitionNodeRenderer(DataHolder options) {
         this.options = new DefinitionOptions(options);
-        this.listOptions = ListOptions.getFrom(options);
+        this.listOptions = ListOptions.get(options);
     }
 
     @Override

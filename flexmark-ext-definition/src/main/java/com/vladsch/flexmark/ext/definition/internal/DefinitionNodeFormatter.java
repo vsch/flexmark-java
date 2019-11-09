@@ -25,7 +25,7 @@ public class DefinitionNodeFormatter implements NodeFormatter {
 
     public DefinitionNodeFormatter(DataHolder options) {
         this.options = new FormatOptions(options);
-        this.listOptions = ListOptions.getFrom(options);
+        this.listOptions = ListOptions.get(options);
     }
 
     @Nullable
@@ -58,7 +58,7 @@ public class DefinitionNodeFormatter implements NodeFormatter {
         BasedSequence openMarkerSpaces = openMarkerChars.subSequence(1);
 
         if (options.markerSpaces >= 1 && openMarkerSpaces.length() != options.markerSpaces) {
-            CharSequence charSequence = RepeatedSequence.of(' ', options.markerSpaces);
+            CharSequence charSequence = RepeatedSequence.repeatOf(' ', options.markerSpaces);
             openMarkerSpaces = BasedSequence.of(charSequence, 0, charSequence.length());
         }
 
@@ -74,7 +74,8 @@ public class DefinitionNodeFormatter implements NodeFormatter {
         }
 
         markdown.line().append(openMarker).append(openMarkerSpaces);
-        RepeatedSequence prefix = RepeatedSequence.of(' ', context.getFormatterOptions().itemContentIndent ? openMarker.length() + openMarkerSpaces.length() : listOptions.getItemIndent());
+        int count = context.getFormatterOptions().itemContentIndent ? openMarker.length() + openMarkerSpaces.length() : listOptions.getItemIndent();
+        CharSequence prefix = RepeatedSequence.repeatOf(' ', count);
         markdown.pushPrefix().addPrefix(prefix);
         context.renderChildren(node);
         markdown.popPrefix();

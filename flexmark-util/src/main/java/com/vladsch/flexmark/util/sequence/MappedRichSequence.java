@@ -75,15 +75,15 @@ public class MappedRichSequence extends IRichSequenceBase<RichSequence> implemen
         return baseSequence == base ? this : new MappedRichSequence(mapper, baseSequence);
     }
 
-    public static RichSequence of(CharMapper mapper, RichSequence baseSeq) {
-        return of(mapper, baseSeq, 0, baseSeq.length());
+    public static RichSequence mappedOf(CharMapper mapper, RichSequence baseSeq) {
+        return mappedOf(mapper, baseSeq, 0, baseSeq.length());
     }
 
-    public static RichSequence of(CharMapper mapper, RichSequence baseSeq, int startIndex) {
-        return of(mapper, baseSeq, startIndex, baseSeq.length());
+    public static RichSequence mappedOf(CharMapper mapper, RichSequence baseSeq, int startIndex) {
+        return mappedOf(mapper, baseSeq, startIndex, baseSeq.length());
     }
 
-    public static RichSequence of(CharMapper mapper, RichSequence baseSeq, int startIndex, int endIndex) {
+    public static RichSequence mappedOf(CharMapper mapper, RichSequence baseSeq, int startIndex, int endIndex) {
         if (baseSeq instanceof MappedRichSequence) return startIndex == 0 && endIndex == baseSeq.length() ? baseSeq.toMapped(mapper) : baseSeq.subSequence(startIndex, endIndex).toMapped(mapper);
         else return new MappedRichSequence(mapper, baseSeq.subSequence(startIndex, endIndex));
     }

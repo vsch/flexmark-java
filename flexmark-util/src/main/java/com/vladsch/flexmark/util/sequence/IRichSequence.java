@@ -30,7 +30,9 @@ public interface IRichSequence<T extends IRichSequence<?>> extends CharSequence,
     char NUL = '\0';
     char ENC_NUL = '\uFFFD';
     char NBSP = '\u00A0';
+    char LS = '\u2028';  // line separator
 
+    String LINE_SEP = Character.toString(LS);
     String WHITESPACE_NO_EOL_CHARS = " \t";
     String WHITESPACE_CHARS = " \t\r\n";
     String WHITESPACE_NBSP_CHARS = " \t\r\n\u00A0";

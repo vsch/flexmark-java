@@ -127,7 +127,9 @@ public final class SegmentedSequence extends BasedSequenceImpl {
             for (BasedSequence segment : segments) {
                 if (segment == null || segment.isNull()) continue;
 
-                assert base.getBase() == segment.getBase() : "all segments must come from the same base sequence";
+                if (base.getBase() != segment.getBase()) {
+                    throw new AssertionError("all segments must come from the same base sequence");
+                }
 
                 if (startOffset == -1) startOffset = segment.getStartOffset();
                 endOffset = segment.getEndOffset();
@@ -286,7 +288,7 @@ public final class SegmentedSequence extends BasedSequenceImpl {
 
     @Override
     public Range getSourceRange() {
-        return new Range(getStartOffset(), getEndOffset());
+        return Range.of(getStartOffset(), getEndOffset());
     }
 
     @Override

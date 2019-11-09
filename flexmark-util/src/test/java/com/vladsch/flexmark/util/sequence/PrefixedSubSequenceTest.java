@@ -6,7 +6,7 @@ import static junit.framework.TestCase.assertEquals;
 
 final public class PrefixedSubSequenceTest {
     private final BasedSequence sequence = BasedSequence.of("abcdefghi", 3, 6);
-    private final BasedSequence substring = PrefixedSubSequence.of("0123", sequence);
+    private final BasedSequence substring = PrefixedSubSequence.prefixOf("0123", sequence);
 
     @Test
     public void testLength() {

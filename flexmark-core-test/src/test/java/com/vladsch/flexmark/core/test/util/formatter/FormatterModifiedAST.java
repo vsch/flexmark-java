@@ -50,7 +50,7 @@ public class FormatterModifiedAST {
         Node document = PARSER.parse(input);
 
         Node html = document.getFirstChild().getNext();
-        html.setChars(PrefixedSubSequence.of("<img src=\"replaced.png\">\n", html.getChars(), 0, 0));
+        html.setChars(PrefixedSubSequence.prefixOf("<img src=\"replaced.png\">\n", html.getChars(), 0, 0));
 
         String formatted = RENDERER.render(document);
 
@@ -64,7 +64,7 @@ public class FormatterModifiedAST {
 
     public void visit(InlineLinkNode linkNode, final String replacemnt) {
         // This is called for all Text nodes. Override other visit methods for other node types.
-        linkNode.setUrlChars(PrefixedSubSequence.of(replacemnt, linkNode.getUrl(), 0, 0));
+        linkNode.setUrlChars(PrefixedSubSequence.prefixOf(replacemnt, linkNode.getUrl(), 0, 0));
         linkNode.setCharsFromSegments();
     }
 

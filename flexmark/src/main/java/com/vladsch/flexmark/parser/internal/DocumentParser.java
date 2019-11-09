@@ -840,7 +840,7 @@ public class DocumentParser implements ParserState {
                 sb.append(' ');
             }
             //sb.append(rest);
-            content = PrefixedSubSequence.of(sb.toString(), rest);
+            content = PrefixedSubSequence.prefixOf(sb.toString(), rest);
         }
 
         //getActiveBlockParser().addLine(content, content.baseSubSequence(lineEOL, lineEnd));

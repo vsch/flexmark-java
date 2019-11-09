@@ -112,22 +112,37 @@ public final class PrefixedSubSequence extends BasedSequenceImpl {
     }
 
     public static PrefixedSubSequence repeatOf(CharSequence prefix, int count, BasedSequence baseSeq) {
-        return of(RepeatedSequence.of(prefix, count).toString(), baseSeq, 0, baseSeq.length());
+        return prefixOf(RepeatedSequence.repeatOf(prefix, count).toString(), baseSeq, 0, baseSeq.length());
     }
 
     public static PrefixedSubSequence repeatOf(char prefix, int count, BasedSequence baseSeq) {
-        return of(RepeatedSequence.of(prefix, count), baseSeq, 0, baseSeq.length());
+        return prefixOf(RepeatedSequence.repeatOf(prefix, count), baseSeq, 0, baseSeq.length());
     }
 
-    public static PrefixedSubSequence of(CharSequence prefix, BasedSequence baseSeq) {
-        return of(prefix, baseSeq, 0, baseSeq.length());
+    public static PrefixedSubSequence prefixOf(CharSequence prefix, BasedSequence baseSeq) {
+        return prefixOf(prefix, baseSeq, 0, baseSeq.length());
     }
 
-    public static PrefixedSubSequence of(CharSequence prefix, BasedSequence baseSeq, int startIndex) {
-        return of(prefix, baseSeq, startIndex, baseSeq.length());
+    public static PrefixedSubSequence prefixOf(CharSequence prefix, BasedSequence baseSeq, int startIndex) {
+        return prefixOf(prefix, baseSeq, startIndex, baseSeq.length());
     }
 
-    public static PrefixedSubSequence of(CharSequence prefix, BasedSequence baseSeq, int startIndex, int endIndex) {
+    public static PrefixedSubSequence prefixOf(CharSequence prefix, BasedSequence baseSeq, int startIndex, int endIndex) {
         return new PrefixedSubSequence(prefix, baseSeq, startIndex, endIndex);
+    }
+
+    @Deprecated
+    public static PrefixedSubSequence of(CharSequence prefix, BasedSequence baseSeq) {
+        return prefixOf(prefix, baseSeq);
+    }
+
+    @Deprecated
+    public static PrefixedSubSequence of(CharSequence prefix, BasedSequence baseSeq, int startIndex) {
+        return prefixOf(prefix, baseSeq, startIndex);
+    }
+
+    @Deprecated
+    public static PrefixedSubSequence of(CharSequence prefix, BasedSequence baseSeq, int startIndex, int endIndex) {
+        return prefixOf(prefix, baseSeq, startIndex, endIndex);
     }
 }

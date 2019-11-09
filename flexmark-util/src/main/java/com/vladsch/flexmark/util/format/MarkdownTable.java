@@ -1179,7 +1179,7 @@ public class MarkdownTable {
             if (cell.trackedTextOffset > cell.text.length()) {
                 // add padding spaces
                 suffixed = cell.trackedTextOffset - cell.text.length() - 1;
-                text = text.append(RepeatedSequence.of(' ', suffixed));
+                text = text.append(RepeatedSequence.repeatOf(' ', suffixed));
             } else if (cell.trackedTextOffset < 0) {
                 neededPrefix = true;
             }

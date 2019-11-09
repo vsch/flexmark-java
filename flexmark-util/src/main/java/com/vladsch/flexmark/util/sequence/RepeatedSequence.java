@@ -73,15 +73,34 @@ public class RepeatedSequence implements CharSequence {
         return sb.toString();
     }
 
-    public static RepeatedSequence of(char c, int count) {
+    public static CharSequence ofSpaces(int count) {
+        return new RepeatedSequence(" ", 0, count);
+    }
+
+    public static CharSequence repeatOf(char c, int count) {
         return new RepeatedSequence(String.valueOf(c), 0, count);
     }
 
-    public static RepeatedSequence of(CharSequence chars, int count) {
+    public static CharSequence repeatOf(CharSequence chars, int count) {
         return new RepeatedSequence(chars, 0, chars.length() * count);
     }
 
-    public static RepeatedSequence of(CharSequence chars, int startIndex, int endIndex) {
+    public static CharSequence repeatOf(CharSequence chars, int startIndex, int endIndex) {
         return new RepeatedSequence(chars, startIndex, endIndex);
+    }
+
+    @Deprecated
+    public static CharSequence of(char c, int count) {
+        return repeatOf(c,count);
+    }
+
+    @Deprecated
+    public static CharSequence of(CharSequence chars, int count) {
+        return repeatOf(chars, count);
+    }
+
+    @Deprecated
+    public static CharSequence of(CharSequence chars, int startIndex, int endIndex) {
+        return repeatOf(chars, startIndex, endIndex);
     }
 }

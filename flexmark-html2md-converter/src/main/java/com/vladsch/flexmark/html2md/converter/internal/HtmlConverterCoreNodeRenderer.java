@@ -400,7 +400,7 @@ public class HtmlConverterCoreNodeRenderer implements PhasedHtmlNodeRenderer {
             CharSequence charSequence = element.ownText();
             BasedSequence text = BasedSequence.of(charSequence, 0, charSequence.length());
             int backTickCount = getMaxRepeatedChars(text, '`', 1);
-            CharSequence backTicks = RepeatedSequence.of("`", backTickCount);
+            CharSequence backTicks = RepeatedSequence.repeatOf("`", backTickCount);
             context.inlineCode(() -> context.processTextNodes(element, false, myHtmlConverterOptions.extInlineCode.isTextOnly() ? "" : backTicks));
         });
     }
@@ -495,7 +495,8 @@ public class HtmlConverterCoreNodeRenderer implements PhasedHtmlNodeRenderer {
             firstIsPara = true;
         }
 
-        CharSequence childPrefix = RepeatedSequence.of(" ", myHtmlConverterOptions.listContentIndent ? myHtmlConverterOptions.definitionMarkerSpaces + 1 : 4);
+        int count = myHtmlConverterOptions.listContentIndent ? myHtmlConverterOptions.definitionMarkerSpaces + 1 : 4;
+        CharSequence childPrefix = RepeatedSequence.repeatOf(" ", count);
 
         out.line().setOptions(options & ~LineFormattingAppendable.COLLAPSE_WHITESPACE);
         out.append(':').repeat(' ', myHtmlConverterOptions.definitionMarkerSpaces);
@@ -708,7 +709,8 @@ public class HtmlConverterCoreNodeRenderer implements PhasedHtmlNodeRenderer {
 
         listState.itemCount++;
         CharSequence itemPrefix = listState.getItemPrefix(this.myHtmlConverterOptions);
-        CharSequence childPrefix = RepeatedSequence.of(" ", myHtmlConverterOptions.listContentIndent ? itemPrefix.length() : 4);
+        int count = myHtmlConverterOptions.listContentIndent ? itemPrefix.length() : 4;
+        CharSequence childPrefix = RepeatedSequence.repeatOf(" ", count);
 
         out.line().append(itemPrefix);
         out.pushPrefix();
@@ -812,7 +814,8 @@ public class HtmlConverterCoreNodeRenderer implements PhasedHtmlNodeRenderer {
                     if (item != element && item.childNodeSize() > 0) {
                         if (hadListItem) {
                             CharSequence itemPrefix = listState.getItemPrefix(this.myHtmlConverterOptions);
-                            CharSequence childPrefix = RepeatedSequence.of(" ", myHtmlConverterOptions.listContentIndent ? itemPrefix.length() : 4);
+                            int count = myHtmlConverterOptions.listContentIndent ? itemPrefix.length() : 4;
+                            CharSequence childPrefix = RepeatedSequence.repeatOf(" ", count);
                             //out.line().append(itemPrefix);
                             out.pushPrefix();
                             out.addPrefix(childPrefix, true);
@@ -980,7 +983,7 @@ public class HtmlConverterCoreNodeRenderer implements PhasedHtmlNodeRenderer {
         //text = Escaping.unescapeHtml(text);
 
         int backTickCount = getMaxRepeatedChars(text, '`', 3);
-        CharSequence backTicks = RepeatedSequence.of("`", backTickCount);
+        CharSequence backTicks = RepeatedSequence.repeatOf("`", backTickCount);
 
         if (!myHtmlConverterOptions.skipFencedCode && (!className.isEmpty() || text.trim().isEmpty() || !hadCode)) {
             out.blankLine().append(backTicks);

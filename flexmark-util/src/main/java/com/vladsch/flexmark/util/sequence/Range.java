@@ -3,7 +3,7 @@ package com.vladsch.flexmark.util.sequence;
 import org.jetbrains.annotations.NotNull;
 
 public class Range {
-    public static final Range NULL = new Range(0, 0);
+    public static final Range NULL = Range.of(0, 0);
 
     public static Range of(int start, int end) {
         return new Range(start, end);
@@ -26,6 +26,13 @@ public class Range {
 
     public int getEndOffset() { return myEnd; }
 
+    /**
+     * Create range
+     * @param start  start
+     * @param end    end
+     * @deprecated  use {@link Range#of(int, int)}
+     */
+    @Deprecated
     public Range(int start, int end) {
         myStart = start;
         myEnd = end;
@@ -37,15 +44,15 @@ public class Range {
     }
 
     public Range withStart(int start) {
-        return start == myStart ? this : new Range(start, myEnd);
+        return start == myStart ? this : Range.of(start, myEnd);
     }
 
     public Range withEnd(int end) {
-        return end == myEnd ? this : new Range(myStart, end);
+        return end == myEnd ? this : Range.of(myStart, end);
     }
 
     public Range withRange(int start, int end) {
-        return start == myStart && end == myEnd ? this : new Range(start, end);
+        return start == myStart && end == myEnd ? this : Range.of(start, end);
     }
 
     /**
@@ -242,7 +249,7 @@ public class Range {
     }
 
     public Range include(int start, int end) {
-        return this.isNull() ? new Range(start, end) : expandToInclude(start, end);
+        return this.isNull() ? Range.of(start, end) : expandToInclude(start, end);
     }
 
     public Range expandToInclude(Range other) {

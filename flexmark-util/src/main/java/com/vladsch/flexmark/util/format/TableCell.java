@@ -83,7 +83,7 @@ public class TableCell {
         this.openMarker = BasedSequence.of(openMarker, 0, openMarker.length());
         this.closeMarker = BasedSequence.of(closeMarker, 0, closeMarker.length());
         BasedSequence useMarker = this.openMarker.isEmpty() ? this.closeMarker.subSequence(0, 0) : this.openMarker.subSequence(this.openMarker.length());
-        this.text = chars.isEmpty() && chars != BasedSequence.NULL ? PrefixedSubSequence.of(" ", useMarker) : chars;
+        this.text = chars.isEmpty() && chars != BasedSequence.NULL ? PrefixedSubSequence.prefixOf(" ", useMarker) : chars;
         this.rowSpan = rowSpan;
         this.columnSpan = columnSpan;
         this.alignment = alignment != null ? alignment : CellAlignment.NONE;
