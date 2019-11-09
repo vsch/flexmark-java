@@ -38,8 +38,28 @@ public interface BasedSequence extends IRichSequence<BasedSequence> {
     }
 
     @NotNull
+    static BasedSequence ofSpaces(int count) {
+        return of(RepeatedSequence.ofSpaces(count));
+    }
+
+    @NotNull
+    static BasedSequence repeatOf(char c, int count) {
+        return of(RepeatedSequence.repeatOf(String.valueOf(c), 0, count));
+    }
+
+    @NotNull
+    static BasedSequence repeatOf(@NotNull CharSequence chars, int count) {
+        return of(RepeatedSequence.repeatOf(chars, 0, chars.length() * count));
+    }
+
+    @NotNull
+    static BasedSequence repeatOf(@NotNull CharSequence chars, int startIndex, int endIndex) {
+        return of(RepeatedSequence.repeatOf(chars, startIndex, endIndex));
+    }
+
+    @NotNull
     static BasedSequenceBuilder builder(@NotNull BasedSequence sequence) {
-        return new BasedSequenceBuilder(sequence);
+        return sequence.getBuilder();
     }
 
     /**
@@ -351,6 +371,29 @@ public interface BasedSequence extends IRichSequence<BasedSequence> {
     @NotNull Range baseLineRangeAtEnd();
     int baseColumnAtEnd();
     int baseColumnAtStart();
+
+    /**
+     * Track given index in this sequence with respect to base offset
+     *
+     * @param index           offset within this sequence to track
+     *                        ie. between its start and end offsets
+     * @param trackerDirection direction of interest, specifically if this sequence is the
+     *                        result of typing the direction is {@link TrackerDirection#RIGHT},
+     *                        result of backspacing direction is {@link TrackerDirection#LEFT},
+     *                        otherwise it is {@link TrackerDirection#NONE}
+     * @return based sequence which tracks offset through editing modifications
+     */
+    @NotNull
+    BasedSequence trackIndex(int index, @NotNull TrackerDirection trackerDirection);
+
+    /**
+     * Get the tracked offset after editing and chopping manipulation of an offset tracking sequence
+     *
+     * @return best guess at the tracked index based on the contents of this sequence,
+     *     0 to length() or -1 if offset is
+     *     no longer part of this sequence
+     */
+    int getTrackedIndex();
 
     @NotNull
     default BasedSequence prefixWithIndent() {

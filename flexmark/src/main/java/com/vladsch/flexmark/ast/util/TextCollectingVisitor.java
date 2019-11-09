@@ -53,7 +53,7 @@ public class TextCollectingVisitor {
                 } else {
                     processChildren(node, processor);
                     if (myLineBreakNodes != null && myLineBreakNodes.contains(node.getClass()) && !node.isOrDescendantOfType(DoNotCollectText.class)) {
-                        out.append("\n");
+                        out.add("\n");
                     }
                 }
             }
@@ -76,7 +76,7 @@ public class TextCollectingVisitor {
 
     public BasedSequence[] collectAndGetSegments(Node node) {
         collect(node);
-        return out.toSegments();
+        return out.toArray();
     }
 
     public BasedSequence collectAndGetSequence(Node node) {
@@ -87,32 +87,32 @@ public class TextCollectingVisitor {
     private void visit(Paragraph node) {
         if (!node.isOrDescendantOfType(DoNotCollectText.class)) {
             if (!out.isEmpty()) {
-                out.append("\n\n");
+                out.add("\n\n");
             }
             myVisitor.visitChildren(node);
         }
     }
 
     private void visit(SoftLineBreak node) {
-        out.append(node.getChars());
+        out.add(node.getChars());
     }
 
     private void visit(HardLineBreak node) {
         BasedSequence chars = node.getChars();
-        out.append(chars.subSequence(chars.length() - 1, chars.length()));
+        out.add(chars.subSequence(chars.length() - 1, chars.length()));
     }
 
     private void visit(HtmlEntity node) {
-        out.append(node.getChars().unescape());
+        out.add(node.getChars().unescape());
     }
 
     private void visit(Text node) {
         if (!node.isOrDescendantOfType(DoNotCollectText.class)) {
-            out.append(node.getChars());
+            out.add(node.getChars());
         }
     }
 
     private void visit(TextBase node) {
-        out.append(node.getChars());
+        out.add(node.getChars());
     }
 }

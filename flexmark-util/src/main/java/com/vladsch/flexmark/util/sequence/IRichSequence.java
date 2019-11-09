@@ -1119,6 +1119,18 @@ public interface IRichSequence<T extends IRichSequence<T>> extends CharSequence,
     @NotNull T toUpperCase();
     @NotNull T toMapped(CharMapper mapper);
 
+    /**
+     * Map spaces to non break spaces
+     * @return mapped sequence with spc changed to NbSp
+     */
+    @NotNull T toNbSp();
+
+    /**
+     * Map non break spaces to spaces
+     * @return mapped sequence with NbSp changed to spc
+     */
+    @NotNull T toSpc();
+
     @NotNull String toVisibleWhitespaceString();
 
     int SPLIT_INCLUDE_DELIMS = 1;
@@ -1149,6 +1161,14 @@ public interface IRichSequence<T extends IRichSequence<T>> extends CharSequence,
     @NotNull T[] split(@NotNull CharSequence delimiter, int limit);
     @NotNull T[] split(@NotNull CharSequence delimiter, int limit, int flags);
     @NotNull T[] split(@NotNull CharSequence delimiter, int limit, int flags, @Nullable String trimChars);
+    @NotNull List<T> splitList(char delimiter, int limit, int flags, String trimChars);
+    @NotNull List<T> splitList(char delimiter);
+    @NotNull List<T> splitList(char delimiter, int limit);
+    @NotNull List<T> splitList(char delimiter, int limit, int flags);
+    @NotNull List<T> splitList(@NotNull CharSequence delimiter);
+    @NotNull List<T> splitList(@NotNull CharSequence delimiter, int limit);
+    @NotNull List<T> splitList(@NotNull CharSequence delimiter, int limit, int flags);
+    @NotNull List<T> splitList(@NotNull CharSequence delimiter, int limit, int flags, @Nullable String trimChars);
 
     /**
      * Get indices of all occurrences of a sequence
@@ -1188,6 +1208,20 @@ public interface IRichSequence<T extends IRichSequence<T>> extends CharSequence,
      */
     @NotNull T suffixOnceWith(@Nullable CharSequence suffix);
 
+    @NotNull T appendEOL();
+    @NotNull T suffixWithEOL();
+    @NotNull T prefixWithEOL();
+    @NotNull T prefixOnceWithEOL();
+    @NotNull T suffixOnceWithEOL();
+
+    @NotNull T appendSpace();
+    @NotNull T suffixWithSpace();
+    @NotNull T prefixWithSpace();
+    @NotNull T appendSpaces(int count);
+    @NotNull T suffixWithSpaces(int count);
+    @NotNull T prefixWithSpaces(int count);
+    @NotNull T prefixOnceWithSpace();
+    @NotNull T suffixOnceWithSpace();
     /**
      * Append helpers
      *

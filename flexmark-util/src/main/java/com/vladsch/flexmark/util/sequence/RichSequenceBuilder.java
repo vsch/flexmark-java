@@ -3,6 +3,7 @@ package com.vladsch.flexmark.util.sequence;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -26,15 +27,24 @@ public final class RichSequenceBuilder implements SequenceBuilder<RichSequenceBu
 
     @NotNull
     @Override
-    public RichSequenceBuilder append(@NotNull RichSequenceBuilder other) {
-        segments.append(other.segments);
+    public RichSequenceBuilder addAll(@NotNull RichSequenceBuilder builder) {
+        segments.append(builder.segments);
         return this;
     }
 
     @NotNull
     @Override
-    public RichSequenceBuilder append(@NotNull CharSequence s) {
-        segments.append(s);
+    public RichSequenceBuilder add(@NotNull CharSequence chars) {
+        segments.append(chars);
+        return this;
+    }
+
+    @NotNull
+    @Override
+    public RichSequenceBuilder addAll(@NotNull Collection<RichSequence> list) {
+        for (RichSequence chars : list) {
+            add(chars);
+        }
         return this;
     }
 

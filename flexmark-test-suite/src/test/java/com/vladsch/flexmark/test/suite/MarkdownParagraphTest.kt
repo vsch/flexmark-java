@@ -162,7 +162,7 @@ Duis aute in voluptate velit esse cillum dolore eu fugiat nulla pariatur."""
                             println(par.computeResultSequence())
                             println()
                         }
-                        if (i > 0) ensureAligned(par.alignment, par.computeResultSequence(), par.firstIndent, par.indent, i, par.isKeepHardBreaks)
+                        if (i > 0) ensureAligned(par.alignment, par.computeResultSequence(), par.firstIndent, par.indent, i, par.keepHardBreaks)
                     }
                 }
             }
@@ -187,7 +187,7 @@ Duis aute in voluptate velit esse cillum dolore eu fugiat nulla pariatur."""
                             println(par.computeResultSequence())
                             println()
                         }
-                        if (i > 0) ensureAligned(par.alignment, par.computeResultSequence(), par.firstIndent, par.indent, i, par.isKeepHardBreaks)
+                        if (i > 0) ensureAligned(par.alignment, par.computeResultSequence(), par.firstIndent, par.indent, i, par.keepHardBreaks)
                     }
                 }
             }
@@ -212,7 +212,7 @@ Duis aute in voluptate velit esse cillum dolore eu fugiat nulla pariatur."""
                             println(par.computeResultSequence())
                             println()
                         }
-                        if (i > 0) ensureAligned(par.alignment, par.computeResultSequence(), par.firstIndent, par.indent, i, par.isKeepHardBreaks)
+                        if (i > 0) ensureAligned(par.alignment, par.computeResultSequence(), par.firstIndent, par.indent, i, par.keepHardBreaks)
                     }
                 }
             }

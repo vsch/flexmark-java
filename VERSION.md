@@ -183,6 +183,8 @@ Next 0.59.42
 * [ ] Add: `Formatter` Paragraph wrapping.
 * Add: `MarkdownParagraph` to utils to wrap paragraph text.
   * [ ] Test: position marker preservation with direction type
+* Add: skeleton code for offset tracking through base sequence manipulations.
+  * [ ] Add: real code to handle offset tracking.
 * Break: `BasedSequence.append(CharSequence[])` now constructs as segmented sequence so proper
 ordering of segments is enforced. This means `IllegalArgumentException` will be thrown when this
   condition is not met. To get old functionality you need to create an appended string of all sequences and `BasedSequence.of()` on that string.

@@ -5,6 +5,7 @@ import com.vladsch.flexmark.util.collection.iteration.ArrayIterable;
 import com.vladsch.flexmark.util.html.Escaping;
 import com.vladsch.flexmark.util.mappers.ChangeCase;
 import com.vladsch.flexmark.util.mappers.CharMapper;
+import com.vladsch.flexmark.util.mappers.SpaceMapper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -1104,7 +1105,6 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
 
     @NotNull
     @Override
-    // TEST:
     public T trimToEndOfLine(@NotNull CharSequence eolChars, boolean includeEol, int index) {
         int eolPos = endOfDelimitedByAny(eolChars, index);
         if (eolPos < length()) {
@@ -1116,7 +1116,6 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
 
     @NotNull
     @Override
-    // TEST:
     public T trimToStartOfLine(@NotNull CharSequence eolChars, boolean includeEol, int index) {
         int eolPos = startOfDelimitedByAny(eolChars, index);
         if (eolPos > 0) {
@@ -1201,7 +1200,7 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
         } else if (index == length()) {
             return suffixWith(chars);
         } else {
-            return getBuilder().append(subSequence(0, index)).append(chars).append(subSequence(index)).toSequence();
+            return getBuilder().add(subSequence(0, index)).add(chars).add(subSequence(index)).toSequence();
         }
     }
 
@@ -1218,22 +1217,32 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
         } else if (endIndex == length()) {
             return subSequence(0, startIndex);
         } else {
-            return getBuilder().append(subSequence(0, startIndex)).append(subSequence(endIndex)).toSequence();
+            return getBuilder().add(subSequence(0, startIndex)).add(subSequence(endIndex)).toSequence();
         }
     }
 
     @NotNull
     @Override
-    // TEST:
     final public T toLowerCase() {
         return toMapped(ChangeCase.toLowerCase);
     }
 
     @NotNull
     @Override
-    // TEST:
     final public T toUpperCase() {
         return toMapped(ChangeCase.toUpperCase);
+    }
+
+    @NotNull
+    @Override
+    final public T toNbSp() {
+        return toMapped(SpaceMapper.toNonBreakSpace);
+    }
+
+    @NotNull
+    @Override
+    final public T toSpc() {
+        return toMapped(SpaceMapper.fromNonBreakSpace);
     }
 
     // @formatter:off
@@ -1336,6 +1345,14 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
     }
 
     // @formatter:off
+    @NotNull @Override final public List<T> splitList(char delimiter) {return splitList(String.valueOf(delimiter), 0, 0, WHITESPACE_CHARS);}
+    @NotNull @Override final public List<T> splitList(char delimiter, int limit) {return splitList(String.valueOf(delimiter), limit, 0, WHITESPACE_CHARS);}
+    @NotNull @Override final public List<T> splitList(char delimiter, int limit, int flags) {return splitList(String.valueOf(delimiter), limit, flags, WHITESPACE_CHARS);}
+    @NotNull @Override final public List<T> splitList(char delimiter, int limit, int flags, String trimChars) {return splitList(String.valueOf(delimiter), limit, flags, trimChars);}
+    @NotNull @Override final public List<T> splitList(@NotNull CharSequence delimiter) {return splitList(delimiter, 0, 0, WHITESPACE_CHARS);}
+    @NotNull @Override final public List<T> splitList(@NotNull CharSequence delimiter, int limit) {return splitList(delimiter, limit, 0, WHITESPACE_CHARS);}
+    @NotNull @Override final public List<T> splitList(@NotNull CharSequence delimiter, int limit, int flags) {return splitList(delimiter, limit, flags, WHITESPACE_CHARS);}
+
     @NotNull @Override final public T[] split(char delimiter) {return split(String.valueOf(delimiter), 0, 0, WHITESPACE_CHARS);}
     @NotNull @Override final public T[] split(char delimiter, int limit) {return split(String.valueOf(delimiter), limit, 0, WHITESPACE_CHARS);}
     @NotNull @Override final public T[] split(char delimiter, int limit, int flags) {return split(String.valueOf(delimiter), limit, flags, WHITESPACE_CHARS);}
@@ -1343,11 +1360,11 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
     @NotNull @Override final public T[] split(@NotNull CharSequence delimiter) {return split(delimiter, 0, 0, WHITESPACE_CHARS);}
     @NotNull @Override final public T[] split(@NotNull CharSequence delimiter, int limit) {return split(delimiter, limit, 0, WHITESPACE_CHARS);}
     @NotNull @Override final public T[] split(@NotNull CharSequence delimiter, int limit, int flags) {return split(delimiter, limit, flags, WHITESPACE_CHARS);}
+    @NotNull @Override final public T[] split(@NotNull CharSequence delimiter, int limit, int flags, @Nullable String trimChars) { return splitList(delimiter, limit, flags, trimChars).toArray(emptyArray());}
     // @formatter:on
 
     @NotNull
-    @Override
-    final public T[] split(@NotNull CharSequence delimiter, int limit, int flags, @Nullable String trimChars) {
+    final public List<T> splitList(@NotNull CharSequence delimiter, int limit, int flags, @Nullable String trimChars) {
         if (trimChars == null) trimChars = WHITESPACE_CHARS;
         if (limit < 1) limit = Integer.MAX_VALUE;
 
@@ -1389,7 +1406,7 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
                 items.add(item);
             }
         }
-        return items.toArray(emptyArray());
+        return items;
     }
 
     // @formatter:off
@@ -1466,17 +1483,34 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
         return truncateTo(indices, iMax);
     }
 
+    // @formatter:off
+    @Override @NotNull final public T appendEOL() { return suffixWith(EOL); }
+    @Override @NotNull final public T suffixWithEOL() { return suffixWith(EOL); }
+    @Override @NotNull final public T prefixWithEOL() { return prefixWith(EOL); }
+    @Override @NotNull final public T prefixOnceWithEOL() { return prefixOnceWith(EOL); }
+    @Override @NotNull final public T suffixOnceWithEOL() { return suffixOnceWith(EOL); }
+
+    @Override @NotNull final public T appendSpace() { return suffixWith(SPACE); }
+    @Override @NotNull final public T suffixWithSpace() { return suffixWith(SPACE); }
+    @Override @NotNull final public T prefixWithSpace() { return prefixWith(SPACE); }
+    @Override @NotNull final public T appendSpaces(int count) { return suffixWith(RepeatedSequence.ofSpaces(count)); }
+    @Override @NotNull final public T suffixWithSpaces(int count) { return suffixWith(RepeatedSequence.ofSpaces(count)); }
+    @Override @NotNull final public T prefixWithSpaces(int count) { return prefixWith(RepeatedSequence.ofSpaces(count)); }
+    @Override @NotNull final public T prefixOnceWithSpace() { return prefixOnceWith(SPACE); }
+    @Override @NotNull final public T suffixOnceWithSpace() { return suffixOnceWith(SPACE); }
+    // @formatter:on
+
     @NotNull
     @Override
     public T prefixWith(@Nullable CharSequence prefix) {
-        return prefix == null || prefix.length() == 0 ? (T) this : getBuilder().append(prefix).append(this).toSequence();
+        return prefix == null || prefix.length() == 0 ? (T) this : getBuilder().add(prefix).add(this).toSequence();
     }
 
     @NotNull
     @Override
     public T suffixWith(@Nullable CharSequence suffix) {
         // convoluted to allow BasedCharSequence to use PrefixedCharSequence so all fits into SegmentedCharSequence
-        return suffix == null || suffix.length() == 0 ? (T) this : getBuilder().append(this).append(suffix).toSequence();
+        return suffix == null || suffix.length() == 0 ? (T) this : getBuilder().add(this).add(suffix).toSequence();
     }
 
     @NotNull
@@ -1499,7 +1533,7 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
         endIndex = Math.min(endIndex, length);
 
         SequenceBuilder<?, T> segments = getBuilder();
-        return segments.append(subSequence(0, startIndex)).append(replacement).append(subSequence(endIndex)).toSequence();
+        return segments.add(subSequence(0, startIndex)).add(replacement).add(subSequence(endIndex)).toSequence();
     }
 
     @NotNull
@@ -1516,13 +1550,13 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
         int lastPos = 0;
         while (i < iMax) {
             int pos = indices[i++];
-            if (lastPos < pos) segments.append(subSequence(lastPos, pos));
+            if (lastPos < pos) segments.add(subSequence(lastPos, pos));
             lastPos = pos + find.length();
-            segments.append(replace);
+            segments.add(replace);
         }
 
         if (lastPos < length) {
-            segments.append(subSequence(lastPos, length));
+            segments.add(subSequence(lastPos, length));
         }
 
         return segments.toSequence();
@@ -1538,9 +1572,9 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
     @Override
     final public T append(Iterable<? extends CharSequence> sequences) {
         SequenceBuilder<?, T> segments = getBuilder();
-        segments.append(this);
+        segments.add(this);
         for (CharSequence sequence : sequences) {
-            segments.append(sequence);
+            segments.add(sequence);
         }
         return segments.toSequence();
     }
@@ -1556,7 +1590,7 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
     final public T extractRanges(Iterable<Range> ranges) {
         SequenceBuilder<?, T> segments = getBuilder();
         for (Range range : ranges) {
-            if (!(range == null || range.isNull())) segments.append(range.safeSubSequence(this));
+            if (!(range == null || range.isNull())) segments.add(range.safeSubSequence(this));
         }
         return segments.toSequence();
     }

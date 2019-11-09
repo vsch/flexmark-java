@@ -2,11 +2,18 @@ package com.vladsch.flexmark.util.sequence;
 
 import org.jetbrains.annotations.NotNull;
 
-public interface SequenceBuilder<T extends SequenceBuilder<T,S>, S extends IRichSequence<S>> {
+import java.util.Collection;
+
+public interface SequenceBuilder<T extends SequenceBuilder<T, S>, S extends IRichSequence<S>> {
     @NotNull T subContext();
-    @NotNull T append(@NotNull T other);
-    @NotNull T append(@NotNull CharSequence s);
+    @NotNull T addAll(@NotNull T builder);
+    @NotNull T addAll(@NotNull Collection<S> list);
+    @NotNull T add(@NotNull CharSequence chars);
     @NotNull S toSequence();
     int length();
     boolean isEmpty();
+
+    default boolean isNotEmpty() {
+        return !isEmpty();
+    }
 }

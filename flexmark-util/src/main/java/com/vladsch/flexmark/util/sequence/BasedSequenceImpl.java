@@ -355,6 +355,17 @@ public abstract class BasedSequenceImpl extends IRichSequenceBase<BasedSequence>
     @Override public @NotNull Pair<Integer, Integer> baseLineColumnAtStart() {return baseLineColumnAtIndex(getStartOffset());}
     // @formatter:on
 
+    @Override
+    public @NotNull BasedSequence trackIndex(int index, @NotNull TrackerDirection trackerDirection) {
+        return TrackedBasedSequence.trackOffset(this, index, trackerDirection);
+    }
+
+    @Override
+    public int getTrackedIndex() {
+        // if we are here then there is no tracking information
+        return -1;
+    }
+
     static BasedSequence create(CharSequence charSequence, int startIndex, int endIndex) {
         if (charSequence instanceof BasedSequence) return ((BasedSequence) charSequence).subSequence(startIndex, endIndex);
         else if (charSequence instanceof String) return CharSubSequence.of(charSequence).subSequence(startIndex, endIndex);
@@ -362,7 +373,7 @@ public abstract class BasedSequenceImpl extends IRichSequenceBase<BasedSequence>
     }
 
     /**
-     * @deprecated  use {@link BasedSequence#of} instead
+     * @deprecated use {@link BasedSequence#of} instead
      */
     @Deprecated
     public static BasedSequence of(CharSequence charSequence) {
@@ -370,7 +381,7 @@ public abstract class BasedSequenceImpl extends IRichSequenceBase<BasedSequence>
     }
 
     /**
-     * @deprecated  use {@link BasedSequence#of} instead
+     * @deprecated use {@link BasedSequence#of} instead
      */
     @Deprecated
     public static BasedSequence of(CharSequence charSequence, int startIndex) {
@@ -378,7 +389,7 @@ public abstract class BasedSequenceImpl extends IRichSequenceBase<BasedSequence>
     }
 
     /**
-     * @deprecated  use {@link BasedSequence#of} instead
+     * @deprecated use {@link BasedSequence#of} instead
      */
     @Deprecated
     public static BasedSequence of(CharSequence charSequence, int startIndex, int endIndex) {

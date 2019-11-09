@@ -47,7 +47,7 @@ public final class PrefixedSubSequence extends BasedSequenceImpl implements Repl
 
     private PrefixedSubSequence(CharSequence prefix, BasedSequence baseSeq, int startIndex, int endIndex) {
         this.prefix = prefix;
-        this.base = BasedSequence.of(baseSeq, startIndex, endIndex);
+        this.base = baseSeq.subSequence(startIndex, endIndex);
     }
 
     @Override

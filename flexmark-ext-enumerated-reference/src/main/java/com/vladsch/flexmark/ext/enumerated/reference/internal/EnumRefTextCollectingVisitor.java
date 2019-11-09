@@ -19,7 +19,7 @@ public class EnumRefTextCollectingVisitor {
     }
 
     public EnumRefTextCollectingVisitor(int ordinal) {
-        ordinalRunnable = ordinal < 0 ? null : () -> out.append(String.valueOf(ordinal));
+        ordinalRunnable = ordinal < 0 ? null : () -> out.add(String.valueOf(ordinal));
 
         visitor = new NodeVisitor(
                 new VisitHandler<>(Text.class, this::visit),
@@ -70,16 +70,16 @@ public class EnumRefTextCollectingVisitor {
             if (referenceFormat != null) {
                 renderer.ordinalRunnable = () -> {
                     if (compoundRunnable != null) compoundRunnable.run();
-                    renderer.out.append(String.valueOf(referenceOrdinal));
-                    if (needSeparator) renderer.out.append(".");
+                    renderer.out.add(String.valueOf(referenceOrdinal));
+                    if (needSeparator) renderer.out.add(".");
                 };
 
                 renderer.visitor.visitChildren(referenceFormat);
             } else {
-                renderer.out.append(defaultText + " ");
+                renderer.out.add(defaultText + " ");
                 if (compoundRunnable != null) compoundRunnable.run();
-                renderer.out.append(String.valueOf(referenceOrdinal));
-                if (needSeparator) renderer.out.append(".");
+                renderer.out.add(String.valueOf(referenceOrdinal));
+                if (needSeparator) renderer.out.add(".");
             }
         }
 
@@ -96,7 +96,7 @@ public class EnumRefTextCollectingVisitor {
 
     public BasedSequence[] collectAndGetSegments(BasedSequence basedSequence, EnumeratedReferenceRendering[] renderings, String defaultFormat) {
         collect(basedSequence, renderings, defaultFormat);
-        return out.toSegments();
+        return out.toArray();
     }
 
     public BasedSequence collectAndGetSequence(BasedSequence basedSequence, EnumeratedReferenceRendering[] renderings, String defaultFormat) {
@@ -123,25 +123,25 @@ public class EnumRefTextCollectingVisitor {
     }
 
     private void visit(SoftLineBreak node) {
-        out.append(node.getChars());
+        out.add(node.getChars());
     }
 
     private void visit(HardLineBreak node) {
         BasedSequence chars = node.getChars();
-        out.append(chars.subSequence(chars.length() - 1, chars.length()));
+        out.add(chars.subSequence(chars.length() - 1, chars.length()));
     }
 
     private void visit(HtmlEntity node) {
-        out.append(node.getChars().unescape());
+        out.add(node.getChars().unescape());
     }
 
     private void visit(Text node) {
         if (!node.isOrDescendantOfType(DoNotCollectText.class)) {
-            out.append(node.getChars());
+            out.add(node.getChars());
         }
     }
 
     private void visit(TextBase node) {
-        out.append(node.getChars());
+        out.add(node.getChars());
     }
 }

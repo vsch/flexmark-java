@@ -22,7 +22,7 @@ public class MarkdownParagraph {
     private @NotNull TextAlignment myAlignment = TextAlignment.LEFT;
     private boolean myKeepHardBreaks = true;
     private boolean myKeepLineBreaks = false;
-    private @NotNull MarkerDirection myMarkerDirection = MarkerDirection.NONE;
+    private @NotNull TrackerDirection myTrackerDirection = TrackerDirection.NONE;
     private int myMarkerOffset = -1;
 
     public MarkdownParagraph(CharSequence replacedChars) {
@@ -39,12 +39,12 @@ public class MarkdownParagraph {
     }
 
     @NotNull
-    public MarkerDirection getMarkerDirection() {
-        return myMarkerDirection;
+    public TrackerDirection getTrackerDirection() {
+        return myTrackerDirection;
     }
 
-    public void setMarkerDirection(@NotNull MarkerDirection markerDirection) {
-        myMarkerDirection = markerDirection;
+    public void setTrackerDirection(@NotNull TrackerDirection trackerDirection) {
+        myTrackerDirection = trackerDirection;
     }
 
     public int getMarkerOffset() {
@@ -105,7 +105,7 @@ public class MarkdownParagraph {
         myAlignment = alignment;
     }
 
-    public boolean isKeepHardBreaks() {
+    public boolean getKeepHardBreaks() {
         return myKeepHardBreaks;
     }
 
@@ -113,7 +113,7 @@ public class MarkdownParagraph {
         myKeepHardBreaks = keepHardBreaks;
     }
 
-    public boolean isKeepLineBreaks() {
+    public boolean getKeepLineBreaks() {
         return myKeepLineBreaks;
     }
 
@@ -234,9 +234,9 @@ public class MarkdownParagraph {
             addLine(result, chars, lineWords, wordsOnLine[0], lineCount[0], (lineWidth[0] - pos[0] - lineIndent[0]) / spaceWidth, lastLine);
 
             if (spaceToken != null) {
-                result.append(spaceToken.subSequence(chars)).append(breakChars);
+                result.add(spaceToken.subSequence(chars)).add(breakChars);
             } else {
-                result.append(breakChars);
+                result.add(breakChars);
             }
 
             lineWords.clear();
@@ -346,7 +346,7 @@ public class MarkdownParagraph {
                 break;
         }
 
-        if (leadSpaces > 0) result.append(RepeatedSequence.repeatOf(' ', leadSpaces));
+        if (leadSpaces > 0) result.add(RepeatedSequence.repeatOf(' ', leadSpaces));
 
         boolean firstWord = true;
         Token lastSpace = null;
@@ -357,26 +357,20 @@ public class MarkdownParagraph {
                 else if (lastSpace == null) {
                     int spcSize = (remSpaces > 0) ? 1 : 0;
                     int spcCount = addSpaces + 1 + spcSize;
-                    result.append(RepeatedSequence.repeatOf(' ', spcCount));
+                    result.add(RepeatedSequence.repeatOf(' ', spcCount));
                     remSpaces -= spcSize;
                 } else {
                     int spcSize = (remSpaces > 0) ? 1 : 0;
                     int spcCount = addSpaces + 1 + spcSize;
-                    replaceSpaces(result, lastSpace.subSequence(charSequence), spcCount, myMarkerDirection, myMarkerOffset);
+                    replaceSpaces(result, lastSpace.subSequence(charSequence), spcCount, myTrackerDirection, myMarkerOffset);
                     remSpaces -= spcSize;
                 }
-                result.append(word.subSequence(charSequence));
+                result.add(word.subSequence(charSequence));
                 lastSpace = null;
             } else {
                 lastSpace = word;
             }
         }
-    }
-
-    public enum MarkerDirection {
-        NONE,  // not moving, pad around it
-        LEFT,  // left leaning, ie. was moving left so pad after it
-        RIGHT; // right leaning, ie. was moving right so pad before it
     }
 
     @NotNull
@@ -401,24 +395,24 @@ public class MarkdownParagraph {
      * @param chars sequence of spaces
      * @param count number of desired spaces
      */
-    public void replaceSpaces(@NotNull BasedSequenceBuilder result, @NotNull BasedSequence chars, int count, @NotNull MarkerDirection markerDirection, int markerIndex) {
+    public void replaceSpaces(@NotNull BasedSequenceBuilder result, @NotNull BasedSequence chars, int count, @NotNull TrackerDirection trackerDirection, int markerIndex) {
         assert count >= 0;
 
         if (chars.length() == 0) {
-            result.append(RepeatedSequence.ofSpaces(count));
+            result.add(RepeatedSequence.ofSpaces(count));
             return;
         }
 
         int spaces = 0;
         int iMax = chars.length();
-        MarkerDirection direction = null;
+        TrackerDirection direction = null;
         int markerPosition = -1;
 
         for (int i = 0; i < iMax; i++) {
             char c = chars.charAt(i);
             if (c == ' ') spaces++;
             else if (chars.getStartOffset() + i == markerIndex) {
-                direction = markerDirection;
+                direction = trackerDirection;
                 markerPosition = i;
             } else {
                 throw new IllegalStateException("Not space or marker " + c);
@@ -426,23 +420,23 @@ public class MarkdownParagraph {
         }
 
         if (spaces == count) {
-            result.append(chars);
+            result.add(chars);
         } else if (chars.length() == 0) {
-            result.append(PrefixedSubSequence.prefixOf(RepeatedSequence.ofSpaces(count), chars));
+            result.add(PrefixedSubSequence.prefixOf(RepeatedSequence.ofSpaces(count), chars));
         } else if (markerPosition == -1) {
             // no marker
             if (spaces < count) {
                 // divide existing spaces in two parts and add padding in the middle
                 int leftSpaces = spaces >> 1;
-                result.append(chars.subSequence(0, leftSpaces));
-                result.append(RepeatedSequence.ofSpaces(count - spaces));
-                result.append(chars.subSequence(leftSpaces));
+                result.add(chars.subSequence(0, leftSpaces));
+                result.add(RepeatedSequence.ofSpaces(count - spaces));
+                result.add(chars.subSequence(leftSpaces));
             } else {
                 // divide kept spaces in two parts, keeping first and last spaces, leaving out the middle
                 int leftSpaces = count >> 1;
                 int rightSpaces = count - leftSpaces;
-                result.append(chars.subSequence(0, leftSpaces));
-                result.append(chars.endSequence(rightSpaces));
+                result.add(chars.subSequence(0, leftSpaces));
+                result.add(chars.endSequence(rightSpaces));
             }
         } else {
             // more convoluted:
@@ -465,9 +459,9 @@ public class MarkdownParagraph {
                         break;
                 }
 
-                result.append(chars.subSequence(0, leftSpaces));
-                result.append(RepeatedSequence.ofSpaces(count - spaces));
-                result.append(chars.subSequence(leftSpaces));
+                result.add(chars.subSequence(0, leftSpaces));
+                result.add(RepeatedSequence.ofSpaces(count - spaces));
+                result.add(chars.subSequence(leftSpaces));
             } else {
                 int leftStart;
                 int leftEnd;
@@ -504,8 +498,8 @@ public class MarkdownParagraph {
                         break;
                 }
 
-                result.append(chars.subSequence(leftStart, leftEnd));
-                result.append(chars.subSequence(rightStart, rightEnd));
+                result.add(chars.subSequence(leftStart, leftEnd));
+                result.add(chars.subSequence(rightStart, rightEnd));
             }
         }
     }
