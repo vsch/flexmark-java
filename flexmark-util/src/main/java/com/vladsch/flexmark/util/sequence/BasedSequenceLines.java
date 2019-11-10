@@ -180,12 +180,12 @@ public class BasedSequenceLines implements List<CharSequence> {
     }
 
     @NotNull
-    public List<BasedSequence> getLines() {
+    public ArrayList<BasedSequence> getLines() {
         return toLines(DiscretionaryText.AS_IS);
     }
 
     @NotNull
-    public List<BasedSequence> toLines(DiscretionaryText lastLineEOL) {
+    public ArrayList<BasedSequence> toLines(DiscretionaryText lastLineEOL) {
         updateSegments(segments);
         return adjustLastLineEOL(new ArrayList<>(segments), lastLineEOL);
     }
