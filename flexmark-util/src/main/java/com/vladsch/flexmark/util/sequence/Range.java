@@ -137,6 +137,8 @@ public class Range {
 
     public boolean isEmpty() { return myStart >= myEnd; }
 
+    public boolean isNotEmpty() { return myStart < myEnd; }
+
     public boolean isContainedBy(int start, int end) { return end >= myEnd && start <= myStart; }
 
     public boolean isProperlyContainedBy(int start, int end) { return end > myEnd && start < myStart; }
