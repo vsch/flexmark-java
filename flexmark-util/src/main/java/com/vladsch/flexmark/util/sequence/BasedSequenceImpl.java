@@ -378,7 +378,7 @@ public abstract class BasedSequenceImpl extends IRichSequenceBase<BasedSequence>
         return -1;
     }
 
-    static BasedSequence create(CharSequence charSequence, int startIndex, int endIndex) {
+    static BasedSequence create(@Nullable CharSequence charSequence, int startIndex, int endIndex) {
         if (charSequence instanceof BasedSequence) return ((BasedSequence) charSequence).subSequence(startIndex, endIndex);
         else if (charSequence instanceof String) return CharSubSequence.of(charSequence).subSequence(startIndex, endIndex);
         else return SubSequence.create(charSequence, startIndex, endIndex);
@@ -388,23 +388,23 @@ public abstract class BasedSequenceImpl extends IRichSequenceBase<BasedSequence>
      * @deprecated use {@link BasedSequence#of} instead
      */
     @Deprecated
-    public static BasedSequence of(CharSequence charSequence) {
-        return BasedSequence.of(charSequence, 0, charSequence.length());
+    public static BasedSequence of(@Nullable CharSequence charSequence) {
+        return BasedSequence.of(charSequence);
     }
 
     /**
      * @deprecated use {@link BasedSequence#of} instead
      */
     @Deprecated
-    public static BasedSequence of(CharSequence charSequence, int startIndex) {
-        return BasedSequence.of(charSequence, startIndex, charSequence.length());
+    public static BasedSequence of(@Nullable CharSequence charSequence, int startIndex) {
+        return BasedSequence.of(charSequence, startIndex);
     }
 
     /**
      * @deprecated use {@link BasedSequence#of} instead
      */
     @Deprecated
-    public static BasedSequence of(CharSequence charSequence, int startIndex, int endIndex) {
+    public static BasedSequence of(@Nullable CharSequence charSequence, int startIndex, int endIndex) {
         return BasedSequence.of(charSequence, startIndex, endIndex);
     }
 }

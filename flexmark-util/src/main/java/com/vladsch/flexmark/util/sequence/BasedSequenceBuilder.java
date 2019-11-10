@@ -9,6 +9,11 @@ import java.util.List;
 
 /**
  * A Builder for Segmented BasedSequences
+ *
+ * FIX: when adding non-based sequences before any based sequences are added, need to keep
+ *   them pending until a based sequence is added to make them prefixes of that sequence
+ *   can also concatenate non-based sequences together. This would eliminate the need to
+ *   make add non-based sequence as prefixed sequence
  */
 public class BasedSequenceBuilder implements SequenceBuilder<BasedSequenceBuilder, BasedSequence> {
     private final ArrayList<BasedSequence> segments;

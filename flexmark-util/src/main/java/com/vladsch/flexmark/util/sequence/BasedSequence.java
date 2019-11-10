@@ -2,6 +2,7 @@ package com.vladsch.flexmark.util.sequence;
 
 import com.vladsch.flexmark.util.Pair;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,17 +24,17 @@ public interface BasedSequence extends IRichSequence<BasedSequence> {
     BasedSequence LINE_SEP = CharSubSequence.of(IRichSequence.LINE_SEP);
 
     @NotNull
-    static BasedSequence of(@NotNull CharSequence charSequence) {
-        return BasedSequenceImpl.create(charSequence, 0, charSequence.length());
+    static BasedSequence of(@Nullable CharSequence charSequence) {
+        return BasedSequenceImpl.create(charSequence, 0, charSequence == null ? 0 : charSequence.length());
     }
 
     @NotNull
-    static BasedSequence of(@NotNull CharSequence charSequence, int startIndex) {
-        return BasedSequenceImpl.create(charSequence, startIndex, charSequence.length());
+    static BasedSequence of(@Nullable CharSequence charSequence, int startIndex) {
+        return BasedSequenceImpl.create(charSequence, startIndex, charSequence == null ? startIndex: charSequence.length());
     }
 
     @NotNull
-    static BasedSequence of(@NotNull CharSequence charSequence, int startIndex, int endIndex) {
+    static BasedSequence of(@Nullable CharSequence charSequence, int startIndex, int endIndex) {
         return BasedSequenceImpl.create(charSequence, startIndex, endIndex);
     }
 
@@ -55,11 +56,6 @@ public interface BasedSequence extends IRichSequence<BasedSequence> {
     @NotNull
     static BasedSequence repeatOf(@NotNull CharSequence chars, int startIndex, int endIndex) {
         return of(RepeatedSequence.repeatOf(chars, startIndex, endIndex));
-    }
-
-    @NotNull
-    static BasedSequenceBuilder builder(@NotNull BasedSequence sequence) {
-        return sequence.getBuilder();
     }
 
     /**

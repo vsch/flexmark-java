@@ -1,6 +1,7 @@
 package com.vladsch.flexmark.util.sequence;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * A BasedSequence implementation which wraps original CharSequence to provide a BasedSequence for
@@ -112,7 +113,7 @@ public final class SubSequence extends BasedSequenceImpl {
         return toString().hashCode();
     }
 
-    static BasedSequence create(CharSequence charSequence, int startIndex, int endIndex) {
+    static BasedSequence create(@Nullable CharSequence charSequence, int startIndex, int endIndex) {
         if (charSequence instanceof BasedSequence) return ((BasedSequence) charSequence).subSequence(startIndex, endIndex);
         else return charSequence == null ? BasedSequence.NULL : new SubSequence(charSequence).subSequence(startIndex, endIndex);
     }
@@ -126,7 +127,7 @@ public final class SubSequence extends BasedSequenceImpl {
     }
 
     /**
-     * @deprecated  use {@link IRichSequence#of} instead
+     * @deprecated  use {@link BasedSequence#of} instead
      */
     @Deprecated
     public static BasedSequence of(CharSequence charSequence, int startIndex) {
@@ -134,7 +135,7 @@ public final class SubSequence extends BasedSequenceImpl {
     }
 
     /**
-     * @deprecated  use {@link IRichSequence#of} instead
+     * @deprecated  use {@link BasedSequence#of} instead
      */
     @Deprecated
     public static BasedSequence of(CharSequence charSequence, int startIndex, int endIndex) {
