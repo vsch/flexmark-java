@@ -1,9 +1,6 @@
 package com.vladsch.flexmark.util.mappers;
 
-import com.sun.xml.internal.bind.v2.model.core.ID;
-
 import java.util.Objects;
-import java.util.function.IntUnaryOperator;
 
 public interface CharMapper {
     CharMapper IDENTITY = t -> t;
@@ -11,8 +8,8 @@ public interface CharMapper {
     /**
      * Map characters
      *
-     * @param codePoint      code point
-     * @return       mapped character
+     * @param codePoint code point
+     * @return mapped character
      */
     char map(char codePoint);
 
@@ -24,9 +21,8 @@ public interface CharMapper {
      *
      * @param before the operator to apply before this operator is applied
      * @return a composed operator that first applies the {@code before}
-     * operator and then applies this operator
+     *         operator and then applies this operator
      * @throws NullPointerException if before is null
-     *
      * @see #andThen(CharMapper)
      */
     default CharMapper compose(CharMapper before) {
@@ -42,9 +38,8 @@ public interface CharMapper {
      *
      * @param after the operator to apply after this operator is applied
      * @return a composed operator that first applies this operator and then
-     * applies the {@code after} operator
+     *         applies the {@code after} operator
      * @throws NullPointerException if after is null
-     *
      * @see #compose(CharMapper)
      */
     default CharMapper andThen(CharMapper after) {
@@ -60,5 +55,4 @@ public interface CharMapper {
     static CharMapper identity() {
         return IDENTITY;
     }
-
 }
