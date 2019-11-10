@@ -254,6 +254,11 @@ public abstract class BasedSequenceImpl extends IRichSequenceBase<BasedSequence>
     }
 
     @NotNull
+    final public BasedSequence prefixWithIndent() {
+        return prefixWithIndent(Integer.MAX_VALUE);
+    }
+
+    @NotNull
     @Override
     public BasedSequence prefixWithIndent(int maxColumns) {
         int offset = getStartOffset();
@@ -334,6 +339,7 @@ public abstract class BasedSequenceImpl extends IRichSequenceBase<BasedSequence>
     }
 
     // @formatter:off
+    // TEST: all these need tests
     @Override public @NotNull Range baseLineRangeAtIndex(int index) { return getBaseSequence().lineRangeAt(index); }
     @Override public @NotNull Pair<Integer, Integer> baseLineColumnAtIndex(int index) { return getBaseSequence().lineColumnAtIndex(index);}
     @Override public int baseEndOfLine(int index) { return getBaseSequence().endOfLine(index); }
@@ -357,11 +363,17 @@ public abstract class BasedSequenceImpl extends IRichSequenceBase<BasedSequence>
 
     @Override
     public @NotNull BasedSequence trackIndex(int index, @NotNull TrackerDirection trackerDirection) {
-        return TrackedBasedSequence.trackOffset(this, index, trackerDirection);
+        return BasedTrackedSequence.trackOffset(this, index, trackerDirection);
     }
 
     @Override
     public int getTrackedIndex() {
+        // if we are here then there is no tracking information
+        return -1;
+    }
+
+    @Override
+    public int getTrackedOffset(int startOffset, int maxOffset) {
         // if we are here then there is no tracking information
         return -1;
     }

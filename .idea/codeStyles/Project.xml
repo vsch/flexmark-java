@@ -105,7 +105,6 @@
       <option name="FIELD_ANNOTATION_WRAP" value="1" />
       <option name="WRAP_ON_TYPING" value="0" />
       <indentOptions>
-        <option name="CONTINUATION_INDENT_SIZE" value="4" />
         <option name="LABEL_INDENT_ABSOLUTE" value="true" />
       </indentOptions>
       <arrangement>

@@ -2,9 +2,7 @@ package com.vladsch.flexmark.util.sequence;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 /**
  * A Builder for Segmented BasedSequences
@@ -27,7 +25,7 @@ public final class RichSequenceBuilder implements SequenceBuilder<RichSequenceBu
 
     @NotNull
     @Override
-    public RichSequenceBuilder addAll(@NotNull RichSequenceBuilder builder) {
+    public RichSequenceBuilder addFrom(@NotNull RichSequenceBuilder builder) {
         segments.append(builder.segments);
         return this;
     }

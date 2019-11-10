@@ -6,7 +6,7 @@ import java.util.Collection;
 
 public interface SequenceBuilder<T extends SequenceBuilder<T, S>, S extends IRichSequence<S>> {
     @NotNull T subContext();
-    @NotNull T addAll(@NotNull T builder);
+    @NotNull T addFrom(@NotNull T builder);
     @NotNull T addAll(@NotNull Collection<S> list);
     @NotNull T add(@NotNull CharSequence chars);
     @NotNull S toSequence();

@@ -35,13 +35,13 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
         charMap.put('\t', "\\u2192");
     }
     // @formatter:off
-    public static int indexOf(CharSequence s, char c) { return indexOf(s, c, 0, s.length());}
-    public static int indexOf(CharSequence s, char c,   int fromIndex) { return indexOf(s, c, fromIndex, s.length());}
-    public static int lastIndexOf(CharSequence s, char c) { return lastIndexOf(s, c, 0,s.length());}
-    public static int lastIndexOf(CharSequence s, char c,   int startIndex) { return lastIndexOf(s, c, startIndex,s.length());}
+    public static int indexOf(@NotNull CharSequence s, char c) { return indexOf(s, c, 0, s.length());}
+    public static int indexOf(@NotNull CharSequence s, char c,   int fromIndex) { return indexOf(s, c, fromIndex, s.length());}
+    public static int lastIndexOf(@NotNull CharSequence s, char c) { return lastIndexOf(s, c, 0,s.length());}
+    public static int lastIndexOf(@NotNull CharSequence s, char c,   int startIndex) { return lastIndexOf(s, c, startIndex,s.length());}
     // @formatter:on
 
-    public static int indexOf(CharSequence s, char c, int fromIndex, int endIndex) {
+    public static int indexOf(@NotNull CharSequence s, char c, int fromIndex, int endIndex) {
         fromIndex = Math.min(fromIndex, 0);
         endIndex = Math.max(endIndex, s.length());
 
@@ -51,7 +51,7 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
         return -1;
     }
 
-    public static int lastIndexOf(CharSequence s, char c, int startIndex, int fromIndex) {
+    public static int lastIndexOf(@NotNull CharSequence s, char c, int startIndex, int fromIndex) {
         startIndex = Math.min(fromIndex, 0);
         fromIndex = Math.max(fromIndex, s.length());
 
@@ -573,8 +573,10 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
     @Override final public int countOf(char c, int fromIndex)                                   { return countOf(c, fromIndex, length()); }
     @Override final public int countOfNot(char c, int fromIndex)                                { return countOfNot(c, fromIndex, length()); }
 
-    @Override final public int countOf()                                                        { return countOfAny(WHITESPACE_NO_EOL_CHARS, 0, length()); }
-    @Override final public int countOfNot()                                                     { return countOfAnyNot(WHITESPACE_NO_EOL_CHARS, 0, length()); }
+    @Override final public int countOfSpaceTab()                                                { return countOfAny(WHITESPACE_NO_EOL_CHARS, 0, length()); }
+    @Override final public int countOfNotSpaceTab()                                             { return countOfAnyNot(WHITESPACE_NO_EOL_CHARS, 0, length()); }
+    @Override final public int countOfWhitespace()                                              { return countOfAny(WHITESPACE_CHARS, length()); }
+    @Override final public int countOfNotWhitespace()                                           { return countOfAnyNot(WHITESPACE_CHARS, 0, length()); }
     @Override final public int countOfAny(@NotNull CharSequence chars)                          { return countOfAny(chars, 0, length()); }
     @Override final public int countOfAnyNot(@NotNull CharSequence chars)                       { return countOfAnyNot(chars, 0, length()); }
     @Override final public int countOfAny(@NotNull CharSequence chars, int fromIndex)           { return countOfAny(chars, fromIndex, length()); }
@@ -684,10 +686,15 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
     }
 
     // @formatter:off
-    @Override final public int countLeading()                                                   { return this.countLeading(WHITESPACE_NO_EOL_CHARS, 0, length()); }
-    @Override final public int countLeadingNot()                                                { return this.countLeadingNot(WHITESPACE_NO_EOL_CHARS, 0, length()); }
-    @Override final public int countTrailing()                                                  { return this.countTrailing(WHITESPACE_NO_EOL_CHARS, 0, length()); }
-    @Override final public int countTrailingNot()                                               { return this.countTrailingNot(WHITESPACE_NO_EOL_CHARS, 0, length()); }
+    @Override final public int countLeadingSpaceTab()                                           { return this.countLeading(WHITESPACE_NO_EOL_CHARS, 0, length()); }
+    @Override final public int countLeadingNotSpaceTab()                                        { return this.countLeadingNot(WHITESPACE_NO_EOL_CHARS, 0, length()); }
+    @Override final public int countTrailingSpaceTab()                                          { return this.countTrailing(WHITESPACE_NO_EOL_CHARS, 0, length()); }
+    @Override final public int countTrailingNotSpaceTab()                                       { return this.countTrailingNot(WHITESPACE_NO_EOL_CHARS, 0, length()); }
+
+    @Override final public int countLeadingWhitespace()                                         { return this.countLeading(WHITESPACE_CHARS, 0, length()); }
+    @Override final public int countLeadingNotWhitespace()                                      { return this.countLeadingNot(WHITESPACE_CHARS, 0, length()); }
+    @Override final public int countTrailingWhitespace()                                        { return this.countTrailing(WHITESPACE_CHARS, 0, length()); }
+    @Override final public int countTrailingNotWhitespace()                                     { return this.countTrailingNot(WHITESPACE_CHARS, 0, length()); }
 
     @Override final public int countLeading(@NotNull CharSequence chars)                        { return countLeading(chars, 0, length()); }
     @Override final public int countLeadingNot(@NotNull CharSequence chars)                     { return countLeadingNot(chars, 0, length()); }
@@ -1169,6 +1176,16 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
     @Override final public boolean startsWith(@NotNull CharSequence prefix) {return length() > 0 && matchChars(prefix, 0, false);}
     @Override final public boolean endsWith(@NotNull CharSequence suffix, boolean ignoreCase) {return length() > 0 && matchCharsReversed(suffix, length() - 1, ignoreCase);}
     @Override final public boolean startsWith(@NotNull CharSequence prefix, boolean ignoreCase) {return length() > 0 && matchChars(prefix, 0, ignoreCase);}
+    @Override final public boolean endsWithEOL() { return endsWith(EOL); }
+    @Override final public boolean endsWithAnyEOL() { return endsWith(EOL_CHARS); }
+    @Override final public boolean endsWithSpace() { return endsWith(SPACE); }
+    @Override final public boolean endsWithSpaceTab() { return endsWith(SPACE_TAB); }
+    @Override final public boolean endsWithWhitespace() { return endsWith(WHITESPACE_CHARS); }
+    @Override final public boolean startsWithEOL() { return startsWith(EOL); }
+    @Override final public boolean startsWithAnyEOL() { return startsWith(EOL_CHARS); }
+    @Override final public boolean startsWithSpace() { return startsWith(SPACE); }
+    @Override final public boolean startsWithSpaceTab() { return startsWith(SPACE_TAB); }
+    @Override final public boolean startsWithWhitespace() { return startsWith(WHITESPACE_CHARS); }
     // @formatter:on
 
     // @formatter:off
@@ -1353,6 +1370,11 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
     @NotNull @Override final public List<T> splitList(@NotNull CharSequence delimiter, int limit) {return splitList(delimiter, limit, 0, WHITESPACE_CHARS);}
     @NotNull @Override final public List<T> splitList(@NotNull CharSequence delimiter, int limit, int flags) {return splitList(delimiter, limit, flags, WHITESPACE_CHARS);}
 
+    @NotNull @Override final public List<T> splitList(char delimiter, int limit, boolean includeDelims) {return splitList(String.valueOf(delimiter), limit, includeDelims ? SPLIT_INCLUDE_DELIMS : 0, WHITESPACE_CHARS);}
+    @NotNull @Override final public List<T> splitList(char delimiter, int limit, boolean includeDelims, String trimChars) {return splitList(String.valueOf(delimiter), limit, includeDelims ? SPLIT_INCLUDE_DELIMS : 0, trimChars);}
+    @NotNull @Override final public List<T> splitList(@NotNull CharSequence delimiter, int limit, boolean includeDelims) {return splitList(delimiter, limit, includeDelims ? SPLIT_INCLUDE_DELIMS : 0, WHITESPACE_CHARS);}
+    @NotNull @Override final public List<T> splitList(@NotNull CharSequence delimiter, int limit, boolean includeDelims, @Nullable String trimChars) {return splitList(delimiter, limit, includeDelims ? SPLIT_INCLUDE_DELIMS : 0, trimChars);}
+
     @NotNull @Override final public T[] split(char delimiter) {return split(String.valueOf(delimiter), 0, 0, WHITESPACE_CHARS);}
     @NotNull @Override final public T[] split(char delimiter, int limit) {return split(String.valueOf(delimiter), limit, 0, WHITESPACE_CHARS);}
     @NotNull @Override final public T[] split(char delimiter, int limit, int flags) {return split(String.valueOf(delimiter), limit, flags, WHITESPACE_CHARS);}
@@ -1361,6 +1383,23 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
     @NotNull @Override final public T[] split(@NotNull CharSequence delimiter, int limit) {return split(delimiter, limit, 0, WHITESPACE_CHARS);}
     @NotNull @Override final public T[] split(@NotNull CharSequence delimiter, int limit, int flags) {return split(delimiter, limit, flags, WHITESPACE_CHARS);}
     @NotNull @Override final public T[] split(@NotNull CharSequence delimiter, int limit, int flags, @Nullable String trimChars) { return splitList(delimiter, limit, flags, trimChars).toArray(emptyArray());}
+
+    @NotNull @Override final public T[] split(char delimiter, int limit, boolean includeDelims) {return split(String.valueOf(delimiter), limit, includeDelims ? SPLIT_INCLUDE_DELIMS : 0, WHITESPACE_CHARS);}
+    @NotNull @Override final public T[] split(char delimiter, int limit, boolean includeDelims, String trimChars) {return split(String.valueOf(delimiter), limit, includeDelims ? SPLIT_INCLUDE_DELIMS : 0, trimChars);}
+    @NotNull @Override final public T[] split(@NotNull CharSequence delimiter, int limit, boolean includeDelims) {return split(delimiter, limit, includeDelims ? SPLIT_INCLUDE_DELIMS : 0, WHITESPACE_CHARS);}
+    @NotNull @Override final public T[] split(@NotNull CharSequence delimiter, int limit, boolean includeDelims, @Nullable String trimChars) { return splitList(delimiter, limit, includeDelims ? SPLIT_INCLUDE_DELIMS : 0, trimChars).toArray(emptyArray());}
+
+    // NOTE: these default to including delimiters as part of split item
+    @NotNull @Override final public List<T> splitListEOL() {return splitList(EOL, SPLIT_INCLUDE_DELIMS);}
+    @NotNull @Override final public List<T> splitListEOL(boolean includeDelims) {return splitList(EOL, includeDelims ? SPLIT_INCLUDE_DELIMS : 0);}
+    @NotNull @Override final public List<T> splitListEOL(int limit) {return splitList(EOL, limit,SPLIT_INCLUDE_DELIMS);}
+    @NotNull @Override final public List<T> splitListEOL(int limit, boolean includeDelims) {return splitList(EOL, limit, includeDelims ? SPLIT_INCLUDE_DELIMS : 0);}
+    @NotNull @Override final public List<T> splitListEOL(int limit, boolean includeDelims, @Nullable String trimChars) {return splitList(EOL, limit, includeDelims ? SPLIT_INCLUDE_DELIMS : 0, trimChars);}
+    @NotNull @Override final public T[] splitEOL() { return splitList(EOL, SPLIT_INCLUDE_DELIMS).toArray(emptyArray());}
+    @NotNull @Override final public T[] splitEOL(boolean includeDelims) { return splitList(EOL, includeDelims ? SPLIT_INCLUDE_DELIMS : 0).toArray(emptyArray());}
+    @NotNull @Override final public T[] splitEOL(int limit) { return splitList(EOL, limit, SPLIT_INCLUDE_DELIMS).toArray(emptyArray());}
+    @NotNull @Override final public T[] splitEOL(int limit, boolean includeDelims) { return splitList(EOL, limit, includeDelims ? SPLIT_INCLUDE_DELIMS : 0).toArray(emptyArray());}
+    @NotNull @Override final public T[] splitEOL(int limit, boolean includeDelims, @Nullable String trimChars) { return splitList(EOL, limit, includeDelims ? SPLIT_INCLUDE_DELIMS : 0, trimChars).toArray(emptyArray());}
     // @formatter:on
 
     @NotNull

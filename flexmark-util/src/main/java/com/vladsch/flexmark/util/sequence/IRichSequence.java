@@ -34,6 +34,8 @@ public interface IRichSequence<T extends IRichSequence<T>> extends CharSequence,
 
     String LINE_SEP = Character.toString(LSEP);
     String WHITESPACE_NO_EOL_CHARS = " \t";
+    String SPACE_TAB = WHITESPACE_NO_EOL_CHARS;
+
     String WHITESPACE_CHARS = " \t\r\n";
     String WHITESPACE_NBSP_CHARS = " \t\r\n\u00A0";
 
@@ -381,12 +383,28 @@ public interface IRichSequence<T extends IRichSequence<T>> extends CharSequence,
     int countTrailing(char c, int startIndex, int endIndex);
     int countTrailingNot(char c, int startIndex, int endIndex);
 
-    int countLeading();
-    int countLeadingNot();
-    int countTrailing();
-    int countTrailingNot();
-    int countOf();
-    int countOfNot();
+    int countLeadingSpaceTab();
+    int countLeadingNotSpaceTab();
+    int countTrailingSpaceTab();
+    int countTrailingNotSpaceTab();
+    int countOfSpaceTab();
+    int countOfNotSpaceTab();
+
+    int countLeadingWhitespace();
+    int countLeadingNotWhitespace();
+    int countTrailingWhitespace();
+    int countTrailingNotWhitespace();
+    int countOfWhitespace();
+    int countOfNotWhitespace();
+
+    // @formatter:off
+    @Deprecated default int countLeading() { return countLeadingSpaceTab(); }
+    @Deprecated default int countLeadingNot() { return countLeadingNotSpaceTab(); }
+    @Deprecated default int countTrailing() { return countTrailingSpaceTab(); }
+    @Deprecated default int countTrailingNot() { return countTrailingNotSpaceTab(); }
+    @Deprecated default int countOf() { return countOfSpaceTab(); }
+    @Deprecated default int countOfNot() { return countOfNotSpaceTab(); }
+    // @formatter:on
 
     int countOf(char c);
     int countOfNot(char c);
@@ -928,6 +946,11 @@ public interface IRichSequence<T extends IRichSequence<T>> extends CharSequence,
      * @return true if ends with suffix
      */
     boolean endsWith(@NotNull CharSequence suffix);
+    boolean endsWithEOL();              // EOL "\n"
+    boolean endsWithAnyEOL();           // EOL_CHARS "\r\n"
+    boolean endsWithSpace();            // SPACE " "
+    boolean endsWithSpaceTab();         // SPACE_TAB " \t"
+    boolean endsWithWhitespace();       // WHITESPACE_CHARS " \t\r\n"
 
     /**
      * test if this sequence ends with given characters, ignoring case differences
@@ -953,6 +976,11 @@ public interface IRichSequence<T extends IRichSequence<T>> extends CharSequence,
      * @return true if starts with prefix
      */
     boolean startsWith(@NotNull CharSequence prefix);
+    boolean startsWithEOL();            // EOL "\n"
+    boolean startsWithAnyEOL();         // EOL_CHARS "\r\n"
+    boolean startsWithSpace();          // SPACE " "
+    boolean startsWithSpaceTab();       // SPACE_TAB " \t"
+    boolean startsWithWhitespace();     // WHITESPACE_CHARS " \t\r\n"
 
     /**
      * test if this sequence starts with given characters, ignoring case differences
@@ -1121,12 +1149,14 @@ public interface IRichSequence<T extends IRichSequence<T>> extends CharSequence,
 
     /**
      * Map spaces to non break spaces
+     *
      * @return mapped sequence with spc changed to NbSp
      */
     @NotNull T toNbSp();
 
     /**
      * Map non break spaces to spaces
+     *
      * @return mapped sequence with NbSp changed to spc
      */
     @NotNull T toSpc();
@@ -1169,6 +1199,36 @@ public interface IRichSequence<T extends IRichSequence<T>> extends CharSequence,
     @NotNull List<T> splitList(@NotNull CharSequence delimiter, int limit);
     @NotNull List<T> splitList(@NotNull CharSequence delimiter, int limit, int flags);
     @NotNull List<T> splitList(@NotNull CharSequence delimiter, int limit, int flags, @Nullable String trimChars);
+
+    /**
+     * Split helpers based on delimiter character sets contained in CharSequence
+     *
+     * @param delimiter     delimiter char or set of chars in CharSequence to split this sequence on
+     * @param limit         max number of segments to split
+     * @param includeDelims if true include delimiters as part of split item
+     * @param trimChars     set of characters that should be used for trimming individual split results
+     * @return List of split results
+     */
+    @NotNull T[] split(char delimiter, int limit, boolean includeDelims, String trimChars);
+    @NotNull T[] split(char delimiter, int limit, boolean includeDelims);
+    @NotNull T[] split(@NotNull CharSequence delimiter, int limit, boolean includeDelims);
+    @NotNull T[] split(@NotNull CharSequence delimiter, int limit, boolean includeDelims, @Nullable String trimChars);
+    @NotNull List<T> splitList(char delimiter, int limit, boolean includeDelims, String trimChars);
+    @NotNull List<T> splitList(char delimiter, int limit, boolean includeDelims);
+    @NotNull List<T> splitList(@NotNull CharSequence delimiter, int limit, boolean includeDelims);
+    @NotNull List<T> splitList(@NotNull CharSequence delimiter, int limit, boolean includeDelims, @Nullable String trimChars);
+
+    // NOTE: these default to including delimiters as part of split item
+    @NotNull T[] splitEOL();
+    @NotNull T[] splitEOL(boolean includeDelims);
+    @NotNull T[] splitEOL(int limit);
+    @NotNull T[] splitEOL(int limit, boolean includeDelims);
+    @NotNull T[] splitEOL(int limit, boolean includeDelims, @Nullable String trimChars);
+    @NotNull List<T> splitListEOL();
+    @NotNull List<T> splitListEOL(boolean includeDelims);
+    @NotNull List<T> splitListEOL(int limit);
+    @NotNull List<T> splitListEOL(int limit, boolean includeDelims);
+    @NotNull List<T> splitListEOL(int limit, boolean includeDelims, @Nullable String trimChars);
 
     /**
      * Get indices of all occurrences of a sequence

@@ -7,14 +7,14 @@ import org.jetbrains.annotations.Nullable;
  * A position tracker within a based sequence
  * <p>
  */
-public final class BasedOffsetTracker implements Comparable<BasedOffsetTracker> {
+public final class OffsetTracker implements Comparable<OffsetTracker> {
     // FIX: gather information as to location within the sequence so the sequence does not need to be stored, only its signature information
     private final BasedSequence baseSeq;
     private final int markerOffset;  // offset in original base, used only when a modified sequence contains this offset
     private final TrackerDirection myTrackerDirection;
     private final int markerIndex;   // index in actual sequence
 
-    private BasedOffsetTracker(BasedSequence baseSeq, int markerOffset, TrackerDirection trackerDirection) {
+    private OffsetTracker(BasedSequence baseSeq, int markerOffset, TrackerDirection trackerDirection) {
         this.baseSeq = baseSeq;
         this.markerOffset = markerOffset;
         this.myTrackerDirection = trackerDirection;
@@ -37,7 +37,7 @@ public final class BasedOffsetTracker implements Comparable<BasedOffsetTracker> 
     }
 
     @Override
-    public int compareTo(@NotNull BasedOffsetTracker other) {
+    public int compareTo(@NotNull OffsetTracker other) {
         // FIX: compare tracker criteria and return -1 or 0 if this tracker supersedes other or 1 if the other supersedes this one
         int trackedIndex = getTrackedIndex(baseSeq);
         int otherIndex = other.getTrackedIndex(other.baseSeq);
@@ -81,12 +81,12 @@ public final class BasedOffsetTracker implements Comparable<BasedOffsetTracker> 
     }
 
     @Nullable
-    public BasedOffsetTracker modifiedTracker(@NotNull BasedSequence modified, @Nullable BasedOffsetTracker other) {
+    public OffsetTracker modifiedTracker(@NotNull BasedSequence modified, @Nullable OffsetTracker other) {
         // need to take segmented sequence into account because marker index needs to be adjusted to be within the sequence
         // keep marker within modified sequence in the same position relative to non-space characters
 
         // FIX: after figuring out a new tracker see if the other tracker supersedes ours and return it instead
-        BasedOffsetTracker modifiedTracker = null;
+        OffsetTracker modifiedTracker = null;
         if (baseSeq.containsSomeOf(modified) || modified.containsSomeOf(baseSeq)) {
             // FIX: return new offset tracker based on modifications to sequence
             modifiedTracker = this;
@@ -101,11 +101,11 @@ public final class BasedOffsetTracker implements Comparable<BasedOffsetTracker> 
     }
 
     @Nullable
-    public static BasedOffsetTracker create(@NotNull BasedSequence baseSeq, int markerIndex, @NotNull TrackerDirection trackerDirection) {
+    public static OffsetTracker create(@NotNull BasedSequence baseSeq, int markerIndex, @NotNull TrackerDirection trackerDirection) {
         if (markerIndex < 0 || markerIndex > baseSeq.length()) {
             return null;
         }
 
-        return new BasedOffsetTracker(baseSeq, markerIndex, trackerDirection);
+        return new OffsetTracker(baseSeq, markerIndex, trackerDirection);
     }
 }

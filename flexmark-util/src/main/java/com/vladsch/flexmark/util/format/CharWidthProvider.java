@@ -1,9 +1,30 @@
 package com.vladsch.flexmark.util.format;
 
+import com.vladsch.flexmark.util.sequence.IRichSequenceBase;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 public interface CharWidthProvider {
     int spaceWidth();
     int charWidth(char c);
-    int charWidth(CharSequence s);
+    int charWidth(@NotNull CharSequence s);
+
+    default int getStringWidth(@NotNull CharSequence chars) {
+        return getStringWidth(chars, null);
+    }
+
+    default int getStringWidth(@NotNull CharSequence chars, @Nullable CharSequence zeroWidth) {
+        int iMax = chars.length();
+        int width = 0;
+
+        for (int i = 0; i < iMax; i++) {
+            char c = chars.charAt(i);
+            if (zeroWidth == null || IRichSequenceBase.indexOf(zeroWidth, c) == -1) {
+                width += charWidth(c);
+            }
+        }
+        return width;
+    }
 
     CharWidthProvider NULL = new CharWidthProvider() {
         @Override
@@ -17,18 +38,8 @@ public interface CharWidthProvider {
         }
 
         @Override
-        public int charWidth(CharSequence s) {
+        public int charWidth(@NotNull CharSequence s) {
             return s.length();
         }
     };
-
-    default int getStringWidth(CharSequence chars) {
-        int iMax = chars.length();
-        int width = 0;
-
-        for (int i = 0; i < iMax; i++) {
-            width += charWidth(chars.charAt(i));
-        }
-        return width;
-    }
 }

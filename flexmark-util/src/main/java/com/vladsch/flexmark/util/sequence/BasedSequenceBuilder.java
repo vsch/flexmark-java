@@ -14,7 +14,7 @@ public class BasedSequenceBuilder implements SequenceBuilder<BasedSequenceBuilde
     private final ArrayList<BasedSequence> segments;
     private final @NotNull BasedSequence base;
     private int lastEndOffset = -1;
-    private @Nullable ArrayList<BasedOffsetTracker> offsetTrackers;
+    private @Nullable ArrayList<OffsetTracker> offsetTrackers;
 
     public BasedSequenceBuilder(BasedSequence base) {
         this(base, -1, null);
@@ -24,21 +24,26 @@ public class BasedSequenceBuilder implements SequenceBuilder<BasedSequenceBuilde
         this(base, initialCapacity, null);
     }
 
-    public BasedSequenceBuilder(@NotNull BasedSequence base, int initialCapacity, @Nullable BasedOffsetTracker offsetTracker) {
+    public BasedSequenceBuilder(@NotNull BasedSequence base, int initialCapacity, @Nullable OffsetTracker offsetTracker) {
         this.segments = initialCapacity < 0 ? new ArrayList<>() : new ArrayList<>(initialCapacity);
         this.base = base.getBaseSequence();
         if (offsetTracker != null) addOffsetTracker(offsetTracker);
     }
 
-    private BasedSequenceBuilder(@NotNull BasedSequence base, @NotNull List<BasedOffsetTracker> offsetTrackers) {
+    private BasedSequenceBuilder(@NotNull BasedSequence base, @NotNull List<OffsetTracker> offsetTrackers) {
         this.segments = new ArrayList<>();
         this.base = base.getBaseSequence();
         this.offsetTrackers = new ArrayList<>(offsetTrackers);
     }
 
-    private void addOffsetTracker(@Nullable BasedOffsetTracker tracker) {
+    private void addOffsetTracker(@Nullable OffsetTracker tracker) {
         if (offsetTrackers == null) offsetTrackers = new ArrayList<>();
         offsetTrackers.add(tracker);
+    }
+
+    @NotNull
+    public BasedSequence getBaseSequence() {
+        return base;
     }
 
     @NotNull
@@ -49,7 +54,7 @@ public class BasedSequenceBuilder implements SequenceBuilder<BasedSequenceBuilde
 
     @NotNull
     @Override
-    public BasedSequenceBuilder addAll(@NotNull BasedSequenceBuilder builder) {
+    public BasedSequenceBuilder addFrom(@NotNull BasedSequenceBuilder builder) {
         if (base != builder.base) {
             throw new IllegalArgumentException("add BasedSequenceBuilder called with other having different base: " + base.hashCode() + " got: " + builder.base.hashCode());
         }
@@ -66,7 +71,7 @@ public class BasedSequenceBuilder implements SequenceBuilder<BasedSequenceBuilde
             segments.addAll(builder.segments);
 
             if (builder.offsetTrackers != null) {
-                for (BasedOffsetTracker offsetTracker : builder.offsetTrackers) {
+                for (OffsetTracker offsetTracker : builder.offsetTrackers) {
                     addOffsetTracker(offsetTracker);
                 }
             }
@@ -108,8 +113,8 @@ public class BasedSequenceBuilder implements SequenceBuilder<BasedSequenceBuilde
             lastEndOffset = s.getEndOffset();
             segments.add(s);
 
-            if (s instanceof TrackedBasedSequence) {
-                addOffsetTracker(((TrackedBasedSequence) s).getOffsetTracker());
+            if (s instanceof BasedTrackedSequence) {
+                addOffsetTracker(((BasedTrackedSequence) s).getOffsetTracker());
             }
         }
         return this;
@@ -149,26 +154,36 @@ public class BasedSequenceBuilder implements SequenceBuilder<BasedSequenceBuilde
     public BasedSequence toSequence() {
         BasedSequence modifiedSeq = SegmentedSequence.of(segments);
         if (offsetTrackers != null) {
-            BasedOffsetTracker modifiedTracker = null;
-            for (BasedOffsetTracker offsetTracker : offsetTrackers) {
+            OffsetTracker modifiedTracker = null;
+            for (OffsetTracker offsetTracker : offsetTrackers) {
                 modifiedTracker = offsetTracker.modifiedTracker(modifiedSeq, modifiedTracker);
             }
 
             if (modifiedTracker != null) {
-                return TrackedBasedSequence.create(modifiedSeq, modifiedTracker);
+                return BasedTrackedSequence.create(modifiedSeq, modifiedTracker);
             }
         }
         return modifiedSeq;
     }
 
     @NotNull
-    public BasedSequence[] toArray() {
+    public BasedSequence[] toBasedArray() {
         return segments.toArray(BasedSequence.EMPTY_SEGMENTS);
     }
 
     @NotNull
-    public List<BasedSequence> toList() {
+    public List<BasedSequence> getSegments() {
         return segments;
+    }
+
+    @NotNull
+    public List<BasedSequence> toLineList() {
+        return toSequence().splitListEOL();
+    }
+
+    @NotNull
+    public BasedSequence[] toLineArray() {
+        return toSequence().splitListEOL().toArray(BasedSequence.EMPTY_SEGMENTS);
     }
 
     @NotNull

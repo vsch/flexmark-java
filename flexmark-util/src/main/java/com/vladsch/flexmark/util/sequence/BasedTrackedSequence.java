@@ -7,14 +7,14 @@ import org.jetbrains.annotations.NotNull;
  * <p>
  * a subSequence() returns a sub-sequence from the original base sequence, possibly with a prefix if it falls in range
  */
-public final class TrackedBasedSequence extends BasedSequenceImpl implements ReplacedBasedSequence {
+public final class BasedTrackedSequence extends BasedSequenceImpl implements ReplacedBasedSequence {
     private final @NotNull BasedSequence base;
-    private final @NotNull BasedOffsetTracker offsetTracker;
+    private final @NotNull OffsetTracker offsetTracker;
 
-    private TrackedBasedSequence(@NotNull BasedSequence baseSeq, @NotNull BasedOffsetTracker offsetTracker) {
-        if (baseSeq instanceof TrackedBasedSequence) {
+    private BasedTrackedSequence(@NotNull BasedSequence baseSeq, @NotNull OffsetTracker offsetTracker) {
+        if (baseSeq instanceof BasedTrackedSequence) {
             // replace it as the tracker with this class
-            this.base = ((TrackedBasedSequence) baseSeq).base;
+            this.base = ((BasedTrackedSequence) baseSeq).base;
         } else {
             this.base = baseSeq;
         }
@@ -23,7 +23,7 @@ public final class TrackedBasedSequence extends BasedSequenceImpl implements Rep
     }
 
     @NotNull
-    public BasedOffsetTracker getOffsetTracker() {
+    public OffsetTracker getOffsetTracker() {
         return offsetTracker;
     }
 
@@ -59,9 +59,9 @@ public final class TrackedBasedSequence extends BasedSequenceImpl implements Rep
     @Override
     public BasedSequence baseSubSequence(int startIndex, int endIndex) {
         BasedSequence modifiedSeq = base.baseSubSequence(startIndex, endIndex);
-        BasedOffsetTracker modifiedTracker = offsetTracker.modifiedTracker(modifiedSeq, null);
+        OffsetTracker modifiedTracker = offsetTracker.modifiedTracker(modifiedSeq, null);
         if (modifiedTracker != null) {
-            return new TrackedBasedSequence(modifiedSeq, modifiedTracker);
+            return new BasedTrackedSequence(modifiedSeq, modifiedTracker);
         }
         return modifiedSeq;
     }
@@ -87,6 +87,12 @@ public final class TrackedBasedSequence extends BasedSequenceImpl implements Rep
     }
 
     @Override
+    public int getTrackedOffset(int startOffset, int maxOffset) {
+        int index = offsetTracker.getTrackedIndex(this);
+        return index < 0 ? -1 : Math.min(maxOffset, Math.max(0, index + startOffset));
+    }
+
+    @Override
     public <B extends SequenceBuilder<B, BasedSequence>> @NotNull B getBuilder() {
         //noinspection unchecked
         return (B) new BasedSequenceBuilder(getBaseSequence(), -1, offsetTracker);
@@ -96,9 +102,9 @@ public final class TrackedBasedSequence extends BasedSequenceImpl implements Rep
     @Override
     public BasedSequence subSequence(int startIndex, int endIndex) {
         BasedSequence modifiedSeq = base.subSequence(startIndex, endIndex);
-        BasedOffsetTracker modifiedTracker = offsetTracker.modifiedTracker(modifiedSeq, null);
+        OffsetTracker modifiedTracker = offsetTracker.modifiedTracker(modifiedSeq, null);
         if (modifiedTracker != null) {
-            return new TrackedBasedSequence(modifiedSeq, modifiedTracker);
+            return new BasedTrackedSequence(modifiedSeq, modifiedTracker);
         }
         return modifiedSeq;
     }
@@ -117,13 +123,13 @@ public final class TrackedBasedSequence extends BasedSequenceImpl implements Rep
     }
 
     @NotNull
-    static BasedSequence create(@NotNull BasedSequence base, @NotNull BasedOffsetTracker offsetTracker) {
-        return new TrackedBasedSequence(base, offsetTracker);
+    static BasedSequence create(@NotNull BasedSequence base, @NotNull OffsetTracker offsetTracker) {
+        return new BasedTrackedSequence(base, offsetTracker);
     }
 
     @NotNull
     public static BasedSequence trackOffset(@NotNull BasedSequence baseSeq, int markerIndex, @NotNull TrackerDirection trackerDirection) {
-        BasedOffsetTracker tracker = BasedOffsetTracker.create(baseSeq, markerIndex, trackerDirection);
-        return tracker != null ? new TrackedBasedSequence(baseSeq, tracker) : baseSeq;
+        OffsetTracker tracker = OffsetTracker.create(baseSeq, markerIndex, trackerDirection);
+        return tracker != null ? new BasedTrackedSequence(baseSeq, tracker) : baseSeq;
     }
 }

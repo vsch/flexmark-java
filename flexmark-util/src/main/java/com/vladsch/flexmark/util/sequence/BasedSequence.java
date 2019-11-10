@@ -344,14 +344,14 @@ public interface BasedSequence extends IRichSequence<BasedSequence> {
      * Extend this based sequence to include characters from underlying based sequence
      * taking tab expansion to 4th spaces into account
      *
-     * @param maxColumns maximum columns to include
+     * @param maxColumns maximum columns to include, default {@link Integer#MAX_VALUE}
      * @return sequence which
      */
     @NotNull BasedSequence prefixWithIndent(int maxColumns);
+    @NotNull BasedSequence prefixWithIndent();
 
     /*
       These are convenience methods returning coordinates in Base Sequence of this sequence
-      TEST: all these need tests
      */
     @NotNull Pair<Integer, Integer> baseLineColumnAtIndex(int index);
     @NotNull Range baseLineRangeAtIndex(int index);
@@ -375,19 +375,19 @@ public interface BasedSequence extends IRichSequence<BasedSequence> {
     /**
      * Track given index in this sequence with respect to base offset
      *
-     * @param index           offset within this sequence to track
-     *                        ie. between its start and end offsets
+     * @param index            offset within this sequence to track
+     *                         ie. between its start and end offsets
      * @param trackerDirection direction of interest, specifically if this sequence is the
-     *                        result of typing the direction is {@link TrackerDirection#RIGHT},
-     *                        result of backspacing direction is {@link TrackerDirection#LEFT},
-     *                        otherwise it is {@link TrackerDirection#NONE}
+     *                         result of typing the direction is {@link TrackerDirection#RIGHT},
+     *                         result of backspacing direction is {@link TrackerDirection#LEFT},
+     *                         otherwise it is {@link TrackerDirection#NONE}
      * @return based sequence which tracks offset through editing modifications
      */
     @NotNull
     BasedSequence trackIndex(int index, @NotNull TrackerDirection trackerDirection);
 
     /**
-     * Get the tracked offset after editing and chopping manipulation of an offset tracking sequence
+     * Get the tracked index after editing and chopping manipulation of an offset tracking sequence
      *
      * @return best guess at the tracked index based on the contents of this sequence,
      *     0 to length() or -1 if offset is
@@ -395,10 +395,17 @@ public interface BasedSequence extends IRichSequence<BasedSequence> {
      */
     int getTrackedIndex();
 
-    @NotNull
-    default BasedSequence prefixWithIndent() {
-        return prefixWithIndent(Integer.MAX_VALUE);
-    }
+    /**
+     * Get tracked offset computed from the tracked index if this sequence is placed at startOffset
+     * in the destination
+     *
+     * @param startOffset new start offset at destination for this sequence
+     * @param maxOffset   max offset at destination
+     * @return best guess at the tracked index based on the contents of this sequence,
+     *     0 to maxOffset or -1 if offset is
+     *     no longer part of this sequence
+     */
+    int getTrackedOffset(int startOffset, int maxOffset);
 
     class EmptyBasedSequence extends BasedSequenceImpl {
         @Override
