@@ -12,7 +12,7 @@ public class MarkdownParagraph {
     final private static char MARKDOWN_START_LINE_CHAR = BasedSequence.LSEP;             // https://www.fileformat.info/info/unicode/char/2028/index.htm LINE_SEPARATOR this one is not preserved but will cause a line break if not already at beginning of line
     final private static BasedSequence MARKDOWN_START_LINE = BasedSequence.LINE_SEP;   // this one is not preserved but will cause a line break if not already at beginning of line
 
-    final private @NotNull BasedSequence myReplacedChars;
+    final private @NotNull BasedSequence myChars;
     final private @NotNull CharWidthProvider myCharWidthProvider;
 
     private int myFirstIndent = 0;
@@ -25,16 +25,16 @@ public class MarkdownParagraph {
     private @NotNull TrackerDirection myTrackerDirection = TrackerDirection.NONE;
     private int myMarkerOffset = -1;
 
-    public MarkdownParagraph(CharSequence replacedChars) {
-        this(BasedSequence.of(replacedChars), CharWidthProvider.NULL);
+    public MarkdownParagraph(CharSequence chars) {
+        this(BasedSequence.of(chars), CharWidthProvider.NULL);
     }
 
-    public MarkdownParagraph(BasedSequence replacedChars) {
-        this(replacedChars, CharWidthProvider.NULL);
+    public MarkdownParagraph(BasedSequence chars) {
+        this(chars, CharWidthProvider.NULL);
     }
 
-    public MarkdownParagraph(@NotNull BasedSequence replacedChars, @NotNull CharWidthProvider charWidthProvider) {
-        myReplacedChars = replacedChars;
+    public MarkdownParagraph(@NotNull BasedSequence chars, @NotNull CharWidthProvider charWidthProvider) {
+        myChars = chars;
         myCharWidthProvider = charWidthProvider;
     }
 
@@ -56,8 +56,8 @@ public class MarkdownParagraph {
     }
 
     @NotNull
-    public BasedSequence getReplacedChars() {
-        return myReplacedChars;
+    public BasedSequence getChars() {
+        return myChars;
     }
 
     public int getFirstIndent() {
@@ -213,21 +213,21 @@ public class MarkdownParagraph {
 
     @NotNull
     public BasedSequence computeResultSequence() {
-        if (getFirstWidth() <= 0) return myReplacedChars;
+        if (getFirstWidth() <= 0) return myChars;
 
         String lineBreak = RichSequence.EOL;
         String hardBreak = "  \n";
         final int[] pos = { 0 };
         final int[] lineCount = { 0 };
         ArrayList<Token> lineWords = new ArrayList<>();
-        BasedSequenceBuilder result = new BasedSequenceBuilder(myReplacedChars, myReplacedChars.length());
+        BasedSequenceBuilder result = new BasedSequenceBuilder(myChars);
         int spaceWidth = myCharWidthProvider.spaceWidth();
         final int[] lineIndent = { spaceWidth * getFirstIndent() };
         int nextIndent = spaceWidth * getIndent();
         final int[] lineWidth = { spaceWidth * getFirstWidth() };
         int nextWidth = (getWidth() <= 0) ? Integer.MAX_VALUE : spaceWidth * getWidth();
         final int[] wordsOnLine = { 0 };
-        BasedSequence chars = myReplacedChars;//.cachedProxy;
+        BasedSequence chars = myChars;
         TextTokenizer tokenizer = new TextTokenizer(chars);
 
         LineBreakProcessor doLineBreak = (spaceToken, breakChars, lastLine) -> {

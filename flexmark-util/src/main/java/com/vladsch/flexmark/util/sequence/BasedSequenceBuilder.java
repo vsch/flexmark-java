@@ -9,34 +9,27 @@ import java.util.List;
 
 /**
  * A Builder for Segmented BasedSequences
- *
+ * <p>
  * FIX: when adding non-based sequences before any based sequences are added, need to keep
- *   them pending until a based sequence is added to make them prefixes of that sequence
- *   can also concatenate non-based sequences together. This would eliminate the need to
- *   make add non-based sequence as prefixed sequence
+ * them pending until a based sequence is added to make them prefixes of that sequence
+ * can also concatenate non-based sequences together. This would eliminate the need to
+ * make add non-based sequence as prefixed sequence
  */
 public class BasedSequenceBuilder implements SequenceBuilder<BasedSequenceBuilder, BasedSequence> {
-    private final ArrayList<BasedSequence> segments;
+    private final ArrayList<BasedSequence> segments = new ArrayList<>();
     private final @NotNull BasedSequence base;
-    private int lastEndOffset = -1;
     private @Nullable ArrayList<OffsetTracker> offsetTrackers;
 
-    public BasedSequenceBuilder(BasedSequence base) {
-        this(base, -1, null);
+    public BasedSequenceBuilder(@NotNull BasedSequence base) {
+        this(base, (OffsetTracker) null);
     }
 
-    public BasedSequenceBuilder(@NotNull BasedSequence base, int initialCapacity) {
-        this(base, initialCapacity, null);
-    }
-
-    public BasedSequenceBuilder(@NotNull BasedSequence base, int initialCapacity, @Nullable OffsetTracker offsetTracker) {
-        this.segments = initialCapacity < 0 ? new ArrayList<>() : new ArrayList<>(initialCapacity);
+    public BasedSequenceBuilder(@NotNull BasedSequence base, @Nullable OffsetTracker offsetTracker) {
         this.base = base.getBaseSequence();
         if (offsetTracker != null) addOffsetTracker(offsetTracker);
     }
 
     private BasedSequenceBuilder(@NotNull BasedSequence base, @NotNull List<OffsetTracker> offsetTrackers) {
-        this.segments = new ArrayList<>();
         this.base = base.getBaseSequence();
         this.offsetTrackers = new ArrayList<>(offsetTrackers);
     }
@@ -65,14 +58,15 @@ public class BasedSequenceBuilder implements SequenceBuilder<BasedSequenceBuilde
         }
 
         if (!builder.isEmpty()) {
-            BasedSequence s = builder.getLastSegment();
-            if (lastEndOffset >= 0) {
+            if (!segments.isEmpty()) {
+                BasedSequence lastSegment = getLastSegment();
+                BasedSequence s = builder.getLastSegment();
+                int lastEndOffset = lastSegment.getEndOffset();
                 if (s.getStartOffset() < lastEndOffset) {
                     throw new IllegalArgumentException("add BasedSequenceBuilder called with last segment of other having startOffset < lastEndOffset, startOffset: " + s.getStartOffset() + " lastEndOffset: " + lastEndOffset);
                 }
             }
 
-            lastEndOffset = s.getEndOffset();
             segments.addAll(builder.segments);
 
             if (builder.offsetTrackers != null) {
@@ -98,24 +92,25 @@ public class BasedSequenceBuilder implements SequenceBuilder<BasedSequenceBuilde
     @NotNull
     @Override
     public BasedSequenceBuilder add(@NotNull CharSequence chars) {
-        if (chars instanceof BasedSequence) return add((BasedSequence) chars);
-        else if (chars.length() > 0) return add(chars.toString());
+        if (chars instanceof BasedSequence) return addBased((BasedSequence) chars);
+        else if (chars.length() > 0) return addString(chars.toString());
         else return this;
     }
 
-    public BasedSequenceBuilder add(BasedSequence s) {
+    private BasedSequenceBuilder addBased(BasedSequence s) {
         if (s.isNotNull()) {
             if (s.getBaseSequence() != base) {
                 throw new IllegalArgumentException("add called with segment having different base: " + base.hashCode() + " got: " + s.getBaseSequence().hashCode());
             }
 
-            if (lastEndOffset >= 0) {
+            if (!segments.isEmpty()) {
+                BasedSequence lastSegment = getLastSegment();
+                int lastEndOffset = lastSegment.getEndOffset();
                 if (s.getStartOffset() < lastEndOffset) {
                     throw new IllegalArgumentException("add called with segment having startOffset < lastEndOffset, startOffset: " + s.getStartOffset() + " lastEndOffset: " + lastEndOffset);
                 }
             }
 
-            lastEndOffset = s.getEndOffset();
             segments.add(s);
 
             if (s instanceof BasedTrackedSequence) {
@@ -126,12 +121,12 @@ public class BasedSequenceBuilder implements SequenceBuilder<BasedSequenceBuilde
     }
 
     @NotNull
-    public BasedSequenceBuilder add(@NotNull Range range) {
+    public BasedSequenceBuilder addRange(@NotNull Range range) {
         return add(base.subSequence(range));
     }
 
     @NotNull
-    public BasedSequenceBuilder add(int startOffset, int endOffset) {
+    public BasedSequenceBuilder addByOffsets(int startOffset, int endOffset) {
         return add(base.subSequence(startOffset, endOffset));
     }
 
@@ -140,11 +135,12 @@ public class BasedSequenceBuilder implements SequenceBuilder<BasedSequenceBuilde
         return add(base.subSequence(startOffset, startOffset + textLength));
     }
 
-    public BasedSequenceBuilder add(String str) {
+    private BasedSequenceBuilder addString(String str) {
         if (str.isEmpty()) return this;
         else {
             BasedSequence useBase;
             if (segments.isEmpty()) {
+                // FIX: when adding non-based sequences before any based sequences are added, need to keep
                 useBase = base.subSequence(0, 0);
             } else {
                 useBase = segments.get(segments.size() - 1);
@@ -242,16 +238,15 @@ public class BasedSequenceBuilder implements SequenceBuilder<BasedSequenceBuilde
 
     @Override
     public String toString() {
-        int total = 0;
         StringBuilder sb = new StringBuilder();
         BasedSequence last = null;
         for (BasedSequence s : segments) {
             if (s.isEmpty()) continue;
 
             if (last != null && last.getEndOffset() < s.getStartOffset()
-                && (BasedSequence.WHITESPACE_CHARS.indexOf(last.charAt(last.length() - 1)) == -1)
-                && BasedSequence.WHITESPACE_CHARS.indexOf(s.charAt(0)) == -1
-                && s.baseSubSequence(last.getEndOffset(), s.getStartOffset()).endsWith(" ")
+                    && (BasedSequence.WHITESPACE_CHARS.indexOf(last.charAt(last.length() - 1)) == -1)
+                    && BasedSequence.WHITESPACE_CHARS.indexOf(s.charAt(0)) == -1
+                    && s.baseSubSequence(last.getEndOffset(), s.getStartOffset()).endsWith(" ")
             ) {
                 sb.append(' ');
             }

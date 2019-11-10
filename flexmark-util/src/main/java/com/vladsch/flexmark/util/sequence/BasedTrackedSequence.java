@@ -95,7 +95,7 @@ public final class BasedTrackedSequence extends BasedSequenceImpl implements Rep
     @Override
     public <B extends SequenceBuilder<B, BasedSequence>> @NotNull B getBuilder() {
         //noinspection unchecked
-        return (B) new BasedSequenceBuilder(getBaseSequence(), -1, offsetTracker);
+        return (B) new BasedSequenceBuilder(getBaseSequence(), offsetTracker);
     }
 
     @NotNull
