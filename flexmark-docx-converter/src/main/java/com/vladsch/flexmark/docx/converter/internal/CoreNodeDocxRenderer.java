@@ -62,6 +62,7 @@ import org.docx4j.relationships.Relationship;
 import org.docx4j.toc.TocException;
 import org.docx4j.toc.TocGenerator;
 import org.docx4j.wml.*;
+import org.jetbrains.annotations.NotNull;
 
 import javax.xml.bind.JAXBElement;
 import java.awt.image.BufferedImage;
@@ -70,9 +71,12 @@ import java.math.BigInteger;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.util.*;
 
 import static com.vladsch.flexmark.html.renderer.LinkStatus.UNKNOWN;
+import static com.vladsch.flexmark.util.html.Attribute.CLASS_ATTR;
 
 @SuppressWarnings({ "WeakerAccess", "MethodMayBeStatic", "OverlyCoupledClass" })
 public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
@@ -83,6 +87,13 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
             DocxRendererPhase.DOCUMENT_TOP,
             DocxRendererPhase.DOCUMENT_BOTTOM
     ));
+    public static final String INPUT_TYPE_DROPDOWN = "dropdown";
+    public static final String INPUT_TYPE_CHECKBOX = "checkbox";
+    public static final String INPUT_TYPE_TEXT = "text";
+
+    public static final String INPUT_CLASS_TEXT = "text";  // class name for input type
+    public static final String INPUT_CLASS_DROPDOWN = "dropdown";  // class name for input type
+    public static final String INPUT_CLASS_CHECKBOX = "checkbox";  // class name for input type
 
     protected final ReferenceRepository referenceRepository;
 
@@ -106,6 +117,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
     private EnumeratedReferences enumeratedOrdinals;
     Runnable ordinalRunnable;
     private final HtmlIdGenerator headerIdGenerator; // used for enumerated text reference
+    private HashMap<String, Integer> formControlCounts = new HashMap<>();
 
     private void ensureNumberedListLength(int level) {
         if (numberedLists.length < level) {
@@ -392,7 +404,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
     Pair<String, AttributeFormat> getAttributeFormat(Node node, AttributablePart part, DocxRendererContext docx) {
         Attributes attributes = docx.extendRenderingNodeAttributes(node, AttributablePart.NODE, null);
         // see if has class which we interpret as style id
-        Attribute classAttribute = attributes.get(Attribute.CLASS_ATTR);
+        Attribute classAttribute = attributes.get(CLASS_ATTR);
         String className = null;
         if (classAttribute != null && !classAttribute.getValue().trim().isEmpty()) {
             String[] classNames = classAttribute.getValue().trim().split(" ");
@@ -930,6 +942,493 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
         renderURL(node.getUrl(), docx, resolvedLink.getUrl(), attributes, new ChildRenderer(docx, node));
     }
 
+    private void renderInputField(LinkRef node, DocxRendererContext docx) {
+        // form
+        Attributes attributes = docx.extendRenderingNodeAttributes(node, AttributablePart.NODE, null);
+        String inputType = INPUT_TYPE_TEXT;
+
+        if (attributes.contains(CLASS_ATTR)) {
+            Attribute classAttr = attributes.get(CLASS_ATTR);
+
+            if (!classAttr.containsValue(INPUT_CLASS_TEXT)) {
+                if (classAttr.containsValue(INPUT_CLASS_DROPDOWN)) {
+                    inputType = INPUT_TYPE_DROPDOWN;
+                } else if (classAttr.containsValue(INPUT_CLASS_CHECKBOX)) {
+                    inputType = INPUT_TYPE_CHECKBOX;
+                }
+            } else {
+                inputType = INPUT_TYPE_TEXT;
+            }
+        }
+
+        int fieldCount = formControlCounts.computeIfAbsent(inputType, k -> 0);
+        fieldCount++;
+        formControlCounts.put(inputType, fieldCount);
+
+        String docxFieldType;
+        String defaultFieldName;
+
+        switch (inputType) {
+            // @formatter:off
+            case INPUT_TYPE_CHECKBOX: defaultFieldName = "Check"; break;
+            case INPUT_TYPE_DROPDOWN: defaultFieldName = "Dropdown"; break;
+            // @formatter:on
+            default:
+            case INPUT_TYPE_TEXT:
+                defaultFieldName = "Text";
+                String type = attributes.getValue("type").trim();
+                if (!type.isEmpty()) {
+                    switch (type) {
+                        // @formatter:off
+                        case "date": defaultFieldName = "Date"; break;
+                        case "number": defaultFieldName = "Number"; break;
+                        case "current-date": defaultFieldName = "CurrentDate"; break;
+                        case "current-time": defaultFieldName = "CurrentTime"; break;
+                        // @formatter:on
+                    }
+                }
+                break;
+        }
+
+        // NOTE: common to all controls
+        // <w:r>
+        //   <w:fldChar w:fldCharType="begin"> for definition
+        //     <w:ffData>
+        //         <w:name w:val="Name1"/> - name of control
+        //         <w:enabled/> - editing enabled,  <w:enabled w:val="0"/> editing disabled
+        //         <w:calcOnExit w:val="0"/>
+        //         <w:helpText w:type="text" w:val="F1 Help"/> - F1 help key, does not work on Mac, leave out if none
+        //         <w:statusText w:type="text" w:val="Status Help"/> - Status Bar help text, leave out if none
+        //         NOTE: control specific content
+        //     </w:ffData>
+        //   </w:fldChar>
+        // </w:r>
+
+        ObjectFactory factory = docx.getFactory();
+
+        docx.createR();
+        FldChar fldChar = docx.addWrappedFldChar(STFldCharType.BEGIN);
+        CTFFData ffData = factory.createCTFFData();
+        fldChar.setFfData(ffData);
+
+        // CTMacroName
+        // CTFFName
+        // BooleanDefaultTrue
+        // CTFFTextInput
+        // BooleanDefaultTrue
+        // CTFFCheckBox
+        // CTFFHelpText
+        // CTMacroName
+        // CTFFStatusText
+        // CTFFDDList
+
+        String fieldName = "";
+        if (attributes.contains("name")) {
+            fieldName = attributes.getValue("name").trim();
+        }
+        if (fieldName.isEmpty()) {
+            fieldName = String.format("%s%d", defaultFieldName, fieldCount);
+        }
+
+        CTFFName ffName = factory.createCTFFName();
+        ffName.setVal(fieldName);
+        ffData.getNameOrEnabledOrCalcOnExit().add(factory.createCTFFDataName(ffName));
+        ffData.getNameOrEnabledOrCalcOnExit().add(factory.createCTFFDataEnabled(new BooleanDefaultTrue()));
+        ffData.getNameOrEnabledOrCalcOnExit().add(factory.createCTFFDataCalcOnExit(docx.getBooleanDefaultTrue(false)));
+
+        String fieldHelp = attributes.getValue("help");
+        if (!fieldHelp.trim().isEmpty()) {
+            CTFFHelpText ffHelpText = factory.createCTFFHelpText();
+            CTFFStatusText ctffStatusText = factory.createCTFFStatusText();
+            ffHelpText.setVal(fieldHelp);
+            ffHelpText.setType(STInfoTextType.TEXT);
+            ctffStatusText.setType(STInfoTextType.TEXT);
+            ctffStatusText.setVal(fieldHelp);
+            ffData.getNameOrEnabledOrCalcOnExit().add(factory.createCTFFDataHelpText(ffHelpText));
+            ffData.getNameOrEnabledOrCalcOnExit().add(factory.createCTFFDataStatusText(ctffStatusText));
+        }
+
+        Runnable extraContent = null;
+
+        switch (inputType) {
+            case INPUT_TYPE_CHECKBOX:
+                // <w:checkBox>
+                //     <w:sizeAuto/>
+                //     <w:default w:val="0"/>
+                //     <w:checked w:val="0"/>
+                // </w:checkBox>
+                //
+                // <w:sizeAuto/>  - no manual size set for checkbox
+                // <w:default w:val="0"/> - 0: unchecked, 1: checked
+                // <w:checked w:val="1"/> - 0: user unchecked, 1: user checked
+                docxFieldType = "FORMCHECKBOX";
+                CTFFCheckBox checkBox = factory.createCTFFCheckBox();
+                checkBox.setDefault(docx.getBooleanDefaultTrue(attributes.contains("checked")));
+                checkBox.setSizeAuto(factory.createBooleanDefaultTrue());
+                ffData.getNameOrEnabledOrCalcOnExit().add(factory.createCTFFDataCheckBox(checkBox));
+                break;
+
+            case INPUT_TYPE_DROPDOWN:
+                //
+                // <w:ddList>
+                //     <w:listEntry w:val="Item 1"/> - option text
+                //     <w:listEntry w:val="Item 2"/> - option text
+                //     <w:listEntry w:val="Item 3"/> - option text
+                // </w:ddList>
+                docxFieldType = "FORMDROPDOWN";
+                CTFFDDList ddList = factory.createCTFFDDList();
+                BasedSequence[] options = BasedSequence.of(attributes.getValue("options")).trim().split("|", 0, BasedSequence.SPLIT_TRIM_PARTS);
+                if (options.length > 0) {
+                    for (BasedSequence option : options) {
+                        if (option.trim().isEmpty()) continue;
+                        CTFFDDList.ListEntry listEntry = factory.createCTFFDDListListEntry();
+                        listEntry.setVal(option.toString());
+                        ddList.getListEntry().add(listEntry);
+                    }
+                }
+
+                String dropDownDefaultValue = attributes.getValue("default").trim();
+                if (!dropDownDefaultValue.isEmpty()) {
+                    int iMax = options.length;
+                    long defaultIndex = -1;
+                    for (int i = 0; i < iMax; i++) {
+                        if (options[i].equals(dropDownDefaultValue)) {
+                            defaultIndex = i;
+                            break;
+                        }
+                    }
+                    if (defaultIndex == -1L) {
+                        // try case insensitive
+                        for (int i = 0; i < iMax; i++) {
+                            if (options[i].toLowerCase().equals(dropDownDefaultValue.toLowerCase())) {
+                                defaultIndex = i;
+                                break;
+                            }
+                        }
+                    }
+
+                    if (defaultIndex == -1) {
+                        // see if it is a number
+                        try {
+                            defaultIndex = Long.parseLong(dropDownDefaultValue);
+                            if (defaultIndex > 0) defaultIndex--;
+                        } catch (NumberFormatException ignored) {
+
+                        }
+                    }
+
+                    if (defaultIndex >= 0 && defaultIndex < options.length) {
+                        BigInteger maxVal = BigInteger.valueOf(defaultIndex);
+                        CTFFDDList.Default defaultVal = factory.createCTFFDDListDefault();
+                        defaultVal.setVal(maxVal);
+                        ddList.setDefault(defaultVal);
+                    }
+                }
+
+                ffData.getNameOrEnabledOrCalcOnExit().add(factory.createCTFFDataDdList(ddList));
+                break;
+
+            default:
+            case INPUT_TYPE_TEXT:
+                //
+                // <w:textInput>
+                //     <w:default w:val="Default Text"/> - default text/number/date, leave out if none
+                //     <w:maxLength w:val="50"/> - max len, leave out if unlimited
+                //     <w:format w:val="FIRST CAPITAL"/> - text, leave out for no format, formats: UPPERCASE, LOWERCASE, FIRST CAPITAL, TITLE CASE
+                //     <w:format w:val="yyyy/M/d"/>  - date formats: yyyy/M/d, and other date formats supported by MS-Word
+                //     <w:format w:val="#,##0"/>  - number formats: #,###0, and other number formats supported by MS-Word
+                //     <w:type w:val="date"/> - leave out for regular text or: date, number
+                // </w:textInput>
+                docxFieldType = "FORMTEXT";
+
+                CTFFTextInput textInput = factory.createCTFFTextInput();
+                String textDefaultValue = attributes.getValue("default").trim();
+
+                String maxLength = attributes.getValue("max-length").trim();
+                if (!maxLength.isEmpty()) {
+                    long maxLen = -1;
+                    try {
+                        maxLen = Long.parseLong(maxLength);
+                    } catch (NumberFormatException ignored) {
+
+                    }
+                    if (maxLen > 0) {
+                        BigInteger maxVal = BigInteger.valueOf(maxLen);
+                        CTFFTextInput.MaxLength maxLengthValue = factory.createCTFFTextInputMaxLength();
+                        maxLengthValue.setVal(maxVal);
+                        textInput.setMaxLength(maxLengthValue);
+                    }
+                }
+
+                String type = attributes.getValue("type").trim();
+                String format = attributes.getValue("format").trim();
+                String useFormat;
+                String typeDefaultValue = null;  // if not null, used if user does not provide default or default is empty
+
+                if (!format.isEmpty()) {
+                    if (type.equals("regular")) {
+                        // we can check these
+                        // "UPPERCASE", "LOWERCASE", "FIRST CAPITAL", "TITLE CASE"
+                        switch (format.toLowerCase()) {
+                            // @formatter:off
+                            case "upper":
+                            case "uppercase":
+                            case "upper-case":
+                            case "upper case":
+                                useFormat = "UPPERCASE";
+                                break;
+
+                            case "lower":
+                            case "lowercase":
+                            case "lower-case":
+                            case "lower case":
+                                useFormat = "LOWERCASE";
+                                break;
+
+                            case "first":
+                            case "firstcap":
+                            case "firstcaps":
+                            case "firstcapital":
+                            case "first-cap":
+                            case "first-caps":
+                            case "first-capital":
+                            case "first cap":
+                            case "first caps":
+                            case "first capital":
+                                useFormat = "FIRST CAPITAL";
+                                break;
+
+                            case "title":
+                            case "titlecase":
+                            case "title-case":
+                            case "title case":
+                                useFormat = "TITLE CASE";
+                                break;
+
+                            default: case "none": useFormat = "";
+                            break;
+                            // @formatter:on
+                        }
+                    } else {
+                        useFormat = format;
+                    }
+
+                    if (!useFormat.isEmpty()) {
+                        CTFFTextInput.Format tiFormat = factory.createCTFFTextInputFormat();
+                        tiFormat.setVal(format);
+                        textInput.setFormat(tiFormat);
+                    }
+                } else {
+                    useFormat = "";
+                }
+
+                STFFTextType stffTextType = null;
+                Runnable extraExtraContent;
+
+                switch (type) {
+                    case "date":
+                        stffTextType = STFFTextType.DATE;
+                        extraExtraContent = null;
+                        typeDefaultValue = getCurrentDate(useFormat.isEmpty() ? "yyyy/M/d" : useFormat);
+                        break;
+                    case "number":
+                        stffTextType = STFFTextType.NUMBER;
+                        typeDefaultValue = "0";
+                        extraExtraContent = null;
+                        break;
+                    case "current-date": {
+                        stffTextType = STFFTextType.CURRENT_TIME; // ms word has these reversed time is date and date is time
+                        //  NOTE: for current date with format
+                        //  <w:r>
+                        //      <w:fldChar w:fldCharType="begin"/>
+                        //  </w:r>
+                        //  <w:r>
+                        //      <w:instrText xml:space="preserve"> DATE \@ "yyyy/M/d" </w:instrText>
+                        //  </w:r>
+                        //  <w:r>
+                        //      <w:fldChar w:fldCharType="separate"/>
+                        //  </w:r>
+                        //  <w:r>
+                        //      <w:rPr>
+                        //          <w:noProof/>
+                        //      </w:rPr>
+                        //      <w:instrText>2019/11/10</w:instrText>
+                        //  </w:r>
+                        //  <w:r>
+                        //      <w:fldChar w:fldCharType="end"/>
+                        //  </w:r>
+                        String currentDate = getCurrentDate(useFormat);
+
+                        typeDefaultValue = currentDate;
+
+                        extraExtraContent = () -> {
+                            docx.createR();
+                            docx.addWrappedFldChar(STFldCharType.BEGIN);
+
+                            docx.createR();
+                            docx.addWrappedInstrText(String.format(" DATE \\@ \"%s\" ", useFormat), true, false);
+
+                            docx.createR();
+                            docx.addWrappedFldChar(STFldCharType.SEPARATE);
+                            docx.createR();
+                            docx.addWrappedInstrText(currentDate, false, true);
+
+                            docx.createR();
+                            docx.addWrappedFldChar(STFldCharType.END);
+                        };
+                    }
+                    break;
+
+                    case "current-time": {
+                        stffTextType = STFFTextType.CURRENT_DATE; // ms word has these reversed time is date and date is time
+                        //  NOTE: for current time with format
+                        //  <w:r>
+                        //      <w:fldChar w:fldCharType="begin"/>
+                        //  </w:r>
+                        //  <w:r>
+                        //      <w:instrText xml:space="preserve"> TIME \@ "yyyy-MM-dd h:mm am/pm" </w:instrText>
+                        //  </w:r>
+                        //  <w:r>
+                        //      <w:fldChar w:fldCharType="separate"/>
+                        //  </w:r>
+                        //  <w:r>
+                        //      <w:rPr>
+                        //          <w:noProof/>
+                        //      </w:rPr>
+                        //      <w:instrText>2019-11-10 8:42 PM</w:instrText>
+                        //  </w:r>
+                        //  <w:r>
+                        //      <w:fldChar w:fldCharType="end"/>
+                        //  </w:r>
+                        String currentTime = getCurrentTime(useFormat);
+
+                        typeDefaultValue = currentTime;
+
+                        extraExtraContent = () -> {
+                            docx.createR();
+                            docx.addWrappedFldChar(STFldCharType.BEGIN);
+
+                            docx.createR();
+                            docx.addWrappedInstrText(String.format(" TIME \\@ \"%s\" ", useFormat), true, false);
+
+                            docx.createR();
+                            docx.addWrappedFldChar(STFldCharType.SEPARATE);
+                            docx.createR();
+                            docx.addWrappedInstrText(currentTime, false, true);
+
+                            docx.createR();
+                            docx.addWrappedFldChar(STFldCharType.END);
+                        };
+                    }
+                    break;
+
+                    default:
+                        stffTextType = STFFTextType.REGULAR;
+                        extraExtraContent = null;
+                        break;
+                }
+
+                // NOTE: extraExtraContent goes ahead
+                //
+                // NOTE: for text only
+                //
+                // <w:r>
+                //    <w:fldChar w:fldCharType="separate"/>
+                // </w:r>
+                // <w:r>
+                //   <w:rPr>
+                //     <w:noProof/>
+                //   </w:rPr>
+                //   <w:t>default text</w:t>
+                // </w:r>
+                if (textDefaultValue.isEmpty() && typeDefaultValue != null) {
+                    textDefaultValue = typeDefaultValue;
+                }
+
+                CTFFTextInput.Default defaultVal = factory.createCTFFTextInputDefault();
+                defaultVal.setVal(textDefaultValue);
+                textInput.setDefault(defaultVal);
+
+                String finalTextDefaultValue = textDefaultValue;
+                extraContent = () -> {
+                    if (extraExtraContent != null) {
+                        extraExtraContent.run();
+                    }
+
+                    docx.createR();
+                    docx.addWrappedFldChar(STFldCharType.SEPARATE);
+
+                    docx.createR();
+                    docx.addWrappedText(finalTextDefaultValue, false, true);
+                };
+
+                CTFFTextType tiType = factory.createCTFFTextType();
+                tiType.setVal(stffTextType);
+                textInput.setType(tiType);
+
+                ffData.getNameOrEnabledOrCalcOnExit().add(factory.createCTFFDataTextInput(textInput));
+                break;
+        }
+
+        // NOTE: bookmarks are optional and wrap, the control content, not implemented
+        // <w:bookmarkStart w:id="0" w:name="Name1"/> - with control name if it is the first and unique
+        //
+        // NOTE: for all
+        //
+        // <w:r>
+        //    <w:instrText xml:space="preserve"> FORMCHECKBOX </w:instrText> - NOTE: the spaces around the text: FORMTEXT, FORMDROPDOWN, FORMCHECKBOX
+        // </w:r>
+        //
+        // NOTE: Extra Text Type Content Here
+        //
+        // NOTE: for all
+        //
+        // <w:r>
+        //    <w:fldChar w:fldCharType="end"/>
+        // </w:r>
+        //
+        //
+        // NOTE: closing of bookmark, not implemented
+        // <w:bookmarkEnd w:id="0"/>
+        //
+
+        docx.createR();
+        docx.addWrappedInstrText(String.format(" %s ", docxFieldType), true, false);
+
+        if (extraContent != null) {
+            extraContent.run();
+        }
+
+        docx.createR();
+        docx.addWrappedFldChar(STFldCharType.END);
+    }
+
+    @NotNull String getCurrentTime(String useFormat) {
+        Date date = options.runningTests ? Date.from(Instant.ofEpochSecond(1000259200L)) : new Date();
+
+        // change to fixed date so test results do not change
+        String currentTime = "";
+        try {
+            SimpleDateFormat dateFormat = new SimpleDateFormat(useFormat);
+            currentTime = dateFormat.format(date);
+        } catch (Exception ignored) {
+        }
+        return currentTime;
+    }
+
+    @NotNull String getCurrentDate(String useFormat) {
+        Date date = options.runningTests ? Date.from(Instant.ofEpochSecond(1000259200L)) : new Date();
+        String currentDate = "";
+        {
+            try {
+                SimpleDateFormat dateFormat = new SimpleDateFormat(useFormat);
+                currentDate = dateFormat.format(date);
+            } catch (Exception ignored) {
+            }
+        }
+        return currentDate;
+    }
+
     private void render(LinkRef node, DocxRendererContext docx) {
         ResolvedLink resolvedLink = null;
 
@@ -966,12 +1465,17 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
         if (resolvedLink == null) {
             // empty ref, we treat it as text
             assert !node.isDefined();
-            if (!node.hasChildren()) {
-                docx.text(node.getChars().unescape());
+
+            if (!options.formControls.isEmpty() && node.getReference().equals(options.formControls)) {
+                renderInputField(node, docx);
             } else {
-                docx.text(node.getChars().prefixOf(node.getChildChars()).unescape());
-                docx.renderChildren(node);
-                docx.text(node.getChars().suffixOf(node.getChildChars()).unescape());
+                if (!node.hasChildren()) {
+                    docx.text(node.getChars().unescape());
+                } else {
+                    docx.text(node.getChars().prefixOf(node.getChildChars()).unescape());
+                    docx.renderChildren(node);
+                    docx.text(node.getChars().suffixOf(node.getChildChars()).unescape());
+                }
             }
         } else {
             Attributes attributes = resolvedLink.getNonNullAttributes();

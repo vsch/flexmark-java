@@ -1,5 +1,6 @@
 package com.vladsch.flexmark.util;
 
+import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 import java.io.*;
@@ -11,6 +12,8 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class Utils {
+    public static final DataKey<Boolean> RUNNING_TESTS = new DataKey<>("RUNNING_TESTS", false);
+
     public static <T> T ifNull(T receiver, T altValue) {
         return (receiver == null) ? altValue : receiver;
     }

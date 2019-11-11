@@ -9,7 +9,9 @@ flexmark-java
 - [Next 0.60.0](#next-0600)
     - [API Changes](#api-changes)
 - [Next](#next)
-- [Next 0.59.42](#next-05942)
+- [Next 0.59.46](#next-05946)
+- [0.59.44](#05944)
+- [0.59.42](#05942)
 - [0.59.40](#05940)
 - [0.59.38](#05938)
 - [0.59.36](#05936)
@@ -177,7 +179,7 @@ Next
 `repeatOf`, `prefixOf` otherwise it is possible to have the wrong factory method called and not see it.
 
 
-Next 0.59.42
+Next 0.59.46
 ------------
 
 * [ ] Add: `Formatter` Paragraph wrapping.
@@ -185,6 +187,42 @@ Next 0.59.42
   * [ ] Test: position marker preservation with direction type
 * Add: skeleton code for offset tracking through base sequence manipulations.
   * [ ] Add: real code to handle offset tracking.
+* [ ] Fix: Document docx form controls in wiki
+
+0.59.44
+-------
+
+* Add: docx renderer form fields via `[name]{.class attributes}` where name is given by `DocxRenderer.FORM_CONTROLS` and if not empty or blank then
+  an unresolved reference link with that name will be converted to a word form input field with type and options given in teh attributes.
+  * drop down list, class name `.dropdown` attributes:
+    * `name` - name for the form field
+    * `default` - default selection first item if no default provided. Can be option text (case sensitive tried first, if no match then case insensitive is tried), if text match fails then attempted to parse as an integer index 1..number of options
+    * `help` - text to show in status bar and on hitting F1
+    * `options` - list of options separated by `|`, individual options will be trimmed but otherwise left as is
+  * checkbox, class name `.checkbox` attributes:
+    * `name` - name for the form field
+    * `checked` - default will be checked, otherwise unchecked
+    * `help` - text to show in status bar and on hitting F1
+  * text, class name `.text` attributes:
+    * `name` - name for the form field
+    * `default` - default value
+    * `help` - text to show in status bar and on hitting F1
+    * `max-length` - number or leave out for unlimited
+    * `type` - gives the type of text field
+      * `regular` - default if type not provided, regular text
+        * `format` - `UPPERCASE`, `LOWERCASE`, `FIRST CAPITAL`, `TITLE CASE`, not case sensitive, space between words can be eliminated or replaced by `-`
+      * `date` - date
+        * `format` - word date format
+      * `number` - number
+        * `format` - word number format
+      * `current-date` - current date
+        * `format` - word date format
+      * `current-time` - current time
+        * `format` - word time format
+
+0.59.42
+-------
+
 * Break: `BasedSequence.append(CharSequence[])` now constructs as segmented sequence so proper
 ordering of segments is enforced. This means `IllegalArgumentException` will be thrown when this
   condition is not met. To get old functionality you need to create an appended string of all sequences and `BasedSequence.of()` on that string.

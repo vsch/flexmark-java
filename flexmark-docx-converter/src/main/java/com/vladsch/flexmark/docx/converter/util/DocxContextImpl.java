@@ -360,6 +360,13 @@ public abstract class DocxContextImpl<T> implements DocxContext<T>, BlockFormatP
     }
 
     @Override
+    public BooleanDefaultTrue getBooleanDefaultTrue(boolean value) {
+        BooleanDefaultTrue defaultTrue = getFactory().createBooleanDefaultTrue();
+        defaultTrue.setVal(value);
+        return defaultTrue;
+    }
+
+    @Override
     public CTShd getCTShd() {
         RPr rPr = getRPr();
         CTShd ctShd = rPr.getShd();
@@ -500,6 +507,44 @@ public abstract class DocxContextImpl<T> implements DocxContext<T>, BlockFormatP
         JAXBElement<Text> textWrapped = myFactory.createRT(text);
         getR().getContent().add(textWrapped);
         return text;
+    }
+
+    @Override
+    public Text addWrappedText(String value, boolean spacePreserve, boolean noProofRPr) {
+        if (noProofRPr) {
+            RPr rpr = getRPr();
+            rpr.setNoProof(new BooleanDefaultTrue());
+        }
+
+        Text text = myFactory.createText();
+        if (spacePreserve) text.setSpace(RunFormatProvider.SPACE_PRESERVE);
+        text.setValue(value);
+        JAXBElement<Text> textWrapped = myFactory.createRT(text);
+        getR().getContent().add(textWrapped);
+        return text;
+    }
+
+    @Override
+    public Text addWrappedInstrText(String instrText, boolean spacePreserve, boolean noProofRPr) {
+        // Create object for t (wrapped in JAXBElement)
+        if (noProofRPr) {
+            RPr rpr = getRPr();
+            rpr.setNoProof(new BooleanDefaultTrue());
+        }
+
+        Text text = myFactory.createText();
+        if (spacePreserve) text.setSpace(RunFormatProvider.SPACE_PRESERVE);
+        text.setValue(instrText);
+        getR().getContent().add(myFactory.createRInstrText(text));
+        return text;
+    }
+
+    @Override
+    public FldChar addWrappedFldChar(STFldCharType charType) {
+        FldChar fldChar = myFactory.createFldChar();
+        fldChar.setFldCharType(charType);
+        getR().getContent().add(myFactory.createRFldChar(fldChar));
+        return fldChar;
     }
 
     @Override

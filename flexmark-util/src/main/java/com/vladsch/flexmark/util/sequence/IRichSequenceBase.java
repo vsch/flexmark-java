@@ -6,6 +6,7 @@ import com.vladsch.flexmark.util.html.Escaping;
 import com.vladsch.flexmark.util.mappers.ChangeCase;
 import com.vladsch.flexmark.util.mappers.CharMapper;
 import com.vladsch.flexmark.util.mappers.SpaceMapper;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -79,6 +80,17 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
             }
         }
         return len1 - len2;
+    }
+
+    @NotNull
+    public static String[] toStringArray(CharSequence... sequences) {
+        String[] result = new String[sequences.length];
+        int i = 0;
+        for (CharSequence sequence : sequences) {
+            result[i] = sequences[i] == null ? null : sequences[i].toString();
+            i++;
+        }
+        return result;
     }
 
     @Override
@@ -1672,6 +1684,7 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
     }
 
     @Override
+    @Contract(pure = true, value = "null->false")
     final public boolean equals(Object other) {
         return (this == other) || other instanceof CharSequence && ((CharSequence) other).length() == length() && matchChars((CharSequence) other, 0, false);
     }

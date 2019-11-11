@@ -425,12 +425,12 @@ public class BasedSequenceImplTest {
     @Test
     public void test_getLineColumnAtIndex() {
         String[] lines = new String[] {
-            "1: line 1\n",
-            "2: line 2\n",
-            "3: line 3\r",
-            "4: line 4\r\n",
-            "5: line 5\r",
-            "6: line 6"
+                "1: line 1\n",
+                "2: line 2\n",
+                "3: line 3\r",
+                "4: line 4\r\n",
+                "5: line 5\r",
+                "6: line 6"
         };
 
         int iMax = lines.length;
@@ -811,14 +811,14 @@ public class BasedSequenceImplTest {
     @Test
     public void test_removeBlankLinesRanges1() {
         String input = "\n" +
-            "\t    test\n" +
-            "\n" +
-            "\n" +
-            "";
+                "\t    test\n" +
+                "\n" +
+                "\n" +
+                "";
 
         String result = "" +
-            "\t    test\n" +
-            "";
+                "\t    test\n" +
+                "";
 
         BasedSequence sequence = BasedSequence.of(input);
         assertEquals(result, sequence.extractRanges(sequence.blankLinesRemovedRanges()).toString());
@@ -827,16 +827,16 @@ public class BasedSequenceImplTest {
     @Test
     public void test_removeBlankLinesRanges2() {
         String input = "\n" +
-            "\t    test\n" +
-            "\n" +
-            "    t\n" +
-            "\n" +
-            "";
+                "\t    test\n" +
+                "\n" +
+                "    t\n" +
+                "\n" +
+                "";
 
         String result = "" +
-            "\t    test\n" +
-            "    t\n" +
-            "";
+                "\t    test\n" +
+                "    t\n" +
+                "";
 
         BasedSequence sequence = BasedSequence.of(input);
         assertEquals(result, sequence.extractRanges(sequence.blankLinesRemovedRanges()).toString());
@@ -845,27 +845,27 @@ public class BasedSequenceImplTest {
     @Test
     public void test_removeBlankLinesRanges3() {
         String input = "\n" +
-            "\t    test\n" +
-            "\n" +
-            "    t1\n" +
-            "\n" +
-            "    t2\n" +
-            "\n" +
-            "\n" +
-            "\n" +
-            "    t3\n" +
-            "\n" +
-            "    t4\n" +
-            "\n" +
-            "";
+                "\t    test\n" +
+                "\n" +
+                "    t1\n" +
+                "\n" +
+                "    t2\n" +
+                "\n" +
+                "\n" +
+                "\n" +
+                "    t3\n" +
+                "\n" +
+                "    t4\n" +
+                "\n" +
+                "";
 
         String result = "" +
-            "\t    test\n" +
-            "    t1\n" +
-            "    t2\n" +
-            "    t3\n" +
-            "    t4\n" +
-            "";
+                "\t    test\n" +
+                "    t1\n" +
+                "    t2\n" +
+                "    t3\n" +
+                "    t4\n" +
+                "";
 
         BasedSequence sequence = BasedSequence.of(input);
         assertEquals(result, sequence.extractRanges(sequence.blankLinesRemovedRanges()).toString());
@@ -874,9 +874,9 @@ public class BasedSequenceImplTest {
     @Test
     public void test_extendToEndOfLine() {
         String input = "" +
-            "0123456789\n" +
-            "abcdefghij\n" +
-            "\n";
+                "0123456789\n" +
+                "abcdefghij\n" +
+                "\n";
 
         BasedSequence sequence = BasedSequence.of(input);
 
@@ -896,9 +896,9 @@ public class BasedSequenceImplTest {
     @Test
     public void test_extendToStartOfLine() {
         String input = "" +
-            "0123456789\n" +
-            "abcdefghij\n" +
-            "\n";
+                "0123456789\n" +
+                "abcdefghij\n" +
+                "\n";
 
         BasedSequence sequence = BasedSequence.of(input);
 
@@ -924,6 +924,17 @@ public class BasedSequenceImplTest {
         assertSame(sequence, sequence.insert("", 0));
         assertSame(sequence, sequence.insert("", 20));
         assertSame(sequence, sequence.insert("", -5));
+    }
+
+    @Test
+    public void test_split() {
+        String input = " 012 | 345 | 678 | 9";
+        BasedSequence sequence = BasedSequence.of(input);
+        BasedSequence[] split = sequence.split("|", 0, BasedSequence.SPLIT_TRIM_PARTS, BasedSequence.SPACE_TAB);
+        String[] expected = new String[] { "012", "345", "678", "9" };
+        String[] actual = IRichSequenceBase.toStringArray(split);
+
+        assertArrayEquals(expected, actual);
     }
 
     @Test
@@ -1453,20 +1464,20 @@ public class BasedSequenceImplTest {
         String input = "\n234\n789\n";
 
         BasedSequence sequence = BasedSequence.of(input);
-        assertEquals(Range.of(0,0), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 0).getSourceRange());
-        assertEquals(Range.of(0,4), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 1).getSourceRange());
-        assertEquals(Range.of(0,4), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 2).getSourceRange());
-        assertEquals(Range.of(0,4), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 3).getSourceRange());
-        assertEquals(Range.of(0,4), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 4).getSourceRange());
-        assertEquals(Range.of(0,8), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 5).getSourceRange());
-        assertEquals(Range.of(0,8), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 6).getSourceRange());
-        assertEquals(Range.of(0,8), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 7).getSourceRange());
-        assertEquals(Range.of(0,8), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 8).getSourceRange());
-        assertEquals(Range.of(0,9), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 9).getSourceRange());
-        assertEquals(Range.of(0,9), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 10).getSourceRange());
-        assertEquals(Range.of(0,9), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 11).getSourceRange());
-        assertEquals(Range.of(0,9), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 12).getSourceRange());
-        assertEquals(Range.of(0,9), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 13).getSourceRange());
+        assertEquals(Range.of(0, 0), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 0).getSourceRange());
+        assertEquals(Range.of(0, 4), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 1).getSourceRange());
+        assertEquals(Range.of(0, 4), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 2).getSourceRange());
+        assertEquals(Range.of(0, 4), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 3).getSourceRange());
+        assertEquals(Range.of(0, 4), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 4).getSourceRange());
+        assertEquals(Range.of(0, 8), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 5).getSourceRange());
+        assertEquals(Range.of(0, 8), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 6).getSourceRange());
+        assertEquals(Range.of(0, 8), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 7).getSourceRange());
+        assertEquals(Range.of(0, 8), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 8).getSourceRange());
+        assertEquals(Range.of(0, 9), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 9).getSourceRange());
+        assertEquals(Range.of(0, 9), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 10).getSourceRange());
+        assertEquals(Range.of(0, 9), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 11).getSourceRange());
+        assertEquals(Range.of(0, 9), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 12).getSourceRange());
+        assertEquals(Range.of(0, 9), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 13).getSourceRange());
     }
 
     @Test
@@ -1474,20 +1485,20 @@ public class BasedSequenceImplTest {
         String input = "\r234\r789\r";
 
         BasedSequence sequence = BasedSequence.of(input);
-        assertEquals(Range.of(0,0), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 0).getSourceRange());
-        assertEquals(Range.of(0,4), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 1).getSourceRange());
-        assertEquals(Range.of(0,4), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 2).getSourceRange());
-        assertEquals(Range.of(0,4), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 3).getSourceRange());
-        assertEquals(Range.of(0,4), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 4).getSourceRange());
-        assertEquals(Range.of(0,8), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 5).getSourceRange());
-        assertEquals(Range.of(0,8), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 6).getSourceRange());
-        assertEquals(Range.of(0,8), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 7).getSourceRange());
-        assertEquals(Range.of(0,8), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 8).getSourceRange());
-        assertEquals(Range.of(0,9), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 9).getSourceRange());
-        assertEquals(Range.of(0,9), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 10).getSourceRange());
-        assertEquals(Range.of(0,9), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 11).getSourceRange());
-        assertEquals(Range.of(0,9), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 12).getSourceRange());
-        assertEquals(Range.of(0,9), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 13).getSourceRange());
+        assertEquals(Range.of(0, 0), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 0).getSourceRange());
+        assertEquals(Range.of(0, 4), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 1).getSourceRange());
+        assertEquals(Range.of(0, 4), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 2).getSourceRange());
+        assertEquals(Range.of(0, 4), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 3).getSourceRange());
+        assertEquals(Range.of(0, 4), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 4).getSourceRange());
+        assertEquals(Range.of(0, 8), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 5).getSourceRange());
+        assertEquals(Range.of(0, 8), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 6).getSourceRange());
+        assertEquals(Range.of(0, 8), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 7).getSourceRange());
+        assertEquals(Range.of(0, 8), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 8).getSourceRange());
+        assertEquals(Range.of(0, 9), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 9).getSourceRange());
+        assertEquals(Range.of(0, 9), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 10).getSourceRange());
+        assertEquals(Range.of(0, 9), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 11).getSourceRange());
+        assertEquals(Range.of(0, 9), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 12).getSourceRange());
+        assertEquals(Range.of(0, 9), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 13).getSourceRange());
     }
 
     @Test
@@ -1495,21 +1506,20 @@ public class BasedSequenceImplTest {
         String input = "\r\n234\r\n789\r\n";
 
         BasedSequence sequence = BasedSequence.of(input);
-        assertEquals(Range.of(0,0), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 0).getSourceRange());
-        assertEquals(Range.of(0,1), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 1).getSourceRange());
-        assertEquals(Range.of(0,5), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 2).getSourceRange());
-        assertEquals(Range.of(0,5), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 3).getSourceRange());
-        assertEquals(Range.of(0,5), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 4).getSourceRange());
-        assertEquals(Range.of(0,5), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 5).getSourceRange());
-        assertEquals(Range.of(0,6), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 6).getSourceRange());
-        assertEquals(Range.of(0,10), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 7).getSourceRange());
-        assertEquals(Range.of(0,10), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 8).getSourceRange());
-        assertEquals(Range.of(0,10), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 9).getSourceRange());
-        assertEquals(Range.of(0,10), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 10).getSourceRange());
-        assertEquals(Range.of(0,11), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 11).getSourceRange());
-        assertEquals(Range.of(0,12), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 12).getSourceRange());
-        assertEquals(Range.of(0,12), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 13).getSourceRange());
-        assertEquals(Range.of(0,12), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 14).getSourceRange());
+        assertEquals(Range.of(0, 0), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 0).getSourceRange());
+        assertEquals(Range.of(0, 1), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 1).getSourceRange());
+        assertEquals(Range.of(0, 5), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 2).getSourceRange());
+        assertEquals(Range.of(0, 5), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 3).getSourceRange());
+        assertEquals(Range.of(0, 5), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 4).getSourceRange());
+        assertEquals(Range.of(0, 5), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 5).getSourceRange());
+        assertEquals(Range.of(0, 6), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 6).getSourceRange());
+        assertEquals(Range.of(0, 10), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 7).getSourceRange());
+        assertEquals(Range.of(0, 10), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 8).getSourceRange());
+        assertEquals(Range.of(0, 10), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 9).getSourceRange());
+        assertEquals(Range.of(0, 10), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 10).getSourceRange());
+        assertEquals(Range.of(0, 11), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 11).getSourceRange());
+        assertEquals(Range.of(0, 12), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 12).getSourceRange());
+        assertEquals(Range.of(0, 12), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 13).getSourceRange());
+        assertEquals(Range.of(0, 12), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 14).getSourceRange());
     }
-
 }

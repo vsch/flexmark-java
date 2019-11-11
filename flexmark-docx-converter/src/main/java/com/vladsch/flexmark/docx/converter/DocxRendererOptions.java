@@ -1,5 +1,6 @@
 package com.vladsch.flexmark.docx.converter;
 
+import com.vladsch.flexmark.util.Utils;
 import com.vladsch.flexmark.util.data.DataHolder;
 import org.docx4j.openpackaging.exceptions.Docx4JException;
 import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
@@ -69,6 +70,8 @@ public class DocxRendererOptions {
     public final double docEmojiImageVertOffset;
     public final double docEmojiImageVertSize;
     public final String errorSourceFile;
+    public final String formControls;
+    public final boolean runningTests;
 
     public final String ASIDE_BLOCK_STYLE;
     public final String BLOCK_QUOTE_STYLE;
@@ -141,6 +144,8 @@ public class DocxRendererOptions {
         tocGenerate = DocxRenderer.TOC_GENERATE.get(options);
         logImageProcessing = DocxRenderer.LOG_IMAGE_PROCESSING.get(options);
         noCharacterStyles = DocxRenderer.NO_CHARACTER_STYLES.get(options);
+        formControls = DocxRenderer.FORM_CONTROLS.get(options).trim();
+        runningTests = Utils.RUNNING_TESTS.get(options);
         codeHighlightShading = DocxRenderer.CODE_HIGHLIGHT_SHADING.get(options);
         localHyperlinkSuffix = DocxRenderer.LOCAL_HYPERLINK_SUFFIX.get(options);
         localHyperlinkMissingHighlight = DocxRenderer.LOCAL_HYPERLINK_MISSING_HIGHLIGHT.get(options);
@@ -226,6 +231,8 @@ public class DocxRendererOptions {
         docEmojiImageVertSize = other.docEmojiImageVertSize;
         errorSourceFile = other.errorSourceFile;
         prefixWwwLinks = other.prefixWwwLinks;
+        formControls = other.formControls;
+        runningTests = other.runningTests;
 
         ASIDE_BLOCK_STYLE = resolveStyleId(other.ASIDE_BLOCK_STYLE, other.isResolved);
         BLOCK_QUOTE_STYLE = resolveStyleId(other.BLOCK_QUOTE_STYLE, other.isResolved);

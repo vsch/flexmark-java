@@ -154,6 +154,35 @@ public interface DocxContext<T> extends DocxContextFrameProvider<T> {
      */
     Text addWrappedText();
 
+    /**
+     * Create and add wrapped Text element to R element
+     * set value and optionally space preserve
+     *
+     * @param value value to set
+     * @param spacePreserve  if true set space preserve
+     * @param noProofRPr if true will add rPr with noProof tag to R
+     * @return Text element
+     */
+    Text addWrappedText(String value, boolean spacePreserve, boolean noProofRPr);
+
+    /**
+     * Create and add wrapped Text element to R element as RInstrText
+     *
+     * @param instrText instrText Value
+     * @param spacePreserve if true wills set space preserve on it
+     * @param noProofRPr if true will add rPr with noProof tag to R
+     * @return Text element
+     */
+    Text addWrappedInstrText(String instrText, boolean spacePreserve, boolean noProofRPr);
+
+    /**
+     * Create and add wrapped Text element to R element as RInstrText
+     *
+     * @param charType  char type to set
+     * @return FldChar element
+     */
+    FldChar addWrappedFldChar(STFldCharType charType);
+
     void addPageBreak();
 
     void addBreak(STBrType breakType);
@@ -164,6 +193,7 @@ public interface DocxContext<T> extends DocxContextFrameProvider<T> {
 
     RPr getRPr();
 
+    BooleanDefaultTrue getBooleanDefaultTrue(boolean value);
     /**
      * Get CTShd from current R or create rPr if none and CTShd if none
      *

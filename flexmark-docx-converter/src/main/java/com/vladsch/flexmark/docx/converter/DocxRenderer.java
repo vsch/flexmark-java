@@ -83,6 +83,7 @@ public class DocxRenderer implements IRender {
     public static final DataKey<String> ERROR_SOURCE_FILE = new DataKey<>("ERROR_SOURCE_FILE", "");
     public static final DataKey<Double> DOC_EMOJI_IMAGE_VERT_OFFSET = new DataKey<>("DOC_EMOJI_IMAGE_VERT_OFFSET", -0.10);  // offset emoji images down by 10% of the line height, final value rounded to nearest pt so can create jumps in position
     public static final DataKey<Double> DOC_EMOJI_IMAGE_VERT_SIZE = new DataKey<>("DOC_EMOJI_IMAGE_VERT_SIZE", 0.9);  // size of image as factor of line height range >0
+    public static final DataKey<String> FORM_CONTROLS = new DataKey<>("FORM_CONTROLS", ""); // enable form controls with name given by this key [name]{.type attributes}
 
     // for compatibility with HtmlIdGenerator these are placed here
     public static final DataKey<Boolean> HEADER_ID_GENERATOR_RESOLVE_DUPES = HtmlRenderer.HEADER_ID_GENERATOR_RESOLVE_DUPES;

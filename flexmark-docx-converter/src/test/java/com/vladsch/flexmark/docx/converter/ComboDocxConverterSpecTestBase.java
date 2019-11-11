@@ -52,7 +52,7 @@ import java.util.Map;
 import static com.vladsch.flexmark.util.Utils.*;
 
 public abstract class ComboDocxConverterSpecTestBase extends ComboSpecTestCase {
-    // RELEASE : change to true for release
+    // RELEASE: change to true for release
     static final boolean SKIP_IGNORED_TESTS = true;
     static final boolean DUMP_TEST_CASE_FILES = !SKIP_IGNORED_TESTS;
     static final boolean DUMP_ALL_TESTS_FILES = !SKIP_IGNORED_TESTS;
@@ -89,6 +89,7 @@ public abstract class ComboDocxConverterSpecTestBase extends ComboSpecTestCase {
             .set(DocxRenderer.RENDER_BODY_ONLY, true)
             .set(DocxRenderer.DOC_RELATIVE_URL, String.format("file://%s", PROJECT_ROOT_DIRECTORY))
             .set(DocxRenderer.DOC_ROOT_URL, String.format("file://%s/assets", PROJECT_ROOT_DIRECTORY))
+            .set(RUNNING_TESTS, SKIP_IGNORED_TESTS)
             .set(DocxRenderer.SUPPRESS_HTML, true);
 
     private static HashMap<String, DataHolder> optionsMap = new HashMap<>();
@@ -106,6 +107,8 @@ public abstract class ComboDocxConverterSpecTestBase extends ComboSpecTestCase {
         optionsMap.put("table-no-span", new MutableDataSet().set(TablesExtension.COLUMN_SPANS, false));
         optionsMap.put("url", new MutableDataSet().set(DocxRenderer.DOC_RELATIVE_URL, String.format("file://%s", PROJECT_ROOT_DIRECTORY)));
         optionsMap.put("yellow-missing-hyperlink", new MutableDataSet().set(DocxRenderer.LOCAL_HYPERLINK_MISSING_HIGHLIGHT, "yellow"));
+        optionsMap.put("form-controls-input", new MutableDataSet().set(DocxRenderer.FORM_CONTROLS, "input"));
+        optionsMap.put("form-controls-form", new MutableDataSet().set(DocxRenderer.FORM_CONTROLS, "form"));
     }
     public ComboDocxConverterSpecTestBase(@NotNull SpecExample example, @Nullable Map<String, ? extends DataHolder> optionMap, @Nullable DataHolder... defaultOptions) {
         super(example, optionsMaps(optionsMap, optionMap), dataHolders(OPTIONS, defaultOptions));
