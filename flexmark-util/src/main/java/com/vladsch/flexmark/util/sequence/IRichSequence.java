@@ -1176,7 +1176,7 @@ public interface IRichSequence<T extends IRichSequence<T>> extends CharSequence,
      * @param limit     max number of segments to split
      * @param flags     flags for desired options:
      *                  SPLIT_INCLUDE_DELIMS: include delimiters as part of split item
-     *                  SPLIT_TRIM_PARTS: trim the segments
+     *                  SPLIT_TRIM_PARTS: trim the segments, if trimChars is not null or empty then this flag is turned on automatically
      *                  SPLIT_SKIP_EMPTY: skip empty segments (or empty after trimming if enabled)
      *                  SPLIT_INCLUDE_DELIM_PARTS: include delimiters as separate split item of its own
      *                  SPLIT_TRIM_SKIP_EMPTY: same as SPLIT_TRIM_PARTS | SPLIT_SKIP_EMPTY

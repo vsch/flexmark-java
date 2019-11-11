@@ -3278,11 +3278,13 @@ Document[0, 50]
 ````````````````````````````````
 
 
-## Issue
+## Issues
+
+### xxx
 
 Issue markdown page generator
 
-```````````````````````````````` example Issue: 1
+```````````````````````````````` example Issues - xxx: 1
 ### hello `<html>` and `<body>`
 .
 <h3><a href="#hello-html-and-body" id="hello-html-and-body"></a>hello <code>&lt;html&gt;</code> and <code>&lt;body&gt;</code></h3>
@@ -3296,6 +3298,90 @@ Document[0, 31]
     Text[18, 23] chars:[18, 23, " and "]
     Code[23, 31] textOpen:[23, 24, "`"] text:[24, 30, "<body>"] textClose:[30, 31, "`"]
       Text[24, 30] chars:[24, 30, "<body>"]
+````````````````````````````````
+
+
+### 376
+
+```````````````````````````````` example Issues - 376: 1
+test1|test2|test3|test4|test5|test6
+:------:|:------:|:------:|:------:|:------:|:------:|:------:
+1*1 | 1*1|1 |3.8%|40.6|523|78
+1*10|1*10|24 |82.7%|72.3|360|1134.1
+.
+<table>
+  <thead>
+    <tr><th align="center">test1</th><th align="center">test2</th><th align="center">test3</th><th align="center">test4</th><th align="center">test5</th><th align="center">test6</th></tr>
+  </thead>
+  <tbody>
+    <tr><td align="center">1*1 </td><td align="center"> 1*1</td><td align="center">1 </td><td align="center">3.8%</td><td align="center">40.6</td><td align="center">523</td><td align="center">78</td></tr>
+    <tr><td align="center">1*10</td><td align="center">1*10</td><td align="center">24 </td><td align="center">82.7%</td><td align="center">72.3</td><td align="center">360</td><td align="center">1134.1</td></tr>
+  </tbody>
+</table>
+.
+Document[0, 164]
+  TableBlock[0, 164]
+    TableHead[0, 35]
+      TableRow[0, 35] rowNumber=1
+        TableCell[0, 6] CENTER header text:[0, 5, "test1"] textClose:[5, 6, "|"]
+          Text[0, 5] chars:[0, 5, "test1"]
+        TableCell[6, 12] CENTER header text:[6, 11, "test2"] textClose:[11, 12, "|"]
+          Text[6, 11] chars:[6, 11, "test2"]
+        TableCell[12, 18] CENTER header text:[12, 17, "test3"] textClose:[17, 18, "|"]
+          Text[12, 17] chars:[12, 17, "test3"]
+        TableCell[18, 24] CENTER header text:[18, 23, "test4"] textClose:[23, 24, "|"]
+          Text[18, 23] chars:[18, 23, "test4"]
+        TableCell[24, 30] CENTER header text:[24, 29, "test5"] textClose:[29, 30, "|"]
+          Text[24, 29] chars:[24, 29, "test5"]
+        TableCell[30, 35] CENTER header text:[30, 35, "test6"]
+          Text[30, 35] chars:[30, 35, "test6"]
+    TableSeparator[36, 98]
+      TableRow[36, 98]
+        TableCell[36, 45] CENTER text:[36, 44, ":------:"] textClose:[44, 45, "|"]
+          Text[36, 44] chars:[36, 44, ":------:"]
+        TableCell[45, 54] CENTER text:[45, 53, ":------:"] textClose:[53, 54, "|"]
+          Text[45, 53] chars:[45, 53, ":------:"]
+        TableCell[54, 63] CENTER text:[54, 62, ":------:"] textClose:[62, 63, "|"]
+          Text[54, 62] chars:[54, 62, ":------:"]
+        TableCell[63, 72] CENTER text:[63, 71, ":------:"] textClose:[71, 72, "|"]
+          Text[63, 71] chars:[63, 71, ":------:"]
+        TableCell[72, 81] CENTER text:[72, 80, ":------:"] textClose:[80, 81, "|"]
+          Text[72, 80] chars:[72, 80, ":------:"]
+        TableCell[81, 90] CENTER text:[81, 89, ":------:"] textClose:[89, 90, "|"]
+          Text[81, 89] chars:[81, 89, ":------:"]
+        TableCell[90, 98] CENTER text:[90, 98, ":------:"]
+          Text[90, 98] chars:[90, 98, ":------:"]
+    TableBody[99, 164]
+      TableRow[99, 128] rowNumber=1
+        TableCell[99, 104] CENTER text:[99, 103, "1*1 "] textClose:[103, 104, "|"]
+          Text[99, 103] chars:[99, 103, "1*1 "]
+        TableCell[104, 109] CENTER text:[104, 108, " 1*1"] textClose:[108, 109, "|"]
+          Text[104, 108] chars:[104, 108, " 1*1"]
+        TableCell[109, 112] CENTER text:[109, 111, "1 "] textClose:[111, 112, "|"]
+          Text[109, 111] chars:[109, 111, "1 "]
+        TableCell[112, 117] CENTER text:[112, 116, "3.8%"] textClose:[116, 117, "|"]
+          Text[112, 116] chars:[112, 116, "3.8%"]
+        TableCell[117, 122] CENTER text:[117, 121, "40.6"] textClose:[121, 122, "|"]
+          Text[117, 121] chars:[117, 121, "40.6"]
+        TableCell[122, 126] CENTER text:[122, 125, "523"] textClose:[125, 126, "|"]
+          Text[122, 125] chars:[122, 125, "523"]
+        TableCell[126, 128] CENTER text:[126, 128, "78"]
+          Text[126, 128] chars:[126, 128, "78"]
+      TableRow[129, 164] rowNumber=2
+        TableCell[129, 134] CENTER text:[129, 133, "1*10"] textClose:[133, 134, "|"]
+          Text[129, 133] chars:[129, 133, "1*10"]
+        TableCell[134, 139] CENTER text:[134, 138, "1*10"] textClose:[138, 139, "|"]
+          Text[134, 138] chars:[134, 138, "1*10"]
+        TableCell[139, 143] CENTER text:[139, 142, "24 "] textClose:[142, 143, "|"]
+          Text[139, 142] chars:[139, 142, "24 "]
+        TableCell[143, 149] CENTER text:[143, 148, "82.7%"] textClose:[148, 149, "|"]
+          Text[143, 148] chars:[143, 148, "82.7%"]
+        TableCell[149, 154] CENTER text:[149, 153, "72.3"] textClose:[153, 154, "|"]
+          Text[149, 153] chars:[149, 153, "72.3"]
+        TableCell[154, 158] CENTER text:[154, 157, "360"] textClose:[157, 158, "|"]
+          Text[154, 157] chars:[154, 157, "360"]
+        TableCell[158, 164] CENTER text:[158, 164, "1134.1"]
+          Text[158, 164] chars:[158, 164, "1134.1"]
 ````````````````````````````````
 
 

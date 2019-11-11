@@ -9,6 +9,7 @@ flexmark-java
 - [Next 0.60.0](#next-0600)
     - [API Changes](#api-changes)
 - [Next](#next)
+- [Next 0.59.48](#next-05948)
 - [Next 0.59.46](#next-05946)
 - [0.59.44](#05944)
 - [0.59.42](#05942)
@@ -32,6 +33,7 @@ flexmark-java
     - [0.59.7](#0597)
     - [0.59.5](#0595)
     - [0.59.1](#0591)
+- [Next 0.50.44](#next-05044)
 - [0.50.42](#05042)
 - [0.50.40](#05040)
 - [0.50.38](#05038)
@@ -178,8 +180,7 @@ Next
 * Deprecate: all static factory method named `of` to more specific so that errors are less likely.
 `repeatOf`, `prefixOf` otherwise it is possible to have the wrong factory method called and not see it.
 
-
-Next 0.59.46
+Next 0.59.48
 ------------
 
 * [ ] Add: `Formatter` Paragraph wrapping.
@@ -187,7 +188,29 @@ Next 0.59.46
   * [ ] Test: position marker preservation with direction type
 * Add: skeleton code for offset tracking through base sequence manipulations.
   * [ ] Add: real code to handle offset tracking.
+
+Next 0.59.46
+------------
+
 * [ ] Fix: Document docx form controls in wiki
+* [ ] Fix: spec files no longer render HTML when option selected.
+* Fix: [#376, convert markdown to html], delimiters are not allowed to span table cells.
+* Add: `Text addText(String value, boolean noProofRPr, boolean createR)`
+* Add: `Text addTextCreateR(String value, boolean noProofRPr)`
+* Add: `Text addTextCreateR(String value)`
+* Add: `Text addText(String value, boolean noProofRPr)`
+* Add: `Text addText(String value)`
+* Add: `Text addInstrText(String value, boolean noProofRPr, boolean createR)`
+* Add: `Text addInstrTextCreateR(String value, boolean noProofRPr)`
+* Add: `Text addInstrTextCreateR(String value)`
+* Add: `Text addInstrText(String value, boolean noProofRPr)`
+* Add: `Text addInstrText(String value)`
+* Add: `FldChar addFldChar(STFldCharType charType, boolean createR)`
+* Add: `FldChar addFldCharCreateR(STFldCharType charType)`
+* Add: `FldChar addFldChar(STFldCharType charType)`
+* Deprecate: `DocxContext.addWrappedText()` use `DocxContext.addText(String)`
+* Deprecate: `DocxContext.text(String)` use `DocxContext.addTextCreateR(String)`
+* Fix: `IRichSequenceBase.split` and `IRichSequenceBase.splitList` some combinations would pass parameters out of place causing wrong operation.
 
 0.59.44
 -------
@@ -630,6 +653,11 @@ ordering of segments is enforced. This means `IllegalArgumentException` will be 
 * Break: make `NodeAdaptedVisitor.myCustomHandlersMap` private. Use
   `NodeAdaptedVisitor.getHandler(Node)`, `NodeAdaptedVisitor.getHandler(Class<?>)`, and
   `NodeAdaptedVisitor.getNodeClasses()` to get access to contained data.
+
+Next 0.50.44
+------------
+
+* Fix: [#376, convert markdown to html], delimiters are not allowed to span table cells.
 
 0.50.42
 -------
@@ -1446,4 +1474,6 @@ ordering of segments is enforced. This means `IllegalArgumentException` will be 
 [NodeInsertingPostProcessorSample.java]: https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/java/samples/NodeInsertingPostProcessorSample.java
 [PdfLandscapeConverter.java]: https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/java/samples/PdfLandscapeConverter.java
 [YouTrack: IDEA-207453]: https://youtrack.jetbrains.com/issue/IDEA-207453 "Add Conversion of ref anchor to UrlFilter for file line navigation"
+[#376, convert markdown to html]: https://github.com/vsch/flexmark-java/issues/376
+
 

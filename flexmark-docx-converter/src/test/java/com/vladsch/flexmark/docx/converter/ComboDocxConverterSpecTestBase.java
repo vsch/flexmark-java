@@ -1,7 +1,6 @@
 package com.vladsch.flexmark.docx.converter;
 
 import com.vladsch.flexmark.docx.converter.util.DocxContextImpl;
-import com.vladsch.flexmark.docx.converter.util.RunFormatProvider;
 import com.vladsch.flexmark.docx.converter.util.XmlDocxSorter;
 import com.vladsch.flexmark.ext.aside.AsideExtension;
 import com.vladsch.flexmark.ext.attributes.AttributesExtension;
@@ -37,7 +36,6 @@ import org.apache.log4j.varia.NullAppender;
 import org.docx4j.Docx4J;
 import org.docx4j.openpackaging.exceptions.Docx4JException;
 import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
-import org.docx4j.wml.Text;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -185,23 +183,17 @@ public abstract class ComboDocxConverterSpecTestBase extends ComboSpecTestCase {
 
             myDocxContext.createColor().setVal("BB002F");
             myDocxContext.addBold();
-            Text text = myDocxContext.addWrappedText();
-            text.setValue("Ignored ");
-            text.setSpace(RunFormatProvider.SPACE_PRESERVE);
+            myDocxContext.addText("Ignored ");
         } else if (failed) {
             // does not match, need more stuff
             myDocxContext.createColor().setVal("BB002F");
             myDocxContext.addBold();
-            Text text = myDocxContext.addWrappedText();
-            text.setValue("Failed ");
-            text.setSpace(RunFormatProvider.SPACE_PRESERVE);
+            myDocxContext.addText("Failed ");
         } else {
             // does not match, need more stuff
             myDocxContext.createColor().setVal("008000");
             myDocxContext.addBold();
-            Text text = myDocxContext.addWrappedText();
-            text.setValue("Passed ");
-            text.setSpace(RunFormatProvider.SPACE_PRESERVE);
+            myDocxContext.addText("Passed ");
         }
 
         StringBuilder header = new StringBuilder();
@@ -209,14 +201,12 @@ public abstract class ComboDocxConverterSpecTestBase extends ComboSpecTestCase {
 
         header.append(section == null ? "" : section.trim()).append(": ").append(example.getExampleNumber());
         String optionsSet = example.getOptionsSet();
-        myDocxContext.text(header.toString());
+        myDocxContext.addText(header.toString());
 
         if (optionsSet != null) {
             myDocxContext.createHpsMeasure(28);
             myDocxContext.createColor().setVal("7B56A0");
-            Text text = myDocxContext.addWrappedText();
-            text.setValue((SpecReader.OPTIONS_STRING + "(") + optionsSet + ")");
-            text.setSpace(RunFormatProvider.SPACE_PRESERVE);
+            myDocxContext.addText((SpecReader.OPTIONS_STRING + "(") + optionsSet + ")");
         }
 
         myDocxContext.createHorizontalLine();
@@ -232,8 +222,7 @@ public abstract class ComboDocxConverterSpecTestBase extends ComboSpecTestCase {
                 if (!trimmed.isEmpty()) {
                     myDocxContext.createP(myDocxContext.getRenderingOptions().LOOSE_PARAGRAPH_STYLE);
                     myDocxContext.createColor().setVal("808080");
-                    Text text = myDocxContext.addWrappedText();
-                    text.setValue(trimmed);
+                    myDocxContext.addText(trimmed);
                 }
             }
         }

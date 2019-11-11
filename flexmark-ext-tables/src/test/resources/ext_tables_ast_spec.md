@@ -1791,7 +1791,7 @@ Document[0, 203]
     <tr><th>c</th><th>d</th></tr>
   </thead>
   <tbody>
-    <tr><td><em>a | b</em></td></tr>
+    <tr><td>*a</td><td>b*</td></tr>
     <tr><td><code>e | f</code></td></tr>
     <tr><td><a href="http://a.com">g | h</a></td></tr>
   </tbody>
@@ -1813,10 +1813,10 @@ Document[0, 73]
           Text[18, 21] chars:[18, 21, "---"]
     TableBody[24, 73]
       TableRow[24, 35] rowNumber=1
-        TableCell[24, 35] textOpen:[24, 25, "|"] text:[26, 33, "*a | b*"] textClose:[34, 35, "|"]
-          Emphasis[26, 33] textOpen:[26, 27, "*"] text:[27, 32, "a | b"] textClose:[32, 33, "*"]
-            Text[27, 32] chars:[27, 32, "a | b"]
-          Text[33, 33]
+        TableCell[24, 30] textOpen:[24, 25, "|"] text:[26, 28, "*a"] textClose:[29, 30, "|"]
+          Text[26, 28] chars:[26, 28, "*a"]
+        TableCell[30, 35] text:[31, 33, "b*"] textClose:[34, 35, "|"]
+          Text[31, 33] chars:[31, 33, "b*"]
       TableRow[36, 47] rowNumber=2
         TableCell[36, 47] textOpen:[36, 37, "|"] text:[38, 45, "`e | f`"] textClose:[46, 47, "|"]
           Code[38, 45] textOpen:[38, 39, "`"] text:[39, 44, "e | f"] textClose:[44, 45, "`"]
@@ -3404,11 +3404,136 @@ Document[0, 302]
 ````````````````````````````````
 
 
-## Issue 106
+## Emphasis in cell
+
+```````````````````````````````` example Emphasis in cell: 1
+| Column 1            | Column 2            |
+|---------------------|---------------------|
+| ___________________ | ___________________ |
+| ___________________ | ___________________ |
+
+.
+<table>
+  <thead>
+    <tr><th>Column 1</th><th>Column 2</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>___________________</td><td>___________________</td></tr>
+    <tr><td>___________________</td><td>___________________</td></tr>
+  </tbody>
+</table>
+.
+Document[0, 185]
+  TableBlock[0, 184]
+    TableHead[0, 45]
+      TableRow[0, 45] rowNumber=1
+        TableCell[0, 23] header textOpen:[0, 1, "|"] text:[2, 10, "Column 1"] textClose:[22, 23, "|"]
+          Text[2, 10] chars:[2, 10, "Column 1"]
+        TableCell[23, 45] header text:[24, 32, "Column 2"] textClose:[44, 45, "|"]
+          Text[24, 32] chars:[24, 32, "Column 2"]
+    TableSeparator[46, 91]
+      TableRow[46, 91]
+        TableCell[46, 69] textOpen:[46, 47, "|"] text:[47, 68, "---------------------"] textClose:[68, 69, "|"]
+          Text[47, 68] chars:[47, 68, "----- … -----"]
+        TableCell[69, 91] text:[69, 90, "---------------------"] textClose:[90, 91, "|"]
+          Text[69, 90] chars:[69, 90, "----- … -----"]
+    TableBody[92, 183]
+      TableRow[92, 137] rowNumber=1
+        TableCell[92, 115] textOpen:[92, 93, "|"] text:[94, 113, "___________________"] textClose:[114, 115, "|"]
+          Text[94, 113] chars:[94, 113, "_____ … _____"]
+        TableCell[115, 137] text:[116, 135, "___________________"] textClose:[136, 137, "|"]
+          Text[116, 135] chars:[116, 135, "_____ … _____"]
+      TableRow[138, 183] rowNumber=2
+        TableCell[138, 161] textOpen:[138, 139, "|"] text:[140, 159, "___________________"] textClose:[160, 161, "|"]
+          Text[140, 159] chars:[140, 159, "_____ … _____"]
+        TableCell[161, 183] text:[162, 181, "___________________"] textClose:[182, 183, "|"]
+          Text[162, 181] chars:[162, 181, "_____ … _____"]
+````````````````````````````````
+
+
+## DoNotDecorate
+
+```````````````````````````````` example DoNotDecorate: 1
+| Abc Long -- 'quoted' |
+|----------------------|
+| Def Short --- "quoted" |
+.
+<table>
+  <thead>
+    <tr><th>Abc Long -- 'quoted'</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Def Short --- &quot;quoted&quot;</td></tr>
+  </tbody>
+</table>
+.
+Document[0, 76]
+  TableBlock[0, 76]
+    TableHead[0, 24]
+      TableRow[0, 24] rowNumber=1
+        TableCell[0, 24] header textOpen:[0, 1, "|"] text:[2, 22, "Abc Long -- 'quoted'"] textClose:[23, 24, "|"]
+          Text[2, 22] chars:[2, 22, "Abc L … oted'"]
+    TableSeparator[25, 49]
+      TableRow[25, 49]
+        TableCell[25, 49] textOpen:[25, 26, "|"] text:[26, 48, "----------------------"] textClose:[48, 49, "|"]
+          Text[26, 48] chars:[26, 48, "----- … -----"]
+    TableBody[50, 76]
+      TableRow[50, 76] rowNumber=1
+        TableCell[50, 76] textOpen:[50, 51, "|"] text:[52, 74, "Def Short --- \"quoted\""] textClose:[75, 76, "|"]
+          Text[52, 74] chars:[52, 74, "Def S … oted\""]
+````````````````````````````````
+
+
+Typographic should not process separator nodes
+
+```````````````````````````````` example(DoNotDecorate: 2) options(typographic)
+| Abc Long -- 'quoted' |
+|----------------------|
+| Def Short --- "quoted" |
+.
+<table>
+  <thead>
+    <tr><th>Abc Long &ndash; &lsquo;quoted&rsquo;</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Def Short &mdash; &ldquo;quoted&rdquo;</td></tr>
+  </tbody>
+</table>
+.
+Document[0, 76]
+  TableBlock[0, 76]
+    TableHead[0, 24]
+      TableRow[0, 24] rowNumber=1
+        TableCell[0, 24] header textOpen:[0, 1, "|"] text:[2, 22, "Abc Long -- 'quoted'"] textClose:[23, 24, "|"]
+          Text[2, 11] chars:[2, 11, "Abc Long "]
+          TypographicSmarts[11, 13] typographic: &ndash; 
+          Text[13, 14] chars:[13, 14, " "]
+          TypographicQuotes[14, 22] typographicOpening: &lsquo;  typographicClosing: &rsquo;  textOpen:[14, 15, "'"] text:[15, 21, "quoted"] textClose:[21, 22, "'"]
+            Text[15, 21] chars:[15, 21, "quoted"]
+          Text[22, 22]
+    TableSeparator[25, 49]
+      TableRow[25, 49]
+        TableCell[25, 49] textOpen:[25, 26, "|"] text:[26, 48, "----------------------"] textClose:[48, 49, "|"]
+          Text[26, 48] chars:[26, 48, "----- … -----"]
+    TableBody[50, 76]
+      TableRow[50, 76] rowNumber=1
+        TableCell[50, 76] textOpen:[50, 51, "|"] text:[52, 74, "Def Short --- \"quoted\""] textClose:[75, 76, "|"]
+          Text[52, 62] chars:[52, 62, "Def Short "]
+          TypographicSmarts[62, 65] typographic: &mdash; 
+          Text[65, 66] chars:[65, 66, " "]
+          TypographicQuotes[66, 74] typographicOpening: &ldquo;  typographicClosing: &rdquo;  textOpen:[66, 67, "\""] text:[67, 73, "quoted"] textClose:[73, 74, "\""]
+            Text[67, 73] chars:[67, 73, "quoted"]
+          Text[74, 74]
+````````````````````````````````
+
+
+## Issue
+
+### 106
 
 Issue #106, Table placed after code block does not parsed
 
-```````````````````````````````` example Issue 106: 1
+```````````````````````````````` example Issue - 106: 1
 Place specified block in the specified point.
 `BLOCK_SET <Block> <Location> [Physics]`
 
@@ -3491,11 +3616,11 @@ Document[0, 449]
 ````````````````````````````````
 
 
-## Issue 125
+### 125
 
 Min Column Dashes
 
-```````````````````````````````` example(Issue 125: 1) options(min-dashes-2)
+```````````````````````````````` example(Issue - 125: 1) options(min-dashes-2)
 |Vowels|dd|
 |------|--|
 |aeiou |a |
@@ -3539,7 +3664,7 @@ Document[0, 47]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Issue 125: 2) options(min-dashes-1)
+```````````````````````````````` example(Issue - 125: 2) options(min-dashes-1)
 |Vowels|d|
 |------|-|
 |aeiou |a |
@@ -3583,12 +3708,12 @@ Document[0, 45]
 ````````````````````````````````
 
 
-## Issue 135
+### 135
 
 Issue #135, Render problem when there is a line below the table that can be interpreted as
 setext heading.
 
-```````````````````````````````` example(Issue 135: 1) options(FAIL)
+```````````````````````````````` example(Issue - 135: 1) options(FAIL)
 |a|b|c|
 |---|---|---|
 |1|2|3|
@@ -3636,7 +3761,7 @@ Document[0, 34]
 
 parsed as heading because table processing occurs on paragraphs only
 
-```````````````````````````````` example Issue 135: 2
+```````````````````````````````` example Issue - 135: 2
 |a|b|c|
 |---|---|---|
 |1|2|3|
@@ -3658,7 +3783,7 @@ Document[0, 33]
 
 parsed as heading because table processing occurs on paragraphs only
 
-```````````````````````````````` example Issue 135: 3
+```````````````````````````````` example Issue - 135: 3
 |a|b|c|
 |---|---|---|
 |1|2|3|
@@ -3678,58 +3803,11 @@ Document[0, 33]
 ````````````````````````````````
 
 
-## Emphasis in cell
-
-```````````````````````````````` example Emphasis in cell: 1
-| Column 1            | Column 2            |
-|---------------------|---------------------|
-| ___________________ | ___________________ |
-| ___________________ | ___________________ |
-
-.
-<table>
-  <thead>
-    <tr><th>Column 1</th><th>Column 2</th></tr>
-  </thead>
-  <tbody>
-    <tr><td>___________________</td><td>___________________</td></tr>
-    <tr><td>___________________</td><td>___________________</td></tr>
-  </tbody>
-</table>
-.
-Document[0, 185]
-  TableBlock[0, 184]
-    TableHead[0, 45]
-      TableRow[0, 45] rowNumber=1
-        TableCell[0, 23] header textOpen:[0, 1, "|"] text:[2, 10, "Column 1"] textClose:[22, 23, "|"]
-          Text[2, 10] chars:[2, 10, "Column 1"]
-        TableCell[23, 45] header text:[24, 32, "Column 2"] textClose:[44, 45, "|"]
-          Text[24, 32] chars:[24, 32, "Column 2"]
-    TableSeparator[46, 91]
-      TableRow[46, 91]
-        TableCell[46, 69] textOpen:[46, 47, "|"] text:[47, 68, "---------------------"] textClose:[68, 69, "|"]
-          Text[47, 68] chars:[47, 68, "----- … -----"]
-        TableCell[69, 91] text:[69, 90, "---------------------"] textClose:[90, 91, "|"]
-          Text[69, 90] chars:[69, 90, "----- … -----"]
-    TableBody[92, 183]
-      TableRow[92, 137] rowNumber=1
-        TableCell[92, 115] textOpen:[92, 93, "|"] text:[94, 113, "___________________"] textClose:[114, 115, "|"]
-          Text[94, 113] chars:[94, 113, "_____ … _____"]
-        TableCell[115, 137] text:[116, 135, "___________________"] textClose:[136, 137, "|"]
-          Text[116, 135] chars:[116, 135, "_____ … _____"]
-      TableRow[138, 183] rowNumber=2
-        TableCell[138, 161] textOpen:[138, 139, "|"] text:[140, 159, "___________________"] textClose:[160, 161, "|"]
-          Text[140, 159] chars:[140, 159, "_____ … _____"]
-        TableCell[161, 183] text:[162, 181, "___________________"] textClose:[182, 183, "|"]
-          Text[162, 181] chars:[162, 181, "_____ … _____"]
-````````````````````````````````
-
-
-## Issue 216
+### 216
 
 Issue #216, Wrong source positions for Tables with empty TableHead/TableBody
 
-```````````````````````````````` example Issue 216: 1
+```````````````````````````````` example Issue - 216: 1
 
 |---|---|
 .
@@ -3751,7 +3829,7 @@ Document[0, 10]
 ````````````````````````````````
 
 
-```````````````````````````````` example Issue 216: 2
+```````````````````````````````` example Issue - 216: 2
 
 |---|---|
 |a|b|
@@ -3781,7 +3859,7 @@ Document[0, 16]
 ````````````````````````````````
 
 
-```````````````````````````````` example Issue 216: 3
+```````````````````````````````` example Issue - 216: 3
 foo
 
 ---|---
@@ -3808,11 +3886,11 @@ Document[0, 14]
 ````````````````````````````````
 
 
-## Issue xxx-1
+### xxx-1
 
 Parse sub sequences
 
-```````````````````````````````` example(Issue xxx-1: 1) options(sub-parse)
+```````````````````````````````` example(Issue - xxx-1: 1) options(sub-parse)
 | Left                                   |  Right | Center  |
 | Left                                   |  Right | Center  |
 |:---------------------------------------|-------:|:-------:|
@@ -3892,7 +3970,7 @@ Document[14, 449]
 
 Parse sub sequences
 
-```````````````````````````````` example(Issue xxx-1: 2) options(strip-indent)
+```````````````````````````````` example(Issue - xxx-1: 2) options(strip-indent)
 > > | Left                                   |  Right | Center  |
 > > | Left                                   |  Right | Center  |
 > > |:---------------------------------------|-------:|:-------:|
@@ -3972,7 +4050,7 @@ Document[4, 463]
 
 Parse sub sequences
 
-```````````````````````````````` example(Issue xxx-1: 3) options(sub-parse, strip-indent)
+```````````````````````````````` example(Issue - xxx-1: 3) options(sub-parse, strip-indent)
 > > | Left                                   |  Right | Center  |
 > > | Left                                   |  Right | Center  |
 > > |:---------------------------------------|-------:|:-------:|
@@ -4050,85 +4128,11 @@ Document[4, 463]
 ````````````````````````````````
 
 
-## DoNotDecorate
+### 365
 
-```````````````````````````````` example DoNotDecorate: 1
-| Abc Long -- 'quoted' |
-|----------------------|
-| Def Short --- "quoted" |
-.
-<table>
-  <thead>
-    <tr><th>Abc Long -- 'quoted'</th></tr>
-  </thead>
-  <tbody>
-    <tr><td>Def Short --- &quot;quoted&quot;</td></tr>
-  </tbody>
-</table>
-.
-Document[0, 76]
-  TableBlock[0, 76]
-    TableHead[0, 24]
-      TableRow[0, 24] rowNumber=1
-        TableCell[0, 24] header textOpen:[0, 1, "|"] text:[2, 22, "Abc Long -- 'quoted'"] textClose:[23, 24, "|"]
-          Text[2, 22] chars:[2, 22, "Abc L … oted'"]
-    TableSeparator[25, 49]
-      TableRow[25, 49]
-        TableCell[25, 49] textOpen:[25, 26, "|"] text:[26, 48, "----------------------"] textClose:[48, 49, "|"]
-          Text[26, 48] chars:[26, 48, "----- … -----"]
-    TableBody[50, 76]
-      TableRow[50, 76] rowNumber=1
-        TableCell[50, 76] textOpen:[50, 51, "|"] text:[52, 74, "Def Short --- \"quoted\""] textClose:[75, 76, "|"]
-          Text[52, 74] chars:[52, 74, "Def S … oted\""]
-````````````````````````````````
+Issue [#365, table does not render correctly]
 
-
-Typographic should not process separator nodes
-
-```````````````````````````````` example(DoNotDecorate: 2) options(typographic)
-| Abc Long -- 'quoted' |
-|----------------------|
-| Def Short --- "quoted" |
-.
-<table>
-  <thead>
-    <tr><th>Abc Long &ndash; &lsquo;quoted&rsquo;</th></tr>
-  </thead>
-  <tbody>
-    <tr><td>Def Short &mdash; &ldquo;quoted&rdquo;</td></tr>
-  </tbody>
-</table>
-.
-Document[0, 76]
-  TableBlock[0, 76]
-    TableHead[0, 24]
-      TableRow[0, 24] rowNumber=1
-        TableCell[0, 24] header textOpen:[0, 1, "|"] text:[2, 22, "Abc Long -- 'quoted'"] textClose:[23, 24, "|"]
-          Text[2, 11] chars:[2, 11, "Abc Long "]
-          TypographicSmarts[11, 13] typographic: &ndash; 
-          Text[13, 14] chars:[13, 14, " "]
-          TypographicQuotes[14, 22] typographicOpening: &lsquo;  typographicClosing: &rsquo;  textOpen:[14, 15, "'"] text:[15, 21, "quoted"] textClose:[21, 22, "'"]
-            Text[15, 21] chars:[15, 21, "quoted"]
-          Text[22, 22]
-    TableSeparator[25, 49]
-      TableRow[25, 49]
-        TableCell[25, 49] textOpen:[25, 26, "|"] text:[26, 48, "----------------------"] textClose:[48, 49, "|"]
-          Text[26, 48] chars:[26, 48, "----- … -----"]
-    TableBody[50, 76]
-      TableRow[50, 76] rowNumber=1
-        TableCell[50, 76] textOpen:[50, 51, "|"] text:[52, 74, "Def Short --- \"quoted\""] textClose:[75, 76, "|"]
-          Text[52, 62] chars:[52, 62, "Def Short "]
-          TypographicSmarts[62, 65] typographic: &mdash; 
-          Text[65, 66] chars:[65, 66, " "]
-          TypographicQuotes[66, 74] typographicOpening: &ldquo;  typographicClosing: &rdquo;  textOpen:[66, 67, "\""] text:[67, 73, "quoted"] textClose:[73, 74, "\""]
-            Text[67, 73] chars:[67, 73, "quoted"]
-          Text[74, 74]
-````````````````````````````````
-
-
-## Issue 365
-
-```````````````````````````````` example Issue 365: 1
+```````````````````````````````` example Issue - 365: 1
 name|age
 -|-
 Tom|23
@@ -4151,7 +4155,7 @@ Document[0, 27]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Issue 365: 2) options(min-dashes-1)
+```````````````````````````````` example(Issue - 365: 2) options(min-dashes-1)
 name|age
 -|-
 Tom|23
@@ -4194,4 +4198,56 @@ Document[0, 27]
           Text[25, 27] chars:[25, 27, "25"]
 ````````````````````````````````
 
+
+### 376
+
+Issue [#376, convert markdown to html], inline delimiters ignore custom chars
+
+```````````````````````````````` example Issue - 376: 1
+| header1 | header2 | header3 |
+|---------|---------|---------|
+| 1*2     | 2*1     | *1*     |
+.
+<table>
+  <thead>
+    <tr><th>header1</th><th>header2</th><th>header3</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>1*2</td><td>2*1</td><td><em>1</em></td></tr>
+  </tbody>
+</table>
+.
+Document[0, 95]
+  TableBlock[0, 95]
+    TableHead[0, 31]
+      TableRow[0, 31] rowNumber=1
+        TableCell[0, 11] header textOpen:[0, 1, "|"] text:[2, 9, "header1"] textClose:[10, 11, "|"]
+          Text[2, 9] chars:[2, 9, "header1"]
+        TableCell[11, 21] header text:[12, 19, "header2"] textClose:[20, 21, "|"]
+          Text[12, 19] chars:[12, 19, "header2"]
+        TableCell[21, 31] header text:[22, 29, "header3"] textClose:[30, 31, "|"]
+          Text[22, 29] chars:[22, 29, "header3"]
+    TableSeparator[32, 63]
+      TableRow[32, 63]
+        TableCell[32, 43] textOpen:[32, 33, "|"] text:[33, 42, "---------"] textClose:[42, 43, "|"]
+          Text[33, 42] chars:[33, 42, "---------"]
+        TableCell[43, 53] text:[43, 52, "---------"] textClose:[52, 53, "|"]
+          Text[43, 52] chars:[43, 52, "---------"]
+        TableCell[53, 63] text:[53, 62, "---------"] textClose:[62, 63, "|"]
+          Text[53, 62] chars:[53, 62, "---------"]
+    TableBody[64, 95]
+      TableRow[64, 95] rowNumber=1
+        TableCell[64, 75] textOpen:[64, 65, "|"] text:[66, 69, "1*2"] textClose:[74, 75, "|"]
+          Text[66, 69] chars:[66, 69, "1*2"]
+        TableCell[75, 85] text:[76, 79, "2*1"] textClose:[84, 85, "|"]
+          Text[76, 79] chars:[76, 79, "2*1"]
+        TableCell[85, 95] text:[86, 89, "*1*"] textClose:[94, 95, "|"]
+          Emphasis[86, 89] textOpen:[86, 87, "*"] text:[87, 88, "1"] textClose:[88, 89, "*"]
+            Text[87, 88] chars:[87, 88, "1"]
+          Text[89, 89]
+````````````````````````````````
+
+
+[#365, table does not render correctly]: https://github.com/vsch/flexmark-java/issues/365
+[#376, convert markdown to html]: https://github.com/vsch/flexmark-java/issues/376
 

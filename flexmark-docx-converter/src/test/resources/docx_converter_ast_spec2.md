@@ -5169,10 +5169,7 @@ Compound numbering
             <w:pStyle w:val="Heading2"/>
         </w:pPr>
         <w:r>
-            <w:t>1</w:t>
-        </w:r>
-        <w:r>
-            <w:t>.</w:t>
+            <w:t>1.</w:t>
         </w:r>
         <w:r>
             <w:t>1</w:t>
@@ -5201,10 +5198,7 @@ Compound numbering
             <w:pStyle w:val="Heading2"/>
         </w:pPr>
         <w:r>
-            <w:t>2</w:t>
-        </w:r>
-        <w:r>
-            <w:t>.</w:t>
+            <w:t>2.</w:t>
         </w:r>
         <w:r>
             <w:t>1</w:t>

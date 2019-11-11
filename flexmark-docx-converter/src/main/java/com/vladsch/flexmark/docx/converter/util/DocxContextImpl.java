@@ -501,49 +501,46 @@ public abstract class DocxContextImpl<T> implements DocxContext<T>, BlockFormatP
     }
 
     @Override
-    public Text addWrappedText() {
-        // Create object for t (wrapped in JAXBElement)
-        Text text = myFactory.createText();
-        JAXBElement<Text> textWrapped = myFactory.createRT(text);
-        getR().getContent().add(textWrapped);
-        return text;
-    }
+    public Text addText(String value, boolean noProofRPr, boolean createR) {
+        R r = createR ? createR() : getR();
 
-    @Override
-    public Text addWrappedText(String value, boolean spacePreserve, boolean noProofRPr) {
         if (noProofRPr) {
             RPr rpr = getRPr();
             rpr.setNoProof(new BooleanDefaultTrue());
         }
 
         Text text = myFactory.createText();
-        if (spacePreserve) text.setSpace(RunFormatProvider.SPACE_PRESERVE);
+        if (value.startsWith(" ") || value.endsWith(" ")) text.setSpace(RunFormatProvider.SPACE_PRESERVE);
         text.setValue(value);
         JAXBElement<Text> textWrapped = myFactory.createRT(text);
-        getR().getContent().add(textWrapped);
+        r.getContent().add(textWrapped);
         return text;
     }
 
     @Override
-    public Text addWrappedInstrText(String instrText, boolean spacePreserve, boolean noProofRPr) {
+    public Text addInstrText(String value, boolean noProofRPr, boolean createR) {
         // Create object for t (wrapped in JAXBElement)
+        R r = createR ? createR() : getR();
+
         if (noProofRPr) {
             RPr rpr = getRPr();
             rpr.setNoProof(new BooleanDefaultTrue());
         }
 
         Text text = myFactory.createText();
-        if (spacePreserve) text.setSpace(RunFormatProvider.SPACE_PRESERVE);
-        text.setValue(instrText);
-        getR().getContent().add(myFactory.createRInstrText(text));
+        if (value.startsWith(" ") || value.endsWith(" ")) text.setSpace(RunFormatProvider.SPACE_PRESERVE);
+        text.setValue(value);
+        r.getContent().add(myFactory.createRInstrText(text));
         return text;
     }
 
     @Override
-    public FldChar addWrappedFldChar(STFldCharType charType) {
+    public FldChar addFldChar(STFldCharType charType, boolean createR) {
+        R r = createR ? createR() : getR();
+
         FldChar fldChar = myFactory.createFldChar();
         fldChar.setFldCharType(charType);
-        getR().getContent().add(myFactory.createRFldChar(fldChar));
+        r.getContent().add(myFactory.createRFldChar(fldChar));
         return fldChar;
     }
 
@@ -635,15 +632,6 @@ public abstract class DocxContextImpl<T> implements DocxContext<T>, BlockFormatP
     }
 
     @Override
-    public Text text(String text) {
-        R r = createR();
-        Text textElem = addWrappedText();
-        textElem.setValue(text);
-        if (text.startsWith(" ") || text.endsWith(" ")) textElem.setSpace(RunFormatProvider.SPACE_PRESERVE);
-        return textElem;
-    }
-
-    @Override
     public WordprocessingMLPackage getPackage() {
         return myPackage;
     }
@@ -729,7 +717,7 @@ public abstract class DocxContextImpl<T> implements DocxContext<T>, BlockFormatP
                 sb.append(BasedSequence.of(line, 0, line.length()).trim());
 
                 // Create object for p
-                text(sb.toString());
+                addTextCreateR(sb.toString());
 
                 i++;
 

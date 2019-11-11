@@ -118,6 +118,7 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
      * Get a portion of this sequence selected by range
      *
      * @param range range to get, coordinates offset form start of this sequence
+     *
      * @return sequence whose contents reflect the selected portion, if range.isNull() then this is returned
      */
     @NotNull
@@ -129,6 +130,7 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
      * Get a portion of this sequence before one selected by range
      *
      * @param range range to get, coordinates offset form start of this sequence
+     *
      * @return sequence whose contents come before the selected range, if range.isNull() then {@link #nullSequence()}
      */
     @NotNull
@@ -140,6 +142,7 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
      * Get a portion of this sequence after one selected by range
      *
      * @param range range to get, coordinates offset form start of this sequence
+     *
      * @return sequence whose contents come after the selected range, if range.isNull() then {@link #nullSequence()}
      */
     @NotNull
@@ -151,6 +154,7 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
      * Get a portions of this sequence before and after one selected by range
      *
      * @param range range to get, coordinates offset form start of this sequence
+     *
      * @return sequence whose contents come before and after the selected range, if range.isNull() then {@link #nullSequence()}
      */
     final public Pair<T, T> subSequenceBeforeAfter(Range range) {
@@ -1374,49 +1378,57 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
     }
 
     // @formatter:off
-    @NotNull @Override final public List<T> splitList(char delimiter) {return splitList(String.valueOf(delimiter), 0, 0, WHITESPACE_CHARS);}
-    @NotNull @Override final public List<T> splitList(char delimiter, int limit) {return splitList(String.valueOf(delimiter), limit, 0, WHITESPACE_CHARS);}
-    @NotNull @Override final public List<T> splitList(char delimiter, int limit, int flags) {return splitList(String.valueOf(delimiter), limit, flags, WHITESPACE_CHARS);}
-    @NotNull @Override final public List<T> splitList(char delimiter, int limit, int flags, String trimChars) {return splitList(String.valueOf(delimiter), limit, flags, trimChars);}
-    @NotNull @Override final public List<T> splitList(@NotNull CharSequence delimiter) {return splitList(delimiter, 0, 0, WHITESPACE_CHARS);}
-    @NotNull @Override final public List<T> splitList(@NotNull CharSequence delimiter, int limit) {return splitList(delimiter, limit, 0, WHITESPACE_CHARS);}
-    @NotNull @Override final public List<T> splitList(@NotNull CharSequence delimiter, int limit, int flags) {return splitList(delimiter, limit, flags, WHITESPACE_CHARS);}
+    @NotNull @Override final public List<T> splitList(char delimiter) {                                                                                 return splitList(String.valueOf(delimiter), 0, 0, null);}
+    @NotNull @Override final public List<T> splitList(char delimiter, int limit) {                                                                      return splitList(String.valueOf(delimiter), limit, 0, null);}
+    @NotNull @Override final public List<T> splitList(char delimiter, int limit, int flags) {                                                           return splitList(String.valueOf(delimiter), limit, flags, null);}
+    @NotNull @Override final public List<T> splitList(char delimiter, int limit, int flags, String trimChars) {                                         return splitList(String.valueOf(delimiter), limit, flags, trimChars);}
+    @NotNull @Override final public List<T> splitList(@NotNull CharSequence delimiter) {                                                                return splitList(delimiter, 0, 0, null);}
+    @NotNull @Override final public List<T> splitList(@NotNull CharSequence delimiter, int limit) {                                                     return splitList(delimiter, limit, 0, null);}
+    @NotNull @Override final public List<T> splitList(@NotNull CharSequence delimiter, int limit, int flags) {                                          return splitList(delimiter, limit, flags, null);}
 
-    @NotNull @Override final public List<T> splitList(char delimiter, int limit, boolean includeDelims) {return splitList(String.valueOf(delimiter), limit, includeDelims ? SPLIT_INCLUDE_DELIMS : 0, WHITESPACE_CHARS);}
-    @NotNull @Override final public List<T> splitList(char delimiter, int limit, boolean includeDelims, String trimChars) {return splitList(String.valueOf(delimiter), limit, includeDelims ? SPLIT_INCLUDE_DELIMS : 0, trimChars);}
-    @NotNull @Override final public List<T> splitList(@NotNull CharSequence delimiter, int limit, boolean includeDelims) {return splitList(delimiter, limit, includeDelims ? SPLIT_INCLUDE_DELIMS : 0, WHITESPACE_CHARS);}
-    @NotNull @Override final public List<T> splitList(@NotNull CharSequence delimiter, int limit, boolean includeDelims, @Nullable String trimChars) {return splitList(delimiter, limit, includeDelims ? SPLIT_INCLUDE_DELIMS : 0, trimChars);}
+    @NotNull @Override final public List<T> splitList(char delimiter, int limit, boolean includeDelims) {                                               return splitList(String.valueOf(delimiter), limit, includeDelims ? SPLIT_INCLUDE_DELIMS : 0, null);}
+    @NotNull @Override final public List<T> splitList(char delimiter, int limit, boolean includeDelims, String trimChars) {                             return splitList(String.valueOf(delimiter), limit, includeDelims ? SPLIT_INCLUDE_DELIMS : 0, trimChars);}
+    @NotNull @Override final public List<T> splitList(@NotNull CharSequence delimiter, int limit, boolean includeDelims) {                              return splitList(delimiter, limit, includeDelims ? SPLIT_INCLUDE_DELIMS : 0, null);}
+    @NotNull @Override final public List<T> splitList(@NotNull CharSequence delimiter, int limit, boolean includeDelims, @Nullable String trimChars) {  return splitList(delimiter, limit, includeDelims ? SPLIT_INCLUDE_DELIMS : 0, trimChars);}
 
-    @NotNull @Override final public T[] split(char delimiter) {return split(String.valueOf(delimiter), 0, 0, WHITESPACE_CHARS);}
-    @NotNull @Override final public T[] split(char delimiter, int limit) {return split(String.valueOf(delimiter), limit, 0, WHITESPACE_CHARS);}
-    @NotNull @Override final public T[] split(char delimiter, int limit, int flags) {return split(String.valueOf(delimiter), limit, flags, WHITESPACE_CHARS);}
-    @NotNull @Override final public T[] split(char delimiter, int limit, int flags, String trimChars) {return split(String.valueOf(delimiter), limit, flags, trimChars);}
-    @NotNull @Override final public T[] split(@NotNull CharSequence delimiter) {return split(delimiter, 0, 0, WHITESPACE_CHARS);}
-    @NotNull @Override final public T[] split(@NotNull CharSequence delimiter, int limit) {return split(delimiter, limit, 0, WHITESPACE_CHARS);}
-    @NotNull @Override final public T[] split(@NotNull CharSequence delimiter, int limit, int flags) {return split(delimiter, limit, flags, WHITESPACE_CHARS);}
-    @NotNull @Override final public T[] split(@NotNull CharSequence delimiter, int limit, int flags, @Nullable String trimChars) { return splitList(delimiter, limit, flags, trimChars).toArray(emptyArray());}
+    @NotNull @Override final public T[] split(char delimiter) {                                                                                         return split(String.valueOf(delimiter), 0, 0, null);}
+    @NotNull @Override final public T[] split(char delimiter, int limit) {                                                                              return split(String.valueOf(delimiter), limit, 0, null);}
+    @NotNull @Override final public T[] split(char delimiter, int limit, int flags) {                                                                   return split(String.valueOf(delimiter), limit, flags, null);}
+    @NotNull @Override final public T[] split(char delimiter, int limit, int flags, String trimChars) {                                                 return split(String.valueOf(delimiter), limit, flags, trimChars);}
+    @NotNull @Override final public T[] split(@NotNull CharSequence delimiter) {                                                                        return split(delimiter, 0, 0, null);}
+    @NotNull @Override final public T[] split(@NotNull CharSequence delimiter, int limit) {                                                             return split(delimiter, limit, 0, null);}
+    @NotNull @Override final public T[] split(@NotNull CharSequence delimiter, int limit, int flags) {                                                  return split(delimiter, limit, flags, null);}
 
-    @NotNull @Override final public T[] split(char delimiter, int limit, boolean includeDelims) {return split(String.valueOf(delimiter), limit, includeDelims ? SPLIT_INCLUDE_DELIMS : 0, WHITESPACE_CHARS);}
-    @NotNull @Override final public T[] split(char delimiter, int limit, boolean includeDelims, String trimChars) {return split(String.valueOf(delimiter), limit, includeDelims ? SPLIT_INCLUDE_DELIMS : 0, trimChars);}
-    @NotNull @Override final public T[] split(@NotNull CharSequence delimiter, int limit, boolean includeDelims) {return split(delimiter, limit, includeDelims ? SPLIT_INCLUDE_DELIMS : 0, WHITESPACE_CHARS);}
-    @NotNull @Override final public T[] split(@NotNull CharSequence delimiter, int limit, boolean includeDelims, @Nullable String trimChars) { return splitList(delimiter, limit, includeDelims ? SPLIT_INCLUDE_DELIMS : 0, trimChars).toArray(emptyArray());}
+    @NotNull @Override final public T[] split(char delimiter, int limit, boolean includeDelims) {                                                       return split(String.valueOf(delimiter), limit, includeDelims ? SPLIT_INCLUDE_DELIMS : 0, null);}
+    @NotNull @Override final public T[] split(char delimiter, int limit, boolean includeDelims, String trimChars) {                                     return split(String.valueOf(delimiter), limit, includeDelims ? SPLIT_INCLUDE_DELIMS : 0, trimChars);}
+    @NotNull @Override final public T[] split(@NotNull CharSequence delimiter, int limit, boolean includeDelims) {                                      return split(delimiter, limit, includeDelims ? SPLIT_INCLUDE_DELIMS : 0, null);}
+    @NotNull @Override final public T[] split(@NotNull CharSequence delimiter, int limit, boolean includeDelims, @Nullable String trimChars) {          return split(delimiter, limit, includeDelims ? SPLIT_INCLUDE_DELIMS : 0, trimChars);}
 
     // NOTE: these default to including delimiters as part of split item
-    @NotNull @Override final public List<T> splitListEOL() {return splitList(EOL, SPLIT_INCLUDE_DELIMS);}
-    @NotNull @Override final public List<T> splitListEOL(boolean includeDelims) {return splitList(EOL, includeDelims ? SPLIT_INCLUDE_DELIMS : 0);}
-    @NotNull @Override final public List<T> splitListEOL(int limit) {return splitList(EOL, limit,SPLIT_INCLUDE_DELIMS);}
-    @NotNull @Override final public List<T> splitListEOL(int limit, boolean includeDelims) {return splitList(EOL, limit, includeDelims ? SPLIT_INCLUDE_DELIMS : 0);}
-    @NotNull @Override final public List<T> splitListEOL(int limit, boolean includeDelims, @Nullable String trimChars) {return splitList(EOL, limit, includeDelims ? SPLIT_INCLUDE_DELIMS : 0, trimChars);}
-    @NotNull @Override final public T[] splitEOL() { return splitList(EOL, SPLIT_INCLUDE_DELIMS).toArray(emptyArray());}
-    @NotNull @Override final public T[] splitEOL(boolean includeDelims) { return splitList(EOL, includeDelims ? SPLIT_INCLUDE_DELIMS : 0).toArray(emptyArray());}
-    @NotNull @Override final public T[] splitEOL(int limit) { return splitList(EOL, limit, SPLIT_INCLUDE_DELIMS).toArray(emptyArray());}
-    @NotNull @Override final public T[] splitEOL(int limit, boolean includeDelims) { return splitList(EOL, limit, includeDelims ? SPLIT_INCLUDE_DELIMS : 0).toArray(emptyArray());}
-    @NotNull @Override final public T[] splitEOL(int limit, boolean includeDelims, @Nullable String trimChars) { return splitList(EOL, limit, includeDelims ? SPLIT_INCLUDE_DELIMS : 0, trimChars).toArray(emptyArray());}
+    @NotNull @Override final public List<T> splitListEOL() {                                                                                            return splitList(EOL, 0, SPLIT_INCLUDE_DELIMS, null);}
+    @NotNull @Override final public List<T> splitListEOL(boolean includeDelims) {                                                                       return splitList(EOL, 0, includeDelims ? SPLIT_INCLUDE_DELIMS : 0, null);}
+    @NotNull @Override final public List<T> splitListEOL(int limit) {                                                                                   return splitList(EOL, limit,SPLIT_INCLUDE_DELIMS, null);}
+    @NotNull @Override final public List<T> splitListEOL(int limit, boolean includeDelims) {                                                            return splitList(EOL, limit, includeDelims ? SPLIT_INCLUDE_DELIMS : 0,null);}
+    @NotNull @Override final public List<T> splitListEOL(int limit, boolean includeDelims, @Nullable String trimChars) {                                return splitList(EOL, limit, includeDelims ? SPLIT_INCLUDE_DELIMS : 0, trimChars);}
+
+    @NotNull @Override final public T[] splitEOL() {                                                                                                    return split(EOL, 0, SPLIT_INCLUDE_DELIMS,null);}
+    @NotNull @Override final public T[] splitEOL(boolean includeDelims) {                                                                               return split(EOL, 0, includeDelims ? SPLIT_INCLUDE_DELIMS : 0, null);}
+    @NotNull @Override final public T[] splitEOL(int limit) {                                                                                           return split(EOL, limit, SPLIT_INCLUDE_DELIMS, null);}
+    @NotNull @Override final public T[] splitEOL(int limit, boolean includeDelims) {                                                                    return split(EOL, limit, includeDelims ? SPLIT_INCLUDE_DELIMS : 0, null);}
+    @NotNull @Override final public T[] splitEOL(int limit, boolean includeDelims, @Nullable String trimChars) {                                        return split(EOL, limit, includeDelims ? SPLIT_INCLUDE_DELIMS : 0, trimChars);}
     // @formatter:on
+
+    @NotNull
+    @Override
+    final public T[] split(@NotNull CharSequence delimiter, int limit, int flags, @Nullable String trimChars) {
+        return splitList(delimiter, limit, flags, trimChars).toArray(emptyArray());
+    }
 
     @NotNull
     final public List<T> splitList(@NotNull CharSequence delimiter, int limit, int flags, @Nullable String trimChars) {
         if (trimChars == null) trimChars = WHITESPACE_CHARS;
+        else if (!trimChars.isEmpty()) flags |= SPLIT_TRIM_PARTS;
+
         if (limit < 1) limit = Integer.MAX_VALUE;
 
         boolean includeDelimiterParts = (flags & SPLIT_INCLUDE_DELIM_PARTS) != 0;

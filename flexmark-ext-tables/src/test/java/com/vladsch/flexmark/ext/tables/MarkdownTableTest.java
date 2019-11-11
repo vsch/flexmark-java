@@ -2575,14 +2575,14 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         assertEquals("" +
                 "| c                     | d  |\n" +
                 "|:----------------------|:---|\n" +
-                "| *a | b*               |    |\n" +
+                "| *a                    | b* |\n" +
                 "| `e | f`               |    |\n" +
                 "| [g | h](http://a.com) |    |\n" +
                 "", formattedTable);
         assertEquals("" +
                 "| c                     | d  |\n" +
                 "|:----------------------|:---|\n" +
-                "| ^*a | b*               |    |\n" +
+                "| ^*a                    | b* |\n" +
                 "| `e | f`               |    |\n" +
                 "| [g | h](http://a.com) |    |\n" +
                 "", formattedTable.substring(0, offset) + "^" + formattedTable.substring(offset));
@@ -2615,14 +2615,14 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         assertEquals("" +
                 "    | c                     | d  |\n" +
                 "    |:----------------------|:---|\n" +
-                "    | *a | b*               |    |\n" +
+                "    | *a                    | b* |\n" +
                 "    | `e | f`               |    |\n" +
                 "    | [g | h](http://a.com) |    |\n" +
                 "", formattedTable);
         assertEquals("" +
                 "    | c                     | d  |\n" +
                 "    |:----------------------|:---|\n" +
-                "    | ^*a | b*               |    |\n" +
+                "    | ^*a                    | b* |\n" +
                 "    | `e | f`               |    |\n" +
                 "    | [g | h](http://a.com) |    |\n" +
                 "", formattedTable.substring(0, offset) + "^" + formattedTable.substring(offset));

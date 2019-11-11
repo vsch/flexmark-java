@@ -382,6 +382,10 @@ public class InlineParserImpl extends LightInlineParserImpl implements InlinePar
                 // When we get here, it's only for a single special character that turned out to not have a special meaning.
                 // So we shouldn't have a single surrogate here, hence it should be ok to turn it into a String.
                 appendText(input.subSequence(index - 1, index));
+            } else {
+                // Issue: #376, need to clear any delimiter stack since whatever is not used is not a delimiter
+                processDelimiters(null);
+                this.lastDelimiter = null;
             }
 
             return true;

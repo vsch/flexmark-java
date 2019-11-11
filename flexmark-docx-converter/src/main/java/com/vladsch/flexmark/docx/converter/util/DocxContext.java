@@ -16,6 +16,7 @@ import java.math.BigInteger;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
+@SuppressWarnings("UnusedReturnValue")
 public interface DocxContext<T> extends DocxContextFrameProvider<T> {
 
     DocxHelper getHelper();
@@ -151,37 +152,83 @@ public interface DocxContext<T> extends DocxContextFrameProvider<T> {
      * Create and add wrapped Text element to R element
      *
      * @return Text element
+     * @deprecated use {@link #addText(String)} instead
      */
-    Text addWrappedText();
+    @Deprecated
+    default Text addWrappedText() {
+        return addText("");
+    }
 
     /**
      * Create and add wrapped Text element to R element
-     * set value and optionally space preserve
+     * set value and optionally space preserve if value starts or ends in a space
      *
-     * @param value value to set
-     * @param spacePreserve  if true set space preserve
+     * @param value      value to set
      * @param noProofRPr if true will add rPr with noProof tag to R
+     * @param createR    if true then create a new R, otherwise add to existing one
      * @return Text element
      */
-    Text addWrappedText(String value, boolean spacePreserve, boolean noProofRPr);
+    Text addText(String value, boolean noProofRPr, boolean createR);
+
+    default Text addTextCreateR(String value, boolean noProofRPr) {
+        return addText(value, noProofRPr, true);
+    }
+
+    default Text addTextCreateR(String value) {
+        return addText(value, false, true);
+    }
+
+    default Text addText(String value, boolean noProofRPr) {
+        return addText(value, noProofRPr, false);
+    }
+
+    default Text addText(String value) {
+        return addText(value, false, false);
+    }
+
+    /**
+     * Create and add wrapped Text element to R element as RInstrText
+     * set value and optionally space preserve if value starts or ends in a space
+     *
+     * @param value      instrText Value
+     * @param noProofRPr if true will add rPr with noProof #BooleanDefaultTrue
+     * @param createR    if true then create a new R, otherwise add to existing one
+     * @return Text element
+     */
+    Text addInstrText(String value, boolean noProofRPr, boolean createR);
+
+    default Text addInstrTextCreateR(String value, boolean noProofRPr) {
+        return addInstrText(value, noProofRPr, true);
+    }
+
+    default Text addInstrTextCreateR(String value) {
+        return addInstrText(value, false, true);
+    }
+
+    default Text addInstrText(String value, boolean noProofRPr) {
+        return addInstrText(value, noProofRPr, false);
+    }
+
+    default Text addInstrText(String value) {
+        return addInstrText(value, false);
+    }
 
     /**
      * Create and add wrapped Text element to R element as RInstrText
      *
-     * @param instrText instrText Value
-     * @param spacePreserve if true wills set space preserve on it
-     * @param noProofRPr if true will add rPr with noProof tag to R
-     * @return Text element
-     */
-    Text addWrappedInstrText(String instrText, boolean spacePreserve, boolean noProofRPr);
-
-    /**
-     * Create and add wrapped Text element to R element as RInstrText
-     *
-     * @param charType  char type to set
+     * @param charType char type to set
+     * @param createR  if true then create a new R, otherwise add to existing one
      * @return FldChar element
      */
-    FldChar addWrappedFldChar(STFldCharType charType);
+    FldChar addFldChar(STFldCharType charType, boolean createR);
+
+    default FldChar addFldCharCreateR(STFldCharType charType) {
+        return addFldChar(charType, true);
+    }
+
+    default FldChar addFldChar(STFldCharType charType) {
+        return addFldChar(charType, true);
+    }
 
     void addPageBreak();
 
@@ -210,8 +257,12 @@ public interface DocxContext<T> extends DocxContextFrameProvider<T> {
      *
      * @param text text to add
      * @return text element
+     * @deprecated use {@link #addTextCreateR(String)}
      */
-    Text text(String text);
+    @Deprecated
+    default Text text(String text) {
+        return addTextCreateR(text);
+    }
 
     /**
      * Get a paragraph style of given name

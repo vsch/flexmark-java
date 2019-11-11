@@ -307,7 +307,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
             docx.createP();
             docx.renderChildren(node);
         } else {
-            docx.text(chars.unescape());
+            docx.addTextCreateR(chars.unescape());
         }
     }
 
@@ -372,7 +372,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
 
     private void render(Text node, DocxRendererContext docx) {
         addRunAttributeFormatting(node, docx);
-        docx.text(node.getChars().unescape());
+        docx.addTextCreateR(node.getChars().unescape());
     }
 
     private void render(TextBase node, DocxRendererContext docx) {
@@ -600,7 +600,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
                 }
             }
         } else {
-            docx.text(node.getChars().unescape());
+            docx.addTextCreateR(node.getChars().unescape());
         }
     }
 
@@ -697,7 +697,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
     }
 
     private void render(SoftLineBreak node, DocxRendererContext docx) {
-        docx.text(" ");
+        docx.addTextCreateR(" ");
     }
 
     private void render(HardLineBreak node, DocxRendererContext docx) {
@@ -746,7 +746,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
                 // render as fenced code
                 docx.renderFencedCodeLines(node.getContentLines());
                 //P p = docx.createP();
-                //docx.text(normalizeEOL);
+                //docx.addTextCreateR(normalizeEOL);
             } else {
                 try {
                     docx.getDocxDocument().addAltChunk(AltChunkType.Html, node.getChars().toString().getBytes(StandardCharsets.UTF_8));
@@ -782,7 +782,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
                 // render as inline code
                 docx.contextFramed(() -> {
                     docx.setRunFormatProvider(new SourceCodeRunFormatProvider<>(docx, options.noCharacterStyles, options.codeHighlightShading));
-                    docx.text(node.getChars().normalizeEOL());
+                    docx.addTextCreateR(node.getChars().normalizeEOL());
                 });
             } else {
                 try {
@@ -799,7 +799,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
     }
 
     private void render(HtmlEntity node, DocxRendererContext docx) {
-        docx.text(node.getChars().unescape());
+        docx.addTextCreateR(node.getChars().unescape());
     }
 
     private void renderURL(BasedSequence urlSource, DocxRendererContext docx, String linkUrl) {
@@ -1006,8 +1006,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
 
         ObjectFactory factory = docx.getFactory();
 
-        docx.createR();
-        FldChar fldChar = docx.addWrappedFldChar(STFldCharType.BEGIN);
+        FldChar fldChar = docx.addFldCharCreateR(STFldCharType.BEGIN);
         CTFFData ffData = factory.createCTFFData();
         fldChar.setFfData(ffData);
 
@@ -1262,19 +1261,15 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
                         typeDefaultValue = currentDate;
 
                         extraExtraContent = () -> {
-                            docx.createR();
-                            docx.addWrappedFldChar(STFldCharType.BEGIN);
+                            docx.addFldCharCreateR(STFldCharType.BEGIN);
 
-                            docx.createR();
-                            docx.addWrappedInstrText(String.format(" DATE \\@ \"%s\" ", useFormat), true, false);
+                            docx.addInstrTextCreateR(String.format(" DATE \\@ \"%s\" ", useFormat));
 
-                            docx.createR();
-                            docx.addWrappedFldChar(STFldCharType.SEPARATE);
-                            docx.createR();
-                            docx.addWrappedInstrText(currentDate, false, true);
+                            docx.addFldCharCreateR(STFldCharType.SEPARATE);
 
-                            docx.createR();
-                            docx.addWrappedFldChar(STFldCharType.END);
+                            docx.addInstrTextCreateR(currentDate, true);
+
+                            docx.addFldCharCreateR(STFldCharType.END);
                         };
                     }
                     break;
@@ -1305,19 +1300,15 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
                         typeDefaultValue = currentTime;
 
                         extraExtraContent = () -> {
-                            docx.createR();
-                            docx.addWrappedFldChar(STFldCharType.BEGIN);
+                            docx.addFldCharCreateR(STFldCharType.BEGIN);
 
-                            docx.createR();
-                            docx.addWrappedInstrText(String.format(" TIME \\@ \"%s\" ", useFormat), true, false);
+                            docx.addInstrTextCreateR(String.format(" TIME \\@ \"%s\" ", useFormat));
 
-                            docx.createR();
-                            docx.addWrappedFldChar(STFldCharType.SEPARATE);
-                            docx.createR();
-                            docx.addWrappedInstrText(currentTime, false, true);
+                            docx.addFldCharCreateR(STFldCharType.SEPARATE);
 
-                            docx.createR();
-                            docx.addWrappedFldChar(STFldCharType.END);
+                            docx.addInstrTextCreateR(currentTime, true);
+
+                            docx.addFldCharCreateR(STFldCharType.END);
                         };
                     }
                     break;
@@ -1355,11 +1346,9 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
                         extraExtraContent.run();
                     }
 
-                    docx.createR();
-                    docx.addWrappedFldChar(STFldCharType.SEPARATE);
+                    docx.addFldCharCreateR(STFldCharType.SEPARATE);
 
-                    docx.createR();
-                    docx.addWrappedText(finalTextDefaultValue, false, true);
+                    docx.addTextCreateR(finalTextDefaultValue, true);
                 };
 
                 CTFFTextType tiType = factory.createCTFFTextType();
@@ -1392,15 +1381,13 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
         // <w:bookmarkEnd w:id="0"/>
         //
 
-        docx.createR();
-        docx.addWrappedInstrText(String.format(" %s ", docxFieldType), true, false);
+        docx.addInstrTextCreateR(String.format(" %s ", docxFieldType));
 
         if (extraContent != null) {
             extraContent.run();
         }
 
-        docx.createR();
-        docx.addWrappedFldChar(STFldCharType.END);
+        docx.addFldCharCreateR(STFldCharType.END);
     }
 
     @NotNull String getCurrentTime(String useFormat) {
@@ -1470,11 +1457,11 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
                 renderInputField(node, docx);
             } else {
                 if (!node.hasChildren()) {
-                    docx.text(node.getChars().unescape());
+                    docx.addTextCreateR(node.getChars().unescape());
                 } else {
-                    docx.text(node.getChars().prefixOf(node.getChildChars()).unescape());
+                    docx.addTextCreateR(node.getChars().prefixOf(node.getChildChars()).unescape());
                     docx.renderChildren(node);
-                    docx.text(node.getChars().suffixOf(node.getChildChars()).unescape());
+                    docx.addTextCreateR(node.getChars().suffixOf(node.getChildChars()).unescape());
                 }
             }
         } else {
@@ -1667,12 +1654,12 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
 
         if (shortcut.emoji == null || shortcut.emojiText == null) {
             // output as text
-            docx.text(":");
+            docx.addTextCreateR(":");
             docx.renderChildren(node);
-            docx.text(":");
+            docx.addTextCreateR(":");
         } else {
             if (shortcut.isUnicode) {
-                docx.text(shortcut.emojiText);
+                docx.addTextCreateR(shortcut.emojiText);
             } else {
                 ResolvedLink resolvedLink = docx.resolveLink(LinkType.IMAGE, shortcut.emojiText, null, null);
                 //String altText = shortcut.alt;
@@ -1773,7 +1760,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
 
         if (resolvedLink == null) {
             // empty ref, we treat it as text
-            docx.text(node.getChars().unescape());
+            docx.addTextCreateR(node.getChars().unescape());
 
             if (options.logImageProcessing) {
                 System.out.println("render image ref of " + referenceRepository.normalizeKey(node.getReference()) + " skipped because it was not defined");
@@ -2110,11 +2097,9 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
         FootnoteBlock footnoteBlock = node.getFootnoteBlock();
         if (footnoteBlock == null) {
             //just text
-            org.docx4j.wml.Text text = docx.addWrappedText();
-            text.setValue("[^");
+            docx.addText("[^");
             docx.renderChildren(node);
-            org.docx4j.wml.Text text1 = docx.addWrappedText();
-            text1.setValue("]");
+            docx.addText("]");
         } else {
             try {
                 BigInteger footnoteId = footnoteIDs.getOrDefault(footnoteBlock, BigInteger.ZERO);
@@ -2207,22 +2192,22 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
         @Override
         public void render(int referenceOrdinal, EnumeratedReferenceBlock referenceFormat, String defaultText, boolean needSeparator) {
             Runnable compoundRunnable = renderer.ordinalRunnable;
+            String text = referenceOrdinal + (needSeparator ? "." : "");
 
             if (referenceFormat != null) {
                 renderer.ordinalRunnable = () -> {
                     if (compoundRunnable != null) compoundRunnable.run();
-                    docx.text(String.valueOf(referenceOrdinal));
-                    if (needSeparator) docx.text(".");
+                    docx.addTextCreateR(text);
                 };
 
                 docx.renderChildren(referenceFormat);
             } else {
                 if (compoundRunnable != null) {
-                    docx.text(defaultText + " ");
+                    docx.addTextCreateR(defaultText + " ");
                     compoundRunnable.run();
-                    docx.text(referenceOrdinal + (needSeparator ? "." : ""));
+                    docx.addTextCreateR(text);
                 } else {
-                    docx.text(defaultText + " " + referenceOrdinal + (needSeparator ? "." : ""));
+                    docx.addTextCreateR(defaultText + " " + text);
                 }
             }
         }
@@ -2279,7 +2264,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
         @Override
         public void run() {
             // Create object for r
-            myDocx.text(myLinkText == null ? myLinkUrl : myLinkText);
+            myDocx.addTextCreateR(myLinkText == null ? myLinkUrl : myLinkText);
         }
     }
 
