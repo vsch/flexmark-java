@@ -6,6 +6,7 @@ flexmark-java
 [TOC]: # " "
 
 - [To Do](#to-do)
+- [0.50.44](#05044)
 - [0.50.42](#05042)
 - [0.50.40](#05040)
 - [0.50.38](#05038)
@@ -109,6 +110,11 @@ flexmark-java
 * [ ] Convert anonymous classes to lambda where possible.
 * [ ] Add: `flexmark-ext-attributes` formatting of individual attributes instead of dumping the
       attributes node text.
+
+0.50.44
+-------
+
+* Fix: [#376, convert markdown to html], delimiters are not allowed to span table cells.
 
 0.50.42
 -------
@@ -1307,7 +1313,7 @@ flexmark-java
 * Add: translation formatting awareness to: abbreviation, admonition, attributes, emoji,
   enumerated reference footnotes and tables extensions
 * Add: translation API sample:
-  [TranslationSample.java](https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/samples/TranslationSample.java)
+  [TranslationSample.java](https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/java/samples/TranslationSample.java)
 * Fix: `AttributesExtension` incorrectly parsed consecutive attributes as a single element
 * Add: `TranslationHandlerFactory` to allow format options to be passed for custom handler
   creation.
@@ -1386,7 +1392,7 @@ flexmark-java
 * Fix: change all javadoc/overview.html to be generated from javadoc/overview.md files.
 * Fix: admonition.css remove non-existent `horiz-align` property.
 * Add:
-  [HtmlToMarkdownSample.java](https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/samples/HtmlToMarkdownSample.java)
+  [HtmlToMarkdownSample.java](https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/java/samples/HtmlToMarkdownSample.java)
 * Add: `HtmlRenderer.HEADER_ID_GENERATOR_NON_DASH_CHARS`, default `""`. Any characters in the
   string will be preserved and passed through to the heading ID.
 * Fix: `ParserEmulationProfile.GITHUB_DOC` now sets
@@ -1700,14 +1706,16 @@ setting either will affect both keys. For information on these keys see
 [#362, ArrayIndexOutOfBoundsException in BasedSequence.indexOfAll]: https://github.com/vsch/flexmark-java/issues/362
 [Admonition Extension, Material for MkDocs]: https://squidfunk.github.io/mkdocs-material/extensions/admonition/
 [Awesome Console]: https://plugins.jetbrains.com/plugin/7677-awesome-console "Awesome Console"
-[HtmlToMarkdownCustomizedSample.java]: https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/samples/HtmlToMarkdownCustomizedSample.java
+[HtmlToMarkdownCustomizedSample.java]: https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/java/samples/HtmlToMarkdownCustomizedSample.java
 [Kijimuna]: https://github.com/Kijimuna
 [migrate 0_35_x to 0_40_0.xml]: /assets/migrations/migrate%20flexmark-java%200_35_x%20to%200_40_0.xml
 [migrate flexmark-java 0_40_x to 0_42_0]: https://github.com/vsch/flexmark-java/blob/master/assets/migrations/migrate%20flexmark-java%200_40_x%20to%200_42_0.xml
 [migrate flexmark-java 0_42_x to 0_50_0.xml]: https://github.com/vsch/flexmark-java/blob/master/assets/migrations/migrate%20flexmark-java%200_42_x%20to%200_50_0.xml
-[NodeInsertingPostProcessorSample.java]: https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/samples/NodeInsertingPostProcessorSample.java
-[PdfLandscapeConverter.java]: https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/samples/PdfLandscapeConverter.java
+[NodeInsertingPostProcessorSample.java]: https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/java/samples/NodeInsertingPostProcessorSample.java
+[PdfLandscapeConverter.java]: https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/java/samples/PdfLandscapeConverter.java
 [YouTrack: IDEA-207453]: https://youtrack.jetbrains.com/issue/IDEA-207453 "Add Conversion of ref anchor to UrlFilter for file line navigation"
 
 
 [#372, \[Regression?\] Attributes extension not applied to \`code\` tag of code blocks]: https://github.com/vsch/flexmark-java/issues/372
+
+[#376, convert markdown to html]: https://github.com/vsch/flexmark-java/issues/376

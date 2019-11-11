@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="FlexmarkProjectSettings">
+    <FlexmarkHtmlSettings flexmarkSpecExampleRendering="0" flexmarkSpecExampleRenderHtml="false">
+      <flexmarkSectionLanguages>
+        <option name="1" value="Markdown" />
+        <option name="2" value="HTML" />
+        <option name="3" value="flexmark-ast:1" />
+      </flexmarkSectionLanguages>
+    </FlexmarkHtmlSettings>
+  </component>
   <component name="MarkdownProjectSettings">
     <PreviewSettings splitEditorLayout="FIRST" splitEditorPreview="PREVIEW" useGrayscaleRendering="false" zoomFactor="1.0" maxImageWidth="0" synchronizePreviewPosition="true" highlightPreviewType="LINE" highlightFadeOut="2" highlightOnTyping="false" synchronizeSourcePosition="true" verticallyAlignSourceAndPreviewSyncPosition="true" showSearchHighlightsInPreview="true" showSelectionInPreview="true" lastLayoutSetsDefault="false">
       <PanelProvider>
@@ -15,11 +24,15 @@
         <option name="AUTOLINKS" value="false" />
         <option name="DEFINITIONS" value="false" />
         <option name="DEFINITION_BREAK_DOUBLE_BLANK_LINE" value="false" />
+        <option name="EXTANCHORLINKS" value="false" />
+        <option name="EXTANCHORLINKS_WRAP" value="false" />
         <option name="FENCED_CODE_BLOCKS" value="true" />
         <option name="FOOTNOTES" value="true" />
         <option name="HARDWRAPS" value="false" />
         <option name="HTML_DEEP_PARSER" value="false" />
         <option name="INSERTED" value="false" />
+        <option name="INTELLIJ_DUMMY_IDENTIFIER" value="false" />
+        <option name="MULTI_LINE_IMAGE_URLS" value="false" />
         <option name="QUOTES" value="false" />
         <option name="RELAXEDHRULES" value="true" />
         <option name="SMARTS" value="true" />
@@ -109,7 +122,5 @@ code {
 }</cssText>
       <cssUriHistory />
     </CssSettings>
-    <EnhPreviewSettings allowBrowsingInPreview="false" openRemoteLinks="true" replaceUnicodeEmoji="false" showGitHubPageIfSynced="false" />
-    <EnhHtmlSettings embedUrlContent="false" embedImages="false" embedHttpImages="false" mathConversion="-1" />
   </component>
 </project>

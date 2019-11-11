@@ -20,7 +20,7 @@ than ideal and for pathological input either hangs or practically hangs during p
 
 ### master [![Build status](https://travis-ci.org/vsch/flexmark-java.svg?branch=master)](https://travis-ci.org/vsch/flexmark-java)
 
-### latest [![Maven Central status](https://img.shields.io/maven-central/v/com.vladsch.flexmark/flexmark.svg)](https://search.maven.org/search?q=g:com.vladsch.flexmark)<!-- @IGNORE PREVIOUS: link --> [![Build status](https://travis-ci.org/vsch/flexmark-java.svg?branch=0.50.42)](https://travis-ci.org/vsch/flexmark-java) [![Javadocs](https://www.javadoc.io/badge/com.vladsch.flexmark/flexmark.svg)](https://www.javadoc.io/doc/com.vladsch.flexmark/flexmark)
+### latest [![Maven Central status](https://img.shields.io/maven-central/v/com.vladsch.flexmark/flexmark.svg)](https://search.maven.org/search?q=g:com.vladsch.flexmark)<!-- @IGNORE PREVIOUS: link --> [![Build status](https://travis-ci.org/vsch/flexmark-java.svg?branch=0.50.44)](https://travis-ci.org/vsch/flexmark-java) [![Javadocs](https://www.javadoc.io/badge/com.vladsch.flexmark/flexmark.svg)](https://www.javadoc.io/doc/com.vladsch.flexmark/flexmark)
 
 <!-- [![codecov](https://codecov.io/gh/vsch/flexmark-java/branch/master/graph/badge.svg)](https://codecov.io/gh/vsch/flexmark-java) -->
 [![GitQ](https://gitq.com/badge.svg)](https://gitq.com/vsch/flexmark-java)
@@ -48,12 +48,12 @@ following sample:
 <dependency>
     <groupId>com.vladsch.flexmark</groupId>
     <artifactId>flexmark-all</artifactId>
-    <version>0.50.42</version>
+    <version>0.50.44</version>
 </dependency>
 ```
 
 Source:
-[BasicSample.java](flexmark-java-samples/src/com/vladsch/flexmark/samples/BasicSample.java)
+[BasicSample.java](flexmark-java-samples/src/com/vladsch/flexmark/java/samples/BasicSample.java)
 
 ```java
 package com.vladsch.flexmark.samples;
@@ -87,7 +87,7 @@ public class BasicSample {
 #### Building via Gradle
 
 ```shell
-compile 'com.vladsch.flexmark:flexmark-all:0.50.42'
+compile 'com.vladsch.flexmark:flexmark-all:0.50.44'
 ```
 
 #### Building with Android Studio
@@ -167,7 +167,7 @@ public class PegdownOptions {
 ```
 
 A sample with a
-[custom link resolver](https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/samples/PegdownCustomLinkResolverOptions.java)
+[custom link resolver](https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/java/samples/PegdownCustomLinkResolverOptions.java)
 is also available, which includes link resolver for changing URLs or attributes of links and a
 custom node renderer if you need to override the generated link HTML.
 
@@ -223,7 +223,7 @@ custom node renderer if you need to override the generated link HTML.
 * Custom node rendering API with ability to invoke standard rendering for an overridden node,
   allowing custom node renders that only handle special cases and let the rest be rendered as
   usual.
-  [PegdownCustomLinkResolverOptions](https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/samples/PegdownCustomLinkResolverOptions.java)
+  [PegdownCustomLinkResolverOptions](https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/java/samples/PegdownCustomLinkResolverOptions.java)
 * [Gfm Issues](https://github.com/vsch/flexmark-java/wiki/Extensions#gfm-issues) and
   [Gfm Users](https://github.com/vsch/flexmark-java/wiki/Extensions#gfm-users) extensions for
   parsing and rendering `#123` and `@user-name` respectively.
@@ -617,14 +617,14 @@ BSD (2-clause) licensed, see [LICENSE.txt] file.
 [commonmark-java]: https://github.com/atlassian/commonmark-java
 [commonMarkSpec.md]: https://github.com/vsch/idea-multimarkdown/blob/master/test/data/performance/commonMarkSpec.md
 [docx4j]: https://www.docx4java.org/trac/docx4j
-[DocxConverter Sample]: https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/samples/DocxConverterCommonMark.java
+[DocxConverter Sample]: https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/java/samples/DocxConverterCommonMark.java
 [Extensions.java]: flexmark-profile-pegdown/src/main/java/com/vladsch/flexmark/profiles/pegdown/Extensions.java
 [flexmark-java]: https://github.com/vsch/flexmark-java
 [GitHub]: https://github.com/vsch/laravel-translation-manager
 [GitHub Issues page]: ../../issues
 [hang-pegdown.md]: https://github.com/vsch/idea-multimarkdown/blob/master/test/data/performance/hang-pegdown.md
 [hang-pegdown2.md]: https://github.com/vsch/idea-multimarkdown/blob/master/test/data/performance/hang-pegdown2.md
-[HtmlToMarkdownCustomizedSample.java]: https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/samples/HtmlToMarkdownCustomizedSample.java
+[HtmlToMarkdownCustomizedSample.java]: https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/java/samples/HtmlToMarkdownCustomizedSample.java
 [Include Markdown and HTML File Content]: ../../wiki/Usage#include-markdown-and-html-file-content
 [intellij-markdown]: https://github.com/valich/intellij-markdown
 [Jekyll]: https://jekyllrb.com

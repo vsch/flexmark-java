@@ -1791,7 +1791,7 @@ Document[0, 204]
     <tr><th>c</th><th>d</th></tr>
   </thead>
   <tbody>
-    <tr><td><em>a | b</em></td></tr>
+    <tr><td>*a</td><td>b*</td></tr>
     <tr><td><code>e | f</code></td></tr>
     <tr><td><a href="http://a.com">g | h</a></td></tr>
   </tbody>
@@ -1813,10 +1813,10 @@ Document[0, 74]
           Text[18, 21] chars:[18, 21, "---"]
     TableBody[24, 73]
       TableRow[24, 35] rowNumber=1
-        TableCell[24, 35] textOpen:[24, 25, "|"] text:[26, 33, "*a | b*"] textClose:[34, 35, "|"]
-          Emphasis[26, 33] textOpen:[26, 27, "*"] text:[27, 32, "a | b"] textClose:[32, 33, "*"]
-            Text[27, 32] chars:[27, 32, "a | b"]
-          Text[33, 33]
+        TableCell[24, 30] textOpen:[24, 25, "|"] text:[26, 28, "*a"] textClose:[29, 30, "|"]
+          Text[26, 28] chars:[26, 28, "*a"]
+        TableCell[30, 35] text:[31, 33, "b*"] textClose:[34, 35, "|"]
+          Text[31, 33] chars:[31, 33, "b*"]
       TableRow[36, 47] rowNumber=2
         TableCell[36, 47] textOpen:[36, 37, "|"] text:[38, 45, "`e | f`"] textClose:[46, 47, "|"]
           Code[38, 45] textOpen:[38, 39, "`"] text:[39, 44, "e | f"] textClose:[44, 45, "`"]
@@ -4195,3 +4195,50 @@ Document[0, 27]
 ````````````````````````````````
 
 
+### 376
+
+Issue [#376, convert markdown to html], inline delimiters ignore custom chars
+
+```````````````````````````````` example 376: 1
+| header1 | header2 | header3 |
+|---------|---------|---------|
+| 1*2     | 2*1     |         |
+.
+<table>
+  <thead>
+    <tr><th>header1</th><th>header2</th><th>header3</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>1*2</td><td>2*1</td><td> </td></tr>
+  </tbody>
+</table>
+.
+Document[0, 96]
+  TableBlock[0, 96]
+    TableHead[0, 31]
+      TableRow[0, 31] rowNumber=1
+        TableCell[0, 11] header textOpen:[0, 1, "|"] text:[2, 9, "header1"] textClose:[10, 11, "|"]
+          Text[2, 9] chars:[2, 9, "header1"]
+        TableCell[11, 21] header text:[12, 19, "header2"] textClose:[20, 21, "|"]
+          Text[12, 19] chars:[12, 19, "header2"]
+        TableCell[21, 31] header text:[22, 29, "header3"] textClose:[30, 31, "|"]
+          Text[22, 29] chars:[22, 29, "header3"]
+    TableSeparator[32, 63]
+      TableRow[32, 63]
+        TableCell[32, 43] textOpen:[32, 33, "|"] text:[33, 42, "---------"] textClose:[42, 43, "|"]
+          Text[33, 42] chars:[33, 42, "---------"]
+        TableCell[43, 53] text:[43, 52, "---------"] textClose:[52, 53, "|"]
+          Text[43, 52] chars:[43, 52, "---------"]
+        TableCell[53, 63] text:[53, 62, "---------"] textClose:[62, 63, "|"]
+          Text[53, 62] chars:[53, 62, "---------"]
+    TableBody[64, 95]
+      TableRow[64, 95] rowNumber=1
+        TableCell[64, 75] textOpen:[64, 65, "|"] text:[66, 69, "1*2"] textClose:[74, 75, "|"]
+          Text[66, 69] chars:[66, 69, "1*2"]
+        TableCell[75, 85] text:[76, 79, "2*1"] textClose:[84, 85, "|"]
+          Text[76, 79] chars:[76, 79, "2*1"]
+        TableCell[85, 95] text:[85, 86, " "] textClose:[94, 95, "|"]
+          Text[85, 86] chars:[85, 86, " "]
+````````````````````````````````
+
+[#376, convert markdown to html]: https://github.com/vsch/flexmark-java/issues/376
