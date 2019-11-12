@@ -211,6 +211,7 @@ Next 0.59.46
 * Deprecate: `DocxContext.addWrappedText()` use `DocxContext.addText(String)`
 * Deprecate: `DocxContext.text(String)` use `DocxContext.addTextCreateR(String)`
 * Fix: `IRichSequenceBase.split` and `IRichSequenceBase.splitList` some combinations would pass parameters out of place causing wrong operation.
+* Fix: `MarkdownParagraph` wrapping to use simplified left aligned wrapping with no trailing spaces
 
 0.59.44
 -------

@@ -8,7 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * A CharSequence that references original char sequence with offsets into original preserved
+ * A CharSequence that references original char sequence with offsets into original preserved.
+ * <p>
+ * NOTE: '\0' changed to '\uFFFD' use {@link com.vladsch.flexmark.util.mappers.NullEncoder#decodeNull} mapper to get original null chars.
  * <p>
  * a subSequence() returns a sub-sequence from the original base sequence with corresponding offsets
  */
@@ -30,7 +32,7 @@ public interface BasedSequence extends IRichSequence<BasedSequence> {
 
     @NotNull
     static BasedSequence of(@Nullable CharSequence charSequence, int startIndex) {
-        return BasedSequenceImpl.create(charSequence, startIndex, charSequence == null ? startIndex: charSequence.length());
+        return BasedSequenceImpl.create(charSequence, startIndex, charSequence == null ? startIndex : charSequence.length());
     }
 
     @NotNull
@@ -233,8 +235,8 @@ public interface BasedSequence extends IRichSequence<BasedSequence> {
      *
      * @param other sequence to append to end of this one
      * @return based sequence that contains the span from start of this sequence and end of other
-     *     <p>
-     *     assertion will fail if the other sequence is not a continuation of this one
+     *         <p>
+     *         assertion will fail if the other sequence is not a continuation of this one
      */
     @NotNull
     BasedSequence spliceAtEnd(@NotNull BasedSequence other);
@@ -316,7 +318,7 @@ public interface BasedSequence extends IRichSequence<BasedSequence> {
      * @param eolChars   characters to consider as EOL, note {@link #eolStartLength(int)} {@link #eolEndLength(int)} should report length of EOL found if length > 1
      * @param includeEol if to include the eol in the string
      * @return resulting sequence after extension. If already spanning the line then this sequence is returned.
-     *     if the last character of this sequence are found in eolChars then no extension will be performed since it already includes the line end
+     *         if the last character of this sequence are found in eolChars then no extension will be performed since it already includes the line end
      */
     @NotNull BasedSequence extendToEndOfLine(@NotNull CharSequence eolChars, boolean includeEol);
     @NotNull BasedSequence extendToEndOfLine(@NotNull CharSequence eolChars);
@@ -329,7 +331,7 @@ public interface BasedSequence extends IRichSequence<BasedSequence> {
      * @param eolChars   characters to consider as EOL, note {@link #eolStartLength(int)} {@link #eolEndLength(int)} should report length of EOL found if length > 1
      * @param includeEol if to include the eol in the string
      * @return resulting sequence after extension. If already spanning the line then this sequence is returned.
-     *     if the first character of this sequence are found in eolChars then no extension will be performed since it already includes the line end
+     *         if the first character of this sequence are found in eolChars then no extension will be performed since it already includes the line end
      */
     @NotNull BasedSequence extendToStartOfLine(@NotNull CharSequence eolChars, boolean includeEol);
     @NotNull BasedSequence extendToStartOfLine(@NotNull CharSequence eolChars);
@@ -386,8 +388,8 @@ public interface BasedSequence extends IRichSequence<BasedSequence> {
      * Get the tracked index after editing and chopping manipulation of an offset tracking sequence
      *
      * @return best guess at the tracked index based on the contents of this sequence,
-     *     0 to length() or -1 if offset is
-     *     no longer part of this sequence
+     *         0 to length() or -1 if offset is
+     *         no longer part of this sequence
      */
     int getTrackedIndex();
 
@@ -398,8 +400,8 @@ public interface BasedSequence extends IRichSequence<BasedSequence> {
      * @param startOffset new start offset at destination for this sequence
      * @param maxOffset   max offset at destination
      * @return best guess at the tracked index based on the contents of this sequence,
-     *     0 to maxOffset or -1 if offset is
-     *     no longer part of this sequence
+     *         0 to maxOffset or -1 if offset is
+     *         no longer part of this sequence
      */
     int getTrackedOffset(int startOffset, int maxOffset);
 

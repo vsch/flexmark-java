@@ -5,6 +5,9 @@ import org.jetbrains.annotations.NotNull;
 /**
  * A CharSequence that references original char[]
  * a subSequence() returns a sub-sequence from the original base sequence
+ *
+ * NOTE: '\0' changed to '\uFFFD' use {@link com.vladsch.flexmark.util.mappers.NullEncoder#decodeNull} mapper to get original null chars.
+ *
  */
 public final class CharSubSequence extends BasedSequenceImpl {
     private final char[] baseChars;
@@ -71,7 +74,8 @@ public final class CharSubSequence extends BasedSequenceImpl {
     @Override
     public char charAt(int index) {
         if (index >= 0 && index < endOffset - startOffset) {
-            return baseChars[index + startOffset];
+            char c = baseChars[index + startOffset];
+            return c == NUL ? ENC_NUL : c;
         }
         throw new StringIndexOutOfBoundsException("CharSubSequence index: " + index + " out of range: 0, " + length());
     }

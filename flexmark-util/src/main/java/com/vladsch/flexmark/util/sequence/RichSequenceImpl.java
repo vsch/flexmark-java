@@ -6,6 +6,8 @@ import org.jetbrains.annotations.Nullable;
 
 /**
  * A RichSequence implementation
+ *
+ * NOTE: '\0' changed to '\uFFFD' use {@link com.vladsch.flexmark.util.mappers.NullEncoder#decodeNull} mapper to get original null chars.
  */
 public class RichSequenceImpl extends IRichSequenceBase<RichSequence> implements RichSequence {
     final CharSequence charSequence;
@@ -52,7 +54,8 @@ public class RichSequenceImpl extends IRichSequenceBase<RichSequence> implements
 
     @Override
     public char charAt(int index) {
-        return charSequence.charAt(index);
+        char c = charSequence.charAt(index);
+        return c == NUL ? ENC_NUL : c;
     }
 
     @NotNull

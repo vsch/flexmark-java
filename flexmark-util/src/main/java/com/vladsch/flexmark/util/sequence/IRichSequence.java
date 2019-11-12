@@ -10,11 +10,11 @@ import java.util.function.BiPredicate;
 import java.util.function.Predicate;
 
 /**
- * A CharSequence that provides a rich set of manipulation methods
+ * A CharSequence that provides a rich set of manipulation methods.
  * <p>
- * safe access methods return '\0' for no char response. If your input sequence has '\0' then it should be
- * wrapped in a {@link MappedRichSequence} wrapper with {@link com.vladsch.flexmark.util.mappers.NullEncoder#encodeNull} mapper
- * and {@link com.vladsch.flexmark.util.mappers.NullEncoder#decodeNull} mapper to get original null chars
+ * NOTE: '\0' changed to '\uFFFD' use {@link com.vladsch.flexmark.util.mappers.NullEncoder#decodeNull} mapper to get original null chars.
+ * <p>
+ * safe access methods return '\0' for no char response.
  */
 @SuppressWarnings("SameParameterValue")
 public interface IRichSequence<T extends IRichSequence<T>> extends CharSequence, Comparable<CharSequence> {
@@ -800,8 +800,8 @@ public interface IRichSequence<T extends IRichSequence<T>> extends CharSequence,
      *                  can be any value, if less than 0 it is the same as 0,
      *                  if greater than length() it is the same as length()
      * @return range of blank lines at or before fromIndex and ranging to minimum of startIndex, Range.NULL if none found
-     *     if the range in sequence contains only whitespace characters then the whole range will be returned
-     *     even if contains no EOL characters
+     *         if the range in sequence contains only whitespace characters then the whole range will be returned
+     *         even if contains no EOL characters
      */
     @NotNull Range leadingBlankLinesRange(@NotNull CharSequence eolChars, int fromIndex, int endIndex);
     /**
@@ -815,8 +815,8 @@ public interface IRichSequence<T extends IRichSequence<T>> extends CharSequence,
      *                   can be any value, if less than 0 it is the same as 0,
      *                   if greater than length() it is the same as length()
      * @return range of blank lines at or before fromIndex and ranging to minimum of startIndex
-     *     if the range in sequence contains only whitespace characters then the whole range will be returned
-     *     even if contains no EOL characters
+     *         if the range in sequence contains only whitespace characters then the whole range will be returned
+     *         even if contains no EOL characters
      */
     @NotNull Range trailingBlankLinesRange(CharSequence eolChars, int startIndex, int fromIndex);
 
@@ -1105,8 +1105,8 @@ public interface IRichSequence<T extends IRichSequence<T>> extends CharSequence,
      * @param chars char sequence to insert
      * @param index index of insertion. if &gt;length of this sequence then same as length, if &lt;0 then same as 0
      * @return resulting sequence
-     *     based sequence implementation may throw an IllegalArgumentException
-     *     if inserting another based sequence out of order based on offsets
+     *         based sequence implementation may throw an IllegalArgumentException
+     *         if inserting another based sequence out of order based on offsets
      */
     @NotNull T insert(@NotNull CharSequence chars, int index);
 
@@ -1337,7 +1337,7 @@ public interface IRichSequence<T extends IRichSequence<T>> extends CharSequence,
      *
      * @param index index for which to get line information
      * @return Pair(line, column) where line and column are 0 based,
-     *     throws IllegalArgumentException if index &lt; 0 or &gt; length.
+     *         throws IllegalArgumentException if index &lt; 0 or &gt; length.
      */
     @NotNull Pair<Integer, Integer> lineColumnAtIndex(int index);
     @Deprecated
