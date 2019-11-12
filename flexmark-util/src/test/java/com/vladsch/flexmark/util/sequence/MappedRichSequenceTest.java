@@ -20,7 +20,7 @@ public class MappedRichSequenceTest {
         IRichSequence encoded = RichSequence.of(encodedInput, 0, ((CharSequence) encodedInput).length());
         IRichSequence encodedDecoded = encoded.toMapped(NullEncoder.decodeNull);
 
-        assertEquals(input, sequence.toString());
+        assertEquals(encodedInput, sequence.toString()); // sequences encoded by default
         assertEquals(encodedInput, mapEncoded.toString());
         assertEquals(input, mapDecoded.toString());
         assertEquals(encodedInput, encoded.toString());

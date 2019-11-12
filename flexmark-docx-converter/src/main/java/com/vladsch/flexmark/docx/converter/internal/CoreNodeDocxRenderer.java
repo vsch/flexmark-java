@@ -802,10 +802,6 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
         docx.addTextCreateR(node.getChars().unescape());
     }
 
-    private void renderURL(BasedSequence urlSource, DocxRendererContext docx, String linkUrl) {
-        renderURL(urlSource, docx, linkUrl, linkUrl);
-    }
-
     private void renderURL(BasedSequence urlSource, DocxRendererContext docx, String linkUrl, String linkText) {
         renderURL(urlSource, docx, linkUrl, null, new UrlRenderer(docx, linkText, linkUrl));
     }
@@ -916,12 +912,13 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
     private void render(AutoLink node, DocxRendererContext docx) {
         String url = node.getChars().unescape();
         addRunAttributeFormatting(node, docx);
-        renderURL(node.getChars(), docx, url);
+        renderURL(node.getChars(), docx, url, url);
     }
 
     private void render(MailLink node, DocxRendererContext docx) {
         addRunAttributeFormatting(node, docx);
-        renderURL(node.getChars(), docx, "mailto:" + node.getChars().unescape());
+        String text = node.getChars().unescape();
+        renderURL(node.getChars(), docx, "mailto:" + text, text);
     }
 
     private void render(Link node, DocxRendererContext docx) {

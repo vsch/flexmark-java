@@ -11,6 +11,7 @@ flexmark-java
 - [Next](#next)
 - [Next 0.59.48](#next-05948)
 - [Next 0.59.46](#next-05946)
+- [Next 0.59.46](#next-05946)
 - [0.59.44](#05944)
 - [0.59.42](#05942)
 - [0.59.40](#05940)
@@ -177,8 +178,9 @@ Next
       `StringBuilder` its text equivalent. A visitor needs to be provided so child nodes could
       be visited.
 * [ ] Fix: change `BasedSequenceImpl` to use `Range` instead of `startOffset` and `endOffset`
-* Deprecate: all static factory method named `of` to more specific so that errors are less likely.
-`repeatOf`, `prefixOf` otherwise it is possible to have the wrong factory method called and not see it.
+* Deprecate: all static factory method named `of` to more specific so that errors are less
+  likely. `repeatOf`, `prefixOf` otherwise it is possible to have the wrong factory method
+  called and not see it.
 
 Next 0.59.48
 ------------
@@ -188,12 +190,16 @@ Next 0.59.48
   * [ ] Test: position marker preservation with direction type
 * Add: skeleton code for offset tracking through base sequence manipulations.
   * [ ] Add: real code to handle offset tracking.
+* [ ] Fix: Document docx form controls in wiki
 
 Next 0.59.46
 ------------
 
-* [ ] Fix: Document docx form controls in wiki
 * [ ] Fix: spec files no longer render HTML when option selected.
+
+Next 0.59.46
+------------
+
 * Fix: [#376, convert markdown to html], delimiters are not allowed to span table cells.
 * Add: `Text addText(String value, boolean noProofRPr, boolean createR)`
 * Add: `Text addTextCreateR(String value, boolean noProofRPr)`
@@ -210,19 +216,26 @@ Next 0.59.46
 * Add: `FldChar addFldChar(STFldCharType charType)`
 * Deprecate: `DocxContext.addWrappedText()` use `DocxContext.addText(String)`
 * Deprecate: `DocxContext.text(String)` use `DocxContext.addTextCreateR(String)`
-* Fix: `IRichSequenceBase.split` and `IRichSequenceBase.splitList` some combinations would pass parameters out of place causing wrong operation.
-* Fix: `MarkdownParagraph` wrapping to use simplified left aligned wrapping with no trailing spaces
+* Fix: `IRichSequenceBase.split` and `IRichSequenceBase.splitList` some combinations would pass
+  parameters out of place causing wrong operation.
+* Fix: `MarkdownParagraph` wrapping to use simplified left aligned wrapping with no trailing
+  spaces
 
 0.59.44
 -------
 
-* Add: docx renderer form fields via `[name]{.class attributes}` where name is given by `DocxRenderer.FORM_CONTROLS` and if not empty or blank then
-  an unresolved reference link with that name will be converted to a word form input field with type and options given in teh attributes.
+* Add: docx renderer form fields via `[name]{.class attributes}` where name is given by
+  `DocxRenderer.FORM_CONTROLS` and if not empty or blank then an unresolved reference link with
+  that name will be converted to a word form input field with type and options given in teh
+  attributes.
   * drop down list, class name `.dropdown` attributes:
     * `name` - name for the form field
-    * `default` - default selection first item if no default provided. Can be option text (case sensitive tried first, if no match then case insensitive is tried), if text match fails then attempted to parse as an integer index 1..number of options
+    * `default` - default selection first item if no default provided. Can be option text (case
+      sensitive tried first, if no match then case insensitive is tried), if text match fails
+      then attempted to parse as an integer index 1..number of options
     * `help` - text to show in status bar and on hitting F1
-    * `options` - list of options separated by `|`, individual options will be trimmed but otherwise left as is
+    * `options` - list of options separated by `|`, individual options will be trimmed but
+      otherwise left as is
   * checkbox, class name `.checkbox` attributes:
     * `name` - name for the form field
     * `checked` - default will be checked, otherwise unchecked
@@ -234,7 +247,8 @@ Next 0.59.46
     * `max-length` - number or leave out for unlimited
     * `type` - gives the type of text field
       * `regular` - default if type not provided, regular text
-        * `format` - `UPPERCASE`, `LOWERCASE`, `FIRST CAPITAL`, `TITLE CASE`, not case sensitive, space between words can be eliminated or replaced by `-`
+        * `format` - `UPPERCASE`, `LOWERCASE`, `FIRST CAPITAL`, `TITLE CASE`, not case
+          sensitive, space between words can be eliminated or replaced by `-`
       * `date` - date
         * `format` - word date format
       * `number` - number
@@ -248,11 +262,13 @@ Next 0.59.46
 -------
 
 * Break: `BasedSequence.append(CharSequence[])` now constructs as segmented sequence so proper
-ordering of segments is enforced. This means `IllegalArgumentException` will be thrown when this
-  condition is not met. To get old functionality you need to create an appended string of all sequences and `BasedSequence.of()` on that string.
+  ordering of segments is enforced. This means `IllegalArgumentException` will be thrown when
+  this condition is not met. To get old functionality you need to create an appended string of
+  all sequences and `BasedSequence.of()` on that string.
 * Break: rename `MappedSequence` to `MappedBasedSequence` to allow for `MappedRichSequence`
-* Break: rename `RichCharSequence` to `IRichSequence` to separate base interfaces for rich and based sequences and
-  allow for `RichSequence` to be the base interface for rich sequences similar to `BasedSequence` for based sequences
+* Break: rename `RichCharSequence` to `IRichSequence` to separate base interfaces for rich and
+  based sequences and allow for `RichSequence` to be the base interface for rich sequences
+  similar to `BasedSequence` for based sequences
 * Break: rename `RichCharSequenceBase` to `IRichSequenceBase`
 * Break: rename `RichCharSequenceImpl` to `RichSequenceImpl`
 * Break: rename `RepeatedCharSequence` to `RepeatedSequence`
@@ -261,10 +277,13 @@ ordering of segments is enforced. This means `IllegalArgumentException` will be 
 * Deprecate: `RichSequenceImpl.of`, use `RichSequence.of` instead
 * Deprecate: `BasedSequenceImpl.of`, use `BasedSequence.of` instead
 * Deprecate: `SubSequence.of`, use `BasedSequence.of` instead
-* Deprecate: `UpperCaseMapper` and `LowerCaseMapper` use `ChangeCase.toUpperCase` and `ChangeCase.toLowerCase`
+* Deprecate: `UpperCaseMapper` and `LowerCaseMapper` use `ChangeCase.toUpperCase` and
+  `ChangeCase.toLowerCase`
 * Break: move
-  * `com.vladsch.flexmark.tree.iteration.ArrayIterable` to `com.vladsch.flexmark.util.collection.iteration.ArrayIterable`
-  * `com.vladsch.flexmark.util.html.CellAlignment` to `com.vladsch.flexmark.util.collection.iteration.ArrayIterable`
+  * `com.vladsch.flexmark.tree.iteration.ArrayIterable` to
+    `com.vladsch.flexmark.util.collection.iteration.ArrayIterable`
+  * `com.vladsch.flexmark.util.html.CellAlignment` to
+    `com.vladsch.flexmark.util.collection.iteration.ArrayIterable`
   * `com.vladsch.flexmark.ast.DelimitedNode` to `com.vladsch.flexmark.util.ast.DelimitedNode`
 * Fix: `IRichSequence` and by extension `RichSequence` and `BasedSequence`
   <!-- @formatter:off -->
@@ -307,22 +326,23 @@ ordering of segments is enforced. This means `IllegalArgumentException` will be 
     * `int baseColumnAtEnd();`
     * `int baseColumnAtStart();`
 * Add: to `Node` convenience methods delegated to `getChars()`
-  * `int getStartOffset()`  to `getStartOffset()`
-  * `int getEndOffset()`  to `getEndOffset()`
-  * `int getTextLength()`  to `length()`
-  * `BasedSequence getBaseSequence()`  to `getBaseSequence()`
-  * `Range getSourceRange()`  to `etSourceRange()`
-  * `BasedSequence baseSubSequence(int startIndex, int endIndex)`  to `baseSubSequence(startIndex, endIndex)`
-  * `BasedSequence baseSubSequence(int startIndex)`  to `baseSubSequence(startIndex)`
-  * `BasedSequence getEmptyPrefix()`  to `getEmptyPrefix()`
-  * `BasedSequence getEmptySuffix()`  to `getEmptySuffix()`
-  * `int getStartOfLine()`  to `baseStartOfLine()`
-  * `int getEndOfLine()`  to `baseEndOfLine()`
-  * `int startOfLine(int index)`  to `baseStartOfLine(index)`
-  * `int endOfLine(int index)`  to `baseEndOfLine(index)`
-  * `Pair<Integer, Integer> lineColumnAtIndex(int index)`  to `baseLineColumnAtIndex(index)`
-  * `Pair<Integer, Integer> lineColumnAtStart()`  to `baseLineColumnAtStart()`
-  * `Pair<Integer, Integer> getLineColumnAtEnd()`  to `baseLineColumnAtEnd()`
+  * `int getStartOffset()` to `getStartOffset()`
+  * `int getEndOffset()` to `getEndOffset()`
+  * `int getTextLength()` to `length()`
+  * `BasedSequence getBaseSequence()` to `getBaseSequence()`
+  * `Range getSourceRange()` to `etSourceRange()`
+  * `BasedSequence baseSubSequence(int startIndex, int endIndex)` to
+    `baseSubSequence(startIndex, endIndex)`
+  * `BasedSequence baseSubSequence(int startIndex)` to `baseSubSequence(startIndex)`
+  * `BasedSequence getEmptyPrefix()` to `getEmptyPrefix()`
+  * `BasedSequence getEmptySuffix()` to `getEmptySuffix()`
+  * `int getStartOfLine()` to `baseStartOfLine()`
+  * `int getEndOfLine()` to `baseEndOfLine()`
+  * `int startOfLine(int index)` to `baseStartOfLine(index)`
+  * `int endOfLine(int index)` to `baseEndOfLine(index)`
+  * `Pair<Integer, Integer> lineColumnAtIndex(int index)` to `baseLineColumnAtIndex(index)`
+  * `Pair<Integer, Integer> lineColumnAtStart()` to `baseLineColumnAtStart()`
+  * `Pair<Integer, Integer> getLineColumnAtEnd()` to `baseLineColumnAtEnd()`
 * Add: `ArrayUtils` for searching arrays of `<T>` on value or predicate
   * `indexOf()` variations for forward search
   * `lastIndexOf()` variations for backward search
@@ -333,9 +353,12 @@ ordering of segments is enforced. This means `IllegalArgumentException` will be 
   trimmable characters to keep, which is more useful but does break compatibility. Now it can be
   used to leave whitespace padding up to a maximum of `keep` characters.
 * Fix: reformat tests for compound sections
-* Deprecate: `Range.subSequence(CharSequence)` use `Range.basedSubSequence(CharSequence)`, `Range.richSubSequence(CharSequence)` or for plain sequences `Range.charSubSequence(CharSequence)`
+* Deprecate: `Range.subSequence(CharSequence)` use `Range.basedSubSequence(CharSequence)`,
+  `Range.richSubSequence(CharSequence)` or for plain sequences
+  `Range.charSubSequence(CharSequence)`
 * Fix: rename `Range.subSequence()` to `Range.basedSubSequence()`
-* Fix: rename `Range.safeSubSequence()` to `Range.safeBasedSubSequence()` which limit the subsequence within 0 to length
+* Fix: rename `Range.safeSubSequence()` to `Range.safeBasedSubSequence()` which limit the
+  subsequence within 0 to length
 * Add: `Range.richSubSequence()`
 * Add: `Range.safeRichBasedSubSequence()` which limit the subsequence within 0 to length
 * Add: `Range.charSubSequence()`
@@ -577,7 +600,7 @@ ordering of segments is enforced. This means `IllegalArgumentException` will be 
   for typed class values
 * Fix: clean up all tests to eliminate duplication and unnecessary interface methods.
 
-  |    Metric     |  Before |   After |
+|    Metric     |  Before |   After |
   |---------------|--------:|--------:|
   | Files         |    1264 |    1297 |
   | Lines         | 124,192 | 118,755 |
@@ -1466,6 +1489,7 @@ Next 0.50.44
 [#357, HTML to markdown and removed nested list]: https://github.com/vsch/flexmark-java/issues/357
 [#362, ArrayIndexOutOfBoundsException in BasedSequence.indexOfAll]: https://github.com/vsch/flexmark-java/issues/362
 [#372, \[Regression?\] Attributes extension not applied to \`code\` tag of code blocks]: https://github.com/vsch/flexmark-java/issues/372
+[#376, convert markdown to html]: https://github.com/vsch/flexmark-java/issues/376
 [Awesome Console]: https://plugins.jetbrains.com/plugin/7677-awesome-console "Awesome Console"
 [HtmlToMarkdownCustomizedSample.java]: https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/java/samples/HtmlToMarkdownCustomizedSample.java
 [Kijimuna]: https://github.com/Kijimuna
@@ -1475,6 +1499,4 @@ Next 0.50.44
 [NodeInsertingPostProcessorSample.java]: https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/java/samples/NodeInsertingPostProcessorSample.java
 [PdfLandscapeConverter.java]: https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/java/samples/PdfLandscapeConverter.java
 [YouTrack: IDEA-207453]: https://youtrack.jetbrains.com/issue/IDEA-207453 "Add Conversion of ref anchor to UrlFilter for file line navigation"
-[#376, convert markdown to html]: https://github.com/vsch/flexmark-java/issues/376
-
 

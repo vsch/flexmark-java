@@ -1065,9 +1065,11 @@ full list items
 
 ## Links
 
+### URL
+
 Web URL
 
-```````````````````````````````` example Links: 1
+```````````````````````````````` example Links - URL: 1
 [flexmark-icon-logo](https://raw.githubusercontent.com/vsch/flexmark-java/master/assets/images/flexmark-icon-logo%402x.png "Title: flexmark-java logo") 
 
 with some text
@@ -1110,7 +1112,7 @@ with some text
 ````````````````````````````````
 
 
-```````````````````````````````` example(Links: 2) options(full-render)
+```````````````````````````````` example(Links - URL: 2) options(full-render)
 <http://example.com>
 .
 <?xml version="1.0" encoding="UTF-8"?>
@@ -2088,6 +2090,38 @@ with some text
         </pkg:xmlData>
     </pkg:part>
 </pkg:package>
+````````````````````````````````
+
+
+### Mail
+
+Mail link
+
+```````````````````````````````` example Links - Mail: 1
+prefix vladimir@vladsch.com suffix 
+    
+.
+<w:body>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="ParagraphTextBody"/>
+        </w:pPr>
+        <w:r>
+            <w:t xml:space="preserve">prefix </w:t>
+        </w:r>
+        <w:hyperlink r:id="rId3" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
+            <w:r>
+                <w:rPr>
+                    <w:rStyle w:val="Hyperlink"/>
+                </w:rPr>
+                <w:t>vladimir@vladsch.com</w:t>
+            </w:r>
+        </w:hyperlink>
+        <w:r>
+            <w:t xml:space="preserve"> suffix</w:t>
+        </w:r>
+    </w:p>
+</w:body>
 ````````````````````````````````
 
 
