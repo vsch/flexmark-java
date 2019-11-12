@@ -10,8 +10,7 @@ flexmark-java
     - [API Changes](#api-changes)
 - [Next](#next)
 - [Next 0.59.48](#next-05948)
-- [Next 0.59.46](#next-05946)
-- [Next 0.59.46](#next-05946)
+- [0.59.46](#05946)
 - [0.59.44](#05944)
 - [0.59.42](#05942)
 - [0.59.40](#05940)
@@ -191,15 +190,13 @@ Next 0.59.48
 * Add: skeleton code for offset tracking through base sequence manipulations.
   * [ ] Add: real code to handle offset tracking.
 * [ ] Fix: Document docx form controls in wiki
-
-Next 0.59.46
-------------
-
 * [ ] Fix: spec files no longer render HTML when option selected.
 
-Next 0.59.46
-------------
+0.59.46
+-------
 
+* Fix: add `'\0'` to `'\uFFFD'` conversion in `RichSequence`
+* Fix: docx conversion renders mail link text with `mailto:` prefix
 * Fix: [#376, convert markdown to html], delimiters are not allowed to span table cells.
 * Add: `Text addText(String value, boolean noProofRPr, boolean createR)`
 * Add: `Text addTextCreateR(String value, boolean noProofRPr)`
@@ -600,13 +597,9 @@ Next 0.59.46
   for typed class values
 * Fix: clean up all tests to eliminate duplication and unnecessary interface methods.
 
-|    Metric     |  Before |   After |
-  |---------------|--------:|--------:|
-  | Files         |    1264 |    1297 |
-  | Lines         | 124,192 | 118,755 |
-  | Source Lines  |  96,669 |  92,145 |
-  | Comment Lines |   9,878 |   9,597 |
-  | Blank Lines   |  17,646 |  17,013 |
+| Metric | Before | After | |---------------|--------:|--------:| | Files | 1264 | 1297 | |
+Lines | 124,192 | 118,755 | | Source Lines | 96,669 | 92,145 | | Comment Lines | 9,878 | 9,597 |
+| Blank Lines | 17,646 | 17,013 |
 
 ### 0.59.11
 
