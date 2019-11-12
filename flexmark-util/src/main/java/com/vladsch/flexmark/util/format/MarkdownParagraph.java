@@ -568,7 +568,6 @@ public class MarkdownParagraph {
         return wrapping.doCompute();
     }
 
-    // FIX: does not handle indented lines, overlaps inserted ranges
     class LeftAlignedWrapping {
         final String lineBreak = IRichSequence.EOL;
         int col = 0;
@@ -580,9 +579,8 @@ public class MarkdownParagraph {
         int lineWidth = spaceWidth * getFirstWidth();
         final int nextWidth = myWidth <= 0 ? Integer.MAX_VALUE : spaceWidth * myWidth;
         int wordsOnLine = 0;
-        Token leadingIndent = null;
-        Range lastRange = null;
-        Token lastSpace = null;
+        BasedSequence leadingIndent = null;
+        BasedSequence lastSpace = null;
         final BasedSequence chars = myChars;
         final TextTokenizer tokenizer = new TextTokenizer(chars);
 
@@ -594,48 +592,37 @@ public class MarkdownParagraph {
             tokenizer.next();
         }
 
-        void commitLastRange() {
-            final Range range = lastRange;
-            if (range != null) {
-                result.add(chars.subSequence(range.getStart(), range.getEnd()));
-            }
-            lastRange = null;
-        }
-
         void addToken(Token token) {
-            final Range range = lastRange;
-            if (range != null && range.isAdjacentBefore(token.range)) {
-                // combine them;
-                lastRange = range.withEnd(token.range.getEnd());
-            } else {
-                if (range != null) {
-                    result.add(chars.subSequence(range.getStart(), range.getEnd()));
-                    if (token.range.getStart() < range.getEnd()) {
-                        int tmp = 0;
-                    }
-                }
-                lastRange = token.range;
-            }
-            col += myCharWidthProvider.getStringWidth(token.subSequence(chars));
+            addChars(chars.subSequence(token.range));
         }
 
         void addChars(CharSequence charSequence) {
-            commitLastRange();
             result.add(charSequence);
             col += myCharWidthProvider.getStringWidth(charSequence);
         }
 
-        void addTokenSubRange(Token token, int count) {
-            if (token.range.getSpan() == count) addToken(token);
-            else addChars(token.subSequence(chars));
-        }
+        BasedSequence addSpaces(BasedSequence sequence, int count) {
+            if (count <= 0) return sequence;
 
-        void addSpaces(Token token, int count) {
-            if (token != null) {
-                addTokenSubRange(token, count);
-            } else {
+            BasedSequence remainder = null;
+
+            // NOTE: can do splitting add from sequence before and after padding spaces to have start/end range if needed
+            if (sequence != null) {
+                addChars(sequence.subSequence(0, Math.min(sequence.length(), count)));
+
+                if (sequence.length() > count) {
+                    remainder = sequence.subSequence(count);
+                }
+
+                count = Math.max(0, count - sequence.length());
+            }
+
+            // add more spaces if needed
+            if (count > 0) {
                 addChars(RepeatedSequence.ofSpaces(count));
             }
+
+            return remainder;
         }
 
         void afterLineBreak() {
@@ -655,8 +642,8 @@ public class MarkdownParagraph {
                 if (token == null) break;
                 switch (token.type) {
                     case SPACE: {
-                        if (col == 0) leadingIndent = token;
-                        else lastSpace = token;
+                        if (col == 0) leadingIndent = chars.subSequence(token.range);
+                        else lastSpace = chars.subSequence(token.range);
                         advance();
                         break;
                     }
@@ -664,8 +651,12 @@ public class MarkdownParagraph {
                     case WORD: {
                         if (col == 0 || col + myCharWidthProvider.getStringWidth(token.subSequence(chars)) + spaceWidth <= lineWidth) {
                             // fits, add it
-                            if (col > 0) addSpaces(lastSpace, 1);
-                            else if (lineIndent > 0) addSpaces(leadingIndent, lineIndent);
+                            if (col > 0) {
+                                lastSpace = addSpaces(lastSpace, 1);
+                            } else if (lineIndent > 0) {
+                                addSpaces(leadingIndent, lineIndent);
+                                leadingIndent = null;
+                            }
                             addToken(token);
                             advance();
                             wordsOnLine++;
@@ -697,7 +688,7 @@ public class MarkdownParagraph {
                             }
                         } else {
                             // treat as a space
-                            lastSpace = token;
+                            lastSpace = chars.subSequence(token.range);
                         }
                         advance();
                         break;
@@ -713,7 +704,7 @@ public class MarkdownParagraph {
                     }
                 }
             }
-            commitLastRange();
+
             return result.toSequence();
         }
     }
