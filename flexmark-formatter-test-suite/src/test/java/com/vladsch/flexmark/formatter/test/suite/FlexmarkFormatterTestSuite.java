@@ -11,6 +11,7 @@ import com.vladsch.flexmark.ext.admonition.ComboAdmonitionTranslationFormatterSp
 import com.vladsch.flexmark.ext.attributes.ComboAttributesFormatterSpecTest;
 import com.vladsch.flexmark.ext.attributes.ComboAttributesTranslationFormatterSpecTest;
 import com.vladsch.flexmark.ext.attributes.MergeAttributesTest;
+import com.vladsch.flexmark.ext.autolink.MergeAutoLinkTest;
 import com.vladsch.flexmark.ext.definition.ComboDefinitionFormatterSpecTest;
 import com.vladsch.flexmark.ext.emoji.ComboEmojiTranslationFormatterSpecTest;
 import com.vladsch.flexmark.ext.enumerated.reference.ComboEnumeratedReferenceFormatterSpecTest;
@@ -61,6 +62,7 @@ import org.junit.runners.Suite;
         MergeFootnotesTest.class,
         MergeMacrosTest.class,
         MergeFormatterCoreTest.class,
+        MergeAutoLinkTest.class,
 })
 public class FlexmarkFormatterTestSuite {
 }

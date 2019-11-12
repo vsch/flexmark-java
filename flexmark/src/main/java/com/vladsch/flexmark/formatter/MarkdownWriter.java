@@ -60,15 +60,6 @@ public class MarkdownWriter extends MarkdownWriterBase<MarkdownWriter, Node, Nod
         return this;
     }
 
-    public @NotNull MarkdownWriter appendNonTranslating(@Nullable CharSequence prefix, @NotNull CharSequence csq, @Nullable CharSequence suffix, @Nullable CharSequence suffix2, @NotNull Consumer<String> placeholderConsumer) {
-        if (context.isTransformingText()) {
-            append(context.transformNonTranslating(prefix, csq, suffix, suffix2));
-        } else {
-            append(csq);
-        }
-        return this;
-    }
-
     public @NotNull MarkdownWriter appendTranslating(@NotNull CharSequence csq) {
         return appendTranslating(null, csq, null, null);
     }

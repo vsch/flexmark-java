@@ -195,8 +195,9 @@ Next 0.59.48
 0.59.46
 -------
 
-* Fix: add `'\0'` to `'\uFFFD'` conversion in `RichSequence`
+* Fix: merge formatter always adding `<>` around autolinks even when original did not have them.
 * Fix: docx conversion renders mail link text with `mailto:` prefix
+* Fix: add `'\0'` to `'\uFFFD'` conversion in `RichSequence`
 * Fix: [#376, convert markdown to html], delimiters are not allowed to span table cells.
 * Add: `Text addText(String value, boolean noProofRPr, boolean createR)`
 * Add: `Text addTextCreateR(String value, boolean noProofRPr)`

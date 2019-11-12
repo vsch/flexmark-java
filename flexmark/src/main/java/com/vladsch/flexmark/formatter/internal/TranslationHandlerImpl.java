@@ -441,12 +441,22 @@ public class TranslationHandlerImpl implements TranslationHandler {
         switch (myRenderPurpose) {
             case TRANSLATION_SPANS:
                 String replacedTextId = getPlaceholderId(myFormatterOptions.translationIdFormat, ++myPlaceholderId, prefix, suffix, trimmedEOL);
-                myNonTranslatingTexts.put(replacedTextId, nonTranslatingText.toString());
-                return replacedTextId;
+                String useReplacedTextId = replacedTextId;
+
+                if (myNonTranslatingPostProcessor != null) {
+                    useReplacedTextId = myNonTranslatingPostProcessor.apply(replacedTextId).toString();
+                }
+
+                myNonTranslatingTexts.put(useReplacedTextId, nonTranslatingText.toString());
+                return useReplacedTextId;
 
             case TRANSLATED_SPANS:
                 String placeholderId = getPlaceholderId(myFormatterOptions.translationIdFormat, ++myPlaceholderId, prefix, suffix, trimmedEOL);
-                return placeholderId;
+                if (myNonTranslatingPostProcessor != null) {
+                    return myNonTranslatingPostProcessor.apply(placeholderId);
+                } else {
+                    return placeholderId;
+                }
 
             case TRANSLATED:
                 if (nonTranslatingText.length() > 0) {

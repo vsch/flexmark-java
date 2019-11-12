@@ -7,6 +7,7 @@ import org.junit.runners.Suite;
 @Suite.SuiteClasses({
         AutolinkTest.class,
         ComboAutolinkSpecTest.class,
+        MergeAutoLinkTest.class,
 })
 public class ExtAutolinkTestSuite {
 }

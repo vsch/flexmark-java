@@ -57,7 +57,6 @@ Document[0, 180]
 ````````````````````````````````
 
 
-
 ## Append References
 
 Without append just include
@@ -106,7 +105,6 @@ Document[0, 122]
       Text[110, 119] chars:[110, 119, "enum:this"]
   BlankLine[121, 122]
 ````````````````````````````````
-
 
 
 With append just include
@@ -171,13 +169,14 @@ Document[0, 133]
 ````````````````````````````````
 
 
+## Issue
 
-## Issue xxx-01
+### xxx-01
 
 When no soft line breaks are used, soft line breaks in inline code, quotes, and other inline
 elements should be removed also
 
-```````````````````````````````` example(Issue xxx-01: 1) options(no-soft-breaks)
+```````````````````````````````` example(Issue - xxx-01: 1) options(no-soft-breaks)
 "broken quoted
 string"
 .
@@ -192,8 +191,7 @@ Document[0, 22]
 ````````````````````````````````
 
 
-
-```````````````````````````````` example(Issue xxx-01: 2) options(no-soft-breaks)
+```````````````````````````````` example(Issue - xxx-01: 2) options(no-soft-breaks)
 `broken inline code 
 string`
 .
@@ -205,5 +203,21 @@ Document[0, 28]
       Text[1, 27] chars:[1, 27, "broke … tring"]
 ````````````````````````````````
 
+
+### xxx-02
+
+Autolinks wrapped in `<>` during merge
+
+```````````````````````````````` example Issue - xxx-02: 1
+test@example.com
+.
+test@example.com
+.
+Document[0, 16]
+  Paragraph[0, 16]
+    TextBase[0, 16] chars:[0, 16, "test@ … e.com"]
+      MailLink[0, 16] text:[0, 16, "test@example.com"]
+        Text[0, 16] chars:[0, 16, "test@ … e.com"]
+````````````````````````````````
 
 

@@ -1025,7 +1025,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
     }
 
     public static final DataKey<Boolean> UNWRAPPED_AUTO_LINKS = new DataKey<>("UNWRAPPED_AUTO_LINKS", false);
-    public static final DataKey<HashSet<String>> UNWRAPPED_AUTO_LINKS_MAP = new DataKey<>("UNWRAPPED_AUTO_LINKS_MAP", new HashSet<>());
+    public static final DataKey<HashSet<String>> UNWRAPPED_AUTO_LINKS_MAP = new DataKey<>("UNWRAPPED_AUTO_LINKS_MAP", HashSet::new);
 
     private void render(AutoLink node, NodeFormatterContext context, MarkdownWriter markdown) {
         renderAutoLink(node, context, markdown, myTranslationAutolinkPrefix, null);
@@ -1040,11 +1040,17 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
             switch (context.getRenderPurpose()) {
                 case TRANSLATION_SPANS:
                     if (node.getOpeningMarker().isNull()) {
-                        // unwrapped, need to store it
+                        // unwrapped, need to store that fact, placeholder is used to allow same url wrapped/unwrapped preservation
                         myTranslationStore.set(UNWRAPPED_AUTO_LINKS, true);
-                        markdown.append("<");
-                        markdown.appendNonTranslating(prefix, node.getText(), suffix, null, s -> UNWRAPPED_AUTO_LINKS_MAP.get(myTranslationStore).add(s));
-                        markdown.append(">");
+
+                        context.postProcessNonTranslating((s) -> {
+                            UNWRAPPED_AUTO_LINKS_MAP.get(myTranslationStore).add(s);
+                            return s;
+                        }, () -> {
+                            markdown.append("<");
+                            markdown.appendNonTranslating(prefix, node.getText(), suffix);
+                            markdown.append(">");
+                        });
                     } else {
                         markdown.append("<");
                         markdown.appendNonTranslating(prefix, node.getText(), suffix);
@@ -1058,6 +1064,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
                     break;
 
                 case TRANSLATED:
+                    // NOTE: on entry the node text is a placeholder, so we can check if it is wrapped or unwrapped
                     if (UNWRAPPED_AUTO_LINKS.get(myTranslationStore) && UNWRAPPED_AUTO_LINKS_MAP.get(myTranslationStore).contains(node.getText().toString())) {
                         markdown.appendNonTranslating(prefix, node.getText(), suffix);
                     } else {
