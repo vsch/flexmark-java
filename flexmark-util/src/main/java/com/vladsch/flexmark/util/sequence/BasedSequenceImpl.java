@@ -57,13 +57,18 @@ public abstract class BasedSequenceImpl extends IRichSequenceBase<BasedSequence>
     @NotNull
     @Override
     public BasedSequence toMapped(CharMapper mapper) {
-        return MappedBasedSequence.mappedOf(mapper, this);
+        return MappedBasedSequence.mappedOf(this, mapper);
     }
 
     @NotNull
     @Override
-    public BasedSequence baseSubSequence(int startIndex) {
+    final public BasedSequence baseSubSequence(int startIndex) {
         return baseSubSequence(startIndex, getBaseSequence().getEndOffset());
+    }
+
+    @Override
+    public @NotNull BasedSequence baseSubSequence(int startIndex, int endIndex) {
+        return getBaseSequence().subSequence(startIndex, endIndex);
     }
 
     @Override

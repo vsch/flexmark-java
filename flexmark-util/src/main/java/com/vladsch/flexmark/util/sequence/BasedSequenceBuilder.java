@@ -20,6 +20,15 @@ public class BasedSequenceBuilder implements SequenceBuilder<BasedSequenceBuilde
     private final @NotNull BasedSequence base;
     private @Nullable ArrayList<OffsetTracker> offsetTrackers;
 
+    /**
+     * Construct a base sequence builder for given base sequence.
+     * <p>
+     * NOTE: the builder is always constructed for the base sequence of the base.
+     * ie. for the based sequence returned by {@link BasedSequence#getBaseSequence()},
+     * so any subsequence from a base can be used as argument for the constructor
+     *
+     * @param base base sequence for which to create a builder
+     */
     public BasedSequenceBuilder(@NotNull BasedSequence base) {
         this(base, (OffsetTracker) null);
     }
@@ -80,9 +89,9 @@ public class BasedSequenceBuilder implements SequenceBuilder<BasedSequenceBuilde
 
     @NotNull
     @Override
-    public BasedSequenceBuilder addAll(@NotNull Collection<BasedSequence> list) {
+    public BasedSequenceBuilder addAll(@NotNull Collection<? extends CharSequence> list) {
         if (!list.isEmpty()) {
-            for (BasedSequence s : list) {
+            for (CharSequence s : list) {
                 add(s);
             }
         }
@@ -91,30 +100,27 @@ public class BasedSequenceBuilder implements SequenceBuilder<BasedSequenceBuilde
 
     @NotNull
     @Override
-    public BasedSequenceBuilder add(@NotNull CharSequence chars) {
-        if (chars instanceof BasedSequence) return addBased((BasedSequence) chars);
-        else if (chars.length() > 0) return addString(chars.toString());
+    public BasedSequenceBuilder add(@Nullable CharSequence chars) {
+        if (chars instanceof BasedSequence && ((BasedSequence) chars).getBaseSequence() == base) return addBased((BasedSequence) chars);
+        else if (chars != null && chars.length() > 0) return addString(chars.toString());
         else return this;
     }
 
-    private BasedSequenceBuilder addBased(BasedSequence s) {
-        if (s.isNotNull()) {
-            if (s.getBaseSequence() != base) {
-                throw new IllegalArgumentException("add called with segment having different base: " + base.hashCode() + " got: " + s.getBaseSequence().hashCode());
-            }
-
+    @NotNull
+    private BasedSequenceBuilder addBased(@NotNull BasedSequence chars) {
+        if (chars.isNotNull()) {
             if (!segments.isEmpty()) {
-                BasedSequence lastSegment = getLastSegment();
-                int lastEndOffset = lastSegment.getEndOffset();
-                if (s.getStartOffset() < lastEndOffset) {
-                    throw new IllegalArgumentException("add called with segment having startOffset < lastEndOffset, startOffset: " + s.getStartOffset() + " lastEndOffset: " + lastEndOffset);
+                int lastEndOffset = getLastSegment().getEndOffset();
+                if (chars.getStartOffset() < lastEndOffset) {
+                    throw new IllegalArgumentException("add called with segment having startOffset < lastEndOffset, startOffset: " + chars.getStartOffset() + " lastEndOffset: " + lastEndOffset);
                 }
             }
 
-            segments.add(s);
+            segments.add(chars);
 
-            if (s instanceof BasedTrackedSequence) {
-                addOffsetTracker(((BasedTrackedSequence) s).getOffsetTracker());
+            if (chars instanceof BasedTrackedSequence) {
+                // FIX: for editing
+//                addOffsetTracker(((BasedTrackedSequence) chars).getOffsetTrackers());
             }
         }
         return this;
@@ -135,8 +141,9 @@ public class BasedSequenceBuilder implements SequenceBuilder<BasedSequenceBuilde
         return add(base.subSequence(startOffset, startOffset + textLength));
     }
 
-    private BasedSequenceBuilder addString(String str) {
-        if (str.isEmpty()) return this;
+    @NotNull
+    private BasedSequenceBuilder addString(@Nullable String chars) {
+        if (chars == null || chars.isEmpty()) return this;
         else {
             BasedSequence useBase;
             if (segments.isEmpty()) {
@@ -146,7 +153,7 @@ public class BasedSequenceBuilder implements SequenceBuilder<BasedSequenceBuilde
                 useBase = segments.get(segments.size() - 1);
                 useBase = useBase.subSequence(useBase.length(), useBase.length());
             }
-            return add(PrefixedSubSequence.prefixOf(str, useBase));
+            return add(PrefixedSubSequence.prefixOf(chars, useBase));
         }
     }
 
@@ -154,16 +161,17 @@ public class BasedSequenceBuilder implements SequenceBuilder<BasedSequenceBuilde
     @Override
     public BasedSequence toSequence() {
         BasedSequence modifiedSeq = SegmentedSequence.of(segments);
-        if (offsetTrackers != null) {
-            OffsetTracker modifiedTracker = null;
-            for (OffsetTracker offsetTracker : offsetTrackers) {
-                modifiedTracker = offsetTracker.modifiedTracker(modifiedSeq, modifiedTracker);
-            }
-
-            if (modifiedTracker != null) {
-                return BasedTrackedSequence.create(modifiedSeq, modifiedTracker);
-            }
-        }
+        // FIX: for editing
+//        if (offsetTrackers != null) {
+//            OffsetTracker modifiedTracker = null;
+//            for (OffsetTracker offsetTracker : offsetTrackers) {
+//                modifiedTracker = offsetTracker.modifiedTracker(modifiedSeq, modifiedTracker);
+//            }
+//
+//            if (modifiedTracker != null) {
+//                return BasedTrackedSequence.create(modifiedSeq, modifiedTracker);
+//            }
+//        }
         return modifiedSeq;
     }
 

@@ -1,6 +1,7 @@
 package com.vladsch.flexmark.util.sequence;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
 
@@ -32,15 +33,17 @@ public final class RichSequenceBuilder implements SequenceBuilder<RichSequenceBu
 
     @NotNull
     @Override
-    public RichSequenceBuilder add(@NotNull CharSequence chars) {
-        segments.append(chars);
+    public RichSequenceBuilder add(@Nullable CharSequence chars) {
+        if (chars != null && chars.length() > 0) {
+            segments.append(chars);
+        }
         return this;
     }
 
     @NotNull
     @Override
-    public RichSequenceBuilder addAll(@NotNull Collection<RichSequence> list) {
-        for (RichSequence chars : list) {
+    public RichSequenceBuilder addAll(@NotNull Collection<? extends CharSequence> list) {
+        for (CharSequence chars : list) {
             add(chars);
         }
         return this;

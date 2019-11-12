@@ -6,12 +6,13 @@ import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSetter;
 import com.vladsch.flexmark.util.format.options.DiscretionaryText;
 import com.vladsch.flexmark.util.format.options.TableCaptionHandling;
+import com.vladsch.flexmark.util.sequence.IRichSequence;
 import org.jetbrains.annotations.NotNull;
 
 @SuppressWarnings("WeakerAccess")
 public class TableFormatOptions implements MutableDataSetter {
-    public static final char INTELLIJ_DUMMY_IDENTIFIER_CHAR = '\u001f';
-    public static final String INTELLIJ_DUMMY_IDENTIFIER = "\u001f";
+    public static final char INTELLIJ_DUMMY_IDENTIFIER_CHAR = IRichSequence.US;
+    public static final String INTELLIJ_DUMMY_IDENTIFIER = IRichSequence.US_CHARS;
 
     public static final DataKey<Boolean> FORMAT_TABLE_LEAD_TRAIL_PIPES = new DataKey<>("FORMAT_TABLE_LEAD_TRAIL_PIPES", true);
     public static final DataKey<Boolean> FORMAT_TABLE_SPACE_AROUND_PIPES = new DataKey<>("FORMAT_TABLE_SPACE_AROUND_PIPES", true);

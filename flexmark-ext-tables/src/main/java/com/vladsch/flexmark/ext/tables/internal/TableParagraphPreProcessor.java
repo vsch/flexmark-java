@@ -15,13 +15,12 @@ import com.vladsch.flexmark.util.ast.DoNotDecorate;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.ast.NodeIterator;
 import com.vladsch.flexmark.util.data.DataHolder;
+import com.vladsch.flexmark.util.format.TableFormatOptions;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 import java.util.regex.Pattern;
-
-import static com.vladsch.flexmark.ast.util.Parsing.INTELLIJ_DUMMY_IDENTIFIER;
 
 public class TableParagraphPreProcessor implements ParagraphPreProcessor {
     private static BitSet pipeCharacters = new BitSet();
@@ -125,7 +124,7 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
         String COL = String.format(Locale.US, "(?:" + "\\s*-{%d,}\\s*|\\s*:-{%d,}\\s*|\\s*-{%d,}:\\s*|\\s*:-{%d,}:\\s*" + ")", minCol, minColDash, minColDash, minColDashes);
 
         boolean noIntelliJ = intellijDummyIdentifier.isEmpty();
-        String add = noIntelliJ ? "" : INTELLIJ_DUMMY_IDENTIFIER;
+        String add = noIntelliJ ? "" : TableFormatOptions.INTELLIJ_DUMMY_IDENTIFIER;
         String sp = noIntelliJ ? "\\s" : "(?:\\s" + add + "?)";
         String ds = noIntelliJ ? "-" : "(?:-" + add + "?)";
         String pipe = noIntelliJ ? "\\|" : "(?:" + add + "?\\|" + add + "?)";

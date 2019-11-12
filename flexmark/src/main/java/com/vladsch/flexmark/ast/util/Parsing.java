@@ -243,14 +243,17 @@ public class Parsing {
     }
 
     public String EXCLUDED_0_TO_SPACE() {
+        // NOTE: hardcoded because of dependency on it being '\u001f'
         return intellijDummyIdentifier ? "\u0000-\u001e\u0020" : "\u0000-\u0020";
     }
 
     public String ADDITIONAL_CHARS() {
-        return intellijDummyIdentifier ? INTELLIJ_DUMMY_IDENTIFIER : "";
+        // NOTE: hardcoded because of dependency on it being '\u001f'
+        return intellijDummyIdentifier ? "\u001f" : "";
     }
 
     public String ADDITIONAL_CHARS_SET(String quantifier) {
+        // NOTE: hardcoded because of dependency on it being '\u001f'
         return intellijDummyIdentifier ? "[\u001f]" + quantifier : "";
     }
 

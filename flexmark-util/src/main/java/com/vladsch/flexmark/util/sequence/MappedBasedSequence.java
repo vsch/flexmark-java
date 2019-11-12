@@ -9,10 +9,10 @@ import org.jetbrains.annotations.Nullable;
  */
 final public class MappedBasedSequence extends BasedSequenceImpl implements MappedSequence<BasedSequence>, ReplacedBasedSequence {
     private final CharMapper mapper;
-    private final BasedSequence base;
+    private final BasedSequence baseSeq;
 
-    private MappedBasedSequence(CharMapper mapper, BasedSequence baseSeq) {
-        this.base = baseSeq;
+    private MappedBasedSequence(BasedSequence baseSeq, CharMapper mapper) {
+        this.baseSeq = baseSeq;
         this.mapper = mapper;
     }
 
@@ -24,22 +24,23 @@ final public class MappedBasedSequence extends BasedSequenceImpl implements Mapp
 
     @Override
     public char charAt(int index) {
-        return mapper.map(base.charAt(index));
+        return mapper.map(baseSeq.charAt(index));
     }
 
+    @NotNull
     @Override
     public BasedSequence getCharSequence() {
-        return base;
+        return baseSeq;
     }
 
     @Override
     public int length() {
-        return base.length();
+        return baseSeq.length();
     }
 
     @Override
     public @NotNull BasedSequence toMapped(CharMapper mapper) {
-        return mapper == CharMapper.IDENTITY ? this : new MappedBasedSequence(this.mapper.andThen(mapper), base);
+        return mapper == CharMapper.IDENTITY ? this : new MappedBasedSequence(baseSeq, this.mapper.andThen(mapper));
     }
 
     @NotNull
@@ -47,65 +48,53 @@ final public class MappedBasedSequence extends BasedSequenceImpl implements Mapp
     public BasedSequence sequenceOf(@Nullable CharSequence baseSeq, int startIndex, int endIndex) {
         if (baseSeq instanceof MappedBasedSequence) {
             return startIndex == 0 && endIndex == baseSeq.length() ? (BasedSequence) baseSeq : ((BasedSequence) baseSeq).subSequence(startIndex, endIndex).toMapped(mapper);
-        } else return new MappedBasedSequence(mapper, base.sequenceOf(baseSeq, startIndex, endIndex));
+        } else return new MappedBasedSequence(this.baseSeq.sequenceOf(baseSeq, startIndex, endIndex), mapper);
     }
 
     @NotNull
     @Override
     public BasedSequence subSequence(int startIndex, int endIndex) {
-        BasedSequence baseSequence = base.subSequence(startIndex, endIndex);
-        return baseSequence == base ? this : new MappedBasedSequence(mapper, baseSequence);
+        if (startIndex == 0 && endIndex == baseSeq.length()) {
+            return this;
+        }
+        return new MappedBasedSequence(baseSeq.subSequence(startIndex, endIndex), mapper);
     }
 
     @NotNull
     @Override
     public Object getBase() {
-        return base.getBase();
+        return baseSeq.getBase();
     }
 
     @NotNull
     @Override
     public BasedSequence getBaseSequence() {
-        return base.getBaseSequence();
+        return baseSeq.getBaseSequence();
     }
 
     @Override
     public int getStartOffset() {
-        return base.getStartOffset();
+        return baseSeq.getStartOffset();
     }
 
     @Override
     public int getEndOffset() {
-        return base.getEndOffset();
+        return baseSeq.getEndOffset();
     }
 
     @Override
     public int getIndexOffset(int index) {
-        return base.charAt(index) == charAt(index) ? base.getIndexOffset(index) : -1;
+        return baseSeq.charAt(index) == charAt(index) ? baseSeq.getIndexOffset(index) : -1;
     }
 
     @NotNull
     @Override
     public Range getSourceRange() {
-        return base.getSourceRange();
+        return baseSeq.getSourceRange();
     }
 
     @NotNull
-    @Override
-    public BasedSequence baseSubSequence(int startIndex, int endIndex) {
-        BasedSequence basedSequence = base.baseSubSequence(startIndex, endIndex);
-        return basedSequence == base ? this : new MappedBasedSequence(mapper, basedSequence);
-    }
-
-    public static BasedSequence mappedOf(CharMapper mapper, BasedSequence baseSeq) {
-        return mappedOf(mapper, baseSeq, 0, baseSeq.length());
-    }
-
-    public static BasedSequence mappedOf(CharMapper mapper, BasedSequence baseSeq, int startIndex) {
-        return mappedOf(mapper, baseSeq, startIndex, baseSeq.length());
-    }
-
-    public static BasedSequence mappedOf(CharMapper mapper, BasedSequence baseSeq, int startIndex, int endIndex) {
-        return new MappedBasedSequence(mapper, baseSeq.subSequence(startIndex, endIndex));
+    public static BasedSequence mappedOf(@NotNull BasedSequence baseSeq, @NotNull CharMapper mapper) {
+        return new MappedBasedSequence(baseSeq, mapper);
     }
 }

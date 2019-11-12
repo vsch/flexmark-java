@@ -11,7 +11,7 @@ import java.util.List;
 import static com.vladsch.flexmark.util.format.TextAlignment.LEFT;
 
 public class MarkdownParagraph {
-    final private static char MARKDOWN_START_LINE_CHAR = BasedSequence.LSEP;             // https://www.fileformat.info/info/unicode/char/2028/index.htm LINE_SEPARATOR this one is not preserved but will cause a line break if not already at beginning of line
+    final private static char MARKDOWN_START_LINE_CHAR = IRichSequence.LS;             // https://www.fileformat.info/info/unicode/char/2028/index.htm LINE_SEPARATOR this one is not preserved but will cause a line break if not already at beginning of line
     final private static BasedSequence MARKDOWN_START_LINE = BasedSequence.LINE_SEP;   // this one is not preserved but will cause a line break if not already at beginning of line
 
     final @NotNull BasedSequence myChars;

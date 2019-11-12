@@ -92,6 +92,7 @@ public interface BasedSequence extends IRichSequence<BasedSequence> {
 
     /**
      * Get the offset of index in this sequence mapped to offset into {@link #getBaseSequence()} and {@link #getBase()} original text source.
+     * NOTE: if the character at given index does not equal the corresponding character in the base sequence then this method should return -1 otherwise segmented based sequence will be created for original base character
      *
      * @param index index for which to get the offset in original source
      * @return offset of index of this sequence in original text
@@ -100,6 +101,7 @@ public interface BasedSequence extends IRichSequence<BasedSequence> {
 
     /**
      * Get the range of indices that map into {@link #getBaseSequence()} with startOffset and endOffset
+     *
      *
      * @param startOffset start offset into base sequence
      * @param endOffset   end offset into base sequence
@@ -117,7 +119,21 @@ public interface BasedSequence extends IRichSequence<BasedSequence> {
     Range getSourceRange();
 
     /**
-     * Get a portion of the original sequence that this sequence is based on
+     * Get a portion of this sequence
+     *
+     * @param startIndex offset from startIndex of this sequence
+     * @param endIndex   offset from startIndex of this sequence
+     * @return based sequence which represents the requested range of this sequence.
+     */
+    @NotNull
+    @Override
+    BasedSequence subSequence(int startIndex, int endIndex);
+    /**
+     * Get a portion of this sequence's base sequence
+     *
+     * NOTE: this means that if this sequence applies modifications to the original sequence then these modifications are NOT be applied to the returned sequence.
+     *
+     * NOTE: It should only be implemented in classes which provide base sequences such as {@link CharSubSequence} and {@link SubSequence} others use inherited implementation of {@link BasedSequenceImpl}
      *
      * @param startIndex offset from 0 of original sequence
      * @param endIndex   offset from 0 of original sequence
@@ -438,13 +454,13 @@ public interface BasedSequence extends IRichSequence<BasedSequence> {
         @NotNull
         @Override
         public BasedSequence getBaseSequence() {
-            return BasedSequence.NULL;
+            return this;
         }
 
         @NotNull
         @Override
         public BasedSequence getBase() {
-            return BasedSequence.NULL;
+            return this;
         }
 
         @Override

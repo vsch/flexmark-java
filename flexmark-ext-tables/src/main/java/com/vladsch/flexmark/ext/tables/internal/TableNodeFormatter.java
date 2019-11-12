@@ -2,7 +2,6 @@ package com.vladsch.flexmark.ext.tables.internal;
 
 import com.vladsch.flexmark.ast.Paragraph;
 import com.vladsch.flexmark.ast.Text;
-import com.vladsch.flexmark.ast.util.Parsing;
 import com.vladsch.flexmark.ext.tables.*;
 import com.vladsch.flexmark.formatter.*;
 import com.vladsch.flexmark.parser.Parser;
@@ -31,7 +30,7 @@ public class TableNodeFormatter implements NodeFormatter {
     public TableNodeFormatter(DataHolder options) {
         this.options = new TableFormatOptions(options);
         isIntellijDummyIdentifier = Parser.INTELLIJ_DUMMY_IDENTIFIER.get(options);
-        intellijDummyIdentifier = isIntellijDummyIdentifier ? Parsing.INTELLIJ_DUMMY_IDENTIFIER : "";
+        intellijDummyIdentifier = isIntellijDummyIdentifier ? TableFormatOptions.INTELLIJ_DUMMY_IDENTIFIER : "";
         parserTrimCellWhiteSpace = TablesExtension.TRIM_CELL_WHITESPACE.get(options);
     }
 

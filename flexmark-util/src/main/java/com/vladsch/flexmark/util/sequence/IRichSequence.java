@@ -30,11 +30,22 @@ public interface IRichSequence<T extends IRichSequence<T>> extends CharSequence,
     char NUL = '\0';
     char ENC_NUL = '\uFFFD';
     char NBSP = '\u00A0';
-    char LSEP = '\u2028';  // line separator
+    char LS = '\u2028'; // line separator
+    char US = '\u001f';  // US or USEP - Unit Separator, also used as IntelliJDummyIdentifier in Parsings, used as a tracked offset marker in the sequence
+    char MRK = US;       // same as US but use in code signals it being related to offset marker handling
 
-    String LINE_SEP = Character.toString(LSEP);
+    /**
+     * Line Separator, used in paragraph wrapping to force start of new line
+     * @deprecated  use {@link #LS} instead as it is named in Unicode
+     */
+    @Deprecated
+    char LSEP = LS;
+
+    String LINE_SEP = Character.toString(LS);
     String WHITESPACE_NO_EOL_CHARS = " \t";
     String SPACE_TAB = WHITESPACE_NO_EOL_CHARS;
+    String US_CHARS = Character.toString(US);
+    String MARKER_CHARS = US_CHARS;  // same as US_CHARS but use in code signals it being related to offset marker handling
 
     String WHITESPACE_CHARS = " \t\r\n";
     String WHITESPACE_NBSP_CHARS = " \t\r\n\u00A0";
@@ -62,6 +73,8 @@ public interface IRichSequence<T extends IRichSequence<T>> extends CharSequence,
 
     /**
      * Get a portion of this sequence
+     *
+     * NOTE: the returned value should only depend on start/end indices. If a subsequence of this sequence with matching start/end should equal (using equals()) all such subsequences of this sequence.
      *
      * @param startIndex offset from startIndex of this sequence
      * @param endIndex   offset from startIndex of this sequence

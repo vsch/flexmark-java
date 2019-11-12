@@ -88,7 +88,8 @@ public class BasedSequenceLines implements List<CharSequence> {
                             }
 
                             if (forSequence && sequence instanceof BasedTrackedSequence) {
-                                addOffsetTracker(((BasedTrackedSequence) sequence).getOffsetTracker());
+                                // FIX: for editing
+//                                addOffsetTracker(((BasedTrackedSequence) sequence).getOffsetTrackers());
                             }
                         }
                     }
@@ -220,16 +221,17 @@ public class BasedSequenceLines implements List<CharSequence> {
         adjustLastLineEOL(sequences, lastLineEOL);
 
         BasedSequence modifiedSeq = SegmentedSequence.of(segments);
-        if (offsetTrackers != null) {
-            OffsetTracker modifiedTracker = null;
-            for (OffsetTracker offsetTracker : offsetTrackers) {
-                modifiedTracker = offsetTracker.modifiedTracker(modifiedSeq, modifiedTracker);
-            }
-
-            if (modifiedTracker != null) {
-                return BasedTrackedSequence.create(modifiedSeq, modifiedTracker);
-            }
-        }
+        // FIX: for editing
+//        if (offsetTrackers != null) {
+//            OffsetTracker modifiedTracker = null;
+//            for (OffsetTracker offsetTracker : offsetTrackers) {
+//                modifiedTracker = offsetTracker.modifiedTracker(modifiedSeq, modifiedTracker);
+//            }
+//
+//            if (modifiedTracker != null) {
+//                return BasedTrackedSequence.create(modifiedSeq, modifiedTracker);
+//            }
+//        }
         return modifiedSeq;
     }
 

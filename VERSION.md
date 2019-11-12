@@ -9,7 +9,8 @@ flexmark-java
 - [Next 0.60.0](#next-0600)
     - [API Changes](#api-changes)
 - [Next](#next)
-- [Next 0.59.48](#next-05948)
+- [Next 0.59.50](#next-05950)
+- [0.59.48](#05948)
 - [0.59.46](#05946)
 - [0.59.44](#05944)
 - [0.59.42](#05942)
@@ -177,11 +178,8 @@ Next
       `StringBuilder` its text equivalent. A visitor needs to be provided so child nodes could
       be visited.
 * [ ] Fix: change `BasedSequenceImpl` to use `Range` instead of `startOffset` and `endOffset`
-* Deprecate: all static factory method named `of` to more specific so that errors are less
-  likely. `repeatOf`, `prefixOf` otherwise it is possible to have the wrong factory method
-  called and not see it.
 
-Next 0.59.48
+Next 0.59.50
 ------------
 
 * [ ] Add: `Formatter` Paragraph wrapping.
@@ -191,6 +189,19 @@ Next 0.59.48
   * [ ] Add: real code to handle offset tracking.
 * [ ] Fix: Document docx form controls in wiki
 * [ ] Fix: spec files no longer render HTML when option selected.
+
+0.59.48
+-------
+
+* Fix: `BasedSequenceBuilder.add(CharSequence)` now does not complain when adding a
+  `BasedSequence` which is from a different base than the builder. It simply treats it as it
+  does any other non-based sequence and adds it as out of base chars.
+* Fix: `SequenceBuilder.addAll(Collection<? extends CharSequence>)` now takes list of anything
+  extending `CharSequence`
+* Add: javadoc to `BasedSequence.baseSubSequence(int, int)` that it should return sequence equal
+  to base sequence without any modifications or additions. This should really be implemented
+  only in real base sequences like `CharSubSequence` and `SubSequence` the rest should rely on
+  `BasedSequenceImpl`.
 
 0.59.46
 -------
@@ -277,6 +288,9 @@ Next 0.59.48
 * Deprecate: `SubSequence.of`, use `BasedSequence.of` instead
 * Deprecate: `UpperCaseMapper` and `LowerCaseMapper` use `ChangeCase.toUpperCase` and
   `ChangeCase.toLowerCase`
+* Deprecate: all static factory method named `of` to more specific so that errors are less
+  likely. `repeatOf`, `prefixOf` otherwise it is possible to have the wrong factory method
+  called and not see it.
 * Break: move
   * `com.vladsch.flexmark.tree.iteration.ArrayIterable` to
     `com.vladsch.flexmark.util.collection.iteration.ArrayIterable`
