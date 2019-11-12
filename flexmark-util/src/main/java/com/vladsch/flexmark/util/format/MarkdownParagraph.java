@@ -8,20 +8,22 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.vladsch.flexmark.util.format.TextAlignment.LEFT;
+
 public class MarkdownParagraph {
     final private static char MARKDOWN_START_LINE_CHAR = BasedSequence.LSEP;             // https://www.fileformat.info/info/unicode/char/2028/index.htm LINE_SEPARATOR this one is not preserved but will cause a line break if not already at beginning of line
     final private static BasedSequence MARKDOWN_START_LINE = BasedSequence.LINE_SEP;   // this one is not preserved but will cause a line break if not already at beginning of line
 
-    final private @NotNull BasedSequence myChars;
-    final private @NotNull CharWidthProvider myCharWidthProvider;
+    final @NotNull BasedSequence myChars;
+    final @NotNull CharWidthProvider myCharWidthProvider;
 
     private int myFirstIndent = 0;
     private int myIndent = 0;
     private int myFirstWidthOffset = 0;
-    private int myWidth = 0;
-    private @NotNull TextAlignment myAlignment = TextAlignment.LEFT;
-    private boolean myKeepHardBreaks = true;
-    private boolean myKeepLineBreaks = false;
+    int myWidth = 0;
+    private @NotNull TextAlignment myAlignment = LEFT;
+    boolean myKeepHardBreaks = true;
+    boolean myKeepLineBreaks = false;
     private @NotNull TrackerDirection myTrackerDirection = TrackerDirection.NONE;
     private int myMarkerOffset = -1;
 
@@ -127,7 +129,7 @@ public class MarkdownParagraph {
     }
 
     void leftAlign(int width) {
-        myAlignment = TextAlignment.LEFT;
+        myAlignment = LEFT;
         setWidth(width);
     }
 
@@ -214,6 +216,10 @@ public class MarkdownParagraph {
     @NotNull
     public BasedSequence computeResultSequence() {
         if (getFirstWidth() <= 0) return myChars;
+
+        if (myAlignment == LEFT) {
+            return computeLeftAlignedSequence();
+        }
 
         String lineBreak = RichSequence.EOL;
         String hardBreak = "  \n";
@@ -515,7 +521,7 @@ public class MarkdownParagraph {
 
         @Override
         public String toString() {
-            return "token: $type $range";
+            return "token: " + type + " " + range;
         }
 
         public BasedSequence subSequence(BasedSequence charSequence) {
@@ -552,6 +558,163 @@ public class MarkdownParagraph {
             myInWord = inWord;
             myLastConsecutiveSpaces = lastConsecutiveSpaces;
             myToken = token;
+        }
+    }
+
+    public BasedSequence computeLeftAlignedSequence() {
+        if (getFirstWidth() <= 0) return myChars;
+
+        LeftAlignedWrapping wrapping = new LeftAlignedWrapping();
+        return wrapping.doCompute();
+    }
+
+    // FIX: does not handle indented lines, overlaps inserted ranges
+    class LeftAlignedWrapping {
+        final String lineBreak = IRichSequence.EOL;
+        int col = 0;
+        int lineCount = 0;
+        final BasedSequenceBuilder result = new BasedSequenceBuilder(myChars);
+        final int spaceWidth = myCharWidthProvider.spaceWidth();
+        int lineIndent = spaceWidth * getFirstIndent();
+        final int nextIndent = spaceWidth * getIndent();
+        int lineWidth = spaceWidth * getFirstWidth();
+        final int nextWidth = myWidth <= 0 ? Integer.MAX_VALUE : spaceWidth * myWidth;
+        int wordsOnLine = 0;
+        Token leadingIndent = null;
+        Range lastRange = null;
+        Token lastSpace = null;
+        final BasedSequence chars = myChars;
+        final TextTokenizer tokenizer = new TextTokenizer(chars);
+
+        LeftAlignedWrapping() {
+
+        }
+
+        void advance() {
+            tokenizer.next();
+        }
+
+        void commitLastRange() {
+            final Range range = lastRange;
+            if (range != null) {
+                result.add(chars.subSequence(range.getStart(), range.getEnd()));
+            }
+            lastRange = null;
+        }
+
+        void addToken(Token token) {
+            final Range range = lastRange;
+            if (range != null && range.isAdjacentBefore(token.range)) {
+                // combine them;
+                lastRange = range.withEnd(token.range.getEnd());
+            } else {
+                if (range != null) {
+                    result.add(chars.subSequence(range.getStart(), range.getEnd()));
+                    if (token.range.getStart() < range.getEnd()) {
+                        int tmp = 0;
+                    }
+                }
+                lastRange = token.range;
+            }
+            col += myCharWidthProvider.getStringWidth(token.subSequence(chars));
+        }
+
+        void addChars(CharSequence charSequence) {
+            commitLastRange();
+            result.add(charSequence);
+            col += myCharWidthProvider.getStringWidth(charSequence);
+        }
+
+        void addTokenSubRange(Token token, int count) {
+            if (token.range.getSpan() == count) addToken(token);
+            else addChars(token.subSequence(chars));
+        }
+
+        void addSpaces(Token token, int count) {
+            if (token != null) {
+                addTokenSubRange(token, count);
+            } else {
+                addChars(RepeatedSequence.ofSpaces(count));
+            }
+        }
+
+        void afterLineBreak() {
+            col = 0;
+            wordsOnLine = 0;
+            lineCount++;
+            lineIndent = nextIndent;
+            lineWidth = nextWidth;
+            lastSpace = null;
+            leadingIndent = null;
+        }
+
+        @NotNull
+        BasedSequence doCompute() {
+            while (true) {
+                final Token token = tokenizer.getToken();
+                if (token == null) break;
+                switch (token.type) {
+                    case SPACE: {
+                        if (col == 0) leadingIndent = token;
+                        else lastSpace = token;
+                        advance();
+                        break;
+                    }
+
+                    case WORD: {
+                        if (col == 0 || col + myCharWidthProvider.getStringWidth(token.subSequence(chars)) + spaceWidth <= lineWidth) {
+                            // fits, add it
+                            if (col > 0) addSpaces(lastSpace, 1);
+                            else if (lineIndent > 0) addSpaces(leadingIndent, lineIndent);
+                            addToken(token);
+                            advance();
+                            wordsOnLine++;
+                        } else {
+                            // need to insert a line break and repeat
+                            addChars(lineBreak);
+                            afterLineBreak();
+                        }
+                        break;
+                    }
+
+                    case MARKDOWN_START_LINE: {
+                        // start a new line if not already new
+                        if (col > 0) {
+                            addChars(lineBreak);
+                            afterLineBreak();
+                        }
+
+                        advance();
+                        break;
+                    }
+
+                    case MARKDOWN_BREAK: {
+                        // start a new line if not already new
+                        if (myKeepHardBreaks) {
+                            if (col > 0) {
+                                addToken(token);
+                                afterLineBreak();
+                            }
+                        } else {
+                            // treat as a space
+                            lastSpace = token;
+                        }
+                        advance();
+                        break;
+                    }
+
+                    case BREAK: {
+                        if (col > 0 && myKeepLineBreaks) {
+                            addToken(token);
+                            afterLineBreak();
+                        }
+                        advance();
+                        break;
+                    }
+                }
+            }
+            commitLastRange();
+            return result.toSequence();
         }
     }
 
