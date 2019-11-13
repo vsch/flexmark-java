@@ -71,6 +71,7 @@ public class BaseSequenceManager {
 
         BasedSequence newBaseSeq = factory.apply(object);
         assert newBaseSeq == newBaseSeq.getBaseSequence();
+        assert newBaseSeq.getBase() == object;
 
         synchronized (baseMap) {
             baseEntry = baseMap.get(object);
