@@ -212,8 +212,8 @@ Next 0.59.50
 
   Weak refs and maps ensure cache is cleared when last used reference to base or its subsequence
   is released and gc() has run.
-* Fix: change `SubSequence` to create a `String` from if passed sequence implements `Appendable`
-  to eliminate use of mutable sequences as bases the same way `CharSubSequence` did for
+* Fix: change `SubSequence` to create a `String` if passed sequence implements `Appendable` to
+  eliminate use of mutable sequences as bases the same way `CharSubSequence` did for
   `StringBuilder`. It is important not to use mutable `CharSequences` for `BasedSequence.of()`
   argument. If not sure `toString()` on the argument is the best option.
 * Fix: change all possible uses of `CharSubSequence` to `SubSequence`
