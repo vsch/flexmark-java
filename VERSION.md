@@ -10,7 +10,7 @@ flexmark-java
     - [API Changes](#api-changes)
 - [Next](#next)
 - [Next 0.59.50](#next-05950)
-- [Next 0.59.48](#next-05948)
+- [0.59.48](#05948)
 - [0.59.46](#05946)
 - [0.59.44](#05944)
 - [0.59.42](#05942)
@@ -190,17 +190,20 @@ Next 0.59.50
 * [ ] Fix: Document docx form controls in wiki
 * [ ] Fix: spec files no longer render HTML when option selected.
 
-Next 0.59.48
-------------
+0.59.48
+-------
 
 * Fix: add quick fail/success test for equality of base object. base strings through delete
   range/insert string operations.
 * Fix: make all based sequence test for same base use `getBase()` instead of
   `getBaseSequence()`. It is the underlying base object that is important not the based sequence
   used to wrap it.
-* Add: `BasedSequenceManager` to allow re-use of equivalent based sequences, uses weak refs and
-  weak hash map so as long as somewhere there is a reference to previously created sequence
-  base, requests to `BaseSequenceManager.INSTANCE.getBaseSequence(T, Function<T,
+* Add: `BasedSequenceManager` to allow re-use of equivalent base sequences to eliminate the
+  problem of having different base sequences for the same text content. Only implemented for
+  `SubSequence` not `CharSubSequence`
+
+  Uses weak refs and weak hash map so as long as there is a reference to previously created
+  sequence base, requests to `BaseSequenceManager.INSTANCE.getBaseSequence(T, Function<T,
   BasedSequence>)` will return an existing based sequence for the passed object.
 
   Uses fast fail on `length()` and `hashCode()` differences with fallback on weak hash map for
@@ -209,6 +212,11 @@ Next 0.59.48
 
   Weak refs and maps ensure cache is cleared when last used reference to base or its subsequence
   is released and gc() has run.
+* Fix: change `SubSequence` to create a `String` from if passed sequence implements `Appendable`
+  to eliminate use of mutable sequences as bases the same way `CharSubSequence` did for
+  `StringBuilder`. It is important not to use mutable `CharSequences` for `BasedSequence.of()`
+  argument. If not sure `toString()` on the argument is the best option.
+* Fix: change all possible uses of `CharSubSequence` to `SubSequence`
 * Add: `SegmentBuilder` to track offset ranges in original or base sequence and inserted out of
 * Fix: `BasedSequenceBuilder.add(CharSequence)` now does not complain when adding a
   `BasedSequence` which is from a different base than the builder. It simply treats it as it
