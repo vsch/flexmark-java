@@ -50,9 +50,8 @@ class BaseSequenceEntry {
         Boolean result;
         equalsCall[0] = 2;
 
-        synchronized (quickEquals) {
-            result = quickEquals.get(o);
-        }
+        // no need to synchronize. Only called by Manager from synchronized code
+        result = quickEquals.get(o);
 
         if (result != null) return result;
 
@@ -67,9 +66,7 @@ class BaseSequenceEntry {
             result = baseSeq.equals(o);
         }
 
-        synchronized (quickEquals) {
-            quickEquals.put(o, result);
-        }
+        quickEquals.put(o, result);
 
         return result;
     }

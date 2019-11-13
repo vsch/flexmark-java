@@ -11,6 +11,10 @@ import java.util.List;
  * A CharSequence that references original char sequence with offsets into original preserved.
  * <p>
  * NOTE: '\0' changed to '\uFFFD' use {@link com.vladsch.flexmark.util.mappers.NullEncoder#decodeNull} mapper to get original null chars.
+ *
+ * Since equals is used for comparison of sequences and strings by base sequence manager, a base sequence with NUL may not compare equal to
+ * an equivalent unwrapped sequence because NUL chars are not converted. For Strings this is handled by using String.equals() for comparison. For
+ * other CharacterSequence types the match will fail if original has NUL in it.
  * <p>
  * a subSequence() returns a sub-sequence from the original base sequence with corresponding offsets
  */

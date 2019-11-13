@@ -29,7 +29,7 @@ public class BaseSequenceManager {
      *
      * @param object    object for the underlying based sequence base
      * @param callTypes one element array for type of tests done to find result
-     *                  NOTE: 0 if map lookup, 10 - set search, 20 - construct and add to map/set, 30 - construct but was added in anther thread, so dropped
+     *                  NOTE: 0 if map lookup, 10 - set search, 20 - construct and add to map/set
      *                  with units digit giving max testEquals call type from all tests done
      * @param factory   factory to create based sequence from the object
      * @return existing equivalent base or newly created base
@@ -67,26 +67,10 @@ public class BaseSequenceManager {
                     callType = Math.max(callType, 10 + equalsCall[0]);
                 }
             }
-        }
 
-        BasedSequence newBaseSeq = factory.apply(object);
-        assert newBaseSeq == newBaseSeq.getBaseSequence();
-        assert newBaseSeq.getBase() == object;
-
-        synchronized (baseMap) {
-            baseEntry = baseMap.get(object);
-
-            if (baseEntry != null) {
-                baseSeq = baseEntry.get();
-                if (baseSeq != null) {
-                    // preserve entry search max call type
-                    callType += 20;
-                    if (callTypes != null) callTypes[0] = callType;
-                    return baseSeq;
-                }
-
-                baseMap.remove(object);
-            }
+            BasedSequence newBaseSeq = factory.apply(object);
+            assert newBaseSeq == newBaseSeq.getBaseSequence();
+            assert newBaseSeq.getBase() == object;
 
             // preserve entry search max call type
             callType += 10;

@@ -44,7 +44,7 @@ public class BaseSequenceManagerTest {
         // NOTE: must use crate() directly
         BasedSequence sequence1 = manager.getBaseSequence("0123456789", callType, seq -> BasedSequenceImpl.createAsIs(seq));
 
-        // NOTE: 0 if map lookup, 10 - set search, 20 - construct and add to map/set, 30 - construct but was added in anther thread, so dropped
+        // NOTE: 0 if map lookup, 10 - set search, 20 - construct and add to map/set
         //   with units digit giving max testEquals call type from all tests done
         assertTrue(callType[0] == 21 || callType[0] == 20);
 
