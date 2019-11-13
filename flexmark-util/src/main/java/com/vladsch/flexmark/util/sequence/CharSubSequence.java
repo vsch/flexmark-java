@@ -5,9 +5,8 @@ import org.jetbrains.annotations.NotNull;
 /**
  * A CharSequence that references original char[]
  * a subSequence() returns a sub-sequence from the original base sequence
- *
+ * <p>
  * NOTE: '\0' changed to '\uFFFD' use {@link com.vladsch.flexmark.util.mappers.NullEncoder#decodeNull} mapper to get original null chars.
- *
  */
 public final class CharSubSequence extends BasedSequenceImpl {
     private final char[] baseChars;
@@ -35,7 +34,9 @@ public final class CharSubSequence extends BasedSequenceImpl {
         return endOffset;
     }
 
-    private CharSubSequence(char[] chars) {
+    private CharSubSequence(char[] chars, int hash) {
+        super(hash);
+
         int iMax = chars.length;
         base = this;
         baseChars = chars;
@@ -44,7 +45,10 @@ public final class CharSubSequence extends BasedSequenceImpl {
     }
 
     private CharSubSequence(CharSubSequence baseSeq, int startIndex, int endIndex) {
-        assert startIndex >= 0 && endIndex >= startIndex && endIndex <= baseSeq.baseChars.length : String.format("CharSubSequence must have startIndex >= 0 && endIndex >= startIndex && endIndex <= %d, got startIndex:%d, endIndex: %d", baseSeq.baseChars.length, startIndex, endIndex);
+        super(0);
+
+        assert startIndex >= 0 && endIndex >= startIndex && endIndex <= baseSeq.baseChars.length : String.format("CharSubSequence must have (startIndex > 0 || endIndex < %d) && endIndex >= startIndex, got startIndex:%d, endIndex: %d", baseSeq.baseChars.length, startIndex, endIndex);
+        assert (startIndex > 0 || endIndex < baseSeq.baseChars.length) : String.format("CharSubSequence must be proper subsequences [1, %d) got startIndex:%d, endIndex: %d", Math.max(0, baseSeq.baseChars.length - 1), startIndex, endIndex);
 
         base = baseSeq;
         baseChars = baseSeq.baseChars;
@@ -104,11 +108,6 @@ public final class CharSubSequence extends BasedSequenceImpl {
         throw new StringIndexOutOfBoundsException("SubCharSequence index: " + endIndex + " out of range: 0, " + length());
     }
 
-    @Override
-    public int hashCode() {
-        return toString().hashCode();
-    }
-
     @NotNull
     @Override
     public String toString() {
@@ -125,33 +124,55 @@ public final class CharSubSequence extends BasedSequenceImpl {
         return of(charSequence, startIndex, charSequence.length());
     }
 
+    /**
+     * @param chars      char array
+     * @param startIndex start index in array
+     * @param endIndex   end index in array
+     * @return CharSubSequence based sequence of array
+     * @deprecated NOTE: there is a minor speed advantage to using this class over SubSequence directly but there is a potentially bigger memory cost factor
+     */
+    @Deprecated
     public static CharSubSequence of(char[] chars, int startIndex, int endIndex) {
         assert startIndex >= 0 && startIndex >= endIndex && endIndex <= chars.length;
 
         char[] useChars = new char[chars.length];
         System.arraycopy(chars, 0, useChars, 0, chars.length);
-        return startIndex == 0 && endIndex == chars.length ? new CharSubSequence(useChars) : new CharSubSequence(useChars).subSequence(startIndex, endIndex);
+        return startIndex == 0 && endIndex == chars.length ? new CharSubSequence(useChars, 0) : new CharSubSequence(useChars, 0).subSequence(startIndex, endIndex);
     }
 
+    /**
+     * @param charSequence char sequence
+     * @param startIndex   start index in sequence
+     * @param endIndex     end index in sequence
+     * @return char based sequence
+     *         <p>
+     *         NOTE: there is a minor speed advantage to using this class over SubSequence directly but there is a potentially bigger memory cost factor
+     * @deprecated use {@link BasedSequence#of(CharSequence, int, int)} instead and it will return the most efficient version available in terms of memory use
+     *         <p>
+     *         In future versions this method will be package private
+     */
+    @Deprecated
     public static CharSubSequence of(CharSequence charSequence, int startIndex, int endIndex) {
         assert startIndex >= 0 && startIndex <= endIndex && endIndex <= charSequence.length();
 
-        if (startIndex == 0 && endIndex == charSequence.length()) {
-            if (charSequence instanceof CharSubSequence) return ((CharSubSequence) charSequence);
-            else if (charSequence instanceof String) return new CharSubSequence(((String) charSequence).toCharArray());
-            else if (charSequence instanceof StringBuilder) {
-                char[] chars = new char[charSequence.length()];
-                ((StringBuilder) charSequence).getChars(0, charSequence.length(), chars, 0);
-                return new CharSubSequence(chars);
-            } else return new CharSubSequence(charSequence.toString().toCharArray());
+        CharSubSequence charSubSequence;
+
+        if (charSequence instanceof CharSubSequence) {
+            charSubSequence = ((CharSubSequence) charSequence);
+        } else if (charSequence instanceof String) {
+            charSubSequence = new CharSubSequence(((String) charSequence).toCharArray(), ((String) charSequence).hashCode());
+        } else if (charSequence instanceof StringBuilder) {
+            char[] chars = new char[charSequence.length()];
+            ((StringBuilder) charSequence).getChars(0, charSequence.length(), chars, 0);
+            charSubSequence = new CharSubSequence(chars, 0);
         } else {
-            if (charSequence instanceof CharSubSequence) return ((CharSubSequence) charSequence).subSequence(startIndex, endIndex);
-            else if (charSequence instanceof String) return new CharSubSequence(((String) charSequence).toCharArray()).subSequence(startIndex, endIndex);
-            else if (charSequence instanceof StringBuilder) {
-                char[] chars = new char[charSequence.length()];
-                ((StringBuilder) charSequence).getChars(0, charSequence.length(), chars, 0);
-                return new CharSubSequence(chars).subSequence(startIndex, endIndex);
-            } else return new CharSubSequence(charSequence.toString().toCharArray()).subSequence(startIndex, endIndex);
+            charSubSequence = new CharSubSequence(charSequence.toString().toCharArray(), 0);
+        }
+
+        if (startIndex == 0 && endIndex == charSequence.length()) {
+            return charSubSequence;
+        } else {
+            return charSubSequence.subSequence(startIndex, endIndex);
         }
     }
 }

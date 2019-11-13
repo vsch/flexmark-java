@@ -36,6 +36,19 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
         charMap.put('\f', "\\f");
         charMap.put('\t', "\\u2192");
     }
+
+    // cached value
+    private int hash;
+
+    /**
+     * Constructor with pre-computed hash if available, 0 for lazy computation if length() not 0
+     *
+     * @param hash hash code for the char sequence
+     */
+    public IRichSequenceBase(int hash) {
+        this.hash = hash;
+    }
+
     // @formatter:off
     public static int indexOf(@NotNull CharSequence s, char c) { return indexOf(s, c, 0, s.length());}
     public static int indexOf(@NotNull CharSequence s, char c,   int fromIndex) { return indexOf(s, c, fromIndex, s.length());}
@@ -94,6 +107,67 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
         return result;
     }
 
+    /**
+     * Equality comparison based on character content of this sequence, with quick fail
+     * resorting to content comparison only if length and hashCodes are equal
+     *
+     * @param o any char sequence
+     * @return true if character contents are equal
+     */
+    @Override
+    @Contract(pure = true, value = "null -> false")
+    final public boolean equals(Object o) {
+        // do quick failure of equality
+        if (o == this) return true;
+        if (!(o instanceof CharSequence)) return false;
+
+        CharSequence chars = (CharSequence) o;
+        if (chars.length() != length()) return false;
+
+        if (o instanceof String) {
+            String other = (String) o;
+            if (other.hashCode() != hashCode()) return false;
+
+            // fall through to slow content comparison
+        } else if (o instanceof IRichSequence) {
+            IRichSequence<?> other = (IRichSequence<?>) o;
+            if (other.hashCode() != hashCode()) return false;
+
+            // fall through to slow content comparison
+        }
+        return matchChars(chars, 0, false);
+    }
+
+    /**
+     * String hash code computation
+     *
+     * @return hash code of equivalent string
+     */
+    @Override
+    @Contract(pure = true)
+    final public int hashCode() {
+        int h = hash;
+        if (h == 0 && length() > 0) {
+            for (int i = 0; i < length(); i++) {
+                h = 31 * h + charAt(i);
+            }
+            hash = h;
+        }
+        return h;
+    }
+
+    @Override
+    @Contract(pure = true, value = "null -> false")
+    final public boolean equalsIgnoreCase(@Nullable Object other) {
+        return (this == other) || (other instanceof CharSequence) && ((CharSequence) other).length() == length() && matchChars((CharSequence) other, 0, true);
+    }
+
+    @Override
+    @Contract(pure = true, value = "null, _ ->false")
+    final public boolean equals(@Nullable Object other, boolean ignoreCase) {
+        return (this == other) || other instanceof CharSequence && ((CharSequence) other).length() == length() && matchChars((CharSequence) other, 0, ignoreCase);
+    }
+
     @Override
     public int compareTo(@NotNull CharSequence o) {
         return compare(this, o);
@@ -119,7 +193,6 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
      * Get a portion of this sequence selected by range
      *
      * @param range range to get, coordinates offset form start of this sequence
-     *
      * @return sequence whose contents reflect the selected portion, if range.isNull() then this is returned
      */
     @NotNull
@@ -131,7 +204,6 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
      * Get a portion of this sequence before one selected by range
      *
      * @param range range to get, coordinates offset form start of this sequence
-     *
      * @return sequence whose contents come before the selected range, if range.isNull() then {@link #nullSequence()}
      */
     @NotNull
@@ -143,7 +215,6 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
      * Get a portion of this sequence after one selected by range
      *
      * @param range range to get, coordinates offset form start of this sequence
-     *
      * @return sequence whose contents come after the selected range, if range.isNull() then {@link #nullSequence()}
      */
     @NotNull
@@ -155,7 +226,6 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
      * Get a portions of this sequence before and after one selected by range
      *
      * @param range range to get, coordinates offset form start of this sequence
-     *
      * @return sequence whose contents come before and after the selected range, if range.isNull() then {@link #nullSequence()}
      */
     final public Pair<T, T> subSequenceBeforeAfter(Range range) {
@@ -1311,6 +1381,7 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
                     if (u1 == u2) {
                         continue;
                     }
+
                     // Unfortunately, conversion to uppercase does not work properly
                     // for the Georgian alphabet, which has strange rules about case
                     // conversion.  So we need to make one last check before
@@ -1694,21 +1765,5 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
         }
 
         return new Pair<>(line, col);
-    }
-
-    @Override
-    @Contract(pure = true, value = "null->false")
-    final public boolean equals(Object other) {
-        return (this == other) || other instanceof CharSequence && ((CharSequence) other).length() == length() && matchChars((CharSequence) other, 0, false);
-    }
-
-    @Override
-    public boolean equalsIgnoreCase(@Nullable Object other) {
-        return (this == other) || (other instanceof CharSequence) && ((CharSequence) other).length() == length() && matchChars((CharSequence) other, 0, true);
-    }
-
-    @Override
-    public boolean equals(@Nullable Object other, boolean ignoreCase) {
-        return (this == other) || other instanceof CharSequence && ((CharSequence) other).length() == length() && matchChars((CharSequence) other, 0, ignoreCase);
     }
 }

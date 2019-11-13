@@ -24,6 +24,7 @@ import org.jetbrains.annotations.Nullable;
 
 import javax.swing.plaf.FontUIResource;
 import java.awt.Font;
+import java.util.Arrays;
 import java.util.HashMap;
 
 @SuppressWarnings("WeakerAccess")
@@ -189,9 +190,9 @@ public class HtmlBuilder extends HtmlFormattingAppendableBase<HtmlBuilder> {
 
     public HtmlBuilder append(CharSequence s, int start, int end) { return super.append(s, start, end); }
 
-    public HtmlBuilder append(char[] str) { return super.append(CharSubSequence.of(str, 0, str.length)); }
+    public HtmlBuilder append(char[] str) { return super.append(String.valueOf(str)); }
 
-    public HtmlBuilder append(char[] str, int offset, int len) { return super.append(CharSubSequence.of(str, offset, offset + len)); }
+    public HtmlBuilder append(char[] str, int offset, int len) { return super.append(String.valueOf(str, offset,len)); }
 
     public HtmlBuilder append(boolean b) { return super.append(b ? "true" : "false"); }
 

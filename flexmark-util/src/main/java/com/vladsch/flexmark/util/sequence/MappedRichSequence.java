@@ -14,6 +14,8 @@ public class MappedRichSequence extends IRichSequenceBase<RichSequence> implemen
     private final RichSequence base;
 
     private MappedRichSequence(CharMapper mapper, RichSequence baseSeq) {
+        super(0);
+
         this.base = baseSeq;
         this.mapper = mapper;
     }

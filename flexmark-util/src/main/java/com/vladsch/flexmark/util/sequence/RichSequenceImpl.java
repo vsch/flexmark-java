@@ -8,13 +8,15 @@ import org.jetbrains.annotations.Nullable;
 
 /**
  * A RichSequence implementation
- *
+ * <p>
  * NOTE: '\0' changed to '\uFFFD' use {@link com.vladsch.flexmark.util.mappers.NullEncoder#decodeNull} mapper to get original null chars.
  */
 public class RichSequenceImpl extends IRichSequenceBase<RichSequence> implements RichSequence {
     final CharSequence charSequence;
 
     private RichSequenceImpl(CharSequence charSequence) {
+        super(charSequence instanceof String ? charSequence.hashCode() : 0);
+
         this.charSequence = charSequence;
     }
 

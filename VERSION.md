@@ -10,7 +10,7 @@ flexmark-java
     - [API Changes](#api-changes)
 - [Next](#next)
 - [Next 0.59.50](#next-05950)
-- [0.59.48](#05948)
+- [Next 0.59.48](#next-05948)
 - [0.59.46](#05946)
 - [0.59.44](#05944)
 - [0.59.42](#05942)
@@ -190,11 +190,26 @@ Next 0.59.50
 * [ ] Fix: Document docx form controls in wiki
 * [ ] Fix: spec files no longer render HTML when option selected.
 
-0.59.48
--------
+Next 0.59.48
+------------
 
+* Fix: add quick fail/success test for equality of base object. base strings through delete
+  range/insert string operations.
+* Fix: make all based sequence test for same base use `getBase()` instead of
+  `getBaseSequence()`. It is the underlying base object that is important not the based sequence
+  used to wrap it.
+* Add: `BasedSequenceManager` to allow re-use of equivalent based sequences, uses weak refs and
+  weak hash map so as long as somewhere there is a reference to previously created sequence
+  base, requests to `BaseSequenceManager.INSTANCE.getBaseSequence(T, Function<T,
+  BasedSequence>)` will return an existing based sequence for the passed object.
+
+  Uses fast fail on `length()` and `hashCode()` differences with fallback on weak hash map for
+  getting previously computed equality comparisons to minimize expensive duplicate content
+  comparisons for previously determined equal/unequal sequence bases.
+
+  Weak refs and maps ensure cache is cleared when last used reference to base or its subsequence
+  is released and gc() has run.
 * Add: `SegmentBuilder` to track offset ranges in original or base sequence and inserted out of
-  base strings through editing operations.
 * Fix: `BasedSequenceBuilder.add(CharSequence)` now does not complain when adding a
   `BasedSequence` which is from a different base than the builder. It simply treats it as it
   does any other non-based sequence and adds it as out of base chars.

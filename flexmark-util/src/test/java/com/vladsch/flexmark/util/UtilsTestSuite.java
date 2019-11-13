@@ -39,6 +39,8 @@ import org.junit.runners.Suite;
         ArrayUtilsTest.class,
         MappedBasedSequenceTest.class,
         MappedRichSequenceTest.class,
+        BaseSequenceEntryTest.class,
+        BaseSequenceManagerTest.class,
 })
 public class UtilsTestSuite {
 }

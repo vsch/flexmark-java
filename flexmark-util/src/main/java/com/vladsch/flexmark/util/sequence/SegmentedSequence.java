@@ -168,6 +168,8 @@ public final class SegmentedSequence extends BasedSequenceImpl implements Replac
     }
 
     private SegmentedSequence(List<BasedSequence> segments, int startOffset, int endOffset) {
+        super(0);
+
         this.baseSeq = segments.get(0).getBaseSequence();
         this.startOffset = startOffset;
         this.endOffset = endOffset;
@@ -218,6 +220,8 @@ public final class SegmentedSequence extends BasedSequenceImpl implements Replac
     }
 
     private SegmentedSequence(final BasedSequence baseSeq, final int[] baseOffsets, final int baseStartOffset, final char[] nonBaseChars, final int length) {
+        super(0);
+
         int iMax = baseOffsets.length;
         assert baseStartOffset + length <= iMax : "Sub-sequence offsets list length < baseStartOffset + sub-sequence length";
 
@@ -342,11 +346,6 @@ public final class SegmentedSequence extends BasedSequenceImpl implements Replac
         } else {
             return new SegmentedSequence(baseSeq, baseOffsets, baseStartOffset + startIndex, nonBaseChars, endIndex - startIndex);
         }
-    }
-
-    @Override
-    public int hashCode() {
-        return toString().hashCode();
     }
 
     public static BasedSequence of(BasedSequence... segments) {

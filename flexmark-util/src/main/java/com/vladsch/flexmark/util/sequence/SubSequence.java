@@ -24,7 +24,7 @@ public final class SubSequence extends BasedSequenceImpl {
 
     @NotNull
     @Override
-    public Object getBase() {
+    public CharSequence getBase() {
         return baseSeq;
     }
 
@@ -37,6 +37,7 @@ public final class SubSequence extends BasedSequenceImpl {
     }
 
     private SubSequence(CharSequence charSequence) {
+        super(charSequence.hashCode());
         assert !(charSequence instanceof BasedSequence);
         base = this;
         baseSeq = charSequence;
@@ -45,6 +46,8 @@ public final class SubSequence extends BasedSequenceImpl {
     }
 
     private SubSequence(SubSequence subSequence, int startIndex, int endIndex) {
+        super(0);
+
         assert startIndex >= 0 && endIndex >= startIndex && endIndex <= subSequence.length() : String.format("SubSequence must have startIndex >= 0 && endIndex >= startIndex && endIndex <= %d, got startIndex:%d, endIndex: %d", subSequence.length(), startIndex, endIndex);
 
         base = subSequence;
@@ -103,11 +106,6 @@ public final class SubSequence extends BasedSequenceImpl {
             throw new StringIndexOutOfBoundsException("SubCharSequence index: " + startIndex + " out of range: 0, " + length());
         }
         throw new StringIndexOutOfBoundsException("SubCharSequence index: " + endIndex + " out of range: 0, " + length());
-    }
-
-    @Override
-    public int hashCode() {
-        return toString().hashCode();
     }
 
     static BasedSequence create(@Nullable CharSequence charSequence, int startIndex, int endIndex) {

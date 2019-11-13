@@ -21,6 +21,10 @@ public abstract class BasedSequenceImpl extends IRichSequenceBase<BasedSequence>
         return NULL;
     }
 
+    public BasedSequenceImpl(int hash) {
+        super(hash);
+    }
+
     @NotNull
     @Override
     public BasedSequence[] emptyArray() {
@@ -386,8 +390,9 @@ public abstract class BasedSequenceImpl extends IRichSequenceBase<BasedSequence>
     }
 
     static BasedSequence create(@Nullable CharSequence charSequence, int startIndex, int endIndex) {
+        // FIX: use BaseSequenceManager to get matching base sequence before making a copy to make sure it is immutable
         if (charSequence instanceof BasedSequence) return ((BasedSequence) charSequence).subSequence(startIndex, endIndex);
-        else if (charSequence instanceof String) return CharSubSequence.of(charSequence).subSequence(startIndex, endIndex);
+//        else if (charSequence instanceof String) return CharSubSequence.of(charSequence).subSequence(startIndex, endIndex);
         else return SubSequence.create(charSequence, startIndex, endIndex);
     }
 

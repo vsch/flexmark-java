@@ -13,6 +13,8 @@ public final class BasedTrackedSequence extends BasedSequenceImpl implements Rep
     private final @NotNull OffsetTracker[] offsetTrackers;
 
     private BasedTrackedSequence(@NotNull BasedSequence baseSeq, @NotNull OffsetTracker[] offsetTrackers) {
+        super(baseSeq instanceof BasedTrackedSequence ? ((BasedTrackedSequence) baseSeq).base.hashCode() : baseSeq.hashCode());
+
         if (baseSeq instanceof BasedTrackedSequence) {
             // replace it as the tracker with this class
             this.base = ((BasedTrackedSequence) baseSeq).base;
@@ -110,11 +112,6 @@ public final class BasedTrackedSequence extends BasedSequenceImpl implements Rep
         StringBuilder sb = new StringBuilder();
         base.appendTo(sb);
         return sb.toString();
-    }
-
-    @Override
-    public int hashCode() {
-        return toString().hashCode();
     }
 
     @NotNull

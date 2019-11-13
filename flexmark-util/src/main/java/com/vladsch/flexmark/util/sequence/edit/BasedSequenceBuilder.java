@@ -102,7 +102,7 @@ public class BasedSequenceBuilder implements SequenceBuilder<BasedSequenceBuilde
     @NotNull
     @Override
     public BasedSequenceBuilder add(@Nullable CharSequence chars) {
-        if (chars instanceof BasedSequence && ((BasedSequence) chars).getBaseSequence() == base) return addBased((BasedSequence) chars);
+        if (chars instanceof BasedSequence && ((BasedSequence) chars).getBase() == base.getBase()) return addBased((BasedSequence) chars);
         else if (chars != null && chars.length() > 0) return addString(chars.toString());
         else return this;
     }

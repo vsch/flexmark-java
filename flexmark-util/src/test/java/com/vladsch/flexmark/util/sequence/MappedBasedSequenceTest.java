@@ -19,7 +19,9 @@ public class MappedBasedSequenceTest {
         BasedSequence encoded = BasedSequence.of(encodedInput);
         BasedSequence encodedDecoded = encoded.toMapped(NullEncoder.decodeNull);
 
-        assertEquals(input, sequence.toString());
+        // sequences automatically encode nulls
+        assertEquals(encodedInput, sequence.toString());
+
         assertEquals(encodedInput, mapEncoded.toString());
         assertEquals(input, mapDecoded.toString());
         assertEquals(encodedInput, encoded.toString());

@@ -46,6 +46,8 @@ public final class PrefixedSubSequence extends BasedSequenceImpl implements Repl
     }
 
     private PrefixedSubSequence(CharSequence prefix, BasedSequence baseSeq, int startIndex, int endIndex) {
+        super(0);
+
         this.prefix = prefix;
         this.base = baseSeq.subSequence(startIndex, endIndex);
     }
@@ -58,7 +60,7 @@ public final class PrefixedSubSequence extends BasedSequenceImpl implements Repl
     @Override
     public int getIndexOffset(int index) {
         if (index < prefix.length()) {
-            // KLUDGE: to allow creation of segmented sequences that have prefixed characters not from original base
+            // NOTE: to allow creation of segmented sequences from modified original base return -1 for all such modified content positions
             return -1;
         }
         return base.getIndexOffset(index - prefix.length());
@@ -108,11 +110,6 @@ public final class PrefixedSubSequence extends BasedSequenceImpl implements Repl
         sb.append(prefix);
         base.appendTo(sb);
         return sb.toString();
-    }
-
-    @Override
-    public int hashCode() {
-        return toString().hashCode();
     }
 
     public static PrefixedSubSequence repeatOf(CharSequence prefix, int count, BasedSequence baseSeq) {

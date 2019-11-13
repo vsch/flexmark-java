@@ -12,6 +12,8 @@ final public class MappedBasedSequence extends BasedSequenceImpl implements Mapp
     private final BasedSequence baseSeq;
 
     private MappedBasedSequence(BasedSequence baseSeq, CharMapper mapper) {
+        super(0);
+
         this.baseSeq = baseSeq;
         this.mapper = mapper;
     }

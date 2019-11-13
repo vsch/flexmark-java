@@ -52,6 +52,23 @@ public interface IRichSequence<T extends IRichSequence<T>> extends CharSequence,
     String WHITESPACE_CHARS = " \t\r\n";
     String WHITESPACE_NBSP_CHARS = " \t\r\n\u00A0";
 
+
+    /**
+     * Comparison to another CharSequence should result in a match if their contents are equal
+     * regardless of the implementation. Should not resort to content comparison unless
+     *
+     * @param other another char sequence
+     * @return true if character sequences are equal
+     */
+    @Override
+    boolean equals(@Nullable Object other);
+
+    /**
+     * Should return hashCode of the underlying character sequence which is equal to the String value of that sequence
+     * @return hash code as if it was a string of the sequence content
+     */
+    int hashCode();
+
     @NotNull T[] emptyArray();
     @NotNull T nullSequence();
 

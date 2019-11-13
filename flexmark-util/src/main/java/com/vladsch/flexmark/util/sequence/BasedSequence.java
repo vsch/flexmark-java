@@ -422,6 +422,10 @@ public interface BasedSequence extends IRichSequence<BasedSequence> {
     int getTrackedOffset(int startOffset, int maxOffset);
 
     class EmptyBasedSequence extends BasedSequenceImpl {
+        public EmptyBasedSequence() {
+            super(0);
+        }
+
         @Override
         public int length() {
             return 0;
