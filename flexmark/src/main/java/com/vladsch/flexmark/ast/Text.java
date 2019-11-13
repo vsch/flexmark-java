@@ -15,7 +15,7 @@ public final class Text extends Node {
     }
 
     public Text(String chars) {
-        super(CharSubSequence.of(chars));
+        super(BasedSequence.of(chars));
     }
 
     public Text(String chars, BasedSequence baseSeq) {

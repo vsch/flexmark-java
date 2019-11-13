@@ -107,14 +107,6 @@ public final class BasedTrackedSequence extends BasedSequenceImpl implements Rep
     }
 
     @NotNull
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        base.appendTo(sb);
-        return sb.toString();
-    }
-
-    @NotNull
     static BasedSequence create(@NotNull BasedSequence baseSeq, @NotNull OffsetTracker offsetTracker) {
         // FIX: for editing
 //        return new BasedTrackedSequence(base, offsetTracker);

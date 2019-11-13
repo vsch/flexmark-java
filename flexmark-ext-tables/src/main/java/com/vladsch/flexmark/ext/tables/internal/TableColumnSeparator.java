@@ -19,7 +19,7 @@ class TableColumnSeparator extends Node implements DoNotDecorate {
     }
 
     public TableColumnSeparator(String chars) {
-        super(CharSubSequence.of(chars));
+        super(BasedSequence.of(chars));
     }
 
     @NotNull

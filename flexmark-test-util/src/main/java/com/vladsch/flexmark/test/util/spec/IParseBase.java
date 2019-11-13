@@ -6,6 +6,7 @@ import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.CharSubSequence;
+import com.vladsch.flexmark.util.sequence.SubSequence;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -26,7 +27,7 @@ public abstract class IParseBase implements IParse {
 
     @Override
     public @NotNull Node parse(@NotNull String input) {
-        return parse(CharSubSequence.of(input));
+        return parse(BasedSequence.of(input));
     }
 
     @Override
@@ -52,7 +53,7 @@ public abstract class IParseBase implements IParse {
             if (charsRead < buffer.length) break;
         }
 
-        BasedSequence source = CharSubSequence.of(file.toString());
+        BasedSequence source = BasedSequence.of(file.toString());
         return parse(source);
     }
 

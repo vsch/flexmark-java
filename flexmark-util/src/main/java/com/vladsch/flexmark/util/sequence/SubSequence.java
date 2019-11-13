@@ -108,9 +108,9 @@ public final class SubSequence extends BasedSequenceImpl {
         throw new StringIndexOutOfBoundsException("SubCharSequence index: " + endIndex + " out of range: 0, " + length());
     }
 
-    static BasedSequence create(@Nullable CharSequence charSequence, int startIndex, int endIndex) {
-        if (charSequence instanceof BasedSequence) return ((BasedSequence) charSequence).subSequence(startIndex, endIndex);
-        else return charSequence == null ? BasedSequence.NULL : new SubSequence(charSequence).subSequence(startIndex, endIndex);
+    static BasedSequence create(@NotNull CharSequence charSequence) {
+        assert !(charSequence instanceof BasedSequence);
+        return new SubSequence(charSequence);
     }
 
     /**

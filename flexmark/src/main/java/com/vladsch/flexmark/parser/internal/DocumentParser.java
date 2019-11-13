@@ -490,7 +490,7 @@ public class DocumentParser implements ParserState {
             if (charsRead < buffer.length) break;
         }
 
-        CharSequence source = CharSubSequence.of(file.toString());
+        CharSequence source = BasedSequence.of(file.toString());
         return parse(source);
     }
 

@@ -389,11 +389,43 @@ public abstract class BasedSequenceImpl extends IRichSequenceBase<BasedSequence>
         return -1;
     }
 
-    static BasedSequence create(@Nullable CharSequence charSequence, int startIndex, int endIndex) {
-        // FIX: use BaseSequenceManager to get matching base sequence before making a copy to make sure it is immutable
-        if (charSequence instanceof BasedSequence) return ((BasedSequence) charSequence).subSequence(startIndex, endIndex);
-//        else if (charSequence instanceof String) return CharSubSequence.of(charSequence).subSequence(startIndex, endIndex);
-        else return SubSequence.create(charSequence, startIndex, endIndex);
+    static BasedSequence createAsIs(@Nullable CharSequence charSequence) {
+        if (charSequence == null) return BasedSequence.NULL;
+
+        else if (charSequence instanceof BasedSequence) {
+            return (BasedSequence) charSequence;
+        } else {
+            if (charSequence instanceof String) {
+                return SubSequence.create(charSequence);
+            } else if (charSequence instanceof Appendable) {
+                return SubSequence.create(charSequence.toString());
+            } else {
+                // this one should not be mutable
+                return SubSequence.create(charSequence);
+            }
+        }
+    }
+
+    static BasedSequence create(@Nullable CharSequence charSequence) {
+        if (charSequence == null) return BasedSequence.NULL;
+
+        else if (charSequence instanceof BasedSequence) {
+            return (BasedSequence) charSequence;
+        } else {
+            CharSequence useSequence;
+
+            if (charSequence instanceof String) {
+                useSequence = charSequence;
+            } else if (charSequence instanceof Appendable) {
+                useSequence = charSequence.toString();
+            } else {
+                // this one should not be mutable
+                useSequence = charSequence;
+            }
+
+            // NOTE: using BaseSequenceManager to get matching base sequence
+            return BaseSequenceManager.INSTANCE.getBaseSequence(useSequence, null, SubSequence::create);
+        }
     }
 
     /**

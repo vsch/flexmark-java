@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.util.sequence;
 
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.TestOnly;
+import org.jetbrains.annotations.Nullable;
 
 import java.lang.ref.WeakReference;
 import java.util.Map;
@@ -16,40 +16,30 @@ public class BaseSequenceManager {
     final private @NotNull WeakHashMap<Object, WeakReference<BasedSequence>> baseMap = new WeakHashMap<>();
     final private @NotNull WeakHashMap<BasedSequence, BaseSequenceEntry> baseSet = new WeakHashMap<>();
 
-    @TestOnly
-    private int callType;
-
     private BaseSequenceManager() {
 
     }
 
     /**
-     * Get type of getBaseSequence impact
-     *
-     * @return 0 if map lookup, 10 - set search, with units digit giving max testEquals call type from all tests done, 20 - construct and add to map/set, 30 - construct but was added in anther thread, so dropped
-     */
-    @TestOnly
-    public int getCallType() {
-        return callType;
-    }
-
-    /**
      * Get an equivalent existing based sequence base or a new one created by passed factory
      * <p>
-     * NOTE: should only be called by base sequence which are the base for their category: {@link CharSubSequence} and {@link SubSequence} for now
+     * NOTE: should only be called by base sequence which are the base for their category: {@link SubSequence} implementing managed sequence base
      * <p>
      * all others should delegate to these sequences for creating the base
      *
-     * @param object  object for the underlying based sequence base
-     * @param factory factory to create based sequence from the object
+     * @param object    object for the underlying based sequence base
+     * @param callTypes one element array for type of tests done to find result
+     *                  NOTE: 0 if map lookup, 10 - set search, 20 - construct and add to map/set, 30 - construct but was added in anther thread, so dropped
+     *                  with units digit giving max testEquals call type from all tests done
+     * @param factory   factory to create based sequence from the object
      * @return existing equivalent base or newly created base
      */
     @NotNull
-    public <T> BasedSequence getBaseSequence(@NotNull T object, @NotNull Function<T, BasedSequence> factory) {
+    public <T> BasedSequence getBaseSequence(@NotNull T object, @Nullable int[] callTypes, @NotNull Function<T, BasedSequence> factory) {
         WeakReference<BasedSequence> baseEntry;
         BasedSequence baseSeq;
 
-        callType = 0;
+        int callType = 0;
 
         synchronized (baseMap) {
             baseEntry = baseMap.get(object);
@@ -57,6 +47,7 @@ public class BaseSequenceManager {
             if (baseEntry != null) {
                 baseSeq = baseEntry.get();
                 if (baseSeq != null) {
+                    if (callTypes != null) callTypes[0] = callType;
                     return baseSeq;
                 }
 
@@ -66,13 +57,15 @@ public class BaseSequenceManager {
 
         // see if we can find one in the set that matches
         callType = 10;
+        int[] equalsCall = { 0 };
         for (Map.Entry<BasedSequence, BaseSequenceEntry> entry : baseSet.entrySet()) {
             if (entry != null) {
-                if (entry.getValue().testEquals(entry.getKey(), object)) {
-                    callType = Math.max(callType, 10 + entry.getValue().getEqualsCall());
+                if (entry.getValue().testEquals(entry.getKey(), object, equalsCall)) {
+                    callType = Math.max(callType, 10 + equalsCall[0]);
+                    if (callTypes != null) callTypes[0] = callType;
                     return entry.getKey();
                 }
-                callType = Math.max(callType, 10 + entry.getValue().getEqualsCall());
+                callType = Math.max(callType, 10 + equalsCall[0]);
             }
         }
 
@@ -87,6 +80,7 @@ public class BaseSequenceManager {
                 if (baseSeq != null) {
                     // preserve entry search max call type
                     callType += 20;
+                    if (callTypes != null) callTypes[0] = callType;
                     return baseSeq;
                 }
 
@@ -95,6 +89,7 @@ public class BaseSequenceManager {
 
             // preserve entry search max call type
             callType += 10;
+            if (callTypes != null) callTypes[0] = callType;
             baseMap.put(object, new WeakReference<>(newBaseSeq));
             baseSet.put(newBaseSeq, new BaseSequenceEntry());
             return newBaseSeq;

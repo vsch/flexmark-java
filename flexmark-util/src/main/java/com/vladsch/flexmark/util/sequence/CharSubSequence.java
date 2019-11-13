@@ -108,12 +108,6 @@ public final class CharSubSequence extends BasedSequenceImpl {
         throw new StringIndexOutOfBoundsException("SubCharSequence index: " + endIndex + " out of range: 0, " + length());
     }
 
-    @NotNull
-    @Override
-    public String toString() {
-        return String.valueOf(baseChars, startOffset, endOffset - startOffset);
-    }
-
     public static CharSubSequence of(CharSequence charSequence) {
         return of(charSequence, 0, charSequence.length());
     }
@@ -129,7 +123,7 @@ public final class CharSubSequence extends BasedSequenceImpl {
      * @param startIndex start index in array
      * @param endIndex   end index in array
      * @return CharSubSequence based sequence of array
-     * @deprecated NOTE: there is a minor speed advantage to using this class over SubSequence directly but there is a potentially bigger memory cost factor
+     * @deprecated NOTE: use BasedSequence.of() for creating based sequences
      */
     @Deprecated
     public static CharSubSequence of(char[] chars, int startIndex, int endIndex) {
@@ -145,11 +139,7 @@ public final class CharSubSequence extends BasedSequenceImpl {
      * @param startIndex   start index in sequence
      * @param endIndex     end index in sequence
      * @return char based sequence
-     *         <p>
-     *         NOTE: there is a minor speed advantage to using this class over SubSequence directly but there is a potentially bigger memory cost factor
-     * @deprecated use {@link BasedSequence#of(CharSequence, int, int)} instead and it will return the most efficient version available in terms of memory use
-     *         <p>
-     *         In future versions this method will be package private
+     * @deprecated NOTE: use BasedSequence.of() for creating based sequences
      */
     @Deprecated
     public static CharSubSequence of(CharSequence charSequence, int startIndex, int endIndex) {

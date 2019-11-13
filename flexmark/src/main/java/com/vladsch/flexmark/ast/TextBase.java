@@ -14,7 +14,7 @@ public class TextBase extends Node {
     }
 
     public TextBase(String chars) {
-        super(CharSubSequence.of(chars));
+        super(BasedSequence.of(chars));
     }
 
     @NotNull

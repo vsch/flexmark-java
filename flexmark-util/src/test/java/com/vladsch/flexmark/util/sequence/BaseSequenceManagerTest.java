@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.util.sequence;
 
-import org.junit.*;
+import org.junit.Test;
 
 import static org.junit.Assert.*;
 
@@ -14,14 +14,15 @@ public class BaseSequenceManagerTest {
         String input4 = "012345678";
         String input5 = "1234567890";
 
+        int[] callType = {0};
         BaseSequenceManager manager = BaseSequenceManager.INSTANCE;
 
-        // NOTE: must use crate() directly so as not to use BasedSequenceImpl.create()
-        BasedSequence sequence1 = manager.getBaseSequence(input1, seq -> BasedSequenceImpl.create(seq, 0, seq.length()));
-        BasedSequence sequence2 = manager.getBaseSequence(input2, seq -> BasedSequenceImpl.create(seq, 0, seq.length()));
-        BasedSequence sequence3 = manager.getBaseSequence(input3, seq -> BasedSequenceImpl.create(seq, 0, seq.length()));
-        BasedSequence sequence4 = manager.getBaseSequence(input4, seq -> BasedSequenceImpl.create(seq, 0, seq.length()));
-        BasedSequence sequence5 = manager.getBaseSequence(input5, seq -> BasedSequenceImpl.create(seq, 0, seq.length()));
+        // NOTE: must use crate() directly so as not to use BasedSequenceImpl.create() which calls base manager
+        BasedSequence sequence1 = manager.getBaseSequence(input1, callType, seq -> BasedSequenceImpl.createAsIs(seq));
+        BasedSequence sequence2 = manager.getBaseSequence(input2, callType, seq -> BasedSequenceImpl.createAsIs(seq));
+        BasedSequence sequence3 = manager.getBaseSequence(input3, callType, seq -> BasedSequenceImpl.createAsIs(seq));
+        BasedSequence sequence4 = manager.getBaseSequence(input4, callType, seq -> BasedSequenceImpl.createAsIs(seq));
+        BasedSequence sequence5 = manager.getBaseSequence(input5, callType, seq -> BasedSequenceImpl.createAsIs(seq));
 
         assertSame(sequence1, sequence2);
         assertSame(sequence1, sequence3);
@@ -38,26 +39,30 @@ public class BaseSequenceManagerTest {
     @Test
     public void test_Release() {
         BaseSequenceManager manager = BaseSequenceManager.INSTANCE;
+        int[] callType = {0};
 
         // NOTE: must use crate() directly
-        BasedSequence sequence1 = manager.getBaseSequence("0123456789", seq -> BasedSequenceImpl.create(seq, 0, seq.length()));
+        BasedSequence sequence1 = manager.getBaseSequence("0123456789", callType, seq -> BasedSequenceImpl.createAsIs(seq));
 
-        // 0 if map lookup, 1 - set search, 2 - construct and add to map/set, 3 - construct but was added in anther thread, so dropped
-        assertEquals(20, manager.getCallType());
+        // NOTE: 0 if map lookup, 10 - set search, 20 - construct and add to map/set, 30 - construct but was added in anther thread, so dropped
+        //   with units digit giving max testEquals call type from all tests done
+        assertTrue(callType[0] == 21 || callType[0] == 20);
 
-        BasedSequence sequence2 = manager.getBaseSequence("0123456789", seq -> BasedSequenceImpl.create(seq, 0, seq.length()));
-        assertEquals(0, manager.getCallType());
+        BasedSequence sequence2 = manager.getBaseSequence("0123456789", callType, seq -> BasedSequenceImpl.createAsIs(seq));
+        assertEquals(0, callType[0]);
 
-        BasedSequence sequence3 = manager.getBaseSequence("0123456789", seq -> BasedSequenceImpl.create(seq, 0, seq.length()));
-        assertEquals(0, manager.getCallType());
+        BasedSequence sequence3 = manager.getBaseSequence("0123456789", callType, seq -> BasedSequenceImpl.createAsIs(seq));
+        assertEquals(0, callType[0]);
 
-        BasedSequence sequence4 = manager.getBaseSequence("012345678", seq -> BasedSequenceImpl.create(seq, 0, seq.length()));
-        assertEquals(20, manager.getCallType());
+        BasedSequence sequence4 = manager.getBaseSequence("012345678", callType, seq -> BasedSequenceImpl.createAsIs(seq));
+        assertTrue(callType[0] == 21 || callType[0] == 20);
 
-        BasedSequence sequence5 = manager.getBaseSequence("1234567890", seq -> BasedSequenceImpl.create(seq, 0, seq.length()));
-        assertEquals(21, manager.getCallType());
-        sequence5 = manager.getBaseSequence("1234567890", seq -> BasedSequenceImpl.create(seq, 0, seq.length()));
-        assertEquals(0, manager.getCallType());
+
+        BasedSequence sequence5 = manager.getBaseSequence("1234567890", callType, seq -> BasedSequenceImpl.createAsIs(seq));
+        assertTrue(callType[0] == 21 || callType[0] == 20);
+
+        sequence5 = manager.getBaseSequence("1234567890", callType, seq -> BasedSequenceImpl.createAsIs(seq));
+        assertEquals(0, callType[0]);
 
         assertSame(sequence1, sequence2);
         assertSame(sequence1, sequence3);
@@ -72,21 +77,21 @@ public class BaseSequenceManagerTest {
 
         // should not release since it is held by sequence1, sequence2 and sequence3
         System.gc();
-        sequence1 = manager.getBaseSequence("0123456789", seq -> BasedSequenceImpl.create(seq, 0, seq.length()));
-        assertEquals(0, manager.getCallType());
+        sequence1 = manager.getBaseSequence("0123456789", callType, seq -> BasedSequenceImpl.createAsIs(seq));
+        assertEquals(0, callType[0]);
 
         // should not release since it is held by sequence2 and sequence3
         sequence1 = null;
         System.gc();
-        sequence1 = manager.getBaseSequence("0123456789", seq -> BasedSequenceImpl.create(seq, 0, seq.length()));
-        assertEquals(0, manager.getCallType());
+        sequence1 = manager.getBaseSequence("0123456789", callType, seq -> BasedSequenceImpl.createAsIs(seq));
+        assertEquals(0, callType[0]);
 
         // should not release since it is held by sequence2 and sequence3
         sequence1 = null;
         sequence2 = null;
         System.gc();
-        sequence1 = manager.getBaseSequence("0123456789", seq -> BasedSequenceImpl.create(seq, 0, seq.length()));
-        assertEquals(0, manager.getCallType());
+        sequence1 = manager.getBaseSequence("0123456789", callType, seq -> BasedSequenceImpl.createAsIs(seq));
+        assertEquals(0, callType[0]);
 
         // should release since not held by anyone
         sequence1 = null;
@@ -94,7 +99,7 @@ public class BaseSequenceManagerTest {
         sequence3 = null;
         System.gc();
 
-        sequence1 = manager.getBaseSequence("0123456789", seq -> BasedSequenceImpl.create(seq, 0, seq.length()));
-        assertEquals(21, manager.getCallType());
+        sequence1 = manager.getBaseSequence("0123456789", callType, seq -> BasedSequenceImpl.createAsIs(seq));
+        assertTrue(callType[0] == 21 || callType[0] == 20);
     }
 }

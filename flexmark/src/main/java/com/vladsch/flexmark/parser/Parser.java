@@ -347,7 +347,7 @@ public class Parser implements IParse {
     public @NotNull Document parse(@NotNull String input) {
         DocumentParser documentParser = new DocumentParser(options, blockParserFactories, paragraphPreProcessorFactories,
                 blockPreProcessorDependencies, inlineParserFactory.inlineParser(options, specialCharacters, delimiterCharacters, delimiterProcessors, linkRefProcessors, inlineParserExtensionFactories));
-        Document document = documentParser.parse(CharSubSequence.of(input));
+        Document document = documentParser.parse(BasedSequence.of(input));
         return postProcess(document);
     }
 

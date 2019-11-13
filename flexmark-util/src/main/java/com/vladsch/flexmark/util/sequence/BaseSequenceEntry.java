@@ -8,9 +8,6 @@ import java.util.WeakHashMap;
 class BaseSequenceEntry {
     final private @NotNull WeakHashMap<Object, Boolean> quickEquals = new WeakHashMap<>();
 
-    @TestOnly
-    private int equalsCall; // 0 - quick class and/or length, 1 - hash, 2 - quick lookup, 3 - content
-
     private int hash;
 
     BaseSequenceEntry() {
@@ -18,25 +15,16 @@ class BaseSequenceEntry {
     }
 
     /**
-     * Get type of equality used to figure out result
-     * only valid right after equals call and in tests
-     *
-     * @return equality type used, 0 - quick class and/or length, 1 - hash, 2 - quick lookup, 3 - content comparison
-     */
-    @TestOnly
-    int getEqualsCall() {
-        return equalsCall;
-    }
-
-    /**
      * Compare object to equality of entry's base sequence
      * NOTE: if not char sequence or base of this entry's base sequence then will return false, so do not expect to pass a new instance of char[] and to get true for equivalent CharSubSequence
      *
      * @param o object to compare
+     * @param equalsCall 1 element array where to return type of equals test done
+     *                   equality type used, 0 - quick class and/or length, 1 - hash, 2 - quick lookup, 3 - string content comparison, 4 - char sequence comparison
      * @return true if object equivalent to this entry's base sequence, false otherwise
      */
-    boolean testEquals(@NotNull BasedSequence baseSeq, @NotNull Object o) {
-        equalsCall = 0;
+    boolean testEquals(@NotNull BasedSequence baseSeq, @NotNull Object o, int[] equalsCall) {
+        equalsCall[0] = 0;
         if (o == baseSeq || o == baseSeq.getBase()) return true;
         if (!(o instanceof CharSequence)) return false;
 
@@ -46,13 +34,13 @@ class BaseSequenceEntry {
 
         if (o instanceof IRichSequence<?>) {
             IRichSequence<?> rich = (BasedSequence) o;
-            equalsCall = 1;
+            equalsCall[0] = 1;
             if (rich.hashCode() != baseSeq.hashCode()) return false;
 
             //fall through to quickEquals tests then slow content comparison
         } else if (o instanceof String) {
             String string = (String) o;
-            equalsCall = 1;
+            equalsCall[0] = 1;
             if (string.hashCode() != baseSeq.hashCode()) return false;
 
             //fall through to quickEquals tests then slow content comparison
@@ -60,7 +48,7 @@ class BaseSequenceEntry {
 
         // see if already have it in the weak hash map
         Boolean result;
-        equalsCall = 2;
+        equalsCall[0] = 2;
 
         synchronized (quickEquals) {
             result = quickEquals.get(o);
@@ -68,8 +56,16 @@ class BaseSequenceEntry {
 
         if (result != null) return result;
 
-        result = baseSeq.equals(o);
-        equalsCall = 3;
+        if (baseSeq instanceof SubSequence && o instanceof String) {
+            equalsCall[0] = 3;
+            result = baseSeq.getBase().equals(o);
+        } else if (baseSeq instanceof SubSequence && o instanceof SubSequence) {
+            equalsCall[0] = 3;
+            result = baseSeq.getBase().equals(((SubSequence) o).getBase());
+        } else {
+            equalsCall[0] = 4;
+            result = baseSeq.equals(o);
+        }
 
         synchronized (quickEquals) {
             quickEquals.put(o, result);

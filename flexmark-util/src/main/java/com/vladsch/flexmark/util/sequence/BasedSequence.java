@@ -27,17 +27,17 @@ public interface BasedSequence extends IRichSequence<BasedSequence> {
 
     @NotNull
     static BasedSequence of(@Nullable CharSequence charSequence) {
-        return BasedSequenceImpl.create(charSequence, 0, charSequence == null ? 0 : charSequence.length());
+        return BasedSequenceImpl.create(charSequence);
     }
 
     @NotNull
     static BasedSequence of(@Nullable CharSequence charSequence, int startIndex) {
-        return BasedSequenceImpl.create(charSequence, startIndex, charSequence == null ? startIndex : charSequence.length());
+        return BasedSequenceImpl.create(charSequence).subSequence(startIndex);
     }
 
     @NotNull
     static BasedSequence of(@Nullable CharSequence charSequence, int startIndex, int endIndex) {
-        return BasedSequenceImpl.create(charSequence, startIndex, endIndex);
+        return BasedSequenceImpl.create(charSequence).subSequence(startIndex, endIndex);
     }
 
     @NotNull
@@ -481,12 +481,6 @@ public interface BasedSequence extends IRichSequence<BasedSequence> {
         @Override
         public Range getSourceRange() {
             return Range.NULL;
-        }
-
-        @NotNull
-        @Override
-        public String toString() {
-            return "";
         }
     }
 }
