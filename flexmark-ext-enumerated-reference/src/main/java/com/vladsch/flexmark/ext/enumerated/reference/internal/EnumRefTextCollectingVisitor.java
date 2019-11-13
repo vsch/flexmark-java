@@ -6,7 +6,7 @@ import com.vladsch.flexmark.util.ast.DoNotCollectText;
 import com.vladsch.flexmark.util.ast.NodeVisitor;
 import com.vladsch.flexmark.util.ast.VisitHandler;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.BasedSequenceBuilder;
+import com.vladsch.flexmark.util.sequence.edit.BasedSequenceBuilder;
 
 @SuppressWarnings("WeakerAccess")
 public class EnumRefTextCollectingVisitor {

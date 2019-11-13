@@ -2,6 +2,7 @@ package com.vladsch.flexmark.util.format;
 
 import com.vladsch.flexmark.util.Pair;
 import com.vladsch.flexmark.util.sequence.*;
+import com.vladsch.flexmark.util.sequence.edit.BasedSequenceBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

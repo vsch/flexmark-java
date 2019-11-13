@@ -197,6 +197,10 @@ public class DelimitedBuilder {
         return this;
     }
 
+    public DelimitedBuilder append(Object o) {
+        return append(o.toString());
+    }
+
     public DelimitedBuilder appendCodePoint(int codePoint) {
         doPending();
         out.appendCodePoint(codePoint);

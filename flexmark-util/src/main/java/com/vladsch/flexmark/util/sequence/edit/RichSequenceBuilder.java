@@ -1,5 +1,6 @@
-package com.vladsch.flexmark.util.sequence;
+package com.vladsch.flexmark.util.sequence.edit;
 
+import com.vladsch.flexmark.util.sequence.RichSequence;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -26,8 +27,8 @@ public final class RichSequenceBuilder implements SequenceBuilder<RichSequenceBu
 
     @NotNull
     @Override
-    public RichSequenceBuilder addFrom(@NotNull RichSequenceBuilder builder) {
-        segments.append(builder.segments);
+    public RichSequenceBuilder addFrom(@NotNull RichSequenceBuilder other) {
+        segments.append(other.segments);
         return this;
     }
 
@@ -42,8 +43,8 @@ public final class RichSequenceBuilder implements SequenceBuilder<RichSequenceBu
 
     @NotNull
     @Override
-    public RichSequenceBuilder addAll(@NotNull Collection<? extends CharSequence> list) {
-        for (CharSequence chars : list) {
+    public RichSequenceBuilder addAll(@NotNull Collection<? extends CharSequence> sequences) {
+        for (CharSequence chars : sequences) {
             add(chars);
         }
         return this;

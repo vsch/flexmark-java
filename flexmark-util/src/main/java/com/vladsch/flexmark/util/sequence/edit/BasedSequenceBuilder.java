@@ -1,5 +1,6 @@
-package com.vladsch.flexmark.util.sequence;
+package com.vladsch.flexmark.util.sequence.edit;
 
+import com.vladsch.flexmark.util.sequence.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -61,25 +62,25 @@ public class BasedSequenceBuilder implements SequenceBuilder<BasedSequenceBuilde
 
     @NotNull
     @Override
-    public BasedSequenceBuilder addFrom(@NotNull BasedSequenceBuilder builder) {
-        if (base != builder.base) {
-            throw new IllegalArgumentException("add BasedSequenceBuilder called with other having different base: " + base.hashCode() + " got: " + builder.base.hashCode());
+    public BasedSequenceBuilder addFrom(@NotNull BasedSequenceBuilder other) {
+        if (base != other.base) {
+            throw new IllegalArgumentException("add BasedSequenceBuilder called with other having different base: " + base.hashCode() + " got: " + other.base.hashCode());
         }
 
-        if (!builder.isEmpty()) {
+        if (!other.isEmpty()) {
             if (!segments.isEmpty()) {
                 BasedSequence lastSegment = getLastSegment();
-                BasedSequence s = builder.getLastSegment();
+                BasedSequence s = other.getLastSegment();
                 int lastEndOffset = lastSegment.getEndOffset();
                 if (s.getStartOffset() < lastEndOffset) {
                     throw new IllegalArgumentException("add BasedSequenceBuilder called with last segment of other having startOffset < lastEndOffset, startOffset: " + s.getStartOffset() + " lastEndOffset: " + lastEndOffset);
                 }
             }
 
-            segments.addAll(builder.segments);
+            segments.addAll(other.segments);
 
-            if (builder.offsetTrackers != null) {
-                for (OffsetTracker offsetTracker : builder.offsetTrackers) {
+            if (other.offsetTrackers != null) {
+                for (OffsetTracker offsetTracker : other.offsetTrackers) {
                     addOffsetTracker(offsetTracker);
                 }
             }
@@ -89,9 +90,9 @@ public class BasedSequenceBuilder implements SequenceBuilder<BasedSequenceBuilde
 
     @NotNull
     @Override
-    public BasedSequenceBuilder addAll(@NotNull Collection<? extends CharSequence> list) {
-        if (!list.isEmpty()) {
-            for (CharSequence s : list) {
+    public BasedSequenceBuilder addAll(@NotNull Collection<? extends CharSequence> sequences) {
+        if (!sequences.isEmpty()) {
+            for (CharSequence s : sequences) {
                 add(s);
             }
         }

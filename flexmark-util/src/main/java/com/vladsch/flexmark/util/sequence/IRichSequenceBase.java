@@ -6,6 +6,7 @@ import com.vladsch.flexmark.util.html.Escaping;
 import com.vladsch.flexmark.util.mappers.ChangeCase;
 import com.vladsch.flexmark.util.mappers.CharMapper;
 import com.vladsch.flexmark.util.mappers.SpaceMapper;
+import com.vladsch.flexmark.util.sequence.edit.SequenceBuilder;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -1223,7 +1224,7 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
 
     @NotNull
     @Override
-    public T insert(@NotNull CharSequence chars, int index) {
+    public T insert(int index, @NotNull CharSequence chars) {
         index = Math.max(0, Math.min(length(), index));
 
         if (chars.length() == 0) {

@@ -193,6 +193,8 @@ Next 0.59.50
 0.59.48
 -------
 
+* Add: `SegmentBuilder` to track offset ranges in original or base sequence and inserted out of
+  base strings through editing operations.
 * Fix: `BasedSequenceBuilder.add(CharSequence)` now does not complain when adding a
   `BasedSequence` which is from a different base than the builder. It simply treats it as it
   does any other non-based sequence and adds it as out of base chars.

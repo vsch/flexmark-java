@@ -2,6 +2,8 @@ package com.vladsch.flexmark.util;
 
 import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.*;
 import java.net.URLDecoder;
@@ -651,5 +653,15 @@ public class Utils {
         StringBuilder sb = new StringBuilder();
         streamAppend(sb, stream);
         return sb.toString();
+    }
+
+    @NotNull
+    public static String escapeString(@Nullable CharSequence param) {
+        return param == null ? "null" : param.toString().replace("\\", "\\\\").replace("\\\"", "\\\\\"");
+    }
+
+    @NotNull
+    public static String quoteString(@Nullable CharSequence param) {
+        return param == null ? "null" : "\"" + param.toString().replace("\\", "\\\\").replace("\\\"", "\\\\\"") + "\"";
     }
 }

@@ -152,6 +152,10 @@ public class Range {
         return index >= myStart && index < myEnd;
     }
 
+    public boolean isValidIndex(int index) {
+        return index >= myStart && index <= myEnd;
+    }
+
     public boolean isAdjacent(int index) {
         return index == myStart - 1 || index == myEnd;
     }

@@ -921,9 +921,9 @@ public class BasedSequenceImplTest {
 
         BasedSequence sequence = BasedSequence.of(input);
 
-        assertSame(sequence, sequence.insert("", 0));
-        assertSame(sequence, sequence.insert("", 20));
-        assertSame(sequence, sequence.insert("", -5));
+        assertSame(sequence, sequence.insert(0, ""));
+        assertSame(sequence, sequence.insert(20, ""));
+        assertSame(sequence, sequence.insert(-5, ""));
     }
 
     @Test
@@ -942,7 +942,7 @@ public class BasedSequenceImplTest {
         String input = "0123456789";
 
         BasedSequence sequence = BasedSequence.of(input);
-        BasedSequence inserted = sequence.insert("^", 0);
+        BasedSequence inserted = sequence.insert(0, "^");
 
         assertTrue(inserted instanceof PrefixedSubSequence);
         assertEquals("^0123456789", inserted.toString());
@@ -960,7 +960,7 @@ public class BasedSequenceImplTest {
         String input = "0123456789";
 
         BasedSequence sequence = BasedSequence.of(input);
-        BasedSequence inserted = sequence.insert("^", 10);
+        BasedSequence inserted = sequence.insert(10, "^");
         assertEquals("0123456789^", inserted.toString());
         assertTrue(inserted instanceof SegmentedSequence);
         assertEquals(Range.of(0, 10), inserted.getSourceRange());
@@ -977,7 +977,7 @@ public class BasedSequenceImplTest {
         String input = "0123456789";
 
         BasedSequence sequence = BasedSequence.of(input);
-        BasedSequence inserted = sequence.insert("^", 1);
+        BasedSequence inserted = sequence.insert(1, "^");
         assertEquals("0^123456789", inserted.toString());
         assertTrue(inserted instanceof SegmentedSequence);
         assertEquals(Range.of(0, 10), inserted.getSourceRange());
@@ -994,7 +994,7 @@ public class BasedSequenceImplTest {
         String input = "0123456789";
 
         BasedSequence sequence = BasedSequence.of(input);
-        BasedSequence inserted = sequence.insert("^", 5);
+        BasedSequence inserted = sequence.insert(5, "^");
         assertEquals("01234^56789", inserted.toString());
         assertTrue(inserted instanceof SegmentedSequence);
         assertEquals(Range.of(0, 10), inserted.getSourceRange());
@@ -1012,7 +1012,7 @@ public class BasedSequenceImplTest {
         String input = "0123456789";
 
         BasedSequence sequence = BasedSequence.of(input);
-        BasedSequence inserted = sequence.insert("^", 9);
+        BasedSequence inserted = sequence.insert(9, "^");
         assertEquals("012345678^9", inserted.toString());
         assertTrue(inserted instanceof SegmentedSequence);
         assertEquals(Range.of(0, 10), inserted.getSourceRange());

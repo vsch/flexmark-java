@@ -2,6 +2,7 @@ package com.vladsch.flexmark.util.sequence;
 
 import com.vladsch.flexmark.util.Pair;
 import com.vladsch.flexmark.util.mappers.CharMapper;
+import com.vladsch.flexmark.util.sequence.edit.SequenceBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -36,7 +37,8 @@ public interface IRichSequence<T extends IRichSequence<T>> extends CharSequence,
 
     /**
      * Line Separator, used in paragraph wrapping to force start of new line
-     * @deprecated  use {@link #LS} instead as it is named in Unicode
+     *
+     * @deprecated use {@link #LS} instead as it is named in Unicode
      */
     @Deprecated
     char LSEP = LS;
@@ -73,7 +75,7 @@ public interface IRichSequence<T extends IRichSequence<T>> extends CharSequence,
 
     /**
      * Get a portion of this sequence
-     *
+     * <p>
      * NOTE: the returned value should only depend on start/end indices. If a subsequence of this sequence with matching start/end should equal (using equals()) all such subsequences of this sequence.
      *
      * @param startIndex offset from startIndex of this sequence
@@ -1115,13 +1117,26 @@ public interface IRichSequence<T extends IRichSequence<T>> extends CharSequence,
     /**
      * Insert char sequence at given index
      *
-     * @param chars char sequence to insert
      * @param index index of insertion. if &gt;length of this sequence then same as length, if &lt;0 then same as 0
+     * @param chars char sequence to insert
      * @return resulting sequence
      *         based sequence implementation may throw an IllegalArgumentException
      *         if inserting another based sequence out of order based on offsets
      */
-    @NotNull T insert(@NotNull CharSequence chars, int index);
+    @NotNull T insert(int index, @NotNull CharSequence chars);
+
+    /**
+     *
+     * @param chars chars
+     * @param index index of insertion
+     * @return resulting sequence
+     * @deprecated use {@link #insert(int, CharSequence)} instead
+     */
+    @NotNull
+    @Deprecated
+    default T insert(@NotNull CharSequence chars, int index) {
+        return insert(index, chars);
+    }
 
     /**
      * Delete range in sequence
