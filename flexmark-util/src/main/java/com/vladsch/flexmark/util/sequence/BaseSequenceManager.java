@@ -53,19 +53,19 @@ public class BaseSequenceManager {
 
                 baseMap.remove(object);
             }
-        }
 
-        // see if we can find one in the set that matches
-        callType = 10;
-        int[] equalsCall = { 0 };
-        for (Map.Entry<BasedSequence, BaseSequenceEntry> entry : baseSet.entrySet()) {
-            if (entry != null) {
-                if (entry.getValue().testEquals(entry.getKey(), object, equalsCall)) {
+            // see if we can find one in the set that matches
+            callType = 10;
+            int[] equalsCall = { 0 };
+            for (Map.Entry<BasedSequence, BaseSequenceEntry> entry : baseSet.entrySet()) {
+                if (entry != null) {
+                    if (entry.getValue().testEquals(entry.getKey(), object, equalsCall)) {
+                        callType = Math.max(callType, 10 + equalsCall[0]);
+                        if (callTypes != null) callTypes[0] = callType;
+                        return entry.getKey();
+                    }
                     callType = Math.max(callType, 10 + equalsCall[0]);
-                    if (callTypes != null) callTypes[0] = callType;
-                    return entry.getKey();
                 }
-                callType = Math.max(callType, 10 + equalsCall[0]);
             }
         }
 
