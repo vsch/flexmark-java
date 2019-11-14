@@ -65,8 +65,8 @@ public class SegmentBuilder {
      * @param endOffset   end offset
      */
     @NotNull
-    public SegmentBuilder appendRange(int startOffset, int endOffset) {
-        return appendRange(Range.of(startOffset, endOffset));
+    public SegmentBuilder append(int startOffset, int endOffset) {
+        return append(Range.of(startOffset, endOffset));
     }
 
     /**
@@ -109,7 +109,7 @@ public class SegmentBuilder {
      * @param range in offsets of original range
      */
     @NotNull
-    public SegmentBuilder appendRange(@NotNull Range range) {
+    public SegmentBuilder append(@NotNull Range range) {
         if (myEndOffset >= range.getStart()) {
             // have overlap, remove overlap from range and add
             int lastRangeIndex = getLastRangeIndex();
@@ -189,7 +189,7 @@ public class SegmentBuilder {
     }
 
     @NotNull
-    public SegmentBuilder appendString(@Nullable String text) {
+    public SegmentBuilder append(@Nullable String text) {
         if (text != null && !text.isEmpty()) {
             String lastString = getLastPartIfString();
             if (lastString != null) {
@@ -209,7 +209,7 @@ public class SegmentBuilder {
      */
     @NotNull
     public SegmentBuilder deleteByIndices(int startIndex, int endIndex) {
-        return deleteRange(Range.of(startIndex, endIndex));
+        return delete(Range.of(startIndex, endIndex));
     }
 
     /**
@@ -220,7 +220,7 @@ public class SegmentBuilder {
      */
     @NotNull
     public SegmentBuilder deleteByLength(int startIndex, int count) {
-        return deleteRange(Range.of(startIndex, startIndex + count));
+        return delete(Range.of(startIndex, startIndex + count));
     }
 
     /**
@@ -229,7 +229,7 @@ public class SegmentBuilder {
      * @param range range to delete in current range coordinates
      */
     @NotNull
-    public SegmentBuilder deleteRange(@NotNull Range range) {
+    public SegmentBuilder delete(@NotNull Range range) {
         int startOffset = 0;
         int endOffset = -1;
         Range remaining = range;
@@ -360,7 +360,7 @@ public class SegmentBuilder {
      * @param text    string to insert
      * @return this
      */
-    public SegmentBuilder insertString(int atIndex, @NotNull String text) {
+    public SegmentBuilder insert(int atIndex, @NotNull String text) {
         int startOffset = 0;
 
         int iMax = myParts.size();
@@ -651,7 +651,7 @@ public class SegmentBuilder {
     @Override
     public String toString() {
         DelimitedBuilder sb = new DelimitedBuilder(", ");
-        sb.append("SegmentBuilder{endOffset=").append(myEndOffset).append(", parts=");
+        sb.append("SegmentBuilder{end=").append(myEndOffset).append(", parts=");
         for (Object part : myParts) {
             if (part instanceof Range) {
                 sb.append(part).mark();
