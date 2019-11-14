@@ -19,6 +19,71 @@ public class PositionListTest {
     }
 
     @Test
+    public void getOrNull() {
+        List<Integer> input = Arrays.asList(9, 8, 7, 6, 5, 4, 3, 2, 1, 0);
+        ArrayList<Integer> list = new ArrayList<>(input);
+        PositionList<Integer> positions = new PositionList<>(list);
+
+        assertEquals((Integer) 9, positions.getOrNull(0));
+        assertNull(positions.getOrNull(-1));
+        assertNull(positions.getOrNull(10));
+    }
+
+    @Test
+    public void testEquals() {
+        List<Integer> input = Arrays.asList(9, 8, 7, 6, 5, 4, 3, 2, 1, 0);
+        ArrayList<Integer> list = new ArrayList<>(input);
+        PositionList<Integer> positions1 = new PositionList<>(list);
+        PositionList<Integer> positions2 = new PositionList<>(list);
+
+        assertEquals(positions1, positions2);
+        assertEquals(positions2, positions1);
+
+        positions1.remove(0, 2);
+        positions2.remove(0, 2);
+
+        assertEquals(positions1, positions2);
+        assertEquals(positions2, positions1);
+    }
+
+    @Test
+    public void testHashCode() {
+        List<Integer> input = Arrays.asList(9, 8, 7, 6, 5, 4, 3, 2, 1, 0);
+        ArrayList<Integer> list = new ArrayList<>(input);
+        PositionList<Integer> positions1 = new PositionList<>(list);
+        PositionList<Integer> positions2 = new PositionList<>(list);
+
+        assertEquals(positions1.hashCode(), positions2.hashCode());
+        assertEquals(positions2.hashCode(), positions1.hashCode());
+
+        positions1.remove(0, 2);
+        positions2.remove(0, 2);
+
+        assertEquals(positions1.hashCode(), positions2.hashCode());
+        assertEquals(positions2.hashCode(), positions1.hashCode());
+    }
+
+    @Test
+    public void set() {
+        List<Integer> input = Arrays.asList(9, 8, 7, 6, 5, 4, 3, 2, 1, 0);
+        ArrayList<Integer> list = new ArrayList<>(input);
+        PositionList<Integer> positions = new PositionList<>(list);
+
+        positions.set(0, -1);
+        List<Integer> expected = Arrays.asList(-1, 8, 7, 6, 5, 4, 3, 2, 1, 0);
+        assertEquals(expected, list);
+
+        Position<Integer> position = positions.get(10);
+        assertEquals(10, position.getIndex());
+
+        positions.set(10, -2);
+        List<Integer> expected2 = Arrays.asList(-1, 8, 7, 6, 5, 4, 3, 2, 1, 0, -2);
+        assertEquals(expected2, list);
+
+        assertEquals(11, position.getIndex());
+    }
+
+    @Test
     public void iterator() {
         List<Integer> input = Arrays.asList(9, 8, 7, 6, 5, 4, 3, 2, 1, 0);
         ArrayList<Integer> list = new ArrayList<>(input);
@@ -113,16 +178,6 @@ public class PositionListTest {
         int i = 1;
         Iterator<Position<Integer>> iterator = positions.iterator();
         iterator.remove();
-
-        while (iterator.hasNext()) {
-            Position<Integer> position = iterator.next();
-            list2.add(position.get());
-            iterator.remove();
-        }
-
-        List<Integer> expected = Arrays.asList(9, -1, 8, -2, 7, -3, 6, -4, 5, -5, 4, -6, 3, -7, 2, -8, 1, -9, 0, -10);
-        assertEquals(input, list2);
-        assertEquals(Collections.emptyList(), list);
     }
 
     @Test
@@ -175,10 +230,6 @@ public class PositionListTest {
             position.remove();
             list2.add(position.get());
         }
-
-        List<Integer> expected = Arrays.asList(9, -1, 8, -2, 7, -3, 6, -4, 5, -5, 4, -6, 3, -7, 2, -8, 1, -9, 0, -10);
-        assertEquals(input, list2);
-        assertEquals(Collections.emptyList(), list);
     }
 
     @Test
@@ -449,7 +500,52 @@ public class PositionListTest {
                 listPositions.add(position);
             }
 
-            positions.addAll(j, Arrays.asList(-2, -1));
+            if (j == jMax) {
+                positions.addAll(Arrays.asList(-2, -1));
+            } else {
+                positions.addAll(j, Arrays.asList(-2, -1));
+            }
+
+            assertEquals(input.size() + 2, list.size());
+
+            for (int i = 0; i <= iMax; i++) {
+                Position<Integer> position = listPositions.get(i);
+                assertEquals("" + i, i < j ? i : i + 2, position.getIndex());
+                assertTrue("" + i, position.isValidIndex());
+                assertTrue("" + i, position.isValid());
+
+                assertEquals("" + i, i < iMax, position.isValidPosition());
+                if (i < iMax) {
+                    assertEquals("" + i, list.get(i < j ? i : i + 2), position.get());
+                    assertEquals("" + i, list.get(i < j ? i : i + 2), position.get(0));
+                }
+            }
+        }
+    }
+
+    @Test
+    public void addAll2() {
+        List<Integer> input = Arrays.asList(9, 8, 7, 6, 5, 4, 3, 2, 1, 0);
+
+        int jMax = input.size();
+
+        for (int j = 0; j <= jMax; j++) {
+            ArrayList<Integer> list = new ArrayList<>(input);
+            PositionList<Integer> positions = new PositionList<>(list);
+            ArrayList<Position<Integer>> listPositions = new ArrayList<>();
+
+            int iMax = list.size();
+            for (int i = 0; i <= iMax; i++) {
+                Position<Integer> position = positions.get(i);
+                assertTrue("" + i, position.isValid());
+                listPositions.add(position);
+            }
+
+            if (j == jMax) {
+                positions.addAll(new PositionList<>(Arrays.asList(-2, -1)));
+            } else {
+                positions.addAll(j, new PositionList<>(Arrays.asList(-2, -1)));
+            }
             assertEquals(input.size() + 2, list.size());
 
             for (int i = 0; i <= iMax; i++) {
@@ -875,17 +971,17 @@ public class PositionListTest {
         assertEquals((Integer) 6, index.getOrNull(Integer.class));
 
         // predicate search
-        index = position.indexOf(p-> p.get() == (Integer)6);
+        index = position.indexOf(p -> p.get() == (Integer) 6);
         assertTrue(index.isValidPosition());
         assertEquals(6, index.getIndex());
         assertEquals((Integer) 6, index.getOrNull(Integer.class));
 
-        index = position.indexOf(7, p-> p.get() == (Integer)6);
+        index = position.indexOf(7, p -> p.get() == (Integer) 6);
         assertTrue(index.isValidPosition());
         assertEquals(16, index.getIndex());
         assertEquals((Integer) 6, index.getOrNull(Integer.class));
 
-        index = position.indexOf(17, p-> p.get() == (Integer)6);
+        index = position.indexOf(17, p -> p.get() == (Integer) 6);
         assertFalse(index.isValidPosition());
     }
 

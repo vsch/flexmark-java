@@ -38,8 +38,20 @@ public abstract class PositionListBase<T, P extends IPosition<T, P>> implements 
         return getPosition(index, true);
     }
 
+    public T getOrNull(int index) {
+        if (index >= 0 && index < myList.size()) {
+            return myList.get(index);
+        }
+        return null;
+    }
+
     public void set(int index, T value) {
-        getPosition(index, true).set(value);
+        if (index == myList.size()) {
+            myList.add(value);
+            inserted(index, 1);
+        } else {
+            myList.set(index, value);
+        }
     }
 
     public P getPosition(int index, boolean isValid) {
